@@ -14,6 +14,2122 @@ from pycrate_asn1rt.asnobj_class     import *
 from pycrate_asn1rt.asnobj_ext       import *
 from pycrate_asn1rt.init             import init_modules
 
+class NR_InterNodeDefinitions:
+
+    _name_  = u'NR-InterNodeDefinitions'
+    _oid_   = []
+    
+    _obj_ = [
+        u'HandoverCommand',
+        u'HandoverCommand-IEs',
+        u'HandoverPreparationInformation',
+        u'HandoverPreparationInformation-IEs',
+        u'AS-Config',
+        u'AS-Context',
+        u'ConfigRestrictInfoDAPS-r16',
+        u'ConfigRestrictInfoDAPS-v1640',
+        u'ReestablishmentInfo',
+        u'ReestabNCellInfoList',
+        u'ReestabNCellInfo',
+        u'RRM-Config',
+        u'CG-Config',
+        u'CG-Config-IEs',
+        u'CG-Config-v1540-IEs',
+        u'CG-Config-v1560-IEs',
+        u'CG-Config-v1590-IEs',
+        u'CG-Config-v1610-IEs',
+        u'CG-Config-v1620-IEs',
+        u'CG-Config-v1630-IEs',
+        u'CG-Config-v1640-IEs',
+        u'ServCellInfoListSCG-NR-r16',
+        u'ServCellInfoXCG-NR-r16',
+        u'FrequencyConfig-NR-r16',
+        u'ServCellInfoListSCG-EUTRA-r16',
+        u'ServCellInfoXCG-EUTRA-r16',
+        u'TransmissionBandwidth-EUTRA-r16',
+        u'PH-TypeListSCG',
+        u'PH-InfoSCG',
+        u'PH-UplinkCarrierSCG',
+        u'MeasConfigSN',
+        u'NR-FreqInfo',
+        u'ConfigRestrictModReqSCG',
+        u'BandCombinationIndex',
+        u'BandCombinationInfoSN',
+        u'FR-InfoList',
+        u'FR-Info',
+        u'CandidateServingFreqListNR',
+        u'CandidateServingFreqListEUTRA',
+        u'T-Offset-r16',
+        u'CG-ConfigInfo',
+        u'CG-ConfigInfo-IEs',
+        u'CG-ConfigInfo-v1540-IEs',
+        u'CG-ConfigInfo-v1560-IEs',
+        u'CG-ConfigInfo-v1570-IEs',
+        u'CG-ConfigInfo-v1590-IEs',
+        u'CG-ConfigInfo-v1610-IEs',
+        u'CG-ConfigInfo-v1620-IEs',
+        u'CG-ConfigInfo-v1640-IEs',
+        u'ServCellInfoListMCG-NR-r16',
+        u'ServCellInfoListMCG-EUTRA-r16',
+        u'SFTD-FrequencyList-NR',
+        u'SFTD-FrequencyList-EUTRA',
+        u'ConfigRestrictInfoSCG',
+        u'SelectedBandEntriesMN',
+        u'BandEntryIndex',
+        u'PH-TypeListMCG',
+        u'PH-InfoMCG',
+        u'PH-UplinkCarrierMCG',
+        u'BandCombinationInfoList',
+        u'BandCombinationInfo',
+        u'FeatureSetEntryIndex',
+        u'DRX-Info',
+        u'DRX-Info2',
+        u'MeasConfigMN',
+        u'MRDC-AssistanceInfo',
+        u'AffectedCarrierFreqCombInfoMRDC',
+        u'VictimSystemType',
+        u'AffectedCarrierFreqCombEUTRA',
+        u'AffectedCarrierFreqCombNR',
+        u'MeasurementTimingConfiguration',
+        u'MeasurementTimingConfiguration-IEs',
+        u'MeasurementTimingConfiguration-v1550-IEs',
+        u'MeasurementTimingConfiguration-v1610-IEs',
+        u'MeasTimingList',
+        u'MeasTiming',
+        u'UERadioPagingInformation',
+        u'UERadioPagingInformation-IEs',
+        u'UERadioPagingInformation-v15e0-IEs',
+        u'UERadioAccessCapabilityInformation',
+        u'UERadioAccessCapabilityInformation-IEs',
+        u'maxMeasFreqsMN',
+        u'maxMeasFreqsSN',
+        u'maxMeasIdentitiesMN',
+        u'maxCellPrep',
+        ]
+    _type_ = [
+        u'HandoverCommand',
+        u'HandoverCommand-IEs',
+        u'HandoverPreparationInformation',
+        u'HandoverPreparationInformation-IEs',
+        u'AS-Config',
+        u'AS-Context',
+        u'ConfigRestrictInfoDAPS-r16',
+        u'ConfigRestrictInfoDAPS-v1640',
+        u'ReestablishmentInfo',
+        u'ReestabNCellInfoList',
+        u'ReestabNCellInfo',
+        u'RRM-Config',
+        u'CG-Config',
+        u'CG-Config-IEs',
+        u'CG-Config-v1540-IEs',
+        u'CG-Config-v1560-IEs',
+        u'CG-Config-v1590-IEs',
+        u'CG-Config-v1610-IEs',
+        u'CG-Config-v1620-IEs',
+        u'CG-Config-v1630-IEs',
+        u'CG-Config-v1640-IEs',
+        u'ServCellInfoListSCG-NR-r16',
+        u'ServCellInfoXCG-NR-r16',
+        u'FrequencyConfig-NR-r16',
+        u'ServCellInfoListSCG-EUTRA-r16',
+        u'ServCellInfoXCG-EUTRA-r16',
+        u'TransmissionBandwidth-EUTRA-r16',
+        u'PH-TypeListSCG',
+        u'PH-InfoSCG',
+        u'PH-UplinkCarrierSCG',
+        u'MeasConfigSN',
+        u'NR-FreqInfo',
+        u'ConfigRestrictModReqSCG',
+        u'BandCombinationIndex',
+        u'BandCombinationInfoSN',
+        u'FR-InfoList',
+        u'FR-Info',
+        u'CandidateServingFreqListNR',
+        u'CandidateServingFreqListEUTRA',
+        u'T-Offset-r16',
+        u'CG-ConfigInfo',
+        u'CG-ConfigInfo-IEs',
+        u'CG-ConfigInfo-v1540-IEs',
+        u'CG-ConfigInfo-v1560-IEs',
+        u'CG-ConfigInfo-v1570-IEs',
+        u'CG-ConfigInfo-v1590-IEs',
+        u'CG-ConfigInfo-v1610-IEs',
+        u'CG-ConfigInfo-v1620-IEs',
+        u'CG-ConfigInfo-v1640-IEs',
+        u'ServCellInfoListMCG-NR-r16',
+        u'ServCellInfoListMCG-EUTRA-r16',
+        u'SFTD-FrequencyList-NR',
+        u'SFTD-FrequencyList-EUTRA',
+        u'ConfigRestrictInfoSCG',
+        u'SelectedBandEntriesMN',
+        u'BandEntryIndex',
+        u'PH-TypeListMCG',
+        u'PH-InfoMCG',
+        u'PH-UplinkCarrierMCG',
+        u'BandCombinationInfoList',
+        u'BandCombinationInfo',
+        u'FeatureSetEntryIndex',
+        u'DRX-Info',
+        u'DRX-Info2',
+        u'MeasConfigMN',
+        u'MRDC-AssistanceInfo',
+        u'AffectedCarrierFreqCombInfoMRDC',
+        u'VictimSystemType',
+        u'AffectedCarrierFreqCombEUTRA',
+        u'AffectedCarrierFreqCombNR',
+        u'MeasurementTimingConfiguration',
+        u'MeasurementTimingConfiguration-IEs',
+        u'MeasurementTimingConfiguration-v1550-IEs',
+        u'MeasurementTimingConfiguration-v1610-IEs',
+        u'MeasTimingList',
+        u'MeasTiming',
+        u'UERadioPagingInformation',
+        u'UERadioPagingInformation-IEs',
+        u'UERadioPagingInformation-v15e0-IEs',
+        u'UERadioAccessCapabilityInformation',
+        u'UERadioAccessCapabilityInformation-IEs',
+        ]
+    _set_ = [
+        ]
+    _val_ = [
+        u'maxMeasFreqsMN',
+        u'maxMeasFreqsSN',
+        u'maxMeasIdentitiesMN',
+        u'maxCellPrep',
+        ]
+    _class_ = [
+        ]
+    _param_ = [
+        ]
+    
+    #-----< HandoverCommand >-----#
+    HandoverCommand = SEQ(name=u'HandoverCommand', mode=MODE_TYPE)
+    _HandoverCommand_criticalExtensions = CHOICE(name=u'criticalExtensions', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
+    __HandoverCommand_criticalExtensions_c1 = CHOICE(name=u'c1', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
+    ___HandoverCommand_criticalExtensions_c1_handoverCommand = SEQ(name=u'handoverCommand', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-InterNodeDefinitions', 'HandoverCommand-IEs')))
+    ___HandoverCommand_criticalExtensions_c1_spare3 = NULL(name=u'spare3', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    ___HandoverCommand_criticalExtensions_c1_spare2 = NULL(name=u'spare2', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    ___HandoverCommand_criticalExtensions_c1_spare1 = NULL(name=u'spare1', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __HandoverCommand_criticalExtensions_c1._cont = ASN1Dict([
+        (u'handoverCommand', ___HandoverCommand_criticalExtensions_c1_handoverCommand),
+        (u'spare3', ___HandoverCommand_criticalExtensions_c1_spare3),
+        (u'spare2', ___HandoverCommand_criticalExtensions_c1_spare2),
+        (u'spare1', ___HandoverCommand_criticalExtensions_c1_spare1),
+        ])
+    __HandoverCommand_criticalExtensions_c1._ext = None
+    __HandoverCommand_criticalExtensions_criticalExtensionsFuture = SEQ(name=u'criticalExtensionsFuture', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __HandoverCommand_criticalExtensions_criticalExtensionsFuture._cont = ASN1Dict([
+        ])
+    __HandoverCommand_criticalExtensions_criticalExtensionsFuture._ext = None
+    _HandoverCommand_criticalExtensions._cont = ASN1Dict([
+        (u'c1', __HandoverCommand_criticalExtensions_c1),
+        (u'criticalExtensionsFuture', __HandoverCommand_criticalExtensions_criticalExtensionsFuture),
+        ])
+    _HandoverCommand_criticalExtensions._ext = None
+    HandoverCommand._cont = ASN1Dict([
+        (u'criticalExtensions', _HandoverCommand_criticalExtensions),
+        ])
+    HandoverCommand._ext = None
+    
+    #-----< HandoverCommand-IEs >-----#
+    HandoverCommand_IEs = SEQ(name=u'HandoverCommand-IEs', mode=MODE_TYPE)
+    _HandoverCommand_IEs_handoverCommandMessage = OCT_STR(name=u'handoverCommandMessage', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __HandoverCommand_IEs_handoverCommandMessage_contain = SEQ(name='_cont_handoverCommandMessage', mode=MODE_TYPE, typeref=ASN1RefType(('NR-RRC-Definitions', 'RRCReconfiguration')))
+    _HandoverCommand_IEs_handoverCommandMessage._const_cont = __HandoverCommand_IEs_handoverCommandMessage_contain
+    _HandoverCommand_IEs_nonCriticalExtension = SEQ(name=u'nonCriticalExtension', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _HandoverCommand_IEs_nonCriticalExtension._cont = ASN1Dict([
+        ])
+    _HandoverCommand_IEs_nonCriticalExtension._ext = None
+    HandoverCommand_IEs._cont = ASN1Dict([
+        (u'handoverCommandMessage', _HandoverCommand_IEs_handoverCommandMessage),
+        (u'nonCriticalExtension', _HandoverCommand_IEs_nonCriticalExtension),
+        ])
+    HandoverCommand_IEs._ext = None
+    
+    #-----< HandoverPreparationInformation >-----#
+    HandoverPreparationInformation = SEQ(name=u'HandoverPreparationInformation', mode=MODE_TYPE)
+    _HandoverPreparationInformation_criticalExtensions = CHOICE(name=u'criticalExtensions', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
+    __HandoverPreparationInformation_criticalExtensions_c1 = CHOICE(name=u'c1', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
+    ___HandoverPreparationInformation_criticalExtensions_c1_handoverPreparationInformation = SEQ(name=u'handoverPreparationInformation', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-InterNodeDefinitions', 'HandoverPreparationInformation-IEs')))
+    ___HandoverPreparationInformation_criticalExtensions_c1_spare3 = NULL(name=u'spare3', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    ___HandoverPreparationInformation_criticalExtensions_c1_spare2 = NULL(name=u'spare2', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    ___HandoverPreparationInformation_criticalExtensions_c1_spare1 = NULL(name=u'spare1', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __HandoverPreparationInformation_criticalExtensions_c1._cont = ASN1Dict([
+        (u'handoverPreparationInformation', ___HandoverPreparationInformation_criticalExtensions_c1_handoverPreparationInformation),
+        (u'spare3', ___HandoverPreparationInformation_criticalExtensions_c1_spare3),
+        (u'spare2', ___HandoverPreparationInformation_criticalExtensions_c1_spare2),
+        (u'spare1', ___HandoverPreparationInformation_criticalExtensions_c1_spare1),
+        ])
+    __HandoverPreparationInformation_criticalExtensions_c1._ext = None
+    __HandoverPreparationInformation_criticalExtensions_criticalExtensionsFuture = SEQ(name=u'criticalExtensionsFuture', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __HandoverPreparationInformation_criticalExtensions_criticalExtensionsFuture._cont = ASN1Dict([
+        ])
+    __HandoverPreparationInformation_criticalExtensions_criticalExtensionsFuture._ext = None
+    _HandoverPreparationInformation_criticalExtensions._cont = ASN1Dict([
+        (u'c1', __HandoverPreparationInformation_criticalExtensions_c1),
+        (u'criticalExtensionsFuture', __HandoverPreparationInformation_criticalExtensions_criticalExtensionsFuture),
+        ])
+    _HandoverPreparationInformation_criticalExtensions._ext = None
+    HandoverPreparationInformation._cont = ASN1Dict([
+        (u'criticalExtensions', _HandoverPreparationInformation_criticalExtensions),
+        ])
+    HandoverPreparationInformation._ext = None
+    
+    #-----< HandoverPreparationInformation-IEs >-----#
+    HandoverPreparationInformation_IEs = SEQ(name=u'HandoverPreparationInformation-IEs', mode=MODE_TYPE)
+    _HandoverPreparationInformation_IEs_ue_CapabilityRAT_List = SEQ_OF(name=u'ue-CapabilityRAT-List', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'UE-CapabilityRAT-ContainerList')))
+    _HandoverPreparationInformation_IEs_sourceConfig = SEQ(name=u'sourceConfig', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-InterNodeDefinitions', 'AS-Config')), opt=True)
+    _HandoverPreparationInformation_IEs_rrm_Config = SEQ(name=u'rrm-Config', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-InterNodeDefinitions', 'RRM-Config')), opt=True)
+    _HandoverPreparationInformation_IEs_as_Context = SEQ(name=u'as-Context', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-InterNodeDefinitions', 'AS-Context')), opt=True)
+    _HandoverPreparationInformation_IEs_nonCriticalExtension = SEQ(name=u'nonCriticalExtension', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _HandoverPreparationInformation_IEs_nonCriticalExtension._cont = ASN1Dict([
+        ])
+    _HandoverPreparationInformation_IEs_nonCriticalExtension._ext = None
+    HandoverPreparationInformation_IEs._cont = ASN1Dict([
+        (u'ue-CapabilityRAT-List', _HandoverPreparationInformation_IEs_ue_CapabilityRAT_List),
+        (u'sourceConfig', _HandoverPreparationInformation_IEs_sourceConfig),
+        (u'rrm-Config', _HandoverPreparationInformation_IEs_rrm_Config),
+        (u'as-Context', _HandoverPreparationInformation_IEs_as_Context),
+        (u'nonCriticalExtension', _HandoverPreparationInformation_IEs_nonCriticalExtension),
+        ])
+    HandoverPreparationInformation_IEs._ext = None
+    
+    #-----< AS-Config >-----#
+    AS_Config = SEQ(name=u'AS-Config', mode=MODE_TYPE)
+    _AS_Config_rrcReconfiguration = OCT_STR(name=u'rrcReconfiguration', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __AS_Config_rrcReconfiguration_contain = SEQ(name='_cont_rrcReconfiguration', mode=MODE_TYPE, typeref=ASN1RefType(('NR-RRC-Definitions', 'RRCReconfiguration')))
+    _AS_Config_rrcReconfiguration._const_cont = __AS_Config_rrcReconfiguration_contain
+    _AS_Config_sourceRB_SN_Config = OCT_STR(name=u'sourceRB-SN-Config', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True, group=0)
+    __AS_Config_sourceRB_SN_Config_contain = SEQ(name='_cont_sourceRB-SN-Config', mode=MODE_TYPE, typeref=ASN1RefType(('NR-RRC-Definitions', 'RadioBearerConfig')))
+    _AS_Config_sourceRB_SN_Config._const_cont = __AS_Config_sourceRB_SN_Config_contain
+    _AS_Config_sourceSCG_NR_Config = OCT_STR(name=u'sourceSCG-NR-Config', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True, group=0)
+    __AS_Config_sourceSCG_NR_Config_contain = SEQ(name='_cont_sourceSCG-NR-Config', mode=MODE_TYPE, typeref=ASN1RefType(('NR-RRC-Definitions', 'RRCReconfiguration')))
+    _AS_Config_sourceSCG_NR_Config._const_cont = __AS_Config_sourceSCG_NR_Config_contain
+    _AS_Config_sourceSCG_EUTRA_Config = OCT_STR(name=u'sourceSCG-EUTRA-Config', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True, group=0)
+    _AS_Config_sourceSCG_Configured = ENUM(name=u'sourceSCG-Configured', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True, group=1)
+    _AS_Config_sourceSCG_Configured._cont = ASN1Dict([(u'true', 0)])
+    _AS_Config_sourceSCG_Configured._ext = None
+    AS_Config._cont = ASN1Dict([
+        (u'rrcReconfiguration', _AS_Config_rrcReconfiguration),
+        (u'sourceRB-SN-Config', _AS_Config_sourceRB_SN_Config),
+        (u'sourceSCG-NR-Config', _AS_Config_sourceSCG_NR_Config),
+        (u'sourceSCG-EUTRA-Config', _AS_Config_sourceSCG_EUTRA_Config),
+        (u'sourceSCG-Configured', _AS_Config_sourceSCG_Configured),
+        ])
+    AS_Config._ext = [u'sourceRB-SN-Config', u'sourceSCG-NR-Config', u'sourceSCG-EUTRA-Config', u'sourceSCG-Configured']
+    
+    #-----< AS-Context >-----#
+    AS_Context = SEQ(name=u'AS-Context', mode=MODE_TYPE)
+    _AS_Context_reestablishmentInfo = SEQ(name=u'reestablishmentInfo', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-InterNodeDefinitions', 'ReestablishmentInfo')), opt=True)
+    _AS_Context_configRestrictInfo = SEQ(name=u'configRestrictInfo', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-InterNodeDefinitions', 'ConfigRestrictInfoSCG')), opt=True)
+    _AS_Context_ran_NotificationAreaInfo = CHOICE(name=u'ran-NotificationAreaInfo', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'RAN-NotificationAreaInfo')), opt=True, group=0)
+    _AS_Context_ueAssistanceInformation = OCT_STR(name=u'ueAssistanceInformation', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True, group=1)
+    __AS_Context_ueAssistanceInformation_contain = SEQ(name='_cont_ueAssistanceInformation', mode=MODE_TYPE, typeref=ASN1RefType(('NR-RRC-Definitions', 'UEAssistanceInformation')))
+    _AS_Context_ueAssistanceInformation._const_cont = __AS_Context_ueAssistanceInformation_contain
+    _AS_Context_selectedBandCombinationSN = SEQ(name=u'selectedBandCombinationSN', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-InterNodeDefinitions', 'BandCombinationInfoSN')), opt=True, group=2)
+    _AS_Context_configRestrictInfoDAPS_r16 = SEQ(name=u'configRestrictInfoDAPS-r16', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-InterNodeDefinitions', 'ConfigRestrictInfoDAPS-r16')), opt=True, group=3)
+    _AS_Context_sidelinkUEInformationNR_r16 = OCT_STR(name=u'sidelinkUEInformationNR-r16', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True, group=3)
+    _AS_Context_sidelinkUEInformationEUTRA_r16 = OCT_STR(name=u'sidelinkUEInformationEUTRA-r16', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True, group=3)
+    _AS_Context_ueAssistanceInformationEUTRA_r16 = OCT_STR(name=u'ueAssistanceInformationEUTRA-r16', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True, group=3)
+    _AS_Context_ueAssistanceInformationSCG_r16 = OCT_STR(name=u'ueAssistanceInformationSCG-r16', mode=MODE_TYPE, tag=(9, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True, group=3)
+    __AS_Context_ueAssistanceInformationSCG_r16_contain = SEQ(name='_cont_ueAssistanceInformationSCG-r16', mode=MODE_TYPE, typeref=ASN1RefType(('NR-RRC-Definitions', 'UEAssistanceInformation')))
+    _AS_Context_ueAssistanceInformationSCG_r16._const_cont = __AS_Context_ueAssistanceInformationSCG_r16_contain
+    _AS_Context_needForGapsInfoNR_r16 = SEQ(name=u'needForGapsInfoNR-r16', mode=MODE_TYPE, tag=(10, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'NeedForGapsInfoNR-r16')), opt=True, group=3)
+    _AS_Context_configRestrictInfoDAPS_v1640 = SEQ(name=u'configRestrictInfoDAPS-v1640', mode=MODE_TYPE, tag=(11, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-InterNodeDefinitions', 'ConfigRestrictInfoDAPS-v1640')), opt=True, group=4)
+    AS_Context._cont = ASN1Dict([
+        (u'reestablishmentInfo', _AS_Context_reestablishmentInfo),
+        (u'configRestrictInfo', _AS_Context_configRestrictInfo),
+        (u'ran-NotificationAreaInfo', _AS_Context_ran_NotificationAreaInfo),
+        (u'ueAssistanceInformation', _AS_Context_ueAssistanceInformation),
+        (u'selectedBandCombinationSN', _AS_Context_selectedBandCombinationSN),
+        (u'configRestrictInfoDAPS-r16', _AS_Context_configRestrictInfoDAPS_r16),
+        (u'sidelinkUEInformationNR-r16', _AS_Context_sidelinkUEInformationNR_r16),
+        (u'sidelinkUEInformationEUTRA-r16', _AS_Context_sidelinkUEInformationEUTRA_r16),
+        (u'ueAssistanceInformationEUTRA-r16', _AS_Context_ueAssistanceInformationEUTRA_r16),
+        (u'ueAssistanceInformationSCG-r16', _AS_Context_ueAssistanceInformationSCG_r16),
+        (u'needForGapsInfoNR-r16', _AS_Context_needForGapsInfoNR_r16),
+        (u'configRestrictInfoDAPS-v1640', _AS_Context_configRestrictInfoDAPS_v1640),
+        ])
+    AS_Context._ext = [u'ran-NotificationAreaInfo', u'ueAssistanceInformation', u'selectedBandCombinationSN', u'configRestrictInfoDAPS-r16', u'sidelinkUEInformationNR-r16', u'sidelinkUEInformationEUTRA-r16', u'ueAssistanceInformationEUTRA-r16', u'ueAssistanceInformationSCG-r16', u'needForGapsInfoNR-r16', u'configRestrictInfoDAPS-v1640']
+    
+    #-----< ConfigRestrictInfoDAPS-r16 >-----#
+    ConfigRestrictInfoDAPS_r16 = SEQ(name=u'ConfigRestrictInfoDAPS-r16', mode=MODE_TYPE)
+    _ConfigRestrictInfoDAPS_r16_powerCoordination_r16 = SEQ(name=u'powerCoordination-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    __ConfigRestrictInfoDAPS_r16_powerCoordination_r16_p_DAPS_Source_r16 = INT(name=u'p-DAPS-Source-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'P-Max')))
+    __ConfigRestrictInfoDAPS_r16_powerCoordination_r16_p_DAPS_Target_r16 = INT(name=u'p-DAPS-Target-r16', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'P-Max')))
+    __ConfigRestrictInfoDAPS_r16_powerCoordination_r16_uplinkPowerSharingDAPS_Mode_r16 = ENUM(name=u'uplinkPowerSharingDAPS-Mode-r16', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __ConfigRestrictInfoDAPS_r16_powerCoordination_r16_uplinkPowerSharingDAPS_Mode_r16._cont = ASN1Dict([(u'semi-static-mode1', 0), (u'semi-static-mode2', 1), (u'dynamic', 2)])
+    __ConfigRestrictInfoDAPS_r16_powerCoordination_r16_uplinkPowerSharingDAPS_Mode_r16._ext = None
+    _ConfigRestrictInfoDAPS_r16_powerCoordination_r16._cont = ASN1Dict([
+        (u'p-DAPS-Source-r16', __ConfigRestrictInfoDAPS_r16_powerCoordination_r16_p_DAPS_Source_r16),
+        (u'p-DAPS-Target-r16', __ConfigRestrictInfoDAPS_r16_powerCoordination_r16_p_DAPS_Target_r16),
+        (u'uplinkPowerSharingDAPS-Mode-r16', __ConfigRestrictInfoDAPS_r16_powerCoordination_r16_uplinkPowerSharingDAPS_Mode_r16),
+        ])
+    _ConfigRestrictInfoDAPS_r16_powerCoordination_r16._ext = None
+    ConfigRestrictInfoDAPS_r16._cont = ASN1Dict([
+        (u'powerCoordination-r16', _ConfigRestrictInfoDAPS_r16_powerCoordination_r16),
+        ])
+    ConfigRestrictInfoDAPS_r16._ext = None
+    
+    #-----< ConfigRestrictInfoDAPS-v1640 >-----#
+    ConfigRestrictInfoDAPS_v1640 = SEQ(name=u'ConfigRestrictInfoDAPS-v1640', mode=MODE_TYPE)
+    _ConfigRestrictInfoDAPS_v1640_sourceFeatureSetPerDownlinkCC_r16 = INT(name=u'sourceFeatureSetPerDownlinkCC-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'FeatureSetDownlinkPerCC-Id')))
+    _ConfigRestrictInfoDAPS_v1640_sourceFeatureSetPerUplinkCC_r16 = INT(name=u'sourceFeatureSetPerUplinkCC-r16', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'FeatureSetUplinkPerCC-Id')))
+    ConfigRestrictInfoDAPS_v1640._cont = ASN1Dict([
+        (u'sourceFeatureSetPerDownlinkCC-r16', _ConfigRestrictInfoDAPS_v1640_sourceFeatureSetPerDownlinkCC_r16),
+        (u'sourceFeatureSetPerUplinkCC-r16', _ConfigRestrictInfoDAPS_v1640_sourceFeatureSetPerUplinkCC_r16),
+        ])
+    ConfigRestrictInfoDAPS_v1640._ext = None
+    
+    #-----< ReestablishmentInfo >-----#
+    ReestablishmentInfo = SEQ(name=u'ReestablishmentInfo', mode=MODE_TYPE)
+    _ReestablishmentInfo_sourcePhysCellId = INT(name=u'sourcePhysCellId', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'PhysCellId')))
+    _ReestablishmentInfo_targetCellShortMAC_I = BIT_STR(name=u'targetCellShortMAC-I', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'ShortMAC-I')))
+    _ReestablishmentInfo_additionalReestabInfoList = SEQ_OF(name=u'additionalReestabInfoList', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-InterNodeDefinitions', 'ReestabNCellInfoList')), opt=True)
+    ReestablishmentInfo._cont = ASN1Dict([
+        (u'sourcePhysCellId', _ReestablishmentInfo_sourcePhysCellId),
+        (u'targetCellShortMAC-I', _ReestablishmentInfo_targetCellShortMAC_I),
+        (u'additionalReestabInfoList', _ReestablishmentInfo_additionalReestabInfoList),
+        ])
+    ReestablishmentInfo._ext = None
+    
+    #-----< ReestabNCellInfoList >-----#
+    ReestabNCellInfoList = SEQ_OF(name=u'ReestabNCellInfoList', mode=MODE_TYPE)
+    _ReestabNCellInfoList__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('NR-InterNodeDefinitions', 'ReestabNCellInfo')))
+    ReestabNCellInfoList._cont = _ReestabNCellInfoList__item_
+    ReestabNCellInfoList._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=32)], ev=None, er=[])
+    
+    #-----< ReestabNCellInfo >-----#
+    ReestabNCellInfo = SEQ(name=u'ReestabNCellInfo', mode=MODE_TYPE)
+    _ReestabNCellInfo_cellIdentity = BIT_STR(name=u'cellIdentity', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'CellIdentity')))
+    _ReestabNCellInfo_key_gNodeB_Star = BIT_STR(name=u'key-gNodeB-Star', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _ReestabNCellInfo_key_gNodeB_Star._const_sz = ASN1Set(rv=[256], rr=[], ev=None, er=[])
+    _ReestabNCellInfo_shortMAC_I = BIT_STR(name=u'shortMAC-I', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'ShortMAC-I')))
+    ReestabNCellInfo._cont = ASN1Dict([
+        (u'cellIdentity', _ReestabNCellInfo_cellIdentity),
+        (u'key-gNodeB-Star', _ReestabNCellInfo_key_gNodeB_Star),
+        (u'shortMAC-I', _ReestabNCellInfo_shortMAC_I),
+        ])
+    ReestabNCellInfo._ext = None
+    
+    #-----< RRM-Config >-----#
+    RRM_Config = SEQ(name=u'RRM-Config', mode=MODE_TYPE)
+    _RRM_Config_ue_InactiveTime = ENUM(name=u'ue-InactiveTime', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _RRM_Config_ue_InactiveTime._cont = ASN1Dict([(u's1', 0), (u's2', 1), (u's3', 2), (u's5', 3), (u's7', 4), (u's10', 5), (u's15', 6), (u's20', 7), (u's25', 8), (u's30', 9), (u's40', 10), (u's50', 11), (u'min1', 12), (u'min1s20', 13), (u'min1s40', 14), (u'min2', 15), (u'min2s30', 16), (u'min3', 17), (u'min3s30', 18), (u'min4', 19), (u'min5', 20), (u'min6', 21), (u'min7', 22), (u'min8', 23), (u'min9', 24), (u'min10', 25), (u'min12', 26), (u'min14', 27), (u'min17', 28), (u'min20', 29), (u'min24', 30), (u'min28', 31), (u'min33', 32), (u'min38', 33), (u'min44', 34), (u'min50', 35), (u'hr1', 36), (u'hr1min30', 37), (u'hr2', 38), (u'hr2min30', 39), (u'hr3', 40), (u'hr3min30', 41), (u'hr4', 42), (u'hr5', 43), (u'hr6', 44), (u'hr8', 45), (u'hr10', 46), (u'hr13', 47), (u'hr16', 48), (u'hr20', 49), (u'day1', 50), (u'day1hr12', 51), (u'day2', 52), (u'day2hr12', 53), (u'day3', 54), (u'day4', 55), (u'day5', 56), (u'day7', 57), (u'day10', 58), (u'day14', 59), (u'day19', 60), (u'day24', 61), (u'day30', 62), (u'dayMoreThan30', 63)])
+    _RRM_Config_ue_InactiveTime._ext = None
+    _RRM_Config_candidateCellInfoList = SEQ_OF(name=u'candidateCellInfoList', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'MeasResultList2NR')), opt=True)
+    _RRM_Config_candidateCellInfoListSN_EUTRA = SEQ_OF(name=u'candidateCellInfoListSN-EUTRA', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'MeasResultServFreqListEUTRA-SCG')), opt=True, group=0)
+    RRM_Config._cont = ASN1Dict([
+        (u'ue-InactiveTime', _RRM_Config_ue_InactiveTime),
+        (u'candidateCellInfoList', _RRM_Config_candidateCellInfoList),
+        (u'candidateCellInfoListSN-EUTRA', _RRM_Config_candidateCellInfoListSN_EUTRA),
+        ])
+    RRM_Config._ext = [u'candidateCellInfoListSN-EUTRA']
+    
+    #-----< CG-Config >-----#
+    CG_Config = SEQ(name=u'CG-Config', mode=MODE_TYPE)
+    _CG_Config_criticalExtensions = CHOICE(name=u'criticalExtensions', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
+    __CG_Config_criticalExtensions_c1 = CHOICE(name=u'c1', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
+    ___CG_Config_criticalExtensions_c1_cg_Config = SEQ(name=u'cg-Config', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-InterNodeDefinitions', 'CG-Config-IEs')))
+    ___CG_Config_criticalExtensions_c1_spare3 = NULL(name=u'spare3', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    ___CG_Config_criticalExtensions_c1_spare2 = NULL(name=u'spare2', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    ___CG_Config_criticalExtensions_c1_spare1 = NULL(name=u'spare1', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __CG_Config_criticalExtensions_c1._cont = ASN1Dict([
+        (u'cg-Config', ___CG_Config_criticalExtensions_c1_cg_Config),
+        (u'spare3', ___CG_Config_criticalExtensions_c1_spare3),
+        (u'spare2', ___CG_Config_criticalExtensions_c1_spare2),
+        (u'spare1', ___CG_Config_criticalExtensions_c1_spare1),
+        ])
+    __CG_Config_criticalExtensions_c1._ext = None
+    __CG_Config_criticalExtensions_criticalExtensionsFuture = SEQ(name=u'criticalExtensionsFuture', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __CG_Config_criticalExtensions_criticalExtensionsFuture._cont = ASN1Dict([
+        ])
+    __CG_Config_criticalExtensions_criticalExtensionsFuture._ext = None
+    _CG_Config_criticalExtensions._cont = ASN1Dict([
+        (u'c1', __CG_Config_criticalExtensions_c1),
+        (u'criticalExtensionsFuture', __CG_Config_criticalExtensions_criticalExtensionsFuture),
+        ])
+    _CG_Config_criticalExtensions._ext = None
+    CG_Config._cont = ASN1Dict([
+        (u'criticalExtensions', _CG_Config_criticalExtensions),
+        ])
+    CG_Config._ext = None
+    
+    #-----< CG-Config-IEs >-----#
+    CG_Config_IEs = SEQ(name=u'CG-Config-IEs', mode=MODE_TYPE)
+    _CG_Config_IEs_scg_CellGroupConfig = OCT_STR(name=u'scg-CellGroupConfig', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    __CG_Config_IEs_scg_CellGroupConfig_contain = SEQ(name='_cont_scg-CellGroupConfig', mode=MODE_TYPE, typeref=ASN1RefType(('NR-RRC-Definitions', 'RRCReconfiguration')))
+    _CG_Config_IEs_scg_CellGroupConfig._const_cont = __CG_Config_IEs_scg_CellGroupConfig_contain
+    _CG_Config_IEs_scg_RB_Config = OCT_STR(name=u'scg-RB-Config', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    __CG_Config_IEs_scg_RB_Config_contain = SEQ(name='_cont_scg-RB-Config', mode=MODE_TYPE, typeref=ASN1RefType(('NR-RRC-Definitions', 'RadioBearerConfig')))
+    _CG_Config_IEs_scg_RB_Config._const_cont = __CG_Config_IEs_scg_RB_Config_contain
+    _CG_Config_IEs_configRestrictModReq = SEQ(name=u'configRestrictModReq', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-InterNodeDefinitions', 'ConfigRestrictModReqSCG')), opt=True)
+    _CG_Config_IEs_drx_InfoSCG = SEQ(name=u'drx-InfoSCG', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-InterNodeDefinitions', 'DRX-Info')), opt=True)
+    _CG_Config_IEs_candidateCellInfoListSN = OCT_STR(name=u'candidateCellInfoListSN', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    __CG_Config_IEs_candidateCellInfoListSN_contain = SEQ_OF(name='_cont_candidateCellInfoListSN', mode=MODE_TYPE, typeref=ASN1RefType(('NR-RRC-Definitions', 'MeasResultList2NR')))
+    _CG_Config_IEs_candidateCellInfoListSN._const_cont = __CG_Config_IEs_candidateCellInfoListSN_contain
+    _CG_Config_IEs_measConfigSN = SEQ(name=u'measConfigSN', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-InterNodeDefinitions', 'MeasConfigSN')), opt=True)
+    _CG_Config_IEs_selectedBandCombination = SEQ(name=u'selectedBandCombination', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-InterNodeDefinitions', 'BandCombinationInfoSN')), opt=True)
+    _CG_Config_IEs_fr_InfoListSCG = SEQ_OF(name=u'fr-InfoListSCG', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-InterNodeDefinitions', 'FR-InfoList')), opt=True)
+    _CG_Config_IEs_candidateServingFreqListNR = SEQ_OF(name=u'candidateServingFreqListNR', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-InterNodeDefinitions', 'CandidateServingFreqListNR')), opt=True)
+    _CG_Config_IEs_nonCriticalExtension = SEQ(name=u'nonCriticalExtension', mode=MODE_TYPE, tag=(9, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-InterNodeDefinitions', 'CG-Config-v1540-IEs')), opt=True)
+    CG_Config_IEs._cont = ASN1Dict([
+        (u'scg-CellGroupConfig', _CG_Config_IEs_scg_CellGroupConfig),
+        (u'scg-RB-Config', _CG_Config_IEs_scg_RB_Config),
+        (u'configRestrictModReq', _CG_Config_IEs_configRestrictModReq),
+        (u'drx-InfoSCG', _CG_Config_IEs_drx_InfoSCG),
+        (u'candidateCellInfoListSN', _CG_Config_IEs_candidateCellInfoListSN),
+        (u'measConfigSN', _CG_Config_IEs_measConfigSN),
+        (u'selectedBandCombination', _CG_Config_IEs_selectedBandCombination),
+        (u'fr-InfoListSCG', _CG_Config_IEs_fr_InfoListSCG),
+        (u'candidateServingFreqListNR', _CG_Config_IEs_candidateServingFreqListNR),
+        (u'nonCriticalExtension', _CG_Config_IEs_nonCriticalExtension),
+        ])
+    CG_Config_IEs._ext = None
+    
+    #-----< CG-Config-v1540-IEs >-----#
+    CG_Config_v1540_IEs = SEQ(name=u'CG-Config-v1540-IEs', mode=MODE_TYPE)
+    _CG_Config_v1540_IEs_pSCellFrequency = INT(name=u'pSCellFrequency', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'ARFCN-ValueNR')), opt=True)
+    _CG_Config_v1540_IEs_reportCGI_RequestNR = SEQ(name=u'reportCGI-RequestNR', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    __CG_Config_v1540_IEs_reportCGI_RequestNR_requestedCellInfo = SEQ(name=u'requestedCellInfo', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    ___CG_Config_v1540_IEs_reportCGI_RequestNR_requestedCellInfo_ssbFrequency = INT(name=u'ssbFrequency', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'ARFCN-ValueNR')))
+    ___CG_Config_v1540_IEs_reportCGI_RequestNR_requestedCellInfo_cellForWhichToReportCGI = INT(name=u'cellForWhichToReportCGI', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'PhysCellId')))
+    __CG_Config_v1540_IEs_reportCGI_RequestNR_requestedCellInfo._cont = ASN1Dict([
+        (u'ssbFrequency', ___CG_Config_v1540_IEs_reportCGI_RequestNR_requestedCellInfo_ssbFrequency),
+        (u'cellForWhichToReportCGI', ___CG_Config_v1540_IEs_reportCGI_RequestNR_requestedCellInfo_cellForWhichToReportCGI),
+        ])
+    __CG_Config_v1540_IEs_reportCGI_RequestNR_requestedCellInfo._ext = None
+    _CG_Config_v1540_IEs_reportCGI_RequestNR._cont = ASN1Dict([
+        (u'requestedCellInfo', __CG_Config_v1540_IEs_reportCGI_RequestNR_requestedCellInfo),
+        ])
+    _CG_Config_v1540_IEs_reportCGI_RequestNR._ext = None
+    _CG_Config_v1540_IEs_ph_InfoSCG = SEQ_OF(name=u'ph-InfoSCG', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-InterNodeDefinitions', 'PH-TypeListSCG')), opt=True)
+    _CG_Config_v1540_IEs_nonCriticalExtension = SEQ(name=u'nonCriticalExtension', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-InterNodeDefinitions', 'CG-Config-v1560-IEs')), opt=True)
+    CG_Config_v1540_IEs._cont = ASN1Dict([
+        (u'pSCellFrequency', _CG_Config_v1540_IEs_pSCellFrequency),
+        (u'reportCGI-RequestNR', _CG_Config_v1540_IEs_reportCGI_RequestNR),
+        (u'ph-InfoSCG', _CG_Config_v1540_IEs_ph_InfoSCG),
+        (u'nonCriticalExtension', _CG_Config_v1540_IEs_nonCriticalExtension),
+        ])
+    CG_Config_v1540_IEs._ext = None
+    
+    #-----< CG-Config-v1560-IEs >-----#
+    CG_Config_v1560_IEs = SEQ(name=u'CG-Config-v1560-IEs', mode=MODE_TYPE)
+    _CG_Config_v1560_IEs_pSCellFrequencyEUTRA = INT(name=u'pSCellFrequencyEUTRA', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'ARFCN-ValueEUTRA')), opt=True)
+    _CG_Config_v1560_IEs_scg_CellGroupConfigEUTRA = OCT_STR(name=u'scg-CellGroupConfigEUTRA', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _CG_Config_v1560_IEs_candidateCellInfoListSN_EUTRA = OCT_STR(name=u'candidateCellInfoListSN-EUTRA', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _CG_Config_v1560_IEs_candidateServingFreqListEUTRA = SEQ_OF(name=u'candidateServingFreqListEUTRA', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-InterNodeDefinitions', 'CandidateServingFreqListEUTRA')), opt=True)
+    _CG_Config_v1560_IEs_needForGaps = ENUM(name=u'needForGaps', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _CG_Config_v1560_IEs_needForGaps._cont = ASN1Dict([(u'true', 0)])
+    _CG_Config_v1560_IEs_needForGaps._ext = None
+    _CG_Config_v1560_IEs_drx_ConfigSCG = SEQ(name=u'drx-ConfigSCG', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'DRX-Config')), opt=True)
+    _CG_Config_v1560_IEs_reportCGI_RequestEUTRA = SEQ(name=u'reportCGI-RequestEUTRA', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    __CG_Config_v1560_IEs_reportCGI_RequestEUTRA_requestedCellInfoEUTRA = SEQ(name=u'requestedCellInfoEUTRA', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    ___CG_Config_v1560_IEs_reportCGI_RequestEUTRA_requestedCellInfoEUTRA_eutraFrequency = INT(name=u'eutraFrequency', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'ARFCN-ValueEUTRA')))
+    ___CG_Config_v1560_IEs_reportCGI_RequestEUTRA_requestedCellInfoEUTRA_cellForWhichToReportCGI_EUTRA = INT(name=u'cellForWhichToReportCGI-EUTRA', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'EUTRA-PhysCellId')))
+    __CG_Config_v1560_IEs_reportCGI_RequestEUTRA_requestedCellInfoEUTRA._cont = ASN1Dict([
+        (u'eutraFrequency', ___CG_Config_v1560_IEs_reportCGI_RequestEUTRA_requestedCellInfoEUTRA_eutraFrequency),
+        (u'cellForWhichToReportCGI-EUTRA', ___CG_Config_v1560_IEs_reportCGI_RequestEUTRA_requestedCellInfoEUTRA_cellForWhichToReportCGI_EUTRA),
+        ])
+    __CG_Config_v1560_IEs_reportCGI_RequestEUTRA_requestedCellInfoEUTRA._ext = None
+    _CG_Config_v1560_IEs_reportCGI_RequestEUTRA._cont = ASN1Dict([
+        (u'requestedCellInfoEUTRA', __CG_Config_v1560_IEs_reportCGI_RequestEUTRA_requestedCellInfoEUTRA),
+        ])
+    _CG_Config_v1560_IEs_reportCGI_RequestEUTRA._ext = None
+    _CG_Config_v1560_IEs_nonCriticalExtension = SEQ(name=u'nonCriticalExtension', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-InterNodeDefinitions', 'CG-Config-v1590-IEs')), opt=True)
+    CG_Config_v1560_IEs._cont = ASN1Dict([
+        (u'pSCellFrequencyEUTRA', _CG_Config_v1560_IEs_pSCellFrequencyEUTRA),
+        (u'scg-CellGroupConfigEUTRA', _CG_Config_v1560_IEs_scg_CellGroupConfigEUTRA),
+        (u'candidateCellInfoListSN-EUTRA', _CG_Config_v1560_IEs_candidateCellInfoListSN_EUTRA),
+        (u'candidateServingFreqListEUTRA', _CG_Config_v1560_IEs_candidateServingFreqListEUTRA),
+        (u'needForGaps', _CG_Config_v1560_IEs_needForGaps),
+        (u'drx-ConfigSCG', _CG_Config_v1560_IEs_drx_ConfigSCG),
+        (u'reportCGI-RequestEUTRA', _CG_Config_v1560_IEs_reportCGI_RequestEUTRA),
+        (u'nonCriticalExtension', _CG_Config_v1560_IEs_nonCriticalExtension),
+        ])
+    CG_Config_v1560_IEs._ext = None
+    
+    #-----< CG-Config-v1590-IEs >-----#
+    CG_Config_v1590_IEs = SEQ(name=u'CG-Config-v1590-IEs', mode=MODE_TYPE)
+    _CG_Config_v1590_IEs_scellFrequenciesSN_NR = SEQ_OF(name=u'scellFrequenciesSN-NR', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    __CG_Config_v1590_IEs_scellFrequenciesSN_NR__item_ = INT(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('NR-RRC-Definitions', 'ARFCN-ValueNR')))
+    _CG_Config_v1590_IEs_scellFrequenciesSN_NR._cont = __CG_Config_v1590_IEs_scellFrequenciesSN_NR__item_
+    _CG_Config_v1590_IEs_scellFrequenciesSN_NR._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=31)], ev=None, er=[])
+    _CG_Config_v1590_IEs_scellFrequenciesSN_EUTRA = SEQ_OF(name=u'scellFrequenciesSN-EUTRA', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    __CG_Config_v1590_IEs_scellFrequenciesSN_EUTRA__item_ = INT(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('NR-RRC-Definitions', 'ARFCN-ValueEUTRA')))
+    _CG_Config_v1590_IEs_scellFrequenciesSN_EUTRA._cont = __CG_Config_v1590_IEs_scellFrequenciesSN_EUTRA__item_
+    _CG_Config_v1590_IEs_scellFrequenciesSN_EUTRA._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=31)], ev=None, er=[])
+    _CG_Config_v1590_IEs_nonCriticalExtension = SEQ(name=u'nonCriticalExtension', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-InterNodeDefinitions', 'CG-Config-v1610-IEs')), opt=True)
+    CG_Config_v1590_IEs._cont = ASN1Dict([
+        (u'scellFrequenciesSN-NR', _CG_Config_v1590_IEs_scellFrequenciesSN_NR),
+        (u'scellFrequenciesSN-EUTRA', _CG_Config_v1590_IEs_scellFrequenciesSN_EUTRA),
+        (u'nonCriticalExtension', _CG_Config_v1590_IEs_nonCriticalExtension),
+        ])
+    CG_Config_v1590_IEs._ext = None
+    
+    #-----< CG-Config-v1610-IEs >-----#
+    CG_Config_v1610_IEs = SEQ(name=u'CG-Config-v1610-IEs', mode=MODE_TYPE)
+    _CG_Config_v1610_IEs_drx_InfoSCG2 = SEQ(name=u'drx-InfoSCG2', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-InterNodeDefinitions', 'DRX-Info2')), opt=True)
+    _CG_Config_v1610_IEs_nonCriticalExtension = SEQ(name=u'nonCriticalExtension', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-InterNodeDefinitions', 'CG-Config-v1620-IEs')), opt=True)
+    CG_Config_v1610_IEs._cont = ASN1Dict([
+        (u'drx-InfoSCG2', _CG_Config_v1610_IEs_drx_InfoSCG2),
+        (u'nonCriticalExtension', _CG_Config_v1610_IEs_nonCriticalExtension),
+        ])
+    CG_Config_v1610_IEs._ext = None
+    
+    #-----< CG-Config-v1620-IEs >-----#
+    CG_Config_v1620_IEs = SEQ(name=u'CG-Config-v1620-IEs', mode=MODE_TYPE)
+    _CG_Config_v1620_IEs_ueAssistanceInformationSCG_r16 = OCT_STR(name=u'ueAssistanceInformationSCG-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    __CG_Config_v1620_IEs_ueAssistanceInformationSCG_r16_contain = SEQ(name='_cont_ueAssistanceInformationSCG-r16', mode=MODE_TYPE, typeref=ASN1RefType(('NR-RRC-Definitions', 'UEAssistanceInformation')))
+    _CG_Config_v1620_IEs_ueAssistanceInformationSCG_r16._const_cont = __CG_Config_v1620_IEs_ueAssistanceInformationSCG_r16_contain
+    _CG_Config_v1620_IEs_nonCriticalExtension = SEQ(name=u'nonCriticalExtension', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-InterNodeDefinitions', 'CG-Config-v1630-IEs')), opt=True)
+    CG_Config_v1620_IEs._cont = ASN1Dict([
+        (u'ueAssistanceInformationSCG-r16', _CG_Config_v1620_IEs_ueAssistanceInformationSCG_r16),
+        (u'nonCriticalExtension', _CG_Config_v1620_IEs_nonCriticalExtension),
+        ])
+    CG_Config_v1620_IEs._ext = None
+    
+    #-----< CG-Config-v1630-IEs >-----#
+    CG_Config_v1630_IEs = SEQ(name=u'CG-Config-v1630-IEs', mode=MODE_TYPE)
+    _CG_Config_v1630_IEs_selectedToffset_r16 = ENUM(name=u'selectedToffset-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-InterNodeDefinitions', 'T-Offset-r16')), opt=True)
+    _CG_Config_v1630_IEs_nonCriticalExtension = SEQ(name=u'nonCriticalExtension', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-InterNodeDefinitions', 'CG-Config-v1640-IEs')), opt=True)
+    CG_Config_v1630_IEs._cont = ASN1Dict([
+        (u'selectedToffset-r16', _CG_Config_v1630_IEs_selectedToffset_r16),
+        (u'nonCriticalExtension', _CG_Config_v1630_IEs_nonCriticalExtension),
+        ])
+    CG_Config_v1630_IEs._ext = None
+    
+    #-----< CG-Config-v1640-IEs >-----#
+    CG_Config_v1640_IEs = SEQ(name=u'CG-Config-v1640-IEs', mode=MODE_TYPE)
+    _CG_Config_v1640_IEs_servCellInfoListSCG_NR_r16 = SEQ_OF(name=u'servCellInfoListSCG-NR-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-InterNodeDefinitions', 'ServCellInfoListSCG-NR-r16')), opt=True)
+    _CG_Config_v1640_IEs_servCellInfoListSCG_EUTRA_r16 = SEQ_OF(name=u'servCellInfoListSCG-EUTRA-r16', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-InterNodeDefinitions', 'ServCellInfoListSCG-EUTRA-r16')), opt=True)
+    _CG_Config_v1640_IEs_nonCriticalExtension = SEQ(name=u'nonCriticalExtension', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _CG_Config_v1640_IEs_nonCriticalExtension._cont = ASN1Dict([
+        ])
+    _CG_Config_v1640_IEs_nonCriticalExtension._ext = None
+    CG_Config_v1640_IEs._cont = ASN1Dict([
+        (u'servCellInfoListSCG-NR-r16', _CG_Config_v1640_IEs_servCellInfoListSCG_NR_r16),
+        (u'servCellInfoListSCG-EUTRA-r16', _CG_Config_v1640_IEs_servCellInfoListSCG_EUTRA_r16),
+        (u'nonCriticalExtension', _CG_Config_v1640_IEs_nonCriticalExtension),
+        ])
+    CG_Config_v1640_IEs._ext = None
+    
+    #-----< ServCellInfoListSCG-NR-r16 >-----#
+    ServCellInfoListSCG_NR_r16 = SEQ_OF(name=u'ServCellInfoListSCG-NR-r16', mode=MODE_TYPE)
+    _ServCellInfoListSCG_NR_r16__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('NR-InterNodeDefinitions', 'ServCellInfoXCG-NR-r16')))
+    ServCellInfoListSCG_NR_r16._cont = _ServCellInfoListSCG_NR_r16__item_
+    ServCellInfoListSCG_NR_r16._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=32)], ev=None, er=[])
+    
+    #-----< ServCellInfoXCG-NR-r16 >-----#
+    ServCellInfoXCG_NR_r16 = SEQ(name=u'ServCellInfoXCG-NR-r16', mode=MODE_TYPE)
+    _ServCellInfoXCG_NR_r16_dl_FreqInfo_NR_r16 = SEQ(name=u'dl-FreqInfo-NR-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-InterNodeDefinitions', 'FrequencyConfig-NR-r16')), opt=True)
+    _ServCellInfoXCG_NR_r16_ul_FreqInfo_NR_r16 = SEQ(name=u'ul-FreqInfo-NR-r16', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-InterNodeDefinitions', 'FrequencyConfig-NR-r16')), opt=True)
+    ServCellInfoXCG_NR_r16._cont = ASN1Dict([
+        (u'dl-FreqInfo-NR-r16', _ServCellInfoXCG_NR_r16_dl_FreqInfo_NR_r16),
+        (u'ul-FreqInfo-NR-r16', _ServCellInfoXCG_NR_r16_ul_FreqInfo_NR_r16),
+        ])
+    ServCellInfoXCG_NR_r16._ext = []
+    
+    #-----< FrequencyConfig-NR-r16 >-----#
+    FrequencyConfig_NR_r16 = SEQ(name=u'FrequencyConfig-NR-r16', mode=MODE_TYPE)
+    _FrequencyConfig_NR_r16_freqBandIndicatorNR_r16 = INT(name=u'freqBandIndicatorNR-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'FreqBandIndicatorNR')))
+    _FrequencyConfig_NR_r16_carrierCenterFreq_NR_r16 = INT(name=u'carrierCenterFreq-NR-r16', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'ARFCN-ValueNR')))
+    _FrequencyConfig_NR_r16_carrierBandwidth_NR_r16 = INT(name=u'carrierBandwidth-NR-r16', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _FrequencyConfig_NR_r16_carrierBandwidth_NR_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=275)], ev=None, er=[])
+    _FrequencyConfig_NR_r16_subcarrierSpacing_NR_r16 = ENUM(name=u'subcarrierSpacing-NR-r16', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'SubcarrierSpacing')))
+    FrequencyConfig_NR_r16._cont = ASN1Dict([
+        (u'freqBandIndicatorNR-r16', _FrequencyConfig_NR_r16_freqBandIndicatorNR_r16),
+        (u'carrierCenterFreq-NR-r16', _FrequencyConfig_NR_r16_carrierCenterFreq_NR_r16),
+        (u'carrierBandwidth-NR-r16', _FrequencyConfig_NR_r16_carrierBandwidth_NR_r16),
+        (u'subcarrierSpacing-NR-r16', _FrequencyConfig_NR_r16_subcarrierSpacing_NR_r16),
+        ])
+    FrequencyConfig_NR_r16._ext = None
+    
+    #-----< ServCellInfoListSCG-EUTRA-r16 >-----#
+    ServCellInfoListSCG_EUTRA_r16 = SEQ_OF(name=u'ServCellInfoListSCG-EUTRA-r16', mode=MODE_TYPE)
+    _ServCellInfoListSCG_EUTRA_r16__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('NR-InterNodeDefinitions', 'ServCellInfoXCG-EUTRA-r16')))
+    ServCellInfoListSCG_EUTRA_r16._cont = _ServCellInfoListSCG_EUTRA_r16__item_
+    ServCellInfoListSCG_EUTRA_r16._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=32)], ev=None, er=[])
+    
+    #-----< ServCellInfoXCG-EUTRA-r16 >-----#
+    ServCellInfoXCG_EUTRA_r16 = SEQ(name=u'ServCellInfoXCG-EUTRA-r16', mode=MODE_TYPE)
+    _ServCellInfoXCG_EUTRA_r16_dl_CarrierFreq_EUTRA_r16 = INT(name=u'dl-CarrierFreq-EUTRA-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'ARFCN-ValueEUTRA')), opt=True)
+    _ServCellInfoXCG_EUTRA_r16_ul_CarrierFreq_EUTRA_r16 = INT(name=u'ul-CarrierFreq-EUTRA-r16', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'ARFCN-ValueEUTRA')), opt=True)
+    _ServCellInfoXCG_EUTRA_r16_transmissionBandwidth_EUTRA_r16 = ENUM(name=u'transmissionBandwidth-EUTRA-r16', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-InterNodeDefinitions', 'TransmissionBandwidth-EUTRA-r16')), opt=True)
+    ServCellInfoXCG_EUTRA_r16._cont = ASN1Dict([
+        (u'dl-CarrierFreq-EUTRA-r16', _ServCellInfoXCG_EUTRA_r16_dl_CarrierFreq_EUTRA_r16),
+        (u'ul-CarrierFreq-EUTRA-r16', _ServCellInfoXCG_EUTRA_r16_ul_CarrierFreq_EUTRA_r16),
+        (u'transmissionBandwidth-EUTRA-r16', _ServCellInfoXCG_EUTRA_r16_transmissionBandwidth_EUTRA_r16),
+        ])
+    ServCellInfoXCG_EUTRA_r16._ext = []
+    
+    #-----< TransmissionBandwidth-EUTRA-r16 >-----#
+    TransmissionBandwidth_EUTRA_r16 = ENUM(name=u'TransmissionBandwidth-EUTRA-r16', mode=MODE_TYPE)
+    TransmissionBandwidth_EUTRA_r16._cont = ASN1Dict([(u'rb6', 0), (u'rb15', 1), (u'rb25', 2), (u'rb50', 3), (u'rb75', 4), (u'rb100', 5)])
+    TransmissionBandwidth_EUTRA_r16._ext = None
+    
+    #-----< PH-TypeListSCG >-----#
+    PH_TypeListSCG = SEQ_OF(name=u'PH-TypeListSCG', mode=MODE_TYPE)
+    _PH_TypeListSCG__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('NR-InterNodeDefinitions', 'PH-InfoSCG')))
+    PH_TypeListSCG._cont = _PH_TypeListSCG__item_
+    PH_TypeListSCG._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=32)], ev=None, er=[])
+    
+    #-----< PH-InfoSCG >-----#
+    PH_InfoSCG = SEQ(name=u'PH-InfoSCG', mode=MODE_TYPE)
+    _PH_InfoSCG_servCellIndex = INT(name=u'servCellIndex', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'ServCellIndex')))
+    _PH_InfoSCG_ph_Uplink = SEQ(name=u'ph-Uplink', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-InterNodeDefinitions', 'PH-UplinkCarrierSCG')))
+    _PH_InfoSCG_ph_SupplementaryUplink = SEQ(name=u'ph-SupplementaryUplink', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-InterNodeDefinitions', 'PH-UplinkCarrierSCG')), opt=True)
+    PH_InfoSCG._cont = ASN1Dict([
+        (u'servCellIndex', _PH_InfoSCG_servCellIndex),
+        (u'ph-Uplink', _PH_InfoSCG_ph_Uplink),
+        (u'ph-SupplementaryUplink', _PH_InfoSCG_ph_SupplementaryUplink),
+        ])
+    PH_InfoSCG._ext = []
+    
+    #-----< PH-UplinkCarrierSCG >-----#
+    PH_UplinkCarrierSCG = SEQ(name=u'PH-UplinkCarrierSCG', mode=MODE_TYPE)
+    _PH_UplinkCarrierSCG_ph_Type1or3 = ENUM(name=u'ph-Type1or3', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _PH_UplinkCarrierSCG_ph_Type1or3._cont = ASN1Dict([(u'type1', 0), (u'type3', 1)])
+    _PH_UplinkCarrierSCG_ph_Type1or3._ext = None
+    PH_UplinkCarrierSCG._cont = ASN1Dict([
+        (u'ph-Type1or3', _PH_UplinkCarrierSCG_ph_Type1or3),
+        ])
+    PH_UplinkCarrierSCG._ext = []
+    
+    #-----< MeasConfigSN >-----#
+    MeasConfigSN = SEQ(name=u'MeasConfigSN', mode=MODE_TYPE)
+    _MeasConfigSN_measuredFrequenciesSN = SEQ_OF(name=u'measuredFrequenciesSN', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    __MeasConfigSN_measuredFrequenciesSN__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('NR-InterNodeDefinitions', 'NR-FreqInfo')))
+    _MeasConfigSN_measuredFrequenciesSN._cont = __MeasConfigSN_measuredFrequenciesSN__item_
+    _MeasConfigSN_measuredFrequenciesSN._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=32)], ev=None, er=[])
+    MeasConfigSN._cont = ASN1Dict([
+        (u'measuredFrequenciesSN', _MeasConfigSN_measuredFrequenciesSN),
+        ])
+    MeasConfigSN._ext = []
+    
+    #-----< NR-FreqInfo >-----#
+    NR_FreqInfo = SEQ(name=u'NR-FreqInfo', mode=MODE_TYPE)
+    _NR_FreqInfo_measuredFrequency = INT(name=u'measuredFrequency', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'ARFCN-ValueNR')), opt=True)
+    NR_FreqInfo._cont = ASN1Dict([
+        (u'measuredFrequency', _NR_FreqInfo_measuredFrequency),
+        ])
+    NR_FreqInfo._ext = []
+    
+    #-----< ConfigRestrictModReqSCG >-----#
+    ConfigRestrictModReqSCG = SEQ(name=u'ConfigRestrictModReqSCG', mode=MODE_TYPE)
+    _ConfigRestrictModReqSCG_requestedBC_MRDC = SEQ(name=u'requestedBC-MRDC', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-InterNodeDefinitions', 'BandCombinationInfoSN')), opt=True)
+    _ConfigRestrictModReqSCG_requestedP_MaxFR1 = INT(name=u'requestedP-MaxFR1', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'P-Max')), opt=True)
+    _ConfigRestrictModReqSCG_requestedPDCCH_BlindDetectionSCG = INT(name=u'requestedPDCCH-BlindDetectionSCG', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True, group=0)
+    _ConfigRestrictModReqSCG_requestedPDCCH_BlindDetectionSCG._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=15)], ev=None, er=[])
+    _ConfigRestrictModReqSCG_requestedP_MaxEUTRA = INT(name=u'requestedP-MaxEUTRA', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'P-Max')), opt=True, group=0)
+    _ConfigRestrictModReqSCG_requestedP_MaxFR2_r16 = INT(name=u'requestedP-MaxFR2-r16', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'P-Max')), opt=True, group=1)
+    _ConfigRestrictModReqSCG_requestedMaxInterFreqMeasIdSCG_r16 = INT(name=u'requestedMaxInterFreqMeasIdSCG-r16', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True, group=1)
+    _ConfigRestrictModReqSCG_requestedMaxInterFreqMeasIdSCG_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=62)], ev=None, er=[])
+    _ConfigRestrictModReqSCG_requestedMaxIntraFreqMeasIdSCG_r16 = INT(name=u'requestedMaxIntraFreqMeasIdSCG-r16', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True, group=1)
+    _ConfigRestrictModReqSCG_requestedMaxIntraFreqMeasIdSCG_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=62)], ev=None, er=[])
+    _ConfigRestrictModReqSCG_requestedToffset_r16 = ENUM(name=u'requestedToffset-r16', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-InterNodeDefinitions', 'T-Offset-r16')), opt=True, group=1)
+    ConfigRestrictModReqSCG._cont = ASN1Dict([
+        (u'requestedBC-MRDC', _ConfigRestrictModReqSCG_requestedBC_MRDC),
+        (u'requestedP-MaxFR1', _ConfigRestrictModReqSCG_requestedP_MaxFR1),
+        (u'requestedPDCCH-BlindDetectionSCG', _ConfigRestrictModReqSCG_requestedPDCCH_BlindDetectionSCG),
+        (u'requestedP-MaxEUTRA', _ConfigRestrictModReqSCG_requestedP_MaxEUTRA),
+        (u'requestedP-MaxFR2-r16', _ConfigRestrictModReqSCG_requestedP_MaxFR2_r16),
+        (u'requestedMaxInterFreqMeasIdSCG-r16', _ConfigRestrictModReqSCG_requestedMaxInterFreqMeasIdSCG_r16),
+        (u'requestedMaxIntraFreqMeasIdSCG-r16', _ConfigRestrictModReqSCG_requestedMaxIntraFreqMeasIdSCG_r16),
+        (u'requestedToffset-r16', _ConfigRestrictModReqSCG_requestedToffset_r16),
+        ])
+    ConfigRestrictModReqSCG._ext = [u'requestedPDCCH-BlindDetectionSCG', u'requestedP-MaxEUTRA', u'requestedP-MaxFR2-r16', u'requestedMaxInterFreqMeasIdSCG-r16', u'requestedMaxIntraFreqMeasIdSCG-r16', u'requestedToffset-r16']
+    
+    #-----< BandCombinationIndex >-----#
+    BandCombinationIndex = INT(name=u'BandCombinationIndex', mode=MODE_TYPE)
+    BandCombinationIndex._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=65536)], ev=None, er=[])
+    
+    #-----< BandCombinationInfoSN >-----#
+    BandCombinationInfoSN = SEQ(name=u'BandCombinationInfoSN', mode=MODE_TYPE)
+    _BandCombinationInfoSN_bandCombinationIndex = INT(name=u'bandCombinationIndex', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-InterNodeDefinitions', 'BandCombinationIndex')))
+    _BandCombinationInfoSN_requestedFeatureSets = INT(name=u'requestedFeatureSets', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-InterNodeDefinitions', 'FeatureSetEntryIndex')))
+    BandCombinationInfoSN._cont = ASN1Dict([
+        (u'bandCombinationIndex', _BandCombinationInfoSN_bandCombinationIndex),
+        (u'requestedFeatureSets', _BandCombinationInfoSN_requestedFeatureSets),
+        ])
+    BandCombinationInfoSN._ext = None
+    
+    #-----< FR-InfoList >-----#
+    FR_InfoList = SEQ_OF(name=u'FR-InfoList', mode=MODE_TYPE)
+    _FR_InfoList__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('NR-InterNodeDefinitions', 'FR-Info')))
+    FR_InfoList._cont = _FR_InfoList__item_
+    FR_InfoList._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=31)], ev=None, er=[])
+    
+    #-----< FR-Info >-----#
+    FR_Info = SEQ(name=u'FR-Info', mode=MODE_TYPE)
+    _FR_Info_servCellIndex = INT(name=u'servCellIndex', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'ServCellIndex')))
+    _FR_Info_fr_Type = ENUM(name=u'fr-Type', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _FR_Info_fr_Type._cont = ASN1Dict([(u'fr1', 0), (u'fr2', 1)])
+    _FR_Info_fr_Type._ext = None
+    FR_Info._cont = ASN1Dict([
+        (u'servCellIndex', _FR_Info_servCellIndex),
+        (u'fr-Type', _FR_Info_fr_Type),
+        ])
+    FR_Info._ext = None
+    
+    #-----< CandidateServingFreqListNR >-----#
+    CandidateServingFreqListNR = SEQ_OF(name=u'CandidateServingFreqListNR', mode=MODE_TYPE)
+    _CandidateServingFreqListNR__item_ = INT(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('NR-RRC-Definitions', 'ARFCN-ValueNR')))
+    CandidateServingFreqListNR._cont = _CandidateServingFreqListNR__item_
+    CandidateServingFreqListNR._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=32)], ev=None, er=[])
+    
+    #-----< CandidateServingFreqListEUTRA >-----#
+    CandidateServingFreqListEUTRA = SEQ_OF(name=u'CandidateServingFreqListEUTRA', mode=MODE_TYPE)
+    _CandidateServingFreqListEUTRA__item_ = INT(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('NR-RRC-Definitions', 'ARFCN-ValueEUTRA')))
+    CandidateServingFreqListEUTRA._cont = _CandidateServingFreqListEUTRA__item_
+    CandidateServingFreqListEUTRA._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=32)], ev=None, er=[])
+    
+    #-----< T-Offset-r16 >-----#
+    T_Offset_r16 = ENUM(name=u'T-Offset-r16', mode=MODE_TYPE)
+    T_Offset_r16._cont = ASN1Dict([(u'ms0dot5', 0), (u'ms0dot75', 1), (u'ms1', 2), (u'ms1dot5', 3), (u'ms2', 4), (u'ms2dot5', 5), (u'ms3', 6), (u'spare1', 7)])
+    T_Offset_r16._ext = None
+    
+    #-----< CG-ConfigInfo >-----#
+    CG_ConfigInfo = SEQ(name=u'CG-ConfigInfo', mode=MODE_TYPE)
+    _CG_ConfigInfo_criticalExtensions = CHOICE(name=u'criticalExtensions', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
+    __CG_ConfigInfo_criticalExtensions_c1 = CHOICE(name=u'c1', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
+    ___CG_ConfigInfo_criticalExtensions_c1_cg_ConfigInfo = SEQ(name=u'cg-ConfigInfo', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-InterNodeDefinitions', 'CG-ConfigInfo-IEs')))
+    ___CG_ConfigInfo_criticalExtensions_c1_spare3 = NULL(name=u'spare3', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    ___CG_ConfigInfo_criticalExtensions_c1_spare2 = NULL(name=u'spare2', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    ___CG_ConfigInfo_criticalExtensions_c1_spare1 = NULL(name=u'spare1', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __CG_ConfigInfo_criticalExtensions_c1._cont = ASN1Dict([
+        (u'cg-ConfigInfo', ___CG_ConfigInfo_criticalExtensions_c1_cg_ConfigInfo),
+        (u'spare3', ___CG_ConfigInfo_criticalExtensions_c1_spare3),
+        (u'spare2', ___CG_ConfigInfo_criticalExtensions_c1_spare2),
+        (u'spare1', ___CG_ConfigInfo_criticalExtensions_c1_spare1),
+        ])
+    __CG_ConfigInfo_criticalExtensions_c1._ext = None
+    __CG_ConfigInfo_criticalExtensions_criticalExtensionsFuture = SEQ(name=u'criticalExtensionsFuture', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __CG_ConfigInfo_criticalExtensions_criticalExtensionsFuture._cont = ASN1Dict([
+        ])
+    __CG_ConfigInfo_criticalExtensions_criticalExtensionsFuture._ext = None
+    _CG_ConfigInfo_criticalExtensions._cont = ASN1Dict([
+        (u'c1', __CG_ConfigInfo_criticalExtensions_c1),
+        (u'criticalExtensionsFuture', __CG_ConfigInfo_criticalExtensions_criticalExtensionsFuture),
+        ])
+    _CG_ConfigInfo_criticalExtensions._ext = None
+    CG_ConfigInfo._cont = ASN1Dict([
+        (u'criticalExtensions', _CG_ConfigInfo_criticalExtensions),
+        ])
+    CG_ConfigInfo._ext = None
+    
+    #-----< CG-ConfigInfo-IEs >-----#
+    CG_ConfigInfo_IEs = SEQ(name=u'CG-ConfigInfo-IEs', mode=MODE_TYPE)
+    _CG_ConfigInfo_IEs_ue_CapabilityInfo = OCT_STR(name=u'ue-CapabilityInfo', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    __CG_ConfigInfo_IEs_ue_CapabilityInfo_contain = SEQ_OF(name='_cont_ue-CapabilityInfo', mode=MODE_TYPE, typeref=ASN1RefType(('NR-RRC-Definitions', 'UE-CapabilityRAT-ContainerList')))
+    _CG_ConfigInfo_IEs_ue_CapabilityInfo._const_cont = __CG_ConfigInfo_IEs_ue_CapabilityInfo_contain
+    _CG_ConfigInfo_IEs_candidateCellInfoListMN = SEQ_OF(name=u'candidateCellInfoListMN', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'MeasResultList2NR')), opt=True)
+    _CG_ConfigInfo_IEs_candidateCellInfoListSN = OCT_STR(name=u'candidateCellInfoListSN', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    __CG_ConfigInfo_IEs_candidateCellInfoListSN_contain = SEQ_OF(name='_cont_candidateCellInfoListSN', mode=MODE_TYPE, typeref=ASN1RefType(('NR-RRC-Definitions', 'MeasResultList2NR')))
+    _CG_ConfigInfo_IEs_candidateCellInfoListSN._const_cont = __CG_ConfigInfo_IEs_candidateCellInfoListSN_contain
+    _CG_ConfigInfo_IEs_measResultCellListSFTD_NR = SEQ_OF(name=u'measResultCellListSFTD-NR', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'MeasResultCellListSFTD-NR')), opt=True)
+    _CG_ConfigInfo_IEs_scgFailureInfo = SEQ(name=u'scgFailureInfo', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    __CG_ConfigInfo_IEs_scgFailureInfo_failureType = ENUM(name=u'failureType', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __CG_ConfigInfo_IEs_scgFailureInfo_failureType._cont = ASN1Dict([(u't310-Expiry', 0), (u'randomAccessProblem', 1), (u'rlc-MaxNumRetx', 2), (u'synchReconfigFailure-SCG', 3), (u'scg-reconfigFailure', 4), (u'srb3-IntegrityFailure', 5)])
+    __CG_ConfigInfo_IEs_scgFailureInfo_failureType._ext = None
+    __CG_ConfigInfo_IEs_scgFailureInfo_measResultSCG = OCT_STR(name=u'measResultSCG', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    ___CG_ConfigInfo_IEs_scgFailureInfo_measResultSCG_contain = SEQ(name='_cont_measResultSCG', mode=MODE_TYPE, typeref=ASN1RefType(('NR-RRC-Definitions', 'MeasResultSCG-Failure')))
+    __CG_ConfigInfo_IEs_scgFailureInfo_measResultSCG._const_cont = ___CG_ConfigInfo_IEs_scgFailureInfo_measResultSCG_contain
+    _CG_ConfigInfo_IEs_scgFailureInfo._cont = ASN1Dict([
+        (u'failureType', __CG_ConfigInfo_IEs_scgFailureInfo_failureType),
+        (u'measResultSCG', __CG_ConfigInfo_IEs_scgFailureInfo_measResultSCG),
+        ])
+    _CG_ConfigInfo_IEs_scgFailureInfo._ext = None
+    _CG_ConfigInfo_IEs_configRestrictInfo = SEQ(name=u'configRestrictInfo', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-InterNodeDefinitions', 'ConfigRestrictInfoSCG')), opt=True)
+    _CG_ConfigInfo_IEs_drx_InfoMCG = SEQ(name=u'drx-InfoMCG', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-InterNodeDefinitions', 'DRX-Info')), opt=True)
+    _CG_ConfigInfo_IEs_measConfigMN = SEQ(name=u'measConfigMN', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-InterNodeDefinitions', 'MeasConfigMN')), opt=True)
+    _CG_ConfigInfo_IEs_sourceConfigSCG = OCT_STR(name=u'sourceConfigSCG', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    __CG_ConfigInfo_IEs_sourceConfigSCG_contain = SEQ(name='_cont_sourceConfigSCG', mode=MODE_TYPE, typeref=ASN1RefType(('NR-RRC-Definitions', 'RRCReconfiguration')))
+    _CG_ConfigInfo_IEs_sourceConfigSCG._const_cont = __CG_ConfigInfo_IEs_sourceConfigSCG_contain
+    _CG_ConfigInfo_IEs_scg_RB_Config = OCT_STR(name=u'scg-RB-Config', mode=MODE_TYPE, tag=(9, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    __CG_ConfigInfo_IEs_scg_RB_Config_contain = SEQ(name='_cont_scg-RB-Config', mode=MODE_TYPE, typeref=ASN1RefType(('NR-RRC-Definitions', 'RadioBearerConfig')))
+    _CG_ConfigInfo_IEs_scg_RB_Config._const_cont = __CG_ConfigInfo_IEs_scg_RB_Config_contain
+    _CG_ConfigInfo_IEs_mcg_RB_Config = OCT_STR(name=u'mcg-RB-Config', mode=MODE_TYPE, tag=(10, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    __CG_ConfigInfo_IEs_mcg_RB_Config_contain = SEQ(name='_cont_mcg-RB-Config', mode=MODE_TYPE, typeref=ASN1RefType(('NR-RRC-Definitions', 'RadioBearerConfig')))
+    _CG_ConfigInfo_IEs_mcg_RB_Config._const_cont = __CG_ConfigInfo_IEs_mcg_RB_Config_contain
+    _CG_ConfigInfo_IEs_mrdc_AssistanceInfo = SEQ(name=u'mrdc-AssistanceInfo', mode=MODE_TYPE, tag=(11, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-InterNodeDefinitions', 'MRDC-AssistanceInfo')), opt=True)
+    _CG_ConfigInfo_IEs_nonCriticalExtension = SEQ(name=u'nonCriticalExtension', mode=MODE_TYPE, tag=(12, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-InterNodeDefinitions', 'CG-ConfigInfo-v1540-IEs')), opt=True)
+    CG_ConfigInfo_IEs._cont = ASN1Dict([
+        (u'ue-CapabilityInfo', _CG_ConfigInfo_IEs_ue_CapabilityInfo),
+        (u'candidateCellInfoListMN', _CG_ConfigInfo_IEs_candidateCellInfoListMN),
+        (u'candidateCellInfoListSN', _CG_ConfigInfo_IEs_candidateCellInfoListSN),
+        (u'measResultCellListSFTD-NR', _CG_ConfigInfo_IEs_measResultCellListSFTD_NR),
+        (u'scgFailureInfo', _CG_ConfigInfo_IEs_scgFailureInfo),
+        (u'configRestrictInfo', _CG_ConfigInfo_IEs_configRestrictInfo),
+        (u'drx-InfoMCG', _CG_ConfigInfo_IEs_drx_InfoMCG),
+        (u'measConfigMN', _CG_ConfigInfo_IEs_measConfigMN),
+        (u'sourceConfigSCG', _CG_ConfigInfo_IEs_sourceConfigSCG),
+        (u'scg-RB-Config', _CG_ConfigInfo_IEs_scg_RB_Config),
+        (u'mcg-RB-Config', _CG_ConfigInfo_IEs_mcg_RB_Config),
+        (u'mrdc-AssistanceInfo', _CG_ConfigInfo_IEs_mrdc_AssistanceInfo),
+        (u'nonCriticalExtension', _CG_ConfigInfo_IEs_nonCriticalExtension),
+        ])
+    CG_ConfigInfo_IEs._ext = None
+    
+    #-----< CG-ConfigInfo-v1540-IEs >-----#
+    CG_ConfigInfo_v1540_IEs = SEQ(name=u'CG-ConfigInfo-v1540-IEs', mode=MODE_TYPE)
+    _CG_ConfigInfo_v1540_IEs_ph_InfoMCG = SEQ_OF(name=u'ph-InfoMCG', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-InterNodeDefinitions', 'PH-TypeListMCG')), opt=True)
+    _CG_ConfigInfo_v1540_IEs_measResultReportCGI = SEQ(name=u'measResultReportCGI', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    __CG_ConfigInfo_v1540_IEs_measResultReportCGI_ssbFrequency = INT(name=u'ssbFrequency', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'ARFCN-ValueNR')))
+    __CG_ConfigInfo_v1540_IEs_measResultReportCGI_cellForWhichToReportCGI = INT(name=u'cellForWhichToReportCGI', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'PhysCellId')))
+    __CG_ConfigInfo_v1540_IEs_measResultReportCGI_cgi_Info = SEQ(name=u'cgi-Info', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'CGI-InfoNR')))
+    _CG_ConfigInfo_v1540_IEs_measResultReportCGI._cont = ASN1Dict([
+        (u'ssbFrequency', __CG_ConfigInfo_v1540_IEs_measResultReportCGI_ssbFrequency),
+        (u'cellForWhichToReportCGI', __CG_ConfigInfo_v1540_IEs_measResultReportCGI_cellForWhichToReportCGI),
+        (u'cgi-Info', __CG_ConfigInfo_v1540_IEs_measResultReportCGI_cgi_Info),
+        ])
+    _CG_ConfigInfo_v1540_IEs_measResultReportCGI._ext = None
+    _CG_ConfigInfo_v1540_IEs_nonCriticalExtension = SEQ(name=u'nonCriticalExtension', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-InterNodeDefinitions', 'CG-ConfigInfo-v1560-IEs')), opt=True)
+    CG_ConfigInfo_v1540_IEs._cont = ASN1Dict([
+        (u'ph-InfoMCG', _CG_ConfigInfo_v1540_IEs_ph_InfoMCG),
+        (u'measResultReportCGI', _CG_ConfigInfo_v1540_IEs_measResultReportCGI),
+        (u'nonCriticalExtension', _CG_ConfigInfo_v1540_IEs_nonCriticalExtension),
+        ])
+    CG_ConfigInfo_v1540_IEs._ext = None
+    
+    #-----< CG-ConfigInfo-v1560-IEs >-----#
+    CG_ConfigInfo_v1560_IEs = SEQ(name=u'CG-ConfigInfo-v1560-IEs', mode=MODE_TYPE)
+    _CG_ConfigInfo_v1560_IEs_candidateCellInfoListMN_EUTRA = OCT_STR(name=u'candidateCellInfoListMN-EUTRA', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _CG_ConfigInfo_v1560_IEs_candidateCellInfoListSN_EUTRA = OCT_STR(name=u'candidateCellInfoListSN-EUTRA', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _CG_ConfigInfo_v1560_IEs_sourceConfigSCG_EUTRA = OCT_STR(name=u'sourceConfigSCG-EUTRA', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _CG_ConfigInfo_v1560_IEs_scgFailureInfoEUTRA = SEQ(name=u'scgFailureInfoEUTRA', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    __CG_ConfigInfo_v1560_IEs_scgFailureInfoEUTRA_failureTypeEUTRA = ENUM(name=u'failureTypeEUTRA', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __CG_ConfigInfo_v1560_IEs_scgFailureInfoEUTRA_failureTypeEUTRA._cont = ASN1Dict([(u't313-Expiry', 0), (u'randomAccessProblem', 1), (u'rlc-MaxNumRetx', 2), (u'scg-ChangeFailure', 3)])
+    __CG_ConfigInfo_v1560_IEs_scgFailureInfoEUTRA_failureTypeEUTRA._ext = None
+    __CG_ConfigInfo_v1560_IEs_scgFailureInfoEUTRA_measResultSCG_EUTRA = OCT_STR(name=u'measResultSCG-EUTRA', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _CG_ConfigInfo_v1560_IEs_scgFailureInfoEUTRA._cont = ASN1Dict([
+        (u'failureTypeEUTRA', __CG_ConfigInfo_v1560_IEs_scgFailureInfoEUTRA_failureTypeEUTRA),
+        (u'measResultSCG-EUTRA', __CG_ConfigInfo_v1560_IEs_scgFailureInfoEUTRA_measResultSCG_EUTRA),
+        ])
+    _CG_ConfigInfo_v1560_IEs_scgFailureInfoEUTRA._ext = None
+    _CG_ConfigInfo_v1560_IEs_drx_ConfigMCG = SEQ(name=u'drx-ConfigMCG', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'DRX-Config')), opt=True)
+    _CG_ConfigInfo_v1560_IEs_measResultReportCGI_EUTRA = SEQ(name=u'measResultReportCGI-EUTRA', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    __CG_ConfigInfo_v1560_IEs_measResultReportCGI_EUTRA_eutraFrequency = INT(name=u'eutraFrequency', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'ARFCN-ValueEUTRA')))
+    __CG_ConfigInfo_v1560_IEs_measResultReportCGI_EUTRA_cellForWhichToReportCGI_EUTRA = INT(name=u'cellForWhichToReportCGI-EUTRA', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'EUTRA-PhysCellId')))
+    __CG_ConfigInfo_v1560_IEs_measResultReportCGI_EUTRA_cgi_InfoEUTRA = SEQ(name=u'cgi-InfoEUTRA', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'CGI-InfoEUTRA')))
+    _CG_ConfigInfo_v1560_IEs_measResultReportCGI_EUTRA._cont = ASN1Dict([
+        (u'eutraFrequency', __CG_ConfigInfo_v1560_IEs_measResultReportCGI_EUTRA_eutraFrequency),
+        (u'cellForWhichToReportCGI-EUTRA', __CG_ConfigInfo_v1560_IEs_measResultReportCGI_EUTRA_cellForWhichToReportCGI_EUTRA),
+        (u'cgi-InfoEUTRA', __CG_ConfigInfo_v1560_IEs_measResultReportCGI_EUTRA_cgi_InfoEUTRA),
+        ])
+    _CG_ConfigInfo_v1560_IEs_measResultReportCGI_EUTRA._ext = None
+    _CG_ConfigInfo_v1560_IEs_measResultCellListSFTD_EUTRA = SEQ_OF(name=u'measResultCellListSFTD-EUTRA', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'MeasResultCellListSFTD-EUTRA')), opt=True)
+    _CG_ConfigInfo_v1560_IEs_fr_InfoListMCG = SEQ_OF(name=u'fr-InfoListMCG', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-InterNodeDefinitions', 'FR-InfoList')), opt=True)
+    _CG_ConfigInfo_v1560_IEs_nonCriticalExtension = SEQ(name=u'nonCriticalExtension', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-InterNodeDefinitions', 'CG-ConfigInfo-v1570-IEs')), opt=True)
+    CG_ConfigInfo_v1560_IEs._cont = ASN1Dict([
+        (u'candidateCellInfoListMN-EUTRA', _CG_ConfigInfo_v1560_IEs_candidateCellInfoListMN_EUTRA),
+        (u'candidateCellInfoListSN-EUTRA', _CG_ConfigInfo_v1560_IEs_candidateCellInfoListSN_EUTRA),
+        (u'sourceConfigSCG-EUTRA', _CG_ConfigInfo_v1560_IEs_sourceConfigSCG_EUTRA),
+        (u'scgFailureInfoEUTRA', _CG_ConfigInfo_v1560_IEs_scgFailureInfoEUTRA),
+        (u'drx-ConfigMCG', _CG_ConfigInfo_v1560_IEs_drx_ConfigMCG),
+        (u'measResultReportCGI-EUTRA', _CG_ConfigInfo_v1560_IEs_measResultReportCGI_EUTRA),
+        (u'measResultCellListSFTD-EUTRA', _CG_ConfigInfo_v1560_IEs_measResultCellListSFTD_EUTRA),
+        (u'fr-InfoListMCG', _CG_ConfigInfo_v1560_IEs_fr_InfoListMCG),
+        (u'nonCriticalExtension', _CG_ConfigInfo_v1560_IEs_nonCriticalExtension),
+        ])
+    CG_ConfigInfo_v1560_IEs._ext = None
+    
+    #-----< CG-ConfigInfo-v1570-IEs >-----#
+    CG_ConfigInfo_v1570_IEs = SEQ(name=u'CG-ConfigInfo-v1570-IEs', mode=MODE_TYPE)
+    _CG_ConfigInfo_v1570_IEs_sftdFrequencyList_NR = SEQ_OF(name=u'sftdFrequencyList-NR', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-InterNodeDefinitions', 'SFTD-FrequencyList-NR')), opt=True)
+    _CG_ConfigInfo_v1570_IEs_sftdFrequencyList_EUTRA = SEQ_OF(name=u'sftdFrequencyList-EUTRA', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-InterNodeDefinitions', 'SFTD-FrequencyList-EUTRA')), opt=True)
+    _CG_ConfigInfo_v1570_IEs_nonCriticalExtension = SEQ(name=u'nonCriticalExtension', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-InterNodeDefinitions', 'CG-ConfigInfo-v1590-IEs')), opt=True)
+    CG_ConfigInfo_v1570_IEs._cont = ASN1Dict([
+        (u'sftdFrequencyList-NR', _CG_ConfigInfo_v1570_IEs_sftdFrequencyList_NR),
+        (u'sftdFrequencyList-EUTRA', _CG_ConfigInfo_v1570_IEs_sftdFrequencyList_EUTRA),
+        (u'nonCriticalExtension', _CG_ConfigInfo_v1570_IEs_nonCriticalExtension),
+        ])
+    CG_ConfigInfo_v1570_IEs._ext = None
+    
+    #-----< CG-ConfigInfo-v1590-IEs >-----#
+    CG_ConfigInfo_v1590_IEs = SEQ(name=u'CG-ConfigInfo-v1590-IEs', mode=MODE_TYPE)
+    _CG_ConfigInfo_v1590_IEs_servFrequenciesMN_NR = SEQ_OF(name=u'servFrequenciesMN-NR', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    __CG_ConfigInfo_v1590_IEs_servFrequenciesMN_NR__item_ = INT(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('NR-RRC-Definitions', 'ARFCN-ValueNR')))
+    _CG_ConfigInfo_v1590_IEs_servFrequenciesMN_NR._cont = __CG_ConfigInfo_v1590_IEs_servFrequenciesMN_NR__item_
+    _CG_ConfigInfo_v1590_IEs_servFrequenciesMN_NR._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=31)], ev=None, er=[])
+    _CG_ConfigInfo_v1590_IEs_nonCriticalExtension = SEQ(name=u'nonCriticalExtension', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-InterNodeDefinitions', 'CG-ConfigInfo-v1610-IEs')), opt=True)
+    CG_ConfigInfo_v1590_IEs._cont = ASN1Dict([
+        (u'servFrequenciesMN-NR', _CG_ConfigInfo_v1590_IEs_servFrequenciesMN_NR),
+        (u'nonCriticalExtension', _CG_ConfigInfo_v1590_IEs_nonCriticalExtension),
+        ])
+    CG_ConfigInfo_v1590_IEs._ext = None
+    
+    #-----< CG-ConfigInfo-v1610-IEs >-----#
+    CG_ConfigInfo_v1610_IEs = SEQ(name=u'CG-ConfigInfo-v1610-IEs', mode=MODE_TYPE)
+    _CG_ConfigInfo_v1610_IEs_drx_InfoMCG2 = SEQ(name=u'drx-InfoMCG2', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-InterNodeDefinitions', 'DRX-Info2')), opt=True)
+    _CG_ConfigInfo_v1610_IEs_alignedDRX_Indication = ENUM(name=u'alignedDRX-Indication', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _CG_ConfigInfo_v1610_IEs_alignedDRX_Indication._cont = ASN1Dict([(u'true', 0)])
+    _CG_ConfigInfo_v1610_IEs_alignedDRX_Indication._ext = None
+    _CG_ConfigInfo_v1610_IEs_scgFailureInfo_r16 = SEQ(name=u'scgFailureInfo-r16', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    __CG_ConfigInfo_v1610_IEs_scgFailureInfo_r16_failureType_r16 = ENUM(name=u'failureType-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __CG_ConfigInfo_v1610_IEs_scgFailureInfo_r16_failureType_r16._cont = ASN1Dict([(u'scg-lbtFailure-r16', 0), (u'beamFailureRecoveryFailure-r16', 1), (u't312-Expiry-r16', 2), (u'bh-RLF-r16', 3), (u'spare4', 4), (u'spare3', 5), (u'spare2', 6), (u'spare1', 7)])
+    __CG_ConfigInfo_v1610_IEs_scgFailureInfo_r16_failureType_r16._ext = None
+    __CG_ConfigInfo_v1610_IEs_scgFailureInfo_r16_measResultSCG_r16 = OCT_STR(name=u'measResultSCG-r16', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    ___CG_ConfigInfo_v1610_IEs_scgFailureInfo_r16_measResultSCG_r16_contain = SEQ(name='_cont_measResultSCG-r16', mode=MODE_TYPE, typeref=ASN1RefType(('NR-RRC-Definitions', 'MeasResultSCG-Failure')))
+    __CG_ConfigInfo_v1610_IEs_scgFailureInfo_r16_measResultSCG_r16._const_cont = ___CG_ConfigInfo_v1610_IEs_scgFailureInfo_r16_measResultSCG_r16_contain
+    _CG_ConfigInfo_v1610_IEs_scgFailureInfo_r16._cont = ASN1Dict([
+        (u'failureType-r16', __CG_ConfigInfo_v1610_IEs_scgFailureInfo_r16_failureType_r16),
+        (u'measResultSCG-r16', __CG_ConfigInfo_v1610_IEs_scgFailureInfo_r16_measResultSCG_r16),
+        ])
+    _CG_ConfigInfo_v1610_IEs_scgFailureInfo_r16._ext = None
+    _CG_ConfigInfo_v1610_IEs_dummy1 = SEQ(name=u'dummy1', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    __CG_ConfigInfo_v1610_IEs_dummy1_failureTypeEUTRA_r16 = ENUM(name=u'failureTypeEUTRA-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __CG_ConfigInfo_v1610_IEs_dummy1_failureTypeEUTRA_r16._cont = ASN1Dict([(u'scg-lbtFailure-r16', 0), (u'beamFailureRecoveryFailure-r16', 1), (u't312-Expiry-r16', 2), (u'spare5', 3), (u'spare4', 4), (u'spare3', 5), (u'spare2', 6), (u'spare1', 7)])
+    __CG_ConfigInfo_v1610_IEs_dummy1_failureTypeEUTRA_r16._ext = None
+    __CG_ConfigInfo_v1610_IEs_dummy1_measResultSCG_EUTRA_r16 = OCT_STR(name=u'measResultSCG-EUTRA-r16', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _CG_ConfigInfo_v1610_IEs_dummy1._cont = ASN1Dict([
+        (u'failureTypeEUTRA-r16', __CG_ConfigInfo_v1610_IEs_dummy1_failureTypeEUTRA_r16),
+        (u'measResultSCG-EUTRA-r16', __CG_ConfigInfo_v1610_IEs_dummy1_measResultSCG_EUTRA_r16),
+        ])
+    _CG_ConfigInfo_v1610_IEs_dummy1._ext = None
+    _CG_ConfigInfo_v1610_IEs_sidelinkUEInformationNR_r16 = OCT_STR(name=u'sidelinkUEInformationNR-r16', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    __CG_ConfigInfo_v1610_IEs_sidelinkUEInformationNR_r16_contain = SEQ(name='_cont_sidelinkUEInformationNR-r16', mode=MODE_TYPE, typeref=ASN1RefType(('NR-RRC-Definitions', 'SidelinkUEInformationNR-r16')))
+    _CG_ConfigInfo_v1610_IEs_sidelinkUEInformationNR_r16._const_cont = __CG_ConfigInfo_v1610_IEs_sidelinkUEInformationNR_r16_contain
+    _CG_ConfigInfo_v1610_IEs_sidelinkUEInformationEUTRA_r16 = OCT_STR(name=u'sidelinkUEInformationEUTRA-r16', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _CG_ConfigInfo_v1610_IEs_nonCriticalExtension = SEQ(name=u'nonCriticalExtension', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-InterNodeDefinitions', 'CG-ConfigInfo-v1620-IEs')), opt=True)
+    CG_ConfigInfo_v1610_IEs._cont = ASN1Dict([
+        (u'drx-InfoMCG2', _CG_ConfigInfo_v1610_IEs_drx_InfoMCG2),
+        (u'alignedDRX-Indication', _CG_ConfigInfo_v1610_IEs_alignedDRX_Indication),
+        (u'scgFailureInfo-r16', _CG_ConfigInfo_v1610_IEs_scgFailureInfo_r16),
+        (u'dummy1', _CG_ConfigInfo_v1610_IEs_dummy1),
+        (u'sidelinkUEInformationNR-r16', _CG_ConfigInfo_v1610_IEs_sidelinkUEInformationNR_r16),
+        (u'sidelinkUEInformationEUTRA-r16', _CG_ConfigInfo_v1610_IEs_sidelinkUEInformationEUTRA_r16),
+        (u'nonCriticalExtension', _CG_ConfigInfo_v1610_IEs_nonCriticalExtension),
+        ])
+    CG_ConfigInfo_v1610_IEs._ext = None
+    
+    #-----< CG-ConfigInfo-v1620-IEs >-----#
+    CG_ConfigInfo_v1620_IEs = SEQ(name=u'CG-ConfigInfo-v1620-IEs', mode=MODE_TYPE)
+    _CG_ConfigInfo_v1620_IEs_ueAssistanceInformationSourceSCG_r16 = OCT_STR(name=u'ueAssistanceInformationSourceSCG-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    __CG_ConfigInfo_v1620_IEs_ueAssistanceInformationSourceSCG_r16_contain = SEQ(name='_cont_ueAssistanceInformationSourceSCG-r16', mode=MODE_TYPE, typeref=ASN1RefType(('NR-RRC-Definitions', 'UEAssistanceInformation')))
+    _CG_ConfigInfo_v1620_IEs_ueAssistanceInformationSourceSCG_r16._const_cont = __CG_ConfigInfo_v1620_IEs_ueAssistanceInformationSourceSCG_r16_contain
+    _CG_ConfigInfo_v1620_IEs_nonCriticalExtension = SEQ(name=u'nonCriticalExtension', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-InterNodeDefinitions', 'CG-ConfigInfo-v1640-IEs')), opt=True)
+    CG_ConfigInfo_v1620_IEs._cont = ASN1Dict([
+        (u'ueAssistanceInformationSourceSCG-r16', _CG_ConfigInfo_v1620_IEs_ueAssistanceInformationSourceSCG_r16),
+        (u'nonCriticalExtension', _CG_ConfigInfo_v1620_IEs_nonCriticalExtension),
+        ])
+    CG_ConfigInfo_v1620_IEs._ext = None
+    
+    #-----< CG-ConfigInfo-v1640-IEs >-----#
+    CG_ConfigInfo_v1640_IEs = SEQ(name=u'CG-ConfigInfo-v1640-IEs', mode=MODE_TYPE)
+    _CG_ConfigInfo_v1640_IEs_servCellInfoListMCG_NR_r16 = SEQ_OF(name=u'servCellInfoListMCG-NR-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-InterNodeDefinitions', 'ServCellInfoListMCG-NR-r16')), opt=True)
+    _CG_ConfigInfo_v1640_IEs_servCellInfoListMCG_EUTRA_r16 = SEQ_OF(name=u'servCellInfoListMCG-EUTRA-r16', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-InterNodeDefinitions', 'ServCellInfoListMCG-EUTRA-r16')), opt=True)
+    _CG_ConfigInfo_v1640_IEs_nonCriticalExtension = SEQ(name=u'nonCriticalExtension', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _CG_ConfigInfo_v1640_IEs_nonCriticalExtension._cont = ASN1Dict([
+        ])
+    _CG_ConfigInfo_v1640_IEs_nonCriticalExtension._ext = None
+    CG_ConfigInfo_v1640_IEs._cont = ASN1Dict([
+        (u'servCellInfoListMCG-NR-r16', _CG_ConfigInfo_v1640_IEs_servCellInfoListMCG_NR_r16),
+        (u'servCellInfoListMCG-EUTRA-r16', _CG_ConfigInfo_v1640_IEs_servCellInfoListMCG_EUTRA_r16),
+        (u'nonCriticalExtension', _CG_ConfigInfo_v1640_IEs_nonCriticalExtension),
+        ])
+    CG_ConfigInfo_v1640_IEs._ext = None
+    
+    #-----< ServCellInfoListMCG-NR-r16 >-----#
+    ServCellInfoListMCG_NR_r16 = SEQ_OF(name=u'ServCellInfoListMCG-NR-r16', mode=MODE_TYPE)
+    _ServCellInfoListMCG_NR_r16__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('NR-InterNodeDefinitions', 'ServCellInfoXCG-NR-r16')))
+    ServCellInfoListMCG_NR_r16._cont = _ServCellInfoListMCG_NR_r16__item_
+    ServCellInfoListMCG_NR_r16._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=32)], ev=None, er=[])
+    
+    #-----< ServCellInfoListMCG-EUTRA-r16 >-----#
+    ServCellInfoListMCG_EUTRA_r16 = SEQ_OF(name=u'ServCellInfoListMCG-EUTRA-r16', mode=MODE_TYPE)
+    _ServCellInfoListMCG_EUTRA_r16__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('NR-InterNodeDefinitions', 'ServCellInfoXCG-EUTRA-r16')))
+    ServCellInfoListMCG_EUTRA_r16._cont = _ServCellInfoListMCG_EUTRA_r16__item_
+    ServCellInfoListMCG_EUTRA_r16._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=32)], ev=None, er=[])
+    
+    #-----< SFTD-FrequencyList-NR >-----#
+    SFTD_FrequencyList_NR = SEQ_OF(name=u'SFTD-FrequencyList-NR', mode=MODE_TYPE)
+    _SFTD_FrequencyList_NR__item_ = INT(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('NR-RRC-Definitions', 'ARFCN-ValueNR')))
+    SFTD_FrequencyList_NR._cont = _SFTD_FrequencyList_NR__item_
+    SFTD_FrequencyList_NR._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=3)], ev=None, er=[])
+    
+    #-----< SFTD-FrequencyList-EUTRA >-----#
+    SFTD_FrequencyList_EUTRA = SEQ_OF(name=u'SFTD-FrequencyList-EUTRA', mode=MODE_TYPE)
+    _SFTD_FrequencyList_EUTRA__item_ = INT(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('NR-RRC-Definitions', 'ARFCN-ValueEUTRA')))
+    SFTD_FrequencyList_EUTRA._cont = _SFTD_FrequencyList_EUTRA__item_
+    SFTD_FrequencyList_EUTRA._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=3)], ev=None, er=[])
+    
+    #-----< ConfigRestrictInfoSCG >-----#
+    ConfigRestrictInfoSCG = SEQ(name=u'ConfigRestrictInfoSCG', mode=MODE_TYPE)
+    _ConfigRestrictInfoSCG_allowedBC_ListMRDC = SEQ_OF(name=u'allowedBC-ListMRDC', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-InterNodeDefinitions', 'BandCombinationInfoList')), opt=True)
+    _ConfigRestrictInfoSCG_powerCoordination_FR1 = SEQ(name=u'powerCoordination-FR1', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    __ConfigRestrictInfoSCG_powerCoordination_FR1_p_maxNR_FR1 = INT(name=u'p-maxNR-FR1', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'P-Max')), opt=True)
+    __ConfigRestrictInfoSCG_powerCoordination_FR1_p_maxEUTRA = INT(name=u'p-maxEUTRA', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'P-Max')), opt=True)
+    __ConfigRestrictInfoSCG_powerCoordination_FR1_p_maxUE_FR1 = INT(name=u'p-maxUE-FR1', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'P-Max')), opt=True)
+    _ConfigRestrictInfoSCG_powerCoordination_FR1._cont = ASN1Dict([
+        (u'p-maxNR-FR1', __ConfigRestrictInfoSCG_powerCoordination_FR1_p_maxNR_FR1),
+        (u'p-maxEUTRA', __ConfigRestrictInfoSCG_powerCoordination_FR1_p_maxEUTRA),
+        (u'p-maxUE-FR1', __ConfigRestrictInfoSCG_powerCoordination_FR1_p_maxUE_FR1),
+        ])
+    _ConfigRestrictInfoSCG_powerCoordination_FR1._ext = None
+    _ConfigRestrictInfoSCG_servCellIndexRangeSCG = SEQ(name=u'servCellIndexRangeSCG', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    __ConfigRestrictInfoSCG_servCellIndexRangeSCG_lowBound = INT(name=u'lowBound', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'ServCellIndex')))
+    __ConfigRestrictInfoSCG_servCellIndexRangeSCG_upBound = INT(name=u'upBound', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'ServCellIndex')))
+    _ConfigRestrictInfoSCG_servCellIndexRangeSCG._cont = ASN1Dict([
+        (u'lowBound', __ConfigRestrictInfoSCG_servCellIndexRangeSCG_lowBound),
+        (u'upBound', __ConfigRestrictInfoSCG_servCellIndexRangeSCG_upBound),
+        ])
+    _ConfigRestrictInfoSCG_servCellIndexRangeSCG._ext = None
+    _ConfigRestrictInfoSCG_maxMeasFreqsSCG = INT(name=u'maxMeasFreqsSCG', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _ConfigRestrictInfoSCG_maxMeasFreqsSCG._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=32)], ev=None, er=[])
+    _ConfigRestrictInfoSCG_dummy = INT(name=u'dummy', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _ConfigRestrictInfoSCG_dummy._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=62)], ev=None, er=[])
+    _ConfigRestrictInfoSCG_selectedBandEntriesMNList = SEQ_OF(name=u'selectedBandEntriesMNList', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True, group=0)
+    __ConfigRestrictInfoSCG_selectedBandEntriesMNList__item_ = SEQ_OF(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('NR-InterNodeDefinitions', 'SelectedBandEntriesMN')))
+    _ConfigRestrictInfoSCG_selectedBandEntriesMNList._cont = __ConfigRestrictInfoSCG_selectedBandEntriesMNList__item_
+    _ConfigRestrictInfoSCG_selectedBandEntriesMNList._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=65536)], ev=None, er=[])
+    _ConfigRestrictInfoSCG_pdcch_BlindDetectionSCG = INT(name=u'pdcch-BlindDetectionSCG', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True, group=0)
+    _ConfigRestrictInfoSCG_pdcch_BlindDetectionSCG._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=15)], ev=None, er=[])
+    _ConfigRestrictInfoSCG_maxNumberROHC_ContextSessionsSN = INT(name=u'maxNumberROHC-ContextSessionsSN', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True, group=0)
+    _ConfigRestrictInfoSCG_maxNumberROHC_ContextSessionsSN._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=16384)], ev=None, er=[])
+    _ConfigRestrictInfoSCG_maxIntraFreqMeasIdentitiesSCG = INT(name=u'maxIntraFreqMeasIdentitiesSCG', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True, group=1)
+    _ConfigRestrictInfoSCG_maxIntraFreqMeasIdentitiesSCG._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=62)], ev=None, er=[])
+    _ConfigRestrictInfoSCG_maxInterFreqMeasIdentitiesSCG = INT(name=u'maxInterFreqMeasIdentitiesSCG', mode=MODE_TYPE, tag=(9, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True, group=1)
+    _ConfigRestrictInfoSCG_maxInterFreqMeasIdentitiesSCG._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=62)], ev=None, er=[])
+    _ConfigRestrictInfoSCG_p_maxNR_FR1_MCG_r16 = INT(name=u'p-maxNR-FR1-MCG-r16', mode=MODE_TYPE, tag=(10, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'P-Max')), opt=True, group=2)
+    _ConfigRestrictInfoSCG_powerCoordination_FR2_r16 = SEQ(name=u'powerCoordination-FR2-r16', mode=MODE_TYPE, tag=(11, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True, group=2)
+    __ConfigRestrictInfoSCG_powerCoordination_FR2_r16_p_maxNR_FR2_MCG_r16 = INT(name=u'p-maxNR-FR2-MCG-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'P-Max')), opt=True)
+    __ConfigRestrictInfoSCG_powerCoordination_FR2_r16_p_maxNR_FR2_SCG_r16 = INT(name=u'p-maxNR-FR2-SCG-r16', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'P-Max')), opt=True)
+    __ConfigRestrictInfoSCG_powerCoordination_FR2_r16_p_maxUE_FR2_r16 = INT(name=u'p-maxUE-FR2-r16', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'P-Max')), opt=True)
+    _ConfigRestrictInfoSCG_powerCoordination_FR2_r16._cont = ASN1Dict([
+        (u'p-maxNR-FR2-MCG-r16', __ConfigRestrictInfoSCG_powerCoordination_FR2_r16_p_maxNR_FR2_MCG_r16),
+        (u'p-maxNR-FR2-SCG-r16', __ConfigRestrictInfoSCG_powerCoordination_FR2_r16_p_maxNR_FR2_SCG_r16),
+        (u'p-maxUE-FR2-r16', __ConfigRestrictInfoSCG_powerCoordination_FR2_r16_p_maxUE_FR2_r16),
+        ])
+    _ConfigRestrictInfoSCG_powerCoordination_FR2_r16._ext = None
+    _ConfigRestrictInfoSCG_nrdc_PC_mode_FR1_r16 = ENUM(name=u'nrdc-PC-mode-FR1-r16', mode=MODE_TYPE, tag=(12, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True, group=2)
+    _ConfigRestrictInfoSCG_nrdc_PC_mode_FR1_r16._cont = ASN1Dict([(u'semi-static-mode1', 0), (u'semi-static-mode2', 1), (u'dynamic', 2)])
+    _ConfigRestrictInfoSCG_nrdc_PC_mode_FR1_r16._ext = None
+    _ConfigRestrictInfoSCG_nrdc_PC_mode_FR2_r16 = ENUM(name=u'nrdc-PC-mode-FR2-r16', mode=MODE_TYPE, tag=(13, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True, group=2)
+    _ConfigRestrictInfoSCG_nrdc_PC_mode_FR2_r16._cont = ASN1Dict([(u'semi-static-mode1', 0), (u'semi-static-mode2', 1), (u'dynamic', 2)])
+    _ConfigRestrictInfoSCG_nrdc_PC_mode_FR2_r16._ext = None
+    _ConfigRestrictInfoSCG_maxMeasSRS_ResourceSCG_r16 = INT(name=u'maxMeasSRS-ResourceSCG-r16', mode=MODE_TYPE, tag=(14, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True, group=2)
+    _ConfigRestrictInfoSCG_maxMeasSRS_ResourceSCG_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=32)], ev=None, er=[])
+    _ConfigRestrictInfoSCG_maxMeasCLI_ResourceSCG_r16 = INT(name=u'maxMeasCLI-ResourceSCG-r16', mode=MODE_TYPE, tag=(15, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True, group=2)
+    _ConfigRestrictInfoSCG_maxMeasCLI_ResourceSCG_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=64)], ev=None, er=[])
+    _ConfigRestrictInfoSCG_maxNumberEHC_ContextsSN_r16 = INT(name=u'maxNumberEHC-ContextsSN-r16', mode=MODE_TYPE, tag=(16, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True, group=2)
+    _ConfigRestrictInfoSCG_maxNumberEHC_ContextsSN_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=65536)], ev=None, er=[])
+    _ConfigRestrictInfoSCG_allowedReducedConfigForOverheating_r16 = SEQ(name=u'allowedReducedConfigForOverheating-r16', mode=MODE_TYPE, tag=(17, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'OverheatingAssistance')), opt=True, group=2)
+    _ConfigRestrictInfoSCG_maxToffset_r16 = ENUM(name=u'maxToffset-r16', mode=MODE_TYPE, tag=(18, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-InterNodeDefinitions', 'T-Offset-r16')), opt=True, group=2)
+    ConfigRestrictInfoSCG._cont = ASN1Dict([
+        (u'allowedBC-ListMRDC', _ConfigRestrictInfoSCG_allowedBC_ListMRDC),
+        (u'powerCoordination-FR1', _ConfigRestrictInfoSCG_powerCoordination_FR1),
+        (u'servCellIndexRangeSCG', _ConfigRestrictInfoSCG_servCellIndexRangeSCG),
+        (u'maxMeasFreqsSCG', _ConfigRestrictInfoSCG_maxMeasFreqsSCG),
+        (u'dummy', _ConfigRestrictInfoSCG_dummy),
+        (u'selectedBandEntriesMNList', _ConfigRestrictInfoSCG_selectedBandEntriesMNList),
+        (u'pdcch-BlindDetectionSCG', _ConfigRestrictInfoSCG_pdcch_BlindDetectionSCG),
+        (u'maxNumberROHC-ContextSessionsSN', _ConfigRestrictInfoSCG_maxNumberROHC_ContextSessionsSN),
+        (u'maxIntraFreqMeasIdentitiesSCG', _ConfigRestrictInfoSCG_maxIntraFreqMeasIdentitiesSCG),
+        (u'maxInterFreqMeasIdentitiesSCG', _ConfigRestrictInfoSCG_maxInterFreqMeasIdentitiesSCG),
+        (u'p-maxNR-FR1-MCG-r16', _ConfigRestrictInfoSCG_p_maxNR_FR1_MCG_r16),
+        (u'powerCoordination-FR2-r16', _ConfigRestrictInfoSCG_powerCoordination_FR2_r16),
+        (u'nrdc-PC-mode-FR1-r16', _ConfigRestrictInfoSCG_nrdc_PC_mode_FR1_r16),
+        (u'nrdc-PC-mode-FR2-r16', _ConfigRestrictInfoSCG_nrdc_PC_mode_FR2_r16),
+        (u'maxMeasSRS-ResourceSCG-r16', _ConfigRestrictInfoSCG_maxMeasSRS_ResourceSCG_r16),
+        (u'maxMeasCLI-ResourceSCG-r16', _ConfigRestrictInfoSCG_maxMeasCLI_ResourceSCG_r16),
+        (u'maxNumberEHC-ContextsSN-r16', _ConfigRestrictInfoSCG_maxNumberEHC_ContextsSN_r16),
+        (u'allowedReducedConfigForOverheating-r16', _ConfigRestrictInfoSCG_allowedReducedConfigForOverheating_r16),
+        (u'maxToffset-r16', _ConfigRestrictInfoSCG_maxToffset_r16),
+        ])
+    ConfigRestrictInfoSCG._ext = [u'selectedBandEntriesMNList', u'pdcch-BlindDetectionSCG', u'maxNumberROHC-ContextSessionsSN', u'maxIntraFreqMeasIdentitiesSCG', u'maxInterFreqMeasIdentitiesSCG', u'p-maxNR-FR1-MCG-r16', u'powerCoordination-FR2-r16', u'nrdc-PC-mode-FR1-r16', u'nrdc-PC-mode-FR2-r16', u'maxMeasSRS-ResourceSCG-r16', u'maxMeasCLI-ResourceSCG-r16', u'maxNumberEHC-ContextsSN-r16', u'allowedReducedConfigForOverheating-r16', u'maxToffset-r16']
+    
+    #-----< SelectedBandEntriesMN >-----#
+    SelectedBandEntriesMN = SEQ_OF(name=u'SelectedBandEntriesMN', mode=MODE_TYPE)
+    _SelectedBandEntriesMN__item_ = INT(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('NR-InterNodeDefinitions', 'BandEntryIndex')))
+    SelectedBandEntriesMN._cont = _SelectedBandEntriesMN__item_
+    SelectedBandEntriesMN._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=32)], ev=None, er=[])
+    
+    #-----< BandEntryIndex >-----#
+    BandEntryIndex = INT(name=u'BandEntryIndex', mode=MODE_TYPE)
+    BandEntryIndex._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=32)], ev=None, er=[])
+    
+    #-----< PH-TypeListMCG >-----#
+    PH_TypeListMCG = SEQ_OF(name=u'PH-TypeListMCG', mode=MODE_TYPE)
+    _PH_TypeListMCG__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('NR-InterNodeDefinitions', 'PH-InfoMCG')))
+    PH_TypeListMCG._cont = _PH_TypeListMCG__item_
+    PH_TypeListMCG._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=32)], ev=None, er=[])
+    
+    #-----< PH-InfoMCG >-----#
+    PH_InfoMCG = SEQ(name=u'PH-InfoMCG', mode=MODE_TYPE)
+    _PH_InfoMCG_servCellIndex = INT(name=u'servCellIndex', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'ServCellIndex')))
+    _PH_InfoMCG_ph_Uplink = SEQ(name=u'ph-Uplink', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-InterNodeDefinitions', 'PH-UplinkCarrierMCG')))
+    _PH_InfoMCG_ph_SupplementaryUplink = SEQ(name=u'ph-SupplementaryUplink', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-InterNodeDefinitions', 'PH-UplinkCarrierMCG')), opt=True)
+    PH_InfoMCG._cont = ASN1Dict([
+        (u'servCellIndex', _PH_InfoMCG_servCellIndex),
+        (u'ph-Uplink', _PH_InfoMCG_ph_Uplink),
+        (u'ph-SupplementaryUplink', _PH_InfoMCG_ph_SupplementaryUplink),
+        ])
+    PH_InfoMCG._ext = []
+    
+    #-----< PH-UplinkCarrierMCG >-----#
+    PH_UplinkCarrierMCG = SEQ(name=u'PH-UplinkCarrierMCG', mode=MODE_TYPE)
+    _PH_UplinkCarrierMCG_ph_Type1or3 = ENUM(name=u'ph-Type1or3', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _PH_UplinkCarrierMCG_ph_Type1or3._cont = ASN1Dict([(u'type1', 0), (u'type3', 1)])
+    _PH_UplinkCarrierMCG_ph_Type1or3._ext = None
+    PH_UplinkCarrierMCG._cont = ASN1Dict([
+        (u'ph-Type1or3', _PH_UplinkCarrierMCG_ph_Type1or3),
+        ])
+    PH_UplinkCarrierMCG._ext = []
+    
+    #-----< BandCombinationInfoList >-----#
+    BandCombinationInfoList = SEQ_OF(name=u'BandCombinationInfoList', mode=MODE_TYPE)
+    _BandCombinationInfoList__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('NR-InterNodeDefinitions', 'BandCombinationInfo')))
+    BandCombinationInfoList._cont = _BandCombinationInfoList__item_
+    BandCombinationInfoList._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=65536)], ev=None, er=[])
+    
+    #-----< BandCombinationInfo >-----#
+    BandCombinationInfo = SEQ(name=u'BandCombinationInfo', mode=MODE_TYPE)
+    _BandCombinationInfo_bandCombinationIndex = INT(name=u'bandCombinationIndex', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-InterNodeDefinitions', 'BandCombinationIndex')))
+    _BandCombinationInfo_allowedFeatureSetsList = SEQ_OF(name=u'allowedFeatureSetsList', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __BandCombinationInfo_allowedFeatureSetsList__item_ = INT(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('NR-InterNodeDefinitions', 'FeatureSetEntryIndex')))
+    _BandCombinationInfo_allowedFeatureSetsList._cont = __BandCombinationInfo_allowedFeatureSetsList__item_
+    _BandCombinationInfo_allowedFeatureSetsList._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=128)], ev=None, er=[])
+    BandCombinationInfo._cont = ASN1Dict([
+        (u'bandCombinationIndex', _BandCombinationInfo_bandCombinationIndex),
+        (u'allowedFeatureSetsList', _BandCombinationInfo_allowedFeatureSetsList),
+        ])
+    BandCombinationInfo._ext = None
+    
+    #-----< FeatureSetEntryIndex >-----#
+    FeatureSetEntryIndex = INT(name=u'FeatureSetEntryIndex', mode=MODE_TYPE)
+    FeatureSetEntryIndex._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=128)], ev=None, er=[])
+    
+    #-----< DRX-Info >-----#
+    DRX_Info = SEQ(name=u'DRX-Info', mode=MODE_TYPE)
+    _DRX_Info_drx_LongCycleStartOffset = CHOICE(name=u'drx-LongCycleStartOffset', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
+    __DRX_Info_drx_LongCycleStartOffset_ms10 = INT(name=u'ms10', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __DRX_Info_drx_LongCycleStartOffset_ms10._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=9)], ev=None, er=[])
+    __DRX_Info_drx_LongCycleStartOffset_ms20 = INT(name=u'ms20', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __DRX_Info_drx_LongCycleStartOffset_ms20._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=19)], ev=None, er=[])
+    __DRX_Info_drx_LongCycleStartOffset_ms32 = INT(name=u'ms32', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __DRX_Info_drx_LongCycleStartOffset_ms32._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=31)], ev=None, er=[])
+    __DRX_Info_drx_LongCycleStartOffset_ms40 = INT(name=u'ms40', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __DRX_Info_drx_LongCycleStartOffset_ms40._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=39)], ev=None, er=[])
+    __DRX_Info_drx_LongCycleStartOffset_ms60 = INT(name=u'ms60', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __DRX_Info_drx_LongCycleStartOffset_ms60._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=59)], ev=None, er=[])
+    __DRX_Info_drx_LongCycleStartOffset_ms64 = INT(name=u'ms64', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __DRX_Info_drx_LongCycleStartOffset_ms64._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=63)], ev=None, er=[])
+    __DRX_Info_drx_LongCycleStartOffset_ms70 = INT(name=u'ms70', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __DRX_Info_drx_LongCycleStartOffset_ms70._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=69)], ev=None, er=[])
+    __DRX_Info_drx_LongCycleStartOffset_ms80 = INT(name=u'ms80', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __DRX_Info_drx_LongCycleStartOffset_ms80._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=79)], ev=None, er=[])
+    __DRX_Info_drx_LongCycleStartOffset_ms128 = INT(name=u'ms128', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __DRX_Info_drx_LongCycleStartOffset_ms128._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=127)], ev=None, er=[])
+    __DRX_Info_drx_LongCycleStartOffset_ms160 = INT(name=u'ms160', mode=MODE_TYPE, tag=(9, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __DRX_Info_drx_LongCycleStartOffset_ms160._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=159)], ev=None, er=[])
+    __DRX_Info_drx_LongCycleStartOffset_ms256 = INT(name=u'ms256', mode=MODE_TYPE, tag=(10, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __DRX_Info_drx_LongCycleStartOffset_ms256._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=255)], ev=None, er=[])
+    __DRX_Info_drx_LongCycleStartOffset_ms320 = INT(name=u'ms320', mode=MODE_TYPE, tag=(11, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __DRX_Info_drx_LongCycleStartOffset_ms320._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=319)], ev=None, er=[])
+    __DRX_Info_drx_LongCycleStartOffset_ms512 = INT(name=u'ms512', mode=MODE_TYPE, tag=(12, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __DRX_Info_drx_LongCycleStartOffset_ms512._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=511)], ev=None, er=[])
+    __DRX_Info_drx_LongCycleStartOffset_ms640 = INT(name=u'ms640', mode=MODE_TYPE, tag=(13, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __DRX_Info_drx_LongCycleStartOffset_ms640._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=639)], ev=None, er=[])
+    __DRX_Info_drx_LongCycleStartOffset_ms1024 = INT(name=u'ms1024', mode=MODE_TYPE, tag=(14, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __DRX_Info_drx_LongCycleStartOffset_ms1024._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=1023)], ev=None, er=[])
+    __DRX_Info_drx_LongCycleStartOffset_ms1280 = INT(name=u'ms1280', mode=MODE_TYPE, tag=(15, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __DRX_Info_drx_LongCycleStartOffset_ms1280._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=1279)], ev=None, er=[])
+    __DRX_Info_drx_LongCycleStartOffset_ms2048 = INT(name=u'ms2048', mode=MODE_TYPE, tag=(16, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __DRX_Info_drx_LongCycleStartOffset_ms2048._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=2047)], ev=None, er=[])
+    __DRX_Info_drx_LongCycleStartOffset_ms2560 = INT(name=u'ms2560', mode=MODE_TYPE, tag=(17, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __DRX_Info_drx_LongCycleStartOffset_ms2560._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=2559)], ev=None, er=[])
+    __DRX_Info_drx_LongCycleStartOffset_ms5120 = INT(name=u'ms5120', mode=MODE_TYPE, tag=(18, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __DRX_Info_drx_LongCycleStartOffset_ms5120._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=5119)], ev=None, er=[])
+    __DRX_Info_drx_LongCycleStartOffset_ms10240 = INT(name=u'ms10240', mode=MODE_TYPE, tag=(19, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __DRX_Info_drx_LongCycleStartOffset_ms10240._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=10239)], ev=None, er=[])
+    _DRX_Info_drx_LongCycleStartOffset._cont = ASN1Dict([
+        (u'ms10', __DRX_Info_drx_LongCycleStartOffset_ms10),
+        (u'ms20', __DRX_Info_drx_LongCycleStartOffset_ms20),
+        (u'ms32', __DRX_Info_drx_LongCycleStartOffset_ms32),
+        (u'ms40', __DRX_Info_drx_LongCycleStartOffset_ms40),
+        (u'ms60', __DRX_Info_drx_LongCycleStartOffset_ms60),
+        (u'ms64', __DRX_Info_drx_LongCycleStartOffset_ms64),
+        (u'ms70', __DRX_Info_drx_LongCycleStartOffset_ms70),
+        (u'ms80', __DRX_Info_drx_LongCycleStartOffset_ms80),
+        (u'ms128', __DRX_Info_drx_LongCycleStartOffset_ms128),
+        (u'ms160', __DRX_Info_drx_LongCycleStartOffset_ms160),
+        (u'ms256', __DRX_Info_drx_LongCycleStartOffset_ms256),
+        (u'ms320', __DRX_Info_drx_LongCycleStartOffset_ms320),
+        (u'ms512', __DRX_Info_drx_LongCycleStartOffset_ms512),
+        (u'ms640', __DRX_Info_drx_LongCycleStartOffset_ms640),
+        (u'ms1024', __DRX_Info_drx_LongCycleStartOffset_ms1024),
+        (u'ms1280', __DRX_Info_drx_LongCycleStartOffset_ms1280),
+        (u'ms2048', __DRX_Info_drx_LongCycleStartOffset_ms2048),
+        (u'ms2560', __DRX_Info_drx_LongCycleStartOffset_ms2560),
+        (u'ms5120', __DRX_Info_drx_LongCycleStartOffset_ms5120),
+        (u'ms10240', __DRX_Info_drx_LongCycleStartOffset_ms10240),
+        ])
+    _DRX_Info_drx_LongCycleStartOffset._ext = None
+    _DRX_Info_shortDRX = SEQ(name=u'shortDRX', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    __DRX_Info_shortDRX_drx_ShortCycle = ENUM(name=u'drx-ShortCycle', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __DRX_Info_shortDRX_drx_ShortCycle._cont = ASN1Dict([(u'ms2', 0), (u'ms3', 1), (u'ms4', 2), (u'ms5', 3), (u'ms6', 4), (u'ms7', 5), (u'ms8', 6), (u'ms10', 7), (u'ms14', 8), (u'ms16', 9), (u'ms20', 10), (u'ms30', 11), (u'ms32', 12), (u'ms35', 13), (u'ms40', 14), (u'ms64', 15), (u'ms80', 16), (u'ms128', 17), (u'ms160', 18), (u'ms256', 19), (u'ms320', 20), (u'ms512', 21), (u'ms640', 22), (u'spare9', 23), (u'spare8', 24), (u'spare7', 25), (u'spare6', 26), (u'spare5', 27), (u'spare4', 28), (u'spare3', 29), (u'spare2', 30), (u'spare1', 31)])
+    __DRX_Info_shortDRX_drx_ShortCycle._ext = None
+    __DRX_Info_shortDRX_drx_ShortCycleTimer = INT(name=u'drx-ShortCycleTimer', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __DRX_Info_shortDRX_drx_ShortCycleTimer._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=16)], ev=None, er=[])
+    _DRX_Info_shortDRX._cont = ASN1Dict([
+        (u'drx-ShortCycle', __DRX_Info_shortDRX_drx_ShortCycle),
+        (u'drx-ShortCycleTimer', __DRX_Info_shortDRX_drx_ShortCycleTimer),
+        ])
+    _DRX_Info_shortDRX._ext = None
+    DRX_Info._cont = ASN1Dict([
+        (u'drx-LongCycleStartOffset', _DRX_Info_drx_LongCycleStartOffset),
+        (u'shortDRX', _DRX_Info_shortDRX),
+        ])
+    DRX_Info._ext = None
+    
+    #-----< DRX-Info2 >-----#
+    DRX_Info2 = SEQ(name=u'DRX-Info2', mode=MODE_TYPE)
+    _DRX_Info2_drx_onDurationTimer = CHOICE(name=u'drx-onDurationTimer', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
+    __DRX_Info2_drx_onDurationTimer_subMilliSeconds = INT(name=u'subMilliSeconds', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __DRX_Info2_drx_onDurationTimer_subMilliSeconds._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=31)], ev=None, er=[])
+    __DRX_Info2_drx_onDurationTimer_milliSeconds = ENUM(name=u'milliSeconds', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __DRX_Info2_drx_onDurationTimer_milliSeconds._cont = ASN1Dict([(u'ms1', 0), (u'ms2', 1), (u'ms3', 2), (u'ms4', 3), (u'ms5', 4), (u'ms6', 5), (u'ms8', 6), (u'ms10', 7), (u'ms20', 8), (u'ms30', 9), (u'ms40', 10), (u'ms50', 11), (u'ms60', 12), (u'ms80', 13), (u'ms100', 14), (u'ms200', 15), (u'ms300', 16), (u'ms400', 17), (u'ms500', 18), (u'ms600', 19), (u'ms800', 20), (u'ms1000', 21), (u'ms1200', 22), (u'ms1600', 23), (u'spare8', 24), (u'spare7', 25), (u'spare6', 26), (u'spare5', 27), (u'spare4', 28), (u'spare3', 29), (u'spare2', 30), (u'spare1', 31)])
+    __DRX_Info2_drx_onDurationTimer_milliSeconds._ext = None
+    _DRX_Info2_drx_onDurationTimer._cont = ASN1Dict([
+        (u'subMilliSeconds', __DRX_Info2_drx_onDurationTimer_subMilliSeconds),
+        (u'milliSeconds', __DRX_Info2_drx_onDurationTimer_milliSeconds),
+        ])
+    _DRX_Info2_drx_onDurationTimer._ext = None
+    DRX_Info2._cont = ASN1Dict([
+        (u'drx-onDurationTimer', _DRX_Info2_drx_onDurationTimer),
+        ])
+    DRX_Info2._ext = None
+    
+    #-----< MeasConfigMN >-----#
+    MeasConfigMN = SEQ(name=u'MeasConfigMN', mode=MODE_TYPE)
+    _MeasConfigMN_measuredFrequenciesMN = SEQ_OF(name=u'measuredFrequenciesMN', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    __MeasConfigMN_measuredFrequenciesMN__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('NR-InterNodeDefinitions', 'NR-FreqInfo')))
+    _MeasConfigMN_measuredFrequenciesMN._cont = __MeasConfigMN_measuredFrequenciesMN__item_
+    _MeasConfigMN_measuredFrequenciesMN._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=32)], ev=None, er=[])
+    _MeasConfigMN_measGapConfig = CHOICE(name=u'measGapConfig', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'SetupRelease')), opt=True)
+    __MeasConfigMN_measGapConfig_release = NULL(name=u'release', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __MeasConfigMN_measGapConfig_setup = SEQ(name=u'setup', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'GapConfig')))
+    _MeasConfigMN_measGapConfig._cont = ASN1Dict([
+        (u'release', __MeasConfigMN_measGapConfig_release),
+        (u'setup', __MeasConfigMN_measGapConfig_setup),
+        ])
+    _MeasConfigMN_measGapConfig._ext = None
+    _MeasConfigMN_gapPurpose = ENUM(name=u'gapPurpose', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _MeasConfigMN_gapPurpose._cont = ASN1Dict([(u'perUE', 0), (u'perFR1', 1)])
+    _MeasConfigMN_gapPurpose._ext = None
+    _MeasConfigMN_measGapConfigFR2 = CHOICE(name=u'measGapConfigFR2', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'SetupRelease')), opt=True, group=0)
+    __MeasConfigMN_measGapConfigFR2_release = NULL(name=u'release', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __MeasConfigMN_measGapConfigFR2_setup = SEQ(name=u'setup', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'GapConfig')))
+    _MeasConfigMN_measGapConfigFR2._cont = ASN1Dict([
+        (u'release', __MeasConfigMN_measGapConfigFR2_release),
+        (u'setup', __MeasConfigMN_measGapConfigFR2_setup),
+        ])
+    _MeasConfigMN_measGapConfigFR2._ext = None
+    MeasConfigMN._cont = ASN1Dict([
+        (u'measuredFrequenciesMN', _MeasConfigMN_measuredFrequenciesMN),
+        (u'measGapConfig', _MeasConfigMN_measGapConfig),
+        (u'gapPurpose', _MeasConfigMN_gapPurpose),
+        (u'measGapConfigFR2', _MeasConfigMN_measGapConfigFR2),
+        ])
+    MeasConfigMN._ext = [u'measGapConfigFR2']
+    
+    #-----< MRDC-AssistanceInfo >-----#
+    MRDC_AssistanceInfo = SEQ(name=u'MRDC-AssistanceInfo', mode=MODE_TYPE)
+    _MRDC_AssistanceInfo_affectedCarrierFreqCombInfoListMRDC = SEQ_OF(name=u'affectedCarrierFreqCombInfoListMRDC', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __MRDC_AssistanceInfo_affectedCarrierFreqCombInfoListMRDC__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('NR-InterNodeDefinitions', 'AffectedCarrierFreqCombInfoMRDC')))
+    _MRDC_AssistanceInfo_affectedCarrierFreqCombInfoListMRDC._cont = __MRDC_AssistanceInfo_affectedCarrierFreqCombInfoListMRDC__item_
+    _MRDC_AssistanceInfo_affectedCarrierFreqCombInfoListMRDC._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=128)], ev=None, er=[])
+    _MRDC_AssistanceInfo_overheatingAssistanceSCG_r16 = OCT_STR(name=u'overheatingAssistanceSCG-r16', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True, group=0)
+    __MRDC_AssistanceInfo_overheatingAssistanceSCG_r16_contain = SEQ(name='_cont_overheatingAssistanceSCG-r16', mode=MODE_TYPE, typeref=ASN1RefType(('NR-RRC-Definitions', 'OverheatingAssistance')))
+    _MRDC_AssistanceInfo_overheatingAssistanceSCG_r16._const_cont = __MRDC_AssistanceInfo_overheatingAssistanceSCG_r16_contain
+    MRDC_AssistanceInfo._cont = ASN1Dict([
+        (u'affectedCarrierFreqCombInfoListMRDC', _MRDC_AssistanceInfo_affectedCarrierFreqCombInfoListMRDC),
+        (u'overheatingAssistanceSCG-r16', _MRDC_AssistanceInfo_overheatingAssistanceSCG_r16),
+        ])
+    MRDC_AssistanceInfo._ext = [u'overheatingAssistanceSCG-r16']
+    
+    #-----< AffectedCarrierFreqCombInfoMRDC >-----#
+    AffectedCarrierFreqCombInfoMRDC = SEQ(name=u'AffectedCarrierFreqCombInfoMRDC', mode=MODE_TYPE)
+    _AffectedCarrierFreqCombInfoMRDC_victimSystemType = SEQ(name=u'victimSystemType', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-InterNodeDefinitions', 'VictimSystemType')))
+    _AffectedCarrierFreqCombInfoMRDC_interferenceDirectionMRDC = ENUM(name=u'interferenceDirectionMRDC', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _AffectedCarrierFreqCombInfoMRDC_interferenceDirectionMRDC._cont = ASN1Dict([(u'eutra-nr', 0), (u'nr', 1), (u'other', 2), (u'utra-nr-other', 3), (u'nr-other', 4), (u'spare3', 5), (u'spare2', 6), (u'spare1', 7)])
+    _AffectedCarrierFreqCombInfoMRDC_interferenceDirectionMRDC._ext = None
+    _AffectedCarrierFreqCombInfoMRDC_affectedCarrierFreqCombMRDC = SEQ(name=u'affectedCarrierFreqCombMRDC', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    __AffectedCarrierFreqCombInfoMRDC_affectedCarrierFreqCombMRDC_affectedCarrierFreqCombEUTRA = SEQ_OF(name=u'affectedCarrierFreqCombEUTRA', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-InterNodeDefinitions', 'AffectedCarrierFreqCombEUTRA')), opt=True)
+    __AffectedCarrierFreqCombInfoMRDC_affectedCarrierFreqCombMRDC_affectedCarrierFreqCombNR = SEQ_OF(name=u'affectedCarrierFreqCombNR', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-InterNodeDefinitions', 'AffectedCarrierFreqCombNR')))
+    _AffectedCarrierFreqCombInfoMRDC_affectedCarrierFreqCombMRDC._cont = ASN1Dict([
+        (u'affectedCarrierFreqCombEUTRA', __AffectedCarrierFreqCombInfoMRDC_affectedCarrierFreqCombMRDC_affectedCarrierFreqCombEUTRA),
+        (u'affectedCarrierFreqCombNR', __AffectedCarrierFreqCombInfoMRDC_affectedCarrierFreqCombMRDC_affectedCarrierFreqCombNR),
+        ])
+    _AffectedCarrierFreqCombInfoMRDC_affectedCarrierFreqCombMRDC._ext = None
+    AffectedCarrierFreqCombInfoMRDC._cont = ASN1Dict([
+        (u'victimSystemType', _AffectedCarrierFreqCombInfoMRDC_victimSystemType),
+        (u'interferenceDirectionMRDC', _AffectedCarrierFreqCombInfoMRDC_interferenceDirectionMRDC),
+        (u'affectedCarrierFreqCombMRDC', _AffectedCarrierFreqCombInfoMRDC_affectedCarrierFreqCombMRDC),
+        ])
+    AffectedCarrierFreqCombInfoMRDC._ext = None
+    
+    #-----< VictimSystemType >-----#
+    VictimSystemType = SEQ(name=u'VictimSystemType', mode=MODE_TYPE)
+    _VictimSystemType_gps = ENUM(name=u'gps', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _VictimSystemType_gps._cont = ASN1Dict([(u'true', 0)])
+    _VictimSystemType_gps._ext = None
+    _VictimSystemType_glonass = ENUM(name=u'glonass', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _VictimSystemType_glonass._cont = ASN1Dict([(u'true', 0)])
+    _VictimSystemType_glonass._ext = None
+    _VictimSystemType_bds = ENUM(name=u'bds', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _VictimSystemType_bds._cont = ASN1Dict([(u'true', 0)])
+    _VictimSystemType_bds._ext = None
+    _VictimSystemType_galileo = ENUM(name=u'galileo', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _VictimSystemType_galileo._cont = ASN1Dict([(u'true', 0)])
+    _VictimSystemType_galileo._ext = None
+    _VictimSystemType_wlan = ENUM(name=u'wlan', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _VictimSystemType_wlan._cont = ASN1Dict([(u'true', 0)])
+    _VictimSystemType_wlan._ext = None
+    _VictimSystemType_bluetooth = ENUM(name=u'bluetooth', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _VictimSystemType_bluetooth._cont = ASN1Dict([(u'true', 0)])
+    _VictimSystemType_bluetooth._ext = None
+    VictimSystemType._cont = ASN1Dict([
+        (u'gps', _VictimSystemType_gps),
+        (u'glonass', _VictimSystemType_glonass),
+        (u'bds', _VictimSystemType_bds),
+        (u'galileo', _VictimSystemType_galileo),
+        (u'wlan', _VictimSystemType_wlan),
+        (u'bluetooth', _VictimSystemType_bluetooth),
+        ])
+    VictimSystemType._ext = None
+    
+    #-----< AffectedCarrierFreqCombEUTRA >-----#
+    AffectedCarrierFreqCombEUTRA = SEQ_OF(name=u'AffectedCarrierFreqCombEUTRA', mode=MODE_TYPE)
+    _AffectedCarrierFreqCombEUTRA__item_ = INT(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('NR-RRC-Definitions', 'ARFCN-ValueEUTRA')))
+    AffectedCarrierFreqCombEUTRA._cont = _AffectedCarrierFreqCombEUTRA__item_
+    AffectedCarrierFreqCombEUTRA._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=32)], ev=None, er=[])
+    
+    #-----< AffectedCarrierFreqCombNR >-----#
+    AffectedCarrierFreqCombNR = SEQ_OF(name=u'AffectedCarrierFreqCombNR', mode=MODE_TYPE)
+    _AffectedCarrierFreqCombNR__item_ = INT(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('NR-RRC-Definitions', 'ARFCN-ValueNR')))
+    AffectedCarrierFreqCombNR._cont = _AffectedCarrierFreqCombNR__item_
+    AffectedCarrierFreqCombNR._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=32)], ev=None, er=[])
+    
+    #-----< MeasurementTimingConfiguration >-----#
+    MeasurementTimingConfiguration = SEQ(name=u'MeasurementTimingConfiguration', mode=MODE_TYPE)
+    _MeasurementTimingConfiguration_criticalExtensions = CHOICE(name=u'criticalExtensions', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
+    __MeasurementTimingConfiguration_criticalExtensions_c1 = CHOICE(name=u'c1', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
+    ___MeasurementTimingConfiguration_criticalExtensions_c1_measTimingConf = SEQ(name=u'measTimingConf', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-InterNodeDefinitions', 'MeasurementTimingConfiguration-IEs')))
+    ___MeasurementTimingConfiguration_criticalExtensions_c1_spare3 = NULL(name=u'spare3', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    ___MeasurementTimingConfiguration_criticalExtensions_c1_spare2 = NULL(name=u'spare2', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    ___MeasurementTimingConfiguration_criticalExtensions_c1_spare1 = NULL(name=u'spare1', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __MeasurementTimingConfiguration_criticalExtensions_c1._cont = ASN1Dict([
+        (u'measTimingConf', ___MeasurementTimingConfiguration_criticalExtensions_c1_measTimingConf),
+        (u'spare3', ___MeasurementTimingConfiguration_criticalExtensions_c1_spare3),
+        (u'spare2', ___MeasurementTimingConfiguration_criticalExtensions_c1_spare2),
+        (u'spare1', ___MeasurementTimingConfiguration_criticalExtensions_c1_spare1),
+        ])
+    __MeasurementTimingConfiguration_criticalExtensions_c1._ext = None
+    __MeasurementTimingConfiguration_criticalExtensions_criticalExtensionsFuture = SEQ(name=u'criticalExtensionsFuture', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __MeasurementTimingConfiguration_criticalExtensions_criticalExtensionsFuture._cont = ASN1Dict([
+        ])
+    __MeasurementTimingConfiguration_criticalExtensions_criticalExtensionsFuture._ext = None
+    _MeasurementTimingConfiguration_criticalExtensions._cont = ASN1Dict([
+        (u'c1', __MeasurementTimingConfiguration_criticalExtensions_c1),
+        (u'criticalExtensionsFuture', __MeasurementTimingConfiguration_criticalExtensions_criticalExtensionsFuture),
+        ])
+    _MeasurementTimingConfiguration_criticalExtensions._ext = None
+    MeasurementTimingConfiguration._cont = ASN1Dict([
+        (u'criticalExtensions', _MeasurementTimingConfiguration_criticalExtensions),
+        ])
+    MeasurementTimingConfiguration._ext = None
+    
+    #-----< MeasurementTimingConfiguration-IEs >-----#
+    MeasurementTimingConfiguration_IEs = SEQ(name=u'MeasurementTimingConfiguration-IEs', mode=MODE_TYPE)
+    _MeasurementTimingConfiguration_IEs_measTiming = SEQ_OF(name=u'measTiming', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-InterNodeDefinitions', 'MeasTimingList')), opt=True)
+    _MeasurementTimingConfiguration_IEs_nonCriticalExtension = SEQ(name=u'nonCriticalExtension', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-InterNodeDefinitions', 'MeasurementTimingConfiguration-v1550-IEs')), opt=True)
+    MeasurementTimingConfiguration_IEs._cont = ASN1Dict([
+        (u'measTiming', _MeasurementTimingConfiguration_IEs_measTiming),
+        (u'nonCriticalExtension', _MeasurementTimingConfiguration_IEs_nonCriticalExtension),
+        ])
+    MeasurementTimingConfiguration_IEs._ext = None
+    
+    #-----< MeasurementTimingConfiguration-v1550-IEs >-----#
+    MeasurementTimingConfiguration_v1550_IEs = SEQ(name=u'MeasurementTimingConfiguration-v1550-IEs', mode=MODE_TYPE)
+    _MeasurementTimingConfiguration_v1550_IEs_campOnFirstSSB = BOOL(name=u'campOnFirstSSB', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _MeasurementTimingConfiguration_v1550_IEs_psCellOnlyOnFirstSSB = BOOL(name=u'psCellOnlyOnFirstSSB', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _MeasurementTimingConfiguration_v1550_IEs_nonCriticalExtension = SEQ(name=u'nonCriticalExtension', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-InterNodeDefinitions', 'MeasurementTimingConfiguration-v1610-IEs')), opt=True)
+    MeasurementTimingConfiguration_v1550_IEs._cont = ASN1Dict([
+        (u'campOnFirstSSB', _MeasurementTimingConfiguration_v1550_IEs_campOnFirstSSB),
+        (u'psCellOnlyOnFirstSSB', _MeasurementTimingConfiguration_v1550_IEs_psCellOnlyOnFirstSSB),
+        (u'nonCriticalExtension', _MeasurementTimingConfiguration_v1550_IEs_nonCriticalExtension),
+        ])
+    MeasurementTimingConfiguration_v1550_IEs._ext = None
+    
+    #-----< MeasurementTimingConfiguration-v1610-IEs >-----#
+    MeasurementTimingConfiguration_v1610_IEs = SEQ(name=u'MeasurementTimingConfiguration-v1610-IEs', mode=MODE_TYPE)
+    _MeasurementTimingConfiguration_v1610_IEs_csi_RS_Config_r16 = SEQ(name=u'csi-RS-Config-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __MeasurementTimingConfiguration_v1610_IEs_csi_RS_Config_r16_csi_RS_SubcarrierSpacing_r16 = ENUM(name=u'csi-RS-SubcarrierSpacing-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'SubcarrierSpacing')))
+    __MeasurementTimingConfiguration_v1610_IEs_csi_RS_Config_r16_csi_RS_CellMobility_r16 = SEQ(name=u'csi-RS-CellMobility-r16', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'CSI-RS-CellMobility')))
+    __MeasurementTimingConfiguration_v1610_IEs_csi_RS_Config_r16_refSSBFreq_r16 = INT(name=u'refSSBFreq-r16', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'ARFCN-ValueNR')))
+    _MeasurementTimingConfiguration_v1610_IEs_csi_RS_Config_r16._cont = ASN1Dict([
+        (u'csi-RS-SubcarrierSpacing-r16', __MeasurementTimingConfiguration_v1610_IEs_csi_RS_Config_r16_csi_RS_SubcarrierSpacing_r16),
+        (u'csi-RS-CellMobility-r16', __MeasurementTimingConfiguration_v1610_IEs_csi_RS_Config_r16_csi_RS_CellMobility_r16),
+        (u'refSSBFreq-r16', __MeasurementTimingConfiguration_v1610_IEs_csi_RS_Config_r16_refSSBFreq_r16),
+        ])
+    _MeasurementTimingConfiguration_v1610_IEs_csi_RS_Config_r16._ext = None
+    _MeasurementTimingConfiguration_v1610_IEs_nonCriticalExtension = SEQ(name=u'nonCriticalExtension', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _MeasurementTimingConfiguration_v1610_IEs_nonCriticalExtension._cont = ASN1Dict([
+        ])
+    _MeasurementTimingConfiguration_v1610_IEs_nonCriticalExtension._ext = None
+    MeasurementTimingConfiguration_v1610_IEs._cont = ASN1Dict([
+        (u'csi-RS-Config-r16', _MeasurementTimingConfiguration_v1610_IEs_csi_RS_Config_r16),
+        (u'nonCriticalExtension', _MeasurementTimingConfiguration_v1610_IEs_nonCriticalExtension),
+        ])
+    MeasurementTimingConfiguration_v1610_IEs._ext = None
+    
+    #-----< MeasTimingList >-----#
+    MeasTimingList = SEQ_OF(name=u'MeasTimingList', mode=MODE_TYPE)
+    _MeasTimingList__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('NR-InterNodeDefinitions', 'MeasTiming')))
+    MeasTimingList._cont = _MeasTimingList__item_
+    MeasTimingList._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=32)], ev=None, er=[])
+    
+    #-----< MeasTiming >-----#
+    MeasTiming = SEQ(name=u'MeasTiming', mode=MODE_TYPE)
+    _MeasTiming_frequencyAndTiming = SEQ(name=u'frequencyAndTiming', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    __MeasTiming_frequencyAndTiming_carrierFreq = INT(name=u'carrierFreq', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'ARFCN-ValueNR')))
+    __MeasTiming_frequencyAndTiming_ssbSubcarrierSpacing = ENUM(name=u'ssbSubcarrierSpacing', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'SubcarrierSpacing')))
+    __MeasTiming_frequencyAndTiming_ssb_MeasurementTimingConfiguration = SEQ(name=u'ssb-MeasurementTimingConfiguration', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'SSB-MTC')))
+    __MeasTiming_frequencyAndTiming_ss_RSSI_Measurement = SEQ(name=u'ss-RSSI-Measurement', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'SS-RSSI-Measurement')), opt=True)
+    _MeasTiming_frequencyAndTiming._cont = ASN1Dict([
+        (u'carrierFreq', __MeasTiming_frequencyAndTiming_carrierFreq),
+        (u'ssbSubcarrierSpacing', __MeasTiming_frequencyAndTiming_ssbSubcarrierSpacing),
+        (u'ssb-MeasurementTimingConfiguration', __MeasTiming_frequencyAndTiming_ssb_MeasurementTimingConfiguration),
+        (u'ss-RSSI-Measurement', __MeasTiming_frequencyAndTiming_ss_RSSI_Measurement),
+        ])
+    _MeasTiming_frequencyAndTiming._ext = None
+    _MeasTiming_ssb_ToMeasure = CHOICE(name=u'ssb-ToMeasure', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'SSB-ToMeasure')), opt=True, group=0)
+    _MeasTiming_physCellId = INT(name=u'physCellId', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'PhysCellId')), opt=True, group=0)
+    MeasTiming._cont = ASN1Dict([
+        (u'frequencyAndTiming', _MeasTiming_frequencyAndTiming),
+        (u'ssb-ToMeasure', _MeasTiming_ssb_ToMeasure),
+        (u'physCellId', _MeasTiming_physCellId),
+        ])
+    MeasTiming._ext = [u'ssb-ToMeasure', u'physCellId']
+    
+    #-----< UERadioPagingInformation >-----#
+    UERadioPagingInformation = SEQ(name=u'UERadioPagingInformation', mode=MODE_TYPE)
+    _UERadioPagingInformation_criticalExtensions = CHOICE(name=u'criticalExtensions', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
+    __UERadioPagingInformation_criticalExtensions_c1 = CHOICE(name=u'c1', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
+    ___UERadioPagingInformation_criticalExtensions_c1_ueRadioPagingInformation = SEQ(name=u'ueRadioPagingInformation', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-InterNodeDefinitions', 'UERadioPagingInformation-IEs')))
+    ___UERadioPagingInformation_criticalExtensions_c1_spare7 = NULL(name=u'spare7', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    ___UERadioPagingInformation_criticalExtensions_c1_spare6 = NULL(name=u'spare6', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    ___UERadioPagingInformation_criticalExtensions_c1_spare5 = NULL(name=u'spare5', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    ___UERadioPagingInformation_criticalExtensions_c1_spare4 = NULL(name=u'spare4', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    ___UERadioPagingInformation_criticalExtensions_c1_spare3 = NULL(name=u'spare3', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    ___UERadioPagingInformation_criticalExtensions_c1_spare2 = NULL(name=u'spare2', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    ___UERadioPagingInformation_criticalExtensions_c1_spare1 = NULL(name=u'spare1', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __UERadioPagingInformation_criticalExtensions_c1._cont = ASN1Dict([
+        (u'ueRadioPagingInformation', ___UERadioPagingInformation_criticalExtensions_c1_ueRadioPagingInformation),
+        (u'spare7', ___UERadioPagingInformation_criticalExtensions_c1_spare7),
+        (u'spare6', ___UERadioPagingInformation_criticalExtensions_c1_spare6),
+        (u'spare5', ___UERadioPagingInformation_criticalExtensions_c1_spare5),
+        (u'spare4', ___UERadioPagingInformation_criticalExtensions_c1_spare4),
+        (u'spare3', ___UERadioPagingInformation_criticalExtensions_c1_spare3),
+        (u'spare2', ___UERadioPagingInformation_criticalExtensions_c1_spare2),
+        (u'spare1', ___UERadioPagingInformation_criticalExtensions_c1_spare1),
+        ])
+    __UERadioPagingInformation_criticalExtensions_c1._ext = None
+    __UERadioPagingInformation_criticalExtensions_criticalExtensionsFuture = SEQ(name=u'criticalExtensionsFuture', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __UERadioPagingInformation_criticalExtensions_criticalExtensionsFuture._cont = ASN1Dict([
+        ])
+    __UERadioPagingInformation_criticalExtensions_criticalExtensionsFuture._ext = None
+    _UERadioPagingInformation_criticalExtensions._cont = ASN1Dict([
+        (u'c1', __UERadioPagingInformation_criticalExtensions_c1),
+        (u'criticalExtensionsFuture', __UERadioPagingInformation_criticalExtensions_criticalExtensionsFuture),
+        ])
+    _UERadioPagingInformation_criticalExtensions._ext = None
+    UERadioPagingInformation._cont = ASN1Dict([
+        (u'criticalExtensions', _UERadioPagingInformation_criticalExtensions),
+        ])
+    UERadioPagingInformation._ext = None
+    
+    #-----< UERadioPagingInformation-IEs >-----#
+    UERadioPagingInformation_IEs = SEQ(name=u'UERadioPagingInformation-IEs', mode=MODE_TYPE)
+    _UERadioPagingInformation_IEs_supportedBandListNRForPaging = SEQ_OF(name=u'supportedBandListNRForPaging', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    __UERadioPagingInformation_IEs_supportedBandListNRForPaging__item_ = INT(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('NR-RRC-Definitions', 'FreqBandIndicatorNR')))
+    _UERadioPagingInformation_IEs_supportedBandListNRForPaging._cont = __UERadioPagingInformation_IEs_supportedBandListNRForPaging__item_
+    _UERadioPagingInformation_IEs_supportedBandListNRForPaging._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=1024)], ev=None, er=[])
+    _UERadioPagingInformation_IEs_nonCriticalExtension = SEQ(name=u'nonCriticalExtension', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-InterNodeDefinitions', 'UERadioPagingInformation-v15e0-IEs')), opt=True)
+    UERadioPagingInformation_IEs._cont = ASN1Dict([
+        (u'supportedBandListNRForPaging', _UERadioPagingInformation_IEs_supportedBandListNRForPaging),
+        (u'nonCriticalExtension', _UERadioPagingInformation_IEs_nonCriticalExtension),
+        ])
+    UERadioPagingInformation_IEs._ext = None
+    
+    #-----< UERadioPagingInformation-v15e0-IEs >-----#
+    UERadioPagingInformation_v15e0_IEs = SEQ(name=u'UERadioPagingInformation-v15e0-IEs', mode=MODE_TYPE)
+    _UERadioPagingInformation_v15e0_IEs_dl_SchedulingOffset_PDSCH_TypeA_FDD_FR1 = ENUM(name=u'dl-SchedulingOffset-PDSCH-TypeA-FDD-FR1', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _UERadioPagingInformation_v15e0_IEs_dl_SchedulingOffset_PDSCH_TypeA_FDD_FR1._cont = ASN1Dict([(u'supported', 0)])
+    _UERadioPagingInformation_v15e0_IEs_dl_SchedulingOffset_PDSCH_TypeA_FDD_FR1._ext = None
+    _UERadioPagingInformation_v15e0_IEs_dl_SchedulingOffset_PDSCH_TypeA_TDD_FR1 = ENUM(name=u'dl-SchedulingOffset-PDSCH-TypeA-TDD-FR1', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _UERadioPagingInformation_v15e0_IEs_dl_SchedulingOffset_PDSCH_TypeA_TDD_FR1._cont = ASN1Dict([(u'supported', 0)])
+    _UERadioPagingInformation_v15e0_IEs_dl_SchedulingOffset_PDSCH_TypeA_TDD_FR1._ext = None
+    _UERadioPagingInformation_v15e0_IEs_dl_SchedulingOffset_PDSCH_TypeA_TDD_FR2 = ENUM(name=u'dl-SchedulingOffset-PDSCH-TypeA-TDD-FR2', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _UERadioPagingInformation_v15e0_IEs_dl_SchedulingOffset_PDSCH_TypeA_TDD_FR2._cont = ASN1Dict([(u'supported', 0)])
+    _UERadioPagingInformation_v15e0_IEs_dl_SchedulingOffset_PDSCH_TypeA_TDD_FR2._ext = None
+    _UERadioPagingInformation_v15e0_IEs_dl_SchedulingOffset_PDSCH_TypeB_FDD_FR1 = ENUM(name=u'dl-SchedulingOffset-PDSCH-TypeB-FDD-FR1', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _UERadioPagingInformation_v15e0_IEs_dl_SchedulingOffset_PDSCH_TypeB_FDD_FR1._cont = ASN1Dict([(u'supported', 0)])
+    _UERadioPagingInformation_v15e0_IEs_dl_SchedulingOffset_PDSCH_TypeB_FDD_FR1._ext = None
+    _UERadioPagingInformation_v15e0_IEs_dl_SchedulingOffset_PDSCH_TypeB_TDD_FR1 = ENUM(name=u'dl-SchedulingOffset-PDSCH-TypeB-TDD-FR1', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _UERadioPagingInformation_v15e0_IEs_dl_SchedulingOffset_PDSCH_TypeB_TDD_FR1._cont = ASN1Dict([(u'supported', 0)])
+    _UERadioPagingInformation_v15e0_IEs_dl_SchedulingOffset_PDSCH_TypeB_TDD_FR1._ext = None
+    _UERadioPagingInformation_v15e0_IEs_dl_SchedulingOffset_PDSCH_TypeB_TDD_FR2 = ENUM(name=u'dl-SchedulingOffset-PDSCH-TypeB-TDD-FR2', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _UERadioPagingInformation_v15e0_IEs_dl_SchedulingOffset_PDSCH_TypeB_TDD_FR2._cont = ASN1Dict([(u'supported', 0)])
+    _UERadioPagingInformation_v15e0_IEs_dl_SchedulingOffset_PDSCH_TypeB_TDD_FR2._ext = None
+    _UERadioPagingInformation_v15e0_IEs_nonCriticalExtension = SEQ(name=u'nonCriticalExtension', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _UERadioPagingInformation_v15e0_IEs_nonCriticalExtension._cont = ASN1Dict([
+        ])
+    _UERadioPagingInformation_v15e0_IEs_nonCriticalExtension._ext = None
+    UERadioPagingInformation_v15e0_IEs._cont = ASN1Dict([
+        (u'dl-SchedulingOffset-PDSCH-TypeA-FDD-FR1', _UERadioPagingInformation_v15e0_IEs_dl_SchedulingOffset_PDSCH_TypeA_FDD_FR1),
+        (u'dl-SchedulingOffset-PDSCH-TypeA-TDD-FR1', _UERadioPagingInformation_v15e0_IEs_dl_SchedulingOffset_PDSCH_TypeA_TDD_FR1),
+        (u'dl-SchedulingOffset-PDSCH-TypeA-TDD-FR2', _UERadioPagingInformation_v15e0_IEs_dl_SchedulingOffset_PDSCH_TypeA_TDD_FR2),
+        (u'dl-SchedulingOffset-PDSCH-TypeB-FDD-FR1', _UERadioPagingInformation_v15e0_IEs_dl_SchedulingOffset_PDSCH_TypeB_FDD_FR1),
+        (u'dl-SchedulingOffset-PDSCH-TypeB-TDD-FR1', _UERadioPagingInformation_v15e0_IEs_dl_SchedulingOffset_PDSCH_TypeB_TDD_FR1),
+        (u'dl-SchedulingOffset-PDSCH-TypeB-TDD-FR2', _UERadioPagingInformation_v15e0_IEs_dl_SchedulingOffset_PDSCH_TypeB_TDD_FR2),
+        (u'nonCriticalExtension', _UERadioPagingInformation_v15e0_IEs_nonCriticalExtension),
+        ])
+    UERadioPagingInformation_v15e0_IEs._ext = None
+    
+    #-----< UERadioAccessCapabilityInformation >-----#
+    UERadioAccessCapabilityInformation = SEQ(name=u'UERadioAccessCapabilityInformation', mode=MODE_TYPE)
+    _UERadioAccessCapabilityInformation_criticalExtensions = CHOICE(name=u'criticalExtensions', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
+    __UERadioAccessCapabilityInformation_criticalExtensions_c1 = CHOICE(name=u'c1', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
+    ___UERadioAccessCapabilityInformation_criticalExtensions_c1_ueRadioAccessCapabilityInformation = SEQ(name=u'ueRadioAccessCapabilityInformation', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-InterNodeDefinitions', 'UERadioAccessCapabilityInformation-IEs')))
+    ___UERadioAccessCapabilityInformation_criticalExtensions_c1_spare7 = NULL(name=u'spare7', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    ___UERadioAccessCapabilityInformation_criticalExtensions_c1_spare6 = NULL(name=u'spare6', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    ___UERadioAccessCapabilityInformation_criticalExtensions_c1_spare5 = NULL(name=u'spare5', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    ___UERadioAccessCapabilityInformation_criticalExtensions_c1_spare4 = NULL(name=u'spare4', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    ___UERadioAccessCapabilityInformation_criticalExtensions_c1_spare3 = NULL(name=u'spare3', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    ___UERadioAccessCapabilityInformation_criticalExtensions_c1_spare2 = NULL(name=u'spare2', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    ___UERadioAccessCapabilityInformation_criticalExtensions_c1_spare1 = NULL(name=u'spare1', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __UERadioAccessCapabilityInformation_criticalExtensions_c1._cont = ASN1Dict([
+        (u'ueRadioAccessCapabilityInformation', ___UERadioAccessCapabilityInformation_criticalExtensions_c1_ueRadioAccessCapabilityInformation),
+        (u'spare7', ___UERadioAccessCapabilityInformation_criticalExtensions_c1_spare7),
+        (u'spare6', ___UERadioAccessCapabilityInformation_criticalExtensions_c1_spare6),
+        (u'spare5', ___UERadioAccessCapabilityInformation_criticalExtensions_c1_spare5),
+        (u'spare4', ___UERadioAccessCapabilityInformation_criticalExtensions_c1_spare4),
+        (u'spare3', ___UERadioAccessCapabilityInformation_criticalExtensions_c1_spare3),
+        (u'spare2', ___UERadioAccessCapabilityInformation_criticalExtensions_c1_spare2),
+        (u'spare1', ___UERadioAccessCapabilityInformation_criticalExtensions_c1_spare1),
+        ])
+    __UERadioAccessCapabilityInformation_criticalExtensions_c1._ext = None
+    __UERadioAccessCapabilityInformation_criticalExtensions_criticalExtensionsFuture = SEQ(name=u'criticalExtensionsFuture', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __UERadioAccessCapabilityInformation_criticalExtensions_criticalExtensionsFuture._cont = ASN1Dict([
+        ])
+    __UERadioAccessCapabilityInformation_criticalExtensions_criticalExtensionsFuture._ext = None
+    _UERadioAccessCapabilityInformation_criticalExtensions._cont = ASN1Dict([
+        (u'c1', __UERadioAccessCapabilityInformation_criticalExtensions_c1),
+        (u'criticalExtensionsFuture', __UERadioAccessCapabilityInformation_criticalExtensions_criticalExtensionsFuture),
+        ])
+    _UERadioAccessCapabilityInformation_criticalExtensions._ext = None
+    UERadioAccessCapabilityInformation._cont = ASN1Dict([
+        (u'criticalExtensions', _UERadioAccessCapabilityInformation_criticalExtensions),
+        ])
+    UERadioAccessCapabilityInformation._ext = None
+    
+    #-----< UERadioAccessCapabilityInformation-IEs >-----#
+    UERadioAccessCapabilityInformation_IEs = SEQ(name=u'UERadioAccessCapabilityInformation-IEs', mode=MODE_TYPE)
+    _UERadioAccessCapabilityInformation_IEs_ue_RadioAccessCapabilityInfo = OCT_STR(name=u'ue-RadioAccessCapabilityInfo', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __UERadioAccessCapabilityInformation_IEs_ue_RadioAccessCapabilityInfo_contain = SEQ_OF(name='_cont_ue-RadioAccessCapabilityInfo', mode=MODE_TYPE, typeref=ASN1RefType(('NR-RRC-Definitions', 'UE-CapabilityRAT-ContainerList')))
+    _UERadioAccessCapabilityInformation_IEs_ue_RadioAccessCapabilityInfo._const_cont = __UERadioAccessCapabilityInformation_IEs_ue_RadioAccessCapabilityInfo_contain
+    _UERadioAccessCapabilityInformation_IEs_nonCriticalExtension = SEQ(name=u'nonCriticalExtension', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _UERadioAccessCapabilityInformation_IEs_nonCriticalExtension._cont = ASN1Dict([
+        ])
+    _UERadioAccessCapabilityInformation_IEs_nonCriticalExtension._ext = None
+    UERadioAccessCapabilityInformation_IEs._cont = ASN1Dict([
+        (u'ue-RadioAccessCapabilityInfo', _UERadioAccessCapabilityInformation_IEs_ue_RadioAccessCapabilityInfo),
+        (u'nonCriticalExtension', _UERadioAccessCapabilityInformation_IEs_nonCriticalExtension),
+        ])
+    UERadioAccessCapabilityInformation_IEs._ext = None
+    
+    #-----< maxMeasFreqsMN >-----#
+    maxMeasFreqsMN = INT(name=u'maxMeasFreqsMN', mode=MODE_VALUE)
+    maxMeasFreqsMN._val = 32
+    
+    #-----< maxMeasFreqsSN >-----#
+    maxMeasFreqsSN = INT(name=u'maxMeasFreqsSN', mode=MODE_VALUE)
+    maxMeasFreqsSN._val = 32
+    
+    #-----< maxMeasIdentitiesMN >-----#
+    maxMeasIdentitiesMN = INT(name=u'maxMeasIdentitiesMN', mode=MODE_VALUE)
+    maxMeasIdentitiesMN._val = 62
+    
+    #-----< maxCellPrep >-----#
+    maxCellPrep = INT(name=u'maxCellPrep', mode=MODE_VALUE)
+    maxCellPrep._val = 32
+    
+    _all_ = [
+        ___HandoverCommand_criticalExtensions_c1_handoverCommand,
+        ___HandoverCommand_criticalExtensions_c1_spare3,
+        ___HandoverCommand_criticalExtensions_c1_spare2,
+        ___HandoverCommand_criticalExtensions_c1_spare1,
+        __HandoverCommand_criticalExtensions_c1,
+        __HandoverCommand_criticalExtensions_criticalExtensionsFuture,
+        _HandoverCommand_criticalExtensions,
+        HandoverCommand,
+        __HandoverCommand_IEs_handoverCommandMessage_contain,
+        _HandoverCommand_IEs_handoverCommandMessage,
+        _HandoverCommand_IEs_nonCriticalExtension,
+        HandoverCommand_IEs,
+        ___HandoverPreparationInformation_criticalExtensions_c1_handoverPreparationInformation,
+        ___HandoverPreparationInformation_criticalExtensions_c1_spare3,
+        ___HandoverPreparationInformation_criticalExtensions_c1_spare2,
+        ___HandoverPreparationInformation_criticalExtensions_c1_spare1,
+        __HandoverPreparationInformation_criticalExtensions_c1,
+        __HandoverPreparationInformation_criticalExtensions_criticalExtensionsFuture,
+        _HandoverPreparationInformation_criticalExtensions,
+        HandoverPreparationInformation,
+        _HandoverPreparationInformation_IEs_ue_CapabilityRAT_List,
+        _HandoverPreparationInformation_IEs_sourceConfig,
+        _HandoverPreparationInformation_IEs_rrm_Config,
+        _HandoverPreparationInformation_IEs_as_Context,
+        _HandoverPreparationInformation_IEs_nonCriticalExtension,
+        HandoverPreparationInformation_IEs,
+        __AS_Config_rrcReconfiguration_contain,
+        _AS_Config_rrcReconfiguration,
+        __AS_Config_sourceRB_SN_Config_contain,
+        _AS_Config_sourceRB_SN_Config,
+        __AS_Config_sourceSCG_NR_Config_contain,
+        _AS_Config_sourceSCG_NR_Config,
+        _AS_Config_sourceSCG_EUTRA_Config,
+        _AS_Config_sourceSCG_Configured,
+        AS_Config,
+        _AS_Context_reestablishmentInfo,
+        _AS_Context_configRestrictInfo,
+        _AS_Context_ran_NotificationAreaInfo,
+        __AS_Context_ueAssistanceInformation_contain,
+        _AS_Context_ueAssistanceInformation,
+        _AS_Context_selectedBandCombinationSN,
+        _AS_Context_configRestrictInfoDAPS_r16,
+        _AS_Context_sidelinkUEInformationNR_r16,
+        _AS_Context_sidelinkUEInformationEUTRA_r16,
+        _AS_Context_ueAssistanceInformationEUTRA_r16,
+        __AS_Context_ueAssistanceInformationSCG_r16_contain,
+        _AS_Context_ueAssistanceInformationSCG_r16,
+        _AS_Context_needForGapsInfoNR_r16,
+        _AS_Context_configRestrictInfoDAPS_v1640,
+        AS_Context,
+        __ConfigRestrictInfoDAPS_r16_powerCoordination_r16_p_DAPS_Source_r16,
+        __ConfigRestrictInfoDAPS_r16_powerCoordination_r16_p_DAPS_Target_r16,
+        __ConfigRestrictInfoDAPS_r16_powerCoordination_r16_uplinkPowerSharingDAPS_Mode_r16,
+        _ConfigRestrictInfoDAPS_r16_powerCoordination_r16,
+        ConfigRestrictInfoDAPS_r16,
+        _ConfigRestrictInfoDAPS_v1640_sourceFeatureSetPerDownlinkCC_r16,
+        _ConfigRestrictInfoDAPS_v1640_sourceFeatureSetPerUplinkCC_r16,
+        ConfigRestrictInfoDAPS_v1640,
+        _ReestablishmentInfo_sourcePhysCellId,
+        _ReestablishmentInfo_targetCellShortMAC_I,
+        _ReestablishmentInfo_additionalReestabInfoList,
+        ReestablishmentInfo,
+        _ReestabNCellInfoList__item_,
+        ReestabNCellInfoList,
+        _ReestabNCellInfo_cellIdentity,
+        _ReestabNCellInfo_key_gNodeB_Star,
+        _ReestabNCellInfo_shortMAC_I,
+        ReestabNCellInfo,
+        _RRM_Config_ue_InactiveTime,
+        _RRM_Config_candidateCellInfoList,
+        _RRM_Config_candidateCellInfoListSN_EUTRA,
+        RRM_Config,
+        ___CG_Config_criticalExtensions_c1_cg_Config,
+        ___CG_Config_criticalExtensions_c1_spare3,
+        ___CG_Config_criticalExtensions_c1_spare2,
+        ___CG_Config_criticalExtensions_c1_spare1,
+        __CG_Config_criticalExtensions_c1,
+        __CG_Config_criticalExtensions_criticalExtensionsFuture,
+        _CG_Config_criticalExtensions,
+        CG_Config,
+        __CG_Config_IEs_scg_CellGroupConfig_contain,
+        _CG_Config_IEs_scg_CellGroupConfig,
+        __CG_Config_IEs_scg_RB_Config_contain,
+        _CG_Config_IEs_scg_RB_Config,
+        _CG_Config_IEs_configRestrictModReq,
+        _CG_Config_IEs_drx_InfoSCG,
+        __CG_Config_IEs_candidateCellInfoListSN_contain,
+        _CG_Config_IEs_candidateCellInfoListSN,
+        _CG_Config_IEs_measConfigSN,
+        _CG_Config_IEs_selectedBandCombination,
+        _CG_Config_IEs_fr_InfoListSCG,
+        _CG_Config_IEs_candidateServingFreqListNR,
+        _CG_Config_IEs_nonCriticalExtension,
+        CG_Config_IEs,
+        _CG_Config_v1540_IEs_pSCellFrequency,
+        ___CG_Config_v1540_IEs_reportCGI_RequestNR_requestedCellInfo_ssbFrequency,
+        ___CG_Config_v1540_IEs_reportCGI_RequestNR_requestedCellInfo_cellForWhichToReportCGI,
+        __CG_Config_v1540_IEs_reportCGI_RequestNR_requestedCellInfo,
+        _CG_Config_v1540_IEs_reportCGI_RequestNR,
+        _CG_Config_v1540_IEs_ph_InfoSCG,
+        _CG_Config_v1540_IEs_nonCriticalExtension,
+        CG_Config_v1540_IEs,
+        _CG_Config_v1560_IEs_pSCellFrequencyEUTRA,
+        _CG_Config_v1560_IEs_scg_CellGroupConfigEUTRA,
+        _CG_Config_v1560_IEs_candidateCellInfoListSN_EUTRA,
+        _CG_Config_v1560_IEs_candidateServingFreqListEUTRA,
+        _CG_Config_v1560_IEs_needForGaps,
+        _CG_Config_v1560_IEs_drx_ConfigSCG,
+        ___CG_Config_v1560_IEs_reportCGI_RequestEUTRA_requestedCellInfoEUTRA_eutraFrequency,
+        ___CG_Config_v1560_IEs_reportCGI_RequestEUTRA_requestedCellInfoEUTRA_cellForWhichToReportCGI_EUTRA,
+        __CG_Config_v1560_IEs_reportCGI_RequestEUTRA_requestedCellInfoEUTRA,
+        _CG_Config_v1560_IEs_reportCGI_RequestEUTRA,
+        _CG_Config_v1560_IEs_nonCriticalExtension,
+        CG_Config_v1560_IEs,
+        __CG_Config_v1590_IEs_scellFrequenciesSN_NR__item_,
+        _CG_Config_v1590_IEs_scellFrequenciesSN_NR,
+        __CG_Config_v1590_IEs_scellFrequenciesSN_EUTRA__item_,
+        _CG_Config_v1590_IEs_scellFrequenciesSN_EUTRA,
+        _CG_Config_v1590_IEs_nonCriticalExtension,
+        CG_Config_v1590_IEs,
+        _CG_Config_v1610_IEs_drx_InfoSCG2,
+        _CG_Config_v1610_IEs_nonCriticalExtension,
+        CG_Config_v1610_IEs,
+        __CG_Config_v1620_IEs_ueAssistanceInformationSCG_r16_contain,
+        _CG_Config_v1620_IEs_ueAssistanceInformationSCG_r16,
+        _CG_Config_v1620_IEs_nonCriticalExtension,
+        CG_Config_v1620_IEs,
+        _CG_Config_v1630_IEs_selectedToffset_r16,
+        _CG_Config_v1630_IEs_nonCriticalExtension,
+        CG_Config_v1630_IEs,
+        _CG_Config_v1640_IEs_servCellInfoListSCG_NR_r16,
+        _CG_Config_v1640_IEs_servCellInfoListSCG_EUTRA_r16,
+        _CG_Config_v1640_IEs_nonCriticalExtension,
+        CG_Config_v1640_IEs,
+        _ServCellInfoListSCG_NR_r16__item_,
+        ServCellInfoListSCG_NR_r16,
+        _ServCellInfoXCG_NR_r16_dl_FreqInfo_NR_r16,
+        _ServCellInfoXCG_NR_r16_ul_FreqInfo_NR_r16,
+        ServCellInfoXCG_NR_r16,
+        _FrequencyConfig_NR_r16_freqBandIndicatorNR_r16,
+        _FrequencyConfig_NR_r16_carrierCenterFreq_NR_r16,
+        _FrequencyConfig_NR_r16_carrierBandwidth_NR_r16,
+        _FrequencyConfig_NR_r16_subcarrierSpacing_NR_r16,
+        FrequencyConfig_NR_r16,
+        _ServCellInfoListSCG_EUTRA_r16__item_,
+        ServCellInfoListSCG_EUTRA_r16,
+        _ServCellInfoXCG_EUTRA_r16_dl_CarrierFreq_EUTRA_r16,
+        _ServCellInfoXCG_EUTRA_r16_ul_CarrierFreq_EUTRA_r16,
+        _ServCellInfoXCG_EUTRA_r16_transmissionBandwidth_EUTRA_r16,
+        ServCellInfoXCG_EUTRA_r16,
+        TransmissionBandwidth_EUTRA_r16,
+        _PH_TypeListSCG__item_,
+        PH_TypeListSCG,
+        _PH_InfoSCG_servCellIndex,
+        _PH_InfoSCG_ph_Uplink,
+        _PH_InfoSCG_ph_SupplementaryUplink,
+        PH_InfoSCG,
+        _PH_UplinkCarrierSCG_ph_Type1or3,
+        PH_UplinkCarrierSCG,
+        __MeasConfigSN_measuredFrequenciesSN__item_,
+        _MeasConfigSN_measuredFrequenciesSN,
+        MeasConfigSN,
+        _NR_FreqInfo_measuredFrequency,
+        NR_FreqInfo,
+        _ConfigRestrictModReqSCG_requestedBC_MRDC,
+        _ConfigRestrictModReqSCG_requestedP_MaxFR1,
+        _ConfigRestrictModReqSCG_requestedPDCCH_BlindDetectionSCG,
+        _ConfigRestrictModReqSCG_requestedP_MaxEUTRA,
+        _ConfigRestrictModReqSCG_requestedP_MaxFR2_r16,
+        _ConfigRestrictModReqSCG_requestedMaxInterFreqMeasIdSCG_r16,
+        _ConfigRestrictModReqSCG_requestedMaxIntraFreqMeasIdSCG_r16,
+        _ConfigRestrictModReqSCG_requestedToffset_r16,
+        ConfigRestrictModReqSCG,
+        BandCombinationIndex,
+        _BandCombinationInfoSN_bandCombinationIndex,
+        _BandCombinationInfoSN_requestedFeatureSets,
+        BandCombinationInfoSN,
+        _FR_InfoList__item_,
+        FR_InfoList,
+        _FR_Info_servCellIndex,
+        _FR_Info_fr_Type,
+        FR_Info,
+        _CandidateServingFreqListNR__item_,
+        CandidateServingFreqListNR,
+        _CandidateServingFreqListEUTRA__item_,
+        CandidateServingFreqListEUTRA,
+        T_Offset_r16,
+        ___CG_ConfigInfo_criticalExtensions_c1_cg_ConfigInfo,
+        ___CG_ConfigInfo_criticalExtensions_c1_spare3,
+        ___CG_ConfigInfo_criticalExtensions_c1_spare2,
+        ___CG_ConfigInfo_criticalExtensions_c1_spare1,
+        __CG_ConfigInfo_criticalExtensions_c1,
+        __CG_ConfigInfo_criticalExtensions_criticalExtensionsFuture,
+        _CG_ConfigInfo_criticalExtensions,
+        CG_ConfigInfo,
+        __CG_ConfigInfo_IEs_ue_CapabilityInfo_contain,
+        _CG_ConfigInfo_IEs_ue_CapabilityInfo,
+        _CG_ConfigInfo_IEs_candidateCellInfoListMN,
+        __CG_ConfigInfo_IEs_candidateCellInfoListSN_contain,
+        _CG_ConfigInfo_IEs_candidateCellInfoListSN,
+        _CG_ConfigInfo_IEs_measResultCellListSFTD_NR,
+        __CG_ConfigInfo_IEs_scgFailureInfo_failureType,
+        ___CG_ConfigInfo_IEs_scgFailureInfo_measResultSCG_contain,
+        __CG_ConfigInfo_IEs_scgFailureInfo_measResultSCG,
+        _CG_ConfigInfo_IEs_scgFailureInfo,
+        _CG_ConfigInfo_IEs_configRestrictInfo,
+        _CG_ConfigInfo_IEs_drx_InfoMCG,
+        _CG_ConfigInfo_IEs_measConfigMN,
+        __CG_ConfigInfo_IEs_sourceConfigSCG_contain,
+        _CG_ConfigInfo_IEs_sourceConfigSCG,
+        __CG_ConfigInfo_IEs_scg_RB_Config_contain,
+        _CG_ConfigInfo_IEs_scg_RB_Config,
+        __CG_ConfigInfo_IEs_mcg_RB_Config_contain,
+        _CG_ConfigInfo_IEs_mcg_RB_Config,
+        _CG_ConfigInfo_IEs_mrdc_AssistanceInfo,
+        _CG_ConfigInfo_IEs_nonCriticalExtension,
+        CG_ConfigInfo_IEs,
+        _CG_ConfigInfo_v1540_IEs_ph_InfoMCG,
+        __CG_ConfigInfo_v1540_IEs_measResultReportCGI_ssbFrequency,
+        __CG_ConfigInfo_v1540_IEs_measResultReportCGI_cellForWhichToReportCGI,
+        __CG_ConfigInfo_v1540_IEs_measResultReportCGI_cgi_Info,
+        _CG_ConfigInfo_v1540_IEs_measResultReportCGI,
+        _CG_ConfigInfo_v1540_IEs_nonCriticalExtension,
+        CG_ConfigInfo_v1540_IEs,
+        _CG_ConfigInfo_v1560_IEs_candidateCellInfoListMN_EUTRA,
+        _CG_ConfigInfo_v1560_IEs_candidateCellInfoListSN_EUTRA,
+        _CG_ConfigInfo_v1560_IEs_sourceConfigSCG_EUTRA,
+        __CG_ConfigInfo_v1560_IEs_scgFailureInfoEUTRA_failureTypeEUTRA,
+        __CG_ConfigInfo_v1560_IEs_scgFailureInfoEUTRA_measResultSCG_EUTRA,
+        _CG_ConfigInfo_v1560_IEs_scgFailureInfoEUTRA,
+        _CG_ConfigInfo_v1560_IEs_drx_ConfigMCG,
+        __CG_ConfigInfo_v1560_IEs_measResultReportCGI_EUTRA_eutraFrequency,
+        __CG_ConfigInfo_v1560_IEs_measResultReportCGI_EUTRA_cellForWhichToReportCGI_EUTRA,
+        __CG_ConfigInfo_v1560_IEs_measResultReportCGI_EUTRA_cgi_InfoEUTRA,
+        _CG_ConfigInfo_v1560_IEs_measResultReportCGI_EUTRA,
+        _CG_ConfigInfo_v1560_IEs_measResultCellListSFTD_EUTRA,
+        _CG_ConfigInfo_v1560_IEs_fr_InfoListMCG,
+        _CG_ConfigInfo_v1560_IEs_nonCriticalExtension,
+        CG_ConfigInfo_v1560_IEs,
+        _CG_ConfigInfo_v1570_IEs_sftdFrequencyList_NR,
+        _CG_ConfigInfo_v1570_IEs_sftdFrequencyList_EUTRA,
+        _CG_ConfigInfo_v1570_IEs_nonCriticalExtension,
+        CG_ConfigInfo_v1570_IEs,
+        __CG_ConfigInfo_v1590_IEs_servFrequenciesMN_NR__item_,
+        _CG_ConfigInfo_v1590_IEs_servFrequenciesMN_NR,
+        _CG_ConfigInfo_v1590_IEs_nonCriticalExtension,
+        CG_ConfigInfo_v1590_IEs,
+        _CG_ConfigInfo_v1610_IEs_drx_InfoMCG2,
+        _CG_ConfigInfo_v1610_IEs_alignedDRX_Indication,
+        __CG_ConfigInfo_v1610_IEs_scgFailureInfo_r16_failureType_r16,
+        ___CG_ConfigInfo_v1610_IEs_scgFailureInfo_r16_measResultSCG_r16_contain,
+        __CG_ConfigInfo_v1610_IEs_scgFailureInfo_r16_measResultSCG_r16,
+        _CG_ConfigInfo_v1610_IEs_scgFailureInfo_r16,
+        __CG_ConfigInfo_v1610_IEs_dummy1_failureTypeEUTRA_r16,
+        __CG_ConfigInfo_v1610_IEs_dummy1_measResultSCG_EUTRA_r16,
+        _CG_ConfigInfo_v1610_IEs_dummy1,
+        __CG_ConfigInfo_v1610_IEs_sidelinkUEInformationNR_r16_contain,
+        _CG_ConfigInfo_v1610_IEs_sidelinkUEInformationNR_r16,
+        _CG_ConfigInfo_v1610_IEs_sidelinkUEInformationEUTRA_r16,
+        _CG_ConfigInfo_v1610_IEs_nonCriticalExtension,
+        CG_ConfigInfo_v1610_IEs,
+        __CG_ConfigInfo_v1620_IEs_ueAssistanceInformationSourceSCG_r16_contain,
+        _CG_ConfigInfo_v1620_IEs_ueAssistanceInformationSourceSCG_r16,
+        _CG_ConfigInfo_v1620_IEs_nonCriticalExtension,
+        CG_ConfigInfo_v1620_IEs,
+        _CG_ConfigInfo_v1640_IEs_servCellInfoListMCG_NR_r16,
+        _CG_ConfigInfo_v1640_IEs_servCellInfoListMCG_EUTRA_r16,
+        _CG_ConfigInfo_v1640_IEs_nonCriticalExtension,
+        CG_ConfigInfo_v1640_IEs,
+        _ServCellInfoListMCG_NR_r16__item_,
+        ServCellInfoListMCG_NR_r16,
+        _ServCellInfoListMCG_EUTRA_r16__item_,
+        ServCellInfoListMCG_EUTRA_r16,
+        _SFTD_FrequencyList_NR__item_,
+        SFTD_FrequencyList_NR,
+        _SFTD_FrequencyList_EUTRA__item_,
+        SFTD_FrequencyList_EUTRA,
+        _ConfigRestrictInfoSCG_allowedBC_ListMRDC,
+        __ConfigRestrictInfoSCG_powerCoordination_FR1_p_maxNR_FR1,
+        __ConfigRestrictInfoSCG_powerCoordination_FR1_p_maxEUTRA,
+        __ConfigRestrictInfoSCG_powerCoordination_FR1_p_maxUE_FR1,
+        _ConfigRestrictInfoSCG_powerCoordination_FR1,
+        __ConfigRestrictInfoSCG_servCellIndexRangeSCG_lowBound,
+        __ConfigRestrictInfoSCG_servCellIndexRangeSCG_upBound,
+        _ConfigRestrictInfoSCG_servCellIndexRangeSCG,
+        _ConfigRestrictInfoSCG_maxMeasFreqsSCG,
+        _ConfigRestrictInfoSCG_dummy,
+        __ConfigRestrictInfoSCG_selectedBandEntriesMNList__item_,
+        _ConfigRestrictInfoSCG_selectedBandEntriesMNList,
+        _ConfigRestrictInfoSCG_pdcch_BlindDetectionSCG,
+        _ConfigRestrictInfoSCG_maxNumberROHC_ContextSessionsSN,
+        _ConfigRestrictInfoSCG_maxIntraFreqMeasIdentitiesSCG,
+        _ConfigRestrictInfoSCG_maxInterFreqMeasIdentitiesSCG,
+        _ConfigRestrictInfoSCG_p_maxNR_FR1_MCG_r16,
+        __ConfigRestrictInfoSCG_powerCoordination_FR2_r16_p_maxNR_FR2_MCG_r16,
+        __ConfigRestrictInfoSCG_powerCoordination_FR2_r16_p_maxNR_FR2_SCG_r16,
+        __ConfigRestrictInfoSCG_powerCoordination_FR2_r16_p_maxUE_FR2_r16,
+        _ConfigRestrictInfoSCG_powerCoordination_FR2_r16,
+        _ConfigRestrictInfoSCG_nrdc_PC_mode_FR1_r16,
+        _ConfigRestrictInfoSCG_nrdc_PC_mode_FR2_r16,
+        _ConfigRestrictInfoSCG_maxMeasSRS_ResourceSCG_r16,
+        _ConfigRestrictInfoSCG_maxMeasCLI_ResourceSCG_r16,
+        _ConfigRestrictInfoSCG_maxNumberEHC_ContextsSN_r16,
+        _ConfigRestrictInfoSCG_allowedReducedConfigForOverheating_r16,
+        _ConfigRestrictInfoSCG_maxToffset_r16,
+        ConfigRestrictInfoSCG,
+        _SelectedBandEntriesMN__item_,
+        SelectedBandEntriesMN,
+        BandEntryIndex,
+        _PH_TypeListMCG__item_,
+        PH_TypeListMCG,
+        _PH_InfoMCG_servCellIndex,
+        _PH_InfoMCG_ph_Uplink,
+        _PH_InfoMCG_ph_SupplementaryUplink,
+        PH_InfoMCG,
+        _PH_UplinkCarrierMCG_ph_Type1or3,
+        PH_UplinkCarrierMCG,
+        _BandCombinationInfoList__item_,
+        BandCombinationInfoList,
+        _BandCombinationInfo_bandCombinationIndex,
+        __BandCombinationInfo_allowedFeatureSetsList__item_,
+        _BandCombinationInfo_allowedFeatureSetsList,
+        BandCombinationInfo,
+        FeatureSetEntryIndex,
+        __DRX_Info_drx_LongCycleStartOffset_ms10,
+        __DRX_Info_drx_LongCycleStartOffset_ms20,
+        __DRX_Info_drx_LongCycleStartOffset_ms32,
+        __DRX_Info_drx_LongCycleStartOffset_ms40,
+        __DRX_Info_drx_LongCycleStartOffset_ms60,
+        __DRX_Info_drx_LongCycleStartOffset_ms64,
+        __DRX_Info_drx_LongCycleStartOffset_ms70,
+        __DRX_Info_drx_LongCycleStartOffset_ms80,
+        __DRX_Info_drx_LongCycleStartOffset_ms128,
+        __DRX_Info_drx_LongCycleStartOffset_ms160,
+        __DRX_Info_drx_LongCycleStartOffset_ms256,
+        __DRX_Info_drx_LongCycleStartOffset_ms320,
+        __DRX_Info_drx_LongCycleStartOffset_ms512,
+        __DRX_Info_drx_LongCycleStartOffset_ms640,
+        __DRX_Info_drx_LongCycleStartOffset_ms1024,
+        __DRX_Info_drx_LongCycleStartOffset_ms1280,
+        __DRX_Info_drx_LongCycleStartOffset_ms2048,
+        __DRX_Info_drx_LongCycleStartOffset_ms2560,
+        __DRX_Info_drx_LongCycleStartOffset_ms5120,
+        __DRX_Info_drx_LongCycleStartOffset_ms10240,
+        _DRX_Info_drx_LongCycleStartOffset,
+        __DRX_Info_shortDRX_drx_ShortCycle,
+        __DRX_Info_shortDRX_drx_ShortCycleTimer,
+        _DRX_Info_shortDRX,
+        DRX_Info,
+        __DRX_Info2_drx_onDurationTimer_subMilliSeconds,
+        __DRX_Info2_drx_onDurationTimer_milliSeconds,
+        _DRX_Info2_drx_onDurationTimer,
+        DRX_Info2,
+        __MeasConfigMN_measuredFrequenciesMN__item_,
+        _MeasConfigMN_measuredFrequenciesMN,
+        __MeasConfigMN_measGapConfig_release,
+        __MeasConfigMN_measGapConfig_setup,
+        _MeasConfigMN_measGapConfig,
+        _MeasConfigMN_gapPurpose,
+        __MeasConfigMN_measGapConfigFR2_release,
+        __MeasConfigMN_measGapConfigFR2_setup,
+        _MeasConfigMN_measGapConfigFR2,
+        MeasConfigMN,
+        __MRDC_AssistanceInfo_affectedCarrierFreqCombInfoListMRDC__item_,
+        _MRDC_AssistanceInfo_affectedCarrierFreqCombInfoListMRDC,
+        __MRDC_AssistanceInfo_overheatingAssistanceSCG_r16_contain,
+        _MRDC_AssistanceInfo_overheatingAssistanceSCG_r16,
+        MRDC_AssistanceInfo,
+        _AffectedCarrierFreqCombInfoMRDC_victimSystemType,
+        _AffectedCarrierFreqCombInfoMRDC_interferenceDirectionMRDC,
+        __AffectedCarrierFreqCombInfoMRDC_affectedCarrierFreqCombMRDC_affectedCarrierFreqCombEUTRA,
+        __AffectedCarrierFreqCombInfoMRDC_affectedCarrierFreqCombMRDC_affectedCarrierFreqCombNR,
+        _AffectedCarrierFreqCombInfoMRDC_affectedCarrierFreqCombMRDC,
+        AffectedCarrierFreqCombInfoMRDC,
+        _VictimSystemType_gps,
+        _VictimSystemType_glonass,
+        _VictimSystemType_bds,
+        _VictimSystemType_galileo,
+        _VictimSystemType_wlan,
+        _VictimSystemType_bluetooth,
+        VictimSystemType,
+        _AffectedCarrierFreqCombEUTRA__item_,
+        AffectedCarrierFreqCombEUTRA,
+        _AffectedCarrierFreqCombNR__item_,
+        AffectedCarrierFreqCombNR,
+        ___MeasurementTimingConfiguration_criticalExtensions_c1_measTimingConf,
+        ___MeasurementTimingConfiguration_criticalExtensions_c1_spare3,
+        ___MeasurementTimingConfiguration_criticalExtensions_c1_spare2,
+        ___MeasurementTimingConfiguration_criticalExtensions_c1_spare1,
+        __MeasurementTimingConfiguration_criticalExtensions_c1,
+        __MeasurementTimingConfiguration_criticalExtensions_criticalExtensionsFuture,
+        _MeasurementTimingConfiguration_criticalExtensions,
+        MeasurementTimingConfiguration,
+        _MeasurementTimingConfiguration_IEs_measTiming,
+        _MeasurementTimingConfiguration_IEs_nonCriticalExtension,
+        MeasurementTimingConfiguration_IEs,
+        _MeasurementTimingConfiguration_v1550_IEs_campOnFirstSSB,
+        _MeasurementTimingConfiguration_v1550_IEs_psCellOnlyOnFirstSSB,
+        _MeasurementTimingConfiguration_v1550_IEs_nonCriticalExtension,
+        MeasurementTimingConfiguration_v1550_IEs,
+        __MeasurementTimingConfiguration_v1610_IEs_csi_RS_Config_r16_csi_RS_SubcarrierSpacing_r16,
+        __MeasurementTimingConfiguration_v1610_IEs_csi_RS_Config_r16_csi_RS_CellMobility_r16,
+        __MeasurementTimingConfiguration_v1610_IEs_csi_RS_Config_r16_refSSBFreq_r16,
+        _MeasurementTimingConfiguration_v1610_IEs_csi_RS_Config_r16,
+        _MeasurementTimingConfiguration_v1610_IEs_nonCriticalExtension,
+        MeasurementTimingConfiguration_v1610_IEs,
+        _MeasTimingList__item_,
+        MeasTimingList,
+        __MeasTiming_frequencyAndTiming_carrierFreq,
+        __MeasTiming_frequencyAndTiming_ssbSubcarrierSpacing,
+        __MeasTiming_frequencyAndTiming_ssb_MeasurementTimingConfiguration,
+        __MeasTiming_frequencyAndTiming_ss_RSSI_Measurement,
+        _MeasTiming_frequencyAndTiming,
+        _MeasTiming_ssb_ToMeasure,
+        _MeasTiming_physCellId,
+        MeasTiming,
+        ___UERadioPagingInformation_criticalExtensions_c1_ueRadioPagingInformation,
+        ___UERadioPagingInformation_criticalExtensions_c1_spare7,
+        ___UERadioPagingInformation_criticalExtensions_c1_spare6,
+        ___UERadioPagingInformation_criticalExtensions_c1_spare5,
+        ___UERadioPagingInformation_criticalExtensions_c1_spare4,
+        ___UERadioPagingInformation_criticalExtensions_c1_spare3,
+        ___UERadioPagingInformation_criticalExtensions_c1_spare2,
+        ___UERadioPagingInformation_criticalExtensions_c1_spare1,
+        __UERadioPagingInformation_criticalExtensions_c1,
+        __UERadioPagingInformation_criticalExtensions_criticalExtensionsFuture,
+        _UERadioPagingInformation_criticalExtensions,
+        UERadioPagingInformation,
+        __UERadioPagingInformation_IEs_supportedBandListNRForPaging__item_,
+        _UERadioPagingInformation_IEs_supportedBandListNRForPaging,
+        _UERadioPagingInformation_IEs_nonCriticalExtension,
+        UERadioPagingInformation_IEs,
+        _UERadioPagingInformation_v15e0_IEs_dl_SchedulingOffset_PDSCH_TypeA_FDD_FR1,
+        _UERadioPagingInformation_v15e0_IEs_dl_SchedulingOffset_PDSCH_TypeA_TDD_FR1,
+        _UERadioPagingInformation_v15e0_IEs_dl_SchedulingOffset_PDSCH_TypeA_TDD_FR2,
+        _UERadioPagingInformation_v15e0_IEs_dl_SchedulingOffset_PDSCH_TypeB_FDD_FR1,
+        _UERadioPagingInformation_v15e0_IEs_dl_SchedulingOffset_PDSCH_TypeB_TDD_FR1,
+        _UERadioPagingInformation_v15e0_IEs_dl_SchedulingOffset_PDSCH_TypeB_TDD_FR2,
+        _UERadioPagingInformation_v15e0_IEs_nonCriticalExtension,
+        UERadioPagingInformation_v15e0_IEs,
+        ___UERadioAccessCapabilityInformation_criticalExtensions_c1_ueRadioAccessCapabilityInformation,
+        ___UERadioAccessCapabilityInformation_criticalExtensions_c1_spare7,
+        ___UERadioAccessCapabilityInformation_criticalExtensions_c1_spare6,
+        ___UERadioAccessCapabilityInformation_criticalExtensions_c1_spare5,
+        ___UERadioAccessCapabilityInformation_criticalExtensions_c1_spare4,
+        ___UERadioAccessCapabilityInformation_criticalExtensions_c1_spare3,
+        ___UERadioAccessCapabilityInformation_criticalExtensions_c1_spare2,
+        ___UERadioAccessCapabilityInformation_criticalExtensions_c1_spare1,
+        __UERadioAccessCapabilityInformation_criticalExtensions_c1,
+        __UERadioAccessCapabilityInformation_criticalExtensions_criticalExtensionsFuture,
+        _UERadioAccessCapabilityInformation_criticalExtensions,
+        UERadioAccessCapabilityInformation,
+        __UERadioAccessCapabilityInformation_IEs_ue_RadioAccessCapabilityInfo_contain,
+        _UERadioAccessCapabilityInformation_IEs_ue_RadioAccessCapabilityInfo,
+        _UERadioAccessCapabilityInformation_IEs_nonCriticalExtension,
+        UERadioAccessCapabilityInformation_IEs,
+        maxMeasFreqsMN,
+        maxMeasFreqsSN,
+        maxMeasIdentitiesMN,
+        maxCellPrep,
+    ]
+
 class NR_RRC_Definitions:
 
     _name_  = u'NR-RRC-Definitions'
@@ -245,9 +2361,11 @@ class NR_RRC_Definitions:
         u'RA-Report-r16',
         u'RA-InformationCommon-r16',
         u'PerRAInfoList-r16',
+        u'PerRAInfoListExt-v1660',
         u'PerRAInfo-r16',
         u'PerRASSBInfo-r16',
         u'PerRACSI-RSInfo-r16',
+        u'PerRACSI-RSInfoExt-v1660',
         u'PerRAAttemptInfoList-r16',
         u'PerRAAttemptInfo-r16',
         u'RLF-Report-r16',
@@ -1356,7 +3474,7 @@ class NR_RRC_Definitions:
         u'SL-ZoneConfig-r16',
         u'SLRB-Uu-ConfigIndex-r16',
         u'maxAI-DCI-PayloadSize-r16',
-        u'maxAI-DCI-PayloadSize-r16-1',
+        u'maxAI-DCI-PayloadSize-1-r16',
         u'maxBandComb',
         u'maxBandsUTRA-FDD-r16',
         u'maxBH-RLC-ChannelID-r16',
@@ -1391,11 +3509,11 @@ class NR_RRC_Definitions:
         u'maxNrofAggregatedCellsPerCellGroupMinus4-r16',
         u'maxNrofDUCells-r16',
         u'maxNrofAvailabilityCombinationsPerSet-r16',
-        u'maxNrofAvailabilityCombinationsPerSet-r16-1',
+        u'maxNrofAvailabilityCombinationsPerSet-1-r16',
         u'maxNrofSCells',
         u'maxNrofCellMeas',
         u'maxNrofCG-SL-r16',
-        u'maxNrofCG-SL-r16-1',
+        u'maxNrofCG-SL-1-r16',
         u'maxNrofSS-BlocksToAverage',
         u'maxNrofCondCells-r16',
         u'maxNrofCSI-RS-ResourcesToAverage',
@@ -1607,7 +3725,7 @@ class NR_RRC_Definitions:
         u'maxOnDemandSIB-r16',
         u'maxOnDemandPosSIB-r16',
         u'maxCI-DCI-PayloadSize-r16',
-        u'maxCI-DCI-PayloadSize-r16-1',
+        u'maxCI-DCI-PayloadSize-1-r16',
         u'maxWLAN-Id-Report-r16',
         u'maxWLAN-Name-r16',
         u'maxRAReport-r16',
@@ -1615,16 +3733,15 @@ class NR_RRC_Definitions:
         u'maxTxConfig-1-r16',
         u'maxPSSCH-TxConfig-r16',
         u'maxNrofCLI-RSSI-Resources-r16',
-        u'maxNrofCLI-RSSI-Resources-r16-1',
+        u'maxNrofCLI-RSSI-Resources-1-r16',
         u'maxNrofCLI-SRS-Resources-r16',
         u'maxCLI-Report-r16',
         u'maxNrofConfiguredGrantConfig-r16',
-        u'maxNrofConfiguredGrantConfig-r16-1',
+        u'maxNrofConfiguredGrantConfig-1-r16',
         u'maxNrofCG-Type2DeactivationState',
-        u'maxNrofConfiguredGrantConfigMAC-r16',
-        u'maxNrofConfiguredGrantConfigMAC-r16-1',
+        u'maxNrofConfiguredGrantConfigMAC-1-r16',
         u'maxNrofSPS-Config-r16',
-        u'maxNrofSPS-Config-r16-1',
+        u'maxNrofSPS-Config-1-r16',
         u'maxNrofSPS-DeactivationState',
         u'maxNrofDormancyGroups',
         u'maxNrofPUCCH-ResourceGroups-1-r16',
@@ -1857,5349 +3974,11 @@ class NR_RRC_Definitions:
         u'RA-Report-r16',
         u'RA-InformationCommon-r16',
         u'PerRAInfoList-r16',
+        u'PerRAInfoListExt-v1660',
         u'PerRAInfo-r16',
         u'PerRASSBInfo-r16',
         u'PerRACSI-RSInfo-r16',
-        u'PerRAAttemptInfoList-r16',
-        u'PerRAAttemptInfo-r16',
-        u'RLF-Report-r16',
-        u'MeasResultList2NR-r16',
-        u'MeasResultList2EUTRA-r16',
-        u'MeasResult2NR-r16',
-        u'MeasResultListLogging2NR-r16',
-        u'MeasResultLogging2NR-r16',
-        u'MeasResultListLoggingNR-r16',
-        u'MeasResultLoggingNR-r16',
-        u'MeasResult2EUTRA-r16',
-        u'MeasResultRLFNR-r16',
-        u'TimeSinceFailure-r16',
-        u'MobilityHistoryReport-r16',
-        u'TimeUntilReconnection-r16',
-        u'ULDedicatedMessageSegment-r16',
-        u'ULDedicatedMessageSegment-r16-IEs',
-        u'ULInformationTransfer',
-        u'ULInformationTransfer-IEs',
-        u'ULInformationTransferIRAT-r16',
-        u'ULInformationTransferIRAT-r16-IEs',
-        u'ULInformationTransferMRDC',
-        u'ULInformationTransferMRDC-IEs',
-        u'SetupRelease',
-        u'SIB2',
-        u'RangeToBestCell',
-        u'SIB3',
-        u'IntraFreqNeighCellList',
-        u'IntraFreqNeighCellList-v1610',
-        u'IntraFreqNeighCellInfo',
-        u'IntraFreqNeighCellInfo-v1610',
-        u'IntraFreqBlackCellList',
-        u'IntraFreqWhiteCellList-r16',
-        u'IntraFreqCAG-CellListPerPLMN-r16',
-        u'SIB4',
-        u'InterFreqCarrierFreqList',
-        u'InterFreqCarrierFreqList-v1610',
-        u'InterFreqCarrierFreqInfo',
-        u'InterFreqCarrierFreqInfo-v1610',
-        u'InterFreqNeighCellList',
-        u'InterFreqNeighCellList-v1610',
-        u'InterFreqNeighCellInfo',
-        u'InterFreqNeighCellInfo-v1610',
-        u'InterFreqBlackCellList',
-        u'InterFreqWhiteCellList-r16',
-        u'InterFreqCAG-CellListPerPLMN-r16',
-        u'SIB5',
-        u'CarrierFreqListEUTRA',
-        u'CarrierFreqListEUTRA-v1610',
-        u'CarrierFreqEUTRA',
-        u'CarrierFreqEUTRA-v1610',
-        u'EUTRA-FreqBlackCellList',
-        u'EUTRA-FreqNeighCellList',
-        u'EUTRA-FreqNeighCellInfo',
-        u'SIB6',
-        u'SIB7',
-        u'SIB8',
-        u'SIB9',
-        u'SIB10-r16',
-        u'HRNN-List-r16',
-        u'HRNN-r16',
-        u'SIB11-r16',
-        u'SIB12-r16',
-        u'SIB12-IEs-r16',
-        u'SL-ConfigCommonNR-r16',
-        u'SL-NR-AnchorCarrierFreqList-r16',
-        u'SL-EUTRA-AnchorCarrierFreqList-r16',
-        u'SIB13-r16',
-        u'SIB14-r16',
-        u'PosSystemInformation-r16-IEs',
-        u'PosSI-SchedulingInfo-r16',
-        u'PosSchedulingInfo-r16',
-        u'PosSIB-MappingInfo-r16',
-        u'PosSIB-Type-r16',
-        u'GNSS-ID-r16',
-        u'SBAS-ID-r16',
-        u'SIBpos-r16',
-        u'AdditionalSpectrumEmission',
-        u'Alpha',
-        u'AMF-Identifier',
-        u'ARFCN-ValueEUTRA',
-        u'ARFCN-ValueNR',
-        u'ARFCN-ValueUTRA-FDD-r16',
-        u'AvailabilityCombinationsPerCell-r16',
-        u'AvailabilityCombinationsPerCellIndex-r16',
-        u'AvailabilityCombination-r16',
-        u'AvailabilityCombinationId-r16',
-        u'AvailabilityIndicator-r16',
-        u'AI-RNTI-r16',
-        u'BAP-RoutingID-r16',
-        u'BeamFailureRecoveryConfig',
-        u'PRACH-ResourceDedicatedBFR',
-        u'BFR-SSB-Resource',
-        u'BFR-CSIRS-Resource',
-        u'CandidateBeamRSListExt-r16',
-        u'BeamFailureRecoverySCellConfig-r16',
-        u'CandidateBeamRS-r16',
-        u'BetaOffsets',
-        u'BH-LogicalChannelIdentity-r16',
-        u'BH-LogicalChannelIdentity-Ext-r16',
-        u'BH-RLC-ChannelConfig-r16',
-        u'BH-RLC-ChannelID-r16',
-        u'BSR-Config',
-        u'BWP',
-        u'BWP-Downlink',
-        u'BWP-DownlinkCommon',
-        u'BWP-DownlinkDedicated',
-        u'SPS-ConfigToAddModList-r16',
-        u'SPS-ConfigToReleaseList-r16',
-        u'SPS-ConfigDeactivationState-r16',
-        u'SPS-ConfigDeactivationStateList-r16',
-        u'BWP-Id',
-        u'BWP-Uplink',
-        u'BWP-UplinkCommon',
-        u'BWP-UplinkDedicated',
-        u'ConfiguredGrantConfigToAddModList-r16',
-        u'ConfiguredGrantConfigToReleaseList-r16',
-        u'ConfiguredGrantConfigType2DeactivationState-r16',
-        u'ConfiguredGrantConfigType2DeactivationStateList-r16',
-        u'CellAccessRelatedInfo',
-        u'CellAccessRelatedInfo-EUTRA-5GC',
-        u'PLMN-IdentityList-EUTRA-5GC',
-        u'PLMN-Identity-EUTRA-5GC',
-        u'CellIdentity-EUTRA-5GC',
-        u'CellAccessRelatedInfo-EUTRA-EPC',
-        u'PLMN-IdentityList-EUTRA-EPC',
-        u'CellGroupConfig',
-        u'SpCellConfig',
-        u'ReconfigurationWithSync',
-        u'DAPS-UplinkPowerConfig-r16',
-        u'SCellConfig',
-        u'CellGroupId',
-        u'CellIdentity',
-        u'CellReselectionPriority',
-        u'CellReselectionSubPriority',
-        u'CGI-InfoEUTRA',
-        u'CGI-InfoEUTRALogging',
-        u'CGI-InfoNR',
-        u'CGI-Info-Logging-r16',
-        u'CLI-RSSI-Range-r16',
-        u'CodebookConfig',
-        u'CodebookConfig-r16',
-        u'CommonLocationInfo-r16',
-        u'CondReconfigId-r16',
-        u'CondReconfigToAddModList-r16',
-        u'CondReconfigToAddMod-r16',
-        u'ConditionalReconfiguration-r16',
-        u'CondReconfigToRemoveList-r16',
-        u'ConfiguredGrantConfig',
-        u'CG-UCI-OnPUSCH',
-        u'CG-COT-Sharing-r16',
-        u'CG-StartingOffsets-r16',
-        u'ConfiguredGrantConfigIndex-r16',
-        u'ConfiguredGrantConfigIndexMAC-r16',
-        u'ConnEstFailureControl',
-        u'ControlResourceSet',
-        u'ControlResourceSetId',
-        u'ControlResourceSetId-r16',
-        u'ControlResourceSetId-v1610',
-        u'ControlResourceSetZero',
-        u'CrossCarrierSchedulingConfig',
-        u'CSI-AperiodicTriggerStateList',
-        u'CSI-AperiodicTriggerState',
-        u'CSI-AssociatedReportConfigInfo',
-        u'CSI-FrequencyOccupation',
-        u'CSI-IM-Resource',
-        u'CSI-IM-ResourceId',
-        u'CSI-IM-ResourceSet',
-        u'CSI-IM-ResourceSetId',
-        u'CSI-MeasConfig',
-        u'CSI-ReportConfig',
-        u'CSI-ReportPeriodicityAndOffset',
-        u'PUCCH-CSI-Resource',
-        u'PortIndexFor8Ranks',
-        u'PortIndex8',
-        u'PortIndex4',
-        u'PortIndex2',
-        u'CSI-ReportConfigId',
-        u'CSI-ResourceConfig',
-        u'CSI-ResourceConfigId',
-        u'CSI-ResourcePeriodicityAndOffset',
-        u'CSI-RS-ResourceConfigMobility',
-        u'CSI-RS-CellMobility',
-        u'CSI-RS-Resource-Mobility',
-        u'CSI-RS-Index',
-        u'CSI-RS-ResourceMapping',
-        u'CSI-SemiPersistentOnPUSCH-TriggerStateList',
-        u'CSI-SemiPersistentOnPUSCH-TriggerState',
-        u'CSI-SSB-ResourceSet',
-        u'CSI-SSB-ResourceSetId',
-        u'DedicatedNAS-Message',
-        u'DMRS-DownlinkConfig',
-        u'DMRS-UplinkConfig',
-        u'DMRS-UplinkTransformPrecoding-r16',
-        u'DownlinkConfigCommon',
-        u'DownlinkConfigCommonSIB',
-        u'BCCH-Config',
-        u'PCCH-Config',
-        u'DownlinkPreemption',
-        u'INT-ConfigurationPerServingCell',
-        u'DRB-Identity',
-        u'DRX-Config',
-        u'DRX-ConfigSecondaryGroup',
-        u'FilterCoefficient',
-        u'FreqBandIndicatorNR',
-        u'FrequencyInfoDL',
-        u'FrequencyInfoDL-SIB',
-        u'FrequencyInfoUL',
-        u'FrequencyInfoUL-SIB',
-        u'HighSpeedConfig-r16',
-        u'Hysteresis',
-        u'InvalidSymbolPattern-r16',
-        u'I-RNTI-Value',
-        u'LBT-FailureRecoveryConfig-r16',
-        u'LocationInfo-r16',
-        u'LocationMeasurementInfo',
-        u'EUTRA-RSTD-InfoList',
-        u'EUTRA-RSTD-Info',
-        u'NR-PRS-MeasurementInfoList-r16',
-        u'NR-PRS-MeasurementInfo-r16',
-        u'LogicalChannelConfig',
-        u'LogicalChannelIdentity',
-        u'MAC-CellGroupConfig',
-        u'DataInactivityTimer',
-        u'MeasConfig',
-        u'MeasObjectToRemoveList',
-        u'MeasIdToRemoveList',
-        u'ReportConfigToRemoveList',
-        u'MeasGapConfig',
-        u'GapConfig',
-        u'MeasGapSharingConfig',
-        u'MeasGapSharingScheme',
-        u'MeasId',
-        u'MeasIdleConfigSIB-r16',
-        u'MeasIdleConfigDedicated-r16',
-        u'ValidityAreaList-r16',
-        u'ValidityArea-r16',
-        u'ValidityCellList',
-        u'MeasIdleCarrierNR-r16',
-        u'MeasIdleCarrierEUTRA-r16',
-        u'CellListNR-r16',
-        u'CellListEUTRA-r16',
-        u'BeamMeasConfigIdle-NR-r16',
-        u'RSRQ-RangeEUTRA-r16',
-        u'MeasIdToAddModList',
-        u'MeasIdToAddMod',
-        u'MeasObjectCLI-r16',
-        u'CLI-ResourceConfig-r16',
-        u'SRS-ResourceListConfigCLI-r16',
-        u'RSSI-ResourceListConfigCLI-r16',
-        u'SRS-ResourceConfigCLI-r16',
-        u'RSSI-ResourceConfigCLI-r16',
-        u'RSSI-ResourceId-r16',
-        u'RSSI-PeriodicityAndOffset-r16',
-        u'MeasObjectEUTRA',
-        u'EUTRA-CellIndexList',
-        u'EUTRA-CellIndex',
-        u'EUTRA-Cell',
-        u'EUTRA-BlackCell',
-        u'MeasObjectId',
-        u'MeasObjectNR',
-        u'SSB-MTC3List-r16',
-        u'T312-r16',
-        u'ReferenceSignalConfig',
-        u'SSB-ConfigMobility',
-        u'Q-OffsetRangeList',
-        u'ThresholdNR',
-        u'CellsToAddModList',
-        u'CellsToAddMod',
-        u'RMTC-Config-r16',
-        u'SSB-PositionQCL-CellsToAddModList-r16',
-        u'SSB-PositionQCL-CellsToAddMod-r16',
-        u'MeasObjectNR-SL-r16',
-        u'Tx-PoolMeasList-r16',
-        u'MeasObjectToAddModList',
-        u'MeasObjectToAddMod',
-        u'MeasObjectUTRA-FDD-r16',
-        u'CellsToAddModListUTRA-FDD-r16',
-        u'CellsToAddModUTRA-FDD-r16',
-        u'UTRA-FDD-CellIndexList-r16',
-        u'UTRA-FDD-CellIndex-r16',
-        u'MeasResultCellListSFTD-NR',
-        u'MeasResultCellSFTD-NR',
-        u'MeasResultCellListSFTD-EUTRA',
-        u'MeasResultSFTD-EUTRA',
-        u'MeasResults',
-        u'MeasResultServMOList',
-        u'MeasResultServMO',
-        u'MeasResultListNR',
-        u'MeasResultNR',
-        u'MeasResultListEUTRA',
-        u'MeasResultEUTRA',
-        u'MultiBandInfoListEUTRA',
-        u'MeasQuantityResults',
-        u'MeasQuantityResultsEUTRA',
-        u'ResultsPerSSB-IndexList',
-        u'ResultsPerSSB-Index',
-        u'ResultsPerCSI-RS-IndexList',
-        u'ResultsPerCSI-RS-Index',
-        u'MeasResultServFreqListEUTRA-SCG',
-        u'MeasResultServFreqListNR-SCG',
-        u'MeasResultListUTRA-FDD-r16',
-        u'MeasResultUTRA-FDD-r16',
-        u'MeasResultForRSSI-r16',
-        u'MeasResultCLI-r16',
-        u'MeasResultListSRS-RSRP-r16',
-        u'MeasResultSRS-RSRP-r16',
-        u'MeasResultListCLI-RSSI-r16',
-        u'MeasResultCLI-RSSI-r16',
-        u'UL-PDCP-DelayValueResultList-r16',
-        u'UL-PDCP-DelayValueResult-r16',
-        u'MeasResult2EUTRA',
-        u'MeasResult2NR',
-        u'MeasResultIdleEUTRA-r16',
-        u'MeasResultsPerCarrierIdleEUTRA-r16',
-        u'MeasResultsPerCellIdleEUTRA-r16',
-        u'MeasResultIdleNR-r16',
-        u'MeasResultsPerCarrierIdleNR-r16',
-        u'MeasResultsPerCellIdleNR-r16',
-        u'ResultsPerSSB-IndexList-r16',
-        u'ResultsPerSSB-IndexIdle-r16',
-        u'MeasResultSCG-Failure',
-        u'MeasResultList2NR',
-        u'MeasResultsSL-r16',
-        u'MeasResultNR-SL-r16',
-        u'MeasResultCBR-NR-r16',
-        u'MeasTriggerQuantityEUTRA',
-        u'RSRP-RangeEUTRA',
-        u'RSRQ-RangeEUTRA',
-        u'SINR-RangeEUTRA',
-        u'MobilityStateParameters',
-        u'MsgA-ConfigCommon-r16',
-        u'MsgA-PUSCH-Config-r16',
-        u'MsgA-PUSCH-Resource-r16',
-        u'MsgA-DMRS-Config-r16',
-        u'MultiFrequencyBandListNR',
-        u'MultiFrequencyBandListNR-SIB',
-        u'NR-MultiBandInfo',
-        u'NeedForGapsConfigNR-r16',
-        u'NeedForGapsInfoNR-r16',
-        u'NeedForGapsIntraFreqlist-r16',
-        u'NeedForGapsBandlistNR-r16',
-        u'NeedForGapsIntraFreq-r16',
-        u'NeedForGapsNR-r16',
-        u'NextHopChainingCount',
-        u'NG-5G-S-TMSI',
-        u'NPN-Identity-r16',
-        u'CAG-IdentityInfo-r16',
-        u'NID-r16',
-        u'NPN-IdentityInfoList-r16',
-        u'NPN-IdentityInfo-r16',
-        u'NR-NS-PmaxList',
-        u'NR-NS-PmaxValue',
-        u'NZP-CSI-RS-Resource',
-        u'NZP-CSI-RS-ResourceId',
-        u'NZP-CSI-RS-ResourceSet',
-        u'NZP-CSI-RS-ResourceSetId',
-        u'P-Max',
-        u'PCI-List',
-        u'PCI-Range',
-        u'PCI-RangeElement',
-        u'PCI-RangeIndex',
-        u'PCI-RangeIndexList',
-        u'PDCCH-Config',
-        u'SearchSpaceSwitchConfig-r16',
-        u'CellGroupForSwitch-r16',
-        u'PDCCH-ConfigCommon',
-        u'PDCCH-ConfigSIB1',
-        u'PDCCH-ServingCellConfig',
-        u'PDCP-Config',
-        u'EthernetHeaderCompression-r16',
-        u'UL-DataSplitThreshold',
-        u'DiscardTimerExt-r16',
-        u'PDSCH-Config',
-        u'RateMatchPatternGroup',
-        u'MinSchedulingOffsetK0-Values-r16',
-        u'MaxMIMO-LayersDL-r16',
-        u'PDSCH-ConfigCommon',
-        u'PDSCH-ServingCellConfig',
-        u'PDSCH-CodeBlockGroupTransmission',
-        u'PDSCH-CodeBlockGroupTransmissionList-r16',
-        u'PDSCH-TimeDomainResourceAllocationList',
-        u'PDSCH-TimeDomainResourceAllocation',
-        u'PDSCH-TimeDomainResourceAllocationList-r16',
-        u'PDSCH-TimeDomainResourceAllocation-r16',
-        u'PHR-Config',
-        u'MPE-Config-FR2-r16',
-        u'PhysCellId',
-        u'PhysicalCellGroupConfig',
-        u'PDCCH-BlindDetection',
-        u'DCP-Config-r16',
-        u'PDSCH-HARQ-ACK-CodebookList-r16',
-        u'PDCCH-BlindDetectionCA-CombIndicator-r16',
-        u'PDCCH-BlindDetection2-r16',
-        u'PDCCH-BlindDetection3-r16',
-        u'PLMN-Identity',
-        u'MCC',
-        u'MNC',
-        u'MCC-MNC-Digit',
-        u'PLMN-IdentityInfoList',
-        u'PLMN-IdentityInfo',
-        u'PLMN-IdentityList2-r16',
-        u'PRB-Id',
-        u'PTRS-DownlinkConfig',
-        u'PTRS-UplinkConfig',
-        u'PUCCH-Config',
-        u'PUCCH-FormatConfig',
-        u'PUCCH-MaxCodeRate',
-        u'PUCCH-ResourceSet',
-        u'PUCCH-ResourceSetId',
-        u'PUCCH-Resource',
-        u'PUCCH-ResourceExt-r16',
-        u'PUCCH-ResourceId',
-        u'PUCCH-format0',
-        u'PUCCH-format1',
-        u'PUCCH-format2',
-        u'PUCCH-format3',
-        u'PUCCH-format4',
-        u'PUCCH-ResourceGroup-r16',
-        u'PUCCH-ResourceGroupId-r16',
-        u'DL-DataToUL-ACK-r16',
-        u'DL-DataToUL-ACK-DCI-1-2-r16',
-        u'UL-AccessConfigListDCI-1-1-r16',
-        u'PUCCH-ConfigCommon',
-        u'PUCCH-ConfigurationList-r16',
-        u'PUCCH-PathlossReferenceRS-Id',
-        u'PUCCH-PathlossReferenceRS-Id-v1610',
-        u'PUCCH-PowerControl',
-        u'P0-PUCCH',
-        u'P0-PUCCH-Id',
-        u'PathlossReferenceRSs-v1610',
-        u'PUCCH-PathlossReferenceRS',
-        u'PUCCH-PathlossReferenceRS-r16',
-        u'PUCCH-SpatialRelationInfo',
-        u'PUCCH-SpatialRelationInfoExt-r16',
-        u'PUCCH-SRS',
-        u'PUCCH-SpatialRelationInfoId',
-        u'PUCCH-SpatialRelationInfoId-r16',
-        u'PUCCH-SpatialRelationInfoId-v1610',
-        u'PUCCH-TPC-CommandConfig',
-        u'PUSCH-Config',
-        u'UCI-OnPUSCH',
-        u'MinSchedulingOffsetK2-Values-r16',
-        u'UCI-OnPUSCH-DCI-0-2-r16',
-        u'FrequencyHoppingOffsetListsDCI-0-2-r16',
-        u'UCI-OnPUSCH-ListDCI-0-2-r16',
-        u'UCI-OnPUSCH-ListDCI-0-1-r16',
-        u'UL-AccessConfigListDCI-0-1-r16',
-        u'PUSCH-ConfigCommon',
-        u'PUSCH-PowerControl',
-        u'P0-PUSCH-AlphaSet',
-        u'P0-PUSCH-AlphaSetId',
-        u'PUSCH-PathlossReferenceRS',
-        u'PUSCH-PathlossReferenceRS-r16',
-        u'PUSCH-PathlossReferenceRS-Id',
-        u'PUSCH-PathlossReferenceRS-Id-v1610',
-        u'SRI-PUSCH-PowerControl',
-        u'SRI-PUSCH-PowerControlId',
-        u'PUSCH-PowerControl-v1610',
-        u'P0-PUSCH-Set-r16',
-        u'P0-PUSCH-SetId-r16',
-        u'P0-PUSCH-r16',
-        u'PUSCH-ServingCellConfig',
-        u'PUSCH-CodeBlockGroupTransmission',
-        u'MaxMIMO-LayersDCI-0-2-r16',
-        u'PUSCH-TimeDomainResourceAllocationList',
-        u'PUSCH-TimeDomainResourceAllocation',
-        u'PUSCH-TimeDomainResourceAllocationList-r16',
-        u'PUSCH-TimeDomainResourceAllocation-r16',
-        u'PUSCH-Allocation-r16',
-        u'PUSCH-TPC-CommandConfig',
-        u'Q-OffsetRange',
-        u'Q-QualMin',
-        u'Q-RxLevMin',
-        u'QuantityConfig',
-        u'QuantityConfigNR',
-        u'QuantityConfigRS',
-        u'FilterConfig',
-        u'FilterConfigCLI-r16',
-        u'QuantityConfigUTRA-FDD-r16',
-        u'RACH-ConfigCommon',
-        u'RACH-ConfigCommonTwoStepRA-r16',
-        u'GroupB-ConfiguredTwoStepRA-r16',
-        u'RACH-ConfigDedicated',
-        u'CFRA',
-        u'CFRA-TwoStep-r16',
-        u'CFRA-SSB-Resource',
-        u'CFRA-CSIRS-Resource',
-        u'RACH-ConfigGeneric',
-        u'RACH-ConfigGenericTwoStepRA-r16',
-        u'RA-Prioritization',
-        u'RadioBearerConfig',
-        u'SRB-ToAddModList',
-        u'SRB-ToAddMod',
-        u'DRB-ToAddModList',
-        u'DRB-ToAddMod',
-        u'DRB-ToReleaseList',
-        u'SecurityConfig',
-        u'RadioLinkMonitoringConfig',
-        u'RadioLinkMonitoringRS',
-        u'RadioLinkMonitoringRS-Id',
-        u'RAN-AreaCode',
-        u'RateMatchPattern',
-        u'RateMatchPatternId',
-        u'RateMatchPatternLTE-CRS',
-        u'LTE-CRS-PatternList-r16',
-        u'ReferenceTimeInfo-r16',
-        u'ReferenceTime-r16',
-        u'RejectWaitTime',
-        u'RepetitionSchemeConfig-r16',
-        u'RepetitionSchemeConfig-v1630',
-        u'FDM-TDM-r16',
-        u'SlotBased-r16',
-        u'SlotBased-v1630',
-        u'ReportConfigId',
-        u'ReportConfigInterRAT',
-        u'ReportCGI-EUTRA',
-        u'ReportSFTD-EUTRA',
-        u'EventTriggerConfigInterRAT',
-        u'PeriodicalReportConfigInterRAT',
-        u'MeasTriggerQuantityUTRA-FDD-r16',
-        u'MeasReportQuantityUTRA-FDD-r16',
-        u'ReportConfigNR',
-        u'ReportCGI',
-        u'ReportSFTD-NR',
-        u'CondTriggerConfig-r16',
-        u'EventTriggerConfig',
-        u'PeriodicalReportConfig',
-        u'NR-RS-Type',
-        u'MeasTriggerQuantity',
-        u'MeasTriggerQuantityOffset',
-        u'MeasReportQuantity',
-        u'MeasRSSI-ReportConfig-r16',
-        u'CLI-EventTriggerConfig-r16',
-        u'CLI-PeriodicalReportConfig-r16',
-        u'MeasTriggerQuantityCLI-r16',
-        u'MeasReportQuantityCLI-r16',
-        u'ReportConfigNR-SL-r16',
-        u'EventTriggerConfigNR-SL-r16',
-        u'PeriodicalReportConfigNR-SL-r16',
-        u'MeasReportQuantity-r16',
-        u'ReportConfigToAddModList',
-        u'ReportConfigToAddMod',
-        u'ReportInterval',
-        u'ReselectionThreshold',
-        u'ReselectionThresholdQ',
-        u'ResumeCause',
-        u'RLC-BearerConfig',
-        u'RLC-Config',
-        u'UL-AM-RLC',
-        u'DL-AM-RLC',
-        u'UL-UM-RLC',
-        u'DL-UM-RLC',
-        u'T-PollRetransmit',
-        u'PollPDU',
-        u'PollByte',
-        u'T-Reassembly',
-        u'T-StatusProhibit',
-        u'SN-FieldLengthUM',
-        u'SN-FieldLengthAM',
-        u'RLC-Config-v1610',
-        u'DL-AM-RLC-v1610',
-        u'T-StatusProhibit-v1610',
-        u'RLF-TimersAndConstants',
-        u'RNTI-Value',
-        u'RSRP-Range',
-        u'RSRQ-Range',
-        u'RSSI-Range-r16',
-        u'SCellIndex',
-        u'SchedulingRequestConfig',
-        u'SchedulingRequestToAddMod',
-        u'SchedulingRequestId',
-        u'SchedulingRequestResourceConfig',
-        u'SchedulingRequestResourceConfigExt-v1610',
-        u'SchedulingRequestResourceId',
-        u'ScramblingId',
-        u'SCS-SpecificCarrier',
-        u'SDAP-Config',
-        u'QFI',
-        u'PDU-SessionID',
-        u'SearchSpace',
-        u'SearchSpaceExt-r16',
-        u'SearchSpaceId',
-        u'SearchSpaceZero',
-        u'SecurityAlgorithmConfig',
-        u'IntegrityProtAlgorithm',
-        u'CipheringAlgorithm',
-        u'SemiStaticChannelAccessConfig-r16',
-        u'Sensor-LocationInfo-r16',
-        u'ServCellIndex',
-        u'ServingCellConfig',
-        u'UplinkConfig',
-        u'DummyJ',
-        u'ChannelAccessConfig-r16',
-        u'IntraCellGuardBandsPerSCS-r16',
-        u'GuardBand-r16',
-        u'DormancyGroupID-r16',
-        u'DormantBWP-Config-r16',
-        u'WithinActiveTimeConfig-r16',
-        u'OutsideActiveTimeConfig-r16',
-        u'UplinkTxSwitching-r16',
-        u'ServingCellConfigCommon',
-        u'ServingCellConfigCommonSIB',
-        u'ShortI-RNTI-Value',
-        u'ShortMAC-I',
-        u'SINR-Range',
-        u'SI-RequestConfig',
-        u'SI-RequestResources',
-        u'SI-SchedulingInfo',
-        u'SchedulingInfo',
-        u'SIB-Mapping',
-        u'SIB-TypeInfo',
-        u'SK-Counter',
-        u'SlotFormatCombinationsPerCell',
-        u'SlotFormatCombination',
-        u'SlotFormatCombinationId',
-        u'SlotFormatIndicator',
-        u'CO-DurationsPerCell-r16',
-        u'CO-Duration-r16',
-        u'AvailableRB-SetsPerCell-r16',
-        u'SearchSpaceSwitchTrigger-r16',
-        u'S-NSSAI',
-        u'SpeedStateScaleFactors',
-        u'SPS-Config',
-        u'SPS-ConfigIndex-r16',
-        u'SPS-PUCCH-AN-r16',
-        u'SPS-PUCCH-AN-List-r16',
-        u'SRB-Identity',
-        u'SRS-CarrierSwitching',
-        u'SRS-TPC-PDCCH-Config',
-        u'SRS-CC-SetIndex',
-        u'SRS-Config',
-        u'SRS-ResourceSet',
-        u'PathlossReferenceRS-Config',
-        u'PathlossReferenceRSList-r16',
-        u'PathlossReferenceRS-r16',
-        u'SRS-PathlossReferenceRS-Id-r16',
-        u'SRS-PosResourceSet-r16',
-        u'SRS-ResourceSetId',
-        u'SRS-PosResourceSetId-r16',
-        u'SRS-Resource',
-        u'SRS-PosResource-r16',
-        u'SRS-SpatialRelationInfo',
-        u'SRS-SpatialRelationInfoPos-r16',
-        u'SSB-Configuration-r16',
-        u'SSB-InfoNcell-r16',
-        u'DL-PRS-Info-r16',
-        u'SRS-ResourceId',
-        u'SRS-PosResourceId-r16',
-        u'SRS-PeriodicityAndOffset',
-        u'SRS-PeriodicityAndOffset-r16',
-        u'SRS-RSRP-Range-r16',
-        u'SRS-TPC-CommandConfig',
-        u'SSB-Index',
-        u'SSB-MTC',
-        u'SSB-MTC2',
-        u'SSB-MTC2-LP-r16',
-        u'SSB-MTC3-r16',
-        u'SSB-PositionQCL-Relation-r16',
-        u'SSB-ToMeasure',
-        u'SS-RSSI-Measurement',
-        u'SubcarrierSpacing',
-        u'TAG-Config',
-        u'TAG',
-        u'TAG-Id',
-        u'TimeAlignmentTimer',
-        u'TCI-State',
-        u'QCL-Info',
-        u'TCI-StateId',
-        u'TDD-UL-DL-ConfigCommon',
-        u'TDD-UL-DL-Pattern',
-        u'TDD-UL-DL-ConfigDedicated',
-        u'TDD-UL-DL-ConfigDedicated-IAB-MT-r16',
-        u'TDD-UL-DL-SlotConfig',
-        u'TDD-UL-DL-SlotConfig-IAB-MT-r16',
-        u'TDD-UL-DL-SlotIndex',
-        u'TrackingAreaCode',
-        u'T-Reselection',
-        u'TimeToTrigger',
-        u'UAC-BarringInfoSetIndex',
-        u'UAC-BarringInfoSetList',
-        u'UAC-BarringInfoSet',
-        u'UAC-BarringPerCatList',
-        u'UAC-BarringPerCat',
-        u'UAC-BarringPerPLMN-List',
-        u'UAC-BarringPerPLMN',
-        u'UE-TimersAndConstants',
-        u'UL-DelayValueConfig-r16',
-        u'UplinkCancellation-r16',
-        u'CI-ConfigurationPerServingCell-r16',
-        u'UplinkConfigCommon',
-        u'UplinkConfigCommonSIB',
-        u'UplinkTxDirectCurrentList',
-        u'UplinkTxDirectCurrentCell',
-        u'UplinkTxDirectCurrentBWP',
-        u'UplinkTxDirectCurrentTwoCarrierList-r16',
-        u'UplinkTxDirectCurrentTwoCarrier-r16',
-        u'UplinkTxDirectCurrentCarrierInfo-r16',
-        u'UplinkTxDirectCurrentTwoCarrierInfo-r16',
-        u'ZP-CSI-RS-Resource',
-        u'ZP-CSI-RS-ResourceId',
-        u'ZP-CSI-RS-ResourceSet',
-        u'ZP-CSI-RS-ResourceSetId',
-        u'AccessStratumRelease',
-        u'BandCombinationList',
-        u'BandCombinationList-v1540',
-        u'BandCombinationList-v1550',
-        u'BandCombinationList-v1560',
-        u'BandCombinationList-v1570',
-        u'BandCombinationList-v1580',
-        u'BandCombinationList-v1590',
-        u'BandCombinationList-v1610',
-        u'BandCombinationList-v1630',
-        u'BandCombinationList-v1640',
-        u'BandCombinationList-v1650',
-        u'BandCombinationList-UplinkTxSwitch-r16',
-        u'BandCombinationList-UplinkTxSwitch-v1630',
-        u'BandCombinationList-UplinkTxSwitch-v1640',
-        u'BandCombinationList-UplinkTxSwitch-v1650',
-        u'BandCombination',
-        u'BandCombination-v1540',
-        u'BandCombination-v1550',
-        u'BandCombination-v1560',
-        u'BandCombination-v1570',
-        u'BandCombination-v1580',
-        u'BandCombination-v1590',
-        u'BandCombination-v1610',
-        u'BandCombination-v1630',
-        u'BandCombination-v1640',
-        u'BandCombination-v1650',
-        u'BandCombination-UplinkTxSwitch-r16',
-        u'BandCombination-UplinkTxSwitch-v1630',
-        u'BandCombination-UplinkTxSwitch-v1640',
-        u'BandCombination-UplinkTxSwitch-v1650',
-        u'ULTxSwitchingBandPair-r16',
-        u'BandParameters',
-        u'BandParameters-v1540',
-        u'BandParameters-v1610',
-        u'ScalingFactorSidelink-r16',
-        u'BandCombinationListSidelinkEUTRA-NR-r16',
-        u'BandCombinationListSidelinkEUTRA-NR-v1630',
-        u'BandCombinationParametersSidelinkEUTRA-NR-r16',
-        u'BandCombinationParametersSidelinkEUTRA-NR-v1630',
-        u'BandParametersSidelinkEUTRA-NR-r16',
-        u'BandParametersSidelinkEUTRA-NR-v1630',
-        u'BandParametersSidelink-r16',
-        u'CA-BandwidthClassEUTRA',
-        u'CA-BandwidthClassNR',
-        u'CA-ParametersEUTRA',
-        u'CA-ParametersEUTRA-v1560',
-        u'CA-ParametersEUTRA-v1570',
-        u'CA-ParametersNR',
-        u'CA-ParametersNR-v1540',
-        u'CA-ParametersNR-v1550',
-        u'CA-ParametersNR-v1560',
-        u'CA-ParametersNR-v1610',
-        u'CA-ParametersNR-v1630',
-        u'CA-ParametersNR-v1640',
-        u'SimulSRS-ForAntennaSwitching-r16',
-        u'TwoPUCCH-Grp-Configurations-r16',
-        u'TwoPUCCH-Grp-ConfigParams-r16',
-        u'PUCCH-Grp-CarrierTypes-r16',
-        u'CA-ParametersNRDC',
-        u'CA-ParametersNRDC-v1610',
-        u'CA-ParametersNRDC-v1630',
-        u'CA-ParametersNRDC-v1640',
-        u'CA-ParametersNRDC-v1650',
-        u'CarrierAggregationVariant',
-        u'CodebookParameters',
-        u'CodebookParameters-v1610',
-        u'CodebookParametersAddition-r16',
-        u'CodebookComboParametersAddition-r16',
-        u'CodebookParametersAdditionPerBC-r16',
-        u'CodebookComboParametersAdditionPerBC-r16',
-        u'CodebookVariantsList-r16',
-        u'SupportedCSI-RS-Resource',
-        u'FeatureSetCombination',
-        u'FeatureSetsPerBand',
-        u'FeatureSet',
-        u'FeatureSetCombinationId',
-        u'FeatureSetDownlink',
-        u'FeatureSetDownlink-v1540',
-        u'FeatureSetDownlink-v15a0',
-        u'FeatureSetDownlink-v1610',
-        u'PDCCH-MonitoringOccasions-r16',
-        u'DummyA',
-        u'DummyB',
-        u'DummyC',
-        u'DummyD',
-        u'DummyE',
-        u'FeatureSetDownlinkId',
-        u'FeatureSetDownlinkPerCC',
-        u'FeatureSetDownlinkPerCC-v1620',
-        u'MultiDCI-MultiTRP-r16',
-        u'FeatureSetDownlinkPerCC-Id',
-        u'FeatureSetEUTRA-DownlinkId',
-        u'FeatureSetEUTRA-UplinkId',
-        u'FeatureSets',
-        u'FeatureSetUplink',
-        u'FeatureSetUplink-v1540',
-        u'FeatureSetUplink-v1610',
-        u'FeatureSetUplink-v1630',
-        u'FeatureSetUplink-v1640',
-        u'SubSlot-Config-r16',
-        u'SRS-AllPosResources-r16',
-        u'SRS-PosResources-r16',
-        u'SRS-PosResourceAP-r16',
-        u'SRS-PosResourceSP-r16',
-        u'SRS-Resources',
-        u'DummyF',
-        u'FeatureSetUplinkId',
-        u'FeatureSetUplinkPerCC',
-        u'FeatureSetUplinkPerCC-v1540',
-        u'FeatureSetUplinkPerCC-Id',
-        u'FreqBandIndicatorEUTRA',
-        u'FreqBandList',
-        u'FreqBandInformation',
-        u'FreqBandInformationEUTRA',
-        u'FreqBandInformationNR',
-        u'AggregatedBandwidth',
-        u'FreqSeparationClass',
-        u'FreqSeparationClassDL-v1620',
-        u'FreqSeparationClassUL-v1620',
-        u'FreqSeparationClassDL-Only-r16',
-        u'HighSpeedParameters-r16',
-        u'HighSpeedParameters-v1650',
-        u'IMS-Parameters',
-        u'IMS-ParametersCommon',
-        u'IMS-ParametersFRX-Diff',
-        u'InterRAT-Parameters',
-        u'EUTRA-Parameters',
-        u'EUTRA-ParametersCommon',
-        u'EUTRA-ParametersXDD-Diff',
-        u'UTRA-FDD-Parameters-r16',
-        u'SupportedBandUTRA-FDD-r16',
-        u'MAC-Parameters',
-        u'MAC-Parameters-v1610',
-        u'MAC-ParametersCommon',
-        u'MAC-ParametersFRX-Diff-r16',
-        u'MAC-ParametersXDD-Diff',
-        u'MinTimeGap-r16',
-        u'MeasAndMobParameters',
-        u'MeasAndMobParametersCommon',
-        u'MeasAndMobParametersXDD-Diff',
-        u'MeasAndMobParametersFRX-Diff',
-        u'MeasAndMobParametersMRDC',
-        u'MeasAndMobParametersMRDC-v1560',
-        u'MeasAndMobParametersMRDC-v1610',
-        u'MeasAndMobParametersMRDC-Common',
-        u'MeasAndMobParametersMRDC-Common-v1610',
-        u'MeasAndMobParametersMRDC-XDD-Diff',
-        u'MeasAndMobParametersMRDC-XDD-Diff-v1560',
-        u'MeasAndMobParametersMRDC-FRX-Diff',
-        u'MIMO-LayersDL',
-        u'MIMO-LayersUL',
-        u'MIMO-ParametersPerBand',
-        u'DummyG',
-        u'BeamManagementSSB-CSI-RS',
-        u'DummyH',
-        u'CSI-RS-ForTracking',
-        u'CSI-RS-IM-ReceptionForFeedback',
-        u'CSI-RS-ProcFrameworkForSRS',
-        u'CSI-ReportFramework',
-        u'CSI-ReportFrameworkExt-r16',
-        u'PTRS-DensityRecommendationDL',
-        u'PTRS-DensityRecommendationUL',
-        u'SpatialRelations',
-        u'DummyI',
-        u'ModulationOrder',
-        u'MRDC-Parameters',
-        u'MRDC-Parameters-v1580',
-        u'MRDC-Parameters-v1590',
-        u'MRDC-Parameters-v1620',
-        u'MRDC-Parameters-v1630',
-        u'NRDC-Parameters',
-        u'NRDC-Parameters-v1570',
-        u'NRDC-Parameters-v15c0',
-        u'NRDC-Parameters-v1610',
-        u'OLPC-SRS-Pos-r16',
-        u'PDCP-Parameters',
-        u'PDCP-ParametersMRDC',
-        u'PDCP-ParametersMRDC-v1610',
-        u'Phy-Parameters',
-        u'Phy-ParametersCommon',
-        u'Phy-ParametersXDD-Diff',
-        u'Phy-ParametersFRX-Diff',
-        u'Phy-ParametersFR1',
-        u'Phy-ParametersFR2',
-        u'Phy-ParametersMRDC',
-        u'NAICS-Capability-Entry',
-        u'Phy-ParametersSharedSpectrumChAccess-r16',
-        u'PowSav-Parameters-r16',
-        u'PowSav-ParametersCommon-r16',
-        u'PowSav-ParametersFRX-Diff-r16',
-        u'ProcessingParameters',
-        u'NumberOfCarriers',
-        u'RAT-Type',
-        u'RF-Parameters',
-        u'BandNR',
-        u'RF-ParametersMRDC',
-        u'RLC-Parameters',
-        u'SDAP-Parameters',
-        u'SidelinkParameters-r16',
-        u'SidelinkParametersNR-r16',
-        u'SidelinkParametersEUTRA-r16',
-        u'RLC-ParametersSidelink-r16',
-        u'MAC-ParametersSidelink-r16',
-        u'UE-SidelinkCapabilityAddXDD-Mode-r16',
-        u'MAC-ParametersSidelinkCommon-r16',
-        u'MAC-ParametersSidelinkXDD-Diff-r16',
-        u'BandSidelinkEUTRA-r16',
-        u'BandSidelink-r16',
-        u'SON-Parameters-r16',
-        u'SpatialRelationsSRS-Pos-r16',
-        u'SRS-SwitchingTimeNR',
-        u'SRS-SwitchingTimeEUTRA',
-        u'SupportedBandwidth',
-        u'UE-BasedPerfMeas-Parameters-r16',
-        u'UE-CapabilityRAT-ContainerList',
-        u'UE-CapabilityRAT-Container',
-        u'UE-CapabilityRAT-RequestList',
-        u'UE-CapabilityRAT-Request',
-        u'UE-CapabilityRequestFilterCommon',
-        u'CellGrouping-r16',
-        u'UE-CapabilityRequestFilterNR',
-        u'UE-CapabilityRequestFilterNR-v1540',
-        u'UE-MRDC-Capability',
-        u'UE-MRDC-Capability-v1560',
-        u'UE-MRDC-Capability-v1610',
-        u'UE-MRDC-CapabilityAddXDD-Mode',
-        u'UE-MRDC-CapabilityAddXDD-Mode-v1560',
-        u'UE-MRDC-CapabilityAddFRX-Mode',
-        u'GeneralParametersMRDC-XDD-Diff',
-        u'GeneralParametersMRDC-v1610',
-        u'UE-NR-Capability',
-        u'UE-NR-Capability-v1530',
-        u'UE-NR-Capability-v1540',
-        u'UE-NR-Capability-v1550',
-        u'UE-NR-Capability-v1560',
-        u'UE-NR-Capability-v1570',
-        u'UE-NR-Capability-v15c0',
-        u'UE-NR-Capability-v1610',
-        u'UE-NR-Capability-v1640',
-        u'UE-NR-Capability-v1650',
-        u'UE-NR-CapabilityAddXDD-Mode',
-        u'UE-NR-CapabilityAddXDD-Mode-v1530',
-        u'UE-NR-CapabilityAddFRX-Mode',
-        u'UE-NR-CapabilityAddFRX-Mode-v1540',
-        u'UE-NR-CapabilityAddFRX-Mode-v1610',
-        u'BAP-Parameters-r16',
-        u'SharedSpectrumChAccessParamsPerBand-r16',
-        u'SharedSpectrumChAccessParamsPerBand-v1630',
-        u'SharedSpectrumChAccessParamsPerBand-v1640',
-        u'SharedSpectrumChAccessParamsPerBand-v1650',
-        u'AbsoluteTimeInfo-r16',
-        u'AreaConfiguration-r16',
-        u'AreaConfig-r16',
-        u'InterFreqTargetInfo-r16',
-        u'CellGlobalIdList-r16',
-        u'TrackingAreaCodeList-r16',
-        u'TrackingAreaIdentityList-r16',
-        u'TrackingAreaIdentity-r16',
-        u'BT-NameList-r16',
-        u'BT-Name-r16',
-        u'EUTRA-AllowedMeasBandwidth',
-        u'EUTRA-MBSFN-SubframeConfigList',
-        u'EUTRA-MBSFN-SubframeConfig',
-        u'EUTRA-MultiBandInfoList',
-        u'EUTRA-MultiBandInfo',
-        u'EUTRA-NS-PmaxList',
-        u'EUTRA-NS-PmaxValue',
-        u'EUTRA-PhysCellId',
-        u'EUTRA-PhysCellIdRange',
-        u'EUTRA-PresenceAntennaPort1',
-        u'EUTRA-Q-OffsetRange',
-        u'IAB-IP-Address-r16',
-        u'IAB-IP-AddressIndex-r16',
-        u'IAB-IP-Usage-r16',
-        u'LoggingDuration-r16',
-        u'LoggingInterval-r16',
-        u'LogMeasResultListBT-r16',
-        u'LogMeasResultBT-r16',
-        u'LogMeasResultListWLAN-r16',
-        u'LogMeasResultWLAN-r16',
-        u'WLAN-Identifiers-r16',
-        u'WLAN-RSSI-Range-r16',
-        u'WLAN-RTT-r16',
-        u'OtherConfig',
-        u'OtherConfig-v1540',
-        u'CandidateServingFreqListNR-r16',
-        u'OtherConfig-v1610',
-        u'OverheatingAssistanceConfig',
-        u'IDC-AssistanceConfig-r16',
-        u'DRX-PreferenceConfig-r16',
-        u'MaxBW-PreferenceConfig-r16',
-        u'MaxCC-PreferenceConfig-r16',
-        u'MaxMIMO-LayerPreferenceConfig-r16',
-        u'MinSchedulingOffsetPreferenceConfig-r16',
-        u'ReleasePreferenceConfig-r16',
-        u'PhysCellIdUTRA-FDD-r16',
-        u'RRC-TransactionIdentifier',
-        u'Sensor-NameList-r16',
-        u'TraceReference-r16',
-        u'UE-MeasurementsAvailable-r16',
-        u'UTRA-FDD-Q-OffsetRange-r16',
-        u'VisitedCellInfoList-r16',
-        u'VisitedCellInfo-r16',
-        u'WLAN-NameList-r16',
-        u'WLAN-Name-r16',
-        u'SL-BWP-Config-r16',
-        u'SL-BWP-Generic-r16',
-        u'SL-BWP-ConfigCommon-r16',
-        u'SL-BWP-PoolConfig-r16',
-        u'SL-TxPoolDedicated-r16',
-        u'SL-ResourcePoolConfig-r16',
-        u'SL-ResourcePoolID-r16',
-        u'SL-BWP-PoolConfigCommon-r16',
-        u'SL-CBR-PriorityTxConfigList-r16',
-        u'SL-CBR-PriorityTxConfigList-v1650',
-        u'SL-PriorityTxConfigIndex-r16',
-        u'SL-PriorityTxConfigIndex-v1650',
-        u'SL-TxConfigIndex-r16',
-        u'SL-CBR-CommonTxConfigList-r16',
-        u'SL-CBR-LevelsConfig-r16',
-        u'SL-CBR-PSSCH-TxConfig-r16',
-        u'SL-CBR-r16',
-        u'SL-ConfigDedicatedNR-r16',
-        u'SL-DestinationIndex-r16',
-        u'SL-PHY-MAC-RLC-Config-r16',
-        u'SL-ConfiguredGrantConfig-r16',
-        u'SL-ConfigIndexCG-r16',
-        u'SL-CG-MaxTransNumList-r16',
-        u'SL-CG-MaxTransNum-r16',
-        u'SL-PeriodCG-r16',
-        u'SL-DestinationIdentity-r16',
-        u'SL-FreqConfig-r16',
-        u'SL-Freq-Id-r16',
-        u'SL-FreqConfigCommon-r16',
-        u'SL-LogicalChannelConfig-r16',
-        u'SL-MeasConfigCommon-r16',
-        u'SL-MeasConfigInfo-r16',
-        u'SL-MeasConfig-r16',
-        u'SL-MeasObjectToRemoveList-r16',
-        u'SL-ReportConfigToRemoveList-r16',
-        u'SL-MeasIdToRemoveList-r16',
-        u'SL-MeasIdList-r16',
-        u'SL-MeasIdInfo-r16',
-        u'SL-MeasId-r16',
-        u'SL-MeasObjectList-r16',
-        u'SL-MeasObjectInfo-r16',
-        u'SL-MeasObjectId-r16',
-        u'SL-MeasObject-r16',
-        u'SL-PDCP-Config-r16',
-        u'SL-PSBCH-Config-r16',
-        u'SL-PSSCH-TxConfigList-r16',
-        u'SL-PSSCH-TxConfig-r16',
-        u'SL-PSSCH-TxParameters-r16',
-        u'SL-QoS-FlowIdentity-r16',
-        u'SL-QoS-Profile-r16',
-        u'SL-PQI-r16',
-        u'SL-QuantityConfig-r16',
-        u'SL-RadioBearerConfig-r16',
-        u'SL-ReportConfigList-r16',
-        u'SL-ReportConfigInfo-r16',
-        u'SL-ReportConfigId-r16',
-        u'SL-ReportConfig-r16',
-        u'SL-PeriodicalReportConfig-r16',
-        u'SL-EventTriggerConfig-r16',
-        u'SL-MeasReportQuantity-r16',
-        u'SL-MeasTriggerQuantity-r16',
-        u'SL-RS-Type-r16',
-        u'SL-ResourcePool-r16',
-        u'SL-ZoneConfigMCR-r16',
-        u'SL-SyncAllowed-r16',
-        u'SL-PSCCH-Config-r16',
-        u'SL-PSSCH-Config-r16',
-        u'SL-PSFCH-Config-r16',
-        u'SL-PTRS-Config-r16',
-        u'SL-UE-SelectedConfigRP-r16',
-        u'SL-ResourceReservePeriod-r16',
-        u'SL-SelectionWindowList-r16',
-        u'SL-SelectionWindowConfig-r16',
-        u'SL-TxPercentageList-r16',
-        u'SL-TxPercentageConfig-r16',
-        u'SL-MinMaxMCS-List-r16',
-        u'SL-MinMaxMCS-Config-r16',
-        u'SL-BetaOffsets-r16',
-        u'SL-PowerControl-r16',
-        u'SL-RLC-BearerConfig-r16',
-        u'SL-RLC-BearerConfigIndex-r16',
-        u'SL-RLC-Config-r16',
-        u'SL-ScheduledConfig-r16',
-        u'MAC-MainConfigSL-r16',
-        u'SL-ConfiguredGrantConfigList-r16',
-        u'SL-SDAP-Config-r16',
-        u'SL-MappedQoS-FlowsListDedicated-r16',
-        u'SL-SyncConfigList-r16',
-        u'SL-SyncConfig-r16',
-        u'SL-RSRP-Range-r16',
-        u'SL-SSB-TimeAllocation-r16',
-        u'SL-Thres-RSRP-List-r16',
-        u'SL-Thres-RSRP-r16',
-        u'SL-TxPower-r16',
-        u'SL-TypeTxSync-r16',
-        u'SL-UE-SelectedConfig-r16',
-        u'SL-ZoneConfig-r16',
-        u'SLRB-Uu-ConfigIndex-r16',
-        u'BCCH-BCH-Message',
-        u'BCCH-BCH-MessageType',
-        u'BCCH-DL-SCH-Message',
-        u'BCCH-DL-SCH-MessageType',
-        u'DL-CCCH-Message',
-        u'DL-CCCH-MessageType',
-        u'DL-DCCH-Message',
-        u'DL-DCCH-MessageType',
-        u'PCCH-Message',
-        u'PCCH-MessageType',
-        u'UL-CCCH-Message',
-        u'UL-CCCH-MessageType',
-        u'UL-CCCH1-Message',
-        u'UL-CCCH1-MessageType',
-        u'UL-DCCH-Message',
-        u'UL-DCCH-MessageType',
-        u'CounterCheck',
-        u'CounterCheck-IEs',
-        u'DRB-CountMSB-InfoList',
-        u'DRB-CountMSB-Info',
-        u'CounterCheckResponse',
-        u'CounterCheckResponse-IEs',
-        u'DRB-CountInfoList',
-        u'DRB-CountInfo',
-        u'DedicatedSIBRequest-r16',
-        u'DedicatedSIBRequest-r16-IEs',
-        u'SIB-ReqInfo-r16',
-        u'PosSIB-ReqInfo-r16',
-        u'DLDedicatedMessageSegment-r16',
-        u'DLDedicatedMessageSegment-r16-IEs',
-        u'DLInformationTransfer',
-        u'DLInformationTransfer-IEs',
-        u'DLInformationTransfer-v1610-IEs',
-        u'DLInformationTransferMRDC-r16',
-        u'DLInformationTransferMRDC-r16-IEs',
-        u'FailureInformation',
-        u'FailureInformation-IEs',
-        u'FailureInfoRLC-Bearer',
-        u'FailureInformation-v1610-IEs',
-        u'FailureInfoDAPS-r16',
-        u'IABOtherInformation-r16',
-        u'IABOtherInformation-r16-IEs',
-        u'IAB-IP-AddressNumReq-r16',
-        u'IAB-IP-AddressPrefixReq-r16',
-        u'IAB-IP-AddressAndTraffic-r16',
-        u'IAB-IP-PrefixAndTraffic-r16',
-        u'LocationMeasurementIndication',
-        u'LocationMeasurementIndication-IEs',
-        u'LoggedMeasurementConfiguration-r16',
-        u'LoggedMeasurementConfiguration-r16-IEs',
-        u'LoggedPeriodicalReportConfig-r16',
-        u'LoggedEventTriggerConfig-r16',
-        u'EventType-r16',
-        u'MCGFailureInformation-r16',
-        u'MCGFailureInformation-r16-IEs',
-        u'FailureReportMCG-r16',
-        u'MeasResultList2UTRA',
-        u'MeasResult2UTRA-FDD-r16',
-        u'MeasResultList2EUTRA',
-        u'MeasurementReport',
-        u'MeasurementReport-IEs',
-        u'MIB',
-        u'MobilityFromNRCommand',
-        u'MobilityFromNRCommand-IEs',
-        u'MobilityFromNRCommand-v1610-IEs',
-        u'Paging',
-        u'PagingRecordList',
-        u'PagingRecord',
-        u'PagingUE-Identity',
-        u'RRCReestablishment',
-        u'RRCReestablishment-IEs',
-        u'RRCReestablishmentComplete',
-        u'RRCReestablishmentComplete-IEs',
-        u'RRCReestablishmentComplete-v1610-IEs',
-        u'RRCReestablishmentRequest',
-        u'RRCReestablishmentRequest-IEs',
-        u'ReestabUE-Identity',
-        u'ReestablishmentCause',
-        u'RRCReconfiguration',
-        u'RRCReconfiguration-IEs',
-        u'RRCReconfiguration-v1530-IEs',
-        u'RRCReconfiguration-v1540-IEs',
-        u'RRCReconfiguration-v1560-IEs',
-        u'RRCReconfiguration-v1610-IEs',
-        u'MRDC-SecondaryCellGroupConfig',
-        u'BAP-Config-r16',
-        u'MasterKeyUpdate',
-        u'OnDemandSIB-Request-r16',
-        u'T316-r16',
-        u'IAB-IP-AddressConfigurationList-r16',
-        u'IAB-IP-AddressConfiguration-r16',
-        u'SL-ConfigDedicatedEUTRA-Info-r16',
-        u'SL-TimeOffsetEUTRA-r16',
-        u'RRCReconfigurationComplete',
-        u'RRCReconfigurationComplete-IEs',
-        u'RRCReconfigurationComplete-v1530-IEs',
-        u'RRCReconfigurationComplete-v1560-IEs',
-        u'RRCReconfigurationComplete-v1610-IEs',
-        u'RRCReconfigurationComplete-v1640-IEs',
-        u'RRCReject',
-        u'RRCReject-IEs',
-        u'RRCRelease',
-        u'RRCRelease-IEs',
-        u'RRCRelease-v1540-IEs',
-        u'RRCRelease-v1610-IEs',
-        u'RRCRelease-v1650-IEs',
-        u'RedirectedCarrierInfo',
-        u'RedirectedCarrierInfo-EUTRA',
-        u'CarrierInfoNR',
-        u'SuspendConfig',
-        u'PeriodicRNAU-TimerValue',
-        u'CellReselectionPriorities',
-        u'PagingCycle',
-        u'FreqPriorityListEUTRA',
-        u'FreqPriorityListNR',
-        u'FreqPriorityEUTRA',
-        u'FreqPriorityNR',
-        u'RAN-NotificationAreaInfo',
-        u'PLMN-RAN-AreaCellList',
-        u'PLMN-RAN-AreaCell',
-        u'PLMN-RAN-AreaConfigList',
-        u'PLMN-RAN-AreaConfig',
-        u'RAN-AreaConfig',
-        u'RRCResume',
-        u'RRCResume-IEs',
-        u'RRCResume-v1560-IEs',
-        u'RRCResume-v1610-IEs',
-        u'RRCResumeComplete',
-        u'RRCResumeComplete-IEs',
-        u'RRCResumeComplete-v1610-IEs',
-        u'RRCResumeComplete-v1640-IEs',
-        u'RRCResumeRequest',
-        u'RRCResumeRequest-IEs',
-        u'RRCResumeRequest1',
-        u'RRCResumeRequest1-IEs',
-        u'RRCSetup',
-        u'RRCSetup-IEs',
-        u'RRCSetupComplete',
-        u'RRCSetupComplete-IEs',
-        u'RRCSetupComplete-v1610-IEs',
-        u'RegisteredAMF',
-        u'RRCSetupRequest',
-        u'RRCSetupRequest-IEs',
-        u'InitialUE-Identity',
-        u'EstablishmentCause',
-        u'RRCSystemInfoRequest',
-        u'RRCSystemInfoRequest-IEs',
-        u'RRC-PosSystemInfoRequest-r16-IEs',
-        u'SCGFailureInformation',
-        u'SCGFailureInformation-IEs',
-        u'SCGFailureInformation-v1590-IEs',
-        u'FailureReportSCG',
-        u'MeasResultFreqList',
-        u'SCGFailureInformationEUTRA',
-        u'SCGFailureInformationEUTRA-IEs',
-        u'SCGFailureInformationEUTRA-v1590-IEs',
-        u'FailureReportSCG-EUTRA',
-        u'MeasResultFreqListFailMRDC',
-        u'SecurityModeCommand',
-        u'SecurityModeCommand-IEs',
-        u'SecurityConfigSMC',
-        u'SecurityModeComplete',
-        u'SecurityModeComplete-IEs',
-        u'SecurityModeFailure',
-        u'SecurityModeFailure-IEs',
-        u'SIB1',
-        u'SIB1-v1610-IEs',
-        u'SIB1-v1630-IEs',
-        u'UAC-AccessCategory1-SelectionAssistanceInfo',
-        u'UAC-AC1-SelectAssistInfo-r16',
-        u'SidelinkUEInformationNR-r16',
-        u'SidelinkUEInformationNR-r16-IEs',
-        u'SL-InterestedFreqList-r16',
-        u'SL-TxResourceReqList-r16',
-        u'SL-TxResourceReq-r16',
-        u'SL-TxInterestedFreqList-r16',
-        u'SL-QoS-Info-r16',
-        u'SL-RLC-ModeIndication-r16',
-        u'SL-FailureList-r16',
-        u'SL-Failure-r16',
-        u'SystemInformation',
-        u'SystemInformation-IEs',
-        u'UEAssistanceInformation',
-        u'UEAssistanceInformation-IEs',
-        u'DelayBudgetReport',
-        u'UEAssistanceInformation-v1540-IEs',
-        u'OverheatingAssistance',
-        u'ReducedAggregatedBandwidth',
-        u'UEAssistanceInformation-v1610-IEs',
-        u'IDC-Assistance-r16',
-        u'AffectedCarrierFreqList-r16',
-        u'AffectedCarrierFreq-r16',
-        u'AffectedCarrierFreqCombList-r16',
-        u'AffectedCarrierFreqComb-r16',
-        u'VictimSystemType-r16',
-        u'DRX-Preference-r16',
-        u'MaxBW-Preference-r16',
-        u'MaxCC-Preference-r16',
-        u'MaxMIMO-LayerPreference-r16',
-        u'MinSchedulingOffsetPreference-r16',
-        u'ReleasePreference-r16',
-        u'ReducedMaxBW-FRx-r16',
-        u'ReducedMaxCCs-r16',
-        u'SL-UE-AssistanceInformationNR-r16',
-        u'SL-TrafficPatternInfo-r16',
-        u'UECapabilityEnquiry',
-        u'UECapabilityEnquiry-IEs',
-        u'UECapabilityEnquiry-v1560-IEs',
-        u'UECapabilityEnquiry-v1610-IEs',
-        u'UECapabilityInformation',
-        u'UECapabilityInformation-IEs',
-        u'UEInformationRequest-r16',
-        u'UEInformationRequest-r16-IEs',
-        u'UEInformationResponse-r16',
-        u'UEInformationResponse-r16-IEs',
-        u'LogMeasReport-r16',
-        u'LogMeasInfoList-r16',
-        u'LogMeasInfo-r16',
-        u'ConnEstFailReport-r16',
-        u'MeasResultServingCell-r16',
-        u'MeasResultFailedCell-r16',
-        u'RA-ReportList-r16',
-        u'RA-Report-r16',
-        u'RA-InformationCommon-r16',
-        u'PerRAInfoList-r16',
-        u'PerRAInfo-r16',
-        u'PerRASSBInfo-r16',
-        u'PerRACSI-RSInfo-r16',
-        u'PerRAAttemptInfoList-r16',
-        u'PerRAAttemptInfo-r16',
-        u'RLF-Report-r16',
-        u'MeasResultList2NR-r16',
-        u'MeasResultList2EUTRA-r16',
-        u'MeasResult2NR-r16',
-        u'MeasResultListLogging2NR-r16',
-        u'MeasResultLogging2NR-r16',
-        u'MeasResultListLoggingNR-r16',
-        u'MeasResultLoggingNR-r16',
-        u'MeasResult2EUTRA-r16',
-        u'MeasResultRLFNR-r16',
-        u'TimeSinceFailure-r16',
-        u'MobilityHistoryReport-r16',
-        u'TimeUntilReconnection-r16',
-        u'ULDedicatedMessageSegment-r16',
-        u'ULDedicatedMessageSegment-r16-IEs',
-        u'ULInformationTransfer',
-        u'ULInformationTransfer-IEs',
-        u'ULInformationTransferIRAT-r16',
-        u'ULInformationTransferIRAT-r16-IEs',
-        u'ULInformationTransferMRDC',
-        u'ULInformationTransferMRDC-IEs',
-        u'SetupRelease',
-        u'SIB2',
-        u'RangeToBestCell',
-        u'SIB3',
-        u'IntraFreqNeighCellList',
-        u'IntraFreqNeighCellList-v1610',
-        u'IntraFreqNeighCellInfo',
-        u'IntraFreqNeighCellInfo-v1610',
-        u'IntraFreqBlackCellList',
-        u'IntraFreqWhiteCellList-r16',
-        u'IntraFreqCAG-CellListPerPLMN-r16',
-        u'SIB4',
-        u'InterFreqCarrierFreqList',
-        u'InterFreqCarrierFreqList-v1610',
-        u'InterFreqCarrierFreqInfo',
-        u'InterFreqCarrierFreqInfo-v1610',
-        u'InterFreqNeighCellList',
-        u'InterFreqNeighCellList-v1610',
-        u'InterFreqNeighCellInfo',
-        u'InterFreqNeighCellInfo-v1610',
-        u'InterFreqBlackCellList',
-        u'InterFreqWhiteCellList-r16',
-        u'InterFreqCAG-CellListPerPLMN-r16',
-        u'SIB5',
-        u'CarrierFreqListEUTRA',
-        u'CarrierFreqListEUTRA-v1610',
-        u'CarrierFreqEUTRA',
-        u'CarrierFreqEUTRA-v1610',
-        u'EUTRA-FreqBlackCellList',
-        u'EUTRA-FreqNeighCellList',
-        u'EUTRA-FreqNeighCellInfo',
-        u'SIB6',
-        u'SIB7',
-        u'SIB8',
-        u'SIB9',
-        u'SIB10-r16',
-        u'HRNN-List-r16',
-        u'HRNN-r16',
-        u'SIB11-r16',
-        u'SIB12-r16',
-        u'SIB12-IEs-r16',
-        u'SL-ConfigCommonNR-r16',
-        u'SL-NR-AnchorCarrierFreqList-r16',
-        u'SL-EUTRA-AnchorCarrierFreqList-r16',
-        u'SIB13-r16',
-        u'SIB14-r16',
-        u'PosSystemInformation-r16-IEs',
-        u'PosSI-SchedulingInfo-r16',
-        u'PosSchedulingInfo-r16',
-        u'PosSIB-MappingInfo-r16',
-        u'PosSIB-Type-r16',
-        u'GNSS-ID-r16',
-        u'SBAS-ID-r16',
-        u'SIBpos-r16',
-        u'AdditionalSpectrumEmission',
-        u'Alpha',
-        u'AMF-Identifier',
-        u'ARFCN-ValueEUTRA',
-        u'ARFCN-ValueNR',
-        u'ARFCN-ValueUTRA-FDD-r16',
-        u'AvailabilityCombinationsPerCell-r16',
-        u'AvailabilityCombinationsPerCellIndex-r16',
-        u'AvailabilityCombination-r16',
-        u'AvailabilityCombinationId-r16',
-        u'AvailabilityIndicator-r16',
-        u'AI-RNTI-r16',
-        u'BAP-RoutingID-r16',
-        u'BeamFailureRecoveryConfig',
-        u'PRACH-ResourceDedicatedBFR',
-        u'BFR-SSB-Resource',
-        u'BFR-CSIRS-Resource',
-        u'CandidateBeamRSListExt-r16',
-        u'BeamFailureRecoverySCellConfig-r16',
-        u'CandidateBeamRS-r16',
-        u'BetaOffsets',
-        u'BH-LogicalChannelIdentity-r16',
-        u'BH-LogicalChannelIdentity-Ext-r16',
-        u'BH-RLC-ChannelConfig-r16',
-        u'BH-RLC-ChannelID-r16',
-        u'BSR-Config',
-        u'BWP',
-        u'BWP-Downlink',
-        u'BWP-DownlinkCommon',
-        u'BWP-DownlinkDedicated',
-        u'SPS-ConfigToAddModList-r16',
-        u'SPS-ConfigToReleaseList-r16',
-        u'SPS-ConfigDeactivationState-r16',
-        u'SPS-ConfigDeactivationStateList-r16',
-        u'BWP-Id',
-        u'BWP-Uplink',
-        u'BWP-UplinkCommon',
-        u'BWP-UplinkDedicated',
-        u'ConfiguredGrantConfigToAddModList-r16',
-        u'ConfiguredGrantConfigToReleaseList-r16',
-        u'ConfiguredGrantConfigType2DeactivationState-r16',
-        u'ConfiguredGrantConfigType2DeactivationStateList-r16',
-        u'CellAccessRelatedInfo',
-        u'CellAccessRelatedInfo-EUTRA-5GC',
-        u'PLMN-IdentityList-EUTRA-5GC',
-        u'PLMN-Identity-EUTRA-5GC',
-        u'CellIdentity-EUTRA-5GC',
-        u'CellAccessRelatedInfo-EUTRA-EPC',
-        u'PLMN-IdentityList-EUTRA-EPC',
-        u'CellGroupConfig',
-        u'SpCellConfig',
-        u'ReconfigurationWithSync',
-        u'DAPS-UplinkPowerConfig-r16',
-        u'SCellConfig',
-        u'CellGroupId',
-        u'CellIdentity',
-        u'CellReselectionPriority',
-        u'CellReselectionSubPriority',
-        u'CGI-InfoEUTRA',
-        u'CGI-InfoEUTRALogging',
-        u'CGI-InfoNR',
-        u'CGI-Info-Logging-r16',
-        u'CLI-RSSI-Range-r16',
-        u'CodebookConfig',
-        u'CodebookConfig-r16',
-        u'CommonLocationInfo-r16',
-        u'CondReconfigId-r16',
-        u'CondReconfigToAddModList-r16',
-        u'CondReconfigToAddMod-r16',
-        u'ConditionalReconfiguration-r16',
-        u'CondReconfigToRemoveList-r16',
-        u'ConfiguredGrantConfig',
-        u'CG-UCI-OnPUSCH',
-        u'CG-COT-Sharing-r16',
-        u'CG-StartingOffsets-r16',
-        u'ConfiguredGrantConfigIndex-r16',
-        u'ConfiguredGrantConfigIndexMAC-r16',
-        u'ConnEstFailureControl',
-        u'ControlResourceSet',
-        u'ControlResourceSetId',
-        u'ControlResourceSetId-r16',
-        u'ControlResourceSetId-v1610',
-        u'ControlResourceSetZero',
-        u'CrossCarrierSchedulingConfig',
-        u'CSI-AperiodicTriggerStateList',
-        u'CSI-AperiodicTriggerState',
-        u'CSI-AssociatedReportConfigInfo',
-        u'CSI-FrequencyOccupation',
-        u'CSI-IM-Resource',
-        u'CSI-IM-ResourceId',
-        u'CSI-IM-ResourceSet',
-        u'CSI-IM-ResourceSetId',
-        u'CSI-MeasConfig',
-        u'CSI-ReportConfig',
-        u'CSI-ReportPeriodicityAndOffset',
-        u'PUCCH-CSI-Resource',
-        u'PortIndexFor8Ranks',
-        u'PortIndex8',
-        u'PortIndex4',
-        u'PortIndex2',
-        u'CSI-ReportConfigId',
-        u'CSI-ResourceConfig',
-        u'CSI-ResourceConfigId',
-        u'CSI-ResourcePeriodicityAndOffset',
-        u'CSI-RS-ResourceConfigMobility',
-        u'CSI-RS-CellMobility',
-        u'CSI-RS-Resource-Mobility',
-        u'CSI-RS-Index',
-        u'CSI-RS-ResourceMapping',
-        u'CSI-SemiPersistentOnPUSCH-TriggerStateList',
-        u'CSI-SemiPersistentOnPUSCH-TriggerState',
-        u'CSI-SSB-ResourceSet',
-        u'CSI-SSB-ResourceSetId',
-        u'DedicatedNAS-Message',
-        u'DMRS-DownlinkConfig',
-        u'DMRS-UplinkConfig',
-        u'DMRS-UplinkTransformPrecoding-r16',
-        u'DownlinkConfigCommon',
-        u'DownlinkConfigCommonSIB',
-        u'BCCH-Config',
-        u'PCCH-Config',
-        u'DownlinkPreemption',
-        u'INT-ConfigurationPerServingCell',
-        u'DRB-Identity',
-        u'DRX-Config',
-        u'DRX-ConfigSecondaryGroup',
-        u'FilterCoefficient',
-        u'FreqBandIndicatorNR',
-        u'FrequencyInfoDL',
-        u'FrequencyInfoDL-SIB',
-        u'FrequencyInfoUL',
-        u'FrequencyInfoUL-SIB',
-        u'HighSpeedConfig-r16',
-        u'Hysteresis',
-        u'InvalidSymbolPattern-r16',
-        u'I-RNTI-Value',
-        u'LBT-FailureRecoveryConfig-r16',
-        u'LocationInfo-r16',
-        u'LocationMeasurementInfo',
-        u'EUTRA-RSTD-InfoList',
-        u'EUTRA-RSTD-Info',
-        u'NR-PRS-MeasurementInfoList-r16',
-        u'NR-PRS-MeasurementInfo-r16',
-        u'LogicalChannelConfig',
-        u'LogicalChannelIdentity',
-        u'MAC-CellGroupConfig',
-        u'DataInactivityTimer',
-        u'MeasConfig',
-        u'MeasObjectToRemoveList',
-        u'MeasIdToRemoveList',
-        u'ReportConfigToRemoveList',
-        u'MeasGapConfig',
-        u'GapConfig',
-        u'MeasGapSharingConfig',
-        u'MeasGapSharingScheme',
-        u'MeasId',
-        u'MeasIdleConfigSIB-r16',
-        u'MeasIdleConfigDedicated-r16',
-        u'ValidityAreaList-r16',
-        u'ValidityArea-r16',
-        u'ValidityCellList',
-        u'MeasIdleCarrierNR-r16',
-        u'MeasIdleCarrierEUTRA-r16',
-        u'CellListNR-r16',
-        u'CellListEUTRA-r16',
-        u'BeamMeasConfigIdle-NR-r16',
-        u'RSRQ-RangeEUTRA-r16',
-        u'MeasIdToAddModList',
-        u'MeasIdToAddMod',
-        u'MeasObjectCLI-r16',
-        u'CLI-ResourceConfig-r16',
-        u'SRS-ResourceListConfigCLI-r16',
-        u'RSSI-ResourceListConfigCLI-r16',
-        u'SRS-ResourceConfigCLI-r16',
-        u'RSSI-ResourceConfigCLI-r16',
-        u'RSSI-ResourceId-r16',
-        u'RSSI-PeriodicityAndOffset-r16',
-        u'MeasObjectEUTRA',
-        u'EUTRA-CellIndexList',
-        u'EUTRA-CellIndex',
-        u'EUTRA-Cell',
-        u'EUTRA-BlackCell',
-        u'MeasObjectId',
-        u'MeasObjectNR',
-        u'SSB-MTC3List-r16',
-        u'T312-r16',
-        u'ReferenceSignalConfig',
-        u'SSB-ConfigMobility',
-        u'Q-OffsetRangeList',
-        u'ThresholdNR',
-        u'CellsToAddModList',
-        u'CellsToAddMod',
-        u'RMTC-Config-r16',
-        u'SSB-PositionQCL-CellsToAddModList-r16',
-        u'SSB-PositionQCL-CellsToAddMod-r16',
-        u'MeasObjectNR-SL-r16',
-        u'Tx-PoolMeasList-r16',
-        u'MeasObjectToAddModList',
-        u'MeasObjectToAddMod',
-        u'MeasObjectUTRA-FDD-r16',
-        u'CellsToAddModListUTRA-FDD-r16',
-        u'CellsToAddModUTRA-FDD-r16',
-        u'UTRA-FDD-CellIndexList-r16',
-        u'UTRA-FDD-CellIndex-r16',
-        u'MeasResultCellListSFTD-NR',
-        u'MeasResultCellSFTD-NR',
-        u'MeasResultCellListSFTD-EUTRA',
-        u'MeasResultSFTD-EUTRA',
-        u'MeasResults',
-        u'MeasResultServMOList',
-        u'MeasResultServMO',
-        u'MeasResultListNR',
-        u'MeasResultNR',
-        u'MeasResultListEUTRA',
-        u'MeasResultEUTRA',
-        u'MultiBandInfoListEUTRA',
-        u'MeasQuantityResults',
-        u'MeasQuantityResultsEUTRA',
-        u'ResultsPerSSB-IndexList',
-        u'ResultsPerSSB-Index',
-        u'ResultsPerCSI-RS-IndexList',
-        u'ResultsPerCSI-RS-Index',
-        u'MeasResultServFreqListEUTRA-SCG',
-        u'MeasResultServFreqListNR-SCG',
-        u'MeasResultListUTRA-FDD-r16',
-        u'MeasResultUTRA-FDD-r16',
-        u'MeasResultForRSSI-r16',
-        u'MeasResultCLI-r16',
-        u'MeasResultListSRS-RSRP-r16',
-        u'MeasResultSRS-RSRP-r16',
-        u'MeasResultListCLI-RSSI-r16',
-        u'MeasResultCLI-RSSI-r16',
-        u'UL-PDCP-DelayValueResultList-r16',
-        u'UL-PDCP-DelayValueResult-r16',
-        u'MeasResult2EUTRA',
-        u'MeasResult2NR',
-        u'MeasResultIdleEUTRA-r16',
-        u'MeasResultsPerCarrierIdleEUTRA-r16',
-        u'MeasResultsPerCellIdleEUTRA-r16',
-        u'MeasResultIdleNR-r16',
-        u'MeasResultsPerCarrierIdleNR-r16',
-        u'MeasResultsPerCellIdleNR-r16',
-        u'ResultsPerSSB-IndexList-r16',
-        u'ResultsPerSSB-IndexIdle-r16',
-        u'MeasResultSCG-Failure',
-        u'MeasResultList2NR',
-        u'MeasResultsSL-r16',
-        u'MeasResultNR-SL-r16',
-        u'MeasResultCBR-NR-r16',
-        u'MeasTriggerQuantityEUTRA',
-        u'RSRP-RangeEUTRA',
-        u'RSRQ-RangeEUTRA',
-        u'SINR-RangeEUTRA',
-        u'MobilityStateParameters',
-        u'MsgA-ConfigCommon-r16',
-        u'MsgA-PUSCH-Config-r16',
-        u'MsgA-PUSCH-Resource-r16',
-        u'MsgA-DMRS-Config-r16',
-        u'MultiFrequencyBandListNR',
-        u'MultiFrequencyBandListNR-SIB',
-        u'NR-MultiBandInfo',
-        u'NeedForGapsConfigNR-r16',
-        u'NeedForGapsInfoNR-r16',
-        u'NeedForGapsIntraFreqlist-r16',
-        u'NeedForGapsBandlistNR-r16',
-        u'NeedForGapsIntraFreq-r16',
-        u'NeedForGapsNR-r16',
-        u'NextHopChainingCount',
-        u'NG-5G-S-TMSI',
-        u'NPN-Identity-r16',
-        u'CAG-IdentityInfo-r16',
-        u'NID-r16',
-        u'NPN-IdentityInfoList-r16',
-        u'NPN-IdentityInfo-r16',
-        u'NR-NS-PmaxList',
-        u'NR-NS-PmaxValue',
-        u'NZP-CSI-RS-Resource',
-        u'NZP-CSI-RS-ResourceId',
-        u'NZP-CSI-RS-ResourceSet',
-        u'NZP-CSI-RS-ResourceSetId',
-        u'P-Max',
-        u'PCI-List',
-        u'PCI-Range',
-        u'PCI-RangeElement',
-        u'PCI-RangeIndex',
-        u'PCI-RangeIndexList',
-        u'PDCCH-Config',
-        u'SearchSpaceSwitchConfig-r16',
-        u'CellGroupForSwitch-r16',
-        u'PDCCH-ConfigCommon',
-        u'PDCCH-ConfigSIB1',
-        u'PDCCH-ServingCellConfig',
-        u'PDCP-Config',
-        u'EthernetHeaderCompression-r16',
-        u'UL-DataSplitThreshold',
-        u'DiscardTimerExt-r16',
-        u'PDSCH-Config',
-        u'RateMatchPatternGroup',
-        u'MinSchedulingOffsetK0-Values-r16',
-        u'MaxMIMO-LayersDL-r16',
-        u'PDSCH-ConfigCommon',
-        u'PDSCH-ServingCellConfig',
-        u'PDSCH-CodeBlockGroupTransmission',
-        u'PDSCH-CodeBlockGroupTransmissionList-r16',
-        u'PDSCH-TimeDomainResourceAllocationList',
-        u'PDSCH-TimeDomainResourceAllocation',
-        u'PDSCH-TimeDomainResourceAllocationList-r16',
-        u'PDSCH-TimeDomainResourceAllocation-r16',
-        u'PHR-Config',
-        u'MPE-Config-FR2-r16',
-        u'PhysCellId',
-        u'PhysicalCellGroupConfig',
-        u'PDCCH-BlindDetection',
-        u'DCP-Config-r16',
-        u'PDSCH-HARQ-ACK-CodebookList-r16',
-        u'PDCCH-BlindDetectionCA-CombIndicator-r16',
-        u'PDCCH-BlindDetection2-r16',
-        u'PDCCH-BlindDetection3-r16',
-        u'PLMN-Identity',
-        u'MCC',
-        u'MNC',
-        u'MCC-MNC-Digit',
-        u'PLMN-IdentityInfoList',
-        u'PLMN-IdentityInfo',
-        u'PLMN-IdentityList2-r16',
-        u'PRB-Id',
-        u'PTRS-DownlinkConfig',
-        u'PTRS-UplinkConfig',
-        u'PUCCH-Config',
-        u'PUCCH-FormatConfig',
-        u'PUCCH-MaxCodeRate',
-        u'PUCCH-ResourceSet',
-        u'PUCCH-ResourceSetId',
-        u'PUCCH-Resource',
-        u'PUCCH-ResourceExt-r16',
-        u'PUCCH-ResourceId',
-        u'PUCCH-format0',
-        u'PUCCH-format1',
-        u'PUCCH-format2',
-        u'PUCCH-format3',
-        u'PUCCH-format4',
-        u'PUCCH-ResourceGroup-r16',
-        u'PUCCH-ResourceGroupId-r16',
-        u'DL-DataToUL-ACK-r16',
-        u'DL-DataToUL-ACK-DCI-1-2-r16',
-        u'UL-AccessConfigListDCI-1-1-r16',
-        u'PUCCH-ConfigCommon',
-        u'PUCCH-ConfigurationList-r16',
-        u'PUCCH-PathlossReferenceRS-Id',
-        u'PUCCH-PathlossReferenceRS-Id-v1610',
-        u'PUCCH-PowerControl',
-        u'P0-PUCCH',
-        u'P0-PUCCH-Id',
-        u'PathlossReferenceRSs-v1610',
-        u'PUCCH-PathlossReferenceRS',
-        u'PUCCH-PathlossReferenceRS-r16',
-        u'PUCCH-SpatialRelationInfo',
-        u'PUCCH-SpatialRelationInfoExt-r16',
-        u'PUCCH-SRS',
-        u'PUCCH-SpatialRelationInfoId',
-        u'PUCCH-SpatialRelationInfoId-r16',
-        u'PUCCH-SpatialRelationInfoId-v1610',
-        u'PUCCH-TPC-CommandConfig',
-        u'PUSCH-Config',
-        u'UCI-OnPUSCH',
-        u'MinSchedulingOffsetK2-Values-r16',
-        u'UCI-OnPUSCH-DCI-0-2-r16',
-        u'FrequencyHoppingOffsetListsDCI-0-2-r16',
-        u'UCI-OnPUSCH-ListDCI-0-2-r16',
-        u'UCI-OnPUSCH-ListDCI-0-1-r16',
-        u'UL-AccessConfigListDCI-0-1-r16',
-        u'PUSCH-ConfigCommon',
-        u'PUSCH-PowerControl',
-        u'P0-PUSCH-AlphaSet',
-        u'P0-PUSCH-AlphaSetId',
-        u'PUSCH-PathlossReferenceRS',
-        u'PUSCH-PathlossReferenceRS-r16',
-        u'PUSCH-PathlossReferenceRS-Id',
-        u'PUSCH-PathlossReferenceRS-Id-v1610',
-        u'SRI-PUSCH-PowerControl',
-        u'SRI-PUSCH-PowerControlId',
-        u'PUSCH-PowerControl-v1610',
-        u'P0-PUSCH-Set-r16',
-        u'P0-PUSCH-SetId-r16',
-        u'P0-PUSCH-r16',
-        u'PUSCH-ServingCellConfig',
-        u'PUSCH-CodeBlockGroupTransmission',
-        u'MaxMIMO-LayersDCI-0-2-r16',
-        u'PUSCH-TimeDomainResourceAllocationList',
-        u'PUSCH-TimeDomainResourceAllocation',
-        u'PUSCH-TimeDomainResourceAllocationList-r16',
-        u'PUSCH-TimeDomainResourceAllocation-r16',
-        u'PUSCH-Allocation-r16',
-        u'PUSCH-TPC-CommandConfig',
-        u'Q-OffsetRange',
-        u'Q-QualMin',
-        u'Q-RxLevMin',
-        u'QuantityConfig',
-        u'QuantityConfigNR',
-        u'QuantityConfigRS',
-        u'FilterConfig',
-        u'FilterConfigCLI-r16',
-        u'QuantityConfigUTRA-FDD-r16',
-        u'RACH-ConfigCommon',
-        u'RACH-ConfigCommonTwoStepRA-r16',
-        u'GroupB-ConfiguredTwoStepRA-r16',
-        u'RACH-ConfigDedicated',
-        u'CFRA',
-        u'CFRA-TwoStep-r16',
-        u'CFRA-SSB-Resource',
-        u'CFRA-CSIRS-Resource',
-        u'RACH-ConfigGeneric',
-        u'RACH-ConfigGenericTwoStepRA-r16',
-        u'RA-Prioritization',
-        u'RadioBearerConfig',
-        u'SRB-ToAddModList',
-        u'SRB-ToAddMod',
-        u'DRB-ToAddModList',
-        u'DRB-ToAddMod',
-        u'DRB-ToReleaseList',
-        u'SecurityConfig',
-        u'RadioLinkMonitoringConfig',
-        u'RadioLinkMonitoringRS',
-        u'RadioLinkMonitoringRS-Id',
-        u'RAN-AreaCode',
-        u'RateMatchPattern',
-        u'RateMatchPatternId',
-        u'RateMatchPatternLTE-CRS',
-        u'LTE-CRS-PatternList-r16',
-        u'ReferenceTimeInfo-r16',
-        u'ReferenceTime-r16',
-        u'RejectWaitTime',
-        u'RepetitionSchemeConfig-r16',
-        u'RepetitionSchemeConfig-v1630',
-        u'FDM-TDM-r16',
-        u'SlotBased-r16',
-        u'SlotBased-v1630',
-        u'ReportConfigId',
-        u'ReportConfigInterRAT',
-        u'ReportCGI-EUTRA',
-        u'ReportSFTD-EUTRA',
-        u'EventTriggerConfigInterRAT',
-        u'PeriodicalReportConfigInterRAT',
-        u'MeasTriggerQuantityUTRA-FDD-r16',
-        u'MeasReportQuantityUTRA-FDD-r16',
-        u'ReportConfigNR',
-        u'ReportCGI',
-        u'ReportSFTD-NR',
-        u'CondTriggerConfig-r16',
-        u'EventTriggerConfig',
-        u'PeriodicalReportConfig',
-        u'NR-RS-Type',
-        u'MeasTriggerQuantity',
-        u'MeasTriggerQuantityOffset',
-        u'MeasReportQuantity',
-        u'MeasRSSI-ReportConfig-r16',
-        u'CLI-EventTriggerConfig-r16',
-        u'CLI-PeriodicalReportConfig-r16',
-        u'MeasTriggerQuantityCLI-r16',
-        u'MeasReportQuantityCLI-r16',
-        u'ReportConfigNR-SL-r16',
-        u'EventTriggerConfigNR-SL-r16',
-        u'PeriodicalReportConfigNR-SL-r16',
-        u'MeasReportQuantity-r16',
-        u'ReportConfigToAddModList',
-        u'ReportConfigToAddMod',
-        u'ReportInterval',
-        u'ReselectionThreshold',
-        u'ReselectionThresholdQ',
-        u'ResumeCause',
-        u'RLC-BearerConfig',
-        u'RLC-Config',
-        u'UL-AM-RLC',
-        u'DL-AM-RLC',
-        u'UL-UM-RLC',
-        u'DL-UM-RLC',
-        u'T-PollRetransmit',
-        u'PollPDU',
-        u'PollByte',
-        u'T-Reassembly',
-        u'T-StatusProhibit',
-        u'SN-FieldLengthUM',
-        u'SN-FieldLengthAM',
-        u'RLC-Config-v1610',
-        u'DL-AM-RLC-v1610',
-        u'T-StatusProhibit-v1610',
-        u'RLF-TimersAndConstants',
-        u'RNTI-Value',
-        u'RSRP-Range',
-        u'RSRQ-Range',
-        u'RSSI-Range-r16',
-        u'SCellIndex',
-        u'SchedulingRequestConfig',
-        u'SchedulingRequestToAddMod',
-        u'SchedulingRequestId',
-        u'SchedulingRequestResourceConfig',
-        u'SchedulingRequestResourceConfigExt-v1610',
-        u'SchedulingRequestResourceId',
-        u'ScramblingId',
-        u'SCS-SpecificCarrier',
-        u'SDAP-Config',
-        u'QFI',
-        u'PDU-SessionID',
-        u'SearchSpace',
-        u'SearchSpaceExt-r16',
-        u'SearchSpaceId',
-        u'SearchSpaceZero',
-        u'SecurityAlgorithmConfig',
-        u'IntegrityProtAlgorithm',
-        u'CipheringAlgorithm',
-        u'SemiStaticChannelAccessConfig-r16',
-        u'Sensor-LocationInfo-r16',
-        u'ServCellIndex',
-        u'ServingCellConfig',
-        u'UplinkConfig',
-        u'DummyJ',
-        u'ChannelAccessConfig-r16',
-        u'IntraCellGuardBandsPerSCS-r16',
-        u'GuardBand-r16',
-        u'DormancyGroupID-r16',
-        u'DormantBWP-Config-r16',
-        u'WithinActiveTimeConfig-r16',
-        u'OutsideActiveTimeConfig-r16',
-        u'UplinkTxSwitching-r16',
-        u'ServingCellConfigCommon',
-        u'ServingCellConfigCommonSIB',
-        u'ShortI-RNTI-Value',
-        u'ShortMAC-I',
-        u'SINR-Range',
-        u'SI-RequestConfig',
-        u'SI-RequestResources',
-        u'SI-SchedulingInfo',
-        u'SchedulingInfo',
-        u'SIB-Mapping',
-        u'SIB-TypeInfo',
-        u'SK-Counter',
-        u'SlotFormatCombinationsPerCell',
-        u'SlotFormatCombination',
-        u'SlotFormatCombinationId',
-        u'SlotFormatIndicator',
-        u'CO-DurationsPerCell-r16',
-        u'CO-Duration-r16',
-        u'AvailableRB-SetsPerCell-r16',
-        u'SearchSpaceSwitchTrigger-r16',
-        u'S-NSSAI',
-        u'SpeedStateScaleFactors',
-        u'SPS-Config',
-        u'SPS-ConfigIndex-r16',
-        u'SPS-PUCCH-AN-r16',
-        u'SPS-PUCCH-AN-List-r16',
-        u'SRB-Identity',
-        u'SRS-CarrierSwitching',
-        u'SRS-TPC-PDCCH-Config',
-        u'SRS-CC-SetIndex',
-        u'SRS-Config',
-        u'SRS-ResourceSet',
-        u'PathlossReferenceRS-Config',
-        u'PathlossReferenceRSList-r16',
-        u'PathlossReferenceRS-r16',
-        u'SRS-PathlossReferenceRS-Id-r16',
-        u'SRS-PosResourceSet-r16',
-        u'SRS-ResourceSetId',
-        u'SRS-PosResourceSetId-r16',
-        u'SRS-Resource',
-        u'SRS-PosResource-r16',
-        u'SRS-SpatialRelationInfo',
-        u'SRS-SpatialRelationInfoPos-r16',
-        u'SSB-Configuration-r16',
-        u'SSB-InfoNcell-r16',
-        u'DL-PRS-Info-r16',
-        u'SRS-ResourceId',
-        u'SRS-PosResourceId-r16',
-        u'SRS-PeriodicityAndOffset',
-        u'SRS-PeriodicityAndOffset-r16',
-        u'SRS-RSRP-Range-r16',
-        u'SRS-TPC-CommandConfig',
-        u'SSB-Index',
-        u'SSB-MTC',
-        u'SSB-MTC2',
-        u'SSB-MTC2-LP-r16',
-        u'SSB-MTC3-r16',
-        u'SSB-PositionQCL-Relation-r16',
-        u'SSB-ToMeasure',
-        u'SS-RSSI-Measurement',
-        u'SubcarrierSpacing',
-        u'TAG-Config',
-        u'TAG',
-        u'TAG-Id',
-        u'TimeAlignmentTimer',
-        u'TCI-State',
-        u'QCL-Info',
-        u'TCI-StateId',
-        u'TDD-UL-DL-ConfigCommon',
-        u'TDD-UL-DL-Pattern',
-        u'TDD-UL-DL-ConfigDedicated',
-        u'TDD-UL-DL-ConfigDedicated-IAB-MT-r16',
-        u'TDD-UL-DL-SlotConfig',
-        u'TDD-UL-DL-SlotConfig-IAB-MT-r16',
-        u'TDD-UL-DL-SlotIndex',
-        u'TrackingAreaCode',
-        u'T-Reselection',
-        u'TimeToTrigger',
-        u'UAC-BarringInfoSetIndex',
-        u'UAC-BarringInfoSetList',
-        u'UAC-BarringInfoSet',
-        u'UAC-BarringPerCatList',
-        u'UAC-BarringPerCat',
-        u'UAC-BarringPerPLMN-List',
-        u'UAC-BarringPerPLMN',
-        u'UE-TimersAndConstants',
-        u'UL-DelayValueConfig-r16',
-        u'UplinkCancellation-r16',
-        u'CI-ConfigurationPerServingCell-r16',
-        u'UplinkConfigCommon',
-        u'UplinkConfigCommonSIB',
-        u'UplinkTxDirectCurrentList',
-        u'UplinkTxDirectCurrentCell',
-        u'UplinkTxDirectCurrentBWP',
-        u'UplinkTxDirectCurrentTwoCarrierList-r16',
-        u'UplinkTxDirectCurrentTwoCarrier-r16',
-        u'UplinkTxDirectCurrentCarrierInfo-r16',
-        u'UplinkTxDirectCurrentTwoCarrierInfo-r16',
-        u'ZP-CSI-RS-Resource',
-        u'ZP-CSI-RS-ResourceId',
-        u'ZP-CSI-RS-ResourceSet',
-        u'ZP-CSI-RS-ResourceSetId',
-        u'AccessStratumRelease',
-        u'BandCombinationList',
-        u'BandCombinationList-v1540',
-        u'BandCombinationList-v1550',
-        u'BandCombinationList-v1560',
-        u'BandCombinationList-v1570',
-        u'BandCombinationList-v1580',
-        u'BandCombinationList-v1590',
-        u'BandCombinationList-v1610',
-        u'BandCombinationList-v1630',
-        u'BandCombinationList-v1640',
-        u'BandCombinationList-v1650',
-        u'BandCombinationList-UplinkTxSwitch-r16',
-        u'BandCombinationList-UplinkTxSwitch-v1630',
-        u'BandCombinationList-UplinkTxSwitch-v1640',
-        u'BandCombinationList-UplinkTxSwitch-v1650',
-        u'BandCombination',
-        u'BandCombination-v1540',
-        u'BandCombination-v1550',
-        u'BandCombination-v1560',
-        u'BandCombination-v1570',
-        u'BandCombination-v1580',
-        u'BandCombination-v1590',
-        u'BandCombination-v1610',
-        u'BandCombination-v1630',
-        u'BandCombination-v1640',
-        u'BandCombination-v1650',
-        u'BandCombination-UplinkTxSwitch-r16',
-        u'BandCombination-UplinkTxSwitch-v1630',
-        u'BandCombination-UplinkTxSwitch-v1640',
-        u'BandCombination-UplinkTxSwitch-v1650',
-        u'ULTxSwitchingBandPair-r16',
-        u'BandParameters',
-        u'BandParameters-v1540',
-        u'BandParameters-v1610',
-        u'ScalingFactorSidelink-r16',
-        u'BandCombinationListSidelinkEUTRA-NR-r16',
-        u'BandCombinationListSidelinkEUTRA-NR-v1630',
-        u'BandCombinationParametersSidelinkEUTRA-NR-r16',
-        u'BandCombinationParametersSidelinkEUTRA-NR-v1630',
-        u'BandParametersSidelinkEUTRA-NR-r16',
-        u'BandParametersSidelinkEUTRA-NR-v1630',
-        u'BandParametersSidelink-r16',
-        u'CA-BandwidthClassEUTRA',
-        u'CA-BandwidthClassNR',
-        u'CA-ParametersEUTRA',
-        u'CA-ParametersEUTRA-v1560',
-        u'CA-ParametersEUTRA-v1570',
-        u'CA-ParametersNR',
-        u'CA-ParametersNR-v1540',
-        u'CA-ParametersNR-v1550',
-        u'CA-ParametersNR-v1560',
-        u'CA-ParametersNR-v1610',
-        u'CA-ParametersNR-v1630',
-        u'CA-ParametersNR-v1640',
-        u'SimulSRS-ForAntennaSwitching-r16',
-        u'TwoPUCCH-Grp-Configurations-r16',
-        u'TwoPUCCH-Grp-ConfigParams-r16',
-        u'PUCCH-Grp-CarrierTypes-r16',
-        u'CA-ParametersNRDC',
-        u'CA-ParametersNRDC-v1610',
-        u'CA-ParametersNRDC-v1630',
-        u'CA-ParametersNRDC-v1640',
-        u'CA-ParametersNRDC-v1650',
-        u'CarrierAggregationVariant',
-        u'CodebookParameters',
-        u'CodebookParameters-v1610',
-        u'CodebookParametersAddition-r16',
-        u'CodebookComboParametersAddition-r16',
-        u'CodebookParametersAdditionPerBC-r16',
-        u'CodebookComboParametersAdditionPerBC-r16',
-        u'CodebookVariantsList-r16',
-        u'SupportedCSI-RS-Resource',
-        u'FeatureSetCombination',
-        u'FeatureSetsPerBand',
-        u'FeatureSet',
-        u'FeatureSetCombinationId',
-        u'FeatureSetDownlink',
-        u'FeatureSetDownlink-v1540',
-        u'FeatureSetDownlink-v15a0',
-        u'FeatureSetDownlink-v1610',
-        u'PDCCH-MonitoringOccasions-r16',
-        u'DummyA',
-        u'DummyB',
-        u'DummyC',
-        u'DummyD',
-        u'DummyE',
-        u'FeatureSetDownlinkId',
-        u'FeatureSetDownlinkPerCC',
-        u'FeatureSetDownlinkPerCC-v1620',
-        u'MultiDCI-MultiTRP-r16',
-        u'FeatureSetDownlinkPerCC-Id',
-        u'FeatureSetEUTRA-DownlinkId',
-        u'FeatureSetEUTRA-UplinkId',
-        u'FeatureSets',
-        u'FeatureSetUplink',
-        u'FeatureSetUplink-v1540',
-        u'FeatureSetUplink-v1610',
-        u'FeatureSetUplink-v1630',
-        u'FeatureSetUplink-v1640',
-        u'SubSlot-Config-r16',
-        u'SRS-AllPosResources-r16',
-        u'SRS-PosResources-r16',
-        u'SRS-PosResourceAP-r16',
-        u'SRS-PosResourceSP-r16',
-        u'SRS-Resources',
-        u'DummyF',
-        u'FeatureSetUplinkId',
-        u'FeatureSetUplinkPerCC',
-        u'FeatureSetUplinkPerCC-v1540',
-        u'FeatureSetUplinkPerCC-Id',
-        u'FreqBandIndicatorEUTRA',
-        u'FreqBandList',
-        u'FreqBandInformation',
-        u'FreqBandInformationEUTRA',
-        u'FreqBandInformationNR',
-        u'AggregatedBandwidth',
-        u'FreqSeparationClass',
-        u'FreqSeparationClassDL-v1620',
-        u'FreqSeparationClassUL-v1620',
-        u'FreqSeparationClassDL-Only-r16',
-        u'HighSpeedParameters-r16',
-        u'HighSpeedParameters-v1650',
-        u'IMS-Parameters',
-        u'IMS-ParametersCommon',
-        u'IMS-ParametersFRX-Diff',
-        u'InterRAT-Parameters',
-        u'EUTRA-Parameters',
-        u'EUTRA-ParametersCommon',
-        u'EUTRA-ParametersXDD-Diff',
-        u'UTRA-FDD-Parameters-r16',
-        u'SupportedBandUTRA-FDD-r16',
-        u'MAC-Parameters',
-        u'MAC-Parameters-v1610',
-        u'MAC-ParametersCommon',
-        u'MAC-ParametersFRX-Diff-r16',
-        u'MAC-ParametersXDD-Diff',
-        u'MinTimeGap-r16',
-        u'MeasAndMobParameters',
-        u'MeasAndMobParametersCommon',
-        u'MeasAndMobParametersXDD-Diff',
-        u'MeasAndMobParametersFRX-Diff',
-        u'MeasAndMobParametersMRDC',
-        u'MeasAndMobParametersMRDC-v1560',
-        u'MeasAndMobParametersMRDC-v1610',
-        u'MeasAndMobParametersMRDC-Common',
-        u'MeasAndMobParametersMRDC-Common-v1610',
-        u'MeasAndMobParametersMRDC-XDD-Diff',
-        u'MeasAndMobParametersMRDC-XDD-Diff-v1560',
-        u'MeasAndMobParametersMRDC-FRX-Diff',
-        u'MIMO-LayersDL',
-        u'MIMO-LayersUL',
-        u'MIMO-ParametersPerBand',
-        u'DummyG',
-        u'BeamManagementSSB-CSI-RS',
-        u'DummyH',
-        u'CSI-RS-ForTracking',
-        u'CSI-RS-IM-ReceptionForFeedback',
-        u'CSI-RS-ProcFrameworkForSRS',
-        u'CSI-ReportFramework',
-        u'CSI-ReportFrameworkExt-r16',
-        u'PTRS-DensityRecommendationDL',
-        u'PTRS-DensityRecommendationUL',
-        u'SpatialRelations',
-        u'DummyI',
-        u'ModulationOrder',
-        u'MRDC-Parameters',
-        u'MRDC-Parameters-v1580',
-        u'MRDC-Parameters-v1590',
-        u'MRDC-Parameters-v1620',
-        u'MRDC-Parameters-v1630',
-        u'NRDC-Parameters',
-        u'NRDC-Parameters-v1570',
-        u'NRDC-Parameters-v15c0',
-        u'NRDC-Parameters-v1610',
-        u'OLPC-SRS-Pos-r16',
-        u'PDCP-Parameters',
-        u'PDCP-ParametersMRDC',
-        u'PDCP-ParametersMRDC-v1610',
-        u'Phy-Parameters',
-        u'Phy-ParametersCommon',
-        u'Phy-ParametersXDD-Diff',
-        u'Phy-ParametersFRX-Diff',
-        u'Phy-ParametersFR1',
-        u'Phy-ParametersFR2',
-        u'Phy-ParametersMRDC',
-        u'NAICS-Capability-Entry',
-        u'Phy-ParametersSharedSpectrumChAccess-r16',
-        u'PowSav-Parameters-r16',
-        u'PowSav-ParametersCommon-r16',
-        u'PowSav-ParametersFRX-Diff-r16',
-        u'ProcessingParameters',
-        u'NumberOfCarriers',
-        u'RAT-Type',
-        u'RF-Parameters',
-        u'BandNR',
-        u'RF-ParametersMRDC',
-        u'RLC-Parameters',
-        u'SDAP-Parameters',
-        u'SidelinkParameters-r16',
-        u'SidelinkParametersNR-r16',
-        u'SidelinkParametersEUTRA-r16',
-        u'RLC-ParametersSidelink-r16',
-        u'MAC-ParametersSidelink-r16',
-        u'UE-SidelinkCapabilityAddXDD-Mode-r16',
-        u'MAC-ParametersSidelinkCommon-r16',
-        u'MAC-ParametersSidelinkXDD-Diff-r16',
-        u'BandSidelinkEUTRA-r16',
-        u'BandSidelink-r16',
-        u'SON-Parameters-r16',
-        u'SpatialRelationsSRS-Pos-r16',
-        u'SRS-SwitchingTimeNR',
-        u'SRS-SwitchingTimeEUTRA',
-        u'SupportedBandwidth',
-        u'UE-BasedPerfMeas-Parameters-r16',
-        u'UE-CapabilityRAT-ContainerList',
-        u'UE-CapabilityRAT-Container',
-        u'UE-CapabilityRAT-RequestList',
-        u'UE-CapabilityRAT-Request',
-        u'UE-CapabilityRequestFilterCommon',
-        u'CellGrouping-r16',
-        u'UE-CapabilityRequestFilterNR',
-        u'UE-CapabilityRequestFilterNR-v1540',
-        u'UE-MRDC-Capability',
-        u'UE-MRDC-Capability-v1560',
-        u'UE-MRDC-Capability-v1610',
-        u'UE-MRDC-CapabilityAddXDD-Mode',
-        u'UE-MRDC-CapabilityAddXDD-Mode-v1560',
-        u'UE-MRDC-CapabilityAddFRX-Mode',
-        u'GeneralParametersMRDC-XDD-Diff',
-        u'GeneralParametersMRDC-v1610',
-        u'UE-NR-Capability',
-        u'UE-NR-Capability-v1530',
-        u'UE-NR-Capability-v1540',
-        u'UE-NR-Capability-v1550',
-        u'UE-NR-Capability-v1560',
-        u'UE-NR-Capability-v1570',
-        u'UE-NR-Capability-v15c0',
-        u'UE-NR-Capability-v1610',
-        u'UE-NR-Capability-v1640',
-        u'UE-NR-Capability-v1650',
-        u'UE-NR-CapabilityAddXDD-Mode',
-        u'UE-NR-CapabilityAddXDD-Mode-v1530',
-        u'UE-NR-CapabilityAddFRX-Mode',
-        u'UE-NR-CapabilityAddFRX-Mode-v1540',
-        u'UE-NR-CapabilityAddFRX-Mode-v1610',
-        u'BAP-Parameters-r16',
-        u'SharedSpectrumChAccessParamsPerBand-r16',
-        u'SharedSpectrumChAccessParamsPerBand-v1630',
-        u'SharedSpectrumChAccessParamsPerBand-v1640',
-        u'SharedSpectrumChAccessParamsPerBand-v1650',
-        u'AbsoluteTimeInfo-r16',
-        u'AreaConfiguration-r16',
-        u'AreaConfig-r16',
-        u'InterFreqTargetInfo-r16',
-        u'CellGlobalIdList-r16',
-        u'TrackingAreaCodeList-r16',
-        u'TrackingAreaIdentityList-r16',
-        u'TrackingAreaIdentity-r16',
-        u'BT-NameList-r16',
-        u'BT-Name-r16',
-        u'EUTRA-AllowedMeasBandwidth',
-        u'EUTRA-MBSFN-SubframeConfigList',
-        u'EUTRA-MBSFN-SubframeConfig',
-        u'EUTRA-MultiBandInfoList',
-        u'EUTRA-MultiBandInfo',
-        u'EUTRA-NS-PmaxList',
-        u'EUTRA-NS-PmaxValue',
-        u'EUTRA-PhysCellId',
-        u'EUTRA-PhysCellIdRange',
-        u'EUTRA-PresenceAntennaPort1',
-        u'EUTRA-Q-OffsetRange',
-        u'IAB-IP-Address-r16',
-        u'IAB-IP-AddressIndex-r16',
-        u'IAB-IP-Usage-r16',
-        u'LoggingDuration-r16',
-        u'LoggingInterval-r16',
-        u'LogMeasResultListBT-r16',
-        u'LogMeasResultBT-r16',
-        u'LogMeasResultListWLAN-r16',
-        u'LogMeasResultWLAN-r16',
-        u'WLAN-Identifiers-r16',
-        u'WLAN-RSSI-Range-r16',
-        u'WLAN-RTT-r16',
-        u'OtherConfig',
-        u'OtherConfig-v1540',
-        u'CandidateServingFreqListNR-r16',
-        u'OtherConfig-v1610',
-        u'OverheatingAssistanceConfig',
-        u'IDC-AssistanceConfig-r16',
-        u'DRX-PreferenceConfig-r16',
-        u'MaxBW-PreferenceConfig-r16',
-        u'MaxCC-PreferenceConfig-r16',
-        u'MaxMIMO-LayerPreferenceConfig-r16',
-        u'MinSchedulingOffsetPreferenceConfig-r16',
-        u'ReleasePreferenceConfig-r16',
-        u'PhysCellIdUTRA-FDD-r16',
-        u'RRC-TransactionIdentifier',
-        u'Sensor-NameList-r16',
-        u'TraceReference-r16',
-        u'UE-MeasurementsAvailable-r16',
-        u'UTRA-FDD-Q-OffsetRange-r16',
-        u'VisitedCellInfoList-r16',
-        u'VisitedCellInfo-r16',
-        u'WLAN-NameList-r16',
-        u'WLAN-Name-r16',
-        u'SL-BWP-Config-r16',
-        u'SL-BWP-Generic-r16',
-        u'SL-BWP-ConfigCommon-r16',
-        u'SL-BWP-PoolConfig-r16',
-        u'SL-TxPoolDedicated-r16',
-        u'SL-ResourcePoolConfig-r16',
-        u'SL-ResourcePoolID-r16',
-        u'SL-BWP-PoolConfigCommon-r16',
-        u'SL-CBR-PriorityTxConfigList-r16',
-        u'SL-CBR-PriorityTxConfigList-v1650',
-        u'SL-PriorityTxConfigIndex-r16',
-        u'SL-PriorityTxConfigIndex-v1650',
-        u'SL-TxConfigIndex-r16',
-        u'SL-CBR-CommonTxConfigList-r16',
-        u'SL-CBR-LevelsConfig-r16',
-        u'SL-CBR-PSSCH-TxConfig-r16',
-        u'SL-CBR-r16',
-        u'SL-ConfigDedicatedNR-r16',
-        u'SL-DestinationIndex-r16',
-        u'SL-PHY-MAC-RLC-Config-r16',
-        u'SL-ConfiguredGrantConfig-r16',
-        u'SL-ConfigIndexCG-r16',
-        u'SL-CG-MaxTransNumList-r16',
-        u'SL-CG-MaxTransNum-r16',
-        u'SL-PeriodCG-r16',
-        u'SL-DestinationIdentity-r16',
-        u'SL-FreqConfig-r16',
-        u'SL-Freq-Id-r16',
-        u'SL-FreqConfigCommon-r16',
-        u'SL-LogicalChannelConfig-r16',
-        u'SL-MeasConfigCommon-r16',
-        u'SL-MeasConfigInfo-r16',
-        u'SL-MeasConfig-r16',
-        u'SL-MeasObjectToRemoveList-r16',
-        u'SL-ReportConfigToRemoveList-r16',
-        u'SL-MeasIdToRemoveList-r16',
-        u'SL-MeasIdList-r16',
-        u'SL-MeasIdInfo-r16',
-        u'SL-MeasId-r16',
-        u'SL-MeasObjectList-r16',
-        u'SL-MeasObjectInfo-r16',
-        u'SL-MeasObjectId-r16',
-        u'SL-MeasObject-r16',
-        u'SL-PDCP-Config-r16',
-        u'SL-PSBCH-Config-r16',
-        u'SL-PSSCH-TxConfigList-r16',
-        u'SL-PSSCH-TxConfig-r16',
-        u'SL-PSSCH-TxParameters-r16',
-        u'SL-QoS-FlowIdentity-r16',
-        u'SL-QoS-Profile-r16',
-        u'SL-PQI-r16',
-        u'SL-QuantityConfig-r16',
-        u'SL-RadioBearerConfig-r16',
-        u'SL-ReportConfigList-r16',
-        u'SL-ReportConfigInfo-r16',
-        u'SL-ReportConfigId-r16',
-        u'SL-ReportConfig-r16',
-        u'SL-PeriodicalReportConfig-r16',
-        u'SL-EventTriggerConfig-r16',
-        u'SL-MeasReportQuantity-r16',
-        u'SL-MeasTriggerQuantity-r16',
-        u'SL-RS-Type-r16',
-        u'SL-ResourcePool-r16',
-        u'SL-ZoneConfigMCR-r16',
-        u'SL-SyncAllowed-r16',
-        u'SL-PSCCH-Config-r16',
-        u'SL-PSSCH-Config-r16',
-        u'SL-PSFCH-Config-r16',
-        u'SL-PTRS-Config-r16',
-        u'SL-UE-SelectedConfigRP-r16',
-        u'SL-ResourceReservePeriod-r16',
-        u'SL-SelectionWindowList-r16',
-        u'SL-SelectionWindowConfig-r16',
-        u'SL-TxPercentageList-r16',
-        u'SL-TxPercentageConfig-r16',
-        u'SL-MinMaxMCS-List-r16',
-        u'SL-MinMaxMCS-Config-r16',
-        u'SL-BetaOffsets-r16',
-        u'SL-PowerControl-r16',
-        u'SL-RLC-BearerConfig-r16',
-        u'SL-RLC-BearerConfigIndex-r16',
-        u'SL-RLC-Config-r16',
-        u'SL-ScheduledConfig-r16',
-        u'MAC-MainConfigSL-r16',
-        u'SL-ConfiguredGrantConfigList-r16',
-        u'SL-SDAP-Config-r16',
-        u'SL-MappedQoS-FlowsListDedicated-r16',
-        u'SL-SyncConfigList-r16',
-        u'SL-SyncConfig-r16',
-        u'SL-RSRP-Range-r16',
-        u'SL-SSB-TimeAllocation-r16',
-        u'SL-Thres-RSRP-List-r16',
-        u'SL-Thres-RSRP-r16',
-        u'SL-TxPower-r16',
-        u'SL-TypeTxSync-r16',
-        u'SL-UE-SelectedConfig-r16',
-        u'SL-ZoneConfig-r16',
-        u'SLRB-Uu-ConfigIndex-r16',
-        u'BCCH-BCH-Message',
-        u'BCCH-BCH-MessageType',
-        u'BCCH-DL-SCH-Message',
-        u'BCCH-DL-SCH-MessageType',
-        u'DL-CCCH-Message',
-        u'DL-CCCH-MessageType',
-        u'DL-DCCH-Message',
-        u'DL-DCCH-MessageType',
-        u'PCCH-Message',
-        u'PCCH-MessageType',
-        u'UL-CCCH-Message',
-        u'UL-CCCH-MessageType',
-        u'UL-CCCH1-Message',
-        u'UL-CCCH1-MessageType',
-        u'UL-DCCH-Message',
-        u'UL-DCCH-MessageType',
-        u'CounterCheck',
-        u'CounterCheck-IEs',
-        u'DRB-CountMSB-InfoList',
-        u'DRB-CountMSB-Info',
-        u'CounterCheckResponse',
-        u'CounterCheckResponse-IEs',
-        u'DRB-CountInfoList',
-        u'DRB-CountInfo',
-        u'DedicatedSIBRequest-r16',
-        u'DedicatedSIBRequest-r16-IEs',
-        u'SIB-ReqInfo-r16',
-        u'PosSIB-ReqInfo-r16',
-        u'DLDedicatedMessageSegment-r16',
-        u'DLDedicatedMessageSegment-r16-IEs',
-        u'DLInformationTransfer',
-        u'DLInformationTransfer-IEs',
-        u'DLInformationTransfer-v1610-IEs',
-        u'DLInformationTransferMRDC-r16',
-        u'DLInformationTransferMRDC-r16-IEs',
-        u'FailureInformation',
-        u'FailureInformation-IEs',
-        u'FailureInfoRLC-Bearer',
-        u'FailureInformation-v1610-IEs',
-        u'FailureInfoDAPS-r16',
-        u'IABOtherInformation-r16',
-        u'IABOtherInformation-r16-IEs',
-        u'IAB-IP-AddressNumReq-r16',
-        u'IAB-IP-AddressPrefixReq-r16',
-        u'IAB-IP-AddressAndTraffic-r16',
-        u'IAB-IP-PrefixAndTraffic-r16',
-        u'LocationMeasurementIndication',
-        u'LocationMeasurementIndication-IEs',
-        u'LoggedMeasurementConfiguration-r16',
-        u'LoggedMeasurementConfiguration-r16-IEs',
-        u'LoggedPeriodicalReportConfig-r16',
-        u'LoggedEventTriggerConfig-r16',
-        u'EventType-r16',
-        u'MCGFailureInformation-r16',
-        u'MCGFailureInformation-r16-IEs',
-        u'FailureReportMCG-r16',
-        u'MeasResultList2UTRA',
-        u'MeasResult2UTRA-FDD-r16',
-        u'MeasResultList2EUTRA',
-        u'MeasurementReport',
-        u'MeasurementReport-IEs',
-        u'MIB',
-        u'MobilityFromNRCommand',
-        u'MobilityFromNRCommand-IEs',
-        u'MobilityFromNRCommand-v1610-IEs',
-        u'Paging',
-        u'PagingRecordList',
-        u'PagingRecord',
-        u'PagingUE-Identity',
-        u'RRCReestablishment',
-        u'RRCReestablishment-IEs',
-        u'RRCReestablishmentComplete',
-        u'RRCReestablishmentComplete-IEs',
-        u'RRCReestablishmentComplete-v1610-IEs',
-        u'RRCReestablishmentRequest',
-        u'RRCReestablishmentRequest-IEs',
-        u'ReestabUE-Identity',
-        u'ReestablishmentCause',
-        u'RRCReconfiguration',
-        u'RRCReconfiguration-IEs',
-        u'RRCReconfiguration-v1530-IEs',
-        u'RRCReconfiguration-v1540-IEs',
-        u'RRCReconfiguration-v1560-IEs',
-        u'RRCReconfiguration-v1610-IEs',
-        u'MRDC-SecondaryCellGroupConfig',
-        u'BAP-Config-r16',
-        u'MasterKeyUpdate',
-        u'OnDemandSIB-Request-r16',
-        u'T316-r16',
-        u'IAB-IP-AddressConfigurationList-r16',
-        u'IAB-IP-AddressConfiguration-r16',
-        u'SL-ConfigDedicatedEUTRA-Info-r16',
-        u'SL-TimeOffsetEUTRA-r16',
-        u'RRCReconfigurationComplete',
-        u'RRCReconfigurationComplete-IEs',
-        u'RRCReconfigurationComplete-v1530-IEs',
-        u'RRCReconfigurationComplete-v1560-IEs',
-        u'RRCReconfigurationComplete-v1610-IEs',
-        u'RRCReconfigurationComplete-v1640-IEs',
-        u'RRCReject',
-        u'RRCReject-IEs',
-        u'RRCRelease',
-        u'RRCRelease-IEs',
-        u'RRCRelease-v1540-IEs',
-        u'RRCRelease-v1610-IEs',
-        u'RRCRelease-v1650-IEs',
-        u'RedirectedCarrierInfo',
-        u'RedirectedCarrierInfo-EUTRA',
-        u'CarrierInfoNR',
-        u'SuspendConfig',
-        u'PeriodicRNAU-TimerValue',
-        u'CellReselectionPriorities',
-        u'PagingCycle',
-        u'FreqPriorityListEUTRA',
-        u'FreqPriorityListNR',
-        u'FreqPriorityEUTRA',
-        u'FreqPriorityNR',
-        u'RAN-NotificationAreaInfo',
-        u'PLMN-RAN-AreaCellList',
-        u'PLMN-RAN-AreaCell',
-        u'PLMN-RAN-AreaConfigList',
-        u'PLMN-RAN-AreaConfig',
-        u'RAN-AreaConfig',
-        u'RRCResume',
-        u'RRCResume-IEs',
-        u'RRCResume-v1560-IEs',
-        u'RRCResume-v1610-IEs',
-        u'RRCResumeComplete',
-        u'RRCResumeComplete-IEs',
-        u'RRCResumeComplete-v1610-IEs',
-        u'RRCResumeComplete-v1640-IEs',
-        u'RRCResumeRequest',
-        u'RRCResumeRequest-IEs',
-        u'RRCResumeRequest1',
-        u'RRCResumeRequest1-IEs',
-        u'RRCSetup',
-        u'RRCSetup-IEs',
-        u'RRCSetupComplete',
-        u'RRCSetupComplete-IEs',
-        u'RRCSetupComplete-v1610-IEs',
-        u'RegisteredAMF',
-        u'RRCSetupRequest',
-        u'RRCSetupRequest-IEs',
-        u'InitialUE-Identity',
-        u'EstablishmentCause',
-        u'RRCSystemInfoRequest',
-        u'RRCSystemInfoRequest-IEs',
-        u'RRC-PosSystemInfoRequest-r16-IEs',
-        u'SCGFailureInformation',
-        u'SCGFailureInformation-IEs',
-        u'SCGFailureInformation-v1590-IEs',
-        u'FailureReportSCG',
-        u'MeasResultFreqList',
-        u'SCGFailureInformationEUTRA',
-        u'SCGFailureInformationEUTRA-IEs',
-        u'SCGFailureInformationEUTRA-v1590-IEs',
-        u'FailureReportSCG-EUTRA',
-        u'MeasResultFreqListFailMRDC',
-        u'SecurityModeCommand',
-        u'SecurityModeCommand-IEs',
-        u'SecurityConfigSMC',
-        u'SecurityModeComplete',
-        u'SecurityModeComplete-IEs',
-        u'SecurityModeFailure',
-        u'SecurityModeFailure-IEs',
-        u'SIB1',
-        u'SIB1-v1610-IEs',
-        u'SIB1-v1630-IEs',
-        u'UAC-AccessCategory1-SelectionAssistanceInfo',
-        u'UAC-AC1-SelectAssistInfo-r16',
-        u'SidelinkUEInformationNR-r16',
-        u'SidelinkUEInformationNR-r16-IEs',
-        u'SL-InterestedFreqList-r16',
-        u'SL-TxResourceReqList-r16',
-        u'SL-TxResourceReq-r16',
-        u'SL-TxInterestedFreqList-r16',
-        u'SL-QoS-Info-r16',
-        u'SL-RLC-ModeIndication-r16',
-        u'SL-FailureList-r16',
-        u'SL-Failure-r16',
-        u'SystemInformation',
-        u'SystemInformation-IEs',
-        u'UEAssistanceInformation',
-        u'UEAssistanceInformation-IEs',
-        u'DelayBudgetReport',
-        u'UEAssistanceInformation-v1540-IEs',
-        u'OverheatingAssistance',
-        u'ReducedAggregatedBandwidth',
-        u'UEAssistanceInformation-v1610-IEs',
-        u'IDC-Assistance-r16',
-        u'AffectedCarrierFreqList-r16',
-        u'AffectedCarrierFreq-r16',
-        u'AffectedCarrierFreqCombList-r16',
-        u'AffectedCarrierFreqComb-r16',
-        u'VictimSystemType-r16',
-        u'DRX-Preference-r16',
-        u'MaxBW-Preference-r16',
-        u'MaxCC-Preference-r16',
-        u'MaxMIMO-LayerPreference-r16',
-        u'MinSchedulingOffsetPreference-r16',
-        u'ReleasePreference-r16',
-        u'ReducedMaxBW-FRx-r16',
-        u'ReducedMaxCCs-r16',
-        u'SL-UE-AssistanceInformationNR-r16',
-        u'SL-TrafficPatternInfo-r16',
-        u'UECapabilityEnquiry',
-        u'UECapabilityEnquiry-IEs',
-        u'UECapabilityEnquiry-v1560-IEs',
-        u'UECapabilityEnquiry-v1610-IEs',
-        u'UECapabilityInformation',
-        u'UECapabilityInformation-IEs',
-        u'UEInformationRequest-r16',
-        u'UEInformationRequest-r16-IEs',
-        u'UEInformationResponse-r16',
-        u'UEInformationResponse-r16-IEs',
-        u'LogMeasReport-r16',
-        u'LogMeasInfoList-r16',
-        u'LogMeasInfo-r16',
-        u'ConnEstFailReport-r16',
-        u'MeasResultServingCell-r16',
-        u'MeasResultFailedCell-r16',
-        u'RA-ReportList-r16',
-        u'RA-Report-r16',
-        u'RA-InformationCommon-r16',
-        u'PerRAInfoList-r16',
-        u'PerRAInfo-r16',
-        u'PerRASSBInfo-r16',
-        u'PerRACSI-RSInfo-r16',
-        u'PerRAAttemptInfoList-r16',
-        u'PerRAAttemptInfo-r16',
-        u'RLF-Report-r16',
-        u'MeasResultList2NR-r16',
-        u'MeasResultList2EUTRA-r16',
-        u'MeasResult2NR-r16',
-        u'MeasResultListLogging2NR-r16',
-        u'MeasResultLogging2NR-r16',
-        u'MeasResultListLoggingNR-r16',
-        u'MeasResultLoggingNR-r16',
-        u'MeasResult2EUTRA-r16',
-        u'MeasResultRLFNR-r16',
-        u'TimeSinceFailure-r16',
-        u'MobilityHistoryReport-r16',
-        u'TimeUntilReconnection-r16',
-        u'ULDedicatedMessageSegment-r16',
-        u'ULDedicatedMessageSegment-r16-IEs',
-        u'ULInformationTransfer',
-        u'ULInformationTransfer-IEs',
-        u'ULInformationTransferIRAT-r16',
-        u'ULInformationTransferIRAT-r16-IEs',
-        u'ULInformationTransferMRDC',
-        u'ULInformationTransferMRDC-IEs',
-        u'SetupRelease',
-        u'SIB2',
-        u'RangeToBestCell',
-        u'SIB3',
-        u'IntraFreqNeighCellList',
-        u'IntraFreqNeighCellList-v1610',
-        u'IntraFreqNeighCellInfo',
-        u'IntraFreqNeighCellInfo-v1610',
-        u'IntraFreqBlackCellList',
-        u'IntraFreqWhiteCellList-r16',
-        u'IntraFreqCAG-CellListPerPLMN-r16',
-        u'SIB4',
-        u'InterFreqCarrierFreqList',
-        u'InterFreqCarrierFreqList-v1610',
-        u'InterFreqCarrierFreqInfo',
-        u'InterFreqCarrierFreqInfo-v1610',
-        u'InterFreqNeighCellList',
-        u'InterFreqNeighCellList-v1610',
-        u'InterFreqNeighCellInfo',
-        u'InterFreqNeighCellInfo-v1610',
-        u'InterFreqBlackCellList',
-        u'InterFreqWhiteCellList-r16',
-        u'InterFreqCAG-CellListPerPLMN-r16',
-        u'SIB5',
-        u'CarrierFreqListEUTRA',
-        u'CarrierFreqListEUTRA-v1610',
-        u'CarrierFreqEUTRA',
-        u'CarrierFreqEUTRA-v1610',
-        u'EUTRA-FreqBlackCellList',
-        u'EUTRA-FreqNeighCellList',
-        u'EUTRA-FreqNeighCellInfo',
-        u'SIB6',
-        u'SIB7',
-        u'SIB8',
-        u'SIB9',
-        u'SIB10-r16',
-        u'HRNN-List-r16',
-        u'HRNN-r16',
-        u'SIB11-r16',
-        u'SIB12-r16',
-        u'SIB12-IEs-r16',
-        u'SL-ConfigCommonNR-r16',
-        u'SL-NR-AnchorCarrierFreqList-r16',
-        u'SL-EUTRA-AnchorCarrierFreqList-r16',
-        u'SIB13-r16',
-        u'SIB14-r16',
-        u'PosSystemInformation-r16-IEs',
-        u'PosSI-SchedulingInfo-r16',
-        u'PosSchedulingInfo-r16',
-        u'PosSIB-MappingInfo-r16',
-        u'PosSIB-Type-r16',
-        u'GNSS-ID-r16',
-        u'SBAS-ID-r16',
-        u'SIBpos-r16',
-        u'AdditionalSpectrumEmission',
-        u'Alpha',
-        u'AMF-Identifier',
-        u'ARFCN-ValueEUTRA',
-        u'ARFCN-ValueNR',
-        u'ARFCN-ValueUTRA-FDD-r16',
-        u'AvailabilityCombinationsPerCell-r16',
-        u'AvailabilityCombinationsPerCellIndex-r16',
-        u'AvailabilityCombination-r16',
-        u'AvailabilityCombinationId-r16',
-        u'AvailabilityIndicator-r16',
-        u'AI-RNTI-r16',
-        u'BAP-RoutingID-r16',
-        u'BeamFailureRecoveryConfig',
-        u'PRACH-ResourceDedicatedBFR',
-        u'BFR-SSB-Resource',
-        u'BFR-CSIRS-Resource',
-        u'CandidateBeamRSListExt-r16',
-        u'BeamFailureRecoverySCellConfig-r16',
-        u'CandidateBeamRS-r16',
-        u'BetaOffsets',
-        u'BH-LogicalChannelIdentity-r16',
-        u'BH-LogicalChannelIdentity-Ext-r16',
-        u'BH-RLC-ChannelConfig-r16',
-        u'BH-RLC-ChannelID-r16',
-        u'BSR-Config',
-        u'BWP',
-        u'BWP-Downlink',
-        u'BWP-DownlinkCommon',
-        u'BWP-DownlinkDedicated',
-        u'SPS-ConfigToAddModList-r16',
-        u'SPS-ConfigToReleaseList-r16',
-        u'SPS-ConfigDeactivationState-r16',
-        u'SPS-ConfigDeactivationStateList-r16',
-        u'BWP-Id',
-        u'BWP-Uplink',
-        u'BWP-UplinkCommon',
-        u'BWP-UplinkDedicated',
-        u'ConfiguredGrantConfigToAddModList-r16',
-        u'ConfiguredGrantConfigToReleaseList-r16',
-        u'ConfiguredGrantConfigType2DeactivationState-r16',
-        u'ConfiguredGrantConfigType2DeactivationStateList-r16',
-        u'CellAccessRelatedInfo',
-        u'CellAccessRelatedInfo-EUTRA-5GC',
-        u'PLMN-IdentityList-EUTRA-5GC',
-        u'PLMN-Identity-EUTRA-5GC',
-        u'CellIdentity-EUTRA-5GC',
-        u'CellAccessRelatedInfo-EUTRA-EPC',
-        u'PLMN-IdentityList-EUTRA-EPC',
-        u'CellGroupConfig',
-        u'SpCellConfig',
-        u'ReconfigurationWithSync',
-        u'DAPS-UplinkPowerConfig-r16',
-        u'SCellConfig',
-        u'CellGroupId',
-        u'CellIdentity',
-        u'CellReselectionPriority',
-        u'CellReselectionSubPriority',
-        u'CGI-InfoEUTRA',
-        u'CGI-InfoEUTRALogging',
-        u'CGI-InfoNR',
-        u'CGI-Info-Logging-r16',
-        u'CLI-RSSI-Range-r16',
-        u'CodebookConfig',
-        u'CodebookConfig-r16',
-        u'CommonLocationInfo-r16',
-        u'CondReconfigId-r16',
-        u'CondReconfigToAddModList-r16',
-        u'CondReconfigToAddMod-r16',
-        u'ConditionalReconfiguration-r16',
-        u'CondReconfigToRemoveList-r16',
-        u'ConfiguredGrantConfig',
-        u'CG-UCI-OnPUSCH',
-        u'CG-COT-Sharing-r16',
-        u'CG-StartingOffsets-r16',
-        u'ConfiguredGrantConfigIndex-r16',
-        u'ConfiguredGrantConfigIndexMAC-r16',
-        u'ConnEstFailureControl',
-        u'ControlResourceSet',
-        u'ControlResourceSetId',
-        u'ControlResourceSetId-r16',
-        u'ControlResourceSetId-v1610',
-        u'ControlResourceSetZero',
-        u'CrossCarrierSchedulingConfig',
-        u'CSI-AperiodicTriggerStateList',
-        u'CSI-AperiodicTriggerState',
-        u'CSI-AssociatedReportConfigInfo',
-        u'CSI-FrequencyOccupation',
-        u'CSI-IM-Resource',
-        u'CSI-IM-ResourceId',
-        u'CSI-IM-ResourceSet',
-        u'CSI-IM-ResourceSetId',
-        u'CSI-MeasConfig',
-        u'CSI-ReportConfig',
-        u'CSI-ReportPeriodicityAndOffset',
-        u'PUCCH-CSI-Resource',
-        u'PortIndexFor8Ranks',
-        u'PortIndex8',
-        u'PortIndex4',
-        u'PortIndex2',
-        u'CSI-ReportConfigId',
-        u'CSI-ResourceConfig',
-        u'CSI-ResourceConfigId',
-        u'CSI-ResourcePeriodicityAndOffset',
-        u'CSI-RS-ResourceConfigMobility',
-        u'CSI-RS-CellMobility',
-        u'CSI-RS-Resource-Mobility',
-        u'CSI-RS-Index',
-        u'CSI-RS-ResourceMapping',
-        u'CSI-SemiPersistentOnPUSCH-TriggerStateList',
-        u'CSI-SemiPersistentOnPUSCH-TriggerState',
-        u'CSI-SSB-ResourceSet',
-        u'CSI-SSB-ResourceSetId',
-        u'DedicatedNAS-Message',
-        u'DMRS-DownlinkConfig',
-        u'DMRS-UplinkConfig',
-        u'DMRS-UplinkTransformPrecoding-r16',
-        u'DownlinkConfigCommon',
-        u'DownlinkConfigCommonSIB',
-        u'BCCH-Config',
-        u'PCCH-Config',
-        u'DownlinkPreemption',
-        u'INT-ConfigurationPerServingCell',
-        u'DRB-Identity',
-        u'DRX-Config',
-        u'DRX-ConfigSecondaryGroup',
-        u'FilterCoefficient',
-        u'FreqBandIndicatorNR',
-        u'FrequencyInfoDL',
-        u'FrequencyInfoDL-SIB',
-        u'FrequencyInfoUL',
-        u'FrequencyInfoUL-SIB',
-        u'HighSpeedConfig-r16',
-        u'Hysteresis',
-        u'InvalidSymbolPattern-r16',
-        u'I-RNTI-Value',
-        u'LBT-FailureRecoveryConfig-r16',
-        u'LocationInfo-r16',
-        u'LocationMeasurementInfo',
-        u'EUTRA-RSTD-InfoList',
-        u'EUTRA-RSTD-Info',
-        u'NR-PRS-MeasurementInfoList-r16',
-        u'NR-PRS-MeasurementInfo-r16',
-        u'LogicalChannelConfig',
-        u'LogicalChannelIdentity',
-        u'MAC-CellGroupConfig',
-        u'DataInactivityTimer',
-        u'MeasConfig',
-        u'MeasObjectToRemoveList',
-        u'MeasIdToRemoveList',
-        u'ReportConfigToRemoveList',
-        u'MeasGapConfig',
-        u'GapConfig',
-        u'MeasGapSharingConfig',
-        u'MeasGapSharingScheme',
-        u'MeasId',
-        u'MeasIdleConfigSIB-r16',
-        u'MeasIdleConfigDedicated-r16',
-        u'ValidityAreaList-r16',
-        u'ValidityArea-r16',
-        u'ValidityCellList',
-        u'MeasIdleCarrierNR-r16',
-        u'MeasIdleCarrierEUTRA-r16',
-        u'CellListNR-r16',
-        u'CellListEUTRA-r16',
-        u'BeamMeasConfigIdle-NR-r16',
-        u'RSRQ-RangeEUTRA-r16',
-        u'MeasIdToAddModList',
-        u'MeasIdToAddMod',
-        u'MeasObjectCLI-r16',
-        u'CLI-ResourceConfig-r16',
-        u'SRS-ResourceListConfigCLI-r16',
-        u'RSSI-ResourceListConfigCLI-r16',
-        u'SRS-ResourceConfigCLI-r16',
-        u'RSSI-ResourceConfigCLI-r16',
-        u'RSSI-ResourceId-r16',
-        u'RSSI-PeriodicityAndOffset-r16',
-        u'MeasObjectEUTRA',
-        u'EUTRA-CellIndexList',
-        u'EUTRA-CellIndex',
-        u'EUTRA-Cell',
-        u'EUTRA-BlackCell',
-        u'MeasObjectId',
-        u'MeasObjectNR',
-        u'SSB-MTC3List-r16',
-        u'T312-r16',
-        u'ReferenceSignalConfig',
-        u'SSB-ConfigMobility',
-        u'Q-OffsetRangeList',
-        u'ThresholdNR',
-        u'CellsToAddModList',
-        u'CellsToAddMod',
-        u'RMTC-Config-r16',
-        u'SSB-PositionQCL-CellsToAddModList-r16',
-        u'SSB-PositionQCL-CellsToAddMod-r16',
-        u'MeasObjectNR-SL-r16',
-        u'Tx-PoolMeasList-r16',
-        u'MeasObjectToAddModList',
-        u'MeasObjectToAddMod',
-        u'MeasObjectUTRA-FDD-r16',
-        u'CellsToAddModListUTRA-FDD-r16',
-        u'CellsToAddModUTRA-FDD-r16',
-        u'UTRA-FDD-CellIndexList-r16',
-        u'UTRA-FDD-CellIndex-r16',
-        u'MeasResultCellListSFTD-NR',
-        u'MeasResultCellSFTD-NR',
-        u'MeasResultCellListSFTD-EUTRA',
-        u'MeasResultSFTD-EUTRA',
-        u'MeasResults',
-        u'MeasResultServMOList',
-        u'MeasResultServMO',
-        u'MeasResultListNR',
-        u'MeasResultNR',
-        u'MeasResultListEUTRA',
-        u'MeasResultEUTRA',
-        u'MultiBandInfoListEUTRA',
-        u'MeasQuantityResults',
-        u'MeasQuantityResultsEUTRA',
-        u'ResultsPerSSB-IndexList',
-        u'ResultsPerSSB-Index',
-        u'ResultsPerCSI-RS-IndexList',
-        u'ResultsPerCSI-RS-Index',
-        u'MeasResultServFreqListEUTRA-SCG',
-        u'MeasResultServFreqListNR-SCG',
-        u'MeasResultListUTRA-FDD-r16',
-        u'MeasResultUTRA-FDD-r16',
-        u'MeasResultForRSSI-r16',
-        u'MeasResultCLI-r16',
-        u'MeasResultListSRS-RSRP-r16',
-        u'MeasResultSRS-RSRP-r16',
-        u'MeasResultListCLI-RSSI-r16',
-        u'MeasResultCLI-RSSI-r16',
-        u'UL-PDCP-DelayValueResultList-r16',
-        u'UL-PDCP-DelayValueResult-r16',
-        u'MeasResult2EUTRA',
-        u'MeasResult2NR',
-        u'MeasResultIdleEUTRA-r16',
-        u'MeasResultsPerCarrierIdleEUTRA-r16',
-        u'MeasResultsPerCellIdleEUTRA-r16',
-        u'MeasResultIdleNR-r16',
-        u'MeasResultsPerCarrierIdleNR-r16',
-        u'MeasResultsPerCellIdleNR-r16',
-        u'ResultsPerSSB-IndexList-r16',
-        u'ResultsPerSSB-IndexIdle-r16',
-        u'MeasResultSCG-Failure',
-        u'MeasResultList2NR',
-        u'MeasResultsSL-r16',
-        u'MeasResultNR-SL-r16',
-        u'MeasResultCBR-NR-r16',
-        u'MeasTriggerQuantityEUTRA',
-        u'RSRP-RangeEUTRA',
-        u'RSRQ-RangeEUTRA',
-        u'SINR-RangeEUTRA',
-        u'MobilityStateParameters',
-        u'MsgA-ConfigCommon-r16',
-        u'MsgA-PUSCH-Config-r16',
-        u'MsgA-PUSCH-Resource-r16',
-        u'MsgA-DMRS-Config-r16',
-        u'MultiFrequencyBandListNR',
-        u'MultiFrequencyBandListNR-SIB',
-        u'NR-MultiBandInfo',
-        u'NeedForGapsConfigNR-r16',
-        u'NeedForGapsInfoNR-r16',
-        u'NeedForGapsIntraFreqlist-r16',
-        u'NeedForGapsBandlistNR-r16',
-        u'NeedForGapsIntraFreq-r16',
-        u'NeedForGapsNR-r16',
-        u'NextHopChainingCount',
-        u'NG-5G-S-TMSI',
-        u'NPN-Identity-r16',
-        u'CAG-IdentityInfo-r16',
-        u'NID-r16',
-        u'NPN-IdentityInfoList-r16',
-        u'NPN-IdentityInfo-r16',
-        u'NR-NS-PmaxList',
-        u'NR-NS-PmaxValue',
-        u'NZP-CSI-RS-Resource',
-        u'NZP-CSI-RS-ResourceId',
-        u'NZP-CSI-RS-ResourceSet',
-        u'NZP-CSI-RS-ResourceSetId',
-        u'P-Max',
-        u'PCI-List',
-        u'PCI-Range',
-        u'PCI-RangeElement',
-        u'PCI-RangeIndex',
-        u'PCI-RangeIndexList',
-        u'PDCCH-Config',
-        u'SearchSpaceSwitchConfig-r16',
-        u'CellGroupForSwitch-r16',
-        u'PDCCH-ConfigCommon',
-        u'PDCCH-ConfigSIB1',
-        u'PDCCH-ServingCellConfig',
-        u'PDCP-Config',
-        u'EthernetHeaderCompression-r16',
-        u'UL-DataSplitThreshold',
-        u'DiscardTimerExt-r16',
-        u'PDSCH-Config',
-        u'RateMatchPatternGroup',
-        u'MinSchedulingOffsetK0-Values-r16',
-        u'MaxMIMO-LayersDL-r16',
-        u'PDSCH-ConfigCommon',
-        u'PDSCH-ServingCellConfig',
-        u'PDSCH-CodeBlockGroupTransmission',
-        u'PDSCH-CodeBlockGroupTransmissionList-r16',
-        u'PDSCH-TimeDomainResourceAllocationList',
-        u'PDSCH-TimeDomainResourceAllocation',
-        u'PDSCH-TimeDomainResourceAllocationList-r16',
-        u'PDSCH-TimeDomainResourceAllocation-r16',
-        u'PHR-Config',
-        u'MPE-Config-FR2-r16',
-        u'PhysCellId',
-        u'PhysicalCellGroupConfig',
-        u'PDCCH-BlindDetection',
-        u'DCP-Config-r16',
-        u'PDSCH-HARQ-ACK-CodebookList-r16',
-        u'PDCCH-BlindDetectionCA-CombIndicator-r16',
-        u'PDCCH-BlindDetection2-r16',
-        u'PDCCH-BlindDetection3-r16',
-        u'PLMN-Identity',
-        u'MCC',
-        u'MNC',
-        u'MCC-MNC-Digit',
-        u'PLMN-IdentityInfoList',
-        u'PLMN-IdentityInfo',
-        u'PLMN-IdentityList2-r16',
-        u'PRB-Id',
-        u'PTRS-DownlinkConfig',
-        u'PTRS-UplinkConfig',
-        u'PUCCH-Config',
-        u'PUCCH-FormatConfig',
-        u'PUCCH-MaxCodeRate',
-        u'PUCCH-ResourceSet',
-        u'PUCCH-ResourceSetId',
-        u'PUCCH-Resource',
-        u'PUCCH-ResourceExt-r16',
-        u'PUCCH-ResourceId',
-        u'PUCCH-format0',
-        u'PUCCH-format1',
-        u'PUCCH-format2',
-        u'PUCCH-format3',
-        u'PUCCH-format4',
-        u'PUCCH-ResourceGroup-r16',
-        u'PUCCH-ResourceGroupId-r16',
-        u'DL-DataToUL-ACK-r16',
-        u'DL-DataToUL-ACK-DCI-1-2-r16',
-        u'UL-AccessConfigListDCI-1-1-r16',
-        u'PUCCH-ConfigCommon',
-        u'PUCCH-ConfigurationList-r16',
-        u'PUCCH-PathlossReferenceRS-Id',
-        u'PUCCH-PathlossReferenceRS-Id-v1610',
-        u'PUCCH-PowerControl',
-        u'P0-PUCCH',
-        u'P0-PUCCH-Id',
-        u'PathlossReferenceRSs-v1610',
-        u'PUCCH-PathlossReferenceRS',
-        u'PUCCH-PathlossReferenceRS-r16',
-        u'PUCCH-SpatialRelationInfo',
-        u'PUCCH-SpatialRelationInfoExt-r16',
-        u'PUCCH-SRS',
-        u'PUCCH-SpatialRelationInfoId',
-        u'PUCCH-SpatialRelationInfoId-r16',
-        u'PUCCH-SpatialRelationInfoId-v1610',
-        u'PUCCH-TPC-CommandConfig',
-        u'PUSCH-Config',
-        u'UCI-OnPUSCH',
-        u'MinSchedulingOffsetK2-Values-r16',
-        u'UCI-OnPUSCH-DCI-0-2-r16',
-        u'FrequencyHoppingOffsetListsDCI-0-2-r16',
-        u'UCI-OnPUSCH-ListDCI-0-2-r16',
-        u'UCI-OnPUSCH-ListDCI-0-1-r16',
-        u'UL-AccessConfigListDCI-0-1-r16',
-        u'PUSCH-ConfigCommon',
-        u'PUSCH-PowerControl',
-        u'P0-PUSCH-AlphaSet',
-        u'P0-PUSCH-AlphaSetId',
-        u'PUSCH-PathlossReferenceRS',
-        u'PUSCH-PathlossReferenceRS-r16',
-        u'PUSCH-PathlossReferenceRS-Id',
-        u'PUSCH-PathlossReferenceRS-Id-v1610',
-        u'SRI-PUSCH-PowerControl',
-        u'SRI-PUSCH-PowerControlId',
-        u'PUSCH-PowerControl-v1610',
-        u'P0-PUSCH-Set-r16',
-        u'P0-PUSCH-SetId-r16',
-        u'P0-PUSCH-r16',
-        u'PUSCH-ServingCellConfig',
-        u'PUSCH-CodeBlockGroupTransmission',
-        u'MaxMIMO-LayersDCI-0-2-r16',
-        u'PUSCH-TimeDomainResourceAllocationList',
-        u'PUSCH-TimeDomainResourceAllocation',
-        u'PUSCH-TimeDomainResourceAllocationList-r16',
-        u'PUSCH-TimeDomainResourceAllocation-r16',
-        u'PUSCH-Allocation-r16',
-        u'PUSCH-TPC-CommandConfig',
-        u'Q-OffsetRange',
-        u'Q-QualMin',
-        u'Q-RxLevMin',
-        u'QuantityConfig',
-        u'QuantityConfigNR',
-        u'QuantityConfigRS',
-        u'FilterConfig',
-        u'FilterConfigCLI-r16',
-        u'QuantityConfigUTRA-FDD-r16',
-        u'RACH-ConfigCommon',
-        u'RACH-ConfigCommonTwoStepRA-r16',
-        u'GroupB-ConfiguredTwoStepRA-r16',
-        u'RACH-ConfigDedicated',
-        u'CFRA',
-        u'CFRA-TwoStep-r16',
-        u'CFRA-SSB-Resource',
-        u'CFRA-CSIRS-Resource',
-        u'RACH-ConfigGeneric',
-        u'RACH-ConfigGenericTwoStepRA-r16',
-        u'RA-Prioritization',
-        u'RadioBearerConfig',
-        u'SRB-ToAddModList',
-        u'SRB-ToAddMod',
-        u'DRB-ToAddModList',
-        u'DRB-ToAddMod',
-        u'DRB-ToReleaseList',
-        u'SecurityConfig',
-        u'RadioLinkMonitoringConfig',
-        u'RadioLinkMonitoringRS',
-        u'RadioLinkMonitoringRS-Id',
-        u'RAN-AreaCode',
-        u'RateMatchPattern',
-        u'RateMatchPatternId',
-        u'RateMatchPatternLTE-CRS',
-        u'LTE-CRS-PatternList-r16',
-        u'ReferenceTimeInfo-r16',
-        u'ReferenceTime-r16',
-        u'RejectWaitTime',
-        u'RepetitionSchemeConfig-r16',
-        u'RepetitionSchemeConfig-v1630',
-        u'FDM-TDM-r16',
-        u'SlotBased-r16',
-        u'SlotBased-v1630',
-        u'ReportConfigId',
-        u'ReportConfigInterRAT',
-        u'ReportCGI-EUTRA',
-        u'ReportSFTD-EUTRA',
-        u'EventTriggerConfigInterRAT',
-        u'PeriodicalReportConfigInterRAT',
-        u'MeasTriggerQuantityUTRA-FDD-r16',
-        u'MeasReportQuantityUTRA-FDD-r16',
-        u'ReportConfigNR',
-        u'ReportCGI',
-        u'ReportSFTD-NR',
-        u'CondTriggerConfig-r16',
-        u'EventTriggerConfig',
-        u'PeriodicalReportConfig',
-        u'NR-RS-Type',
-        u'MeasTriggerQuantity',
-        u'MeasTriggerQuantityOffset',
-        u'MeasReportQuantity',
-        u'MeasRSSI-ReportConfig-r16',
-        u'CLI-EventTriggerConfig-r16',
-        u'CLI-PeriodicalReportConfig-r16',
-        u'MeasTriggerQuantityCLI-r16',
-        u'MeasReportQuantityCLI-r16',
-        u'ReportConfigNR-SL-r16',
-        u'EventTriggerConfigNR-SL-r16',
-        u'PeriodicalReportConfigNR-SL-r16',
-        u'MeasReportQuantity-r16',
-        u'ReportConfigToAddModList',
-        u'ReportConfigToAddMod',
-        u'ReportInterval',
-        u'ReselectionThreshold',
-        u'ReselectionThresholdQ',
-        u'ResumeCause',
-        u'RLC-BearerConfig',
-        u'RLC-Config',
-        u'UL-AM-RLC',
-        u'DL-AM-RLC',
-        u'UL-UM-RLC',
-        u'DL-UM-RLC',
-        u'T-PollRetransmit',
-        u'PollPDU',
-        u'PollByte',
-        u'T-Reassembly',
-        u'T-StatusProhibit',
-        u'SN-FieldLengthUM',
-        u'SN-FieldLengthAM',
-        u'RLC-Config-v1610',
-        u'DL-AM-RLC-v1610',
-        u'T-StatusProhibit-v1610',
-        u'RLF-TimersAndConstants',
-        u'RNTI-Value',
-        u'RSRP-Range',
-        u'RSRQ-Range',
-        u'RSSI-Range-r16',
-        u'SCellIndex',
-        u'SchedulingRequestConfig',
-        u'SchedulingRequestToAddMod',
-        u'SchedulingRequestId',
-        u'SchedulingRequestResourceConfig',
-        u'SchedulingRequestResourceConfigExt-v1610',
-        u'SchedulingRequestResourceId',
-        u'ScramblingId',
-        u'SCS-SpecificCarrier',
-        u'SDAP-Config',
-        u'QFI',
-        u'PDU-SessionID',
-        u'SearchSpace',
-        u'SearchSpaceExt-r16',
-        u'SearchSpaceId',
-        u'SearchSpaceZero',
-        u'SecurityAlgorithmConfig',
-        u'IntegrityProtAlgorithm',
-        u'CipheringAlgorithm',
-        u'SemiStaticChannelAccessConfig-r16',
-        u'Sensor-LocationInfo-r16',
-        u'ServCellIndex',
-        u'ServingCellConfig',
-        u'UplinkConfig',
-        u'DummyJ',
-        u'ChannelAccessConfig-r16',
-        u'IntraCellGuardBandsPerSCS-r16',
-        u'GuardBand-r16',
-        u'DormancyGroupID-r16',
-        u'DormantBWP-Config-r16',
-        u'WithinActiveTimeConfig-r16',
-        u'OutsideActiveTimeConfig-r16',
-        u'UplinkTxSwitching-r16',
-        u'ServingCellConfigCommon',
-        u'ServingCellConfigCommonSIB',
-        u'ShortI-RNTI-Value',
-        u'ShortMAC-I',
-        u'SINR-Range',
-        u'SI-RequestConfig',
-        u'SI-RequestResources',
-        u'SI-SchedulingInfo',
-        u'SchedulingInfo',
-        u'SIB-Mapping',
-        u'SIB-TypeInfo',
-        u'SK-Counter',
-        u'SlotFormatCombinationsPerCell',
-        u'SlotFormatCombination',
-        u'SlotFormatCombinationId',
-        u'SlotFormatIndicator',
-        u'CO-DurationsPerCell-r16',
-        u'CO-Duration-r16',
-        u'AvailableRB-SetsPerCell-r16',
-        u'SearchSpaceSwitchTrigger-r16',
-        u'S-NSSAI',
-        u'SpeedStateScaleFactors',
-        u'SPS-Config',
-        u'SPS-ConfigIndex-r16',
-        u'SPS-PUCCH-AN-r16',
-        u'SPS-PUCCH-AN-List-r16',
-        u'SRB-Identity',
-        u'SRS-CarrierSwitching',
-        u'SRS-TPC-PDCCH-Config',
-        u'SRS-CC-SetIndex',
-        u'SRS-Config',
-        u'SRS-ResourceSet',
-        u'PathlossReferenceRS-Config',
-        u'PathlossReferenceRSList-r16',
-        u'PathlossReferenceRS-r16',
-        u'SRS-PathlossReferenceRS-Id-r16',
-        u'SRS-PosResourceSet-r16',
-        u'SRS-ResourceSetId',
-        u'SRS-PosResourceSetId-r16',
-        u'SRS-Resource',
-        u'SRS-PosResource-r16',
-        u'SRS-SpatialRelationInfo',
-        u'SRS-SpatialRelationInfoPos-r16',
-        u'SSB-Configuration-r16',
-        u'SSB-InfoNcell-r16',
-        u'DL-PRS-Info-r16',
-        u'SRS-ResourceId',
-        u'SRS-PosResourceId-r16',
-        u'SRS-PeriodicityAndOffset',
-        u'SRS-PeriodicityAndOffset-r16',
-        u'SRS-RSRP-Range-r16',
-        u'SRS-TPC-CommandConfig',
-        u'SSB-Index',
-        u'SSB-MTC',
-        u'SSB-MTC2',
-        u'SSB-MTC2-LP-r16',
-        u'SSB-MTC3-r16',
-        u'SSB-PositionQCL-Relation-r16',
-        u'SSB-ToMeasure',
-        u'SS-RSSI-Measurement',
-        u'SubcarrierSpacing',
-        u'TAG-Config',
-        u'TAG',
-        u'TAG-Id',
-        u'TimeAlignmentTimer',
-        u'TCI-State',
-        u'QCL-Info',
-        u'TCI-StateId',
-        u'TDD-UL-DL-ConfigCommon',
-        u'TDD-UL-DL-Pattern',
-        u'TDD-UL-DL-ConfigDedicated',
-        u'TDD-UL-DL-ConfigDedicated-IAB-MT-r16',
-        u'TDD-UL-DL-SlotConfig',
-        u'TDD-UL-DL-SlotConfig-IAB-MT-r16',
-        u'TDD-UL-DL-SlotIndex',
-        u'TrackingAreaCode',
-        u'T-Reselection',
-        u'TimeToTrigger',
-        u'UAC-BarringInfoSetIndex',
-        u'UAC-BarringInfoSetList',
-        u'UAC-BarringInfoSet',
-        u'UAC-BarringPerCatList',
-        u'UAC-BarringPerCat',
-        u'UAC-BarringPerPLMN-List',
-        u'UAC-BarringPerPLMN',
-        u'UE-TimersAndConstants',
-        u'UL-DelayValueConfig-r16',
-        u'UplinkCancellation-r16',
-        u'CI-ConfigurationPerServingCell-r16',
-        u'UplinkConfigCommon',
-        u'UplinkConfigCommonSIB',
-        u'UplinkTxDirectCurrentList',
-        u'UplinkTxDirectCurrentCell',
-        u'UplinkTxDirectCurrentBWP',
-        u'UplinkTxDirectCurrentTwoCarrierList-r16',
-        u'UplinkTxDirectCurrentTwoCarrier-r16',
-        u'UplinkTxDirectCurrentCarrierInfo-r16',
-        u'UplinkTxDirectCurrentTwoCarrierInfo-r16',
-        u'ZP-CSI-RS-Resource',
-        u'ZP-CSI-RS-ResourceId',
-        u'ZP-CSI-RS-ResourceSet',
-        u'ZP-CSI-RS-ResourceSetId',
-        u'AccessStratumRelease',
-        u'BandCombinationList',
-        u'BandCombinationList-v1540',
-        u'BandCombinationList-v1550',
-        u'BandCombinationList-v1560',
-        u'BandCombinationList-v1570',
-        u'BandCombinationList-v1580',
-        u'BandCombinationList-v1590',
-        u'BandCombinationList-v1610',
-        u'BandCombinationList-v1630',
-        u'BandCombinationList-v1640',
-        u'BandCombinationList-v1650',
-        u'BandCombinationList-UplinkTxSwitch-r16',
-        u'BandCombinationList-UplinkTxSwitch-v1630',
-        u'BandCombinationList-UplinkTxSwitch-v1640',
-        u'BandCombinationList-UplinkTxSwitch-v1650',
-        u'BandCombination',
-        u'BandCombination-v1540',
-        u'BandCombination-v1550',
-        u'BandCombination-v1560',
-        u'BandCombination-v1570',
-        u'BandCombination-v1580',
-        u'BandCombination-v1590',
-        u'BandCombination-v1610',
-        u'BandCombination-v1630',
-        u'BandCombination-v1640',
-        u'BandCombination-v1650',
-        u'BandCombination-UplinkTxSwitch-r16',
-        u'BandCombination-UplinkTxSwitch-v1630',
-        u'BandCombination-UplinkTxSwitch-v1640',
-        u'BandCombination-UplinkTxSwitch-v1650',
-        u'ULTxSwitchingBandPair-r16',
-        u'BandParameters',
-        u'BandParameters-v1540',
-        u'BandParameters-v1610',
-        u'ScalingFactorSidelink-r16',
-        u'BandCombinationListSidelinkEUTRA-NR-r16',
-        u'BandCombinationListSidelinkEUTRA-NR-v1630',
-        u'BandCombinationParametersSidelinkEUTRA-NR-r16',
-        u'BandCombinationParametersSidelinkEUTRA-NR-v1630',
-        u'BandParametersSidelinkEUTRA-NR-r16',
-        u'BandParametersSidelinkEUTRA-NR-v1630',
-        u'BandParametersSidelink-r16',
-        u'CA-BandwidthClassEUTRA',
-        u'CA-BandwidthClassNR',
-        u'CA-ParametersEUTRA',
-        u'CA-ParametersEUTRA-v1560',
-        u'CA-ParametersEUTRA-v1570',
-        u'CA-ParametersNR',
-        u'CA-ParametersNR-v1540',
-        u'CA-ParametersNR-v1550',
-        u'CA-ParametersNR-v1560',
-        u'CA-ParametersNR-v1610',
-        u'CA-ParametersNR-v1630',
-        u'CA-ParametersNR-v1640',
-        u'SimulSRS-ForAntennaSwitching-r16',
-        u'TwoPUCCH-Grp-Configurations-r16',
-        u'TwoPUCCH-Grp-ConfigParams-r16',
-        u'PUCCH-Grp-CarrierTypes-r16',
-        u'CA-ParametersNRDC',
-        u'CA-ParametersNRDC-v1610',
-        u'CA-ParametersNRDC-v1630',
-        u'CA-ParametersNRDC-v1640',
-        u'CA-ParametersNRDC-v1650',
-        u'CarrierAggregationVariant',
-        u'CodebookParameters',
-        u'CodebookParameters-v1610',
-        u'CodebookParametersAddition-r16',
-        u'CodebookComboParametersAddition-r16',
-        u'CodebookParametersAdditionPerBC-r16',
-        u'CodebookComboParametersAdditionPerBC-r16',
-        u'CodebookVariantsList-r16',
-        u'SupportedCSI-RS-Resource',
-        u'FeatureSetCombination',
-        u'FeatureSetsPerBand',
-        u'FeatureSet',
-        u'FeatureSetCombinationId',
-        u'FeatureSetDownlink',
-        u'FeatureSetDownlink-v1540',
-        u'FeatureSetDownlink-v15a0',
-        u'FeatureSetDownlink-v1610',
-        u'PDCCH-MonitoringOccasions-r16',
-        u'DummyA',
-        u'DummyB',
-        u'DummyC',
-        u'DummyD',
-        u'DummyE',
-        u'FeatureSetDownlinkId',
-        u'FeatureSetDownlinkPerCC',
-        u'FeatureSetDownlinkPerCC-v1620',
-        u'MultiDCI-MultiTRP-r16',
-        u'FeatureSetDownlinkPerCC-Id',
-        u'FeatureSetEUTRA-DownlinkId',
-        u'FeatureSetEUTRA-UplinkId',
-        u'FeatureSets',
-        u'FeatureSetUplink',
-        u'FeatureSetUplink-v1540',
-        u'FeatureSetUplink-v1610',
-        u'FeatureSetUplink-v1630',
-        u'FeatureSetUplink-v1640',
-        u'SubSlot-Config-r16',
-        u'SRS-AllPosResources-r16',
-        u'SRS-PosResources-r16',
-        u'SRS-PosResourceAP-r16',
-        u'SRS-PosResourceSP-r16',
-        u'SRS-Resources',
-        u'DummyF',
-        u'FeatureSetUplinkId',
-        u'FeatureSetUplinkPerCC',
-        u'FeatureSetUplinkPerCC-v1540',
-        u'FeatureSetUplinkPerCC-Id',
-        u'FreqBandIndicatorEUTRA',
-        u'FreqBandList',
-        u'FreqBandInformation',
-        u'FreqBandInformationEUTRA',
-        u'FreqBandInformationNR',
-        u'AggregatedBandwidth',
-        u'FreqSeparationClass',
-        u'FreqSeparationClassDL-v1620',
-        u'FreqSeparationClassUL-v1620',
-        u'FreqSeparationClassDL-Only-r16',
-        u'HighSpeedParameters-r16',
-        u'HighSpeedParameters-v1650',
-        u'IMS-Parameters',
-        u'IMS-ParametersCommon',
-        u'IMS-ParametersFRX-Diff',
-        u'InterRAT-Parameters',
-        u'EUTRA-Parameters',
-        u'EUTRA-ParametersCommon',
-        u'EUTRA-ParametersXDD-Diff',
-        u'UTRA-FDD-Parameters-r16',
-        u'SupportedBandUTRA-FDD-r16',
-        u'MAC-Parameters',
-        u'MAC-Parameters-v1610',
-        u'MAC-ParametersCommon',
-        u'MAC-ParametersFRX-Diff-r16',
-        u'MAC-ParametersXDD-Diff',
-        u'MinTimeGap-r16',
-        u'MeasAndMobParameters',
-        u'MeasAndMobParametersCommon',
-        u'MeasAndMobParametersXDD-Diff',
-        u'MeasAndMobParametersFRX-Diff',
-        u'MeasAndMobParametersMRDC',
-        u'MeasAndMobParametersMRDC-v1560',
-        u'MeasAndMobParametersMRDC-v1610',
-        u'MeasAndMobParametersMRDC-Common',
-        u'MeasAndMobParametersMRDC-Common-v1610',
-        u'MeasAndMobParametersMRDC-XDD-Diff',
-        u'MeasAndMobParametersMRDC-XDD-Diff-v1560',
-        u'MeasAndMobParametersMRDC-FRX-Diff',
-        u'MIMO-LayersDL',
-        u'MIMO-LayersUL',
-        u'MIMO-ParametersPerBand',
-        u'DummyG',
-        u'BeamManagementSSB-CSI-RS',
-        u'DummyH',
-        u'CSI-RS-ForTracking',
-        u'CSI-RS-IM-ReceptionForFeedback',
-        u'CSI-RS-ProcFrameworkForSRS',
-        u'CSI-ReportFramework',
-        u'CSI-ReportFrameworkExt-r16',
-        u'PTRS-DensityRecommendationDL',
-        u'PTRS-DensityRecommendationUL',
-        u'SpatialRelations',
-        u'DummyI',
-        u'ModulationOrder',
-        u'MRDC-Parameters',
-        u'MRDC-Parameters-v1580',
-        u'MRDC-Parameters-v1590',
-        u'MRDC-Parameters-v1620',
-        u'MRDC-Parameters-v1630',
-        u'NRDC-Parameters',
-        u'NRDC-Parameters-v1570',
-        u'NRDC-Parameters-v15c0',
-        u'NRDC-Parameters-v1610',
-        u'OLPC-SRS-Pos-r16',
-        u'PDCP-Parameters',
-        u'PDCP-ParametersMRDC',
-        u'PDCP-ParametersMRDC-v1610',
-        u'Phy-Parameters',
-        u'Phy-ParametersCommon',
-        u'Phy-ParametersXDD-Diff',
-        u'Phy-ParametersFRX-Diff',
-        u'Phy-ParametersFR1',
-        u'Phy-ParametersFR2',
-        u'Phy-ParametersMRDC',
-        u'NAICS-Capability-Entry',
-        u'Phy-ParametersSharedSpectrumChAccess-r16',
-        u'PowSav-Parameters-r16',
-        u'PowSav-ParametersCommon-r16',
-        u'PowSav-ParametersFRX-Diff-r16',
-        u'ProcessingParameters',
-        u'NumberOfCarriers',
-        u'RAT-Type',
-        u'RF-Parameters',
-        u'BandNR',
-        u'RF-ParametersMRDC',
-        u'RLC-Parameters',
-        u'SDAP-Parameters',
-        u'SidelinkParameters-r16',
-        u'SidelinkParametersNR-r16',
-        u'SidelinkParametersEUTRA-r16',
-        u'RLC-ParametersSidelink-r16',
-        u'MAC-ParametersSidelink-r16',
-        u'UE-SidelinkCapabilityAddXDD-Mode-r16',
-        u'MAC-ParametersSidelinkCommon-r16',
-        u'MAC-ParametersSidelinkXDD-Diff-r16',
-        u'BandSidelinkEUTRA-r16',
-        u'BandSidelink-r16',
-        u'SON-Parameters-r16',
-        u'SpatialRelationsSRS-Pos-r16',
-        u'SRS-SwitchingTimeNR',
-        u'SRS-SwitchingTimeEUTRA',
-        u'SupportedBandwidth',
-        u'UE-BasedPerfMeas-Parameters-r16',
-        u'UE-CapabilityRAT-ContainerList',
-        u'UE-CapabilityRAT-Container',
-        u'UE-CapabilityRAT-RequestList',
-        u'UE-CapabilityRAT-Request',
-        u'UE-CapabilityRequestFilterCommon',
-        u'CellGrouping-r16',
-        u'UE-CapabilityRequestFilterNR',
-        u'UE-CapabilityRequestFilterNR-v1540',
-        u'UE-MRDC-Capability',
-        u'UE-MRDC-Capability-v1560',
-        u'UE-MRDC-Capability-v1610',
-        u'UE-MRDC-CapabilityAddXDD-Mode',
-        u'UE-MRDC-CapabilityAddXDD-Mode-v1560',
-        u'UE-MRDC-CapabilityAddFRX-Mode',
-        u'GeneralParametersMRDC-XDD-Diff',
-        u'GeneralParametersMRDC-v1610',
-        u'UE-NR-Capability',
-        u'UE-NR-Capability-v1530',
-        u'UE-NR-Capability-v1540',
-        u'UE-NR-Capability-v1550',
-        u'UE-NR-Capability-v1560',
-        u'UE-NR-Capability-v1570',
-        u'UE-NR-Capability-v15c0',
-        u'UE-NR-Capability-v1610',
-        u'UE-NR-Capability-v1640',
-        u'UE-NR-Capability-v1650',
-        u'UE-NR-CapabilityAddXDD-Mode',
-        u'UE-NR-CapabilityAddXDD-Mode-v1530',
-        u'UE-NR-CapabilityAddFRX-Mode',
-        u'UE-NR-CapabilityAddFRX-Mode-v1540',
-        u'UE-NR-CapabilityAddFRX-Mode-v1610',
-        u'BAP-Parameters-r16',
-        u'SharedSpectrumChAccessParamsPerBand-r16',
-        u'SharedSpectrumChAccessParamsPerBand-v1630',
-        u'SharedSpectrumChAccessParamsPerBand-v1640',
-        u'SharedSpectrumChAccessParamsPerBand-v1650',
-        u'AbsoluteTimeInfo-r16',
-        u'AreaConfiguration-r16',
-        u'AreaConfig-r16',
-        u'InterFreqTargetInfo-r16',
-        u'CellGlobalIdList-r16',
-        u'TrackingAreaCodeList-r16',
-        u'TrackingAreaIdentityList-r16',
-        u'TrackingAreaIdentity-r16',
-        u'BT-NameList-r16',
-        u'BT-Name-r16',
-        u'EUTRA-AllowedMeasBandwidth',
-        u'EUTRA-MBSFN-SubframeConfigList',
-        u'EUTRA-MBSFN-SubframeConfig',
-        u'EUTRA-MultiBandInfoList',
-        u'EUTRA-MultiBandInfo',
-        u'EUTRA-NS-PmaxList',
-        u'EUTRA-NS-PmaxValue',
-        u'EUTRA-PhysCellId',
-        u'EUTRA-PhysCellIdRange',
-        u'EUTRA-PresenceAntennaPort1',
-        u'EUTRA-Q-OffsetRange',
-        u'IAB-IP-Address-r16',
-        u'IAB-IP-AddressIndex-r16',
-        u'IAB-IP-Usage-r16',
-        u'LoggingDuration-r16',
-        u'LoggingInterval-r16',
-        u'LogMeasResultListBT-r16',
-        u'LogMeasResultBT-r16',
-        u'LogMeasResultListWLAN-r16',
-        u'LogMeasResultWLAN-r16',
-        u'WLAN-Identifiers-r16',
-        u'WLAN-RSSI-Range-r16',
-        u'WLAN-RTT-r16',
-        u'OtherConfig',
-        u'OtherConfig-v1540',
-        u'CandidateServingFreqListNR-r16',
-        u'OtherConfig-v1610',
-        u'OverheatingAssistanceConfig',
-        u'IDC-AssistanceConfig-r16',
-        u'DRX-PreferenceConfig-r16',
-        u'MaxBW-PreferenceConfig-r16',
-        u'MaxCC-PreferenceConfig-r16',
-        u'MaxMIMO-LayerPreferenceConfig-r16',
-        u'MinSchedulingOffsetPreferenceConfig-r16',
-        u'ReleasePreferenceConfig-r16',
-        u'PhysCellIdUTRA-FDD-r16',
-        u'RRC-TransactionIdentifier',
-        u'Sensor-NameList-r16',
-        u'TraceReference-r16',
-        u'UE-MeasurementsAvailable-r16',
-        u'UTRA-FDD-Q-OffsetRange-r16',
-        u'VisitedCellInfoList-r16',
-        u'VisitedCellInfo-r16',
-        u'WLAN-NameList-r16',
-        u'WLAN-Name-r16',
-        u'SL-BWP-Config-r16',
-        u'SL-BWP-Generic-r16',
-        u'SL-BWP-ConfigCommon-r16',
-        u'SL-BWP-PoolConfig-r16',
-        u'SL-TxPoolDedicated-r16',
-        u'SL-ResourcePoolConfig-r16',
-        u'SL-ResourcePoolID-r16',
-        u'SL-BWP-PoolConfigCommon-r16',
-        u'SL-CBR-PriorityTxConfigList-r16',
-        u'SL-CBR-PriorityTxConfigList-v1650',
-        u'SL-PriorityTxConfigIndex-r16',
-        u'SL-PriorityTxConfigIndex-v1650',
-        u'SL-TxConfigIndex-r16',
-        u'SL-CBR-CommonTxConfigList-r16',
-        u'SL-CBR-LevelsConfig-r16',
-        u'SL-CBR-PSSCH-TxConfig-r16',
-        u'SL-CBR-r16',
-        u'SL-ConfigDedicatedNR-r16',
-        u'SL-DestinationIndex-r16',
-        u'SL-PHY-MAC-RLC-Config-r16',
-        u'SL-ConfiguredGrantConfig-r16',
-        u'SL-ConfigIndexCG-r16',
-        u'SL-CG-MaxTransNumList-r16',
-        u'SL-CG-MaxTransNum-r16',
-        u'SL-PeriodCG-r16',
-        u'SL-DestinationIdentity-r16',
-        u'SL-FreqConfig-r16',
-        u'SL-Freq-Id-r16',
-        u'SL-FreqConfigCommon-r16',
-        u'SL-LogicalChannelConfig-r16',
-        u'SL-MeasConfigCommon-r16',
-        u'SL-MeasConfigInfo-r16',
-        u'SL-MeasConfig-r16',
-        u'SL-MeasObjectToRemoveList-r16',
-        u'SL-ReportConfigToRemoveList-r16',
-        u'SL-MeasIdToRemoveList-r16',
-        u'SL-MeasIdList-r16',
-        u'SL-MeasIdInfo-r16',
-        u'SL-MeasId-r16',
-        u'SL-MeasObjectList-r16',
-        u'SL-MeasObjectInfo-r16',
-        u'SL-MeasObjectId-r16',
-        u'SL-MeasObject-r16',
-        u'SL-PDCP-Config-r16',
-        u'SL-PSBCH-Config-r16',
-        u'SL-PSSCH-TxConfigList-r16',
-        u'SL-PSSCH-TxConfig-r16',
-        u'SL-PSSCH-TxParameters-r16',
-        u'SL-QoS-FlowIdentity-r16',
-        u'SL-QoS-Profile-r16',
-        u'SL-PQI-r16',
-        u'SL-QuantityConfig-r16',
-        u'SL-RadioBearerConfig-r16',
-        u'SL-ReportConfigList-r16',
-        u'SL-ReportConfigInfo-r16',
-        u'SL-ReportConfigId-r16',
-        u'SL-ReportConfig-r16',
-        u'SL-PeriodicalReportConfig-r16',
-        u'SL-EventTriggerConfig-r16',
-        u'SL-MeasReportQuantity-r16',
-        u'SL-MeasTriggerQuantity-r16',
-        u'SL-RS-Type-r16',
-        u'SL-ResourcePool-r16',
-        u'SL-ZoneConfigMCR-r16',
-        u'SL-SyncAllowed-r16',
-        u'SL-PSCCH-Config-r16',
-        u'SL-PSSCH-Config-r16',
-        u'SL-PSFCH-Config-r16',
-        u'SL-PTRS-Config-r16',
-        u'SL-UE-SelectedConfigRP-r16',
-        u'SL-ResourceReservePeriod-r16',
-        u'SL-SelectionWindowList-r16',
-        u'SL-SelectionWindowConfig-r16',
-        u'SL-TxPercentageList-r16',
-        u'SL-TxPercentageConfig-r16',
-        u'SL-MinMaxMCS-List-r16',
-        u'SL-MinMaxMCS-Config-r16',
-        u'SL-BetaOffsets-r16',
-        u'SL-PowerControl-r16',
-        u'SL-RLC-BearerConfig-r16',
-        u'SL-RLC-BearerConfigIndex-r16',
-        u'SL-RLC-Config-r16',
-        u'SL-ScheduledConfig-r16',
-        u'MAC-MainConfigSL-r16',
-        u'SL-ConfiguredGrantConfigList-r16',
-        u'SL-SDAP-Config-r16',
-        u'SL-MappedQoS-FlowsListDedicated-r16',
-        u'SL-SyncConfigList-r16',
-        u'SL-SyncConfig-r16',
-        u'SL-RSRP-Range-r16',
-        u'SL-SSB-TimeAllocation-r16',
-        u'SL-Thres-RSRP-List-r16',
-        u'SL-Thres-RSRP-r16',
-        u'SL-TxPower-r16',
-        u'SL-TypeTxSync-r16',
-        u'SL-UE-SelectedConfig-r16',
-        u'SL-ZoneConfig-r16',
-        u'SLRB-Uu-ConfigIndex-r16',
-        u'BCCH-BCH-Message',
-        u'BCCH-BCH-MessageType',
-        u'BCCH-DL-SCH-Message',
-        u'BCCH-DL-SCH-MessageType',
-        u'DL-CCCH-Message',
-        u'DL-CCCH-MessageType',
-        u'DL-DCCH-Message',
-        u'DL-DCCH-MessageType',
-        u'PCCH-Message',
-        u'PCCH-MessageType',
-        u'UL-CCCH-Message',
-        u'UL-CCCH-MessageType',
-        u'UL-CCCH1-Message',
-        u'UL-CCCH1-MessageType',
-        u'UL-DCCH-Message',
-        u'UL-DCCH-MessageType',
-        u'CounterCheck',
-        u'CounterCheck-IEs',
-        u'DRB-CountMSB-InfoList',
-        u'DRB-CountMSB-Info',
-        u'CounterCheckResponse',
-        u'CounterCheckResponse-IEs',
-        u'DRB-CountInfoList',
-        u'DRB-CountInfo',
-        u'DedicatedSIBRequest-r16',
-        u'DedicatedSIBRequest-r16-IEs',
-        u'SIB-ReqInfo-r16',
-        u'PosSIB-ReqInfo-r16',
-        u'DLDedicatedMessageSegment-r16',
-        u'DLDedicatedMessageSegment-r16-IEs',
-        u'DLInformationTransfer',
-        u'DLInformationTransfer-IEs',
-        u'DLInformationTransfer-v1610-IEs',
-        u'DLInformationTransferMRDC-r16',
-        u'DLInformationTransferMRDC-r16-IEs',
-        u'FailureInformation',
-        u'FailureInformation-IEs',
-        u'FailureInfoRLC-Bearer',
-        u'FailureInformation-v1610-IEs',
-        u'FailureInfoDAPS-r16',
-        u'IABOtherInformation-r16',
-        u'IABOtherInformation-r16-IEs',
-        u'IAB-IP-AddressNumReq-r16',
-        u'IAB-IP-AddressPrefixReq-r16',
-        u'IAB-IP-AddressAndTraffic-r16',
-        u'IAB-IP-PrefixAndTraffic-r16',
-        u'LocationMeasurementIndication',
-        u'LocationMeasurementIndication-IEs',
-        u'LoggedMeasurementConfiguration-r16',
-        u'LoggedMeasurementConfiguration-r16-IEs',
-        u'LoggedPeriodicalReportConfig-r16',
-        u'LoggedEventTriggerConfig-r16',
-        u'EventType-r16',
-        u'MCGFailureInformation-r16',
-        u'MCGFailureInformation-r16-IEs',
-        u'FailureReportMCG-r16',
-        u'MeasResultList2UTRA',
-        u'MeasResult2UTRA-FDD-r16',
-        u'MeasResultList2EUTRA',
-        u'MeasurementReport',
-        u'MeasurementReport-IEs',
-        u'MIB',
-        u'MobilityFromNRCommand',
-        u'MobilityFromNRCommand-IEs',
-        u'MobilityFromNRCommand-v1610-IEs',
-        u'Paging',
-        u'PagingRecordList',
-        u'PagingRecord',
-        u'PagingUE-Identity',
-        u'RRCReestablishment',
-        u'RRCReestablishment-IEs',
-        u'RRCReestablishmentComplete',
-        u'RRCReestablishmentComplete-IEs',
-        u'RRCReestablishmentComplete-v1610-IEs',
-        u'RRCReestablishmentRequest',
-        u'RRCReestablishmentRequest-IEs',
-        u'ReestabUE-Identity',
-        u'ReestablishmentCause',
-        u'RRCReconfiguration',
-        u'RRCReconfiguration-IEs',
-        u'RRCReconfiguration-v1530-IEs',
-        u'RRCReconfiguration-v1540-IEs',
-        u'RRCReconfiguration-v1560-IEs',
-        u'RRCReconfiguration-v1610-IEs',
-        u'MRDC-SecondaryCellGroupConfig',
-        u'BAP-Config-r16',
-        u'MasterKeyUpdate',
-        u'OnDemandSIB-Request-r16',
-        u'T316-r16',
-        u'IAB-IP-AddressConfigurationList-r16',
-        u'IAB-IP-AddressConfiguration-r16',
-        u'SL-ConfigDedicatedEUTRA-Info-r16',
-        u'SL-TimeOffsetEUTRA-r16',
-        u'RRCReconfigurationComplete',
-        u'RRCReconfigurationComplete-IEs',
-        u'RRCReconfigurationComplete-v1530-IEs',
-        u'RRCReconfigurationComplete-v1560-IEs',
-        u'RRCReconfigurationComplete-v1610-IEs',
-        u'RRCReconfigurationComplete-v1640-IEs',
-        u'RRCReject',
-        u'RRCReject-IEs',
-        u'RRCRelease',
-        u'RRCRelease-IEs',
-        u'RRCRelease-v1540-IEs',
-        u'RRCRelease-v1610-IEs',
-        u'RRCRelease-v1650-IEs',
-        u'RedirectedCarrierInfo',
-        u'RedirectedCarrierInfo-EUTRA',
-        u'CarrierInfoNR',
-        u'SuspendConfig',
-        u'PeriodicRNAU-TimerValue',
-        u'CellReselectionPriorities',
-        u'PagingCycle',
-        u'FreqPriorityListEUTRA',
-        u'FreqPriorityListNR',
-        u'FreqPriorityEUTRA',
-        u'FreqPriorityNR',
-        u'RAN-NotificationAreaInfo',
-        u'PLMN-RAN-AreaCellList',
-        u'PLMN-RAN-AreaCell',
-        u'PLMN-RAN-AreaConfigList',
-        u'PLMN-RAN-AreaConfig',
-        u'RAN-AreaConfig',
-        u'RRCResume',
-        u'RRCResume-IEs',
-        u'RRCResume-v1560-IEs',
-        u'RRCResume-v1610-IEs',
-        u'RRCResumeComplete',
-        u'RRCResumeComplete-IEs',
-        u'RRCResumeComplete-v1610-IEs',
-        u'RRCResumeComplete-v1640-IEs',
-        u'RRCResumeRequest',
-        u'RRCResumeRequest-IEs',
-        u'RRCResumeRequest1',
-        u'RRCResumeRequest1-IEs',
-        u'RRCSetup',
-        u'RRCSetup-IEs',
-        u'RRCSetupComplete',
-        u'RRCSetupComplete-IEs',
-        u'RRCSetupComplete-v1610-IEs',
-        u'RegisteredAMF',
-        u'RRCSetupRequest',
-        u'RRCSetupRequest-IEs',
-        u'InitialUE-Identity',
-        u'EstablishmentCause',
-        u'RRCSystemInfoRequest',
-        u'RRCSystemInfoRequest-IEs',
-        u'RRC-PosSystemInfoRequest-r16-IEs',
-        u'SCGFailureInformation',
-        u'SCGFailureInformation-IEs',
-        u'SCGFailureInformation-v1590-IEs',
-        u'FailureReportSCG',
-        u'MeasResultFreqList',
-        u'SCGFailureInformationEUTRA',
-        u'SCGFailureInformationEUTRA-IEs',
-        u'SCGFailureInformationEUTRA-v1590-IEs',
-        u'FailureReportSCG-EUTRA',
-        u'MeasResultFreqListFailMRDC',
-        u'SecurityModeCommand',
-        u'SecurityModeCommand-IEs',
-        u'SecurityConfigSMC',
-        u'SecurityModeComplete',
-        u'SecurityModeComplete-IEs',
-        u'SecurityModeFailure',
-        u'SecurityModeFailure-IEs',
-        u'SIB1',
-        u'SIB1-v1610-IEs',
-        u'SIB1-v1630-IEs',
-        u'UAC-AccessCategory1-SelectionAssistanceInfo',
-        u'UAC-AC1-SelectAssistInfo-r16',
-        u'SidelinkUEInformationNR-r16',
-        u'SidelinkUEInformationNR-r16-IEs',
-        u'SL-InterestedFreqList-r16',
-        u'SL-TxResourceReqList-r16',
-        u'SL-TxResourceReq-r16',
-        u'SL-TxInterestedFreqList-r16',
-        u'SL-QoS-Info-r16',
-        u'SL-RLC-ModeIndication-r16',
-        u'SL-FailureList-r16',
-        u'SL-Failure-r16',
-        u'SystemInformation',
-        u'SystemInformation-IEs',
-        u'UEAssistanceInformation',
-        u'UEAssistanceInformation-IEs',
-        u'DelayBudgetReport',
-        u'UEAssistanceInformation-v1540-IEs',
-        u'OverheatingAssistance',
-        u'ReducedAggregatedBandwidth',
-        u'UEAssistanceInformation-v1610-IEs',
-        u'IDC-Assistance-r16',
-        u'AffectedCarrierFreqList-r16',
-        u'AffectedCarrierFreq-r16',
-        u'AffectedCarrierFreqCombList-r16',
-        u'AffectedCarrierFreqComb-r16',
-        u'VictimSystemType-r16',
-        u'DRX-Preference-r16',
-        u'MaxBW-Preference-r16',
-        u'MaxCC-Preference-r16',
-        u'MaxMIMO-LayerPreference-r16',
-        u'MinSchedulingOffsetPreference-r16',
-        u'ReleasePreference-r16',
-        u'ReducedMaxBW-FRx-r16',
-        u'ReducedMaxCCs-r16',
-        u'SL-UE-AssistanceInformationNR-r16',
-        u'SL-TrafficPatternInfo-r16',
-        u'UECapabilityEnquiry',
-        u'UECapabilityEnquiry-IEs',
-        u'UECapabilityEnquiry-v1560-IEs',
-        u'UECapabilityEnquiry-v1610-IEs',
-        u'UECapabilityInformation',
-        u'UECapabilityInformation-IEs',
-        u'UEInformationRequest-r16',
-        u'UEInformationRequest-r16-IEs',
-        u'UEInformationResponse-r16',
-        u'UEInformationResponse-r16-IEs',
-        u'LogMeasReport-r16',
-        u'LogMeasInfoList-r16',
-        u'LogMeasInfo-r16',
-        u'ConnEstFailReport-r16',
-        u'MeasResultServingCell-r16',
-        u'MeasResultFailedCell-r16',
-        u'RA-ReportList-r16',
-        u'RA-Report-r16',
-        u'RA-InformationCommon-r16',
-        u'PerRAInfoList-r16',
-        u'PerRAInfo-r16',
-        u'PerRASSBInfo-r16',
-        u'PerRACSI-RSInfo-r16',
-        u'PerRAAttemptInfoList-r16',
-        u'PerRAAttemptInfo-r16',
-        u'RLF-Report-r16',
-        u'MeasResultList2NR-r16',
-        u'MeasResultList2EUTRA-r16',
-        u'MeasResult2NR-r16',
-        u'MeasResultListLogging2NR-r16',
-        u'MeasResultLogging2NR-r16',
-        u'MeasResultListLoggingNR-r16',
-        u'MeasResultLoggingNR-r16',
-        u'MeasResult2EUTRA-r16',
-        u'MeasResultRLFNR-r16',
-        u'TimeSinceFailure-r16',
-        u'MobilityHistoryReport-r16',
-        u'TimeUntilReconnection-r16',
-        u'ULDedicatedMessageSegment-r16',
-        u'ULDedicatedMessageSegment-r16-IEs',
-        u'ULInformationTransfer',
-        u'ULInformationTransfer-IEs',
-        u'ULInformationTransferIRAT-r16',
-        u'ULInformationTransferIRAT-r16-IEs',
-        u'ULInformationTransferMRDC',
-        u'ULInformationTransferMRDC-IEs',
-        u'SetupRelease',
-        u'SIB2',
-        u'RangeToBestCell',
-        u'SIB3',
-        u'IntraFreqNeighCellList',
-        u'IntraFreqNeighCellList-v1610',
-        u'IntraFreqNeighCellInfo',
-        u'IntraFreqNeighCellInfo-v1610',
-        u'IntraFreqBlackCellList',
-        u'IntraFreqWhiteCellList-r16',
-        u'IntraFreqCAG-CellListPerPLMN-r16',
-        u'SIB4',
-        u'InterFreqCarrierFreqList',
-        u'InterFreqCarrierFreqList-v1610',
-        u'InterFreqCarrierFreqInfo',
-        u'InterFreqCarrierFreqInfo-v1610',
-        u'InterFreqNeighCellList',
-        u'InterFreqNeighCellList-v1610',
-        u'InterFreqNeighCellInfo',
-        u'InterFreqNeighCellInfo-v1610',
-        u'InterFreqBlackCellList',
-        u'InterFreqWhiteCellList-r16',
-        u'InterFreqCAG-CellListPerPLMN-r16',
-        u'SIB5',
-        u'CarrierFreqListEUTRA',
-        u'CarrierFreqListEUTRA-v1610',
-        u'CarrierFreqEUTRA',
-        u'CarrierFreqEUTRA-v1610',
-        u'EUTRA-FreqBlackCellList',
-        u'EUTRA-FreqNeighCellList',
-        u'EUTRA-FreqNeighCellInfo',
-        u'SIB6',
-        u'SIB7',
-        u'SIB8',
-        u'SIB9',
-        u'SIB10-r16',
-        u'HRNN-List-r16',
-        u'HRNN-r16',
-        u'SIB11-r16',
-        u'SIB12-r16',
-        u'SIB12-IEs-r16',
-        u'SL-ConfigCommonNR-r16',
-        u'SL-NR-AnchorCarrierFreqList-r16',
-        u'SL-EUTRA-AnchorCarrierFreqList-r16',
-        u'SIB13-r16',
-        u'SIB14-r16',
-        u'PosSystemInformation-r16-IEs',
-        u'PosSI-SchedulingInfo-r16',
-        u'PosSchedulingInfo-r16',
-        u'PosSIB-MappingInfo-r16',
-        u'PosSIB-Type-r16',
-        u'GNSS-ID-r16',
-        u'SBAS-ID-r16',
-        u'SIBpos-r16',
-        u'AdditionalSpectrumEmission',
-        u'Alpha',
-        u'AMF-Identifier',
-        u'ARFCN-ValueEUTRA',
-        u'ARFCN-ValueNR',
-        u'ARFCN-ValueUTRA-FDD-r16',
-        u'AvailabilityCombinationsPerCell-r16',
-        u'AvailabilityCombinationsPerCellIndex-r16',
-        u'AvailabilityCombination-r16',
-        u'AvailabilityCombinationId-r16',
-        u'AvailabilityIndicator-r16',
-        u'AI-RNTI-r16',
-        u'BAP-RoutingID-r16',
-        u'BeamFailureRecoveryConfig',
-        u'PRACH-ResourceDedicatedBFR',
-        u'BFR-SSB-Resource',
-        u'BFR-CSIRS-Resource',
-        u'CandidateBeamRSListExt-r16',
-        u'BeamFailureRecoverySCellConfig-r16',
-        u'CandidateBeamRS-r16',
-        u'BetaOffsets',
-        u'BH-LogicalChannelIdentity-r16',
-        u'BH-LogicalChannelIdentity-Ext-r16',
-        u'BH-RLC-ChannelConfig-r16',
-        u'BH-RLC-ChannelID-r16',
-        u'BSR-Config',
-        u'BWP',
-        u'BWP-Downlink',
-        u'BWP-DownlinkCommon',
-        u'BWP-DownlinkDedicated',
-        u'SPS-ConfigToAddModList-r16',
-        u'SPS-ConfigToReleaseList-r16',
-        u'SPS-ConfigDeactivationState-r16',
-        u'SPS-ConfigDeactivationStateList-r16',
-        u'BWP-Id',
-        u'BWP-Uplink',
-        u'BWP-UplinkCommon',
-        u'BWP-UplinkDedicated',
-        u'ConfiguredGrantConfigToAddModList-r16',
-        u'ConfiguredGrantConfigToReleaseList-r16',
-        u'ConfiguredGrantConfigType2DeactivationState-r16',
-        u'ConfiguredGrantConfigType2DeactivationStateList-r16',
-        u'CellAccessRelatedInfo',
-        u'CellAccessRelatedInfo-EUTRA-5GC',
-        u'PLMN-IdentityList-EUTRA-5GC',
-        u'PLMN-Identity-EUTRA-5GC',
-        u'CellIdentity-EUTRA-5GC',
-        u'CellAccessRelatedInfo-EUTRA-EPC',
-        u'PLMN-IdentityList-EUTRA-EPC',
-        u'CellGroupConfig',
-        u'SpCellConfig',
-        u'ReconfigurationWithSync',
-        u'DAPS-UplinkPowerConfig-r16',
-        u'SCellConfig',
-        u'CellGroupId',
-        u'CellIdentity',
-        u'CellReselectionPriority',
-        u'CellReselectionSubPriority',
-        u'CGI-InfoEUTRA',
-        u'CGI-InfoEUTRALogging',
-        u'CGI-InfoNR',
-        u'CGI-Info-Logging-r16',
-        u'CLI-RSSI-Range-r16',
-        u'CodebookConfig',
-        u'CodebookConfig-r16',
-        u'CommonLocationInfo-r16',
-        u'CondReconfigId-r16',
-        u'CondReconfigToAddModList-r16',
-        u'CondReconfigToAddMod-r16',
-        u'ConditionalReconfiguration-r16',
-        u'CondReconfigToRemoveList-r16',
-        u'ConfiguredGrantConfig',
-        u'CG-UCI-OnPUSCH',
-        u'CG-COT-Sharing-r16',
-        u'CG-StartingOffsets-r16',
-        u'ConfiguredGrantConfigIndex-r16',
-        u'ConfiguredGrantConfigIndexMAC-r16',
-        u'ConnEstFailureControl',
-        u'ControlResourceSet',
-        u'ControlResourceSetId',
-        u'ControlResourceSetId-r16',
-        u'ControlResourceSetId-v1610',
-        u'ControlResourceSetZero',
-        u'CrossCarrierSchedulingConfig',
-        u'CSI-AperiodicTriggerStateList',
-        u'CSI-AperiodicTriggerState',
-        u'CSI-AssociatedReportConfigInfo',
-        u'CSI-FrequencyOccupation',
-        u'CSI-IM-Resource',
-        u'CSI-IM-ResourceId',
-        u'CSI-IM-ResourceSet',
-        u'CSI-IM-ResourceSetId',
-        u'CSI-MeasConfig',
-        u'CSI-ReportConfig',
-        u'CSI-ReportPeriodicityAndOffset',
-        u'PUCCH-CSI-Resource',
-        u'PortIndexFor8Ranks',
-        u'PortIndex8',
-        u'PortIndex4',
-        u'PortIndex2',
-        u'CSI-ReportConfigId',
-        u'CSI-ResourceConfig',
-        u'CSI-ResourceConfigId',
-        u'CSI-ResourcePeriodicityAndOffset',
-        u'CSI-RS-ResourceConfigMobility',
-        u'CSI-RS-CellMobility',
-        u'CSI-RS-Resource-Mobility',
-        u'CSI-RS-Index',
-        u'CSI-RS-ResourceMapping',
-        u'CSI-SemiPersistentOnPUSCH-TriggerStateList',
-        u'CSI-SemiPersistentOnPUSCH-TriggerState',
-        u'CSI-SSB-ResourceSet',
-        u'CSI-SSB-ResourceSetId',
-        u'DedicatedNAS-Message',
-        u'DMRS-DownlinkConfig',
-        u'DMRS-UplinkConfig',
-        u'DMRS-UplinkTransformPrecoding-r16',
-        u'DownlinkConfigCommon',
-        u'DownlinkConfigCommonSIB',
-        u'BCCH-Config',
-        u'PCCH-Config',
-        u'DownlinkPreemption',
-        u'INT-ConfigurationPerServingCell',
-        u'DRB-Identity',
-        u'DRX-Config',
-        u'DRX-ConfigSecondaryGroup',
-        u'FilterCoefficient',
-        u'FreqBandIndicatorNR',
-        u'FrequencyInfoDL',
-        u'FrequencyInfoDL-SIB',
-        u'FrequencyInfoUL',
-        u'FrequencyInfoUL-SIB',
-        u'HighSpeedConfig-r16',
-        u'Hysteresis',
-        u'InvalidSymbolPattern-r16',
-        u'I-RNTI-Value',
-        u'LBT-FailureRecoveryConfig-r16',
-        u'LocationInfo-r16',
-        u'LocationMeasurementInfo',
-        u'EUTRA-RSTD-InfoList',
-        u'EUTRA-RSTD-Info',
-        u'NR-PRS-MeasurementInfoList-r16',
-        u'NR-PRS-MeasurementInfo-r16',
-        u'LogicalChannelConfig',
-        u'LogicalChannelIdentity',
-        u'MAC-CellGroupConfig',
-        u'DataInactivityTimer',
-        u'MeasConfig',
-        u'MeasObjectToRemoveList',
-        u'MeasIdToRemoveList',
-        u'ReportConfigToRemoveList',
-        u'MeasGapConfig',
-        u'GapConfig',
-        u'MeasGapSharingConfig',
-        u'MeasGapSharingScheme',
-        u'MeasId',
-        u'MeasIdleConfigSIB-r16',
-        u'MeasIdleConfigDedicated-r16',
-        u'ValidityAreaList-r16',
-        u'ValidityArea-r16',
-        u'ValidityCellList',
-        u'MeasIdleCarrierNR-r16',
-        u'MeasIdleCarrierEUTRA-r16',
-        u'CellListNR-r16',
-        u'CellListEUTRA-r16',
-        u'BeamMeasConfigIdle-NR-r16',
-        u'RSRQ-RangeEUTRA-r16',
-        u'MeasIdToAddModList',
-        u'MeasIdToAddMod',
-        u'MeasObjectCLI-r16',
-        u'CLI-ResourceConfig-r16',
-        u'SRS-ResourceListConfigCLI-r16',
-        u'RSSI-ResourceListConfigCLI-r16',
-        u'SRS-ResourceConfigCLI-r16',
-        u'RSSI-ResourceConfigCLI-r16',
-        u'RSSI-ResourceId-r16',
-        u'RSSI-PeriodicityAndOffset-r16',
-        u'MeasObjectEUTRA',
-        u'EUTRA-CellIndexList',
-        u'EUTRA-CellIndex',
-        u'EUTRA-Cell',
-        u'EUTRA-BlackCell',
-        u'MeasObjectId',
-        u'MeasObjectNR',
-        u'SSB-MTC3List-r16',
-        u'T312-r16',
-        u'ReferenceSignalConfig',
-        u'SSB-ConfigMobility',
-        u'Q-OffsetRangeList',
-        u'ThresholdNR',
-        u'CellsToAddModList',
-        u'CellsToAddMod',
-        u'RMTC-Config-r16',
-        u'SSB-PositionQCL-CellsToAddModList-r16',
-        u'SSB-PositionQCL-CellsToAddMod-r16',
-        u'MeasObjectNR-SL-r16',
-        u'Tx-PoolMeasList-r16',
-        u'MeasObjectToAddModList',
-        u'MeasObjectToAddMod',
-        u'MeasObjectUTRA-FDD-r16',
-        u'CellsToAddModListUTRA-FDD-r16',
-        u'CellsToAddModUTRA-FDD-r16',
-        u'UTRA-FDD-CellIndexList-r16',
-        u'UTRA-FDD-CellIndex-r16',
-        u'MeasResultCellListSFTD-NR',
-        u'MeasResultCellSFTD-NR',
-        u'MeasResultCellListSFTD-EUTRA',
-        u'MeasResultSFTD-EUTRA',
-        u'MeasResults',
-        u'MeasResultServMOList',
-        u'MeasResultServMO',
-        u'MeasResultListNR',
-        u'MeasResultNR',
-        u'MeasResultListEUTRA',
-        u'MeasResultEUTRA',
-        u'MultiBandInfoListEUTRA',
-        u'MeasQuantityResults',
-        u'MeasQuantityResultsEUTRA',
-        u'ResultsPerSSB-IndexList',
-        u'ResultsPerSSB-Index',
-        u'ResultsPerCSI-RS-IndexList',
-        u'ResultsPerCSI-RS-Index',
-        u'MeasResultServFreqListEUTRA-SCG',
-        u'MeasResultServFreqListNR-SCG',
-        u'MeasResultListUTRA-FDD-r16',
-        u'MeasResultUTRA-FDD-r16',
-        u'MeasResultForRSSI-r16',
-        u'MeasResultCLI-r16',
-        u'MeasResultListSRS-RSRP-r16',
-        u'MeasResultSRS-RSRP-r16',
-        u'MeasResultListCLI-RSSI-r16',
-        u'MeasResultCLI-RSSI-r16',
-        u'UL-PDCP-DelayValueResultList-r16',
-        u'UL-PDCP-DelayValueResult-r16',
-        u'MeasResult2EUTRA',
-        u'MeasResult2NR',
-        u'MeasResultIdleEUTRA-r16',
-        u'MeasResultsPerCarrierIdleEUTRA-r16',
-        u'MeasResultsPerCellIdleEUTRA-r16',
-        u'MeasResultIdleNR-r16',
-        u'MeasResultsPerCarrierIdleNR-r16',
-        u'MeasResultsPerCellIdleNR-r16',
-        u'ResultsPerSSB-IndexList-r16',
-        u'ResultsPerSSB-IndexIdle-r16',
-        u'MeasResultSCG-Failure',
-        u'MeasResultList2NR',
-        u'MeasResultsSL-r16',
-        u'MeasResultNR-SL-r16',
-        u'MeasResultCBR-NR-r16',
-        u'MeasTriggerQuantityEUTRA',
-        u'RSRP-RangeEUTRA',
-        u'RSRQ-RangeEUTRA',
-        u'SINR-RangeEUTRA',
-        u'MobilityStateParameters',
-        u'MsgA-ConfigCommon-r16',
-        u'MsgA-PUSCH-Config-r16',
-        u'MsgA-PUSCH-Resource-r16',
-        u'MsgA-DMRS-Config-r16',
-        u'MultiFrequencyBandListNR',
-        u'MultiFrequencyBandListNR-SIB',
-        u'NR-MultiBandInfo',
-        u'NeedForGapsConfigNR-r16',
-        u'NeedForGapsInfoNR-r16',
-        u'NeedForGapsIntraFreqlist-r16',
-        u'NeedForGapsBandlistNR-r16',
-        u'NeedForGapsIntraFreq-r16',
-        u'NeedForGapsNR-r16',
-        u'NextHopChainingCount',
-        u'NG-5G-S-TMSI',
-        u'NPN-Identity-r16',
-        u'CAG-IdentityInfo-r16',
-        u'NID-r16',
-        u'NPN-IdentityInfoList-r16',
-        u'NPN-IdentityInfo-r16',
-        u'NR-NS-PmaxList',
-        u'NR-NS-PmaxValue',
-        u'NZP-CSI-RS-Resource',
-        u'NZP-CSI-RS-ResourceId',
-        u'NZP-CSI-RS-ResourceSet',
-        u'NZP-CSI-RS-ResourceSetId',
-        u'P-Max',
-        u'PCI-List',
-        u'PCI-Range',
-        u'PCI-RangeElement',
-        u'PCI-RangeIndex',
-        u'PCI-RangeIndexList',
-        u'PDCCH-Config',
-        u'SearchSpaceSwitchConfig-r16',
-        u'CellGroupForSwitch-r16',
-        u'PDCCH-ConfigCommon',
-        u'PDCCH-ConfigSIB1',
-        u'PDCCH-ServingCellConfig',
-        u'PDCP-Config',
-        u'EthernetHeaderCompression-r16',
-        u'UL-DataSplitThreshold',
-        u'DiscardTimerExt-r16',
-        u'PDSCH-Config',
-        u'RateMatchPatternGroup',
-        u'MinSchedulingOffsetK0-Values-r16',
-        u'MaxMIMO-LayersDL-r16',
-        u'PDSCH-ConfigCommon',
-        u'PDSCH-ServingCellConfig',
-        u'PDSCH-CodeBlockGroupTransmission',
-        u'PDSCH-CodeBlockGroupTransmissionList-r16',
-        u'PDSCH-TimeDomainResourceAllocationList',
-        u'PDSCH-TimeDomainResourceAllocation',
-        u'PDSCH-TimeDomainResourceAllocationList-r16',
-        u'PDSCH-TimeDomainResourceAllocation-r16',
-        u'PHR-Config',
-        u'MPE-Config-FR2-r16',
-        u'PhysCellId',
-        u'PhysicalCellGroupConfig',
-        u'PDCCH-BlindDetection',
-        u'DCP-Config-r16',
-        u'PDSCH-HARQ-ACK-CodebookList-r16',
-        u'PDCCH-BlindDetectionCA-CombIndicator-r16',
-        u'PDCCH-BlindDetection2-r16',
-        u'PDCCH-BlindDetection3-r16',
-        u'PLMN-Identity',
-        u'MCC',
-        u'MNC',
-        u'MCC-MNC-Digit',
-        u'PLMN-IdentityInfoList',
-        u'PLMN-IdentityInfo',
-        u'PLMN-IdentityList2-r16',
-        u'PRB-Id',
-        u'PTRS-DownlinkConfig',
-        u'PTRS-UplinkConfig',
-        u'PUCCH-Config',
-        u'PUCCH-FormatConfig',
-        u'PUCCH-MaxCodeRate',
-        u'PUCCH-ResourceSet',
-        u'PUCCH-ResourceSetId',
-        u'PUCCH-Resource',
-        u'PUCCH-ResourceExt-r16',
-        u'PUCCH-ResourceId',
-        u'PUCCH-format0',
-        u'PUCCH-format1',
-        u'PUCCH-format2',
-        u'PUCCH-format3',
-        u'PUCCH-format4',
-        u'PUCCH-ResourceGroup-r16',
-        u'PUCCH-ResourceGroupId-r16',
-        u'DL-DataToUL-ACK-r16',
-        u'DL-DataToUL-ACK-DCI-1-2-r16',
-        u'UL-AccessConfigListDCI-1-1-r16',
-        u'PUCCH-ConfigCommon',
-        u'PUCCH-ConfigurationList-r16',
-        u'PUCCH-PathlossReferenceRS-Id',
-        u'PUCCH-PathlossReferenceRS-Id-v1610',
-        u'PUCCH-PowerControl',
-        u'P0-PUCCH',
-        u'P0-PUCCH-Id',
-        u'PathlossReferenceRSs-v1610',
-        u'PUCCH-PathlossReferenceRS',
-        u'PUCCH-PathlossReferenceRS-r16',
-        u'PUCCH-SpatialRelationInfo',
-        u'PUCCH-SpatialRelationInfoExt-r16',
-        u'PUCCH-SRS',
-        u'PUCCH-SpatialRelationInfoId',
-        u'PUCCH-SpatialRelationInfoId-r16',
-        u'PUCCH-SpatialRelationInfoId-v1610',
-        u'PUCCH-TPC-CommandConfig',
-        u'PUSCH-Config',
-        u'UCI-OnPUSCH',
-        u'MinSchedulingOffsetK2-Values-r16',
-        u'UCI-OnPUSCH-DCI-0-2-r16',
-        u'FrequencyHoppingOffsetListsDCI-0-2-r16',
-        u'UCI-OnPUSCH-ListDCI-0-2-r16',
-        u'UCI-OnPUSCH-ListDCI-0-1-r16',
-        u'UL-AccessConfigListDCI-0-1-r16',
-        u'PUSCH-ConfigCommon',
-        u'PUSCH-PowerControl',
-        u'P0-PUSCH-AlphaSet',
-        u'P0-PUSCH-AlphaSetId',
-        u'PUSCH-PathlossReferenceRS',
-        u'PUSCH-PathlossReferenceRS-r16',
-        u'PUSCH-PathlossReferenceRS-Id',
-        u'PUSCH-PathlossReferenceRS-Id-v1610',
-        u'SRI-PUSCH-PowerControl',
-        u'SRI-PUSCH-PowerControlId',
-        u'PUSCH-PowerControl-v1610',
-        u'P0-PUSCH-Set-r16',
-        u'P0-PUSCH-SetId-r16',
-        u'P0-PUSCH-r16',
-        u'PUSCH-ServingCellConfig',
-        u'PUSCH-CodeBlockGroupTransmission',
-        u'MaxMIMO-LayersDCI-0-2-r16',
-        u'PUSCH-TimeDomainResourceAllocationList',
-        u'PUSCH-TimeDomainResourceAllocation',
-        u'PUSCH-TimeDomainResourceAllocationList-r16',
-        u'PUSCH-TimeDomainResourceAllocation-r16',
-        u'PUSCH-Allocation-r16',
-        u'PUSCH-TPC-CommandConfig',
-        u'Q-OffsetRange',
-        u'Q-QualMin',
-        u'Q-RxLevMin',
-        u'QuantityConfig',
-        u'QuantityConfigNR',
-        u'QuantityConfigRS',
-        u'FilterConfig',
-        u'FilterConfigCLI-r16',
-        u'QuantityConfigUTRA-FDD-r16',
-        u'RACH-ConfigCommon',
-        u'RACH-ConfigCommonTwoStepRA-r16',
-        u'GroupB-ConfiguredTwoStepRA-r16',
-        u'RACH-ConfigDedicated',
-        u'CFRA',
-        u'CFRA-TwoStep-r16',
-        u'CFRA-SSB-Resource',
-        u'CFRA-CSIRS-Resource',
-        u'RACH-ConfigGeneric',
-        u'RACH-ConfigGenericTwoStepRA-r16',
-        u'RA-Prioritization',
-        u'RadioBearerConfig',
-        u'SRB-ToAddModList',
-        u'SRB-ToAddMod',
-        u'DRB-ToAddModList',
-        u'DRB-ToAddMod',
-        u'DRB-ToReleaseList',
-        u'SecurityConfig',
-        u'RadioLinkMonitoringConfig',
-        u'RadioLinkMonitoringRS',
-        u'RadioLinkMonitoringRS-Id',
-        u'RAN-AreaCode',
-        u'RateMatchPattern',
-        u'RateMatchPatternId',
-        u'RateMatchPatternLTE-CRS',
-        u'LTE-CRS-PatternList-r16',
-        u'ReferenceTimeInfo-r16',
-        u'ReferenceTime-r16',
-        u'RejectWaitTime',
-        u'RepetitionSchemeConfig-r16',
-        u'RepetitionSchemeConfig-v1630',
-        u'FDM-TDM-r16',
-        u'SlotBased-r16',
-        u'SlotBased-v1630',
-        u'ReportConfigId',
-        u'ReportConfigInterRAT',
-        u'ReportCGI-EUTRA',
-        u'ReportSFTD-EUTRA',
-        u'EventTriggerConfigInterRAT',
-        u'PeriodicalReportConfigInterRAT',
-        u'MeasTriggerQuantityUTRA-FDD-r16',
-        u'MeasReportQuantityUTRA-FDD-r16',
-        u'ReportConfigNR',
-        u'ReportCGI',
-        u'ReportSFTD-NR',
-        u'CondTriggerConfig-r16',
-        u'EventTriggerConfig',
-        u'PeriodicalReportConfig',
-        u'NR-RS-Type',
-        u'MeasTriggerQuantity',
-        u'MeasTriggerQuantityOffset',
-        u'MeasReportQuantity',
-        u'MeasRSSI-ReportConfig-r16',
-        u'CLI-EventTriggerConfig-r16',
-        u'CLI-PeriodicalReportConfig-r16',
-        u'MeasTriggerQuantityCLI-r16',
-        u'MeasReportQuantityCLI-r16',
-        u'ReportConfigNR-SL-r16',
-        u'EventTriggerConfigNR-SL-r16',
-        u'PeriodicalReportConfigNR-SL-r16',
-        u'MeasReportQuantity-r16',
-        u'ReportConfigToAddModList',
-        u'ReportConfigToAddMod',
-        u'ReportInterval',
-        u'ReselectionThreshold',
-        u'ReselectionThresholdQ',
-        u'ResumeCause',
-        u'RLC-BearerConfig',
-        u'RLC-Config',
-        u'UL-AM-RLC',
-        u'DL-AM-RLC',
-        u'UL-UM-RLC',
-        u'DL-UM-RLC',
-        u'T-PollRetransmit',
-        u'PollPDU',
-        u'PollByte',
-        u'T-Reassembly',
-        u'T-StatusProhibit',
-        u'SN-FieldLengthUM',
-        u'SN-FieldLengthAM',
-        u'RLC-Config-v1610',
-        u'DL-AM-RLC-v1610',
-        u'T-StatusProhibit-v1610',
-        u'RLF-TimersAndConstants',
-        u'RNTI-Value',
-        u'RSRP-Range',
-        u'RSRQ-Range',
-        u'RSSI-Range-r16',
-        u'SCellIndex',
-        u'SchedulingRequestConfig',
-        u'SchedulingRequestToAddMod',
-        u'SchedulingRequestId',
-        u'SchedulingRequestResourceConfig',
-        u'SchedulingRequestResourceConfigExt-v1610',
-        u'SchedulingRequestResourceId',
-        u'ScramblingId',
-        u'SCS-SpecificCarrier',
-        u'SDAP-Config',
-        u'QFI',
-        u'PDU-SessionID',
-        u'SearchSpace',
-        u'SearchSpaceExt-r16',
-        u'SearchSpaceId',
-        u'SearchSpaceZero',
-        u'SecurityAlgorithmConfig',
-        u'IntegrityProtAlgorithm',
-        u'CipheringAlgorithm',
-        u'SemiStaticChannelAccessConfig-r16',
-        u'Sensor-LocationInfo-r16',
-        u'ServCellIndex',
-        u'ServingCellConfig',
-        u'UplinkConfig',
-        u'DummyJ',
-        u'ChannelAccessConfig-r16',
-        u'IntraCellGuardBandsPerSCS-r16',
-        u'GuardBand-r16',
-        u'DormancyGroupID-r16',
-        u'DormantBWP-Config-r16',
-        u'WithinActiveTimeConfig-r16',
-        u'OutsideActiveTimeConfig-r16',
-        u'UplinkTxSwitching-r16',
-        u'ServingCellConfigCommon',
-        u'ServingCellConfigCommonSIB',
-        u'ShortI-RNTI-Value',
-        u'ShortMAC-I',
-        u'SINR-Range',
-        u'SI-RequestConfig',
-        u'SI-RequestResources',
-        u'SI-SchedulingInfo',
-        u'SchedulingInfo',
-        u'SIB-Mapping',
-        u'SIB-TypeInfo',
-        u'SK-Counter',
-        u'SlotFormatCombinationsPerCell',
-        u'SlotFormatCombination',
-        u'SlotFormatCombinationId',
-        u'SlotFormatIndicator',
-        u'CO-DurationsPerCell-r16',
-        u'CO-Duration-r16',
-        u'AvailableRB-SetsPerCell-r16',
-        u'SearchSpaceSwitchTrigger-r16',
-        u'S-NSSAI',
-        u'SpeedStateScaleFactors',
-        u'SPS-Config',
-        u'SPS-ConfigIndex-r16',
-        u'SPS-PUCCH-AN-r16',
-        u'SPS-PUCCH-AN-List-r16',
-        u'SRB-Identity',
-        u'SRS-CarrierSwitching',
-        u'SRS-TPC-PDCCH-Config',
-        u'SRS-CC-SetIndex',
-        u'SRS-Config',
-        u'SRS-ResourceSet',
-        u'PathlossReferenceRS-Config',
-        u'PathlossReferenceRSList-r16',
-        u'PathlossReferenceRS-r16',
-        u'SRS-PathlossReferenceRS-Id-r16',
-        u'SRS-PosResourceSet-r16',
-        u'SRS-ResourceSetId',
-        u'SRS-PosResourceSetId-r16',
-        u'SRS-Resource',
-        u'SRS-PosResource-r16',
-        u'SRS-SpatialRelationInfo',
-        u'SRS-SpatialRelationInfoPos-r16',
-        u'SSB-Configuration-r16',
-        u'SSB-InfoNcell-r16',
-        u'DL-PRS-Info-r16',
-        u'SRS-ResourceId',
-        u'SRS-PosResourceId-r16',
-        u'SRS-PeriodicityAndOffset',
-        u'SRS-PeriodicityAndOffset-r16',
-        u'SRS-RSRP-Range-r16',
-        u'SRS-TPC-CommandConfig',
-        u'SSB-Index',
-        u'SSB-MTC',
-        u'SSB-MTC2',
-        u'SSB-MTC2-LP-r16',
-        u'SSB-MTC3-r16',
-        u'SSB-PositionQCL-Relation-r16',
-        u'SSB-ToMeasure',
-        u'SS-RSSI-Measurement',
-        u'SubcarrierSpacing',
-        u'TAG-Config',
-        u'TAG',
-        u'TAG-Id',
-        u'TimeAlignmentTimer',
-        u'TCI-State',
-        u'QCL-Info',
-        u'TCI-StateId',
-        u'TDD-UL-DL-ConfigCommon',
-        u'TDD-UL-DL-Pattern',
-        u'TDD-UL-DL-ConfigDedicated',
-        u'TDD-UL-DL-ConfigDedicated-IAB-MT-r16',
-        u'TDD-UL-DL-SlotConfig',
-        u'TDD-UL-DL-SlotConfig-IAB-MT-r16',
-        u'TDD-UL-DL-SlotIndex',
-        u'TrackingAreaCode',
-        u'T-Reselection',
-        u'TimeToTrigger',
-        u'UAC-BarringInfoSetIndex',
-        u'UAC-BarringInfoSetList',
-        u'UAC-BarringInfoSet',
-        u'UAC-BarringPerCatList',
-        u'UAC-BarringPerCat',
-        u'UAC-BarringPerPLMN-List',
-        u'UAC-BarringPerPLMN',
-        u'UE-TimersAndConstants',
-        u'UL-DelayValueConfig-r16',
-        u'UplinkCancellation-r16',
-        u'CI-ConfigurationPerServingCell-r16',
-        u'UplinkConfigCommon',
-        u'UplinkConfigCommonSIB',
-        u'UplinkTxDirectCurrentList',
-        u'UplinkTxDirectCurrentCell',
-        u'UplinkTxDirectCurrentBWP',
-        u'UplinkTxDirectCurrentTwoCarrierList-r16',
-        u'UplinkTxDirectCurrentTwoCarrier-r16',
-        u'UplinkTxDirectCurrentCarrierInfo-r16',
-        u'UplinkTxDirectCurrentTwoCarrierInfo-r16',
-        u'ZP-CSI-RS-Resource',
-        u'ZP-CSI-RS-ResourceId',
-        u'ZP-CSI-RS-ResourceSet',
-        u'ZP-CSI-RS-ResourceSetId',
-        u'AccessStratumRelease',
-        u'BandCombinationList',
-        u'BandCombinationList-v1540',
-        u'BandCombinationList-v1550',
-        u'BandCombinationList-v1560',
-        u'BandCombinationList-v1570',
-        u'BandCombinationList-v1580',
-        u'BandCombinationList-v1590',
-        u'BandCombinationList-v1610',
-        u'BandCombinationList-v1630',
-        u'BandCombinationList-v1640',
-        u'BandCombinationList-v1650',
-        u'BandCombinationList-UplinkTxSwitch-r16',
-        u'BandCombinationList-UplinkTxSwitch-v1630',
-        u'BandCombinationList-UplinkTxSwitch-v1640',
-        u'BandCombinationList-UplinkTxSwitch-v1650',
-        u'BandCombination',
-        u'BandCombination-v1540',
-        u'BandCombination-v1550',
-        u'BandCombination-v1560',
-        u'BandCombination-v1570',
-        u'BandCombination-v1580',
-        u'BandCombination-v1590',
-        u'BandCombination-v1610',
-        u'BandCombination-v1630',
-        u'BandCombination-v1640',
-        u'BandCombination-v1650',
-        u'BandCombination-UplinkTxSwitch-r16',
-        u'BandCombination-UplinkTxSwitch-v1630',
-        u'BandCombination-UplinkTxSwitch-v1640',
-        u'BandCombination-UplinkTxSwitch-v1650',
-        u'ULTxSwitchingBandPair-r16',
-        u'BandParameters',
-        u'BandParameters-v1540',
-        u'BandParameters-v1610',
-        u'ScalingFactorSidelink-r16',
-        u'BandCombinationListSidelinkEUTRA-NR-r16',
-        u'BandCombinationListSidelinkEUTRA-NR-v1630',
-        u'BandCombinationParametersSidelinkEUTRA-NR-r16',
-        u'BandCombinationParametersSidelinkEUTRA-NR-v1630',
-        u'BandParametersSidelinkEUTRA-NR-r16',
-        u'BandParametersSidelinkEUTRA-NR-v1630',
-        u'BandParametersSidelink-r16',
-        u'CA-BandwidthClassEUTRA',
-        u'CA-BandwidthClassNR',
-        u'CA-ParametersEUTRA',
-        u'CA-ParametersEUTRA-v1560',
-        u'CA-ParametersEUTRA-v1570',
-        u'CA-ParametersNR',
-        u'CA-ParametersNR-v1540',
-        u'CA-ParametersNR-v1550',
-        u'CA-ParametersNR-v1560',
-        u'CA-ParametersNR-v1610',
-        u'CA-ParametersNR-v1630',
-        u'CA-ParametersNR-v1640',
-        u'SimulSRS-ForAntennaSwitching-r16',
-        u'TwoPUCCH-Grp-Configurations-r16',
-        u'TwoPUCCH-Grp-ConfigParams-r16',
-        u'PUCCH-Grp-CarrierTypes-r16',
-        u'CA-ParametersNRDC',
-        u'CA-ParametersNRDC-v1610',
-        u'CA-ParametersNRDC-v1630',
-        u'CA-ParametersNRDC-v1640',
-        u'CA-ParametersNRDC-v1650',
-        u'CarrierAggregationVariant',
-        u'CodebookParameters',
-        u'CodebookParameters-v1610',
-        u'CodebookParametersAddition-r16',
-        u'CodebookComboParametersAddition-r16',
-        u'CodebookParametersAdditionPerBC-r16',
-        u'CodebookComboParametersAdditionPerBC-r16',
-        u'CodebookVariantsList-r16',
-        u'SupportedCSI-RS-Resource',
-        u'FeatureSetCombination',
-        u'FeatureSetsPerBand',
-        u'FeatureSet',
-        u'FeatureSetCombinationId',
-        u'FeatureSetDownlink',
-        u'FeatureSetDownlink-v1540',
-        u'FeatureSetDownlink-v15a0',
-        u'FeatureSetDownlink-v1610',
-        u'PDCCH-MonitoringOccasions-r16',
-        u'DummyA',
-        u'DummyB',
-        u'DummyC',
-        u'DummyD',
-        u'DummyE',
-        u'FeatureSetDownlinkId',
-        u'FeatureSetDownlinkPerCC',
-        u'FeatureSetDownlinkPerCC-v1620',
-        u'MultiDCI-MultiTRP-r16',
-        u'FeatureSetDownlinkPerCC-Id',
-        u'FeatureSetEUTRA-DownlinkId',
-        u'FeatureSetEUTRA-UplinkId',
-        u'FeatureSets',
-        u'FeatureSetUplink',
-        u'FeatureSetUplink-v1540',
-        u'FeatureSetUplink-v1610',
-        u'FeatureSetUplink-v1630',
-        u'FeatureSetUplink-v1640',
-        u'SubSlot-Config-r16',
-        u'SRS-AllPosResources-r16',
-        u'SRS-PosResources-r16',
-        u'SRS-PosResourceAP-r16',
-        u'SRS-PosResourceSP-r16',
-        u'SRS-Resources',
-        u'DummyF',
-        u'FeatureSetUplinkId',
-        u'FeatureSetUplinkPerCC',
-        u'FeatureSetUplinkPerCC-v1540',
-        u'FeatureSetUplinkPerCC-Id',
-        u'FreqBandIndicatorEUTRA',
-        u'FreqBandList',
-        u'FreqBandInformation',
-        u'FreqBandInformationEUTRA',
-        u'FreqBandInformationNR',
-        u'AggregatedBandwidth',
-        u'FreqSeparationClass',
-        u'FreqSeparationClassDL-v1620',
-        u'FreqSeparationClassUL-v1620',
-        u'FreqSeparationClassDL-Only-r16',
-        u'HighSpeedParameters-r16',
-        u'HighSpeedParameters-v1650',
-        u'IMS-Parameters',
-        u'IMS-ParametersCommon',
-        u'IMS-ParametersFRX-Diff',
-        u'InterRAT-Parameters',
-        u'EUTRA-Parameters',
-        u'EUTRA-ParametersCommon',
-        u'EUTRA-ParametersXDD-Diff',
-        u'UTRA-FDD-Parameters-r16',
-        u'SupportedBandUTRA-FDD-r16',
-        u'MAC-Parameters',
-        u'MAC-Parameters-v1610',
-        u'MAC-ParametersCommon',
-        u'MAC-ParametersFRX-Diff-r16',
-        u'MAC-ParametersXDD-Diff',
-        u'MinTimeGap-r16',
-        u'MeasAndMobParameters',
-        u'MeasAndMobParametersCommon',
-        u'MeasAndMobParametersXDD-Diff',
-        u'MeasAndMobParametersFRX-Diff',
-        u'MeasAndMobParametersMRDC',
-        u'MeasAndMobParametersMRDC-v1560',
-        u'MeasAndMobParametersMRDC-v1610',
-        u'MeasAndMobParametersMRDC-Common',
-        u'MeasAndMobParametersMRDC-Common-v1610',
-        u'MeasAndMobParametersMRDC-XDD-Diff',
-        u'MeasAndMobParametersMRDC-XDD-Diff-v1560',
-        u'MeasAndMobParametersMRDC-FRX-Diff',
-        u'MIMO-LayersDL',
-        u'MIMO-LayersUL',
-        u'MIMO-ParametersPerBand',
-        u'DummyG',
-        u'BeamManagementSSB-CSI-RS',
-        u'DummyH',
-        u'CSI-RS-ForTracking',
-        u'CSI-RS-IM-ReceptionForFeedback',
-        u'CSI-RS-ProcFrameworkForSRS',
-        u'CSI-ReportFramework',
-        u'CSI-ReportFrameworkExt-r16',
-        u'PTRS-DensityRecommendationDL',
-        u'PTRS-DensityRecommendationUL',
-        u'SpatialRelations',
-        u'DummyI',
-        u'ModulationOrder',
-        u'MRDC-Parameters',
-        u'MRDC-Parameters-v1580',
-        u'MRDC-Parameters-v1590',
-        u'MRDC-Parameters-v1620',
-        u'MRDC-Parameters-v1630',
-        u'NRDC-Parameters',
-        u'NRDC-Parameters-v1570',
-        u'NRDC-Parameters-v15c0',
-        u'NRDC-Parameters-v1610',
-        u'OLPC-SRS-Pos-r16',
-        u'PDCP-Parameters',
-        u'PDCP-ParametersMRDC',
-        u'PDCP-ParametersMRDC-v1610',
-        u'Phy-Parameters',
-        u'Phy-ParametersCommon',
-        u'Phy-ParametersXDD-Diff',
-        u'Phy-ParametersFRX-Diff',
-        u'Phy-ParametersFR1',
-        u'Phy-ParametersFR2',
-        u'Phy-ParametersMRDC',
-        u'NAICS-Capability-Entry',
-        u'Phy-ParametersSharedSpectrumChAccess-r16',
-        u'PowSav-Parameters-r16',
-        u'PowSav-ParametersCommon-r16',
-        u'PowSav-ParametersFRX-Diff-r16',
-        u'ProcessingParameters',
-        u'NumberOfCarriers',
-        u'RAT-Type',
-        u'RF-Parameters',
-        u'BandNR',
-        u'RF-ParametersMRDC',
-        u'RLC-Parameters',
-        u'SDAP-Parameters',
-        u'SidelinkParameters-r16',
-        u'SidelinkParametersNR-r16',
-        u'SidelinkParametersEUTRA-r16',
-        u'RLC-ParametersSidelink-r16',
-        u'MAC-ParametersSidelink-r16',
-        u'UE-SidelinkCapabilityAddXDD-Mode-r16',
-        u'MAC-ParametersSidelinkCommon-r16',
-        u'MAC-ParametersSidelinkXDD-Diff-r16',
-        u'BandSidelinkEUTRA-r16',
-        u'BandSidelink-r16',
-        u'SON-Parameters-r16',
-        u'SpatialRelationsSRS-Pos-r16',
-        u'SRS-SwitchingTimeNR',
-        u'SRS-SwitchingTimeEUTRA',
-        u'SupportedBandwidth',
-        u'UE-BasedPerfMeas-Parameters-r16',
-        u'UE-CapabilityRAT-ContainerList',
-        u'UE-CapabilityRAT-Container',
-        u'UE-CapabilityRAT-RequestList',
-        u'UE-CapabilityRAT-Request',
-        u'UE-CapabilityRequestFilterCommon',
-        u'CellGrouping-r16',
-        u'UE-CapabilityRequestFilterNR',
-        u'UE-CapabilityRequestFilterNR-v1540',
-        u'UE-MRDC-Capability',
-        u'UE-MRDC-Capability-v1560',
-        u'UE-MRDC-Capability-v1610',
-        u'UE-MRDC-CapabilityAddXDD-Mode',
-        u'UE-MRDC-CapabilityAddXDD-Mode-v1560',
-        u'UE-MRDC-CapabilityAddFRX-Mode',
-        u'GeneralParametersMRDC-XDD-Diff',
-        u'GeneralParametersMRDC-v1610',
-        u'UE-NR-Capability',
-        u'UE-NR-Capability-v1530',
-        u'UE-NR-Capability-v1540',
-        u'UE-NR-Capability-v1550',
-        u'UE-NR-Capability-v1560',
-        u'UE-NR-Capability-v1570',
-        u'UE-NR-Capability-v15c0',
-        u'UE-NR-Capability-v1610',
-        u'UE-NR-Capability-v1640',
-        u'UE-NR-Capability-v1650',
-        u'UE-NR-CapabilityAddXDD-Mode',
-        u'UE-NR-CapabilityAddXDD-Mode-v1530',
-        u'UE-NR-CapabilityAddFRX-Mode',
-        u'UE-NR-CapabilityAddFRX-Mode-v1540',
-        u'UE-NR-CapabilityAddFRX-Mode-v1610',
-        u'BAP-Parameters-r16',
-        u'SharedSpectrumChAccessParamsPerBand-r16',
-        u'SharedSpectrumChAccessParamsPerBand-v1630',
-        u'SharedSpectrumChAccessParamsPerBand-v1640',
-        u'SharedSpectrumChAccessParamsPerBand-v1650',
-        u'AbsoluteTimeInfo-r16',
-        u'AreaConfiguration-r16',
-        u'AreaConfig-r16',
-        u'InterFreqTargetInfo-r16',
-        u'CellGlobalIdList-r16',
-        u'TrackingAreaCodeList-r16',
-        u'TrackingAreaIdentityList-r16',
-        u'TrackingAreaIdentity-r16',
-        u'BT-NameList-r16',
-        u'BT-Name-r16',
-        u'EUTRA-AllowedMeasBandwidth',
-        u'EUTRA-MBSFN-SubframeConfigList',
-        u'EUTRA-MBSFN-SubframeConfig',
-        u'EUTRA-MultiBandInfoList',
-        u'EUTRA-MultiBandInfo',
-        u'EUTRA-NS-PmaxList',
-        u'EUTRA-NS-PmaxValue',
-        u'EUTRA-PhysCellId',
-        u'EUTRA-PhysCellIdRange',
-        u'EUTRA-PresenceAntennaPort1',
-        u'EUTRA-Q-OffsetRange',
-        u'IAB-IP-Address-r16',
-        u'IAB-IP-AddressIndex-r16',
-        u'IAB-IP-Usage-r16',
-        u'LoggingDuration-r16',
-        u'LoggingInterval-r16',
-        u'LogMeasResultListBT-r16',
-        u'LogMeasResultBT-r16',
-        u'LogMeasResultListWLAN-r16',
-        u'LogMeasResultWLAN-r16',
-        u'WLAN-Identifiers-r16',
-        u'WLAN-RSSI-Range-r16',
-        u'WLAN-RTT-r16',
-        u'OtherConfig',
-        u'OtherConfig-v1540',
-        u'CandidateServingFreqListNR-r16',
-        u'OtherConfig-v1610',
-        u'OverheatingAssistanceConfig',
-        u'IDC-AssistanceConfig-r16',
-        u'DRX-PreferenceConfig-r16',
-        u'MaxBW-PreferenceConfig-r16',
-        u'MaxCC-PreferenceConfig-r16',
-        u'MaxMIMO-LayerPreferenceConfig-r16',
-        u'MinSchedulingOffsetPreferenceConfig-r16',
-        u'ReleasePreferenceConfig-r16',
-        u'PhysCellIdUTRA-FDD-r16',
-        u'RRC-TransactionIdentifier',
-        u'Sensor-NameList-r16',
-        u'TraceReference-r16',
-        u'UE-MeasurementsAvailable-r16',
-        u'UTRA-FDD-Q-OffsetRange-r16',
-        u'VisitedCellInfoList-r16',
-        u'VisitedCellInfo-r16',
-        u'WLAN-NameList-r16',
-        u'WLAN-Name-r16',
-        u'SL-BWP-Config-r16',
-        u'SL-BWP-Generic-r16',
-        u'SL-BWP-ConfigCommon-r16',
-        u'SL-BWP-PoolConfig-r16',
-        u'SL-TxPoolDedicated-r16',
-        u'SL-ResourcePoolConfig-r16',
-        u'SL-ResourcePoolID-r16',
-        u'SL-BWP-PoolConfigCommon-r16',
-        u'SL-CBR-PriorityTxConfigList-r16',
-        u'SL-CBR-PriorityTxConfigList-v1650',
-        u'SL-PriorityTxConfigIndex-r16',
-        u'SL-PriorityTxConfigIndex-v1650',
-        u'SL-TxConfigIndex-r16',
-        u'SL-CBR-CommonTxConfigList-r16',
-        u'SL-CBR-LevelsConfig-r16',
-        u'SL-CBR-PSSCH-TxConfig-r16',
-        u'SL-CBR-r16',
-        u'SL-ConfigDedicatedNR-r16',
-        u'SL-DestinationIndex-r16',
-        u'SL-PHY-MAC-RLC-Config-r16',
-        u'SL-ConfiguredGrantConfig-r16',
-        u'SL-ConfigIndexCG-r16',
-        u'SL-CG-MaxTransNumList-r16',
-        u'SL-CG-MaxTransNum-r16',
-        u'SL-PeriodCG-r16',
-        u'SL-DestinationIdentity-r16',
-        u'SL-FreqConfig-r16',
-        u'SL-Freq-Id-r16',
-        u'SL-FreqConfigCommon-r16',
-        u'SL-LogicalChannelConfig-r16',
-        u'SL-MeasConfigCommon-r16',
-        u'SL-MeasConfigInfo-r16',
-        u'SL-MeasConfig-r16',
-        u'SL-MeasObjectToRemoveList-r16',
-        u'SL-ReportConfigToRemoveList-r16',
-        u'SL-MeasIdToRemoveList-r16',
-        u'SL-MeasIdList-r16',
-        u'SL-MeasIdInfo-r16',
-        u'SL-MeasId-r16',
-        u'SL-MeasObjectList-r16',
-        u'SL-MeasObjectInfo-r16',
-        u'SL-MeasObjectId-r16',
-        u'SL-MeasObject-r16',
-        u'SL-PDCP-Config-r16',
-        u'SL-PSBCH-Config-r16',
-        u'SL-PSSCH-TxConfigList-r16',
-        u'SL-PSSCH-TxConfig-r16',
-        u'SL-PSSCH-TxParameters-r16',
-        u'SL-QoS-FlowIdentity-r16',
-        u'SL-QoS-Profile-r16',
-        u'SL-PQI-r16',
-        u'SL-QuantityConfig-r16',
-        u'SL-RadioBearerConfig-r16',
-        u'SL-ReportConfigList-r16',
-        u'SL-ReportConfigInfo-r16',
-        u'SL-ReportConfigId-r16',
-        u'SL-ReportConfig-r16',
-        u'SL-PeriodicalReportConfig-r16',
-        u'SL-EventTriggerConfig-r16',
-        u'SL-MeasReportQuantity-r16',
-        u'SL-MeasTriggerQuantity-r16',
-        u'SL-RS-Type-r16',
-        u'SL-ResourcePool-r16',
-        u'SL-ZoneConfigMCR-r16',
-        u'SL-SyncAllowed-r16',
-        u'SL-PSCCH-Config-r16',
-        u'SL-PSSCH-Config-r16',
-        u'SL-PSFCH-Config-r16',
-        u'SL-PTRS-Config-r16',
-        u'SL-UE-SelectedConfigRP-r16',
-        u'SL-ResourceReservePeriod-r16',
-        u'SL-SelectionWindowList-r16',
-        u'SL-SelectionWindowConfig-r16',
-        u'SL-TxPercentageList-r16',
-        u'SL-TxPercentageConfig-r16',
-        u'SL-MinMaxMCS-List-r16',
-        u'SL-MinMaxMCS-Config-r16',
-        u'SL-BetaOffsets-r16',
-        u'SL-PowerControl-r16',
-        u'SL-RLC-BearerConfig-r16',
-        u'SL-RLC-BearerConfigIndex-r16',
-        u'SL-RLC-Config-r16',
-        u'SL-ScheduledConfig-r16',
-        u'MAC-MainConfigSL-r16',
-        u'SL-ConfiguredGrantConfigList-r16',
-        u'SL-SDAP-Config-r16',
-        u'SL-MappedQoS-FlowsListDedicated-r16',
-        u'SL-SyncConfigList-r16',
-        u'SL-SyncConfig-r16',
-        u'SL-RSRP-Range-r16',
-        u'SL-SSB-TimeAllocation-r16',
-        u'SL-Thres-RSRP-List-r16',
-        u'SL-Thres-RSRP-r16',
-        u'SL-TxPower-r16',
-        u'SL-TypeTxSync-r16',
-        u'SL-UE-SelectedConfig-r16',
-        u'SL-ZoneConfig-r16',
-        u'SLRB-Uu-ConfigIndex-r16',
-        u'BCCH-BCH-Message',
-        u'BCCH-BCH-MessageType',
-        u'BCCH-DL-SCH-Message',
-        u'BCCH-DL-SCH-MessageType',
-        u'DL-CCCH-Message',
-        u'DL-CCCH-MessageType',
-        u'DL-DCCH-Message',
-        u'DL-DCCH-MessageType',
-        u'PCCH-Message',
-        u'PCCH-MessageType',
-        u'UL-CCCH-Message',
-        u'UL-CCCH-MessageType',
-        u'UL-CCCH1-Message',
-        u'UL-CCCH1-MessageType',
-        u'UL-DCCH-Message',
-        u'UL-DCCH-MessageType',
-        u'CounterCheck',
-        u'CounterCheck-IEs',
-        u'DRB-CountMSB-InfoList',
-        u'DRB-CountMSB-Info',
-        u'CounterCheckResponse',
-        u'CounterCheckResponse-IEs',
-        u'DRB-CountInfoList',
-        u'DRB-CountInfo',
-        u'DedicatedSIBRequest-r16',
-        u'DedicatedSIBRequest-r16-IEs',
-        u'SIB-ReqInfo-r16',
-        u'PosSIB-ReqInfo-r16',
-        u'DLDedicatedMessageSegment-r16',
-        u'DLDedicatedMessageSegment-r16-IEs',
-        u'DLInformationTransfer',
-        u'DLInformationTransfer-IEs',
-        u'DLInformationTransfer-v1610-IEs',
-        u'DLInformationTransferMRDC-r16',
-        u'DLInformationTransferMRDC-r16-IEs',
-        u'FailureInformation',
-        u'FailureInformation-IEs',
-        u'FailureInfoRLC-Bearer',
-        u'FailureInformation-v1610-IEs',
-        u'FailureInfoDAPS-r16',
-        u'IABOtherInformation-r16',
-        u'IABOtherInformation-r16-IEs',
-        u'IAB-IP-AddressNumReq-r16',
-        u'IAB-IP-AddressPrefixReq-r16',
-        u'IAB-IP-AddressAndTraffic-r16',
-        u'IAB-IP-PrefixAndTraffic-r16',
-        u'LocationMeasurementIndication',
-        u'LocationMeasurementIndication-IEs',
-        u'LoggedMeasurementConfiguration-r16',
-        u'LoggedMeasurementConfiguration-r16-IEs',
-        u'LoggedPeriodicalReportConfig-r16',
-        u'LoggedEventTriggerConfig-r16',
-        u'EventType-r16',
-        u'MCGFailureInformation-r16',
-        u'MCGFailureInformation-r16-IEs',
-        u'FailureReportMCG-r16',
-        u'MeasResultList2UTRA',
-        u'MeasResult2UTRA-FDD-r16',
-        u'MeasResultList2EUTRA',
-        u'MeasurementReport',
-        u'MeasurementReport-IEs',
-        u'MIB',
-        u'MobilityFromNRCommand',
-        u'MobilityFromNRCommand-IEs',
-        u'MobilityFromNRCommand-v1610-IEs',
-        u'Paging',
-        u'PagingRecordList',
-        u'PagingRecord',
-        u'PagingUE-Identity',
-        u'RRCReestablishment',
-        u'RRCReestablishment-IEs',
-        u'RRCReestablishmentComplete',
-        u'RRCReestablishmentComplete-IEs',
-        u'RRCReestablishmentComplete-v1610-IEs',
-        u'RRCReestablishmentRequest',
-        u'RRCReestablishmentRequest-IEs',
-        u'ReestabUE-Identity',
-        u'ReestablishmentCause',
-        u'RRCReconfiguration',
-        u'RRCReconfiguration-IEs',
-        u'RRCReconfiguration-v1530-IEs',
-        u'RRCReconfiguration-v1540-IEs',
-        u'RRCReconfiguration-v1560-IEs',
-        u'RRCReconfiguration-v1610-IEs',
-        u'MRDC-SecondaryCellGroupConfig',
-        u'BAP-Config-r16',
-        u'MasterKeyUpdate',
-        u'OnDemandSIB-Request-r16',
-        u'T316-r16',
-        u'IAB-IP-AddressConfigurationList-r16',
-        u'IAB-IP-AddressConfiguration-r16',
-        u'SL-ConfigDedicatedEUTRA-Info-r16',
-        u'SL-TimeOffsetEUTRA-r16',
-        u'RRCReconfigurationComplete',
-        u'RRCReconfigurationComplete-IEs',
-        u'RRCReconfigurationComplete-v1530-IEs',
-        u'RRCReconfigurationComplete-v1560-IEs',
-        u'RRCReconfigurationComplete-v1610-IEs',
-        u'RRCReconfigurationComplete-v1640-IEs',
-        u'RRCReject',
-        u'RRCReject-IEs',
-        u'RRCRelease',
-        u'RRCRelease-IEs',
-        u'RRCRelease-v1540-IEs',
-        u'RRCRelease-v1610-IEs',
-        u'RRCRelease-v1650-IEs',
-        u'RedirectedCarrierInfo',
-        u'RedirectedCarrierInfo-EUTRA',
-        u'CarrierInfoNR',
-        u'SuspendConfig',
-        u'PeriodicRNAU-TimerValue',
-        u'CellReselectionPriorities',
-        u'PagingCycle',
-        u'FreqPriorityListEUTRA',
-        u'FreqPriorityListNR',
-        u'FreqPriorityEUTRA',
-        u'FreqPriorityNR',
-        u'RAN-NotificationAreaInfo',
-        u'PLMN-RAN-AreaCellList',
-        u'PLMN-RAN-AreaCell',
-        u'PLMN-RAN-AreaConfigList',
-        u'PLMN-RAN-AreaConfig',
-        u'RAN-AreaConfig',
-        u'RRCResume',
-        u'RRCResume-IEs',
-        u'RRCResume-v1560-IEs',
-        u'RRCResume-v1610-IEs',
-        u'RRCResumeComplete',
-        u'RRCResumeComplete-IEs',
-        u'RRCResumeComplete-v1610-IEs',
-        u'RRCResumeComplete-v1640-IEs',
-        u'RRCResumeRequest',
-        u'RRCResumeRequest-IEs',
-        u'RRCResumeRequest1',
-        u'RRCResumeRequest1-IEs',
-        u'RRCSetup',
-        u'RRCSetup-IEs',
-        u'RRCSetupComplete',
-        u'RRCSetupComplete-IEs',
-        u'RRCSetupComplete-v1610-IEs',
-        u'RegisteredAMF',
-        u'RRCSetupRequest',
-        u'RRCSetupRequest-IEs',
-        u'InitialUE-Identity',
-        u'EstablishmentCause',
-        u'RRCSystemInfoRequest',
-        u'RRCSystemInfoRequest-IEs',
-        u'RRC-PosSystemInfoRequest-r16-IEs',
-        u'SCGFailureInformation',
-        u'SCGFailureInformation-IEs',
-        u'SCGFailureInformation-v1590-IEs',
-        u'FailureReportSCG',
-        u'MeasResultFreqList',
-        u'SCGFailureInformationEUTRA',
-        u'SCGFailureInformationEUTRA-IEs',
-        u'SCGFailureInformationEUTRA-v1590-IEs',
-        u'FailureReportSCG-EUTRA',
-        u'MeasResultFreqListFailMRDC',
-        u'SecurityModeCommand',
-        u'SecurityModeCommand-IEs',
-        u'SecurityConfigSMC',
-        u'SecurityModeComplete',
-        u'SecurityModeComplete-IEs',
-        u'SecurityModeFailure',
-        u'SecurityModeFailure-IEs',
-        u'SIB1',
-        u'SIB1-v1610-IEs',
-        u'SIB1-v1630-IEs',
-        u'UAC-AccessCategory1-SelectionAssistanceInfo',
-        u'UAC-AC1-SelectAssistInfo-r16',
-        u'SidelinkUEInformationNR-r16',
-        u'SidelinkUEInformationNR-r16-IEs',
-        u'SL-InterestedFreqList-r16',
-        u'SL-TxResourceReqList-r16',
-        u'SL-TxResourceReq-r16',
-        u'SL-TxInterestedFreqList-r16',
-        u'SL-QoS-Info-r16',
-        u'SL-RLC-ModeIndication-r16',
-        u'SL-FailureList-r16',
-        u'SL-Failure-r16',
-        u'SystemInformation',
-        u'SystemInformation-IEs',
-        u'UEAssistanceInformation',
-        u'UEAssistanceInformation-IEs',
-        u'DelayBudgetReport',
-        u'UEAssistanceInformation-v1540-IEs',
-        u'OverheatingAssistance',
-        u'ReducedAggregatedBandwidth',
-        u'UEAssistanceInformation-v1610-IEs',
-        u'IDC-Assistance-r16',
-        u'AffectedCarrierFreqList-r16',
-        u'AffectedCarrierFreq-r16',
-        u'AffectedCarrierFreqCombList-r16',
-        u'AffectedCarrierFreqComb-r16',
-        u'VictimSystemType-r16',
-        u'DRX-Preference-r16',
-        u'MaxBW-Preference-r16',
-        u'MaxCC-Preference-r16',
-        u'MaxMIMO-LayerPreference-r16',
-        u'MinSchedulingOffsetPreference-r16',
-        u'ReleasePreference-r16',
-        u'ReducedMaxBW-FRx-r16',
-        u'ReducedMaxCCs-r16',
-        u'SL-UE-AssistanceInformationNR-r16',
-        u'SL-TrafficPatternInfo-r16',
-        u'UECapabilityEnquiry',
-        u'UECapabilityEnquiry-IEs',
-        u'UECapabilityEnquiry-v1560-IEs',
-        u'UECapabilityEnquiry-v1610-IEs',
-        u'UECapabilityInformation',
-        u'UECapabilityInformation-IEs',
-        u'UEInformationRequest-r16',
-        u'UEInformationRequest-r16-IEs',
-        u'UEInformationResponse-r16',
-        u'UEInformationResponse-r16-IEs',
-        u'LogMeasReport-r16',
-        u'LogMeasInfoList-r16',
-        u'LogMeasInfo-r16',
-        u'ConnEstFailReport-r16',
-        u'MeasResultServingCell-r16',
-        u'MeasResultFailedCell-r16',
-        u'RA-ReportList-r16',
-        u'RA-Report-r16',
-        u'RA-InformationCommon-r16',
-        u'PerRAInfoList-r16',
-        u'PerRAInfo-r16',
-        u'PerRASSBInfo-r16',
-        u'PerRACSI-RSInfo-r16',
+        u'PerRACSI-RSInfoExt-v1660',
         u'PerRAAttemptInfoList-r16',
         u'PerRAAttemptInfo-r16',
         u'RLF-Report-r16',
@@ -8312,7 +5091,7 @@ class NR_RRC_Definitions:
         ]
     _val_ = [
         u'maxAI-DCI-PayloadSize-r16',
-        u'maxAI-DCI-PayloadSize-r16-1',
+        u'maxAI-DCI-PayloadSize-1-r16',
         u'maxBandComb',
         u'maxBandsUTRA-FDD-r16',
         u'maxBH-RLC-ChannelID-r16',
@@ -8347,11 +5126,11 @@ class NR_RRC_Definitions:
         u'maxNrofAggregatedCellsPerCellGroupMinus4-r16',
         u'maxNrofDUCells-r16',
         u'maxNrofAvailabilityCombinationsPerSet-r16',
-        u'maxNrofAvailabilityCombinationsPerSet-r16-1',
+        u'maxNrofAvailabilityCombinationsPerSet-1-r16',
         u'maxNrofSCells',
         u'maxNrofCellMeas',
         u'maxNrofCG-SL-r16',
-        u'maxNrofCG-SL-r16-1',
+        u'maxNrofCG-SL-1-r16',
         u'maxNrofSS-BlocksToAverage',
         u'maxNrofCondCells-r16',
         u'maxNrofCSI-RS-ResourcesToAverage',
@@ -8563,7 +5342,7 @@ class NR_RRC_Definitions:
         u'maxOnDemandSIB-r16',
         u'maxOnDemandPosSIB-r16',
         u'maxCI-DCI-PayloadSize-r16',
-        u'maxCI-DCI-PayloadSize-r16-1',
+        u'maxCI-DCI-PayloadSize-1-r16',
         u'maxWLAN-Id-Report-r16',
         u'maxWLAN-Name-r16',
         u'maxRAReport-r16',
@@ -8571,1116 +5350,15 @@ class NR_RRC_Definitions:
         u'maxTxConfig-1-r16',
         u'maxPSSCH-TxConfig-r16',
         u'maxNrofCLI-RSSI-Resources-r16',
-        u'maxNrofCLI-RSSI-Resources-r16-1',
+        u'maxNrofCLI-RSSI-Resources-1-r16',
         u'maxNrofCLI-SRS-Resources-r16',
         u'maxCLI-Report-r16',
         u'maxNrofConfiguredGrantConfig-r16',
-        u'maxNrofConfiguredGrantConfig-r16-1',
+        u'maxNrofConfiguredGrantConfig-1-r16',
         u'maxNrofCG-Type2DeactivationState',
-        u'maxNrofConfiguredGrantConfigMAC-r16',
-        u'maxNrofConfiguredGrantConfigMAC-r16-1',
+        u'maxNrofConfiguredGrantConfigMAC-1-r16',
         u'maxNrofSPS-Config-r16',
-        u'maxNrofSPS-Config-r16-1',
-        u'maxNrofSPS-DeactivationState',
-        u'maxNrofDormancyGroups',
-        u'maxNrofPUCCH-ResourceGroups-1-r16',
-        u'maxNrofServingCellsTCI-r16',
-        u'maxNrofTxDC-TwoCarrier-r16',
-        u'maxAI-DCI-PayloadSize-r16',
-        u'maxAI-DCI-PayloadSize-r16-1',
-        u'maxBandComb',
-        u'maxBandsUTRA-FDD-r16',
-        u'maxBH-RLC-ChannelID-r16',
-        u'maxBT-IdReport-r16',
-        u'maxBT-Name-r16',
-        u'maxCAG-Cell-r16',
-        u'maxTwoPUCCH-Grp-ConfigList-r16',
-        u'maxCBR-Config-r16',
-        u'maxCBR-Config-1-r16',
-        u'maxCBR-Level-r16',
-        u'maxCBR-Level-1-r16',
-        u'maxCellBlack',
-        u'maxCellGroupings-r16',
-        u'maxCellHistory-r16',
-        u'maxCellInter',
-        u'maxCellIntra',
-        u'maxCellMeasEUTRA',
-        u'maxCellMeasIdle-r16',
-        u'maxCellMeasUTRA-FDD-r16',
-        u'maxCellWhite',
-        u'maxEARFCN',
-        u'maxEUTRA-CellBlack',
-        u'maxEUTRA-NS-Pmax',
-        u'maxLogMeasReport-r16',
-        u'maxMultiBands',
-        u'maxNARFCN',
-        u'maxNR-NS-Pmax',
-        u'maxFreqIdle-r16',
-        u'maxNrofServingCells',
-        u'maxNrofServingCells-1',
-        u'maxNrofAggregatedCellsPerCellGroup',
-        u'maxNrofAggregatedCellsPerCellGroupMinus4-r16',
-        u'maxNrofDUCells-r16',
-        u'maxNrofAvailabilityCombinationsPerSet-r16',
-        u'maxNrofAvailabilityCombinationsPerSet-r16-1',
-        u'maxNrofSCells',
-        u'maxNrofCellMeas',
-        u'maxNrofCG-SL-r16',
-        u'maxNrofCG-SL-r16-1',
-        u'maxNrofSS-BlocksToAverage',
-        u'maxNrofCondCells-r16',
-        u'maxNrofCSI-RS-ResourcesToAverage',
-        u'maxNrofDL-Allocations',
-        u'maxNrofSR-ConfigPerCellGroup',
-        u'maxLCG-ID',
-        u'maxLC-ID',
-        u'maxLC-ID-Iab-r16',
-        u'maxLTE-CRS-Patterns-r16',
-        u'maxNrofTAGs',
-        u'maxNrofTAGs-1',
-        u'maxNrofBWPs',
-        u'maxNrofCombIDC',
-        u'maxNrofSymbols-1',
-        u'maxNrofSlots',
-        u'maxNrofSlots-1',
-        u'maxNrofPhysicalResourceBlocks',
-        u'maxNrofPhysicalResourceBlocks-1',
-        u'maxNrofPhysicalResourceBlocksPlus1',
-        u'maxNrofControlResourceSets',
-        u'maxNrofControlResourceSets-1',
-        u'maxNrofControlResourceSets-1-r16',
-        u'maxNrofCoresetPools-r16',
-        u'maxCoReSetDuration',
-        u'maxNrofSearchSpaces-1',
-        u'maxSFI-DCI-PayloadSize',
-        u'maxSFI-DCI-PayloadSize-1',
-        u'maxIAB-IP-Address-r16',
-        u'maxINT-DCI-PayloadSize',
-        u'maxINT-DCI-PayloadSize-1',
-        u'maxNrofRateMatchPatterns',
-        u'maxNrofRateMatchPatterns-1',
-        u'maxNrofRateMatchPatternsPerGroup',
-        u'maxNrofCSI-ReportConfigurations',
-        u'maxNrofCSI-ReportConfigurations-1',
-        u'maxNrofCSI-ResourceConfigurations',
-        u'maxNrofCSI-ResourceConfigurations-1',
-        u'maxNrofAP-CSI-RS-ResourcesPerSet',
-        u'maxNrOfCSI-AperiodicTriggers',
-        u'maxNrofReportConfigPerAperiodicTrigger',
-        u'maxNrofNZP-CSI-RS-Resources',
-        u'maxNrofNZP-CSI-RS-Resources-1',
-        u'maxNrofNZP-CSI-RS-ResourcesPerSet',
-        u'maxNrofNZP-CSI-RS-ResourceSets',
-        u'maxNrofNZP-CSI-RS-ResourceSets-1',
-        u'maxNrofNZP-CSI-RS-ResourceSetsPerConfig',
-        u'maxNrofNZP-CSI-RS-ResourcesPerConfig',
-        u'maxNrofZP-CSI-RS-Resources',
-        u'maxNrofZP-CSI-RS-Resources-1',
-        u'maxNrofZP-CSI-RS-ResourceSets-1',
-        u'maxNrofZP-CSI-RS-ResourcesPerSet',
-        u'maxNrofZP-CSI-RS-ResourceSets',
-        u'maxNrofCSI-IM-Resources',
-        u'maxNrofCSI-IM-Resources-1',
-        u'maxNrofCSI-IM-ResourcesPerSet',
-        u'maxNrofCSI-IM-ResourceSets',
-        u'maxNrofCSI-IM-ResourceSets-1',
-        u'maxNrofCSI-IM-ResourceSetsPerConfig',
-        u'maxNrofCSI-SSB-ResourcePerSet',
-        u'maxNrofCSI-SSB-ResourceSets',
-        u'maxNrofCSI-SSB-ResourceSets-1',
-        u'maxNrofCSI-SSB-ResourceSetsPerConfig',
-        u'maxNrofFailureDetectionResources',
-        u'maxNrofFailureDetectionResources-1',
-        u'maxNrofFreqSL-r16',
-        u'maxNrofSL-BWPs-r16',
-        u'maxFreqSL-EUTRA-r16',
-        u'maxNrofSL-MeasId-r16',
-        u'maxNrofSL-ObjectId-r16',
-        u'maxNrofSL-ReportConfigId-r16',
-        u'maxNrofSL-PoolToMeasureNR-r16',
-        u'maxFreqSL-NR-r16',
-        u'maxNrofSL-QFIs-r16',
-        u'maxNrofSL-QFIsPerDest-r16',
-        u'maxNrofObjectId',
-        u'maxNrofPageRec',
-        u'maxNrofPCI-Ranges',
-        u'maxPLMN',
-        u'maxNrofCSI-RS-ResourcesRRM',
-        u'maxNrofCSI-RS-ResourcesRRM-1',
-        u'maxNrofMeasId',
-        u'maxNrofQuantityConfig',
-        u'maxNrofCSI-RS-CellsRRM',
-        u'maxNrofSL-Dest-r16',
-        u'maxNrofSL-Dest-1-r16',
-        u'maxNrofSLRB-r16',
-        u'maxSL-LCID-r16',
-        u'maxSL-SyncConfig-r16',
-        u'maxNrofRXPool-r16',
-        u'maxNrofTXPool-r16',
-        u'maxNrofPoolID-r16',
-        u'maxNrofSRS-PathlossReferenceRS-r16',
-        u'maxNrofSRS-PathlossReferenceRS-1-r16',
-        u'maxNrofSRS-ResourceSets',
-        u'maxNrofSRS-ResourceSets-1',
-        u'maxNrofSRS-PosResourceSets-r16',
-        u'maxNrofSRS-PosResourceSets-1-r16',
-        u'maxNrofSRS-Resources',
-        u'maxNrofSRS-Resources-1',
-        u'maxNrofSRS-PosResources-r16',
-        u'maxNrofSRS-PosResources-1-r16',
-        u'maxNrofSRS-ResourcesPerSet',
-        u'maxNrofSRS-TriggerStates-1',
-        u'maxNrofSRS-TriggerStates-2',
-        u'maxRAT-CapabilityContainers',
-        u'maxSimultaneousBands',
-        u'maxULTxSwitchingBandPairs',
-        u'maxNrofSlotFormatCombinationsPerSet',
-        u'maxNrofSlotFormatCombinationsPerSet-1',
-        u'maxNrofTrafficPattern-r16',
-        u'maxNrofPUCCH-Resources',
-        u'maxNrofPUCCH-Resources-1',
-        u'maxNrofPUCCH-ResourceSets',
-        u'maxNrofPUCCH-ResourceSets-1',
-        u'maxNrofPUCCH-ResourcesPerSet',
-        u'maxNrofPUCCH-P0-PerSet',
-        u'maxNrofPUCCH-PathlossReferenceRSs',
-        u'maxNrofPUCCH-PathlossReferenceRSs-1',
-        u'maxNrofPUCCH-PathlossReferenceRSs-r16',
-        u'maxNrofPUCCH-PathlossReferenceRSs-1-r16',
-        u'maxNrofPUCCH-PathlossReferenceRSsDiff-r16',
-        u'maxNrofPUCCH-ResourceGroups-r16',
-        u'maxNrofPUCCH-ResourcesPerGroup-r16',
-        u'maxNrofMultiplePUSCHs-r16',
-        u'maxNrofP0-PUSCH-AlphaSets',
-        u'maxNrofP0-PUSCH-AlphaSets-1',
-        u'maxNrofPUSCH-PathlossReferenceRSs',
-        u'maxNrofPUSCH-PathlossReferenceRSs-1',
-        u'maxNrofPUSCH-PathlossReferenceRSs-r16',
-        u'maxNrofPUSCH-PathlossReferenceRSs-1-r16',
-        u'maxNrofPUSCH-PathlossReferenceRSsDiff-r16',
-        u'maxNrofNAICS-Entries',
-        u'maxBands',
-        u'maxBandsMRDC',
-        u'maxBandsEUTRA',
-        u'maxCellReport',
-        u'maxDRB',
-        u'maxFreq',
-        u'maxFreqLayers',
-        u'maxFreqIDC-r16',
-        u'maxCombIDC-r16',
-        u'maxFreqIDC-MRDC',
-        u'maxNrofCandidateBeams',
-        u'maxNrofCandidateBeams-r16',
-        u'maxNrofCandidateBeamsExt-r16',
-        u'maxNrofPCIsPerSMTC',
-        u'maxNrofQFIs',
-        u'maxNrofResourceAvailabilityPerCombination-r16',
-        u'maxNrOfSemiPersistentPUSCH-Triggers',
-        u'maxNrofSR-Resources',
-        u'maxNrofSlotFormatsPerCombination',
-        u'maxNrofSpatialRelationInfos',
-        u'maxNrofSpatialRelationInfos-plus-1',
-        u'maxNrofSpatialRelationInfos-r16',
-        u'maxNrofSpatialRelationInfosDiff-r16',
-        u'maxNrofIndexesToReport',
-        u'maxNrofIndexesToReport2',
-        u'maxNrofSSBs-r16',
-        u'maxNrofSSBs-1',
-        u'maxNrofS-NSSAI',
-        u'maxNrofTCI-StatesPDCCH',
-        u'maxNrofTCI-States',
-        u'maxNrofTCI-States-1',
-        u'maxNrofUL-Allocations',
-        u'maxQFI',
-        u'maxRA-CSIRS-Resources',
-        u'maxRA-OccasionsPerCSIRS',
-        u'maxRA-Occasions-1',
-        u'maxRA-SSB-Resources',
-        u'maxSCSs',
-        u'maxSecondaryCellGroups',
-        u'maxNrofServingCellsEUTRA',
-        u'maxMBSFN-Allocations',
-        u'maxNrofMultiBands',
-        u'maxCellSFTD',
-        u'maxReportConfigId',
-        u'maxNrofCodebooks',
-        u'maxNrofCSI-RS-ResourcesExt-r16',
-        u'maxNrofCSI-RS-Resources',
-        u'maxNrofCSI-RS-ResourcesAlt-r16',
-        u'maxNrofCSI-RS-ResourcesAlt-1-r16',
-        u'maxNrofSRI-PUSCH-Mappings',
-        u'maxNrofSRI-PUSCH-Mappings-1',
-        u'maxSIB',
-        u'maxSI-Message',
-        u'maxPO-perPF',
-        u'maxAccessCat-1',
-        u'maxBarringInfoSet',
-        u'maxCellEUTRA',
-        u'maxEUTRA-Carrier',
-        u'maxPLMNIdentities',
-        u'maxDownlinkFeatureSets',
-        u'maxUplinkFeatureSets',
-        u'maxEUTRA-DL-FeatureSets',
-        u'maxEUTRA-UL-FeatureSets',
-        u'maxFeatureSetsPerBand',
-        u'maxPerCC-FeatureSets',
-        u'maxFeatureSetCombinations',
-        u'maxInterRAT-RSTD-Freq',
-        u'maxHRNN-Len-r16',
-        u'maxNPN-r16',
-        u'maxNrOfMinSchedulingOffsetValues-r16',
-        u'maxK0-SchedulingOffset-r16',
-        u'maxK2-SchedulingOffset-r16',
-        u'maxDCI-2-6-Size-r16',
-        u'maxDCI-2-6-Size-1-r16',
-        u'maxNrofUL-Allocations-r16',
-        u'maxNrofP0-PUSCH-Set-r16',
-        u'maxOnDemandSIB-r16',
-        u'maxOnDemandPosSIB-r16',
-        u'maxCI-DCI-PayloadSize-r16',
-        u'maxCI-DCI-PayloadSize-r16-1',
-        u'maxWLAN-Id-Report-r16',
-        u'maxWLAN-Name-r16',
-        u'maxRAReport-r16',
-        u'maxTxConfig-r16',
-        u'maxTxConfig-1-r16',
-        u'maxPSSCH-TxConfig-r16',
-        u'maxNrofCLI-RSSI-Resources-r16',
-        u'maxNrofCLI-RSSI-Resources-r16-1',
-        u'maxNrofCLI-SRS-Resources-r16',
-        u'maxCLI-Report-r16',
-        u'maxNrofConfiguredGrantConfig-r16',
-        u'maxNrofConfiguredGrantConfig-r16-1',
-        u'maxNrofCG-Type2DeactivationState',
-        u'maxNrofConfiguredGrantConfigMAC-r16',
-        u'maxNrofConfiguredGrantConfigMAC-r16-1',
-        u'maxNrofSPS-Config-r16',
-        u'maxNrofSPS-Config-r16-1',
-        u'maxNrofSPS-DeactivationState',
-        u'maxNrofDormancyGroups',
-        u'maxNrofPUCCH-ResourceGroups-1-r16',
-        u'maxNrofServingCellsTCI-r16',
-        u'maxNrofTxDC-TwoCarrier-r16',
-        u'maxAI-DCI-PayloadSize-r16',
-        u'maxAI-DCI-PayloadSize-r16-1',
-        u'maxBandComb',
-        u'maxBandsUTRA-FDD-r16',
-        u'maxBH-RLC-ChannelID-r16',
-        u'maxBT-IdReport-r16',
-        u'maxBT-Name-r16',
-        u'maxCAG-Cell-r16',
-        u'maxTwoPUCCH-Grp-ConfigList-r16',
-        u'maxCBR-Config-r16',
-        u'maxCBR-Config-1-r16',
-        u'maxCBR-Level-r16',
-        u'maxCBR-Level-1-r16',
-        u'maxCellBlack',
-        u'maxCellGroupings-r16',
-        u'maxCellHistory-r16',
-        u'maxCellInter',
-        u'maxCellIntra',
-        u'maxCellMeasEUTRA',
-        u'maxCellMeasIdle-r16',
-        u'maxCellMeasUTRA-FDD-r16',
-        u'maxCellWhite',
-        u'maxEARFCN',
-        u'maxEUTRA-CellBlack',
-        u'maxEUTRA-NS-Pmax',
-        u'maxLogMeasReport-r16',
-        u'maxMultiBands',
-        u'maxNARFCN',
-        u'maxNR-NS-Pmax',
-        u'maxFreqIdle-r16',
-        u'maxNrofServingCells',
-        u'maxNrofServingCells-1',
-        u'maxNrofAggregatedCellsPerCellGroup',
-        u'maxNrofAggregatedCellsPerCellGroupMinus4-r16',
-        u'maxNrofDUCells-r16',
-        u'maxNrofAvailabilityCombinationsPerSet-r16',
-        u'maxNrofAvailabilityCombinationsPerSet-r16-1',
-        u'maxNrofSCells',
-        u'maxNrofCellMeas',
-        u'maxNrofCG-SL-r16',
-        u'maxNrofCG-SL-r16-1',
-        u'maxNrofSS-BlocksToAverage',
-        u'maxNrofCondCells-r16',
-        u'maxNrofCSI-RS-ResourcesToAverage',
-        u'maxNrofDL-Allocations',
-        u'maxNrofSR-ConfigPerCellGroup',
-        u'maxLCG-ID',
-        u'maxLC-ID',
-        u'maxLC-ID-Iab-r16',
-        u'maxLTE-CRS-Patterns-r16',
-        u'maxNrofTAGs',
-        u'maxNrofTAGs-1',
-        u'maxNrofBWPs',
-        u'maxNrofCombIDC',
-        u'maxNrofSymbols-1',
-        u'maxNrofSlots',
-        u'maxNrofSlots-1',
-        u'maxNrofPhysicalResourceBlocks',
-        u'maxNrofPhysicalResourceBlocks-1',
-        u'maxNrofPhysicalResourceBlocksPlus1',
-        u'maxNrofControlResourceSets',
-        u'maxNrofControlResourceSets-1',
-        u'maxNrofControlResourceSets-1-r16',
-        u'maxNrofCoresetPools-r16',
-        u'maxCoReSetDuration',
-        u'maxNrofSearchSpaces-1',
-        u'maxSFI-DCI-PayloadSize',
-        u'maxSFI-DCI-PayloadSize-1',
-        u'maxIAB-IP-Address-r16',
-        u'maxINT-DCI-PayloadSize',
-        u'maxINT-DCI-PayloadSize-1',
-        u'maxNrofRateMatchPatterns',
-        u'maxNrofRateMatchPatterns-1',
-        u'maxNrofRateMatchPatternsPerGroup',
-        u'maxNrofCSI-ReportConfigurations',
-        u'maxNrofCSI-ReportConfigurations-1',
-        u'maxNrofCSI-ResourceConfigurations',
-        u'maxNrofCSI-ResourceConfigurations-1',
-        u'maxNrofAP-CSI-RS-ResourcesPerSet',
-        u'maxNrOfCSI-AperiodicTriggers',
-        u'maxNrofReportConfigPerAperiodicTrigger',
-        u'maxNrofNZP-CSI-RS-Resources',
-        u'maxNrofNZP-CSI-RS-Resources-1',
-        u'maxNrofNZP-CSI-RS-ResourcesPerSet',
-        u'maxNrofNZP-CSI-RS-ResourceSets',
-        u'maxNrofNZP-CSI-RS-ResourceSets-1',
-        u'maxNrofNZP-CSI-RS-ResourceSetsPerConfig',
-        u'maxNrofNZP-CSI-RS-ResourcesPerConfig',
-        u'maxNrofZP-CSI-RS-Resources',
-        u'maxNrofZP-CSI-RS-Resources-1',
-        u'maxNrofZP-CSI-RS-ResourceSets-1',
-        u'maxNrofZP-CSI-RS-ResourcesPerSet',
-        u'maxNrofZP-CSI-RS-ResourceSets',
-        u'maxNrofCSI-IM-Resources',
-        u'maxNrofCSI-IM-Resources-1',
-        u'maxNrofCSI-IM-ResourcesPerSet',
-        u'maxNrofCSI-IM-ResourceSets',
-        u'maxNrofCSI-IM-ResourceSets-1',
-        u'maxNrofCSI-IM-ResourceSetsPerConfig',
-        u'maxNrofCSI-SSB-ResourcePerSet',
-        u'maxNrofCSI-SSB-ResourceSets',
-        u'maxNrofCSI-SSB-ResourceSets-1',
-        u'maxNrofCSI-SSB-ResourceSetsPerConfig',
-        u'maxNrofFailureDetectionResources',
-        u'maxNrofFailureDetectionResources-1',
-        u'maxNrofFreqSL-r16',
-        u'maxNrofSL-BWPs-r16',
-        u'maxFreqSL-EUTRA-r16',
-        u'maxNrofSL-MeasId-r16',
-        u'maxNrofSL-ObjectId-r16',
-        u'maxNrofSL-ReportConfigId-r16',
-        u'maxNrofSL-PoolToMeasureNR-r16',
-        u'maxFreqSL-NR-r16',
-        u'maxNrofSL-QFIs-r16',
-        u'maxNrofSL-QFIsPerDest-r16',
-        u'maxNrofObjectId',
-        u'maxNrofPageRec',
-        u'maxNrofPCI-Ranges',
-        u'maxPLMN',
-        u'maxNrofCSI-RS-ResourcesRRM',
-        u'maxNrofCSI-RS-ResourcesRRM-1',
-        u'maxNrofMeasId',
-        u'maxNrofQuantityConfig',
-        u'maxNrofCSI-RS-CellsRRM',
-        u'maxNrofSL-Dest-r16',
-        u'maxNrofSL-Dest-1-r16',
-        u'maxNrofSLRB-r16',
-        u'maxSL-LCID-r16',
-        u'maxSL-SyncConfig-r16',
-        u'maxNrofRXPool-r16',
-        u'maxNrofTXPool-r16',
-        u'maxNrofPoolID-r16',
-        u'maxNrofSRS-PathlossReferenceRS-r16',
-        u'maxNrofSRS-PathlossReferenceRS-1-r16',
-        u'maxNrofSRS-ResourceSets',
-        u'maxNrofSRS-ResourceSets-1',
-        u'maxNrofSRS-PosResourceSets-r16',
-        u'maxNrofSRS-PosResourceSets-1-r16',
-        u'maxNrofSRS-Resources',
-        u'maxNrofSRS-Resources-1',
-        u'maxNrofSRS-PosResources-r16',
-        u'maxNrofSRS-PosResources-1-r16',
-        u'maxNrofSRS-ResourcesPerSet',
-        u'maxNrofSRS-TriggerStates-1',
-        u'maxNrofSRS-TriggerStates-2',
-        u'maxRAT-CapabilityContainers',
-        u'maxSimultaneousBands',
-        u'maxULTxSwitchingBandPairs',
-        u'maxNrofSlotFormatCombinationsPerSet',
-        u'maxNrofSlotFormatCombinationsPerSet-1',
-        u'maxNrofTrafficPattern-r16',
-        u'maxNrofPUCCH-Resources',
-        u'maxNrofPUCCH-Resources-1',
-        u'maxNrofPUCCH-ResourceSets',
-        u'maxNrofPUCCH-ResourceSets-1',
-        u'maxNrofPUCCH-ResourcesPerSet',
-        u'maxNrofPUCCH-P0-PerSet',
-        u'maxNrofPUCCH-PathlossReferenceRSs',
-        u'maxNrofPUCCH-PathlossReferenceRSs-1',
-        u'maxNrofPUCCH-PathlossReferenceRSs-r16',
-        u'maxNrofPUCCH-PathlossReferenceRSs-1-r16',
-        u'maxNrofPUCCH-PathlossReferenceRSsDiff-r16',
-        u'maxNrofPUCCH-ResourceGroups-r16',
-        u'maxNrofPUCCH-ResourcesPerGroup-r16',
-        u'maxNrofMultiplePUSCHs-r16',
-        u'maxNrofP0-PUSCH-AlphaSets',
-        u'maxNrofP0-PUSCH-AlphaSets-1',
-        u'maxNrofPUSCH-PathlossReferenceRSs',
-        u'maxNrofPUSCH-PathlossReferenceRSs-1',
-        u'maxNrofPUSCH-PathlossReferenceRSs-r16',
-        u'maxNrofPUSCH-PathlossReferenceRSs-1-r16',
-        u'maxNrofPUSCH-PathlossReferenceRSsDiff-r16',
-        u'maxNrofNAICS-Entries',
-        u'maxBands',
-        u'maxBandsMRDC',
-        u'maxBandsEUTRA',
-        u'maxCellReport',
-        u'maxDRB',
-        u'maxFreq',
-        u'maxFreqLayers',
-        u'maxFreqIDC-r16',
-        u'maxCombIDC-r16',
-        u'maxFreqIDC-MRDC',
-        u'maxNrofCandidateBeams',
-        u'maxNrofCandidateBeams-r16',
-        u'maxNrofCandidateBeamsExt-r16',
-        u'maxNrofPCIsPerSMTC',
-        u'maxNrofQFIs',
-        u'maxNrofResourceAvailabilityPerCombination-r16',
-        u'maxNrOfSemiPersistentPUSCH-Triggers',
-        u'maxNrofSR-Resources',
-        u'maxNrofSlotFormatsPerCombination',
-        u'maxNrofSpatialRelationInfos',
-        u'maxNrofSpatialRelationInfos-plus-1',
-        u'maxNrofSpatialRelationInfos-r16',
-        u'maxNrofSpatialRelationInfosDiff-r16',
-        u'maxNrofIndexesToReport',
-        u'maxNrofIndexesToReport2',
-        u'maxNrofSSBs-r16',
-        u'maxNrofSSBs-1',
-        u'maxNrofS-NSSAI',
-        u'maxNrofTCI-StatesPDCCH',
-        u'maxNrofTCI-States',
-        u'maxNrofTCI-States-1',
-        u'maxNrofUL-Allocations',
-        u'maxQFI',
-        u'maxRA-CSIRS-Resources',
-        u'maxRA-OccasionsPerCSIRS',
-        u'maxRA-Occasions-1',
-        u'maxRA-SSB-Resources',
-        u'maxSCSs',
-        u'maxSecondaryCellGroups',
-        u'maxNrofServingCellsEUTRA',
-        u'maxMBSFN-Allocations',
-        u'maxNrofMultiBands',
-        u'maxCellSFTD',
-        u'maxReportConfigId',
-        u'maxNrofCodebooks',
-        u'maxNrofCSI-RS-ResourcesExt-r16',
-        u'maxNrofCSI-RS-Resources',
-        u'maxNrofCSI-RS-ResourcesAlt-r16',
-        u'maxNrofCSI-RS-ResourcesAlt-1-r16',
-        u'maxNrofSRI-PUSCH-Mappings',
-        u'maxNrofSRI-PUSCH-Mappings-1',
-        u'maxSIB',
-        u'maxSI-Message',
-        u'maxPO-perPF',
-        u'maxAccessCat-1',
-        u'maxBarringInfoSet',
-        u'maxCellEUTRA',
-        u'maxEUTRA-Carrier',
-        u'maxPLMNIdentities',
-        u'maxDownlinkFeatureSets',
-        u'maxUplinkFeatureSets',
-        u'maxEUTRA-DL-FeatureSets',
-        u'maxEUTRA-UL-FeatureSets',
-        u'maxFeatureSetsPerBand',
-        u'maxPerCC-FeatureSets',
-        u'maxFeatureSetCombinations',
-        u'maxInterRAT-RSTD-Freq',
-        u'maxHRNN-Len-r16',
-        u'maxNPN-r16',
-        u'maxNrOfMinSchedulingOffsetValues-r16',
-        u'maxK0-SchedulingOffset-r16',
-        u'maxK2-SchedulingOffset-r16',
-        u'maxDCI-2-6-Size-r16',
-        u'maxDCI-2-6-Size-1-r16',
-        u'maxNrofUL-Allocations-r16',
-        u'maxNrofP0-PUSCH-Set-r16',
-        u'maxOnDemandSIB-r16',
-        u'maxOnDemandPosSIB-r16',
-        u'maxCI-DCI-PayloadSize-r16',
-        u'maxCI-DCI-PayloadSize-r16-1',
-        u'maxWLAN-Id-Report-r16',
-        u'maxWLAN-Name-r16',
-        u'maxRAReport-r16',
-        u'maxTxConfig-r16',
-        u'maxTxConfig-1-r16',
-        u'maxPSSCH-TxConfig-r16',
-        u'maxNrofCLI-RSSI-Resources-r16',
-        u'maxNrofCLI-RSSI-Resources-r16-1',
-        u'maxNrofCLI-SRS-Resources-r16',
-        u'maxCLI-Report-r16',
-        u'maxNrofConfiguredGrantConfig-r16',
-        u'maxNrofConfiguredGrantConfig-r16-1',
-        u'maxNrofCG-Type2DeactivationState',
-        u'maxNrofConfiguredGrantConfigMAC-r16',
-        u'maxNrofConfiguredGrantConfigMAC-r16-1',
-        u'maxNrofSPS-Config-r16',
-        u'maxNrofSPS-Config-r16-1',
-        u'maxNrofSPS-DeactivationState',
-        u'maxNrofDormancyGroups',
-        u'maxNrofPUCCH-ResourceGroups-1-r16',
-        u'maxNrofServingCellsTCI-r16',
-        u'maxNrofTxDC-TwoCarrier-r16',
-        u'maxAI-DCI-PayloadSize-r16',
-        u'maxAI-DCI-PayloadSize-r16-1',
-        u'maxBandComb',
-        u'maxBandsUTRA-FDD-r16',
-        u'maxBH-RLC-ChannelID-r16',
-        u'maxBT-IdReport-r16',
-        u'maxBT-Name-r16',
-        u'maxCAG-Cell-r16',
-        u'maxTwoPUCCH-Grp-ConfigList-r16',
-        u'maxCBR-Config-r16',
-        u'maxCBR-Config-1-r16',
-        u'maxCBR-Level-r16',
-        u'maxCBR-Level-1-r16',
-        u'maxCellBlack',
-        u'maxCellGroupings-r16',
-        u'maxCellHistory-r16',
-        u'maxCellInter',
-        u'maxCellIntra',
-        u'maxCellMeasEUTRA',
-        u'maxCellMeasIdle-r16',
-        u'maxCellMeasUTRA-FDD-r16',
-        u'maxCellWhite',
-        u'maxEARFCN',
-        u'maxEUTRA-CellBlack',
-        u'maxEUTRA-NS-Pmax',
-        u'maxLogMeasReport-r16',
-        u'maxMultiBands',
-        u'maxNARFCN',
-        u'maxNR-NS-Pmax',
-        u'maxFreqIdle-r16',
-        u'maxNrofServingCells',
-        u'maxNrofServingCells-1',
-        u'maxNrofAggregatedCellsPerCellGroup',
-        u'maxNrofAggregatedCellsPerCellGroupMinus4-r16',
-        u'maxNrofDUCells-r16',
-        u'maxNrofAvailabilityCombinationsPerSet-r16',
-        u'maxNrofAvailabilityCombinationsPerSet-r16-1',
-        u'maxNrofSCells',
-        u'maxNrofCellMeas',
-        u'maxNrofCG-SL-r16',
-        u'maxNrofCG-SL-r16-1',
-        u'maxNrofSS-BlocksToAverage',
-        u'maxNrofCondCells-r16',
-        u'maxNrofCSI-RS-ResourcesToAverage',
-        u'maxNrofDL-Allocations',
-        u'maxNrofSR-ConfigPerCellGroup',
-        u'maxLCG-ID',
-        u'maxLC-ID',
-        u'maxLC-ID-Iab-r16',
-        u'maxLTE-CRS-Patterns-r16',
-        u'maxNrofTAGs',
-        u'maxNrofTAGs-1',
-        u'maxNrofBWPs',
-        u'maxNrofCombIDC',
-        u'maxNrofSymbols-1',
-        u'maxNrofSlots',
-        u'maxNrofSlots-1',
-        u'maxNrofPhysicalResourceBlocks',
-        u'maxNrofPhysicalResourceBlocks-1',
-        u'maxNrofPhysicalResourceBlocksPlus1',
-        u'maxNrofControlResourceSets',
-        u'maxNrofControlResourceSets-1',
-        u'maxNrofControlResourceSets-1-r16',
-        u'maxNrofCoresetPools-r16',
-        u'maxCoReSetDuration',
-        u'maxNrofSearchSpaces-1',
-        u'maxSFI-DCI-PayloadSize',
-        u'maxSFI-DCI-PayloadSize-1',
-        u'maxIAB-IP-Address-r16',
-        u'maxINT-DCI-PayloadSize',
-        u'maxINT-DCI-PayloadSize-1',
-        u'maxNrofRateMatchPatterns',
-        u'maxNrofRateMatchPatterns-1',
-        u'maxNrofRateMatchPatternsPerGroup',
-        u'maxNrofCSI-ReportConfigurations',
-        u'maxNrofCSI-ReportConfigurations-1',
-        u'maxNrofCSI-ResourceConfigurations',
-        u'maxNrofCSI-ResourceConfigurations-1',
-        u'maxNrofAP-CSI-RS-ResourcesPerSet',
-        u'maxNrOfCSI-AperiodicTriggers',
-        u'maxNrofReportConfigPerAperiodicTrigger',
-        u'maxNrofNZP-CSI-RS-Resources',
-        u'maxNrofNZP-CSI-RS-Resources-1',
-        u'maxNrofNZP-CSI-RS-ResourcesPerSet',
-        u'maxNrofNZP-CSI-RS-ResourceSets',
-        u'maxNrofNZP-CSI-RS-ResourceSets-1',
-        u'maxNrofNZP-CSI-RS-ResourceSetsPerConfig',
-        u'maxNrofNZP-CSI-RS-ResourcesPerConfig',
-        u'maxNrofZP-CSI-RS-Resources',
-        u'maxNrofZP-CSI-RS-Resources-1',
-        u'maxNrofZP-CSI-RS-ResourceSets-1',
-        u'maxNrofZP-CSI-RS-ResourcesPerSet',
-        u'maxNrofZP-CSI-RS-ResourceSets',
-        u'maxNrofCSI-IM-Resources',
-        u'maxNrofCSI-IM-Resources-1',
-        u'maxNrofCSI-IM-ResourcesPerSet',
-        u'maxNrofCSI-IM-ResourceSets',
-        u'maxNrofCSI-IM-ResourceSets-1',
-        u'maxNrofCSI-IM-ResourceSetsPerConfig',
-        u'maxNrofCSI-SSB-ResourcePerSet',
-        u'maxNrofCSI-SSB-ResourceSets',
-        u'maxNrofCSI-SSB-ResourceSets-1',
-        u'maxNrofCSI-SSB-ResourceSetsPerConfig',
-        u'maxNrofFailureDetectionResources',
-        u'maxNrofFailureDetectionResources-1',
-        u'maxNrofFreqSL-r16',
-        u'maxNrofSL-BWPs-r16',
-        u'maxFreqSL-EUTRA-r16',
-        u'maxNrofSL-MeasId-r16',
-        u'maxNrofSL-ObjectId-r16',
-        u'maxNrofSL-ReportConfigId-r16',
-        u'maxNrofSL-PoolToMeasureNR-r16',
-        u'maxFreqSL-NR-r16',
-        u'maxNrofSL-QFIs-r16',
-        u'maxNrofSL-QFIsPerDest-r16',
-        u'maxNrofObjectId',
-        u'maxNrofPageRec',
-        u'maxNrofPCI-Ranges',
-        u'maxPLMN',
-        u'maxNrofCSI-RS-ResourcesRRM',
-        u'maxNrofCSI-RS-ResourcesRRM-1',
-        u'maxNrofMeasId',
-        u'maxNrofQuantityConfig',
-        u'maxNrofCSI-RS-CellsRRM',
-        u'maxNrofSL-Dest-r16',
-        u'maxNrofSL-Dest-1-r16',
-        u'maxNrofSLRB-r16',
-        u'maxSL-LCID-r16',
-        u'maxSL-SyncConfig-r16',
-        u'maxNrofRXPool-r16',
-        u'maxNrofTXPool-r16',
-        u'maxNrofPoolID-r16',
-        u'maxNrofSRS-PathlossReferenceRS-r16',
-        u'maxNrofSRS-PathlossReferenceRS-1-r16',
-        u'maxNrofSRS-ResourceSets',
-        u'maxNrofSRS-ResourceSets-1',
-        u'maxNrofSRS-PosResourceSets-r16',
-        u'maxNrofSRS-PosResourceSets-1-r16',
-        u'maxNrofSRS-Resources',
-        u'maxNrofSRS-Resources-1',
-        u'maxNrofSRS-PosResources-r16',
-        u'maxNrofSRS-PosResources-1-r16',
-        u'maxNrofSRS-ResourcesPerSet',
-        u'maxNrofSRS-TriggerStates-1',
-        u'maxNrofSRS-TriggerStates-2',
-        u'maxRAT-CapabilityContainers',
-        u'maxSimultaneousBands',
-        u'maxULTxSwitchingBandPairs',
-        u'maxNrofSlotFormatCombinationsPerSet',
-        u'maxNrofSlotFormatCombinationsPerSet-1',
-        u'maxNrofTrafficPattern-r16',
-        u'maxNrofPUCCH-Resources',
-        u'maxNrofPUCCH-Resources-1',
-        u'maxNrofPUCCH-ResourceSets',
-        u'maxNrofPUCCH-ResourceSets-1',
-        u'maxNrofPUCCH-ResourcesPerSet',
-        u'maxNrofPUCCH-P0-PerSet',
-        u'maxNrofPUCCH-PathlossReferenceRSs',
-        u'maxNrofPUCCH-PathlossReferenceRSs-1',
-        u'maxNrofPUCCH-PathlossReferenceRSs-r16',
-        u'maxNrofPUCCH-PathlossReferenceRSs-1-r16',
-        u'maxNrofPUCCH-PathlossReferenceRSsDiff-r16',
-        u'maxNrofPUCCH-ResourceGroups-r16',
-        u'maxNrofPUCCH-ResourcesPerGroup-r16',
-        u'maxNrofMultiplePUSCHs-r16',
-        u'maxNrofP0-PUSCH-AlphaSets',
-        u'maxNrofP0-PUSCH-AlphaSets-1',
-        u'maxNrofPUSCH-PathlossReferenceRSs',
-        u'maxNrofPUSCH-PathlossReferenceRSs-1',
-        u'maxNrofPUSCH-PathlossReferenceRSs-r16',
-        u'maxNrofPUSCH-PathlossReferenceRSs-1-r16',
-        u'maxNrofPUSCH-PathlossReferenceRSsDiff-r16',
-        u'maxNrofNAICS-Entries',
-        u'maxBands',
-        u'maxBandsMRDC',
-        u'maxBandsEUTRA',
-        u'maxCellReport',
-        u'maxDRB',
-        u'maxFreq',
-        u'maxFreqLayers',
-        u'maxFreqIDC-r16',
-        u'maxCombIDC-r16',
-        u'maxFreqIDC-MRDC',
-        u'maxNrofCandidateBeams',
-        u'maxNrofCandidateBeams-r16',
-        u'maxNrofCandidateBeamsExt-r16',
-        u'maxNrofPCIsPerSMTC',
-        u'maxNrofQFIs',
-        u'maxNrofResourceAvailabilityPerCombination-r16',
-        u'maxNrOfSemiPersistentPUSCH-Triggers',
-        u'maxNrofSR-Resources',
-        u'maxNrofSlotFormatsPerCombination',
-        u'maxNrofSpatialRelationInfos',
-        u'maxNrofSpatialRelationInfos-plus-1',
-        u'maxNrofSpatialRelationInfos-r16',
-        u'maxNrofSpatialRelationInfosDiff-r16',
-        u'maxNrofIndexesToReport',
-        u'maxNrofIndexesToReport2',
-        u'maxNrofSSBs-r16',
-        u'maxNrofSSBs-1',
-        u'maxNrofS-NSSAI',
-        u'maxNrofTCI-StatesPDCCH',
-        u'maxNrofTCI-States',
-        u'maxNrofTCI-States-1',
-        u'maxNrofUL-Allocations',
-        u'maxQFI',
-        u'maxRA-CSIRS-Resources',
-        u'maxRA-OccasionsPerCSIRS',
-        u'maxRA-Occasions-1',
-        u'maxRA-SSB-Resources',
-        u'maxSCSs',
-        u'maxSecondaryCellGroups',
-        u'maxNrofServingCellsEUTRA',
-        u'maxMBSFN-Allocations',
-        u'maxNrofMultiBands',
-        u'maxCellSFTD',
-        u'maxReportConfigId',
-        u'maxNrofCodebooks',
-        u'maxNrofCSI-RS-ResourcesExt-r16',
-        u'maxNrofCSI-RS-Resources',
-        u'maxNrofCSI-RS-ResourcesAlt-r16',
-        u'maxNrofCSI-RS-ResourcesAlt-1-r16',
-        u'maxNrofSRI-PUSCH-Mappings',
-        u'maxNrofSRI-PUSCH-Mappings-1',
-        u'maxSIB',
-        u'maxSI-Message',
-        u'maxPO-perPF',
-        u'maxAccessCat-1',
-        u'maxBarringInfoSet',
-        u'maxCellEUTRA',
-        u'maxEUTRA-Carrier',
-        u'maxPLMNIdentities',
-        u'maxDownlinkFeatureSets',
-        u'maxUplinkFeatureSets',
-        u'maxEUTRA-DL-FeatureSets',
-        u'maxEUTRA-UL-FeatureSets',
-        u'maxFeatureSetsPerBand',
-        u'maxPerCC-FeatureSets',
-        u'maxFeatureSetCombinations',
-        u'maxInterRAT-RSTD-Freq',
-        u'maxHRNN-Len-r16',
-        u'maxNPN-r16',
-        u'maxNrOfMinSchedulingOffsetValues-r16',
-        u'maxK0-SchedulingOffset-r16',
-        u'maxK2-SchedulingOffset-r16',
-        u'maxDCI-2-6-Size-r16',
-        u'maxDCI-2-6-Size-1-r16',
-        u'maxNrofUL-Allocations-r16',
-        u'maxNrofP0-PUSCH-Set-r16',
-        u'maxOnDemandSIB-r16',
-        u'maxOnDemandPosSIB-r16',
-        u'maxCI-DCI-PayloadSize-r16',
-        u'maxCI-DCI-PayloadSize-r16-1',
-        u'maxWLAN-Id-Report-r16',
-        u'maxWLAN-Name-r16',
-        u'maxRAReport-r16',
-        u'maxTxConfig-r16',
-        u'maxTxConfig-1-r16',
-        u'maxPSSCH-TxConfig-r16',
-        u'maxNrofCLI-RSSI-Resources-r16',
-        u'maxNrofCLI-RSSI-Resources-r16-1',
-        u'maxNrofCLI-SRS-Resources-r16',
-        u'maxCLI-Report-r16',
-        u'maxNrofConfiguredGrantConfig-r16',
-        u'maxNrofConfiguredGrantConfig-r16-1',
-        u'maxNrofCG-Type2DeactivationState',
-        u'maxNrofConfiguredGrantConfigMAC-r16',
-        u'maxNrofConfiguredGrantConfigMAC-r16-1',
-        u'maxNrofSPS-Config-r16',
-        u'maxNrofSPS-Config-r16-1',
-        u'maxNrofSPS-DeactivationState',
-        u'maxNrofDormancyGroups',
-        u'maxNrofPUCCH-ResourceGroups-1-r16',
-        u'maxNrofServingCellsTCI-r16',
-        u'maxNrofTxDC-TwoCarrier-r16',
-        u'maxAI-DCI-PayloadSize-r16',
-        u'maxAI-DCI-PayloadSize-r16-1',
-        u'maxBandComb',
-        u'maxBandsUTRA-FDD-r16',
-        u'maxBH-RLC-ChannelID-r16',
-        u'maxBT-IdReport-r16',
-        u'maxBT-Name-r16',
-        u'maxCAG-Cell-r16',
-        u'maxTwoPUCCH-Grp-ConfigList-r16',
-        u'maxCBR-Config-r16',
-        u'maxCBR-Config-1-r16',
-        u'maxCBR-Level-r16',
-        u'maxCBR-Level-1-r16',
-        u'maxCellBlack',
-        u'maxCellGroupings-r16',
-        u'maxCellHistory-r16',
-        u'maxCellInter',
-        u'maxCellIntra',
-        u'maxCellMeasEUTRA',
-        u'maxCellMeasIdle-r16',
-        u'maxCellMeasUTRA-FDD-r16',
-        u'maxCellWhite',
-        u'maxEARFCN',
-        u'maxEUTRA-CellBlack',
-        u'maxEUTRA-NS-Pmax',
-        u'maxLogMeasReport-r16',
-        u'maxMultiBands',
-        u'maxNARFCN',
-        u'maxNR-NS-Pmax',
-        u'maxFreqIdle-r16',
-        u'maxNrofServingCells',
-        u'maxNrofServingCells-1',
-        u'maxNrofAggregatedCellsPerCellGroup',
-        u'maxNrofAggregatedCellsPerCellGroupMinus4-r16',
-        u'maxNrofDUCells-r16',
-        u'maxNrofAvailabilityCombinationsPerSet-r16',
-        u'maxNrofAvailabilityCombinationsPerSet-r16-1',
-        u'maxNrofSCells',
-        u'maxNrofCellMeas',
-        u'maxNrofCG-SL-r16',
-        u'maxNrofCG-SL-r16-1',
-        u'maxNrofSS-BlocksToAverage',
-        u'maxNrofCondCells-r16',
-        u'maxNrofCSI-RS-ResourcesToAverage',
-        u'maxNrofDL-Allocations',
-        u'maxNrofSR-ConfigPerCellGroup',
-        u'maxLCG-ID',
-        u'maxLC-ID',
-        u'maxLC-ID-Iab-r16',
-        u'maxLTE-CRS-Patterns-r16',
-        u'maxNrofTAGs',
-        u'maxNrofTAGs-1',
-        u'maxNrofBWPs',
-        u'maxNrofCombIDC',
-        u'maxNrofSymbols-1',
-        u'maxNrofSlots',
-        u'maxNrofSlots-1',
-        u'maxNrofPhysicalResourceBlocks',
-        u'maxNrofPhysicalResourceBlocks-1',
-        u'maxNrofPhysicalResourceBlocksPlus1',
-        u'maxNrofControlResourceSets',
-        u'maxNrofControlResourceSets-1',
-        u'maxNrofControlResourceSets-1-r16',
-        u'maxNrofCoresetPools-r16',
-        u'maxCoReSetDuration',
-        u'maxNrofSearchSpaces-1',
-        u'maxSFI-DCI-PayloadSize',
-        u'maxSFI-DCI-PayloadSize-1',
-        u'maxIAB-IP-Address-r16',
-        u'maxINT-DCI-PayloadSize',
-        u'maxINT-DCI-PayloadSize-1',
-        u'maxNrofRateMatchPatterns',
-        u'maxNrofRateMatchPatterns-1',
-        u'maxNrofRateMatchPatternsPerGroup',
-        u'maxNrofCSI-ReportConfigurations',
-        u'maxNrofCSI-ReportConfigurations-1',
-        u'maxNrofCSI-ResourceConfigurations',
-        u'maxNrofCSI-ResourceConfigurations-1',
-        u'maxNrofAP-CSI-RS-ResourcesPerSet',
-        u'maxNrOfCSI-AperiodicTriggers',
-        u'maxNrofReportConfigPerAperiodicTrigger',
-        u'maxNrofNZP-CSI-RS-Resources',
-        u'maxNrofNZP-CSI-RS-Resources-1',
-        u'maxNrofNZP-CSI-RS-ResourcesPerSet',
-        u'maxNrofNZP-CSI-RS-ResourceSets',
-        u'maxNrofNZP-CSI-RS-ResourceSets-1',
-        u'maxNrofNZP-CSI-RS-ResourceSetsPerConfig',
-        u'maxNrofNZP-CSI-RS-ResourcesPerConfig',
-        u'maxNrofZP-CSI-RS-Resources',
-        u'maxNrofZP-CSI-RS-Resources-1',
-        u'maxNrofZP-CSI-RS-ResourceSets-1',
-        u'maxNrofZP-CSI-RS-ResourcesPerSet',
-        u'maxNrofZP-CSI-RS-ResourceSets',
-        u'maxNrofCSI-IM-Resources',
-        u'maxNrofCSI-IM-Resources-1',
-        u'maxNrofCSI-IM-ResourcesPerSet',
-        u'maxNrofCSI-IM-ResourceSets',
-        u'maxNrofCSI-IM-ResourceSets-1',
-        u'maxNrofCSI-IM-ResourceSetsPerConfig',
-        u'maxNrofCSI-SSB-ResourcePerSet',
-        u'maxNrofCSI-SSB-ResourceSets',
-        u'maxNrofCSI-SSB-ResourceSets-1',
-        u'maxNrofCSI-SSB-ResourceSetsPerConfig',
-        u'maxNrofFailureDetectionResources',
-        u'maxNrofFailureDetectionResources-1',
-        u'maxNrofFreqSL-r16',
-        u'maxNrofSL-BWPs-r16',
-        u'maxFreqSL-EUTRA-r16',
-        u'maxNrofSL-MeasId-r16',
-        u'maxNrofSL-ObjectId-r16',
-        u'maxNrofSL-ReportConfigId-r16',
-        u'maxNrofSL-PoolToMeasureNR-r16',
-        u'maxFreqSL-NR-r16',
-        u'maxNrofSL-QFIs-r16',
-        u'maxNrofSL-QFIsPerDest-r16',
-        u'maxNrofObjectId',
-        u'maxNrofPageRec',
-        u'maxNrofPCI-Ranges',
-        u'maxPLMN',
-        u'maxNrofCSI-RS-ResourcesRRM',
-        u'maxNrofCSI-RS-ResourcesRRM-1',
-        u'maxNrofMeasId',
-        u'maxNrofQuantityConfig',
-        u'maxNrofCSI-RS-CellsRRM',
-        u'maxNrofSL-Dest-r16',
-        u'maxNrofSL-Dest-1-r16',
-        u'maxNrofSLRB-r16',
-        u'maxSL-LCID-r16',
-        u'maxSL-SyncConfig-r16',
-        u'maxNrofRXPool-r16',
-        u'maxNrofTXPool-r16',
-        u'maxNrofPoolID-r16',
-        u'maxNrofSRS-PathlossReferenceRS-r16',
-        u'maxNrofSRS-PathlossReferenceRS-1-r16',
-        u'maxNrofSRS-ResourceSets',
-        u'maxNrofSRS-ResourceSets-1',
-        u'maxNrofSRS-PosResourceSets-r16',
-        u'maxNrofSRS-PosResourceSets-1-r16',
-        u'maxNrofSRS-Resources',
-        u'maxNrofSRS-Resources-1',
-        u'maxNrofSRS-PosResources-r16',
-        u'maxNrofSRS-PosResources-1-r16',
-        u'maxNrofSRS-ResourcesPerSet',
-        u'maxNrofSRS-TriggerStates-1',
-        u'maxNrofSRS-TriggerStates-2',
-        u'maxRAT-CapabilityContainers',
-        u'maxSimultaneousBands',
-        u'maxULTxSwitchingBandPairs',
-        u'maxNrofSlotFormatCombinationsPerSet',
-        u'maxNrofSlotFormatCombinationsPerSet-1',
-        u'maxNrofTrafficPattern-r16',
-        u'maxNrofPUCCH-Resources',
-        u'maxNrofPUCCH-Resources-1',
-        u'maxNrofPUCCH-ResourceSets',
-        u'maxNrofPUCCH-ResourceSets-1',
-        u'maxNrofPUCCH-ResourcesPerSet',
-        u'maxNrofPUCCH-P0-PerSet',
-        u'maxNrofPUCCH-PathlossReferenceRSs',
-        u'maxNrofPUCCH-PathlossReferenceRSs-1',
-        u'maxNrofPUCCH-PathlossReferenceRSs-r16',
-        u'maxNrofPUCCH-PathlossReferenceRSs-1-r16',
-        u'maxNrofPUCCH-PathlossReferenceRSsDiff-r16',
-        u'maxNrofPUCCH-ResourceGroups-r16',
-        u'maxNrofPUCCH-ResourcesPerGroup-r16',
-        u'maxNrofMultiplePUSCHs-r16',
-        u'maxNrofP0-PUSCH-AlphaSets',
-        u'maxNrofP0-PUSCH-AlphaSets-1',
-        u'maxNrofPUSCH-PathlossReferenceRSs',
-        u'maxNrofPUSCH-PathlossReferenceRSs-1',
-        u'maxNrofPUSCH-PathlossReferenceRSs-r16',
-        u'maxNrofPUSCH-PathlossReferenceRSs-1-r16',
-        u'maxNrofPUSCH-PathlossReferenceRSsDiff-r16',
-        u'maxNrofNAICS-Entries',
-        u'maxBands',
-        u'maxBandsMRDC',
-        u'maxBandsEUTRA',
-        u'maxCellReport',
-        u'maxDRB',
-        u'maxFreq',
-        u'maxFreqLayers',
-        u'maxFreqIDC-r16',
-        u'maxCombIDC-r16',
-        u'maxFreqIDC-MRDC',
-        u'maxNrofCandidateBeams',
-        u'maxNrofCandidateBeams-r16',
-        u'maxNrofCandidateBeamsExt-r16',
-        u'maxNrofPCIsPerSMTC',
-        u'maxNrofQFIs',
-        u'maxNrofResourceAvailabilityPerCombination-r16',
-        u'maxNrOfSemiPersistentPUSCH-Triggers',
-        u'maxNrofSR-Resources',
-        u'maxNrofSlotFormatsPerCombination',
-        u'maxNrofSpatialRelationInfos',
-        u'maxNrofSpatialRelationInfos-plus-1',
-        u'maxNrofSpatialRelationInfos-r16',
-        u'maxNrofSpatialRelationInfosDiff-r16',
-        u'maxNrofIndexesToReport',
-        u'maxNrofIndexesToReport2',
-        u'maxNrofSSBs-r16',
-        u'maxNrofSSBs-1',
-        u'maxNrofS-NSSAI',
-        u'maxNrofTCI-StatesPDCCH',
-        u'maxNrofTCI-States',
-        u'maxNrofTCI-States-1',
-        u'maxNrofUL-Allocations',
-        u'maxQFI',
-        u'maxRA-CSIRS-Resources',
-        u'maxRA-OccasionsPerCSIRS',
-        u'maxRA-Occasions-1',
-        u'maxRA-SSB-Resources',
-        u'maxSCSs',
-        u'maxSecondaryCellGroups',
-        u'maxNrofServingCellsEUTRA',
-        u'maxMBSFN-Allocations',
-        u'maxNrofMultiBands',
-        u'maxCellSFTD',
-        u'maxReportConfigId',
-        u'maxNrofCodebooks',
-        u'maxNrofCSI-RS-ResourcesExt-r16',
-        u'maxNrofCSI-RS-Resources',
-        u'maxNrofCSI-RS-ResourcesAlt-r16',
-        u'maxNrofCSI-RS-ResourcesAlt-1-r16',
-        u'maxNrofSRI-PUSCH-Mappings',
-        u'maxNrofSRI-PUSCH-Mappings-1',
-        u'maxSIB',
-        u'maxSI-Message',
-        u'maxPO-perPF',
-        u'maxAccessCat-1',
-        u'maxBarringInfoSet',
-        u'maxCellEUTRA',
-        u'maxEUTRA-Carrier',
-        u'maxPLMNIdentities',
-        u'maxDownlinkFeatureSets',
-        u'maxUplinkFeatureSets',
-        u'maxEUTRA-DL-FeatureSets',
-        u'maxEUTRA-UL-FeatureSets',
-        u'maxFeatureSetsPerBand',
-        u'maxPerCC-FeatureSets',
-        u'maxFeatureSetCombinations',
-        u'maxInterRAT-RSTD-Freq',
-        u'maxHRNN-Len-r16',
-        u'maxNPN-r16',
-        u'maxNrOfMinSchedulingOffsetValues-r16',
-        u'maxK0-SchedulingOffset-r16',
-        u'maxK2-SchedulingOffset-r16',
-        u'maxDCI-2-6-Size-r16',
-        u'maxDCI-2-6-Size-1-r16',
-        u'maxNrofUL-Allocations-r16',
-        u'maxNrofP0-PUSCH-Set-r16',
-        u'maxOnDemandSIB-r16',
-        u'maxOnDemandPosSIB-r16',
-        u'maxCI-DCI-PayloadSize-r16',
-        u'maxCI-DCI-PayloadSize-r16-1',
-        u'maxWLAN-Id-Report-r16',
-        u'maxWLAN-Name-r16',
-        u'maxRAReport-r16',
-        u'maxTxConfig-r16',
-        u'maxTxConfig-1-r16',
-        u'maxPSSCH-TxConfig-r16',
-        u'maxNrofCLI-RSSI-Resources-r16',
-        u'maxNrofCLI-RSSI-Resources-r16-1',
-        u'maxNrofCLI-SRS-Resources-r16',
-        u'maxCLI-Report-r16',
-        u'maxNrofConfiguredGrantConfig-r16',
-        u'maxNrofConfiguredGrantConfig-r16-1',
-        u'maxNrofCG-Type2DeactivationState',
-        u'maxNrofConfiguredGrantConfigMAC-r16',
-        u'maxNrofConfiguredGrantConfigMAC-r16-1',
-        u'maxNrofSPS-Config-r16',
-        u'maxNrofSPS-Config-r16-1',
+        u'maxNrofSPS-Config-1-r16',
         u'maxNrofSPS-DeactivationState',
         u'maxNrofDormancyGroups',
         u'maxNrofPUCCH-ResourceGroups-1-r16',
@@ -9690,10 +5368,6 @@ class NR_RRC_Definitions:
     _class_ = [
         ]
     _param_ = [
-        u'SetupRelease',
-        u'SetupRelease',
-        u'SetupRelease',
-        u'SetupRelease',
         u'SetupRelease',
         ]
     
@@ -13527,6 +9201,7 @@ class NR_RRC_Definitions:
     _RA_InformationCommon_r16_msg1_FDMCFRA_r16._cont = ASN1Dict([(u'one', 0), (u'two', 1), (u'four', 2), (u'eight', 3)])
     _RA_InformationCommon_r16_msg1_FDMCFRA_r16._ext = None
     _RA_InformationCommon_r16_perRAInfoList_r16 = SEQ_OF(name=u'perRAInfoList-r16', mode=MODE_TYPE, tag=(9, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'PerRAInfoList-r16')))
+    _RA_InformationCommon_r16_perRAInfoListExt_v1660 = SEQ_OF(name=u'perRAInfoListExt-v1660', mode=MODE_TYPE, tag=(10, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'PerRAInfoListExt-v1660')), opt=True, group=0)
     RA_InformationCommon_r16._cont = ASN1Dict([
         (u'absoluteFrequencyPointA-r16', _RA_InformationCommon_r16_absoluteFrequencyPointA_r16),
         (u'locationAndBandwidth-r16', _RA_InformationCommon_r16_locationAndBandwidth_r16),
@@ -13538,14 +9213,21 @@ class NR_RRC_Definitions:
         (u'msg1-FDM-r16', _RA_InformationCommon_r16_msg1_FDM_r16),
         (u'msg1-FDMCFRA-r16', _RA_InformationCommon_r16_msg1_FDMCFRA_r16),
         (u'perRAInfoList-r16', _RA_InformationCommon_r16_perRAInfoList_r16),
+        (u'perRAInfoListExt-v1660', _RA_InformationCommon_r16_perRAInfoListExt_v1660),
         ])
-    RA_InformationCommon_r16._ext = []
+    RA_InformationCommon_r16._ext = [u'perRAInfoListExt-v1660']
     
     #-----< PerRAInfoList-r16 >-----#
     PerRAInfoList_r16 = SEQ_OF(name=u'PerRAInfoList-r16', mode=MODE_TYPE)
     _PerRAInfoList_r16__item_ = CHOICE(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('NR-RRC-Definitions', 'PerRAInfo-r16')))
     PerRAInfoList_r16._cont = _PerRAInfoList_r16__item_
     PerRAInfoList_r16._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=200)], ev=None, er=[])
+    
+    #-----< PerRAInfoListExt-v1660 >-----#
+    PerRAInfoListExt_v1660 = SEQ_OF(name=u'PerRAInfoListExt-v1660', mode=MODE_TYPE)
+    _PerRAInfoListExt_v1660__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('NR-RRC-Definitions', 'PerRACSI-RSInfoExt-v1660')))
+    PerRAInfoListExt_v1660._cont = _PerRAInfoListExt_v1660__item_
+    PerRAInfoListExt_v1660._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=200)], ev=None, er=[])
     
     #-----< PerRAInfo-r16 >-----#
     PerRAInfo_r16 = CHOICE(name=u'PerRAInfo-r16', mode=MODE_TYPE)
@@ -13580,6 +9262,15 @@ class NR_RRC_Definitions:
         (u'numberOfPreamblesSentOnCSI-RS-r16', _PerRACSI_RSInfo_r16_numberOfPreamblesSentOnCSI_RS_r16),
         ])
     PerRACSI_RSInfo_r16._ext = None
+    
+    #-----< PerRACSI-RSInfoExt-v1660 >-----#
+    PerRACSI_RSInfoExt_v1660 = SEQ(name=u'PerRACSI-RSInfoExt-v1660', mode=MODE_TYPE)
+    _PerRACSI_RSInfoExt_v1660_csi_RS_Index_v1660 = INT(name=u'csi-RS-Index-v1660', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _PerRACSI_RSInfoExt_v1660_csi_RS_Index_v1660._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=96)], ev=None, er=[])
+    PerRACSI_RSInfoExt_v1660._cont = ASN1Dict([
+        (u'csi-RS-Index-v1660', _PerRACSI_RSInfoExt_v1660_csi_RS_Index_v1660),
+        ])
+    PerRACSI_RSInfoExt_v1660._ext = None
     
     #-----< PerRAAttemptInfoList-r16 >-----#
     PerRAAttemptInfoList_r16 = SEQ_OF(name=u'PerRAAttemptInfoList-r16', mode=MODE_TYPE)
@@ -15574,7 +11265,7 @@ class NR_RRC_Definitions:
     
     #-----< CellAccessRelatedInfo >-----#
     CellAccessRelatedInfo = SEQ(name=u'CellAccessRelatedInfo', mode=MODE_TYPE)
-    _CellAccessRelatedInfo_plmn_IdentityList = SEQ_OF(name=u'plmn-IdentityList', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'PLMN-IdentityInfoList')))
+    _CellAccessRelatedInfo_plmn_IdentityInfoList = SEQ_OF(name=u'plmn-IdentityInfoList', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'PLMN-IdentityInfoList')))
     _CellAccessRelatedInfo_cellReservedForOtherUse = ENUM(name=u'cellReservedForOtherUse', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     _CellAccessRelatedInfo_cellReservedForOtherUse._cont = ASN1Dict([(u'true', 0)])
     _CellAccessRelatedInfo_cellReservedForOtherUse._ext = None
@@ -15583,7 +11274,7 @@ class NR_RRC_Definitions:
     _CellAccessRelatedInfo_cellReservedForFutureUse_r16._ext = None
     _CellAccessRelatedInfo_npn_IdentityInfoList_r16 = SEQ_OF(name=u'npn-IdentityInfoList-r16', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'NPN-IdentityInfoList-r16')), opt=True, group=0)
     CellAccessRelatedInfo._cont = ASN1Dict([
-        (u'plmn-IdentityList', _CellAccessRelatedInfo_plmn_IdentityList),
+        (u'plmn-IdentityInfoList', _CellAccessRelatedInfo_plmn_IdentityInfoList),
         (u'cellReservedForOtherUse', _CellAccessRelatedInfo_cellReservedForOtherUse),
         (u'cellReservedForFutureUse-r16', _CellAccessRelatedInfo_cellReservedForFutureUse_r16),
         (u'npn-IdentityInfoList-r16', _CellAccessRelatedInfo_npn_IdentityInfoList_r16),
@@ -33236,6 +28927,9 @@ class NR_RRC_Definitions:
     _RF_Parameters_supportedBandCombinationList_UplinkTxSwitch_v1640 = SEQ_OF(name=u'supportedBandCombinationList-UplinkTxSwitch-v1640', mode=MODE_TYPE, tag=(14, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'BandCombinationList-UplinkTxSwitch-v1640')), opt=True, group=5)
     _RF_Parameters_supportedBandCombinationList_v1650 = SEQ_OF(name=u'supportedBandCombinationList-v1650', mode=MODE_TYPE, tag=(15, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'BandCombinationList-v1650')), opt=True, group=6)
     _RF_Parameters_supportedBandCombinationList_UplinkTxSwitch_v1650 = SEQ_OF(name=u'supportedBandCombinationList-UplinkTxSwitch-v1650', mode=MODE_TYPE, tag=(16, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'BandCombinationList-UplinkTxSwitch-v1650')), opt=True, group=6)
+    _RF_Parameters_extendedBand_n77_r16 = ENUM(name=u'extendedBand-n77-r16', mode=MODE_TYPE, tag=(17, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True, group=7)
+    _RF_Parameters_extendedBand_n77_r16._cont = ASN1Dict([(u'supported', 0)])
+    _RF_Parameters_extendedBand_n77_r16._ext = None
     RF_Parameters._cont = ASN1Dict([
         (u'supportedBandListNR', _RF_Parameters_supportedBandListNR),
         (u'supportedBandCombinationList', _RF_Parameters_supportedBandCombinationList),
@@ -33254,8 +28948,9 @@ class NR_RRC_Definitions:
         (u'supportedBandCombinationList-UplinkTxSwitch-v1640', _RF_Parameters_supportedBandCombinationList_UplinkTxSwitch_v1640),
         (u'supportedBandCombinationList-v1650', _RF_Parameters_supportedBandCombinationList_v1650),
         (u'supportedBandCombinationList-UplinkTxSwitch-v1650', _RF_Parameters_supportedBandCombinationList_UplinkTxSwitch_v1650),
+        (u'extendedBand-n77-r16', _RF_Parameters_extendedBand_n77_r16),
         ])
-    RF_Parameters._ext = [u'supportedBandCombinationList-v1540', u'srs-SwitchingTimeRequested', u'supportedBandCombinationList-v1550', u'supportedBandCombinationList-v1560', u'supportedBandCombinationList-v1610', u'supportedBandCombinationListSidelinkEUTRA-NR-r16', u'supportedBandCombinationList-UplinkTxSwitch-r16', u'supportedBandCombinationList-v1630', u'supportedBandCombinationListSidelinkEUTRA-NR-v1630', u'supportedBandCombinationList-UplinkTxSwitch-v1630', u'supportedBandCombinationList-v1640', u'supportedBandCombinationList-UplinkTxSwitch-v1640', u'supportedBandCombinationList-v1650', u'supportedBandCombinationList-UplinkTxSwitch-v1650']
+    RF_Parameters._ext = [u'supportedBandCombinationList-v1540', u'srs-SwitchingTimeRequested', u'supportedBandCombinationList-v1550', u'supportedBandCombinationList-v1560', u'supportedBandCombinationList-v1610', u'supportedBandCombinationListSidelinkEUTRA-NR-r16', u'supportedBandCombinationList-UplinkTxSwitch-r16', u'supportedBandCombinationList-v1630', u'supportedBandCombinationListSidelinkEUTRA-NR-v1630', u'supportedBandCombinationList-UplinkTxSwitch-v1630', u'supportedBandCombinationList-v1640', u'supportedBandCombinationList-UplinkTxSwitch-v1640', u'supportedBandCombinationList-v1650', u'supportedBandCombinationList-UplinkTxSwitch-v1650', u'extendedBand-n77-r16']
     
     #-----< BandNR >-----#
     BandNR = SEQ(name=u'BandNR', mode=MODE_TYPE)
@@ -33604,6 +29299,12 @@ class NR_RRC_Definitions:
     _BandNR_configuredUL_GrantType2_v1650._cont = ASN1Dict([(u'supported', 0)])
     _BandNR_configuredUL_GrantType2_v1650._ext = None
     _BandNR_sharedSpectrumChAccessParamsPerBand_v1650 = SEQ(name=u'sharedSpectrumChAccessParamsPerBand-v1650', mode=MODE_TYPE, tag=(58, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'SharedSpectrumChAccessParamsPerBand-v1650')), opt=True, group=8)
+    _BandNR_enhancedSkipUplinkTxConfigured_v1660 = ENUM(name=u'enhancedSkipUplinkTxConfigured-v1660', mode=MODE_TYPE, tag=(59, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True, group=9)
+    _BandNR_enhancedSkipUplinkTxConfigured_v1660._cont = ASN1Dict([(u'supported', 0)])
+    _BandNR_enhancedSkipUplinkTxConfigured_v1660._ext = None
+    _BandNR_enhancedSkipUplinkTxDynamic_v1660 = ENUM(name=u'enhancedSkipUplinkTxDynamic-v1660', mode=MODE_TYPE, tag=(60, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True, group=9)
+    _BandNR_enhancedSkipUplinkTxDynamic_v1660._cont = ASN1Dict([(u'supported', 0)])
+    _BandNR_enhancedSkipUplinkTxDynamic_v1660._ext = None
     BandNR._cont = ASN1Dict([
         (u'bandNR', _BandNR_bandNR),
         (u'modifiedMPR-Behaviour', _BandNR_modifiedMPR_Behaviour),
@@ -33664,8 +29365,10 @@ class NR_RRC_Definitions:
         (u'configuredUL-GrantType1-v1650', _BandNR_configuredUL_GrantType1_v1650),
         (u'configuredUL-GrantType2-v1650', _BandNR_configuredUL_GrantType2_v1650),
         (u'sharedSpectrumChAccessParamsPerBand-v1650', _BandNR_sharedSpectrumChAccessParamsPerBand_v1650),
+        (u'enhancedSkipUplinkTxConfigured-v1660', _BandNR_enhancedSkipUplinkTxConfigured_v1660),
+        (u'enhancedSkipUplinkTxDynamic-v1660', _BandNR_enhancedSkipUplinkTxDynamic_v1660),
         ])
-    BandNR._ext = [u'maxUplinkDutyCycle-PC2-FR1', u'pucch-SpatialRelInfoMAC-CE', u'powerBoosting-pi2BPSK', u'maxUplinkDutyCycle-FR2', u'channelBWs-DL-v1590', u'channelBWs-UL-v1590', u'asymmetricBandwidthCombinationSet', u'sharedSpectrumChAccessParamsPerBand-r16', u'cancelOverlappingPUSCH-r16', u'multipleRateMatchingEUTRA-CRS-r16', u'overlapRateMatchingEUTRA-CRS-r16', u'pdsch-MappingTypeB-Alt-r16', u'oneSlotPeriodicTRS-r16', u'olpc-SRS-Pos-r16', u'spatialRelationsSRS-Pos-r16', u'simulSRS-MIMO-TransWithinBand-r16', u'channelBW-DL-IAB-r16', u'channelBW-UL-IAB-r16', u'rasterShift7dot5-IAB-r16', u'ue-PowerClass-v1610', u'condHandover-r16', u'condHandoverFailure-r16', u'condHandoverTwoTriggerEvents-r16', u'condPSCellChange-r16', u'condPSCellChangeTwoTriggerEvents-r16', u'mpr-PowerBoost-FR2-r16', u'activeConfiguredGrant-r16', u'jointReleaseConfiguredGrantType2-r16', u'sps-r16', u'jointReleaseSPS-r16', u'simulSRS-TransWithinBand-r16', u'trs-AdditionalBandwidth-r16', u'handoverIntraF-IAB-r16', u'simulTX-SRS-AntSwitchingIntraBandUL-CA-r16', u'sharedSpectrumChAccessParamsPerBand-v1630', u'handoverUTRA-FDD-r16', u'enhancedUL-TransientPeriod-r16', u'sharedSpectrumChAccessParamsPerBand-v1640', u'type1-PUSCH-RepetitionMultiSlots-v1650', u'type2-PUSCH-RepetitionMultiSlots-v1650', u'pusch-RepetitionMultiSlots-v1650', u'configuredUL-GrantType1-v1650', u'configuredUL-GrantType2-v1650', u'sharedSpectrumChAccessParamsPerBand-v1650']
+    BandNR._ext = [u'maxUplinkDutyCycle-PC2-FR1', u'pucch-SpatialRelInfoMAC-CE', u'powerBoosting-pi2BPSK', u'maxUplinkDutyCycle-FR2', u'channelBWs-DL-v1590', u'channelBWs-UL-v1590', u'asymmetricBandwidthCombinationSet', u'sharedSpectrumChAccessParamsPerBand-r16', u'cancelOverlappingPUSCH-r16', u'multipleRateMatchingEUTRA-CRS-r16', u'overlapRateMatchingEUTRA-CRS-r16', u'pdsch-MappingTypeB-Alt-r16', u'oneSlotPeriodicTRS-r16', u'olpc-SRS-Pos-r16', u'spatialRelationsSRS-Pos-r16', u'simulSRS-MIMO-TransWithinBand-r16', u'channelBW-DL-IAB-r16', u'channelBW-UL-IAB-r16', u'rasterShift7dot5-IAB-r16', u'ue-PowerClass-v1610', u'condHandover-r16', u'condHandoverFailure-r16', u'condHandoverTwoTriggerEvents-r16', u'condPSCellChange-r16', u'condPSCellChangeTwoTriggerEvents-r16', u'mpr-PowerBoost-FR2-r16', u'activeConfiguredGrant-r16', u'jointReleaseConfiguredGrantType2-r16', u'sps-r16', u'jointReleaseSPS-r16', u'simulSRS-TransWithinBand-r16', u'trs-AdditionalBandwidth-r16', u'handoverIntraF-IAB-r16', u'simulTX-SRS-AntSwitchingIntraBandUL-CA-r16', u'sharedSpectrumChAccessParamsPerBand-v1630', u'handoverUTRA-FDD-r16', u'enhancedUL-TransientPeriod-r16', u'sharedSpectrumChAccessParamsPerBand-v1640', u'type1-PUSCH-RepetitionMultiSlots-v1650', u'type2-PUSCH-RepetitionMultiSlots-v1650', u'pusch-RepetitionMultiSlots-v1650', u'configuredUL-GrantType1-v1650', u'configuredUL-GrantType2-v1650', u'sharedSpectrumChAccessParamsPerBand-v1650', u'enhancedSkipUplinkTxConfigured-v1660', u'enhancedSkipUplinkTxDynamic-v1660']
     
     #-----< RF-ParametersMRDC >-----#
     RF_ParametersMRDC = SEQ(name=u'RF-ParametersMRDC', mode=MODE_TYPE)
@@ -37210,9 +32913,9 @@ class NR_RRC_Definitions:
     maxAI_DCI_PayloadSize_r16 = INT(name=u'maxAI-DCI-PayloadSize-r16', mode=MODE_VALUE)
     maxAI_DCI_PayloadSize_r16._val = 128
     
-    #-----< maxAI-DCI-PayloadSize-r16-1 >-----#
-    maxAI_DCI_PayloadSize_r16_1 = INT(name=u'maxAI-DCI-PayloadSize-r16-1', mode=MODE_VALUE)
-    maxAI_DCI_PayloadSize_r16_1._val = 127
+    #-----< maxAI-DCI-PayloadSize-1-r16 >-----#
+    maxAI_DCI_PayloadSize_1_r16 = INT(name=u'maxAI-DCI-PayloadSize-1-r16', mode=MODE_VALUE)
+    maxAI_DCI_PayloadSize_1_r16._val = 127
     
     #-----< maxBandComb >-----#
     maxBandComb = INT(name=u'maxBandComb', mode=MODE_VALUE)
@@ -37350,9 +33053,9 @@ class NR_RRC_Definitions:
     maxNrofAvailabilityCombinationsPerSet_r16 = INT(name=u'maxNrofAvailabilityCombinationsPerSet-r16', mode=MODE_VALUE)
     maxNrofAvailabilityCombinationsPerSet_r16._val = 512
     
-    #-----< maxNrofAvailabilityCombinationsPerSet-r16-1 >-----#
-    maxNrofAvailabilityCombinationsPerSet_r16_1 = INT(name=u'maxNrofAvailabilityCombinationsPerSet-r16-1', mode=MODE_VALUE)
-    maxNrofAvailabilityCombinationsPerSet_r16_1._val = 511
+    #-----< maxNrofAvailabilityCombinationsPerSet-1-r16 >-----#
+    maxNrofAvailabilityCombinationsPerSet_1_r16 = INT(name=u'maxNrofAvailabilityCombinationsPerSet-1-r16', mode=MODE_VALUE)
+    maxNrofAvailabilityCombinationsPerSet_1_r16._val = 511
     
     #-----< maxNrofSCells >-----#
     maxNrofSCells = INT(name=u'maxNrofSCells', mode=MODE_VALUE)
@@ -37366,9 +33069,9 @@ class NR_RRC_Definitions:
     maxNrofCG_SL_r16 = INT(name=u'maxNrofCG-SL-r16', mode=MODE_VALUE)
     maxNrofCG_SL_r16._val = 8
     
-    #-----< maxNrofCG-SL-r16-1 >-----#
-    maxNrofCG_SL_r16_1 = INT(name=u'maxNrofCG-SL-r16-1', mode=MODE_VALUE)
-    maxNrofCG_SL_r16_1._val = 7
+    #-----< maxNrofCG-SL-1-r16 >-----#
+    maxNrofCG_SL_1_r16 = INT(name=u'maxNrofCG-SL-1-r16', mode=MODE_VALUE)
+    maxNrofCG_SL_1_r16._val = 7
     
     #-----< maxNrofSS-BlocksToAverage >-----#
     maxNrofSS_BlocksToAverage = INT(name=u'maxNrofSS-BlocksToAverage', mode=MODE_VALUE)
@@ -38214,9 +33917,9 @@ class NR_RRC_Definitions:
     maxCI_DCI_PayloadSize_r16 = INT(name=u'maxCI-DCI-PayloadSize-r16', mode=MODE_VALUE)
     maxCI_DCI_PayloadSize_r16._val = 126
     
-    #-----< maxCI-DCI-PayloadSize-r16-1 >-----#
-    maxCI_DCI_PayloadSize_r16_1 = INT(name=u'maxCI-DCI-PayloadSize-r16-1', mode=MODE_VALUE)
-    maxCI_DCI_PayloadSize_r16_1._val = 125
+    #-----< maxCI-DCI-PayloadSize-1-r16 >-----#
+    maxCI_DCI_PayloadSize_1_r16 = INT(name=u'maxCI-DCI-PayloadSize-1-r16', mode=MODE_VALUE)
+    maxCI_DCI_PayloadSize_1_r16._val = 125
     
     #-----< maxWLAN-Id-Report-r16 >-----#
     maxWLAN_Id_Report_r16 = INT(name=u'maxWLAN-Id-Report-r16', mode=MODE_VALUE)
@@ -38246,9 +33949,9 @@ class NR_RRC_Definitions:
     maxNrofCLI_RSSI_Resources_r16 = INT(name=u'maxNrofCLI-RSSI-Resources-r16', mode=MODE_VALUE)
     maxNrofCLI_RSSI_Resources_r16._val = 64
     
-    #-----< maxNrofCLI-RSSI-Resources-r16-1 >-----#
-    maxNrofCLI_RSSI_Resources_r16_1 = INT(name=u'maxNrofCLI-RSSI-Resources-r16-1', mode=MODE_VALUE)
-    maxNrofCLI_RSSI_Resources_r16_1._val = 63
+    #-----< maxNrofCLI-RSSI-Resources-1-r16 >-----#
+    maxNrofCLI_RSSI_Resources_1_r16 = INT(name=u'maxNrofCLI-RSSI-Resources-1-r16', mode=MODE_VALUE)
+    maxNrofCLI_RSSI_Resources_1_r16._val = 63
     
     #-----< maxNrofCLI-SRS-Resources-r16 >-----#
     maxNrofCLI_SRS_Resources_r16 = INT(name=u'maxNrofCLI-SRS-Resources-r16', mode=MODE_VALUE)
@@ -38262,29 +33965,25 @@ class NR_RRC_Definitions:
     maxNrofConfiguredGrantConfig_r16 = INT(name=u'maxNrofConfiguredGrantConfig-r16', mode=MODE_VALUE)
     maxNrofConfiguredGrantConfig_r16._val = 12
     
-    #-----< maxNrofConfiguredGrantConfig-r16-1 >-----#
-    maxNrofConfiguredGrantConfig_r16_1 = INT(name=u'maxNrofConfiguredGrantConfig-r16-1', mode=MODE_VALUE)
-    maxNrofConfiguredGrantConfig_r16_1._val = 11
+    #-----< maxNrofConfiguredGrantConfig-1-r16 >-----#
+    maxNrofConfiguredGrantConfig_1_r16 = INT(name=u'maxNrofConfiguredGrantConfig-1-r16', mode=MODE_VALUE)
+    maxNrofConfiguredGrantConfig_1_r16._val = 11
     
     #-----< maxNrofCG-Type2DeactivationState >-----#
     maxNrofCG_Type2DeactivationState = INT(name=u'maxNrofCG-Type2DeactivationState', mode=MODE_VALUE)
     maxNrofCG_Type2DeactivationState._val = 16
     
-    #-----< maxNrofConfiguredGrantConfigMAC-r16 >-----#
-    maxNrofConfiguredGrantConfigMAC_r16 = INT(name=u'maxNrofConfiguredGrantConfigMAC-r16', mode=MODE_VALUE)
-    maxNrofConfiguredGrantConfigMAC_r16._val = 32
-    
-    #-----< maxNrofConfiguredGrantConfigMAC-r16-1 >-----#
-    maxNrofConfiguredGrantConfigMAC_r16_1 = INT(name=u'maxNrofConfiguredGrantConfigMAC-r16-1', mode=MODE_VALUE)
-    maxNrofConfiguredGrantConfigMAC_r16_1._val = 31
+    #-----< maxNrofConfiguredGrantConfigMAC-1-r16 >-----#
+    maxNrofConfiguredGrantConfigMAC_1_r16 = INT(name=u'maxNrofConfiguredGrantConfigMAC-1-r16', mode=MODE_VALUE)
+    maxNrofConfiguredGrantConfigMAC_1_r16._val = 31
     
     #-----< maxNrofSPS-Config-r16 >-----#
     maxNrofSPS_Config_r16 = INT(name=u'maxNrofSPS-Config-r16', mode=MODE_VALUE)
     maxNrofSPS_Config_r16._val = 8
     
-    #-----< maxNrofSPS-Config-r16-1 >-----#
-    maxNrofSPS_Config_r16_1 = INT(name=u'maxNrofSPS-Config-r16-1', mode=MODE_VALUE)
-    maxNrofSPS_Config_r16_1._val = 7
+    #-----< maxNrofSPS-Config-1-r16 >-----#
+    maxNrofSPS_Config_1_r16 = INT(name=u'maxNrofSPS-Config-1-r16', mode=MODE_VALUE)
+    maxNrofSPS_Config_1_r16._val = 7
     
     #-----< maxNrofSPS-DeactivationState >-----#
     maxNrofSPS_DeactivationState = INT(name=u'maxNrofSPS-DeactivationState', mode=MODE_VALUE)
@@ -39419,9 +35118,12 @@ class NR_RRC_Definitions:
         _RA_InformationCommon_r16_msg1_FDM_r16,
         _RA_InformationCommon_r16_msg1_FDMCFRA_r16,
         _RA_InformationCommon_r16_perRAInfoList_r16,
+        _RA_InformationCommon_r16_perRAInfoListExt_v1660,
         RA_InformationCommon_r16,
         _PerRAInfoList_r16__item_,
         PerRAInfoList_r16,
+        _PerRAInfoListExt_v1660__item_,
+        PerRAInfoListExt_v1660,
         _PerRAInfo_r16_perRASSBInfoList_r16,
         _PerRAInfo_r16_perRACSI_RSInfoList_r16,
         PerRAInfo_r16,
@@ -39432,6 +35134,8 @@ class NR_RRC_Definitions:
         _PerRACSI_RSInfo_r16_csi_RS_Index_r16,
         _PerRACSI_RSInfo_r16_numberOfPreamblesSentOnCSI_RS_r16,
         PerRACSI_RSInfo_r16,
+        _PerRACSI_RSInfoExt_v1660_csi_RS_Index_v1660,
+        PerRACSI_RSInfoExt_v1660,
         _PerRAAttemptInfoList_r16__item_,
         PerRAAttemptInfoList_r16,
         _PerRAAttemptInfo_r16_contentionDetected_r16,
@@ -40069,7 +35773,7 @@ class NR_RRC_Definitions:
         ConfiguredGrantConfigType2DeactivationState_r16,
         _ConfiguredGrantConfigType2DeactivationStateList_r16__item_,
         ConfiguredGrantConfigType2DeactivationStateList_r16,
-        _CellAccessRelatedInfo_plmn_IdentityList,
+        _CellAccessRelatedInfo_plmn_IdentityInfoList,
         _CellAccessRelatedInfo_cellReservedForOtherUse,
         _CellAccessRelatedInfo_cellReservedForFutureUse_r16,
         _CellAccessRelatedInfo_npn_IdentityInfoList_r16,
@@ -45192,6 +40896,7 @@ class NR_RRC_Definitions:
         _RF_Parameters_supportedBandCombinationList_UplinkTxSwitch_v1640,
         _RF_Parameters_supportedBandCombinationList_v1650,
         _RF_Parameters_supportedBandCombinationList_UplinkTxSwitch_v1650,
+        _RF_Parameters_extendedBand_n77_r16,
         RF_Parameters,
         _BandNR_bandNR,
         _BandNR_modifiedMPR_Behaviour,
@@ -45300,6 +41005,8 @@ class NR_RRC_Definitions:
         _BandNR_configuredUL_GrantType1_v1650,
         _BandNR_configuredUL_GrantType2_v1650,
         _BandNR_sharedSpectrumChAccessParamsPerBand_v1650,
+        _BandNR_enhancedSkipUplinkTxConfigured_v1660,
+        _BandNR_enhancedSkipUplinkTxDynamic_v1660,
         BandNR,
         _RF_ParametersMRDC_supportedBandCombinationList,
         _RF_ParametersMRDC_appliedFreqBandListFilter,
@@ -46320,7 +42027,7 @@ class NR_RRC_Definitions:
         SL_ZoneConfig_r16,
         SLRB_Uu_ConfigIndex_r16,
         maxAI_DCI_PayloadSize_r16,
-        maxAI_DCI_PayloadSize_r16_1,
+        maxAI_DCI_PayloadSize_1_r16,
         maxBandComb,
         maxBandsUTRA_FDD_r16,
         maxBH_RLC_ChannelID_r16,
@@ -46355,11 +42062,11 @@ class NR_RRC_Definitions:
         maxNrofAggregatedCellsPerCellGroupMinus4_r16,
         maxNrofDUCells_r16,
         maxNrofAvailabilityCombinationsPerSet_r16,
-        maxNrofAvailabilityCombinationsPerSet_r16_1,
+        maxNrofAvailabilityCombinationsPerSet_1_r16,
         maxNrofSCells,
         maxNrofCellMeas,
         maxNrofCG_SL_r16,
-        maxNrofCG_SL_r16_1,
+        maxNrofCG_SL_1_r16,
         maxNrofSS_BlocksToAverage,
         maxNrofCondCells_r16,
         maxNrofCSI_RS_ResourcesToAverage,
@@ -46571,7 +42278,7 @@ class NR_RRC_Definitions:
         maxOnDemandSIB_r16,
         maxOnDemandPosSIB_r16,
         maxCI_DCI_PayloadSize_r16,
-        maxCI_DCI_PayloadSize_r16_1,
+        maxCI_DCI_PayloadSize_1_r16,
         maxWLAN_Id_Report_r16,
         maxWLAN_Name_r16,
         maxRAReport_r16,
@@ -46579,21 +42286,610 @@ class NR_RRC_Definitions:
         maxTxConfig_1_r16,
         maxPSSCH_TxConfig_r16,
         maxNrofCLI_RSSI_Resources_r16,
-        maxNrofCLI_RSSI_Resources_r16_1,
+        maxNrofCLI_RSSI_Resources_1_r16,
         maxNrofCLI_SRS_Resources_r16,
         maxCLI_Report_r16,
         maxNrofConfiguredGrantConfig_r16,
-        maxNrofConfiguredGrantConfig_r16_1,
+        maxNrofConfiguredGrantConfig_1_r16,
         maxNrofCG_Type2DeactivationState,
-        maxNrofConfiguredGrantConfigMAC_r16,
-        maxNrofConfiguredGrantConfigMAC_r16_1,
+        maxNrofConfiguredGrantConfigMAC_1_r16,
         maxNrofSPS_Config_r16,
-        maxNrofSPS_Config_r16_1,
+        maxNrofSPS_Config_1_r16,
         maxNrofSPS_DeactivationState,
         maxNrofDormancyGroups,
         maxNrofPUCCH_ResourceGroups_1_r16,
         maxNrofServingCellsTCI_r16,
         maxNrofTxDC_TwoCarrier_r16,
+    ]
+
+class NR_Sidelink_Preconf:
+
+    _name_  = u'NR-Sidelink-Preconf'
+    _oid_   = []
+    
+    _obj_ = [
+        u'SL-PreconfigurationNR-r16',
+        u'SidelinkPreconfigNR-r16',
+        u'SL-PreconfigGeneral-r16',
+        u'SL-RoHC-Profiles-r16',
+        ]
+    _type_ = [
+        u'SL-PreconfigurationNR-r16',
+        u'SidelinkPreconfigNR-r16',
+        u'SL-PreconfigGeneral-r16',
+        u'SL-RoHC-Profiles-r16',
+        ]
+    _set_ = [
+        ]
+    _val_ = [
+        ]
+    _class_ = [
+        ]
+    _param_ = [
+        ]
+    
+    #-----< SL-PreconfigurationNR-r16 >-----#
+    SL_PreconfigurationNR_r16 = SEQ(name=u'SL-PreconfigurationNR-r16', mode=MODE_TYPE)
+    _SL_PreconfigurationNR_r16_sidelinkPreconfigNR_r16 = SEQ(name=u'sidelinkPreconfigNR-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-Sidelink-Preconf', 'SidelinkPreconfigNR-r16')))
+    SL_PreconfigurationNR_r16._cont = ASN1Dict([
+        (u'sidelinkPreconfigNR-r16', _SL_PreconfigurationNR_r16_sidelinkPreconfigNR_r16),
+        ])
+    SL_PreconfigurationNR_r16._ext = []
+    
+    #-----< SidelinkPreconfigNR-r16 >-----#
+    SidelinkPreconfigNR_r16 = SEQ(name=u'SidelinkPreconfigNR-r16', mode=MODE_TYPE)
+    _SidelinkPreconfigNR_r16_sl_PreconfigFreqInfoList_r16 = SEQ_OF(name=u'sl-PreconfigFreqInfoList-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    __SidelinkPreconfigNR_r16_sl_PreconfigFreqInfoList_r16__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('NR-RRC-Definitions', 'SL-FreqConfigCommon-r16')))
+    _SidelinkPreconfigNR_r16_sl_PreconfigFreqInfoList_r16._cont = __SidelinkPreconfigNR_r16_sl_PreconfigFreqInfoList_r16__item_
+    _SidelinkPreconfigNR_r16_sl_PreconfigFreqInfoList_r16._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=8)], ev=None, er=[])
+    _SidelinkPreconfigNR_r16_sl_PreconfigNR_AnchorCarrierFreqList_r16 = SEQ_OF(name=u'sl-PreconfigNR-AnchorCarrierFreqList-r16', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'SL-NR-AnchorCarrierFreqList-r16')), opt=True)
+    _SidelinkPreconfigNR_r16_sl_PreconfigEUTRA_AnchorCarrierFreqList_r16 = SEQ_OF(name=u'sl-PreconfigEUTRA-AnchorCarrierFreqList-r16', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'SL-EUTRA-AnchorCarrierFreqList-r16')), opt=True)
+    _SidelinkPreconfigNR_r16_sl_RadioBearerPreConfigList_r16 = SEQ_OF(name=u'sl-RadioBearerPreConfigList-r16', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    __SidelinkPreconfigNR_r16_sl_RadioBearerPreConfigList_r16__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('NR-RRC-Definitions', 'SL-RadioBearerConfig-r16')))
+    _SidelinkPreconfigNR_r16_sl_RadioBearerPreConfigList_r16._cont = __SidelinkPreconfigNR_r16_sl_RadioBearerPreConfigList_r16__item_
+    _SidelinkPreconfigNR_r16_sl_RadioBearerPreConfigList_r16._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=512)], ev=None, er=[])
+    _SidelinkPreconfigNR_r16_sl_RLC_BearerPreConfigList_r16 = SEQ_OF(name=u'sl-RLC-BearerPreConfigList-r16', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    __SidelinkPreconfigNR_r16_sl_RLC_BearerPreConfigList_r16__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('NR-RRC-Definitions', 'SL-RLC-BearerConfig-r16')))
+    _SidelinkPreconfigNR_r16_sl_RLC_BearerPreConfigList_r16._cont = __SidelinkPreconfigNR_r16_sl_RLC_BearerPreConfigList_r16__item_
+    _SidelinkPreconfigNR_r16_sl_RLC_BearerPreConfigList_r16._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=512)], ev=None, er=[])
+    _SidelinkPreconfigNR_r16_sl_MeasPreConfig_r16 = SEQ(name=u'sl-MeasPreConfig-r16', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'SL-MeasConfigCommon-r16')), opt=True)
+    _SidelinkPreconfigNR_r16_sl_OffsetDFN_r16 = INT(name=u'sl-OffsetDFN-r16', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _SidelinkPreconfigNR_r16_sl_OffsetDFN_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=1000)], ev=None, er=[])
+    _SidelinkPreconfigNR_r16_t400_r16 = ENUM(name=u't400-r16', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _SidelinkPreconfigNR_r16_t400_r16._cont = ASN1Dict([(u'ms100', 0), (u'ms200', 1), (u'ms300', 2), (u'ms400', 3), (u'ms600', 4), (u'ms1000', 5), (u'ms1500', 6), (u'ms2000', 7)])
+    _SidelinkPreconfigNR_r16_t400_r16._ext = None
+    _SidelinkPreconfigNR_r16_sl_MaxNumConsecutiveDTX_r16 = ENUM(name=u'sl-MaxNumConsecutiveDTX-r16', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _SidelinkPreconfigNR_r16_sl_MaxNumConsecutiveDTX_r16._cont = ASN1Dict([(u'n1', 0), (u'n2', 1), (u'n3', 2), (u'n4', 3), (u'n6', 4), (u'n8', 5), (u'n16', 6), (u'n32', 7)])
+    _SidelinkPreconfigNR_r16_sl_MaxNumConsecutiveDTX_r16._ext = None
+    _SidelinkPreconfigNR_r16_sl_SSB_PriorityNR_r16 = INT(name=u'sl-SSB-PriorityNR-r16', mode=MODE_TYPE, tag=(9, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _SidelinkPreconfigNR_r16_sl_SSB_PriorityNR_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=8)], ev=None, er=[])
+    _SidelinkPreconfigNR_r16_sl_PreconfigGeneral_r16 = SEQ(name=u'sl-PreconfigGeneral-r16', mode=MODE_TYPE, tag=(10, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-Sidelink-Preconf', 'SL-PreconfigGeneral-r16')), opt=True)
+    _SidelinkPreconfigNR_r16_sl_UE_SelectedPreConfig_r16 = SEQ(name=u'sl-UE-SelectedPreConfig-r16', mode=MODE_TYPE, tag=(11, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'SL-UE-SelectedConfig-r16')), opt=True)
+    _SidelinkPreconfigNR_r16_sl_CSI_Acquisition_r16 = ENUM(name=u'sl-CSI-Acquisition-r16', mode=MODE_TYPE, tag=(12, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _SidelinkPreconfigNR_r16_sl_CSI_Acquisition_r16._cont = ASN1Dict([(u'enabled', 0)])
+    _SidelinkPreconfigNR_r16_sl_CSI_Acquisition_r16._ext = None
+    _SidelinkPreconfigNR_r16_sl_RoHC_Profiles_r16 = SEQ(name=u'sl-RoHC-Profiles-r16', mode=MODE_TYPE, tag=(13, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-Sidelink-Preconf', 'SL-RoHC-Profiles-r16')), opt=True)
+    _SidelinkPreconfigNR_r16_sl_MaxCID_r16 = INT(name=u'sl-MaxCID-r16', mode=MODE_TYPE, tag=(14, TAG_CONTEXT_SPEC, TAG_IMPLICIT), default=15)
+    _SidelinkPreconfigNR_r16_sl_MaxCID_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=16383)], ev=None, er=[])
+    SidelinkPreconfigNR_r16._cont = ASN1Dict([
+        (u'sl-PreconfigFreqInfoList-r16', _SidelinkPreconfigNR_r16_sl_PreconfigFreqInfoList_r16),
+        (u'sl-PreconfigNR-AnchorCarrierFreqList-r16', _SidelinkPreconfigNR_r16_sl_PreconfigNR_AnchorCarrierFreqList_r16),
+        (u'sl-PreconfigEUTRA-AnchorCarrierFreqList-r16', _SidelinkPreconfigNR_r16_sl_PreconfigEUTRA_AnchorCarrierFreqList_r16),
+        (u'sl-RadioBearerPreConfigList-r16', _SidelinkPreconfigNR_r16_sl_RadioBearerPreConfigList_r16),
+        (u'sl-RLC-BearerPreConfigList-r16', _SidelinkPreconfigNR_r16_sl_RLC_BearerPreConfigList_r16),
+        (u'sl-MeasPreConfig-r16', _SidelinkPreconfigNR_r16_sl_MeasPreConfig_r16),
+        (u'sl-OffsetDFN-r16', _SidelinkPreconfigNR_r16_sl_OffsetDFN_r16),
+        (u't400-r16', _SidelinkPreconfigNR_r16_t400_r16),
+        (u'sl-MaxNumConsecutiveDTX-r16', _SidelinkPreconfigNR_r16_sl_MaxNumConsecutiveDTX_r16),
+        (u'sl-SSB-PriorityNR-r16', _SidelinkPreconfigNR_r16_sl_SSB_PriorityNR_r16),
+        (u'sl-PreconfigGeneral-r16', _SidelinkPreconfigNR_r16_sl_PreconfigGeneral_r16),
+        (u'sl-UE-SelectedPreConfig-r16', _SidelinkPreconfigNR_r16_sl_UE_SelectedPreConfig_r16),
+        (u'sl-CSI-Acquisition-r16', _SidelinkPreconfigNR_r16_sl_CSI_Acquisition_r16),
+        (u'sl-RoHC-Profiles-r16', _SidelinkPreconfigNR_r16_sl_RoHC_Profiles_r16),
+        (u'sl-MaxCID-r16', _SidelinkPreconfigNR_r16_sl_MaxCID_r16),
+        ])
+    SidelinkPreconfigNR_r16._ext = []
+    
+    #-----< SL-PreconfigGeneral-r16 >-----#
+    SL_PreconfigGeneral_r16 = SEQ(name=u'SL-PreconfigGeneral-r16', mode=MODE_TYPE)
+    _SL_PreconfigGeneral_r16_sl_TDD_Configuration_r16 = SEQ(name=u'sl-TDD-Configuration-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'TDD-UL-DL-ConfigCommon')), opt=True)
+    _SL_PreconfigGeneral_r16_reservedBits_r16 = BIT_STR(name=u'reservedBits-r16', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _SL_PreconfigGeneral_r16_reservedBits_r16._const_sz = ASN1Set(rv=[2], rr=[], ev=None, er=[])
+    SL_PreconfigGeneral_r16._cont = ASN1Dict([
+        (u'sl-TDD-Configuration-r16', _SL_PreconfigGeneral_r16_sl_TDD_Configuration_r16),
+        (u'reservedBits-r16', _SL_PreconfigGeneral_r16_reservedBits_r16),
+        ])
+    SL_PreconfigGeneral_r16._ext = []
+    
+    #-----< SL-RoHC-Profiles-r16 >-----#
+    SL_RoHC_Profiles_r16 = SEQ(name=u'SL-RoHC-Profiles-r16', mode=MODE_TYPE)
+    _SL_RoHC_Profiles_r16_profile0x0001_r16 = BOOL(name=u'profile0x0001-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _SL_RoHC_Profiles_r16_profile0x0002_r16 = BOOL(name=u'profile0x0002-r16', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _SL_RoHC_Profiles_r16_profile0x0003_r16 = BOOL(name=u'profile0x0003-r16', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _SL_RoHC_Profiles_r16_profile0x0004_r16 = BOOL(name=u'profile0x0004-r16', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _SL_RoHC_Profiles_r16_profile0x0006_r16 = BOOL(name=u'profile0x0006-r16', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _SL_RoHC_Profiles_r16_profile0x0101_r16 = BOOL(name=u'profile0x0101-r16', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _SL_RoHC_Profiles_r16_profile0x0102_r16 = BOOL(name=u'profile0x0102-r16', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _SL_RoHC_Profiles_r16_profile0x0103_r16 = BOOL(name=u'profile0x0103-r16', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _SL_RoHC_Profiles_r16_profile0x0104_r16 = BOOL(name=u'profile0x0104-r16', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    SL_RoHC_Profiles_r16._cont = ASN1Dict([
+        (u'profile0x0001-r16', _SL_RoHC_Profiles_r16_profile0x0001_r16),
+        (u'profile0x0002-r16', _SL_RoHC_Profiles_r16_profile0x0002_r16),
+        (u'profile0x0003-r16', _SL_RoHC_Profiles_r16_profile0x0003_r16),
+        (u'profile0x0004-r16', _SL_RoHC_Profiles_r16_profile0x0004_r16),
+        (u'profile0x0006-r16', _SL_RoHC_Profiles_r16_profile0x0006_r16),
+        (u'profile0x0101-r16', _SL_RoHC_Profiles_r16_profile0x0101_r16),
+        (u'profile0x0102-r16', _SL_RoHC_Profiles_r16_profile0x0102_r16),
+        (u'profile0x0103-r16', _SL_RoHC_Profiles_r16_profile0x0103_r16),
+        (u'profile0x0104-r16', _SL_RoHC_Profiles_r16_profile0x0104_r16),
+        ])
+    SL_RoHC_Profiles_r16._ext = None
+    
+    _all_ = [
+        _SL_PreconfigurationNR_r16_sidelinkPreconfigNR_r16,
+        SL_PreconfigurationNR_r16,
+        __SidelinkPreconfigNR_r16_sl_PreconfigFreqInfoList_r16__item_,
+        _SidelinkPreconfigNR_r16_sl_PreconfigFreqInfoList_r16,
+        _SidelinkPreconfigNR_r16_sl_PreconfigNR_AnchorCarrierFreqList_r16,
+        _SidelinkPreconfigNR_r16_sl_PreconfigEUTRA_AnchorCarrierFreqList_r16,
+        __SidelinkPreconfigNR_r16_sl_RadioBearerPreConfigList_r16__item_,
+        _SidelinkPreconfigNR_r16_sl_RadioBearerPreConfigList_r16,
+        __SidelinkPreconfigNR_r16_sl_RLC_BearerPreConfigList_r16__item_,
+        _SidelinkPreconfigNR_r16_sl_RLC_BearerPreConfigList_r16,
+        _SidelinkPreconfigNR_r16_sl_MeasPreConfig_r16,
+        _SidelinkPreconfigNR_r16_sl_OffsetDFN_r16,
+        _SidelinkPreconfigNR_r16_t400_r16,
+        _SidelinkPreconfigNR_r16_sl_MaxNumConsecutiveDTX_r16,
+        _SidelinkPreconfigNR_r16_sl_SSB_PriorityNR_r16,
+        _SidelinkPreconfigNR_r16_sl_PreconfigGeneral_r16,
+        _SidelinkPreconfigNR_r16_sl_UE_SelectedPreConfig_r16,
+        _SidelinkPreconfigNR_r16_sl_CSI_Acquisition_r16,
+        _SidelinkPreconfigNR_r16_sl_RoHC_Profiles_r16,
+        _SidelinkPreconfigNR_r16_sl_MaxCID_r16,
+        SidelinkPreconfigNR_r16,
+        _SL_PreconfigGeneral_r16_sl_TDD_Configuration_r16,
+        _SL_PreconfigGeneral_r16_reservedBits_r16,
+        SL_PreconfigGeneral_r16,
+        _SL_RoHC_Profiles_r16_profile0x0001_r16,
+        _SL_RoHC_Profiles_r16_profile0x0002_r16,
+        _SL_RoHC_Profiles_r16_profile0x0003_r16,
+        _SL_RoHC_Profiles_r16_profile0x0004_r16,
+        _SL_RoHC_Profiles_r16_profile0x0006_r16,
+        _SL_RoHC_Profiles_r16_profile0x0101_r16,
+        _SL_RoHC_Profiles_r16_profile0x0102_r16,
+        _SL_RoHC_Profiles_r16_profile0x0103_r16,
+        _SL_RoHC_Profiles_r16_profile0x0104_r16,
+        SL_RoHC_Profiles_r16,
+    ]
+
+class NR_UE_Variables:
+
+    _name_  = u'NR-UE-Variables'
+    _oid_   = []
+    
+    _obj_ = [
+        u'VarConditionalReconfig',
+        u'VarConnEstFailReport-r16',
+        u'VarLogMeasConfig-r16-IEs',
+        u'VarLogMeasReport-r16',
+        u'VarMeasConfig',
+        u'VarMeasConfigSL-r16',
+        u'VarMeasIdleConfig-r16',
+        u'VarMeasIdleReport-r16',
+        u'VarMeasReportList',
+        u'VarMeasReport',
+        u'CellsTriggeredList',
+        u'CLI-TriggeredList-r16',
+        u'SRS-RSRP-TriggeredList-r16',
+        u'CLI-RSSI-TriggeredList-r16',
+        u'VarMeasReportListSL-r16',
+        u'VarMeasReportSL-r16',
+        u'VarMobilityHistoryReport-r16',
+        u'VarPendingRNA-Update',
+        u'VarRA-Report-r16',
+        u'PLMN-IdentityList-r16',
+        u'VarResumeMAC-Input',
+        u'VarRLF-Report-r16',
+        u'VarShortMAC-Input',
+        ]
+    _type_ = [
+        u'VarConditionalReconfig',
+        u'VarConnEstFailReport-r16',
+        u'VarLogMeasConfig-r16-IEs',
+        u'VarLogMeasReport-r16',
+        u'VarMeasConfig',
+        u'VarMeasConfigSL-r16',
+        u'VarMeasIdleConfig-r16',
+        u'VarMeasIdleReport-r16',
+        u'VarMeasReportList',
+        u'VarMeasReport',
+        u'CellsTriggeredList',
+        u'CLI-TriggeredList-r16',
+        u'SRS-RSRP-TriggeredList-r16',
+        u'CLI-RSSI-TriggeredList-r16',
+        u'VarMeasReportListSL-r16',
+        u'VarMeasReportSL-r16',
+        u'VarMobilityHistoryReport-r16',
+        u'VarPendingRNA-Update',
+        u'VarRA-Report-r16',
+        u'PLMN-IdentityList-r16',
+        u'VarResumeMAC-Input',
+        u'VarRLF-Report-r16',
+        u'VarShortMAC-Input',
+        ]
+    _set_ = [
+        ]
+    _val_ = [
+        ]
+    _class_ = [
+        ]
+    _param_ = [
+        ]
+    
+    #-----< VarConditionalReconfig >-----#
+    VarConditionalReconfig = SEQ(name=u'VarConditionalReconfig', mode=MODE_TYPE)
+    _VarConditionalReconfig_condReconfigList = SEQ_OF(name=u'condReconfigList', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'CondReconfigToAddModList-r16')), opt=True)
+    VarConditionalReconfig._cont = ASN1Dict([
+        (u'condReconfigList', _VarConditionalReconfig_condReconfigList),
+        ])
+    VarConditionalReconfig._ext = None
+    
+    #-----< VarConnEstFailReport-r16 >-----#
+    VarConnEstFailReport_r16 = SEQ(name=u'VarConnEstFailReport-r16', mode=MODE_TYPE)
+    _VarConnEstFailReport_r16_connEstFailReport_r16 = SEQ(name=u'connEstFailReport-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'ConnEstFailReport-r16')))
+    _VarConnEstFailReport_r16_plmn_Identity_r16 = SEQ(name=u'plmn-Identity-r16', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'PLMN-Identity')))
+    VarConnEstFailReport_r16._cont = ASN1Dict([
+        (u'connEstFailReport-r16', _VarConnEstFailReport_r16_connEstFailReport_r16),
+        (u'plmn-Identity-r16', _VarConnEstFailReport_r16_plmn_Identity_r16),
+        ])
+    VarConnEstFailReport_r16._ext = None
+    
+    #-----< VarLogMeasConfig-r16-IEs >-----#
+    VarLogMeasConfig_r16_IEs = SEQ(name=u'VarLogMeasConfig-r16-IEs', mode=MODE_TYPE)
+    _VarLogMeasConfig_r16_IEs_areaConfiguration_r16 = SEQ(name=u'areaConfiguration-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'AreaConfiguration-r16')), opt=True)
+    _VarLogMeasConfig_r16_IEs_bt_NameList_r16 = SEQ_OF(name=u'bt-NameList-r16', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'BT-NameList-r16')), opt=True)
+    _VarLogMeasConfig_r16_IEs_wlan_NameList_r16 = SEQ_OF(name=u'wlan-NameList-r16', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'WLAN-NameList-r16')), opt=True)
+    _VarLogMeasConfig_r16_IEs_sensor_NameList_r16 = SEQ(name=u'sensor-NameList-r16', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'Sensor-NameList-r16')), opt=True)
+    _VarLogMeasConfig_r16_IEs_loggingDuration_r16 = ENUM(name=u'loggingDuration-r16', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'LoggingDuration-r16')))
+    _VarLogMeasConfig_r16_IEs_reportType = CHOICE(name=u'reportType', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
+    __VarLogMeasConfig_r16_IEs_reportType_periodical = SEQ(name=u'periodical', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'LoggedPeriodicalReportConfig-r16')))
+    __VarLogMeasConfig_r16_IEs_reportType_eventTriggered = SEQ(name=u'eventTriggered', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'LoggedEventTriggerConfig-r16')))
+    _VarLogMeasConfig_r16_IEs_reportType._cont = ASN1Dict([
+        (u'periodical', __VarLogMeasConfig_r16_IEs_reportType_periodical),
+        (u'eventTriggered', __VarLogMeasConfig_r16_IEs_reportType_eventTriggered),
+        ])
+    _VarLogMeasConfig_r16_IEs_reportType._ext = None
+    VarLogMeasConfig_r16_IEs._cont = ASN1Dict([
+        (u'areaConfiguration-r16', _VarLogMeasConfig_r16_IEs_areaConfiguration_r16),
+        (u'bt-NameList-r16', _VarLogMeasConfig_r16_IEs_bt_NameList_r16),
+        (u'wlan-NameList-r16', _VarLogMeasConfig_r16_IEs_wlan_NameList_r16),
+        (u'sensor-NameList-r16', _VarLogMeasConfig_r16_IEs_sensor_NameList_r16),
+        (u'loggingDuration-r16', _VarLogMeasConfig_r16_IEs_loggingDuration_r16),
+        (u'reportType', _VarLogMeasConfig_r16_IEs_reportType),
+        ])
+    VarLogMeasConfig_r16_IEs._ext = None
+    
+    #-----< VarLogMeasReport-r16 >-----#
+    VarLogMeasReport_r16 = SEQ(name=u'VarLogMeasReport-r16', mode=MODE_TYPE)
+    _VarLogMeasReport_r16_absoluteTimeInfo_r16 = BIT_STR(name=u'absoluteTimeInfo-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'AbsoluteTimeInfo-r16')))
+    _VarLogMeasReport_r16_traceReference_r16 = SEQ(name=u'traceReference-r16', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'TraceReference-r16')))
+    _VarLogMeasReport_r16_traceRecordingSessionRef_r16 = OCT_STR(name=u'traceRecordingSessionRef-r16', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _VarLogMeasReport_r16_traceRecordingSessionRef_r16._const_sz = ASN1Set(rv=[2], rr=[], ev=None, er=[])
+    _VarLogMeasReport_r16_tce_Id_r16 = OCT_STR(name=u'tce-Id-r16', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _VarLogMeasReport_r16_tce_Id_r16._const_sz = ASN1Set(rv=[1], rr=[], ev=None, er=[])
+    _VarLogMeasReport_r16_logMeasInfoList_r16 = SEQ_OF(name=u'logMeasInfoList-r16', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'LogMeasInfoList-r16')))
+    _VarLogMeasReport_r16_plmn_IdentityList_r16 = SEQ_OF(name=u'plmn-IdentityList-r16', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'PLMN-IdentityList2-r16')))
+    VarLogMeasReport_r16._cont = ASN1Dict([
+        (u'absoluteTimeInfo-r16', _VarLogMeasReport_r16_absoluteTimeInfo_r16),
+        (u'traceReference-r16', _VarLogMeasReport_r16_traceReference_r16),
+        (u'traceRecordingSessionRef-r16', _VarLogMeasReport_r16_traceRecordingSessionRef_r16),
+        (u'tce-Id-r16', _VarLogMeasReport_r16_tce_Id_r16),
+        (u'logMeasInfoList-r16', _VarLogMeasReport_r16_logMeasInfoList_r16),
+        (u'plmn-IdentityList-r16', _VarLogMeasReport_r16_plmn_IdentityList_r16),
+        ])
+    VarLogMeasReport_r16._ext = None
+    
+    #-----< VarMeasConfig >-----#
+    VarMeasConfig = SEQ(name=u'VarMeasConfig', mode=MODE_TYPE)
+    _VarMeasConfig_measIdList = SEQ_OF(name=u'measIdList', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'MeasIdToAddModList')), opt=True)
+    _VarMeasConfig_measObjectList = SEQ_OF(name=u'measObjectList', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'MeasObjectToAddModList')), opt=True)
+    _VarMeasConfig_reportConfigList = SEQ_OF(name=u'reportConfigList', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'ReportConfigToAddModList')), opt=True)
+    _VarMeasConfig_quantityConfig = SEQ(name=u'quantityConfig', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'QuantityConfig')), opt=True)
+    _VarMeasConfig_s_MeasureConfig = CHOICE(name=u's-MeasureConfig', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_EXPLICIT), opt=True)
+    __VarMeasConfig_s_MeasureConfig_ssb_RSRP = INT(name=u'ssb-RSRP', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'RSRP-Range')))
+    __VarMeasConfig_s_MeasureConfig_csi_RSRP = INT(name=u'csi-RSRP', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'RSRP-Range')))
+    _VarMeasConfig_s_MeasureConfig._cont = ASN1Dict([
+        (u'ssb-RSRP', __VarMeasConfig_s_MeasureConfig_ssb_RSRP),
+        (u'csi-RSRP', __VarMeasConfig_s_MeasureConfig_csi_RSRP),
+        ])
+    _VarMeasConfig_s_MeasureConfig._ext = None
+    VarMeasConfig._cont = ASN1Dict([
+        (u'measIdList', _VarMeasConfig_measIdList),
+        (u'measObjectList', _VarMeasConfig_measObjectList),
+        (u'reportConfigList', _VarMeasConfig_reportConfigList),
+        (u'quantityConfig', _VarMeasConfig_quantityConfig),
+        (u's-MeasureConfig', _VarMeasConfig_s_MeasureConfig),
+        ])
+    VarMeasConfig._ext = None
+    
+    #-----< VarMeasConfigSL-r16 >-----#
+    VarMeasConfigSL_r16 = SEQ(name=u'VarMeasConfigSL-r16', mode=MODE_TYPE)
+    _VarMeasConfigSL_r16_sl_MeasIdList_r16 = SEQ_OF(name=u'sl-MeasIdList-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'SL-MeasIdList-r16')), opt=True)
+    _VarMeasConfigSL_r16_sl_MeasObjectList_r16 = SEQ_OF(name=u'sl-MeasObjectList-r16', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'SL-MeasObjectList-r16')), opt=True)
+    _VarMeasConfigSL_r16_sl_reportConfigList_r16 = SEQ_OF(name=u'sl-reportConfigList-r16', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'SL-ReportConfigList-r16')), opt=True)
+    _VarMeasConfigSL_r16_sl_QuantityConfig_r16 = SEQ(name=u'sl-QuantityConfig-r16', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'SL-QuantityConfig-r16')), opt=True)
+    VarMeasConfigSL_r16._cont = ASN1Dict([
+        (u'sl-MeasIdList-r16', _VarMeasConfigSL_r16_sl_MeasIdList_r16),
+        (u'sl-MeasObjectList-r16', _VarMeasConfigSL_r16_sl_MeasObjectList_r16),
+        (u'sl-reportConfigList-r16', _VarMeasConfigSL_r16_sl_reportConfigList_r16),
+        (u'sl-QuantityConfig-r16', _VarMeasConfigSL_r16_sl_QuantityConfig_r16),
+        ])
+    VarMeasConfigSL_r16._ext = None
+    
+    #-----< VarMeasIdleConfig-r16 >-----#
+    VarMeasIdleConfig_r16 = SEQ(name=u'VarMeasIdleConfig-r16', mode=MODE_TYPE)
+    _VarMeasIdleConfig_r16_measIdleCarrierListNR_r16 = SEQ_OF(name=u'measIdleCarrierListNR-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    __VarMeasIdleConfig_r16_measIdleCarrierListNR_r16__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('NR-RRC-Definitions', 'MeasIdleCarrierNR-r16')))
+    _VarMeasIdleConfig_r16_measIdleCarrierListNR_r16._cont = __VarMeasIdleConfig_r16_measIdleCarrierListNR_r16__item_
+    _VarMeasIdleConfig_r16_measIdleCarrierListNR_r16._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=8)], ev=None, er=[])
+    _VarMeasIdleConfig_r16_measIdleCarrierListEUTRA_r16 = SEQ_OF(name=u'measIdleCarrierListEUTRA-r16', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    __VarMeasIdleConfig_r16_measIdleCarrierListEUTRA_r16__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('NR-RRC-Definitions', 'MeasIdleCarrierEUTRA-r16')))
+    _VarMeasIdleConfig_r16_measIdleCarrierListEUTRA_r16._cont = __VarMeasIdleConfig_r16_measIdleCarrierListEUTRA_r16__item_
+    _VarMeasIdleConfig_r16_measIdleCarrierListEUTRA_r16._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=8)], ev=None, er=[])
+    _VarMeasIdleConfig_r16_measIdleDuration_r16 = ENUM(name=u'measIdleDuration-r16', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _VarMeasIdleConfig_r16_measIdleDuration_r16._cont = ASN1Dict([(u'sec10', 0), (u'sec30', 1), (u'sec60', 2), (u'sec120', 3), (u'sec180', 4), (u'sec240', 5), (u'sec300', 6), (u'spare', 7)])
+    _VarMeasIdleConfig_r16_measIdleDuration_r16._ext = None
+    _VarMeasIdleConfig_r16_validityAreaList_r16 = SEQ_OF(name=u'validityAreaList-r16', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'ValidityAreaList-r16')), opt=True)
+    VarMeasIdleConfig_r16._cont = ASN1Dict([
+        (u'measIdleCarrierListNR-r16', _VarMeasIdleConfig_r16_measIdleCarrierListNR_r16),
+        (u'measIdleCarrierListEUTRA-r16', _VarMeasIdleConfig_r16_measIdleCarrierListEUTRA_r16),
+        (u'measIdleDuration-r16', _VarMeasIdleConfig_r16_measIdleDuration_r16),
+        (u'validityAreaList-r16', _VarMeasIdleConfig_r16_validityAreaList_r16),
+        ])
+    VarMeasIdleConfig_r16._ext = None
+    
+    #-----< VarMeasIdleReport-r16 >-----#
+    VarMeasIdleReport_r16 = SEQ(name=u'VarMeasIdleReport-r16', mode=MODE_TYPE)
+    _VarMeasIdleReport_r16_measReportIdleNR_r16 = SEQ(name=u'measReportIdleNR-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'MeasResultIdleNR-r16')), opt=True)
+    _VarMeasIdleReport_r16_measReportIdleEUTRA_r16 = SEQ(name=u'measReportIdleEUTRA-r16', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'MeasResultIdleEUTRA-r16')), opt=True)
+    VarMeasIdleReport_r16._cont = ASN1Dict([
+        (u'measReportIdleNR-r16', _VarMeasIdleReport_r16_measReportIdleNR_r16),
+        (u'measReportIdleEUTRA-r16', _VarMeasIdleReport_r16_measReportIdleEUTRA_r16),
+        ])
+    VarMeasIdleReport_r16._ext = None
+    
+    #-----< VarMeasReportList >-----#
+    VarMeasReportList = SEQ_OF(name=u'VarMeasReportList', mode=MODE_TYPE)
+    _VarMeasReportList__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('NR-UE-Variables', 'VarMeasReport')))
+    VarMeasReportList._cont = _VarMeasReportList__item_
+    VarMeasReportList._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=64)], ev=None, er=[])
+    
+    #-----< VarMeasReport >-----#
+    VarMeasReport = SEQ(name=u'VarMeasReport', mode=MODE_TYPE)
+    _VarMeasReport_measId = INT(name=u'measId', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'MeasId')))
+    _VarMeasReport_cellsTriggeredList = SEQ_OF(name=u'cellsTriggeredList', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-UE-Variables', 'CellsTriggeredList')), opt=True)
+    _VarMeasReport_numberOfReportsSent = INT(name=u'numberOfReportsSent', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _VarMeasReport_cli_TriggeredList_r16 = CHOICE(name=u'cli-TriggeredList-r16', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('NR-UE-Variables', 'CLI-TriggeredList-r16')), opt=True)
+    _VarMeasReport_tx_PoolMeasToAddModListNR_r16 = SEQ_OF(name=u'tx-PoolMeasToAddModListNR-r16', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'Tx-PoolMeasList-r16')), opt=True)
+    VarMeasReport._cont = ASN1Dict([
+        (u'measId', _VarMeasReport_measId),
+        (u'cellsTriggeredList', _VarMeasReport_cellsTriggeredList),
+        (u'numberOfReportsSent', _VarMeasReport_numberOfReportsSent),
+        (u'cli-TriggeredList-r16', _VarMeasReport_cli_TriggeredList_r16),
+        (u'tx-PoolMeasToAddModListNR-r16', _VarMeasReport_tx_PoolMeasToAddModListNR_r16),
+        ])
+    VarMeasReport._ext = None
+    
+    #-----< CellsTriggeredList >-----#
+    CellsTriggeredList = SEQ_OF(name=u'CellsTriggeredList', mode=MODE_TYPE)
+    _CellsTriggeredList__item_ = CHOICE(name='_item_', mode=MODE_TYPE)
+    __CellsTriggeredList__item__physCellId = INT(name=u'physCellId', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'PhysCellId')))
+    __CellsTriggeredList__item__physCellIdEUTRA = INT(name=u'physCellIdEUTRA', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'EUTRA-PhysCellId')))
+    __CellsTriggeredList__item__physCellIdUTRA_FDD_r16 = INT(name=u'physCellIdUTRA-FDD-r16', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'PhysCellIdUTRA-FDD-r16')))
+    _CellsTriggeredList__item_._cont = ASN1Dict([
+        (u'physCellId', __CellsTriggeredList__item__physCellId),
+        (u'physCellIdEUTRA', __CellsTriggeredList__item__physCellIdEUTRA),
+        (u'physCellIdUTRA-FDD-r16', __CellsTriggeredList__item__physCellIdUTRA_FDD_r16),
+        ])
+    _CellsTriggeredList__item_._ext = None
+    CellsTriggeredList._cont = _CellsTriggeredList__item_
+    CellsTriggeredList._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=32)], ev=None, er=[])
+    
+    #-----< CLI-TriggeredList-r16 >-----#
+    CLI_TriggeredList_r16 = CHOICE(name=u'CLI-TriggeredList-r16', mode=MODE_TYPE)
+    _CLI_TriggeredList_r16_srs_RSRP_TriggeredList_r16 = SEQ_OF(name=u'srs-RSRP-TriggeredList-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-UE-Variables', 'SRS-RSRP-TriggeredList-r16')))
+    _CLI_TriggeredList_r16_cli_RSSI_TriggeredList_r16 = SEQ_OF(name=u'cli-RSSI-TriggeredList-r16', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-UE-Variables', 'CLI-RSSI-TriggeredList-r16')))
+    CLI_TriggeredList_r16._cont = ASN1Dict([
+        (u'srs-RSRP-TriggeredList-r16', _CLI_TriggeredList_r16_srs_RSRP_TriggeredList_r16),
+        (u'cli-RSSI-TriggeredList-r16', _CLI_TriggeredList_r16_cli_RSSI_TriggeredList_r16),
+        ])
+    CLI_TriggeredList_r16._ext = None
+    
+    #-----< SRS-RSRP-TriggeredList-r16 >-----#
+    SRS_RSRP_TriggeredList_r16 = SEQ_OF(name=u'SRS-RSRP-TriggeredList-r16', mode=MODE_TYPE)
+    _SRS_RSRP_TriggeredList_r16__item_ = INT(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('NR-RRC-Definitions', 'SRS-ResourceId')))
+    SRS_RSRP_TriggeredList_r16._cont = _SRS_RSRP_TriggeredList_r16__item_
+    SRS_RSRP_TriggeredList_r16._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=32)], ev=None, er=[])
+    
+    #-----< CLI-RSSI-TriggeredList-r16 >-----#
+    CLI_RSSI_TriggeredList_r16 = SEQ_OF(name=u'CLI-RSSI-TriggeredList-r16', mode=MODE_TYPE)
+    _CLI_RSSI_TriggeredList_r16__item_ = INT(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('NR-RRC-Definitions', 'RSSI-ResourceId-r16')))
+    CLI_RSSI_TriggeredList_r16._cont = _CLI_RSSI_TriggeredList_r16__item_
+    CLI_RSSI_TriggeredList_r16._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=64)], ev=None, er=[])
+    
+    #-----< VarMeasReportListSL-r16 >-----#
+    VarMeasReportListSL_r16 = SEQ_OF(name=u'VarMeasReportListSL-r16', mode=MODE_TYPE)
+    _VarMeasReportListSL_r16__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('NR-UE-Variables', 'VarMeasReportSL-r16')))
+    VarMeasReportListSL_r16._cont = _VarMeasReportListSL_r16__item_
+    VarMeasReportListSL_r16._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=64)], ev=None, er=[])
+    
+    #-----< VarMeasReportSL-r16 >-----#
+    VarMeasReportSL_r16 = SEQ(name=u'VarMeasReportSL-r16', mode=MODE_TYPE)
+    _VarMeasReportSL_r16_sl_MeasId_r16 = INT(name=u'sl-MeasId-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'SL-MeasId-r16')))
+    _VarMeasReportSL_r16_sl_FrequencyTriggeredList_r16 = SEQ_OF(name=u'sl-FrequencyTriggeredList-r16', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    __VarMeasReportSL_r16_sl_FrequencyTriggeredList_r16__item_ = INT(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('NR-RRC-Definitions', 'ARFCN-ValueNR')))
+    _VarMeasReportSL_r16_sl_FrequencyTriggeredList_r16._cont = __VarMeasReportSL_r16_sl_FrequencyTriggeredList_r16__item_
+    _VarMeasReportSL_r16_sl_FrequencyTriggeredList_r16._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=8)], ev=None, er=[])
+    _VarMeasReportSL_r16_sl_NumberOfReportsSent_r16 = INT(name=u'sl-NumberOfReportsSent-r16', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    VarMeasReportSL_r16._cont = ASN1Dict([
+        (u'sl-MeasId-r16', _VarMeasReportSL_r16_sl_MeasId_r16),
+        (u'sl-FrequencyTriggeredList-r16', _VarMeasReportSL_r16_sl_FrequencyTriggeredList_r16),
+        (u'sl-NumberOfReportsSent-r16', _VarMeasReportSL_r16_sl_NumberOfReportsSent_r16),
+        ])
+    VarMeasReportSL_r16._ext = None
+    
+    #-----< VarMobilityHistoryReport-r16 >-----#
+    VarMobilityHistoryReport_r16 = SEQ_OF(name=u'VarMobilityHistoryReport-r16', mode=MODE_TYPE, typeref=ASN1RefType(('NR-RRC-Definitions', 'VisitedCellInfoList-r16')))
+    
+    #-----< VarPendingRNA-Update >-----#
+    VarPendingRNA_Update = SEQ(name=u'VarPendingRNA-Update', mode=MODE_TYPE)
+    _VarPendingRNA_Update_pendingRNA_Update = BOOL(name=u'pendingRNA-Update', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    VarPendingRNA_Update._cont = ASN1Dict([
+        (u'pendingRNA-Update', _VarPendingRNA_Update_pendingRNA_Update),
+        ])
+    VarPendingRNA_Update._ext = None
+    
+    #-----< VarRA-Report-r16 >-----#
+    VarRA_Report_r16 = SEQ(name=u'VarRA-Report-r16', mode=MODE_TYPE)
+    _VarRA_Report_r16_ra_ReportList_r16 = SEQ_OF(name=u'ra-ReportList-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'RA-ReportList-r16')))
+    _VarRA_Report_r16_plmn_IdentityList_r16 = SEQ_OF(name=u'plmn-IdentityList-r16', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-UE-Variables', 'PLMN-IdentityList-r16')))
+    VarRA_Report_r16._cont = ASN1Dict([
+        (u'ra-ReportList-r16', _VarRA_Report_r16_ra_ReportList_r16),
+        (u'plmn-IdentityList-r16', _VarRA_Report_r16_plmn_IdentityList_r16),
+        ])
+    VarRA_Report_r16._ext = None
+    
+    #-----< PLMN-IdentityList-r16 >-----#
+    PLMN_IdentityList_r16 = SEQ_OF(name=u'PLMN-IdentityList-r16', mode=MODE_TYPE)
+    _PLMN_IdentityList_r16__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('NR-RRC-Definitions', 'PLMN-Identity')))
+    PLMN_IdentityList_r16._cont = _PLMN_IdentityList_r16__item_
+    PLMN_IdentityList_r16._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=12)], ev=None, er=[])
+    
+    #-----< VarResumeMAC-Input >-----#
+    VarResumeMAC_Input = SEQ(name=u'VarResumeMAC-Input', mode=MODE_TYPE)
+    _VarResumeMAC_Input_sourcePhysCellId = INT(name=u'sourcePhysCellId', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'PhysCellId')))
+    _VarResumeMAC_Input_targetCellIdentity = BIT_STR(name=u'targetCellIdentity', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'CellIdentity')))
+    _VarResumeMAC_Input_source_c_RNTI = INT(name=u'source-c-RNTI', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'RNTI-Value')))
+    VarResumeMAC_Input._cont = ASN1Dict([
+        (u'sourcePhysCellId', _VarResumeMAC_Input_sourcePhysCellId),
+        (u'targetCellIdentity', _VarResumeMAC_Input_targetCellIdentity),
+        (u'source-c-RNTI', _VarResumeMAC_Input_source_c_RNTI),
+        ])
+    VarResumeMAC_Input._ext = None
+    
+    #-----< VarRLF-Report-r16 >-----#
+    VarRLF_Report_r16 = SEQ(name=u'VarRLF-Report-r16', mode=MODE_TYPE)
+    _VarRLF_Report_r16_rlf_Report_r16 = CHOICE(name=u'rlf-Report-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'RLF-Report-r16')))
+    _VarRLF_Report_r16_plmn_IdentityList_r16 = SEQ_OF(name=u'plmn-IdentityList-r16', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'PLMN-IdentityList2-r16')))
+    VarRLF_Report_r16._cont = ASN1Dict([
+        (u'rlf-Report-r16', _VarRLF_Report_r16_rlf_Report_r16),
+        (u'plmn-IdentityList-r16', _VarRLF_Report_r16_plmn_IdentityList_r16),
+        ])
+    VarRLF_Report_r16._ext = None
+    
+    #-----< VarShortMAC-Input >-----#
+    VarShortMAC_Input = SEQ(name=u'VarShortMAC-Input', mode=MODE_TYPE)
+    _VarShortMAC_Input_sourcePhysCellId = INT(name=u'sourcePhysCellId', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'PhysCellId')))
+    _VarShortMAC_Input_targetCellIdentity = BIT_STR(name=u'targetCellIdentity', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'CellIdentity')))
+    _VarShortMAC_Input_source_c_RNTI = INT(name=u'source-c-RNTI', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'RNTI-Value')))
+    VarShortMAC_Input._cont = ASN1Dict([
+        (u'sourcePhysCellId', _VarShortMAC_Input_sourcePhysCellId),
+        (u'targetCellIdentity', _VarShortMAC_Input_targetCellIdentity),
+        (u'source-c-RNTI', _VarShortMAC_Input_source_c_RNTI),
+        ])
+    VarShortMAC_Input._ext = None
+    
+    _all_ = [
+        _VarConditionalReconfig_condReconfigList,
+        VarConditionalReconfig,
+        _VarConnEstFailReport_r16_connEstFailReport_r16,
+        _VarConnEstFailReport_r16_plmn_Identity_r16,
+        VarConnEstFailReport_r16,
+        _VarLogMeasConfig_r16_IEs_areaConfiguration_r16,
+        _VarLogMeasConfig_r16_IEs_bt_NameList_r16,
+        _VarLogMeasConfig_r16_IEs_wlan_NameList_r16,
+        _VarLogMeasConfig_r16_IEs_sensor_NameList_r16,
+        _VarLogMeasConfig_r16_IEs_loggingDuration_r16,
+        __VarLogMeasConfig_r16_IEs_reportType_periodical,
+        __VarLogMeasConfig_r16_IEs_reportType_eventTriggered,
+        _VarLogMeasConfig_r16_IEs_reportType,
+        VarLogMeasConfig_r16_IEs,
+        _VarLogMeasReport_r16_absoluteTimeInfo_r16,
+        _VarLogMeasReport_r16_traceReference_r16,
+        _VarLogMeasReport_r16_traceRecordingSessionRef_r16,
+        _VarLogMeasReport_r16_tce_Id_r16,
+        _VarLogMeasReport_r16_logMeasInfoList_r16,
+        _VarLogMeasReport_r16_plmn_IdentityList_r16,
+        VarLogMeasReport_r16,
+        _VarMeasConfig_measIdList,
+        _VarMeasConfig_measObjectList,
+        _VarMeasConfig_reportConfigList,
+        _VarMeasConfig_quantityConfig,
+        __VarMeasConfig_s_MeasureConfig_ssb_RSRP,
+        __VarMeasConfig_s_MeasureConfig_csi_RSRP,
+        _VarMeasConfig_s_MeasureConfig,
+        VarMeasConfig,
+        _VarMeasConfigSL_r16_sl_MeasIdList_r16,
+        _VarMeasConfigSL_r16_sl_MeasObjectList_r16,
+        _VarMeasConfigSL_r16_sl_reportConfigList_r16,
+        _VarMeasConfigSL_r16_sl_QuantityConfig_r16,
+        VarMeasConfigSL_r16,
+        __VarMeasIdleConfig_r16_measIdleCarrierListNR_r16__item_,
+        _VarMeasIdleConfig_r16_measIdleCarrierListNR_r16,
+        __VarMeasIdleConfig_r16_measIdleCarrierListEUTRA_r16__item_,
+        _VarMeasIdleConfig_r16_measIdleCarrierListEUTRA_r16,
+        _VarMeasIdleConfig_r16_measIdleDuration_r16,
+        _VarMeasIdleConfig_r16_validityAreaList_r16,
+        VarMeasIdleConfig_r16,
+        _VarMeasIdleReport_r16_measReportIdleNR_r16,
+        _VarMeasIdleReport_r16_measReportIdleEUTRA_r16,
+        VarMeasIdleReport_r16,
+        _VarMeasReportList__item_,
+        VarMeasReportList,
+        _VarMeasReport_measId,
+        _VarMeasReport_cellsTriggeredList,
+        _VarMeasReport_numberOfReportsSent,
+        _VarMeasReport_cli_TriggeredList_r16,
+        _VarMeasReport_tx_PoolMeasToAddModListNR_r16,
+        VarMeasReport,
+        __CellsTriggeredList__item__physCellId,
+        __CellsTriggeredList__item__physCellIdEUTRA,
+        __CellsTriggeredList__item__physCellIdUTRA_FDD_r16,
+        _CellsTriggeredList__item_,
+        CellsTriggeredList,
+        _CLI_TriggeredList_r16_srs_RSRP_TriggeredList_r16,
+        _CLI_TriggeredList_r16_cli_RSSI_TriggeredList_r16,
+        CLI_TriggeredList_r16,
+        _SRS_RSRP_TriggeredList_r16__item_,
+        SRS_RSRP_TriggeredList_r16,
+        _CLI_RSSI_TriggeredList_r16__item_,
+        CLI_RSSI_TriggeredList_r16,
+        _VarMeasReportListSL_r16__item_,
+        VarMeasReportListSL_r16,
+        _VarMeasReportSL_r16_sl_MeasId_r16,
+        __VarMeasReportSL_r16_sl_FrequencyTriggeredList_r16__item_,
+        _VarMeasReportSL_r16_sl_FrequencyTriggeredList_r16,
+        _VarMeasReportSL_r16_sl_NumberOfReportsSent_r16,
+        VarMeasReportSL_r16,
+        VarMobilityHistoryReport_r16,
+        _VarPendingRNA_Update_pendingRNA_Update,
+        VarPendingRNA_Update,
+        _VarRA_Report_r16_ra_ReportList_r16,
+        _VarRA_Report_r16_plmn_IdentityList_r16,
+        VarRA_Report_r16,
+        _PLMN_IdentityList_r16__item_,
+        PLMN_IdentityList_r16,
+        _VarResumeMAC_Input_sourcePhysCellId,
+        _VarResumeMAC_Input_targetCellIdentity,
+        _VarResumeMAC_Input_source_c_RNTI,
+        VarResumeMAC_Input,
+        _VarRLF_Report_r16_rlf_Report_r16,
+        _VarRLF_Report_r16_plmn_IdentityList_r16,
+        VarRLF_Report_r16,
+        _VarShortMAC_Input_sourcePhysCellId,
+        _VarShortMAC_Input_targetCellIdentity,
+        _VarShortMAC_Input_source_c_RNTI,
+        VarShortMAC_Input,
     ]
 
 class PC5_RRC_Definitions:
@@ -46637,105 +42933,6 @@ class PC5_RRC_Definitions:
         u'BandSidelinkPC5-r16',
         ]
     _type_ = [
-        u'SBCCH-SL-BCH-Message',
-        u'SBCCH-SL-BCH-MessageType',
-        u'SCCH-Message',
-        u'SCCH-MessageType',
-        u'MasterInformationBlockSidelink',
-        u'MeasurementReportSidelink',
-        u'MeasurementReportSidelink-IEs-r16',
-        u'SL-MeasResults-r16',
-        u'SL-MeasResult-r16',
-        u'SL-MeasQuantityResult-r16',
-        u'RRCReconfigurationSidelink',
-        u'RRCReconfigurationSidelink-IEs-r16',
-        u'SLRB-Config-r16',
-        u'SLRB-PC5-ConfigIndex-r16',
-        u'SL-SDAP-ConfigPC5-r16',
-        u'SL-PDCP-ConfigPC5-r16',
-        u'SL-RLC-ConfigPC5-r16',
-        u'SL-LogicalChannelConfigPC5-r16',
-        u'SL-PQFI-r16',
-        u'SL-CSI-RS-Config-r16',
-        u'RRCReconfigurationCompleteSidelink',
-        u'RRCReconfigurationCompleteSidelink-IEs-r16',
-        u'RRCReconfigurationFailureSidelink',
-        u'RRCReconfigurationFailureSidelink-IEs-r16',
-        u'UECapabilityEnquirySidelink',
-        u'UECapabilityEnquirySidelink-IEs-r16',
-        u'UECapabilityInformationSidelink',
-        u'UECapabilityInformationSidelink-IEs-r16',
-        u'AccessStratumReleaseSidelink-r16',
-        u'PDCP-ParametersSidelink-r16',
-        u'BandCombinationListSidelinkNR-r16',
-        u'BandCombinationParametersSidelinkNR-r16',
-        u'BandSidelinkPC5-r16',
-        u'SBCCH-SL-BCH-Message',
-        u'SBCCH-SL-BCH-MessageType',
-        u'SCCH-Message',
-        u'SCCH-MessageType',
-        u'MasterInformationBlockSidelink',
-        u'MeasurementReportSidelink',
-        u'MeasurementReportSidelink-IEs-r16',
-        u'SL-MeasResults-r16',
-        u'SL-MeasResult-r16',
-        u'SL-MeasQuantityResult-r16',
-        u'RRCReconfigurationSidelink',
-        u'RRCReconfigurationSidelink-IEs-r16',
-        u'SLRB-Config-r16',
-        u'SLRB-PC5-ConfigIndex-r16',
-        u'SL-SDAP-ConfigPC5-r16',
-        u'SL-PDCP-ConfigPC5-r16',
-        u'SL-RLC-ConfigPC5-r16',
-        u'SL-LogicalChannelConfigPC5-r16',
-        u'SL-PQFI-r16',
-        u'SL-CSI-RS-Config-r16',
-        u'RRCReconfigurationCompleteSidelink',
-        u'RRCReconfigurationCompleteSidelink-IEs-r16',
-        u'RRCReconfigurationFailureSidelink',
-        u'RRCReconfigurationFailureSidelink-IEs-r16',
-        u'UECapabilityEnquirySidelink',
-        u'UECapabilityEnquirySidelink-IEs-r16',
-        u'UECapabilityInformationSidelink',
-        u'UECapabilityInformationSidelink-IEs-r16',
-        u'AccessStratumReleaseSidelink-r16',
-        u'PDCP-ParametersSidelink-r16',
-        u'BandCombinationListSidelinkNR-r16',
-        u'BandCombinationParametersSidelinkNR-r16',
-        u'BandSidelinkPC5-r16',
-        u'SBCCH-SL-BCH-Message',
-        u'SBCCH-SL-BCH-MessageType',
-        u'SCCH-Message',
-        u'SCCH-MessageType',
-        u'MasterInformationBlockSidelink',
-        u'MeasurementReportSidelink',
-        u'MeasurementReportSidelink-IEs-r16',
-        u'SL-MeasResults-r16',
-        u'SL-MeasResult-r16',
-        u'SL-MeasQuantityResult-r16',
-        u'RRCReconfigurationSidelink',
-        u'RRCReconfigurationSidelink-IEs-r16',
-        u'SLRB-Config-r16',
-        u'SLRB-PC5-ConfigIndex-r16',
-        u'SL-SDAP-ConfigPC5-r16',
-        u'SL-PDCP-ConfigPC5-r16',
-        u'SL-RLC-ConfigPC5-r16',
-        u'SL-LogicalChannelConfigPC5-r16',
-        u'SL-PQFI-r16',
-        u'SL-CSI-RS-Config-r16',
-        u'RRCReconfigurationCompleteSidelink',
-        u'RRCReconfigurationCompleteSidelink-IEs-r16',
-        u'RRCReconfigurationFailureSidelink',
-        u'RRCReconfigurationFailureSidelink-IEs-r16',
-        u'UECapabilityEnquirySidelink',
-        u'UECapabilityEnquirySidelink-IEs-r16',
-        u'UECapabilityInformationSidelink',
-        u'UECapabilityInformationSidelink-IEs-r16',
-        u'AccessStratumReleaseSidelink-r16',
-        u'PDCP-ParametersSidelink-r16',
-        u'BandCombinationListSidelinkNR-r16',
-        u'BandCombinationParametersSidelinkNR-r16',
-        u'BandSidelinkPC5-r16',
         u'SBCCH-SL-BCH-Message',
         u'SBCCH-SL-BCH-MessageType',
         u'SCCH-Message',
@@ -47533,2760 +43730,4 @@ class PC5_RRC_Definitions:
         BandSidelinkPC5_r16,
     ]
 
-class NR_UE_Variables:
-
-    _name_  = u'NR-UE-Variables'
-    _oid_   = []
-    
-    _obj_ = [
-        u'VarConditionalReconfig',
-        u'VarConnEstFailReport-r16',
-        u'VarLogMeasConfig-r16-IEs',
-        u'VarLogMeasReport-r16',
-        u'VarMeasConfig',
-        u'VarMeasConfigSL-r16',
-        u'VarMeasIdleConfig-r16',
-        u'VarMeasIdleReport-r16',
-        u'VarMeasReportList',
-        u'VarMeasReport',
-        u'CellsTriggeredList',
-        u'CLI-TriggeredList-r16',
-        u'SRS-RSRP-TriggeredList-r16',
-        u'CLI-RSSI-TriggeredList-r16',
-        u'VarMeasReportListSL-r16',
-        u'VarMeasReportSL-r16',
-        u'VarMobilityHistoryReport-r16',
-        u'VarPendingRNA-Update',
-        u'VarRA-Report-r16',
-        u'PLMN-IdentityList-r16',
-        u'VarResumeMAC-Input',
-        u'VarRLF-Report-r16',
-        u'VarShortMAC-Input',
-        ]
-    _type_ = [
-        u'VarConditionalReconfig',
-        u'VarConnEstFailReport-r16',
-        u'VarLogMeasConfig-r16-IEs',
-        u'VarLogMeasReport-r16',
-        u'VarMeasConfig',
-        u'VarMeasConfigSL-r16',
-        u'VarMeasIdleConfig-r16',
-        u'VarMeasIdleReport-r16',
-        u'VarMeasReportList',
-        u'VarMeasReport',
-        u'CellsTriggeredList',
-        u'CLI-TriggeredList-r16',
-        u'SRS-RSRP-TriggeredList-r16',
-        u'CLI-RSSI-TriggeredList-r16',
-        u'VarMeasReportListSL-r16',
-        u'VarMeasReportSL-r16',
-        u'VarMobilityHistoryReport-r16',
-        u'VarPendingRNA-Update',
-        u'VarRA-Report-r16',
-        u'PLMN-IdentityList-r16',
-        u'VarResumeMAC-Input',
-        u'VarRLF-Report-r16',
-        u'VarShortMAC-Input',
-        u'VarConditionalReconfig',
-        u'VarConnEstFailReport-r16',
-        u'VarLogMeasConfig-r16-IEs',
-        u'VarLogMeasReport-r16',
-        u'VarMeasConfig',
-        u'VarMeasConfigSL-r16',
-        u'VarMeasIdleConfig-r16',
-        u'VarMeasIdleReport-r16',
-        u'VarMeasReportList',
-        u'VarMeasReport',
-        u'CellsTriggeredList',
-        u'CLI-TriggeredList-r16',
-        u'SRS-RSRP-TriggeredList-r16',
-        u'CLI-RSSI-TriggeredList-r16',
-        u'VarMeasReportListSL-r16',
-        u'VarMeasReportSL-r16',
-        u'VarMobilityHistoryReport-r16',
-        u'VarPendingRNA-Update',
-        u'VarRA-Report-r16',
-        u'PLMN-IdentityList-r16',
-        u'VarResumeMAC-Input',
-        u'VarRLF-Report-r16',
-        u'VarShortMAC-Input',
-        u'VarConditionalReconfig',
-        u'VarConnEstFailReport-r16',
-        u'VarLogMeasConfig-r16-IEs',
-        u'VarLogMeasReport-r16',
-        u'VarMeasConfig',
-        u'VarMeasConfigSL-r16',
-        u'VarMeasIdleConfig-r16',
-        u'VarMeasIdleReport-r16',
-        u'VarMeasReportList',
-        u'VarMeasReport',
-        u'CellsTriggeredList',
-        u'CLI-TriggeredList-r16',
-        u'SRS-RSRP-TriggeredList-r16',
-        u'CLI-RSSI-TriggeredList-r16',
-        u'VarMeasReportListSL-r16',
-        u'VarMeasReportSL-r16',
-        u'VarMobilityHistoryReport-r16',
-        u'VarPendingRNA-Update',
-        u'VarRA-Report-r16',
-        u'PLMN-IdentityList-r16',
-        u'VarResumeMAC-Input',
-        u'VarRLF-Report-r16',
-        u'VarShortMAC-Input',
-        ]
-    _set_ = [
-        ]
-    _val_ = [
-        ]
-    _class_ = [
-        ]
-    _param_ = [
-        ]
-    
-    #-----< VarConditionalReconfig >-----#
-    VarConditionalReconfig = SEQ(name=u'VarConditionalReconfig', mode=MODE_TYPE)
-    _VarConditionalReconfig_condReconfigList = SEQ_OF(name=u'condReconfigList', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'CondReconfigToAddModList-r16')), opt=True)
-    VarConditionalReconfig._cont = ASN1Dict([
-        (u'condReconfigList', _VarConditionalReconfig_condReconfigList),
-        ])
-    VarConditionalReconfig._ext = None
-    
-    #-----< VarConnEstFailReport-r16 >-----#
-    VarConnEstFailReport_r16 = SEQ(name=u'VarConnEstFailReport-r16', mode=MODE_TYPE)
-    _VarConnEstFailReport_r16_connEstFailReport_r16 = SEQ(name=u'connEstFailReport-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'ConnEstFailReport-r16')))
-    _VarConnEstFailReport_r16_plmn_Identity_r16 = SEQ(name=u'plmn-Identity-r16', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'PLMN-Identity')))
-    VarConnEstFailReport_r16._cont = ASN1Dict([
-        (u'connEstFailReport-r16', _VarConnEstFailReport_r16_connEstFailReport_r16),
-        (u'plmn-Identity-r16', _VarConnEstFailReport_r16_plmn_Identity_r16),
-        ])
-    VarConnEstFailReport_r16._ext = None
-    
-    #-----< VarLogMeasConfig-r16-IEs >-----#
-    VarLogMeasConfig_r16_IEs = SEQ(name=u'VarLogMeasConfig-r16-IEs', mode=MODE_TYPE)
-    _VarLogMeasConfig_r16_IEs_areaConfiguration_r16 = SEQ(name=u'areaConfiguration-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'AreaConfiguration-r16')), opt=True)
-    _VarLogMeasConfig_r16_IEs_bt_NameList_r16 = SEQ_OF(name=u'bt-NameList-r16', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'BT-NameList-r16')), opt=True)
-    _VarLogMeasConfig_r16_IEs_wlan_NameList_r16 = SEQ_OF(name=u'wlan-NameList-r16', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'WLAN-NameList-r16')), opt=True)
-    _VarLogMeasConfig_r16_IEs_sensor_NameList_r16 = SEQ(name=u'sensor-NameList-r16', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'Sensor-NameList-r16')), opt=True)
-    _VarLogMeasConfig_r16_IEs_loggingDuration_r16 = ENUM(name=u'loggingDuration-r16', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'LoggingDuration-r16')))
-    _VarLogMeasConfig_r16_IEs_reportType = CHOICE(name=u'reportType', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
-    __VarLogMeasConfig_r16_IEs_reportType_periodical = SEQ(name=u'periodical', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'LoggedPeriodicalReportConfig-r16')))
-    __VarLogMeasConfig_r16_IEs_reportType_eventTriggered = SEQ(name=u'eventTriggered', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'LoggedEventTriggerConfig-r16')))
-    _VarLogMeasConfig_r16_IEs_reportType._cont = ASN1Dict([
-        (u'periodical', __VarLogMeasConfig_r16_IEs_reportType_periodical),
-        (u'eventTriggered', __VarLogMeasConfig_r16_IEs_reportType_eventTriggered),
-        ])
-    _VarLogMeasConfig_r16_IEs_reportType._ext = None
-    VarLogMeasConfig_r16_IEs._cont = ASN1Dict([
-        (u'areaConfiguration-r16', _VarLogMeasConfig_r16_IEs_areaConfiguration_r16),
-        (u'bt-NameList-r16', _VarLogMeasConfig_r16_IEs_bt_NameList_r16),
-        (u'wlan-NameList-r16', _VarLogMeasConfig_r16_IEs_wlan_NameList_r16),
-        (u'sensor-NameList-r16', _VarLogMeasConfig_r16_IEs_sensor_NameList_r16),
-        (u'loggingDuration-r16', _VarLogMeasConfig_r16_IEs_loggingDuration_r16),
-        (u'reportType', _VarLogMeasConfig_r16_IEs_reportType),
-        ])
-    VarLogMeasConfig_r16_IEs._ext = None
-    
-    #-----< VarLogMeasReport-r16 >-----#
-    VarLogMeasReport_r16 = SEQ(name=u'VarLogMeasReport-r16', mode=MODE_TYPE)
-    _VarLogMeasReport_r16_absoluteTimeInfo_r16 = BIT_STR(name=u'absoluteTimeInfo-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'AbsoluteTimeInfo-r16')))
-    _VarLogMeasReport_r16_traceReference_r16 = SEQ(name=u'traceReference-r16', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'TraceReference-r16')))
-    _VarLogMeasReport_r16_traceRecordingSessionRef_r16 = OCT_STR(name=u'traceRecordingSessionRef-r16', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _VarLogMeasReport_r16_traceRecordingSessionRef_r16._const_sz = ASN1Set(rv=[2], rr=[], ev=None, er=[])
-    _VarLogMeasReport_r16_tce_Id_r16 = OCT_STR(name=u'tce-Id-r16', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _VarLogMeasReport_r16_tce_Id_r16._const_sz = ASN1Set(rv=[1], rr=[], ev=None, er=[])
-    _VarLogMeasReport_r16_logMeasInfoList_r16 = SEQ_OF(name=u'logMeasInfoList-r16', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'LogMeasInfoList-r16')))
-    _VarLogMeasReport_r16_plmn_IdentityList_r16 = SEQ_OF(name=u'plmn-IdentityList-r16', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'PLMN-IdentityList2-r16')))
-    VarLogMeasReport_r16._cont = ASN1Dict([
-        (u'absoluteTimeInfo-r16', _VarLogMeasReport_r16_absoluteTimeInfo_r16),
-        (u'traceReference-r16', _VarLogMeasReport_r16_traceReference_r16),
-        (u'traceRecordingSessionRef-r16', _VarLogMeasReport_r16_traceRecordingSessionRef_r16),
-        (u'tce-Id-r16', _VarLogMeasReport_r16_tce_Id_r16),
-        (u'logMeasInfoList-r16', _VarLogMeasReport_r16_logMeasInfoList_r16),
-        (u'plmn-IdentityList-r16', _VarLogMeasReport_r16_plmn_IdentityList_r16),
-        ])
-    VarLogMeasReport_r16._ext = None
-    
-    #-----< VarMeasConfig >-----#
-    VarMeasConfig = SEQ(name=u'VarMeasConfig', mode=MODE_TYPE)
-    _VarMeasConfig_measIdList = SEQ_OF(name=u'measIdList', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'MeasIdToAddModList')), opt=True)
-    _VarMeasConfig_measObjectList = SEQ_OF(name=u'measObjectList', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'MeasObjectToAddModList')), opt=True)
-    _VarMeasConfig_reportConfigList = SEQ_OF(name=u'reportConfigList', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'ReportConfigToAddModList')), opt=True)
-    _VarMeasConfig_quantityConfig = SEQ(name=u'quantityConfig', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'QuantityConfig')), opt=True)
-    _VarMeasConfig_s_MeasureConfig = CHOICE(name=u's-MeasureConfig', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_EXPLICIT), opt=True)
-    __VarMeasConfig_s_MeasureConfig_ssb_RSRP = INT(name=u'ssb-RSRP', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'RSRP-Range')))
-    __VarMeasConfig_s_MeasureConfig_csi_RSRP = INT(name=u'csi-RSRP', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'RSRP-Range')))
-    _VarMeasConfig_s_MeasureConfig._cont = ASN1Dict([
-        (u'ssb-RSRP', __VarMeasConfig_s_MeasureConfig_ssb_RSRP),
-        (u'csi-RSRP', __VarMeasConfig_s_MeasureConfig_csi_RSRP),
-        ])
-    _VarMeasConfig_s_MeasureConfig._ext = None
-    VarMeasConfig._cont = ASN1Dict([
-        (u'measIdList', _VarMeasConfig_measIdList),
-        (u'measObjectList', _VarMeasConfig_measObjectList),
-        (u'reportConfigList', _VarMeasConfig_reportConfigList),
-        (u'quantityConfig', _VarMeasConfig_quantityConfig),
-        (u's-MeasureConfig', _VarMeasConfig_s_MeasureConfig),
-        ])
-    VarMeasConfig._ext = None
-    
-    #-----< VarMeasConfigSL-r16 >-----#
-    VarMeasConfigSL_r16 = SEQ(name=u'VarMeasConfigSL-r16', mode=MODE_TYPE)
-    _VarMeasConfigSL_r16_sl_MeasIdList_r16 = SEQ_OF(name=u'sl-MeasIdList-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'SL-MeasIdList-r16')), opt=True)
-    _VarMeasConfigSL_r16_sl_MeasObjectList_r16 = SEQ_OF(name=u'sl-MeasObjectList-r16', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'SL-MeasObjectList-r16')), opt=True)
-    _VarMeasConfigSL_r16_sl_reportConfigList_r16 = SEQ_OF(name=u'sl-reportConfigList-r16', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'SL-ReportConfigList-r16')), opt=True)
-    _VarMeasConfigSL_r16_sl_QuantityConfig_r16 = SEQ(name=u'sl-QuantityConfig-r16', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'SL-QuantityConfig-r16')), opt=True)
-    VarMeasConfigSL_r16._cont = ASN1Dict([
-        (u'sl-MeasIdList-r16', _VarMeasConfigSL_r16_sl_MeasIdList_r16),
-        (u'sl-MeasObjectList-r16', _VarMeasConfigSL_r16_sl_MeasObjectList_r16),
-        (u'sl-reportConfigList-r16', _VarMeasConfigSL_r16_sl_reportConfigList_r16),
-        (u'sl-QuantityConfig-r16', _VarMeasConfigSL_r16_sl_QuantityConfig_r16),
-        ])
-    VarMeasConfigSL_r16._ext = None
-    
-    #-----< VarMeasIdleConfig-r16 >-----#
-    VarMeasIdleConfig_r16 = SEQ(name=u'VarMeasIdleConfig-r16', mode=MODE_TYPE)
-    _VarMeasIdleConfig_r16_measIdleCarrierListNR_r16 = SEQ_OF(name=u'measIdleCarrierListNR-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    __VarMeasIdleConfig_r16_measIdleCarrierListNR_r16__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('NR-RRC-Definitions', 'MeasIdleCarrierNR-r16')))
-    _VarMeasIdleConfig_r16_measIdleCarrierListNR_r16._cont = __VarMeasIdleConfig_r16_measIdleCarrierListNR_r16__item_
-    _VarMeasIdleConfig_r16_measIdleCarrierListNR_r16._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=8)], ev=None, er=[])
-    _VarMeasIdleConfig_r16_measIdleCarrierListEUTRA_r16 = SEQ_OF(name=u'measIdleCarrierListEUTRA-r16', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    __VarMeasIdleConfig_r16_measIdleCarrierListEUTRA_r16__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('NR-RRC-Definitions', 'MeasIdleCarrierEUTRA-r16')))
-    _VarMeasIdleConfig_r16_measIdleCarrierListEUTRA_r16._cont = __VarMeasIdleConfig_r16_measIdleCarrierListEUTRA_r16__item_
-    _VarMeasIdleConfig_r16_measIdleCarrierListEUTRA_r16._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=8)], ev=None, er=[])
-    _VarMeasIdleConfig_r16_measIdleDuration_r16 = ENUM(name=u'measIdleDuration-r16', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _VarMeasIdleConfig_r16_measIdleDuration_r16._cont = ASN1Dict([(u'sec10', 0), (u'sec30', 1), (u'sec60', 2), (u'sec120', 3), (u'sec180', 4), (u'sec240', 5), (u'sec300', 6), (u'spare', 7)])
-    _VarMeasIdleConfig_r16_measIdleDuration_r16._ext = None
-    _VarMeasIdleConfig_r16_validityAreaList_r16 = SEQ_OF(name=u'validityAreaList-r16', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'ValidityAreaList-r16')), opt=True)
-    VarMeasIdleConfig_r16._cont = ASN1Dict([
-        (u'measIdleCarrierListNR-r16', _VarMeasIdleConfig_r16_measIdleCarrierListNR_r16),
-        (u'measIdleCarrierListEUTRA-r16', _VarMeasIdleConfig_r16_measIdleCarrierListEUTRA_r16),
-        (u'measIdleDuration-r16', _VarMeasIdleConfig_r16_measIdleDuration_r16),
-        (u'validityAreaList-r16', _VarMeasIdleConfig_r16_validityAreaList_r16),
-        ])
-    VarMeasIdleConfig_r16._ext = None
-    
-    #-----< VarMeasIdleReport-r16 >-----#
-    VarMeasIdleReport_r16 = SEQ(name=u'VarMeasIdleReport-r16', mode=MODE_TYPE)
-    _VarMeasIdleReport_r16_measReportIdleNR_r16 = SEQ(name=u'measReportIdleNR-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'MeasResultIdleNR-r16')), opt=True)
-    _VarMeasIdleReport_r16_measReportIdleEUTRA_r16 = SEQ(name=u'measReportIdleEUTRA-r16', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'MeasResultIdleEUTRA-r16')), opt=True)
-    VarMeasIdleReport_r16._cont = ASN1Dict([
-        (u'measReportIdleNR-r16', _VarMeasIdleReport_r16_measReportIdleNR_r16),
-        (u'measReportIdleEUTRA-r16', _VarMeasIdleReport_r16_measReportIdleEUTRA_r16),
-        ])
-    VarMeasIdleReport_r16._ext = None
-    
-    #-----< VarMeasReportList >-----#
-    VarMeasReportList = SEQ_OF(name=u'VarMeasReportList', mode=MODE_TYPE)
-    _VarMeasReportList__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('NR-UE-Variables', 'VarMeasReport')))
-    VarMeasReportList._cont = _VarMeasReportList__item_
-    VarMeasReportList._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=64)], ev=None, er=[])
-    
-    #-----< VarMeasReport >-----#
-    VarMeasReport = SEQ(name=u'VarMeasReport', mode=MODE_TYPE)
-    _VarMeasReport_measId = INT(name=u'measId', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'MeasId')))
-    _VarMeasReport_cellsTriggeredList = SEQ_OF(name=u'cellsTriggeredList', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-UE-Variables', 'CellsTriggeredList')), opt=True)
-    _VarMeasReport_numberOfReportsSent = INT(name=u'numberOfReportsSent', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _VarMeasReport_cli_TriggeredList_r16 = CHOICE(name=u'cli-TriggeredList-r16', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('NR-UE-Variables', 'CLI-TriggeredList-r16')), opt=True)
-    _VarMeasReport_tx_PoolMeasToAddModListNR_r16 = SEQ_OF(name=u'tx-PoolMeasToAddModListNR-r16', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'Tx-PoolMeasList-r16')), opt=True)
-    VarMeasReport._cont = ASN1Dict([
-        (u'measId', _VarMeasReport_measId),
-        (u'cellsTriggeredList', _VarMeasReport_cellsTriggeredList),
-        (u'numberOfReportsSent', _VarMeasReport_numberOfReportsSent),
-        (u'cli-TriggeredList-r16', _VarMeasReport_cli_TriggeredList_r16),
-        (u'tx-PoolMeasToAddModListNR-r16', _VarMeasReport_tx_PoolMeasToAddModListNR_r16),
-        ])
-    VarMeasReport._ext = None
-    
-    #-----< CellsTriggeredList >-----#
-    CellsTriggeredList = SEQ_OF(name=u'CellsTriggeredList', mode=MODE_TYPE)
-    _CellsTriggeredList__item_ = CHOICE(name='_item_', mode=MODE_TYPE)
-    __CellsTriggeredList__item__physCellId = INT(name=u'physCellId', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'PhysCellId')))
-    __CellsTriggeredList__item__physCellIdEUTRA = INT(name=u'physCellIdEUTRA', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'EUTRA-PhysCellId')))
-    __CellsTriggeredList__item__physCellIdUTRA_FDD_r16 = INT(name=u'physCellIdUTRA-FDD-r16', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'PhysCellIdUTRA-FDD-r16')))
-    _CellsTriggeredList__item_._cont = ASN1Dict([
-        (u'physCellId', __CellsTriggeredList__item__physCellId),
-        (u'physCellIdEUTRA', __CellsTriggeredList__item__physCellIdEUTRA),
-        (u'physCellIdUTRA-FDD-r16', __CellsTriggeredList__item__physCellIdUTRA_FDD_r16),
-        ])
-    _CellsTriggeredList__item_._ext = None
-    CellsTriggeredList._cont = _CellsTriggeredList__item_
-    CellsTriggeredList._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=32)], ev=None, er=[])
-    
-    #-----< CLI-TriggeredList-r16 >-----#
-    CLI_TriggeredList_r16 = CHOICE(name=u'CLI-TriggeredList-r16', mode=MODE_TYPE)
-    _CLI_TriggeredList_r16_srs_RSRP_TriggeredList_r16 = SEQ_OF(name=u'srs-RSRP-TriggeredList-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-UE-Variables', 'SRS-RSRP-TriggeredList-r16')))
-    _CLI_TriggeredList_r16_cli_RSSI_TriggeredList_r16 = SEQ_OF(name=u'cli-RSSI-TriggeredList-r16', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-UE-Variables', 'CLI-RSSI-TriggeredList-r16')))
-    CLI_TriggeredList_r16._cont = ASN1Dict([
-        (u'srs-RSRP-TriggeredList-r16', _CLI_TriggeredList_r16_srs_RSRP_TriggeredList_r16),
-        (u'cli-RSSI-TriggeredList-r16', _CLI_TriggeredList_r16_cli_RSSI_TriggeredList_r16),
-        ])
-    CLI_TriggeredList_r16._ext = None
-    
-    #-----< SRS-RSRP-TriggeredList-r16 >-----#
-    SRS_RSRP_TriggeredList_r16 = SEQ_OF(name=u'SRS-RSRP-TriggeredList-r16', mode=MODE_TYPE)
-    _SRS_RSRP_TriggeredList_r16__item_ = INT(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('NR-RRC-Definitions', 'SRS-ResourceId')))
-    SRS_RSRP_TriggeredList_r16._cont = _SRS_RSRP_TriggeredList_r16__item_
-    SRS_RSRP_TriggeredList_r16._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=32)], ev=None, er=[])
-    
-    #-----< CLI-RSSI-TriggeredList-r16 >-----#
-    CLI_RSSI_TriggeredList_r16 = SEQ_OF(name=u'CLI-RSSI-TriggeredList-r16', mode=MODE_TYPE)
-    _CLI_RSSI_TriggeredList_r16__item_ = INT(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('NR-RRC-Definitions', 'RSSI-ResourceId-r16')))
-    CLI_RSSI_TriggeredList_r16._cont = _CLI_RSSI_TriggeredList_r16__item_
-    CLI_RSSI_TriggeredList_r16._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=64)], ev=None, er=[])
-    
-    #-----< VarMeasReportListSL-r16 >-----#
-    VarMeasReportListSL_r16 = SEQ_OF(name=u'VarMeasReportListSL-r16', mode=MODE_TYPE)
-    _VarMeasReportListSL_r16__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('NR-UE-Variables', 'VarMeasReportSL-r16')))
-    VarMeasReportListSL_r16._cont = _VarMeasReportListSL_r16__item_
-    VarMeasReportListSL_r16._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=64)], ev=None, er=[])
-    
-    #-----< VarMeasReportSL-r16 >-----#
-    VarMeasReportSL_r16 = SEQ(name=u'VarMeasReportSL-r16', mode=MODE_TYPE)
-    _VarMeasReportSL_r16_sl_MeasId_r16 = INT(name=u'sl-MeasId-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'SL-MeasId-r16')))
-    _VarMeasReportSL_r16_sl_FrequencyTriggeredList_r16 = SEQ_OF(name=u'sl-FrequencyTriggeredList-r16', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    __VarMeasReportSL_r16_sl_FrequencyTriggeredList_r16__item_ = INT(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('NR-RRC-Definitions', 'ARFCN-ValueNR')))
-    _VarMeasReportSL_r16_sl_FrequencyTriggeredList_r16._cont = __VarMeasReportSL_r16_sl_FrequencyTriggeredList_r16__item_
-    _VarMeasReportSL_r16_sl_FrequencyTriggeredList_r16._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=8)], ev=None, er=[])
-    _VarMeasReportSL_r16_sl_NumberOfReportsSent_r16 = INT(name=u'sl-NumberOfReportsSent-r16', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    VarMeasReportSL_r16._cont = ASN1Dict([
-        (u'sl-MeasId-r16', _VarMeasReportSL_r16_sl_MeasId_r16),
-        (u'sl-FrequencyTriggeredList-r16', _VarMeasReportSL_r16_sl_FrequencyTriggeredList_r16),
-        (u'sl-NumberOfReportsSent-r16', _VarMeasReportSL_r16_sl_NumberOfReportsSent_r16),
-        ])
-    VarMeasReportSL_r16._ext = None
-    
-    #-----< VarMobilityHistoryReport-r16 >-----#
-    VarMobilityHistoryReport_r16 = SEQ_OF(name=u'VarMobilityHistoryReport-r16', mode=MODE_TYPE, typeref=ASN1RefType(('NR-RRC-Definitions', 'VisitedCellInfoList-r16')))
-    
-    #-----< VarPendingRNA-Update >-----#
-    VarPendingRNA_Update = SEQ(name=u'VarPendingRNA-Update', mode=MODE_TYPE)
-    _VarPendingRNA_Update_pendingRNA_Update = BOOL(name=u'pendingRNA-Update', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    VarPendingRNA_Update._cont = ASN1Dict([
-        (u'pendingRNA-Update', _VarPendingRNA_Update_pendingRNA_Update),
-        ])
-    VarPendingRNA_Update._ext = None
-    
-    #-----< VarRA-Report-r16 >-----#
-    VarRA_Report_r16 = SEQ(name=u'VarRA-Report-r16', mode=MODE_TYPE)
-    _VarRA_Report_r16_ra_ReportList_r16 = SEQ_OF(name=u'ra-ReportList-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'RA-ReportList-r16')))
-    _VarRA_Report_r16_plmn_IdentityList_r16 = SEQ_OF(name=u'plmn-IdentityList-r16', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-UE-Variables', 'PLMN-IdentityList-r16')))
-    VarRA_Report_r16._cont = ASN1Dict([
-        (u'ra-ReportList-r16', _VarRA_Report_r16_ra_ReportList_r16),
-        (u'plmn-IdentityList-r16', _VarRA_Report_r16_plmn_IdentityList_r16),
-        ])
-    VarRA_Report_r16._ext = None
-    
-    #-----< PLMN-IdentityList-r16 >-----#
-    PLMN_IdentityList_r16 = SEQ_OF(name=u'PLMN-IdentityList-r16', mode=MODE_TYPE)
-    _PLMN_IdentityList_r16__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('NR-RRC-Definitions', 'PLMN-Identity')))
-    PLMN_IdentityList_r16._cont = _PLMN_IdentityList_r16__item_
-    PLMN_IdentityList_r16._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=12)], ev=None, er=[])
-    
-    #-----< VarResumeMAC-Input >-----#
-    VarResumeMAC_Input = SEQ(name=u'VarResumeMAC-Input', mode=MODE_TYPE)
-    _VarResumeMAC_Input_sourcePhysCellId = INT(name=u'sourcePhysCellId', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'PhysCellId')))
-    _VarResumeMAC_Input_targetCellIdentity = BIT_STR(name=u'targetCellIdentity', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'CellIdentity')))
-    _VarResumeMAC_Input_source_c_RNTI = INT(name=u'source-c-RNTI', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'RNTI-Value')))
-    VarResumeMAC_Input._cont = ASN1Dict([
-        (u'sourcePhysCellId', _VarResumeMAC_Input_sourcePhysCellId),
-        (u'targetCellIdentity', _VarResumeMAC_Input_targetCellIdentity),
-        (u'source-c-RNTI', _VarResumeMAC_Input_source_c_RNTI),
-        ])
-    VarResumeMAC_Input._ext = None
-    
-    #-----< VarRLF-Report-r16 >-----#
-    VarRLF_Report_r16 = SEQ(name=u'VarRLF-Report-r16', mode=MODE_TYPE)
-    _VarRLF_Report_r16_rlf_Report_r16 = CHOICE(name=u'rlf-Report-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'RLF-Report-r16')))
-    _VarRLF_Report_r16_plmn_IdentityList_r16 = SEQ_OF(name=u'plmn-IdentityList-r16', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'PLMN-IdentityList2-r16')))
-    VarRLF_Report_r16._cont = ASN1Dict([
-        (u'rlf-Report-r16', _VarRLF_Report_r16_rlf_Report_r16),
-        (u'plmn-IdentityList-r16', _VarRLF_Report_r16_plmn_IdentityList_r16),
-        ])
-    VarRLF_Report_r16._ext = None
-    
-    #-----< VarShortMAC-Input >-----#
-    VarShortMAC_Input = SEQ(name=u'VarShortMAC-Input', mode=MODE_TYPE)
-    _VarShortMAC_Input_sourcePhysCellId = INT(name=u'sourcePhysCellId', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'PhysCellId')))
-    _VarShortMAC_Input_targetCellIdentity = BIT_STR(name=u'targetCellIdentity', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'CellIdentity')))
-    _VarShortMAC_Input_source_c_RNTI = INT(name=u'source-c-RNTI', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'RNTI-Value')))
-    VarShortMAC_Input._cont = ASN1Dict([
-        (u'sourcePhysCellId', _VarShortMAC_Input_sourcePhysCellId),
-        (u'targetCellIdentity', _VarShortMAC_Input_targetCellIdentity),
-        (u'source-c-RNTI', _VarShortMAC_Input_source_c_RNTI),
-        ])
-    VarShortMAC_Input._ext = None
-    
-    _all_ = [
-        _VarConditionalReconfig_condReconfigList,
-        VarConditionalReconfig,
-        _VarConnEstFailReport_r16_connEstFailReport_r16,
-        _VarConnEstFailReport_r16_plmn_Identity_r16,
-        VarConnEstFailReport_r16,
-        _VarLogMeasConfig_r16_IEs_areaConfiguration_r16,
-        _VarLogMeasConfig_r16_IEs_bt_NameList_r16,
-        _VarLogMeasConfig_r16_IEs_wlan_NameList_r16,
-        _VarLogMeasConfig_r16_IEs_sensor_NameList_r16,
-        _VarLogMeasConfig_r16_IEs_loggingDuration_r16,
-        __VarLogMeasConfig_r16_IEs_reportType_periodical,
-        __VarLogMeasConfig_r16_IEs_reportType_eventTriggered,
-        _VarLogMeasConfig_r16_IEs_reportType,
-        VarLogMeasConfig_r16_IEs,
-        _VarLogMeasReport_r16_absoluteTimeInfo_r16,
-        _VarLogMeasReport_r16_traceReference_r16,
-        _VarLogMeasReport_r16_traceRecordingSessionRef_r16,
-        _VarLogMeasReport_r16_tce_Id_r16,
-        _VarLogMeasReport_r16_logMeasInfoList_r16,
-        _VarLogMeasReport_r16_plmn_IdentityList_r16,
-        VarLogMeasReport_r16,
-        _VarMeasConfig_measIdList,
-        _VarMeasConfig_measObjectList,
-        _VarMeasConfig_reportConfigList,
-        _VarMeasConfig_quantityConfig,
-        __VarMeasConfig_s_MeasureConfig_ssb_RSRP,
-        __VarMeasConfig_s_MeasureConfig_csi_RSRP,
-        _VarMeasConfig_s_MeasureConfig,
-        VarMeasConfig,
-        _VarMeasConfigSL_r16_sl_MeasIdList_r16,
-        _VarMeasConfigSL_r16_sl_MeasObjectList_r16,
-        _VarMeasConfigSL_r16_sl_reportConfigList_r16,
-        _VarMeasConfigSL_r16_sl_QuantityConfig_r16,
-        VarMeasConfigSL_r16,
-        __VarMeasIdleConfig_r16_measIdleCarrierListNR_r16__item_,
-        _VarMeasIdleConfig_r16_measIdleCarrierListNR_r16,
-        __VarMeasIdleConfig_r16_measIdleCarrierListEUTRA_r16__item_,
-        _VarMeasIdleConfig_r16_measIdleCarrierListEUTRA_r16,
-        _VarMeasIdleConfig_r16_measIdleDuration_r16,
-        _VarMeasIdleConfig_r16_validityAreaList_r16,
-        VarMeasIdleConfig_r16,
-        _VarMeasIdleReport_r16_measReportIdleNR_r16,
-        _VarMeasIdleReport_r16_measReportIdleEUTRA_r16,
-        VarMeasIdleReport_r16,
-        _VarMeasReportList__item_,
-        VarMeasReportList,
-        _VarMeasReport_measId,
-        _VarMeasReport_cellsTriggeredList,
-        _VarMeasReport_numberOfReportsSent,
-        _VarMeasReport_cli_TriggeredList_r16,
-        _VarMeasReport_tx_PoolMeasToAddModListNR_r16,
-        VarMeasReport,
-        __CellsTriggeredList__item__physCellId,
-        __CellsTriggeredList__item__physCellIdEUTRA,
-        __CellsTriggeredList__item__physCellIdUTRA_FDD_r16,
-        _CellsTriggeredList__item_,
-        CellsTriggeredList,
-        _CLI_TriggeredList_r16_srs_RSRP_TriggeredList_r16,
-        _CLI_TriggeredList_r16_cli_RSSI_TriggeredList_r16,
-        CLI_TriggeredList_r16,
-        _SRS_RSRP_TriggeredList_r16__item_,
-        SRS_RSRP_TriggeredList_r16,
-        _CLI_RSSI_TriggeredList_r16__item_,
-        CLI_RSSI_TriggeredList_r16,
-        _VarMeasReportListSL_r16__item_,
-        VarMeasReportListSL_r16,
-        _VarMeasReportSL_r16_sl_MeasId_r16,
-        __VarMeasReportSL_r16_sl_FrequencyTriggeredList_r16__item_,
-        _VarMeasReportSL_r16_sl_FrequencyTriggeredList_r16,
-        _VarMeasReportSL_r16_sl_NumberOfReportsSent_r16,
-        VarMeasReportSL_r16,
-        VarMobilityHistoryReport_r16,
-        _VarPendingRNA_Update_pendingRNA_Update,
-        VarPendingRNA_Update,
-        _VarRA_Report_r16_ra_ReportList_r16,
-        _VarRA_Report_r16_plmn_IdentityList_r16,
-        VarRA_Report_r16,
-        _PLMN_IdentityList_r16__item_,
-        PLMN_IdentityList_r16,
-        _VarResumeMAC_Input_sourcePhysCellId,
-        _VarResumeMAC_Input_targetCellIdentity,
-        _VarResumeMAC_Input_source_c_RNTI,
-        VarResumeMAC_Input,
-        _VarRLF_Report_r16_rlf_Report_r16,
-        _VarRLF_Report_r16_plmn_IdentityList_r16,
-        VarRLF_Report_r16,
-        _VarShortMAC_Input_sourcePhysCellId,
-        _VarShortMAC_Input_targetCellIdentity,
-        _VarShortMAC_Input_source_c_RNTI,
-        VarShortMAC_Input,
-    ]
-
-class NR_Sidelink_Preconf:
-
-    _name_  = u'NR-Sidelink-Preconf'
-    _oid_   = []
-    
-    _obj_ = [
-        u'SL-PreconfigurationNR-r16',
-        u'SidelinkPreconfigNR-r16',
-        u'SL-PreconfigGeneral-r16',
-        u'SL-RoHC-Profiles-r16',
-        ]
-    _type_ = [
-        u'SL-PreconfigurationNR-r16',
-        u'SidelinkPreconfigNR-r16',
-        u'SL-PreconfigGeneral-r16',
-        u'SL-RoHC-Profiles-r16',
-        u'SL-PreconfigurationNR-r16',
-        u'SidelinkPreconfigNR-r16',
-        u'SL-PreconfigGeneral-r16',
-        u'SL-RoHC-Profiles-r16',
-        ]
-    _set_ = [
-        ]
-    _val_ = [
-        ]
-    _class_ = [
-        ]
-    _param_ = [
-        ]
-    
-    #-----< SL-PreconfigurationNR-r16 >-----#
-    SL_PreconfigurationNR_r16 = SEQ(name=u'SL-PreconfigurationNR-r16', mode=MODE_TYPE)
-    _SL_PreconfigurationNR_r16_sidelinkPreconfigNR_r16 = SEQ(name=u'sidelinkPreconfigNR-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-Sidelink-Preconf', 'SidelinkPreconfigNR-r16')))
-    SL_PreconfigurationNR_r16._cont = ASN1Dict([
-        (u'sidelinkPreconfigNR-r16', _SL_PreconfigurationNR_r16_sidelinkPreconfigNR_r16),
-        ])
-    SL_PreconfigurationNR_r16._ext = []
-    
-    #-----< SidelinkPreconfigNR-r16 >-----#
-    SidelinkPreconfigNR_r16 = SEQ(name=u'SidelinkPreconfigNR-r16', mode=MODE_TYPE)
-    _SidelinkPreconfigNR_r16_sl_PreconfigFreqInfoList_r16 = SEQ_OF(name=u'sl-PreconfigFreqInfoList-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    __SidelinkPreconfigNR_r16_sl_PreconfigFreqInfoList_r16__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('NR-RRC-Definitions', 'SL-FreqConfigCommon-r16')))
-    _SidelinkPreconfigNR_r16_sl_PreconfigFreqInfoList_r16._cont = __SidelinkPreconfigNR_r16_sl_PreconfigFreqInfoList_r16__item_
-    _SidelinkPreconfigNR_r16_sl_PreconfigFreqInfoList_r16._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=8)], ev=None, er=[])
-    _SidelinkPreconfigNR_r16_sl_PreconfigNR_AnchorCarrierFreqList_r16 = SEQ_OF(name=u'sl-PreconfigNR-AnchorCarrierFreqList-r16', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'SL-NR-AnchorCarrierFreqList-r16')), opt=True)
-    _SidelinkPreconfigNR_r16_sl_PreconfigEUTRA_AnchorCarrierFreqList_r16 = SEQ_OF(name=u'sl-PreconfigEUTRA-AnchorCarrierFreqList-r16', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'SL-EUTRA-AnchorCarrierFreqList-r16')), opt=True)
-    _SidelinkPreconfigNR_r16_sl_RadioBearerPreConfigList_r16 = SEQ_OF(name=u'sl-RadioBearerPreConfigList-r16', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    __SidelinkPreconfigNR_r16_sl_RadioBearerPreConfigList_r16__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('NR-RRC-Definitions', 'SL-RadioBearerConfig-r16')))
-    _SidelinkPreconfigNR_r16_sl_RadioBearerPreConfigList_r16._cont = __SidelinkPreconfigNR_r16_sl_RadioBearerPreConfigList_r16__item_
-    _SidelinkPreconfigNR_r16_sl_RadioBearerPreConfigList_r16._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=512)], ev=None, er=[])
-    _SidelinkPreconfigNR_r16_sl_RLC_BearerPreConfigList_r16 = SEQ_OF(name=u'sl-RLC-BearerPreConfigList-r16', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    __SidelinkPreconfigNR_r16_sl_RLC_BearerPreConfigList_r16__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('NR-RRC-Definitions', 'SL-RLC-BearerConfig-r16')))
-    _SidelinkPreconfigNR_r16_sl_RLC_BearerPreConfigList_r16._cont = __SidelinkPreconfigNR_r16_sl_RLC_BearerPreConfigList_r16__item_
-    _SidelinkPreconfigNR_r16_sl_RLC_BearerPreConfigList_r16._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=512)], ev=None, er=[])
-    _SidelinkPreconfigNR_r16_sl_MeasPreConfig_r16 = SEQ(name=u'sl-MeasPreConfig-r16', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'SL-MeasConfigCommon-r16')), opt=True)
-    _SidelinkPreconfigNR_r16_sl_OffsetDFN_r16 = INT(name=u'sl-OffsetDFN-r16', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _SidelinkPreconfigNR_r16_sl_OffsetDFN_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=1000)], ev=None, er=[])
-    _SidelinkPreconfigNR_r16_t400_r16 = ENUM(name=u't400-r16', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _SidelinkPreconfigNR_r16_t400_r16._cont = ASN1Dict([(u'ms100', 0), (u'ms200', 1), (u'ms300', 2), (u'ms400', 3), (u'ms600', 4), (u'ms1000', 5), (u'ms1500', 6), (u'ms2000', 7)])
-    _SidelinkPreconfigNR_r16_t400_r16._ext = None
-    _SidelinkPreconfigNR_r16_sl_MaxNumConsecutiveDTX_r16 = ENUM(name=u'sl-MaxNumConsecutiveDTX-r16', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _SidelinkPreconfigNR_r16_sl_MaxNumConsecutiveDTX_r16._cont = ASN1Dict([(u'n1', 0), (u'n2', 1), (u'n3', 2), (u'n4', 3), (u'n6', 4), (u'n8', 5), (u'n16', 6), (u'n32', 7)])
-    _SidelinkPreconfigNR_r16_sl_MaxNumConsecutiveDTX_r16._ext = None
-    _SidelinkPreconfigNR_r16_sl_SSB_PriorityNR_r16 = INT(name=u'sl-SSB-PriorityNR-r16', mode=MODE_TYPE, tag=(9, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _SidelinkPreconfigNR_r16_sl_SSB_PriorityNR_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=8)], ev=None, er=[])
-    _SidelinkPreconfigNR_r16_sl_PreconfigGeneral_r16 = SEQ(name=u'sl-PreconfigGeneral-r16', mode=MODE_TYPE, tag=(10, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-Sidelink-Preconf', 'SL-PreconfigGeneral-r16')), opt=True)
-    _SidelinkPreconfigNR_r16_sl_UE_SelectedPreConfig_r16 = SEQ(name=u'sl-UE-SelectedPreConfig-r16', mode=MODE_TYPE, tag=(11, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'SL-UE-SelectedConfig-r16')), opt=True)
-    _SidelinkPreconfigNR_r16_sl_CSI_Acquisition_r16 = ENUM(name=u'sl-CSI-Acquisition-r16', mode=MODE_TYPE, tag=(12, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _SidelinkPreconfigNR_r16_sl_CSI_Acquisition_r16._cont = ASN1Dict([(u'enabled', 0)])
-    _SidelinkPreconfigNR_r16_sl_CSI_Acquisition_r16._ext = None
-    _SidelinkPreconfigNR_r16_sl_RoHC_Profiles_r16 = SEQ(name=u'sl-RoHC-Profiles-r16', mode=MODE_TYPE, tag=(13, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-Sidelink-Preconf', 'SL-RoHC-Profiles-r16')), opt=True)
-    _SidelinkPreconfigNR_r16_sl_MaxCID_r16 = INT(name=u'sl-MaxCID-r16', mode=MODE_TYPE, tag=(14, TAG_CONTEXT_SPEC, TAG_IMPLICIT), default=15)
-    _SidelinkPreconfigNR_r16_sl_MaxCID_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=16383)], ev=None, er=[])
-    SidelinkPreconfigNR_r16._cont = ASN1Dict([
-        (u'sl-PreconfigFreqInfoList-r16', _SidelinkPreconfigNR_r16_sl_PreconfigFreqInfoList_r16),
-        (u'sl-PreconfigNR-AnchorCarrierFreqList-r16', _SidelinkPreconfigNR_r16_sl_PreconfigNR_AnchorCarrierFreqList_r16),
-        (u'sl-PreconfigEUTRA-AnchorCarrierFreqList-r16', _SidelinkPreconfigNR_r16_sl_PreconfigEUTRA_AnchorCarrierFreqList_r16),
-        (u'sl-RadioBearerPreConfigList-r16', _SidelinkPreconfigNR_r16_sl_RadioBearerPreConfigList_r16),
-        (u'sl-RLC-BearerPreConfigList-r16', _SidelinkPreconfigNR_r16_sl_RLC_BearerPreConfigList_r16),
-        (u'sl-MeasPreConfig-r16', _SidelinkPreconfigNR_r16_sl_MeasPreConfig_r16),
-        (u'sl-OffsetDFN-r16', _SidelinkPreconfigNR_r16_sl_OffsetDFN_r16),
-        (u't400-r16', _SidelinkPreconfigNR_r16_t400_r16),
-        (u'sl-MaxNumConsecutiveDTX-r16', _SidelinkPreconfigNR_r16_sl_MaxNumConsecutiveDTX_r16),
-        (u'sl-SSB-PriorityNR-r16', _SidelinkPreconfigNR_r16_sl_SSB_PriorityNR_r16),
-        (u'sl-PreconfigGeneral-r16', _SidelinkPreconfigNR_r16_sl_PreconfigGeneral_r16),
-        (u'sl-UE-SelectedPreConfig-r16', _SidelinkPreconfigNR_r16_sl_UE_SelectedPreConfig_r16),
-        (u'sl-CSI-Acquisition-r16', _SidelinkPreconfigNR_r16_sl_CSI_Acquisition_r16),
-        (u'sl-RoHC-Profiles-r16', _SidelinkPreconfigNR_r16_sl_RoHC_Profiles_r16),
-        (u'sl-MaxCID-r16', _SidelinkPreconfigNR_r16_sl_MaxCID_r16),
-        ])
-    SidelinkPreconfigNR_r16._ext = []
-    
-    #-----< SL-PreconfigGeneral-r16 >-----#
-    SL_PreconfigGeneral_r16 = SEQ(name=u'SL-PreconfigGeneral-r16', mode=MODE_TYPE)
-    _SL_PreconfigGeneral_r16_sl_TDD_Configuration_r16 = SEQ(name=u'sl-TDD-Configuration-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'TDD-UL-DL-ConfigCommon')), opt=True)
-    _SL_PreconfigGeneral_r16_reservedBits_r16 = BIT_STR(name=u'reservedBits-r16', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _SL_PreconfigGeneral_r16_reservedBits_r16._const_sz = ASN1Set(rv=[2], rr=[], ev=None, er=[])
-    SL_PreconfigGeneral_r16._cont = ASN1Dict([
-        (u'sl-TDD-Configuration-r16', _SL_PreconfigGeneral_r16_sl_TDD_Configuration_r16),
-        (u'reservedBits-r16', _SL_PreconfigGeneral_r16_reservedBits_r16),
-        ])
-    SL_PreconfigGeneral_r16._ext = []
-    
-    #-----< SL-RoHC-Profiles-r16 >-----#
-    SL_RoHC_Profiles_r16 = SEQ(name=u'SL-RoHC-Profiles-r16', mode=MODE_TYPE)
-    _SL_RoHC_Profiles_r16_profile0x0001_r16 = BOOL(name=u'profile0x0001-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _SL_RoHC_Profiles_r16_profile0x0002_r16 = BOOL(name=u'profile0x0002-r16', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _SL_RoHC_Profiles_r16_profile0x0003_r16 = BOOL(name=u'profile0x0003-r16', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _SL_RoHC_Profiles_r16_profile0x0004_r16 = BOOL(name=u'profile0x0004-r16', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _SL_RoHC_Profiles_r16_profile0x0006_r16 = BOOL(name=u'profile0x0006-r16', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _SL_RoHC_Profiles_r16_profile0x0101_r16 = BOOL(name=u'profile0x0101-r16', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _SL_RoHC_Profiles_r16_profile0x0102_r16 = BOOL(name=u'profile0x0102-r16', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _SL_RoHC_Profiles_r16_profile0x0103_r16 = BOOL(name=u'profile0x0103-r16', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _SL_RoHC_Profiles_r16_profile0x0104_r16 = BOOL(name=u'profile0x0104-r16', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    SL_RoHC_Profiles_r16._cont = ASN1Dict([
-        (u'profile0x0001-r16', _SL_RoHC_Profiles_r16_profile0x0001_r16),
-        (u'profile0x0002-r16', _SL_RoHC_Profiles_r16_profile0x0002_r16),
-        (u'profile0x0003-r16', _SL_RoHC_Profiles_r16_profile0x0003_r16),
-        (u'profile0x0004-r16', _SL_RoHC_Profiles_r16_profile0x0004_r16),
-        (u'profile0x0006-r16', _SL_RoHC_Profiles_r16_profile0x0006_r16),
-        (u'profile0x0101-r16', _SL_RoHC_Profiles_r16_profile0x0101_r16),
-        (u'profile0x0102-r16', _SL_RoHC_Profiles_r16_profile0x0102_r16),
-        (u'profile0x0103-r16', _SL_RoHC_Profiles_r16_profile0x0103_r16),
-        (u'profile0x0104-r16', _SL_RoHC_Profiles_r16_profile0x0104_r16),
-        ])
-    SL_RoHC_Profiles_r16._ext = None
-    
-    _all_ = [
-        _SL_PreconfigurationNR_r16_sidelinkPreconfigNR_r16,
-        SL_PreconfigurationNR_r16,
-        __SidelinkPreconfigNR_r16_sl_PreconfigFreqInfoList_r16__item_,
-        _SidelinkPreconfigNR_r16_sl_PreconfigFreqInfoList_r16,
-        _SidelinkPreconfigNR_r16_sl_PreconfigNR_AnchorCarrierFreqList_r16,
-        _SidelinkPreconfigNR_r16_sl_PreconfigEUTRA_AnchorCarrierFreqList_r16,
-        __SidelinkPreconfigNR_r16_sl_RadioBearerPreConfigList_r16__item_,
-        _SidelinkPreconfigNR_r16_sl_RadioBearerPreConfigList_r16,
-        __SidelinkPreconfigNR_r16_sl_RLC_BearerPreConfigList_r16__item_,
-        _SidelinkPreconfigNR_r16_sl_RLC_BearerPreConfigList_r16,
-        _SidelinkPreconfigNR_r16_sl_MeasPreConfig_r16,
-        _SidelinkPreconfigNR_r16_sl_OffsetDFN_r16,
-        _SidelinkPreconfigNR_r16_t400_r16,
-        _SidelinkPreconfigNR_r16_sl_MaxNumConsecutiveDTX_r16,
-        _SidelinkPreconfigNR_r16_sl_SSB_PriorityNR_r16,
-        _SidelinkPreconfigNR_r16_sl_PreconfigGeneral_r16,
-        _SidelinkPreconfigNR_r16_sl_UE_SelectedPreConfig_r16,
-        _SidelinkPreconfigNR_r16_sl_CSI_Acquisition_r16,
-        _SidelinkPreconfigNR_r16_sl_RoHC_Profiles_r16,
-        _SidelinkPreconfigNR_r16_sl_MaxCID_r16,
-        SidelinkPreconfigNR_r16,
-        _SL_PreconfigGeneral_r16_sl_TDD_Configuration_r16,
-        _SL_PreconfigGeneral_r16_reservedBits_r16,
-        SL_PreconfigGeneral_r16,
-        _SL_RoHC_Profiles_r16_profile0x0001_r16,
-        _SL_RoHC_Profiles_r16_profile0x0002_r16,
-        _SL_RoHC_Profiles_r16_profile0x0003_r16,
-        _SL_RoHC_Profiles_r16_profile0x0004_r16,
-        _SL_RoHC_Profiles_r16_profile0x0006_r16,
-        _SL_RoHC_Profiles_r16_profile0x0101_r16,
-        _SL_RoHC_Profiles_r16_profile0x0102_r16,
-        _SL_RoHC_Profiles_r16_profile0x0103_r16,
-        _SL_RoHC_Profiles_r16_profile0x0104_r16,
-        SL_RoHC_Profiles_r16,
-    ]
-
-class NR_InterNodeDefinitions:
-
-    _name_  = u'NR-InterNodeDefinitions'
-    _oid_   = []
-    
-    _obj_ = [
-        u'HandoverCommand',
-        u'HandoverCommand-IEs',
-        u'HandoverPreparationInformation',
-        u'HandoverPreparationInformation-IEs',
-        u'AS-Config',
-        u'AS-Context',
-        u'ConfigRestrictInfoDAPS-r16',
-        u'ConfigRestrictInfoDAPS-v1640',
-        u'ReestablishmentInfo',
-        u'ReestabNCellInfoList',
-        u'ReestabNCellInfo',
-        u'RRM-Config',
-        u'CG-Config',
-        u'CG-Config-IEs',
-        u'CG-Config-v1540-IEs',
-        u'CG-Config-v1560-IEs',
-        u'CG-Config-v1590-IEs',
-        u'CG-Config-v1610-IEs',
-        u'CG-Config-v1620-IEs',
-        u'CG-Config-v1630-IEs',
-        u'CG-Config-v1640-IEs',
-        u'ServCellInfoListSCG-NR-r16',
-        u'ServCellInfoXCG-NR-r16',
-        u'FrequencyConfig-NR-r16',
-        u'ServCellInfoListSCG-EUTRA-r16',
-        u'ServCellInfoXCG-EUTRA-r16',
-        u'TransmissionBandwidth-EUTRA-r16',
-        u'PH-TypeListSCG',
-        u'PH-InfoSCG',
-        u'PH-UplinkCarrierSCG',
-        u'MeasConfigSN',
-        u'NR-FreqInfo',
-        u'ConfigRestrictModReqSCG',
-        u'BandCombinationIndex',
-        u'BandCombinationInfoSN',
-        u'FR-InfoList',
-        u'FR-Info',
-        u'CandidateServingFreqListNR',
-        u'CandidateServingFreqListEUTRA',
-        u'T-Offset-r16',
-        u'CG-ConfigInfo',
-        u'CG-ConfigInfo-IEs',
-        u'CG-ConfigInfo-v1540-IEs',
-        u'CG-ConfigInfo-v1560-IEs',
-        u'CG-ConfigInfo-v1570-IEs',
-        u'CG-ConfigInfo-v1590-IEs',
-        u'CG-ConfigInfo-v1610-IEs',
-        u'CG-ConfigInfo-v1620-IEs',
-        u'CG-ConfigInfo-v1640-IEs',
-        u'ServCellInfoListMCG-NR-r16',
-        u'ServCellInfoListMCG-EUTRA-r16',
-        u'SFTD-FrequencyList-NR',
-        u'SFTD-FrequencyList-EUTRA',
-        u'ConfigRestrictInfoSCG',
-        u'SelectedBandEntriesMN',
-        u'BandEntryIndex',
-        u'PH-TypeListMCG',
-        u'PH-InfoMCG',
-        u'PH-UplinkCarrierMCG',
-        u'BandCombinationInfoList',
-        u'BandCombinationInfo',
-        u'FeatureSetEntryIndex',
-        u'DRX-Info',
-        u'DRX-Info2',
-        u'MeasConfigMN',
-        u'MRDC-AssistanceInfo',
-        u'AffectedCarrierFreqCombInfoMRDC',
-        u'VictimSystemType',
-        u'AffectedCarrierFreqCombEUTRA',
-        u'AffectedCarrierFreqCombNR',
-        u'MeasurementTimingConfiguration',
-        u'MeasurementTimingConfiguration-IEs',
-        u'MeasurementTimingConfiguration-v1550-IEs',
-        u'MeasurementTimingConfiguration-v1610-IEs',
-        u'MeasTimingList',
-        u'MeasTiming',
-        u'UERadioPagingInformation',
-        u'UERadioPagingInformation-IEs',
-        u'UERadioPagingInformation-v15e0-IEs',
-        u'UERadioAccessCapabilityInformation',
-        u'UERadioAccessCapabilityInformation-IEs',
-        u'maxMeasFreqsMN',
-        u'maxMeasFreqsSN',
-        u'maxMeasIdentitiesMN',
-        u'maxCellPrep',
-        ]
-    _type_ = [
-        u'HandoverCommand',
-        u'HandoverCommand-IEs',
-        u'HandoverPreparationInformation',
-        u'HandoverPreparationInformation-IEs',
-        u'AS-Config',
-        u'AS-Context',
-        u'ConfigRestrictInfoDAPS-r16',
-        u'ConfigRestrictInfoDAPS-v1640',
-        u'ReestablishmentInfo',
-        u'ReestabNCellInfoList',
-        u'ReestabNCellInfo',
-        u'RRM-Config',
-        u'CG-Config',
-        u'CG-Config-IEs',
-        u'CG-Config-v1540-IEs',
-        u'CG-Config-v1560-IEs',
-        u'CG-Config-v1590-IEs',
-        u'CG-Config-v1610-IEs',
-        u'CG-Config-v1620-IEs',
-        u'CG-Config-v1630-IEs',
-        u'CG-Config-v1640-IEs',
-        u'ServCellInfoListSCG-NR-r16',
-        u'ServCellInfoXCG-NR-r16',
-        u'FrequencyConfig-NR-r16',
-        u'ServCellInfoListSCG-EUTRA-r16',
-        u'ServCellInfoXCG-EUTRA-r16',
-        u'TransmissionBandwidth-EUTRA-r16',
-        u'PH-TypeListSCG',
-        u'PH-InfoSCG',
-        u'PH-UplinkCarrierSCG',
-        u'MeasConfigSN',
-        u'NR-FreqInfo',
-        u'ConfigRestrictModReqSCG',
-        u'BandCombinationIndex',
-        u'BandCombinationInfoSN',
-        u'FR-InfoList',
-        u'FR-Info',
-        u'CandidateServingFreqListNR',
-        u'CandidateServingFreqListEUTRA',
-        u'T-Offset-r16',
-        u'CG-ConfigInfo',
-        u'CG-ConfigInfo-IEs',
-        u'CG-ConfigInfo-v1540-IEs',
-        u'CG-ConfigInfo-v1560-IEs',
-        u'CG-ConfigInfo-v1570-IEs',
-        u'CG-ConfigInfo-v1590-IEs',
-        u'CG-ConfigInfo-v1610-IEs',
-        u'CG-ConfigInfo-v1620-IEs',
-        u'CG-ConfigInfo-v1640-IEs',
-        u'ServCellInfoListMCG-NR-r16',
-        u'ServCellInfoListMCG-EUTRA-r16',
-        u'SFTD-FrequencyList-NR',
-        u'SFTD-FrequencyList-EUTRA',
-        u'ConfigRestrictInfoSCG',
-        u'SelectedBandEntriesMN',
-        u'BandEntryIndex',
-        u'PH-TypeListMCG',
-        u'PH-InfoMCG',
-        u'PH-UplinkCarrierMCG',
-        u'BandCombinationInfoList',
-        u'BandCombinationInfo',
-        u'FeatureSetEntryIndex',
-        u'DRX-Info',
-        u'DRX-Info2',
-        u'MeasConfigMN',
-        u'MRDC-AssistanceInfo',
-        u'AffectedCarrierFreqCombInfoMRDC',
-        u'VictimSystemType',
-        u'AffectedCarrierFreqCombEUTRA',
-        u'AffectedCarrierFreqCombNR',
-        u'MeasurementTimingConfiguration',
-        u'MeasurementTimingConfiguration-IEs',
-        u'MeasurementTimingConfiguration-v1550-IEs',
-        u'MeasurementTimingConfiguration-v1610-IEs',
-        u'MeasTimingList',
-        u'MeasTiming',
-        u'UERadioPagingInformation',
-        u'UERadioPagingInformation-IEs',
-        u'UERadioPagingInformation-v15e0-IEs',
-        u'UERadioAccessCapabilityInformation',
-        u'UERadioAccessCapabilityInformation-IEs',
-        ]
-    _set_ = [
-        ]
-    _val_ = [
-        u'maxMeasFreqsMN',
-        u'maxMeasFreqsSN',
-        u'maxMeasIdentitiesMN',
-        u'maxCellPrep',
-        ]
-    _class_ = [
-        ]
-    _param_ = [
-        ]
-    
-    #-----< HandoverCommand >-----#
-    HandoverCommand = SEQ(name=u'HandoverCommand', mode=MODE_TYPE)
-    _HandoverCommand_criticalExtensions = CHOICE(name=u'criticalExtensions', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
-    __HandoverCommand_criticalExtensions_c1 = CHOICE(name=u'c1', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
-    ___HandoverCommand_criticalExtensions_c1_handoverCommand = SEQ(name=u'handoverCommand', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-InterNodeDefinitions', 'HandoverCommand-IEs')))
-    ___HandoverCommand_criticalExtensions_c1_spare3 = NULL(name=u'spare3', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    ___HandoverCommand_criticalExtensions_c1_spare2 = NULL(name=u'spare2', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    ___HandoverCommand_criticalExtensions_c1_spare1 = NULL(name=u'spare1', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    __HandoverCommand_criticalExtensions_c1._cont = ASN1Dict([
-        (u'handoverCommand', ___HandoverCommand_criticalExtensions_c1_handoverCommand),
-        (u'spare3', ___HandoverCommand_criticalExtensions_c1_spare3),
-        (u'spare2', ___HandoverCommand_criticalExtensions_c1_spare2),
-        (u'spare1', ___HandoverCommand_criticalExtensions_c1_spare1),
-        ])
-    __HandoverCommand_criticalExtensions_c1._ext = None
-    __HandoverCommand_criticalExtensions_criticalExtensionsFuture = SEQ(name=u'criticalExtensionsFuture', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    __HandoverCommand_criticalExtensions_criticalExtensionsFuture._cont = ASN1Dict([
-        ])
-    __HandoverCommand_criticalExtensions_criticalExtensionsFuture._ext = None
-    _HandoverCommand_criticalExtensions._cont = ASN1Dict([
-        (u'c1', __HandoverCommand_criticalExtensions_c1),
-        (u'criticalExtensionsFuture', __HandoverCommand_criticalExtensions_criticalExtensionsFuture),
-        ])
-    _HandoverCommand_criticalExtensions._ext = None
-    HandoverCommand._cont = ASN1Dict([
-        (u'criticalExtensions', _HandoverCommand_criticalExtensions),
-        ])
-    HandoverCommand._ext = None
-    
-    #-----< HandoverCommand-IEs >-----#
-    HandoverCommand_IEs = SEQ(name=u'HandoverCommand-IEs', mode=MODE_TYPE)
-    _HandoverCommand_IEs_handoverCommandMessage = OCT_STR(name=u'handoverCommandMessage', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    __HandoverCommand_IEs_handoverCommandMessage_contain = SEQ(name='_cont_handoverCommandMessage', mode=MODE_TYPE, typeref=ASN1RefType(('NR-RRC-Definitions', 'RRCReconfiguration')))
-    _HandoverCommand_IEs_handoverCommandMessage._const_cont = __HandoverCommand_IEs_handoverCommandMessage_contain
-    _HandoverCommand_IEs_nonCriticalExtension = SEQ(name=u'nonCriticalExtension', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _HandoverCommand_IEs_nonCriticalExtension._cont = ASN1Dict([
-        ])
-    _HandoverCommand_IEs_nonCriticalExtension._ext = None
-    HandoverCommand_IEs._cont = ASN1Dict([
-        (u'handoverCommandMessage', _HandoverCommand_IEs_handoverCommandMessage),
-        (u'nonCriticalExtension', _HandoverCommand_IEs_nonCriticalExtension),
-        ])
-    HandoverCommand_IEs._ext = None
-    
-    #-----< HandoverPreparationInformation >-----#
-    HandoverPreparationInformation = SEQ(name=u'HandoverPreparationInformation', mode=MODE_TYPE)
-    _HandoverPreparationInformation_criticalExtensions = CHOICE(name=u'criticalExtensions', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
-    __HandoverPreparationInformation_criticalExtensions_c1 = CHOICE(name=u'c1', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
-    ___HandoverPreparationInformation_criticalExtensions_c1_handoverPreparationInformation = SEQ(name=u'handoverPreparationInformation', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-InterNodeDefinitions', 'HandoverPreparationInformation-IEs')))
-    ___HandoverPreparationInformation_criticalExtensions_c1_spare3 = NULL(name=u'spare3', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    ___HandoverPreparationInformation_criticalExtensions_c1_spare2 = NULL(name=u'spare2', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    ___HandoverPreparationInformation_criticalExtensions_c1_spare1 = NULL(name=u'spare1', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    __HandoverPreparationInformation_criticalExtensions_c1._cont = ASN1Dict([
-        (u'handoverPreparationInformation', ___HandoverPreparationInformation_criticalExtensions_c1_handoverPreparationInformation),
-        (u'spare3', ___HandoverPreparationInformation_criticalExtensions_c1_spare3),
-        (u'spare2', ___HandoverPreparationInformation_criticalExtensions_c1_spare2),
-        (u'spare1', ___HandoverPreparationInformation_criticalExtensions_c1_spare1),
-        ])
-    __HandoverPreparationInformation_criticalExtensions_c1._ext = None
-    __HandoverPreparationInformation_criticalExtensions_criticalExtensionsFuture = SEQ(name=u'criticalExtensionsFuture', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    __HandoverPreparationInformation_criticalExtensions_criticalExtensionsFuture._cont = ASN1Dict([
-        ])
-    __HandoverPreparationInformation_criticalExtensions_criticalExtensionsFuture._ext = None
-    _HandoverPreparationInformation_criticalExtensions._cont = ASN1Dict([
-        (u'c1', __HandoverPreparationInformation_criticalExtensions_c1),
-        (u'criticalExtensionsFuture', __HandoverPreparationInformation_criticalExtensions_criticalExtensionsFuture),
-        ])
-    _HandoverPreparationInformation_criticalExtensions._ext = None
-    HandoverPreparationInformation._cont = ASN1Dict([
-        (u'criticalExtensions', _HandoverPreparationInformation_criticalExtensions),
-        ])
-    HandoverPreparationInformation._ext = None
-    
-    #-----< HandoverPreparationInformation-IEs >-----#
-    HandoverPreparationInformation_IEs = SEQ(name=u'HandoverPreparationInformation-IEs', mode=MODE_TYPE)
-    _HandoverPreparationInformation_IEs_ue_CapabilityRAT_List = SEQ_OF(name=u'ue-CapabilityRAT-List', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'UE-CapabilityRAT-ContainerList')))
-    _HandoverPreparationInformation_IEs_sourceConfig = SEQ(name=u'sourceConfig', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-InterNodeDefinitions', 'AS-Config')), opt=True)
-    _HandoverPreparationInformation_IEs_rrm_Config = SEQ(name=u'rrm-Config', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-InterNodeDefinitions', 'RRM-Config')), opt=True)
-    _HandoverPreparationInformation_IEs_as_Context = SEQ(name=u'as-Context', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-InterNodeDefinitions', 'AS-Context')), opt=True)
-    _HandoverPreparationInformation_IEs_nonCriticalExtension = SEQ(name=u'nonCriticalExtension', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _HandoverPreparationInformation_IEs_nonCriticalExtension._cont = ASN1Dict([
-        ])
-    _HandoverPreparationInformation_IEs_nonCriticalExtension._ext = None
-    HandoverPreparationInformation_IEs._cont = ASN1Dict([
-        (u'ue-CapabilityRAT-List', _HandoverPreparationInformation_IEs_ue_CapabilityRAT_List),
-        (u'sourceConfig', _HandoverPreparationInformation_IEs_sourceConfig),
-        (u'rrm-Config', _HandoverPreparationInformation_IEs_rrm_Config),
-        (u'as-Context', _HandoverPreparationInformation_IEs_as_Context),
-        (u'nonCriticalExtension', _HandoverPreparationInformation_IEs_nonCriticalExtension),
-        ])
-    HandoverPreparationInformation_IEs._ext = None
-    
-    #-----< AS-Config >-----#
-    AS_Config = SEQ(name=u'AS-Config', mode=MODE_TYPE)
-    _AS_Config_rrcReconfiguration = OCT_STR(name=u'rrcReconfiguration', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    __AS_Config_rrcReconfiguration_contain = SEQ(name='_cont_rrcReconfiguration', mode=MODE_TYPE, typeref=ASN1RefType(('NR-RRC-Definitions', 'RRCReconfiguration')))
-    _AS_Config_rrcReconfiguration._const_cont = __AS_Config_rrcReconfiguration_contain
-    _AS_Config_sourceRB_SN_Config = OCT_STR(name=u'sourceRB-SN-Config', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True, group=0)
-    __AS_Config_sourceRB_SN_Config_contain = SEQ(name='_cont_sourceRB-SN-Config', mode=MODE_TYPE, typeref=ASN1RefType(('NR-RRC-Definitions', 'RadioBearerConfig')))
-    _AS_Config_sourceRB_SN_Config._const_cont = __AS_Config_sourceRB_SN_Config_contain
-    _AS_Config_sourceSCG_NR_Config = OCT_STR(name=u'sourceSCG-NR-Config', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True, group=0)
-    __AS_Config_sourceSCG_NR_Config_contain = SEQ(name='_cont_sourceSCG-NR-Config', mode=MODE_TYPE, typeref=ASN1RefType(('NR-RRC-Definitions', 'RRCReconfiguration')))
-    _AS_Config_sourceSCG_NR_Config._const_cont = __AS_Config_sourceSCG_NR_Config_contain
-    _AS_Config_sourceSCG_EUTRA_Config = OCT_STR(name=u'sourceSCG-EUTRA-Config', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True, group=0)
-    _AS_Config_sourceSCG_Configured = ENUM(name=u'sourceSCG-Configured', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True, group=1)
-    _AS_Config_sourceSCG_Configured._cont = ASN1Dict([(u'true', 0)])
-    _AS_Config_sourceSCG_Configured._ext = None
-    AS_Config._cont = ASN1Dict([
-        (u'rrcReconfiguration', _AS_Config_rrcReconfiguration),
-        (u'sourceRB-SN-Config', _AS_Config_sourceRB_SN_Config),
-        (u'sourceSCG-NR-Config', _AS_Config_sourceSCG_NR_Config),
-        (u'sourceSCG-EUTRA-Config', _AS_Config_sourceSCG_EUTRA_Config),
-        (u'sourceSCG-Configured', _AS_Config_sourceSCG_Configured),
-        ])
-    AS_Config._ext = [u'sourceRB-SN-Config', u'sourceSCG-NR-Config', u'sourceSCG-EUTRA-Config', u'sourceSCG-Configured']
-    
-    #-----< AS-Context >-----#
-    AS_Context = SEQ(name=u'AS-Context', mode=MODE_TYPE)
-    _AS_Context_reestablishmentInfo = SEQ(name=u'reestablishmentInfo', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-InterNodeDefinitions', 'ReestablishmentInfo')), opt=True)
-    _AS_Context_configRestrictInfo = SEQ(name=u'configRestrictInfo', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-InterNodeDefinitions', 'ConfigRestrictInfoSCG')), opt=True)
-    _AS_Context_ran_NotificationAreaInfo = CHOICE(name=u'ran-NotificationAreaInfo', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'RAN-NotificationAreaInfo')), opt=True, group=0)
-    _AS_Context_ueAssistanceInformation = OCT_STR(name=u'ueAssistanceInformation', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True, group=1)
-    __AS_Context_ueAssistanceInformation_contain = SEQ(name='_cont_ueAssistanceInformation', mode=MODE_TYPE, typeref=ASN1RefType(('NR-RRC-Definitions', 'UEAssistanceInformation')))
-    _AS_Context_ueAssistanceInformation._const_cont = __AS_Context_ueAssistanceInformation_contain
-    _AS_Context_selectedBandCombinationSN = SEQ(name=u'selectedBandCombinationSN', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-InterNodeDefinitions', 'BandCombinationInfoSN')), opt=True, group=2)
-    _AS_Context_configRestrictInfoDAPS_r16 = SEQ(name=u'configRestrictInfoDAPS-r16', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-InterNodeDefinitions', 'ConfigRestrictInfoDAPS-r16')), opt=True, group=3)
-    _AS_Context_sidelinkUEInformationNR_r16 = OCT_STR(name=u'sidelinkUEInformationNR-r16', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True, group=3)
-    _AS_Context_sidelinkUEInformationEUTRA_r16 = OCT_STR(name=u'sidelinkUEInformationEUTRA-r16', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True, group=3)
-    _AS_Context_ueAssistanceInformationEUTRA_r16 = OCT_STR(name=u'ueAssistanceInformationEUTRA-r16', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True, group=3)
-    _AS_Context_ueAssistanceInformationSCG_r16 = OCT_STR(name=u'ueAssistanceInformationSCG-r16', mode=MODE_TYPE, tag=(9, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True, group=3)
-    __AS_Context_ueAssistanceInformationSCG_r16_contain = SEQ(name='_cont_ueAssistanceInformationSCG-r16', mode=MODE_TYPE, typeref=ASN1RefType(('NR-RRC-Definitions', 'UEAssistanceInformation')))
-    _AS_Context_ueAssistanceInformationSCG_r16._const_cont = __AS_Context_ueAssistanceInformationSCG_r16_contain
-    _AS_Context_needForGapsInfoNR_r16 = SEQ(name=u'needForGapsInfoNR-r16', mode=MODE_TYPE, tag=(10, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'NeedForGapsInfoNR-r16')), opt=True, group=3)
-    _AS_Context_configRestrictInfoDAPS_v1640 = SEQ(name=u'configRestrictInfoDAPS-v1640', mode=MODE_TYPE, tag=(11, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-InterNodeDefinitions', 'ConfigRestrictInfoDAPS-v1640')), opt=True, group=4)
-    AS_Context._cont = ASN1Dict([
-        (u'reestablishmentInfo', _AS_Context_reestablishmentInfo),
-        (u'configRestrictInfo', _AS_Context_configRestrictInfo),
-        (u'ran-NotificationAreaInfo', _AS_Context_ran_NotificationAreaInfo),
-        (u'ueAssistanceInformation', _AS_Context_ueAssistanceInformation),
-        (u'selectedBandCombinationSN', _AS_Context_selectedBandCombinationSN),
-        (u'configRestrictInfoDAPS-r16', _AS_Context_configRestrictInfoDAPS_r16),
-        (u'sidelinkUEInformationNR-r16', _AS_Context_sidelinkUEInformationNR_r16),
-        (u'sidelinkUEInformationEUTRA-r16', _AS_Context_sidelinkUEInformationEUTRA_r16),
-        (u'ueAssistanceInformationEUTRA-r16', _AS_Context_ueAssistanceInformationEUTRA_r16),
-        (u'ueAssistanceInformationSCG-r16', _AS_Context_ueAssistanceInformationSCG_r16),
-        (u'needForGapsInfoNR-r16', _AS_Context_needForGapsInfoNR_r16),
-        (u'configRestrictInfoDAPS-v1640', _AS_Context_configRestrictInfoDAPS_v1640),
-        ])
-    AS_Context._ext = [u'ran-NotificationAreaInfo', u'ueAssistanceInformation', u'selectedBandCombinationSN', u'configRestrictInfoDAPS-r16', u'sidelinkUEInformationNR-r16', u'sidelinkUEInformationEUTRA-r16', u'ueAssistanceInformationEUTRA-r16', u'ueAssistanceInformationSCG-r16', u'needForGapsInfoNR-r16', u'configRestrictInfoDAPS-v1640']
-    
-    #-----< ConfigRestrictInfoDAPS-r16 >-----#
-    ConfigRestrictInfoDAPS_r16 = SEQ(name=u'ConfigRestrictInfoDAPS-r16', mode=MODE_TYPE)
-    _ConfigRestrictInfoDAPS_r16_powerCoordination_r16 = SEQ(name=u'powerCoordination-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    __ConfigRestrictInfoDAPS_r16_powerCoordination_r16_p_DAPS_Source_r16 = INT(name=u'p-DAPS-Source-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'P-Max')))
-    __ConfigRestrictInfoDAPS_r16_powerCoordination_r16_p_DAPS_Target_r16 = INT(name=u'p-DAPS-Target-r16', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'P-Max')))
-    __ConfigRestrictInfoDAPS_r16_powerCoordination_r16_uplinkPowerSharingDAPS_Mode_r16 = ENUM(name=u'uplinkPowerSharingDAPS-Mode-r16', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    __ConfigRestrictInfoDAPS_r16_powerCoordination_r16_uplinkPowerSharingDAPS_Mode_r16._cont = ASN1Dict([(u'semi-static-mode1', 0), (u'semi-static-mode2', 1), (u'dynamic', 2)])
-    __ConfigRestrictInfoDAPS_r16_powerCoordination_r16_uplinkPowerSharingDAPS_Mode_r16._ext = None
-    _ConfigRestrictInfoDAPS_r16_powerCoordination_r16._cont = ASN1Dict([
-        (u'p-DAPS-Source-r16', __ConfigRestrictInfoDAPS_r16_powerCoordination_r16_p_DAPS_Source_r16),
-        (u'p-DAPS-Target-r16', __ConfigRestrictInfoDAPS_r16_powerCoordination_r16_p_DAPS_Target_r16),
-        (u'uplinkPowerSharingDAPS-Mode-r16', __ConfigRestrictInfoDAPS_r16_powerCoordination_r16_uplinkPowerSharingDAPS_Mode_r16),
-        ])
-    _ConfigRestrictInfoDAPS_r16_powerCoordination_r16._ext = None
-    ConfigRestrictInfoDAPS_r16._cont = ASN1Dict([
-        (u'powerCoordination-r16', _ConfigRestrictInfoDAPS_r16_powerCoordination_r16),
-        ])
-    ConfigRestrictInfoDAPS_r16._ext = None
-    
-    #-----< ConfigRestrictInfoDAPS-v1640 >-----#
-    ConfigRestrictInfoDAPS_v1640 = SEQ(name=u'ConfigRestrictInfoDAPS-v1640', mode=MODE_TYPE)
-    _ConfigRestrictInfoDAPS_v1640_sourceFeatureSetPerDownlinkCC_r16 = INT(name=u'sourceFeatureSetPerDownlinkCC-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'FeatureSetDownlinkPerCC-Id')))
-    _ConfigRestrictInfoDAPS_v1640_sourceFeatureSetPerUplinkCC_r16 = INT(name=u'sourceFeatureSetPerUplinkCC-r16', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'FeatureSetUplinkPerCC-Id')))
-    ConfigRestrictInfoDAPS_v1640._cont = ASN1Dict([
-        (u'sourceFeatureSetPerDownlinkCC-r16', _ConfigRestrictInfoDAPS_v1640_sourceFeatureSetPerDownlinkCC_r16),
-        (u'sourceFeatureSetPerUplinkCC-r16', _ConfigRestrictInfoDAPS_v1640_sourceFeatureSetPerUplinkCC_r16),
-        ])
-    ConfigRestrictInfoDAPS_v1640._ext = None
-    
-    #-----< ReestablishmentInfo >-----#
-    ReestablishmentInfo = SEQ(name=u'ReestablishmentInfo', mode=MODE_TYPE)
-    _ReestablishmentInfo_sourcePhysCellId = INT(name=u'sourcePhysCellId', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'PhysCellId')))
-    _ReestablishmentInfo_targetCellShortMAC_I = BIT_STR(name=u'targetCellShortMAC-I', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'ShortMAC-I')))
-    _ReestablishmentInfo_additionalReestabInfoList = SEQ_OF(name=u'additionalReestabInfoList', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-InterNodeDefinitions', 'ReestabNCellInfoList')), opt=True)
-    ReestablishmentInfo._cont = ASN1Dict([
-        (u'sourcePhysCellId', _ReestablishmentInfo_sourcePhysCellId),
-        (u'targetCellShortMAC-I', _ReestablishmentInfo_targetCellShortMAC_I),
-        (u'additionalReestabInfoList', _ReestablishmentInfo_additionalReestabInfoList),
-        ])
-    ReestablishmentInfo._ext = None
-    
-    #-----< ReestabNCellInfoList >-----#
-    ReestabNCellInfoList = SEQ_OF(name=u'ReestabNCellInfoList', mode=MODE_TYPE)
-    _ReestabNCellInfoList__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('NR-InterNodeDefinitions', 'ReestabNCellInfo')))
-    ReestabNCellInfoList._cont = _ReestabNCellInfoList__item_
-    ReestabNCellInfoList._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=32)], ev=None, er=[])
-    
-    #-----< ReestabNCellInfo >-----#
-    ReestabNCellInfo = SEQ(name=u'ReestabNCellInfo', mode=MODE_TYPE)
-    _ReestabNCellInfo_cellIdentity = BIT_STR(name=u'cellIdentity', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'CellIdentity')))
-    _ReestabNCellInfo_key_gNodeB_Star = BIT_STR(name=u'key-gNodeB-Star', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _ReestabNCellInfo_key_gNodeB_Star._const_sz = ASN1Set(rv=[256], rr=[], ev=None, er=[])
-    _ReestabNCellInfo_shortMAC_I = BIT_STR(name=u'shortMAC-I', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'ShortMAC-I')))
-    ReestabNCellInfo._cont = ASN1Dict([
-        (u'cellIdentity', _ReestabNCellInfo_cellIdentity),
-        (u'key-gNodeB-Star', _ReestabNCellInfo_key_gNodeB_Star),
-        (u'shortMAC-I', _ReestabNCellInfo_shortMAC_I),
-        ])
-    ReestabNCellInfo._ext = None
-    
-    #-----< RRM-Config >-----#
-    RRM_Config = SEQ(name=u'RRM-Config', mode=MODE_TYPE)
-    _RRM_Config_ue_InactiveTime = ENUM(name=u'ue-InactiveTime', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _RRM_Config_ue_InactiveTime._cont = ASN1Dict([(u's1', 0), (u's2', 1), (u's3', 2), (u's5', 3), (u's7', 4), (u's10', 5), (u's15', 6), (u's20', 7), (u's25', 8), (u's30', 9), (u's40', 10), (u's50', 11), (u'min1', 12), (u'min1s20', 13), (u'min1s40', 14), (u'min2', 15), (u'min2s30', 16), (u'min3', 17), (u'min3s30', 18), (u'min4', 19), (u'min5', 20), (u'min6', 21), (u'min7', 22), (u'min8', 23), (u'min9', 24), (u'min10', 25), (u'min12', 26), (u'min14', 27), (u'min17', 28), (u'min20', 29), (u'min24', 30), (u'min28', 31), (u'min33', 32), (u'min38', 33), (u'min44', 34), (u'min50', 35), (u'hr1', 36), (u'hr1min30', 37), (u'hr2', 38), (u'hr2min30', 39), (u'hr3', 40), (u'hr3min30', 41), (u'hr4', 42), (u'hr5', 43), (u'hr6', 44), (u'hr8', 45), (u'hr10', 46), (u'hr13', 47), (u'hr16', 48), (u'hr20', 49), (u'day1', 50), (u'day1hr12', 51), (u'day2', 52), (u'day2hr12', 53), (u'day3', 54), (u'day4', 55), (u'day5', 56), (u'day7', 57), (u'day10', 58), (u'day14', 59), (u'day19', 60), (u'day24', 61), (u'day30', 62), (u'dayMoreThan30', 63)])
-    _RRM_Config_ue_InactiveTime._ext = None
-    _RRM_Config_candidateCellInfoList = SEQ_OF(name=u'candidateCellInfoList', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'MeasResultList2NR')), opt=True)
-    _RRM_Config_candidateCellInfoListSN_EUTRA = SEQ_OF(name=u'candidateCellInfoListSN-EUTRA', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'MeasResultServFreqListEUTRA-SCG')), opt=True, group=0)
-    RRM_Config._cont = ASN1Dict([
-        (u'ue-InactiveTime', _RRM_Config_ue_InactiveTime),
-        (u'candidateCellInfoList', _RRM_Config_candidateCellInfoList),
-        (u'candidateCellInfoListSN-EUTRA', _RRM_Config_candidateCellInfoListSN_EUTRA),
-        ])
-    RRM_Config._ext = [u'candidateCellInfoListSN-EUTRA']
-    
-    #-----< CG-Config >-----#
-    CG_Config = SEQ(name=u'CG-Config', mode=MODE_TYPE)
-    _CG_Config_criticalExtensions = CHOICE(name=u'criticalExtensions', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
-    __CG_Config_criticalExtensions_c1 = CHOICE(name=u'c1', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
-    ___CG_Config_criticalExtensions_c1_cg_Config = SEQ(name=u'cg-Config', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-InterNodeDefinitions', 'CG-Config-IEs')))
-    ___CG_Config_criticalExtensions_c1_spare3 = NULL(name=u'spare3', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    ___CG_Config_criticalExtensions_c1_spare2 = NULL(name=u'spare2', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    ___CG_Config_criticalExtensions_c1_spare1 = NULL(name=u'spare1', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    __CG_Config_criticalExtensions_c1._cont = ASN1Dict([
-        (u'cg-Config', ___CG_Config_criticalExtensions_c1_cg_Config),
-        (u'spare3', ___CG_Config_criticalExtensions_c1_spare3),
-        (u'spare2', ___CG_Config_criticalExtensions_c1_spare2),
-        (u'spare1', ___CG_Config_criticalExtensions_c1_spare1),
-        ])
-    __CG_Config_criticalExtensions_c1._ext = None
-    __CG_Config_criticalExtensions_criticalExtensionsFuture = SEQ(name=u'criticalExtensionsFuture', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    __CG_Config_criticalExtensions_criticalExtensionsFuture._cont = ASN1Dict([
-        ])
-    __CG_Config_criticalExtensions_criticalExtensionsFuture._ext = None
-    _CG_Config_criticalExtensions._cont = ASN1Dict([
-        (u'c1', __CG_Config_criticalExtensions_c1),
-        (u'criticalExtensionsFuture', __CG_Config_criticalExtensions_criticalExtensionsFuture),
-        ])
-    _CG_Config_criticalExtensions._ext = None
-    CG_Config._cont = ASN1Dict([
-        (u'criticalExtensions', _CG_Config_criticalExtensions),
-        ])
-    CG_Config._ext = None
-    
-    #-----< CG-Config-IEs >-----#
-    CG_Config_IEs = SEQ(name=u'CG-Config-IEs', mode=MODE_TYPE)
-    _CG_Config_IEs_scg_CellGroupConfig = OCT_STR(name=u'scg-CellGroupConfig', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    __CG_Config_IEs_scg_CellGroupConfig_contain = SEQ(name='_cont_scg-CellGroupConfig', mode=MODE_TYPE, typeref=ASN1RefType(('NR-RRC-Definitions', 'RRCReconfiguration')))
-    _CG_Config_IEs_scg_CellGroupConfig._const_cont = __CG_Config_IEs_scg_CellGroupConfig_contain
-    _CG_Config_IEs_scg_RB_Config = OCT_STR(name=u'scg-RB-Config', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    __CG_Config_IEs_scg_RB_Config_contain = SEQ(name='_cont_scg-RB-Config', mode=MODE_TYPE, typeref=ASN1RefType(('NR-RRC-Definitions', 'RadioBearerConfig')))
-    _CG_Config_IEs_scg_RB_Config._const_cont = __CG_Config_IEs_scg_RB_Config_contain
-    _CG_Config_IEs_configRestrictModReq = SEQ(name=u'configRestrictModReq', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-InterNodeDefinitions', 'ConfigRestrictModReqSCG')), opt=True)
-    _CG_Config_IEs_drx_InfoSCG = SEQ(name=u'drx-InfoSCG', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-InterNodeDefinitions', 'DRX-Info')), opt=True)
-    _CG_Config_IEs_candidateCellInfoListSN = OCT_STR(name=u'candidateCellInfoListSN', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    __CG_Config_IEs_candidateCellInfoListSN_contain = SEQ_OF(name='_cont_candidateCellInfoListSN', mode=MODE_TYPE, typeref=ASN1RefType(('NR-RRC-Definitions', 'MeasResultList2NR')))
-    _CG_Config_IEs_candidateCellInfoListSN._const_cont = __CG_Config_IEs_candidateCellInfoListSN_contain
-    _CG_Config_IEs_measConfigSN = SEQ(name=u'measConfigSN', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-InterNodeDefinitions', 'MeasConfigSN')), opt=True)
-    _CG_Config_IEs_selectedBandCombination = SEQ(name=u'selectedBandCombination', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-InterNodeDefinitions', 'BandCombinationInfoSN')), opt=True)
-    _CG_Config_IEs_fr_InfoListSCG = SEQ_OF(name=u'fr-InfoListSCG', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-InterNodeDefinitions', 'FR-InfoList')), opt=True)
-    _CG_Config_IEs_candidateServingFreqListNR = SEQ_OF(name=u'candidateServingFreqListNR', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-InterNodeDefinitions', 'CandidateServingFreqListNR')), opt=True)
-    _CG_Config_IEs_nonCriticalExtension = SEQ(name=u'nonCriticalExtension', mode=MODE_TYPE, tag=(9, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-InterNodeDefinitions', 'CG-Config-v1540-IEs')), opt=True)
-    CG_Config_IEs._cont = ASN1Dict([
-        (u'scg-CellGroupConfig', _CG_Config_IEs_scg_CellGroupConfig),
-        (u'scg-RB-Config', _CG_Config_IEs_scg_RB_Config),
-        (u'configRestrictModReq', _CG_Config_IEs_configRestrictModReq),
-        (u'drx-InfoSCG', _CG_Config_IEs_drx_InfoSCG),
-        (u'candidateCellInfoListSN', _CG_Config_IEs_candidateCellInfoListSN),
-        (u'measConfigSN', _CG_Config_IEs_measConfigSN),
-        (u'selectedBandCombination', _CG_Config_IEs_selectedBandCombination),
-        (u'fr-InfoListSCG', _CG_Config_IEs_fr_InfoListSCG),
-        (u'candidateServingFreqListNR', _CG_Config_IEs_candidateServingFreqListNR),
-        (u'nonCriticalExtension', _CG_Config_IEs_nonCriticalExtension),
-        ])
-    CG_Config_IEs._ext = None
-    
-    #-----< CG-Config-v1540-IEs >-----#
-    CG_Config_v1540_IEs = SEQ(name=u'CG-Config-v1540-IEs', mode=MODE_TYPE)
-    _CG_Config_v1540_IEs_pSCellFrequency = INT(name=u'pSCellFrequency', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'ARFCN-ValueNR')), opt=True)
-    _CG_Config_v1540_IEs_reportCGI_RequestNR = SEQ(name=u'reportCGI-RequestNR', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    __CG_Config_v1540_IEs_reportCGI_RequestNR_requestedCellInfo = SEQ(name=u'requestedCellInfo', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    ___CG_Config_v1540_IEs_reportCGI_RequestNR_requestedCellInfo_ssbFrequency = INT(name=u'ssbFrequency', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'ARFCN-ValueNR')))
-    ___CG_Config_v1540_IEs_reportCGI_RequestNR_requestedCellInfo_cellForWhichToReportCGI = INT(name=u'cellForWhichToReportCGI', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'PhysCellId')))
-    __CG_Config_v1540_IEs_reportCGI_RequestNR_requestedCellInfo._cont = ASN1Dict([
-        (u'ssbFrequency', ___CG_Config_v1540_IEs_reportCGI_RequestNR_requestedCellInfo_ssbFrequency),
-        (u'cellForWhichToReportCGI', ___CG_Config_v1540_IEs_reportCGI_RequestNR_requestedCellInfo_cellForWhichToReportCGI),
-        ])
-    __CG_Config_v1540_IEs_reportCGI_RequestNR_requestedCellInfo._ext = None
-    _CG_Config_v1540_IEs_reportCGI_RequestNR._cont = ASN1Dict([
-        (u'requestedCellInfo', __CG_Config_v1540_IEs_reportCGI_RequestNR_requestedCellInfo),
-        ])
-    _CG_Config_v1540_IEs_reportCGI_RequestNR._ext = None
-    _CG_Config_v1540_IEs_ph_InfoSCG = SEQ_OF(name=u'ph-InfoSCG', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-InterNodeDefinitions', 'PH-TypeListSCG')), opt=True)
-    _CG_Config_v1540_IEs_nonCriticalExtension = SEQ(name=u'nonCriticalExtension', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-InterNodeDefinitions', 'CG-Config-v1560-IEs')), opt=True)
-    CG_Config_v1540_IEs._cont = ASN1Dict([
-        (u'pSCellFrequency', _CG_Config_v1540_IEs_pSCellFrequency),
-        (u'reportCGI-RequestNR', _CG_Config_v1540_IEs_reportCGI_RequestNR),
-        (u'ph-InfoSCG', _CG_Config_v1540_IEs_ph_InfoSCG),
-        (u'nonCriticalExtension', _CG_Config_v1540_IEs_nonCriticalExtension),
-        ])
-    CG_Config_v1540_IEs._ext = None
-    
-    #-----< CG-Config-v1560-IEs >-----#
-    CG_Config_v1560_IEs = SEQ(name=u'CG-Config-v1560-IEs', mode=MODE_TYPE)
-    _CG_Config_v1560_IEs_pSCellFrequencyEUTRA = INT(name=u'pSCellFrequencyEUTRA', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'ARFCN-ValueEUTRA')), opt=True)
-    _CG_Config_v1560_IEs_scg_CellGroupConfigEUTRA = OCT_STR(name=u'scg-CellGroupConfigEUTRA', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _CG_Config_v1560_IEs_candidateCellInfoListSN_EUTRA = OCT_STR(name=u'candidateCellInfoListSN-EUTRA', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _CG_Config_v1560_IEs_candidateServingFreqListEUTRA = SEQ_OF(name=u'candidateServingFreqListEUTRA', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-InterNodeDefinitions', 'CandidateServingFreqListEUTRA')), opt=True)
-    _CG_Config_v1560_IEs_needForGaps = ENUM(name=u'needForGaps', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _CG_Config_v1560_IEs_needForGaps._cont = ASN1Dict([(u'true', 0)])
-    _CG_Config_v1560_IEs_needForGaps._ext = None
-    _CG_Config_v1560_IEs_drx_ConfigSCG = SEQ(name=u'drx-ConfigSCG', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'DRX-Config')), opt=True)
-    _CG_Config_v1560_IEs_reportCGI_RequestEUTRA = SEQ(name=u'reportCGI-RequestEUTRA', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    __CG_Config_v1560_IEs_reportCGI_RequestEUTRA_requestedCellInfoEUTRA = SEQ(name=u'requestedCellInfoEUTRA', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    ___CG_Config_v1560_IEs_reportCGI_RequestEUTRA_requestedCellInfoEUTRA_eutraFrequency = INT(name=u'eutraFrequency', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'ARFCN-ValueEUTRA')))
-    ___CG_Config_v1560_IEs_reportCGI_RequestEUTRA_requestedCellInfoEUTRA_cellForWhichToReportCGI_EUTRA = INT(name=u'cellForWhichToReportCGI-EUTRA', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'EUTRA-PhysCellId')))
-    __CG_Config_v1560_IEs_reportCGI_RequestEUTRA_requestedCellInfoEUTRA._cont = ASN1Dict([
-        (u'eutraFrequency', ___CG_Config_v1560_IEs_reportCGI_RequestEUTRA_requestedCellInfoEUTRA_eutraFrequency),
-        (u'cellForWhichToReportCGI-EUTRA', ___CG_Config_v1560_IEs_reportCGI_RequestEUTRA_requestedCellInfoEUTRA_cellForWhichToReportCGI_EUTRA),
-        ])
-    __CG_Config_v1560_IEs_reportCGI_RequestEUTRA_requestedCellInfoEUTRA._ext = None
-    _CG_Config_v1560_IEs_reportCGI_RequestEUTRA._cont = ASN1Dict([
-        (u'requestedCellInfoEUTRA', __CG_Config_v1560_IEs_reportCGI_RequestEUTRA_requestedCellInfoEUTRA),
-        ])
-    _CG_Config_v1560_IEs_reportCGI_RequestEUTRA._ext = None
-    _CG_Config_v1560_IEs_nonCriticalExtension = SEQ(name=u'nonCriticalExtension', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-InterNodeDefinitions', 'CG-Config-v1590-IEs')), opt=True)
-    CG_Config_v1560_IEs._cont = ASN1Dict([
-        (u'pSCellFrequencyEUTRA', _CG_Config_v1560_IEs_pSCellFrequencyEUTRA),
-        (u'scg-CellGroupConfigEUTRA', _CG_Config_v1560_IEs_scg_CellGroupConfigEUTRA),
-        (u'candidateCellInfoListSN-EUTRA', _CG_Config_v1560_IEs_candidateCellInfoListSN_EUTRA),
-        (u'candidateServingFreqListEUTRA', _CG_Config_v1560_IEs_candidateServingFreqListEUTRA),
-        (u'needForGaps', _CG_Config_v1560_IEs_needForGaps),
-        (u'drx-ConfigSCG', _CG_Config_v1560_IEs_drx_ConfigSCG),
-        (u'reportCGI-RequestEUTRA', _CG_Config_v1560_IEs_reportCGI_RequestEUTRA),
-        (u'nonCriticalExtension', _CG_Config_v1560_IEs_nonCriticalExtension),
-        ])
-    CG_Config_v1560_IEs._ext = None
-    
-    #-----< CG-Config-v1590-IEs >-----#
-    CG_Config_v1590_IEs = SEQ(name=u'CG-Config-v1590-IEs', mode=MODE_TYPE)
-    _CG_Config_v1590_IEs_scellFrequenciesSN_NR = SEQ_OF(name=u'scellFrequenciesSN-NR', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    __CG_Config_v1590_IEs_scellFrequenciesSN_NR__item_ = INT(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('NR-RRC-Definitions', 'ARFCN-ValueNR')))
-    _CG_Config_v1590_IEs_scellFrequenciesSN_NR._cont = __CG_Config_v1590_IEs_scellFrequenciesSN_NR__item_
-    _CG_Config_v1590_IEs_scellFrequenciesSN_NR._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=31)], ev=None, er=[])
-    _CG_Config_v1590_IEs_scellFrequenciesSN_EUTRA = SEQ_OF(name=u'scellFrequenciesSN-EUTRA', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    __CG_Config_v1590_IEs_scellFrequenciesSN_EUTRA__item_ = INT(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('NR-RRC-Definitions', 'ARFCN-ValueEUTRA')))
-    _CG_Config_v1590_IEs_scellFrequenciesSN_EUTRA._cont = __CG_Config_v1590_IEs_scellFrequenciesSN_EUTRA__item_
-    _CG_Config_v1590_IEs_scellFrequenciesSN_EUTRA._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=31)], ev=None, er=[])
-    _CG_Config_v1590_IEs_nonCriticalExtension = SEQ(name=u'nonCriticalExtension', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-InterNodeDefinitions', 'CG-Config-v1610-IEs')), opt=True)
-    CG_Config_v1590_IEs._cont = ASN1Dict([
-        (u'scellFrequenciesSN-NR', _CG_Config_v1590_IEs_scellFrequenciesSN_NR),
-        (u'scellFrequenciesSN-EUTRA', _CG_Config_v1590_IEs_scellFrequenciesSN_EUTRA),
-        (u'nonCriticalExtension', _CG_Config_v1590_IEs_nonCriticalExtension),
-        ])
-    CG_Config_v1590_IEs._ext = None
-    
-    #-----< CG-Config-v1610-IEs >-----#
-    CG_Config_v1610_IEs = SEQ(name=u'CG-Config-v1610-IEs', mode=MODE_TYPE)
-    _CG_Config_v1610_IEs_drx_InfoSCG2 = SEQ(name=u'drx-InfoSCG2', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-InterNodeDefinitions', 'DRX-Info2')), opt=True)
-    _CG_Config_v1610_IEs_nonCriticalExtension = SEQ(name=u'nonCriticalExtension', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-InterNodeDefinitions', 'CG-Config-v1620-IEs')), opt=True)
-    CG_Config_v1610_IEs._cont = ASN1Dict([
-        (u'drx-InfoSCG2', _CG_Config_v1610_IEs_drx_InfoSCG2),
-        (u'nonCriticalExtension', _CG_Config_v1610_IEs_nonCriticalExtension),
-        ])
-    CG_Config_v1610_IEs._ext = None
-    
-    #-----< CG-Config-v1620-IEs >-----#
-    CG_Config_v1620_IEs = SEQ(name=u'CG-Config-v1620-IEs', mode=MODE_TYPE)
-    _CG_Config_v1620_IEs_ueAssistanceInformationSCG_r16 = OCT_STR(name=u'ueAssistanceInformationSCG-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    __CG_Config_v1620_IEs_ueAssistanceInformationSCG_r16_contain = SEQ(name='_cont_ueAssistanceInformationSCG-r16', mode=MODE_TYPE, typeref=ASN1RefType(('NR-RRC-Definitions', 'UEAssistanceInformation')))
-    _CG_Config_v1620_IEs_ueAssistanceInformationSCG_r16._const_cont = __CG_Config_v1620_IEs_ueAssistanceInformationSCG_r16_contain
-    _CG_Config_v1620_IEs_nonCriticalExtension = SEQ(name=u'nonCriticalExtension', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-InterNodeDefinitions', 'CG-Config-v1630-IEs')), opt=True)
-    CG_Config_v1620_IEs._cont = ASN1Dict([
-        (u'ueAssistanceInformationSCG-r16', _CG_Config_v1620_IEs_ueAssistanceInformationSCG_r16),
-        (u'nonCriticalExtension', _CG_Config_v1620_IEs_nonCriticalExtension),
-        ])
-    CG_Config_v1620_IEs._ext = None
-    
-    #-----< CG-Config-v1630-IEs >-----#
-    CG_Config_v1630_IEs = SEQ(name=u'CG-Config-v1630-IEs', mode=MODE_TYPE)
-    _CG_Config_v1630_IEs_selectedToffset_r16 = ENUM(name=u'selectedToffset-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-InterNodeDefinitions', 'T-Offset-r16')), opt=True)
-    _CG_Config_v1630_IEs_nonCriticalExtension = SEQ(name=u'nonCriticalExtension', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-InterNodeDefinitions', 'CG-Config-v1640-IEs')), opt=True)
-    CG_Config_v1630_IEs._cont = ASN1Dict([
-        (u'selectedToffset-r16', _CG_Config_v1630_IEs_selectedToffset_r16),
-        (u'nonCriticalExtension', _CG_Config_v1630_IEs_nonCriticalExtension),
-        ])
-    CG_Config_v1630_IEs._ext = None
-    
-    #-----< CG-Config-v1640-IEs >-----#
-    CG_Config_v1640_IEs = SEQ(name=u'CG-Config-v1640-IEs', mode=MODE_TYPE)
-    _CG_Config_v1640_IEs_servCellInfoListSCG_NR_r16 = SEQ_OF(name=u'servCellInfoListSCG-NR-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-InterNodeDefinitions', 'ServCellInfoListSCG-NR-r16')), opt=True)
-    _CG_Config_v1640_IEs_servCellInfoListSCG_EUTRA_r16 = SEQ_OF(name=u'servCellInfoListSCG-EUTRA-r16', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-InterNodeDefinitions', 'ServCellInfoListSCG-EUTRA-r16')), opt=True)
-    _CG_Config_v1640_IEs_nonCriticalExtension = SEQ(name=u'nonCriticalExtension', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _CG_Config_v1640_IEs_nonCriticalExtension._cont = ASN1Dict([
-        ])
-    _CG_Config_v1640_IEs_nonCriticalExtension._ext = None
-    CG_Config_v1640_IEs._cont = ASN1Dict([
-        (u'servCellInfoListSCG-NR-r16', _CG_Config_v1640_IEs_servCellInfoListSCG_NR_r16),
-        (u'servCellInfoListSCG-EUTRA-r16', _CG_Config_v1640_IEs_servCellInfoListSCG_EUTRA_r16),
-        (u'nonCriticalExtension', _CG_Config_v1640_IEs_nonCriticalExtension),
-        ])
-    CG_Config_v1640_IEs._ext = None
-    
-    #-----< ServCellInfoListSCG-NR-r16 >-----#
-    ServCellInfoListSCG_NR_r16 = SEQ_OF(name=u'ServCellInfoListSCG-NR-r16', mode=MODE_TYPE)
-    _ServCellInfoListSCG_NR_r16__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('NR-InterNodeDefinitions', 'ServCellInfoXCG-NR-r16')))
-    ServCellInfoListSCG_NR_r16._cont = _ServCellInfoListSCG_NR_r16__item_
-    ServCellInfoListSCG_NR_r16._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=32)], ev=None, er=[])
-    
-    #-----< ServCellInfoXCG-NR-r16 >-----#
-    ServCellInfoXCG_NR_r16 = SEQ(name=u'ServCellInfoXCG-NR-r16', mode=MODE_TYPE)
-    _ServCellInfoXCG_NR_r16_dl_FreqInfo_NR_r16 = SEQ(name=u'dl-FreqInfo-NR-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-InterNodeDefinitions', 'FrequencyConfig-NR-r16')), opt=True)
-    _ServCellInfoXCG_NR_r16_ul_FreqInfo_NR_r16 = SEQ(name=u'ul-FreqInfo-NR-r16', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-InterNodeDefinitions', 'FrequencyConfig-NR-r16')), opt=True)
-    ServCellInfoXCG_NR_r16._cont = ASN1Dict([
-        (u'dl-FreqInfo-NR-r16', _ServCellInfoXCG_NR_r16_dl_FreqInfo_NR_r16),
-        (u'ul-FreqInfo-NR-r16', _ServCellInfoXCG_NR_r16_ul_FreqInfo_NR_r16),
-        ])
-    ServCellInfoXCG_NR_r16._ext = []
-    
-    #-----< FrequencyConfig-NR-r16 >-----#
-    FrequencyConfig_NR_r16 = SEQ(name=u'FrequencyConfig-NR-r16', mode=MODE_TYPE)
-    _FrequencyConfig_NR_r16_freqBandIndicatorNR_r16 = INT(name=u'freqBandIndicatorNR-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'FreqBandIndicatorNR')))
-    _FrequencyConfig_NR_r16_carrierCenterFreq_NR_r16 = INT(name=u'carrierCenterFreq-NR-r16', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'ARFCN-ValueNR')))
-    _FrequencyConfig_NR_r16_carrierBandwidth_NR_r16 = INT(name=u'carrierBandwidth-NR-r16', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _FrequencyConfig_NR_r16_carrierBandwidth_NR_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=275)], ev=None, er=[])
-    _FrequencyConfig_NR_r16_subcarrierSpacing_NR_r16 = ENUM(name=u'subcarrierSpacing-NR-r16', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'SubcarrierSpacing')))
-    FrequencyConfig_NR_r16._cont = ASN1Dict([
-        (u'freqBandIndicatorNR-r16', _FrequencyConfig_NR_r16_freqBandIndicatorNR_r16),
-        (u'carrierCenterFreq-NR-r16', _FrequencyConfig_NR_r16_carrierCenterFreq_NR_r16),
-        (u'carrierBandwidth-NR-r16', _FrequencyConfig_NR_r16_carrierBandwidth_NR_r16),
-        (u'subcarrierSpacing-NR-r16', _FrequencyConfig_NR_r16_subcarrierSpacing_NR_r16),
-        ])
-    FrequencyConfig_NR_r16._ext = None
-    
-    #-----< ServCellInfoListSCG-EUTRA-r16 >-----#
-    ServCellInfoListSCG_EUTRA_r16 = SEQ_OF(name=u'ServCellInfoListSCG-EUTRA-r16', mode=MODE_TYPE)
-    _ServCellInfoListSCG_EUTRA_r16__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('NR-InterNodeDefinitions', 'ServCellInfoXCG-EUTRA-r16')))
-    ServCellInfoListSCG_EUTRA_r16._cont = _ServCellInfoListSCG_EUTRA_r16__item_
-    ServCellInfoListSCG_EUTRA_r16._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=32)], ev=None, er=[])
-    
-    #-----< ServCellInfoXCG-EUTRA-r16 >-----#
-    ServCellInfoXCG_EUTRA_r16 = SEQ(name=u'ServCellInfoXCG-EUTRA-r16', mode=MODE_TYPE)
-    _ServCellInfoXCG_EUTRA_r16_dl_CarrierFreq_EUTRA_r16 = INT(name=u'dl-CarrierFreq-EUTRA-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'ARFCN-ValueEUTRA')), opt=True)
-    _ServCellInfoXCG_EUTRA_r16_ul_CarrierFreq_EUTRA_r16 = INT(name=u'ul-CarrierFreq-EUTRA-r16', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'ARFCN-ValueEUTRA')), opt=True)
-    _ServCellInfoXCG_EUTRA_r16_transmissionBandwidth_EUTRA_r16 = ENUM(name=u'transmissionBandwidth-EUTRA-r16', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-InterNodeDefinitions', 'TransmissionBandwidth-EUTRA-r16')), opt=True)
-    ServCellInfoXCG_EUTRA_r16._cont = ASN1Dict([
-        (u'dl-CarrierFreq-EUTRA-r16', _ServCellInfoXCG_EUTRA_r16_dl_CarrierFreq_EUTRA_r16),
-        (u'ul-CarrierFreq-EUTRA-r16', _ServCellInfoXCG_EUTRA_r16_ul_CarrierFreq_EUTRA_r16),
-        (u'transmissionBandwidth-EUTRA-r16', _ServCellInfoXCG_EUTRA_r16_transmissionBandwidth_EUTRA_r16),
-        ])
-    ServCellInfoXCG_EUTRA_r16._ext = []
-    
-    #-----< TransmissionBandwidth-EUTRA-r16 >-----#
-    TransmissionBandwidth_EUTRA_r16 = ENUM(name=u'TransmissionBandwidth-EUTRA-r16', mode=MODE_TYPE)
-    TransmissionBandwidth_EUTRA_r16._cont = ASN1Dict([(u'rb6', 0), (u'rb15', 1), (u'rb25', 2), (u'rb50', 3), (u'rb75', 4), (u'rb100', 5)])
-    TransmissionBandwidth_EUTRA_r16._ext = None
-    
-    #-----< PH-TypeListSCG >-----#
-    PH_TypeListSCG = SEQ_OF(name=u'PH-TypeListSCG', mode=MODE_TYPE)
-    _PH_TypeListSCG__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('NR-InterNodeDefinitions', 'PH-InfoSCG')))
-    PH_TypeListSCG._cont = _PH_TypeListSCG__item_
-    PH_TypeListSCG._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=32)], ev=None, er=[])
-    
-    #-----< PH-InfoSCG >-----#
-    PH_InfoSCG = SEQ(name=u'PH-InfoSCG', mode=MODE_TYPE)
-    _PH_InfoSCG_servCellIndex = INT(name=u'servCellIndex', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'ServCellIndex')))
-    _PH_InfoSCG_ph_Uplink = SEQ(name=u'ph-Uplink', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-InterNodeDefinitions', 'PH-UplinkCarrierSCG')))
-    _PH_InfoSCG_ph_SupplementaryUplink = SEQ(name=u'ph-SupplementaryUplink', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-InterNodeDefinitions', 'PH-UplinkCarrierSCG')), opt=True)
-    PH_InfoSCG._cont = ASN1Dict([
-        (u'servCellIndex', _PH_InfoSCG_servCellIndex),
-        (u'ph-Uplink', _PH_InfoSCG_ph_Uplink),
-        (u'ph-SupplementaryUplink', _PH_InfoSCG_ph_SupplementaryUplink),
-        ])
-    PH_InfoSCG._ext = []
-    
-    #-----< PH-UplinkCarrierSCG >-----#
-    PH_UplinkCarrierSCG = SEQ(name=u'PH-UplinkCarrierSCG', mode=MODE_TYPE)
-    _PH_UplinkCarrierSCG_ph_Type1or3 = ENUM(name=u'ph-Type1or3', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _PH_UplinkCarrierSCG_ph_Type1or3._cont = ASN1Dict([(u'type1', 0), (u'type3', 1)])
-    _PH_UplinkCarrierSCG_ph_Type1or3._ext = None
-    PH_UplinkCarrierSCG._cont = ASN1Dict([
-        (u'ph-Type1or3', _PH_UplinkCarrierSCG_ph_Type1or3),
-        ])
-    PH_UplinkCarrierSCG._ext = []
-    
-    #-----< MeasConfigSN >-----#
-    MeasConfigSN = SEQ(name=u'MeasConfigSN', mode=MODE_TYPE)
-    _MeasConfigSN_measuredFrequenciesSN = SEQ_OF(name=u'measuredFrequenciesSN', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    __MeasConfigSN_measuredFrequenciesSN__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('NR-InterNodeDefinitions', 'NR-FreqInfo')))
-    _MeasConfigSN_measuredFrequenciesSN._cont = __MeasConfigSN_measuredFrequenciesSN__item_
-    _MeasConfigSN_measuredFrequenciesSN._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=32)], ev=None, er=[])
-    MeasConfigSN._cont = ASN1Dict([
-        (u'measuredFrequenciesSN', _MeasConfigSN_measuredFrequenciesSN),
-        ])
-    MeasConfigSN._ext = []
-    
-    #-----< NR-FreqInfo >-----#
-    NR_FreqInfo = SEQ(name=u'NR-FreqInfo', mode=MODE_TYPE)
-    _NR_FreqInfo_measuredFrequency = INT(name=u'measuredFrequency', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'ARFCN-ValueNR')), opt=True)
-    NR_FreqInfo._cont = ASN1Dict([
-        (u'measuredFrequency', _NR_FreqInfo_measuredFrequency),
-        ])
-    NR_FreqInfo._ext = []
-    
-    #-----< ConfigRestrictModReqSCG >-----#
-    ConfigRestrictModReqSCG = SEQ(name=u'ConfigRestrictModReqSCG', mode=MODE_TYPE)
-    _ConfigRestrictModReqSCG_requestedBC_MRDC = SEQ(name=u'requestedBC-MRDC', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-InterNodeDefinitions', 'BandCombinationInfoSN')), opt=True)
-    _ConfigRestrictModReqSCG_requestedP_MaxFR1 = INT(name=u'requestedP-MaxFR1', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'P-Max')), opt=True)
-    _ConfigRestrictModReqSCG_requestedPDCCH_BlindDetectionSCG = INT(name=u'requestedPDCCH-BlindDetectionSCG', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True, group=0)
-    _ConfigRestrictModReqSCG_requestedPDCCH_BlindDetectionSCG._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=15)], ev=None, er=[])
-    _ConfigRestrictModReqSCG_requestedP_MaxEUTRA = INT(name=u'requestedP-MaxEUTRA', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'P-Max')), opt=True, group=0)
-    _ConfigRestrictModReqSCG_requestedP_MaxFR2_r16 = INT(name=u'requestedP-MaxFR2-r16', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'P-Max')), opt=True, group=1)
-    _ConfigRestrictModReqSCG_requestedMaxInterFreqMeasIdSCG_r16 = INT(name=u'requestedMaxInterFreqMeasIdSCG-r16', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True, group=1)
-    _ConfigRestrictModReqSCG_requestedMaxInterFreqMeasIdSCG_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=62)], ev=None, er=[])
-    _ConfigRestrictModReqSCG_requestedMaxIntraFreqMeasIdSCG_r16 = INT(name=u'requestedMaxIntraFreqMeasIdSCG-r16', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True, group=1)
-    _ConfigRestrictModReqSCG_requestedMaxIntraFreqMeasIdSCG_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=62)], ev=None, er=[])
-    _ConfigRestrictModReqSCG_requestedToffset_r16 = ENUM(name=u'requestedToffset-r16', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-InterNodeDefinitions', 'T-Offset-r16')), opt=True, group=1)
-    ConfigRestrictModReqSCG._cont = ASN1Dict([
-        (u'requestedBC-MRDC', _ConfigRestrictModReqSCG_requestedBC_MRDC),
-        (u'requestedP-MaxFR1', _ConfigRestrictModReqSCG_requestedP_MaxFR1),
-        (u'requestedPDCCH-BlindDetectionSCG', _ConfigRestrictModReqSCG_requestedPDCCH_BlindDetectionSCG),
-        (u'requestedP-MaxEUTRA', _ConfigRestrictModReqSCG_requestedP_MaxEUTRA),
-        (u'requestedP-MaxFR2-r16', _ConfigRestrictModReqSCG_requestedP_MaxFR2_r16),
-        (u'requestedMaxInterFreqMeasIdSCG-r16', _ConfigRestrictModReqSCG_requestedMaxInterFreqMeasIdSCG_r16),
-        (u'requestedMaxIntraFreqMeasIdSCG-r16', _ConfigRestrictModReqSCG_requestedMaxIntraFreqMeasIdSCG_r16),
-        (u'requestedToffset-r16', _ConfigRestrictModReqSCG_requestedToffset_r16),
-        ])
-    ConfigRestrictModReqSCG._ext = [u'requestedPDCCH-BlindDetectionSCG', u'requestedP-MaxEUTRA', u'requestedP-MaxFR2-r16', u'requestedMaxInterFreqMeasIdSCG-r16', u'requestedMaxIntraFreqMeasIdSCG-r16', u'requestedToffset-r16']
-    
-    #-----< BandCombinationIndex >-----#
-    BandCombinationIndex = INT(name=u'BandCombinationIndex', mode=MODE_TYPE)
-    BandCombinationIndex._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=65536)], ev=None, er=[])
-    
-    #-----< BandCombinationInfoSN >-----#
-    BandCombinationInfoSN = SEQ(name=u'BandCombinationInfoSN', mode=MODE_TYPE)
-    _BandCombinationInfoSN_bandCombinationIndex = INT(name=u'bandCombinationIndex', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-InterNodeDefinitions', 'BandCombinationIndex')))
-    _BandCombinationInfoSN_requestedFeatureSets = INT(name=u'requestedFeatureSets', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-InterNodeDefinitions', 'FeatureSetEntryIndex')))
-    BandCombinationInfoSN._cont = ASN1Dict([
-        (u'bandCombinationIndex', _BandCombinationInfoSN_bandCombinationIndex),
-        (u'requestedFeatureSets', _BandCombinationInfoSN_requestedFeatureSets),
-        ])
-    BandCombinationInfoSN._ext = None
-    
-    #-----< FR-InfoList >-----#
-    FR_InfoList = SEQ_OF(name=u'FR-InfoList', mode=MODE_TYPE)
-    _FR_InfoList__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('NR-InterNodeDefinitions', 'FR-Info')))
-    FR_InfoList._cont = _FR_InfoList__item_
-    FR_InfoList._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=31)], ev=None, er=[])
-    
-    #-----< FR-Info >-----#
-    FR_Info = SEQ(name=u'FR-Info', mode=MODE_TYPE)
-    _FR_Info_servCellIndex = INT(name=u'servCellIndex', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'ServCellIndex')))
-    _FR_Info_fr_Type = ENUM(name=u'fr-Type', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _FR_Info_fr_Type._cont = ASN1Dict([(u'fr1', 0), (u'fr2', 1)])
-    _FR_Info_fr_Type._ext = None
-    FR_Info._cont = ASN1Dict([
-        (u'servCellIndex', _FR_Info_servCellIndex),
-        (u'fr-Type', _FR_Info_fr_Type),
-        ])
-    FR_Info._ext = None
-    
-    #-----< CandidateServingFreqListNR >-----#
-    CandidateServingFreqListNR = SEQ_OF(name=u'CandidateServingFreqListNR', mode=MODE_TYPE)
-    _CandidateServingFreqListNR__item_ = INT(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('NR-RRC-Definitions', 'ARFCN-ValueNR')))
-    CandidateServingFreqListNR._cont = _CandidateServingFreqListNR__item_
-    CandidateServingFreqListNR._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=32)], ev=None, er=[])
-    
-    #-----< CandidateServingFreqListEUTRA >-----#
-    CandidateServingFreqListEUTRA = SEQ_OF(name=u'CandidateServingFreqListEUTRA', mode=MODE_TYPE)
-    _CandidateServingFreqListEUTRA__item_ = INT(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('NR-RRC-Definitions', 'ARFCN-ValueEUTRA')))
-    CandidateServingFreqListEUTRA._cont = _CandidateServingFreqListEUTRA__item_
-    CandidateServingFreqListEUTRA._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=32)], ev=None, er=[])
-    
-    #-----< T-Offset-r16 >-----#
-    T_Offset_r16 = ENUM(name=u'T-Offset-r16', mode=MODE_TYPE)
-    T_Offset_r16._cont = ASN1Dict([(u'ms0dot5', 0), (u'ms0dot75', 1), (u'ms1', 2), (u'ms1dot5', 3), (u'ms2', 4), (u'ms2dot5', 5), (u'ms3', 6), (u'spare1', 7)])
-    T_Offset_r16._ext = None
-    
-    #-----< CG-ConfigInfo >-----#
-    CG_ConfigInfo = SEQ(name=u'CG-ConfigInfo', mode=MODE_TYPE)
-    _CG_ConfigInfo_criticalExtensions = CHOICE(name=u'criticalExtensions', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
-    __CG_ConfigInfo_criticalExtensions_c1 = CHOICE(name=u'c1', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
-    ___CG_ConfigInfo_criticalExtensions_c1_cg_ConfigInfo = SEQ(name=u'cg-ConfigInfo', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-InterNodeDefinitions', 'CG-ConfigInfo-IEs')))
-    ___CG_ConfigInfo_criticalExtensions_c1_spare3 = NULL(name=u'spare3', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    ___CG_ConfigInfo_criticalExtensions_c1_spare2 = NULL(name=u'spare2', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    ___CG_ConfigInfo_criticalExtensions_c1_spare1 = NULL(name=u'spare1', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    __CG_ConfigInfo_criticalExtensions_c1._cont = ASN1Dict([
-        (u'cg-ConfigInfo', ___CG_ConfigInfo_criticalExtensions_c1_cg_ConfigInfo),
-        (u'spare3', ___CG_ConfigInfo_criticalExtensions_c1_spare3),
-        (u'spare2', ___CG_ConfigInfo_criticalExtensions_c1_spare2),
-        (u'spare1', ___CG_ConfigInfo_criticalExtensions_c1_spare1),
-        ])
-    __CG_ConfigInfo_criticalExtensions_c1._ext = None
-    __CG_ConfigInfo_criticalExtensions_criticalExtensionsFuture = SEQ(name=u'criticalExtensionsFuture', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    __CG_ConfigInfo_criticalExtensions_criticalExtensionsFuture._cont = ASN1Dict([
-        ])
-    __CG_ConfigInfo_criticalExtensions_criticalExtensionsFuture._ext = None
-    _CG_ConfigInfo_criticalExtensions._cont = ASN1Dict([
-        (u'c1', __CG_ConfigInfo_criticalExtensions_c1),
-        (u'criticalExtensionsFuture', __CG_ConfigInfo_criticalExtensions_criticalExtensionsFuture),
-        ])
-    _CG_ConfigInfo_criticalExtensions._ext = None
-    CG_ConfigInfo._cont = ASN1Dict([
-        (u'criticalExtensions', _CG_ConfigInfo_criticalExtensions),
-        ])
-    CG_ConfigInfo._ext = None
-    
-    #-----< CG-ConfigInfo-IEs >-----#
-    CG_ConfigInfo_IEs = SEQ(name=u'CG-ConfigInfo-IEs', mode=MODE_TYPE)
-    _CG_ConfigInfo_IEs_ue_CapabilityInfo = OCT_STR(name=u'ue-CapabilityInfo', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    __CG_ConfigInfo_IEs_ue_CapabilityInfo_contain = SEQ_OF(name='_cont_ue-CapabilityInfo', mode=MODE_TYPE, typeref=ASN1RefType(('NR-RRC-Definitions', 'UE-CapabilityRAT-ContainerList')))
-    _CG_ConfigInfo_IEs_ue_CapabilityInfo._const_cont = __CG_ConfigInfo_IEs_ue_CapabilityInfo_contain
-    _CG_ConfigInfo_IEs_candidateCellInfoListMN = SEQ_OF(name=u'candidateCellInfoListMN', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'MeasResultList2NR')), opt=True)
-    _CG_ConfigInfo_IEs_candidateCellInfoListSN = OCT_STR(name=u'candidateCellInfoListSN', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    __CG_ConfigInfo_IEs_candidateCellInfoListSN_contain = SEQ_OF(name='_cont_candidateCellInfoListSN', mode=MODE_TYPE, typeref=ASN1RefType(('NR-RRC-Definitions', 'MeasResultList2NR')))
-    _CG_ConfigInfo_IEs_candidateCellInfoListSN._const_cont = __CG_ConfigInfo_IEs_candidateCellInfoListSN_contain
-    _CG_ConfigInfo_IEs_measResultCellListSFTD_NR = SEQ_OF(name=u'measResultCellListSFTD-NR', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'MeasResultCellListSFTD-NR')), opt=True)
-    _CG_ConfigInfo_IEs_scgFailureInfo = SEQ(name=u'scgFailureInfo', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    __CG_ConfigInfo_IEs_scgFailureInfo_failureType = ENUM(name=u'failureType', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    __CG_ConfigInfo_IEs_scgFailureInfo_failureType._cont = ASN1Dict([(u't310-Expiry', 0), (u'randomAccessProblem', 1), (u'rlc-MaxNumRetx', 2), (u'synchReconfigFailure-SCG', 3), (u'scg-reconfigFailure', 4), (u'srb3-IntegrityFailure', 5)])
-    __CG_ConfigInfo_IEs_scgFailureInfo_failureType._ext = None
-    __CG_ConfigInfo_IEs_scgFailureInfo_measResultSCG = OCT_STR(name=u'measResultSCG', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    ___CG_ConfigInfo_IEs_scgFailureInfo_measResultSCG_contain = SEQ(name='_cont_measResultSCG', mode=MODE_TYPE, typeref=ASN1RefType(('NR-RRC-Definitions', 'MeasResultSCG-Failure')))
-    __CG_ConfigInfo_IEs_scgFailureInfo_measResultSCG._const_cont = ___CG_ConfigInfo_IEs_scgFailureInfo_measResultSCG_contain
-    _CG_ConfigInfo_IEs_scgFailureInfo._cont = ASN1Dict([
-        (u'failureType', __CG_ConfigInfo_IEs_scgFailureInfo_failureType),
-        (u'measResultSCG', __CG_ConfigInfo_IEs_scgFailureInfo_measResultSCG),
-        ])
-    _CG_ConfigInfo_IEs_scgFailureInfo._ext = None
-    _CG_ConfigInfo_IEs_configRestrictInfo = SEQ(name=u'configRestrictInfo', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-InterNodeDefinitions', 'ConfigRestrictInfoSCG')), opt=True)
-    _CG_ConfigInfo_IEs_drx_InfoMCG = SEQ(name=u'drx-InfoMCG', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-InterNodeDefinitions', 'DRX-Info')), opt=True)
-    _CG_ConfigInfo_IEs_measConfigMN = SEQ(name=u'measConfigMN', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-InterNodeDefinitions', 'MeasConfigMN')), opt=True)
-    _CG_ConfigInfo_IEs_sourceConfigSCG = OCT_STR(name=u'sourceConfigSCG', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    __CG_ConfigInfo_IEs_sourceConfigSCG_contain = SEQ(name='_cont_sourceConfigSCG', mode=MODE_TYPE, typeref=ASN1RefType(('NR-RRC-Definitions', 'RRCReconfiguration')))
-    _CG_ConfigInfo_IEs_sourceConfigSCG._const_cont = __CG_ConfigInfo_IEs_sourceConfigSCG_contain
-    _CG_ConfigInfo_IEs_scg_RB_Config = OCT_STR(name=u'scg-RB-Config', mode=MODE_TYPE, tag=(9, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    __CG_ConfigInfo_IEs_scg_RB_Config_contain = SEQ(name='_cont_scg-RB-Config', mode=MODE_TYPE, typeref=ASN1RefType(('NR-RRC-Definitions', 'RadioBearerConfig')))
-    _CG_ConfigInfo_IEs_scg_RB_Config._const_cont = __CG_ConfigInfo_IEs_scg_RB_Config_contain
-    _CG_ConfigInfo_IEs_mcg_RB_Config = OCT_STR(name=u'mcg-RB-Config', mode=MODE_TYPE, tag=(10, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    __CG_ConfigInfo_IEs_mcg_RB_Config_contain = SEQ(name='_cont_mcg-RB-Config', mode=MODE_TYPE, typeref=ASN1RefType(('NR-RRC-Definitions', 'RadioBearerConfig')))
-    _CG_ConfigInfo_IEs_mcg_RB_Config._const_cont = __CG_ConfigInfo_IEs_mcg_RB_Config_contain
-    _CG_ConfigInfo_IEs_mrdc_AssistanceInfo = SEQ(name=u'mrdc-AssistanceInfo', mode=MODE_TYPE, tag=(11, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-InterNodeDefinitions', 'MRDC-AssistanceInfo')), opt=True)
-    _CG_ConfigInfo_IEs_nonCriticalExtension = SEQ(name=u'nonCriticalExtension', mode=MODE_TYPE, tag=(12, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-InterNodeDefinitions', 'CG-ConfigInfo-v1540-IEs')), opt=True)
-    CG_ConfigInfo_IEs._cont = ASN1Dict([
-        (u'ue-CapabilityInfo', _CG_ConfigInfo_IEs_ue_CapabilityInfo),
-        (u'candidateCellInfoListMN', _CG_ConfigInfo_IEs_candidateCellInfoListMN),
-        (u'candidateCellInfoListSN', _CG_ConfigInfo_IEs_candidateCellInfoListSN),
-        (u'measResultCellListSFTD-NR', _CG_ConfigInfo_IEs_measResultCellListSFTD_NR),
-        (u'scgFailureInfo', _CG_ConfigInfo_IEs_scgFailureInfo),
-        (u'configRestrictInfo', _CG_ConfigInfo_IEs_configRestrictInfo),
-        (u'drx-InfoMCG', _CG_ConfigInfo_IEs_drx_InfoMCG),
-        (u'measConfigMN', _CG_ConfigInfo_IEs_measConfigMN),
-        (u'sourceConfigSCG', _CG_ConfigInfo_IEs_sourceConfigSCG),
-        (u'scg-RB-Config', _CG_ConfigInfo_IEs_scg_RB_Config),
-        (u'mcg-RB-Config', _CG_ConfigInfo_IEs_mcg_RB_Config),
-        (u'mrdc-AssistanceInfo', _CG_ConfigInfo_IEs_mrdc_AssistanceInfo),
-        (u'nonCriticalExtension', _CG_ConfigInfo_IEs_nonCriticalExtension),
-        ])
-    CG_ConfigInfo_IEs._ext = None
-    
-    #-----< CG-ConfigInfo-v1540-IEs >-----#
-    CG_ConfigInfo_v1540_IEs = SEQ(name=u'CG-ConfigInfo-v1540-IEs', mode=MODE_TYPE)
-    _CG_ConfigInfo_v1540_IEs_ph_InfoMCG = SEQ_OF(name=u'ph-InfoMCG', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-InterNodeDefinitions', 'PH-TypeListMCG')), opt=True)
-    _CG_ConfigInfo_v1540_IEs_measResultReportCGI = SEQ(name=u'measResultReportCGI', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    __CG_ConfigInfo_v1540_IEs_measResultReportCGI_ssbFrequency = INT(name=u'ssbFrequency', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'ARFCN-ValueNR')))
-    __CG_ConfigInfo_v1540_IEs_measResultReportCGI_cellForWhichToReportCGI = INT(name=u'cellForWhichToReportCGI', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'PhysCellId')))
-    __CG_ConfigInfo_v1540_IEs_measResultReportCGI_cgi_Info = SEQ(name=u'cgi-Info', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'CGI-InfoNR')))
-    _CG_ConfigInfo_v1540_IEs_measResultReportCGI._cont = ASN1Dict([
-        (u'ssbFrequency', __CG_ConfigInfo_v1540_IEs_measResultReportCGI_ssbFrequency),
-        (u'cellForWhichToReportCGI', __CG_ConfigInfo_v1540_IEs_measResultReportCGI_cellForWhichToReportCGI),
-        (u'cgi-Info', __CG_ConfigInfo_v1540_IEs_measResultReportCGI_cgi_Info),
-        ])
-    _CG_ConfigInfo_v1540_IEs_measResultReportCGI._ext = None
-    _CG_ConfigInfo_v1540_IEs_nonCriticalExtension = SEQ(name=u'nonCriticalExtension', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-InterNodeDefinitions', 'CG-ConfigInfo-v1560-IEs')), opt=True)
-    CG_ConfigInfo_v1540_IEs._cont = ASN1Dict([
-        (u'ph-InfoMCG', _CG_ConfigInfo_v1540_IEs_ph_InfoMCG),
-        (u'measResultReportCGI', _CG_ConfigInfo_v1540_IEs_measResultReportCGI),
-        (u'nonCriticalExtension', _CG_ConfigInfo_v1540_IEs_nonCriticalExtension),
-        ])
-    CG_ConfigInfo_v1540_IEs._ext = None
-    
-    #-----< CG-ConfigInfo-v1560-IEs >-----#
-    CG_ConfigInfo_v1560_IEs = SEQ(name=u'CG-ConfigInfo-v1560-IEs', mode=MODE_TYPE)
-    _CG_ConfigInfo_v1560_IEs_candidateCellInfoListMN_EUTRA = OCT_STR(name=u'candidateCellInfoListMN-EUTRA', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _CG_ConfigInfo_v1560_IEs_candidateCellInfoListSN_EUTRA = OCT_STR(name=u'candidateCellInfoListSN-EUTRA', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _CG_ConfigInfo_v1560_IEs_sourceConfigSCG_EUTRA = OCT_STR(name=u'sourceConfigSCG-EUTRA', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _CG_ConfigInfo_v1560_IEs_scgFailureInfoEUTRA = SEQ(name=u'scgFailureInfoEUTRA', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    __CG_ConfigInfo_v1560_IEs_scgFailureInfoEUTRA_failureTypeEUTRA = ENUM(name=u'failureTypeEUTRA', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    __CG_ConfigInfo_v1560_IEs_scgFailureInfoEUTRA_failureTypeEUTRA._cont = ASN1Dict([(u't313-Expiry', 0), (u'randomAccessProblem', 1), (u'rlc-MaxNumRetx', 2), (u'scg-ChangeFailure', 3)])
-    __CG_ConfigInfo_v1560_IEs_scgFailureInfoEUTRA_failureTypeEUTRA._ext = None
-    __CG_ConfigInfo_v1560_IEs_scgFailureInfoEUTRA_measResultSCG_EUTRA = OCT_STR(name=u'measResultSCG-EUTRA', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _CG_ConfigInfo_v1560_IEs_scgFailureInfoEUTRA._cont = ASN1Dict([
-        (u'failureTypeEUTRA', __CG_ConfigInfo_v1560_IEs_scgFailureInfoEUTRA_failureTypeEUTRA),
-        (u'measResultSCG-EUTRA', __CG_ConfigInfo_v1560_IEs_scgFailureInfoEUTRA_measResultSCG_EUTRA),
-        ])
-    _CG_ConfigInfo_v1560_IEs_scgFailureInfoEUTRA._ext = None
-    _CG_ConfigInfo_v1560_IEs_drx_ConfigMCG = SEQ(name=u'drx-ConfigMCG', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'DRX-Config')), opt=True)
-    _CG_ConfigInfo_v1560_IEs_measResultReportCGI_EUTRA = SEQ(name=u'measResultReportCGI-EUTRA', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    __CG_ConfigInfo_v1560_IEs_measResultReportCGI_EUTRA_eutraFrequency = INT(name=u'eutraFrequency', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'ARFCN-ValueEUTRA')))
-    __CG_ConfigInfo_v1560_IEs_measResultReportCGI_EUTRA_cellForWhichToReportCGI_EUTRA = INT(name=u'cellForWhichToReportCGI-EUTRA', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'EUTRA-PhysCellId')))
-    __CG_ConfigInfo_v1560_IEs_measResultReportCGI_EUTRA_cgi_InfoEUTRA = SEQ(name=u'cgi-InfoEUTRA', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'CGI-InfoEUTRA')))
-    _CG_ConfigInfo_v1560_IEs_measResultReportCGI_EUTRA._cont = ASN1Dict([
-        (u'eutraFrequency', __CG_ConfigInfo_v1560_IEs_measResultReportCGI_EUTRA_eutraFrequency),
-        (u'cellForWhichToReportCGI-EUTRA', __CG_ConfigInfo_v1560_IEs_measResultReportCGI_EUTRA_cellForWhichToReportCGI_EUTRA),
-        (u'cgi-InfoEUTRA', __CG_ConfigInfo_v1560_IEs_measResultReportCGI_EUTRA_cgi_InfoEUTRA),
-        ])
-    _CG_ConfigInfo_v1560_IEs_measResultReportCGI_EUTRA._ext = None
-    _CG_ConfigInfo_v1560_IEs_measResultCellListSFTD_EUTRA = SEQ_OF(name=u'measResultCellListSFTD-EUTRA', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'MeasResultCellListSFTD-EUTRA')), opt=True)
-    _CG_ConfigInfo_v1560_IEs_fr_InfoListMCG = SEQ_OF(name=u'fr-InfoListMCG', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-InterNodeDefinitions', 'FR-InfoList')), opt=True)
-    _CG_ConfigInfo_v1560_IEs_nonCriticalExtension = SEQ(name=u'nonCriticalExtension', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-InterNodeDefinitions', 'CG-ConfigInfo-v1570-IEs')), opt=True)
-    CG_ConfigInfo_v1560_IEs._cont = ASN1Dict([
-        (u'candidateCellInfoListMN-EUTRA', _CG_ConfigInfo_v1560_IEs_candidateCellInfoListMN_EUTRA),
-        (u'candidateCellInfoListSN-EUTRA', _CG_ConfigInfo_v1560_IEs_candidateCellInfoListSN_EUTRA),
-        (u'sourceConfigSCG-EUTRA', _CG_ConfigInfo_v1560_IEs_sourceConfigSCG_EUTRA),
-        (u'scgFailureInfoEUTRA', _CG_ConfigInfo_v1560_IEs_scgFailureInfoEUTRA),
-        (u'drx-ConfigMCG', _CG_ConfigInfo_v1560_IEs_drx_ConfigMCG),
-        (u'measResultReportCGI-EUTRA', _CG_ConfigInfo_v1560_IEs_measResultReportCGI_EUTRA),
-        (u'measResultCellListSFTD-EUTRA', _CG_ConfigInfo_v1560_IEs_measResultCellListSFTD_EUTRA),
-        (u'fr-InfoListMCG', _CG_ConfigInfo_v1560_IEs_fr_InfoListMCG),
-        (u'nonCriticalExtension', _CG_ConfigInfo_v1560_IEs_nonCriticalExtension),
-        ])
-    CG_ConfigInfo_v1560_IEs._ext = None
-    
-    #-----< CG-ConfigInfo-v1570-IEs >-----#
-    CG_ConfigInfo_v1570_IEs = SEQ(name=u'CG-ConfigInfo-v1570-IEs', mode=MODE_TYPE)
-    _CG_ConfigInfo_v1570_IEs_sftdFrequencyList_NR = SEQ_OF(name=u'sftdFrequencyList-NR', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-InterNodeDefinitions', 'SFTD-FrequencyList-NR')), opt=True)
-    _CG_ConfigInfo_v1570_IEs_sftdFrequencyList_EUTRA = SEQ_OF(name=u'sftdFrequencyList-EUTRA', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-InterNodeDefinitions', 'SFTD-FrequencyList-EUTRA')), opt=True)
-    _CG_ConfigInfo_v1570_IEs_nonCriticalExtension = SEQ(name=u'nonCriticalExtension', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-InterNodeDefinitions', 'CG-ConfigInfo-v1590-IEs')), opt=True)
-    CG_ConfigInfo_v1570_IEs._cont = ASN1Dict([
-        (u'sftdFrequencyList-NR', _CG_ConfigInfo_v1570_IEs_sftdFrequencyList_NR),
-        (u'sftdFrequencyList-EUTRA', _CG_ConfigInfo_v1570_IEs_sftdFrequencyList_EUTRA),
-        (u'nonCriticalExtension', _CG_ConfigInfo_v1570_IEs_nonCriticalExtension),
-        ])
-    CG_ConfigInfo_v1570_IEs._ext = None
-    
-    #-----< CG-ConfigInfo-v1590-IEs >-----#
-    CG_ConfigInfo_v1590_IEs = SEQ(name=u'CG-ConfigInfo-v1590-IEs', mode=MODE_TYPE)
-    _CG_ConfigInfo_v1590_IEs_servFrequenciesMN_NR = SEQ_OF(name=u'servFrequenciesMN-NR', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    __CG_ConfigInfo_v1590_IEs_servFrequenciesMN_NR__item_ = INT(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('NR-RRC-Definitions', 'ARFCN-ValueNR')))
-    _CG_ConfigInfo_v1590_IEs_servFrequenciesMN_NR._cont = __CG_ConfigInfo_v1590_IEs_servFrequenciesMN_NR__item_
-    _CG_ConfigInfo_v1590_IEs_servFrequenciesMN_NR._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=31)], ev=None, er=[])
-    _CG_ConfigInfo_v1590_IEs_nonCriticalExtension = SEQ(name=u'nonCriticalExtension', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-InterNodeDefinitions', 'CG-ConfigInfo-v1610-IEs')), opt=True)
-    CG_ConfigInfo_v1590_IEs._cont = ASN1Dict([
-        (u'servFrequenciesMN-NR', _CG_ConfigInfo_v1590_IEs_servFrequenciesMN_NR),
-        (u'nonCriticalExtension', _CG_ConfigInfo_v1590_IEs_nonCriticalExtension),
-        ])
-    CG_ConfigInfo_v1590_IEs._ext = None
-    
-    #-----< CG-ConfigInfo-v1610-IEs >-----#
-    CG_ConfigInfo_v1610_IEs = SEQ(name=u'CG-ConfigInfo-v1610-IEs', mode=MODE_TYPE)
-    _CG_ConfigInfo_v1610_IEs_drx_InfoMCG2 = SEQ(name=u'drx-InfoMCG2', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-InterNodeDefinitions', 'DRX-Info2')), opt=True)
-    _CG_ConfigInfo_v1610_IEs_alignedDRX_Indication = ENUM(name=u'alignedDRX-Indication', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _CG_ConfigInfo_v1610_IEs_alignedDRX_Indication._cont = ASN1Dict([(u'true', 0)])
-    _CG_ConfigInfo_v1610_IEs_alignedDRX_Indication._ext = None
-    _CG_ConfigInfo_v1610_IEs_scgFailureInfo_r16 = SEQ(name=u'scgFailureInfo-r16', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    __CG_ConfigInfo_v1610_IEs_scgFailureInfo_r16_failureType_r16 = ENUM(name=u'failureType-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    __CG_ConfigInfo_v1610_IEs_scgFailureInfo_r16_failureType_r16._cont = ASN1Dict([(u'scg-lbtFailure-r16', 0), (u'beamFailureRecoveryFailure-r16', 1), (u't312-Expiry-r16', 2), (u'bh-RLF-r16', 3), (u'spare4', 4), (u'spare3', 5), (u'spare2', 6), (u'spare1', 7)])
-    __CG_ConfigInfo_v1610_IEs_scgFailureInfo_r16_failureType_r16._ext = None
-    __CG_ConfigInfo_v1610_IEs_scgFailureInfo_r16_measResultSCG_r16 = OCT_STR(name=u'measResultSCG-r16', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    ___CG_ConfigInfo_v1610_IEs_scgFailureInfo_r16_measResultSCG_r16_contain = SEQ(name='_cont_measResultSCG-r16', mode=MODE_TYPE, typeref=ASN1RefType(('NR-RRC-Definitions', 'MeasResultSCG-Failure')))
-    __CG_ConfigInfo_v1610_IEs_scgFailureInfo_r16_measResultSCG_r16._const_cont = ___CG_ConfigInfo_v1610_IEs_scgFailureInfo_r16_measResultSCG_r16_contain
-    _CG_ConfigInfo_v1610_IEs_scgFailureInfo_r16._cont = ASN1Dict([
-        (u'failureType-r16', __CG_ConfigInfo_v1610_IEs_scgFailureInfo_r16_failureType_r16),
-        (u'measResultSCG-r16', __CG_ConfigInfo_v1610_IEs_scgFailureInfo_r16_measResultSCG_r16),
-        ])
-    _CG_ConfigInfo_v1610_IEs_scgFailureInfo_r16._ext = None
-    _CG_ConfigInfo_v1610_IEs_dummy1 = SEQ(name=u'dummy1', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    __CG_ConfigInfo_v1610_IEs_dummy1_failureTypeEUTRA_r16 = ENUM(name=u'failureTypeEUTRA-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    __CG_ConfigInfo_v1610_IEs_dummy1_failureTypeEUTRA_r16._cont = ASN1Dict([(u'scg-lbtFailure-r16', 0), (u'beamFailureRecoveryFailure-r16', 1), (u't312-Expiry-r16', 2), (u'spare5', 3), (u'spare4', 4), (u'spare3', 5), (u'spare2', 6), (u'spare1', 7)])
-    __CG_ConfigInfo_v1610_IEs_dummy1_failureTypeEUTRA_r16._ext = None
-    __CG_ConfigInfo_v1610_IEs_dummy1_measResultSCG_EUTRA_r16 = OCT_STR(name=u'measResultSCG-EUTRA-r16', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _CG_ConfigInfo_v1610_IEs_dummy1._cont = ASN1Dict([
-        (u'failureTypeEUTRA-r16', __CG_ConfigInfo_v1610_IEs_dummy1_failureTypeEUTRA_r16),
-        (u'measResultSCG-EUTRA-r16', __CG_ConfigInfo_v1610_IEs_dummy1_measResultSCG_EUTRA_r16),
-        ])
-    _CG_ConfigInfo_v1610_IEs_dummy1._ext = None
-    _CG_ConfigInfo_v1610_IEs_sidelinkUEInformationNR_r16 = OCT_STR(name=u'sidelinkUEInformationNR-r16', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    __CG_ConfigInfo_v1610_IEs_sidelinkUEInformationNR_r16_contain = SEQ(name='_cont_sidelinkUEInformationNR-r16', mode=MODE_TYPE, typeref=ASN1RefType(('NR-RRC-Definitions', 'SidelinkUEInformationNR-r16')))
-    _CG_ConfigInfo_v1610_IEs_sidelinkUEInformationNR_r16._const_cont = __CG_ConfigInfo_v1610_IEs_sidelinkUEInformationNR_r16_contain
-    _CG_ConfigInfo_v1610_IEs_sidelinkUEInformationEUTRA_r16 = OCT_STR(name=u'sidelinkUEInformationEUTRA-r16', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _CG_ConfigInfo_v1610_IEs_nonCriticalExtension = SEQ(name=u'nonCriticalExtension', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-InterNodeDefinitions', 'CG-ConfigInfo-v1620-IEs')), opt=True)
-    CG_ConfigInfo_v1610_IEs._cont = ASN1Dict([
-        (u'drx-InfoMCG2', _CG_ConfigInfo_v1610_IEs_drx_InfoMCG2),
-        (u'alignedDRX-Indication', _CG_ConfigInfo_v1610_IEs_alignedDRX_Indication),
-        (u'scgFailureInfo-r16', _CG_ConfigInfo_v1610_IEs_scgFailureInfo_r16),
-        (u'dummy1', _CG_ConfigInfo_v1610_IEs_dummy1),
-        (u'sidelinkUEInformationNR-r16', _CG_ConfigInfo_v1610_IEs_sidelinkUEInformationNR_r16),
-        (u'sidelinkUEInformationEUTRA-r16', _CG_ConfigInfo_v1610_IEs_sidelinkUEInformationEUTRA_r16),
-        (u'nonCriticalExtension', _CG_ConfigInfo_v1610_IEs_nonCriticalExtension),
-        ])
-    CG_ConfigInfo_v1610_IEs._ext = None
-    
-    #-----< CG-ConfigInfo-v1620-IEs >-----#
-    CG_ConfigInfo_v1620_IEs = SEQ(name=u'CG-ConfigInfo-v1620-IEs', mode=MODE_TYPE)
-    _CG_ConfigInfo_v1620_IEs_ueAssistanceInformationSourceSCG_r16 = OCT_STR(name=u'ueAssistanceInformationSourceSCG-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    __CG_ConfigInfo_v1620_IEs_ueAssistanceInformationSourceSCG_r16_contain = SEQ(name='_cont_ueAssistanceInformationSourceSCG-r16', mode=MODE_TYPE, typeref=ASN1RefType(('NR-RRC-Definitions', 'UEAssistanceInformation')))
-    _CG_ConfigInfo_v1620_IEs_ueAssistanceInformationSourceSCG_r16._const_cont = __CG_ConfigInfo_v1620_IEs_ueAssistanceInformationSourceSCG_r16_contain
-    _CG_ConfigInfo_v1620_IEs_nonCriticalExtension = SEQ(name=u'nonCriticalExtension', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-InterNodeDefinitions', 'CG-ConfigInfo-v1640-IEs')), opt=True)
-    CG_ConfigInfo_v1620_IEs._cont = ASN1Dict([
-        (u'ueAssistanceInformationSourceSCG-r16', _CG_ConfigInfo_v1620_IEs_ueAssistanceInformationSourceSCG_r16),
-        (u'nonCriticalExtension', _CG_ConfigInfo_v1620_IEs_nonCriticalExtension),
-        ])
-    CG_ConfigInfo_v1620_IEs._ext = None
-    
-    #-----< CG-ConfigInfo-v1640-IEs >-----#
-    CG_ConfigInfo_v1640_IEs = SEQ(name=u'CG-ConfigInfo-v1640-IEs', mode=MODE_TYPE)
-    _CG_ConfigInfo_v1640_IEs_servCellInfoListMCG_NR_r16 = SEQ_OF(name=u'servCellInfoListMCG-NR-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-InterNodeDefinitions', 'ServCellInfoListMCG-NR-r16')), opt=True)
-    _CG_ConfigInfo_v1640_IEs_servCellInfoListMCG_EUTRA_r16 = SEQ_OF(name=u'servCellInfoListMCG-EUTRA-r16', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-InterNodeDefinitions', 'ServCellInfoListMCG-EUTRA-r16')), opt=True)
-    _CG_ConfigInfo_v1640_IEs_nonCriticalExtension = SEQ(name=u'nonCriticalExtension', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _CG_ConfigInfo_v1640_IEs_nonCriticalExtension._cont = ASN1Dict([
-        ])
-    _CG_ConfigInfo_v1640_IEs_nonCriticalExtension._ext = None
-    CG_ConfigInfo_v1640_IEs._cont = ASN1Dict([
-        (u'servCellInfoListMCG-NR-r16', _CG_ConfigInfo_v1640_IEs_servCellInfoListMCG_NR_r16),
-        (u'servCellInfoListMCG-EUTRA-r16', _CG_ConfigInfo_v1640_IEs_servCellInfoListMCG_EUTRA_r16),
-        (u'nonCriticalExtension', _CG_ConfigInfo_v1640_IEs_nonCriticalExtension),
-        ])
-    CG_ConfigInfo_v1640_IEs._ext = None
-    
-    #-----< ServCellInfoListMCG-NR-r16 >-----#
-    ServCellInfoListMCG_NR_r16 = SEQ_OF(name=u'ServCellInfoListMCG-NR-r16', mode=MODE_TYPE)
-    _ServCellInfoListMCG_NR_r16__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('NR-InterNodeDefinitions', 'ServCellInfoXCG-NR-r16')))
-    ServCellInfoListMCG_NR_r16._cont = _ServCellInfoListMCG_NR_r16__item_
-    ServCellInfoListMCG_NR_r16._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=32)], ev=None, er=[])
-    
-    #-----< ServCellInfoListMCG-EUTRA-r16 >-----#
-    ServCellInfoListMCG_EUTRA_r16 = SEQ_OF(name=u'ServCellInfoListMCG-EUTRA-r16', mode=MODE_TYPE)
-    _ServCellInfoListMCG_EUTRA_r16__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('NR-InterNodeDefinitions', 'ServCellInfoXCG-EUTRA-r16')))
-    ServCellInfoListMCG_EUTRA_r16._cont = _ServCellInfoListMCG_EUTRA_r16__item_
-    ServCellInfoListMCG_EUTRA_r16._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=32)], ev=None, er=[])
-    
-    #-----< SFTD-FrequencyList-NR >-----#
-    SFTD_FrequencyList_NR = SEQ_OF(name=u'SFTD-FrequencyList-NR', mode=MODE_TYPE)
-    _SFTD_FrequencyList_NR__item_ = INT(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('NR-RRC-Definitions', 'ARFCN-ValueNR')))
-    SFTD_FrequencyList_NR._cont = _SFTD_FrequencyList_NR__item_
-    SFTD_FrequencyList_NR._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=3)], ev=None, er=[])
-    
-    #-----< SFTD-FrequencyList-EUTRA >-----#
-    SFTD_FrequencyList_EUTRA = SEQ_OF(name=u'SFTD-FrequencyList-EUTRA', mode=MODE_TYPE)
-    _SFTD_FrequencyList_EUTRA__item_ = INT(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('NR-RRC-Definitions', 'ARFCN-ValueEUTRA')))
-    SFTD_FrequencyList_EUTRA._cont = _SFTD_FrequencyList_EUTRA__item_
-    SFTD_FrequencyList_EUTRA._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=3)], ev=None, er=[])
-    
-    #-----< ConfigRestrictInfoSCG >-----#
-    ConfigRestrictInfoSCG = SEQ(name=u'ConfigRestrictInfoSCG', mode=MODE_TYPE)
-    _ConfigRestrictInfoSCG_allowedBC_ListMRDC = SEQ_OF(name=u'allowedBC-ListMRDC', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-InterNodeDefinitions', 'BandCombinationInfoList')), opt=True)
-    _ConfigRestrictInfoSCG_powerCoordination_FR1 = SEQ(name=u'powerCoordination-FR1', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    __ConfigRestrictInfoSCG_powerCoordination_FR1_p_maxNR_FR1 = INT(name=u'p-maxNR-FR1', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'P-Max')), opt=True)
-    __ConfigRestrictInfoSCG_powerCoordination_FR1_p_maxEUTRA = INT(name=u'p-maxEUTRA', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'P-Max')), opt=True)
-    __ConfigRestrictInfoSCG_powerCoordination_FR1_p_maxUE_FR1 = INT(name=u'p-maxUE-FR1', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'P-Max')), opt=True)
-    _ConfigRestrictInfoSCG_powerCoordination_FR1._cont = ASN1Dict([
-        (u'p-maxNR-FR1', __ConfigRestrictInfoSCG_powerCoordination_FR1_p_maxNR_FR1),
-        (u'p-maxEUTRA', __ConfigRestrictInfoSCG_powerCoordination_FR1_p_maxEUTRA),
-        (u'p-maxUE-FR1', __ConfigRestrictInfoSCG_powerCoordination_FR1_p_maxUE_FR1),
-        ])
-    _ConfigRestrictInfoSCG_powerCoordination_FR1._ext = None
-    _ConfigRestrictInfoSCG_servCellIndexRangeSCG = SEQ(name=u'servCellIndexRangeSCG', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    __ConfigRestrictInfoSCG_servCellIndexRangeSCG_lowBound = INT(name=u'lowBound', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'ServCellIndex')))
-    __ConfigRestrictInfoSCG_servCellIndexRangeSCG_upBound = INT(name=u'upBound', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'ServCellIndex')))
-    _ConfigRestrictInfoSCG_servCellIndexRangeSCG._cont = ASN1Dict([
-        (u'lowBound', __ConfigRestrictInfoSCG_servCellIndexRangeSCG_lowBound),
-        (u'upBound', __ConfigRestrictInfoSCG_servCellIndexRangeSCG_upBound),
-        ])
-    _ConfigRestrictInfoSCG_servCellIndexRangeSCG._ext = None
-    _ConfigRestrictInfoSCG_maxMeasFreqsSCG = INT(name=u'maxMeasFreqsSCG', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _ConfigRestrictInfoSCG_maxMeasFreqsSCG._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=32)], ev=None, er=[])
-    _ConfigRestrictInfoSCG_dummy = INT(name=u'dummy', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _ConfigRestrictInfoSCG_dummy._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=62)], ev=None, er=[])
-    _ConfigRestrictInfoSCG_selectedBandEntriesMNList = SEQ_OF(name=u'selectedBandEntriesMNList', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True, group=0)
-    __ConfigRestrictInfoSCG_selectedBandEntriesMNList__item_ = SEQ_OF(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('NR-InterNodeDefinitions', 'SelectedBandEntriesMN')))
-    _ConfigRestrictInfoSCG_selectedBandEntriesMNList._cont = __ConfigRestrictInfoSCG_selectedBandEntriesMNList__item_
-    _ConfigRestrictInfoSCG_selectedBandEntriesMNList._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=65536)], ev=None, er=[])
-    _ConfigRestrictInfoSCG_pdcch_BlindDetectionSCG = INT(name=u'pdcch-BlindDetectionSCG', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True, group=0)
-    _ConfigRestrictInfoSCG_pdcch_BlindDetectionSCG._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=15)], ev=None, er=[])
-    _ConfigRestrictInfoSCG_maxNumberROHC_ContextSessionsSN = INT(name=u'maxNumberROHC-ContextSessionsSN', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True, group=0)
-    _ConfigRestrictInfoSCG_maxNumberROHC_ContextSessionsSN._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=16384)], ev=None, er=[])
-    _ConfigRestrictInfoSCG_maxIntraFreqMeasIdentitiesSCG = INT(name=u'maxIntraFreqMeasIdentitiesSCG', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True, group=1)
-    _ConfigRestrictInfoSCG_maxIntraFreqMeasIdentitiesSCG._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=62)], ev=None, er=[])
-    _ConfigRestrictInfoSCG_maxInterFreqMeasIdentitiesSCG = INT(name=u'maxInterFreqMeasIdentitiesSCG', mode=MODE_TYPE, tag=(9, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True, group=1)
-    _ConfigRestrictInfoSCG_maxInterFreqMeasIdentitiesSCG._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=62)], ev=None, er=[])
-    _ConfigRestrictInfoSCG_p_maxNR_FR1_MCG_r16 = INT(name=u'p-maxNR-FR1-MCG-r16', mode=MODE_TYPE, tag=(10, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'P-Max')), opt=True, group=2)
-    _ConfigRestrictInfoSCG_powerCoordination_FR2_r16 = SEQ(name=u'powerCoordination-FR2-r16', mode=MODE_TYPE, tag=(11, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True, group=2)
-    __ConfigRestrictInfoSCG_powerCoordination_FR2_r16_p_maxNR_FR2_MCG_r16 = INT(name=u'p-maxNR-FR2-MCG-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'P-Max')), opt=True)
-    __ConfigRestrictInfoSCG_powerCoordination_FR2_r16_p_maxNR_FR2_SCG_r16 = INT(name=u'p-maxNR-FR2-SCG-r16', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'P-Max')), opt=True)
-    __ConfigRestrictInfoSCG_powerCoordination_FR2_r16_p_maxUE_FR2_r16 = INT(name=u'p-maxUE-FR2-r16', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'P-Max')), opt=True)
-    _ConfigRestrictInfoSCG_powerCoordination_FR2_r16._cont = ASN1Dict([
-        (u'p-maxNR-FR2-MCG-r16', __ConfigRestrictInfoSCG_powerCoordination_FR2_r16_p_maxNR_FR2_MCG_r16),
-        (u'p-maxNR-FR2-SCG-r16', __ConfigRestrictInfoSCG_powerCoordination_FR2_r16_p_maxNR_FR2_SCG_r16),
-        (u'p-maxUE-FR2-r16', __ConfigRestrictInfoSCG_powerCoordination_FR2_r16_p_maxUE_FR2_r16),
-        ])
-    _ConfigRestrictInfoSCG_powerCoordination_FR2_r16._ext = None
-    _ConfigRestrictInfoSCG_nrdc_PC_mode_FR1_r16 = ENUM(name=u'nrdc-PC-mode-FR1-r16', mode=MODE_TYPE, tag=(12, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True, group=2)
-    _ConfigRestrictInfoSCG_nrdc_PC_mode_FR1_r16._cont = ASN1Dict([(u'semi-static-mode1', 0), (u'semi-static-mode2', 1), (u'dynamic', 2)])
-    _ConfigRestrictInfoSCG_nrdc_PC_mode_FR1_r16._ext = None
-    _ConfigRestrictInfoSCG_nrdc_PC_mode_FR2_r16 = ENUM(name=u'nrdc-PC-mode-FR2-r16', mode=MODE_TYPE, tag=(13, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True, group=2)
-    _ConfigRestrictInfoSCG_nrdc_PC_mode_FR2_r16._cont = ASN1Dict([(u'semi-static-mode1', 0), (u'semi-static-mode2', 1), (u'dynamic', 2)])
-    _ConfigRestrictInfoSCG_nrdc_PC_mode_FR2_r16._ext = None
-    _ConfigRestrictInfoSCG_maxMeasSRS_ResourceSCG_r16 = INT(name=u'maxMeasSRS-ResourceSCG-r16', mode=MODE_TYPE, tag=(14, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True, group=2)
-    _ConfigRestrictInfoSCG_maxMeasSRS_ResourceSCG_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=32)], ev=None, er=[])
-    _ConfigRestrictInfoSCG_maxMeasCLI_ResourceSCG_r16 = INT(name=u'maxMeasCLI-ResourceSCG-r16', mode=MODE_TYPE, tag=(15, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True, group=2)
-    _ConfigRestrictInfoSCG_maxMeasCLI_ResourceSCG_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=64)], ev=None, er=[])
-    _ConfigRestrictInfoSCG_maxNumberEHC_ContextsSN_r16 = INT(name=u'maxNumberEHC-ContextsSN-r16', mode=MODE_TYPE, tag=(16, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True, group=2)
-    _ConfigRestrictInfoSCG_maxNumberEHC_ContextsSN_r16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=65536)], ev=None, er=[])
-    _ConfigRestrictInfoSCG_allowedReducedConfigForOverheating_r16 = SEQ(name=u'allowedReducedConfigForOverheating-r16', mode=MODE_TYPE, tag=(17, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'OverheatingAssistance')), opt=True, group=2)
-    _ConfigRestrictInfoSCG_maxToffset_r16 = ENUM(name=u'maxToffset-r16', mode=MODE_TYPE, tag=(18, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-InterNodeDefinitions', 'T-Offset-r16')), opt=True, group=2)
-    ConfigRestrictInfoSCG._cont = ASN1Dict([
-        (u'allowedBC-ListMRDC', _ConfigRestrictInfoSCG_allowedBC_ListMRDC),
-        (u'powerCoordination-FR1', _ConfigRestrictInfoSCG_powerCoordination_FR1),
-        (u'servCellIndexRangeSCG', _ConfigRestrictInfoSCG_servCellIndexRangeSCG),
-        (u'maxMeasFreqsSCG', _ConfigRestrictInfoSCG_maxMeasFreqsSCG),
-        (u'dummy', _ConfigRestrictInfoSCG_dummy),
-        (u'selectedBandEntriesMNList', _ConfigRestrictInfoSCG_selectedBandEntriesMNList),
-        (u'pdcch-BlindDetectionSCG', _ConfigRestrictInfoSCG_pdcch_BlindDetectionSCG),
-        (u'maxNumberROHC-ContextSessionsSN', _ConfigRestrictInfoSCG_maxNumberROHC_ContextSessionsSN),
-        (u'maxIntraFreqMeasIdentitiesSCG', _ConfigRestrictInfoSCG_maxIntraFreqMeasIdentitiesSCG),
-        (u'maxInterFreqMeasIdentitiesSCG', _ConfigRestrictInfoSCG_maxInterFreqMeasIdentitiesSCG),
-        (u'p-maxNR-FR1-MCG-r16', _ConfigRestrictInfoSCG_p_maxNR_FR1_MCG_r16),
-        (u'powerCoordination-FR2-r16', _ConfigRestrictInfoSCG_powerCoordination_FR2_r16),
-        (u'nrdc-PC-mode-FR1-r16', _ConfigRestrictInfoSCG_nrdc_PC_mode_FR1_r16),
-        (u'nrdc-PC-mode-FR2-r16', _ConfigRestrictInfoSCG_nrdc_PC_mode_FR2_r16),
-        (u'maxMeasSRS-ResourceSCG-r16', _ConfigRestrictInfoSCG_maxMeasSRS_ResourceSCG_r16),
-        (u'maxMeasCLI-ResourceSCG-r16', _ConfigRestrictInfoSCG_maxMeasCLI_ResourceSCG_r16),
-        (u'maxNumberEHC-ContextsSN-r16', _ConfigRestrictInfoSCG_maxNumberEHC_ContextsSN_r16),
-        (u'allowedReducedConfigForOverheating-r16', _ConfigRestrictInfoSCG_allowedReducedConfigForOverheating_r16),
-        (u'maxToffset-r16', _ConfigRestrictInfoSCG_maxToffset_r16),
-        ])
-    ConfigRestrictInfoSCG._ext = [u'selectedBandEntriesMNList', u'pdcch-BlindDetectionSCG', u'maxNumberROHC-ContextSessionsSN', u'maxIntraFreqMeasIdentitiesSCG', u'maxInterFreqMeasIdentitiesSCG', u'p-maxNR-FR1-MCG-r16', u'powerCoordination-FR2-r16', u'nrdc-PC-mode-FR1-r16', u'nrdc-PC-mode-FR2-r16', u'maxMeasSRS-ResourceSCG-r16', u'maxMeasCLI-ResourceSCG-r16', u'maxNumberEHC-ContextsSN-r16', u'allowedReducedConfigForOverheating-r16', u'maxToffset-r16']
-    
-    #-----< SelectedBandEntriesMN >-----#
-    SelectedBandEntriesMN = SEQ_OF(name=u'SelectedBandEntriesMN', mode=MODE_TYPE)
-    _SelectedBandEntriesMN__item_ = INT(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('NR-InterNodeDefinitions', 'BandEntryIndex')))
-    SelectedBandEntriesMN._cont = _SelectedBandEntriesMN__item_
-    SelectedBandEntriesMN._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=32)], ev=None, er=[])
-    
-    #-----< BandEntryIndex >-----#
-    BandEntryIndex = INT(name=u'BandEntryIndex', mode=MODE_TYPE)
-    BandEntryIndex._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=32)], ev=None, er=[])
-    
-    #-----< PH-TypeListMCG >-----#
-    PH_TypeListMCG = SEQ_OF(name=u'PH-TypeListMCG', mode=MODE_TYPE)
-    _PH_TypeListMCG__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('NR-InterNodeDefinitions', 'PH-InfoMCG')))
-    PH_TypeListMCG._cont = _PH_TypeListMCG__item_
-    PH_TypeListMCG._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=32)], ev=None, er=[])
-    
-    #-----< PH-InfoMCG >-----#
-    PH_InfoMCG = SEQ(name=u'PH-InfoMCG', mode=MODE_TYPE)
-    _PH_InfoMCG_servCellIndex = INT(name=u'servCellIndex', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'ServCellIndex')))
-    _PH_InfoMCG_ph_Uplink = SEQ(name=u'ph-Uplink', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-InterNodeDefinitions', 'PH-UplinkCarrierMCG')))
-    _PH_InfoMCG_ph_SupplementaryUplink = SEQ(name=u'ph-SupplementaryUplink', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-InterNodeDefinitions', 'PH-UplinkCarrierMCG')), opt=True)
-    PH_InfoMCG._cont = ASN1Dict([
-        (u'servCellIndex', _PH_InfoMCG_servCellIndex),
-        (u'ph-Uplink', _PH_InfoMCG_ph_Uplink),
-        (u'ph-SupplementaryUplink', _PH_InfoMCG_ph_SupplementaryUplink),
-        ])
-    PH_InfoMCG._ext = []
-    
-    #-----< PH-UplinkCarrierMCG >-----#
-    PH_UplinkCarrierMCG = SEQ(name=u'PH-UplinkCarrierMCG', mode=MODE_TYPE)
-    _PH_UplinkCarrierMCG_ph_Type1or3 = ENUM(name=u'ph-Type1or3', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _PH_UplinkCarrierMCG_ph_Type1or3._cont = ASN1Dict([(u'type1', 0), (u'type3', 1)])
-    _PH_UplinkCarrierMCG_ph_Type1or3._ext = None
-    PH_UplinkCarrierMCG._cont = ASN1Dict([
-        (u'ph-Type1or3', _PH_UplinkCarrierMCG_ph_Type1or3),
-        ])
-    PH_UplinkCarrierMCG._ext = []
-    
-    #-----< BandCombinationInfoList >-----#
-    BandCombinationInfoList = SEQ_OF(name=u'BandCombinationInfoList', mode=MODE_TYPE)
-    _BandCombinationInfoList__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('NR-InterNodeDefinitions', 'BandCombinationInfo')))
-    BandCombinationInfoList._cont = _BandCombinationInfoList__item_
-    BandCombinationInfoList._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=65536)], ev=None, er=[])
-    
-    #-----< BandCombinationInfo >-----#
-    BandCombinationInfo = SEQ(name=u'BandCombinationInfo', mode=MODE_TYPE)
-    _BandCombinationInfo_bandCombinationIndex = INT(name=u'bandCombinationIndex', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-InterNodeDefinitions', 'BandCombinationIndex')))
-    _BandCombinationInfo_allowedFeatureSetsList = SEQ_OF(name=u'allowedFeatureSetsList', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    __BandCombinationInfo_allowedFeatureSetsList__item_ = INT(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('NR-InterNodeDefinitions', 'FeatureSetEntryIndex')))
-    _BandCombinationInfo_allowedFeatureSetsList._cont = __BandCombinationInfo_allowedFeatureSetsList__item_
-    _BandCombinationInfo_allowedFeatureSetsList._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=128)], ev=None, er=[])
-    BandCombinationInfo._cont = ASN1Dict([
-        (u'bandCombinationIndex', _BandCombinationInfo_bandCombinationIndex),
-        (u'allowedFeatureSetsList', _BandCombinationInfo_allowedFeatureSetsList),
-        ])
-    BandCombinationInfo._ext = None
-    
-    #-----< FeatureSetEntryIndex >-----#
-    FeatureSetEntryIndex = INT(name=u'FeatureSetEntryIndex', mode=MODE_TYPE)
-    FeatureSetEntryIndex._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=128)], ev=None, er=[])
-    
-    #-----< DRX-Info >-----#
-    DRX_Info = SEQ(name=u'DRX-Info', mode=MODE_TYPE)
-    _DRX_Info_drx_LongCycleStartOffset = CHOICE(name=u'drx-LongCycleStartOffset', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
-    __DRX_Info_drx_LongCycleStartOffset_ms10 = INT(name=u'ms10', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    __DRX_Info_drx_LongCycleStartOffset_ms10._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=9)], ev=None, er=[])
-    __DRX_Info_drx_LongCycleStartOffset_ms20 = INT(name=u'ms20', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    __DRX_Info_drx_LongCycleStartOffset_ms20._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=19)], ev=None, er=[])
-    __DRX_Info_drx_LongCycleStartOffset_ms32 = INT(name=u'ms32', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    __DRX_Info_drx_LongCycleStartOffset_ms32._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=31)], ev=None, er=[])
-    __DRX_Info_drx_LongCycleStartOffset_ms40 = INT(name=u'ms40', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    __DRX_Info_drx_LongCycleStartOffset_ms40._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=39)], ev=None, er=[])
-    __DRX_Info_drx_LongCycleStartOffset_ms60 = INT(name=u'ms60', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    __DRX_Info_drx_LongCycleStartOffset_ms60._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=59)], ev=None, er=[])
-    __DRX_Info_drx_LongCycleStartOffset_ms64 = INT(name=u'ms64', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    __DRX_Info_drx_LongCycleStartOffset_ms64._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=63)], ev=None, er=[])
-    __DRX_Info_drx_LongCycleStartOffset_ms70 = INT(name=u'ms70', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    __DRX_Info_drx_LongCycleStartOffset_ms70._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=69)], ev=None, er=[])
-    __DRX_Info_drx_LongCycleStartOffset_ms80 = INT(name=u'ms80', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    __DRX_Info_drx_LongCycleStartOffset_ms80._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=79)], ev=None, er=[])
-    __DRX_Info_drx_LongCycleStartOffset_ms128 = INT(name=u'ms128', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    __DRX_Info_drx_LongCycleStartOffset_ms128._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=127)], ev=None, er=[])
-    __DRX_Info_drx_LongCycleStartOffset_ms160 = INT(name=u'ms160', mode=MODE_TYPE, tag=(9, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    __DRX_Info_drx_LongCycleStartOffset_ms160._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=159)], ev=None, er=[])
-    __DRX_Info_drx_LongCycleStartOffset_ms256 = INT(name=u'ms256', mode=MODE_TYPE, tag=(10, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    __DRX_Info_drx_LongCycleStartOffset_ms256._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=255)], ev=None, er=[])
-    __DRX_Info_drx_LongCycleStartOffset_ms320 = INT(name=u'ms320', mode=MODE_TYPE, tag=(11, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    __DRX_Info_drx_LongCycleStartOffset_ms320._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=319)], ev=None, er=[])
-    __DRX_Info_drx_LongCycleStartOffset_ms512 = INT(name=u'ms512', mode=MODE_TYPE, tag=(12, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    __DRX_Info_drx_LongCycleStartOffset_ms512._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=511)], ev=None, er=[])
-    __DRX_Info_drx_LongCycleStartOffset_ms640 = INT(name=u'ms640', mode=MODE_TYPE, tag=(13, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    __DRX_Info_drx_LongCycleStartOffset_ms640._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=639)], ev=None, er=[])
-    __DRX_Info_drx_LongCycleStartOffset_ms1024 = INT(name=u'ms1024', mode=MODE_TYPE, tag=(14, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    __DRX_Info_drx_LongCycleStartOffset_ms1024._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=1023)], ev=None, er=[])
-    __DRX_Info_drx_LongCycleStartOffset_ms1280 = INT(name=u'ms1280', mode=MODE_TYPE, tag=(15, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    __DRX_Info_drx_LongCycleStartOffset_ms1280._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=1279)], ev=None, er=[])
-    __DRX_Info_drx_LongCycleStartOffset_ms2048 = INT(name=u'ms2048', mode=MODE_TYPE, tag=(16, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    __DRX_Info_drx_LongCycleStartOffset_ms2048._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=2047)], ev=None, er=[])
-    __DRX_Info_drx_LongCycleStartOffset_ms2560 = INT(name=u'ms2560', mode=MODE_TYPE, tag=(17, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    __DRX_Info_drx_LongCycleStartOffset_ms2560._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=2559)], ev=None, er=[])
-    __DRX_Info_drx_LongCycleStartOffset_ms5120 = INT(name=u'ms5120', mode=MODE_TYPE, tag=(18, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    __DRX_Info_drx_LongCycleStartOffset_ms5120._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=5119)], ev=None, er=[])
-    __DRX_Info_drx_LongCycleStartOffset_ms10240 = INT(name=u'ms10240', mode=MODE_TYPE, tag=(19, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    __DRX_Info_drx_LongCycleStartOffset_ms10240._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=10239)], ev=None, er=[])
-    _DRX_Info_drx_LongCycleStartOffset._cont = ASN1Dict([
-        (u'ms10', __DRX_Info_drx_LongCycleStartOffset_ms10),
-        (u'ms20', __DRX_Info_drx_LongCycleStartOffset_ms20),
-        (u'ms32', __DRX_Info_drx_LongCycleStartOffset_ms32),
-        (u'ms40', __DRX_Info_drx_LongCycleStartOffset_ms40),
-        (u'ms60', __DRX_Info_drx_LongCycleStartOffset_ms60),
-        (u'ms64', __DRX_Info_drx_LongCycleStartOffset_ms64),
-        (u'ms70', __DRX_Info_drx_LongCycleStartOffset_ms70),
-        (u'ms80', __DRX_Info_drx_LongCycleStartOffset_ms80),
-        (u'ms128', __DRX_Info_drx_LongCycleStartOffset_ms128),
-        (u'ms160', __DRX_Info_drx_LongCycleStartOffset_ms160),
-        (u'ms256', __DRX_Info_drx_LongCycleStartOffset_ms256),
-        (u'ms320', __DRX_Info_drx_LongCycleStartOffset_ms320),
-        (u'ms512', __DRX_Info_drx_LongCycleStartOffset_ms512),
-        (u'ms640', __DRX_Info_drx_LongCycleStartOffset_ms640),
-        (u'ms1024', __DRX_Info_drx_LongCycleStartOffset_ms1024),
-        (u'ms1280', __DRX_Info_drx_LongCycleStartOffset_ms1280),
-        (u'ms2048', __DRX_Info_drx_LongCycleStartOffset_ms2048),
-        (u'ms2560', __DRX_Info_drx_LongCycleStartOffset_ms2560),
-        (u'ms5120', __DRX_Info_drx_LongCycleStartOffset_ms5120),
-        (u'ms10240', __DRX_Info_drx_LongCycleStartOffset_ms10240),
-        ])
-    _DRX_Info_drx_LongCycleStartOffset._ext = None
-    _DRX_Info_shortDRX = SEQ(name=u'shortDRX', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    __DRX_Info_shortDRX_drx_ShortCycle = ENUM(name=u'drx-ShortCycle', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    __DRX_Info_shortDRX_drx_ShortCycle._cont = ASN1Dict([(u'ms2', 0), (u'ms3', 1), (u'ms4', 2), (u'ms5', 3), (u'ms6', 4), (u'ms7', 5), (u'ms8', 6), (u'ms10', 7), (u'ms14', 8), (u'ms16', 9), (u'ms20', 10), (u'ms30', 11), (u'ms32', 12), (u'ms35', 13), (u'ms40', 14), (u'ms64', 15), (u'ms80', 16), (u'ms128', 17), (u'ms160', 18), (u'ms256', 19), (u'ms320', 20), (u'ms512', 21), (u'ms640', 22), (u'spare9', 23), (u'spare8', 24), (u'spare7', 25), (u'spare6', 26), (u'spare5', 27), (u'spare4', 28), (u'spare3', 29), (u'spare2', 30), (u'spare1', 31)])
-    __DRX_Info_shortDRX_drx_ShortCycle._ext = None
-    __DRX_Info_shortDRX_drx_ShortCycleTimer = INT(name=u'drx-ShortCycleTimer', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    __DRX_Info_shortDRX_drx_ShortCycleTimer._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=16)], ev=None, er=[])
-    _DRX_Info_shortDRX._cont = ASN1Dict([
-        (u'drx-ShortCycle', __DRX_Info_shortDRX_drx_ShortCycle),
-        (u'drx-ShortCycleTimer', __DRX_Info_shortDRX_drx_ShortCycleTimer),
-        ])
-    _DRX_Info_shortDRX._ext = None
-    DRX_Info._cont = ASN1Dict([
-        (u'drx-LongCycleStartOffset', _DRX_Info_drx_LongCycleStartOffset),
-        (u'shortDRX', _DRX_Info_shortDRX),
-        ])
-    DRX_Info._ext = None
-    
-    #-----< DRX-Info2 >-----#
-    DRX_Info2 = SEQ(name=u'DRX-Info2', mode=MODE_TYPE)
-    _DRX_Info2_drx_onDurationTimer = CHOICE(name=u'drx-onDurationTimer', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
-    __DRX_Info2_drx_onDurationTimer_subMilliSeconds = INT(name=u'subMilliSeconds', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    __DRX_Info2_drx_onDurationTimer_subMilliSeconds._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=31)], ev=None, er=[])
-    __DRX_Info2_drx_onDurationTimer_milliSeconds = ENUM(name=u'milliSeconds', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    __DRX_Info2_drx_onDurationTimer_milliSeconds._cont = ASN1Dict([(u'ms1', 0), (u'ms2', 1), (u'ms3', 2), (u'ms4', 3), (u'ms5', 4), (u'ms6', 5), (u'ms8', 6), (u'ms10', 7), (u'ms20', 8), (u'ms30', 9), (u'ms40', 10), (u'ms50', 11), (u'ms60', 12), (u'ms80', 13), (u'ms100', 14), (u'ms200', 15), (u'ms300', 16), (u'ms400', 17), (u'ms500', 18), (u'ms600', 19), (u'ms800', 20), (u'ms1000', 21), (u'ms1200', 22), (u'ms1600', 23), (u'spare8', 24), (u'spare7', 25), (u'spare6', 26), (u'spare5', 27), (u'spare4', 28), (u'spare3', 29), (u'spare2', 30), (u'spare1', 31)])
-    __DRX_Info2_drx_onDurationTimer_milliSeconds._ext = None
-    _DRX_Info2_drx_onDurationTimer._cont = ASN1Dict([
-        (u'subMilliSeconds', __DRX_Info2_drx_onDurationTimer_subMilliSeconds),
-        (u'milliSeconds', __DRX_Info2_drx_onDurationTimer_milliSeconds),
-        ])
-    _DRX_Info2_drx_onDurationTimer._ext = None
-    DRX_Info2._cont = ASN1Dict([
-        (u'drx-onDurationTimer', _DRX_Info2_drx_onDurationTimer),
-        ])
-    DRX_Info2._ext = None
-    
-    #-----< MeasConfigMN >-----#
-    MeasConfigMN = SEQ(name=u'MeasConfigMN', mode=MODE_TYPE)
-    _MeasConfigMN_measuredFrequenciesMN = SEQ_OF(name=u'measuredFrequenciesMN', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    __MeasConfigMN_measuredFrequenciesMN__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('NR-InterNodeDefinitions', 'NR-FreqInfo')))
-    _MeasConfigMN_measuredFrequenciesMN._cont = __MeasConfigMN_measuredFrequenciesMN__item_
-    _MeasConfigMN_measuredFrequenciesMN._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=32)], ev=None, er=[])
-    _MeasConfigMN_measGapConfig = CHOICE(name=u'measGapConfig', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'SetupRelease')), opt=True)
-    __MeasConfigMN_measGapConfig_release = NULL(name=u'release', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    __MeasConfigMN_measGapConfig_setup = SEQ(name=u'setup', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'GapConfig')))
-    _MeasConfigMN_measGapConfig._cont = ASN1Dict([
-        (u'release', __MeasConfigMN_measGapConfig_release),
-        (u'setup', __MeasConfigMN_measGapConfig_setup),
-        ])
-    _MeasConfigMN_measGapConfig._ext = None
-    _MeasConfigMN_gapPurpose = ENUM(name=u'gapPurpose', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _MeasConfigMN_gapPurpose._cont = ASN1Dict([(u'perUE', 0), (u'perFR1', 1)])
-    _MeasConfigMN_gapPurpose._ext = None
-    _MeasConfigMN_measGapConfigFR2 = CHOICE(name=u'measGapConfigFR2', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'SetupRelease')), opt=True, group=0)
-    __MeasConfigMN_measGapConfigFR2_release = NULL(name=u'release', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    __MeasConfigMN_measGapConfigFR2_setup = SEQ(name=u'setup', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'GapConfig')))
-    _MeasConfigMN_measGapConfigFR2._cont = ASN1Dict([
-        (u'release', __MeasConfigMN_measGapConfigFR2_release),
-        (u'setup', __MeasConfigMN_measGapConfigFR2_setup),
-        ])
-    _MeasConfigMN_measGapConfigFR2._ext = None
-    MeasConfigMN._cont = ASN1Dict([
-        (u'measuredFrequenciesMN', _MeasConfigMN_measuredFrequenciesMN),
-        (u'measGapConfig', _MeasConfigMN_measGapConfig),
-        (u'gapPurpose', _MeasConfigMN_gapPurpose),
-        (u'measGapConfigFR2', _MeasConfigMN_measGapConfigFR2),
-        ])
-    MeasConfigMN._ext = [u'measGapConfigFR2']
-    
-    #-----< MRDC-AssistanceInfo >-----#
-    MRDC_AssistanceInfo = SEQ(name=u'MRDC-AssistanceInfo', mode=MODE_TYPE)
-    _MRDC_AssistanceInfo_affectedCarrierFreqCombInfoListMRDC = SEQ_OF(name=u'affectedCarrierFreqCombInfoListMRDC', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    __MRDC_AssistanceInfo_affectedCarrierFreqCombInfoListMRDC__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('NR-InterNodeDefinitions', 'AffectedCarrierFreqCombInfoMRDC')))
-    _MRDC_AssistanceInfo_affectedCarrierFreqCombInfoListMRDC._cont = __MRDC_AssistanceInfo_affectedCarrierFreqCombInfoListMRDC__item_
-    _MRDC_AssistanceInfo_affectedCarrierFreqCombInfoListMRDC._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=128)], ev=None, er=[])
-    _MRDC_AssistanceInfo_overheatingAssistanceSCG_r16 = OCT_STR(name=u'overheatingAssistanceSCG-r16', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True, group=0)
-    __MRDC_AssistanceInfo_overheatingAssistanceSCG_r16_contain = SEQ(name='_cont_overheatingAssistanceSCG-r16', mode=MODE_TYPE, typeref=ASN1RefType(('NR-RRC-Definitions', 'OverheatingAssistance')))
-    _MRDC_AssistanceInfo_overheatingAssistanceSCG_r16._const_cont = __MRDC_AssistanceInfo_overheatingAssistanceSCG_r16_contain
-    MRDC_AssistanceInfo._cont = ASN1Dict([
-        (u'affectedCarrierFreqCombInfoListMRDC', _MRDC_AssistanceInfo_affectedCarrierFreqCombInfoListMRDC),
-        (u'overheatingAssistanceSCG-r16', _MRDC_AssistanceInfo_overheatingAssistanceSCG_r16),
-        ])
-    MRDC_AssistanceInfo._ext = [u'overheatingAssistanceSCG-r16']
-    
-    #-----< AffectedCarrierFreqCombInfoMRDC >-----#
-    AffectedCarrierFreqCombInfoMRDC = SEQ(name=u'AffectedCarrierFreqCombInfoMRDC', mode=MODE_TYPE)
-    _AffectedCarrierFreqCombInfoMRDC_victimSystemType = SEQ(name=u'victimSystemType', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-InterNodeDefinitions', 'VictimSystemType')))
-    _AffectedCarrierFreqCombInfoMRDC_interferenceDirectionMRDC = ENUM(name=u'interferenceDirectionMRDC', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _AffectedCarrierFreqCombInfoMRDC_interferenceDirectionMRDC._cont = ASN1Dict([(u'eutra-nr', 0), (u'nr', 1), (u'other', 2), (u'utra-nr-other', 3), (u'nr-other', 4), (u'spare3', 5), (u'spare2', 6), (u'spare1', 7)])
-    _AffectedCarrierFreqCombInfoMRDC_interferenceDirectionMRDC._ext = None
-    _AffectedCarrierFreqCombInfoMRDC_affectedCarrierFreqCombMRDC = SEQ(name=u'affectedCarrierFreqCombMRDC', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    __AffectedCarrierFreqCombInfoMRDC_affectedCarrierFreqCombMRDC_affectedCarrierFreqCombEUTRA = SEQ_OF(name=u'affectedCarrierFreqCombEUTRA', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-InterNodeDefinitions', 'AffectedCarrierFreqCombEUTRA')), opt=True)
-    __AffectedCarrierFreqCombInfoMRDC_affectedCarrierFreqCombMRDC_affectedCarrierFreqCombNR = SEQ_OF(name=u'affectedCarrierFreqCombNR', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-InterNodeDefinitions', 'AffectedCarrierFreqCombNR')))
-    _AffectedCarrierFreqCombInfoMRDC_affectedCarrierFreqCombMRDC._cont = ASN1Dict([
-        (u'affectedCarrierFreqCombEUTRA', __AffectedCarrierFreqCombInfoMRDC_affectedCarrierFreqCombMRDC_affectedCarrierFreqCombEUTRA),
-        (u'affectedCarrierFreqCombNR', __AffectedCarrierFreqCombInfoMRDC_affectedCarrierFreqCombMRDC_affectedCarrierFreqCombNR),
-        ])
-    _AffectedCarrierFreqCombInfoMRDC_affectedCarrierFreqCombMRDC._ext = None
-    AffectedCarrierFreqCombInfoMRDC._cont = ASN1Dict([
-        (u'victimSystemType', _AffectedCarrierFreqCombInfoMRDC_victimSystemType),
-        (u'interferenceDirectionMRDC', _AffectedCarrierFreqCombInfoMRDC_interferenceDirectionMRDC),
-        (u'affectedCarrierFreqCombMRDC', _AffectedCarrierFreqCombInfoMRDC_affectedCarrierFreqCombMRDC),
-        ])
-    AffectedCarrierFreqCombInfoMRDC._ext = None
-    
-    #-----< VictimSystemType >-----#
-    VictimSystemType = SEQ(name=u'VictimSystemType', mode=MODE_TYPE)
-    _VictimSystemType_gps = ENUM(name=u'gps', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _VictimSystemType_gps._cont = ASN1Dict([(u'true', 0)])
-    _VictimSystemType_gps._ext = None
-    _VictimSystemType_glonass = ENUM(name=u'glonass', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _VictimSystemType_glonass._cont = ASN1Dict([(u'true', 0)])
-    _VictimSystemType_glonass._ext = None
-    _VictimSystemType_bds = ENUM(name=u'bds', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _VictimSystemType_bds._cont = ASN1Dict([(u'true', 0)])
-    _VictimSystemType_bds._ext = None
-    _VictimSystemType_galileo = ENUM(name=u'galileo', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _VictimSystemType_galileo._cont = ASN1Dict([(u'true', 0)])
-    _VictimSystemType_galileo._ext = None
-    _VictimSystemType_wlan = ENUM(name=u'wlan', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _VictimSystemType_wlan._cont = ASN1Dict([(u'true', 0)])
-    _VictimSystemType_wlan._ext = None
-    _VictimSystemType_bluetooth = ENUM(name=u'bluetooth', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _VictimSystemType_bluetooth._cont = ASN1Dict([(u'true', 0)])
-    _VictimSystemType_bluetooth._ext = None
-    VictimSystemType._cont = ASN1Dict([
-        (u'gps', _VictimSystemType_gps),
-        (u'glonass', _VictimSystemType_glonass),
-        (u'bds', _VictimSystemType_bds),
-        (u'galileo', _VictimSystemType_galileo),
-        (u'wlan', _VictimSystemType_wlan),
-        (u'bluetooth', _VictimSystemType_bluetooth),
-        ])
-    VictimSystemType._ext = None
-    
-    #-----< AffectedCarrierFreqCombEUTRA >-----#
-    AffectedCarrierFreqCombEUTRA = SEQ_OF(name=u'AffectedCarrierFreqCombEUTRA', mode=MODE_TYPE)
-    _AffectedCarrierFreqCombEUTRA__item_ = INT(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('NR-RRC-Definitions', 'ARFCN-ValueEUTRA')))
-    AffectedCarrierFreqCombEUTRA._cont = _AffectedCarrierFreqCombEUTRA__item_
-    AffectedCarrierFreqCombEUTRA._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=32)], ev=None, er=[])
-    
-    #-----< AffectedCarrierFreqCombNR >-----#
-    AffectedCarrierFreqCombNR = SEQ_OF(name=u'AffectedCarrierFreqCombNR', mode=MODE_TYPE)
-    _AffectedCarrierFreqCombNR__item_ = INT(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('NR-RRC-Definitions', 'ARFCN-ValueNR')))
-    AffectedCarrierFreqCombNR._cont = _AffectedCarrierFreqCombNR__item_
-    AffectedCarrierFreqCombNR._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=32)], ev=None, er=[])
-    
-    #-----< MeasurementTimingConfiguration >-----#
-    MeasurementTimingConfiguration = SEQ(name=u'MeasurementTimingConfiguration', mode=MODE_TYPE)
-    _MeasurementTimingConfiguration_criticalExtensions = CHOICE(name=u'criticalExtensions', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
-    __MeasurementTimingConfiguration_criticalExtensions_c1 = CHOICE(name=u'c1', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
-    ___MeasurementTimingConfiguration_criticalExtensions_c1_measTimingConf = SEQ(name=u'measTimingConf', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-InterNodeDefinitions', 'MeasurementTimingConfiguration-IEs')))
-    ___MeasurementTimingConfiguration_criticalExtensions_c1_spare3 = NULL(name=u'spare3', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    ___MeasurementTimingConfiguration_criticalExtensions_c1_spare2 = NULL(name=u'spare2', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    ___MeasurementTimingConfiguration_criticalExtensions_c1_spare1 = NULL(name=u'spare1', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    __MeasurementTimingConfiguration_criticalExtensions_c1._cont = ASN1Dict([
-        (u'measTimingConf', ___MeasurementTimingConfiguration_criticalExtensions_c1_measTimingConf),
-        (u'spare3', ___MeasurementTimingConfiguration_criticalExtensions_c1_spare3),
-        (u'spare2', ___MeasurementTimingConfiguration_criticalExtensions_c1_spare2),
-        (u'spare1', ___MeasurementTimingConfiguration_criticalExtensions_c1_spare1),
-        ])
-    __MeasurementTimingConfiguration_criticalExtensions_c1._ext = None
-    __MeasurementTimingConfiguration_criticalExtensions_criticalExtensionsFuture = SEQ(name=u'criticalExtensionsFuture', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    __MeasurementTimingConfiguration_criticalExtensions_criticalExtensionsFuture._cont = ASN1Dict([
-        ])
-    __MeasurementTimingConfiguration_criticalExtensions_criticalExtensionsFuture._ext = None
-    _MeasurementTimingConfiguration_criticalExtensions._cont = ASN1Dict([
-        (u'c1', __MeasurementTimingConfiguration_criticalExtensions_c1),
-        (u'criticalExtensionsFuture', __MeasurementTimingConfiguration_criticalExtensions_criticalExtensionsFuture),
-        ])
-    _MeasurementTimingConfiguration_criticalExtensions._ext = None
-    MeasurementTimingConfiguration._cont = ASN1Dict([
-        (u'criticalExtensions', _MeasurementTimingConfiguration_criticalExtensions),
-        ])
-    MeasurementTimingConfiguration._ext = None
-    
-    #-----< MeasurementTimingConfiguration-IEs >-----#
-    MeasurementTimingConfiguration_IEs = SEQ(name=u'MeasurementTimingConfiguration-IEs', mode=MODE_TYPE)
-    _MeasurementTimingConfiguration_IEs_measTiming = SEQ_OF(name=u'measTiming', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-InterNodeDefinitions', 'MeasTimingList')), opt=True)
-    _MeasurementTimingConfiguration_IEs_nonCriticalExtension = SEQ(name=u'nonCriticalExtension', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-InterNodeDefinitions', 'MeasurementTimingConfiguration-v1550-IEs')), opt=True)
-    MeasurementTimingConfiguration_IEs._cont = ASN1Dict([
-        (u'measTiming', _MeasurementTimingConfiguration_IEs_measTiming),
-        (u'nonCriticalExtension', _MeasurementTimingConfiguration_IEs_nonCriticalExtension),
-        ])
-    MeasurementTimingConfiguration_IEs._ext = None
-    
-    #-----< MeasurementTimingConfiguration-v1550-IEs >-----#
-    MeasurementTimingConfiguration_v1550_IEs = SEQ(name=u'MeasurementTimingConfiguration-v1550-IEs', mode=MODE_TYPE)
-    _MeasurementTimingConfiguration_v1550_IEs_campOnFirstSSB = BOOL(name=u'campOnFirstSSB', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _MeasurementTimingConfiguration_v1550_IEs_psCellOnlyOnFirstSSB = BOOL(name=u'psCellOnlyOnFirstSSB', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _MeasurementTimingConfiguration_v1550_IEs_nonCriticalExtension = SEQ(name=u'nonCriticalExtension', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-InterNodeDefinitions', 'MeasurementTimingConfiguration-v1610-IEs')), opt=True)
-    MeasurementTimingConfiguration_v1550_IEs._cont = ASN1Dict([
-        (u'campOnFirstSSB', _MeasurementTimingConfiguration_v1550_IEs_campOnFirstSSB),
-        (u'psCellOnlyOnFirstSSB', _MeasurementTimingConfiguration_v1550_IEs_psCellOnlyOnFirstSSB),
-        (u'nonCriticalExtension', _MeasurementTimingConfiguration_v1550_IEs_nonCriticalExtension),
-        ])
-    MeasurementTimingConfiguration_v1550_IEs._ext = None
-    
-    #-----< MeasurementTimingConfiguration-v1610-IEs >-----#
-    MeasurementTimingConfiguration_v1610_IEs = SEQ(name=u'MeasurementTimingConfiguration-v1610-IEs', mode=MODE_TYPE)
-    _MeasurementTimingConfiguration_v1610_IEs_csi_RS_Config_r16 = SEQ(name=u'csi-RS-Config-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    __MeasurementTimingConfiguration_v1610_IEs_csi_RS_Config_r16_csi_RS_SubcarrierSpacing_r16 = ENUM(name=u'csi-RS-SubcarrierSpacing-r16', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'SubcarrierSpacing')))
-    __MeasurementTimingConfiguration_v1610_IEs_csi_RS_Config_r16_csi_RS_CellMobility_r16 = SEQ(name=u'csi-RS-CellMobility-r16', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'CSI-RS-CellMobility')))
-    __MeasurementTimingConfiguration_v1610_IEs_csi_RS_Config_r16_refSSBFreq_r16 = INT(name=u'refSSBFreq-r16', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'ARFCN-ValueNR')))
-    _MeasurementTimingConfiguration_v1610_IEs_csi_RS_Config_r16._cont = ASN1Dict([
-        (u'csi-RS-SubcarrierSpacing-r16', __MeasurementTimingConfiguration_v1610_IEs_csi_RS_Config_r16_csi_RS_SubcarrierSpacing_r16),
-        (u'csi-RS-CellMobility-r16', __MeasurementTimingConfiguration_v1610_IEs_csi_RS_Config_r16_csi_RS_CellMobility_r16),
-        (u'refSSBFreq-r16', __MeasurementTimingConfiguration_v1610_IEs_csi_RS_Config_r16_refSSBFreq_r16),
-        ])
-    _MeasurementTimingConfiguration_v1610_IEs_csi_RS_Config_r16._ext = None
-    _MeasurementTimingConfiguration_v1610_IEs_nonCriticalExtension = SEQ(name=u'nonCriticalExtension', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _MeasurementTimingConfiguration_v1610_IEs_nonCriticalExtension._cont = ASN1Dict([
-        ])
-    _MeasurementTimingConfiguration_v1610_IEs_nonCriticalExtension._ext = None
-    MeasurementTimingConfiguration_v1610_IEs._cont = ASN1Dict([
-        (u'csi-RS-Config-r16', _MeasurementTimingConfiguration_v1610_IEs_csi_RS_Config_r16),
-        (u'nonCriticalExtension', _MeasurementTimingConfiguration_v1610_IEs_nonCriticalExtension),
-        ])
-    MeasurementTimingConfiguration_v1610_IEs._ext = None
-    
-    #-----< MeasTimingList >-----#
-    MeasTimingList = SEQ_OF(name=u'MeasTimingList', mode=MODE_TYPE)
-    _MeasTimingList__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('NR-InterNodeDefinitions', 'MeasTiming')))
-    MeasTimingList._cont = _MeasTimingList__item_
-    MeasTimingList._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=32)], ev=None, er=[])
-    
-    #-----< MeasTiming >-----#
-    MeasTiming = SEQ(name=u'MeasTiming', mode=MODE_TYPE)
-    _MeasTiming_frequencyAndTiming = SEQ(name=u'frequencyAndTiming', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    __MeasTiming_frequencyAndTiming_carrierFreq = INT(name=u'carrierFreq', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'ARFCN-ValueNR')))
-    __MeasTiming_frequencyAndTiming_ssbSubcarrierSpacing = ENUM(name=u'ssbSubcarrierSpacing', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'SubcarrierSpacing')))
-    __MeasTiming_frequencyAndTiming_ssb_MeasurementTimingConfiguration = SEQ(name=u'ssb-MeasurementTimingConfiguration', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'SSB-MTC')))
-    __MeasTiming_frequencyAndTiming_ss_RSSI_Measurement = SEQ(name=u'ss-RSSI-Measurement', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'SS-RSSI-Measurement')), opt=True)
-    _MeasTiming_frequencyAndTiming._cont = ASN1Dict([
-        (u'carrierFreq', __MeasTiming_frequencyAndTiming_carrierFreq),
-        (u'ssbSubcarrierSpacing', __MeasTiming_frequencyAndTiming_ssbSubcarrierSpacing),
-        (u'ssb-MeasurementTimingConfiguration', __MeasTiming_frequencyAndTiming_ssb_MeasurementTimingConfiguration),
-        (u'ss-RSSI-Measurement', __MeasTiming_frequencyAndTiming_ss_RSSI_Measurement),
-        ])
-    _MeasTiming_frequencyAndTiming._ext = None
-    _MeasTiming_ssb_ToMeasure = CHOICE(name=u'ssb-ToMeasure', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'SSB-ToMeasure')), opt=True, group=0)
-    _MeasTiming_physCellId = INT(name=u'physCellId', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-RRC-Definitions', 'PhysCellId')), opt=True, group=0)
-    MeasTiming._cont = ASN1Dict([
-        (u'frequencyAndTiming', _MeasTiming_frequencyAndTiming),
-        (u'ssb-ToMeasure', _MeasTiming_ssb_ToMeasure),
-        (u'physCellId', _MeasTiming_physCellId),
-        ])
-    MeasTiming._ext = [u'ssb-ToMeasure', u'physCellId']
-    
-    #-----< UERadioPagingInformation >-----#
-    UERadioPagingInformation = SEQ(name=u'UERadioPagingInformation', mode=MODE_TYPE)
-    _UERadioPagingInformation_criticalExtensions = CHOICE(name=u'criticalExtensions', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
-    __UERadioPagingInformation_criticalExtensions_c1 = CHOICE(name=u'c1', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
-    ___UERadioPagingInformation_criticalExtensions_c1_ueRadioPagingInformation = SEQ(name=u'ueRadioPagingInformation', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-InterNodeDefinitions', 'UERadioPagingInformation-IEs')))
-    ___UERadioPagingInformation_criticalExtensions_c1_spare7 = NULL(name=u'spare7', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    ___UERadioPagingInformation_criticalExtensions_c1_spare6 = NULL(name=u'spare6', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    ___UERadioPagingInformation_criticalExtensions_c1_spare5 = NULL(name=u'spare5', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    ___UERadioPagingInformation_criticalExtensions_c1_spare4 = NULL(name=u'spare4', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    ___UERadioPagingInformation_criticalExtensions_c1_spare3 = NULL(name=u'spare3', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    ___UERadioPagingInformation_criticalExtensions_c1_spare2 = NULL(name=u'spare2', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    ___UERadioPagingInformation_criticalExtensions_c1_spare1 = NULL(name=u'spare1', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    __UERadioPagingInformation_criticalExtensions_c1._cont = ASN1Dict([
-        (u'ueRadioPagingInformation', ___UERadioPagingInformation_criticalExtensions_c1_ueRadioPagingInformation),
-        (u'spare7', ___UERadioPagingInformation_criticalExtensions_c1_spare7),
-        (u'spare6', ___UERadioPagingInformation_criticalExtensions_c1_spare6),
-        (u'spare5', ___UERadioPagingInformation_criticalExtensions_c1_spare5),
-        (u'spare4', ___UERadioPagingInformation_criticalExtensions_c1_spare4),
-        (u'spare3', ___UERadioPagingInformation_criticalExtensions_c1_spare3),
-        (u'spare2', ___UERadioPagingInformation_criticalExtensions_c1_spare2),
-        (u'spare1', ___UERadioPagingInformation_criticalExtensions_c1_spare1),
-        ])
-    __UERadioPagingInformation_criticalExtensions_c1._ext = None
-    __UERadioPagingInformation_criticalExtensions_criticalExtensionsFuture = SEQ(name=u'criticalExtensionsFuture', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    __UERadioPagingInformation_criticalExtensions_criticalExtensionsFuture._cont = ASN1Dict([
-        ])
-    __UERadioPagingInformation_criticalExtensions_criticalExtensionsFuture._ext = None
-    _UERadioPagingInformation_criticalExtensions._cont = ASN1Dict([
-        (u'c1', __UERadioPagingInformation_criticalExtensions_c1),
-        (u'criticalExtensionsFuture', __UERadioPagingInformation_criticalExtensions_criticalExtensionsFuture),
-        ])
-    _UERadioPagingInformation_criticalExtensions._ext = None
-    UERadioPagingInformation._cont = ASN1Dict([
-        (u'criticalExtensions', _UERadioPagingInformation_criticalExtensions),
-        ])
-    UERadioPagingInformation._ext = None
-    
-    #-----< UERadioPagingInformation-IEs >-----#
-    UERadioPagingInformation_IEs = SEQ(name=u'UERadioPagingInformation-IEs', mode=MODE_TYPE)
-    _UERadioPagingInformation_IEs_supportedBandListNRForPaging = SEQ_OF(name=u'supportedBandListNRForPaging', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    __UERadioPagingInformation_IEs_supportedBandListNRForPaging__item_ = INT(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('NR-RRC-Definitions', 'FreqBandIndicatorNR')))
-    _UERadioPagingInformation_IEs_supportedBandListNRForPaging._cont = __UERadioPagingInformation_IEs_supportedBandListNRForPaging__item_
-    _UERadioPagingInformation_IEs_supportedBandListNRForPaging._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=1024)], ev=None, er=[])
-    _UERadioPagingInformation_IEs_nonCriticalExtension = SEQ(name=u'nonCriticalExtension', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-InterNodeDefinitions', 'UERadioPagingInformation-v15e0-IEs')), opt=True)
-    UERadioPagingInformation_IEs._cont = ASN1Dict([
-        (u'supportedBandListNRForPaging', _UERadioPagingInformation_IEs_supportedBandListNRForPaging),
-        (u'nonCriticalExtension', _UERadioPagingInformation_IEs_nonCriticalExtension),
-        ])
-    UERadioPagingInformation_IEs._ext = None
-    
-    #-----< UERadioPagingInformation-v15e0-IEs >-----#
-    UERadioPagingInformation_v15e0_IEs = SEQ(name=u'UERadioPagingInformation-v15e0-IEs', mode=MODE_TYPE)
-    _UERadioPagingInformation_v15e0_IEs_dl_SchedulingOffset_PDSCH_TypeA_FDD_FR1 = ENUM(name=u'dl-SchedulingOffset-PDSCH-TypeA-FDD-FR1', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _UERadioPagingInformation_v15e0_IEs_dl_SchedulingOffset_PDSCH_TypeA_FDD_FR1._cont = ASN1Dict([(u'supported', 0)])
-    _UERadioPagingInformation_v15e0_IEs_dl_SchedulingOffset_PDSCH_TypeA_FDD_FR1._ext = None
-    _UERadioPagingInformation_v15e0_IEs_dl_SchedulingOffset_PDSCH_TypeA_TDD_FR1 = ENUM(name=u'dl-SchedulingOffset-PDSCH-TypeA-TDD-FR1', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _UERadioPagingInformation_v15e0_IEs_dl_SchedulingOffset_PDSCH_TypeA_TDD_FR1._cont = ASN1Dict([(u'supported', 0)])
-    _UERadioPagingInformation_v15e0_IEs_dl_SchedulingOffset_PDSCH_TypeA_TDD_FR1._ext = None
-    _UERadioPagingInformation_v15e0_IEs_dl_SchedulingOffset_PDSCH_TypeA_TDD_FR2 = ENUM(name=u'dl-SchedulingOffset-PDSCH-TypeA-TDD-FR2', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _UERadioPagingInformation_v15e0_IEs_dl_SchedulingOffset_PDSCH_TypeA_TDD_FR2._cont = ASN1Dict([(u'supported', 0)])
-    _UERadioPagingInformation_v15e0_IEs_dl_SchedulingOffset_PDSCH_TypeA_TDD_FR2._ext = None
-    _UERadioPagingInformation_v15e0_IEs_dl_SchedulingOffset_PDSCH_TypeB_FDD_FR1 = ENUM(name=u'dl-SchedulingOffset-PDSCH-TypeB-FDD-FR1', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _UERadioPagingInformation_v15e0_IEs_dl_SchedulingOffset_PDSCH_TypeB_FDD_FR1._cont = ASN1Dict([(u'supported', 0)])
-    _UERadioPagingInformation_v15e0_IEs_dl_SchedulingOffset_PDSCH_TypeB_FDD_FR1._ext = None
-    _UERadioPagingInformation_v15e0_IEs_dl_SchedulingOffset_PDSCH_TypeB_TDD_FR1 = ENUM(name=u'dl-SchedulingOffset-PDSCH-TypeB-TDD-FR1', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _UERadioPagingInformation_v15e0_IEs_dl_SchedulingOffset_PDSCH_TypeB_TDD_FR1._cont = ASN1Dict([(u'supported', 0)])
-    _UERadioPagingInformation_v15e0_IEs_dl_SchedulingOffset_PDSCH_TypeB_TDD_FR1._ext = None
-    _UERadioPagingInformation_v15e0_IEs_dl_SchedulingOffset_PDSCH_TypeB_TDD_FR2 = ENUM(name=u'dl-SchedulingOffset-PDSCH-TypeB-TDD-FR2', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _UERadioPagingInformation_v15e0_IEs_dl_SchedulingOffset_PDSCH_TypeB_TDD_FR2._cont = ASN1Dict([(u'supported', 0)])
-    _UERadioPagingInformation_v15e0_IEs_dl_SchedulingOffset_PDSCH_TypeB_TDD_FR2._ext = None
-    _UERadioPagingInformation_v15e0_IEs_nonCriticalExtension = SEQ(name=u'nonCriticalExtension', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _UERadioPagingInformation_v15e0_IEs_nonCriticalExtension._cont = ASN1Dict([
-        ])
-    _UERadioPagingInformation_v15e0_IEs_nonCriticalExtension._ext = None
-    UERadioPagingInformation_v15e0_IEs._cont = ASN1Dict([
-        (u'dl-SchedulingOffset-PDSCH-TypeA-FDD-FR1', _UERadioPagingInformation_v15e0_IEs_dl_SchedulingOffset_PDSCH_TypeA_FDD_FR1),
-        (u'dl-SchedulingOffset-PDSCH-TypeA-TDD-FR1', _UERadioPagingInformation_v15e0_IEs_dl_SchedulingOffset_PDSCH_TypeA_TDD_FR1),
-        (u'dl-SchedulingOffset-PDSCH-TypeA-TDD-FR2', _UERadioPagingInformation_v15e0_IEs_dl_SchedulingOffset_PDSCH_TypeA_TDD_FR2),
-        (u'dl-SchedulingOffset-PDSCH-TypeB-FDD-FR1', _UERadioPagingInformation_v15e0_IEs_dl_SchedulingOffset_PDSCH_TypeB_FDD_FR1),
-        (u'dl-SchedulingOffset-PDSCH-TypeB-TDD-FR1', _UERadioPagingInformation_v15e0_IEs_dl_SchedulingOffset_PDSCH_TypeB_TDD_FR1),
-        (u'dl-SchedulingOffset-PDSCH-TypeB-TDD-FR2', _UERadioPagingInformation_v15e0_IEs_dl_SchedulingOffset_PDSCH_TypeB_TDD_FR2),
-        (u'nonCriticalExtension', _UERadioPagingInformation_v15e0_IEs_nonCriticalExtension),
-        ])
-    UERadioPagingInformation_v15e0_IEs._ext = None
-    
-    #-----< UERadioAccessCapabilityInformation >-----#
-    UERadioAccessCapabilityInformation = SEQ(name=u'UERadioAccessCapabilityInformation', mode=MODE_TYPE)
-    _UERadioAccessCapabilityInformation_criticalExtensions = CHOICE(name=u'criticalExtensions', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
-    __UERadioAccessCapabilityInformation_criticalExtensions_c1 = CHOICE(name=u'c1', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
-    ___UERadioAccessCapabilityInformation_criticalExtensions_c1_ueRadioAccessCapabilityInformation = SEQ(name=u'ueRadioAccessCapabilityInformation', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('NR-InterNodeDefinitions', 'UERadioAccessCapabilityInformation-IEs')))
-    ___UERadioAccessCapabilityInformation_criticalExtensions_c1_spare7 = NULL(name=u'spare7', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    ___UERadioAccessCapabilityInformation_criticalExtensions_c1_spare6 = NULL(name=u'spare6', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    ___UERadioAccessCapabilityInformation_criticalExtensions_c1_spare5 = NULL(name=u'spare5', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    ___UERadioAccessCapabilityInformation_criticalExtensions_c1_spare4 = NULL(name=u'spare4', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    ___UERadioAccessCapabilityInformation_criticalExtensions_c1_spare3 = NULL(name=u'spare3', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    ___UERadioAccessCapabilityInformation_criticalExtensions_c1_spare2 = NULL(name=u'spare2', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    ___UERadioAccessCapabilityInformation_criticalExtensions_c1_spare1 = NULL(name=u'spare1', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    __UERadioAccessCapabilityInformation_criticalExtensions_c1._cont = ASN1Dict([
-        (u'ueRadioAccessCapabilityInformation', ___UERadioAccessCapabilityInformation_criticalExtensions_c1_ueRadioAccessCapabilityInformation),
-        (u'spare7', ___UERadioAccessCapabilityInformation_criticalExtensions_c1_spare7),
-        (u'spare6', ___UERadioAccessCapabilityInformation_criticalExtensions_c1_spare6),
-        (u'spare5', ___UERadioAccessCapabilityInformation_criticalExtensions_c1_spare5),
-        (u'spare4', ___UERadioAccessCapabilityInformation_criticalExtensions_c1_spare4),
-        (u'spare3', ___UERadioAccessCapabilityInformation_criticalExtensions_c1_spare3),
-        (u'spare2', ___UERadioAccessCapabilityInformation_criticalExtensions_c1_spare2),
-        (u'spare1', ___UERadioAccessCapabilityInformation_criticalExtensions_c1_spare1),
-        ])
-    __UERadioAccessCapabilityInformation_criticalExtensions_c1._ext = None
-    __UERadioAccessCapabilityInformation_criticalExtensions_criticalExtensionsFuture = SEQ(name=u'criticalExtensionsFuture', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    __UERadioAccessCapabilityInformation_criticalExtensions_criticalExtensionsFuture._cont = ASN1Dict([
-        ])
-    __UERadioAccessCapabilityInformation_criticalExtensions_criticalExtensionsFuture._ext = None
-    _UERadioAccessCapabilityInformation_criticalExtensions._cont = ASN1Dict([
-        (u'c1', __UERadioAccessCapabilityInformation_criticalExtensions_c1),
-        (u'criticalExtensionsFuture', __UERadioAccessCapabilityInformation_criticalExtensions_criticalExtensionsFuture),
-        ])
-    _UERadioAccessCapabilityInformation_criticalExtensions._ext = None
-    UERadioAccessCapabilityInformation._cont = ASN1Dict([
-        (u'criticalExtensions', _UERadioAccessCapabilityInformation_criticalExtensions),
-        ])
-    UERadioAccessCapabilityInformation._ext = None
-    
-    #-----< UERadioAccessCapabilityInformation-IEs >-----#
-    UERadioAccessCapabilityInformation_IEs = SEQ(name=u'UERadioAccessCapabilityInformation-IEs', mode=MODE_TYPE)
-    _UERadioAccessCapabilityInformation_IEs_ue_RadioAccessCapabilityInfo = OCT_STR(name=u'ue-RadioAccessCapabilityInfo', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    __UERadioAccessCapabilityInformation_IEs_ue_RadioAccessCapabilityInfo_contain = SEQ_OF(name='_cont_ue-RadioAccessCapabilityInfo', mode=MODE_TYPE, typeref=ASN1RefType(('NR-RRC-Definitions', 'UE-CapabilityRAT-ContainerList')))
-    _UERadioAccessCapabilityInformation_IEs_ue_RadioAccessCapabilityInfo._const_cont = __UERadioAccessCapabilityInformation_IEs_ue_RadioAccessCapabilityInfo_contain
-    _UERadioAccessCapabilityInformation_IEs_nonCriticalExtension = SEQ(name=u'nonCriticalExtension', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _UERadioAccessCapabilityInformation_IEs_nonCriticalExtension._cont = ASN1Dict([
-        ])
-    _UERadioAccessCapabilityInformation_IEs_nonCriticalExtension._ext = None
-    UERadioAccessCapabilityInformation_IEs._cont = ASN1Dict([
-        (u'ue-RadioAccessCapabilityInfo', _UERadioAccessCapabilityInformation_IEs_ue_RadioAccessCapabilityInfo),
-        (u'nonCriticalExtension', _UERadioAccessCapabilityInformation_IEs_nonCriticalExtension),
-        ])
-    UERadioAccessCapabilityInformation_IEs._ext = None
-    
-    #-----< maxMeasFreqsMN >-----#
-    maxMeasFreqsMN = INT(name=u'maxMeasFreqsMN', mode=MODE_VALUE)
-    maxMeasFreqsMN._val = 32
-    
-    #-----< maxMeasFreqsSN >-----#
-    maxMeasFreqsSN = INT(name=u'maxMeasFreqsSN', mode=MODE_VALUE)
-    maxMeasFreqsSN._val = 32
-    
-    #-----< maxMeasIdentitiesMN >-----#
-    maxMeasIdentitiesMN = INT(name=u'maxMeasIdentitiesMN', mode=MODE_VALUE)
-    maxMeasIdentitiesMN._val = 62
-    
-    #-----< maxCellPrep >-----#
-    maxCellPrep = INT(name=u'maxCellPrep', mode=MODE_VALUE)
-    maxCellPrep._val = 32
-    
-    _all_ = [
-        ___HandoverCommand_criticalExtensions_c1_handoverCommand,
-        ___HandoverCommand_criticalExtensions_c1_spare3,
-        ___HandoverCommand_criticalExtensions_c1_spare2,
-        ___HandoverCommand_criticalExtensions_c1_spare1,
-        __HandoverCommand_criticalExtensions_c1,
-        __HandoverCommand_criticalExtensions_criticalExtensionsFuture,
-        _HandoverCommand_criticalExtensions,
-        HandoverCommand,
-        __HandoverCommand_IEs_handoverCommandMessage_contain,
-        _HandoverCommand_IEs_handoverCommandMessage,
-        _HandoverCommand_IEs_nonCriticalExtension,
-        HandoverCommand_IEs,
-        ___HandoverPreparationInformation_criticalExtensions_c1_handoverPreparationInformation,
-        ___HandoverPreparationInformation_criticalExtensions_c1_spare3,
-        ___HandoverPreparationInformation_criticalExtensions_c1_spare2,
-        ___HandoverPreparationInformation_criticalExtensions_c1_spare1,
-        __HandoverPreparationInformation_criticalExtensions_c1,
-        __HandoverPreparationInformation_criticalExtensions_criticalExtensionsFuture,
-        _HandoverPreparationInformation_criticalExtensions,
-        HandoverPreparationInformation,
-        _HandoverPreparationInformation_IEs_ue_CapabilityRAT_List,
-        _HandoverPreparationInformation_IEs_sourceConfig,
-        _HandoverPreparationInformation_IEs_rrm_Config,
-        _HandoverPreparationInformation_IEs_as_Context,
-        _HandoverPreparationInformation_IEs_nonCriticalExtension,
-        HandoverPreparationInformation_IEs,
-        __AS_Config_rrcReconfiguration_contain,
-        _AS_Config_rrcReconfiguration,
-        __AS_Config_sourceRB_SN_Config_contain,
-        _AS_Config_sourceRB_SN_Config,
-        __AS_Config_sourceSCG_NR_Config_contain,
-        _AS_Config_sourceSCG_NR_Config,
-        _AS_Config_sourceSCG_EUTRA_Config,
-        _AS_Config_sourceSCG_Configured,
-        AS_Config,
-        _AS_Context_reestablishmentInfo,
-        _AS_Context_configRestrictInfo,
-        _AS_Context_ran_NotificationAreaInfo,
-        __AS_Context_ueAssistanceInformation_contain,
-        _AS_Context_ueAssistanceInformation,
-        _AS_Context_selectedBandCombinationSN,
-        _AS_Context_configRestrictInfoDAPS_r16,
-        _AS_Context_sidelinkUEInformationNR_r16,
-        _AS_Context_sidelinkUEInformationEUTRA_r16,
-        _AS_Context_ueAssistanceInformationEUTRA_r16,
-        __AS_Context_ueAssistanceInformationSCG_r16_contain,
-        _AS_Context_ueAssistanceInformationSCG_r16,
-        _AS_Context_needForGapsInfoNR_r16,
-        _AS_Context_configRestrictInfoDAPS_v1640,
-        AS_Context,
-        __ConfigRestrictInfoDAPS_r16_powerCoordination_r16_p_DAPS_Source_r16,
-        __ConfigRestrictInfoDAPS_r16_powerCoordination_r16_p_DAPS_Target_r16,
-        __ConfigRestrictInfoDAPS_r16_powerCoordination_r16_uplinkPowerSharingDAPS_Mode_r16,
-        _ConfigRestrictInfoDAPS_r16_powerCoordination_r16,
-        ConfigRestrictInfoDAPS_r16,
-        _ConfigRestrictInfoDAPS_v1640_sourceFeatureSetPerDownlinkCC_r16,
-        _ConfigRestrictInfoDAPS_v1640_sourceFeatureSetPerUplinkCC_r16,
-        ConfigRestrictInfoDAPS_v1640,
-        _ReestablishmentInfo_sourcePhysCellId,
-        _ReestablishmentInfo_targetCellShortMAC_I,
-        _ReestablishmentInfo_additionalReestabInfoList,
-        ReestablishmentInfo,
-        _ReestabNCellInfoList__item_,
-        ReestabNCellInfoList,
-        _ReestabNCellInfo_cellIdentity,
-        _ReestabNCellInfo_key_gNodeB_Star,
-        _ReestabNCellInfo_shortMAC_I,
-        ReestabNCellInfo,
-        _RRM_Config_ue_InactiveTime,
-        _RRM_Config_candidateCellInfoList,
-        _RRM_Config_candidateCellInfoListSN_EUTRA,
-        RRM_Config,
-        ___CG_Config_criticalExtensions_c1_cg_Config,
-        ___CG_Config_criticalExtensions_c1_spare3,
-        ___CG_Config_criticalExtensions_c1_spare2,
-        ___CG_Config_criticalExtensions_c1_spare1,
-        __CG_Config_criticalExtensions_c1,
-        __CG_Config_criticalExtensions_criticalExtensionsFuture,
-        _CG_Config_criticalExtensions,
-        CG_Config,
-        __CG_Config_IEs_scg_CellGroupConfig_contain,
-        _CG_Config_IEs_scg_CellGroupConfig,
-        __CG_Config_IEs_scg_RB_Config_contain,
-        _CG_Config_IEs_scg_RB_Config,
-        _CG_Config_IEs_configRestrictModReq,
-        _CG_Config_IEs_drx_InfoSCG,
-        __CG_Config_IEs_candidateCellInfoListSN_contain,
-        _CG_Config_IEs_candidateCellInfoListSN,
-        _CG_Config_IEs_measConfigSN,
-        _CG_Config_IEs_selectedBandCombination,
-        _CG_Config_IEs_fr_InfoListSCG,
-        _CG_Config_IEs_candidateServingFreqListNR,
-        _CG_Config_IEs_nonCriticalExtension,
-        CG_Config_IEs,
-        _CG_Config_v1540_IEs_pSCellFrequency,
-        ___CG_Config_v1540_IEs_reportCGI_RequestNR_requestedCellInfo_ssbFrequency,
-        ___CG_Config_v1540_IEs_reportCGI_RequestNR_requestedCellInfo_cellForWhichToReportCGI,
-        __CG_Config_v1540_IEs_reportCGI_RequestNR_requestedCellInfo,
-        _CG_Config_v1540_IEs_reportCGI_RequestNR,
-        _CG_Config_v1540_IEs_ph_InfoSCG,
-        _CG_Config_v1540_IEs_nonCriticalExtension,
-        CG_Config_v1540_IEs,
-        _CG_Config_v1560_IEs_pSCellFrequencyEUTRA,
-        _CG_Config_v1560_IEs_scg_CellGroupConfigEUTRA,
-        _CG_Config_v1560_IEs_candidateCellInfoListSN_EUTRA,
-        _CG_Config_v1560_IEs_candidateServingFreqListEUTRA,
-        _CG_Config_v1560_IEs_needForGaps,
-        _CG_Config_v1560_IEs_drx_ConfigSCG,
-        ___CG_Config_v1560_IEs_reportCGI_RequestEUTRA_requestedCellInfoEUTRA_eutraFrequency,
-        ___CG_Config_v1560_IEs_reportCGI_RequestEUTRA_requestedCellInfoEUTRA_cellForWhichToReportCGI_EUTRA,
-        __CG_Config_v1560_IEs_reportCGI_RequestEUTRA_requestedCellInfoEUTRA,
-        _CG_Config_v1560_IEs_reportCGI_RequestEUTRA,
-        _CG_Config_v1560_IEs_nonCriticalExtension,
-        CG_Config_v1560_IEs,
-        __CG_Config_v1590_IEs_scellFrequenciesSN_NR__item_,
-        _CG_Config_v1590_IEs_scellFrequenciesSN_NR,
-        __CG_Config_v1590_IEs_scellFrequenciesSN_EUTRA__item_,
-        _CG_Config_v1590_IEs_scellFrequenciesSN_EUTRA,
-        _CG_Config_v1590_IEs_nonCriticalExtension,
-        CG_Config_v1590_IEs,
-        _CG_Config_v1610_IEs_drx_InfoSCG2,
-        _CG_Config_v1610_IEs_nonCriticalExtension,
-        CG_Config_v1610_IEs,
-        __CG_Config_v1620_IEs_ueAssistanceInformationSCG_r16_contain,
-        _CG_Config_v1620_IEs_ueAssistanceInformationSCG_r16,
-        _CG_Config_v1620_IEs_nonCriticalExtension,
-        CG_Config_v1620_IEs,
-        _CG_Config_v1630_IEs_selectedToffset_r16,
-        _CG_Config_v1630_IEs_nonCriticalExtension,
-        CG_Config_v1630_IEs,
-        _CG_Config_v1640_IEs_servCellInfoListSCG_NR_r16,
-        _CG_Config_v1640_IEs_servCellInfoListSCG_EUTRA_r16,
-        _CG_Config_v1640_IEs_nonCriticalExtension,
-        CG_Config_v1640_IEs,
-        _ServCellInfoListSCG_NR_r16__item_,
-        ServCellInfoListSCG_NR_r16,
-        _ServCellInfoXCG_NR_r16_dl_FreqInfo_NR_r16,
-        _ServCellInfoXCG_NR_r16_ul_FreqInfo_NR_r16,
-        ServCellInfoXCG_NR_r16,
-        _FrequencyConfig_NR_r16_freqBandIndicatorNR_r16,
-        _FrequencyConfig_NR_r16_carrierCenterFreq_NR_r16,
-        _FrequencyConfig_NR_r16_carrierBandwidth_NR_r16,
-        _FrequencyConfig_NR_r16_subcarrierSpacing_NR_r16,
-        FrequencyConfig_NR_r16,
-        _ServCellInfoListSCG_EUTRA_r16__item_,
-        ServCellInfoListSCG_EUTRA_r16,
-        _ServCellInfoXCG_EUTRA_r16_dl_CarrierFreq_EUTRA_r16,
-        _ServCellInfoXCG_EUTRA_r16_ul_CarrierFreq_EUTRA_r16,
-        _ServCellInfoXCG_EUTRA_r16_transmissionBandwidth_EUTRA_r16,
-        ServCellInfoXCG_EUTRA_r16,
-        TransmissionBandwidth_EUTRA_r16,
-        _PH_TypeListSCG__item_,
-        PH_TypeListSCG,
-        _PH_InfoSCG_servCellIndex,
-        _PH_InfoSCG_ph_Uplink,
-        _PH_InfoSCG_ph_SupplementaryUplink,
-        PH_InfoSCG,
-        _PH_UplinkCarrierSCG_ph_Type1or3,
-        PH_UplinkCarrierSCG,
-        __MeasConfigSN_measuredFrequenciesSN__item_,
-        _MeasConfigSN_measuredFrequenciesSN,
-        MeasConfigSN,
-        _NR_FreqInfo_measuredFrequency,
-        NR_FreqInfo,
-        _ConfigRestrictModReqSCG_requestedBC_MRDC,
-        _ConfigRestrictModReqSCG_requestedP_MaxFR1,
-        _ConfigRestrictModReqSCG_requestedPDCCH_BlindDetectionSCG,
-        _ConfigRestrictModReqSCG_requestedP_MaxEUTRA,
-        _ConfigRestrictModReqSCG_requestedP_MaxFR2_r16,
-        _ConfigRestrictModReqSCG_requestedMaxInterFreqMeasIdSCG_r16,
-        _ConfigRestrictModReqSCG_requestedMaxIntraFreqMeasIdSCG_r16,
-        _ConfigRestrictModReqSCG_requestedToffset_r16,
-        ConfigRestrictModReqSCG,
-        BandCombinationIndex,
-        _BandCombinationInfoSN_bandCombinationIndex,
-        _BandCombinationInfoSN_requestedFeatureSets,
-        BandCombinationInfoSN,
-        _FR_InfoList__item_,
-        FR_InfoList,
-        _FR_Info_servCellIndex,
-        _FR_Info_fr_Type,
-        FR_Info,
-        _CandidateServingFreqListNR__item_,
-        CandidateServingFreqListNR,
-        _CandidateServingFreqListEUTRA__item_,
-        CandidateServingFreqListEUTRA,
-        T_Offset_r16,
-        ___CG_ConfigInfo_criticalExtensions_c1_cg_ConfigInfo,
-        ___CG_ConfigInfo_criticalExtensions_c1_spare3,
-        ___CG_ConfigInfo_criticalExtensions_c1_spare2,
-        ___CG_ConfigInfo_criticalExtensions_c1_spare1,
-        __CG_ConfigInfo_criticalExtensions_c1,
-        __CG_ConfigInfo_criticalExtensions_criticalExtensionsFuture,
-        _CG_ConfigInfo_criticalExtensions,
-        CG_ConfigInfo,
-        __CG_ConfigInfo_IEs_ue_CapabilityInfo_contain,
-        _CG_ConfigInfo_IEs_ue_CapabilityInfo,
-        _CG_ConfigInfo_IEs_candidateCellInfoListMN,
-        __CG_ConfigInfo_IEs_candidateCellInfoListSN_contain,
-        _CG_ConfigInfo_IEs_candidateCellInfoListSN,
-        _CG_ConfigInfo_IEs_measResultCellListSFTD_NR,
-        __CG_ConfigInfo_IEs_scgFailureInfo_failureType,
-        ___CG_ConfigInfo_IEs_scgFailureInfo_measResultSCG_contain,
-        __CG_ConfigInfo_IEs_scgFailureInfo_measResultSCG,
-        _CG_ConfigInfo_IEs_scgFailureInfo,
-        _CG_ConfigInfo_IEs_configRestrictInfo,
-        _CG_ConfigInfo_IEs_drx_InfoMCG,
-        _CG_ConfigInfo_IEs_measConfigMN,
-        __CG_ConfigInfo_IEs_sourceConfigSCG_contain,
-        _CG_ConfigInfo_IEs_sourceConfigSCG,
-        __CG_ConfigInfo_IEs_scg_RB_Config_contain,
-        _CG_ConfigInfo_IEs_scg_RB_Config,
-        __CG_ConfigInfo_IEs_mcg_RB_Config_contain,
-        _CG_ConfigInfo_IEs_mcg_RB_Config,
-        _CG_ConfigInfo_IEs_mrdc_AssistanceInfo,
-        _CG_ConfigInfo_IEs_nonCriticalExtension,
-        CG_ConfigInfo_IEs,
-        _CG_ConfigInfo_v1540_IEs_ph_InfoMCG,
-        __CG_ConfigInfo_v1540_IEs_measResultReportCGI_ssbFrequency,
-        __CG_ConfigInfo_v1540_IEs_measResultReportCGI_cellForWhichToReportCGI,
-        __CG_ConfigInfo_v1540_IEs_measResultReportCGI_cgi_Info,
-        _CG_ConfigInfo_v1540_IEs_measResultReportCGI,
-        _CG_ConfigInfo_v1540_IEs_nonCriticalExtension,
-        CG_ConfigInfo_v1540_IEs,
-        _CG_ConfigInfo_v1560_IEs_candidateCellInfoListMN_EUTRA,
-        _CG_ConfigInfo_v1560_IEs_candidateCellInfoListSN_EUTRA,
-        _CG_ConfigInfo_v1560_IEs_sourceConfigSCG_EUTRA,
-        __CG_ConfigInfo_v1560_IEs_scgFailureInfoEUTRA_failureTypeEUTRA,
-        __CG_ConfigInfo_v1560_IEs_scgFailureInfoEUTRA_measResultSCG_EUTRA,
-        _CG_ConfigInfo_v1560_IEs_scgFailureInfoEUTRA,
-        _CG_ConfigInfo_v1560_IEs_drx_ConfigMCG,
-        __CG_ConfigInfo_v1560_IEs_measResultReportCGI_EUTRA_eutraFrequency,
-        __CG_ConfigInfo_v1560_IEs_measResultReportCGI_EUTRA_cellForWhichToReportCGI_EUTRA,
-        __CG_ConfigInfo_v1560_IEs_measResultReportCGI_EUTRA_cgi_InfoEUTRA,
-        _CG_ConfigInfo_v1560_IEs_measResultReportCGI_EUTRA,
-        _CG_ConfigInfo_v1560_IEs_measResultCellListSFTD_EUTRA,
-        _CG_ConfigInfo_v1560_IEs_fr_InfoListMCG,
-        _CG_ConfigInfo_v1560_IEs_nonCriticalExtension,
-        CG_ConfigInfo_v1560_IEs,
-        _CG_ConfigInfo_v1570_IEs_sftdFrequencyList_NR,
-        _CG_ConfigInfo_v1570_IEs_sftdFrequencyList_EUTRA,
-        _CG_ConfigInfo_v1570_IEs_nonCriticalExtension,
-        CG_ConfigInfo_v1570_IEs,
-        __CG_ConfigInfo_v1590_IEs_servFrequenciesMN_NR__item_,
-        _CG_ConfigInfo_v1590_IEs_servFrequenciesMN_NR,
-        _CG_ConfigInfo_v1590_IEs_nonCriticalExtension,
-        CG_ConfigInfo_v1590_IEs,
-        _CG_ConfigInfo_v1610_IEs_drx_InfoMCG2,
-        _CG_ConfigInfo_v1610_IEs_alignedDRX_Indication,
-        __CG_ConfigInfo_v1610_IEs_scgFailureInfo_r16_failureType_r16,
-        ___CG_ConfigInfo_v1610_IEs_scgFailureInfo_r16_measResultSCG_r16_contain,
-        __CG_ConfigInfo_v1610_IEs_scgFailureInfo_r16_measResultSCG_r16,
-        _CG_ConfigInfo_v1610_IEs_scgFailureInfo_r16,
-        __CG_ConfigInfo_v1610_IEs_dummy1_failureTypeEUTRA_r16,
-        __CG_ConfigInfo_v1610_IEs_dummy1_measResultSCG_EUTRA_r16,
-        _CG_ConfigInfo_v1610_IEs_dummy1,
-        __CG_ConfigInfo_v1610_IEs_sidelinkUEInformationNR_r16_contain,
-        _CG_ConfigInfo_v1610_IEs_sidelinkUEInformationNR_r16,
-        _CG_ConfigInfo_v1610_IEs_sidelinkUEInformationEUTRA_r16,
-        _CG_ConfigInfo_v1610_IEs_nonCriticalExtension,
-        CG_ConfigInfo_v1610_IEs,
-        __CG_ConfigInfo_v1620_IEs_ueAssistanceInformationSourceSCG_r16_contain,
-        _CG_ConfigInfo_v1620_IEs_ueAssistanceInformationSourceSCG_r16,
-        _CG_ConfigInfo_v1620_IEs_nonCriticalExtension,
-        CG_ConfigInfo_v1620_IEs,
-        _CG_ConfigInfo_v1640_IEs_servCellInfoListMCG_NR_r16,
-        _CG_ConfigInfo_v1640_IEs_servCellInfoListMCG_EUTRA_r16,
-        _CG_ConfigInfo_v1640_IEs_nonCriticalExtension,
-        CG_ConfigInfo_v1640_IEs,
-        _ServCellInfoListMCG_NR_r16__item_,
-        ServCellInfoListMCG_NR_r16,
-        _ServCellInfoListMCG_EUTRA_r16__item_,
-        ServCellInfoListMCG_EUTRA_r16,
-        _SFTD_FrequencyList_NR__item_,
-        SFTD_FrequencyList_NR,
-        _SFTD_FrequencyList_EUTRA__item_,
-        SFTD_FrequencyList_EUTRA,
-        _ConfigRestrictInfoSCG_allowedBC_ListMRDC,
-        __ConfigRestrictInfoSCG_powerCoordination_FR1_p_maxNR_FR1,
-        __ConfigRestrictInfoSCG_powerCoordination_FR1_p_maxEUTRA,
-        __ConfigRestrictInfoSCG_powerCoordination_FR1_p_maxUE_FR1,
-        _ConfigRestrictInfoSCG_powerCoordination_FR1,
-        __ConfigRestrictInfoSCG_servCellIndexRangeSCG_lowBound,
-        __ConfigRestrictInfoSCG_servCellIndexRangeSCG_upBound,
-        _ConfigRestrictInfoSCG_servCellIndexRangeSCG,
-        _ConfigRestrictInfoSCG_maxMeasFreqsSCG,
-        _ConfigRestrictInfoSCG_dummy,
-        __ConfigRestrictInfoSCG_selectedBandEntriesMNList__item_,
-        _ConfigRestrictInfoSCG_selectedBandEntriesMNList,
-        _ConfigRestrictInfoSCG_pdcch_BlindDetectionSCG,
-        _ConfigRestrictInfoSCG_maxNumberROHC_ContextSessionsSN,
-        _ConfigRestrictInfoSCG_maxIntraFreqMeasIdentitiesSCG,
-        _ConfigRestrictInfoSCG_maxInterFreqMeasIdentitiesSCG,
-        _ConfigRestrictInfoSCG_p_maxNR_FR1_MCG_r16,
-        __ConfigRestrictInfoSCG_powerCoordination_FR2_r16_p_maxNR_FR2_MCG_r16,
-        __ConfigRestrictInfoSCG_powerCoordination_FR2_r16_p_maxNR_FR2_SCG_r16,
-        __ConfigRestrictInfoSCG_powerCoordination_FR2_r16_p_maxUE_FR2_r16,
-        _ConfigRestrictInfoSCG_powerCoordination_FR2_r16,
-        _ConfigRestrictInfoSCG_nrdc_PC_mode_FR1_r16,
-        _ConfigRestrictInfoSCG_nrdc_PC_mode_FR2_r16,
-        _ConfigRestrictInfoSCG_maxMeasSRS_ResourceSCG_r16,
-        _ConfigRestrictInfoSCG_maxMeasCLI_ResourceSCG_r16,
-        _ConfigRestrictInfoSCG_maxNumberEHC_ContextsSN_r16,
-        _ConfigRestrictInfoSCG_allowedReducedConfigForOverheating_r16,
-        _ConfigRestrictInfoSCG_maxToffset_r16,
-        ConfigRestrictInfoSCG,
-        _SelectedBandEntriesMN__item_,
-        SelectedBandEntriesMN,
-        BandEntryIndex,
-        _PH_TypeListMCG__item_,
-        PH_TypeListMCG,
-        _PH_InfoMCG_servCellIndex,
-        _PH_InfoMCG_ph_Uplink,
-        _PH_InfoMCG_ph_SupplementaryUplink,
-        PH_InfoMCG,
-        _PH_UplinkCarrierMCG_ph_Type1or3,
-        PH_UplinkCarrierMCG,
-        _BandCombinationInfoList__item_,
-        BandCombinationInfoList,
-        _BandCombinationInfo_bandCombinationIndex,
-        __BandCombinationInfo_allowedFeatureSetsList__item_,
-        _BandCombinationInfo_allowedFeatureSetsList,
-        BandCombinationInfo,
-        FeatureSetEntryIndex,
-        __DRX_Info_drx_LongCycleStartOffset_ms10,
-        __DRX_Info_drx_LongCycleStartOffset_ms20,
-        __DRX_Info_drx_LongCycleStartOffset_ms32,
-        __DRX_Info_drx_LongCycleStartOffset_ms40,
-        __DRX_Info_drx_LongCycleStartOffset_ms60,
-        __DRX_Info_drx_LongCycleStartOffset_ms64,
-        __DRX_Info_drx_LongCycleStartOffset_ms70,
-        __DRX_Info_drx_LongCycleStartOffset_ms80,
-        __DRX_Info_drx_LongCycleStartOffset_ms128,
-        __DRX_Info_drx_LongCycleStartOffset_ms160,
-        __DRX_Info_drx_LongCycleStartOffset_ms256,
-        __DRX_Info_drx_LongCycleStartOffset_ms320,
-        __DRX_Info_drx_LongCycleStartOffset_ms512,
-        __DRX_Info_drx_LongCycleStartOffset_ms640,
-        __DRX_Info_drx_LongCycleStartOffset_ms1024,
-        __DRX_Info_drx_LongCycleStartOffset_ms1280,
-        __DRX_Info_drx_LongCycleStartOffset_ms2048,
-        __DRX_Info_drx_LongCycleStartOffset_ms2560,
-        __DRX_Info_drx_LongCycleStartOffset_ms5120,
-        __DRX_Info_drx_LongCycleStartOffset_ms10240,
-        _DRX_Info_drx_LongCycleStartOffset,
-        __DRX_Info_shortDRX_drx_ShortCycle,
-        __DRX_Info_shortDRX_drx_ShortCycleTimer,
-        _DRX_Info_shortDRX,
-        DRX_Info,
-        __DRX_Info2_drx_onDurationTimer_subMilliSeconds,
-        __DRX_Info2_drx_onDurationTimer_milliSeconds,
-        _DRX_Info2_drx_onDurationTimer,
-        DRX_Info2,
-        __MeasConfigMN_measuredFrequenciesMN__item_,
-        _MeasConfigMN_measuredFrequenciesMN,
-        __MeasConfigMN_measGapConfig_release,
-        __MeasConfigMN_measGapConfig_setup,
-        _MeasConfigMN_measGapConfig,
-        _MeasConfigMN_gapPurpose,
-        __MeasConfigMN_measGapConfigFR2_release,
-        __MeasConfigMN_measGapConfigFR2_setup,
-        _MeasConfigMN_measGapConfigFR2,
-        MeasConfigMN,
-        __MRDC_AssistanceInfo_affectedCarrierFreqCombInfoListMRDC__item_,
-        _MRDC_AssistanceInfo_affectedCarrierFreqCombInfoListMRDC,
-        __MRDC_AssistanceInfo_overheatingAssistanceSCG_r16_contain,
-        _MRDC_AssistanceInfo_overheatingAssistanceSCG_r16,
-        MRDC_AssistanceInfo,
-        _AffectedCarrierFreqCombInfoMRDC_victimSystemType,
-        _AffectedCarrierFreqCombInfoMRDC_interferenceDirectionMRDC,
-        __AffectedCarrierFreqCombInfoMRDC_affectedCarrierFreqCombMRDC_affectedCarrierFreqCombEUTRA,
-        __AffectedCarrierFreqCombInfoMRDC_affectedCarrierFreqCombMRDC_affectedCarrierFreqCombNR,
-        _AffectedCarrierFreqCombInfoMRDC_affectedCarrierFreqCombMRDC,
-        AffectedCarrierFreqCombInfoMRDC,
-        _VictimSystemType_gps,
-        _VictimSystemType_glonass,
-        _VictimSystemType_bds,
-        _VictimSystemType_galileo,
-        _VictimSystemType_wlan,
-        _VictimSystemType_bluetooth,
-        VictimSystemType,
-        _AffectedCarrierFreqCombEUTRA__item_,
-        AffectedCarrierFreqCombEUTRA,
-        _AffectedCarrierFreqCombNR__item_,
-        AffectedCarrierFreqCombNR,
-        ___MeasurementTimingConfiguration_criticalExtensions_c1_measTimingConf,
-        ___MeasurementTimingConfiguration_criticalExtensions_c1_spare3,
-        ___MeasurementTimingConfiguration_criticalExtensions_c1_spare2,
-        ___MeasurementTimingConfiguration_criticalExtensions_c1_spare1,
-        __MeasurementTimingConfiguration_criticalExtensions_c1,
-        __MeasurementTimingConfiguration_criticalExtensions_criticalExtensionsFuture,
-        _MeasurementTimingConfiguration_criticalExtensions,
-        MeasurementTimingConfiguration,
-        _MeasurementTimingConfiguration_IEs_measTiming,
-        _MeasurementTimingConfiguration_IEs_nonCriticalExtension,
-        MeasurementTimingConfiguration_IEs,
-        _MeasurementTimingConfiguration_v1550_IEs_campOnFirstSSB,
-        _MeasurementTimingConfiguration_v1550_IEs_psCellOnlyOnFirstSSB,
-        _MeasurementTimingConfiguration_v1550_IEs_nonCriticalExtension,
-        MeasurementTimingConfiguration_v1550_IEs,
-        __MeasurementTimingConfiguration_v1610_IEs_csi_RS_Config_r16_csi_RS_SubcarrierSpacing_r16,
-        __MeasurementTimingConfiguration_v1610_IEs_csi_RS_Config_r16_csi_RS_CellMobility_r16,
-        __MeasurementTimingConfiguration_v1610_IEs_csi_RS_Config_r16_refSSBFreq_r16,
-        _MeasurementTimingConfiguration_v1610_IEs_csi_RS_Config_r16,
-        _MeasurementTimingConfiguration_v1610_IEs_nonCriticalExtension,
-        MeasurementTimingConfiguration_v1610_IEs,
-        _MeasTimingList__item_,
-        MeasTimingList,
-        __MeasTiming_frequencyAndTiming_carrierFreq,
-        __MeasTiming_frequencyAndTiming_ssbSubcarrierSpacing,
-        __MeasTiming_frequencyAndTiming_ssb_MeasurementTimingConfiguration,
-        __MeasTiming_frequencyAndTiming_ss_RSSI_Measurement,
-        _MeasTiming_frequencyAndTiming,
-        _MeasTiming_ssb_ToMeasure,
-        _MeasTiming_physCellId,
-        MeasTiming,
-        ___UERadioPagingInformation_criticalExtensions_c1_ueRadioPagingInformation,
-        ___UERadioPagingInformation_criticalExtensions_c1_spare7,
-        ___UERadioPagingInformation_criticalExtensions_c1_spare6,
-        ___UERadioPagingInformation_criticalExtensions_c1_spare5,
-        ___UERadioPagingInformation_criticalExtensions_c1_spare4,
-        ___UERadioPagingInformation_criticalExtensions_c1_spare3,
-        ___UERadioPagingInformation_criticalExtensions_c1_spare2,
-        ___UERadioPagingInformation_criticalExtensions_c1_spare1,
-        __UERadioPagingInformation_criticalExtensions_c1,
-        __UERadioPagingInformation_criticalExtensions_criticalExtensionsFuture,
-        _UERadioPagingInformation_criticalExtensions,
-        UERadioPagingInformation,
-        __UERadioPagingInformation_IEs_supportedBandListNRForPaging__item_,
-        _UERadioPagingInformation_IEs_supportedBandListNRForPaging,
-        _UERadioPagingInformation_IEs_nonCriticalExtension,
-        UERadioPagingInformation_IEs,
-        _UERadioPagingInformation_v15e0_IEs_dl_SchedulingOffset_PDSCH_TypeA_FDD_FR1,
-        _UERadioPagingInformation_v15e0_IEs_dl_SchedulingOffset_PDSCH_TypeA_TDD_FR1,
-        _UERadioPagingInformation_v15e0_IEs_dl_SchedulingOffset_PDSCH_TypeA_TDD_FR2,
-        _UERadioPagingInformation_v15e0_IEs_dl_SchedulingOffset_PDSCH_TypeB_FDD_FR1,
-        _UERadioPagingInformation_v15e0_IEs_dl_SchedulingOffset_PDSCH_TypeB_TDD_FR1,
-        _UERadioPagingInformation_v15e0_IEs_dl_SchedulingOffset_PDSCH_TypeB_TDD_FR2,
-        _UERadioPagingInformation_v15e0_IEs_nonCriticalExtension,
-        UERadioPagingInformation_v15e0_IEs,
-        ___UERadioAccessCapabilityInformation_criticalExtensions_c1_ueRadioAccessCapabilityInformation,
-        ___UERadioAccessCapabilityInformation_criticalExtensions_c1_spare7,
-        ___UERadioAccessCapabilityInformation_criticalExtensions_c1_spare6,
-        ___UERadioAccessCapabilityInformation_criticalExtensions_c1_spare5,
-        ___UERadioAccessCapabilityInformation_criticalExtensions_c1_spare4,
-        ___UERadioAccessCapabilityInformation_criticalExtensions_c1_spare3,
-        ___UERadioAccessCapabilityInformation_criticalExtensions_c1_spare2,
-        ___UERadioAccessCapabilityInformation_criticalExtensions_c1_spare1,
-        __UERadioAccessCapabilityInformation_criticalExtensions_c1,
-        __UERadioAccessCapabilityInformation_criticalExtensions_criticalExtensionsFuture,
-        _UERadioAccessCapabilityInformation_criticalExtensions,
-        UERadioAccessCapabilityInformation,
-        __UERadioAccessCapabilityInformation_IEs_ue_RadioAccessCapabilityInfo_contain,
-        _UERadioAccessCapabilityInformation_IEs_ue_RadioAccessCapabilityInfo,
-        _UERadioAccessCapabilityInformation_IEs_nonCriticalExtension,
-        UERadioAccessCapabilityInformation_IEs,
-        maxMeasFreqsMN,
-        maxMeasFreqsSN,
-        maxMeasIdentitiesMN,
-        maxCellPrep,
-    ]
-
-init_modules(NR_RRC_Definitions, PC5_RRC_Definitions, NR_UE_Variables, NR_Sidelink_Preconf, NR_InterNodeDefinitions)
+init_modules(NR_InterNodeDefinitions, NR_RRC_Definitions, NR_Sidelink_Preconf, NR_UE_Variables, PC5_RRC_Definitions)

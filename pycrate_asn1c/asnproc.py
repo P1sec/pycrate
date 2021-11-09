@@ -688,6 +688,7 @@ def module_get_import(text=''):
             # remove {} at the end of parameterized objects
             obj = [o[:-2].strip() if o[-2:] == '{}' else o for o in obj] 
             # fill-in the import list
+            # warning: ignoring WITH SUCCESSORS / DESCENDANTS
             l.append({'name':import_prm['name'],
                       'with':import_prm['with'],
                       'oidstr':oidstr,
