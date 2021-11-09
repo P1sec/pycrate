@@ -458,14 +458,14 @@ def scan_for_comments(text=''):
         while text[cur:1+cur] == '-':
             cur += 1
         while True:
-            # move 1 by 1 and find an end-of-comment or end-of-file
+            # move 1 by 1
             if text[cur:1+cur] == '\n' or cur >= len(text):
-                comment = False
+                # end-of-line or end-of-file
                 ret.append((start, cur))
                 cur += 1
                 break
             elif text[cur:2+cur] == '--':
-                comment = False
+                # end-of-comment
                 cur += 2
                 ret.append((start, cur))
                 break
@@ -476,6 +476,38 @@ def scan_for_comments(text=''):
     return ret
 
 
+def scan_for_comments_cstyle(text=''):
+    """
+    returns a list of 2-tuple (start offset, end offset) for each ASN.1 comment
+    in C-style found in text
+    """
+    ret = []
+    cur = 0
+    next = text.find('/*')
+    while next >= 0:
+        cur += next
+        # start of comment
+        start = cur
+        # move cursor forward to reach the end of comment
+        cur += 2
+        while True:
+            # move 1 by 1 and find an end-of-comment or end-of-file
+            if cur >= len(text):
+                # end-of-file
+                ret.append((start, cur))
+                break
+            elif text[cur:2+cur] == '*/':
+                # end-of-comment
+                cur += 2
+                ret.append((start, cur))
+                break
+            else:
+                cur += 1
+        # find the next comment
+        next = text[cur:].find('/*')
+    return ret
+
+
 def clean_text(text=''):
     """
     processes text to: 
@@ -483,11 +515,24 @@ def clean_text(text=''):
         replace tab with space
         remove duplicated spaces
     """
+    # WARNING: this routine for text cleanup, as it is applied early in the text
+    # processing, may mess up ASN.1 string values
+    #
     # remove comments
     comments = scan_for_comments(text)
     if comments:
         # get the complementary text to comments, to get the text containing
         # the actual definitions
+        start, defins = 0, []
+        for (so, eo) in comments:
+            defins.append( text[start:so] )
+            start = eo
+        defins.append( text[start:len(text)] )
+        text = ''.join(defins)
+    #
+    # remove C-style comments
+    comments = scan_for_comments_cstyle(text)
+    if comments:
         start, defins = 0, []
         for (so, eo) in comments:
             defins.append( text[start:so] )
