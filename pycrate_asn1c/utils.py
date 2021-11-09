@@ -334,18 +334,6 @@ SYNT_RE_MODULEDEF = re.compile(
 SYNT_RE_MODULEREF = re.compile(
     '(?:^|\s{1})(%s){1}\s{0,}(\{[\s\-a-zA-Z0-9\(\)]{1,}\}){0,1}' % _RE_TYPEREF)
 
-'''
-# FROM $ModuleRef $ModuleOIDOrOIDRef{0,1}
-SYNT_RE_MODULEFROM = re.compile(
-    '(?:FROM\s{1,})(%s)' \
-    '(?:\s*' \
-        '(\{[\s\-a-zA-Z0-9\(\)]{1,}\})|' \
-        '\s{1,}(%s)(?:\s{1,}%s(?:\s*\{\})?(?:\s*,|\s{1,}FROM)|\s*$)' \
-        '){0,1}' \
-    '(?:\s*WITH\s{1,}(SUCCESSORS|DESCENDANTS)){0,1}' \
-    % (_RE_TYPEREF, _RE_IDENT, _RE_WORD))
-    # TODO, catch "WITH SUCCESSORS" / "WITH DESCENDANTS" after the imported module name
-'''
 SYNT_RE_MODULEFROM = re.compile(
     '(?:FROM\s{1,})(%s)\s*' % _RE_TYPEREF)
 SYNT_RE_MODULEFROM_SYM = re.compile(
@@ -420,6 +408,8 @@ SYNT_RE_TIMEGENE = re.compile(
 SYNT_RE_CONST_DISPATCH = re.compile(
     '(?:^|\s{1})(INCLUDES)|(SIZE)|(FROM)|(WITH COMPONENTS)|(WITH COMPONENT)|' \
     '(PATTERN)|(SETTINGS)|(CONTAINING)|(ENCODED BY)|(CONSTRAINED BY)')
+SYNT_RE_CONST_EXT = re.compile(
+    ',\s{0,}\.\.\.')
 SYNT_RE_GROUPVERS = re.compile(
     '(?:^|\s{1})[0-9]{1,}\s{0,1}\:')
 

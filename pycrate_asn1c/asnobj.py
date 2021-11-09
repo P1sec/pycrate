@@ -4159,11 +4159,23 @@ class ASN1Obj(object):
         # 4) transfer references from ObjProxy to self
         if ObjProxy._ref:
             self._ref.update( ObjProxy._ref )
-        
+        #
+        # 5) check for some more funny constraint
+        m = SYNT_RE_CONST_EXT.match(rest)
+        if m:
+            # previous constraint must be considered extensible
+            const = self.select(['const', const_index])
+            if const['ext'] is None:
+                const['ext'] = []
+            rest = rest[m.end():].lstrip()
+        elif rest[0:1] == '^':
+            # intersection with a 2nd constraint
+            self._parse_const('(%s)' % rest[1:].lstrip())
+            # this is a hack, and this is bad
+            rest = ''
         if rest:
-            # may have ", ..." or "^ $other_constraint"
-            asnlog('WNG: remaining text for SIZE constraint, {1}'\
-              .format(self.fullname(), rest))
+            raise(ASN1ProcTextErr('{0}: remaining text for SIZE constraint, {1}'\
+                 .format(self.fullname(), rest)))
     
     def _parse_const_alphabet(self, const):
         const_index = len(self._const)
@@ -4216,11 +4228,23 @@ class ASN1Obj(object):
         # 4) transfer references from ObjProxy to self
         if ObjProxy._ref:
             self._ref.update( ObjProxy._ref )
-    
+        #
+        # 5) check for some more funny constraint
+        m = SYNT_RE_CONST_EXT.match(rest)
+        if m:
+            # previous constraint must be considered extensible
+            const = self.select(['const', const_index])
+            if const['ext'] is None:
+                const['ext'] = []
+            rest = rest[m.end():].lstrip()
+        elif rest[0:1] == '^':
+            # intersection with a 2nd constraint
+            self._parse_const('(%s)' % rest[1:].lstrip())
+            # this is a hack, and this is bad
+            rest = ''
         if rest:
-            # may have ", ..." or "^ $other_constraint"
-            asnlog('WNG: remaining text for ALPHABET constraint, {1}'\
-              .format(self.fullname(), rest))
+            raise(ASN1ProcTextErr('{0}: remaining text for SIZE constraint, {1}'\
+                 .format(self.fullname(), rest)))
     
     def _parse_const_withcomp(self, const):
         const_index = len(self._const)
