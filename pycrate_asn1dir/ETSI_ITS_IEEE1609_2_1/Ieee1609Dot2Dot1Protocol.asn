@@ -1,0 +1,1433 @@
+--***************************************************************************--
+--                       IEEE Std 1609.2.1: Protocol                         --
+--***************************************************************************--
+
+/** 
+ * @brief NOTE: Section references in this file are to clauses in IEEE Std
+ * 1609.2.1 unless indicated otherwise. Full forms of acronyms and
+ * abbreviations used in this file are specified in 3.2.
+ */
+
+Ieee1609Dot2Dot1Protocol {iso(1) identified-organization(3) ieee(111)
+  standards-association-numbered-series-standards(2) wave-stds(1609) dot2(2)
+  extension-standards(255) dot1(1) interfaces(1) protocol(17) 
+  major-version-2(2) minor-version-2(2)}
+
+DEFINITIONS AUTOMATIC TAGS ::= BEGIN
+
+EXPORTS ALL;
+
+IMPORTS
+  CrlSeries,
+  EccP256CurvePoint,
+  EccP384CurvePoint,
+  EcdsaP256Signature,
+  EcdsaP384Signature,
+  GeographicRegion, 
+  HashAlgorithm,
+  HashedId3,
+  Psid,
+  PublicEncryptionKey,
+  PublicVerificationKey,
+  SequenceOfPsid,
+  SequenceOfPsidSsp,
+  SubjectAssurance,
+  Uint8,
+  Uint16,
+  ValidityPeriod
+FROM Ieee1609Dot2BaseTypes {iso(1) identified-organization(3) ieee(111)
+  standards-association-numbered-series-standards(2) wave-stds(1609)
+  dot2(2) base(1) base-types(2) major-version-2(2) minor-version-3(3)}
+ 
+  Certificate,
+  CertificateId,
+  Ieee1609Dot2Data,
+  SequenceOfCertificate,
+  SequenceOfPsidGroupPermissions,
+  SignerIdentifier,
+  VerificationKeyIndicator,
+  Signature,
+  ToBeSignedCertificate
+FROM Ieee1609Dot2 {iso(1) identified-organization(3) ieee(111)
+  standards-association-numbered-series-standards(2) wave-stds(1609)
+  dot2(2) base(1) schema(1) major-version-2(2) minor-version-4(4)}
+WITH SUCCESSORS
+
+  AcaEeInterfacePdu
+FROM Ieee1609Dot2Dot1AcaEeInterface {iso(1) identified-organization(3) 
+  ieee(111) standards-association-numbered-series-standards(2) 
+  wave-stds(1609) dot2(2) extension-standards(255) dot1(1) interfaces(1) 
+  aca-ee(1) major-version-2(2) minor-version-2(2)}
+WITH SUCCESSORS
+
+  AcaLaInterfacePdu
+FROM Ieee1609Dot2Dot1AcaLaInterface {iso(1) identified-organization(3) 
+  ieee(111) standards-association-numbered-series-standards(2) 
+  wave-stds(1609) dot2(2) extension-standards(255) dot1(1) interfaces(1) 
+  aca-la(2) major-version-2(2) minor-version-1(1)}
+WITH SUCCESSORS
+
+  AcaMaInterfacePdu
+FROM Ieee1609Dot2Dot1AcaMaInterface {iso(1) identified-organization(3) 
+  ieee(111) standards-association-numbered-series-standards(2) 
+  wave-stds(1609) dot2(2) extension-standards(255) dot1(1) interfaces(1) 
+  aca-ma(3) major-version-2(2) minor-version-1(1)}
+WITH SUCCESSORS
+
+  AcaRaInterfacePdu
+FROM Ieee1609Dot2Dot1AcaRaInterface {iso(1) identified-organization(3) 
+  ieee(111) standards-association-numbered-series-standards(2) 
+  wave-stds(1609) dot2(2) extension-standards(255) dot1(1) interfaces(1) 
+  aca-ra(4) major-version-2(2) minor-version-2(2)}
+WITH SUCCESSORS
+
+  AcpcTreeId
+FROM Ieee1609Dot2Dot1Acpc {iso(1) identified-organization(3) ieee(111)
+  standards-association-numbered-series-standards(2) wave-stds(1609) dot2(2)
+  extension-standards(255) dot1(1) interfaces(1) acpc(18) major-version-1(1) 
+  minor-version-2(2)}
+WITH SUCCESSORS
+
+  CertManagementPdu
+FROM Ieee1609Dot2Dot1CertManagement{iso(1) identified-organization(3) ieee(111)
+  standards-association-numbered-series-standards(2) wave-stds(1609) dot2(2)
+  extension-standards(255) dot1(1) interfaces(1) cert-management(7) 
+  major-version-2(2) minor-version-2(2)}
+WITH SUCCESSORS
+
+  EcaEeInterfacePdu
+FROM Ieee1609Dot2Dot1EcaEeInterface {iso(1) identified-organization(3) 
+  ieee(111) standards-association-numbered-series-standards(2) 
+  wave-stds(1609) dot2(2) extension-standards(255) dot1(1) interfaces(1) 
+  eca-ee(9) major-version-2(2) minor-version-2(2)}
+WITH SUCCESSORS
+
+  EeMaInterfacePdu
+FROM Ieee1609Dot2Dot1EeMaInterface {iso(1) identified-organization(3) ieee(111)
+  standards-association-numbered-series-standards(2) wave-stds(1609) dot2(2)
+  extension-standards(255) dot1(1) interfaces(1) ee-ma(10) major-version-2(2)
+  minor-version-1(1)}
+WITH SUCCESSORS
+
+  EeRaInterfacePdu
+FROM Ieee1609Dot2Dot1EeRaInterface {iso(1) identified-organization(3) ieee(111)
+  standards-association-numbered-series-standards(2) wave-stds(1609) dot2(2)
+  extension-standards(255) dot1(1) interfaces(1) ee-ra(11) major-version-2(2) 
+  minor-version-2(2)}
+WITH SUCCESSORS
+
+  LaMaInterfacePdu
+FROM Ieee1609Dot2Dot1LaMaInterface {iso(1) identified-organization(3) ieee(111)
+  standards-association-numbered-series-standards(2) wave-stds(1609) dot2(2)
+  extension-standards(255) dot1(1) interfaces(1) la-ma(12) major-version-2(2)
+  minor-version-1(1)}
+WITH SUCCESSORS
+
+  LaRaInterfacePdu
+FROM Ieee1609Dot2Dot1LaRaInterface {iso(1) identified-organization(3) ieee(111)
+  standards-association-numbered-series-standards(2) wave-stds(1609) dot2(2)
+  extension-standards(255) dot1(1) interfaces(1) la-ra(13) major-version-2(2)
+  minor-version-1(1)}
+WITH SUCCESSORS
+
+  MaRaInterfacePdu
+FROM Ieee1609Dot2Dot1MaRaInterface {iso(1) identified-organization(3) ieee(111)
+  standards-association-numbered-series-standards(2) wave-stds(1609) dot2(2)
+  extension-standards(255) dot1(1) interfaces(1) ma-ra(14) major-version-2(2)
+  minor-version-1(1)}
+WITH SUCCESSORS
+;
+
+/**
+ * @class SecurityMgmtPsid
+ *
+ * @brief This PSID, 0x23, identifies security management activities as
+ * defined in this document. 
+ */
+  SecurityMgmtPsid ::= Psid (35)
+
+/**
+ * @class ScmsPdu
+ *
+ * @brief This is the parent structure that encompasses all parent structures
+ * of interfaces defined in the SCMS. An overview of this structure is as
+ * follows:
+ *
+ * @param version contains the current version of the structure.
+ *
+ * @param aca-ee contains the interface structures defined for interaction
+ * between the ACA and the EE.
+ *
+ * @param aca-la contains the interface structures defined for interaction
+ * between the ACA and the LA.
+ *
+ * @param aca-ma contains the interface structures defined for interaction
+ * between the ACA and the MA.
+ *
+ * @param aca-ra contains the interface structures defined for interaction
+ * between the ACA and the RA.
+ *
+ * @param cert contains the interface structures defined for certificate
+ * management.
+ *
+ * @param eca-ee contains the interface structures defined for interaction
+ * between the ECA and the EE.
+ *
+ * @param ee-ma contains the interface structures defined for interaction
+ * between the EE and the MA.
+ *
+ * @param ee-ra contains the interface structures defined for interaction
+ * between the EE and the RA.
+ *
+ * @param la-ma contains the interface structures defined for interaction
+ * between the LA and the MA.
+ *
+ * @param la-ra contains the interface structures defined for interaction
+ * between the LA and the RA.
+ *
+ * @param ma-ra contains the interface structures defined for interactions
+ * between the MA and the RA.
+ */
+  ScmsPdu ::= SEQUENCE {
+    version  Uint8 (2),
+    content  CHOICE {
+      aca-ee  AcaEeInterfacePdu,
+      aca-la  AcaLaInterfacePdu,
+      aca-ma  AcaMaInterfacePdu,
+      aca-ra  AcaRaInterfacePdu,
+      cert    CertManagementPdu,
+      eca-ee  EcaEeInterfacePdu,
+      ee-ma   EeMaInterfacePdu,
+      ee-ra   EeRaInterfacePdu,
+      la-ma   LaMaInterfacePdu,
+      la-ra   LaRaInterfacePdu,
+      ma-ra   MaRaInterfacePdu,
+      ...
+    }
+  }
+
+--***************************************************************************--
+--                            Parameterized Types                            --
+--***************************************************************************--
+
+/**
+ * @class ScmsPdu-Scoped
+ *
+ * @brief This structure defines a parameterized type for creating a scoped
+ * data as a subtype of ScmsPdu.
+ */
+  ScmsPdu-Scoped {Pdu} ::= ScmsPdu (WITH COMPONENTS {
+    ...,
+    content (CONSTRAINED BY {
+      Pdu
+    })
+  })
+
+/**
+ * @class Ieee1609Dot2Data-Unsecured
+ *
+ * @brief This structure defines a parameterized type for creating an
+ * unsecured data as a subtype of Ieee1609Dot2Data.
+ */
+  Ieee1609Dot2Data-Unsecured {Tbu} ::= Ieee1609Dot2Data (WITH COMPONENTS {
+    ...,
+    content (WITH COMPONENTS {
+      ...,
+      unsecuredData (CONTAINING Tbu)
+    })
+  })
+
+/**
+ * @class Ieee1609Dot2Data-Signed
+ *
+ * @brief This structure defines a parameterized type for creating a signed
+ * data as a subtype of Ieee1609Dot2Data.
+ */
+  Ieee1609Dot2Data-Signed {Tbs, Psid} ::= 
+    Ieee1609Dot2Data (WITH COMPONENTS {
+    ...,
+    content (WITH COMPONENTS {
+      ...,
+      signedData (WITH COMPONENTS {
+        ...,
+        tbsData (WITH COMPONENTS {
+          ...,
+          payload (WITH COMPONENTS {
+            ...,
+            data (WITH COMPONENTS {
+              ...,
+              content (WITH COMPONENTS {
+                unsecuredData (CONTAINING Tbs)
+              })
+            })
+          }),
+          headerInfo (WITH COMPONENTS {
+            ...,
+            psid (Psid),
+            generationTime PRESENT,
+            expiryTime ABSENT,
+            generationLocation ABSENT,
+            p2pcdLearningRequest ABSENT,
+            missingCrlIdentifier ABSENT,
+            encryptionKey ABSENT
+          })
+        }),
+        signer (SignerSingleCert)
+      })
+    })
+  })
+
+/**
+ * @class Ieee1609Dot2Data-Encrypted
+ *
+ * @brief This structure defines a parameterized type for creating an
+ * encrypted data as a subtype of Ieee1609Dot2Data. An overview of this
+ * structure is as follows:
+ *
+ * @param Tbe is first encrypted and the resulting ciphertext is used as
+ * input to the encryptedData field.
+ */
+  Ieee1609Dot2Data-Encrypted {Tbe} ::= 
+    Ieee1609Dot2Data (WITH COMPONENTS {
+    ...,
+    content (WITH COMPONENTS {
+      encryptedData (CONSTRAINED BY {
+        --encryption of-- Tbe
+      })
+    })
+  })
+
+/**
+ * @class Ieee1609Dot2Data-EncryptedOpen
+ *
+ * @brief This structure defines a parameterized type for creating an
+ * encrypted data as a subtype of Ieee1609Dot2Data. This structure differs
+ * from Ieee1609Dot2Data-Encrypted in that it does not specify the contents
+ * of the encrypted data.
+ */
+  Ieee1609Dot2Data-EncryptedOpen ::= 
+    Ieee1609Dot2Data (WITH COMPONENTS {
+    ...,
+    content (WITH COMPONENTS {
+      encryptedData
+    })
+  })
+
+/**
+ * @class Ieee1609Dot2Data-SignedCertRequest
+ *
+ * @brief This structure defines a parameterized type for creating a signed
+ * certificate request as a subtype of Ieee1609Dot2Data.
+ */
+  Ieee1609Dot2Data-SignedCertRequest {Tbscr, Signer} ::= 
+    Ieee1609Dot2Data (WITH COMPONENTS {
+    ...,
+    content (WITH COMPONENTS {
+    ...,
+      signedCertificateRequest (CONTAINING 
+      SignedCertificateRequest (WITH COMPONENTS {
+        ...,
+        tbsRequest (Tbscr),
+        signer (Signer)
+      }))
+    })
+  })
+  
+/**
+ * @class X509Certificate
+ *
+ * @brief This structure is a wrapper for an ITU-T X.509 certificate.
+ *
+ * <br><br>NOTE: ITU-T X.509 certificates are encoded with the ASN.1 DER
+ * rather than the OER used in this document and so cannot be "directly"
+ * imported into these structures.
+ */ 
+  X509Certificate ::= OCTET STRING
+
+/**
+ * @class SequenceOfX509Certificate
+ *
+ * @brief This type is used for clarity of definitions.
+ */
+  SequenceOfX509Certificate ::= SEQUENCE OF X509Certificate
+
+/**
+ * @class X509SignerIdentifier
+ *
+ * @brief This structure identifies an ITU-T X.509 certificate used to sign a
+ * signed data structure. The only data structure currently defined that can
+ * be signed by an ITU-T X.509 certificate is SignedX509CertificateRequest.
+ */
+  X509SignerIdentifier ::= CHOICE {
+    certificate  SequenceOfX509Certificate,
+    ...
+  }
+
+/**
+ * @class Ieee1609Dot2Data-SignedX509AuthenticatedCertRequest
+ *
+ * @brief This structure defines a parameterized type for creating a
+ * certificate request, signed with an ITU-T X.509 certificate, as a subtype of
+ * Ieee1609Dot2Data. It makes use of the extension of Ieee1609Dot2Content
+ * defined in 11.2.3.  
+ */
+  Ieee1609Dot2Data-SignedX509AuthenticatedCertRequest {Tbscr, Signer} ::=
+    Ieee1609Dot2Data (WITH COMPONENTS {
+    ...,
+    content (WITH COMPONENTS {
+    ...,
+      signedCertificateRequest (CONTAINING 
+      SignedX509CertificateRequest (WITH COMPONENTS {
+        ...,
+        tbsRequest (Tbscr),
+        signer (Signer)
+      }))
+    })
+  })
+
+/**
+ * @class Ieee1609Dot2Data-SignedEncrypted
+ *
+ * @brief This structure defines a parameterized type for creating a signed
+ * then encrypted data as a subtype of Ieee1609Dot2Data.
+ */
+  Ieee1609Dot2Data-SignedEncrypted {Tbse, Psid} ::= 
+    Ieee1609Dot2Data-Encrypted {
+    Ieee1609Dot2Data-Signed {
+      Tbse, 
+      Psid
+    }
+  }
+
+/**
+ * @class Ieee1609Dot2Data-EncryptedSigned
+ *
+ * @brief This structure defines a parameterized type for creating an
+ * encrypted then signed data as a subtype of Ieee1609Dot2Data.
+ */
+  Ieee1609Dot2Data-EncryptedSigned {Tbes, Psid} ::= Ieee1609Dot2Data-Signed {
+    Ieee1609Dot2Data-Encrypted {
+      Tbes
+    }, 
+    Psid
+  }
+
+/**
+ * @class Ieee1609Dot2Data-EncryptedOpenSigned
+ *
+ * @brief This structure defines a parameterized type for creating an
+ * encrypted then signed data as a subtype of Ieee1609Dot2Data. Unlike
+ * Ieee1609Dot2Data-EncryptedSigned, this structure does not specify the
+ * contents to be encrypted. This structure is intended for use in
+ * misbehavior report upload where the encrypted data is received by the RA
+ * that does not know the contents.
+ */
+  Ieee1609Dot2Data-EncryptedOpenSigned{Psid} ::= 
+    Ieee1609Dot2Data-Signed {
+    Ieee1609Dot2Data-EncryptedOpen, 
+    Psid
+  }
+
+/**
+ * @class Ieee1609Dot2Data-SignedEncryptedCertRequest
+ *
+ * @brief This structure defines a parameterized type for creating a signed
+ * then encrypted certificate request as a subtype of Ieee1609Dot2Data.
+ */
+  Ieee1609Dot2Data-SignedEncryptedCertRequest {Tbstecr, Signer} ::= 
+    Ieee1609Dot2Data-Encrypted {
+    Ieee1609Dot2Data-SignedCertRequest {
+      Tbstecr, 
+      Signer
+    }
+  }
+
+/**
+ * @class Ieee1609Dot2Data-SymmEncryptedSingleRecipient
+ *
+ * @brief This structure defines a parameterized type for creating an
+ * encrypted data as a subtype of Ieee1609Dot2Data. An overview of this
+ * structure is as follows:
+ *
+ * @param Tbe is first encrypted and the resulting ciphertext is used as
+ * input to the encryptedData field.
+ */
+  Ieee1609Dot2Data-SymmEncryptedSingleRecipient {Tbe} ::= 
+    Ieee1609Dot2Data (WITH COMPONENTS {
+    ...,
+    content (WITH COMPONENTS {
+      encryptedData (CONSTRAINED BY {
+        --contains only one RecipientInfo, of form symmRecipinfo
+		--symmetric encryption of-- Tbe
+      })
+    })
+  })
+
+--***************************************************************************--
+--                                Signer Types                               --
+--***************************************************************************--
+
+/**
+ * @class SignerSingleCert
+ *
+ * @brief This structure is used to indicate a SignerIdentifier with a
+ * certificate chain of size 1.
+ */
+  SignerSingleCert ::= SignerIdentifier(WITH COMPONENTS {
+    certificate (SequenceOfCertificate (SIZE (1)))
+  })
+
+/**
+ * @class SignerSingleX509Cert
+ *
+ * @brief This structure is used to indicate an X509SignerIdentifier with a
+ * certificate chain of size 1.
+ */  
+  SignerSingleX509Cert ::= X509SignerIdentifier(WITH COMPONENTS {
+    certificate (SequenceOfX509Certificate (SIZE (1)))
+  })
+
+/**
+ * @class SignerSelf
+ *
+ * @brief This structure is used to indicate a SignerIdentifier of type self.
+ */
+  SignerSelf ::= SignerIdentifier(WITH COMPONENTS {
+    self
+  })
+
+--***************************************************************************--
+--                            Certificate Requests                           --
+--***************************************************************************--
+
+  ScmsPdu-RaAcaCertRequest ::= ScmsPdu-Scoped {
+    AcaRaInterfacePdu (WITH COMPONENTS {
+      raAcaCertRequest
+    })
+  }
+  ScmsPdu-EeEcaCertRequest ::= ScmsPdu-Scoped {
+    EcaEeInterfacePdu (WITH COMPONENTS {
+      eeEcaCertRequest
+    })
+  } 
+  ScmsPdu-EeRaCertRequest ::= ScmsPdu-Scoped {
+    EeRaInterfacePdu (WITH COMPONENTS {
+      eeRaCertRequest
+    })
+  }
+  ScmsPdu-EeRaSuccessorEnrollmentCertRequest ::= ScmsPdu-Scoped {
+    EeRaInterfacePdu (WITH COMPONENTS {
+      eeRaSuccessorEnrollmentCertRequest
+    })
+  }
+
+/**
+ * @class ScopedCertificateRequest
+ *
+ * @brief This structure defines the all certificate request structures as a
+ * scoped version of the ScmsPdu.
+ */
+  ScopedCertificateRequest ::= ScmsPdu (
+    ScmsPdu-RaAcaCertRequest | ScmsPdu-EeEcaCertRequest | ScmsPdu-EeRaCertRequest | ScmsPdu-EeRaSuccessorEnrollmentCertRequest
+  )
+
+/**
+ * @class SignedCertificateRequest
+ *
+ * @brief This structure defines the format of a signed certificate request.
+ * An overview of this structure is as follows:
+ *
+ * <br><br>The signature is generated on the hash of this structure, obtained
+ * per the rules specified for hashing data objects in 5.3.1 of IEEE Std
+ * 1609.2a-2017, with the parameter <i>Data Input</i> equal to the C-OER
+ * encoding of tbsRequest, and the parameter <i>Signer Identifier Input</i>
+ * equal to the signer's enrollment certificate.
+ *
+ * @param hashAlgorithmId contains the identifier of the hash algorithm used
+ * inside the binary tree.
+ *
+ * @param tbsRequest contains the certificate request information that is
+ * signed by the recipient.
+ *
+ * @param signer denotes the signing entity's identifier.
+ *
+ * @param signature contains the request sender's signature.
+ */
+  SignedCertificateRequest ::= SEQUENCE  {
+    hashAlgorithmId  HashAlgorithm,
+    tbsRequest       ScopedCertificateRequest,
+    signer           SignerIdentifier,
+    signature        Signature
+  }
+
+/**
+ * @class SignedX509CertificateRequest
+ *
+ * @brief This structure contains a certificate request signed with an ITU-T 
+ * X.509 certificate. The only type of certificate request signed with an 
+ * ITU-T X.509 certificate supported in this document is an authorization
+ * certificate request. An overview of this structure is as follows:
+ *
+ * <br><br>The signature is generated on the hash of this structure, obtained
+ * per the rules specified for hashing data objects in 5.3.1 of IEEE
+ * Std 1609.2a-2017, with the parameter <i>Data Input</i> equal to the C-OER
+ * encoding of tbsRequest, and the parameter <i>Signer Identifier Input</i>
+ * equal to the signer's certificate, that is, the ITU-T X.509 certificate
+ * contained in the OCTET STRING indicated by the first X509Certificate in
+ * signer.
+ *
+ * @param hashAlgorithmId contains the identifier of the hash algorithm used
+ * inside the binary tree.
+ *
+ * @param tbsRequest contains the certificate request information that is
+ * signed by the recipient.
+ *
+ * @param signer denotes the signing entity's identifier.
+ *
+ * @param signature contains the request sender's signature.
+ */ 
+  SignedX509CertificateRequest ::= SEQUENCE  {
+    hashAlgorithmId  HashAlgorithm,
+    tbsRequest       ScopedCertificateRequest,
+    signer           X509SignerIdentifier,
+    signature        Signature
+  }
+
+--***************************************************************************--
+--                             ACA - EE Interface                            --
+--***************************************************************************--
+
+/**
+ * @class AcaEeCertResponsePlainSpdu
+ *
+ * @brief This structure contains a certificate response for consumption by
+ * the EE. In the architecture of this document, although it is created by the
+ * ACA, it is made available to the EE via the RA as described in 8.2.
+ *
+ * <br><br>The ACA creates this response when 1) the compact unified
+ * butterfly key mechanism is not being used (that is, some other flavor of
+ * butterfly key is being used, or butterfly keys are not being used) and 2)
+ * it is not necessary to protect the EE's privacy from the RA, for example,
+ * when the certificate being returned is not a pseudonym certificate.
+ */
+  AcaEeCertResponsePlainSpdu ::= Ieee1609Dot2Data-Unsecured {
+    ScmsPdu-Scoped {
+      AcaEeInterfacePdu (WITH COMPONENTS {
+        acaEeCertResponse
+      })
+    }
+  }
+
+/**
+ * @class AcaEeCertResponsePrivateSpdu
+ *
+ * @brief This structure contains a certificate response for consumption by
+ * the EE. In the architecture of this document, although it is created by the
+ * ACA, it is made available to the EE via the RA as described in 8.2. 
+ *
+ * <br><br>The ACA creates this response when 1) the compact unified
+ * butterfly key mechanism is not being used (that is, some other flavor of
+ * butterfly key is being used, or butterfly keys are not being used) and 2)
+ * it is necessary to protect the EE's privacy from the RA, for example when
+ * the certificate being returned is a pseudonym certificate.
+ *
+ * <br><br>The structure consists of a signed SPDU containing an encrypted
+ * SPDU.
+ *
+ * <br><br>The encrypted SPDU is encrypted with the response
+ * encryption key that was provided to the ACA for that purpose. This key is
+ * determined as follows:
+ * <ul>
+ * <li> If the original EeRaCertRequest from the end entity indicated a single
+ * response encryption key, that is, if the additionalParams.encryptionKey
+ * field was present in the request, then the response is encrypted with that
+ * key.
+ * </li>
+ *
+ * <li> If the original EeRaCertRequest from the end entity indicated a
+ * response encryption key generated with the "original" butterfly key
+ * mechanism, that is, the additionalParams.original field was provided in the
+ * request, then the response is encrypted with the cocoon encryption key
+ * derived from additionalParams.original.encryptionKey and 
+ * additionalParams.original.encryptionExpansion as specified in 9.3.4.2
+ * and the corresponding decryption private key is derived as specified in
+ * 9.3.4.1.</li>
+ *
+ * <li> If the original EeRaCertRequest from the end entity indicated a
+ * response encryption key generated with the "unified" butterfly key
+ * mechanism, that is, the additionalParams.unified field was provided in the
+ * request, then the response is encrypted with the cocoon encryption key
+ * derived from tbsCert.verifyKeyIndicator and additionalParams.unified as
+ * specified in 9.3.4.2 and the corresponding decryption private key is 
+ * derived as specified in 9.3.4.1.</li>
+ * </ul>
+ *
+ * See 9.3 for more material about butterfly keys.
+ *
+ * <br><br>The resulting Ieee1609Dot2Data of content type encryptedData is
+ * signed by the same ACA certificate that was used to issue the certificate
+ * field in the AcaEeCertResponse. If this structure is signed by a different
+ * ACA certificate, it is invalid. The ACA certificate shall follow the ACA
+ * certificate profile given in 7.7.3.2.
+ *
+ * <br><br>NOTE 1: <b>Other potential responses to an authorization certificate
+ * request</b>. If the original request indicated the use of "compact unified"
+ * butterfly key mechanism by including the additionalParams.compactUnified
+ * field, the response shall be a AcaEeCertResponseCubkSpdu, not a
+ * AcaEeCertResponsePrivateSpdu.
+ *
+ * <br><br>NOTE 2: <b>How the ACA obtains the response encryption key</b>. This
+ * document provides the RaAcaCertRequest structure to allow the RA to
+ * indicate whether the original or unified butterfly key mechanism is to be
+ * used via the flags field. The encryption key for encrypting
+ * AcaEeCertResponse is calculated by the indicated method even if the RA
+ * does not use an RaAcaCertRequest as defined in this document to
+ * communicate the certificate request to the ACA.
+ *
+ * <br><br>NOTE 3: <b>Consistency between inner and outer signers, and the IEEE
+ * Std 1609.2 model</b>. This SPDU introduces a new type of validity condition
+ * by requiring that the ACA that signs the outer signed SPDU is also the ACA
+ * that issued the certificate inside the encrypted SPDU. This requires that
+ * to verify the inner "SPDU", that is, the certificate, the verifier
+ * needs to store the information from the outer SPDU. This is not a violation
+ * of the IEEE 1609.2 model: Subclause 4.2.2.3 of IEEE Std 1609.2 considers all
+ * operations carried out on received data to be atomic and does not put any
+ * restrictions on the information that is stored between operations. However,
+ * it should be noted that because the IEEE 1609.2 approach enables SPDUs to
+ * be nested within one another as Ieee1609Dot2Data, in principle an
+ * implementation could be built that iterated through the layers of a nested
+ * SPDU within a single call from the invoking application instance. (And it
+ * should also be noted that IEEE Std 1609.2 was consciously designed to
+ * enable this approach: Although the primitives provided in IEEE Std 1609.2
+ * only support the series-of-single-operations approach, an implementation
+ * could layer this "one-invocation processing" on top of the IEEE 1609.2
+ * interface as an optimization.) A "one-invocation processing" implementation
+ * of that type would have to anticipate situations of coupling between inner
+ * and outer SPDUs like the one created by this AcaEeCertResponsePrivateSpdu,
+ * and allow the invoking certificate management service to check consistency
+ * at the application layer, perhaps by (for example) returning the signing
+ * certificates for all nested signed SPDUs. How this is to be implemented is
+ * implementation specific; this note is intended as a notification of this
+ * potential issue to implementers planning to implement one-invocation
+ * processing. 
+ */
+  AcaEeCertResponsePrivateSpdu ::= Ieee1609Dot2Data-EncryptedSigned {
+    ScmsPdu-Scoped {
+      AcaEeInterfacePdu (WITH COMPONENTS {
+        acaEeCertResponse
+      })
+    }, 
+    SecurityMgmtPsid
+  }
+
+/**
+ * @class AcaEeCertResponseCubkSpdu
+ *
+ * @brief This structure contains a certificate response for consumption by
+ * the EE. In the architecture of this document, although it is created by
+ * the ACA, it is made available to the EE via the RA as described in 8.2. 
+ *
+ * <br><br>The ACA creates a certificate response in this form when the
+ * compact unified butterfly key mechanism is being used. If the
+ * RaAcaCertRequest structure was used to communicate between the RA and the
+ * ACA, the RA indicated use of compact unified butterfly keys by setting the
+ * cubk (1) bit in the bkType field in the corresponding RaAcaCertRequest. 
+ *
+ * <br><br>The AcaEeCertResponse is encrypted by the ACA using the cocoon
+ * public key for encryption. See 9.3.4.2 for how the ACA derives the cocoon
+ * public key for encryption, using the tbsCert.verifyKeyIndicator field in the
+ * corresponding RaAcaCertRequest as the input cocoon public key for signing
+ * Bt. See 9.3.4.1 for how the EE derives the corresponding cocoon private
+ * key for encryption.
+ */
+  AcaEeCertResponseCubkSpdu ::= Ieee1609Dot2Data-Encrypted {
+    ScmsPdu-Scoped {
+      AcaEeInterfacePdu (WITH COMPONENTS {
+        acaEeCertResponse
+      })
+    }
+  }
+
+--***************************************************************************--
+--                             ACA - LA Interface                            --
+--***************************************************************************--
+
+--***************************************************************************--
+--                             ACA - MA Interface                            --
+--***************************************************************************--
+
+--***************************************************************************--
+--                             ACA - RA Interface                            --
+--***************************************************************************--
+
+/**
+ * @class RaAcaCertRequestSpdu
+ *
+ * @brief This structure is the SPDU used to send a signed RaAcaCertRequest.
+ * For the signature to be valid the signing certificate shall conform to the
+ * RA certificate profile given in 7.7.3.9, contain a PSID equal to
+ * SecurityMgmtPsid (0x23) and a corresponding SSP containing the C-OER
+ * encoding of an ScmsSsp indicating RaSsp. The
+ * toBeSigned.certRequestPermissions field of the RA certificate shall permit
+ * the requested permissions in the raAcaCertRequest.tbsCert.appPermissions
+ * field.
+ */
+  RaAcaCertRequestSpdu ::= Ieee1609Dot2Data-SignedCertRequest {
+    ScmsPdu-Scoped {
+      AcaRaInterfacePdu (WITH COMPONENTS {
+        raAcaCertRequest
+      })
+    }, 
+    SignerSingleCert
+  }
+
+/**
+ * @class AcaRaCertResponseSpdu
+ *
+ * @brief This structure is the SPDU used to send a signed AcaRaCertResponse.
+ * For the signature to be valid the signing certificate shall contain a PSID
+ * equal to SecurityMgmtPsid (0x23) and a corresponding SSP containing the
+ * C-OER encoding of an ScmsSsp indicating AcaSsp.
+ */
+  AcaRaCertResponseSpdu ::= Ieee1609Dot2Data-Signed {
+    ScmsPdu-Scoped {
+      AcaRaInterfacePdu (WITH COMPONENTS {
+        acaRaCertResponse
+      })
+    }, 
+    SecurityMgmtPsid
+  }
+
+--***************************************************************************--
+--                           Certificate Management                          --
+--***************************************************************************--
+
+/**
+ * @class CompositeCrlSpdu
+ *
+ * @brief This structure is the SPDU used to send an unsecured CompositeCrl.
+ * It is used to create composite CRL files as specified in 8.5.
+ */
+  CompositeCrlSpdu ::= Ieee1609Dot2Data-Unsecured {
+    ScmsPdu-Scoped {
+      CertManagementPdu (WITH COMPONENTS {
+        compositeCrl
+      })
+    }
+  }
+
+/**
+ * @class CertificateChainSpdu
+ *
+ * @brief This structure is the SPDU used to send an unsecured
+ * CertificateChain. It is used to create certificate chain files as
+ * specified in 8.4.
+ */
+  CertificateChainSpdu ::= Ieee1609Dot2Data-Unsecured {
+    ScmsPdu-Scoped {
+      CertManagementPdu (WITH COMPONENTS {
+        certificateChain
+      })
+    }
+  }
+
+/**
+ * @class MultiSignedCtlSpdu
+ *
+ * @brief This structure is the SPDU used to send an unsecured MultiSignedCtl.
+ */
+  MultiSignedCtlSpdu ::= Ieee1609Dot2Data-Unsecured {
+    ScmsPdu-Scoped {
+      CertManagementPdu (WITH COMPONENTS {
+        multiSignedCtl
+      })
+    }
+  }
+
+/**
+ * @class CtlSignatureSpdu
+ *
+ * @brief This structure is the SPDU used to send a signed
+ * ToBeSignedCtlSignature. For the signature to be valid, the signing
+ * certificate shall match the elector certificate profile in 7.7.3.7. This
+ * means that the signature is calculated as specified in IEEE Std 1609.2,
+ * with the data input to the hash process consisting of the C-OER encoding
+ * of the tbsData that includes the ToBeSignedCtlSignature.
+ */
+  CtlSignatureSpdu ::= Ieee1609Dot2Data-Signed {
+    ScmsPdu-Scoped {
+      CertManagementPdu (WITH COMPONENTS {
+        tbsCtlSignature
+      })
+    }, 
+    SecurityMgmtPsid
+  }
+  
+/**
+ * @class CertificateManagementInformationStatusSpdu
+ *
+ * @brief This structure is the SPDU used to send a signed
+ * CertManagementInfoStatus. For the signature to be valid the signing
+ * certificate shall conform to the RA certificate profile given in 7.7.3.9 or
+ * the DC certificate profile given in 7.7.3.10.
+ */
+  CertificateManagementInformationStatusSpdu ::= 
+    Ieee1609Dot2Data-Signed {
+      ScmsPdu-Scoped {
+        CertManagementPdu (WITH COMPONENTS {
+          infoStatus 
+        })
+      }, 
+      SecurityMgmtPsid
+    }
+
+
+--***************************************************************************--
+--                             ECA - EE Interface                            --
+--***************************************************************************--
+
+/**
+ * @class EeEcaCertRequestSpdu
+ *
+ * @brief This structure is the SPDU used to send a signed EeEcaCertRequest,
+ * as follows: 
+ * <ul>
+ * <li> If eeEcaCertRequest.canonicalId is not present, the EE signs this
+ * structure using the private key corresponding to the
+ * tbsCert.verifyKeyIndicator field of the EeEcaCertRequest.</li>
+ *
+ * <li> If eeEcaCertRequest.canonicalId is present, the EE signs this
+ * structure using the canonical private key as specified in 4.1.4.2.</li>
+ * </ul>
+ */ 
+  EeEcaCertRequestSpdu ::= Ieee1609Dot2Data-SignedCertRequest {
+    ScmsPdu-Scoped {
+      EcaEeInterfacePdu (WITH COMPONENTS {
+        eeEcaCertRequest
+      })
+    }, 
+    SignerSelf
+  }
+
+/**
+ * @class EcaEeCertResponseSpdu
+ *
+ * @brief This structure is the SPDU used to send a signed EcaEeCertResponse.
+ * For the signature to be valid, the signing certificate shall contain a PSID
+ * equal to SecurityMgmtPsid (0x23) and a corresponding SSP containing the
+ * C-OER encoding of an ScmsSsp indicating EcaSsp.
+ */
+  EcaEeCertResponseSpdu ::= Ieee1609Dot2Data-Signed {
+    ScmsPdu-Scoped {
+      EcaEeInterfacePdu (WITH COMPONENTS {
+        ecaEeCertResponse
+      })
+    }, 
+    SecurityMgmtPsid
+  }
+
+--***************************************************************************--
+--                              EE - MA Interface                            --
+--***************************************************************************--
+
+--***************************************************************************--
+--                              EE - RA Interface                            --
+--***************************************************************************--
+
+/**
+ * @class EeRaCertRequestSpdu
+ *
+ * @brief This structure is the SPDU used to send a signed then encrypted
+ * EeRaCertRequest. It is a choice of the IEEE 1609.2 authenticated
+ * certificate request, which may be any kind of EE-RA certificate request,
+ * and the ITU-T X.509 certificate request, which is required to be an
+ * authorization certificate request. 
+ */
+  EeRaCertRequestSpdu ::= Ieee1609Dot2Data ( 
+    EeRa1609Dot2AuthenticatedCertRequestSpdu |
+    EeRaX509AuthenticatedCertRequestSpdu
+  )
+
+/**
+ * @class EeRa1609Dot2AuthenticatedCertRequestSpdu
+ *
+ * @brief This structure is the SPDU used to send a signed then encrypted IEEE
+ * 1609.2 authenticated certificate request. The EE signs this structure
+ * using its enrollment certificate. The enrollment certificate shall conform
+ * to the enrollment certificate profile given in 7.7.3.5. The EE encrypts
+ * the signed structure using the encryptionKey from the RA's certificate.
+ */
+  EeRa1609Dot2AuthenticatedCertRequestSpdu ::= 
+    Ieee1609Dot2Data-SignedEncryptedCertRequest {
+    ScmsPdu-Scoped {
+      EeRaInterfacePdu (WITH COMPONENTS {
+        eeRaCertRequest
+      })
+    }, 
+    SignerSingleCert
+  }
+
+/**
+ * @class EeRaX509AuthenticatedCertRequestSpdu
+ *
+ * @brief This structure is the SPDU used to send a signed then encrypted ITU-T
+ * X.509authenticated certificate request. The EE signs this structure
+ * using its enrollment certificate. The enrollment certificate shall conform
+ * to the enrollment certificate profile given in 7.7.3.6. The EE encrypts
+ * the signed structure using the encryptionKey from the RA's certificate. 
+ */
+  EeRaX509AuthenticatedCertRequestSpdu ::= Ieee1609Dot2Data-Encrypted {
+    Ieee1609Dot2Data-SignedX509AuthenticatedCertRequest {
+      ScmsPdu-Scoped {
+        EeRaInterfacePdu (WITH COMPONENTS {
+          eeRaCertRequest
+        })
+      }, 
+      SignerSingleX509Cert
+    }
+  }
+
+/**
+ * @class RaEeCertAckSpdu
+ *
+ * @brief This structure is the SPDU used to send a signed RaEeCertAck to
+ * acknowledge the receipt of an EeRaCertRequestSpdu. For the signature to be
+ * valid the signing certificate shall conform to the RA certificate profile
+ * given in 7.7.3.9.
+ */
+  RaEeCertAckSpdu ::= Ieee1609Dot2Data-Signed {
+    ScmsPdu-Scoped {
+      EeRaInterfacePdu (WITH COMPONENTS {
+        raEeCertAck 
+      })
+    }, 
+    SecurityMgmtPsid
+  }
+
+/**
+ * @class RaEeCertInfoSpdu
+ *
+ * @brief This structure is the SPDU used to create an unsigned .info file
+ * to be included in a certificate batch zip file as specified in 8.2. This
+ * SPDU is used if the RaEeCertInfo does not contain an acpcTreeId field.
+ */
+  RaEeCertInfoSpdu ::= Ieee1609Dot2Data-Unsecured {
+    ScmsPdu-Scoped {
+      EeRaInterfacePdu (WITH COMPONENTS {
+        raEeCertInfo (WITH COMPONENTS {
+          acpcTreeId ABSENT
+        })
+      })
+    }
+  }
+
+/**
+ * @class RaEeCertAndAcpcInfoSpdu
+ *
+ * @brief This structure is the SPDU used to create a signed .info file to
+ * be included in a certificate batch zip file as specified in 8.2. This
+ * SPDU is used if the RaEeCertInfo contains an acpcTreeId field. For the
+ * signature to be valid the signing certificate shall conform to the RA
+ * certificate profile given in 7.7.3.9.
+ */
+  RaEeCertAndAcpcInfoSpdu ::= Ieee1609Dot2Data-Signed {
+    ScmsPdu-Scoped {
+      EeRaInterfacePdu (WITH COMPONENTS {
+        raEeCertInfo (WITH COMPONENTS {
+          acpcTreeId PRESENT
+        })
+      })
+    }, 
+    SecurityMgmtPsid
+  }
+
+/**
+ * @class EeRaDownloadRequestPlainSpdu
+ *
+ * @brief This structure is the SPDU used to send an unsecured
+ * EeRaDownloadRequest.
+ */
+  EeRaDownloadRequestPlainSpdu ::= Ieee1609Dot2Data-Unsecured {
+    ScmsPdu-Scoped {
+      EeRaInterfacePdu (WITH COMPONENTS {
+        eeRaDownloadRequest
+      })
+    }
+  }
+
+/**
+ * @class EeRaDownloadRequestSpdu
+ *
+ * @brief This structure is the SPDU used to send an signed then encrypted
+ * EeRaDownloadRequest. The EE signs this structure using its enrollment
+ * certificate. The enrollment certificate shall conform to the enrollment
+ * certificate profile given in 7.7.3.5. The EE encrypts the signed
+ * structure using the encryptionKey from the RA's certificate. 
+ */
+  EeRaDownloadRequestSpdu ::= Ieee1609Dot2Data-SignedEncrypted {
+    ScmsPdu-Scoped {
+      EeRaInterfacePdu (WITH COMPONENTS {
+        eeRaDownloadRequest
+      })
+    }, 
+    SecurityMgmtPsid
+  }
+
+/**
+ * @class EeRaSuccessorEnrollmentCertRequestSpdu
+ *
+ * @brief This structure is the SPDU used to send a signed then encrypted
+ * EeEcaCertRequestSpdu. The EE signs this structure using its enrollment
+ * certificate. The enrollment certificate shall conform to the enrollment
+ * certificate profile given in 7.7.3.5. The EE encrypts the signed
+ * structure using the encryptionKey from the RA's certificate.
+ */
+  EeRaSuccessorEnrollmentCertRequestSpdu ::=
+    Ieee1609Dot2Data-SignedEncryptedCertRequest {ScmsPdu-Scoped {
+      EeRaInterfacePdu (WITH COMPONENTS {
+        eeRaSuccessorEnrollmentCertRequest
+      })
+    }, 
+    SignerSingleCert
+  }
+
+/**
+ * @class RaEeEnrollmentCertAckSpdu
+ *
+ * @brief This structure is the SPDU used to send a signed RaEeCertInfo. For
+ * the signature to be valid the signing certificate shall conform to the RA
+ * certificate profile given in 7.7.3.9.
+ */
+  RaEeEnrollmentCertAckSpdu ::= Ieee1609Dot2Data-Signed {
+    ScmsPdu-Scoped {
+      EeRaInterfacePdu (WITH COMPONENTS {
+        raEeCertInfo (WITH COMPONENTS {
+          acpcTreeId ABSENT
+        })
+      })
+    }, 
+    SecurityMgmtPsid
+  }
+
+/**
+ * @class EeRaEncryptedSignedMisbehaviorReportSpdu
+ *
+ * @brief This structure is used for misbehavior report upload when EE
+ * authentication is done at the SCMS REST API v2 level (see 6.3.5.6). The
+ * contents of the encrypted data are misbehavior report specific and
+ * outside the scope of this document. The contents are encrypted for the MA
+ * certificate.
+ */
+  EeRaEncryptedSignedMisbehaviorReportSpdu ::=
+    Ieee1609Dot2Data-EncryptedOpenSigned {AnyMbrPsid}
+	
+/**
+ * @class EeRaEncryptedMisbehaviorReportSpdu
+ *
+ * @brief This structure is used for misbehavior report upload when EE
+ * authentication is done at the Web API level (see 6.3.5.6). The contents of
+ * the encrypted data are misbehavior report specific and outside the scope
+ * of this document. The contents are encrypted for the MA certificate.
+ */	
+  EeRaEncryptedMisbehaviorReportSpdu ::= Ieee1609Dot2Data-EncryptedOpen
+
+/**
+ * @class AnyMbrPsid
+ *
+ * @brief This structure is a list of the PSIDs entitled to authorize
+ * misbehavior report upload. It currently only lists one PSID. It is
+ * intended to be extensible as additional misbehavior reporting PSIDs are
+ * defined and to take the form AnyMbrPsid = Psid (BaseMbrPsid | MbrPsid2 |
+ * MbrPsid3 | etc.).
+ */
+  AnyMbrPsid ::= Psid(BaseMbrPsid) 
+
+/**
+ * @class BaseMbrPsid
+ *
+ * @brief This PSID identifies misbehavior reporting for a baseline set of
+ * applications. It is owned by CAMP.
+ */
+  BaseMbrPsid ::= Psid(38)
+
+--***************************************************************************--
+--                              LA - MA Interface                            --
+--***************************************************************************--
+
+--***************************************************************************--
+--                              LA - RA Interface                            --
+--***************************************************************************--
+
+--***************************************************************************--
+--                              MA - RA Interface                            --
+--***************************************************************************--
+
+--***************************************************************************--
+--                        Service Specific Permissions                       --
+--***************************************************************************--
+
+/**
+ * @class ScmsSsp
+ *
+ * @brief This parent structure defines the SSP for PSID 0x23 and encompasses
+ * all SSP structures defined in this document. An overview of this structure
+ * is as follows:
+ *
+ * <br><br>NOTE: The LOP is in the SSP for backward compatibility reasons,
+ * and in practice, in this design the LOP does not have a certificate.
+ *
+ * @param elector contains the SSP defined for an elector.
+ *
+ * @param root contains the SSP defined for a root CA.
+ *
+ * @param pg contains the SSP defined for a policy generator.
+ *
+ * @param ica contains the SSP defined for an intermediate CA.
+ *
+ * @param eca contains the SSP defined for an enrollment CA.
+ *
+ * @param aca contains the SSP defined for an authorization CA.
+ *
+ * @param crl contains the SSP defined for a CRL signer.
+ *
+ * @param dcm contains the SSP defined for a device configuration manager.
+ *
+ * @param la contains the SSP defined for a linkage authority.
+ *
+ * @param lop contains the SSP defined for a location obscurer proxy.
+ *
+ * @param ma contains the SSP defined for a misbehavior authority.
+ *
+ * @param ra contains the SSP defined for a registration authority.
+ *
+ * @param ee contains the SSP defined for an end entity.
+ *
+ * @param dc contains the SSP defined for a distribution center.
+ */
+  ScmsSsp ::= CHOICE {
+    elector  ElectorSsp,
+    root     RootCaSsp,
+    pg       PgSsp,
+    ica      IcaSsp,
+    eca      EcaSsp,
+    aca      AcaSsp,
+    crl      CrlSignerSsp,
+    dcm      DcmSsp,
+    la       LaSsp,
+    lop      LopSsp,
+    ma       MaSsp,
+    ra       RaSsp,
+    ee       EeSsp,
+    ...,
+	dc       DcSsp
+  }
+
+/**
+ * @class ElectorSsp
+ *
+ * @brief This structure defines the SSP for an elector when it is
+ * authorizing Security Management messages (PSID 0x23). It has no
+ * parameters other than the version number.
+ */
+  ElectorSsp ::= SEQUENCE {
+    version  Uint8 (2),
+    ...
+  }
+
+/**
+ * @class RootCaSsp
+ *
+ * @brief This structure defines the SSP for a root CA when it is
+ * authorizing Security Management messages (PSID 0x23). It has no
+ * parameters other than the version number.
+ */
+  RootCaSsp ::= SEQUENCE {
+    version  Uint8 (2),
+    ...
+  }
+
+/**
+ * @class PgSsp
+ *
+ * @brief This structure defines the SSP for a policy generator when it is
+ * authorizing Security Management messages (PSID 0x23). It has no
+ * parameters other than the version number.
+ */
+  PgSsp ::= SEQUENCE {
+    version  Uint8 (2),
+    ...
+  }
+
+/**
+ * @class IcaSsp
+ *
+ * @brief This structure defines the SSP for an intermediate CA when it is
+ * authorizing Security Management messages (PSID 0x23). It has no
+ * parameters other than the version number.
+ */
+  IcaSsp ::= SEQUENCE {
+    version  Uint8 (2),
+    ...
+  }
+
+/**
+ * @class EcaSsp
+ *
+ * @brief This structure defines the SSP for an enrollment CA when it is
+ * authorizing Security Management messages (PSID 0x23). It has no
+ * parameters other than the version number.
+ */
+  EcaSsp ::= SEQUENCE {
+    version  Uint8 (2),
+    ...
+  }
+
+/**
+ * @class AcaSsp
+ *
+ * @brief This structure defines the SSP for an ACA when it is authorizing
+ * Security Management messages (PSID 0x23). It has no parameters other than
+ * the version number.
+ */
+  AcaSsp ::= SEQUENCE {
+    version  Uint8 (2),
+    ...
+  }
+
+/**
+ * @class CrlSignerSsp
+ *
+ * @brief This structure defines the SSP for a CRL signer when it is
+ * authorizing Security Management messages (PSID 0x23). It has no
+ * parameters other than the version number.
+ *
+ * <br><br>NOTE: The SSP for a CRL signer when signing CRLs is associated with
+ * PSID 0x0100 and is defined in IEEE Std 1609.2.
+ */
+  CrlSignerSsp ::= SEQUENCE {
+    version  Uint8 (2),
+    ...
+  }
+
+/**
+ * @class DcmSsp
+ *
+ * @brief This structure defines the SSP for a device configuration manager
+ * when it is authorizing Security Management messages (PSID 0x23). It has
+ * no parameters other than the version number.
+ */
+  DcmSsp ::= SEQUENCE {
+    version  Uint8 (2),
+    ...
+  }
+
+/**
+ * @class LaSsp
+ *
+ * @brief This structure defines the SSP for a linkage authority when it is
+ * authorizing Security Management messages (PSID 0x23). The SSP contains
+ * the 16 bit LA ID for that linkage authority.
+ */
+  LaSsp ::= SEQUENCE {
+    version  Uint8 (2),
+    laId     Uint16,
+    ...
+  }
+
+/**
+ * @class LopSsp
+ *
+ * @brief This structure defines the SSP for a location obscurer proxy (LOP)
+ * when it is authorizing Security Management messages (PSID 0x23). It has
+ * no parameters other than the version number.
+ *
+ * <br><br>NOTE: The LOP is in the SSP for backward compatibility reasons, and
+ * in practice, in this design the LOP does not have a certificate.
+ */
+  LopSsp ::= SEQUENCE {
+    version  Uint8 (2),
+    ...
+  }
+
+/**
+ * @class MaSsp
+ *
+ * @brief This structure defines the SSP for a misbehavior authority when it
+ * is authorizing Security Management messages (PSID 0x23). Its parameters
+ * indicate the PSIDs associated with the misbehavior that is to be reported
+ * to that MA (see 4.1.5 for further details). The certificate containing
+ * this SSP is the MA Certificate to which an end entity should encrypt
+ * misbehavior reports related to the indicated PSIDs.
+ */
+  MaSsp ::= SEQUENCE {
+    version        Uint8 (2),
+    relevantPsids  SequenceOfPsid,
+    ...
+  }
+
+/**
+ * @class RaSsp
+ *
+ * @brief This structure defines the SSP for an RA when it is authorizing
+ * Security Management messages (PSID 0x23). It has no parameters other than
+ * the version number.
+ */
+  RaSsp ::= SEQUENCE {
+    version  Uint8 (2),
+    ...
+  }
+
+/**
+ * @class EeSsp
+ *
+ * @brief This structure defines the SSP for an end entity when it is
+ * authorizing Security Management messages (PSID 0x23). It has no
+ * parameters other than the version number.
+ */
+  EeSsp ::= SEQUENCE {
+    version  Uint8(2),
+    ...
+  }
+
+/**
+ * @class AcpcSsp
+ *
+ * @brief This is a container for ACPC-related SSPs, specifying one SSP for
+ * each role. The only SSP defined in this document is the CamSsp, used in 
+ * the CAM certificate that signs a SignedAprvBinaryTree or a
+ * SignedIndividualAprv. The SSP shall be C-OER encoded for inclusion in the
+ * CAM certificate. New versions of the CAM SSP should be handled by
+ * extending this structure rather than by use of a version number in the
+ * CamSsp structure.
+ *
+ * <br><br>The AcpcSsp is associated with the AcpcPsid in the CAM certificate's
+ * appPermissions field.
+ */
+  AcpcSsp ::= CHOICE {
+    cam  CamSsp,
+    ...
+  }
+
+/**
+ * @class CamSsp
+ *
+ * @brief This is a list of the ACPC Tree IDs for which the containing CAM
+ * certificate is entitled to sign a SignedAprvBinaryTree or a
+ * SignedIndividualAprv. The SSP entitles the certificate holder to sign
+ * either of these structures.
+ */
+  CamSsp ::= SEQUENCE (SIZE(1..MAX)) OF AcpcTreeId
+  
+/**
+ * @class DcSsp
+ *
+ * @brief This structure defines the SSP for a distribution center when it is
+ * authorizing Security Management messages (PSID 0x23). It has no
+ * parameters other than the version number.
+ */
+  DcSsp ::= SEQUENCE {
+    version  Uint8(2),
+    ...
+  }
+
+END

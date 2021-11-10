@@ -160,8 +160,10 @@ ASN_SPECS_CORE = {
 
 # ETSI Intelligent Transport System
 ASN_SPECS_ITS = {
-    'ITS_r1318'      : 'ETSI_ITS_r1318',
-    'ITS_IEEE1609_2' : 'ETSI_ITS_IEEE1609_2',
+    'ITS_r1318'       : 'ETSI_ITS_r1318',
+    'ITS_IEEE1609_2'  : 'ETSI_ITS_IEEE1609_2',
+    #'ITS_IEEE1609_21' : 'ETSI_ITS_IEEE1609_2_1',
+    
     }
 
 # Open Mobile Alliance geolocation protocols

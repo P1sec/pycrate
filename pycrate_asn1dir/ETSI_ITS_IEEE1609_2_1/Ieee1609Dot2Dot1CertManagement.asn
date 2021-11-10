@@ -1,0 +1,455 @@
+--***************************************************************************--
+--                IEEE Std 1609.2.1: Certificate Management                  --
+--***************************************************************************--
+
+/** 
+ * @brief NOTE: Section references in this file are to clauses in IEEE Std
+ * 1609.2.1 unless indicated otherwise. Full forms of acronyms and
+ * abbreviations used in this file are specified in 3.2.
+ */
+
+Ieee1609Dot2Dot1CertManagement {iso(1) identified-organization(3) ieee(111)
+  standards-association-numbered-series-standards(2) wave-stds(1609) dot2(2)
+  extension-standards(255) dot1(1) interfaces(1) cert-management(7) 
+  major-version-2(2) minor-version-2(2)}
+
+DEFINITIONS AUTOMATIC TAGS ::= BEGIN
+
+EXPORTS ALL;
+
+IMPORTS
+  HashedId8,
+  HashedId32,
+  Time32,
+  Uint8
+FROM Ieee1609Dot2BaseTypes {iso(1) identified-organization(3) ieee(111)
+  standards-association-numbered-series-standards(2) wave-stds(1609)
+  dot2(2) base(1) base-types(2) major-version-2(2) minor-version-3(3)}
+WITH SUCCESSORS
+
+  Certificate,
+  SequenceOfCertificate
+FROM Ieee1609Dot2 {iso(1) identified-organization(3) ieee(111)
+  standards-association-numbered-series-standards(2) wave-stds(1609)
+  dot2(2) base(1) schema(1) major-version-2(2) minor-version-4(4)}
+WITH SUCCESSORS
+
+  CrlSeries
+FROM Ieee1609Dot2CrlBaseTypes {iso(1) identified-organization(3) ieee(111) 
+  standards-association-numbered-series-standards(2) wave-stds(1609) dot2(2)
+  crl(3) base-types(2) major-version-2(2) minor-version-2(2)}
+WITH SUCCESSORS
+  
+  SecuredCrl
+FROM Ieee1609Dot2Crl {iso(1) identified-organization(3) ieee(111) 
+  standards-association-numbered-series-standards(2) wave-stds(1609) dot2(2)
+  crl(3) protocol(1) major-version-2(2) minor-version-2(2)}
+WITH SUCCESSORS
+  
+  CtlSignatureSpdu,
+  MultiSignedCtlSpdu,
+  SequenceOfPsid
+FROM Ieee1609Dot2Dot1Protocol {iso(1) identified-organization(3) ieee(111)
+  standards-association-numbered-series-standards(2) wave-stds(1609) dot2(2)
+  extension-standards(255) dot1(1) interfaces(1) protocol(17) 
+  major-version-2(2) minor-version-2(2)}
+WITH SUCCESSORS
+;
+
+/**
+ * @class HashedId48
+ *
+ * @brief This data structure contains the hash of another data structure,
+ * calculated with a hash function with at least 48 bytes of output length.
+ * The HashedId48 for a given data structure is calculated by calculating the
+ * hash of the encoded data structure and taking the low-order 48 bytes of
+ * the hash output if necessary. If the data structure is subject to
+ * canonicalization it is canonicalized before hashing.
+ */
+  HashedId48 ::= OCTET STRING(SIZE(48))
+
+/**
+ * @class CertManagementPdu
+ *
+ * @brief This is the parent structure for all SCMS component certificate
+ * management structures. An overview of this structure is as follows:
+ *
+ * @param compositeCrl contains zero or more SecuredCrl as defined in IEEE
+ * Std 1609.2, and the CTL.
+ *
+ * @param certificateChain contains a collection of certificates and the CTL.
+ * 
+ * @param multiSignedCtl contains the CTL signed by multiple
+ * signers, the electors.
+ *
+ * @param tbsCtlSignature contains the CTL-instance-specific information used
+ * to generate a signature on the CTL.
+ */
+  CertManagementPdu ::= CHOICE {
+    compositeCrl      CompositeCrl,
+    certificateChain  CertificateChain,
+    multiSignedCtl    MultiSignedCtl,
+    tbsCtlSignature   ToBeSignedCtlSignature, 
+    infoStatus        CertificateManagementInfoStatus,
+    ...
+  }
+
+/**
+ * @class CompositeCrl
+ *
+ * @brief This structure is used to encapsulate CRLs and a CTL. An overview
+ * of this structure is as follows:
+ *
+ * @param crl contains a list of signed CRLs for different (CRACA ID, CRL
+ * series) pairs. The CRLs are signed individually, and this document does not
+ * specify the order in which they should appear.
+ *
+ * @param homeCtl contains a CTL. If the composite CRL was requested via the
+ * mechanisms given in 6.3.5.8, the ElectorGroupId in this CTL is the same as
+ * the ElectorGroupId provided in the request. The intent is that this is the
+ * "home" CTL of the requester, but this field can in practice be used to
+ * provide any CTL with any ElectorGroupId value.
+ */
+  CompositeCrl ::= SEQUENCE {
+    crl      SEQUENCE SIZE(0..MAX) OF SecuredCrl,
+    homeCtl  MultiSignedCtlSpdu,
+    ...
+  }
+
+/**
+ * @class CertificateChain
+ *
+ * @brief This structure is used to encapsulate certificates and a CTL. An
+ * overview of this structure is as follows:
+ *
+ * @param homeCtl contains a CTL. If the certificate chain was requested via
+ * the mechanisms given in 6.3.5.7, the ElectorGroupId in this CTL is the
+ * same as the ElectorGroupId provided in the request. The intent is that
+ * this is the "home" CTL of the requester, but this field can in practice be
+ * used to provide any CTL.
+ *
+ * @param others contains additional valid certificates of the CAs and the
+ * MAs chosen by means outside the scope of this document.
+ */
+  CertificateChain ::= SEQUENCE {
+    homeCtl  MultiSignedCtlSpdu,
+    others   SEQUENCE SIZE(0..MAX) OF Certificate,
+    ...
+  }
+
+/**
+ * @class MultiSignedCtl
+ *
+ * @brief This structure a certificate trust list (CTL) signed by multiple
+ * signers, the electors. An overview of this structure is as follows:
+ *
+ * @param type contains the type of the multi-signed CTL. Only one type of
+ * multi-signed CTL is supported in this version of this document.
+ *
+ * @param tbsCtl contains the CTL contents.
+ *
+ * @param unsigned contains data that are associated with the CTL and that
+ * are not included directly in tbsCtl. For example, if the type is
+ * fullIeeeCtlType, the FullIeeeTbsCtl contains the hashes of the
+ * certificates, and the certificates themselves are contained in unsigned.
+ *
+ * @param signatures contains the signatures. How the signatures are
+ * calculated is specified in the definition of ToBeSignedCtlSignature. The
+ * number of signatures shall be no more than the number of electors. Each
+ * signature shall have been generated by a distinct elector.
+ */
+  MultiSignedCtl ::= SEQUENCE {
+    type        IEEE-1609-2-1-MSCTL.&type({Ieee1609dot2dot1Ctls}),
+    tbsCtl      IEEE-1609-2-1-MSCTL.&TbsCtl({Ieee1609dot2dot1Ctls}{@.type}),
+    unsigned    IEEE-1609-2-1-MSCTL.&UnsignedCtlMaterial({
+                  Ieee1609dot2dot1Ctls}{@.type}),
+    signatures  SEQUENCE (SIZE(1..MAX)) OF CtlSignatureSpdu
+  }
+
+/**
+ * @class IEEE-1609-2-1-MSCTL
+ *
+ * @brief This is the ASN.1 Information Object Class used to associate
+ * multisigned CTL type identifiers, CTL contents, and unsigned material. In
+ * this structure:
+ *
+ * @param type contains the type, an Ieee1609dot2dot1MsctlType.
+ *
+ * @param TbsCtl contains the CTL contents.
+ *
+ * @param UnsignedCtlMaterial contains unsigned material associated with the 
+ * CTL, as specified in 7.3.11.
+ */
+  IEEE-1609-2-1-MSCTL ::= CLASS {
+    &type        Ieee1609dot2dot1MsctlType,
+    &TbsCtl,
+    &UnsignedCtlMaterial
+  } WITH SYNTAX {&TbsCtl IDENTIFIED BY &type USING &UnsignedCtlMaterial}
+
+/**
+ * @class Ieee1609dot2dot1Ctls
+ *
+ * @brief This is the Information Object Set containing the instances of the
+ * IEEE-1609-2-1-MSCTL class that are specified for use. Only one instance is
+ * specified for use in this version of this document.
+ */
+  Ieee1609dot2dot1Ctls IEEE-1609-2-1-MSCTL ::= {
+    {FullIeeeTbsCtl IDENTIFIED BY fullIeeeCtl USING SequenceOfCertificate}
+    , ...
+  }
+
+/**
+ * @class Ieee1609dot2dot1MsctlType
+ *
+ * @brief This is the integer used to identify the type of the CTL.
+ */
+  Ieee1609dot2dot1MsctlType ::= INTEGER (0..255)
+  fullIeeeCtl  Ieee1609dot2dot1MsctlType ::= 1
+
+/**
+ * @class FullIeeeTbsCtl
+ *
+ * @brief This structure specifies a CTL that contains information about the
+ * complete set of certificates trusted by the electors that sign the CTL. An
+ * overview of this structure is as follows:
+ *
+ * <br><br>NOTE 1: If in future CTL types are defined that contain the same
+ * information as, or a subset of the information in, the fullIeeeCtl, those
+ * types are anticipated to contain the same sequence number as the
+ * corresponding fullIeeeCtl.
+ *
+ * <br><br>NOTE 2: Any root CA or elector certificate that is not on the CTL is
+ * not trusted. The electorRemove and rootCaRemove are intended to be used
+ * only if the SCMS manager wants to explicitly indicate that a previously
+ * trusted entity (elector or root CA) is now not trusted even though that
+ * entity's certificate is still within its validity period. In practice, it
+ * is anticipated that the remove fields (electorRemove and rootCaRemove)
+ * will almost always be sequences of length 0.
+ *
+ * @param type contains the type of the CTL. It is identical to the type
+ * field that appears in the enclosing MultiSignedCtl. The field is included
+ * here as well to provide the simplest mechanism to help ensure that the
+ * type is included in the calculated CTL hash.
+ *
+ * @param electorGroupId contains the group of electors that have signed the
+ * CTL. It plays a role similar to CrlSeries in a CRL. This field is intended
+ * to be globally unique in the universe of all systems that use the
+ * MultiSignedCtl. See the specification of ElectorGroupId for discussion of
+ * a convention that can be followed to enable uniqueness.
+ *
+ * @param sequenceNumber contains the sequence number of the CTL. This is
+ * incremented by 1 every time a new FullIeeeTbsCtl is issued. 
+ *
+ * @param effectiveDate contains the time when the CTL is to take effect.
+ * This is to be greater than or equal to the effectiveDate field in the CTL
+ * with the same electorGroupId and the previous sequence number.
+ *
+ * @param electorApprove contains the list of hashes of the elector
+ * certificates that are approved as of the effective date. The hash is
+ * calculated with the same hash algorithm that is used to hash the elector
+ * certificate for signing.
+ *
+ * @param electorRemove contains the list of hashes of the elector
+ * certificates that are valid (that is, not expired) on the effective date and
+ * are not approved, as of the effective date, to sign a CTL. The hash is
+ * calculated with the same hash algorithm that is used to hash the elector
+ * certificate for signing. This field is to be considered informational as a
+ * certificate that is not included in electorApprove is not valid even if it
+ * does not appear in electorRemove.
+ *
+ * @param rootCaApprove contains the list of root CA certificates that are
+ * approved as of the effective date. The hash is calculated with the same
+ * hash algorithm that is used to hash the root certificate for signing. If
+ * the root certificate is signed with a hash function with a 48 octet
+ * output, this is truncated to the low-order 32 bytes for inclusion in the
+ * CTL. 
+ *
+ * @param rootCaRemove contains the list of root CA certificates that are
+ * valid (that is, not expired) on the effective date and are not approved, as
+ * of the effective date, to issue certificates or carry out other
+ * activities. If the root certificate is signed with a hash function
+ * with a 48 octet output, this is truncated to the low-order 32 bytes for
+ * inclusion in the CTL. This field is to be considered informational as a
+ * certificate that is not included in rootCaApprove is not valid even if it
+ * does not appear in rootCaRemove. 
+ *
+ * @param quorum contains the quorum, that is, the number of the electors
+ * required to sign the next CTL with the same ElectorGroupId value for that
+ * CTL to be trusted. If this field is absent, the quorum for the next CTL is
+ * equal to the quorum for the current CTL.
+ */
+  FullIeeeTbsCtl ::= SEQUENCE { 
+    type            Ieee1609dot2dot1MsctlType(fullIeeeCtl),
+    electorGroupId  ElectorGroupId,
+    sequenceNumber  CtlSequenceNumber,
+    effectiveDate   Time32,
+    electorApprove  SEQUENCE OF CtlElectorEntry,
+    electorRemove   SEQUENCE OF CtlElectorEntry,
+    rootCaApprove   SEQUENCE OF CtlRootCaEntry,
+    rootCaRemove    SEQUENCE OF CtlRootCaEntry,
+    ...,
+    quorum          INTEGER     
+  }
+
+/**
+ * @class ElectorGroupId
+ *
+ * @brief This structure identifies a group of electors that sign a series of
+ * CTLs for a specific purpose. Registration of ElectorGroupId values is
+ * managed by the IEEE RA; see http://standards.ieee.org/regauth. A list of
+ * assigned ElectorGroupId values is provided in K.1.
+ */
+  ElectorGroupId ::= OCTET STRING (SIZE(8))
+
+/**
+ * @class CtlSequenceNumber
+ *
+ * @brief This structure is used to encode the CTL sequence number. This
+ * document does not specify semantics of this type once it reaches its
+ * maximum value.
+ */
+  CtlSequenceNumber ::= INTEGER(0..65535)
+
+/**
+ * @class CtlElectorEntry
+ *
+ * @brief This structure contains the hash of an elector certificate.
+ */
+  CtlElectorEntry ::= HashedId48
+
+/**
+ * @class CtlRootCaEntry
+ *
+ * @brief This structure contains the hash of a root CA certificate.
+ */
+  CtlRootCaEntry ::= HashedId32
+  
+/**
+ * @class ToBeSignedCtlSignature
+ *
+ * @brief This structure contains the CTL-instance-specific information used
+ * to generate a signature on the CTL. An overview of this structure is as
+ * follows:
+ *
+ * @param electorGroupId contains the ElectorGroupId that appears in the CTL.
+ *
+ * @param ctlType identifies the type of the CTL.
+ *
+ * @param sequenceNumber contains the sequence number of the CTL being signed.
+ *
+ * @param tbsCtlHash contains the hash of the C-OER encoded tbsCtl field
+ * in the MultiSignedCtl. The hash is calculated using the same hash
+ * algorithm that is used to generate the signature on this structure when it
+ * is contained in a CtlSignatureSpdu. This algorithm can be determined from
+ * the headers of the CtlSignatureSpdu.
+ */
+  ToBeSignedCtlSignature ::= SEQUENCE {
+    electorGroupId  ElectorGroupId,
+    ctlType         Ieee1609dot2dot1MsctlType,
+    sequenceNumber  CtlSequenceNumber,
+    tbsCtlHash      HashedId48
+  }
+
+/**
+ * @class CertificateManagementInfoStatus
+ *
+ * @brief This structure contains the status of different certificate
+ * management information, including CRLs, CTLs, and individual certificates
+ * of CAs, MAs, and the RA.
+ *
+ * @param crl contains the status information for CRLs.
+ *
+ * @param ctl contains the status information for CTLs.
+ *
+ * @param caCcf contains the time of the last update of any of the CA 
+ * certificates in the CCF.
+ *
+ * @param ma contains the status information for MA certificates.
+ *
+ * @param ra contains the time of the last update of the RA's certificate.
+ * It is omitted if this structure is not sent by an RA.
+ */
+  CertificateManagementInfoStatus ::= SEQUENCE {
+    crl    SequenceOfCrlInfoStatus,
+    ctl    SequenceOfCtlInfoStatus,
+    caCcf  Time32,
+    ma     SequenceOfMaInfoStatus,
+    ra     Time32 OPTIONAL,
+    ...
+  }
+
+/**
+ * @class SequenceOfCtlInfoStatus
+ *
+ * @brief This type is used for clarity of definitions.
+ */
+  SequenceOfCtlInfoStatus ::= SEQUENCE OF CtlInfoStatus
+
+/**
+ * @class CtlInfoStatus
+ *
+ * @brief This structure contains the status information for a CTL.
+ *
+ * @param electorGroupId contains the elector group ID of the CTL.
+ *
+ * @param sequenceNumber contains the sequence number of the CTL.
+ *
+ * @param lastUpdate contains the time of the last update of the CTL.
+ */
+  CtlInfoStatus ::= SEQUENCE {
+   electorGroupId  ElectorGroupId,
+   sequenceNumber  CtlSequenceNumber,
+   lastUpdate      Time32,
+   ...
+}
+
+/**
+ * @class SequenceOfCrlInfoStatus
+ *
+ * @brief This type is used for clarity of definitions.
+ */
+  SequenceOfCrlInfoStatus ::= SEQUENCE OF CrlInfoStatus
+
+/**
+ * @class SequenceOfCrlInfoStatus
+ *
+ * @brief This structure contains the status information for a CRL.
+ *
+ * @param cracaId contains the CRACA ID of the CRL.
+ *
+ * @param series contains the CRL series of the CRL.
+ *
+ * @param issueDate contains the time of the last update of the CRL.
+ */
+  CrlInfoStatus ::= SEQUENCE {
+    cracaId    HashedId8,
+    series     CrlSeries,
+    issueDate  Time32,
+   ...
+}
+
+/**
+ * @class SequenceOfMaInfoStatus
+ *
+ * @brief This type is used for clarity of definitions.
+ */
+  SequenceOfMaInfoStatus ::= SEQUENCE OF MaInfoStatus
+
+/**
+ * @class MaInfoStatus
+ *
+ * @brief This structure contains the status information for an MA's
+ * certificate.
+ *
+ * @param psids contains the PSIDs associated with the misbehavior that is to
+ * be reported to that MA.
+ *
+ * @param updated contains the time of the last update of the MA's certificate.
+ */
+  MaInfoStatus ::= SEQUENCE {
+    psids    SequenceOfPsid,
+    updated  Time32,
+    ...
+  }
+ 
+END

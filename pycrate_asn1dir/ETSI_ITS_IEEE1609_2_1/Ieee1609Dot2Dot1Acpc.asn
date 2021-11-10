@@ -1,0 +1,218 @@
+--***************************************************************************--
+--                         IEEE Std 1609.2.1: ACPC                           --
+--***************************************************************************--
+
+/** 
+ * @brief NOTE: Section references in this file are to clauses in IEEE Std
+ * 1609.2.1 unless indicated otherwise. Full forms of acronyms and
+ * abbreviations used in this file are specified in 3.2.
+ */
+
+Ieee1609Dot2Dot1Acpc {iso(1) identified-organization(3) ieee(111)
+  standards-association-numbered-series-standards(2) wave-stds(1609) dot2(2)
+  extension-standards(255) dot1(1) interfaces(1) acpc(18) major-version-1(1)
+  minor-version-2(2)
+}
+
+DEFINITIONS AUTOMATIC TAGS ::= BEGIN
+
+EXPORTS ALL;
+
+IMPORTS
+  HashAlgorithm,
+  IValue,
+  Psid,
+  Time32,
+  Uint8
+FROM Ieee1609Dot2BaseTypes {iso(1) identified-organization(3) ieee(111)
+  standards-association-numbered-series-standards(2) wave-stds(1609)
+  dot2(2) base(1) base-types(2) major-version-2(2) minor-version-3(3)}
+WITH SUCCESSORS
+
+  Ieee1609Dot2Data-Unsecured,
+  Ieee1609Dot2Data-Signed
+FROM Ieee1609Dot2Dot1Protocol {iso(1) identified-organization(3) ieee(111)
+  standards-association-numbered-series-standards(2) wave-stds(1609) dot2(2)
+  extension-standards(255) dot1(1) interfaces(1) protocol(17) 
+  major-version-2(2)  minor-version-2(2)}
+WITH SUCCESSORS
+;
+
+/**
+ * @class AcpcPdu
+ *
+ * @brief This structure contains an APrV structure produced by the CAM. An
+ * overview of this structure is as follows:
+ *
+ * @param tree contains an AprvBinaryTree.
+ *
+ * @param aprv contains a single IndividualAprv.
+ */
+  AcpcPdu ::= CHOICE {
+    tree  AprvBinaryTree,
+    aprv  IndividualAprv,
+    ...
+  }
+
+/**
+ * @class AprvBinaryTree
+ *
+ * @brief This structure encodes a binary tree. An overview of this structure
+ * is as follows:
+ *
+ * @param version contains the current version of the structure.
+ *
+ * @param generationTime contains the generation time of AprvBinaryTree.
+ *
+ * @param currentI contains the i-value associated with the batch of
+ * certificates.
+ *
+ * @param acpcTreeId contains an identifier for the CAM creating this binary
+ * tree.
+ *
+ * @param hashAlgorithmId contains the identifier of the hash algorithm used
+ * inside the binary tree.
+ *
+ * @param tree contains a bit string indicating which nodes of the tree are 
+ * present. It is calculated as specified in 9.5.4.2, and can be used by the
+ * EE to determine which entry in nodeValueList to use to derive that EE's
+ * APrV as specified in 9.5.2.
+ *
+ * @param nodeValueList contains the values of the nodes that are present in 
+ * the order indicated by tree.
+ */
+  AprvBinaryTree ::= SEQUENCE {
+    version          Uint8 (2), 
+    generationTime   Time32,
+    currentI         IValue, 
+    acpcTreeId       AcpcTreeId,
+    hashAlgorithmId  HashAlgorithm,
+    tree             BIT STRING,
+    nodeValueList    SEQUENCE (SIZE (1..MAX)) OF AcpcNodeValue,
+    ...
+  }
+
+/**
+ * @class AcpcPsid
+ *
+ * @brief This is the PSID used to indicate activities in ACPC as specified in
+ * this document.
+ */
+  AcpcPsid ::= Psid(2113696)
+
+/**
+ * @class UnsecuredAprvBinaryTree
+ *
+ * @brief This is used to wrap an AprvBinaryTree in an Ieee1609Dot2Data for
+ * transmission if the policy is that the AprvBinaryTree need not be signed.
+ * See 9.5.6 for discussion.
+ */
+  UnsecuredAprvBinaryTree ::= Ieee1609Dot2Data-Unsecured {
+	AcpcPdu (WITH COMPONENTS {tree})
+  }
+
+/**
+ * @class SignedAprvBinaryTree
+ *
+ * @brief This is used to wrap an AprvBinaryTree in an Ieee1609Dot2Data for
+ * transmission if the policy is that the AprvBinaryTree be signed. See 9.5.6
+ * for discussion.
+ */
+  SignedAprvBinaryTree ::= Ieee1609Dot2Data-Signed {
+    AcpcPdu (WITH COMPONENTS {tree}), AcpcPsid
+  }
+
+/**
+ * @class IndividualAprv
+ *
+ * @brief This structure contains an individual APrV. An overview of this
+ * structure is as follows:
+ *
+ * @param version contains the current version of the structure.
+ *
+ * @param generationTime contains the generation time of IndividualAprv.
+ *
+ * @param currentI contains the i-value associated with the batch of
+ * certificates.
+ *
+ * @param acpcTreeId contains an identifier for the CAM creating this binary
+ * tree.
+ *
+ * @param nodeId contains the identifier of the node.
+ *
+ * @param nodeValue contains the value of the node.
+ */
+  IndividualAprv ::= SEQUENCE {
+    version         Uint8 (2),
+    generationTime  Time32,
+    currentI        IValue,
+    acpcTreeId      AcpcTreeId,
+    nodeId          BIT STRING,
+    nodeValue       AcpcNodeValue,
+    ...
+  }
+
+/**
+ * @class SignedIndividualAprv
+ *
+ * @brief This is used to wrap an IndividualAprv in an Ieee1609Dot2Data for
+ * transmission if the policy is that the IndividualAprv be signed. See 9.5.6
+ * for discussion.
+ */
+  SignedIndividualAprv ::= Ieee1609Dot2Data-Signed {
+    AcpcPdu (WITH COMPONENTS {aprv}), AcpcPsid
+  }
+
+/**
+ * @class AcpcTreeId
+ *
+ * @brief This is an 8 byte string that identifies an ACPC tree series. It is
+ * required to be globally unique within the system and is the same for all
+ * ACPC tree instances within the ACPC tree series. Registration of AcpcTreeId
+ * values is managed by the IEEE RA; see http://standards.ieee.org/regauth. A
+ * list of assigned AcpcTreeId values is provided in L.2.
+ */
+  AcpcTreeId ::= OCTET STRING (SIZE(8))
+
+/**
+ * @class AcpcNodeValue
+ *
+ * @brief This is a 16 byte string that represents the value of a node in the
+ * ACPC tree.
+ */
+  AcpcNodeValue ::= OCTET STRING (SIZE(16))
+
+/**
+ * @class AprvHashCalculationInput
+ *
+ * @brief This structure, C-OER encoded, is the input to the hash function to
+ * calculate child node values from a parent node. By including the ID fields
+ * it "firewalls" the hash function so that an attacker who inverts the hash
+ * has only found the hash preimage for a specific node, in a specific tree,
+ * for a specific time period. An overview of this structure is as follows:
+ *
+ * @param version contains the current version of the structure.
+ *
+ * @param acpcTreeId contains an identifier for this ACPC tree series.
+ *
+ * @param acpcPeriod contains an identifier for the time period for this tree.
+ * If the certificates for which this set of APrVs are intended have an IValue
+ * field, acpcPeriod in this structure shall be equal to the IValue field in
+ * the certificates. How the RA and the CAM synchronize on this value is
+ * outside the scope of this document.
+ *
+ * @param childNodeId contains a bit string of length l encoding the node
+ * location within the l'th level. 
+ *
+ * @param parentNodeValue contains the value of the parent node.
+ */
+  AprvHashCalculationInput ::= SEQUENCE {
+    version          Uint8 (2),
+    acpcTreeId       AcpcTreeId,
+    acpcPeriod       IValue,
+    childNodeId      BIT STRING,
+    parentNodeValue  OCTET STRING (SIZE(16)),
+    ...
+  }
+
+END
