@@ -151,7 +151,7 @@ ASN_SPECS_CORE = {
     # GSMA spec
     'TAP3'      : 'GSMA_TAP3_17102014',
     # Pycrate TCAP-specific modules
-    'TCAP_RAW'      : 'Pycrate_TCAP',
+    'TCAP_RAW'      : 'Pycrate_TCAP',         # TCAP-only, with each component kept as OCTET STRING
     'TCAP_MAP'      : 'Pycrate_TCAP_MAP',     # MAPv3 and further (based on 3GPP specs)
     'TCAP_MAPv2'    : 'Pycrate_TCAP_MAPv2',   # MAPv1 and v2 (based on old ETSI specs)
     'TCAP_MAPv2v3'  : 'Pycrate_TCAP_MAPv2v3', # all MAPv1, v2, v3 and further into a single Python module
@@ -160,10 +160,12 @@ ASN_SPECS_CORE = {
 
 # ETSI Intelligent Transport System
 ASN_SPECS_ITS = {
-    'ITS_r1318'       : 'ETSI_ITS_r1318',
+    'ITS_r1318'       : 'ETSI_ITS_r1318',     # Old all-in-one ITS release from ETSI
     'ITS_IEEE1609_2'  : 'ETSI_ITS_IEEE1609_2',
-    #'ITS_IEEE1609_21' : 'ETSI_ITS_IEEE1609_2_1',
-    
+    'ITS_IEEE1609_21' : 'ETSI_ITS_IEEE1609_2_1',
+    'ITS_CAM_2'       : 'ETSI_ITS_CAM_EN302637_2',
+    'ITS_DENM_3'      : 'ETSI_ITS_DENM_EN302637_3',
+    'ITS_VAM_3'       : 'ETSI_ITS_VAM_TS103300_3',
     }
 
 # Open Mobile Alliance geolocation protocols
