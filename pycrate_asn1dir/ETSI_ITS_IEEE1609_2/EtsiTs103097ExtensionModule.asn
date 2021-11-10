@@ -1,0 +1,52 @@
+EtsiTs103097ExtensionModule
+{itu-t(0) identified-organization(4) etsi(0) itsDomain(5) wg5(5) secHeaders(103097) extension(2) major-version-1(1) minor-version-1(1)} 
+DEFINITIONS AUTOMATIC TAGS ::= BEGIN
+
+IMPORTS 
+  HashedId8,
+  Time32
+FROM Ieee1609Dot2BaseTypes {iso(1) identified-organization(3) ieee(111) 
+    standards-association-numbered-series-standards(2) wave-stds(1609)  
+    dot2(2) base(1) base-types(2) major-version-2 (2) minor-version-3 (3)}
+WITH SUCCESSORS    
+;
+
+ExtensionModuleVersion::= INTEGER(1)
+
+Extension {EXT-TYPE : ExtensionTypes} ::= SEQUENCE {
+    id      EXT-TYPE.&extId({ExtensionTypes}),
+    content EXT-TYPE.&ExtContent({ExtensionTypes}{@.id})
+}
+
+EXT-TYPE ::= CLASS {
+    &extId        ExtId,
+    &ExtContent
+} WITH SYNTAX {&ExtContent IDENTIFIED BY &extId} 
+
+ExtId ::= INTEGER(0..255)
+
+EtsiOriginatingHeaderInfoExtension ::= Extension{{EtsiTs103097HeaderInfoExtensions}}
+
+EtsiTs103097HeaderInfoExtensionId ::= ExtId
+   etsiTs102941CrlRequestId      EtsiTs103097HeaderInfoExtensionId ::= 1 --'01'H
+   etsiTs102941DeltaCtlRequestId EtsiTs103097HeaderInfoExtensionId ::= 2 --'02'H
+
+EtsiTs103097HeaderInfoExtensions EXT-TYPE ::= {
+   { EtsiTs102941CrlRequest       IDENTIFIED BY etsiTs102941CrlRequestId } |
+   { EtsiTs102941DeltaCtlRequest  IDENTIFIED BY etsiTs102941DeltaCtlRequestId },
+   ...
+}
+
+EtsiTs102941CrlRequest::= SEQUENCE {
+    issuerId        HashedId8,
+    lastKnownUpdate Time32 OPTIONAL
+}
+
+EtsiTs102941CtlRequest::= SEQUENCE {
+    issuerId             HashedId8,
+    lastKnownCtlSequence INTEGER (0..255) OPTIONAL
+}
+
+EtsiTs102941DeltaCtlRequest::= EtsiTs102941CtlRequest
+
+END
