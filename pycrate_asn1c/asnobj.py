@@ -4106,7 +4106,7 @@ class ASN1Obj(object):
                 const['at'] = ['..'] * lvl + at_name
                 parent = obj
             for atn in at_name:
-                if parent is None or atn not in parent._cont:
+                if parent is None or parent._cont is None or atn not in parent._cont:
                     raise(ASN1ProcTextErr(
                           '{0}: undefined field reference for table constraint, {1}'\
                           .format(self.fullname(), at_name)))
@@ -4335,10 +4335,12 @@ class ASN1Obj(object):
         for comp in comps:
             ident = comp.split(' ', 1)[0]
             if ident not in cont:
-                raise(ASN1ProcTextErr(
-                      '{0}: invalid ident in WITH COMPONENTS constraint, {1}'\
-                      .format(self.fullname(), ident)))
-            elif ident in done:
+                ident = comp.split('(', 1)[0]
+                if ident not in cont:
+                    raise(ASN1ProcTextErr(
+                          '{0}: invalid ident in WITH COMPONENTS constraint, {1}'\
+                          .format(self.fullname(), ident)))
+            if ident in done:
                 raise(ASN1ProcTextErr(
                       '{0}: duplicated ident in WITH COMPONENTS constraint, {1}'\
                       .format(self.fullname(), ident)))
