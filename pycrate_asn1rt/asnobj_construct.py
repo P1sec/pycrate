@@ -73,6 +73,8 @@ Specific attributes:
 %s
 """ % ASN1Obj_docstring
     
+    #_const_ind set during module initialization (init.py) according to the 
+    # CHOICE content
     _const_ind = None
     
     TYPE  = TYPE_CHOICE
@@ -1794,7 +1796,7 @@ Single value: Python dict
 Specific attributes:
     
     - cont: ASN1Dict {ident (str): ASN1Obj instance},
-        provides the content of the CHOICE object
+        provides the content of the SEQUENCE object
     
     - cont_tags: dict with {tag (int): identifier (str)},
         provides a lookup table for tag value to components
@@ -2243,7 +2245,7 @@ Single value: Python dict
 Specific attributes:
     
     - cont: ASN1Dict {ident (str): ASN1Obj instance},
-        provides the content of the CHOICE object
+        provides the content of the SET object
     
     - cont_tags: dict with {tag (int): identifier (str)},
         provides a lookup table for tag value to components

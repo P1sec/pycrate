@@ -918,6 +918,9 @@ class PycrateGenerator(_Generator):
                        'processing only the common components'.format(self._mod_name, Obj._name))
             '''
             #
+            '''
+            # this is not required as both step 2 and 3 are commented out
+            #
             # 1) duplicate the content structure of the object
             if not Obj._cont:
                 cont, Obj._ext = Obj.get_cont(wext=True)
@@ -926,6 +929,7 @@ class PycrateGenerator(_Generator):
                 Obj._cont = Obj._cont.copy()
             for ident, Comp in Obj._cont.items():
                 Obj._cont[ident] = Comp.__class__(Comp)
+            '''
             #
             '''
             # TODO: components need actually to stay there, and be kept OPTIONAL
@@ -952,12 +956,17 @@ class PycrateGenerator(_Generator):
                 for ident in pres:
                     if FLAG_OPT in Obj._cont[ident]._flag:
                         del Obj._cont[ident]._flag[FLAG_OPT]
-            '''
             #
             if len(Consts_comps[0]['root']) > 1:
                 asnlog('WNG: {0}.{1}: multiple root parts in WITH COMPONENTS constraint, '\
                        'unable to compile them'.format(self._mod_name, Obj._name))
                 return
+            '''
+            #
+            '''
+            # TODO: additional constraints provided through WITH COMPONENTS are not
+            # PER visible and must not be mixed with existing constraints which are
+            # PER visible
             #
             # 3) apply additional constraint on components
             # only if we have a single root component in the constraint
@@ -969,7 +978,7 @@ class PycrateGenerator(_Generator):
                 Obj._cont[ident]._const = list(Obj._cont[ident]._const)
                 Obj._cont[ident]._const.extend(Const[ident]['const'])
                 #print('%s.%s: %r' % (Obj._name, ident, Obj._cont[ident]._const))
-
+            '''
 
 #------------------------------------------------------------------------------#
 # JSON graph dependency generator
@@ -1008,6 +1017,7 @@ def asnmod_build_dep(mods):
                     else:
                         CallerDict[objname] = [ Ref ]
     return CallerDict, CalledDict
+
 
 class JSONDepGraphGenerator(_Generator):
     """

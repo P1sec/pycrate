@@ -1,0 +1,28 @@
+--***************************************************************************--
+--                  IEEE Std 1609.2.1: ACA - MA Interface                    --
+--***************************************************************************--
+
+/** 
+ * @brief NOTE: Section references in this file are to clauses in IEEE Std
+ * 1609.2.1 unless indicated otherwise. Full forms of acronyms and
+ * abbreviations used in this file are specified in 3.2.
+ */
+
+Ieee1609Dot2Dot1AcaMaInterface {iso(1) identified-organization(3) ieee(111)
+  standards-association-numbered-series-standards(2) wave-stds(1609) dot2(2)
+  extension-standards(255) dot1(1) interfaces(1) aca-ma(3) major-version-2(2)
+  minor-version-1(1)}
+
+DEFINITIONS AUTOMATIC TAGS ::= BEGIN 
+
+EXPORTS ALL;
+
+/** 
+ * @class AcaMaInterfacePdu
+ *
+ * @brief This structure is not used by EEs, so it is defined as NULL for
+ * purposes of this document.
+ */
+  AcaMaInterfacePdu ::= NULL
+
+END

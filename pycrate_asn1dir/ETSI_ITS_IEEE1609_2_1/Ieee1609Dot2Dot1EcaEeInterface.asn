@@ -1,0 +1,180 @@
+--***************************************************************************--
+--                  IEEE Std 1609.2.1: ECA - EE Interface                    --
+--***************************************************************************--
+
+/** 
+ * @brief NOTE: Section references in this file are to clauses in IEEE Std
+ * 1609.2.1 unless indicated otherwise. Full forms of acronyms and
+ * abbreviations used in this file are specified in 3.2.
+ */
+
+Ieee1609Dot2Dot1EcaEeInterface {iso(1) identified-organization(3) ieee(111)
+  standards-association-numbered-series-standards(2) wave-stds(1609) dot2(2)
+  extension-standards(255) dot1(1) interfaces(1) eca-ee(9) major-version-2(2)
+  minor-version-2(2)
+}
+
+DEFINITIONS AUTOMATIC TAGS ::= BEGIN
+
+EXPORTS ALL;
+
+IMPORTS
+  EccP256CurvePoint,
+  HashedId8,
+  Time32,
+  Uint8
+FROM Ieee1609Dot2BaseTypes {iso(1) identified-organization(3) ieee(111)
+  standards-association-numbered-series-standards(2) wave-stds(1609)
+  dot2(2) base(1) base-types(2) major-version-2(2) minor-version-3(3)}
+WITH SUCCESSORS
+
+  Certificate,
+  CertificateType,
+  SequenceOfCertificate
+FROM Ieee1609Dot2 {iso(1) identified-organization(3) ieee(111)
+  standards-association-numbered-series-standards(2) wave-stds(1609)
+  dot2(2) base (1) schema (1) major-version-2(2) minor-version-4(4)}
+WITH SUCCESSORS
+
+  PublicVerificationKey,
+  ToBeSignedCertificate
+FROM Ieee1609Dot2Dot1Protocol {iso(1) identified-organization(3) ieee(111)
+  standards-association-numbered-series-standards(2) wave-stds(1609) dot2(2)
+  extension-standards(255) dot1(1) interfaces(1) protocol(17) 
+  major-version-2(2) minor-version-2(2)}
+WITH SUCCESSORS
+;
+
+/**
+ * @class EcaEeInterfacePDU
+ *
+ * @brief This is the parent structure for all structures exchanged between
+ * the ECA and the EE. An overview of this structure is as follows:
+ *
+ * @param eeEcaCertRequest contains the enrollment certificate request sent
+ * by the EE to the ECA.
+ *
+ * @param ecaEeCertResponse contains the enrollment certificate response sent
+ * by the ECA to the EE.
+ */
+  EcaEeInterfacePdu::= CHOICE {
+    eeEcaCertRequest   EeEcaCertRequest,
+    ecaEeCertResponse  EcaEeCertResponse,
+    ...
+  }
+
+/**
+ * @class EeEcaCertRequest
+ *
+ * @brief This structure contains parameters needed to request an enrollment
+ * certificate from the ECA. The ECA may, subject to policy, issue an
+ * enrollment certificate with different contents than the contents requested.
+ * An overview of this structure is as follows:
+ *
+ * <br><br>NOTE 1: The tbsCert.cracaId and tbsCert.crlSeries are set to the
+ * indicated values in the corresponding EeEcaCertRequest. In the issued
+ * enrollment certificate, they may have different values, set by the ECA.
+ *
+ * <br><br>NOTE 2: The EE uses the type field to indicate whether it is
+ * requesting an explicit or an implicit enrollment certificate. A policy is
+ * anticipated that determines what type of certificate is appropriate for a
+ * given set of circumstances (such as PSIDs, other end entity information,
+ * and locality) and that if the EE has requested a kind of certificate that
+ * is not allowed by policy, the ECA returns an error to the EE.
+ *
+ * @param version contains the current version of the structure. 
+ *
+ * @param generationTime contains the generation time of EeEcaCertRequest.
+ *
+ * @param type indicates whether the request is for an explicit or implicit
+ * certificate (see 4.1.1, 4.1.4.3.1).
+ *
+ * @param tbsCert contains the parameters used by the ECA to generate the
+ * enrollment certificate. tbsCert.verifyKeyIndicator.verificationKey
+ * contains the public key information sent by the requester. The
+ * verifyKeyIndicator field indicates the choice verificationKey even if type
+ * is implicit, as this allows the requester to indicate which signature
+ * algorithm and curve they are requesting. The value in this field is used
+ * as the verification key in the certificate if the certificate issued in
+ * response to this request is explicit, and as the input public key value
+ * for implicit certificate generation if the certificate issued in response
+ * to this request is implicit.
+ *
+ * @param canonicalId is the canonical identifier for the device per 4.1.4.2.
+ * If it is present, it indicates that the enclosing EeEcaCertRequestSpdu has
+ * been signed by the canonical private key. The receiver is intended to use
+ * the canonicalId to look up the canonical public key to verify the
+ * certificate request.
+ */
+  EeEcaCertRequest ::= SEQUENCE {
+    version         Uint8 (2),
+    generationTime  Time32,
+    type            CertificateType,
+    tbsCert         ToBeSignedCertificate (WITH COMPONENTS {
+      ...,
+      id (WITH COMPONENTS {
+        ..., 
+        linkageData ABSENT
+      }),
+      cracaId ('000000'H),
+      crlSeries (0),
+      appPermissions ABSENT,
+      certIssuePermissions ABSENT,
+      certRequestPermissions PRESENT,
+      verifyKeyIndicator (WITH COMPONENTS {
+        verificationKey
+      })
+    }),
+    canonicalId     IA5String OPTIONAL,
+    ...
+  }
+
+/**
+ * @class EcaEeCertResponse
+ *
+ * @brief This structure is used by the ECA to respond to an EE's enrollment
+ * certificate request. Additional bootstrapping information including the
+ * RA's certificate are provided by the DCM. The specification of the DCM is
+ * outside the scope of this document. An overview of this structure is as
+ * follows:
+ *
+ * <br><br>NOTE: The ECA uses the tbsCert.verifyKeyIndicator field in the
+ * EeEcaCertRequest to determine whether the EE is requesting an explicit or
+ * an implicit enrollment certificate. A policy is anticipated that
+ * determines what type of certificate is appropriate for a given set of
+ * circumstances (such as PSIDs, other end entity information, and locality)
+ * and that if the EE has requested a kind of certificate that is not
+ * allowed by policy, the ECA returns an error to the EE.
+ *
+ * @param version contains the current version of the structure.
+ *
+ * @param requestHash contains the following hash: 
+ * <ol>
+ * <li> EeEcaCertRequestSPDU, if the corresponding request was
+ * EeEcaCertRequestSPDU.</li>
+ *
+ * <li> EeRaSuccessorEnrollmentCertRequestSpd, if the corresponding request
+ * was EeRaSuccessorEnrollmentCertRequestSpd.</li>
+ * </ol>
+ *
+ * @param ecaCertChain contains the ECA's currently valid certificate and the
+ * certificate chain, up to and including the root CA. 
+ *
+ * @param certificate contains the enrollment certificate generated by the
+ * ECA, which shall be of the type indicated by the type field in the
+ * corresponding request. 
+ *
+ * @param privateKeyInfo contains the private key reconstruction value, if
+ * certificate.type is implicit. This is used by the EE as specified in
+ * 9.3.5.1.
+ */
+  EcaEeCertResponse ::= SEQUENCE {
+    version         Uint8 (2),
+    requestHash     HashedId8,
+    ecaCertChain    SequenceOfCertificate,
+    certificate     Certificate,
+    privateKeyInfo  OCTET STRING (SIZE(32)) OPTIONAL,
+    ...
+  }
+
+END

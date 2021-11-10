@@ -1,0 +1,1232 @@
+--***************************************************************************--
+--                        IEEE Std 1609.2: Data Types                        --
+--***************************************************************************--
+
+/** 
+ * @brief NOTE: Section references in this file are to clauses in IEEE Std
+ * 1609.2 unless indicated otherwise. Full forms of acronyms and
+ * abbreviations used in this file are specified in 3.2. 
+ */
+ 
+Ieee1609Dot2 {iso(1) identified-organization(3) ieee(111) 
+  standards-association-numbered-series-standards(2) wave-stds(1609)  
+  dot2(2) base (1) schema (1) major-version-2(2) minor-version-3(3)}
+
+DEFINITIONS AUTOMATIC TAGS ::= BEGIN 
+ 
+EXPORTS ALL;
+
+IMPORTS 
+  CrlSeries,
+  EccP256CurvePoint,
+  EciesP256EncryptedKey,
+  EncryptionKey,
+  GeographicRegion,
+  GroupLinkageValue,
+  HashAlgorithm,
+  HashedId3,
+  HashedId8,
+  Hostname,
+  IValue,
+  LinkageValue,
+  Opaque,
+  Psid,
+  PsidSsp,
+  PsidSspRange,
+  PublicEncryptionKey,
+  PublicVerificationKey,
+  SequenceOfHashedId3,
+  SequenceOfPsidSsp,
+  SequenceOfPsidSspRange,
+  ServiceSpecificPermissions,
+  Signature,
+  SubjectAssurance,
+  SymmetricEncryptionKey,
+  ThreeDLocation,
+  Time64,
+  Uint3,
+  Uint8,
+  Uint16, 
+  Uint32,
+  ValidityPeriod
+FROM Ieee1609Dot2BaseTypes {iso(1) identified-organization(3) ieee(111) 
+  standards-association-numbered-series-standards(2) wave-stds(1609) dot2(2)
+  base(1) base-types(2) major-version-2(2) minor-version-2(2)}
+WITH SUCCESSORS
+
+EtsiOriginatingHeaderInfoExtension 
+FROM EtsiTs103097ExtensionModule {itu-t(0) identified-organization(4)
+    etsi(0) itsDomain(5) wg5(5) secHeaders(103097) extension(2)
+    version1(1)}
+WITH SUCCESSORS
+;
+
+--***************************************************************************--
+--                               Secured Data                                --
+--***************************************************************************--
+
+/** 
+ * @class Ieee1609Dot2Data 
+ *
+ * @brief This data type is used to contain the other data types in this
+ * clause. The fields in the Ieee1609Dot2Data have the following meanings:  
+ *
+ * @param protocolVersion contains the current version of the protocol. The
+ * version specified in this document is version 3, represented by the
+ * integer 3. There are no major or minor version numbers.
+ *
+ * @param content contains the content in the form of an Ieee1609Dot2Content.
+ */
+  Ieee1609Dot2Data ::= SEQUENCE {
+    protocolVersion  Uint8(3),
+    content          Ieee1609Dot2Content
+  }
+
+/**
+ * @class Ieee1609Dot2Content
+ * 
+ * @brief In this structure:
+ *
+ * @param unsecuredData indicates that the content is an OCTET STRING to be
+ * consumed outside the SDS.
+ *
+ * @param signedData indicates that the content has been signed according to
+ * this standard.
+ *
+ * @param encryptedData indicates that the content has been encrypted
+ * according to this standard.
+ *
+ * @param signedCertificateRequest indicates that the content is a
+ * certificate request. Further specification of certificate requests is not
+ * provided in this version of this standard.
+ */
+  Ieee1609Dot2Content ::=  CHOICE { 
+    unsecuredData             Opaque, 
+    signedData                SignedData,
+    encryptedData             EncryptedData,
+    signedCertificateRequest  Opaque,
+    ...
+  }
+
+/**
+ * @class SignedData
+ * 
+ * @brief In this structure:
+ *
+ * @param hashId indicates the hash algorithm to be used to generate the hash
+ * of the message for signing and verification.
+ *
+ * @param tbsData contains the data that is hashed as input to the signature.
+ *
+ * @param signer determines the keying material and hash algorithm used to
+ * sign the data.
+ *
+ * @param signature contains the digital signature itself, calculated as
+ * specified in 5.3.1.
+ * <ul>
+ * <li> If signer indicates the choice self, then the signature calculation
+ * is parameterized as follows:</li>
+ * <ul>
+ * <li> <i>Data input</i> is equal to the COER encoding of the tbsData field
+ * canonicalized according to the encoding considerations given in 6.3.6.</li>
+ *
+ * <li> <i>Verification type</i> is equal to <i>self</i>.</li>
+ *
+ * <li> <i>Signer identifier input</i> is equal to the empty string.</li>
+ * </ul>
+ *
+ * <li> If signer indicates certificate or digest, then the signature
+ * calculation is parameterized as follows:</li>
+ * <ul>
+ * <li> <i>Data input</i> is equal to the COER encoding of the tbsData field
+ * canonicalized according to the encoding considerations given in 6.3.6.</li>
+ *
+ * <li> <i>Verification type</i> is equal to <i>certificate</i>.</li>
+ *
+ * <li> <i>Signer identifier input</i> equal to the COER-encoding of the
+ * Certificate that is to be used to verify the SPDU, canonicalized according
+ * to the encoding considerations given in 6.4.3.</li>
+ * </ul>
+ * </ul>
+ */
+  SignedData ::= SEQUENCE { 
+    hashId     HashAlgorithm,
+    tbsData    ToBeSignedData,
+    signer     SignerIdentifier,
+    signature  Signature
+  }
+
+/**
+ * @class ToBeSignedData
+ * 
+ * @brief This structure contains the data to be hashed when generating or
+ * verifying a signature. See 6.3.4 for the specification of the input to the
+ * hash.
+ * 
+ * <br><br><b>Encoding considerations</b>: For encoding considerations
+ * associated with the headerInfo field, see 6.3.9.
+ *
+ * <br><br><b>Parameters</b>:
+ *
+ * @param payload contains data that is provided by the entity that invokes
+ * the SDS.
+ *
+ * @param headerInfo contains additional data that is inserted by the SDS. 
+ */
+  ToBeSignedData ::= SEQUENCE { 
+    payload     SignedDataPayload,
+    headerInfo  HeaderInfo
+  }
+
+/**
+ * @class SignedDataPayload
+ * 
+ * @brief This structure contains the data payload of a ToBeSignedData. This
+ * structure contains at least one of data and extDataHash, and may contain
+ * both.
+ *
+ * @param data contains data that is explicitly transported within the
+ * structure.
+ *
+ * @param extDataHash contains the hash of data that is not explicitly
+ * transported within the structure, and which the creator of the structure
+ * wishes to cryptographically bind to the signature. For example, if a
+ * creator wanted to indicate that some large message was still valid, they
+ * could use the extDataHash field to send a Signed¬Data containing the hash
+ * of that large message without having to resend the message itself. Whether
+ * or not extDataHash is used, and how it is used, is SDEE-specific. 
+ */  
+  SignedDataPayload ::= SEQUENCE { 
+    data         Ieee1609Dot2Data OPTIONAL,
+    extDataHash  HashedData OPTIONAL,
+    ...
+  } (WITH COMPONENTS {..., data PRESENT} | 
+     WITH COMPONENTS {..., extDataHash PRESENT})
+
+/**
+ * @class HashedData
+ * 
+ * @brief This structure contains the hash of some data with a specified hash
+ * algorithm. The hash algorithms supported in this version of this
+ * standard are SHA-256 (in the root) and SHA-384 (in the first extension).
+ * The reserved extension is for future use.
+ *
+ * <br><br><b>Critical information fields</b>: If present, this is a critical
+ * information field as defined in 5.2.6. An implementation that does not
+ * recognize the indicated CHOICE for this type when verifying a signed SPDU
+ * shall indicate that the signed SPDU is invalid.
+ */
+  HashedData ::= CHOICE { 
+    sha256HashedData  OCTET STRING (SIZE(32)),
+    ...,
+    sha384HashedData  OCTET STRING (SIZE(48)),
+    reserved          OCTET STRING (SIZE(32))
+  }
+
+/**
+ * @class HeaderInfo
+ * 
+ * @brief This structure contains information that is used to establish
+ * validity by the criteria of 5.2.
+ *
+ * <br><br><b>Encoding considerations</b>: When the structure is encoded in
+ * order to be digested to generate or check a signature, if encryptionKey is
+ * present, and indicates the choice public, and contains a
+ * BasePublicEncryptionKey that is an elliptic curve point (i.e., of
+ * typeEccP256CurvePoint or EccP384CurvePoint), then the elliptic curve point
+ * is encoded in compressed form, i.e., such that the choice indicated within
+ * the Ecc*CurvePoint is compressed-y-0 or compressed-y-1.
+ *
+ * <br><br><b>Parameters</b>:
+ *
+ * @param psid indicates the application area with which the sender is
+ * claiming the payload should be associated.
+ *
+ * @param generationTime indicates the time at which the structure was
+ * generated. See 5.2.5.2.2 and 5.2.5.2.3 for discussion of the use of this
+ * field. 
+ *
+ * @param expiryTime, if present, contains the time after which the data
+ * should no longer be considered relevant. If both generationTime and
+ * expiryTime are present, the signed SPDU is invalid if generationTime is
+ * not strictly earlier than expiryTime.
+ *
+ * @param generationLocation, if present, contains the location at which the
+ * signature was generated. 
+ *
+ * @param p2pcdLearningRequest, if present, is used by the SDS to request
+ * certificates for which it has seen identifiers but does not know the
+ * entire certificate. A specification of this peer-to-peer certificate
+ * distribution (P2PCD) mechanism is given in Clause 8. This field is used
+ * for the out-of-band flavor of P2PCD and shall only be present if
+ * inlineP2pcdRequest is not present. The HashedId3 is calculated with the
+ * whole-certificate hash algorithm, determined as described in 6.4.3.
+ *
+ * @param missingCrlIdentifier, if present, is used by the SDS to request
+ * CRLs which it knows to have been issued but have not received. This is
+ * provided for future use and the associated mechanism is not defined in
+ * this version of this standard.
+ *
+ * @param encryptionKey, if present, is used to indicate that a further
+ * communication should be encrypted with the indicated key. One possible use
+ * of this key to encrypt a response is specified in 6.3.35, 6.3.37, and
+ * 6.3.34. An encryptionKey field of type symmetric should only be used if
+ * the Signed¬Data containing this field is securely encrypted by some means. 
+ *
+ * @param inlineP2pcdRequest, if present, is used by the SDS to request
+ * unknown certificates per the inline peer-to-peer certificate distribution
+ * mechanism is given in Clause 8. This field shall only be present if
+ * p2pcdLearningRequest is not present. The HashedId3 is calculated with the
+ * whole-certificate hash algorithm, determined as described in 6.4.3.
+ *
+ * @param requestedCertificate, if present, is used by the SDS to provide
+ * certificates per the “inline" version of the peer-to-peer certificate
+ * distribution mechanism given in Clause 8.
+ *
+ * @param pduFunctionalType, if present, is used to indicate that the SPDU is
+ * to be consumed by a process other than an application process as defined
+ * in ISO 21177 [B14a]. See 6.3.23b for more details.
+ *
+ * @param contributedExtensions, if present, is used to provide extension blocks
+ * defined by identified contributing organizations.
+ */
+  HeaderInfo ::= SEQUENCE { 
+    psid                  Psid,
+    generationTime        Time64 OPTIONAL,
+    expiryTime            Time64  OPTIONAL,
+    generationLocation    ThreeDLocation OPTIONAL,
+    p2pcdLearningRequest  HashedId3 OPTIONAL,
+    missingCrlIdentifier  MissingCrlIdentifier OPTIONAL,
+    encryptionKey         EncryptionKey OPTIONAL,
+    ...,
+    inlineP2pcdRequest    SequenceOfHashedId3 OPTIONAL,
+    requestedCertificate  Certificate OPTIONAL,
+    pduFunctionalType     PduFunctionalType OPTIONAL,
+    contributedExtensions ContributedExtensionBlocks OPTIONAL
+  }
+
+/**
+ * @class MissingCrlIdentifier
+ * 
+ * @brief This structure may be used to request a CRL that the SSME knows to
+ * have been issued but has not yet received. It is provided for future use
+ * and its use is not defined in this version of this standard.
+ *
+ * @param cracaId is the HashedId3 of the CRACA, as defined in 5.1.3. The
+ * HashedId3 is calculated with the whole-certificate hash algorithm,
+ * determined as described in 6.4.3.
+ *
+ * @param crlSeries is the requested CRL Series value. See 5.1.3 for more
+ * information.
+ */
+  MissingCrlIdentifier ::= SEQUENCE { 
+    cracaId    HashedId3,
+	crlSeries  CrlSeries,
+	...
+  }
+
+/**
+ * @class PduFunctionalType
+ * 
+ * @brief This data structure identifies the functional entity that is
+ * intended to consume an SPDU, for the case where that functional entity is
+ * not an application process but security support services for an
+ * application process. Further details and the intended use of this field
+ * are defined in ISO 21177 [B14a]. 
+ *
+ * <br><br>An SPDU in which the pduFunctionalType field is present conforms
+ * to the security profile for that PduFunctionalType value (given in ISO
+ * 21177 [B14a]), not to the security profile for Application SPDUs for the
+ * PSID.
+ *
+ * @param tlsHandshake indicates that the Signed SPDU is not to be directly
+ * consumed as an application PDU but is to be used to provide information
+ * about the holder’s permissions to a Transport Layer Security (TLS) (IETF
+ * 5246 [B13], IETF 8446 [B13a]) handshake process operating to secure
+ * communications to an application process. See IETF [B13b] and ISO 21177
+ * [B14a] for further information.
+ *
+ * @param iso21177ExtendedAuth indicates that the Signed SPDU is not to be
+ * directly consumed as an application PDU but is to be used to provide
+ * additional information about the holder’s permissions to the ISO 21177
+ * Security Subsystem for an application process. See ISO 21177 [B14a] for
+ * further information.
+ */
+  PduFunctionalType ::= INTEGER (0..255)
+    tlsHandshake          PduFunctionalType ::= 1
+    iso21177ExtendedAuth  PduFunctionalType ::= 2
+
+/**
+ * @class ContributedExtensionBlocks 
+ * 
+ * @brief This data structure defines a list of ContributedExtensionBlock
+ */
+  ContributedExtensionBlocks ::= SEQUENCE (SIZE(1..MAX)) OF ContributedExtensionBlock
+
+/**
+ * @class ContributedExtensionBlock 
+ * 
+ * @brief This data structure defines the format of an extension block 
+ * provided by an identified contributor by using the temnplate provided
+ * in the class IEEE1609DOT2-HEADERINFO-CONTRIBUTED-EXTENSION constraint
+ * to the objects in the set Ieee1609Dot2HeaderInfoContributedExtensions.
+ *
+ * @param contributorId uniquely identifies the contributor
+ *
+ * @param extns contains a list of extensions from that contributor.   
+ */
+  ContributedExtensionBlock ::= SEQUENCE {
+      contributorId IEEE1609DOT2-HEADERINFO-CONTRIBUTED-EXTENSION.&id
+        ({Ieee1609Dot2HeaderInfoContributedExtensions}),
+      extns   SEQUENCE (SIZE(1..MAX)) OF IEEE1609DOT2-HEADERINFO-CONTRIBUTED-EXTENSION.&Extn
+        ({Ieee1609Dot2HeaderInfoContributedExtensions}{@contributorId})
+}
+
+/**
+ * @class IEEE1609DOT2-HEADERINFO-CONTRIBUTED-EXTENSION
+ * 
+ * @brief This data structure defines the information object class that 
+ * provides a "template" for defining extension blocks.
+ */
+  IEEE1609DOT2-HEADERINFO-CONTRIBUTED-EXTENSION ::= CLASS {
+      &id    HeaderInfoContributorId UNIQUE,
+      &Extn
+  } WITH SYNTAX {&Extn IDENTIFIED BY &id}
+
+/**
+ * @class Ieee1609Dot2HeaderInfoContributedExtensions
+ * 
+ * @brief This data structure defines the set of ContributedExtensionBlock 
+ * Objects. 
+ *
+ * @param In this version of the standard, only the type
+ * EtsiOriginatingHeaderInfoExtension contributed by ETSI is supported.
+ * The information object EtsiOriginatingHeaderInfoExtension is imported 
+ * from the EtsiTs103097ExtensionModule 
+ */
+  Ieee1609Dot2HeaderInfoContributedExtensions IEEE1609DOT2-HEADERINFO-CONTRIBUTED-EXTENSION ::= {
+      {EtsiOriginatingHeaderInfoExtension IDENTIFIED BY etsiHeaderInfoContributorId},
+      ...
+  }
+
+/**
+ * @class HeaderInfoContributorId 
+ * 
+ * @brief This data structure defines the header info contributor id type 
+ * and its values. 
+ *
+ * @param In this version of the standard, value 2 is assigned to ETSI.
+ */
+  HeaderInfoContributorId ::= INTEGER (0..255)
+      etsiHeaderInfoContributorId         HeaderInfoContributorId ::= 2
+
+/**
+ * @class SignerIdentifier
+ * 
+ * @brief This structure allows the recipient of data to determine which
+ * keying material to use to authenticate the data. It also indicates the
+ * verification type to be used to generate the hash for verification, as
+ * specified in 5.3.1. 
+ * <ul>
+ * <li> If the choice indicated is digest:</li>
+ * <ul>
+ * <li> The structure contains the HashedId8 of the relevant certificate. The
+ * HashedId8 is calculated with the whole-certificate hash algorithm,
+ * determined as described in 6.4.3.</li>
+ *
+ * <li> The verification type is <i>certificate</i> and the certificate data
+ * passed to the hash function as specified in 5.3.1 is the authorization
+ * certificate.</li>
+ * </ul>
+ *
+ * <li> If the choice indicated is certificate:</li> 
+ * <ul>
+ * <li> The structure contains one or more Certificate structures, in order
+ * such that the first certificate is the authorization certificate and each
+ * subsequent certificate is the issuer of the one before it.</li>
+ *
+ * <li> The verification type is <i>certificate</i> and the certificate data
+ * passed to the hash function as specified in 5.3.1 is the authorization
+ * certificate.</li> 
+ * </ul>
+ *
+ * <li> If the choice indicated is self:</li>
+ * <ul>
+ * <li> The structure does not contain any data beyond the indication that
+ * the choice value is self.</li>
+ *
+ * <li> The verification type is <i>self-signed</i>.</li>
+ * </ul>
+ * </ul>
+ *
+ * <b>Critical information fields</b>:
+ * <ol>
+ * <li> If present, this is a critical information field as defined in 5.2.6.
+ * An implementation that does not recognize the CHOICE value for this type
+ * when verifying a signed SPDU shall indicate that the signed SPDU is invalid.
+ * </li>
+ *
+ * <li> If present, certificate is a critical information field as defined in
+ * 5.2.6. An implementation that does not support the number of certificates
+ * in certificate when verifying a signed SPDU shall indicate that the signed
+ * SPDU is invalid. A compliant implementation shall support certificate
+ * fields containing at least one certificate.</li>
+ * </ol>
+ */ 
+  SignerIdentifier ::= CHOICE { 
+    digest       HashedId8,
+    certificate  SequenceOfCertificate,
+    self         NULL,
+    ...
+  }
+
+--***************************************************************************--
+--                              Encrypted Data                               --
+--***************************************************************************--
+
+/**
+ * @class EncryptedData
+ * 
+ * @brief This data structure encodes data that has been encrypted to one or
+ * more recipients using the recipients’ public or symmetric keys as
+ * specified in 1.1.1.
+ *
+ * <br><br><b>Critical information fields</b>:
+ * <ul>
+ * <li> If present, recipients is a critical information field as defined in
+ * 5.2.6. An implementation that does not support the number of RecipientInfo
+ * in recipients when decrypted shall indicate that the encrypted SPDU could
+ * not be decrypted due to unsupported critical information fields. A
+ * compliant implementation shall support recipients fields containing at
+ * least eight entries.</li>
+ * </ul>
+ *
+ * <b>Parameters</b>:
+ * 
+ * @param recipients contains one or more RecipientInfos. These entries may
+ * be more than one RecipientInfo, and more than one type of RecipientInfo,
+ * as long as they are all indicating or containing the same data encryption
+ * key.
+ *
+ * @param ciphertext contains the encrypted data. This is the encryption of
+ * an encoded Ieee1609Dot2Data structure as specified in 5.3.4.2.
+ */
+  EncryptedData ::= SEQUENCE { 
+    recipients  SequenceOfRecipientInfo,
+	ciphertext  SymmetricCiphertext
+  }
+
+/**
+ * @class RecipientInfo
+ * 
+ * @brief This data structure is used to transfer the data encryption key to
+ * an individual recipient of an EncryptedData. The option pskRecipInfo is
+ * selected if the EncryptedData was encrypted using the static encryption
+ * key approach specified in 1.1.1.1. The other options are selected if the
+ * EncryptedData was encrypted using the ephemeral encryption key approach
+ * specified in 1.1.1.1. The meanings of the choices are:
+ *
+ * <br><br>See Annex C.7 for guidance on when it may be appropriate to use
+ * each of these approaches.
+ *
+ * @param pskRecipInfo: The ciphertext was encrypted directly using a
+ * symmetric key.
+ *
+ * @param symmRecipInfo: The data encryption key was encrypted using a
+ * symmetric key.
+ *
+ * @param certRecipInfo: The data encryption key was encrypted using a public
+ * key encryption scheme, where the public encryption key was obtained from a
+ * certificate. In this case, the parameter P1 to ECIES as defined in 5.3.4
+ * is the hash of the certificate.
+ *
+ * @param signedDataRecipInfo: The data encryption key was encrypted using a
+ * public encryption key, where the encryption key was obtained as the public
+ * response encryption key from a Signed-Data. In this case, the parameter P1
+ * to ECIES as defined in 5.3.4 is the SHA-256 hash of the Ieee1609Dot2Data
+ * containing the response encryption key.
+ *
+ * @param rekRecipInfo: The data encryption key was encrypted using a public
+ * key that was not obtained from a Signed¬Data. In this case, the parameter
+ * P1 to ECIES as defined in 5.3.4 is the hash of the empty string.
+ */
+  RecipientInfo ::= CHOICE { 
+    pskRecipInfo         PreSharedKeyRecipientInfo,
+    symmRecipInfo        SymmRecipientInfo,
+    certRecipInfo        PKRecipientInfo, 
+    signedDataRecipInfo  PKRecipientInfo, 
+    rekRecipInfo         PKRecipientInfo 
+  }
+
+/** 
+ * @class SequenceOfRecipientInfo
+ *
+ * @brief This type is used for clarity of definitions.
+ */
+  SequenceOfRecipientInfo ::= SEQUENCE OF RecipientInfo
+  
+/** 
+ * @class PreSharedKeyRecipientInfo
+ *
+ * @brief This data structure is used to indicate a symmetric key that may be
+ * used directly to decrypt a SymmetricCiphertext. It consists of the
+ * low-order 8 bytes of the SHA-256 hash of the COER encoding of a
+ * SymmetricEncryptionKey structure containing the symmetric key in question.
+ * The symmetric key may be established by any appropriate means agreed by
+ * the two parties to the exchange.         
+ */
+  PreSharedKeyRecipientInfo ::= HashedId8
+  
+/** 
+ * @class SymmRecipientInfo
+ *
+ * @brief This data structure contains the following fields:
+ *
+ * @param recipientId contains the hash of the symmetric key encryption key
+ * that may be used to decrypt the data encryption key. It consists of the
+ * low-order 8 bytes of the SHA-256 hash of the COER encoding of a
+ * SymmetricEncryptionKey structure containing the symmetric key in question.
+ * The symmetric key may be established by any appropriate means agreed by
+ * the two parties to the exchange.
+ *
+ * @param encKey contains the encrypted data encryption key within an AES-CCM
+ * ciphertext.
+ */
+  SymmRecipientInfo ::= SEQUENCE { 
+    recipientId  HashedId8, 
+    encKey       SymmetricCiphertext
+  }
+
+/** 
+ * @class PKRecipientInfo
+ *
+ * @brief This data structure contains the following fields:
+ *
+ * @param recipientId contains the hash of the container for the encryption
+ * public key as specified in the definition of RecipientInfo. Specifically,
+ * depending on the choice indicated by the containing RecipientInfo structure:
+ * <ul>
+ * <li> If the containing RecipientInfo structure indicates certRecipInfo,
+ * this field contains the HashedId8 of the certificate. The HashedId8 is
+ * calculated with the whole-certificate hash algorithm, determined as
+ * described in 6.4.3.</li>
+ *
+ * <li> If the containing RecipientInfo structure indicates
+ * signedDataRecipInfo, this field contains the HashedId8 of the
+ * Ieee1609Dot2Data of type signed that contained the encryption key, with
+ * that Ieee1609Dot2Data canonicalized per 6.3.4. The HashedId8 is calculated
+ * with SHA-256.</li>
+ *
+ * <li> If the containing RecipientInfo structure indicates rekRecipInfo,
+ * this field contains the HashedId8 of the COER encoding of a
+ * PublicEncryptionKey structure containing the response encryption key. The
+ * HashedId8 is calculated with SHA-256.</li>
+ * </ul>
+ *
+ * @param encKey contains the encrypted key. 
+ */
+  PKRecipientInfo ::= SEQUENCE { 
+    recipientId  HashedId8, 
+    encKey       EncryptedDataEncryptionKey
+  }
+
+/** 
+ * @class EncryptedDataEncryptionKey
+ *
+ * @brief This data structure contains an encrypted data encryption key. 
+ *
+ * <br><br><b>Critical information fields</b>: If present and applicable to
+ * the receiving SDEE, this is a critical information field as defined in
+ * 5.2.6. If an implementation receives an encrypted SPDU and determines that
+ * one or more RecipientInfo fields are relevant to it, and if all of those
+ * RecipientInfos contain an EncryptedDataEncryptionKey such that the
+ * implementation does not recognize the indicated CHOICE, the implementation
+ * shall indicate that the encrypted SPDU is not decryptable.
+ */
+  EncryptedDataEncryptionKey ::= CHOICE { 
+    eciesNistP256         EciesP256EncryptedKey,
+    eciesBrainpoolP256r1  EciesP256EncryptedKey,
+    ...
+  }
+
+/** 
+ * @class SymmetricCiphertext
+ *
+ * @brief This data structure encapsulates a ciphertext generated with an
+ * approved symmetric algorithm. 
+ *
+ * <br><br><b>Critical information fields</b>: If present, this is a critical
+ * information field as defined in 5.2.6. An implementation that does not
+ * recognize the indicated CHOICE value for this type in an encrypted SPDU
+ * shall reject the SPDU as invalid.
+ */
+  SymmetricCiphertext ::= CHOICE { 
+    aes128ccm  AesCcmCiphertext,
+    ...
+  }
+
+/** 
+ * @class AesCcmCiphertext
+ *
+ * @brief This data structure encapsulates an encrypted ciphertext for the
+ * AES-CCM symmetric algorithm. It contains the following fields:
+ *
+ * <br><br>The ciphertext is 16 bytes longer than the corresponding plaintext.
+ *
+ * <br><br>The plaintext resulting from a correct decryption of the
+ * ciphertext is a COER-encoded Ieee1609Dot2Data structure.
+ *
+ * @param nonce contains the nonce N as specified in 5.3.7. 
+ *
+ * @param ccmCiphertext contains the ciphertext C as specified in 5.3.7.
+ */
+  AesCcmCiphertext ::= SEQUENCE { 
+    nonce          OCTET STRING (SIZE (12)),
+	ccmCiphertext  Opaque 
+  }
+
+/** 
+ * @class Countersignature
+ *
+ * @brief This data structure is used to perform a countersignature over an
+ * already-signed SPDU. This is the profile of an Ieee1609Dot2Data containing
+ * a signedData. The tbsData within content is composed of a payload
+ * containing the hash (extDataHash) of the externally generated, pre-signed
+ * SPDU over which the countersignature is performed.
+ */
+  Countersignature ::= Ieee1609Dot2Data (WITH COMPONENTS {...,
+    content (WITH COMPONENTS {..., 
+      signedData  (WITH COMPONENTS {..., 
+        tbsData (WITH COMPONENTS {..., 
+          payload (WITH COMPONENTS {..., 
+            data ABSENT,
+            extDataHash PRESENT
+          }),
+          headerInfo(WITH COMPONENTS {..., 
+            generationTime PRESENT,
+            expiryTime ABSENT,
+            generationLocation ABSENT,
+            p2pcdLearningRequest ABSENT,
+            missingCrlIdentifier ABSENT,
+            encryptionKey ABSENT
+          })
+        })
+      })
+    })
+  })
+
+--***************************************************************************--
+--                Certificates and other Security Management                 --
+--***************************************************************************--
+
+/** 
+ * @class Certificate
+ *
+ * @brief This structure is a profile of the structure CertificateBase which
+ * specifies the valid combinations of fields to transmit implicit and
+ * explicit certificates.
+ */
+  Certificate ::= CertificateBase (ImplicitCertificate | ExplicitCertificate)
+
+/** 
+ * @class SequenceOfCertificate
+ *
+ * @brief This type is used for clarity of definitions.
+ */
+  SequenceOfCertificate ::= SEQUENCE OF Certificate
+
+/** 
+ * @class CertificateBase
+ *
+ * @brief The fields in this structure have the following meaning:
+ *
+ * <br><br><b>Encoding considerations</b>: When a certificate is encoded for
+ * hashing, for example to generate its HashedId8, or when it is to be used
+ * as the <i>signer identifier information</i> for verification, it is
+ * canonicalized as follows:
+ * <ul>
+ * <li> The encoding of toBeSigned uses the compressed form for all elliptic
+ * curve points: that is, those points indicate a choice of compressed-y-0 or
+ * compressed-y-1.</li>
+ *
+ * <li> The encoding of the signature, if present and if an ECDSA signature,
+ * takes the r value to be an EccP256CurvePoint or EccP384CurvePoint
+ * indicating the choice x-only.</li>
+ * </ul>
+ *
+ * <br><br><b>Whole-certificate hash</b>: If the entirety of a certificate is
+ * hashed to calculate a HashedId3, HashedId8, or HashedId10, the algorithm
+ * used for this purpose is known as the <i>whole-certificate hash</i>.
+ * <ul>
+ * <li> The whole-certificate hash is SHA-256 if the certificate is an
+ * implicit certificate.</li>
+ *
+ * <li> The whole-certificate hash is SHA-256 if the certificate is an
+ * explicit certificate and toBeSigned.verifyKeyIndicator.verificationKey is
+ * an EccP256CurvePoint.</li>
+ *
+ * <li> The whole-certificate hash is SHA-384 if the certificate is an
+ * explicit certificate and toBeSigned.verifyKeyIndicator.verificationKey is
+ * an EccP384CurvePoint.</li>
+ * </ul>
+ *
+ * <b>Parameters</b>:
+ *
+ * @param version contains the version of the certificate format. In this
+ * version of the data structures, this field is set to 3.
+ *
+ * @param type states whether the certificate is implicit or explicit. This
+ * field is set to explicit for explicit certificates and to implicit for
+ * implicit certificates. See ExplicitCertificate and ImplicitCertificate for
+ * more details.
+ *
+ * @param issuer identifies the issuer of the certificate.
+ *
+ * @param toBeSigned is the certificate contents. This field is an input to
+ * the hash when generating or verifying signatures for an explicit
+ * certificate, or generating or verifying the public key from the
+ * reconstruction value for an implicit certificate. The details of how this
+ * field are encoded are given in the description of the
+ * ToBeSignedCertificate type.
+ *
+ * @param signature is included in an ExplicitCertificate. It is the
+ * signature, calculated by the signer identified in the issuer field, over
+ * the hash of toBeSigned. The hash is calculated as specified in 5.3.1, where:
+ * <ul>
+ * <li> Data input is the encoding of toBeSigned following the COER.</li>
+ *
+ * <li> Signer identifier input depends on the verification type, which in
+ * turn depends on the choice indicated by issuer. If the choice indicated by
+ * issuer is self, the verification type is self-signed and the signer
+ * identifier input is the empty string. If the choice indicated by issuer is
+ * not self, the verification type is certificate and the signer identifier
+ * input is the canonicalized COER encoding of the certificate indicated by
+ * issuer. The canonicalization is carried out as specified in the <b>Encoding
+ * consideration</b>s section of this subclause.</li>
+ * </ul>
+ */
+  CertificateBase ::= SEQUENCE { 
+    version     Uint8(3),
+    type        CertificateType,
+    issuer      IssuerIdentifier,
+    toBeSigned  ToBeSignedCertificate,
+    signature   Signature OPTIONAL
+  }
+
+/** 
+ * @class CertificateType
+ *
+ * @brief This enumerated type indicates whether a certificate is explicit or
+ * implicit.
+ *
+ * <br><br><b>Critical information fields</b>: If present, this is a critical
+ * information field as defined in 5.2.5. An implementation that does not
+ * recognize the indicated CHOICE for this type when verifying a signed SPDU
+ * shall indicate that the signed SPDU is invalid.
+ */  
+  CertificateType ::= ENUMERATED {
+    explicit,
+    implicit,
+    ...
+  }
+
+/** 
+ * @class ImplicitCertificate
+ *
+ * @brief This is a profile of the CertificateBase structure providing all
+ * the fields necessary for an implicit certificate, and no others.
+ */
+  ImplicitCertificate ::= CertificateBase (WITH COMPONENTS {...,
+    type(implicit),
+    toBeSigned(WITH COMPONENTS {..., 
+      verifyKeyIndicator(WITH COMPONENTS {reconstructionValue})
+    }), 
+    signature ABSENT
+  })
+
+/** 
+ * @class ExplicitCertificate
+ *
+ * @brief This is a profile of the CertificateBase structure providing all
+ * the fields necessary for an explicit certificate, and no others.
+ */
+  ExplicitCertificate ::= CertificateBase (WITH COMPONENTS {...,
+      type(explicit),
+      toBeSigned(WITH COMPONENTS {..., 
+          verifyKeyIndicator(WITH COMPONENTS {verificationKey})
+      }), 
+      signature PRESENT
+  })
+
+/** 
+ * @class IssuerIdentifier
+ *
+ * @brief This structure allows the recipient of a certificate to determine
+ * which keying material to use to authenticate the certificate. 
+ *
+ * <br><br>If the choice indicated is sha256AndDigest or sha384AndDigest:
+ * <ul>
+ * <li> The structure contains the HashedId8 of the issuing certificate,
+ * where the certificate is canonicalized as specified in 6.4.3 before
+ * hashing and the HashedId8 is calculated with the whole-certificate hash
+ * algorithm, determined as described in 6.4.3.</li>
+ *
+ * <li> The hash algorithm to be used to generate the hash of the certificate
+ * for verification is SHA-256 (in the case of sha256AndDigest) or SHA-384
+ * (in the case of sha384AndDigest).</li>
+ *
+ * <li> The certificate is to be verified with the public key of the
+ * indicated issuing certificate.</li>
+ * </ul>
+ *
+ * If the choice indicated is self:
+ * <ul>
+ * <li> The structure indicates what hash algorithm is to be used to generate
+ * the hash of the certificate for verification.</li>
+ * 
+ * <li> The certificate is to be verified with the public key indicated by
+ * the verifyKeyIndicator field in theToBeSignedCertificate.</li>
+ * </ul>
+ *
+ * <br><br><b>Critical information fields</b>: If present, this is a critical
+ * information field as defined in 5.2.5. An implementation that does not
+ * recognize the indicated CHOICE for this type when verifying a signed SPDU
+ * shall indicate that the signed SPDU is invalid.
+ */
+  IssuerIdentifier ::= CHOICE  { 
+    sha256AndDigest  HashedId8,
+    self             HashAlgorithm,
+    ...,
+    sha384AndDigest  HashedId8
+  }
+
+/** 
+ * @class ToBeSignedCertificate
+ *
+ * @brief The fields in the ToBeSignedCertificate structure have the
+ * following meaning:
+ * 
+ * <br><br><b>Encoding considerations</b>: The encoding of toBeSigned which
+ * is input to the hash uses the compressed form for all public keys and
+ * reconstruction values that are elliptic curve points: that is, those
+ * points indicate a choice of compressed-y-0 or compressed-y-1. The encoding
+ * of the issuing certificate uses the compressed form for all public key and
+ * reconstruction values and takes the r value of an ECDSA signature, which
+ * in this standard is an ECC curve point, to be of type x-only.
+ *
+ * <br><br>For both implicit and explicit certificates, when the certificate
+ * is hashed to create or recover the public key (in the case of an implicit
+ * certificate) or to generate or verify the signature (in the case of an
+ * explicit certificate), the hash is Hash (<i>Data input</i>) || Hash (<i>
+ * Signer identifier input</i>), where:
+ * <ul>
+ * <li> <i>Data input</i> is the COER encoding of toBeSigned, canonicalized
+ * as described above.</li>
+ *
+ * <li> <i>Signer identifier input</i> depends on the verification type,
+ * which in turn depends on the choice indicated by issuer. If the choice
+ * indicated by issuer is self, the verification type is self-signed and the
+ * signer identifier input is the empty string. If the choice indicated by
+ * issuer is not self, the verification type is certificate and the signer
+ * identifier input is the COER encoding of the canonicalization per 6.4.3 of
+ * the certificate indicated by issuer.</li>
+ * </ul>
+ *
+ * In other words, for implicit certificates, the value H (CertU) in SEC 4,
+ * section 3, is for purposes of this standard taken to be H [H
+ * (canonicalized ToBeSignedCertificate from the subordinate certificate) ||
+ * H (entirety of issuer Certificate)]. See 5.3.2 for further discussion,
+ * including material differences between this standard and SEC 4 regarding
+ * how the hash function output is converted from a bit string to an integer.
+ *
+ * <br><br>NOTE: This encoding of the implicit certificate for hashing has
+ * been changed from the encoding specified in IEEE Std 1609.2-2013 for
+ * consistency with the encoding of the explicit certificates. This
+ * definition of the encoding results in implicit and explicit certificates
+ * both being hashed as specified in 5.3.1.
+ *
+ * <br><br><b>Critical information fields</b>: 
+ * <ul>
+ * <li> If present, appPermissions is a critical information field as defined
+ * in 5.2.6. An implementation that does not support the number of PsidSsp in
+ * appPermissions shall reject the signed SPDU as invalid. A compliant
+ * implementation shall support appPermissions fields containing at least
+ * eight entries.</li>
+ *
+ * <li> If present, certIssuePermissions is a critical information field as
+ * defined in 5.2.6. An implementation that does not support the number of
+ * PsidGroupPermissions in certIssuePermissions shall reject the signed SPDU
+ * as invalid. A compliant implementation shall support certIssuePermissions
+ * fields containing at least eight entries.</li>
+ *
+ * <li> If present, certRequestPermissions is a critical information field as
+ * defined in 5.2.6. An implementation that does not support the number of
+ * PsidGroupPermissions in certRequestPermissions shall reject the signed
+ * SPDU as invalid. A compliant implementation shall support
+ * certRequestPermissions fields containing at least eight entries.</li>
+ * </ul>
+ *
+ * <b>Parameters</b>:
+ *
+ * @param id contains information that is used to identify the certificate
+ * holder if necessary.
+ *
+ * @param cracaId identifies the Certificate Revocation Authorization CA
+ * (CRACA) responsible for certificate revocation lists (CRLs) on which this
+ * certificate might appear. Use of the cracaId is specified in 5.1.3. The
+ * HashedId3 is calculated with the whole-certificate hash algorithm,
+ * determined as described in 6.4.12.
+ *
+ * @param crlSeries represents the CRL series relevant to a particular
+ * Certificate Revocation Authorization CA (CRACA) on which the certificate
+ * might appear. Use of this field is specified in 5.1.3. 
+ *
+ * @param validityPeriod contains the validity period of the certificate.
+ *
+ * @param region, if present, indicates the validity region of the
+ * certificate. If it is omitted the validity region is indicated as follows:
+ * <ul>
+ * <li> If enclosing certificate is self-signed, i.e., the choice indicated
+ * by the issuer field in the enclosing certificate structure is self, the
+ * certificate is valid worldwide.</li>
+ *
+ * <li> Otherwise, the certificate has the same validity region as the
+ * certificate that issued it.</li>
+ * </ul>
+ *
+ * @param assuranceLevel indicates the assurance level of the certificate
+ * holder.
+ *
+ * @param appPermissions indicates the permissions that the certificate
+ * holder has to sign application data with this certificate. A valid
+ * instance of appPermissions contains any particular Psid value in at most
+ * one entry.  
+ *
+ * @param certIssuePermissions indicates the permissions that the certificate
+ * holder has to sign certificates with this certificate. A valid instance of
+ * this array contains no more than one entry whose psidSspRange field
+ * indicates all. If the array has multiple entries and one entry has its
+ * psidSspRange field indicate all, then the entry indicating all specifies
+ * the permissions for all PSIDs other than the ones explicitly specified in
+ * the other entries. See the description of PsidGroupPermissions for further
+ * discussion.
+ *
+ * @param certRequestPermissions indicates the permissions that the
+ * certificate holder has to sign certificate requests with this certificate.
+ * A valid instance of this array contains no more than one entry whose
+ * psidSspRange field indicates all. If the array has multiple entries and
+ * one entry has its psidSspRange field indicate all, then the entry
+ * indicating all specifies the permissions for all PSIDs other than the ones
+ * explicitly specified in the other entries. See the description of
+ * PsidGroupPermissions for further discussion.
+ *
+ * @param canRequestRollover indicates that the certificate may be used to
+ * sign a request for another certificate with the same permissions. This
+ * field is provided for future use and its use is not defined in this
+ * version of this standard.
+ *
+ * @param encryptionKey contains a public key for encryption for which the
+ * certificate holder holds the corresponding private key. 
+ *
+ * @param verifyKeyIndicator contains material that may be used to recover
+ * the public key that may be used to verify data signed by this certificate. 
+ */
+  ToBeSignedCertificate ::= SEQUENCE { 
+    id                      CertificateId,
+    cracaId                 HashedId3,
+    crlSeries               CrlSeries,
+    validityPeriod          ValidityPeriod,
+    region                  GeographicRegion OPTIONAL,
+    assuranceLevel          SubjectAssurance OPTIONAL,
+    appPermissions          SequenceOfPsidSsp OPTIONAL,
+    certIssuePermissions    SequenceOfPsidGroupPermissions OPTIONAL,
+    certRequestPermissions  SequenceOfPsidGroupPermissions OPTIONAL, 
+    canRequestRollover      NULL OPTIONAL,
+    encryptionKey           PublicEncryptionKey OPTIONAL,
+    verifyKeyIndicator      VerificationKeyIndicator,
+    ...
+  }
+  (WITH COMPONENTS { ..., appPermissions PRESENT} |
+   WITH COMPONENTS { ..., certIssuePermissions PRESENT} |
+   WITH COMPONENTS { ..., certRequestPermissions PRESENT})
+
+/** 
+ * @class CertificateId
+ *
+ * @brief This structure contains information that is used to identify the
+ * certificate holder if necessary.
+ *
+ * <br><br><b>Critical information fields</b>: 
+ * <ul>
+ * <li> If present, this is a critical information field as defined in 5.2.6.
+ * An implementation that does not recognize the choice indicated in this
+ * field shall reject a signed SPDU as invalid.</li>
+ * </ul>
+ *
+ * <b>Parameters</b>:
+ *
+ * @param linkageData is used to identify the certificate for revocation
+ * purposes in the case of certificates that appear on linked certificate
+ * CRLs. See 5.1.3 and 7.3 for further discussion.
+ *
+ * @param name is used to identify the certificate holder in the case of
+ * non-anonymous certificates. The contents of this field are a matter of
+ * policy and should be human-readable.
+ *
+ * @param binaryId supports identifiers that are not human-readable.
+ *
+ * @param none indicates that the certificate does not include an identifier.
+ */
+  CertificateId ::= CHOICE {
+    linkageData  LinkageData,
+    name         Hostname,
+    binaryId     OCTET STRING(SIZE(1..64)),
+    none         NULL,
+    ...
+  }
+
+/** 
+ * @class LinkageData
+ *
+ * @brief This structure contains information that is matched against
+ * information obtained from a linkage ID-based CRL to determine whether the
+ * containing certificate has been revoked. See 5.1.3.4 and 7.3 for details
+ * of use.
+ */
+  LinkageData ::= SEQUENCE { 
+    iCert                IValue,
+    linkage-value        LinkageValue, 
+    group-linkage-value  GroupLinkageValue OPTIONAL
+  }
+  
+/** 
+ * @class EndEntityType
+ *
+ * @brief This type indicates which type of permissions may appear in
+ * end-entity certificates the chain of whose permissions passes through the
+ * PsidGroupPermissions field containing this value. If app is indicated, the
+ * end-entity certificate may contain an appPermissions field. If enroll is
+ * indicated, the end-entity certificate may contain a certRequestPermissions
+ * field.   
+ */
+  EndEntityType ::= BIT STRING {
+    app (0), 
+    enroll (1) 
+  } (SIZE (8)) (ALL EXCEPT {})
+
+/** 
+ * @class PsidGroupPermissions
+ *
+ * @brief This structure states the permissions that a certificate holder has
+ * with respect to issuing and requesting certificates for a particular set
+ * of PSIDs. In this structure:
+ *
+ * <br><br> For examples, see D.5.3 and D.5.4.
+ *
+ * @param subjectPermissions indicates PSIDs and SSP Ranges covered by this
+ * field.
+ *
+ * @param minChainLength and chainLengthRange indicate how long the
+ * certificate chain from this certificate to the end-entity certificate is
+ * permitted to be. As specified in 5.1.2.1, the length of the certificate
+ * chain is the number of certificates "below" this certificate in the chain,
+ * down to and including the end-entity certificate. The length is permitted
+ * to be (a) greater than or equal to minChainLength certificates and (b)
+ * less than or equal to minChainLength + chainLengthRange certificates. A
+ * value of 0 for minChainLength is not permitted when this type appears in
+ * the certIssuePermissions field of a ToBeSignedCertificate; a certificate
+ * that has a value of 0 for this field is invalid. The value −1 for
+ * chainLengthRange is a special case: if the value of chainLengthRange is −1
+ * it indicates that the certificate chain may be any length equal to or
+ * greater than minChainLength. See the examples below for further discussion. 
+ *
+ * @param eeType takes one or more of the values app and enroll and indicates
+ * the type of certificates or requests that this instance of
+ * PsidGroupPermissions in the certificate is entitled to authorize. If this
+ * field indicates app, the chain is allowed to end in an authorization
+ * certificate, i.e., a certficate in which these permissions appear in an
+ * appPermissions field (in other words, if the field does not indicate app
+ * but the chain ends in an authorization certificate, the chain shall be
+ * considered invalid). If this field indicates enroll, the chain is allowed
+ * to end in an enrollment certificate, i.e., a certificate in which these
+ * permissions appear in a certReqPermissions permissions field), or both (in
+ * other words, if the field does not indicate app but the chain ends in an
+ * authorization certificate, the chain shall be considered invalid).
+ * Different instances of PsidGroupPermissions within a ToBeSignedCertificate
+ * may have different values for eeType.
+ */
+  PsidGroupPermissions ::= SEQUENCE {
+    subjectPermissions  SubjectPermissions,
+    minChainLength      INTEGER DEFAULT 1, 
+    chainLengthRange    INTEGER DEFAULT 0, 
+    eeType              EndEntityType DEFAULT {app}
+  }
+
+/** 
+ * @class SequenceOfPsidGroupPermissions
+ *
+ * @brief This type is used for clarity of definitions.
+ */
+  SequenceOfPsidGroupPermissions ::= SEQUENCE OF PsidGroupPermissions
+
+/** 
+ * @class SubjectPermissions
+ *
+ * @brief This indicates the PSIDs and associated SSPs for which certificate
+ * issuance or request permissions are granted by a PsidGroupPermissions
+ * structure. If this takes the value explicit, the enclosing
+ * PsidGroupPermissions structure grants certificate issuance or request
+ * permissions for the indicated PSIDs and SSP Ranges. If this takes the
+ * value all, the enclosing PsidGroupPermissions structure grants certificate
+ * issuance or request permissions for all PSIDs not indicated by other
+ * PsidGroupPermissions in the same certIssuePermissions or
+ * certRequestPermissions field.
+ *
+ * <br><br><b>Critical information fields</b>:
+ * <ul>
+ * <li> If present, this is a critical information field as defined in 5.2.6.
+ * An implementation that does not recognize the indicated CHOICE when
+ * verifying a signed SPDU shall indicate that the signed SPDU is
+ * invalid.</li>
+ *
+ * <li> If present, explicit is a critical information field as defined in
+ * 5.2.6. An implementation that does not support the number of PsidSspRange
+ * in explicit when verifying a signed SPDU shall indicate that the signed
+ * SPDU is invalid. A compliant implementation shall support explicit fields
+ * containing at least eight entries.</li>
+ * </ul>
+ */
+  SubjectPermissions ::= CHOICE {
+          explicit        SequenceOfPsidSspRange,
+          all             NULL,
+          ...
+  }
+
+/** 
+ * @class VerificationKeyIndicator
+ *
+ * @brief The contents of this field depend on whether the certificate is an
+ * implicit or an explicit certificate.
+ *
+ * <br><br><b>Critical information fields</b>: If present, this is a critical
+ * information field as defined in 5.2.5. An implementation that does not
+ * recognize the indicated CHOICE for this type when verifying a signed SPDU
+ * shall indicate that the signed SPDU is invalid.
+ *
+ * <br><br><b>Parameters</b>:
+ *
+ * @param verificationKey is included in explicit certificates. It contains
+ * the public key to be used to verify signatures generated by the holder of
+ * the Certificate.
+ *
+ * @param reconstructionValue is included in implicit certificates. It
+ * contains the reconstruction value, which is used to recover the public key
+ * as specified in SEC 4 and 5.3.2. 
+ */
+  VerificationKeyIndicator ::= CHOICE {
+    verificationKey      PublicVerificationKey,
+    reconstructionValue  EccP256CurvePoint,
+    ...
+  }
+  
+END

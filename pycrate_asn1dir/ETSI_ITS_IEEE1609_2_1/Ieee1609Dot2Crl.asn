@@ -1,0 +1,57 @@
+Ieee1609Dot2Crl {iso(1) identified-organization(3) ieee(111) 
+standards-association-numbered-series-standards(2) wave-stds(1609)  
+dot2(2) crl(3) protocol(1) major-version-2(2) minor-version-2(2)}
+
+DEFINITIONS AUTOMATIC TAGS ::= BEGIN 
+
+EXPORTS ALL;
+ 
+IMPORTS 
+
+  Ieee1609Dot2Data
+FROM Ieee1609Dot2 {iso(1) identified-organization(3) ieee(111) 
+    standards-association-numbered-series-standards(2) wave-stds(1609)  
+    dot2(2) base (1) schema (1) major-version-2 (2) minor-version-4(4)}
+
+  Opaque,
+  Psid
+FROM Ieee1609Dot2BaseTypes {iso(1) identified-organization(3) ieee(111) 
+    standards-association-numbered-series-standards(2) wave-stds(1609)  
+    dot2(2) base(1) base-types(2) major-version-2 (2) minor-version-3(3)}
+
+  CrlContents
+FROM Ieee1609Dot2CrlBaseTypes {iso(1) identified-organization(3) ieee(111) 
+    standards-association-numbered-series-standards(2) wave-stds(1609)  
+    dot2(2) crl(3) base-types(2) major-version-2 (2) minor-version-2(2)}
+
+;
+
+CrlPsid ::= Psid(256) -- PSID = 0x100, 0p8080
+
+SecuredCrl ::= Ieee1609Dot2Data (WITH COMPONENTS {..., 
+  content (WITH COMPONENTS {
+    signedData  (WITH COMPONENTS {..., 
+      tbsData (WITH COMPONENTS {
+        payload (WITH COMPONENTS {..., 
+          data (WITH COMPONENTS {...,
+             content (WITH COMPONENTS {
+                unsecuredData (CONTAINING CrlContents)
+            })
+          })
+        }),
+        headerInfo (WITH COMPONENTS {..., 
+          psid (CrlPsid),
+          generationTime ABSENT,
+          expiryTime ABSENT,
+          generationLocation ABSENT,
+          p2pcdLearningRequest ABSENT,
+          missingCrlIdentifier ABSENT,
+          encryptionKey ABSENT
+        })
+      })
+    })
+  })
+})
+
+
+END

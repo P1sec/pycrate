@@ -1,0 +1,9 @@
+AddGrpC.asn
+CAM-PDU-Descriptions.asn
+DSRC.asn
+ElectronicRegistrationIdentificationVehicleDataModule.asn
+ITS-Container.asn
+REGION.asn
+VAM-PDU-Descriptions.asn
+VAM-Temp-Imports.asn
+VRU-Motorcyclist-Special-Container.asn

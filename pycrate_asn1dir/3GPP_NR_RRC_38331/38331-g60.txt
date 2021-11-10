@@ -1,4 +1,4 @@
-﻿3GPP TS 38.331 V16.5.0 (2021-06)
+﻿3GPP TS 38.331 V16.6.0 (2021-09)
 Technical Specification
 3rd Generation Partnership Project;
 Technical Specification Group Radio Access Network;
@@ -65,7 +65,7 @@ Foreword	19
 5.2.2.3	Acquisition of System Information	36
 5.2.2.3.1	Acquisition of MIB and SIB1	36
 5.2.2.3.2	Acquisition of an SI message	37
-5.2.2.3.3	Request for on demand system information	38
+5.2.2.3.3	Request for on demand system information	39
 5.2.2.3.3a	Request for on demand positioning system information	39
 5.2.2.3.4	Actions related to transmission of RRCSystemInfoRequest message	40
 5.2.2.3.5	Acquisition of SIB(s) or posSIB(s) in RRC_CONNECTED	40
@@ -80,11 +80,11 @@ Foreword	19
 5.2.2.4.7	Actions upon reception of SIB6	47
 5.2.2.4.8	Actions upon reception of SIB7	47
 5.2.2.4.9	Actions upon reception of SIB8	48
-5.2.2.4.10	Actions upon reception of SIB9	49
+5.2.2.4.10	Actions upon reception of SIB9	48
 5.2.2.4.11	Actions upon reception of SIB10	49
 5.2.2.4.12	Actions upon reception of SIB11	49
 5.2.2.4.13	Actions upon reception of SIB12	49
-5.2.2.4.14	Actions upon reception of SIB13	50
+5.2.2.4.14	Actions upon reception of SIB13	49
 5.2.2.4.15	Actions upon reception of SIB14	50
 5.2.2.4.16	Actions upon reception of SIBpos	50
 5.2.2.5	Essential system information missing	50
@@ -94,78 +94,78 @@ Foreword	19
 5.3.1.2	AS Security	51
 5.3.2	Paging	52
 5.3.2.1	General	52
-5.3.2.2	Initiation	53
-5.3.2.3	Reception of the Paging message by the UE	53
+5.3.2.2	Initiation	52
+5.3.2.3	Reception of the Paging message by the UE	52
 5.3.3	RRC connection establishment	53
 5.3.3.1	General	53
-5.3.3.1a	Conditions for establishing RRC Connection for NR sidelink communication/V2X sidelink communication	54
+5.3.3.1a	Conditions for establishing RRC Connection for NR sidelink communication/V2X sidelink communication	53
 5.3.3.2	Initiation	54
-5.3.3.3	Actions related to transmission of RRCSetupRequest message	55
+5.3.3.3	Actions related to transmission of RRCSetupRequest message	54
 5.3.3.4	Reception of the RRCSetup by the UE	55
-5.3.3.5	Reception of the RRCReject by the UE	58
-5.3.3.6	Cell re-selection or cell selection while T390, T300 or T302 is running (UE in RRC_IDLE)	58
+5.3.3.5	Reception of the RRCReject by the UE	57
+5.3.3.6	Cell re-selection or cell selection while T390, T300 or T302 is running (UE in RRC_IDLE)	57
 5.3.3.7	T300 expiry	58
 5.3.3.8	Abortion of RRC connection establishment	59
-5.3.4	Initial AS security activation	60
-5.3.4.1	General	60
-5.3.4.2	Initiation	60
+5.3.4	Initial AS security activation	59
+5.3.4.1	General	59
+5.3.4.2	Initiation	59
 5.3.4.3	Reception of the SecurityModeCommand by the UE	60
-5.3.5	RRC reconfiguration	61
-5.3.5.1	General	61
-5.3.5.2	Initiation	62
+5.3.5	RRC reconfiguration	60
+5.3.5.1	General	60
+5.3.5.2	Initiation	61
 5.3.5.3	Reception of an RRCReconfiguration by the UE	62
 5.3.5.4	Secondary cell group release	69
-5.3.5.5	Cell Group configuration	70
-5.3.5.5.1	General	70
+5.3.5.5	Cell Group configuration	69
+5.3.5.5.1	General	69
 5.3.5.5.2	Reconfiguration with sync	70
-5.3.5.5.3	RLC bearer release	72
+5.3.5.5.3	RLC bearer release	71
 5.3.5.5.4	RLC bearer addition/modification	72
 5.3.5.5.5	MAC entity configuration	73
 5.3.5.5.6	RLF Timers & Constants configuration	73
 5.3.5.5.7	SpCell Configuration	74
-5.3.5.5.8	SCell Release	75
-5.3.5.5.9	SCell Addition/Modification	75
+5.3.5.5.8	SCell Release	74
+5.3.5.5.9	SCell Addition/Modification	74
 5.3.5.5.10	BH RLC channel release	75
-5.3.5.5.11	BH RLC channel addition/modification	76
+5.3.5.5.11	BH RLC channel addition/modification	75
 5.3.5.6	Radio Bearer configuration	76
 5.3.5.6.1	General	76
 5.3.5.6.2	SRB release	76
 5.3.5.6.3	SRB addition/modification	76
 5.3.5.6.4	DRB release	78
-5.3.5.6.5	DRB addition/modification	79
+5.3.5.6.5	DRB addition/modification	78
 5.3.5.7	AS Security key update	81
-5.3.5.8	Reconfiguration failure	83
-5.3.5.8.1	Void	83
-5.3.5.8.2	Inability to comply with RRCReconfiguration	83
+5.3.5.8	Reconfiguration failure	82
+5.3.5.8.1	Void	82
+5.3.5.8.2	Inability to comply with RRCReconfiguration	82
 5.3.5.8.3	T304 expiry (Reconfiguration with sync Failure)	84
-5.3.5.9	Other configuration	86
+5.3.5.9	Other configuration	85
 5.3.5.10	MR-DC release	88
 5.3.5.11	Full configuration	88
-5.3.5.12	BAP configuration	90
+5.3.5.12	BAP configuration	89
 5.3.5.12a	IAB Other Configuration	90
 5.3.5.12a.1	IP address management	90
 5.3.5.12a.1.1	IP Address Release	90
 5.3.5.12a.1.2	IP Address Addition/Modification	90
-5.3.5.13	Conditional Reconfiguration	92
-5.3.5.13.1	General	92
-5.3.5.13.2	Conditional reconfiguration removal	92
+5.3.5.13	Conditional Reconfiguration	91
+5.3.5.13.1	General	91
+5.3.5.13.2	Conditional reconfiguration removal	91
 5.3.5.13.3	Conditional reconfiguration addition/modification	92
 5.3.5.13.4	Conditional reconfiguration evaluation	92
-5.3.5.13.5	Conditional reconfiguration execution	93
+5.3.5.13.5	Conditional reconfiguration execution	92
 5.3.5.14	Sidelink dedicated configuration	93
 5.3.6	Counter check	94
 5.3.6.1	General	94
-5.3.6.2	Initiation	95
-5.3.6.3	Reception of the CounterCheck message by the UE	95
+5.3.6.2	Initiation	94
+5.3.6.3	Reception of the CounterCheck message by the UE	94
 5.3.7	RRC connection re-establishment	95
 5.3.7.1	General	95
 5.3.7.2	Initiation	96
-5.3.7.3	Actions following cell selection while T311 is running	98
-5.3.7.4	Actions related to transmission of RRCReestablishmentRequest message	100
-5.3.7.5	Reception of the RRCReestablishment by the UE	101
-5.3.7.6	T311 expiry	102
-5.3.7.7	T301 expiry or selected cell no longer suitable	102
-5.3.7.8	Reception of the RRCSetup by the UE	102
+5.3.7.3	Actions following cell selection while T311 is running	97
+5.3.7.4	Actions related to transmission of RRCReestablishmentRequest message	99
+5.3.7.5	Reception of the RRCReestablishment by the UE	100
+5.3.7.6	T311 expiry	101
+5.3.7.7	T301 expiry or selected cell no longer suitable	101
+5.3.7.8	Reception of the RRCSetup by the UE	101
 5.3.8	RRC connection release	102
 5.3.8.1	General	102
 5.3.8.2	Initiation	102
@@ -175,257 +175,257 @@ Foreword	19
 5.3.9	RRC connection release requested by upper layers	105
 5.3.9.1	General	105
 5.3.9.2	Initiation	105
-5.3.10	Radio link failure related actions	106
-5.3.10.1	Detection of physical layer problems in RRC_CONNECTED	106
-5.3.10.2	Recovery of physical layer problems	106
+5.3.10	Radio link failure related actions	105
+5.3.10.1	Detection of physical layer problems in RRC_CONNECTED	105
+5.3.10.2	Recovery of physical layer problems	105
 5.3.10.3	Detection of radio link failure	106
-5.3.10.4	RLF cause determination	108
+5.3.10.4	RLF cause determination	107
 5.3.10.5	RLF report content determination	108
-5.3.11	UE actions upon going to RRC_IDLE	111
-5.3.12	UE actions upon PUCCH/SRS release request	112
+5.3.11	UE actions upon going to RRC_IDLE	110
+5.3.12	UE actions upon PUCCH/SRS release request	111
 5.3.13	RRC connection resume	112
 5.3.13.1	General	112
 5.3.13.1a	Conditions for resuming RRC Connection for NR sidelink communication/V2X sidelink communication	113
 5.3.13.2	Initiation	113
 5.3.13.3	Actions related to transmission of RRCResumeRequest or RRCResumeRequest1 message	115
 5.3.13.4	Reception of the RRCResume by the UE	116
-5.3.13.5	T319 expiry or Integrity check failure from lower layers while T319 is running	120
+5.3.13.5	T319 expiry or Integrity check failure from lower layers while T319 is running	119
 5.3.13.6	Cell re-selection or cell selection while T390, T319 or T302 is running (UE in RRC_INACTIVE)	120
-5.3.13.7	Reception of the RRCSetup by the UE	121
-5.3.13.8	RNA update	121
+5.3.13.7	Reception of the RRCSetup by the UE	120
+5.3.13.8	RNA update	120
 5.3.13.9	Reception of the RRCRelease by the UE	121
 5.3.13.10	Reception of the RRCReject by the UE	121
 5.3.13.11	Inability to comply with RRCResume	121
-5.3.13.12	Inter RAT cell reselection	122
-5.3.14	Unified Access Control	122
-5.3.14.1	General	122
-5.3.14.2	Initiation	122
-5.3.14.3	Void	124
-5.3.14.4	T302, T390 expiry or stop (Barring alleviation)	124
+5.3.13.12	Inter RAT cell reselection	121
+5.3.14	Unified Access Control	121
+5.3.14.1	General	121
+5.3.14.2	Initiation	121
+5.3.14.3	Void	123
+5.3.14.4	T302, T390 expiry or stop (Barring alleviation)	123
 5.3.14.5	Access barring check	124
-5.3.15	RRC connection reject	125
-5.3.15.1	Initiation	125
-5.3.15.2	Reception of the RRCReject by the UE	125
-5.4	Inter-RAT mobility	126
-5.4.1	Introduction	126
-5.4.2	Handover to NR	126
-5.4.2.1	General	126
+5.3.15	RRC connection reject	124
+5.3.15.1	Initiation	124
+5.3.15.2	Reception of the RRCReject by the UE	124
+5.4	Inter-RAT mobility	125
+5.4.1	Introduction	125
+5.4.2	Handover to NR	125
+5.4.2.1	General	125
 5.4.2.2	Initiation	126
 5.4.2.3	Reception of the RRCReconfiguration by the UE	126
-5.4.3	Mobility from NR	127
-5.4.3.1	General	127
+5.4.3	Mobility from NR	126
+5.4.3.1	General	126
 5.4.3.2	Initiation	127
 5.4.3.3	Reception of the MobilityFromNRCommand by the UE	127
-5.4.3.4	Successful completion of the mobility from NR	128
+5.4.3.4	Successful completion of the mobility from NR	127
 5.4.3.5	Mobility from NR failure	128
-5.5	Measurements	129
-5.5.1	Introduction	129
+5.5	Measurements	128
+5.5.1	Introduction	128
 5.5.2	Measurement configuration	131
 5.5.2.1	General	131
-5.5.2.2	Measurement identity removal	133
-5.5.2.3	Measurement identity addition/modification	133
-5.5.2.4	Measurement object removal	134
+5.5.2.2	Measurement identity removal	132
+5.5.2.3	Measurement identity addition/modification	132
+5.5.2.4	Measurement object removal	133
 5.5.2.5	Measurement object addition/modification	134
 5.5.2.6	Reporting configuration removal	136
 5.5.2.7	Reporting configuration addition/modification	136
-5.5.2.8	Quantity configuration	137
-5.5.2.9	Measurement gap configuration	137
+5.5.2.8	Quantity configuration	136
+5.5.2.9	Measurement gap configuration	136
 5.5.2.10	Reference signal measurement timing configuration	138
-5.5.2.10a	RSSI measurement timing configuration	139
+5.5.2.10a	RSSI measurement timing configuration	138
 5.5.2.11	Measurement gap sharing configuration	139
-5.5.3	Performing measurements	140
-5.5.3.1	General	140
-5.5.3.2	Layer 3 filtering	144
+5.5.3	Performing measurements	139
+5.5.3.1	General	139
+5.5.3.2	Layer 3 filtering	143
 5.5.3.3	Derivation of cell measurement results	144
 5.5.3.3a	Derivation of layer 3 beam filtered measurement	145
 5.5.4	Measurement report triggering	145
 5.5.4.1	General	145
-5.5.4.2	Event A1 (Serving becomes better than threshold)	151
+5.5.4.2	Event A1 (Serving becomes better than threshold)	150
 5.5.4.3	Event A2 (Serving becomes worse than threshold)	151
-5.5.4.4	Event A3 (Neighbour becomes offset better than SpCell)	152
+5.5.4.4	Event A3 (Neighbour becomes offset better than SpCell)	151
 5.5.4.5	Event A4 (Neighbour becomes better than threshold)	152
-5.5.4.6	Event A5 (SpCell becomes worse than threshold1 and neighbour becomes better than threshold2)	153
-5.5.4.7	Event A6 (Neighbour becomes offset better than SCell)	154
+5.5.4.6	Event A5 (SpCell becomes worse than threshold1 and neighbour becomes better than threshold2)	152
+5.5.4.7	Event A6 (Neighbour becomes offset better than SCell)	153
 5.5.4.8	Event B1 (Inter RAT neighbour becomes better than threshold)	154
 5.5.4.9	Event B2 (PCell becomes worse than threshold1 and inter RAT neighbour becomes better than threshold2)	155
-5.5.4.10	Event I1 (Interference becomes higher than threshold)	156
+5.5.4.10	Event I1 (Interference becomes higher than threshold)	155
 5.5.4.11	Event C1 (The NR sidelink channel busy ratio is above a threshold)	156
-5.5.4.12	Event C2 (The NR sidelink channel busy ratio is below a threshold)	157
-5.5.4.13	Void	158
-5.5.4.14	Void	158
-5.5.5	Measurement reporting	158
-5.5.5.1	General	158
-5.5.5.2	Reporting of beam measurement information	165
-5.5.5.3	Sorting of cell measurement results	166
+5.5.4.12	Event C2 (The NR sidelink channel busy ratio is below a threshold)	156
+5.5.4.13	Void	157
+5.5.4.14	Void	157
+5.5.5	Measurement reporting	157
+5.5.5.1	General	157
+5.5.5.2	Reporting of beam measurement information	164
+5.5.5.3	Sorting of cell measurement results	165
 5.5.6	Location measurement indication	166
 5.5.6.1	General	166
-5.5.6.2	Initiation	167
-5.5.6.3	Actions related to transmission of LocationMeasurementIndication message	167
+5.5.6.2	Initiation	166
+5.5.6.3	Actions related to transmission of LocationMeasurementIndication message	166
 5.5a	Logged Measurements	167
 5.5a.1	Logged Measurement Configuration	167
 5.5a.1.1	General	167
-5.5a.1.2	Initiation	168
-5.5a.1.3	Reception of the LoggedMeasurementConfiguration by the UE	168
+5.5a.1.2	Initiation	167
+5.5a.1.3	Reception of the LoggedMeasurementConfiguration by the UE	167
 5.5a.1.4	T330 expiry	168
-5.5a.2	Release of Logged Measurement Configuration	169
-5.5a.2.1	General	169
-5.5a.2.2	Initiation	169
-5.5a.3	Measurements logging	169
-5.5a.3.1	General	169
-5.5a.3.2	Initiation	169
-5.6	UE capabilities	171
-5.6.1	UE capability transfer	171
-5.6.1.1	General	171
-5.6.1.2	Initiation	171
-5.6.1.3	Reception of the UECapabilityEnquiry by the UE	171
-5.6.1.4	Setting band combinations, feature set combinations and feature sets supported by the UE	172
-5.6.1.5	Void	175
-5.7	Other	175
-5.7.1	DL information transfer	175
-5.7.1.1	General	175
-5.7.1.2	Initiation	175
-5.7.1.3	Reception of the DLInformationTransfer by the UE	175
-5.7.1a	DL information transfer for MR-DC	175
-5.7.1a.1	General	175
-5.7.1a.2	Initiation	176
-5.7.1a.3	Actions related to reception of DLInformationTransferMRDC message	176
-5.7.2	UL information transfer	176
-5.7.2.1	General	176
-5.7.2.2	Initiation	176
-5.7.2.3	Actions related to transmission of ULInformationTransfer message	176
-5.7.2.4	Failure to deliver ULInformationTransfer message	177
-5.7.2a	UL information transfer for MR-DC	177
-5.7.2a.1	General	177
-5.7.2a.2	Initiation	177
-5.7.2a.3	Actions related to transmission of ULInformationTransferMRDC message	177
-5.7.2b	UL transfer of IRAT information	178
-5.7.2b.1	General	178
-5.7.2b.2	Initiation	178
-5.7.2b.3	Actions related to transmission of ULInformationTransferIRAT message	178
-5.7.3	SCG failure information	178
-5.7.3.1	General	178
-5.7.3.2	Initiation	179
-5.7.3.3	Failure type determination for (NG)EN-DC	179
-5.7.3.4	Setting the contents of MeasResultSCG-Failure	180
-5.7.3.5	Actions related to transmission of SCGFailureInformation message	180
-5.7.3a	EUTRA SCG failure information	182
-5.7.3a.1	General	182
-5.7.3a.2	Initiation	182
-5.7.3a.3	Actions related to transmission of SCGFailureInformationEUTRA message	182
-5.7.3b	MCG failure information	183
-5.7.3b.1	General	183
-5.7.3b.2	Initiation	183
-5.7.3b.3	Failure type determination	183
-5.7.3b.4	Actions related to transmission of MCGFailureInformation message	184
-5.7.3b.5	T316 expiry	185
-5.7.4	UE Assistance Information	186
-5.7.4.1	General	186
-5.7.4.2	Initiation	186
-5.7.4.3	Actions related to transmission of UEAssistanceInformation message	190
-5.7.4.3a	Setting the contents of OverheatingAssistance IE	195
-5.7.4a	Void	196
-5.7.5	Failure information	196
-5.7.5.1	General	196
-5.7.5.2	Initiation	196
-5.7.5.3	Actions related to transmission of FailureInformation message	196
-5.7.6	DL message segment transfer	197
-5.7.6.1	General	197
-5.7.6.2	Initiation	197
-5.7.6.3	Reception of DLDedicatedMessageSegment by the UE	197
-5.7.7	UL message segment transfer	197
-5.7.7.1	General	197
-5.7.7.2	Initiation	197
-5.7.7.3	Actions related to transmission of ULDedicatedMessageSegment message	198
-5.7.8	Idle/inactive Measurements	198
-5.7.8.1	General	198
-5.7.8.1a	Measurement configuration	198
-5.7.8.2	Void	199
-5.7.8.2a	Performing measurements	199
-5.7.8.3	T331 expiry or stop	202
-5.7.8.4	Cell re-selection or cell selection while T331 is running	202
-5.7.9	Mobility history information	202
-5.7.9.1	General	202
-5.7.9.2	Initiation	202
-5.7.10	UE Information	203
-5.7.10.1	General	203
-5.7.10.2	Initiation	203
-5.7.10.3	Reception of the UEInformationRequest message	203
-5.7.10.4	Actions upon successful completion of random-access procedure	205
-5.7.10.5	RA information determination for RA report and RLF report	206
-5.7.12	IAB Other Information	207
-5.7.12.1	General	207
-5.7.12.2	Initiation	207
-5.7.12.3	Actions related to transmission of IABOtherInformation message	207
-5.8	Sidelink	209
-5.8.1	General	209
-5.8.2	Conditions for NR sidelink communication operation	209
-5.8.3	Sidelink UE information for NR sidelink communication	210
-5.8.3.1	General	210
-5.8.3.2	Initiation	210
-5.8.3.3	Actions related to transmission of SidelinkUEInformationNR message	211
+5.5a.2	Release of Logged Measurement Configuration	168
+5.5a.2.1	General	168
+5.5a.2.2	Initiation	168
+5.5a.3	Measurements logging	168
+5.5a.3.1	General	168
+5.5a.3.2	Initiation	168
+5.6	UE capabilities	170
+5.6.1	UE capability transfer	170
+5.6.1.1	General	170
+5.6.1.2	Initiation	170
+5.6.1.3	Reception of the UECapabilityEnquiry by the UE	170
+5.6.1.4	Setting band combinations, feature set combinations and feature sets supported by the UE	171
+5.6.1.5	Void	174
+5.7	Other	174
+5.7.1	DL information transfer	174
+5.7.1.1	General	174
+5.7.1.2	Initiation	174
+5.7.1.3	Reception of the DLInformationTransfer by the UE	174
+5.7.1a	DL information transfer for MR-DC	174
+5.7.1a.1	General	174
+5.7.1a.2	Initiation	175
+5.7.1a.3	Actions related to reception of DLInformationTransferMRDC message	175
+5.7.2	UL information transfer	175
+5.7.2.1	General	175
+5.7.2.2	Initiation	175
+5.7.2.3	Actions related to transmission of ULInformationTransfer message	175
+5.7.2.4	Failure to deliver ULInformationTransfer message	176
+5.7.2a	UL information transfer for MR-DC	176
+5.7.2a.1	General	176
+5.7.2a.2	Initiation	176
+5.7.2a.3	Actions related to transmission of ULInformationTransferMRDC message	176
+5.7.2b	UL transfer of IRAT information	177
+5.7.2b.1	General	177
+5.7.2b.2	Initiation	177
+5.7.2b.3	Actions related to transmission of ULInformationTransferIRAT message	177
+5.7.3	SCG failure information	177
+5.7.3.1	General	177
+5.7.3.2	Initiation	178
+5.7.3.3	Failure type determination for (NG)EN-DC	178
+5.7.3.4	Setting the contents of MeasResultSCG-Failure	179
+5.7.3.5	Actions related to transmission of SCGFailureInformation message	179
+5.7.3a	EUTRA SCG failure information	181
+5.7.3a.1	General	181
+5.7.3a.2	Initiation	181
+5.7.3a.3	Actions related to transmission of SCGFailureInformationEUTRA message	181
+5.7.3b	MCG failure information	182
+5.7.3b.1	General	182
+5.7.3b.2	Initiation	182
+5.7.3b.3	Failure type determination	182
+5.7.3b.4	Actions related to transmission of MCGFailureInformation message	183
+5.7.3b.5	T316 expiry	184
+5.7.4	UE Assistance Information	185
+5.7.4.1	General	185
+5.7.4.2	Initiation	185
+5.7.4.3	Actions related to transmission of UEAssistanceInformation message	189
+5.7.4.3a	Setting the contents of OverheatingAssistance IE	194
+5.7.4a	Void	195
+5.7.5	Failure information	195
+5.7.5.1	General	195
+5.7.5.2	Initiation	195
+5.7.5.3	Actions related to transmission of FailureInformation message	195
+5.7.6	DL message segment transfer	196
+5.7.6.1	General	196
+5.7.6.2	Initiation	196
+5.7.6.3	Reception of DLDedicatedMessageSegment by the UE	196
+5.7.7	UL message segment transfer	196
+5.7.7.1	General	196
+5.7.7.2	Initiation	196
+5.7.7.3	Actions related to transmission of ULDedicatedMessageSegment message	197
+5.7.8	Idle/inactive Measurements	197
+5.7.8.1	General	197
+5.7.8.1a	Measurement configuration	197
+5.7.8.2	Void	198
+5.7.8.2a	Performing measurements	198
+5.7.8.3	T331 expiry or stop	201
+5.7.8.4	Cell re-selection or cell selection while T331 is running	201
+5.7.9	Mobility history information	201
+5.7.9.1	General	201
+5.7.9.2	Initiation	201
+5.7.10	UE Information	202
+5.7.10.1	General	202
+5.7.10.2	Initiation	202
+5.7.10.3	Reception of the UEInformationRequest message	202
+5.7.10.4	Actions upon successful completion of random-access procedure	204
+5.7.10.5	RA information determination for RA report and RLF report	205
+5.7.12	IAB Other Information	206
+5.7.12.1	General	206
+5.7.12.2	Initiation	206
+5.7.12.3	Actions related to transmission of IABOtherInformation message	206
+5.8	Sidelink	208
+5.8.1	General	208
+5.8.2	Conditions for NR sidelink communication operation	208
+5.8.3	Sidelink UE information for NR sidelink communication	209
+5.8.3.1	General	209
+5.8.3.2	Initiation	209
+5.8.3.3	Actions related to transmission of SidelinkUEInformationNR message	210
 5.8.4	Void	212
 5.8.5	Sidelink synchronisation information transmission for NR sidelink communication	212
 5.8.5.1	General	212
-5.8.5.2	Initiation	213
+5.8.5.2	Initiation	212
 5.8.5.3	Transmission of SLSS	213
-5.8.5a	Sidelink synchronisation information transmission for V2X sidelink communication	215
-5.8.5a.1	General	215
+5.8.5a	Sidelink synchronisation information transmission for V2X sidelink communication	214
+5.8.5a.1	General	214
 5.8.5a.2	Initiation	215
 5.8.6	Sidelink synchronisation reference	215
 5.8.6.1	General	215
 5.8.6.2	Selection and reselection of synchronisation reference	215
-5.8.6.3	Sidelink communication transmission reference cell selection	218
+5.8.6.3	Sidelink communication transmission reference cell selection	217
 5.8.7	Sidelink communication reception	218
-5.8.8	Sidelink communication transmission	219
+5.8.8	Sidelink communication transmission	218
 5.8.9	Sidelink RRC procedure	220
 5.8.9.1	Sidelink RRC reconfiguration	220
 5.8.9.1.1	General	220
-5.8.9.1.2	Actions related to transmission of RRCReconfigurationSidelink message	221
-5.8.9.1.3	Reception of an RRCReconfigurationSidelink by the UE	222
-5.8.9.1.4	Void	223
-5.8.9.1.5	Void	223
-5.8.9.1.6	Void	223
-5.8.9.1.7	Void	223
-5.8.9.1.8	Reception of an RRCReconfigurationFailureSidelink by the UE	223
+5.8.9.1.2	Actions related to transmission of RRCReconfigurationSidelink message	220
+5.8.9.1.3	Reception of an RRCReconfigurationSidelink by the UE	221
+5.8.9.1.4	Void	222
+5.8.9.1.5	Void	222
+5.8.9.1.6	Void	222
+5.8.9.1.7	Void	222
+5.8.9.1.8	Reception of an RRCReconfigurationFailureSidelink by the UE	222
 5.8.9.1.9	Reception of an RRCReconfigurationCompleteSidelink by the UE	223
-5.8.9.1a	Sidelink radio bearer management	224
-5.8.9.1a.1	Sidelink DRB release	224
-5.8.9.1a.2	Sidelink DRB addition/modification	225
+5.8.9.1a	Sidelink radio bearer management	223
+5.8.9.1a.1	Sidelink DRB release	223
+5.8.9.1a.2	Sidelink DRB addition/modification	224
 5.8.9.1a.3	Sidelink SRB release	226
 5.8.9.1a.4	Sidelink SRB addition	226
-5.8.9.2	Sidelink UE capability transfer	227
-5.8.9.2.1	General	227
-5.8.9.2.2	Initiation	227
-5.8.9.2.3	Actions related to transmission of the UECapabilityEnquirySidelink by the UE	227
+5.8.9.2	Sidelink UE capability transfer	226
+5.8.9.2.1	General	226
+5.8.9.2.2	Initiation	226
+5.8.9.2.3	Actions related to transmission of the UECapabilityEnquirySidelink by the UE	226
 5.8.9.2.4	Actions related to reception of the UECapabilityEnquirySidelink by the UE	227
-5.8.9.3	Sidelink radio link failure related actions	228
+5.8.9.3	Sidelink radio link failure related actions	227
 5.8.9.4	Sidelink common control information	228
 5.8.9.4.1	General	228
 5.8.9.4.2	Actions related to reception of MasterInformationBlockSidelink message	228
-5.8.9.4.3	Transmission of MasterInformationBlockSidelink message	229
-5.8.9.5	Actions related to PC5-RRC connection release requested by upper layers	230
-5.8.10	Sidelink measurement	230
-5.8.10.1	Introduction	230
-5.8.10.2	Sidelink measurement configuration	231
-5.8.10.2.1	General	231
-5.8.10.2.2	Sidelink measurement identity removal	231
+5.8.9.4.3	Transmission of MasterInformationBlockSidelink message	228
+5.8.9.5	Actions related to PC5-RRC connection release requested by upper layers	229
+5.8.10	Sidelink measurement	229
+5.8.10.1	Introduction	229
+5.8.10.2	Sidelink measurement configuration	230
+5.8.10.2.1	General	230
+5.8.10.2.2	Sidelink measurement identity removal	230
 5.8.10.2.3	Sidelink measurement identity addition/modification	231
-5.8.10.2.4	Sidelink measurement object removal	232
-5.8.10.2.5	Sidelink measurement object addition/modification	232
+5.8.10.2.4	Sidelink measurement object removal	231
+5.8.10.2.5	Sidelink measurement object addition/modification	231
 5.8.10.2.6	Sidelink reporting configuration removal	232
-5.8.10.2.7	Sidelink reporting configuration addition/modification	233
-5.8.10.2.8	Sidelink quantity configuration	233
+5.8.10.2.7	Sidelink reporting configuration addition/modification	232
+5.8.10.2.8	Sidelink quantity configuration	232
 5.8.10.3	Performing NR sidelink measurements	233
 5.8.10.3.1	General	233
-5.8.10.3.2	Derivation of NR sidelink measurement results	234
-5.8.10.4	Sidelink measurement report triggering	234
-5.8.10.4.1	General	234
-5.8.10.4.2	Event S1 (Serving becomes better than threshold)	235
+5.8.10.3.2	Derivation of NR sidelink measurement results	233
+5.8.10.4	Sidelink measurement report triggering	233
+5.8.10.4.1	General	233
+5.8.10.4.2	Event S1 (Serving becomes better than threshold)	234
 5.8.10.4.3	Event S2 (Serving becomes worse than threshold)	235
-5.8.10.5	Sidelink measurement reporting	236
-5.8.10.5.1	General	236
-5.8.11	Zone identity calculation	237
-5.8.12	DFN derivation from GNSS	237
+5.8.10.5	Sidelink measurement reporting	235
+5.8.10.5.1	General	235
+5.8.11	Zone identity calculation	236
+5.8.12	DFN derivation from GNSS	236
 6	Protocol data units, formats and parameters (ASN.1)	238
 6.1	General	238
 6.1.1	Introduction	238
@@ -486,563 +486,563 @@ Foreword	19
 –	UECapabilityInformation	312
 –	UEInformationRequest	313
 –	UEInformationResponse	314
-–	ULDedicatedMessageSegment	323
-–	ULInformationTransfer	324
-–	ULInformationTransferIRAT	325
-–	ULInformationTransferMRDC	326
-6.3	RRC information elements	327
-6.3.0	Parameterized types	327
-–	SetupRelease	327
-6.3.1	System information blocks	327
-–	SIB2	327
-–	SIB3	332
-–	SIB4	333
-–	SIB5	338
-–	SIB6	341
-–	SIB7	341
-–	SIB8	342
-–	SIB9	343
-–	SIB10	344
-–	SIB11	345
-–	SIB12	345
-–	SIB13	347
-–	SIB14	348
-6.3.1a	Positioning System information blocks	349
-–	PosSystemInformation-r16-IEs	349
-–	PosSI-SchedulingInfo	350
-–	SIBpos	351
-6.3.2	Radio resource control information elements	352
-–	AdditionalSpectrumEmission	352
-–	Alpha	352
-–	AMF-Identifier	353
-–	ARFCN-ValueEUTRA	353
-–	ARFCN-ValueNR	353
-–	ARFCN-ValueUTRA-FDD	354
-–	AvailabilityCombinationsPerCell	354
-–	AvailabilityIndicator	355
-–	BAP-RoutingID	356
-–	BeamFailureRecoveryConfig	356
-–	BeamFailureRecoverySCellConfig	359
-–	BetaOffsets	360
-–	BH-LogicalChannelIdentity	361
-–	BH-LogicalChannelIdentity-Ext	361
-–	BH-RLC-ChannelConfig	362
-–	BH-RLC-ChannelID	363
-–	BSR-Config	363
-–	BWP	364
-–	BWP-Downlink	365
-–	BWP-DownlinkCommon	365
-–	BWP-DownlinkDedicated	366
-–	BWP-Id	367
-–	BWP-Uplink	368
-–	BWP-UplinkCommon	368
-–	BWP-UplinkDedicated	369
-–	CellAccessRelatedInfo	372
-–	CellAccessRelatedInfo-EUTRA-5GC	373
-–	CellAccessRelatedInfo-EUTRA-EPC	374
-–	CellGroupConfig	374
-–	CellGroupId	379
-–	CellIdentity	380
-–	CellReselectionPriority	380
-–	CellReselectionSubPriority	380
-–	CGI-InfoEUTRA	381
-–	CGI-InfoEUTRALogging	381
-–	CGI-InfoNR	382
-–	CGI-Info-Logging	383
-–	CLI-RSSI-Range	383
-–	CodebookConfig	384
-–	CommonLocationInfo	387
-–	CondReconfigId	388
-–	CondReconfigToAddModList	389
-–	ConditionalReconfiguration	389
-–	ConfiguredGrantConfig	390
-–	ConfiguredGrantConfigIndex	396
-–	ConfiguredGrantConfigIndexMAC	397
-–	ConnEstFailureControl	397
-–	ControlResourceSet	398
-–	ControlResourceSetId	401
-–	ControlResourceSetZero	401
-–	CrossCarrierSchedulingConfig	401
-–	CSI-AperiodicTriggerStateList	403
-–	CSI-FrequencyOccupation	405
-–	CSI-IM-Resource	405
-–	CSI-IM-ResourceId	407
-–	CSI-IM-ResourceSet	407
-–	CSI-IM-ResourceSetId	407
-–	CSI-MeasConfig	408
-–	CSI-ReportConfig	409
-–	CSI-ReportConfigId	415
-–	CSI-ResourceConfig	415
-–	CSI-ResourceConfigId	416
-–	CSI-ResourcePeriodicityAndOffset	417
-–	CSI-RS-ResourceConfigMobility	417
-–	CSI-RS-ResourceMapping	420
-–	CSI-SemiPersistentOnPUSCH-TriggerStateList	421
-–	CSI-SSB-ResourceSet	422
-–	CSI-SSB-ResourceSetId	422
-–	DedicatedNAS-Message	422
-–	DMRS-DownlinkConfig	423
-–	DMRS-UplinkConfig	424
-–	DownlinkConfigCommon	426
-–	DownlinkConfigCommonSIB	427
-–	DownlinkPreemption	430
-–	DRB-Identity	431
-–	DRX-Config	431
-–	DRX-ConfigSecondaryGroup	433
-–	FilterCoefficient	434
-–	FreqBandIndicatorNR	434
-–	FrequencyInfoDL	435
-–	FrequencyInfoDL-SIB	435
-–	FrequencyInfoUL	436
-–	FrequencyInfoUL-SIB	437
-–	HighSpeedConfig	438
-–	Hysteresis	439
-–	InvalidSymbolPattern	439
-–	I-RNTI-Value	440
-–	LBT-FailureRecoveryConfig	440
-–	LocationInfo	441
-–	LocationMeasurementInfo	441
-–	LogicalChannelConfig	443
-–	LogicalChannelIdentity	446
-–	MAC-CellGroupConfig	446
-–	MeasConfig	448
-–	MeasGapConfig	450
-–	MeasGapSharingConfig	452
-–	MeasId	453
-–	MeasIdleConfig	453
-–	MeasIdToAddModList	457
-–	MeasObjectCLI	457
-–	MeasObjectEUTRA	460
-–	MeasObjectId	462
-–	MeasObjectNR	462
-–	MeasObjectNR-SL	467
-–	MeasObjectToAddModList	468
-–	MeasObjectUTRA-FDD	468
-–	MeasResultCellListSFTD-NR	469
-–	MeasResultCellListSFTD-EUTRA	470
-–	MeasResults	470
-–	MeasResult2EUTRA	476
-–	MeasResult2NR	476
-–	MeasResultIdleEUTRA	476
-–	MeasResultIdleNR	477
-–	MeasResultSCG-Failure	479
-–	MeasResultsSL	479
-–	MeasTriggerQuantityEUTRA	480
-–	MobilityStateParameters	481
-–	MsgA-ConfigCommon	481
-–	MsgA-PUSCH-Config	482
-–	MultiFrequencyBandListNR	485
-–	MultiFrequencyBandListNR-SIB	486
-–	NeedForGapsConfigNR	486
-–	NextHopChainingCount	488
-–	NG-5G-S-TMSI	488
-–	NPN-Identity	489
-–	NPN-IdentityInfoList	490
-–	NR-NS-PmaxList	491
-–	NZP-CSI-RS-Resource	491
-–	NZP-CSI-RS-ResourceId	493
-–	NZP-CSI-RS-ResourceSet	493
-–	NZP-CSI-RS-ResourceSetId	494
-–	P-Max	494
-–	PCI-List	495
-–	PCI-Range	495
-–	PCI-RangeElement	495
-–	PCI-RangeIndex	496
-–	PCI-RangeIndexList	496
-–	PDCCH-Config	497
-–	PDCCH-ConfigCommon	498
-–	PDCCH-ConfigSIB1	500
-–	PDCCH-ServingCellConfig	501
-–	PDCP-Config	502
-–	PDSCH-Config	508
-–	PDSCH-ConfigCommon	513
-–	PDSCH-ServingCellConfig	513
-–	PDSCH-TimeDomainResourceAllocationList	515
-–	PHR-Config	516
-–	PhysCellId	518
-–	PhysicalCellGroupConfig	518
-–	PLMN-Identity	523
-–	PLMN-IdentityInfoList	523
-–	PLMN-IdentityList2	524
-–	PRB-Id	525
-–	PTRS-DownlinkConfig	525
-–	PTRS-UplinkConfig	526
-–	PUCCH-Config	527
-–	PUCCH-ConfigCommon	533
-–	PUCCH-ConfigurationList	534
-–	PUCCH-PathlossReferenceRS-Id	535
-–	PUCCH-PowerControl	535
-–	PUCCH-SpatialRelationInfo	537
-–	PUCCH-SpatialRelationInfo-Id	538
-–	PUCCH-TPC-CommandConfig	538
-–	PUSCH-Config	539
-–	PUSCH-ConfigCommon	545
-–	PUSCH-PowerControl	546
-–	PUSCH-ServingCellConfig	550
-–	PUSCH-TimeDomainResourceAllocationList	551
-–	PUSCH-TPC-CommandConfig	553
-–	Q-OffsetRange	553
-–	Q-QualMin	554
-–	Q-RxLevMin	554
-–	QuantityConfig	554
-–	RACH-ConfigCommon	556
-–	RACH-ConfigCommonTwoStepRA	559
-–	RACH-ConfigDedicated	562
-–	RACH-ConfigGeneric	566
-–	RACH-ConfigGenericTwoStepRA	567
-–	RA-Prioritization	569
-–	RadioBearerConfig	569
-–	RadioLinkMonitoringConfig	573
-–	RadioLinkMonitoringRS-Id	574
-–	RAN-AreaCode	574
-–	RateMatchPattern	574
-–	RateMatchPatternId	576
-–	RateMatchPatternLTE-CRS	577
-–	ReferenceTimeInfo	577
-–	RejectWaitTime	579
-–	RepetitionSchemeConfig	579
-–	ReportConfigId	580
-–	ReportConfigInterRAT	580
-–	ReportConfigNR	584
-–	ReportConfigNR-SL	593
-–	ReportConfigToAddModList	594
-–	ReportInterval	595
-–	ReselectionThreshold	595
-–	ReselectionThresholdQ	596
-–	ResumeCause	596
-–	RLC-BearerConfig	596
-–	RLC-Config	597
-–	RLF-TimersAndConstants	600
-–	RNTI-Value	601
-–	RSRP-Range	601
-–	RSRQ-Range	601
-–	RSSI-Range	602
-–	SCellIndex	602
-–	SchedulingRequestConfig	602
-–	SchedulingRequestId	603
-–	SchedulingRequestResourceConfig	604
-–	SchedulingRequestResourceId	605
-–	ScramblingId	605
-–	SCS-SpecificCarrier	606
-–	SDAP-Config	607
-–	SearchSpace	608
-–	SearchSpaceId	613
-–	SearchSpaceZero	613
-–	SecurityAlgorithmConfig	614
-–	SemiStaticChannelAccessConfig	615
-–	Sensor-LocationInfo	615
-–	ServCellIndex	616
-–	ServingCellConfig	616
-–	ServingCellConfigCommon	625
-–	ServingCellConfigCommonSIB	628
-–	ShortI-RNTI-Value	629
-–	ShortMAC-I	630
-–	SINR-Range	630
-–	SI-RequestConfig	630
-–	SI-SchedulingInfo	632
-–	SK-Counter	633
-–	SlotFormatCombinationsPerCell	633
-–	SlotFormatIndicator	635
-–	S-NSSAI	638
-–	SpeedStateScaleFactors	638
-–	SPS-Config	639
-–	SPS-ConfigIndex	640
-–	SPS-PUCCH-AN	641
-–	SPS-PUCCH-AN-List	641
-–	SRB-Identity	641
-–	SRS-CarrierSwitching	642
-–	SRS-Config	643
-–	SRS-RSRP-Range	654
-–	SRS-TPC-CommandConfig	654
-–	SSB-Index	655
-–	SSB-MTC	656
-–	SSB-PositionQCL-Relation	657
-–	SSB-ToMeasure	658
-–	SS-RSSI-Measurement	658
-–	SubcarrierSpacing	659
-–	TAG-Config	659
-–	TCI-State	660
-–	TCI-StateId	661
-–	TDD-UL-DL-ConfigCommon	661
-–	TDD-UL-DL-ConfigDedicated	662
-–	TrackingAreaCode	664
-–	T-Reselection	665
-–	TimeToTrigger	665
-–	UAC-BarringInfoSetIndex	665
-–	UAC-BarringInfoSetList	666
-–	UAC-BarringPerCatList	667
-–	UAC-BarringPerPLMN-List	667
-–	UE-TimersAndConstants	668
-–	UL-DelayValueConfig	668
-–	UplinkCancellation	669
-–	UplinkConfigCommon	671
-–	UplinkConfigCommonSIB	671
-–	UplinkTxDirectCurrentList	672
-–	UplinkTxDirectCurrentTwoCarrierList	673
-–	ZP-CSI-RS-Resource	675
-–	ZP-CSI-RS-ResourceSet	675
-–	ZP-CSI-RS-ResourceSetId	676
-6.3.3	UE capability information elements	676
-–	AccessStratumRelease	676
-–	BandCombinationList	677
-–	BandCombinationListSidelinkEUTRA-NR	681
-–	CA-BandwidthClassEUTRA	682
-–	CA-BandwidthClassNR	683
-–	CA-ParametersEUTRA	683
-–	CA-ParametersNR	684
-–	CA-ParametersNRDC	687
-–	CarrierAggregationVariant	688
-–	CodebookParameters	689
-–	FeatureSetCombination	693
-–	FeatureSetCombinationId	694
-–	FeatureSetDownlink	694
-–	FeatureSetDownlinkId	698
-–	FeatureSetDownlinkPerCC	698
-–	FeatureSetDownlinkPerCC-Id	699
-–	FeatureSetEUTRA-DownlinkId	699
-–	FeatureSetEUTRA-UplinkId	700
-–	FeatureSets	700
-–	FeatureSetUplink	701
-–	FeatureSetUplinkId	706
-–	FeatureSetUplinkPerCC	706
-–	FeatureSetUplinkPerCC-Id	707
-–	FreqBandIndicatorEUTRA	707
-–	FreqBandList	707
-–	FreqSeparationClass	708
-–	FreqSeparationClassDL-Only	708
-–	HighSpeedParameters	709
-–	IMS-Parameters	709
-–	InterRAT-Parameters	710
-–	MAC-Parameters	711
-–	MeasAndMobParameters	713
-–	MeasAndMobParametersMRDC	715
-–	MIMO-Layers	716
-–	MIMO-ParametersPerBand	717
-–	ModulationOrder	722
-–	MRDC-Parameters	723
-–	NRDC-Parameters	724
-–	OLPC-SRS-Pos	725
-–	PDCP-Parameters	725
-–	PDCP-ParametersMRDC	726
-–	Phy-Parameters	727
-–	Phy-ParametersMRDC	733
-–	Phy-ParametersSharedSpectrumChAccess	733
-–	PowSav-Parameters	735
-–	ProcessingParameters	735
-–	RAT-Type	736
-–	RF-Parameters	736
-–	RF-ParametersMRDC	741
-–	RLC-Parameters	743
-–	SDAP-Parameters	743
-–	SidelinkParameters	744
-–	SON-Parameters	747
-–	SpatialRelationsSRS-Pos	747
-–	SRS-SwitchingTimeNR	748
-–	SRS-SwitchingTimeEUTRA	748
-–	SupportedBandwidth	748
-–	UE-BasedPerfMeas-Parameters	749
-–	UE-CapabilityRAT-ContainerList	749
-–	UE-CapabilityRAT-RequestList	750
-–	UE-CapabilityRequestFilterCommon	750
-–	UE-CapabilityRequestFilterNR	752
-–	UE-MRDC-Capability	753
-–	UE-NR-Capability	754
-–	SharedSpectrumChAccessParamsPerBand	757
-6.3.4	Other information elements	760
-–	AbsoluteTimeInfo	760
-–	AreaConfiguration	760
-–	BT-NameList	761
-–	EUTRA-AllowedMeasBandwidth	762
-–	EUTRA-MBSFN-SubframeConfigList	762
-–	EUTRA-MultiBandInfoList	763
-–	EUTRA-NS-PmaxList	763
-–	EUTRA-PhysCellId	764
-–	EUTRA-PhysCellIdRange	764
-–	EUTRA-PresenceAntennaPort1	765
-–	EUTRA-Q-OffsetRange	765
-–	IAB-IP-Address	765
-–	IAB-IP-AddressIndex	766
-–	IAB-IP-Usage	766
-–	LoggingDuration	767
-–	LoggingInterval	767
-–	LogMeasResultListBT	767
-–	LogMeasResultListWLAN	768
-–	OtherConfig	769
-–	PhysCellIdUTRA-FDD	773
-–	RRC-TransactionIdentifier	773
-–	Sensor-NameList	773
-–	TraceReference	774
-–	UE-MeasurementsAvailable	774
-–	UTRA-FDD-Q-OffsetRange	775
-–	VisitedCellInfoList	775
-–	WLAN-NameList	776
-6.3.5	Sidelink information elements	777
-–	SL-BWP-Config	777
-–	SL-BWP-ConfigCommon	778
-–	SL-BWP-PoolConfig	778
-–	SL-BWP-PoolConfigCommon	779
-–	SL-CBR-PriorityTxConfigList	780
-–	SL-CBR-CommonTxConfigList	781
-–	SL-ConfigDedicatedNR	782
-–	SL-ConfiguredGrantConfig	784
-–	SL-DestinationIdentity	785
-–	SL-FreqConfig	786
-–	SL-FreqConfigCommon	787
-–	SL-LogicalChannelConfig	788
-–	SL-MeasConfigCommon	790
-–	SL-MeasConfigInfo	791
-–	SL-MeasIdList	792
-–	SL-MeasObjectList	793
-–	SL-PDCP-Config	793
-–	SL-PSSCH-TxConfigList	795
-–	SL-QoS-FlowIdentity	796
-–	SL-QoS-Profile	796
-–	SL-QuantityConfig	798
-–	SL-RadioBearerConfig	798
-–	SL-ReportConfigList	799
-–	SL-ResourcePool	801
-–	SL-RLC-BearerConfig	809
-–	SL-RLC-BearerConfigIndex	810
-–	SL-RLC-Config	810
-–	SL-ScheduledConfig	811
-–	SL-SDAP-Config	812
-–	SL-SyncConfig	813
-–	SL-Thres-RSRP-List	815
-–	SL-TxPower	816
-–	SL-TypeTxSync	816
-–	SL-UE-SelectedConfig	816
-–	SL-ZoneConfig	817
-–	SLRB-Uu-ConfigIndex	818
-6.4	RRC multiplicity and type constraint values	818
-–	Multiplicity and type constraint definitions	818
-–	End of NR-RRC-Definitions	824
-6.5	Short Message	824
-6.6	PC5 RRC messages	825
-6.6.1	General message structure	825
-–	PC5-RRC-Definitions	825
-–	SBCCH-SL-BCH-Message	825
-–	SCCH-Message	826
-–	MasterInformationBlockSidelink	826
-–	MeasurementReportSidelink	827
-–	RRCReconfigurationSidelink	828
-–	RRCReconfigurationCompleteSidelink	831
-–	RRCReconfigurationFailureSidelink	832
-–	UECapabilityEnquirySidelink	833
-–	UECapabilityInformationSidelink	834
-–	End of PC5-RRC-Definitions	835
-7	Variables and constants	836
-7.1	Timers	836
-7.1.1	Timers (Informative)	836
-7.1.2	Timer handling	843
-7.2	Counters	844
-7.3	Constants	844
-7.4	UE variables	844
-–	NR-UE-Variables	844
-–	VarConditionalReconfig	846
-–	VarConnEstFailReport	846
-–	VarLogMeasConfig	847
-–	VarLogMeasReport	847
-–	VarMeasConfig	848
-–	VarMeasConfigSL	848
-–	VarMeasIdleConfig	849
-–	VarMeasIdleReport	849
-–	VarMeasReportList	850
-–	VarMeasReportListSL	850
-–	VarMobilityHistoryReport	851
-–	VarPendingRNA-Update	851
-–	VarRA-Report	851
-–	VarResumeMAC-Input	852
-–	VarRLF-Report	853
-–	VarShortMAC-Input	853
-–	End of NR-UE-Variables	854
-8	Protocol data unit abstract syntax	855
-8.1	General	855
-8.2	Structure of encoded RRC messages	855
-8.3	Basic production	855
-8.4	Extension	855
-8.5	Padding	856
-9	Specified and default radio configurations	856
-9.1	Specified configurations	856
-9.1.1	Logical channel configurations	856
-9.1.1.1	BCCH configuration	856
-9.1.1.2	CCCH configuration	857
-9.1.1.3	PCCH configuration	857
-9.1.1.4	SCCH configuration	857
-9.1.1.5	STCH configuration	859
-9.1.2	Void	859
-9.2	Default radio configurations	859
-9.2.1	Default SRB configurations	859
-9.2.2	Default MAC Cell Group configuration	860
-9.2.3	Default values timers and constants	860
-9.3	Sidelink pre-configured parameters	861
-–	NR-Sidelink-Preconf	861
-–	SL-PreconfigurationNR	861
-–	End of NR-Sidelink-Preconf	863
-10	Generic error handling	864
-10.1	General	864
-10.2	ASN.1 violation or encoding error	864
-10.3	Field set to a not comprehended value	864
-10.4	Mandatory field missing	864
-10.5	Not comprehended field	866
-11	Radio information related interactions between network nodes	867
-11.1	General	867
-11.2	Inter-node RRC messages	867
-11.2.1	General	867
-11.2.2	Message definitions	868
-–	HandoverCommand	868
-–	HandoverPreparationInformation	869
-–	CG-Config	874
-–	CG-ConfigInfo	881
-–	MeasurementTimingConfiguration	891
-–	UERadioPagingInformation	893
-–	UERadioAccessCapabilityInformation	895
-11.2.3	Mandatory information in inter-node RRC messages	895
-11.3	Inter-node RRC information element definitions	897
-11.4	Inter-node RRC multiplicity and type constraint values	897
-–	Multiplicity and type constraints definitions	897
-–	End of NR-InterNodeDefinitions	897
-12	Processing delay requirements for RRC procedures	898
-Annex A (informative):	Guidelines, mainly on use of ASN.1	902
-A.1	Introduction	902
-A.2	Procedural specification	902
-A.2.1	General principles	902
-A.2.2	More detailed aspects	903
-A.3	PDU specification	903
-A.3.1	General principles	903
-A.3.1.1	ASN.1 sections	903
-A.3.1.2	ASN.1 identifier naming conventions	904
-A.3.1.3	Text references using ASN.1 identifiers	906
-A.3.2	High-level message structure	906
-A.3.3	Message definition	907
-A.3.4	Information elements	909
-A.3.5	Fields with optional presence	910
-A.3.6	Fields with conditional presence	911
-A.3.7	Guidelines on use of lists with elements of SEQUENCE type	912
-A.3.8	Guidelines on use of parameterised SetupRelease type	913
-A.3.9	Guidelines on use of ToAddModList and ToReleaseList	914
-A.3.10	Guidelines on use of of lists (without ToAddModList and ToReleaseList)	915
-A.4	Extension of the PDU specifications	916
-A.4.1	General principles to ensure compatibility	916
-A.4.2	Critical extension of messages and fields	916
-A.4.3	Non-critical extension of messages	919
-A.4.3.1	General principles	919
-A.4.3.2	Further guidelines	920
-A.4.3.3	Typical example of evolution of IE with local extensions	921
-A.4.3.4	Typical examples of non critical extension at the end of a message	922
-A.4.3.5	Examples of non-critical extensions not placed at the default extension location	923
-–	ParentIE-WithEM	923
-–	ChildIE1-WithoutEM	924
-–	ChildIE2-WithoutEM	925
-A.5	Guidelines regarding inclusion of transaction identifiers in RRC messages	928
-A.6	Guidelines regarding use of need codes	929
-A.7	Guidelines regarding use of conditions	929
-A.8	Miscellaneous	930
-Annex B (informative):	RRC Information	931
-B.1	Protection of RRC messages	931
-B.2	Description of BWP configuration options	933
-Annex C (normative):	List of CRs Containing Early Implementable Features and Corrections	935
-Annex D (normative):	UE requirements on ASN.1 comprehension	936
-Annex E (informative): Change history	938
+–	ULDedicatedMessageSegment	325
+–	ULInformationTransfer	326
+–	ULInformationTransferIRAT	327
+–	ULInformationTransferMRDC	328
+6.3	RRC information elements	329
+6.3.0	Parameterized types	329
+–	SetupRelease	329
+6.3.1	System information blocks	329
+–	SIB2	329
+–	SIB3	334
+–	SIB4	335
+–	SIB5	340
+–	SIB6	343
+–	SIB7	343
+–	SIB8	344
+–	SIB9	345
+–	SIB10	346
+–	SIB11	347
+–	SIB12	347
+–	SIB13	349
+–	SIB14	350
+6.3.1a	Positioning System information blocks	351
+–	PosSystemInformation-r16-IEs	351
+–	PosSI-SchedulingInfo	352
+–	SIBpos	353
+6.3.2	Radio resource control information elements	354
+–	AdditionalSpectrumEmission	354
+–	Alpha	354
+–	AMF-Identifier	355
+–	ARFCN-ValueEUTRA	355
+–	ARFCN-ValueNR	355
+–	ARFCN-ValueUTRA-FDD	356
+–	AvailabilityCombinationsPerCell	356
+–	AvailabilityIndicator	357
+–	BAP-RoutingID	358
+–	BeamFailureRecoveryConfig	358
+–	BeamFailureRecoverySCellConfig	361
+–	BetaOffsets	362
+–	BH-LogicalChannelIdentity	363
+–	BH-LogicalChannelIdentity-Ext	363
+–	BH-RLC-ChannelConfig	364
+–	BH-RLC-ChannelID	365
+–	BSR-Config	365
+–	BWP	366
+–	BWP-Downlink	367
+–	BWP-DownlinkCommon	367
+–	BWP-DownlinkDedicated	368
+–	BWP-Id	369
+–	BWP-Uplink	370
+–	BWP-UplinkCommon	370
+–	BWP-UplinkDedicated	371
+–	CellAccessRelatedInfo	374
+–	CellAccessRelatedInfo-EUTRA-5GC	375
+–	CellAccessRelatedInfo-EUTRA-EPC	376
+–	CellGroupConfig	376
+–	CellGroupId	382
+–	CellIdentity	382
+–	CellReselectionPriority	382
+–	CellReselectionSubPriority	383
+–	CGI-InfoEUTRA	383
+–	CGI-InfoEUTRALogging	383
+–	CGI-InfoNR	384
+–	CGI-Info-Logging	385
+–	CLI-RSSI-Range	386
+–	CodebookConfig	386
+–	CommonLocationInfo	389
+–	CondReconfigId	390
+–	CondReconfigToAddModList	391
+–	ConditionalReconfiguration	391
+–	ConfiguredGrantConfig	392
+–	ConfiguredGrantConfigIndex	398
+–	ConfiguredGrantConfigIndexMAC	399
+–	ConnEstFailureControl	399
+–	ControlResourceSet	400
+–	ControlResourceSetId	403
+–	ControlResourceSetZero	403
+–	CrossCarrierSchedulingConfig	403
+–	CSI-AperiodicTriggerStateList	405
+–	CSI-FrequencyOccupation	407
+–	CSI-IM-Resource	407
+–	CSI-IM-ResourceId	409
+–	CSI-IM-ResourceSet	409
+–	CSI-IM-ResourceSetId	409
+–	CSI-MeasConfig	410
+–	CSI-ReportConfig	411
+–	CSI-ReportConfigId	417
+–	CSI-ResourceConfig	417
+–	CSI-ResourceConfigId	418
+–	CSI-ResourcePeriodicityAndOffset	419
+–	CSI-RS-ResourceConfigMobility	419
+–	CSI-RS-ResourceMapping	422
+–	CSI-SemiPersistentOnPUSCH-TriggerStateList	423
+–	CSI-SSB-ResourceSet	424
+–	CSI-SSB-ResourceSetId	424
+–	DedicatedNAS-Message	424
+–	DMRS-DownlinkConfig	425
+–	DMRS-UplinkConfig	426
+–	DownlinkConfigCommon	428
+–	DownlinkConfigCommonSIB	429
+–	DownlinkPreemption	432
+–	DRB-Identity	433
+–	DRX-Config	433
+–	DRX-ConfigSecondaryGroup	435
+–	FilterCoefficient	436
+–	FreqBandIndicatorNR	436
+–	FrequencyInfoDL	437
+–	FrequencyInfoDL-SIB	437
+–	FrequencyInfoUL	438
+–	FrequencyInfoUL-SIB	439
+–	HighSpeedConfig	440
+–	Hysteresis	441
+–	InvalidSymbolPattern	441
+–	I-RNTI-Value	442
+–	LBT-FailureRecoveryConfig	442
+–	LocationInfo	443
+–	LocationMeasurementInfo	443
+–	LogicalChannelConfig	445
+–	LogicalChannelIdentity	448
+–	MAC-CellGroupConfig	448
+–	MeasConfig	450
+–	MeasGapConfig	452
+–	MeasGapSharingConfig	454
+–	MeasId	455
+–	MeasIdleConfig	455
+–	MeasIdToAddModList	459
+–	MeasObjectCLI	459
+–	MeasObjectEUTRA	462
+–	MeasObjectId	464
+–	MeasObjectNR	464
+–	MeasObjectNR-SL	469
+–	MeasObjectToAddModList	470
+–	MeasObjectUTRA-FDD	470
+–	MeasResultCellListSFTD-NR	471
+–	MeasResultCellListSFTD-EUTRA	472
+–	MeasResults	472
+–	MeasResult2EUTRA	478
+–	MeasResult2NR	478
+–	MeasResultIdleEUTRA	478
+–	MeasResultIdleNR	479
+–	MeasResultSCG-Failure	481
+–	MeasResultsSL	481
+–	MeasTriggerQuantityEUTRA	482
+–	MobilityStateParameters	483
+–	MsgA-ConfigCommon	483
+–	MsgA-PUSCH-Config	484
+–	MultiFrequencyBandListNR	487
+–	MultiFrequencyBandListNR-SIB	488
+–	NeedForGapsConfigNR	488
+–	NextHopChainingCount	490
+–	NG-5G-S-TMSI	490
+–	NPN-Identity	491
+–	NPN-IdentityInfoList	492
+–	NR-NS-PmaxList	493
+–	NZP-CSI-RS-Resource	493
+–	NZP-CSI-RS-ResourceId	495
+–	NZP-CSI-RS-ResourceSet	495
+–	NZP-CSI-RS-ResourceSetId	496
+–	P-Max	496
+–	PCI-List	497
+–	PCI-Range	497
+–	PCI-RangeElement	497
+–	PCI-RangeIndex	498
+–	PCI-RangeIndexList	498
+–	PDCCH-Config	499
+–	PDCCH-ConfigCommon	500
+–	PDCCH-ConfigSIB1	502
+–	PDCCH-ServingCellConfig	503
+–	PDCP-Config	504
+–	PDSCH-Config	510
+–	PDSCH-ConfigCommon	515
+–	PDSCH-ServingCellConfig	515
+–	PDSCH-TimeDomainResourceAllocationList	517
+–	PHR-Config	518
+–	PhysCellId	520
+–	PhysicalCellGroupConfig	520
+–	PLMN-Identity	525
+–	PLMN-IdentityInfoList	525
+–	PLMN-IdentityList2	526
+–	PRB-Id	527
+–	PTRS-DownlinkConfig	527
+–	PTRS-UplinkConfig	528
+–	PUCCH-Config	529
+–	PUCCH-ConfigCommon	535
+–	PUCCH-ConfigurationList	536
+–	PUCCH-PathlossReferenceRS-Id	537
+–	PUCCH-PowerControl	537
+–	PUCCH-SpatialRelationInfo	539
+–	PUCCH-SpatialRelationInfo-Id	540
+–	PUCCH-TPC-CommandConfig	540
+–	PUSCH-Config	541
+–	PUSCH-ConfigCommon	547
+–	PUSCH-PowerControl	548
+–	PUSCH-ServingCellConfig	552
+–	PUSCH-TimeDomainResourceAllocationList	553
+–	PUSCH-TPC-CommandConfig	555
+–	Q-OffsetRange	555
+–	Q-QualMin	556
+–	Q-RxLevMin	556
+–	QuantityConfig	556
+–	RACH-ConfigCommon	558
+–	RACH-ConfigCommonTwoStepRA	561
+–	RACH-ConfigDedicated	564
+–	RACH-ConfigGeneric	568
+–	RACH-ConfigGenericTwoStepRA	569
+–	RA-Prioritization	571
+–	RadioBearerConfig	571
+–	RadioLinkMonitoringConfig	575
+–	RadioLinkMonitoringRS-Id	576
+–	RAN-AreaCode	576
+–	RateMatchPattern	576
+–	RateMatchPatternId	578
+–	RateMatchPatternLTE-CRS	579
+–	ReferenceTimeInfo	579
+–	RejectWaitTime	581
+–	RepetitionSchemeConfig	581
+–	ReportConfigId	582
+–	ReportConfigInterRAT	582
+–	ReportConfigNR	586
+–	ReportConfigNR-SL	595
+–	ReportConfigToAddModList	596
+–	ReportInterval	597
+–	ReselectionThreshold	597
+–	ReselectionThresholdQ	598
+–	ResumeCause	598
+–	RLC-BearerConfig	598
+–	RLC-Config	599
+–	RLF-TimersAndConstants	602
+–	RNTI-Value	603
+–	RSRP-Range	603
+–	RSRQ-Range	603
+–	RSSI-Range	604
+–	SCellIndex	604
+–	SchedulingRequestConfig	604
+–	SchedulingRequestId	605
+–	SchedulingRequestResourceConfig	606
+–	SchedulingRequestResourceId	607
+–	ScramblingId	607
+–	SCS-SpecificCarrier	608
+–	SDAP-Config	609
+–	SearchSpace	610
+–	SearchSpaceId	615
+–	SearchSpaceZero	615
+–	SecurityAlgorithmConfig	616
+–	SemiStaticChannelAccessConfig	617
+–	Sensor-LocationInfo	617
+–	ServCellIndex	618
+–	ServingCellConfig	618
+–	ServingCellConfigCommon	627
+–	ServingCellConfigCommonSIB	630
+–	ShortI-RNTI-Value	631
+–	ShortMAC-I	632
+–	SINR-Range	632
+–	SI-RequestConfig	632
+–	SI-SchedulingInfo	634
+–	SK-Counter	635
+–	SlotFormatCombinationsPerCell	635
+–	SlotFormatIndicator	637
+–	S-NSSAI	640
+–	SpeedStateScaleFactors	640
+–	SPS-Config	641
+–	SPS-ConfigIndex	642
+–	SPS-PUCCH-AN	643
+–	SPS-PUCCH-AN-List	643
+–	SRB-Identity	643
+–	SRS-CarrierSwitching	644
+–	SRS-Config	645
+–	SRS-RSRP-Range	656
+–	SRS-TPC-CommandConfig	656
+–	SSB-Index	657
+–	SSB-MTC	658
+–	SSB-PositionQCL-Relation	659
+–	SSB-ToMeasure	660
+–	SS-RSSI-Measurement	660
+–	SubcarrierSpacing	661
+–	TAG-Config	661
+–	TCI-State	662
+–	TCI-StateId	663
+–	TDD-UL-DL-ConfigCommon	663
+–	TDD-UL-DL-ConfigDedicated	664
+–	TrackingAreaCode	666
+–	T-Reselection	667
+–	TimeToTrigger	667
+–	UAC-BarringInfoSetIndex	667
+–	UAC-BarringInfoSetList	668
+–	UAC-BarringPerCatList	669
+–	UAC-BarringPerPLMN-List	669
+–	UE-TimersAndConstants	670
+–	UL-DelayValueConfig	670
+–	UplinkCancellation	671
+–	UplinkConfigCommon	673
+–	UplinkConfigCommonSIB	673
+–	UplinkTxDirectCurrentList	674
+–	UplinkTxDirectCurrentTwoCarrierList	675
+–	ZP-CSI-RS-Resource	677
+–	ZP-CSI-RS-ResourceSet	677
+–	ZP-CSI-RS-ResourceSetId	678
+6.3.3	UE capability information elements	678
+–	AccessStratumRelease	678
+–	BandCombinationList	679
+–	BandCombinationListSidelinkEUTRA-NR	683
+–	CA-BandwidthClassEUTRA	684
+–	CA-BandwidthClassNR	685
+–	CA-ParametersEUTRA	685
+–	CA-ParametersNR	686
+–	CA-ParametersNRDC	689
+–	CarrierAggregationVariant	690
+–	CodebookParameters	691
+–	FeatureSetCombination	695
+–	FeatureSetCombinationId	696
+–	FeatureSetDownlink	696
+–	FeatureSetDownlinkId	700
+–	FeatureSetDownlinkPerCC	700
+–	FeatureSetDownlinkPerCC-Id	701
+–	FeatureSetEUTRA-DownlinkId	701
+–	FeatureSetEUTRA-UplinkId	702
+–	FeatureSets	702
+–	FeatureSetUplink	703
+–	FeatureSetUplinkId	708
+–	FeatureSetUplinkPerCC	708
+–	FeatureSetUplinkPerCC-Id	709
+–	FreqBandIndicatorEUTRA	709
+–	FreqBandList	709
+–	FreqSeparationClass	710
+–	FreqSeparationClassDL-Only	710
+–	HighSpeedParameters	711
+–	IMS-Parameters	711
+–	InterRAT-Parameters	712
+–	MAC-Parameters	713
+–	MeasAndMobParameters	715
+–	MeasAndMobParametersMRDC	717
+–	MIMO-Layers	718
+–	MIMO-ParametersPerBand	719
+–	ModulationOrder	724
+–	MRDC-Parameters	725
+–	NRDC-Parameters	726
+–	OLPC-SRS-Pos	727
+–	PDCP-Parameters	727
+–	PDCP-ParametersMRDC	728
+–	Phy-Parameters	729
+–	Phy-ParametersMRDC	735
+–	Phy-ParametersSharedSpectrumChAccess	735
+–	PowSav-Parameters	737
+–	ProcessingParameters	737
+–	RAT-Type	738
+–	RF-Parameters	738
+–	RF-ParametersMRDC	743
+–	RLC-Parameters	745
+–	SDAP-Parameters	745
+–	SidelinkParameters	746
+–	SON-Parameters	749
+–	SpatialRelationsSRS-Pos	749
+–	SRS-SwitchingTimeNR	750
+–	SRS-SwitchingTimeEUTRA	750
+–	SupportedBandwidth	750
+–	UE-BasedPerfMeas-Parameters	751
+–	UE-CapabilityRAT-ContainerList	751
+–	UE-CapabilityRAT-RequestList	752
+–	UE-CapabilityRequestFilterCommon	752
+–	UE-CapabilityRequestFilterNR	754
+–	UE-MRDC-Capability	755
+–	UE-NR-Capability	756
+–	SharedSpectrumChAccessParamsPerBand	759
+6.3.4	Other information elements	762
+–	AbsoluteTimeInfo	762
+–	AreaConfiguration	762
+–	BT-NameList	763
+–	EUTRA-AllowedMeasBandwidth	764
+–	EUTRA-MBSFN-SubframeConfigList	764
+–	EUTRA-MultiBandInfoList	765
+–	EUTRA-NS-PmaxList	765
+–	EUTRA-PhysCellId	766
+–	EUTRA-PhysCellIdRange	766
+–	EUTRA-PresenceAntennaPort1	767
+–	EUTRA-Q-OffsetRange	767
+–	IAB-IP-Address	767
+–	IAB-IP-AddressIndex	768
+–	IAB-IP-Usage	768
+–	LoggingDuration	769
+–	LoggingInterval	769
+–	LogMeasResultListBT	769
+–	LogMeasResultListWLAN	770
+–	OtherConfig	771
+–	PhysCellIdUTRA-FDD	775
+–	RRC-TransactionIdentifier	775
+–	Sensor-NameList	775
+–	TraceReference	776
+–	UE-MeasurementsAvailable	776
+–	UTRA-FDD-Q-OffsetRange	777
+–	VisitedCellInfoList	777
+–	WLAN-NameList	778
+6.3.5	Sidelink information elements	779
+–	SL-BWP-Config	779
+–	SL-BWP-ConfigCommon	780
+–	SL-BWP-PoolConfig	780
+–	SL-BWP-PoolConfigCommon	781
+–	SL-CBR-PriorityTxConfigList	782
+–	SL-CBR-CommonTxConfigList	783
+–	SL-ConfigDedicatedNR	784
+–	SL-ConfiguredGrantConfig	786
+–	SL-DestinationIdentity	787
+–	SL-FreqConfig	788
+–	SL-FreqConfigCommon	789
+–	SL-LogicalChannelConfig	790
+–	SL-MeasConfigCommon	792
+–	SL-MeasConfigInfo	793
+–	SL-MeasIdList	794
+–	SL-MeasObjectList	795
+–	SL-PDCP-Config	795
+–	SL-PSSCH-TxConfigList	797
+–	SL-QoS-FlowIdentity	798
+–	SL-QoS-Profile	798
+–	SL-QuantityConfig	800
+–	SL-RadioBearerConfig	800
+–	SL-ReportConfigList	801
+–	SL-ResourcePool	803
+–	SL-RLC-BearerConfig	811
+–	SL-RLC-BearerConfigIndex	812
+–	SL-RLC-Config	812
+–	SL-ScheduledConfig	813
+–	SL-SDAP-Config	814
+–	SL-SyncConfig	815
+–	SL-Thres-RSRP-List	817
+–	SL-TxPower	818
+–	SL-TypeTxSync	818
+–	SL-UE-SelectedConfig	818
+–	SL-ZoneConfig	819
+–	SLRB-Uu-ConfigIndex	820
+6.4	RRC multiplicity and type constraint values	820
+–	Multiplicity and type constraint definitions	820
+–	End of NR-RRC-Definitions	826
+6.5	Short Message	826
+6.6	PC5 RRC messages	826
+6.6.1	General message structure	826
+–	PC5-RRC-Definitions	826
+–	SBCCH-SL-BCH-Message	827
+–	SCCH-Message	828
+–	MasterInformationBlockSidelink	828
+–	MeasurementReportSidelink	829
+–	RRCReconfigurationSidelink	830
+–	RRCReconfigurationCompleteSidelink	833
+–	RRCReconfigurationFailureSidelink	834
+–	UECapabilityEnquirySidelink	835
+–	UECapabilityInformationSidelink	836
+–	End of PC5-RRC-Definitions	837
+7	Variables and constants	838
+7.1	Timers	838
+7.1.1	Timers (Informative)	838
+7.1.2	Timer handling	845
+7.2	Counters	846
+7.3	Constants	846
+7.4	UE variables	846
+–	NR-UE-Variables	846
+–	VarConditionalReconfig	848
+–	VarConnEstFailReport	848
+–	VarLogMeasConfig	849
+–	VarLogMeasReport	849
+–	VarMeasConfig	850
+–	VarMeasConfigSL	850
+–	VarMeasIdleConfig	851
+–	VarMeasIdleReport	851
+–	VarMeasReportList	852
+–	VarMeasReportListSL	852
+–	VarMobilityHistoryReport	853
+–	VarPendingRNA-Update	853
+–	VarRA-Report	853
+–	VarResumeMAC-Input	854
+–	VarRLF-Report	855
+–	VarShortMAC-Input	855
+–	End of NR-UE-Variables	856
+8	Protocol data unit abstract syntax	857
+8.1	General	857
+8.2	Structure of encoded RRC messages	857
+8.3	Basic production	857
+8.4	Extension	857
+8.5	Padding	858
+9	Specified and default radio configurations	858
+9.1	Specified configurations	858
+9.1.1	Logical channel configurations	858
+9.1.1.1	BCCH configuration	858
+9.1.1.2	CCCH configuration	859
+9.1.1.3	PCCH configuration	859
+9.1.1.4	SCCH configuration	859
+9.1.1.5	STCH configuration	861
+9.1.2	Void	861
+9.2	Default radio configurations	861
+9.2.1	Default SRB configurations	861
+9.2.2	Default MAC Cell Group configuration	862
+9.2.3	Default values timers and constants	862
+9.3	Sidelink pre-configured parameters	863
+–	NR-Sidelink-Preconf	863
+–	SL-PreconfigurationNR	863
+–	End of NR-Sidelink-Preconf	865
+10	Generic error handling	866
+10.1	General	866
+10.2	ASN.1 violation or encoding error	866
+10.3	Field set to a not comprehended value	866
+10.4	Mandatory field missing	866
+10.5	Not comprehended field	868
+11	Radio information related interactions between network nodes	869
+11.1	General	869
+11.2	Inter-node RRC messages	869
+11.2.1	General	869
+11.2.2	Message definitions	870
+–	HandoverCommand	870
+–	HandoverPreparationInformation	871
+–	CG-Config	876
+–	CG-ConfigInfo	883
+–	MeasurementTimingConfiguration	893
+–	UERadioPagingInformation	895
+–	UERadioAccessCapabilityInformation	897
+11.2.3	Mandatory information in inter-node RRC messages	897
+11.3	Inter-node RRC information element definitions	899
+11.4	Inter-node RRC multiplicity and type constraint values	899
+–	Multiplicity and type constraints definitions	899
+–	End of NR-InterNodeDefinitions	899
+12	Processing delay requirements for RRC procedures	900
+Annex A (informative):	Guidelines, mainly on use of ASN.1	904
+A.1	Introduction	904
+A.2	Procedural specification	905
+A.2.1	General principles	905
+A.2.2	More detailed aspects	905
+A.3	PDU specification	905
+A.3.1	General principles	905
+A.3.1.1	ASN.1 sections	905
+A.3.1.2	ASN.1 identifier naming conventions	906
+A.3.1.3	Text references using ASN.1 identifiers	908
+A.3.2	High-level message structure	909
+A.3.3	Message definition	910
+A.3.4	Information elements	912
+A.3.5	Fields with optional presence	913
+A.3.6	Fields with conditional presence	914
+A.3.7	Guidelines on use of lists with elements of SEQUENCE type	915
+A.3.8	Guidelines on use of parameterised SetupRelease type	915
+A.3.9	Guidelines on use of ToAddModList and ToReleaseList	917
+A.3.10	Guidelines on use of of lists (without ToAddModList and ToReleaseList)	918
+A.4	Extension of the PDU specifications	919
+A.4.1	General principles to ensure compatibility	919
+A.4.2	Critical extension of messages and fields	919
+A.4.3	Non-critical extension of messages	922
+A.4.3.1	General principles	922
+A.4.3.2	Further guidelines	923
+A.4.3.3	Typical example of evolution of IE with local extensions	924
+A.4.3.4	Typical examples of non critical extension at the end of a message	925
+A.4.3.5	Examples of non-critical extensions not placed at the default extension location	926
+–	ParentIE-WithEM	926
+–	ChildIE1-WithoutEM	926
+–	ChildIE2-WithoutEM	927
+A.5	Guidelines regarding inclusion of transaction identifiers in RRC messages	931
+A.6	Guidelines regarding use of need codes	932
+A.7	Guidelines regarding use of conditions	932
+A.8	Miscellaneous	933
+Annex B (informative):	RRC Information	934
+B.1	Protection of RRC messages	934
+B.2	Description of BWP configuration options	936
+Annex C (normative):	List of CRs Containing Early Implementable Features and Corrections	938
+Annex D (normative):	UE requirements on ASN.1 comprehension	939
+Annex E (informative): Change history	941
 Foreword
 This Technical Specification has been produced by the 3rd Generation Partnership Project (3GPP).
 The contents of the present document are subject to continuing work within the TSG and may change following formal TSG approval. Should the TSG modify the contents of the present document, it will be re-released by the TSG with an identifying change of release date and an increase in version number as follows:
@@ -1452,13 +1452,15 @@ The UE shall:
 1>	delete any stored version of a SIB after 3 hours from the moment it was successfully confirmed as valid;
 1>	for each stored version of a SIB:
 2>	if the areaScope is associated and its value for the stored version of the SIB is the same as the value received in the si-SchedulingInfo for that SIB from the serving cell:
-3>	if the UE is NPN capable and the cell is an NPN-only cell and the first NPN identity included in the NPN-IdentityInfoList, the systemInformationAreaID and the valueTag that are included in the si-SchedulingInfo for the SIB received from the serving cell are identical to the NPN identity, the systemInformationAreaID and the valueTag associated with the stored version of that SIB:
-4>	consider the stored SIB as valid for the cell;
+3>	if the UE is NPN capable and the cell is an NPN-only cell:
+4>	if the first NPN identity included in the NPN-IdentityInfoList, the systemInformationAreaID and the valueTag that are included in the si-SchedulingInfo for the SIB received from the serving cell are identical to the NPN identity, the systemInformationAreaID and the valueTag associated with the stored version of that SIB:
+5>	consider the stored SIB as valid for the cell;
 3>	else if the first PLMN-Identity included in the PLMN-IdentityInfoList, the systemInformationAreaID and the valueTag that are included in the si-SchedulingInfo for the SIB received from the serving cell are identical to the PLMN-Identity, the systemInformationAreaID and the valueTag associated with the stored version of that SIB:
 4>	consider the stored SIB as valid for the cell;
 2>	if the areaScope is not present for the stored version of the SIB and the areaScope value is not included in the si-SchedulingInfo for that SIB from the serving cell:
-3>	if the UE is NPN capable and the cell is an NPN-only cell and the first NPN identity in the NPN-IdentityInfoList, the cellIdentity and valueTag that are included in the si-SchedulingInfo for the SIB received from the serving cell are identical to the NPN identity, the cellIdentity and the valueTag associated with the stored version of that SIB:
-4>	consider the stored SIB as valid for the cell;
+3>	if the UE is NPN capable and the cell is an NPN-only cell:
+4>	if the first NPN identity in the NPN-IdentityInfoList, the cellIdentity and valueTag that are included in the si-SchedulingInfo for the SIB received from the serving cell are identical to the NPN identity, the cellIdentity and the valueTag associated with the stored version of that SIB:
+5>	consider the stored SIB as valid for the cell;
 3>	else if the first PLMN-Identity in the PLMN-IdentityInfoList, the cellIdentity and valueTag that are included in the si-SchedulingInfo for the SIB received from the serving cell are identical to the PLMN-Identity, the cellIdentity and the valueTag associated with the stored version of that SIB:
 4>	consider the stored SIB as valid for the cell;
 1>	for each stored version of a posSIB:
@@ -1627,11 +1629,7 @@ Upon receiving the MIB the UE shall:
 1>	if the UE is in RRC_IDLE or in RRC_INACTIVE, or if the UE is in RRC_CONNECTED while T311 is running:
 2>	if the cellBarred in the acquired MIB is set to barred:
 3>	consider the cell as barred in accordance with TS 38.304 [20];
-3>	if intraFreqReselection is set to notAllowed; and
-3>	if the cell operates in licensed spectrum, or the cell belongs to a PLMN which is indicated as being equivalent to the registered PLMN or the selected PLMN of the UE, or the cell belongs to the registered SNPN or the selected SNPN of the UE:
-4>	consider cell re-selection to other cells on the same frequency as the barred cell as not allowed, as specified in TS 38.304 [20].
-3>	else:
-4>	consider cell re-selection to other cells on the same frequency as the barred cell as allowed, as specified in TS 38.304 [20].
+3>	perform cell re-selection to other cells on the same frequency as the barred cell as specified in TS 38.304 [20];
 2>	else:
 3>	apply the received systemFrameNumber, pdcch-ConfigSIB1, subCarrierSpacingCommon, ssb-SubcarrierOffset and dmrs-TypeA-Position.
 5.2.2.4.2	Actions upon reception of the SIB1
@@ -1664,10 +1662,7 @@ NOTE:	Void.
 2>	if frequencyShift7p5khz is present and the UE supports corresponding 7.5kHz frequency shift on this band; or frequencyShift7p5khz is not present:
 3>	if trackingAreaCode is not provided for the selected PLMN nor the registered PLMN nor PLMN of the equivalent PLMN list:
 4>	consider the cell as barred in accordance with TS 38.304 [20];
-4>	if intraFreqReselection is set to notAllowed:
-5>	consider cell re-selection to other cells on the same frequency as the barred cell as not allowed, as specified in TS 38.304 [20];
-4>	else:
-5>	consider cell re-selection to other cells on the same frequency as the barred cell as allowed, as specified in TS 38.304 [20];
+4>	perform cell re-selection to other cells on the same frequency as the barred cell as specified in TS 38.304 [20];
 3>	else if UE is IAB-MT and if iab-Support is not provided for the selected PLMN nor the registered PLMN nor PLMN of the equivalent PLMN list nor the selected SNPN nor the registered SNPN:
 4>	consider the cell as barred for IAB-MT in accordance with TS 38.304 [20];
 3>	else:
@@ -1863,14 +1858,11 @@ No UE requirements related to the contents of the SIBpos apply other than those 
 The UE shall:
 1>	if in RRC_IDLE or in RRC_INACTIVE or in RRC_CONNECTED while T311 is running:
 2>	if the UE is unable to acquire the MIB:
-3>	consider the cell as barred in accordance with TS 38.304 [20]; and
+3>	consider the cell as barred in accordance with TS 38.304 [20];
 3>	perform barring as if intraFreqReselection is set to allowed;
 2>	else if the UE is unable to acquire the SIB1:
-3>	consider the cell as barred in accordance with TS 38.304 [20].
-3>	if the cell operates in licensed spectrum and intraFreqReselection in MIB is set to notAllowed:
-4>	consider cell re-selection to other cells on the same frequency as the barred cell as not allowed, as specified in TS 38.304 [20].
-3>	else:
-4>	consider cell re-selection to other cells on the same frequency as the barred cell as allowed, as specified in TS 38.304 [20].
+3>	consider the cell as barred in accordance with TS 38.304 [20];
+3>	perform cell re-selection to other cells on the same frequency as the barred cell as specified in TS 38.304 [20].
 5.3	Connection control
 5.3.1	Introduction
 5.3.1.1	RRC connection control
@@ -1880,7 +1872,7 @@ The release of the RRC connection normally is initiated by the network. The proc
 The suspension of the RRC connection is initiated by the network. When the RRC connection is suspended, the UE stores the UE Inactive AS context and any configuration received from the network, and transits to RRC_INACTIVE state. The RRC message to suspend the RRC connection is integrity protected and ciphered.
 The resumption of a suspended RRC connection is initiated by upper layers when the UE needs to transit from RRC_INACTIVE state to RRC_CONNECTED state or by RRC layer to perform a RNA update or by RAN paging from NG-RAN. When the RRC connection is resumed, network configures the UE according to the RRC connection resume procedure based on the stored UE Inactive AS context and any RRC configuration received from the network. The RRC connection resume procedure re-activates AS security and re-establishes SRB(s) and DRB(s).
 In response to a request to resume the RRC connection, the network may resume the suspended RRC connection and send UE to RRC_CONNECTED, or reject the request to resume and send UE to RRC_INACTIVE (with a wait timer), or directly re-suspend the RRC connection and send UE to RRC_INACTIVE, or directly release the RRC connection and send UE to RRC_IDLE, or instruct the UE to initiate NAS level recovery (in this case the network sends an RRC setup message).
-NOTE:	In case the UE receives the configurations for NR sidelink communication via the E-UTRA, the configurations for NR sidelink communication in SIB12 and sl-ConfigDedicatedNR within RRCReconfiguration used in subclause 5.3 are provided by the configurations in SystemInformationBlockType28 and sl-ConfigDedicatedNR within RRCConnectionReconfiguration as specified in TS 36.331[10], respectively.
+NOTE:	In case the UE receives the configurations for NR sidelink communication via the E-UTRA, the configurations for NR sidelink communication in SIB12 and sl-ConfigDedicatedNR within RRCReconfiguration used in subclause 5.3 are provided by the configurations in SystemInformationBlockType28 and sl-ConfigDedicatedForNR within RRCConnectionReconfiguration as specified in TS 36.331[10], respectively.
 5.3.1.2	AS Security
 AS security comprises of the integrity protection and ciphering of RRC signalling (SRBs) and user data (DRBs).
 RRC handles the configuration of the AS security parameters which are part of the AS configuration: the integrity protection algorithm, the ciphering algorithm, if integrity protection and/or ciphering is enabled for a DRB and two parameters, namely the keySetChangeIndicator and the nextHopChainingCount, which are used by the UE to determine the AS security keys upon reconfiguration with sync (with key change), connection re-establishment and/or connection resume.
@@ -2010,7 +2002,7 @@ The UE shall perform the following actions upon reception of the RRCSetup:
 2>	if upper layers selected an SNPN or a PLMN and in case of PLMN UE is either allowed or instructed to access the PLMN via a cell for which at least one CAG ID is broadcast:
 3>	set the selectedPLMN-Identity from the npn-IdentityInfoList;
 2>	else:
-3>	set the selectedPLMN-Identity to the PLMN selected by upper layers from the plmn-IdentityList;
+3>	set the selectedPLMN-Identity to the PLMN selected by upper layers from the plmn-IdentityInfoList;
 2>	if upper layers provide the 'Registered AMF':
 3>	include and set the registeredAMF as follows:
 4>	if the PLMN identity of the 'Registered AMF' is different from the PLMN selected by the upper layers:
@@ -2065,7 +2057,7 @@ NOTE 1:	When performing cell selection, if no suitable or acceptable cell can be
 3>	reset the numberOfConnFail to 0;
 2>	clear the content included in VarConnEstFailReport except for the numberOfConnFail, if any;
 2>	store the following connection establishment failure information in the VarConnEstFailReport by setting its fields as follows:
-3>	set the plmn-Identity to the PLMN selected by upper layers (see TS 24.501 [23]) from the PLMN(s) included in the plmn-IdentityList in SIB1;
+3>	set the plmn-Identity to the PLMN selected by upper layers (see TS 24.501 [23]) from the PLMN(s) included in the plmn-IdentityInfoList in SIB1;
 3>	set the measResultFailedCell to include the global cell identity, tracking area code, the cell level and SS/PBCH block level RSRP, and RSRQ, and SS/PBCH block indexes, of the failed cell based on the available SSB measurements collected up to the moment the UE detected connection establishment failure;
 3>	if available, set the measResultNeighCells, in order of decreasing ranking-criterion as used for cell re-selection, to include neighbouring cell measurements for at most the following number of neighbouring cells: 6 intra-frequency and 3 inter-frequency neighbours per frequency as well as 3 inter-RAT neighbours, per frequency/ set of frequencies per RAT and according to the following:
 4>	for each neighbour cell included, include the optional fields that are available;
@@ -2230,17 +2222,18 @@ NOTE 0b:	It is expected that the reportUplinkTxDirectCurrentTwoCarrier is only r
 3>	include in the eutra-SCG-Response the E-UTRA RRCConnectionReconfigurationComplete message in accordance with TS 36.331 [10] clause 5.3.5.3;
 2> if the RRCReconfiguration message includes the mrdc-SecondaryCellGroupConfig with mrdc-SecondaryCellGroup set to nr-SCG:
 3>	include in the nr-SCG-Response the RRCReconfigurationComplete message;
-2>	if the UE has logged measurements available for NR and if the RPLMN is included in plmn-IdentityList stored in VarLogMeasReport:
-3>	include the logMeasAvailable in the RRCReconfigurationComplete message;
-3>	if Bluetooth measurement results are included in the logged measurements the UE has available for NR:
-4>	include the logMeasAvailableBT in the RRCReconfigurationComplete message;
-3>	if WLAN measurement results are included in the logged measurements the UE has available for NR:
-4>	include the logMeasAvailableWLAN in the RRCReconfigurationComplete message;
-2>	if the UE has connection establishment failure or connection resume failure information available in VarConnEstFailReport and if the RPLMN is equal to plmn-Identity stored in VarConnEstFailReport:
-3>	include connEstFailInfoAvailable in the RRCReconfigurationComplete message;
-2>	if the UE has radio link failure or handover failure information available in VarRLF-Report and if the RPLMN is included in plmn-IdentityList stored in VarRLF-Report; or
-2>	if the UE has radio link failure or handover failure information available in VarRLF-Report of TS 36.331 [10] and if the UE is capable of cross-RAT RLF reporting and if the RPLMN is included in plmn-IdentityList stored in VarRLF-Report of TS 36.331 [10]:
-3>	include rlf-InfoAvailable in the RRCReconfigurationComplete message;
+2>	if the RRCReconfiguration includes the reconfigurationWithSync in spCellConfig of an MCG:
+3>	if the UE has logged measurements available for NR and if the RPLMN is included in plmn-IdentityList stored in VarLogMeasReport:
+4>	include the logMeasAvailable in the RRCReconfigurationComplete message;
+4>	if Bluetooth measurement results are included in the logged measurements the UE has available for NR:
+5>	include the logMeasAvailableBT in the RRCReconfigurationComplete message;
+4>	if WLAN measurement results are included in the logged measurements the UE has available for NR:
+5>	include the logMeasAvailableWLAN in the RRCReconfigurationComplete message;
+3>	if the UE has connection establishment failure or connection resume failure information available in VarConnEstFailReport and if the RPLMN is equal to plmn-Identity stored in VarConnEstFailReport:
+4>	include connEstFailInfoAvailable in the RRCReconfigurationComplete message;
+3>	if the UE has radio link failure or handover failure information available in VarRLF-Report and if the RPLMN is included in plmn-IdentityList stored in VarRLF-Report; or
+3>	if the UE has radio link failure or handover failure information available in VarRLF-Report of TS 36.331 [10] and if the UE is capable of cross-RAT RLF reporting and if the RPLMN is included in plmn-IdentityList stored in VarRLF-Report of TS 36.331 [10]:
+4>	include rlf-InfoAvailable in the RRCReconfigurationComplete message;
 2>	if the RRCReconfiguration message was received via SRB1, but not within mrdc-SecondaryCellGroup or E-UTRA RRCConnectionReconfiguration or E-UTRA RRCConnectionResume:
 3>	if the UE is configured to provide the measurement gap requirement information of NR target bands:
 4>	if the RRCReconfiguration message includes the needForGapsConfigNR; or
@@ -2351,7 +2344,7 @@ The network configures the UE with Master Cell Group (MCG), and zero or one Seco
 The UE performs the following actions based on a received CellGroupConfig IE:
 1>	if the CellGroupConfig contains the spCellConfig with reconfigurationWithSync:
 2>	perform Reconfiguration with sync according to 5.3.5.5.2;
-2>	resume all suspended radio bearers and resume SCG transmission for all radio bearers, and resume BH RLC channels and resume SCG transmission for BH RLC channels for IAB-MT, if suspended;
+2>	resume all suspended radio bearers except the SRBs for the source cell group, and resume SCG transmission for all radio bearers, and resume BH RLC channels and resume SCG transmission for BH RLC channels for IAB-MT, if suspended;
 1>	if the CellGroupConfig contains the rlc-BearerToReleaseList:
 2>	perform RLC bearer release as specified in 5.3.5.5.3;
 1>	if the CellGroupConfig contains the rlc-BearerToAddModList:
@@ -2549,9 +2542,9 @@ The UE shall:
 1>	If any DAPS bearer is configured, for each SRB:
 2>	establish a PDCP entity for the target cell group as specified in TS 38.323 [5], with the same configuration as the PDCP entity for the source cell group;
 2>	if the masterKeyUpdate is received:
-3>	configure the PDCP entity with the security algorithms according to securityConfig and apply the keys (KRRCenc and KRRCint) associated with the master key ( KgNB);
+3>	configure the PDCP entity with the security algorithms according to securityConfig and apply the keys (KRRCenc and KRRCint) associated with the master key (KgNB);
 2>	else:
-3>	configure the PDCP entity for the target cell group with state variables continuation as specified in TS 38.323 [5], the state variables and security configuration as the PDCP entity for the source cell group;
+3>	configure the PDCP entity for the target cell group with state variables continuation as specified in TS 38.323 [5], and with the same security configuration as the PDCP entity for the source cell group;
 1>	for each srb-Identity value included in the srb-ToAddModList that is not part of the current UE configuration (SRB establishment or reconfiguration from E-UTRA PDCP to NR PDCP):
 2>	establish a PDCP entity;
 2>	if AS security has been activated:
@@ -2561,7 +2554,7 @@ The UE shall:
 5>	configure the PDCP entity with the security algorithms and keys (KRRCenc and KRRCint) configured/derived as specified in TS 36.331 [10];
 4>	else (i.e., UE capable of NGEN-DC):
 5>	configure the PDCP entity with the security algorithms according to securityConfig and apply the keys (KRRCenc and KRRCint) associated with the master key (KeNB) or secondary key (S-KgNB) as indicated in keyToUse, if applicable;
-3>	else (i.e., UE connected to NR or UE in EN-DC):
+3>	else (i.e., UE connected to NR or UE connected to E-UTRA/EPC):
 4>	configure the PDCP entity with the security algorithms according to securityConfig and apply the keys (KRRCenc and KRRCint) associated with the master key (KeNB/ KgNB) or secondary key (S-KgNB) as indicated in keyToUse, if applicable;
 2>	if the current UE configuration as configured by E-UTRA in TS 36.331 [10] includes an SRB identified with the same srb-Identity value:
 3>	associate the E-UTRA RLC entity and DCCH of this SRB with the NR PDCP entity;
@@ -2767,16 +2760,15 @@ The UE shall:
 4>	reconfigure the PDCP entity to release DAPS as specified in TS 38.323 [5];
 3>	for each SRB:
 4>	if the masterKeyUpdate was not received:
-5>	configure the PDCP entity for the source PCell with state variables continuation as specified in TS 38.323 [5], the state variables as the PDCP entity for the target PCell;
+5>	configure the PDCP entity for the source PCell with state variables continuation as specified in TS 38.323 [5];
 4>	release the PDCP entity for the target PCell;
 4>	release the RLC entity as specified in TS 38.322 [4], clause 5.1.3, and the associated logical channel for the target PCell;
 4>	trigger the PDCP entity for the source PCell to perform SDU discard as specified in TS 38.323 [5];
 4>	re-establish the RLC entity for the source PCell;
 3>	release the physical channel configuration for the target PCell;
-3>	revert back to the SDAP configuration used in the source PCell;
 3>	discard the keys used in target PCell (the KgNB key, the KRRCenc key, the KRRCint key, the KUPint key and the KUPenc key), if any;
 3>	resume suspended SRBs in the source PCell;
-3>	for each non DAPS bearer:
+3>	for each non-DAPS bearer:
 4>	revert back to the UE configuration used for the DRB in the source PCell, includes PDCP, RLC states variables, the security configuration and the data stored in transmission and reception buffers in PDCP and RLC entities ;
 3>	revert back to the UE measurement configuration used in the source PCell;
 3>	initiate the failure information procedure as specified in subclause 5.7.5 to report DAPS handover failure.
@@ -2990,6 +2982,7 @@ The UE shall:
 2>	for each measId included in the measIdList within VarMeasConfig indicated in the condExecutionCond associated to condReconfigId:
 3>	if the entry condition(s) applicable for this event associated with the condReconfigId, i.e. the event corresponding with the condEventId(s) of the corresponding condTriggerConfig within VarConditionalReconfig, is fulfilled for the applicable cells for all measurements after layer 3 filtering taken during the corresponding timeToTrigger defined for this event within the VarConditionalReconfig:
 4>	consider the event associated to that measId to be fulfilled;
+3>	if the measId for this event associated with the condReconfigId has been modified; or
 3>	if the leaving condition(s) applicable for this event associated with the condReconfigId, i.e. the event corresponding with the condEventId(s) of the corresponding condTriggerConfig within VarConditionalReconfig, is fulfilled for the applicable cells for all measurements after layer 3 filtering taken during the corresponding timeToTrigger defined for this event within the VarConditionalReconfig:
 4>	consider the event associated to that measId to be not fulfilled;
 2>	if event(s) associated to all measId(s) within condTriggerConfig for a target candidate cell within the stored condRRCReconfig are fulfilled:
@@ -3013,7 +3006,7 @@ Upon initiating the procedure, the UE shall:
 3>	use the resource pool(s) indicated by sl-RxPool for NR sidelink communication reception, as specified in 5.8.7;
 2>	if configured to transmit NR sidelink communication:
 3>	use the resource pool(s) indicated by sl-TxPoolSelectedNormal, sl-TxPoolScheduling or sl-TxPoolExceptional for NR sidelink communication transmission, as specified in 5.8.8;
-2>	perform CBR measurement on the transmission resource pools indicated by sl-TxPoolSelectedNormal, sl-TxPoolScheduling or sl-TxPoolExceptional for NR sidelink communication transmission, as specified in 5.5.3;
+2>	perform CBR measurement on the transmission resource pool(s) indicated by sl-TxPoolSelectedNormal, sl-TxPoolScheduling or sl-TxPoolExceptional for NR sidelink communication transmission, as specified in 5.5.3;
 2>	use the synchronization configuration parameters for NR sidelink communication on frequencies included in sl-FreqInfoToAddModList, as specified in 5.8.5;
 1>	if sl-RadioBearerToReleaseList or sl-RLC-BearerToReleaseList is included in sl-ConfigDedicatedNR within RRCReconfiguration:
 2>	perform sidelink DRB release as specified in 5.8.9.1a.1;
@@ -3440,7 +3433,7 @@ The UE shall determine the content in the VarRLF-Report as follows:
 2>	set the rsIndexResults in measResultLastServCell to include all the available measurement quantities of the source PCell (in case HO failure) or PCell (in case RLF), ordered such that the highest SS/PBCH block RSRP is listed first if SS/PBCH block RSRP measurement results are available, otherwise the highest SS/PBCH block RSRQ is listed first if SS/PBCH block RSRQ measurement results are available, otherwise the highest SS/PBCH block SINR is listed first, based on the available SS/PBCH block based measurements collected up to the moment the UE detected failure;
 1>	if the CSI-RS based measurement quantities are available:
 2>	set the rsIndexResults in measResultLastServCell to include all the available measurement quantities of the source PCell (in case HO failure) or PCell (in case RLF), ordered such that the highest CSI-RS RSRP is listed first if CSI-RS RSRP measurement results are available, otherwise the highest CSI-RS RSRQ is listed first if CSI-RS RSRQ measurement results are available, otherwise the highest CSI-RS SINR is listed first, based on the available CSI-RS based measurements collected up to the moment the UE detected failure;
-1>	set the ssbRLMConfigBitmap and/or csi-rsRLMConfigBitmap in measResultLastServCell to include the radio link monitoring configuration of the source PCell(in case HO failure) or PCell (in case RLF);
+1>	set the ssbRLMConfigBitmap and/or csi-rsRLMConfigBitmap in measResultLastServCell to include the radio link monitoring configuration of the source PCell(in case HO failure) or PCell (in case RLF), if available;
 1>	for each of the configured measObjectNR in which measurements are available:
 2>	if the SS/PBCH block-based measurement quantities are available:
 3>	set the measResultListNR in measResultNeighCells to include all the available measurement quantities of the best measured cells, other than the source PCell(in case HO failure) or PCell (in case RLF), ordered such that the cell with highest SS/PBCH block RSRP is listed first if SS/PBCH block RSRP measurement results are available, otherwise the cell with highest SS/PBCH block RSRQ is listed first if SS/PBCH block RSRQ measurement results are available, otherwise the cell with highest SS/PBCH block SINR is listed first, based on the available SS/PBCH block based measurements collected up to the moment the UE detected failure;
@@ -3689,7 +3682,7 @@ The UE shall:
 2>	if upper layers provides a PLMN and UE is either allowed or instructed to access the PLMN via a cell for which at least one CAG ID is broadcast:
 3>	set the selectedPLMN-Identity from the npn-IdentityInfoList;
 2>	else:
-3>	set the selectedPLMN-Identity to the PLMN selected by upper layers from the plmn-IdentityList;
+3>	set the selectedPLMN-Identity to the PLMN selected by upper layers from the plmn-IdentityInfoList;
 2>	if the masterCellGroup contains the reportUplinkTxDirectCurrent:
 3>	include the uplinkTxDirectCurrentList for each MCG serving cell with UL;
 3>	include uplinkDirectCurrentBWP-SUL for each MCG serving cell configured with SUL carrier, if any, within the uplinkTxDirectCurrentList;
@@ -3737,7 +3730,7 @@ The UE shall:
 3>	reset the numberOfConnFail to 0;
 2> clear the content included in VarConnEstFailReport except for the numberOfConnFail, if any;
 2>	store the following connection resume failure information in the VarConnEstFailReport by setting its fields as follows:
-3>	set the plmn-Identity to the PLMN selected by upper layers (see TS 24.501 [23]) from the PLMN(s) included in the plmn-IdentityList in SIB1;
+3>	set the plmn-Identity to the PLMN selected by upper layers (see TS 24.501 [23]) from the PLMN(s) included in the plmn-IdentityInfoList in SIB1;
 3>	set the measResultFailedCell to include the global cell identity, tracking area code, the cell level and SS/PBCH block level RSRP, and RSRQ, and SS/PBCH block indexes, of the failed cell based on the available SSB measurements collected up to the moment the UE detected connection resume failure;
 3>	if available, set the measResultNeighCells, in order of decreasing ranking-criterion as used for cell re-selection, to include neighbouring cell measurements for at most the following number of neighbouring cells: 6 intra-frequency and 3 inter-frequency neighbours per frequency as well as 3 inter-RAT neighbours, per frequency/ set of frequencies per RAT and according to the following:
 4>	for each neighbour cell included, include the optional fields that are available;
@@ -3866,7 +3859,7 @@ The UE shall:
 1>	if for at least one of these Access Identities the corresponding bit in the uac-BarringForAccessIdentity contained in "UAC barring parameter" is set to zero:
 2>	consider the access attempt as allowed;
 1>	else:
-2>	if the establishment of the RRC connection is the result of release with redirect with mpsPriorityIndication (either in NR or E-UTRAN); and 
+2>	if the establishment of the RRC connection is the result of release with redirect with mpsPriorityIndication (either in NR or E-UTRAN); and
 2>	if the bit corresponding to Access Identity 1 in the uac-BarringForAccessIdentity contained in the "UAC barring parameter" is set to zero:
 3>	consider the access attempt as allowed;
 2>	else:
@@ -4012,7 +4005,7 @@ The measurement configuration includes the following parameters:
 1.	Measurement objects: A list of objects on which the UE shall perform the measurements.
 -	For intra-frequency and inter-frequency measurements a measurement object indicates the frequency/time location and subcarrier spacing of reference signals to be measured. Associated with this measurement object, the network may configure a list of cell specific offsets, a list of 'blacklisted' cells and a list of 'whitelisted' cells. Blacklisted cells are not applicable in event evaluation or measurement reporting. Whitelisted cells are the only ones applicable in event evaluation or measurement reporting.
 -	The measObjectId of the MO which corresponds to each serving cell is indicated by servingCellMO within the serving cell configuration.
--	For inter-RAT E-UTRA measurements a measurement object is a single E-UTRA carrier frequency. Associated with this E-UTRA carrier frequency, the network can configure a list of cell specific offsets, a list of 'blacklisted' cells and a list of 'whitelisted' cells. Blacklisted cells are not applicable in event evaluation or measurement reporting. Whitelisted cells are the only ones applicable in event evaluation or measurement reporting.
+-	For inter-RAT E-UTRA measurements a measurement object is a single E-UTRA carrier frequency. Associated with this E-UTRA carrier frequency, the network can configure a list of cell specific offsets and a list of 'blacklisted' cells. Blacklisted cells are not applicable in event evaluation or measurement reporting.
 -	For inter-RAT UTRA-FDD measurements a measurement object is a set of cells on a single UTRA-FDD carrier frequency.
 -	For CBR measurement of NR sidelink communication, a measurement object is a set of transmission resource pool(s) on a single carrier frequency for NR sidelink communication.
 -	For CLI measurements a measurement object indicates the frequency/time location of SRS resources and/or CLI-RSSI resources, and subcarrier spacing of SRS resources to be measured.
@@ -4098,6 +4091,7 @@ The UE shall:
 3>	add a new entry for this measId within the VarMeasConfig;
 2>	remove the measurement reporting entry for this measId from the VarMeasReportList, if included;
 2>	stop the periodical reporting timer or timer T321 or timer T322, whichever one is running, and reset the associated information (e.g. timeToTrigger) for this measId;
+NOTE 1:	If the measId associated with reportConfig for conditional reconfiguration is modified, the conditions are considered to be not fulfilled as specified in 5.3.5.13.4.
 2>	if the reportType is set to reportCGI in the reportConfig associated with this measId:
 3>	if the measObject associated with this measId concerns E-UTRA:
 4>	if the useAutonomousGaps is included in the reportConfig associated with this measId:
@@ -4241,7 +4235,7 @@ with T = MGRP/10 as defined in TS 38.133 [14];
 2>	apply the specified timing advance mgta to the gap occurrences calculated above (i.e. the UE starts the measurement mgta ms before the gap subframe occurrences);
 1>	else if gapUE is set to release:
 2>	release the per UE measurement gap configuration.
-NOTE 1:	For gapFR2 configuration with synchrnonous CA, for the UE in NE-DC or NR-DC, the SFN and subframe of the serving cell indicated by the refServCellIndicator in gapFR2 is used in the gap calculation. Otherwise, the SFN and subframe of a serving cell on FR2 frequency is used in the gap calculation
+NOTE 1:	For gapFR2 configuration with synchronous CA, for the UE in NE-DC or NR-DC, the SFN and subframe of the serving cell indicated by the refServCellIndicator in gapFR2 is used in the gap calculation. Otherwise, the SFN and subframe of a serving cell on FR2 frequency is used in the gap calculation
 NOTE 2:	For gapFR1 or gapUE configuration, for the UE in NE-DC or NR-DC, the SFN and subframe of the serving cell indicated by the refServCellIndicator in corresponding gapFR1 or gapUE is used in the gap calculation. Otherwise, the SFN and subframe of the PCell is used in the gap calculation.
 NOTE 3:	For gapFR2 configuration with asynchronous CA, for the UE in NE-DC or NR-DC, the SFN and subframe of the serving cell indicated by the refServCellIndicator and refFR2ServCellAsyncCA in gapFR2 is used in the gap calculation. Otherwise, the SFN and subframe of a serving cell on FR2 frequency indicated by the refFR2ServCellAsyncCA in gapFR2 is used in the gap calculation
 5.5.2.10	Reference signal measurement timing configuration
@@ -4253,7 +4247,7 @@ else:
 subframe = Offset or (Offset +5);
 with T = CEIL(Periodicity/10).
 If smtc2 is present, for cells indicated in the pci-List parameter in smtc2 in the same MeasObjectNR, the UE shall setup an additional SS/PBCH block measurement timing configuration (SMTC) in accordance with the received periodicity parameter in the smtc2 configuration and use the Offset (derived from parameter periodicityAndOffset) and duration parameter from the smtc1 configuration. The first subframe of each SMTC occasion occurs at an SFN and subframe of the NR SpCell meeting the above condition.
-If smtc2-LP is present, for cells indicated in the pci-List parameter in smtc2-LP in the same frequency (for intra frequency cell reselection) or different frequency (for inter frequency cell reselecion), the UE shall setup an additional SS/PBCH block measurement timing configuration (SMTC) in accordance with the received periodicity parameter in the smtc2-LP configuration and use the Offset (derived from parameter periodicityAndOffset) and duration parameter from the smtc configuration for that frequency. The first subframe of each SMTC occasion occurs at an SFN and subframe of the NR SpCell or serving cell (for cell reselection) meeting the above condition.
+If smtc2-LP is present, for cells indicated in the pci-List parameter in smtc2-LP in the same frequency (for intra frequency cell reselection) or different frequency (for inter frequency cell reselection), the UE shall setup an additional SS/PBCH block measurement timing configuration (SMTC) in accordance with the received periodicity parameter in the smtc2-LP configuration and use the Offset (derived from parameter periodicityAndOffset) and duration parameter from the smtc configuration for that frequency. The first subframe of each SMTC occasion occurs at an SFN and subframe of the NR SpCell or serving cell (for cell reselection) meeting the above condition.
 If smtc3list is present, for cells indicated in the pci-List parameter in each SSB-MTC3 element of the list in the same MeasObjectNR, the IAB-MT shall setup an additional SS block measurement timing configuration in accordance with the received periodicityAndOffset parameter (using same condition as smtc1 to identify the SFN and the subframe for SMTC occasion) in each SSB-MTC3 configuration and use the duration and ssb-ToMeasure parameters from each SSB-MTC3 configuration.
 On the indicated ssbFrequency, the UE shall not consider SS/PBCH block transmission in subframes outside the SMTC occasion for RRM measurements based on SS/PBCH blocks and for RRM measurements based on CSI-RS except for SFTD measurement (see TS 38.133 [14], subclause 9.3.8).
 5.5.2.10a	RSSI measurement timing configuration
@@ -4261,7 +4255,7 @@ The UE shall setup the RSSI measurement timing configuration (RMTC) in accordanc
 SFN mod T = FLOOR(rmtc-SubframeOffset/10);
 subframe = rmtc-SubframeOffset mod 10;
 with T = rmtc-Periodicity/10;
-On the frequency configured by rmtc-Frequency, the UE shall not consider RSSI measurements outside the configured RMTC occasion which lasts for measDuration for RSSI and channel occupancy measurements.
+On the frequency configured by rmtc-Frequency, the UE shall not consider RSSI measurements outside the configured RMTC occasion which lasts for measDurationSymbols for RSSI and channel occupancy measurements.
 The UE derives the RSSI measurement duration from a combination of measDurationSymbols and ref-SCS-CP. At least for RSSI measurement confined within the active DL BWP, the UE performs RSSI measurement using the numerology of the active DL BWP during the derived measurement duration. Otherwise, the numerology used by the UE for measurements is up to UE implementation.
 5.5.2.11	Measurement gap sharing configuration
 The UE shall:
@@ -4370,12 +4364,12 @@ The UE capable of CBR measurement when configured to transmit NR sidelink commun
 3>	if tx-PoolMeasToAddModList is included in VarMeasConfig:
 4>	perform CBR measurements on each transmission resource pool indicated in the tx-PoolMeasToAddModList;
 3>	if sl-TxPoolSelectedNormal, sl-TxPoolScheduling or sl-TxPoolExceptional is included in sl-ConfigDedicatedNR for the concerned frequency within RRCReconfiguration:
-4>	perform CBR measurement on pools in sl-TxPoolSelectedNormal, sl-TxPoolScheduling or sl-TxPoolExceptional if included in sl-ConfigDedicatedNR for the concerned frequency within RRCReconfiguration;
+4>	perform CBR measurement on pool(s) in sl-TxPoolSelectedNormal, sl-TxPoolScheduling or sl-TxPoolExceptional if included in sl-ConfigDedicatedNR for the concerned frequency within RRCReconfiguration;
 3>	else if the cell chosen for NR sidelink communication provides SIB12 which includes sl-TxPoolSelectedNormal or sl-TxPoolExceptional for the concerned frequency:
-4>	perform CBR measurement on pools in sl-TxPoolSelectedNormal and sl-TxPoolExceptional for the concerned frequency in SIB12;
+4>	perform CBR measurement on pool(s) in sl-TxPoolSelectedNormal and sl-TxPoolExceptional for the concerned frequency in SIB12;
 1>	else:
-2>	perform CBR measurement on pools in sl-TxPoolSelectedNormal and sl-TxPoolExceptional in SidelinkPreconfigNR for the concerned frequency.
-NOTE 2:	In case the configurations for NR sidelink communication and CBR measurement are acquired via the E-UTRA, configurations for NR sidelink communication in SIB12, sl-ConfigDedicatedNR within RRCReconfiguration used in this subclause are provided by the configurations in SystemInformationBlockType28, sl-ConfigDedicatedNR within RRCConnectionReconfiguration as specified in TS 36.331[10], respectively.
+2>	perform CBR measurement on pool(s) in sl-TxPoolSelectedNormal and sl-TxPoolExceptional in SidelinkPreconfigNR for the concerned frequency.
+NOTE 2:	In case the configurations for NR sidelink communication and CBR measurement are acquired via the E-UTRA, configurations for NR sidelink communication in SIB12, sl-ConfigDedicatedNR within RRCReconfiguration used in this subclause are provided by the configurations in SystemInformationBlockType28, sl-ConfigDedicatedForNR within RRCConnectionReconfiguration as specified in TS 36.331[10], respectively.
 NOTE 3:	If a UE that is configured by upper layers to transmit V2X sidelink communication is configured by NR with transmission resource pool(s) and the measurement objects concerning V2X sidelink communication (i.e. by sl-ConfigDedicatedEUTRA-Info), it shall perform CBR measurement as specified in subclause 5.5.3 of TS 36.331 [10], based on the transmission resource pool(s) and the measurement object(s) concerning V2X sidelink communication configured by NR.
 NOTE 4:	For V2X sidelink communication, each of the CBR measurement results is associated with a resource pool, as indicated by the poolReportId (see TS 36.331 [10]), that refers to a pool as included in sl-ConfigDedicatedEUTRA-Info or SIB13.
 5.5.3.2	Layer 3 filtering
@@ -4440,8 +4434,7 @@ If AS security has been activated successfully, the UE shall:
 3>	else if the corresponding measObject concerns E-UTRA:
 4>	if eventB1 or eventB2 is configured in the corresponding reportConfig:
 5>	consider a serving cell, if any, on the associated E-UTRA frequency as neighbour cell;
-4>	else:
-5>	consider any neighbouring cell detected on the associated frequency to be applicable when the concerned cell is not included in the blackCellsToAddModListEUTRAN defined within the VarMeasConfig for this measId;
+4>	consider any neighbouring cell detected on the associated frequency to be applicable when the concerned cell is not included in the blackCellsToAddModListEUTRAN defined within the VarMeasConfig for this measId;
 3>	else if the corresponding measObject concerns UTRA-FDD:
 4>	if eventB1-UTRA-FDD or eventB2-UTRA-FDD is configured in the corresponding reportConfig; or
 4>	if corresponding reportConfig includes reportType set to periodical:
@@ -4508,6 +4501,8 @@ If AS security has been activated successfully, the UE shall:
 3>	set the numberOfReportsSent defined within the VarMeasReportList for this measId to 0;
 3>	if the corresponding reportConfig includes measRSSI-ReportConfig:
 4>	initiate the measurement reporting procedure as specified in 5.5.5 immediately when RSSI sample values are reported by the physical layer after the first L1 measurement duration;
+3>	else if the corresponding reportConfig includes the ul-DelayValueConfig:
+4>	initiate the measurement reporting procedure, as specified in 5.5.5, immediately after a first measurement result is provided from lower layers of the associated DRB identity;
 3>	else if the reportAmount exceeds 1:
 4>	initiate the measurement reporting procedure, as specified in 5.5.5, immediately after the quantity to be reported becomes available for the NR SpCell;
 3>	else (i.e. the reportAmount is equal to 1):
@@ -4555,8 +4550,6 @@ If AS security has been activated successfully, the UE shall:
 4>	include a measurement reporting entry within the VarMeasReportList for this measId;
 4>	set the numberOfReportsSent defined within the VarMeasReportList for this measId to 0;
 4>	initiate the measurement reporting procedure, as specified in 5.5.5;
-2>	if the corresponding reportConfig includes the ul-DelayValueConfig:
-3>	initiate the measurement reporting procedure, as specified in 5.5.5, immediately after a first measurement result is provided by all lower layers of the associated DRB identity;
 2>	upon the expiry of T321 for this measId:
 3>	include a measurement reporting entry within the VarMeasReportList for this measId;
 3>	set the numberOfReportsSent defined within the VarMeasReportList for this measId to 0;
@@ -4885,7 +4878,7 @@ For the measId for which the measurement reporting procedure was triggered, the 
 4>	set sfn-OffsetResult and frameBoundaryOffsetResult to the measurement results provided by lower layers;
 4>	if the reportRSRP is set to true;
 5>	set rsrpResult-EUTRA to the RSRP of the EUTRA PSCell;
-1>	if avareage uplink PDCP delay values are available:
+1>	if average uplink PDCP delay values are available:
 2>	set the ul-PDCP-DelayValueResultList to include the corresponding average uplink PDCP delay values;
 1>	if the includeCommonLocationInfo is configured in the corresponding reportConfig for this measId and detailed location information that has not been reported is available, set the content of commonLocationInfo of the locationInfo as follows:
 2>	include the locationTimestamp;
@@ -5075,7 +5068,7 @@ While T330 is running, the UE shall:
 3>	upon transition from any cell selection state to camped normally state in NR:
 4>	if the RPLMN is included in plmn-IdentityList stored in VarLogMeasReport; and
 4>	if areaConfiguration is not included in VarLogMeasConfig or if the current camping cell is part of the area indicated by areaConfig of areaConfiguration in VarLogMeasConfig:
-5>	perform the logging at regular time intervals, as defined by the loggingInterval in the VarLogMeasConfig;
+5>	perform the logging;
 2>	else if the reportType is set to eventTriggered and eventType is set to eventL1:
 3>	if the UE is in camped normally state on an NR cell and if the RPLMN is included in plmn-IdentityList stored in VarLogMeasReport:
 4>	if areaConfiguration is not included in VarLogMeasConfig; or
@@ -5088,9 +5081,9 @@ While T330 is running, the UE shall:
 4>	set anyCellSelectionDetected to indicate the detection of no suitable or no acceptable cell found;
 4>	if the reportType is set to eventTriggered in the VarLogMeasConfig; and
 4>	if the RPLMN at the time of entering the any cell selection state is included in plmn-IdentityList stored in VarLogMeasReport; and
-4>	if areaConfiguration is not included in VarLogMeasConfig or if the last cell that the UE was camping on is part of the area indicated by areaConfig of areaConfiguration in VarLogMeasConfig:
-5>	set the servCellIdentity to indicate global cell identity of the last cell that the UE was camping on;
-5>	set the measResultServingCell to include the quantities of the last cell the UE was camping on;
+4>	if areaConfiguration is not included in VarLogMeasConfig or if the last suitable cell that the UE was camping on is part of the area indicated by areaConfig of areaConfiguration in VarLogMeasConfig:
+5>	set the servCellIdentity to indicate global cell identity of the last suitable cell that the UE was camping on;
+5>	set the measResultServingCell to include the quantities of the last suitable cell the UE was camping on;
 4>	else if the reportType is set to periodical in the VarLogMeasConfig:
 5>	set the servCellIdentity to indicate global cell identity of the last logged cell that the UE was camping on;
 5>	set the measResultServingCell to include the quantities of the last logged cell the UE was camping on;
@@ -5147,7 +5140,7 @@ The UE shall:
 3>	remove the NR-only band combination from the list of "candidate band combinations";
 NOTE 4:	The (E-UTRA) network may request capabilities for nr but indicate with the eutra-nr-only flag that the UE shall not include any NR band combinations in the UE-NR-Capability. In this case the procedural text above removes all NR-only band combinations from the candidate list and thereby also avoids inclusion of corresponding feature set combinations and feature sets below.
 2>	if it is regarded as a fallback band combination with the same capabilities of another band combination included in the list of "candidate band combinations", and
-2>	if this fallback band combination is generated by releasing at least one SCell or uplink configuration of SCell according to TS 38.306 [26]:
+2>	if this fallback band combination is generated by releasing at least one SCell or uplink configuration of SCell or SUL according to TS 38.306 [26]:
 3>	remove the band combination from the list of "candidate band combinations";
 NOTE 5:	Even if the network requests (only) capabilities for nr, it may include E-UTRA band numbers in the frequencyBandListFilter to ensure that the UE includes all necessary feature sets needed for subsequently requested eutra-nr capabilities. At this point of the procedure the list of "candidate band combinations" contains all NR- and/or E-UTRA-NR band combinations that match the filter (frequencyBandListFilter) provided by the NW and that match the eutra-nr-only flag (if RAT-Type nr is requested by E-UTRA). In the following, this candidate list is used to derive the band combinations, feature set combinations and feature sets to be reported in the requested capability container.
 1>	if the requested rat-Type is nr:
@@ -5209,7 +5202,7 @@ Upon receiving DLInformationTransfer message, the UE shall:
 5.7.1a.1	General
 
 Figure 5.7.1a.1-1: DL information transfer MR-DC
-The purpose of this procedure is to transfer RRC messages from the network to the UE over SRB3 (e.g. an NR or E-UTRA RRC connection reconfiguration, an RRC connection release, a MobilityFromNRCommand, or a MobilityFromEUTRACommand message) during fast MCG link recovery.
+The purpose of this procedure is to transfer RRC messages from the network to the UE over SRB3 (e.g. an NR RRC reconfiguration message including reconfigurationWithSync, an E-UTRA RRC connection reconfiguration message including mobilityControlInfo, an RRC connection release message, a MobilityFromNRCommand message, or a MobilityFromEUTRACommand message) during fast MCG link recovery.
 5.7.1a.2	Initiation
 The network initiates this procedure whenever there is a need to transfer an RRC message during fast MCG link recovery.
 5.7.1a.3	Actions related to reception of DLInformationTransferMRDC message
@@ -5221,7 +5214,7 @@ Upon receiving the DLInformationTransferMRDC, the UE shall:
 1>	else if the MobilityFromNRCommand message is included in the dl-DCCH-MessageNR:
 2>	perform the mobility from NR procedure according to 5.4.3.3;
 1>	else if the E-UTRA RRCConnectionReconfiguration message is included in dl-DCCH-MessageEUTRA:
-2>	perform the RRC connection reconfiguration procedure as specified in TS 36.331 [10], clause 5.3.5.3;
+2>	perform the RRC connection reconfiguration procedure as specified in TS 36.331 [10], clause 5.3.5.4;
 1>	else if the E-UTRA RRCConnectionRelease message is included in dl-DCCH-MessageEUTRA:
 2>	perform the RRC connection release as specified in TS 36.331 [10], clause 5.3.8;
 1>	else if the MobilityFromEUTRACommand message is included in the dl-DCCH-MessageEUTRA:
@@ -5297,12 +5290,12 @@ The UE shall set the SCG failure type as follows:
 1>	if the UE initiates transmission of the SCGFailureInformationNR message due to T310 expiry:
 2>	set the failureType as t310-Expiry;
 1>	else if the UE initiates transmission of the SCGFailureInformationNR message due to T312 expiry:
-2>	set the failureType as other and set the failureType-v1610 as t312-Expiry;
+2>	set the failureType as any value and set the failureType-v1610 as t312-Expiry;
 1>	else if the UE initiates transmission of the SCGFailureInformationNR message to provide reconfiguration with sync failure information for an SCG:
 2>	set the failureType as synchReconfigFailureSCG;
 1>	else if the UE initiates transmission of the SCGFailureInformationNR message to provide random access problem indication from SCG MAC:
 2>	if the random access procedure was initiated for beam failure recovery:
-3>	set the failureType as other and set the failureType-v1610 as beamFailureRecoveryFailure;
+3>	set the failureType as randomAccessProblem and set the failureType-v1610 as beamFailureRecoveryFailure;
 2>	else:
 3>	set the failureType as randomAccessProblem;
 1>	else if the UE initiates transmission of the SCGFailureInformationNR message to provide indication from SCG RLC that the maximum number of retransmissions has been reached:
@@ -5312,9 +5305,9 @@ The UE shall set the SCG failure type as follows:
 1>	else if the UE initiates transmission of the SCGFailureInformationNR message due to Reconfiguration failure of NR RRC reconfiguration message:
 2>	set the failureType as scg-reconfigFailure;
 1>	else if the UE initiates transmission of the SCGFailureInformationNR message due to consistent uplink LBT failures:
-2>	set the failureType as other and set the failureType-v1610 as scg-lbtFailure;
+2>	set the failureType as any value and set the failureType-v1610 as scg-lbtFailure;
 1> else if connected as an IAB-node and the SCGFailureInformationNR is initiated due to the reception of a BH RLF indication on BAP entity from the SCG:
-2>	set the failureType as other and set failureType-v1610 as bh-RLF.
+2>	set the failureType as any value and set failureType-v1610 as bh-RLF.
 5.7.3.4	Setting the contents of MeasResultSCG-Failure
 The UE shall set the contents of the MeasResultSCG-Failure as follows:
 1>	for each MeasObjectNR configured on NR SCG for which a measId is configured and measurement results are available:
@@ -5884,13 +5877,13 @@ The UE shall:
 NOTE:	It is up to UE implementation whether to continue idle/inactive measurements according to SIB11 and SIB4 configurations or according to E-UTRA SIB5 and E-UTRA SIB24 configurations as specified in TS 36.331 [10] upon inter-RAT cell reselection to E-UTRA, after T331 has expired or stopped.
 5.7.8.4	Cell re-selection or cell selection while T331 is running
 The UE shall:
-1>	if intra-RAT cell selection or reselection occurs while T331 is runing:
+1>	if intra-RAT cell selection or reselection occurs while T331 is running:
 2>	if validityAreaList is configured in VarMeasIdleConfig:
 3>	if the serving frequency does not match with the carrierFreq of an entry in the validityAreaList; or
 3>	if the serving frequency matches with the carrierFreq of an entry in the validityAreaList, the validityCellList is included in that entry, and the physical cell identity of the serving cell does not match with any entry in validityCellList:
 4>	stop timer T331;
 4>	perform the actions as specified in 5.7.8.3, upon which the procedure ends.
-1>	else if inter-RAT cell selection or reselection occurs while T331 is runing:
+1>	else if inter-RAT cell selection or reselection occurs while T331 is running:
 2>	stop timer T331;
 2>	perform the actions as specified in 5.7.8.3;
 5.7.9	Mobility history information
@@ -5963,18 +5956,16 @@ Upon receiving the UEInformationRequest message, the UE shall, only after succes
 2>	submit the UEInformationResponse message to lower layers for transmission via SRB1.
 5.7.10.4	Actions upon successful completion of random-access procedure
 Upon successfully performing 4 step random access procedure, the UE shall:
+1>	if the RPLMN or the PLMN selected by upper layers (see TS24.501 [23]) from the PLMN(s) included in the plmn-IdentityList in SIB1 is not included in plmn-IdentityList stored in a non-empty VarRA-Report:
+2>	clear the information included in VarRA-Report;
 1>	if the number of RA-Report entries stored in the ra-ReportList in VarRA-Report is less than maxRAReport:
 2>	if the number of PLMN entries in plmn-IdentityList stored in VarRA-Report is less than maxPLMN; or
 2>	if the number of PLMN entries in plmn-IdentityList stored in VarRA-Report is equal to maxPLMN and the list of EPLMNs is subset of or equal to the plmn-IdentityList stored in VarRA-Report:
 3>	append the following contents associated to the successfully completed random-access procedure as a new entry in the VarRA-Report:
 4>	if the list of EPLMNs has been stored by the UE:
-5>	if the RPLMN is included in plmn-IdentityList stored in VarRA-Report:
-6>	set the plmn-IdentityList to include the list of EPLMNs stored by the UE (i.e. includes the RPLMN) without exceeding the limit of maxPLMN;
-5>	else:
-6>	clear the information included in VarRA-Report;
-6>	set the plmn-IdentityList to the list of EPLMNs stored by the UE (i.e. includes the RPLMN);
+5>	set the plmn-IdentityList to include the list of EPLMNs stored by the UE (i.e. includes the RPLMN) without exceeding the limit of maxPLMN;
 4>	else:
-5>	set the plmn-Identity, in plmn-IdentityList, to the PLMN selected by upper layers (see TS 24.501 [23]) from the PLMN(s) included in the plmn-IdentityList in SIB1;
+5>	set the plmn-Identity, in plmn-IdentityList, to the PLMN selected by upper layers (see TS 24.501 [23]) from the PLMN(s) included in the plmn-IdentityInfoList in SIB1;
 4>	set the cellId to the global cell identity and the tracking area code, if available, otherwise to the physical cell identity and carrier frequency of the cell in which the corresponding random-access preamble was transmitted;
 4>	set the raPurpose to include the purpose of triggering the random-access procedure;
 4>	set the ra-InformationCommon as specified in subclause 5.7.10.5.
@@ -6067,11 +6058,12 @@ The IAB-MT shall set the contents of IABOtherInformation message as follows:
 5.8.1	General
 NR sidelink communication consists of unicast, groupcast and broadcast. For unicast, the PC5-RRC connection is a logical connection between a pair of a Source Layer-2 ID and a Destination Layer-2 ID in the AS. The PC5-RRC signalling, as specified in sub-clause 5.8.9, can be initiated after its corresponding PC5 unicast link establishment (TS 23.287 [55]). The PC5-RRC connection and the corresponding sidelink SRBs and sidelink DRB(s) are released when the PC5 unicast link is released as indicated by upper layers.
 For each PC5-RRC connection of unicast, one sidelink SRB (i.e. SL-SRB0) is used to transmit the PC5-S message(s) before the PC5-S security has been established. One sidelink SRB (i.e. SL-SRB1) is used to transmit the PC5-S messages to establish the PC5-S security. One sidelink SRB (i.e. SL-SRB2) is used to transmit the PC5-S messages after the PC5-S security has been established, which is protected. One sidelink SRB (i.e. SL-SRB3) is used to transmit the PC5-RRC signalling, which is protected and only sent after the PC5-S security has been established.
-For unicast of NR Sidelink communication, AS security comprises of integrity protection of PC5 signalling (SL-SRB1, SL-SRB2 and SL-SRB3) and user data (SL-DRBs), and it further comprises of ciphering of PC5 signaling (SL-SRB1 only for the Direct Link Security Mode Complete message as specified in TS 24.587[57], SL-SRB2 and SL-SRB3) and user data (SL-DRBs). The ciphering and integrity protection algorithms and parameters for a PC5 unicast link are exchanged by PC5-S messages in the upper layers as specified in TS 33.536 [60], and apply to the corresponding PC5-RRC connection in the AS. Once AS security is activated for a PC5 unicast link in the upper layers as specified in TS 33.536 [60], all messages on SL-SRB2 and SL-SRB3 and/or user data on SL-DRBs of the corresponding PC5-RRC connection are integrity protected and/or ciphered by the PDCP.
-For unicast of NR Sidelink communication, if the change of the key is indicated by the upper layers as specified in TS 24.587 [57], UE re-establishes the PDCP entity of the SL-SRB1, SL-SRB2, SL-SRB3 and SL-DRBs on the corresponding PC5-RRC connection.
-NOTE 1:	In case the configurations for NR sidelink communication are acquired via the E-UTRA, the configurations for NR sidelink communication in SIB12 and sl-ConfigDedicatedNR within RRCReconfiguration used in subclause 5.8 are provided by the configurations in SystemInformationBlockType28 and sl-ConfigDedicatedNR within RRCConnectionReconfiguration as specified in TS 36.331 [10], respectively.
+For unicast of NR sidelink communication, AS security comprises of integrity protection of PC5 signalling (SL-SRB1, SL-SRB2 and SL-SRB3) and user data (SL-DRBs), and it further comprises of ciphering of PC5 signaling (SL-SRB1 only for the Direct Link Security Mode Complete message as specified in TS 24.587[57], SL-SRB2 and SL-SRB3) and user data (SL-DRBs). The ciphering and integrity protection algorithms and parameters for a PC5 unicast link are exchanged by PC5-S messages in the upper layers as specified in TS 33.536 [60], and apply to the corresponding PC5-RRC connection in the AS. Once AS security is activated for a PC5 unicast link in the upper layers as specified in TS 33.536 [60], all messages on SL-SRB2 and SL-SRB3 and/or user data on SL-DRBs of the corresponding PC5-RRC connection are integrity protected and/or ciphered by the PDCP.
+For unicast of NR sidelink communication, if the change of the key is indicated by the upper layers as specified in TS 24.587 [57], UE re-establishes the PDCP entity of the SL-SRB1, SL-SRB2, SL-SRB3 and SL-DRBs on the corresponding PC5-RRC connection.
+NOTE 1:	In case the configurations for NR sidelink communication are acquired via the E-UTRA, the configurations for NR sidelink communication in SIB12 and sl-ConfigDedicatedNR within RRCReconfiguration used in subclause 5.8 are provided by the configurations in SystemInformationBlockType28 and sl-ConfigDedicatedForNR within RRCConnectionReconfiguration as specified in TS 36.331 [10], respectively.
 NOTE 2:	In this release, there is one-to-one correspondence between the PC5-RRC connection and the PC5 unicast link as specified in TS 38.300[2].
-NOTE3:	All SL-DRBs related to the same PC5-RRC connection have the same activation/deactivation setting for ciphering and the same activation/deactivation setting for integrity protection as in TS 33.536 [60].
+NOTE 3:	All SL-DRBs related to the same PC5-RRC connection have the same activation/deactivation setting for ciphering and the same activation/deactivation setting for integrity protection as in TS 33.536 [60].
+NOTE 4:	When integrity check failure concerning SL-SRB1 for a specific destination is detected, the UE sends an indication to the upper layers [57].
 5.8.2	Conditions for NR sidelink communication operation
 The UE shall perform NR sidelink communication operation only if the conditions defined in this clause are met:
 1>	if the UE's serving cell is suitable (RRC_IDLE or RRC_INACTIVE or RRC_CONNECTED); and if either the selected cell on the frequency used for NR sidelink communication operation belongs to the registered or equivalent PLMN as specified in TS 24.587 [57] or the UE is out of coverage on the frequency used for NR sidelink communication operation as defined in TS 38.304 [20] and TS 36.304 [27]; or
@@ -6267,7 +6259,7 @@ A UE capable of NR sidelink communication that is configured by upper layers to 
 2>	if the frequency used for NR sidelink communication is included in sl-FreqInfoToAddModList in RRCReconfiguration message or sl-FreqInfoList included in SIB12:
 3>	if the UE is configured with sl-RxPool included in RRCReconfiguration message with reconfigurationWithSync (i.e. handover):
 4>	configure lower layers to monitor sidelink control information and the corresponding data using the pool of resources indicated by sl-RxPool;
-3>	else if the cell chosen for NR sidelink communication transmission provides SIB12:
+3>	else if the cell chosen for NR sidelink communication provides SIB12:
 4>	configure lower layers to monitor sidelink control information and the corresponding data using the pool of resources indicated by sl-RxPool in SIB12;
 2>	else:
 3>	configure lower layers to monitor sidelink control information and the corresponding data using the pool of resources that were preconfigured by sl-RxPool in SL-PreconfigurationNR, as defined in sub-clause 9.3;
@@ -6847,7 +6839,7 @@ The handling of need codes as specified in the previous implies that:
 -	if nonCriticalExtension defined by IE RRCMessage-v1570-IEs is absent, the UE does not modify field3 but releases field4;
 6.1.3	General rules
 In the ASN.1 of this specification, the first bit of a bit string refers to the leftmost bit, unless stated otherwise.
-Upon reception of a list not using ToAddModList and ToReleaseList structure, the UE shall delete all entries of the list currently in the UE configuration before applying the received list and shall consider each entry as newly created. This applies also to lists whose size is extended (i.e. with a second list structure in the ASN.1 comprising additional entries). This implies that Need M should not be used for fields in the entries of these lists; if used, UE will handle such fields equivalent to a Need R.
+Upon reception of a list not using ToAddModList and ToReleaseList structure, the UE shall delete all entries of the list currently in the UE configuration before applying the received list and shall consider each entry as newly created. This applies also to lists whose size is extended (i.e. with a second list structure in the ASN.1 comprising additional entries), unless otherwise specified. This implies that Need M should not be used for fields in the entries of these lists; if used, UE will handle such fields equivalent to a Need R.
 6.2	RRC messages
 6.2.1	General message structure
 –	NR-RRC-Definitions
@@ -7584,7 +7576,7 @@ Parameter Trace Collection Entity Id: See TS 32.422 [52].
 traceRecordingSessionRef
 Parameter Trace Recording Session Reference: See TS 32.422 [52].
 reportType
-Parameter configures the type of MDT configuration, specifically Periodic MDT conifguraiton or Event Triggerd MDT configuration.
+Parameter configures the type of MDT configuration, specifically Periodic MDT configuration or Event Triggerd MDT configuration.
 
 –	MCGFailureInformation
 The MCGFailureInformation message is used to provide information regarding NR MCG failures detected by the UE.
@@ -7710,7 +7702,7 @@ Corresponds to kSSB (see TS 38.213 [13]), which is the frequency domain offset b
 The value range of this field may be extended by an additional most significant bit encoded within PBCH as specified in TS 38.213 [13].
 This field may indicate that this cell does not provide SIB1 and that there is hence no CORESET#0 configured in MIB (see TS 38.213 [13], clause 13). In this case, the field pdcch-ConfigSIB1 may indicate the frequency positions where the UE may (not) find a SS/PBCH with a control resource set and search space for SIB1 (see TS 38.213 [13], clause 13).
 subCarrierSpacingCommon
-Subcarrier spacing for SIB1, Msg.2/4 for initial access, paging and broadcast SI-messages. If the UE acquires this MIB on an FR1 carrier frequency, the value scs15or60 corresponds to 15 kHz and the value scs30or120 corresponds to 30 kHz. If the UE acquires this MIB on an FR2 carrier frequency, the value scs15or60 corresponds to 60 kHz and the value scs30or120 corresponds to 120 kHz. For operation with shared spectrum channel access (see 37.213 [48]), the subcarrier spacing for SIB1 is same as that for the corresponding SSB and this field instead is used for deriving the QCL relation between SS/PBCH blocks as specified in TS 38.213 [13], clause 4.1.
+Subcarrier spacing for SIB1, Msg.2/4 and MsgB for initial access, paging and broadcast SI-messages. If the UE acquires this MIB on an FR1 carrier frequency, the value scs15or60 corresponds to 15 kHz and the value scs30or120 corresponds to 30 kHz. If the UE acquires this MIB on an FR2 carrier frequency, the value scs15or60 corresponds to 60 kHz and the value scs30or120 corresponds to 120 kHz. For operation with shared spectrum channel access (see 37.213 [48]), the subcarrier spacing for SIB1, Msg.2/4 and MsgB for initial access, paging and broadcast SI-messages is same as that for the corresponding SSB and this field instead is used for deriving the QCL relation between SS/PBCH blocks as specified in TS 38.213 [13], clause 4.1.
 systemFrameNumber
 The 6 most significant bits (MSB) of the 10-bit System Frame Number (SFN). The 4 LSB of the SFN are conveyed in the PBCH transport block as part of channel coding (i.e. outside the MIB encoding), as defined in clause 7.1 in TS 38.212 [17].
 
@@ -8540,7 +8532,7 @@ NR measurement results performed during RRC_INACTIVE.
 needForGapsInfoNR
 This field is used to indicate the measurement gap requirement information of the UE for NR target bands.
 selectedPLMN-Identity
-Index of the PLMN selected by the UE from the plmn-IdentityList or npn-IdentityInfoList fields included in SIB1.
+Index of the PLMN selected by the UE from the plmn-IdentityInfoList or npn-IdentityInfoList fields included in SIB1.
 uplinkTxDirectCurrentList
 The Tx Direct Current locations for the configured serving cells and BWPs if requested by the NW (see reportUplinkTxDirectCurrent in CellGroupConfig).
 uplinkTxDirectCurrentTwoCarrierList
@@ -8707,7 +8699,7 @@ The leftmost 9 bits of 5G-S-TMSI.
 registeredAMF
 This field is used to transfer the GUAMI of the AMF where the UE is registered, as provided by upper layers, see TS 23.003 [21].
 selectedPLMN-Identity
-Index of the PLMN or SNPN selected by the UE from the plmn-IdentityList or npn-IdentityInfoList fields included in SIB1.
+Index of the PLMN or SNPN selected by the UE from the plmn-IdentityInfoList or npn-IdentityInfoList fields included in SIB1.
 
 –	RRCSetupRequest
 The RRCSetupRequest message is used to request the establishment of an RRC connection.
@@ -9068,7 +9060,7 @@ Parameter "Qrxlevmin" in TS 38.304 [20], applicable for serving cell.
 servingCellConfigCommon
 Configuration of the serving cell.
 uac-AccessCategory1-SelectionAssistanceInfo
-Information used to determine whether Access Category 1 applies to the UE, as defined in TS 22.261 [25]. If plmnCommon is chosen, the UAC-AccessCategory1-SelectionAssistanceInfo is applicable to all the PLMNs and SNPNs in plmn-IdentityList and npn-IdentityInfoList. If individualPLMNList is chosen, the 1st entry in the list corresponds to the first network within all of the PLMNs and SNPNs across the plmn-IdentityList and the npn-IdentityInfoList, the 2nd entry in the list corresponds to the second network within all of the PLMNs and SNPNs across the plmn-IdentityList and the npn-IdentityInfoList and so on. If uac-AC1-SelectAssistInfo-r16 is present, the UE shall ignore the uac-AccessCategory1-SelectionAssistanceInfo.
+Information used to determine whether Access Category 1 applies to the UE, as defined in TS 22.261 [25]. If plmnCommon is chosen, the UAC-AccessCategory1-SelectionAssistanceInfo is applicable to all the PLMNs and SNPNs in plmn-IdentityInfoList and npn-IdentityInfoList. If individualPLMNList is chosen, the 1st entry in the list corresponds to the first network within all of the PLMNs and SNPNs across the plmn-IdentityList and the npn-IdentityInfoList, the 2nd entry in the list corresponds to the second network within all of the PLMNs and SNPNs across the plmn-IdentityList and the npn-IdentityInfoList and so on. If uac-AC1-SelectAssistInfo-r16 is present, the UE shall ignore the uac-AccessCategory1-SelectionAssistanceInfo.
 uac-AC1-SelectAssistInfo
 Information used to determine whether Access Category 1 applies to the UE, as defined in TS 22.261 [25]. The 1st entry in the list corresponds to the first network within all of the PLMNs and SNPNs across the plmn-IdentityList and npn-IdentityInfoList, the 2nd entry in the list corresponds to the second network within all of the PLMNs and SNPNs across the plmn-IdentityList and the npn-IdentityInfoList and so on. Value notConfigured indicates that Access Category1 is not configured for the corresponding PLMN/SNPN.
 uac-BarringForCommon
@@ -9693,10 +9685,15 @@ RA-InformationCommon-r16 ::=         SEQUENCE {
     msg1-FDM-r16                         ENUMERATED {one, two, four, eight}               OPTIONAL,
     msg1-FDMCFRA-r16                     ENUMERATED {one, two, four, eight}               OPTIONAL,
     perRAInfoList-r16                    PerRAInfoList-r16,
-    ...
+    ...,
+    [[
+    perRAInfoListExt-v1660               PerRAInfoListExt-v1660                           OPTIONAL
+    ]]
 }
 
 PerRAInfoList-r16 ::= SEQUENCE (SIZE (1..200)) OF PerRAInfo-r16
+
+PerRAInfoListExt-v1660 ::= SEQUENCE (SIZE (1..200)) OF PerRACSI-RSInfoExt-v1660
 
 PerRAInfo-r16 ::=                    CHOICE {
     perRASSBInfoList-r16                 PerRASSBInfo-r16,
@@ -9712,6 +9709,10 @@ PerRASSBInfo-r16 ::=                 SEQUENCE {
 PerRACSI-RSInfo-r16 ::=              SEQUENCE {
     csi-RS-Index-r16                     CSI-RS-Index,
     numberOfPreamblesSentOnCSI-RS-r16    INTEGER (1..200)
+}
+
+PerRACSI-RSInfoExt-v1660 ::=         SEQUENCE {
+    csi-RS-Index-v1660                   INTEGER (1..96)                     OPTIONAL
 }
 
 PerRAAttemptInfoList-r16 ::=         SEQUENCE (SIZE (1..200)) OF PerRAAttemptInfo-r16
@@ -9865,8 +9866,6 @@ measResultNeighCells
 This field refers to the neighbour cell measurements when connection establishment failure or connection resume failure happened.
 numberOfConnFail
 This field is used to indicate the latest number of consecutive failed RRCSetup or RRCResume procedures in the same cell independent of RRC state transition.
-numberOfPreamblesSent
-This field is used to indicate the number of random access preambles that were transmitted.
 timeSinceFailure
 This field is used to indicate the time that elapsed since the connection (establishment or resume) failure. Value in seconds. The maximum value 172800 means 172800s or longer.
 
@@ -9877,8 +9876,9 @@ cellID
 This field indicates the CGI of the cell in which the associated random access procedure was performed.
 contentionDetected
 This field is used to indicate that contention was detected for the transmitted preamble in the given random access attempt or not. This field is not included when the UE performs random access attempt is using contention free random-access resources or when the raPurpose is set to requestForOtherSI.
-csi-RS-Index
+csi-RS-Index, csi-RS-Index-v1660
 This field is used to indicate the CSI-RS index corresponding to the random access attempt.
+If the random access procedure is for beam failure recovery, the field indicates the NZP-CSI-RS-ResourceId. For CSI-RS index larger than maxNrofCSI-RS-ResourcesRRM-1, the index value is the sum of csi-RS-Index (without suffix) and csi-RS-Index-v1660.
 dlRSRPAboveThreshold
 This field is used to indicate whether the DL beam (SSB) quality associated to the random access attempt was above or below the threshold rsrp-ThresholdSSB in beamFailureRecoveryConfig in UL BWP configuration of UL BWP selected for random access procedure initiated for beam failure recovery; Otherwise, rsrp-ThresholdSSB in rach-ConfigCommon in UL BWP configuration of UL BWP selected for random access procedure.
 locationAndBandwidth
@@ -9889,8 +9889,8 @@ numberOfPreamblesSentOnSSB
 This field is used to indicate the total number of successive RA preambles that were transmitted on the corresponding SS/PBCH block.
 perRAAttemptInfoList
 This field provides detailed information about a random access attempt.
-perRAInfoList
-This field provides detailed information about each of the random access attempts in the chronological order of the random access attempts.
+perRAInfoList, perRAInfoListExt-v1660
+This field provides detailed information about each of the random access attempts in the chronological order of the random access attempts. If perRAInfoListExt-v1660 is present, it shall contain the same number of entries, listed in the same order as in perRAInfoList (without suffix).
 perRACSI-RSInfoList
 This field provides detailed information about the successive random access attempts associated to the same CSI-RS.
 perRASSBInfoList
@@ -10745,7 +10745,7 @@ HRNN-r16 ::=                SEQUENCE {
 
 SIB10 field descriptions
 HRNN-List
-The same amount of HRNN elements as the number of NPNs in SIB 1 are included. The n-th entry of HRNN-List contains the human readable network name of the n-th NPN of SIB1. The hrnn in the corresponding entry in HRNN-List is absent if there is no HRNN associated with the given NPN.
+The same amount of HRNN (see TS 23.003 [21]) elements as the number of NPNs in SIB 1 are included. The n-th entry of HRNN-List contains the human readable network name of the n-th NPN of SIB1. The hrnn in the corresponding entry in HRNN-List is absent if there is no HRNN associated with the given NPN.
 
 –	SIB11
 SIB11 contains information related to idle/inactive measurements.
@@ -11105,7 +11105,7 @@ AvailabilityCombinationsPerCell information element
 AvailabilityCombinationsPerCell-r16 ::=     SEQUENCE {
     availabilityCombinationsPerCellIndex-r16     AvailabilityCombinationsPerCellIndex-r16,
     iab-DU-CellIdentity-r16                      CellIdentity,
-    positionInDCI-AI-r16                         INTEGER(0..maxAI-DCI-PayloadSize-r16-1)                              OPTIONAL, -- Need M
+    positionInDCI-AI-r16                         INTEGER(0..maxAI-DCI-PayloadSize-1-r16)                              OPTIONAL, -- Need M
     availabilityCombinations-r16                 SEQUENCE (SIZE (1..maxNrofAvailabilityCombinationsPerSet-r16)) OF AvailabilityCombination-r16,
     ...
 }
@@ -11117,7 +11117,7 @@ AvailabilityCombination-r16 ::=         SEQUENCE {
     resourceAvailability-r16                SEQUENCE (SIZE (1..maxNrofResourceAvailabilityPerCombination-r16)) OF INTEGER (0..7)
 }
 
-AvailabilityCombinationId-r16 ::=       INTEGER (0..maxNrofAvailabilityCombinationsPerSet-r16-1)
+AvailabilityCombinationId-r16 ::=       INTEGER (0..maxNrofAvailabilityCombinationsPerSet-1-r16)
 
 -- TAG-AVAILABILITYCOMBINATIONSPERCELL-STOP
 -- ASN1STOP
@@ -11240,7 +11240,7 @@ BeamFailureRecoveryConfig field descriptions
 beamFailureRecoveryTimer
 Timer for beam failure recovery timer. Upon expiration of the timer the UE does not use CFRA for BFR. Value in ms. Value ms10 corresponds to 10 ms, value ms20 corresponds to 20 ms, and so on.
 candidateBeamRSList, candidateBeamRSListExt-v1610
-The list of reference signals (CSI-RS and/or SSB) identifying the candidate beams for recovery and the associated RA parameters. The UE shall consider this list to include all elements of candidateBeamRSList (without suffix) and all elements of candidateBeamRSListExt-v1610. The network configures these reference signals to be within the linked DL BWP (i.e., within the DL BWP with the same bwp-Id) of the UL BWP in which the BeamFailureRecoveryConfig is provided. 
+Set of reference signals (CSI-RS and/or SSB) identifying the candidate beams for recovery and the associated RA parameters. This set includes all elements of candidateBeamRSList (without suffix) and all elements of candidateBeamRSListExt-v1610. The UE maintains candidateBeamRSList and candidateBeamRSListExt-v1610 separately: Receiving candidateBeamRSListExt-v1610 set to release releases only the entries that were configured by candidateBeamRSListExt-v1610, and receiving candidateBeamRSListExt-v1610 set to setup replaces only the entries that were configured by candidateBeamRSListExt-v1610 with the newly signalled entries. The network configures these reference signals to be within the linked DL BWP (i.e., within the DL BWP with the same bwp-Id) of the UL BWP in which the BeamFailureRecoveryConfig is provided. 
 msg1-SubcarrierSpacing
 Subcarrier spacing for contention free beam failure recovery. Only the values 15 kHz or 30 kHz (FR1), and 60 kHz or 120 kHz (FR2) are applicable. See TS 38.211 [16], clause 5.3.2.
 rsrp-ThresholdSSB
@@ -11252,7 +11252,7 @@ Parameters which apply for prioritized 2-step random access procedure for BFR (s
 ra-ssb-OccasionMaskIndex
 Explicitly signalled PRACH Mask Index for RA Resource selection in TS 38.321 [3]. The mask is valid for all SSB resources.
 rach-ConfigBFR
-Configuration of contention free random access occasions for BFR.
+Configuration of random access parameters for BFR.
 recoverySearchSpaceId
 Search space to use for BFR RAR. The network configures this search space to be within the linked DL BWP (i.e., within the DL BWP with the same bwp-Id) of the UL BWP in which the BeamFailureRecoveryConfig is provided. The CORESET associated with the recovery search space cannot be associated with another search space. Network always configures the UE with a value for this field when contention free random access resources for BFR are configured.
 rootSequenceIndex-BFR
@@ -11744,7 +11744,7 @@ CellAccessRelatedInfo information element
 -- TAG-CELLACCESSRELATEDINFO-START
 
 CellAccessRelatedInfo   ::=         SEQUENCE {
-    plmn-IdentityList                   PLMN-IdentityInfoList,
+    plmn-IdentityInfoList               PLMN-IdentityInfoList,
     cellReservedForOtherUse             ENUMERATED {true}             OPTIONAL,   -- Need R
     ...,
     [[
@@ -11762,15 +11762,15 @@ Indicates whether the cell is reserved, as defined in 38.304 [20] for future use
 cellReservedForOtherUse
 Indicates whether the cell is reserved, as defined in 38.304 [20]. The field is applicable to all PLMNs. This field is ignored by IAB-MT for cell barring determination, but still considered by NPN capable IAB-MT for determination of an NPN-only cell.
 npn-IdentityInfoList
-The npn-IdentityInfoList is used to configure a set of NPN-IdentityInfo elements. Each of those elements contains a list of one or more NPN Identities and additional information associated with those NPNs. The total number of PLMNs (identified by a PLMN identity in plmn -IdentityList), PNI-NPNs (identified by a PLMN identity and a CAG-ID), and SNPNs (identified by a PLMN identity and a NID) together in the PLMN-IdentityInfoList and NPN-IdentityInfoList does not exceed 12, except for the NPN-only cells. In case of NPN-only cells the PLMN-IdentityList contains a single element that does not count to the limit of 12. The NPN index is defined as B+c1+c2+…+c(n-1)+d1+d2+…+d(m-1)+e(i) for the NPN identity included in the n-th entry of NPN-IdentityInfoList and in the m-th entry of NPN-Identitylist within that npn-IdentityInfoList entry, and the i-th entry of its corresponding NPN-Identity, where
+The npn-IdentityInfoList is used to configure a set of NPN-IdentityInfo elements. Each of those elements contains a list of one or more NPN Identities and additional information associated with those NPNs. The total number of PLMNs (identified by a PLMN identity in plmn -IdentityList), PNI-NPNs (identified by a PLMN identity and a CAG-ID), and SNPNs (identified by a PLMN identity and a NID) together in the PLMN-IdentityInfoList and NPN-IdentityInfoList does not exceed 12, except for the NPN-only cells. A PNI-NPN and SNPN can be included only once, and in only one entry of the NPN-IdentityInfoList. In case of NPN-only cells the PLMN-IdentityList contains a single element that does not count to the limit of 12. The NPN index is defined as B+c1+c2+…+c(n-1)+d1+d2+…+d(m-1)+e(i) for the NPN identity included in the n-th entry of NPN-IdentityInfoList and in the m-th entry of npn-Identitylist within that NPN-IdentityInfoList entry, and the i-th entry of its corresponding NPN-Identity, where
 - B is the index used for the last PLMN in the PLMN-IdentittyInfoList; in NPN-only cells B is considered 0;
 - c(j) is the number of NPN index values used in the j-th NPN-IdentityInfoList entry;
 - d(k) is the number of NPN index values used in the k-th npn-IdentityList entry within the n-th NPN-IdentityInfoList entry;
 - e(i) is
     - i if the n-th entry of NPN-IdentityInfoList entry is for SNPN(s);
     - 1 if the n-th entry of NPN-IdentityInfoList entry is for PNI-NPN(s).
-plmn-IdentityList
-The plmn-IdentityList is used to configure a set of PLMN-IdentityInfo elements. Each of those elements contains a list of one or more PLMN Identities and additional information associated with those PLMNs. A PLMN-identity can be included only once, and in only one entry of the PLMN-IdentityInfoList. The PLMN index is defined as b1+b2+…+b(n-1)+i for the PLMN included at the n-th entry of PLMN-IdentityInfoList and the i-th entry of its corresponding PLMN-IdentityInfo, where b(j) is the number of PLMN-Identity entries in each PLMN-IdentityInfo, respectively.
+plmn-IdentityInfoList
+The plmn-IdentityInfoList is used to configure a set of PLMN-IdentityInfo elements. Each of those elements contains a list of one or more PLMN Identities and additional information associated with those PLMNs. A PLMN-identity can be included only once, and in only one entry of the PLMN-IdentityInfoList. The PLMN index is defined as b1+b2+…+b(n-1)+i for the PLMN included at the n-th entry of PLMN-IdentityInfoList and the i-th entry of its corresponding PLMN-IdentityInfo, where b(j) is the number of PLMN-Identity entries in each PLMN-IdentityInfo, respectively.
 
 –	CellAccessRelatedInfo-EUTRA-5GC
 The IE CellAccessRelatedInfo-EUTRA-5GC indicates cell access related information for an LTE cell connected to 5GC.
@@ -11953,7 +11953,7 @@ ReconfigurationWithSync field descriptions
 rach-ConfigDedicated
 Random access configuration to be used for the reconfiguration with sync (e.g. handover). The UE performs the RA according to these parameters in the firstActiveUplinkBWP (see UplinkConfig).
 smtc
-The SSB periodicity/offset/duration configuration of target cell for NR PSCell change, and NR PCell change. The network sets the periodicityAndOffset to indicate the same periodicity as ssb-periodicityServingCell in spCellConfigCommon.
+The SSB periodicity/offset/duration configuration of target cell for NR PSCell change and NR PCell change. The network sets the periodicityAndOffset to indicate the same periodicity as ssb-periodicityServingCell in spCellConfigCommon.
 For case of NR PCell change, the smtc is based on the timing reference of (source) PCell. For case of NR PSCell change, it is based on the timing reference of source PSCell.
 If both this field and targetCellSMTC-SCG are absent, the UE uses the SMTC in the measObjectNR having the same SSB frequency and subcarrier spacing, as configured before the reception of the RRC message.
 
@@ -11978,12 +11978,15 @@ The field is optionally present, Need N, if drx-ConfigSecondaryGroup is configur
 ReconfWithSync
 The field is mandatory present in the RRCReconfiguration message:
 -	in each configured CellGroupConfig for which the SpCell changes,
--	in the masterCellGroup at change of AS security key derived from KgNB,
+-	in the masterCellGroup:
+-	at change of AS security key derived from KgNB,
+-	in an RRCReconfiguration message contained in a DLInformationTransferMRDC message,
 -	in the secondaryCellGroup at:
 -	PSCell addition,
 -	SCG resume with NR-DC or (NG)EN-DC,
 -	update of required SI for PSCell,
--	change of AS security key derived from S-KgNB while the UE is configured with at least one radio bearer with keyToUse set to secondary and that is not released by this RRCReconfiguration message,
+-	change of AS security key derived from S-KgNB in NR-DC while the UE is configured with at least one radio bearer with keyToUse set to secondary and that is not released by this RRCReconfiguration message,
+-	MN handover in (NG)EN-DC.
 Otherwise, it is optionally present, need M. The field is absent in the masterCellGroup in RRCResume and RRCSetup messages and is absent in the masterCellGroup in RRCReconfiguration messages if source configuration is not released during DAPS handover.
 SCellAdd
 The field is mandatory present upon SCell addition; otherwise it is absent, Need M.
@@ -12374,7 +12377,7 @@ CondReconfigToAddMod field descriptions
 condExecutionCond
 The execution condition that needs to be fulfilled in order to trigger the execution of a conditional reconfiguration. When configuring 2 triggering events (Meas Ids) for a candidate cell, network ensures that both refer to the same measObject.
 condRRCReconfig
-The RRCReconfiguration message to be applied when the condition(s) are fulfilled. The RRCReconfiguration message contained in condRRCReconfig cannot contain the field conditionalReconfiguration or the field daps-Config.
+The RRCReconfiguration message to be applied when the condition(s) are fulfilled. The RRCReconfiguration message contained in condRRCReconfig cannot contain the field conditionalReconfiguration, the field daps-Config or the configuration for target SCG.
 
 Conditional Presence
 Explanation
@@ -12647,7 +12650,7 @@ ConfiguredGrantConfigIndex information element
 -- ASN1START
 -- TAG-CONFIGUREDGRANTCONFIGINDEX-START
 
-ConfiguredGrantConfigIndex-r16 ::= INTEGER (0.. maxNrofConfiguredGrantConfig-r16-1)
+ConfiguredGrantConfigIndex-r16 ::= INTEGER (0.. maxNrofConfiguredGrantConfig-1-r16)
 
 -- TAG-CONFIGUREDGRANTCONFIGINDEX-STOP
 -- ASN1STOP
@@ -12658,7 +12661,7 @@ ConfiguredGrantConfigIndexMAC information element
 -- ASN1START
 -- TAG-CONFIGUREDGRANTCONFIGINDEXMAC-START
 
-ConfiguredGrantConfigIndexMAC-r16 ::= INTEGER (0.. maxNrofConfiguredGrantConfigMAC-r16-1)
+ConfiguredGrantConfigIndexMAC-r16 ::= INTEGER (0.. maxNrofConfiguredGrantConfigMAC-1-r16)
 
 -- TAG-CONFIGUREDGRANTCONFIGINDEXMAC-STOP
 -- ASN1STOP
@@ -12747,9 +12750,9 @@ Resource Element Groups (REGs) can be bundled to create REG bundles. This parame
 shiftIndex
 When the field is absent the UE applies the value of the physCellIdconfigured for this serving cell (see TS 38.211 [16], clause 7.3.2.2).
 tci-PresentInDCI
-This field indicates if TCI field is present or absent in DCI format 1_1. When the field is absent the UE considers the TCI to be absent/disabled. In case of cross carrier scheduling, the network sets this field to enabled for the ControlResourceSet used for cross carrier scheduling in the scheduling cell if enableDefaultBeamForCCS is not configured (see TS 38.214 [19], clause 5.1.5).
+This field indicates if TCI field is present or absent in DCI format 1_1. When the field is absent the UE considers the TCI to be absent/disabled. In case of cross carrier scheduling, the network sets this field to enabled for the ControlResourceSet used for cross carrier scheduling in DCI format 1_1 in the scheduling cell if enableDefaultBeamForCCS is not configured (see TS 38.214 [19], clause 5.1.5).
 tci-PresentDCI-1-2
-Configures the number of bits for "Transmission configuration indicator" in DCI format 1_2. When the field is absent the UE applies the value of 0 bit for the "Transmission configuration indicator" in DCI format 1_2 (see TS 38.212, clause 7.3.1 and TS 38.214, clause 5.1.5).
+Configures the number of bits for "Transmission configuration indicator" in DCI format 1_2. When the field is absent the UE applies the value of 0 bit for the "Transmission configuration indicator" in DCI format 1_2 (see TS 38.212, clause 7.3.1 and TS 38.214, clause 5.1.5). In case of cross carrier scheduling, the network configures this field for the ControlResourceSet used for cross carrier scheduling in DCI format 1_2 in the scheduling cell if enableDefaultBeamForCCS is not configured (see TS 38.214 [19], clause 5.1.5).
 tci-StatesPDCCH-ToAddList
 A subset of the TCI states defined in pdsch-Config included in the BWP-DownlinkDedicated corresponding to the serving cell and to the DL BWP to which the ControlResourceSet belong to. They are used for providing QCL relationships between the DL RS(s) in one RS Set (TCI-State) and the PDCCH DMRS ports (see TS 38.213 [13], clause 6.). The network configures at most maxNrofTCI-StatesPDCCH entries.
 
@@ -13212,13 +13215,13 @@ Indicates in which serving cell the CSI-ResourceConfig indicated below are to be
 codebookConfig
 Codebook configuration for Type-1 or Type-2 including codebook subset restriction. Network does not configure codebookConfig and codebookConfig-r16 simultaneously to a UE 
 cqi-FormatIndicator
-Indicates whether the UE shall report a single (wideband) or multiple (subband) CQI. (see TS 38.214 [19], clause 5.2.1.4).
+Indicates whether the UE shall report a single (wideband) or multiple (subband) CQI (see TS 38.214 [19], clause 5.2.1.4).
 cqi-Table
 Which CQI table to use for CQI calculation (see TS 38.214 [19], clause 5.2.2.1).
 csi-IM-ResourcesForInterference
 CSI IM resources for interference measurement. csi-ResourceConfigId of a CSI-ResourceConfig included in the configuration of the serving cell indicated with the field "carrier" above. The CSI-ResourceConfig indicated here contains only CSI-IM resources. The bwp-Id in that CSI-ResourceConfig is the same value as the bwp-Id in the CSI-ResourceConfig indicated by resourcesForChannelMeasurement.
 csi-ReportingBand
-Indicates a contiguous or non-contiguous subset of subbands in the bandwidth part which CSI shall be reported for. Each bit in the bit-string represents one subband. The right-most bit in the bit string represents the lowest subband in the BWP. The choice determines the number of subbands (subbands3 for 3 subbands, subbands4 for 4 subbands, and so on) (see TS 38.214 [19], clause 5.2.1.4). This field is absent if there are less than 24 PRBs (no sub band) and present otherwise, the number of sub bands can be from 3 (24 PRBs, sub band size 8) to 18 (72 PRBs, sub band size 4).
+Indicates a contiguous or non-contiguous subset of subbands in the bandwidth part which CSI shall be reported for. Each bit in the bit-string represents one subband. The right-most bit in the bit string represents the lowest subband in the BWP. The choice determines the number of subbands (subbands3 for 3 subbands, subbands4 for 4 subbands, and so on) (see TS 38.214 [19], clause 5.2.1.4). This field is absent if there are less than 24 PRBs (no sub band) and present otherwise (see TS 38.214 [19], clause 5.2.1.4).
 dummy
 This field is not used in the specification. If received it shall be ignored by the UE.
 groupBasedBeamReporting
@@ -14186,7 +14189,7 @@ LBT-FailureRecoveryConfig field descriptions
 lbt-FailureDetectionTimer
 Timer for consistent uplink LBT failure detection (see TS 38.321 [3]). Value ms10 corresponds to 10 ms, value ms20 corresponds to 20 ms, and so on.
 lbt-FailureInstanceMaxCount
-This field determines after how many consistent uplink LBT failure events the UE triggers uplink LBT failure recovery (see TS 38.321 [3]). Value n4 corresponds to 4, value n8 corresponds to 8, and so on.
+This field determines after how many LBT failure indications received from the physical layer the UE triggers uplink LBT failure recovery (see TS 38.321 [3]). Value n4 corresponds to 4, value n8 corresponds to 8, and so on.
 
 –	LocationInfo
 The IE LocationInfo is used to transfer available detailed location information, Bluetooth, WLAN and sensor available measurement results at the UE.
@@ -14284,7 +14287,7 @@ LogicalChannelConfig ::=            SEQUENCE {
         ...,
         bitRateQueryProhibitTimer       ENUMERATED {s0, s0dot4, s0dot8, s1dot6, s3, s6, s12, s30}               OPTIONAL,    -- Need R
         [[
-        allowedCG-List-r16                  SEQUENCE (SIZE (0.. maxNrofConfiguredGrantConfigMAC-r16-1)) OF ConfiguredGrantConfigIndexMAC-r16
+        allowedCG-List-r16                  SEQUENCE (SIZE (0.. maxNrofConfiguredGrantConfigMAC-1-r16)) OF ConfiguredGrantConfigIndexMAC-r16
                                                                                                                 OPTIONAL,   -- Need S
         allowedPHY-PriorityIndex-r16        ENUMERATED {p0, p1}                                                 OPTIONAL    -- Need S
         ]]
@@ -14405,7 +14408,7 @@ Indicates the scheduling request configuration applicable for BFR on SCell, as s
 schedulingRequestID-LBT-SCell
 Indicates the scheduling request configuration applicable for consistent uplink LBT recovery on SCell, as specified in TS 38.321 [3].
 skipUplinkTxDynamic, enhancedSkipUplinkTxDynamic, enhancedSkipUplinkTxConfigured
-If set to true, the UE skips UL transmissions as described in TS 38.321 [3].
+If set to true, the UE skips UL transmissions as described in TS 38.321 [3]. If the UE is configured with enhancedSkipUplinkTxDynamic or enhancedSkipUplinkTxConfigured with value true, REPETITION_NUMBER (as specified in TS 38.321 [3], clause 5.4.2.1) of the corresponding PUSCH transmission of the uplink grant shall be equal to 1.
 tag-Config
 The field is used to configure parameters for a time-alignment group. The field is not present if any DAPS bearer is configured.
 
@@ -14761,7 +14764,7 @@ RSSI-ResourceConfigCLI-r16 ::=      SEQUENCE {
     ...
 }
 
-RSSI-ResourceId-r16 ::=             INTEGER (0.. maxNrofCLI-RSSI-Resources-r16-1)
+RSSI-ResourceId-r16 ::=             INTEGER (0.. maxNrofCLI-RSSI-Resources-1-r16)
 
 RSSI-PeriodicityAndOffset-r16 ::=   CHOICE {
     sl10                                INTEGER(0..9),
@@ -14804,7 +14807,7 @@ refServCellIndex
 The index of the reference serving cell. Frequency reference point of the RSSI resource is subcarrier 0 of CRB0 of the reference serving cell. If this field is absent, the reference serving cell is PCell.
 rssi-PeriodicityAndOffset
 Periodicity and slot offset for this CLI-RSSI resource. All values are in "number of slots". Value sl1 corresponds to a periodicity of 1 slot, value sl2 corresponds to a periodicity of 2 slots, and so on. For each periodicity the corresponding offset is given in number of slots.
-rssi-scs
+rssi-SCS
 Reference subcarrier spacing for CLI-RSSI measurement. Only the values 15, 30 kHz or 60 kHz (FR1), and 60 or 120 kHz (FR2) are applicable. UE performs CLI-RSSI measurement with the SCS of the active bandwidth part within the configured CLI-RSSI resource in the active BWP regardless of the reference SCS of the measurement resource.
 startPosition
 OFDM symbol location of the CLI-RSSI resource within a slot.
@@ -15218,7 +15221,7 @@ frameBoundaryOffsetResult
 Indicates the frame boundary difference between the PCell and the E-UTRA cell as an integer value according to TS 38.215 [9].
 
 –	MeasResults
-The IE MeasResults covers measured results for intra-frequency, inter-frequency, inter-RAT mobility and measured results for sidelink.
+The IE MeasResults covers measured results for intra-frequency, inter-frequency, inter-RAT mobility and measured results for NR sidelink communication.
 MeasResults information element
 -- ASN1START
 -- TAG-MEASRESULTS-START
@@ -16630,9 +16633,9 @@ PDSCH-Config ::=                        SEQUENCE {
 
     -- Start of the parameters for DCI format 1_2 introduced in V16.1.0
     antennaPortsFieldPresenceDCI-1-2-r16            ENUMERATED {enabled}                                        OPTIONAL,   -- Need S
-    aperiodicZP-CSI-RS-ResourceSetsToAddModListDCI-1-2-r16  SEQUENCE (SIZE (1..maxNrofZP-CSI-RS-ResourceSets)) OF ZP-CSI-RS-ResourceSet                                                                                          
+    aperiodicZP-CSI-RS-ResourceSetsToAddModListDCI-1-2-r16  SEQUENCE (SIZE (1..maxNrofZP-CSI-RS-ResourceSets)) OF ZP-CSI-RS-ResourceSet                                                                                         
                                                                                                                 OPTIONAL,   -- Need N
-    aperiodicZP-CSI-RS-ResourceSetsToReleaseListDCI-1-2-r16 SEQUENCE (SIZE (1..maxNrofZP-CSI-RS-ResourceSets)) OF ZP-CSI-RS-ResourceSetId                                                                                              
+    aperiodicZP-CSI-RS-ResourceSetsToReleaseListDCI-1-2-r16 SEQUENCE (SIZE (1..maxNrofZP-CSI-RS-ResourceSets)) OF ZP-CSI-RS-ResourceSetId                                                                                             
                                                                                                                 OPTIONAL,   -- Need N
     dmrs-DownlinkForPDSCH-MappingTypeA-DCI-1-2-r16  SetupRelease { DMRS-DownlinkConfig }                        OPTIONAL,   -- Need M
     dmrs-DownlinkForPDSCH-MappingTypeB-DCI-1-2-r16  SetupRelease { DMRS-DownlinkConfig }                        OPTIONAL,   -- Need M
@@ -16856,7 +16859,7 @@ Slot offset between DCI and its scheduled PDSCH (see TS 38.214 [19], clause 5.1.
 mappingType
 PDSCH mapping type. (see TS 38.214 [19], clause 5.3).
 repetitionNumber
-Indicates the number of PDSCH transmission occations for slot-based repetition scheme in IE RepetitionSchemeConfig. The parameter is used as specified in 38.214 [19].
+Indicates the number of PDSCH transmission occasions for slot-based repetition scheme in IE RepetitionSchemeConfig. The parameter is used as specified in 38.214 [19].
 startSymbolAndLength
 An index giving valid combinations of start symbol and length (jointly encoded) as start and length indicator (SLIV). The network configures the field so that the allocation does not cross the slot boundary (see TS 38.214 [19], clause 5.1.2.1).
 
@@ -17060,7 +17063,7 @@ The maximum total transmit power to be used by the UE across all serving cells i
 pdsch-HARQ-ACK-Codebook
 The PDSCH HARQ-ACK codebook is either semi-static or dynamic. This is applicable to both CA and none CA operation (see TS 38.213 [13], clauses 9.1.2 and 9.1.3). If pdsch-HARQ-ACK-Codebook-r16 is signalled, UE shall ignore the pdsch-HARQ-ACK-Codebook (without suffix). For the HARQ-ACK for sidelink, if pdsch-HARQ-ACK-Codebook-r16 is signalled, the UE uses pdsch-HARQ-ACK-Codebook (without suffix) and ignores pdsch-HARQ-ACK-Codebook-r16. If the field pdsch-HARQ-ACK-Codebook-secondaryPUCCHgroup is present, pdsch-HARQ-ACK-Codebook is applied to primary PUCCH group. Otherwise, this field is applied to the cell group (i.e. for all the cells within the cell group). For the HARQ-ACK for sidelink, if the field pdsch-HARQ-ACK-Codebook-secondaryPUCCHgroup is present, pdsch-HARQ-ACK-Codebook is applied to primary and secondary PUCCH group and the UE ignores pdsch-HARQ-ACK-Codebook-secondaryPUCCHgroup.
 pdsch-HARQ-ACK-CodebookList
-A list of configuration for at least two simultaneously constructed HARQ-ACK codebooks. Each configuration in the list is defined in the same way as pdsch-HARQ-ACK-Codebook (see TS 38.212 [17], clause 7.3.1.2.2 and TS 38.213 [13], clauses 7.2.1, 9.1.2, 9.1.3 and 9.2.1). If this field is present, the field pdsch-HARQ-ACK-Codebook is ignored for the case at least two HARQ-ACK codebooks are simultaneously constructed. If this field is present, the value of this field is applied for primary PUCCH group and for secondary PUCCH group (if configured). For the HARQ-ACK for sidelink, the UE uses pdsch-HARQ-ACK-Codebook and ignores pdsch-HARQ-ACK-CodebookList if this field is present.
+A list of configurations for one or two HARQ-ACK codebooks. Each configuration in the list is defined in the same way as pdsch-HARQ-ACK-Codebook (see TS 38.212 [17], clause 7.3.1.2.2 and TS 38.213 [13], clauses 7.2.1, 9.1.2, 9.1.3 and 9.2.1). If this field is present, the field pdsch-HARQ-ACK-Codebook is ignored. If this field is present, the value of this field is applied for primary PUCCH group and for secondary PUCCH group (if configured). For the HARQ-ACK for sidelink, the UE uses pdsch-HARQ-ACK-Codebook and ignores pdsch-HARQ-ACK-CodebookList if this field is present.
 pdsch-HARQ-ACK-Codebook-secondaryPUCCHgroup
 The PDSCH HARQ-ACK codebook is either semi-static or dynamic. This is applicable to CA operation (see TS 38.213 [13], clauses 9.1.2 and 9.1.3). It is configured for secondary PUCCH group.
 pdsch-HARQ-ACK-OneShotFeedback
@@ -18050,7 +18053,7 @@ Dedicated alpha value for msg3 PUSCH (see TS 38.213 [13], clause 7.1). When the 
 olpc-ParameterSetDCI-0-1, olpc-ParameterSetDCI-0-2
 Configures the number of bits for Open-loop power control parameter set indication for DCI format 0_1/0_2 in case SRI is not configured in the DCI. 2 bits is applicable only if SRI is not present in the DCI format 0_1. The field olpc-ParameterSetDCI-0-1 applies to DCI format 0_1 and the field olpc-ParameterSetDCI-0-2 applies to DCI format 0_2 (see TS 38.212 [17], clause 7.3.1 and TS 38.213 [13], clause 11).
 p0-AlphaSets
-configuration {p0-pusch, alpha} sets for PUSCH (except msg3), i.e., { {p0,alpha,index1}, {p0,alpha,index2},...} (see TS 38.213 [13], clause 7.1). When no set is configured, the UE uses the P0-nominal for msg3 PUSCH, P0-UE is set to 0 and alpha is set according to msg3-Alpha configured for msg3 PUSCH.
+configuration {p0-pusch, alpha} sets for PUSCH (except msg3 and msgA PUSCH), i.e., { {p0,alpha,index1}, {p0,alpha,index2},...} (see TS 38.213 [13], clause 7.1). When no set is configured, the UE uses the P0-nominal for msg3 PUSCH, P0-UE is set to 0 and alpha is set according to msg3-Alpha configured for msg3 PUSCH.
 p0-NominalWithoutGrant
 P0 value for UL grant-free/SPS based PUSCH. Value in dBm. Only even values (step size 2) allowed (see TS 38.213 [13], clause 7.1).
 p0-PUSCH-SetList
@@ -18629,7 +18632,7 @@ CFRA-TwoStep field descriptions
 msgA-CFRA-PUSCH
 PUSCH resource configuration(s) for msgA CFRA.
 msgA-TransMax
-Max number of MsgA preamble transmissions performed before switching to 4-step type random access (see TS 38.321 [3], clauses 5.1.1). This field is only applicable when 2-step and 4-step RA type are configured and switching to 4-step type RA is supported. If the field is absent in RACH-ConfigDedidated, switching from 2-step RA type to 4-step RA type is not allowed.
+Max number of MsgA preamble transmissions performed before switching to 4-step type random access (see TS 38.321 [3], clauses 5.1.1). This field is only applicable when 2-step and 4-step RA type are configured and switching to 4-step type RA is supported. If the field is absent in cfra-TwoStep, switching from 2-step RA type to 4-step RA type is not allowed.
 occasionsTwoStepRA
 RA occasions for contention free random access. If the field is absent, the UE uses the RA occasions configured in RACH-ConfigCommonTwoStepRA in the first active UL BWP.
 ra-SSB-OccasionMaskIndex
@@ -19160,11 +19163,11 @@ SlotBased-v1630 ::=            SEQUENCE {
 
 RepetitionSchemeConfig field descriptions
 fdm-TDM
-Configures UE with a repetition scheme among fdmSchemeA, fdmSchemeB and tdmSchemeA as specified in clause 5.1 of TS 38.214 [19].
+Configures UE with a repetition scheme among fdmSchemeA, fdmSchemeB and tdmSchemeA as specified in clause 5.1 of TS 38.214 [19]. The network does not set this field to release. Upon reception of this field in RepetitionSchemeConfig-r16, the UE shall release slotBased if previously configured in the same instance of RepetitionSchemeConfig-r16.
 sequenceOffsetForRV
 For slot-based repetition scheme, selected RV sequence is applied to transmission occasions associated to the first TCI state. The RV sequence associated to the second TCI state is determined by a RV offset from that selected RV sequence.
 slotBased
-Configures UE with slot-based repetition scheme. Network always configures this field when the parameter repetitionNumber is present in IE PDSCH-TimeDomainResourceAllocationList
+Configures UE with slot-based repetition scheme. Network always configures this field when the parameter repetitionNumber is present in IE PDSCH-TimeDomainResourceAllocationList. The network does not set this field to release. Upon reception of this field in RepetitionSchemeConfig-r16, the UE shall release fdm-TDM if previously configured in the same instance of RepetitionSchemeConfig-r16.
 startingSymbolOffsetK
 The starting symbol of the second transmission occasion has K symbol offset relative to the last symbol of the first transmission occasion. When UE is configured with tdmSchemeA, the parameter startingSymbolOffsetK is present, otherwise absent.
 tciMapping
@@ -20031,7 +20034,7 @@ RSRQ-Range ::=                      INTEGER(0..127)
 -- ASN1STOP
 
 –	RSSI-Range
-The IE RSSI-Range specifies the value range used in RSSI measurements and thresholds for NR operation with shared spectrum channel access. The integer value for RSSI measurements is derived from the mapping table as defined in in TS 38.133 [14].
+The IE RSSI-Range specifies the value range used in RSSI measurements and thresholds for NR operation with shared spectrum channel access. The integer value for RSSI measurements is according to Table 10.1.34.3-1 in TS 38.133 [14].
 RSSI-Range information element
 -- ASN1START
 -- TAG-RSSI-RANGE-START
@@ -20750,7 +20753,7 @@ supplementaryUplinkRelease
 If this field is included, the UE shall release the uplink configuration configured by supplementaryUplink. The network only includes either supplementaryUplinkRelease or supplementaryUplink at a time.
 tag-Id
 Timing Advance Group ID, as specified in TS 38.321 [3], which this cell belongs to.
-tdd-UL-DL-ConfigurationDedicated-iab-mt
+tdd-UL-DL-ConfigurationDedicated-IAB-MT
 Resource configuration per IAB-MT D/U/F overrides all symbols (with a limitation that effectively only flexible symbols can be overwritten in Rel-16) per slot over the number of slots as provided by TDD-UL-DL ConfigurationCommon.
 uplinkConfig
 Network may configure this field only when uplinkConfigCommon is configured in ServingCellConfigCommon or ServingCellConfigCommonSIB. Addition or release of this field can only be done upon SCell addition or release (respectively).
@@ -21014,7 +21017,7 @@ SI-RequestConfig information element
 -- ASN1START
 -- TAG–SI-REQUESTCONFIG-START
 
-SI-RequestConfig::=                 SEQUENCE {
+SI-RequestConfig ::=                SEQUENCE {
     rach-OccasionsSI                    SEQUENCE {
         rach-ConfigSI                       RACH-ConfigGeneric,
         ssb-perRACH-Occasion                ENUMERATED {oneEighth, oneFourth, oneHalf, one, two, four, eight, sixteen}
@@ -21155,7 +21158,7 @@ Slot formats that occur in consecutive slots in time domain order as listed here
 
 SlotFormatCombinationsPerCell field descriptions
 enableConfiguredUL
-If configured, the UE is allowed to transmit uplink signals (SRS, PUCCH, CG-PUSCH) in the set of symbols of the slot when the UE does not detect a DCI format 2_0 providing a slot format for the set of symbols (see TS 38.213 [13], 11.1.1).
+If configured, the UE is allowed to transmit uplink signals/channels (SRS, PUCCH, CG-PUSCH) in the set of symbols of the slot when the UE does not detect a DCI format 2_0 providing a slot format for the set of symbols (see TS 38.213 [13], 11.1.1).
 positionInDCI
 The (starting) position (bit) of the slotFormatCombinationId (SFI-Index) for this serving cell (servingCellId) within the DCI payload (see TS 38.213 [13], clause 11.1.1).
 servingCellId
@@ -21357,7 +21360,7 @@ SPS-ConfigIndex information element
 -- ASN1START
 -- TAG-SPS-CONFIGINDEX-START
 
-SPS-ConfigIndex-r16             ::= INTEGER (0.. maxNrofSPS-Config-r16-1)
+SPS-ConfigIndex-r16             ::= INTEGER (0.. maxNrofSPS-Config-1-r16)
 
 -- TAG-SPS-CONFIGINDEX-STOP
 -- ASN1STOP
@@ -22400,7 +22403,7 @@ UAC-BarringPerPLMN-List field descriptions
 uac-ACBarringListType
 Access control parameters for each access category valid only for a specific PLMN or SNPN. UE behaviour upon absence of this field is specified in clause 5.3.14.2.
 plmn-IdentityIndex
-Index of the PLMN or SNPN across the plmn-IdentityList and npn-IdentityInfoList fields included in SIB1.
+Index of the PLMN or SNPN across the plmn-IdentityInfoList and npn-IdentityInfoList fields included in SIB1.
 
 –	UE-TimersAndConstants
 The IE UE-TimersAndConstants contains timers and constants used by the UE in RRC_CONNECTED, RRC_INACTIVE and RRC_IDLE.
@@ -22454,8 +22457,8 @@ UplinkCancellation-r16 ::=           SEQUENCE {
 
 CI-ConfigurationPerServingCell-r16 ::=   SEQUENCE {
     servingCellId                            ServCellIndex,
-    positionInDCI-r16                        INTEGER (0..maxCI-DCI-PayloadSize-r16-1),
-    positionInDCI-ForSUL-r16                 INTEGER (0..maxCI-DCI-PayloadSize-r16-1)                             OPTIONAL,   -- Cond SUL-Only
+    positionInDCI-r16                        INTEGER (0..maxCI-DCI-PayloadSize-1-r16),
+    positionInDCI-ForSUL-r16                 INTEGER (0..maxCI-DCI-PayloadSize-1-r16)                             OPTIONAL,   -- Cond SUL-Only
     ci-PayloadSize-r16                       ENUMERATED {n1, n2, n4, n5, n7, n8, n10, n14, n16, n20, n28, n32, n35, n42, n56, n112},
     timeFrequencyRegion-r16                  SEQUENCE {
         timeDurationForCI-r16                    ENUMERATED {n2, n4, n7, n14}                                      OPTIONAL,   -- Cond SymbolPeriodicity
@@ -22640,7 +22643,7 @@ UplinkTxDirectCurrentCarrierInfo field descriptions
 bwp-Id
 The BWP ID of the serving cell which is part of the two carrier uplink carrier aggregation. The UE shall not report this field if the serving cell is reported as deactivated using deactivatedCarrier-r16.
 deactivatedCarrier
-For the reported uplink Tx Direct Current location(s) corresponding to singlePA-TxDirectCurrent-r16, indicates whether the carrier is deactivated or not for this serving cell. If the carrier refers to the PCell, the UE shall not set this field to deactivated..
+For the reported uplink Tx Direct Current location(s) corresponding to singlePA-TxDirectCurrent-r16, indicates whether the carrier is deactivated or not for this serving cell. If the carrier refers to the PCell, the UE shall not set this field to deactivated.
 servCellIndex
 The serving cell ID of the serving cell which is part of the two carrier uplink carrier aggregation.
 
@@ -22650,9 +22653,9 @@ The serving cell ID and BWP ID of the first carrier of the uplink carrier aggreg
 carrierTwoInfo
 The serving cell ID and BWP ID of the second carrier of the uplink carrier aggregation for which the uplink Tx Direct Current location(s) are being reported.
 singlePA-TxDirectCurrent
-The uplink Tx Direct Current location for the UE which support single PA for this uplink carrier aggregation. For the UEs which support dual PA for this uplink carrier aggregation, this filed is for reporting the uplink Tx Direct Current location of the first PA.  
+The uplink Tx Direct Current location for the UE which support single PA for this uplink carrier aggregation. For the UEs which support dual PA for this uplink carrier aggregation, this field is for reporting the uplink Tx Direct Current location of the first PA.  
 secondPA-TxDirectCurrent
-The uplink Tx Direct Current location used by the UE with the second PA for the UEs which support dual PA for this uplink carrier aggregation. 
+The uplink Tx Direct Current location used by the UE with the second PA for the UEs which support dual PA for this uplink carrier aggregation. This field shall be absent for the UplinkTxDirectCurrentTwoCarrier entity where deactivatedCarrier of carrierOneInfo or carrierTwoInfo is set to deactivated.
 
 –	ZP-CSI-RS-Resource
 The IE ZP-CSI-RS-Resource is used to configure a Zero-Power (ZP) CSI-RS resource (see TS 38.214 [19], clause 5.1.4.2). Reconfiguration of a ZP-CSI-RS-Resource between periodic or semi-persistent and aperiodic is not supported.
@@ -23153,13 +23156,13 @@ CA-ParametersNR-v1630 ::= SEQUENCE {
 CA-ParametersNR-v1640 ::= SEQUENCE {
     -- R4 7-5: Support of reporting UL Tx DC locations for uplink intra-band CA.
     uplinkTxDC-TwoCarrierReport-r16                               ENUMERATED {supported}          OPTIONAL,
-    -- RAN 22-6: Support of up to 3 different numerologies in the same NR PUCCH group for NR part of EN-DC, NGEN-DC, NE-DC and NR-CA 
+    -- RAN 22-6: Support of up to 3 different numerologies in the same NR PUCCH group for NR part of EN-DC, NGEN-DC, NE-DC and NR-CA
     -- where UE is not configured with two NR PUCCH groups
     maxUpTo3Diff-NumerologiesConfigSinglePUCCH-grp-r16            PUCCH-Grp-CarrierTypes-r16      OPTIONAL,
-    -- RAN 22-6a: Support of up to 4 different numerologies in the same NR PUCCH group for NR part of EN-DC, NGEN-DC, NE-DC and NR-CA 
+    -- RAN 22-6a: Support of up to 4 different numerologies in the same NR PUCCH group for NR part of EN-DC, NGEN-DC, NE-DC and NR-CA
     -- where UE is not configured with two NR PUCCH groups
     maxUpTo4Diff-NumerologiesConfigSinglePUCCH-grp-r16            PUCCH-Grp-CarrierTypes-r16      OPTIONAL,
-    -- RAN 22-7: Support two PUCCH groups for NR-CA with 3 or more bands with at least two carrier types 
+    -- RAN 22-7: Support two PUCCH groups for NR-CA with 3 or more bands with at least two carrier types
     twoPUCCH-Grp-ConfigurationsList-r16 SEQUENCE (SIZE (1..maxTwoPUCCH-Grp-ConfigList-r16)) OF TwoPUCCH-Grp-Configurations-r16 OPTIONAL,
     -- R1 22-7a: Different numerology across NR PUCCH groups
     diffNumerologyAcrossPUCCH-Group-CarrierTypes-r16              ENUMERATED {supported}          OPTIONAL,
@@ -25493,6 +25496,9 @@ RF-Parameters ::=                                   SEQUENCE {
     [[
     supportedBandCombinationList-v1650                  BandCombinationList-v1650                   OPTIONAL,
     supportedBandCombinationList-UplinkTxSwitch-v1650   BandCombinationList-UplinkTxSwitch-v1650    OPTIONAL
+    ]],
+    [[
+    extendedBand-n77-r16                                ENUMERATED {supported}                      OPTIONAL
     ]]
 
 }
@@ -25660,6 +25666,10 @@ BandNR ::=                          SEQUENCE {
     configuredUL-GrantType1-v1650             ENUMERATED {supported}                       OPTIONAL,
     configuredUL-GrantType2-v1650             ENUMERATED {supported}                       OPTIONAL,
     sharedSpectrumChAccessParamsPerBand-v1650 SharedSpectrumChAccessParamsPerBand-v1650    OPTIONAL
+    ]],
+    [[
+    enhancedSkipUplinkTxConfigured-v1660      ENUMERATED {supported}                       OPTIONAL,
+    enhancedSkipUplinkTxDynamic-v1660         ENUMERATED {supported}                       OPTIONAL
     ]]
 }
 
@@ -27235,7 +27245,7 @@ HO
 This field is optionally present, need M, in an RRCReconfiguration message including reconfigurationWithSync; otherwise it is absent, Need M.
 
 –	SL-BWP-PoolConfigCommon
-The IE SL-BWP-PoolConfigCommon is used to configure configure the cell-specific NR sidelink communication resource pool.
+The IE SL-BWP-PoolConfigCommon is used to configure the cell-specific NR sidelink communication resource pool.
 SL-BWP-PoolConfigCommon information element
 -- ASN1START
 -- TAG-SL-BWP-POOLCONFIGCOMMON-START
@@ -27419,7 +27429,7 @@ SL-ConfiguredGrantConfig-r16 ::=           SEQUENCE {
     ]]
 }
 
-SL-ConfigIndexCG-r16 ::=          INTEGER (0..maxNrofCG-SL-r16-1)
+SL-ConfigIndexCG-r16 ::=          INTEGER (0..maxNrofCG-SL-1-r16)
 
 SL-CG-MaxTransNumList-r16 ::=     SEQUENCE (SIZE (1..8)) OF SL-CG-MaxTransNum-r16
 
@@ -27558,7 +27568,7 @@ Indicates the frequency location of sidelink SSB. The transmission bandwidth for
 sl-BWP-List
 This field indicates the list of sidelink BWP(s) on which the NR sidelink communication configuration. In this release, only one BWP is allowed to be configured for NR sidelink conmunication.
 sl-NbAsSync
-This field indicates whether the network can be selected as synchronization reference directly/indirectly only, if sl-SyncPriority is set to gnss. If this filed is set to TRUE, the network is enabled to be selected as synchronization reference directly/indirectly. The field is only present in SidelinkPreconfigNR. Otherwise it is absent.
+This field indicates whether the network can be selected as synchronization reference directly/indirectly only, if sl-SyncPriority is set to gnss. If this field is set to TRUE, the network is enabled to be selected as synchronization reference directly/indirectly. The field is only present in SidelinkPreconfigNR. Otherwise it is absent.
 sl-SyncPriority
 This field indicates synchronization priority order, as specified in sub-clause 5.8.6..
 sl-SyncConfigList
@@ -27585,7 +27595,7 @@ SL-LogicalChannelConfig-r16 ::=            SEQUENCE {
                                                spare7, spare6, spare5, spare4, spare3,spare2, spare1},
     sl-ConfiguredGrantType1Allowed-r16         ENUMERATED {true}                                                        OPTIONAL,   -- Need R
     sl-HARQ-FeedbackEnabled-r16                ENUMERATED {enabled, disabled }                                          OPTIONAL,   -- Need R
-    sl-AllowedCG-List-r16                      SEQUENCE (SIZE (0.. maxNrofCG-SL-r16-1)) OF SL-ConfigIndexCG-r16
+    sl-AllowedCG-List-r16                      SEQUENCE (SIZE (0.. maxNrofCG-SL-1-r16)) OF SL-ConfigIndexCG-r16
                                                                                                                         OPTIONAL,   -- Need R
     sl-AllowedSCS-List-r16                     SEQUENCE (SIZE (1..maxSCSs)) OF SubcarrierSpacing                        OPTIONAL,   -- Need R
     sl-MaxPUSCH-Duration-r16                   ENUMERATED {ms0p02, ms0p04, ms0p0625, ms0p125, ms0p25, ms0p5, spare2, spare1}
@@ -28311,7 +28321,7 @@ Scrambling ID for sequence hopping of the PSFCH used in the resource pool.
 sl-PSFCH-Period
 Indicates the period of PSFCH resource in the unit of slots within this resource pool. If set to sl0, no resource for PSFCH, and HARQ feedback for all transmissions in the resource pool is disabled.
 sl-PSFCH-RB-Set
-Indicates the set of PRBs that are actually used for PSFCH transmission and reception. The leftmost bit of the bitmap refers to the lowest RB index in the resource pool, and so on
+Indicates the set of PRBs that are actually used for PSFCH transmission and reception. The leftmost bit of the bitmap refers to the lowest RB index in the resource pool, and so on. Value 0 in the bitmap indicates that the corresponding PRB is not used for PSFCH transmission and reception while value 1 indicates that the corresponding PRB is used for PSFCH transmission and reception (see TS 38.213 [13]).
 
 SL-PTRS-Config field descriptions
 sl-PTRS-FreqDensity
@@ -28707,7 +28717,7 @@ SLRB-Uu-ConfigIndex-r16 ::=                    INTEGER (1..maxNrofSLRB-r16)
 -- TAG-MULTIPLICITY-AND-TYPE-CONSTRAINT-DEFINITIONS-START
 
 maxAI-DCI-PayloadSize-r16               INTEGER ::= 128      --Maximum size of the DCI payload scrambled with ai-RNTI
-maxAI-DCI-PayloadSize-r16-1             INTEGER ::= 127      --Maximum size of the DCI payload scrambled with ai-RNTI minus 1
+maxAI-DCI-PayloadSize-1-r16             INTEGER ::= 127      --Maximum size of the DCI payload scrambled with ai-RNTI minus 1
 maxBandComb                             INTEGER ::= 65536   -- Maximum number of DL band combinations
 maxBandsUTRA-FDD-r16                    INTEGER ::= 64      -- Maximum number of bands listed in UTRA-FDD UE caps
 maxBH-RLC-ChannelID-r16                 INTEGER ::= 65536   -- Maximum value of BH RLC Channel ID
@@ -28746,11 +28756,11 @@ maxNrofAggregatedCellsPerCellGroup      INTEGER ::= 16
 maxNrofAggregatedCellsPerCellGroupMinus4-r16   INTEGER ::= 12
 maxNrofDUCells-r16                      INTEGER ::= 512     -- Max number of cells configured on the collocated IAB-DU
 maxNrofAvailabilityCombinationsPerSet-r16   INTEGER ::= 512 -- Max number of AvailabilityCombinationId used in the DCI format 2_5
-maxNrofAvailabilityCombinationsPerSet-r16-1 INTEGER ::= 511 -- Max number of AvailabilityCombinationId used in the DCI format 2_5 minus 1
+maxNrofAvailabilityCombinationsPerSet-1-r16 INTEGER ::= 511 -- Max number of AvailabilityCombinationId used in the DCI format 2_5 minus 1
 maxNrofSCells                           INTEGER ::= 31      -- Max number of secondary serving cells per cell group
 maxNrofCellMeas                         INTEGER ::= 32      -- Maximum number of entries in each of the cell lists in a measurement object
 maxNrofCG-SL-r16                        INTEGER ::= 8       -- Max number of sidelink configured grant
-maxNrofCG-SL-r16-1                      INTEGER ::= 7       -- Max number of sidelink configured grant minus 1
+maxNrofCG-SL-1-r16                      INTEGER ::= 7       -- Max number of sidelink configured grant minus 1
 maxNrofSS-BlocksToAverage               INTEGER ::= 16      -- Max number for the (max) number of SS blocks to average to determine cell measurement
 maxNrofCondCells-r16                    INTEGER ::= 8       -- Max number of conditional candidate SpCells
 maxNrofCSI-RS-ResourcesToAverage        INTEGER ::= 16      -- Max number for the (max) number of CSI-RS to average to determine cell measurement
@@ -28942,7 +28952,7 @@ maxSIB                                  INTEGER::= 32       -- Maximum number of
 maxSI-Message                           INTEGER::= 32       -- Maximum number of SI messages
 maxPO-perPF                             INTEGER ::= 4       -- Maximum number of paging occasion per paging frame
 maxAccessCat-1                          INTEGER ::= 63      -- Maximum number of Access Categories minus 1
-maxBarringInfoSet                       INTEGER ::= 8       -- Maximum number of Access Categories
+maxBarringInfoSet                       INTEGER ::= 8       -- Maximum number of access control parameter sets
 maxCellEUTRA                            INTEGER ::= 8       -- Maximum number of E-UTRA cells in SIB list
 maxEUTRA-Carrier                        INTEGER ::= 8       -- Maximum number of E-UTRA carriers in SIB list
 maxPLMNIdentities                       INTEGER ::= 8       -- Maximum number of PLMN identites in RAN area configurations
@@ -28966,7 +28976,7 @@ maxNrofP0-PUSCH-Set-r16                 INTEGER ::= 2       -- Maximum number of
 maxOnDemandSIB-r16                      INTEGER ::= 8       -- Maximum number of SIB(s) that can be requested on-demand
 maxOnDemandPosSIB-r16                   INTEGER ::= 32      -- Maximum number of posSIB(s) that can be requested on-demand
 maxCI-DCI-PayloadSize-r16               INTEGER ::= 126     -- Maximum number of the DCI size for CI
-maxCI-DCI-PayloadSize-r16-1             INTEGER ::= 125     -- Maximum number of the DCI size for CI minus 1
+maxCI-DCI-PayloadSize-1-r16             INTEGER ::= 125     -- Maximum number of the DCI size for CI minus 1
 maxWLAN-Id-Report-r16                   INTEGER ::= 32      -- Maximum number of WLAN IDs to report
 maxWLAN-Name-r16                        INTEGER ::= 4       -- Maximum number of WLAN name
 maxRAReport-r16                         INTEGER ::= 8       -- Maximum number of RA procedures information to be included in the RA report
@@ -28974,16 +28984,15 @@ maxTxConfig-r16                         INTEGER ::= 64      -- Maximum number of
 maxTxConfig-1-r16                       INTEGER ::= 63      -- Maximum number of sidelink transmission parameters configurations minus 1
 maxPSSCH-TxConfig-r16                   INTEGER ::= 16      -- Maximum number of PSSCH TX configurations
 maxNrofCLI-RSSI-Resources-r16           INTEGER ::= 64      -- Maximum number of CLI-RSSI resources for UE
-maxNrofCLI-RSSI-Resources-r16-1         INTEGER ::= 63      -- Maximum number of CLI-RSSI resources for UE minus 1
-maxNrofCLI-SRS-Resources-r16             INTEGER ::= 32      -- Maximum number of SRS resources for CLI measurement for UE
+maxNrofCLI-RSSI-Resources-1-r16         INTEGER ::= 63      -- Maximum number of CLI-RSSI resources for UE minus 1
+maxNrofCLI-SRS-Resources-r16            INTEGER ::= 32      -- Maximum number of SRS resources for CLI measurement for UE
 maxCLI-Report-r16                       INTEGER ::= 8
 maxNrofConfiguredGrantConfig-r16        INTEGER ::= 12      -- Maximum number of configured grant configurations per BWP
-maxNrofConfiguredGrantConfig-r16-1      INTEGER ::= 11      -- Maximum number of configured grant configurations per BWP minus 1
+maxNrofConfiguredGrantConfig-1-r16      INTEGER ::= 11      -- Maximum number of configured grant configurations per BWP minus 1
 maxNrofCG-Type2DeactivationState        INTEGER ::= 16      -- Maximum number of deactivation state for type 2 configured grants per BWP
-maxNrofConfiguredGrantConfigMAC-r16     INTEGER ::= 32      -- Maximum number of configured grant configurations per MAC entity
-maxNrofConfiguredGrantConfigMAC-r16-1   INTEGER ::= 31      -- Maximum number of configured grant configurations per MAC entity minus 1
+maxNrofConfiguredGrantConfigMAC-1-r16   INTEGER ::= 31      -- Maximum number of configured grant configurations per MAC entity minus 1
 maxNrofSPS-Config-r16                   INTEGER ::= 8       -- Maximum number of SPS configurations per BWP
-maxNrofSPS-Config-r16-1                 INTEGER ::= 7       -- Maximum number of SPS configurations per BWP minus 1
+maxNrofSPS-Config-1-r16                 INTEGER ::= 7       -- Maximum number of SPS configurations per BWP minus 1
 maxNrofSPS-DeactivationState            INTEGER ::= 16      -- Maximum number of deactivation state for SPS per BWP
 maxNrofDormancyGroups                   INTEGER ::= 5       --
 maxNrofPUCCH-ResourceGroups-1-r16       INTEGER ::= 3       --
@@ -31993,6 +32002,11 @@ SecurityModeComplete/SecurityModeFailure
 5
 
 Inter RAT mobility
+Handover to NR
+RRCReconfiguration (sent by other RAT)
+RRCReconfigurationComplete
+NA
+The performance of this procedure is specified in TS 36.133 [40] clauses 5.3.4.2, 5.3.4A.2 and 5.3.5.2 in case of handover from E-UTRA to NR.
 Handover from NR
 MobilityFromNRCommand
 
@@ -32564,9 +32578,9 @@ The mechanisms to extend a message in a non-critical manner are defined in A.3.3
 -	at the end of a structure contained in a BIT STRING or OCTET STRING.
 -	When an extension marker is available, non-critical extensions are preferably placed at the location (e.g. the IE) where the concerned parameter belongs from a logical/ functional perspective (referred to as the 'default extension location').
 -	It is desirable to aggregate extensions of the same release or version of the specification into a group, which should be placed at the lowest possible level.
--	In specific cases it may be preferable to place extensions elsewhere (referred to as the 'actual extension location') e.g. when it is possible to aggregate several extensions in a group. In such a case, the group should be placed at the lowest suitable level in the message. <TBD: ref to separate example>
+-	In specific cases it may be preferable to place extensions elsewhere (referred to as the 'actual extension location') e.g. when it is possible to aggregate several extensions in a group. In such a case, the group should be placed at the lowest suitable level in the message.
 -	In case placement at the default extension location affects earlier critical branches of the message, locating the extension at a following higher level in the message should be considered.
--	In case an extension is not placed at the default extension location, an IE should be defined. The IE's ASN.1 definition should be placed in the same ASN.1 section as the default extension location. In case there are intermediate levels in-between the actual and the default extension location, an IE may be defined for each level. Intermediate levels are primarily introduced for readability and overview. Hence intermediate levels need not always be introduced e.g. they may not be needed when the default and the actual extension location are within the same ASN.1 section. <TBD: ref to separate example>
+-	In case an extension is not placed at the default extension location, an IE should be defined. The IE's ASN.1 definition should be placed in the same ASN.1 section as the default extension location. In case there are intermediate levels in-between the actual and the default extension location, an IE may be defined for each level. Intermediate levels are primarily introduced for readability and overview. Hence intermediate levels need not always be introduced e.g. they may not be needed when the default and the actual extension location are within the same ASN.1 section.
 A.4.3.2	Further guidelines
 Further to the general principles defined in the previous section, the following additional guidelines apply regarding the use of extension markers:
 -	Extension markers within SEQUENCE:
@@ -33197,6 +33211,16 @@ Release 15
 RP-211483: Clarification on the initiation of RNA update
 2581
 1
+Release 15
+
+RP-201190: Introduction of eCall over IMS for NR
+1670
+-
+Release 15
+
+RP-212598: Distinguishing support of extended band n77
+2810
+2
 Release 15
 
 
@@ -39844,4 +39868,220 @@ RP-211471
 F
 SON-MDT Changes agreed in RAN2#114 meeting
 16.5.0
+09/2021
+RP-93
+RP-212444
+2708
+1
+F
+Correction on UL Skipping for PUSCH in Rel-16
+16.6.0
+
+RP-93
+RP-212442
+2709
+1
+F
+Corrections to SIB validity for NPN only cell
+16.6.0
+
+RP-93
+RP-212444
+2714
+-
+F
+Early implementation of eCall over IMS in NR
+16.6.0
+
+RP-93
+RP-212441
+2715
+1
+F
+Miscellaneous corrections on TS 38.331
+16.6.0
+
+RP-93
+RP-212443
+2716
+-
+F
+Corrections to intra-frequency cell reselection for MIB, SIB1 acquisition failure and TAC absence in SIB1
+16.6.0
+
+RP-93
+RP-212442
+2723
+1
+F
+Correction on TCI configuration for DCI format 1_2
+16.6.0
+
+RP-93
+RP-212442
+2728
+1
+F
+Correction to description of p0-AlphaSets
+16.6.0
+
+RP-93
+RP-212442
+2746
+1
+F
+Clarification on the NPN-IdentityInfoList
+16.6.0
+
+RP-93
+RP-212442
+2752
+1
+F
+Modification of measId for conditional reconfiguration
+16.6.0
+
+RP-93
+RP-212443
+2754
+1
+F
+MIB correction on subCarrierSpacingCommon
+16.6.0
+
+RP-93
+RP-212442
+2760
+-
+F
+Correction to 38.331 on the field description of msgA-TransMax
+16.6.0
+
+RP-93
+RP-212440
+2763
+2
+F
+Miscellaneous non-controversial corrections Set XI
+16.6.0
+
+RP-93
+RP-212441
+2776
+1
+F
+Corrections on RRC reconfiguration for fast MCG link recovery
+16.6.0
+
+RP-93
+RP-212442
+2777
+-
+F
+Correction on RepetitionSchemeConfig for eMIMO
+16.6.0
+
+RP-93
+RP-212438
+2780
+-
+A
+Correction on fallback band combination for SUL
+16.6.0
+
+RP-93
+RP-212439
+2785
+1
+F
+Clarification on RRC processing delay for HO from E-UTRA to NR
+16.6.0
+
+RP-93
+RP-212443
+2789
+1
+F
+CR for UE reporting Tx DC location info for the second PA
+16.6.0
+
+RP-93
+RP-212438
+2793
+-
+A
+Correction on inter-RAT measurement report triggering
+16.6.0
+
+RP-93
+RP-212439
+2799
+2
+A
+Correction on reconfigurationWithSync
+16.6.0
+
+RP-93
+RP-212442
+2800
+1
+F
+Correction to DAPS handover
+16.6.0
+
+RP-93
+RP-212442
+2801
+-
+F
+Corrections to pdsch-HARQ-ACK-CodeBookList
+16.6.0
+
+RP-93
+RP-212443
+2802
+-
+F
+SON-MDT Changes agreed in RAN2#115 meeting
+16.6.0
+
+RP-93
+RP-212442
+2803
+-
+F
+No support for CHO with SCG configuration
+16.6.0
+
+RP-93
+RP-212440
+2804
+2
+F
+CR to 38.331 on correcting Rel-15 failure type definition
+16.6.0
+
+RP-93
+RP-212442
+2807
+-
+F
+Handling of candidateBeamRSListExt-v1610 (option A1)
+16.6.0
+
+RP-93
+RP-212440
+2808
+-
+F
+FR1/FR2 differentiation for enhanced UL grant skipping capabilities
+16.6.0
+
+RP-93
+RP-212598
+2810
+2
+C
+Distinguishing support of extended band n77
+16.6.0
 

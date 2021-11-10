@@ -4106,7 +4106,7 @@ class ASN1Obj(object):
                 const['at'] = ['..'] * lvl + at_name
                 parent = obj
             for atn in at_name:
-                if parent is None or atn not in parent._cont:
+                if parent is None or parent._cont is None or atn not in parent._cont:
                     raise(ASN1ProcTextErr(
                           '{0}: undefined field reference for table constraint, {1}'\
                           .format(self.fullname(), at_name)))
@@ -4159,6 +4159,23 @@ class ASN1Obj(object):
         # 4) transfer references from ObjProxy to self
         if ObjProxy._ref:
             self._ref.update( ObjProxy._ref )
+        #
+        # 5) check for some more funny constraint
+        m = SYNT_RE_CONST_EXT.match(rest)
+        if m:
+            # previous constraint must be considered extensible
+            const = self.select(['const', const_index])
+            if const['ext'] is None:
+                const['ext'] = []
+            rest = rest[m.end():].lstrip()
+        elif rest[0:1] == '^':
+            # intersection with a 2nd constraint
+            self._parse_const('(%s)' % rest[1:].lstrip())
+            # this is a hack, and this is bad
+            rest = ''
+        if rest:
+            raise(ASN1ProcTextErr('{0}: remaining text for SIZE constraint, {1}'\
+                 .format(self.fullname(), rest)))
     
     def _parse_const_alphabet(self, const):
         const_index = len(self._const)
@@ -4211,6 +4228,23 @@ class ASN1Obj(object):
         # 4) transfer references from ObjProxy to self
         if ObjProxy._ref:
             self._ref.update( ObjProxy._ref )
+        #
+        # 5) check for some more funny constraint
+        m = SYNT_RE_CONST_EXT.match(rest)
+        if m:
+            # previous constraint must be considered extensible
+            const = self.select(['const', const_index])
+            if const['ext'] is None:
+                const['ext'] = []
+            rest = rest[m.end():].lstrip()
+        elif rest[0:1] == '^':
+            # intersection with a 2nd constraint
+            self._parse_const('(%s)' % rest[1:].lstrip())
+            # this is a hack, and this is bad
+            rest = ''
+        if rest:
+            raise(ASN1ProcTextErr('{0}: remaining text for SIZE constraint, {1}'\
+                 .format(self.fullname(), rest)))
     
     def _parse_const_withcomp(self, const):
         const_index = len(self._const)
@@ -4301,10 +4335,12 @@ class ASN1Obj(object):
         for comp in comps:
             ident = comp.split(' ', 1)[0]
             if ident not in cont:
-                raise(ASN1ProcTextErr(
-                      '{0}: invalid ident in WITH COMPONENTS constraint, {1}'\
-                      .format(self.fullname(), ident)))
-            elif ident in done:
+                ident = comp.split('(', 1)[0]
+                if ident not in cont:
+                    raise(ASN1ProcTextErr(
+                          '{0}: invalid ident in WITH COMPONENTS constraint, {1}'\
+                          .format(self.fullname(), ident)))
+            if ident in done:
                 raise(ASN1ProcTextErr(
                       '{0}: duplicated ident in WITH COMPONENTS constraint, {1}'\
                       .format(self.fullname(), ident)))

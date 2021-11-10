@@ -1,4 +1,4 @@
-﻿3GPP TS 36.331 V16.5.0 (2021-06)
+﻿3GPP TS 36.331 V16.6.0 (2021-09)
 Technical Specification
 3rd Generation Partnership Project;
 Technical Specification Group Radio Access Network;
@@ -240,12 +240,12 @@ Foreword	24
 5.3.11.3a	Detection of early-out-of-sync event	192
 5.3.11.3b	Detection of early-in-sync event	192
 5.3.12	UE actions upon leaving RRC_CONNECTED or RRC_INACTIVE	192
-5.3.13	UE actions upon PUCCH/ SPUCCH/ SRS release request	195
+5.3.13	UE actions upon PUCCH/ SPUCCH/ SRS release request	194
 5.3.13a	UE actions upon SR release request for NB-IoT	195
 5.3.13b	UE actions upon PUR release request	195
 5.3.14	Proximity indication	195
 5.3.14.1	General	195
-5.3.14.2	Initiation	196
+5.3.14.2	Initiation	195
 5.3.14.3	Actions related to transmission of ProximityIndication message	196
 5.3.15	Void	196
 5.3.16	Unified Access Control	196
@@ -256,7 +256,7 @@ Foreword	24
 5.3.16.5	Access barring check	201
 5.3.17	RAN notification area update	201
 5.3.17.1	General	201
-5.3.17.2	Initiation	202
+5.3.17.2	Initiation	201
 5.3.17.3	Inter RAT cell reselection or CN type change	202
 5.4	Inter-RAT mobility	202
 5.4.1	Introduction	202
@@ -1453,7 +1453,7 @@ UE in CE: Refers to a UE that is capable of using coverage enhancement, and requ
 User plane CIoT 5GS optimisation: Enables support for change from 5GMM-IDLE mode to 5GMM-CONNECTED mode without the need for using the Service Request procedure, as defined in TS 24.501 [95].
 User plane CIoT EPS optimisation: Enables support for change from EMM-IDLE mode to EMM-CONNECTED mode without the need for using the Service Request procedure, as defined in TS 24.301 [35].
 User plane EDT: Early Data Transmission used with the User plane CIoT EPS optimisation or User plane CIoT 5GS optimisation.
-V2X Sidelink communication: AS functionality enabling V2X Communication as defined in TS 23.285 [78], between nearby UEs, using E-UTRA technology but not traversing any network node.
+V2X sidelink communication: AS functionality enabling V2X Communication as defined in TS 23.285 [78], between nearby UEs, using E-UTRA technology but not traversing any network node.
 3.2	Abbreviations
 For the purposes of the present document, the abbreviations given in TR 21.905 [1], TS 36.300 [9] and the following apply. An abbreviation defined in the present document takes precedence over the definition of the same abbreviation, if any, in TR 21.905 [1] or TS 36.300 [9].
 1xRTT	CDMA2000 1x Radio Transmission Technology
@@ -1641,6 +1641,7 @@ SI-RNTI	System Information RNTI
 SL	Sidelink
 SLSS	Sidelink Synchronisation Signal
 SMC	Security Mode Control
+SMTC	SS/PBCH Block Measurement Timing Configuration
 SPDCCH	Short PDCCH
 SPS	Semi-Persistent Scheduling
 SPT	Short Processing Time
@@ -3550,7 +3551,7 @@ NOTE 3:	Which location information related configuration is used by the UE to ma
 3>	set contentionDetected to indicate whether contention resolution was not successful as specified in TS 36.321 [6] for at least one of the transmitted preambles for the failed random access procedure;
 3>	set maxTxPowerReached to indicate whether or not the maximum power level was used for the last transmitted preamble, see TS 36.321 [6];
 2>	if in RRC_INACTIVE:
-3>	perform the actions upon leaving RRC_INACTIVE as specified in 5.3.12, with release cause 'RRC connection failure';
+3>	perform the actions upon leaving RRC_INACTIVE as specified in 5.3.12, with release cause 'RRC Resume failure';
 2>	else inform upper layers about the failure to establish the RRC connection or failure to resume the RRC connection with suspend indication, upon which the procedure ends;
 The UE may discard the connection establishment failure information, i.e. release the UE variable VarConnEstFailReport, 48 hours after the failure is detected, upon power off or upon detach.
 5.3.3.7	T302, T303, T305, T306, or T308 expiry or stop
@@ -3596,7 +3597,7 @@ NOTE:	The UE stores the deprioritisation request irrespective of any cell resele
 3>	discard the stored UE AS context and resumeIdentity;
 3>	inform upper layers about the failure to resume the RRC connection without suspend indication and that access barring for mobile originating calls, mobile originating signalling, mobile terminating access and except for NB-IoT for mobile originating CS fallback is applicable, upon which the procedure ends;
 2>	else:
-3>	if the RRCConnectionReject is received in response to an RRCConnectionResumeRequest sent after early security reactivation or for transmission using PUR or for resuming a suspended RRC connection in 5GC:
+3>	if the RRCConnectionReject is received in response to an RRCConnectionResumeRequest sent after early security reactivation in accordance with conditions in 5.3.3.18:
 4>	perform the actions as specified in 5.3.3.9a;
 3>	else:
 4>	suspend SRB1;
@@ -3660,7 +3661,7 @@ NOTE:	ACs 12, 13, 14 are only valid for use in the home country and ACs 11, 15 a
 2>	for at least one of these valid Access Classes the corresponding bit in the ac-BarringForSpecialAC contained in "AC barring parameter" is set to zero:
 3>	consider access to the cell as not barred;
 2>	else if the establishment of the RRC connection is the result of release with redirect with mpsPriorityIndication (either in NR or E-UTRAN); and 
-2>	if the corresponding bit for Access Class 14 in the ac-BarringForSpecialAC contained in "AC barring parameter" is set to zero:
+2>	if the corresponding bit for any of the Access Classes 12, 13 or 14 in the ac-BarringForSpecialAC contained in "AC barring parameter" is set to zero:
 3>	consider access to the cell as not barred;
 2>	else:
 3>	draw a random number 'rand' uniformly distributed in the range: 0 ≤ rand < 1;
@@ -3793,7 +3794,7 @@ The UE shall:
 2>	discard the stored UE AS context and resumeIdentity;
 2>	perform the actions upon leaving RRC_CONNECTED as specified in 5.3.12, with release cause 'other';
 1>	upon receiving integrity check failure indication from lower layers while T300 is running and if the UE is resuming the RRC connection from RRC_INACTIVE:
-2>	perform the actions upon leaving RRC_INACTIVE as specified in 5.3.12, with release cause 'RRC connection failure';
+2>	perform the actions upon leaving RRC_INACTIVE as specified in 5.3.12, with release cause 'RRC Resume failure';
 5.3.3.17	Inability to comply with RRCConnectionResume
 The UE shall:
 1>	if the UE is unable to comply with (part of) the configuration included in the RRCConnectionResume message;
@@ -4371,12 +4372,13 @@ If AS security has been activated successfully, the UE shall:
 2>	consider the cell which has a physical cell identity matching the value indicated in the ServingCellConfigCommon within condReconfigurationToApply to be an applicable cell;
 2>	for each measId included in the measIdList within VarMeasConfig indicated in the triggerCondition associated to condReconfigurationId:
 3>	if the entry condition(s) applicable for this event associated with the condReconfigurationId, i.e. the event corresponding with the condEventId of the corresponding condReconfigurationTriggerEUTRA within VarConditionalReconfiguration, is fulfilled for the applicable cell for all measurements after layer 3 filtering taken during the corresponding timeToTrigger defined for this event within the VarConditionalReconfiguration:
-4> consider the entry condition for the associated measId within triggerCondition as fulfilled;
+4>	consider the entry condition for the associated measId within triggerCondition as fulfilled;
+3>	if the measId for this event associated with the condReconfigurationId has been modified; or
 3> if the leaving condition(s) applicable for this event associated with the condReconfigurationId, i.e. the event corresponding with the condEventId(s) of the corresponding condReconfigurationTriggerEUTRA within VarConditionalReconfiguration, is fulfilled for the applicable cells for all measurements after layer 3 filtering taken during the corresponding timeToTrigger defined for this event within the VarConditionalReconfiguration:
-4> consider the event associated to that measId to be not fulfilled;
+4>	consider the event associated to that measId to be not fulfilled;
 2>	if trigger conditions for all associated measId(s) within triggerCondition are fulfilled:
-3> consider the target cell candidate within the stored condReconfigurationToApply, associated to that condReconfigurationId, as a triggered cell;
-3> initiate the conditional reconfiguration execution, as specified in 5.3.5.9.5;
+3>	consider the target cell candidate within the stored condReconfigurationToApply, associated to that condReconfigurationId, as a triggered cell;
+3>	initiate the conditional reconfiguration execution, as specified in 5.3.5.9.5;
 5.3.5.9.5	Conditional reconfiguration execution
 The UE shall:
 1>	if more than one triggered cell exists:
@@ -5592,46 +5594,46 @@ The UE shall:
 1>	upon indication from MCG RLC, which is allowed to be send on PCell, that the maximum number of retransmissions has been reached for an SRB or DRB:
 2>	consider radio link failure to be detected for the MCG i.e. RLF;
 2>	discard any segments of segmented RRC messages received;
+2>	store the following radio link failure information in the VarRLF-Report (VarRLF-Report-NB in NB-IoT) by setting its fields as follows:
+3>	clear the information included in VarRLF-Report (VarRLF-Report-NB in NB-IoT), if any;
+3>	set the plmn-IdentityList to include the list of EPLMNs stored by the UE (i.e. includes the RPLMN);
+3>	set the measResultLastServCell to include the RSRP and RSRQ, if available, of the PCell based on measurements collected up to the moment the UE detected radio link failure;
+3>	except for NB-IoT, set the measResultNeighCells to include the best measured cells, other than the PCell, ordered such that the best cell is listed first, and based on measurements collected up to the moment the UE detected radio link failure, and set its fields as follows;
+4>	if the UE was configured to perform measurements for one or more EUTRA frequencies, include the measResultListEUTRA;
+4>	if the UE was configured to perform measurement reporting for one or more neighbouring UTRA frequencies, include the measResultListUTRA;
+4>	if the UE was configured to perform measurement reporting for one or more neighbouring GERAN frequencies, include the measResultListGERAN;
+4>	if the UE was configured to perform measurement reporting for one or more neighbouring CDMA2000 frequencies, include the measResultsCDMA2000;
+4>	if the UE was configured to perform measurement reporting, not related to NR sidelink communication, for one or more neighbouring NR frequencies, include the measResultListNR;
+4>	for each neighbour cell included, include the optional fields that are available;
+NOTE 1:	The measured quantities are filtered by the L3 filter as configured in the mobility measurement configuration. The measurements are based on the time domain measurement resource restriction, if configured. Blacklisted cells are not required to be reported.
+3>	except for NB-IoT, if available, set the logMeasResultListWLAN to include the WLAN measurement results, in order of decreasing RSSI for WLAN APs;
+3>	except for NB-IoT, if available, set the logMeasResultListBT to include the Bluetooth measurement results, in order of decreasing RSSI for Bluetooth beacons;
+3>	if detailed location information is available, set the content of the locationInfo as follows:
+4>	include the locationCoordinates;
+4>	include the horizontalVelocity, if available;
+3>	set the failedPCellId to the global cell identity, if available, and otherwise , except for NB-IoT, to the physical cell identity and carrier frequency of the PCell where radio link failure is detected;
+3>	except for NB-IoT, set the tac-FailedPCell to the tracking area code, if available, of the PCell where radio link failure is detected;
+3>	except for NB-IoT, if an RRCConnectionReconfiguration message including the mobilityControlInfo was received before the connection failure:
+4>	if the last RRCConnectionReconfiguration message including the mobilityControlInfo concerned an intra E-UTRA handover:
+5>	include the previousPCellId and set it to the global cell identity of the PCell where the last RRCConnectionReconfiguration message including mobilityControlInfo was received;
+5>	set the timeConnFailure to the elapsed time since reception of the last RRCConnectionReconfiguration message including the mobilityControlInfo;
+4>	if the last RRCConnectionReconfiguration message including the mobilityControlInfo concerned a handover to E-UTRA from UTRA and if the UE supports Radio Link Failure Report for Inter-RAT MRO:
+5>	include the previousUTRA-CellId and set it to the physical cell identity, the carrier frequency and the global cell identity, if available, of the UTRA Cell in which the last RRCConnectionReconfiguration message including mobilityControlInfo was received;
+5>	set the timeConnFailure to the elapsed time since reception of the last RRCConnectionReconfiguration message including the mobilityControlInfo;
+4>	if the last RRCConnectionReconfiguration message including the mobilityControlInfo concerned a handover to E-UTRA from NR and if the UE supports Radio Link Failure Report for Inter-RAT MRO NR:
+5>	include the previousNR-PCellId and set it to the global cell identity of the PCell where the last RRCConnectionReconfiguration message including mobilityControlInfo was received embedded in NR RRC message MobilityFromNRCommand message as specified in TS 38.331 [82] clause 5.4.3.3;
+5>	set the timeConnFailure to the elapsed time since reception of the last RRCConnectionReconfiguration message including the mobilityControlInfo embedded in NR RRC message MobilityFromNRCommand message as specified in TS 38.331 [82] clause 5.4.3.3.
+3>	except for NB-IoT, if the UE supports QCI1 indication in Radio Link Failure Report and has a DRB for which QCI is 1:
+4>	include the drb-EstablishedWithQCI-1;
+3>	except for NB-IoT, set the connectionFailureType to rlf;
+3>	except for NB-IoT, set the c-RNTI to the C-RNTI used in the PCell;
+3>	except for NB-IoT, set the rlf-Cause to the trigger for detecting radio link failure;
 2>	if the UE is configured with (NG)EN-DC; and
 2>	if T316 is configured; and
 2>	if SCG transmission is not suspended; and
 2>	if neither NR PSCell change nor NR PSCell addition is ongoing (i.e. T304 for the NR PSCell is not running as specified in TS 38.331 [82], clause 5.3.5.5.2, in (NG)EN-DC):
 3>	initiate the MCG failure information procedure as specified in 5.6.26 to report MCG radio link failure;
 2>	else:
-3>	store the following radio link failure information in the VarRLF-Report (VarRLF-Report-NB in NB-IoT) by setting its fields as follows:
-4>	clear the information included in VarRLF-Report (VarRLF-Report-NB in NB-IoT), if any;
-4>	set the plmn-IdentityList to include the list of EPLMNs stored by the UE (i.e. includes the RPLMN);
-4>	set the measResultLastServCell to include the RSRP and RSRQ, if available, of the PCell based on measurements collected up to the moment the UE detected radio link failure;
-4>	except for NB-IoT, set the measResultNeighCells to include the best measured cells, other than the PCell, ordered such that the best cell is listed first, and based on measurements collected up to the moment the UE detected radio link failure, and set its fields as follows;
-5>	if the UE was configured to perform measurements for one or more EUTRA frequencies, include the measResultListEUTRA;
-5>	if the UE was configured to perform measurement reporting for one or more neighbouring UTRA frequencies, include the measResultListUTRA;
-5>	if the UE was configured to perform measurement reporting for one or more neighbouring GERAN frequencies, include the measResultListGERAN;
-5>	if the UE was configured to perform measurement reporting for one or more neighbouring CDMA2000 frequencies, include the measResultsCDMA2000;
-5>	if the UE was configured to perform measurement reporting, not related to NR sidelink communication, for one or more neighbouring NR frequencies, include the measResultListNR;
-5>	for each neighbour cell included, include the optional fields that are available;
-NOTE 1:	The measured quantities are filtered by the L3 filter as configured in the mobility measurement configuration. The measurements are based on the time domain measurement resource restriction, if configured. Blacklisted cells are not required to be reported.
-4>	except for NB-IoT, if available, set the logMeasResultListWLAN to include the WLAN measurement results, in order of decreasing RSSI for WLAN APs;
-4>	except for NB-IoT, if available, set the logMeasResultListBT to include the Bluetooth measurement results, in order of decreasing RSSI for Bluetooth beacons;
-4>	if detailed location information is available, set the content of the locationInfo as follows:
-5>	include the locationCoordinates;
-5>	include the horizontalVelocity, if available;
-4>	set the failedPCellId to the global cell identity, if available, and otherwise , except for NB-IoT, to the physical cell identity and carrier frequency of the PCell where radio link failure is detected;
-4>	except for NB-IoT, set the tac-FailedPCell to the tracking area code, if available, of the PCell where radio link failure is detected;
-4>	except for NB-IoT, if an RRCConnectionReconfiguration message including the mobilityControlInfo was received before the connection failure:
-5>	if the last RRCConnectionReconfiguration message including the mobilityControlInfo concerned an intra E-UTRA handover:
-6>	include the previousPCellId and set it to the global cell identity of the PCell where the last RRCConnectionReconfiguration message including mobilityControlInfo was received;
-6>	set the timeConnFailure to the elapsed time since reception of the last RRCConnectionReconfiguration message including the mobilityControlInfo;
-5>	if the last RRCConnectionReconfiguration message including the mobilityControlInfo concerned a handover to E-UTRA from UTRA and if the UE supports Radio Link Failure Report for Inter-RAT MRO:
-6>	include the previousUTRA-CellId and set it to the physical cell identity, the carrier frequency and the global cell identity, if available, of the UTRA Cell in which the last RRCConnectionReconfiguration message including mobilityControlInfo was received;
-6>	set the timeConnFailure to the elapsed time since reception of the last RRCConnectionReconfiguration message including the mobilityControlInfo;
-5>	if the last RRCConnectionReconfiguration message including the mobilityControlInfo concerned a handover to E-UTRA from NR and if the UE supports Radio Link Failure Report for Inter-RAT MRO NR:
-6>	include the previousNR-PCellId and set it to the global cell identity of the PCell where the last RRCConnectionReconfiguration message including mobilityControlInfo was received embedded in NR RRC message MobilityFromNRCommand message as specified in TS 38.331 [82] clause 5.4.3.3;
-6>	set the timeConnFailure to the elapsed time since reception of the last RRCConnectionReconfiguration message including the mobilityControlInfo embedded in NR RRC message MobilityFromNRCommand message as specified in TS 38.331 [82] clause 5.4.3.3.
-4>	except for NB-IoT, if the UE supports QCI1 indication in Radio Link Failure Report and has a DRB for which QCI is 1:
-5>	include the drb-EstablishedWithQCI-1;
-4>	except for NB-IoT, set the connectionFailureType to rlf;
-4>	except for NB-IoT, set the c-RNTI to the C-RNTI used in the PCell;
-4>	except for NB-IoT, set the rlf-Cause to the trigger for detecting radio link failure;
 3>	if AS security has not been activated:
 4>	if the UE is a NB-IoT UE:
 5>	if the UE is connected to EPC and the UE supports RRC connection re-establishment for the Control Plane CIoT EPS optimisation; or
@@ -6164,7 +6166,7 @@ Upon successfully completing the handover, the cell change order or enhanced 1xR
 2>	release ran-NotificationAreaInfo, if stored;
 2>	release the AS security context including the KRRCenc key, the KRRCint, the KUPint key and the KUPenc key, if stored;
 2>	release all radio resources, including release of the RLC entity, the MAC configuration and the associated PDCP entity and SDAP entity for all established RBs;
-NOTE 1:	PDCP and SDAP configured by the source configurations RAT prior to the handover that are reconfigured and re-used by target RAT when delta signalling (i.e., during inter-RAT intra-sytem handover when fullConfig is not present) is used, are not released as part of this procedure.
+NOTE 1:	PDCP and SDAP configured by the source configurations RAT prior to the handover that are reconfigured and re-used by target RAT when delta signalling (i.e., during inter-RAT intra-system handover when fullConfig is not present) is used, are not released as part of this procedure.
 1>	else:
 2>	perform the actions upon leaving RRC_CONNECTED as specified in 5.3.12, with release cause 'other';
 NOTE 2:	If the UE performs enhanced 1xRTT CS fallback along with concurrent mobility to CDMA2000 HRPD and the connection to either CDMA2000 1xRTT or CDMA2000 HRPD succeeds, then the mobility from E-UTRA is considered successful.
@@ -6345,6 +6347,7 @@ The UE shall:
 3>	add a new entry for this measId within the VarMeasConfig;
 2>	remove the measurement reporting entry for this measId from the VarMeasReportList, if included;
 2>	stop the periodical reporting timer or timer T321, whichever one is running, and reset the associated information (e.g. timeToTrigger) for this measId;
+NOTE:	If the measId associated with reportConfig for conditional reconfiguration is modified, the conditions need to be set to non-fulfilled as specified in 5.3.5.9.4.
 2>	if the triggerType is set to periodical and the purpose is set to reportCGI in the reportConfig associated with this measId:
 3>	if the measObject associated with this measId concerns E-UTRA:
 4>	if the si-RequestForHO is included in the reportConfig associated with this measId:
@@ -6513,7 +6516,7 @@ with T = MGRP/10 as defined in TS 36.133 [16];
 4>	apply the gap configuration for LTE serving cells and for NR serving cells on FR1;
 3>	else:
 4>	apply the gap configuration for all LTE and NR serving cells;
-2>	if mgta is set to TRUE, apply a timing advance value of 0.5ms to the gap occurrences calculated above according to TS 38.133 [16];
+2>	if mgta is set to TRUE, apply a timing advance value of 0.5ms to the gap occurrences calculated above according to TS 38.133 [84];
 NOTE 1:	The UE applies a single gap, which timing is relative to the MCG cells, even when configured with DC. In case of (NG)EN-DC, the UE may either be configured with a single (common) gap or with two separate gaps i.e. a first one for FR1 (configured by E-UTRA RRC) and a second one for FR2 (configured by NR RRC).
 1>	else if measGapConfig is set to release:
 2>	release the measurement gap configuration measGapConfig;
@@ -6578,10 +6581,10 @@ else;
 subframe = Offset or (Offset +5);
 with T = CEIL(Periodicity/10).
 On the concerned frequency, the UE shall not consider SS/PBCH block transmission in subframes outside the SMTC occasion which lasts for ssb-Duration for measurements including RRM measurements except for SFTD measurement (see TS 36.133 [16], clause 8.1.2.4.25.2 and 8.1.2.4.26.1).
-If smtc2-LP is present, for cells indicated in the pci-List parameter in smtc2-LP for inter-RAT cell reselection, the UE shall setup an additional SS/PBCH block measurement timing configuration (SMTC) in accordance with the received periodicity parameter in the smtc2-LP configuration and use the Offset (derived from parameter periodicityAndOffset) and duration parameter from the measTimingConfig configuration for that frequency. The first subframe of each SMTC occasion occurs at an SFN and subframe of the NR SpCell or serving cell (for cell reselection) meeting the above condition.
+If smtc2-LP is present, for cells indicated in the pci-List parameter in smtc2-LP for inter-RAT cell reselection, the UE shall setup an additional SS/PBCH block measurement timing configuration (SMTC) in accordance with the received periodicity parameter in the smtc2-LP configuration and use the Offset (derived from parameter periodicityAndOffset) and ssb-Duration parameter from the measTimingConfig configuration for that frequency. The first subframe of each SMTC occasion occurs at an SFN and subframe of the NR SpCell or serving cell (for cell reselection) meeting the above condition.
 5.5.3	Performing measurements
 5.5.3.1	General
-For all measurements, except for UE Rx–Tx time difference measurements, RSSI, UL PDCP Packet Delay per QCI measurement, channel occupancy measurements, CBR measurement, sensing measurement and except for WLAN measurements of Band, Carrier Info, Available Admission Capacity, Backhaul Bandwidth, Channel Utilization, and Station Count, the UE applies the layer 3 filtering as specified in 5.5.3.2, before using the measured results for evaluation of reporting criteria, for measurement reporting or for evaluation of fulfilment of the criteria to trigger conditional reconfiguration execution. When performing measurements on NR carriers, the UE derives the cell quality as specified in 5.5.3.3 and the beam quality as specified in 5.5.3.4.
+For all measurements, except for UE Rx–Tx time difference measurements, RSSI, UL PDCP Packet Delay per QCI measurement, UL PDCP Packet Delay Value per DRB measurement, channel occupancy measurements, CBR measurement, sensing measurement and except for WLAN measurements of Band, Carrier Info, Available Admission Capacity, Backhaul Bandwidth, Channel Utilization, and Station Count, the UE applies the layer 3 filtering as specified in 5.5.3.2, before using the measured results for evaluation of reporting criteria, for measurement reporting or for evaluation of fulfilment of the criteria to trigger conditional reconfiguration execution. When performing measurements on NR carriers, the UE derives the cell quality as specified in 5.5.3.3 and the beam quality as specified in 5.5.3.4.
 The UE shall:
 1>	whenever the UE has a measConfig, perform RSRP and RSRQ measurements for each serving cell as follows:
 2>	for the PCell, apply the time domain measurement resource restriction in accordance with measSubframePatternPCell, if configured;
@@ -6692,14 +6695,14 @@ The UE capable of sensing measurement, with commTxResources set to scheduled, sh
 3>	perform the sensing measurement in accordance with TS 36.213 [23] on the pools of v2x-SchedulingPool and also indicated in tx-ResourcePoolToAddList in the associated measObject, using sensingSubchannelNumber, sensingPeriodicity, sensingReselectionCounter and sensingPriority.
 If a UE that is configured by upper layers to transmit NR sidelink communication is configured by EUTRA with transmission resource pool(s) in SystemInformationBlockType28 or by sl-ConfigDedicatedForNR and the measurements concerning NR sidelink communication (i.e. by sl-ConfigDedicatedForNR), it shall perform CBR measurement as specified in subclause 5.5.3 of TS 38.331 [82], based on the transmission resource pool(s) in SystemInformationBlockType28 or sl-ConfigDedicatedForNR.
 NOTE 2a:	SIB12 specified in subclause 5.5.3 of TS 38.331 is provided in SystemInformationBlockType28.
-NOTE 2b:	For NR sidelink communication, each of the CBR measurement results is associated with a resource pool, as indicated by the sl-poolReportIdentity (see TS 38.331 [82]), that refers to a pool as included in sl-ConfigDedicatedNR or SytemInformationBlockType28.
+NOTE 2b:	For NR sidelink communication, each of the CBR measurement results is associated with a resource pool, as indicated by the sl-poolReportIdentity (see TS 38.331 [82]), that refers to a pool as included in sl-ConfigDedicatedForNR or SystemInformationBlockType28.
 NOTE 3:	The s-Measure defines when the UE is required to perform measurements. The UE is however allowed to perform measurements also when the PCell RSRP (or PSCell RSRP, if the UE is in NE-DC) exceeds s-Measure, e.g., to measure cells broadcasting a CSG identity following use of the autonomous search function as defined in TS 36.304 [4].
 NOTE 4:	The UE may not perform the WLAN measurements it is configured with e.g. due to connection to another WLAN based on user preferences as specified in TS 23.402 [75] or due to turning off WLAN.
 NOTE 5:	In case the configurations for V2X sidelink communication are acquired from NR, the configurations for V2X sidelink communication in SystemInformationBlockType21, SystemInformationBlockType26, SL-V2X-ConfigDedicated within RRCConnectionReconfiguration used in this subclause can be provided by SIB13, SIB14, sl-ConfigDedicatedEUTRA within RRCReconfiguration as specified in TS 38.331 [82], respectively.
 5.5.3.2	Layer 3 filtering
 The UE shall:
 1>	for each measurement quantity that the UE performs measurements according to 5.5.3.1:
-NOTE 1:	This does not include quantities configured solely for UE Rx-Tx time difference, SSTD measurements and RSSI, channel occupancy measurements, WLAN measurements of Band, Carrier Info, Available Admission Capacity, Backhaul Bandwidth, Channel Utilization, and Station Count, CBR measurement, sensing measurement and UL PDCP Packet Delay per QCI measurement i.e. for those types of measurements the UE ignores the triggerQuantity and reportQuantity.
+NOTE 1:	This does not include quantities configured solely for UE Rx-Tx time difference, SSTD measurements and RSSI, channel occupancy measurements, WLAN measurements of Band, Carrier Info, Available Admission Capacity, Backhaul Bandwidth, Channel Utilization, and Station Count, CBR measurement, sensing measurement, UL PDCP Packet Delay per QCI measurement and UL PDCP Packet Delay Value per DRB measurement i.e. for those types of measurements the UE ignores the triggerQuantity and reportQuantity.
 2>	filter the measured result, before using for evaluation of reporting criteria or for measurement reporting, by the following formula:
 	
 where
@@ -7521,7 +7524,7 @@ Upon receiving DLInformationTransfer message, the UE shall:
 2>	calculate the time reference based on the included time, timeInfoType and referenceSFN in timeReferenceInfo;
 2>	calculate the inaccuracy of the time reference based on the uncertainty and other implementation-related inaccuracies, if uncertainty is included in timeReferenceInfo;
 2>	inform upper layers of the time reference and, if uncertainty is included in timeReferenceInfo, of the inaccuracy of the time reference.
-Upon receiving DLInformationTransfer message, the the IAB-MT shall:
+Upon receiving DLInformationTransfer message, the IAB-MT shall:
 1>	if dedicatedInfoF1c is included:
 2>	forward dedicatedInfoF1c to the IAB-DU.
 5.6.2	UL information transfer
@@ -7555,7 +7558,7 @@ The UE shall:
 5.6.2a.1	General
 
 Figure 5.6.2a.1-1: UL information transfer MR-DC
-The purpose of this procedure is to transfer from the UE to E-UTRAN MR-DC dedicated information e.g. the NR RRC MeasurementReport, the NR RRC UEAssistanceInformation, the NR RRC IABOtherInformation, NR RRC FailureInformation or an NR RRCReconfigurationComplete (transmitted upon CPC execution if only SRB1 is configured and the UE is operating in EN-DC) messages.
+The purpose of this procedure is to transfer from the UE to E-UTRAN MR-DC dedicated information e.g. the NR RRC MeasurementReport, the NR RRC UEAssistanceInformation, the NR RRC IABOtherInformation, NR RRC FailureInformation or an NR RRCReconfigurationComplete (transmitted upon CPC execution if NR RRCReconfiguration with conditionalReconfiguration for CPC was received via SRB1 and the UE is operating in EN-DC) messages.
 5.6.2a.2	Initiation
 A UE in RRC_CONNECTED initiates the UL information transfer procedure whenever there is a need to transfer MR DC dedicated information as specified in TS 38.331 [82]. I.e. the procedure is not used during an RRC connection reconfiguration involving NR connection reconfiguration, in which case the MR DC information is piggybacked to the RRCConnectionReconfigurationComplete message, except in the case the UE executes a Conditional PSCell Change.
 5.6.2a.3	Actions related to transmission of ULInformationTransferMRDC message
@@ -9569,7 +9572,7 @@ A UE capable of sidelink remote UE operation that is configured by upper layers 
 NOTE 1:	The details of the interaction with upper layers are up to UE implementation.
 2>	if the UE does not have a selected sidelink relay UE:
 3>	select a candidate sidelink relay UE which SD-RSRP exceeds q-RxLevMin included in either reselectionInfoIC (in coverage) or reselectionInfoOoC (out of coverage) by minHyst;
-2>	else if SD-RSRP of the currently selected sidelink relay UE is below q-RxLevMin included in either reselectionInfoIC (in coverage) or reselectionInfoOoC (out of coverage); orif upper layers indicate not to use the currently selected sidelink relay: (i.e. sidelink relay UE reselection):
+2>	else if SD-RSRP of the currently selected sidelink relay UE is below q-RxLevMin included in either reselectionInfoIC (in coverage) or reselectionInfoOoC (out of coverage); or if upper layers indicate not to use the currently selected sidelink relay: (i.e. sidelink relay UE reselection):
 3>	select a candidate sidelink relay UE which SD-RSRP exceeds q-RxLevMin included in either reselectionInfoIC (in coverage) or reselectionInfoOoC (out of coverage) by minHyst;
 2>	else if the UE did not detect any candidate sidelink relay UE which SD-RSRP exceeds q-RxLevMin included in either reselectionInfoIC (in coverage) or reselectionInfoOoC (out of coverage) by minHyst:
 3>	consider no sidelink relay UE to be selected;
@@ -9707,7 +9710,7 @@ Figure 5.10.16-1: Synchronisation information transmission for NR sidelink commu
 Figure 5.10.16-2: Synchronisation information transmission for NR sidelink communication, out of coverage
 The purpose of this procedure is to provide synchronisation information to a UE.
 The initiation and the procedure for the transmission of sidelink SSB follow the procedure specified for NR sidelink communication in subclause 5.8.5 of TS 38.331 [82].
-NOTE:	When applying the procedure in this subclause, SystemInformationBlockType28 in Figure 5.10.16-1 correspond to SIB12 specified in TS 38.331 [82].
+NOTE:	When applying the procedure in this subclause, SystemInformationBlockType28 in Figure 5.10.16-1 corresponds to SIB12 specified in TS 38.331 [82].
 6	Protocol data units, formats and parameters (tabular & ASN.1)
 6.1	General
 The contents of each RRC message is specified in subclause 6.2 using ASN.1 to specify the message syntax and using tables when needed to provide further detailed information about the fields specified in the message syntax. The syntax of the information elements that are defined as stand-alone abstract types is further specified in a similar manner in subclause 6.3.
@@ -12121,7 +12124,7 @@ This field is optionally present, need ON, for a FDD PSCell if there is no SCell
 fullConfig
 This field is mandatory present for handover within E-UTRA when the fullConfig is included; otherwise it is optionally present, Need OP. 
 HO
-The field is mandatory present in case of handover within E-UTRA or to E-UTRA; otherwise the field is not present. The field is not present if source PCell resources after a DAPS handover have not been released.
+The field is mandatory present in case of handover within E-UTRA or to E-UTRA and in a message contained in a NR DLInformationTransferMRDC message; otherwise the field is not present. The field is not present if source PCell resources after a DAPS handover have not been released.
 HO-Reestab
 The field is mandatory present in case of inter-system handover within E-UTRA or handover from NR to E-UTRA/EPC; it is optionally present, need ON, in case of intra-system handover within E-UTRA or upon the first reconfiguration after RRC connection re-establishment; or for intra-system handover from NR to E-UTRA, otherwise the field is not present.
 HO-5GC
@@ -13529,7 +13532,7 @@ FailureReportSCG-NR-r15 ::=		SEQUENCE {
 											t310-Expiry, randomAccessProblem,
 											rlc-MaxNumRetx,
 											synchReconfigFailureSCG, scg-reconfigFailure,
-											srb3-IntegrityFailure, other-r16},
+											srb3-IntegrityFailure, dummy},
 	measResultFreqListNR-r15				MeasResultFreqListFailNR-r15		OPTIONAL,
 	measResultSCG-r15						OCTET STRING						OPTIONAL,
 	...,
@@ -13554,7 +13557,7 @@ MeasResultFreqFailNR-r15 ::=		SEQUENCE {
 
 SCGFailureInformationNR field descriptions
 failureType
-Indicates the cause of the SCG failure.
+Indicates the cause of the SCG failure. When the field failureType-v1610 is included, the network ignores the field failureType-r15.
 measResultFreqListNR
 The field contains available results of measurements on NR frequencies the UE is configured to measure by measConfig.
 measResultSCG
@@ -15696,12 +15699,6 @@ wlan-Status
 Indicates the connection status to WLAN and the cause of failures. If the wlan-Status-v1430 is included, E-UTRAN ignores the wlan-Status-r13.
 
 6.3	RRC information elements
--- ASN1START
-
-TypeFFS ::= NULL					-- To be removed
-
--- ASN1STOP
-
 6.3.0	Parameterized types
 –	SetupRelease
 SetupRelease allows the ElementTypeParam to be used as the referenced data type for the setup and release entries. See A.3.8 for guidelines.
@@ -18408,7 +18405,7 @@ aul-StartingFullBW-OutsideMCOT
 This field indicates the AUL-specific set of PUSCH starting offset values for the AUL transmission outside of eNB obtained MCOT when a UE configured with AUL configuration is allocated to occupy the full channel bandwidth as described in TS 36.213 [23], clause 8.0. The first/leftmost bit corresponds to value 16, second bit corresponds to value 25, third bit corresponds to value 34, fourth bit corresponds to value 43, fifth bit corresponds to value 52, sixth bit corresponds to value 61 and last bit corresponds to value OS#1.
 aul-StartingPartialBW-InsideMCOT
 This field indicates the exact AUL-specific PUSCH starting offset value for the AUL transmission inside of eNB obtained MCOT when a UE configured with AUL configuration is allocated to occupy partial channel bandwidth as described in TS 36.213 [23], clause 8.0. The value o34 corresponds to 34, and the value o43 corresponds to 43 and so on.
-aul-StartingPartialBW-OutsideCOT
+aul-StartingPartialBW-OutsideMCOT
 This field indicates the exact AUL-specific PUSCH starting offset value for the AUL transmission outside of eNB obtained MCOT when a UE configured with AUL configuration is allocated to occupy partial channel bandwidth as described in TS 36.213 [23], clause 8.0. The value o16 corresponds to 16, the value o25 corresponds to 25 and so on.
 aul-Subframes
 This field indicates which subframes are allowed for AUL operation as described in TS 36.321 [6]. The first/leftmost bit corresponds to the subframe #0 of the radio frame satisfying SFN mod 4 = 0. Value 0 in the bitmap indicates that the corresponding subframe is not allowed for AUL. Value 1 in the bitmap indicates that the corresponding subframe is allowed for AUL.
@@ -20688,8 +20685,6 @@ PDSCH-ConfigDedicated-v1430 ::=		SEQUENCE {
 PDSCH-ConfigDedicated-v1530 ::=		SEQUENCE {
 	qcl-Operation-v1530						ENUMERATED {typeC}				OPTIONAL,	-- Need OR
 	tbs-IndexAlt3-r15							ENUMERATED {a37}			OPTIONAL,	-- Need OR
-	-- eNote (ToDo): Clarify that eMTC fields (i.e. fields starting with ce-) do not apply
-	-- for SCell (merging issue)
 	ce-CQI-AlternativeTableConfig-r15			ENUMERATED {on}				OPTIONAL,	-- Need OR
 	ce-PDSCH-64QAM-Config-r15					ENUMERATED {on}				OPTIONAL,	-- Need OR
 	ce-PDSCH-FlexibleStartPRB-AllocConfig-r15	ENUMERATED {on}				OPTIONAL,	-- Need OR
@@ -24592,7 +24587,6 @@ SPS-ConfigUL ::=	CHOICE {
 		]],
 		[[ cyclicShiftSPS-r15				ENUMERATED {cs0, cs1, cs2, cs3, cs4, cs5, cs6, cs7}
 												OPTIONAL,	-- Need ON
-	-- eNote (TBC) that no separate STTI field is required (alike in merged CR)
 			harq-ProcID-Offset-r15				INTEGER (0..7)			OPTIONAL,	-- Need ON
 			rv-SPS-UL-Repetitions-r15			ENUMERATED {ulrvseq1, ulrvseq2, ulrvseq3} OPTIONAL, -- Need ON
 			tpc-PDCCH-ConfigPUSCH-SPS-r15		TPC-PDCCH-Config		OPTIONAL,	-- Need ON
@@ -25953,7 +25947,7 @@ CondReconfigurationAddMod-r16 ::= SEQUENCE {
 
 CondReconfigurationToAddMod field descriptions
 condReconfigurationToApply
-The RRCConnectionReconfiguration message to be applied when the condition(s) are fulfilled.
+The RRCConnectionReconfiguration message to be applied when the condition(s) are fulfilled. The RRCConnectionReconfiguration in condReconfigurationToApply cannot contain a target node SCG configuration.
 triggerCondition
 The condition that needs to be fulfilled in order to trigger the execution of a conditional reconfiguration. When configuring two triggering events (MeasIds) for a candidate cell, the network ensures that both refer to the same measObject.
 
@@ -26986,7 +26980,7 @@ Value TRUE indicates that the UE shall, when performing RSRQ measurements, perfo
 measScaleFactor
 Even if reducedMeasPerformance is not included in any measObjectEUTRA or measObjectUTRA, E-UTRAN may configure this field. The UE behavior is specified in TS 36.133 [16].
 mgta
-Indicates whether a timing advance value of 0.5 ms is applicable to the measurement gap configuration provided by E-UTRAN according to TS 38.133 [16]. E-UTRAN sets mgta to TRUE only when the UE is configured to perform NR measurements.
+Indicates whether a timing advance value of 0.5 ms is applicable to the measurement gap configuration provided by E-UTRAN according to TS 38.133 [84]. E-UTRAN sets mgta to TRUE only when the UE is configured to perform NR measurements.
 preRegistrationInfoHRPD
 The CDMA2000 HRPD Pre-Registration Information tells the UE if it should pre-register with the CDMA2000 HRPD network and identifies the Pre-registration zone to the UE.
 reportConfigToRemoveList
@@ -28527,7 +28521,7 @@ sensingPriority
 Indicate the priority, i.e., parameter  as specified in TS 36.213 [23], clause 14.1.1.6.
 
 –	MTC-SSB-NR
-The IE MTC-SSB-NR specifies the measurement timing configuration (MTC) applicable for SSB based NR measurements i.e. the time occasions for performing these measurments, see 5.5.2.13.
+The IE MTC-SSB-NR specifies the SS/PBCH block measurement timing configuration (SMTC) applicable for SSB based NR measurements i.e. the time occasions for performing these measurements, see 5.5.2.13.
 MTC-SSB-NR information elements
 -- ASN1START
 
@@ -28865,6 +28859,9 @@ RSSI threshold which is used for channel occupancy evaluation.
 condEventId
 Choice of conditional reconfiguration event triggered criteria.
 
+condReconfigurationTriggerEUTRA
+Event configured for conditional reconfiguration. If this field is configured, the UE shall ignore the configuration of triggerType, reportQuantity, maxReportCells, reportInterval, and reportAmount.
+
 eventId
 Choice of E‑UTRA event triggered reporting criteria. EUTRAN may set this field to eventC1 or eventC2 only if measDS-Config is configured in the associated measObject with one or more CSI-RS resources. The eventC1 and eventC2 are not applicable for the eventId if RS-SINR is configured as triggerQuantity or reportQuantity.
 
@@ -28941,8 +28938,7 @@ ul-DelayConfig
 If the field is present, E-UTRAN configures UL PDCP Packet Delay per QCI measurement and the UE shall ignore the fields triggerQuantity and maxReportCells. The applicable values for the corresponding triggerType and reportInterval are periodical and (one of the) ms1024, ms2048, ms5120 or ms10240 respectively.The reportInterval indicates the periodicity for performing and reporting of UL PDCP Delay per QCI measurement as specified in TS 36.314 [71].
 
 ul-DelayValueConfig
-If the field is present, the UE shall perform the UL PDCP Packet Delay measurement per DRB as specified in TS 38.314 [103] and the UE shall ignore the fields reportQuantityCell and maxReportCells. The applicable values for the corresponding reportInterval are (one of the) { ms120, ms240, ms480, ms640, ms1024, ms2048, ms5120, ms10240,
-min1, min6, min12, min30, min60}. The reportInterval indicates the periodicity for performing and reporting of UL PDCP Packet Delay per DRB measurement as specified in TS 38.314 [103].
+If the field is present, the UE shall perform the UL PDCP Packet Delay measurement per DRB as specified in TS 38.314 [103] and the UE shall ignore the fields reportQuantityCell and maxReportCells. The applicable values for the corresponding reportInterval are (one of the) { ms120, ms240, ms480, ms640, ms1024, ms2048, ms5120, ms10240, min1, min6, min12, min30, min60}. The reportInterval indicates the periodicity for performing and reporting of UL PDCP Packet Delay per DRB measurement as specified in TS 38.314 [103].
 
 Conditional presence
 Explanation
@@ -30526,6 +30522,11 @@ UE-EUTRA-Capability-v1630-IEs ::= SEQUENCE {
 
 UE-EUTRA-Capability-v1650-IEs ::= SEQUENCE {
 	otherParameters-v1650				Other-Parameters-v1650			OPTIONAL,
+	nonCriticalExtension				UE-EUTRA-Capability-v1660-IEs		OPTIONAL
+}
+
+UE-EUTRA-Capability-v1660-IEs ::= SEQUENCE {
+	irat-ParametersNR-v1660			IRAT-ParametersNR-v1660,
 	nonCriticalExtension				SEQUENCE {}						OPTIONAL
 }
 
@@ -31967,6 +31968,10 @@ IRAT-ParametersNR-v1610 ::=		SEQUENCE {
 	ce-EUTRA-5GC-HO-ToNR-TDD-FR2-r16	ENUMERATED {supported}				OPTIONAL
 }
 
+IRAT-ParametersNR-v1660 ::=		SEQUENCE {
+	extendedBand-n77-r16				ENUMERATED {supported}				OPTIONAL
+}
+
 EUTRA-5GC-Parameters-r15 ::=		SEQUENCE {
 	eutra-5GC-r15								ENUMERATED {supported}			OPTIONAL,
 	eutra-EPC-HO-EUTRA-5GC-r15				ENUMERATED {supported}			OPTIONAL,
@@ -33184,6 +33189,9 @@ Indicates whether the UE supports, upon configuration of si-RequestForHO by the 
 Yes
 eventB2
 Indicates whether the UE supports event B2. A UE supporting NR SA operation shall set this bit to supported.
+-
+extendedBand-n77
+This field is only applicable for UEs that indicate support for band n77. If present, the UE supports the restriction to 3450 - 3550 MHz and 3700 - 3980 MHz ranges of band n77 in the USA as specified in Note 12 of Table 5.2-1 in TS 38.101-1 [85]. If absent, the UE supports only restriction to the 3700 - 3980 MHz range of band n77 in the USA. A UE that indicates this field shall support NS value 55 as specified in TS 38.101-1 [85].
 -
 extendedFreqPriorities
 Indicates whether the UE supports extended E-UTRA frequency priorities indicated by cellReselectionSubPriority field. A UE supporting NR SA operation shall set this bit to supported.
@@ -45845,7 +45853,6 @@ NA
 
 11.3	Void
 Annex A (informative):	Guidelines, mainly on use of ASN.1
-Editor's note	No agreements have been reached concerning the extension of RRC PDUs so far. Any statements in this clause about the protocol extension mechanism should be considered as FFS.
 A.1	Introduction
 The following clauses contain guidelines for the specification of RRC protocol data units (PDUs) with ASN.1.
 A.2	Procedural specification
@@ -46278,9 +46285,9 @@ The mechanisms to extend a message in a non-critical manner are defined in A.3.3
 -	at the end of a structure contained in a BIT STRING or OCTET STRING
 -	When an extension marker is available, non-critical extensions are preferably placed at the location (e.g. the IE) where the concerned parameter belongs from a logical/ functional perspective (referred to as the 'default extension location')
 -	It is desirable to aggregate extensions of the same release or version of the specification into a group, which should be placed at the lowest possible level.
--	In specific cases it may be preferrable to place extensions elsewhere (referred to as the 'actual extension location') e.g. when it is possible to aggregate several extensions in a group. In such a case, the group should be placed at the lowest suitable level in the message. <TBD: ref to seperate example>
+-	In specific cases it may be preferrable to place extensions elsewhere (referred to as the 'actual extension location') e.g. when it is possible to aggregate several extensions in a group. In such a case, the group should be placed at the lowest suitable level in the message.
 -	In case placement at the default extension location affects earlier critical branches of the message, locating the extension at a following higher level in the message should be considered.
--	In case an extension is not placed at the default extension location, an IE should be defined. The IE's ASN.1 definition should be placed in the same ASN.1 section as the default extension location. In case there are intermediate levels in-between the actual and the default extension location, an IE may be defined for each level. Intermediate levels are primarily introduced for readability and overview. Hence intermediate levels need not allways be introduced e.g. they may not be needed when the default and the actual extension location are within the same ASN.1 section. <TBD: ref to seperate example>
+-	In case an extension is not placed at the default extension location, an IE should be defined. The IE's ASN.1 definition should be placed in the same ASN.1 section as the default extension location. In case there are intermediate levels in-between the actual and the default extension location, an IE may be defined for each level. Intermediate levels are primarily introduced for readability and overview. Hence intermediate levels need not allways be introduced e.g. they may not be needed when the default and the actual extension location are within the same ASN.1 section.
 A.4.3.2	Further guidelines
 Further to the general principles defined in the previous clause, the following additional guidelines apply regarding the use of extension markers:
 -	Extension markers within SEQUENCE
@@ -47776,6 +47783,11 @@ Release 15
 RP-211481: Clarification on the initiation of RNA update
 4651
 1
+Release 15
+
+RP-212596: Distinguishing support of extended band n77
+4723
+2
 Release 15
 
 NOTE 1:	In case a CR has mirror CR(s), the mirror CR(s) are not listed.
@@ -61824,4 +61836,108 @@ RP-211471
 F
 SON-MDT Changes agreed in RAN2#114 meeting
 16.5.0
+09/2021
+RP-93
+RP-212441
+4690
+2
+F
+Miscellaneous corrections on TS 36.331
+16.6.0
+
+RP-93
+RP-212443
+4697
+-
+F
+Corrections on RLF Report Storage in 36.331
+16.6.0
+
+RP-93
+RP-212439
+4701
+1
+A
+Correction on the Release Cause for RRC_INACTVE UE
+16.6.0
+
+RP-93
+RP-212441
+4706
+1
+F
+Modification of measId for conditional reconfiguration
+16.6.0
+
+RP-93
+RP-212443
+4711
+-
+F
+On PDCP queuing delay value measurement
+16.6.0
+
+RP-93
+RP-212441
+4713
+1
+F
+Correction on ULInformationTransferMRDC
+16.6.0
+
+RP-93
+RP-212440
+4714
+-
+F
+Correction on Redirection with MPS Indication
+16.6.0
+
+RP-93
+RP-212441
+4715
+1
+F
+Corrections on RRC reconfiguration for fast MCG link recovery
+16.6.0
+
+RP-93
+RP-212437
+4719
+1
+A
+Minor changes collected by Rapporteur
+16.6.0
+
+RP-93
+RP-212441
+4720
+1
+F
+36.331 Correction on ReportConfigEUTRA for CHO/CPAC
+16.6.0
+
+RP-93
+RP-212441
+4721
+-
+F
+No support for CHO with SCG configuration
+16.6.0
+
+RP-93
+RP-212440
+4722
+2
+F
+CR to 36.331 on correcting Rel-15 failure type definition
+16.6.0
+
+RP-93
+RP-212596
+4723
+2
+C
+Distinguishing support of extended band n77
+16.6.0
 
