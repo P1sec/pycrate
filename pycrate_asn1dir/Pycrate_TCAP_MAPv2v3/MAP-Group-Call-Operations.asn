@@ -1,7 +1,7 @@
 MAP-Group-Call-Operations {
    itu-t identified-organization (4) etsi (0) mobileDomain (0)
    gsm-Network (1) modules (3) map-Group-Call-Operations (22)
-   version16 (16)}
+   version19 (19)}
 
 DEFINITIONS
 
@@ -20,7 +20,7 @@ EXPORTS
 IMPORTS
 	OPERATION
 FROM Remote-Operations-Information-Objects {
-    joint-iso-itu-t remote-operations(4)
+joint-iso-itu-t remote-operations(4)
   informationObjects(5) version1(0)}
 
 	systemFailure,
@@ -32,7 +32,7 @@ FROM Remote-Operations-Information-Objects {
 	dataMissing
 FROM MAP-Errors {
    itu-t identified-organization (4) etsi (0) mobileDomain (0)
-   gsm-Network (1) modules (3) map-Errors (10) version16 (16)}
+   gsm-Network (1) modules (3) map-Errors (10) version19 (19)}
 
 	PrepareGroupCallArg,
 	PrepareGroupCallRes,
@@ -44,50 +44,50 @@ FROM MAP-Errors {
 	SendGroupCallInfoRes
 FROM MAP-GR-DataTypes {
    itu-t identified-organization (4) etsi (0) mobileDomain (0)
-   gsm-Network (1) modules (3) map-GR-DataTypes (23) version16 (16)}
+   gsm-Network (1) modules (3) map-GR-DataTypes (23) version19 (19)}
 
 ;
 
-prepareGroupCall  OPERATION ::= {				--Timer m
+prepareGroupCall  OPERATION ::= {	--Timer m
 	ARGUMENT
-		PrepareGroupCallArg
+	PrepareGroupCallArg
 	RESULT
 	PrepareGroupCallRes
 	ERRORS {
-		systemFailure |
-		noGroupCallNumberAvailable |
-		unexpectedDataValue}
+	systemFailure |
+	noGroupCallNumberAvailable |
+	unexpectedDataValue}
 	CODE	local:39 }
 
-sendGroupCallEndSignal  OPERATION ::= {				--Timer l
+sendGroupCallEndSignal  OPERATION ::= {	--Timer l
 	ARGUMENT
-		SendGroupCallEndSignalArg
+	SendGroupCallEndSignalArg
 	RESULT
-		SendGroupCallEndSignalRes
+	SendGroupCallEndSignalRes
 	CODE	local:40 }
 
-processGroupCallSignalling  OPERATION ::= {				--Timer s
+processGroupCallSignalling  OPERATION ::= {	--Timer s
 	ARGUMENT
-		ProcessGroupCallSignallingArg
+	ProcessGroupCallSignallingArg
 	CODE	local:41 }
 
-forwardGroupCallSignalling  OPERATION ::= {				--Timer s
+forwardGroupCallSignalling  OPERATION ::= {	--Timer s
 	ARGUMENT
-		ForwardGroupCallSignallingArg
+	ForwardGroupCallSignallingArg
 	CODE	local:42 }
 
-sendGroupCallInfo  OPERATION ::= {				--Timer m
+sendGroupCallInfo  OPERATION ::= {	--Timer m
 	ARGUMENT
-		SendGroupCallInfoArg
+	SendGroupCallInfoArg
 	RESULT
-		SendGroupCallInfoRes
+	SendGroupCallInfoRes
 	ERRORS {
-		systemFailure |
-		ongoingGroupCall |
-		unexpectedDataValue |
-		dataMissing |
-		teleserviceNotProvisioned |
-		unknownSubscriber}
+	systemFailure |
+	ongoingGroupCall |
+	unexpectedDataValue |
+	dataMissing |
+	teleserviceNotProvisioned |
+	unknownSubscriber}
 	CODE	local:84 }
 
 

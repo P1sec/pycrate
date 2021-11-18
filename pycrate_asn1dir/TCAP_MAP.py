@@ -209,554 +209,10 @@ class DialoguePDUs:
         Release_response_reason,
     ]
 
-class UnidialoguePDUs:
-
-    _name_  = u'UnidialoguePDUs'
-    _oid_   = [0, 0, 17, 773, 2, 3, 1]
-    
-    _obj_ = [
-        u'uniDialogue-as-id',
-        u'UniDialoguePDU',
-        u'AUDT-apdu',
-        ]
-    _type_ = [
-        u'UniDialoguePDU',
-        u'AUDT-apdu',
-        ]
-    _set_ = [
-        ]
-    _val_ = [
-        u'uniDialogue-as-id',
-        ]
-    _class_ = [
-        ]
-    _param_ = [
-        ]
-    
-    #-----< uniDialogue-as-id >-----#
-    uniDialogue_as_id = OID(name=u'uniDialogue-as-id', mode=MODE_VALUE)
-    uniDialogue_as_id._val = (0, 0, 17, 773, 1, 2, 1)
-    
-    #-----< UniDialoguePDU >-----#
-    UniDialoguePDU = CHOICE(name=u'UniDialoguePDU', mode=MODE_TYPE)
-    _UniDialoguePDU_unidialoguePDU = SEQ(name=u'unidialoguePDU', mode=MODE_TYPE, typeref=ASN1RefType(('UnidialoguePDUs', 'AUDT-apdu')))
-    UniDialoguePDU._cont = ASN1Dict([
-        (u'unidialoguePDU', _UniDialoguePDU_unidialoguePDU),
-        ])
-    UniDialoguePDU._ext = None
-    
-    #-----< AUDT-apdu >-----#
-    AUDT_apdu = SEQ(name=u'AUDT-apdu', mode=MODE_TYPE, tag=(0, TAG_APPLICATION, TAG_IMPLICIT))
-    _AUDT_apdu_protocol_version = BIT_STR(name=u'protocol-version', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), default=(1, 1))
-    _AUDT_apdu_protocol_version._cont = ASN1Dict([(u'version1', 0)])
-    _AUDT_apdu_application_context_name = OID(name=u'application-context-name', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
-    _AUDT_apdu_user_information = SEQ_OF(name=u'user-information', mode=MODE_TYPE, tag=(30, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    __AUDT_apdu_user_information__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('Pycrate-TCAP-MAP-Dialogue', 'TcapDialogueExternal')))
-    _AUDT_apdu_user_information._cont = __AUDT_apdu_user_information__item_
-    AUDT_apdu._cont = ASN1Dict([
-        (u'protocol-version', _AUDT_apdu_protocol_version),
-        (u'application-context-name', _AUDT_apdu_application_context_name),
-        (u'user-information', _AUDT_apdu_user_information),
-        ])
-    AUDT_apdu._ext = None
-    
-    _all_ = [
-        uniDialogue_as_id,
-        _UniDialoguePDU_unidialoguePDU,
-        UniDialoguePDU,
-        _AUDT_apdu_protocol_version,
-        _AUDT_apdu_application_context_name,
-        __AUDT_apdu_user_information__item_,
-        _AUDT_apdu_user_information,
-        AUDT_apdu,
-    ]
-
-class Remote_Operations_Generic_ROS_PDUs:
-
-    _name_  = u'Remote-Operations-Generic-ROS-PDUs'
-    _oid_   = [2, 4, 6, 0]
-    
-    _obj_ = [
-        u'ROS',
-        u'Invoke',
-        u'ReturnResult',
-        u'ReturnError',
-        u'Reject',
-        u'GeneralProblem',
-        u'InvokeProblem',
-        u'ReturnResultProblem',
-        u'ReturnErrorProblem',
-        u'RejectProblem',
-        u'InvokeId',
-        u'noInvokeId',
-        u'NoInvokeId',
-        u'Errors',
-        u'Bind',
-        u'Unbind',
-        ]
-    _type_ = [
-        u'ROS',
-        u'Invoke',
-        u'ReturnResult',
-        u'ReturnError',
-        u'Reject',
-        u'GeneralProblem',
-        u'InvokeProblem',
-        u'ReturnResultProblem',
-        u'ReturnErrorProblem',
-        u'RejectProblem',
-        u'InvokeId',
-        u'Bind',
-        u'Unbind',
-        ]
-    _set_ = [
-        u'NoInvokeId',
-        u'Errors',
-        ]
-    _val_ = [
-        u'noInvokeId',
-        ]
-    _class_ = [
-        u'Errors',
-        ]
-    _param_ = [
-        u'ROS',
-        u'Invoke',
-        u'ReturnResult',
-        u'ReturnError',
-        u'Errors',
-        u'Bind',
-        u'Unbind',
-        ]
-    
-    #-----< ROS >-----#
-    ROS = CHOICE(name=u'ROS', mode=MODE_TYPE, param=True)
-    
-    #-----< Invoke >-----#
-    Invoke = SEQ(name=u'Invoke', mode=MODE_TYPE, param=True)
-    
-    #-----< ReturnResult >-----#
-    ReturnResult = SEQ(name=u'ReturnResult', mode=MODE_TYPE, param=True)
-    
-    #-----< ReturnError >-----#
-    ReturnError = SEQ(name=u'ReturnError', mode=MODE_TYPE, param=True)
-    
-    #-----< Reject >-----#
-    Reject = SEQ(name=u'Reject', mode=MODE_TYPE)
-    _Reject_invokeId = CHOICE(name=u'invokeId', mode=MODE_TYPE, typeref=ASN1RefType(('Remote-Operations-Generic-ROS-PDUs', 'InvokeId')))
-    _Reject_problem = CHOICE(name=u'problem', mode=MODE_TYPE)
-    __Reject_problem_general = INT(name=u'general', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('Remote-Operations-Generic-ROS-PDUs', 'GeneralProblem')))
-    __Reject_problem_invoke = INT(name=u'invoke', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('Remote-Operations-Generic-ROS-PDUs', 'InvokeProblem')))
-    __Reject_problem_returnResult = INT(name=u'returnResult', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('Remote-Operations-Generic-ROS-PDUs', 'ReturnResultProblem')))
-    __Reject_problem_returnError = INT(name=u'returnError', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('Remote-Operations-Generic-ROS-PDUs', 'ReturnErrorProblem')))
-    _Reject_problem._cont = ASN1Dict([
-        (u'general', __Reject_problem_general),
-        (u'invoke', __Reject_problem_invoke),
-        (u'returnResult', __Reject_problem_returnResult),
-        (u'returnError', __Reject_problem_returnError),
-        ])
-    _Reject_problem._ext = None
-    Reject._cont = ASN1Dict([
-        (u'invokeId', _Reject_invokeId),
-        (u'problem', _Reject_problem),
-        ])
-    Reject._ext = None
-    
-    #-----< GeneralProblem >-----#
-    GeneralProblem = INT(name=u'GeneralProblem', mode=MODE_TYPE)
-    GeneralProblem._cont = ASN1Dict([(u'unrecognizedPDU', 0), (u'mistypedPDU', 1), (u'badlyStructuredPDU', 2)])
-    
-    #-----< InvokeProblem >-----#
-    InvokeProblem = INT(name=u'InvokeProblem', mode=MODE_TYPE)
-    InvokeProblem._cont = ASN1Dict([(u'duplicateInvocation', 0), (u'unrecognizedOperation', 1), (u'mistypedArgument', 2), (u'resourceLimitation', 3), (u'releaseInProgress', 4), (u'unrecognizedLinkedId', 5), (u'linkedResponseUnexpected', 6), (u'unexpectedLinkedOperation', 7)])
-    
-    #-----< ReturnResultProblem >-----#
-    ReturnResultProblem = INT(name=u'ReturnResultProblem', mode=MODE_TYPE)
-    ReturnResultProblem._cont = ASN1Dict([(u'unrecognizedInvocation', 0), (u'resultResponseUnexpected', 1), (u'mistypedResult', 2)])
-    
-    #-----< ReturnErrorProblem >-----#
-    ReturnErrorProblem = INT(name=u'ReturnErrorProblem', mode=MODE_TYPE)
-    ReturnErrorProblem._cont = ASN1Dict([(u'unrecognizedInvocation', 0), (u'errorResponseUnexpected', 1), (u'unrecognizedError', 2), (u'unexpectedError', 3), (u'mistypedParameter', 4)])
-    
-    #-----< RejectProblem >-----#
-    RejectProblem = INT(name=u'RejectProblem', mode=MODE_TYPE)
-    RejectProblem._cont = ASN1Dict([(u'general-unrecognizedPDU', 0), (u'general-mistypedPDU', 1), (u'general-badlyStructuredPDU', 2), (u'invoke-duplicateInvocation', 10), (u'invoke-unrecognizedOperation', 11), (u'invoke-mistypedArgument', 12), (u'invoke-resourceLimitation', 13), (u'invoke-releaseInProgress', 14), (u'invoke-unrecognizedLinkedId', 15), (u'invoke-linkedResponseUnexpected', 16), (u'invoke-unexpectedLinkedOperation', 17), (u'returnResult-unrecognizedInvocation', 20), (u'returnResult-resultResponseUnexpected', 21), (u'returnResult-mistypedResult', 22), (u'returnError-unrecognizedInvocation', 30), (u'returnError-errorResponseUnexpected', 31), (u'returnError-unrecognizedError', 32), (u'returnError-unexpectedError', 33), (u'returnError-mistypedParameter', 34)])
-    
-    #-----< InvokeId >-----#
-    InvokeId = CHOICE(name=u'InvokeId', mode=MODE_TYPE)
-    _InvokeId_present = INT(name=u'present', mode=MODE_TYPE)
-    _InvokeId_absent = NULL(name=u'absent', mode=MODE_TYPE)
-    InvokeId._cont = ASN1Dict([
-        (u'present', _InvokeId_present),
-        (u'absent', _InvokeId_absent),
-        ])
-    InvokeId._ext = None
-    
-    #-----< noInvokeId >-----#
-    noInvokeId = CHOICE(name=u'noInvokeId', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Generic-ROS-PDUs', 'InvokeId')))
-    noInvokeId._val = (u'absent', 0)
-    
-    #-----< NoInvokeId >-----#
-    NoInvokeId = CHOICE(name=u'NoInvokeId', mode=MODE_SET, typeref=ASN1RefType(('Remote-Operations-Generic-ROS-PDUs', 'InvokeId')))
-    NoInvokeId._val = ASN1Set(rv=[(u'absent', 0)], rr=[], ev=None, er=[])
-    
-    #-----< Errors >-----#
-    Errors = CLASS(name=u'Errors', mode=MODE_SET, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'ERROR')), param=True)
-    
-    #-----< Bind >-----#
-    Bind = CHOICE(name=u'Bind', mode=MODE_TYPE, param=True)
-    
-    #-----< Unbind >-----#
-    Unbind = CHOICE(name=u'Unbind', mode=MODE_TYPE, param=True)
-    
-    _all_ = [
-        _Reject_invokeId,
-        __Reject_problem_general,
-        __Reject_problem_invoke,
-        __Reject_problem_returnResult,
-        __Reject_problem_returnError,
-        _Reject_problem,
-        Reject,
-        GeneralProblem,
-        InvokeProblem,
-        ReturnResultProblem,
-        ReturnErrorProblem,
-        RejectProblem,
-        _InvokeId_present,
-        _InvokeId_absent,
-        InvokeId,
-        noInvokeId,
-        NoInvokeId,
-    ]
-
-class Remote_Operations_Information_Objects:
-
-    _name_  = u'Remote-Operations-Information-Objects'
-    _oid_   = [2, 4, 5, 0]
-    
-    _obj_ = [
-        u'OPERATION',
-        u'ERROR',
-        u'OPERATION-PACKAGE',
-        u'CONNECTION-PACKAGE',
-        u'CONTRACT',
-        u'ROS-OBJECT-CLASS',
-        u'Code',
-        u'Priority',
-        u'refuse',
-        u'emptyBind',
-        u'emptyUnbind',
-        ]
-    _type_ = [
-        u'OPERATION',
-        u'ERROR',
-        u'OPERATION-PACKAGE',
-        u'CONNECTION-PACKAGE',
-        u'CONTRACT',
-        u'ROS-OBJECT-CLASS',
-        u'Code',
-        u'Priority',
-        ]
-    _set_ = [
-        ]
-    _val_ = [
-        u'refuse',
-        u'emptyBind',
-        u'emptyUnbind',
-        ]
-    _class_ = [
-        u'OPERATION',
-        u'ERROR',
-        u'OPERATION-PACKAGE',
-        u'CONNECTION-PACKAGE',
-        u'CONTRACT',
-        u'ROS-OBJECT-CLASS',
-        u'refuse',
-        u'emptyBind',
-        u'emptyUnbind',
-        ]
-    _param_ = [
-        ]
-    
-    #-----< OPERATION >-----#
-    OPERATION = CLASS(name=u'OPERATION', mode=MODE_TYPE)
-    _OPERATION_ArgumentType = OPEN(name=u'ArgumentType', mode=MODE_TYPE, opt=True)
-    _OPERATION_argumentTypeOptional = BOOL(name=u'argumentTypeOptional', mode=MODE_VALUE, opt=True)
-    _OPERATION_returnResult = BOOL(name=u'returnResult', mode=MODE_VALUE, default=True)
-    _OPERATION_ResultType = OPEN(name=u'ResultType', mode=MODE_TYPE, opt=True)
-    _OPERATION_resultTypeOptional = BOOL(name=u'resultTypeOptional', mode=MODE_VALUE, opt=True)
-    _OPERATION_Errors = CLASS(name=u'Errors', mode=MODE_SET, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'ERROR')), opt=True)
-    _OPERATION_Linked = CLASS(name=u'Linked', mode=MODE_SET, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')), opt=True)
-    _OPERATION_synchronous = BOOL(name=u'synchronous', mode=MODE_VALUE, default=False)
-    _OPERATION_alwaysReturns = BOOL(name=u'alwaysReturns', mode=MODE_VALUE, default=True)
-    _OPERATION_InvokePriority = INT(name=u'InvokePriority', mode=MODE_SET, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'Priority')), opt=True)
-    _OPERATION_ResultPriority = INT(name=u'ResultPriority', mode=MODE_SET, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'Priority')), opt=True)
-    _OPERATION_operationCode = CHOICE(name=u'operationCode', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'Code')), opt=True, uniq=True)
-    OPERATION._cont = ASN1Dict([
-        (u'ArgumentType', _OPERATION_ArgumentType),
-        (u'argumentTypeOptional', _OPERATION_argumentTypeOptional),
-        (u'returnResult', _OPERATION_returnResult),
-        (u'ResultType', _OPERATION_ResultType),
-        (u'resultTypeOptional', _OPERATION_resultTypeOptional),
-        (u'Errors', _OPERATION_Errors),
-        (u'Linked', _OPERATION_Linked),
-        (u'synchronous', _OPERATION_synchronous),
-        (u'alwaysReturns', _OPERATION_alwaysReturns),
-        (u'InvokePriority', _OPERATION_InvokePriority),
-        (u'ResultPriority', _OPERATION_ResultPriority),
-        (u'operationCode', _OPERATION_operationCode),
-        ])
-    
-    #-----< ERROR >-----#
-    ERROR = CLASS(name=u'ERROR', mode=MODE_TYPE)
-    _ERROR_ParameterType = OPEN(name=u'ParameterType', mode=MODE_TYPE, opt=True)
-    _ERROR_parameterTypeOptional = BOOL(name=u'parameterTypeOptional', mode=MODE_VALUE, opt=True)
-    _ERROR_ErrorPriority = INT(name=u'ErrorPriority', mode=MODE_SET, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'Priority')), opt=True)
-    _ERROR_errorCode = CHOICE(name=u'errorCode', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'Code')), opt=True, uniq=True)
-    ERROR._cont = ASN1Dict([
-        (u'ParameterType', _ERROR_ParameterType),
-        (u'parameterTypeOptional', _ERROR_parameterTypeOptional),
-        (u'ErrorPriority', _ERROR_ErrorPriority),
-        (u'errorCode', _ERROR_errorCode),
-        ])
-    
-    #-----< OPERATION-PACKAGE >-----#
-    OPERATION_PACKAGE = CLASS(name=u'OPERATION-PACKAGE', mode=MODE_TYPE)
-    _OPERATION_PACKAGE_Both = CLASS(name=u'Both', mode=MODE_SET, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')), opt=True)
-    _OPERATION_PACKAGE_Consumer = CLASS(name=u'Consumer', mode=MODE_SET, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')), opt=True)
-    _OPERATION_PACKAGE_Supplier = CLASS(name=u'Supplier', mode=MODE_SET, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')), opt=True)
-    _OPERATION_PACKAGE_id = OID(name=u'id', mode=MODE_VALUE, opt=True, uniq=True)
-    OPERATION_PACKAGE._cont = ASN1Dict([
-        (u'Both', _OPERATION_PACKAGE_Both),
-        (u'Consumer', _OPERATION_PACKAGE_Consumer),
-        (u'Supplier', _OPERATION_PACKAGE_Supplier),
-        (u'id', _OPERATION_PACKAGE_id),
-        ])
-    
-    #-----< CONNECTION-PACKAGE >-----#
-    CONNECTION_PACKAGE = CLASS(name=u'CONNECTION-PACKAGE', mode=MODE_TYPE)
-    _CONNECTION_PACKAGE_bind = CLASS(name=u'bind', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')), default=dict([(u'Errors', ASN1Set(rv=[dict([(u'errorCode', (u'local', -1))])], rr=[], ev=None, er=[])), (u'synchronous', True)]))
-    _CONNECTION_PACKAGE_unbind = CLASS(name=u'unbind', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')), default=dict([(u'synchronous', True)]))
-    _CONNECTION_PACKAGE_responderCanUnbind = BOOL(name=u'responderCanUnbind', mode=MODE_VALUE, default=False)
-    _CONNECTION_PACKAGE_unbindCanFail = BOOL(name=u'unbindCanFail', mode=MODE_VALUE, default=False)
-    _CONNECTION_PACKAGE_id = OID(name=u'id', mode=MODE_VALUE, opt=True, uniq=True)
-    CONNECTION_PACKAGE._cont = ASN1Dict([
-        (u'bind', _CONNECTION_PACKAGE_bind),
-        (u'unbind', _CONNECTION_PACKAGE_unbind),
-        (u'responderCanUnbind', _CONNECTION_PACKAGE_responderCanUnbind),
-        (u'unbindCanFail', _CONNECTION_PACKAGE_unbindCanFail),
-        (u'id', _CONNECTION_PACKAGE_id),
-        ])
-    
-    #-----< CONTRACT >-----#
-    CONTRACT = CLASS(name=u'CONTRACT', mode=MODE_TYPE)
-    _CONTRACT_connection = CLASS(name=u'connection', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'CONNECTION-PACKAGE')), opt=True)
-    _CONTRACT_OperationsOf = CLASS(name=u'OperationsOf', mode=MODE_SET, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION-PACKAGE')), opt=True)
-    _CONTRACT_InitiatorConsumerOf = CLASS(name=u'InitiatorConsumerOf', mode=MODE_SET, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION-PACKAGE')), opt=True)
-    _CONTRACT_InitiatorSupplierOf = CLASS(name=u'InitiatorSupplierOf', mode=MODE_SET, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION-PACKAGE')), opt=True)
-    _CONTRACT_id = OID(name=u'id', mode=MODE_VALUE, opt=True, uniq=True)
-    CONTRACT._cont = ASN1Dict([
-        (u'connection', _CONTRACT_connection),
-        (u'OperationsOf', _CONTRACT_OperationsOf),
-        (u'InitiatorConsumerOf', _CONTRACT_InitiatorConsumerOf),
-        (u'InitiatorSupplierOf', _CONTRACT_InitiatorSupplierOf),
-        (u'id', _CONTRACT_id),
-        ])
-    
-    #-----< ROS-OBJECT-CLASS >-----#
-    ROS_OBJECT_CLASS = CLASS(name=u'ROS-OBJECT-CLASS', mode=MODE_TYPE)
-    _ROS_OBJECT_CLASS_Is = CLASS(name=u'Is', mode=MODE_SET, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'ROS-OBJECT-CLASS')), opt=True)
-    _ROS_OBJECT_CLASS_Initiates = CLASS(name=u'Initiates', mode=MODE_SET, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'CONTRACT')), opt=True)
-    _ROS_OBJECT_CLASS_Responds = CLASS(name=u'Responds', mode=MODE_SET, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'CONTRACT')), opt=True)
-    _ROS_OBJECT_CLASS_InitiatesAndResponds = CLASS(name=u'InitiatesAndResponds', mode=MODE_SET, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'CONTRACT')), opt=True)
-    _ROS_OBJECT_CLASS_id = OID(name=u'id', mode=MODE_VALUE, uniq=True)
-    ROS_OBJECT_CLASS._cont = ASN1Dict([
-        (u'Is', _ROS_OBJECT_CLASS_Is),
-        (u'Initiates', _ROS_OBJECT_CLASS_Initiates),
-        (u'Responds', _ROS_OBJECT_CLASS_Responds),
-        (u'InitiatesAndResponds', _ROS_OBJECT_CLASS_InitiatesAndResponds),
-        (u'id', _ROS_OBJECT_CLASS_id),
-        ])
-    
-    #-----< Code >-----#
-    Code = CHOICE(name=u'Code', mode=MODE_TYPE)
-    _Code_local = INT(name=u'local', mode=MODE_TYPE)
-    _Code_global_ = OID(name=u'global', mode=MODE_TYPE)
-    Code._cont = ASN1Dict([
-        (u'local', _Code_local),
-        (u'global', _Code_global_),
-        ])
-    Code._ext = None
-    
-    #-----< Priority >-----#
-    Priority = INT(name=u'Priority', mode=MODE_TYPE)
-    Priority._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=None)], ev=None, er=[])
-    
-    #-----< refuse >-----#
-    refuse = CLASS(name=u'refuse', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'ERROR')))
-    refuse._val = dict([(u'errorCode', (u'local', -1))])
-    
-    #-----< emptyBind >-----#
-    emptyBind = CLASS(name=u'emptyBind', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
-    emptyBind._val = dict([(u'Errors', ASN1Set(rv=[dict([(u'errorCode', (u'local', -1))])], rr=[], ev=None, er=[])), (u'synchronous', True)])
-    
-    #-----< emptyUnbind >-----#
-    emptyUnbind = CLASS(name=u'emptyUnbind', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
-    emptyUnbind._val = dict([(u'synchronous', True)])
-    
-    _all_ = [
-        _OPERATION_ArgumentType,
-        _OPERATION_argumentTypeOptional,
-        _OPERATION_returnResult,
-        _OPERATION_ResultType,
-        _OPERATION_resultTypeOptional,
-        _OPERATION_Errors,
-        _OPERATION_Linked,
-        _OPERATION_synchronous,
-        _OPERATION_alwaysReturns,
-        _OPERATION_InvokePriority,
-        _OPERATION_ResultPriority,
-        _OPERATION_operationCode,
-        OPERATION,
-        _ERROR_ParameterType,
-        _ERROR_parameterTypeOptional,
-        _ERROR_ErrorPriority,
-        _ERROR_errorCode,
-        ERROR,
-        _OPERATION_PACKAGE_Both,
-        _OPERATION_PACKAGE_Consumer,
-        _OPERATION_PACKAGE_Supplier,
-        _OPERATION_PACKAGE_id,
-        OPERATION_PACKAGE,
-        _CONNECTION_PACKAGE_bind,
-        _CONNECTION_PACKAGE_unbind,
-        _CONNECTION_PACKAGE_responderCanUnbind,
-        _CONNECTION_PACKAGE_unbindCanFail,
-        _CONNECTION_PACKAGE_id,
-        CONNECTION_PACKAGE,
-        _CONTRACT_connection,
-        _CONTRACT_OperationsOf,
-        _CONTRACT_InitiatorConsumerOf,
-        _CONTRACT_InitiatorSupplierOf,
-        _CONTRACT_id,
-        CONTRACT,
-        _ROS_OBJECT_CLASS_Is,
-        _ROS_OBJECT_CLASS_Initiates,
-        _ROS_OBJECT_CLASS_Responds,
-        _ROS_OBJECT_CLASS_InitiatesAndResponds,
-        _ROS_OBJECT_CLASS_id,
-        ROS_OBJECT_CLASS,
-        _Code_local,
-        _Code_global_,
-        Code,
-        Priority,
-        refuse,
-        emptyBind,
-        emptyUnbind,
-    ]
-
-class MobileDomainDefinitions:
-
-    _name_  = u'MobileDomainDefinitions'
-    _oid_   = [0, 4, 0, 0, 0, 1]
-    
-    _obj_ = [
-        u'mobileDomainId',
-        u'gsm-NetworkId',
-        u'gsm-AccessId',
-        u'gsm-OperationAndMaintenanceId',
-        u'gsm-MessagingId',
-        u'CommonComponentId',
-        u'ac-Id',
-        u'as-Id',
-        u'ase-Id',
-        u'moduleId',
-        u'er-Id',
-        ]
-    _type_ = [
-        u'CommonComponentId',
-        ]
-    _set_ = [
-        ]
-    _val_ = [
-        u'mobileDomainId',
-        u'gsm-NetworkId',
-        u'gsm-AccessId',
-        u'gsm-OperationAndMaintenanceId',
-        u'gsm-MessagingId',
-        u'ac-Id',
-        u'as-Id',
-        u'ase-Id',
-        u'moduleId',
-        u'er-Id',
-        ]
-    _class_ = [
-        ]
-    _param_ = [
-        ]
-    
-    #-----< mobileDomainId >-----#
-    mobileDomainId = OID(name=u'mobileDomainId', mode=MODE_VALUE)
-    mobileDomainId._val = (0, 4, 0, 0)
-    
-    #-----< gsm-NetworkId >-----#
-    gsm_NetworkId = OID(name=u'gsm-NetworkId', mode=MODE_VALUE)
-    gsm_NetworkId._val = (0, 4, 0, 0, 1)
-    
-    #-----< gsm-AccessId >-----#
-    gsm_AccessId = OID(name=u'gsm-AccessId', mode=MODE_VALUE)
-    gsm_AccessId._val = (0, 4, 0, 0, 2)
-    
-    #-----< gsm-OperationAndMaintenanceId >-----#
-    gsm_OperationAndMaintenanceId = OID(name=u'gsm-OperationAndMaintenanceId', mode=MODE_VALUE)
-    gsm_OperationAndMaintenanceId._val = (0, 4, 0, 0, 3)
-    
-    #-----< gsm-MessagingId >-----#
-    gsm_MessagingId = OID(name=u'gsm-MessagingId', mode=MODE_VALUE)
-    gsm_MessagingId._val = (0, 4, 0, 0, 4)
-    
-    #-----< CommonComponentId >-----#
-    CommonComponentId = INT(name=u'CommonComponentId', mode=MODE_TYPE)
-    CommonComponentId._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=9)], ev=None, er=[])
-    
-    #-----< ac-Id >-----#
-    ac_Id = INT(name=u'ac-Id', mode=MODE_VALUE, typeref=ASN1RefType(('MobileDomainDefinitions', 'CommonComponentId')))
-    ac_Id._val = 0
-    
-    #-----< as-Id >-----#
-    as_Id = INT(name=u'as-Id', mode=MODE_VALUE, typeref=ASN1RefType(('MobileDomainDefinitions', 'CommonComponentId')))
-    as_Id._val = 1
-    
-    #-----< ase-Id >-----#
-    ase_Id = INT(name=u'ase-Id', mode=MODE_VALUE, typeref=ASN1RefType(('MobileDomainDefinitions', 'CommonComponentId')))
-    ase_Id._val = 2
-    
-    #-----< moduleId >-----#
-    moduleId = INT(name=u'moduleId', mode=MODE_VALUE, typeref=ASN1RefType(('MobileDomainDefinitions', 'CommonComponentId')))
-    moduleId._val = 3
-    
-    #-----< er-Id >-----#
-    er_Id = INT(name=u'er-Id', mode=MODE_VALUE, typeref=ASN1RefType(('MobileDomainDefinitions', 'CommonComponentId')))
-    er_Id._val = 4
-    
-    _all_ = [
-        mobileDomainId,
-        gsm_NetworkId,
-        gsm_AccessId,
-        gsm_OperationAndMaintenanceId,
-        gsm_MessagingId,
-        CommonComponentId,
-        ac_Id,
-        as_Id,
-        ase_Id,
-        moduleId,
-        er_Id,
-    ]
-
 class MAP_ApplicationContexts:
 
     _name_  = u'MAP-ApplicationContexts'
-    _oid_   = [0, 4, 0, 0, 1, 3, 2, 16]
+    _oid_   = [0, 4, 0, 0, 1, 3, 2, 19]
     
     _obj_ = [
         u'map-ac',
@@ -1092,7 +548,7 @@ class MAP_ApplicationContexts:
 class MAP_BS_Code:
 
     _name_  = u'MAP-BS-Code'
-    _oid_   = [0, 4, 0, 0, 1, 3, 20, 16]
+    _oid_   = [0, 4, 0, 0, 1, 3, 20, 19]
     
     _obj_ = [
         u'BearerServiceCode',
@@ -1488,207 +944,10 @@ class MAP_BS_Code:
         plmn_specificBS_F,
     ]
 
-class MAP_CallHandlingOperations:
-
-    _name_  = u'MAP-CallHandlingOperations'
-    _oid_   = [0, 4, 0, 0, 1, 3, 7, 16]
-    
-    _obj_ = [
-        u'sendRoutingInfo',
-        u'provideRoamingNumber',
-        u'resumeCallHandling',
-        u'setReportingState',
-        u'statusReport',
-        u'remoteUserFree',
-        u'ist-Alert',
-        u'ist-Command',
-        u'releaseResources',
-        ]
-    _type_ = [
-        ]
-    _set_ = [
-        ]
-    _val_ = [
-        u'sendRoutingInfo',
-        u'provideRoamingNumber',
-        u'resumeCallHandling',
-        u'setReportingState',
-        u'statusReport',
-        u'remoteUserFree',
-        u'ist-Alert',
-        u'ist-Command',
-        u'releaseResources',
-        ]
-    _class_ = [
-        u'sendRoutingInfo',
-        u'provideRoamingNumber',
-        u'resumeCallHandling',
-        u'setReportingState',
-        u'statusReport',
-        u'remoteUserFree',
-        u'ist-Alert',
-        u'ist-Command',
-        u'releaseResources',
-        ]
-    _param_ = [
-        ]
-    
-    #-----< sendRoutingInfo >-----#
-    sendRoutingInfo = CLASS(name=u'sendRoutingInfo', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
-    _sendRoutingInfo_val_ArgumentType = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-CH-DataTypes', 'SendRoutingInfoArg')))
-    _sendRoutingInfo_val_ResultType = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-CH-DataTypes', 'SendRoutingInfoRes')))
-    __OPERATION_Errors_val_ParameterType_0 = CHOICE(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'SystemFailureParam')))
-    __OPERATION_Errors_val_ParameterType_1 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'DataMissingParam')))
-    __OPERATION_Errors_val_ParameterType_2 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'UnexpectedDataParam')))
-    __OPERATION_Errors_val_ParameterType_3 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'FacilityNotSupParam')))
-    __OPERATION_Errors_val_ParameterType_4 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'OR-NotAllowedParam')))
-    __OPERATION_Errors_val_ParameterType_5 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'UnknownSubscriberParam')))
-    __OPERATION_Errors_val_ParameterType_6 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'NumberChangedParam')))
-    __OPERATION_Errors_val_ParameterType_7 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'BearerServNotProvParam')))
-    __OPERATION_Errors_val_ParameterType_8 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'TeleservNotProvParam')))
-    __OPERATION_Errors_val_ParameterType_9 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'AbsentSubscriberParam')))
-    __OPERATION_Errors_val_ParameterType_10 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'BusySubscriberParam')))
-    __OPERATION_Errors_val_ParameterType_11 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'NoSubscriberReplyParam')))
-    __OPERATION_Errors_val_ParameterType_12 = CHOICE(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'CallBarredParam')))
-    __OPERATION_Errors_val_ParameterType_13 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'CUG-RejectParam')))
-    __OPERATION_Errors_val_ParameterType_14 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'ForwardingViolationParam')))
-    sendRoutingInfo._val = dict([(u'ArgumentType', _sendRoutingInfo_val_ArgumentType), (u'ResultType', _sendRoutingInfo_val_ResultType), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_1), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_3), (u'errorCode', (u'local', 21))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_4), (u'errorCode', (u'local', 48))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_5), (u'errorCode', (u'local', 1))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_6), (u'errorCode', (u'local', 44))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_7), (u'errorCode', (u'local', 10))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_8), (u'errorCode', (u'local', 11))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_9), (u'errorCode', (u'local', 27))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_10), (u'errorCode', (u'local', 45))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_11), (u'errorCode', (u'local', 46))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_12), (u'errorCode', (u'local', 13))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_13), (u'errorCode', (u'local', 15))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_14), (u'errorCode', (u'local', 14))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 22))])
-    
-    #-----< provideRoamingNumber >-----#
-    provideRoamingNumber = CLASS(name=u'provideRoamingNumber', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
-    _provideRoamingNumber_val_ArgumentType = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-CH-DataTypes', 'ProvideRoamingNumberArg')))
-    _provideRoamingNumber_val_ResultType = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-CH-DataTypes', 'ProvideRoamingNumberRes')))
-    __OPERATION_Errors_val_ParameterType_5_0 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'AbsentSubscriberParam')))
-    __OPERATION_Errors_val_ParameterType_6_0 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'NoRoamingNbParam')))
-    provideRoamingNumber._val = dict([(u'ArgumentType', _provideRoamingNumber_val_ArgumentType), (u'ResultType', _provideRoamingNumber_val_ResultType), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_1), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_3), (u'errorCode', (u'local', 21))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_4), (u'errorCode', (u'local', 48))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_5_0), (u'errorCode', (u'local', 27))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_6_0), (u'errorCode', (u'local', 39))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 4))])
-    
-    #-----< resumeCallHandling >-----#
-    resumeCallHandling = CLASS(name=u'resumeCallHandling', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
-    _resumeCallHandling_val_ArgumentType = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-CH-DataTypes', 'ResumeCallHandlingArg')))
-    _resumeCallHandling_val_ResultType = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-CH-DataTypes', 'ResumeCallHandlingRes')))
-    __OPERATION_Errors_val_ParameterType_0_0 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'ForwardingFailedParam')))
-    __OPERATION_Errors_val_ParameterType_1_0 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'OR-NotAllowedParam')))
-    __OPERATION_Errors_val_ParameterType_3_0 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'DataMissingParam')))
-    resumeCallHandling._val = dict([(u'ArgumentType', _resumeCallHandling_val_ArgumentType), (u'ResultType', _resumeCallHandling_val_ResultType), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0_0), (u'errorCode', (u'local', 47))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_1_0), (u'errorCode', (u'local', 48))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_3_0), (u'errorCode', (u'local', 35))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 6))])
-    
-    #-----< setReportingState >-----#
-    setReportingState = CLASS(name=u'setReportingState', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
-    _setReportingState_val_ArgumentType = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-CH-DataTypes', 'SetReportingStateArg')))
-    _setReportingState_val_ResultType = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-CH-DataTypes', 'SetReportingStateRes')))
-    __OPERATION_Errors_val_ParameterType_1_1 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'UnidentifiedSubParam')))
-    __OPERATION_Errors_val_ParameterType_4_0 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'ResourceLimitationParam')))
-    __OPERATION_Errors_val_ParameterType_5_1 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'FacilityNotSupParam')))
-    setReportingState._val = dict([(u'ArgumentType', _setReportingState_val_ArgumentType), (u'ResultType', _setReportingState_val_ResultType), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_1_1), (u'errorCode', (u'local', 5))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_3_0), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_4_0), (u'errorCode', (u'local', 51))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_5_1), (u'errorCode', (u'local', 21))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 73))])
-    
-    #-----< statusReport >-----#
-    statusReport = CLASS(name=u'statusReport', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
-    _statusReport_val_ArgumentType = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-CH-DataTypes', 'StatusReportArg')))
-    _statusReport_val_ResultType = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-CH-DataTypes', 'StatusReportRes')))
-    __OPERATION_Errors_val_ParameterType_0_1 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'UnknownSubscriberParam')))
-    __OPERATION_Errors_val_ParameterType_1_2 = CHOICE(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'SystemFailureParam')))
-    statusReport._val = dict([(u'ArgumentType', _statusReport_val_ArgumentType), (u'ResultType', _statusReport_val_ResultType), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0_1), (u'errorCode', (u'local', 1))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_1_2), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_3_0), (u'errorCode', (u'local', 35))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 74))])
-    
-    #-----< remoteUserFree >-----#
-    remoteUserFree = CLASS(name=u'remoteUserFree', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
-    _remoteUserFree_val_ArgumentType = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-CH-DataTypes', 'RemoteUserFreeArg')))
-    _remoteUserFree_val_ResultType = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-CH-DataTypes', 'RemoteUserFreeRes')))
-    __OPERATION_Errors_val_ParameterType_0_2 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'UnexpectedDataParam')))
-    __OPERATION_Errors_val_ParameterType_2_0 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'IncompatibleTerminalParam')))
-    __OPERATION_Errors_val_ParameterType_3_1 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'AbsentSubscriberParam')))
-    __OPERATION_Errors_val_ParameterType_4_1 = CHOICE(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'SystemFailureParam')))
-    __OPERATION_Errors_val_ParameterType_5_2 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'BusySubscriberParam')))
-    remoteUserFree._val = dict([(u'ArgumentType', _remoteUserFree_val_ArgumentType), (u'ResultType', _remoteUserFree_val_ResultType), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0_2), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_1), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_2_0), (u'errorCode', (u'local', 28))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_3_1), (u'errorCode', (u'local', 27))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_4_1), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_5_2), (u'errorCode', (u'local', 45))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 75))])
-    
-    #-----< ist-Alert >-----#
-    ist_Alert = CLASS(name=u'ist-Alert', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
-    _ist_Alert_val_ArgumentType = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-CH-DataTypes', 'IST-AlertArg')))
-    _ist_Alert_val_ResultType = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-CH-DataTypes', 'IST-AlertRes')))
-    __OPERATION_Errors_val_ParameterType_1_3 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'ResourceLimitationParam')))
-    __OPERATION_Errors_val_ParameterType_2_1 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'UnknownSubscriberParam')))
-    __OPERATION_Errors_val_ParameterType_3_2 = CHOICE(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'SystemFailureParam')))
-    __OPERATION_Errors_val_ParameterType_4_2 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'FacilityNotSupParam')))
-    ist_Alert._val = dict([(u'ArgumentType', _ist_Alert_val_ArgumentType), (u'ResultType', _ist_Alert_val_ResultType), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0_2), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_1_3), (u'errorCode', (u'local', 51))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_2_1), (u'errorCode', (u'local', 1))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_3_2), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_4_2), (u'errorCode', (u'local', 21))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 87))])
-    
-    #-----< ist-Command >-----#
-    ist_Command = CLASS(name=u'ist-Command', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
-    _ist_Command_val_ArgumentType = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-CH-DataTypes', 'IST-CommandArg')))
-    _ist_Command_val_ResultType = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-CH-DataTypes', 'IST-CommandRes')))
-    ist_Command._val = dict([(u'ArgumentType', _ist_Command_val_ArgumentType), (u'ResultType', _ist_Command_val_ResultType), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0_2), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_1_3), (u'errorCode', (u'local', 51))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_2_1), (u'errorCode', (u'local', 1))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_3_2), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_4_2), (u'errorCode', (u'local', 21))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 88))])
-    
-    #-----< releaseResources >-----#
-    releaseResources = CLASS(name=u'releaseResources', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
-    _releaseResources_val_ArgumentType = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-CH-DataTypes', 'ReleaseResourcesArg')))
-    _releaseResources_val_ResultType = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-CH-DataTypes', 'ReleaseResourcesRes')))
-    releaseResources._val = dict([(u'ArgumentType', _releaseResources_val_ArgumentType), (u'ResultType', _releaseResources_val_ResultType), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0_2), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_1_2), (u'errorCode', (u'local', 34))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 20))])
-    
-    _all_ = [
-        sendRoutingInfo,
-        _sendRoutingInfo_val_ArgumentType,
-        _sendRoutingInfo_val_ResultType,
-        __OPERATION_Errors_val_ParameterType_0,
-        __OPERATION_Errors_val_ParameterType_1,
-        __OPERATION_Errors_val_ParameterType_2,
-        __OPERATION_Errors_val_ParameterType_3,
-        __OPERATION_Errors_val_ParameterType_4,
-        __OPERATION_Errors_val_ParameterType_5,
-        __OPERATION_Errors_val_ParameterType_6,
-        __OPERATION_Errors_val_ParameterType_7,
-        __OPERATION_Errors_val_ParameterType_8,
-        __OPERATION_Errors_val_ParameterType_9,
-        __OPERATION_Errors_val_ParameterType_10,
-        __OPERATION_Errors_val_ParameterType_11,
-        __OPERATION_Errors_val_ParameterType_12,
-        __OPERATION_Errors_val_ParameterType_13,
-        __OPERATION_Errors_val_ParameterType_14,
-        provideRoamingNumber,
-        _provideRoamingNumber_val_ArgumentType,
-        _provideRoamingNumber_val_ResultType,
-        __OPERATION_Errors_val_ParameterType_5_0,
-        __OPERATION_Errors_val_ParameterType_6_0,
-        resumeCallHandling,
-        _resumeCallHandling_val_ArgumentType,
-        _resumeCallHandling_val_ResultType,
-        __OPERATION_Errors_val_ParameterType_0_0,
-        __OPERATION_Errors_val_ParameterType_1_0,
-        __OPERATION_Errors_val_ParameterType_3_0,
-        setReportingState,
-        _setReportingState_val_ArgumentType,
-        _setReportingState_val_ResultType,
-        __OPERATION_Errors_val_ParameterType_1_1,
-        __OPERATION_Errors_val_ParameterType_4_0,
-        __OPERATION_Errors_val_ParameterType_5_1,
-        statusReport,
-        _statusReport_val_ArgumentType,
-        _statusReport_val_ResultType,
-        __OPERATION_Errors_val_ParameterType_0_1,
-        __OPERATION_Errors_val_ParameterType_1_2,
-        remoteUserFree,
-        _remoteUserFree_val_ArgumentType,
-        _remoteUserFree_val_ResultType,
-        __OPERATION_Errors_val_ParameterType_0_2,
-        __OPERATION_Errors_val_ParameterType_2_0,
-        __OPERATION_Errors_val_ParameterType_3_1,
-        __OPERATION_Errors_val_ParameterType_4_1,
-        __OPERATION_Errors_val_ParameterType_5_2,
-        ist_Alert,
-        _ist_Alert_val_ArgumentType,
-        _ist_Alert_val_ResultType,
-        __OPERATION_Errors_val_ParameterType_1_3,
-        __OPERATION_Errors_val_ParameterType_2_1,
-        __OPERATION_Errors_val_ParameterType_3_2,
-        __OPERATION_Errors_val_ParameterType_4_2,
-        ist_Command,
-        _ist_Command_val_ArgumentType,
-        _ist_Command_val_ResultType,
-        releaseResources,
-        _releaseResources_val_ArgumentType,
-        _releaseResources_val_ResultType,
-    ]
-
 class MAP_CH_DataTypes:
 
     _name_  = u'MAP-CH-DataTypes'
-    _oid_   = [0, 4, 0, 0, 1, 3, 13, 16]
+    _oid_   = [0, 4, 0, 0, 1, 3, 13, 19]
     
     _obj_ = [
         u'CUG-CheckInfo',
@@ -2617,10 +1876,207 @@ class MAP_CH_DataTypes:
         ReleaseResourcesRes,
     ]
 
+class MAP_CallHandlingOperations:
+
+    _name_  = u'MAP-CallHandlingOperations'
+    _oid_   = [0, 4, 0, 0, 1, 3, 7, 19]
+    
+    _obj_ = [
+        u'sendRoutingInfo',
+        u'provideRoamingNumber',
+        u'resumeCallHandling',
+        u'setReportingState',
+        u'statusReport',
+        u'remoteUserFree',
+        u'ist-Alert',
+        u'ist-Command',
+        u'releaseResources',
+        ]
+    _type_ = [
+        ]
+    _set_ = [
+        ]
+    _val_ = [
+        u'sendRoutingInfo',
+        u'provideRoamingNumber',
+        u'resumeCallHandling',
+        u'setReportingState',
+        u'statusReport',
+        u'remoteUserFree',
+        u'ist-Alert',
+        u'ist-Command',
+        u'releaseResources',
+        ]
+    _class_ = [
+        u'sendRoutingInfo',
+        u'provideRoamingNumber',
+        u'resumeCallHandling',
+        u'setReportingState',
+        u'statusReport',
+        u'remoteUserFree',
+        u'ist-Alert',
+        u'ist-Command',
+        u'releaseResources',
+        ]
+    _param_ = [
+        ]
+    
+    #-----< sendRoutingInfo >-----#
+    sendRoutingInfo = CLASS(name=u'sendRoutingInfo', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
+    _sendRoutingInfo_val_ArgumentType = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-CH-DataTypes', 'SendRoutingInfoArg')))
+    _sendRoutingInfo_val_ResultType = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-CH-DataTypes', 'SendRoutingInfoRes')))
+    __sendRoutingInfo_Errors_val_ParameterType_0 = CHOICE(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'SystemFailureParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_1 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'DataMissingParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_2 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'UnexpectedDataParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_3 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'FacilityNotSupParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_4 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'OR-NotAllowedParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_5 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'UnknownSubscriberParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_6 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'NumberChangedParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_7 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'BearerServNotProvParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_8 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'TeleservNotProvParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_9 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'AbsentSubscriberParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_10 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'BusySubscriberParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_11 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'NoSubscriberReplyParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_12 = CHOICE(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'CallBarredParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_13 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'CUG-RejectParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_14 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'ForwardingViolationParam')))
+    sendRoutingInfo._val = dict([(u'ArgumentType', _sendRoutingInfo_val_ArgumentType), (u'ResultType', _sendRoutingInfo_val_ResultType), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_1), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_3), (u'errorCode', (u'local', 21))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_4), (u'errorCode', (u'local', 48))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_5), (u'errorCode', (u'local', 1))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_6), (u'errorCode', (u'local', 44))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_7), (u'errorCode', (u'local', 10))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_8), (u'errorCode', (u'local', 11))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_9), (u'errorCode', (u'local', 27))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_10), (u'errorCode', (u'local', 45))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_11), (u'errorCode', (u'local', 46))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_12), (u'errorCode', (u'local', 13))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_13), (u'errorCode', (u'local', 15))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_14), (u'errorCode', (u'local', 14))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 22))])
+    
+    #-----< provideRoamingNumber >-----#
+    provideRoamingNumber = CLASS(name=u'provideRoamingNumber', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
+    _provideRoamingNumber_val_ArgumentType = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-CH-DataTypes', 'ProvideRoamingNumberArg')))
+    _provideRoamingNumber_val_ResultType = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-CH-DataTypes', 'ProvideRoamingNumberRes')))
+    __sendRoutingInfo_Errors_val_ParameterType_5_0 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'AbsentSubscriberParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_6_0 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'NoRoamingNbParam')))
+    provideRoamingNumber._val = dict([(u'ArgumentType', _provideRoamingNumber_val_ArgumentType), (u'ResultType', _provideRoamingNumber_val_ResultType), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_1), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_3), (u'errorCode', (u'local', 21))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_4), (u'errorCode', (u'local', 48))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_5_0), (u'errorCode', (u'local', 27))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_6_0), (u'errorCode', (u'local', 39))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 4))])
+    
+    #-----< resumeCallHandling >-----#
+    resumeCallHandling = CLASS(name=u'resumeCallHandling', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
+    _resumeCallHandling_val_ArgumentType = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-CH-DataTypes', 'ResumeCallHandlingArg')))
+    _resumeCallHandling_val_ResultType = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-CH-DataTypes', 'ResumeCallHandlingRes')))
+    __sendRoutingInfo_Errors_val_ParameterType_0_0 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'ForwardingFailedParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_1_0 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'OR-NotAllowedParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_3_0 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'DataMissingParam')))
+    resumeCallHandling._val = dict([(u'ArgumentType', _resumeCallHandling_val_ArgumentType), (u'ResultType', _resumeCallHandling_val_ResultType), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_0_0), (u'errorCode', (u'local', 47))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_1_0), (u'errorCode', (u'local', 48))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_3_0), (u'errorCode', (u'local', 35))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 6))])
+    
+    #-----< setReportingState >-----#
+    setReportingState = CLASS(name=u'setReportingState', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
+    _setReportingState_val_ArgumentType = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-CH-DataTypes', 'SetReportingStateArg')))
+    _setReportingState_val_ResultType = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-CH-DataTypes', 'SetReportingStateRes')))
+    __sendRoutingInfo_Errors_val_ParameterType_1_1 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'UnidentifiedSubParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_4_0 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'ResourceLimitationParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_5_1 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'FacilityNotSupParam')))
+    setReportingState._val = dict([(u'ArgumentType', _setReportingState_val_ArgumentType), (u'ResultType', _setReportingState_val_ResultType), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_1_1), (u'errorCode', (u'local', 5))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_3_0), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_4_0), (u'errorCode', (u'local', 51))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_5_1), (u'errorCode', (u'local', 21))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 73))])
+    
+    #-----< statusReport >-----#
+    statusReport = CLASS(name=u'statusReport', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
+    _statusReport_val_ArgumentType = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-CH-DataTypes', 'StatusReportArg')))
+    _statusReport_val_ResultType = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-CH-DataTypes', 'StatusReportRes')))
+    __sendRoutingInfo_Errors_val_ParameterType_0_1 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'UnknownSubscriberParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_1_2 = CHOICE(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'SystemFailureParam')))
+    statusReport._val = dict([(u'ArgumentType', _statusReport_val_ArgumentType), (u'ResultType', _statusReport_val_ResultType), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_0_1), (u'errorCode', (u'local', 1))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_1_2), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_3_0), (u'errorCode', (u'local', 35))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 74))])
+    
+    #-----< remoteUserFree >-----#
+    remoteUserFree = CLASS(name=u'remoteUserFree', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
+    _remoteUserFree_val_ArgumentType = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-CH-DataTypes', 'RemoteUserFreeArg')))
+    _remoteUserFree_val_ResultType = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-CH-DataTypes', 'RemoteUserFreeRes')))
+    __sendRoutingInfo_Errors_val_ParameterType_0_2 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'UnexpectedDataParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_2_0 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'IncompatibleTerminalParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_3_1 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'AbsentSubscriberParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_4_1 = CHOICE(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'SystemFailureParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_5_2 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'BusySubscriberParam')))
+    remoteUserFree._val = dict([(u'ArgumentType', _remoteUserFree_val_ArgumentType), (u'ResultType', _remoteUserFree_val_ResultType), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_0_2), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_1), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_2_0), (u'errorCode', (u'local', 28))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_3_1), (u'errorCode', (u'local', 27))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_4_1), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_5_2), (u'errorCode', (u'local', 45))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 75))])
+    
+    #-----< ist-Alert >-----#
+    ist_Alert = CLASS(name=u'ist-Alert', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
+    _ist_Alert_val_ArgumentType = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-CH-DataTypes', 'IST-AlertArg')))
+    _ist_Alert_val_ResultType = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-CH-DataTypes', 'IST-AlertRes')))
+    __sendRoutingInfo_Errors_val_ParameterType_1_3 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'ResourceLimitationParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_2_1 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'UnknownSubscriberParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_3_2 = CHOICE(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'SystemFailureParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_4_2 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'FacilityNotSupParam')))
+    ist_Alert._val = dict([(u'ArgumentType', _ist_Alert_val_ArgumentType), (u'ResultType', _ist_Alert_val_ResultType), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_0_2), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_1_3), (u'errorCode', (u'local', 51))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_2_1), (u'errorCode', (u'local', 1))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_3_2), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_4_2), (u'errorCode', (u'local', 21))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 87))])
+    
+    #-----< ist-Command >-----#
+    ist_Command = CLASS(name=u'ist-Command', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
+    _ist_Command_val_ArgumentType = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-CH-DataTypes', 'IST-CommandArg')))
+    _ist_Command_val_ResultType = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-CH-DataTypes', 'IST-CommandRes')))
+    ist_Command._val = dict([(u'ArgumentType', _ist_Command_val_ArgumentType), (u'ResultType', _ist_Command_val_ResultType), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_0_2), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_1_3), (u'errorCode', (u'local', 51))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_2_1), (u'errorCode', (u'local', 1))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_3_2), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_4_2), (u'errorCode', (u'local', 21))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 88))])
+    
+    #-----< releaseResources >-----#
+    releaseResources = CLASS(name=u'releaseResources', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
+    _releaseResources_val_ArgumentType = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-CH-DataTypes', 'ReleaseResourcesArg')))
+    _releaseResources_val_ResultType = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-CH-DataTypes', 'ReleaseResourcesRes')))
+    releaseResources._val = dict([(u'ArgumentType', _releaseResources_val_ArgumentType), (u'ResultType', _releaseResources_val_ResultType), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_0_2), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_1_2), (u'errorCode', (u'local', 34))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 20))])
+    
+    _all_ = [
+        sendRoutingInfo,
+        _sendRoutingInfo_val_ArgumentType,
+        _sendRoutingInfo_val_ResultType,
+        __sendRoutingInfo_Errors_val_ParameterType_0,
+        __sendRoutingInfo_Errors_val_ParameterType_1,
+        __sendRoutingInfo_Errors_val_ParameterType_2,
+        __sendRoutingInfo_Errors_val_ParameterType_3,
+        __sendRoutingInfo_Errors_val_ParameterType_4,
+        __sendRoutingInfo_Errors_val_ParameterType_5,
+        __sendRoutingInfo_Errors_val_ParameterType_6,
+        __sendRoutingInfo_Errors_val_ParameterType_7,
+        __sendRoutingInfo_Errors_val_ParameterType_8,
+        __sendRoutingInfo_Errors_val_ParameterType_9,
+        __sendRoutingInfo_Errors_val_ParameterType_10,
+        __sendRoutingInfo_Errors_val_ParameterType_11,
+        __sendRoutingInfo_Errors_val_ParameterType_12,
+        __sendRoutingInfo_Errors_val_ParameterType_13,
+        __sendRoutingInfo_Errors_val_ParameterType_14,
+        provideRoamingNumber,
+        _provideRoamingNumber_val_ArgumentType,
+        _provideRoamingNumber_val_ResultType,
+        __sendRoutingInfo_Errors_val_ParameterType_5_0,
+        __sendRoutingInfo_Errors_val_ParameterType_6_0,
+        resumeCallHandling,
+        _resumeCallHandling_val_ArgumentType,
+        _resumeCallHandling_val_ResultType,
+        __sendRoutingInfo_Errors_val_ParameterType_0_0,
+        __sendRoutingInfo_Errors_val_ParameterType_1_0,
+        __sendRoutingInfo_Errors_val_ParameterType_3_0,
+        setReportingState,
+        _setReportingState_val_ArgumentType,
+        _setReportingState_val_ResultType,
+        __sendRoutingInfo_Errors_val_ParameterType_1_1,
+        __sendRoutingInfo_Errors_val_ParameterType_4_0,
+        __sendRoutingInfo_Errors_val_ParameterType_5_1,
+        statusReport,
+        _statusReport_val_ArgumentType,
+        _statusReport_val_ResultType,
+        __sendRoutingInfo_Errors_val_ParameterType_0_1,
+        __sendRoutingInfo_Errors_val_ParameterType_1_2,
+        remoteUserFree,
+        _remoteUserFree_val_ArgumentType,
+        _remoteUserFree_val_ResultType,
+        __sendRoutingInfo_Errors_val_ParameterType_0_2,
+        __sendRoutingInfo_Errors_val_ParameterType_2_0,
+        __sendRoutingInfo_Errors_val_ParameterType_3_1,
+        __sendRoutingInfo_Errors_val_ParameterType_4_1,
+        __sendRoutingInfo_Errors_val_ParameterType_5_2,
+        ist_Alert,
+        _ist_Alert_val_ArgumentType,
+        _ist_Alert_val_ResultType,
+        __sendRoutingInfo_Errors_val_ParameterType_1_3,
+        __sendRoutingInfo_Errors_val_ParameterType_2_1,
+        __sendRoutingInfo_Errors_val_ParameterType_3_2,
+        __sendRoutingInfo_Errors_val_ParameterType_4_2,
+        ist_Command,
+        _ist_Command_val_ArgumentType,
+        _ist_Command_val_ResultType,
+        releaseResources,
+        _releaseResources_val_ArgumentType,
+        _releaseResources_val_ResultType,
+    ]
+
 class MAP_CommonDataTypes:
 
     _name_  = u'MAP-CommonDataTypes'
-    _oid_   = [0, 4, 0, 0, 1, 3, 18, 16]
+    _oid_   = [0, 4, 0, 0, 1, 3, 18, 19]
     
     _obj_ = [
         u'TBCD-STRING',
@@ -2761,7 +2217,9 @@ class MAP_CommonDataTypes:
         u'serv127',
         u'PLMN-Id',
         u'E-UTRAN-CGI',
+        u'NR-CGI',
         u'TA-Id',
+        u'NR-TA-Id',
         u'RAIdentity',
         u'NetworkNodeDiameterAddress',
         u'CellGlobalIdOrServiceAreaIdOrLAI',
@@ -2824,7 +2282,9 @@ class MAP_CommonDataTypes:
         u'LCSServiceTypeID',
         u'PLMN-Id',
         u'E-UTRAN-CGI',
+        u'NR-CGI',
         u'TA-Id',
+        u'NR-TA-Id',
         u'RAIdentity',
         u'NetworkNodeDiameterAddress',
         u'CellGlobalIdOrServiceAreaIdOrLAI',
@@ -3575,9 +3035,17 @@ class MAP_CommonDataTypes:
     E_UTRAN_CGI = OCT_STR(name=u'E-UTRAN-CGI', mode=MODE_TYPE)
     E_UTRAN_CGI._const_sz = ASN1Set(rv=[7], rr=[], ev=None, er=[])
     
+    #-----< NR-CGI >-----#
+    NR_CGI = OCT_STR(name=u'NR-CGI', mode=MODE_TYPE)
+    NR_CGI._const_sz = ASN1Set(rv=[8], rr=[], ev=None, er=[])
+    
     #-----< TA-Id >-----#
     TA_Id = OCT_STR(name=u'TA-Id', mode=MODE_TYPE)
     TA_Id._const_sz = ASN1Set(rv=[5], rr=[], ev=None, er=[])
+    
+    #-----< NR-TA-Id >-----#
+    NR_TA_Id = OCT_STR(name=u'NR-TA-Id', mode=MODE_TYPE)
+    NR_TA_Id._const_sz = ASN1Set(rv=[6], rr=[], ev=None, er=[])
     
     #-----< RAIdentity >-----#
     RAIdentity = OCT_STR(name=u'RAIdentity', mode=MODE_TYPE)
@@ -3872,7 +3340,9 @@ class MAP_CommonDataTypes:
         serv127,
         PLMN_Id,
         E_UTRAN_CGI,
+        NR_CGI,
         TA_Id,
+        NR_TA_Id,
         RAIdentity,
         _NetworkNodeDiameterAddress_diameter_Name,
         _NetworkNodeDiameterAddress_diameter_Realm,
@@ -3916,7 +3386,7 @@ class MAP_CommonDataTypes:
 class MAP_DialogueInformation:
 
     _name_  = u'MAP-DialogueInformation'
-    _oid_   = [0, 4, 0, 0, 1, 3, 3, 16]
+    _oid_   = [0, 4, 0, 0, 1, 3, 3, 19]
     
     _obj_ = [
         u'map-DialogueAS',
@@ -4114,7 +3584,7 @@ class MAP_DialogueInformation:
 class MAP_ER_DataTypes:
 
     _name_  = u'MAP-ER-DataTypes'
-    _oid_   = [0, 4, 0, 0, 1, 3, 17, 16]
+    _oid_   = [0, 4, 0, 0, 1, 3, 17, 19]
     
     _obj_ = [
         u'RoamingNotAllowedParam',
@@ -4890,7 +4360,7 @@ class MAP_ER_DataTypes:
 class MAP_Errors:
 
     _name_  = u'MAP-Errors'
-    _oid_   = [0, 4, 0, 0, 1, 3, 10, 16]
+    _oid_   = [0, 4, 0, 0, 1, 3, 10, 19]
     
     _obj_ = [
         u'systemFailure',
@@ -5455,7 +4925,7 @@ class MAP_Errors:
 class MAP_ExtensionDataTypes:
 
     _name_  = u'MAP-ExtensionDataTypes'
-    _oid_   = [0, 4, 0, 0, 1, 3, 21, 16]
+    _oid_   = [0, 4, 0, 0, 1, 3, 21, 19]
     
     _obj_ = [
         u'MAP-EXTENSION',
@@ -5621,7 +5091,7 @@ class MAP_Frame:
 class MAP_GR_DataTypes:
 
     _name_  = u'MAP-GR-DataTypes'
-    _oid_   = [0, 4, 0, 0, 1, 3, 23, 16]
+    _oid_   = [0, 4, 0, 0, 1, 3, 23, 19]
     
     _obj_ = [
         u'PrepareGroupCallArg',
@@ -5960,7 +5430,7 @@ class MAP_GR_DataTypes:
 class MAP_Group_Call_Operations:
 
     _name_  = u'MAP-Group-Call-Operations'
-    _oid_   = [0, 4, 0, 0, 1, 3, 22, 16]
+    _oid_   = [0, 4, 0, 0, 1, 3, 22, 19]
     
     _obj_ = [
         u'prepareGroupCall',
@@ -5994,10 +5464,10 @@ class MAP_Group_Call_Operations:
     prepareGroupCall = CLASS(name=u'prepareGroupCall', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
     _prepareGroupCall_val_ArgumentType = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-GR-DataTypes', 'PrepareGroupCallArg')))
     _prepareGroupCall_val_ResultType = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-GR-DataTypes', 'PrepareGroupCallRes')))
-    __OPERATION_Errors_val_ParameterType_0 = CHOICE(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'SystemFailureParam')))
-    __OPERATION_Errors_val_ParameterType_1 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'NoGroupCallNbParam')))
-    __OPERATION_Errors_val_ParameterType_2 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'UnexpectedDataParam')))
-    prepareGroupCall._val = dict([(u'ArgumentType', _prepareGroupCall_val_ArgumentType), (u'ResultType', _prepareGroupCall_val_ResultType), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_1), (u'errorCode', (u'local', 50))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 39))])
+    __sendRoutingInfo_Errors_val_ParameterType_0 = CHOICE(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'SystemFailureParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_1 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'NoGroupCallNbParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_2 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'UnexpectedDataParam')))
+    prepareGroupCall._val = dict([(u'ArgumentType', _prepareGroupCall_val_ArgumentType), (u'ResultType', _prepareGroupCall_val_ResultType), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_1), (u'errorCode', (u'local', 50))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 39))])
     
     #-----< sendGroupCallEndSignal >-----#
     sendGroupCallEndSignal = CLASS(name=u'sendGroupCallEndSignal', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
@@ -6019,19 +5489,19 @@ class MAP_Group_Call_Operations:
     sendGroupCallInfo = CLASS(name=u'sendGroupCallInfo', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
     _sendGroupCallInfo_val_ArgumentType = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-GR-DataTypes', 'SendGroupCallInfoArg')))
     _sendGroupCallInfo_val_ResultType = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-GR-DataTypes', 'SendGroupCallInfoRes')))
-    __OPERATION_Errors_val_ParameterType_1_0 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'OngoingGroupCallParam')))
-    __OPERATION_Errors_val_ParameterType_3 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'DataMissingParam')))
-    __OPERATION_Errors_val_ParameterType_4 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'TeleservNotProvParam')))
-    __OPERATION_Errors_val_ParameterType_5 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'UnknownSubscriberParam')))
-    sendGroupCallInfo._val = dict([(u'ArgumentType', _sendGroupCallInfo_val_ArgumentType), (u'ResultType', _sendGroupCallInfo_val_ResultType), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_1_0), (u'errorCode', (u'local', 22))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_3), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_4), (u'errorCode', (u'local', 11))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_5), (u'errorCode', (u'local', 1))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 84))])
+    __sendRoutingInfo_Errors_val_ParameterType_1_0 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'OngoingGroupCallParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_3 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'DataMissingParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_4 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'TeleservNotProvParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_5 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'UnknownSubscriberParam')))
+    sendGroupCallInfo._val = dict([(u'ArgumentType', _sendGroupCallInfo_val_ArgumentType), (u'ResultType', _sendGroupCallInfo_val_ResultType), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_1_0), (u'errorCode', (u'local', 22))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_3), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_4), (u'errorCode', (u'local', 11))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_5), (u'errorCode', (u'local', 1))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 84))])
     
     _all_ = [
         prepareGroupCall,
         _prepareGroupCall_val_ArgumentType,
         _prepareGroupCall_val_ResultType,
-        __OPERATION_Errors_val_ParameterType_0,
-        __OPERATION_Errors_val_ParameterType_1,
-        __OPERATION_Errors_val_ParameterType_2,
+        __sendRoutingInfo_Errors_val_ParameterType_0,
+        __sendRoutingInfo_Errors_val_ParameterType_1,
+        __sendRoutingInfo_Errors_val_ParameterType_2,
         sendGroupCallEndSignal,
         _sendGroupCallEndSignal_val_ArgumentType,
         _sendGroupCallEndSignal_val_ResultType,
@@ -6042,16 +5512,16 @@ class MAP_Group_Call_Operations:
         sendGroupCallInfo,
         _sendGroupCallInfo_val_ArgumentType,
         _sendGroupCallInfo_val_ResultType,
-        __OPERATION_Errors_val_ParameterType_1_0,
-        __OPERATION_Errors_val_ParameterType_3,
-        __OPERATION_Errors_val_ParameterType_4,
-        __OPERATION_Errors_val_ParameterType_5,
+        __sendRoutingInfo_Errors_val_ParameterType_1_0,
+        __sendRoutingInfo_Errors_val_ParameterType_3,
+        __sendRoutingInfo_Errors_val_ParameterType_4,
+        __sendRoutingInfo_Errors_val_ParameterType_5,
     ]
 
 class MAP_LCS_DataTypes:
 
     _name_  = u'MAP-LCS-DataTypes'
-    _oid_   = [0, 4, 0, 0, 1, 3, 25, 16]
+    _oid_   = [0, 4, 0, 0, 1, 3, 25, 19]
     
     _obj_ = [
         u'RoutingInfoForLCS-Arg',
@@ -7086,7 +6556,7 @@ class MAP_LCS_DataTypes:
 class MAP_LocationServiceOperations:
 
     _name_  = u'MAP-LocationServiceOperations'
-    _oid_   = [0, 4, 0, 0, 1, 3, 24, 16]
+    _oid_   = [0, 4, 0, 0, 1, 3, 24, 19]
     
     _obj_ = [
         u'sendRoutingInfoForLCS',
@@ -7114,497 +6584,72 @@ class MAP_LocationServiceOperations:
     sendRoutingInfoForLCS = CLASS(name=u'sendRoutingInfoForLCS', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
     _sendRoutingInfoForLCS_val_ArgumentType = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-LCS-DataTypes', 'RoutingInfoForLCS-Arg')))
     _sendRoutingInfoForLCS_val_ResultType = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-LCS-DataTypes', 'RoutingInfoForLCS-Res')))
-    __OPERATION_Errors_val_ParameterType_0 = CHOICE(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'SystemFailureParam')))
-    __OPERATION_Errors_val_ParameterType_1 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'DataMissingParam')))
-    __OPERATION_Errors_val_ParameterType_2 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'UnexpectedDataParam')))
-    __OPERATION_Errors_val_ParameterType_3 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'FacilityNotSupParam')))
-    __OPERATION_Errors_val_ParameterType_4 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'UnknownSubscriberParam')))
-    __OPERATION_Errors_val_ParameterType_5 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'AbsentSubscriberParam')))
-    __OPERATION_Errors_val_ParameterType_6 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'UnauthorizedRequestingNetwork-Param')))
-    sendRoutingInfoForLCS._val = dict([(u'ArgumentType', _sendRoutingInfoForLCS_val_ArgumentType), (u'ResultType', _sendRoutingInfoForLCS_val_ResultType), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_1), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_3), (u'errorCode', (u'local', 21))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_4), (u'errorCode', (u'local', 1))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_5), (u'errorCode', (u'local', 27))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_6), (u'errorCode', (u'local', 52))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 85))])
+    __sendRoutingInfo_Errors_val_ParameterType_0 = CHOICE(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'SystemFailureParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_1 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'DataMissingParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_2 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'UnexpectedDataParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_3 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'FacilityNotSupParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_4 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'UnknownSubscriberParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_5 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'AbsentSubscriberParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_6 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'UnauthorizedRequestingNetwork-Param')))
+    sendRoutingInfoForLCS._val = dict([(u'ArgumentType', _sendRoutingInfoForLCS_val_ArgumentType), (u'ResultType', _sendRoutingInfoForLCS_val_ResultType), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_1), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_3), (u'errorCode', (u'local', 21))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_4), (u'errorCode', (u'local', 1))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_5), (u'errorCode', (u'local', 27))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_6), (u'errorCode', (u'local', 52))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 85))])
     
     #-----< provideSubscriberLocation >-----#
     provideSubscriberLocation = CLASS(name=u'provideSubscriberLocation', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
     _provideSubscriberLocation_val_ArgumentType = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-LCS-DataTypes', 'ProvideSubscriberLocation-Arg')))
     _provideSubscriberLocation_val_ResultType = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-LCS-DataTypes', 'ProvideSubscriberLocation-Res')))
-    __OPERATION_Errors_val_ParameterType_4_0 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'UnidentifiedSubParam')))
-    __OPERATION_Errors_val_ParameterType_5_0 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'IllegalSubscriberParam')))
-    __OPERATION_Errors_val_ParameterType_6_0 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'IllegalEquipmentParam')))
-    __OPERATION_Errors_val_ParameterType_7 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'AbsentSubscriberParam')))
-    __OPERATION_Errors_val_ParameterType_8 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'UnauthorizedRequestingNetwork-Param')))
-    __OPERATION_Errors_val_ParameterType_9 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'UnauthorizedLCSClient-Param')))
-    __OPERATION_Errors_val_ParameterType_10 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'PositionMethodFailure-Param')))
-    provideSubscriberLocation._val = dict([(u'ArgumentType', _provideSubscriberLocation_val_ArgumentType), (u'ResultType', _provideSubscriberLocation_val_ResultType), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_1), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_3), (u'errorCode', (u'local', 21))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_4_0), (u'errorCode', (u'local', 5))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_5_0), (u'errorCode', (u'local', 9))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_6_0), (u'errorCode', (u'local', 12))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_7), (u'errorCode', (u'local', 27))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_8), (u'errorCode', (u'local', 52))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_9), (u'errorCode', (u'local', 53))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_10), (u'errorCode', (u'local', 54))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 83))])
+    __sendRoutingInfo_Errors_val_ParameterType_4_0 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'UnidentifiedSubParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_5_0 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'IllegalSubscriberParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_6_0 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'IllegalEquipmentParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_7 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'AbsentSubscriberParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_8 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'UnauthorizedRequestingNetwork-Param')))
+    __sendRoutingInfo_Errors_val_ParameterType_9 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'UnauthorizedLCSClient-Param')))
+    __sendRoutingInfo_Errors_val_ParameterType_10 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'PositionMethodFailure-Param')))
+    provideSubscriberLocation._val = dict([(u'ArgumentType', _provideSubscriberLocation_val_ArgumentType), (u'ResultType', _provideSubscriberLocation_val_ResultType), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_1), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_3), (u'errorCode', (u'local', 21))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_4_0), (u'errorCode', (u'local', 5))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_5_0), (u'errorCode', (u'local', 9))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_6_0), (u'errorCode', (u'local', 12))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_7), (u'errorCode', (u'local', 27))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_8), (u'errorCode', (u'local', 52))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_9), (u'errorCode', (u'local', 53))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_10), (u'errorCode', (u'local', 54))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 83))])
     
     #-----< subscriberLocationReport >-----#
     subscriberLocationReport = CLASS(name=u'subscriberLocationReport', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
     _subscriberLocationReport_val_ArgumentType = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-LCS-DataTypes', 'SubscriberLocationReport-Arg')))
     _subscriberLocationReport_val_ResultType = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-LCS-DataTypes', 'SubscriberLocationReport-Res')))
-    __OPERATION_Errors_val_ParameterType_2_0 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'ResourceLimitationParam')))
-    __OPERATION_Errors_val_ParameterType_3_0 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'UnexpectedDataParam')))
-    __OPERATION_Errors_val_ParameterType_5_1 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'UnauthorizedRequestingNetwork-Param')))
-    __OPERATION_Errors_val_ParameterType_6_1 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'UnknownOrUnreachableLCSClient-Param')))
-    subscriberLocationReport._val = dict([(u'ArgumentType', _subscriberLocationReport_val_ArgumentType), (u'ResultType', _subscriberLocationReport_val_ResultType), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_1), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_2_0), (u'errorCode', (u'local', 51))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_3_0), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_4), (u'errorCode', (u'local', 1))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_5_1), (u'errorCode', (u'local', 52))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_6_1), (u'errorCode', (u'local', 58))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 86))])
+    __sendRoutingInfo_Errors_val_ParameterType_2_0 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'ResourceLimitationParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_3_0 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'UnexpectedDataParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_5_1 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'UnauthorizedRequestingNetwork-Param')))
+    __sendRoutingInfo_Errors_val_ParameterType_6_1 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'UnknownOrUnreachableLCSClient-Param')))
+    subscriberLocationReport._val = dict([(u'ArgumentType', _subscriberLocationReport_val_ArgumentType), (u'ResultType', _subscriberLocationReport_val_ResultType), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_1), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_2_0), (u'errorCode', (u'local', 51))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_3_0), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_4), (u'errorCode', (u'local', 1))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_5_1), (u'errorCode', (u'local', 52))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_6_1), (u'errorCode', (u'local', 58))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 86))])
     
     _all_ = [
         sendRoutingInfoForLCS,
         _sendRoutingInfoForLCS_val_ArgumentType,
         _sendRoutingInfoForLCS_val_ResultType,
-        __OPERATION_Errors_val_ParameterType_0,
-        __OPERATION_Errors_val_ParameterType_1,
-        __OPERATION_Errors_val_ParameterType_2,
-        __OPERATION_Errors_val_ParameterType_3,
-        __OPERATION_Errors_val_ParameterType_4,
-        __OPERATION_Errors_val_ParameterType_5,
-        __OPERATION_Errors_val_ParameterType_6,
+        __sendRoutingInfo_Errors_val_ParameterType_0,
+        __sendRoutingInfo_Errors_val_ParameterType_1,
+        __sendRoutingInfo_Errors_val_ParameterType_2,
+        __sendRoutingInfo_Errors_val_ParameterType_3,
+        __sendRoutingInfo_Errors_val_ParameterType_4,
+        __sendRoutingInfo_Errors_val_ParameterType_5,
+        __sendRoutingInfo_Errors_val_ParameterType_6,
         provideSubscriberLocation,
         _provideSubscriberLocation_val_ArgumentType,
         _provideSubscriberLocation_val_ResultType,
-        __OPERATION_Errors_val_ParameterType_4_0,
-        __OPERATION_Errors_val_ParameterType_5_0,
-        __OPERATION_Errors_val_ParameterType_6_0,
-        __OPERATION_Errors_val_ParameterType_7,
-        __OPERATION_Errors_val_ParameterType_8,
-        __OPERATION_Errors_val_ParameterType_9,
-        __OPERATION_Errors_val_ParameterType_10,
+        __sendRoutingInfo_Errors_val_ParameterType_4_0,
+        __sendRoutingInfo_Errors_val_ParameterType_5_0,
+        __sendRoutingInfo_Errors_val_ParameterType_6_0,
+        __sendRoutingInfo_Errors_val_ParameterType_7,
+        __sendRoutingInfo_Errors_val_ParameterType_8,
+        __sendRoutingInfo_Errors_val_ParameterType_9,
+        __sendRoutingInfo_Errors_val_ParameterType_10,
         subscriberLocationReport,
         _subscriberLocationReport_val_ArgumentType,
         _subscriberLocationReport_val_ResultType,
-        __OPERATION_Errors_val_ParameterType_2_0,
-        __OPERATION_Errors_val_ParameterType_3_0,
-        __OPERATION_Errors_val_ParameterType_5_1,
-        __OPERATION_Errors_val_ParameterType_6_1,
-    ]
-
-class MAP_MobileServiceOperations:
-
-    _name_  = u'MAP-MobileServiceOperations'
-    _oid_   = [0, 4, 0, 0, 1, 3, 5, 16]
-    
-    _obj_ = [
-        u'updateLocation',
-        u'cancelLocation',
-        u'purgeMS',
-        u'sendIdentification',
-        u'updateGprsLocation',
-        u'provideSubscriberInfo',
-        u'anyTimeInterrogation',
-        u'anyTimeSubscriptionInterrogation',
-        u'anyTimeModification',
-        u'noteSubscriberDataModified',
-        u'prepareHandover',
-        u'sendEndSignal',
-        u'processAccessSignalling',
-        u'forwardAccessSignalling',
-        u'prepareSubsequentHandover',
-        u'sendAuthenticationInfo',
-        u'authenticationFailureReport',
-        u'checkIMEI',
-        u'insertSubscriberData',
-        u'deleteSubscriberData',
-        u'reset',
-        u'forwardCheckSS-Indication',
-        u'restoreData',
-        u'sendRoutingInfoForGprs',
-        u'failureReport',
-        u'noteMsPresentForGprs',
-        u'noteMM-Event',
-        u'updateVcsgLocation',
-        u'cancelVcsgLocation',
-        ]
-    _type_ = [
-        ]
-    _set_ = [
-        ]
-    _val_ = [
-        u'updateLocation',
-        u'cancelLocation',
-        u'purgeMS',
-        u'sendIdentification',
-        u'updateGprsLocation',
-        u'provideSubscriberInfo',
-        u'anyTimeInterrogation',
-        u'anyTimeSubscriptionInterrogation',
-        u'anyTimeModification',
-        u'noteSubscriberDataModified',
-        u'prepareHandover',
-        u'sendEndSignal',
-        u'processAccessSignalling',
-        u'forwardAccessSignalling',
-        u'prepareSubsequentHandover',
-        u'sendAuthenticationInfo',
-        u'authenticationFailureReport',
-        u'checkIMEI',
-        u'insertSubscriberData',
-        u'deleteSubscriberData',
-        u'reset',
-        u'forwardCheckSS-Indication',
-        u'restoreData',
-        u'sendRoutingInfoForGprs',
-        u'failureReport',
-        u'noteMsPresentForGprs',
-        u'noteMM-Event',
-        u'updateVcsgLocation',
-        u'cancelVcsgLocation',
-        ]
-    _class_ = [
-        u'updateLocation',
-        u'cancelLocation',
-        u'purgeMS',
-        u'sendIdentification',
-        u'updateGprsLocation',
-        u'provideSubscriberInfo',
-        u'anyTimeInterrogation',
-        u'anyTimeSubscriptionInterrogation',
-        u'anyTimeModification',
-        u'noteSubscriberDataModified',
-        u'prepareHandover',
-        u'sendEndSignal',
-        u'processAccessSignalling',
-        u'forwardAccessSignalling',
-        u'prepareSubsequentHandover',
-        u'sendAuthenticationInfo',
-        u'authenticationFailureReport',
-        u'checkIMEI',
-        u'insertSubscriberData',
-        u'deleteSubscriberData',
-        u'reset',
-        u'forwardCheckSS-Indication',
-        u'restoreData',
-        u'sendRoutingInfoForGprs',
-        u'failureReport',
-        u'noteMsPresentForGprs',
-        u'noteMM-Event',
-        u'updateVcsgLocation',
-        u'cancelVcsgLocation',
-        ]
-    _param_ = [
-        ]
-    
-    #-----< updateLocation >-----#
-    updateLocation = CLASS(name=u'updateLocation', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
-    _updateLocation_val_ArgumentType = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'UpdateLocationArg')))
-    _updateLocation_val_ResultType = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'UpdateLocationRes')))
-    __OPERATION_Errors_val_ParameterType_0 = CHOICE(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'SystemFailureParam')))
-    __OPERATION_Errors_val_ParameterType_1 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'DataMissingParam')))
-    __OPERATION_Errors_val_ParameterType_2 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'UnexpectedDataParam')))
-    __OPERATION_Errors_val_ParameterType_3 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'UnknownSubscriberParam')))
-    __OPERATION_Errors_val_ParameterType_4 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'RoamingNotAllowedParam')))
-    updateLocation._val = dict([(u'ArgumentType', _updateLocation_val_ArgumentType), (u'ResultType', _updateLocation_val_ResultType), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_1), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_3), (u'errorCode', (u'local', 1))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_4), (u'errorCode', (u'local', 8))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 2))])
-    
-    #-----< cancelLocation >-----#
-    cancelLocation = CLASS(name=u'cancelLocation', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
-    _cancelLocation_val_ArgumentType = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'CancelLocationArg')))
-    _cancelLocation_val_ResultType = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'CancelLocationRes')))
-    __OPERATION_Errors_val_ParameterType_0_0 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'DataMissingParam')))
-    __OPERATION_Errors_val_ParameterType_1_0 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'UnexpectedDataParam')))
-    cancelLocation._val = dict([(u'ArgumentType', _cancelLocation_val_ArgumentType), (u'ResultType', _cancelLocation_val_ResultType), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0_0), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_1_0), (u'errorCode', (u'local', 36))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 3))])
-    
-    #-----< purgeMS >-----#
-    purgeMS = CLASS(name=u'purgeMS', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
-    _purgeMS_val_ArgumentType = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'PurgeMS-Arg')))
-    _purgeMS_val_ResultType = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'PurgeMS-Res')))
-    __OPERATION_Errors_val_ParameterType_2_0 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'UnknownSubscriberParam')))
-    purgeMS._val = dict([(u'ArgumentType', _purgeMS_val_ArgumentType), (u'ResultType', _purgeMS_val_ResultType), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0_0), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_1_0), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_2_0), (u'errorCode', (u'local', 1))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 67))])
-    
-    #-----< sendIdentification >-----#
-    sendIdentification = CLASS(name=u'sendIdentification', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
-    _sendIdentification_val_ArgumentType = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'SendIdentificationArg')))
-    _sendIdentification_val_ResultType = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'SendIdentificationRes')))
-    __OPERATION_Errors_val_ParameterType_1_1 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'UnidentifiedSubParam')))
-    sendIdentification._val = dict([(u'ArgumentType', _sendIdentification_val_ArgumentType), (u'ResultType', _sendIdentification_val_ResultType), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0_0), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_1_1), (u'errorCode', (u'local', 5))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 55))])
-    
-    #-----< updateGprsLocation >-----#
-    updateGprsLocation = CLASS(name=u'updateGprsLocation', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
-    _updateGprsLocation_val_ArgumentType = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'UpdateGprsLocationArg')))
-    _updateGprsLocation_val_ResultType = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'UpdateGprsLocationRes')))
-    __OPERATION_Errors_val_ParameterType_3_0 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'RoamingNotAllowedParam')))
-    updateGprsLocation._val = dict([(u'ArgumentType', _updateGprsLocation_val_ArgumentType), (u'ResultType', _updateGprsLocation_val_ResultType), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_1_0), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_2_0), (u'errorCode', (u'local', 1))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_3_0), (u'errorCode', (u'local', 8))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 23))])
-    
-    #-----< provideSubscriberInfo >-----#
-    provideSubscriberInfo = CLASS(name=u'provideSubscriberInfo', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
-    _provideSubscriberInfo_val_ArgumentType = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'ProvideSubscriberInfoArg')))
-    _provideSubscriberInfo_val_ResultType = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'ProvideSubscriberInfoRes')))
-    provideSubscriberInfo._val = dict([(u'ArgumentType', _provideSubscriberInfo_val_ArgumentType), (u'ResultType', _provideSubscriberInfo_val_ResultType), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0_0), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_1_0), (u'errorCode', (u'local', 36))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 70))])
-    
-    #-----< anyTimeInterrogation >-----#
-    anyTimeInterrogation = CLASS(name=u'anyTimeInterrogation', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
-    _anyTimeInterrogation_val_ArgumentType = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'AnyTimeInterrogationArg')))
-    _anyTimeInterrogation_val_ResultType = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'AnyTimeInterrogationRes')))
-    __OPERATION_Errors_val_ParameterType_1_2 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'ATI-NotAllowedParam')))
-    __OPERATION_Errors_val_ParameterType_2_1 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'DataMissingParam')))
-    __OPERATION_Errors_val_ParameterType_3_1 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'UnexpectedDataParam')))
-    __OPERATION_Errors_val_ParameterType_4_0 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'UnknownSubscriberParam')))
-    anyTimeInterrogation._val = dict([(u'ArgumentType', _anyTimeInterrogation_val_ArgumentType), (u'ResultType', _anyTimeInterrogation_val_ResultType), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_1_2), (u'errorCode', (u'local', 49))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_2_1), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_3_1), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_4_0), (u'errorCode', (u'local', 1))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 71))])
-    
-    #-----< anyTimeSubscriptionInterrogation >-----#
-    anyTimeSubscriptionInterrogation = CLASS(name=u'anyTimeSubscriptionInterrogation', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
-    _anyTimeSubscriptionInterrogation_val_ArgumentType = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'AnyTimeSubscriptionInterrogationArg')))
-    _anyTimeSubscriptionInterrogation_val_ResultType = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'AnyTimeSubscriptionInterrogationRes')))
-    __OPERATION_Errors_val_ParameterType_0_1 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'ATSI-NotAllowedParam')))
-    __OPERATION_Errors_val_ParameterType_4_1 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'BearerServNotProvParam')))
-    __OPERATION_Errors_val_ParameterType_5 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'TeleservNotProvParam')))
-    __OPERATION_Errors_val_ParameterType_6 = CHOICE(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'CallBarredParam')))
-    __OPERATION_Errors_val_ParameterType_7 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'IllegalSS-OperationParam')))
-    __OPERATION_Errors_val_ParameterType_8 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'SS-NotAvailableParam')))
-    __OPERATION_Errors_val_ParameterType_9 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'InformationNotAvailableParam')))
-    anyTimeSubscriptionInterrogation._val = dict([(u'ArgumentType', _anyTimeSubscriptionInterrogation_val_ArgumentType), (u'ResultType', _anyTimeSubscriptionInterrogation_val_ResultType), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0_1), (u'errorCode', (u'local', 60))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_1), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_3), (u'errorCode', (u'local', 1))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_4_1), (u'errorCode', (u'local', 10))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_5), (u'errorCode', (u'local', 11))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_6), (u'errorCode', (u'local', 13))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_7), (u'errorCode', (u'local', 16))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_8), (u'errorCode', (u'local', 18))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_9), (u'errorCode', (u'local', 62))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 62))])
-    
-    #-----< anyTimeModification >-----#
-    anyTimeModification = CLASS(name=u'anyTimeModification', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
-    _anyTimeModification_val_ArgumentType = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'AnyTimeModificationArg')))
-    _anyTimeModification_val_ResultType = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'AnyTimeModificationRes')))
-    __OPERATION_Errors_val_ParameterType_0_2 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'ATM-NotAllowedParam')))
-    __OPERATION_Errors_val_ParameterType_8_0 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'SS-SubscriptionViolationParam')))
-    __OPERATION_Errors_val_ParameterType_9_0 = OCT_STR(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-SS-DataTypes', 'SS-Status')))
-    __OPERATION_Errors_val_ParameterType_10 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'SS-IncompatibilityCause')))
-    __OPERATION_Errors_val_ParameterType_11 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'InformationNotAvailableParam')))
-    anyTimeModification._val = dict([(u'ArgumentType', _anyTimeModification_val_ArgumentType), (u'ResultType', _anyTimeModification_val_ResultType), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0_2), (u'errorCode', (u'local', 61))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_1), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_3), (u'errorCode', (u'local', 1))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_4_1), (u'errorCode', (u'local', 10))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_5), (u'errorCode', (u'local', 11))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_6), (u'errorCode', (u'local', 13))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_7), (u'errorCode', (u'local', 16))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_8_0), (u'errorCode', (u'local', 19))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_9_0), (u'errorCode', (u'local', 17))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_10), (u'errorCode', (u'local', 20))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_11), (u'errorCode', (u'local', 62))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 65))])
-    
-    #-----< noteSubscriberDataModified >-----#
-    noteSubscriberDataModified = CLASS(name=u'noteSubscriberDataModified', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
-    _noteSubscriberDataModified_val_ArgumentType = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'NoteSubscriberDataModifiedArg')))
-    _noteSubscriberDataModified_val_ResultType = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'NoteSubscriberDataModifiedRes')))
-    noteSubscriberDataModified._val = dict([(u'ArgumentType', _noteSubscriberDataModified_val_ArgumentType), (u'ResultType', _noteSubscriberDataModified_val_ResultType), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0_0), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_1_0), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_2_0), (u'errorCode', (u'local', 1))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 5))])
-    
-    #-----< prepareHandover >-----#
-    prepareHandover = CLASS(name=u'prepareHandover', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
-    _prepareHandover_val_ArgumentType = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'PrepareHO-Arg')))
-    _prepareHandover_val_ResultType = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'PrepareHO-Res')))
-    __OPERATION_Errors_val_ParameterType_4_2 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'TargetCellOutsideGCA-Param')))
-    prepareHandover._val = dict([(u'ArgumentType', _prepareHandover_val_ArgumentType), (u'ResultType', _prepareHandover_val_ResultType), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_1), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))]), dict([(u'errorCode', (u'local', 25))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_4_2), (u'errorCode', (u'local', 42))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 68))])
-    
-    #-----< sendEndSignal >-----#
-    sendEndSignal = CLASS(name=u'sendEndSignal', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
-    _sendEndSignal_val_ArgumentType = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'SendEndSignal-Arg')))
-    _sendEndSignal_val_ResultType = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'SendEndSignal-Res')))
-    sendEndSignal._val = dict([(u'ArgumentType', _sendEndSignal_val_ArgumentType), (u'ResultType', _sendEndSignal_val_ResultType), (u'operationCode', (u'local', 29))])
-    
-    #-----< processAccessSignalling >-----#
-    processAccessSignalling = CLASS(name=u'processAccessSignalling', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
-    _processAccessSignalling_val_ArgumentType = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'ProcessAccessSignalling-Arg')))
-    processAccessSignalling._val = dict([(u'ArgumentType', _processAccessSignalling_val_ArgumentType), (u'operationCode', (u'local', 33))])
-    
-    #-----< forwardAccessSignalling >-----#
-    forwardAccessSignalling = CLASS(name=u'forwardAccessSignalling', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
-    _forwardAccessSignalling_val_ArgumentType = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'ForwardAccessSignalling-Arg')))
-    forwardAccessSignalling._val = dict([(u'ArgumentType', _forwardAccessSignalling_val_ArgumentType), (u'operationCode', (u'local', 34))])
-    
-    #-----< prepareSubsequentHandover >-----#
-    prepareSubsequentHandover = CLASS(name=u'prepareSubsequentHandover', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
-    _prepareSubsequentHandover_val_ArgumentType = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'PrepareSubsequentHO-Arg')))
-    _prepareSubsequentHandover_val_ResultType = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'PrepareSubsequentHO-Res')))
-    __OPERATION_Errors_val_ParameterType_0_3 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'UnexpectedDataParam')))
-    prepareSubsequentHandover._val = dict([(u'ArgumentType', _prepareSubsequentHandover_val_ArgumentType), (u'ResultType', _prepareSubsequentHandover_val_ResultType), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0_3), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_1), (u'errorCode', (u'local', 35))]), dict([(u'errorCode', (u'local', 3))]), dict([(u'errorCode', (u'local', 26))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 69))])
-    
-    #-----< sendAuthenticationInfo >-----#
-    sendAuthenticationInfo = CLASS(name=u'sendAuthenticationInfo', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
-    _sendAuthenticationInfo_val_ArgumentType = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'SendAuthenticationInfoArg')))
-    _sendAuthenticationInfo_val_ResultType = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'SendAuthenticationInfoRes')))
-    sendAuthenticationInfo._val = dict([(u'ArgumentType', _sendAuthenticationInfo_val_ArgumentType), (u'ResultType', _sendAuthenticationInfo_val_ResultType), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_1), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_3), (u'errorCode', (u'local', 1))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 56))])
-    
-    #-----< authenticationFailureReport >-----#
-    authenticationFailureReport = CLASS(name=u'authenticationFailureReport', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
-    _authenticationFailureReport_val_ArgumentType = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'AuthenticationFailureReportArg')))
-    _authenticationFailureReport_val_ResultType = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'AuthenticationFailureReportRes')))
-    authenticationFailureReport._val = dict([(u'ArgumentType', _authenticationFailureReport_val_ArgumentType), (u'ResultType', _authenticationFailureReport_val_ResultType), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_1_0), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_2_0), (u'errorCode', (u'local', 1))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 15))])
-    
-    #-----< checkIMEI >-----#
-    checkIMEI = CLASS(name=u'checkIMEI', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
-    _checkIMEI_val_ArgumentType = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'CheckIMEI-Arg')))
-    _checkIMEI_val_ResultType = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'CheckIMEI-Res')))
-    checkIMEI._val = dict([(u'ArgumentType', _checkIMEI_val_ArgumentType), (u'ResultType', _checkIMEI_val_ResultType), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_1), (u'errorCode', (u'local', 35))]), dict([(u'errorCode', (u'local', 7))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 43))])
-    
-    #-----< insertSubscriberData >-----#
-    insertSubscriberData = CLASS(name=u'insertSubscriberData', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
-    _insertSubscriberData_val_ArgumentType = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'InsertSubscriberDataArg')))
-    _insertSubscriberData_val_ResultType = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'InsertSubscriberDataRes')))
-    __OPERATION_Errors_val_ParameterType_2_2 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'UnidentifiedSubParam')))
-    insertSubscriberData._val = dict([(u'ArgumentType', _insertSubscriberData_val_ArgumentType), (u'ResultType', _insertSubscriberData_val_ResultType), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0_0), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_1_0), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_2_2), (u'errorCode', (u'local', 5))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 7))])
-    
-    #-----< deleteSubscriberData >-----#
-    deleteSubscriberData = CLASS(name=u'deleteSubscriberData', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
-    _deleteSubscriberData_val_ArgumentType = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'DeleteSubscriberDataArg')))
-    _deleteSubscriberData_val_ResultType = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'DeleteSubscriberDataRes')))
-    deleteSubscriberData._val = dict([(u'ArgumentType', _deleteSubscriberData_val_ArgumentType), (u'ResultType', _deleteSubscriberData_val_ResultType), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0_0), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_1_0), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_2_2), (u'errorCode', (u'local', 5))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 8))])
-    
-    #-----< reset >-----#
-    reset = CLASS(name=u'reset', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
-    _reset_val_ArgumentType = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'ResetArg')))
-    reset._val = dict([(u'ArgumentType', _reset_val_ArgumentType), (u'operationCode', (u'local', 37))])
-    
-    #-----< forwardCheckSS-Indication >-----#
-    forwardCheckSS_Indication = CLASS(name=u'forwardCheckSS-Indication', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
-    forwardCheckSS_Indication._val = dict([(u'operationCode', (u'local', 38))])
-    
-    #-----< restoreData >-----#
-    restoreData = CLASS(name=u'restoreData', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
-    _restoreData_val_ArgumentType = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'RestoreDataArg')))
-    _restoreData_val_ResultType = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'RestoreDataRes')))
-    restoreData._val = dict([(u'ArgumentType', _restoreData_val_ArgumentType), (u'ResultType', _restoreData_val_ResultType), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_1), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_3), (u'errorCode', (u'local', 1))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 57))])
-    
-    #-----< sendRoutingInfoForGprs >-----#
-    sendRoutingInfoForGprs = CLASS(name=u'sendRoutingInfoForGprs', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
-    _sendRoutingInfoForGprs_val_ArgumentType = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'SendRoutingInfoForGprsArg')))
-    _sendRoutingInfoForGprs_val_ResultType = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'SendRoutingInfoForGprsRes')))
-    __OPERATION_Errors_val_ParameterType_0_4 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'AbsentSubscriberParam')))
-    __OPERATION_Errors_val_ParameterType_1_3 = CHOICE(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'SystemFailureParam')))
-    __OPERATION_Errors_val_ParameterType_5_0 = CHOICE(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'CallBarredParam')))
-    sendRoutingInfoForGprs._val = dict([(u'ArgumentType', _sendRoutingInfoForGprs_val_ArgumentType), (u'ResultType', _sendRoutingInfoForGprs_val_ResultType), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0_4), (u'errorCode', (u'local', 27))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_1_3), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_2_1), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_3_1), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_4_0), (u'errorCode', (u'local', 1))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_5_0), (u'errorCode', (u'local', 13))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 24))])
-    
-    #-----< failureReport >-----#
-    failureReport = CLASS(name=u'failureReport', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
-    _failureReport_val_ArgumentType = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'FailureReportArg')))
-    _failureReport_val_ResultType = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'FailureReportRes')))
-    failureReport._val = dict([(u'ArgumentType', _failureReport_val_ArgumentType), (u'ResultType', _failureReport_val_ResultType), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_1), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_3), (u'errorCode', (u'local', 1))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 25))])
-    
-    #-----< noteMsPresentForGprs >-----#
-    noteMsPresentForGprs = CLASS(name=u'noteMsPresentForGprs', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
-    _noteMsPresentForGprs_val_ArgumentType = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'NoteMsPresentForGprsArg')))
-    _noteMsPresentForGprs_val_ResultType = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'NoteMsPresentForGprsRes')))
-    noteMsPresentForGprs._val = dict([(u'ArgumentType', _noteMsPresentForGprs_val_ArgumentType), (u'ResultType', _noteMsPresentForGprs_val_ResultType), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_1), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_3), (u'errorCode', (u'local', 1))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 26))])
-    
-    #-----< noteMM-Event >-----#
-    noteMM_Event = CLASS(name=u'noteMM-Event', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
-    _noteMM_Event_val_ArgumentType = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'NoteMM-EventArg')))
-    _noteMM_Event_val_ResultType = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'NoteMM-EventRes')))
-    __OPERATION_Errors_val_ParameterType_3_2 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'MM-EventNotSupported-Param')))
-    noteMM_Event._val = dict([(u'ArgumentType', _noteMM_Event_val_ArgumentType), (u'ResultType', _noteMM_Event_val_ResultType), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0_0), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_1_0), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_2_0), (u'errorCode', (u'local', 1))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_3_2), (u'errorCode', (u'local', 59))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 89))])
-    
-    #-----< updateVcsgLocation >-----#
-    updateVcsgLocation = CLASS(name=u'updateVcsgLocation', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
-    _updateVcsgLocation_val_ArgumentType = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'UpdateVcsgLocationArg')))
-    _updateVcsgLocation_val_ResultType = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'UpdateVcsgLocationRes')))
-    updateVcsgLocation._val = dict([(u'ArgumentType', _updateVcsgLocation_val_ArgumentType), (u'ResultType', _updateVcsgLocation_val_ResultType), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_1_0), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_2_0), (u'errorCode', (u'local', 1))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 53))])
-    
-    #-----< cancelVcsgLocation >-----#
-    cancelVcsgLocation = CLASS(name=u'cancelVcsgLocation', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
-    _cancelVcsgLocation_val_ArgumentType = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'CancelVcsgLocationArg')))
-    _cancelVcsgLocation_val_ResultType = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'CancelVcsgLocationRes')))
-    cancelVcsgLocation._val = dict([(u'ArgumentType', _cancelVcsgLocation_val_ArgumentType), (u'ResultType', _cancelVcsgLocation_val_ResultType), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0_0), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_1_0), (u'errorCode', (u'local', 36))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 36))])
-    
-    _all_ = [
-        updateLocation,
-        _updateLocation_val_ArgumentType,
-        _updateLocation_val_ResultType,
-        __OPERATION_Errors_val_ParameterType_0,
-        __OPERATION_Errors_val_ParameterType_1,
-        __OPERATION_Errors_val_ParameterType_2,
-        __OPERATION_Errors_val_ParameterType_3,
-        __OPERATION_Errors_val_ParameterType_4,
-        cancelLocation,
-        _cancelLocation_val_ArgumentType,
-        _cancelLocation_val_ResultType,
-        __OPERATION_Errors_val_ParameterType_0_0,
-        __OPERATION_Errors_val_ParameterType_1_0,
-        purgeMS,
-        _purgeMS_val_ArgumentType,
-        _purgeMS_val_ResultType,
-        __OPERATION_Errors_val_ParameterType_2_0,
-        sendIdentification,
-        _sendIdentification_val_ArgumentType,
-        _sendIdentification_val_ResultType,
-        __OPERATION_Errors_val_ParameterType_1_1,
-        updateGprsLocation,
-        _updateGprsLocation_val_ArgumentType,
-        _updateGprsLocation_val_ResultType,
-        __OPERATION_Errors_val_ParameterType_3_0,
-        provideSubscriberInfo,
-        _provideSubscriberInfo_val_ArgumentType,
-        _provideSubscriberInfo_val_ResultType,
-        anyTimeInterrogation,
-        _anyTimeInterrogation_val_ArgumentType,
-        _anyTimeInterrogation_val_ResultType,
-        __OPERATION_Errors_val_ParameterType_1_2,
-        __OPERATION_Errors_val_ParameterType_2_1,
-        __OPERATION_Errors_val_ParameterType_3_1,
-        __OPERATION_Errors_val_ParameterType_4_0,
-        anyTimeSubscriptionInterrogation,
-        _anyTimeSubscriptionInterrogation_val_ArgumentType,
-        _anyTimeSubscriptionInterrogation_val_ResultType,
-        __OPERATION_Errors_val_ParameterType_0_1,
-        __OPERATION_Errors_val_ParameterType_4_1,
-        __OPERATION_Errors_val_ParameterType_5,
-        __OPERATION_Errors_val_ParameterType_6,
-        __OPERATION_Errors_val_ParameterType_7,
-        __OPERATION_Errors_val_ParameterType_8,
-        __OPERATION_Errors_val_ParameterType_9,
-        anyTimeModification,
-        _anyTimeModification_val_ArgumentType,
-        _anyTimeModification_val_ResultType,
-        __OPERATION_Errors_val_ParameterType_0_2,
-        __OPERATION_Errors_val_ParameterType_8_0,
-        __OPERATION_Errors_val_ParameterType_9_0,
-        __OPERATION_Errors_val_ParameterType_10,
-        __OPERATION_Errors_val_ParameterType_11,
-        noteSubscriberDataModified,
-        _noteSubscriberDataModified_val_ArgumentType,
-        _noteSubscriberDataModified_val_ResultType,
-        prepareHandover,
-        _prepareHandover_val_ArgumentType,
-        _prepareHandover_val_ResultType,
-        __OPERATION_Errors_val_ParameterType_4_2,
-        sendEndSignal,
-        _sendEndSignal_val_ArgumentType,
-        _sendEndSignal_val_ResultType,
-        processAccessSignalling,
-        _processAccessSignalling_val_ArgumentType,
-        forwardAccessSignalling,
-        _forwardAccessSignalling_val_ArgumentType,
-        prepareSubsequentHandover,
-        _prepareSubsequentHandover_val_ArgumentType,
-        _prepareSubsequentHandover_val_ResultType,
-        __OPERATION_Errors_val_ParameterType_0_3,
-        sendAuthenticationInfo,
-        _sendAuthenticationInfo_val_ArgumentType,
-        _sendAuthenticationInfo_val_ResultType,
-        authenticationFailureReport,
-        _authenticationFailureReport_val_ArgumentType,
-        _authenticationFailureReport_val_ResultType,
-        checkIMEI,
-        _checkIMEI_val_ArgumentType,
-        _checkIMEI_val_ResultType,
-        insertSubscriberData,
-        _insertSubscriberData_val_ArgumentType,
-        _insertSubscriberData_val_ResultType,
-        __OPERATION_Errors_val_ParameterType_2_2,
-        deleteSubscriberData,
-        _deleteSubscriberData_val_ArgumentType,
-        _deleteSubscriberData_val_ResultType,
-        reset,
-        _reset_val_ArgumentType,
-        forwardCheckSS_Indication,
-        restoreData,
-        _restoreData_val_ArgumentType,
-        _restoreData_val_ResultType,
-        sendRoutingInfoForGprs,
-        _sendRoutingInfoForGprs_val_ArgumentType,
-        _sendRoutingInfoForGprs_val_ResultType,
-        __OPERATION_Errors_val_ParameterType_0_4,
-        __OPERATION_Errors_val_ParameterType_1_3,
-        __OPERATION_Errors_val_ParameterType_5_0,
-        failureReport,
-        _failureReport_val_ArgumentType,
-        _failureReport_val_ResultType,
-        noteMsPresentForGprs,
-        _noteMsPresentForGprs_val_ArgumentType,
-        _noteMsPresentForGprs_val_ResultType,
-        noteMM_Event,
-        _noteMM_Event_val_ArgumentType,
-        _noteMM_Event_val_ResultType,
-        __OPERATION_Errors_val_ParameterType_3_2,
-        updateVcsgLocation,
-        _updateVcsgLocation_val_ArgumentType,
-        _updateVcsgLocation_val_ResultType,
-        cancelVcsgLocation,
-        _cancelVcsgLocation_val_ArgumentType,
-        _cancelVcsgLocation_val_ResultType,
+        __sendRoutingInfo_Errors_val_ParameterType_2_0,
+        __sendRoutingInfo_Errors_val_ParameterType_3_0,
+        __sendRoutingInfo_Errors_val_ParameterType_5_1,
+        __sendRoutingInfo_Errors_val_ParameterType_6_1,
     ]
 
 class MAP_MS_DataTypes:
 
     _name_  = u'MAP-MS-DataTypes'
-    _oid_   = [0, 4, 0, 0, 1, 3, 11, 16]
+    _oid_   = [0, 4, 0, 0, 1, 3, 11, 19]
     
     _obj_ = [
         u'UpdateLocationArg',
@@ -7658,6 +6703,7 @@ class MAP_MS_DataTypes:
         u'ISR-Information',
         u'SGSN-Capability',
         u'SupportedFeatures',
+        u'Ext-SupportedFeatures',
         u'UE-SRVCC-Capability',
         u'UpdateGprsLocationRes',
         u'EPLMN-List',
@@ -7730,6 +6776,12 @@ class MAP_MS_DataTypes:
         u'UESBI-IuB',
         u'EquipmentStatus',
         u'InsertSubscriberDataArg',
+        u'EDRX-Cycle-Length-List',
+        u'EDRX-Cycle-Length',
+        u'EDRX-Cycle-Length-Value',
+        u'Reset-Id-List',
+        u'Reset-Id',
+        u'DL-Buffering-Suggested-Packet-Count',
         u'Group-Service-ID',
         u'Local-GroupID',
         u'IMSI-GroupIdList',
@@ -7749,6 +6801,7 @@ class MAP_MS_DataTypes:
         u'EPS-DataList',
         u'maxNumOfAPN-Configurations',
         u'APN-Configuration',
+        u'PDN-ConnectionContinuity',
         u'NIDD-Mechanism',
         u'PDN-Type',
         u'EPS-QoS-Subscribed',
@@ -7757,6 +6810,7 @@ class MAP_MS_DataTypes:
         u'maxNumOfSpecificAPNInfos',
         u'SpecificAPNInfo',
         u'Bandwidth',
+        u'BandwidthExt',
         u'QoS-Class-Identifier',
         u'Allocation-Retention-Priority',
         u'PDN-GW-Identity',
@@ -7765,6 +6819,7 @@ class MAP_MS_DataTypes:
         u'WLAN-Offloadability',
         u'WLAN-Offloadability-Indication',
         u'AccessRestrictionData',
+        u'Ext-AccessRestrictionData',
         u'AdjacentAccessRestrictionDataList',
         u'AdjacentAccessRestrictionData',
         u'CS-AllocationRetentionPriority',
@@ -7968,6 +7023,7 @@ class MAP_MS_DataTypes:
         u'LocationInformation',
         u'LocationInformationEPS',
         u'LocationInformationGPRS',
+        u'LocationInformation5GS',
         u'UserCSGInformation',
         u'GeographicalInformation',
         u'GeodeticInformation',
@@ -8083,6 +7139,7 @@ class MAP_MS_DataTypes:
         u'ISR-Information',
         u'SGSN-Capability',
         u'SupportedFeatures',
+        u'Ext-SupportedFeatures',
         u'UE-SRVCC-Capability',
         u'UpdateGprsLocationRes',
         u'EPLMN-List',
@@ -8147,6 +7204,12 @@ class MAP_MS_DataTypes:
         u'UESBI-IuB',
         u'EquipmentStatus',
         u'InsertSubscriberDataArg',
+        u'EDRX-Cycle-Length-List',
+        u'EDRX-Cycle-Length',
+        u'EDRX-Cycle-Length-Value',
+        u'Reset-Id-List',
+        u'Reset-Id',
+        u'DL-Buffering-Suggested-Packet-Count',
         u'Group-Service-ID',
         u'Local-GroupID',
         u'IMSI-GroupIdList',
@@ -8164,6 +7227,7 @@ class MAP_MS_DataTypes:
         u'APN-ConfigurationProfile',
         u'EPS-DataList',
         u'APN-Configuration',
+        u'PDN-ConnectionContinuity',
         u'NIDD-Mechanism',
         u'PDN-Type',
         u'EPS-QoS-Subscribed',
@@ -8171,6 +7235,7 @@ class MAP_MS_DataTypes:
         u'SpecificAPNInfoList',
         u'SpecificAPNInfo',
         u'Bandwidth',
+        u'BandwidthExt',
         u'QoS-Class-Identifier',
         u'Allocation-Retention-Priority',
         u'PDN-GW-Identity',
@@ -8179,6 +7244,7 @@ class MAP_MS_DataTypes:
         u'WLAN-Offloadability',
         u'WLAN-Offloadability-Indication',
         u'AccessRestrictionData',
+        u'Ext-AccessRestrictionData',
         u'AdjacentAccessRestrictionDataList',
         u'AdjacentAccessRestrictionData',
         u'CS-AllocationRetentionPriority',
@@ -8354,6 +7420,7 @@ class MAP_MS_DataTypes:
         u'LocationInformation',
         u'LocationInformationEPS',
         u'LocationInformationGPRS',
+        u'LocationInformation5GS',
         u'UserCSGInformation',
         u'GeographicalInformation',
         u'GeodeticInformation',
@@ -8515,6 +7582,7 @@ class MAP_MS_DataTypes:
     _VLR_Capability_longGroupID_Supported = NULL(name=u'longGroupID-Supported', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     _VLR_Capability_mtRoamingForwardingSupported = NULL(name=u'mtRoamingForwardingSupported', mode=MODE_TYPE, tag=(9, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     _VLR_Capability_msisdn_lessOperation_Supported = NULL(name=u'msisdn-lessOperation-Supported', mode=MODE_TYPE, tag=(10, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _VLR_Capability_reset_ids_Supported = NULL(name=u'reset-ids-Supported', mode=MODE_TYPE, tag=(11, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     VLR_Capability._cont = ASN1Dict([
         (u'supportedCamelPhases', _VLR_Capability_supportedCamelPhases),
         (u'extensionContainer', _VLR_Capability_extensionContainer),
@@ -8528,12 +7596,13 @@ class MAP_MS_DataTypes:
         (u'longGroupID-Supported', _VLR_Capability_longGroupID_Supported),
         (u'mtRoamingForwardingSupported', _VLR_Capability_mtRoamingForwardingSupported),
         (u'msisdn-lessOperation-Supported', _VLR_Capability_msisdn_lessOperation_Supported),
+        (u'reset-ids-Supported', _VLR_Capability_reset_ids_Supported),
         ])
-    VLR_Capability._ext = [u'solsaSupportIndicator', u'istSupportIndicator', u'superChargerSupportedInServingNetworkEntity', u'longFTN-Supported', u'supportedLCS-CapabilitySets', u'offeredCamel4CSIs', u'supportedRAT-TypesIndicator', u'longGroupID-Supported', u'mtRoamingForwardingSupported', u'msisdn-lessOperation-Supported']
+    VLR_Capability._ext = [u'solsaSupportIndicator', u'istSupportIndicator', u'superChargerSupportedInServingNetworkEntity', u'longFTN-Supported', u'supportedLCS-CapabilitySets', u'offeredCamel4CSIs', u'supportedRAT-TypesIndicator', u'longGroupID-Supported', u'mtRoamingForwardingSupported', u'msisdn-lessOperation-Supported', u'reset-ids-Supported']
     
     #-----< SupportedRAT-Types >-----#
     SupportedRAT_Types = BIT_STR(name=u'SupportedRAT-Types', mode=MODE_TYPE)
-    SupportedRAT_Types._cont = ASN1Dict([(u'utran', 0), (u'geran', 1), (u'gan', 2), (u'i-hspa-evolution', 3), (u'e-utran', 4)])
+    SupportedRAT_Types._cont = ASN1Dict([(u'utran', 0), (u'geran', 1), (u'gan', 2), (u'i-hspa-evolution', 3), (u'e-utran', 4), (u'nb-iot', 5)])
     SupportedRAT_Types._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=2, ub=8)], ev=None, er=[])
     
     #-----< SuperChargerInfo >-----#
@@ -8961,8 +8030,8 @@ class MAP_MS_DataTypes:
     
     #-----< Used-RAT-Type >-----#
     Used_RAT_Type = ENUM(name=u'Used-RAT-Type', mode=MODE_TYPE)
-    Used_RAT_Type._cont = ASN1Dict([(u'utran', 0), (u'geran', 1), (u'gan', 2), (u'i-hspa-evolution', 3), (u'e-utran', 4)])
-    Used_RAT_Type._ext = []
+    Used_RAT_Type._cont = ASN1Dict([(u'utran', 0), (u'geran', 1), (u'gan', 2), (u'i-hspa-evolution', 3), (u'e-utran', 4), (u'nb-iot', 5)])
+    Used_RAT_Type._ext = [u'nb-iot']
     
     #-----< EPS-Info >-----#
     EPS_Info = CHOICE(name=u'EPS-Info', mode=MODE_TYPE)
@@ -9010,6 +8079,8 @@ class MAP_MS_DataTypes:
     _SGSN_Capability_cancellationTypeInitialAttach = NULL(name=u'cancellationTypeInitialAttach', mode=MODE_TYPE, tag=(12, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     _SGSN_Capability_msisdn_lessOperation_Supported = NULL(name=u'msisdn-lessOperation-Supported', mode=MODE_TYPE, tag=(14, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     _SGSN_Capability_updateofHomogeneousSupportOfIMSVoiceOverPSSessions = NULL(name=u'updateofHomogeneousSupportOfIMSVoiceOverPSSessions', mode=MODE_TYPE, tag=(15, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _SGSN_Capability_reset_ids_Supported = NULL(name=u'reset-ids-Supported', mode=MODE_TYPE, tag=(16, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _SGSN_Capability_ext_SupportedFeatures = BIT_STR(name=u'ext-SupportedFeatures', mode=MODE_TYPE, tag=(17, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAP-MS-DataTypes', 'Ext-SupportedFeatures')), opt=True)
     SGSN_Capability._cont = ASN1Dict([
         (u'solsaSupportIndicator', _SGSN_Capability_solsaSupportIndicator),
         (u'extensionContainer', _SGSN_Capability_extensionContainer),
@@ -9026,13 +8097,20 @@ class MAP_MS_DataTypes:
         (u'cancellationTypeInitialAttach', _SGSN_Capability_cancellationTypeInitialAttach),
         (u'msisdn-lessOperation-Supported', _SGSN_Capability_msisdn_lessOperation_Supported),
         (u'updateofHomogeneousSupportOfIMSVoiceOverPSSessions', _SGSN_Capability_updateofHomogeneousSupportOfIMSVoiceOverPSSessions),
+        (u'reset-ids-Supported', _SGSN_Capability_reset_ids_Supported),
+        (u'ext-SupportedFeatures', _SGSN_Capability_ext_SupportedFeatures),
         ])
-    SGSN_Capability._ext = [u'superChargerSupportedInServingNetworkEntity', u'gprsEnhancementsSupportIndicator', u'supportedCamelPhases', u'supportedLCS-CapabilitySets', u'offeredCamel4CSIs', u'smsCallBarringSupportIndicator', u'supportedRAT-TypesIndicator', u'supportedFeatures', u't-adsDataRetrieval', u'homogeneousSupportOfIMSVoiceOverPSSessions', u'cancellationTypeInitialAttach', u'msisdn-lessOperation-Supported', u'updateofHomogeneousSupportOfIMSVoiceOverPSSessions']
+    SGSN_Capability._ext = [u'superChargerSupportedInServingNetworkEntity', u'gprsEnhancementsSupportIndicator', u'supportedCamelPhases', u'supportedLCS-CapabilitySets', u'offeredCamel4CSIs', u'smsCallBarringSupportIndicator', u'supportedRAT-TypesIndicator', u'supportedFeatures', u't-adsDataRetrieval', u'homogeneousSupportOfIMSVoiceOverPSSessions', u'cancellationTypeInitialAttach', u'msisdn-lessOperation-Supported', u'updateofHomogeneousSupportOfIMSVoiceOverPSSessions', u'reset-ids-Supported', u'ext-SupportedFeatures']
     
     #-----< SupportedFeatures >-----#
     SupportedFeatures = BIT_STR(name=u'SupportedFeatures', mode=MODE_TYPE)
-    SupportedFeatures._cont = ASN1Dict([(u'odb-all-apn', 0), (u'odb-HPLMN-APN', 1), (u'odb-VPLMN-APN', 2), (u'odb-all-og', 3), (u'odb-all-international-og', 4), (u'odb-all-int-og-not-to-HPLMN-country', 5), (u'odb-all-interzonal-og', 6), (u'odb-all-interzonal-og-not-to-HPLMN-country', 7), (u'odb-all-interzonal-og-and-internat-og-not-to-HPLMN-country', 8), (u'regSub', 9), (u'trace', 10), (u'lcs-all-PrivExcep', 11), (u'lcs-universal', 12), (u'lcs-CallSessionRelated', 13), (u'lcs-CallSessionUnrelated', 14), (u'lcs-PLMN-operator', 15), (u'lcs-ServiceType', 16), (u'lcs-all-MOLR-SS', 17), (u'lcs-basicSelfLocation', 18), (u'lcs-autonomousSelfLocation', 19), (u'lcs-transferToThirdParty', 20), (u'sm-mo-pp', 21), (u'barring-OutgoingCalls', 22), (u'baoc', 23), (u'boic', 24), (u'boicExHC', 25), (u'localTimeZoneRetrieval', 26), (u'additionalMsisdn', 27), (u'smsInMME', 28), (u'smsInSGSN', 29), (u'ue-Reachability-Notification', 30), (u'state-Location-Information-Retrieval', 31), (u'partialPurge', 32), (u'gddInSGSN', 33), (u'sgsnCAMELCapability', 34), (u'pcscf-Restoration', 35), (u'dedicatedCoreNetworks', 36), (u'non-IP-PDN-Type-APNs', 37)])
+    SupportedFeatures._cont = ASN1Dict([(u'odb-all-apn', 0), (u'odb-HPLMN-APN', 1), (u'odb-VPLMN-APN', 2), (u'odb-all-og', 3), (u'odb-all-international-og', 4), (u'odb-all-int-og-not-to-HPLMN-country', 5), (u'odb-all-interzonal-og', 6), (u'odb-all-interzonal-og-not-to-HPLMN-country', 7), (u'odb-all-interzonal-og-and-internat-og-not-to-HPLMN-country', 8), (u'regSub', 9), (u'trace', 10), (u'lcs-all-PrivExcep', 11), (u'lcs-universal', 12), (u'lcs-CallSessionRelated', 13), (u'lcs-CallSessionUnrelated', 14), (u'lcs-PLMN-operator', 15), (u'lcs-ServiceType', 16), (u'lcs-all-MOLR-SS', 17), (u'lcs-basicSelfLocation', 18), (u'lcs-autonomousSelfLocation', 19), (u'lcs-transferToThirdParty', 20), (u'sm-mo-pp', 21), (u'barring-OutgoingCalls', 22), (u'baoc', 23), (u'boic', 24), (u'boicExHC', 25), (u'localTimeZoneRetrieval', 26), (u'additionalMsisdn', 27), (u'smsInMME', 28), (u'smsInSGSN', 29), (u'ue-Reachability-Notification', 30), (u'state-Location-Information-Retrieval', 31), (u'partialPurge', 32), (u'gddInSGSN', 33), (u'sgsnCAMELCapability', 34), (u'pcscf-Restoration', 35), (u'dedicatedCoreNetworks', 36), (u'non-IP-PDN-Type-APNs', 37), (u'non-IP-PDP-Type-APNs', 38), (u'nrAsSecondaryRAT', 39)])
     SupportedFeatures._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=26, ub=40)], ev=None, er=[])
+    
+    #-----< Ext-SupportedFeatures >-----#
+    Ext_SupportedFeatures = BIT_STR(name=u'Ext-SupportedFeatures', mode=MODE_TYPE)
+    Ext_SupportedFeatures._cont = ASN1Dict([(u'unlicensedSpectrumAsSecondaryRAT', 0)])
+    Ext_SupportedFeatures._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=40)], ev=None, er=[])
     
     #-----< UE-SRVCC-Capability >-----#
     UE_SRVCC_Capability = ENUM(name=u'UE-SRVCC-Capability', mode=MODE_TYPE)
@@ -9755,6 +8833,11 @@ class MAP_MS_DataTypes:
     _InsertSubscriberDataArg_imsi_Group_Id_List = SEQ_OF(name=u'imsi-Group-Id-List', mode=MODE_TYPE, tag=(47, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAP-MS-DataTypes', 'IMSI-GroupIdList')), opt=True)
     _InsertSubscriberDataArg_ueUsageType = OCT_STR(name=u'ueUsageType', mode=MODE_TYPE, tag=(48, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAP-MS-DataTypes', 'UE-UsageType')), opt=True)
     _InsertSubscriberDataArg_userPlaneIntegrityProtectionIndicator = NULL(name=u'userPlaneIntegrityProtectionIndicator', mode=MODE_TYPE, tag=(49, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _InsertSubscriberDataArg_dl_Buffering_Suggested_Packet_Count = INT(name=u'dl-Buffering-Suggested-Packet-Count', mode=MODE_TYPE, tag=(50, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAP-MS-DataTypes', 'DL-Buffering-Suggested-Packet-Count')), opt=True)
+    _InsertSubscriberDataArg_reset_Id_List = SEQ_OF(name=u'reset-Id-List', mode=MODE_TYPE, tag=(51, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAP-MS-DataTypes', 'Reset-Id-List')), opt=True)
+    _InsertSubscriberDataArg_eDRX_Cycle_Length_List = SEQ_OF(name=u'eDRX-Cycle-Length-List', mode=MODE_TYPE, tag=(52, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAP-MS-DataTypes', 'EDRX-Cycle-Length-List')), opt=True)
+    _InsertSubscriberDataArg_ext_AccessRestrictionData = BIT_STR(name=u'ext-AccessRestrictionData', mode=MODE_TYPE, tag=(53, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAP-MS-DataTypes', 'Ext-AccessRestrictionData')), opt=True)
+    _InsertSubscriberDataArg_iab_Operation_Allowed_Indicator = NULL(name=u'iab-Operation-Allowed-Indicator', mode=MODE_TYPE, tag=(54, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     InsertSubscriberDataArg._cont = ASN1Dict([
         (u'imsi', _InsertSubscriberDataArg_imsi),
         (u'msisdn', _InsertSubscriberDataArg_msisdn),
@@ -9804,8 +8887,47 @@ class MAP_MS_DataTypes:
         (u'imsi-Group-Id-List', _InsertSubscriberDataArg_imsi_Group_Id_List),
         (u'ueUsageType', _InsertSubscriberDataArg_ueUsageType),
         (u'userPlaneIntegrityProtectionIndicator', _InsertSubscriberDataArg_userPlaneIntegrityProtectionIndicator),
+        (u'dl-Buffering-Suggested-Packet-Count', _InsertSubscriberDataArg_dl_Buffering_Suggested_Packet_Count),
+        (u'reset-Id-List', _InsertSubscriberDataArg_reset_Id_List),
+        (u'eDRX-Cycle-Length-List', _InsertSubscriberDataArg_eDRX_Cycle_Length_List),
+        (u'ext-AccessRestrictionData', _InsertSubscriberDataArg_ext_AccessRestrictionData),
+        (u'iab-Operation-Allowed-Indicator', _InsertSubscriberDataArg_iab_Operation_Allowed_Indicator),
         ])
-    InsertSubscriberDataArg._ext = [u'naea-PreferredCI', u'gprsSubscriptionData', u'roamingRestrictedInSgsnDueToUnsupportedFeature', u'networkAccessMode', u'lsaInformation', u'lmu-Indicator', u'lcsInformation', u'istAlertTimer', u'superChargerSupportedInHLR', u'mc-SS-Info', u'cs-AllocationRetentionPriority', u'sgsn-CAMEL-SubscriptionInfo', u'chargingCharacteristics', u'accessRestrictionData', u'ics-Indicator', u'eps-SubscriptionData', u'csg-SubscriptionDataList', u'ue-ReachabilityRequestIndicator', u'sgsn-Number', u'mme-Name', u'subscribedPeriodicRAUTAUtimer', u'vplmnLIPAAllowed', u'mdtUserConsent', u'subscribedPeriodicLAUtimer', u'vplmn-Csg-SubscriptionDataList', u'additionalMSISDN', u'psAndSMS-OnlyServiceProvision', u'smsInSGSNAllowed', u'cs-to-ps-SRVCC-Allowed-Indicator', u'pcscf-Restoration-Request', u'adjacentAccessRestrictionDataList', u'imsi-Group-Id-List', u'ueUsageType', u'userPlaneIntegrityProtectionIndicator']
+    InsertSubscriberDataArg._ext = [u'naea-PreferredCI', u'gprsSubscriptionData', u'roamingRestrictedInSgsnDueToUnsupportedFeature', u'networkAccessMode', u'lsaInformation', u'lmu-Indicator', u'lcsInformation', u'istAlertTimer', u'superChargerSupportedInHLR', u'mc-SS-Info', u'cs-AllocationRetentionPriority', u'sgsn-CAMEL-SubscriptionInfo', u'chargingCharacteristics', u'accessRestrictionData', u'ics-Indicator', u'eps-SubscriptionData', u'csg-SubscriptionDataList', u'ue-ReachabilityRequestIndicator', u'sgsn-Number', u'mme-Name', u'subscribedPeriodicRAUTAUtimer', u'vplmnLIPAAllowed', u'mdtUserConsent', u'subscribedPeriodicLAUtimer', u'vplmn-Csg-SubscriptionDataList', u'additionalMSISDN', u'psAndSMS-OnlyServiceProvision', u'smsInSGSNAllowed', u'cs-to-ps-SRVCC-Allowed-Indicator', u'pcscf-Restoration-Request', u'adjacentAccessRestrictionDataList', u'imsi-Group-Id-List', u'ueUsageType', u'userPlaneIntegrityProtectionIndicator', u'dl-Buffering-Suggested-Packet-Count', u'reset-Id-List', u'eDRX-Cycle-Length-List', u'ext-AccessRestrictionData', u'iab-Operation-Allowed-Indicator']
+    
+    #-----< EDRX-Cycle-Length-List >-----#
+    EDRX_Cycle_Length_List = SEQ_OF(name=u'EDRX-Cycle-Length-List', mode=MODE_TYPE)
+    _EDRX_Cycle_Length_List__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'EDRX-Cycle-Length')))
+    EDRX_Cycle_Length_List._cont = _EDRX_Cycle_Length_List__item_
+    EDRX_Cycle_Length_List._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=8)], ev=None, er=[])
+    
+    #-----< EDRX-Cycle-Length >-----#
+    EDRX_Cycle_Length = SEQ(name=u'EDRX-Cycle-Length', mode=MODE_TYPE)
+    _EDRX_Cycle_Length_rat_Type = ENUM(name=u'rat-Type', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAP-MS-DataTypes', 'Used-RAT-Type')))
+    _EDRX_Cycle_Length_eDRX_Cycle_Length_Value = OCT_STR(name=u'eDRX-Cycle-Length-Value', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAP-MS-DataTypes', 'EDRX-Cycle-Length-Value')))
+    EDRX_Cycle_Length._cont = ASN1Dict([
+        (u'rat-Type', _EDRX_Cycle_Length_rat_Type),
+        (u'eDRX-Cycle-Length-Value', _EDRX_Cycle_Length_eDRX_Cycle_Length_Value),
+        ])
+    EDRX_Cycle_Length._ext = []
+    
+    #-----< EDRX-Cycle-Length-Value >-----#
+    EDRX_Cycle_Length_Value = OCT_STR(name=u'EDRX-Cycle-Length-Value', mode=MODE_TYPE)
+    EDRX_Cycle_Length_Value._const_sz = ASN1Set(rv=[1], rr=[], ev=None, er=[])
+    
+    #-----< Reset-Id-List >-----#
+    Reset_Id_List = SEQ_OF(name=u'Reset-Id-List', mode=MODE_TYPE)
+    _Reset_Id_List__item_ = OCT_STR(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'Reset-Id')))
+    Reset_Id_List._cont = _Reset_Id_List__item_
+    Reset_Id_List._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=50)], ev=None, er=[])
+    
+    #-----< Reset-Id >-----#
+    Reset_Id = OCT_STR(name=u'Reset-Id', mode=MODE_TYPE)
+    Reset_Id._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=4)], ev=None, er=[])
+    
+    #-----< DL-Buffering-Suggested-Packet-Count >-----#
+    DL_Buffering_Suggested_Packet_Count = INT(name=u'DL-Buffering-Suggested-Packet-Count', mode=MODE_TYPE)
+    DL_Buffering_Suggested_Packet_Count._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=-1, ub=2147483647)], ev=None, er=[])
     
     #-----< Group-Service-ID >-----#
     Group_Service_ID = INT(name=u'Group-Service-ID', mode=MODE_TYPE)
@@ -9965,6 +9087,7 @@ class MAP_MS_DataTypes:
     _APN_Configuration_non_IP_PDN_Type_Indicator = NULL(name=u'non-IP-PDN-Type-Indicator', mode=MODE_TYPE, tag=(19, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     _APN_Configuration_nIDD_Mechanism = ENUM(name=u'nIDD-Mechanism', mode=MODE_TYPE, tag=(20, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAP-MS-DataTypes', 'NIDD-Mechanism')), opt=True)
     _APN_Configuration_sCEF_ID = OCT_STR(name=u'sCEF-ID', mode=MODE_TYPE, tag=(21, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAP-MS-DataTypes', 'FQDN')), opt=True)
+    _APN_Configuration_pdn_ConnectionContinuity = ENUM(name=u'pdn-ConnectionContinuity', mode=MODE_TYPE, tag=(22, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAP-MS-DataTypes', 'PDN-ConnectionContinuity')), opt=True)
     APN_Configuration._cont = ASN1Dict([
         (u'contextId', _APN_Configuration_contextId),
         (u'pdn-Type', _APN_Configuration_pdn_Type),
@@ -9988,8 +9111,14 @@ class MAP_MS_DataTypes:
         (u'non-IP-PDN-Type-Indicator', _APN_Configuration_non_IP_PDN_Type_Indicator),
         (u'nIDD-Mechanism', _APN_Configuration_nIDD_Mechanism),
         (u'sCEF-ID', _APN_Configuration_sCEF_ID),
+        (u'pdn-ConnectionContinuity', _APN_Configuration_pdn_ConnectionContinuity),
         ])
-    APN_Configuration._ext = [u'apn-oi-Replacement', u'sipto-Permission', u'lipa-Permission', u'restoration-Priority', u'sipto-local-network-Permission', u'wlan-offloadability', u'non-IP-PDN-Type-Indicator', u'nIDD-Mechanism', u'sCEF-ID']
+    APN_Configuration._ext = [u'apn-oi-Replacement', u'sipto-Permission', u'lipa-Permission', u'restoration-Priority', u'sipto-local-network-Permission', u'wlan-offloadability', u'non-IP-PDN-Type-Indicator', u'nIDD-Mechanism', u'sCEF-ID', u'pdn-ConnectionContinuity']
+    
+    #-----< PDN-ConnectionContinuity >-----#
+    PDN_ConnectionContinuity = ENUM(name=u'PDN-ConnectionContinuity', mode=MODE_TYPE)
+    PDN_ConnectionContinuity._cont = ASN1Dict([(u'maintainPDN-Connection', 0), (u'disconnectPDN-ConnectionWithReactivationRequest', 1), (u'disconnectPDN-ConnectionWithoutReactivationRequest', 2)])
+    PDN_ConnectionContinuity._ext = None
     
     #-----< NIDD-Mechanism >-----#
     NIDD_Mechanism = ENUM(name=u'NIDD-Mechanism', mode=MODE_TYPE)
@@ -10017,12 +9146,16 @@ class MAP_MS_DataTypes:
     _AMBR_max_RequestedBandwidth_UL = INT(name=u'max-RequestedBandwidth-UL', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAP-MS-DataTypes', 'Bandwidth')))
     _AMBR_max_RequestedBandwidth_DL = INT(name=u'max-RequestedBandwidth-DL', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAP-MS-DataTypes', 'Bandwidth')))
     _AMBR_extensionContainer = SEQ(name=u'extensionContainer', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAP-ExtensionDataTypes', 'ExtensionContainer')), opt=True)
+    _AMBR_extended_Max_RequestedBandwidth_UL = INT(name=u'extended-Max-RequestedBandwidth-UL', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAP-MS-DataTypes', 'BandwidthExt')), opt=True)
+    _AMBR_extended_Max_RequestedBandwidth_DL = INT(name=u'extended-Max-RequestedBandwidth-DL', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAP-MS-DataTypes', 'BandwidthExt')), opt=True)
     AMBR._cont = ASN1Dict([
         (u'max-RequestedBandwidth-UL', _AMBR_max_RequestedBandwidth_UL),
         (u'max-RequestedBandwidth-DL', _AMBR_max_RequestedBandwidth_DL),
         (u'extensionContainer', _AMBR_extensionContainer),
+        (u'extended-Max-RequestedBandwidth-UL', _AMBR_extended_Max_RequestedBandwidth_UL),
+        (u'extended-Max-RequestedBandwidth-DL', _AMBR_extended_Max_RequestedBandwidth_DL),
         ])
-    AMBR._ext = []
+    AMBR._ext = [u'extended-Max-RequestedBandwidth-UL', u'extended-Max-RequestedBandwidth-DL']
     
     #-----< SpecificAPNInfoList >-----#
     SpecificAPNInfoList = SEQ_OF(name=u'SpecificAPNInfoList', mode=MODE_TYPE)
@@ -10048,6 +9181,9 @@ class MAP_MS_DataTypes:
     
     #-----< Bandwidth >-----#
     Bandwidth = INT(name=u'Bandwidth', mode=MODE_TYPE)
+    
+    #-----< BandwidthExt >-----#
+    BandwidthExt = INT(name=u'BandwidthExt', mode=MODE_TYPE)
     
     #-----< QoS-Class-Identifier >-----#
     QoS_Class_Identifier = INT(name=u'QoS-Class-Identifier', mode=MODE_TYPE)
@@ -10109,8 +9245,13 @@ class MAP_MS_DataTypes:
     
     #-----< AccessRestrictionData >-----#
     AccessRestrictionData = BIT_STR(name=u'AccessRestrictionData', mode=MODE_TYPE)
-    AccessRestrictionData._cont = ASN1Dict([(u'utranNotAllowed', 0), (u'geranNotAllowed', 1), (u'ganNotAllowed', 2), (u'i-hspa-evolutionNotAllowed', 3), (u'wb-e-utranNotAllowed', 4), (u'ho-toNon3GPP-AccessNotAllowed', 5), (u'nb-iotNotAllowed', 6)])
+    AccessRestrictionData._cont = ASN1Dict([(u'utranNotAllowed', 0), (u'geranNotAllowed', 1), (u'ganNotAllowed', 2), (u'i-hspa-evolutionNotAllowed', 3), (u'wb-e-utranNotAllowed', 4), (u'ho-toNon3GPP-AccessNotAllowed', 5), (u'nb-iotNotAllowed', 6), (u'enhancedCoverageNotAllowed', 7)])
     AccessRestrictionData._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=2, ub=8)], ev=None, er=[])
+    
+    #-----< Ext-AccessRestrictionData >-----#
+    Ext_AccessRestrictionData = BIT_STR(name=u'Ext-AccessRestrictionData', mode=MODE_TYPE)
+    Ext_AccessRestrictionData._cont = ASN1Dict([(u'nrAsSecondaryRATNotAllowed', 0), (u'unlicensedSpectrumAsSecondaryRATNotAllowed', 1)])
+    Ext_AccessRestrictionData._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=32)], ev=None, er=[])
     
     #-----< AdjacentAccessRestrictionDataList >-----#
     AdjacentAccessRestrictionDataList = SEQ_OF(name=u'AdjacentAccessRestrictionDataList', mode=MODE_TYPE)
@@ -10122,11 +9263,13 @@ class MAP_MS_DataTypes:
     AdjacentAccessRestrictionData = SEQ(name=u'AdjacentAccessRestrictionData', mode=MODE_TYPE)
     _AdjacentAccessRestrictionData_plmnId = OCT_STR(name=u'plmnId', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAP-CommonDataTypes', 'PLMN-Id')))
     _AdjacentAccessRestrictionData_accessRestrictionData = BIT_STR(name=u'accessRestrictionData', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAP-MS-DataTypes', 'AccessRestrictionData')))
+    _AdjacentAccessRestrictionData_ext_AccessRestrictionData = BIT_STR(name=u'ext-AccessRestrictionData', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAP-MS-DataTypes', 'Ext-AccessRestrictionData')), opt=True)
     AdjacentAccessRestrictionData._cont = ASN1Dict([
         (u'plmnId', _AdjacentAccessRestrictionData_plmnId),
         (u'accessRestrictionData', _AdjacentAccessRestrictionData_accessRestrictionData),
+        (u'ext-AccessRestrictionData', _AdjacentAccessRestrictionData_ext_AccessRestrictionData),
         ])
-    AdjacentAccessRestrictionData._ext = []
+    AdjacentAccessRestrictionData._ext = [u'ext-AccessRestrictionData']
     
     #-----< CS-AllocationRetentionPriority >-----#
     CS_AllocationRetentionPriority = OCT_STR(name=u'CS-AllocationRetentionPriority', mode=MODE_TYPE)
@@ -10197,6 +9340,8 @@ class MAP_MS_DataTypes:
     _PDP_Context_lipa_Permission = ENUM(name=u'lipa-Permission', mode=MODE_TYPE, tag=(9, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAP-MS-DataTypes', 'LIPA-Permission')), opt=True)
     _PDP_Context_restoration_Priority = OCT_STR(name=u'restoration-Priority', mode=MODE_TYPE, tag=(11, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAP-MS-DataTypes', 'Restoration-Priority')), opt=True)
     _PDP_Context_sipto_local_network_Permission = ENUM(name=u'sipto-local-network-Permission', mode=MODE_TYPE, tag=(12, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAP-MS-DataTypes', 'SIPTO-Local-Network-Permission')), opt=True)
+    _PDP_Context_nIDD_Mechanism = ENUM(name=u'nIDD-Mechanism', mode=MODE_TYPE, tag=(13, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAP-MS-DataTypes', 'NIDD-Mechanism')), opt=True)
+    _PDP_Context_sCEF_ID = OCT_STR(name=u'sCEF-ID', mode=MODE_TYPE, tag=(14, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAP-MS-DataTypes', 'FQDN')), opt=True)
     PDP_Context._cont = ASN1Dict([
         (u'pdp-ContextId', _PDP_Context_pdp_ContextId),
         (u'pdp-Type', _PDP_Context_pdp_Type),
@@ -10218,8 +9363,10 @@ class MAP_MS_DataTypes:
         (u'lipa-Permission', _PDP_Context_lipa_Permission),
         (u'restoration-Priority', _PDP_Context_restoration_Priority),
         (u'sipto-local-network-Permission', _PDP_Context_sipto_local_network_Permission),
+        (u'nIDD-Mechanism', _PDP_Context_nIDD_Mechanism),
+        (u'sCEF-ID', _PDP_Context_sCEF_ID),
         ])
-    PDP_Context._ext = [u'ext-QoS-Subscribed', u'pdp-ChargingCharacteristics', u'ext2-QoS-Subscribed', u'ext3-QoS-Subscribed', u'ext4-QoS-Subscribed', u'apn-oi-Replacement', u'ext-pdp-Type', u'ext-pdp-Address', u'ambr', u'sipto-Permission', u'lipa-Permission', u'restoration-Priority', u'sipto-local-network-Permission']
+    PDP_Context._ext = [u'ext-QoS-Subscribed', u'pdp-ChargingCharacteristics', u'ext2-QoS-Subscribed', u'ext3-QoS-Subscribed', u'ext4-QoS-Subscribed', u'apn-oi-Replacement', u'ext-pdp-Type', u'ext-pdp-Address', u'ambr', u'sipto-Permission', u'lipa-Permission', u'restoration-Priority', u'sipto-local-network-Permission', u'nIDD-Mechanism', u'sCEF-ID']
     
     #-----< Restoration-Priority >-----#
     Restoration_Priority = OCT_STR(name=u'Restoration-Priority', mode=MODE_TYPE)
@@ -10854,6 +10001,7 @@ class MAP_MS_DataTypes:
     _InsertSubscriberDataRes_extensionContainer = SEQ(name=u'extensionContainer', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAP-ExtensionDataTypes', 'ExtensionContainer')), opt=True)
     _InsertSubscriberDataRes_offeredCamel4CSIs = BIT_STR(name=u'offeredCamel4CSIs', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAP-MS-DataTypes', 'OfferedCamel4CSIs')), opt=True)
     _InsertSubscriberDataRes_supportedFeatures = BIT_STR(name=u'supportedFeatures', mode=MODE_TYPE, tag=(9, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAP-MS-DataTypes', 'SupportedFeatures')), opt=True)
+    _InsertSubscriberDataRes_ext_SupportedFeatures = BIT_STR(name=u'ext-SupportedFeatures', mode=MODE_TYPE, tag=(10, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAP-MS-DataTypes', 'Ext-SupportedFeatures')), opt=True)
     InsertSubscriberDataRes._cont = ASN1Dict([
         (u'teleserviceList', _InsertSubscriberDataRes_teleserviceList),
         (u'bearerServiceList', _InsertSubscriberDataRes_bearerServiceList),
@@ -10864,8 +10012,9 @@ class MAP_MS_DataTypes:
         (u'extensionContainer', _InsertSubscriberDataRes_extensionContainer),
         (u'offeredCamel4CSIs', _InsertSubscriberDataRes_offeredCamel4CSIs),
         (u'supportedFeatures', _InsertSubscriberDataRes_supportedFeatures),
+        (u'ext-SupportedFeatures', _InsertSubscriberDataRes_ext_SupportedFeatures),
         ])
-    InsertSubscriberDataRes._ext = [u'offeredCamel4CSIs', u'supportedFeatures']
+    InsertSubscriberDataRes._ext = [u'offeredCamel4CSIs', u'supportedFeatures', u'ext-SupportedFeatures']
     
     #-----< RegionalSubscriptionResponse >-----#
     RegionalSubscriptionResponse = ENUM(name=u'RegionalSubscriptionResponse', mode=MODE_TYPE)
@@ -10902,6 +10051,10 @@ class MAP_MS_DataTypes:
     _DeleteSubscriberDataArg_cs_to_ps_SRVCC_Withdraw = NULL(name=u'cs-to-ps-SRVCC-Withdraw', mode=MODE_TYPE, tag=(26, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     _DeleteSubscriberDataArg_imsiGroupIdList_Withdraw = NULL(name=u'imsiGroupIdList-Withdraw', mode=MODE_TYPE, tag=(27, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     _DeleteSubscriberDataArg_userPlaneIntegrityProtectionWithdraw = NULL(name=u'userPlaneIntegrityProtectionWithdraw', mode=MODE_TYPE, tag=(28, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _DeleteSubscriberDataArg_dl_Buffering_Suggested_Packet_Count_Withdraw = NULL(name=u'dl-Buffering-Suggested-Packet-Count-Withdraw', mode=MODE_TYPE, tag=(29, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _DeleteSubscriberDataArg_ue_UsageTypeWithdraw = NULL(name=u'ue-UsageTypeWithdraw', mode=MODE_TYPE, tag=(30, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _DeleteSubscriberDataArg_reset_idsWithdraw = NULL(name=u'reset-idsWithdraw', mode=MODE_TYPE, tag=(31, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _DeleteSubscriberDataArg_iab_OperationWithdraw = NULL(name=u'iab-OperationWithdraw', mode=MODE_TYPE, tag=(32, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     DeleteSubscriberDataArg._cont = ASN1Dict([
         (u'imsi', _DeleteSubscriberDataArg_imsi),
         (u'basicServiceList', _DeleteSubscriberDataArg_basicServiceList),
@@ -10931,8 +10084,12 @@ class MAP_MS_DataTypes:
         (u'cs-to-ps-SRVCC-Withdraw', _DeleteSubscriberDataArg_cs_to_ps_SRVCC_Withdraw),
         (u'imsiGroupIdList-Withdraw', _DeleteSubscriberDataArg_imsiGroupIdList_Withdraw),
         (u'userPlaneIntegrityProtectionWithdraw', _DeleteSubscriberDataArg_userPlaneIntegrityProtectionWithdraw),
+        (u'dl-Buffering-Suggested-Packet-Count-Withdraw', _DeleteSubscriberDataArg_dl_Buffering_Suggested_Packet_Count_Withdraw),
+        (u'ue-UsageTypeWithdraw', _DeleteSubscriberDataArg_ue_UsageTypeWithdraw),
+        (u'reset-idsWithdraw', _DeleteSubscriberDataArg_reset_idsWithdraw),
+        (u'iab-OperationWithdraw', _DeleteSubscriberDataArg_iab_OperationWithdraw),
         ])
-    DeleteSubscriberDataArg._ext = [u'gprsSubscriptionDataWithdraw', u'roamingRestrictedInSgsnDueToUnsuppportedFeature', u'lsaInformationWithdraw', u'gmlc-ListWithdraw', u'istInformationWithdraw', u'specificCSI-Withdraw', u'chargingCharacteristicsWithdraw', u'stn-srWithdraw', u'epsSubscriptionDataWithdraw', u'apn-oi-replacementWithdraw', u'csg-SubscriptionDeleted', u'subscribedPeriodicTAU-RAU-TimerWithdraw', u'subscribedPeriodicLAU-TimerWithdraw', u'subscribed-vsrvccWithdraw', u'vplmn-Csg-SubscriptionDeleted', u'additionalMSISDN-Withdraw', u'cs-to-ps-SRVCC-Withdraw', u'imsiGroupIdList-Withdraw', u'userPlaneIntegrityProtectionWithdraw']
+    DeleteSubscriberDataArg._ext = [u'gprsSubscriptionDataWithdraw', u'roamingRestrictedInSgsnDueToUnsuppportedFeature', u'lsaInformationWithdraw', u'gmlc-ListWithdraw', u'istInformationWithdraw', u'specificCSI-Withdraw', u'chargingCharacteristicsWithdraw', u'stn-srWithdraw', u'epsSubscriptionDataWithdraw', u'apn-oi-replacementWithdraw', u'csg-SubscriptionDeleted', u'subscribedPeriodicTAU-RAU-TimerWithdraw', u'subscribedPeriodicLAU-TimerWithdraw', u'subscribed-vsrvccWithdraw', u'vplmn-Csg-SubscriptionDeleted', u'additionalMSISDN-Withdraw', u'cs-to-ps-SRVCC-Withdraw', u'imsiGroupIdList-Withdraw', u'userPlaneIntegrityProtectionWithdraw', u'dl-Buffering-Suggested-Packet-Count-Withdraw', u'ue-UsageTypeWithdraw', u'reset-idsWithdraw', u'iab-OperationWithdraw']
     
     #-----< SpecificCSI-Withdraw >-----#
     SpecificCSI_Withdraw = BIT_STR(name=u'SpecificCSI-Withdraw', mode=MODE_TYPE)
@@ -11558,12 +10715,18 @@ class MAP_MS_DataTypes:
     _ResetArg_sendingNodenumber = CHOICE(name=u'sendingNodenumber', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'SendingNode-Number')))
     _ResetArg_hlr_List = SEQ_OF(name=u'hlr-List', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-CommonDataTypes', 'HLR-List')), opt=True)
     _ResetArg_extensionContainer = SEQ(name=u'extensionContainer', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAP-ExtensionDataTypes', 'ExtensionContainer')), opt=True)
+    _ResetArg_reset_Id_List = SEQ_OF(name=u'reset-Id-List', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAP-MS-DataTypes', 'Reset-Id-List')), opt=True)
+    _ResetArg_subscriptionData = SEQ(name=u'subscriptionData', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAP-MS-DataTypes', 'InsertSubscriberDataArg')), opt=True)
+    _ResetArg_subscriptionDataDeletion = SEQ(name=u'subscriptionDataDeletion', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAP-MS-DataTypes', 'DeleteSubscriberDataArg')), opt=True)
     ResetArg._cont = ASN1Dict([
         (u'sendingNodenumber', _ResetArg_sendingNodenumber),
         (u'hlr-List', _ResetArg_hlr_List),
         (u'extensionContainer', _ResetArg_extensionContainer),
+        (u'reset-Id-List', _ResetArg_reset_Id_List),
+        (u'subscriptionData', _ResetArg_subscriptionData),
+        (u'subscriptionDataDeletion', _ResetArg_subscriptionDataDeletion),
         ])
-    ResetArg._ext = []
+    ResetArg._ext = [u'reset-Id-List', u'subscriptionData', u'subscriptionDataDeletion']
     
     #-----< SendingNode-Number >-----#
     SendingNode_Number = CHOICE(name=u'SendingNode-Number', mode=MODE_TYPE)
@@ -11714,6 +10877,7 @@ class MAP_MS_DataTypes:
     _SubscriberInfo_locationInformationEPS = SEQ(name=u'locationInformationEPS', mode=MODE_TYPE, tag=(13, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAP-MS-DataTypes', 'LocationInformationEPS')), opt=True)
     _SubscriberInfo_timeZone = OCT_STR(name=u'timeZone', mode=MODE_TYPE, tag=(14, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAP-MS-DataTypes', 'TimeZone')), opt=True)
     _SubscriberInfo_daylightSavingTime = ENUM(name=u'daylightSavingTime', mode=MODE_TYPE, tag=(15, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAP-MS-DataTypes', 'DaylightSavingTime')), opt=True)
+    _SubscriberInfo_locationInformation5GS = SEQ(name=u'locationInformation5GS', mode=MODE_TYPE, tag=(16, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAP-MS-DataTypes', 'LocationInformation5GS')), opt=True)
     SubscriberInfo._cont = ASN1Dict([
         (u'locationInformation', _SubscriberInfo_locationInformation),
         (u'subscriberState', _SubscriberInfo_subscriberState),
@@ -11731,8 +10895,9 @@ class MAP_MS_DataTypes:
         (u'locationInformationEPS', _SubscriberInfo_locationInformationEPS),
         (u'timeZone', _SubscriberInfo_timeZone),
         (u'daylightSavingTime', _SubscriberInfo_daylightSavingTime),
+        (u'locationInformation5GS', _SubscriberInfo_locationInformation5GS),
         ])
-    SubscriberInfo._ext = [u'locationInformationGPRS', u'ps-SubscriberState', u'imei', u'ms-Classmark2', u'gprs-MS-Class', u'mnpInfoRes', u'imsVoiceOverPS-SessionsIndication', u'lastUE-ActivityTime', u'lastRAT-Type', u'eps-SubscriberState', u'locationInformationEPS', u'timeZone', u'daylightSavingTime']
+    SubscriberInfo._ext = [u'locationInformationGPRS', u'ps-SubscriberState', u'imei', u'ms-Classmark2', u'gprs-MS-Class', u'mnpInfoRes', u'imsVoiceOverPS-SessionsIndication', u'lastUE-ActivityTime', u'lastRAT-Type', u'eps-SubscriberState', u'locationInformationEPS', u'timeZone', u'daylightSavingTime', u'locationInformation5GS']
     
     #-----< IMS-VoiceOverPS-SessionsInd >-----#
     IMS_VoiceOverPS_SessionsInd = ENUM(name=u'IMS-VoiceOverPS-SessionsInd', mode=MODE_TYPE)
@@ -11918,6 +11083,38 @@ class MAP_MS_DataTypes:
         (u'userCSGInformation', _LocationInformationGPRS_userCSGInformation),
         ])
     LocationInformationGPRS._ext = [u'sai-Present', u'geodeticInformation', u'currentLocationRetrieved', u'ageOfLocationInformation', u'userCSGInformation']
+    
+    #-----< LocationInformation5GS >-----#
+    LocationInformation5GS = SEQ(name=u'LocationInformation5GS', mode=MODE_TYPE)
+    _LocationInformation5GS_nrCellGlobalIdentity = OCT_STR(name=u'nrCellGlobalIdentity', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAP-CommonDataTypes', 'NR-CGI')), opt=True)
+    _LocationInformation5GS_e_utranCellGlobalIdentity = OCT_STR(name=u'e-utranCellGlobalIdentity', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAP-CommonDataTypes', 'E-UTRAN-CGI')), opt=True)
+    _LocationInformation5GS_geographicalInformation = OCT_STR(name=u'geographicalInformation', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAP-MS-DataTypes', 'GeographicalInformation')), opt=True)
+    _LocationInformation5GS_geodeticInformation = OCT_STR(name=u'geodeticInformation', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAP-MS-DataTypes', 'GeodeticInformation')), opt=True)
+    _LocationInformation5GS_amf_address = OCT_STR(name=u'amf-address', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAP-MS-DataTypes', 'FQDN')), opt=True)
+    _LocationInformation5GS_trackingAreaIdentity = OCT_STR(name=u'trackingAreaIdentity', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAP-CommonDataTypes', 'TA-Id')), opt=True)
+    _LocationInformation5GS_currentLocationRetrieved = NULL(name=u'currentLocationRetrieved', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _LocationInformation5GS_ageOfLocationInformation = INT(name=u'ageOfLocationInformation', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAP-CommonDataTypes', 'AgeOfLocationInformation')), opt=True)
+    _LocationInformation5GS_vplmnId = OCT_STR(name=u'vplmnId', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAP-CommonDataTypes', 'PLMN-Id')), opt=True)
+    _LocationInformation5GS_localtimeZone = OCT_STR(name=u'localtimeZone', mode=MODE_TYPE, tag=(9, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAP-MS-DataTypes', 'TimeZone')), opt=True)
+    _LocationInformation5GS_rat_Type = ENUM(name=u'rat-Type', mode=MODE_TYPE, tag=(10, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAP-MS-DataTypes', 'Used-RAT-Type')), opt=True)
+    _LocationInformation5GS_extensionContainer = SEQ(name=u'extensionContainer', mode=MODE_TYPE, tag=(11, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAP-ExtensionDataTypes', 'ExtensionContainer')), opt=True)
+    _LocationInformation5GS_nrTrackingAreaIdentity = OCT_STR(name=u'nrTrackingAreaIdentity', mode=MODE_TYPE, tag=(12, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAP-CommonDataTypes', 'NR-TA-Id')), opt=True)
+    LocationInformation5GS._cont = ASN1Dict([
+        (u'nrCellGlobalIdentity', _LocationInformation5GS_nrCellGlobalIdentity),
+        (u'e-utranCellGlobalIdentity', _LocationInformation5GS_e_utranCellGlobalIdentity),
+        (u'geographicalInformation', _LocationInformation5GS_geographicalInformation),
+        (u'geodeticInformation', _LocationInformation5GS_geodeticInformation),
+        (u'amf-address', _LocationInformation5GS_amf_address),
+        (u'trackingAreaIdentity', _LocationInformation5GS_trackingAreaIdentity),
+        (u'currentLocationRetrieved', _LocationInformation5GS_currentLocationRetrieved),
+        (u'ageOfLocationInformation', _LocationInformation5GS_ageOfLocationInformation),
+        (u'vplmnId', _LocationInformation5GS_vplmnId),
+        (u'localtimeZone', _LocationInformation5GS_localtimeZone),
+        (u'rat-Type', _LocationInformation5GS_rat_Type),
+        (u'extensionContainer', _LocationInformation5GS_extensionContainer),
+        (u'nrTrackingAreaIdentity', _LocationInformation5GS_nrTrackingAreaIdentity),
+        ])
+    LocationInformation5GS._ext = [u'nrTrackingAreaIdentity']
     
     #-----< UserCSGInformation >-----#
     UserCSGInformation = SEQ(name=u'UserCSGInformation', mode=MODE_TYPE)
@@ -12813,6 +12010,7 @@ class MAP_MS_DataTypes:
         _VLR_Capability_longGroupID_Supported,
         _VLR_Capability_mtRoamingForwardingSupported,
         _VLR_Capability_msisdn_lessOperation_Supported,
+        _VLR_Capability_reset_ids_Supported,
         VLR_Capability,
         SupportedRAT_Types,
         _SuperChargerInfo_sendSubscriberData,
@@ -12987,8 +12185,11 @@ class MAP_MS_DataTypes:
         _SGSN_Capability_cancellationTypeInitialAttach,
         _SGSN_Capability_msisdn_lessOperation_Supported,
         _SGSN_Capability_updateofHomogeneousSupportOfIMSVoiceOverPSSessions,
+        _SGSN_Capability_reset_ids_Supported,
+        _SGSN_Capability_ext_SupportedFeatures,
         SGSN_Capability,
         SupportedFeatures,
+        Ext_SupportedFeatures,
         UE_SRVCC_Capability,
         _UpdateGprsLocationRes_hlr_Number,
         _UpdateGprsLocationRes_extensionContainer,
@@ -13273,7 +12474,22 @@ class MAP_MS_DataTypes:
         _InsertSubscriberDataArg_imsi_Group_Id_List,
         _InsertSubscriberDataArg_ueUsageType,
         _InsertSubscriberDataArg_userPlaneIntegrityProtectionIndicator,
+        _InsertSubscriberDataArg_dl_Buffering_Suggested_Packet_Count,
+        _InsertSubscriberDataArg_reset_Id_List,
+        _InsertSubscriberDataArg_eDRX_Cycle_Length_List,
+        _InsertSubscriberDataArg_ext_AccessRestrictionData,
+        _InsertSubscriberDataArg_iab_Operation_Allowed_Indicator,
         InsertSubscriberDataArg,
+        _EDRX_Cycle_Length_List__item_,
+        EDRX_Cycle_Length_List,
+        _EDRX_Cycle_Length_rat_Type,
+        _EDRX_Cycle_Length_eDRX_Cycle_Length_Value,
+        EDRX_Cycle_Length,
+        EDRX_Cycle_Length_Value,
+        _Reset_Id_List__item_,
+        Reset_Id_List,
+        Reset_Id,
+        DL_Buffering_Suggested_Packet_Count,
         Group_Service_ID,
         Local_GroupID,
         _IMSI_GroupIdList__item_,
@@ -13341,7 +12557,9 @@ class MAP_MS_DataTypes:
         _APN_Configuration_non_IP_PDN_Type_Indicator,
         _APN_Configuration_nIDD_Mechanism,
         _APN_Configuration_sCEF_ID,
+        _APN_Configuration_pdn_ConnectionContinuity,
         APN_Configuration,
+        PDN_ConnectionContinuity,
         NIDD_Mechanism,
         PDN_Type,
         _EPS_QoS_Subscribed_qos_Class_Identifier,
@@ -13351,6 +12569,8 @@ class MAP_MS_DataTypes:
         _AMBR_max_RequestedBandwidth_UL,
         _AMBR_max_RequestedBandwidth_DL,
         _AMBR_extensionContainer,
+        _AMBR_extended_Max_RequestedBandwidth_UL,
+        _AMBR_extended_Max_RequestedBandwidth_DL,
         AMBR,
         _SpecificAPNInfoList__item_,
         SpecificAPNInfoList,
@@ -13360,6 +12580,7 @@ class MAP_MS_DataTypes:
         _SpecificAPNInfo_extensionContainer,
         SpecificAPNInfo,
         Bandwidth,
+        BandwidthExt,
         QoS_Class_Identifier,
         _Allocation_Retention_Priority_priority_level,
         _Allocation_Retention_Priority_pre_emption_capability,
@@ -13379,10 +12600,12 @@ class MAP_MS_DataTypes:
         WLAN_Offloadability,
         WLAN_Offloadability_Indication,
         AccessRestrictionData,
+        Ext_AccessRestrictionData,
         _AdjacentAccessRestrictionDataList__item_,
         AdjacentAccessRestrictionDataList,
         _AdjacentAccessRestrictionData_plmnId,
         _AdjacentAccessRestrictionData_accessRestrictionData,
+        _AdjacentAccessRestrictionData_ext_AccessRestrictionData,
         AdjacentAccessRestrictionData,
         CS_AllocationRetentionPriority,
         IST_AlertTimerValue,
@@ -13418,6 +12641,8 @@ class MAP_MS_DataTypes:
         _PDP_Context_lipa_Permission,
         _PDP_Context_restoration_Priority,
         _PDP_Context_sipto_local_network_Permission,
+        _PDP_Context_nIDD_Mechanism,
+        _PDP_Context_sCEF_ID,
         PDP_Context,
         Restoration_Priority,
         SIPTO_Permission,
@@ -13629,6 +12854,7 @@ class MAP_MS_DataTypes:
         _InsertSubscriberDataRes_extensionContainer,
         _InsertSubscriberDataRes_offeredCamel4CSIs,
         _InsertSubscriberDataRes_supportedFeatures,
+        _InsertSubscriberDataRes_ext_SupportedFeatures,
         InsertSubscriberDataRes,
         RegionalSubscriptionResponse,
         _DeleteSubscriberDataArg_imsi,
@@ -13659,6 +12885,10 @@ class MAP_MS_DataTypes:
         _DeleteSubscriberDataArg_cs_to_ps_SRVCC_Withdraw,
         _DeleteSubscriberDataArg_imsiGroupIdList_Withdraw,
         _DeleteSubscriberDataArg_userPlaneIntegrityProtectionWithdraw,
+        _DeleteSubscriberDataArg_dl_Buffering_Suggested_Packet_Count_Withdraw,
+        _DeleteSubscriberDataArg_ue_UsageTypeWithdraw,
+        _DeleteSubscriberDataArg_reset_idsWithdraw,
+        _DeleteSubscriberDataArg_iab_OperationWithdraw,
         DeleteSubscriberDataArg,
         SpecificCSI_Withdraw,
         _GPRSSubscriptionDataWithdraw_allGPRSData,
@@ -13866,6 +13096,9 @@ class MAP_MS_DataTypes:
         _ResetArg_sendingNodenumber,
         _ResetArg_hlr_List,
         _ResetArg_extensionContainer,
+        _ResetArg_reset_Id_List,
+        _ResetArg_subscriptionData,
+        _ResetArg_subscriptionDataDeletion,
         ResetArg,
         _SendingNode_Number_hlr_Number,
         _SendingNode_Number_css_Number,
@@ -13926,6 +13159,7 @@ class MAP_MS_DataTypes:
         _SubscriberInfo_locationInformationEPS,
         _SubscriberInfo_timeZone,
         _SubscriberInfo_daylightSavingTime,
+        _SubscriberInfo_locationInformation5GS,
         SubscriberInfo,
         IMS_VoiceOverPS_SessionsInd,
         TimeZone,
@@ -13995,6 +13229,20 @@ class MAP_MS_DataTypes:
         _LocationInformationGPRS_ageOfLocationInformation,
         _LocationInformationGPRS_userCSGInformation,
         LocationInformationGPRS,
+        _LocationInformation5GS_nrCellGlobalIdentity,
+        _LocationInformation5GS_e_utranCellGlobalIdentity,
+        _LocationInformation5GS_geographicalInformation,
+        _LocationInformation5GS_geodeticInformation,
+        _LocationInformation5GS_amf_address,
+        _LocationInformation5GS_trackingAreaIdentity,
+        _LocationInformation5GS_currentLocationRetrieved,
+        _LocationInformation5GS_ageOfLocationInformation,
+        _LocationInformation5GS_vplmnId,
+        _LocationInformation5GS_localtimeZone,
+        _LocationInformation5GS_rat_Type,
+        _LocationInformation5GS_extensionContainer,
+        _LocationInformation5GS_nrTrackingAreaIdentity,
+        LocationInformation5GS,
         _UserCSGInformation_csg_Id,
         _UserCSGInformation_extensionContainer,
         _UserCSGInformation_accessMode,
@@ -14318,10 +13566,435 @@ class MAP_MS_DataTypes:
         CancelVcsgLocationRes,
     ]
 
+class MAP_MobileServiceOperations:
+
+    _name_  = u'MAP-MobileServiceOperations'
+    _oid_   = [0, 4, 0, 0, 1, 3, 5, 19]
+    
+    _obj_ = [
+        u'updateLocation',
+        u'cancelLocation',
+        u'purgeMS',
+        u'sendIdentification',
+        u'updateGprsLocation',
+        u'provideSubscriberInfo',
+        u'anyTimeInterrogation',
+        u'anyTimeSubscriptionInterrogation',
+        u'anyTimeModification',
+        u'noteSubscriberDataModified',
+        u'prepareHandover',
+        u'sendEndSignal',
+        u'processAccessSignalling',
+        u'forwardAccessSignalling',
+        u'prepareSubsequentHandover',
+        u'sendAuthenticationInfo',
+        u'authenticationFailureReport',
+        u'checkIMEI',
+        u'insertSubscriberData',
+        u'deleteSubscriberData',
+        u'reset',
+        u'forwardCheckSS-Indication',
+        u'restoreData',
+        u'sendRoutingInfoForGprs',
+        u'failureReport',
+        u'noteMsPresentForGprs',
+        u'noteMM-Event',
+        u'updateVcsgLocation',
+        u'cancelVcsgLocation',
+        ]
+    _type_ = [
+        ]
+    _set_ = [
+        ]
+    _val_ = [
+        u'updateLocation',
+        u'cancelLocation',
+        u'purgeMS',
+        u'sendIdentification',
+        u'updateGprsLocation',
+        u'provideSubscriberInfo',
+        u'anyTimeInterrogation',
+        u'anyTimeSubscriptionInterrogation',
+        u'anyTimeModification',
+        u'noteSubscriberDataModified',
+        u'prepareHandover',
+        u'sendEndSignal',
+        u'processAccessSignalling',
+        u'forwardAccessSignalling',
+        u'prepareSubsequentHandover',
+        u'sendAuthenticationInfo',
+        u'authenticationFailureReport',
+        u'checkIMEI',
+        u'insertSubscriberData',
+        u'deleteSubscriberData',
+        u'reset',
+        u'forwardCheckSS-Indication',
+        u'restoreData',
+        u'sendRoutingInfoForGprs',
+        u'failureReport',
+        u'noteMsPresentForGprs',
+        u'noteMM-Event',
+        u'updateVcsgLocation',
+        u'cancelVcsgLocation',
+        ]
+    _class_ = [
+        u'updateLocation',
+        u'cancelLocation',
+        u'purgeMS',
+        u'sendIdentification',
+        u'updateGprsLocation',
+        u'provideSubscriberInfo',
+        u'anyTimeInterrogation',
+        u'anyTimeSubscriptionInterrogation',
+        u'anyTimeModification',
+        u'noteSubscriberDataModified',
+        u'prepareHandover',
+        u'sendEndSignal',
+        u'processAccessSignalling',
+        u'forwardAccessSignalling',
+        u'prepareSubsequentHandover',
+        u'sendAuthenticationInfo',
+        u'authenticationFailureReport',
+        u'checkIMEI',
+        u'insertSubscriberData',
+        u'deleteSubscriberData',
+        u'reset',
+        u'forwardCheckSS-Indication',
+        u'restoreData',
+        u'sendRoutingInfoForGprs',
+        u'failureReport',
+        u'noteMsPresentForGprs',
+        u'noteMM-Event',
+        u'updateVcsgLocation',
+        u'cancelVcsgLocation',
+        ]
+    _param_ = [
+        ]
+    
+    #-----< updateLocation >-----#
+    updateLocation = CLASS(name=u'updateLocation', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
+    _updateLocation_val_ArgumentType = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'UpdateLocationArg')))
+    _updateLocation_val_ResultType = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'UpdateLocationRes')))
+    __sendRoutingInfo_Errors_val_ParameterType_0 = CHOICE(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'SystemFailureParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_1 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'DataMissingParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_2 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'UnexpectedDataParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_3 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'UnknownSubscriberParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_4 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'RoamingNotAllowedParam')))
+    updateLocation._val = dict([(u'ArgumentType', _updateLocation_val_ArgumentType), (u'ResultType', _updateLocation_val_ResultType), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_1), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_3), (u'errorCode', (u'local', 1))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_4), (u'errorCode', (u'local', 8))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 2))])
+    
+    #-----< cancelLocation >-----#
+    cancelLocation = CLASS(name=u'cancelLocation', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
+    _cancelLocation_val_ArgumentType = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'CancelLocationArg')))
+    _cancelLocation_val_ResultType = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'CancelLocationRes')))
+    __sendRoutingInfo_Errors_val_ParameterType_0_0 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'DataMissingParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_1_0 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'UnexpectedDataParam')))
+    cancelLocation._val = dict([(u'ArgumentType', _cancelLocation_val_ArgumentType), (u'ResultType', _cancelLocation_val_ResultType), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_0_0), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_1_0), (u'errorCode', (u'local', 36))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 3))])
+    
+    #-----< purgeMS >-----#
+    purgeMS = CLASS(name=u'purgeMS', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
+    _purgeMS_val_ArgumentType = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'PurgeMS-Arg')))
+    _purgeMS_val_ResultType = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'PurgeMS-Res')))
+    __sendRoutingInfo_Errors_val_ParameterType_2_0 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'UnknownSubscriberParam')))
+    purgeMS._val = dict([(u'ArgumentType', _purgeMS_val_ArgumentType), (u'ResultType', _purgeMS_val_ResultType), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_0_0), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_1_0), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_2_0), (u'errorCode', (u'local', 1))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 67))])
+    
+    #-----< sendIdentification >-----#
+    sendIdentification = CLASS(name=u'sendIdentification', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
+    _sendIdentification_val_ArgumentType = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'SendIdentificationArg')))
+    _sendIdentification_val_ResultType = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'SendIdentificationRes')))
+    __sendRoutingInfo_Errors_val_ParameterType_1_1 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'UnidentifiedSubParam')))
+    sendIdentification._val = dict([(u'ArgumentType', _sendIdentification_val_ArgumentType), (u'ResultType', _sendIdentification_val_ResultType), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_0_0), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_1_1), (u'errorCode', (u'local', 5))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 55))])
+    
+    #-----< updateGprsLocation >-----#
+    updateGprsLocation = CLASS(name=u'updateGprsLocation', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
+    _updateGprsLocation_val_ArgumentType = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'UpdateGprsLocationArg')))
+    _updateGprsLocation_val_ResultType = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'UpdateGprsLocationRes')))
+    __sendRoutingInfo_Errors_val_ParameterType_3_0 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'RoamingNotAllowedParam')))
+    updateGprsLocation._val = dict([(u'ArgumentType', _updateGprsLocation_val_ArgumentType), (u'ResultType', _updateGprsLocation_val_ResultType), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_1_0), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_2_0), (u'errorCode', (u'local', 1))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_3_0), (u'errorCode', (u'local', 8))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 23))])
+    
+    #-----< provideSubscriberInfo >-----#
+    provideSubscriberInfo = CLASS(name=u'provideSubscriberInfo', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
+    _provideSubscriberInfo_val_ArgumentType = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'ProvideSubscriberInfoArg')))
+    _provideSubscriberInfo_val_ResultType = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'ProvideSubscriberInfoRes')))
+    provideSubscriberInfo._val = dict([(u'ArgumentType', _provideSubscriberInfo_val_ArgumentType), (u'ResultType', _provideSubscriberInfo_val_ResultType), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_0_0), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_1_0), (u'errorCode', (u'local', 36))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 70))])
+    
+    #-----< anyTimeInterrogation >-----#
+    anyTimeInterrogation = CLASS(name=u'anyTimeInterrogation', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
+    _anyTimeInterrogation_val_ArgumentType = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'AnyTimeInterrogationArg')))
+    _anyTimeInterrogation_val_ResultType = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'AnyTimeInterrogationRes')))
+    __sendRoutingInfo_Errors_val_ParameterType_1_2 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'ATI-NotAllowedParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_2_1 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'DataMissingParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_3_1 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'UnexpectedDataParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_4_0 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'UnknownSubscriberParam')))
+    anyTimeInterrogation._val = dict([(u'ArgumentType', _anyTimeInterrogation_val_ArgumentType), (u'ResultType', _anyTimeInterrogation_val_ResultType), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_1_2), (u'errorCode', (u'local', 49))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_2_1), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_3_1), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_4_0), (u'errorCode', (u'local', 1))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 71))])
+    
+    #-----< anyTimeSubscriptionInterrogation >-----#
+    anyTimeSubscriptionInterrogation = CLASS(name=u'anyTimeSubscriptionInterrogation', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
+    _anyTimeSubscriptionInterrogation_val_ArgumentType = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'AnyTimeSubscriptionInterrogationArg')))
+    _anyTimeSubscriptionInterrogation_val_ResultType = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'AnyTimeSubscriptionInterrogationRes')))
+    __sendRoutingInfo_Errors_val_ParameterType_0_1 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'ATSI-NotAllowedParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_4_1 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'BearerServNotProvParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_5 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'TeleservNotProvParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_6 = CHOICE(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'CallBarredParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_7 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'IllegalSS-OperationParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_8 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'SS-NotAvailableParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_9 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'InformationNotAvailableParam')))
+    anyTimeSubscriptionInterrogation._val = dict([(u'ArgumentType', _anyTimeSubscriptionInterrogation_val_ArgumentType), (u'ResultType', _anyTimeSubscriptionInterrogation_val_ResultType), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_0_1), (u'errorCode', (u'local', 60))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_1), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_3), (u'errorCode', (u'local', 1))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_4_1), (u'errorCode', (u'local', 10))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_5), (u'errorCode', (u'local', 11))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_6), (u'errorCode', (u'local', 13))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_7), (u'errorCode', (u'local', 16))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_8), (u'errorCode', (u'local', 18))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_9), (u'errorCode', (u'local', 62))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 62))])
+    
+    #-----< anyTimeModification >-----#
+    anyTimeModification = CLASS(name=u'anyTimeModification', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
+    _anyTimeModification_val_ArgumentType = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'AnyTimeModificationArg')))
+    _anyTimeModification_val_ResultType = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'AnyTimeModificationRes')))
+    __sendRoutingInfo_Errors_val_ParameterType_0_2 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'ATM-NotAllowedParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_8_0 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'SS-SubscriptionViolationParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_9_0 = OCT_STR(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-SS-DataTypes', 'SS-Status')))
+    __sendRoutingInfo_Errors_val_ParameterType_10 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'SS-IncompatibilityCause')))
+    __sendRoutingInfo_Errors_val_ParameterType_11 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'InformationNotAvailableParam')))
+    anyTimeModification._val = dict([(u'ArgumentType', _anyTimeModification_val_ArgumentType), (u'ResultType', _anyTimeModification_val_ResultType), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_0_2), (u'errorCode', (u'local', 61))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_1), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_3), (u'errorCode', (u'local', 1))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_4_1), (u'errorCode', (u'local', 10))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_5), (u'errorCode', (u'local', 11))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_6), (u'errorCode', (u'local', 13))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_7), (u'errorCode', (u'local', 16))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_8_0), (u'errorCode', (u'local', 19))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_9_0), (u'errorCode', (u'local', 17))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_10), (u'errorCode', (u'local', 20))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_11), (u'errorCode', (u'local', 62))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 65))])
+    
+    #-----< noteSubscriberDataModified >-----#
+    noteSubscriberDataModified = CLASS(name=u'noteSubscriberDataModified', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
+    _noteSubscriberDataModified_val_ArgumentType = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'NoteSubscriberDataModifiedArg')))
+    _noteSubscriberDataModified_val_ResultType = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'NoteSubscriberDataModifiedRes')))
+    noteSubscriberDataModified._val = dict([(u'ArgumentType', _noteSubscriberDataModified_val_ArgumentType), (u'ResultType', _noteSubscriberDataModified_val_ResultType), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_0_0), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_1_0), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_2_0), (u'errorCode', (u'local', 1))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 5))])
+    
+    #-----< prepareHandover >-----#
+    prepareHandover = CLASS(name=u'prepareHandover', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
+    _prepareHandover_val_ArgumentType = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'PrepareHO-Arg')))
+    _prepareHandover_val_ResultType = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'PrepareHO-Res')))
+    __sendRoutingInfo_Errors_val_ParameterType_4_2 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'TargetCellOutsideGCA-Param')))
+    prepareHandover._val = dict([(u'ArgumentType', _prepareHandover_val_ArgumentType), (u'ResultType', _prepareHandover_val_ResultType), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_1), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))]), dict([(u'errorCode', (u'local', 25))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_4_2), (u'errorCode', (u'local', 42))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 68))])
+    
+    #-----< sendEndSignal >-----#
+    sendEndSignal = CLASS(name=u'sendEndSignal', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
+    _sendEndSignal_val_ArgumentType = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'SendEndSignal-Arg')))
+    _sendEndSignal_val_ResultType = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'SendEndSignal-Res')))
+    sendEndSignal._val = dict([(u'ArgumentType', _sendEndSignal_val_ArgumentType), (u'ResultType', _sendEndSignal_val_ResultType), (u'operationCode', (u'local', 29))])
+    
+    #-----< processAccessSignalling >-----#
+    processAccessSignalling = CLASS(name=u'processAccessSignalling', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
+    _processAccessSignalling_val_ArgumentType = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'ProcessAccessSignalling-Arg')))
+    processAccessSignalling._val = dict([(u'ArgumentType', _processAccessSignalling_val_ArgumentType), (u'operationCode', (u'local', 33))])
+    
+    #-----< forwardAccessSignalling >-----#
+    forwardAccessSignalling = CLASS(name=u'forwardAccessSignalling', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
+    _forwardAccessSignalling_val_ArgumentType = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'ForwardAccessSignalling-Arg')))
+    forwardAccessSignalling._val = dict([(u'ArgumentType', _forwardAccessSignalling_val_ArgumentType), (u'operationCode', (u'local', 34))])
+    
+    #-----< prepareSubsequentHandover >-----#
+    prepareSubsequentHandover = CLASS(name=u'prepareSubsequentHandover', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
+    _prepareSubsequentHandover_val_ArgumentType = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'PrepareSubsequentHO-Arg')))
+    _prepareSubsequentHandover_val_ResultType = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'PrepareSubsequentHO-Res')))
+    __sendRoutingInfo_Errors_val_ParameterType_0_3 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'UnexpectedDataParam')))
+    prepareSubsequentHandover._val = dict([(u'ArgumentType', _prepareSubsequentHandover_val_ArgumentType), (u'ResultType', _prepareSubsequentHandover_val_ResultType), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_0_3), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_1), (u'errorCode', (u'local', 35))]), dict([(u'errorCode', (u'local', 3))]), dict([(u'errorCode', (u'local', 26))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 69))])
+    
+    #-----< sendAuthenticationInfo >-----#
+    sendAuthenticationInfo = CLASS(name=u'sendAuthenticationInfo', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
+    _sendAuthenticationInfo_val_ArgumentType = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'SendAuthenticationInfoArg')))
+    _sendAuthenticationInfo_val_ResultType = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'SendAuthenticationInfoRes')))
+    sendAuthenticationInfo._val = dict([(u'ArgumentType', _sendAuthenticationInfo_val_ArgumentType), (u'ResultType', _sendAuthenticationInfo_val_ResultType), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_1), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_3), (u'errorCode', (u'local', 1))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 56))])
+    
+    #-----< authenticationFailureReport >-----#
+    authenticationFailureReport = CLASS(name=u'authenticationFailureReport', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
+    _authenticationFailureReport_val_ArgumentType = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'AuthenticationFailureReportArg')))
+    _authenticationFailureReport_val_ResultType = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'AuthenticationFailureReportRes')))
+    authenticationFailureReport._val = dict([(u'ArgumentType', _authenticationFailureReport_val_ArgumentType), (u'ResultType', _authenticationFailureReport_val_ResultType), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_1_0), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_2_0), (u'errorCode', (u'local', 1))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 15))])
+    
+    #-----< checkIMEI >-----#
+    checkIMEI = CLASS(name=u'checkIMEI', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
+    _checkIMEI_val_ArgumentType = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'CheckIMEI-Arg')))
+    _checkIMEI_val_ResultType = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'CheckIMEI-Res')))
+    checkIMEI._val = dict([(u'ArgumentType', _checkIMEI_val_ArgumentType), (u'ResultType', _checkIMEI_val_ResultType), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_1), (u'errorCode', (u'local', 35))]), dict([(u'errorCode', (u'local', 7))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 43))])
+    
+    #-----< insertSubscriberData >-----#
+    insertSubscriberData = CLASS(name=u'insertSubscriberData', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
+    _insertSubscriberData_val_ArgumentType = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'InsertSubscriberDataArg')))
+    _insertSubscriberData_val_ResultType = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'InsertSubscriberDataRes')))
+    __sendRoutingInfo_Errors_val_ParameterType_2_2 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'UnidentifiedSubParam')))
+    insertSubscriberData._val = dict([(u'ArgumentType', _insertSubscriberData_val_ArgumentType), (u'ResultType', _insertSubscriberData_val_ResultType), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_0_0), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_1_0), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_2_2), (u'errorCode', (u'local', 5))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 7))])
+    
+    #-----< deleteSubscriberData >-----#
+    deleteSubscriberData = CLASS(name=u'deleteSubscriberData', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
+    _deleteSubscriberData_val_ArgumentType = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'DeleteSubscriberDataArg')))
+    _deleteSubscriberData_val_ResultType = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'DeleteSubscriberDataRes')))
+    deleteSubscriberData._val = dict([(u'ArgumentType', _deleteSubscriberData_val_ArgumentType), (u'ResultType', _deleteSubscriberData_val_ResultType), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_0_0), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_1_0), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_2_2), (u'errorCode', (u'local', 5))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 8))])
+    
+    #-----< reset >-----#
+    reset = CLASS(name=u'reset', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
+    _reset_val_ArgumentType = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'ResetArg')))
+    reset._val = dict([(u'ArgumentType', _reset_val_ArgumentType), (u'operationCode', (u'local', 37))])
+    
+    #-----< forwardCheckSS-Indication >-----#
+    forwardCheckSS_Indication = CLASS(name=u'forwardCheckSS-Indication', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
+    forwardCheckSS_Indication._val = dict([(u'operationCode', (u'local', 38))])
+    
+    #-----< restoreData >-----#
+    restoreData = CLASS(name=u'restoreData', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
+    _restoreData_val_ArgumentType = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'RestoreDataArg')))
+    _restoreData_val_ResultType = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'RestoreDataRes')))
+    restoreData._val = dict([(u'ArgumentType', _restoreData_val_ArgumentType), (u'ResultType', _restoreData_val_ResultType), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_1), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_3), (u'errorCode', (u'local', 1))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 57))])
+    
+    #-----< sendRoutingInfoForGprs >-----#
+    sendRoutingInfoForGprs = CLASS(name=u'sendRoutingInfoForGprs', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
+    _sendRoutingInfoForGprs_val_ArgumentType = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'SendRoutingInfoForGprsArg')))
+    _sendRoutingInfoForGprs_val_ResultType = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'SendRoutingInfoForGprsRes')))
+    __sendRoutingInfo_Errors_val_ParameterType_0_4 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'AbsentSubscriberParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_1_3 = CHOICE(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'SystemFailureParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_5_0 = CHOICE(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'CallBarredParam')))
+    sendRoutingInfoForGprs._val = dict([(u'ArgumentType', _sendRoutingInfoForGprs_val_ArgumentType), (u'ResultType', _sendRoutingInfoForGprs_val_ResultType), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_0_4), (u'errorCode', (u'local', 27))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_1_3), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_2_1), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_3_1), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_4_0), (u'errorCode', (u'local', 1))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_5_0), (u'errorCode', (u'local', 13))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 24))])
+    
+    #-----< failureReport >-----#
+    failureReport = CLASS(name=u'failureReport', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
+    _failureReport_val_ArgumentType = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'FailureReportArg')))
+    _failureReport_val_ResultType = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'FailureReportRes')))
+    failureReport._val = dict([(u'ArgumentType', _failureReport_val_ArgumentType), (u'ResultType', _failureReport_val_ResultType), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_1), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_3), (u'errorCode', (u'local', 1))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 25))])
+    
+    #-----< noteMsPresentForGprs >-----#
+    noteMsPresentForGprs = CLASS(name=u'noteMsPresentForGprs', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
+    _noteMsPresentForGprs_val_ArgumentType = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'NoteMsPresentForGprsArg')))
+    _noteMsPresentForGprs_val_ResultType = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'NoteMsPresentForGprsRes')))
+    noteMsPresentForGprs._val = dict([(u'ArgumentType', _noteMsPresentForGprs_val_ArgumentType), (u'ResultType', _noteMsPresentForGprs_val_ResultType), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_1), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_3), (u'errorCode', (u'local', 1))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 26))])
+    
+    #-----< noteMM-Event >-----#
+    noteMM_Event = CLASS(name=u'noteMM-Event', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
+    _noteMM_Event_val_ArgumentType = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'NoteMM-EventArg')))
+    _noteMM_Event_val_ResultType = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'NoteMM-EventRes')))
+    __sendRoutingInfo_Errors_val_ParameterType_3_2 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'MM-EventNotSupported-Param')))
+    noteMM_Event._val = dict([(u'ArgumentType', _noteMM_Event_val_ArgumentType), (u'ResultType', _noteMM_Event_val_ResultType), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_0_0), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_1_0), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_2_0), (u'errorCode', (u'local', 1))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_3_2), (u'errorCode', (u'local', 59))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 89))])
+    
+    #-----< updateVcsgLocation >-----#
+    updateVcsgLocation = CLASS(name=u'updateVcsgLocation', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
+    _updateVcsgLocation_val_ArgumentType = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'UpdateVcsgLocationArg')))
+    _updateVcsgLocation_val_ResultType = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'UpdateVcsgLocationRes')))
+    updateVcsgLocation._val = dict([(u'ArgumentType', _updateVcsgLocation_val_ArgumentType), (u'ResultType', _updateVcsgLocation_val_ResultType), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_1_0), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_2_0), (u'errorCode', (u'local', 1))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 53))])
+    
+    #-----< cancelVcsgLocation >-----#
+    cancelVcsgLocation = CLASS(name=u'cancelVcsgLocation', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
+    _cancelVcsgLocation_val_ArgumentType = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'CancelVcsgLocationArg')))
+    _cancelVcsgLocation_val_ResultType = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'CancelVcsgLocationRes')))
+    cancelVcsgLocation._val = dict([(u'ArgumentType', _cancelVcsgLocation_val_ArgumentType), (u'ResultType', _cancelVcsgLocation_val_ResultType), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_0_0), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_1_0), (u'errorCode', (u'local', 36))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 36))])
+    
+    _all_ = [
+        updateLocation,
+        _updateLocation_val_ArgumentType,
+        _updateLocation_val_ResultType,
+        __sendRoutingInfo_Errors_val_ParameterType_0,
+        __sendRoutingInfo_Errors_val_ParameterType_1,
+        __sendRoutingInfo_Errors_val_ParameterType_2,
+        __sendRoutingInfo_Errors_val_ParameterType_3,
+        __sendRoutingInfo_Errors_val_ParameterType_4,
+        cancelLocation,
+        _cancelLocation_val_ArgumentType,
+        _cancelLocation_val_ResultType,
+        __sendRoutingInfo_Errors_val_ParameterType_0_0,
+        __sendRoutingInfo_Errors_val_ParameterType_1_0,
+        purgeMS,
+        _purgeMS_val_ArgumentType,
+        _purgeMS_val_ResultType,
+        __sendRoutingInfo_Errors_val_ParameterType_2_0,
+        sendIdentification,
+        _sendIdentification_val_ArgumentType,
+        _sendIdentification_val_ResultType,
+        __sendRoutingInfo_Errors_val_ParameterType_1_1,
+        updateGprsLocation,
+        _updateGprsLocation_val_ArgumentType,
+        _updateGprsLocation_val_ResultType,
+        __sendRoutingInfo_Errors_val_ParameterType_3_0,
+        provideSubscriberInfo,
+        _provideSubscriberInfo_val_ArgumentType,
+        _provideSubscriberInfo_val_ResultType,
+        anyTimeInterrogation,
+        _anyTimeInterrogation_val_ArgumentType,
+        _anyTimeInterrogation_val_ResultType,
+        __sendRoutingInfo_Errors_val_ParameterType_1_2,
+        __sendRoutingInfo_Errors_val_ParameterType_2_1,
+        __sendRoutingInfo_Errors_val_ParameterType_3_1,
+        __sendRoutingInfo_Errors_val_ParameterType_4_0,
+        anyTimeSubscriptionInterrogation,
+        _anyTimeSubscriptionInterrogation_val_ArgumentType,
+        _anyTimeSubscriptionInterrogation_val_ResultType,
+        __sendRoutingInfo_Errors_val_ParameterType_0_1,
+        __sendRoutingInfo_Errors_val_ParameterType_4_1,
+        __sendRoutingInfo_Errors_val_ParameterType_5,
+        __sendRoutingInfo_Errors_val_ParameterType_6,
+        __sendRoutingInfo_Errors_val_ParameterType_7,
+        __sendRoutingInfo_Errors_val_ParameterType_8,
+        __sendRoutingInfo_Errors_val_ParameterType_9,
+        anyTimeModification,
+        _anyTimeModification_val_ArgumentType,
+        _anyTimeModification_val_ResultType,
+        __sendRoutingInfo_Errors_val_ParameterType_0_2,
+        __sendRoutingInfo_Errors_val_ParameterType_8_0,
+        __sendRoutingInfo_Errors_val_ParameterType_9_0,
+        __sendRoutingInfo_Errors_val_ParameterType_10,
+        __sendRoutingInfo_Errors_val_ParameterType_11,
+        noteSubscriberDataModified,
+        _noteSubscriberDataModified_val_ArgumentType,
+        _noteSubscriberDataModified_val_ResultType,
+        prepareHandover,
+        _prepareHandover_val_ArgumentType,
+        _prepareHandover_val_ResultType,
+        __sendRoutingInfo_Errors_val_ParameterType_4_2,
+        sendEndSignal,
+        _sendEndSignal_val_ArgumentType,
+        _sendEndSignal_val_ResultType,
+        processAccessSignalling,
+        _processAccessSignalling_val_ArgumentType,
+        forwardAccessSignalling,
+        _forwardAccessSignalling_val_ArgumentType,
+        prepareSubsequentHandover,
+        _prepareSubsequentHandover_val_ArgumentType,
+        _prepareSubsequentHandover_val_ResultType,
+        __sendRoutingInfo_Errors_val_ParameterType_0_3,
+        sendAuthenticationInfo,
+        _sendAuthenticationInfo_val_ArgumentType,
+        _sendAuthenticationInfo_val_ResultType,
+        authenticationFailureReport,
+        _authenticationFailureReport_val_ArgumentType,
+        _authenticationFailureReport_val_ResultType,
+        checkIMEI,
+        _checkIMEI_val_ArgumentType,
+        _checkIMEI_val_ResultType,
+        insertSubscriberData,
+        _insertSubscriberData_val_ArgumentType,
+        _insertSubscriberData_val_ResultType,
+        __sendRoutingInfo_Errors_val_ParameterType_2_2,
+        deleteSubscriberData,
+        _deleteSubscriberData_val_ArgumentType,
+        _deleteSubscriberData_val_ResultType,
+        reset,
+        _reset_val_ArgumentType,
+        forwardCheckSS_Indication,
+        restoreData,
+        _restoreData_val_ArgumentType,
+        _restoreData_val_ResultType,
+        sendRoutingInfoForGprs,
+        _sendRoutingInfoForGprs_val_ArgumentType,
+        _sendRoutingInfoForGprs_val_ResultType,
+        __sendRoutingInfo_Errors_val_ParameterType_0_4,
+        __sendRoutingInfo_Errors_val_ParameterType_1_3,
+        __sendRoutingInfo_Errors_val_ParameterType_5_0,
+        failureReport,
+        _failureReport_val_ArgumentType,
+        _failureReport_val_ResultType,
+        noteMsPresentForGprs,
+        _noteMsPresentForGprs_val_ArgumentType,
+        _noteMsPresentForGprs_val_ResultType,
+        noteMM_Event,
+        _noteMM_Event_val_ArgumentType,
+        _noteMM_Event_val_ResultType,
+        __sendRoutingInfo_Errors_val_ParameterType_3_2,
+        updateVcsgLocation,
+        _updateVcsgLocation_val_ArgumentType,
+        _updateVcsgLocation_val_ResultType,
+        cancelVcsgLocation,
+        _cancelVcsgLocation_val_ArgumentType,
+        _cancelVcsgLocation_val_ResultType,
+    ]
+
 class MAP_OM_DataTypes:
 
     _name_  = u'MAP-OM-DataTypes'
-    _oid_   = [0, 4, 0, 0, 1, 3, 12, 16]
+    _oid_   = [0, 4, 0, 0, 1, 3, 12, 19]
     
     _obj_ = [
         u'ActivateTraceModeArg',
@@ -15094,7 +14767,7 @@ class MAP_OM_DataTypes:
 class MAP_OperationAndMaintenanceOperations:
 
     _name_  = u'MAP-OperationAndMaintenanceOperations'
-    _oid_   = [0, 4, 0, 0, 1, 3, 6, 16]
+    _oid_   = [0, 4, 0, 0, 1, 3, 6, 19]
     
     _obj_ = [
         u'activateTraceMode',
@@ -15122,54 +14795,54 @@ class MAP_OperationAndMaintenanceOperations:
     activateTraceMode = CLASS(name=u'activateTraceMode', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
     _activateTraceMode_val_ArgumentType = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-OM-DataTypes', 'ActivateTraceModeArg')))
     _activateTraceMode_val_ResultType = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-OM-DataTypes', 'ActivateTraceModeRes')))
-    __OPERATION_Errors_val_ParameterType_0 = CHOICE(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'SystemFailureParam')))
-    __OPERATION_Errors_val_ParameterType_1 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'DataMissingParam')))
-    __OPERATION_Errors_val_ParameterType_2 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'UnexpectedDataParam')))
-    __OPERATION_Errors_val_ParameterType_3 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'FacilityNotSupParam')))
-    __OPERATION_Errors_val_ParameterType_4 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'UnidentifiedSubParam')))
-    __OPERATION_Errors_val_ParameterType_5 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'TracingBufferFullParam')))
-    activateTraceMode._val = dict([(u'ArgumentType', _activateTraceMode_val_ArgumentType), (u'ResultType', _activateTraceMode_val_ResultType), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_1), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_3), (u'errorCode', (u'local', 21))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_4), (u'errorCode', (u'local', 5))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_5), (u'errorCode', (u'local', 40))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 50))])
+    __sendRoutingInfo_Errors_val_ParameterType_0 = CHOICE(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'SystemFailureParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_1 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'DataMissingParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_2 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'UnexpectedDataParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_3 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'FacilityNotSupParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_4 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'UnidentifiedSubParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_5 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'TracingBufferFullParam')))
+    activateTraceMode._val = dict([(u'ArgumentType', _activateTraceMode_val_ArgumentType), (u'ResultType', _activateTraceMode_val_ResultType), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_1), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_3), (u'errorCode', (u'local', 21))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_4), (u'errorCode', (u'local', 5))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_5), (u'errorCode', (u'local', 40))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 50))])
     
     #-----< deactivateTraceMode >-----#
     deactivateTraceMode = CLASS(name=u'deactivateTraceMode', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
     _deactivateTraceMode_val_ArgumentType = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-OM-DataTypes', 'DeactivateTraceModeArg')))
     _deactivateTraceMode_val_ResultType = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-OM-DataTypes', 'DeactivateTraceModeRes')))
-    deactivateTraceMode._val = dict([(u'ArgumentType', _deactivateTraceMode_val_ArgumentType), (u'ResultType', _deactivateTraceMode_val_ResultType), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_1), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_3), (u'errorCode', (u'local', 21))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_4), (u'errorCode', (u'local', 5))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 51))])
+    deactivateTraceMode._val = dict([(u'ArgumentType', _deactivateTraceMode_val_ArgumentType), (u'ResultType', _deactivateTraceMode_val_ResultType), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_1), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_3), (u'errorCode', (u'local', 21))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_4), (u'errorCode', (u'local', 5))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 51))])
     
     #-----< sendIMSI >-----#
     sendIMSI = CLASS(name=u'sendIMSI', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
     _sendIMSI_val_ArgumentType = OCT_STR(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-CommonDataTypes', 'ISDN-AddressString')))
     _sendIMSI_val_ResultType = OCT_STR(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-CommonDataTypes', 'IMSI')))
-    __OPERATION_Errors_val_ParameterType_0_0 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'DataMissingParam')))
-    __OPERATION_Errors_val_ParameterType_1_0 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'UnexpectedDataParam')))
-    __OPERATION_Errors_val_ParameterType_2_0 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'UnknownSubscriberParam')))
-    sendIMSI._val = dict([(u'ArgumentType', _sendIMSI_val_ArgumentType), (u'ResultType', _sendIMSI_val_ResultType), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0_0), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_1_0), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_2_0), (u'errorCode', (u'local', 1))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 58))])
+    __sendRoutingInfo_Errors_val_ParameterType_0_0 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'DataMissingParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_1_0 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'UnexpectedDataParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_2_0 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'UnknownSubscriberParam')))
+    sendIMSI._val = dict([(u'ArgumentType', _sendIMSI_val_ArgumentType), (u'ResultType', _sendIMSI_val_ResultType), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_0_0), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_1_0), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_2_0), (u'errorCode', (u'local', 1))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 58))])
     
     _all_ = [
         activateTraceMode,
         _activateTraceMode_val_ArgumentType,
         _activateTraceMode_val_ResultType,
-        __OPERATION_Errors_val_ParameterType_0,
-        __OPERATION_Errors_val_ParameterType_1,
-        __OPERATION_Errors_val_ParameterType_2,
-        __OPERATION_Errors_val_ParameterType_3,
-        __OPERATION_Errors_val_ParameterType_4,
-        __OPERATION_Errors_val_ParameterType_5,
+        __sendRoutingInfo_Errors_val_ParameterType_0,
+        __sendRoutingInfo_Errors_val_ParameterType_1,
+        __sendRoutingInfo_Errors_val_ParameterType_2,
+        __sendRoutingInfo_Errors_val_ParameterType_3,
+        __sendRoutingInfo_Errors_val_ParameterType_4,
+        __sendRoutingInfo_Errors_val_ParameterType_5,
         deactivateTraceMode,
         _deactivateTraceMode_val_ArgumentType,
         _deactivateTraceMode_val_ResultType,
         sendIMSI,
         _sendIMSI_val_ArgumentType,
         _sendIMSI_val_ResultType,
-        __OPERATION_Errors_val_ParameterType_0_0,
-        __OPERATION_Errors_val_ParameterType_1_0,
-        __OPERATION_Errors_val_ParameterType_2_0,
+        __sendRoutingInfo_Errors_val_ParameterType_0_0,
+        __sendRoutingInfo_Errors_val_ParameterType_1_0,
+        __sendRoutingInfo_Errors_val_ParameterType_2_0,
     ]
 
 class MAP_Protocol:
 
     _name_  = u'MAP-Protocol'
-    _oid_   = [0, 4, 0, 0, 1, 3, 4, 16]
+    _oid_   = [0, 4, 0, 0, 1, 3, 4, 19]
     
     _obj_ = [
         u'Supported-MAP-Operations',
@@ -15191,38 +14864,38 @@ class MAP_Protocol:
     Supported_MAP_Operations = CLASS(name=u'Supported-MAP-Operations', mode=MODE_SET, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
     _Supported_MAP_Operations_val_ArgumentType_0 = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'UpdateLocationArg')))
     _Supported_MAP_Operations_val_ResultType_0 = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'UpdateLocationRes')))
-    __OPERATION_Errors_val_ParameterType_0 = CHOICE(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'SystemFailureParam')))
-    __OPERATION_Errors_val_ParameterType_1 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'DataMissingParam')))
-    __OPERATION_Errors_val_ParameterType_2 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'UnexpectedDataParam')))
-    __OPERATION_Errors_val_ParameterType_3 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'UnknownSubscriberParam')))
-    __OPERATION_Errors_val_ParameterType_4 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'RoamingNotAllowedParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_0 = CHOICE(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'SystemFailureParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_1 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'DataMissingParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_2 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'UnexpectedDataParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_3 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'UnknownSubscriberParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_4 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'RoamingNotAllowedParam')))
     _Supported_MAP_Operations_val_ArgumentType_1 = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'CancelLocationArg')))
     _Supported_MAP_Operations_val_ResultType_1 = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'CancelLocationRes')))
-    __OPERATION_Errors_val_ParameterType_0_0 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'DataMissingParam')))
-    __OPERATION_Errors_val_ParameterType_1_0 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'UnexpectedDataParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_0_0 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'DataMissingParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_1_0 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'UnexpectedDataParam')))
     _Supported_MAP_Operations_val_ArgumentType_2 = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'CancelVcsgLocationArg')))
     _Supported_MAP_Operations_val_ResultType_2 = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'CancelVcsgLocationRes')))
     _Supported_MAP_Operations_val_ArgumentType_3 = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'PurgeMS-Arg')))
     _Supported_MAP_Operations_val_ResultType_3 = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'PurgeMS-Res')))
-    __OPERATION_Errors_val_ParameterType_2_0 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'UnknownSubscriberParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_2_0 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'UnknownSubscriberParam')))
     _Supported_MAP_Operations_val_ArgumentType_4 = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'SendIdentificationArg')))
     _Supported_MAP_Operations_val_ResultType_4 = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'SendIdentificationRes')))
-    __OPERATION_Errors_val_ParameterType_1_1 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'UnidentifiedSubParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_1_1 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'UnidentifiedSubParam')))
     _Supported_MAP_Operations_val_ArgumentType_5 = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'UpdateGprsLocationArg')))
     _Supported_MAP_Operations_val_ResultType_5 = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'UpdateGprsLocationRes')))
-    __OPERATION_Errors_val_ParameterType_3_0 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'RoamingNotAllowedParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_3_0 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'RoamingNotAllowedParam')))
     _Supported_MAP_Operations_val_ArgumentType_6 = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'UpdateVcsgLocationArg')))
     _Supported_MAP_Operations_val_ResultType_6 = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'UpdateVcsgLocationRes')))
     _Supported_MAP_Operations_val_ArgumentType_7 = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'PrepareHO-Arg')))
     _Supported_MAP_Operations_val_ResultType_7 = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'PrepareHO-Res')))
-    __OPERATION_Errors_val_ParameterType_4_0 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'TargetCellOutsideGCA-Param')))
+    __sendRoutingInfo_Errors_val_ParameterType_4_0 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'TargetCellOutsideGCA-Param')))
     _Supported_MAP_Operations_val_ArgumentType_8 = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'SendEndSignal-Arg')))
     _Supported_MAP_Operations_val_ResultType_8 = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'SendEndSignal-Res')))
     _Supported_MAP_Operations_val_ArgumentType_9 = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'ProcessAccessSignalling-Arg')))
     _Supported_MAP_Operations_val_ArgumentType_10 = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'ForwardAccessSignalling-Arg')))
     _Supported_MAP_Operations_val_ArgumentType_11 = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'PrepareSubsequentHO-Arg')))
     _Supported_MAP_Operations_val_ResultType_11 = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'PrepareSubsequentHO-Res')))
-    __OPERATION_Errors_val_ParameterType_0_1 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'UnexpectedDataParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_0_1 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'UnexpectedDataParam')))
     _Supported_MAP_Operations_val_ArgumentType_12 = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'SendAuthenticationInfoArg')))
     _Supported_MAP_Operations_val_ResultType_12 = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'SendAuthenticationInfoRes')))
     _Supported_MAP_Operations_val_ArgumentType_13 = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'AuthenticationFailureReportArg')))
@@ -15231,7 +14904,7 @@ class MAP_Protocol:
     _Supported_MAP_Operations_val_ResultType_14 = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'CheckIMEI-Res')))
     _Supported_MAP_Operations_val_ArgumentType_15 = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'InsertSubscriberDataArg')))
     _Supported_MAP_Operations_val_ResultType_15 = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'InsertSubscriberDataRes')))
-    __OPERATION_Errors_val_ParameterType_2_1 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'UnidentifiedSubParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_2_1 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'UnidentifiedSubParam')))
     _Supported_MAP_Operations_val_ArgumentType_16 = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'DeleteSubscriberDataArg')))
     _Supported_MAP_Operations_val_ResultType_16 = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'DeleteSubscriberDataRes')))
     _Supported_MAP_Operations_val_ArgumentType_17 = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'ResetArg')))
@@ -15241,122 +14914,122 @@ class MAP_Protocol:
     _Supported_MAP_Operations_val_ResultType_20 = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'ProvideSubscriberInfoRes')))
     _Supported_MAP_Operations_val_ArgumentType_21 = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'AnyTimeInterrogationArg')))
     _Supported_MAP_Operations_val_ResultType_21 = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'AnyTimeInterrogationRes')))
-    __OPERATION_Errors_val_ParameterType_1_2 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'ATI-NotAllowedParam')))
-    __OPERATION_Errors_val_ParameterType_2_2 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'DataMissingParam')))
-    __OPERATION_Errors_val_ParameterType_3_1 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'UnexpectedDataParam')))
-    __OPERATION_Errors_val_ParameterType_4_1 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'UnknownSubscriberParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_1_2 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'ATI-NotAllowedParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_2_2 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'DataMissingParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_3_1 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'UnexpectedDataParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_4_1 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'UnknownSubscriberParam')))
     _Supported_MAP_Operations_val_ArgumentType_22 = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'AnyTimeSubscriptionInterrogationArg')))
     _Supported_MAP_Operations_val_ResultType_22 = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'AnyTimeSubscriptionInterrogationRes')))
-    __OPERATION_Errors_val_ParameterType_0_2 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'ATSI-NotAllowedParam')))
-    __OPERATION_Errors_val_ParameterType_4_2 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'BearerServNotProvParam')))
-    __OPERATION_Errors_val_ParameterType_5 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'TeleservNotProvParam')))
-    __OPERATION_Errors_val_ParameterType_6 = CHOICE(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'CallBarredParam')))
-    __OPERATION_Errors_val_ParameterType_7 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'IllegalSS-OperationParam')))
-    __OPERATION_Errors_val_ParameterType_8 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'SS-NotAvailableParam')))
-    __OPERATION_Errors_val_ParameterType_9 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'InformationNotAvailableParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_0_2 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'ATSI-NotAllowedParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_4_2 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'BearerServNotProvParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_5 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'TeleservNotProvParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_6 = CHOICE(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'CallBarredParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_7 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'IllegalSS-OperationParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_8 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'SS-NotAvailableParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_9 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'InformationNotAvailableParam')))
     _Supported_MAP_Operations_val_ArgumentType_23 = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'AnyTimeModificationArg')))
     _Supported_MAP_Operations_val_ResultType_23 = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'AnyTimeModificationRes')))
-    __OPERATION_Errors_val_ParameterType_0_3 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'ATM-NotAllowedParam')))
-    __OPERATION_Errors_val_ParameterType_8_0 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'SS-SubscriptionViolationParam')))
-    __OPERATION_Errors_val_ParameterType_9_0 = OCT_STR(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-SS-DataTypes', 'SS-Status')))
-    __OPERATION_Errors_val_ParameterType_10 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'SS-IncompatibilityCause')))
-    __OPERATION_Errors_val_ParameterType_11 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'InformationNotAvailableParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_0_3 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'ATM-NotAllowedParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_8_0 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'SS-SubscriptionViolationParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_9_0 = OCT_STR(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-SS-DataTypes', 'SS-Status')))
+    __sendRoutingInfo_Errors_val_ParameterType_10 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'SS-IncompatibilityCause')))
+    __sendRoutingInfo_Errors_val_ParameterType_11 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'InformationNotAvailableParam')))
     _Supported_MAP_Operations_val_ArgumentType_24 = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'SendRoutingInfoForGprsArg')))
     _Supported_MAP_Operations_val_ResultType_24 = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'SendRoutingInfoForGprsRes')))
-    __OPERATION_Errors_val_ParameterType_0_4 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'AbsentSubscriberParam')))
-    __OPERATION_Errors_val_ParameterType_1_3 = CHOICE(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'SystemFailureParam')))
-    __OPERATION_Errors_val_ParameterType_5_0 = CHOICE(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'CallBarredParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_0_4 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'AbsentSubscriberParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_1_3 = CHOICE(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'SystemFailureParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_5_0 = CHOICE(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'CallBarredParam')))
     _Supported_MAP_Operations_val_ArgumentType_25 = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'FailureReportArg')))
     _Supported_MAP_Operations_val_ResultType_25 = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'FailureReportRes')))
     _Supported_MAP_Operations_val_ArgumentType_26 = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'NoteMsPresentForGprsArg')))
     _Supported_MAP_Operations_val_ResultType_26 = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'NoteMsPresentForGprsRes')))
     _Supported_MAP_Operations_val_ArgumentType_27 = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'NoteMM-EventArg')))
     _Supported_MAP_Operations_val_ResultType_27 = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'NoteMM-EventRes')))
-    __OPERATION_Errors_val_ParameterType_3_2 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'MM-EventNotSupported-Param')))
+    __sendRoutingInfo_Errors_val_ParameterType_3_2 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'MM-EventNotSupported-Param')))
     _Supported_MAP_Operations_val_ArgumentType_28 = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'NoteSubscriberDataModifiedArg')))
     _Supported_MAP_Operations_val_ResultType_28 = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'NoteSubscriberDataModifiedRes')))
     _Supported_MAP_Operations_val_ArgumentType_29 = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-OM-DataTypes', 'ActivateTraceModeArg')))
     _Supported_MAP_Operations_val_ResultType_29 = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-OM-DataTypes', 'ActivateTraceModeRes')))
-    __OPERATION_Errors_val_ParameterType_3_3 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'FacilityNotSupParam')))
-    __OPERATION_Errors_val_ParameterType_4_3 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'UnidentifiedSubParam')))
-    __OPERATION_Errors_val_ParameterType_5_1 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'TracingBufferFullParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_3_3 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'FacilityNotSupParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_4_3 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'UnidentifiedSubParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_5_1 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'TracingBufferFullParam')))
     _Supported_MAP_Operations_val_ArgumentType_30 = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-OM-DataTypes', 'DeactivateTraceModeArg')))
     _Supported_MAP_Operations_val_ResultType_30 = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-OM-DataTypes', 'DeactivateTraceModeRes')))
     _Supported_MAP_Operations_val_ArgumentType_31 = OCT_STR(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-CommonDataTypes', 'ISDN-AddressString')))
     _Supported_MAP_Operations_val_ResultType_31 = OCT_STR(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-CommonDataTypes', 'IMSI')))
     _Supported_MAP_Operations_val_ArgumentType_32 = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-CH-DataTypes', 'SendRoutingInfoArg')))
     _Supported_MAP_Operations_val_ResultType_32 = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-CH-DataTypes', 'SendRoutingInfoRes')))
-    __OPERATION_Errors_val_ParameterType_4_4 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'OR-NotAllowedParam')))
-    __OPERATION_Errors_val_ParameterType_5_2 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'UnknownSubscriberParam')))
-    __OPERATION_Errors_val_ParameterType_6_0 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'NumberChangedParam')))
-    __OPERATION_Errors_val_ParameterType_7_0 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'BearerServNotProvParam')))
-    __OPERATION_Errors_val_ParameterType_8_1 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'TeleservNotProvParam')))
-    __OPERATION_Errors_val_ParameterType_9_1 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'AbsentSubscriberParam')))
-    __OPERATION_Errors_val_ParameterType_10_0 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'BusySubscriberParam')))
-    __OPERATION_Errors_val_ParameterType_11_0 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'NoSubscriberReplyParam')))
-    __OPERATION_Errors_val_ParameterType_12 = CHOICE(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'CallBarredParam')))
-    __OPERATION_Errors_val_ParameterType_13 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'CUG-RejectParam')))
-    __OPERATION_Errors_val_ParameterType_14 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'ForwardingViolationParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_4_4 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'OR-NotAllowedParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_5_2 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'UnknownSubscriberParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_6_0 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'NumberChangedParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_7_0 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'BearerServNotProvParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_8_1 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'TeleservNotProvParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_9_1 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'AbsentSubscriberParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_10_0 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'BusySubscriberParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_11_0 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'NoSubscriberReplyParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_12 = CHOICE(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'CallBarredParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_13 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'CUG-RejectParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_14 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'ForwardingViolationParam')))
     _Supported_MAP_Operations_val_ArgumentType_33 = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-CH-DataTypes', 'ProvideRoamingNumberArg')))
     _Supported_MAP_Operations_val_ResultType_33 = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-CH-DataTypes', 'ProvideRoamingNumberRes')))
-    __OPERATION_Errors_val_ParameterType_5_3 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'AbsentSubscriberParam')))
-    __OPERATION_Errors_val_ParameterType_6_1 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'NoRoamingNbParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_5_3 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'AbsentSubscriberParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_6_1 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'NoRoamingNbParam')))
     _Supported_MAP_Operations_val_ArgumentType_34 = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-CH-DataTypes', 'ResumeCallHandlingArg')))
     _Supported_MAP_Operations_val_ResultType_34 = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-CH-DataTypes', 'ResumeCallHandlingRes')))
-    __OPERATION_Errors_val_ParameterType_0_5 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'ForwardingFailedParam')))
-    __OPERATION_Errors_val_ParameterType_1_4 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'OR-NotAllowedParam')))
-    __OPERATION_Errors_val_ParameterType_3_4 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'DataMissingParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_0_5 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'ForwardingFailedParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_1_4 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'OR-NotAllowedParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_3_4 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'DataMissingParam')))
     _Supported_MAP_Operations_val_ArgumentType_35 = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-CH-DataTypes', 'SetReportingStateArg')))
     _Supported_MAP_Operations_val_ResultType_35 = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-CH-DataTypes', 'SetReportingStateRes')))
-    __OPERATION_Errors_val_ParameterType_4_5 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'ResourceLimitationParam')))
-    __OPERATION_Errors_val_ParameterType_5_4 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'FacilityNotSupParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_4_5 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'ResourceLimitationParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_5_4 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'FacilityNotSupParam')))
     _Supported_MAP_Operations_val_ArgumentType_36 = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-CH-DataTypes', 'StatusReportArg')))
     _Supported_MAP_Operations_val_ResultType_36 = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-CH-DataTypes', 'StatusReportRes')))
-    __OPERATION_Errors_val_ParameterType_0_6 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'UnknownSubscriberParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_0_6 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'UnknownSubscriberParam')))
     _Supported_MAP_Operations_val_ArgumentType_37 = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-CH-DataTypes', 'RemoteUserFreeArg')))
     _Supported_MAP_Operations_val_ResultType_37 = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-CH-DataTypes', 'RemoteUserFreeRes')))
-    __OPERATION_Errors_val_ParameterType_2_3 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'IncompatibleTerminalParam')))
-    __OPERATION_Errors_val_ParameterType_3_5 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'AbsentSubscriberParam')))
-    __OPERATION_Errors_val_ParameterType_4_6 = CHOICE(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'SystemFailureParam')))
-    __OPERATION_Errors_val_ParameterType_5_5 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'BusySubscriberParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_2_3 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'IncompatibleTerminalParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_3_5 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'AbsentSubscriberParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_4_6 = CHOICE(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'SystemFailureParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_5_5 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'BusySubscriberParam')))
     _Supported_MAP_Operations_val_ArgumentType_38 = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-CH-DataTypes', 'IST-AlertArg')))
     _Supported_MAP_Operations_val_ResultType_38 = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-CH-DataTypes', 'IST-AlertRes')))
-    __OPERATION_Errors_val_ParameterType_1_5 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'ResourceLimitationParam')))
-    __OPERATION_Errors_val_ParameterType_3_6 = CHOICE(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'SystemFailureParam')))
-    __OPERATION_Errors_val_ParameterType_4_7 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'FacilityNotSupParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_1_5 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'ResourceLimitationParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_3_6 = CHOICE(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'SystemFailureParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_4_7 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'FacilityNotSupParam')))
     _Supported_MAP_Operations_val_ArgumentType_39 = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-CH-DataTypes', 'IST-CommandArg')))
     _Supported_MAP_Operations_val_ResultType_39 = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-CH-DataTypes', 'IST-CommandRes')))
     _Supported_MAP_Operations_val_ArgumentType_40 = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-SS-DataTypes', 'RegisterSS-Arg')))
     _Supported_MAP_Operations_val_ResultType_40 = CHOICE(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-SS-DataTypes', 'SS-Info')))
-    __OPERATION_Errors_val_ParameterType_3_7 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'BearerServNotProvParam')))
-    __OPERATION_Errors_val_ParameterType_4_8 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'TeleservNotProvParam')))
-    __OPERATION_Errors_val_ParameterType_6_2 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'IllegalSS-OperationParam')))
-    __OPERATION_Errors_val_ParameterType_7_1 = OCT_STR(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-SS-DataTypes', 'SS-Status')))
-    __OPERATION_Errors_val_ParameterType_8_2 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'SS-IncompatibilityCause')))
+    __sendRoutingInfo_Errors_val_ParameterType_3_7 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'BearerServNotProvParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_4_8 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'TeleservNotProvParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_6_2 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'IllegalSS-OperationParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_7_1 = OCT_STR(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-SS-DataTypes', 'SS-Status')))
+    __sendRoutingInfo_Errors_val_ParameterType_8_2 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'SS-IncompatibilityCause')))
     _Supported_MAP_Operations_val_ArgumentType_41 = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-SS-DataTypes', 'SS-ForBS-Code')))
     _Supported_MAP_Operations_val_ResultType_41 = CHOICE(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-SS-DataTypes', 'SS-Info')))
     _Supported_MAP_Operations_val_ArgumentType_42 = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-SS-DataTypes', 'SS-ForBS-Code')))
     _Supported_MAP_Operations_val_ResultType_42 = CHOICE(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-SS-DataTypes', 'SS-Info')))
-    __OPERATION_Errors_val_ParameterType_9_2 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'SS-IncompatibilityCause')))
+    __sendRoutingInfo_Errors_val_ParameterType_9_2 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'SS-IncompatibilityCause')))
     _Supported_MAP_Operations_val_ArgumentType_43 = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-SS-DataTypes', 'SS-ForBS-Code')))
     _Supported_MAP_Operations_val_ResultType_43 = CHOICE(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-SS-DataTypes', 'SS-Info')))
     _Supported_MAP_Operations_val_ArgumentType_44 = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-SS-DataTypes', 'SS-ForBS-Code')))
     _Supported_MAP_Operations_val_ResultType_44 = CHOICE(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-SS-DataTypes', 'InterrogateSS-Res')))
-    __OPERATION_Errors_val_ParameterType_7_2 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'SS-NotAvailableParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_7_2 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'SS-NotAvailableParam')))
     _Supported_MAP_Operations_val_ArgumentType_45 = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-SS-DataTypes', 'USSD-Arg')))
     _Supported_MAP_Operations_val_ResultType_45 = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-SS-DataTypes', 'USSD-Res')))
-    __OPERATION_Errors_val_ParameterType_4_9 = CHOICE(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'CallBarredParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_4_9 = CHOICE(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'CallBarredParam')))
     _Supported_MAP_Operations_val_ArgumentType_46 = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-SS-DataTypes', 'USSD-Arg')))
     _Supported_MAP_Operations_val_ResultType_46 = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-SS-DataTypes', 'USSD-Res')))
-    __OPERATION_Errors_val_ParameterType_4_10 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'IllegalSubscriberParam')))
-    __OPERATION_Errors_val_ParameterType_5_6 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'IllegalEquipmentParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_4_10 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'IllegalSubscriberParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_5_6 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'IllegalEquipmentParam')))
     _Supported_MAP_Operations_val_ArgumentType_47 = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-SS-DataTypes', 'USSD-Arg')))
     _Supported_MAP_Operations_val_ArgumentType_48 = OCT_STR(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-SS-Code', 'SS-Code')))
     _Supported_MAP_Operations_val_ResultType_48 = STR_NUM(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-SS-DataTypes', 'Password')))
     _Supported_MAP_Operations_val_ResultType_48._const_alpha = ASN1Set(rv=[u'0', u'1', u'2', u'3', u'4', u'5', u'6', u'7', u'8', u'9'], rr=[], ev=None, er=[])
-    __OPERATION_Errors_val_ParameterType_3_8 = CHOICE(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'CallBarredParam')))
-    __OPERATION_Errors_val_ParameterType_4__11 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'SS-SubscriptionViolationParam')))
-    __OPERATION_Errors_val_ParameterType_5_7 = ENUM(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'PW-RegistrationFailureCause')))
+    __sendRoutingInfo_Errors_val_ParameterType_3_8 = CHOICE(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'CallBarredParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_4__11 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'SS-SubscriptionViolationParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_5_7 = ENUM(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'PW-RegistrationFailureCause')))
     _Supported_MAP_Operations_val_ArgumentType_49 = ENUM(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-SS-DataTypes', 'GuidanceInfo')))
     _Supported_MAP_Operations_val_ResultType_49 = STR_NUM(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-SS-DataTypes', 'Password')))
     _Supported_MAP_Operations_val_ResultType_49._const_alpha = ASN1Set(rv=[u'0', u'1', u'2', u'3', u'4', u'5', u'6', u'7', u'8', u'9'], rr=[], ev=None, er=[])
@@ -15364,101 +15037,101 @@ class MAP_Protocol:
     _Supported_MAP_Operations_val_ResultType_50 = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-SS-DataTypes', 'SS-InvocationNotificationRes')))
     _Supported_MAP_Operations_val_ArgumentType_51 = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-SS-DataTypes', 'RegisterCC-EntryArg')))
     _Supported_MAP_Operations_val_ResultType_51 = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-SS-DataTypes', 'RegisterCC-EntryRes')))
-    __OPERATION_Errors_val_ParameterType_4___12 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'IllegalSS-OperationParam')))
-    __OPERATION_Errors_val_ParameterType_5_8 = OCT_STR(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-SS-DataTypes', 'SS-Status')))
-    __OPERATION_Errors_val_ParameterType_6_3 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'SS-IncompatibilityCause')))
-    __OPERATION_Errors_val_ParameterType_7_3 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'ShortTermDenialParam')))
-    __OPERATION_Errors_val_ParameterType_8_3 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'LongTermDenialParam')))
-    __OPERATION_Errors_val_ParameterType_9_3 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'FacilityNotSupParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_4___12 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'IllegalSS-OperationParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_5_8 = OCT_STR(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-SS-DataTypes', 'SS-Status')))
+    __sendRoutingInfo_Errors_val_ParameterType_6_3 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'SS-IncompatibilityCause')))
+    __sendRoutingInfo_Errors_val_ParameterType_7_3 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'ShortTermDenialParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_8_3 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'LongTermDenialParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_9_3 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'FacilityNotSupParam')))
     _Supported_MAP_Operations_val_ArgumentType_52 = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-SS-DataTypes', 'EraseCC-EntryArg')))
     _Supported_MAP_Operations_val_ResultType_52 = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-SS-DataTypes', 'EraseCC-EntryRes')))
     _Supported_MAP_Operations_val_ArgumentType_53 = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-SM-DataTypes', 'RoutingInfoForSM-Arg')))
     _Supported_MAP_Operations_val_ResultType_53 = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-SM-DataTypes', 'RoutingInfoForSM-Res')))
-    __OPERATION_Errors_val_ParameterType_7_4 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'AbsentSubscriberSM-Param')))
+    __sendRoutingInfo_Errors_val_ParameterType_7_4 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'AbsentSubscriberSM-Param')))
     _Supported_MAP_Operations_val_ArgumentType_54 = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-SM-DataTypes', 'MO-ForwardSM-Arg')))
     _Supported_MAP_Operations_val_ResultType_54 = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-SM-DataTypes', 'MO-ForwardSM-Res')))
-    __OPERATION_Errors_val_ParameterType_2_4 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'FacilityNotSupParam')))
-    __OPERATION_Errors_val_ParameterType_3_9 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'SM-DeliveryFailureCause')))
+    __sendRoutingInfo_Errors_val_ParameterType_2_4 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'FacilityNotSupParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_3_9 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'SM-DeliveryFailureCause')))
     _Supported_MAP_Operations_val_ArgumentType_55 = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-SM-DataTypes', 'MT-ForwardSM-Arg')))
     _Supported_MAP_Operations_val_ResultType_55 = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-SM-DataTypes', 'MT-ForwardSM-Res')))
-    __OPERATION_Errors_val_ParameterType_5_9 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'IllegalSubscriberParam')))
-    __OPERATION_Errors_val_ParameterType_6_4 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'IllegalEquipmentParam')))
-    __OPERATION_Errors_val_ParameterType_7_5 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'SubBusyForMT-SMS-Param')))
-    __OPERATION_Errors_val_ParameterType_8_4 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'SM-DeliveryFailureCause')))
-    __OPERATION_Errors_val_ParameterType_9_4 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'AbsentSubscriberSM-Param')))
+    __sendRoutingInfo_Errors_val_ParameterType_5_9 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'IllegalSubscriberParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_6_4 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'IllegalEquipmentParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_7_5 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'SubBusyForMT-SMS-Param')))
+    __sendRoutingInfo_Errors_val_ParameterType_8_4 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'SM-DeliveryFailureCause')))
+    __sendRoutingInfo_Errors_val_ParameterType_9_4 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'AbsentSubscriberSM-Param')))
     _Supported_MAP_Operations_val_ArgumentType_56 = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-SM-DataTypes', 'ReportSM-DeliveryStatusArg')))
     _Supported_MAP_Operations_val_ResultType_56 = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-SM-DataTypes', 'ReportSM-DeliveryStatusRes')))
-    __OPERATION_Errors_val_ParameterType_3_10 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'MessageWaitListFullParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_3_10 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'MessageWaitListFullParam')))
     _Supported_MAP_Operations_val_ArgumentType_57 = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-SM-DataTypes', 'AlertServiceCentreArg')))
     _Supported_MAP_Operations_val_ArgumentType_58 = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-SM-DataTypes', 'InformServiceCentreArg')))
     _Supported_MAP_Operations_val_ArgumentType_59 = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-SM-DataTypes', 'ReadyForSM-Arg')))
     _Supported_MAP_Operations_val_ResultType_59 = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-SM-DataTypes', 'ReadyForSM-Res')))
     _Supported_MAP_Operations_val_ArgumentType_60 = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-GR-DataTypes', 'PrepareGroupCallArg')))
     _Supported_MAP_Operations_val_ResultType_60 = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-GR-DataTypes', 'PrepareGroupCallRes')))
-    __OPERATION_Errors_val_ParameterType_1_6 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'NoGroupCallNbParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_1_6 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'NoGroupCallNbParam')))
     _Supported_MAP_Operations_val_ArgumentType_61 = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-GR-DataTypes', 'ProcessGroupCallSignallingArg')))
     _Supported_MAP_Operations_val_ArgumentType_62 = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-GR-DataTypes', 'ForwardGroupCallSignallingArg')))
     _Supported_MAP_Operations_val_ArgumentType_63 = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-GR-DataTypes', 'SendGroupCallEndSignalArg')))
     _Supported_MAP_Operations_val_ResultType_63 = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-GR-DataTypes', 'SendGroupCallEndSignalRes')))
     _Supported_MAP_Operations_val_ArgumentType_64 = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-LCS-DataTypes', 'ProvideSubscriberLocation-Arg')))
     _Supported_MAP_Operations_val_ResultType_64 = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-LCS-DataTypes', 'ProvideSubscriberLocation-Res')))
-    __OPERATION_Errors_val_ParameterType_7_6 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'AbsentSubscriberParam')))
-    __OPERATION_Errors_val_ParameterType_8_5 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'UnauthorizedRequestingNetwork-Param')))
-    __OPERATION_Errors_val_ParameterType_9_5 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'UnauthorizedLCSClient-Param')))
-    __OPERATION_Errors_val_ParameterType_10_1 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'PositionMethodFailure-Param')))
+    __sendRoutingInfo_Errors_val_ParameterType_7_6 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'AbsentSubscriberParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_8_5 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'UnauthorizedRequestingNetwork-Param')))
+    __sendRoutingInfo_Errors_val_ParameterType_9_5 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'UnauthorizedLCSClient-Param')))
+    __sendRoutingInfo_Errors_val_ParameterType_10_1 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'PositionMethodFailure-Param')))
     _Supported_MAP_Operations_val_ArgumentType_65 = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-LCS-DataTypes', 'RoutingInfoForLCS-Arg')))
     _Supported_MAP_Operations_val_ResultType_65 = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-LCS-DataTypes', 'RoutingInfoForLCS-Res')))
-    __OPERATION_Errors_val_ParameterType_6_5 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'UnauthorizedRequestingNetwork-Param')))
+    __sendRoutingInfo_Errors_val_ParameterType_6_5 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'UnauthorizedRequestingNetwork-Param')))
     _Supported_MAP_Operations_val_ArgumentType_66 = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-LCS-DataTypes', 'SubscriberLocationReport-Arg')))
     _Supported_MAP_Operations_val_ResultType_66 = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-LCS-DataTypes', 'SubscriberLocationReport-Res')))
-    __OPERATION_Errors_val_ParameterType_2_5 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'ResourceLimitationParam')))
-    __OPERATION_Errors_val_ParameterType_5_10 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'UnauthorizedRequestingNetwork-Param')))
-    __OPERATION_Errors_val_ParameterType_6_6 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'UnknownOrUnreachableLCSClient-Param')))
+    __sendRoutingInfo_Errors_val_ParameterType_2_5 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'ResourceLimitationParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_5_10 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'UnauthorizedRequestingNetwork-Param')))
+    __sendRoutingInfo_Errors_val_ParameterType_6_6 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'UnknownOrUnreachableLCSClient-Param')))
     _Supported_MAP_Operations_val_ArgumentType_67 = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-CH-DataTypes', 'ReleaseResourcesArg')))
     _Supported_MAP_Operations_val_ResultType_67 = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-CH-DataTypes', 'ReleaseResourcesRes')))
     _Supported_MAP_Operations_val_ArgumentType_68 = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-SM-DataTypes', 'MT-ForwardSM-VGCS-Arg')))
     _Supported_MAP_Operations_val_ResultType_68 = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-SM-DataTypes', 'MT-ForwardSM-VGCS-Res')))
     _Supported_MAP_Operations_val_ArgumentType_69 = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-GR-DataTypes', 'SendGroupCallInfoArg')))
     _Supported_MAP_Operations_val_ResultType_69 = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-GR-DataTypes', 'SendGroupCallInfoRes')))
-    __OPERATION_Errors_val_ParameterType_1_7 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'OngoingGroupCallParam')))
-    Supported_MAP_Operations._val = ASN1Set(rv=[dict([(u'ArgumentType', _Supported_MAP_Operations_val_ArgumentType_0), (u'ResultType', _Supported_MAP_Operations_val_ResultType_0), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_1), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_3), (u'errorCode', (u'local', 1))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_4), (u'errorCode', (u'local', 8))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 2))]), dict([(u'ArgumentType', _Supported_MAP_Operations_val_ArgumentType_1), (u'ResultType', _Supported_MAP_Operations_val_ResultType_1), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0_0), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_1_0), (u'errorCode', (u'local', 36))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 3))]), dict([(u'ArgumentType', _Supported_MAP_Operations_val_ArgumentType_2), (u'ResultType', _Supported_MAP_Operations_val_ResultType_2), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0_0), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_1_0), (u'errorCode', (u'local', 36))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 36))]), dict([(u'ArgumentType', _Supported_MAP_Operations_val_ArgumentType_3), (u'ResultType', _Supported_MAP_Operations_val_ResultType_3), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0_0), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_1_0), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_2_0), (u'errorCode', (u'local', 1))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 67))]), dict([(u'ArgumentType', _Supported_MAP_Operations_val_ArgumentType_4), (u'ResultType', _Supported_MAP_Operations_val_ResultType_4), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0_0), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_1_1), (u'errorCode', (u'local', 5))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 55))]), dict([(u'ArgumentType', _Supported_MAP_Operations_val_ArgumentType_5), (u'ResultType', _Supported_MAP_Operations_val_ResultType_5), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_1_0), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_2_0), (u'errorCode', (u'local', 1))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_3_0), (u'errorCode', (u'local', 8))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 23))]), dict([(u'ArgumentType', _Supported_MAP_Operations_val_ArgumentType_6), (u'ResultType', _Supported_MAP_Operations_val_ResultType_6), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_1_0), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_2_0), (u'errorCode', (u'local', 1))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 53))]), dict([(u'ArgumentType', _Supported_MAP_Operations_val_ArgumentType_7), (u'ResultType', _Supported_MAP_Operations_val_ResultType_7), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_1), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))]), dict([(u'errorCode', (u'local', 25))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_4_0), (u'errorCode', (u'local', 42))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 68))]), dict([(u'ArgumentType', _Supported_MAP_Operations_val_ArgumentType_8), (u'ResultType', _Supported_MAP_Operations_val_ResultType_8), (u'operationCode', (u'local', 29))]), dict([(u'ArgumentType', _Supported_MAP_Operations_val_ArgumentType_9), (u'operationCode', (u'local', 33))]), dict([(u'ArgumentType', _Supported_MAP_Operations_val_ArgumentType_10), (u'operationCode', (u'local', 34))]), dict([(u'ArgumentType', _Supported_MAP_Operations_val_ArgumentType_11), (u'ResultType', _Supported_MAP_Operations_val_ResultType_11), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0_1), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_1), (u'errorCode', (u'local', 35))]), dict([(u'errorCode', (u'local', 3))]), dict([(u'errorCode', (u'local', 26))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 69))]), dict([(u'ArgumentType', _Supported_MAP_Operations_val_ArgumentType_12), (u'ResultType', _Supported_MAP_Operations_val_ResultType_12), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_1), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_3), (u'errorCode', (u'local', 1))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 56))]), dict([(u'ArgumentType', _Supported_MAP_Operations_val_ArgumentType_13), (u'ResultType', _Supported_MAP_Operations_val_ResultType_13), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_1_0), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_2_0), (u'errorCode', (u'local', 1))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 15))]), dict([(u'ArgumentType', _Supported_MAP_Operations_val_ArgumentType_14), (u'ResultType', _Supported_MAP_Operations_val_ResultType_14), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_1), (u'errorCode', (u'local', 35))]), dict([(u'errorCode', (u'local', 7))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 43))]), dict([(u'ArgumentType', _Supported_MAP_Operations_val_ArgumentType_15), (u'ResultType', _Supported_MAP_Operations_val_ResultType_15), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0_0), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_1_0), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_2_1), (u'errorCode', (u'local', 5))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 7))]), dict([(u'ArgumentType', _Supported_MAP_Operations_val_ArgumentType_16), (u'ResultType', _Supported_MAP_Operations_val_ResultType_16), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0_0), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_1_0), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_2_1), (u'errorCode', (u'local', 5))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 8))]), dict([(u'ArgumentType', _Supported_MAP_Operations_val_ArgumentType_17), (u'operationCode', (u'local', 37))]), dict([(u'operationCode', (u'local', 38))]), dict([(u'ArgumentType', _Supported_MAP_Operations_val_ArgumentType_19), (u'ResultType', _Supported_MAP_Operations_val_ResultType_19), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_1), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_3), (u'errorCode', (u'local', 1))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 57))]), dict([(u'ArgumentType', _Supported_MAP_Operations_val_ArgumentType_20), (u'ResultType', _Supported_MAP_Operations_val_ResultType_20), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0_0), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_1_0), (u'errorCode', (u'local', 36))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 70))]), dict([(u'ArgumentType', _Supported_MAP_Operations_val_ArgumentType_21), (u'ResultType', _Supported_MAP_Operations_val_ResultType_21), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_1_2), (u'errorCode', (u'local', 49))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_2_2), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_3_1), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_4_1), (u'errorCode', (u'local', 1))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 71))]), dict([(u'ArgumentType', _Supported_MAP_Operations_val_ArgumentType_22), (u'ResultType', _Supported_MAP_Operations_val_ResultType_22), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0_2), (u'errorCode', (u'local', 60))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_1), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_3), (u'errorCode', (u'local', 1))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_4_2), (u'errorCode', (u'local', 10))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_5), (u'errorCode', (u'local', 11))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_6), (u'errorCode', (u'local', 13))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_7), (u'errorCode', (u'local', 16))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_8), (u'errorCode', (u'local', 18))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_9), (u'errorCode', (u'local', 62))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 62))]), dict([(u'ArgumentType', _Supported_MAP_Operations_val_ArgumentType_23), (u'ResultType', _Supported_MAP_Operations_val_ResultType_23), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0_3), (u'errorCode', (u'local', 61))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_1), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_3), (u'errorCode', (u'local', 1))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_4_2), (u'errorCode', (u'local', 10))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_5), (u'errorCode', (u'local', 11))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_6), (u'errorCode', (u'local', 13))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_7), (u'errorCode', (u'local', 16))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_8_0), (u'errorCode', (u'local', 19))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_9_0), (u'errorCode', (u'local', 17))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_10), (u'errorCode', (u'local', 20))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_11), (u'errorCode', (u'local', 62))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 65))]), dict([(u'ArgumentType', _Supported_MAP_Operations_val_ArgumentType_24), (u'ResultType', _Supported_MAP_Operations_val_ResultType_24), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0_4), (u'errorCode', (u'local', 27))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_1_3), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_2_2), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_3_1), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_4_1), (u'errorCode', (u'local', 1))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_5_0), (u'errorCode', (u'local', 13))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 24))]), dict([(u'ArgumentType', _Supported_MAP_Operations_val_ArgumentType_25), (u'ResultType', _Supported_MAP_Operations_val_ResultType_25), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_1), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_3), (u'errorCode', (u'local', 1))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 25))]), dict([(u'ArgumentType', _Supported_MAP_Operations_val_ArgumentType_26), (u'ResultType', _Supported_MAP_Operations_val_ResultType_26), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_1), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_3), (u'errorCode', (u'local', 1))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 26))]), dict([(u'ArgumentType', _Supported_MAP_Operations_val_ArgumentType_27), (u'ResultType', _Supported_MAP_Operations_val_ResultType_27), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0_0), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_1_0), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_2_0), (u'errorCode', (u'local', 1))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_3_2), (u'errorCode', (u'local', 59))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 89))]), dict([(u'ArgumentType', _Supported_MAP_Operations_val_ArgumentType_28), (u'ResultType', _Supported_MAP_Operations_val_ResultType_28), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0_0), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_1_0), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_2_0), (u'errorCode', (u'local', 1))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 5))]), dict([(u'ArgumentType', _Supported_MAP_Operations_val_ArgumentType_29), (u'ResultType', _Supported_MAP_Operations_val_ResultType_29), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_1), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_3_3), (u'errorCode', (u'local', 21))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_4_3), (u'errorCode', (u'local', 5))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_5_1), (u'errorCode', (u'local', 40))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 50))]), dict([(u'ArgumentType', _Supported_MAP_Operations_val_ArgumentType_30), (u'ResultType', _Supported_MAP_Operations_val_ResultType_30), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_1), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_3_3), (u'errorCode', (u'local', 21))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_4_3), (u'errorCode', (u'local', 5))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 51))]), dict([(u'ArgumentType', _Supported_MAP_Operations_val_ArgumentType_31), (u'ResultType', _Supported_MAP_Operations_val_ResultType_31), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0_0), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_1_0), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_2_0), (u'errorCode', (u'local', 1))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 58))]), dict([(u'ArgumentType', _Supported_MAP_Operations_val_ArgumentType_32), (u'ResultType', _Supported_MAP_Operations_val_ResultType_32), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_1), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_3_3), (u'errorCode', (u'local', 21))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_4_4), (u'errorCode', (u'local', 48))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_5_2), (u'errorCode', (u'local', 1))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_6_0), (u'errorCode', (u'local', 44))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_7_0), (u'errorCode', (u'local', 10))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_8_1), (u'errorCode', (u'local', 11))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_9_1), (u'errorCode', (u'local', 27))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_10_0), (u'errorCode', (u'local', 45))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_11_0), (u'errorCode', (u'local', 46))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_12), (u'errorCode', (u'local', 13))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_13), (u'errorCode', (u'local', 15))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_14), (u'errorCode', (u'local', 14))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 22))]), dict([(u'ArgumentType', _Supported_MAP_Operations_val_ArgumentType_33), (u'ResultType', _Supported_MAP_Operations_val_ResultType_33), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_1), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_3_3), (u'errorCode', (u'local', 21))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_4_4), (u'errorCode', (u'local', 48))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_5_3), (u'errorCode', (u'local', 27))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_6_1), (u'errorCode', (u'local', 39))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 4))]), dict([(u'ArgumentType', _Supported_MAP_Operations_val_ArgumentType_34), (u'ResultType', _Supported_MAP_Operations_val_ResultType_34), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0_5), (u'errorCode', (u'local', 47))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_1_4), (u'errorCode', (u'local', 48))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_3_4), (u'errorCode', (u'local', 35))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 6))]), dict([(u'ArgumentType', _Supported_MAP_Operations_val_ArgumentType_35), (u'ResultType', _Supported_MAP_Operations_val_ResultType_35), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_1_1), (u'errorCode', (u'local', 5))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_3_4), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_4_5), (u'errorCode', (u'local', 51))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_5_4), (u'errorCode', (u'local', 21))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 73))]), dict([(u'ArgumentType', _Supported_MAP_Operations_val_ArgumentType_36), (u'ResultType', _Supported_MAP_Operations_val_ResultType_36), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0_6), (u'errorCode', (u'local', 1))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_1_3), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_3_4), (u'errorCode', (u'local', 35))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 74))]), dict([(u'ArgumentType', _Supported_MAP_Operations_val_ArgumentType_37), (u'ResultType', _Supported_MAP_Operations_val_ResultType_37), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0_1), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_1), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_2_3), (u'errorCode', (u'local', 28))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_3_5), (u'errorCode', (u'local', 27))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_4_6), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_5_5), (u'errorCode', (u'local', 45))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 75))]), dict([(u'ArgumentType', _Supported_MAP_Operations_val_ArgumentType_38), (u'ResultType', _Supported_MAP_Operations_val_ResultType_38), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0_1), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_1_5), (u'errorCode', (u'local', 51))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_2_0), (u'errorCode', (u'local', 1))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_3_6), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_4_7), (u'errorCode', (u'local', 21))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 87))]), dict([(u'ArgumentType', _Supported_MAP_Operations_val_ArgumentType_39), (u'ResultType', _Supported_MAP_Operations_val_ResultType_39), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0_1), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_1_5), (u'errorCode', (u'local', 51))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_2_0), (u'errorCode', (u'local', 1))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_3_6), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_4_7), (u'errorCode', (u'local', 21))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 88))]), dict([(u'ArgumentType', _Supported_MAP_Operations_val_ArgumentType_40), (u'ResultType', _Supported_MAP_Operations_val_ResultType_40), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_1), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_3_7), (u'errorCode', (u'local', 10))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_4_8), (u'errorCode', (u'local', 11))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_5_0), (u'errorCode', (u'local', 13))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_6_2), (u'errorCode', (u'local', 16))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_7_1), (u'errorCode', (u'local', 17))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_8_2), (u'errorCode', (u'local', 20))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 10))]), dict([(u'ArgumentType', _Supported_MAP_Operations_val_ArgumentType_41), (u'ResultType', _Supported_MAP_Operations_val_ResultType_41), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_1), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_3_7), (u'errorCode', (u'local', 10))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_4_8), (u'errorCode', (u'local', 11))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_5_0), (u'errorCode', (u'local', 13))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_6_2), (u'errorCode', (u'local', 16))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_7_1), (u'errorCode', (u'local', 17))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 11))]), dict([(u'ArgumentType', _Supported_MAP_Operations_val_ArgumentType_42), (u'ResultType', _Supported_MAP_Operations_val_ResultType_42), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_1), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_3_7), (u'errorCode', (u'local', 10))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_4_8), (u'errorCode', (u'local', 11))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_5_0), (u'errorCode', (u'local', 13))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_6_2), (u'errorCode', (u'local', 16))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_7_1), (u'errorCode', (u'local', 17))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_8_0), (u'errorCode', (u'local', 19))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_9_2), (u'errorCode', (u'local', 20))]), dict([(u'errorCode', (u'local', 38))]), dict([(u'errorCode', (u'local', 43))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 12))]), dict([(u'ArgumentType', _Supported_MAP_Operations_val_ArgumentType_43), (u'ResultType', _Supported_MAP_Operations_val_ResultType_43), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_1), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_3_7), (u'errorCode', (u'local', 10))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_4_8), (u'errorCode', (u'local', 11))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_5_0), (u'errorCode', (u'local', 13))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_6_2), (u'errorCode', (u'local', 16))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_7_1), (u'errorCode', (u'local', 17))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_8_0), (u'errorCode', (u'local', 19))]), dict([(u'errorCode', (u'local', 38))]), dict([(u'errorCode', (u'local', 43))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 13))]), dict([(u'ArgumentType', _Supported_MAP_Operations_val_ArgumentType_44), (u'ResultType', _Supported_MAP_Operations_val_ResultType_44), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_1), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_3_7), (u'errorCode', (u'local', 10))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_4_8), (u'errorCode', (u'local', 11))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_5_0), (u'errorCode', (u'local', 13))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_6_2), (u'errorCode', (u'local', 16))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_7_2), (u'errorCode', (u'local', 18))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 14))]), dict([(u'ArgumentType', _Supported_MAP_Operations_val_ArgumentType_45), (u'ResultType', _Supported_MAP_Operations_val_ResultType_45), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_1), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))]), dict([(u'errorCode', (u'local', 71))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_4_9), (u'errorCode', (u'local', 13))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 59))]), dict([(u'ArgumentType', _Supported_MAP_Operations_val_ArgumentType_46), (u'ResultType', _Supported_MAP_Operations_val_ResultType_46), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_1), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_3_5), (u'errorCode', (u'local', 27))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_4_10), (u'errorCode', (u'local', 9))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_5_6), (u'errorCode', (u'local', 12))]), dict([(u'errorCode', (u'local', 71))]), dict([(u'errorCode', (u'local', 72))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 60))]), dict([(u'ArgumentType', _Supported_MAP_Operations_val_ArgumentType_47), (u'returnResult', True), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_1), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_3_5), (u'errorCode', (u'local', 27))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_4_10), (u'errorCode', (u'local', 9))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_5_6), (u'errorCode', (u'local', 12))]), dict([(u'errorCode', (u'local', 71))]), dict([(u'errorCode', (u'local', 72))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 61))]), dict([(u'ArgumentType', _Supported_MAP_Operations_val_ArgumentType_48), (u'ResultType', _Supported_MAP_Operations_val_ResultType_48), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_1), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_3_8), (u'errorCode', (u'local', 13))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_4__11), (u'errorCode', (u'local', 19))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_5_7), (u'errorCode', (u'local', 37))]), dict([(u'errorCode', (u'local', 38))]), dict([(u'errorCode', (u'local', 43))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 17))]), dict([(u'ArgumentType', _Supported_MAP_Operations_val_ArgumentType_49), (u'ResultType', _Supported_MAP_Operations_val_ResultType_49), (u'operationCode', (u'local', 18))]), dict([(u'ArgumentType', _Supported_MAP_Operations_val_ArgumentType_50), (u'ResultType', _Supported_MAP_Operations_val_ResultType_50), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0_0), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_1_0), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_2_0), (u'errorCode', (u'local', 1))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 72))]), dict([(u'ArgumentType', _Supported_MAP_Operations_val_ArgumentType_51), (u'ResultType', _Supported_MAP_Operations_val_ResultType_51), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_1), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_3_8), (u'errorCode', (u'local', 13))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_4___12), (u'errorCode', (u'local', 16))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_5_8), (u'errorCode', (u'local', 17))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_6_3), (u'errorCode', (u'local', 20))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_7_3), (u'errorCode', (u'local', 29))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_8_3), (u'errorCode', (u'local', 30))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_9_3), (u'errorCode', (u'local', 21))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 76))]), dict([(u'ArgumentType', _Supported_MAP_Operations_val_ArgumentType_52), (u'ResultType', _Supported_MAP_Operations_val_ResultType_52), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_1), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_3_8), (u'errorCode', (u'local', 13))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_4___12), (u'errorCode', (u'local', 16))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_5_8), (u'errorCode', (u'local', 17))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 77))]), dict([(u'ArgumentType', _Supported_MAP_Operations_val_ArgumentType_53), (u'ResultType', _Supported_MAP_Operations_val_ResultType_53), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_1), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_3_3), (u'errorCode', (u'local', 21))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_4_1), (u'errorCode', (u'local', 1))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_5), (u'errorCode', (u'local', 11))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_6), (u'errorCode', (u'local', 13))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_7_4), (u'errorCode', (u'local', 6))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 45))]), dict([(u'ArgumentType', _Supported_MAP_Operations_val_ArgumentType_54), (u'ResultType', _Supported_MAP_Operations_val_ResultType_54), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_1_0), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_2_4), (u'errorCode', (u'local', 21))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_3_9), (u'errorCode', (u'local', 32))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 46))]), dict([(u'ArgumentType', _Supported_MAP_Operations_val_ArgumentType_55), (u'ResultType', _Supported_MAP_Operations_val_ResultType_55), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_1), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_3_3), (u'errorCode', (u'local', 21))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_4_3), (u'errorCode', (u'local', 5))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_5_9), (u'errorCode', (u'local', 9))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_6_4), (u'errorCode', (u'local', 12))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_7_5), (u'errorCode', (u'local', 31))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_8_4), (u'errorCode', (u'local', 32))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_9_4), (u'errorCode', (u'local', 6))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 44))]), dict([(u'ArgumentType', _Supported_MAP_Operations_val_ArgumentType_56), (u'ResultType', _Supported_MAP_Operations_val_ResultType_56), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0_0), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_1_0), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_2_0), (u'errorCode', (u'local', 1))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_3_10), (u'errorCode', (u'local', 33))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 47))]), dict([(u'ArgumentType', _Supported_MAP_Operations_val_ArgumentType_57), (u'returnResult', True), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_1), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 64))]), dict([(u'ArgumentType', _Supported_MAP_Operations_val_ArgumentType_58), (u'operationCode', (u'local', 63))]), dict([(u'ArgumentType', _Supported_MAP_Operations_val_ArgumentType_59), (u'ResultType', _Supported_MAP_Operations_val_ResultType_59), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0_0), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_1_0), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_2_4), (u'errorCode', (u'local', 21))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_3), (u'errorCode', (u'local', 1))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 66))]), dict([(u'ArgumentType', _Supported_MAP_Operations_val_ArgumentType_60), (u'ResultType', _Supported_MAP_Operations_val_ResultType_60), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_1_6), (u'errorCode', (u'local', 50))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 39))]), dict([(u'ArgumentType', _Supported_MAP_Operations_val_ArgumentType_61), (u'operationCode', (u'local', 41))]), dict([(u'ArgumentType', _Supported_MAP_Operations_val_ArgumentType_62), (u'operationCode', (u'local', 42))]), dict([(u'ArgumentType', _Supported_MAP_Operations_val_ArgumentType_63), (u'ResultType', _Supported_MAP_Operations_val_ResultType_63), (u'operationCode', (u'local', 40))]), dict([(u'ArgumentType', _Supported_MAP_Operations_val_ArgumentType_64), (u'ResultType', _Supported_MAP_Operations_val_ResultType_64), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_1), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_3_3), (u'errorCode', (u'local', 21))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_4_3), (u'errorCode', (u'local', 5))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_5_9), (u'errorCode', (u'local', 9))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_6_4), (u'errorCode', (u'local', 12))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_7_6), (u'errorCode', (u'local', 27))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_8_5), (u'errorCode', (u'local', 52))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_9_5), (u'errorCode', (u'local', 53))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_10_1), (u'errorCode', (u'local', 54))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 83))]), dict([(u'ArgumentType', _Supported_MAP_Operations_val_ArgumentType_65), (u'ResultType', _Supported_MAP_Operations_val_ResultType_65), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_1), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_3_3), (u'errorCode', (u'local', 21))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_4_1), (u'errorCode', (u'local', 1))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_5_3), (u'errorCode', (u'local', 27))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_6_5), (u'errorCode', (u'local', 52))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 85))]), dict([(u'ArgumentType', _Supported_MAP_Operations_val_ArgumentType_66), (u'ResultType', _Supported_MAP_Operations_val_ResultType_66), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_1), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_2_5), (u'errorCode', (u'local', 51))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_3_1), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_4_1), (u'errorCode', (u'local', 1))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_5_10), (u'errorCode', (u'local', 52))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_6_6), (u'errorCode', (u'local', 58))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 86))]), dict([(u'ArgumentType', _Supported_MAP_Operations_val_ArgumentType_67), (u'ResultType', _Supported_MAP_Operations_val_ResultType_67), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0_1), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_1_3), (u'errorCode', (u'local', 34))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 20))]), dict([(u'ArgumentType', _Supported_MAP_Operations_val_ArgumentType_68), (u'ResultType', _Supported_MAP_Operations_val_ResultType_68), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_1_0), (u'errorCode', (u'local', 36))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 21))]), dict([(u'ArgumentType', _Supported_MAP_Operations_val_ArgumentType_69), (u'ResultType', _Supported_MAP_Operations_val_ResultType_69), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_1_7), (u'errorCode', (u'local', 22))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_3_4), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_4_8), (u'errorCode', (u'local', 11))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_5_2), (u'errorCode', (u'local', 1))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 84))])], rr=[], ev=None, er=[])
+    __sendRoutingInfo_Errors_val_ParameterType_1_7 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'OngoingGroupCallParam')))
+    Supported_MAP_Operations._val = ASN1Set(rv=[dict([(u'ArgumentType', _Supported_MAP_Operations_val_ArgumentType_0), (u'ResultType', _Supported_MAP_Operations_val_ResultType_0), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_1), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_3), (u'errorCode', (u'local', 1))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_4), (u'errorCode', (u'local', 8))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 2))]), dict([(u'ArgumentType', _Supported_MAP_Operations_val_ArgumentType_1), (u'ResultType', _Supported_MAP_Operations_val_ResultType_1), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_0_0), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_1_0), (u'errorCode', (u'local', 36))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 3))]), dict([(u'ArgumentType', _Supported_MAP_Operations_val_ArgumentType_2), (u'ResultType', _Supported_MAP_Operations_val_ResultType_2), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_0_0), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_1_0), (u'errorCode', (u'local', 36))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 36))]), dict([(u'ArgumentType', _Supported_MAP_Operations_val_ArgumentType_3), (u'ResultType', _Supported_MAP_Operations_val_ResultType_3), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_0_0), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_1_0), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_2_0), (u'errorCode', (u'local', 1))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 67))]), dict([(u'ArgumentType', _Supported_MAP_Operations_val_ArgumentType_4), (u'ResultType', _Supported_MAP_Operations_val_ResultType_4), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_0_0), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_1_1), (u'errorCode', (u'local', 5))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 55))]), dict([(u'ArgumentType', _Supported_MAP_Operations_val_ArgumentType_5), (u'ResultType', _Supported_MAP_Operations_val_ResultType_5), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_1_0), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_2_0), (u'errorCode', (u'local', 1))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_3_0), (u'errorCode', (u'local', 8))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 23))]), dict([(u'ArgumentType', _Supported_MAP_Operations_val_ArgumentType_6), (u'ResultType', _Supported_MAP_Operations_val_ResultType_6), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_1_0), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_2_0), (u'errorCode', (u'local', 1))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 53))]), dict([(u'ArgumentType', _Supported_MAP_Operations_val_ArgumentType_7), (u'ResultType', _Supported_MAP_Operations_val_ResultType_7), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_1), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))]), dict([(u'errorCode', (u'local', 25))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_4_0), (u'errorCode', (u'local', 42))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 68))]), dict([(u'ArgumentType', _Supported_MAP_Operations_val_ArgumentType_8), (u'ResultType', _Supported_MAP_Operations_val_ResultType_8), (u'operationCode', (u'local', 29))]), dict([(u'ArgumentType', _Supported_MAP_Operations_val_ArgumentType_9), (u'operationCode', (u'local', 33))]), dict([(u'ArgumentType', _Supported_MAP_Operations_val_ArgumentType_10), (u'operationCode', (u'local', 34))]), dict([(u'ArgumentType', _Supported_MAP_Operations_val_ArgumentType_11), (u'ResultType', _Supported_MAP_Operations_val_ResultType_11), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_0_1), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_1), (u'errorCode', (u'local', 35))]), dict([(u'errorCode', (u'local', 3))]), dict([(u'errorCode', (u'local', 26))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 69))]), dict([(u'ArgumentType', _Supported_MAP_Operations_val_ArgumentType_12), (u'ResultType', _Supported_MAP_Operations_val_ResultType_12), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_1), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_3), (u'errorCode', (u'local', 1))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 56))]), dict([(u'ArgumentType', _Supported_MAP_Operations_val_ArgumentType_13), (u'ResultType', _Supported_MAP_Operations_val_ResultType_13), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_1_0), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_2_0), (u'errorCode', (u'local', 1))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 15))]), dict([(u'ArgumentType', _Supported_MAP_Operations_val_ArgumentType_14), (u'ResultType', _Supported_MAP_Operations_val_ResultType_14), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_1), (u'errorCode', (u'local', 35))]), dict([(u'errorCode', (u'local', 7))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 43))]), dict([(u'ArgumentType', _Supported_MAP_Operations_val_ArgumentType_15), (u'ResultType', _Supported_MAP_Operations_val_ResultType_15), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_0_0), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_1_0), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_2_1), (u'errorCode', (u'local', 5))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 7))]), dict([(u'ArgumentType', _Supported_MAP_Operations_val_ArgumentType_16), (u'ResultType', _Supported_MAP_Operations_val_ResultType_16), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_0_0), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_1_0), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_2_1), (u'errorCode', (u'local', 5))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 8))]), dict([(u'ArgumentType', _Supported_MAP_Operations_val_ArgumentType_17), (u'operationCode', (u'local', 37))]), dict([(u'operationCode', (u'local', 38))]), dict([(u'ArgumentType', _Supported_MAP_Operations_val_ArgumentType_19), (u'ResultType', _Supported_MAP_Operations_val_ResultType_19), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_1), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_3), (u'errorCode', (u'local', 1))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 57))]), dict([(u'ArgumentType', _Supported_MAP_Operations_val_ArgumentType_20), (u'ResultType', _Supported_MAP_Operations_val_ResultType_20), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_0_0), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_1_0), (u'errorCode', (u'local', 36))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 70))]), dict([(u'ArgumentType', _Supported_MAP_Operations_val_ArgumentType_21), (u'ResultType', _Supported_MAP_Operations_val_ResultType_21), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_1_2), (u'errorCode', (u'local', 49))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_2_2), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_3_1), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_4_1), (u'errorCode', (u'local', 1))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 71))]), dict([(u'ArgumentType', _Supported_MAP_Operations_val_ArgumentType_22), (u'ResultType', _Supported_MAP_Operations_val_ResultType_22), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_0_2), (u'errorCode', (u'local', 60))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_1), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_3), (u'errorCode', (u'local', 1))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_4_2), (u'errorCode', (u'local', 10))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_5), (u'errorCode', (u'local', 11))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_6), (u'errorCode', (u'local', 13))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_7), (u'errorCode', (u'local', 16))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_8), (u'errorCode', (u'local', 18))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_9), (u'errorCode', (u'local', 62))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 62))]), dict([(u'ArgumentType', _Supported_MAP_Operations_val_ArgumentType_23), (u'ResultType', _Supported_MAP_Operations_val_ResultType_23), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_0_3), (u'errorCode', (u'local', 61))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_1), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_3), (u'errorCode', (u'local', 1))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_4_2), (u'errorCode', (u'local', 10))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_5), (u'errorCode', (u'local', 11))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_6), (u'errorCode', (u'local', 13))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_7), (u'errorCode', (u'local', 16))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_8_0), (u'errorCode', (u'local', 19))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_9_0), (u'errorCode', (u'local', 17))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_10), (u'errorCode', (u'local', 20))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_11), (u'errorCode', (u'local', 62))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 65))]), dict([(u'ArgumentType', _Supported_MAP_Operations_val_ArgumentType_24), (u'ResultType', _Supported_MAP_Operations_val_ResultType_24), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_0_4), (u'errorCode', (u'local', 27))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_1_3), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_2_2), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_3_1), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_4_1), (u'errorCode', (u'local', 1))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_5_0), (u'errorCode', (u'local', 13))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 24))]), dict([(u'ArgumentType', _Supported_MAP_Operations_val_ArgumentType_25), (u'ResultType', _Supported_MAP_Operations_val_ResultType_25), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_1), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_3), (u'errorCode', (u'local', 1))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 25))]), dict([(u'ArgumentType', _Supported_MAP_Operations_val_ArgumentType_26), (u'ResultType', _Supported_MAP_Operations_val_ResultType_26), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_1), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_3), (u'errorCode', (u'local', 1))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 26))]), dict([(u'ArgumentType', _Supported_MAP_Operations_val_ArgumentType_27), (u'ResultType', _Supported_MAP_Operations_val_ResultType_27), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_0_0), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_1_0), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_2_0), (u'errorCode', (u'local', 1))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_3_2), (u'errorCode', (u'local', 59))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 89))]), dict([(u'ArgumentType', _Supported_MAP_Operations_val_ArgumentType_28), (u'ResultType', _Supported_MAP_Operations_val_ResultType_28), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_0_0), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_1_0), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_2_0), (u'errorCode', (u'local', 1))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 5))]), dict([(u'ArgumentType', _Supported_MAP_Operations_val_ArgumentType_29), (u'ResultType', _Supported_MAP_Operations_val_ResultType_29), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_1), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_3_3), (u'errorCode', (u'local', 21))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_4_3), (u'errorCode', (u'local', 5))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_5_1), (u'errorCode', (u'local', 40))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 50))]), dict([(u'ArgumentType', _Supported_MAP_Operations_val_ArgumentType_30), (u'ResultType', _Supported_MAP_Operations_val_ResultType_30), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_1), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_3_3), (u'errorCode', (u'local', 21))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_4_3), (u'errorCode', (u'local', 5))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 51))]), dict([(u'ArgumentType', _Supported_MAP_Operations_val_ArgumentType_31), (u'ResultType', _Supported_MAP_Operations_val_ResultType_31), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_0_0), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_1_0), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_2_0), (u'errorCode', (u'local', 1))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 58))]), dict([(u'ArgumentType', _Supported_MAP_Operations_val_ArgumentType_32), (u'ResultType', _Supported_MAP_Operations_val_ResultType_32), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_1), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_3_3), (u'errorCode', (u'local', 21))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_4_4), (u'errorCode', (u'local', 48))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_5_2), (u'errorCode', (u'local', 1))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_6_0), (u'errorCode', (u'local', 44))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_7_0), (u'errorCode', (u'local', 10))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_8_1), (u'errorCode', (u'local', 11))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_9_1), (u'errorCode', (u'local', 27))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_10_0), (u'errorCode', (u'local', 45))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_11_0), (u'errorCode', (u'local', 46))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_12), (u'errorCode', (u'local', 13))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_13), (u'errorCode', (u'local', 15))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_14), (u'errorCode', (u'local', 14))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 22))]), dict([(u'ArgumentType', _Supported_MAP_Operations_val_ArgumentType_33), (u'ResultType', _Supported_MAP_Operations_val_ResultType_33), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_1), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_3_3), (u'errorCode', (u'local', 21))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_4_4), (u'errorCode', (u'local', 48))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_5_3), (u'errorCode', (u'local', 27))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_6_1), (u'errorCode', (u'local', 39))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 4))]), dict([(u'ArgumentType', _Supported_MAP_Operations_val_ArgumentType_34), (u'ResultType', _Supported_MAP_Operations_val_ResultType_34), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_0_5), (u'errorCode', (u'local', 47))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_1_4), (u'errorCode', (u'local', 48))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_3_4), (u'errorCode', (u'local', 35))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 6))]), dict([(u'ArgumentType', _Supported_MAP_Operations_val_ArgumentType_35), (u'ResultType', _Supported_MAP_Operations_val_ResultType_35), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_1_1), (u'errorCode', (u'local', 5))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_3_4), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_4_5), (u'errorCode', (u'local', 51))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_5_4), (u'errorCode', (u'local', 21))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 73))]), dict([(u'ArgumentType', _Supported_MAP_Operations_val_ArgumentType_36), (u'ResultType', _Supported_MAP_Operations_val_ResultType_36), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_0_6), (u'errorCode', (u'local', 1))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_1_3), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_3_4), (u'errorCode', (u'local', 35))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 74))]), dict([(u'ArgumentType', _Supported_MAP_Operations_val_ArgumentType_37), (u'ResultType', _Supported_MAP_Operations_val_ResultType_37), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_0_1), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_1), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_2_3), (u'errorCode', (u'local', 28))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_3_5), (u'errorCode', (u'local', 27))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_4_6), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_5_5), (u'errorCode', (u'local', 45))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 75))]), dict([(u'ArgumentType', _Supported_MAP_Operations_val_ArgumentType_38), (u'ResultType', _Supported_MAP_Operations_val_ResultType_38), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_0_1), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_1_5), (u'errorCode', (u'local', 51))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_2_0), (u'errorCode', (u'local', 1))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_3_6), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_4_7), (u'errorCode', (u'local', 21))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 87))]), dict([(u'ArgumentType', _Supported_MAP_Operations_val_ArgumentType_39), (u'ResultType', _Supported_MAP_Operations_val_ResultType_39), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_0_1), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_1_5), (u'errorCode', (u'local', 51))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_2_0), (u'errorCode', (u'local', 1))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_3_6), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_4_7), (u'errorCode', (u'local', 21))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 88))]), dict([(u'ArgumentType', _Supported_MAP_Operations_val_ArgumentType_40), (u'ResultType', _Supported_MAP_Operations_val_ResultType_40), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_1), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_3_7), (u'errorCode', (u'local', 10))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_4_8), (u'errorCode', (u'local', 11))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_5_0), (u'errorCode', (u'local', 13))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_6_2), (u'errorCode', (u'local', 16))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_7_1), (u'errorCode', (u'local', 17))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_8_2), (u'errorCode', (u'local', 20))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 10))]), dict([(u'ArgumentType', _Supported_MAP_Operations_val_ArgumentType_41), (u'ResultType', _Supported_MAP_Operations_val_ResultType_41), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_1), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_3_7), (u'errorCode', (u'local', 10))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_4_8), (u'errorCode', (u'local', 11))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_5_0), (u'errorCode', (u'local', 13))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_6_2), (u'errorCode', (u'local', 16))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_7_1), (u'errorCode', (u'local', 17))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 11))]), dict([(u'ArgumentType', _Supported_MAP_Operations_val_ArgumentType_42), (u'ResultType', _Supported_MAP_Operations_val_ResultType_42), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_1), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_3_7), (u'errorCode', (u'local', 10))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_4_8), (u'errorCode', (u'local', 11))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_5_0), (u'errorCode', (u'local', 13))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_6_2), (u'errorCode', (u'local', 16))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_7_1), (u'errorCode', (u'local', 17))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_8_0), (u'errorCode', (u'local', 19))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_9_2), (u'errorCode', (u'local', 20))]), dict([(u'errorCode', (u'local', 38))]), dict([(u'errorCode', (u'local', 43))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 12))]), dict([(u'ArgumentType', _Supported_MAP_Operations_val_ArgumentType_43), (u'ResultType', _Supported_MAP_Operations_val_ResultType_43), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_1), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_3_7), (u'errorCode', (u'local', 10))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_4_8), (u'errorCode', (u'local', 11))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_5_0), (u'errorCode', (u'local', 13))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_6_2), (u'errorCode', (u'local', 16))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_7_1), (u'errorCode', (u'local', 17))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_8_0), (u'errorCode', (u'local', 19))]), dict([(u'errorCode', (u'local', 38))]), dict([(u'errorCode', (u'local', 43))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 13))]), dict([(u'ArgumentType', _Supported_MAP_Operations_val_ArgumentType_44), (u'ResultType', _Supported_MAP_Operations_val_ResultType_44), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_1), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_3_7), (u'errorCode', (u'local', 10))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_4_8), (u'errorCode', (u'local', 11))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_5_0), (u'errorCode', (u'local', 13))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_6_2), (u'errorCode', (u'local', 16))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_7_2), (u'errorCode', (u'local', 18))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 14))]), dict([(u'ArgumentType', _Supported_MAP_Operations_val_ArgumentType_45), (u'ResultType', _Supported_MAP_Operations_val_ResultType_45), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_1), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))]), dict([(u'errorCode', (u'local', 71))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_4_9), (u'errorCode', (u'local', 13))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 59))]), dict([(u'ArgumentType', _Supported_MAP_Operations_val_ArgumentType_46), (u'ResultType', _Supported_MAP_Operations_val_ResultType_46), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_1), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_3_5), (u'errorCode', (u'local', 27))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_4_10), (u'errorCode', (u'local', 9))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_5_6), (u'errorCode', (u'local', 12))]), dict([(u'errorCode', (u'local', 71))]), dict([(u'errorCode', (u'local', 72))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 60))]), dict([(u'ArgumentType', _Supported_MAP_Operations_val_ArgumentType_47), (u'returnResult', True), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_1), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_3_5), (u'errorCode', (u'local', 27))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_4_10), (u'errorCode', (u'local', 9))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_5_6), (u'errorCode', (u'local', 12))]), dict([(u'errorCode', (u'local', 71))]), dict([(u'errorCode', (u'local', 72))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 61))]), dict([(u'ArgumentType', _Supported_MAP_Operations_val_ArgumentType_48), (u'ResultType', _Supported_MAP_Operations_val_ResultType_48), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_1), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_3_8), (u'errorCode', (u'local', 13))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_4__11), (u'errorCode', (u'local', 19))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_5_7), (u'errorCode', (u'local', 37))]), dict([(u'errorCode', (u'local', 38))]), dict([(u'errorCode', (u'local', 43))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 17))]), dict([(u'ArgumentType', _Supported_MAP_Operations_val_ArgumentType_49), (u'ResultType', _Supported_MAP_Operations_val_ResultType_49), (u'operationCode', (u'local', 18))]), dict([(u'ArgumentType', _Supported_MAP_Operations_val_ArgumentType_50), (u'ResultType', _Supported_MAP_Operations_val_ResultType_50), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_0_0), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_1_0), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_2_0), (u'errorCode', (u'local', 1))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 72))]), dict([(u'ArgumentType', _Supported_MAP_Operations_val_ArgumentType_51), (u'ResultType', _Supported_MAP_Operations_val_ResultType_51), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_1), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_3_8), (u'errorCode', (u'local', 13))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_4___12), (u'errorCode', (u'local', 16))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_5_8), (u'errorCode', (u'local', 17))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_6_3), (u'errorCode', (u'local', 20))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_7_3), (u'errorCode', (u'local', 29))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_8_3), (u'errorCode', (u'local', 30))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_9_3), (u'errorCode', (u'local', 21))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 76))]), dict([(u'ArgumentType', _Supported_MAP_Operations_val_ArgumentType_52), (u'ResultType', _Supported_MAP_Operations_val_ResultType_52), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_1), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_3_8), (u'errorCode', (u'local', 13))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_4___12), (u'errorCode', (u'local', 16))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_5_8), (u'errorCode', (u'local', 17))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 77))]), dict([(u'ArgumentType', _Supported_MAP_Operations_val_ArgumentType_53), (u'ResultType', _Supported_MAP_Operations_val_ResultType_53), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_1), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_3_3), (u'errorCode', (u'local', 21))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_4_1), (u'errorCode', (u'local', 1))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_5), (u'errorCode', (u'local', 11))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_6), (u'errorCode', (u'local', 13))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_7_4), (u'errorCode', (u'local', 6))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 45))]), dict([(u'ArgumentType', _Supported_MAP_Operations_val_ArgumentType_54), (u'ResultType', _Supported_MAP_Operations_val_ResultType_54), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_1_0), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_2_4), (u'errorCode', (u'local', 21))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_3_9), (u'errorCode', (u'local', 32))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 46))]), dict([(u'ArgumentType', _Supported_MAP_Operations_val_ArgumentType_55), (u'ResultType', _Supported_MAP_Operations_val_ResultType_55), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_1), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_3_3), (u'errorCode', (u'local', 21))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_4_3), (u'errorCode', (u'local', 5))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_5_9), (u'errorCode', (u'local', 9))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_6_4), (u'errorCode', (u'local', 12))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_7_5), (u'errorCode', (u'local', 31))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_8_4), (u'errorCode', (u'local', 32))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_9_4), (u'errorCode', (u'local', 6))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 44))]), dict([(u'ArgumentType', _Supported_MAP_Operations_val_ArgumentType_56), (u'ResultType', _Supported_MAP_Operations_val_ResultType_56), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_0_0), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_1_0), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_2_0), (u'errorCode', (u'local', 1))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_3_10), (u'errorCode', (u'local', 33))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 47))]), dict([(u'ArgumentType', _Supported_MAP_Operations_val_ArgumentType_57), (u'returnResult', True), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_1), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 64))]), dict([(u'ArgumentType', _Supported_MAP_Operations_val_ArgumentType_58), (u'operationCode', (u'local', 63))]), dict([(u'ArgumentType', _Supported_MAP_Operations_val_ArgumentType_59), (u'ResultType', _Supported_MAP_Operations_val_ResultType_59), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_0_0), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_1_0), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_2_4), (u'errorCode', (u'local', 21))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_3), (u'errorCode', (u'local', 1))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 66))]), dict([(u'ArgumentType', _Supported_MAP_Operations_val_ArgumentType_60), (u'ResultType', _Supported_MAP_Operations_val_ResultType_60), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_1_6), (u'errorCode', (u'local', 50))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 39))]), dict([(u'ArgumentType', _Supported_MAP_Operations_val_ArgumentType_61), (u'operationCode', (u'local', 41))]), dict([(u'ArgumentType', _Supported_MAP_Operations_val_ArgumentType_62), (u'operationCode', (u'local', 42))]), dict([(u'ArgumentType', _Supported_MAP_Operations_val_ArgumentType_63), (u'ResultType', _Supported_MAP_Operations_val_ResultType_63), (u'operationCode', (u'local', 40))]), dict([(u'ArgumentType', _Supported_MAP_Operations_val_ArgumentType_64), (u'ResultType', _Supported_MAP_Operations_val_ResultType_64), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_1), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_3_3), (u'errorCode', (u'local', 21))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_4_3), (u'errorCode', (u'local', 5))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_5_9), (u'errorCode', (u'local', 9))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_6_4), (u'errorCode', (u'local', 12))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_7_6), (u'errorCode', (u'local', 27))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_8_5), (u'errorCode', (u'local', 52))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_9_5), (u'errorCode', (u'local', 53))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_10_1), (u'errorCode', (u'local', 54))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 83))]), dict([(u'ArgumentType', _Supported_MAP_Operations_val_ArgumentType_65), (u'ResultType', _Supported_MAP_Operations_val_ResultType_65), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_1), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_3_3), (u'errorCode', (u'local', 21))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_4_1), (u'errorCode', (u'local', 1))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_5_3), (u'errorCode', (u'local', 27))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_6_5), (u'errorCode', (u'local', 52))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 85))]), dict([(u'ArgumentType', _Supported_MAP_Operations_val_ArgumentType_66), (u'ResultType', _Supported_MAP_Operations_val_ResultType_66), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_1), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_2_5), (u'errorCode', (u'local', 51))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_3_1), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_4_1), (u'errorCode', (u'local', 1))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_5_10), (u'errorCode', (u'local', 52))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_6_6), (u'errorCode', (u'local', 58))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 86))]), dict([(u'ArgumentType', _Supported_MAP_Operations_val_ArgumentType_67), (u'ResultType', _Supported_MAP_Operations_val_ResultType_67), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_0_1), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_1_3), (u'errorCode', (u'local', 34))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 20))]), dict([(u'ArgumentType', _Supported_MAP_Operations_val_ArgumentType_68), (u'ResultType', _Supported_MAP_Operations_val_ResultType_68), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_1_0), (u'errorCode', (u'local', 36))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 21))]), dict([(u'ArgumentType', _Supported_MAP_Operations_val_ArgumentType_69), (u'ResultType', _Supported_MAP_Operations_val_ResultType_69), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_1_7), (u'errorCode', (u'local', 22))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_3_4), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_4_8), (u'errorCode', (u'local', 11))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_5_2), (u'errorCode', (u'local', 1))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 84))])], rr=[], ev=None, er=[])
     
     _all_ = [
         Supported_MAP_Operations,
         _Supported_MAP_Operations_val_ArgumentType_0,
         _Supported_MAP_Operations_val_ResultType_0,
-        __OPERATION_Errors_val_ParameterType_0,
-        __OPERATION_Errors_val_ParameterType_1,
-        __OPERATION_Errors_val_ParameterType_2,
-        __OPERATION_Errors_val_ParameterType_3,
-        __OPERATION_Errors_val_ParameterType_4,
+        __sendRoutingInfo_Errors_val_ParameterType_0,
+        __sendRoutingInfo_Errors_val_ParameterType_1,
+        __sendRoutingInfo_Errors_val_ParameterType_2,
+        __sendRoutingInfo_Errors_val_ParameterType_3,
+        __sendRoutingInfo_Errors_val_ParameterType_4,
         _Supported_MAP_Operations_val_ArgumentType_1,
         _Supported_MAP_Operations_val_ResultType_1,
-        __OPERATION_Errors_val_ParameterType_0_0,
-        __OPERATION_Errors_val_ParameterType_1_0,
+        __sendRoutingInfo_Errors_val_ParameterType_0_0,
+        __sendRoutingInfo_Errors_val_ParameterType_1_0,
         _Supported_MAP_Operations_val_ArgumentType_2,
         _Supported_MAP_Operations_val_ResultType_2,
         _Supported_MAP_Operations_val_ArgumentType_3,
         _Supported_MAP_Operations_val_ResultType_3,
-        __OPERATION_Errors_val_ParameterType_2_0,
+        __sendRoutingInfo_Errors_val_ParameterType_2_0,
         _Supported_MAP_Operations_val_ArgumentType_4,
         _Supported_MAP_Operations_val_ResultType_4,
-        __OPERATION_Errors_val_ParameterType_1_1,
+        __sendRoutingInfo_Errors_val_ParameterType_1_1,
         _Supported_MAP_Operations_val_ArgumentType_5,
         _Supported_MAP_Operations_val_ResultType_5,
-        __OPERATION_Errors_val_ParameterType_3_0,
+        __sendRoutingInfo_Errors_val_ParameterType_3_0,
         _Supported_MAP_Operations_val_ArgumentType_6,
         _Supported_MAP_Operations_val_ResultType_6,
         _Supported_MAP_Operations_val_ArgumentType_7,
         _Supported_MAP_Operations_val_ResultType_7,
-        __OPERATION_Errors_val_ParameterType_4_0,
+        __sendRoutingInfo_Errors_val_ParameterType_4_0,
         _Supported_MAP_Operations_val_ArgumentType_8,
         _Supported_MAP_Operations_val_ResultType_8,
         _Supported_MAP_Operations_val_ArgumentType_9,
         _Supported_MAP_Operations_val_ArgumentType_10,
         _Supported_MAP_Operations_val_ArgumentType_11,
         _Supported_MAP_Operations_val_ResultType_11,
-        __OPERATION_Errors_val_ParameterType_0_1,
+        __sendRoutingInfo_Errors_val_ParameterType_0_1,
         _Supported_MAP_Operations_val_ArgumentType_12,
         _Supported_MAP_Operations_val_ResultType_12,
         _Supported_MAP_Operations_val_ArgumentType_13,
@@ -15467,7 +15140,7 @@ class MAP_Protocol:
         _Supported_MAP_Operations_val_ResultType_14,
         _Supported_MAP_Operations_val_ArgumentType_15,
         _Supported_MAP_Operations_val_ResultType_15,
-        __OPERATION_Errors_val_ParameterType_2_1,
+        __sendRoutingInfo_Errors_val_ParameterType_2_1,
         _Supported_MAP_Operations_val_ArgumentType_16,
         _Supported_MAP_Operations_val_ResultType_16,
         _Supported_MAP_Operations_val_ArgumentType_17,
@@ -15477,345 +15150,190 @@ class MAP_Protocol:
         _Supported_MAP_Operations_val_ResultType_20,
         _Supported_MAP_Operations_val_ArgumentType_21,
         _Supported_MAP_Operations_val_ResultType_21,
-        __OPERATION_Errors_val_ParameterType_1_2,
-        __OPERATION_Errors_val_ParameterType_2_2,
-        __OPERATION_Errors_val_ParameterType_3_1,
-        __OPERATION_Errors_val_ParameterType_4_1,
+        __sendRoutingInfo_Errors_val_ParameterType_1_2,
+        __sendRoutingInfo_Errors_val_ParameterType_2_2,
+        __sendRoutingInfo_Errors_val_ParameterType_3_1,
+        __sendRoutingInfo_Errors_val_ParameterType_4_1,
         _Supported_MAP_Operations_val_ArgumentType_22,
         _Supported_MAP_Operations_val_ResultType_22,
-        __OPERATION_Errors_val_ParameterType_0_2,
-        __OPERATION_Errors_val_ParameterType_4_2,
-        __OPERATION_Errors_val_ParameterType_5,
-        __OPERATION_Errors_val_ParameterType_6,
-        __OPERATION_Errors_val_ParameterType_7,
-        __OPERATION_Errors_val_ParameterType_8,
-        __OPERATION_Errors_val_ParameterType_9,
+        __sendRoutingInfo_Errors_val_ParameterType_0_2,
+        __sendRoutingInfo_Errors_val_ParameterType_4_2,
+        __sendRoutingInfo_Errors_val_ParameterType_5,
+        __sendRoutingInfo_Errors_val_ParameterType_6,
+        __sendRoutingInfo_Errors_val_ParameterType_7,
+        __sendRoutingInfo_Errors_val_ParameterType_8,
+        __sendRoutingInfo_Errors_val_ParameterType_9,
         _Supported_MAP_Operations_val_ArgumentType_23,
         _Supported_MAP_Operations_val_ResultType_23,
-        __OPERATION_Errors_val_ParameterType_0_3,
-        __OPERATION_Errors_val_ParameterType_8_0,
-        __OPERATION_Errors_val_ParameterType_9_0,
-        __OPERATION_Errors_val_ParameterType_10,
-        __OPERATION_Errors_val_ParameterType_11,
+        __sendRoutingInfo_Errors_val_ParameterType_0_3,
+        __sendRoutingInfo_Errors_val_ParameterType_8_0,
+        __sendRoutingInfo_Errors_val_ParameterType_9_0,
+        __sendRoutingInfo_Errors_val_ParameterType_10,
+        __sendRoutingInfo_Errors_val_ParameterType_11,
         _Supported_MAP_Operations_val_ArgumentType_24,
         _Supported_MAP_Operations_val_ResultType_24,
-        __OPERATION_Errors_val_ParameterType_0_4,
-        __OPERATION_Errors_val_ParameterType_1_3,
-        __OPERATION_Errors_val_ParameterType_5_0,
+        __sendRoutingInfo_Errors_val_ParameterType_0_4,
+        __sendRoutingInfo_Errors_val_ParameterType_1_3,
+        __sendRoutingInfo_Errors_val_ParameterType_5_0,
         _Supported_MAP_Operations_val_ArgumentType_25,
         _Supported_MAP_Operations_val_ResultType_25,
         _Supported_MAP_Operations_val_ArgumentType_26,
         _Supported_MAP_Operations_val_ResultType_26,
         _Supported_MAP_Operations_val_ArgumentType_27,
         _Supported_MAP_Operations_val_ResultType_27,
-        __OPERATION_Errors_val_ParameterType_3_2,
+        __sendRoutingInfo_Errors_val_ParameterType_3_2,
         _Supported_MAP_Operations_val_ArgumentType_28,
         _Supported_MAP_Operations_val_ResultType_28,
         _Supported_MAP_Operations_val_ArgumentType_29,
         _Supported_MAP_Operations_val_ResultType_29,
-        __OPERATION_Errors_val_ParameterType_3_3,
-        __OPERATION_Errors_val_ParameterType_4_3,
-        __OPERATION_Errors_val_ParameterType_5_1,
+        __sendRoutingInfo_Errors_val_ParameterType_3_3,
+        __sendRoutingInfo_Errors_val_ParameterType_4_3,
+        __sendRoutingInfo_Errors_val_ParameterType_5_1,
         _Supported_MAP_Operations_val_ArgumentType_30,
         _Supported_MAP_Operations_val_ResultType_30,
         _Supported_MAP_Operations_val_ArgumentType_31,
         _Supported_MAP_Operations_val_ResultType_31,
         _Supported_MAP_Operations_val_ArgumentType_32,
         _Supported_MAP_Operations_val_ResultType_32,
-        __OPERATION_Errors_val_ParameterType_4_4,
-        __OPERATION_Errors_val_ParameterType_5_2,
-        __OPERATION_Errors_val_ParameterType_6_0,
-        __OPERATION_Errors_val_ParameterType_7_0,
-        __OPERATION_Errors_val_ParameterType_8_1,
-        __OPERATION_Errors_val_ParameterType_9_1,
-        __OPERATION_Errors_val_ParameterType_10_0,
-        __OPERATION_Errors_val_ParameterType_11_0,
-        __OPERATION_Errors_val_ParameterType_12,
-        __OPERATION_Errors_val_ParameterType_13,
-        __OPERATION_Errors_val_ParameterType_14,
+        __sendRoutingInfo_Errors_val_ParameterType_4_4,
+        __sendRoutingInfo_Errors_val_ParameterType_5_2,
+        __sendRoutingInfo_Errors_val_ParameterType_6_0,
+        __sendRoutingInfo_Errors_val_ParameterType_7_0,
+        __sendRoutingInfo_Errors_val_ParameterType_8_1,
+        __sendRoutingInfo_Errors_val_ParameterType_9_1,
+        __sendRoutingInfo_Errors_val_ParameterType_10_0,
+        __sendRoutingInfo_Errors_val_ParameterType_11_0,
+        __sendRoutingInfo_Errors_val_ParameterType_12,
+        __sendRoutingInfo_Errors_val_ParameterType_13,
+        __sendRoutingInfo_Errors_val_ParameterType_14,
         _Supported_MAP_Operations_val_ArgumentType_33,
         _Supported_MAP_Operations_val_ResultType_33,
-        __OPERATION_Errors_val_ParameterType_5_3,
-        __OPERATION_Errors_val_ParameterType_6_1,
+        __sendRoutingInfo_Errors_val_ParameterType_5_3,
+        __sendRoutingInfo_Errors_val_ParameterType_6_1,
         _Supported_MAP_Operations_val_ArgumentType_34,
         _Supported_MAP_Operations_val_ResultType_34,
-        __OPERATION_Errors_val_ParameterType_0_5,
-        __OPERATION_Errors_val_ParameterType_1_4,
-        __OPERATION_Errors_val_ParameterType_3_4,
+        __sendRoutingInfo_Errors_val_ParameterType_0_5,
+        __sendRoutingInfo_Errors_val_ParameterType_1_4,
+        __sendRoutingInfo_Errors_val_ParameterType_3_4,
         _Supported_MAP_Operations_val_ArgumentType_35,
         _Supported_MAP_Operations_val_ResultType_35,
-        __OPERATION_Errors_val_ParameterType_4_5,
-        __OPERATION_Errors_val_ParameterType_5_4,
+        __sendRoutingInfo_Errors_val_ParameterType_4_5,
+        __sendRoutingInfo_Errors_val_ParameterType_5_4,
         _Supported_MAP_Operations_val_ArgumentType_36,
         _Supported_MAP_Operations_val_ResultType_36,
-        __OPERATION_Errors_val_ParameterType_0_6,
+        __sendRoutingInfo_Errors_val_ParameterType_0_6,
         _Supported_MAP_Operations_val_ArgumentType_37,
         _Supported_MAP_Operations_val_ResultType_37,
-        __OPERATION_Errors_val_ParameterType_2_3,
-        __OPERATION_Errors_val_ParameterType_3_5,
-        __OPERATION_Errors_val_ParameterType_4_6,
-        __OPERATION_Errors_val_ParameterType_5_5,
+        __sendRoutingInfo_Errors_val_ParameterType_2_3,
+        __sendRoutingInfo_Errors_val_ParameterType_3_5,
+        __sendRoutingInfo_Errors_val_ParameterType_4_6,
+        __sendRoutingInfo_Errors_val_ParameterType_5_5,
         _Supported_MAP_Operations_val_ArgumentType_38,
         _Supported_MAP_Operations_val_ResultType_38,
-        __OPERATION_Errors_val_ParameterType_1_5,
-        __OPERATION_Errors_val_ParameterType_3_6,
-        __OPERATION_Errors_val_ParameterType_4_7,
+        __sendRoutingInfo_Errors_val_ParameterType_1_5,
+        __sendRoutingInfo_Errors_val_ParameterType_3_6,
+        __sendRoutingInfo_Errors_val_ParameterType_4_7,
         _Supported_MAP_Operations_val_ArgumentType_39,
         _Supported_MAP_Operations_val_ResultType_39,
         _Supported_MAP_Operations_val_ArgumentType_40,
         _Supported_MAP_Operations_val_ResultType_40,
-        __OPERATION_Errors_val_ParameterType_3_7,
-        __OPERATION_Errors_val_ParameterType_4_8,
-        __OPERATION_Errors_val_ParameterType_6_2,
-        __OPERATION_Errors_val_ParameterType_7_1,
-        __OPERATION_Errors_val_ParameterType_8_2,
+        __sendRoutingInfo_Errors_val_ParameterType_3_7,
+        __sendRoutingInfo_Errors_val_ParameterType_4_8,
+        __sendRoutingInfo_Errors_val_ParameterType_6_2,
+        __sendRoutingInfo_Errors_val_ParameterType_7_1,
+        __sendRoutingInfo_Errors_val_ParameterType_8_2,
         _Supported_MAP_Operations_val_ArgumentType_41,
         _Supported_MAP_Operations_val_ResultType_41,
         _Supported_MAP_Operations_val_ArgumentType_42,
         _Supported_MAP_Operations_val_ResultType_42,
-        __OPERATION_Errors_val_ParameterType_9_2,
+        __sendRoutingInfo_Errors_val_ParameterType_9_2,
         _Supported_MAP_Operations_val_ArgumentType_43,
         _Supported_MAP_Operations_val_ResultType_43,
         _Supported_MAP_Operations_val_ArgumentType_44,
         _Supported_MAP_Operations_val_ResultType_44,
-        __OPERATION_Errors_val_ParameterType_7_2,
+        __sendRoutingInfo_Errors_val_ParameterType_7_2,
         _Supported_MAP_Operations_val_ArgumentType_45,
         _Supported_MAP_Operations_val_ResultType_45,
-        __OPERATION_Errors_val_ParameterType_4_9,
+        __sendRoutingInfo_Errors_val_ParameterType_4_9,
         _Supported_MAP_Operations_val_ArgumentType_46,
         _Supported_MAP_Operations_val_ResultType_46,
-        __OPERATION_Errors_val_ParameterType_4_10,
-        __OPERATION_Errors_val_ParameterType_5_6,
+        __sendRoutingInfo_Errors_val_ParameterType_4_10,
+        __sendRoutingInfo_Errors_val_ParameterType_5_6,
         _Supported_MAP_Operations_val_ArgumentType_47,
         _Supported_MAP_Operations_val_ArgumentType_48,
         _Supported_MAP_Operations_val_ResultType_48,
-        __OPERATION_Errors_val_ParameterType_3_8,
-        __OPERATION_Errors_val_ParameterType_4__11,
-        __OPERATION_Errors_val_ParameterType_5_7,
+        __sendRoutingInfo_Errors_val_ParameterType_3_8,
+        __sendRoutingInfo_Errors_val_ParameterType_4__11,
+        __sendRoutingInfo_Errors_val_ParameterType_5_7,
         _Supported_MAP_Operations_val_ArgumentType_49,
         _Supported_MAP_Operations_val_ResultType_49,
         _Supported_MAP_Operations_val_ArgumentType_50,
         _Supported_MAP_Operations_val_ResultType_50,
         _Supported_MAP_Operations_val_ArgumentType_51,
         _Supported_MAP_Operations_val_ResultType_51,
-        __OPERATION_Errors_val_ParameterType_4___12,
-        __OPERATION_Errors_val_ParameterType_5_8,
-        __OPERATION_Errors_val_ParameterType_6_3,
-        __OPERATION_Errors_val_ParameterType_7_3,
-        __OPERATION_Errors_val_ParameterType_8_3,
-        __OPERATION_Errors_val_ParameterType_9_3,
+        __sendRoutingInfo_Errors_val_ParameterType_4___12,
+        __sendRoutingInfo_Errors_val_ParameterType_5_8,
+        __sendRoutingInfo_Errors_val_ParameterType_6_3,
+        __sendRoutingInfo_Errors_val_ParameterType_7_3,
+        __sendRoutingInfo_Errors_val_ParameterType_8_3,
+        __sendRoutingInfo_Errors_val_ParameterType_9_3,
         _Supported_MAP_Operations_val_ArgumentType_52,
         _Supported_MAP_Operations_val_ResultType_52,
         _Supported_MAP_Operations_val_ArgumentType_53,
         _Supported_MAP_Operations_val_ResultType_53,
-        __OPERATION_Errors_val_ParameterType_7_4,
+        __sendRoutingInfo_Errors_val_ParameterType_7_4,
         _Supported_MAP_Operations_val_ArgumentType_54,
         _Supported_MAP_Operations_val_ResultType_54,
-        __OPERATION_Errors_val_ParameterType_2_4,
-        __OPERATION_Errors_val_ParameterType_3_9,
+        __sendRoutingInfo_Errors_val_ParameterType_2_4,
+        __sendRoutingInfo_Errors_val_ParameterType_3_9,
         _Supported_MAP_Operations_val_ArgumentType_55,
         _Supported_MAP_Operations_val_ResultType_55,
-        __OPERATION_Errors_val_ParameterType_5_9,
-        __OPERATION_Errors_val_ParameterType_6_4,
-        __OPERATION_Errors_val_ParameterType_7_5,
-        __OPERATION_Errors_val_ParameterType_8_4,
-        __OPERATION_Errors_val_ParameterType_9_4,
+        __sendRoutingInfo_Errors_val_ParameterType_5_9,
+        __sendRoutingInfo_Errors_val_ParameterType_6_4,
+        __sendRoutingInfo_Errors_val_ParameterType_7_5,
+        __sendRoutingInfo_Errors_val_ParameterType_8_4,
+        __sendRoutingInfo_Errors_val_ParameterType_9_4,
         _Supported_MAP_Operations_val_ArgumentType_56,
         _Supported_MAP_Operations_val_ResultType_56,
-        __OPERATION_Errors_val_ParameterType_3_10,
+        __sendRoutingInfo_Errors_val_ParameterType_3_10,
         _Supported_MAP_Operations_val_ArgumentType_57,
         _Supported_MAP_Operations_val_ArgumentType_58,
         _Supported_MAP_Operations_val_ArgumentType_59,
         _Supported_MAP_Operations_val_ResultType_59,
         _Supported_MAP_Operations_val_ArgumentType_60,
         _Supported_MAP_Operations_val_ResultType_60,
-        __OPERATION_Errors_val_ParameterType_1_6,
+        __sendRoutingInfo_Errors_val_ParameterType_1_6,
         _Supported_MAP_Operations_val_ArgumentType_61,
         _Supported_MAP_Operations_val_ArgumentType_62,
         _Supported_MAP_Operations_val_ArgumentType_63,
         _Supported_MAP_Operations_val_ResultType_63,
         _Supported_MAP_Operations_val_ArgumentType_64,
         _Supported_MAP_Operations_val_ResultType_64,
-        __OPERATION_Errors_val_ParameterType_7_6,
-        __OPERATION_Errors_val_ParameterType_8_5,
-        __OPERATION_Errors_val_ParameterType_9_5,
-        __OPERATION_Errors_val_ParameterType_10_1,
+        __sendRoutingInfo_Errors_val_ParameterType_7_6,
+        __sendRoutingInfo_Errors_val_ParameterType_8_5,
+        __sendRoutingInfo_Errors_val_ParameterType_9_5,
+        __sendRoutingInfo_Errors_val_ParameterType_10_1,
         _Supported_MAP_Operations_val_ArgumentType_65,
         _Supported_MAP_Operations_val_ResultType_65,
-        __OPERATION_Errors_val_ParameterType_6_5,
+        __sendRoutingInfo_Errors_val_ParameterType_6_5,
         _Supported_MAP_Operations_val_ArgumentType_66,
         _Supported_MAP_Operations_val_ResultType_66,
-        __OPERATION_Errors_val_ParameterType_2_5,
-        __OPERATION_Errors_val_ParameterType_5_10,
-        __OPERATION_Errors_val_ParameterType_6_6,
+        __sendRoutingInfo_Errors_val_ParameterType_2_5,
+        __sendRoutingInfo_Errors_val_ParameterType_5_10,
+        __sendRoutingInfo_Errors_val_ParameterType_6_6,
         _Supported_MAP_Operations_val_ArgumentType_67,
         _Supported_MAP_Operations_val_ResultType_67,
         _Supported_MAP_Operations_val_ArgumentType_68,
         _Supported_MAP_Operations_val_ResultType_68,
         _Supported_MAP_Operations_val_ArgumentType_69,
         _Supported_MAP_Operations_val_ResultType_69,
-        __OPERATION_Errors_val_ParameterType_1_7,
-    ]
-
-class MAP_ShortMessageServiceOperations:
-
-    _name_  = u'MAP-ShortMessageServiceOperations'
-    _oid_   = [0, 4, 0, 0, 1, 3, 9, 16]
-    
-    _obj_ = [
-        u'sendRoutingInfoForSM',
-        u'mo-ForwardSM',
-        u'mt-ForwardSM',
-        u'reportSM-DeliveryStatus',
-        u'alertServiceCentre',
-        u'informServiceCentre',
-        u'readyForSM',
-        u'mt-ForwardSM-VGCS',
-        ]
-    _type_ = [
-        ]
-    _set_ = [
-        ]
-    _val_ = [
-        u'sendRoutingInfoForSM',
-        u'mo-ForwardSM',
-        u'mt-ForwardSM',
-        u'reportSM-DeliveryStatus',
-        u'alertServiceCentre',
-        u'informServiceCentre',
-        u'readyForSM',
-        u'mt-ForwardSM-VGCS',
-        ]
-    _class_ = [
-        u'sendRoutingInfoForSM',
-        u'mo-ForwardSM',
-        u'mt-ForwardSM',
-        u'reportSM-DeliveryStatus',
-        u'alertServiceCentre',
-        u'informServiceCentre',
-        u'readyForSM',
-        u'mt-ForwardSM-VGCS',
-        ]
-    _param_ = [
-        ]
-    
-    #-----< sendRoutingInfoForSM >-----#
-    sendRoutingInfoForSM = CLASS(name=u'sendRoutingInfoForSM', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
-    _sendRoutingInfoForSM_val_ArgumentType = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-SM-DataTypes', 'RoutingInfoForSM-Arg')))
-    _sendRoutingInfoForSM_val_ResultType = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-SM-DataTypes', 'RoutingInfoForSM-Res')))
-    __OPERATION_Errors_val_ParameterType_0 = CHOICE(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'SystemFailureParam')))
-    __OPERATION_Errors_val_ParameterType_1 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'DataMissingParam')))
-    __OPERATION_Errors_val_ParameterType_2 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'UnexpectedDataParam')))
-    __OPERATION_Errors_val_ParameterType_3 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'FacilityNotSupParam')))
-    __OPERATION_Errors_val_ParameterType_4 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'UnknownSubscriberParam')))
-    __OPERATION_Errors_val_ParameterType_5 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'TeleservNotProvParam')))
-    __OPERATION_Errors_val_ParameterType_6 = CHOICE(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'CallBarredParam')))
-    __OPERATION_Errors_val_ParameterType_7 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'AbsentSubscriberSM-Param')))
-    sendRoutingInfoForSM._val = dict([(u'ArgumentType', _sendRoutingInfoForSM_val_ArgumentType), (u'ResultType', _sendRoutingInfoForSM_val_ResultType), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_1), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_3), (u'errorCode', (u'local', 21))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_4), (u'errorCode', (u'local', 1))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_5), (u'errorCode', (u'local', 11))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_6), (u'errorCode', (u'local', 13))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_7), (u'errorCode', (u'local', 6))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 45))])
-    
-    #-----< mo-ForwardSM >-----#
-    mo_ForwardSM = CLASS(name=u'mo-ForwardSM', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
-    _mo_ForwardSM_val_ArgumentType = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-SM-DataTypes', 'MO-ForwardSM-Arg')))
-    _mo_ForwardSM_val_ResultType = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-SM-DataTypes', 'MO-ForwardSM-Res')))
-    __OPERATION_Errors_val_ParameterType_1_0 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'UnexpectedDataParam')))
-    __OPERATION_Errors_val_ParameterType_2_0 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'FacilityNotSupParam')))
-    __OPERATION_Errors_val_ParameterType_3_0 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'SM-DeliveryFailureCause')))
-    mo_ForwardSM._val = dict([(u'ArgumentType', _mo_ForwardSM_val_ArgumentType), (u'ResultType', _mo_ForwardSM_val_ResultType), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_1_0), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_2_0), (u'errorCode', (u'local', 21))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_3_0), (u'errorCode', (u'local', 32))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 46))])
-    
-    #-----< mt-ForwardSM >-----#
-    mt_ForwardSM = CLASS(name=u'mt-ForwardSM', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
-    _mt_ForwardSM_val_ArgumentType = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-SM-DataTypes', 'MT-ForwardSM-Arg')))
-    _mt_ForwardSM_val_ResultType = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-SM-DataTypes', 'MT-ForwardSM-Res')))
-    __OPERATION_Errors_val_ParameterType_4_0 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'UnidentifiedSubParam')))
-    __OPERATION_Errors_val_ParameterType_5_0 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'IllegalSubscriberParam')))
-    __OPERATION_Errors_val_ParameterType_6_0 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'IllegalEquipmentParam')))
-    __OPERATION_Errors_val_ParameterType_7_0 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'SubBusyForMT-SMS-Param')))
-    __OPERATION_Errors_val_ParameterType_8 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'SM-DeliveryFailureCause')))
-    __OPERATION_Errors_val_ParameterType_9 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'AbsentSubscriberSM-Param')))
-    mt_ForwardSM._val = dict([(u'ArgumentType', _mt_ForwardSM_val_ArgumentType), (u'ResultType', _mt_ForwardSM_val_ResultType), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_1), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_3), (u'errorCode', (u'local', 21))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_4_0), (u'errorCode', (u'local', 5))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_5_0), (u'errorCode', (u'local', 9))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_6_0), (u'errorCode', (u'local', 12))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_7_0), (u'errorCode', (u'local', 31))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_8), (u'errorCode', (u'local', 32))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_9), (u'errorCode', (u'local', 6))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 44))])
-    
-    #-----< reportSM-DeliveryStatus >-----#
-    reportSM_DeliveryStatus = CLASS(name=u'reportSM-DeliveryStatus', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
-    _reportSM_DeliveryStatus_val_ArgumentType = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-SM-DataTypes', 'ReportSM-DeliveryStatusArg')))
-    _reportSM_DeliveryStatus_val_ResultType = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-SM-DataTypes', 'ReportSM-DeliveryStatusRes')))
-    __OPERATION_Errors_val_ParameterType_0_0 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'DataMissingParam')))
-    __OPERATION_Errors_val_ParameterType_2_1 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'UnknownSubscriberParam')))
-    __OPERATION_Errors_val_ParameterType_3_1 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'MessageWaitListFullParam')))
-    reportSM_DeliveryStatus._val = dict([(u'ArgumentType', _reportSM_DeliveryStatus_val_ArgumentType), (u'ResultType', _reportSM_DeliveryStatus_val_ResultType), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0_0), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_1_0), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_2_1), (u'errorCode', (u'local', 1))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_3_1), (u'errorCode', (u'local', 33))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 47))])
-    
-    #-----< alertServiceCentre >-----#
-    alertServiceCentre = CLASS(name=u'alertServiceCentre', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
-    _alertServiceCentre_val_ArgumentType = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-SM-DataTypes', 'AlertServiceCentreArg')))
-    alertServiceCentre._val = dict([(u'ArgumentType', _alertServiceCentre_val_ArgumentType), (u'returnResult', True), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_1), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 64))])
-    
-    #-----< informServiceCentre >-----#
-    informServiceCentre = CLASS(name=u'informServiceCentre', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
-    _informServiceCentre_val_ArgumentType = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-SM-DataTypes', 'InformServiceCentreArg')))
-    informServiceCentre._val = dict([(u'ArgumentType', _informServiceCentre_val_ArgumentType), (u'operationCode', (u'local', 63))])
-    
-    #-----< readyForSM >-----#
-    readyForSM = CLASS(name=u'readyForSM', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
-    _readyForSM_val_ArgumentType = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-SM-DataTypes', 'ReadyForSM-Arg')))
-    _readyForSM_val_ResultType = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-SM-DataTypes', 'ReadyForSM-Res')))
-    __OPERATION_Errors_val_ParameterType_3_2 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'UnknownSubscriberParam')))
-    readyForSM._val = dict([(u'ArgumentType', _readyForSM_val_ArgumentType), (u'ResultType', _readyForSM_val_ResultType), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0_0), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_1_0), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_2_0), (u'errorCode', (u'local', 21))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_3_2), (u'errorCode', (u'local', 1))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 66))])
-    
-    #-----< mt-ForwardSM-VGCS >-----#
-    mt_ForwardSM_VGCS = CLASS(name=u'mt-ForwardSM-VGCS', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
-    _mt_ForwardSM_VGCS_val_ArgumentType = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-SM-DataTypes', 'MT-ForwardSM-VGCS-Arg')))
-    _mt_ForwardSM_VGCS_val_ResultType = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-SM-DataTypes', 'MT-ForwardSM-VGCS-Res')))
-    mt_ForwardSM_VGCS._val = dict([(u'ArgumentType', _mt_ForwardSM_VGCS_val_ArgumentType), (u'ResultType', _mt_ForwardSM_VGCS_val_ResultType), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_1_0), (u'errorCode', (u'local', 36))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 21))])
-    
-    _all_ = [
-        sendRoutingInfoForSM,
-        _sendRoutingInfoForSM_val_ArgumentType,
-        _sendRoutingInfoForSM_val_ResultType,
-        __OPERATION_Errors_val_ParameterType_0,
-        __OPERATION_Errors_val_ParameterType_1,
-        __OPERATION_Errors_val_ParameterType_2,
-        __OPERATION_Errors_val_ParameterType_3,
-        __OPERATION_Errors_val_ParameterType_4,
-        __OPERATION_Errors_val_ParameterType_5,
-        __OPERATION_Errors_val_ParameterType_6,
-        __OPERATION_Errors_val_ParameterType_7,
-        mo_ForwardSM,
-        _mo_ForwardSM_val_ArgumentType,
-        _mo_ForwardSM_val_ResultType,
-        __OPERATION_Errors_val_ParameterType_1_0,
-        __OPERATION_Errors_val_ParameterType_2_0,
-        __OPERATION_Errors_val_ParameterType_3_0,
-        mt_ForwardSM,
-        _mt_ForwardSM_val_ArgumentType,
-        _mt_ForwardSM_val_ResultType,
-        __OPERATION_Errors_val_ParameterType_4_0,
-        __OPERATION_Errors_val_ParameterType_5_0,
-        __OPERATION_Errors_val_ParameterType_6_0,
-        __OPERATION_Errors_val_ParameterType_7_0,
-        __OPERATION_Errors_val_ParameterType_8,
-        __OPERATION_Errors_val_ParameterType_9,
-        reportSM_DeliveryStatus,
-        _reportSM_DeliveryStatus_val_ArgumentType,
-        _reportSM_DeliveryStatus_val_ResultType,
-        __OPERATION_Errors_val_ParameterType_0_0,
-        __OPERATION_Errors_val_ParameterType_2_1,
-        __OPERATION_Errors_val_ParameterType_3_1,
-        alertServiceCentre,
-        _alertServiceCentre_val_ArgumentType,
-        informServiceCentre,
-        _informServiceCentre_val_ArgumentType,
-        readyForSM,
-        _readyForSM_val_ArgumentType,
-        _readyForSM_val_ResultType,
-        __OPERATION_Errors_val_ParameterType_3_2,
-        mt_ForwardSM_VGCS,
-        _mt_ForwardSM_VGCS_val_ArgumentType,
-        _mt_ForwardSM_VGCS_val_ResultType,
+        __sendRoutingInfo_Errors_val_ParameterType_1_7,
     ]
 
 class MAP_SM_DataTypes:
 
     _name_  = u'MAP-SM-DataTypes'
-    _oid_   = [0, 4, 0, 0, 1, 3, 16, 16]
+    _oid_   = [0, 4, 0, 0, 1, 3, 16, 19]
     
     _obj_ = [
         u'RoutingInfoForSM-Arg',
@@ -15911,6 +15429,7 @@ class MAP_SM_DataTypes:
     _RoutingInfoForSM_Arg_t4_Trigger_Indicator = NULL(name=u't4-Trigger-Indicator', mode=MODE_TYPE, tag=(14, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     _RoutingInfoForSM_Arg_singleAttemptDelivery = NULL(name=u'singleAttemptDelivery', mode=MODE_TYPE, tag=(13, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     _RoutingInfoForSM_Arg_correlationID = SEQ(name=u'correlationID', mode=MODE_TYPE, tag=(15, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAP-SM-DataTypes', 'CorrelationID')), opt=True)
+    _RoutingInfoForSM_Arg_smsf_supportIndicator = NULL(name=u'smsf-supportIndicator', mode=MODE_TYPE, tag=(16, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     RoutingInfoForSM_Arg._cont = ASN1Dict([
         (u'msisdn', _RoutingInfoForSM_Arg_msisdn),
         (u'sm-RP-PRI', _RoutingInfoForSM_Arg_sm_RP_PRI),
@@ -15925,8 +15444,9 @@ class MAP_SM_DataTypes:
         (u't4-Trigger-Indicator', _RoutingInfoForSM_Arg_t4_Trigger_Indicator),
         (u'singleAttemptDelivery', _RoutingInfoForSM_Arg_singleAttemptDelivery),
         (u'correlationID', _RoutingInfoForSM_Arg_correlationID),
+        (u'smsf-supportIndicator', _RoutingInfoForSM_Arg_smsf_supportIndicator),
         ])
-    RoutingInfoForSM_Arg._ext = [u'gprsSupportIndicator', u'sm-RP-MTI', u'sm-RP-SMEA', u'sm-deliveryNotIntended', u'ip-sm-gwGuidanceIndicator', u'imsi', u't4-Trigger-Indicator', u'singleAttemptDelivery', u'correlationID']
+    RoutingInfoForSM_Arg._ext = [u'gprsSupportIndicator', u'sm-RP-MTI', u'sm-RP-SMEA', u'sm-deliveryNotIntended', u'ip-sm-gwGuidanceIndicator', u'imsi', u't4-Trigger-Indicator', u'singleAttemptDelivery', u'correlationID', u'smsf-supportIndicator']
     
     #-----< SM-DeliveryNotIntended >-----#
     SM_DeliveryNotIntended = ENUM(name=u'SM-DeliveryNotIntended', mode=MODE_TYPE)
@@ -15979,6 +15499,12 @@ class MAP_SM_DataTypes:
     _LocationInfoWithLMSI_thirdNumber = CHOICE(name=u'thirdNumber', mode=MODE_TYPE, tag=(9, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAP-SM-DataTypes', 'Additional-Number')), opt=True)
     _LocationInfoWithLMSI_thirdNetworkNodeDiameterAddress = SEQ(name=u'thirdNetworkNodeDiameterAddress', mode=MODE_TYPE, tag=(10, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAP-CommonDataTypes', 'NetworkNodeDiameterAddress')), opt=True)
     _LocationInfoWithLMSI_imsNodeIndicator = NULL(name=u'imsNodeIndicator', mode=MODE_TYPE, tag=(11, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _LocationInfoWithLMSI_smsf_3gpp_Number = OCT_STR(name=u'smsf-3gpp-Number', mode=MODE_TYPE, tag=(12, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAP-CommonDataTypes', 'ISDN-AddressString')), opt=True)
+    _LocationInfoWithLMSI_smsf_3gpp_DiameterAddress = SEQ(name=u'smsf-3gpp-DiameterAddress', mode=MODE_TYPE, tag=(13, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAP-CommonDataTypes', 'NetworkNodeDiameterAddress')), opt=True)
+    _LocationInfoWithLMSI_smsf_non_3gpp_Number = OCT_STR(name=u'smsf-non-3gpp-Number', mode=MODE_TYPE, tag=(14, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAP-CommonDataTypes', 'ISDN-AddressString')), opt=True)
+    _LocationInfoWithLMSI_smsf_non_3gpp_DiameterAddress = SEQ(name=u'smsf-non-3gpp-DiameterAddress', mode=MODE_TYPE, tag=(15, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAP-CommonDataTypes', 'NetworkNodeDiameterAddress')), opt=True)
+    _LocationInfoWithLMSI_smsf_3gpp_address_indicator = NULL(name=u'smsf-3gpp-address-indicator', mode=MODE_TYPE, tag=(16, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _LocationInfoWithLMSI_smsf_non_3gpp_address_indicator = NULL(name=u'smsf-non-3gpp-address-indicator', mode=MODE_TYPE, tag=(17, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     LocationInfoWithLMSI._cont = ASN1Dict([
         (u'networkNode-Number', _LocationInfoWithLMSI_networkNode_Number),
         (u'lmsi', _LocationInfoWithLMSI_lmsi),
@@ -15990,8 +15516,14 @@ class MAP_SM_DataTypes:
         (u'thirdNumber', _LocationInfoWithLMSI_thirdNumber),
         (u'thirdNetworkNodeDiameterAddress', _LocationInfoWithLMSI_thirdNetworkNodeDiameterAddress),
         (u'imsNodeIndicator', _LocationInfoWithLMSI_imsNodeIndicator),
+        (u'smsf-3gpp-Number', _LocationInfoWithLMSI_smsf_3gpp_Number),
+        (u'smsf-3gpp-DiameterAddress', _LocationInfoWithLMSI_smsf_3gpp_DiameterAddress),
+        (u'smsf-non-3gpp-Number', _LocationInfoWithLMSI_smsf_non_3gpp_Number),
+        (u'smsf-non-3gpp-DiameterAddress', _LocationInfoWithLMSI_smsf_non_3gpp_DiameterAddress),
+        (u'smsf-3gpp-address-indicator', _LocationInfoWithLMSI_smsf_3gpp_address_indicator),
+        (u'smsf-non-3gpp-address-indicator', _LocationInfoWithLMSI_smsf_non_3gpp_address_indicator),
         ])
-    LocationInfoWithLMSI._ext = [u'gprsNodeIndicator', u'additional-Number', u'networkNodeDiameterAddress', u'additionalNetworkNodeDiameterAddress', u'thirdNumber', u'thirdNetworkNodeDiameterAddress', u'imsNodeIndicator']
+    LocationInfoWithLMSI._ext = [u'gprsNodeIndicator', u'additional-Number', u'networkNodeDiameterAddress', u'additionalNetworkNodeDiameterAddress', u'thirdNumber', u'thirdNetworkNodeDiameterAddress', u'imsNodeIndicator', u'smsf-3gpp-Number', u'smsf-3gpp-DiameterAddress', u'smsf-non-3gpp-Number', u'smsf-non-3gpp-DiameterAddress', u'smsf-3gpp-address-indicator', u'smsf-non-3gpp-address-indicator']
     
     #-----< Additional-Number >-----#
     Additional_Number = CHOICE(name=u'Additional-Number', mode=MODE_TYPE)
@@ -16135,6 +15667,12 @@ class MAP_SM_DataTypes:
     _ReportSM_DeliveryStatusArg_imsi = OCT_STR(name=u'imsi', mode=MODE_TYPE, tag=(9, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAP-CommonDataTypes', 'IMSI')), opt=True)
     _ReportSM_DeliveryStatusArg_singleAttemptDelivery = NULL(name=u'singleAttemptDelivery', mode=MODE_TYPE, tag=(10, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     _ReportSM_DeliveryStatusArg_correlationID = SEQ(name=u'correlationID', mode=MODE_TYPE, tag=(11, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAP-SM-DataTypes', 'CorrelationID')), opt=True)
+    _ReportSM_DeliveryStatusArg_smsf_3gpp_deliveryOutcomeIndicator = NULL(name=u'smsf-3gpp-deliveryOutcomeIndicator', mode=MODE_TYPE, tag=(12, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _ReportSM_DeliveryStatusArg_smsf_3gpp_deliveryOutcome = ENUM(name=u'smsf-3gpp-deliveryOutcome', mode=MODE_TYPE, tag=(13, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAP-SM-DataTypes', 'SM-DeliveryOutcome')), opt=True)
+    _ReportSM_DeliveryStatusArg_smsf_3gpp_absentSubscriberDiagSM = INT(name=u'smsf-3gpp-absentSubscriberDiagSM', mode=MODE_TYPE, tag=(14, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAP-ER-DataTypes', 'AbsentSubscriberDiagnosticSM')), opt=True)
+    _ReportSM_DeliveryStatusArg_smsf_non_3gpp_deliveryOutcomeIndicator = NULL(name=u'smsf-non-3gpp-deliveryOutcomeIndicator', mode=MODE_TYPE, tag=(15, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _ReportSM_DeliveryStatusArg_smsf_non_3gpp_deliveryOutcome = ENUM(name=u'smsf-non-3gpp-deliveryOutcome', mode=MODE_TYPE, tag=(16, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAP-SM-DataTypes', 'SM-DeliveryOutcome')), opt=True)
+    _ReportSM_DeliveryStatusArg_smsf_non_3gpp_absentSubscriberDiagSM = INT(name=u'smsf-non-3gpp-absentSubscriberDiagSM', mode=MODE_TYPE, tag=(17, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAP-ER-DataTypes', 'AbsentSubscriberDiagnosticSM')), opt=True)
     ReportSM_DeliveryStatusArg._cont = ASN1Dict([
         (u'msisdn', _ReportSM_DeliveryStatusArg_msisdn),
         (u'serviceCentreAddress', _ReportSM_DeliveryStatusArg_serviceCentreAddress),
@@ -16151,8 +15689,14 @@ class MAP_SM_DataTypes:
         (u'imsi', _ReportSM_DeliveryStatusArg_imsi),
         (u'singleAttemptDelivery', _ReportSM_DeliveryStatusArg_singleAttemptDelivery),
         (u'correlationID', _ReportSM_DeliveryStatusArg_correlationID),
+        (u'smsf-3gpp-deliveryOutcomeIndicator', _ReportSM_DeliveryStatusArg_smsf_3gpp_deliveryOutcomeIndicator),
+        (u'smsf-3gpp-deliveryOutcome', _ReportSM_DeliveryStatusArg_smsf_3gpp_deliveryOutcome),
+        (u'smsf-3gpp-absentSubscriberDiagSM', _ReportSM_DeliveryStatusArg_smsf_3gpp_absentSubscriberDiagSM),
+        (u'smsf-non-3gpp-deliveryOutcomeIndicator', _ReportSM_DeliveryStatusArg_smsf_non_3gpp_deliveryOutcomeIndicator),
+        (u'smsf-non-3gpp-deliveryOutcome', _ReportSM_DeliveryStatusArg_smsf_non_3gpp_deliveryOutcome),
+        (u'smsf-non-3gpp-absentSubscriberDiagSM', _ReportSM_DeliveryStatusArg_smsf_non_3gpp_absentSubscriberDiagSM),
         ])
-    ReportSM_DeliveryStatusArg._ext = [u'gprsSupportIndicator', u'deliveryOutcomeIndicator', u'additionalSM-DeliveryOutcome', u'additionalAbsentSubscriberDiagnosticSM', u'ip-sm-gw-Indicator', u'ip-sm-gw-sm-deliveryOutcome', u'ip-sm-gw-absentSubscriberDiagnosticSM', u'imsi', u'singleAttemptDelivery', u'correlationID']
+    ReportSM_DeliveryStatusArg._ext = [u'gprsSupportIndicator', u'deliveryOutcomeIndicator', u'additionalSM-DeliveryOutcome', u'additionalAbsentSubscriberDiagnosticSM', u'ip-sm-gw-Indicator', u'ip-sm-gw-sm-deliveryOutcome', u'ip-sm-gw-absentSubscriberDiagnosticSM', u'imsi', u'singleAttemptDelivery', u'correlationID', u'smsf-3gpp-deliveryOutcomeIndicator', u'smsf-3gpp-deliveryOutcome', u'smsf-3gpp-absentSubscriberDiagSM', u'smsf-non-3gpp-deliveryOutcomeIndicator', u'smsf-non-3gpp-deliveryOutcome', u'smsf-non-3gpp-absentSubscriberDiagSM']
     
     #-----< SM-DeliveryOutcome >-----#
     SM_DeliveryOutcome = ENUM(name=u'SM-DeliveryOutcome', mode=MODE_TYPE)
@@ -16182,6 +15726,7 @@ class MAP_SM_DataTypes:
     _AlertServiceCentreArg_newSGSNDiameterAddress = SEQ(name=u'newSGSNDiameterAddress', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAP-CommonDataTypes', 'NetworkNodeDiameterAddress')), opt=True)
     _AlertServiceCentreArg_newMMENumber = OCT_STR(name=u'newMMENumber', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAP-CommonDataTypes', 'ISDN-AddressString')), opt=True)
     _AlertServiceCentreArg_newMMEDiameterAddress = SEQ(name=u'newMMEDiameterAddress', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAP-CommonDataTypes', 'NetworkNodeDiameterAddress')), opt=True)
+    _AlertServiceCentreArg_newMSCNumber = OCT_STR(name=u'newMSCNumber', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAP-CommonDataTypes', 'ISDN-AddressString')), opt=True)
     AlertServiceCentreArg._cont = ASN1Dict([
         (u'msisdn', _AlertServiceCentreArg_msisdn),
         (u'serviceCentreAddress', _AlertServiceCentreArg_serviceCentreAddress),
@@ -16194,8 +15739,9 @@ class MAP_SM_DataTypes:
         (u'newSGSNDiameterAddress', _AlertServiceCentreArg_newSGSNDiameterAddress),
         (u'newMMENumber', _AlertServiceCentreArg_newMMENumber),
         (u'newMMEDiameterAddress', _AlertServiceCentreArg_newMMEDiameterAddress),
+        (u'newMSCNumber', _AlertServiceCentreArg_newMSCNumber),
         ])
-    AlertServiceCentreArg._ext = [u'imsi', u'correlationID', u'maximumUeAvailabilityTime', u'smsGmscAlertEvent', u'smsGmscDiameterAddress', u'newSGSNNumber', u'newSGSNDiameterAddress', u'newMMENumber', u'newMMEDiameterAddress']
+    AlertServiceCentreArg._ext = [u'imsi', u'correlationID', u'maximumUeAvailabilityTime', u'smsGmscAlertEvent', u'smsGmscDiameterAddress', u'newSGSNNumber', u'newSGSNDiameterAddress', u'newMMENumber', u'newMMEDiameterAddress', u'newMSCNumber']
     
     #-----< SmsGmsc-Alert-Event >-----#
     SmsGmsc_Alert_Event = ENUM(name=u'SmsGmsc-Alert-Event', mode=MODE_TYPE)
@@ -16209,18 +15755,22 @@ class MAP_SM_DataTypes:
     _InformServiceCentreArg_extensionContainer = SEQ(name=u'extensionContainer', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ExtensionDataTypes', 'ExtensionContainer')), opt=True)
     _InformServiceCentreArg_absentSubscriberDiagnosticSM = INT(name=u'absentSubscriberDiagnosticSM', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'AbsentSubscriberDiagnosticSM')), opt=True)
     _InformServiceCentreArg_additionalAbsentSubscriberDiagnosticSM = INT(name=u'additionalAbsentSubscriberDiagnosticSM', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAP-ER-DataTypes', 'AbsentSubscriberDiagnosticSM')), opt=True)
+    _InformServiceCentreArg_smsf3gppAbsentSubscriberDiagnosticSM = INT(name=u'smsf3gppAbsentSubscriberDiagnosticSM', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAP-ER-DataTypes', 'AbsentSubscriberDiagnosticSM')), opt=True)
+    _InformServiceCentreArg_smsfNon3gppAbsentSubscriberDiagnosticSM = INT(name=u'smsfNon3gppAbsentSubscriberDiagnosticSM', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAP-ER-DataTypes', 'AbsentSubscriberDiagnosticSM')), opt=True)
     InformServiceCentreArg._cont = ASN1Dict([
         (u'storedMSISDN', _InformServiceCentreArg_storedMSISDN),
         (u'mw-Status', _InformServiceCentreArg_mw_Status),
         (u'extensionContainer', _InformServiceCentreArg_extensionContainer),
         (u'absentSubscriberDiagnosticSM', _InformServiceCentreArg_absentSubscriberDiagnosticSM),
         (u'additionalAbsentSubscriberDiagnosticSM', _InformServiceCentreArg_additionalAbsentSubscriberDiagnosticSM),
+        (u'smsf3gppAbsentSubscriberDiagnosticSM', _InformServiceCentreArg_smsf3gppAbsentSubscriberDiagnosticSM),
+        (u'smsfNon3gppAbsentSubscriberDiagnosticSM', _InformServiceCentreArg_smsfNon3gppAbsentSubscriberDiagnosticSM),
         ])
-    InformServiceCentreArg._ext = [u'absentSubscriberDiagnosticSM', u'additionalAbsentSubscriberDiagnosticSM']
+    InformServiceCentreArg._ext = [u'absentSubscriberDiagnosticSM', u'additionalAbsentSubscriberDiagnosticSM', u'smsf3gppAbsentSubscriberDiagnosticSM', u'smsfNon3gppAbsentSubscriberDiagnosticSM']
     
     #-----< MW-Status >-----#
     MW_Status = BIT_STR(name=u'MW-Status', mode=MODE_TYPE)
-    MW_Status._cont = ASN1Dict([(u'sc-AddressNotIncluded', 0), (u'mnrf-Set', 1), (u'mcef-Set', 2), (u'mnrg-Set', 3)])
+    MW_Status._cont = ASN1Dict([(u'sc-AddressNotIncluded', 0), (u'mnrf-Set', 1), (u'mcef-Set', 2), (u'mnrg-Set', 3), (u'mnr5g-Set', 4), (u'mnr5gn3g-Set', 5)])
     MW_Status._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=6, ub=16)], ev=None, er=[])
     
     #-----< ReadyForSM-Arg >-----#
@@ -16318,6 +15868,7 @@ class MAP_SM_DataTypes:
         _RoutingInfoForSM_Arg_t4_Trigger_Indicator,
         _RoutingInfoForSM_Arg_singleAttemptDelivery,
         _RoutingInfoForSM_Arg_correlationID,
+        _RoutingInfoForSM_Arg_smsf_supportIndicator,
         RoutingInfoForSM_Arg,
         SM_DeliveryNotIntended,
         SM_RP_MTI,
@@ -16341,6 +15892,12 @@ class MAP_SM_DataTypes:
         _LocationInfoWithLMSI_thirdNumber,
         _LocationInfoWithLMSI_thirdNetworkNodeDiameterAddress,
         _LocationInfoWithLMSI_imsNodeIndicator,
+        _LocationInfoWithLMSI_smsf_3gpp_Number,
+        _LocationInfoWithLMSI_smsf_3gpp_DiameterAddress,
+        _LocationInfoWithLMSI_smsf_non_3gpp_Number,
+        _LocationInfoWithLMSI_smsf_non_3gpp_DiameterAddress,
+        _LocationInfoWithLMSI_smsf_3gpp_address_indicator,
+        _LocationInfoWithLMSI_smsf_non_3gpp_address_indicator,
         LocationInfoWithLMSI,
         _Additional_Number_msc_Number,
         _Additional_Number_sgsn_Number,
@@ -16402,6 +15959,12 @@ class MAP_SM_DataTypes:
         _ReportSM_DeliveryStatusArg_imsi,
         _ReportSM_DeliveryStatusArg_singleAttemptDelivery,
         _ReportSM_DeliveryStatusArg_correlationID,
+        _ReportSM_DeliveryStatusArg_smsf_3gpp_deliveryOutcomeIndicator,
+        _ReportSM_DeliveryStatusArg_smsf_3gpp_deliveryOutcome,
+        _ReportSM_DeliveryStatusArg_smsf_3gpp_absentSubscriberDiagSM,
+        _ReportSM_DeliveryStatusArg_smsf_non_3gpp_deliveryOutcomeIndicator,
+        _ReportSM_DeliveryStatusArg_smsf_non_3gpp_deliveryOutcome,
+        _ReportSM_DeliveryStatusArg_smsf_non_3gpp_absentSubscriberDiagSM,
         ReportSM_DeliveryStatusArg,
         SM_DeliveryOutcome,
         _ReportSM_DeliveryStatusRes_storedMSISDN,
@@ -16418,6 +15981,7 @@ class MAP_SM_DataTypes:
         _AlertServiceCentreArg_newSGSNDiameterAddress,
         _AlertServiceCentreArg_newMMENumber,
         _AlertServiceCentreArg_newMMEDiameterAddress,
+        _AlertServiceCentreArg_newMSCNumber,
         AlertServiceCentreArg,
         SmsGmsc_Alert_Event,
         _InformServiceCentreArg_storedMSISDN,
@@ -16425,6 +15989,8 @@ class MAP_SM_DataTypes:
         _InformServiceCentreArg_extensionContainer,
         _InformServiceCentreArg_absentSubscriberDiagnosticSM,
         _InformServiceCentreArg_additionalAbsentSubscriberDiagnosticSM,
+        _InformServiceCentreArg_smsf3gppAbsentSubscriberDiagnosticSM,
+        _InformServiceCentreArg_smsfNon3gppAbsentSubscriberDiagnosticSM,
         InformServiceCentreArg,
         MW_Status,
         _ReadyForSM_Arg_imsi,
@@ -16459,7 +16025,7 @@ class MAP_SM_DataTypes:
 class MAP_SS_Code:
 
     _name_  = u'MAP-SS-Code'
-    _oid_   = [0, 4, 0, 0, 1, 3, 15, 16]
+    _oid_   = [0, 4, 0, 0, 1, 3, 15, 19]
     
     _obj_ = [
         u'SS-Code',
@@ -16991,7 +16557,7 @@ class MAP_SS_Code:
 class MAP_SS_DataTypes:
 
     _name_  = u'MAP-SS-DataTypes'
-    _oid_   = [0, 4, 0, 0, 1, 3, 14, 16]
+    _oid_   = [0, 4, 0, 0, 1, 3, 14, 19]
     
     _obj_ = [
         u'RegisterSS-Arg',
@@ -17624,10 +17190,165 @@ class MAP_SS_DataTypes:
         EraseCC_EntryRes,
     ]
 
+class MAP_ShortMessageServiceOperations:
+
+    _name_  = u'MAP-ShortMessageServiceOperations'
+    _oid_   = [0, 4, 0, 0, 1, 3, 9, 19]
+    
+    _obj_ = [
+        u'sendRoutingInfoForSM',
+        u'mo-ForwardSM',
+        u'mt-ForwardSM',
+        u'reportSM-DeliveryStatus',
+        u'alertServiceCentre',
+        u'informServiceCentre',
+        u'readyForSM',
+        u'mt-ForwardSM-VGCS',
+        ]
+    _type_ = [
+        ]
+    _set_ = [
+        ]
+    _val_ = [
+        u'sendRoutingInfoForSM',
+        u'mo-ForwardSM',
+        u'mt-ForwardSM',
+        u'reportSM-DeliveryStatus',
+        u'alertServiceCentre',
+        u'informServiceCentre',
+        u'readyForSM',
+        u'mt-ForwardSM-VGCS',
+        ]
+    _class_ = [
+        u'sendRoutingInfoForSM',
+        u'mo-ForwardSM',
+        u'mt-ForwardSM',
+        u'reportSM-DeliveryStatus',
+        u'alertServiceCentre',
+        u'informServiceCentre',
+        u'readyForSM',
+        u'mt-ForwardSM-VGCS',
+        ]
+    _param_ = [
+        ]
+    
+    #-----< sendRoutingInfoForSM >-----#
+    sendRoutingInfoForSM = CLASS(name=u'sendRoutingInfoForSM', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
+    _sendRoutingInfoForSM_val_ArgumentType = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-SM-DataTypes', 'RoutingInfoForSM-Arg')))
+    _sendRoutingInfoForSM_val_ResultType = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-SM-DataTypes', 'RoutingInfoForSM-Res')))
+    __sendRoutingInfo_Errors_val_ParameterType_0 = CHOICE(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'SystemFailureParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_1 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'DataMissingParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_2 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'UnexpectedDataParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_3 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'FacilityNotSupParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_4 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'UnknownSubscriberParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_5 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'TeleservNotProvParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_6 = CHOICE(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'CallBarredParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_7 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'AbsentSubscriberSM-Param')))
+    sendRoutingInfoForSM._val = dict([(u'ArgumentType', _sendRoutingInfoForSM_val_ArgumentType), (u'ResultType', _sendRoutingInfoForSM_val_ResultType), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_1), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_3), (u'errorCode', (u'local', 21))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_4), (u'errorCode', (u'local', 1))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_5), (u'errorCode', (u'local', 11))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_6), (u'errorCode', (u'local', 13))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_7), (u'errorCode', (u'local', 6))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 45))])
+    
+    #-----< mo-ForwardSM >-----#
+    mo_ForwardSM = CLASS(name=u'mo-ForwardSM', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
+    _mo_ForwardSM_val_ArgumentType = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-SM-DataTypes', 'MO-ForwardSM-Arg')))
+    _mo_ForwardSM_val_ResultType = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-SM-DataTypes', 'MO-ForwardSM-Res')))
+    __sendRoutingInfo_Errors_val_ParameterType_1_0 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'UnexpectedDataParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_2_0 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'FacilityNotSupParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_3_0 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'SM-DeliveryFailureCause')))
+    mo_ForwardSM._val = dict([(u'ArgumentType', _mo_ForwardSM_val_ArgumentType), (u'ResultType', _mo_ForwardSM_val_ResultType), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_1_0), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_2_0), (u'errorCode', (u'local', 21))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_3_0), (u'errorCode', (u'local', 32))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 46))])
+    
+    #-----< mt-ForwardSM >-----#
+    mt_ForwardSM = CLASS(name=u'mt-ForwardSM', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
+    _mt_ForwardSM_val_ArgumentType = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-SM-DataTypes', 'MT-ForwardSM-Arg')))
+    _mt_ForwardSM_val_ResultType = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-SM-DataTypes', 'MT-ForwardSM-Res')))
+    __sendRoutingInfo_Errors_val_ParameterType_4_0 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'UnidentifiedSubParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_5_0 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'IllegalSubscriberParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_6_0 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'IllegalEquipmentParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_7_0 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'SubBusyForMT-SMS-Param')))
+    __sendRoutingInfo_Errors_val_ParameterType_8 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'SM-DeliveryFailureCause')))
+    __sendRoutingInfo_Errors_val_ParameterType_9 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'AbsentSubscriberSM-Param')))
+    mt_ForwardSM._val = dict([(u'ArgumentType', _mt_ForwardSM_val_ArgumentType), (u'ResultType', _mt_ForwardSM_val_ResultType), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_1), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_3), (u'errorCode', (u'local', 21))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_4_0), (u'errorCode', (u'local', 5))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_5_0), (u'errorCode', (u'local', 9))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_6_0), (u'errorCode', (u'local', 12))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_7_0), (u'errorCode', (u'local', 31))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_8), (u'errorCode', (u'local', 32))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_9), (u'errorCode', (u'local', 6))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 44))])
+    
+    #-----< reportSM-DeliveryStatus >-----#
+    reportSM_DeliveryStatus = CLASS(name=u'reportSM-DeliveryStatus', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
+    _reportSM_DeliveryStatus_val_ArgumentType = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-SM-DataTypes', 'ReportSM-DeliveryStatusArg')))
+    _reportSM_DeliveryStatus_val_ResultType = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-SM-DataTypes', 'ReportSM-DeliveryStatusRes')))
+    __sendRoutingInfo_Errors_val_ParameterType_0_0 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'DataMissingParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_2_1 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'UnknownSubscriberParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_3_1 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'MessageWaitListFullParam')))
+    reportSM_DeliveryStatus._val = dict([(u'ArgumentType', _reportSM_DeliveryStatus_val_ArgumentType), (u'ResultType', _reportSM_DeliveryStatus_val_ResultType), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_0_0), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_1_0), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_2_1), (u'errorCode', (u'local', 1))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_3_1), (u'errorCode', (u'local', 33))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 47))])
+    
+    #-----< alertServiceCentre >-----#
+    alertServiceCentre = CLASS(name=u'alertServiceCentre', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
+    _alertServiceCentre_val_ArgumentType = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-SM-DataTypes', 'AlertServiceCentreArg')))
+    alertServiceCentre._val = dict([(u'ArgumentType', _alertServiceCentre_val_ArgumentType), (u'returnResult', True), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_1), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 64))])
+    
+    #-----< informServiceCentre >-----#
+    informServiceCentre = CLASS(name=u'informServiceCentre', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
+    _informServiceCentre_val_ArgumentType = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-SM-DataTypes', 'InformServiceCentreArg')))
+    informServiceCentre._val = dict([(u'ArgumentType', _informServiceCentre_val_ArgumentType), (u'operationCode', (u'local', 63))])
+    
+    #-----< readyForSM >-----#
+    readyForSM = CLASS(name=u'readyForSM', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
+    _readyForSM_val_ArgumentType = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-SM-DataTypes', 'ReadyForSM-Arg')))
+    _readyForSM_val_ResultType = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-SM-DataTypes', 'ReadyForSM-Res')))
+    __sendRoutingInfo_Errors_val_ParameterType_3_2 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'UnknownSubscriberParam')))
+    readyForSM._val = dict([(u'ArgumentType', _readyForSM_val_ArgumentType), (u'ResultType', _readyForSM_val_ResultType), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_0_0), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_1_0), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_2_0), (u'errorCode', (u'local', 21))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_3_2), (u'errorCode', (u'local', 1))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 66))])
+    
+    #-----< mt-ForwardSM-VGCS >-----#
+    mt_ForwardSM_VGCS = CLASS(name=u'mt-ForwardSM-VGCS', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
+    _mt_ForwardSM_VGCS_val_ArgumentType = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-SM-DataTypes', 'MT-ForwardSM-VGCS-Arg')))
+    _mt_ForwardSM_VGCS_val_ResultType = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-SM-DataTypes', 'MT-ForwardSM-VGCS-Res')))
+    mt_ForwardSM_VGCS._val = dict([(u'ArgumentType', _mt_ForwardSM_VGCS_val_ArgumentType), (u'ResultType', _mt_ForwardSM_VGCS_val_ResultType), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_1_0), (u'errorCode', (u'local', 36))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 21))])
+    
+    _all_ = [
+        sendRoutingInfoForSM,
+        _sendRoutingInfoForSM_val_ArgumentType,
+        _sendRoutingInfoForSM_val_ResultType,
+        __sendRoutingInfo_Errors_val_ParameterType_0,
+        __sendRoutingInfo_Errors_val_ParameterType_1,
+        __sendRoutingInfo_Errors_val_ParameterType_2,
+        __sendRoutingInfo_Errors_val_ParameterType_3,
+        __sendRoutingInfo_Errors_val_ParameterType_4,
+        __sendRoutingInfo_Errors_val_ParameterType_5,
+        __sendRoutingInfo_Errors_val_ParameterType_6,
+        __sendRoutingInfo_Errors_val_ParameterType_7,
+        mo_ForwardSM,
+        _mo_ForwardSM_val_ArgumentType,
+        _mo_ForwardSM_val_ResultType,
+        __sendRoutingInfo_Errors_val_ParameterType_1_0,
+        __sendRoutingInfo_Errors_val_ParameterType_2_0,
+        __sendRoutingInfo_Errors_val_ParameterType_3_0,
+        mt_ForwardSM,
+        _mt_ForwardSM_val_ArgumentType,
+        _mt_ForwardSM_val_ResultType,
+        __sendRoutingInfo_Errors_val_ParameterType_4_0,
+        __sendRoutingInfo_Errors_val_ParameterType_5_0,
+        __sendRoutingInfo_Errors_val_ParameterType_6_0,
+        __sendRoutingInfo_Errors_val_ParameterType_7_0,
+        __sendRoutingInfo_Errors_val_ParameterType_8,
+        __sendRoutingInfo_Errors_val_ParameterType_9,
+        reportSM_DeliveryStatus,
+        _reportSM_DeliveryStatus_val_ArgumentType,
+        _reportSM_DeliveryStatus_val_ResultType,
+        __sendRoutingInfo_Errors_val_ParameterType_0_0,
+        __sendRoutingInfo_Errors_val_ParameterType_2_1,
+        __sendRoutingInfo_Errors_val_ParameterType_3_1,
+        alertServiceCentre,
+        _alertServiceCentre_val_ArgumentType,
+        informServiceCentre,
+        _informServiceCentre_val_ArgumentType,
+        readyForSM,
+        _readyForSM_val_ArgumentType,
+        _readyForSM_val_ResultType,
+        __sendRoutingInfo_Errors_val_ParameterType_3_2,
+        mt_ForwardSM_VGCS,
+        _mt_ForwardSM_VGCS_val_ArgumentType,
+        _mt_ForwardSM_VGCS_val_ResultType,
+    ]
+
 class MAP_SupplementaryServiceOperations:
 
     _name_  = u'MAP-SupplementaryServiceOperations'
-    _oid_   = [0, 4, 0, 0, 1, 3, 8, 16]
+    _oid_   = [0, 4, 0, 0, 1, 3, 8, 19]
     
     _obj_ = [
         u'registerSS',
@@ -17685,74 +17406,74 @@ class MAP_SupplementaryServiceOperations:
     registerSS = CLASS(name=u'registerSS', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
     _registerSS_val_ArgumentType = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-SS-DataTypes', 'RegisterSS-Arg')))
     _registerSS_val_ResultType = CHOICE(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-SS-DataTypes', 'SS-Info')))
-    __OPERATION_Errors_val_ParameterType_0 = CHOICE(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'SystemFailureParam')))
-    __OPERATION_Errors_val_ParameterType_1 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'DataMissingParam')))
-    __OPERATION_Errors_val_ParameterType_2 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'UnexpectedDataParam')))
-    __OPERATION_Errors_val_ParameterType_3 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'BearerServNotProvParam')))
-    __OPERATION_Errors_val_ParameterType_4 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'TeleservNotProvParam')))
-    __OPERATION_Errors_val_ParameterType_5 = CHOICE(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'CallBarredParam')))
-    __OPERATION_Errors_val_ParameterType_6 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'IllegalSS-OperationParam')))
-    __OPERATION_Errors_val_ParameterType_7 = OCT_STR(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-SS-DataTypes', 'SS-Status')))
-    __OPERATION_Errors_val_ParameterType_8 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'SS-IncompatibilityCause')))
-    registerSS._val = dict([(u'ArgumentType', _registerSS_val_ArgumentType), (u'ResultType', _registerSS_val_ResultType), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_1), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_3), (u'errorCode', (u'local', 10))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_4), (u'errorCode', (u'local', 11))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_5), (u'errorCode', (u'local', 13))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_6), (u'errorCode', (u'local', 16))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_7), (u'errorCode', (u'local', 17))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_8), (u'errorCode', (u'local', 20))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 10))])
+    __sendRoutingInfo_Errors_val_ParameterType_0 = CHOICE(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'SystemFailureParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_1 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'DataMissingParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_2 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'UnexpectedDataParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_3 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'BearerServNotProvParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_4 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'TeleservNotProvParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_5 = CHOICE(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'CallBarredParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_6 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'IllegalSS-OperationParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_7 = OCT_STR(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-SS-DataTypes', 'SS-Status')))
+    __sendRoutingInfo_Errors_val_ParameterType_8 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'SS-IncompatibilityCause')))
+    registerSS._val = dict([(u'ArgumentType', _registerSS_val_ArgumentType), (u'ResultType', _registerSS_val_ResultType), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_1), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_3), (u'errorCode', (u'local', 10))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_4), (u'errorCode', (u'local', 11))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_5), (u'errorCode', (u'local', 13))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_6), (u'errorCode', (u'local', 16))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_7), (u'errorCode', (u'local', 17))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_8), (u'errorCode', (u'local', 20))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 10))])
     
     #-----< eraseSS >-----#
     eraseSS = CLASS(name=u'eraseSS', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
     _eraseSS_val_ArgumentType = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-SS-DataTypes', 'SS-ForBS-Code')))
     _eraseSS_val_ResultType = CHOICE(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-SS-DataTypes', 'SS-Info')))
-    eraseSS._val = dict([(u'ArgumentType', _eraseSS_val_ArgumentType), (u'ResultType', _eraseSS_val_ResultType), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_1), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_3), (u'errorCode', (u'local', 10))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_4), (u'errorCode', (u'local', 11))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_5), (u'errorCode', (u'local', 13))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_6), (u'errorCode', (u'local', 16))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_7), (u'errorCode', (u'local', 17))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 11))])
+    eraseSS._val = dict([(u'ArgumentType', _eraseSS_val_ArgumentType), (u'ResultType', _eraseSS_val_ResultType), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_1), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_3), (u'errorCode', (u'local', 10))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_4), (u'errorCode', (u'local', 11))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_5), (u'errorCode', (u'local', 13))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_6), (u'errorCode', (u'local', 16))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_7), (u'errorCode', (u'local', 17))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 11))])
     
     #-----< activateSS >-----#
     activateSS = CLASS(name=u'activateSS', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
     _activateSS_val_ArgumentType = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-SS-DataTypes', 'SS-ForBS-Code')))
     _activateSS_val_ResultType = CHOICE(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-SS-DataTypes', 'SS-Info')))
-    __OPERATION_Errors_val_ParameterType_8_0 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'SS-SubscriptionViolationParam')))
-    __OPERATION_Errors_val_ParameterType_9 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'SS-IncompatibilityCause')))
-    activateSS._val = dict([(u'ArgumentType', _activateSS_val_ArgumentType), (u'ResultType', _activateSS_val_ResultType), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_1), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_3), (u'errorCode', (u'local', 10))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_4), (u'errorCode', (u'local', 11))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_5), (u'errorCode', (u'local', 13))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_6), (u'errorCode', (u'local', 16))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_7), (u'errorCode', (u'local', 17))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_8_0), (u'errorCode', (u'local', 19))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_9), (u'errorCode', (u'local', 20))]), dict([(u'errorCode', (u'local', 38))]), dict([(u'errorCode', (u'local', 43))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 12))])
+    __sendRoutingInfo_Errors_val_ParameterType_8_0 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'SS-SubscriptionViolationParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_9 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'SS-IncompatibilityCause')))
+    activateSS._val = dict([(u'ArgumentType', _activateSS_val_ArgumentType), (u'ResultType', _activateSS_val_ResultType), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_1), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_3), (u'errorCode', (u'local', 10))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_4), (u'errorCode', (u'local', 11))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_5), (u'errorCode', (u'local', 13))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_6), (u'errorCode', (u'local', 16))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_7), (u'errorCode', (u'local', 17))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_8_0), (u'errorCode', (u'local', 19))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_9), (u'errorCode', (u'local', 20))]), dict([(u'errorCode', (u'local', 38))]), dict([(u'errorCode', (u'local', 43))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 12))])
     
     #-----< deactivateSS >-----#
     deactivateSS = CLASS(name=u'deactivateSS', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
     _deactivateSS_val_ArgumentType = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-SS-DataTypes', 'SS-ForBS-Code')))
     _deactivateSS_val_ResultType = CHOICE(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-SS-DataTypes', 'SS-Info')))
-    deactivateSS._val = dict([(u'ArgumentType', _deactivateSS_val_ArgumentType), (u'ResultType', _deactivateSS_val_ResultType), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_1), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_3), (u'errorCode', (u'local', 10))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_4), (u'errorCode', (u'local', 11))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_5), (u'errorCode', (u'local', 13))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_6), (u'errorCode', (u'local', 16))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_7), (u'errorCode', (u'local', 17))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_8_0), (u'errorCode', (u'local', 19))]), dict([(u'errorCode', (u'local', 38))]), dict([(u'errorCode', (u'local', 43))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 13))])
+    deactivateSS._val = dict([(u'ArgumentType', _deactivateSS_val_ArgumentType), (u'ResultType', _deactivateSS_val_ResultType), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_1), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_3), (u'errorCode', (u'local', 10))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_4), (u'errorCode', (u'local', 11))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_5), (u'errorCode', (u'local', 13))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_6), (u'errorCode', (u'local', 16))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_7), (u'errorCode', (u'local', 17))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_8_0), (u'errorCode', (u'local', 19))]), dict([(u'errorCode', (u'local', 38))]), dict([(u'errorCode', (u'local', 43))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 13))])
     
     #-----< interrogateSS >-----#
     interrogateSS = CLASS(name=u'interrogateSS', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
     _interrogateSS_val_ArgumentType = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-SS-DataTypes', 'SS-ForBS-Code')))
     _interrogateSS_val_ResultType = CHOICE(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-SS-DataTypes', 'InterrogateSS-Res')))
-    __OPERATION_Errors_val_ParameterType_7_0 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'SS-NotAvailableParam')))
-    interrogateSS._val = dict([(u'ArgumentType', _interrogateSS_val_ArgumentType), (u'ResultType', _interrogateSS_val_ResultType), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_1), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_3), (u'errorCode', (u'local', 10))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_4), (u'errorCode', (u'local', 11))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_5), (u'errorCode', (u'local', 13))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_6), (u'errorCode', (u'local', 16))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_7_0), (u'errorCode', (u'local', 18))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 14))])
+    __sendRoutingInfo_Errors_val_ParameterType_7_0 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'SS-NotAvailableParam')))
+    interrogateSS._val = dict([(u'ArgumentType', _interrogateSS_val_ArgumentType), (u'ResultType', _interrogateSS_val_ResultType), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_1), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_3), (u'errorCode', (u'local', 10))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_4), (u'errorCode', (u'local', 11))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_5), (u'errorCode', (u'local', 13))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_6), (u'errorCode', (u'local', 16))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_7_0), (u'errorCode', (u'local', 18))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 14))])
     
     #-----< processUnstructuredSS-Request >-----#
     processUnstructuredSS_Request = CLASS(name=u'processUnstructuredSS-Request', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
     _processUnstructuredSS_Request_val_ArgumentType = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-SS-DataTypes', 'USSD-Arg')))
     _processUnstructuredSS_Request_val_ResultType = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-SS-DataTypes', 'USSD-Res')))
-    __OPERATION_Errors_val_ParameterType_4_0 = CHOICE(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'CallBarredParam')))
-    processUnstructuredSS_Request._val = dict([(u'ArgumentType', _processUnstructuredSS_Request_val_ArgumentType), (u'ResultType', _processUnstructuredSS_Request_val_ResultType), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_1), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))]), dict([(u'errorCode', (u'local', 71))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_4_0), (u'errorCode', (u'local', 13))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 59))])
+    __sendRoutingInfo_Errors_val_ParameterType_4_0 = CHOICE(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'CallBarredParam')))
+    processUnstructuredSS_Request._val = dict([(u'ArgumentType', _processUnstructuredSS_Request_val_ArgumentType), (u'ResultType', _processUnstructuredSS_Request_val_ResultType), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_1), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))]), dict([(u'errorCode', (u'local', 71))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_4_0), (u'errorCode', (u'local', 13))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 59))])
     
     #-----< unstructuredSS-Request >-----#
     unstructuredSS_Request = CLASS(name=u'unstructuredSS-Request', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
     _unstructuredSS_Request_val_ArgumentType = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-SS-DataTypes', 'USSD-Arg')))
     _unstructuredSS_Request_val_ResultType = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-SS-DataTypes', 'USSD-Res')))
-    __OPERATION_Errors_val_ParameterType_3_0 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'AbsentSubscriberParam')))
-    __OPERATION_Errors_val_ParameterType_4_1 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'IllegalSubscriberParam')))
-    __OPERATION_Errors_val_ParameterType_5_0 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'IllegalEquipmentParam')))
-    unstructuredSS_Request._val = dict([(u'ArgumentType', _unstructuredSS_Request_val_ArgumentType), (u'ResultType', _unstructuredSS_Request_val_ResultType), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_1), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_3_0), (u'errorCode', (u'local', 27))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_4_1), (u'errorCode', (u'local', 9))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_5_0), (u'errorCode', (u'local', 12))]), dict([(u'errorCode', (u'local', 71))]), dict([(u'errorCode', (u'local', 72))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 60))])
+    __sendRoutingInfo_Errors_val_ParameterType_3_0 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'AbsentSubscriberParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_4_1 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'IllegalSubscriberParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_5_0 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'IllegalEquipmentParam')))
+    unstructuredSS_Request._val = dict([(u'ArgumentType', _unstructuredSS_Request_val_ArgumentType), (u'ResultType', _unstructuredSS_Request_val_ResultType), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_1), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_3_0), (u'errorCode', (u'local', 27))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_4_1), (u'errorCode', (u'local', 9))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_5_0), (u'errorCode', (u'local', 12))]), dict([(u'errorCode', (u'local', 71))]), dict([(u'errorCode', (u'local', 72))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 60))])
     
     #-----< unstructuredSS-Notify >-----#
     unstructuredSS_Notify = CLASS(name=u'unstructuredSS-Notify', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
     _unstructuredSS_Notify_val_ArgumentType = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-SS-DataTypes', 'USSD-Arg')))
-    unstructuredSS_Notify._val = dict([(u'ArgumentType', _unstructuredSS_Notify_val_ArgumentType), (u'returnResult', True), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_1), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_3_0), (u'errorCode', (u'local', 27))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_4_1), (u'errorCode', (u'local', 9))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_5_0), (u'errorCode', (u'local', 12))]), dict([(u'errorCode', (u'local', 71))]), dict([(u'errorCode', (u'local', 72))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 61))])
+    unstructuredSS_Notify._val = dict([(u'ArgumentType', _unstructuredSS_Notify_val_ArgumentType), (u'returnResult', True), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_1), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_3_0), (u'errorCode', (u'local', 27))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_4_1), (u'errorCode', (u'local', 9))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_5_0), (u'errorCode', (u'local', 12))]), dict([(u'errorCode', (u'local', 71))]), dict([(u'errorCode', (u'local', 72))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 61))])
     
     #-----< registerPassword >-----#
     registerPassword = CLASS(name=u'registerPassword', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
     _registerPassword_val_ArgumentType = OCT_STR(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-SS-Code', 'SS-Code')))
     _registerPassword_val_ResultType = STR_NUM(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-SS-DataTypes', 'Password')))
     _registerPassword_val_ResultType._const_alpha = ASN1Set(rv=[u'0', u'1', u'2', u'3', u'4', u'5', u'6', u'7', u'8', u'9'], rr=[], ev=None, er=[])
-    __OPERATION_Errors_val_ParameterType_3_1 = CHOICE(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'CallBarredParam')))
-    __OPERATION_Errors_val_ParameterType_4_2 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'SS-SubscriptionViolationParam')))
-    __OPERATION_Errors_val_ParameterType_5_1 = ENUM(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'PW-RegistrationFailureCause')))
-    registerPassword._val = dict([(u'ArgumentType', _registerPassword_val_ArgumentType), (u'ResultType', _registerPassword_val_ResultType), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_1), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_3_1), (u'errorCode', (u'local', 13))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_4_2), (u'errorCode', (u'local', 19))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_5_1), (u'errorCode', (u'local', 37))]), dict([(u'errorCode', (u'local', 38))]), dict([(u'errorCode', (u'local', 43))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 17))])
+    __sendRoutingInfo_Errors_val_ParameterType_3_1 = CHOICE(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'CallBarredParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_4_2 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'SS-SubscriptionViolationParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_5_1 = ENUM(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'PW-RegistrationFailureCause')))
+    registerPassword._val = dict([(u'ArgumentType', _registerPassword_val_ArgumentType), (u'ResultType', _registerPassword_val_ResultType), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_1), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_3_1), (u'errorCode', (u'local', 13))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_4_2), (u'errorCode', (u'local', 19))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_5_1), (u'errorCode', (u'local', 37))]), dict([(u'errorCode', (u'local', 38))]), dict([(u'errorCode', (u'local', 43))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 17))])
     
     #-----< getPassword >-----#
     getPassword = CLASS(name=u'getPassword', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
@@ -17765,93 +17486,93 @@ class MAP_SupplementaryServiceOperations:
     ss_InvocationNotification = CLASS(name=u'ss-InvocationNotification', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
     _ss_InvocationNotification_val_ArgumentType = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-SS-DataTypes', 'SS-InvocationNotificationArg')))
     _ss_InvocationNotification_val_ResultType = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-SS-DataTypes', 'SS-InvocationNotificationRes')))
-    __OPERATION_Errors_val_ParameterType_0_0 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'DataMissingParam')))
-    __OPERATION_Errors_val_ParameterType_1_0 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'UnexpectedDataParam')))
-    __OPERATION_Errors_val_ParameterType_2_0 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'UnknownSubscriberParam')))
-    ss_InvocationNotification._val = dict([(u'ArgumentType', _ss_InvocationNotification_val_ArgumentType), (u'ResultType', _ss_InvocationNotification_val_ResultType), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0_0), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_1_0), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_2_0), (u'errorCode', (u'local', 1))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 72))])
+    __sendRoutingInfo_Errors_val_ParameterType_0_0 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'DataMissingParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_1_0 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'UnexpectedDataParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_2_0 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'UnknownSubscriberParam')))
+    ss_InvocationNotification._val = dict([(u'ArgumentType', _ss_InvocationNotification_val_ArgumentType), (u'ResultType', _ss_InvocationNotification_val_ResultType), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_0_0), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_1_0), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_2_0), (u'errorCode', (u'local', 1))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 72))])
     
     #-----< registerCC-Entry >-----#
     registerCC_Entry = CLASS(name=u'registerCC-Entry', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
     _registerCC_Entry_val_ArgumentType = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-SS-DataTypes', 'RegisterCC-EntryArg')))
     _registerCC_Entry_val_ResultType = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-SS-DataTypes', 'RegisterCC-EntryRes')))
-    __OPERATION_Errors_val_ParameterType_4_3 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'IllegalSS-OperationParam')))
-    __OPERATION_Errors_val_ParameterType_5_2 = OCT_STR(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-SS-DataTypes', 'SS-Status')))
-    __OPERATION_Errors_val_ParameterType_6_0 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'SS-IncompatibilityCause')))
-    __OPERATION_Errors_val_ParameterType_7_1 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'ShortTermDenialParam')))
-    __OPERATION_Errors_val_ParameterType_8_1 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'LongTermDenialParam')))
-    __OPERATION_Errors_val_ParameterType_9_0 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'FacilityNotSupParam')))
-    registerCC_Entry._val = dict([(u'ArgumentType', _registerCC_Entry_val_ArgumentType), (u'ResultType', _registerCC_Entry_val_ResultType), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_1), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_3_1), (u'errorCode', (u'local', 13))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_4_3), (u'errorCode', (u'local', 16))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_5_2), (u'errorCode', (u'local', 17))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_6_0), (u'errorCode', (u'local', 20))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_7_1), (u'errorCode', (u'local', 29))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_8_1), (u'errorCode', (u'local', 30))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_9_0), (u'errorCode', (u'local', 21))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 76))])
+    __sendRoutingInfo_Errors_val_ParameterType_4_3 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'IllegalSS-OperationParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_5_2 = OCT_STR(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-SS-DataTypes', 'SS-Status')))
+    __sendRoutingInfo_Errors_val_ParameterType_6_0 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'SS-IncompatibilityCause')))
+    __sendRoutingInfo_Errors_val_ParameterType_7_1 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'ShortTermDenialParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_8_1 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'LongTermDenialParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_9_0 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'FacilityNotSupParam')))
+    registerCC_Entry._val = dict([(u'ArgumentType', _registerCC_Entry_val_ArgumentType), (u'ResultType', _registerCC_Entry_val_ResultType), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_1), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_3_1), (u'errorCode', (u'local', 13))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_4_3), (u'errorCode', (u'local', 16))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_5_2), (u'errorCode', (u'local', 17))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_6_0), (u'errorCode', (u'local', 20))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_7_1), (u'errorCode', (u'local', 29))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_8_1), (u'errorCode', (u'local', 30))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_9_0), (u'errorCode', (u'local', 21))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 76))])
     
     #-----< eraseCC-Entry >-----#
     eraseCC_Entry = CLASS(name=u'eraseCC-Entry', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
     _eraseCC_Entry_val_ArgumentType = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-SS-DataTypes', 'EraseCC-EntryArg')))
     _eraseCC_Entry_val_ResultType = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-SS-DataTypes', 'EraseCC-EntryRes')))
-    eraseCC_Entry._val = dict([(u'ArgumentType', _eraseCC_Entry_val_ArgumentType), (u'ResultType', _eraseCC_Entry_val_ResultType), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_1), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_3_1), (u'errorCode', (u'local', 13))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_4_3), (u'errorCode', (u'local', 16))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_5_2), (u'errorCode', (u'local', 17))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 77))])
+    eraseCC_Entry._val = dict([(u'ArgumentType', _eraseCC_Entry_val_ArgumentType), (u'ResultType', _eraseCC_Entry_val_ResultType), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_1), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_3_1), (u'errorCode', (u'local', 13))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_4_3), (u'errorCode', (u'local', 16))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_5_2), (u'errorCode', (u'local', 17))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 77))])
     
     _all_ = [
         registerSS,
         _registerSS_val_ArgumentType,
         _registerSS_val_ResultType,
-        __OPERATION_Errors_val_ParameterType_0,
-        __OPERATION_Errors_val_ParameterType_1,
-        __OPERATION_Errors_val_ParameterType_2,
-        __OPERATION_Errors_val_ParameterType_3,
-        __OPERATION_Errors_val_ParameterType_4,
-        __OPERATION_Errors_val_ParameterType_5,
-        __OPERATION_Errors_val_ParameterType_6,
-        __OPERATION_Errors_val_ParameterType_7,
-        __OPERATION_Errors_val_ParameterType_8,
+        __sendRoutingInfo_Errors_val_ParameterType_0,
+        __sendRoutingInfo_Errors_val_ParameterType_1,
+        __sendRoutingInfo_Errors_val_ParameterType_2,
+        __sendRoutingInfo_Errors_val_ParameterType_3,
+        __sendRoutingInfo_Errors_val_ParameterType_4,
+        __sendRoutingInfo_Errors_val_ParameterType_5,
+        __sendRoutingInfo_Errors_val_ParameterType_6,
+        __sendRoutingInfo_Errors_val_ParameterType_7,
+        __sendRoutingInfo_Errors_val_ParameterType_8,
         eraseSS,
         _eraseSS_val_ArgumentType,
         _eraseSS_val_ResultType,
         activateSS,
         _activateSS_val_ArgumentType,
         _activateSS_val_ResultType,
-        __OPERATION_Errors_val_ParameterType_8_0,
-        __OPERATION_Errors_val_ParameterType_9,
+        __sendRoutingInfo_Errors_val_ParameterType_8_0,
+        __sendRoutingInfo_Errors_val_ParameterType_9,
         deactivateSS,
         _deactivateSS_val_ArgumentType,
         _deactivateSS_val_ResultType,
         interrogateSS,
         _interrogateSS_val_ArgumentType,
         _interrogateSS_val_ResultType,
-        __OPERATION_Errors_val_ParameterType_7_0,
+        __sendRoutingInfo_Errors_val_ParameterType_7_0,
         processUnstructuredSS_Request,
         _processUnstructuredSS_Request_val_ArgumentType,
         _processUnstructuredSS_Request_val_ResultType,
-        __OPERATION_Errors_val_ParameterType_4_0,
+        __sendRoutingInfo_Errors_val_ParameterType_4_0,
         unstructuredSS_Request,
         _unstructuredSS_Request_val_ArgumentType,
         _unstructuredSS_Request_val_ResultType,
-        __OPERATION_Errors_val_ParameterType_3_0,
-        __OPERATION_Errors_val_ParameterType_4_1,
-        __OPERATION_Errors_val_ParameterType_5_0,
+        __sendRoutingInfo_Errors_val_ParameterType_3_0,
+        __sendRoutingInfo_Errors_val_ParameterType_4_1,
+        __sendRoutingInfo_Errors_val_ParameterType_5_0,
         unstructuredSS_Notify,
         _unstructuredSS_Notify_val_ArgumentType,
         registerPassword,
         _registerPassword_val_ArgumentType,
         _registerPassword_val_ResultType,
-        __OPERATION_Errors_val_ParameterType_3_1,
-        __OPERATION_Errors_val_ParameterType_4_2,
-        __OPERATION_Errors_val_ParameterType_5_1,
+        __sendRoutingInfo_Errors_val_ParameterType_3_1,
+        __sendRoutingInfo_Errors_val_ParameterType_4_2,
+        __sendRoutingInfo_Errors_val_ParameterType_5_1,
         getPassword,
         _getPassword_val_ArgumentType,
         _getPassword_val_ResultType,
         ss_InvocationNotification,
         _ss_InvocationNotification_val_ArgumentType,
         _ss_InvocationNotification_val_ResultType,
-        __OPERATION_Errors_val_ParameterType_0_0,
-        __OPERATION_Errors_val_ParameterType_1_0,
-        __OPERATION_Errors_val_ParameterType_2_0,
+        __sendRoutingInfo_Errors_val_ParameterType_0_0,
+        __sendRoutingInfo_Errors_val_ParameterType_1_0,
+        __sendRoutingInfo_Errors_val_ParameterType_2_0,
         registerCC_Entry,
         _registerCC_Entry_val_ArgumentType,
         _registerCC_Entry_val_ResultType,
-        __OPERATION_Errors_val_ParameterType_4_3,
-        __OPERATION_Errors_val_ParameterType_5_2,
-        __OPERATION_Errors_val_ParameterType_6_0,
-        __OPERATION_Errors_val_ParameterType_7_1,
-        __OPERATION_Errors_val_ParameterType_8_1,
-        __OPERATION_Errors_val_ParameterType_9_0,
+        __sendRoutingInfo_Errors_val_ParameterType_4_3,
+        __sendRoutingInfo_Errors_val_ParameterType_5_2,
+        __sendRoutingInfo_Errors_val_ParameterType_6_0,
+        __sendRoutingInfo_Errors_val_ParameterType_7_1,
+        __sendRoutingInfo_Errors_val_ParameterType_8_1,
+        __sendRoutingInfo_Errors_val_ParameterType_9_0,
         eraseCC_Entry,
         _eraseCC_Entry_val_ArgumentType,
         _eraseCC_Entry_val_ResultType,
@@ -17860,7 +17581,7 @@ class MAP_SupplementaryServiceOperations:
 class MAP_TS_Code:
 
     _name_  = u'MAP-TS-Code'
-    _oid_   = [0, 4, 0, 0, 1, 3, 19, 16]
+    _oid_   = [0, 4, 0, 0, 1, 3, 19, 19]
     
     _obj_ = [
         u'TeleserviceCode',
@@ -18116,6 +17837,104 @@ class MAP_TS_Code:
         plmn_specificTS_F,
     ]
 
+class MobileDomainDefinitions:
+
+    _name_  = u'MobileDomainDefinitions'
+    _oid_   = [0, 4, 0, 0, 0, 1]
+    
+    _obj_ = [
+        u'mobileDomainId',
+        u'gsm-NetworkId',
+        u'gsm-AccessId',
+        u'gsm-OperationAndMaintenanceId',
+        u'gsm-MessagingId',
+        u'CommonComponentId',
+        u'ac-Id',
+        u'as-Id',
+        u'ase-Id',
+        u'moduleId',
+        u'er-Id',
+        ]
+    _type_ = [
+        u'CommonComponentId',
+        ]
+    _set_ = [
+        ]
+    _val_ = [
+        u'mobileDomainId',
+        u'gsm-NetworkId',
+        u'gsm-AccessId',
+        u'gsm-OperationAndMaintenanceId',
+        u'gsm-MessagingId',
+        u'ac-Id',
+        u'as-Id',
+        u'ase-Id',
+        u'moduleId',
+        u'er-Id',
+        ]
+    _class_ = [
+        ]
+    _param_ = [
+        ]
+    
+    #-----< mobileDomainId >-----#
+    mobileDomainId = OID(name=u'mobileDomainId', mode=MODE_VALUE)
+    mobileDomainId._val = (0, 4, 0, 0)
+    
+    #-----< gsm-NetworkId >-----#
+    gsm_NetworkId = OID(name=u'gsm-NetworkId', mode=MODE_VALUE)
+    gsm_NetworkId._val = (0, 4, 0, 0, 1)
+    
+    #-----< gsm-AccessId >-----#
+    gsm_AccessId = OID(name=u'gsm-AccessId', mode=MODE_VALUE)
+    gsm_AccessId._val = (0, 4, 0, 0, 2)
+    
+    #-----< gsm-OperationAndMaintenanceId >-----#
+    gsm_OperationAndMaintenanceId = OID(name=u'gsm-OperationAndMaintenanceId', mode=MODE_VALUE)
+    gsm_OperationAndMaintenanceId._val = (0, 4, 0, 0, 3)
+    
+    #-----< gsm-MessagingId >-----#
+    gsm_MessagingId = OID(name=u'gsm-MessagingId', mode=MODE_VALUE)
+    gsm_MessagingId._val = (0, 4, 0, 0, 4)
+    
+    #-----< CommonComponentId >-----#
+    CommonComponentId = INT(name=u'CommonComponentId', mode=MODE_TYPE)
+    CommonComponentId._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=9)], ev=None, er=[])
+    
+    #-----< ac-Id >-----#
+    ac_Id = INT(name=u'ac-Id', mode=MODE_VALUE, typeref=ASN1RefType(('MobileDomainDefinitions', 'CommonComponentId')))
+    ac_Id._val = 0
+    
+    #-----< as-Id >-----#
+    as_Id = INT(name=u'as-Id', mode=MODE_VALUE, typeref=ASN1RefType(('MobileDomainDefinitions', 'CommonComponentId')))
+    as_Id._val = 1
+    
+    #-----< ase-Id >-----#
+    ase_Id = INT(name=u'ase-Id', mode=MODE_VALUE, typeref=ASN1RefType(('MobileDomainDefinitions', 'CommonComponentId')))
+    ase_Id._val = 2
+    
+    #-----< moduleId >-----#
+    moduleId = INT(name=u'moduleId', mode=MODE_VALUE, typeref=ASN1RefType(('MobileDomainDefinitions', 'CommonComponentId')))
+    moduleId._val = 3
+    
+    #-----< er-Id >-----#
+    er_Id = INT(name=u'er-Id', mode=MODE_VALUE, typeref=ASN1RefType(('MobileDomainDefinitions', 'CommonComponentId')))
+    er_Id._val = 4
+    
+    _all_ = [
+        mobileDomainId,
+        gsm_NetworkId,
+        gsm_AccessId,
+        gsm_OperationAndMaintenanceId,
+        gsm_MessagingId,
+        CommonComponentId,
+        ac_Id,
+        as_Id,
+        ase_Id,
+        moduleId,
+        er_Id,
+    ]
+
 class Pycrate_TCAP_MAP_Dialogue:
 
     _name_  = u'Pycrate-TCAP-MAP-Dialogue'
@@ -18256,38 +18075,38 @@ class TCAP_MAP_Messages:
     _______TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab = CLASS(name='_tab_OPERATION', mode=MODE_SET, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
     ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_0 = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'UpdateLocationArg')))
     ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_0 = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'UpdateLocationRes')))
-    __OPERATION_Errors_val_ParameterType_0 = CHOICE(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'SystemFailureParam')))
-    __OPERATION_Errors_val_ParameterType_1 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'DataMissingParam')))
-    __OPERATION_Errors_val_ParameterType_2 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'UnexpectedDataParam')))
-    __OPERATION_Errors_val_ParameterType_3 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'UnknownSubscriberParam')))
-    __OPERATION_Errors_val_ParameterType_4 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'RoamingNotAllowedParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_0 = CHOICE(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'SystemFailureParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_1 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'DataMissingParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_2 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'UnexpectedDataParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_3 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'UnknownSubscriberParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_4 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'RoamingNotAllowedParam')))
     ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_1 = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'CancelLocationArg')))
     ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_1 = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'CancelLocationRes')))
-    __OPERATION_Errors_val_ParameterType_0_0 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'DataMissingParam')))
-    __OPERATION_Errors_val_ParameterType_1_0 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'UnexpectedDataParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_0_0 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'DataMissingParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_1_0 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'UnexpectedDataParam')))
     ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_2 = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'CancelVcsgLocationArg')))
     ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_2 = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'CancelVcsgLocationRes')))
     ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_3 = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'PurgeMS-Arg')))
     ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_3 = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'PurgeMS-Res')))
-    __OPERATION_Errors_val_ParameterType_2_0 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'UnknownSubscriberParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_2_0 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'UnknownSubscriberParam')))
     ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_4 = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'SendIdentificationArg')))
     ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_4 = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'SendIdentificationRes')))
-    __OPERATION_Errors_val_ParameterType_1_1 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'UnidentifiedSubParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_1_1 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'UnidentifiedSubParam')))
     ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_5 = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'UpdateGprsLocationArg')))
     ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_5 = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'UpdateGprsLocationRes')))
-    __OPERATION_Errors_val_ParameterType_3_0 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'RoamingNotAllowedParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_3_0 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'RoamingNotAllowedParam')))
     ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_6 = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'UpdateVcsgLocationArg')))
     ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_6 = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'UpdateVcsgLocationRes')))
     ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_7 = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'PrepareHO-Arg')))
     ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_7 = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'PrepareHO-Res')))
-    __OPERATION_Errors_val_ParameterType_4_0 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'TargetCellOutsideGCA-Param')))
+    __sendRoutingInfo_Errors_val_ParameterType_4_0 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'TargetCellOutsideGCA-Param')))
     ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_8 = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'SendEndSignal-Arg')))
     ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_8 = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'SendEndSignal-Res')))
     ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_9 = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'ProcessAccessSignalling-Arg')))
     ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_10 = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'ForwardAccessSignalling-Arg')))
     ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_11 = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'PrepareSubsequentHO-Arg')))
     ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_11 = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'PrepareSubsequentHO-Res')))
-    __OPERATION_Errors_val_ParameterType_0_1 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'UnexpectedDataParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_0_1 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'UnexpectedDataParam')))
     ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_12 = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'SendAuthenticationInfoArg')))
     ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_12 = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'SendAuthenticationInfoRes')))
     ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_13 = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'AuthenticationFailureReportArg')))
@@ -18296,7 +18115,7 @@ class TCAP_MAP_Messages:
     ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_14 = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'CheckIMEI-Res')))
     ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_15 = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'InsertSubscriberDataArg')))
     ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_15 = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'InsertSubscriberDataRes')))
-    __OPERATION_Errors_val_ParameterType_2_1 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'UnidentifiedSubParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_2_1 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'UnidentifiedSubParam')))
     ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_16 = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'DeleteSubscriberDataArg')))
     ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_16 = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'DeleteSubscriberDataRes')))
     ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_17 = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'ResetArg')))
@@ -18306,122 +18125,122 @@ class TCAP_MAP_Messages:
     ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_20 = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'ProvideSubscriberInfoRes')))
     ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_21 = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'AnyTimeInterrogationArg')))
     ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_21 = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'AnyTimeInterrogationRes')))
-    __OPERATION_Errors_val_ParameterType_1_2 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'ATI-NotAllowedParam')))
-    __OPERATION_Errors_val_ParameterType_2_2 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'DataMissingParam')))
-    __OPERATION_Errors_val_ParameterType_3_1 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'UnexpectedDataParam')))
-    __OPERATION_Errors_val_ParameterType_4_1 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'UnknownSubscriberParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_1_2 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'ATI-NotAllowedParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_2_2 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'DataMissingParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_3_1 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'UnexpectedDataParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_4_1 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'UnknownSubscriberParam')))
     ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_22 = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'AnyTimeSubscriptionInterrogationArg')))
     ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_22 = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'AnyTimeSubscriptionInterrogationRes')))
-    __OPERATION_Errors_val_ParameterType_0_2 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'ATSI-NotAllowedParam')))
-    __OPERATION_Errors_val_ParameterType_4_2 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'BearerServNotProvParam')))
-    __OPERATION_Errors_val_ParameterType_5 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'TeleservNotProvParam')))
-    __OPERATION_Errors_val_ParameterType_6 = CHOICE(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'CallBarredParam')))
-    __OPERATION_Errors_val_ParameterType_7 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'IllegalSS-OperationParam')))
-    __OPERATION_Errors_val_ParameterType_8 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'SS-NotAvailableParam')))
-    __OPERATION_Errors_val_ParameterType_9 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'InformationNotAvailableParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_0_2 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'ATSI-NotAllowedParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_4_2 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'BearerServNotProvParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_5 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'TeleservNotProvParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_6 = CHOICE(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'CallBarredParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_7 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'IllegalSS-OperationParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_8 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'SS-NotAvailableParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_9 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'InformationNotAvailableParam')))
     ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_23 = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'AnyTimeModificationArg')))
     ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_23 = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'AnyTimeModificationRes')))
-    __OPERATION_Errors_val_ParameterType_0_3 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'ATM-NotAllowedParam')))
-    __OPERATION_Errors_val_ParameterType_8_0 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'SS-SubscriptionViolationParam')))
-    __OPERATION_Errors_val_ParameterType_9_0 = OCT_STR(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-SS-DataTypes', 'SS-Status')))
-    __OPERATION_Errors_val_ParameterType_10 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'SS-IncompatibilityCause')))
-    __OPERATION_Errors_val_ParameterType_11 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'InformationNotAvailableParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_0_3 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'ATM-NotAllowedParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_8_0 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'SS-SubscriptionViolationParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_9_0 = OCT_STR(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-SS-DataTypes', 'SS-Status')))
+    __sendRoutingInfo_Errors_val_ParameterType_10 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'SS-IncompatibilityCause')))
+    __sendRoutingInfo_Errors_val_ParameterType_11 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'InformationNotAvailableParam')))
     ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_24 = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'SendRoutingInfoForGprsArg')))
     ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_24 = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'SendRoutingInfoForGprsRes')))
-    __OPERATION_Errors_val_ParameterType_0_4 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'AbsentSubscriberParam')))
-    __OPERATION_Errors_val_ParameterType_1_3 = CHOICE(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'SystemFailureParam')))
-    __OPERATION_Errors_val_ParameterType_5_0 = CHOICE(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'CallBarredParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_0_4 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'AbsentSubscriberParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_1_3 = CHOICE(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'SystemFailureParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_5_0 = CHOICE(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'CallBarredParam')))
     ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_25 = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'FailureReportArg')))
     ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_25 = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'FailureReportRes')))
     ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_26 = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'NoteMsPresentForGprsArg')))
     ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_26 = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'NoteMsPresentForGprsRes')))
     ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_27 = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'NoteMM-EventArg')))
     ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_27 = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'NoteMM-EventRes')))
-    __OPERATION_Errors_val_ParameterType_3_2 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'MM-EventNotSupported-Param')))
+    __sendRoutingInfo_Errors_val_ParameterType_3_2 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'MM-EventNotSupported-Param')))
     ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_28 = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'NoteSubscriberDataModifiedArg')))
     ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_28 = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-MS-DataTypes', 'NoteSubscriberDataModifiedRes')))
     ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_29 = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-OM-DataTypes', 'ActivateTraceModeArg')))
     ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_29 = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-OM-DataTypes', 'ActivateTraceModeRes')))
-    __OPERATION_Errors_val_ParameterType_3_3 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'FacilityNotSupParam')))
-    __OPERATION_Errors_val_ParameterType_4_3 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'UnidentifiedSubParam')))
-    __OPERATION_Errors_val_ParameterType_5_1 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'TracingBufferFullParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_3_3 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'FacilityNotSupParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_4_3 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'UnidentifiedSubParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_5_1 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'TracingBufferFullParam')))
     ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_30 = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-OM-DataTypes', 'DeactivateTraceModeArg')))
     ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_30 = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-OM-DataTypes', 'DeactivateTraceModeRes')))
     ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_31 = OCT_STR(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-CommonDataTypes', 'ISDN-AddressString')))
     ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_31 = OCT_STR(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-CommonDataTypes', 'IMSI')))
     ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_32 = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-CH-DataTypes', 'SendRoutingInfoArg')))
     ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_32 = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-CH-DataTypes', 'SendRoutingInfoRes')))
-    __OPERATION_Errors_val_ParameterType_4_4 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'OR-NotAllowedParam')))
-    __OPERATION_Errors_val_ParameterType_5_2 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'UnknownSubscriberParam')))
-    __OPERATION_Errors_val_ParameterType_6_0 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'NumberChangedParam')))
-    __OPERATION_Errors_val_ParameterType_7_0 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'BearerServNotProvParam')))
-    __OPERATION_Errors_val_ParameterType_8_1 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'TeleservNotProvParam')))
-    __OPERATION_Errors_val_ParameterType_9_1 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'AbsentSubscriberParam')))
-    __OPERATION_Errors_val_ParameterType_10_0 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'BusySubscriberParam')))
-    __OPERATION_Errors_val_ParameterType_11_0 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'NoSubscriberReplyParam')))
-    __OPERATION_Errors_val_ParameterType_12 = CHOICE(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'CallBarredParam')))
-    __OPERATION_Errors_val_ParameterType_13 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'CUG-RejectParam')))
-    __OPERATION_Errors_val_ParameterType_14 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'ForwardingViolationParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_4_4 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'OR-NotAllowedParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_5_2 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'UnknownSubscriberParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_6_0 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'NumberChangedParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_7_0 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'BearerServNotProvParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_8_1 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'TeleservNotProvParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_9_1 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'AbsentSubscriberParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_10_0 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'BusySubscriberParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_11_0 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'NoSubscriberReplyParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_12 = CHOICE(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'CallBarredParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_13 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'CUG-RejectParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_14 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'ForwardingViolationParam')))
     ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_33 = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-CH-DataTypes', 'ProvideRoamingNumberArg')))
     ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_33 = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-CH-DataTypes', 'ProvideRoamingNumberRes')))
-    __OPERATION_Errors_val_ParameterType_5_3 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'AbsentSubscriberParam')))
-    __OPERATION_Errors_val_ParameterType_6_1 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'NoRoamingNbParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_5_3 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'AbsentSubscriberParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_6_1 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'NoRoamingNbParam')))
     ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_34 = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-CH-DataTypes', 'ResumeCallHandlingArg')))
     ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_34 = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-CH-DataTypes', 'ResumeCallHandlingRes')))
-    __OPERATION_Errors_val_ParameterType_0_5 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'ForwardingFailedParam')))
-    __OPERATION_Errors_val_ParameterType_1_4 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'OR-NotAllowedParam')))
-    __OPERATION_Errors_val_ParameterType_3_4 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'DataMissingParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_0_5 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'ForwardingFailedParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_1_4 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'OR-NotAllowedParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_3_4 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'DataMissingParam')))
     ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_35 = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-CH-DataTypes', 'SetReportingStateArg')))
     ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_35 = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-CH-DataTypes', 'SetReportingStateRes')))
-    __OPERATION_Errors_val_ParameterType_4_5 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'ResourceLimitationParam')))
-    __OPERATION_Errors_val_ParameterType_5_4 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'FacilityNotSupParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_4_5 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'ResourceLimitationParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_5_4 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'FacilityNotSupParam')))
     ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_36 = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-CH-DataTypes', 'StatusReportArg')))
     ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_36 = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-CH-DataTypes', 'StatusReportRes')))
-    __OPERATION_Errors_val_ParameterType_0_6 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'UnknownSubscriberParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_0_6 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'UnknownSubscriberParam')))
     ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_37 = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-CH-DataTypes', 'RemoteUserFreeArg')))
     ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_37 = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-CH-DataTypes', 'RemoteUserFreeRes')))
-    __OPERATION_Errors_val_ParameterType_2_3 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'IncompatibleTerminalParam')))
-    __OPERATION_Errors_val_ParameterType_3_5 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'AbsentSubscriberParam')))
-    __OPERATION_Errors_val_ParameterType_4_6 = CHOICE(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'SystemFailureParam')))
-    __OPERATION_Errors_val_ParameterType_5_5 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'BusySubscriberParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_2_3 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'IncompatibleTerminalParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_3_5 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'AbsentSubscriberParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_4_6 = CHOICE(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'SystemFailureParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_5_5 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'BusySubscriberParam')))
     ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_38 = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-CH-DataTypes', 'IST-AlertArg')))
     ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_38 = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-CH-DataTypes', 'IST-AlertRes')))
-    __OPERATION_Errors_val_ParameterType_1_5 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'ResourceLimitationParam')))
-    __OPERATION_Errors_val_ParameterType_3_6 = CHOICE(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'SystemFailureParam')))
-    __OPERATION_Errors_val_ParameterType_4_7 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'FacilityNotSupParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_1_5 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'ResourceLimitationParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_3_6 = CHOICE(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'SystemFailureParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_4_7 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'FacilityNotSupParam')))
     ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_39 = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-CH-DataTypes', 'IST-CommandArg')))
     ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_39 = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-CH-DataTypes', 'IST-CommandRes')))
     ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_40 = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-SS-DataTypes', 'RegisterSS-Arg')))
     ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_40 = CHOICE(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-SS-DataTypes', 'SS-Info')))
-    __OPERATION_Errors_val_ParameterType_3_7 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'BearerServNotProvParam')))
-    __OPERATION_Errors_val_ParameterType_4_8 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'TeleservNotProvParam')))
-    __OPERATION_Errors_val_ParameterType_6_2 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'IllegalSS-OperationParam')))
-    __OPERATION_Errors_val_ParameterType_7_1 = OCT_STR(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-SS-DataTypes', 'SS-Status')))
-    __OPERATION_Errors_val_ParameterType_8_2 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'SS-IncompatibilityCause')))
+    __sendRoutingInfo_Errors_val_ParameterType_3_7 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'BearerServNotProvParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_4_8 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'TeleservNotProvParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_6_2 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'IllegalSS-OperationParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_7_1 = OCT_STR(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-SS-DataTypes', 'SS-Status')))
+    __sendRoutingInfo_Errors_val_ParameterType_8_2 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'SS-IncompatibilityCause')))
     ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_41 = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-SS-DataTypes', 'SS-ForBS-Code')))
     ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_41 = CHOICE(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-SS-DataTypes', 'SS-Info')))
     ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_42 = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-SS-DataTypes', 'SS-ForBS-Code')))
     ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_42 = CHOICE(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-SS-DataTypes', 'SS-Info')))
-    __OPERATION_Errors_val_ParameterType_9_2 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'SS-IncompatibilityCause')))
+    __sendRoutingInfo_Errors_val_ParameterType_9_2 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'SS-IncompatibilityCause')))
     ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_43 = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-SS-DataTypes', 'SS-ForBS-Code')))
     ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_43 = CHOICE(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-SS-DataTypes', 'SS-Info')))
     ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_44 = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-SS-DataTypes', 'SS-ForBS-Code')))
     ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_44 = CHOICE(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-SS-DataTypes', 'InterrogateSS-Res')))
-    __OPERATION_Errors_val_ParameterType_7_2 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'SS-NotAvailableParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_7_2 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'SS-NotAvailableParam')))
     ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_45 = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-SS-DataTypes', 'USSD-Arg')))
     ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_45 = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-SS-DataTypes', 'USSD-Res')))
-    __OPERATION_Errors_val_ParameterType_4_9 = CHOICE(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'CallBarredParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_4_9 = CHOICE(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'CallBarredParam')))
     ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_46 = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-SS-DataTypes', 'USSD-Arg')))
     ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_46 = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-SS-DataTypes', 'USSD-Res')))
-    __OPERATION_Errors_val_ParameterType_4_10 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'IllegalSubscriberParam')))
-    __OPERATION_Errors_val_ParameterType_5_6 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'IllegalEquipmentParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_4_10 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'IllegalSubscriberParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_5_6 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'IllegalEquipmentParam')))
     ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_47 = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-SS-DataTypes', 'USSD-Arg')))
     ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_48 = OCT_STR(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-SS-Code', 'SS-Code')))
     ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_48 = STR_NUM(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-SS-DataTypes', 'Password')))
     ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_48._const_alpha = ASN1Set(rv=[u'0', u'1', u'2', u'3', u'4', u'5', u'6', u'7', u'8', u'9'], rr=[], ev=None, er=[])
-    __OPERATION_Errors_val_ParameterType_3_8 = CHOICE(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'CallBarredParam')))
-    __OPERATION_Errors_val_ParameterType_4__11 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'SS-SubscriptionViolationParam')))
-    __OPERATION_Errors_val_ParameterType_5_7 = ENUM(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'PW-RegistrationFailureCause')))
+    __sendRoutingInfo_Errors_val_ParameterType_3_8 = CHOICE(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'CallBarredParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_4__11 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'SS-SubscriptionViolationParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_5_7 = ENUM(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'PW-RegistrationFailureCause')))
     ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_49 = ENUM(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-SS-DataTypes', 'GuidanceInfo')))
     ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_49 = STR_NUM(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-SS-DataTypes', 'Password')))
     ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_49._const_alpha = ASN1Set(rv=[u'0', u'1', u'2', u'3', u'4', u'5', u'6', u'7', u'8', u'9'], rr=[], ev=None, er=[])
@@ -18429,64 +18248,64 @@ class TCAP_MAP_Messages:
     ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_50 = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-SS-DataTypes', 'SS-InvocationNotificationRes')))
     ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_51 = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-SS-DataTypes', 'RegisterCC-EntryArg')))
     ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_51 = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-SS-DataTypes', 'RegisterCC-EntryRes')))
-    __OPERATION_Errors_val_ParameterType_4___12 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'IllegalSS-OperationParam')))
-    __OPERATION_Errors_val_ParameterType_5_8 = OCT_STR(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-SS-DataTypes', 'SS-Status')))
-    __OPERATION_Errors_val_ParameterType_6_3 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'SS-IncompatibilityCause')))
-    __OPERATION_Errors_val_ParameterType_7_3 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'ShortTermDenialParam')))
-    __OPERATION_Errors_val_ParameterType_8_3 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'LongTermDenialParam')))
-    __OPERATION_Errors_val_ParameterType_9_3 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'FacilityNotSupParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_4___12 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'IllegalSS-OperationParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_5_8 = OCT_STR(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-SS-DataTypes', 'SS-Status')))
+    __sendRoutingInfo_Errors_val_ParameterType_6_3 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'SS-IncompatibilityCause')))
+    __sendRoutingInfo_Errors_val_ParameterType_7_3 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'ShortTermDenialParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_8_3 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'LongTermDenialParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_9_3 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'FacilityNotSupParam')))
     ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_52 = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-SS-DataTypes', 'EraseCC-EntryArg')))
     ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_52 = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-SS-DataTypes', 'EraseCC-EntryRes')))
     ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_53 = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-SM-DataTypes', 'RoutingInfoForSM-Arg')))
     ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_53 = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-SM-DataTypes', 'RoutingInfoForSM-Res')))
-    __OPERATION_Errors_val_ParameterType_7_4 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'AbsentSubscriberSM-Param')))
+    __sendRoutingInfo_Errors_val_ParameterType_7_4 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'AbsentSubscriberSM-Param')))
     ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_54 = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-SM-DataTypes', 'MO-ForwardSM-Arg')))
     ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_54 = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-SM-DataTypes', 'MO-ForwardSM-Res')))
-    __OPERATION_Errors_val_ParameterType_2_4 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'FacilityNotSupParam')))
-    __OPERATION_Errors_val_ParameterType_3_9 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'SM-DeliveryFailureCause')))
+    __sendRoutingInfo_Errors_val_ParameterType_2_4 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'FacilityNotSupParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_3_9 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'SM-DeliveryFailureCause')))
     ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_55 = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-SM-DataTypes', 'MT-ForwardSM-Arg')))
     ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_55 = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-SM-DataTypes', 'MT-ForwardSM-Res')))
-    __OPERATION_Errors_val_ParameterType_5_9 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'IllegalSubscriberParam')))
-    __OPERATION_Errors_val_ParameterType_6_4 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'IllegalEquipmentParam')))
-    __OPERATION_Errors_val_ParameterType_7_5 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'SubBusyForMT-SMS-Param')))
-    __OPERATION_Errors_val_ParameterType_8_4 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'SM-DeliveryFailureCause')))
-    __OPERATION_Errors_val_ParameterType_9_4 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'AbsentSubscriberSM-Param')))
+    __sendRoutingInfo_Errors_val_ParameterType_5_9 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'IllegalSubscriberParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_6_4 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'IllegalEquipmentParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_7_5 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'SubBusyForMT-SMS-Param')))
+    __sendRoutingInfo_Errors_val_ParameterType_8_4 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'SM-DeliveryFailureCause')))
+    __sendRoutingInfo_Errors_val_ParameterType_9_4 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'AbsentSubscriberSM-Param')))
     ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_56 = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-SM-DataTypes', 'ReportSM-DeliveryStatusArg')))
     ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_56 = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-SM-DataTypes', 'ReportSM-DeliveryStatusRes')))
-    __OPERATION_Errors_val_ParameterType_3_10 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'MessageWaitListFullParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_3_10 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'MessageWaitListFullParam')))
     ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_57 = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-SM-DataTypes', 'AlertServiceCentreArg')))
     ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_58 = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-SM-DataTypes', 'InformServiceCentreArg')))
     ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_59 = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-SM-DataTypes', 'ReadyForSM-Arg')))
     ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_59 = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-SM-DataTypes', 'ReadyForSM-Res')))
     ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_60 = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-GR-DataTypes', 'PrepareGroupCallArg')))
     ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_60 = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-GR-DataTypes', 'PrepareGroupCallRes')))
-    __OPERATION_Errors_val_ParameterType_1_6 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'NoGroupCallNbParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_1_6 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'NoGroupCallNbParam')))
     ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_61 = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-GR-DataTypes', 'ProcessGroupCallSignallingArg')))
     ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_62 = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-GR-DataTypes', 'ForwardGroupCallSignallingArg')))
     ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_63 = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-GR-DataTypes', 'SendGroupCallEndSignalArg')))
     ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_63 = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-GR-DataTypes', 'SendGroupCallEndSignalRes')))
     ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_64 = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-LCS-DataTypes', 'ProvideSubscriberLocation-Arg')))
     ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_64 = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-LCS-DataTypes', 'ProvideSubscriberLocation-Res')))
-    __OPERATION_Errors_val_ParameterType_7_6 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'AbsentSubscriberParam')))
-    __OPERATION_Errors_val_ParameterType_8_5 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'UnauthorizedRequestingNetwork-Param')))
-    __OPERATION_Errors_val_ParameterType_9_5 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'UnauthorizedLCSClient-Param')))
-    __OPERATION_Errors_val_ParameterType_10_1 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'PositionMethodFailure-Param')))
+    __sendRoutingInfo_Errors_val_ParameterType_7_6 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'AbsentSubscriberParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_8_5 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'UnauthorizedRequestingNetwork-Param')))
+    __sendRoutingInfo_Errors_val_ParameterType_9_5 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'UnauthorizedLCSClient-Param')))
+    __sendRoutingInfo_Errors_val_ParameterType_10_1 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'PositionMethodFailure-Param')))
     ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_65 = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-LCS-DataTypes', 'RoutingInfoForLCS-Arg')))
     ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_65 = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-LCS-DataTypes', 'RoutingInfoForLCS-Res')))
-    __OPERATION_Errors_val_ParameterType_6_5 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'UnauthorizedRequestingNetwork-Param')))
+    __sendRoutingInfo_Errors_val_ParameterType_6_5 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'UnauthorizedRequestingNetwork-Param')))
     ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_66 = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-LCS-DataTypes', 'SubscriberLocationReport-Arg')))
     ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_66 = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-LCS-DataTypes', 'SubscriberLocationReport-Res')))
-    __OPERATION_Errors_val_ParameterType_2_5 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'ResourceLimitationParam')))
-    __OPERATION_Errors_val_ParameterType_5_10 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'UnauthorizedRequestingNetwork-Param')))
-    __OPERATION_Errors_val_ParameterType_6_6 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'UnknownOrUnreachableLCSClient-Param')))
+    __sendRoutingInfo_Errors_val_ParameterType_2_5 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'ResourceLimitationParam')))
+    __sendRoutingInfo_Errors_val_ParameterType_5_10 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'UnauthorizedRequestingNetwork-Param')))
+    __sendRoutingInfo_Errors_val_ParameterType_6_6 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'UnknownOrUnreachableLCSClient-Param')))
     ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_67 = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-CH-DataTypes', 'ReleaseResourcesArg')))
     ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_67 = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-CH-DataTypes', 'ReleaseResourcesRes')))
     ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_68 = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-SM-DataTypes', 'MT-ForwardSM-VGCS-Arg')))
     ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_68 = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-SM-DataTypes', 'MT-ForwardSM-VGCS-Res')))
     ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_69 = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-GR-DataTypes', 'SendGroupCallInfoArg')))
     ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_69 = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-GR-DataTypes', 'SendGroupCallInfoRes')))
-    __OPERATION_Errors_val_ParameterType_1_7 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'OngoingGroupCallParam')))
-    _______TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab._val = ASN1Set(rv=[dict([(u'ArgumentType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_0), (u'ResultType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_0), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_1), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_3), (u'errorCode', (u'local', 1))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_4), (u'errorCode', (u'local', 8))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 2))]), dict([(u'ArgumentType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_1), (u'ResultType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_1), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0_0), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_1_0), (u'errorCode', (u'local', 36))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 3))]), dict([(u'ArgumentType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_2), (u'ResultType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_2), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0_0), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_1_0), (u'errorCode', (u'local', 36))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 36))]), dict([(u'ArgumentType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_3), (u'ResultType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_3), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0_0), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_1_0), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_2_0), (u'errorCode', (u'local', 1))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 67))]), dict([(u'ArgumentType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_4), (u'ResultType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_4), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0_0), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_1_1), (u'errorCode', (u'local', 5))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 55))]), dict([(u'ArgumentType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_5), (u'ResultType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_5), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_1_0), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_2_0), (u'errorCode', (u'local', 1))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_3_0), (u'errorCode', (u'local', 8))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 23))]), dict([(u'ArgumentType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_6), (u'ResultType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_6), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_1_0), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_2_0), (u'errorCode', (u'local', 1))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 53))]), dict([(u'ArgumentType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_7), (u'ResultType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_7), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_1), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))]), dict([(u'errorCode', (u'local', 25))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_4_0), (u'errorCode', (u'local', 42))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 68))]), dict([(u'ArgumentType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_8), (u'ResultType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_8), (u'operationCode', (u'local', 29))]), dict([(u'ArgumentType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_9), (u'operationCode', (u'local', 33))]), dict([(u'ArgumentType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_10), (u'operationCode', (u'local', 34))]), dict([(u'ArgumentType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_11), (u'ResultType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_11), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0_1), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_1), (u'errorCode', (u'local', 35))]), dict([(u'errorCode', (u'local', 3))]), dict([(u'errorCode', (u'local', 26))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 69))]), dict([(u'ArgumentType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_12), (u'ResultType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_12), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_1), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_3), (u'errorCode', (u'local', 1))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 56))]), dict([(u'ArgumentType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_13), (u'ResultType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_13), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_1_0), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_2_0), (u'errorCode', (u'local', 1))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 15))]), dict([(u'ArgumentType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_14), (u'ResultType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_14), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_1), (u'errorCode', (u'local', 35))]), dict([(u'errorCode', (u'local', 7))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 43))]), dict([(u'ArgumentType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_15), (u'ResultType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_15), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0_0), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_1_0), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_2_1), (u'errorCode', (u'local', 5))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 7))]), dict([(u'ArgumentType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_16), (u'ResultType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_16), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0_0), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_1_0), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_2_1), (u'errorCode', (u'local', 5))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 8))]), dict([(u'ArgumentType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_17), (u'operationCode', (u'local', 37))]), dict([(u'operationCode', (u'local', 38))]), dict([(u'ArgumentType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_19), (u'ResultType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_19), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_1), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_3), (u'errorCode', (u'local', 1))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 57))]), dict([(u'ArgumentType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_20), (u'ResultType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_20), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0_0), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_1_0), (u'errorCode', (u'local', 36))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 70))]), dict([(u'ArgumentType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_21), (u'ResultType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_21), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_1_2), (u'errorCode', (u'local', 49))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_2_2), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_3_1), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_4_1), (u'errorCode', (u'local', 1))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 71))]), dict([(u'ArgumentType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_22), (u'ResultType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_22), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0_2), (u'errorCode', (u'local', 60))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_1), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_3), (u'errorCode', (u'local', 1))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_4_2), (u'errorCode', (u'local', 10))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_5), (u'errorCode', (u'local', 11))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_6), (u'errorCode', (u'local', 13))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_7), (u'errorCode', (u'local', 16))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_8), (u'errorCode', (u'local', 18))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_9), (u'errorCode', (u'local', 62))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 62))]), dict([(u'ArgumentType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_23), (u'ResultType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_23), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0_3), (u'errorCode', (u'local', 61))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_1), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_3), (u'errorCode', (u'local', 1))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_4_2), (u'errorCode', (u'local', 10))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_5), (u'errorCode', (u'local', 11))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_6), (u'errorCode', (u'local', 13))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_7), (u'errorCode', (u'local', 16))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_8_0), (u'errorCode', (u'local', 19))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_9_0), (u'errorCode', (u'local', 17))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_10), (u'errorCode', (u'local', 20))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_11), (u'errorCode', (u'local', 62))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 65))]), dict([(u'ArgumentType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_24), (u'ResultType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_24), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0_4), (u'errorCode', (u'local', 27))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_1_3), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_2_2), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_3_1), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_4_1), (u'errorCode', (u'local', 1))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_5_0), (u'errorCode', (u'local', 13))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 24))]), dict([(u'ArgumentType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_25), (u'ResultType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_25), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_1), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_3), (u'errorCode', (u'local', 1))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 25))]), dict([(u'ArgumentType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_26), (u'ResultType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_26), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_1), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_3), (u'errorCode', (u'local', 1))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 26))]), dict([(u'ArgumentType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_27), (u'ResultType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_27), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0_0), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_1_0), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_2_0), (u'errorCode', (u'local', 1))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_3_2), (u'errorCode', (u'local', 59))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 89))]), dict([(u'ArgumentType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_28), (u'ResultType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_28), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0_0), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_1_0), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_2_0), (u'errorCode', (u'local', 1))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 5))]), dict([(u'ArgumentType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_29), (u'ResultType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_29), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_1), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_3_3), (u'errorCode', (u'local', 21))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_4_3), (u'errorCode', (u'local', 5))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_5_1), (u'errorCode', (u'local', 40))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 50))]), dict([(u'ArgumentType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_30), (u'ResultType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_30), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_1), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_3_3), (u'errorCode', (u'local', 21))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_4_3), (u'errorCode', (u'local', 5))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 51))]), dict([(u'ArgumentType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_31), (u'ResultType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_31), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0_0), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_1_0), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_2_0), (u'errorCode', (u'local', 1))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 58))]), dict([(u'ArgumentType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_32), (u'ResultType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_32), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_1), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_3_3), (u'errorCode', (u'local', 21))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_4_4), (u'errorCode', (u'local', 48))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_5_2), (u'errorCode', (u'local', 1))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_6_0), (u'errorCode', (u'local', 44))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_7_0), (u'errorCode', (u'local', 10))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_8_1), (u'errorCode', (u'local', 11))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_9_1), (u'errorCode', (u'local', 27))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_10_0), (u'errorCode', (u'local', 45))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_11_0), (u'errorCode', (u'local', 46))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_12), (u'errorCode', (u'local', 13))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_13), (u'errorCode', (u'local', 15))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_14), (u'errorCode', (u'local', 14))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 22))]), dict([(u'ArgumentType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_33), (u'ResultType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_33), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_1), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_3_3), (u'errorCode', (u'local', 21))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_4_4), (u'errorCode', (u'local', 48))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_5_3), (u'errorCode', (u'local', 27))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_6_1), (u'errorCode', (u'local', 39))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 4))]), dict([(u'ArgumentType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_34), (u'ResultType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_34), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0_5), (u'errorCode', (u'local', 47))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_1_4), (u'errorCode', (u'local', 48))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_3_4), (u'errorCode', (u'local', 35))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 6))]), dict([(u'ArgumentType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_35), (u'ResultType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_35), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_1_1), (u'errorCode', (u'local', 5))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_3_4), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_4_5), (u'errorCode', (u'local', 51))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_5_4), (u'errorCode', (u'local', 21))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 73))]), dict([(u'ArgumentType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_36), (u'ResultType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_36), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0_6), (u'errorCode', (u'local', 1))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_1_3), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_3_4), (u'errorCode', (u'local', 35))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 74))]), dict([(u'ArgumentType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_37), (u'ResultType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_37), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0_1), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_1), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_2_3), (u'errorCode', (u'local', 28))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_3_5), (u'errorCode', (u'local', 27))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_4_6), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_5_5), (u'errorCode', (u'local', 45))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 75))]), dict([(u'ArgumentType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_38), (u'ResultType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_38), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0_1), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_1_5), (u'errorCode', (u'local', 51))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_2_0), (u'errorCode', (u'local', 1))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_3_6), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_4_7), (u'errorCode', (u'local', 21))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 87))]), dict([(u'ArgumentType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_39), (u'ResultType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_39), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0_1), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_1_5), (u'errorCode', (u'local', 51))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_2_0), (u'errorCode', (u'local', 1))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_3_6), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_4_7), (u'errorCode', (u'local', 21))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 88))]), dict([(u'ArgumentType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_40), (u'ResultType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_40), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_1), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_3_7), (u'errorCode', (u'local', 10))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_4_8), (u'errorCode', (u'local', 11))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_5_0), (u'errorCode', (u'local', 13))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_6_2), (u'errorCode', (u'local', 16))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_7_1), (u'errorCode', (u'local', 17))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_8_2), (u'errorCode', (u'local', 20))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 10))]), dict([(u'ArgumentType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_41), (u'ResultType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_41), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_1), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_3_7), (u'errorCode', (u'local', 10))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_4_8), (u'errorCode', (u'local', 11))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_5_0), (u'errorCode', (u'local', 13))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_6_2), (u'errorCode', (u'local', 16))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_7_1), (u'errorCode', (u'local', 17))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 11))]), dict([(u'ArgumentType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_42), (u'ResultType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_42), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_1), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_3_7), (u'errorCode', (u'local', 10))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_4_8), (u'errorCode', (u'local', 11))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_5_0), (u'errorCode', (u'local', 13))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_6_2), (u'errorCode', (u'local', 16))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_7_1), (u'errorCode', (u'local', 17))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_8_0), (u'errorCode', (u'local', 19))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_9_2), (u'errorCode', (u'local', 20))]), dict([(u'errorCode', (u'local', 38))]), dict([(u'errorCode', (u'local', 43))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 12))]), dict([(u'ArgumentType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_43), (u'ResultType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_43), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_1), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_3_7), (u'errorCode', (u'local', 10))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_4_8), (u'errorCode', (u'local', 11))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_5_0), (u'errorCode', (u'local', 13))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_6_2), (u'errorCode', (u'local', 16))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_7_1), (u'errorCode', (u'local', 17))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_8_0), (u'errorCode', (u'local', 19))]), dict([(u'errorCode', (u'local', 38))]), dict([(u'errorCode', (u'local', 43))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 13))]), dict([(u'ArgumentType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_44), (u'ResultType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_44), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_1), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_3_7), (u'errorCode', (u'local', 10))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_4_8), (u'errorCode', (u'local', 11))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_5_0), (u'errorCode', (u'local', 13))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_6_2), (u'errorCode', (u'local', 16))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_7_2), (u'errorCode', (u'local', 18))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 14))]), dict([(u'ArgumentType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_45), (u'ResultType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_45), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_1), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))]), dict([(u'errorCode', (u'local', 71))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_4_9), (u'errorCode', (u'local', 13))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 59))]), dict([(u'ArgumentType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_46), (u'ResultType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_46), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_1), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_3_5), (u'errorCode', (u'local', 27))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_4_10), (u'errorCode', (u'local', 9))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_5_6), (u'errorCode', (u'local', 12))]), dict([(u'errorCode', (u'local', 71))]), dict([(u'errorCode', (u'local', 72))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 60))]), dict([(u'ArgumentType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_47), (u'returnResult', True), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_1), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_3_5), (u'errorCode', (u'local', 27))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_4_10), (u'errorCode', (u'local', 9))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_5_6), (u'errorCode', (u'local', 12))]), dict([(u'errorCode', (u'local', 71))]), dict([(u'errorCode', (u'local', 72))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 61))]), dict([(u'ArgumentType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_48), (u'ResultType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_48), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_1), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_3_8), (u'errorCode', (u'local', 13))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_4__11), (u'errorCode', (u'local', 19))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_5_7), (u'errorCode', (u'local', 37))]), dict([(u'errorCode', (u'local', 38))]), dict([(u'errorCode', (u'local', 43))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 17))]), dict([(u'ArgumentType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_49), (u'ResultType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_49), (u'operationCode', (u'local', 18))]), dict([(u'ArgumentType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_50), (u'ResultType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_50), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0_0), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_1_0), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_2_0), (u'errorCode', (u'local', 1))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 72))]), dict([(u'ArgumentType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_51), (u'ResultType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_51), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_1), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_3_8), (u'errorCode', (u'local', 13))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_4___12), (u'errorCode', (u'local', 16))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_5_8), (u'errorCode', (u'local', 17))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_6_3), (u'errorCode', (u'local', 20))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_7_3), (u'errorCode', (u'local', 29))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_8_3), (u'errorCode', (u'local', 30))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_9_3), (u'errorCode', (u'local', 21))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 76))]), dict([(u'ArgumentType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_52), (u'ResultType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_52), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_1), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_3_8), (u'errorCode', (u'local', 13))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_4___12), (u'errorCode', (u'local', 16))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_5_8), (u'errorCode', (u'local', 17))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 77))]), dict([(u'ArgumentType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_53), (u'ResultType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_53), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_1), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_3_3), (u'errorCode', (u'local', 21))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_4_1), (u'errorCode', (u'local', 1))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_5), (u'errorCode', (u'local', 11))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_6), (u'errorCode', (u'local', 13))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_7_4), (u'errorCode', (u'local', 6))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 45))]), dict([(u'ArgumentType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_54), (u'ResultType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_54), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_1_0), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_2_4), (u'errorCode', (u'local', 21))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_3_9), (u'errorCode', (u'local', 32))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 46))]), dict([(u'ArgumentType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_55), (u'ResultType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_55), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_1), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_3_3), (u'errorCode', (u'local', 21))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_4_3), (u'errorCode', (u'local', 5))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_5_9), (u'errorCode', (u'local', 9))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_6_4), (u'errorCode', (u'local', 12))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_7_5), (u'errorCode', (u'local', 31))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_8_4), (u'errorCode', (u'local', 32))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_9_4), (u'errorCode', (u'local', 6))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 44))]), dict([(u'ArgumentType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_56), (u'ResultType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_56), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0_0), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_1_0), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_2_0), (u'errorCode', (u'local', 1))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_3_10), (u'errorCode', (u'local', 33))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 47))]), dict([(u'ArgumentType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_57), (u'returnResult', True), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_1), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 64))]), dict([(u'ArgumentType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_58), (u'operationCode', (u'local', 63))]), dict([(u'ArgumentType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_59), (u'ResultType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_59), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0_0), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_1_0), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_2_4), (u'errorCode', (u'local', 21))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_3), (u'errorCode', (u'local', 1))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 66))]), dict([(u'ArgumentType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_60), (u'ResultType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_60), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_1_6), (u'errorCode', (u'local', 50))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 39))]), dict([(u'ArgumentType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_61), (u'operationCode', (u'local', 41))]), dict([(u'ArgumentType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_62), (u'operationCode', (u'local', 42))]), dict([(u'ArgumentType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_63), (u'ResultType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_63), (u'operationCode', (u'local', 40))]), dict([(u'ArgumentType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_64), (u'ResultType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_64), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_1), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_3_3), (u'errorCode', (u'local', 21))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_4_3), (u'errorCode', (u'local', 5))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_5_9), (u'errorCode', (u'local', 9))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_6_4), (u'errorCode', (u'local', 12))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_7_6), (u'errorCode', (u'local', 27))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_8_5), (u'errorCode', (u'local', 52))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_9_5), (u'errorCode', (u'local', 53))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_10_1), (u'errorCode', (u'local', 54))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 83))]), dict([(u'ArgumentType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_65), (u'ResultType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_65), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_1), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_3_3), (u'errorCode', (u'local', 21))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_4_1), (u'errorCode', (u'local', 1))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_5_3), (u'errorCode', (u'local', 27))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_6_5), (u'errorCode', (u'local', 52))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 85))]), dict([(u'ArgumentType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_66), (u'ResultType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_66), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_1), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_2_5), (u'errorCode', (u'local', 51))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_3_1), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_4_1), (u'errorCode', (u'local', 1))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_5_10), (u'errorCode', (u'local', 52))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_6_6), (u'errorCode', (u'local', 58))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 86))]), dict([(u'ArgumentType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_67), (u'ResultType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_67), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0_1), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_1_3), (u'errorCode', (u'local', 34))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 20))]), dict([(u'ArgumentType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_68), (u'ResultType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_68), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_1_0), (u'errorCode', (u'local', 36))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 21))]), dict([(u'ArgumentType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_69), (u'ResultType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_69), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_1_7), (u'errorCode', (u'local', 22))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_3_4), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_4_8), (u'errorCode', (u'local', 11))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_5_2), (u'errorCode', (u'local', 1))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 84))])], rr=[], ev=None, er=[])
+    __sendRoutingInfo_Errors_val_ParameterType_1_7 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-ER-DataTypes', 'OngoingGroupCallParam')))
+    _______TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab._val = ASN1Set(rv=[dict([(u'ArgumentType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_0), (u'ResultType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_0), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_1), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_3), (u'errorCode', (u'local', 1))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_4), (u'errorCode', (u'local', 8))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 2))]), dict([(u'ArgumentType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_1), (u'ResultType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_1), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_0_0), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_1_0), (u'errorCode', (u'local', 36))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 3))]), dict([(u'ArgumentType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_2), (u'ResultType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_2), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_0_0), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_1_0), (u'errorCode', (u'local', 36))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 36))]), dict([(u'ArgumentType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_3), (u'ResultType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_3), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_0_0), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_1_0), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_2_0), (u'errorCode', (u'local', 1))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 67))]), dict([(u'ArgumentType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_4), (u'ResultType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_4), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_0_0), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_1_1), (u'errorCode', (u'local', 5))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 55))]), dict([(u'ArgumentType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_5), (u'ResultType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_5), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_1_0), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_2_0), (u'errorCode', (u'local', 1))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_3_0), (u'errorCode', (u'local', 8))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 23))]), dict([(u'ArgumentType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_6), (u'ResultType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_6), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_1_0), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_2_0), (u'errorCode', (u'local', 1))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 53))]), dict([(u'ArgumentType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_7), (u'ResultType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_7), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_1), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))]), dict([(u'errorCode', (u'local', 25))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_4_0), (u'errorCode', (u'local', 42))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 68))]), dict([(u'ArgumentType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_8), (u'ResultType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_8), (u'operationCode', (u'local', 29))]), dict([(u'ArgumentType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_9), (u'operationCode', (u'local', 33))]), dict([(u'ArgumentType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_10), (u'operationCode', (u'local', 34))]), dict([(u'ArgumentType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_11), (u'ResultType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_11), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_0_1), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_1), (u'errorCode', (u'local', 35))]), dict([(u'errorCode', (u'local', 3))]), dict([(u'errorCode', (u'local', 26))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 69))]), dict([(u'ArgumentType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_12), (u'ResultType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_12), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_1), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_3), (u'errorCode', (u'local', 1))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 56))]), dict([(u'ArgumentType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_13), (u'ResultType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_13), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_1_0), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_2_0), (u'errorCode', (u'local', 1))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 15))]), dict([(u'ArgumentType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_14), (u'ResultType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_14), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_1), (u'errorCode', (u'local', 35))]), dict([(u'errorCode', (u'local', 7))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 43))]), dict([(u'ArgumentType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_15), (u'ResultType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_15), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_0_0), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_1_0), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_2_1), (u'errorCode', (u'local', 5))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 7))]), dict([(u'ArgumentType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_16), (u'ResultType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_16), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_0_0), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_1_0), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_2_1), (u'errorCode', (u'local', 5))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 8))]), dict([(u'ArgumentType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_17), (u'operationCode', (u'local', 37))]), dict([(u'operationCode', (u'local', 38))]), dict([(u'ArgumentType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_19), (u'ResultType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_19), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_1), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_3), (u'errorCode', (u'local', 1))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 57))]), dict([(u'ArgumentType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_20), (u'ResultType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_20), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_0_0), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_1_0), (u'errorCode', (u'local', 36))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 70))]), dict([(u'ArgumentType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_21), (u'ResultType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_21), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_1_2), (u'errorCode', (u'local', 49))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_2_2), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_3_1), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_4_1), (u'errorCode', (u'local', 1))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 71))]), dict([(u'ArgumentType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_22), (u'ResultType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_22), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_0_2), (u'errorCode', (u'local', 60))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_1), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_3), (u'errorCode', (u'local', 1))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_4_2), (u'errorCode', (u'local', 10))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_5), (u'errorCode', (u'local', 11))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_6), (u'errorCode', (u'local', 13))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_7), (u'errorCode', (u'local', 16))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_8), (u'errorCode', (u'local', 18))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_9), (u'errorCode', (u'local', 62))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 62))]), dict([(u'ArgumentType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_23), (u'ResultType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_23), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_0_3), (u'errorCode', (u'local', 61))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_1), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_3), (u'errorCode', (u'local', 1))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_4_2), (u'errorCode', (u'local', 10))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_5), (u'errorCode', (u'local', 11))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_6), (u'errorCode', (u'local', 13))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_7), (u'errorCode', (u'local', 16))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_8_0), (u'errorCode', (u'local', 19))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_9_0), (u'errorCode', (u'local', 17))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_10), (u'errorCode', (u'local', 20))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_11), (u'errorCode', (u'local', 62))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 65))]), dict([(u'ArgumentType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_24), (u'ResultType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_24), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_0_4), (u'errorCode', (u'local', 27))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_1_3), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_2_2), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_3_1), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_4_1), (u'errorCode', (u'local', 1))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_5_0), (u'errorCode', (u'local', 13))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 24))]), dict([(u'ArgumentType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_25), (u'ResultType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_25), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_1), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_3), (u'errorCode', (u'local', 1))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 25))]), dict([(u'ArgumentType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_26), (u'ResultType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_26), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_1), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_3), (u'errorCode', (u'local', 1))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 26))]), dict([(u'ArgumentType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_27), (u'ResultType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_27), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_0_0), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_1_0), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_2_0), (u'errorCode', (u'local', 1))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_3_2), (u'errorCode', (u'local', 59))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 89))]), dict([(u'ArgumentType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_28), (u'ResultType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_28), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_0_0), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_1_0), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_2_0), (u'errorCode', (u'local', 1))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 5))]), dict([(u'ArgumentType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_29), (u'ResultType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_29), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_1), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_3_3), (u'errorCode', (u'local', 21))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_4_3), (u'errorCode', (u'local', 5))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_5_1), (u'errorCode', (u'local', 40))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 50))]), dict([(u'ArgumentType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_30), (u'ResultType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_30), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_1), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_3_3), (u'errorCode', (u'local', 21))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_4_3), (u'errorCode', (u'local', 5))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 51))]), dict([(u'ArgumentType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_31), (u'ResultType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_31), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_0_0), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_1_0), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_2_0), (u'errorCode', (u'local', 1))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 58))]), dict([(u'ArgumentType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_32), (u'ResultType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_32), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_1), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_3_3), (u'errorCode', (u'local', 21))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_4_4), (u'errorCode', (u'local', 48))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_5_2), (u'errorCode', (u'local', 1))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_6_0), (u'errorCode', (u'local', 44))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_7_0), (u'errorCode', (u'local', 10))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_8_1), (u'errorCode', (u'local', 11))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_9_1), (u'errorCode', (u'local', 27))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_10_0), (u'errorCode', (u'local', 45))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_11_0), (u'errorCode', (u'local', 46))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_12), (u'errorCode', (u'local', 13))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_13), (u'errorCode', (u'local', 15))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_14), (u'errorCode', (u'local', 14))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 22))]), dict([(u'ArgumentType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_33), (u'ResultType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_33), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_1), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_3_3), (u'errorCode', (u'local', 21))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_4_4), (u'errorCode', (u'local', 48))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_5_3), (u'errorCode', (u'local', 27))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_6_1), (u'errorCode', (u'local', 39))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 4))]), dict([(u'ArgumentType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_34), (u'ResultType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_34), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_0_5), (u'errorCode', (u'local', 47))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_1_4), (u'errorCode', (u'local', 48))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_3_4), (u'errorCode', (u'local', 35))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 6))]), dict([(u'ArgumentType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_35), (u'ResultType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_35), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_1_1), (u'errorCode', (u'local', 5))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_3_4), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_4_5), (u'errorCode', (u'local', 51))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_5_4), (u'errorCode', (u'local', 21))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 73))]), dict([(u'ArgumentType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_36), (u'ResultType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_36), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_0_6), (u'errorCode', (u'local', 1))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_1_3), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_3_4), (u'errorCode', (u'local', 35))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 74))]), dict([(u'ArgumentType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_37), (u'ResultType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_37), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_0_1), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_1), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_2_3), (u'errorCode', (u'local', 28))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_3_5), (u'errorCode', (u'local', 27))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_4_6), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_5_5), (u'errorCode', (u'local', 45))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 75))]), dict([(u'ArgumentType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_38), (u'ResultType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_38), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_0_1), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_1_5), (u'errorCode', (u'local', 51))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_2_0), (u'errorCode', (u'local', 1))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_3_6), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_4_7), (u'errorCode', (u'local', 21))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 87))]), dict([(u'ArgumentType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_39), (u'ResultType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_39), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_0_1), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_1_5), (u'errorCode', (u'local', 51))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_2_0), (u'errorCode', (u'local', 1))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_3_6), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_4_7), (u'errorCode', (u'local', 21))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 88))]), dict([(u'ArgumentType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_40), (u'ResultType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_40), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_1), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_3_7), (u'errorCode', (u'local', 10))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_4_8), (u'errorCode', (u'local', 11))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_5_0), (u'errorCode', (u'local', 13))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_6_2), (u'errorCode', (u'local', 16))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_7_1), (u'errorCode', (u'local', 17))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_8_2), (u'errorCode', (u'local', 20))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 10))]), dict([(u'ArgumentType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_41), (u'ResultType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_41), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_1), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_3_7), (u'errorCode', (u'local', 10))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_4_8), (u'errorCode', (u'local', 11))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_5_0), (u'errorCode', (u'local', 13))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_6_2), (u'errorCode', (u'local', 16))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_7_1), (u'errorCode', (u'local', 17))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 11))]), dict([(u'ArgumentType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_42), (u'ResultType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_42), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_1), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_3_7), (u'errorCode', (u'local', 10))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_4_8), (u'errorCode', (u'local', 11))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_5_0), (u'errorCode', (u'local', 13))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_6_2), (u'errorCode', (u'local', 16))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_7_1), (u'errorCode', (u'local', 17))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_8_0), (u'errorCode', (u'local', 19))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_9_2), (u'errorCode', (u'local', 20))]), dict([(u'errorCode', (u'local', 38))]), dict([(u'errorCode', (u'local', 43))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 12))]), dict([(u'ArgumentType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_43), (u'ResultType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_43), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_1), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_3_7), (u'errorCode', (u'local', 10))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_4_8), (u'errorCode', (u'local', 11))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_5_0), (u'errorCode', (u'local', 13))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_6_2), (u'errorCode', (u'local', 16))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_7_1), (u'errorCode', (u'local', 17))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_8_0), (u'errorCode', (u'local', 19))]), dict([(u'errorCode', (u'local', 38))]), dict([(u'errorCode', (u'local', 43))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 13))]), dict([(u'ArgumentType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_44), (u'ResultType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_44), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_1), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_3_7), (u'errorCode', (u'local', 10))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_4_8), (u'errorCode', (u'local', 11))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_5_0), (u'errorCode', (u'local', 13))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_6_2), (u'errorCode', (u'local', 16))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_7_2), (u'errorCode', (u'local', 18))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 14))]), dict([(u'ArgumentType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_45), (u'ResultType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_45), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_1), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))]), dict([(u'errorCode', (u'local', 71))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_4_9), (u'errorCode', (u'local', 13))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 59))]), dict([(u'ArgumentType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_46), (u'ResultType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_46), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_1), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_3_5), (u'errorCode', (u'local', 27))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_4_10), (u'errorCode', (u'local', 9))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_5_6), (u'errorCode', (u'local', 12))]), dict([(u'errorCode', (u'local', 71))]), dict([(u'errorCode', (u'local', 72))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 60))]), dict([(u'ArgumentType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_47), (u'returnResult', True), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_1), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_3_5), (u'errorCode', (u'local', 27))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_4_10), (u'errorCode', (u'local', 9))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_5_6), (u'errorCode', (u'local', 12))]), dict([(u'errorCode', (u'local', 71))]), dict([(u'errorCode', (u'local', 72))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 61))]), dict([(u'ArgumentType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_48), (u'ResultType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_48), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_1), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_3_8), (u'errorCode', (u'local', 13))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_4__11), (u'errorCode', (u'local', 19))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_5_7), (u'errorCode', (u'local', 37))]), dict([(u'errorCode', (u'local', 38))]), dict([(u'errorCode', (u'local', 43))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 17))]), dict([(u'ArgumentType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_49), (u'ResultType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_49), (u'operationCode', (u'local', 18))]), dict([(u'ArgumentType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_50), (u'ResultType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_50), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_0_0), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_1_0), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_2_0), (u'errorCode', (u'local', 1))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 72))]), dict([(u'ArgumentType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_51), (u'ResultType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_51), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_1), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_3_8), (u'errorCode', (u'local', 13))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_4___12), (u'errorCode', (u'local', 16))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_5_8), (u'errorCode', (u'local', 17))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_6_3), (u'errorCode', (u'local', 20))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_7_3), (u'errorCode', (u'local', 29))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_8_3), (u'errorCode', (u'local', 30))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_9_3), (u'errorCode', (u'local', 21))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 76))]), dict([(u'ArgumentType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_52), (u'ResultType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_52), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_1), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_3_8), (u'errorCode', (u'local', 13))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_4___12), (u'errorCode', (u'local', 16))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_5_8), (u'errorCode', (u'local', 17))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 77))]), dict([(u'ArgumentType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_53), (u'ResultType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_53), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_1), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_3_3), (u'errorCode', (u'local', 21))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_4_1), (u'errorCode', (u'local', 1))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_5), (u'errorCode', (u'local', 11))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_6), (u'errorCode', (u'local', 13))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_7_4), (u'errorCode', (u'local', 6))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 45))]), dict([(u'ArgumentType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_54), (u'ResultType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_54), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_1_0), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_2_4), (u'errorCode', (u'local', 21))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_3_9), (u'errorCode', (u'local', 32))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 46))]), dict([(u'ArgumentType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_55), (u'ResultType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_55), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_1), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_3_3), (u'errorCode', (u'local', 21))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_4_3), (u'errorCode', (u'local', 5))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_5_9), (u'errorCode', (u'local', 9))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_6_4), (u'errorCode', (u'local', 12))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_7_5), (u'errorCode', (u'local', 31))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_8_4), (u'errorCode', (u'local', 32))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_9_4), (u'errorCode', (u'local', 6))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 44))]), dict([(u'ArgumentType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_56), (u'ResultType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_56), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_0_0), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_1_0), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_2_0), (u'errorCode', (u'local', 1))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_3_10), (u'errorCode', (u'local', 33))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 47))]), dict([(u'ArgumentType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_57), (u'returnResult', True), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_1), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 64))]), dict([(u'ArgumentType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_58), (u'operationCode', (u'local', 63))]), dict([(u'ArgumentType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_59), (u'ResultType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_59), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_0_0), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_1_0), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_2_4), (u'errorCode', (u'local', 21))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_3), (u'errorCode', (u'local', 1))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 66))]), dict([(u'ArgumentType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_60), (u'ResultType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_60), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_1_6), (u'errorCode', (u'local', 50))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 39))]), dict([(u'ArgumentType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_61), (u'operationCode', (u'local', 41))]), dict([(u'ArgumentType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_62), (u'operationCode', (u'local', 42))]), dict([(u'ArgumentType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_63), (u'ResultType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_63), (u'operationCode', (u'local', 40))]), dict([(u'ArgumentType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_64), (u'ResultType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_64), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_1), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_3_3), (u'errorCode', (u'local', 21))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_4_3), (u'errorCode', (u'local', 5))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_5_9), (u'errorCode', (u'local', 9))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_6_4), (u'errorCode', (u'local', 12))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_7_6), (u'errorCode', (u'local', 27))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_8_5), (u'errorCode', (u'local', 52))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_9_5), (u'errorCode', (u'local', 53))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_10_1), (u'errorCode', (u'local', 54))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 83))]), dict([(u'ArgumentType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_65), (u'ResultType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_65), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_1), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_3_3), (u'errorCode', (u'local', 21))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_4_1), (u'errorCode', (u'local', 1))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_5_3), (u'errorCode', (u'local', 27))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_6_5), (u'errorCode', (u'local', 52))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 85))]), dict([(u'ArgumentType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_66), (u'ResultType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_66), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_1), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_2_5), (u'errorCode', (u'local', 51))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_3_1), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_4_1), (u'errorCode', (u'local', 1))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_5_10), (u'errorCode', (u'local', 52))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_6_6), (u'errorCode', (u'local', 58))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 86))]), dict([(u'ArgumentType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_67), (u'ResultType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_67), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_0_1), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_1_3), (u'errorCode', (u'local', 34))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 20))]), dict([(u'ArgumentType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_68), (u'ResultType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_68), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_1_0), (u'errorCode', (u'local', 36))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 21))]), dict([(u'ArgumentType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_69), (u'ResultType', ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_69), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_1_7), (u'errorCode', (u'local', 22))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_2), (u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_3_4), (u'errorCode', (u'local', 35))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_4_8), (u'errorCode', (u'local', 11))]), dict([(u'ParameterType', __sendRoutingInfo_Errors_val_ParameterType_5_2), (u'errorCode', (u'local', 1))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 84))])], rr=[], ev=None, er=[])
     ______TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode._const_tab = _______TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab
     ______TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode._const_tab_at = None
     ______TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode._const_tab_id = u'operationCode'
@@ -18983,38 +18802,38 @@ class TCAP_MAP_Messages:
         _______TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab,
         ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_0,
         ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_0,
-        __OPERATION_Errors_val_ParameterType_0,
-        __OPERATION_Errors_val_ParameterType_1,
-        __OPERATION_Errors_val_ParameterType_2,
-        __OPERATION_Errors_val_ParameterType_3,
-        __OPERATION_Errors_val_ParameterType_4,
+        __sendRoutingInfo_Errors_val_ParameterType_0,
+        __sendRoutingInfo_Errors_val_ParameterType_1,
+        __sendRoutingInfo_Errors_val_ParameterType_2,
+        __sendRoutingInfo_Errors_val_ParameterType_3,
+        __sendRoutingInfo_Errors_val_ParameterType_4,
         ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_1,
         ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_1,
-        __OPERATION_Errors_val_ParameterType_0_0,
-        __OPERATION_Errors_val_ParameterType_1_0,
+        __sendRoutingInfo_Errors_val_ParameterType_0_0,
+        __sendRoutingInfo_Errors_val_ParameterType_1_0,
         ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_2,
         ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_2,
         ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_3,
         ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_3,
-        __OPERATION_Errors_val_ParameterType_2_0,
+        __sendRoutingInfo_Errors_val_ParameterType_2_0,
         ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_4,
         ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_4,
-        __OPERATION_Errors_val_ParameterType_1_1,
+        __sendRoutingInfo_Errors_val_ParameterType_1_1,
         ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_5,
         ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_5,
-        __OPERATION_Errors_val_ParameterType_3_0,
+        __sendRoutingInfo_Errors_val_ParameterType_3_0,
         ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_6,
         ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_6,
         ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_7,
         ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_7,
-        __OPERATION_Errors_val_ParameterType_4_0,
+        __sendRoutingInfo_Errors_val_ParameterType_4_0,
         ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_8,
         ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_8,
         ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_9,
         ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_10,
         ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_11,
         ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_11,
-        __OPERATION_Errors_val_ParameterType_0_1,
+        __sendRoutingInfo_Errors_val_ParameterType_0_1,
         ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_12,
         ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_12,
         ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_13,
@@ -19023,7 +18842,7 @@ class TCAP_MAP_Messages:
         ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_14,
         ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_15,
         ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_15,
-        __OPERATION_Errors_val_ParameterType_2_1,
+        __sendRoutingInfo_Errors_val_ParameterType_2_1,
         ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_16,
         ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_16,
         ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_17,
@@ -19033,184 +18852,184 @@ class TCAP_MAP_Messages:
         ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_20,
         ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_21,
         ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_21,
-        __OPERATION_Errors_val_ParameterType_1_2,
-        __OPERATION_Errors_val_ParameterType_2_2,
-        __OPERATION_Errors_val_ParameterType_3_1,
-        __OPERATION_Errors_val_ParameterType_4_1,
+        __sendRoutingInfo_Errors_val_ParameterType_1_2,
+        __sendRoutingInfo_Errors_val_ParameterType_2_2,
+        __sendRoutingInfo_Errors_val_ParameterType_3_1,
+        __sendRoutingInfo_Errors_val_ParameterType_4_1,
         ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_22,
         ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_22,
-        __OPERATION_Errors_val_ParameterType_0_2,
-        __OPERATION_Errors_val_ParameterType_4_2,
-        __OPERATION_Errors_val_ParameterType_5,
-        __OPERATION_Errors_val_ParameterType_6,
-        __OPERATION_Errors_val_ParameterType_7,
-        __OPERATION_Errors_val_ParameterType_8,
-        __OPERATION_Errors_val_ParameterType_9,
+        __sendRoutingInfo_Errors_val_ParameterType_0_2,
+        __sendRoutingInfo_Errors_val_ParameterType_4_2,
+        __sendRoutingInfo_Errors_val_ParameterType_5,
+        __sendRoutingInfo_Errors_val_ParameterType_6,
+        __sendRoutingInfo_Errors_val_ParameterType_7,
+        __sendRoutingInfo_Errors_val_ParameterType_8,
+        __sendRoutingInfo_Errors_val_ParameterType_9,
         ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_23,
         ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_23,
-        __OPERATION_Errors_val_ParameterType_0_3,
-        __OPERATION_Errors_val_ParameterType_8_0,
-        __OPERATION_Errors_val_ParameterType_9_0,
-        __OPERATION_Errors_val_ParameterType_10,
-        __OPERATION_Errors_val_ParameterType_11,
+        __sendRoutingInfo_Errors_val_ParameterType_0_3,
+        __sendRoutingInfo_Errors_val_ParameterType_8_0,
+        __sendRoutingInfo_Errors_val_ParameterType_9_0,
+        __sendRoutingInfo_Errors_val_ParameterType_10,
+        __sendRoutingInfo_Errors_val_ParameterType_11,
         ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_24,
         ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_24,
-        __OPERATION_Errors_val_ParameterType_0_4,
-        __OPERATION_Errors_val_ParameterType_1_3,
-        __OPERATION_Errors_val_ParameterType_5_0,
+        __sendRoutingInfo_Errors_val_ParameterType_0_4,
+        __sendRoutingInfo_Errors_val_ParameterType_1_3,
+        __sendRoutingInfo_Errors_val_ParameterType_5_0,
         ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_25,
         ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_25,
         ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_26,
         ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_26,
         ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_27,
         ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_27,
-        __OPERATION_Errors_val_ParameterType_3_2,
+        __sendRoutingInfo_Errors_val_ParameterType_3_2,
         ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_28,
         ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_28,
         ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_29,
         ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_29,
-        __OPERATION_Errors_val_ParameterType_3_3,
-        __OPERATION_Errors_val_ParameterType_4_3,
-        __OPERATION_Errors_val_ParameterType_5_1,
+        __sendRoutingInfo_Errors_val_ParameterType_3_3,
+        __sendRoutingInfo_Errors_val_ParameterType_4_3,
+        __sendRoutingInfo_Errors_val_ParameterType_5_1,
         ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_30,
         ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_30,
         ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_31,
         ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_31,
         ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_32,
         ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_32,
-        __OPERATION_Errors_val_ParameterType_4_4,
-        __OPERATION_Errors_val_ParameterType_5_2,
-        __OPERATION_Errors_val_ParameterType_6_0,
-        __OPERATION_Errors_val_ParameterType_7_0,
-        __OPERATION_Errors_val_ParameterType_8_1,
-        __OPERATION_Errors_val_ParameterType_9_1,
-        __OPERATION_Errors_val_ParameterType_10_0,
-        __OPERATION_Errors_val_ParameterType_11_0,
-        __OPERATION_Errors_val_ParameterType_12,
-        __OPERATION_Errors_val_ParameterType_13,
-        __OPERATION_Errors_val_ParameterType_14,
+        __sendRoutingInfo_Errors_val_ParameterType_4_4,
+        __sendRoutingInfo_Errors_val_ParameterType_5_2,
+        __sendRoutingInfo_Errors_val_ParameterType_6_0,
+        __sendRoutingInfo_Errors_val_ParameterType_7_0,
+        __sendRoutingInfo_Errors_val_ParameterType_8_1,
+        __sendRoutingInfo_Errors_val_ParameterType_9_1,
+        __sendRoutingInfo_Errors_val_ParameterType_10_0,
+        __sendRoutingInfo_Errors_val_ParameterType_11_0,
+        __sendRoutingInfo_Errors_val_ParameterType_12,
+        __sendRoutingInfo_Errors_val_ParameterType_13,
+        __sendRoutingInfo_Errors_val_ParameterType_14,
         ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_33,
         ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_33,
-        __OPERATION_Errors_val_ParameterType_5_3,
-        __OPERATION_Errors_val_ParameterType_6_1,
+        __sendRoutingInfo_Errors_val_ParameterType_5_3,
+        __sendRoutingInfo_Errors_val_ParameterType_6_1,
         ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_34,
         ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_34,
-        __OPERATION_Errors_val_ParameterType_0_5,
-        __OPERATION_Errors_val_ParameterType_1_4,
-        __OPERATION_Errors_val_ParameterType_3_4,
+        __sendRoutingInfo_Errors_val_ParameterType_0_5,
+        __sendRoutingInfo_Errors_val_ParameterType_1_4,
+        __sendRoutingInfo_Errors_val_ParameterType_3_4,
         ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_35,
         ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_35,
-        __OPERATION_Errors_val_ParameterType_4_5,
-        __OPERATION_Errors_val_ParameterType_5_4,
+        __sendRoutingInfo_Errors_val_ParameterType_4_5,
+        __sendRoutingInfo_Errors_val_ParameterType_5_4,
         ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_36,
         ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_36,
-        __OPERATION_Errors_val_ParameterType_0_6,
+        __sendRoutingInfo_Errors_val_ParameterType_0_6,
         ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_37,
         ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_37,
-        __OPERATION_Errors_val_ParameterType_2_3,
-        __OPERATION_Errors_val_ParameterType_3_5,
-        __OPERATION_Errors_val_ParameterType_4_6,
-        __OPERATION_Errors_val_ParameterType_5_5,
+        __sendRoutingInfo_Errors_val_ParameterType_2_3,
+        __sendRoutingInfo_Errors_val_ParameterType_3_5,
+        __sendRoutingInfo_Errors_val_ParameterType_4_6,
+        __sendRoutingInfo_Errors_val_ParameterType_5_5,
         ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_38,
         ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_38,
-        __OPERATION_Errors_val_ParameterType_1_5,
-        __OPERATION_Errors_val_ParameterType_3_6,
-        __OPERATION_Errors_val_ParameterType_4_7,
+        __sendRoutingInfo_Errors_val_ParameterType_1_5,
+        __sendRoutingInfo_Errors_val_ParameterType_3_6,
+        __sendRoutingInfo_Errors_val_ParameterType_4_7,
         ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_39,
         ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_39,
         ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_40,
         ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_40,
-        __OPERATION_Errors_val_ParameterType_3_7,
-        __OPERATION_Errors_val_ParameterType_4_8,
-        __OPERATION_Errors_val_ParameterType_6_2,
-        __OPERATION_Errors_val_ParameterType_7_1,
-        __OPERATION_Errors_val_ParameterType_8_2,
+        __sendRoutingInfo_Errors_val_ParameterType_3_7,
+        __sendRoutingInfo_Errors_val_ParameterType_4_8,
+        __sendRoutingInfo_Errors_val_ParameterType_6_2,
+        __sendRoutingInfo_Errors_val_ParameterType_7_1,
+        __sendRoutingInfo_Errors_val_ParameterType_8_2,
         ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_41,
         ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_41,
         ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_42,
         ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_42,
-        __OPERATION_Errors_val_ParameterType_9_2,
+        __sendRoutingInfo_Errors_val_ParameterType_9_2,
         ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_43,
         ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_43,
         ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_44,
         ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_44,
-        __OPERATION_Errors_val_ParameterType_7_2,
+        __sendRoutingInfo_Errors_val_ParameterType_7_2,
         ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_45,
         ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_45,
-        __OPERATION_Errors_val_ParameterType_4_9,
+        __sendRoutingInfo_Errors_val_ParameterType_4_9,
         ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_46,
         ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_46,
-        __OPERATION_Errors_val_ParameterType_4_10,
-        __OPERATION_Errors_val_ParameterType_5_6,
+        __sendRoutingInfo_Errors_val_ParameterType_4_10,
+        __sendRoutingInfo_Errors_val_ParameterType_5_6,
         ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_47,
         ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_48,
         ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_48,
-        __OPERATION_Errors_val_ParameterType_3_8,
-        __OPERATION_Errors_val_ParameterType_4__11,
-        __OPERATION_Errors_val_ParameterType_5_7,
+        __sendRoutingInfo_Errors_val_ParameterType_3_8,
+        __sendRoutingInfo_Errors_val_ParameterType_4__11,
+        __sendRoutingInfo_Errors_val_ParameterType_5_7,
         ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_49,
         ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_49,
         ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_50,
         ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_50,
         ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_51,
         ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_51,
-        __OPERATION_Errors_val_ParameterType_4___12,
-        __OPERATION_Errors_val_ParameterType_5_8,
-        __OPERATION_Errors_val_ParameterType_6_3,
-        __OPERATION_Errors_val_ParameterType_7_3,
-        __OPERATION_Errors_val_ParameterType_8_3,
-        __OPERATION_Errors_val_ParameterType_9_3,
+        __sendRoutingInfo_Errors_val_ParameterType_4___12,
+        __sendRoutingInfo_Errors_val_ParameterType_5_8,
+        __sendRoutingInfo_Errors_val_ParameterType_6_3,
+        __sendRoutingInfo_Errors_val_ParameterType_7_3,
+        __sendRoutingInfo_Errors_val_ParameterType_8_3,
+        __sendRoutingInfo_Errors_val_ParameterType_9_3,
         ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_52,
         ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_52,
         ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_53,
         ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_53,
-        __OPERATION_Errors_val_ParameterType_7_4,
+        __sendRoutingInfo_Errors_val_ParameterType_7_4,
         ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_54,
         ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_54,
-        __OPERATION_Errors_val_ParameterType_2_4,
-        __OPERATION_Errors_val_ParameterType_3_9,
+        __sendRoutingInfo_Errors_val_ParameterType_2_4,
+        __sendRoutingInfo_Errors_val_ParameterType_3_9,
         ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_55,
         ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_55,
-        __OPERATION_Errors_val_ParameterType_5_9,
-        __OPERATION_Errors_val_ParameterType_6_4,
-        __OPERATION_Errors_val_ParameterType_7_5,
-        __OPERATION_Errors_val_ParameterType_8_4,
-        __OPERATION_Errors_val_ParameterType_9_4,
+        __sendRoutingInfo_Errors_val_ParameterType_5_9,
+        __sendRoutingInfo_Errors_val_ParameterType_6_4,
+        __sendRoutingInfo_Errors_val_ParameterType_7_5,
+        __sendRoutingInfo_Errors_val_ParameterType_8_4,
+        __sendRoutingInfo_Errors_val_ParameterType_9_4,
         ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_56,
         ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_56,
-        __OPERATION_Errors_val_ParameterType_3_10,
+        __sendRoutingInfo_Errors_val_ParameterType_3_10,
         ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_57,
         ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_58,
         ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_59,
         ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_59,
         ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_60,
         ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_60,
-        __OPERATION_Errors_val_ParameterType_1_6,
+        __sendRoutingInfo_Errors_val_ParameterType_1_6,
         ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_61,
         ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_62,
         ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_63,
         ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_63,
         ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_64,
         ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_64,
-        __OPERATION_Errors_val_ParameterType_7_6,
-        __OPERATION_Errors_val_ParameterType_8_5,
-        __OPERATION_Errors_val_ParameterType_9_5,
-        __OPERATION_Errors_val_ParameterType_10_1,
+        __sendRoutingInfo_Errors_val_ParameterType_7_6,
+        __sendRoutingInfo_Errors_val_ParameterType_8_5,
+        __sendRoutingInfo_Errors_val_ParameterType_9_5,
+        __sendRoutingInfo_Errors_val_ParameterType_10_1,
         ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_65,
         ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_65,
-        __OPERATION_Errors_val_ParameterType_6_5,
+        __sendRoutingInfo_Errors_val_ParameterType_6_5,
         ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_66,
         ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_66,
-        __OPERATION_Errors_val_ParameterType_2_5,
-        __OPERATION_Errors_val_ParameterType_5_10,
-        __OPERATION_Errors_val_ParameterType_6_6,
+        __sendRoutingInfo_Errors_val_ParameterType_2_5,
+        __sendRoutingInfo_Errors_val_ParameterType_5_10,
+        __sendRoutingInfo_Errors_val_ParameterType_6_6,
         ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_67,
         ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_67,
         ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_68,
         ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_68,
         ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ArgumentType_69,
         ________TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab_val_ResultType_69,
-        __OPERATION_Errors_val_ParameterType_1_7,
+        __sendRoutingInfo_Errors_val_ParameterType_1_7,
         ______TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_opcode,
         ______TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke_argument,
         _____TCAP_MAP_Message_unidirectional_components__item__basicROS_invoke,
@@ -19371,6 +19190,390 @@ class TCAP_MAP_Messages:
         TCAP_MAP_Message,
     ]
 
+class Remote_Operations_Generic_ROS_PDUs:
+
+    _name_  = u'Remote-Operations-Generic-ROS-PDUs'
+    _oid_   = [2, 4, 6, 0]
+    
+    _obj_ = [
+        u'ROS',
+        u'Invoke',
+        u'ReturnResult',
+        u'ReturnError',
+        u'Reject',
+        u'GeneralProblem',
+        u'InvokeProblem',
+        u'ReturnResultProblem',
+        u'ReturnErrorProblem',
+        u'RejectProblem',
+        u'InvokeId',
+        u'noInvokeId',
+        u'NoInvokeId',
+        u'Errors',
+        u'Bind',
+        u'Unbind',
+        ]
+    _type_ = [
+        u'ROS',
+        u'Invoke',
+        u'ReturnResult',
+        u'ReturnError',
+        u'Reject',
+        u'GeneralProblem',
+        u'InvokeProblem',
+        u'ReturnResultProblem',
+        u'ReturnErrorProblem',
+        u'RejectProblem',
+        u'InvokeId',
+        u'Bind',
+        u'Unbind',
+        ]
+    _set_ = [
+        u'NoInvokeId',
+        u'Errors',
+        ]
+    _val_ = [
+        u'noInvokeId',
+        ]
+    _class_ = [
+        u'Errors',
+        ]
+    _param_ = [
+        u'ROS',
+        u'Invoke',
+        u'ReturnResult',
+        u'ReturnError',
+        u'Errors',
+        u'Bind',
+        u'Unbind',
+        ]
+    
+    #-----< ROS >-----#
+    ROS = CHOICE(name=u'ROS', mode=MODE_TYPE, param=True)
+    
+    #-----< Invoke >-----#
+    Invoke = SEQ(name=u'Invoke', mode=MODE_TYPE, param=True)
+    
+    #-----< ReturnResult >-----#
+    ReturnResult = SEQ(name=u'ReturnResult', mode=MODE_TYPE, param=True)
+    
+    #-----< ReturnError >-----#
+    ReturnError = SEQ(name=u'ReturnError', mode=MODE_TYPE, param=True)
+    
+    #-----< Reject >-----#
+    Reject = SEQ(name=u'Reject', mode=MODE_TYPE)
+    _Reject_invokeId = CHOICE(name=u'invokeId', mode=MODE_TYPE, typeref=ASN1RefType(('Remote-Operations-Generic-ROS-PDUs', 'InvokeId')))
+    _Reject_problem = CHOICE(name=u'problem', mode=MODE_TYPE)
+    __Reject_problem_general = INT(name=u'general', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('Remote-Operations-Generic-ROS-PDUs', 'GeneralProblem')))
+    __Reject_problem_invoke = INT(name=u'invoke', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('Remote-Operations-Generic-ROS-PDUs', 'InvokeProblem')))
+    __Reject_problem_returnResult = INT(name=u'returnResult', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('Remote-Operations-Generic-ROS-PDUs', 'ReturnResultProblem')))
+    __Reject_problem_returnError = INT(name=u'returnError', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('Remote-Operations-Generic-ROS-PDUs', 'ReturnErrorProblem')))
+    _Reject_problem._cont = ASN1Dict([
+        (u'general', __Reject_problem_general),
+        (u'invoke', __Reject_problem_invoke),
+        (u'returnResult', __Reject_problem_returnResult),
+        (u'returnError', __Reject_problem_returnError),
+        ])
+    _Reject_problem._ext = None
+    Reject._cont = ASN1Dict([
+        (u'invokeId', _Reject_invokeId),
+        (u'problem', _Reject_problem),
+        ])
+    Reject._ext = None
+    
+    #-----< GeneralProblem >-----#
+    GeneralProblem = INT(name=u'GeneralProblem', mode=MODE_TYPE)
+    GeneralProblem._cont = ASN1Dict([(u'unrecognizedPDU', 0), (u'mistypedPDU', 1), (u'badlyStructuredPDU', 2)])
+    
+    #-----< InvokeProblem >-----#
+    InvokeProblem = INT(name=u'InvokeProblem', mode=MODE_TYPE)
+    InvokeProblem._cont = ASN1Dict([(u'duplicateInvocation', 0), (u'unrecognizedOperation', 1), (u'mistypedArgument', 2), (u'resourceLimitation', 3), (u'releaseInProgress', 4), (u'unrecognizedLinkedId', 5), (u'linkedResponseUnexpected', 6), (u'unexpectedLinkedOperation', 7)])
+    
+    #-----< ReturnResultProblem >-----#
+    ReturnResultProblem = INT(name=u'ReturnResultProblem', mode=MODE_TYPE)
+    ReturnResultProblem._cont = ASN1Dict([(u'unrecognizedInvocation', 0), (u'resultResponseUnexpected', 1), (u'mistypedResult', 2)])
+    
+    #-----< ReturnErrorProblem >-----#
+    ReturnErrorProblem = INT(name=u'ReturnErrorProblem', mode=MODE_TYPE)
+    ReturnErrorProblem._cont = ASN1Dict([(u'unrecognizedInvocation', 0), (u'errorResponseUnexpected', 1), (u'unrecognizedError', 2), (u'unexpectedError', 3), (u'mistypedParameter', 4)])
+    
+    #-----< RejectProblem >-----#
+    RejectProblem = INT(name=u'RejectProblem', mode=MODE_TYPE)
+    RejectProblem._cont = ASN1Dict([(u'general-unrecognizedPDU', 0), (u'general-mistypedPDU', 1), (u'general-badlyStructuredPDU', 2), (u'invoke-duplicateInvocation', 10), (u'invoke-unrecognizedOperation', 11), (u'invoke-mistypedArgument', 12), (u'invoke-resourceLimitation', 13), (u'invoke-releaseInProgress', 14), (u'invoke-unrecognizedLinkedId', 15), (u'invoke-linkedResponseUnexpected', 16), (u'invoke-unexpectedLinkedOperation', 17), (u'returnResult-unrecognizedInvocation', 20), (u'returnResult-resultResponseUnexpected', 21), (u'returnResult-mistypedResult', 22), (u'returnError-unrecognizedInvocation', 30), (u'returnError-errorResponseUnexpected', 31), (u'returnError-unrecognizedError', 32), (u'returnError-unexpectedError', 33), (u'returnError-mistypedParameter', 34)])
+    
+    #-----< InvokeId >-----#
+    InvokeId = CHOICE(name=u'InvokeId', mode=MODE_TYPE)
+    _InvokeId_present = INT(name=u'present', mode=MODE_TYPE)
+    _InvokeId_absent = NULL(name=u'absent', mode=MODE_TYPE)
+    InvokeId._cont = ASN1Dict([
+        (u'present', _InvokeId_present),
+        (u'absent', _InvokeId_absent),
+        ])
+    InvokeId._ext = None
+    
+    #-----< noInvokeId >-----#
+    noInvokeId = CHOICE(name=u'noInvokeId', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Generic-ROS-PDUs', 'InvokeId')))
+    noInvokeId._val = (u'absent', 0)
+    
+    #-----< NoInvokeId >-----#
+    NoInvokeId = CHOICE(name=u'NoInvokeId', mode=MODE_SET, typeref=ASN1RefType(('Remote-Operations-Generic-ROS-PDUs', 'InvokeId')))
+    NoInvokeId._val = ASN1Set(rv=[(u'absent', 0)], rr=[], ev=None, er=[])
+    
+    #-----< Errors >-----#
+    Errors = CLASS(name=u'Errors', mode=MODE_SET, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'ERROR')), param=True)
+    
+    #-----< Bind >-----#
+    Bind = CHOICE(name=u'Bind', mode=MODE_TYPE, param=True)
+    
+    #-----< Unbind >-----#
+    Unbind = CHOICE(name=u'Unbind', mode=MODE_TYPE, param=True)
+    
+    _all_ = [
+        _Reject_invokeId,
+        __Reject_problem_general,
+        __Reject_problem_invoke,
+        __Reject_problem_returnResult,
+        __Reject_problem_returnError,
+        _Reject_problem,
+        Reject,
+        GeneralProblem,
+        InvokeProblem,
+        ReturnResultProblem,
+        ReturnErrorProblem,
+        RejectProblem,
+        _InvokeId_present,
+        _InvokeId_absent,
+        InvokeId,
+        noInvokeId,
+        NoInvokeId,
+    ]
+
+class Remote_Operations_Information_Objects:
+
+    _name_  = u'Remote-Operations-Information-Objects'
+    _oid_   = [2, 4, 5, 0]
+    
+    _obj_ = [
+        u'OPERATION',
+        u'ERROR',
+        u'OPERATION-PACKAGE',
+        u'CONNECTION-PACKAGE',
+        u'CONTRACT',
+        u'ROS-OBJECT-CLASS',
+        u'Code',
+        u'Priority',
+        u'refuse',
+        u'emptyBind',
+        u'emptyUnbind',
+        ]
+    _type_ = [
+        u'OPERATION',
+        u'ERROR',
+        u'OPERATION-PACKAGE',
+        u'CONNECTION-PACKAGE',
+        u'CONTRACT',
+        u'ROS-OBJECT-CLASS',
+        u'Code',
+        u'Priority',
+        ]
+    _set_ = [
+        ]
+    _val_ = [
+        u'refuse',
+        u'emptyBind',
+        u'emptyUnbind',
+        ]
+    _class_ = [
+        u'OPERATION',
+        u'ERROR',
+        u'OPERATION-PACKAGE',
+        u'CONNECTION-PACKAGE',
+        u'CONTRACT',
+        u'ROS-OBJECT-CLASS',
+        u'refuse',
+        u'emptyBind',
+        u'emptyUnbind',
+        ]
+    _param_ = [
+        ]
+    
+    #-----< OPERATION >-----#
+    OPERATION = CLASS(name=u'OPERATION', mode=MODE_TYPE)
+    _OPERATION_ArgumentType = OPEN(name=u'ArgumentType', mode=MODE_TYPE, opt=True)
+    _OPERATION_argumentTypeOptional = BOOL(name=u'argumentTypeOptional', mode=MODE_VALUE, opt=True)
+    _OPERATION_returnResult = BOOL(name=u'returnResult', mode=MODE_VALUE, default=True)
+    _OPERATION_ResultType = OPEN(name=u'ResultType', mode=MODE_TYPE, opt=True)
+    _OPERATION_resultTypeOptional = BOOL(name=u'resultTypeOptional', mode=MODE_VALUE, opt=True)
+    _OPERATION_Errors = CLASS(name=u'Errors', mode=MODE_SET, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'ERROR')), opt=True)
+    _OPERATION_Linked = CLASS(name=u'Linked', mode=MODE_SET, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')), opt=True)
+    _OPERATION_synchronous = BOOL(name=u'synchronous', mode=MODE_VALUE, default=False)
+    _OPERATION_alwaysReturns = BOOL(name=u'alwaysReturns', mode=MODE_VALUE, default=True)
+    _OPERATION_InvokePriority = INT(name=u'InvokePriority', mode=MODE_SET, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'Priority')), opt=True)
+    _OPERATION_ResultPriority = INT(name=u'ResultPriority', mode=MODE_SET, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'Priority')), opt=True)
+    _OPERATION_operationCode = CHOICE(name=u'operationCode', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'Code')), opt=True, uniq=True)
+    OPERATION._cont = ASN1Dict([
+        (u'ArgumentType', _OPERATION_ArgumentType),
+        (u'argumentTypeOptional', _OPERATION_argumentTypeOptional),
+        (u'returnResult', _OPERATION_returnResult),
+        (u'ResultType', _OPERATION_ResultType),
+        (u'resultTypeOptional', _OPERATION_resultTypeOptional),
+        (u'Errors', _OPERATION_Errors),
+        (u'Linked', _OPERATION_Linked),
+        (u'synchronous', _OPERATION_synchronous),
+        (u'alwaysReturns', _OPERATION_alwaysReturns),
+        (u'InvokePriority', _OPERATION_InvokePriority),
+        (u'ResultPriority', _OPERATION_ResultPriority),
+        (u'operationCode', _OPERATION_operationCode),
+        ])
+    
+    #-----< ERROR >-----#
+    ERROR = CLASS(name=u'ERROR', mode=MODE_TYPE)
+    _ERROR_ParameterType = OPEN(name=u'ParameterType', mode=MODE_TYPE, opt=True)
+    _ERROR_parameterTypeOptional = BOOL(name=u'parameterTypeOptional', mode=MODE_VALUE, opt=True)
+    _ERROR_ErrorPriority = INT(name=u'ErrorPriority', mode=MODE_SET, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'Priority')), opt=True)
+    _ERROR_errorCode = CHOICE(name=u'errorCode', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'Code')), opt=True, uniq=True)
+    ERROR._cont = ASN1Dict([
+        (u'ParameterType', _ERROR_ParameterType),
+        (u'parameterTypeOptional', _ERROR_parameterTypeOptional),
+        (u'ErrorPriority', _ERROR_ErrorPriority),
+        (u'errorCode', _ERROR_errorCode),
+        ])
+    
+    #-----< OPERATION-PACKAGE >-----#
+    OPERATION_PACKAGE = CLASS(name=u'OPERATION-PACKAGE', mode=MODE_TYPE)
+    _OPERATION_PACKAGE_Both = CLASS(name=u'Both', mode=MODE_SET, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')), opt=True)
+    _OPERATION_PACKAGE_Consumer = CLASS(name=u'Consumer', mode=MODE_SET, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')), opt=True)
+    _OPERATION_PACKAGE_Supplier = CLASS(name=u'Supplier', mode=MODE_SET, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')), opt=True)
+    _OPERATION_PACKAGE_id = OID(name=u'id', mode=MODE_VALUE, opt=True, uniq=True)
+    OPERATION_PACKAGE._cont = ASN1Dict([
+        (u'Both', _OPERATION_PACKAGE_Both),
+        (u'Consumer', _OPERATION_PACKAGE_Consumer),
+        (u'Supplier', _OPERATION_PACKAGE_Supplier),
+        (u'id', _OPERATION_PACKAGE_id),
+        ])
+    
+    #-----< CONNECTION-PACKAGE >-----#
+    CONNECTION_PACKAGE = CLASS(name=u'CONNECTION-PACKAGE', mode=MODE_TYPE)
+    _CONNECTION_PACKAGE_bind = CLASS(name=u'bind', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')), default=dict([(u'Errors', ASN1Set(rv=[dict([(u'errorCode', (u'local', -1))])], rr=[], ev=None, er=[])), (u'synchronous', True)]))
+    _CONNECTION_PACKAGE_unbind = CLASS(name=u'unbind', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')), default=dict([(u'synchronous', True)]))
+    _CONNECTION_PACKAGE_responderCanUnbind = BOOL(name=u'responderCanUnbind', mode=MODE_VALUE, default=False)
+    _CONNECTION_PACKAGE_unbindCanFail = BOOL(name=u'unbindCanFail', mode=MODE_VALUE, default=False)
+    _CONNECTION_PACKAGE_id = OID(name=u'id', mode=MODE_VALUE, opt=True, uniq=True)
+    CONNECTION_PACKAGE._cont = ASN1Dict([
+        (u'bind', _CONNECTION_PACKAGE_bind),
+        (u'unbind', _CONNECTION_PACKAGE_unbind),
+        (u'responderCanUnbind', _CONNECTION_PACKAGE_responderCanUnbind),
+        (u'unbindCanFail', _CONNECTION_PACKAGE_unbindCanFail),
+        (u'id', _CONNECTION_PACKAGE_id),
+        ])
+    
+    #-----< CONTRACT >-----#
+    CONTRACT = CLASS(name=u'CONTRACT', mode=MODE_TYPE)
+    _CONTRACT_connection = CLASS(name=u'connection', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'CONNECTION-PACKAGE')), opt=True)
+    _CONTRACT_OperationsOf = CLASS(name=u'OperationsOf', mode=MODE_SET, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION-PACKAGE')), opt=True)
+    _CONTRACT_InitiatorConsumerOf = CLASS(name=u'InitiatorConsumerOf', mode=MODE_SET, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION-PACKAGE')), opt=True)
+    _CONTRACT_InitiatorSupplierOf = CLASS(name=u'InitiatorSupplierOf', mode=MODE_SET, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION-PACKAGE')), opt=True)
+    _CONTRACT_id = OID(name=u'id', mode=MODE_VALUE, opt=True, uniq=True)
+    CONTRACT._cont = ASN1Dict([
+        (u'connection', _CONTRACT_connection),
+        (u'OperationsOf', _CONTRACT_OperationsOf),
+        (u'InitiatorConsumerOf', _CONTRACT_InitiatorConsumerOf),
+        (u'InitiatorSupplierOf', _CONTRACT_InitiatorSupplierOf),
+        (u'id', _CONTRACT_id),
+        ])
+    
+    #-----< ROS-OBJECT-CLASS >-----#
+    ROS_OBJECT_CLASS = CLASS(name=u'ROS-OBJECT-CLASS', mode=MODE_TYPE)
+    _ROS_OBJECT_CLASS_Is = CLASS(name=u'Is', mode=MODE_SET, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'ROS-OBJECT-CLASS')), opt=True)
+    _ROS_OBJECT_CLASS_Initiates = CLASS(name=u'Initiates', mode=MODE_SET, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'CONTRACT')), opt=True)
+    _ROS_OBJECT_CLASS_Responds = CLASS(name=u'Responds', mode=MODE_SET, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'CONTRACT')), opt=True)
+    _ROS_OBJECT_CLASS_InitiatesAndResponds = CLASS(name=u'InitiatesAndResponds', mode=MODE_SET, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'CONTRACT')), opt=True)
+    _ROS_OBJECT_CLASS_id = OID(name=u'id', mode=MODE_VALUE, uniq=True)
+    ROS_OBJECT_CLASS._cont = ASN1Dict([
+        (u'Is', _ROS_OBJECT_CLASS_Is),
+        (u'Initiates', _ROS_OBJECT_CLASS_Initiates),
+        (u'Responds', _ROS_OBJECT_CLASS_Responds),
+        (u'InitiatesAndResponds', _ROS_OBJECT_CLASS_InitiatesAndResponds),
+        (u'id', _ROS_OBJECT_CLASS_id),
+        ])
+    
+    #-----< Code >-----#
+    Code = CHOICE(name=u'Code', mode=MODE_TYPE)
+    _Code_local = INT(name=u'local', mode=MODE_TYPE)
+    _Code_global_ = OID(name=u'global', mode=MODE_TYPE)
+    Code._cont = ASN1Dict([
+        (u'local', _Code_local),
+        (u'global', _Code_global_),
+        ])
+    Code._ext = None
+    
+    #-----< Priority >-----#
+    Priority = INT(name=u'Priority', mode=MODE_TYPE)
+    Priority._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=None)], ev=None, er=[])
+    
+    #-----< refuse >-----#
+    refuse = CLASS(name=u'refuse', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'ERROR')))
+    refuse._val = dict([(u'errorCode', (u'local', -1))])
+    
+    #-----< emptyBind >-----#
+    emptyBind = CLASS(name=u'emptyBind', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
+    emptyBind._val = dict([(u'Errors', ASN1Set(rv=[dict([(u'errorCode', (u'local', -1))])], rr=[], ev=None, er=[])), (u'synchronous', True)])
+    
+    #-----< emptyUnbind >-----#
+    emptyUnbind = CLASS(name=u'emptyUnbind', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
+    emptyUnbind._val = dict([(u'synchronous', True)])
+    
+    _all_ = [
+        _OPERATION_ArgumentType,
+        _OPERATION_argumentTypeOptional,
+        _OPERATION_returnResult,
+        _OPERATION_ResultType,
+        _OPERATION_resultTypeOptional,
+        _OPERATION_Errors,
+        _OPERATION_Linked,
+        _OPERATION_synchronous,
+        _OPERATION_alwaysReturns,
+        _OPERATION_InvokePriority,
+        _OPERATION_ResultPriority,
+        _OPERATION_operationCode,
+        OPERATION,
+        _ERROR_ParameterType,
+        _ERROR_parameterTypeOptional,
+        _ERROR_ErrorPriority,
+        _ERROR_errorCode,
+        ERROR,
+        _OPERATION_PACKAGE_Both,
+        _OPERATION_PACKAGE_Consumer,
+        _OPERATION_PACKAGE_Supplier,
+        _OPERATION_PACKAGE_id,
+        OPERATION_PACKAGE,
+        _CONNECTION_PACKAGE_bind,
+        _CONNECTION_PACKAGE_unbind,
+        _CONNECTION_PACKAGE_responderCanUnbind,
+        _CONNECTION_PACKAGE_unbindCanFail,
+        _CONNECTION_PACKAGE_id,
+        CONNECTION_PACKAGE,
+        _CONTRACT_connection,
+        _CONTRACT_OperationsOf,
+        _CONTRACT_InitiatorConsumerOf,
+        _CONTRACT_InitiatorSupplierOf,
+        _CONTRACT_id,
+        CONTRACT,
+        _ROS_OBJECT_CLASS_Is,
+        _ROS_OBJECT_CLASS_Initiates,
+        _ROS_OBJECT_CLASS_Responds,
+        _ROS_OBJECT_CLASS_InitiatesAndResponds,
+        _ROS_OBJECT_CLASS_id,
+        ROS_OBJECT_CLASS,
+        _Code_local,
+        _Code_global_,
+        Code,
+        Priority,
+        refuse,
+        emptyBind,
+        emptyUnbind,
+    ]
+
 class TCAPMessages:
 
     _name_  = u'TCAPMessages'
@@ -19493,4 +19696,66 @@ class TCAPMessages:
         TCInvokeIdSet,
     ]
 
-init_modules(DialoguePDUs, UnidialoguePDUs, Remote_Operations_Generic_ROS_PDUs, Remote_Operations_Information_Objects, MobileDomainDefinitions, MAP_ApplicationContexts, MAP_BS_Code, MAP_CallHandlingOperations, MAP_CH_DataTypes, MAP_CommonDataTypes, MAP_DialogueInformation, MAP_ER_DataTypes, MAP_Errors, MAP_ExtensionDataTypes, MAP_Frame, MAP_GR_DataTypes, MAP_Group_Call_Operations, MAP_LCS_DataTypes, MAP_LocationServiceOperations, MAP_MobileServiceOperations, MAP_MS_DataTypes, MAP_OM_DataTypes, MAP_OperationAndMaintenanceOperations, MAP_Protocol, MAP_ShortMessageServiceOperations, MAP_SM_DataTypes, MAP_SS_Code, MAP_SS_DataTypes, MAP_SupplementaryServiceOperations, MAP_TS_Code, Pycrate_TCAP_MAP_Dialogue, TCAP_MAP_Messages, TCAPMessages)
+class UnidialoguePDUs:
+
+    _name_  = u'UnidialoguePDUs'
+    _oid_   = [0, 0, 17, 773, 2, 3, 1]
+    
+    _obj_ = [
+        u'uniDialogue-as-id',
+        u'UniDialoguePDU',
+        u'AUDT-apdu',
+        ]
+    _type_ = [
+        u'UniDialoguePDU',
+        u'AUDT-apdu',
+        ]
+    _set_ = [
+        ]
+    _val_ = [
+        u'uniDialogue-as-id',
+        ]
+    _class_ = [
+        ]
+    _param_ = [
+        ]
+    
+    #-----< uniDialogue-as-id >-----#
+    uniDialogue_as_id = OID(name=u'uniDialogue-as-id', mode=MODE_VALUE)
+    uniDialogue_as_id._val = (0, 0, 17, 773, 1, 2, 1)
+    
+    #-----< UniDialoguePDU >-----#
+    UniDialoguePDU = CHOICE(name=u'UniDialoguePDU', mode=MODE_TYPE)
+    _UniDialoguePDU_unidialoguePDU = SEQ(name=u'unidialoguePDU', mode=MODE_TYPE, typeref=ASN1RefType(('UnidialoguePDUs', 'AUDT-apdu')))
+    UniDialoguePDU._cont = ASN1Dict([
+        (u'unidialoguePDU', _UniDialoguePDU_unidialoguePDU),
+        ])
+    UniDialoguePDU._ext = None
+    
+    #-----< AUDT-apdu >-----#
+    AUDT_apdu = SEQ(name=u'AUDT-apdu', mode=MODE_TYPE, tag=(0, TAG_APPLICATION, TAG_IMPLICIT))
+    _AUDT_apdu_protocol_version = BIT_STR(name=u'protocol-version', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), default=(1, 1))
+    _AUDT_apdu_protocol_version._cont = ASN1Dict([(u'version1', 0)])
+    _AUDT_apdu_application_context_name = OID(name=u'application-context-name', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
+    _AUDT_apdu_user_information = SEQ_OF(name=u'user-information', mode=MODE_TYPE, tag=(30, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    __AUDT_apdu_user_information__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('Pycrate-TCAP-MAP-Dialogue', 'TcapDialogueExternal')))
+    _AUDT_apdu_user_information._cont = __AUDT_apdu_user_information__item_
+    AUDT_apdu._cont = ASN1Dict([
+        (u'protocol-version', _AUDT_apdu_protocol_version),
+        (u'application-context-name', _AUDT_apdu_application_context_name),
+        (u'user-information', _AUDT_apdu_user_information),
+        ])
+    AUDT_apdu._ext = None
+    
+    _all_ = [
+        uniDialogue_as_id,
+        _UniDialoguePDU_unidialoguePDU,
+        UniDialoguePDU,
+        _AUDT_apdu_protocol_version,
+        _AUDT_apdu_application_context_name,
+        __AUDT_apdu_user_information__item_,
+        _AUDT_apdu_user_information,
+        AUDT_apdu,
+    ]
+
+init_modules(DialoguePDUs, MAP_ApplicationContexts, MAP_BS_Code, MAP_CH_DataTypes, MAP_CallHandlingOperations, MAP_CommonDataTypes, MAP_DialogueInformation, MAP_ER_DataTypes, MAP_Errors, MAP_ExtensionDataTypes, MAP_Frame, MAP_GR_DataTypes, MAP_Group_Call_Operations, MAP_LCS_DataTypes, MAP_LocationServiceOperations, MAP_MS_DataTypes, MAP_MobileServiceOperations, MAP_OM_DataTypes, MAP_OperationAndMaintenanceOperations, MAP_Protocol, MAP_SM_DataTypes, MAP_SS_Code, MAP_SS_DataTypes, MAP_ShortMessageServiceOperations, MAP_SupplementaryServiceOperations, MAP_TS_Code, MobileDomainDefinitions, Pycrate_TCAP_MAP_Dialogue, TCAP_MAP_Messages, Remote_Operations_Generic_ROS_PDUs, Remote_Operations_Information_Objects, TCAPMessages, UnidialoguePDUs)

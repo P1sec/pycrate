@@ -1,6 +1,6 @@
 MAP-Protocol {
    itu-t identified-organization (4) etsi (0) mobileDomain (0)
-   gsm-Network (1) modules (3) map-Protocol (4) version16 (16)}
+   gsm-Network (1) modules (3) map-Protocol (4) version19 (19)}
 
 DEFINITIONS
 
@@ -9,10 +9,10 @@ DEFINITIONS
 BEGIN
 
 IMPORTS
-    OPERATION
+OPERATION
 FROM Remote-Operations-Information-Objects {
-    joint-iso-itu-t remote-operations(4) informationObjects(5) version1(0)}
-    
+joint-iso-itu-t remote-operations(4) informationObjects(5) version1(0)}
+
 	updateLocation,
 	cancelLocation,
 	cancelVcsgLocation,
@@ -26,7 +26,7 @@ FROM Remote-Operations-Information-Objects {
 	forwardAccessSignalling,
 	prepareSubsequentHandover,
 	sendAuthenticationInfo,
-    authenticationFailureReport,
+authenticationFailureReport,
 	checkIMEI,
 	insertSubscriberData,
 	deleteSubscriberData,
@@ -47,7 +47,7 @@ FROM Remote-Operations-Information-Objects {
 FROM MAP-MobileServiceOperations {
    itu-t identified-organization (4) etsi (0) mobileDomain (0)
    gsm-Network (1) modules (3) map-MobileServiceOperations (5)
-   version16 (16)}
+   version19 (19)}
 
 	activateTraceMode,
 	deactivateTraceMode,
@@ -55,7 +55,7 @@ FROM MAP-MobileServiceOperations {
 FROM MAP-OperationAndMaintenanceOperations {
    itu-t identified-organization (4) etsi (0) mobileDomain (0)
    gsm-Network (1) modules (3) map-OperationAndMaintenanceOperations (6)
-   version16 (16)}
+   version19 (19)}
 
 	sendRoutingInfo,
 	provideRoamingNumber,
@@ -69,7 +69,7 @@ FROM MAP-OperationAndMaintenanceOperations {
 FROM MAP-CallHandlingOperations {
    itu-t identified-organization (4) etsi (0) mobileDomain (0)
    gsm-Network (1) modules (3) map-CallHandlingOperations (7)
-   version16 (16)}
+   version19 (19)}
 
 	registerSS,
 	eraseSS,
@@ -87,7 +87,7 @@ FROM MAP-CallHandlingOperations {
 FROM MAP-SupplementaryServiceOperations {
    itu-t identified-organization (4) etsi (0) mobileDomain (0)
    gsm-Network (1) modules (3) map-SupplementaryServiceOperations (8)
-   version16 (16)}
+   version19 (19)}
 
 	sendRoutingInfoForSM,
 	mo-ForwardSM,
@@ -100,7 +100,7 @@ FROM MAP-SupplementaryServiceOperations {
 FROM MAP-ShortMessageServiceOperations {
    itu-t identified-organization (4) etsi (0) mobileDomain (0)
    gsm-Network (1) modules (3) map-ShortMessageServiceOperations (9)
-   version16 (16)}
+   version19 (19)}
 
 	prepareGroupCall,
 	processGroupCallSignalling,
@@ -110,7 +110,7 @@ FROM MAP-ShortMessageServiceOperations {
 FROM MAP-Group-Call-Operations {
    itu-t identified-organization (4) etsi (0) mobileDomain (0)
    gsm-Network (1) modules (3) map-Group-Call-Operations (22)
-   version16 (16)}
+   version19 (19)}
 
 	provideSubscriberLocation,
 	sendRoutingInfoForLCS,
@@ -118,28 +118,28 @@ FROM MAP-Group-Call-Operations {
 FROM MAP-LocationServiceOperations {
    itu-t identified-organization (4) etsi (0) mobileDomain (0)
    gsm-Network (1) modules (3) map-LocationServiceOperations (24)
-   version16 (16)}
+   version19 (19)}
 
 
 ;
 Supported-MAP-Operations OPERATION ::= {updateLocation | cancelLocation | cancelVcsgLocation | 
 purgeMS | 
-    sendIdentification | updateGprsLocation | updateVcsgLocation | prepareHandover | sendEndSignal | 
-    processAccessSignalling | forwardAccessSignalling | prepareSubsequentHandover | 
-    sendAuthenticationInfo | authenticationFailureReport | checkIMEI | insertSubscriberData | 
-    deleteSubscriberData | reset | forwardCheckSS-Indication | restoreData | provideSubscriberInfo | 
-    anyTimeInterrogation | anyTimeSubscriptionInterrogation | anyTimeModification | 
-    sendRoutingInfoForGprs | failureReport |noteMsPresentForGprs | noteMM-Event | 
-    noteSubscriberDataModified | activateTraceMode | deactivateTraceMode | sendIMSI | 
+sendIdentification | updateGprsLocation | updateVcsgLocation | prepareHandover | sendEndSignal | 
+processAccessSignalling | forwardAccessSignalling | prepareSubsequentHandover | 
+sendAuthenticationInfo | authenticationFailureReport | checkIMEI | insertSubscriberData | 
+deleteSubscriberData | reset | forwardCheckSS-Indication | restoreData | provideSubscriberInfo | 
+anyTimeInterrogation | anyTimeSubscriptionInterrogation | anyTimeModification | 
+sendRoutingInfoForGprs | failureReport |noteMsPresentForGprs | noteMM-Event | 
+noteSubscriberDataModified | activateTraceMode | deactivateTraceMode | sendIMSI | 
 sendRoutingInfo | provideRoamingNumber | resumeCallHandling | setReportingState | statusReport | 
 remoteUserFree | ist-Alert | 
-    ist-Command | registerSS | eraseSS | activateSS | deactivateSS | interrogateSS | 
-    processUnstructuredSS-Request | unstructuredSS-Request | unstructuredSS-Notify | 
-    registerPassword | getPassword | ss-InvocationNotification | registerCC-Entry | eraseCC-Entry | 
-    sendRoutingInfoForSM | mo-ForwardSM | mt-ForwardSM | reportSM-DeliveryStatus | 
-    alertServiceCentre | informServiceCentre | readyForSM | prepareGroupCall | 
-    processGroupCallSignalling | forwardGroupCallSignalling | sendGroupCallEndSignal |
-    provideSubscriberLocation | sendRoutingInfoForLCS | subscriberLocationReport | 
+ist-Command | registerSS | eraseSS | activateSS | deactivateSS | interrogateSS | 
+processUnstructuredSS-Request | unstructuredSS-Request | unstructuredSS-Notify | 
+registerPassword | getPassword | ss-InvocationNotification | registerCC-Entry | eraseCC-Entry | 
+sendRoutingInfoForSM | mo-ForwardSM | mt-ForwardSM | reportSM-DeliveryStatus | 
+alertServiceCentre | informServiceCentre | readyForSM | prepareGroupCall | 
+processGroupCallSignalling | forwardGroupCallSignalling | sendGroupCallEndSignal |
+provideSubscriberLocation | sendRoutingInfoForLCS | subscriberLocationReport | 
 releaseResources | mt-ForwardSM-VGCS | sendGroupCallInfo }
 
 
