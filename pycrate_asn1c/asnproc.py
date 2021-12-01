@@ -546,8 +546,15 @@ def build_implicit_mod():
             transfer-syntax [4] OBJECT IDENTIFIER,
             fixed [5] NULL
             },
-        string-value [1] OCTET STRING 
+        data-value-descriptor [1] ObjectDescriptor OPTIONAL,
+        string-value [2] OCTET STRING 
     }
+    """.strip()))
+    _CHARACTER_STRING._parse_const(clean_text("""
+    (WITH COMPONENTS {
+        ...,
+        data-value-descriptor ABSENT
+    })
     """.strip()))
     _path_pop()
     _CHARACTER_STRING._text_def = ''
