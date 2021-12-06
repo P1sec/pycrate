@@ -95,9 +95,10 @@ class Ethernet(Envelope):
         Buf('src', val=6*b'\0', bl=48, rep=REPR_HEX),
         Uint16('type', rep=REPR_HEX) # val automated
         )
+    
     def __init__(self, *args, **kwargs):
         Envelope.__init__(self, *args, **kwargs)
-        self[2].set_valauto(self._set_type_val)
+        self[2].set_valauto(lambda: self._set_type_val())
     
     def _set_type_val(self):
         pay = self.get_payload()
@@ -106,6 +107,7 @@ class Ethernet(Envelope):
         else:
             return 0
 
+
 class VLAN(Envelope):
     _GEN = (
         Uint('pcp', desc='Priority Code Point', bl=3),
@@ -113,9 +115,10 @@ class VLAN(Envelope):
         Uint('vid', desc='VLAN identifier', bl=12),
         Uint16('type', rep=REPR_HEX) # val automated
         )
+    
     def __init__(self, *args, **kwargs):
         Envelope.__init__(self, *args, **kwargs)
-        self[3].get_valauto(self._set_type_val)
+        self[3].set_valauto(lambda: self._set_type_val())
     
     def _set_type_val(self):
         pay = self.get_payload()
@@ -145,6 +148,8 @@ class EthernetPacket(Envelope):
         self.__init__()
         # Ethernet layer
         self[0]._from_char(char)
+        if not char.len_byte():
+            return
         typ = self[0][2].get_val()
         hier = 1
         # potential VLAN layer
@@ -153,6 +158,8 @@ class EthernetPacket(Envelope):
             hier += 1
             vlan._from_char(char)
             self.append(vlan)
+            if not char.len_byte():
+                return
             typ = vlan[3]._val
         # ARP or IP layer
         if typ == 0x0806:
@@ -171,6 +178,8 @@ class EthernetPacket(Envelope):
             typ = ip[4]
         ip._from_char(char)
         self.append(ip)
+        if not char.len_byte():
+            return
         typ = typ._val
         # ICMP, UDP, TCP or SCTP layer
         if typ == 1:
