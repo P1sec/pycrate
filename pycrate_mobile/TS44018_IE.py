@@ -305,8 +305,12 @@ class _FreqListAlt2(Envelope):
         """returns the list of ARFCNs set
         """
         orig_arfcn = self[1].get_val()
-        return [orig_arfcn] + \
-               list(map(lambda x: orig_arfcn + x, self[2].get_alt()._decode()))
+        # 512 is a special case of _FreqListRange in that the ARFCNs are not added to ORIG-ARFCN mod 1024
+        if self[2].get_alt()._Range == 512:
+            return [orig_arfcn] + self[2].get_alt()._decode()
+        else:
+            return [orig_arfcn] + \
+               list(map(lambda x: (orig_arfcn + x) % 1024, self[2].get_alt()._decode()))
     
     def encode(self, arfcns):
         """sets a list of ARFCNs
