@@ -1,0 +1,47 @@
+CITSapplMgmtIDs {iso(1) standard(0) cits-applMgmt (17419) ids (1) version1 (1)} 
+DEFINITIONS AUTOMATIC TAGS::=BEGIN
+
+IMPORTS
+
+;
+
+-- End of IMPORTS
+
+-- Types
+
+-- Variable length data types
+
+VarLengthNumber::=CHOICE{
+	content	[0]	INTEGER(0..127), -- one octet length
+	extension	[1]	Ext1
+	}
+
+Ext1::=CHOICE{
+	content	[0]	INTEGER(128..16511), -- two octets length
+	extension	[1]	Ext2
+}
+
+Ext2::=CHOICE{
+	content	[0]	INTEGER(16512..2113663), -- three octets length
+	extension	[1]	Ext3
+	}
+
+Ext3::=INTEGER(2113664..270549119,...) -- four and more octets length
+
+
+VarLengthNumber2::=CHOICE{
+	shortNo	[0] INTEGER(0..127),
+	longNo	[1] INTEGER(0..32767)
+	}
+
+
+-- Values
+
+version INTEGER(0..255)::=1 -- version of this module
+
+/*
+   The ASN.1 specification has been checked for conformance to the ASN.1
+   standards by OSS ASN.1 Syntax Checker, and by OSS ASN-1STEP
+*/
+
+END

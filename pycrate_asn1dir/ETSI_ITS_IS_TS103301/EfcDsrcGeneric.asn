@@ -1,0 +1,37 @@
+-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-- ISO TS 14906 Generic
+--
+-- This ASN.1 was generated: 30.08.2016
+--
+-- This document contains only the data element needed for the encoding of an IVI message
+-- as defined in ISO TS 19321(2020)
+--
+-- Published version location:
+-- https://standards.iso.org/iso/14906/ed-3/en/ISO14906(2018)EfcDsrcGenericv7.asn
+-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+EfcDsrcGeneric {iso(1) standard(0) 14906 generic(1) version7(7)}
+DEFINITIONS AUTOMATIC TAGS ::=
+BEGIN
+
+AttributeIdList ::= SEQUENCE (SIZE(0.. 127,...)) OF INTEGER(0..127,...)
+
+AttributeList{Container} ::= SEQUENCE (SIZE(0..127,...)) OF Attributes{Container}
+
+Attributes{Container} ::= SEQUENCE {
+	attributeId INTEGER (0..127,...),
+	attributeValue Container
+}
+
+END
+-- Below imported data from ISO 14816's ASN.1 module
+-- AVIAEINumberingAndDataStructures {iso(1) standard(0) 14816 }
+-- DEFINITIONS AUTOMATIC TAGS ::= BEGIN
+-- EXPORTS ALL;
+-- CS5 ::= VisibleString
+-- CountryCode ::= BIT STRING(SIZE(10))
+-- Value assignment is done in accordance with ISO 3166-1 and by
+-- using the ITA.2 alphabet.
+-- IssuerIdentifier ::= INTEGER(0 .. 16383)
+-- See Annex A of ISO 14816 for registration
+-- END

@@ -166,6 +166,7 @@ ASN_SPECS_ITS = {
     'ITS_CAM_2'       : 'ETSI_ITS_CAM_EN302637_2',
     'ITS_DENM_3'      : 'ETSI_ITS_DENM_EN302637_3',
     'ITS_VAM_3'       : 'ETSI_ITS_VAM_TS103300_3',
+    'ITS_IS'          : 'ETSI_ITS_IS_TS103301',
     }
 
 # Open Mobile Alliance geolocation protocols

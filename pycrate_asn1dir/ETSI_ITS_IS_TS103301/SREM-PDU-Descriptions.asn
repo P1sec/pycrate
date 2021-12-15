@@ -1,0 +1,40 @@
+-- @brief Specification of the Signal request extended Message ETSI TS 103 301
+-- Latest version available at @url https://forge.etsi.org/rep/ITS/asn1/is_ts103301.git
+
+SREM-PDU-Descriptions {
+	itu-t (0) identified-organization (4) etsi (0) itsDomain (5) wg1 (1) ts103301 (103301) srem (3) version2 (2)
+}
+
+DEFINITIONS AUTOMATIC TAGS ::=
+
+BEGIN
+
+IMPORTS
+
+-- @brief Include ISO 19091
+-- Include references from @url https://standards.iso.org/iso/ts/19091/ed-2/en/ISO-TS-19091-addgrp-C-2018.asn
+SignalRequestMessage
+FROM DSRC { iso (1) standard (0) signalizedIntersection (19091) profilec(2) dsrc (2) version2 (2) }
+
+-- @brief Include ETSI TS 102 894-2
+-- Include references from @url https://forge.etsi.org/rep/ITS/ITS_ASN1/blob/master/CDD_TS102894-2/ITS-Container.asn
+ItsPduHeader
+FROM ITS-Container {  itu-t (0) identified-organization (4) etsi (0) itsDomain (5) wg1 (1) ts (102894) cdd (2) version (2)};
+
+-- Signal request extended Message Message
+
+-- @brief Signal request extended Message Root
+-- This DF includes DEs for the SREM: protocolVersion, the SREM message type identifier _messageID_,
+-- the station identifier _stationID_ of the originating ITS-S and the signal request data ISO TS 19091.
+SREM ::= SEQUENCE {
+    -- @details header
+    -- The DE _protocolVersion_ is used to select the appropriate protocol decoder at the receiving ITS-S.
+    --   It shall be set to 2.
+    -- The DE _messageID_ shall be srem(9).
+    header  ItsPduHeader,
+    -- @details srm
+    -- The DE _srm_ contains the Signal request data as defined in ISO TS 19091.
+    srm     SignalRequestMessage
+}
+
+END

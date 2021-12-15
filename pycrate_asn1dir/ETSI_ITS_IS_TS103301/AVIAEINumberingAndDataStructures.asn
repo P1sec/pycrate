@@ -1,0 +1,130 @@
+--<OSS.PDU>-- 
+
+-- ISO 14816:2005 Amd.1:2015
+
+
+AVIAEINumberingAndDataStructures {iso(1) standard(0) iso14816(14816) asnm1(1) version1(1)} 
+DEFINITIONS AUTOMATIC TAGS::= BEGIN
+ 
+CS1::= SEQUENCE {
+	countryCode			CountryCode,
+	issuerIdentifier	IssuerIdentifier,
+	serviceNumber		ServiceNumber
+	}
+
+CS2::= SEQUENCE {
+	manufacturerIdentifier	ManufacturerIdentifier,
+	serviceNumber			ServiceNumber
+	}
+
+CS3::= SEQUENCE {
+	startTime		StartTime, 
+	stopTime		StopTime,
+	geographLimit	GeoGraphicalLimit,
+	serviceAppLimit ServiceApplicationLimit
+	}
+
+
+/*
+CS4::= SEQUENCE {
+	countryCode 		CountryCode,
+	alphabetIndicator 	AlphabetIndicator, 
+	licPlateNumber 		LicPlateNumber
+	}
+	*/
+	
+CS4::= SEQUENCE {
+	countryCode 		CountryCode,
+	alphabetIndicator 	AlphabetIndicator, 
+	licPlateNumber 		LicPlateNumber
+	} (WITH COMPONENTS {..., licPlateNumber (SIZE(14))})
+
+CS5::= SEQUENCE{
+	vin	VisibleString, -- 17 characters VIN
+	fill	BIT STRING (SIZE(9)) -- set to '000000000'
+	}
+
+CS7::= FreightContainerData
+
+FreightContainerData::= SEQUENCE { -- octet aligned by means of 3 fill bits at the end
+	ownerCode			BIT STRING(SIZE(19)), 	-- 19bits
+	serialNumber		INTEGER(0 .. 1000000),	-- 20bits
+	checkDigit			INTEGER(0 .. 10),	-- 4bits
+	length				INTEGER(1 .. 2000),	-- 11bits
+	height				INTEGER(1 .. 500),	-- 9bits
+	width				INTEGER(200 .. 300),	-- 7bits
+	containerTypeCode	INTEGER(0 .. 127),	-- 7bits
+	maximumGrossMass	INTEGER(19 .. 500),	-- 9bits
+	tareMass			INTEGER(0 .. 99),	-- 7bits
+	fill				BIT STRING (SIZE(3)) -- set to '000'
+	} -- 12 octets
+
+CS8::= SEQUENCE { -- octet aligned by means of 6 fill bits at the beginning
+	fill		BIT STRING (SIZE(6)), -- set to '000000'
+	countryCode	CountryCode, -- 10 bits
+	taxCode		TaxCode
+	}
+
+CountryCode::= BIT STRING(SIZE(10))
+
+IssuerIdentifier::= INTEGER(0 .. 16383)
+
+ManufacturerIdentifier::= INTEGER(0 .. 65535)
+
+LicPlateNumber::= OCTET STRING 
+
+--ServiceNumber::= BIT STRING(SIZE(32))
+ServiceNumber::= BIT STRING (SIZE(32))(CONTAINING INTEGER (0..4294967295))
+
+TaxCode::= OCTET STRING
+
+AlphabetIndicator::= INTEGER {
+	latinAlphabetNo1		(0), -- encoded as 00 00 00B
+	latinAlphabetNo2		(1), -- encoded as 00 00 01B etc
+	latinAlphabetNo3		(2),
+	latinAlphabetNo4		(3),
+	latinCyrillicAlphabet	(4),
+	latinArabicAlphabet		(5),
+	latinGreekAlphabet		(6),
+	latinHebrewAlphabet		(7),
+	latinAlphabetNo5		(8),
+	latinAlphabetNo6		(9),
+	twoOctetBMP				(10),
+	fourOctetCanonical		(11)
+	} (0..63) -- 6 bits, latinAlphabetNo1 recommended 
+
+AviEriDateTime ::= OCTET STRING (SIZE(10))  	-- YYMMDDhhmm
+	
+StartTime::= AviEriDateTime
+
+StopTime::= AviEriDateTime
+
+GeoGraphicalLimit::= BIT STRING {
+	globalRestriction			(0),
+	regionalRestriction			(1),
+	nationalRestriction			(2),
+	district					(3),
+	issuerCoverageRestriction	(4),
+	reservedForCEN1				(5),
+	reservedForCEN2				(6),
+	issuerSpecificRestriction	(7) 
+	} (SIZE(8))
+	
+ServiceApplicationLimit::= BIT STRING {
+	notForPostpayment			(0),
+	notForPrepayment			(1),
+	notForVehicleaccess			(2),
+	notForFleetcontrol			(3),
+	issuerSpecificRestriction1	(4),
+	issuerSpecificRestriction2	(5),
+	issuerSpecificRestriction3	(6),
+	issuerSpecificRestriction4	(7)
+	} (SIZE(8))
+	
+version INTEGER(0..255)::= 1 -- version of this ASN.1 module
+	
+END
+/*
+   The ASN.1 specification has been checked for conformance to the ASN.1
+   standards by OSS ASN.1 Studio
+*/

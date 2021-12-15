@@ -1,0 +1,17 @@
+AVIAEINumberingAndDataStructures.asn
+AddGrpC.asn
+CITSapplMgmtIDs.asn
+DSRC.asn
+EfcDsrcApplication.asn
+EfcDsrcGeneric.asn
+ElectronicRegistrationIdentificationVehicleDataModule.asn
+GDD.asn
+ITS-Container.asn
+IVI.asn
+IVIM-PDU-Descriptions.asn
+MAPEM-PDU-Descriptions.asn
+REGION.asn
+RTCMEM-PDU-Descriptions.asn
+SPATEM-PDU-Descriptions.asn
+SREM-PDU-Descriptions.asn
+SSEM-PDU-Descriptions.asn

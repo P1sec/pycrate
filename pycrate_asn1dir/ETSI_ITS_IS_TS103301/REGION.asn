@@ -1,0 +1,133 @@
+-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-- ISO TS 19091 2018
+--
+-- This document includes three ASN.1 modules
+--    AddGrpC
+--    REGION
+--    DSRC
+--
+-- This document contains the data element needed for the encoding the SPAT, MapData, SignalRequestMessage, SignalStatusMessage, RTCMcorrections
+-- as defined in ISO TS 19091 and basic data element referenced to SAEJ2735
+--
+-- It includes the addendum extensions for Addgrp-C (e.g. Europe)
+-- 
+-- ISO Standards maintenance Portal:
+-- http://standards.iso.org/iso/ts/19091/addgrp_c/
+-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+-- ^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-
+-- 
+-- module: REGION
+-- 
+-- ^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-
+
+REGION {
+  iso (1) standard (0) signalizedIntersection (19091) profilec (2) region (1)
+  version2 (2)
+}
+
+DEFINITIONS AUTOMATIC TAGS::= BEGIN
+
+IMPORTS
+
+addGrpC, REG-EXT-ID-AND-TYPE 
+FROM DSRC { 
+  iso (1) standard (0) signalizedIntersection (19091) profilec(2) dsrc (2) version2 (2)
+}
+
+ConnectionManeuverAssist-addGrpC, ConnectionTrajectory-addGrpC,
+IntersectionState-addGrpC, LaneAttributes-addGrpC, MapData-addGrpC,
+MovementEvent-addGrpC, NodeAttributeSet-addGrpC, Position3D-addGrpC, RequestorDescription-addGrpC, RestrictionUserType-addGrpC, SignalStatusPackage-addGrpC
+FROM AddGrpC {iso (1) standard (0) signalizedIntersection (19091) profilec(2) addgrpc (0) version2 (2)};
+
+Reg-AdvisorySpeed	            REG-EXT-ID-AND-TYPE ::= { ... }
+
+Reg-ComputedLane	            REG-EXT-ID-AND-TYPE ::= { ... }
+
+Reg-ConnectionManeuverAssist	REG-EXT-ID-AND-TYPE ::= {
+	{ConnectionManeuverAssist-addGrpC  IDENTIFIED BY addGrpC},
+	...
+}
+
+Reg-GenericLane	             REG-EXT-ID-AND-TYPE ::= {
+	{ConnectionTrajectory-addGrpC	IDENTIFIED BY addGrpC} ,
+	...
+}
+
+Reg-IntersectionGeometry  	  REG-EXT-ID-AND-TYPE ::= { ... }
+
+Reg-IntersectionState           REG-EXT-ID-AND-TYPE ::= {
+	{IntersectionState-addGrpC IDENTIFIED BY addGrpC},
+	...
+}
+
+Reg-LaneAttributes	             REG-EXT-ID-AND-TYPE ::= {
+   {LaneAttributes-addGrpC IDENTIFIED BY addGrpC} ,
+   ...
+}
+Reg-LaneDataAttribute           REG-EXT-ID-AND-TYPE ::= { ... }
+
+Reg-MapData	REG-EXT-ID-AND-TYPE ::= {
+	{MapData-addGrpC  IDENTIFIED BY addGrpC},
+	...
+}
+
+Reg-MovementEvent	            REG-EXT-ID-AND-TYPE ::= {
+   {MovementEvent-addGrpC IDENTIFIED BY addGrpC} ,
+   ...
+}
+Reg-MovementState               REG-EXT-ID-AND-TYPE ::= { ... }
+
+-- Reg-NodeAttributeSetLL       REG-EXT-ID-AND-TYPE ::= { ... }
+
+Reg-NodeAttributeSetXY          REG-EXT-ID-AND-TYPE ::= {
+	{NodeAttributeSet-addGrpC   IDENTIFIED BY addGrpC},
+	...
+}
+
+-- Reg-NodeOffsetPointLL	   REG-EXT-ID-AND-TYPE ::= { ... }
+
+Reg-NodeOffsetPointXY	       REG-EXT-ID-AND-TYPE ::= { ... }
+
+Reg-Position3D	              REG-EXT-ID-AND-TYPE ::= {
+	{Position3D-addGrpC  IDENTIFIED BY addGrpC} ,
+	...
+}
+
+Reg-RequestorDescription      REG-EXT-ID-AND-TYPE ::= {
+   { RequestorDescription-addGrpC IDENTIFIED BY addGrpC} ,
+   ...
+}
+
+Reg-RequestorType	            REG-EXT-ID-AND-TYPE ::= { ... }
+
+Reg-RestrictionUserType	  REG-EXT-ID-AND-TYPE ::= {
+  {RestrictionUserType-addGrpC IDENTIFIED BY addGrpC} ,
+  ...
+}
+
+Reg-RoadSegment	             REG-EXT-ID-AND-TYPE ::= { ... }
+
+Reg-RTCMcorrections             REG-EXT-ID-AND-TYPE ::= { ... }
+
+Reg-SignalControlZone           REG-EXT-ID-AND-TYPE ::= { ... }
+
+Reg-SignalRequest               REG-EXT-ID-AND-TYPE ::= { ... }
+
+Reg-SignalRequestMessage        REG-EXT-ID-AND-TYPE ::= { ... }
+
+Reg-SignalRequestPackage        REG-EXT-ID-AND-TYPE ::= { ... }
+
+Reg-SignalStatus	        REG-EXT-ID-AND-TYPE ::= { ... }
+
+Reg-SignalStatusMessage	 REG-EXT-ID-AND-TYPE ::= { ... }
+
+Reg-SignalStatusPackage	 REG-EXT-ID-AND-TYPE ::= {
+	{ SignalStatusPackage-addGrpC IDENTIFIED BY addGrpC },
+	...
+}
+
+Reg-SPAT	                   REG-EXT-ID-AND-TYPE ::= { ... }
+
+END
+
