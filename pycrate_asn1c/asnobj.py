@@ -4316,6 +4316,15 @@ class ASN1Obj(object):
         #
         # 3) get the content of the original constructed object
         cont = self.get_cont()
+        if cont is None:
+            # warning: it seems there is this quite bad practice of using WITH COMPONENTS
+            # constraint applied to formal parameters, which are undefined by nature.
+            # so we do our best here to manage the constraint definition when there is
+            # no available content defined
+            # TODO: the constraint should be parsed after parameterization has happened
+            asnlog('INF: {0}.{1}, unprocessed WITH COMPONENTS constraint on formal parameter'\
+               .format(GLOBAL.COMP['NS']['mod'], self.fullname()))
+            return
         #
         # 4) check for partial components
         if comps[0] == '...':
