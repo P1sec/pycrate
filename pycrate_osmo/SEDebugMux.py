@@ -3,7 +3,7 @@
 # * Software Name : pycrate
 # * Version : 0.4
 # *
-# * Copyright 2021. Benoit Michau. P1sec.
+# * Copyright 2022. Vadim Yanitskiy
 # *
 # * This library is free software; you can redistribute it and/or
 # * modify it under the terms of the GNU Lesser General Public
@@ -22,7 +22,7 @@
 # *
 # *--------------------------------------------------------
 # * File Name : pycrate_osmo/SEDebugMux.py
-# * Created : 2021-01-08
+# * Created : 2022-01-08
 # * Authors : Vadim Yanitskiy
 # *--------------------------------------------------------
 #*/
@@ -33,6 +33,7 @@ from pycrate_core.utils import *
 from pycrate_core.elt   import *
 from pycrate_core.base  import *
 from pycrate_core.repr  import *
+
 
 class SEDebugMuxMsg(Envelope):
     _GEN = (
@@ -47,11 +48,11 @@ class SEDebugMuxMsg(Envelope):
 
     def __init__(self, *args, **kwargs):
         Envelope.__init__(self, *args, **kwargs)
-
+        
         # The 'length' field indicates length of *all* fields following it
         self['length'].set_valauto(lambda: 3 + self['msg_data'].get_len() + 2)
         self['msg_data'].set_blauto(lambda: (self['length'].get_val() - 3 - 2) * 8)
-
+        
         # Kudos to Stefan @Sec Zehl for finding the CRC function parameters
         self._fcs_func = crcmod.mkCrcFun(0x11021, rev=True, initCrc=0x0, xorOut=0xffff)
         self['fcs'].set_valauto(lambda: self._fcs_func(self[:-1].to_bytes()))

@@ -351,6 +351,14 @@ This subdirectory contains the following modules:
 * *Diameter3GPP*: a Diameter module which relies on AVP types provided in all 3GPP TS
 
 
+pycrate_osmo
+------------
+
+This subdirectory contains the following modules:
+* *L1CTL*: structures used by osmocom-bb to communicate with the embedded stack from the host
+* *SEDebugMux*: structure used by Sony-Ericsson SoC and basebands to wrap logs
+
+
 pycrate_corenet
 ---------------
 
