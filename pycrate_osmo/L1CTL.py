@@ -292,7 +292,7 @@ class L1CTLDataInd(Envelope):
 
 
 # traffic from the network
-class L1CTLTrafficInd(Buf):
+class L1CTLTrafficInd(Envelope):
     _GEN = (
         L1CTLInfoDL(),
         Buf('Payload', rep=REPR_HEX)
