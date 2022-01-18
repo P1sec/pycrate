@@ -37,22 +37,22 @@ from pycrate_core.repr  import *
 
 class DebugMuxFrame(Envelope):
     _GEN = (
-        Buf('magic', desc='Start marker', val=b'\x42\x42', bl=16),
-        Uint16LE('length', desc='Message length'), # val automated
-        Uint8('tx_count', desc='Number of messages sent'),
-        Uint8('rx_count', desc='Number of messages received'),
-        Uint8('msg_type', desc='Message type', rep=REPR_HEX),
-        Buf('msg_data', rep=REPR_HEX), # TODO: define inner data structures
-        Uint16LE('fcs', desc='Frame Check Sequence', rep=REPR_HEX) # val automated
+        Buf('Magic', desc='Start marker', val=b'\x42\x42', bl=16),
+        Uint16LE('Length', desc='Message length'), # val automated
+        Uint8('TxCount', desc='Number of messages sent'),
+        Uint8('RxCount', desc='Number of messages received'),
+        Uint8('MsgType', desc='Message type', rep=REPR_HEX),
+        Buf('MsgData', rep=REPR_HEX), # TODO: define inner data structures
+        Uint16LE('FCS', desc='Frame Check Sequence', rep=REPR_HEX) # val automated
         )
 
     def __init__(self, *args, **kwargs):
         Envelope.__init__(self, *args, **kwargs)
         
-        # The 'length' field indicates length of *all* fields following it
-        self['length'].set_valauto(lambda: 3 + self['msg_data'].get_len() + 2)
-        self['msg_data'].set_blauto(lambda: (self['length'].get_val() - 3 - 2) * 8)
+        # The 'Length' field indicates length of *all* fields following it
+        self['Length'].set_valauto(lambda: 3 + self['MsgData'].get_len() + 2)
+        self['MsgData'].set_blauto(lambda: (self['Length'].get_val() - 3 - 2) * 8)
         
         # Kudos to Stefan @Sec Zehl for finding the CRC function parameters
         self._fcs_func = crcmod.mkCrcFun(0x11021, rev=True, initCrc=0x0, xorOut=0xffff)
-        self['fcs'].set_valauto(lambda: self._fcs_func(self[:-1].to_bytes()))
+        self['FCS'].set_valauto(lambda: self._fcs_func(self[:-1].to_bytes()))
