@@ -35,7 +35,7 @@ from pycrate_core.base  import *
 from pycrate_core.repr  import *
 
 
-class SEDebugMuxMsg(Envelope):
+class DebugMuxFrame(Envelope):
     _GEN = (
         Buf('magic', desc='Start marker', val=b'\x42\x42', bl=16),
         Uint16LE('length', desc='Message length'), # val automated
