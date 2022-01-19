@@ -1446,27 +1446,48 @@ class ASN1Obj(Element):
     # conversion between internal value and ASN.1 BER encoding
     ###
     
-    def __to_ber_codec_set(self):
-        # 0) enables BER length encoding options to be set by field
-        if hasattr(self, '_BER_ENC_LLONG'):
-            ber_enc_llong = ASN1CodecBER.ENC_LLONG
-            ASN1CodecBER.ENC_LLONG = self._BER_ENC_LLONG
-        else:
-            ber_enc_llong = None
-        if hasattr(self, '_BER_ENC_LUNDEF'):
-            # this is only for constructed types,
-            # but it is easier to handle it here globally
-            ber_enc_lundef = ASN1CodecBER.ENC_LUNDEF
-            ASN1CodecBER.ENC_LUNDEF = self._BER_ENC_LUNDEF
-        else:
-            ber_enc_lundef = None
-        return (ber_enc_llong, ber_enc_lundef)
+    # for BER encoding, we can enable per-object encoding options
+    # set this to False to disable per-object encoding options
+    _BER_ENC_OPT  = True
     
-    def __to_ber_codec_unset(self, *ber_enc_args):
-        if ber_enc_args[0] is not None:
-            ASN1CodecBER.ENC_LLONG = ber_enc_args[0]
-        if ber_enc_args[1] is not None:
-            ASN1CodecBER.ENC_LUNDEF = ber_enc_args[1]
+    # following are the different BER encoding options supported
+    # see codecs.ASN1CodecBER class for further description
+    _BER_ENC_ARGS = (
+        # for tag prefix
+        'TAG_LEXT',
+        # for length prefix
+        'LLONG',
+        'LUNDEF',
+        # for DEFAULT values
+        'DEF_CANON',
+        # for BOOLEAN object
+        'BOOLTRUE',
+        # for BIT / OCTET STRING object
+        'BSTR_FRAG',
+        'OSTR_FRAG',
+        # for *OID* object
+        'OID_LEXT',
+        # for *Time* object
+        'TIME_CANON',
+        )
+    
+    def __to_ber_codec_set(self):
+        ber_enc_args = {}
+        for arg in self._BER_ENC_ARGS:
+            attr_g, attr_l = 'ENC_%s' % arg, '_BER_ENC_%s' % arg
+            if hasattr(self, attr_l):
+                # save the global attribute for restoration
+                # after object has been encoded
+                ber_enc_args[attr_g] = getattr(ASN1CodecBER, attr_g)
+                # set the global attribute to the object's local value
+                setattr(ASN1CodecBER, attr_g, getattr(self, attr_l))
+        return ber_enc_args
+    
+    def __to_ber_codec_unset(self, ber_enc_args):
+        for k, v in ber_enc_args.items():
+            setattr(ASN1CodecBER, k, v)
+    
+    # std BER decoding / encoding routines
     
     def _from_ber(self, char, TLV):
         # 1) decode the tag chain
@@ -1509,7 +1530,8 @@ class ASN1Obj(Element):
     
     def _to_ber(self):
         # 0) set potential BER codec locals
-        _ber_enc_args = self.__to_ber_codec_set()
+        if self._BER_ENC_OPT:
+            _ber_enc_args = self.__to_ber_codec_set()
         #
         # 1) encode the most inner TLV part
         pc, lval, V = self._encode_ber_cont()
@@ -1546,7 +1568,8 @@ class ASN1Obj(Element):
                 ret = TLV
         #
         # 2) restore potential BER encoder globals
-        self.__to_ber_codec_unset(*_ber_enc_args)
+        if self._BER_ENC_OPT:
+            self.__to_ber_codec_unset(_ber_enc_args)
         return ret
     
     def to_ber(self, val=None):
@@ -1626,7 +1649,8 @@ class ASN1Obj(Element):
     
     def _to_ber_ws(self):
         # 0) set potential BER codec locals
-        _ber_enc_args = self.__to_ber_codec_set()
+        if self._BER_ENC_OPT:
+            _ber_enc_args = self.__to_ber_codec_set()
         #
         # 1) encode the most inner TLV part
         pc, lval, V = self._encode_ber_cont_ws()
@@ -1670,7 +1694,8 @@ class ASN1Obj(Element):
         self._struct = TLV
         #
         # 2) restore potential BER encoder globals
-        self.__to_ber_codec_unset(*_ber_enc_args)
+        if self._BER_ENC_OPT:
+            self.__to_ber_codec_unset(_ber_enc_args)
         return TLV
     
     def to_ber_ws(self, val=None):
@@ -1875,9 +1900,9 @@ class ASN1Obj(Element):
             char = Charpy(buf)
         else:
             char = buf
-
+        #
         self._from_oer(char)
-
+        #
         if self._SAFE_BND:
             self._safechk_bnd(self._val)
 
@@ -1887,9 +1912,9 @@ class ASN1Obj(Element):
             char = Charpy(buf)
         else:
             char = buf
-
+        #
         self._from_oer_ws(char)
-
+        #
         if self._SAFE_BND:
             self._safechk_bnd(self._val)
 

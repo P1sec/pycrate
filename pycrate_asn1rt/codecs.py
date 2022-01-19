@@ -1085,7 +1085,7 @@ class ASN1CodecBER(ASN1Codec):
     # integers within OBJECT IDENTIFIER and RELATIVE-OID
     ENC_OID_LEXT = 0
     # force the encoder to extend to a given length the encoding of unsigned 
-    # integers for tag prefixes
+    # integers for tag prefixes, when tag >= 31
     ENC_TAG_LEXT = 0
     
     # force the encoder to use the constructed form enabling the fragmentation
