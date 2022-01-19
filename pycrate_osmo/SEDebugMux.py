@@ -27,6 +27,7 @@
 # *--------------------------------------------------------
 #*/
 
+import enum
 import crcmod
 
 from pycrate_core.utils import *
@@ -35,24 +36,122 @@ from pycrate_core.base  import *
 from pycrate_core.repr  import *
 
 
-class SEDebugMuxMsg(Envelope):
+class PascalString(Envelope):
+    ''' A variable length string that is prefixed by a length field '''
     _GEN = (
-        Buf('magic', desc='Start marker', val=b'\x42\x42', bl=16),
-        Uint16LE('length', desc='Message length'), # val automated
-        Uint8('tx_count', desc='Number of messages sent'),
-        Uint8('rx_count', desc='Number of messages received'),
-        Uint8('msg_type', desc='Message type', rep=REPR_HEX),
-        Buf('msg_data', rep=REPR_HEX), # TODO: define inner data structures
-        Uint16LE('fcs', desc='Frame Check Sequence', rep=REPR_HEX) # val automated
+        Uint8('L', desc='Length'),
+        Buf('V', desc='Value')
+        )
+
+    def __init__(self, *args, **kwargs):
+        Envelope.__init__(self, *args, **kwargs)
+        self['L'].set_valauto(lambda: self['V'].get_bl() >> 3)
+        self['V'].set_blauto(lambda: self['L'].get_val() << 3)
+
+class DebugMuxMsgType(enum.Enum):
+    ''' DebugMux message type '''
+    Enquiry             = 0x65 # 'e'
+    Ident               = 0x66 # 'f'
+    Ping                = 0x67 # 'g'
+    Pong                = 0x68 # 'h'
+
+    DPAnnounce          = 0x69 # 'i'
+    # TODO              = 0x6a # 'j'
+    ConnEstablish       = 0x6b # 'k'
+    ConnEstablished     = 0x6c # 'l'
+    ConnTerminate       = 0x6d # 'm'
+    ConnTerminated      = 0x6e # 'n'
+    ConnData            = 0x6f # 'o'
+    # TODO:             = 0x70 # 'p'
+    Ack                 = 0x71 # 'q'
+
+DebugMuxMsgType_dict = { e.value : e.name for e in DebugMuxMsgType }
+
+class DebugMuxMsg(Alt):
+    ''' DebugMux message, may be contained in a DebugMuxFrame '''
+    class Ident(Envelope):
+        ''' DebugMuxMsgType.Ident structure '''
+        _GEN = (
+            Buf('Magic', bl=32), # TODO: what's here?
+            PascalString('Ident'),
+            )
+
+    class PingPong(PascalString):
+        ''' DebugMuxMsgType.{Ping,Pong} structure '''
+
+    class DPAnnounce(Envelope):
+        ''' DebugMuxMsgType.DPAnnounce structure '''
+        _GEN = (
+            Uint16LE('DPRef'),
+            PascalString('Name'),
+            )
+
+    class ConnEstablish(Envelope):
+        ''' DebugMuxMsgType.ConnEstablish structure '''
+        _GEN = (
+            Uint16LE('DPRef'),
+            )
+
+    class ConnEstablished(Envelope):
+        ''' DebugMuxMsgType.ConnEstablished structure '''
+        _GEN = (
+            Uint16LE('DPRef'),
+            Uint16LE('ConnRef'),
+            Uint16LE('DataBlockLimit'),
+            )
+
+    class ConnTerminate(Envelope):
+        ''' DebugMuxMsgType.ConnTerminate structure '''
+        _GEN = (
+            Uint16LE('ConnRef'),
+            )
+
+    class ConnTerminated(Envelope):
+        ''' DebugMuxMsgType.ConnTerminated structure '''
+        _GEN = (
+            Uint16LE('DPRef'),
+            Uint16LE('ConnRef'),
+            )
+
+    class ConnData(Envelope):
+        ''' DebugMuxMsgType.ConnData structure '''
+        _GEN = (
+            Uint16LE('ConnRef'),
+            BufAuto('Data'),
+            )
+
+    # All currently known messages
+    _GEN = {
+        DebugMuxMsgType.Ident.value              : Ident(),
+        DebugMuxMsgType.Ping.value               : PingPong(),
+        DebugMuxMsgType.Pong.value               : PingPong(),
+        DebugMuxMsgType.DPAnnounce.value         : DPAnnounce(),
+        DebugMuxMsgType.ConnEstablish.value      : ConnEstablish(),
+        DebugMuxMsgType.ConnEstablished.value    : ConnEstablished(),
+        DebugMuxMsgType.ConnTerminate.value      : ConnTerminate(),
+        DebugMuxMsgType.ConnTerminated.value     : ConnTerminated(),
+        DebugMuxMsgType.ConnData.value           : ConnData(),
+        }
+
+class DebugMuxFrame(Envelope):
+    ''' DebugMux frame, may contain a DebugMuxMsg '''
+    _GEN = (
+        Buf('Magic', desc='Start marker', val=b'\x42\x42', bl=16),
+        Uint16LE('Length', desc='Message length'), # val automated
+        Uint8('TxCount', desc='Number of messages sent'),
+        Uint8('RxCount', desc='Number of messages received'),
+        Uint8('MsgType', desc='Message type', dic=DebugMuxMsgType_dict),
+        DebugMuxMsg('MsgData', sel=lambda self: self.get_env()['MsgType'].get_val()),
+        Uint16LE('FCS', desc='Frame Check Sequence', rep=REPR_HEX) # val automated
         )
 
     def __init__(self, *args, **kwargs):
         Envelope.__init__(self, *args, **kwargs)
         
-        # The 'length' field indicates length of *all* fields following it
-        self['length'].set_valauto(lambda: 3 + self['msg_data'].get_len() + 2)
-        self['msg_data'].set_blauto(lambda: (self['length'].get_val() - 3 - 2) * 8)
+        # The 'Length' field indicates length of *all* fields following it
+        self['Length'].set_valauto(lambda: 3 + self['MsgData'].get_len() + 2)
+        self['MsgData'].set_blauto(lambda: (self['Length'].get_val() - 3 - 2) * 8)
         
         # Kudos to Stefan @Sec Zehl for finding the CRC function parameters
         self._fcs_func = crcmod.mkCrcFun(0x11021, rev=True, initCrc=0x0, xorOut=0xffff)
-        self['fcs'].set_valauto(lambda: self._fcs_func(self[:-1].to_bytes()))
+        self['FCS'].set_valauto(lambda: self._fcs_func(self[:-1].to_bytes()))

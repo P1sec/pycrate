@@ -50,7 +50,7 @@ test_frames = (
 def test_sedebugmux():
     for f in test_frames:
         # print('[+] Testing frame: %s' % f.hex())
-        msg = SEDebugMuxMsg()
+        msg = DebugMuxFrame()
         msg.from_bytes(f)
         v = msg.get_val()
         msg.reautomate()
