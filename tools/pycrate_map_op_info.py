@@ -40,6 +40,10 @@ from pycrate_asn1dir.TCAP_MAPv2v3       import *
 from pycrate_mobile.TS29002_MAPAppCtx   import *
 
 
+def load_cap_mod():
+    from pycrate_asn1dir.TCAP_CAP       import GLOBAL
+    
+
 # this does not work perfectly, because get_construct_info() is not recursive
 # but call get_proto() for SEQUENCE / SET inner components
 PRINT_PROTO_EXTCONTAINER = False
@@ -61,7 +65,10 @@ def get_error_info(err, info, wext=True):
     info.append('  errorCode: (local, %.2i)' % err['errorCode'][1])
     if 'ParameterType' in err:
         par = err['ParameterType']
-        info.append('    ParameterType: %s (%s)' % (par._typeref.called[1], par.TYPE))
+        try:
+            info.append('    ParameterType: %s (%s)' % (par._typeref.called[1], par.TYPE))
+        except Exception:
+            info.append('    ParameterType: %s (%s)' % (par._name, par.TYPE))
         get_construct_info(par, info, wext=wext, space=SPACE_CONSTRUCT)
     info.append('')
 
@@ -106,7 +113,7 @@ def get_construct_info(obj, info, wext=True, space=SPACE_CONSTRUCT):
         info.append( SPACE_MARGIN + space + repr(cont) )
 
 
-def show_infos(val, werr, wext):
+def show_infos(val, werr, wext, cap=False):
     
     print()
     vers = ''
@@ -132,12 +139,18 @@ def show_infos(val, werr, wext):
         for e in err.getv():
             get_error_info(e, info, wext)
     
-    if vers == 'MAPv2':
-        info.insert(0, 'MAP version 1 and 2')
-    elif vers:
-        info.insert(0, 'MAP version 3 and over')
+    if cap:
+        for name in GLOBAL.MOD['CAP-operationcodes']['_val_']:
+            if GLOBAL.MOD['CAP-operationcodes'][name]._val == val['operationCode']:
+                info.insert(0, 'CAP-operationcodes name: %s' % name)
+                break
     else:
-        info.insert(0, 'MAP version unknown')
+        if vers == 'MAPv2':
+            info.insert(0, 'MAP version 1 and 2')
+        elif vers:
+            info.insert(0, 'MAP version 3 and over')
+        else:
+            info.insert(0, 'MAP version unknown')
     
     print('\n'.join(info))
 
@@ -169,7 +182,13 @@ def show_appctx(oc):
 
 
 def print_operation_infos(args):
-    Op = GLOBAL.MOD['MAPv2v3-Protocol']['Supported-MAP-Operations']
+    if args.c:
+        Op = GLOBAL.MOD['TCAP-CAP-Messages']['AllCAPInvokable']
+        prot = 'CAP'
+    else:
+        Op = GLOBAL.MOD['MAPv2v3-Protocol']['Supported-MAP-Operations']
+        prot = 'MAP'
+    #
     if args.o == []:
         oc = list(range(0x100))
     else:
@@ -179,35 +198,34 @@ def print_operation_infos(args):
         if args.l:
             if vals[0] == 'U':
                 if 'ArgumentType' in vals[1]:
-                    Arg = vals[1]['ArgumentType'].get_typeref()
-                    print('MAP operation code (local, %.2i): %s.%s'\
-                          % (i, Arg._mod, Arg._name))
+                    mod, name = vals[1]['ArgumentType']._typeref.called
+                    print('%s operation code (local, %.2i): %s.%s' % (prot, i, mod, name))
                 else:
-                    print('MAP operation code (local, %.2i): no argument' % i)
+                    print('%s operation code (local, %.2i): no argument' % (prot, i))
             elif vals[0] == 'M':
                 for v in vals[1]:
                     if 'ArgumentType' in v:
-                        Arg = v['ArgumentType'].get_typeref()
-                        print('MAP operation code (local, %.2i): %s.%s'\
-                              % (i, Arg._mod, Arg._name))
+                        mod, name = v['ArgumentType']._typeref.called
+                        print('%s operation code (local, %.2i): %s.%s' % (prot, i, mod, name))
                     else:
-                        print('MAP operation code (local, %.2i): no argument' % i)
+                        print('%s operation code (local, %.2i): no argument' % (prot, i))
         else:
             if vals[0] == 'U':
                 print()
                 print('-'*80)
-                print('-'*25, ' operationCode: (local, %.2i) ' % i, '-'*25)
+                print('-'*23, ' %s operationCode: (local, %.2i) ' % (prot, i), '-'*23)
                 print('-'*80)
                 val = vals[1]
-                show_infos(val, args.e, args.x)
+                show_infos(val, args.e, args.x, cap=args.c)
             elif vals[0] == 'M':
                 print()
                 print('-'*80)
-                print('-'*25, ' operationCode: (local, %.2i) ' % i, '-'*25)
+                print('-'*23, ' %s operationCode: (local, %.2i) ' % (prot, i), '-'*23)
                 print('-'*80)
                 for val in vals[1]:
                     show_infos(val, args.e, args.x)
-            show_appctx(i)
+            if not args.c:
+                show_appctx(i)
 
 
 def main():
@@ -217,7 +235,10 @@ def main():
     parser.add_argument('-l', action='store_true', help='only list MAP argument name associated to operation codes')
     parser.add_argument('-e', action='store_true', help='add procedure-related errors')
     parser.add_argument('-x', action='store_true', help='add extended data structures')
+    parser.add_argument('-c', action='store_true', help='switch to the CAP / Camel protocol instead of MAP')
     args = parser.parse_args()
+    if args.c:
+        load_cap_mod()
     #
     print_operation_infos(args)
     return 0
