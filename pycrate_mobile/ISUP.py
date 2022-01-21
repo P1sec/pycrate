@@ -423,11 +423,12 @@ class _Q931_MIE(Envelope):
 
 class Q931IE(Envelope):
     _GEN = (
-        Uint('S', dic={0: 'variable length', 1: 'single octet'}),
+        Uint('S', bl=1, dic={0: 'variable length', 1: 'single octet'}),
         Alt('IE', GEN={
             0 : _Q931_MIE('MIE'),
             1 : _Q931_SIE('SIE')
-            })
+            },
+            sel=lambda self: self.get_env()['S'].get_val())
         )
 
 
