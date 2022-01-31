@@ -48,6 +48,8 @@ class RRCTLMsgType(enum.IntEnum):
     NetworkSelect               = 0x03
     ConnEstabish                = 0x04
     ConnRelease                 = 0x05
+    Paging                      = 0x06
+    Param                       = 0x07
 
 RRCTLMsgType_dict = { e.value : e.name for e in RRCTLMsgType }
 
@@ -72,6 +74,12 @@ class RRCTLConnEstCause(enum.IntEnum):
     MO_VoiceCall_v1280          = 0x06
 
 RRCTLConnEstCause_dict = { e.value : e.name for e in RRCTLConnEstCause }
+
+class RRCTLParamType(enum.IntEnum):
+    ''' RRCTL parameter type for RRCTLMsgType.Param '''
+    UEID                        = 0x00
+
+RRCTLParamType_dict = { e.value : e.name for e in RRCTLParamType }
 
 #------------------------------------------------------------------------------#
 # RRCTL message payload
@@ -113,6 +121,29 @@ class ConnDataReqInd(Envelope):
         Buf('PDU'),
         )
 
+class MMESubscrId(Envelope):
+    _GEN = (
+            Uint8('MMEC'),
+            Uint32('M_TMSI'),
+        )
+
+class PagingInd(MMESubscrId):
+    pass
+
+class ParamReq(Envelope):
+    _GEN = (
+        Uint8('Type', dic=RRCTLParamType_dict),
+        Uint8('Len'),
+        Alt('Data', hier=1, GEN={
+                RRCTLParamType.UEID : MMESubscrId()
+            },
+            sel=lambda self: self.get_env()['Type'].get_val())
+        )
+
+    def __init__(self, *args, **kwargs):
+        Envelope.__init__(self, *args, **kwargs)
+        self['Len'].set_valauto(lambda: self['Data'].get_len())
+
 #------------------------------------------------------------------------------#
 # RRCTL message definition
 #------------------------------------------------------------------------------#
@@ -135,6 +166,8 @@ class RRCTLMsg(Envelope):
                 (RRCTLMsgType.ConnEstabish,     RRCTLMsgDisc.Req) : ConnEstablishReq(),
                 (RRCTLMsgType.ConnData,         RRCTLMsgDisc.Req) : ConnDataReqInd(),
                 (RRCTLMsgType.ConnData,         RRCTLMsgDisc.Ind) : ConnDataReqInd(),
+                (RRCTLMsgType.Paging,           RRCTLMsgDisc.Ind) : PagingInd(),
+                (RRCTLMsgType.Param,            RRCTLMsgDisc.Req) : ParamReq(),
             },
             sel=lambda self: (self.get_env()['Hdr']['Type'].get_val(),
                               self.get_env()['Hdr']['Disc'].get_val()))
