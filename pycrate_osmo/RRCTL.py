@@ -50,6 +50,7 @@ class RRCTLMsgType(enum.IntEnum):
     ConnRelease                 = 0x05
     Paging                      = 0x06
     Param                       = 0x07
+    SecMode                     = 0x08
 
 RRCTLMsgType_dict = { e.value : e.name for e in RRCTLMsgType }
 
@@ -144,6 +145,21 @@ class ParamReq(Envelope):
         Envelope.__init__(self, *args, **kwargs)
         self['Len'].set_valauto(lambda: self['Data'].get_len())
 
+class SecModeReq(Envelope):
+    _GEN = (
+        Uint('EEA', bl=3),
+        Uint('EIA', bl=3),
+        Uint('ResetTxCTR', bl=1),
+        Uint('ResetRxCTR', bl=1),
+        Buf('Spare', bl=24),
+        Buf('KASME', bl=32 * 8), # optional
+    )
+
+    def __init__(self, *args, **kwargs):
+        Envelope.__init__(self, *args, **kwargs)
+        # KASME is absent when neither encryption nor integrity protection is active
+        self['KASME'].set_transauto(lambda: not self['EEA']() and not self['EIA']())
+
 #------------------------------------------------------------------------------#
 # RRCTL message definition
 #------------------------------------------------------------------------------#
@@ -168,6 +184,7 @@ class RRCTLMsg(Envelope):
                 (RRCTLMsgType.ConnData,         RRCTLMsgDisc.Ind) : ConnDataReqInd(),
                 (RRCTLMsgType.Paging,           RRCTLMsgDisc.Ind) : PagingInd(),
                 (RRCTLMsgType.Param,            RRCTLMsgDisc.Req) : ParamReq(),
+                (RRCTLMsgType.SecMode,          RRCTLMsgDisc.Req) : SecModeReq(),
             },
             sel=lambda self: (self.get_env()['Hdr']['Type'].get_val(),
                               self.get_env()['Hdr']['Disc'].get_val()))
