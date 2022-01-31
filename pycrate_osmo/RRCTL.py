@@ -51,6 +51,8 @@ class RRCTLMsgType(enum.IntEnum):
     Paging                      = 0x06
     Param                       = 0x07
     SecMode                     = 0x08
+    # RRCTL protocol extensions (0b11xxxx) follow
+    RFU                         = 0x3f # 0b111111
 
 RRCTLMsgType_dict = { e.value : e.name for e in RRCTLMsgType }
 
