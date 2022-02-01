@@ -52,6 +52,7 @@ class RRCTLMsgType(enum.IntEnum):
     Param                       = 0x07
     SecMode                     = 0x08
     # RRCTL protocol extensions (0b11xxxx) follow
+    ExtUSIM                     = 0x3e
     RFU                         = 0x3f # 0b111111
 
 RRCTLMsgType_dict = { e.value : e.name for e in RRCTLMsgType }
@@ -163,6 +164,97 @@ class SecModeReq(Envelope):
         self['KASME'].set_transauto(lambda: not self['EEA']() and not self['EIA']())
 
 #------------------------------------------------------------------------------#
+# RRCTL protocol extensions
+#------------------------------------------------------------------------------#
+
+class L16V(Envelope):
+    _GEN = (
+        Uint16('L'),
+        Buf('V'),
+        )
+
+    def __init__(self, *args, **kwargs):
+        Envelope.__init__(self, *args, **kwargs)
+        self['L'].set_valauto(lambda: self['V'].get_bl() >> 3)
+        self['V'].set_blauto(lambda: self['L'].get_val() << 3)
+
+class ExtUSIM:
+    ''' RRCTL protocol extension for (U)SIM specific sommands '''
+    class MsgType(enum.IntEnum):
+        RawAPDU                     = 0x00
+        ReadFile                    = 0x01
+        UpdateFile                  = 0x02
+        GenAuthVector               = 0x03
+        Reserved                    = 0xff
+
+    MsgType_dict = { e.value : e.name for e in MsgType }
+
+    class RawAPDU(L16V):
+        pass
+
+    class ReadFileReq(Envelope):
+        _GEN = (
+            Uint16('DF'), # Dedicated File
+            Uint16('EF'), # Elementary File
+            )
+
+    class ReadFileRes(L16V):
+        pass
+
+    class UpdateFileReq(Envelope):
+        _GEN = (
+            Uint16('DF'), # Dedicated File
+            Uint16('EF'), # Elementary File
+            L16V('Data'),
+            )
+
+    class GenAuthVectorReq(Envelope):
+        _GEN = (
+            Buf('Rand', bl=16 * 8),
+            Buf('Autn', bl=16 * 8),
+            BufBCD('MCC', bl=16),
+            BufBCD('MNC', bl=16),
+            )
+
+    class GenAuthVectorRes(Envelope):
+        _GEN = (
+            Uint8('OutOfSync'),
+            Uint8('KASMELen'),
+            Buf('Spare', bl=16),
+            Buf('KASME'),
+            )
+
+        def __init__(self, *args, **kwargs):
+            Envelope.__init__(self, *args, **kwargs)
+            self['KASMELen'].set_valauto(lambda: self['KASME'].get_bl() >> 3)
+            self['KASME'].set_blauto(lambda: self['KASMELen'].get_val() << 3)
+
+class ExtUSIMMsgReq(Envelope):
+    _GEN = (
+        Uint8('Type', dic=ExtUSIM.MsgType_dict),
+        Buf('Spare', bl=24),
+        Alt('Data', hier=1, GEN={
+                ExtUSIM.MsgType.RawAPDU             : ExtUSIM.RawAPDU(),
+                ExtUSIM.MsgType.ReadFile            : ExtUSIM.ReadFileReq(),
+                ExtUSIM.MsgType.UpdateFile          : ExtUSIM.UpdateFileReq(),
+                ExtUSIM.MsgType.GenAuthVector       : ExtUSIM.GenAuthVectorReq(),
+            },
+            sel=lambda self: self.get_env()['Type'].get_val())
+        )
+
+class ExtUSIMMsgRes(Envelope):
+    _GEN = (
+        Uint8('Type', dic=ExtUSIM.MsgType_dict),
+        Buf('Spare', bl=24),
+        Alt('Data', hier=1, GEN={
+                ExtUSIM.MsgType.RawAPDU             : ExtUSIM.RawAPDU(),
+                ExtUSIM.MsgType.ReadFile            : ExtUSIM.ReadFileRes(),
+                ExtUSIM.MsgType.GenAuthVector       : ExtUSIM.GenAuthVectorRes(),
+            },
+            sel=lambda self: self.get_env()['Type'].get_val())
+        )
+
+#------------------------------------------------------------------------------#
 # RRCTL message definition
 #------------------------------------------------------------------------------#
 
@@ -187,6 +279,9 @@ class RRCTLMsg(Envelope):
                 (RRCTLMsgType.Paging,           RRCTLMsgDisc.Ind) : PagingInd(),
                 (RRCTLMsgType.Param,            RRCTLMsgDisc.Req) : ParamReq(),
                 (RRCTLMsgType.SecMode,          RRCTLMsgDisc.Req) : SecModeReq(),
+                # RRCTL protocol extensions follow
+                (RRCTLMsgType.ExtUSIM,          RRCTLMsgDisc.Req) : ExtUSIMMsgReq(),
+                (RRCTLMsgType.ExtUSIM,          RRCTLMsgDisc.Res) : ExtUSIMMsgRes(),
             },
             sel=lambda self: (self.get_env()['Hdr']['Type'].get_val(),
                               self.get_env()['Hdr']['Disc'].get_val()))
