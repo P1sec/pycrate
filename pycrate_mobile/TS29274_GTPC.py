@@ -467,7 +467,7 @@ class Cause(Envelope):
             Uint16('Len'),
             Uint('spare', bl=4),
             Uint('Inst', bl=4)
-            ))
+            ), trans=True)
         )
     
     def _from_char(self, char):
