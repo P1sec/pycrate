@@ -153,6 +153,8 @@ class BufBCD(Buf):
             Buf.set_val(self, val)
         elif isinstance(val, str_types):
             self.encode(val)
+        else:
+            raise(PycrateErr('{0}: invalid BufBCD value'.format(self._name)))
     
     def decode(self):
         """returns the encoded string of digits
@@ -277,6 +279,8 @@ class PLMN(Buf):
             Buf.set_val(self, val)
         elif isinstance(val, str_types):
             self.encode(val)
+        else:
+            raise(PycrateErr('{0}: invalid PLMN value'.format(self._name)))
     
     def decode(self):
         """returns the encoded string of digits
