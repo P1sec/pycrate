@@ -40,6 +40,7 @@ setup(
         "pycrate_corenet",
         "pycrate_sys",
         "pycrate_crypto",
+        "pycrate_osmo",
         ],
     
     test_suite="test.test_pycrate",
