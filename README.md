@@ -430,7 +430,7 @@ Four different tools are provided (yet):
 * *pycrate_berdecode.py* parses any BER/CER/DER encoded binary value of ASN.1 
    objects and prints the corresponding structure.
 * *pycrate_map_op_info.py* prints prototypes and various information related to
-   TCAP and MAP (Mobile Application Part) operations and application-contexts.
+   TCAP-MAP (Mobile Application Part) and CAMEL operations and application-contexts.
 
 
 Examples
