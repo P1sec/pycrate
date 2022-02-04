@@ -51,6 +51,7 @@ setup(
         "tools/pycrate_showmedia.py",
         "tools/pycrate_shownas.py",
         "tools/pycrate_map_op_info.py",
+        "tools/pycrate_extnas_demo.py",
         ],
     
     # potential dependencies
