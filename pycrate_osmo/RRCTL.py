@@ -297,8 +297,8 @@ class RRCTLMsg(Envelope):
         self['Hdr']['Disc'].set_val(msg_disc)
 
     def match(self, msg_type, msg_disc):
-        if self['Hdr']['Type'].get_val() is not msg_type:
+        if self['Hdr']['Type'].get_val() != msg_type:
             return False
-        if self['Hdr']['Disc'].get_val() is not msg_disc:
+        if self['Hdr']['Disc'].get_val() != msg_disc:
             return False
         return True
