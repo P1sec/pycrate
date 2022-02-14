@@ -35,7 +35,7 @@
 #------------------------------------------------------------------------------#
 # 3GPP TS 29.274: Evolved General Packet Radio Service (GPRS) Tunnelling Protocol 
 # for Control plane (GTPv2-C)
-# release 17.1.1 (h11)
+# release 16 (h11)
 #------------------------------------------------------------------------------#
 
 from pycrate_core.utils import *

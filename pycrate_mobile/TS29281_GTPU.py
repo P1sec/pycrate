@@ -47,7 +47,7 @@ __all__ = [
 #------------------------------------------------------------------------------#
 # 3GPP TS 29.281: General Packet Radio System (GPRS) Tunnelling Protocol 
 # User Plane (GTPv1-U)
-# release 17 (h10)
+# release 16 (h10)
 #------------------------------------------------------------------------------#
 
 from enum import IntEnum
@@ -56,6 +56,17 @@ from pycrate_core.utils import *
 from pycrate_core.elt   import *
 from pycrate_core.base  import *
 
+from pycrate_mobile.TS29060_GTP     import (
+    # extension header
+    BufAligned,
+    GTPHdrExtCont,
+    GTPHdrExt,
+    # header
+    GTPHdrExtList,
+    GTPHdrOpt,
+    ProtType_dict,
+    GTPHdr
+    )
 from pycrate_mobile.TS38415_PDUSess import *
 
 
@@ -82,42 +93,7 @@ GTPUNextExtHeader_dict = {
     }
 
 
-# buffer that makes the Extension Header 32-bit-aligned
-class BufAligned(Buf):
-    
-    _rep = REPR_HEX
-    
-    PAD = b'\0'
-    
-    def set_val(self, val):
-        pad_len = -(len(val)+2) % 4
-        if pad_len:
-            Buf.set_val(self, val + pad_len*self.PAD)
-        else:
-            Buf.set_val(self, val)
-
-
-# prototype for the content of a generic Ext Header
-class _GTPUHdrExtCont(Envelope):
-    _GEN = (
-        BufAligned('Value', val=b'\0\0'),
-        )
-    
-    _ID = 1
-    
-    def __init__(self, *args, **kwargs):
-        if 'ID' in kwargs:
-            self._ID = kwargs['ID']
-            del kwargs['ID']
-        Envelope.__init__(self, *args, **kwargs)
-    
-    def clone(self):
-        c = Envelope.clone(self)
-        c._ID = self._ID
-        return c
-
-
-class _LongPDCPPDUNumber(_GTPUHdrExtCont):
+class _LongPDCPPDUNumber(GTPHdrExtCont):
     _GEN = (
         Uint('spare', bl=6, rep=REPR_HEX),
         Uint('Value', bl=18),
@@ -129,75 +105,36 @@ class _LongPDCPPDUNumber(_GTPUHdrExtCont):
 GTPUHdrExtCont_dict = {
     3   : _LongPDCPPDUNumber('LongPDCPPDUNumber',
             ID=3),
-    32  : _GTPUHdrExtCont('ServiceClassInd', GEN=(
+    32  : GTPHdrExtCont('ServiceClassInd', GEN=(
             Uint8('Value'),
             Uint8('spare', rep=REPR_HEX),
             ), ID=32),
-    64  : _GTPUHdrExtCont('UDPPort', GEN=(
+    64  : GTPHdrExtCont('UDPPort', GEN=(
             Uint16('Value'),
             ), ID=64),
-    129 : _GTPUHdrExtCont('RANContainer',
+    129 : GTPHdrExtCont('RANContainer',
             ID=129),
     130 : _LongPDCPPDUNumber('LongPDCPPDUNumber',
             ID=130),
-    131 : _GTPUHdrExtCont('XwRANContainer', 
+    131 : GTPHdrExtCont('XwRANContainer', 
             ID=131),
-    132 : _GTPUHdrExtCont('NRRANContainer',
+    132 : GTPHdrExtCont('NRRANContainer',
             ID=132),
-    133 : _GTPUHdrExtCont('PDUSessionContainer', GEN=PDUSessInfo._GEN,
+    133 : GTPHdrExtCont('PDUSessionContainer', GEN=PDUSessInfo._GEN,
             ID=133),
-    192 : _GTPUHdrExtCont('PDCPPDUNumber', GEN=(
+    192 : GTPHdrExtCont('PDCPPDUNumber', GEN=(
             Uint('Value', bl=15),
             Uint('spare', bl=1, rep=REPR_HEX),
             ), ID=192)
     }
 
 
-class GTPUHdrExt(Envelope): 
-    _GEN  = (
-        Uint8('Len'),
-        _GTPUHdrExtCont('Content', rep=REPR_HEX),
-        Uint8('NextExt', dic=GTPUNextExtHeader_dict)
-        )
-    
-    def __init__(self, *args, **kwargs):
-        Envelope.__init__(self, *args, **kwargs)
-        self[0].set_valauto(lambda: (2 + self[1].get_len()) >> 2)
-        self[1].set_blauto(lambda: self._get_cont_len())
-        self[2].set_valauto(lambda: self._get_ne())
-    
-    def _get_cont_len(self):
-        return max(0, (self[0].get_val()*32) - 16)
-    
-    def _get_ne(self):
-        n = self.get_next()
-        if n:
-            return n[1]._ID
-        else:
-            return 0
-    
-    def set_val(self, val):
-        self._set_cont_cls()
-        Envelope.set_val(self, val)
-    
-    def _from_char(self, char):
-        self._set_cont_cls()
-        Envelope._from_char(self, char)
-    
-    def _set_cont_cls(self):
-        ne = 1
-        if self._env:
-            p = self.get_prev()
-            if p:
-                # get NextExt from previous GTPUHdrExt
-                ne = p['NextExt'].get_val()
-            elif self._env._env:
-                # get NextExt from GTPUHdrOpt
-                ne = self._env._env['GTPUHdrOpt']['NextExt'].get_val()
-        if ne in GTPUHdrExtCont_dict:
-            Cont = GTPUHdrExtCont_dict[ne].clone()
-            Cont.set_blauto(lambda: self._get_cont_len())
-            self.replace(self[1], Cont)
+# define a dedicated class for GTPU
+class GTPUHdrExt(GTPHdrExt):
+    _ExtCont = GTPUHdrExtCont_dict
+
+# patch the next extension field dict
+GTPUHdrExt._GEN[2]._dic = GTPUNextExtHeader_dict
 
 
 #------------------------------------------------------------------------------#
@@ -205,105 +142,43 @@ class GTPUHdrExt(Envelope):
 # TS 29.281, section 5.1
 #------------------------------------------------------------------------------#
 
-class GTPUHdrExtList(Sequence):
+# define a dedicated class for GTPU
+class GTPUHdrExtList(GTPHdrExtList):
     _GEN = GTPUHdrExt()
-    
-    def _from_char(self, char):
-        if self.get_trans():
-            return
-        self.set_val(None)
-        l = 0
-        p = self.get_prev()
-        if not p:
-            return
-        l += 1
-        self.set_num(l)
-        self[-1]._from_char(char)
-        while self[-1]['NextExt'].get_val() != 0:
-            l += 1
-            self.set_num(l)
-            self[-1]._from_char(char)
 
-
-class GTPUHdrOpt(Envelope):
-    _GEN = (
-        Uint16('SeqNum'),
-        Uint8('NPDUNum'),
-        Uint8('NextExt')
-        )
-    
-    def __init__(self, *args, **kwargs):
-        Envelope.__init__(self, *args, **kwargs)
-        self[-1].set_valauto(lambda: self._get_ne())
-    
-    def _get_ne(self):
-        n = self.get_next()
-        if isinstance(n, GTPUHdrExtList) and n.get_num():
-            return n[0][1]._ID
-        else:
-            return 0
-
-
-ProtType_dict = {
-    0 : 'GTP prime',
-    1 : 'GTP',          # the one for GTP-U
-    }
-
-GTPUType_dict = {
-    1   : 'Echo Request',
-    2   : 'Echo Response',
-    26  : 'Error Indication',
-    31  : 'Supported Extension Headers Notification',
-    253 : 'Tunnel Status',
-    254 : 'End Marker',
-    255 : 'G-PDU'
-    }
 
 class GTPUType(IntEnum):
-    EchoRequest                             = 1
-    EchoResponse                            = 2
-    ErrorIndication                         = 26
-    SupportedExtensionHeadersNotification   = 31
-    TunnelStatus                            = 253
-    EndMarker                               = 254
-    GPDU                                    = 255
+    EchoReq                         = 1
+    EchoResp                        = 2
+    ErrorIndication                 = 26
+    SupportedExtensionHeadersNotif  = 31
+    TunnelStatus                    = 253
+    EndMarker                       = 254
+    GPDU                            = 255
+
+GTPUType_dict = {e.value: str(e) for e in GTPUType}
 
 
-class GTPUHdr(Envelope):
-    _GEN = (
-        Uint('Version', val=1, bl=3),               # 1 for GTP-U
-        Uint('PT', val=1, bl=1, dic=ProtType_dict), # 1 for GTP-U
+class GTPUHdr(GTPHdr):
+    _GEN = (        
+        Uint('Version', val=1, bl=3),               # 1 for GTP 29.060
+        Uint('PT', val=1, bl=1, dic=ProtType_dict), # 1 for GTP 29.060
         Uint('spare', bl=1),
         Uint('E', bl=1),
         Uint('S', bl=1),
         Uint('PN', bl=1),
-        Uint8('Type', val=GTPUType.EchoRequest.value, dic=GTPUType_dict),
+        Uint8('Type', val=GTPUType.EchoReq.value, dic=GTPUType_dict),
         Uint16('Len'),
         Uint32('TEID', rep=REPR_HEX),
-        GTPUHdrOpt(hier=1),
-        GTPUHdrExtList(hier=1)
+        GTPHdrOpt('GTPUHdrOpt', hier=1), # optional
+        GTPUHdrExtList(hier=1)           # optional
         )
     
     def __init__(self, *args, **kwargs):
         Envelope.__init__(self, *args, **kwargs)
-        self[7].set_valauto(lambda: self._get_len())
-        self[9].set_transauto(lambda: False if (self[3]() or self[4]() or self[5]()) else True)
-        self[10].set_transauto(lambda: False if self[3]() else True)
-
-    def _get_len(self):
-        l = 0
-        # get length of header optional and extended part
-        if not self[9].get_trans():
-            l +=4
-        if self[10]._content:
-            l += self[10].get_len()
-        # get length of payload
-        env = self.get_env()
-        if env:
-            for e in env._content[1:]:
-                if not e.get_trans():
-                    l += e.get_len()
-        return l
+        self['Len'].set_valauto(lambda: self._get_len())
+        self['GTPUHdrOpt'].set_transauto(lambda: False if (self[3]() or self[4]() or self[5]()) else True)
+        self['GTPUHdrExtList'].set_transauto(lambda: False if self[3]() else True)
 
 
 #------------------------------------------------------------------------------#
@@ -437,7 +312,7 @@ class _GTPUMsg(Envelope):
 
 class GTPUEchoRequest(_GTPUMsg):
     _GEN = (
-        GTPUHdr(val={'Type': GTPUType.EchoRequest.value}),
+        GTPUHdr(val={'Type': GTPUType.EchoReq.value}),
         GTPUIEPrivateExt(hier=1, trans=True) # optional
         )
 
@@ -449,7 +324,7 @@ class GTPUEchoRequest(_GTPUMsg):
 
 class GTPUEchoResponse(_GTPUMsg):
     _GEN = (
-        GTPUHdr(val={'Type': GTPUType.EchoResponse.value}),
+        GTPUHdr(val={'Type': GTPUType.EchoResp.value}),
         GTPUIERecovery(hier=1),
         GTPUIEPrivateExt(hier=1, trans=True) # optional
         )
@@ -462,7 +337,7 @@ class GTPUEchoResponse(_GTPUMsg):
 
 class GTPUSuppExtHdrNotif(_GTPUMsg):
     _GEN = (
-        GTPUHdr(val={'Type': GTPUType.SupportedExtensionHeadersNotification.value}),
+        GTPUHdr(val={'Type': GTPUType.SupportedExtensionHeadersNotif.value}),
         GTPUIEExtHdrList(hier=1)
         )
 
