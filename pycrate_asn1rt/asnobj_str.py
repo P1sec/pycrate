@@ -1236,7 +1236,6 @@ Specific constraints attributes:
     
     def _get_val_obj(self, ref):
         if isinstance(ref, str_types) and self._const_cont:
-        
             if self._const_cont._typeref:
                 ident = self._const_cont._typeref.called[1]
             else:
