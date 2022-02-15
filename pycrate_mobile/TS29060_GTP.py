@@ -326,48 +326,176 @@ class GTPHdr(Envelope):
 #------------------------------------------------------------------------------#
 
 GTPIEType_dict = {
-}
+    1   : ('TV', 1, 'Cause'),
+    2   : ('TV', 8, 'International Mobile Subscriber Identity (IMSI)'),
+    3   : ('TV', 6, 'Routeing Area Identity (RAI)'),
+    4   : ('TV', 4, 'Temporary Logical Link Identity (TLLI)'),
+    5   : ('TV', 4, 'Packet TMSI (P-TMSI)'),
+    8   : ('TV', 1, 'Reordering Required'),
+    9   : ('TV', 28, 'Authentication Triplet'),
+    11  : ('TV', 1, 'MAP Cause'),
+    12  : ('TV', 3, 'P-TMSI Signature'),
+    13  : ('TV', 1, 'MS Validated'),
+    14  : ('TV', 1, 'Recovery'),
+    15  : ('TV', 1, 'Selection Mode'),
+    16  : ('TV', 4, 'Tunnel Endpoint Identifier Data I'),
+    17  : ('TV', 4, 'Tunnel Endpoint Identifier Control Plane'),
+    18  : ('TV', 5, 'Tunnel Endpoint Identifier Data II'),
+    19  : ('TV', 1, 'Teardown Ind'),
+    20  : ('TV', 1, 'NSAPI'),
+    21  : ('TV', 1, 'RANAP Cause'),
+    22  : ('TV', 9, 'RAB Context'),
+    23  : ('TV', 1, 'Radio Priority SMS'),
+    24  : ('TV', 1, 'Radio Priority'),
+    25  : ('TV', 2, 'Packet Flow Id'),
+    26  : ('TV', 2, 'Charging Characteristics'),
+    27  : ('TV', 2, 'Trace Reference'),
+    28  : ('TV', 2, 'Trace Type'),
+    29  : ('TV', 1, 'MS Not Reachable Reason'),
+    127 : ('TV', 4, 'Charging ID'),
+    128 : ('TLV', -1, 'End User Address'),
+    129 : ('TLV', -1, 'MM Context'),
+    130 : ('TLV', -1, 'PDP Context'),
+    131 : ('TLV', -1, 'Access Point Name'),
+    132 : ('TLV', -1, 'Protocol Configuration Options'),
+    133 : ('TLV', -1, 'GSN Address'),
+    134 : ('TLV', -1, 'MS International PSTN/ISDN Number (MSISDN)'),
+    135 : ('TLV', -1, 'Quality of Service Profile'),
+    136 : ('TLV', -1, 'Authentication Quintuplet'),
+    137 : ('TLV', -1, 'Traffic Flow Template'),
+    138 : ('TLV', -1, 'Target Identification'),
+    139 : ('TLV', -1, 'UTRAN Transparent Container'),
+    140 : ('TLV', -1, 'RAB Setup Information'),
+    141 : ('TLV', -1, 'Extension Header Type List'),
+    142 : ('TLV', -1, 'Trigger Id'),
+    143 : ('TLV', -1, 'OMC Identity'),
+    144 : ('TLV', -1, 'RAN Transparent Container'),
+    145 : ('TLV', 0, 'PDP Context Prioritization'),
+    146 : ('TLV', -1, 'Additional RAB Setup Information'),
+    147 : ('TLV', -1, 'SGSN Number'),
+    148 : ('TLV', 1, 'Common Flags'),
+    149 : ('TLV', 1, 'APN Restriction'),
+    150 : ('TLV', 1, 'Radio Priority LCS'),
+    151 : ('TLV', 1, 'RAT Type'),
+    152 : ('TLV', -1, 'User Location Information'),
+    153 : ('TLV', 1, 'MS Time Zone'),
+    154 : ('TLV', 8, 'IMEI(SV)'),
+    155 : ('TLV', -1, 'CAMEL Charging Information Container'),
+    156 : ('TLV', -1, 'MBMS UE Context'),
+    157 : ('TLV', 6, 'Temporary Mobile Group Identity (TMGI)'),
+    158 : ('TLV', -1, 'RIM Routing Address'),
+    159 : ('TLV', -1, 'MBMS Protocol Configuration Options'),
+    160 : ('TLV', -1, 'MBMS Service Area'),
+    161 : ('TLV', -1, 'Source RNC PDCP context info'),
+    162 : ('TLV', 9, 'Additional Trace Info'),
+    163 : ('TLV', 1, 'Hop Counter'),
+    164 : ('TLV', 3, 'Selected PLMN ID'),
+    165 : ('TLV', 1, 'MBMS Session Identifier'),
+    166 : ('TLV', 1, 'MBMS 2G/3G Indicator'),
+    167 : ('TLV', 1, 'Enhanced NSAPI'),
+    168 : ('TLV', 3, 'MBMS Session Duration'),
+    169 : ('TLV', 8, 'Additional MBMS Trace Info'),
+    170 : ('TLV', 1, 'MBMS Session Repetition Number'),
+    171 : ('TLV', 1, 'MBMS Time To Data Transfer'),
+    173 : ('TLV', -1, 'BSS Container'),
+    174 : ('TLV', 17, 'Cell Identification'),
+    175 : ('TLV', 9, 'PDU Numbers'),
+    176 : ('TLV', 1, 'BSSGP Cause'),
+    177 : ('TLV', -1, 'Required MBMS bearer capabilities'),
+    178 : ('TLV', 1, 'RIM Routing Address Discriminator'),
+    179 : ('TLV', -1, 'List of set-up PFCs'),
+    180 : ('TLV', -1, 'PS Handover XID Parameters'),
+    181 : ('TLV', 1, 'MS Info Change Reporting Action'),
+    182 : ('TLV', -1, 'Direct Tunnel Flags'),
+    183 : ('TLV', 1, 'Correlation-ID'),
+    184 : ('TLV', 1, 'Bearer Control Mode'),
+    185 : ('TLV', -1, 'MBMS Flow Identifier'),
+    186 : ('TLV', -1, 'MBMS IP Multicast Distribution'),
+    187 : ('TLV', 1, 'MBMS Distribution Acknowledgement'),
+    188 : ('TLV', 1, 'Reliable INTER RAT HANDOVER INFO'),
+    189 : ('TLV', 2, 'RFSP Index'),
+    190 : ('TLV', -1, 'Fully Qualified Domain Name (FQDN)'),
+    191 : ('TLV', 1, 'Evolved Allocation/Retention Priority I'),
+    192 : ('TLV', 2, 'Evolved Allocation/Retention Priority II'),
+    193 : ('TLV', -1, 'Extended Common Flags'),
+    194 : ('TLV', 8, 'User CSG Information (UCI)'),
+    195 : ('TLV', -1, 'CSG Information Reporting Action'),
+    196 : ('TLV', 4, 'CSG ID'),
+    197 : ('TLV', 1, 'CSG Membership Indication (CMI)'),
+    198 : ('TLV', 8, 'Aggregate Maximum Bit Rate (AMBR)'),
+    199 : ('TLV', -1, 'UE Network Capability'),
+    200 : ('TLV', -1, 'UE-AMBR'),
+    201 : ('TLV', 9, 'APN-AMBR with NSAPI'),
+    202 : ('TLV', -1, 'GGSN Back-Off Time'),
+    203 : ('TLV', -1, 'Signalling Priority Indication'),
+    204 : ('TLV', -1, 'Signalling Priority Indication with NSAPI'),
+    205 : ('TLV', 1, 'Higher bitrates than 16 Mbps flag'),
+    207 : ('TLV', -1, 'Additional MM context for SRVCC'),
+    208 : ('TLV', -1, 'Additional flags for SRVCC'),
+    209 : ('TLV', -1, 'STN-SR'),
+    210 : ('TLV', -1, 'C-MSISDN'),
+    211 : ('TLV', -1, 'Extended RANAP Cause'),
+    212 : ('TLV', -1, 'eNodeB ID'),
+    213 : ('TLV', 2, 'Selection Mode with NSAPI'),
+    214 : ('TLV', -1, 'ULI Timestamp'),
+    215 : ('TLV', -1, 'Local Home Network ID (LHN-ID) with NSAPI'),
+    216 : ('TLV', -1, 'CN Operator Selection Entity'),
+    217 : ('TLV', -1, 'UE Usage Type'),
+    218 : ('TLV', -1, 'Extended Common Flags II'),
+    219 : ('TLV', -1, 'Node Identifier'),
+    220 : ('TLV', -1, 'CIoT Optimizations Support Indication'),
+    221 : ('TLV', -1, 'SCEF PDN Connection'),
+    222 : ('TLV', 1, 'IOV_updates counter'),
+    223 : ('TLV', -1, 'Mapped UE Usage Type'),
+    224 : ('TLV', -1, 'UP Function Selection Indication Flags'),
+    238 : ('TLV', -1, 'Special IE type for IE Type Extension'),
+    251 : ('TLV', -1, 'Charging Gateway Address'),
+    255 : ('TLV', -1, 'Private Extension'),
+    }
+
+GTPIETagDesc_dict = {k: v[2] for k, v in GTPIEType_dict.items()} 
 
 
-class GTPIEHdr(Envelope):
-    """GTPv1-C Information Element's header
+class GTPIETV(Envelope):
+    """GTPv1-C Information Element in Tag-Value format, with fixed length
     """
-    ENV_SEL_TRANS = False
     
     _GEN = (
-        Uint8('Type', val=0, dic=GTPIEType_dict),
-        Uint16('Len'), # present if Type & 0x80 == 1
+        Uint8('Type', val=1, dic=GTPIETagDesc_dict),
+        Buf('Data', bl=8, rep=REPR_HEX)
+        )
+
+
+class GTPIETLV(Envelope):
+    """GTPv1-C Information Element in Tag-Length-Value format
+    """
+    
+    _GEN = (
+        Uint8('Type', val=128, dic=GTPIETagDesc_dict),
+        Uint16('Len'),
         Uint16('TypeExt'), # present if Type == 238
+        Buf('Data', rep=REPR_HEX)
         )
     
     def __init__(self, *args, **kwargs):
         Envelope.__init__(self, *args, **kwargs)
-        # TODO: verify if Len can be absent, or just fixed
-        #self['Len'].set_transauto(lambda: not self['Type'].get_val() & 0x80)
-        self['TypeExt'].set_transauto(lambda: self['Type'].get_val() != 238)
-
-
-class GTPIE(Envelope):
-    """GTPv1-C Information Element
-    """
+        self[1].set_valauto(lambda: self._set_len())
+        self[2].set_transauto(lambda: self[0].get_val() != 238)
+        self[3].set_blauto(lambda: self._set_dat_len())
     
-    _GEN = (
-        GTPIEHdr(),
-        Buf('GTPIEData', rep=REPR_HEX, hier=1)
-        )
-    
-    def __init__(self, *args, **kwargs):
-        Envelope.__init__(self, *args, **kwargs)
-        self[0][1].set_valauto(lambda: self._get_len())
-    
-    def _get_len(self):
-        l = 0
-        if len(self._content) > 1:
-            # IE data
-            l += self._content[1].get_len()
-        if self[0][0].get_val() == 254:
+    def _set_len(self):
+        if self[0].get_val() == 238:
             # extended type
-            l += 2
-        return l
+            return 2 + self[3].get_len()
+        else:
+            return self[3].get_len()
+    
+    def _set_dat_len(self):
+        if self[0].get_val() == 238:
+            # extended type
+            return (self[0][1].get_val()-2) << 3
+        else:
+            return self[0][1].get_val() << 3
+
 
 
