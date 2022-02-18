@@ -845,7 +845,7 @@ class UpdatePDPCtxtRespGGSN(GTPMsg):
             GTPIETV('ChargingID', val={'Type': GTPIEType.ChargingID.value}, bl={'Data': 32}, trans=True),
             GTPIETLV('PCO', val={'Type': GTPIEType.PCO.value}, trans=True),
             GTPIETLV('GGSNAddrForControlPlane', val={'Type': GTPIEType.GSNAddr.value}, trans=True),
-            GTPIETLV('GGSNAddressForUserTraffic', val={'Type': GTPIEType.GSNAddr.value}, trans=True),
+            GTPIETLV('GGSNAddrForUserTraffic', val={'Type': GTPIEType.GSNAddr.value}, trans=True),
             GTPIETLV('AltGGSNAddrForControlPlane', val={'Type': GTPIEType.GSNAddr.value}, trans=True),
             GTPIETLV('AltGGSNAddrForUserTraffic', val={'Type': GTPIEType.GSNAddr.value}, trans=True),
             GTPIETLV('QoSProfile', val={'Type': GTPIEType.QoSProfile.value}, trans=True),
@@ -1865,7 +1865,7 @@ GTPDispatcherSGSN = {
     }
 
 
-GTPCDispatcherGGSN = {
+GTPDispatcherGGSN = {
     1 : EchoReq,
     2 : EchoResp,
     3 : VersionNotSupported,
@@ -1936,7 +1936,7 @@ ERR_GTP_TYPE_NONEXIST = 3
 ERR_GTP_MAND_IE_MISS  = 4
 
 
-def parse_GTPC_SGSN(buf):
+def parse_GTP_SGSN(buf):
     """parses the buffer `buf' for GTPv1-C message as received by a SGSN
     and returns a 2-tuple:
     - GTPv1-C message structure, or None if parsing failed
@@ -1955,13 +1955,13 @@ def parse_GTPC_SGSN(buf):
     try:
         Msg.from_bytes(buf)
     except GTPDecErr:
-        GTPCIEs.VERIF_MAND = False
+        GTPIEs.VERIF_MAND = False
         Msg = Msg.__class__()
         try:
             Msg.from_bytes(buf)
-            GTPCIEs.VERIF_MAND = True
+            GTPIEs.VERIF_MAND = True
         except Exception:
-            GTPCIEs.VERIF_MAND = True
+            GTPIEs.VERIF_MAND = True
             return None, ERR_GTP_BUF_INVALID
         else:
             return Msg, ERR_GTP_MAND_IE_MISS
@@ -1971,7 +1971,7 @@ def parse_GTPC_SGSN(buf):
         return Msg, 0
 
 
-def parse_GTPC_GGSN(buf):
+def parse_GTP_GGSN(buf):
     """parses the buffer `buf' for GTPv1-C message as received by a GGSN
     and returns a 2-tuple:
     - GTPv1-C message structure, or None if parsing failed
@@ -1990,13 +1990,13 @@ def parse_GTPC_GGSN(buf):
     try:
         Msg.from_bytes(buf)
     except GTPDecErr:
-        GTPCIEs.VERIF_MAND = False
+        GTPIEs.VERIF_MAND = False
         Msg = Msg.__class__()
         try:
             Msg.from_bytes(buf)
-            GTPCIEs.VERIF_MAND = True
+            GTPIEs.VERIF_MAND = True
         except Exception:
-            GTPCIEs.VERIF_MAND = True
+            GTPIEs.VERIF_MAND = True
             return None, ERR_GTP_BUF_INVALID
         else:
             return Msg, ERR_GTP_MAND_IE_MISS
