@@ -7434,8 +7434,8 @@ ERR_GTPC_TYPE_NONEXIST = 3
 
 
 def parse_GTPC(buf):
-    """parses the buffer `buf' for GTP-C message and returns a 2-tuple:
-    - GTP-C message structure, or None if parsing failed
+    """parses the buffer `buf' for GTPv2-C message and returns a 2-tuple:
+    - GTPv2-C message structure, or None if parsing failed
     - parsing error code, 0 if parsing succeeded, > 0 otherwise
     """
     if len(buf) < 8:

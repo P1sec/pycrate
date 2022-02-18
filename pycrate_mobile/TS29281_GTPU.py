@@ -150,7 +150,7 @@ class GTPUHdrExtList(GTPHdrExtList):
 class GTPUType(IntEnum):
     EchoReq                         = 1
     EchoResp                        = 2
-    ErrorIndication                 = 26
+    ErrorInd                        = 26
     SupportedExtensionHeadersNotif  = 31
     TunnelStatus                    = 253
     EndMarker                       = 254
@@ -170,8 +170,8 @@ class GTPUHdr(GTPHdr):
         Uint8('Type', val=GTPUType.EchoReq.value, dic=GTPUType_dict),
         Uint16('Len'),
         Uint32('TEID', rep=REPR_HEX),
-        GTPHdrOpt('GTPUHdrOpt', hier=1), # optional
-        GTPUHdrExtList(hier=1)           # optional
+        GTPHdrOpt('GTPUHdrOpt'), # optional
+        GTPUHdrExtList()         # optional
         )
     
     def __init__(self, *args, **kwargs):
@@ -349,7 +349,7 @@ class GTPUSuppExtHdrNotif(_GTPUMsg):
 
 class GTPUErrorInd(_GTPUMsg):
     _GEN = (
-        GTPUHdr(val={'Type': GTPUType.ErrorIndication.value}),
+        GTPUHdr(val={'Type': GTPUType.ErrorInd.value}),
         GTPUIETEID(hier=1),
         GTPUIEPeerAddr(hier=1),
         GTPUIEPrivateExt(hier=1, trans=True) # optional
@@ -409,6 +409,10 @@ ERR_GTPU_TYPE_NONEXIST = 3
 
 
 def parse_GTPU(buf):
+    """parses the buffer `buf' for GTP-U message and returns a 2-tuple:
+    - GTP-U message structure, or None if parsing failed
+    - parsing error code, 0 if parsing succeeded, > 0 otherwise
+    """
     if len(buf) < 8:
         return None, ERR_GTPU_BUF_TOO_SHORT
     if python_version < 3:
