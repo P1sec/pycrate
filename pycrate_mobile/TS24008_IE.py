@@ -2702,7 +2702,7 @@ class APN(Sequence):
         apn_items = val.split('.')
         Sequence.set_val(self, [{'Value': apn_item.encode()} for apn_item in apn_items])
     
-    def decode(self, val):
+    def decode(self):
         return '.'.join([apn_item[1].decode() for apn_item in self.get_val()])
 
 
