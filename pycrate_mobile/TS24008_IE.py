@@ -2700,10 +2700,10 @@ class APN(Sequence):
     
     def encode(self, val):
         apn_items = val.split('.')
-        Sequence.set_val(self, [{'Value': apn_item} for apn_item in apn_items])
+        Sequence.set_val(self, [{'Value': apn_item.encode()} for apn_item in apn_items])
     
     def decode(self, val):
-        return '.'.join([apn_item[1] for apn_item in self.get_val()])
+        return '.'.join([apn_item[1].decode() for apn_item in self.get_val()])
 
 
 #------------------------------------------------------------------------------#

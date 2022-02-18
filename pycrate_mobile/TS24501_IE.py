@@ -105,11 +105,10 @@ class DNN(Envelope):
             Envelope.set_val(self, val)
     
     def encode(self, val):
-        apn_items = val.split('.')
-        self['APN'].set_val(self, [{'Value': apn_item} for apn_item in apn_items])
+        self[1].encode(val)
     
     def decode(self, val):
-        return '.'.join([apn_item[1] for apn_item in self['APN'].get_val()])
+        return self[1].decode()
 
 
 #------------------------------------------------------------------------------#
