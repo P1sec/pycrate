@@ -1,0 +1,2027 @@
+PEDefinitions {joint-iso-itu-t(2) international-organizations(23) simalliance(143) euicc-profile(1) spec-version(1) version-two(2)}
+DEFINITIONS
+AUTOMATIC TAGS
+EXTENSIBILITY IMPLIED ::=
+BEGIN
+
+-- Basic integer types, for size constraints
+maxUInt8 INTEGER ::= 255
+UInt8 ::= INTEGER (0..maxUInt8)
+maxUInt15 INTEGER ::= 32767
+UInt15 ::= INTEGER (0..maxUInt15)
+maxUInt16 INTEGER ::= 65535
+UInt16 ::= INTEGER (0..maxUInt16)
+maxUInt31 INTEGER ::= 2147483647
+UInt31 ::= INTEGER (0..maxUInt31)
+
+ApplicationIdentifier ::= OCTET STRING (SIZE(5..16))
+
+PEHeader ::= SEQUENCE {
+	mandated NULL OPTIONAL,
+	-- if set, indicate that the support of this PE is mandatory
+	identification UInt15 -- Identification number of this PE
+}
+
+ProfileElement ::= CHOICE {
+	header ProfileHeader,
+
+/* PEs */
+	genericFileManagement PE-GenericFileManagement,
+	pinCodes PE-PINCodes,
+	pukCodes PE-PUKCodes,
+	akaParameter PE-AKAParameter,
+	cdmaParameter PE-CDMAParameter,
+	securityDomain PE-SecurityDomain,
+	rfm PE-RFM,
+	application PE-Application,
+	nonStandard PE-NonStandard,
+	end PE-End,
+      rfu1 PE-Dummy, -- this avoids renumbering of tag values
+      rfu2 PE-Dummy, -- in case other non-file-system PEs are
+      rfu3 PE-Dummy, -- added here in future versions
+      rfu4 PE-Dummy,
+      rfu5 PE-Dummy,
+
+/* PEs related to file system creation using templates defined in this specification */	
+	mf PE-MF,
+	cd PE-CD,
+	telecom PE-TELECOM,
+	usim PE-USIM,
+	opt-usim PE-OPT-USIM,
+	isim PE-ISIM,
+	opt-isim PE-OPT-ISIM,
+	phonebook PE-PHONEBOOK,
+	gsm-access PE-GSM-ACCESS,
+	csim PE-CSIM,
+	opt-csim PE-OPT-CSIM,
+	eap PE-EAP,
+...
+}
+
+PE-Dummy ::= SEQUENCE {
+}
+
+ProfileHeader ::= SEQUENCE {
+	major-version UInt8, -- set to 2 for this version of the specification
+	minor-version UInt8, -- set to 2 for this version of the specification
+	profileType UTF8String OPTIONAL, -- Profile type
+	iccid OCTET STRING (SIZE (10)), -- ICCID of the Profile 
+	pol OCTET STRING  OPTIONAL,
+	eUICC-Mandatory-services ServicesList,
+	eUICC-Mandatory-GFSTEList SEQUENCE OF OBJECT IDENTIFIER,
+	connectivityParameters OCTET STRING OPTIONAL,
+	eUICC-Mandatory-AIDs SEQUENCE OF SEQUENCE {
+		aid ApplicationIdentifier,
+		version OCTET STRING (SIZE(2))
+	} OPTIONAL
+}
+
+ServicesList ::= SEQUENCE {
+/* Contactless */
+	contactless NULL OPTIONAL,
+
+/* NAAs */
+	usim NULL OPTIONAL,
+	isim NULL OPTIONAL,
+	csim NULL OPTIONAL,
+
+/* NAA algorithms */
+	milenage NULL OPTIONAL,
+	tuak128 NULL OPTIONAL,
+	cave NULL OPTIONAL,
+
+/* USIM/ISIM services */
+	gba-usim NULL OPTIONAL,
+	gba-isim NULL OPTIONAL,
+	mbms NULL OPTIONAL,
+
+/* EAP service */
+	eap NULL OPTIONAL,
+
+/* Application Runtime environment */
+	javacard NULL OPTIONAL,
+	multos NULL OPTIONAL,
+
+/* NAAs */
+	multiple-usim NULL OPTIONAL,
+	multiple-isim NULL OPTIONAL,
+	multiple-csim NULL OPTIONAL,
+
+/* Additional algorithms */
+	tuak256 NULL OPTIONAL,
+	usim-test-algorithm NULL OPTIONAL,
+
+/* File type */
+	ber-tlv NULL OPTIONAL,
+
+/* Linked files */
+	dfLink NULL OPTIONAL,
+
+/* Support of CAT_TP */
+	cat-tp NULL OPTIONAL
+}
+
+ProprietaryInfo ::= SEQUENCE {
+	specialFileInformation [PRIVATE 0] OCTET STRING (SIZE (1)) DEFAULT '00'H,
+
+	/* fillPattern, repeatPattern
+	only one of the parameters may be present. Coding and rules defined within ETSI TS 102 222 [102 222] apply
+	*/
+
+	fillPattern [PRIVATE 1] OCTET STRING(SIZE(1..200))OPTIONAL,
+	repeatPattern [PRIVATE 2] OCTET STRING(SIZE(1..200))OPTIONAL
+}
+
+Fcp ::= SEQUENCE {
+		/* The fileDescriptor shall be encoded as defined in
+		 ETSI TS 102 222 [102 222] */
+	   fileDescriptor [2] OCTET STRING (SIZE(2..4)) OPTIONAL,
+
+		/* fileID	
+		For ADFs, the fileID is a temporary value (named temporary file ID in this document) used only during the profile creation. It has to be unique within a profile and is used for referencing files within this ADF using the file path.
+		*/
+	   fileID [3] OCTET STRING (SIZE(2)) OPTIONAL,
+
+		/* dfName	
+		Only applies for ADFs
+		*/
+	   dfName [4] ApplicationIdentifier OPTIONAL,
+
+		/* lcsi	
+		Coding according to ETSI TS 102 222 [102 222]
+		*/
+	   lcsi [10] OCTET STRING (SIZE (1)) DEFAULT '05'H,
+
+		/* securityAttributesReferenced
+		Either containing EF ARR ID[2] + record number[1] or
+        record number[1] only and EF ARR ID implicitly known from the
+        context: File ID 2F06 is automatically applied for ADFs,
+		the MF and all files directly located under the MF
+		'6F06' for any other files
+		*/
+	   securityAttributesReferenced [11] OCTET STRING (SIZE (1..3)) OPTIONAL,
+
+		/* efFileSize
+		Mandatory for EF file types
+		Not allowed for DF files
+		Shall be encoded on the minimum number of octets possible
+		(i.e. no leading bytes set to '00' are allowed)
+		*/
+	   efFileSize [0] OCTET STRING OPTIONAL,
+
+		/* pinStatusTemplateDO
+		Not allowed for EF files
+		Mandatory for DF/ADF files
+		(e.g. '01810A'H as a typical value for an ADF_USIM)
+		*/
+	   pinStatusTemplateDO [PRIVATE 6] OCTET STRING OPTIONAL,
+
+		/* shortEFID
+		Not allowed for DF files
+		Optional for EF file types / equivalent to ETSI TS 102 222
+		shortEFID not provided: in case of a template file, SFI
+			is set according to Annex A.
+			For files created by using GenericFileManagement, SFI is calculated from FID
+		shortEFID provided with no value: no SFI is supported for this EF
+		shortEFID available with a length of 1 byte:
+			The Short File Identifier is coded from bits b8 to b4.
+			Bits b3,b2,b1 = 000.
+		*/
+	   shortEFID [8] OCTET STRING (SIZE (0..1)) OPTIONAL,
+
+		/* proprietaryEFInfo
+		Optional for EF file types
+		Not allowed for DF files
+		*/
+	   proprietaryEFInfo [5] ProprietaryInfo OPTIONAL,
+
+		/* linkPath
+		Specifies the path to the file to which shall be linked,
+		also valid for DFs/ADFs. Files within ADFs are addressed
+        by the temporary file ID of the respective ADF. For the coding
+		see filePath.
+		*/
+	   linkPath [PRIVATE 7] OCTET STRING OPTIONAL,
+	   unknownTag [PRIVATE 99] OCTET STRING OPTIONAL
+
+		/* unknownTag
+		Tag defined for testing purpose only
+		*/
+}
+
+File ::= SEQUENCE OF CHOICE {
+	doNotCreate	NULL,	/* Indicates that this file shall not be created by the eUICC even if present in a PE referencing a "Created by Default" template.
+This flag has no effect for the creation of files in the MF and shall not be used for all the files listed in a "Not Created by Default" template*/
+	fileDescriptor Fcp,
+	fillFileOffset UInt16,
+	fillFileContent OCTET STRING
+}
+
+PE-MF ::= SEQUENCE {
+	mf-header PEHeader,
+	templateID OBJECT IDENTIFIER,
+	mf File,
+	ef-pl File OPTIONAL,
+	ef-iccid File,
+	ef-dir File,
+	ef-arr File,
+	ef-umpc File OPTIONAL
+}
+
+PE-CD ::= SEQUENCE {
+	cd-header PEHeader,
+	templateID OBJECT IDENTIFIER,
+	df-cd File, 
+	ef-launchpad File OPTIONAL, --
+	ef-icon File OPTIONAL
+}
+
+PE-TELECOM ::= SEQUENCE {
+	telecom-header PEHeader,
+	templateID OBJECT IDENTIFIER,
+	df-telecom File, 
+	ef-arr File OPTIONAL,
+	ef-rma File OPTIONAL,
+	ef-sume File OPTIONAL,
+	ef-ice-dn File OPTIONAL,
+	ef-ice-ff File OPTIONAL,
+	ef-psismsc File OPTIONAL,
+	df-graphics File OPTIONAL,
+	  ef-img File OPTIONAL,
+	  ef-iidf File OPTIONAL,
+	  ef-ice-graphics File OPTIONAL,
+	  ef-launch-scws File OPTIONAL,
+	  ef-icon File OPTIONAL,
+	df-phonebook File OPTIONAL,
+	  ef-pbr File OPTIONAL,
+	  ef-ext1 File OPTIONAL,
+	  ef-aas File OPTIONAL,
+	  ef-gas File OPTIONAL,
+	  ef-psc File OPTIONAL,
+	  ef-cc File OPTIONAL,
+	  ef-puid File OPTIONAL,
+	  ef-iap File OPTIONAL,
+	  ef-adn File OPTIONAL,
+	  ef-pbc File OPTIONAL,
+	  ef-anr File OPTIONAL,
+	  ef-puri File OPTIONAL,
+	  ef-email File OPTIONAL,
+	  ef-sne File OPTIONAL,
+	  ef-uid File OPTIONAL,
+	  ef-grp File OPTIONAL,
+	  ef-ccp1 File OPTIONAL,
+	df-multimedia File OPTIONAL,
+	  ef-mml File OPTIONAL,
+	  ef-mmdf File OPTIONAL,
+	df-mmss File OPTIONAL,
+	  ef-mlpl File OPTIONAL,
+	  ef-mspl File OPTIONAL,
+	  ef-mmssmode File OPTIONAL
+}
+
+PE-USIM ::= SEQUENCE {
+	usim-header PEHeader,
+	templateID OBJECT IDENTIFIER,
+	adf-usim File, 
+	ef-imsi File,
+	ef-arr File,
+	ef-keys File OPTIONAL,
+	ef-keysPS File OPTIONAL,
+	ef-hpplmn File OPTIONAL,
+	ef-ust File, /* The content of UST file shall be modified by the eUICC during profile installation according to the functionality supported by the eUICC platform  i.e. in the case where a service is not supported (and not indicated as required) the related bit(s) will be set to zero */
+	ef-fdn File OPTIONAL,
+	ef-sms File OPTIONAL,
+	ef-smsp File OPTIONAL,
+	ef-smss File OPTIONAL,
+	ef-spn File,
+	ef-est File,
+	ef-start-hfn File OPTIONAL,
+	ef-threshold File OPTIONAL,
+	ef-psloci File OPTIONAL,
+	ef-acc File,
+	ef-fplmn File OPTIONAL,
+	ef-loci File OPTIONAL,
+	ef-ad File OPTIONAL,
+	ef-ecc File,
+	ef-netpar File OPTIONAL,
+	ef-epsloci File OPTIONAL,
+	ef-epsnsc File OPTIONAL
+}
+
+PE-OPT-USIM ::= SEQUENCE {
+	optusim-header PEHeader,
+	templateID OBJECT IDENTIFIER,
+	ef-li File OPTIONAL,
+	ef-acmax File OPTIONAL,
+	ef-acm File OPTIONAL,
+	ef-gid1 File OPTIONAL,
+	ef-gid2 File OPTIONAL,
+	ef-msisdn File OPTIONAL,
+	ef-puct File OPTIONAL,
+	ef-cbmi File OPTIONAL,
+	ef-cbmid File OPTIONAL,
+	ef-sdn File OPTIONAL,
+	ef-ext2 File OPTIONAL,
+	ef-ext3 File OPTIONAL,
+	ef-cbmir File OPTIONAL,
+	ef-plmnwact File OPTIONAL,
+	ef-oplmnwact File OPTIONAL,
+	ef-hplmnwact File OPTIONAL,
+	ef-dck File OPTIONAL,
+	ef-cnl File OPTIONAL,
+	ef-smsr File OPTIONAL,
+	ef-bdn File OPTIONAL,
+	ef-ext5 File OPTIONAL,
+	ef-ccp2 File OPTIONAL,
+	ef-ext4 File OPTIONAL,
+	ef-acl File OPTIONAL,
+	ef-cmi File OPTIONAL,
+	ef-ici File OPTIONAL,
+	ef-oci File OPTIONAL,
+	ef-ict File OPTIONAL,
+	ef-oct File OPTIONAL,
+	ef-vgcs File OPTIONAL,
+	ef-vgcss File OPTIONAL,
+	ef-vbs File OPTIONAL,
+	ef-vbss File OPTIONAL,
+	ef-emlpp File OPTIONAL,
+	ef-aaem File OPTIONAL,
+	ef-hiddenkey File OPTIONAL,
+	ef-pnn File OPTIONAL,
+	ef-opl File OPTIONAL,
+	ef-mbdn File OPTIONAL,
+	ef-ext6 File OPTIONAL,
+	ef-mbi File OPTIONAL,
+	ef-mwis File OPTIONAL,
+	ef-cfis File OPTIONAL,
+	ef-ext7 File OPTIONAL,
+	ef-spdi File OPTIONAL,
+	ef-mmsn File OPTIONAL,
+	ef-ext8 File OPTIONAL,
+	ef-mmsicp File OPTIONAL,
+	ef-mmsup File OPTIONAL,
+	ef-mmsucp File OPTIONAL,
+	ef-nia File OPTIONAL,
+	ef-vgcsca File OPTIONAL,
+	ef-vbsca File OPTIONAL,
+	ef-gbabp File OPTIONAL,
+	ef-msk File OPTIONAL,
+	ef-muk File OPTIONAL,
+	ef-ehplmn File OPTIONAL,
+	ef-gbanl File OPTIONAL,
+	ef-ehplmnpi File OPTIONAL,
+	ef-lrplmnsi File OPTIONAL,
+	ef-nafkca File OPTIONAL,
+	ef-spni File OPTIONAL,
+	ef-pnni File OPTIONAL,
+	ef-ncp-ip File OPTIONAL,
+	ef-ufc File OPTIONAL,
+	ef-nasconfig File OPTIONAL,
+	ef-uicciari File OPTIONAL,
+	ef-pws File OPTIONAL,
+	ef-fdnuri File OPTIONAL,
+	ef-bdnuri File OPTIONAL,
+	ef-sdnuri File OPTIONAL,
+	ef-iwl File OPTIONAL,
+	ef-ips File OPTIONAL,
+	ef-ipd File OPTIONAL
+}
+
+PE-PHONEBOOK ::= SEQUENCE {
+	phonebook-header PEHeader,
+	templateID OBJECT IDENTIFIER,
+	df-phonebook File, 
+	ef-pbr File OPTIONAL,
+	ef-ext1 File OPTIONAL,
+	ef-aas File OPTIONAL,
+	ef-gas File OPTIONAL,
+	ef-psc File OPTIONAL,
+	ef-cc File OPTIONAL,
+	ef-puid File OPTIONAL,
+	ef-iap File OPTIONAL,
+	ef-adn File OPTIONAL,
+	ef-pbc File OPTIONAL,
+	ef-anr File OPTIONAL,
+	ef-puri File OPTIONAL,
+	ef-email File OPTIONAL,
+	ef-sne File OPTIONAL,
+	ef-uid File OPTIONAL,
+	ef-grp File OPTIONAL,
+	ef-ccp1 File OPTIONAL
+}
+
+PE-GSM-ACCESS ::= SEQUENCE {
+	gsm-access-header PEHeader,
+	templateID OBJECT IDENTIFIER,
+	df-gsm-access File,
+	ef-kc File OPTIONAL,
+	ef-kcgprs File OPTIONAL,
+	ef-cpbcch File OPTIONAL,
+	ef-invscan File OPTIONAL
+}
+
+PE-ISIM ::= SEQUENCE {
+	isim-header PEHeader,
+	templateID OBJECT IDENTIFIER,
+	adf-isim File,
+	ef-impi File,
+	ef-impu File,
+	ef-domain File,
+	ef-ist File, /* The content of IST file shall be modified by the eUICC during profile installation according to the functionality supported by the eUICC platform i.e. in the case where a service is not supported (and not indicated as required) the related bit(s) will be set to zero */
+	ef-ad File OPTIONAL,
+	ef-arr File
+}
+
+PE-OPT-ISIM ::= SEQUENCE {
+	optisim-header PEHeader,
+	templateID OBJECT IDENTIFIER,
+	ef-pcscf File OPTIONAL,
+	ef-sms File OPTIONAL,
+	ef-smsp File OPTIONAL,
+	ef-smss File OPTIONAL,
+	ef-smsr File OPTIONAL,
+	ef-gbabp File OPTIONAL,
+	ef-gbanl File OPTIONAL,
+	ef-nafkca File OPTIONAL,
+	ef-uicciari File OPTIONAL
+}
+
+PE-CSIM ::= SEQUENCE {
+	csim-header PEHeader,
+	templateID OBJECT IDENTIFIER,
+	adf-csim File, 
+	ef-arr File,
+	ef-call-count File,
+	ef-imsi-m File,
+	ef-imsi-t File,
+	ef-tmsi File,
+	ef-ah File,
+	ef-aop File,
+	ef-aloc File,
+	ef-cdmahome File,
+	ef-znregi File,
+	ef-snregi File,
+	ef-distregi File,
+	ef-accolc File,
+	ef-term File,
+	ef-acp File,
+	ef-prl File,
+	ef-ruimid File,
+	ef-csim-st File,
+	ef-spc File,
+	ef-otapaspc File,
+	ef-namlock File,
+	ef-ota File,
+	ef-sp File,
+	ef-esn-meid-me File,
+	ef-li File,
+	ef-usgind File,
+	ef-ad File,
+	ef-max-prl File,
+	ef-spcs File,
+	ef-mecrp File,
+	ef-home-tag File,
+	ef-group-tag File,
+	ef-specific-tag File,
+	ef-call-prompt File
+}
+
+PE-OPT-CSIM ::= SEQUENCE {
+	optcsim-header PEHeader,
+	templateID OBJECT IDENTIFIER,
+	ef-ssci File OPTIONAL,
+	ef-fdn File OPTIONAL,
+	ef-sms File OPTIONAL,
+	ef-smsp File OPTIONAL,
+	ef-smss File OPTIONAL,
+	ef-ssfc File OPTIONAL,
+	ef-spn File OPTIONAL,
+	ef-mdn File OPTIONAL,
+	ef-ecc File OPTIONAL,
+	ef-me3gpdopc File OPTIONAL,
+	ef-3gpdopm File OPTIONAL,
+	ef-sipcap File OPTIONAL,
+	ef-mipcap File OPTIONAL,
+	ef-sipupp File OPTIONAL,
+	ef-mipupp File OPTIONAL,
+	ef-sipsp File OPTIONAL,
+	ef-mipsp File OPTIONAL,
+	ef-sippapss File OPTIONAL,
+	ef-puzl File OPTIONAL,
+	ef-maxpuzl File OPTIONAL,
+	ef-hrpdcap File OPTIONAL,
+	ef-hrpdupp File OPTIONAL,
+	ef-csspr File OPTIONAL,
+	ef-atc File OPTIONAL,
+	ef-eprl File OPTIONAL,
+	ef-bcsmscfg File OPTIONAL,
+	ef-bcsmspref File OPTIONAL,
+	ef-bcsmstable File OPTIONAL,
+	ef-bcsmsp File OPTIONAL,
+	ef-bakpara File OPTIONAL,
+	ef-upbakpara File OPTIONAL,
+	ef-mmsn File OPTIONAL,
+	ef-ext8 File OPTIONAL,
+	ef-mmsicp File OPTIONAL,
+	ef-mmsup File OPTIONAL,
+	ef-mmsucp File OPTIONAL,
+	ef-auth-capability File OPTIONAL,
+	ef-3gcik File OPTIONAL,
+	ef-dck File OPTIONAL,
+	ef-gid1 File OPTIONAL,
+	ef-gid2 File OPTIONAL,
+	ef-cdmacnl File OPTIONAL,
+	ef-sf-euimid File OPTIONAL,
+	ef-est File OPTIONAL,
+	ef-hidden-key File OPTIONAL,
+	ef-lcsver File OPTIONAL,
+	ef-lcscp File OPTIONAL,
+	ef-sdn File OPTIONAL,
+	ef-ext2 File OPTIONAL,
+	ef-ext3 File OPTIONAL,
+	ef-ici File OPTIONAL,
+	ef-oci File OPTIONAL,
+	ef-ext5 File OPTIONAL,
+	ef-ccp2 File OPTIONAL,
+	ef-applabels File OPTIONAL,
+	ef-model File OPTIONAL,
+	ef-rc File OPTIONAL,
+	ef-smscap File OPTIONAL,
+	ef-mipflags File OPTIONAL,
+	ef-3gpduppext File OPTIONAL,
+	ef-ipv6cap File OPTIONAL,
+	ef-tcpconfig File OPTIONAL,
+	ef-dgc File OPTIONAL,
+	ef-wapbrowsercp File OPTIONAL,
+	ef-wapbrowserbm File OPTIONAL,
+	ef-mmsconfig File OPTIONAL,
+	ef-jdl File OPTIONAL
+}
+
+PE-EAP ::= SEQUENCE {
+	eap-header PEHeader,
+	templateID OBJECT IDENTIFIER,
+	df-eap File,
+	ef-eapkeys File OPTIONAL,
+	ef-eapstatus File,
+	ef-puid File OPTIONAL,
+	ef-ps File OPTIONAL,
+	ef-curid File OPTIONAL,
+	ef-reid File OPTIONAL,
+	ef-realm File OPTIONAL
+}
+
+
+/* Create GenericFileManagement
+*/
+PE-GenericFileManagement ::= SEQUENCE {
+    gfm-header PEHeader,
+	fileManagementCMD SEQUENCE (SIZE (1..MAX)) OF FileManagement
+}
+
+FileManagement ::= SEQUENCE (SIZE (1..MAX)) OF CHOICE {
+    filePath [0] OCTET STRING, -- Use Temporary File ID for ADF
+    createFCP [APPLICATION 2] Fcp, 
+    fillFileOffset UInt16,
+    fillFileContent [1] OCTET STRING
+}
+
+MappingParameter ::= SEQUENCE {
+mappingOptions	OCTET STRING (SIZE(1)),
+	mappingSource	ApplicationIdentifier
+}
+
+AlgoParameter ::= SEQUENCE {
+	algorithmID INTEGER {
+		milenage(1),
+		tuak(2),
+		usim-test-algorithm(3)
+
+	},
+
+	algorithmOptions	OCTET STRING (SIZE(1)),
+	key OCTET STRING,
+	opc OCTET STRING, /* OPc for Milenage; TOPc for TUAK; ignored in case of usim-test-algorithm */
+
+/* rotationConstants only apply for Milenage; ignored in case of TUAK and usim-test-algorithm */
+	rotationConstants	OCTET STRING (SIZE (5)) DEFAULT '4000204060'H,
+
+/* xoringConstants only apply for Milenage; ignored in case of TUAK and usim-test-algorithm */
+	xoringConstants	OCTET STRING (SIZE (80)) DEFAULT '0000000000000000000000000000000000000000000000000000000000000001000000000000000000000000000000020000000000000000000000000000000400000000000000000000000000000008'H,
+	authCounterMax	OCTET STRING (SIZE(3)) OPTIONAL, /* ignored in case of usim-test-algorithm */
+
+/* Number of iterations of Keccak-f[1600] (noted: ? ) permutation as recommended by 3GPP TS 35.231 [TUAK] in section 7.2.
+This parameter only applies for TUAK; ignored otherwise.*/
+	numberOfKeccak	UInt8 DEFAULT 1
+}
+
+PE-AKAParameter ::= SEQUENCE {
+	aka-header PEHeader,
+	algoConfiguration CHOICE {
+		mappingParameter	MappingParameter,
+		algoParameter	AlgoParameter
+	},
+
+	sqnOptions		OCTET STRING (SIZE(1)) DEFAULT '02'H, /* ignored in case of usim-test-algorithm */
+-- maximum value for sqnDelta and sqnAgeLimit is '07FFFFFFFFFF'H
+	sqnDelta		OCTET STRING (SIZE(6)) DEFAULT '000010000000'H, /* ignored in case of usim-test-algorithm */
+	sqnAgeLimit 	OCTET STRING (SIZE(6)) DEFAULT '000010000000'H, /* ignored in case of usim-test-algorithm */
+
+-- Sequence numbers do not include the index (IND)
+-- maximum for any values within sqnInit is '07FFFFFFFFFF'H
+	sqnInit SEQUENCE (SIZE (32)) OF OCTET STRING (SIZE (6)) DEFAULT {
+/* Index 0  */'000000000000'H, '000000000000'H, '000000000000'H, '000000000000'H,'000000000000'H, '000000000000'H, '000000000000'H, '000000000000'H, '000000000000'H, '000000000000'H, '000000000000'H, '000000000000'H,'000000000000'H, '000000000000'H, '000000000000'H, '000000000000'H, '000000000000'H, '000000000000'H, '000000000000'H, '000000000000'H,'000000000000'H, '000000000000'H, '000000000000'H, '000000000000'H, '000000000000'H, '000000000000'H, '000000000000'H, '000000000000'H,'000000000000'H, '000000000000'H, '000000000000'H,
+/* Index 31 */'000000000000'H } /* ignored in case of usim-test-algorithm */
+}
+
+PE-CDMAParameter ::= SEQUENCE {
+	cdma-header PEHeader,
+
+/* A-Key for CAVE Authentication */ 
+	authenticationKey OCTET STRING (SIZE(8)), 
+
+/* 
+Optional value for ssd
+Bytes 1..8: value if shared secret data A 
+Bytes 9..16: value if shared secret data B 
+*/ 
+	ssd OCTET STRING (SIZE (16)) OPTIONAL, 
+
+/* 
+   Shared Secrets for HRPD access authentication 
+   Includes the shared secret data. This field is coded as defined in section 4.5.7.10 HRPD Access Authentication CHAP SS Parameters of [S0016]. 
+*/ 
+	hrpdAccessAuthenticationData OCTET STRING (SIZE (2..32)) OPTIONAL, 
+
+/* 
+   Parameters for simple IP authentication are coded as defined in section 4.5.7.7 SimpleIP CHAP SS Parameters of [S0016].
+*/ 
+	simpleIPAuthenticationData OCTET STRING (SIZE (3..483)) OPTIONAL, 
+
+/* 
+   Parameters for mobile IP authentication are coded as defined in section 4.5.7.8 MobileIP SS Parameters of [S0016].
+*/ 
+	mobileIPAuthenticationData OCTET STRING (SIZE (12..957)) OPTIONAL
+}
+
+PINKeyReferenceValue ::= INTEGER {
+pinAppl1(1),			-- PIN global of App 1
+pinAppl2(2), 			-- PIN global of App 2
+pinAppl3(3), 			-- PIN global of App 3
+pinAppl4(4), 			-- PIN global of App 4
+pinAppl5(5), 			-- PIN global of App 5
+pinAppl6(6), 			-- PIN global of App 6
+pinAppl7(7), 			-- PIN global of App 7
+pinAppl8(8), 			-- PIN global of App 8
+adm1(10),				-- Administrative Key 1
+adm2(11), 				-- Administrative Key 2
+adm3(12), 				-- Administrative Key 3
+adm4(13), 				-- Administrative Key 4
+adm5(14), 				-- Administrative Key 5
+secondPINAppl1(129),	-- PIN local of App 1
+secondPINAppl2(130), 	-- PIN local of App 2
+secondPINAppl3(131), 	-- PIN local of App 3
+secondPINAppl4(132), 	-- PIN local of App 4
+secondPINAppl5(133), 	-- PIN local of App 5
+secondPINAppl6(134), 	-- PIN local of App 6
+secondPINAppl7(135), 	-- PIN local of App 7
+secondPINAppl8(136), 	-- PIN local of App 8
+adm6(138), 				-- Administrative Key 6
+adm7(139), 				-- Administrative Key 7
+adm8(140), 				-- Administrative Key 8
+adm9(141), 				-- Administrative Key 9
+adm10(142) 				-- Administrative Key 10
+}
+
+PINConfiguration ::= SEQUENCE {
+/*
+	For every value defined in PINKeyReferenceValue only one entry may be included per PE-PINCodes.
+	Within the PE-PINCodes sent in the context of the MF only global PIN key references shall be used.
+	For PINs in any ADF/DF only local PINs shall be defined: secondPINAppl1 secondPINAppl8.
+	It is allowed to define the same PINKeyReferenceValue in multiple directories
+	(e.g. secondPINAppl1 may be defined in the ISIM NAA and within the USIM NAA).
+	Provided they are not linked they shall be handled as two independent PIN values which also may
+	reference different PUK references.
+*/
+	keyReference PINKeyReferenceValue,
+	pinValue OCTET STRING (SIZE (8)),
+
+/*
+	In case no unblockingPINReference is set, no PUK applies for the corresponding PIN.
+	In case a PUKKeyReferenceValue is defined the related PUKKeyReferenceValue shall exist within the PE-PUKCodes list.
+	Any value defined in PUKKeyReferenceValue may be applied for any PINKeyReferenceValue.
+*/
+	unblockingPINReference PUKKeyReferenceValue OPTIONAL,
+	pinAttributes UInt8 DEFAULT 7,
+	maxNumOfAttemps-retryNumLeft UInt8 DEFAULT 51
+/* maxNumOfAttemps-retryNumLeft is encoded as follows: max Number of Attempts is encoded in the high nibble of this value (Bits b8 to b5) and the Number of retry left is encoded in the low nibble of this value (Bits b4 to b1)*/
+}
+
+PE-PINCodes ::= SEQUENCE {
+	pin-Header PEHeader,
+	pinCodes CHOICE {
+    pinconfig SEQUENCE (SIZE (1..26))OF PINConfiguration,
+    filePath OCTET STRING /* temporary File ID for ADF, coding according to section 8.3.5 */
+	} 
+/* PIN can be either defined in the current context or shared
+ with another DF/ADF
+ Up to 26 PIN could be defined according to TS 102 221 [102 221] 
+*/
+}
+
+PUKKeyReferenceValue ::= INTEGER {
+	pukAppl1(1),			-- PUK Reference 1
+	pukAppl2(2), 			-- PUK Reference 2
+	pukAppl3(3), 			-- PUK Reference 3
+	pukAppl4(4), 			-- PUK Reference 4
+	pukAppl5(5), 			-- PUK Reference 5
+	pukAppl6(6), 			-- PUK Reference 6
+	pukAppl7(7), 			-- PUK Reference 7
+	pukAppl8(8), 			-- PUK Reference 8
+	secondPUKAppl1(129),	-- PUK Reference 9
+	secondPUKAppl2(130), 	-- PUK Reference 10
+	secondPUKAppl3(131), 	-- PUK Reference 11
+	secondPUKAppl4(132), 	-- PUK Reference 12
+	secondPUKAppl5(133), 	-- PUK Reference 13
+	secondPUKAppl6(134), 	-- PUK Reference 14
+	secondPUKAppl7(135), 	-- PUK Reference 15
+	secondPUKAppl8(136) 	-- PUK Reference 16
+}
+
+PUKConfiguration ::= SEQUENCE {
+/*
+Any PUKKeyReferenceValue shall only be defined once within PE-PUKCodes.
+*/
+	keyReference PUKKeyReferenceValue,
+	pukValue OCTET STRING (SIZE (8)),
+	maxNumOfAttemps-retryNumLeft UInt8 DEFAULT 170
+/* maxNumOfAttemps-retryNumLeft is encoded as follows: max Number of Attempts is encoded in the high nibble of this value (Bits b8 to b5) and the Number of retry left is encoded in the low nibble of this value (Bits b4 to b1)*/
+}
+
+PE-PUKCodes ::= SEQUENCE {
+	puk-Header PEHeader,
+	pukCodes SEQUENCE (SIZE (1..16))OF PUKConfiguration
+}
+
+PE-SecurityDomain ::= SEQUENCE {
+	sd-Header PEHeader,
+	instance ApplicationInstance, -- see section 8.7.3
+	keyList SEQUENCE (SIZE (1..MAX)) OF KeyObject OPTIONAL, -- see section 8.6.3
+	sdPersoData SEQUENCE (SIZE (1..MAX)) OF OCTET STRING OPTIONAL, -- see section 8.6.4
+	openPersoData SEQUENCE {
+		restrictParameter [PRIVATE 25] OCTET STRING OPTIONAL,
+		contactlessProtocolParameters OCTET STRING OPTIONAL
+	} OPTIONAL, /* see section 8.6.6 */
+	catTpParameters SEQUENCE
+	{
+		catTpMaxSduSize UInt16,
+		catTpMaxPduSize UInt16
+	} OPTIONAL -- see section 8.6.7
+}
+
+KeyObject::= SEQUENCE {
+	keyUsageQualifier [21] OCTET STRING (SIZE (1..2)), /* see [GPCS] section 11.1.9 */
+	keyAccess [22] OCTET STRING (SIZE (1)) DEFAULT '00'H,
+	keyIdentifier [2] OCTET STRING (SIZE (1)),
+	keyVersionNumber [3] OCTET STRING (SIZE (1)),
+	keyCounterValue [5] OCTET STRING OPTIONAL,
+	keyCompontents SEQUENCE (SIZE (1..MAX)) OF SEQUENCE {
+		keyType [0] OCTET STRING, 
+		keyData [6] OCTET STRING,
+		macLength[7] UInt8 DEFAULT 8
+	}
+}
+
+PE-Application ::= SEQUENCE {
+	app-Header PEHeader,
+	loadBlock ApplicationLoadPackage OPTIONAL,
+	instanceList SEQUENCE (SIZE (1..MAX)) OF ApplicationInstance OPTIONAL
+}
+
+ApplicationLoadPackage ::= SEQUENCE {
+	loadPackageAID [APPLICATION 15] ApplicationIdentifier,
+	securityDomainAID [APPLICATION 15] ApplicationIdentifier OPTIONAL,
+	nonVolatileCodeLimitC6 [PRIVATE 6] OCTET STRING OPTIONAL,
+	volatileDataLimitC7 [PRIVATE 7] OCTET STRING OPTIONAL,
+	nonVolatileDataLimitC8 [PRIVATE 8] OCTET STRING OPTIONAL,
+	hashValue [PRIVATE 1] OCTET STRING OPTIONAL,
+	loadBlockObject [PRIVATE 4] OCTET STRING
+}
+
+ApplicationInstance ::= SEQUENCE {
+	applicationLoadPackageAID [APPLICATION 15] ApplicationIdentifier,
+	classAID [APPLICATION 15] ApplicationIdentifier,
+	instanceAID [APPLICATION 15] ApplicationIdentifier,
+	extraditeSecurityDomainAID [APPLICATION 15] ApplicationIdentifier OPTIONAL,
+	applicationPrivileges [2] OCTET STRING,
+	lifeCycleState [3] OCTET STRING (SIZE(1)) DEFAULT '07'H,
+	/* Coding according to GP Life Cycle State.  */
+
+	applicationSpecificParametersC9 [PRIVATE 9] OCTET STRING,
+	systemSpecificParameters [PRIVATE 15] ApplicationSystemParameters OPTIONAL,
+	applicationParameters [PRIVATE 10] UICCApplicationParameters OPTIONAL,
+	processData SEQUENCE (SIZE (1..MAX)) OF OCTET STRING OPTIONAL
+}
+
+ApplicationSystemParameters ::= SEQUENCE{
+	volatileMemoryQuotaC7 [PRIVATE 7] OCTET STRING (SIZE (2..4)) OPTIONAL,
+	nonVolatileMemoryQuotaC8 [PRIVATE 8] OCTET STRING (SIZE (2..4)) OPTIONAL,
+	globalServiceParameters [PRIVATE 11] OCTET STRING OPTIONAL,
+	implicitSelectionParameter [PRIVATE 15] OCTET STRING OPTIONAL,
+	volatileReservedMemory [PRIVATE 23] OCTET STRING (SIZE (2..4)) OPTIONAL,
+	nonVolatileReservedMemory [PRIVATE 24] OCTET STRING (SIZE (2..4)) OPTIONAL,
+	ts102226SIMFileAccessToolkitParameter [PRIVATE 10] OCTET STRING OPTIONAL,
+	ts102226AdditionalContactlessParameters [0] TS102226AdditionalContactlessParameters OPTIONAL,
+	contactlessProtocolParameters [PRIVATE 25] OCTET STRING OPTIONAL, /* Coded according to Contactless Protocol Parameters Structure as defined in GP Amd. C */
+	userInteractionContactlessParameters [PRIVATE 26] OCTET STRING OPTIONAL,  /* Coded according to User Interaction Parameters Structure as defined in GP Amd. C */
+	cumulativeGrantedVolatileMemory [2] OCTET STRING (SIZE (2..4)) OPTIONAL, /* Coded according to Contactless Specific Parameters as defined in GP Amd. C */
+	cumulativeGrantedNonVolatileMemory [3] OCTET STRING (SIZE (2..4)) OPTIONAL /* Coded according to Contactless Specific Parameters as defined in GP Amd. C */
+}
+
+UICCApplicationParameters ::= SEQUENCE {
+	uiccToolkitApplicationSpecificParametersField [0] OCTET STRING OPTIONAL,
+	uiccAccessApplicationSpecificParametersField [1] OCTET STRING OPTIONAL,
+	uiccAdministrativeAccessApplicationSpecificParametersField [2] OCTET STRING OPTIONAL
+}
+
+TS102226AdditionalContactlessParameters ::= SEQUENCE{
+	protocolParameterData OCTET STRING /* Parameters for contactless applications encoded according to TS 102 226 */
+}
+
+PE-RFM ::= SEQUENCE {
+	rfm-header [0] PEHeader,
+
+	/* instanceAID 
+	AID of the RFM instance
+	*/
+	instanceAID [APPLICATION 15] ApplicationIdentifier,
+
+	/* securityDomainAID to which the RFM instance is associated
+	*/
+	securityDomainAID [APPLICATION 15] ApplicationIdentifier OPTIONAL,
+
+	tarList [0] SEQUENCE (SIZE (1..MAX)) OF OCTET STRING (SIZE(3)) OPTIONAL,
+
+	minimumSecurityLevel [1] OCTET STRING (SIZE (1)),
+
+	uiccAccessDomain OCTET STRING,
+    uiccAdminAccessDomain OCTET STRING,
+
+	/*
+       If the following parameter is available the respective ADF will be the     directory selected by default within an RFM script. In case it is not available the MF will be the default selection.
+        */
+    adfRFMAccess ADFRFMAccess OPTIONAL
+}
+
+ADFRFMAccess ::= SEQUENCE {
+    adfAID ApplicationIdentifier,
+    adfAccessDomain OCTET STRING,
+    adfAdminAccessDomain OCTET STRING
+}
+
+PE-NonStandard ::= SEQUENCE {
+	nonStandard-header PEHeader,
+	issuerID OBJECT IDENTIFIER,
+	content OCTET STRING
+}
+
+PE-End ::= SEQUENCE {
+	end-header PEHeader
+}
+
+PEStatus ::= SEQUENCE {
+	status INTEGER {
+	ok(0), pe-not-supported(1), memory-failure(2),bad-values(3),
+	not-enough-memory(4),invalid-request-format(5), invalid-parameter(6),
+	runtime-not-supported (7), lib-not-supported (8),
+	template-not-supported (9), feature-not-supported (10),
+	pin-code-missing (11),
+	unsupported-profile-version(31)
+	/* ISO 7816 standard status values apply in the range of [24576...28671]
+	 and [36864...40959] for reporting status values '6xxx'H and '9xxx'H
+	proprietary values apply in the range [40960...65535]
+	*/
+	},
+	identification UInt15 OPTIONAL,
+	-- Identification number of the PE triggering the error
+	additional-information UInt8 OPTIONAL,
+	-- Additional information related to the status code
+	offset UInt31 OPTIONAL
+	-- Position of the part of the PE generating this status code
+}
+
+EUICCResponse ::= SEQUENCE {
+	peStatus SEQUENCE OF PEStatus,
+	profileInstallationAborted NULL OPTIONAL,
+	statusMessage UTF8String OPTIONAL
+}
+
+/*
+Test Profile
+*/
+
+headerVal ProfileElement ::= header : {
+  major-version 2,
+  minor-version 100,
+  profileType "SIMalliance Sample Profile",
+  iccid '89019990001234567893'H,
+  eUICC-Mandatory-services {
+    usim NULL,
+    milenage NULL,
+    javacard NULL
+  },
+  eUICC-Mandatory-GFSTEList {
+    { 2 23 143 1 2 1 },
+    { 2 23 143 1 2 4 }
+  }
+}
+
+-- Creation of the MF file system using the template
+mfVal ProfileElement ::= mf : {
+  mf-header {
+    mandated NULL,
+    identification 1
+  },
+  templateID { 2 23 143 1 2 1 },
+  mf {
+    fileDescriptor : {
+      pinStatusTemplateDO '01020A'H
+    }
+  },
+  ef-pl {
+    fileDescriptor : {
+-- EF_PL modified to use Access Rule 15 within EF_ARR
+      securityAttributesReferenced '0F'H
+    }
+  },
+  ef-iccid {
+-- swapped ICCID: 98109909002143658739
+    fillFileContent : '98109909002143658739'H
+  },
+  ef-dir {
+    fileDescriptor : {
+-- Shareable Linear Fixed File
+-- 4 records, record length: 38 bytes
+      fileDescriptor '42210026'H,
+      efFileSize '98'H      
+    },
+-- USIM AID: A0000000871002FF33FF018900000100
+    fillFileContent : '61184F10A0000000871002FF33FF01890000010050045553494D'H
+  },
+  ef-arr {
+    fileDescriptor : {
+-- Shareable Linear Fixed File
+-- 15 records, record length: 37 bytes
+-- ARR created with content recommended in Annex A (Section 9.9) plus one additional record for use with EF_PL
+      fileDescriptor '42210025'H,
+      efFileSize '022B'H      
+    },
+    fillFileContent : '8001019000800102A406830101950108800158A40683010A950108'H,
+    fillFileOffset : 10,
+    fillFileContent : '800101A40683010195010880015AA40683010A950108'H,
+    fillFileOffset : 15,
+    fillFileContent : '80015BA40683010A950108'H,
+    fillFileOffset : 26,
+    fillFileContent : '800101900080015A9700'H,
+    fillFileOffset : 27,
+    fillFileContent : '800103A406830101950108800158A40683010A950108'H,
+    fillFileOffset : 15,
+    fillFileContent : '800111A40683010195010880014AA40683010A950108'H,
+    fillFileOffset : 15,
+    fillFileContent : '800103A406830101950108800158A40683010A950108840132A406830101950108'H,
+    fillFileOffset : 4,
+    fillFileContent : '800101A406830101950108800102A406830181950108800158A40683010A950108'H,
+    fillFileOffset : 4,
+    fillFileContent : '800101900080011AA406830101950108800140A40683010A950108'H,
+    fillFileOffset : 10,
+    fillFileContent : '800101900080015AA40683010A950108'H,
+    fillFileOffset : 21,
+    fillFileContent : '8001019000800118A40683010A9501088001429700'H,
+    fillFileOffset : 16,
+    fillFileContent : '800101A40683010195010880015A9700'H,
+    fillFileOffset : 21,
+    fillFileContent : '800113A406830101950108800148A40683010A950108'H,
+    fillFileOffset : 15,
+    fillFileContent : '80015EA40683010A950108'H,
+    fillFileOffset : 26,
+-- Rule 15: [Read: Always][Update/CreateEF: PIN Appl 1|PIN Appl 2][Deactivate, Activate, DeleteSelf: ADM1]
+    fillFileContent : '8001019000800102A010A406830101950108A406830102950108800158A40683010A950108'H
+  }
+}
+
+
+-- Creation of the MF using Generic File Management (Alternative to usage of the template. A real Profile Package shall not use both)!!!
+altMFVal ProfileElement ::= genericFileManagement : {
+  gfm-header {
+    mandated NULL,
+    identification 1
+  },
+  fileManagementCMD {
+    {
+-- create MF
+      createFCP : {
+        fileDescriptor '7821'H,
+        fileID '3F00'H,
+        securityAttributesReferenced '0E'H,
+        pinStatusTemplateDO '01020A'H
+      },
+-- create PL
+      createFCP : {
+        fileDescriptor '4121'H,
+        fileID '2F05'H,
+        securityAttributesReferenced '0F'H,
+        efFileSize '03'H,
+        shortEFID '28'H
+      },
+-- create ICCID
+      createFCP : {
+        fileDescriptor '4121'H,
+        fileID '2FE2'H,
+        securityAttributesReferenced '0B'H,
+        efFileSize '0A'H
+      },
+-- swapped ICCID: 98109909002143658739
+      fillFileContent : '98109909002143658739'H,
+-- create DIR
+-- Shareable Linear Fixed File
+-- 4 records, record length: 38 bytes
+      createFCP : {
+        fileDescriptor '42210026'H,
+        fileID '2F00'H,
+        securityAttributesReferenced '0A'H,
+        efFileSize '98'H,
+        shortEFID 'F0'H
+      },
+-- USIM AID: A0000000871002FF33FF018900000100
+      fillFileContent : '61184F10A0000000871002FF33FF01890000010050045553494D'H,
+
+-- create ARR
+      createFCP : {
+-- Shareable Linear Fixed File
+-- 15 records, record length: 37 bytes
+        fileDescriptor '42210025'H,
+        fileID '2F06'H,
+        securityAttributesReferenced '0A'H,
+        efFileSize '022B'H
+      },
+    fillFileContent : '8001019000800102A406830101950108800158A40683010A950108'H,
+    fillFileOffset : 10,
+    fillFileContent : '800101A40683010195010880015AA40683010A950108'H,
+    fillFileOffset : 15,
+    fillFileContent : '80015BA40683010A950108'H,
+    fillFileOffset : 26,
+    fillFileContent : '800101900080015A9700'H,
+    fillFileOffset : 27,
+    fillFileContent : '800103A406830101950108800158A40683010A950108'H,
+    fillFileOffset : 15,
+    fillFileContent : '800111A40683010195010880014AA40683010A950108'H,
+    fillFileOffset : 15,
+    fillFileContent : '800103A406830101950108800158A40683010A950108840132A406830101950108'H,
+    fillFileOffset : 4,
+    fillFileContent : '800101A406830101950108800102A406830181950108800158A40683010A950108'H,
+    fillFileOffset : 4,
+    fillFileContent : '800101900080011AA406830101950108800140A40683010A950108'H,
+    fillFileOffset : 10,
+    fillFileContent : '800101900080015AA40683010A950108'H,
+    fillFileOffset : 21,
+    fillFileContent : '8001019000800118A40683010A9501088001429700'H,
+    fillFileOffset : 16,
+    fillFileContent : '800101A40683010195010880015A9700'H,
+    fillFileOffset : 21,
+    fillFileContent : '800113A406830101950108800148A40683010A950108'H,
+    fillFileOffset : 15,
+    fillFileContent : '80015EA40683010A950108'H,
+    fillFileOffset : 26,
+-- Rule 15: [Read: Always][Update/CreateEF: PIN Appl 1|PIN Appl 2][Deactivate, Activate, DeleteSelf: ADM1]
+    fillFileContent : '8001019000800102A010A406830101950108A406830102950108800158A40683010A950108'H,
+-- create UMPC
+      createFCP : {
+        fileDescriptor '4121'H,
+        fileID '2F08'H,
+        securityAttributesReferenced '0A'H,
+        efFileSize '05'H
+      }
+    }
+  }
+}
+
+
+pukVal ProfileElement ::= pukCodes : {
+  puk-Header {
+    mandated NULL,
+    identification 2
+  },
+  pukCodes {
+    {
+      keyReference pukAppl1,
+-- PUK = 00000000
+      pukValue '3030303030303030'H,
+      -- maxNumOfAttemps:9, retryNumLeft:9
+      maxNumOfAttemps-retryNumLeft 153
+    },
+    {
+      keyReference pukAppl2,
+-- PUK = 12345678
+      pukValue '3132333435363738'H
+    },
+    {
+      keyReference secondPUKAppl1,
+-- PUK = 12345678
+      pukValue '3132333435363738'H,
+-- maxNumOfAttemps:8, retryNumLeft:8
+      maxNumOfAttemps-retryNumLeft 136
+    }
+  }
+}
+
+pinVal ProfileElement ::= pinCodes : {
+  pin-Header {
+    mandated NULL,
+    identification 3
+  },
+  pinCodes pinconfig : {
+    {
+      keyReference pinAppl1,
+-- PIN = 1234
+      pinValue '31323334FFFFFFFF'H,
+      unblockingPINReference pukAppl1
+    },
+    {
+      keyReference pinAppl2,
+-- PIN = 0000
+      pinValue '30303030FFFFFFFF'H,
+      unblockingPINReference pukAppl2
+    },
+    {
+      keyReference adm1,
+-- PIN = 5678
+      pinValue '35363738FFFFFFFF'H,
+	  pinAttributes 1
+    }
+  }
+}
+
+-- USIM file system creation using template
+usimValue ProfileElement ::= usim : {
+  usim-header {
+    mandated NULL,
+    identification 4
+  },
+  templateID { 2 23 143 1 2 4 },
+  adf-usim {
+     fileDescriptor : {
+        fileID '7FF1'H,
+        dfName 'A0000000871002FF33FF018900000100'H,
+		pinStatusTemplateDO '01810A'H
+     }
+  },
+  ef-imsi {
+    -- numerical format: 234101943787656
+    fillFileContent : '082943019134876765'H         
+  },
+  ef-arr {
+    fileDescriptor : {
+	  linkPath '2F06'H
+    }
+   },
+  ef-ust {
+    -- Service Dialling Numbers, Short Message Storage
+    fillFileContent : '0A2E178CE73204000000000000'H
+  },
+  ef-spn {
+    -- ASCII format: "SIMalliance"
+    fillFileContent : '0253494D616C6C69616E6365'H      
+  },
+  ef-est {
+    -- Services deactivated
+    fillFileContent : '00'H
+  },
+  ef-acc {
+    -- Access class 2
+    fillFileContent : '0040'H 
+  },
+  ef-ecc {
+    -- Emergency Call Code 911
+    fillFileContent : '19F1FF01'H 
+  }
+}
+
+-- Creation of the USIM File system using Generic File Management (Alternative to usage of the template. A real Profile Package shall not use both)!!!
+altUsimValue ProfileElement ::= genericFileManagement : {
+  gfm-header {
+    mandated NULL,
+    identification 4
+  },
+  fileManagementCMD {
+    {
+-- ADF_USIM
+      createFCP : {
+        fileDescriptor '7821'H,
+        fileID '7FF1'H,
+        dfName 'A0000000871002FF33FF018900000100'H,
+        securityAttributesReferenced '0A'H,
+        pinStatusTemplateDO '01810A'H
+      },
+
+-- EF_IMSI
+      createFCP : {
+        fileDescriptor '4121'H,
+        fileID '6F07'H,
+        securityAttributesReferenced '02'H,
+        efFileSize '09'H,
+        shortEFID '38'H
+      },
+    -- provide content for EF_IMSI
+    -- numerical format: 234101943787656
+      fillFileContent : '082943019134876765'H,
+
+-- EF_ARR Link
+      createFCP : {
+        fileDescriptor '42210025'H,
+        fileID '6F06'H,
+        securityAttributesReferenced '0A'H,
+        shortEFID 'B8'H,
+        linkPath '2F06'H
+      },
+
+-- EF_Keys
+      createFCP : {
+        fileDescriptor '4121'H,
+        fileID '6F08'H,
+        securityAttributesReferenced '05'H,
+        efFileSize '21'H,
+        shortEFID '40'H,
+        proprietaryEFInfo {
+          specialFileInformation '80'H,
+          fillPattern '07FF'H
+        }
+      },
+
+-- EF_KeysPS
+      createFCP : {
+        fileDescriptor '4121'H,
+        fileID '6F09'H,
+        securityAttributesReferenced '05'H,
+        efFileSize '21'H,
+        shortEFID '48'H,
+        proprietaryEFInfo {
+          specialFileInformation '80'H,
+          fillPattern '07FF'H
+        }
+      },
+
+-- EF_HPPLMN
+      createFCP : {
+        fileDescriptor '4121'H,
+        fileID '6F31'H,
+        securityAttributesReferenced '02'H,
+        efFileSize '01'H,
+        shortEFID '90'H,
+        proprietaryEFInfo {
+-- specialFileInformation with Default value
+          specialFileInformation '00'H,
+          fillPattern '0A'H
+        }
+      },
+
+-- EF_UST
+      createFCP : {
+        fileDescriptor '4121'H,
+        fileID '6F38'H,
+        securityAttributesReferenced '02'H,
+        efFileSize '0E'H,
+        shortEFID '20'H
+      },
+      -- provide UST settings
+      -- Service Dialling Numbers, Short Message Storage
+      fillFileContent : '0A2E178CE73204000000000000'H,
+
+-- EF_FDN
+      createFCP : {
+        fileDescriptor '4221001A'H,
+        fileID '6F3B'H,
+        securityAttributesReferenced '08'H,
+        efFileSize '0208'H,
+        shortEFID ''H,
+        proprietaryEFInfo {
+          fillPattern '00FF'H
+        }
+      },
+
+-- EF_SMS
+      createFCP : {
+        fileDescriptor '422100B0'H,
+        fileID '6F3C'H,
+        securityAttributesReferenced '05'H,
+        efFileSize '06E0'H,
+        shortEFID ''H,
+        proprietaryEFInfo {
+          fillPattern '00FF'H
+        }
+      },
+
+-- EF_SMSP
+      createFCP : {
+        fileDescriptor '42210026'H,
+        fileID '6F42'H,
+        securityAttributesReferenced '05'H,
+        efFileSize '26'H,
+        shortEFID ''H
+      },
+
+-- EF_SMSS
+      createFCP : {
+        fileDescriptor '4121'H,
+        fileID '6F43'H,
+        securityAttributesReferenced '05'H,
+        efFileSize '02'H,
+        shortEFID ''H,
+        proprietaryEFInfo {
+          specialFileInformation '80'H
+        }
+      },
+
+-- EF_SPN
+      createFCP : {
+        fileDescriptor '4121'H,
+        fileID '6F46'H,
+-- provide the full access rule including EF_ARR File ID
+        securityAttributesReferenced '6F060A'H,
+        efFileSize '11'H,
+        shortEFID ''H
+      },
+      -- ASCII format: "SIMalliance"
+      fillFileContent : '0253494D616C6C69616E6365'H,
+
+-- EF_EST
+      createFCP : {
+        fileDescriptor '4121'H,
+        fileID '6F56'H,
+        securityAttributesReferenced '08'H,
+        efFileSize '01'H,
+        shortEFID '28'H
+      },
+      -- EST Services deactivated
+      fillFileContent : '00'H,
+
+-- EF_START-HFN
+      createFCP : {
+        fileDescriptor '4121'H,
+        fileID '6F5B'H,
+        securityAttributesReferenced '05'H,
+        efFileSize '06'H,
+        shortEFID '78'H,
+        proprietaryEFInfo {
+          specialFileInformation '80'H,
+-- use of repeat pattern to initialize the content
+          repeatPattern 'F00000'H
+        }
+      },
+
+-- EF_THRESHOLD
+      createFCP : {
+        fileDescriptor '4121'H,
+        fileID '6F5C'H,
+        securityAttributesReferenced '02'H,
+        efFileSize '03'H,
+        shortEFID '80'H,
+        proprietaryEFInfo {
+          specialFileInformation '80'H
+        }
+      },
+
+-- EF_PSLOCI
+      createFCP : {
+        fileDescriptor '4121'H,
+        fileID '6F73'H,
+        securityAttributesReferenced '05'H,
+        efFileSize '0E'H,
+        shortEFID '60'H,
+        proprietaryEFInfo {
+          specialFileInformation '80'H
+        }
+      },
+      -- Initialize PSLOCI
+      fillFileOffset : 7,
+      fillFileContent : '00F1100000FF01'H,
+
+-- EF_ACC
+      createFCP : {
+        fileDescriptor '4121'H,
+        fileID '6F78'H,
+        securityAttributesReferenced '02'H,
+        efFileSize '02'H,
+        shortEFID '30'H
+      },
+      -- Provide Content for ACC
+      -- Access class 2
+      fillFileContent : '0040'H,
+
+-- EF_FPLMN
+      createFCP : {
+        fileDescriptor '4121'H,
+        fileID '6F7B'H,
+        securityAttributesReferenced '05'H,
+        efFileSize '0C'H,
+        shortEFID '68'H
+      },
+
+-- EF_LOCI
+      createFCP : {
+        fileDescriptor '4121'H,
+        fileID '6F7E'H,
+        securityAttributesReferenced '05'H,
+        efFileSize '0B'H,
+        shortEFID '58'H,
+        proprietaryEFInfo {
+          specialFileInformation '80'H
+        }
+      },
+      -- Initialize LOCI
+      fillFileOffset : 7,
+      fillFileContent : '0000FF01'H,
+
+-- EF_AD
+      createFCP : {
+        fileDescriptor '4121'H,
+        fileID '6FAD'H,
+        securityAttributesReferenced '0A'H,
+        efFileSize '04'H,
+        shortEFID '18'H,
+        proprietaryEFInfo {
+-- use of fillPattern in Combination with fillFileContent (not efficient in this example)
+          fillPattern '00'H
+        }
+      },
+      -- Initialize AD
+      fillFileOffset : 3,
+      fillFileContent : '02'H,
+
+-- EF_ECC
+      createFCP : {
+        fileDescriptor '42210004'H,
+        fileID '6FB7'H,
+        securityAttributesReferenced '0A'H,
+        efFileSize '04'H,
+        shortEFID '08'H
+      },
+      -- Initialize ECC
+      -- Emergency Call Code 911
+      fillFileContent : '19F1FF01'H,
+
+-- EF_NETPAR
+      createFCP : {
+        fileDescriptor '4121'H,
+        fileID '6FC4'H,
+        securityAttributesReferenced '05'H,
+        efFileSize '80'H,
+        shortEFID ''H,
+        proprietaryEFInfo {
+          specialFileInformation '80'H
+        }
+      },
+
+-- EF_EPSLOCI
+      createFCP : {
+        fileDescriptor '4121'H,
+        fileID '6FE3'H,
+        securityAttributesReferenced '05'H,
+        efFileSize '12'H,
+        shortEFID 'F0'H,
+        proprietaryEFInfo {
+          specialFileInformation '80'H
+        }
+      },
+
+      -- Initialize EF_EPSLOCI
+      fillFileOffset : 15,
+      fillFileContent : '000001'H, 
+
+-- EF_EPSNSC
+      createFCP : {
+        fileDescriptor '4121'H,
+        fileID '6FE4'H,
+        securityAttributesReferenced '05'H,
+        efFileSize '50'H,
+        shortEFID 'C0'H,
+        proprietaryEFInfo {
+          specialFileInformation '80'H
+        }
+      }
+    }
+  }
+}
+
+
+usimPin ProfileElement ::= pinCodes : { -- Local USIM PIN
+  pin-Header {
+    mandated NULL,
+    identification 5
+  },
+  pinCodes pinconfig : {
+    {
+      keyReference secondPINAppl1,
+-- PIN = 1234
+      pinValue '31323334FFFFFFFF'H,
+      unblockingPINReference secondPUKAppl1,
+      -- PIN is Enabled
+      pinAttributes 1,
+      -- maxNumOfAttemps:2, retryNumLeft:2
+      maxNumOfAttemps-retryNumLeft 34
+    }
+  }
+}
+
+
+akaMilenage ProfileElement ::= akaParameter : {
+   aka-header {
+      mandated NULL,
+      identification 6	
+      }, 
+   algoConfiguration algoParameter : {
+      algorithmID milenage,
+      algorithmOptions '01'H,      -- RES and MAC 64 bits, CK and IK 128 bits 
+
+      key '000102030405060708090A0B0C0D0E0F'H,
+      opc '0102030405060708090A0B0C0D0E0F00'H,	
+--    rotationConstants  uses default: '4000204060'H,   
+--    xoringConstants    uses default: '00000000000000000000000000000001000000000000000200000000000000040000000000000008'H,
+      authCounterMax	'010203'H        
+   }
+-- sqnOptions 	uses default: '02'H, i.e. Anonymity key used, SQN wrap around not allowed
+-- sqnDelta   	uses default: '000010000000'H
+-- sqnAgeLimit  uses default: '000010000000'H
+-- sqnInit:     uses default: all bytes zero
+}
+
+cdmaParam ProfileElement ::= cdmaParameter : {
+	cdma-header {
+		mandated NULL,
+	identification 15
+	},
+	authenticationKey '0102030405060708'H,
+	ssd '0123456789ABCDEF0123456789ABCDEF'H,
+--HRDP Access Authentication Value: 0x43484150434841504348415043484150 
+	hrpdAccessAuthenticationData '821A420A821A420A821A420A821A420A80'H,
+/*
+Simple IP CHAP SS Parameters:
+- Value:
+entry 00: 0x43484150434841504348415043484150
+entry 01: 0x44554D4D5944554D4D5944554D4D5944554D4D5944554D4D5944554D4D5944
+entry 02: 0x4E4144414E414441
+*/
+	simpleIPAuthenticationData '30821A420A821A420A821A420A821A420A80FD11553535651155353565115535356511553535651155353565115535356510909C8288829C828882'H,
+
+/*
+Mobile IP SS Parameters:
+- Value:
+entry 00:
+- MN-AAA-SS: 0x31323334353637383930313233343536
+- MN-HA-SS: 0x30303131323233333434353536363737
+entry 01:
+- MN-AAA-SS: 0x44554D4D5944554D4D5944554D4D5944554D4D5944554D4D5944554D4D5944
+- MN-HA-SS: 0x4E4144414E414441
+entry 02:
+- MN-AAA-SS: 0x4E4144414E414441
+- MN-HA-SS: 0x44554D4D5944554D4D5944554D4D5944554D4D5944554D4D5944554D4D5944
+*/
+	mobileIPAuthenticationData '3081899199A1A9B1B9C1C981899199A1A9B40C0C0C4C4C8C8CCCCD0D0D4D4D8D8DCDC7E88AA9A9AB288AA9A9AB288AA9A9AB288AA9A9AB288AA9A9AB288AA9A9AB28884E4144414E414441242720A220A720A220FD11553535651155353565115535356511553535651155353565115535356510'H
+}
+
+mnoSdValue ProfileElement ::= securityDomain : {
+  sd-Header {
+    mandated NULL,
+    identification 7
+  },
+  instance {     
+    applicationLoadPackageAID 'A0000001515350'H, 
+    classAID 'A000000151535041'H, 
+    instanceAID 'A000000151000000'H, 
+    applicationPrivileges '82DC00'H,
+    -- Secured
+    lifeCycleState '0F'H, 
+    -- SCP80 supported, extradition supported
+    applicationSpecificParametersC9 '810280008201F08701F0'H, 
+    -- other parameters may be necessary
+    applicationParameters {
+      -- TAR: B20100, MSL: 12
+      uiccToolkitApplicationSpecificParametersField 
+         '0100000100000002011203B2010000'H
+    }
+  },
+  keyList {
+    {
+      -- C-ENC + R-ENC
+      keyUsageQualifier '38'H, 
+      -- may be used by SD and application
+      keyAccess '00'H, 
+      -- ENC key
+      keyIdentifier '01'H, 
+      keyVersionNumber '01'H,
+      keyCompontents {
+        {
+          -- DES mode implicitly known (as an example)
+          keyType '80'H, 
+          -- This value may be freely changed
+          keyData '112233445566778899AABBCCDDEEFF10'H
+        }
+      }
+    },
+    {
+      -- C-MAC + R-MAC
+      keyUsageQualifier '34'H, 
+      -- may be used by SD and application
+      keyAccess '00'H, 
+      -- MAC key
+      keyIdentifier '02'H, 
+      keyVersionNumber '01'H,
+      keyCompontents {
+        {
+          -- DES mode implicitly known(as an example)	
+          keyType '80'H, 
+          -- This value may be freely changed
+          keyData '112233445566778899AABBCCDDEEFF10'H
+        }
+      }
+    },
+    {
+      -- C-DEK + R-DEK
+      keyUsageQualifier 'C8'H, 
+      -- may be used by SD and application
+      keyAccess '00'H, 
+      -- data ENC key
+      keyIdentifier '03'H, 
+      keyVersionNumber '01'H,
+      keyCompontents {
+        {
+          -- DES mode implicitly known (as an example)
+          keyType '80'H, 
+          -- This value may be freely changed
+          keyData '112233445566778899AABBCCDDEEFF10'H
+        }
+      }
+    }
+  }
+}
+
+mnoSdCompValue ProfileElement ::= securityDomain : {
+  sd-Header {
+    mandated NULL,
+    identification 7
+  },
+  instance {     
+    applicationLoadPackageAID 'A0000001515350'H,
+    classAID 'A000000151535041'H, 
+    instanceAID 'A000000151000000'H,
+    applicationPrivileges '82FC80'H,
+    -- Secured
+    lifeCycleState '0F'H, 
+    -- SCP80 supported and SCP03 mode 70
+    applicationSpecificParametersC9 '81028000810203708201F08701F0'H,
+    -- other parameters may be necessary
+    applicationParameters {
+      -- TAR: B20100, MSL: 12
+      uiccToolkitApplicationSpecificParametersField 
+         '0100000100000002011203B2010000'H
+    }
+  },
+  keyList {
+    { 
+	  -- KeySet SCP80 KVN 01 Kid 01 
+      -- C-ENC + R-ENC
+      keyUsageQualifier '38'H,
+      -- may be used by SD and application
+      keyAccess '00'H, 
+      -- ENC key
+      keyIdentifier '01'H,
+      keyVersionNumber '01'H,
+      keyCompontents {
+        {
+          -- DES mode implicitly known (as an example)
+          keyType '80'H,
+          -- This value may be freely changed
+          keyData '112233445566778899AABBCCDDEEFF10'H
+        }
+      }
+    },
+    { 
+	  -- KeySet SCP80 KVN 01 Kid 02
+      -- C-MAC + R-MAC
+      keyUsageQualifier '34'H,
+      -- may be used by SD and application
+      keyAccess '00'H,
+      -- MAC key
+      keyIdentifier '02'H,
+      keyVersionNumber '01'H,
+      keyCompontents {
+        {
+          -- DES mode implicitly known(as an example)
+          keyType '80'H, 
+          -- This value may be freely changed
+          keyData '112233445566778899AABBCCDDEEFF10'H
+        }
+      }
+    },
+    { 
+	  -- KeySet SCP80 KVN 01 Kid 03
+      -- C-DEK + R-DEK
+      keyUsageQualifier 'C8'H,
+      -- may be used by SD and application
+      keyAccess '00'H,
+      -- data ENC key
+      keyIdentifier '03'H,
+      keyVersionNumber '01'H,
+      keyCompontents {
+        {
+          -- DES mode implicitly known (as an example)
+          keyType '80'H, 
+          -- This value may be freely changed
+          keyData '112233445566778899AABBCCDDEEFF10'H
+        }
+      }
+    },
+    { 
+	  -- KeySet SCP03 KVN 30 Kid 01
+      -- C-ENC + R-ENC
+      keyUsageQualifier '38'H,
+      -- may be used by SD and application
+      keyAccess '00'H, 
+      -- ENC key
+      keyIdentifier '01'H,
+      keyVersionNumber '30'H,
+      keyCompontents {
+        {
+          -- AES (16, 24, or 32 long keys)
+          keyType '88'H,
+          -- This value may be freely changed
+          keyData '11111111030303031111111103030303'H
+        }
+      }
+    },
+    { 
+	  -- KeySet SCP03 KVN 30 Kid 02
+      -- C-MAC + R-MAC
+      keyUsageQualifier '34'H,
+      -- may be used by SD and application
+      keyAccess '00'H,
+      -- MAC key
+      keyIdentifier '02'H,
+      keyVersionNumber '30'H,
+      keyCompontents {
+        {
+          -- AES (16, 24, or 32 long keys) 
+          keyType '88'H, 
+          -- This value may be freely changed
+          keyData '22222222030303032222222203030303'H
+        }
+      }
+    },
+    { 
+	  -- KeySet SCP03 KVN 30 Kid 03
+      -- C-DEK + R-DEK
+      keyUsageQualifier 'C8'H,
+      -- may be used by SD and application
+      keyAccess '00'H,
+      -- data ENC key
+      keyIdentifier '03'H,
+      keyVersionNumber '30'H,
+      keyCompontents {
+        {
+          -- AES (16, 24, or 32 long keys) 
+          keyType '88'H, 
+          -- This value may be freely changed
+          keyData '33333333030303033333333303030303'H
+        }
+      }
+    },
+	{-- Token AES scheme as example 
+	keyUsageQualifier  '81'H,
+	-- may be used by SD 
+	keyAccess  '01'H,
+  	-- Key Id 01
+	keyIdentifier  '01'H,
+	keyVersionNumber '70'H,
+	keyCompontents  {
+	{
+  	-- AES (16, 24, or 32 long keys)
+	keyType  '88'H, 
+	-- This value may be freely changed
+	keyData  'CDFE56B7B72FAE6A047341F003D7A48D'H
+ 		}
+	  }
+   },
+	{-- Receipt the AES scheme shall be supported 
+	keyUsageQualifier  '44'H,
+	-- may be used by SD 
+	keyAccess  '01'H,
+  	-- Key Id 01
+	keyIdentifier  '01'H,
+	keyVersionNumber '71'H,
+	keyCompontents  {
+	{
+  	-- AES (16, 24, or 32 long keys) 
+	keyType  '88'H, 
+	-- This value may be freely changed
+	keyData  '11121314212223243132333441424344'H
+ 	}
+	  }
+   }
+ },
+ sdPersoData {
+	'0070084206606162636465'H,
+    '00700A45081434128014341280'H
+  }
+}
+
+
+ssdValue ProfileElement ::= securityDomain : {
+  sd-Header {
+    mandated NULL,
+    identification 8
+  },
+  instance {     
+    applicationLoadPackageAID 'A0000001515350'H, 
+    classAID 'A000000151535041'H, 
+    instanceAID 'A00000055910100102736456616C7565'H, 
+    -- by default extradited under MNO extraditeSecurityDomainAID 'A000000151000000'H
+    -- Security Domain + Trusted Path 
+    applicationPrivileges '808000'H, 
+    -- Personalized
+    lifeCycleState '0F'H, 
+    -- SCP80 supported, extradition supported
+    applicationSpecificParametersC9 '810280008201F0'H, 
+    applicationParameters {  
+      -- TAR: 6C7565, MSL: 12
+      uiccToolkitApplicationSpecificParametersField 
+         '01000001000000020112036C756500'H
+    }
+  },
+  keyList {
+    {
+      -- C-ENC + R-ENC
+      keyUsageQualifier '38'H, 
+      -- may be used by SD and application
+      keyAccess '00'H, 
+      -- ENC key
+      keyIdentifier '01'H, 
+      keyVersionNumber '01'H,
+      keyCompontents {
+        {
+          -- DES mode implicitly known (as an example)
+          keyType '80'H, 
+          -- This value may be freely changed
+          keyData '88112233445566778811223344556677'H
+        }
+      }
+    },
+    {
+      -- C-MAC + R-MAC
+      keyUsageQualifier '34'H, 
+      -- keyAccess '00'H, may be used by SD and application
+      -- MAC key
+      keyIdentifier '02'H, 
+      keyVersionNumber '01'H,
+      keyCompontents {
+        {
+          -- DES mode implicitly known (as an example)
+          keyType '80'H, 
+          -- This value may be freely changed
+          keyData '88112233445566778811223344556677'H
+        }
+      }
+    },
+    {
+      -- C-DEK + R-DEK
+      keyUsageQualifier 'C8'H, 
+      -- keyAccess '00'H, may be used by SD and application
+      -- data ENC key
+      keyIdentifier '03'H, 
+      keyVersionNumber '01'H,
+      keyCompontents {
+        {
+          -- DES mode implicitly known (as an example)
+          keyType '80'H, 
+          -- This value may be freely changed
+          keyData '88112233445566778811223344556677'H
+        }
+      }
+    }
+  }
+}
+
+applet1 ProfileElement ::= application : {
+  app-Header {
+    mandated NULL,
+    identification 9
+  },
+  loadBlock {
+    loadPackageAID 'A000000559101001'H,
+    loadBlockObject '01002EDECAFFED020204000108A0000005591010011B636F6D2F67736D612F65756963632F746573742F6170706C657431020021002E0021000F003B002A00210066000A000E0000008A040F00000000000004010004003B04030107A0000000620101000110A0000000090005FFFFFFFF8912000000010110A0000000871005FFFFFFFF8913200000000107A000000062000103000F010BA0000005591010011122330008060021000044800300FF00050400000033FFFF0030004081070082000080020081080108070066000110188C00007A04328F00013D8C00022E181D252904160461081B8B0003700C1B181D044116048B00041B8C00057A00207A02301E046B071967041877017702211D7500160001000200098D00062D1A048E0200071770027A02108D0008058E020009007A08000A0000000000000000000005002A000A06800300010002000600000103800301038003020600005A06810F0001810400068110000181090009000E0000000A0506040E0C04200709050B008A010001000204000000068107820080028108008100010016000500000000010900080018002600000000070100300023000100000000050100330027000B0000000008010040002E001800000000FF02005A0016000A00000000000A0016FFFF0016001600180016001BFFFF001FFFFF011004B4310568104005681090066800A10B6800636800200241'H
+  },
+  instanceList {
+    {     
+      applicationLoadPackageAID 'A000000559101001'H, 
+      classAID 'A000000559101001112233'H, 
+      instanceAID 'A00000055910100111223301'H, 
+      applicationPrivileges '000000'H, 
+      applicationSpecificParametersC9 '00'H,
+      applicationParameters {  
+        uiccToolkitApplicationSpecificParametersField 
+          -- TAR: 112233
+          '0100000000000311223300'H
+      }
+    }
+  }
+}
+
+applet2 ProfileElement ::= application : {
+  app-Header {
+    identification 10
+  },
+  loadBlock {
+    loadPackageAID 'A000000559101003'H,
+    loadBlockObject '01002EDECAFFED020204000108A0000005591010031B636F6D2F67736D612F65756963632F746573742F6170706C657433020021002E0021000F00150016000E002F000A00090000004301F400000000000002010004001502030107A0000000620101000107A000000062000103000F010BA000000559101003445566000806000E000000800300FF0007010000002C07002F000110188C00007A04328F00013D8C00022E181D252904160461081B8B0003700C1B181D044116048B00047A00207A08000A0000000000000000000005001600050680030001000200060000010380030103800302090009000000050506040E0C0B00430100010002000000000300810001000C00050000000001090008000E0022000000000701002C00110001000000000005000CFFFF000C000C000E011004B431066800A1'H
+  },
+  instanceList {
+    {     
+      applicationLoadPackageAID 'A000000559101003'H, 
+      classAID 'A000000559101003445566'H, 
+      instanceAID 'A00000055910100344556601'H, 
+	  extraditeSecurityDomainAID 'A00000055910100102736456616C7565'H,
+      applicationPrivileges '000000'H, 
+      applicationSpecificParametersC9 '00'H
+    }
+  }
+}
+
+
+rfmUicc ProfileElement ::= rfm : {
+  rfm-header {
+    identification 11
+  },
+  -- Instance AID
+  instanceAID 'A00000055910100001'H, 
+  tarList {
+    'B00000'H
+  },
+  -- cryptographic checksum + counter higher  
+  minimumSecurityLevel '12'H,
+  -- full access  
+  uiccAccessDomain '00'H,
+  -- full access    
+  uiccAdminAccessDomain '00'H   
+}
+
+
+rfmUsim ProfileElement ::= rfm : {
+  rfm-header {
+    identification 12
+  },
+  -- Instance AID
+  instanceAID 'A00000055910100002'H, 
+  tarList {
+    'B00020'H
+  },
+  -- cryptographic checksum + counter higher  
+  minimumSecurityLevel '12'H,
+  -- full access
+  uiccAccessDomain '00'H,
+  -- full access
+  uiccAdminAccessDomain '00'H,   
+  adfRFMAccess {
+    adfAID 'A0000000871002FF33FF018900000100'H,
+	-- UICC access condition: ADM1
+    adfAccessDomain '02000100'H,
+	-- UICC access condition: ADM1
+    adfAdminAccessDomain '02000100'H
+  }
+}
+
+gsmaProp ProfileElement ::= nonStandard : {
+	nonStandard-header {
+		mandated NULL,
+		identification 13
+	},
+	issuerID { 2 23 143 1 2 1 },
+	content '02000100'H
+}
+
+endVal ProfileElement ::= end : {
+  end-header {
+    mandated NULL,
+    identification 99
+  }
+}
+
+-- Response message from the eUICC 
+respValue EUICCResponse ::= {
+  peStatus {
+    {
+-- Library not supported in Application 2 loaded in the SSD
+      status lib-not-supported,
+      identification 10
+    }
+  }
+}
+
+END

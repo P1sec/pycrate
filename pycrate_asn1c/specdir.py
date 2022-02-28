@@ -4,6 +4,7 @@
 # * Version : 0.4
 # *
 # * Copyright 2016. Benoit Michau. ANSSI.
+# * Copyright 2019. Benoit Michau. P1Sec.
 # *
 # * This library is free software; you can redistribute it and/or
 # * modify it under the terms of the GNU Lesser General Public
@@ -28,14 +29,8 @@
 #*/
 
 # These are dictionnaries referencing all ASN.1 specifications that are supported 
-# by the compiler in proc.py, and stored in the pycrate_asn1dir/ directory
+# by the compiler in asnproc.py, and stored in the pycrate_asn1dir/ directory
 
-# For 3GPP specs, extraction scripts are provided in the subdirs to make it easy 
-# to move to new versions provided by the 3gpp.org portal
-# In order to use them, it is first required to convert the .doc file of the specification
-# to a .txt file with Microsoft Word, then the extract.py script can be run as is 
-# from the subdir:
-# $ python ./extract.py
 
 # 3GPP RRLP (2G)
 ASN_SPECS_2G = {
@@ -176,6 +171,12 @@ ASN_SPECS_OMA = {
     'LPPe'      : 'OMA_LPPe',
     }
 
+# eUICC-related specs
+ASN_SPECS_EUICC = {
+    'eUICCPP_IFTv2' : 'TCA_eUICCPP_IFTv2',
+    'eUICCPP_IFTv3' : 'TCA_eUICCPP_IFTv3',
+    }
+
 # various biotechnologies specs
 ASN_SPECS_BIO = {
     'NCBI'     : ('NCBI_201702', 'autotags'),
@@ -205,6 +206,7 @@ ASN_SPECS.update( ASN_SPECS_IETF )
 ASN_SPECS.update( ASN_SPECS_CORE )
 ASN_SPECS.update( ASN_SPECS_ITS )
 ASN_SPECS.update( ASN_SPECS_OMA )
+ASN_SPECS.update( ASN_SPECS_EUICC )
 ASN_SPECS.update( ASN_SPECS_BIO )
 #ASN_SPECS.update( _ASN_SPECS_PROP )
 
