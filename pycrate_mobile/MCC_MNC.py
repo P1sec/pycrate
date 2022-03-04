@@ -2,6 +2,9 @@
 # Python dictionnaries for MCC / MNC
 # Mobile Country Code / Mobile Network Code
 
+# TODO: switch to https://github.com/P1sec/MCC_MNC
+
+
 def _process_html(fn):
     # processing the HTML tab extracted from http://www.mcc-mnc.com/
     # take care to have a blank line at the end of the file
