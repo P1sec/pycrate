@@ -1651,10 +1651,8 @@ class Envelope(Element):
         if vals is None:
             [elt.set_val(None) for elt in self.__iter__()]
         elif isinstance(vals, (tuple, list)):
-            ind = 0
-            for elt in self.__iter__():
+            for ind, elt in enumerate(self.__iter__()):
                 elt.set_val(vals[ind])
-                ind += 1
         elif isinstance(vals, dict):
             # ordered values is sometimes required, depending of the structure
             # -> happens in particular when an Alt() is present in the envelope
@@ -1720,10 +1718,8 @@ class Envelope(Element):
                 setting raises
         """
         if isinstance(bl, (tuple, list)):
-            ind = 0
-            for elt in self.__iter__():
+            for ind, elt in enumerate(self.__iter__()):
                 elt.set_bl(bl[ind])
-                ind += 1
         elif isinstance(bl, dict):
             for key, val in bl.items():
                 self.__getitem__(key).set_bl(val)
