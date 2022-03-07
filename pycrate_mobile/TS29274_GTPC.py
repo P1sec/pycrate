@@ -45,7 +45,7 @@ from pycrate_core.base  import *
 from pycrate_mobile.TS29244_PFCP    import (
     BitFlags,
     FQCSID,
-    _FQDN,
+    FQDN,
     TimerUnit_dict,
     _Timer,
     _IEExtUint32,
@@ -70,7 +70,8 @@ from pycrate_mobile.TS24008_IE      import (
     MSCm2,
     classmark_3_value_part,
     ms_network_capability_value_part,
-    SuppCodecList
+    SuppCodecList,
+    IPAddr
     )
 from pycrate_mobile.TS44018_IE      import (
     ChanNeeded,
@@ -539,8 +540,8 @@ class EBI(Envelope):
 # TS 29.274, 8.9
 #------------------------------------------------------------------------------#
 
-class IPAddress(Buf):
-    _rep = REPR_HEX
+class IPAddress(IPAddr):
+    pass
 
 
 #------------------------------------------------------------------------------#
@@ -975,8 +976,8 @@ class FTEID(Envelope):
         Uint('V6', bl=1),
         Uint('IF', bl=6, dic=FTEIDIF_dict),
         Uint32('TEID_GREKey', rep=REPR_HEX),
-        Buf('IPv4Addr', bl=32, rep=REPR_HEX),
-        Buf('IPv6Addr', bl=128, rep=REPR_HEX),
+        IPAddr('IPv4Addr', bl=32),
+        IPAddr('IPv6Addr', bl=128),
         Buf('ext', val=b'', rep=REPR_HEX)
         )
     
@@ -1022,7 +1023,7 @@ class GlobalCNId(Envelope):
 class S103PDF(Envelope):
     _GEN = (
         Uint8('HSGWAddrLen'),
-        Buf('HSGWAddr', val=4*b'\0', rep=REPR_HEX), # IPv4 or v6
+        IPAddr('HSGWAddr', val=4*b'\0'), # IPv4 or v6
         Uint32('GREKey', rep=REPR_HEX),
         Uint8('EBINum'),
         Uint('spare', bl=4, rep=REPR_HEX),
@@ -1045,9 +1046,14 @@ class S1UDF(Envelope):
         Uint('spare', bl=4, rep=REPR_HEX),
         Uint('EBI', val=5, bl=4),
         Uint8('SGWAddrLen'),
-        Buf('SGWAddr', val=4*b'\0', rep=REPR_HEX), # IPv4 or v6
+        IPAddr('SGWAddr', val=4*b'\0'), # IPv4 or v6
         Uint32('TEID', rep=REPR_HEX)
         )
+    
+    def __init__(self, *args, **kwargs):
+        Envelope.__init__(self, *args, **kwargs)
+        self['SGWAddrLen'].set_valauto(lambda: self['SGWAddr'].get_len())
+        self['SGWAddr'].set_blauto(lambda: self['SGWAddrLen'].get_val()<<3)
 
 
 #------------------------------------------------------------------------------#
@@ -2146,9 +2152,7 @@ class NodeType(Envelope):
 # Fully Qualified Domain Name (FQDN)
 # TS 29.274, 8.66
 #------------------------------------------------------------------------------#
-
-class FQDN(_FQDN):
-    pass
+# FQDN imported from PFCP
 
 
 #------------------------------------------------------------------------------#
@@ -2236,8 +2240,8 @@ class MulticastAddr(Envelope):
         Uint('Type', val=0, bl=2, dic={0: 'V4', 1: 'V6'}),
         Uint('Len', bl=6),
         Alt('Addr', GEN={
-            0: Buf('IPv4Addr', bl=32, rep=REPR_HEX),
-            1: Buf('IPv6Addr', bl=128, rep=REPR_HEX)},
+            0: IPAddr('IPv4Addr', bl=32),
+            1: IPAddr('IPv6Addr', bl=128)},
             DEFAULT=Buf('unk', val=b'', rep=REPR_HEX),
             sel=lambda self: self.get_env()['Type'].get_val())
         )
@@ -2580,7 +2584,7 @@ class HeNBInformationReporting(Envelope):
 class IP4CP(Envelope):
     _GEN = (
         Uint8('SubnetPrefLen'),
-        Buf('IPv4DefaultRouterAddr', bl=32, rep=REPR_HEX),
+        IPAddr('IPv4DefaultRouterAddr', bl=32),
         Buf('ext', val=b'', rep=REPR_HEX)
         )
 
@@ -2790,7 +2794,7 @@ class NodeNumber(Envelope):
 # TS 29.274, 8.106
 #------------------------------------------------------------------------------#
 
-class NodeIdentifier(Envelope):
+class NodeIdent(Envelope):
     _GEN = (
         _LU8V('NodeName'),
         _LU8V('NodeRealm'),
@@ -3162,7 +3166,7 @@ class SecondaryRATUsageDataReport(Envelope):
 # TS 29.274, 8.133
 #------------------------------------------------------------------------------#
 
-class UPFunctionSelectionIndicationFlags(Envelope):
+class UPFunctionSelectionIndFlags(Envelope):
     _GEN = (
         Uint('spare', bl=7, rep=REPR_HEX),
         Uint('DCNR', bl=1),
@@ -3310,8 +3314,8 @@ class SGiPtPTunnelAddress(Envelope):
         Uint('P', bl=1),
         Uint('V6', bl=1),
         Uint('V4', val=1, bl=1),
-        Buf('IPv4Addr', bl=32, rep=REPR_HEX),
-        Buf('IPv6Addr', bl=128, rep=REPR_HEX),
+        IPAddr('IPv4Addr', bl=32),
+        IPAddr('IPv6Addr', bl=128),
         Uint16('Port', rep=REPR_HEX),
         Buf('ext', val=b'', rep=REPR_HEX)
         )
@@ -3330,7 +3334,7 @@ class SGiPtPTunnelAddress(Envelope):
 
 class PGWSetFQDN(Envelope):
     _GEN = (
-        _FQDN('FQDN'),
+        FQDN(),
         Buf('ext', val=b'', rep=REPR_HEX)
         )
 
@@ -3452,16 +3456,16 @@ class S121TransparentContainer(Buf):
 # TS 29.276, 7A.5.3
 #------------------------------------------------------------------------------#
 
-RIMRoutingAddressType_dict = {
+RIMRoutingAddrType_dict = {
     0 : 'Macro eNodeB ID',
     1 : 'Home eNodeB ID',
     2 : 'HRPD Sector Identifier',
     }
 
 
-class RIMRoutingAddress(Envelope):
+class RIMRoutingAddr(Envelope):
     _GEN = (
-        Uint8('Type', dic=RIMRoutingAddressType_dict),
+        Uint8('Type', dic=RIMRoutingAddrType_dict),
         Buf('Addr', rep=REPR_HEX)
         )
 
@@ -3651,7 +3655,7 @@ GTPCIETags_dict = {
     12 : (UnauthenticatedIMSI, -1, 'Unauthenticated IMSI'),
     14 : (EUTRANRoundTripDelay, 2, 'EUTRAN Round Trip Delay'),
     35 : (S121TransparentContainer, -1, 'S121 Transparent Container'),
-    36 : (RIMRoutingAddress, -1, 'RIM Routing Address'),
+    36 : (RIMRoutingAddr, -1, 'RIM Routing Address'),
     51 : (STNSR, -1, 'STN-SR'),
     52 : (SourcetoTargetTransparentContainer, -1, 'Source to Target Transparent Container'),
     53 : (TargettoSourceTransparentContainer, -1, 'Target to Source Transparent Container'),
@@ -3762,7 +3766,7 @@ GTPCIETags_dict = {
     173: (CNOperatorSelectionEntity, 1, 'CN Operator Selection Entity'),
     174: (TrustedWLANModeIndication, 1, 'Trusted WLAN Mode Indication'),
     175: (NodeNumber, -1, 'Node Number'),
-    176: (NodeIdentifier, -1, 'Node Identifier'),
+    176: (NodeIdent, -1, 'Node Identifier'),
     177: (PresenceReportingAreaAction, -1, 'Presence Reporting Area Action'),
     178: (PresenceReportingAreaInformation, 4, 'Presence Reporting Area Information'),
     179: (TWANIdentifierTimestamp, 4, 'TWAN Identifier Timestamp'),
@@ -3784,7 +3788,7 @@ GTPCIETags_dict = {
     199: (Counter, 5, 'Counter'),
     200: (MappedUEUsageType, 2, 'Mapped UE Usage Type'),
     201: (SecondaryRATUsageDataReport, 27, 'Secondary RAT Usage Data Report'),
-    202: (UPFunctionSelectionIndicationFlags, 1, 'UP Function Selection Indication Flags'),
+    202: (UPFunctionSelectionIndFlags, 1, 'UP Function Selection Indication Flags'),
     203: (MaximumPacketLossRate, 1, 'Maximum Packet Loss Rate'),
     204: (APNRateControlStatus, 20, 'APN Rate Control Status'),
     205: (ExtendedTraceInformation, -1, 'Extended Trace Information'),
@@ -4171,7 +4175,7 @@ class CreateSessionRequestIEs(GTPCIEs):
         (169, 1) : (TWANIdentifier, 'WLANLocationInformation'),
         (173, 0) : (CNOperatorSelectionEntity, 'CNOperatorSelectionEntity'),
         (174, 0) : (TrustedWLANModeIndication, 'TrustedWLANModeIndication'),
-        (176, 0) : (NodeIdentifier, '3GPPAAAServerIdentifier'),
+        (176, 0) : (NodeIdent, '3GPPAAAServerIdent'),
         (178, 0) : (PresenceReportingAreaInformation, 'PresenceReportingAreaInformation'),
         (179, 0) : (TWANIdentifierTimestamp, 'WLANLocationTimestamp'),
         (180, 0) : (CreateSessionRequest_OverloadControlInformation, 'MMES4SGSNsOverloadControlInformation'),
@@ -4185,7 +4189,7 @@ class CreateSessionRequestIEs(GTPCIEs):
         (199, 0) : (Counter, 'MOExceptionDataCounter'),
         (200, 0) : (MappedUEUsageType, 'MappedUEUsageType'),
         (201, 0) : (SecondaryRATUsageDataReport, 'SecondaryRATUsageDataReport'),
-        (202, 0) : (UPFunctionSelectionIndicationFlags, 'UPFunctionSelectionIndicationFlags'),
+        (202, 0) : (UPFunctionSelectionIndFlags, 'UPFunctionSelectionIndFlags'),
         (204, 0) : (APNRateControlStatus, 'APNRateControlStatus'),
         255      : (PrivateExtension, 'PrivateExtension'),
         }
@@ -5762,7 +5766,7 @@ class ForwardRelocationRequest_MMEUESCEFPDNConnections(GTPCIEs):
     MAND = {
         (71, 0)  : (APN, 'APN'),
         (73, 0)  : (EBI, 'DefaultEPSBearerID'),
-        (176, 0) : (NodeIdentifier, 'SCEFID'),
+        (176, 0) : (NodeIdent, 'SCEFID'),
         }
 
 
@@ -5868,7 +5872,7 @@ class ForwardRelocationRequestIEs(GTPCIEs):
         (159, 0) : (AdditionalMMContextForSRVCC, 'AdditionalMMContextForSRVCC'),
         (160, 0) : (AdditionalFlagsForSRVCC, 'AdditionalFlagsForSRVCC'),
         (162, 0) : (MDTConfiguration, 'MDTConfiguration'),
-        (176, 0) : (NodeIdentifier, 'IWKSCEFIDforMonitoringEvent'),
+        (176, 0) : (NodeIdent, 'IWKSCEFIDForMonitoringEvent'),
         (187, 0) : (IntegerNumber, 'UEUsageType'),
         (189, 0) : (MonitoringEventInformation, 'MonitoringEventInformation'),
         (195, 0) : (ForwardRelocationRequest_MMEUESCEFPDNConnections, 'MMESGSNUESCEFPDNConnections'),
@@ -5927,10 +5931,10 @@ class ForwardRelocationResponseIEs(GTPCIEs):
         (151, 0) : (LDN, 'MMES4SGSNLDN'),
         (175, 0) : (NodeNumber, 'SGSNNumber'),
         (175, 1) : (NodeNumber, 'MMEnumberforMTSMS'),
-        (176, 0) : (NodeIdentifier, 'SGSNIdentifier'),
-        (176, 1) : (NodeIdentifier, 'MMEIdentifier'),
-        (176, 2) : (NodeIdentifier, 'SGSNIdentifierforMTSMS'),
-        (176, 3) : (NodeIdentifier, 'MMEIdentifierforMTSMS'),
+        (176, 0) : (NodeIdent, 'SGSNIdent'),
+        (176, 1) : (NodeIdent, 'MMEIdent'),
+        (176, 2) : (NodeIdent, 'SGSNIdentForMTSMS'),
+        (176, 3) : (NodeIdent, 'MMEIdentForMTSMS'),
         255      : (PrivateExtension, 'PrivateExtension'),
         }
 
@@ -5995,8 +5999,8 @@ class ContextRequestIEs(GTPCIEs):
         (136, 1) : (FQDN, 'MMEnodename'),
         (151, 0) : (LDN, 'MMES4SGSNLDN'),
         (175, 0) : (NodeNumber, 'SGSNNumber'),
-        (176, 0) : (NodeIdentifier, 'SGSNIdentifier'),
-        (176, 1) : (NodeIdentifier, 'MMEIdentifier'),
+        (176, 0) : (NodeIdent, 'SGSNIdent'),
+        (176, 1) : (NodeIdent, 'MMEIdent'),
         (194, 0) : (CIoTOptimizationsSupportIndication, 'CIoTOptimizationsSupportIndication'),
         255      : (PrivateExtension, 'PrivateExtension'),
         }
@@ -6024,7 +6028,7 @@ class ContextResponse_MMESGSNUESCEFPDNConnections(GTPCIEs):
     MAND = {
         (71, 0)  : (APN, 'APN'),
         (73, 0)  : (EBI, 'DefaultEPSBearerID'),
-        (176, 0) : (NodeIdentifier, 'SCEFID'),
+        (176, 0) : (NodeIdent, 'SCEFID'),
         }
 
 
@@ -6112,7 +6116,7 @@ class ContextResponseIEs(GTPCIEs):
         (145, 0) : (UCI, 'UCI'),
         (151, 0) : (LDN, 'MMES4SGSNLDN'),
         (162, 0) : (MDTConfiguration, 'MDTConfiguration'),
-        (176, 0) : (NodeIdentifier, 'IWKSCEFIDforMonitoringEvent'),
+        (176, 0) : (NodeIdent, 'IWKSCEFIDForMonitoringEvent'),
         (187, 0) : (IntegerNumber, 'UEUsageType'),
         (187, 1) : (IntegerNumber, 'RemainingRunningServiceGapTimer'),
         (189, 0) : (MonitoringEventInformation, 'MonitoringEventInformation'),
@@ -6154,8 +6158,8 @@ class ContextAcknowledgeIEs(GTPCIEs):
         (93, 0)  : (ContextAcknowledge_BearerContext, 'BearerContext'),
         (175, 0) : (NodeNumber, 'SGSNNumber'),
         (175, 1) : (NodeNumber, 'MMEnumberforMTSMS'),
-        (176, 0) : (NodeIdentifier, 'SGSNIdentifierforMTSMS'),
-        (176, 1) : (NodeIdentifier, 'MMEIdentifierforMTSMS'),
+        (176, 0) : (NodeIdent, 'SGSNIdentForMTSMS'),
+        (176, 1) : (NodeIdent, 'MMEIdentForMTSMS'),
         255      : (PrivateExtension, 'PrivateExtension'),
         }
 
@@ -6394,7 +6398,7 @@ class RANInformationRelayIEs(GTPCIEs):
         (118, 0) : (FContainer, 'BSSContainer'),
         }
     OPT  = {
-        (121, 0) : (TargetIdentification, 'RIMRoutingAddress'),
+        (121, 0) : (TargetIdentification, 'RIMRoutingAddr'),
         255      : (PrivateExtension, 'PrivateExtension'),
         }
 
@@ -7060,7 +7064,7 @@ class NotificationResponse(GTPCMsg):
 class RIMInformationTransferIEs(GTPCIEs):
     MAND = {
         (35, 0)  : (S121TransparentContainer, 'S121 Transparent Container'),
-        (36, 0)  : (RIMRoutingAddress, 'RIM Routing Address'),
+        (36, 0)  : (RIMRoutingAddr, 'RIM Routing Address'),
         }
     OPT  = {
         255      : (PrivateExtension, 'PrivateExtension'),
