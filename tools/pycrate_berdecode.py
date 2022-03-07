@@ -92,10 +92,15 @@ def main():
     char = Charpy(buf)
     cnt  = 0 
     while char.len_bit() >= 16:
-        Obj, V = ASN1CodecBER.decode_tlv_ws(char)
-        print('\n' + 14*'--' + ' object %i ' % cnt + 14*'--' + '\n')
-        pprint.pprint(V)
-        cnt += 1
+        try:
+            Obj, V = ASN1CodecBER.decode_tlv_ws(char)
+        except Exception as err:
+            print('Invalid BER buffer: %s' % err)
+            char._cur += 16
+        else:
+            print('\n' + 14*'--' + ' object %i ' % cnt + 14*'--' + '\n')
+            pprint.pprint(V)
+            cnt += 1
     return 0
     
 if __name__ == '__main__':
