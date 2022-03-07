@@ -77,7 +77,7 @@ from pycrate_core.base      import *
 from pycrate_core.charpy    import *
 
 from pycrate_ether.Ethernet     import EtherType_dict
-from pycrate_mobile.TS24008_IE  import PLMN
+from pycrate_mobile.TS24008_IE  import PLMN, IPAddr
 
 
 #------------------------------------------------------------------------------#
@@ -180,7 +180,7 @@ class _LU16V(Envelope):
 class _LU16LU16V(Envelope):
     _GEN = (
         Uint16('Len'),
-        Sequence('Vals', GEN=_LU16V())
+        Sequence('Vals', GEN=_LU16V('LV'))
         )
     
     def __init__(self, *args, **kwargs):
@@ -1953,8 +1953,8 @@ class FTEID(Envelope):
         Uint('V6', bl=1),
         Uint('V4', bl=1),
         Uint32('TEID'),
-        Buf('IPv4Addr', bl=32, rep=REPR_HEX),
-        Buf('IPv6Addr', bl=128, rep=REPR_HEX),
+        IPAddr('IPv4Addr', bl=32),
+        IPAddr('IPv6Addr', bl=128),
         Uint8('CHOOSE_ID'),
         Buf('ext', val=b'', rep=REPR_HEX)
         )
@@ -2565,8 +2565,8 @@ class FSEID(Envelope):
         Uint('V4', bl=1),
         Uint('V6', bl=1),
         Uint64('SEID'),
-        Buf('IPv4Addr', bl=32, rep=REPR_HEX),
-        Buf('IPv6Addr', bl=128, rep=REPR_HEX),
+        IPAddr('IPv4Addr', bl=32),
+        IPAddr('IPv6Addr', bl=128),
         Buf('ext', val=b'', rep=REPR_HEX)
         )
     
@@ -2587,8 +2587,41 @@ NodeIDType_dict = {
     }
 
 
-class _FQDN(Sequence):
+class FQDN(Sequence):
     _GEN = _LU8V('Label')
+    
+    def set_val(self, val):
+        if isinstance(val, str_types):
+            self.encode(val)
+        else:
+            Sequence.set_val(self, val)
+    
+    def encode(self, val):
+        fqdn_labels = val.split('.')
+        Sequence.set_val(self, [{'Value': fqdn_label.encode()} for fqdn_label in fqdn_labels])
+    
+    def decode(self):
+        return '.'.join([fqdn_label[1].decode() for fqdn_label in self.get_val()])
+    
+    def repr(self):
+        # element transparency
+        if self.get_trans():
+            trans = ' [transparent]'
+        else:
+            trans = ''
+        # additional description
+        if self._desc:
+            desc = ' [%s]' % self._desc
+        else:
+            desc = ''
+        #
+        return '<%s%s%s : %s>' % \
+               (self._name, desc, trans, self.decode())
+    
+    __repr__ = repr
+    
+    def show(self):
+        return self.get_hier_abs() * '    ' + self.repr()
 
 
 # IE Type: 60
@@ -2597,9 +2630,9 @@ class NodeID(Envelope):
         Uint('spare', bl=4),
         Uint('Type', bl=4, dic=NodeIDType_dict),
         Alt('Val', GEN={
-            0 : Buf('IPv4Addr', bl=32, rep=REPR_HEX),
-            1 : Buf('IPv6Addr', bl=128, rep=REPR_HEX),
-            2 : _FQDN('FQDN')},
+            0 : IPAddr('IPv4Addr', bl=32),
+            1 : IPAddr('IPv6Addr', bl=128),
+            2 : FQDN()},
             DEFAULT=Buf('unk', val=b'', rep=REPR_HEX),
             sel=lambda self: self.get_env()['Type'].get_val()
             ),
@@ -2729,8 +2762,8 @@ class FQCSID(Envelope):
         Uint('NodeIDType', bl=4, dic={0: 'IPv4', 1: 'IPv6', 2:'MCCMNC-based'}),
         Uint('NumCSIDs', bl=4),
         Alt('NodeAddr', GEN={
-            0 : Buf('IPv4Addr', bl=32, rep=REPR_HEX),
-            1 : Buf('IPv6Addr', bl=128, rep=REPR_HEX),
+            0 : IPAddr('IPv4Addr', bl=32),
+            1 : IPAddr('IPv6Addr', bl=128),
             2 : Buf('MCCMNCAddr', bl=32, rep=REPR_HEX)},
             DEFAULT=Buf('none', bl=0),
             sel=lambda self: self.get_env()['NodeIDType'].get_val()),
@@ -2907,8 +2940,8 @@ class OuterHeaderCreation(Envelope):
         Uint('N6', bl=1),
         Uint('N19', bl=1),
         Uint32('TEID'),
-        Buf('IPv4Addr', bl=32, rep=REPR_HEX),
-        Buf('IPv6Addr', bl=128, rep=REPR_HEX),
+        IPAddr('IPv4Addr', bl=32),
+        IPAddr('IPv6Addr', bl=128),
         Uint16('Port'),
         Buf('VLAN_CTAG', bl=24, rep=REPR_HEX),
         Buf('VLAN_STAG', bl=24, rep=REPR_HEX),
@@ -3034,8 +3067,8 @@ class UEIPAddress(Envelope):
         Uint('SD', bl=1),
         Uint('V4', bl=1),
         Uint('V6', bl=1),
-        Buf('IPv4Addr', bl=32, rep=REPR_HEX),
-        Buf('IPv6Addr', bl=128, rep=REPR_HEX),
+        IPAddr('IPv4Addr', bl=32),
+        IPAddr('IPv6Addr', bl=128),
 	    Uint8('IPv6PrefDeleg'),
         Uint8('IPv6PrefLen'),
         Buf('ext', val=b'', rep=REPR_HEX)
@@ -3229,8 +3262,8 @@ class RemoteGTPUPeer(Envelope):
         Uint('DI', bl=1),
         Uint('V4', bl=1),
         Uint('V6', bl=1),
-        Buf('IPv4Addr', bl=32, rep=REPR_HEX),
-        Buf('IPv6Addr', bl=128, rep=REPR_HEX),
+        IPAddr('IPv4Addr', bl=32),
+        IPAddr('IPv6Addr', bl=128),
         _LU16V('DestinationInterface'),
         _LU16V('NetworkInstance'),
         Buf('ext', val=b'', rep=REPR_HEX)
@@ -3831,7 +3864,7 @@ class PagingPolicyIndicator(Envelope):
 #------------------------------------------------------------------------------#
 
 # IE Type: 159
-class APNDNN(_FQDN):
+class APNDNN(FQDN):
     pass
 
 
@@ -4030,8 +4063,8 @@ class AlternativeSMFIPAddress(Envelope):
         Uint('spare', bl=6, rep=REPR_HEX),
         Uint('V4', bl=1),
         Uint('V6', bl=1),
-        Buf('IPv4Addr', bl=32, rep=REPR_HEX),
-        Buf('IPv6Addr', bl=128, rep=REPR_HEX),
+        IPAddr('IPv4Addr', bl=32),
+        IPAddr('IPv6Addr', bl=128),
         Buf('ext', val=b'', rep=REPR_HEX)
         )
     
@@ -4065,7 +4098,7 @@ class PacketReplicationandDetectionCarryOnInformation(Envelope):
 class SMFSetID(Envelope):
     _GEN = (
         Uint8('spare'),
-        _FQDN('FQDN'),
+        FQDN(),
         Buf('ext', val=b'', rep=REPR_HEX)
         )
 
@@ -4112,8 +4145,8 @@ class CPPFCPEntityIPAddress(Envelope):
         Uint('spare', bl=6, rep=REPR_HEX),
         Uint('V4', bl=1),
         Uint('V6', bl=1),
-        Buf('IPv4Addr', bl=32, rep=REPR_HEX),
-        Buf('IPv6Addr', bl=128, rep=REPR_HEX),
+        IPAddr('IPv4Addr', bl=32),
+        IPAddr('IPv6Addr', bl=128),
         Buf('ext', val=b'', rep=REPR_HEX)
         )
     
@@ -4148,10 +4181,10 @@ class IPMulticastAddress(Envelope):
         Uint('R', bl=1),
         Uint('V4', bl=1),
         Uint('V6', bl=1),
-        Buf('IPv4Addr', bl=32, rep=REPR_HEX),
-        Buf('IPv6Addr', bl=128, rep=REPR_HEX),
-        Buf('IPv4AddrEnd', bl=32, rep=REPR_HEX),
-        Buf('IPv6AddrEnd', bl=128, rep=REPR_HEX),
+        IPAddr('IPv4Addr', bl=32),
+        IPAddr('IPv6Addr', bl=128),
+        IPAddr('IPv4AddrEnd', bl=32),
+        IPAddr('IPv6AddrEnd', bl=128),
         Buf('ext', val=b'', rep=REPR_HEX)
         )
     
@@ -4178,8 +4211,8 @@ class SourceIPAddress(Envelope):
         Uint('MPL', bl=1),
         Uint('V4', bl=1),
         Uint('V6', bl=1),
-        Buf('IPv4Addr', bl=32, rep=REPR_HEX),
-        Buf('IPv6Addr', bl=128, rep=REPR_HEX),
+        IPAddr('IPv4Addr', bl=32),
+        IPAddr('IPv6Addr', bl=128),
         Uint8('MaskPrefLen'),
         Buf('ext', val=b'', rep=REPR_HEX)
         )
@@ -4469,10 +4502,10 @@ class UELinkSpecificIPAddress(Envelope):
         Uint('NV4', bl=1),
         Uint('V6', bl=1),
         Uint('V4', bl=1),
-        Buf('IPv4Addr', bl=32, rep=REPR_HEX),
-        Buf('IPv6Addr', bl=128, rep=REPR_HEX),
-        Buf('IPv4AddrNon3GPP', bl=32, rep=REPR_HEX),
-        Buf('IPv6AddrNon3GPP', bl=128, rep=REPR_HEX),
+        IPAddr('IPv4Addr', bl=32),
+        IPAddr('IPv6Addr', bl=128),
+        IPAddr('IPv4AddrNon3GPP', bl=32),
+        IPAddr('IPv6AddrNon3GPP', bl=128),
         Buf('ext', val=b'', rep=REPR_HEX)
         )
     
@@ -4495,8 +4528,8 @@ class PMFAddressInformation(Envelope):
         Uint('MAC', bl=1),
         Uint('V6', bl=1),
         Uint('V4', bl=1),
-        Buf('IPv4Addr', bl=32, rep=REPR_HEX),
-        Buf('IPv6Addr', bl=128, rep=REPR_HEX),
+        IPAddr('IPv4Addr', bl=32),
+        IPAddr('IPv6Addr', bl=128),
         Uint16('Port3GPP'),
         Uint16('PortNon3GPP'),
         Buf('MAC3GPP', bl=48, rep=REPR_HEX),
