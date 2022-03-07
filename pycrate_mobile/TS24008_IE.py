@@ -34,6 +34,7 @@
 
 from binascii import hexlify, unhexlify
 from time     import struct_time
+from socket   import inet_ntop, inet_pton, AF_INET, AF_INET6
 
 from pycrate_core.utils  import *
 from pycrate_core.elt    import (
@@ -229,9 +230,8 @@ class BufBCD(Buf):
 # with additionnal methods: encode(), decode()
 
 class PLMN(Buf):
-    """Child of pycrate_core.base.Buf object
-    with additional encode() and decode() capabilities in order to handle
-    PLMN encoding
+    """Custom `Buf' subclass supporting custom encode(), decode(), set_val() and repr() methods
+    specific for encoding a PLMN MCC-MNC code into 3 bytes in the std 3GPP BCD format
     """
     
     _bl  = 24 # 3 bytes
@@ -359,6 +359,58 @@ class PLMN(Buf):
         if self.REPR_MAXLEN > 0 and len(val_repr) > self.REPR_MAXLEN:
             val_repr = val_repr[:self.REPR_MAXLEN] + '...'
         return '<%s%s%s : %s>' % (self._name, desc, trans, val_repr)
+    
+    __repr__ = repr
+
+
+class IPAddr(Buf):
+    """Custom `Buf' subclass supporting custom encode(), decode(), set_val() and repr() methods
+    specific for an IP address:
+    - IPv4 when length is 4 bytes
+    - IPv6 when length is 16 bytes
+    """
+    
+    _rep = REPR_HUM
+    
+    def encode(self, val):
+        try:
+            if val.count('.') == 3:
+                Buf.set_val(self, inet_pton(AF_INET, val))
+            elif val.count(':'):
+                Buf.set_val(self, inet_pton(AF_INET6, val))
+            else:
+                Buf.set_val(val)
+        except Exception as err:
+            raise(PycrateErr('invalid IP address string'))
+    
+    def decode(self):
+        val = self.get_val()
+        if len(val) == 4:
+            return inet_ntop(AF_INET, val)
+        elif len(val) == 16:
+            return inet_ntop(AF_INET6, val)
+        else:
+            return val
+    
+    def set_val(self, val):
+        if python_version == 2 and isinstance(val, unicode) \
+        or python_version > 2 and isinstance(val, str_types):
+            self.encode(val)
+        else:
+            Buf.set_val(self, val)
+    
+    def repr(self):
+        vallen = self.get_len()
+        if self._rep == REPR_HUM and vallen in {4, 16}:
+            # element transparency
+            if self.get_trans():
+                trans = ' [transparent]'
+            else:
+                trans = ''
+            val_repr = self.decode()
+            return '<%s%s : %s>' % (self._name, trans, val_repr)
+        else:
+            return Buf.repr(self)
     
     __repr__ = repr
 
@@ -2704,6 +2756,25 @@ class APN(Sequence):
     
     def decode(self):
         return '.'.join([apn_item[1].decode() for apn_item in self.get_val()])
+    
+    def repr(self):
+        # element transparency
+        if self.get_trans():
+            trans = ' [transparent]'
+        else:
+            trans = ''
+        # additional description
+        if self._desc:
+            desc = ' [%s]' % self._desc
+        else:
+            desc = ''
+        #
+        return '<%s%s%s : %s>' % (self._name, desc, trans, self.decode())
+    
+    __repr__ = repr
+    
+    def show(self):
+        return self.get_hier_abs() * '    ' + self.repr()
 
 
 #------------------------------------------------------------------------------#
@@ -2838,50 +2909,27 @@ _PDPTypeOrg_dict = {
     1 : 'IETF allocated',
     15 : 'Empty PDP type',
     }
-_PDPTypeNum0_dict = {
+
+_PDPTypeNum_dict = {
+    # ETSI allocated
     0 : 'reserved',
     1 : 'PPP',
-    }
-_PDPTypeNum1_dict = {
+    # IETF allocated
     33 : 'IPv4',
     87 : 'IPv6',
     141 : 'IPv4v6',
     }
 
+
 class PDPAddr(Envelope):
     _GEN = (
-        Uint('spare', bl=4),
+        Uint('spare', val=0, bl=4, rep=REPR_HEX),
         Uint('TypeOrg', val=1, bl=4, dic=_PDPTypeOrg_dict),
-        Uint8('Type', val=33),
-        Buf('Addr', val=b'', rep=REPR_HEX)
+        Uint8('Type', val=33, dic=_PDPTypeNum_dict),
+        IPAddr('Addr', val=b'') # empty when used in a Request, 4, 16, 20... up to 64 bytes otherwise
         )
-    
-    def __init__(self, *args, **kwargs):
-        Envelope.__init__(self, *args, **kwargs)
-        self[2].set_dicauto(self._set_pdpt_dic)
-        # Addr can be empty, when PDPAddr is used within a request
-        #self[3].set_blauto(self._set_addr_len)
-    
-    def _set_pdpt_dic(self):
-        to = self[1]()
-        if to == 0:
-            return _PDPTypeNum0_dict
-        elif to == 1:
-            return _PDPTypeNum1_dict
-        else:
-            return None
-    
-    #def _set_addr_len(self):
-    #    to, t = self[1](), self[2]()
-    #    if to == 1:
-    #        if t == 33:
-    #            return 32
-    #        elif t == 87:
-    #            return 128
-    #        elif t == 141:
-    #            return 160
-    #    return None
-    
+
+
 #------------------------------------------------------------------------------#
 # Quality of service
 # TS 24.008, 10.5.6.5
@@ -3319,7 +3367,7 @@ _PktFilterCompType_dict = {
     35 : 'IPv6 local address/prefix length type',
     48 : 'Protocol identifier/Next header type',
     64 : 'Single local port type',
-    65 : 'Local port range type',
+    65 : 'Local port range type',   
     80 : 'Single remote port type',
     81 : 'Remote port range type',
     96 : 'Security parameter index type',
@@ -3340,21 +3388,21 @@ class TFTPktFilterId(Envelope):
 
 class _CompIPv4(Envelope):
     _GEN = (
-        Buf('Address', bl=32, rep=REPR_HEX),
+        IPAddr('Address', bl=32),
         Buf('Netmask', bl=32, rep=REPR_HEX)
         )
 
 
 class _CompIPv6(Envelope):
     _GEN = (
-        Buf('Address', bl=128, rep=REPR_HEX),
+        IPAddr('Address', bl=128),
         Buf('Netmask', bl=128, rep=REPR_HEX)
         )
 
 
 class _CompIPv6Pref(Envelope):
     _GEN = (
-        Buf('Address', bl=128, rep=REPR_HEX),
+        IPAddr('Address', bl=128),
         Uint8('PrefixLen')
         )
 
