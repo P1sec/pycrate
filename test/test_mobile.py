@@ -361,10 +361,7 @@ def test_isup(isup_pdu=isup_pdu):
 
 def test_gtp(gtp_pdu=gtp_pdu):
     for pdu in gtp_pdu:
-        m, e = parse_GTP_SGSN(pdu)
-        if e == 4:
-            # missing mandatory IE, may need to parse the buffer the as the other end
-            m, e = parse_GTP_GGSN(pdu)
+        m, e = parse_GTP(pdu)
         assert( e == 0 )
         v = m.get_val()
         m.reautomate()

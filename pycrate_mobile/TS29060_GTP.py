@@ -3130,6 +3130,32 @@ class RANInfoRelay(GTPMsg):
         )
 
 
+# UE Registration Query Request
+
+class UERegistrationQueryReq(GTPMsg):
+    _GEN = (
+        GTPHdr(val={'Type': GTPType.UERegistrationQueryReq.value}),
+        GTPIEs(GEN=(
+            GTPIETV('IMSI', val={'Type': GTPIEType.IMSI.value}, bl={'Data': 64}),
+            GTPIETLV('PrivateExt', val={'Type': GTPIEType.PrivateExt.value}, trans=True),
+            ), hier=1)
+        )
+
+
+# UE Registration Query Response
+
+class UERegistrationQueryResp(GTPMsg):
+    _GEN = (
+        GTPHdr(val={'Type': GTPType.UERegistrationQueryResp.value}),
+        GTPIEs(GEN=(
+            GTPIETV('Cause', val={'Type': GTPIEType.Cause.value}, bl={'Data': 8}),
+            GTPIETV('IMSI', val={'Type': GTPIEType.IMSI.value}, bl={'Data': 64}),
+            GTPIETLV('SelectedPLMNID', val={'Type': GTPIEType.SelectedPLMNID.value}, trans=True),
+            GTPIETLV('PrivateExt', val={'Type': GTPIEType.PrivateExt.value}, trans=True),
+            ), hier=1)
+        )
+
+
 #------------------------------------------------------------------------------#
 # 7.5A MBMS Messages
 #------------------------------------------------------------------------------#
@@ -3621,12 +3647,129 @@ class DataRecordTransferResp(GTPMsg):
 # TS 29.060, section 7.1
 #------------------------------------------------------------------------------#
 
+INI_ANY  = 'Any'
+INI_SGSN = 'SGSN'
+INI_GGSN = 'GGSN'
+INI_HLR  = 'HLR' # Actually, not directly the HLR, but the GTP-MAP converter in front of the HLR
+INI_MME  = 'MME'
+INI_CGF  = 'CGF' # Charging Gateway Function
+
+
+# GTP-C v1 requests (code, initiator) / responses (code, initiator)
+GTPReqResp = {
+    #
+    # error messages that could eventually come in reponse to any kind of request:
+    # 3: VersionNotSupported
+    # 26: ErrorInd
+    # 31: SupportedExtHeadersNotif
+    #
+    # Path mgmt
+    'Path': {
+        (1, INI_ANY) : (2, INI_ANY),
+        (3, INI_ANY) : (None, INI_ANY),
+        (31, INI_ANY) : (None, INI_ANY),
+        },
+    #
+    # Tunnel mgmt
+    'Tun': {
+        (16, INI_SGSN) : (17, INI_GGSN),
+        (18, INI_SGSN) : (19, INI_GGSN),
+        (18, INI_GGSN) : (19, INI_SGSN),
+        (20, INI_SGSN) : (21, INI_GGSN),
+        (22, INI_GGSN) : (23, INI_SGSN),
+        (27, INI_GGSN) : (28, INI_SGSN),
+        (29, INI_SGSN) : (30, INI_GGSN),
+        },
+    #
+    # Location mgmt
+    'Loc': {
+        (32, INI_GGSN) : (33, INI_HLR),
+        (34, INI_GGSN) : (35, INI_HLR),
+        (36, INI_HLR)  : (37, INI_GGSN),
+        },
+    #
+    # Mobility mgmt
+    'Mob': {
+        # Identity Req / Resp:
+        (48, INI_SGSN) : (49, INI_SGSN),
+        # SGSN Context transmission:
+        #  Old SGSN  /  New SGSN
+        #     == 50 (Req) ==>
+        #    <== 51 (Res) ==
+        #     == 52 (Ack) ==>
+        (50, INI_SGSN) : (51, INI_SGSN),
+        (51, INI_SGSN) : (52, INI_SGSN),
+        # Forward Relocation (SRNS Relocation / PS handover):
+        # Old SGSN  /  New SGSN
+        #    == 53 (Req) ==>
+        #   <== 54 (Res) ==
+        #   <== 55 (Com) == (after SRNS relocation succeeded)
+        #    == 59 (Ack) ==>
+        (53, INI_SGSN) : (54, INI_SGSN),
+        (55, INI_SGSN) : (59, INI_SGSN),
+        # Relocation Cancel (SRNS Relocation / PS handover):
+        # Old SGSN  /  New SGSN
+        #   == 56 (Req) ==>
+        #  <== 57 (Res) ==
+        (56, INI_SGSN) : (57, INI_SGSN),
+        # Forward SRNS Context (Hard handover + switch of SGSN):
+        # Old SGSN  /  New SGSN
+        #   == 58 (Req) ==>
+        #  <== 60 (Ack) ==
+        (58, INI_SGSN) : (60, INI_SGSN),
+        # RAN Info Relay
+        (70, INI_SGSN) : (None, INI_SGSN),
+        # UE Reg Query
+        (61, INI_SGSN) : (62, INI_MME),
+        },
+    #
+    # UE-specific MBMS
+    'MB_UE': {
+        (96, INI_GGSN) : (97, INI_SGSN),
+        (98, INI_SGSN) : (99, INI_GGSN),
+        (100, INI_SGSN) : (101, INI_GGSN),
+        (102, INI_SGSN) : (103, INI_GGSN),
+        (104, INI_SGSN) : (105, INI_GGSN),
+        },
+    #
+    # Service-specific MBMS
+    'MB_Serv': {
+        (112, INI_SGSN) : (113, INI_GGSN),
+        (114, INI_SGSN) : (115, INI_GGSN),
+        (114, INI_GGSN) : (115, INI_SGSN),
+        (116, INI_GGSN) : (117, INI_SGSN),
+        (118, INI_GGSN) : (119, INI_SGSN),
+        (118, INI_SGSN) : (119, INI_GGSN),
+        (120, INI_GGSN) : (121, INI_SGSN),
+        },
+    #
+    # MS Info Change Reporting
+    'MSInfo': {
+        (128, INI_SGSN) : (129, INI_GGSN),
+        },
+    #
+    # GTP'
+    'GTPp': {
+        (4, INI_ANY) : (5, INI_ANY),
+        # Here, Any is for any function that can generates PS CDR
+        (6, INI_CGF) : (7, INI_ANY),
+        (240, INI_ANY) : (241, INI_CGF),
+        },
+    }
+
+GTPReqResp_flat = {}
+[GTPReqResp_flat.update(req_resp_d) for req_resp_d in GTPReqResp.values()]
+
+
 GTPDispatcherSGSN = {
     # GTP
+    # Path mgmt
     1 : EchoReq,
     2 : EchoResp,
     3 : VersionNotSupported,
     31 : SupportedExtHeadersNotif,
+    #
+    # Tunnel mgmt
     16 : CreatePDPCtxtReq,
     17 : CreatePDPCtxtResp,
     #18 : UpdatePDPCtxtReqSGSN,
@@ -3642,12 +3785,16 @@ GTPDispatcherSGSN = {
     30 : PDUNotifRejectResp,
     22 : InitiatePDPCtxtActivationReq,
     23 : InitiatePDPCtxtActivationResp,
+    #
+    # Location mgmt
     32 : SendRouteingInfoforGPRSReq,
     33 : SendRouteingInfoforGPRSResp,
     34 : FailureReportReq,
     35 : FailureReportResp,
     36 : NoteMSGPRSPresentReq,
     37 : NoteMSGPRSPresentResp,
+    #
+    # Mobility mgmt
     48 : IdentificationReq,
     49 : IdentificationResp,
     50 : SGSNCtxtReq,
@@ -3662,6 +3809,10 @@ GTPDispatcherSGSN = {
     60 : ForwardSRNSCtxtAck,
     58 : ForwardSRNSCtxt,
     70 : RANInfoRelay,
+    61 : UERegistrationQueryReq,
+    62 : UERegistrationQueryResp,
+    #
+    # UE-related MBMS
     96 : MBMSNotifReq,
     97 : MBMSNotifResp,
     98 : MBMSNotifRejectReq,
@@ -3672,6 +3823,8 @@ GTPDispatcherSGSN = {
     103 : UpdateMBMSCtxtResp,
     104 : DeleteMBMSCtxtReq,
     105 : DeleteMBMSCtxtResp,
+    #
+    # Service-related MBMS
     112 : MBMSRegistrationReq,
     113 : MBMSRegistrationResp,
     114 : MBMSDeRegistrationReq,
@@ -3682,8 +3835,11 @@ GTPDispatcherSGSN = {
     119 : MBMSSessionStopResp,
     120 : MBMSSessionUpdateReq,
     121 : MBMSSessionUpdateResp,
+    #
+    # MS Info Change Reporting
     128 : MSInfoChangeNotifReq,
     129 : MSInfoChangeNotifResp,
+    #
     # GTP'
     4 : NodeAliveReq,
     5 : NodeAliveResp,
@@ -3696,10 +3852,13 @@ GTPDispatcherSGSN = {
 
 GTPDispatcherGGSN = {
     # GTP
+    # Path mgmt
     1 : EchoReq,
     2 : EchoResp,
     3 : VersionNotSupported,
     31 : SupportedExtHeadersNotif,
+    #
+    # Tunnel mgmt
     16 : CreatePDPCtxtReq,
     17 : CreatePDPCtxtResp,
     18 : UpdatePDPCtxtReqSGSN,
@@ -3715,12 +3874,16 @@ GTPDispatcherGGSN = {
     30 : PDUNotifRejectResp,
     22 : InitiatePDPCtxtActivationReq,
     23 : InitiatePDPCtxtActivationResp,
+    #
+    # Location mgmt
     32 : SendRouteingInfoforGPRSReq,
     33 : SendRouteingInfoforGPRSResp,
     34 : FailureReportReq,
     35 : FailureReportResp,
     36 : NoteMSGPRSPresentReq,
     37 : NoteMSGPRSPresentResp,
+    #
+    # Mobility mgmt
     48 : IdentificationReq,
     49 : IdentificationResp,
     50 : SGSNCtxtReq,
@@ -3735,6 +3898,10 @@ GTPDispatcherGGSN = {
     60 : ForwardSRNSCtxtAck,
     58 : ForwardSRNSCtxt,
     70 : RANInfoRelay,
+    61 : UERegistrationQueryReq,
+    62 : UERegistrationQueryResp,
+    #
+    # UE-related MBMS
     96 : MBMSNotifReq,
     97 : MBMSNotifResp,
     98 : MBMSNotifRejectReq,
@@ -3745,6 +3912,8 @@ GTPDispatcherGGSN = {
     103 : UpdateMBMSCtxtResp,
     104 : DeleteMBMSCtxtReq,
     105 : DeleteMBMSCtxtResp,
+    #
+    # Service-related MBMS
     112 : MBMSRegistrationReq,
     113 : MBMSRegistrationResp,
     114 : MBMSDeRegistrationReq,
@@ -3755,8 +3924,11 @@ GTPDispatcherGGSN = {
     119 : MBMSSessionStopResp,
     120 : MBMSSessionUpdateReq,
     121 : MBMSSessionUpdateResp,
+    #
+    # MS Info Change Reporting
     128 : MSInfoChangeNotifReq,
     129 : MSInfoChangeNotifResp,
+    #
     # GTP'
     4 : NodeAliveReq,
     5 : NodeAliveResp,
@@ -3841,4 +4013,20 @@ def parse_GTP_GGSN(buf):
         return None, ERR_GTP_BUF_INVALID
     else:
         return Msg, 0
+
+
+def parse_GTP(buf):
+    """parses the buffer `buf' for GTPv1-C message and returns a 2-tuple:
+    - GTPv1-C message structure, or None if parsing failed
+    - parsing error code, 0 if parsing succeeded, > 0 otherwise
+    
+    Eventually tries both SGSN-initiated and GGSN-initiated structures for message types:
+    18 : Update PDP Ctxt Req
+    19 : Update PDP Ctxt Resp
+    """
+    # this is the best we can do
+    Msg, Err = parse_GTP_SGSN(buf)
+    if Err == 4 and Msg and Msg[0]['Type'].get_val() in {18, 19}:
+        Msg, Err = parse_GTP_GGSN(buf)
+    return Msg, Err
 
