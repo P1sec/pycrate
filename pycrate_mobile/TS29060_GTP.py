@@ -1935,6 +1935,19 @@ class _GTPIE(Envelope):
                     ie._blauto = self['Data']._blauto
                 ie._name = 'Data'
                 self.replace(self['Data'], ie)
+    
+    def set_ie_class(self):
+        # this is to simply set the internal IE structure, if exists
+        typ = self.get_type()
+        try:
+            ie = GTPIELUT[typ]()
+        except KeyError:
+            pass
+        else:
+            if self['Data']._blauto and (not hasattr(ie, '_bl') or ie._bl is None):
+                ie._blauto = self['Data']._blauto
+            ie._name = 'Data'
+            self.replace(self['Data'], ie)
 
 
 class GTPIETV(_GTPIE):
@@ -2017,6 +2030,10 @@ class GTPIEs(Envelope):
     # this is to raise in case a mandatory IE is not found during the decoding
     VERIF_MAND = True
     
+    
+    def __init__(self, *args, **kwargs):
+        Envelope.__init__(self, *args, **kwargs)
+    
     def _from_char(self, char):
         if self.get_trans():
             return
@@ -2064,6 +2081,46 @@ class GTPIEs(Envelope):
                 break
             else:
                 self.append(ie)
+    
+    def add_ie(self, ie_type, val=None):
+        """add the IE of given type `ie_type` and sets the value `val` 
+        (raw bytes buffer or structured data) into its data part
+        """
+        found = False
+        for ie in self._content:
+            if ie.get_type() == ie_type:
+                found = True
+                break
+        if not found:
+            return
+        if ie.get_trans():
+            ie.set_trans(False)
+        if val is not None:
+            ie.set_val(val)
+        else:
+            ie.set_ie_class()
+    
+    def rem_ie(self, ie_type, ie_inst=0):
+        """remove the IE of given type `ie_type`
+        """
+        found = False
+        for ie in self._content:
+            if ie.get_type() == ie_type:
+                found = True
+                break
+        if not ie.get_trans():
+            ie.set_trans(True)
+    
+    def init_ies(self, wopt=False):
+        """initialize all IEs that are mandatory,
+        adding optional ones if `wopt` is set,
+        adding the private extension if `wpriv` is set
+        """
+        # clear the content first
+        for ie in self._content:
+            if ie.get_trans() and wopt:
+                ie.set_trans(False)
+                ie.set_ie_class()
 
 
 #------------------------------------------------------------------------------#
@@ -2343,6 +2400,9 @@ class GTPMsg(Envelope):
     """parent class for all GTPv1-C messages
     """
     
+    # MAND and OPT class attributes are generated when module is loaded
+    # each one is a set listing IE types that are mandatory, respectively optional
+    
     _GEN = (
         GTPHdr(),
         GTPIEs(hier=1)
@@ -2370,43 +2430,84 @@ class GTPMsg(Envelope):
 
 # Echo Request
 
+class EchoReqIEs(GTPIEs):
+    
+    MAND = set()
+    OPT  = {
+        GTPIEType.PrivateExt.value
+        }
+    
+    _GEN = (
+        GTPIETLV('PrivateExt', val={'Type': GTPIEType.PrivateExt.value}, trans=True),
+        )
+
+
 class EchoReq(GTPMsg):
     _GEN = (
-        GTPHdr(val={'Type': GTPType.EchoReq.value}),
-        GTPIEs(GEN=(
-            GTPIETLV('PrivateExt', val={'Type': GTPIEType.PrivateExt.value}, trans=True),
-            ), hier=1)
+        GTPHdr(val={'PT': 1, 'Type': GTPType.EchoReq.value}),
+        EchoReqIEs(hier=1),
         )
 
 
 # Echo Response
 
+class EchoRespIEs(GTPIEs):
+    
+    MAND = {
+        GTPIEType.Recovery.value
+        }
+    OPT  = {
+        GTPIEType.PrivateExt.value
+        }
+    
+    _GEN = (
+        GTPIETV('Recovery', val={'Type': GTPIEType.Recovery.value}, bl={'Data': 8}),
+        GTPIETLV('PrivateExt', val={'Type': GTPIEType.PrivateExt.value}, trans=True),
+        )
+
+
 class EchoResp(GTPMsg):
     _GEN = (
-        GTPHdr(val={'Type': GTPType.EchoResp.value}),
-        GTPIEs(GEN=(
-            GTPIETV('Recovery', val={'Type': GTPIEType.Recovery.value}, bl={'Data': 8}),
-            GTPIETLV('PrivateExt', val={'Type': GTPIEType.PrivateExt.value}, trans=True),
-            ), hier=1)
+        GTPHdr(val={'PT': 1, 'Type': GTPType.EchoResp.value}),
+        EchoRespIEs(hier=1),
         )
 
 
 # Version Not Supported
 
+class VersionNotSupportedIEs(GTPIEs):
+    
+    MAND = set()
+    OPT  = set()
+    
+    _GEN = ()
+
+
 class VersionNotSupported(GTPMsg):
     _GEN = (
-        GTPHdr(val={'Type': GTPType.VersionNotSupported.value}),
+        GTPHdr(val={'PT': 1, 'Type': GTPType.VersionNotSupported.value}),
+        VersionNotSupportedIEs(hier=1),
         )
 
 
 # Supported Extension Headers Notification
 
+class SupportedExtHeadersNotifIEs(GTPIEs):
+    
+    MAND = {
+        GTPIEType.ExtHeaderTypeList.value
+        }
+    OPT  = set()
+    
+    _GEN = (
+        GTPIETLV('ExtHeaderTypeList', val={'Type': GTPIEType.ExtHeaderTypeList.value}),
+        )
+
+
 class SupportedExtHeadersNotif(GTPMsg):
     _GEN = (
-        GTPHdr(val={'Type': GTPType.SupportedExtHeadersNotif.value}),
-        GTPIEs(GEN=(
-            GTPIETLV('ExtHeaderTypeList', val={'Type': GTPIEType.ExtHeaderTypeList.value}),
-            ), hier=1)
+        GTPHdr(val={'PT': 1, 'Type': GTPType.SupportedExtHeadersNotif.value}),
+        SupportedExtHeadersNotifIEs(hier=1),
         )
 
 
@@ -2417,343 +2518,674 @@ class SupportedExtHeadersNotif(GTPMsg):
 
 # Create PDP Context Request
 
+class CreatePDPCtxtReqIEs(GTPIEs):
+    
+    MAND = {
+        GTPIEType.TEIDDataI.value,
+        GTPIEType.NSAPI.value,
+        GTPIEType.GSNAddr.value,
+        GTPIEType.QoSProfile.value
+        }
+    OPT  = {
+        GTPIEType.IMSI.value,
+        GTPIEType.RAI.value,
+        GTPIEType.Recovery.value,
+        GTPIEType.SelectionMode.value,
+        GTPIEType.TEIDCP.value,
+        GTPIEType.NSAPI.value,
+        GTPIEType.ChargingCharacteristics.value,
+        GTPIEType.TraceReference.value,
+        GTPIEType.TraceType.value,
+        GTPIEType.EndUserAddr.value,
+        GTPIEType.APN.value,
+        GTPIEType.PCO.value,
+        GTPIEType.MSISDN.value,
+        GTPIEType.TFT.value,
+        GTPIEType.TriggerId.value,
+        GTPIEType.OMCIdentity.value,
+        GTPIEType.CommonFlags.value,
+        GTPIEType.APNRestriction.value,
+        GTPIEType.RATType.value,
+        GTPIEType.ULI.value,
+        GTPIEType.MSTimeZone.value,
+        GTPIEType.IMEI.value,
+        GTPIEType.CAMELChargingInfoContainer.value,
+        GTPIEType.AdditionalTraceInfo.value,
+        GTPIEType.CorrelationID.value,
+        GTPIEType.EvolvedAllocationRetentionPriorityI.value,
+        GTPIEType.ExtCommonFlags.value,
+        GTPIEType.UCI.value,
+        GTPIEType.AMBR.value,
+        GTPIEType.SignallingPriorityInd.value,
+        GTPIEType.CNOperatorSelectionEntity.value,
+        GTPIEType.MappedUEUsageType.value,
+        GTPIEType.UPFSelectionIndFlags.value,
+        GTPIEType.PrivateExt.value
+        }
+    
+    _GEN = (
+        GTPIETV('IMSI', val={'Type': GTPIEType.IMSI.value}, bl={'Data': 64}, trans=True),
+        GTPIETV('RAI', val={'Type': GTPIEType.RAI.value}, bl={'Data': 48}, trans=True),
+        GTPIETV('Recovery', val={'Type': GTPIEType.Recovery.value}, bl={'Data': 8}, trans=True),
+        GTPIETV('SelectionMode', val={'Type': GTPIEType.SelectionMode.value}, bl={'Data': 8}, trans=True),
+        GTPIETV('TEIDDataI', val={'Type': GTPIEType.TEIDDataI.value}, bl={'Data': 32}),
+        GTPIETV('TEIDCP', val={'Type': GTPIEType.TEIDCP.value}, bl={'Data': 32}, trans=True),
+        GTPIETV('NSAPI', val={'Type': GTPIEType.NSAPI.value}, bl={'Data': 8}),
+        GTPIETV('LinkedNSAPI', val={'Type': GTPIEType.NSAPI.value}, bl={'Data': 8}, trans=True),
+        GTPIETV('ChargingCharacteristics', val={'Type': GTPIEType.ChargingCharacteristics.value}, bl={'Data': 16}, trans=True),
+        GTPIETV('TraceReference', val={'Type': GTPIEType.TraceReference.value}, bl={'Data': 16}, trans=True),
+        GTPIETV('TraceType', val={'Type': GTPIEType.TraceType.value}, bl={'Data': 16}, trans=True),
+        GTPIETLV('EndUserAddr', val={'Type': GTPIEType.EndUserAddr.value}, trans=True),
+        GTPIETLV('APN', val={'Type': GTPIEType.APN.value}, trans=True),
+        GTPIETLV('PCO', val={'Type': GTPIEType.PCO.value}, trans=True),
+        GTPIETLV('SGSNAddrForSignalling', val={'Type': GTPIEType.GSNAddr.value}),
+        GTPIETLV('SGSNAddrForUserTraffic', val={'Type': GTPIEType.GSNAddr.value}),
+        GTPIETLV('MSISDN', val={'Type': GTPIEType.MSISDN.value}, trans=True),
+        GTPIETLV('QoSProfile', val={'Type': GTPIEType.QoSProfile.value}),
+        GTPIETLV('TFT', val={'Type': GTPIEType.TFT.value}, trans=True),
+        GTPIETLV('TriggerId', val={'Type': GTPIEType.TriggerId.value}, trans=True),
+        GTPIETLV('OMCIdentity', val={'Type': GTPIEType.OMCIdentity.value}, trans=True),
+        GTPIETLV('CommonFlags', val={'Type': GTPIEType.CommonFlags.value}, trans=True),
+        GTPIETLV('APNRestriction', val={'Type': GTPIEType.APNRestriction.value}, trans=True),
+        GTPIETLV('RATType', val={'Type': GTPIEType.RATType.value}, trans=True),
+        GTPIETLV('ULI', val={'Type': GTPIEType.ULI.value}, trans=True),
+        GTPIETLV('MSTimeZone', val={'Type': GTPIEType.MSTimeZone.value}, trans=True),
+        GTPIETLV('IMEI', val={'Type': GTPIEType.IMEI.value}, trans=True),
+        GTPIETLV('CAMELChargingInfoContainer', val={'Type': GTPIEType.CAMELChargingInfoContainer.value}, trans=True),
+        GTPIETLV('AdditionalTraceInfo', val={'Type': GTPIEType.AdditionalTraceInfo.value}, trans=True),
+        GTPIETLV('CorrelationID', val={'Type': GTPIEType.CorrelationID.value}, trans=True),
+        GTPIETLV('EvolvedAllocationRetentionPriorityI', val={'Type': GTPIEType.EvolvedAllocationRetentionPriorityI.value}, trans=True),
+        GTPIETLV('ExtCommonFlags', val={'Type': GTPIEType.ExtCommonFlags.value}, trans=True),
+        GTPIETLV('UCI', val={'Type': GTPIEType.UCI.value}, trans=True),
+        GTPIETLV('APNAMBR', val={'Type': GTPIEType.AMBR.value}, trans=True),
+        GTPIETLV('SignallingPriorityInd', val={'Type': GTPIEType.SignallingPriorityInd.value}, trans=True),
+        GTPIETLV('CNOperatorSelectionEntity', val={'Type': GTPIEType.CNOperatorSelectionEntity.value}, trans=True),
+        GTPIETLV('MappedUEUsageType', val={'Type': GTPIEType.MappedUEUsageType.value}, trans=True),
+        GTPIETLV('UPFSelectionIndFlags', val={'Type': GTPIEType.UPFSelectionIndFlags.value}, trans=True),
+        GTPIETLV('PrivateExt', val={'Type': GTPIEType.PrivateExt.value}, trans=True),
+        )
+
+
 class CreatePDPCtxtReq(GTPMsg):
     _GEN = (
-        GTPHdr(val={'Type': GTPType.CreatePDPCtxtReq.value}),
-        GTPIEs(GEN=(
-            GTPIETV('IMSI', val={'Type': GTPIEType.IMSI.value}, bl={'Data': 64}, trans=True),
-            GTPIETV('RAI', val={'Type': GTPIEType.RAI.value}, bl={'Data': 48}, trans=True),
-            GTPIETV('Recovery', val={'Type': GTPIEType.Recovery.value}, bl={'Data': 8}, trans=True),
-            GTPIETV('SelectionMode', val={'Type': GTPIEType.SelectionMode.value}, bl={'Data': 8}, trans=True),
-            GTPIETV('TEIDDataI', val={'Type': GTPIEType.TEIDDataI.value}, bl={'Data': 32}),
-            GTPIETV('TEIDCP', val={'Type': GTPIEType.TEIDCP.value}, bl={'Data': 32}, trans=True),
-            GTPIETV('NSAPI', val={'Type': GTPIEType.NSAPI.value}, bl={'Data': 8}),
-            GTPIETV('LinkedNSAPI', val={'Type': GTPIEType.NSAPI.value}, bl={'Data': 8}, trans=True),
-            GTPIETV('ChargingCharacteristics', val={'Type': GTPIEType.ChargingCharacteristics.value}, bl={'Data': 16}, trans=True),
-            GTPIETV('TraceReference', val={'Type': GTPIEType.TraceReference.value}, bl={'Data': 16}, trans=True),
-            GTPIETV('TraceType', val={'Type': GTPIEType.TraceType.value}, bl={'Data': 16}, trans=True),
-            GTPIETLV('EndUserAddr', val={'Type': GTPIEType.EndUserAddr.value}, trans=True),
-            GTPIETLV('APN', val={'Type': GTPIEType.APN.value}, trans=True),
-            GTPIETLV('PCO', val={'Type': GTPIEType.PCO.value}, trans=True),
-            GTPIETLV('SGSNAddrForSignalling', val={'Type': GTPIEType.GSNAddr.value}),
-            GTPIETLV('SGSNAddrForUserTraffic', val={'Type': GTPIEType.GSNAddr.value}),
-            GTPIETLV('MSISDN', val={'Type': GTPIEType.MSISDN.value}, trans=True),
-            GTPIETLV('QoSProfile', val={'Type': GTPIEType.QoSProfile.value}),
-            GTPIETLV('TFT', val={'Type': GTPIEType.TFT.value}, trans=True),
-            GTPIETLV('TriggerId', val={'Type': GTPIEType.TriggerId.value}, trans=True),
-            GTPIETLV('OMCIdentity', val={'Type': GTPIEType.OMCIdentity.value}, trans=True),
-            GTPIETLV('CommonFlags', val={'Type': GTPIEType.CommonFlags.value}, trans=True),
-            GTPIETLV('APNRestriction', val={'Type': GTPIEType.APNRestriction.value}, trans=True),
-            GTPIETLV('RATType', val={'Type': GTPIEType.RATType.value}, trans=True),
-            GTPIETLV('ULI', val={'Type': GTPIEType.ULI.value}, trans=True),
-            GTPIETLV('MSTimeZone', val={'Type': GTPIEType.MSTimeZone.value}, trans=True),
-            GTPIETLV('IMEI', val={'Type': GTPIEType.IMEI.value}, trans=True),
-            GTPIETLV('CAMELChargingInfoContainer', val={'Type': GTPIEType.CAMELChargingInfoContainer.value}, trans=True),
-            GTPIETLV('AdditionalTraceInfo', val={'Type': GTPIEType.AdditionalTraceInfo.value}, trans=True),
-            GTPIETLV('CorrelationID', val={'Type': GTPIEType.CorrelationID.value}, trans=True),
-            GTPIETLV('EvolvedAllocationRetentionPriorityI', val={'Type': GTPIEType.EvolvedAllocationRetentionPriorityI.value}, trans=True),
-            GTPIETLV('ExtCommonFlags', val={'Type': GTPIEType.ExtCommonFlags.value}, trans=True),
-            GTPIETLV('UCI', val={'Type': GTPIEType.UCI.value}, trans=True),
-            GTPIETLV('APNAMBR', val={'Type': GTPIEType.AMBR.value}, trans=True),
-            GTPIETLV('SignallingPriorityInd', val={'Type': GTPIEType.SignallingPriorityInd.value}, trans=True),
-            GTPIETLV('CNOperatorSelectionEntity', val={'Type': GTPIEType.CNOperatorSelectionEntity.value}, trans=True),
-            GTPIETLV('MappedUEUsageType', val={'Type': GTPIEType.MappedUEUsageType.value}, trans=True),
-            GTPIETLV('UPFSelectionIndFlags', val={'Type': GTPIEType.UPFSelectionIndFlags.value}, trans=True),
-            GTPIETLV('PrivateExt', val={'Type': GTPIEType.PrivateExt.value}, trans=True),
-            ), hier=1)
+        GTPHdr(val={'PT': 1, 'Type': GTPType.CreatePDPCtxtReq.value}),
+        CreatePDPCtxtReqIEs(hier=1),
         )
 
 
 # Create PDP Context Response
 
+class CreatePDPCtxtRespIEs(GTPIEs):
+    
+    MAND = {
+        GTPIEType.Cause.value
+        }
+    OPT  = {
+        GTPIEType.ReorderingRequired.value,
+        GTPIEType.Recovery.value,
+        GTPIEType.TEIDDataI.value,
+        GTPIEType.TEIDCP.value,
+        GTPIEType.NSAPI.value,
+        GTPIEType.ChargingID.value,
+        GTPIEType.EndUserAddr.value,
+        GTPIEType.PCO.value,
+        GTPIEType.GSNAddr.value,
+        GTPIEType.QoSProfile.value,
+        GTPIEType.CommonFlags.value,
+        GTPIEType.APNRestriction.value,
+        GTPIEType.MSInfoChangeReportingAction.value,
+        GTPIEType.BearerControlMode.value,
+        GTPIEType.EvolvedAllocationRetentionPriorityI.value,
+        GTPIEType.ExtCommonFlags.value,
+        GTPIEType.CSGInfoReportingAction.value,
+        GTPIEType.AMBR.value,
+        GTPIEType.GGSNBackOffTime.value,
+        GTPIEType.ExtCommonFlagsII.value,
+        GTPIEType.ChargingGatewayAddr.value,
+        GTPIEType.PrivateExt.value
+        }
+    
+    _GEN = (
+        GTPIETV('Cause', val={'Type': GTPIEType.Cause.value}, bl={'Data': 8}),
+        GTPIETV('ReorderingRequired', val={'Type': GTPIEType.ReorderingRequired.value}, bl={'Data': 8}, trans=True),
+        GTPIETV('Recovery', val={'Type': GTPIEType.Recovery.value}, bl={'Data': 8}, trans=True),
+        GTPIETV('TEIDDataI', val={'Type': GTPIEType.TEIDDataI.value}, bl={'Data': 32}, trans=True),
+        GTPIETV('TEIDCP', val={'Type': GTPIEType.TEIDCP.value}, bl={'Data': 32}, trans=True),
+        GTPIETV('NSAPI', val={'Type': GTPIEType.NSAPI.value}, bl={'Data': 8}, trans=True),
+        GTPIETV('ChargingID', val={'Type': GTPIEType.ChargingID.value}, bl={'Data': 32}, trans=True),
+        GTPIETLV('EndUserAddr', val={'Type': GTPIEType.EndUserAddr.value}, trans=True),
+        GTPIETLV('PCO', val={'Type': GTPIEType.PCO.value}, trans=True),
+        GTPIETLV('GGSNAddrForControlPlane', val={'Type': GTPIEType.GSNAddr.value}, trans=True),
+        GTPIETLV('GGSNAddrForUserTraffic', val={'Type': GTPIEType.GSNAddr.value}, trans=True),
+        GTPIETLV('AltGGSNAddrForControlPlane', val={'Type': GTPIEType.GSNAddr.value}, trans=True),
+        GTPIETLV('AltGGSNAddrForUserTraffic', val={'Type': GTPIEType.GSNAddr.value}, trans=True),
+        GTPIETLV('QoSProfile', val={'Type': GTPIEType.QoSProfile.value}, trans=True),
+        GTPIETLV('ChargingGatewayAddr', val={'Type': GTPIEType.ChargingGatewayAddr.value}, trans=True),
+        GTPIETLV('AltChargingGatewayAddr', val={'Type': GTPIEType.ChargingGatewayAddr.value}, trans=True),
+        GTPIETLV('CommonFlags', val={'Type': GTPIEType.CommonFlags.value}, trans=True),
+        GTPIETLV('APNRestriction', val={'Type': GTPIEType.APNRestriction.value}, trans=True),
+        GTPIETLV('MSInfoChangeReportingAction', val={'Type': GTPIEType.MSInfoChangeReportingAction.value}, trans=True),
+        GTPIETLV('BearerControlMode', val={'Type': GTPIEType.BearerControlMode.value}, trans=True),
+        GTPIETLV('EvolvedAllocationRetentionPriorityI', val={'Type': GTPIEType.EvolvedAllocationRetentionPriorityI.value}, trans=True),
+        GTPIETLV('ExtCommonFlags', val={'Type': GTPIEType.ExtCommonFlags.value}, trans=True),
+        GTPIETLV('CSGInfoReportingAction', val={'Type': GTPIEType.CSGInfoReportingAction.value}, trans=True),
+        GTPIETLV('APNAMBR', val={'Type': GTPIEType.AMBR.value}, trans=True),
+        GTPIETLV('GGSNBackOffTime', val={'Type': GTPIEType.GGSNBackOffTime.value}, trans=True),
+        GTPIETLV('ExtCommonFlagsII', val={'Type': GTPIEType.ExtCommonFlagsII.value}, trans=True),
+        GTPIETLV('PrivateExt', val={'Type': GTPIEType.PrivateExt.value}, trans=True),
+        )
+
+
 class CreatePDPCtxtResp(GTPMsg):
     _GEN = (
-        GTPHdr(val={'Type': GTPType.CreatePDPCtxtResp.value}),
-        GTPIEs(GEN=(
-            GTPIETV('Cause', val={'Type': GTPIEType.Cause.value}, bl={'Data': 8}),
-            GTPIETV('ReorderingRequired', val={'Type': GTPIEType.ReorderingRequired.value}, bl={'Data': 8}, trans=True),
-            GTPIETV('Recovery', val={'Type': GTPIEType.Recovery.value}, bl={'Data': 8}, trans=True),
-            GTPIETV('TEIDDataI', val={'Type': GTPIEType.TEIDDataI.value}, bl={'Data': 32}, trans=True),
-            GTPIETV('TEIDCP', val={'Type': GTPIEType.TEIDCP.value}, bl={'Data': 32}, trans=True),
-            GTPIETV('NSAPI', val={'Type': GTPIEType.NSAPI.value}, bl={'Data': 8}, trans=True),
-            GTPIETV('ChargingID', val={'Type': GTPIEType.ChargingID.value}, bl={'Data': 32}, trans=True),
-            GTPIETLV('EndUserAddr', val={'Type': GTPIEType.EndUserAddr.value}, trans=True),
-            GTPIETLV('PCO', val={'Type': GTPIEType.PCO.value}, trans=True),
-            GTPIETLV('GGSNAddrForControlPlane', val={'Type': GTPIEType.GSNAddr.value}, trans=True),
-            GTPIETLV('GGSNAddrForUserTraffic', val={'Type': GTPIEType.GSNAddr.value}, trans=True),
-            GTPIETLV('AltGGSNAddrForControlPlane', val={'Type': GTPIEType.GSNAddr.value}, trans=True),
-            GTPIETLV('AltGGSNAddrForUserTraffic', val={'Type': GTPIEType.GSNAddr.value}, trans=True),
-            GTPIETLV('QoSProfile', val={'Type': GTPIEType.QoSProfile.value}, trans=True),
-            GTPIETLV('ChargingGatewayAddr', val={'Type': GTPIEType.ChargingGatewayAddr.value}, trans=True),
-            GTPIETLV('AltChargingGatewayAddr', val={'Type': GTPIEType.ChargingGatewayAddr.value}, trans=True),
-            GTPIETLV('CommonFlags', val={'Type': GTPIEType.CommonFlags.value}, trans=True),
-            GTPIETLV('APNRestriction', val={'Type': GTPIEType.APNRestriction.value}, trans=True),
-            GTPIETLV('MSInfoChangeReportingAction', val={'Type': GTPIEType.MSInfoChangeReportingAction.value}, trans=True),
-            GTPIETLV('BearerControlMode', val={'Type': GTPIEType.BearerControlMode.value}, trans=True),
-            GTPIETLV('EvolvedAllocationRetentionPriorityI', val={'Type': GTPIEType.EvolvedAllocationRetentionPriorityI.value}, trans=True),
-            GTPIETLV('ExtCommonFlags', val={'Type': GTPIEType.ExtCommonFlags.value}, trans=True),
-            GTPIETLV('CSGInfoReportingAction', val={'Type': GTPIEType.CSGInfoReportingAction.value}, trans=True),
-            GTPIETLV('APNAMBR', val={'Type': GTPIEType.AMBR.value}, trans=True),
-            GTPIETLV('GGSNBackOffTime', val={'Type': GTPIEType.GGSNBackOffTime.value}, trans=True),
-            GTPIETLV('ExtCommonFlagsII', val={'Type': GTPIEType.ExtCommonFlagsII.value}, trans=True),
-            GTPIETLV('PrivateExt', val={'Type': GTPIEType.PrivateExt.value}, trans=True),
-            ), hier=1)
+        GTPHdr(val={'PT': 1, 'Type': GTPType.CreatePDPCtxtResp.value}),
+        CreatePDPCtxtRespIEs(hier=1),
         )
 
 
 # SGSN-Initiated Update PDP Context Request
 
+class UpdatePDPCtxtReqSGSNIEs(GTPIEs):
+    
+    MAND = {
+        GTPIEType.TEIDDataI.value,
+        GTPIEType.NSAPI.value,
+        GTPIEType.GSNAddr.value,
+        GTPIEType.QoSProfile.value
+        }
+    OPT  = {
+        GTPIEType.IMSI.value,
+        GTPIEType.RAI.value,
+        GTPIEType.Recovery.value,
+        GTPIEType.TEIDCP.value,
+        GTPIEType.TraceReference.value,
+        GTPIEType.TraceType.value,
+        GTPIEType.PCO.value,
+        GTPIEType.GSNAddr.value,
+        GTPIEType.TFT.value,
+        GTPIEType.TriggerId.value,
+        GTPIEType.OMCIdentity.value,
+        GTPIEType.CommonFlags.value,
+        GTPIEType.RATType.value,
+        GTPIEType.ULI.value,
+        GTPIEType.MSTimeZone.value,
+        GTPIEType.IMEI.value,
+        GTPIEType.AdditionalTraceInfo.value,
+        GTPIEType.DirectTunnelFlags.value,
+        GTPIEType.EvolvedAllocationRetentionPriorityI.value,
+        GTPIEType.ExtCommonFlags.value,
+        GTPIEType.UCI.value,
+        GTPIEType.AMBR.value,
+        GTPIEType.SignallingPriorityInd.value,
+        GTPIEType.CNOperatorSelectionEntity.value,
+        GTPIEType.PrivateExt.value
+        }
+    
+    _GEN = (
+        GTPIETV('IMSI', val={'Type': GTPIEType.IMSI.value}, bl={'Data': 64}, trans=True),
+        GTPIETV('RAI', val={'Type': GTPIEType.RAI.value}, bl={'Data': 48}, trans=True),
+        GTPIETV('Recovery', val={'Type': GTPIEType.Recovery.value}, bl={'Data': 8}, trans=True),
+        GTPIETV('TEIDDataI', val={'Type': GTPIEType.TEIDDataI.value}, bl={'Data': 32}),
+        GTPIETV('TEIDCP', val={'Type': GTPIEType.TEIDCP.value}, bl={'Data': 32}, trans=True),
+        GTPIETV('NSAPI', val={'Type': GTPIEType.NSAPI.value}, bl={'Data': 8}),
+        GTPIETV('TraceReference', val={'Type': GTPIEType.TraceReference.value}, bl={'Data': 16}, trans=True),
+        GTPIETV('TraceType', val={'Type': GTPIEType.TraceType.value}, bl={'Data': 16}, trans=True),
+        GTPIETLV('PCO', val={'Type': GTPIEType.PCO.value}, trans=True),
+        GTPIETLV('SGSNAddrForControlPlane', val={'Type': GTPIEType.GSNAddr.value}),
+        GTPIETLV('SGSNAddrForUserTraffic', val={'Type': GTPIEType.GSNAddr.value}),
+        GTPIETLV('AltSGSNAddrForControlPlane', val={'Type': GTPIEType.GSNAddr.value}, trans=True),
+        GTPIETLV('AltSGSNAddrForUserTraffic', val={'Type': GTPIEType.GSNAddr.value}, trans=True),
+        GTPIETLV('QoSProfile', val={'Type': GTPIEType.QoSProfile.value}),
+        GTPIETLV('TFT', val={'Type': GTPIEType.TFT.value}, trans=True),
+        GTPIETLV('TriggerId', val={'Type': GTPIEType.TriggerId.value}, trans=True),
+        GTPIETLV('OMCIdentity', val={'Type': GTPIEType.OMCIdentity.value}, trans=True),
+        GTPIETLV('CommonFlags', val={'Type': GTPIEType.CommonFlags.value}, trans=True),
+        GTPIETLV('RATType', val={'Type': GTPIEType.RATType.value}, trans=True),
+        GTPIETLV('ULI', val={'Type': GTPIEType.ULI.value}, trans=True),
+        GTPIETLV('MSTimeZone', val={'Type': GTPIEType.MSTimeZone.value}, trans=True),
+        GTPIETLV('AdditionalTraceInfo', val={'Type': GTPIEType.AdditionalTraceInfo.value}, trans=True),
+        GTPIETLV('DirectTunnelFlags', val={'Type': GTPIEType.DirectTunnelFlags.value}, trans=True),
+        GTPIETLV('EvolvedAllocationRetentionPriorityI', val={'Type': GTPIEType.EvolvedAllocationRetentionPriorityI.value}, trans=True),
+        GTPIETLV('ExtCommonFlags', val={'Type': GTPIEType.ExtCommonFlags.value}, trans=True),
+        GTPIETLV('UCI', val={'Type': GTPIEType.UCI.value}, trans=True),
+        GTPIETLV('APNAMBR', val={'Type': GTPIEType.AMBR.value}, trans=True),
+        GTPIETLV('SignallingPriorityInd', val={'Type': GTPIEType.SignallingPriorityInd.value}, trans=True),
+        GTPIETLV('CNOperatorSelectionEntity', val={'Type': GTPIEType.CNOperatorSelectionEntity.value}, trans=True),
+        GTPIETLV('IMEI', val={'Type': GTPIEType.IMEI.value}, trans=True),
+        GTPIETLV('PrivateExt', val={'Type': GTPIEType.PrivateExt.value}, trans=True),
+        )
+
+
 class UpdatePDPCtxtReqSGSN(GTPMsg):
     _GEN = (
-        GTPHdr(val={'Type': GTPType.UpdatePDPCtxtReq.value}),
-        GTPIEs(GEN=(
-            GTPIETV('IMSI', val={'Type': GTPIEType.IMSI.value}, bl={'Data': 64}, trans=True),
-            GTPIETV('RAI', val={'Type': GTPIEType.RAI.value}, bl={'Data': 48}, trans=True),
-            GTPIETV('Recovery', val={'Type': GTPIEType.Recovery.value}, bl={'Data': 8}, trans=True),
-            GTPIETV('TEIDDataI', val={'Type': GTPIEType.TEIDDataI.value}, bl={'Data': 32}),
-            GTPIETV('TEIDCP', val={'Type': GTPIEType.TEIDCP.value}, bl={'Data': 32}, trans=True),
-            GTPIETV('NSAPI', val={'Type': GTPIEType.NSAPI.value}, bl={'Data': 8}),
-            GTPIETV('TraceReference', val={'Type': GTPIEType.TraceReference.value}, bl={'Data': 16}, trans=True),
-            GTPIETV('TraceType', val={'Type': GTPIEType.TraceType.value}, bl={'Data': 16}, trans=True),
-            GTPIETLV('PCO', val={'Type': GTPIEType.PCO.value}, trans=True),
-            GTPIETLV('SGSNAddrForControlPlane', val={'Type': GTPIEType.GSNAddr.value}),
-            GTPIETLV('SGSNAddrForUserTraffic', val={'Type': GTPIEType.GSNAddr.value}),
-            GTPIETLV('AltSGSNAddrForControlPlane', val={'Type': GTPIEType.GSNAddr.value}, trans=True),
-            GTPIETLV('AltSGSNAddrForUserTraffic', val={'Type': GTPIEType.GSNAddr.value}, trans=True),
-            GTPIETLV('QoSProfile', val={'Type': GTPIEType.QoSProfile.value}),
-            GTPIETLV('TFT', val={'Type': GTPIEType.TFT.value}, trans=True),
-            GTPIETLV('TriggerId', val={'Type': GTPIEType.TriggerId.value}, trans=True),
-            GTPIETLV('OMCIdentity', val={'Type': GTPIEType.OMCIdentity.value}, trans=True),
-            GTPIETLV('CommonFlags', val={'Type': GTPIEType.CommonFlags.value}, trans=True),
-            GTPIETLV('RATType', val={'Type': GTPIEType.RATType.value}, trans=True),
-            GTPIETLV('ULI', val={'Type': GTPIEType.ULI.value}, trans=True),
-            GTPIETLV('MSTimeZone', val={'Type': GTPIEType.MSTimeZone.value}, trans=True),
-            GTPIETLV('AdditionalTraceInfo', val={'Type': GTPIEType.AdditionalTraceInfo.value}, trans=True),
-            GTPIETLV('DirectTunnelFlags', val={'Type': GTPIEType.DirectTunnelFlags.value}, trans=True),
-            GTPIETLV('EvolvedAllocationRetentionPriorityI', val={'Type': GTPIEType.EvolvedAllocationRetentionPriorityI.value}, trans=True),
-            GTPIETLV('ExtCommonFlags', val={'Type': GTPIEType.ExtCommonFlags.value}, trans=True),
-            GTPIETLV('UCI', val={'Type': GTPIEType.UCI.value}, trans=True),
-            GTPIETLV('APNAMBR', val={'Type': GTPIEType.AMBR.value}, trans=True),
-            GTPIETLV('SignallingPriorityInd', val={'Type': GTPIEType.SignallingPriorityInd.value}, trans=True),
-            GTPIETLV('CNOperatorSelectionEntity', val={'Type': GTPIEType.CNOperatorSelectionEntity.value}, trans=True),
-            GTPIETLV('IMEI', val={'Type': GTPIEType.IMEI.value}, trans=True),
-            GTPIETLV('PrivateExt', val={'Type': GTPIEType.PrivateExt.value}, trans=True),
-            ), hier=1)
+        GTPHdr(val={'PT': 1, 'Type': GTPType.UpdatePDPCtxtReq.value}),
+        UpdatePDPCtxtReqSGSNIEs(hier=1),
         )
 
 
 # GGSN-Initiated Update PDP Context Request
 
+class UpdatePDPCtxtReqGGSNIEs(GTPIEs):
+    
+    MAND = {
+        GTPIEType.NSAPI.value
+        }
+    OPT  = {
+        GTPIEType.IMSI.value,
+        GTPIEType.Recovery.value,
+        GTPIEType.EndUserAddr.value,
+        GTPIEType.PCO.value,
+        GTPIEType.QoSProfile.value,
+        GTPIEType.TFT.value,
+        GTPIEType.CommonFlags.value,
+        GTPIEType.APNRestriction.value,
+        GTPIEType.MSInfoChangeReportingAction.value,
+        GTPIEType.DirectTunnelFlags.value,
+        GTPIEType.BearerControlMode.value,
+        GTPIEType.EvolvedAllocationRetentionPriorityI.value,
+        GTPIEType.ExtCommonFlags.value,
+        GTPIEType.CSGInfoReportingAction.value,
+        GTPIEType.AMBR.value,
+        GTPIEType.PrivateExt.value
+        }
+    
+    _GEN = (
+        GTPIETV('IMSI', val={'Type': GTPIEType.IMSI.value}, bl={'Data': 64}, trans=True),
+        GTPIETV('Recovery', val={'Type': GTPIEType.Recovery.value}, bl={'Data': 8}, trans=True),
+        GTPIETV('NSAPI', val={'Type': GTPIEType.NSAPI.value}, bl={'Data': 8}),
+        GTPIETLV('EndUserAddr', val={'Type': GTPIEType.EndUserAddr.value}, trans=True),
+        GTPIETLV('PCO', val={'Type': GTPIEType.PCO.value}, trans=True),
+        GTPIETLV('QoSProfile', val={'Type': GTPIEType.QoSProfile.value}, trans=True),
+        GTPIETLV('TFT', val={'Type': GTPIEType.TFT.value}, trans=True),
+        GTPIETLV('CommonFlags', val={'Type': GTPIEType.CommonFlags.value}, trans=True),
+        GTPIETLV('APNRestriction', val={'Type': GTPIEType.APNRestriction.value}, trans=True),
+        GTPIETLV('MSInfoChangeReportingAction', val={'Type': GTPIEType.MSInfoChangeReportingAction.value}, trans=True),
+        GTPIETLV('DirectTunnelFlags', val={'Type': GTPIEType.DirectTunnelFlags.value}, trans=True),
+        GTPIETLV('BearerControlMode', val={'Type': GTPIEType.BearerControlMode.value}, trans=True),
+        GTPIETLV('EvolvedAllocationRetentionPriorityI', val={'Type': GTPIEType.EvolvedAllocationRetentionPriorityI.value}, trans=True),
+        GTPIETLV('ExtCommonFlags', val={'Type': GTPIEType.ExtCommonFlags.value}, trans=True),
+        GTPIETLV('CSGInfoReportingAction', val={'Type': GTPIEType.CSGInfoReportingAction.value}, trans=True),
+        GTPIETLV('APNAMBR', val={'Type': GTPIEType.AMBR.value}, trans=True),
+        GTPIETLV('PrivateExt', val={'Type': GTPIEType.PrivateExt.value}, trans=True),
+        )
+
+
 class UpdatePDPCtxtReqGGSN(GTPMsg):
     _GEN = (
-        GTPHdr(val={'Type': GTPType.UpdatePDPCtxtReq.value}),
-        GTPIEs(GEN=(
-            GTPIETV('IMSI', val={'Type': GTPIEType.IMSI.value}, bl={'Data': 64}, trans=True),
-            GTPIETV('Recovery', val={'Type': GTPIEType.Recovery.value}, bl={'Data': 8}, trans=True),
-            GTPIETV('NSAPI', val={'Type': GTPIEType.NSAPI.value}, bl={'Data': 8}),
-            GTPIETLV('EndUserAddr', val={'Type': GTPIEType.EndUserAddr.value}, trans=True),
-            GTPIETLV('PCO', val={'Type': GTPIEType.PCO.value}, trans=True),
-            GTPIETLV('QoSProfile', val={'Type': GTPIEType.QoSProfile.value}, trans=True),
-            GTPIETLV('TFT', val={'Type': GTPIEType.TFT.value}, trans=True),
-            GTPIETLV('CommonFlags', val={'Type': GTPIEType.CommonFlags.value}, trans=True),
-            GTPIETLV('APNRestriction', val={'Type': GTPIEType.APNRestriction.value}, trans=True),
-            GTPIETLV('MSInfoChangeReportingAction', val={'Type': GTPIEType.MSInfoChangeReportingAction.value}, trans=True),
-            GTPIETLV('DirectTunnelFlags', val={'Type': GTPIEType.DirectTunnelFlags.value}, trans=True),
-            GTPIETLV('BearerControlMode', val={'Type': GTPIEType.BearerControlMode.value}, trans=True),
-            GTPIETLV('EvolvedAllocationRetentionPriorityI', val={'Type': GTPIEType.EvolvedAllocationRetentionPriorityI.value}, trans=True),
-            GTPIETLV('ExtCommonFlags', val={'Type': GTPIEType.ExtCommonFlags.value}, trans=True),
-            GTPIETLV('CSGInfoReportingAction', val={'Type': GTPIEType.CSGInfoReportingAction.value}, trans=True),
-            GTPIETLV('APNAMBR', val={'Type': GTPIEType.AMBR.value}, trans=True),
-            GTPIETLV('PrivateExt', val={'Type': GTPIEType.PrivateExt.value}, trans=True),
-            ), hier=1)
+        GTPHdr(val={'PT': 1, 'Type': GTPType.UpdatePDPCtxtReq.value}),
+        UpdatePDPCtxtReqGGSNIEs(hier=1),
         )
 
 
 # Update PDP Context Response sent by a GGSN
 
+class UpdatePDPCtxtRespGGSNIEs(GTPIEs):
+    
+    MAND = {
+        GTPIEType.Cause.value
+        }
+    OPT  = {
+        GTPIEType.Recovery.value,
+        GTPIEType.TEIDDataI.value,
+        GTPIEType.TEIDCP.value,
+        GTPIEType.ChargingID.value,
+        GTPIEType.PCO.value,
+        GTPIEType.GSNAddr.value,
+        GTPIEType.QoSProfile.value,
+        GTPIEType.CommonFlags.value,
+        GTPIEType.APNRestriction.value,
+        GTPIEType.MSInfoChangeReportingAction.value,
+        GTPIEType.BearerControlMode.value,
+        GTPIEType.EvolvedAllocationRetentionPriorityI.value,
+        GTPIEType.CSGInfoReportingAction.value,
+        GTPIEType.AMBR.value,
+        GTPIEType.ChargingGatewayAddr.value,
+        GTPIEType.PrivateExt.value
+        }
+    
+    _GEN = (
+        GTPIETV('Cause', val={'Type': GTPIEType.Cause.value}, bl={'Data': 8}),
+        GTPIETV('Recovery', val={'Type': GTPIEType.Recovery.value}, bl={'Data': 8}, trans=True),
+        GTPIETV('TEIDDataI', val={'Type': GTPIEType.TEIDDataI.value}, bl={'Data': 32}, trans=True),
+        GTPIETV('TEIDCP', val={'Type': GTPIEType.TEIDCP.value}, bl={'Data': 32}, trans=True),
+        GTPIETV('ChargingID', val={'Type': GTPIEType.ChargingID.value}, bl={'Data': 32}, trans=True),
+        GTPIETLV('PCO', val={'Type': GTPIEType.PCO.value}, trans=True),
+        GTPIETLV('GGSNAddrForControlPlane', val={'Type': GTPIEType.GSNAddr.value}, trans=True),
+        GTPIETLV('GGSNAddrForUserTraffic', val={'Type': GTPIEType.GSNAddr.value}, trans=True),
+        GTPIETLV('AltGGSNAddrForControlPlane', val={'Type': GTPIEType.GSNAddr.value}, trans=True),
+        GTPIETLV('AltGGSNAddrForUserTraffic', val={'Type': GTPIEType.GSNAddr.value}, trans=True),
+        GTPIETLV('QoSProfile', val={'Type': GTPIEType.QoSProfile.value}, trans=True),
+        GTPIETLV('ChargingGatewayAddr', val={'Type': GTPIEType.ChargingGatewayAddr.value}, trans=True),
+        GTPIETLV('AltChargingGatewayAddr', val={'Type': GTPIEType.ChargingGatewayAddr.value}, trans=True),
+        GTPIETLV('CommonFlags', val={'Type': GTPIEType.CommonFlags.value}, trans=True),
+        GTPIETLV('APNRestriction', val={'Type': GTPIEType.APNRestriction.value}, trans=True),
+        GTPIETLV('BearerControlMode', val={'Type': GTPIEType.BearerControlMode.value}, trans=True),
+        GTPIETLV('MSInfoChangeReportingAction', val={'Type': GTPIEType.MSInfoChangeReportingAction.value}, trans=True),
+        GTPIETLV('EvolvedAllocationRetentionPriorityI', val={'Type': GTPIEType.EvolvedAllocationRetentionPriorityI.value}, trans=True),
+        GTPIETLV('CSGInfoReportingAction', val={'Type': GTPIEType.CSGInfoReportingAction.value}, trans=True),
+        GTPIETLV('APNAMBR', val={'Type': GTPIEType.AMBR.value}, trans=True),
+        GTPIETLV('PrivateExt', val={'Type': GTPIEType.PrivateExt.value}, trans=True),
+        )
+
+
 class UpdatePDPCtxtRespGGSN(GTPMsg):
     _GEN = (
-        GTPHdr(val={'Type': GTPType.UpdatePDPCtxtResp.value}),
-        GTPIEs(GEN=(
-            GTPIETV('Cause', val={'Type': GTPIEType.Cause.value}, bl={'Data': 8}),
-            GTPIETV('Recovery', val={'Type': GTPIEType.Recovery.value}, bl={'Data': 8}, trans=True),
-            GTPIETV('TEIDDataI', val={'Type': GTPIEType.TEIDDataI.value}, bl={'Data': 32}, trans=True),
-            GTPIETV('TEIDCP', val={'Type': GTPIEType.TEIDCP.value}, bl={'Data': 32}, trans=True),
-            GTPIETV('ChargingID', val={'Type': GTPIEType.ChargingID.value}, bl={'Data': 32}, trans=True),
-            GTPIETLV('PCO', val={'Type': GTPIEType.PCO.value}, trans=True),
-            GTPIETLV('GGSNAddrForControlPlane', val={'Type': GTPIEType.GSNAddr.value}, trans=True),
-            GTPIETLV('GGSNAddrForUserTraffic', val={'Type': GTPIEType.GSNAddr.value}, trans=True),
-            GTPIETLV('AltGGSNAddrForControlPlane', val={'Type': GTPIEType.GSNAddr.value}, trans=True),
-            GTPIETLV('AltGGSNAddrForUserTraffic', val={'Type': GTPIEType.GSNAddr.value}, trans=True),
-            GTPIETLV('QoSProfile', val={'Type': GTPIEType.QoSProfile.value}, trans=True),
-            GTPIETLV('ChargingGatewayAddr', val={'Type': GTPIEType.ChargingGatewayAddr.value}, trans=True),
-            GTPIETLV('AltChargingGatewayAddr', val={'Type': GTPIEType.ChargingGatewayAddr.value}, trans=True),
-            GTPIETLV('CommonFlags', val={'Type': GTPIEType.CommonFlags.value}, trans=True),
-            GTPIETLV('APNRestriction', val={'Type': GTPIEType.APNRestriction.value}, trans=True),
-            GTPIETLV('BearerControlMode', val={'Type': GTPIEType.BearerControlMode.value}, trans=True),
-            GTPIETLV('MSInfoChangeReportingAction', val={'Type': GTPIEType.MSInfoChangeReportingAction.value}, trans=True),
-            GTPIETLV('EvolvedAllocationRetentionPriorityI', val={'Type': GTPIEType.EvolvedAllocationRetentionPriorityI.value}, trans=True),
-            GTPIETLV('CSGInfoReportingAction', val={'Type': GTPIEType.CSGInfoReportingAction.value}, trans=True),
-            GTPIETLV('APNAMBR', val={'Type': GTPIEType.AMBR.value}, trans=True),
-            GTPIETLV('PrivateExt', val={'Type': GTPIEType.PrivateExt.value}, trans=True),
-            ), hier=1)
+        GTPHdr(val={'PT': 1, 'Type': GTPType.UpdatePDPCtxtResp.value}),
+        UpdatePDPCtxtRespGGSNIEs(hier=1),
         )
 
 
 # Update PDP Context Response sent by a SGSN
 
+class UpdatePDPCtxtRespSGSNIEs(GTPIEs):
+    
+    MAND = {
+        GTPIEType.Cause.value
+        }
+    OPT  = {
+        GTPIEType.Recovery.value,
+        GTPIEType.TEIDDataI.value,
+        GTPIEType.PCO.value,
+        GTPIEType.GSNAddr.value,
+        GTPIEType.QoSProfile.value,
+        GTPIEType.ULI.value,
+        GTPIEType.MSTimeZone.value,
+        GTPIEType.DirectTunnelFlags.value,
+        GTPIEType.EvolvedAllocationRetentionPriorityI.value,
+        GTPIEType.AMBR.value,
+        GTPIEType.PrivateExt.value
+        }
+    
+    _GEN = (
+        GTPIETV('Cause', val={'Type': GTPIEType.Cause.value}, bl={'Data': 8}),
+        GTPIETV('Recovery', val={'Type': GTPIEType.Recovery.value}, bl={'Data': 8}, trans=True),
+        GTPIETV('TEIDDataI', val={'Type': GTPIEType.TEIDDataI.value}, bl={'Data': 32}, trans=True),
+        GTPIETLV('PCO', val={'Type': GTPIEType.PCO.value}, trans=True),
+        GTPIETLV('SGSNAddrForUserTraffic', val={'Type': GTPIEType.GSNAddr.value}, trans=True),
+        GTPIETLV('QoSProfile', val={'Type': GTPIEType.QoSProfile.value}, trans=True),
+        GTPIETLV('ULI', val={'Type': GTPIEType.ULI.value}, trans=True),
+        GTPIETLV('MSTimeZone', val={'Type': GTPIEType.MSTimeZone.value}, trans=True),
+        GTPIETLV('DirectTunnelFlags', val={'Type': GTPIEType.DirectTunnelFlags.value}, trans=True),
+        GTPIETLV('EvolvedAllocationRetentionPriorityI', val={'Type': GTPIEType.EvolvedAllocationRetentionPriorityI.value}, trans=True),
+        GTPIETLV('APNAMBR', val={'Type': GTPIEType.AMBR.value}, trans=True),
+        GTPIETLV('PrivateExt', val={'Type': GTPIEType.PrivateExt.value}, trans=True),
+        )
+
+
 class UpdatePDPCtxtRespSGSN(GTPMsg):
     _GEN = (
-        GTPHdr(val={'Type': GTPType.UpdatePDPCtxtResp.value}),
-        GTPIEs(GEN=(
-            GTPIETV('Cause', val={'Type': GTPIEType.Cause.value}, bl={'Data': 8}),
-            GTPIETV('Recovery', val={'Type': GTPIEType.Recovery.value}, bl={'Data': 8}, trans=True),
-            GTPIETV('TEIDDataI', val={'Type': GTPIEType.TEIDDataI.value}, bl={'Data': 32}, trans=True),
-            GTPIETLV('PCO', val={'Type': GTPIEType.PCO.value}, trans=True),
-            GTPIETLV('SGSNAddrForUserTraffic', val={'Type': GTPIEType.GSNAddr.value}, trans=True),
-            GTPIETLV('QoSProfile', val={'Type': GTPIEType.QoSProfile.value}, trans=True),
-            GTPIETLV('ULI', val={'Type': GTPIEType.ULI.value}, trans=True),
-            GTPIETLV('MSTimeZone', val={'Type': GTPIEType.MSTimeZone.value}, trans=True),
-            GTPIETLV('DirectTunnelFlags', val={'Type': GTPIEType.DirectTunnelFlags.value}, trans=True),
-            GTPIETLV('EvolvedAllocationRetentionPriorityI', val={'Type': GTPIEType.EvolvedAllocationRetentionPriorityI.value}, trans=True),
-            GTPIETLV('APNAMBR', val={'Type': GTPIEType.AMBR.value}, trans=True),
-            GTPIETLV('PrivateExt', val={'Type': GTPIEType.PrivateExt.value}, trans=True),
-            ), hier=1)
+        GTPHdr(val={'PT': 1, 'Type': GTPType.UpdatePDPCtxtResp.value}),
+        UpdatePDPCtxtRespSGSNIEs(hier=1),
         )
 
 
 # Delete PDP Context Request
 
+class DeletePDPCtxtReqIEs(GTPIEs):
+    
+    MAND = {
+        GTPIEType.NSAPI.value
+        }
+    OPT  = {
+        GTPIEType.Cause.value,
+        GTPIEType.TeardownInd.value,
+        GTPIEType.PCO.value,
+        GTPIEType.ULI.value,
+        GTPIEType.MSTimeZone.value,
+        GTPIEType.ExtCommonFlags.value,
+        GTPIEType.ULITimestamp.value,
+        GTPIEType.PrivateExt.value
+        }
+    
+    _GEN = (
+        GTPIETV('Cause', val={'Type': GTPIEType.Cause.value}, bl={'Data': 8}, trans=True),
+        GTPIETV('TeardownInd', val={'Type': GTPIEType.TeardownInd.value}, bl={'Data': 8}, trans=True),
+        GTPIETV('NSAPI', val={'Type': GTPIEType.NSAPI.value}, bl={'Data': 8}),
+        GTPIETLV('PCO', val={'Type': GTPIEType.PCO.value}, trans=True),
+        GTPIETLV('ULI', val={'Type': GTPIEType.ULI.value}, trans=True),
+        GTPIETLV('MSTimeZone', val={'Type': GTPIEType.MSTimeZone.value}, trans=True),
+        GTPIETLV('ExtCommonFlags', val={'Type': GTPIEType.ExtCommonFlags.value}, trans=True),
+        GTPIETLV('ULITimestamp', val={'Type': GTPIEType.ULITimestamp.value}, trans=True),
+        GTPIETLV('PrivateExt', val={'Type': GTPIEType.PrivateExt.value}, trans=True),
+        )
+
+
 class DeletePDPCtxtReq(GTPMsg):
     _GEN = (
-        GTPHdr(val={'Type': GTPType.DeletePDPCtxtReq.value}),
-        GTPIEs(GEN=(
-            GTPIETV('Cause', val={'Type': GTPIEType.Cause.value}, bl={'Data': 8}, trans=True),
-            GTPIETV('TeardownInd', val={'Type': GTPIEType.TeardownInd.value}, bl={'Data': 8}, trans=True),
-            GTPIETV('NSAPI', val={'Type': GTPIEType.NSAPI.value}, bl={'Data': 8}),
-            GTPIETLV('PCO', val={'Type': GTPIEType.PCO.value}, trans=True),
-            GTPIETLV('ULI', val={'Type': GTPIEType.ULI.value}, trans=True),
-            GTPIETLV('MSTimeZone', val={'Type': GTPIEType.MSTimeZone.value}, trans=True),
-            GTPIETLV('ExtCommonFlags', val={'Type': GTPIEType.ExtCommonFlags.value}, trans=True),
-            GTPIETLV('ULITimestamp', val={'Type': GTPIEType.ULITimestamp.value}, trans=True),
-            GTPIETLV('PrivateExt', val={'Type': GTPIEType.PrivateExt.value}, trans=True),
-            ), hier=1)
+        GTPHdr(val={'PT': 1, 'Type': GTPType.DeletePDPCtxtReq.value}),
+        DeletePDPCtxtReqIEs(hier=1),
         )
 
 
 # Delete PDP Context Response
 
+class DeletePDPCtxtRespIEs(GTPIEs):
+    
+    MAND = {
+        GTPIEType.Cause.value
+        }
+    OPT  = {
+        GTPIEType.PCO.value,
+        GTPIEType.ULI.value,
+        GTPIEType.MSTimeZone.value,
+        GTPIEType.ULITimestamp.value,
+        GTPIEType.PrivateExt.value
+        }
+    
+    _GEN = (
+        GTPIETV('Cause', val={'Type': GTPIEType.Cause.value}, bl={'Data': 8}),
+        GTPIETLV('PCO', val={'Type': GTPIEType.PCO.value}, trans=True),
+        GTPIETLV('ULI', val={'Type': GTPIEType.ULI.value}, trans=True),
+        GTPIETLV('MSTimeZone', val={'Type': GTPIEType.MSTimeZone.value}, trans=True),
+        GTPIETLV('ULITimestamp', val={'Type': GTPIEType.ULITimestamp.value}, trans=True),
+        GTPIETLV('PrivateExt', val={'Type': GTPIEType.PrivateExt.value}, trans=True),
+        )
+
+
 class DeletePDPCtxtResp(GTPMsg):
     _GEN = (
-        GTPHdr(val={'Type': GTPType.DeletePDPCtxtResp.value}),
-        GTPIEs(GEN=(
-            GTPIETV('Cause', val={'Type': GTPIEType.Cause.value}, bl={'Data': 8}),
-            GTPIETLV('PCO', val={'Type': GTPIEType.PCO.value}, trans=True),
-            GTPIETLV('ULI', val={'Type': GTPIEType.ULI.value}, trans=True),
-            GTPIETLV('MSTimeZone', val={'Type': GTPIEType.MSTimeZone.value}, trans=True),
-            GTPIETLV('ULITimestamp', val={'Type': GTPIEType.ULITimestamp.value}, trans=True),
-            GTPIETLV('PrivateExt', val={'Type': GTPIEType.PrivateExt.value}, trans=True),
-            ), hier=1)
+        GTPHdr(val={'PT': 1, 'Type': GTPType.DeletePDPCtxtResp.value}),
+        DeletePDPCtxtRespIEs(hier=1),
         )
 
 
 # Error Indication
 
+class ErrorIndIEs(GTPIEs):
+    
+    MAND = {
+        GTPIEType.TEIDDataI.value,
+        GTPIEType.GSNAddr.value
+        }
+    OPT  = {
+        GTPIEType.PrivateExt.value
+        }
+    
+    _GEN = (
+        GTPIETV('TEIDDataI', val={'Type': GTPIEType.TEIDDataI.value}, bl={'Data': 32}),
+        GTPIETLV('GTPUPeerAddr', val={'Type': GTPIEType.GSNAddr.value}),
+        GTPIETLV('PrivateExt', val={'Type': GTPIEType.PrivateExt.value}, trans=True),
+        )
+
+
 class ErrorInd(GTPMsg):
     _GEN = (
-        GTPHdr(val={'Type': GTPType.ErrorInd.value}),
-        GTPIEs(GEN=(
-            GTPIETV('TEIDDataI', val={'Type': GTPIEType.TEIDDataI.value}, bl={'Data': 32}),
-            GTPIETLV('GTPUPeerAddr', val={'Type': GTPIEType.GSNAddr.value}),
-            GTPIETLV('PrivateExt', val={'Type': GTPIEType.PrivateExt.value}, trans=True),
-            ), hier=1),
+        GTPHdr(val={'PT': 1, 'Type': GTPType.ErrorInd.value}),
+        ErrorIndIEs(hier=1),
         )
 
 
 # PDU Notification Request
 
+class PDUNotifReqIEs(GTPIEs):
+    
+    MAND = {
+        GTPIEType.IMSI.value,
+        GTPIEType.TEIDCP.value,
+        GTPIEType.EndUserAddr.value,
+        GTPIEType.APN.value,
+        GTPIEType.GSNAddr.value
+        }
+    OPT  = {
+        GTPIEType.PCO.value,
+        GTPIEType.PrivateExt.value
+        }
+    
+    _GEN = (
+        GTPIETV('IMSI', val={'Type': GTPIEType.IMSI.value}, bl={'Data': 64}),
+        GTPIETV('TEIDCP', val={'Type': GTPIEType.TEIDCP.value}, bl={'Data': 32}),
+        GTPIETLV('EndUserAddr', val={'Type': GTPIEType.EndUserAddr.value}),
+        GTPIETLV('APN', val={'Type': GTPIEType.APN.value}),
+        GTPIETLV('PCO', val={'Type': GTPIEType.PCO.value}, trans=True),
+        GTPIETLV('GGSNAddrForControlPlane', val={'Type': GTPIEType.GSNAddr.value}),
+        GTPIETLV('PrivateExt', val={'Type': GTPIEType.PrivateExt.value}, trans=True),
+        )
+
+
 class PDUNotifReq(GTPMsg):
     _GEN = (
-        GTPHdr(val={'Type': GTPType.PDUNotifReq.value}),
-        GTPIEs(GEN=(
-            GTPIETV('IMSI', val={'Type': GTPIEType.IMSI.value}, bl={'Data': 64}),
-            GTPIETV('TEIDCP', val={'Type': GTPIEType.TEIDCP.value}, bl={'Data': 32}),
-            GTPIETLV('EndUserAddr', val={'Type': GTPIEType.EndUserAddr.value}),
-            GTPIETLV('APN', val={'Type': GTPIEType.APN.value}),
-            GTPIETLV('PCO', val={'Type': GTPIEType.PCO.value}, trans=True),
-            GTPIETLV('GGSNAddrForControlPlane', val={'Type': GTPIEType.GSNAddr.value}),
-            GTPIETLV('PrivateExt', val={'Type': GTPIEType.PrivateExt.value}, trans=True),
-            ), hier=1)
+        GTPHdr(val={'PT': 1, 'Type': GTPType.PDUNotifReq.value}),
+        PDUNotifReqIEs(hier=1),
         )
 
 
 # PDU Notification Response
 
+class PDUNotifRespIEs(GTPIEs):
+    
+    MAND = {
+        GTPIEType.Cause.value
+        }
+    OPT  = {
+        GTPIEType.PrivateExt.value
+        }
+    
+    _GEN = (
+        GTPIETV('Cause', val={'Type': GTPIEType.Cause.value}, bl={'Data': 8}),
+        GTPIETLV('PrivateExt', val={'Type': GTPIEType.PrivateExt.value}, trans=True),
+        )
+
+
 class PDUNotifResp(GTPMsg):
     _GEN = (
-        GTPHdr(val={'Type': GTPType.PDUNotifResp.value}),
-        GTPIEs(GEN=(
-            GTPIETV('Cause', val={'Type': GTPIEType.Cause.value}, bl={'Data': 8}),
-            GTPIETLV('PrivateExt', val={'Type': GTPIEType.PrivateExt.value}, trans=True),
-            ), hier=1)
+        GTPHdr(val={'PT': 1, 'Type': GTPType.PDUNotifResp.value}),
+        PDUNotifRespIEs(hier=1),
         )
 
 
 # PDU Notification Reject Request
 
+class PDUNotifRejectReqIEs(GTPIEs):
+    
+    MAND = {
+        GTPIEType.Cause.value,
+        GTPIEType.TEIDCP.value,
+        GTPIEType.EndUserAddr.value,
+        GTPIEType.APN.value
+        }
+    OPT  = {
+        GTPIEType.PCO.value,
+        GTPIEType.PrivateExt.value
+        }
+    
+    _GEN = (
+        GTPIETV('Cause', val={'Type': GTPIEType.Cause.value}, bl={'Data': 8}),
+        GTPIETV('TEIDCP', val={'Type': GTPIEType.TEIDCP.value}, bl={'Data': 32}),
+        GTPIETLV('EndUserAddr', val={'Type': GTPIEType.EndUserAddr.value}),
+        GTPIETLV('APN', val={'Type': GTPIEType.APN.value}),
+        GTPIETLV('PCO', val={'Type': GTPIEType.PCO.value}, trans=True),
+        GTPIETLV('PrivateExt', val={'Type': GTPIEType.PrivateExt.value}, trans=True),
+        )
+
+
 class PDUNotifRejectReq(GTPMsg):
     _GEN = (
-        GTPHdr(val={'Type': GTPType.PDUNotifRejectReq.value}),
-        GTPIEs(GEN=(
-            GTPIETV('Cause', val={'Type': GTPIEType.Cause.value}, bl={'Data': 8}),
-            GTPIETV('TEIDCP', val={'Type': GTPIEType.TEIDCP.value}, bl={'Data': 32}),
-            GTPIETLV('EndUserAddr', val={'Type': GTPIEType.EndUserAddr.value}),
-            GTPIETLV('APN', val={'Type': GTPIEType.APN.value}),
-            GTPIETLV('PCO', val={'Type': GTPIEType.PCO.value}, trans=True),
-            GTPIETLV('PrivateExt', val={'Type': GTPIEType.PrivateExt.value}, trans=True),
-            ), hier=1)
+        GTPHdr(val={'PT': 1, 'Type': GTPType.PDUNotifRejectReq.value}),
+        PDUNotifRejectReqIEs(hier=1),
         )
 
 
 # PDU Notification Reject Response
 
+class PDUNotifRejectRespIEs(GTPIEs):
+    
+    MAND = {
+        GTPIEType.Cause.value
+        }
+    OPT  = {
+        GTPIEType.PrivateExt.value
+        }
+    
+    _GEN = (
+        GTPIETV('Cause', val={'Type': GTPIEType.Cause.value}, bl={'Data': 8}),
+        GTPIETLV('PrivateExt', val={'Type': GTPIEType.PrivateExt.value}, trans=True),
+        )
+
+
 class PDUNotifRejectResp(GTPMsg):
     _GEN = (
-        GTPHdr(val={'Type': GTPType.PDUNotifRejectResp.value}),
-        GTPIEs(GEN=(
-            GTPIETV('Cause', val={'Type': GTPIEType.Cause.value}, bl={'Data': 8}),
-            GTPIETLV('PrivateExt', val={'Type': GTPIEType.PrivateExt.value}, trans=True),
-            ), hier=1)
+        GTPHdr(val={'PT': 1, 'Type': GTPType.PDUNotifRejectResp.value}),
+        PDUNotifRejectRespIEs(hier=1),
         )
 
 
 # Initiate PDP Context Activation Request
 
+class InitiatePDPCtxtActivationReqIEs(GTPIEs):
+    
+    MAND = {
+        GTPIEType.NSAPI.value,
+        GTPIEType.QoSProfile.value,
+        GTPIEType.CorrelationID.value
+        }
+    OPT  = {
+        GTPIEType.PCO.value,
+        GTPIEType.TFT.value,
+        GTPIEType.EvolvedAllocationRetentionPriorityI.value,
+        GTPIEType.PrivateExt.value
+        }
+    
+    _GEN = (
+        GTPIETV('LinkedNSAPI', val={'Type': GTPIEType.NSAPI.value}, bl={'Data': 8}),
+        GTPIETLV('PCO', val={'Type': GTPIEType.PCO.value}, trans=True),
+        GTPIETLV('QoSProfile', val={'Type': GTPIEType.QoSProfile.value}),
+        GTPIETLV('TFT', val={'Type': GTPIEType.TFT.value}, trans=True),
+        GTPIETLV('CorrelationID', val={'Type': GTPIEType.CorrelationID.value}),
+        GTPIETLV('EvolvedAllocationRetentionPriorityI', val={'Type': GTPIEType.EvolvedAllocationRetentionPriorityI.value}, trans=True),
+        GTPIETLV('PrivateExt', val={'Type': GTPIEType.PrivateExt.value}, trans=True),
+        )
+
+
 class InitiatePDPCtxtActivationReq(GTPMsg):
     _GEN = (
-        GTPHdr(val={'Type': GTPType.InitiatePDPCtxtActivationReq.value}),
-        GTPIEs(GEN=(
-            GTPIETV('LinkedNSAPI', val={'Type': GTPIEType.NSAPI.value}, bl={'Data': 8}),
-            GTPIETLV('PCO', val={'Type': GTPIEType.PCO.value}, trans=True),
-            GTPIETLV('QoSProfile', val={'Type': GTPIEType.QoSProfile.value}),
-            GTPIETLV('TFT', val={'Type': GTPIEType.TFT.value}, trans=True),
-            GTPIETLV('CorrelationID', val={'Type': GTPIEType.CorrelationID.value}),
-            GTPIETLV('EvolvedAllocationRetentionPriorityI', val={'Type': GTPIEType.EvolvedAllocationRetentionPriorityI.value}, trans=True),
-            GTPIETLV('PrivateExt', val={'Type': GTPIEType.PrivateExt.value}, trans=True),
-            ), hier=1)
+        GTPHdr(val={'PT': 1, 'Type': GTPType.InitiatePDPCtxtActivationReq.value}),
+        InitiatePDPCtxtActivationReqIEs(hier=1),
         )
 
 
 # Initiate PDP Context Activation Response
 
+class InitiatePDPCtxtActivationRespIEs(GTPIEs):
+    
+    MAND = {
+        GTPIEType.Cause.value
+        }
+    OPT  = {
+        GTPIEType.PCO.value,
+        GTPIEType.PrivateExt.value
+        }
+    
+    _GEN = (
+        GTPIETV('Cause', val={'Type': GTPIEType.Cause.value}, bl={'Data': 8}),
+        GTPIETLV('PCO', val={'Type': GTPIEType.PCO.value}, trans=True),
+        GTPIETLV('PrivateExt', val={'Type': GTPIEType.PrivateExt.value}, trans=True),
+        )
+
+
 class InitiatePDPCtxtActivationResp(GTPMsg):
     _GEN = (
-        GTPHdr(val={'Type': GTPType.InitiatePDPCtxtActivationResp.value}),
-        GTPIEs(GEN=(
-            GTPIETV('Cause', val={'Type': GTPIEType.Cause.value}, bl={'Data': 8}),
-            GTPIETLV('PCO', val={'Type': GTPIEType.PCO.value}, trans=True),
-            GTPIETLV('PrivateExt', val={'Type': GTPIEType.PrivateExt.value}, trans=True),
-            ), hier=1)
+        GTPHdr(val={'PT': 1, 'Type': GTPType.InitiatePDPCtxtActivationResp.value}),
+        InitiatePDPCtxtActivationRespIEs(hier=1),
         )
 
 
@@ -2765,79 +3197,157 @@ class InitiatePDPCtxtActivationResp(GTPMsg):
 
 # Send Routeing Information for GPRS Request
 
+class SendRouteingInfoforGPRSReqIEs(GTPIEs):
+    
+    MAND = {
+        GTPIEType.IMSI.value
+        }
+    OPT  = {
+        GTPIEType.PrivateExt.value
+        }
+    
+    _GEN = (
+        GTPIETV('IMSI', val={'Type': GTPIEType.IMSI.value}, bl={'Data': 64}),
+        GTPIETLV('PrivateExt', val={'Type': GTPIEType.PrivateExt.value}, trans=True),
+        )
+
+
 class SendRouteingInfoforGPRSReq(GTPMsg):
     _GEN = (
-        GTPHdr(val={'Type': GTPType.SendRouteingInfoforGPRSReq.value}),
-        GTPIEs(GEN=(
-            GTPIETV('IMSI', val={'Type': GTPIEType.IMSI.value}, bl={'Data': 64}),
-            GTPIETLV('PrivateExt', val={'Type': GTPIEType.PrivateExt.value}, trans=True),
-            ), hier=1)
+        GTPHdr(val={'PT': 1, 'Type': GTPType.SendRouteingInfoforGPRSReq.value}),
+        SendRouteingInfoforGPRSReqIEs(hier=1),
         )
 
 
 # Send Routeing Information for GPRS Response
 
+class SendRouteingInfoforGPRSRespIEs(GTPIEs):
+    
+    MAND = {
+        GTPIEType.Cause.value,
+        GTPIEType.IMSI.value
+        }
+    OPT  = {
+        GTPIEType.MAPCause.value,
+        GTPIEType.MSNotReachableReason.value,
+        GTPIEType.GSNAddr.value,
+        GTPIEType.PrivateExt.value
+        }
+    
+    _GEN = (
+        GTPIETV('Cause', val={'Type': GTPIEType.Cause.value}, bl={'Data': 8}),
+        GTPIETV('IMSI', val={'Type': GTPIEType.IMSI.value}, bl={'Data': 64}),
+        GTPIETV('MAPCause', val={'Type': GTPIEType.MAPCause.value}, bl={'Data': 8}, trans=True),
+        GTPIETV('MSNotReachableReason', val={'Type': GTPIEType.MSNotReachableReason.value}, bl={'Data': 8}, trans=True),
+        GTPIETLV('GSNAddr', val={'Type': GTPIEType.GSNAddr.value}, trans=True),
+        GTPIETLV('PrivateExt', val={'Type': GTPIEType.PrivateExt.value}, trans=True),
+        )
+
+
 class SendRouteingInfoforGPRSResp(GTPMsg):
     _GEN = (
-        GTPHdr(val={'Type': GTPType.SendRouteingInfoforGPRSResp.value}),
-        GTPIEs(GEN=(
-            GTPIETV('Cause', val={'Type': GTPIEType.Cause.value}, bl={'Data': 8}),
-            GTPIETV('IMSI', val={'Type': GTPIEType.IMSI.value}, bl={'Data': 64}),
-            GTPIETV('MAPCause', val={'Type': GTPIEType.MAPCause.value}, bl={'Data': 8}, trans=True),
-            GTPIETV('MSNotReachableReason', val={'Type': GTPIEType.MSNotReachableReason.value}, bl={'Data': 8}, trans=True),
-            GTPIETLV('GSNAddr', val={'Type': GTPIEType.GSNAddr.value}, trans=True),
-            GTPIETLV('PrivateExt', val={'Type': GTPIEType.PrivateExt.value}, trans=True),
-            ), hier=1)
+        GTPHdr(val={'PT': 1, 'Type': GTPType.SendRouteingInfoforGPRSResp.value}),
+        SendRouteingInfoforGPRSRespIEs(hier=1),
         )
 
 
 # Failure Report Request
 
+class FailureReportReqIEs(GTPIEs):
+    
+    MAND = {
+        GTPIEType.IMSI.value
+        }
+    OPT  = {
+        GTPIEType.PrivateExt.value
+        }
+    
+    _GEN = (
+        GTPIETV('IMSI', val={'Type': GTPIEType.IMSI.value}, bl={'Data': 64}),
+        GTPIETLV('PrivateExt', val={'Type': GTPIEType.PrivateExt.value}, trans=True),
+        )
+
+
 class FailureReportReq(GTPMsg):
     _GEN = (
-        GTPHdr(val={'Type': GTPType.FailureReportReq.value}),
-        GTPIEs(GEN=(
-            GTPIETV('IMSI', val={'Type': GTPIEType.IMSI.value}, bl={'Data': 64}),
-            GTPIETLV('PrivateExt', val={'Type': GTPIEType.PrivateExt.value}, trans=True),
-            ), hier=1)
+        GTPHdr(val={'PT': 1, 'Type': GTPType.FailureReportReq.value}),
+        FailureReportReqIEs(hier=1),
         )
 
 
 # Failure Report Response
 
+class FailureReportRespIEs(GTPIEs):
+    
+    MAND = {
+        GTPIEType.Cause.value
+        }
+    OPT  = {
+        GTPIEType.MAPCause.value,
+        GTPIEType.PrivateExt.value
+        }
+    
+    _GEN = (
+        GTPIETV('Cause', val={'Type': GTPIEType.Cause.value}, bl={'Data': 8}),
+        GTPIETV('MAPCause', val={'Type': GTPIEType.MAPCause.value}, bl={'Data': 8}, trans=True),
+        GTPIETLV('PrivateExt', val={'Type': GTPIEType.PrivateExt.value}, trans=True),
+        )
+
+
 class FailureReportResp(GTPMsg):
     _GEN = (
-        GTPHdr(val={'Type': GTPType.FailureReportResp.value}),
-        GTPIEs(GEN=(
-            GTPIETV('Cause', val={'Type': GTPIEType.Cause.value}, bl={'Data': 8}),
-            GTPIETV('MAPCause', val={'Type': GTPIEType.MAPCause.value}, bl={'Data': 8}, trans=True),
-            GTPIETLV('PrivateExt', val={'Type': GTPIEType.PrivateExt.value}, trans=True),
-            ), hier=1)
+        GTPHdr(val={'PT': 1, 'Type': GTPType.FailureReportResp.value}),
+        FailureReportRespIEs(hier=1),
         )
 
 
 # Note MS Present Request
 
+class NoteMSGPRSPresentReqIEs(GTPIEs):
+    
+    MAND = {
+        GTPIEType.IMSI.value,
+        GTPIEType.GSNAddr.value
+        }
+    OPT  = {
+        GTPIEType.PrivateExt.value
+        }
+    
+    _GEN = (
+        GTPIETV('IMSI', val={'Type': GTPIEType.IMSI.value}, bl={'Data': 64}),
+        GTPIETLV('GSNAddr', val={'Type': GTPIEType.GSNAddr.value}),
+        GTPIETLV('PrivateExt', val={'Type': GTPIEType.PrivateExt.value}, trans=True),
+        )
+
+
 class NoteMSGPRSPresentReq(GTPMsg):
     _GEN = (
-        GTPHdr(val={'Type': GTPType.NoteMSGPRSPresentReq.value}),
-        GTPIEs(GEN=(
-            GTPIETV('IMSI', val={'Type': GTPIEType.IMSI.value}, bl={'Data': 64}),
-            GTPIETLV('GSNAddr', val={'Type': GTPIEType.GSNAddr.value}),
-            GTPIETLV('PrivateExt', val={'Type': GTPIEType.PrivateExt.value}, trans=True),
-            ), hier=1)
+        GTPHdr(val={'PT': 1, 'Type': GTPType.NoteMSGPRSPresentReq.value}),
+        NoteMSGPRSPresentReqIEs(hier=1),
         )
 
 
 # Note MS Present Response
 
+class NoteMSGPRSPresentRespIEs(GTPIEs):
+    
+    MAND = {
+        GTPIEType.Cause.value
+        }
+    OPT  = {
+        GTPIEType.PrivateExt.value
+        }
+    
+    _GEN = (
+        GTPIETV('Cause', val={'Type': GTPIEType.Cause.value}, bl={'Data': 8}),
+        GTPIETLV('PrivateExt', val={'Type': GTPIEType.PrivateExt.value}, trans=True),
+        )
+
+
 class NoteMSGPRSPresentResp(GTPMsg):
     _GEN = (
-        GTPHdr(val={'Type': GTPType.NoteMSGPRSPresentResp.value}),
-        GTPIEs(GEN=(
-            GTPIETV('Cause', val={'Type': GTPIEType.Cause.value}, bl={'Data': 8}),
-            GTPIETLV('PrivateExt', val={'Type': GTPIEType.PrivateExt.value}, trans=True),
-            ), hier=1)
+        GTPHdr(val={'PT': 1, 'Type': GTPType.NoteMSGPRSPresentResp.value}),
+        NoteMSGPRSPresentRespIEs(hier=1),
         )
 
 
@@ -2848,311 +3358,613 @@ class NoteMSGPRSPresentResp(GTPMsg):
 
 # Identification Request
 
+class IdentificationReqIEs(GTPIEs):
+    
+    MAND = {
+        GTPIEType.RAI.value,
+        GTPIEType.PTMSI.value
+        }
+    OPT  = {
+        GTPIEType.PTMSISignature.value,
+        GTPIEType.GSNAddr.value,
+        GTPIEType.HopCounter.value,
+        GTPIEType.PrivateExt.value
+        }
+    
+    _GEN = (
+        GTPIETV('RAI', val={'Type': GTPIEType.RAI.value}, bl={'Data': 48}),
+        GTPIETV('PTMSI', val={'Type': GTPIEType.PTMSI.value}, bl={'Data': 32}),
+        GTPIETV('PTMSISignature', val={'Type': GTPIEType.PTMSISignature.value}, bl={'Data': 24}, trans=True),
+        GTPIETLV('SGSNAddrForControlPlane', val={'Type': GTPIEType.GSNAddr.value}, trans=True),
+        GTPIETLV('HopCounter', val={'Type': GTPIEType.HopCounter.value}, trans=True),
+        GTPIETLV('PrivateExt', val={'Type': GTPIEType.PrivateExt.value}, trans=True),
+        )
+
+
 class IdentificationReq(GTPMsg):
     _GEN = (
-        GTPHdr(val={'Type': GTPType.IdentificationReq.value}),
-        GTPIEs(GEN=(
-            GTPIETV('RAI', val={'Type': GTPIEType.RAI.value}, bl={'Data': 48}),
-            GTPIETV('PTMSI', val={'Type': GTPIEType.PTMSI.value}, bl={'Data': 32}),
-            GTPIETV('PTMSISignature', val={'Type': GTPIEType.PTMSISignature.value}, bl={'Data': 24}, trans=True),
-            GTPIETLV('SGSNAddrForControlPlane', val={'Type': GTPIEType.GSNAddr.value}, trans=True),
-            GTPIETLV('HopCounter', val={'Type': GTPIEType.HopCounter.value}, trans=True),
-            GTPIETLV('PrivateExt', val={'Type': GTPIEType.PrivateExt.value}, trans=True),
-            ), hier=1)
+        GTPHdr(val={'PT': 1, 'Type': GTPType.IdentificationReq.value}),
+        IdentificationReqIEs(hier=1),
         )
 
 
 # Identification Response
 
+class IdentificationRespIEs(GTPIEs):
+    
+    MAND = {
+        GTPIEType.Cause.value
+        }
+    OPT  = {
+        GTPIEType.IMSI.value,
+        GTPIEType.AuthentTriplet.value,
+        GTPIEType.AuthentQuintuplet.value,
+        GTPIEType.UEUsageType.value,
+        GTPIEType.IOVUpdatesCounter.value
+        }
+    
+    _GEN = (
+        GTPIETV('Cause', val={'Type': GTPIEType.Cause.value}, bl={'Data': 8}),
+        GTPIETV('IMSI', val={'Type': GTPIEType.IMSI.value}, bl={'Data': 64}, trans=True),
+        GTPIETV('AuthentTriplet', val={'Type': GTPIEType.AuthentTriplet.value}, bl={'Data': 224}, trans=True),
+        GTPIETLV('AuthentQuintuplet', val={'Type': GTPIEType.AuthentQuintuplet.value}, trans=True),
+        GTPIETLV('UEUsageType', val={'Type': GTPIEType.UEUsageType.value}, trans=True),
+        GTPIETLV('IOVUpdatesCounter', val={'Type': GTPIEType.IOVUpdatesCounter.value}, trans=True),
+        )
+
+
 class IdentificationResp(GTPMsg):
     _GEN = (
-        GTPHdr(val={'Type': GTPType.IdentificationResp.value}),
-        GTPIEs(GEN=(
-            GTPIETV('Cause', val={'Type': GTPIEType.Cause.value}, bl={'Data': 8}),
-            GTPIETV('IMSI', val={'Type': GTPIEType.IMSI.value}, bl={'Data': 64}, trans=True),
-            GTPIETV('AuthentTriplet', val={'Type': GTPIEType.AuthentTriplet.value}, bl={'Data': 224}, trans=True),
-            GTPIETLV('AuthentQuintuplet', val={'Type': GTPIEType.AuthentQuintuplet.value}, trans=True),
-            GTPIETLV('UEUsageType', val={'Type': GTPIEType.UEUsageType.value}, trans=True),
-            GTPIETLV('IOVUpdatesCounter', val={'Type': GTPIEType.IOVUpdatesCounter.value}, trans=True),
-            ), hier=1)
+        GTPHdr(val={'PT': 1, 'Type': GTPType.IdentificationResp.value}),
+        IdentificationRespIEs(hier=1),
         )
 
 
 # SGSN Context Request
 
+class SGSNCtxtReqIEs(GTPIEs):
+    
+    MAND = {
+        GTPIEType.RAI.value,
+        GTPIEType.TEIDCP.value,
+        GTPIEType.GSNAddr.value
+        }
+    OPT  = {
+        GTPIEType.IMSI.value,
+        GTPIEType.TLLI.value,
+        GTPIEType.PTMSI.value,
+        GTPIEType.PTMSISignature.value,
+        GTPIEType.MSValidated.value,
+        GTPIEType.GSNAddr.value,
+        GTPIEType.SGSNNumber.value,
+        GTPIEType.RATType.value,
+        GTPIEType.HopCounter.value,
+        GTPIEType.PrivateExt.value
+        }
+    
+    _GEN = (
+        GTPIETV('IMSI', val={'Type': GTPIEType.IMSI.value}, bl={'Data': 64}, trans=True),
+        GTPIETV('RAI', val={'Type': GTPIEType.RAI.value}, bl={'Data': 48}),
+        GTPIETV('TLLI', val={'Type': GTPIEType.TLLI.value}, bl={'Data': 8}, trans=True),
+        GTPIETV('PTMSI', val={'Type': GTPIEType.PTMSI.value}, bl={'Data': 32}, trans=True),
+        GTPIETV('PTMSISignature', val={'Type': GTPIEType.PTMSISignature.value}, bl={'Data': 24}, trans=True),
+        GTPIETV('MSValidated', val={'Type': GTPIEType.MSValidated.value}, bl={'Data': 8}, trans=True),
+        GTPIETV('TEIDCP', val={'Type': GTPIEType.TEIDCP.value}, bl={'Data': 32}),
+        GTPIETLV('SGSNAddrForControlPlane', val={'Type': GTPIEType.GSNAddr.value}),
+        GTPIETLV('AltSGSNAddrForControlPlane', val={'Type': GTPIEType.GSNAddr.value}, trans=True),
+        GTPIETLV('SGSNNumber', val={'Type': GTPIEType.SGSNNumber.value}, trans=True),
+        GTPIETLV('RATType', val={'Type': GTPIEType.RATType.value}, trans=True),
+        GTPIETLV('HopCounter', val={'Type': GTPIEType.HopCounter.value}, trans=True),
+        GTPIETLV('PrivateExt', val={'Type': GTPIEType.PrivateExt.value}, trans=True),
+        )
+
+
 class SGSNCtxtReq(GTPMsg):
     _GEN = (
-        GTPHdr(val={'Type': GTPType.SGSNCtxtReq.value}),
-        GTPIEs(GEN=(
-            GTPIETV('IMSI', val={'Type': GTPIEType.IMSI.value}, bl={'Data': 64}, trans=True),
-            GTPIETV('RAI', val={'Type': GTPIEType.RAI.value}, bl={'Data': 48}),
-            GTPIETV('TLLI', val={'Type': GTPIEType.TLLI.value}, trans=True),
-            GTPIETV('PTMSI', val={'Type': GTPIEType.PTMSI.value}, bl={'Data': 32}, trans=True),
-            GTPIETV('PTMSISignature', val={'Type': GTPIEType.PTMSISignature.value}, bl={'Data': 24}, trans=True),
-            GTPIETV('MSValidated', val={'Type': GTPIEType.MSValidated.value}, bl={'Data': 8}, trans=True),
-            GTPIETV('TEIDCP', val={'Type': GTPIEType.TEIDCP.value}, bl={'Data': 32}),
-            GTPIETLV('SGSNAddrForControlPlane', val={'Type': GTPIEType.GSNAddr.value}),
-            GTPIETLV('AltSGSNAddrForControlPlane', val={'Type': GTPIEType.GSNAddr.value}, trans=True),
-            GTPIETLV('SGSNNumber', val={'Type': GTPIEType.SGSNNumber.value}, trans=True),
-            GTPIETLV('RATType', val={'Type': GTPIEType.RATType.value}, trans=True),
-            GTPIETLV('HopCounter', val={'Type': GTPIEType.HopCounter.value}, trans=True),
-            GTPIETLV('PrivateExt', val={'Type': GTPIEType.PrivateExt.value}, trans=True),
-            ), hier=1)
+        GTPHdr(val={'PT': 1, 'Type': GTPType.SGSNCtxtReq.value}),
+        SGSNCtxtReqIEs(hier=1),
         )
 
 
 # SGSN Context Response
 
+class SGSNCtxtRespIEs(GTPIEs):
+    
+    MAND = {
+        GTPIEType.Cause.value
+        }
+    OPT  = {
+        GTPIEType.IMSI.value,
+        GTPIEType.TEIDCP.value,
+        GTPIEType.RABContext.value,
+        GTPIEType.RadioPrioritySMS.value,
+        GTPIEType.RadioPriority.value,
+        GTPIEType.PacketFlowId.value,
+        GTPIEType.ChargingCharacteristics.value,
+        GTPIEType.MMContext.value,
+        GTPIEType.PDPContext.value,
+        GTPIEType.GSNAddr.value,
+        GTPIEType.PDPContextPrioritization.value,
+        GTPIEType.RadioPriorityLCS.value,
+        GTPIEType.MBMSUEContext.value,
+        GTPIEType.RFSPIndex.value,
+        GTPIEType.FQDN.value,
+        GTPIEType.EvolvedAllocationRetentionPriorityII.value,
+        GTPIEType.ExtCommonFlags.value,
+        GTPIEType.UENetCap.value,
+        GTPIEType.UEAMBR.value,
+        GTPIEType.APNAMBRWithNSAPI.value,
+        GTPIEType.SignallingPriorityIndWithNSAPI.value,
+        GTPIEType.HigherBitratesThan16MbpsFlag.value,
+        GTPIEType.SelectionModeWithNSAPI.value,
+        GTPIEType.LocalHomeNetworkIDWithNSAPI.value,
+        GTPIEType.UEUsageType.value,
+        GTPIEType.ExtCommonFlagsII.value,
+        GTPIEType.SCEFPDNConnection.value,
+        GTPIEType.IOVUpdatesCounter.value,
+        GTPIEType.PrivateExt.value
+        }
+    
+    _GEN = (
+        GTPIETV('Cause', val={'Type': GTPIEType.Cause.value}, bl={'Data': 8}),
+        GTPIETV('IMSI', val={'Type': GTPIEType.IMSI.value}, bl={'Data': 64}, trans=True),
+        GTPIETV('TEIDCP', val={'Type': GTPIEType.TEIDCP.value}, bl={'Data': 32}, trans=True),
+        GTPIETV('RABContext', val={'Type': GTPIEType.RABContext.value}, bl={'Data': 72}, trans=True),
+        GTPIETV('RadioPrioritySMS', val={'Type': GTPIEType.RadioPrioritySMS.value}, bl={'Data': 8}, trans=True),
+        GTPIETV('RadioPriority', val={'Type': GTPIEType.RadioPriority.value}, bl={'Data': 8}, trans=True),
+        GTPIETV('PacketFlowId', val={'Type': GTPIEType.PacketFlowId.value}, bl={'Data': 16}, trans=True),
+        GTPIETV('ChargingCharacteristics', val={'Type': GTPIEType.ChargingCharacteristics.value}, bl={'Data': 16}, trans=True),
+        GTPIETLV('RadioPriorityLCS', val={'Type': GTPIEType.RadioPriorityLCS.value}, trans=True),
+        GTPIETLV('MMContext', val={'Type': GTPIEType.MMContext.value}, trans=True),
+        GTPIETLV('PDPContext', val={'Type': GTPIEType.PDPContext.value}, trans=True),
+        GTPIETLV('SGSNAddrForControlPlane', val={'Type': GTPIEType.GSNAddr.value}, trans=True),
+        GTPIETLV('PDPContextPrioritization', val={'Type': GTPIEType.PDPContextPrioritization.value}, trans=True),
+        GTPIETLV('MBMSUEContext', val={'Type': GTPIEType.MBMSUEContext.value}, trans=True),
+        GTPIETLV('SubscribedRFSPIndex', val={'Type': GTPIEType.RFSPIndex.value}, trans=True),
+        GTPIETLV('RFSPIndex', val={'Type': GTPIEType.RFSPIndex.value}, trans=True),
+        GTPIETLV('ColocatedGGSNPGWFQDN', val={'Type': GTPIEType.FQDN.value}, trans=True),
+        GTPIETLV('EvolvedAllocationRetentionPriorityII', val={'Type': GTPIEType.EvolvedAllocationRetentionPriorityII.value}, trans=True),
+        GTPIETLV('ExtCommonFlags', val={'Type': GTPIEType.ExtCommonFlags.value}, trans=True),
+        GTPIETLV('UENetCap', val={'Type': GTPIEType.UENetCap.value}, trans=True),
+        GTPIETLV('UEAMBR', val={'Type': GTPIEType.UEAMBR.value}, trans=True),
+        GTPIETLV('APNAMBRWithNSAPI', val={'Type': GTPIEType.APNAMBRWithNSAPI.value}, trans=True),
+        GTPIETLV('SignallingPriorityIndWithNSAPI', val={'Type': GTPIEType.SignallingPriorityIndWithNSAPI.value}, trans=True),
+        GTPIETLV('HigherBitratesThan16MbpsFlag', val={'Type': GTPIEType.HigherBitratesThan16MbpsFlag.value}, trans=True),
+        GTPIETLV('SelectionModeWithNSAPI', val={'Type': GTPIEType.SelectionModeWithNSAPI.value}, trans=True),
+        GTPIETLV('LocalHomeNetworkIDWithNSAPI', val={'Type': GTPIEType.LocalHomeNetworkIDWithNSAPI.value}, trans=True),
+        GTPIETLV('UEUsageType', val={'Type': GTPIEType.UEUsageType.value}, trans=True),
+        GTPIETLV('ExtCommonFlagsII', val={'Type': GTPIEType.ExtCommonFlagsII.value}, trans=True),
+        GTPIETLV('UESCEFPDNConnection', val={'Type': GTPIEType.SCEFPDNConnection.value}, trans=True),
+        GTPIETLV('IOVUpdatesCounter', val={'Type': GTPIEType.IOVUpdatesCounter.value}, trans=True),
+        GTPIETLV('AltGGSNAddrForControlPlane', val={'Type': GTPIEType.GSNAddr.value}, trans=True),
+        GTPIETLV('AltGGSNAddrForUserTraffic', val={'Type': GTPIEType.GSNAddr.value}, trans=True),
+        GTPIETLV('PrivateExt', val={'Type': GTPIEType.PrivateExt.value}, trans=True),
+        )
+
+
 class SGSNCtxtResp(GTPMsg):
     _GEN = (
-        GTPHdr(val={'Type': GTPType.SGSNCtxtResp.value}),
-        GTPIEs(GEN=(
-            GTPIETV('Cause', val={'Type': GTPIEType.Cause.value}, bl={'Data': 8}),
-            GTPIETV('IMSI', val={'Type': GTPIEType.IMSI.value}, bl={'Data': 64}, trans=True),
-            GTPIETV('TEIDCP', val={'Type': GTPIEType.TEIDCP.value}, bl={'Data': 32}, trans=True),
-            GTPIETV('RABContext', val={'Type': GTPIEType.RABContext.value}, bl={'Data': 72}, trans=True),
-            GTPIETV('RadioPrioritySMS', val={'Type': GTPIEType.RadioPrioritySMS.value}, bl={'Data': 8}, trans=True),
-            GTPIETV('RadioPriority', val={'Type': GTPIEType.RadioPriority.value}, bl={'Data': 8}, trans=True),
-            GTPIETV('PacketFlowId', val={'Type': GTPIEType.PacketFlowId.value}, bl={'Data': 16}, trans=True),
-            GTPIETV('ChargingCharacteristics', val={'Type': GTPIEType.ChargingCharacteristics.value}, bl={'Data': 16}, trans=True),
-            GTPIETLV('RadioPriorityLCS', val={'Type': GTPIEType.RadioPriorityLCS.value}, trans=True),
-            GTPIETLV('MMContext', val={'Type': GTPIEType.MMContext.value}, trans=True),
-            GTPIETLV('PDPContext', val={'Type': GTPIEType.PDPContext.value}, trans=True),
-            GTPIETLV('SGSNAddrForControlPlane', val={'Type': GTPIEType.GSNAddr.value}, trans=True),
-            GTPIETLV('PDPContextPrioritization', val={'Type': GTPIEType.PDPContextPrioritization.value}, trans=True),
-            GTPIETLV('MBMSUEContext', val={'Type': GTPIEType.MBMSUEContext.value}, trans=True),
-            GTPIETLV('SubscribedRFSPIndex', val={'Type': GTPIEType.RFSPIndex.value}, trans=True),
-            GTPIETLV('RFSPIndex', val={'Type': GTPIEType.RFSPIndex.value}, trans=True),
-            GTPIETLV('ColocatedGGSNPGWFQDN', val={'Type': GTPIEType.FQDN.value}, trans=True),
-            GTPIETLV('EvolvedAllocationRetentionPriorityII', val={'Type': GTPIEType.EvolvedAllocationRetentionPriorityII.value}, trans=True),
-            GTPIETLV('ExtCommonFlags', val={'Type': GTPIEType.ExtCommonFlags.value}, trans=True),
-            GTPIETLV('UENetCap', val={'Type': GTPIEType.UENetCap.value}, trans=True),
-            GTPIETLV('UEAMBR', val={'Type': GTPIEType.UEAMBR.value}, trans=True),
-            GTPIETLV('APNAMBRWithNSAPI', val={'Type': GTPIEType.APNAMBRWithNSAPI.value}, trans=True),
-            GTPIETLV('SignallingPriorityIndWithNSAPI', val={'Type': GTPIEType.SignallingPriorityIndWithNSAPI.value}, trans=True),
-            GTPIETLV('HigherBitratesThan16MbpsFlag', val={'Type': GTPIEType.HigherBitratesThan16MbpsFlag.value}, trans=True),
-            GTPIETLV('SelectionModeWithNSAPI', val={'Type': GTPIEType.SelectionModeWithNSAPI.value}, trans=True),
-            GTPIETLV('LocalHomeNetworkIDWithNSAPI', val={'Type': GTPIEType.LocalHomeNetworkIDWithNSAPI.value}, trans=True),
-            GTPIETLV('UEUsageType', val={'Type': GTPIEType.UEUsageType.value}, trans=True),
-            GTPIETLV('ExtCommonFlagsII', val={'Type': GTPIEType.ExtCommonFlagsII.value}, trans=True),
-            GTPIETLV('UESCEFPDNConnection', val={'Type': GTPIEType.SCEFPDNConnection.value}, trans=True),
-            GTPIETLV('IOVUpdatesCounter', val={'Type': GTPIEType.IOVUpdatesCounter.value}, trans=True),
-            GTPIETLV('AltGGSNAddrForControlPlane', val={'Type': GTPIEType.GSNAddr.value}, trans=True),
-            GTPIETLV('AltGGSNAddrForUserTraffic', val={'Type': GTPIEType.GSNAddr.value}, trans=True),
-            GTPIETLV('PrivateExt', val={'Type': GTPIEType.PrivateExt.value}, trans=True),
-            ), hier=1)
+        GTPHdr(val={'PT': 1, 'Type': GTPType.SGSNCtxtResp.value}),
+        SGSNCtxtRespIEs(hier=1),
         )
 
 
 # SGSN Context Acknowledge
 
+class SGSNCtxtAckIEs(GTPIEs):
+    
+    MAND = {
+        GTPIEType.Cause.value
+        }
+    OPT  = {
+        GTPIEType.TEIDDataII.value,
+        GTPIEType.GSNAddr.value,
+        GTPIEType.SGSNNumber.value,
+        GTPIEType.NodeIdent.value,
+        GTPIEType.PrivateExt.value
+        }
+    
+    _GEN = (
+        GTPIETV('Cause', val={'Type': GTPIEType.Cause.value}, bl={'Data': 8}),
+        GTPIETV('TEIDDataII', val={'Type': GTPIEType.TEIDDataII.value}, bl={'Data': 40}, trans=True),
+        GTPIETLV('SGSNAddrForUserTraffic', val={'Type': GTPIEType.GSNAddr.value}, trans=True),
+        GTPIETLV('SGSNNumber', val={'Type': GTPIEType.SGSNNumber.value}, trans=True),
+        GTPIETLV('NodeIdent', val={'Type': GTPIEType.NodeIdent.value}, trans=True),
+        GTPIETLV('PrivateExt', val={'Type': GTPIEType.PrivateExt.value}, trans=True),
+        )
+
+
 class SGSNCtxtAck(GTPMsg):
     _GEN = (
-        GTPHdr(val={'Type': GTPType.SGSNCtxtAck.value}),
-        GTPIEs(GEN=(
-            GTPIETV('Cause', val={'Type': GTPIEType.Cause.value}, bl={'Data': 8}),
-            GTPIETV('TEIDDataII', val={'Type': GTPIEType.TEIDDataII.value}, bl={'Data': 40}, trans=True),
-            GTPIETLV('SGSNAddrForUserTraffic', val={'Type': GTPIEType.GSNAddr.value}, trans=True),
-            GTPIETLV('SGSNNumber', val={'Type': GTPIEType.SGSNNumber.value}, trans=True),
-            GTPIETLV('NodeIdent', val={'Type': GTPIEType.NodeIdent.value}, trans=True),
-            GTPIETLV('PrivateExt', val={'Type': GTPIEType.PrivateExt.value}, trans=True),
-            ), hier=1)
+        GTPHdr(val={'PT': 1, 'Type': GTPType.SGSNCtxtAck.value}),
+        SGSNCtxtAckIEs(hier=1),
         )
 
 
 # Forward Relocation Request
 
+class ForwardRelocationReqIEs(GTPIEs):
+    
+    MAND = {
+        GTPIEType.TEIDCP.value,
+        GTPIEType.RANAPCause.value,
+        GTPIEType.MMContext.value,
+        GTPIEType.TargetIdent.value,
+        GTPIEType.UTRANTransparentContainer.value
+        }
+    OPT  = {
+        GTPIEType.IMSI.value,
+        GTPIEType.PacketFlowId.value,
+        GTPIEType.ChargingCharacteristics.value,
+        GTPIEType.PDPContext.value,
+        GTPIEType.GSNAddr.value,
+        GTPIEType.PDPContextPrioritization.value,
+        GTPIEType.MBMSUEContext.value,
+        GTPIEType.SelectedPLMNID.value,
+        GTPIEType.BSSContainer.value,
+        GTPIEType.CellIdent.value,
+        GTPIEType.BSSGPCause.value,
+        GTPIEType.PSHandoverXIDParams.value,
+        GTPIEType.DirectTunnelFlags.value,
+        GTPIEType.ReliableInterRATHandoverInfo.value,
+        GTPIEType.RFSPIndex.value,
+        GTPIEType.FQDN.value,
+        GTPIEType.EvolvedAllocationRetentionPriorityII.value,
+        GTPIEType.ExtCommonFlags.value,
+        GTPIEType.CSGID.value,
+        GTPIEType.CMI.value,
+        GTPIEType.UENetCap.value,
+        GTPIEType.UEAMBR.value,
+        GTPIEType.APNAMBRWithNSAPI.value,
+        GTPIEType.SignallingPriorityIndWithNSAPI.value,
+        GTPIEType.HigherBitratesThan16MbpsFlag.value,
+        GTPIEType.AdditionalMMContextForSRVCC.value,
+        GTPIEType.AdditionalFlagsForSRVCC.value,
+        GTPIEType.STNSR.value,
+        GTPIEType.CMSISDN.value,
+        GTPIEType.ExtRANAPCause.value,
+        GTPIEType.ENodeBID.value,
+        GTPIEType.SelectionModeWithNSAPI.value,
+        GTPIEType.UEUsageType.value,
+        GTPIEType.ExtCommonFlagsII.value,
+        GTPIEType.SCEFPDNConnection.value,
+        GTPIEType.PrivateExt.value
+        }
+    
+    _GEN = (
+        GTPIETV('IMSI', val={'Type': GTPIEType.IMSI.value}, bl={'Data': 64}, trans=True),
+        GTPIETV('TEIDCP', val={'Type': GTPIEType.TEIDCP.value}, bl={'Data': 32}),
+        GTPIETV('RANAPCause', val={'Type': GTPIEType.RANAPCause.value}, bl={'Data': 8}),
+        GTPIETV('PacketFlowId', val={'Type': GTPIEType.PacketFlowId.value}, bl={'Data': 16}, trans=True),
+        GTPIETV('ChargingCharacteristics', val={'Type': GTPIEType.ChargingCharacteristics.value}, bl={'Data': 16}, trans=True),
+        GTPIETLV('MMContext', val={'Type': GTPIEType.MMContext.value}),
+        GTPIETLV('PDPContext', val={'Type': GTPIEType.PDPContext.value}, trans=True),
+        GTPIETLV('SGSNAddrForControlPlane', val={'Type': GTPIEType.GSNAddr.value}, trans=True),
+        GTPIETLV('TargetIdent', val={'Type': GTPIEType.TargetIdent.value}),
+        GTPIETLV('UTRANTransparentContainer', val={'Type': GTPIEType.UTRANTransparentContainer.value}),
+        GTPIETLV('PDPContextPrioritization', val={'Type': GTPIEType.PDPContextPrioritization.value}, trans=True),
+        GTPIETLV('MBMSUEContext', val={'Type': GTPIEType.MBMSUEContext.value}, trans=True),
+        GTPIETLV('SelectedPLMNID', val={'Type': GTPIEType.SelectedPLMNID.value}, trans=True),
+        GTPIETLV('BSSContainer', val={'Type': GTPIEType.BSSContainer.value}, trans=True),
+        GTPIETLV('CellIdent', val={'Type': GTPIEType.CellIdent.value}, trans=True),
+        GTPIETLV('BSSGPCause', val={'Type': GTPIEType.BSSGPCause.value}, trans=True),
+        GTPIETLV('PSHandoverXIDParams', val={'Type': GTPIEType.PSHandoverXIDParams.value}, trans=True),
+        GTPIETLV('DirectTunnelFlags', val={'Type': GTPIEType.DirectTunnelFlags.value}, trans=True),
+        GTPIETLV('ReliableInterRATHandoverInfo', val={'Type': GTPIEType.ReliableInterRATHandoverInfo.value}, trans=True),
+        GTPIETLV('SubscribedRFSPIndex', val={'Type': GTPIEType.RFSPIndex.value}, trans=True),
+        GTPIETLV('RFSPIndex', val={'Type': GTPIEType.RFSPIndex.value}, trans=True),
+        GTPIETLV('ColocatedGGSNPGWFQDN', val={'Type': GTPIEType.FQDN.value}, trans=True),
+        GTPIETLV('EvolvedAllocationRetentionPriorityII', val={'Type': GTPIEType.EvolvedAllocationRetentionPriorityII.value}, trans=True),
+        GTPIETLV('ExtCommonFlags', val={'Type': GTPIEType.ExtCommonFlags.value}, trans=True),
+        GTPIETLV('CSGID', val={'Type': GTPIEType.CSGID.value}, trans=True),
+        GTPIETLV('CMI', val={'Type': GTPIEType.CMI.value}, trans=True),
+        GTPIETLV('UENetCap', val={'Type': GTPIEType.UENetCap.value}, trans=True),
+        GTPIETLV('UEAMBR', val={'Type': GTPIEType.UEAMBR.value}, trans=True),
+        GTPIETLV('APNAMBRWithNSAPI', val={'Type': GTPIEType.APNAMBRWithNSAPI.value}, trans=True),
+        GTPIETLV('SignallingPriorityIndWithNSAPI', val={'Type': GTPIEType.SignallingPriorityIndWithNSAPI.value}, trans=True),
+        GTPIETLV('HigherBitratesThan16MbpsFlag', val={'Type': GTPIEType.HigherBitratesThan16MbpsFlag.value}, trans=True),
+        GTPIETLV('AdditionalMMContextForSRVCC', val={'Type': GTPIEType.AdditionalMMContextForSRVCC.value}, trans=True),
+        GTPIETLV('AdditionalFlagsForSRVCC', val={'Type': GTPIEType.AdditionalFlagsForSRVCC.value}, trans=True),
+        GTPIETLV('STNSR', val={'Type': GTPIEType.STNSR.value}, trans=True),
+        GTPIETLV('CMSISDN', val={'Type': GTPIEType.CMSISDN.value}, trans=True),
+        GTPIETLV('ExtRANAPCause', val={'Type': GTPIEType.ExtRANAPCause.value}, trans=True),
+        GTPIETLV('ENodeBID', val={'Type': GTPIEType.ENodeBID.value}, trans=True),
+        GTPIETLV('SelectionModeWithNSAPI', val={'Type': GTPIEType.SelectionModeWithNSAPI.value}, trans=True),
+        GTPIETLV('UEUsageType', val={'Type': GTPIEType.UEUsageType.value}, trans=True),
+        GTPIETLV('ExtCommonFlagsII', val={'Type': GTPIEType.ExtCommonFlagsII.value}, trans=True),
+        GTPIETLV('UESCEFPDNConnection', val={'Type': GTPIEType.SCEFPDNConnection.value}, trans=True),
+        GTPIETLV('AltGGSNAddrForControlPlane', val={'Type': GTPIEType.GSNAddr.value}, trans=True),
+        GTPIETLV('AltGGSNAddrForUserTraffic', val={'Type': GTPIEType.GSNAddr.value}, trans=True),
+        GTPIETLV('PrivateExt', val={'Type': GTPIEType.PrivateExt.value}, trans=True),
+        )
+
+
 class ForwardRelocationReq(GTPMsg):
     _GEN = (
-        GTPHdr(val={'Type': GTPType.ForwardRelocationReq.value}),
-        GTPIEs(GEN=(
-            GTPIETV('IMSI', val={'Type': GTPIEType.IMSI.value}, bl={'Data': 64}, trans=True),
-            GTPIETV('TEIDCP', val={'Type': GTPIEType.TEIDCP.value}, bl={'Data': 32}),
-            GTPIETV('RANAPCause', val={'Type': GTPIEType.RANAPCause.value}, bl={'Data': 8}),
-            GTPIETV('PacketFlowId', val={'Type': GTPIEType.PacketFlowId.value}, bl={'Data': 16}, trans=True),
-            GTPIETV('ChargingCharacteristics', val={'Type': GTPIEType.ChargingCharacteristics.value}, bl={'Data': 16}, trans=True),
-            GTPIETLV('MMContext', val={'Type': GTPIEType.MMContext.value}),
-            GTPIETLV('PDPContext', val={'Type': GTPIEType.PDPContext.value}, trans=True),
-            GTPIETLV('SGSNAddrForControlPlane', val={'Type': GTPIEType.GSNAddr.value}, trans=True),
-            GTPIETLV('TargetIdent', val={'Type': GTPIEType.TargetIdent.value}),
-            GTPIETLV('UTRANTransparentContainer', val={'Type': GTPIEType.UTRANTransparentContainer.value}),
-            GTPIETLV('PDPContextPrioritization', val={'Type': GTPIEType.PDPContextPrioritization.value}, trans=True),
-            GTPIETLV('MBMSUEContext', val={'Type': GTPIEType.MBMSUEContext.value}, trans=True),
-            GTPIETLV('SelectedPLMNID', val={'Type': GTPIEType.SelectedPLMNID.value}, trans=True),
-            GTPIETLV('BSSContainer', val={'Type': GTPIEType.BSSContainer.value}, trans=True),
-            GTPIETLV('CellIdent', val={'Type': GTPIEType.CellIdent.value}, trans=True),
-            GTPIETLV('BSSGPCause', val={'Type': GTPIEType.BSSGPCause.value}, trans=True),
-            GTPIETLV('PSHandoverXIDParams', val={'Type': GTPIEType.PSHandoverXIDParams.value}, trans=True),
-            GTPIETLV('DirectTunnelFlags', val={'Type': GTPIEType.DirectTunnelFlags.value}, trans=True),
-            GTPIETLV('ReliableInterRATHandoverInfo', val={'Type': GTPIEType.ReliableInterRATHandoverInfo.value}, trans=True),
-            GTPIETLV('SubscribedRFSPIndex', val={'Type': GTPIEType.RFSPIndex.value}, trans=True),
-            GTPIETLV('RFSPIndex', val={'Type': GTPIEType.RFSPIndex.value}, trans=True),
-            GTPIETLV('ColocatedGGSNPGWFQDN', val={'Type': GTPIEType.FQDN.value}, trans=True),
-            GTPIETLV('EvolvedAllocationRetentionPriorityII', val={'Type': GTPIEType.EvolvedAllocationRetentionPriorityII.value}, trans=True),
-            GTPIETLV('ExtCommonFlags', val={'Type': GTPIEType.ExtCommonFlags.value}, trans=True),
-            GTPIETLV('CSGID', val={'Type': GTPIEType.CSGID.value}, trans=True),
-            GTPIETLV('CMI', val={'Type': GTPIEType.CMI.value}, trans=True),
-            GTPIETLV('UENetCap', val={'Type': GTPIEType.UENetCap.value}, trans=True),
-            GTPIETLV('UEAMBR', val={'Type': GTPIEType.UEAMBR.value}, trans=True),
-            GTPIETLV('APNAMBRWithNSAPI', val={'Type': GTPIEType.APNAMBRWithNSAPI.value}, trans=True),
-            GTPIETLV('SignallingPriorityIndWithNSAPI', val={'Type': GTPIEType.SignallingPriorityIndWithNSAPI.value}, trans=True),
-            GTPIETLV('HigherBitratesThan16MbpsFlag', val={'Type': GTPIEType.HigherBitratesThan16MbpsFlag.value}, trans=True),
-            GTPIETLV('AdditionalMMContextForSRVCC', val={'Type': GTPIEType.AdditionalMMContextForSRVCC.value}, trans=True),
-            GTPIETLV('AdditionalFlagsForSRVCC', val={'Type': GTPIEType.AdditionalFlagsForSRVCC.value}, trans=True),
-            GTPIETLV('STNSR', val={'Type': GTPIEType.STNSR.value}, trans=True),
-            GTPIETLV('CMSISDN', val={'Type': GTPIEType.CMSISDN.value}, trans=True),
-            GTPIETLV('ExtRANAPCause', val={'Type': GTPIEType.ExtRANAPCause.value}, trans=True),
-            GTPIETLV('ENodeBID', val={'Type': GTPIEType.ENodeBID.value}, trans=True),
-            GTPIETLV('SelectionModeWithNSAPI', val={'Type': GTPIEType.SelectionModeWithNSAPI.value}, trans=True),
-            GTPIETLV('UEUsageType', val={'Type': GTPIEType.UEUsageType.value}, trans=True),
-            GTPIETLV('ExtCommonFlagsII', val={'Type': GTPIEType.ExtCommonFlagsII.value}, trans=True),
-            GTPIETLV('UESCEFPDNConnection', val={'Type': GTPIEType.SCEFPDNConnection.value}, trans=True),
-            GTPIETLV('AltGGSNAddrForControlPlane', val={'Type': GTPIEType.GSNAddr.value}, trans=True),
-            GTPIETLV('AltGGSNAddrForUserTraffic', val={'Type': GTPIEType.GSNAddr.value}, trans=True),
-            GTPIETLV('PrivateExt', val={'Type': GTPIEType.PrivateExt.value}, trans=True),
-            ), hier=1)
+        GTPHdr(val={'PT': 1, 'Type': GTPType.ForwardRelocationReq.value}),
+        ForwardRelocationReqIEs(hier=1),
         )
 
 
 # Forward Relocation Response
 
+class ForwardRelocationRespIEs(GTPIEs):
+    
+    MAND = {
+        GTPIEType.Cause.value
+        }
+    OPT  = {
+        GTPIEType.TEIDCP.value,
+        GTPIEType.TEIDDataII.value,
+        GTPIEType.RANAPCause.value,
+        GTPIEType.GSNAddr.value,
+        GTPIEType.UTRANTransparentContainer.value,
+        GTPIEType.RABSetupInfo.value,
+        GTPIEType.AdditionalRABSetupInfo.value,
+        GTPIEType.SGSNNumber.value,
+        GTPIEType.BSSContainer.value,
+        GTPIEType.BSSGPCause.value,
+        GTPIEType.ListOfSetupPFCs.value,
+        GTPIEType.ExtRANAPCause.value,
+        GTPIEType.NodeIdent.value,
+        GTPIEType.PrivateExt.value
+        }
+    
+    _GEN = (
+        GTPIETV('Cause', val={'Type': GTPIEType.Cause.value}, bl={'Data': 8}),
+        GTPIETV('TEIDCP', val={'Type': GTPIEType.TEIDCP.value}, bl={'Data': 32}, trans=True),
+        GTPIETV('TEIDDataII', val={'Type': GTPIEType.TEIDDataII.value}, bl={'Data': 40}, trans=True),
+        GTPIETV('RANAPCause', val={'Type': GTPIEType.RANAPCause.value}, bl={'Data': 8}, trans=True),
+        GTPIETLV('SGSNAddrForControlPlane', val={'Type': GTPIEType.GSNAddr.value}, trans=True),
+        GTPIETLV('SGSNAddrForUserTraffic', val={'Type': GTPIEType.GSNAddr.value}, trans=True),
+        GTPIETLV('UTRANTransparentContainer', val={'Type': GTPIEType.UTRANTransparentContainer.value}, trans=True),
+        GTPIETLV('RABSetupInfo', val={'Type': GTPIEType.RABSetupInfo.value}, trans=True),
+        GTPIETLV('AdditionalRABSetupInfo', val={'Type': GTPIEType.AdditionalRABSetupInfo.value}, trans=True),
+        GTPIETLV('SGSNNumber', val={'Type': GTPIEType.SGSNNumber.value}, trans=True),
+        GTPIETLV('BSSContainer', val={'Type': GTPIEType.BSSContainer.value}, trans=True),
+        GTPIETLV('BSSGPCause', val={'Type': GTPIEType.BSSGPCause.value}, trans=True),
+        GTPIETLV('ListOfSetupPFCs', val={'Type': GTPIEType.ListOfSetupPFCs.value}, trans=True),
+        GTPIETLV('ExtRANAPCause', val={'Type': GTPIEType.ExtRANAPCause.value}, trans=True),
+        GTPIETLV('NodeIdent', val={'Type': GTPIEType.NodeIdent.value}, trans=True),
+        GTPIETLV('PrivateExt', val={'Type': GTPIEType.PrivateExt.value}, trans=True),
+        )
+
+
 class ForwardRelocationResp(GTPMsg):
     _GEN = (
-        GTPHdr(val={'Type': GTPType.ForwardRelocationResp.value}),
-        GTPIEs(GEN=(
-            GTPIETV('Cause', val={'Type': GTPIEType.Cause.value}, bl={'Data': 8}),
-            GTPIETV('TEIDCP', val={'Type': GTPIEType.TEIDCP.value}, bl={'Data': 32}, trans=True),
-            GTPIETV('TEIDDataII', val={'Type': GTPIEType.TEIDDataII.value}, bl={'Data': 40}, trans=True),
-            GTPIETV('RANAPCause', val={'Type': GTPIEType.RANAPCause.value}, bl={'Data': 8}, trans=True),
-            GTPIETLV('SGSNAddrForControlPlane', val={'Type': GTPIEType.GSNAddr.value}, trans=True),
-            GTPIETLV('SGSNAddrForUserTraffic', val={'Type': GTPIEType.GSNAddr.value}, trans=True),
-            GTPIETLV('UTRANTransparentContainer', val={'Type': GTPIEType.UTRANTransparentContainer.value}, trans=True),
-            GTPIETLV('RABSetupInfo', val={'Type': GTPIEType.RABSetupInfo.value}, trans=True),
-            GTPIETLV('AdditionalRABSetupInfo', val={'Type': GTPIEType.AdditionalRABSetupInfo.value}, trans=True),
-            GTPIETLV('SGSNNumber', val={'Type': GTPIEType.SGSNNumber.value}, trans=True),
-            GTPIETLV('BSSContainer', val={'Type': GTPIEType.BSSContainer.value}, trans=True),
-            GTPIETLV('BSSGPCause', val={'Type': GTPIEType.BSSGPCause.value}, trans=True),
-            GTPIETLV('ListOfSetupPFCs', val={'Type': GTPIEType.ListOfSetupPFCs.value}, trans=True),
-            GTPIETLV('ExtRANAPCause', val={'Type': GTPIEType.ExtRANAPCause.value}, trans=True),
-            GTPIETLV('NodeIdent', val={'Type': GTPIEType.NodeIdent.value}, trans=True),
-            GTPIETLV('PrivateExt', val={'Type': GTPIEType.PrivateExt.value}, trans=True),
-            ), hier=1)
+        GTPHdr(val={'PT': 1, 'Type': GTPType.ForwardRelocationResp.value}),
+        ForwardRelocationRespIEs(hier=1),
         )
 
 
 # Forward Relocation Complete
 
+class ForwardRelocationCompleteIEs(GTPIEs):
+    
+    MAND = set()
+    OPT  = {
+        GTPIEType.PrivateExt.value
+        }
+    
+    _GEN = (
+        GTPIETLV('PrivateExt', val={'Type': GTPIEType.PrivateExt.value}, trans=True),
+        )
+
+
 class ForwardRelocationComplete(GTPMsg):
     _GEN = (
-        GTPHdr(val={'Type': GTPType.ForwardRelocationComplete.value}),
-        GTPIEs(GEN=(
-            GTPIETLV('PrivateExt', val={'Type': GTPIEType.PrivateExt.value}, trans=True),
-            ), hier=1)
+        GTPHdr(val={'PT': 1, 'Type': GTPType.ForwardRelocationComplete.value}),
+        ForwardRelocationCompleteIEs(hier=1),
         )
 
 
 # Relocation Cancel Request
 
+class RelocationCancelReqIEs(GTPIEs):
+    
+    MAND = set()
+    OPT  = {
+        GTPIEType.IMSI.value,
+        GTPIEType.IMEI.value,
+        GTPIEType.ExtCommonFlags.value,
+        GTPIEType.ExtRANAPCause.value,
+        GTPIEType.PrivateExt.value
+        }
+    
+    _GEN = (
+        GTPIETV('IMSI', val={'Type': GTPIEType.IMSI.value}, bl={'Data': 64}, trans=True),
+        GTPIETLV('IMEI', val={'Type': GTPIEType.IMEI.value}, trans=True),
+        GTPIETLV('ExtCommonFlags', val={'Type': GTPIEType.ExtCommonFlags.value}, trans=True),
+        GTPIETLV('ExtRANAPCause', val={'Type': GTPIEType.ExtRANAPCause.value}, trans=True),
+        GTPIETLV('PrivateExt', val={'Type': GTPIEType.PrivateExt.value}, trans=True),
+        )
+
+
 class RelocationCancelReq(GTPMsg):
     _GEN = (
-        GTPHdr(val={'Type': GTPType.RelocationCancelReq.value}),
-        GTPIEs(GEN=(
-            GTPIETV('IMSI', val={'Type': GTPIEType.IMSI.value}, bl={'Data': 64}, trans=True),
-            GTPIETLV('IMEI', val={'Type': GTPIEType.IMEI.value}, trans=True),
-            GTPIETLV('ExtCommonFlags', val={'Type': GTPIEType.ExtCommonFlags.value}, trans=True),
-            GTPIETLV('ExtRANAPCause', val={'Type': GTPIEType.ExtRANAPCause.value}, trans=True),
-            GTPIETLV('PrivateExt', val={'Type': GTPIEType.PrivateExt.value}, trans=True),
-            ), hier=1)
+        GTPHdr(val={'PT': 1, 'Type': GTPType.RelocationCancelReq.value}),
+        RelocationCancelReqIEs(hier=1),
         )
+
 
 
 # Relocation Cancel Response
 
+class RelocationCancelRespIEs(GTPIEs):
+    
+    MAND = {
+        GTPIEType.Cause.value
+        }
+    OPT  = {
+        GTPIEType.PrivateExt.value
+        }
+    
+    _GEN = (
+        GTPIETV('Cause', val={'Type': GTPIEType.Cause.value}, bl={'Data': 8}),
+        GTPIETLV('PrivateExt', val={'Type': GTPIEType.PrivateExt.value}, trans=True),
+        )
+
+
 class RelocationCancelResp(GTPMsg):
     _GEN = (
-        GTPHdr(val={'Type': GTPType.RelocationCancelResp.value}),
-        GTPIEs(GEN=(
-            GTPIETV('Cause', val={'Type': GTPIEType.Cause.value}, bl={'Data': 8}),
-            GTPIETLV('PrivateExt', val={'Type': GTPIEType.PrivateExt.value}, trans=True),
-            ), hier=1)
+        GTPHdr(val={'PT': 1, 'Type': GTPType.RelocationCancelResp.value}),
+        RelocationCancelRespIEs(hier=1),
         )
 
 
 # Forward Relocation Complete Acknowledge
 
+class ForwardRelocationCompleteAckIEs(GTPIEs):
+    
+    MAND = {
+        GTPIEType.Cause.value
+        }
+    OPT  = {
+        GTPIEType.PrivateExt.value
+        }
+    
+    _GEN = (
+        GTPIETV('Cause', val={'Type': GTPIEType.Cause.value}, bl={'Data': 8}),
+        GTPIETLV('PrivateExt', val={'Type': GTPIEType.PrivateExt.value}, trans=True),
+        )
+
+
 class ForwardRelocationCompleteAck(GTPMsg):
     _GEN = (
-        GTPHdr(val={'Type': GTPType.ForwardRelocationCompleteAck.value}),
-        GTPIEs(GEN=(
-            GTPIETV('Cause', val={'Type': GTPIEType.Cause.value}, bl={'Data': 8}),
-            GTPIETLV('PrivateExt', val={'Type': GTPIEType.PrivateExt.value}, trans=True),
-            ), hier=1)
+        GTPHdr(val={'PT': 1, 'Type': GTPType.ForwardRelocationCompleteAck.value}),
+        ForwardRelocationCompleteAckIEs(hier=1),
         )
 
 
 # Forward SRNS Context Acknowledge
 
+class ForwardSRNSCtxtAckIEs(GTPIEs):
+    
+    MAND = {
+        GTPIEType.Cause.value
+        }
+    OPT  = {
+        GTPIEType.PrivateExt.value
+        }
+    
+    _GEN = (
+        GTPIETV('Cause', val={'Type': GTPIEType.Cause.value}, bl={'Data': 8}),
+        GTPIETLV('PrivateExt', val={'Type': GTPIEType.PrivateExt.value}, trans=True),
+        )
+
+
 class ForwardSRNSCtxtAck(GTPMsg):
     _GEN = (
-        GTPHdr(val={'Type': GTPType.ForwardSRNSCtxtAck.value}),
-        GTPIEs(GEN=(
-            GTPIETV('Cause', val={'Type': GTPIEType.Cause.value}, bl={'Data': 8}),
-            GTPIETLV('PrivateExt', val={'Type': GTPIEType.PrivateExt.value}, trans=True),
-            ), hier=1)
+        GTPHdr(val={'PT': 1, 'Type': GTPType.ForwardSRNSCtxtAck.value}),
+        ForwardSRNSCtxtAckIEs(hier=1),
         )
 
 
 # Forward SRNS Context
 
+class ForwardSRNSCtxtIEs(GTPIEs):
+    
+    MAND = {
+        GTPIEType.RABContext.value
+        }
+    OPT  = {
+        GTPIEType.SourceRNCPDCPContextInfo.value,
+        GTPIEType.PDUNumbers.value,
+        GTPIEType.PrivateExt.value
+        }
+    
+    _GEN = (
+        GTPIETV('RABContext', val={'Type': GTPIEType.RABContext.value}, bl={'Data': 72}),
+        GTPIETLV('SourceRNCPDCPContextInfo', val={'Type': GTPIEType.SourceRNCPDCPContextInfo.value}, trans=True),
+        GTPIETLV('PDUNumbers', val={'Type': GTPIEType.PDUNumbers.value}, trans=True),
+        GTPIETLV('PrivateExt', val={'Type': GTPIEType.PrivateExt.value}, trans=True),
+        )
+
+
 class ForwardSRNSCtxt(GTPMsg):
     _GEN = (
-        GTPHdr(val={'Type': GTPType.ForwardSRNSCtxt.value}),
-        GTPIEs(GEN=(
-            GTPIETV('RABContext', val={'Type': GTPIEType.RABContext.value}, bl={'Data': 72}),
-            GTPIETLV('SourceRNCPDCPContextInfo', val={'Type': GTPIEType.SourceRNCPDCPContextInfo.value}, trans=True),
-            GTPIETLV('PDUNumbers', val={'Type': GTPIEType.PDUNumbers.value}, trans=True),
-            GTPIETLV('PrivateExt', val={'Type': GTPIEType.PrivateExt.value}, trans=True),
-            ), hier=1)
+        GTPHdr(val={'PT': 1, 'Type': GTPType.ForwardSRNSCtxt.value}),
+        ForwardSRNSCtxtIEs(hier=1),
         )
 
 
 # RAN Information Relay
 
+class RANInfoRelayIEs(GTPIEs):
+    
+    MAND = {
+        GTPIEType.RANTransparentContainer.value
+        }
+    OPT  = {
+        GTPIEType.RIMRoutingAddr.value,
+        GTPIEType.RIMRoutingAddrDiscriminator.value,
+        GTPIEType.PrivateExt.value
+        }
+    
+    _GEN = (
+        GTPIETLV('RANTransparentContainer', val={'Type': GTPIEType.RANTransparentContainer.value}),
+        GTPIETLV('RIMRoutingAddr', val={'Type': GTPIEType.RIMRoutingAddr.value}, trans=True),
+        GTPIETLV('RIMRoutingAddrDiscriminator', val={'Type': GTPIEType.RIMRoutingAddrDiscriminator.value}, trans=True),
+        GTPIETLV('PrivateExt', val={'Type': GTPIEType.PrivateExt.value}, trans=True),
+        )
+
+
 class RANInfoRelay(GTPMsg):
     _GEN = (
-        GTPHdr(val={'Type': GTPType.RANInfoRelay.value}),
-        GTPIEs(GEN=(
-            GTPIETLV('RANTransparentContainer', val={'Type': GTPIEType.RANTransparentContainer.value}),
-            GTPIETLV('RIMRoutingAddr', val={'Type': GTPIEType.RIMRoutingAddr.value}, trans=True),
-            GTPIETLV('RIMRoutingAddrDiscriminator', val={'Type': GTPIEType.RIMRoutingAddrDiscriminator.value}, trans=True),
-            GTPIETLV('PrivateExt', val={'Type': GTPIEType.PrivateExt.value}, trans=True),
-            ), hier=1)
+        GTPHdr(val={'PT': 1, 'Type': GTPType.RANInfoRelay.value}),
+        RANInfoRelayIEs(hier=1),
         )
 
 
 # UE Registration Query Request
 
+class UERegistrationQueryReqIEs(GTPIEs):
+    
+    MAND = {
+        GTPIEType.IMSI.value
+        }
+    OPT  = {
+        GTPIEType.PrivateExt.value
+        }
+    
+    _GEN = (
+        GTPIETV('IMSI', val={'Type': GTPIEType.IMSI.value}, bl={'Data': 64}),
+        GTPIETLV('PrivateExt', val={'Type': GTPIEType.PrivateExt.value}, trans=True),
+        )
+
+
 class UERegistrationQueryReq(GTPMsg):
     _GEN = (
-        GTPHdr(val={'Type': GTPType.UERegistrationQueryReq.value}),
-        GTPIEs(GEN=(
-            GTPIETV('IMSI', val={'Type': GTPIEType.IMSI.value}, bl={'Data': 64}),
-            GTPIETLV('PrivateExt', val={'Type': GTPIEType.PrivateExt.value}, trans=True),
-            ), hier=1)
+        GTPHdr(val={'PT': 1, 'Type': GTPType.UERegistrationQueryReq.value}),
+        UERegistrationQueryReqIEs(hier=1),
         )
 
 
 # UE Registration Query Response
 
+class UERegistrationQueryRespIEs(GTPIEs):
+    
+    MAND = {
+        GTPIEType.Cause.value,
+        GTPIEType.IMSI.value
+        }
+    OPT  = {
+        GTPIEType.SelectedPLMNID.value,
+        GTPIEType.PrivateExt.value
+        }
+    
+    _GEN = (
+        GTPIETV('Cause', val={'Type': GTPIEType.Cause.value}, bl={'Data': 8}),
+        GTPIETV('IMSI', val={'Type': GTPIEType.IMSI.value}, bl={'Data': 64}),
+        GTPIETLV('SelectedPLMNID', val={'Type': GTPIEType.SelectedPLMNID.value}, trans=True),
+        GTPIETLV('PrivateExt', val={'Type': GTPIEType.PrivateExt.value}, trans=True),
+        )
+
+
 class UERegistrationQueryResp(GTPMsg):
     _GEN = (
-        GTPHdr(val={'Type': GTPType.UERegistrationQueryResp.value}),
-        GTPIEs(GEN=(
-            GTPIETV('Cause', val={'Type': GTPIEType.Cause.value}, bl={'Data': 8}),
-            GTPIETV('IMSI', val={'Type': GTPIEType.IMSI.value}, bl={'Data': 64}),
-            GTPIETLV('SelectedPLMNID', val={'Type': GTPIEType.SelectedPLMNID.value}, trans=True),
-            GTPIETLV('PrivateExt', val={'Type': GTPIEType.PrivateExt.value}, trans=True),
-            ), hier=1)
+        GTPHdr(val={'PT': 1, 'Type': GTPType.UERegistrationQueryResp.value}),
+        UERegistrationQueryRespIEs(hier=1),
         )
 
 
@@ -3165,187 +3977,367 @@ class UERegistrationQueryResp(GTPMsg):
 
 # MBMS Notification Request
 
+class MBMSNotifReqIEs(GTPIEs):
+    
+    MAND = {
+        GTPIEType.IMSI.value,
+        GTPIEType.TEIDCP.value,
+        GTPIEType.NSAPI.value,
+        GTPIEType.EndUserAddr.value,
+        GTPIEType.APN.value,
+        GTPIEType.GSNAddr.value
+        }
+    OPT  = {
+        GTPIEType.MBMSPCO.value,
+        GTPIEType.PrivateExt.value
+        }
+    
+    _GEN = (
+        GTPIETV('IMSI', val={'Type': GTPIEType.IMSI.value}, bl={'Data': 64}),
+        GTPIETV('TEIDCP', val={'Type': GTPIEType.TEIDCP.value}, bl={'Data': 32}),
+        GTPIETV('NSAPI', val={'Type': GTPIEType.NSAPI.value}, bl={'Data': 8}),
+        GTPIETLV('EndUserAddr', val={'Type': GTPIEType.EndUserAddr.value}),
+        GTPIETLV('APN', val={'Type': GTPIEType.APN.value}),
+        GTPIETLV('GGSNAddrForControlPlane', val={'Type': GTPIEType.GSNAddr.value}),
+        GTPIETLV('MBMSPCO', val={'Type': GTPIEType.MBMSPCO.value}, trans=True),
+        GTPIETLV('PrivateExt', val={'Type': GTPIEType.PrivateExt.value}, trans=True),
+        )
+
+
 class MBMSNotifReq(GTPMsg):
     _GEN = (
-        GTPHdr(val={'Type': GTPType.MBMSNotifReq.value}),
-        GTPIEs(GEN=(
-            GTPIETV('IMSI', val={'Type': GTPIEType.IMSI.value}, bl={'Data': 64}),
-            GTPIETV('TEIDCP', val={'Type': GTPIEType.TEIDCP.value}, bl={'Data': 32}),
-            GTPIETV('NSAPI', val={'Type': GTPIEType.NSAPI.value}, bl={'Data': 8}),
-            GTPIETLV('EndUserAddr', val={'Type': GTPIEType.EndUserAddr.value}),
-            GTPIETLV('APN', val={'Type': GTPIEType.APN.value}),
-            GTPIETLV('GGSNAddrForControlPlane', val={'Type': GTPIEType.GSNAddr.value}),
-            GTPIETLV('MBMSPCO', val={'Type': GTPIEType.MBMSPCO.value}, trans=True),
-            GTPIETLV('PrivateExt', val={'Type': GTPIEType.PrivateExt.value}, trans=True),
-            ), hier=1)
+        GTPHdr(val={'PT': 1, 'Type': GTPType.MBMSNotifReq.value}),
+        MBMSNotifReqIEs(hier=1),
         )
 
 
 # MBMS Notification Response
 
+class MBMSNotifRespIEs(GTPIEs):
+    
+    MAND = {
+        GTPIEType.Cause.value
+        }
+    OPT  = {
+        GTPIEType.PrivateExt.value
+        }
+    
+    _GEN = (
+        GTPIETV('Cause', val={'Type': GTPIEType.Cause.value}, bl={'Data': 8}),
+        GTPIETLV('PrivateExt', val={'Type': GTPIEType.PrivateExt.value}, trans=True),
+        )
+
+
 class MBMSNotifResp(GTPMsg):
     _GEN = (
-        GTPHdr(val={'Type': GTPType.MBMSNotifResp.value}),
-        GTPIEs(GEN=(
-            GTPIETV('Cause', val={'Type': GTPIEType.Cause.value}, bl={'Data': 8}),
-            GTPIETLV('PrivateExt', val={'Type': GTPIEType.PrivateExt.value}, trans=True),
-            ), hier=1)
+        GTPHdr(val={'PT': 1, 'Type': GTPType.MBMSNotifResp.value}),
+        MBMSNotifRespIEs(hier=1),
         )
 
 
 # MBMS Notification Reject Request
 
+class MBMSNotifRejectReqIEs(GTPIEs):
+    
+    MAND = {
+        GTPIEType.Cause.value,
+        GTPIEType.TEIDCP.value,
+        GTPIEType.NSAPI.value,
+        GTPIEType.EndUserAddr.value,
+        GTPIEType.APN.value
+        }
+    OPT  = {
+        GTPIEType.GSNAddr.value,
+        GTPIEType.PrivateExt.value
+        }
+    
+    _GEN = (
+        GTPIETV('Cause', val={'Type': GTPIEType.Cause.value}, bl={'Data': 8}),
+        GTPIETV('TEIDCP', val={'Type': GTPIEType.TEIDCP.value}, bl={'Data': 32}),
+        GTPIETV('NSAPI', val={'Type': GTPIEType.NSAPI.value}, bl={'Data': 8}),
+        GTPIETLV('EndUserAddr', val={'Type': GTPIEType.EndUserAddr.value}),
+        GTPIETLV('APN', val={'Type': GTPIEType.APN.value}),
+        GTPIETLV('SGSNAddrForControlPlane', val={'Type': GTPIEType.GSNAddr.value}, trans=True),
+        GTPIETLV('PrivateExt', val={'Type': GTPIEType.PrivateExt.value}, trans=True),
+        )
+
+
 class MBMSNotifRejectReq(GTPMsg):
     _GEN = (
-        GTPHdr(val={'Type': GTPType.MBMSNotifRejectReq.value}),
-        GTPIEs(GEN=(
-            GTPIETV('Cause', val={'Type': GTPIEType.Cause.value}, bl={'Data': 8}),
-            GTPIETV('TEIDCP', val={'Type': GTPIEType.TEIDCP.value}, bl={'Data': 32}),
-            GTPIETV('NSAPI', val={'Type': GTPIEType.NSAPI.value}, bl={'Data': 8}),
-            GTPIETLV('EndUserAddr', val={'Type': GTPIEType.EndUserAddr.value}),
-            GTPIETLV('APN', val={'Type': GTPIEType.APN.value}),
-            GTPIETLV('SGSNAddrForControlPlane', val={'Type': GTPIEType.GSNAddr.value}, trans=True),
-            GTPIETLV('PrivateExt', val={'Type': GTPIEType.PrivateExt.value}, trans=True),
-            ), hier=1)
+        GTPHdr(val={'PT': 1, 'Type': GTPType.MBMSNotifRejectReq.value}),
+        MBMSNotifRejectReqIEs(hier=1),
         )
 
 
 # MBMS Notification Reject Response
 
+class MBMSNotifRejectRespIEs(GTPIEs):
+    
+    MAND = {
+        GTPIEType.Cause.value
+        }
+    OPT  = {
+        GTPIEType.PrivateExt.value
+        }
+    
+    _GEN = (
+        GTPIETV('Cause', val={'Type': GTPIEType.Cause.value}, bl={'Data': 8}),
+        GTPIETLV('PrivateExt', val={'Type': GTPIEType.PrivateExt.value}, trans=True),
+        )
+
+
 class MBMSNotifRejectResp(GTPMsg):
     _GEN = (
-        GTPHdr(val={'Type': GTPType.MBMSNotifRejectResp.value}),
-        GTPIEs(GEN=(
-            GTPIETV('Cause', val={'Type': GTPIEType.Cause.value}, bl={'Data': 8}),
-            GTPIETLV('PrivateExt', val={'Type': GTPIEType.PrivateExt.value}, trans=True),
-            ), hier=1)
+        GTPHdr(val={'PT': 1, 'Type': GTPType.MBMSNotifRejectResp.value}),
+        MBMSNotifRejectRespIEs(hier=1),
         )
 
 
 # Create MBMS Context Request
 
+class CreateMBMSCtxtReqIEs(GTPIEs):
+    
+    MAND = {
+        GTPIEType.RAI.value,
+        GTPIEType.EndUserAddr.value,
+        GTPIEType.APN.value,
+        GTPIEType.GSNAddr.value,
+        GTPIEType.EnhancedNSAPI.value
+        }
+    OPT  = {
+        GTPIEType.IMSI.value,
+        GTPIEType.Recovery.value,
+        GTPIEType.SelectionMode.value,
+        GTPIEType.TEIDCP.value,
+        GTPIEType.TraceReference.value,
+        GTPIEType.TraceType.value,
+        GTPIEType.MSISDN.value,
+        GTPIEType.TriggerId.value,
+        GTPIEType.OMCIdentity.value,
+        GTPIEType.RATType.value,
+        GTPIEType.ULI.value,
+        GTPIEType.MSTimeZone.value,
+        GTPIEType.IMEI.value,
+        GTPIEType.MBMSPCO.value,
+        GTPIEType.AdditionalTraceInfo.value,
+        GTPIEType.AdditionalMBMSTraceInfo.value,
+        GTPIEType.PrivateExt.value
+        }
+    
+    _GEN = (
+        GTPIETV('IMSI', val={'Type': GTPIEType.IMSI.value}, bl={'Data': 64}, trans=True),
+        GTPIETV('RAI', val={'Type': GTPIEType.RAI.value}, bl={'Data': 48}),
+        GTPIETV('Recovery', val={'Type': GTPIEType.Recovery.value}, bl={'Data': 8}, trans=True),
+        GTPIETV('SelectionMode', val={'Type': GTPIEType.SelectionMode.value}, bl={'Data': 8}, trans=True),
+        GTPIETV('TEIDCP', val={'Type': GTPIEType.TEIDCP.value}, bl={'Data': 32}, trans=True),
+        GTPIETV('TraceReference', val={'Type': GTPIEType.TraceReference.value}, bl={'Data': 16}, trans=True),
+        GTPIETV('TraceType', val={'Type': GTPIEType.TraceType.value}, bl={'Data': 16}, trans=True),
+        GTPIETLV('EndUserAddr', val={'Type': GTPIEType.EndUserAddr.value}),
+        GTPIETLV('APN', val={'Type': GTPIEType.APN.value}),
+        GTPIETLV('SGSNAddrForSignalling', val={'Type': GTPIEType.GSNAddr.value}),
+        GTPIETLV('MSISDN', val={'Type': GTPIEType.MSISDN.value}, trans=True),
+        GTPIETLV('TriggerId', val={'Type': GTPIEType.TriggerId.value}, trans=True),
+        GTPIETLV('OMCIdentity', val={'Type': GTPIEType.OMCIdentity.value}, trans=True),
+        GTPIETLV('RATType', val={'Type': GTPIEType.RATType.value}, trans=True),
+        GTPIETLV('ULI', val={'Type': GTPIEType.ULI.value}, trans=True),
+        GTPIETLV('MSTimeZone', val={'Type': GTPIEType.MSTimeZone.value}, trans=True),
+        GTPIETLV('IMEI', val={'Type': GTPIEType.IMEI.value}, trans=True),
+        GTPIETLV('MBMSPCO', val={'Type': GTPIEType.MBMSPCO.value}, trans=True),
+        GTPIETLV('AdditionalTraceInfo', val={'Type': GTPIEType.AdditionalTraceInfo.value}, trans=True),
+        GTPIETLV('EnhancedNSAPI', val={'Type': GTPIEType.EnhancedNSAPI.value}),
+        GTPIETLV('AdditionalMBMSTraceInfo', val={'Type': GTPIEType.AdditionalMBMSTraceInfo.value}, trans=True),
+        GTPIETLV('PrivateExt', val={'Type': GTPIEType.PrivateExt.value}, trans=True),
+        )
+
+
 class CreateMBMSCtxtReq(GTPMsg):
     _GEN = (
-        GTPHdr(val={'Type': GTPType.CreateMBMSCtxtReq.value}),
-        GTPIEs(GEN=(
-            GTPIETV('IMSI', val={'Type': GTPIEType.IMSI.value}, bl={'Data': 64}, trans=True),
-            GTPIETV('RAI', val={'Type': GTPIEType.RAI.value}, bl={'Data': 48}),
-            GTPIETV('Recovery', val={'Type': GTPIEType.Recovery.value}, bl={'Data': 8}, trans=True),
-            GTPIETV('SelectionMode', val={'Type': GTPIEType.SelectionMode.value}, bl={'Data': 8}, trans=True),
-            GTPIETV('TEIDCP', val={'Type': GTPIEType.TEIDCP.value}, bl={'Data': 32}, trans=True),
-            GTPIETV('TraceReference', val={'Type': GTPIEType.TraceReference.value}, bl={'Data': 16}, trans=True),
-            GTPIETV('TraceType', val={'Type': GTPIEType.TraceType.value}, bl={'Data': 16}, trans=True),
-            GTPIETLV('EndUserAddr', val={'Type': GTPIEType.EndUserAddr.value}),
-            GTPIETLV('APN', val={'Type': GTPIEType.APN.value}),
-            GTPIETLV('SGSNAddrForSignalling', val={'Type': GTPIEType.GSNAddr.value}),
-            GTPIETLV('MSISDN', val={'Type': GTPIEType.MSISDN.value}, trans=True),
-            GTPIETLV('TriggerId', val={'Type': GTPIEType.TriggerId.value}, trans=True),
-            GTPIETLV('OMCIdentity', val={'Type': GTPIEType.OMCIdentity.value}, trans=True),
-            GTPIETLV('RATType', val={'Type': GTPIEType.RATType.value}, trans=True),
-            GTPIETLV('ULI', val={'Type': GTPIEType.ULI.value}, trans=True),
-            GTPIETLV('MSTimeZone', val={'Type': GTPIEType.MSTimeZone.value}, trans=True),
-            GTPIETLV('IMEI', val={'Type': GTPIEType.IMEI.value}, trans=True),
-            GTPIETLV('MBMSPCO', val={'Type': GTPIEType.MBMSPCO.value}, trans=True),
-            GTPIETLV('AdditionalTraceInfo', val={'Type': GTPIEType.AdditionalTraceInfo.value}, trans=True),
-            GTPIETLV('EnhancedNSAPI', val={'Type': GTPIEType.EnhancedNSAPI.value}),
-            GTPIETLV('AdditionalMBMSTraceInfo', val={'Type': GTPIEType.AdditionalMBMSTraceInfo.value}, trans=True),
-            GTPIETLV('PrivateExt', val={'Type': GTPIEType.PrivateExt.value}, trans=True),
-            ), hier=1)
+        GTPHdr(val={'PT': 1, 'Type': GTPType.CreateMBMSCtxtReq.value}),
+        CreateMBMSCtxtReqIEs(hier=1),
         )
 
 
 # Create MBMS Context Response
 
+class CreateMBMSCtxtRespIEs(GTPIEs):
+    
+    MAND = {
+        GTPIEType.Cause.value
+        }
+    OPT  = {
+        GTPIEType.Recovery.value,
+        GTPIEType.TEIDCP.value,
+        GTPIEType.ChargingID.value,
+        GTPIEType.GSNAddr.value,
+        GTPIEType.MBMSPCO.value,
+        GTPIEType.ChargingGatewayAddr.value,
+        GTPIEType.PrivateExt.value
+        }
+    
+    _GEN = (
+        GTPIETV('Cause', val={'Type': GTPIEType.Cause.value}, bl={'Data': 8}),
+        GTPIETV('Recovery', val={'Type': GTPIEType.Recovery.value}, bl={'Data': 8}, trans=True),
+        GTPIETV('TEIDCP', val={'Type': GTPIEType.TEIDCP.value}, bl={'Data': 32}, trans=True),
+        GTPIETV('ChargingID', val={'Type': GTPIEType.ChargingID.value}, bl={'Data': 32}, trans=True),
+        GTPIETLV('GGSNAddrForControlPlane', val={'Type': GTPIEType.GSNAddr.value}, trans=True),
+        GTPIETLV('AltGGSNAddrForControlPlane', val={'Type': GTPIEType.GSNAddr.value}, trans=True),
+        GTPIETLV('ChargingGatewayAddr', val={'Type': GTPIEType.ChargingGatewayAddr.value}, trans=True),
+        GTPIETLV('AltChargingGatewayAddr', val={'Type': GTPIEType.ChargingGatewayAddr.value}, trans=True),
+        GTPIETLV('MBMSPCO', val={'Type': GTPIEType.MBMSPCO.value}, trans=True),
+        GTPIETLV('PrivateExt', val={'Type': GTPIEType.PrivateExt.value}, trans=True),
+        )
+
+
 class CreateMBMSCtxtResp(GTPMsg):
     _GEN = (
-        GTPHdr(val={'Type': GTPType.CreateMBMSCtxtResp.value}),
-        GTPIEs(GEN=(
-            GTPIETV('Cause', val={'Type': GTPIEType.Cause.value}, bl={'Data': 8}),
-            GTPIETV('Recovery', val={'Type': GTPIEType.Recovery.value}, bl={'Data': 8}, trans=True),
-            GTPIETV('TEIDCP', val={'Type': GTPIEType.TEIDCP.value}, bl={'Data': 32}, trans=True),
-            GTPIETV('ChargingID', val={'Type': GTPIEType.ChargingID.value}, bl={'Data': 32}, trans=True),
-            GTPIETLV('GGSNAddrForControlPlane', val={'Type': GTPIEType.GSNAddr.value}, trans=True),
-            GTPIETLV('AltGGSNAddrForControlPlane', val={'Type': GTPIEType.GSNAddr.value}, trans=True),
-            GTPIETLV('ChargingGatewayAddr', val={'Type': GTPIEType.ChargingGatewayAddr.value}, trans=True),
-            GTPIETLV('AltChargingGatewayAddr', val={'Type': GTPIEType.ChargingGatewayAddr.value}, trans=True),
-            GTPIETLV('MBMSPCO', val={'Type': GTPIEType.MBMSPCO.value}, trans=True),
-            GTPIETLV('PrivateExt', val={'Type': GTPIEType.PrivateExt.value}, trans=True),
-            ), hier=1)
+        GTPHdr(val={'PT': 1, 'Type': GTPType.CreateMBMSCtxtResp.value}),
+        CreateMBMSCtxtRespIEs(hier=1),
         )
 
 
 # Update MBMS Context Request
 
+class UpdateMBMSCtxtReqIEs(GTPIEs):
+    
+    MAND = {
+        GTPIEType.RAI.value,
+        GTPIEType.EnhancedNSAPI.value
+        }
+    OPT  = {
+        GTPIEType.Recovery.value,
+        GTPIEType.TEIDCP.value,
+        GTPIEType.TraceReference.value,
+        GTPIEType.TraceType.value,
+        GTPIEType.GSNAddr.value,
+        GTPIEType.TriggerId.value,
+        GTPIEType.OMCIdentity.value,
+        GTPIEType.RATType.value,
+        GTPIEType.ULI.value,
+        GTPIEType.MSTimeZone.value,
+        GTPIEType.AdditionalTraceInfo.value,
+        GTPIEType.AdditionalMBMSTraceInfo.value,
+        GTPIEType.PrivateExt.value
+        }
+    
+    _GEN = (
+        GTPIETV('RAI', val={'Type': GTPIEType.RAI.value}, bl={'Data': 48}),
+        GTPIETV('Recovery', val={'Type': GTPIEType.Recovery.value}, bl={'Data': 8}, trans=True),
+        GTPIETV('TEIDCP', val={'Type': GTPIEType.TEIDCP.value}, bl={'Data': 32}, trans=True),
+        GTPIETV('TraceReference', val={'Type': GTPIEType.TraceReference.value}, bl={'Data': 16}, trans=True),
+        GTPIETV('TraceType', val={'Type': GTPIEType.TraceType.value}, bl={'Data': 16}, trans=True),
+        GTPIETLV('SGSNAddrForControlPlane', val={'Type': GTPIEType.GSNAddr.value}, trans=True),
+        GTPIETLV('AltSGSNAddrForControlPlane', val={'Type': GTPIEType.GSNAddr.value}, trans=True),
+        GTPIETLV('TriggerId', val={'Type': GTPIEType.TriggerId.value}, trans=True),
+        GTPIETLV('OMCIdentity', val={'Type': GTPIEType.OMCIdentity.value}, trans=True),
+        GTPIETLV('RATType', val={'Type': GTPIEType.RATType.value}, trans=True),
+        GTPIETLV('ULI', val={'Type': GTPIEType.ULI.value}, trans=True),
+        GTPIETLV('MSTimeZone', val={'Type': GTPIEType.MSTimeZone.value}, trans=True),
+        GTPIETLV('AdditionalTraceInfo', val={'Type': GTPIEType.AdditionalTraceInfo.value}, trans=True),
+        GTPIETLV('EnhancedNSAPI', val={'Type': GTPIEType.EnhancedNSAPI.value}),
+        GTPIETLV('AdditionalMBMSTraceInfo', val={'Type': GTPIEType.AdditionalMBMSTraceInfo.value}, trans=True),
+        GTPIETLV('PrivateExt', val={'Type': GTPIEType.PrivateExt.value}, trans=True),
+        )
+
+
 class UpdateMBMSCtxtReq(GTPMsg):
     _GEN = (
-        GTPHdr(val={'Type': GTPType.UpdateMBMSCtxtReq.value}),
-        GTPIEs(GEN=(
-            GTPIETV('RAI', val={'Type': GTPIEType.RAI.value}, bl={'Data': 48}),
-            GTPIETV('Recovery', val={'Type': GTPIEType.Recovery.value}, bl={'Data': 8}, trans=True),
-            GTPIETV('TEIDCP', val={'Type': GTPIEType.TEIDCP.value}, bl={'Data': 32}, trans=True),
-            GTPIETV('TraceReference', val={'Type': GTPIEType.TraceReference.value}, bl={'Data': 16}, trans=True),
-            GTPIETV('TraceType', val={'Type': GTPIEType.TraceType.value}, bl={'Data': 16}, trans=True),
-            GTPIETLV('SGSNAddrForControlPlane', val={'Type': GTPIEType.GSNAddr.value}, trans=True),
-            GTPIETLV('AltSGSNAddrForControlPlane', val={'Type': GTPIEType.GSNAddr.value}, trans=True),
-            GTPIETLV('TriggerId', val={'Type': GTPIEType.TriggerId.value}, trans=True),
-            GTPIETLV('OMCIdentity', val={'Type': GTPIEType.OMCIdentity.value}, trans=True),
-            GTPIETLV('RATType', val={'Type': GTPIEType.RATType.value}, trans=True),
-            GTPIETLV('ULI', val={'Type': GTPIEType.ULI.value}, trans=True),
-            GTPIETLV('MSTimeZone', val={'Type': GTPIEType.MSTimeZone.value}, trans=True),
-            GTPIETLV('AdditionalTraceInfo', val={'Type': GTPIEType.AdditionalTraceInfo.value}, trans=True),
-            GTPIETLV('EnhancedNSAPI', val={'Type': GTPIEType.EnhancedNSAPI.value}),
-            GTPIETLV('AdditionalMBMSTraceInfo', val={'Type': GTPIEType.AdditionalMBMSTraceInfo.value}, trans=True),
-            GTPIETLV('PrivateExt', val={'Type': GTPIEType.PrivateExt.value}, trans=True),
-            ), hier=1)
+        GTPHdr(val={'PT': 1, 'Type': GTPType.UpdateMBMSCtxtReq.value}),
+        UpdateMBMSCtxtReqIEs(hier=1),
         )
 
 
 # Update MBMS Context Response
 
+class UpdateMBMSCtxtRespIEs(GTPIEs):
+    
+    MAND = {
+        GTPIEType.Cause.value
+        }
+    OPT  = {
+        GTPIEType.Recovery.value,
+        GTPIEType.TEIDCP.value,
+        GTPIEType.ChargingID.value,
+        GTPIEType.GSNAddr.value,
+        GTPIEType.ChargingGatewayAddr.value,
+        GTPIEType.PrivateExt.value
+        }
+    
+    _GEN = (
+        GTPIETV('Cause', val={'Type': GTPIEType.Cause.value}, bl={'Data': 8}),
+        GTPIETV('Recovery', val={'Type': GTPIEType.Recovery.value}, bl={'Data': 8}, trans=True),
+        GTPIETV('TEIDCP', val={'Type': GTPIEType.TEIDCP.value}, bl={'Data': 32}, trans=True),
+        GTPIETV('ChargingID', val={'Type': GTPIEType.ChargingID.value}, bl={'Data': 32}, trans=True),
+        GTPIETLV('GGSNAddrForControlPlane', val={'Type': GTPIEType.GSNAddr.value}, trans=True),
+        GTPIETLV('AltGGSNAddrForControlPlane', val={'Type': GTPIEType.GSNAddr.value}, trans=True),
+        GTPIETLV('ChargingGatewayAddr', val={'Type': GTPIEType.ChargingGatewayAddr.value}, trans=True),
+        GTPIETLV('AltChargingGatewayAddr', val={'Type': GTPIEType.ChargingGatewayAddr.value}, trans=True),
+        GTPIETLV('PrivateExt', val={'Type': GTPIEType.PrivateExt.value}, trans=True),
+        )
+
+
 class UpdateMBMSCtxtResp(GTPMsg):
     _GEN = (
-        GTPHdr(val={'Type': GTPType.UpdateMBMSCtxtResp.value}),
-        GTPIEs(GEN=(
-            GTPIETV('Cause', val={'Type': GTPIEType.Cause.value}, bl={'Data': 8}),
-            GTPIETV('Recovery', val={'Type': GTPIEType.Recovery.value}, bl={'Data': 8}, trans=True),
-            GTPIETV('TEIDCP', val={'Type': GTPIEType.TEIDCP.value}, bl={'Data': 32}, trans=True),
-            GTPIETV('ChargingID', val={'Type': GTPIEType.ChargingID.value}, bl={'Data': 32}, trans=True),
-            GTPIETLV('GGSNAddrForControlPlane', val={'Type': GTPIEType.GSNAddr.value}, trans=True),
-            GTPIETLV('AltGGSNAddrForControlPlane', val={'Type': GTPIEType.GSNAddr.value}, trans=True),
-            GTPIETLV('ChargingGatewayAddr', val={'Type': GTPIEType.ChargingGatewayAddr.value}, trans=True),
-            GTPIETLV('AltChargingGatewayAddr', val={'Type': GTPIEType.ChargingGatewayAddr.value}, trans=True),
-            GTPIETLV('PrivateExt', val={'Type': GTPIEType.PrivateExt.value}, trans=True),
-            ), hier=1)
+        GTPHdr(val={'PT': 1, 'Type': GTPType.UpdateMBMSCtxtResp.value}),
+        UpdateMBMSCtxtRespIEs(hier=1),
         )
 
 
 # Delete MBMS Context Request
 
+class DeleteMBMSCtxtReqIEs(GTPIEs):
+    
+    MAND = set()
+    OPT  = {
+        GTPIEType.IMSI.value,
+        GTPIEType.TEIDCP.value,
+        GTPIEType.EndUserAddr.value,
+        GTPIEType.APN.value,
+        GTPIEType.MBMSPCO.value,
+        GTPIEType.EnhancedNSAPI.value,
+        GTPIEType.PrivateExt.value
+        }
+    
+    _GEN = (
+        GTPIETV('IMSI', val={'Type': GTPIEType.IMSI.value}, bl={'Data': 64}, trans=True),
+        GTPIETV('TEIDCP', val={'Type': GTPIEType.TEIDCP.value}, bl={'Data': 32}, trans=True),
+        GTPIETLV('EndUserAddr', val={'Type': GTPIEType.EndUserAddr.value}, trans=True),
+        GTPIETLV('APN', val={'Type': GTPIEType.APN.value}, trans=True),
+        GTPIETLV('MBMSPCO', val={'Type': GTPIEType.MBMSPCO.value}, trans=True),
+        GTPIETLV('EnhancedNSAPI', val={'Type': GTPIEType.EnhancedNSAPI.value}, trans=True),
+        GTPIETLV('PrivateExt', val={'Type': GTPIEType.PrivateExt.value}, trans=True),
+        )
+
+
 class DeleteMBMSCtxtReq(GTPMsg):
     _GEN = (
-        GTPHdr(val={'Type': GTPType.DeleteMBMSCtxtReq.value}),
-        GTPIEs(GEN=(
-            GTPIETV('IMSI', val={'Type': GTPIEType.IMSI.value}, bl={'Data': 64}, trans=True),
-            GTPIETV('TEIDCP', val={'Type': GTPIEType.TEIDCP.value}, bl={'Data': 32}, trans=True),
-            GTPIETLV('EndUserAddr', val={'Type': GTPIEType.EndUserAddr.value}, trans=True),
-            GTPIETLV('APN', val={'Type': GTPIEType.APN.value}, trans=True),
-            GTPIETLV('MBMSPCO', val={'Type': GTPIEType.MBMSPCO.value}, trans=True),
-            GTPIETLV('EnhancedNSAPI', val={'Type': GTPIEType.EnhancedNSAPI.value}, trans=True),
-            GTPIETLV('PrivateExt', val={'Type': GTPIEType.PrivateExt.value}, trans=True),
-            ), hier=1)
+        GTPHdr(val={'PT': 1, 'Type': GTPType.DeleteMBMSCtxtReq.value}),
+        DeleteMBMSCtxtReqIEs(hier=1),
         )
 
 
 # Delete MBMS Context Response
 
+class DeleteMBMSCtxtRespIEs(GTPIEs):
+    
+    MAND = {
+        GTPIEType.Cause.value
+        }
+    OPT  = {
+        GTPIEType.MBMSPCO.value,
+        GTPIEType.PrivateExt.value
+        }
+    
+    _GEN = (
+        GTPIETV('Cause', val={'Type': GTPIEType.Cause.value}, bl={'Data': 8}),
+        GTPIETLV('MBMSPCO', val={'Type': GTPIEType.MBMSPCO.value}, trans=True),
+        GTPIETLV('PrivateExt', val={'Type': GTPIEType.PrivateExt.value}, trans=True),
+        )
+
+
 class DeleteMBMSCtxtResp(GTPMsg):
     _GEN = (
-        GTPHdr(val={'Type': GTPType.DeleteMBMSCtxtResp.value}),
-        GTPIEs(GEN=(
-            GTPIETV('Cause', val={'Type': GTPIEType.Cause.value}, bl={'Data': 8}),
-            GTPIETLV('MBMSPCO', val={'Type': GTPIEType.MBMSPCO.value}, trans=True),
-            GTPIETLV('PrivateExt', val={'Type': GTPIEType.PrivateExt.value}, trans=True),
-            ), hier=1)
+        GTPHdr(val={'PT': 1, 'Type': GTPType.DeleteMBMSCtxtResp.value}),
+        DeleteMBMSCtxtRespIEs(hier=1),
         )
 
 
@@ -3353,168 +4345,330 @@ class DeleteMBMSCtxtResp(GTPMsg):
 
 # MBMS Registration Request
 
+class MBMSRegistrationReqIEs(GTPIEs):
+    
+    MAND = {
+        GTPIEType.EndUserAddr.value,
+        GTPIEType.APN.value
+        }
+    OPT  = {
+        GTPIEType.TEIDCP.value,
+        GTPIEType.GSNAddr.value,
+        GTPIEType.PrivateExt.value
+        }
+    
+    _GEN = (
+        GTPIETV('TEIDCP', val={'Type': GTPIEType.TEIDCP.value}, bl={'Data': 32}, trans=True),
+        GTPIETLV('EndUserAddr', val={'Type': GTPIEType.EndUserAddr.value}),
+        GTPIETLV('APN', val={'Type': GTPIEType.APN.value}),
+        GTPIETLV('SGSNAddrForControlPlane', val={'Type': GTPIEType.GSNAddr.value}, trans=True),
+        GTPIETLV('AltSGSNAddrForControlPlane', val={'Type': GTPIEType.GSNAddr.value}, trans=True),
+        GTPIETLV('PrivateExt', val={'Type': GTPIEType.PrivateExt.value}, trans=True),
+        )
+
+
 class MBMSRegistrationReq(GTPMsg):
     _GEN = (
-        GTPHdr(val={'Type': GTPType.MBMSRegistrationReq.value}),
-        GTPIEs(GEN=(
-            GTPIETV('TEIDCP', val={'Type': GTPIEType.TEIDCP.value}, bl={'Data': 32}, trans=True),
-            GTPIETLV('EndUserAddr', val={'Type': GTPIEType.EndUserAddr.value}),
-            GTPIETLV('APN', val={'Type': GTPIEType.APN.value}),
-            GTPIETLV('SGSNAddrForControlPlane', val={'Type': GTPIEType.GSNAddr.value}, trans=True),
-            GTPIETLV('AltSGSNAddrForControlPlane', val={'Type': GTPIEType.GSNAddr.value}, trans=True),
-            GTPIETLV('PrivateExt', val={'Type': GTPIEType.PrivateExt.value}, trans=True),
-            ), hier=1)
+        GTPHdr(val={'PT': 1, 'Type': GTPType.MBMSRegistrationReq.value}),
+        MBMSRegistrationReqIEs(hier=1),
         )
 
 
 # MBMS Registration Response
 
+class MBMSRegistrationRespIEs(GTPIEs):
+    
+    MAND = {
+        GTPIEType.Cause.value
+        }
+    OPT  = {
+        GTPIEType.TEIDCP.value,
+        GTPIEType.GSNAddr.value,
+        GTPIEType.TMGI.value,
+        GTPIEType.RequiredMBMSBearerCap.value,
+        GTPIEType.PrivateExt.value
+        }
+    
+    _GEN = (
+        GTPIETV('Cause', val={'Type': GTPIEType.Cause.value}, bl={'Data': 8}),
+        GTPIETV('TEIDCP', val={'Type': GTPIEType.TEIDCP.value}, bl={'Data': 32}, trans=True),
+        GTPIETLV('GGSNAddrForControlPlane', val={'Type': GTPIEType.GSNAddr.value}, trans=True),
+        GTPIETLV('TMGI', val={'Type': GTPIEType.TMGI.value}, trans=True),
+        GTPIETLV('RequiredMBMSBearerCap', val={'Type': GTPIEType.RequiredMBMSBearerCap.value}, trans=True),
+        GTPIETLV('PrivateExt', val={'Type': GTPIEType.PrivateExt.value}, trans=True),
+        )
+
+
 class MBMSRegistrationResp(GTPMsg):
     _GEN = (
-        GTPHdr(val={'Type': GTPType.MBMSRegistrationResp.value}),
-        GTPIEs(GEN=(
-            GTPIETV('Cause', val={'Type': GTPIEType.Cause.value}, bl={'Data': 8}),
-            GTPIETV('TEIDCP', val={'Type': GTPIEType.TEIDCP.value}, bl={'Data': 32}, trans=True),
-            GTPIETLV('GGSNAddrForControlPlane', val={'Type': GTPIEType.GSNAddr.value}, trans=True),
-            GTPIETLV('TMGI', val={'Type': GTPIEType.TMGI.value}, trans=True),
-            GTPIETLV('RequiredMBMSBearerCap', val={'Type': GTPIEType.RequiredMBMSBearerCap.value}, trans=True),
-            GTPIETLV('PrivateExt', val={'Type': GTPIEType.PrivateExt.value}, trans=True),
-            ), hier=1)
+        GTPHdr(val={'PT': 1, 'Type': GTPType.MBMSRegistrationResp.value}),
+        MBMSRegistrationRespIEs(hier=1),
         )
 
 
 # MBMS De-registration Request
 
+class MBMSDeRegistrationReqIEs(GTPIEs):
+    
+    MAND = {
+        GTPIEType.EndUserAddr.value,
+        GTPIEType.APN.value
+        }
+    OPT  = {
+        GTPIEType.PrivateExt.value
+        }
+    
+    _GEN = (
+        GTPIETLV('EndUserAddr', val={'Type': GTPIEType.EndUserAddr.value}),
+        GTPIETLV('APN', val={'Type': GTPIEType.APN.value}),
+        GTPIETLV('PrivateExt', val={'Type': GTPIEType.PrivateExt.value}, trans=True),
+        )
+
+
 class MBMSDeRegistrationReq(GTPMsg):
     _GEN = (
-        GTPHdr(val={'Type': GTPType.MBMSDeRegistrationReq.value}),
-        GTPIEs(GEN=(
-            GTPIETLV('EndUserAddr', val={'Type': GTPIEType.EndUserAddr.value}),
-            GTPIETLV('APN', val={'Type': GTPIEType.APN.value}),
-            GTPIETLV('PrivateExt', val={'Type': GTPIEType.PrivateExt.value}, trans=True),
-            ), hier=1)
+        GTPHdr(val={'PT': 1, 'Type': GTPType.MBMSDeRegistrationReq.value}),
+        MBMSDeRegistrationReqIEs(hier=1),
         )
 
 
 # MBMS De-registration Response
 
+class MBMSDeRegistrationRespIEs(GTPIEs):
+    
+    MAND = {
+        GTPIEType.Cause.value
+        }
+    OPT  = {
+        GTPIEType.PrivateExt.value
+        }
+    
+    _GEN = (
+        GTPIETV('Cause', val={'Type': GTPIEType.Cause.value}, bl={'Data': 8}),
+        GTPIETLV('PrivateExt', val={'Type': GTPIEType.PrivateExt.value}, trans=True),
+        )
+
+
 class MBMSDeRegistrationResp(GTPMsg):
     _GEN = (
-        GTPHdr(val={'Type': GTPType.MBMSDeRegistrationResp.value}),
-        GTPIEs(GEN=(
-            GTPIETV('Cause', val={'Type': GTPIEType.Cause.value}, bl={'Data': 8}),
-            GTPIETLV('PrivateExt', val={'Type': GTPIEType.PrivateExt.value}, trans=True),
-            ), hier=1)
+        GTPHdr(val={'PT': 1, 'Type': GTPType.MBMSDeRegistrationResp.value}),
+        MBMSDeRegistrationRespIEs(hier=1),
         )
 
 
 # MBMS Session Start Request
 
+class MBMSSessionStartReqIEs(GTPIEs):
+    
+    MAND = {
+        GTPIEType.EndUserAddr.value,
+        GTPIEType.APN.value,
+        GTPIEType.QoSProfile.value,
+        GTPIEType.CommonFlags.value,
+        GTPIEType.TMGI.value,
+        GTPIEType.MBMSServiceArea.value,
+        GTPIEType.MBMS2G3GInd.value,
+        GTPIEType.MBMSSessionDuration.value,
+        GTPIEType.MBMSTimeToDataTransfer.value
+        }
+    OPT  = {
+        GTPIEType.Recovery.value,
+        GTPIEType.TEIDCP.value,
+        GTPIEType.GSNAddr.value,
+        GTPIEType.MBMSSessionIdent.value,
+        GTPIEType.MBMSSessionRepetitionNumber.value,
+        GTPIEType.MBMSFlowIdent.value,
+        GTPIEType.MBMSIPMulticastDistrib.value,
+        GTPIEType.PrivateExt.value
+        }
+    
+    _GEN = (
+        GTPIETV('Recovery', val={'Type': GTPIEType.Recovery.value}, bl={'Data': 8}, trans=True),
+        GTPIETV('TEIDCP', val={'Type': GTPIEType.TEIDCP.value}, bl={'Data': 32}, trans=True),
+        GTPIETLV('EndUserAddr', val={'Type': GTPIEType.EndUserAddr.value}),
+        GTPIETLV('APN', val={'Type': GTPIEType.APN.value}),
+        GTPIETLV('GGSNAddrForControlPlane', val={'Type': GTPIEType.GSNAddr.value}, trans=True),
+        GTPIETLV('AltGGSNAddrForControlPlane', val={'Type': GTPIEType.GSNAddr.value}, trans=True),
+        GTPIETLV('QoSProfile', val={'Type': GTPIEType.QoSProfile.value}),
+        GTPIETLV('CommonFlags', val={'Type': GTPIEType.CommonFlags.value}),
+        GTPIETLV('TMGI', val={'Type': GTPIEType.TMGI.value}),
+        GTPIETLV('MBMSServiceArea', val={'Type': GTPIEType.MBMSServiceArea.value}),
+        GTPIETLV('MBMSSessionIdent', val={'Type': GTPIEType.MBMSSessionIdent.value}, trans=True),
+        GTPIETLV('MBMS2G3GInd', val={'Type': GTPIEType.MBMS2G3GInd.value}),
+        GTPIETLV('MBMSSessionDuration', val={'Type': GTPIEType.MBMSSessionDuration.value}),
+        GTPIETLV('MBMSSessionRepetitionNumber', val={'Type': GTPIEType.MBMSSessionRepetitionNumber.value}, trans=True),
+        GTPIETLV('MBMSTimeToDataTransfer', val={'Type': GTPIEType.MBMSTimeToDataTransfer.value}),
+        GTPIETLV('MBMSFlowIdent', val={'Type': GTPIEType.MBMSFlowIdent.value}, trans=True),
+        GTPIETLV('MBMSIPMulticastDistrib', val={'Type': GTPIEType.MBMSIPMulticastDistrib.value}, trans=True),
+        GTPIETLV('PrivateExt', val={'Type': GTPIEType.PrivateExt.value}, trans=True),
+        )
+
+
 class MBMSSessionStartReq(GTPMsg):
     _GEN = (
-        GTPHdr(val={'Type': GTPType.MBMSSessionStartReq.value}),
-        GTPIEs(GEN=(
-            GTPIETV('Recovery', val={'Type': GTPIEType.Recovery.value}, bl={'Data': 8}, trans=True),
-            GTPIETV('TEIDCP', val={'Type': GTPIEType.TEIDCP.value}, bl={'Data': 32}, trans=True),
-            GTPIETLV('EndUserAddr', val={'Type': GTPIEType.EndUserAddr.value}),
-            GTPIETLV('APN', val={'Type': GTPIEType.APN.value}),
-            GTPIETLV('GGSNAddrForControlPlane', val={'Type': GTPIEType.GSNAddr.value}, trans=True),
-            GTPIETLV('AltGGSNAddrForControlPlane', val={'Type': GTPIEType.GSNAddr.value}, trans=True),
-            GTPIETLV('QoSProfile', val={'Type': GTPIEType.QoSProfile.value}),
-            GTPIETLV('CommonFlags', val={'Type': GTPIEType.CommonFlags.value}),
-            GTPIETLV('TMGI', val={'Type': GTPIEType.TMGI.value}),
-            GTPIETLV('MBMSServiceArea', val={'Type': GTPIEType.MBMSServiceArea.value}),
-            GTPIETLV('MBMSSessionIdent', val={'Type': GTPIEType.MBMSSessionIdent.value}, trans=True),
-            GTPIETLV('MBMS2G3GInd', val={'Type': GTPIEType.MBMS2G3GInd.value}),
-            GTPIETLV('MBMSSessionDuration', val={'Type': GTPIEType.MBMSSessionDuration.value}),
-            GTPIETLV('MBMSSessionRepetitionNumber', val={'Type': GTPIEType.MBMSSessionRepetitionNumber.value}, trans=True),
-            GTPIETLV('MBMSTimeToDataTransfer', val={'Type': GTPIEType.MBMSTimeToDataTransfer.value}),
-            GTPIETLV('MBMSFlowIdent', val={'Type': GTPIEType.MBMSFlowIdent.value}, trans=True),
-            GTPIETLV('MBMSIPMulticastDistrib', val={'Type': GTPIEType.MBMSIPMulticastDistrib.value}, trans=True),
-            GTPIETLV('PrivateExt', val={'Type': GTPIEType.PrivateExt.value}, trans=True),
-            ), hier=1)
+        GTPHdr(val={'PT': 1, 'Type': GTPType.MBMSSessionStartReq.value}),
+        MBMSSessionStartReqIEs(hier=1),
         )
 
 
 # MBMS Session Start Response
 
+class MBMSSessionStartRespIEs(GTPIEs):
+    
+    MAND = {
+        GTPIEType.Cause.value
+        }
+    OPT  = {
+        GTPIEType.Recovery.value,
+        GTPIEType.TEIDDataI.value,
+        GTPIEType.TEIDCP.value,
+        GTPIEType.GSNAddr.value,
+        GTPIEType.MBMSDistribAck.value,
+        GTPIEType.PrivateExt.value
+        }
+    
+    _GEN = (
+        GTPIETV('Cause', val={'Type': GTPIEType.Cause.value}, bl={'Data': 8}),
+        GTPIETV('Recovery', val={'Type': GTPIEType.Recovery.value}, bl={'Data': 8}, trans=True),
+        GTPIETV('TEIDDataI', val={'Type': GTPIEType.TEIDDataI.value}, bl={'Data': 32}, trans=True),
+        GTPIETV('TEIDCP', val={'Type': GTPIEType.TEIDCP.value}, bl={'Data': 32}, trans=True),
+        GTPIETLV('SGSNAddrForControlPlane', val={'Type': GTPIEType.GSNAddr.value}, trans=True),
+        GTPIETLV('SGSNAddrForUserTraffic', val={'Type': GTPIEType.GSNAddr.value}, trans=True),
+        GTPIETLV('AltSGSNAddrForUserTraffic', val={'Type': GTPIEType.GSNAddr.value}, trans=True),
+        GTPIETLV('MBMSDistribAck', val={'Type': GTPIEType.MBMSDistribAck.value}, trans=True),
+        GTPIETLV('PrivateExt', val={'Type': GTPIEType.PrivateExt.value}, trans=True),
+        )
+
+
 class MBMSSessionStartResp(GTPMsg):
     _GEN = (
-        GTPHdr(val={'Type': GTPType.MBMSSessionStartResp.value}),
-        GTPIEs(GEN=(
-            GTPIETV('Cause', val={'Type': GTPIEType.Cause.value}, bl={'Data': 8}),
-            GTPIETV('Recovery', val={'Type': GTPIEType.Recovery.value}, bl={'Data': 8}, trans=True),
-            GTPIETV('TEIDDataI', val={'Type': GTPIEType.TEIDDataI.value}, bl={'Data': 32}, trans=True),
-            GTPIETV('TEIDCP', val={'Type': GTPIEType.TEIDCP.value}, bl={'Data': 32}, trans=True),
-            GTPIETLV('SGSNAddrForControlPlane', val={'Type': GTPIEType.GSNAddr.value}, trans=True),
-            GTPIETLV('SGSNAddrForUserTraffic', val={'Type': GTPIEType.GSNAddr.value}, trans=True),
-            GTPIETLV('AltSGSNAddrForUserTraffic', val={'Type': GTPIEType.GSNAddr.value}, trans=True),
-            GTPIETLV('MBMSDistribAck', val={'Type': GTPIEType.MBMSDistribAck.value}, trans=True),
-            GTPIETLV('PrivateExt', val={'Type': GTPIEType.PrivateExt.value}, trans=True),
-            ), hier=1)
+        GTPHdr(val={'PT': 1, 'Type': GTPType.MBMSSessionStartResp.value}),
+        MBMSSessionStartRespIEs(hier=1),
         )
 
 
 # MBMS Session Stop Request
 
+class MBMSSessionStopReqIEs(GTPIEs):
+    
+    MAND = {
+        GTPIEType.EndUserAddr.value,
+        GTPIEType.APN.value
+        }
+    OPT  = {
+        GTPIEType.MBMSFlowIdent.value,
+        GTPIEType.PrivateExt.value
+        }
+    
+    _GEN = (
+        GTPIETLV('EndUserAddr', val={'Type': GTPIEType.EndUserAddr.value}),
+        GTPIETLV('APN', val={'Type': GTPIEType.APN.value}),
+        GTPIETLV('MBMSFlowIdent', val={'Type': GTPIEType.MBMSFlowIdent.value}, trans=True),
+        GTPIETLV('PrivateExt', val={'Type': GTPIEType.PrivateExt.value}, trans=True),
+        )
+
+
 class MBMSSessionStopReq(GTPMsg):
     _GEN = (
-        GTPHdr(val={'Type': GTPType.MBMSSessionStopReq.value}),
-        GTPIEs(GEN=(
-            GTPIETLV('EndUserAddr', val={'Type': GTPIEType.EndUserAddr.value}),
-            GTPIETLV('APN', val={'Type': GTPIEType.APN.value}),
-            GTPIETLV('MBMSFlowIdent', val={'Type': GTPIEType.MBMSFlowIdent.value}, trans=True),
-            GTPIETLV('PrivateExt', val={'Type': GTPIEType.PrivateExt.value}, trans=True),
-            ), hier=1)
+        GTPHdr(val={'PT': 1, 'Type': GTPType.MBMSSessionStopReq.value}),
+        MBMSSessionStopReqIEs(hier=1),
         )
 
 
 # MBMS Session Stop Response
 
+class MBMSSessionStopRespIEs(GTPIEs):
+    
+    MAND = {
+        GTPIEType.Cause.value
+        }
+    OPT  = {
+        GTPIEType.PrivateExt.value
+        }
+    
+    _GEN = (
+        GTPIETV('Cause', val={'Type': GTPIEType.Cause.value}, bl={'Data': 8}),
+        GTPIETLV('PrivateExt', val={'Type': GTPIEType.PrivateExt.value}, trans=True),
+        )
+
+
 class MBMSSessionStopResp(GTPMsg):
     _GEN = (
-        GTPHdr(val={'Type': GTPType.MBMSSessionStopResp.value}),
-        GTPIEs(GEN=(
-            GTPIETV('Cause', val={'Type': GTPIEType.Cause.value}, bl={'Data': 8}),
-            GTPIETLV('PrivateExt', val={'Type': GTPIEType.PrivateExt.value}, trans=True),
-            ), hier=1)
+        GTPHdr(val={'PT': 1, 'Type': GTPType.MBMSSessionStopResp.value}),
+        MBMSSessionStopRespIEs(hier=1),
         )
 
 
 # MBMS Session Update Request
 
+class MBMSSessionUpdateReqIEs(GTPIEs):
+    
+    MAND = {
+        GTPIEType.EndUserAddr.value,
+        GTPIEType.APN.value,
+        GTPIEType.TMGI.value,
+        GTPIEType.MBMSServiceArea.value,
+        GTPIEType.MBMSSessionDuration.value
+        }
+    OPT  = {
+        GTPIEType.TEIDCP.value,
+        GTPIEType.GSNAddr.value,
+        GTPIEType.MBMSSessionIdent.value,
+        GTPIEType.MBMSSessionRepetitionNumber.value,
+        GTPIEType.MBMSFlowIdent.value,
+        GTPIEType.PrivateExt.value
+        }
+    
+    _GEN = (
+        GTPIETV('TEIDCP', val={'Type': GTPIEType.TEIDCP.value}, bl={'Data': 32}, trans=True),
+        GTPIETLV('EndUserAddr', val={'Type': GTPIEType.EndUserAddr.value}),
+        GTPIETLV('APN', val={'Type': GTPIEType.APN.value}),
+        GTPIETLV('GGSNAddrForControlPlane', val={'Type': GTPIEType.GSNAddr.value}, trans=True),
+        GTPIETLV('TMGI', val={'Type': GTPIEType.TMGI.value}),
+        GTPIETLV('MBMSSessionDuration', val={'Type': GTPIEType.MBMSSessionDuration.value}),
+        GTPIETLV('MBMSServiceArea', val={'Type': GTPIEType.MBMSServiceArea.value}),
+        GTPIETLV('MBMSSessionIdent', val={'Type': GTPIEType.MBMSSessionIdent.value}, trans=True),
+        GTPIETLV('MBMSSessionRepetitionNumber', val={'Type': GTPIEType.MBMSSessionRepetitionNumber.value}, trans=True),
+        GTPIETLV('MBMSFlowIdent', val={'Type': GTPIEType.MBMSFlowIdent.value}, trans=True),
+        GTPIETLV('PrivateExt', val={'Type': GTPIEType.PrivateExt.value}, trans=True),
+        )
+
+
 class MBMSSessionUpdateReq(GTPMsg):
     _GEN = (
-        GTPHdr(val={'Type': GTPType.MBMSSessionUpdateReq.value}),
-        GTPIEs(GEN=(
-            GTPIETV('TEIDCP', val={'Type': GTPIEType.TEIDCP.value}, bl={'Data': 32}, trans=True),
-            GTPIETLV('EndUserAddr', val={'Type': GTPIEType.EndUserAddr.value}),
-            GTPIETLV('APN', val={'Type': GTPIEType.APN.value}),
-            GTPIETLV('GGSNAddrForControlPlane', val={'Type': GTPIEType.GSNAddr.value}, trans=True),
-            GTPIETLV('TMGI', val={'Type': GTPIEType.TMGI.value}),
-            GTPIETLV('MBMSSessionDuration', val={'Type': GTPIEType.MBMSSessionDuration.value}),
-            GTPIETLV('MBMSServiceArea', val={'Type': GTPIEType.MBMSServiceArea.value}),
-            GTPIETLV('MBMSSessionIdent', val={'Type': GTPIEType.MBMSSessionIdent.value}, trans=True),
-            GTPIETLV('MBMSSessionRepetitionNumber', val={'Type': GTPIEType.MBMSSessionRepetitionNumber.value}, trans=True),
-            GTPIETLV('MBMSFlowIdent', val={'Type': GTPIEType.MBMSFlowIdent.value}, trans=True),
-            GTPIETLV('PrivateExt', val={'Type': GTPIEType.PrivateExt.value}, trans=True),
-            ), hier=1)
+        GTPHdr(val={'PT': 1, 'Type': GTPType.MBMSSessionUpdateReq.value}),
+        MBMSSessionUpdateReqIEs(hier=1),
         )
 
 
 # MBMS Session Update Response
 
+class MBMSSessionUpdateRespIEs(GTPIEs):
+    
+    MAND = {
+        GTPIEType.Cause.value
+        }
+    OPT  = {
+        GTPIEType.TEIDDataI.value,
+        GTPIEType.TEIDCP.value,
+        GTPIEType.GSNAddr.value,
+        GTPIEType.PrivateExt.value
+        }
+    
+    _GEN = (
+        GTPIETV('Cause', val={'Type': GTPIEType.Cause.value}, bl={'Data': 8}),
+        GTPIETV('TEIDDataI', val={'Type': GTPIEType.TEIDDataI.value}, bl={'Data': 32}, trans=True),
+        GTPIETV('TEIDCP', val={'Type': GTPIEType.TEIDCP.value}, bl={'Data': 32}, trans=True),
+        GTPIETLV('SGSNAddrForDataI', val={'Type': GTPIEType.GSNAddr.value}, trans=True),
+        GTPIETLV('SGSNAddrForControlPlane', val={'Type': GTPIEType.GSNAddr.value}, trans=True),
+        GTPIETLV('PrivateExt', val={'Type': GTPIEType.PrivateExt.value}, trans=True),
+        )
+
+
 class MBMSSessionUpdateResp(GTPMsg):
     _GEN = (
-        GTPHdr(val={'Type': GTPType.MBMSSessionUpdateResp.value}),
-        GTPIEs(GEN=(
-            GTPIETV('Cause', val={'Type': GTPIEType.Cause.value}, bl={'Data': 8}),
-            GTPIETV('TEIDDataI', val={'Type': GTPIEType.TEIDDataI.value}, bl={'Data': 32}, trans=True),
-            GTPIETV('TEIDCP', val={'Type': GTPIEType.TEIDCP.value}, bl={'Data': 32}, trans=True),
-            GTPIETLV('SGSNAddrForDataI', val={'Type': GTPIEType.GSNAddr.value}, trans=True),
-            GTPIETLV('SGSNAddrForControlPlane', val={'Type': GTPIEType.GSNAddr.value}, trans=True),
-            GTPIETLV('PrivateExt', val={'Type': GTPIEType.PrivateExt.value}, trans=True),
-            ), hier=1)
+        GTPHdr(val={'PT': 1, 'Type': GTPType.MBMSSessionUpdateResp.value}),
+        MBMSSessionUpdateRespIEs(hier=1),
         )
 
 
@@ -3525,38 +4679,72 @@ class MBMSSessionUpdateResp(GTPMsg):
 
 # MS Info Change Notification Request
 
+class MSInfoChangeNotifReqIEs(GTPIEs):
+    
+    MAND = {
+        GTPIEType.RATType.value
+        }
+    OPT  = {
+        GTPIEType.IMSI.value,
+        GTPIEType.NSAPI.value,
+        GTPIEType.ULI.value,
+        GTPIEType.IMEI.value,
+        GTPIEType.ExtCommonFlags.value,
+        GTPIEType.UCI.value,
+        GTPIEType.PrivateExt.value
+        }
+    
+    _GEN = (
+        GTPIETV('IMSI', val={'Type': GTPIEType.IMSI.value}, bl={'Data': 64}, trans=True),
+        GTPIETV('LinkedNSAPI', val={'Type': GTPIEType.NSAPI.value}, bl={'Data': 8}, trans=True),
+        GTPIETLV('RATType', val={'Type': GTPIEType.RATType.value}),
+        GTPIETLV('ULI', val={'Type': GTPIEType.ULI.value}, trans=True),
+        GTPIETLV('IMEI', val={'Type': GTPIEType.IMEI.value}, trans=True),
+        GTPIETLV('ExtCommonFlags', val={'Type': GTPIEType.ExtCommonFlags.value}, trans=True),
+        GTPIETLV('UCI', val={'Type': GTPIEType.UCI.value}, trans=True),
+        GTPIETLV('PrivateExt', val={'Type': GTPIEType.PrivateExt.value}, trans=True),
+        )
+
+
 class MSInfoChangeNotifReq(GTPMsg):
     _GEN = (
-        GTPHdr(val={'Type': GTPType.MSInfoChangeNotifReq.value}),
-        GTPIEs(GEN=(
-            GTPIETV('IMSI', val={'Type': GTPIEType.IMSI.value}, bl={'Data': 64}, trans=True),
-            GTPIETV('LinkedNSAPI', val={'Type': GTPIEType.NSAPI.value}, bl={'Data': 8}, trans=True),
-            GTPIETLV('RATType', val={'Type': GTPIEType.RATType.value}),
-            GTPIETLV('ULI', val={'Type': GTPIEType.ULI.value}, trans=True),
-            GTPIETLV('IMEI', val={'Type': GTPIEType.IMEI.value}, trans=True),
-            GTPIETLV('ExtCommonFlags', val={'Type': GTPIEType.ExtCommonFlags.value}, trans=True),
-            GTPIETLV('UCI', val={'Type': GTPIEType.UCI.value}, trans=True),
-            GTPIETLV('PrivateExt', val={'Type': GTPIEType.PrivateExt.value}, trans=True),
-            ), hier=1)
+        GTPHdr(val={'PT': 1, 'Type': GTPType.MSInfoChangeNotifReq.value}),
+        MSInfoChangeNotifReqIEs(hier=1),
         )
 
 
 # MS Info Change Notification Response
 
-class MSInfoChangeNotifResp(GTPMsg):
+class MSInfoChangeNotifRespIEs(GTPIEs):
+    
+    MAND = {
+        GTPIEType.Cause.value
+        }
+    OPT  = {
+        GTPIEType.IMSI.value,
+        GTPIEType.NSAPI.value,
+        GTPIEType.IMEI.value,
+        GTPIEType.MSInfoChangeReportingAction.value,
+        GTPIEType.CSGInfoReportingAction.value,
+        GTPIEType.PrivateExt.value
+        }
+    
     _GEN = (
-        GTPHdr(val={'Type': GTPType.MSInfoChangeNotifResp.value}),
-        GTPIEs(GEN=(
-            GTPIETV('Cause', val={'Type': GTPIEType.Cause.value}, bl={'Data': 8}),
-            GTPIETV('IMSI', val={'Type': GTPIEType.IMSI.value}, bl={'Data': 64}, trans=True),
-            GTPIETV('LinkedNSAPI', val={'Type': GTPIEType.NSAPI.value}, bl={'Data': 8}, trans=True),
-            GTPIETLV('IMEI', val={'Type': GTPIEType.IMEI.value}, trans=True),
-            GTPIETLV('MSInfoChangeReportingAction', val={'Type': GTPIEType.MSInfoChangeReportingAction.value}, trans=True),
-            GTPIETLV('CSGInfoReportingAction', val={'Type': GTPIEType.CSGInfoReportingAction.value}, trans=True),
-            GTPIETLV('PrivateExt', val={'Type': GTPIEType.PrivateExt.value}, trans=True),
-            ), hier=1)
+        GTPIETV('Cause', val={'Type': GTPIEType.Cause.value}, bl={'Data': 8}),
+        GTPIETV('IMSI', val={'Type': GTPIEType.IMSI.value}, bl={'Data': 64}, trans=True),
+        GTPIETV('LinkedNSAPI', val={'Type': GTPIEType.NSAPI.value}, bl={'Data': 8}, trans=True),
+        GTPIETLV('IMEI', val={'Type': GTPIEType.IMEI.value}, trans=True),
+        GTPIETLV('MSInfoChangeReportingAction', val={'Type': GTPIEType.MSInfoChangeReportingAction.value}, trans=True),
+        GTPIETLV('CSGInfoReportingAction', val={'Type': GTPIEType.CSGInfoReportingAction.value}, trans=True),
+        GTPIETLV('PrivateExt', val={'Type': GTPIEType.PrivateExt.value}, trans=True),
         )
 
+
+class MSInfoChangeNotifResp(GTPMsg):
+    _GEN = (
+        GTPHdr(val={'PT': 1, 'Type': GTPType.MSInfoChangeNotifResp.value}),
+        MSInfoChangeNotifRespIEs(hier=1),
+        )
 
 
 #------------------------------------------------------------------------------#
@@ -3566,79 +4754,156 @@ class MSInfoChangeNotifResp(GTPMsg):
 
 # Node Alive Request
 
+class NodeAliveReqIEs(GTPIEs):
+    
+    MAND = {
+        GTPIEType.ChargingGatewayAddr.value
+        }
+    OPT  = {
+        GTPIEType.ChargingGatewayAddr.value,
+        GTPIEType.PrivateExt.value
+        }
+    
+    _GEN = (
+        GTPIETLV('NodeAddr', val={'Type': GTPIEType.ChargingGatewayAddr.value}),
+        GTPIETLV('AltNodeAddr', val={'Type': GTPIEType.ChargingGatewayAddr.value}, trans=True),
+        GTPIETLV('PrivateExt', val={'Type': GTPIEType.PrivateExt.value}, trans=True),
+        )
+
+
 class NodeAliveReq(GTPMsg):
     _GEN = (
-        GTPHdr(val={'PT': 0, 'Type': GTPType.NodeAliveReq}),
-        GTPIEs(GEN=(
-            GTPIETLV('NodeAddr', val={'Type': GTPIEType.ChargingGatewayAddr.value}),
-            GTPIETLV('AltNodeAddr', val={'Type': GTPIEType.ChargingGatewayAddr.value}, trans=True),
-            GTPIETLV('PrivateExt', val={'Type': GTPIEType.PrivateExt.value}, trans=True),
-            ), hier=1)
+        GTPHdr(val={'PT': 0, 'Type': GTPType.NodeAliveReq.value}),
+        NodeAliveReqIEs(hier=1),
         )
 
 
 # Node Alive Response
 
+class NodeAliveRespIEs(GTPIEs):
+    
+    MAND = set()
+    OPT  = {
+        GTPIEType.PrivateExt.value
+        }
+    
+    _GEN = (
+        GTPIETLV('PrivateExt', val={'Type': GTPIEType.PrivateExt.value}, trans=True),
+        )
+
+
 class NodeAliveResp(GTPMsg):
     _GEN = (
-        GTPHdr(val={'PT': 0, 'Type': GTPType.NodeAliveResp}),
-        GTPIEs(GEN=(
-            GTPIETLV('PrivateExt', val={'Type': GTPIEType.PrivateExt.value}, trans=True),
-            ), hier=1)
+        GTPHdr(val={'PT': 0, 'Type': GTPType.NodeAliveResp.value}),
+        NodeAliveRespIEs(hier=1),
         )
+
 
 
 # Redirection Request
 
+class RedirectionReqIEs(GTPIEs):
+    
+    MAND = {
+        GTPIEType.Cause.value
+        }
+    OPT  = {
+        GTPIEType.RecommendedNodeAddr.value,
+        GTPIEType.PrivateExt.value
+        }
+    
+    _GEN = (
+        GTPIETV('Cause', val={'Type': GTPIEType.Cause.value}, bl={'Data': 8}),
+        GTPIETLV('RecommendedNodeAddr', val={'Type': GTPIEType.RecommendedNodeAddr.value}, trans=True),
+        GTPIETLV('AltRecommendedNodeAddr', val={'Type': GTPIEType.RecommendedNodeAddr.value}, trans=True),
+        GTPIETLV('PrivateExt', val={'Type': GTPIEType.PrivateExt.value}, trans=True),
+        )
+
+
 class RedirectionReq(GTPMsg):
     _GEN = (
-        GTPHdr(val={'PT': 0, 'Type': GTPType.RedirectionReq}),
-        GTPIEs(GEN=(
-            GTPIETV('Cause', val={'Type': GTPIEType.Cause.value}, bl={'Data': 8}),
-            GTPIETLV('RecommendedNodeAddr', val={'Type': GTPIEType.RecommendedNodeAddr.value}, trans=True),
-            GTPIETLV('AltRecommendedNodeAddr', val={'Type': GTPIEType.RecommendedNodeAddr.value}, trans=True),
-            GTPIETLV('PrivateExt', val={'Type': GTPIEType.PrivateExt.value}, trans=True),
-            ), hier=1)
+        GTPHdr(val={'PT': 0, 'Type': GTPType.RedirectionReq.value}),
+        RedirectionReqIEs(hier=1),
         )
 
 
 # Redirection Response
 
+class RedirectionRespIEs(GTPIEs):
+    
+    MAND = {
+        GTPIEType.Cause.value
+        }
+    OPT  = {
+        GTPIEType.PrivateExt.value
+        }
+    
+    _GEN = (
+        GTPIETV('Cause', val={'Type': GTPIEType.Cause.value}, bl={'Data': 8}),
+        GTPIETLV('PrivateExt', val={'Type': GTPIEType.PrivateExt.value}, trans=True),
+        )
+
+
 class RedirectionResp(GTPMsg):
     _GEN = (
-        GTPHdr(val={'PT': 0, 'Type': GTPType.RedirectionResp}),
-        GTPIEs(GEN=(
-            GTPIETV('Cause', val={'Type': GTPIEType.Cause.value}, bl={'Data': 8}),
-            GTPIETLV('PrivateExt', val={'Type': GTPIEType.PrivateExt.value}, trans=True),
-            ), hier=1)
+        GTPHdr(val={'PT': 0, 'Type': GTPType.RedirectionResp.value}),
+        RedirectionRespIEs(hier=1),
         )
 
 
 # Data Record Transfer Request
 
+class DataRecordTransferReqIEs(GTPIEs):
+    
+    MAND = {
+        GTPIEType.PacketTransferCmd.value
+        }
+    OPT  = {
+        GTPIEType.SeqNumReleasedPackets.value,
+        GTPIEType.SeqNumCancelledPackets.value,
+        GTPIEType.DataRecordPacket.value,
+        GTPIEType.PrivateExt.value
+        }
+    
+    _GEN = (
+        GTPIETV('PacketTransferCmd', val={'Type': GTPIEType.PacketTransferCmd.value}, bl={'Data': 8}),
+        GTPIETLV('DataRecordPacket', val={'Type': GTPIEType.DataRecordPacket.value}, trans=True),
+        GTPIETLV('SeqNumReleasedPackets', val={'Type': GTPIEType.SeqNumReleasedPackets.value}, trans=True),
+        GTPIETLV('SeqNumCancelledPackets', val={'Type': GTPIEType.SeqNumCancelledPackets.value}, trans=True),
+        GTPIETLV('PrivateExt', val={'Type': GTPIEType.PrivateExt.value}, trans=True),
+        )
+
+
 class DataRecordTransferReq(GTPMsg):
     _GEN = (
-        GTPHdr(val={'PT': 0, 'Type': GTPType.DataRecordTransferReq}),
-        GTPIEs(GEN=(
-            GTPIETV('PacketTransferCmd', val={'Type': GTPIEType.PacketTransferCmd.value}, bl={'Data': 8}),
-            GTPIETLV('DataRecordPacket', val={'Type': GTPIEType.DataRecordPacket.value}, trans=True),
-            GTPIETLV('SeqNumReleasedPackets', val={'Type': GTPIEType.SeqNumReleasedPackets.value}, trans=True),
-            GTPIETLV('SeqNumCancelledPackets', val={'Type': GTPIEType.SeqNumCancelledPackets.value}, trans=True),
-            GTPIETLV('PrivateExt', val={'Type': GTPIEType.PrivateExt.value}, trans=True),
-            ), hier=1)
+        GTPHdr(val={'PT': 0, 'Type': GTPType.DataRecordTransferReq.value}),
+        DataRecordTransferReqIEs(hier=1),
         )
 
 
 # Data Record Transfer Response
 
+class DataRecordTransferRespIEs(GTPIEs):
+    
+    MAND = {
+        GTPIEType.Cause.value,
+        GTPIEType.RequestsResponded.value
+        }
+    OPT  = {
+        GTPIEType.PrivateExt.value
+        }
+    
+    _GEN = (
+        GTPIETV('Cause', val={'Type': GTPIEType.Cause.value}, bl={'Data': 8}),
+        GTPIETLV('RequestsResponded', val={'Type': GTPIEType.RequestsResponded.value}),
+        GTPIETLV('PrivateExt', val={'Type': GTPIEType.PrivateExt.value}, trans=True),
+        )
+
+
 class DataRecordTransferResp(GTPMsg):
     _GEN = (
-        GTPHdr(val={'PT': 0, 'Type': GTPType.DataRecordTransferResp}),
-        GTPIEs(GEN=(
-            GTPIETV('Cause', val={'Type': GTPIEType.Cause.value}, bl={'Data': 8}),
-            GTPIETLV('RequestsResponded', val={'Type': GTPIEType.RequestsResponded.value}),
-            GTPIETLV('PrivateExt', val={'Type': GTPIEType.PrivateExt.value}, trans=True),
-            ), hier=1)
+        GTPHdr(val={'PT': 0, 'Type': GTPType.DataRecordTransferResp.value}),
+        DataRecordTransferRespIEs(hier=1),
         )
 
 
@@ -3937,6 +5202,59 @@ GTPDispatcherGGSN = {
     240 : DataRecordTransferReq,
     241 : DataRecordTransferResp,
     }
+
+
+'''
+# create sets listing mandatory and optional IEs under .MAND and .OPT class attributes
+for disp in (GTPDispatcherSGSN, GTPDispatcherGGSN):
+    for cls in disp.values():
+        if hasattr(cls, 'MAND'):
+            continue
+        cls.MAND, cls.OPT = set(), set()
+        for ie in cls._GEN[1]._content:
+            if ie.get_trans():
+                cls.OPT.add(ie.get_type())
+            else:
+                cls.MAND.add(ie.get_type())
+
+
+def _inline(cls):
+    
+    def get_enum(en, i):
+        for e in en:
+            if e == i:
+                return e
+        assert()    
+    
+    # generate dedicated class GTPIEs
+    print('class %sIEs(GTPIEs):' % cls.__name__)
+    print('    ')
+    print('    MAND = {\n        %s\n        }' % ',\n        '.join(map(lambda i: '%s.value' % get_enum(GTPIEType, i), sorted(cls.MAND))))
+    print('    OPT  = {\n        %s\n        }' % ',\n        '.join(map(lambda i: '%s.value' % get_enum(GTPIEType, i),  sorted(cls.OPT))))
+    print('    ')
+    print('    _GEN = (')
+    for ie in cls._GEN[1]._content:
+        if ie._trans:
+            trans = ', trans=True'
+        else:
+            trans = ''
+        if isinstance(ie, GTPIETV):
+            print('        GTPIETV(\'%s\', val={\'Type\': %s.value}, bl={\'Data\': %i}%s),'\
+                  % (ie._name, get_enum(GTPIEType, ie['Type']._val), ie['Data']._bl, trans))
+        else:
+            print('        GTPIETLV(\'%s\', val={\'Type\': %s.value}%s),'\
+                  % (ie._name, get_enum(GTPIEType, ie['Type']._val), trans))
+    print('        )\n\n')
+    
+    # generate msg class GTPMsg
+    print('class %s(GTPMsg):' % cls.__name__)
+    print('    _GEN = (')
+    print('        GTPHdr(val={\'PT\': %i, \'Type\': %s.value}),'\
+          % (cls._GEN[0]['PT']._val, get_enum(GTPType, cls._GEN[0]['Type']._val)))
+    print('        %sIEs(hier=1),' % cls.__name__)
+    print('        )\n\n')
+
+'''
 
 
 ERR_GTP_BUF_TOO_SHORT = 1
