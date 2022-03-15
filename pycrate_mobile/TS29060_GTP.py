@@ -2027,9 +2027,12 @@ class GTPIEs(Envelope):
     # this is to not show transparent (optional / conditional) IEs when they are not set
     ENV_SEL_TRANS = False
     
+    # MAND and OPT attributes are set for each GTPIEs subclass
+    MAND = set()
+    OPT  = set()
+    
     # this is to raise in case a mandatory IE is not found during the decoding
     VERIF_MAND = True
-    
     
     def __init__(self, *args, **kwargs):
         Envelope.__init__(self, *args, **kwargs)
@@ -2047,29 +2050,30 @@ class GTPIEs(Envelope):
         while char.len_byte() >= 1 and i < len_cont:
             ie = self._content[i]
             try:
-                typ = _get_type_from_char(char)
+                char_type = _get_type_from_char(char)
             except CharpyErr:
                 # not enough buffer available
                 break
             else:
-                if ie.get_type() == typ:
+                if char_type == ie.get_type():
                     if ie._trans:
                         # optional IE which is to be decoded
                         ie._trans = False
                     ie._from_char(char)
-                elif not ie._trans and self.VERIF_MAND:
+                elif ie._name in self.MAND and self.VERIF_MAND:
                     # mandatory IE which is not present
-                    raise(GTPDecErr('Missing mandatory GTP IE type %i' % ie.get_type()))
-                if typ != 255:
-                    # PrivateExt IE can be present multiple times,
+                    raise(GTPDecErr('Missing mandatory GTP IE %s, type %i' % (ie._name, ie.get_type())))
+                if char_type != 255:
+                    # PrivateExt IE is always the last defined IE
+                    # and can be present multiple times,
                     # otherwise we go to the next IE
                     i += 1
         #
         if i < len_cont-1 and self.VERIF_MAND:
             # verify if some trailing mandatory IE have been ignored
             for ie in self._content[i:]:
-                if not ie._trans:
-                    raise(GTPDecErr('Missing mandatory GTP IE type %i' % ie.get_type()))
+                if ie.get_type() in self.MAND:
+                    raise(GTPDecErr('Missing mandatory GTP IE %s, type %i' % (ie._name, ie.get_type())))
         #
         # additional decoding for more undefined GTPIETLV 
         while char.len_bit() >= 24:
@@ -2434,7 +2438,7 @@ class EchoReqIEs(GTPIEs):
     
     MAND = set()
     OPT  = {
-        GTPIEType.PrivateExt.value
+        'PrivateExt'
         }
     
     _GEN = (
@@ -2454,10 +2458,10 @@ class EchoReq(GTPMsg):
 class EchoRespIEs(GTPIEs):
     
     MAND = {
-        GTPIEType.Recovery.value
+        'Recovery'
         }
     OPT  = {
-        GTPIEType.PrivateExt.value
+        'PrivateExt'
         }
     
     _GEN = (
@@ -2495,7 +2499,7 @@ class VersionNotSupported(GTPMsg):
 class SupportedExtHeadersNotifIEs(GTPIEs):
     
     MAND = {
-        GTPIEType.ExtHeaderTypeList.value
+        'ExtHeaderTypeList'
         }
     OPT  = set()
     
@@ -2521,46 +2525,47 @@ class SupportedExtHeadersNotif(GTPMsg):
 class CreatePDPCtxtReqIEs(GTPIEs):
     
     MAND = {
-        GTPIEType.TEIDDataI.value,
-        GTPIEType.NSAPI.value,
-        GTPIEType.GSNAddr.value,
-        GTPIEType.QoSProfile.value
+        'TEIDDataI',
+        'NSAPI',
+        'SGSNAddrForSignalling',
+        'SGSNAddrForUserTraffic',
+        'QoSProfile'
         }
     OPT  = {
-        GTPIEType.IMSI.value,
-        GTPIEType.RAI.value,
-        GTPIEType.Recovery.value,
-        GTPIEType.SelectionMode.value,
-        GTPIEType.TEIDCP.value,
-        GTPIEType.NSAPI.value,
-        GTPIEType.ChargingCharacteristics.value,
-        GTPIEType.TraceReference.value,
-        GTPIEType.TraceType.value,
-        GTPIEType.EndUserAddr.value,
-        GTPIEType.APN.value,
-        GTPIEType.PCO.value,
-        GTPIEType.MSISDN.value,
-        GTPIEType.TFT.value,
-        GTPIEType.TriggerId.value,
-        GTPIEType.OMCIdentity.value,
-        GTPIEType.CommonFlags.value,
-        GTPIEType.APNRestriction.value,
-        GTPIEType.RATType.value,
-        GTPIEType.ULI.value,
-        GTPIEType.MSTimeZone.value,
-        GTPIEType.IMEI.value,
-        GTPIEType.CAMELChargingInfoContainer.value,
-        GTPIEType.AdditionalTraceInfo.value,
-        GTPIEType.CorrelationID.value,
-        GTPIEType.EvolvedAllocationRetentionPriorityI.value,
-        GTPIEType.ExtCommonFlags.value,
-        GTPIEType.UCI.value,
-        GTPIEType.AMBR.value,
-        GTPIEType.SignallingPriorityInd.value,
-        GTPIEType.CNOperatorSelectionEntity.value,
-        GTPIEType.MappedUEUsageType.value,
-        GTPIEType.UPFSelectionIndFlags.value,
-        GTPIEType.PrivateExt.value
+        'IMSI',
+        'RAI',
+        'Recovery',
+        'SelectionMode',
+        'TEIDCP',
+        'LinkedNSAPI',
+        'ChargingCharacteristics',
+        'TraceReference',
+        'TraceType',
+        'EndUserAddr',
+        'APN',
+        'PCO',
+        'MSISDN',
+        'TFT',
+        'TriggerId',
+        'OMCIdentity',
+        'CommonFlags',
+        'APNRestriction',
+        'RATType',
+        'ULI',
+        'MSTimeZone',
+        'IMEI',
+        'CAMELChargingInfoContainer',
+        'AdditionalTraceInfo',
+        'CorrelationID',
+        'EvolvedAllocationRetentionPriorityI',
+        'ExtCommonFlags',
+        'UCI',
+        'APNAMBR',
+        'SignallingPriorityInd',
+        'CNOperatorSelectionEntity',
+        'MappedUEUsageType',
+        'UPFSelectionIndFlags',
+        'PrivateExt'
         }
     
     _GEN = (
@@ -2618,31 +2623,35 @@ class CreatePDPCtxtReq(GTPMsg):
 class CreatePDPCtxtRespIEs(GTPIEs):
     
     MAND = {
-        GTPIEType.Cause.value
+        'Cause'
         }
     OPT  = {
-        GTPIEType.ReorderingRequired.value,
-        GTPIEType.Recovery.value,
-        GTPIEType.TEIDDataI.value,
-        GTPIEType.TEIDCP.value,
-        GTPIEType.NSAPI.value,
-        GTPIEType.ChargingID.value,
-        GTPIEType.EndUserAddr.value,
-        GTPIEType.PCO.value,
-        GTPIEType.GSNAddr.value,
-        GTPIEType.QoSProfile.value,
-        GTPIEType.CommonFlags.value,
-        GTPIEType.APNRestriction.value,
-        GTPIEType.MSInfoChangeReportingAction.value,
-        GTPIEType.BearerControlMode.value,
-        GTPIEType.EvolvedAllocationRetentionPriorityI.value,
-        GTPIEType.ExtCommonFlags.value,
-        GTPIEType.CSGInfoReportingAction.value,
-        GTPIEType.AMBR.value,
-        GTPIEType.GGSNBackOffTime.value,
-        GTPIEType.ExtCommonFlagsII.value,
-        GTPIEType.ChargingGatewayAddr.value,
-        GTPIEType.PrivateExt.value
+        'ReorderingRequired',
+        'Recovery',
+        'TEIDDataI',
+        'TEIDCP',
+        'NSAPI',
+        'ChargingID',
+        'EndUserAddr',
+        'PCO',
+        'GGSNAddrForControlPlane',
+        'GGSNAddrForUserTraffic',
+        'AltGGSNAddrForControlPlane',
+        'AltGGSNAddrForUserTraffic',
+        'QoSProfile',
+        'ChargingGatewayAddr',
+        'AltChargingGatewayAddr',
+        'CommonFlags',
+        'APNRestriction',
+        'MSInfoChangeReportingAction',
+        'BearerControlMode',
+        'EvolvedAllocationRetentionPriorityI',
+        'ExtCommonFlags',
+        'CSGInfoReportingAction',
+        'APNAMBR',
+        'GGSNBackOffTime',
+        'ExtCommonFlagsII',
+        'PrivateExt'
         }
     
     _GEN = (
@@ -2688,37 +2697,39 @@ class CreatePDPCtxtResp(GTPMsg):
 class UpdatePDPCtxtReqSGSNIEs(GTPIEs):
     
     MAND = {
-        GTPIEType.TEIDDataI.value,
-        GTPIEType.NSAPI.value,
-        GTPIEType.GSNAddr.value,
-        GTPIEType.QoSProfile.value
+        'TEIDDataI',
+        'NSAPI',
+        'SGSNAddrForControlPlane',
+        'SGSNAddrForUserTraffic',
+        'QoSProfile'
         }
     OPT  = {
-        GTPIEType.IMSI.value,
-        GTPIEType.RAI.value,
-        GTPIEType.Recovery.value,
-        GTPIEType.TEIDCP.value,
-        GTPIEType.TraceReference.value,
-        GTPIEType.TraceType.value,
-        GTPIEType.PCO.value,
-        GTPIEType.GSNAddr.value,
-        GTPIEType.TFT.value,
-        GTPIEType.TriggerId.value,
-        GTPIEType.OMCIdentity.value,
-        GTPIEType.CommonFlags.value,
-        GTPIEType.RATType.value,
-        GTPIEType.ULI.value,
-        GTPIEType.MSTimeZone.value,
-        GTPIEType.IMEI.value,
-        GTPIEType.AdditionalTraceInfo.value,
-        GTPIEType.DirectTunnelFlags.value,
-        GTPIEType.EvolvedAllocationRetentionPriorityI.value,
-        GTPIEType.ExtCommonFlags.value,
-        GTPIEType.UCI.value,
-        GTPIEType.AMBR.value,
-        GTPIEType.SignallingPriorityInd.value,
-        GTPIEType.CNOperatorSelectionEntity.value,
-        GTPIEType.PrivateExt.value
+        'IMSI',
+        'RAI',
+        'Recovery',
+        'TEIDCP',
+        'TraceReference',
+        'TraceType',
+        'PCO',
+        'AltSGSNAddrForControlPlane',
+        'AltSGSNAddrForUserTraffic',
+        'TFT',
+        'TriggerId',
+        'OMCIdentity',
+        'CommonFlags',
+        'RATType',
+        'ULI',
+        'MSTimeZone',
+        'AdditionalTraceInfo',
+        'DirectTunnelFlags',
+        'EvolvedAllocationRetentionPriorityI',
+        'ExtCommonFlags',
+        'UCI',
+        'APNAMBR',
+        'SignallingPriorityInd',
+        'CNOperatorSelectionEntity',
+        'IMEI',
+        'PrivateExt'
         }
     
     _GEN = (
@@ -2768,25 +2779,25 @@ class UpdatePDPCtxtReqSGSN(GTPMsg):
 class UpdatePDPCtxtReqGGSNIEs(GTPIEs):
     
     MAND = {
-        GTPIEType.NSAPI.value
+        'NSAPI'
         }
     OPT  = {
-        GTPIEType.IMSI.value,
-        GTPIEType.Recovery.value,
-        GTPIEType.EndUserAddr.value,
-        GTPIEType.PCO.value,
-        GTPIEType.QoSProfile.value,
-        GTPIEType.TFT.value,
-        GTPIEType.CommonFlags.value,
-        GTPIEType.APNRestriction.value,
-        GTPIEType.MSInfoChangeReportingAction.value,
-        GTPIEType.DirectTunnelFlags.value,
-        GTPIEType.BearerControlMode.value,
-        GTPIEType.EvolvedAllocationRetentionPriorityI.value,
-        GTPIEType.ExtCommonFlags.value,
-        GTPIEType.CSGInfoReportingAction.value,
-        GTPIEType.AMBR.value,
-        GTPIEType.PrivateExt.value
+        'IMSI',
+        'Recovery',
+        'EndUserAddr',
+        'PCO',
+        'QoSProfile',
+        'TFT',
+        'CommonFlags',
+        'APNRestriction',
+        'MSInfoChangeReportingAction',
+        'DirectTunnelFlags',
+        'BearerControlMode',
+        'EvolvedAllocationRetentionPriorityI',
+        'ExtCommonFlags',
+        'CSGInfoReportingAction',
+        'APNAMBR',
+        'PrivateExt'
         }
     
     _GEN = (
@@ -2822,25 +2833,29 @@ class UpdatePDPCtxtReqGGSN(GTPMsg):
 class UpdatePDPCtxtRespGGSNIEs(GTPIEs):
     
     MAND = {
-        GTPIEType.Cause.value
+        'Cause'
         }
     OPT  = {
-        GTPIEType.Recovery.value,
-        GTPIEType.TEIDDataI.value,
-        GTPIEType.TEIDCP.value,
-        GTPIEType.ChargingID.value,
-        GTPIEType.PCO.value,
-        GTPIEType.GSNAddr.value,
-        GTPIEType.QoSProfile.value,
-        GTPIEType.CommonFlags.value,
-        GTPIEType.APNRestriction.value,
-        GTPIEType.MSInfoChangeReportingAction.value,
-        GTPIEType.BearerControlMode.value,
-        GTPIEType.EvolvedAllocationRetentionPriorityI.value,
-        GTPIEType.CSGInfoReportingAction.value,
-        GTPIEType.AMBR.value,
-        GTPIEType.ChargingGatewayAddr.value,
-        GTPIEType.PrivateExt.value
+        'Recovery',
+        'TEIDDataI',
+        'TEIDCP',
+        'ChargingID',
+        'PCO',
+        'GGSNAddrForControlPlane',
+        'GGSNAddrForUserTraffic',
+        'AltGGSNAddrForControlPlane',
+        'AltGGSNAddrForUserTraffic',
+        'QoSProfile',
+        'ChargingGatewayAddr',
+        'AltChargingGatewayAddr',
+        'CommonFlags',
+        'APNRestriction',
+        'BearerControlMode',
+        'MSInfoChangeReportingAction',
+        'EvolvedAllocationRetentionPriorityI',
+        'CSGInfoReportingAction',
+        'APNAMBR',
+        'PrivateExt'
         }
     
     _GEN = (
@@ -2880,20 +2895,20 @@ class UpdatePDPCtxtRespGGSN(GTPMsg):
 class UpdatePDPCtxtRespSGSNIEs(GTPIEs):
     
     MAND = {
-        GTPIEType.Cause.value
+        'Cause'
         }
     OPT  = {
-        GTPIEType.Recovery.value,
-        GTPIEType.TEIDDataI.value,
-        GTPIEType.PCO.value,
-        GTPIEType.GSNAddr.value,
-        GTPIEType.QoSProfile.value,
-        GTPIEType.ULI.value,
-        GTPIEType.MSTimeZone.value,
-        GTPIEType.DirectTunnelFlags.value,
-        GTPIEType.EvolvedAllocationRetentionPriorityI.value,
-        GTPIEType.AMBR.value,
-        GTPIEType.PrivateExt.value
+        'Recovery',
+        'TEIDDataI',
+        'PCO',
+        'SGSNAddrForUserTraffic',
+        'QoSProfile',
+        'ULI',
+        'MSTimeZone',
+        'DirectTunnelFlags',
+        'EvolvedAllocationRetentionPriorityI',
+        'APNAMBR',
+        'PrivateExt'
         }
     
     _GEN = (
@@ -2924,17 +2939,17 @@ class UpdatePDPCtxtRespSGSN(GTPMsg):
 class DeletePDPCtxtReqIEs(GTPIEs):
     
     MAND = {
-        GTPIEType.NSAPI.value
+        'NSAPI'
         }
     OPT  = {
-        GTPIEType.Cause.value,
-        GTPIEType.TeardownInd.value,
-        GTPIEType.PCO.value,
-        GTPIEType.ULI.value,
-        GTPIEType.MSTimeZone.value,
-        GTPIEType.ExtCommonFlags.value,
-        GTPIEType.ULITimestamp.value,
-        GTPIEType.PrivateExt.value
+        'Cause',
+        'TeardownInd',
+        'PCO',
+        'ULI',
+        'MSTimeZone',
+        'ExtCommonFlags',
+        'ULITimestamp',
+        'PrivateExt'
         }
     
     _GEN = (
@@ -2962,14 +2977,14 @@ class DeletePDPCtxtReq(GTPMsg):
 class DeletePDPCtxtRespIEs(GTPIEs):
     
     MAND = {
-        GTPIEType.Cause.value
+        'Cause'
         }
     OPT  = {
-        GTPIEType.PCO.value,
-        GTPIEType.ULI.value,
-        GTPIEType.MSTimeZone.value,
-        GTPIEType.ULITimestamp.value,
-        GTPIEType.PrivateExt.value
+        'PCO',
+        'ULI',
+        'MSTimeZone',
+        'ULITimestamp',
+        'PrivateExt'
         }
     
     _GEN = (
@@ -2994,11 +3009,11 @@ class DeletePDPCtxtResp(GTPMsg):
 class ErrorIndIEs(GTPIEs):
     
     MAND = {
-        GTPIEType.TEIDDataI.value,
-        GTPIEType.GSNAddr.value
+        'TEIDDataI',
+        'GTPUPeerAddr'
         }
     OPT  = {
-        GTPIEType.PrivateExt.value
+        'PrivateExt'
         }
     
     _GEN = (
@@ -3020,15 +3035,15 @@ class ErrorInd(GTPMsg):
 class PDUNotifReqIEs(GTPIEs):
     
     MAND = {
-        GTPIEType.IMSI.value,
-        GTPIEType.TEIDCP.value,
-        GTPIEType.EndUserAddr.value,
-        GTPIEType.APN.value,
-        GTPIEType.GSNAddr.value
+        'IMSI',
+        'TEIDCP',
+        'EndUserAddr',
+        'APN',
+        'GGSNAddrForControlPlane'
         }
     OPT  = {
-        GTPIEType.PCO.value,
-        GTPIEType.PrivateExt.value
+        'PCO',
+        'PrivateExt'
         }
     
     _GEN = (
@@ -3054,10 +3069,10 @@ class PDUNotifReq(GTPMsg):
 class PDUNotifRespIEs(GTPIEs):
     
     MAND = {
-        GTPIEType.Cause.value
+        'Cause'
         }
     OPT  = {
-        GTPIEType.PrivateExt.value
+        'PrivateExt'
         }
     
     _GEN = (
@@ -3078,14 +3093,14 @@ class PDUNotifResp(GTPMsg):
 class PDUNotifRejectReqIEs(GTPIEs):
     
     MAND = {
-        GTPIEType.Cause.value,
-        GTPIEType.TEIDCP.value,
-        GTPIEType.EndUserAddr.value,
-        GTPIEType.APN.value
+        'Cause',
+        'TEIDCP',
+        'EndUserAddr',
+        'APN'
         }
     OPT  = {
-        GTPIEType.PCO.value,
-        GTPIEType.PrivateExt.value
+        'PCO',
+        'PrivateExt'
         }
     
     _GEN = (
@@ -3110,10 +3125,10 @@ class PDUNotifRejectReq(GTPMsg):
 class PDUNotifRejectRespIEs(GTPIEs):
     
     MAND = {
-        GTPIEType.Cause.value
+        'Cause'
         }
     OPT  = {
-        GTPIEType.PrivateExt.value
+        'PrivateExt'
         }
     
     _GEN = (
@@ -3134,15 +3149,15 @@ class PDUNotifRejectResp(GTPMsg):
 class InitiatePDPCtxtActivationReqIEs(GTPIEs):
     
     MAND = {
-        GTPIEType.NSAPI.value,
-        GTPIEType.QoSProfile.value,
-        GTPIEType.CorrelationID.value
+        'LinkedNSAPI',
+        'QoSProfile',
+        'CorrelationID'
         }
     OPT  = {
-        GTPIEType.PCO.value,
-        GTPIEType.TFT.value,
-        GTPIEType.EvolvedAllocationRetentionPriorityI.value,
-        GTPIEType.PrivateExt.value
+        'PCO',
+        'TFT',
+        'EvolvedAllocationRetentionPriorityI',
+        'PrivateExt'
         }
     
     _GEN = (
@@ -3168,11 +3183,11 @@ class InitiatePDPCtxtActivationReq(GTPMsg):
 class InitiatePDPCtxtActivationRespIEs(GTPIEs):
     
     MAND = {
-        GTPIEType.Cause.value
+        'Cause'
         }
     OPT  = {
-        GTPIEType.PCO.value,
-        GTPIEType.PrivateExt.value
+        'PCO',
+        'PrivateExt'
         }
     
     _GEN = (
@@ -3200,10 +3215,10 @@ class InitiatePDPCtxtActivationResp(GTPMsg):
 class SendRouteingInfoforGPRSReqIEs(GTPIEs):
     
     MAND = {
-        GTPIEType.IMSI.value
+        'IMSI'
         }
     OPT  = {
-        GTPIEType.PrivateExt.value
+        'PrivateExt'
         }
     
     _GEN = (
@@ -3224,14 +3239,14 @@ class SendRouteingInfoforGPRSReq(GTPMsg):
 class SendRouteingInfoforGPRSRespIEs(GTPIEs):
     
     MAND = {
-        GTPIEType.Cause.value,
-        GTPIEType.IMSI.value
+        'Cause',
+        'IMSI'
         }
     OPT  = {
-        GTPIEType.MAPCause.value,
-        GTPIEType.MSNotReachableReason.value,
-        GTPIEType.GSNAddr.value,
-        GTPIEType.PrivateExt.value
+        'MAPCause',
+        'MSNotReachableReason',
+        'GSNAddr',
+        'PrivateExt'
         }
     
     _GEN = (
@@ -3256,10 +3271,10 @@ class SendRouteingInfoforGPRSResp(GTPMsg):
 class FailureReportReqIEs(GTPIEs):
     
     MAND = {
-        GTPIEType.IMSI.value
+        'IMSI'
         }
     OPT  = {
-        GTPIEType.PrivateExt.value
+        'PrivateExt'
         }
     
     _GEN = (
@@ -3280,11 +3295,11 @@ class FailureReportReq(GTPMsg):
 class FailureReportRespIEs(GTPIEs):
     
     MAND = {
-        GTPIEType.Cause.value
+        'Cause'
         }
     OPT  = {
-        GTPIEType.MAPCause.value,
-        GTPIEType.PrivateExt.value
+        'MAPCause',
+        'PrivateExt'
         }
     
     _GEN = (
@@ -3306,11 +3321,11 @@ class FailureReportResp(GTPMsg):
 class NoteMSGPRSPresentReqIEs(GTPIEs):
     
     MAND = {
-        GTPIEType.IMSI.value,
-        GTPIEType.GSNAddr.value
+        'IMSI',
+        'GSNAddr'
         }
     OPT  = {
-        GTPIEType.PrivateExt.value
+        'PrivateExt'
         }
     
     _GEN = (
@@ -3332,10 +3347,10 @@ class NoteMSGPRSPresentReq(GTPMsg):
 class NoteMSGPRSPresentRespIEs(GTPIEs):
     
     MAND = {
-        GTPIEType.Cause.value
+        'Cause'
         }
     OPT  = {
-        GTPIEType.PrivateExt.value
+        'PrivateExt'
         }
     
     _GEN = (
@@ -3361,14 +3376,14 @@ class NoteMSGPRSPresentResp(GTPMsg):
 class IdentificationReqIEs(GTPIEs):
     
     MAND = {
-        GTPIEType.RAI.value,
-        GTPIEType.PTMSI.value
+        'RAI',
+        'PTMSI'
         }
     OPT  = {
-        GTPIEType.PTMSISignature.value,
-        GTPIEType.GSNAddr.value,
-        GTPIEType.HopCounter.value,
-        GTPIEType.PrivateExt.value
+        'PTMSISignature',
+        'SGSNAddrForControlPlane',
+        'HopCounter',
+        'PrivateExt'
         }
     
     _GEN = (
@@ -3393,14 +3408,14 @@ class IdentificationReq(GTPMsg):
 class IdentificationRespIEs(GTPIEs):
     
     MAND = {
-        GTPIEType.Cause.value
+        'Cause'
         }
     OPT  = {
-        GTPIEType.IMSI.value,
-        GTPIEType.AuthentTriplet.value,
-        GTPIEType.AuthentQuintuplet.value,
-        GTPIEType.UEUsageType.value,
-        GTPIEType.IOVUpdatesCounter.value
+        'IMSI',
+        'AuthentTriplet',
+        'AuthentQuintuplet',
+        'UEUsageType',
+        'IOVUpdatesCounter'
         }
     
     _GEN = (
@@ -3425,21 +3440,21 @@ class IdentificationResp(GTPMsg):
 class SGSNCtxtReqIEs(GTPIEs):
     
     MAND = {
-        GTPIEType.RAI.value,
-        GTPIEType.TEIDCP.value,
-        GTPIEType.GSNAddr.value
+        'RAI',
+        'TEIDCP',
+        'SGSNAddrForControlPlane'
         }
     OPT  = {
-        GTPIEType.IMSI.value,
-        GTPIEType.TLLI.value,
-        GTPIEType.PTMSI.value,
-        GTPIEType.PTMSISignature.value,
-        GTPIEType.MSValidated.value,
-        GTPIEType.GSNAddr.value,
-        GTPIEType.SGSNNumber.value,
-        GTPIEType.RATType.value,
-        GTPIEType.HopCounter.value,
-        GTPIEType.PrivateExt.value
+        'IMSI',
+        'TLLI',
+        'PTMSI',
+        'PTMSISignature',
+        'MSValidated',
+        'AltSGSNAddrForControlPlane',
+        'SGSNNumber',
+        'RATType',
+        'HopCounter',
+        'PrivateExt'
         }
     
     _GEN = (
@@ -3471,38 +3486,41 @@ class SGSNCtxtReq(GTPMsg):
 class SGSNCtxtRespIEs(GTPIEs):
     
     MAND = {
-        GTPIEType.Cause.value
+        'Cause'
         }
     OPT  = {
-        GTPIEType.IMSI.value,
-        GTPIEType.TEIDCP.value,
-        GTPIEType.RABContext.value,
-        GTPIEType.RadioPrioritySMS.value,
-        GTPIEType.RadioPriority.value,
-        GTPIEType.PacketFlowId.value,
-        GTPIEType.ChargingCharacteristics.value,
-        GTPIEType.MMContext.value,
-        GTPIEType.PDPContext.value,
-        GTPIEType.GSNAddr.value,
-        GTPIEType.PDPContextPrioritization.value,
-        GTPIEType.RadioPriorityLCS.value,
-        GTPIEType.MBMSUEContext.value,
-        GTPIEType.RFSPIndex.value,
-        GTPIEType.FQDN.value,
-        GTPIEType.EvolvedAllocationRetentionPriorityII.value,
-        GTPIEType.ExtCommonFlags.value,
-        GTPIEType.UENetCap.value,
-        GTPIEType.UEAMBR.value,
-        GTPIEType.APNAMBRWithNSAPI.value,
-        GTPIEType.SignallingPriorityIndWithNSAPI.value,
-        GTPIEType.HigherBitratesThan16MbpsFlag.value,
-        GTPIEType.SelectionModeWithNSAPI.value,
-        GTPIEType.LocalHomeNetworkIDWithNSAPI.value,
-        GTPIEType.UEUsageType.value,
-        GTPIEType.ExtCommonFlagsII.value,
-        GTPIEType.SCEFPDNConnection.value,
-        GTPIEType.IOVUpdatesCounter.value,
-        GTPIEType.PrivateExt.value
+        'IMSI',
+        'TEIDCP',
+        'RABContext',
+        'RadioPrioritySMS',
+        'RadioPriority',
+        'PacketFlowId',
+        'ChargingCharacteristics',
+        'RadioPriorityLCS',
+        'MMContext',
+        'PDPContext',
+        'SGSNAddrForControlPlane',
+        'PDPContextPrioritization',
+        'MBMSUEContext',
+        'SubscribedRFSPIndex',
+        'RFSPIndex',
+        'ColocatedGGSNPGWFQDN',
+        'EvolvedAllocationRetentionPriorityII',
+        'ExtCommonFlags',
+        'UENetCap',
+        'UEAMBR',
+        'APNAMBRWithNSAPI',
+        'SignallingPriorityIndWithNSAPI',
+        'HigherBitratesThan16MbpsFlag',
+        'SelectionModeWithNSAPI',
+        'LocalHomeNetworkIDWithNSAPI',
+        'UEUsageType',
+        'ExtCommonFlagsII',
+        'UESCEFPDNConnection',
+        'IOVUpdatesCounter',
+        'AltGGSNAddrForControlPlane',
+        'AltGGSNAddrForUserTraffic',
+        'PrivateExt'
         }
     
     _GEN = (
@@ -3554,14 +3572,14 @@ class SGSNCtxtResp(GTPMsg):
 class SGSNCtxtAckIEs(GTPIEs):
     
     MAND = {
-        GTPIEType.Cause.value
+        'Cause'
         }
     OPT  = {
-        GTPIEType.TEIDDataII.value,
-        GTPIEType.GSNAddr.value,
-        GTPIEType.SGSNNumber.value,
-        GTPIEType.NodeIdent.value,
-        GTPIEType.PrivateExt.value
+        'TEIDDataII',
+        'SGSNAddrForUserTraffic',
+        'SGSNNumber',
+        'NodeIdent',
+        'PrivateExt'
         }
     
     _GEN = (
@@ -3586,49 +3604,52 @@ class SGSNCtxtAck(GTPMsg):
 class ForwardRelocationReqIEs(GTPIEs):
     
     MAND = {
-        GTPIEType.TEIDCP.value,
-        GTPIEType.RANAPCause.value,
-        GTPIEType.MMContext.value,
-        GTPIEType.TargetIdent.value,
-        GTPIEType.UTRANTransparentContainer.value
+        'TEIDCP',
+        'RANAPCause',
+        'MMContext',
+        'TargetIdent',
+        'UTRANTransparentContainer'
         }
     OPT  = {
-        GTPIEType.IMSI.value,
-        GTPIEType.PacketFlowId.value,
-        GTPIEType.ChargingCharacteristics.value,
-        GTPIEType.PDPContext.value,
-        GTPIEType.GSNAddr.value,
-        GTPIEType.PDPContextPrioritization.value,
-        GTPIEType.MBMSUEContext.value,
-        GTPIEType.SelectedPLMNID.value,
-        GTPIEType.BSSContainer.value,
-        GTPIEType.CellIdent.value,
-        GTPIEType.BSSGPCause.value,
-        GTPIEType.PSHandoverXIDParams.value,
-        GTPIEType.DirectTunnelFlags.value,
-        GTPIEType.ReliableInterRATHandoverInfo.value,
-        GTPIEType.RFSPIndex.value,
-        GTPIEType.FQDN.value,
-        GTPIEType.EvolvedAllocationRetentionPriorityII.value,
-        GTPIEType.ExtCommonFlags.value,
-        GTPIEType.CSGID.value,
-        GTPIEType.CMI.value,
-        GTPIEType.UENetCap.value,
-        GTPIEType.UEAMBR.value,
-        GTPIEType.APNAMBRWithNSAPI.value,
-        GTPIEType.SignallingPriorityIndWithNSAPI.value,
-        GTPIEType.HigherBitratesThan16MbpsFlag.value,
-        GTPIEType.AdditionalMMContextForSRVCC.value,
-        GTPIEType.AdditionalFlagsForSRVCC.value,
-        GTPIEType.STNSR.value,
-        GTPIEType.CMSISDN.value,
-        GTPIEType.ExtRANAPCause.value,
-        GTPIEType.ENodeBID.value,
-        GTPIEType.SelectionModeWithNSAPI.value,
-        GTPIEType.UEUsageType.value,
-        GTPIEType.ExtCommonFlagsII.value,
-        GTPIEType.SCEFPDNConnection.value,
-        GTPIEType.PrivateExt.value
+        'IMSI',
+        'PacketFlowId',
+        'ChargingCharacteristics',
+        'PDPContext',
+        'SGSNAddrForControlPlane',
+        'PDPContextPrioritization',
+        'MBMSUEContext',
+        'SelectedPLMNID',
+        'BSSContainer',
+        'CellIdent',
+        'BSSGPCause',
+        'PSHandoverXIDParams',
+        'DirectTunnelFlags',
+        'ReliableInterRATHandoverInfo',
+        'SubscribedRFSPIndex',
+        'RFSPIndex',
+        'ColocatedGGSNPGWFQDN',
+        'EvolvedAllocationRetentionPriorityII',
+        'ExtCommonFlags',
+        'CSGID',
+        'CMI',
+        'UENetCap',
+        'UEAMBR',
+        'APNAMBRWithNSAPI',
+        'SignallingPriorityIndWithNSAPI',
+        'HigherBitratesThan16MbpsFlag',
+        'AdditionalMMContextForSRVCC',
+        'AdditionalFlagsForSRVCC',
+        'STNSR',
+        'CMSISDN',
+        'ExtRANAPCause',
+        'ENodeBID',
+        'SelectionModeWithNSAPI',
+        'UEUsageType',
+        'ExtCommonFlagsII',
+        'UESCEFPDNConnection',
+        'AltGGSNAddrForControlPlane',
+        'AltGGSNAddrForUserTraffic',
+        'PrivateExt'
         }
     
     _GEN = (
@@ -3691,23 +3712,24 @@ class ForwardRelocationReq(GTPMsg):
 class ForwardRelocationRespIEs(GTPIEs):
     
     MAND = {
-        GTPIEType.Cause.value
+        'Cause'
         }
     OPT  = {
-        GTPIEType.TEIDCP.value,
-        GTPIEType.TEIDDataII.value,
-        GTPIEType.RANAPCause.value,
-        GTPIEType.GSNAddr.value,
-        GTPIEType.UTRANTransparentContainer.value,
-        GTPIEType.RABSetupInfo.value,
-        GTPIEType.AdditionalRABSetupInfo.value,
-        GTPIEType.SGSNNumber.value,
-        GTPIEType.BSSContainer.value,
-        GTPIEType.BSSGPCause.value,
-        GTPIEType.ListOfSetupPFCs.value,
-        GTPIEType.ExtRANAPCause.value,
-        GTPIEType.NodeIdent.value,
-        GTPIEType.PrivateExt.value
+        'TEIDCP',
+        'TEIDDataII',
+        'RANAPCause',
+        'SGSNAddrForControlPlane',
+        'SGSNAddrForUserTraffic',
+        'UTRANTransparentContainer',
+        'RABSetupInfo',
+        'AdditionalRABSetupInfo',
+        'SGSNNumber',
+        'BSSContainer',
+        'BSSGPCause',
+        'ListOfSetupPFCs',
+        'ExtRANAPCause',
+        'NodeIdent',
+        'PrivateExt'
         }
     
     _GEN = (
@@ -3743,7 +3765,7 @@ class ForwardRelocationCompleteIEs(GTPIEs):
     
     MAND = set()
     OPT  = {
-        GTPIEType.PrivateExt.value
+        'PrivateExt'
         }
     
     _GEN = (
@@ -3764,12 +3786,13 @@ class RelocationCancelReqIEs(GTPIEs):
     
     MAND = set()
     OPT  = {
-        GTPIEType.IMSI.value,
-        GTPIEType.IMEI.value,
-        GTPIEType.ExtCommonFlags.value,
-        GTPIEType.ExtRANAPCause.value,
-        GTPIEType.PrivateExt.value
+        'IMSI',
+        'IMEI',
+        'ExtCommonFlags',
+        'ExtRANAPCause',
+        'PrivateExt'
         }
+
     
     _GEN = (
         GTPIETV('IMSI', val={'Type': GTPIEType.IMSI.value}, bl={'Data': 64}, trans=True),
@@ -3793,10 +3816,10 @@ class RelocationCancelReq(GTPMsg):
 class RelocationCancelRespIEs(GTPIEs):
     
     MAND = {
-        GTPIEType.Cause.value
+        'Cause'
         }
     OPT  = {
-        GTPIEType.PrivateExt.value
+        'PrivateExt'
         }
     
     _GEN = (
@@ -3817,10 +3840,10 @@ class RelocationCancelResp(GTPMsg):
 class ForwardRelocationCompleteAckIEs(GTPIEs):
     
     MAND = {
-        GTPIEType.Cause.value
+        'Cause'
         }
     OPT  = {
-        GTPIEType.PrivateExt.value
+        'PrivateExt'
         }
     
     _GEN = (
@@ -3841,10 +3864,10 @@ class ForwardRelocationCompleteAck(GTPMsg):
 class ForwardSRNSCtxtAckIEs(GTPIEs):
     
     MAND = {
-        GTPIEType.Cause.value
+        'Cause'
         }
     OPT  = {
-        GTPIEType.PrivateExt.value
+        'PrivateExt'
         }
     
     _GEN = (
@@ -3865,12 +3888,12 @@ class ForwardSRNSCtxtAck(GTPMsg):
 class ForwardSRNSCtxtIEs(GTPIEs):
     
     MAND = {
-        GTPIEType.RABContext.value
+        'RABContext'
         }
     OPT  = {
-        GTPIEType.SourceRNCPDCPContextInfo.value,
-        GTPIEType.PDUNumbers.value,
-        GTPIEType.PrivateExt.value
+        'SourceRNCPDCPContextInfo',
+        'PDUNumbers',
+        'PrivateExt'
         }
     
     _GEN = (
@@ -3893,12 +3916,12 @@ class ForwardSRNSCtxt(GTPMsg):
 class RANInfoRelayIEs(GTPIEs):
     
     MAND = {
-        GTPIEType.RANTransparentContainer.value
+        'RANTransparentContainer'
         }
     OPT  = {
-        GTPIEType.RIMRoutingAddr.value,
-        GTPIEType.RIMRoutingAddrDiscriminator.value,
-        GTPIEType.PrivateExt.value
+        'RIMRoutingAddr',
+        'RIMRoutingAddrDiscriminator',
+        'PrivateExt'
         }
     
     _GEN = (
@@ -3921,10 +3944,10 @@ class RANInfoRelay(GTPMsg):
 class UERegistrationQueryReqIEs(GTPIEs):
     
     MAND = {
-        GTPIEType.IMSI.value
+        'IMSI'
         }
     OPT  = {
-        GTPIEType.PrivateExt.value
+        'PrivateExt'
         }
     
     _GEN = (
@@ -3945,12 +3968,12 @@ class UERegistrationQueryReq(GTPMsg):
 class UERegistrationQueryRespIEs(GTPIEs):
     
     MAND = {
-        GTPIEType.Cause.value,
-        GTPIEType.IMSI.value
+        'Cause',
+        'IMSI'
         }
     OPT  = {
-        GTPIEType.SelectedPLMNID.value,
-        GTPIEType.PrivateExt.value
+        'SelectedPLMNID',
+        'PrivateExt'
         }
     
     _GEN = (
@@ -3980,16 +4003,16 @@ class UERegistrationQueryResp(GTPMsg):
 class MBMSNotifReqIEs(GTPIEs):
     
     MAND = {
-        GTPIEType.IMSI.value,
-        GTPIEType.TEIDCP.value,
-        GTPIEType.NSAPI.value,
-        GTPIEType.EndUserAddr.value,
-        GTPIEType.APN.value,
-        GTPIEType.GSNAddr.value
+        'IMSI',
+        'TEIDCP',
+        'NSAPI',
+        'EndUserAddr',
+        'APN',
+        'GGSNAddrForControlPlane'
         }
     OPT  = {
-        GTPIEType.MBMSPCO.value,
-        GTPIEType.PrivateExt.value
+        'MBMSPCO',
+        'PrivateExt'
         }
     
     _GEN = (
@@ -4016,10 +4039,10 @@ class MBMSNotifReq(GTPMsg):
 class MBMSNotifRespIEs(GTPIEs):
     
     MAND = {
-        GTPIEType.Cause.value
+        'Cause'
         }
     OPT  = {
-        GTPIEType.PrivateExt.value
+        'PrivateExt'
         }
     
     _GEN = (
@@ -4040,15 +4063,15 @@ class MBMSNotifResp(GTPMsg):
 class MBMSNotifRejectReqIEs(GTPIEs):
     
     MAND = {
-        GTPIEType.Cause.value,
-        GTPIEType.TEIDCP.value,
-        GTPIEType.NSAPI.value,
-        GTPIEType.EndUserAddr.value,
-        GTPIEType.APN.value
+        'Cause',
+        'TEIDCP',
+        'NSAPI',
+        'EndUserAddr',
+        'APN'
         }
     OPT  = {
-        GTPIEType.GSNAddr.value,
-        GTPIEType.PrivateExt.value
+        'SGSNAddrForControlPlane',
+        'PrivateExt'
         }
     
     _GEN = (
@@ -4074,10 +4097,10 @@ class MBMSNotifRejectReq(GTPMsg):
 class MBMSNotifRejectRespIEs(GTPIEs):
     
     MAND = {
-        GTPIEType.Cause.value
+        'Cause'
         }
     OPT  = {
-        GTPIEType.PrivateExt.value
+        'PrivateExt'
         }
     
     _GEN = (
@@ -4098,30 +4121,30 @@ class MBMSNotifRejectResp(GTPMsg):
 class CreateMBMSCtxtReqIEs(GTPIEs):
     
     MAND = {
-        GTPIEType.RAI.value,
-        GTPIEType.EndUserAddr.value,
-        GTPIEType.APN.value,
-        GTPIEType.GSNAddr.value,
-        GTPIEType.EnhancedNSAPI.value
+        'RAI',
+        'EndUserAddr',
+        'APN',
+        'SGSNAddrForSignalling',
+        'EnhancedNSAPI'
         }
     OPT  = {
-        GTPIEType.IMSI.value,
-        GTPIEType.Recovery.value,
-        GTPIEType.SelectionMode.value,
-        GTPIEType.TEIDCP.value,
-        GTPIEType.TraceReference.value,
-        GTPIEType.TraceType.value,
-        GTPIEType.MSISDN.value,
-        GTPIEType.TriggerId.value,
-        GTPIEType.OMCIdentity.value,
-        GTPIEType.RATType.value,
-        GTPIEType.ULI.value,
-        GTPIEType.MSTimeZone.value,
-        GTPIEType.IMEI.value,
-        GTPIEType.MBMSPCO.value,
-        GTPIEType.AdditionalTraceInfo.value,
-        GTPIEType.AdditionalMBMSTraceInfo.value,
-        GTPIEType.PrivateExt.value
+        'IMSI',
+        'Recovery',
+        'SelectionMode',
+        'TEIDCP',
+        'TraceReference',
+        'TraceType',
+        'MSISDN',
+        'TriggerId',
+        'OMCIdentity',
+        'RATType',
+        'ULI',
+        'MSTimeZone',
+        'IMEI',
+        'MBMSPCO',
+        'AdditionalTraceInfo',
+        'AdditionalMBMSTraceInfo',
+        'PrivateExt'
         }
     
     _GEN = (
@@ -4162,16 +4185,18 @@ class CreateMBMSCtxtReq(GTPMsg):
 class CreateMBMSCtxtRespIEs(GTPIEs):
     
     MAND = {
-        GTPIEType.Cause.value
+        'Cause'
         }
     OPT  = {
-        GTPIEType.Recovery.value,
-        GTPIEType.TEIDCP.value,
-        GTPIEType.ChargingID.value,
-        GTPIEType.GSNAddr.value,
-        GTPIEType.MBMSPCO.value,
-        GTPIEType.ChargingGatewayAddr.value,
-        GTPIEType.PrivateExt.value
+        'Recovery',
+        'TEIDCP',
+        'ChargingID',
+        'GGSNAddrForControlPlane',
+        'AltGGSNAddrForControlPlane',
+        'ChargingGatewayAddr',
+        'AltChargingGatewayAddr',
+        'MBMSPCO',
+        'PrivateExt'
         }
     
     _GEN = (
@@ -4200,23 +4225,24 @@ class CreateMBMSCtxtResp(GTPMsg):
 class UpdateMBMSCtxtReqIEs(GTPIEs):
     
     MAND = {
-        GTPIEType.RAI.value,
-        GTPIEType.EnhancedNSAPI.value
+        'RAI',
+        'EnhancedNSAPI'
         }
     OPT  = {
-        GTPIEType.Recovery.value,
-        GTPIEType.TEIDCP.value,
-        GTPIEType.TraceReference.value,
-        GTPIEType.TraceType.value,
-        GTPIEType.GSNAddr.value,
-        GTPIEType.TriggerId.value,
-        GTPIEType.OMCIdentity.value,
-        GTPIEType.RATType.value,
-        GTPIEType.ULI.value,
-        GTPIEType.MSTimeZone.value,
-        GTPIEType.AdditionalTraceInfo.value,
-        GTPIEType.AdditionalMBMSTraceInfo.value,
-        GTPIEType.PrivateExt.value
+        'Recovery',
+        'TEIDCP',
+        'TraceReference',
+        'TraceType',
+        'SGSNAddrForControlPlane',
+        'AltSGSNAddrForControlPlane',
+        'TriggerId',
+        'OMCIdentity',
+        'RATType',
+        'ULI',
+        'MSTimeZone',
+        'AdditionalTraceInfo',
+        'AdditionalMBMSTraceInfo',
+        'PrivateExt'
         }
     
     _GEN = (
@@ -4251,15 +4277,17 @@ class UpdateMBMSCtxtReq(GTPMsg):
 class UpdateMBMSCtxtRespIEs(GTPIEs):
     
     MAND = {
-        GTPIEType.Cause.value
+        'Cause'
         }
     OPT  = {
-        GTPIEType.Recovery.value,
-        GTPIEType.TEIDCP.value,
-        GTPIEType.ChargingID.value,
-        GTPIEType.GSNAddr.value,
-        GTPIEType.ChargingGatewayAddr.value,
-        GTPIEType.PrivateExt.value
+        'Recovery',
+        'TEIDCP',
+        'ChargingID',
+        'GGSNAddrForControlPlane',
+        'AltGGSNAddrForControlPlane',
+        'ChargingGatewayAddr',
+        'AltChargingGatewayAddr',
+        'PrivateExt'
         }
     
     _GEN = (
@@ -4288,13 +4316,13 @@ class DeleteMBMSCtxtReqIEs(GTPIEs):
     
     MAND = set()
     OPT  = {
-        GTPIEType.IMSI.value,
-        GTPIEType.TEIDCP.value,
-        GTPIEType.EndUserAddr.value,
-        GTPIEType.APN.value,
-        GTPIEType.MBMSPCO.value,
-        GTPIEType.EnhancedNSAPI.value,
-        GTPIEType.PrivateExt.value
+        'IMSI',
+        'TEIDCP',
+        'EndUserAddr',
+        'APN',
+        'MBMSPCO',
+        'EnhancedNSAPI',
+        'PrivateExt'
         }
     
     _GEN = (
@@ -4320,11 +4348,11 @@ class DeleteMBMSCtxtReq(GTPMsg):
 class DeleteMBMSCtxtRespIEs(GTPIEs):
     
     MAND = {
-        GTPIEType.Cause.value
+        'Cause'
         }
     OPT  = {
-        GTPIEType.MBMSPCO.value,
-        GTPIEType.PrivateExt.value
+        'MBMSPCO',
+        'PrivateExt'
         }
     
     _GEN = (
@@ -4348,13 +4376,14 @@ class DeleteMBMSCtxtResp(GTPMsg):
 class MBMSRegistrationReqIEs(GTPIEs):
     
     MAND = {
-        GTPIEType.EndUserAddr.value,
-        GTPIEType.APN.value
+        'EndUserAddr',
+        'APN'
         }
     OPT  = {
-        GTPIEType.TEIDCP.value,
-        GTPIEType.GSNAddr.value,
-        GTPIEType.PrivateExt.value
+        'TEIDCP',
+        'SGSNAddrForControlPlane',
+        'AltSGSNAddrForControlPlane',
+        'PrivateExt'
         }
     
     _GEN = (
@@ -4379,14 +4408,14 @@ class MBMSRegistrationReq(GTPMsg):
 class MBMSRegistrationRespIEs(GTPIEs):
     
     MAND = {
-        GTPIEType.Cause.value
+        'Cause'
         }
     OPT  = {
-        GTPIEType.TEIDCP.value,
-        GTPIEType.GSNAddr.value,
-        GTPIEType.TMGI.value,
-        GTPIEType.RequiredMBMSBearerCap.value,
-        GTPIEType.PrivateExt.value
+        'TEIDCP',
+        'GGSNAddrForControlPlane',
+        'TMGI',
+        'RequiredMBMSBearerCap',
+        'PrivateExt'
         }
     
     _GEN = (
@@ -4411,11 +4440,11 @@ class MBMSRegistrationResp(GTPMsg):
 class MBMSDeRegistrationReqIEs(GTPIEs):
     
     MAND = {
-        GTPIEType.EndUserAddr.value,
-        GTPIEType.APN.value
+        'EndUserAddr',
+        'APN'
         }
     OPT  = {
-        GTPIEType.PrivateExt.value
+        'PrivateExt'
         }
     
     _GEN = (
@@ -4437,10 +4466,10 @@ class MBMSDeRegistrationReq(GTPMsg):
 class MBMSDeRegistrationRespIEs(GTPIEs):
     
     MAND = {
-        GTPIEType.Cause.value
+        'Cause'
         }
     OPT  = {
-        GTPIEType.PrivateExt.value
+        'PrivateExt'
         }
     
     _GEN = (
@@ -4461,25 +4490,26 @@ class MBMSDeRegistrationResp(GTPMsg):
 class MBMSSessionStartReqIEs(GTPIEs):
     
     MAND = {
-        GTPIEType.EndUserAddr.value,
-        GTPIEType.APN.value,
-        GTPIEType.QoSProfile.value,
-        GTPIEType.CommonFlags.value,
-        GTPIEType.TMGI.value,
-        GTPIEType.MBMSServiceArea.value,
-        GTPIEType.MBMS2G3GInd.value,
-        GTPIEType.MBMSSessionDuration.value,
-        GTPIEType.MBMSTimeToDataTransfer.value
+        'EndUserAddr',
+        'APN',
+        'QoSProfile',
+        'CommonFlags',
+        'TMGI',
+        'MBMSServiceArea',
+        'MBMS2G3GInd',
+        'MBMSSessionDuration',
+        'MBMSTimeToDataTransfer'
         }
     OPT  = {
-        GTPIEType.Recovery.value,
-        GTPIEType.TEIDCP.value,
-        GTPIEType.GSNAddr.value,
-        GTPIEType.MBMSSessionIdent.value,
-        GTPIEType.MBMSSessionRepetitionNumber.value,
-        GTPIEType.MBMSFlowIdent.value,
-        GTPIEType.MBMSIPMulticastDistrib.value,
-        GTPIEType.PrivateExt.value
+        'Recovery',
+        'TEIDCP',
+        'GGSNAddrForControlPlane',
+        'AltGGSNAddrForControlPlane',
+        'MBMSSessionIdent',
+        'MBMSSessionRepetitionNumber',
+        'MBMSFlowIdent',
+        'MBMSIPMulticastDistrib',
+        'PrivateExt'
         }
     
     _GEN = (
@@ -4516,15 +4546,17 @@ class MBMSSessionStartReq(GTPMsg):
 class MBMSSessionStartRespIEs(GTPIEs):
     
     MAND = {
-        GTPIEType.Cause.value
+        'Cause'
         }
     OPT  = {
-        GTPIEType.Recovery.value,
-        GTPIEType.TEIDDataI.value,
-        GTPIEType.TEIDCP.value,
-        GTPIEType.GSNAddr.value,
-        GTPIEType.MBMSDistribAck.value,
-        GTPIEType.PrivateExt.value
+        'Recovery',
+        'TEIDDataI',
+        'TEIDCP',
+        'SGSNAddrForControlPlane',
+        'SGSNAddrForUserTraffic',
+        'AltSGSNAddrForUserTraffic',
+        'MBMSDistribAck',
+        'PrivateExt'
         }
     
     _GEN = (
@@ -4552,12 +4584,12 @@ class MBMSSessionStartResp(GTPMsg):
 class MBMSSessionStopReqIEs(GTPIEs):
     
     MAND = {
-        GTPIEType.EndUserAddr.value,
-        GTPIEType.APN.value
+        'EndUserAddr',
+        'APN'
         }
     OPT  = {
-        GTPIEType.MBMSFlowIdent.value,
-        GTPIEType.PrivateExt.value
+        'MBMSFlowIdent',
+        'PrivateExt'
         }
     
     _GEN = (
@@ -4580,10 +4612,10 @@ class MBMSSessionStopReq(GTPMsg):
 class MBMSSessionStopRespIEs(GTPIEs):
     
     MAND = {
-        GTPIEType.Cause.value
+        'Cause'
         }
     OPT  = {
-        GTPIEType.PrivateExt.value
+        'PrivateExt'
         }
     
     _GEN = (
@@ -4604,19 +4636,19 @@ class MBMSSessionStopResp(GTPMsg):
 class MBMSSessionUpdateReqIEs(GTPIEs):
     
     MAND = {
-        GTPIEType.EndUserAddr.value,
-        GTPIEType.APN.value,
-        GTPIEType.TMGI.value,
-        GTPIEType.MBMSServiceArea.value,
-        GTPIEType.MBMSSessionDuration.value
+        'EndUserAddr',
+        'APN',
+        'TMGI',
+        'MBMSSessionDuration',
+        'MBMSServiceArea'
         }
     OPT  = {
-        GTPIEType.TEIDCP.value,
-        GTPIEType.GSNAddr.value,
-        GTPIEType.MBMSSessionIdent.value,
-        GTPIEType.MBMSSessionRepetitionNumber.value,
-        GTPIEType.MBMSFlowIdent.value,
-        GTPIEType.PrivateExt.value
+        'TEIDCP',
+        'GGSNAddrForControlPlane',
+        'MBMSSessionIdent',
+        'MBMSSessionRepetitionNumber',
+        'MBMSFlowIdent',
+        'PrivateExt'
         }
     
     _GEN = (
@@ -4646,13 +4678,14 @@ class MBMSSessionUpdateReq(GTPMsg):
 class MBMSSessionUpdateRespIEs(GTPIEs):
     
     MAND = {
-        GTPIEType.Cause.value
+        'Cause'
         }
     OPT  = {
-        GTPIEType.TEIDDataI.value,
-        GTPIEType.TEIDCP.value,
-        GTPIEType.GSNAddr.value,
-        GTPIEType.PrivateExt.value
+        'TEIDDataI',
+        'TEIDCP',
+        'SGSNAddrForDataI',
+        'SGSNAddrForControlPlane',
+        'PrivateExt'
         }
     
     _GEN = (
@@ -4682,16 +4715,16 @@ class MBMSSessionUpdateResp(GTPMsg):
 class MSInfoChangeNotifReqIEs(GTPIEs):
     
     MAND = {
-        GTPIEType.RATType.value
+        'RATType'
         }
     OPT  = {
-        GTPIEType.IMSI.value,
-        GTPIEType.NSAPI.value,
-        GTPIEType.ULI.value,
-        GTPIEType.IMEI.value,
-        GTPIEType.ExtCommonFlags.value,
-        GTPIEType.UCI.value,
-        GTPIEType.PrivateExt.value
+        'IMSI',
+        'LinkedNSAPI',
+        'ULI',
+        'IMEI',
+        'ExtCommonFlags',
+        'UCI',
+        'PrivateExt'
         }
     
     _GEN = (
@@ -4718,15 +4751,15 @@ class MSInfoChangeNotifReq(GTPMsg):
 class MSInfoChangeNotifRespIEs(GTPIEs):
     
     MAND = {
-        GTPIEType.Cause.value
+        'Cause'
         }
     OPT  = {
-        GTPIEType.IMSI.value,
-        GTPIEType.NSAPI.value,
-        GTPIEType.IMEI.value,
-        GTPIEType.MSInfoChangeReportingAction.value,
-        GTPIEType.CSGInfoReportingAction.value,
-        GTPIEType.PrivateExt.value
+        'IMSI',
+        'LinkedNSAPI',
+        'IMEI',
+        'MSInfoChangeReportingAction',
+        'CSGInfoReportingAction',
+        'PrivateExt'
         }
     
     _GEN = (
@@ -4757,11 +4790,11 @@ class MSInfoChangeNotifResp(GTPMsg):
 class NodeAliveReqIEs(GTPIEs):
     
     MAND = {
-        GTPIEType.ChargingGatewayAddr.value
+        'NodeAddr'
         }
     OPT  = {
-        GTPIEType.ChargingGatewayAddr.value,
-        GTPIEType.PrivateExt.value
+        'AltNodeAddr',
+        'PrivateExt'
         }
     
     _GEN = (
@@ -4784,7 +4817,7 @@ class NodeAliveRespIEs(GTPIEs):
     
     MAND = set()
     OPT  = {
-        GTPIEType.PrivateExt.value
+        'PrivateExt'
         }
     
     _GEN = (
@@ -4805,11 +4838,11 @@ class NodeAliveResp(GTPMsg):
 class RedirectionReqIEs(GTPIEs):
     
     MAND = {
-        GTPIEType.Cause.value
+        'Cause'
         }
     OPT  = {
-        GTPIEType.RecommendedNodeAddr.value,
-        GTPIEType.PrivateExt.value
+        'RecommendedNodeAddr',
+        'PrivateExt'
         }
     
     _GEN = (
@@ -4832,10 +4865,10 @@ class RedirectionReq(GTPMsg):
 class RedirectionRespIEs(GTPIEs):
     
     MAND = {
-        GTPIEType.Cause.value
+        'Cause'
         }
     OPT  = {
-        GTPIEType.PrivateExt.value
+        'PrivateExt'
         }
     
     _GEN = (
@@ -4856,13 +4889,13 @@ class RedirectionResp(GTPMsg):
 class DataRecordTransferReqIEs(GTPIEs):
     
     MAND = {
-        GTPIEType.PacketTransferCmd.value
+        'PacketTransferCmd'
         }
     OPT  = {
-        GTPIEType.SeqNumReleasedPackets.value,
-        GTPIEType.SeqNumCancelledPackets.value,
-        GTPIEType.DataRecordPacket.value,
-        GTPIEType.PrivateExt.value
+        'DataRecordPacket',
+        'SeqNumReleasedPackets',
+        'SeqNumCancelledPackets',
+        'PrivateExt'
         }
     
     _GEN = (
@@ -4886,11 +4919,11 @@ class DataRecordTransferReq(GTPMsg):
 class DataRecordTransferRespIEs(GTPIEs):
     
     MAND = {
-        GTPIEType.Cause.value,
-        GTPIEType.RequestsResponded.value
+        'Cause',
+        'RequestsResponded'
         }
     OPT  = {
-        GTPIEType.PrivateExt.value
+        'PrivateExt'
         }
     
     _GEN = (
@@ -5204,59 +5237,6 @@ GTPDispatcherGGSN = {
     }
 
 
-'''
-# create sets listing mandatory and optional IEs under .MAND and .OPT class attributes
-for disp in (GTPDispatcherSGSN, GTPDispatcherGGSN):
-    for cls in disp.values():
-        if hasattr(cls, 'MAND'):
-            continue
-        cls.MAND, cls.OPT = set(), set()
-        for ie in cls._GEN[1]._content:
-            if ie.get_trans():
-                cls.OPT.add(ie.get_type())
-            else:
-                cls.MAND.add(ie.get_type())
-
-
-def _inline(cls):
-    
-    def get_enum(en, i):
-        for e in en:
-            if e == i:
-                return e
-        assert()    
-    
-    # generate dedicated class GTPIEs
-    print('class %sIEs(GTPIEs):' % cls.__name__)
-    print('    ')
-    print('    MAND = {\n        %s\n        }' % ',\n        '.join(map(lambda i: '%s.value' % get_enum(GTPIEType, i), sorted(cls.MAND))))
-    print('    OPT  = {\n        %s\n        }' % ',\n        '.join(map(lambda i: '%s.value' % get_enum(GTPIEType, i),  sorted(cls.OPT))))
-    print('    ')
-    print('    _GEN = (')
-    for ie in cls._GEN[1]._content:
-        if ie._trans:
-            trans = ', trans=True'
-        else:
-            trans = ''
-        if isinstance(ie, GTPIETV):
-            print('        GTPIETV(\'%s\', val={\'Type\': %s.value}, bl={\'Data\': %i}%s),'\
-                  % (ie._name, get_enum(GTPIEType, ie['Type']._val), ie['Data']._bl, trans))
-        else:
-            print('        GTPIETLV(\'%s\', val={\'Type\': %s.value}%s),'\
-                  % (ie._name, get_enum(GTPIEType, ie['Type']._val), trans))
-    print('        )\n\n')
-    
-    # generate msg class GTPMsg
-    print('class %s(GTPMsg):' % cls.__name__)
-    print('    _GEN = (')
-    print('        GTPHdr(val={\'PT\': %i, \'Type\': %s.value}),'\
-          % (cls._GEN[0]['PT']._val, get_enum(GTPType, cls._GEN[0]['Type']._val)))
-    print('        %sIEs(hier=1),' % cls.__name__)
-    print('        )\n\n')
-
-'''
-
-
 ERR_GTP_BUF_TOO_SHORT = 1
 ERR_GTP_BUF_INVALID   = 2
 ERR_GTP_TYPE_NONEXIST = 3
@@ -5348,3 +5328,56 @@ def parse_GTP(buf):
         Msg, Err = parse_GTP_GGSN(buf)
     return Msg, Err
 
+
+
+'''
+# create sets listing mandatory and optional IEs under .MAND and .OPT class attributes
+for disp in (GTPDispatcherSGSN, GTPDispatcherGGSN):
+    for cls in disp.values():
+        if hasattr(cls, 'MAND'):
+            continue
+        cls.MAND, cls.OPT = [], []
+        for ie in cls._GEN[1]._content:
+            if ie.get_trans():
+                cls.OPT.append(ie._name)
+            else:
+                cls.MAND.append(ie._name)
+        assert( len(cls.MAND) == len(set(cls.MAND)) and len(cls.OPT) == len(set(cls.OPT)) )
+
+
+def inl(cls):
+    
+    def get_enum(en, i):
+        for e in en:
+            if e == i:
+                return e
+        assert()    
+    
+    # generate dedicated class GTPIEs
+    print('class %sIEs(GTPIEs):' % cls.__name__)
+    print('    ')
+    print('    MAND = {\n        %s\n        }' % ',\n        '.join(map(repr, cls.MAND)))
+    print('    OPT  = {\n        %s\n        }' % ',\n        '.join(map(repr, cls.OPT)))
+    print('    ')
+    print('    _GEN = (')
+    for ie in cls._GEN[1]._content:
+        if ie._trans:
+            trans = ', trans=True'
+        else:
+            trans = ''
+        if isinstance(ie, GTPIETV):
+            print('        GTPIETV(\'%s\', val={\'Type\': %s.value}, bl={\'Data\': %i}%s),'\
+                  % (ie._name, get_enum(GTPIEType, ie['Type']._val), ie['Data']._bl, trans))
+        else:
+            print('        GTPIETLV(\'%s\', val={\'Type\': %s.value}%s),'\
+                  % (ie._name, get_enum(GTPIEType, ie['Type']._val), trans))
+    print('        )\n\n')
+    
+    # generate msg class GTPMsg
+    print('class %s(GTPMsg):' % cls.__name__)
+    print('    _GEN = (')
+    print('        GTPHdr(val={\'PT\': %i, \'Type\': %s.value}),'\
+          % (cls._GEN[0]['PT']._val, get_enum(GTPType, cls._GEN[0]['Type']._val)))
+    print('        %sIEs(hier=1),' % cls.__name__)
+    print('        )\n\n')
+'''
