@@ -5,7 +5,7 @@ import sys
 from setuptools import setup, find_packages
 
 # Pycrate Version
-VERSION = "0.5.3"
+VERSION = "0.5.4"
 
 
 # get dependencies according to the Python version
@@ -89,6 +89,6 @@ setup(
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/P1sec/pycrate/",
-    keywords="protocol format ASN.1 CSN.1 compiler encoder decoder mobile core network Diameter NAS S1AP NGAP TCAP MAP GTP-C PFCP",
+    keywords="protocol format ASN.1 CSN.1 compiler encoder decoder mobile core network Diameter NAS S1AP NGAP TCAP MAP GTP PFCP SCCP ISUP",
     license="LGPL v2.1+",
     )
