@@ -309,6 +309,23 @@ GTPC_IF_S16     = set((128, 129, 130, 131, 132, 133, 134, 135, 136, 139, 140, 13
 GTPC_IF_N26     = set((128, 129, 130, 131, 132, 133, 134, 135, 136, 139, 140, 141))
 GTPC_IF_Sm      = set((231, 232, 233, 234, 235, 236))
 
+GTPC_IF_ALL     = {
+    'S101'  : GTPC_IF_S101,
+    'S121'  : GTPC_IF_S121,
+    'Sv'    : GTPC_IF_Sv,
+    'S4'    : GTPC_IF_S4,
+    'S11'   : GTPC_IF_S11,
+    'S5'    : GTPC_IF_S5,
+    'S8'    : GTPC_IF_S8,
+    'S2a'   : GTPC_IF_S2a,
+    'S2b'   : GTPC_IF_S2b,
+    'S3'    : GTPC_IF_S3,
+    'S10'   : GTPC_IF_S10,
+    'S16'   : GTPC_IF_S16,
+    'N26'   : GTPC_IF_N26,
+    'Sm'    : GTPC_IF_Sm
+    }
+
 
 class GTPCHdr(Envelope):
     
