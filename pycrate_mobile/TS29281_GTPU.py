@@ -37,6 +37,7 @@ __all__ = [
     'GTPUTunnelStatus',
     'GPDU',
     # GTPU Message parser and associated errors
+    'GTPUDispatcher',
     'parse_GTPU',
     'ERR_GTPU_BUF_TOO_SHORT',
     'ERR_GTPU_BUF_INVALID',
