@@ -2086,17 +2086,11 @@ class GTPIEs(Envelope):
             else:
                 self.append(ie)
     
-    def add_ie(self, ie_type, val=None):
-        """add the IE of given type `ie_type` and sets the value `val` 
+    def add_ie(self, ie_name, val=None):
+        """add the IE with the given identifier `ie_name` and sets the value `val` 
         (raw bytes buffer or structured data) into its data part
         """
-        found = False
-        for ie in self._content:
-            if ie.get_type() == ie_type:
-                found = True
-                break
-        if not found:
-            return
+        ie = self[ie_name]
         if ie.get_trans():
             ie.set_trans(False)
         if val is not None:
@@ -2104,27 +2098,23 @@ class GTPIEs(Envelope):
         else:
             ie.set_ie_class()
     
-    def rem_ie(self, ie_type, ie_inst=0):
-        """remove the IE of given type `ie_type`
+    def rem_ie(self, ie_name):
+        """remove the IE with the given identifier `ie_name`
         """
-        found = False
-        for ie in self._content:
-            if ie.get_type() == ie_type:
-                found = True
-                break
+        ie = self[ie_name]
         if not ie.get_trans():
             ie.set_trans(True)
     
-    def init_ies(self, wopt=False):
+    def init_ies(self, wopt=False, **kwargs):
         """initialize all IEs that are mandatory,
         adding optional ones if `wopt` is set,
         adding the private extension if `wpriv` is set
         """
         # clear the content first
         for ie in self._content:
-            if ie.get_trans() and wopt:
+            if ie._name in self.OPT and wopt:
                 ie.set_trans(False)
-                ie.set_ie_class()
+            ie.set_ie_class()
 
 
 #------------------------------------------------------------------------------#
