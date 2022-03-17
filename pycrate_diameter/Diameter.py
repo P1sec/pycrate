@@ -230,27 +230,38 @@ class AVPGeneric(Envelope):
         self[2].set_blauto(lambda: (-self[1].get_len()%4) << 3)
     
     def set_val(self, val):
-        if isinstance(val, (tuple, list)) and val:
+        if isinstance(val, (tuple, list)) and len(val) >= 1:
             self.set_val_hdr(val[0])
-            if len(val) > 1:
-                self[1].set_val(val[1])
-            if len(val) > 2:
+            if len(val) >= 2:
+                self.set_val_data(val[1])
+            if len(val) >= 3:
                 self[2].set_val(val[2])
         elif isinstance(val, dict) and 'AVPHdr' in val:
             self.set_val_hdr(val['AVPHdr'])
             if 'AVPData' in val:
-                self[1].set_val(val['AVPData'])
+                self.set_val_data(val['AVPData'])
+            elif self[1]._name in val:
+                self.set_val_data(val[self[1]._name])
             if 'AVPPad' in val:
-                self[1].set_val(val['AVPPad'])
+                self[2].set_val(val['AVPPad'])
         else:
             Envelope.set_val(self, val)
     
     def set_val_hdr(self, val_hdr):
+        # this sets the AVP header value, and change the structure of the AVPData
+        # to a specific one, in case it is defined in the FMT_LUT dict
         self[0].set_val(val_hdr)
         avp_code = self[0][0].get_val()
         if avp_code in self.FMT_LUT:
-            AVPData = self.FMT_LUT[avp_code](hier=1)
-            self.replace(self[1], AVPData)
+            self.replace(self[1], self.FMT_LUT[avp_code](hier=1))
+    
+    def set_val_data(self, val_data):
+        if isinstance(val_data, bytes_types) and \
+        (not hasattr(self[1], 'TYPES') or bytes not in self[1].TYPES):
+            # a buffer is provided for the Data part, while we are expecting another type
+            # hence we restore the default AVPData buffer from AVPGeneric
+            self.replace(self[1], Buf('AVPData', rep=REPR_HEX, hier=1))
+        self[1].set_val(val_data)
     
     def _from_char(self, char):
         if self.get_trans():
