@@ -2271,7 +2271,7 @@ ProtType_dict = {
     }
 
 
-class GTPType(IntEnum):
+class GTPMsgType(IntEnum):
     EchoReq                         = 1
     EchoResp                        = 2
     VersionNotSupported             = 3
@@ -2342,7 +2342,7 @@ class GTPType(IntEnum):
     EndMarker                       = 254
     GPDU                            = 255
 
-GTPType_dict = {e.value: e.name for e in GTPType}
+GTPMsgType_dict = {e.value: e.name for e in GTPMsgType}
 
 
 class GTPHdr(Envelope):
@@ -2356,7 +2356,7 @@ class GTPHdr(Envelope):
         Uint('E', bl=1),
         Uint('S', bl=1),
         Uint('PN', bl=1),
-        Uint8('Type', val=GTPType.EchoReq.value, dic=GTPType_dict),
+        Uint8('Type', val=GTPMsgType.EchoReq.value, dic=GTPMsgType_dict),
         Uint16('Len'),
         Uint32('TEID', rep=REPR_HEX),
         GTPHdrOpt(),      # optional
@@ -2438,7 +2438,7 @@ class EchoReqIEs(GTPIEs):
 
 class EchoReq(GTPMsg):
     _GEN = (
-        GTPHdr(val={'PT': 1, 'Type': GTPType.EchoReq.value}),
+        GTPHdr(val={'PT': 1, 'Type': GTPMsgType.EchoReq.value}),
         EchoReqIEs(hier=1),
         )
 
@@ -2462,7 +2462,7 @@ class EchoRespIEs(GTPIEs):
 
 class EchoResp(GTPMsg):
     _GEN = (
-        GTPHdr(val={'PT': 1, 'Type': GTPType.EchoResp.value}),
+        GTPHdr(val={'PT': 1, 'Type': GTPMsgType.EchoResp.value}),
         EchoRespIEs(hier=1),
         )
 
@@ -2479,7 +2479,7 @@ class VersionNotSupportedIEs(GTPIEs):
 
 class VersionNotSupported(GTPMsg):
     _GEN = (
-        GTPHdr(val={'PT': 1, 'Type': GTPType.VersionNotSupported.value}),
+        GTPHdr(val={'PT': 1, 'Type': GTPMsgType.VersionNotSupported.value}),
         VersionNotSupportedIEs(hier=1),
         )
 
@@ -2500,7 +2500,7 @@ class SupportedExtHeadersNotifIEs(GTPIEs):
 
 class SupportedExtHeadersNotif(GTPMsg):
     _GEN = (
-        GTPHdr(val={'PT': 1, 'Type': GTPType.SupportedExtHeadersNotif.value}),
+        GTPHdr(val={'PT': 1, 'Type': GTPMsgType.SupportedExtHeadersNotif.value}),
         SupportedExtHeadersNotifIEs(hier=1),
         )
 
@@ -2603,7 +2603,7 @@ class CreatePDPCtxtReqIEs(GTPIEs):
 
 class CreatePDPCtxtReq(GTPMsg):
     _GEN = (
-        GTPHdr(val={'PT': 1, 'Type': GTPType.CreatePDPCtxtReq.value}),
+        GTPHdr(val={'PT': 1, 'Type': GTPMsgType.CreatePDPCtxtReq.value}),
         CreatePDPCtxtReqIEs(hier=1),
         )
 
@@ -2677,7 +2677,7 @@ class CreatePDPCtxtRespIEs(GTPIEs):
 
 class CreatePDPCtxtResp(GTPMsg):
     _GEN = (
-        GTPHdr(val={'PT': 1, 'Type': GTPType.CreatePDPCtxtResp.value}),
+        GTPHdr(val={'PT': 1, 'Type': GTPMsgType.CreatePDPCtxtResp.value}),
         CreatePDPCtxtRespIEs(hier=1),
         )
 
@@ -2759,7 +2759,7 @@ class UpdatePDPCtxtReqSGSNIEs(GTPIEs):
 
 class UpdatePDPCtxtReqSGSN(GTPMsg):
     _GEN = (
-        GTPHdr(val={'PT': 1, 'Type': GTPType.UpdatePDPCtxtReq.value}),
+        GTPHdr(val={'PT': 1, 'Type': GTPMsgType.UpdatePDPCtxtReq.value}),
         UpdatePDPCtxtReqSGSNIEs(hier=1),
         )
 
@@ -2813,7 +2813,7 @@ class UpdatePDPCtxtReqGGSNIEs(GTPIEs):
 
 class UpdatePDPCtxtReqGGSN(GTPMsg):
     _GEN = (
-        GTPHdr(val={'PT': 1, 'Type': GTPType.UpdatePDPCtxtReq.value}),
+        GTPHdr(val={'PT': 1, 'Type': GTPMsgType.UpdatePDPCtxtReq.value}),
         UpdatePDPCtxtReqGGSNIEs(hier=1),
         )
 
@@ -2875,7 +2875,7 @@ class UpdatePDPCtxtRespGGSNIEs(GTPIEs):
 
 class UpdatePDPCtxtRespGGSN(GTPMsg):
     _GEN = (
-        GTPHdr(val={'PT': 1, 'Type': GTPType.UpdatePDPCtxtResp.value}),
+        GTPHdr(val={'PT': 1, 'Type': GTPMsgType.UpdatePDPCtxtResp.value}),
         UpdatePDPCtxtRespGGSNIEs(hier=1),
         )
 
@@ -2919,7 +2919,7 @@ class UpdatePDPCtxtRespSGSNIEs(GTPIEs):
 
 class UpdatePDPCtxtRespSGSN(GTPMsg):
     _GEN = (
-        GTPHdr(val={'PT': 1, 'Type': GTPType.UpdatePDPCtxtResp.value}),
+        GTPHdr(val={'PT': 1, 'Type': GTPMsgType.UpdatePDPCtxtResp.value}),
         UpdatePDPCtxtRespSGSNIEs(hier=1),
         )
 
@@ -2957,7 +2957,7 @@ class DeletePDPCtxtReqIEs(GTPIEs):
 
 class DeletePDPCtxtReq(GTPMsg):
     _GEN = (
-        GTPHdr(val={'PT': 1, 'Type': GTPType.DeletePDPCtxtReq.value}),
+        GTPHdr(val={'PT': 1, 'Type': GTPMsgType.DeletePDPCtxtReq.value}),
         DeletePDPCtxtReqIEs(hier=1),
         )
 
@@ -2989,7 +2989,7 @@ class DeletePDPCtxtRespIEs(GTPIEs):
 
 class DeletePDPCtxtResp(GTPMsg):
     _GEN = (
-        GTPHdr(val={'PT': 1, 'Type': GTPType.DeletePDPCtxtResp.value}),
+        GTPHdr(val={'PT': 1, 'Type': GTPMsgType.DeletePDPCtxtResp.value}),
         DeletePDPCtxtRespIEs(hier=1),
         )
 
@@ -3015,7 +3015,7 @@ class ErrorIndIEs(GTPIEs):
 
 class ErrorInd(GTPMsg):
     _GEN = (
-        GTPHdr(val={'PT': 1, 'Type': GTPType.ErrorInd.value}),
+        GTPHdr(val={'PT': 1, 'Type': GTPMsgType.ErrorInd.value}),
         ErrorIndIEs(hier=1),
         )
 
@@ -3049,7 +3049,7 @@ class PDUNotifReqIEs(GTPIEs):
 
 class PDUNotifReq(GTPMsg):
     _GEN = (
-        GTPHdr(val={'PT': 1, 'Type': GTPType.PDUNotifReq.value}),
+        GTPHdr(val={'PT': 1, 'Type': GTPMsgType.PDUNotifReq.value}),
         PDUNotifReqIEs(hier=1),
         )
 
@@ -3073,7 +3073,7 @@ class PDUNotifRespIEs(GTPIEs):
 
 class PDUNotifResp(GTPMsg):
     _GEN = (
-        GTPHdr(val={'PT': 1, 'Type': GTPType.PDUNotifResp.value}),
+        GTPHdr(val={'PT': 1, 'Type': GTPMsgType.PDUNotifResp.value}),
         PDUNotifRespIEs(hier=1),
         )
 
@@ -3105,7 +3105,7 @@ class PDUNotifRejectReqIEs(GTPIEs):
 
 class PDUNotifRejectReq(GTPMsg):
     _GEN = (
-        GTPHdr(val={'PT': 1, 'Type': GTPType.PDUNotifRejectReq.value}),
+        GTPHdr(val={'PT': 1, 'Type': GTPMsgType.PDUNotifRejectReq.value}),
         PDUNotifRejectReqIEs(hier=1),
         )
 
@@ -3129,7 +3129,7 @@ class PDUNotifRejectRespIEs(GTPIEs):
 
 class PDUNotifRejectResp(GTPMsg):
     _GEN = (
-        GTPHdr(val={'PT': 1, 'Type': GTPType.PDUNotifRejectResp.value}),
+        GTPHdr(val={'PT': 1, 'Type': GTPMsgType.PDUNotifRejectResp.value}),
         PDUNotifRejectRespIEs(hier=1),
         )
 
@@ -3163,7 +3163,7 @@ class InitiatePDPCtxtActivationReqIEs(GTPIEs):
 
 class InitiatePDPCtxtActivationReq(GTPMsg):
     _GEN = (
-        GTPHdr(val={'PT': 1, 'Type': GTPType.InitiatePDPCtxtActivationReq.value}),
+        GTPHdr(val={'PT': 1, 'Type': GTPMsgType.InitiatePDPCtxtActivationReq.value}),
         InitiatePDPCtxtActivationReqIEs(hier=1),
         )
 
@@ -3189,7 +3189,7 @@ class InitiatePDPCtxtActivationRespIEs(GTPIEs):
 
 class InitiatePDPCtxtActivationResp(GTPMsg):
     _GEN = (
-        GTPHdr(val={'PT': 1, 'Type': GTPType.InitiatePDPCtxtActivationResp.value}),
+        GTPHdr(val={'PT': 1, 'Type': GTPMsgType.InitiatePDPCtxtActivationResp.value}),
         InitiatePDPCtxtActivationRespIEs(hier=1),
         )
 
@@ -3219,7 +3219,7 @@ class SendRouteingInfoforGPRSReqIEs(GTPIEs):
 
 class SendRouteingInfoforGPRSReq(GTPMsg):
     _GEN = (
-        GTPHdr(val={'PT': 1, 'Type': GTPType.SendRouteingInfoforGPRSReq.value}),
+        GTPHdr(val={'PT': 1, 'Type': GTPMsgType.SendRouteingInfoforGPRSReq.value}),
         SendRouteingInfoforGPRSReqIEs(hier=1),
         )
 
@@ -3251,7 +3251,7 @@ class SendRouteingInfoforGPRSRespIEs(GTPIEs):
 
 class SendRouteingInfoforGPRSResp(GTPMsg):
     _GEN = (
-        GTPHdr(val={'PT': 1, 'Type': GTPType.SendRouteingInfoforGPRSResp.value}),
+        GTPHdr(val={'PT': 1, 'Type': GTPMsgType.SendRouteingInfoforGPRSResp.value}),
         SendRouteingInfoforGPRSRespIEs(hier=1),
         )
 
@@ -3275,7 +3275,7 @@ class FailureReportReqIEs(GTPIEs):
 
 class FailureReportReq(GTPMsg):
     _GEN = (
-        GTPHdr(val={'PT': 1, 'Type': GTPType.FailureReportReq.value}),
+        GTPHdr(val={'PT': 1, 'Type': GTPMsgType.FailureReportReq.value}),
         FailureReportReqIEs(hier=1),
         )
 
@@ -3301,7 +3301,7 @@ class FailureReportRespIEs(GTPIEs):
 
 class FailureReportResp(GTPMsg):
     _GEN = (
-        GTPHdr(val={'PT': 1, 'Type': GTPType.FailureReportResp.value}),
+        GTPHdr(val={'PT': 1, 'Type': GTPMsgType.FailureReportResp.value}),
         FailureReportRespIEs(hier=1),
         )
 
@@ -3327,7 +3327,7 @@ class NoteMSGPRSPresentReqIEs(GTPIEs):
 
 class NoteMSGPRSPresentReq(GTPMsg):
     _GEN = (
-        GTPHdr(val={'PT': 1, 'Type': GTPType.NoteMSGPRSPresentReq.value}),
+        GTPHdr(val={'PT': 1, 'Type': GTPMsgType.NoteMSGPRSPresentReq.value}),
         NoteMSGPRSPresentReqIEs(hier=1),
         )
 
@@ -3351,7 +3351,7 @@ class NoteMSGPRSPresentRespIEs(GTPIEs):
 
 class NoteMSGPRSPresentResp(GTPMsg):
     _GEN = (
-        GTPHdr(val={'PT': 1, 'Type': GTPType.NoteMSGPRSPresentResp.value}),
+        GTPHdr(val={'PT': 1, 'Type': GTPMsgType.NoteMSGPRSPresentResp.value}),
         NoteMSGPRSPresentRespIEs(hier=1),
         )
 
@@ -3388,7 +3388,7 @@ class IdentificationReqIEs(GTPIEs):
 
 class IdentificationReq(GTPMsg):
     _GEN = (
-        GTPHdr(val={'PT': 1, 'Type': GTPType.IdentificationReq.value}),
+        GTPHdr(val={'PT': 1, 'Type': GTPMsgType.IdentificationReq.value}),
         IdentificationReqIEs(hier=1),
         )
 
@@ -3420,7 +3420,7 @@ class IdentificationRespIEs(GTPIEs):
 
 class IdentificationResp(GTPMsg):
     _GEN = (
-        GTPHdr(val={'PT': 1, 'Type': GTPType.IdentificationResp.value}),
+        GTPHdr(val={'PT': 1, 'Type': GTPMsgType.IdentificationResp.value}),
         IdentificationRespIEs(hier=1),
         )
 
@@ -3466,7 +3466,7 @@ class SGSNCtxtReqIEs(GTPIEs):
 
 class SGSNCtxtReq(GTPMsg):
     _GEN = (
-        GTPHdr(val={'PT': 1, 'Type': GTPType.SGSNCtxtReq.value}),
+        GTPHdr(val={'PT': 1, 'Type': GTPMsgType.SGSNCtxtReq.value}),
         SGSNCtxtReqIEs(hier=1),
         )
 
@@ -3552,7 +3552,7 @@ class SGSNCtxtRespIEs(GTPIEs):
 
 class SGSNCtxtResp(GTPMsg):
     _GEN = (
-        GTPHdr(val={'PT': 1, 'Type': GTPType.SGSNCtxtResp.value}),
+        GTPHdr(val={'PT': 1, 'Type': GTPMsgType.SGSNCtxtResp.value}),
         SGSNCtxtRespIEs(hier=1),
         )
 
@@ -3584,7 +3584,7 @@ class SGSNCtxtAckIEs(GTPIEs):
 
 class SGSNCtxtAck(GTPMsg):
     _GEN = (
-        GTPHdr(val={'PT': 1, 'Type': GTPType.SGSNCtxtAck.value}),
+        GTPHdr(val={'PT': 1, 'Type': GTPMsgType.SGSNCtxtAck.value}),
         SGSNCtxtAckIEs(hier=1),
         )
 
@@ -3692,7 +3692,7 @@ class ForwardRelocationReqIEs(GTPIEs):
 
 class ForwardRelocationReq(GTPMsg):
     _GEN = (
-        GTPHdr(val={'PT': 1, 'Type': GTPType.ForwardRelocationReq.value}),
+        GTPHdr(val={'PT': 1, 'Type': GTPMsgType.ForwardRelocationReq.value}),
         ForwardRelocationReqIEs(hier=1),
         )
 
@@ -3744,7 +3744,7 @@ class ForwardRelocationRespIEs(GTPIEs):
 
 class ForwardRelocationResp(GTPMsg):
     _GEN = (
-        GTPHdr(val={'PT': 1, 'Type': GTPType.ForwardRelocationResp.value}),
+        GTPHdr(val={'PT': 1, 'Type': GTPMsgType.ForwardRelocationResp.value}),
         ForwardRelocationRespIEs(hier=1),
         )
 
@@ -3765,7 +3765,7 @@ class ForwardRelocationCompleteIEs(GTPIEs):
 
 class ForwardRelocationComplete(GTPMsg):
     _GEN = (
-        GTPHdr(val={'PT': 1, 'Type': GTPType.ForwardRelocationComplete.value}),
+        GTPHdr(val={'PT': 1, 'Type': GTPMsgType.ForwardRelocationComplete.value}),
         ForwardRelocationCompleteIEs(hier=1),
         )
 
@@ -3795,7 +3795,7 @@ class RelocationCancelReqIEs(GTPIEs):
 
 class RelocationCancelReq(GTPMsg):
     _GEN = (
-        GTPHdr(val={'PT': 1, 'Type': GTPType.RelocationCancelReq.value}),
+        GTPHdr(val={'PT': 1, 'Type': GTPMsgType.RelocationCancelReq.value}),
         RelocationCancelReqIEs(hier=1),
         )
 
@@ -3820,7 +3820,7 @@ class RelocationCancelRespIEs(GTPIEs):
 
 class RelocationCancelResp(GTPMsg):
     _GEN = (
-        GTPHdr(val={'PT': 1, 'Type': GTPType.RelocationCancelResp.value}),
+        GTPHdr(val={'PT': 1, 'Type': GTPMsgType.RelocationCancelResp.value}),
         RelocationCancelRespIEs(hier=1),
         )
 
@@ -3844,7 +3844,7 @@ class ForwardRelocationCompleteAckIEs(GTPIEs):
 
 class ForwardRelocationCompleteAck(GTPMsg):
     _GEN = (
-        GTPHdr(val={'PT': 1, 'Type': GTPType.ForwardRelocationCompleteAck.value}),
+        GTPHdr(val={'PT': 1, 'Type': GTPMsgType.ForwardRelocationCompleteAck.value}),
         ForwardRelocationCompleteAckIEs(hier=1),
         )
 
@@ -3868,7 +3868,7 @@ class ForwardSRNSCtxtAckIEs(GTPIEs):
 
 class ForwardSRNSCtxtAck(GTPMsg):
     _GEN = (
-        GTPHdr(val={'PT': 1, 'Type': GTPType.ForwardSRNSCtxtAck.value}),
+        GTPHdr(val={'PT': 1, 'Type': GTPMsgType.ForwardSRNSCtxtAck.value}),
         ForwardSRNSCtxtAckIEs(hier=1),
         )
 
@@ -3896,7 +3896,7 @@ class ForwardSRNSCtxtIEs(GTPIEs):
 
 class ForwardSRNSCtxt(GTPMsg):
     _GEN = (
-        GTPHdr(val={'PT': 1, 'Type': GTPType.ForwardSRNSCtxt.value}),
+        GTPHdr(val={'PT': 1, 'Type': GTPMsgType.ForwardSRNSCtxt.value}),
         ForwardSRNSCtxtIEs(hier=1),
         )
 
@@ -3924,7 +3924,7 @@ class RANInfoRelayIEs(GTPIEs):
 
 class RANInfoRelay(GTPMsg):
     _GEN = (
-        GTPHdr(val={'PT': 1, 'Type': GTPType.RANInfoRelay.value}),
+        GTPHdr(val={'PT': 1, 'Type': GTPMsgType.RANInfoRelay.value}),
         RANInfoRelayIEs(hier=1),
         )
 
@@ -3948,7 +3948,7 @@ class UERegistrationQueryReqIEs(GTPIEs):
 
 class UERegistrationQueryReq(GTPMsg):
     _GEN = (
-        GTPHdr(val={'PT': 1, 'Type': GTPType.UERegistrationQueryReq.value}),
+        GTPHdr(val={'PT': 1, 'Type': GTPMsgType.UERegistrationQueryReq.value}),
         UERegistrationQueryReqIEs(hier=1),
         )
 
@@ -3976,7 +3976,7 @@ class UERegistrationQueryRespIEs(GTPIEs):
 
 class UERegistrationQueryResp(GTPMsg):
     _GEN = (
-        GTPHdr(val={'PT': 1, 'Type': GTPType.UERegistrationQueryResp.value}),
+        GTPHdr(val={'PT': 1, 'Type': GTPMsgType.UERegistrationQueryResp.value}),
         UERegistrationQueryRespIEs(hier=1),
         )
 
@@ -4019,7 +4019,7 @@ class MBMSNotifReqIEs(GTPIEs):
 
 class MBMSNotifReq(GTPMsg):
     _GEN = (
-        GTPHdr(val={'PT': 1, 'Type': GTPType.MBMSNotifReq.value}),
+        GTPHdr(val={'PT': 1, 'Type': GTPMsgType.MBMSNotifReq.value}),
         MBMSNotifReqIEs(hier=1),
         )
 
@@ -4043,7 +4043,7 @@ class MBMSNotifRespIEs(GTPIEs):
 
 class MBMSNotifResp(GTPMsg):
     _GEN = (
-        GTPHdr(val={'PT': 1, 'Type': GTPType.MBMSNotifResp.value}),
+        GTPHdr(val={'PT': 1, 'Type': GTPMsgType.MBMSNotifResp.value}),
         MBMSNotifRespIEs(hier=1),
         )
 
@@ -4077,7 +4077,7 @@ class MBMSNotifRejectReqIEs(GTPIEs):
 
 class MBMSNotifRejectReq(GTPMsg):
     _GEN = (
-        GTPHdr(val={'PT': 1, 'Type': GTPType.MBMSNotifRejectReq.value}),
+        GTPHdr(val={'PT': 1, 'Type': GTPMsgType.MBMSNotifRejectReq.value}),
         MBMSNotifRejectReqIEs(hier=1),
         )
 
@@ -4101,7 +4101,7 @@ class MBMSNotifRejectRespIEs(GTPIEs):
 
 class MBMSNotifRejectResp(GTPMsg):
     _GEN = (
-        GTPHdr(val={'PT': 1, 'Type': GTPType.MBMSNotifRejectResp.value}),
+        GTPHdr(val={'PT': 1, 'Type': GTPMsgType.MBMSNotifRejectResp.value}),
         MBMSNotifRejectRespIEs(hier=1),
         )
 
@@ -4165,7 +4165,7 @@ class CreateMBMSCtxtReqIEs(GTPIEs):
 
 class CreateMBMSCtxtReq(GTPMsg):
     _GEN = (
-        GTPHdr(val={'PT': 1, 'Type': GTPType.CreateMBMSCtxtReq.value}),
+        GTPHdr(val={'PT': 1, 'Type': GTPMsgType.CreateMBMSCtxtReq.value}),
         CreateMBMSCtxtReqIEs(hier=1),
         )
 
@@ -4205,7 +4205,7 @@ class CreateMBMSCtxtRespIEs(GTPIEs):
 
 class CreateMBMSCtxtResp(GTPMsg):
     _GEN = (
-        GTPHdr(val={'PT': 1, 'Type': GTPType.CreateMBMSCtxtResp.value}),
+        GTPHdr(val={'PT': 1, 'Type': GTPMsgType.CreateMBMSCtxtResp.value}),
         CreateMBMSCtxtRespIEs(hier=1),
         )
 
@@ -4257,7 +4257,7 @@ class UpdateMBMSCtxtReqIEs(GTPIEs):
 
 class UpdateMBMSCtxtReq(GTPMsg):
     _GEN = (
-        GTPHdr(val={'PT': 1, 'Type': GTPType.UpdateMBMSCtxtReq.value}),
+        GTPHdr(val={'PT': 1, 'Type': GTPMsgType.UpdateMBMSCtxtReq.value}),
         UpdateMBMSCtxtReqIEs(hier=1),
         )
 
@@ -4295,7 +4295,7 @@ class UpdateMBMSCtxtRespIEs(GTPIEs):
 
 class UpdateMBMSCtxtResp(GTPMsg):
     _GEN = (
-        GTPHdr(val={'PT': 1, 'Type': GTPType.UpdateMBMSCtxtResp.value}),
+        GTPHdr(val={'PT': 1, 'Type': GTPMsgType.UpdateMBMSCtxtResp.value}),
         UpdateMBMSCtxtRespIEs(hier=1),
         )
 
@@ -4328,7 +4328,7 @@ class DeleteMBMSCtxtReqIEs(GTPIEs):
 
 class DeleteMBMSCtxtReq(GTPMsg):
     _GEN = (
-        GTPHdr(val={'PT': 1, 'Type': GTPType.DeleteMBMSCtxtReq.value}),
+        GTPHdr(val={'PT': 1, 'Type': GTPMsgType.DeleteMBMSCtxtReq.value}),
         DeleteMBMSCtxtReqIEs(hier=1),
         )
 
@@ -4354,7 +4354,7 @@ class DeleteMBMSCtxtRespIEs(GTPIEs):
 
 class DeleteMBMSCtxtResp(GTPMsg):
     _GEN = (
-        GTPHdr(val={'PT': 1, 'Type': GTPType.DeleteMBMSCtxtResp.value}),
+        GTPHdr(val={'PT': 1, 'Type': GTPMsgType.DeleteMBMSCtxtResp.value}),
         DeleteMBMSCtxtRespIEs(hier=1),
         )
 
@@ -4388,7 +4388,7 @@ class MBMSRegistrationReqIEs(GTPIEs):
 
 class MBMSRegistrationReq(GTPMsg):
     _GEN = (
-        GTPHdr(val={'PT': 1, 'Type': GTPType.MBMSRegistrationReq.value}),
+        GTPHdr(val={'PT': 1, 'Type': GTPMsgType.MBMSRegistrationReq.value}),
         MBMSRegistrationReqIEs(hier=1),
         )
 
@@ -4420,7 +4420,7 @@ class MBMSRegistrationRespIEs(GTPIEs):
 
 class MBMSRegistrationResp(GTPMsg):
     _GEN = (
-        GTPHdr(val={'PT': 1, 'Type': GTPType.MBMSRegistrationResp.value}),
+        GTPHdr(val={'PT': 1, 'Type': GTPMsgType.MBMSRegistrationResp.value}),
         MBMSRegistrationRespIEs(hier=1),
         )
 
@@ -4446,7 +4446,7 @@ class MBMSDeRegistrationReqIEs(GTPIEs):
 
 class MBMSDeRegistrationReq(GTPMsg):
     _GEN = (
-        GTPHdr(val={'PT': 1, 'Type': GTPType.MBMSDeRegistrationReq.value}),
+        GTPHdr(val={'PT': 1, 'Type': GTPMsgType.MBMSDeRegistrationReq.value}),
         MBMSDeRegistrationReqIEs(hier=1),
         )
 
@@ -4470,7 +4470,7 @@ class MBMSDeRegistrationRespIEs(GTPIEs):
 
 class MBMSDeRegistrationResp(GTPMsg):
     _GEN = (
-        GTPHdr(val={'PT': 1, 'Type': GTPType.MBMSDeRegistrationResp.value}),
+        GTPHdr(val={'PT': 1, 'Type': GTPMsgType.MBMSDeRegistrationResp.value}),
         MBMSDeRegistrationRespIEs(hier=1),
         )
 
@@ -4526,7 +4526,7 @@ class MBMSSessionStartReqIEs(GTPIEs):
 
 class MBMSSessionStartReq(GTPMsg):
     _GEN = (
-        GTPHdr(val={'PT': 1, 'Type': GTPType.MBMSSessionStartReq.value}),
+        GTPHdr(val={'PT': 1, 'Type': GTPMsgType.MBMSSessionStartReq.value}),
         MBMSSessionStartReqIEs(hier=1),
         )
 
@@ -4564,7 +4564,7 @@ class MBMSSessionStartRespIEs(GTPIEs):
 
 class MBMSSessionStartResp(GTPMsg):
     _GEN = (
-        GTPHdr(val={'PT': 1, 'Type': GTPType.MBMSSessionStartResp.value}),
+        GTPHdr(val={'PT': 1, 'Type': GTPMsgType.MBMSSessionStartResp.value}),
         MBMSSessionStartRespIEs(hier=1),
         )
 
@@ -4592,7 +4592,7 @@ class MBMSSessionStopReqIEs(GTPIEs):
 
 class MBMSSessionStopReq(GTPMsg):
     _GEN = (
-        GTPHdr(val={'PT': 1, 'Type': GTPType.MBMSSessionStopReq.value}),
+        GTPHdr(val={'PT': 1, 'Type': GTPMsgType.MBMSSessionStopReq.value}),
         MBMSSessionStopReqIEs(hier=1),
         )
 
@@ -4616,7 +4616,7 @@ class MBMSSessionStopRespIEs(GTPIEs):
 
 class MBMSSessionStopResp(GTPMsg):
     _GEN = (
-        GTPHdr(val={'PT': 1, 'Type': GTPType.MBMSSessionStopResp.value}),
+        GTPHdr(val={'PT': 1, 'Type': GTPMsgType.MBMSSessionStopResp.value}),
         MBMSSessionStopRespIEs(hier=1),
         )
 
@@ -4658,7 +4658,7 @@ class MBMSSessionUpdateReqIEs(GTPIEs):
 
 class MBMSSessionUpdateReq(GTPMsg):
     _GEN = (
-        GTPHdr(val={'PT': 1, 'Type': GTPType.MBMSSessionUpdateReq.value}),
+        GTPHdr(val={'PT': 1, 'Type': GTPMsgType.MBMSSessionUpdateReq.value}),
         MBMSSessionUpdateReqIEs(hier=1),
         )
 
@@ -4690,7 +4690,7 @@ class MBMSSessionUpdateRespIEs(GTPIEs):
 
 class MBMSSessionUpdateResp(GTPMsg):
     _GEN = (
-        GTPHdr(val={'PT': 1, 'Type': GTPType.MBMSSessionUpdateResp.value}),
+        GTPHdr(val={'PT': 1, 'Type': GTPMsgType.MBMSSessionUpdateResp.value}),
         MBMSSessionUpdateRespIEs(hier=1),
         )
 
@@ -4731,7 +4731,7 @@ class MSInfoChangeNotifReqIEs(GTPIEs):
 
 class MSInfoChangeNotifReq(GTPMsg):
     _GEN = (
-        GTPHdr(val={'PT': 1, 'Type': GTPType.MSInfoChangeNotifReq.value}),
+        GTPHdr(val={'PT': 1, 'Type': GTPMsgType.MSInfoChangeNotifReq.value}),
         MSInfoChangeNotifReqIEs(hier=1),
         )
 
@@ -4765,7 +4765,7 @@ class MSInfoChangeNotifRespIEs(GTPIEs):
 
 class MSInfoChangeNotifResp(GTPMsg):
     _GEN = (
-        GTPHdr(val={'PT': 1, 'Type': GTPType.MSInfoChangeNotifResp.value}),
+        GTPHdr(val={'PT': 1, 'Type': GTPMsgType.MSInfoChangeNotifResp.value}),
         MSInfoChangeNotifRespIEs(hier=1),
         )
 
@@ -4796,7 +4796,7 @@ class NodeAliveReqIEs(GTPIEs):
 
 class NodeAliveReq(GTPMsg):
     _GEN = (
-        GTPHdr(val={'PT': 0, 'Type': GTPType.NodeAliveReq.value}),
+        GTPHdr(val={'PT': 0, 'Type': GTPMsgType.NodeAliveReq.value}),
         NodeAliveReqIEs(hier=1),
         )
 
@@ -4817,7 +4817,7 @@ class NodeAliveRespIEs(GTPIEs):
 
 class NodeAliveResp(GTPMsg):
     _GEN = (
-        GTPHdr(val={'PT': 0, 'Type': GTPType.NodeAliveResp.value}),
+        GTPHdr(val={'PT': 0, 'Type': GTPMsgType.NodeAliveResp.value}),
         NodeAliveRespIEs(hier=1),
         )
 
@@ -4845,7 +4845,7 @@ class RedirectionReqIEs(GTPIEs):
 
 class RedirectionReq(GTPMsg):
     _GEN = (
-        GTPHdr(val={'PT': 0, 'Type': GTPType.RedirectionReq.value}),
+        GTPHdr(val={'PT': 0, 'Type': GTPMsgType.RedirectionReq.value}),
         RedirectionReqIEs(hier=1),
         )
 
@@ -4869,7 +4869,7 @@ class RedirectionRespIEs(GTPIEs):
 
 class RedirectionResp(GTPMsg):
     _GEN = (
-        GTPHdr(val={'PT': 0, 'Type': GTPType.RedirectionResp.value}),
+        GTPHdr(val={'PT': 0, 'Type': GTPMsgType.RedirectionResp.value}),
         RedirectionRespIEs(hier=1),
         )
 
@@ -4899,7 +4899,7 @@ class DataRecordTransferReqIEs(GTPIEs):
 
 class DataRecordTransferReq(GTPMsg):
     _GEN = (
-        GTPHdr(val={'PT': 0, 'Type': GTPType.DataRecordTransferReq.value}),
+        GTPHdr(val={'PT': 0, 'Type': GTPMsgType.DataRecordTransferReq.value}),
         DataRecordTransferReqIEs(hier=1),
         )
 
@@ -4925,7 +4925,7 @@ class DataRecordTransferRespIEs(GTPIEs):
 
 class DataRecordTransferResp(GTPMsg):
     _GEN = (
-        GTPHdr(val={'PT': 0, 'Type': GTPType.DataRecordTransferResp.value}),
+        GTPHdr(val={'PT': 0, 'Type': GTPMsgType.DataRecordTransferResp.value}),
         DataRecordTransferRespIEs(hier=1),
         )
 
@@ -5367,7 +5367,7 @@ def inl(cls):
     print('class %s(GTPMsg):' % cls.__name__)
     print('    _GEN = (')
     print('        GTPHdr(val={\'PT\': %i, \'Type\': %s.value}),'\
-          % (cls._GEN[0]['PT']._val, get_enum(GTPType, cls._GEN[0]['Type']._val)))
+          % (cls._GEN[0]['PT']._val, get_enum(GTPMsgType, cls._GEN[0]['Type']._val)))
     print('        %sIEs(hier=1),' % cls.__name__)
     print('        )\n\n')
 '''

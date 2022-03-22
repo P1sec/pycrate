@@ -38,6 +38,8 @@
 # release 16 (h11)
 #------------------------------------------------------------------------------#
 
+from enum   import IntEnum
+
 from pycrate_core.utils import *
 from pycrate_core.elt   import *
 from pycrate_core.base  import *
@@ -96,7 +98,7 @@ from pycrate_mobile.TS24007         import (
 # TS 29.276, section 7.1 for S101, section 7A for S121
 # TS 29.280, section 5 for Sv
 
-GTPCType_dict = {
+GTPCMsgType_dict = {
     # all GTP-C v2 interfaces
     0   : 'Reserved',
     1   : 'Echo Request',
@@ -334,10 +336,10 @@ class GTPCHdr(Envelope):
     _GEN = (
         Uint('Version', val=2, bl=3),
         Uint('P', bl=1),
-        Uint('T', val=1, bl=1), # T=0 only for EchoRequest, EchoResponse and VersionNotSupported
+        Uint('T', val=1, bl=1), # T=0 only for EchoReq, EchoResp and VersionNotSupported
         Uint('MP', bl=1),
         Uint('spare', bl=2),
-        Uint8('Type', dic=GTPCType_dict),
+        Uint8('Type', dic=GTPCMsgType_dict),
         Uint16('Len'),
         # if T=1
         Uint32('TEID', rep=REPR_HEX),
@@ -1787,7 +1789,7 @@ class TraceReference(Envelope):
 # TS 29.274, 8.46
 #------------------------------------------------------------------------------#
 
-class CompleteRequestMessage(Envelope):
+class CompleteReqMessage(Envelope):
     _GEN = (
         Uint8('MsgType', dic={0: 'Attach Request', 1: 'TAU Request'}),
         Buf('Msg', rep=REPR_HEX)
@@ -2290,7 +2292,7 @@ MBMSDistribInd_dict = {
     2 : 'Some RNCs have accepted IP multicast distribution',
     }
 
-class MBMSDistributionAcknowledge(Envelope):
+class MBMSDistributionAck(Envelope):
     _GEN = (
         Uint('spare', bl=6, rep=REPR_HEX),
         Uint('Ind', bl=2, dic=MBMSDistribInd_dict),
@@ -2474,7 +2476,7 @@ class EPCTimer(_Timer):
 # TS 29.274, 8.88
 #------------------------------------------------------------------------------#
 
-class SignallingPriorityIndication(Envelope):
+class SignallingPriorityInd(Envelope):
     _GEN = (
         Uint('spare', bl=7, rep=REPR_HEX),
         Uint('LAPI', bl=1),
@@ -2625,17 +2627,17 @@ class ChangeToReportFlags(Envelope):
 # TS 29.274, 8.99
 #------------------------------------------------------------------------------#
 
-ActionIndication_dict = {
+ActionInd_dict = {
     0 : 'No Action',
     1 : 'Deactivation Indication',
     2 : 'Paging Indication',
     3 : 'Paging Stop Indication'
     }
 
-class ActionIndication(Envelope):
+class ActionInd(Envelope):
     _GEN = (
         Uint('spare', bl=5, rep=REPR_HEX),
-        Uint('Val', bl=3, dic=ActionIndication_dict),
+        Uint('Val', bl=3, dic=ActionInd_dict),
         Buf('ext', val=b'', rep=REPR_HEX)
         )
 
@@ -2779,7 +2781,7 @@ class CNOperatorSelectionEntity(Envelope):
 # TS 29.274, 8.105
 #------------------------------------------------------------------------------#
 
-class TrustedWLANModeIndication(Envelope):
+class TrustedWLANModeInd(Envelope):
     _GEN = (
         Uint('spare', bl=6, rep=REPR_HEX),
         Uint('MCM', bl=1),
@@ -2963,7 +2965,7 @@ class APNAndRelativeCapacity(Envelope):
 # TS 29.274, 8.116
 #------------------------------------------------------------------------------#
 
-class WLANOffloadabilityIndication(Envelope):
+class WLANOffloadabilityInd(Envelope):
     _GEN = (
         Uint('spare', bl=6, rep=REPR_HEX),
         Uint('EUTRANInd', bl=1),
@@ -3086,7 +3088,7 @@ class RemoteUEIPInformation(Buf):
 # TS 29.274, 8.125
 #------------------------------------------------------------------------------#
 
-class CIoTOptimizationsSupportIndication(Envelope):
+class CIoTOptimizationsSupportInd(Envelope):
     _GEN = (
         Uint('spare', bl=4, rep=REPR_HEX),
         Uint('IHCSI', bl=1),
@@ -3726,7 +3728,7 @@ GTPCIETags_dict = {
     113: (HopCounter, 1, 'Hop Counter'),
     114: (UETimeZone, 2, 'UE Time Zone'),
     115: (TraceReference, 6, 'Trace Reference'),
-    116: (CompleteRequestMessage, -1, 'Complete Request Message'),
+    116: (CompleteReqMessage, -1, 'Complete Request Message'),
     117: (GUTI, -1, 'GUTI'),
     118: (FContainer, -1, 'F-Container'),
     119: (FCause, -1, 'F-Cause'),
@@ -3751,7 +3753,7 @@ GTPCIETags_dict = {
     140: (MBMSSessionIdentifier, 1, 'MBMS Session Identifier'),
     141: (MBMSFlowIdentifier, 2, 'MBMS Flow Identifier'),
     142: (MBMSIPMulticastDistribution, -1, 'MBMS IP Multicast Distribution'),
-    143: (MBMSDistributionAcknowledge, 1, 'MBMS Distribution Acknowledge'),
+    143: (MBMSDistributionAck, 1, 'MBMS Distribution Acknowledge'),
     144: (RFSPIndex, 2, 'RFSP Index'),
     145: (UCI, 8, 'User CSG Information (UCI)'),
     146: (CSGInformationReportingAction, 1, 'CSG Information Reporting Action'),
@@ -3765,7 +3767,7 @@ GTPCIETags_dict = {
     154: (Throttling, 2, 'Throttling'),
     155: (ARP, 1, 'Allocation/Retention Priority (ARP)'),
     156: (EPCTimer, 1, 'EPC Timer'),
-    157: (SignallingPriorityIndication, 1, 'Signalling Priority Indication'),
+    157: (SignallingPriorityInd, 1, 'Signalling Priority Indication'),
     158: (TMGI, 6, 'Temporary Mobile Group Identity (TMGI)'),
     159: (AdditionalMMContextForSRVCC, -1, 'Additional MM context for SRVCC'),
     160: (AdditionalFlagsForSRVCC, 1, 'Additional flags for SRVCC'),
@@ -3775,13 +3777,13 @@ GTPCIETags_dict = {
     165: (HeNBInformationReporting, 1, 'H(e)NB Information Reporting'),
     166: (IP4CP, 5, 'IPv4 Configuration Parameters (IP4CP)'),
     167: (ChangeToReportFlags, 1, 'Change to Report Flags'),
-    168: (ActionIndication, 1, 'Action Indication'),
+    168: (ActionInd, 1, 'Action Indication'),
     169: (TWANIdentifier, -1, 'TWAN Identifier'),
     170: (ULITimestamp, 4, 'ULI Timestamp'),
     171: (MBMSFlags, 1, 'MBMS Flags'),
     172: (RANNASCause, -1, 'RAN/NAS Cause'),
     173: (CNOperatorSelectionEntity, 1, 'CN Operator Selection Entity'),
-    174: (TrustedWLANModeIndication, 1, 'Trusted WLAN Mode Indication'),
+    174: (TrustedWLANModeInd, 1, 'Trusted WLAN Mode Indication'),
     175: (NodeNumber, -1, 'Node Number'),
     176: (NodeIdent, -1, 'Node Identifier'),
     177: (PresenceReportingAreaAction, -1, 'Presence Reporting Area Action'),
@@ -3790,7 +3792,7 @@ GTPCIETags_dict = {
     182: (Metric, 1, 'Metric'),
     183: (SequenceNumber, 4, 'Sequence Number'),
     184: (APNAndRelativeCapacity, -1, 'APN and Relative Capacity'),
-    185: (WLANOffloadabilityIndication, 1, 'WLAN Offloadability Indication'),
+    185: (WLANOffloadabilityInd, 1, 'WLAN Offloadability Indication'),
     186: (PagingAndServiceInformation, -1, 'Paging and Service Information'),
     187: (IntegerNumber, -1, 'Integer Number'),
     188: (MillisecondTimeStamp, 6, 'Millisecond Time Stamp'),
@@ -3798,7 +3800,7 @@ GTPCIETags_dict = {
     190: (ECGIList, -1, 'ECGI List'),
     192: (RemoteUserID, -1, 'Remote User ID'),
     193: (RemoteUEIPInformation, -1, 'Remote UE IP information'),
-    194: (CIoTOptimizationsSupportIndication, 1, 'CIoT Optimizations Support Indication'),
+    194: (CIoTOptimizationsSupportInd, 1, 'CIoT Optimizations Support Indication'),
     196: (HeaderCompressionConfiguration, 4, 'Header Compression Configuration'),
     197: (EPCO, -1, 'Extended Protocol Configuration Options (ePCO)'),
     198: (ServingPLMNRateControl, 4, 'Serving PLMN Rate Control'),
@@ -4054,7 +4056,7 @@ class GTPCMsg(Envelope):
 
 
 # Table 7.1.1-1: Information Elements in Echo Request
-class EchoRequestIEs(GTPCIEs):
+class EchoReqIEs(GTPCIEs):
     MAND = {
         (3, 0)   : (Recovery, 'Recovery'),
         }
@@ -4064,15 +4066,15 @@ class EchoRequestIEs(GTPCIEs):
         }
 
 
-class EchoRequest(GTPCMsg):
+class EchoReq(GTPCMsg):
     _GEN = (
         GTPCHdr(val={'Type': 1, 'T': 0}),
-        EchoRequestIEs(hier=1)
+        EchoReqIEs(hier=1)
         )
 
 
 # Table 7.1.2-1: Information Elements in Echo Response
-class EchoResponseIEs(GTPCIEs):
+class EchoRespIEs(GTPCIEs):
     MAND = {
         (3, 0)   : (Recovery, 'Recovery'),
         }
@@ -4082,16 +4084,16 @@ class EchoResponseIEs(GTPCIEs):
         }
 
 
-class EchoResponse(GTPCMsg):
+class EchoResp(GTPCMsg):
     _GEN = (
         GTPCHdr(val={'Type': 2, 'T': 0}),
-        EchoResponseIEs(hier=1)
+        EchoRespIEs(hier=1)
         )
 
 
 # Table 7.2.1-5: Remote UE Context Connected within Create Session Request
 # IE Type: 191
-class CreateSessionRequest_RemoteUEContextConnected(GTPCIEs):
+class CreateSessionReq_RemoteUEContextConnected(GTPCIEs):
     MAND = {
         (192, 0) : (RemoteUserID, 'RemoteUserID'),
         (193, 0) : (RemoteUEIPInformation, 'RemoteUEIPInformation'),
@@ -4100,7 +4102,7 @@ class CreateSessionRequest_RemoteUEContextConnected(GTPCIEs):
 
 # Table 7.2.1-4: Overload Control Information within Create Session Request
 # IE Type: 180
-class CreateSessionRequest_OverloadControlInformation(GTPCIEs):
+class CreateSessionReq_OverloadControlInformation(GTPCIEs):
     MAND = {
         (156, 0) : (EPCTimer, 'PeriodofValidity'),
         (182, 0) : (Metric, 'OverloadReductionMetric'),
@@ -4110,7 +4112,7 @@ class CreateSessionRequest_OverloadControlInformation(GTPCIEs):
 
 # Table 7.2.1-3: Bearer Context to be removed within Create Session Request
 # IE Type: 93
-class CreateSessionRequest_BearerContexttoberemoved(GTPCIEs):
+class CreateSessionReq_BearerContexttoberemoved(GTPCIEs):
     MAND = {
         (73, 0)  : (EBI, 'EPSBearerID'),
         }
@@ -4121,7 +4123,7 @@ class CreateSessionRequest_BearerContexttoberemoved(GTPCIEs):
 
 # Table 7.2.1-2: Bearer Context to be created within Create Session Request
 # IE Type: 93
-class CreateSessionRequest_BearerContexttobecreated(GTPCIEs):
+class CreateSessionReq_BearerContexttobecreated(GTPCIEs):
     MAND = {
         (73, 0)  : (EBI, 'EPSBearerID'),
         (80, 0)  : (BearerQoS, 'BearerLevelQoS'),
@@ -4140,12 +4142,12 @@ class CreateSessionRequest_BearerContexttobecreated(GTPCIEs):
 
 
 # Table 7.2.1-1: Information Elements in a Create Session Request
-class CreateSessionRequestIEs(GTPCIEs):
+class CreateSessionReqIEs(GTPCIEs):
     MAND = {
         (71, 0)  : (APN, 'APN'),
         (82, 0)  : (RATType, 'RATType'),
         (87, 0)  : (FTEID, 'SenderFTEIDforControlPlane'),
-        (93, 0)  : (CreateSessionRequest_BearerContexttobecreated, 'BearerContexttobecreated'),
+        (93, 0)  : (CreateSessionReq_BearerContexttobecreated, 'BearerContexttobecreated'),
         }
     OPT  = {
         (1, 0)   : (IMSI, 'IMSI'),
@@ -4165,7 +4167,7 @@ class CreateSessionRequestIEs(GTPCIEs):
         (86, 0)  : (ULI, 'ULI'),
         (86, 1)  : (ULI, 'UserLocationInformationforSGW'),
         (87, 1)  : (FTEID, 'PGWS5S8AddressforControlPlaneorPMIP'),
-        (93, 1)  : (CreateSessionRequest_BearerContexttoberemoved, 'BearerContexttoberemoved'),
+        (93, 1)  : (CreateSessionReq_BearerContexttoberemoved, 'BearerContexttoberemoved'),
         (95, 0)  : (ChargingCharacteristics, 'ChargingCharacteristics'),
         (96, 0)  : (TraceInformation, 'TraceInformation'),
         (99, 0)  : (PDNType, 'PDNType'),
@@ -4186,21 +4188,21 @@ class CreateSessionRequestIEs(GTPCIEs):
         (151, 1) : (LDN, 'SGWLDN'),
         (151, 2) : (LDN, 'ePDGLDN'),
         (151, 3) : (LDN, 'TWANLDN'),
-        (157, 0) : (SignallingPriorityIndication, 'SignallingPriorityIndication'),
+        (157, 0) : (SignallingPriorityInd, 'SignallingPriorityInd'),
         (163, 0) : (APCO, 'APCO'),
         (169, 0) : (TWANIdentifier, 'TWANIdentifier'),
         (169, 1) : (TWANIdentifier, 'WLANLocationInformation'),
         (173, 0) : (CNOperatorSelectionEntity, 'CNOperatorSelectionEntity'),
-        (174, 0) : (TrustedWLANModeIndication, 'TrustedWLANModeIndication'),
+        (174, 0) : (TrustedWLANModeInd, 'TrustedWLANModeInd'),
         (176, 0) : (NodeIdent, '3GPPAAAServerIdent'),
         (178, 0) : (PresenceReportingAreaInformation, 'PresenceReportingAreaInformation'),
         (179, 0) : (TWANIdentifierTimestamp, 'WLANLocationTimestamp'),
-        (180, 0) : (CreateSessionRequest_OverloadControlInformation, 'MMES4SGSNsOverloadControlInformation'),
-        (180, 1) : (CreateSessionRequest_OverloadControlInformation, 'SGWsOverloadControlInformation'),
-        (180, 2) : (CreateSessionRequest_OverloadControlInformation, 'TWANePDGsOverloadControlInformation'),
+        (180, 0) : (CreateSessionReq_OverloadControlInformation, 'MMES4SGSNsOverloadControlInformation'),
+        (180, 1) : (CreateSessionReq_OverloadControlInformation, 'SGWsOverloadControlInformation'),
+        (180, 2) : (CreateSessionReq_OverloadControlInformation, 'TWANePDGsOverloadControlInformation'),
         (187, 0) : (IntegerNumber, 'MaximumWaitTime'),
         (188, 0) : (MillisecondTimeStamp, 'OriginationTimeStamp'),
-        (191, 0) : (CreateSessionRequest_RemoteUEContextConnected, 'RemoteUEContextConnected'),
+        (191, 0) : (CreateSessionReq_RemoteUEContextConnected, 'RemoteUEContextConnected'),
         (197, 0) : (EPCO, 'ExtendedProtocolConfigurationOptions'),
         (198, 0) : (ServingPLMNRateControl, 'ServingPLMNRateControl'),
         (199, 0) : (Counter, 'MOExceptionDataCounter'),
@@ -4212,16 +4214,16 @@ class CreateSessionRequestIEs(GTPCIEs):
         }
 
 
-class CreateSessionRequest(GTPCMsg):
+class CreateSessionReq(GTPCMsg):
     _GEN = (
         GTPCHdr(val={'Type': 32}),
-        CreateSessionRequestIEs(hier=1)
+        CreateSessionReqIEs(hier=1)
         )
 
 
 # Table 7.2.2-6: PGW Change Info within Create Session Response
 # IE Type: 214
-class CreateSessionResponse_PGWChangeInfo(GTPCIEs):
+class CreateSessionResp_PGWChangeInfo(GTPCIEs):
     OPT  = {
         (74, 0)  : (IPAddress, 'AlternativePGWCSMFIPAddress'),
         (215, 0) : (PGWSetFQDN, 'PGWSetFQDN'),
@@ -4230,7 +4232,7 @@ class CreateSessionResponse_PGWChangeInfo(GTPCIEs):
 
 # Table 7.2.2-5: Overload Control Information within Create Session Response
 # IE Type: 180
-class CreateSessionResponse_OverloadControlInformation(GTPCIEs):
+class CreateSessionResp_OverloadControlInformation(GTPCIEs):
     MAND = {
         (156, 0) : (EPCTimer, 'PeriodofValidity'),
         (182, 0) : (Metric, 'OverloadReductionMetric'),
@@ -4243,7 +4245,7 @@ class CreateSessionResponse_OverloadControlInformation(GTPCIEs):
 
 # Table 7.2.2-4: Load Control Information within Create Session Response
 # IE Type: 181
-class CreateSessionResponse_LoadControlInformation(GTPCIEs):
+class CreateSessionResp_LoadControlInformation(GTPCIEs):
     MAND = {
         (182, 0) : (Metric, 'LoadMetric'),
         (183, 0) : (SequenceNumber, 'LoadControlSequenceNumber'),
@@ -4255,7 +4257,7 @@ class CreateSessionResponse_LoadControlInformation(GTPCIEs):
 
 # Table 7.2.2-3: Bearer Context marked for removal within a Create Session Response
 # IE Type: 93
-class CreateSessionResponse_BearerContextmarkedforremoval(GTPCIEs):
+class CreateSessionResp_BearerContextmarkedforremoval(GTPCIEs):
     MAND = {
         (2, 0)   : (Cause, 'Cause'),
         (73, 0)  : (EBI, 'EPSBearerID'),
@@ -4264,7 +4266,7 @@ class CreateSessionResponse_BearerContextmarkedforremoval(GTPCIEs):
 
 # Table 7.2.2-2: Bearer Context Created within Create Session Response
 # IE Type: 93
-class CreateSessionResponse_BearerContextCreated(GTPCIEs):
+class CreateSessionResp_BearerContextCreated(GTPCIEs):
     MAND = {
         (2, 0)   : (Cause, 'Cause'),
         (73, 0)  : (EBI, 'EPSBearerID'),
@@ -4284,10 +4286,10 @@ class CreateSessionResponse_BearerContextCreated(GTPCIEs):
 
 
 # Table 7.2.2-1: Information Elements in a Create Session Response
-class CreateSessionResponseIEs(GTPCIEs):
+class CreateSessionRespIEs(GTPCIEs):
     MAND = {
         (2, 0)   : (Cause, 'Cause'),
-        (93, 0)  : (CreateSessionResponse_BearerContextCreated, 'BearerContextcreated'),
+        (93, 0)  : (CreateSessionResp_BearerContextCreated, 'BearerContextcreated'),
         }
     OPT  = {
         (3, 0)   : (Recovery, 'Recovery'),
@@ -4300,7 +4302,7 @@ class CreateSessionResponseIEs(GTPCIEs):
         (79, 0)  : (PAA, 'PAA'),
         (87, 0)  : (FTEID, 'SenderFTEIDforControlPlane'),
         (87, 1)  : (FTEID, 'PGWS5S8S2aS2bFTEIDforPMIPbasedinterfaceorforGTPbasedControlPlaneinterface'),
-        (93, 1)  : (CreateSessionResponse_BearerContextmarkedforremoval, 'BearerContextmarkedforremoval'),
+        (93, 1)  : (CreateSessionResp_BearerContextmarkedforremoval, 'BearerContextmarkedforremoval'),
         (94, 0)  : (ChargingID, 'PDNConnectionChargingID'),
         (118, 0) : (FContainer, 'NBIFOMContainer'),
         (127, 0) : (APNRestriction, 'APNRestriction'),
@@ -4318,28 +4320,28 @@ class CreateSessionResponseIEs(GTPCIEs):
         (165, 0) : (HeNBInformationReporting, 'HeNBInformationReporting'),
         (166, 0) : (IP4CP, 'TrustedWLANIPv4Parameters'),
         (177, 0) : (PresenceReportingAreaAction, 'PresenceReportingAreaAction'),
-        (180, 0) : (CreateSessionResponse_OverloadControlInformation, 'PGWsOverloadControlInformation'),
-        (180, 1) : (CreateSessionResponse_OverloadControlInformation, 'SGWsOverloadControlInformation'),
-        (181, 0) : (CreateSessionResponse_LoadControlInformation, 'PGWsnodelevelLoadControlInformation'),
-        (181, 1) : (CreateSessionResponse_LoadControlInformation, 'PGWsAPNlevelLoadControlInformation'),
-        (181, 2) : (CreateSessionResponse_LoadControlInformation, 'SGWsnodelevelLoadControlInformation'),
+        (180, 0) : (CreateSessionResp_OverloadControlInformation, 'PGWsOverloadControlInformation'),
+        (180, 1) : (CreateSessionResp_OverloadControlInformation, 'SGWsOverloadControlInformation'),
+        (181, 0) : (CreateSessionResp_LoadControlInformation, 'PGWsnodelevelLoadControlInformation'),
+        (181, 1) : (CreateSessionResp_LoadControlInformation, 'PGWsAPNlevelLoadControlInformation'),
+        (181, 2) : (CreateSessionResp_LoadControlInformation, 'SGWsnodelevelLoadControlInformation'),
         (197, 0) : (EPCO, 'ExtendedProtocolConfigurationOptions'),
         (213, 0) : (SGiPtPTunnelAddress, 'SGiPtPTunnelAddress'),
-        (214, 0) : (CreateSessionResponse_PGWChangeInfo, 'PGWChangeInfo'),
+        (214, 0) : (CreateSessionResp_PGWChangeInfo, 'PGWChangeInfo'),
         255      : (PrivateExtension, 'PrivateExtension'),
         }
 
 
-class CreateSessionResponse(GTPCMsg):
+class CreateSessionResp(GTPCMsg):
     _GEN = (
         GTPCHdr(val={'Type': 33}),
-        CreateSessionResponseIEs(hier=1)
+        CreateSessionRespIEs(hier=1)
         )
 
 
 # Table 7.2.3-5: PGW Change Info within Create Bearer Request
 # IE Type: 214
-class CreateBearerRequest_PGWChangeInfo(GTPCIEs):
+class CreateBearerReq_PGWChangeInfo(GTPCIEs):
     OPT  = {
         (74, 0)  : (IPAddress, 'AlternativePGWCSMFIPAddress'),
         (74, 1)  : (IPAddress, 'NewPGWCSMFIPAddress'),
@@ -4349,7 +4351,7 @@ class CreateBearerRequest_PGWChangeInfo(GTPCIEs):
 
 # Table 7.2.3-4: Overload Control Information within Create Bearer Request
 # IE Type: 181
-class CreateBearerRequest_OverloadControlInformation(GTPCIEs):
+class CreateBearerReq_OverloadControlInformation(GTPCIEs):
     MAND = {
         (156, 0) : (EPCTimer, 'PeriodofValidity'),
         (182, 0) : (Metric, 'OverloadReductionMetric'),
@@ -4362,7 +4364,7 @@ class CreateBearerRequest_OverloadControlInformation(GTPCIEs):
 
 # Table 7.2.3-3: Load Control Information within Create Bearer Request
 # IE Type: 181
-class CreateBearerRequest_LoadControlInformation(GTPCIEs):
+class CreateBearerReq_LoadControlInformation(GTPCIEs):
     MAND = {
         (182, 0) : (Metric, 'LoadMetric'),
         (183, 0) : (SequenceNumber, 'LoadControlSequenceNumber'),
@@ -4374,7 +4376,7 @@ class CreateBearerRequest_LoadControlInformation(GTPCIEs):
 
 # Table 7.2.3-2: Bearer Context within Create Bearer Request
 # IE Type: 93
-class CreateBearerRequest_BearerContext(GTPCIEs):
+class CreateBearerReq_BearerContext(GTPCIEs):
     MAND = {
         (73, 0)  : (EBI, 'EPSBearerID'),
         (80, 0)  : (BearerQoS, 'BearerLevelQoS'),
@@ -4396,10 +4398,10 @@ class CreateBearerRequest_BearerContext(GTPCIEs):
 
 
 # Table 7.2.3-1: Information Elements in a Create Bearer Request
-class CreateBearerRequestIEs(GTPCIEs):
+class CreateBearerReqIEs(GTPCIEs):
     MAND = {
         (73, 0)  : (EBI, 'LinkedEPSBearerID'),
-        (93, 0)  : (CreateBearerRequest_BearerContext, 'BearerContext'),
+        (93, 0)  : (CreateBearerReq_BearerContext, 'BearerContext'),
         }
     OPT  = {
         (77, 0)  : (Indication, 'IndicationFlags'),
@@ -4412,26 +4414,26 @@ class CreateBearerRequestIEs(GTPCIEs):
         (146, 0) : (CSGInformationReportingAction, 'CSGInformationReportingAction'),
         (165, 0) : (HeNBInformationReporting, 'HeNBInformationReporting'),
         (177, 0) : (PresenceReportingAreaAction, 'PresenceReportingAreaAction'),
-        (181, 0) : (CreateBearerRequest_LoadControlInformation, 'PGWsnodelevelLoadControlInformation'),
-        (181, 1) : (CreateBearerRequest_LoadControlInformation, 'PGWsAPNlevelLoadControlInformation'),
-        (181, 2) : (CreateBearerRequest_LoadControlInformation, 'SGWsnodelevelLoadControlInformation'),
-        (181, 0) : (CreateBearerRequest_OverloadControlInformation, 'PGWsOverloadControlInformation'),
-        (181, 1) : (CreateBearerRequest_OverloadControlInformation, 'SGWsOverloadControlInformation'),
-        (214, 0) : (CreateBearerRequest_PGWChangeInfo, 'PGWChangeInfo'),
+        (181, 0) : (CreateBearerReq_LoadControlInformation, 'PGWsnodelevelLoadControlInformation'),
+        (181, 1) : (CreateBearerReq_LoadControlInformation, 'PGWsAPNlevelLoadControlInformation'),
+        (181, 2) : (CreateBearerReq_LoadControlInformation, 'SGWsnodelevelLoadControlInformation'),
+        (181, 0) : (CreateBearerReq_OverloadControlInformation, 'PGWsOverloadControlInformation'),
+        (181, 1) : (CreateBearerReq_OverloadControlInformation, 'SGWsOverloadControlInformation'),
+        (214, 0) : (CreateBearerReq_PGWChangeInfo, 'PGWChangeInfo'),
         255      : (PrivateExtension, 'PrivateExtension'),
         }
 
 
-class CreateBearerRequest(GTPCMsg):
+class CreateBearerReq(GTPCMsg):
     _GEN = (
         GTPCHdr(val={'Type': 95}),
-        CreateBearerRequestIEs(hier=1)
+        CreateBearerReqIEs(hier=1)
         )
 
 
 # Table 7.2.4-3: Overload Control Information within Create Bearer Response
 # IE Type: 180
-class CreateBearerResponse_OverloadControlInformation(GTPCIEs):
+class CreateBearerResp_OverloadControlInformation(GTPCIEs):
     MAND = {
         (156, 0) : (EPCTimer, 'PeriodofValidity'),
         (182, 0) : (Metric, 'OverloadReductionMetric'),
@@ -4441,7 +4443,7 @@ class CreateBearerResponse_OverloadControlInformation(GTPCIEs):
 
 # Table 7.2.4-2: Bearer Context within Create Bearer Response
 # IE Type: 93
-class CreateBearerResponse_BearerContext(GTPCIEs):
+class CreateBearerResp_BearerContext(GTPCIEs):
     MAND = {
         (2, 0)   : (Cause, 'Cause'),
         (73, 0)  : (EBI, 'EPSBearerID'),
@@ -4466,10 +4468,10 @@ class CreateBearerResponse_BearerContext(GTPCIEs):
 
 
 # Table 7.2.4-1: Information Elements in a Create Bearer Response
-class CreateBearerResponseIEs(GTPCIEs):
+class CreateBearerRespIEs(GTPCIEs):
     MAND = {
         (2, 0)   : (Cause, 'Cause'),
-        (93, 0)  : (CreateBearerResponse_BearerContext, 'BearerContext'),
+        (93, 0)  : (CreateBearerResp_BearerContext, 'BearerContext'),
         }
     OPT  = {
         (3, 0)   : (Recovery, 'Recovery'),
@@ -4489,17 +4491,17 @@ class CreateBearerResponseIEs(GTPCIEs):
         (169, 1) : (TWANIdentifier, 'WLANLocationInformation'),
         (178, 0) : (PresenceReportingAreaInformation, 'PresenceReportingAreaInformation'),
         (179, 1) : (TWANIdentifierTimestamp, 'WLANLocationTimestamp'),
-        (180, 0) : (CreateBearerResponse_OverloadControlInformation, 'MMES4SGSNsOverloadControlInformation'),
-        (180, 1) : (CreateBearerResponse_OverloadControlInformation, 'SGWsOverloadControlInformation'),
-        (180, 2) : (CreateBearerResponse_OverloadControlInformation, 'TWANePDGsOverloadControlInformation'),
+        (180, 0) : (CreateBearerResp_OverloadControlInformation, 'MMES4SGSNsOverloadControlInformation'),
+        (180, 1) : (CreateBearerResp_OverloadControlInformation, 'SGWsOverloadControlInformation'),
+        (180, 2) : (CreateBearerResp_OverloadControlInformation, 'TWANePDGsOverloadControlInformation'),
         255      : (PrivateExtension, 'PrivateExtension'),
         }
 
 
-class CreateBearerResponse(GTPCMsg):
+class CreateBearerResp(GTPCMsg):
     _GEN = (
         GTPCHdr(val={'Type': 96}),
-        CreateBearerResponseIEs(hier=1)
+        CreateBearerRespIEs(hier=1)
         )
 
 
@@ -4532,7 +4534,7 @@ class BearerResourceCommandIEs(GTPCIEs):
         (87, 1)  : (FTEID, 'S12RNCFTEID'),
         (87, 2)  : (FTEID, 'SenderFTEIDforControlPlane'),
         (118, 0) : (FContainer, 'NBIFOMContainer'),
-        (157, 0) : (SignallingPriorityIndication, 'SignallingPriorityIndication'),
+        (157, 0) : (SignallingPriorityInd, 'SignallingPriorityInd'),
         (180, 0) : (BearerResourceCommand_OverloadControlInformation, 'MMES4SGSNsOverloadControlInformation'),
         (180, 1) : (BearerResourceCommand_OverloadControlInformation, 'SGWsOverloadControlInformation'),
         (197, 0) : (EPCO, 'ExtendedProtocolConfigurationOptions'),
@@ -4549,7 +4551,7 @@ class BearerResourceCommand(GTPCMsg):
 
 # Table 7.2.6-2: Overload Control Information within Bearer Resource Failure Indication
 # IE Type: 180
-class BearerResourceFailureIndication_OverloadControlInformation(GTPCIEs):
+class BearerResourceFailureInd_OverloadControlInformation(GTPCIEs):
     MAND = {
         (156, 0) : (EPCTimer, 'PeriodofValidity'),
         (182, 0) : (Metric, 'OverloadReductionMetric'),
@@ -4561,7 +4563,7 @@ class BearerResourceFailureIndication_OverloadControlInformation(GTPCIEs):
 
 
 # Table 7.2.6-1: Information Elements in a Bearer Resource Failure Indication
-class BearerResourceFailureIndicationIEs(GTPCIEs):
+class BearerResourceFailureIndIEs(GTPCIEs):
     MAND = {
         (2, 0)   : (Cause, 'Cause'),
         (73, 0)  : (EBI, 'LinkedEPSBearerID'),
@@ -4571,22 +4573,22 @@ class BearerResourceFailureIndicationIEs(GTPCIEs):
         (3, 0)   : (Recovery, 'Recovery'),
         (77, 0)  : (Indication, 'IndicationFlags'),
         (118, 0) : (FContainer, 'NBIFOMContainer'),
-        (180, 0) : (BearerResourceFailureIndication_OverloadControlInformation, 'PGWsOverloadControlInformation'),
-        (180, 1) : (BearerResourceFailureIndication_OverloadControlInformation, 'SGWsOverloadControlInformation'),
+        (180, 0) : (BearerResourceFailureInd_OverloadControlInformation, 'PGWsOverloadControlInformation'),
+        (180, 1) : (BearerResourceFailureInd_OverloadControlInformation, 'SGWsOverloadControlInformation'),
         255      : (PrivateExtension, 'PrivateExtension'),
         }
 
 
-class BearerResourceFailureIndication(GTPCMsg):
+class BearerResourceFailureInd(GTPCMsg):
     _GEN = (
         GTPCHdr(val={'Type': 69}),
-        BearerResourceFailureIndicationIEs(hier=1)
+        BearerResourceFailureIndIEs(hier=1)
         )
 
 
 # Table 7.2.7-4: Overload Control Information within Modify Bearer Request
 # IE Type: 180
-class ModifyBearerRequest_OverloadControlInformation(GTPCIEs):
+class ModifyBearerReq_OverloadControlInformation(GTPCIEs):
     MAND = {
         (156, 0) : (EPCTimer, 'PeriodofValidity'),
         (182, 0) : (Metric, 'OverloadReductionMetric'),
@@ -4596,7 +4598,7 @@ class ModifyBearerRequest_OverloadControlInformation(GTPCIEs):
 
 # Table 7.2.7-3: Bearer Context to be removed within Modify Bearer Request
 # IE Type: 93
-class ModifyBearerRequest_BearerContexttoberemoved(GTPCIEs):
+class ModifyBearerReq_BearerContexttoberemoved(GTPCIEs):
     MAND = {
         (73, 0)  : (EBI, 'EPSBearerID'),
         }
@@ -4604,7 +4606,7 @@ class ModifyBearerRequest_BearerContexttoberemoved(GTPCIEs):
 
 # Table 7.2.7-2: Bearer Context to be modified within Modify Bearer Request
 # IE Type: 93
-class ModifyBearerRequest_BearerContexttobemodified(GTPCIEs):
+class ModifyBearerReq_BearerContexttobemodified(GTPCIEs):
     MAND = {
         (73, 0)  : (EBI, 'EPSBearerID'),
         }
@@ -4618,7 +4620,7 @@ class ModifyBearerRequest_BearerContexttobemodified(GTPCIEs):
 
 
 # Table 7.2.7-1: Information Elements in a Modify Bearer Request
-class ModifyBearerRequestIEs(GTPCIEs):
+class ModifyBearerReqIEs(GTPCIEs):
     OPT  = {
         (1, 0)   : (IMSI, 'IMSI'),
         (3, 0)   : (Recovery, 'Recovery'),
@@ -4633,9 +4635,9 @@ class ModifyBearerRequestIEs(GTPCIEs):
         (86, 0)  : (ULI, 'ULI'),
         (86, 1)  : (ULI, 'UserLocationInformationforSGW'),
         (87, 0)  : (FTEID, 'SenderFTEIDforControlPlane'),
-        (92, 0)  : (DelayValue, 'DelayDownlinkPacketNotificationRequest'),
-        (93, 0)  : (ModifyBearerRequest_BearerContexttobemodified, 'BearerContexttobemodified'),
-        (93, 1)  : (ModifyBearerRequest_BearerContexttoberemoved, 'BearerContexttoberemoved'),
+        (92, 0)  : (DelayValue, 'DelayDownlinkPacketNotifReq'),
+        (93, 0)  : (ModifyBearerReq_BearerContexttobemodified, 'BearerContexttobemodified'),
+        (93, 1)  : (ModifyBearerReq_BearerContexttoberemoved, 'BearerContexttoberemoved'),
         (114, 0) : (UETimeZone, 'UETimeZone'),
         (126, 1) : (PortNumber, 'UEUDPPort'),
         (126, 0) : (PortNumber, 'HeNBUDPPort'),
@@ -4648,9 +4650,9 @@ class ModifyBearerRequestIEs(GTPCIEs):
         (173, 0) : (CNOperatorSelectionEntity, 'CNOperatorSelectionEntity'),
         (178, 0) : (PresenceReportingAreaInformation, 'PresenceReportingAreaInformation'),
         (179, 0) : (TWANIdentifierTimestamp, 'WLANLocationTimestamp'),
-        (180, 0) : (ModifyBearerRequest_OverloadControlInformation, 'MMES4SGSNsOverloadControlInformation'),
-        (180, 1) : (ModifyBearerRequest_OverloadControlInformation, 'SGWsOverloadControlInformation'),
-        (180, 2) : (ModifyBearerRequest_OverloadControlInformation, 'ePDGsOverloadControlInformation'),
+        (180, 0) : (ModifyBearerReq_OverloadControlInformation, 'MMES4SGSNsOverloadControlInformation'),
+        (180, 1) : (ModifyBearerReq_OverloadControlInformation, 'SGWsOverloadControlInformation'),
+        (180, 2) : (ModifyBearerReq_OverloadControlInformation, 'ePDGsOverloadControlInformation'),
         (198, 0) : (ServingPLMNRateControl, 'ServingPLMNRateControl'),
         (199, 0) : (Counter, 'MOExceptionDataCounter'),
         (201, 0) : (SecondaryRATUsageDataReport, 'SecondaryRATUsageDataReport'),
@@ -4658,16 +4660,16 @@ class ModifyBearerRequestIEs(GTPCIEs):
         }
 
 
-class ModifyBearerRequest(GTPCMsg):
+class ModifyBearerReq(GTPCMsg):
     _GEN = (
         GTPCHdr(val={'Type': 34}),
-        ModifyBearerRequestIEs(hier=1)
+        ModifyBearerReqIEs(hier=1)
         )
 
 
 # Table 7.2.8-6: PGW Change Info within Modify Bearer Response
 # IE Type: 214
-class ModifyBearerResponse_PGWChangeInfo(GTPCIEs):
+class ModifyBearerResp_PGWChangeInfo(GTPCIEs):
     OPT  = {
         (74, 0)  : (IPAddress, 'AlternativePGWCSMFIPAddress'),
         (215, 0) : (PGWSetFQDN, 'PGWSetFQDN'),
@@ -4676,7 +4678,7 @@ class ModifyBearerResponse_PGWChangeInfo(GTPCIEs):
 
 # Table 7.2.8-5: Overload Control Information within Modify Bearer Response
 # IE Type: 180
-class ModifyBearerResponse_OverloadControlInformation(GTPCIEs):
+class ModifyBearerResp_OverloadControlInformation(GTPCIEs):
     MAND = {
         (156, 0) : (EPCTimer, 'PeriodofValidity'),
         (182, 0) : (Metric, 'OverloadReductionMetric'),
@@ -4689,7 +4691,7 @@ class ModifyBearerResponse_OverloadControlInformation(GTPCIEs):
 
 # Table 7.2.8-4: Load Control Information within Modify Bearer Response
 # IE Type: 181
-class ModifyBearerResponse_LoadControlInformation(GTPCIEs):
+class ModifyBearerResp_LoadControlInformation(GTPCIEs):
     MAND = {
         (182, 0) : (Metric, 'LoadMetric'),
         (183, 0) : (SequenceNumber, 'LoadControlSequenceNumber'),
@@ -4701,7 +4703,7 @@ class ModifyBearerResponse_LoadControlInformation(GTPCIEs):
 
 # Table 7.2.8-3: Bearer Context marked for removal within Modify Bearer Response
 # IE Type: 93
-class ModifyBearerResponse_BearerContextmarkedforremoval(GTPCIEs):
+class ModifyBearerResp_BearerContextmarkedforremoval(GTPCIEs):
     MAND = {
         (2, 0)   : (Cause, 'Cause'),
         (73, 0)  : (EBI, 'EPSBearerID'),
@@ -4710,7 +4712,7 @@ class ModifyBearerResponse_BearerContextmarkedforremoval(GTPCIEs):
 
 # Table 7.2.8-2: Bearer Context modified within Modify Bearer Response
 # IE Type: 93
-class ModifyBearerResponse_BearerContextmodified(GTPCIEs):
+class ModifyBearerResp_BearerContextmodified(GTPCIEs):
     MAND = {
         (2, 0)   : (Cause, 'Cause'),
         (73, 0)  : (EBI, 'EPSBearerID'),
@@ -4725,8 +4727,8 @@ class ModifyBearerResponse_BearerContextmodified(GTPCIEs):
         }
 
 
-# Table 7.2.8-1: Information Elements in a Modify Bearer Response
-class ModifyBearerResponseIEs(GTPCIEs):
+# Table 7.2.8-1: Information Elements in a Modify Bearer Resp
+class ModifyBearerRespIEs(GTPCIEs):
     MAND = {
         (2, 0)   : (Cause, 'Cause'),
         }
@@ -4737,8 +4739,8 @@ class ModifyBearerResponseIEs(GTPCIEs):
         (76, 0)  : (MSISDN, 'MSISDN'),
         (77, 0)  : (Indication, 'IndicationFlags'),
         (78, 0)  : (PCO, 'PCO'),
-        (93, 0)  : (ModifyBearerResponse_BearerContextmodified, 'BearerContextmodified'),
-        (93, 1)  : (ModifyBearerResponse_BearerContextmarkedforremoval, 'BearerContextmarkedforremoval'),
+        (93, 0)  : (ModifyBearerResp_BearerContextmodified, 'BearerContextmodified'),
+        (93, 1)  : (ModifyBearerResp_BearerContextmarkedforremoval, 'BearerContextmarkedforremoval'),
         (94, 0)  : (ChargingID, 'PDNConnectionChargingID'),
         (127, 0) : (APNRestriction, 'APNRestriction'),
         (131, 0) : (ChangeReportingAction, 'ChangeReportingAction'),
@@ -4750,26 +4752,26 @@ class ModifyBearerResponseIEs(GTPCIEs):
         (151, 1) : (LDN, 'PGWLDN'),
         (165, 0) : (HeNBInformationReporting, 'HeNBInformationReporting'),
         (177, 0) : (PresenceReportingAreaAction, 'PresenceReportingAreaAction'),
-        (180, 0) : (ModifyBearerResponse_OverloadControlInformation, 'PGWsOverloadControlInformation'),
-        (180, 1) : (ModifyBearerResponse_OverloadControlInformation, 'SGWsOverloadControlInformation'),
-        (181, 0) : (ModifyBearerResponse_LoadControlInformation, 'PGWsnodelevelLoadControlInformation'),
-        (181, 1) : (ModifyBearerResponse_LoadControlInformation, 'PGWsAPNlevelLoadControlInformation'),
-        (181, 2) : (ModifyBearerResponse_LoadControlInformation, 'SGWsnodelevelLoadControlInformation'),
-        (214, 0) : (ModifyBearerResponse_PGWChangeInfo, 'PGWChangeInfo'),
+        (180, 0) : (ModifyBearerResp_OverloadControlInformation, 'PGWsOverloadControlInformation'),
+        (180, 1) : (ModifyBearerResp_OverloadControlInformation, 'SGWsOverloadControlInformation'),
+        (181, 0) : (ModifyBearerResp_LoadControlInformation, 'PGWsnodelevelLoadControlInformation'),
+        (181, 1) : (ModifyBearerResp_LoadControlInformation, 'PGWsAPNlevelLoadControlInformation'),
+        (181, 2) : (ModifyBearerResp_LoadControlInformation, 'SGWsnodelevelLoadControlInformation'),
+        (214, 0) : (ModifyBearerResp_PGWChangeInfo, 'PGWChangeInfo'),
         255      : (PrivateExtension, 'PrivateExtension'),
         }
 
 
-class ModifyBearerResponse(GTPCMsg):
+class ModifyBearerResp(GTPCMsg):
     _GEN = (
         GTPCHdr(val={'Type': 35}),
-        ModifyBearerResponseIEs(hier=1)
+        ModifyBearerRespIEs(hier=1)
         )
 
 
 # Table 7.2.9.1-2: Overload Control Information within Delete Session Request
 # IE Type: 180
-class DeleteSessionRequest_OverloadControlInformation(GTPCIEs):
+class DeleteSessionReq_OverloadControlInformation(GTPCIEs):
     MAND = {
         (156, 0) : (EPCTimer, 'PeriodofValidity'),
         (182, 0) : (Metric, 'OverloadReductionMetric'),
@@ -4778,7 +4780,7 @@ class DeleteSessionRequest_OverloadControlInformation(GTPCIEs):
 
 
 # Table 7.2.9.1-1: Information Elements in a Delete Session Request
-class DeleteSessionRequestIEs(GTPCIEs):
+class DeleteSessionReqIEs(GTPCIEs):
     OPT  = {
         (2, 0)   : (Cause, 'Cause'),
         (73, 0)  : (EBI, 'LinkedEPSBearerID'),
@@ -4797,25 +4799,25 @@ class DeleteSessionRequestIEs(GTPCIEs):
         (172, 0) : (RANNASCause, 'RANNASReleaseCause'),
         (179, 0) : (TWANIdentifierTimestamp, 'TWANIdentifierTimestamp'),
         (179, 1) : (TWANIdentifierTimestamp, 'WLANLocationTimestamp'),
-        (180, 0) : (DeleteSessionRequest_OverloadControlInformation, 'MMES4SGSNsOverloadControlInformation'),
-        (180, 1) : (DeleteSessionRequest_OverloadControlInformation, 'SGWsOverloadControlInformation'),
-        (180, 2) : (DeleteSessionRequest_OverloadControlInformation, 'TWANePDGsOverloadControlInformation'),
+        (180, 0) : (DeleteSessionReq_OverloadControlInformation, 'MMES4SGSNsOverloadControlInformation'),
+        (180, 1) : (DeleteSessionReq_OverloadControlInformation, 'SGWsOverloadControlInformation'),
+        (180, 2) : (DeleteSessionReq_OverloadControlInformation, 'TWANePDGsOverloadControlInformation'),
         (197, 0) : (EPCO, 'ExtendedProtocolConfigurationOptions'),
         (201, 0) : (SecondaryRATUsageDataReport, 'SecondaryRATUsageDataReport'),
         255      : (PrivateExtension, 'PrivateExtension'),
         }
 
 
-class DeleteSessionRequest(GTPCMsg):
+class DeleteSessionReq(GTPCMsg):
     _GEN = (
         GTPCHdr(val={'Type': 36}),
-        DeleteSessionRequestIEs(hier=1)
+        DeleteSessionReqIEs(hier=1)
         )
 
 
 # Table 7.2.9.2-5: PGW Set Change within Delete Bearer Request
 # IE Type: 214
-class DeleteBearerRequest_PGWSetChange(GTPCIEs):
+class DeleteBearerReq_PGWSetChange(GTPCIEs):
     OPT  = {
         (74, 0)  : (IPAddress, 'AlternativePGWCSMFIPAddress'),
         (74, 1)  : (IPAddress, 'NewPGWCSMFIPAddress'),
@@ -4825,7 +4827,7 @@ class DeleteBearerRequest_PGWSetChange(GTPCIEs):
 
 # Table 7.2.9.2-4: Overload Control Information within Delete Bearer Request
 # IE Type: 180
-class DeleteBearerRequest_OverloadControlInformation(GTPCIEs):
+class DeleteBearerReq_OverloadControlInformation(GTPCIEs):
     MAND = {
         (156, 0) : (EPCTimer, 'PeriodofValidity'),
         (182, 0) : (Metric, 'OverloadReductionMetric'),
@@ -4838,7 +4840,7 @@ class DeleteBearerRequest_OverloadControlInformation(GTPCIEs):
 
 # Table 7.2.9.2-3: Load Control Information within Delete Bearer Request
 # IE Type: 181
-class DeleteBearerRequest_LoadControlInformation(GTPCIEs):
+class DeleteBearerReq_LoadControlInformation(GTPCIEs):
     MAND = {
         (182, 0) : (Metric, 'LoadMetric'),
         (183, 0) : (SequenceNumber, 'LoadControlSequenceNumber'),
@@ -4850,7 +4852,7 @@ class DeleteBearerRequest_LoadControlInformation(GTPCIEs):
 
 # Table 7.2.9.2-2: Bearer Context within Delete Bearer Request
 # IE Type: 93
-class DeleteBearerRequest_BearerContext(GTPCIEs):
+class DeleteBearerReq_BearerContext(GTPCIEs):
     MAND = {
         (2, 0)   : (Cause, 'Cause'),
         (73, 0)  : (EBI, 'EPSBearerID'),
@@ -4858,40 +4860,40 @@ class DeleteBearerRequest_BearerContext(GTPCIEs):
 
 
 # Table 7.2.9.2-1: Information Elements in a Delete Bearer Request
-class DeleteBearerRequestIEs(GTPCIEs):
+class DeleteBearerReqIEs(GTPCIEs):
     OPT  = {
         (2, 0)   : (Cause, 'Cause'),
         (73, 0)  : (EBI, 'LinkedEPSBearerID'),
         (73, 1)  : (EBI, 'EPSBearerIDs'),
         (77, 0)  : (Indication, 'IndicationFlags'),
         (78, 0)  : (PCO, 'PCO'),
-        (93, 0)  : (DeleteBearerRequest_BearerContext, 'FailedBearerContext'),
+        (93, 0)  : (DeleteBearerReq_BearerContext, 'FailedBearerContext'),
         (100, 0) : (PTI, 'PTI'),
         (118, 0) : (FContainer, 'NBIFOMContainer'),
         (132, 0) : (FQCSID, 'PGWFQCSID'),
         (132, 1) : (FQCSID, 'SGWFQCSID'),
-        (180, 0) : (DeleteBearerRequest_OverloadControlInformation, 'PGWsOverloadControlInformation'),
-        (180, 1) : (DeleteBearerRequest_OverloadControlInformation, 'SGWsOverloadControlInformation'),
-        (181, 0) : (DeleteBearerRequest_LoadControlInformation, 'PGWsnodelevelLoadControlInformation'),
-        (181, 1) : (DeleteBearerRequest_LoadControlInformation, 'PGWsAPNlevelLoadControlInformation'),
-        (181, 2) : (DeleteBearerRequest_LoadControlInformation, 'SGWsnodelevelLoadControlInformation'),
+        (180, 0) : (DeleteBearerReq_OverloadControlInformation, 'PGWsOverloadControlInformation'),
+        (180, 1) : (DeleteBearerReq_OverloadControlInformation, 'SGWsOverloadControlInformation'),
+        (181, 0) : (DeleteBearerReq_LoadControlInformation, 'PGWsnodelevelLoadControlInformation'),
+        (181, 1) : (DeleteBearerReq_LoadControlInformation, 'PGWsAPNlevelLoadControlInformation'),
+        (181, 2) : (DeleteBearerReq_LoadControlInformation, 'SGWsnodelevelLoadControlInformation'),
         (197, 0) : (EPCO, 'ExtendedProtocolConfigurationOptions'),
         (204, 0) : (APNRateControlStatus, 'APNRateControlStatus'),
-        (214, 0) : (DeleteBearerRequest_PGWSetChange, 'PGWChangeInfo'),
+        (214, 0) : (DeleteBearerReq_PGWSetChange, 'PGWChangeInfo'),
         255      : (PrivateExtension, 'PrivateExtension'),
         }
 
 
-class DeleteBearerRequest(GTPCMsg):
+class DeleteBearerReq(GTPCMsg):
     _GEN = (
         GTPCHdr(val={'Type': 99}),
-        DeleteBearerRequestIEs(hier=1)
+        DeleteBearerReqIEs(hier=1)
         )
 
 
 # Table 7.2.10.1-3: Overload Control Information within Delete Session Response
 # IE Type: 180
-class DeleteSessionResponse_OverloadControlInformation(GTPCIEs):
+class DeleteSessionResp_OverloadControlInformation(GTPCIEs):
     MAND = {
         (156, 0) : (EPCTimer, 'PeriodofValidity'),
         (182, 0) : (Metric, 'OverloadReductionMetric'),
@@ -4904,7 +4906,7 @@ class DeleteSessionResponse_OverloadControlInformation(GTPCIEs):
 
 # Table 7.2.10.1-2: Load Control Information within Delete Session Response
 # IE Type: 181
-class DeleteSessionResponse_LoadControlInformation(GTPCIEs):
+class DeleteSessionResp_LoadControlInformation(GTPCIEs):
     MAND = {
         (182, 0) : (Metric, 'LoadMetric'),
         (183, 0) : (SequenceNumber, 'LoadControlSequenceNumber'),
@@ -4915,7 +4917,7 @@ class DeleteSessionResponse_LoadControlInformation(GTPCIEs):
 
 
 # Table 7.2.10.1-1: Information Elements in a Delete Session Response
-class DeleteSessionResponseIEs(GTPCIEs):
+class DeleteSessionRespIEs(GTPCIEs):
     MAND = {
         (2, 0)   : (Cause, 'Cause'),
         }
@@ -4923,27 +4925,27 @@ class DeleteSessionResponseIEs(GTPCIEs):
         (3, 0)   : (Recovery, 'Recovery'),
         (77, 0)  : (Indication, 'IndicationFlags'),
         (78, 0)  : (PCO, 'PCO'),
-        (180, 0) : (DeleteSessionResponse_OverloadControlInformation, 'PGWsOverloadControlInformation'),
-        (180, 1) : (DeleteSessionResponse_OverloadControlInformation, 'SGWsOverloadControlInformation'),
-        (181, 0) : (DeleteSessionResponse_LoadControlInformation, 'PGWsnodelevelLoadControlInformation'),
-        (181, 1) : (DeleteSessionResponse_LoadControlInformation, 'PGWsAPNlevelLoadControlInformation'),
-        (181, 2) : (DeleteSessionResponse_LoadControlInformation, 'SGWsnodelevelLoadControlInformation'),
+        (180, 0) : (DeleteSessionResp_OverloadControlInformation, 'PGWsOverloadControlInformation'),
+        (180, 1) : (DeleteSessionResp_OverloadControlInformation, 'SGWsOverloadControlInformation'),
+        (181, 0) : (DeleteSessionResp_LoadControlInformation, 'PGWsnodelevelLoadControlInformation'),
+        (181, 1) : (DeleteSessionResp_LoadControlInformation, 'PGWsAPNlevelLoadControlInformation'),
+        (181, 2) : (DeleteSessionResp_LoadControlInformation, 'SGWsnodelevelLoadControlInformation'),
         (197, 0) : (EPCO, 'ExtendedProtocolConfigurationOptions'),
         (204, 0) : (APNRateControlStatus, 'APNRateControlStatus'),
         255      : (PrivateExtension, 'PrivateExtension'),
         }
 
 
-class DeleteSessionResponse(GTPCMsg):
+class DeleteSessionResp(GTPCMsg):
     _GEN = (
         GTPCHdr(val={'Type': 37}),
-        DeleteSessionResponseIEs(hier=1)
+        DeleteSessionRespIEs(hier=1)
         )
 
 
 # Table 7.2.10.2-3: Overload Control Information within Delete Bearer Response
 # IE Type: 180
-class DeleteBearerResponse_OverloadControlInformation(GTPCIEs):
+class DeleteBearerResp_OverloadControlInformation(GTPCIEs):
     MAND = {
         (156, 0) : (EPCTimer, 'PeriodofValidity'),
         (182, 0) : (Metric, 'OverloadReductionMetric'),
@@ -4953,7 +4955,7 @@ class DeleteBearerResponse_OverloadControlInformation(GTPCIEs):
 
 # Table 7.2.10.2-2: Bearer Context within Delete Bearer Response
 # IE Type: 93
-class DeleteBearerResponse_BearerContext(GTPCIEs):
+class DeleteBearerResp_BearerContext(GTPCIEs):
     MAND = {
         (2, 0)   : (Cause, 'Cause'),
         (73, 0)  : (EBI, 'EPSBearerID'),
@@ -4966,7 +4968,7 @@ class DeleteBearerResponse_BearerContext(GTPCIEs):
 
 
 # Table 7.2.10.2-1: Information Elements in Delete Bearer Response
-class DeleteBearerResponseIEs(GTPCIEs):
+class DeleteBearerRespIEs(GTPCIEs):
     MAND = {
         (2, 0)   : (Cause, 'Cause'),
         }
@@ -4977,7 +4979,7 @@ class DeleteBearerResponseIEs(GTPCIEs):
         (74, 0)  : (IPAddress, 'UELocalIPAddress'),
         (78, 0)  : (PCO, 'PCO'),
         (86, 0)  : (ULI, 'ULI'),
-        (93, 0)  : (DeleteBearerResponse_BearerContext, 'BearerContext'),
+        (93, 0)  : (DeleteBearerResp_BearerContext, 'BearerContext'),
         (114, 0) : (UETimeZone, 'UETimeZone'),
         (118, 0) : (FContainer, 'NBIFOMContainer'),
         (126, 0) : (PortNumber, 'UEUDPPort'),
@@ -4991,24 +4993,24 @@ class DeleteBearerResponseIEs(GTPCIEs):
         (170, 0) : (ULITimestamp, 'ULITimestamp'),
         (179, 0) : (TWANIdentifierTimestamp, 'TWANIdentifierTimestamp'),
         (179, 1) : (TWANIdentifierTimestamp, 'WLANLocationTimestamp'),
-        (180, 0) : (DeleteBearerResponse_OverloadControlInformation, 'MMES4SGSNsOverloadControlInformation'),
-        (180, 1) : (DeleteBearerResponse_OverloadControlInformation, 'SGWsOverloadControlInformation'),
-        (180, 2) : (DeleteBearerResponse_OverloadControlInformation, 'TWANePDGsOverloadControlInformation'),
+        (180, 0) : (DeleteBearerResp_OverloadControlInformation, 'MMES4SGSNsOverloadControlInformation'),
+        (180, 1) : (DeleteBearerResp_OverloadControlInformation, 'SGWsOverloadControlInformation'),
+        (180, 2) : (DeleteBearerResp_OverloadControlInformation, 'TWANePDGsOverloadControlInformation'),
         (201, 0) : (SecondaryRATUsageDataReport, 'SecondaryRATUsageDataReport'),
         255      : (PrivateExtension, 'PrivateExtension'),
         }
 
 
-class DeleteBearerResponse(GTPCMsg):
+class DeleteBearerResp(GTPCMsg):
     _GEN = (
         GTPCHdr(val={'Type': 100}),
-        DeleteBearerResponseIEs(hier=1)
+        DeleteBearerRespIEs(hier=1)
         )
 
 
 # Table 7.2.11.1-3: Overload Control Information within Downlink Data Notification
 # IE Type: 180
-class DownlinkDataNotification_OverloadControlInformation(GTPCIEs):
+class DownlinkDataNotif_OverloadControlInformation(GTPCIEs):
     MAND = {
         (156, 0) : (EPCTimer, 'PeriodofValidity'),
         (182, 0) : (Metric, 'OverloadReductionMetric'),
@@ -5018,7 +5020,7 @@ class DownlinkDataNotification_OverloadControlInformation(GTPCIEs):
 
 # Table 7.2.11.1-2: Load Control Information within Downlink Data Notification
 # IE Type: 181
-class DownlinkDataNotification_LoadControlInformation(GTPCIEs):
+class DownlinkDataNotif_LoadControlInformation(GTPCIEs):
     MAND = {
         (182, 0) : (Metric, 'LoadMetric'),
         (183, 0) : (SequenceNumber, 'LoadControlSequenceNumber'),
@@ -5026,7 +5028,7 @@ class DownlinkDataNotification_LoadControlInformation(GTPCIEs):
 
 
 # Table 7.2.11.1-1: Information Elements in a Downlink Data Notification
-class DownlinkDataNotificationIEs(GTPCIEs):
+class DownlinkDataNotifIEs(GTPCIEs):
     OPT  = {
         (1, 0)   : (IMSI, 'IMSI'),
         (2, 0)   : (Cause, 'Cause'),
@@ -5034,30 +5036,30 @@ class DownlinkDataNotificationIEs(GTPCIEs):
         (77, 0)  : (Indication, 'IndicationFlags'),
         (87, 0)  : (FTEID, 'SenderFTEIDforControlPlane'),
         (155, 0) : (ARP, 'AllocationRetentionPriority'),
-        (180, 0) : (DownlinkDataNotification_OverloadControlInformation, 'SGWsOverloadControlInformation'),
-        (181, 0) : (DownlinkDataNotification_LoadControlInformation, 'SGWsnodelevelLoadControlInformation'),
+        (180, 0) : (DownlinkDataNotif_OverloadControlInformation, 'SGWsOverloadControlInformation'),
+        (181, 0) : (DownlinkDataNotif_LoadControlInformation, 'SGWsnodelevelLoadControlInformation'),
         (186, 0) : (PagingAndServiceInformation, 'PagingAndServiceInformation'),
         (187, 0) : (IntegerNumber, 'DLDataPacketsSize'),
         255      : (PrivateExtension, 'PrivateExtension'),
         }
 
 
-class DownlinkDataNotification(GTPCMsg):
+class DownlinkDataNotif(GTPCMsg):
     _GEN = (
         GTPCHdr(val={'Type': 176}),
-        DownlinkDataNotificationIEs(hier=1)
+        DownlinkDataNotifIEs(hier=1)
         )
 
 
 # Table 7.2.11.2-1: Information Elements in a Downlink Data Notification Acknowledge
-class DownlinkDataNotificationAcknowledgeIEs(GTPCIEs):
+class DownlinkDataNotifAckIEs(GTPCIEs):
     MAND = {
         (2, 0)   : (Cause, 'Cause'),
         }
     OPT  = {
         (1, 0)   : (IMSI, 'IMSI'),
         (3, 0)   : (Recovery, 'Recovery'),
-        (92, 0)  : (DelayValue, 'DataNotificationDelay'),
+        (92, 0)  : (DelayValue, 'DataNotifDelay'),
         (154, 0) : (Throttling, 'DLlowprioritytrafficThrottling'),
         (156, 0) : (EPCTimer, 'DLBufferingDuration'),
         (187, 0) : (IntegerNumber, 'DLBufferingSuggestedPacketCount'),
@@ -5065,15 +5067,15 @@ class DownlinkDataNotificationAcknowledgeIEs(GTPCIEs):
         }
 
 
-class DownlinkDataNotificationAcknowledge(GTPCMsg):
+class DownlinkDataNotifAck(GTPCMsg):
     _GEN = (
         GTPCHdr(val={'Type': 177}),
-        DownlinkDataNotificationAcknowledgeIEs(hier=1)
+        DownlinkDataNotifAckIEs(hier=1)
         )
 
 
 # Table 7.2.11.3-1: Information Elements in a Downlink Data Notification Failure Indication
-class DownlinkDataNotificationFailureIndicationIEs(GTPCIEs):
+class DownlinkDataNotifFailureIndIEs(GTPCIEs):
     MAND = {
         (2, 0)   : (Cause, 'Cause'),
         }
@@ -5084,29 +5086,29 @@ class DownlinkDataNotificationFailureIndicationIEs(GTPCIEs):
         }
 
 
-class DownlinkDataNotificationFailureIndication(GTPCMsg):
+class DownlinkDataNotifFailureInd(GTPCMsg):
     _GEN = (
         GTPCHdr(val={'Type': 70}),
-        DownlinkDataNotificationFailureIndicationIEs(hier=1)
+        DownlinkDataNotifFailureIndIEs(hier=1)
         )
 
 
 # Table 7.2.12-1: Information Element in Delete Indirect Data Forwarding Tunnel Request
-class DeleteIndirectDataForwardingTunnelRequestIEs(GTPCIEs):
+class DeleteIndirectDataForwardingTunnelReqIEs(GTPCIEs):
     OPT  = {
         255      : (PrivateExtension, 'PrivateExtension'),
         }
 
 
-class DeleteIndirectDataForwardingTunnelRequest(GTPCMsg):
+class DeleteIndirectDataForwardingTunnelReq(GTPCMsg):
     _GEN = (
         GTPCHdr(val={'Type': 168}),
-        DeleteIndirectDataForwardingTunnelRequestIEs(hier=1)
+        DeleteIndirectDataForwardingTunnelReqIEs(hier=1)
         )
 
 
 # Table 7.2.13-1: Information Element in Delete Indirect Data Forwarding Tunnel Response
-class DeleteIndirectDataForwardingTunnelResponseIEs(GTPCIEs):
+class DeleteIndirectDataForwardingTunnelRespIEs(GTPCIEs):
     MAND = {
         (2, 0)   : (Cause, 'Cause'),
         }
@@ -5116,10 +5118,10 @@ class DeleteIndirectDataForwardingTunnelResponseIEs(GTPCIEs):
         }
 
 
-class DeleteIndirectDataForwardingTunnelResponse(GTPCMsg):
+class DeleteIndirectDataForwardingTunnelResp(GTPCMsg):
     _GEN = (
         GTPCHdr(val={'Type': 169}),
-        DeleteIndirectDataForwardingTunnelResponseIEs(hier=1)
+        DeleteIndirectDataForwardingTunnelRespIEs(hier=1)
         )
 
 
@@ -5168,7 +5170,7 @@ class ModifyBearerCommand(GTPCMsg):
 
 # Table 7.2.14-2: Overload Control Information within Modify Bearer Failure Indication
 # IE Type: 180
-class ModifyBearerFailureIndication_OverloadControlInformation(GTPCIEs):
+class ModifyBearerFailureInd_OverloadControlInformation(GTPCIEs):
     MAND = {
         (156, 0) : (EPCTimer, 'PeriodofValidity'),
         (182, 0) : (Metric, 'OverloadReductionMetric'),
@@ -5180,29 +5182,29 @@ class ModifyBearerFailureIndication_OverloadControlInformation(GTPCIEs):
 
 
 # Table 7.2.14.2-1: Information Elements in a Modify Bearer Failure Indication
-class ModifyBearerFailureIndicationIEs(GTPCIEs):
+class ModifyBearerFailureIndIEs(GTPCIEs):
     MAND = {
         (2, 0)   : (Cause, 'Cause'),
         }
     OPT  = {
         (3, 0)   : (Recovery, 'Recovery'),
         (77, 0)  : (Indication, 'IndicationFlags'),
-        (180, 0) : (ModifyBearerFailureIndication_OverloadControlInformation, 'PGWsOverloadControlInformation'),
-        (180, 1) : (ModifyBearerFailureIndication_OverloadControlInformation, 'SGWsOverloadControlInformation'),
+        (180, 0) : (ModifyBearerFailureInd_OverloadControlInformation, 'PGWsOverloadControlInformation'),
+        (180, 1) : (ModifyBearerFailureInd_OverloadControlInformation, 'SGWsOverloadControlInformation'),
         255      : (PrivateExtension, 'PrivateExtension'),
         }
 
 
-class ModifyBearerFailureIndication(GTPCMsg):
+class ModifyBearerFailureInd(GTPCMsg):
     _GEN = (
         GTPCHdr(val={'Type': 65}),
-        ModifyBearerFailureIndicationIEs(hier=1)
+        ModifyBearerFailureIndIEs(hier=1)
         )
 
 
 # Table 7.2.15-5: PGW Change Info within Update Bearer Request
 # IE Type: 214
-class UpdateBearerRequest_PGWChangeInfo(GTPCIEs):
+class UpdateBearerReq_PGWChangeInfo(GTPCIEs):
     OPT  = {
         (74, 0)  : (IPAddress, 'AlternativePGWCSMFIPAddress'),
         (74, 1)  : (IPAddress, 'NewPGWCSMFIPAddress'),
@@ -5212,7 +5214,7 @@ class UpdateBearerRequest_PGWChangeInfo(GTPCIEs):
 
 # Table 7.2.15-4: Overload Control Information within Update Bearer Request
 # IE Type: 180
-class UpdateBearerRequest_OverloadControlInformation(GTPCIEs):
+class UpdateBearerReq_OverloadControlInformation(GTPCIEs):
     MAND = {
         (156, 0) : (EPCTimer, 'PeriodofValidity'),
         (182, 0) : (Metric, 'OverloadReductionMetric'),
@@ -5225,7 +5227,7 @@ class UpdateBearerRequest_OverloadControlInformation(GTPCIEs):
 
 # Table 7.2.15-3: Load Control Information within Update Bearer Request
 # IE Type: 181
-class UpdateBearerRequest_LoadControlInformation(GTPCIEs):
+class UpdateBearerReq_LoadControlInformation(GTPCIEs):
     MAND = {
         (182, 0) : (Metric, 'LoadMetric'),
         (183, 0) : (SequenceNumber, 'LoadControlSequenceNumber'),
@@ -5237,7 +5239,7 @@ class UpdateBearerRequest_LoadControlInformation(GTPCIEs):
 
 # Table 7.2.15-2: Bearer Context within Update Bearer Request
 # IE Type: 93
-class UpdateBearerRequest_BearerContext(GTPCIEs):
+class UpdateBearerReq_BearerContext(GTPCIEs):
     MAND = {
         (73, 0)  : (EBI, 'EPSBearerID'),
         }
@@ -5253,10 +5255,10 @@ class UpdateBearerRequest_BearerContext(GTPCIEs):
 
 
 # Table 7.2.15-1: Information Elements in an Update Bearer Request
-class UpdateBearerRequestIEs(GTPCIEs):
+class UpdateBearerReqIEs(GTPCIEs):
     MAND = {
         (72, 0)  : (AMBR, 'AggregateMaximumBitRate'),
-        (93, 0)  : (UpdateBearerRequest_BearerContext, 'BearerContext'),
+        (93, 0)  : (UpdateBearerReq_BearerContext, 'BearerContext'),
         }
     OPT  = {
         (77, 0)  : (Indication, 'Indicationflags'),
@@ -5269,26 +5271,26 @@ class UpdateBearerRequestIEs(GTPCIEs):
         (146, 0) : (CSGInformationReportingAction, 'CSGInformationReportingAction'),
         (165, 0) : (HeNBInformationReporting, 'HeNBInformationReporting'),
         (177, 0) : (PresenceReportingAreaAction, 'PresenceReportingAreaAction'),
-        (180, 0) : (UpdateBearerRequest_OverloadControlInformation, 'PGWsOverloadControlInformation'),
-        (180, 1) : (UpdateBearerRequest_OverloadControlInformation, 'SGWsOverloadControlInformation'),
-        (181, 0) : (UpdateBearerRequest_LoadControlInformation, 'PGWsnodelevelLoadControlInformation'),
-        (181, 1) : (UpdateBearerRequest_LoadControlInformation, 'PGWsAPNlevelLoadControlInformation'),
-        (181, 2) : (UpdateBearerRequest_LoadControlInformation, 'SGWsnodelevelLoadControlInformation'),
-        (214, 0) : (UpdateBearerRequest_PGWChangeInfo, 'PGWChangeInfo'),
+        (180, 0) : (UpdateBearerReq_OverloadControlInformation, 'PGWsOverloadControlInformation'),
+        (180, 1) : (UpdateBearerReq_OverloadControlInformation, 'SGWsOverloadControlInformation'),
+        (181, 0) : (UpdateBearerReq_LoadControlInformation, 'PGWsnodelevelLoadControlInformation'),
+        (181, 1) : (UpdateBearerReq_LoadControlInformation, 'PGWsAPNlevelLoadControlInformation'),
+        (181, 2) : (UpdateBearerReq_LoadControlInformation, 'SGWsnodelevelLoadControlInformation'),
+        (214, 0) : (UpdateBearerReq_PGWChangeInfo, 'PGWChangeInfo'),
         255      : (PrivateExtension, 'PrivateExtension'),
         }
 
 
-class UpdateBearerRequest(GTPCMsg):
+class UpdateBearerReq(GTPCMsg):
     _GEN = (
         GTPCHdr(val={'Type': 97}),
-        UpdateBearerRequestIEs(hier=1)
+        UpdateBearerReqIEs(hier=1)
         )
 
 
 # Table 7.2.16-3: Overload Control Information within Update Bearer Response
 # IE Type: 180
-class UpdateBearerResponse_OverloadControlInformation(GTPCIEs):
+class UpdateBearerResp_OverloadControlInformation(GTPCIEs):
     MAND = {
         (156, 0) : (EPCTimer, 'PeriodofValidity'),
         (182, 0) : (Metric, 'OverloadReductionMetric'),
@@ -5298,7 +5300,7 @@ class UpdateBearerResponse_OverloadControlInformation(GTPCIEs):
 
 # Table 7.2.16-2: Bearer Context within Update Bearer Response
 # IE Type: 93
-class UpdateBearerResponse_BearerContext(GTPCIEs):
+class UpdateBearerResp_BearerContext(GTPCIEs):
     MAND = {
         (2, 0)   : (Cause, 'Cause'),
         (73, 0)  : (EBI, 'EPSBearerID'),
@@ -5313,10 +5315,10 @@ class UpdateBearerResponse_BearerContext(GTPCIEs):
 
 
 # Table 7.2.16-1: Information Elements in an Update Bearer Response
-class UpdateBearerResponseIEs(GTPCIEs):
+class UpdateBearerRespIEs(GTPCIEs):
     MAND = {
         (2, 0)   : (Cause, 'Cause'),
-        (93, 0)  : (UpdateBearerResponse_BearerContext, 'BearerContext'),
+        (93, 0)  : (UpdateBearerResp_BearerContext, 'BearerContext'),
         }
     OPT  = {
         (3, 0)   : (Recovery, 'Recovery'),
@@ -5337,17 +5339,17 @@ class UpdateBearerResponseIEs(GTPCIEs):
         (169, 1) : (TWANIdentifier, 'WLANLocationInformation'),
         (178, 0) : (PresenceReportingAreaInformation, 'PresenceReportingAreaInformation'),
         (179, 1) : (TWANIdentifierTimestamp, 'WLANLocationTimestamp'),
-        (180, 0) : (UpdateBearerResponse_OverloadControlInformation, 'MMES4SGSNsOverloadControlInformation'),
-        (180, 1) : (UpdateBearerResponse_OverloadControlInformation, 'SGWsOverloadControlInformation'),
-        (180, 2) : (UpdateBearerResponse_OverloadControlInformation, 'TWANePDGsOverloadControlInformation'),
+        (180, 0) : (UpdateBearerResp_OverloadControlInformation, 'MMES4SGSNsOverloadControlInformation'),
+        (180, 1) : (UpdateBearerResp_OverloadControlInformation, 'SGWsOverloadControlInformation'),
+        (180, 2) : (UpdateBearerResp_OverloadControlInformation, 'TWANePDGsOverloadControlInformation'),
         255      : (PrivateExtension, 'PrivateExtension'),
         }
 
 
-class UpdateBearerResponse(GTPCMsg):
+class UpdateBearerResp(GTPCMsg):
     _GEN = (
         GTPCHdr(val={'Type': 98}),
-        UpdateBearerResponseIEs(hier=1)
+        UpdateBearerRespIEs(hier=1)
         )
 
 
@@ -5399,7 +5401,7 @@ class DeleteBearerCommand(GTPCMsg):
 
 # Table 7.2.17-3: Overload Control Information within Delete Bearer Failure Indication
 # IE Type: 180
-class DeleteBearerFailureIndication_OverloadControlInformation(GTPCIEs):
+class DeleteBearerFailureInd_OverloadControlInformation(GTPCIEs):
     MAND = {
         (156, 0) : (EPCTimer, 'PeriodofValidity'),
         (182, 0) : (Metric, 'OverloadReductionMetric'),
@@ -5412,7 +5414,7 @@ class DeleteBearerFailureIndication_OverloadControlInformation(GTPCIEs):
 
 # Table 7.2.17.2-2: Bearer Context within Delete Bearer Failure Indication
 # IE Type: 93
-class DeleteBearerFailureIndication_BearerContext(GTPCIEs):
+class DeleteBearerFailureInd_BearerContext(GTPCIEs):
     MAND = {
         (2, 0)   : (Cause, 'Cause'),
         (73, 0)  : (EBI, 'EPSBearerID'),
@@ -5420,30 +5422,30 @@ class DeleteBearerFailureIndication_BearerContext(GTPCIEs):
 
 
 # Table 7.2.17.2-1: Information Elements in a Delete Bearer Failure Indication
-class DeleteBearerFailureIndicationIEs(GTPCIEs):
+class DeleteBearerFailureIndIEs(GTPCIEs):
     MAND = {
         (2, 0)   : (Cause, 'Cause'),
-        (93, 0)  : (DeleteBearerFailureIndication_BearerContext, 'BearerContext'),
+        (93, 0)  : (DeleteBearerFailureInd_BearerContext, 'BearerContext'),
         }
     OPT  = {
         (3, 0)   : (Recovery, 'Recovery'),
         (77, 0)  : (Indication, 'IndicationFlags'),
-        (180, 0) : (DeleteBearerFailureIndication_OverloadControlInformation, 'PGWsOverloadControlInformation'),
-        (180, 1) : (DeleteBearerFailureIndication_OverloadControlInformation, 'SGWsOverloadControlInformation'),
+        (180, 0) : (DeleteBearerFailureInd_OverloadControlInformation, 'PGWsOverloadControlInformation'),
+        (180, 1) : (DeleteBearerFailureInd_OverloadControlInformation, 'SGWsOverloadControlInformation'),
         255      : (PrivateExtension, 'PrivateExtension'),
         }
 
 
-class DeleteBearerFailureIndication(GTPCMsg):
+class DeleteBearerFailureInd(GTPCMsg):
     _GEN = (
         GTPCHdr(val={'Type': 67}),
-        DeleteBearerFailureIndicationIEs(hier=1)
+        DeleteBearerFailureIndIEs(hier=1)
         )
 
 
 # Table 7.2.18-2: Bearer Context within Create Indirect Data Forwarding Tunnel Request
 # IE Type: 93
-class CreateIndirectDataForwardingTunnelRequest_BearerContext(GTPCIEs):
+class CreateIndirectDataForwardingTunnelReq_BearerContext(GTPCIEs):
     MAND = {
         (73, 0)  : (EBI, 'EPSBearerID'),
         }
@@ -5459,9 +5461,9 @@ class CreateIndirectDataForwardingTunnelRequest_BearerContext(GTPCIEs):
 
 
 # Table 7.2.18-1: Information Elements in a Create Indirect Data Forwarding Tunnel Request
-class CreateIndirectDataForwardingTunnelRequestIEs(GTPCIEs):
+class CreateIndirectDataForwardingTunnelReqIEs(GTPCIEs):
     MAND = {
-        (93, 0)  : (CreateIndirectDataForwardingTunnelRequest_BearerContext, 'BearerContext'),
+        (93, 0)  : (CreateIndirectDataForwardingTunnelReq_BearerContext, 'BearerContext'),
         }
     OPT  = {
         (1, 0)   : (IMSI, 'IMSI'),
@@ -5473,16 +5475,16 @@ class CreateIndirectDataForwardingTunnelRequestIEs(GTPCIEs):
         }
 
 
-class CreateIndirectDataForwardingTunnelRequest(GTPCMsg):
+class CreateIndirectDataForwardingTunnelReq(GTPCMsg):
     _GEN = (
         GTPCHdr(val={'Type': 166}),
-        CreateIndirectDataForwardingTunnelRequestIEs(hier=1)
+        CreateIndirectDataForwardingTunnelReqIEs(hier=1)
         )
 
 
 # Table 7.2.19-2: Bearer Context within Create Indirect Data Forwarding Tunnel Response
 # IE Type: 93
-class CreateIndirectDataForwardingTunnelResponse_BearerContext(GTPCIEs):
+class CreateIndirectDataForwardingTunnelResp_BearerContext(GTPCIEs):
     MAND = {
         (2, 0)   : (Cause, 'Cause'),
         (73, 0)  : (EBI, 'EPSBearerID'),
@@ -5498,10 +5500,10 @@ class CreateIndirectDataForwardingTunnelResponse_BearerContext(GTPCIEs):
 
 
 # Table 7.2.19-1: Information Elements in a Create Indirect Data Forwarding Tunnel Response
-class CreateIndirectDataForwardingTunnelResponseIEs(GTPCIEs):
+class CreateIndirectDataForwardingTunnelRespIEs(GTPCIEs):
     MAND = {
         (2, 0)   : (Cause, 'Cause'),
-        (93, 0)  : (CreateIndirectDataForwardingTunnelResponse_BearerContext, 'BearerContext'),
+        (93, 0)  : (CreateIndirectDataForwardingTunnelResp_BearerContext, 'BearerContext'),
         }
     OPT  = {
         (3, 0)   : (Recovery, 'Recovery'),
@@ -5510,15 +5512,15 @@ class CreateIndirectDataForwardingTunnelResponseIEs(GTPCIEs):
         }
 
 
-class CreateIndirectDataForwardingTunnelResponse(GTPCMsg):
+class CreateIndirectDataForwardingTunnelResp(GTPCMsg):
     _GEN = (
         GTPCHdr(val={'Type': 167}),
-        CreateIndirectDataForwardingTunnelResponseIEs(hier=1)
+        CreateIndirectDataForwardingTunnelRespIEs(hier=1)
         )
 
 
 # Table 7.2.21-1: Information Element in Release Access Bearers Request
-class ReleaseAccessBearersRequestIEs(GTPCIEs):
+class ReleaseAccessBearersReqIEs(GTPCIEs):
     OPT  = {
         (73, 0)  : (EBI, 'ListofRABs'),
         (77, 0)  : (Indication, 'IndicationFlags'),
@@ -5528,16 +5530,16 @@ class ReleaseAccessBearersRequestIEs(GTPCIEs):
         }
 
 
-class ReleaseAccessBearersRequest(GTPCMsg):
+class ReleaseAccessBearersReq(GTPCMsg):
     _GEN = (
         GTPCHdr(val={'Type': 170}),
-        ReleaseAccessBearersRequestIEs(hier=1)
+        ReleaseAccessBearersReqIEs(hier=1)
         )
 
 
 # Table 7.2.22-3: Overload Control Information within Release Access Bearers Response
 # IE Type: 180
-class ReleaseAccessBearersResponse_OverloadControlInformation(GTPCIEs):
+class ReleaseAccessBearersResp_OverloadControlInformation(GTPCIEs):
     MAND = {
         (156, 0) : (EPCTimer, 'PeriodofValidity'),
         (182, 0) : (Metric, 'OverloadReductionMetric'),
@@ -5547,7 +5549,7 @@ class ReleaseAccessBearersResponse_OverloadControlInformation(GTPCIEs):
 
 # Table 7.2.22-2: Load Control Information within Release Access Bearers Response
 # IE Type: 181
-class ReleaseAccessBearersResponse_LoadControlInformation(GTPCIEs):
+class ReleaseAccessBearersResp_LoadControlInformation(GTPCIEs):
     MAND = {
         (182, 0) : (Metric, 'LoadMetric'),
         (183, 0) : (SequenceNumber, 'LoadControlSequenceNumber'),
@@ -5555,44 +5557,44 @@ class ReleaseAccessBearersResponse_LoadControlInformation(GTPCIEs):
 
 
 # Table 7.2.22-1: Information Element in Release Access Bearers Response
-class ReleaseAccessBearersResponseIEs(GTPCIEs):
+class ReleaseAccessBearersRespIEs(GTPCIEs):
     MAND = {
         (2, 0)   : (Cause, 'Cause'),
         }
     OPT  = {
         (3, 0)   : (Recovery, 'Recovery'),
         (77, 0)  : (Indication, 'IndicationFlags'),
-        (180, 0) : (ReleaseAccessBearersResponse_OverloadControlInformation, 'SGWsOverloadControlInformation'),
-        (181, 0) : (ReleaseAccessBearersResponse_LoadControlInformation, 'SGWsnodelevelLoadControlInformation'),
+        (180, 0) : (ReleaseAccessBearersResp_OverloadControlInformation, 'SGWsOverloadControlInformation'),
+        (181, 0) : (ReleaseAccessBearersResp_LoadControlInformation, 'SGWsnodelevelLoadControlInformation'),
         255      : (PrivateExtension, 'PrivateExtension'),
         }
 
 
-class ReleaseAccessBearersResponse(GTPCMsg):
+class ReleaseAccessBearersResp(GTPCMsg):
     _GEN = (
         GTPCHdr(val={'Type': 171}),
-        ReleaseAccessBearersResponseIEs(hier=1)
+        ReleaseAccessBearersRespIEs(hier=1)
         )
 
 
 # Table 7.2.23-1: Information Elements in a Stop Paging Indication
-class StopPagingIndicationIEs(GTPCIEs):
+class StopPagingIndIEs(GTPCIEs):
     OPT  = {
         (1, 0)   : (IMSI, 'IMSI'),
         255      : (PrivateExtension, 'PrivateExtension'),
         }
 
 
-class StopPagingIndication(GTPCMsg):
+class StopPagingInd(GTPCMsg):
     _GEN = (
         GTPCHdr(val={'Type': 73}),
-        StopPagingIndicationIEs(hier=1)
+        StopPagingIndIEs(hier=1)
         )
 
 
 # Table 7.2.24-3: Bearer Context to be removed within Modify Access Bearers Request
 # IE Type: 93
-class ModifyAccessBearersRequest_BearerContexttoberemoved(GTPCIEs):
+class ModifyAccessBearersReq_BearerContexttoberemoved(GTPCIEs):
     MAND = {
         (73, 0)  : (EBI, 'EPSBearerID'),
         }
@@ -5600,7 +5602,7 @@ class ModifyAccessBearersRequest_BearerContexttoberemoved(GTPCIEs):
 
 # Table 7.2.24-2: Bearer Context to be modified within Modify Access Bearers Request
 # IE Type: 93
-class ModifyAccessBearersRequest_BearerContexttobemodified(GTPCIEs):
+class ModifyAccessBearersReq_BearerContexttobemodified(GTPCIEs):
     MAND = {
         (73, 0)  : (EBI, 'EPSBearerID'),
         }
@@ -5611,29 +5613,29 @@ class ModifyAccessBearersRequest_BearerContexttobemodified(GTPCIEs):
 
 
 # Table 7.2.24-1: Information Elements in a Modify Access Bearers Request
-class ModifyAccessBearersRequestIEs(GTPCIEs):
+class ModifyAccessBearersReqIEs(GTPCIEs):
     OPT  = {
         (3, 0)   : (Recovery, 'Recovery'),
         (77, 0)  : (Indication, 'IndicationFlags'),
         (87, 0)  : (FTEID, 'SenderFTEIDforControlPlane'),
-        (92, 0)  : (DelayValue, 'DelayDownlinkPacketNotificationRequest'),
-        (93, 0)  : (ModifyAccessBearersRequest_BearerContexttobemodified, 'BearerContexttobemodified'),
-        (93, 1)  : (ModifyAccessBearersRequest_BearerContexttoberemoved, 'BearerContexttoberemoved'),
+        (92, 0)  : (DelayValue, 'DelayDownlinkPacketNotifReq'),
+        (93, 0)  : (ModifyAccessBearersReq_BearerContexttobemodified, 'BearerContexttobemodified'),
+        (93, 1)  : (ModifyAccessBearersReq_BearerContexttoberemoved, 'BearerContexttoberemoved'),
         (201, 0) : (SecondaryRATUsageDataReport, 'SecondaryRATUsageDataReport'),
         255      : (PrivateExtension, 'PrivateExtension'),
         }
 
 
-class ModifyAccessBearersRequest(GTPCMsg):
+class ModifyAccessBearersReq(GTPCMsg):
     _GEN = (
         GTPCHdr(val={'Type': 211}),
-        ModifyAccessBearersRequestIEs(hier=1)
+        ModifyAccessBearersReqIEs(hier=1)
         )
 
 
 # Table 7.2.25-5: Overload Control Information within Modify Access Bearers Response
 # IE Type: 180
-class ModifyAccessBearersResponse_OverloadControlInformation(GTPCIEs):
+class ModifyAccessBearersResp_OverloadControlInformation(GTPCIEs):
     MAND = {
         (156, 0) : (EPCTimer, 'PeriodofValidity'),
         (182, 0) : (Metric, 'OverloadReductionMetric'),
@@ -5643,7 +5645,7 @@ class ModifyAccessBearersResponse_OverloadControlInformation(GTPCIEs):
 
 # Table 7.2.25-4: Load Control Information within Modify Access Bearers Response
 # IE Type: 181
-class ModifyAccessBearersResponse_LoadControlInformation(GTPCIEs):
+class ModifyAccessBearersResp_LoadControlInformation(GTPCIEs):
     MAND = {
         (182, 0) : (Metric, 'LoadMetric'),
         (183, 0) : (SequenceNumber, 'LoadControlSequenceNumber'),
@@ -5652,7 +5654,7 @@ class ModifyAccessBearersResponse_LoadControlInformation(GTPCIEs):
 
 # Table 7.2.25-3: Bearer Context marked for removal within Modify Access Bearers Response
 # IE Type: 93
-class ModifyAccessBearersResponse_BearerContextmarkedforremoval(GTPCIEs):
+class ModifyAccessBearersResp_BearerContextmarkedforremoval(GTPCIEs):
     MAND = {
         (2, 0)   : (Cause, 'Cause'),
         (73, 0)  : (EBI, 'EPSBearerID'),
@@ -5661,7 +5663,7 @@ class ModifyAccessBearersResponse_BearerContextmarkedforremoval(GTPCIEs):
 
 # Table 7.2.25-2: Bearer Context modified within Modify Access Bearers Response
 # IE Type: 93
-class ModifyAccessBearersResponse_BearerContextmodified(GTPCIEs):
+class ModifyAccessBearersResp_BearerContextmodified(GTPCIEs):
     MAND = {
         (2, 0)   : (Cause, 'Cause'),
         (73, 0)  : (EBI, 'EPSBearerID'),
@@ -5673,31 +5675,31 @@ class ModifyAccessBearersResponse_BearerContextmodified(GTPCIEs):
 
 
 # Table 7.2.25-1: Information Elements in a Modify Access Bearers Response
-class ModifyAccessBearersResponseIEs(GTPCIEs):
+class ModifyAccessBearersRespIEs(GTPCIEs):
     MAND = {
         (2, 0)   : (Cause, 'Cause'),
         }
     OPT  = {
         (3, 0)   : (Recovery, 'Recovery'),
         (77, 0)  : (Indication, 'IndicationFlags'),
-        (93, 0)  : (ModifyAccessBearersResponse_BearerContextmodified, 'BearerContextmodified'),
-        (93, 1)  : (ModifyAccessBearersResponse_BearerContextmarkedforremoval, 'BearerContextmarkedforremoval'),
-        (180, 0) : (ModifyAccessBearersResponse_OverloadControlInformation, 'SGWsOverloadControlInformation'),
-        (181, 0) : (ModifyAccessBearersResponse_LoadControlInformation, 'SGWsnodelevelLoadControlInformation'),
+        (93, 0)  : (ModifyAccessBearersResp_BearerContextmodified, 'BearerContextmodified'),
+        (93, 1)  : (ModifyAccessBearersResp_BearerContextmarkedforremoval, 'BearerContextmarkedforremoval'),
+        (180, 0) : (ModifyAccessBearersResp_OverloadControlInformation, 'SGWsOverloadControlInformation'),
+        (181, 0) : (ModifyAccessBearersResp_LoadControlInformation, 'SGWsnodelevelLoadControlInformation'),
         255      : (PrivateExtension, 'PrivateExtension'),
         }
 
 
-class ModifyAccessBearersResponse(GTPCMsg):
+class ModifyAccessBearersResp(GTPCMsg):
     _GEN = (
         GTPCHdr(val={'Type': 212}),
-        ModifyAccessBearersResponseIEs(hier=1)
+        ModifyAccessBearersRespIEs(hier=1)
         )
 
 
 # Table 7.2.26-3: Remote UE Context Disconnected with Remote UE Report Notification
 # IE Type: 191
-class RemoteUEReportNotification_RemoteUEContextDisconnected(GTPCIEs):
+class RemoteUEReportNotif_RemoteUEContextDisconnected(GTPCIEs):
     MAND = {
         (192, 0) : (RemoteUserID, 'RemoteUserID'),
         }
@@ -5705,7 +5707,7 @@ class RemoteUEReportNotification_RemoteUEContextDisconnected(GTPCIEs):
 
 # Table 7.2.26-2: Remote UE Context Connected within Remote UE Report Notification
 # IE Type: 191
-class RemoteUEReportNotification_RemoteUEContextConnected(GTPCIEs):
+class RemoteUEReportNotif_RemoteUEContextConnected(GTPCIEs):
     MAND = {
         (192, 0) : (RemoteUserID, 'RemoteUserID'),
         (193, 0) : (RemoteUEIPInformation, 'RemoteUEIPInformation'),
@@ -5713,23 +5715,23 @@ class RemoteUEReportNotification_RemoteUEContextConnected(GTPCIEs):
 
 
 # Table 7.2.26-1: Information Elements in Remote UE Report Notification
-class RemoteUEReportNotificationIEs(GTPCIEs):
+class RemoteUEReportNotifIEs(GTPCIEs):
     OPT  = {
-        (191, 0) : (RemoteUEReportNotification_RemoteUEContextConnected, 'RemoteUEContextConnected'),
-        (191, 1) : (RemoteUEReportNotification_RemoteUEContextDisconnected, 'RemoteUEContextDisconnected'),
+        (191, 0) : (RemoteUEReportNotif_RemoteUEContextConnected, 'RemoteUEContextConnected'),
+        (191, 1) : (RemoteUEReportNotif_RemoteUEContextDisconnected, 'RemoteUEContextDisconnected'),
         255      : (PrivateExtension, 'PrivateExtension'),
         }
 
 
-class RemoteUEReportNotification(GTPCMsg):
+class RemoteUEReportNotif(GTPCMsg):
     _GEN = (
         GTPCHdr(val={'Type': 40}),
-        RemoteUEReportNotificationIEs(hier=1)
+        RemoteUEReportNotifIEs(hier=1)
         )
 
 
 # Table 7.2.27-1: Information Elements in Remote UE Report Acknowledge
-class RemoteUEReportAcknowledgeIEs(GTPCIEs):
+class RemoteUEReportAckIEs(GTPCIEs):
     MAND = {
         (2, 0)   : (Cause, 'Cause'),
         }
@@ -5738,16 +5740,16 @@ class RemoteUEReportAcknowledgeIEs(GTPCIEs):
         }
 
 
-class RemoteUEReportAcknowledge(GTPCMsg):
+class RemoteUEReportAck(GTPCMsg):
     _GEN = (
         GTPCHdr(val={'Type': 41}),
-        RemoteUEReportAcknowledgeIEs(hier=1)
+        RemoteUEReportAckIEs(hier=1)
         )
 
 
 # Table 7.3.1-8: PGW Change Info with Forward Relocation Request
 # IE Type: 214
-class ForwardRelocationRequest_PGWChangeInfo(GTPCIEs):
+class ForwardRelocationReq_PGWChangeInfo(GTPCIEs):
     OPT  = {
         (74, 0)  : (IPAddress, 'AlternativePGWCSMFIPAddress'),
         (215, 0) : (PGWSetFQDN, 'PGWSetFQDN'),
@@ -5756,7 +5758,7 @@ class ForwardRelocationRequest_PGWChangeInfo(GTPCIEs):
 
 # Table 7.3.1-7: PC5 QoS Parameters within Forward Relocation Request
 # IE Type: 209
-class ForwardRelocationRequest_PC5QoSParameters(GTPCIEs):
+class ForwardRelocationReq_PC5QoSParameters(GTPCIEs):
     MAND = {
         (212, 0) : (PC5QoSFlow, 'PC5QoSFlows'),
         }
@@ -5767,9 +5769,9 @@ class ForwardRelocationRequest_PC5QoSParameters(GTPCIEs):
 
 # Table 7.3.1-6: Subscribed V2X Information within Forward Relocation Request
 # IE Type: 208
-class ForwardRelocationRequest_SubscribedV2XInformation(GTPCIEs):
+class ForwardRelocationReq_SubscribedV2XInformation(GTPCIEs):
     OPT  = {
-        (209, 0) : (ForwardRelocationRequest_PC5QoSParameters, 'PC5QoSParameters'),
+        (209, 0) : (ForwardRelocationReq_PC5QoSParameters, 'PC5QoSParameters'),
         (210, 0) : (ServicesAuthorized, 'LTEV2XServicesAuthorized'),
         (210, 1) : (ServicesAuthorized, 'NRV2XServicesAuthorized'),
         (211, 0) : (BitRate, 'LTEUESidelinkAggregateMaximumBitRate'),
@@ -5779,7 +5781,7 @@ class ForwardRelocationRequest_SubscribedV2XInformation(GTPCIEs):
 
 # Table 7.3.1-5: MME UE SCEF PDN Connections within Forward Relocation Request
 # IE Type: 195
-class ForwardRelocationRequest_MMEUESCEFPDNConnections(GTPCIEs):
+class ForwardRelocationReq_MMEUESCEFPDNConnections(GTPCIEs):
     MAND = {
         (71, 0)  : (APN, 'APN'),
         (73, 0)  : (EBI, 'DefaultEPSBearerID'),
@@ -5789,7 +5791,7 @@ class ForwardRelocationRequest_MMEUESCEFPDNConnections(GTPCIEs):
 
 # Table 7.3.1-4: Remote UE Context Connected within MME/SGSN UE EPS PDN Connections within Forward Relocation Request
 # IE Type: 191
-class ForwardRelocationRequest_MMESGSNUEEPSPDNConnections_RemoteUEContextConnected(GTPCIEs):
+class ForwardRelocationReq_MMESGSNUEEPSPDNConnections_RemoteUEContextConnected(GTPCIEs):
     MAND = {
         (192, 0) : (RemoteUserID, 'RemoteUserID'),
         (193, 0) : (RemoteUEIPInformation, 'RemoteUEIPInformation'),
@@ -5798,7 +5800,7 @@ class ForwardRelocationRequest_MMESGSNUEEPSPDNConnections_RemoteUEContextConnect
 
 # Table 7.3.1-3: Bearer Context within MME/SGSN/AMF UE EPS PDN Connections within Forward Relocation Request
 # IE Type: 93
-class ForwardRelocationRequest_MMESGSNAMFUEEPSPDNConnections_BearerContext(GTPCIEs):
+class ForwardRelocationReq_MMESGSNAMFUEEPSPDNConnections_BearerContext(GTPCIEs):
     MAND = {
         (73, 0)  : (EBI, 'EPSBearerID'),
         (80, 0)  : (BearerQoS, 'BearerLevelQoS'),
@@ -5816,7 +5818,7 @@ class ForwardRelocationRequest_MMESGSNAMFUEEPSPDNConnections_BearerContext(GTPCI
 
 # Table 7.3.1-2: MME/SGSN/AMF UE EPS PDN Connections within Forward Relocation Request
 # IE Type: 109
-class ForwardRelocationRequest_MMESGSNAMFUEEPSPDNConnections(GTPCIEs):
+class ForwardRelocationReq_MMESGSNAMFUEEPSPDNConnections(GTPCIEs):
     MAND = {
         (71, 0)  : (APN, 'APN'),
         (72, 0)  : (AMBR, 'AggregateMaximumBitRate'),
@@ -5827,7 +5829,7 @@ class ForwardRelocationRequest_MMESGSNAMFUEEPSPDNConnections(GTPCIEs):
         (74, 0)  : (IPAddress, 'IPv4Address'),
         (74, 1)  : (IPAddress, 'IPv6Address'),
         (77, 0)  : (Indication, 'IndicationFlags'),
-        (93, 0)  : (ForwardRelocationRequest_MMESGSNAMFUEEPSPDNConnections_BearerContext, 'BearerContext'),
+        (93, 0)  : (ForwardRelocationReq_MMESGSNAMFUEEPSPDNConnections_BearerContext, 'BearerContext'),
         (95, 0)  : (ChargingCharacteristics, 'ChargingCharacteristics'),
         (99, 0)  : (PDNType, 'PDNType'),
         (127, 0) : (APNRestriction, 'APNRestriction'),
@@ -5836,19 +5838,19 @@ class ForwardRelocationRequest_MMESGSNAMFUEEPSPDNConnections(GTPCIEs):
         (136, 0) : (FQDN, 'PGWnodename'),
         (136, 1) : (FQDN, 'LocalHomeNetworkID'),
         (146, 0) : (CSGInformationReportingAction, 'CSGInformationReportingAction'),
-        (157, 0) : (SignallingPriorityIndication, 'SignallingPriorityIndication'),
+        (157, 0) : (SignallingPriorityInd, 'SignallingPriorityInd'),
         (165, 0) : (HeNBInformationReporting, 'HeNBInformationReporting'),
         (167, 0) : (ChangeToReportFlags, 'ChangeToReportFlags'),
         (177, 0) : (PresenceReportingAreaAction, 'PresenceReportingAreaAction'),
-        (185, 0) : (WLANOffloadabilityIndication, 'WLANOffloadabilityIndication'),
-        (191, 0) : (ForwardRelocationRequest_MMESGSNUEEPSPDNConnections_RemoteUEContextConnected, 'RemoteUEContextConnected'),
+        (185, 0) : (WLANOffloadabilityInd, 'WLANOffloadabilityInd'),
+        (191, 0) : (ForwardRelocationReq_MMESGSNUEEPSPDNConnections_RemoteUEContextConnected, 'RemoteUEContextConnected'),
         (196, 0) : (HeaderCompressionConfiguration, 'HeaderCompressionConfiguration'),
-        (214, 0) : (ForwardRelocationRequest_PGWChangeInfo, 'PGWChangeInfo'),
+        (214, 0) : (ForwardRelocationReq_PGWChangeInfo, 'PGWChangeInfo'),
         }
 
 
 # Table 7.3.1-1: Information Elements in a Forward Relocation Request
-class ForwardRelocationRequestIEs(GTPCIEs):
+class ForwardRelocationReqIEs(GTPCIEs):
     MAND = {
         (87, 0)  : (FTEID, 'SendersFTEIDforControlPlane'),
         (103, 0) : (MMContext, 'MMESGSNAMFUEMMContext'),
@@ -5865,7 +5867,7 @@ class ForwardRelocationRequestIEs(GTPCIEs):
         (83, 0)  : (ServingNetwork, 'ServingNetwork'),
         (87, 1)  : (FTEID, 'SGWS11S4IPAddressandTEIDforControlPlane'),
         (96, 0)  : (TraceInformation, 'TraceInformation'),
-        (109, 0) : (ForwardRelocationRequest_MMESGSNAMFUEEPSPDNConnections, 'MMESGSNAMFUEEPSPDNConnections'),
+        (109, 0) : (ForwardRelocationReq_MMESGSNAMFUEEPSPDNConnections, 'MMESGSNAMFUEEPSPDNConnections'),
         (114, 0) : (UETimeZone, 'UETimeZone'),
         (118, 0) : (FContainer, 'EUTRANTransparentContainer'),
         (118, 1) : (FContainer, 'UTRANTransparentContainer'),
@@ -5884,7 +5886,7 @@ class ForwardRelocationRequestIEs(GTPCIEs):
         (144, 1) : (RFSPIndex, 'RFSPIndexinUse'),
         (145, 0) : (UCI, 'UCI'),
         (147, 0) : (CSGID, 'CSGID'),
-        (148, 0) : (CMI, 'CSGMembershipIndication'),
+        (148, 0) : (CMI, 'CSGMembershipInd'),
         (151, 0) : (LDN, 'MMES4SGSNLDN'),
         (159, 0) : (AdditionalMMContextForSRVCC, 'AdditionalMMContextForSRVCC'),
         (160, 0) : (AdditionalFlagsForSRVCC, 'AdditionalFlagsForSRVCC'),
@@ -5892,27 +5894,27 @@ class ForwardRelocationRequestIEs(GTPCIEs):
         (176, 0) : (NodeIdent, 'IWKSCEFIDForMonitoringEvent'),
         (187, 0) : (IntegerNumber, 'UEUsageType'),
         (189, 0) : (MonitoringEventInformation, 'MonitoringEventInformation'),
-        (195, 0) : (ForwardRelocationRequest_MMEUESCEFPDNConnections, 'MMESGSNUESCEFPDNConnections'),
+        (195, 0) : (ForwardRelocationReq_MMEUESCEFPDNConnections, 'MMESGSNUESCEFPDNConnections'),
         (198, 0) : (ServingPLMNRateControl, 'ServingPLMNRateControl'),
         (205, 0) : (ExtendedTraceInformation, 'ExtendedTraceInformation'),
         (206, 0) : (MonitoringEventExtensionInformation, 'MonitoringEventExtensionInformation'),
         (207, 0) : (AdditionalRRMPolicyIndex, 'SubscribedAdditionalRRMPolicyIndex'),
         (207, 1) : (AdditionalRRMPolicyIndex, 'AdditionalRRMPolicyIndexinUse'),
-        (208, 0) : (ForwardRelocationRequest_SubscribedV2XInformation, 'SubscribedV2XInformation'),
+        (208, 0) : (ForwardRelocationReq_SubscribedV2XInformation, 'SubscribedV2XInformation'),
         255      : (PrivateExtension, 'PrivateExtension'),
         }
 
 
-class ForwardRelocationRequest(GTPCMsg):
+class ForwardRelocationReq(GTPCMsg):
     _GEN = (
         GTPCHdr(val={'Type': 133}),
-        ForwardRelocationRequestIEs(hier=1)
+        ForwardRelocationReqIEs(hier=1)
         )
 
 
 # Table 7.3.2-2: Bearer Context within Forward Relocation Response
 # IE Type: 93
-class ForwardRelocationResponse_BearerContext(GTPCIEs):
+class ForwardRelocationResp_BearerContext(GTPCIEs):
     OPT  = {
         (73, 0)  : (EBI, 'EPSBearerID'),
         (87, 0)  : (FTEID, 'eNodeBFTEIDforDLdataforwarding'),
@@ -5926,17 +5928,17 @@ class ForwardRelocationResponse_BearerContext(GTPCIEs):
 
 
 # Table 7.3.2-1: Information Elements in a Forward Relocation Response
-class ForwardRelocationResponseIEs(GTPCIEs):
+class ForwardRelocationRespIEs(GTPCIEs):
     MAND = {
         (2, 0)   : (Cause, 'Cause'),
         }
     OPT  = {
         (77, 0)  : (Indication, 'IndicationFlags'),
         (87, 0)  : (FTEID, 'SendersFTEIDforControlPlane'),
-        (93, 0)  : (ForwardRelocationResponse_BearerContext, 'ListofSetupBearers'),
-        (93, 1)  : (ForwardRelocationResponse_BearerContext, 'ListofSetupRABs'),
-        (93, 2)  : (ForwardRelocationResponse_BearerContext, 'ListofSetupPFCs'),
-        (93, 3)  : (ForwardRelocationResponse_BearerContext, 'ListofSetupBearersforSCEFPDNConnections'),
+        (93, 0)  : (ForwardRelocationResp_BearerContext, 'ListofSetupBearers'),
+        (93, 1)  : (ForwardRelocationResp_BearerContext, 'ListofSetupRABs'),
+        (93, 2)  : (ForwardRelocationResp_BearerContext, 'ListofSetupPFCs'),
+        (93, 3)  : (ForwardRelocationResp_BearerContext, 'ListofSetupBearersforSCEFPDNConnections'),
         (118, 0) : (FContainer, 'EUTRANTransparentContainer'),
         (118, 1) : (FContainer, 'UTRANTransparentContainer'),
         (118, 2) : (FContainer, 'BSSContainer'),
@@ -5956,30 +5958,30 @@ class ForwardRelocationResponseIEs(GTPCIEs):
         }
 
 
-class ForwardRelocationResponse(GTPCMsg):
+class ForwardRelocationResp(GTPCMsg):
     _GEN = (
         GTPCHdr(val={'Type': 134}),
-        ForwardRelocationResponseIEs(hier=1)
+        ForwardRelocationRespIEs(hier=1)
         )
 
 
 # Table 7.3.3-1: Information Elements in a Forward Relocation Complete Notification
-class ForwardRelocationCompleteNotificationIEs(GTPCIEs):
+class ForwardRelocationCompleteNotifIEs(GTPCIEs):
     OPT  = {
         (77, 0)  : (Indication, 'IndicationFlags'),
         255      : (PrivateExtension, 'PrivateExtension'),
         }
 
 
-class ForwardRelocationCompleteNotification(GTPCMsg):
+class ForwardRelocationCompleteNotif(GTPCMsg):
     _GEN = (
         GTPCHdr(val={'Type': 135}),
-        ForwardRelocationCompleteNotificationIEs(hier=1)
+        ForwardRelocationCompleteNotifIEs(hier=1)
         )
 
 
 # Table 7.3.4-1: Information Elements in a Forward Relocation Complete Acknowledge
-class ForwardRelocationCompleteAcknowledgeIEs(GTPCIEs):
+class ForwardRelocationCompleteAckIEs(GTPCIEs):
     MAND = {
         (2, 0)   : (Cause, 'Cause'),
         }
@@ -5990,18 +5992,18 @@ class ForwardRelocationCompleteAcknowledgeIEs(GTPCIEs):
         }
 
 
-class ForwardRelocationCompleteAcknowledge(GTPCMsg):
+class ForwardRelocationCompleteAck(GTPCMsg):
     _GEN = (
         GTPCHdr(val={'Type': 136}),
-        ForwardRelocationCompleteAcknowledgeIEs(hier=1)
+        ForwardRelocationCompleteAckIEs(hier=1)
         )
 
 
 # Table 7.3.5-1: Information Elements in a Context Request
-class ContextRequestIEs(GTPCIEs):
+class ContextReqIEs(GTPCIEs):
     OPT  = {
         (1, 0)   : (IMSI, 'IMSI'),
-        (77, 0)  : (Indication, 'Indication'),
+        (77, 0)  : (Indication, 'IndicationFlags'),
         (82, 0)  : (RATType, 'RATType'),
         (83, 0)  : (ServingNetwork, 'TargetPLMNID'),
         (86, 0)  : (ULI, 'RouteingAreaIdentity'),
@@ -6009,7 +6011,7 @@ class ContextRequestIEs(GTPCIEs):
         (111, 0) : (PTMSI, 'PTMSI'),
         (112, 0) : (PTMSISignature, 'PTMSISignature'),
         (113, 0) : (HopCounter, 'HopCounter'),
-        (116, 0) : (CompleteRequestMessage, 'CompleteTAUrequestmessage'),
+        (116, 0) : (CompleteReqMessage, 'CompleteTAUReqmessage'),
         (117, 0) : (GUTI, 'GUTI'),
         (126, 0) : (PortNumber, 'UDPSourcePortNumber'),
         (136, 0) : (FQDN, 'SGSNnodename'),
@@ -6018,21 +6020,21 @@ class ContextRequestIEs(GTPCIEs):
         (175, 0) : (NodeNumber, 'SGSNNumber'),
         (176, 0) : (NodeIdent, 'SGSNIdent'),
         (176, 1) : (NodeIdent, 'MMEIdent'),
-        (194, 0) : (CIoTOptimizationsSupportIndication, 'CIoTOptimizationsSupportIndication'),
+        (194, 0) : (CIoTOptimizationsSupportInd, 'CIoTOptimizationsSupportInd'),
         255      : (PrivateExtension, 'PrivateExtension'),
         }
 
 
-class ContextRequest(GTPCMsg):
+class ContextReq(GTPCMsg):
     _GEN = (
         GTPCHdr(val={'Type': 130}),
-        ContextRequestIEs(hier=1)
+        ContextReqIEs(hier=1)
         )
 
 
 # Table 7.3.1-6: PGW Change Info with Context Response // misnumbered table
 # IE Type: 214
-class ContextResponse_PGWChangeInfo(GTPCIEs):
+class ContextResp_PGWChangeInfo(GTPCIEs):
     OPT  = {
         (74, 0)  : (IPAddress, 'AlternativePGWCSMFIPAddress'),
         (215, 0) : (PGWSetFQDN, 'PGWSetFQDN'),
@@ -6041,7 +6043,7 @@ class ContextResponse_PGWChangeInfo(GTPCIEs):
 
 # Table 7.3.6-5: MME/SGSN UE SCEF PDN Connections within Context Response
 # IE Type: x // guessing it's like ForwardRelocationRequestIEs
-class ContextResponse_MMESGSNUESCEFPDNConnections(GTPCIEs):
+class ContextResp_MMESGSNUESCEFPDNConnections(GTPCIEs):
     MAND = {
         (71, 0)  : (APN, 'APN'),
         (73, 0)  : (EBI, 'DefaultEPSBearerID'),
@@ -6051,7 +6053,7 @@ class ContextResponse_MMESGSNUESCEFPDNConnections(GTPCIEs):
 
 # Table 7.3.6-4: Remote UE Context Connected within MME/SGSN UE EPS PDN Connections within Context Response
 # IE Type: 191
-class ContextResponse_MMESGSNUEEPSPDNConnections_RemoteUEContextConnected(GTPCIEs):
+class ContextResp_MMESGSNUEEPSPDNConnections_RemoteUEContextConnected(GTPCIEs):
     MAND = {
         (192, 0) : (RemoteUserID, 'RemoteUserID'),
         (193, 0) : (RemoteUEIPInformation, 'RemoteUEIPInformation'),
@@ -6060,7 +6062,7 @@ class ContextResponse_MMESGSNUEEPSPDNConnections_RemoteUEContextConnected(GTPCIE
 
 # Table 7.3.6-3: Bearer Context within MME/SGSN/AMF UE EPS PDN Connections within Context Response
 # IE Type: 93
-class ContextResponse_MMESGSNAMFUEEPSPDNConnections_BearerContext(GTPCIEs):
+class ContextResp_MMESGSNAMFUEEPSPDNConnections_BearerContext(GTPCIEs):
     MAND = {
         (73, 0)  : (EBI, 'EPSBearerID'),
         (80, 0)  : (BearerQoS, 'BearerLevelQoS'),
@@ -6077,18 +6079,18 @@ class ContextResponse_MMESGSNAMFUEEPSPDNConnections_BearerContext(GTPCIEs):
 
 # Table 7.3.6-2: MME/SGSN/AMF UE EPS PDN Connections within Context Response
 # IE Type: 109
-class ContextResponse_MMESGSNAMFUEEPSPDNConnections(GTPCIEs):
+class ContextResp_MMESGSNAMFUEEPSPDNConnections(GTPCIEs):
     MAND = {
         (71, 0)  : (APN, 'APN'),
         (72, 0)  : (AMBR, 'AggregateMaximumBitRate'),
         (73, 0)  : (EBI, 'LinkedEPSBearerID'),
         (87, 0)  : (FTEID, 'PGWS5S8IPAddressforControlPlaneorPMIP'),
-        (93, 0)  : (ContextResponse_MMESGSNAMFUEEPSPDNConnections_BearerContext, 'BearerContext'),
+        (93, 0)  : (ContextResp_MMESGSNAMFUEEPSPDNConnections_BearerContext, 'BearerContext'),
         }
     OPT  = {
         (74, 0)  : (IPAddress, 'IPv4Address'),
         (74, 1)  : (IPAddress, 'IPv6Address'),
-        (77, 0)  : (Indication, 'Indicationflags'),
+        (77, 0)  : (Indication, 'IndicationFlags'),
         (95, 0)  : (ChargingCharacteristics, 'ChargingCharacteristics'),
         (99, 0)  : (PDNType, 'PDNType'),
         (127, 0) : (APNRestriction, 'APNRestriction'),
@@ -6097,19 +6099,19 @@ class ContextResponse_MMESGSNAMFUEEPSPDNConnections(GTPCIEs):
         (136, 0) : (FQDN, 'PGWnodename'),
         (136, 1) : (FQDN, 'LocalHomeNetworkID'),
         (146, 0) : (CSGInformationReportingAction, 'CSGInformationReportingAction'),
-        (157, 0) : (SignallingPriorityIndication, 'SignallingPriorityIndication'),
+        (157, 0) : (SignallingPriorityInd, 'SignallingPriorityInd'),
         (165, 0) : (HeNBInformationReporting, 'HeNBInformationReporting'),
         (167, 0) : (ChangeToReportFlags, 'ChangeToReportFlags'),
         (177, 0) : (PresenceReportingAreaAction, 'PresenceReportingAreaAction'),
-        (185, 0) : (WLANOffloadabilityIndication, 'WLANOffloadabilityIndication'),
-        (191, 0) : (ContextResponse_MMESGSNUEEPSPDNConnections_RemoteUEContextConnected, 'RemoteUEContextConnected'),
+        (185, 0) : (WLANOffloadabilityInd, 'WLANOffloadabilityInd'),
+        (191, 0) : (ContextResp_MMESGSNUEEPSPDNConnections_RemoteUEContextConnected, 'RemoteUEContextConnected'),
         (196, 0) : (HeaderCompressionConfiguration, 'HeaderCompressionConfiguration'),
-        (215, 0) : (ContextResponse_PGWChangeInfo, 'PGWChangeInfo'),
+        (215, 0) : (ContextResp_PGWChangeInfo, 'PGWChangeInfo'),
         }
 
 
 # Table 7.3.6-1: Information Elements in a Context Response
-class ContextResponseIEs(GTPCIEs):
+class ContextRespIEs(GTPCIEs):
     MAND = {
         (2, 0)   : (Cause, 'Cause'),
         }
@@ -6123,7 +6125,7 @@ class ContextResponseIEs(GTPCIEs):
         (87, 1)  : (FTEID, 'SGWS11S4IPAddressandTEIDforControlPlane'),
         (96, 0)  : (TraceInformation, 'TraceInformation'),
         (103, 0) : (MMContext, 'MMESGSNAMFUEMMContext'),
-        (109, 0) : (ContextResponse_MMESGSNAMFUEEPSPDNConnections, 'MMESGSNAMFUEEPSPDNConnections'),
+        (109, 0) : (ContextResp_MMESGSNAMFUEEPSPDNConnections, 'MMESGSNAMFUEEPSPDNConnections'),
         (114, 0) : (UETimeZone, 'UETimeZone'),
         (136, 0) : (FQDN, 'SGWnodename'),
         (136, 1) : (FQDN, 'SGSNnodename'),
@@ -6137,7 +6139,7 @@ class ContextResponseIEs(GTPCIEs):
         (187, 0) : (IntegerNumber, 'UEUsageType'),
         (187, 1) : (IntegerNumber, 'RemainingRunningServiceGapTimer'),
         (189, 0) : (MonitoringEventInformation, 'MonitoringEventInformation'),
-        (195, 0) : (ContextResponse_MMESGSNUESCEFPDNConnections, 'MMESGSNUESCEFPDNConnections'),
+        (195, 0) : (ContextResp_MMESGSNUESCEFPDNConnections, 'MMESGSNUESCEFPDNConnections'),
         (198, 0) : (ServingPLMNRateControl, 'ServingPLMNRateControl'),
         (199, 0) : (Counter, 'MOExceptionDataCounter'),
         (205, 0) : (ExtendedTraceInformation, 'ExtendedTraceInformation'),
@@ -6148,16 +6150,16 @@ class ContextResponseIEs(GTPCIEs):
         }
 
 
-class ContextResponse(GTPCMsg):
+class ContextResp(GTPCMsg):
     _GEN = (
         GTPCHdr(val={'Type': 131}),
-        ContextResponseIEs(hier=1)
+        ContextRespIEs(hier=1)
         )
 
 
 # Table 7.3.7-2: Bearer Context within Context Acknowledge
 # IE Type: 93
-class ContextAcknowledge_BearerContext(GTPCIEs):
+class ContextAck_BearerContext(GTPCIEs):
     MAND = {
         (73, 0)  : (EBI, 'EPSBearerID'),
         (87, 0)  : (FTEID, 'ForwardingFTEID'),
@@ -6165,14 +6167,14 @@ class ContextAcknowledge_BearerContext(GTPCIEs):
 
 
 # Table 7.3.7-1: Information Elements in a Context Acknowledge
-class ContextAcknowledgeIEs(GTPCIEs):
+class ContextAckIEs(GTPCIEs):
     MAND = {
         (2, 0)   : (Cause, 'Cause'),
         }
     OPT  = {
         (77, 0)  : (Indication, 'Indicationflags'),
         (87, 0)  : (FTEID, 'ForwardingFTEID'),
-        (93, 0)  : (ContextAcknowledge_BearerContext, 'BearerContext'),
+        (93, 0)  : (ContextAck_BearerContext, 'BearerContext'),
         (175, 0) : (NodeNumber, 'SGSNNumber'),
         (175, 1) : (NodeNumber, 'MMEnumberforMTSMS'),
         (176, 0) : (NodeIdent, 'SGSNIdentForMTSMS'),
@@ -6181,15 +6183,15 @@ class ContextAcknowledgeIEs(GTPCIEs):
         }
 
 
-class ContextAcknowledge(GTPCMsg):
+class ContextAck(GTPCMsg):
     _GEN = (
         GTPCHdr(val={'Type': 132}),
-        ContextAcknowledgeIEs(hier=1)
+        ContextAckIEs(hier=1)
         )
 
 
 # Table 7.3.8-1: Information Elements in an Identification Request
-class IdentificationRequestIEs(GTPCIEs):
+class IdentificationReqIEs(GTPCIEs):
     OPT  = {
         (74, 0)  : (IPAddress, 'AddressforControlPlane'),
         (83, 0)  : (ServingNetwork, 'TargetPLMNID'),
@@ -6197,22 +6199,22 @@ class IdentificationRequestIEs(GTPCIEs):
         (111, 0) : (PTMSI, 'PTMSI'),
         (112, 0) : (PTMSISignature, 'PTMSISignature'),
         (113, 0) : (HopCounter, 'HopCounter'),
-        (116, 0) : (CompleteRequestMessage, 'CompleteAttachRequestMessage'),
+        (116, 0) : (CompleteReqMessage, 'CompleteAttachReqMessage'),
         (117, 0) : (GUTI, 'GUTI'),
         (126, 0) : (PortNumber, 'UDPSourcePortNumber'),
         255      : (PrivateExtension, 'PrivateExtension'),
         }
 
 
-class IdentificationRequest(GTPCMsg):
+class IdentificationReq(GTPCMsg):
     _GEN = (
         GTPCHdr(val={'Type': 128}),
-        IdentificationRequestIEs(hier=1)
+        IdentificationReqIEs(hier=1)
         )
 
 
 # Table 7.3.9-1: Information Elements in an Identification Response
-class IdentificationResponseIEs(GTPCIEs):
+class IdentificationRespIEs(GTPCIEs):
     MAND = {
         (2, 0)   : (Cause, 'Cause'),
         }
@@ -6228,15 +6230,15 @@ class IdentificationResponseIEs(GTPCIEs):
         }
 
 
-class IdentificationResponse(GTPCMsg):
+class IdentificationResp(GTPCMsg):
     _GEN = (
         GTPCHdr(val={'Type': 129}),
-        IdentificationResponseIEs(hier=1)
+        IdentificationRespIEs(hier=1)
         )
 
 
 # Table 7.3.10-1: Information Elements in a Forward Access Context Notification
-class ForwardAccessContextNotificationIEs(GTPCIEs):
+class ForwardAccessContextNotifIEs(GTPCIEs):
     OPT  = {
         (110, 0) : (PDUNumbers, 'PDUNumbers'),
         (118, 0) : (FContainer, 'EUTRANTransparentContainer'),
@@ -6247,15 +6249,15 @@ class ForwardAccessContextNotificationIEs(GTPCIEs):
         }
 
 
-class ForwardAccessContextNotification(GTPCMsg):
+class ForwardAccessContextNotif(GTPCMsg):
     _GEN = (
         GTPCHdr(val={'Type': 137}),
-        ForwardAccessContextNotificationIEs(hier=1)
+        ForwardAccessContextNotifIEs(hier=1)
         )
 
 
 # Table 7.3.11-1: Information Elements in a Forward Access Context Acknowledge
-class ForwardAccessContextAcknowledgeIEs(GTPCIEs):
+class ForwardAccessContextAckIEs(GTPCIEs):
     MAND = {
         (2, 0)   : (Cause, 'Cause'),
         }
@@ -6264,15 +6266,15 @@ class ForwardAccessContextAcknowledgeIEs(GTPCIEs):
         }
 
 
-class ForwardAccessContextAcknowledge(GTPCMsg):
+class ForwardAccessContextAck(GTPCMsg):
     _GEN = (
         GTPCHdr(val={'Type': 138}),
-        ForwardAccessContextAcknowledgeIEs(hier=1)
+        ForwardAccessContextAckIEs(hier=1)
         )
 
 
 # Table 7.3.12-1: Information Elements in a Detach Notification
-class DetachNotificationIEs(GTPCIEs):
+class DetachNotifIEs(GTPCIEs):
     MAND = {
         (2, 0)   : (Cause, 'Cause'),
         }
@@ -6282,15 +6284,15 @@ class DetachNotificationIEs(GTPCIEs):
         }
 
 
-class DetachNotification(GTPCMsg):
+class DetachNotif(GTPCMsg):
     _GEN = (
         GTPCHdr(val={'Type': 149}),
-        DetachNotificationIEs(hier=1)
+        DetachNotifIEs(hier=1)
         )
 
 
 # Table 7.3.13-1: Information Elements in a Detach Acknowledge
-class DetachAcknowledgeIEs(GTPCIEs):
+class DetachAckIEs(GTPCIEs):
     MAND = {
         (2, 0)   : (Cause, 'Cause'),
         }
@@ -6300,15 +6302,15 @@ class DetachAcknowledgeIEs(GTPCIEs):
         }
 
 
-class DetachAcknowledge(GTPCMsg):
+class DetachAck(GTPCMsg):
     _GEN = (
         GTPCHdr(val={'Type': 150}),
-        DetachAcknowledgeIEs(hier=1)
+        DetachAckIEs(hier=1)
         )
 
 
 # Table 7.3.14-1: Information Element in Change Notification Request
-class ChangeNotificationRequestIEs(GTPCIEs):
+class ChangeNotifReqIEs(GTPCIEs):
     MAND = {
         (82, 0)  : (RATType, 'RATType'),
         }
@@ -6327,15 +6329,15 @@ class ChangeNotificationRequestIEs(GTPCIEs):
         }
 
 
-class ChangeNotificationRequest(GTPCMsg):
+class ChangeNotifReq(GTPCMsg):
     _GEN = (
         GTPCHdr(val={'Type': 38}),
-        ChangeNotificationRequestIEs(hier=1)
+        ChangeNotifReqIEs(hier=1)
         )
 
 
 # Table 7.3.15-1: Information Element in Change Notification Response
-class ChangeNotificationResponseIEs(GTPCIEs):
+class ChangeNotifRespIEs(GTPCIEs):
     MAND = {
         (2, 0)   : (Cause, 'Cause'),
         }
@@ -6349,15 +6351,15 @@ class ChangeNotificationResponseIEs(GTPCIEs):
         }
 
 
-class ChangeNotificationResponse(GTPCMsg):
+class ChangeNotifResp(GTPCMsg):
     _GEN = (
         GTPCHdr(val={'Type': 39}),
-        ChangeNotificationResponseIEs(hier=1)
+        ChangeNotifRespIEs(hier=1)
         )
 
 
 # Table 7.3.16-1: Information Elements in Relocation Cancel Request
-class RelocationCancelRequestIEs(GTPCIEs):
+class RelocationCancelReqIEs(GTPCIEs):
     OPT  = {
         (1, 0)   : (IMSI, 'IMSI'),
         (75, 0)  : (MEI, 'MEI'),
@@ -6367,15 +6369,15 @@ class RelocationCancelRequestIEs(GTPCIEs):
         }
 
 
-class RelocationCancelRequest(GTPCMsg):
+class RelocationCancelReq(GTPCMsg):
     _GEN = (
         GTPCHdr(val={'Type': 139}),
-        RelocationCancelRequestIEs(hier=1)
+        RelocationCancelReqIEs(hier=1)
         )
 
 
 # Table 7.3.17-1: Information Elements in Relocation Cancel Response
-class RelocationCancelResponseIEs(GTPCIEs):
+class RelocationCancelRespIEs(GTPCIEs):
     MAND = {
         (2, 0)   : (Cause, 'Cause'),
         }
@@ -6384,10 +6386,10 @@ class RelocationCancelResponseIEs(GTPCIEs):
         }
 
 
-class RelocationCancelResponse(GTPCMsg):
+class RelocationCancelResp(GTPCMsg):
     _GEN = (
         GTPCHdr(val={'Type': 140}),
-        RelocationCancelResponseIEs(hier=1)
+        RelocationCancelRespIEs(hier=1)
         )
 
 
@@ -6428,24 +6430,24 @@ class RANInformationRelay(GTPCMsg):
 
 
 # Table 7.3.20-1: Information Elements in an ISR Status Indication
-class ISRStatusIndicationIEs(GTPCIEs):
+class ISRStatusIndIEs(GTPCIEs):
     MAND = {
-        (168, 0) : (ActionIndication, 'ActionIndication'),
+        (168, 0) : (ActionInd, 'ActionInd'),
         }
     OPT  = {
         255      : (PrivateExtension, 'PrivateExtension'),
         }
 
 
-class ISRStatusIndication(GTPCMsg):
+class ISRStatusInd(GTPCMsg):
     _GEN = (
         GTPCHdr(val={'Type': 157}),
-        ISRStatusIndicationIEs(hier=1)
+        ISRStatusIndIEs(hier=1)
         )
 
 
 # Table 7.3.21-1: Information Elements in UE Registration Query Request
-class UERegistrationQueryRequestIEs(GTPCIEs):
+class UERegistrationQueryReqIEs(GTPCIEs):
     MAND = {
         (1, 0)   : (IMSI, 'IMSI'),
         }
@@ -6454,15 +6456,15 @@ class UERegistrationQueryRequestIEs(GTPCIEs):
         }
 
 
-class UERegistrationQueryRequest(GTPCMsg):
+class UERegistrationQueryReq(GTPCMsg):
     _GEN = (
         GTPCHdr(val={'Type': 158}),
-        UERegistrationQueryRequestIEs(hier=1)
+        UERegistrationQueryReqIEs(hier=1)
         )
 
 
 # Table 7.3.22-1: Information Elements in UE Registration Query Response
-class UERegistrationQueryResponseIEs(GTPCIEs):
+class UERegistrationQueryRespIEs(GTPCIEs):
     MAND = {
         (1, 0)   : (IMSI, 'IMSI'),
         (2, 0)   : (Cause, 'Cause'),
@@ -6473,15 +6475,15 @@ class UERegistrationQueryResponseIEs(GTPCIEs):
         }
 
 
-class UERegistrationQueryResponse(GTPCMsg):
+class UERegistrationQueryResp(GTPCMsg):
     _GEN = (
         GTPCHdr(val={'Type': 159}),
-        UERegistrationQueryResponseIEs(hier=1)
+        UERegistrationQueryRespIEs(hier=1)
         )
 
 
 # Table 7.4.1-1: Information Element in Suspend Notification
-class SuspendNotificationIEs(GTPCIEs):
+class SuspendNotifIEs(GTPCIEs):
     OPT  = {
         (1, 0)   : (IMSI, 'IMSI'),
         (73, 0)  : (EBI, 'LinkedEPSBearerID'),
@@ -6496,15 +6498,15 @@ class SuspendNotificationIEs(GTPCIEs):
         }
 
 
-class SuspendNotification(GTPCMsg):
+class SuspendNotif(GTPCMsg):
     _GEN = (
         GTPCHdr(val={'Type': 162}),
-        SuspendNotificationIEs(hier=1)
+        SuspendNotifIEs(hier=1)
         )
 
 
 # Table 7.4.2-1: Information Element in Suspend Acknowledge
-class SuspendAcknowledgeIEs(GTPCIEs):
+class SuspendAckIEs(GTPCIEs):
     MAND = {
         (2, 0)   : (Cause, 'Cause'),
         }
@@ -6513,15 +6515,15 @@ class SuspendAcknowledgeIEs(GTPCIEs):
         }
 
 
-class SuspendAcknowledge(GTPCMsg):
+class SuspendAck(GTPCMsg):
     _GEN = (
         GTPCHdr(val={'Type': 163}),
-        SuspendAcknowledgeIEs(hier=1)
+        SuspendAckIEs(hier=1)
         )
 
 
 # Table 7.4.3-1: Information Element in Resume Notification
-class ResumeNotificationIEs(GTPCIEs):
+class ResumeNotifIEs(GTPCIEs):
     MAND = {
         (1, 0)   : (IMSI, 'IMSI'),
         }
@@ -6533,15 +6535,15 @@ class ResumeNotificationIEs(GTPCIEs):
         }
 
 
-class ResumeNotification(GTPCMsg):
+class ResumeNotif(GTPCMsg):
     _GEN = (
         GTPCHdr(val={'Type': 164}),
-        ResumeNotificationIEs(hier=1)
+        ResumeNotifIEs(hier=1)
         )
 
 
 # Table 7.4.4-1: Information Element in Resume Acknowledge
-class ResumeAcknowledgeIEs(GTPCIEs):
+class ResumeAckIEs(GTPCIEs):
     MAND = {
         (2, 0)   : (Cause, 'Cause'),
         }
@@ -6550,15 +6552,15 @@ class ResumeAcknowledgeIEs(GTPCIEs):
         }
 
 
-class ResumeAcknowledge(GTPCMsg):
+class ResumeAck(GTPCMsg):
     _GEN = (
         GTPCHdr(val={'Type': 165}),
-        ResumeAcknowledgeIEs(hier=1)
+        ResumeAckIEs(hier=1)
         )
 
 
 # Table 7.4.5-1: Information Element in CS Paging Indication
-class CSPagingIndicationIEs(GTPCIEs):
+class CSPagingIndIEs(GTPCIEs):
     MAND = {
         (1, 0)   : (IMSI, 'IMSI'),
         (136, 0) : (FQDN, 'VLRName'),
@@ -6574,29 +6576,29 @@ class CSPagingIndicationIEs(GTPCIEs):
         }
 
 
-class CSPagingIndication(GTPCMsg):
+class CSPagingInd(GTPCMsg):
     _GEN = (
         GTPCHdr(val={'Type': 151}),
-        CSPagingIndicationIEs(hier=1)
+        CSPagingIndIEs(hier=1)
         )
 
 
 # Table 7.4.6-1: Information Element in Alert MME Notification
-class AlertMMENotificationIEs(GTPCIEs):
+class AlertMMENotifIEs(GTPCIEs):
     OPT  = {
         255      : (PrivateExtension, 'PrivateExtension'),
         }
 
 
-class AlertMMENotification(GTPCMsg):
+class AlertMMENotif(GTPCMsg):
     _GEN = (
         GTPCHdr(val={'Type': 153}),
-        AlertMMENotificationIEs(hier=1)
+        AlertMMENotifIEs(hier=1)
         )
 
 
 # Table 7.4.7-1: Information Elements in Alert MME Acknowledge
-class AlertMMEAcknowledgeIEs(GTPCIEs):
+class AlertMMEAckIEs(GTPCIEs):
     MAND = {
         (2, 0)   : (Cause, 'Cause'),
         }
@@ -6605,29 +6607,29 @@ class AlertMMEAcknowledgeIEs(GTPCIEs):
         }
 
 
-class AlertMMEAcknowledge(GTPCMsg):
+class AlertMMEAck(GTPCMsg):
     _GEN = (
         GTPCHdr(val={'Type': 154}),
-        AlertMMEAcknowledgeIEs(hier=1)
+        AlertMMEAckIEs(hier=1)
         )
 
 
 # Table 7.4.8-1: Information Element in UE Activity Notification
-class UEActivityNotificationIEs(GTPCIEs):
+class UEActivityNotifIEs(GTPCIEs):
     OPT  = {
         255      : (PrivateExtension, 'PrivateExtension'),
         }
 
 
-class UEActivityNotification(GTPCMsg):
+class UEActivityNotif(GTPCMsg):
     _GEN = (
         GTPCHdr(val={'Type': 155}),
-        UEActivityNotificationIEs(hier=1)
+        UEActivityNotifIEs(hier=1)
         )
 
 
 # Table 7.4.z-1: Information Elements in UE Activity Acknowledge
-class UEActivityAcknowledgeIEs(GTPCIEs):
+class UEActivityAckIEs(GTPCIEs):
     MAND = {
         (2, 0)   : (Cause, 'Cause'),
         }
@@ -6636,15 +6638,15 @@ class UEActivityAcknowledgeIEs(GTPCIEs):
         }
 
 
-class UEActivityAcknowledge(GTPCMsg):
+class UEActivityAck(GTPCMsg):
     _GEN = (
         GTPCHdr(val={'Type': 156}),
-        UEActivityAcknowledgeIEs(hier=1)
+        UEActivityAckIEs(hier=1)
         )
 
 
 # Table 7.5.1-1: Information Elements in a Create Forwarding Tunnel Request
-class CreateForwardingTunnelRequestIEs(GTPCIEs):
+class CreateForwardingTunnelReqIEs(GTPCIEs):
     MAND = {
         (90, 0)  : (S103PDF, 'S103PDNDataForwardingInfo'),
         }
@@ -6653,15 +6655,15 @@ class CreateForwardingTunnelRequestIEs(GTPCIEs):
         }
 
 
-class CreateForwardingTunnelRequest(GTPCMsg):
+class CreateForwardingTunnelReq(GTPCMsg):
     _GEN = (
         GTPCHdr(val={'Type': 160}),
-        CreateForwardingTunnelRequestIEs(hier=1)
+        CreateForwardingTunnelReqIEs(hier=1)
         )
 
 
 # Table 7.5.2-1: Information Elements in a Create Forwarding Tunnel Response
-class CreateForwardingTunnelResponseIEs(GTPCIEs):
+class CreateForwardingTunnelRespIEs(GTPCIEs):
     MAND = {
         (2, 0)   : (Cause, 'Cause'),
         }
@@ -6671,15 +6673,15 @@ class CreateForwardingTunnelResponseIEs(GTPCIEs):
         }
 
 
-class CreateForwardingTunnelResponse(GTPCMsg):
+class CreateForwardingTunnelResp(GTPCMsg):
     _GEN = (
         GTPCHdr(val={'Type': 161}),
-        CreateForwardingTunnelResponseIEs(hier=1)
+        CreateForwardingTunnelRespIEs(hier=1)
         )
 
 
 # Table 7.9.1-1: Information Elements in a Delete PDN Connection Set Request
-class DeletePDNConnectionSetRequestIEs(GTPCIEs):
+class DeletePDNConnectionSetReqIEs(GTPCIEs):
     OPT  = {
         (132, 0) : (FQCSID, 'MMEFQCSID'),
         (132, 1) : (FQCSID, 'SGWFQCSID'),
@@ -6690,15 +6692,15 @@ class DeletePDNConnectionSetRequestIEs(GTPCIEs):
         }
 
 
-class DeletePDNConnectionSetRequest(GTPCMsg):
+class DeletePDNConnectionSetReq(GTPCMsg):
     _GEN = (
         GTPCHdr(val={'Type': 101}),
-        DeletePDNConnectionSetRequestIEs(hier=1)
+        DeletePDNConnectionSetReqIEs(hier=1)
         )
 
 
 # Table 7.9.2: Information Elements in a Delete PDN Connection Set Response
-class DeletePDNConnectionSetResponseIEs(GTPCIEs):
+class DeletePDNConnectionSetRespIEs(GTPCIEs):
     MAND = {
         (2, 0)   : (Cause, 'Cause'),
         }
@@ -6708,15 +6710,15 @@ class DeletePDNConnectionSetResponseIEs(GTPCIEs):
         }
 
 
-class DeletePDNConnectionSetResponse(GTPCMsg):
+class DeletePDNConnectionSetResp(GTPCMsg):
     _GEN = (
         GTPCHdr(val={'Type': 102}),
-        DeletePDNConnectionSetResponseIEs(hier=1)
+        DeletePDNConnectionSetRespIEs(hier=1)
         )
 
 
 # Table 7.9.3-1: Information Elements in a Update PDN Connection Set Request
-class UpdatePDNConnectionSetRequestIEs(GTPCIEs):
+class UpdatePDNConnectionSetReqIEs(GTPCIEs):
     OPT  = {
         (132, 0) : (FQCSID, 'MMEFQCSID'),
         (132, 1) : (FQCSID, 'SGWFQCSID'),
@@ -6724,15 +6726,15 @@ class UpdatePDNConnectionSetRequestIEs(GTPCIEs):
         }
 
 
-class UpdatePDNConnectionSetRequest(GTPCMsg):
+class UpdatePDNConnectionSetReq(GTPCMsg):
     _GEN = (
         GTPCHdr(val={'Type': 200}),
-        UpdatePDNConnectionSetRequestIEs(hier=1)
+        UpdatePDNConnectionSetReqIEs(hier=1)
         )
 
 
 # Table 7.9.4-1: Information Elements in a Update PDN Connection Set Response
-class UpdatePDNConnectionSetResponseIEs(GTPCIEs):
+class UpdatePDNConnectionSetRespIEs(GTPCIEs):
     MAND = {
         (2, 0)   : (Cause, 'Cause'),
         }
@@ -6743,15 +6745,15 @@ class UpdatePDNConnectionSetResponseIEs(GTPCIEs):
         }
 
 
-class UpdatePDNConnectionSetResponse(GTPCMsg):
+class UpdatePDNConnectionSetResp(GTPCMsg):
     _GEN = (
         GTPCHdr(val={'Type': 201}),
-        UpdatePDNConnectionSetResponseIEs(hier=1)
+        UpdatePDNConnectionSetRespIEs(hier=1)
         )
 
 
 # Table 7.9.5-1: Information Elements in PGW Restart Notification
-class PGWRestartNotificationIEs(GTPCIEs):
+class PGWRestartNotifIEs(GTPCIEs):
     MAND = {
         (74, 0)  : (IPAddress, 'PGWS5S8IPAddressforControlPlaneorPMIP'),
         (74, 1)  : (IPAddress, 'SGWS11S4IPAddressforControlPlane'),
@@ -6762,15 +6764,15 @@ class PGWRestartNotificationIEs(GTPCIEs):
         }
 
 
-class PGWRestartNotification(GTPCMsg):
+class PGWRestartNotif(GTPCMsg):
     _GEN = (
         GTPCHdr(val={'Type': 179}),
-        PGWRestartNotificationIEs(hier=1)
+        PGWRestartNotifIEs(hier=1)
         )
 
 
 # Table 7.9.6-1: Information Elements in PGW Restart Notification Acknowledge
-class PGWRestartNotificationAcknowledgeIEs(GTPCIEs):
+class PGWRestartNotifAckIEs(GTPCIEs):
     MAND = {
         (2, 0)   : (Cause, 'Cause'),
         }
@@ -6779,15 +6781,15 @@ class PGWRestartNotificationAcknowledgeIEs(GTPCIEs):
         }
 
 
-class PGWRestartNotificationAcknowledge(GTPCMsg):
+class PGWRestartNotifAck(GTPCMsg):
     _GEN = (
         GTPCHdr(val={'Type': 180}),
-        PGWRestartNotificationAcknowledgeIEs(hier=1)
+        PGWRestartNotifAckIEs(hier=1)
         )
 
 
 # Table 7.9.7-1: Information Elements in PGW Downlink Triggering Notification
-class PGWDownlinkTriggeringNotificationIEs(GTPCIEs):
+class PGWDownlinkTriggeringNotifIEs(GTPCIEs):
     MAND = {
         (1, 0)   : (IMSI, 'IMSI'),
         }
@@ -6798,15 +6800,15 @@ class PGWDownlinkTriggeringNotificationIEs(GTPCIEs):
         }
 
 
-class PGWDownlinkTriggeringNotification(GTPCMsg):
+class PGWDownlinkTriggeringNotif(GTPCMsg):
     _GEN = (
         GTPCHdr(val={'Type': 103}),
-        PGWDownlinkTriggeringNotificationIEs(hier=1)
+        PGWDownlinkTriggeringNotifIEs(hier=1)
         )
 
 
 # Table 7.9.8-1: Information Elements in PGW Downlink Triggering Acknowledge
-class PGWDownlinkTriggeringAcknowledgeIEs(GTPCIEs):
+class PGWDownlinkTriggeringAckIEs(GTPCIEs):
     MAND = {
         (2, 0)   : (Cause, 'Cause'),
         }
@@ -6817,10 +6819,10 @@ class PGWDownlinkTriggeringAcknowledgeIEs(GTPCIEs):
         }
 
 
-class PGWDownlinkTriggeringAcknowledge(GTPCMsg):
+class PGWDownlinkTriggeringAck(GTPCMsg):
     _GEN = (
         GTPCHdr(val={'Type': 104}),
-        PGWDownlinkTriggeringAcknowledgeIEs(hier=1)
+        PGWDownlinkTriggeringAckIEs(hier=1)
         )
 
 
@@ -6857,7 +6859,7 @@ class TraceSessionDeactivation(GTPCMsg):
 
 
 # Table 7.13.1-1: Information Elements in a MBMS Session Start Request
-class MBMSSessionStartRequestIEs(GTPCIEs):
+class MBMSSessionStartReqIEs(GTPCIEs):
     MAND = {
         (80, 0)  : (BearerQoS, 'QoSprofile'),
         (87, 0)  : (FTEID, 'SenderFTEIDforControlPlane'),
@@ -6879,15 +6881,15 @@ class MBMSSessionStartRequestIEs(GTPCIEs):
         }
 
 
-class MBMSSessionStartRequest(GTPCMsg):
+class MBMSSessionStartReq(GTPCMsg):
     _GEN = (
         GTPCHdr(val={'Type': 231}),
-        MBMSSessionStartRequestIEs(hier=1)
+        MBMSSessionStartReqIEs(hier=1)
         )
 
 
 # Table 7.13.2-1: Information Elements in a MBMS Session Start Response
-class MBMSSessionStartResponseIEs(GTPCIEs):
+class MBMSSessionStartRespIEs(GTPCIEs):
     MAND = {
         (2, 0)   : (Cause, 'Cause'),
         (87, 0)  : (FTEID, 'SenderFTEIDforControlPlane'),
@@ -6895,20 +6897,20 @@ class MBMSSessionStartResponseIEs(GTPCIEs):
     OPT  = {
         (3, 0)   : (Recovery, 'Recovery'),
         (87, 1)  : (FTEID, 'SnUSGSNFTEID'),
-        (143, 0) : (MBMSDistributionAcknowledge, 'MBMSDistributionAcknowledge'),
+        (143, 0) : (MBMSDistributionAck, 'MBMSDistributionAck'),
         255      : (PrivateExtension, 'PrivateExtension'),
         }
 
 
-class MBMSSessionStartResponse(GTPCMsg):
+class MBMSSessionStartResp(GTPCMsg):
     _GEN = (
         GTPCHdr(val={'Type': 232}),
-        MBMSSessionStartResponseIEs(hier=1)
+        MBMSSessionStartRespIEs(hier=1)
         )
 
 
 # Table 7.13.3-1: Information Elements in a MBMS Session Update Request
-class MBMSSessionUpdateRequestIEs(GTPCIEs):
+class MBMSSessionUpdateReqIEs(GTPCIEs):
     MAND = {
         (80, 0)  : (BearerQoS, 'QoSprofile'),
         (138, 0) : (MBMSSessionDuration, 'MBMSSessionDuration'),
@@ -6926,35 +6928,35 @@ class MBMSSessionUpdateRequestIEs(GTPCIEs):
         }
 
 
-class MBMSSessionUpdateRequest(GTPCMsg):
+class MBMSSessionUpdateReq(GTPCMsg):
     _GEN = (
         GTPCHdr(val={'Type': 233}),
-        MBMSSessionUpdateRequestIEs(hier=1)
+        MBMSSessionUpdateReqIEs(hier=1)
         )
 
 
 # Table 7.13.4-1: Information Elements in a MBMS Session Update Response
-class MBMSSessionUpdateResponseIEs(GTPCIEs):
+class MBMSSessionUpdateRespIEs(GTPCIEs):
     MAND = {
         (2, 0)   : (Cause, 'Cause'),
         }
     OPT  = {
         (3, 0)   : (Recovery, 'Recovery'),
         (87, 0)  : (FTEID, 'SnUSGSNFTEID'),
-        (143, 0) : (MBMSDistributionAcknowledge, 'MBMSDistributionAcknowledge'),
+        (143, 0) : (MBMSDistributionAck, 'MBMSDistributionAck'),
         255      : (PrivateExtension, 'PrivateExtension'),
         }
 
 
-class MBMSSessionUpdateResponse(GTPCMsg):
+class MBMSSessionUpdateResp(GTPCMsg):
     _GEN = (
         GTPCHdr(val={'Type': 234}),
-        MBMSSessionUpdateResponseIEs(hier=1)
+        MBMSSessionUpdateRespIEs(hier=1)
         )
 
 
 # Table 7.13.5-1: Information Elements in a MBMS Session Stop Request
-class MBMSSessionStopRequestIEs(GTPCIEs):
+class MBMSSessionStopReqIEs(GTPCIEs):
     OPT  = {
         (141, 0) : (MBMSFlowIdentifier, 'MBMSFlowIdentifier'),
         (164, 0) : (AbsoluteTimeOfMBMSDataTransfer, 'MBMSDataTransferStop'),
@@ -6963,15 +6965,15 @@ class MBMSSessionStopRequestIEs(GTPCIEs):
         }
 
 
-class MBMSSessionStopRequest(GTPCMsg):
+class MBMSSessionStopReq(GTPCMsg):
     _GEN = (
         GTPCHdr(val={'Type': 235}),
-        MBMSSessionStopRequestIEs(hier=1)
+        MBMSSessionStopReqIEs(hier=1)
         )
 
 
 # Table 7.13.6-1: Information Elements in a MBMS Session Stop Response
-class MBMSSessionStopResponseIEs(GTPCIEs):
+class MBMSSessionStopRespIEs(GTPCIEs):
     MAND = {
         (2, 0)   : (Cause, 'Cause'),
         }
@@ -6981,10 +6983,10 @@ class MBMSSessionStopResponseIEs(GTPCIEs):
         }
 
 
-class MBMSSessionStopResponse(GTPCMsg):
+class MBMSSessionStopResp(GTPCMsg):
     _GEN = (
         GTPCHdr(val={'Type': 236}),
-        MBMSSessionStopResponseIEs(hier=1)
+        MBMSSessionStopRespIEs(hier=1)
         )
 
 
@@ -6993,7 +6995,7 @@ class MBMSSessionStopResponse(GTPCMsg):
 #------------------------------------------------------------------------------#
 
 # Table 7.3.2-1: Information Elements in a Direct Transfer Request
-class DirectTransferRequestIEs(GTPCIEs):
+class DirectTransferReqIEs(GTPCIEs):
     MAND = {
         (5, 0)   : (S101TransparentContainer, 'S101 Transparent Container'),
         }
@@ -7012,15 +7014,15 @@ class DirectTransferRequestIEs(GTPCIEs):
         }
 
 
-class DirectTransferRequest(GTPCMsg):
+class DirectTransferReq(GTPCMsg):
     _GEN = (
         GTPCHdr(val={'Type': 4}),
-        DirectTransferRequestIEs(hier=1)
+        DirectTransferReqIEs(hier=1)
         )
 
 
 # Table 7.3.3-1: Information Elements in a Direct Transfer Response message
-class DirectTransferResponseIEs(GTPCIEs):
+class DirectTransferRespIEs(GTPCIEs):
     MAND = {
         (2, 0)   : (Cause, 'Cause'),
         }
@@ -7032,15 +7034,15 @@ class DirectTransferResponseIEs(GTPCIEs):
         }
 
 
-class DirectTransferResponse(GTPCMsg):
+class DirectTransferResp(GTPCMsg):
     _GEN = (
         GTPCHdr(val={'Type': 5}),
-        DirectTransferResponseIEs(hier=1)
+        DirectTransferRespIEs(hier=1)
         )
 
 
 # Table 7.3.4-1: Information Elements in a Notification Request
-class NotificationRequestIEs(GTPCIEs):
+class NotifReqIEs(GTPCIEs):
     OPT  = {
         (1, 0)   : (IMSI, 'SessionID'),
         (3, 0)   : (Recovery, 'Recovery'),
@@ -7050,15 +7052,15 @@ class NotificationRequestIEs(GTPCIEs):
         }
 
 
-class NotificationRequest(GTPCMsg):
+class NotifReq(GTPCMsg):
     _GEN = (
         GTPCHdr(val={'Type': 6}),
-        NotificationRequestIEs(hier=1)
+        NotifReqIEs(hier=1)
         )
 
 
 # Table 7.3.5-1: Information Elements in a Notification Response message
-class NotificationResponseIEs(GTPCIEs):
+class NotifRespIEs(GTPCIEs):
     MAND = {
         (2, 0)   : (Cause, 'Cause'),
         }
@@ -7070,10 +7072,10 @@ class NotificationResponseIEs(GTPCIEs):
         }
 
 
-class NotificationResponse(GTPCMsg):
+class NotifResp(GTPCMsg):
     _GEN = (
         GTPCHdr(val={'Type': 7}),
-        NotificationResponseIEs(hier=1)
+        NotifRespIEs(hier=1)
         )
 
 
@@ -7100,7 +7102,7 @@ class RIMInformationTransfer(GTPCMsg):
 #------------------------------------------------------------------------------#
 
 # Table 5.2.2: Information Elements in a SRVCC PS to CS Request
-class SRVCCPStoCSRequestIEs(GTPCIEs):
+class SRVCCPStoCSReqIEs(GTPCIEs):
     MAND = {
         (52, 0)  : (SourcetoTargetTransparentContainer, 'SourcetoTargetTransparentContainer'),
         (59, 0)  : (TEIDC, 'MMESGSNSvTEIDforControlPlane'),
@@ -7123,15 +7125,15 @@ class SRVCCPStoCSRequestIEs(GTPCIEs):
         }
 
 
-class SRVCCPStoCSRequest(GTPCMsg):
+class SRVCCPStoCSReq(GTPCMsg):
     _GEN = (
         GTPCHdr(val={'Type': 25}),
-        SRVCCPStoCSRequestIEs(hier=1)
+        SRVCCPStoCSReqIEs(hier=1)
         )
 
 
 # Table 5.2.3: Information Elements in a SRVCC PS to CS Response
-class SRVCCPStoCSResponseIEs(GTPCIEs):
+class SRVCCPStoCSRespIEs(GTPCIEs):
     MAND = {
         (2, 0)   : (Cause, 'Cause'),
         }
@@ -7144,15 +7146,15 @@ class SRVCCPStoCSResponseIEs(GTPCIEs):
         }
 
 
-class SRVCCPStoCSResponse(GTPCMsg):
+class SRVCCPStoCSResp(GTPCMsg):
     _GEN = (
         GTPCHdr(val={'Type': 26}),
-        SRVCCPStoCSResponseIEs(hier=1)
+        SRVCCPStoCSRespIEs(hier=1)
         )
 
 
 # Table 5.2.4: Information Elements in a SRVCC PS to CS Complete Notification
-class SRVCCPStoCSCompleteNotificationIEs(GTPCIEs):
+class SRVCCPStoCSCompleteNotifIEs(GTPCIEs):
     OPT  = {
         (1, 0)   : (IMSI, 'IMSI'),
         (56, 0)  : (SRVCCCause, 'SRVCCpostfailureCause'),
@@ -7160,15 +7162,15 @@ class SRVCCPStoCSCompleteNotificationIEs(GTPCIEs):
         }
 
 
-class SRVCCPStoCSCompleteNotification(GTPCMsg):
+class SRVCCPStoCSCompleteNotif(GTPCMsg):
     _GEN = (
         GTPCHdr(val={'Type': 27}),
-        SRVCCPStoCSCompleteNotificationIEs(hier=1)
+        SRVCCPStoCSCompleteNotifIEs(hier=1)
         )
 
 
 # Table 5.2.5: Information Elements in a SRVCC PS to CS Complete Acknowledge
-class SRVCCPStoCSCompleteAcknowledgeIEs(GTPCIEs):
+class SRVCCPStoCSCompleteAckIEs(GTPCIEs):
     MAND = {
         (2, 0)   : (Cause, 'Cause'),
         }
@@ -7177,15 +7179,15 @@ class SRVCCPStoCSCompleteAcknowledgeIEs(GTPCIEs):
         }
 
 
-class SRVCCPStoCSCompleteAcknowledge(GTPCMsg):
+class SRVCCPStoCSCompleteAck(GTPCMsg):
     _GEN = (
         GTPCHdr(val={'Type': 28}),
-        SRVCCPStoCSCompleteAcknowledgeIEs(hier=1)
+        SRVCCPStoCSCompleteAckIEs(hier=1)
         )
 
 
 # Table 5.2.6: Information Elements in a SRVCC PS to CS Cancel Notification
-class SRVCCPStoCSCancelNotificationIEs(GTPCIEs):
+class SRVCCPStoCSCancelNotifIEs(GTPCIEs):
     MAND = {
         (56, 0)  : (SRVCCCause, 'CancelCause'),
         }
@@ -7196,15 +7198,15 @@ class SRVCCPStoCSCancelNotificationIEs(GTPCIEs):
         }
 
 
-class SRVCCPStoCSCancelNotification(GTPCMsg):
+class SRVCCPStoCSCancelNotif(GTPCMsg):
     _GEN = (
         GTPCHdr(val={'Type': 29}),
-        SRVCCPStoCSCancelNotificationIEs(hier=1)
+        SRVCCPStoCSCancelNotifIEs(hier=1)
         )
 
 
 # Table 5.2.7: Information Elements in a SRVCC PS to CS Cancel Acknowledge
-class SRVCCPStoCSCancelAcknowledgeIEs(GTPCIEs):
+class SRVCCPStoCSCancelAckIEs(GTPCIEs):
     MAND = {
         (2, 0)   : (Cause, 'Cause'),
         }
@@ -7214,15 +7216,15 @@ class SRVCCPStoCSCancelAcknowledgeIEs(GTPCIEs):
         }
 
 
-class SRVCCPStoCSCancelAcknowledge(GTPCMsg):
+class SRVCCPStoCSCancelAck(GTPCMsg):
     _GEN = (
         GTPCHdr(val={'Type': 30}),
-        SRVCCPStoCSCancelAcknowledgeIEs(hier=1)
+        SRVCCPStoCSCancelAckIEs(hier=1)
         )
 
 
 # Table 5.2.8: Information Elements in a SRVCC CS to PS Request
-class SRVCCCStoPSRequestIEs(GTPCIEs):
+class SRVCCCStoPSReqIEs(GTPCIEs):
     MAND = {
         (52, 0)  : (SourcetoTargetTransparentContainer, 'SourcetoTargetTransparentContainer'),
         (59, 0)  : (TEIDC, 'MSCServerSvTEIDforControlPlane'),
@@ -7241,15 +7243,15 @@ class SRVCCCStoPSRequestIEs(GTPCIEs):
         }
 
 
-class SRVCCCStoPSRequest(GTPCMsg):
+class SRVCCCStoPSReq(GTPCMsg):
     _GEN = (
         GTPCHdr(val={'Type': 31}),
-        SRVCCCStoPSRequestIEs(hier=1)
+        SRVCCCStoPSReqIEs(hier=1)
         )
 
 
 # Table 5.2.9: Information Elements in a SRVCC CS to PS Response
-class SRVCCCStoPSResponseIEs(GTPCIEs):
+class SRVCCCStoPSRespIEs(GTPCIEs):
     MAND = {
         (2, 0)   : (Cause, 'Cause'),
         }
@@ -7262,30 +7264,30 @@ class SRVCCCStoPSResponseIEs(GTPCIEs):
         }
 
 
-class SRVCCCStoPSResponse(GTPCMsg):
+class SRVCCCStoPSResp(GTPCMsg):
     _GEN = (
         GTPCHdr(val={'Type': 240}),
-        SRVCCCStoPSResponseIEs(hier=1)
+        SRVCCCStoPSRespIEs(hier=1)
         )
 
 
 # Table 5.2.10: Information Elements in a SRVCC CS to PS Complete Notification
-class SRVCCCStoPSCompleteNotificationIEs(GTPCIEs):
+class SRVCCCStoPSCompleteNotifIEs(GTPCIEs):
     OPT  = {
         (56, 0)  : (SRVCCCause, 'SRVCCfailureCause'),
         255      : (PrivateExtension, 'PrivateExtension'),
         }
 
 
-class SRVCCCStoPSCompleteNotification(GTPCMsg):
+class SRVCCCStoPSCompleteNotif(GTPCMsg):
     _GEN = (
         GTPCHdr(val={'Type': 241}),
-        SRVCCCStoPSCompleteNotificationIEs(hier=1)
+        SRVCCCStoPSCompleteNotifIEs(hier=1)
         )
 
 
 # Table 5.2.11: Information Elements in a SRVCC CS to PS Complete Acknowledge
-class SRVCCCStoPSCompleteAcknowledgeIEs(GTPCIEs):
+class SRVCCCStoPSCompleteAckIEs(GTPCIEs):
     MAND = {
         (2, 0)   : (Cause, 'Cause'),
         }
@@ -7294,15 +7296,15 @@ class SRVCCCStoPSCompleteAcknowledgeIEs(GTPCIEs):
         }
 
 
-class SRVCCCStoPSCompleteAcknowledge(GTPCMsg):
+class SRVCCCStoPSCompleteAck(GTPCMsg):
     _GEN = (
         GTPCHdr(val={'Type': 242}),
-        SRVCCCStoPSCompleteAcknowledgeIEs(hier=1)
+        SRVCCCStoPSCompleteAckIEs(hier=1)
         )
 
 
 # Table 5.2.12: Information Elements in a SRVCC CS to PS Cancel Notification
-class SRVCCCStoPSCancelNotificationIEs(GTPCIEs):
+class SRVCCCStoPSCancelNotifIEs(GTPCIEs):
     MAND = {
         (56, 0)  : (SRVCCCause, 'CancelCause'),
         }
@@ -7313,15 +7315,15 @@ class SRVCCCStoPSCancelNotificationIEs(GTPCIEs):
         }
 
 
-class SRVCCCStoPSCancelNotification(GTPCMsg):
+class SRVCCCStoPSCancelNotif(GTPCMsg):
     _GEN = (
         GTPCHdr(val={'Type': 243}),
-        SRVCCCStoPSCancelNotificationIEs(hier=1)
+        SRVCCCStoPSCancelNotifIEs(hier=1)
         )
 
 
 # Table 5.2.13: Information Elements in a SRVCC CS to PS Cancel Acknowledge
-class SRVCCCStoPSCancelAcknowledgeIEs(GTPCIEs):
+class SRVCCCStoPSCancelAckIEs(GTPCIEs):
     MAND = {
         (2, 0)   : (Cause, 'Cause'),
         }
@@ -7330,10 +7332,10 @@ class SRVCCCStoPSCancelAcknowledgeIEs(GTPCIEs):
         }
 
 
-class SRVCCCStoPSCancelAcknowledge(GTPCMsg):
+class SRVCCCStoPSCancelAck(GTPCMsg):
     _GEN = (
         GTPCHdr(val={'Type': 244}),
-        SRVCCCStoPSCancelAcknowledgeIEs(hier=1)
+        SRVCCCStoPSCancelAckIEs(hier=1)
         )
 
 
@@ -7344,109 +7346,113 @@ class SRVCCCStoPSCancelAcknowledge(GTPCMsg):
 
 GTPCDispatcher = {
     # TS 29.274
-    1  : EchoRequest,
-    2  : EchoResponse,
-    32 : CreateSessionRequest,
-    33 : CreateSessionResponse,
-    34 : ModifyBearerRequest,
-    35 : ModifyBearerResponse,
-    36 : DeleteSessionRequest,
-    37 : DeleteSessionResponse,
-    38 : ChangeNotificationRequest,
-    39 : ChangeNotificationResponse,
-    40 : RemoteUEReportNotification,
-    41 : RemoteUEReportAcknowledge,
+    1  : EchoReq,
+    2  : EchoResp,
+    32 : CreateSessionReq,
+    33 : CreateSessionResp,
+    34 : ModifyBearerReq,
+    35 : ModifyBearerResp,
+    36 : DeleteSessionReq,
+    37 : DeleteSessionResp,
+    38 : ChangeNotifReq,
+    39 : ChangeNotifResp,
+    40 : RemoteUEReportNotif,
+    41 : RemoteUEReportAck,
     64 : ModifyBearerCommand,
-    65 : ModifyBearerFailureIndication,
+    65 : ModifyBearerFailureInd,
     66 : DeleteBearerCommand,
-    67 : DeleteBearerFailureIndication,
+    67 : DeleteBearerFailureInd,
     68 : BearerResourceCommand,
-    69 : BearerResourceFailureIndication,
-    70 : DownlinkDataNotificationFailureIndication,
+    69 : BearerResourceFailureInd,
+    70 : DownlinkDataNotifFailureInd,
     71 : TraceSessionActivation,
     72 : TraceSessionDeactivation,
-    73 : StopPagingIndication,
-    95 : CreateBearerRequest,
-    96 : CreateBearerResponse,
-    97 : UpdateBearerRequest,
-    98 : UpdateBearerResponse,
-    99 : DeleteBearerRequest,
-    100: DeleteBearerResponse,
-    101: DeletePDNConnectionSetRequest,
-    102: DeletePDNConnectionSetResponse,
-    103: PGWDownlinkTriggeringNotification,
-    104: PGWDownlinkTriggeringAcknowledge,
-    128: IdentificationRequest,
-    129: IdentificationResponse,
-    130: ContextRequest,
-    131: ContextResponse,
-    132: ContextAcknowledge,
-    133: ForwardRelocationRequest,
-    134: ForwardRelocationResponse,
-    135: ForwardRelocationCompleteNotification,
-    136: ForwardRelocationCompleteAcknowledge,
-    137: ForwardAccessContextNotification,
-    138: ForwardAccessContextAcknowledge,
-    139: RelocationCancelRequest,
-    140: RelocationCancelResponse,
+    73 : StopPagingInd,
+    95 : CreateBearerReq,
+    96 : CreateBearerResp,
+    97 : UpdateBearerReq,
+    98 : UpdateBearerResp,
+    99 : DeleteBearerReq,
+    100: DeleteBearerResp,
+    101: DeletePDNConnectionSetReq,
+    102: DeletePDNConnectionSetResp,
+    103: PGWDownlinkTriggeringNotif,
+    104: PGWDownlinkTriggeringAck,
+    128: IdentificationReq,
+    129: IdentificationResp,
+    130: ContextReq,
+    131: ContextResp,
+    132: ContextAck,
+    133: ForwardRelocationReq,
+    134: ForwardRelocationResp,
+    135: ForwardRelocationCompleteNotif,
+    136: ForwardRelocationCompleteAck,
+    137: ForwardAccessContextNotif,
+    138: ForwardAccessContextAck,
+    139: RelocationCancelReq,
+    140: RelocationCancelResp,
     141: ConfigurationTransferTunnelMessage,
-    149: DetachNotification,
-    150: DetachAcknowledge,
-    151: CSPagingIndication,
+    149: DetachNotif,
+    150: DetachAck,
+    151: CSPagingInd,
     152: RANInformationRelay,
-    153: AlertMMENotification,
-    154: AlertMMEAcknowledge,
-    155: UEActivityNotification,
-    156: UEActivityAcknowledge,
-    157: ISRStatusIndication,
-    158: UERegistrationQueryRequest,
-    159: UERegistrationQueryResponse,
-    160: CreateForwardingTunnelRequest,
-    161: CreateForwardingTunnelResponse,
-    162: SuspendNotification,
-    163: SuspendAcknowledge,
-    164: ResumeNotification,
-    165: ResumeAcknowledge,
-    166: CreateIndirectDataForwardingTunnelRequest,
-    167: CreateIndirectDataForwardingTunnelResponse,
-    168: DeleteIndirectDataForwardingTunnelRequest,
-    169: DeleteIndirectDataForwardingTunnelResponse,
-    170: ReleaseAccessBearersRequest,
-    171: ReleaseAccessBearersResponse,
-    176: DownlinkDataNotification,
-    177: DownlinkDataNotificationAcknowledge,
-    179: PGWRestartNotification,
-    180: PGWRestartNotificationAcknowledge,
-    200: UpdatePDNConnectionSetRequest,
-    201: UpdatePDNConnectionSetResponse,
-    211: ModifyAccessBearersRequest,
-    212: ModifyAccessBearersResponse,
-    231: MBMSSessionStartRequest,
-    232: MBMSSessionStartResponse,
-    233: MBMSSessionUpdateRequest,
-    234: MBMSSessionUpdateResponse,
-    235: MBMSSessionStopRequest,
-    236: MBMSSessionStopResponse,
+    153: AlertMMENotif,
+    154: AlertMMEAck,
+    155: UEActivityNotif,
+    156: UEActivityAck,
+    157: ISRStatusInd,
+    158: UERegistrationQueryReq,
+    159: UERegistrationQueryResp,
+    160: CreateForwardingTunnelReq,
+    161: CreateForwardingTunnelResp,
+    162: SuspendNotif,
+    163: SuspendAck,
+    164: ResumeNotif,
+    165: ResumeAck,
+    166: CreateIndirectDataForwardingTunnelReq,
+    167: CreateIndirectDataForwardingTunnelResp,
+    168: DeleteIndirectDataForwardingTunnelReq,
+    169: DeleteIndirectDataForwardingTunnelResp,
+    170: ReleaseAccessBearersReq,
+    171: ReleaseAccessBearersResp,
+    176: DownlinkDataNotif,
+    177: DownlinkDataNotifAck,
+    179: PGWRestartNotif,
+    180: PGWRestartNotifAck,
+    200: UpdatePDNConnectionSetReq,
+    201: UpdatePDNConnectionSetResp,
+    211: ModifyAccessBearersReq,
+    212: ModifyAccessBearersResp,
+    231: MBMSSessionStartReq,
+    232: MBMSSessionStartResp,
+    233: MBMSSessionUpdateReq,
+    234: MBMSSessionUpdateResp,
+    235: MBMSSessionStopReq,
+    236: MBMSSessionStopResp,
     # TS 29.276
-    4   : DirectTransferRequest,
-    5   : DirectTransferResponse,
-    6   : NotificationRequest,
-    7   : NotificationResponse,
+    4   : DirectTransferReq,
+    5   : DirectTransferResp,
+    6   : NotifReq,
+    7   : NotifResp,
     17  : RIMInformationTransfer,
     # TS 29.280
-    25  : SRVCCPStoCSRequest,
-    26  : SRVCCPStoCSResponse,
-    27  : SRVCCPStoCSCompleteNotification,
-    28  : SRVCCPStoCSCompleteAcknowledge,
-    29  : SRVCCPStoCSCancelNotification,
-    30  : SRVCCPStoCSCancelAcknowledge,
-    31  : SRVCCCStoPSRequest,
-    240 : SRVCCCStoPSResponse,
-    241 : SRVCCCStoPSCompleteNotification,
-    242 : SRVCCCStoPSCompleteAcknowledge,
-    243 : SRVCCCStoPSCancelNotification,
-    244 : SRVCCCStoPSCancelAcknowledge,
+    25  : SRVCCPStoCSReq,
+    26  : SRVCCPStoCSResp,
+    27  : SRVCCPStoCSCompleteNotif,
+    28  : SRVCCPStoCSCompleteAck,
+    29  : SRVCCPStoCSCancelNotif,
+    30  : SRVCCPStoCSCancelAck,
+    31  : SRVCCCStoPSReq,
+    240 : SRVCCCStoPSResp,
+    241 : SRVCCCStoPSCompleteNotif,
+    242 : SRVCCCStoPSCompleteAck,
+    243 : SRVCCCStoPSCancelNotif,
+    244 : SRVCCCStoPSCancelAck,
     }
+
+
+class GTPCMsgType(IntEnum):
+    pass
 
 
 ERR_GTPC_BUF_TOO_SHORT = 1

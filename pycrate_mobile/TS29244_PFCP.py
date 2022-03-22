@@ -31,29 +31,29 @@
 __all__ = [
     'PFCPIEType',
     'PFCPDispatcher',
-    'PFCPHeartbeatRequest',
-    'PFCPHeartbeatResponse',
-    'PFCPPFDManagementRequest',
-    'PFCPPFDManagementResponse',
-    'PFCPAssociationSetupRequest',
-    'PFCPAssociationSetupResponse',
-    'PFCPAssociationUpdateRequest',
-    'PFCPAssociationUpdateResponse',
-    'PFCPAssociationReleaseRequest',
-    'PFCPAssociationReleaseResponse',
-    'PFCPVersionNotSupportedResponse',
-    'PFCPNodeReportRequest',
-    'PFCPNodeReportResponse',
-    'PFCPSessionSetDeletionRequest',
-    'PFCPSessionSetDeletionResponse',
-    'PFCPSessionEstablishmentRequest',
-    'PFCPSessionEstablishmentResponse',
-    'PFCPSessionModificationRequest',
-    'PFCPSessionModificationResponse',
-    'PFCPSessionDeletionRequest',
-    'PFCPSessionDeletionResponse',
-    'PFCPSessionReportRequest',
-    'PFCPSessionReportResponse',
+    'PFCPHeartbeatReq',
+    'PFCPHeartbeatResp',
+    'PFCPPFDManagementReq',
+    'PFCPPFDManagementResp',
+    'PFCPAssociationSetupReq',
+    'PFCPAssociationSetupResp',
+    'PFCPAssociationUpdateReq',
+    'PFCPAssociationUpdateResp',
+    'PFCPAssociationReleaseReq',
+    'PFCPAssociationReleaseResp',
+    'PFCPVersionNotSupportedResp',
+    'PFCPNodeReportReq',
+    'PFCPNodeReportResp',
+    'PFCPSessionSetDeletionReq',
+    'PFCPSessionSetDeletionResp',
+    'PFCPSessionEstablishmentReq',
+    'PFCPSessionEstablishmentResp',
+    'PFCPSessionModificationReq',
+    'PFCPSessionModificationResp',
+    'PFCPSessionDeletionReq',
+    'PFCPSessionDeletionResp',
+    'PFCPSessionReportReq',
+    'PFCPSessionReportResp',
     'ERR_PFCP_BUF_TOO_SHORT',
     'ERR_PFCP_BUF_INVALID',
     'ERR_PFCP_TYPE_NONEXIST',
@@ -89,6 +89,8 @@ def strip_name(s):
     s = re.sub('^3G', 'TG', s)
     # remove unneeded chars
     s = re.sub('[\s\(\)\'-/]', '', s).strip()
+    #
+    #s = s.replace('Request', 'Req').replace('Response', 'Resp')
     return s
 
 
@@ -209,7 +211,7 @@ PFCPIEType_dict = {
     9 : 'Update PDR',
     10 : 'Update FAR',
     11 : 'Update Forwarding Parameters',
-    12 : 'Update BAR (Session Report Response)',
+    12 : 'Update BAR (Session Report Resp)',
     13 : 'Update URR',
     14 : 'Update QER',
     15 : 'Remove PDR',
@@ -275,15 +277,15 @@ PFCPIEType_dict = {
     75 : 'Start Time',
     76 : 'End Time',
     77 : 'Query URR',
-    78 : 'Usage Report (Session Modification Response)',
-    79 : 'Usage Report (Session Deletion Response)',
-    80 : 'Usage Report (Session Report Request)',
+    78 : 'Usage Report (Session Mod Resp)',
+    79 : 'Usage Report (Session Deletion Resp)',
+    80 : 'Usage Report (Session Report Req)',
     81 : 'URR ID',
     82 : 'Linked URR ID',
     83 : 'Downlink Data Report',
     84 : 'Outer Header Creation',
     85 : 'Create BAR',
-    86 : 'Update BAR (Session Modification Request)',
+    86 : 'Update BAR (Session Mod Req)',
     87 : 'Remove BAR',
     88 : 'BAR ID',
     89 : 'CP Function Features',
@@ -308,7 +310,7 @@ PFCPIEType_dict = {
     108 : 'FAR ID',
     109 : 'QER ID',
     110 : 'OCI Flags',
-    111 : 'Association Release Request',
+    111 : 'Association Release Req',
     112 : 'Graceful Release Period',
     113 : 'PDN Type',
     114 : 'Failed Rule ID',
@@ -396,9 +398,9 @@ PFCPIEType_dict = {
     196 : 'DS-TT Port Number',
     197 : 'NW-TT Port Number',
     198 : 'TSN Bridge ID',
-    199 : 'TSC Management Information (Session Modification Request)',
-    200 : 'TSC Management Information (Session Modification Response)',
-    201 : 'TSC Management Information (Session Report Request)',
+    199 : 'TSC Management Information (Session Mod Req)',
+    200 : 'TSC Management Information (Session Mod Resp)',
+    201 : 'TSC Management Information (Session Report Req)',
     202 : 'Port Management Information Container',
     203 : 'Clock Drift Control Information',
     204 : 'Requested Clock Drift Information',
@@ -461,7 +463,7 @@ PFCPIEType_dict = {
     261 : 'Provide RDS Configuration Information',
     262 : 'RDS Configuration Information',
     263 : 'Query Packet Rate Status',
-    264 : 'Packet Rate Status Report (Session Modification Response)',
+    264 : 'Packet Rate Status Report (Session Mod Resp)',
     265 : 'MPTCP Applicable Indication',
     266 : 'Bridge Management Information Container',
     267 : 'UE IP Address Usage Information',
@@ -469,8 +471,8 @@ PFCPIEType_dict = {
     269 : 'Validity Timer',
     270 : 'Redundant Transmission Forwarding Parameters',
     271 : 'Transport Delay Reporting',
-    272 : 'Partial Failure Information (Session Establishment Response) ',
-    273 : 'Partial Failure Information (Session Modification Response) ',
+    272 : 'Partial Failure Information (Session Establishment Resp) ',
+    273 : 'Partial Failure Information (Session Mod Resp) ',
     274 : 'Offending IE Information',
     275 : 'RAT Type',
     }
@@ -1129,7 +1131,7 @@ class ProvideRDSConfigurationInformation(PFCPIEs):
 #------------------------------------------------------------------------------#
 
 # IE Type: 272
-class PartialFailureInformationSessionEstablishmentResponse(PFCPIEs):
+class PartialFailureInformationSessionEstablishmentResp(PFCPIEs):
     MAND = (
         PFCPIEType.FailedRuleID.value,
         PFCPIEType.Cause.value,
@@ -1441,7 +1443,7 @@ class QueryURR(PFCPIEs):
 #------------------------------------------------------------------------------#
 
 # IE Type: 86
-class UpdateBARSessionModificationRequest(PFCPIEs):
+class UpdateBARSessionModReq(PFCPIEs):
     MAND = (
         PFCPIEType.BARID.value,
         )
@@ -1551,7 +1553,7 @@ class UpdateNon3GPPAccessForwardingActionInformation(PFCPIEs):
 #------------------------------------------------------------------------------#
 
 # IE Type: 199
-class TSCManagementInformationSessionModificationRequest(PFCPIEs):
+class TSCManagementInformationSessionModReq(PFCPIEs):
     OPT  = (
         PFCPIEType.PortManagementInformationContainer.value,
         PFCPIEType.BridgeManagementInformationContainer.value,
@@ -1612,7 +1614,7 @@ class QueryPacketRateStatus(PFCPIEs):
 #------------------------------------------------------------------------------#
 
 # IE Type: 273
-class PartialFailureInformationSessionModificationResponse(PFCPIEs):
+class PartialFailureInformationSessionModResp(PFCPIEs):
     MAND = (
         PFCPIEType.FailedRuleID.value,
         PFCPIEType.Cause.value,
@@ -1625,7 +1627,7 @@ class PartialFailureInformationSessionModificationResponse(PFCPIEs):
 #------------------------------------------------------------------------------#
 
 # IE Type: 78
-class UsageReportSessionModificationResponse(PFCPIEs):
+class UsageReportSessionModResp(PFCPIEs):
     MAND = (
         PFCPIEType.URRID.value,
         PFCPIEType.URSEQN.value,
@@ -1649,7 +1651,7 @@ class UsageReportSessionModificationResponse(PFCPIEs):
 #------------------------------------------------------------------------------#
 
 # IE Type: 200
-class TSCManagementInformationSessionModificationResponse(PFCPIEs):
+class TSCManagementInformationSessionModResp(PFCPIEs):
     OPT  = (
         PFCPIEType.PortManagementInformationContainer.value,
         PFCPIEType.BridgeManagementInformationContainer.value,
@@ -1662,7 +1664,7 @@ class TSCManagementInformationSessionModificationResponse(PFCPIEs):
 #------------------------------------------------------------------------------#
 
 # IE Type: 264
-class PacketRateStatusReportSessionModificationResponse(PFCPIEs):
+class PacketRateStatusReportSessionModResp(PFCPIEs):
     MAND = (
         PFCPIEType.QERID.value,
         PFCPIEType.PacketRateStatus.value
@@ -1702,7 +1704,7 @@ class PacketRateStatusReport(PFCPIEs):
 #------------------------------------------------------------------------------#
 
 # IE Type: 79
-class UsageReportSessionDeletionResponse(PFCPIEs):
+class UsageReportSessionDeletionResp(PFCPIEs):
     MAND = (
         PFCPIEType.URRID.value,
         PFCPIEType.URSEQN.value,
@@ -1741,7 +1743,7 @@ class DownlinkDataReport(PFCPIEs):
 #------------------------------------------------------------------------------#
 
 # IE Type: 80
-class UsageReportSessionReportRequest(PFCPIEs):
+class UsageReportSessionReportReq(PFCPIEs):
     MAND = (
         PFCPIEType.DownlinkDataServiceInformation.value,
         PFCPIEType.DLDataPacketsSize.value,
@@ -1822,7 +1824,7 @@ class ErrorIndicationReport(PFCPIEs):
 #------------------------------------------------------------------------------#
 
 # IE Type: 201
-class TSCManagementInformationSessionReportRequest(PFCPIEs):
+class TSCManagementInformationSessionReportReq(PFCPIEs):
     OPT  = (
         PFCPIEType.PortManagementInformationContainer.value,
         PFCPIEType.BridgeManagementInformationContainer.value,
@@ -1869,7 +1871,7 @@ class QoSMonitoringReport(PFCPIEs):
 #------------------------------------------------------------------------------#
 
 # IE Type: 12
-class UpdateBARSessionReportResponse(PFCPIEs):
+class UpdateBARSessionReportResp(PFCPIEs):
     MAND = (
         PFCPIEType.BARID.value,
         )
@@ -3346,7 +3348,7 @@ class OCIFlags(Envelope):
 #------------------------------------------------------------------------------#
 
 # IE Type: 111
-class AssociationReleaseRequest(Envelope):
+class AssociationReleaseReq(Envelope):
     _GEN = (
         Uint('spare', bl=6, rep=REPR_HEX),
         Uint('URSS', bl=1),
@@ -4936,7 +4938,7 @@ PFCPIELUT = {
     9 : UpdatePDR,
     10 : UpdateFAR,
     11 : UpdateForwardingParameters,
-    12 : UpdateBARSessionReportResponse,
+    12 : UpdateBARSessionReportResp,
     13 : UpdateURR,
     14 : UpdateQER,
     15 : RemovePDR,
@@ -5002,15 +5004,15 @@ PFCPIELUT = {
     75 : StartTime,
     76 : EndTime,
     77 : QueryURR,
-    78 : UsageReportSessionModificationResponse,
-    79 : UsageReportSessionDeletionResponse,
-    80 : UsageReportSessionReportRequest,
+    78 : UsageReportSessionModResp,
+    79 : UsageReportSessionDeletionResp,
+    80 : UsageReportSessionReportReq,
     81 : URRID,
     82 : LinkedURRID,
     83 : DownlinkDataReport,
     84 : OuterHeaderCreation,
     85 : CreateBAR,
-    86 : UpdateBARSessionModificationRequest,
+    86 : UpdateBARSessionModReq,
     87 : RemoveBAR,
     88 : BARID,
     89 : CPFunctionFeatures,
@@ -5035,7 +5037,7 @@ PFCPIELUT = {
     108 : FARID,
     109 : QERID,
     110 : OCIFlags,
-    111 : AssociationReleaseRequest,
+    111 : AssociationReleaseReq,
     112 : GracefulReleasePeriod,
     113 : PDNType,
     114 : FailedRuleID,
@@ -5122,9 +5124,9 @@ PFCPIELUT = {
     196 : DSTTPortNumber,
     197 : NWTTPortNumber,
     198 : TSNBridgeID,
-    199 : TSCManagementInformationSessionModificationRequest,
-    200 : TSCManagementInformationSessionModificationResponse,
-    201 : TSCManagementInformationSessionReportRequest,
+    199 : TSCManagementInformationSessionModReq,
+    200 : TSCManagementInformationSessionModResp,
+    201 : TSCManagementInformationSessionReportReq,
     202 : PortManagementInformationContainer,
     203 : ClockDriftControlInformation,
     204 : RequestedClockDriftInformation,
@@ -5187,7 +5189,7 @@ PFCPIELUT = {
     261 : ProvideRDSConfigurationInformation,
     262 : RDSConfigurationInformation,
     263 : QueryPacketRateStatus,
-    264 : PacketRateStatusReportSessionModificationResponse,
+    264 : PacketRateStatusReportSessionModResp,
     265 : MPTCPApplicableIndication,
     266 : BridgeManagementInformationContainer,
     267 : UEIPAddressUsageInformation,
@@ -5195,8 +5197,8 @@ PFCPIELUT = {
     269 : ValidityTimer,
     270 : RedundantTransmissionForwardingParameters,
     271 : TransportDelayReporting,
-    272 : PartialFailureInformationSessionEstablishmentResponse,
-    273 : PartialFailureInformationSessionModificationResponse,
+    272 : PartialFailureInformationSessionEstablishmentResp,
+    273 : PartialFailureInformationSessionModResp,
     274 : OffendingIEInformation,
     275 : RATType
     }
@@ -5244,7 +5246,32 @@ PFCPMsgType_dict = {
     57 : 'PFCP Session Report Response',
     }
 
-PFCPMsgType = IntEnum('PFCPMsgType', {strip_name(v) : k for k, v in PFCPMsgType_dict.items()})
+
+class PFCPMsgType(IntEnum):
+    PFCPHeartbeatReq             = 1
+    PFCPHeartbeatResp            = 2
+    PFCPPFDManagementReq         = 3
+    PFCPPFDManagementResp        = 4
+    PFCPAssociationSetupReq      = 5
+    PFCPAssociationSetupResp     = 6
+    PFCPAssociationUpdateReq     = 7
+    PFCPAssociationUpdateResp    = 8
+    PFCPAssociationReleaseReq    = 9
+    PFCPAssociationReleaseResp   = 10
+    PFCPVersionNotSupportedResp  = 11
+    PFCPNodeReportReq            = 12
+    PFCPNodeReportResp           = 13
+    PFCPSessionSetDeletionReq    = 14
+    PFCPSessionSetDeletionResp   = 15
+    PFCPSessionEstablishmentReq  = 50
+    PFCPSessionEstablishmentResp = 51
+    PFCPSessionModificationReq   = 52
+    PFCPSessionModificationResp  = 53
+    PFCPSessionDeletionReq       = 54
+    PFCPSessionDeletionResp      = 55
+    PFCPSessionReportReq         = 56
+    PFCPSessionReportResp        = 57
+
 
 # PFCP Request / Response (success, error)
 PFCPReqResp = {
@@ -5316,9 +5343,9 @@ class PFCPMsg(Envelope):
 # TS 29.244, section 7.4.2: Heartbeat Messages
 #------------------------------------------------------------------------------#
 
-class PFCPHeartbeatRequest(PFCPMsg):
+class PFCPHeartbeatReq(PFCPMsg):
     _GEN = (
-        PFCPHdr('Hdr', val={'S': 0, 'Type': PFCPMsgType.PFCPHeartbeatRequest.value}),
+        PFCPHdr('Hdr', val={'S': 0, 'Type': PFCPMsgType.PFCPHeartbeatReq.value}),
         PFCPIEs('IEs', hier=1,
             mand=[
                 PFCPIEType.RecoveryTimeStamp.value
@@ -5329,9 +5356,9 @@ class PFCPHeartbeatRequest(PFCPMsg):
         )
 
 
-class PFCPHeartbeatResponse(PFCPMsg):
+class PFCPHeartbeatResp(PFCPMsg):
     _GEN = (
-        PFCPHdr('Hdr', val={'S': 0, 'Type': PFCPMsgType.PFCPHeartbeatResponse.value}),
+        PFCPHdr('Hdr', val={'S': 0, 'Type': PFCPMsgType.PFCPHeartbeatResp.value}),
         PFCPIEs('IEs', hier=1,
             mand=[
                 PFCPIEType.RecoveryTimeStamp.value
@@ -5344,9 +5371,9 @@ class PFCPHeartbeatResponse(PFCPMsg):
 # TS 29.244, section 7.4.3: PFCP PFD Management
 #------------------------------------------------------------------------------#
 
-class PFCPPFDManagementRequest(PFCPMsg):
+class PFCPPFDManagementReq(PFCPMsg):
     _GEN = (
-        PFCPHdr('Hdr', val={'S': 0, 'Type': PFCPMsgType.PFCPPFDManagementRequest.value}),
+        PFCPHdr('Hdr', val={'S': 0, 'Type': PFCPMsgType.PFCPPFDManagementReq.value}),
         PFCPIEs('IEs', hier=1,
             opt=[
                 PFCPIEType.ApplicationIDsPFDs.value,
@@ -5355,9 +5382,9 @@ class PFCPPFDManagementRequest(PFCPMsg):
         )
 
 
-class PFCPPFDManagementResponse(PFCPMsg):
+class PFCPPFDManagementResp(PFCPMsg):
     _GEN = (
-        PFCPHdr('Hdr', val={'S': 0, 'Type': PFCPMsgType.PFCPPFDManagementResponse.value}),
+        PFCPHdr('Hdr', val={'S': 0, 'Type': PFCPMsgType.PFCPPFDManagementResp.value}),
         PFCPIEs('IEs', hier=1,
             mand=[
                 PFCPIEType.Cause.value
@@ -5373,9 +5400,9 @@ class PFCPPFDManagementResponse(PFCPMsg):
 # TS 29.244, section 7.4.4: PFCP Association messages
 #------------------------------------------------------------------------------#
 
-class PFCPAssociationSetupRequest(PFCPMsg):
+class PFCPAssociationSetupReq(PFCPMsg):
     _GEN = (
-        PFCPHdr('Hdr', val={'S': 0, 'Type': PFCPMsgType.PFCPAssociationSetupRequest.value}),
+        PFCPHdr('Hdr', val={'S': 0, 'Type': PFCPMsgType.PFCPAssociationSetupReq.value}),
         PFCPIEs('IEs', hier=1,
             mand=[
                 PFCPIEType.NodeID.value,
@@ -5396,9 +5423,9 @@ class PFCPAssociationSetupRequest(PFCPMsg):
         )
 
 
-class PFCPAssociationSetupResponse(PFCPMsg):
+class PFCPAssociationSetupResp(PFCPMsg):
     _GEN = (
-        PFCPHdr('Hdr', val={'S': 0, 'Type': PFCPMsgType.PFCPAssociationSetupResponse.value}),
+        PFCPHdr('Hdr', val={'S': 0, 'Type': PFCPMsgType.PFCPAssociationSetupResp.value}),
         PFCPIEs('IEs', hier=1,
             mand=[
                 PFCPIEType.NodeID.value,
@@ -5419,9 +5446,9 @@ class PFCPAssociationSetupResponse(PFCPMsg):
         )
 
 
-class PFCPAssociationUpdateRequest(PFCPMsg):
+class PFCPAssociationUpdateReq(PFCPMsg):
     _GEN = (
-        PFCPHdr('Hdr', val={'S': 0, 'Type': PFCPMsgType.PFCPAssociationUpdateRequest.value}),
+        PFCPHdr('Hdr', val={'S': 0, 'Type': PFCPMsgType.PFCPAssociationUpdateReq.value}),
         PFCPIEs('IEs', hier=1,
             mand=[
                 PFCPIEType.NodeID.value,
@@ -5429,7 +5456,7 @@ class PFCPAssociationUpdateRequest(PFCPMsg):
             opt=[
                 PFCPIEType.UPFunctionFeatures.value,
                 PFCPIEType.CPFunctionFeatures.value,
-                PFCPIEType.AssociationReleaseRequest.value,
+                PFCPIEType.AssociationReleaseReq.value,
                 PFCPIEType.GracefulReleasePeriod.value,
                 PFCPIEType.PFCPAUReqFlags.value,
                 PFCPIEType.AlternativeSMFIPAddress.value,
@@ -5442,9 +5469,9 @@ class PFCPAssociationUpdateRequest(PFCPMsg):
         )
 
 
-class PFCPAssociationUpdateResponse(PFCPMsg):
+class PFCPAssociationUpdateResp(PFCPMsg):
     _GEN = (
-        PFCPHdr('Hdr', val={'S': 0, 'Type': PFCPMsgType.PFCPAssociationUpdateResponse.value}),
+        PFCPHdr('Hdr', val={'S': 0, 'Type': PFCPMsgType.PFCPAssociationUpdateResp.value}),
         PFCPIEs('IEs', hier=1,
             mand=[
                 PFCPIEType.NodeID.value,
@@ -5458,9 +5485,9 @@ class PFCPAssociationUpdateResponse(PFCPMsg):
         )
 
 
-class PFCPAssociationReleaseRequest(PFCPMsg):
+class PFCPAssociationReleaseReq(PFCPMsg):
     _GEN = (
-        PFCPHdr('Hdr', val={'S': 0, 'Type': PFCPMsgType.PFCPAssociationReleaseRequest.value}),
+        PFCPHdr('Hdr', val={'S': 0, 'Type': PFCPMsgType.PFCPAssociationReleaseReq.value}),
         PFCPIEs('IEs', hier=1,
             mand=[
                 PFCPIEType.NodeID.value,
@@ -5468,9 +5495,9 @@ class PFCPAssociationReleaseRequest(PFCPMsg):
         )
 
 
-class PFCPAssociationReleaseResponse(PFCPMsg):
+class PFCPAssociationReleaseResp(PFCPMsg):
     _GEN = (
-        PFCPHdr('Hdr', val={'S': 0, 'Type': PFCPMsgType.PFCPAssociationReleaseResponse.value}),
+        PFCPHdr('Hdr', val={'S': 0, 'Type': PFCPMsgType.PFCPAssociationReleaseResp.value}),
         PFCPIEs('IEs', hier=1,
             mand=[
                 PFCPIEType.NodeID.value,
@@ -5479,9 +5506,9 @@ class PFCPAssociationReleaseResponse(PFCPMsg):
         )
 
 
-class PFCPVersionNotSupportedResponse(PFCPMsg):
+class PFCPVersionNotSupportedResp(PFCPMsg):
     _GEN = (
-        PFCPHdr('Hdr', val={'S': 0, 'Type': PFCPMsgType.PFCPVersionNotSupportedResponse.value}),
+        PFCPHdr('Hdr', val={'S': 0, 'Type': PFCPMsgType.PFCPVersionNotSupportedResp.value}),
         PFCPIEs('IEs', hier=1)
         )
 
@@ -5490,9 +5517,9 @@ class PFCPVersionNotSupportedResponse(PFCPMsg):
 # TS 29.244, section 7.4.5: PFCP Node Report Procedure
 #------------------------------------------------------------------------------#
 
-class PFCPNodeReportRequest(PFCPMsg):
+class PFCPNodeReportReq(PFCPMsg):
     _GEN = (
-        PFCPHdr('Hdr', val={'S': 0, 'Type': PFCPMsgType.PFCPNodeReportRequest.value}),
+        PFCPHdr('Hdr', val={'S': 0, 'Type': PFCPMsgType.PFCPNodeReportReq.value}),
         PFCPIEs('IEs', hier=1,
             mand=[
                 PFCPIEType.NodeID.value,
@@ -5507,9 +5534,9 @@ class PFCPNodeReportRequest(PFCPMsg):
         )
 
 
-class PFCPNodeReportResponse(PFCPMsg):
+class PFCPNodeReportResp(PFCPMsg):
     _GEN = (
-        PFCPHdr('Hdr', val={'S': 0, 'Type': PFCPMsgType.PFCPNodeReportResponse.value}),
+        PFCPHdr('Hdr', val={'S': 0, 'Type': PFCPMsgType.PFCPNodeReportResp.value}),
         PFCPIEs('IEs', hier=1,
             mand=[
                 PFCPIEType.NodeID.value,
@@ -5525,9 +5552,9 @@ class PFCPNodeReportResponse(PFCPMsg):
 # TS 29.244, section 7.4.6: PFCP Session Set Deletion
 #------------------------------------------------------------------------------#
 
-class PFCPSessionSetDeletionRequest(PFCPMsg):
+class PFCPSessionSetDeletionReq(PFCPMsg):
     _GEN = (
-        PFCPHdr('Hdr', val={'S': 0, 'Type': PFCPMsgType.PFCPSessionSetDeletionRequest.value}),
+        PFCPHdr('Hdr', val={'S': 0, 'Type': PFCPMsgType.PFCPSessionSetDeletionReq.value}),
         PFCPIEs('IEs', hier=1,
             mand=[
                 PFCPIEType.NodeID.value
@@ -5543,9 +5570,9 @@ class PFCPSessionSetDeletionRequest(PFCPMsg):
         )
 
 
-class PFCPSessionSetDeletionResponse(PFCPMsg):
+class PFCPSessionSetDeletionResp(PFCPMsg):
     _GEN = (
-        PFCPHdr('Hdr', val={'S': 0, 'Type': PFCPMsgType.PFCPSessionSetDeletionResponse.value}),
+        PFCPHdr('Hdr', val={'S': 0, 'Type': PFCPMsgType.PFCPSessionSetDeletionResp.value}),
         PFCPIEs('IEs', hier=1,
             mand=[
                 PFCPIEType.NodeID.value,
@@ -5561,9 +5588,9 @@ class PFCPSessionSetDeletionResponse(PFCPMsg):
 # TS 29.244, section 7.5.2: PFCP Session Establishment Request
 #------------------------------------------------------------------------------#
 
-class PFCPSessionEstablishmentRequest(PFCPMsg):
+class PFCPSessionEstablishmentReq(PFCPMsg):
     _GEN = (
-        PFCPHdr('Hdr', val={'S': 1, 'Type': PFCPMsgType.PFCPSessionEstablishmentRequest.value}),
+        PFCPHdr('Hdr', val={'S': 1, 'Type': PFCPMsgType.PFCPSessionEstablishmentReq.value}),
         PFCPIEs('IEs', hier=1,
             mand=[
                 PFCPIEType.NodeID.value,
@@ -5599,9 +5626,9 @@ class PFCPSessionEstablishmentRequest(PFCPMsg):
         )
 
 
-class PFCPSessionEstablishmentResponse(PFCPMsg):
+class PFCPSessionEstablishmentResp(PFCPMsg):
     _GEN = (
-        PFCPHdr('Hdr', val={'S': 1, 'Type': PFCPMsgType.PFCPSessionEstablishmentResponse.value}),
+        PFCPHdr('Hdr', val={'S': 1, 'Type': PFCPMsgType.PFCPSessionEstablishmentResp.value}),
         PFCPIEs('IEs', hier=1,
             mand=[
                 PFCPIEType.NodeID.value,
@@ -5619,7 +5646,7 @@ class PFCPSessionEstablishmentResponse(PFCPMsg):
                 PFCPIEType.CreatedBridgeInfoforTSC.value,
                 PFCPIEType.ATSSSControlParameters.value,
                 PFCPIEType.RDSConfigurationInformation.value,
-                PFCPIEType.PartialFailureInformationSessionEstablishmentResponse.value
+                PFCPIEType.PartialFailureInformationSessionEstablishmentResp.value
                 ])
         )
 
@@ -5628,9 +5655,9 @@ class PFCPSessionEstablishmentResponse(PFCPMsg):
 # TS 29.244, section 7.5.4: PFCP Session Modification Request
 #------------------------------------------------------------------------------#
 
-class PFCPSessionModificationRequest(PFCPMsg):
+class PFCPSessionModificationReq(PFCPMsg):
     _GEN = (
-        PFCPHdr('Hdr', val={'S': 1, 'Type': PFCPMsgType.PFCPSessionModificationRequest.value}),
+        PFCPHdr('Hdr', val={'S': 1, 'Type': PFCPMsgType.PFCPSessionModificationReq.value}),
         PFCPIEs('IEs', hier=1,
             mand=[
                 ],
@@ -5652,7 +5679,7 @@ class PFCPSessionModificationRequest(PFCPMsg):
                 PFCPIEType.UpdateFAR.value,
                 PFCPIEType.UpdateURR.value,
                 PFCPIEType.UpdateQER.value,
-                PFCPIEType.UpdateBARSessionModificationRequest.value,
+                PFCPIEType.UpdateBARSessionModReq.value,
                 PFCPIEType.UpdateTrafficEndpoint.value,
                 PFCPIEType.PFCPSMReqFlags.value,
                 PFCPIEType.QueryURR.value,
@@ -5668,7 +5695,7 @@ class PFCPSessionModificationRequest(PFCPMsg):
                 PFCPIEType.UpdateMAR.value,
                 PFCPIEType.CreateMAR.value,
                 PFCPIEType.NodeID.value,
-                PFCPIEType.TSCManagementInformationSessionModificationRequest.value,
+                PFCPIEType.TSCManagementInformationSessionModReq.value,
                 PFCPIEType.RemoveSRR.value,
                 PFCPIEType.CreateSRR.value,
                 PFCPIEType.UpdateSRR.value,
@@ -5686,9 +5713,9 @@ class PFCPSessionModificationRequest(PFCPMsg):
 # TS 29.244, section 7.5.5: PFCP Session Modification Response
 #------------------------------------------------------------------------------#
 
-class PFCPSessionModificationResponse(PFCPMsg):
+class PFCPSessionModificationResp(PFCPMsg):
     _GEN = (
-        PFCPHdr('Hdr', val={'S': 1, 'Type': PFCPMsgType.PFCPSessionModificationResponse.value}),
+        PFCPHdr('Hdr', val={'S': 1, 'Type': PFCPMsgType.PFCPSessionModificationResp.value}),
         PFCPIEs('IEs', hier=1,
             mand=[
                 PFCPIEType.Cause.value
@@ -5698,15 +5725,15 @@ class PFCPSessionModificationResponse(PFCPMsg):
                 PFCPIEType.CreatedPDR.value,
                 PFCPIEType.LoadControlInformation.value,
                 PFCPIEType.OverloadControlInformation.value,
-                PFCPIEType.UsageReportSessionModificationResponse.value,
+                PFCPIEType.UsageReportSessionModResp.value,
                 PFCPIEType.FailedRuleID.value,
                 PFCPIEType.AdditionalUsageReportsInformation.value,
                 PFCPIEType.CreatedTrafficEndpoint.value,
-                PFCPIEType.TSCManagementInformationSessionModificationResponse.value,
+                PFCPIEType.TSCManagementInformationSessionModResp.value,
                 PFCPIEType.ATSSSControlParameters.value,
                 PFCPIEType.UpdatedPDR.value,
                 PFCPIEType.PacketRateStatusReport.value,
-                PFCPIEType.PartialFailureInformationSessionModificationResponse.value
+                PFCPIEType.PartialFailureInformationSessionModResp.value
                 ])
         )
 
@@ -5715,9 +5742,9 @@ class PFCPSessionModificationResponse(PFCPMsg):
 # TS 29.244, section 7.5.6: PFCP Session Deletion Request
 #------------------------------------------------------------------------------#
 
-class PFCPSessionDeletionRequest(PFCPMsg):
+class PFCPSessionDeletionReq(PFCPMsg):
     _GEN = (
-        PFCPHdr('Hdr', val={'S': 1, 'Type': PFCPMsgType.PFCPSessionDeletionRequest.value}),
+        PFCPHdr('Hdr', val={'S': 1, 'Type': PFCPMsgType.PFCPSessionDeletionReq.value}),
         PFCPIEs('IEs', hier=1)
         )
 
@@ -5726,9 +5753,9 @@ class PFCPSessionDeletionRequest(PFCPMsg):
 # TS 29.244, section 7.5.7: PFCP Session Deletion Response
 #------------------------------------------------------------------------------#
 
-class PFCPSessionDeletionResponse(PFCPMsg):
+class PFCPSessionDeletionResp(PFCPMsg):
     _GEN = (
-        PFCPHdr('Hdr', val={'S': 1, 'Type': PFCPMsgType.PFCPSessionDeletionResponse.value}),
+        PFCPHdr('Hdr', val={'S': 1, 'Type': PFCPMsgType.PFCPSessionDeletionResp.value}),
         PFCPIEs('IEs', hier=1,
             mand=[
                 PFCPIEType.Cause.value
@@ -5737,7 +5764,7 @@ class PFCPSessionDeletionResponse(PFCPMsg):
                 PFCPIEType.OffendingIE.value,
                 PFCPIEType.LoadControlInformation.value,
                 PFCPIEType.OverloadControlInformation.value,
-                PFCPIEType.UsageReportSessionDeletionResponse.value,
+                PFCPIEType.UsageReportSessionDeletionResp.value,
                 PFCPIEType.AdditionalUsageReportsInformation.value,
                 PFCPIEType.PacketRateStatusReport.value,
                 PFCPIEType.SessionReport.value
@@ -5749,16 +5776,16 @@ class PFCPSessionDeletionResponse(PFCPMsg):
 # TS 29.244, section 7.5.8: PFCP Session Report Request
 #------------------------------------------------------------------------------#
 
-class PFCPSessionReportRequest(PFCPMsg):
+class PFCPSessionReportReq(PFCPMsg):
     _GEN = (
-        PFCPHdr('Hdr', val={'S': 1, 'Type': PFCPMsgType.PFCPSessionReportRequest.value}),
+        PFCPHdr('Hdr', val={'S': 1, 'Type': PFCPMsgType.PFCPSessionReportReq.value}),
         PFCPIEs('IEs', hier=1,
             mand=[
                 PFCPIEType.ReportType.value
                 ],
             opt=[
                 PFCPIEType.DownlinkDataReport.value,
-                PFCPIEType.UsageReportSessionReportRequest.value,
+                PFCPIEType.UsageReportSessionReportReq.value,
                 PFCPIEType.ErrorIndicationReport.value,
                 PFCPIEType.LoadControlInformation.value,
                 PFCPIEType.OverloadControlInformation.value,
@@ -5766,7 +5793,7 @@ class PFCPSessionReportRequest(PFCPMsg):
                 PFCPIEType.PFCPSRReqFlags.value,
                 PFCPIEType.FSEID.value,
                 PFCPIEType.PacketRateStatusReport.value,
-                PFCPIEType.TSCManagementInformationSessionReportRequest.value,
+                PFCPIEType.TSCManagementInformationSessionReportReq.value,
                 PFCPIEType.SessionReport.value
                 ])
         )
@@ -5776,16 +5803,16 @@ class PFCPSessionReportRequest(PFCPMsg):
 # TS 29.244, section 7.5.9: PFCP Session Report Response
 #------------------------------------------------------------------------------#
 
-class PFCPSessionReportResponse(PFCPMsg):
+class PFCPSessionReportResp(PFCPMsg):
     _GEN = (
-        PFCPHdr('Hdr', val={'S': 1, 'Type': PFCPMsgType.PFCPSessionReportResponse.value}),
+        PFCPHdr('Hdr', val={'S': 1, 'Type': PFCPMsgType.PFCPSessionReportResp.value}),
         PFCPIEs('IEs', hier=1,
             mand=[
                 PFCPIEType.Cause.value
                 ],
             opt=[
                 PFCPIEType.OffendingIE.value,
-                PFCPIEType.UpdateBARSessionReportResponse.value,
+                PFCPIEType.UpdateBARSessionReportResp.value,
                 PFCPIEType.PFCPSRRspFlags.value,
                 PFCPIEType.FSEID.value,
                 PFCPIEType.FTEID.value,
@@ -5799,29 +5826,29 @@ class PFCPSessionReportResponse(PFCPMsg):
 #------------------------------------------------------------------------------#
 
 PFCPDispatcher = {
-    1 : PFCPHeartbeatRequest,
-    2 : PFCPHeartbeatResponse,
-    3 : PFCPPFDManagementRequest,
-    4 : PFCPPFDManagementResponse,
-    5 : PFCPAssociationSetupRequest,
-    6 : PFCPAssociationSetupResponse,
-    7 : PFCPAssociationUpdateRequest,
-    8 : PFCPAssociationUpdateResponse,
-    9 : PFCPAssociationReleaseRequest,
-    10 : PFCPAssociationReleaseResponse,
-    11 : PFCPVersionNotSupportedResponse,
-    12 : PFCPNodeReportRequest,
-    13 : PFCPNodeReportResponse,
-    14 : PFCPSessionSetDeletionRequest,
-    15 : PFCPSessionSetDeletionResponse,
-    50 : PFCPSessionEstablishmentRequest,
-    51 : PFCPSessionEstablishmentResponse,
-    52 : PFCPSessionModificationRequest,
-    53 : PFCPSessionModificationResponse,
-    54 : PFCPSessionDeletionRequest,
-    55 : PFCPSessionDeletionResponse,
-    56 : PFCPSessionReportRequest,
-    57 : PFCPSessionReportResponse
+    1 : PFCPHeartbeatReq,
+    2 : PFCPHeartbeatResp,
+    3 : PFCPPFDManagementReq,
+    4 : PFCPPFDManagementResp,
+    5 : PFCPAssociationSetupReq,
+    6 : PFCPAssociationSetupResp,
+    7 : PFCPAssociationUpdateReq,
+    8 : PFCPAssociationUpdateResp,
+    9 : PFCPAssociationReleaseReq,
+    10 : PFCPAssociationReleaseResp,
+    11 : PFCPVersionNotSupportedResp,
+    12 : PFCPNodeReportReq,
+    13 : PFCPNodeReportResp,
+    14 : PFCPSessionSetDeletionReq,
+    15 : PFCPSessionSetDeletionResp,
+    50 : PFCPSessionEstablishmentReq,
+    51 : PFCPSessionEstablishmentResp,
+    52 : PFCPSessionModificationReq,
+    53 : PFCPSessionModificationResp,
+    54 : PFCPSessionDeletionReq,
+    55 : PFCPSessionDeletionResp,
+    56 : PFCPSessionReportReq,
+    57 : PFCPSessionReportResp
     }
 
 

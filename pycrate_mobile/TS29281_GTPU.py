@@ -29,8 +29,8 @@
 
 __all__ = [
     # GTPU Messages
-    'GTPUEchoRequest',
-    'GTPUEchoResponse',
+    'GTPUEchoReq',
+    'GTPUEchoResp',
     'GTPUErrorInd',
     'GTPUSuppExtHdrNotif',
     'GTPUEndMarker',
@@ -311,7 +311,7 @@ class _GTPUMsg(Envelope):
 # TS 29.281, section 7.2.1
 #------------------------------------------------------------------------------#
 
-class GTPUEchoRequest(_GTPUMsg):
+class GTPUEchoReq(_GTPUMsg):
     _GEN = (
         GTPUHdr(val={'Type': GTPUType.EchoReq.value}),
         GTPUIEPrivateExt(hier=1, trans=True) # optional
@@ -323,7 +323,7 @@ class GTPUEchoRequest(_GTPUMsg):
 # TS 29.281, section 7.2.2
 #------------------------------------------------------------------------------#
 
-class GTPUEchoResponse(_GTPUMsg):
+class GTPUEchoResp(_GTPUMsg):
     _GEN = (
         GTPUHdr(val={'Type': GTPUType.EchoResp.value}),
         GTPUIERecovery(hier=1),
@@ -394,8 +394,8 @@ class GPDU(Envelope):
 
 
 GTPUDispatcher = {
-    1   : GTPUEchoRequest,
-    2   : GTPUEchoResponse,
+    1   : GTPUEchoReq,
+    2   : GTPUEchoResp,
     26  : GTPUErrorInd,
     31  : GTPUSuppExtHdrNotif,
     253 : GTPUTunnelStatus,
