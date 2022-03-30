@@ -1194,7 +1194,7 @@ class MBMSIPMulticastDistrib(Envelope):
         Uint32('CommonTEID', rep=REPR_HEX),
         Uint('DistribAddrType', bl=2, dic=_AddrType_dict),
         Uint('DistribAddrLen', bl=6),
-        IPAddr('DitribAddr'),
+        IPAddr('DistribAddr'),
         Uint('SrcAddrType', bl=2, dic=_AddrType_dict),
         Uint('SrcAddrLen', bl=6),
         IPAddr('SrcAddr'),
@@ -1202,6 +1202,7 @@ class MBMSIPMulticastDistrib(Envelope):
         )
     
     def __init__(self, *args, **kwargs):
+        Envelope.__init__(self, *args, **kwargs)
         self['DistribAddrLen'].set_valauto(lambda: self['DistribAddr'].get_len())
         self['DistribAddr'].set_blauto(lambda: self['DistribAddrLen'].get_val()<<3)
         self['SrcAddrLen'].set_valauto(lambda: self['SrcAddr'].get_len())
@@ -2036,6 +2037,8 @@ class GTPIEs(Envelope):
     
     def __init__(self, *args, **kwargs):
         Envelope.__init__(self, *args, **kwargs)
+        # set mandatory-only IEs by default
+        self.init_ies(wopt=False)
     
     def _from_char(self, char):
         if self.get_trans():
@@ -2090,12 +2093,15 @@ class GTPIEs(Envelope):
         """add the IE with the given identifier `ie_name` and sets the value `val` 
         (raw bytes buffer or structured data) into its data part
         """
-        ie = self[ie_name]
+        ie = self.__getitem__(ie_name)
         if ie.get_trans():
             ie.set_trans(False)
         if val is not None:
+            # _GTPIE.set_val() takes care of setting the potential specific internal structure
             ie.set_val(val)
         else:
+            # if no specific value is provided, we set the potential specific internal structure
+            # with its default value
             ie.set_ie_class()
     
     def rem_ie(self, ie_name):
@@ -2112,8 +2118,11 @@ class GTPIEs(Envelope):
         """
         # clear the content first
         for ie in self._content:
-            if ie._name in self.OPT and wopt:
-                ie.set_trans(False)
+            if ie._name in self.OPT:
+                if wopt:
+                    ie.set_trans(False)
+                else:
+                    ie.set_trans(True)
             ie.set_ie_class()
 
 
