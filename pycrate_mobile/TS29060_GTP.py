@@ -682,6 +682,8 @@ class RABSetupInfo(Envelope):
         Envelope.set_val(self, val)
     
     def _from_char(self, char):
+        if self.get_trans():
+            return
         if char.len_byte() > 5:
             self['TEIDDataI'].set_trans(False)
             self['RNCAddr'].set_trans(False)
@@ -1921,6 +1923,8 @@ class _GTPIE(Envelope):
             self['Data'].set_val(None)
     
     def _from_char(self, char):
+        if self.get_trans():
+            return
         Envelope._from_char(self, char)
         # check if a sub-structure is available to replace the Data buffer
         typ = self.get_type()
@@ -2036,9 +2040,14 @@ class GTPIEs(Envelope):
     VERIF_MAND = True
     
     def __init__(self, *args, **kwargs):
+        if '_wopt' in kwargs:
+            wopt = kwargs['_wopt']
+            del kwargs['_wopt']
+        else:
+            wopt = False
         Envelope.__init__(self, *args, **kwargs)
-        # set mandatory-only IEs by default
-        self.init_ies(wopt=False)
+        # ensure at least all mandatory IEs are there
+        self.init_ies(wopt=wopt)
     
     def _from_char(self, char):
         if self.get_trans():
@@ -2121,8 +2130,6 @@ class GTPIEs(Envelope):
             if ie._name in self.OPT:
                 if wopt:
                     ie.set_trans(False)
-                else:
-                    ie.set_trans(True)
             ie.set_ie_class()
 
 
