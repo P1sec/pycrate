@@ -433,12 +433,12 @@ def print_pduies(desc):
                 IEs = []
                 for ident in ies('id'):
                     try:
-                        info = '  - %i: %s (%s)'\
+                        info = '  - %2i: %s (%s)'\
                                % (ident,
                                   pythonize_name(ies('id', ident)['Value']._tr._name),
                                   ies('id', ident)['presence'][0].upper())
                     except Exception:
-                        info = '  - %i: [%s] (%s)'\
+                        info = '  - %2i: [%s] (%s)'\
                                % (ident,
                                   ies('id', ident)['Value'].TYPE,
                                   ies('id', ident)['presence'][0].upper())
@@ -455,12 +455,12 @@ def print_pduies(desc):
                 Exts = []
                 for ident in ies('id'):
                     try:
-                        info = '  - %i: %s (%s)'\
+                        info = '  - %2i: %s (%s)'\
                                % (ident,
                                   pythonize_name(ies('id', ident)['Extension']._tr._name),
                                   ies('id', ident)['presence'][0].upper())
                     except Exception:
-                        info = '  - %i: [%s] (%s)'\
+                        info = '  - %2i: [%s] (%s)'\
                                % (ident,
                                   pythonize_name(ies('id', ident)['Extension'].TYPE),
                                   ies('id', ident)['presence'][0].upper())
