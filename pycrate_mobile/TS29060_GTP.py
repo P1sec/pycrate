@@ -2040,14 +2040,9 @@ class GTPIEs(Envelope):
     VERIF_MAND = True
     
     def __init__(self, *args, **kwargs):
-        if '_wopt' in kwargs:
-            wopt = kwargs['_wopt']
-            del kwargs['_wopt']
-        else:
-            wopt = False
         Envelope.__init__(self, *args, **kwargs)
         # ensure at least all mandatory IEs are there
-        self.init_ies(wopt=wopt)
+        self.init_ies(wopt=False)
     
     def _from_char(self, char):
         if self.get_trans():
