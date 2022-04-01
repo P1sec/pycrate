@@ -88,6 +88,14 @@ from pycrate_mobile.TS24007         import (
 
 
 #------------------------------------------------------------------------------#
+# Custom error handlers for decoding and encoding routines
+#------------------------------------------------------------------------------#
+
+class GTPCDecErr(PycrateErr):
+    pass
+
+
+#------------------------------------------------------------------------------#
 # GTP-C header
 # TS 29.274, section 5.1
 #------------------------------------------------------------------------------#
@@ -491,6 +499,8 @@ class Cause(Envelope):
         )
     
     def _from_char(self, char):
+        if self.get_trans():
+            return
         ie = self.get_env()
         if ie is not None and ie[0][1].get_val() >= 6:
             # this is an arbitrary choice to expect the OffendingIE part if 
@@ -1699,7 +1709,7 @@ class MMContext(Alt):
         108: MMContext_UMTSKeyQuadrupletsQuintuplets()
         }
     DEFAULT = Buf('MMContext')
-    _sel = lambda a, b: b.get_env()[0][0].get_val() # GTPCIEHdr['Type']
+    _sel = lambda a, b: b.get_env()[0][0].get_val() # GTPCIE Hdr['Type']
 
 
 #------------------------------------------------------------------------------#
@@ -3823,6 +3833,7 @@ GTPCIETags_dict = {
     }
 
 GTPCIETagDesc_dict = {k: v[2] for k, v in GTPCIETags_dict.items()}
+GTPCIEType = IntEnum('GTPCIEType', {v[0].__name__: k for k, v in GTPCIETags_dict.items()})
 
 
 class GTPCIEHdr(Envelope):
@@ -3848,8 +3859,8 @@ class GTPCIE(Envelope):
     """
     
     _GEN = (
-        GTPCIEHdr(),
-        Buf('GTPCIEData', rep=REPR_HEX, hier=1)
+        GTPCIEHdr('Hdr'),
+        Buf('Data', rep=REPR_HEX, hier=1)
         )
     
     def __init__(self, *args, **kwargs):
@@ -3867,17 +3878,30 @@ class GTPCIE(Envelope):
         return l
     
     def set_val(self, val):
+        data_val = None
         if isinstance(val, (tuple, list)) and val:
             self[0].set_val(val[0])
             self.set_ie_class()
             if len(val) > 1:
-                self[1].set_val(val[1])
-        else:
-            if isinstance(val, dict) and 'GTPCIEHdr' in val:
-                self[0].set_val(val['GTPCIEHdr'])
-                del val['GTPCIEHdr']
+                data_val = val[1]
+        elif isinstance(val, dict) and 'Hdr' in val:
+                # copy the dict to avoid emptying the one passed as args
+                val = dict(val)
+                self[0].set_val(val['Hdr'])
+                del val['Hdr']
                 self.set_ie_class()
+                if val:
+                    data_val = val.popitem()
+        else:
             Envelope.set_val(self, val)
+        if data_val:
+            try:
+                self[1].set_val(data_val)
+            except PycrateErr:
+                # try to restore the default Data buffer
+                buf = Buf('Data', rep=REPR_HEX, hier=1)
+                buf.set_val(data_val)
+                self.replace(self[1], buf)
     
     def _from_char(self, char):
         if self.get_trans():
@@ -3893,22 +3917,22 @@ class GTPCIE(Envelope):
         self[1]._from_char(char)
         char._len_bit = char_lb
     
-    #--------------------------------------------------------------------------#
-    # specific methods to deal with MAND / OPT dict at decoding and encoding
-    #--------------------------------------------------------------------------#
-    
     def set_ie_class(self):
-        # this is were the potential replacement of the generic GTPCIEData happens,
-        # according to the GTPCIEHdr value
-        ie_type = self[0][0].get_val()
-        if ie_type == 254:
-            ie_type = self[0][4].get_val()
-        ie_inst = self[0][3].get_val()
-        ie_data, ie_desc = self._select_ie(ie_type, ie_inst)
-        if ie_data is not None:
-            self.replace(self[1], ie_data)
-        if ie_desc is not None:
-            self._name = ie_desc
+        """replace the default Data buffer with a specifically defined class sub-structure
+        according to the IE Type and Inst values in the Hdr
+        """
+        # this is were the potential replacement of the generic Data happens,
+        # according to the Hdr value
+        if isinstance(self[1], Buf) and self[1]._name == 'Data':
+            ie_type = self[0][0].get_val()
+            if ie_type == 254:
+                ie_type = self[0][4].get_val()
+            ie_inst = self[0][3].get_val()
+            ie_data, ie_desc = self._select_ie(ie_type, ie_inst)
+            if ie_data is not None:
+                self.replace(self[1], ie_data)
+            if ie_desc is not None:
+                self._name = ie_desc
     
     def _select_ie(self, ie_type, ie_inst=0):
         # get the envelope of the IE (GTPCMsg or GTPCIEGrouped) to check 
@@ -3931,7 +3955,7 @@ class GTPCIE(Envelope):
             return None, ie_desc
         else:
             return ie_class(hier=1), ie_desc
-    
+
 
 class GTPCIEs(Sequence):
     """GTPv2-C Grouped Information Element
@@ -3943,10 +3967,11 @@ class GTPCIEs(Sequence):
     VERIF_MAND = True
     
     # Each IE is identified by its Tag + Instance identifiers
-    # Each mandatory IE must be included at least 1 time in the msg
+    # Each mandatory IE must be included at least 1 time in the msg, IE order is 
+    #    not specified 
     # Each C, CO or Optional IE can be included 1 time or more in the msg
     # When linking IE, locally defined (grouped) IE have precedence over 
-    # globally defined IE (defined in GTPCIETags_dict)
+    #    globally defined IE (defined in GTPCIETags_dict)
     
     # Hence a GTPCIEGrouped have 2 dicts:
     # MAND: (Tag, Inst) -> locally or globally defined IE class
@@ -3961,31 +3986,40 @@ class GTPCIEs(Sequence):
     
     def __init__(self, *args, **kwargs):
         Sequence.__init__(self, *args, **kwargs)
-        self._ie_mand = set()
-        for _, ie_name in self.MAND.values():
-            self._ie_mand.add(ie_name)
+        # ensure at least all mandatory IEs are there
+        self._ie_mand = set(self.MAND)
+        for ie in self:
+            self._ie_mand.discard( (ie[0]['Type'].get_val(), ie[0]['Inst'].get_val()) )
+        # add missing mandatory IEs
+        for typ, inst in self._ie_mand:
+            self.add_ie(typ, inst)
+            if isinstance(self[-1][1], GTPCIEs):
+                self[-1][1].init_ies(wopt=False, wpriv=False)
     
     def _from_char(self, char):
         if self.get_trans():
             return
         #
-        self.__init__()
+        if self._content:
+            # reinitialize the Sequence to an empty one
+            self.__init__()
+        # decode the sequence of IEs, whatever they are
         Sequence._from_char(self, char)
         #
         # eventually verify mandatory IE
         if self.VERIF_MAND:
+            self._ie_mand = set(self.MAND)
             for ie in self:
-                if ie._name in self._ie_mand:
-                    self._ie_mand.remove(ie._name)
+                self._ie_mand.discard( (ie[0]['Type'].get_val(), ie[0]['Inst'].get_val()) )
             if self._ie_mand:
-                raise(PycrateErr('{0}: missing mandatory IE(s), {1}'\
-                      .format(self._name, ', '.join(sorted(self._ie_mand)))))
+                raise(GTPCDecErr('{0}: missing mandatory IE(s), {1}'\
+                      .format(self._name, ', '.join([self.MAND[k][1] for k in self._ie_mand]))))
     
     def add_ie(self, ie_type, ie_inst=0, val=None):
         """add the IE of given type `ie_type` and instance `ie_inst` and sets the
         value `val` (raw bytes buffer or structured data) into its data part
         """
-        self.set_val({self.get_num(): {'GTPCIEHdr': {'Type': ie_type, 'Inst': ie_inst}}})
+        self.set_val({self.get_num(): {'Hdr': {'Type': ie_type, 'Inst': ie_inst}}})
         if val is not None:
             self[-1][1].set_val(val)
     
@@ -3998,7 +4032,7 @@ class GTPCIEs(Sequence):
                 break
         
     def init_ies(self, wopt=False, wpriv=False):
-        """initialize all IEs that are mandatory,
+        """re-initialize all IEs that are mandatory,
         adding optional ones if `wopt` is set,
         adding the private extension if `wpriv` is set
         
@@ -4015,6 +4049,7 @@ class GTPCIEs(Sequence):
         if wopt:
             for ie_type in self.OPT:
                 if isinstance(ie_type, tuple):
+                    # this avoids processing the private IE
                     ie_type, ie_inst = ie_type
                     self.add_ie(ie_type, ie_inst)
                     if isinstance(self[-1][1], GTPCIEs):
@@ -4022,6 +4057,28 @@ class GTPCIEs(Sequence):
         # then private extension
         if wpriv and 255 in self.OPT:
             self.add_ie(255)
+    
+    def chk_comp(self):
+        """check the compliance of the sequence of IEs against the list of mandatory
+        IEs and the potential presence of unexpected IEs
+        
+        return 2 sets
+            1st contains the missing mandatory IEs type and instance
+            2nd contains the unexpected (neither mandatory, nor optional) IEs type and instance
+        """
+        # check the sequence of GTPC IEs for errors against the list of mandatory 
+        # and optional IEs
+        mand = set(self.MAND)
+        unex = set()
+        for ie in self:
+            ie_type_inst = ie[0]['Type'].get_val(), ie[0]['Inst'].get_val()
+            if ie_type_inst[0] == 255:
+                ie_type_inst = 255
+            if ie_type_inst in mand:
+                mand.remove(ie_type)
+            elif ie_type_inst not in self.OPT:
+                unex.add(ie_type)
+        return mand, unex
 
 
 #------------------------------------------------------------------------------#
@@ -7458,6 +7515,7 @@ class GTPCMsgType(IntEnum):
 ERR_GTPC_BUF_TOO_SHORT = 1
 ERR_GTPC_BUF_INVALID   = 2
 ERR_GTPC_TYPE_NONEXIST = 3
+ERR_GTPC_MAND_IE_MISS  = 4
 
 
 def parse_GTPC(buf):
@@ -7477,8 +7535,17 @@ def parse_GTPC(buf):
         return None, ERR_GTPC_TYPE_NONEXIST
     try:
         Msg.from_bytes(buf)
-    except Exception:
-        return None, ERR_GTPC_BUF_INVALID
+    except GTPCDecErr:
+        GTPCIEs.VERIF_MAND = False
+        Msg = Msg.__class__()
+        try:
+            Msg.from_bytes(buf)
+            GTPCIEs.VERIF_MAND = True
+        except Exception:
+            GTPCIEs.VERIF_MAND = True
+            return None, ERR_GTPC_BUF_INVALID
+        else:
+            return Msg, ERR_GTPC_MAND_IE_MISS
     else:
         # TODO: support piggy-backed GTP-C message (see 5.5.1 and P flag)
         return Msg, 0

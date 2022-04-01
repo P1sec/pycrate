@@ -81,6 +81,14 @@ from pycrate_mobile.TS24008_IE  import PLMN, IPAddr
 
 
 #------------------------------------------------------------------------------#
+# Custom error handlers for decoding and encoding routines
+#------------------------------------------------------------------------------#
+
+class PFCPDecErr(PycrateErr):
+    pass
+
+
+#------------------------------------------------------------------------------#
 # some utilities and generic structures
 #------------------------------------------------------------------------------#
 
@@ -484,9 +492,6 @@ class PFCPIE(Envelope):
     """PFCP Information Element
     """
     
-    # this is to decode the content of the Data into each specific IE structure
-    DECODE_IE_DATA = True
-    
     _GEN = (
         Uint16('Type', val=0, dic=PFCPIEType_dict),
         Uint16('Len'),
@@ -496,84 +501,165 @@ class PFCPIE(Envelope):
     
     def __init__(self, *args, **kwargs):
         Envelope.__init__(self, *args, **kwargs)
-        self['Len'].set_valauto(lambda: self['Data'].get_len() + (2 if self['Type'].get_val() & 0x8000 else 0))
-        self['EID'].set_transauto(lambda: False if self['Type'].get_val() & 0x8000 else True)
-        self['Data'].set_blauto(lambda: (self['Len'].get_val() - (2 if self['Type'].get_val() & 0x8000 else 0)) << 3)
+        self[1].set_valauto(lambda: self[3].get_len() + (2 if self[0].get_val() & 0x8000 else 0))
+        self[2].set_transauto(lambda: False if self[0].get_val() & 0x8000 else True)
+        self[3].set_blauto(lambda: (self[1].get_val() - (2 if self[0].get_val() & 0x8000 else 0)) << 3)
     
     def set_val(self, val):
-        t, d = None, None
-        if isinstance(val, (tuple, list)):
-            if len(val) > 3:
-                t, d = val[0], val[3]
-            elif val:
-                t = val[0]
-        elif isinstance(val, dict):
-            if 'Type' in val:
-                t = val['Type']
-            if 'Data' in val:
-                d = val['Data']
-        if t and t in PFCPIELUT and not isinstance(d, bytes_types):
-            self.set_ie_class(t)
-        Envelope.set_val(self, val)
+        data_val = None
+        if isinstance(val, (tuple, list)) and len(val) > 3:
+            self[0].set_val(val[0])
+            self.set_ie_class()
+            self[1].set_val(val[1])
+            self[2].set_val(val[2])
+            data_val = val[3]
+        elif isinstance(val, dict) and 'Type' in val:
+            data_val = dict(val)
+            hdr_val  = {k: data_val.pop(k) for k in ('Type', 'Len', 'EID') if k in data_val}
+            Envelope.set_val(self, hdr_val)
+            self.set_ie_class()
+        else:
+            Envelope.set_val(self, val)
+        if data_val:
+            try:
+                self[3].set_val(data_val)
+            except PycrateErr:
+                # try to restore the default Data buffer
+                buf = Buf('Data', rep=REPR_HEX)
+                buf.set_blauto(lambda: (self[1].get_val() - (2 if self[0].get_val() & 0x8000 else 0)) << 3)
+                buf.set_val(data_val)
+                self.replace(self[3], buf)
     
     def _from_char(self, char):
-        if self.DECODE_IE_DATA:
-            t = char.to_uint(16)
-            if t in PFCPIELUT:
-                self.set_ie_class(t)
-        Envelope._from_char(self, char)
+        if self.get_trans():
+            return
+        self[0]._from_char(char)
+        self[1]._from_char(char)
+        self[2]._from_char(char)
+        self.set_ie_class()
+        self[3]._from_char(char)
     
-    def set_ie_class(self, t):
-        """replace the default Data buffer with a specifically defined class structure
-        according to the IE Type value `t'
+    def set_ie_class(self):
+        """replace the default Data buffer with a specifically defined class sub-structure
+        according to the IE Type value
         """
-        IE = PFCPIELUT[t]('Data')
-        if not hasattr(IE, '_bl') or IE._bl is None:
-            IE.set_blauto(lambda: (self['Len'].get_val() - (2 if self['Type'].get_val() & 0x8000 else 0)) << 3)
-        self.replace(self['Data'], IE)
+        if isinstance(self[3], Buf) and self[3]._name == 'Data': 
+            ie_type = self[0].get_val()
+            if ie_type in PFCPIELUT:
+                # We instantiate the sub-structure for the IE data
+                # and provide the most appropriate naming to it (as we have some IEs 
+                # that may use the same structure) 
+                ie = PFCPIELUT[ie_type]()
+                if not hasattr(ie, '_bl') or ie._bl is None:
+                    ie.set_blauto(lambda: (self[1].get_val() - (2 if self[0].get_val() & 0x8000 else 0)) << 3)
+                self.replace(self[3], ie)
 
 
 class PFCPIEs(Sequence):
     """PFCP Grouped Information Element
     """
-    # for mandatory / optional IE types
-    MAND = ()
-    OPT  = ()
-    #
+    
     _GEN = PFCPIE()
+    
+    # this is to raise in case not all mandatory IEs are set in the grouped IE
+    VERIF_MAND = True
+    
+    # Each IE is identified by its Type
+    # Each mandatory IE must be included at least 1 time in the msg, IE order is 
+    #    not specified
+    # Each C, CO or Optional IE can be included 1 time or more in the msg
+    
+    # This defines sets of mandatory or optional (whether conditional or not) 
+    # IE types
+    MAND = {}
+    OPT  = {}
     
     def __init__(self, *args, **kwargs):
         Sequence.__init__(self, *args, **kwargs)
-        if 'mand' in kwargs:
-            ids = kwargs['mand']
-            assert( isinstance(ids, (tuple, list)) and all([isinstance(i, integer_types) for i in ids]) )
-            self.MAND = tuple(ids)
-        if 'opt' in kwargs:
-            ids = kwargs['opt']
-            assert( isinstance(ids, (tuple, list)) and all([isinstance(i, integer_types) for i in ids]) )
-            self.OPT = tuple(ids)
+        # ensure at least all mandatory IEs are there
+        self._ie_mand = set(self.MAND)
+        for ie in self:
+            self._ie_mand.discard( ie['Type'].get_val() )
+        # add missing mandatory IEs
+        for typ in self._ie_mand:
+            self.add_ie(typ)
+            if isinstance(self[-1], PFCPIEs):
+                self[-1].init_ies(wopt=False)
+    
+    def _from_char(self, char):
+        if self.get_trans():
+            return
+        #
+        if self._content:
+            # reinitialize the Sequence to an empty one
+            self.__init__()
+        # decode the sequence of IEs, whatever they are
+        Sequence._from_char(self, char)
+        #
+        # eventually verify mandatory IE
+        if self.VERIF_MAND:
+            self._ie_mand = set(self.MAND)
+            for ie in self:
+                self._ie_mand.discard( ie['Type'].get_val() )
+            if self._ie_mand:
+                raise(PFCPDecErr('{0}: missing mandatory IE(s), {1}'\
+                      .format(self._name, ', '.join(['%i (%s)' % (i, PFCPIEType_dict[i]) for i in self._ie_mand]))))
+    
+    def add_ie(self, ie_type, val=None):
+        """add the IE of given type `ie_type` and sets the value `val` (raw bytes 
+        buffer or structured data) into its data part
+        """
+        if val is not None:
+            self.set_val({self.get_num(): {'Type': ie_type, 'Data': val}})
+        else:
+            self.set_val({self.get_num(): {'Type': ie_type}})
+    
+    def rem_ie(self, ie_type):
+        """remove the IE of given type `ie_type`
+        """
+        for ie in self._content[::-1]:
+            if ie['Type'].get_val() == ie_type:
+                self._content.remove(ie)
+                break
+    
+    def init_ies(self, wopt=False, **kwargs):
+        """re-initialize all IEs that are mandatory,
+        adding optional ones if `wopt` is set
+        
+        This is called recursively on all internal GroupedIEs, too.
+        """
+        # clear the content first
+        self.clear()
+        # init all mandatory IEs
+        for ie_type in self.MAND:
+            self.add_ie(ie_type)
+            if isinstance(self[-1], PFCPIEs):
+                self[-1].init_ies(wopt)
+        # then optional IEs
+        if wopt:
+            for ie_type in self.OPT:
+                self.add_ie(ie_type)
+                if isinstance(self[-1], PFCPIEs):
+                    self[-1].init_ies(wopt)
     
     def chk_comp(self):
         """check the compliance of the sequence of IEs against the list of mandatory
         IEs and the potential presence of unexpected IEs
         
-        return 2 lists
-            1st contains the list of missing mandatory IE types
-            2nd contains the list of unexpected IE types
+        return 2 sets
+            1st contains the missing mandatory IEs type
+            2nd contains the unexpected (neither mandatory, nor optional) IEs type
         """
         # check the sequence of PFCP IEs for errors against the list of mandatory 
         # and optional IEs
-        mand = list(self.MAND)
-        opt  = list(self.OPT)
-        unex = []
-        if ie in self:
+        mand = set(self.MAND)
+        unex = set()
+        for ie in self:
             ie_type = ie['Type'].get_val()
             if ie_type in mand:
                 mand.remove(ie_type)
-            elif ie_type in opt:
-                opt.remove(ie_type)
-            else:
-                unex.append(ie_type)
+            elif ie_type not in self.OPT:
+                unex.add(ie_type)
         return mand, unex
 
 
@@ -5204,6 +5290,7 @@ PFCPIELUT = {
     }
 
 
+# this is only to ensure we are consistent between PFCPIEType Enum and this PFCPIELUT dict
 def _chk_ies():
     for ie in PFCPIEType: 
         if ie.value not in PFCPIELUT: 
@@ -5211,6 +5298,8 @@ def _chk_ies():
         else:
             if PFCPIELUT[ie.value].__name__ != ie.name: 
                 print('mismatching IE name: %i, %s - %s' % (ie.value, ie.name, PFCPIELUT[ie.value].__name__)) 
+
+#_chk_ies()
 
 
 #------------------------------------------------------------------------------#
@@ -5336,34 +5425,41 @@ class PFCPMsg(Envelope):
     
     def __init__(self, *args, **kwargs):
         Envelope.__init__(self, *args, **kwargs)
-        self['IEs'].set_blauto(lambda: (self['Hdr']['Len'].get_val() - (12 if self['Hdr']['S'].get_val() else 4)) << 3)
+        self[1].set_blauto(lambda: (self[0]['Len'].get_val() - (12 if self[0]['S'].get_val() else 4)) << 3)
 
 
 #------------------------------------------------------------------------------#
 # TS 29.244, section 7.4.2: Heartbeat Messages
 #------------------------------------------------------------------------------#
 
+class PFCPHeartbeatReqIEs(PFCPIEs):
+    MAND = {
+        PFCPIEType.RecoveryTimeStamp.value
+        }
+    OPT = {
+        PFCPIEType.SourceIPAddress.value
+        }
+
+
 class PFCPHeartbeatReq(PFCPMsg):
     _GEN = (
         PFCPHdr('Hdr', val={'S': 0, 'Type': PFCPMsgType.PFCPHeartbeatReq.value}),
-        PFCPIEs('IEs', hier=1,
-            mand=[
-                PFCPIEType.RecoveryTimeStamp.value
-                ],
-            opt=[
-                PFCPIEType.SourceIPAddress.value
-                ])
+        PFCPHeartbeatReqIEs(hier=1)
         )
+
+
+class PFCPHeartbeatRespIEs(PFCPIEs):
+    MAND = {
+        PFCPIEType.RecoveryTimeStamp.value
+        }
+    OPT = {
+        }
 
 
 class PFCPHeartbeatResp(PFCPMsg):
     _GEN = (
         PFCPHdr('Hdr', val={'S': 0, 'Type': PFCPMsgType.PFCPHeartbeatResp.value}),
-        PFCPIEs('IEs', hier=1,
-            mand=[
-                PFCPIEType.RecoveryTimeStamp.value
-                ],
-            opt=[])
+        PFCPHeartbeatRespIEs(hier=1)
         )
 
 
@@ -5371,28 +5467,34 @@ class PFCPHeartbeatResp(PFCPMsg):
 # TS 29.244, section 7.4.3: PFCP PFD Management
 #------------------------------------------------------------------------------#
 
+class PFCPPFDManagementReqIEs(PFCPIEs):
+    OPT = {
+        PFCPIEType.ApplicationIDsPFDs.value,
+        PFCPIEType.NodeID.value
+        }
+
+
 class PFCPPFDManagementReq(PFCPMsg):
     _GEN = (
         PFCPHdr('Hdr', val={'S': 0, 'Type': PFCPMsgType.PFCPPFDManagementReq.value}),
-        PFCPIEs('IEs', hier=1,
-            opt=[
-                PFCPIEType.ApplicationIDsPFDs.value,
-                PFCPIEType.NodeID.value
-                ])
+        PFCPPFDManagementReqIEs(hier=1)
         )
+
+
+class PFCPPFDManagementRespIEs(PFCPIEs):
+    MAND = {
+        PFCPIEType.Cause.value
+        }
+    OPT = {
+        PFCPIEType.OffendingIE.value,
+        PFCPIEType.NodeID.value
+        }
 
 
 class PFCPPFDManagementResp(PFCPMsg):
     _GEN = (
         PFCPHdr('Hdr', val={'S': 0, 'Type': PFCPMsgType.PFCPPFDManagementResp.value}),
-        PFCPIEs('IEs', hier=1,
-            mand=[
-                PFCPIEType.Cause.value
-                ],
-            opt=[
-                PFCPIEType.OffendingIE.value,
-                PFCPIEType.NodeID.value
-                ])
+        PFCPPFDManagementRespIEs(hier=1)
         )
 
 
@@ -5400,116 +5502,134 @@ class PFCPPFDManagementResp(PFCPMsg):
 # TS 29.244, section 7.4.4: PFCP Association messages
 #------------------------------------------------------------------------------#
 
+class PFCPAssociationSetupReqIEs(PFCPIEs):
+    MAND = {
+        PFCPIEType.NodeID.value,
+        PFCPIEType.RecoveryTimeStamp.value
+        }
+    OPT = {
+        PFCPIEType.UPFunctionFeatures.value,
+        PFCPIEType.CPFunctionFeatures.value,
+        PFCPIEType.AlternativeSMFIPAddress.value,
+        PFCPIEType.SMFSetID.value,
+        PFCPIEType.SessionRetentionInformation.value,
+        PFCPIEType.UEIPAddressPoolInformation.value,
+        PFCPIEType.GTPUPathQoSControlInformation.value,
+        PFCPIEType.ClockDriftControlInformation.value,
+        PFCPIEType.NFInstanceID.value,
+        PFCPIEType.PFCPASReqFlags.value
+        }
+
+
 class PFCPAssociationSetupReq(PFCPMsg):
     _GEN = (
         PFCPHdr('Hdr', val={'S': 0, 'Type': PFCPMsgType.PFCPAssociationSetupReq.value}),
-        PFCPIEs('IEs', hier=1,
-            mand=[
-                PFCPIEType.NodeID.value,
-                PFCPIEType.RecoveryTimeStamp.value
-                ],
-            opt=[
-                PFCPIEType.UPFunctionFeatures.value,
-                PFCPIEType.CPFunctionFeatures.value,
-                PFCPIEType.AlternativeSMFIPAddress.value,
-                PFCPIEType.SMFSetID.value,
-                PFCPIEType.SessionRetentionInformation.value,
-                PFCPIEType.UEIPAddressPoolInformation.value,
-                PFCPIEType.GTPUPathQoSControlInformation.value,
-                PFCPIEType.ClockDriftControlInformation.value,
-                PFCPIEType.NFInstanceID.value,
-                PFCPIEType.PFCPASReqFlags.value
-                ])
+        PFCPAssociationSetupReqIEs(hier=1)
         )
+
+
+class PFCPAssociationSetupRespIEs(PFCPIEs):
+    MAND = {
+        PFCPIEType.NodeID.value,
+        PFCPIEType.Cause.value,
+        PFCPIEType.RecoveryTimeStamp.value
+        }
+    OPT = {
+        PFCPIEType.UPFunctionFeatures.value,
+        PFCPIEType.CPFunctionFeatures.value,
+        PFCPIEType.AlternativeSMFIPAddress.value,
+        PFCPIEType.SMFSetID.value,
+        PFCPIEType.PFCPASRspFlags.value,
+        PFCPIEType.ClockDriftControlInformation.value,
+        PFCPIEType.UEIPAddressPoolInformation.value,
+        PFCPIEType.GTPUPathQoSControlInformation.value,
+        PFCPIEType.NFInstanceID.value
+        }
 
 
 class PFCPAssociationSetupResp(PFCPMsg):
     _GEN = (
         PFCPHdr('Hdr', val={'S': 0, 'Type': PFCPMsgType.PFCPAssociationSetupResp.value}),
-        PFCPIEs('IEs', hier=1,
-            mand=[
-                PFCPIEType.NodeID.value,
-                PFCPIEType.Cause.value,
-                PFCPIEType.RecoveryTimeStamp.value
-                ],
-            opt=[
-                PFCPIEType.UPFunctionFeatures.value,
-                PFCPIEType.CPFunctionFeatures.value,
-                PFCPIEType.AlternativeSMFIPAddress.value,
-                PFCPIEType.SMFSetID.value,
-                PFCPIEType.PFCPASRspFlags.value,
-                PFCPIEType.ClockDriftControlInformation.value,
-                PFCPIEType.UEIPAddressPoolInformation.value,
-                PFCPIEType.GTPUPathQoSControlInformation.value,
-                PFCPIEType.NFInstanceID.value
-                ])
+        PFCPAssociationSetupRespIEs(hier=1)
         )
+
+
+class PFCPAssociationUpdateReqIEs(PFCPIEs):
+    MAND = {
+        PFCPIEType.NodeID.value
+        }
+    OPT = {
+        PFCPIEType.UPFunctionFeatures.value,
+        PFCPIEType.CPFunctionFeatures.value,
+        PFCPIEType.AssociationReleaseReq.value,
+        PFCPIEType.GracefulReleasePeriod.value,
+        PFCPIEType.PFCPAUReqFlags.value,
+        PFCPIEType.AlternativeSMFIPAddress.value,
+        PFCPIEType.SMFSetID.value,
+        PFCPIEType.ClockDriftControlInformation.value,
+        PFCPIEType.UEIPAddressPoolInformation.value,
+        PFCPIEType.GTPUPathQoSControlInformation.value,
+        PFCPIEType.UEIPAddressUsageInformation.value
+        }
 
 
 class PFCPAssociationUpdateReq(PFCPMsg):
     _GEN = (
         PFCPHdr('Hdr', val={'S': 0, 'Type': PFCPMsgType.PFCPAssociationUpdateReq.value}),
-        PFCPIEs('IEs', hier=1,
-            mand=[
-                PFCPIEType.NodeID.value,
-                ],
-            opt=[
-                PFCPIEType.UPFunctionFeatures.value,
-                PFCPIEType.CPFunctionFeatures.value,
-                PFCPIEType.AssociationReleaseReq.value,
-                PFCPIEType.GracefulReleasePeriod.value,
-                PFCPIEType.PFCPAUReqFlags.value,
-                PFCPIEType.AlternativeSMFIPAddress.value,
-                PFCPIEType.SMFSetID.value,
-                PFCPIEType.ClockDriftControlInformation.value,
-                PFCPIEType.UEIPAddressPoolInformation.value,
-                PFCPIEType.GTPUPathQoSControlInformation.value,
-                PFCPIEType.UEIPAddressUsageInformation.value
-                ])
+        PFCPAssociationUpdateReqIEs(hier=1)
         )
+
+
+class PFCPAssociationUpdateRespIEs(PFCPIEs):
+    MAND = {
+        PFCPIEType.NodeID.value,
+        PFCPIEType.Cause.value
+        }
+    OPT = {
+        PFCPIEType.UPFunctionFeatures.value,
+        PFCPIEType.CPFunctionFeatures.value,
+        PFCPIEType.UEIPAddressUsageInformation.value
+        }
 
 
 class PFCPAssociationUpdateResp(PFCPMsg):
     _GEN = (
         PFCPHdr('Hdr', val={'S': 0, 'Type': PFCPMsgType.PFCPAssociationUpdateResp.value}),
-        PFCPIEs('IEs', hier=1,
-            mand=[
-                PFCPIEType.NodeID.value,
-                PFCPIEType.Cause.value
-                ],
-            opt=[
-                PFCPIEType.UPFunctionFeatures.value,
-                PFCPIEType.CPFunctionFeatures.value,
-                PFCPIEType.UEIPAddressUsageInformation.value
-                ])
+        PFCPAssociationUpdateRespIEs(hier=1)
         )
+
+
+class PFCPAssociationReleaseReqIEs(PFCPIEs):
+    MAND = {
+        PFCPIEType.NodeID.value
+        }
 
 
 class PFCPAssociationReleaseReq(PFCPMsg):
     _GEN = (
         PFCPHdr('Hdr', val={'S': 0, 'Type': PFCPMsgType.PFCPAssociationReleaseReq.value}),
-        PFCPIEs('IEs', hier=1,
-            mand=[
-                PFCPIEType.NodeID.value,
-                ])
+        PFCPAssociationReleaseReqIEs(hier=1)
         )
+
+
+class PFCPAssociationReleaseRespIEs(PFCPIEs):
+    MAND = {
+        PFCPIEType.NodeID.value,
+        PFCPIEType.Cause.value
+        }
 
 
 class PFCPAssociationReleaseResp(PFCPMsg):
     _GEN = (
         PFCPHdr('Hdr', val={'S': 0, 'Type': PFCPMsgType.PFCPAssociationReleaseResp.value}),
-        PFCPIEs('IEs', hier=1,
-            mand=[
-                PFCPIEType.NodeID.value,
-                PFCPIEType.Cause.value
-                ])
+        PFCPAssociationReleaseRespIEs(hier=1)
         )
 
 
 class PFCPVersionNotSupportedResp(PFCPMsg):
     _GEN = (
         PFCPHdr('Hdr', val={'S': 0, 'Type': PFCPMsgType.PFCPVersionNotSupportedResp.value}),
-        PFCPIEs('IEs', hier=1)
+        PFCPIEs('PFCPVersionNotSupportedRespIEs', hier=1)
         )
 
 
@@ -5517,34 +5637,40 @@ class PFCPVersionNotSupportedResp(PFCPMsg):
 # TS 29.244, section 7.4.5: PFCP Node Report Procedure
 #------------------------------------------------------------------------------#
 
+class PFCPNodeReportReqIEs(PFCPIEs):
+    MAND = {
+        PFCPIEType.NodeID.value,
+        PFCPIEType.NodeReportType.value
+        }
+    OPT = {
+        PFCPIEType.UserPlanePathFailureReport.value,
+        PFCPIEType.UserPlanePathRecoveryReport.value,
+        PFCPIEType.ClockDriftReport.value,
+        PFCPIEType.GTPUPathQoSReport.value
+        }
+
+
 class PFCPNodeReportReq(PFCPMsg):
     _GEN = (
         PFCPHdr('Hdr', val={'S': 0, 'Type': PFCPMsgType.PFCPNodeReportReq.value}),
-        PFCPIEs('IEs', hier=1,
-            mand=[
-                PFCPIEType.NodeID.value,
-                PFCPIEType.NodeReportType.value
-                ],
-            opt=[
-                PFCPIEType.UserPlanePathFailureReport.value,
-                PFCPIEType.UserPlanePathRecoveryReport.value,
-                PFCPIEType.ClockDriftReport.value,
-                PFCPIEType.GTPUPathQoSReport.value
-                ])
+        PFCPNodeReportReqIEs(hier=1)
         )
+
+
+class PFCPNodeReportRespIEs(PFCPIEs):
+    MAND = {
+        PFCPIEType.NodeID.value,
+        PFCPIEType.Cause.value
+        }
+    OPT = {
+        PFCPIEType.OffendingIE.value
+        }
 
 
 class PFCPNodeReportResp(PFCPMsg):
     _GEN = (
         PFCPHdr('Hdr', val={'S': 0, 'Type': PFCPMsgType.PFCPNodeReportResp.value}),
-        PFCPIEs('IEs', hier=1,
-            mand=[
-                PFCPIEType.NodeID.value,
-                PFCPIEType.Cause.value
-                ],
-            opt=[
-                PFCPIEType.OffendingIE.value
-                ])
+        PFCPNodeReportRespIEs(hier=1)
         )
 
 
@@ -5552,35 +5678,36 @@ class PFCPNodeReportResp(PFCPMsg):
 # TS 29.244, section 7.4.6: PFCP Session Set Deletion
 #------------------------------------------------------------------------------#
 
+class PFCPSessionSetDeletionReqIEs(PFCPIEs):
+    MAND = {
+        PFCPIEType.NodeID.value
+        }
+    OPT = {
+        PFCPIEType.FQCSID.value # which can be duplicated up to 5 times... crappy 3gpp specification !
+        }
+
+
 class PFCPSessionSetDeletionReq(PFCPMsg):
     _GEN = (
         PFCPHdr('Hdr', val={'S': 0, 'Type': PFCPMsgType.PFCPSessionSetDeletionReq.value}),
-        PFCPIEs('IEs', hier=1,
-            mand=[
-                PFCPIEType.NodeID.value
-                ],
-            opt=[
-                PFCPIEType.FQCSID.value,
-                PFCPIEType.FQCSID.value,
-                PFCPIEType.FQCSID.value,
-                PFCPIEType.FQCSID.value,
-                PFCPIEType.FQCSID.value,
-                PFCPIEType.FQCSID.value,
-                ])
+        PFCPSessionSetDeletionReqIEs(hier=1)
         )
+
+
+class PFCPSessionSetDeletionRespIEs(PFCPIEs):
+    MAND = {
+        PFCPIEType.NodeID.value,
+        PFCPIEType.Cause.value
+        }
+    OPT = {
+        PFCPIEType.OffendingIE.value
+        }
 
 
 class PFCPSessionSetDeletionResp(PFCPMsg):
     _GEN = (
         PFCPHdr('Hdr', val={'S': 0, 'Type': PFCPMsgType.PFCPSessionSetDeletionResp.value}),
-        PFCPIEs('IEs', hier=1,
-            mand=[
-                PFCPIEType.NodeID.value,
-                PFCPIEType.Cause.value
-                ],
-            opt=[
-                PFCPIEType.OffendingIE.value
-                ])
+        PFCPSessionSetDeletionRespIEs(hier=1)
         )
 
 
@@ -5588,66 +5715,68 @@ class PFCPSessionSetDeletionResp(PFCPMsg):
 # TS 29.244, section 7.5.2: PFCP Session Establishment Request
 #------------------------------------------------------------------------------#
 
+class PFCPSessionEstablishmentReqIEs(PFCPIEs):
+    MAND = {
+        PFCPIEType.NodeID.value,
+        PFCPIEType.FSEID.value,
+        PFCPIEType.CreatePDR.value,
+        PFCPIEType.CreateFAR.value
+        }
+    OPT = {
+        PFCPIEType.CreateURR.value,
+        PFCPIEType.CreateQER.value,
+        PFCPIEType.CreateBAR.value,
+        PFCPIEType.CreateTrafficEndpoint.value,
+        PFCPIEType.PDNType.value,
+        PFCPIEType.FQCSID.value, # which can be duplicated up to 5 times...
+        PFCPIEType.UserPlaneInactivityTimer.value,
+        PFCPIEType.UserID.value,
+        PFCPIEType.TraceInformation.value,
+        PFCPIEType.APNDNN.value,
+        PFCPIEType.CreateMAR.value,
+        PFCPIEType.PFCPSEReqFlags.value,
+        PFCPIEType.CreateBridgeInfoforTSC.value,
+        PFCPIEType.CreateSRR.value,
+        PFCPIEType.ProvideATSSSControlInformation.value,
+        PFCPIEType.RecoveryTimeStamp.value,
+        PFCPIEType.SNSSAI.value,
+        PFCPIEType.ProvideRDSConfigurationInformation.value,
+        PFCPIEType.RATType.value
+        }
+
+
 class PFCPSessionEstablishmentReq(PFCPMsg):
     _GEN = (
         PFCPHdr('Hdr', val={'S': 1, 'Type': PFCPMsgType.PFCPSessionEstablishmentReq.value}),
-        PFCPIEs('IEs', hier=1,
-            mand=[
-                PFCPIEType.NodeID.value,
-                PFCPIEType.FSEID.value,
-                PFCPIEType.CreatePDR.value,
-                PFCPIEType.CreateFAR.value
-                ],
-            opt=[
-                PFCPIEType.CreateURR.value,
-                PFCPIEType.CreateQER.value,
-                PFCPIEType.CreateBAR.value,
-                PFCPIEType.CreateTrafficEndpoint.value,
-                PFCPIEType.PDNType.value,
-                PFCPIEType.FQCSID.value,
-                PFCPIEType.FQCSID.value,
-                PFCPIEType.FQCSID.value,
-                PFCPIEType.FQCSID.value,
-                PFCPIEType.FQCSID.value,
-                PFCPIEType.UserPlaneInactivityTimer.value,
-                PFCPIEType.UserID.value,
-                PFCPIEType.TraceInformation.value,
-                PFCPIEType.APNDNN.value,
-                PFCPIEType.CreateMAR.value,
-                PFCPIEType.PFCPSEReqFlags.value,
-                PFCPIEType.CreateBridgeInfoforTSC.value,
-                PFCPIEType.CreateSRR.value,
-                PFCPIEType.ProvideATSSSControlInformation.value,
-                PFCPIEType.RecoveryTimeStamp.value,
-                PFCPIEType.SNSSAI.value,
-                PFCPIEType.ProvideRDSConfigurationInformation.value,
-                PFCPIEType.RATType.value,
-                ])
+        PFCPSessionEstablishmentReqIEs(hier=1)
         )
+
+
+class PFCPSessionEstablishmentRespIEs(PFCPIEs):
+    MAND = {
+        PFCPIEType.NodeID.value,
+        PFCPIEType.Cause.value
+        }
+    OPT = {
+        PFCPIEType.OffendingIE.value,
+        PFCPIEType.FSEID.value,
+        PFCPIEType.CreatePDR.value,
+        PFCPIEType.LoadControlInformation.value,
+        PFCPIEType.OverloadControlInformation.value,
+        PFCPIEType.FQCSID.value,
+        PFCPIEType.FailedRuleID.value,
+        PFCPIEType.CreatedTrafficEndpoint.value,
+        PFCPIEType.CreatedBridgeInfoforTSC.value,
+        PFCPIEType.ATSSSControlParameters.value,
+        PFCPIEType.RDSConfigurationInformation.value,
+        PFCPIEType.PartialFailureInformationSessionEstablishmentResp.value
+        }
 
 
 class PFCPSessionEstablishmentResp(PFCPMsg):
     _GEN = (
         PFCPHdr('Hdr', val={'S': 1, 'Type': PFCPMsgType.PFCPSessionEstablishmentResp.value}),
-        PFCPIEs('IEs', hier=1,
-            mand=[
-                PFCPIEType.NodeID.value,
-                PFCPIEType.Cause.value
-                ],
-            opt=[
-                PFCPIEType.OffendingIE.value,
-                PFCPIEType.FSEID.value,
-                PFCPIEType.CreatePDR.value,
-                PFCPIEType.LoadControlInformation.value,
-                PFCPIEType.OverloadControlInformation.value,
-                PFCPIEType.FQCSID.value,
-                PFCPIEType.FailedRuleID.value,
-                PFCPIEType.CreatedTrafficEndpoint.value,
-                PFCPIEType.CreatedBridgeInfoforTSC.value,
-                PFCPIEType.ATSSSControlParameters.value,
-                PFCPIEType.RDSConfigurationInformation.value,
-                PFCPIEType.PartialFailureInformationSessionEstablishmentResp.value
-                ])
+        PFCPSessionEstablishmentRespIEs(hier=1)
         )
 
 
@@ -5655,57 +5784,54 @@ class PFCPSessionEstablishmentResp(PFCPMsg):
 # TS 29.244, section 7.5.4: PFCP Session Modification Request
 #------------------------------------------------------------------------------#
 
+class PFCPSessionModificationReqIEs(PFCPIEs):
+    OPT = {
+        PFCPIEType.FSEID.value,
+        PFCPIEType.RemovePDR.value,
+        PFCPIEType.RemoveFAR.value,
+        PFCPIEType.RemoveURR.value,
+        PFCPIEType.RemoveQER.value,
+        PFCPIEType.RemoveBAR.value,
+        PFCPIEType.RemoveTrafficEndpoint.value,
+        PFCPIEType.CreatePDR.value,
+        PFCPIEType.CreateFAR.value,
+        PFCPIEType.CreateURR.value,
+        PFCPIEType.CreateQER.value,
+        PFCPIEType.CreateBAR.value,
+        PFCPIEType.CreateTrafficEndpoint.value,
+        PFCPIEType.UpdatePDR.value,
+        PFCPIEType.UpdateFAR.value,
+        PFCPIEType.UpdateURR.value,
+        PFCPIEType.UpdateQER.value,
+        PFCPIEType.UpdateBARSessionModReq.value,
+        PFCPIEType.UpdateTrafficEndpoint.value,
+        PFCPIEType.PFCPSMReqFlags.value,
+        PFCPIEType.QueryURR.value,
+        PFCPIEType.FQCSID.value, # which can be duplicated up to 5 times...
+        PFCPIEType.UserPlaneInactivityTimer.value,
+        PFCPIEType.QueryURRReference.value,
+        PFCPIEType.TraceInformation.value,
+        PFCPIEType.RemoveMAR.value,
+        PFCPIEType.UpdateMAR.value,
+        PFCPIEType.CreateMAR.value,
+        PFCPIEType.NodeID.value,
+        PFCPIEType.TSCManagementInformationSessionModReq.value,
+        PFCPIEType.RemoveSRR.value,
+        PFCPIEType.CreateSRR.value,
+        PFCPIEType.UpdateSRR.value,
+        PFCPIEType.ProvideATSSSControlInformation.value,
+        PFCPIEType.EthernetContextInformation.value,
+        PFCPIEType.AccessAvailabilityInformation.value,
+        PFCPIEType.QueryPacketRateStatus.value,
+        PFCPIEType.SNSSAI.value,
+        PFCPIEType.RATType.value
+        }
+
+
 class PFCPSessionModificationReq(PFCPMsg):
     _GEN = (
         PFCPHdr('Hdr', val={'S': 1, 'Type': PFCPMsgType.PFCPSessionModificationReq.value}),
-        PFCPIEs('IEs', hier=1,
-            mand=[
-                ],
-            opt=[
-                PFCPIEType.FSEID.value,
-                PFCPIEType.RemovePDR.value,
-                PFCPIEType.RemoveFAR.value,
-                PFCPIEType.RemoveURR.value,
-                PFCPIEType.RemoveQER.value,
-                PFCPIEType.RemoveBAR.value,
-                PFCPIEType.RemoveTrafficEndpoint.value,
-                PFCPIEType.CreatePDR.value,
-                PFCPIEType.CreateFAR.value,
-                PFCPIEType.CreateURR.value,
-                PFCPIEType.CreateQER.value,
-                PFCPIEType.CreateBAR.value,
-                PFCPIEType.CreateTrafficEndpoint.value,
-                PFCPIEType.UpdatePDR.value,
-                PFCPIEType.UpdateFAR.value,
-                PFCPIEType.UpdateURR.value,
-                PFCPIEType.UpdateQER.value,
-                PFCPIEType.UpdateBARSessionModReq.value,
-                PFCPIEType.UpdateTrafficEndpoint.value,
-                PFCPIEType.PFCPSMReqFlags.value,
-                PFCPIEType.QueryURR.value,
-                PFCPIEType.FQCSID.value,
-                PFCPIEType.FQCSID.value,
-                PFCPIEType.FQCSID.value,
-                PFCPIEType.FQCSID.value,
-                PFCPIEType.FQCSID.value,
-                PFCPIEType.UserPlaneInactivityTimer.value,
-                PFCPIEType.QueryURRReference.value,
-                PFCPIEType.TraceInformation.value,
-                PFCPIEType.RemoveMAR.value,
-                PFCPIEType.UpdateMAR.value,
-                PFCPIEType.CreateMAR.value,
-                PFCPIEType.NodeID.value,
-                PFCPIEType.TSCManagementInformationSessionModReq.value,
-                PFCPIEType.RemoveSRR.value,
-                PFCPIEType.CreateSRR.value,
-                PFCPIEType.UpdateSRR.value,
-                PFCPIEType.ProvideATSSSControlInformation.value,
-                PFCPIEType.EthernetContextInformation.value,
-                PFCPIEType.AccessAvailabilityInformation.value,
-                PFCPIEType.QueryPacketRateStatus.value,
-                PFCPIEType.SNSSAI.value,
-                PFCPIEType.RATType.value,
-                ])
+        PFCPSessionModificationReqIEs(hier=1)
         )
 
 
@@ -5713,28 +5839,31 @@ class PFCPSessionModificationReq(PFCPMsg):
 # TS 29.244, section 7.5.5: PFCP Session Modification Response
 #------------------------------------------------------------------------------#
 
+class PFCPSessionModificationRespIEs(PFCPIEs):
+    MAND = {
+        PFCPIEType.Cause.value,
+        }
+    OPT = {
+        PFCPIEType.OffendingIE.value,
+        PFCPIEType.CreatedPDR.value,
+        PFCPIEType.LoadControlInformation.value,
+        PFCPIEType.OverloadControlInformation.value,
+        PFCPIEType.UsageReportSessionModResp.value,
+        PFCPIEType.FailedRuleID.value,
+        PFCPIEType.AdditionalUsageReportsInformation.value,
+        PFCPIEType.CreatedTrafficEndpoint.value,
+        PFCPIEType.TSCManagementInformationSessionModResp.value,
+        PFCPIEType.ATSSSControlParameters.value,
+        PFCPIEType.UpdatedPDR.value,
+        PFCPIEType.PacketRateStatusReport.value,
+        PFCPIEType.PartialFailureInformationSessionModResp.value,
+        }
+
+
 class PFCPSessionModificationResp(PFCPMsg):
     _GEN = (
         PFCPHdr('Hdr', val={'S': 1, 'Type': PFCPMsgType.PFCPSessionModificationResp.value}),
-        PFCPIEs('IEs', hier=1,
-            mand=[
-                PFCPIEType.Cause.value
-                ],
-            opt=[
-                PFCPIEType.OffendingIE.value,
-                PFCPIEType.CreatedPDR.value,
-                PFCPIEType.LoadControlInformation.value,
-                PFCPIEType.OverloadControlInformation.value,
-                PFCPIEType.UsageReportSessionModResp.value,
-                PFCPIEType.FailedRuleID.value,
-                PFCPIEType.AdditionalUsageReportsInformation.value,
-                PFCPIEType.CreatedTrafficEndpoint.value,
-                PFCPIEType.TSCManagementInformationSessionModResp.value,
-                PFCPIEType.ATSSSControlParameters.value,
-                PFCPIEType.UpdatedPDR.value,
-                PFCPIEType.PacketRateStatusReport.value,
-                PFCPIEType.PartialFailureInformationSessionModResp.value
-                ])
+        PFCPSessionModificationRespIEs(hier=1)
         )
 
 
@@ -5745,7 +5874,7 @@ class PFCPSessionModificationResp(PFCPMsg):
 class PFCPSessionDeletionReq(PFCPMsg):
     _GEN = (
         PFCPHdr('Hdr', val={'S': 1, 'Type': PFCPMsgType.PFCPSessionDeletionReq.value}),
-        PFCPIEs('IEs', hier=1)
+        PFCPIEs('PFCPSessionDeletionReqIEs', hier=1)
         )
 
 
@@ -5753,22 +5882,25 @@ class PFCPSessionDeletionReq(PFCPMsg):
 # TS 29.244, section 7.5.7: PFCP Session Deletion Response
 #------------------------------------------------------------------------------#
 
+class PFCPSessionDeletionRespIEs(PFCPIEs):
+    MAND = {
+        PFCPIEType.Cause.value,
+        }
+    OPT = {
+        PFCPIEType.OffendingIE.value,
+        PFCPIEType.LoadControlInformation.value,
+        PFCPIEType.OverloadControlInformation.value,
+        PFCPIEType.UsageReportSessionDeletionResp.value,
+        PFCPIEType.AdditionalUsageReportsInformation.value,
+        PFCPIEType.PacketRateStatusReport.value,
+        PFCPIEType.SessionReport.value,
+        }
+
+
 class PFCPSessionDeletionResp(PFCPMsg):
     _GEN = (
         PFCPHdr('Hdr', val={'S': 1, 'Type': PFCPMsgType.PFCPSessionDeletionResp.value}),
-        PFCPIEs('IEs', hier=1,
-            mand=[
-                PFCPIEType.Cause.value
-                ],
-            opt=[
-                PFCPIEType.OffendingIE.value,
-                PFCPIEType.LoadControlInformation.value,
-                PFCPIEType.OverloadControlInformation.value,
-                PFCPIEType.UsageReportSessionDeletionResp.value,
-                PFCPIEType.AdditionalUsageReportsInformation.value,
-                PFCPIEType.PacketRateStatusReport.value,
-                PFCPIEType.SessionReport.value
-                ])
+        PFCPSessionDeletionRespIEs(hier=1)
         )
 
 
@@ -5776,26 +5908,29 @@ class PFCPSessionDeletionResp(PFCPMsg):
 # TS 29.244, section 7.5.8: PFCP Session Report Request
 #------------------------------------------------------------------------------#
 
+class PFCPSessionReportReqIEs(PFCPIEs):
+    MAND = {
+        PFCPIEType.ReportType.value,
+        }
+    OPT = {
+        PFCPIEType.DownlinkDataReport.value,
+        PFCPIEType.UsageReportSessionReportReq.value,
+        PFCPIEType.ErrorIndicationReport.value,
+        PFCPIEType.LoadControlInformation.value,
+        PFCPIEType.OverloadControlInformation.value,
+        PFCPIEType.AdditionalUsageReportsInformation.value,
+        PFCPIEType.PFCPSRReqFlags.value,
+        PFCPIEType.FSEID.value,
+        PFCPIEType.PacketRateStatusReport.value,
+        PFCPIEType.TSCManagementInformationSessionReportReq.value,
+        PFCPIEType.SessionReport.value,
+        }
+
+
 class PFCPSessionReportReq(PFCPMsg):
     _GEN = (
         PFCPHdr('Hdr', val={'S': 1, 'Type': PFCPMsgType.PFCPSessionReportReq.value}),
-        PFCPIEs('IEs', hier=1,
-            mand=[
-                PFCPIEType.ReportType.value
-                ],
-            opt=[
-                PFCPIEType.DownlinkDataReport.value,
-                PFCPIEType.UsageReportSessionReportReq.value,
-                PFCPIEType.ErrorIndicationReport.value,
-                PFCPIEType.LoadControlInformation.value,
-                PFCPIEType.OverloadControlInformation.value,
-                PFCPIEType.AdditionalUsageReportsInformation.value,
-                PFCPIEType.PFCPSRReqFlags.value,
-                PFCPIEType.FSEID.value,
-                PFCPIEType.PacketRateStatusReport.value,
-                PFCPIEType.TSCManagementInformationSessionReportReq.value,
-                PFCPIEType.SessionReport.value
-                ])
+        PFCPSessionReportReqIEs(hier=1)
         )
 
 
@@ -5803,21 +5938,24 @@ class PFCPSessionReportReq(PFCPMsg):
 # TS 29.244, section 7.5.9: PFCP Session Report Response
 #------------------------------------------------------------------------------#
 
+class PFCPSessionReportRespIEs(PFCPIEs):
+    MAND = {
+        PFCPIEType.Cause.value,
+        }
+    OPT = {
+        PFCPIEType.OffendingIE.value,
+        PFCPIEType.UpdateBARSessionReportResp.value,
+        PFCPIEType.PFCPSRRspFlags.value,
+        PFCPIEType.FSEID.value,
+        PFCPIEType.FTEID.value,
+        PFCPIEType.AlternativeSMFIPAddress.value,
+        }
+
+
 class PFCPSessionReportResp(PFCPMsg):
     _GEN = (
         PFCPHdr('Hdr', val={'S': 1, 'Type': PFCPMsgType.PFCPSessionReportResp.value}),
-        PFCPIEs('IEs', hier=1,
-            mand=[
-                PFCPIEType.Cause.value
-                ],
-            opt=[
-                PFCPIEType.OffendingIE.value,
-                PFCPIEType.UpdateBARSessionReportResp.value,
-                PFCPIEType.PFCPSRRspFlags.value,
-                PFCPIEType.FSEID.value,
-                PFCPIEType.FTEID.value,
-                PFCPIEType.AlternativeSMFIPAddress.value
-                ])
+        PFCPSessionReportRespIEs(hier=1)
         )
 
 
@@ -5855,6 +5993,7 @@ PFCPDispatcher = {
 ERR_PFCP_BUF_TOO_SHORT = 1
 ERR_PFCP_BUF_INVALID   = 2
 ERR_PFCP_TYPE_NONEXIST = 3
+ERR_PFCP_MAND_IE_MISS  = 4
 
 
 def parse_PFCP(buf):
@@ -5865,17 +6004,26 @@ def parse_PFCP(buf):
     if len(buf) < 8:
         return None, ERR_PFCP_BUF_TOO_SHORT
     if python_version < 3:
-        type = ord(buf[1])
+        typ = ord(buf[1])
     else:
-        type = buf[1]
+        typ = buf[1]
     try:
-        Msg = PFCPDispatcher[type]()
+        Msg = PFCPDispatcher[typ]()
     except KeyError:
         return None, ERR_PFCP_TYPE_NONEXIST
     try:
         Msg.from_bytes(buf)
-    except Exception:
-        return None, ERR_PFCP_BUF_INVALID
+    except PFCPDecErr:
+        PFCPIEs.VERIF_MAND = False
+        Msg = Msg.__class__()
+        try:
+            Msg.from_bytes(buf)
+            PFCPIEs.VERIF_MAND = True
+        except Exception:
+            PFCPIEs.VERIF_MAND = True
+            return None, ERR_PFCP_BUF_INVALID
+        else:
+            return Msg, ERR_PFCP_MAND_IE_MISS
     else:
         # TODO: support piggy-backed PFCP message (FO flag)
         return Msg, 0

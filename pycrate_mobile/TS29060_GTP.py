@@ -31,7 +31,7 @@
 #__all__ = [
 #    ]
 
-
+from binascii import *
 from socket import inet_pton, inet_ntop, AF_INET, AF_INET6
 from enum   import IntEnum
 
@@ -78,10 +78,6 @@ from pycrate_mobile.TS29002_MAPIE   import (
 #------------------------------------------------------------------------------#
 
 class GTPDecErr(PycrateErr):
-    pass
-
-
-class GTPEncErr(PycrateErr):
     pass
 
 
@@ -1874,92 +1870,14 @@ GTPIETypeDesc_dict = {k: v[2] for k, v in GTPIEType_dict.items()}
 
 
 class _GTPIE(Envelope):
-    """parent class for all GTPv1-C Information Element
+    """parent class for GTPv1-C Information Element: GTPIETV and GTPIETLV
     """
-    
-    # TODO: check how to switch optional IE to present when assigning them a value
-    #       maybe do it at __init__, similar as with NAS IE in TS24007.py
-    
-    # those are required for the set_val() method
-    _KW_STAT = set()
-    _KW_STAT_LEN = 0
-    
-    def set_val(self, val):
-        # remove the `Data' part from `val'
-        val_data = None
-        if isinstance(val, dict) and 'Data' in val and val['Data'] is not None:
-            val_data = val['Data']
-            val = dict(val)
-            val['Data'] = None
-        elif isinstance(val, (tuple, list)):
-            if val[0] == 238 and len(val) == 1+self._KW_STAT_LEN and val[self._KW_STAT_LEN] is not None:
-                val_data = val[self._KW_STAT_LEN]
-                val = list(val)
-                val[self._KW_STAT_LEN] = None
-            elif len(val) == self._KW_STAT_LEN and val[self._KW_STAT_LEN-1] is not None:
-                val_data = val[self._KW_STAT_LEN-1]
-                val = list(val)
-                val[self._KW_STAT_LEN-1] = None
-        # set the 1st part of `val' without `Data'
-        Envelope.set_val(self, val)
-        #print('_GTPIE.set_val(%r), val_data: %r' % (val, val_data))
-        if val_data is not None:
-            # replace the `Data' buffer with the IE sub-structure
-            typ = self.get_type()
-            if typ in GTPIELUT:
-                ie = GTPIELUT[typ]()
-                if self['Data']._blauto and (not hasattr(ie, '_bl') or ie._bl is None):
-                    ie._blauto = self['Data']._blauto
-                ie._name = 'Data'
-                try:
-                    ie.set_val(val_data)
-                except Exception:
-                    self['Data'].set_val(val_data)
-                else:
-                    self.replace(self['Data'], ie)
-            else:
-                self['Data'].set_val(val_data)
-        else:
-            self['Data'].set_val(None)
-    
-    def _from_char(self, char):
-        if self.get_trans():
-            return
-        Envelope._from_char(self, char)
-        # check if a sub-structure is available to replace the Data buffer
-        typ = self.get_type()
-        if typ in GTPIELUT:
-            ie = GTPIELUT[typ]()
-            try:
-                ie.from_bytes(self['Data'].to_bytes())
-            except PycrateErr:
-                # TODO: it may be better to raise here...
-                pass
-            else:
-                if self['Data']._blauto and (not hasattr(ie, '_bl') or ie._bl is None):
-                    ie._blauto = self['Data']._blauto
-                ie._name = 'Data'
-                self.replace(self['Data'], ie)
-    
-    def set_ie_class(self):
-        # this is to simply set the internal IE structure, if exists
-        typ = self.get_type()
-        try:
-            ie = GTPIELUT[typ]()
-        except KeyError:
-            pass
-        else:
-            if self['Data']._blauto and (not hasattr(ie, '_bl') or ie._bl is None):
-                ie._blauto = self['Data']._blauto
-            ie._name = 'Data'
-            self.replace(self['Data'], ie)
+    pass
 
 
 class GTPIETV(_GTPIE):
     """GTPv1-C Information Element in Tag-Value format, with fixed length
     """
-    _KW_STAT     = {'Type'}
-    _KW_STAT_LEN = 2
     
     _GEN = (
         Uint8('Type', val=1, dic=GTPIETypeDesc_dict),
@@ -1967,14 +1885,65 @@ class GTPIETV(_GTPIE):
         )
     
     def get_type(self):
-        return self[0].get_val()
+        return self['Type'].get_val()
+    
+    def set_val(self, val):
+        data_val = None
+        if isinstance(val, (tuple, list)) and len(val) == 2:
+            self['Type'].set_val(val[0])
+            if not isinstance(val[1], bytes_types):
+                self.set_ie_class()
+            data_val = val[1]
+        elif isinstance(val, dict) and 'Type' in val:
+            self['Type'].set_val(val['Type'])
+            if 'Data' in val:
+                if not isinstance(val['Data'], bytes_types):
+                    self.set_ie_class()
+                data_val = val['Data']
+        else:
+            Envelope.set_val(self, val)
+        if data_val:
+            try:
+                self['Data'].set_val(data_val)
+            except PycrateErr:
+                # try to restore a simple Data buffer
+                data = Buf('Data', bl=self['Data'].get_bl(), rep=REPR_HEX)
+                data.set_val(data_val)
+                self.replace(self['Data'], data)
+    
+    def _from_char(self, char):
+        if self.get_trans():
+            return
+        self[0]._from_char(char)
+        # check if a sub-structure is available to replace the Data buffer
+        typ = self['Type'].get_val()
+        buf = char.get_bytes(self['Data'].get_bl())
+        if typ in GTPIELUT:
+            data = GTPIELUT[typ]('Data')
+            try:
+                data.from_bytes(buf)
+            except PycrateErr:
+                # restore the basic buffer representation
+                data = Buf('Data', val=buf, bl=len(buf)<<3, rep=REPR_HEX)
+        else:
+            # only have the basic buffer representation
+            data = Buf('Data', val=buf, bl=len(buf)<<3, rep=REPR_HEX)
+        self.replace(self['Data'], data)
+    
+    def set_ie_class(self):
+        if isinstance(self['Data'], Buf):
+            # switch to the IE-specific sub-structure, if available
+            try:
+                ie = GTPIELUT[self['Type'].get_val()]('Data')
+            except KeyError:
+                pass
+            else:
+                self.replace(self['Data'], ie)
 
 
 class GTPIETLV(_GTPIE):
     """GTPv1-C Information Element in Tag-Length-Value format
     """
-    _KW_STAT = {'Type', 'Len', 'TypeExt'}
-    _KW_STAT_LEN = 3
     
     ENV_SEL_TRANS = False
     
@@ -1989,7 +1958,8 @@ class GTPIETLV(_GTPIE):
         Envelope.__init__(self, *args, **kwargs)
         self[1].set_valauto(lambda: self._set_len())
         self[2].set_transauto(lambda: self[0].get_val() != 238)
-        self[3].set_blauto(lambda: self._set_dat_len())
+        if not hasattr(self[3], '_bl') or self[3]._bl is None:
+            self[3].set_blauto(lambda: self._get_data_len())
     
     def _set_len(self):
         if self[0].get_val() == 238:
@@ -1998,7 +1968,7 @@ class GTPIETLV(_GTPIE):
         else:
             return self[3].get_len()
     
-    def _set_dat_len(self):
+    def _get_data_len(self):
         if self[0].get_val() == 238:
             # extended type
             return (self[1].get_val()-2) << 3
@@ -2011,9 +1981,87 @@ class GTPIETLV(_GTPIE):
             return self[2].get_val()
         else:
             return typ
+    
+    def set_val(self, val):
+        data_val = None
+        if isinstance(val, (tuple, list)) and len(val) >= 3:
+            self['Type'].set_val(val[0])
+            self['Len'].set_val(val[1])
+            if val[0] == 238:
+                self['TypeExt'].set_val(val[2])
+                data_val = val[3]
+            else:
+                data_val = val[2]
+            if not isinstance(data_val, bytes_types):
+                self.set_ie_class()
+        elif isinstance(val, dict) and 'Type' in val:
+            val = dict(val)
+            if val['Type'] > 255:
+                self['Type'].set_val(238)
+                self['TypeExt'].set_val(val['Type'])
+            else:
+                self['Type'].set_val(val['Type'])
+            del val['Type']
+            if 'Len' in val:
+                self['Len'].set_val(val['Len'])
+                del val['Len']
+            if 'TypeExt' in val:
+                self['TypeExt'].set_val(val['TypeExt'])
+                del val['TypeExt']
+            if val:
+                data_val = val.popitem()
+                if not isinstance(data_val, bytes_types):
+                    self.set_ie_class()
+        else:
+            Envelope.set_val(self, val)
+        if data_val:
+            try:
+                self['Data'].set_val(data_val)
+            except PycrateErr:
+                # try to restore a simple Data buffer
+                data = Buf('Data', rep=REPR_HEX)
+                data.set_blauto(lambda: self._set_len())
+                data.set_val(data_val)
+                self.replace(self['Data'], data)
+    
+    def _from_char(self, char):
+        if self.get_trans():
+            return
+        self[0]._from_char(char)
+        self[1]._from_char(char)
+        self[2]._from_char(char)
+        # check if a sub-structure is available to replace the Data buffer
+        typ = self.get_type()
+        buf = char.get_bytes(self._get_data_len())
+        if typ in GTPIELUT:
+            data = GTPIELUT[typ]('Data')
+            try:
+                data.from_bytes(buf)
+            except PycrateErr:
+                # restore the basic buffer representation
+                data = Buf('Data', val=buf, rep=REPR_HEX)
+                data.set_blauto(lambda: self._set_len())
+        else:
+            # only have the basic buffer representation
+            data = Buf('Data', val=buf, rep=REPR_HEX)
+            data.set_blauto(lambda: self._set_len())
+        self.replace(self['Data'], data)
+    
+    def set_ie_class(self):
+        if isinstance(self['Data'], Buf):
+            # switch to the IE-specific sub-structure, if available
+            try:
+                ie = GTPIELUT[self['Type'].get_val()]('Data')
+            except KeyError:
+                pass
+            else:
+                if not hasattr(ie, '_bl') or ie._bl is None:
+                    ie.set_blauto(lambda: self._set_len())
+                self.replace(self['Data'], ie)
 
 
 def _get_type_from_char(char):
+    # this is only used inside GTPIEs._from_char()
     # this routine can raise, and needs to be used inside a try-except stmt
     typ = char.to_uint(8)
     if typ == 238:
@@ -2042,7 +2090,12 @@ class GTPIEs(Envelope):
     def __init__(self, *args, **kwargs):
         Envelope.__init__(self, *args, **kwargs)
         # ensure at least all mandatory IEs are there
-        self.init_ies(wopt=False)
+        self.init_ies(wopt=False, wpriv=False)
+        # switch optional ones that were set explicitely to non-transparent
+        if 'val' in kwargs and isinstance(kwargs['val'], dict):
+            for k in kwargs['val']:
+                if k in self.OPT:
+                    self[k].set_trans(False)
     
     def _from_char(self, char):
         if self.get_trans():
@@ -2079,7 +2132,7 @@ class GTPIEs(Envelope):
         if i < len_cont-1 and self.VERIF_MAND:
             # verify if some trailing mandatory IE have been ignored
             for ie in self._content[i:]:
-                if ie.get_type() in self.MAND:
+                if ie._name in self.MAND:
                     raise(GTPDecErr('Missing mandatory GTP IE %s, type %i' % (ie._name, ie.get_type())))
         #
         # additional decoding for more undefined GTPIETLV 
@@ -2115,17 +2168,41 @@ class GTPIEs(Envelope):
         if not ie.get_trans():
             ie.set_trans(True)
     
-    def init_ies(self, wopt=False, **kwargs):
+    def init_ies(self, wopt=False, wpriv=False):
         """initialize all IEs that are mandatory,
         adding optional ones if `wopt` is set,
         adding the private extension if `wpriv` is set
         """
-        # clear the content first
         for ie in self._content:
-            if ie._name in self.OPT:
-                if wopt:
-                    ie.set_trans(False)
+            if ie._name in self.OPT and wopt:
+                ie.set_trans(False)
             ie.set_ie_class()
+        if self._content and self._content[-1]._name == 'PrivateExt':
+            if wpriv:
+                ie.set_trans(False)
+            else:
+                ie.set_trans(True)
+
+    def chk_comp(self):
+        """check the compliance of all the present IEs against the list of mandatory
+        and potentially unexpected ones
+        
+        return 2 sets
+            1st contains the missing mandatory IEs name
+            2nd contains the unexpected (neither mandatory, nor optional) IEs type
+        """
+        # check the sequence of PFCP IEs for errors against the list of mandatory 
+        # and optional IEs
+        mand = set(self.MAND)
+        unex = set()
+        for ie in self:
+            if ie.get_trans():
+                continue
+            if ie._name in mand:
+                mand.remove(ie._name)
+            elif ie._name not in self.OPT:
+                unex.add(ie.get_type())
+        return mand, unex
 
 
 #------------------------------------------------------------------------------#
@@ -5329,56 +5406,3 @@ def parse_GTP(buf):
         Msg, Err = parse_GTP_GGSN(buf)
     return Msg, Err
 
-
-
-'''
-# create sets listing mandatory and optional IEs under .MAND and .OPT class attributes
-for disp in (GTPDispatcherSGSN, GTPDispatcherGGSN):
-    for cls in disp.values():
-        if hasattr(cls, 'MAND'):
-            continue
-        cls.MAND, cls.OPT = [], []
-        for ie in cls._GEN[1]._content:
-            if ie.get_trans():
-                cls.OPT.append(ie._name)
-            else:
-                cls.MAND.append(ie._name)
-        assert( len(cls.MAND) == len(set(cls.MAND)) and len(cls.OPT) == len(set(cls.OPT)) )
-
-
-def inl(cls):
-    
-    def get_enum(en, i):
-        for e in en:
-            if e == i:
-                return e
-        assert()    
-    
-    # generate dedicated class GTPIEs
-    print('class %sIEs(GTPIEs):' % cls.__name__)
-    print('    ')
-    print('    MAND = {\n        %s\n        }' % ',\n        '.join(map(repr, cls.MAND)))
-    print('    OPT  = {\n        %s\n        }' % ',\n        '.join(map(repr, cls.OPT)))
-    print('    ')
-    print('    _GEN = (')
-    for ie in cls._GEN[1]._content:
-        if ie._trans:
-            trans = ', trans=True'
-        else:
-            trans = ''
-        if isinstance(ie, GTPIETV):
-            print('        GTPIETV(\'%s\', val={\'Type\': %s.value}, bl={\'Data\': %i}%s),'\
-                  % (ie._name, get_enum(GTPIEType, ie['Type']._val), ie['Data']._bl, trans))
-        else:
-            print('        GTPIETLV(\'%s\', val={\'Type\': %s.value}%s),'\
-                  % (ie._name, get_enum(GTPIEType, ie['Type']._val), trans))
-    print('        )\n\n')
-    
-    # generate msg class GTPMsg
-    print('class %s(GTPMsg):' % cls.__name__)
-    print('    _GEN = (')
-    print('        GTPHdr(val={\'PT\': %i, \'Type\': %s.value}),'\
-          % (cls._GEN[0]['PT']._val, get_enum(GTPMsgType, cls._GEN[0]['Type']._val)))
-    print('        %sIEs(hier=1),' % cls.__name__)
-    print('        )\n\n')
-'''
