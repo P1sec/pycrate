@@ -1,7 +1,7 @@
 # -*- coding: UTF-8 -*-
 #/**
 # * Software Name : pycrate
-# * Version : 0.3
+# * Version : 0.4
 # *
 # * Copyright 2016. Benoit Michau. ANSSI.
 # *
@@ -297,7 +297,7 @@ class ASN1RangeStr(ASN1Range):
         # disjoint sets:
         if ub < ralb:
             return self, ra
-        else:
+        elif raub < lb:
             return ra, self
         #
         # intersecting sets:

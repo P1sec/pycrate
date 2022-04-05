@@ -1,9 +1,10 @@
 # -*- coding: UTF-8 -*-
 #/**
 # * Software Name : pycrate
-# * Version : 0.3
+# * Version : 0.4
 # *
 # * Copyright 2017. Benoit Michau. ANSSI.
+# * Copyright 2019. Benoit Michau. P1Sec.
 # *
 # * This library is free software; you can redistribute it and/or
 # * modify it under the terms of the GNU Lesser General Public
@@ -29,20 +30,26 @@
 
 #------------------------------------------------------------------------------#
 # 3GPP TS 24.301: NAS protocol for EPS
-# release 13 (da0)
+# release 16 (g20)
 #------------------------------------------------------------------------------#
 
 from binascii import unhexlify
+from time     import struct_time
 
 from pycrate_core.utils  import *
-from pycrate_core.elt    import Envelope, Sequence, Array, REPR_RAW, REPR_HEX, \
-     REPR_BIN, REPR_HD, REPR_HUM
+from pycrate_core.elt    import (
+    Envelope, Sequence, Array,
+    REPR_RAW, REPR_HEX, REPR_BIN, REPR_HD, REPR_HUM
+    )
 from pycrate_core.base   import *
 from pycrate_core.repr   import *
 from pycrate_core.charpy import Charpy
 
-from pycrate_mobile.MCC_MNC    import MNC_dict
-from pycrate_mobile.TS24008_IE import TFT, PLMN, encode_bcd, decode_bcd
+from pycrate_mobile.MCC_MNC     import MNC_dict
+from pycrate_mobile.TS23038     import encode_7b, decode_7b
+from pycrate_mobile.TS24008_IE  import (
+    TFT, PLMN, BufBCD, encode_bcd, decode_bcd, _TP_SCTS_Comp
+    )
 
 #------------------------------------------------------------------------------#
 # For Supplementary Services, some ASN.1 structures are required
@@ -382,7 +389,7 @@ class EPSID(Envelope):
             return (type, self[3].decode(), self[4](), self[5](), self[6]())
     
     def encode(self, type, ident):
-        """sets the mobile identity with given type
+        """sets the EPS mobile identity with given type
         
         if type is IDTYPE_IMSI or IDTYPE_IMEISV: ident must be a string of digits
         if type is IDTYPE_GUTI: ident must be a 4-tuple (PLMN -string of digits-, 
@@ -423,43 +430,44 @@ class EPSID(Envelope):
                   .format(self._name, ident)))
     
     def _from_char(self, char):
-        if not self.get_trans():
-            try:
-                spare = char.get_uint(5)
-                type  = char.get_uint(3)
-            except CharpyErr as err:
-                raise(CharpyErr('{0} [_from_char]: {1}'.format(self._name, err)))
-            except Exception as err:
-                raise(EltErr('{0} [_from_char]: {1}'.format(self._name, err)))
-            #
-            if type in (IDTYPE_IMSI, IDTYPE_IMEISV):
-                if not hasattr(self, '_IDDigit'):
-                    self._IDDigit = IDDigit()
-                self._content = self._IDDigit._content
-                self._by_id   = self._IDDigit._by_id
-                self._by_name = self._IDDigit._by_name
-                self[0]._val = spare >> 1
-                self[1]._val = spare & 1
-                self[2]._val = type
-                self[3]._from_char(char)   
-            #
-            elif type == IDTYPE_GUTI:
-                if not hasattr(self, '_IDGUTI'):
-                    self._IDGUTI = IDGUTI()
-                self._content = self._IDGUTI._content
-                self._by_id   = self._IDGUTI._by_id
-                self._by_name = self._IDGUTI._by_name
-                self[0]._val = spare >> 1
-                self[1]._val = spare & 1
-                self[2]._val = type
-                self[3]._from_char(char)
-                self[4]._from_char(char)
-                self[5]._from_char(char)
-                self[6]._from_char(char)
-            #
-            else:
-                raise(PycrateErr('{0}: invalid identity to decode, {1}'\
-                      .format(self._name, type)))
+        if self.get_trans():
+            return
+        try:
+            spare = char.get_uint(5)
+            type  = char.get_uint(3)
+        except CharpyErr as err:
+            raise(CharpyErr('{0} [_from_char]: {1}'.format(self._name, err)))
+        except Exception as err:
+            raise(EltErr('{0} [_from_char]: {1}'.format(self._name, err)))
+        #
+        if type in (IDTYPE_IMSI, IDTYPE_IMEISV):
+            if not hasattr(self, '_IDDigit'):
+                self._IDDigit = IDDigit()
+            self._content = self._IDDigit._content
+            self._by_id   = self._IDDigit._by_id
+            self._by_name = self._IDDigit._by_name
+            self[0]._val = spare >> 1
+            self[1]._val = spare & 1
+            self[2]._val = type
+            self[3]._from_char(char)   
+        #
+        elif type == IDTYPE_GUTI:
+            if not hasattr(self, '_IDGUTI'):
+                self._IDGUTI = IDGUTI()
+            self._content = self._IDGUTI._content
+            self._by_id   = self._IDGUTI._by_id
+            self._by_name = self._IDGUTI._by_name
+            self[0]._val = spare >> 1
+            self[1]._val = spare & 1
+            self[2]._val = type
+            self[3]._from_char(char)
+            self[4]._from_char(char)
+            self[5]._from_char(char)
+            self[6]._from_char(char)
+        #
+        else:
+            raise(PycrateErr('{0}: invalid identity to decode, {1}'\
+                  .format(self._name, type)))
     
     def repr(self):
         if not self._content:
@@ -509,6 +517,8 @@ class EPSNetFeat(Envelope):
         )
     
     def _from_char(self, char):
+        if self.get_trans():
+            return
         if char.len_bit() < 16:
             self._set_o2_trans(True)
         Envelope._from_char(self, char)
@@ -569,7 +579,7 @@ class EPSUpdateType(Envelope):
 
 class NAS_KSI(Envelope):
     _GEN = (
-        Uint('TSC', bl=1, dic={0:' native security context', 1:'mapped security context'}),
+        Uint('TSC', bl=1, dic={0:'native security context', 1:'mapped security context'}),
         Uint('Value', bl=3, dic={7:'no key available'})
         )
 
@@ -823,6 +833,8 @@ class TAIList(Envelope):
         return ret
     
     def _from_char(self, char):
+        if self.get_trans():
+            return
         self.clear()
         if self._ptail2 is not None:
             del self._ptail2
@@ -840,6 +852,87 @@ class TAIList(Envelope):
             ptl._from_char(char)
             self.append(ptl)
 
+
+'''this will need to be introduced, to be similar as in TS24501_IE
+class _PTAIList0(Envelope):
+    """List of non-consecutive TACs belonging to one PLMN
+    """
+    
+    _GEN = (
+        Uint('Num', bl=5),
+        PLMN(),
+        Array('TACs', GEN=Uint16('TAC'))
+        )
+    
+    def __init__(self, *args, **kwargs):
+        Envelope.__init__(self, *args, **kwargs)
+        self[0].set_valauto(lambda: max(0, self[2].get_num()-1))
+        self[2].set_numauto(lambda: self[0].get_val()+1)
+    
+    def get_tai(self):
+        plmn = self['PLMN'].decode()
+        return set([(plmn, tac) for tac in self['TACs'].get_val()])
+
+
+class _PTAIList1(Envelope):
+    """List of consecutive TACs belonging to one PLMN
+    """
+    
+    _GEN = (
+        Uint('Num', bl=5),
+        PLMN(),
+        Uint16('TAC1'),
+        )
+    
+    def get_tai(self):
+        plmn, tac1 = self['PLMN'].decode(), self['TAC1'].get_val()
+        return set([(plmn, tac1 + i) for i in range(self['Num'].get_val() + 1)])
+
+
+class _PTAIList2(Envelope):
+    """List of TAI belonging to different PLMNs
+    """
+    
+    _GEN = (
+        Uint('Num', bl=5),
+        Sequence('TAIs', GEN=TAI())
+        )
+    
+    def __init__(self, *args, **kwargs):
+        Envelope.__init__(self, *args, **kwargs)
+        self[0].set_valauto(lambda: max(0, self[1].get_num()-1))
+        self[1].set_numauto(lambda: self[0].get_val()+1)
+    
+    def get_tai(self):
+        return set([tai.decode() for tai in self['TAIs']])
+
+
+class PTAIList(Envelope):
+    _GEN = (
+        Uint('spare', bl=1),
+        Uint('Type', bl=2, dic=_PTAIListType_dict),
+        Alt('PTAI', GEN={
+            0: _PTAIList0('PTAIList0'),
+            1: _PTAIList1('PTAIList1'),
+            2: _PTAIList2('PTAIList2')
+            },
+            DEFAULT=_PTAIList1('PTAIList1'),
+            sel=lambda self: self.get_env()['Type'].get_val())
+        )
+    
+    def get_tai(self):
+        return self['PTAI'].get_tai()
+
+
+class TAIList(Sequence):
+    _GEN = PTAIList()
+    
+    def get_tai(self):
+        tai = set()
+        for tl in self:
+            tai.update(tl.get_tai())
+        return tai
+'''
 
 #------------------------------------------------------------------------------#
 # UE network capability
@@ -911,6 +1004,8 @@ class UENetCap(Envelope):
         )
     
     def _from_char(self, char):
+        if self.get_trans():
+            return
         l = char.len_bit()
         if l <= 56:
             # disable all elements after bit l
@@ -943,6 +1038,9 @@ class UENetCap(Envelope):
 #------------------------------------------------------------------------------#
 
 class UESecCap(Envelope):
+    
+    ENV_SEL_TRANS = False
+    
     _GEN = (
         Uint('EEA0', bl=1),
         Uint('EEA1_128', bl=1),
@@ -986,7 +1084,14 @@ class UESecCap(Envelope):
         Uint('GEA7', bl=1) # end of octet 5
         )
     
+    def set_val(self, val):
+        if isinstance(val, (tuple, list)) and len(val) < 33:
+            self.disable_from(len(val))
+        Envelope.set_val(self, val)
+    
     def _from_char(self, char):
+        if self.get_trans():
+            return
         l = char.len_bit()
         if l <= 40:
             # disable all elements after bit l
@@ -1008,6 +1113,69 @@ class UESecCap(Envelope):
         if isinstance(ind, str_types) and ind in self._by_name:
             ind = 1 + self._by_name.index(ind)
         [e.set_trans(False) for e in self._content[:ind]]
+
+
+#------------------------------------------------------------------------------#
+# Extended emergency number list
+# TS 24.008, section 9.9.3.37A
+#------------------------------------------------------------------------------#
+
+class _SubServices(Buf):
+    
+    def set_val(self, val):
+        if isinstance(val, str_types):
+            # this is not Python2-friendly...
+            self.encode(val)
+        else:
+            Buf.set_val(self, val)
+    
+    def encode(self, val):
+        self._val, _ = encode_7b(val)
+    
+    def decode(self):
+        return decode_7b(self.get_val())
+    
+    def repr(self):
+        return '<%s: %s>' % (self._name, self.decode())
+    
+    __repr__ = repr
+
+
+class ExtEmergNum(Envelope):
+    _GEN = (
+        Uint8('LenNum'), # number of digits
+        BufBCD('Num'),
+        Uint8('LenSubServices'), # number of bytes
+        _SubServices('SubServices')
+        )
+    
+    def __init__(self, *args, **kw):
+        Envelope.__init__(self, *args, **kw)
+        self[0].set_valauto(lambda: len(self[1].decode()))
+        self[1].set_blauto(lambda: self._get_len_num())
+        self[2].set_valauto(lambda: self[3].get_len())
+        self[3].set_blauto(lambda: self[2].get_val()<<3)
+    
+    def _get_len_num(self):
+        len_num = self[0].get_val()
+        if len_num % 2:
+            return (1+len_num)<<2
+        else:
+            return len_num<<2
+
+
+EENLValidity_dict = {
+    0 : 'country wide list',
+    1 : 'PLMN wide list'
+    }
+
+class ExtEmergNumList(Envelope):
+    _GEN = (
+        Uint('spare', bl=7),
+        Uint('EENLValidity', bl=1, dic=EENLValidity_dict),
+        Array('EENL', GEN=ExtEmergNum()),
+        )
+
 
 #------------------------------------------------------------------------------#
 # SS Code
@@ -1148,6 +1316,23 @@ class GUTIType(Envelope):
 
 
 #------------------------------------------------------------------------------#
+# Network policy
+# TS 24.301, 9.9.3.52
+#------------------------------------------------------------------------------#
+
+_NetworkPol_dict = {
+    0 : 'Unsecured redirection to GERAN allowed',
+    1 : 'Unsecured redirection to GERAN not allowed'
+    }
+
+class NetworkPol(Envelope):
+    _GEN = (
+        Uint('spare', bl=3),
+        Uint('Value', bl=1, dic=_NetworkPol_dict)
+        )
+
+
+#------------------------------------------------------------------------------#
 # Control plane service type
 # TS 24.301, 9.9.3.47
 #------------------------------------------------------------------------------#
@@ -1163,6 +1348,208 @@ class CPServiceType(Envelope):
              dic={0:'No bearer establishment requested', 1:'Bearer establishment requested'}),
         Uint('Value', bl=3, dic=_CPServType_dict)
         )
+
+
+#------------------------------------------------------------------------------#
+# UE additional security capability
+# TS 24.301, 9.9.3.53 
+#------------------------------------------------------------------------------#
+
+class UEAddSecCap(Envelope):
+    _GEN = (
+        Uint('5G-EA0', bl=1),
+        Uint('5G-EA1_128', bl=1),
+        Uint('5G-EA2_128', bl=1),
+        Uint('5G-EA3_128', bl=1),
+        Uint('5G-EA4', bl=1),
+        Uint('5G-EA5', bl=1),
+        Uint('5G-EA6', bl=1),
+        Uint('5G-EA7', bl=1),
+        Uint('5G-EA8', bl=1),
+        Uint('5G-EA9', bl=1),
+        Uint('5G-EA10', bl=1),
+        Uint('5G-EA11', bl=1),
+        Uint('5G-EA12', bl=1),
+        Uint('5G-EA13', bl=1),
+        Uint('5G-EA14', bl=1),
+        Uint('5G-EA15', bl=1),
+        Uint('5G-IA0', bl=1),
+        Uint('5G-IA1_128', bl=1),
+        Uint('5G-IA2_128', bl=1),
+        Uint('5G-IA3_128', bl=1),
+        Uint('5G-IA4', bl=1),
+        Uint('5G-IA5', bl=1),
+        Uint('5G-IA6', bl=1),
+        Uint('5G-IA7', bl=1),
+        Uint('5G-IA8', bl=1),
+        Uint('5G-IA9', bl=1),
+        Uint('5G-IA10', bl=1),
+        Uint('5G-IA11', bl=1),
+        Uint('5G-IA12', bl=1),
+        Uint('5G-IA13', bl=1),
+        Uint('5G-IA14', bl=1),
+        Uint('5G-IA15', bl=1)
+        )
+
+
+#------------------------------------------------------------------------------#
+# Additional information requested
+# TS 24.301, 9.9.3.55
+#------------------------------------------------------------------------------#
+
+_AddInfoReq_dict = {
+    0 : 'ciphering keys for ciphered broadcast assistance data not requested',
+    1 : 'ciphering keys for ciphered broadcast assistance data requested'
+    }
+
+class AddInfoReq(Envelope):
+    _GEN = (
+        Uint('spare', bl=7),
+        Uint('CipherKey', bl=1, dic=_AddInfoReq_dict)
+        )
+
+
+#------------------------------------------------------------------------------#
+# Ciphering key data
+# TS 24.301, 9.9.3.56
+#------------------------------------------------------------------------------#
+
+class _CipherDataTime(Envelope):
+    _GEN = (
+        _TP_SCTS_Comp('Year', GEN=(Uint('Y1', bl=4), Uint('Y0', bl=4))),
+        _TP_SCTS_Comp('Mon',  GEN=(Uint('M1', bl=4), Uint('M0', bl=4))),
+        _TP_SCTS_Comp('Day',  GEN=(Uint('D1', bl=4), Uint('D0', bl=4))),
+        _TP_SCTS_Comp('Hour', GEN=(Uint('H1', bl=4), Uint('H0', bl=4))),
+        _TP_SCTS_Comp('Min',  GEN=(Uint('M1', bl=4), Uint('M0', bl=4))),
+        )
+    
+    def set_val(self, val):
+        if isinstance(val, struct_time):
+            self.encode(val)
+        else:
+            Envelope.set_val(self, val)
+    
+    def encode(self, ts, tz=0.0):
+        """encode a Python struct_time as the value of the _CipherDataTime
+        """
+        self['Year'].encode( ts.tm_year-self.YEAR_BASE )
+        self['Mon'].encode( ts.tm_mon  )
+        self['Day'].encode( ts.tm_mday )
+        self['Hour'].encode( ts.tm_hour )
+        self['Min'].encode( ts.tm_min )
+    
+    def decode(self):
+        """decode the value of the _CipherDataTime into a Python struct_time
+        """
+        return struct_time((
+            self.YEAR_BASE+self['Year'].decode(),
+            self['Mon'].decode(),
+            self['Day'].decode(),
+            self['Hour'].decode(),
+            self['Min'].decode(),
+            0, 0, 0, 0))
+
+
+class _CipherDataSet(Envelope):
+    _GEN = (
+        Uint16('CipherSetID'),
+        Buf('CipherKey', bl=128, rep=REPR_HEX),
+        Uint('spare', bl=3),
+        Uint('C0Len', bl=5),
+        Buf('C0', rep=REPR_HEX),
+        Uint('PosSIBType11', bl=1),
+        Uint('PosSIBType12', bl=1),
+        Uint('PosSIBType13', bl=1),
+        Uint('PosSIBType14', bl=1),
+        Uint('PosSIBType15', bl=1),
+        Uint('PosSIBType16', bl=1),
+        Uint('PosSIBType17', bl=1),
+        Uint('PosSIBType21', bl=1),
+        Uint('PosSIBType22', bl=1),
+        Uint('PosSIBType23', bl=1),
+        Uint('PosSIBType24', bl=1),
+        Uint('PosSIBType25', bl=1),
+        Uint('PosSIBType26', bl=1),
+        Uint('PosSIBType27', bl=1),
+        Uint('PosSIBType28', bl=1),
+        Uint('PosSIBType29', bl=1),
+        Uint('PosSIBType210', bl=1),
+        Uint('PosSIBType211', bl=1),
+        Uint('PosSIBType212', bl=1),
+        Uint('PosSIBType213', bl=1),
+        Uint('PosSIBType214', bl=1),
+        Uint('PosSIBType215', bl=1),
+        Uint('PosSIBType216', bl=1),
+        Uint('PosSIBType217', bl=1),
+        Uint('PosSIBType218', bl=1),
+        Uint('PosSIBType219', bl=1),
+        Uint('PosSIBType31', bl=1),
+        Uint('spare', bl=5),
+        _CipherDataTime('ValidityStartTime'),
+        Uint16('ValidityDuration'),
+        TAIList()
+        )
+
+
+class CipherKeyData(Sequence):
+    _GEN = _CipherDataSet()
+
+
+#------------------------------------------------------------------------------#
+# N1 UE network capability
+# TS 24.301, 9.9.3.57
+#------------------------------------------------------------------------------#
+
+class N1UENetCap(Envelope):
+    _GEN = (
+        Uint('spare', bl=2),
+        Uint('5GS-PNB-CIoT', bl=2),
+        Uint('5G-UP-CIoT', bl=1),
+        Uint('5G-HC-CP-CIoT', bl=1),
+        Uint('N3Data', bl=1),
+        Uint('5G-CP-CIoT', bl=1),
+        )
+
+
+#------------------------------------------------------------------------------#
+# UE radio capability ID availability
+# TS 24.301, 9.9.3.58
+#------------------------------------------------------------------------------#
+
+_UERadioCapIDAvail_dict = {
+    0 : 'UE radio capability ID not available',
+    1 : 'UE radio capability ID available'
+    }
+
+class UERadioCapIDAvail(Envelope):
+    _GEN = (
+        Uint('spare', bl=1),
+        Uint('Value', bl=3, dic=_UERadioCapIDAvail_dict)
+        )
+
+
+#------------------------------------------------------------------------------#
+# UE radio capability ID request
+# TS 24.301, 9.9.3.58
+#------------------------------------------------------------------------------#
+
+_UERadioCapIDReq_dict = {
+    0 : 'UE radio capability ID not requested',
+    1 : 'UE radio capability ID requested'
+    }
+
+class UERadioCapIDReq(Envelope):
+    _GEN = (
+        Uint('spare', bl=1),
+        Uint('Value', bl=3, dic=_UERadioCapIDReq_dict)
+        )
+
+
+#------------------------------------------------------------------------------#
+# WUS assistance information
+# TS 24.301, 9.9.3.62
+#------------------------------------------------------------------------------#
+# unclear description
 
 
 #------------------------------------------------------------------------------#
@@ -1208,6 +1595,8 @@ class APN_AMBR(Envelope):
         Envelope.set_val(self, vals)
     
     def _from_char(self, char):
+        if self.get_trans():
+            return
         # in case long-enough buffer is available, make extended fields non-transparent
         l = char.len_byte()
         if l == 6:
@@ -1291,6 +1680,8 @@ class EPSQoS(Envelope):
         Envelope.set_val(self, vals)
     
     def _from_char(self, char):
+        if self.get_trans():
+            return
         # in case long-enough buffer is available, make extended fields non-transparent
         l = char.len_byte()
         if l == 13:
@@ -1503,35 +1894,36 @@ class RemoteUEID(Envelope):
             self[3]._val = encode_bcd(ident[1:])
     
     def _from_char(self, char):
-        if not self.get_trans():
-            try:
-                spare = char.get_uint(5)
-                type  = char.get_uint(3)
-            except CharpyErr as err:
-                raise(CharpyErr('{0} [_from_char]: {1}'.format(self._name, err)))
-            except Exception as err:
-                raise(EltErr('{0} [_from_char]: {1}'.format(self._name, err)))
-            #
-            if type == 1:
-                if not hasattr(self, '_IDEncIMSI'):
-                    self._IDEncIMSI = RemUEIDEncIMSI()
-                self._content = self._IDTemp._content
-                self._by_id   = self._IDTemp._by_id
-                self._by_name = self._IDTemp._by_name
-                self[0]._val = spare >> 1
-                self[1]._val = spare & 1
-                self[3]._from_char(char)
-            #
-            elif type in (2, 3, 4, 5):
-                if not hasattr(self, '_IDDigit'):
-                    self._IDDigit = RemUEIDDigit()
-                self._content = self._IDDigit._content
-                self._by_id   = self._IDDigit._by_id
-                self._by_name = self._IDDigit._by_name
-                self[0]._val = spare >> 1
-                self[1]._val = spare & 1
-                self[2]._val = type
-                self[3]._from_char(char)   
+        if self.get_trans():
+            return
+        try:
+            spare = char.get_uint(5)
+            type  = char.get_uint(3)
+        except CharpyErr as err:
+            raise(CharpyErr('{0} [_from_char]: {1}'.format(self._name, err)))
+        except Exception as err:
+            raise(EltErr('{0} [_from_char]: {1}'.format(self._name, err)))
+        #
+        if type == 1:
+            if not hasattr(self, '_IDEncIMSI'):
+                self._IDEncIMSI = RemUEIDEncIMSI()
+            self._content = self._IDTemp._content
+            self._by_id   = self._IDTemp._by_id
+            self._by_name = self._IDTemp._by_name
+            self[0]._val = spare >> 1
+            self[1]._val = spare & 1
+            self[3]._from_char(char)
+        #
+        elif type in (2, 3, 4, 5):
+            if not hasattr(self, '_IDDigit'):
+                self._IDDigit = RemUEIDDigit()
+            self._content = self._IDDigit._content
+            self._by_id   = self._IDDigit._by_id
+            self._by_name = self._IDDigit._by_name
+            self[0]._val = spare >> 1
+            self[1]._val = spare & 1
+            self[2]._val = type
+            self[3]._from_char(char)   
     
     def repr(self):
         if not self._content:
@@ -1569,7 +1961,7 @@ class RemoteUEID(Envelope):
 
 
 class RemoteUECtxt(Envelope):
-    _AddrBlLUT = {1:4, 2:8} 
+    _AddrBlLUT = {1:32, 2:64} 
     _GEN = (
         Uint8('Len'),
         Uint8('Num'),
@@ -1646,7 +2038,7 @@ class HdrCompConfig(Envelope):
         Uint('P0x0002', bl=1),
         Uint16('MAX_CID'),
         Uint8('ParamsType', dic=_HdrCompConfPType_dict, trans=True),
-        Buf('ParamsContainer', trans=True, rep=REPR_HEX)
+        Buf('ParamsContainer', val=b'', rep=REPR_HEX, trans=True)
         )
     
     def set_val(self, vals):
@@ -1662,6 +2054,8 @@ class HdrCompConfig(Envelope):
         Envelope.set_val(self, vals)
     
     def _from_char(self, char):
+        if self.get_trans():
+            return
         if char.get_len() >= 4:
             self[9].set_trans(False)
             self[10].set_trans(False)
@@ -1742,4 +2136,58 @@ class HdrCompConfigStat(Envelope):
 class ServingPLMNRateCtrl(Uint16):
     _desc = 'maximum ESM data transport messages with user data per 6 min'
     _dic  = {0xFFFF: 'not restricted'}
+
+
+#------------------------------------------------------------------------------#
+# Extended APN aggregate maximum bit rate
+# TS 24.301, 9.9.4.29
+#------------------------------------------------------------------------------#
+
+_UnitBitrate_dict = {
+    1 : '200 kbps',
+    2 : '1 Mbps',
+    3 : '4 Mbps',
+    4 : '16 Mbps',
+    5 : '64 Mbps',
+    6 : '256 Mbps',
+    7 : '1 Gbps',
+    8 : '4 Gbps',
+    9 : '16 Gbps',
+    10: '64 Gbps',
+    11: '256 Gbps',
+    12: '1 Tbps',
+    13: '4 Tbps',
+    14: '16 Tbps',
+    15: '64 Tbps',
+    16: '256 Tbps',
+    17: '1 Pbps',
+    18: '4 Pbps',
+    19: '16 Pbps',
+    20: '64 Pbps',
+    21: '256 Pbps', # does it make any sense ?!!
+    }
+
+class ExtAPN_AMBR(Envelope):
+    _GEN = (
+        Uint8('UnitDL', dic=_UnitBitrate_dict),
+        Uint16('DL'),
+        Uint8('UnitUL', dic=_UnitBitrate_dict),
+        Uint16('UL')
+        )
+
+
+#------------------------------------------------------------------------------#
+# Extended quality of service
+# TS 24.301, 9.9.4.30
+#------------------------------------------------------------------------------#
+
+class ExtEPSQoS(Envelope):
+    _GEN = (
+        Uint8('UnitMaxBitrate', dic=_UnitBitrate_dict),
+        Uint16('MaxULBitrate'),
+        Uint16('MaxDLBitrate'),
+        Uint8('UnitGuaranteedBitrate', dic=_UnitBitrate_dict),
+        Uint16('GuaranteedULBitrate'),
+        Uint16('GuaranteedDLBitrate')
+        )
 

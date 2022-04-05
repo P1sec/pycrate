@@ -1,7 +1,7 @@
 # -*- coding: UTF-8 -*-
 #/**
 # * Software Name : pycrate
-# * Version : 0.3
+# * Version : 0.4
 # *
 # * Copyright 2017. Benoit Michau. ANSSI.
 # * Copyright 2018. Benoit Michau. P1Sec.
@@ -103,11 +103,9 @@ Single value: Python 2-tuple
     
     _ASN_RE = re.compile('(?:\'([\s01]{0,})\'B)|(?:\'([\s0-9A-F]{0,})\'H)')
     
-    _val_ref_type = str_types + (tuple, )
-    
     def _get_val_obj(self, ref):
-        if isinstance(ref, self._val_ref_type):
-            const_tr = self._get_const_tr()
+        const_tr = self._get_const_tr()
+        if isinstance(ref, str_types):
             if ref in const_tr:
                 return const_tr[ref]
             elif ref in _ASN1ObjBasicLUT:
@@ -115,12 +113,18 @@ Single value: Python 2-tuple
             else:
                 raise(ASN1ObjErr('{0}: invalid object reference, {1!r}'\
                       .format(self.fullname(), ref)))
+        elif isinstance(ref, (tuple, list)):
+            if ref in const_tr:
+                return const_tr[ref]
+            else:
+                try:
+                    return GLOBAL.MOD[ref[0]][ref[1]]
+                except Exception:
+                    raise(ASN1ObjErr('{0}: invalid object reference, {1!r}'\
+                          .format(self.fullname(), ref)))
         else:
-            try:
-                return GLOBAL.MOD[ref[0]][ref[1]]
-            except:
-                raise(ASN1ObjErr('{0}: invalid object reference, {1!r}'\
-                      .format(self.fullname(), ref)))
+            raise(ASN1ObjErr('{0}: invalid object reference, {1!r}'\
+                  .format(self.fullname(), ref)))
     
     def _get_const_tr(self):
         if hasattr(self, '__const_tr__'):
@@ -146,7 +150,7 @@ Single value: Python 2-tuple
             if self._TAB_LUT and self._const_tab and self._const_tab_at:
                 # collect all types from the table constraint
                 assert( hasattr(self, '_const_tab_id') )
-                for O in self._const_tab(self._const_tab_id):
+                for O in self._const_tab(self._const_tab_id)[::-1]:
                     if O._typeref is not None:
                         # put both complete module ref, and obj-only ref
                         const_tr[O._typeref.called] = O
@@ -223,23 +227,25 @@ Single value: Python 2-tuple
                 ASN1NotSuppErr('{0}: reference parsing unsupported'.format(self.fullname()))
     
     def _to_asn1(self):
-        if self._val[0][:5] == '_unk_':
-            # HSTRING
-            if python_version >= 3:
-                return '\'%s\'H' % hexlify(self._val[1]).decode('ascii').upper()
+        if isinstance(self._val[0], str_types):
+            if self._val[0][:5] == '_unk_':
+                # HSTRING
+                if python_version >= 3:
+                    return '\'%s\'H' % hexlify(self._val[1]).decode('ascii').upper()
+                else:
+                    return '\'%s\'H' % hexlify(self._val[1]).upper()
             else:
-                return '\'%s\'H' % hexlify(self._val[1]).upper()
-        else:
-            if isinstance(self._val[0], str_types):
                 ident = self._val[0]
-            elif isinstance(self._val[0], tuple):
-                ident = '.'.join(self._val[0])
-            else:
-                # self._val[0] is an ASN1Obj instance
-                ident = '%s.%s' % (self._val[0]._mod, self._val[0]._name)
-            Obj = self._get_val_obj(self._val[0])
-            Obj._val = self._val[1]
-            return '%s: %s' % (ident, Obj.to_asn1())
+                Obj   = self._get_val_obj(self._val[0])
+        elif isinstance(self._val[0], tuple):
+            ident = '.'.join(self._val[0])
+            Obj   = self._get_val_obj(self._val[0])
+        else:
+            # self._val[0] is an ASN1Obj instance
+            ident = '%s.%s' % (self._val[0]._mod, self._val[0]._name)
+            Obj   = self._val[0]
+        Obj._val = self._val[1]
+        return '%s: %s' % (ident, Obj.to_asn1())
     
     ###
     # conversion between internal value and ASN.1 PER encoding
@@ -332,7 +338,6 @@ Single value: Python 2-tuple
             Obj = self._get_val_obj(self._val[0])
         Obj._val = self._val[1]
         GEN = ASN1CodecPER.encode_unconst_open_ws(Obj)
-        #Obj._val = None
         self._struct = Envelope(self._name, GEN=tuple(GEN))
         return self._struct
     
@@ -346,7 +351,6 @@ Single value: Python 2-tuple
             Obj = self._get_val_obj(self._val[0])
         Obj._val = self._val[1]
         ret = ASN1CodecPER.encode_unconst_open(Obj)
-        #Obj._val = None
         return ret
     
     ###
@@ -369,7 +373,6 @@ Single value: Python 2-tuple
                 if not self._SILENT:
                     asnlog('OPEN._decode_ber_cont_ws: %s, unable to retrieve a table-looked up object'\
                            % self.fullname())
-                Objs = []
             elif const_obj_type == CLASET_UNIQ:
                 Objs = [const_obj]
             else:
@@ -396,7 +399,7 @@ Single value: Python 2-tuple
             for Obj in Objs:
                 try:
                     Obj._from_ber_ws(char, [tlv])
-                except:
+                except Exception:
                     # decoding failed
                     char._cur, char._len_bit = char_cur, char_lb
                 else:
@@ -431,7 +434,8 @@ Single value: Python 2-tuple
                 char._len_bit = 8*len(char._buf)
                 val = ASN1CodecBER.scan_tlv_ws(char, tlv)
                 self._val_tag = (cl, pc, tval)
-                self._val = ('_unk_%i%i%i' % self._val_tag, val)
+                ident = '_unk_%i%i%i' % self._val_tag
+                self._val = (ident, val)
                 V = Envelope('V', GEN=(Tag, Len, Buf(ident, val=val, bl=8*len(val), rep=REPR_HEX)))
             elif lval >= 0:
                 # primitive object
@@ -463,7 +467,6 @@ Single value: Python 2-tuple
                 if not self._SILENT:
                     asnlog('OPEN._decode_ber_cont: %s, unable to retrieve a table-looked up object'\
                            % self.fullname())
-                Objs = []
             elif const_obj_type == CLASET_UNIQ:
                 Objs = [const_obj]
             else:
@@ -490,7 +493,7 @@ Single value: Python 2-tuple
             for Obj in Objs:
                 try:
                     Obj._from_ber(char, [tlv])
-                except Exception as err:
+                except Exception:
                     char._cur, char._len_bit = char_cur, char_lb
                 else:
                     # set value
@@ -545,7 +548,7 @@ Single value: Python 2-tuple
                     cl, pc, tval = int(self._val[0][5:6]), \
                                    int(self._val[0][6:7]), \
                                    int(self._val[0][7:])
-                except:
+                except Exception:
                     cl, pc, tval = 0, 0, 4
                 TLV = ASN1CodecBER.encode_tlv_ws(cl, tval, self._val[1], pc=pc)
             else:
@@ -570,7 +573,7 @@ Single value: Python 2-tuple
                     cl, pc, tval = int(self._val[0][5:6]), \
                                    int(self._val[0][6:7]), \
                                    int(self._val[0][7:])
-                except:
+                except Exception:
                     cl, pc, tval = 0, 0, 4
                 TLV = ASN1CodecBER.encode_tlv(cl, tval, self._val[1], pc=pc)
             else:
@@ -639,6 +642,107 @@ Single value: Python 2-tuple
                 Obj = self._get_val_obj(self._val[0])
             Obj._val = self._val[1]
             return Obj._to_jval()
+
+    ###
+    # conversion between internal value and ASN.1 OER/COER encoding
+    ###
+
+    def _from_oer(self, char):
+        # try to get a defined object from a table constraint
+        if self._TAB_LUT and self._const_tab and self._const_tab_at:
+            const_obj_type, const_obj = self._get_tab_obj()
+            if const_obj_type == CLASET_NONE:
+                if not self._SILENT:
+                    asnlog('OPEN._from_oer: %s, unable to retrieve a table-looked up object' \
+                           % (self.fullname()))
+                Obj = None
+            elif const_obj_type == CLASET_UNIQ:
+                Obj = const_obj
+            else:
+                # const_obj_type == CLASET_MULT
+                # with PER, no tag to select a given object
+                Obj = const_obj[0]
+        else:
+            # TODO: another way to provide a (set of) potential defined object(s)
+            # is to look into value constraint self._const_val
+            # if we have multiple, then we would have to bruteforce the decoding
+            # until a correct one is found !!!
+            Obj = None
+        #
+        val_bytes = ASN1CodecOER.decode_open_type(char)
+        val = Obj.from_oer(val_bytes) if (Obj is not None) else val_bytes
+
+        if Obj is None:
+            if self._const_val:
+                asnlog('OPEN._from_per: %s, potential type constraint(s) available but unused' \
+                       % self.fullname())
+            assert( isinstance(val, bytes_types) )
+            self._val = ('_unk_004', val)
+        else:
+            if Obj._typeref is not None:
+                self._val = (Obj._typeref.called[1], val)
+            else:
+                self._val = (Obj.TYPE, val)
+        return
+
+    def _from_oer_ws(self, char):
+        # try to get a defined object from a table constraint
+        if self._TAB_LUT and self._const_tab and self._const_tab_at:
+            const_obj_type, const_obj = self._get_tab_obj()
+            if const_obj_type == CLASET_NONE:
+                if not self._SILENT:
+                    asnlog('OPEN._from_per_ws: %s, unable to retrieve a table-looked up object' \
+                           % (self.fullname()))
+                Obj = None
+            elif const_obj_type == CLASET_UNIQ:
+                Obj = const_obj
+            else:
+                # const_obj_type == CLASET_MULT
+                # with PER, no tag to select a given object
+                Obj = const_obj[0]
+        else:
+            # TODO: another way to provide a (set of) potential defined object(s)
+            # is to look into value constraint self._const_val
+            # if we have multiple, then we would have to bruteforce the decoding
+            # until a correct one is found !!!
+            Obj = None
+        #
+        val_bytes, GEN = ASN1CodecOER.decode_open_type_ws(char)
+        if Obj is None:
+            if self._const_val:
+                asnlog('OPEN._from_per_ws: %s, potential type constraint(s) available but unused' \
+                       % self.fullname())
+            self._val = ('_unk_004', val_bytes)
+        else:
+            val = Obj.from_oer(val_bytes)
+            if Obj._typeref is not None:
+                self._val = (Obj._typeref.called[1], val)
+            else:
+                self._val = (Obj.TYPE, val)
+        self._struct = Envelope(self._name, GEN=tuple(GEN))
+
+    def _to_oer(self):
+        if isinstance(self._val[0], ASN1Obj):
+            Obj = self._val[0]
+        else:
+            if self._val[0][:5] == '_unk_':
+                return ASN1CodecOER.encode_open_type(self._val[1])
+            Obj = self._get_val_obj(self._val[0])
+        Obj._val = self._val[1]
+        return ASN1CodecOER.encode_open_type(Obj.to_oer())
+
+    def _to_oer_ws(self):
+        if isinstance(self._val[0], ASN1Obj):
+            Obj = self._val[0]
+        else:
+            if self._val[0][:5] == '_unk_':
+                _gen = ASN1CodecOER.encode_open_type_ws(self._val[1])
+                return Envelope(self._name, GEN=(_gen,))
+            Obj = self._get_val_obj(self._val[0])
+        Obj._val = self._val[1]
+        _gen = ASN1CodecOER.encode_open_type_ws(Obj.to_oer())
+        self._struct = Envelope(self._name, GEN=(_gen,))
+        return self._struct
 
 
 class ANY(OPEN):

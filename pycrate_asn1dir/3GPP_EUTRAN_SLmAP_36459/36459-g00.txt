@@ -1,0 +1,2464 @@
+﻿
+
+
+
+Contents
+Foreword	5
+1	Scope	6
+2	References	6
+3	Definitions, symbols and abbreviations	6
+3.1	Definitions	6
+3.2	Symbols	7
+3.3	Abbreviations	7
+4	General	7
+4.1	Procedure Specification Principles	7
+4.2	Forwards and Backwards Compatibility	8
+4.3	Specification Notations	8
+5	SLmAP Services	8
+6	Services Expected from Signalling Transport	8
+7	Functions of SLmAP	8
+8	SLmAP Procedures	9
+8.1	List of SLmAP Elementary procedures	9
+8.2	Measurement Procedures	9
+8.2.1	Measurement	9
+8.2.1.1	General	9
+8.2.1.2	Successful Operation	10
+8.2.1.3	Unsuccessful Operation	10
+8.2.1.4	Abnormal Conditions	10
+8.2.2	Measurement Update	10
+8.2.2.1	General	10
+8.2.2.2	Successful Operation	11
+8.2.2.3	Unsuccessful Operation	11
+8.2.2.4	Abnormal Conditions	11
+8.2.3	Measurement Abort	11
+8.2.3.1	General	11
+8.2.3.2	Successful Operation	11
+8.2.3.3	Unsuccessful Operation	12
+8.2.3.4	Abnormal Conditions	12
+8.3	Management procedures	12
+8.3.1	SLm Setup	12
+8.3.1.1	General	12
+8.3.1.2	Successful Operation	12
+8.3.1.3	Unsuccessful Operation	12
+8.3.1.4	Abnormal Conditions	13
+8.3.2	Reset	13
+8.3.2.1	General	13
+8.3.2.2	Successful Operation	13
+8.3.2.2.1	Reset Procedure Initiated from the E-SMLC	13
+8.3.2.2.2	Reset Procedure Initiated from the LMU	13
+8.3.2.4	Abnormal Conditions	14
+8.3.3	Error Indication	14
+8.3.3.1	General	14
+8.3.3.2	Successful Operation	14
+9	Elements for SLmAP Communication	14
+9.1	Message Functional Definition and Content	14
+9.1.1	MEASUREMENT REQUEST	14
+9.1.2	MEASUREMENT RESPONSE	15
+9.1.3	MEASUREMENT FAILURE	15
+9.1.4	SLm SETUP REQUEST	15
+9.1.5	SLm SETUP RESPONSE	15
+9.1.6	SLm SETUP FAILURE	15
+9.1.7	RESET REQUEST	16
+9.1.8	RESET ACKNOWLEDGE	16
+9.1.9	MEASUREMENT ABORT	16
+9.1.10	MEASUREMENT UPDATE	16
+9.1.11	ERROR INDICATION	17
+9.2	Information Element Definitions	17
+9.2.1	General	17
+9.2.2	Message Type	17
+9.2.3	SLmAP Transaction ID	17
+9.2.4	UL RTOA Measurement Configuration	18
+9.2.5	UL RTOA Measurements	20
+9.2.6	LMU ID	20
+9.2.7	E-SMLC ID	20
+9.2.8	LMU Information	21
+9.2.9	LMU Position	21
+9.2.10	Cause	22
+9.2.11	Criticality Diagnostics	23
+9.2.12	E-SMLC Measurement ID	24
+9.3	Message and Information Element Abstract Syntax (with ASN.1)	25
+9.3.1	General	25
+9.3.2	Usage of Private Message Mechanism for Non-standard Use	25
+9.3.3	Elementary Procedure Definitions	25
+9.3.4	PDU Definitions	29
+9.3.5	Information Element definitions	34
+9.3.6	Common definitions	40
+9.3.7	Constant definitions	41
+9.3.8	Container definitions	42
+9.4	Message Transfer Syntax	46
+9.5	Timers	46
+10	Handling of Unknown, Unforeseen and Erroneous Protocol Data	47
+Annex A (informative):	Change history	47
+
+Foreword
+This Technical Specification has been produced by the 3rd Generation Partnership Project (3GPP).
+The contents of the present document are subject to continuing work within the TSG and may change following formal TSG approval. Should the TSG modify the contents of the present document, it will be re-released by the TSG with an identifying change of release date and an increase in version number as follows:
+Version x.y.z
+where:
+x	the first digit:
+1	presented to TSG for information;
+2	presented to TSG for approval;
+3	or greater indicates TSG approved document under change control.
+y	the second digit is incremented for all changes of substance, i.e., technical enhancements, corrections, updates, etc.
+z	the third digit is incremented when editorial only changes have been incorporated in the document.
+1	Scope
+The present document specifies the E-UTRAN radio network layer signalling protocol for the SLm interface. The SLm Application Protocol (SLmAP) supports the functions of the SLm interface by signalling procedures defined in this document. SLmAP is developed in accordance to the general principles stated in TS 36.305 [2] and TS 36.456 [3].
+2	References
+The following documents contain provisions which, through reference in this text, constitute provisions of the present document.
+-	References are either specific (identified by date of publication, edition number, version number, etc.) or non‑specific.
+-	For a specific reference, subsequent revisions do not apply.
+-	For a non-specific reference, the latest version applies. In the case of a reference to a 3GPP document (including a GSM document), a non-specific reference implicitly refers to the latest version of that document in the same Release as the present document.
+[1]	3GPP TR 21.905: "Vocabulary for 3GPP Specifications".
+[2]	3GPP TS 36.305: "Stage 2 functional specification of User Equipment (UE) positioning in E-UTRAN".
+[3]	3GPP TS 36.456: "Evolved Universal Terrestrial Radio Access Network (E-UTRAN); SLm interface general aspects and principles".
+[4]	3GPP TS 36.455: "LTE Positioning Protocol A (LPPa)".
+[5]	3GPP TS 36.101: "User Equipment (UE) radio transmission and reception".
+[6]	3GPP TS 23.032: "Universal Geographical Area Description (GAD)".
+[7]	3GPP TS 36.413: " Evolved Universal Terrestrial Radio Access Network (E-UTRAN);  S1 Application Protocol".
+[8]	ITU-T Recommendation X.691 (2002-07): "Information technology - ASN.1 encoding rules - Specification of Packed Encoding Rules (PER)".
+[9]	3GPP TS 36.111: "Location Measurement Unit (LMU) performance specification; User Equipment (UE) positioning in E-UTRAN".
+[10]	3GPP TS 36.104:  "Evolved Universal Terrestrial Radio Access Network (E-UTRAN); Base Station (BS) radio transmission and reception".
+[11]	3GPP TS 36.211:  "Evolved Universal Terrestrial Radio Access Network (E-UTRAN); Physical Channels and Modulation".
+3	Definitions, symbols and abbreviations
+3.1	Definitions
+For the purposes of the present document, the terms and definitions given in TR 21.905 [1] and the following apply. A term defined in the present document takes precedence over the definition of the same term, if any, in TR 21.905 [1].
+Elementary Procedure: SLmAP consists of Elementary Procedures (EPs). An Elementary Procedure is a unit of interaction between LMUs in the E-UTRAN and E-SMLCs in the EPC. These Elementary Procedures are defined separately and are intended to be used to build up complete sequences in a flexible manner. If the independence between some EPs is restricted, it is described under the relevant EP description. Unless otherwise stated by the restrictions, the EPs may be invoked independently of each other as standalone procedures, which can be active in parallel. The usage of several SLmAP EPs together or together with EPs from other interfaces is specified in stage 2 specifications (e.g., TS 23.305 [2]).
+An EP consists of an initiating message and possibly a response message. Two kinds of EPs are used:
+-	Class 1: Elementary Procedures with response (success and/or failure).
+-	Class 2: Elementary Procedures without response.
+For Class 1 EPs, the types of responses can be as follows:
+Successful:
+-	A signalling message explicitly indicates that the elementary procedure successfully completed with the receipt of the response.
+Unsuccessful:
+-	A signalling message explicitly indicates that the EP failed.
+-	On time supervision expiry (i.e., absence of expected response).
+Successful and Unsuccessful:
+-	One signalling message reports both successful and unsuccessful outcome for the different included requests. The response message used is the one defined for successful outcome.
+Class 2 EPs are considered always successful.
+3.2	Symbols
+-
+3.3	Abbreviations
+For the purposes of the present document, the abbreviations given in TR 21.905 [1] and the following apply. An abbreviation defined in the present document takes precedence over the definition of the same abbreviation, if any, in TR 21.905 [1].
+LMU	Location Measurement Unit
+SLmAP	SLm Interface Application Protocol
+SRS	Sounding Reference Signal
+TNL	Transport Network Layer
+UL RTOA	Uplink Relative Time of Arrival
+UTDOA	Uplink Time Difference of Arrival
+4	General
+4.1	Procedure Specification Principles
+The principle for specifying the procedure logic is to specify the functional behaviour of the terminating node exactly and completely. Any rule that specifies the behaviour of the originating node shall be possible to be verified with information that is visible within the system.
+The following specification principles have been applied for the procedure text in clause 8:
+-	The procedure text discriminates between:
+1)	Functionality which "shall" be executed
+	The procedure text indicates that the receiving node "shall" perform a certain function Y under a certain condition. If the receiving node supports procedure X but cannot perform functionality Y requested in the REQUEST message of a Class 1 EP, the receiving node shall respond with the message used to report unsuccessful outcome for this procedure, containing an appropriate cause value.
+2)	Functionality which "shall, if supported" be executed
+	The procedure text indicates that the receiving node "shall, if supported," perform a certain function Y under a certain condition. If the receiving node supports procedure X, but does not support functionality Y, the receiving node shall proceed with the execution of the EP, possibly informing the requesting node about the not supported functionality.
+-	Any required inclusion of an optional IE in a response message is explicitly indicated in the procedure text. If the procedure text does not explicitly indicate that an optional IE shall be included in a response message, the optional IE shall not be included. For requirements on including Criticality Diagnostics IE, see clause 10.
+4.2	Forwards and Backwards Compatibility
+The forwards and backwards compatibility of the protocol is assured by mechanism where all current and future messages, and IEs or groups of related IEs, include ID and criticality fields that are coded in a standard format that will not be changed in the future. These parts can always be decoded regardless of the standard version.
+4.3	Specification Notations
+For the purposes of the present document, the following notations apply:
+Procedure	When referring to an elementary procedure in the specification the Procedure Name is written with the first letters in each word in upper case characters followed by the word "procedure", e.g., E-RAB procedure.
+Message	When referring to a message in the specification the MESSAGE NAME is written with all letters in upper case characters followed by the word "message", e.g., MESSAGE NAME message.
+IE	When referring to an information element (IE) in the specification the Information Element Name is written with the first letters in each word in upper case characters and all letters in Italic font followed by the abbreviation "IE", e.g., Information Element IE.
+Value of an IE	When referring to the value of an information element (IE) in the specification the "Value" is written as it is specified in subclause 9.2 enclosed by quotation marks, e.g., "Value".
+5	SLmAP Services
+SLmAP provides the signalling service between E-SMLC and the Location Measurement Unit (LMU) that is required to fulfil the SLmAP functions described in clause 7. The procedures are divided into two groups:
+1.	UTDOA Measurement Information Transfer procedures;
+2.	SLm Interface Management procedures.
+6	Services Expected from Signalling Transport
+The signalling connection shall provide in sequence delivery of SLmAP messages. SLmAP shall be notified if the signalling connection breaks.
+7	Functions of SLmAP
+The SLmAP protocol has the following functions:
+-	Measurement Information Transfer. This function allows the E-SMLC to exchange measurement information with the LMU for the purpose of UTDOA positioning.
+-	SLm interface management.  This function allows initialization of the SLm interface and exchange of capability information between the E-SMLC and LMU.
+-	Reporting of general error situations.  This function allows proper error reporting and handling.
+Table 7.1: Mapping between SLmAP functions and LPPa EPs
+Function
+Elementary Procedure(s)
+Measurement Information Transfer
+a) Measurement 
+b) Measurement Update
+c) Measurement Abort
+SLm Interface Management
+a) SLm Setup 
+b) Reset 
+Reporting of general error situations
+Error Indication 
+
+8	SLmAP Procedures
+8.1	List of SLmAP Elementary procedures
+In the following tables, all EPs are divided into Class 1 and Class 2 EPs (see subclause 3.1 for explanation of the different classes):
+Table 8.1.1: Class 1 procedures
+Elementary Procedure
+Initiating Message
+Successful Outcome
+Unsuccessful Outcome
+
+
+Response message
+Response message
+Measurement 
+MEASUREMENT  REQUEST
+MEASUREMENT RESPONSE
+MEASUREMENT FAILURE
+SLm Setup
+SLm SETUP REQUEST
+SLm SETUP RESPONSE
+SLm SETUP FAILURE
+Reset
+RESET REQUEST
+RESET ACKNOWLEDGE
+
+
+Table 8.1.2: Class 2 procedures
+Elementary Procedure
+Message
+Measurement Update
+MEASUREMENT UPDATE
+Measurement Abort
+MEASUREMENT ABORT 
+Error Indication
+ERROR INDICATION
+
+The following applies concerning interference between Elementary Procedures:
+-	The Reset procedure takes precedence over all other EPs.
+8.2	Measurement Procedures
+8.2.1	Measurement
+8.2.1.1	General
+The purpose of the Measurement procedure is to allow the E-SMLC to request the LMU to perform and report UL RTOA measurements for the purpose of UTDOA positioning.
+8.2.1.2	Successful Operation
+
+Figure 8.2.1.2.1: Measurement procedure. Successful operation.
+The E-SMLC initiates the procedure by sending a MEASUREMENT REQUEST message to the LMU. The E-SMLC shall include the deltaSS IE in the MEASUREMENT REQUEST message if SRS sequence hopping is enabled for that particular measurement. If the deltaSS IE is included in the MEASUREMENT REQUEST message, the LMU shall consider that SRS sequence hopping is enabled for the measurement being requested. If the requested measurement has been successful, the LMU shall reply with a MEASUREMENT RESPONSE message.
+8.2.1.3	Unsuccessful Operation
+
+Figure 8.2.1.3.1: Measurement procedure. Unsuccessful operation.
+If the LMU cannot successfully measure the UL RTOA for the target UE, it shall respond with a MEASUREMENT FAILURE message indicating the cause of the failure.
+8.2.1.4	Abnormal Conditions
+Not applicable.
+8.2.2	Measurement Update
+8.2.2.1	General
+The purpose of the Measurement Update Procedure is to notify the LMU of a change in the previously signalled measurement configuration for one or more cells for the UE being positioned.
+8.2.2.2	Successful Operation
+
+Figure 8.2.2.2.1: Measurement Update: Successful Operation.
+The E-SMLC initiates the procedure by sending a MEASUREMENT UPDATE message. The E-SMLC shall include the deltaSS IE in the MEASUREMENT UPDATE message if SRS sequence hopping is enabled for that particular measurement. If the deltaSS IE is included in the MEASUREMENT UPDATE message, the LMU shall consider that SRS sequence hopping is enabled for the measurement.
+Upon receiving the UL RTOA Measurement Configuration IE, the LMU shall overwrite the previously received measurement configuration information.
+8.2.2.3	Unsuccessful Operation
+Not applicable.
+8.2.2.4	Abnormal Conditions
+If the LMU cannot identify the previously requested measurement to be modified, it shall ignore the MEASUREMENT UPDATE message without taking further action.
+8.2.3	Measurement Abort
+8.2.3.1	General
+The purpose of the Measurement Abort Procedure is to enable the E-SMLC to abort  an on-going measurement identified by the E-SMLC Measurement ID.
+8.2.3.2	Successful Operation
+
+Figure 8.2.3.2.1: Measurement Abort Procedure: Successful Operation.
+The E-SMLC initiates the procedure by sending a MEASUREMENT ABORT message.
+Upon receiving this message, the LMU shall terminate the on-going measurement identified by the E-SMLC Measurement ID and may release any resources previously allocated for the same measurement.
+8.2.3.3	Unsuccessful Operation
+Not applicable.
+8.2.3.4	Abnormal Conditions
+If the LMU cannot identify the previously requested measurement to be aborted, it shall ignore the MEASUREMENT ABORT message without taking further action.
+8.3	Management procedures
+The following paragraphs describe the SLmAP interface management procedures.
+8.3.1	SLm Setup
+8.3.1.1	General
+The purpose of the Setup procedure is to exchange application level data needed for the E-SMLC and the LMU to correctly interoperate on the SLm interface. This procedure shall be the first SLmAP procedure triggered after the TNL association has become operational.
+8.3.1.2	Successful Operation
+
+Figure 8.3.1.2.1: SLm Setup procedure: Successful Operation.
+The LMU initiates the procedure by sending the SLm SETUP REQUEST message to the E-SMLC including the appropriate data. The E-SMLC responds with an SLm SETUP RESPONSE message.
+The exchanged data shall be stored in respective node and used for the duration of the TNL association. When this procedure is finished, the SLm interface is operational and other SLmAP messages can be exchanged.
+8.3.1.3	Unsuccessful Operation
+
+Figure 8.3.1.3.1: SLm Setup procedure: Unsuccessful Operation.
+If the E-SMLC cannot accept the setup, it shall respond with an SLm SETUP FAILURE with an appropriate cause value.
+8.3.1.4	Abnormal Conditions
+Not applicable.
+8.3.2	Reset
+8.3.2.1	General
+The purpose of the Reset procedure is to initialise or re-initialise the LMU SLmAP contexts in the event of a failure in either the LMU or E-SMLC. This procedure does not affect the application level configuration data exchanged during, e.g., the SLm Setup procedure.
+8.3.2.2	Successful Operation
+8.3.2.2.1	Reset Procedure Initiated from the E-SMLC
+
+Figure 8.3.2.2.1.1: Reset procedure initiated from the E-SMLC.
+In the event of a failure at the E-SMLC, which has resulted in the loss of some or all transaction reference information, a RESET REQUEST message should be sent to the LMU.
+At reception of the RESET REQUEST message the LMU shall abort any other ongoing procedure (except another Reset procedure) on the same SLm interface, delete any measurement information related to the E-SMLC, release associated resources, and respond with the RESET ACKNOWLEDGE message.
+8.3.2.2.2	Reset Procedure Initiated from the LMU
+
+Figure 8.3.2.2.2.1: Reset procedure initiated from the LMU.
+In the event of a failure at the LMU, which has resulted in the loss of some or all transaction reference information, a RESET REQUEST message shall be sent to the E-SMLC.
+At reception of the RESET REQUEST message the E-SMLC shall abort any other ongoing procedure (except another Reset procedure) on the same SLm interface, delete any measurement information related to the LMU, release associated resources, and respond with the RESET ACKNOWLEDGE message.
+8.3.2.3	Unsuccessful Operation
+Void.
+8.3.2.4	Abnormal Conditions
+If a Reset procedure is ongoing in the LMU concerning one requesting E-SMLC and the LMU receives a RESET message from the same E-SMLC, the LMU shall respond with the RESET ACKNOWLEDGE message as described in 8.3.2.2.1.
+If a Reset procedure is ongoing in the E-SMLC concerning one requesting LMU and the E-SMLC receives a RESET message from the same LMU, the E-SMLC shall respond with the RESET ACKNOWLEDGE message as described in 8.3.2.2.2.
+If the requesting entity does not receive RESET ACKNOWLEDGE message, the requesting entity may reinitiate the Reset procedure towards the same receiving entity provided that the content of the new RESET REQUEST message is identical to the content of the previously unacknowledged RESET REQUEST message.
+8.3.3	Error Indication
+8.3.3.1	General
+The Error Indication procedure is initiated by a node in order to report detected errors in one incoming message, provided they cannot be reported by an appropriate failure message.
+8.3.3.2	Successful Operation
+
+Figure 8.3.3.2.1: Error Indication procedure
+When the conditions defined in clause 10 are fulfilled, the Error Indication procedure is initiated by an ERROR INDICATION message sent from the receiving node.
+The ERROR INDICATION message shall contain at least either the Cause IE or the Criticality Diagnostics IE.
+9	Elements for SLmAP Communication
+9.1	Message Functional Definition and Content
+9.1.1	MEASUREMENT REQUEST
+This message is sent by the E-SMLC to request the LMU to make a UL RTOA measurement.
+Direction: E-SMLC  LMU.
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+Criticality
+Assigned Criticality
+Message Type
+M
+
+9.2.2
+
+YES
+reject
+SLmAP Transaction ID
+M
+
+9.2.3
+
+-
+
+E-SMLC Measurement ID
+M
+
+9.2.12
+
+YES
+reject
+UL RTOA Measurement Configuration
+M
+
+9.2.4
+
+YES
+reject
+
+9.1.2	MEASUREMENT RESPONSE
+This message is sent by the LMU to report UL RTOA measurements for the target UE.
+Direction: LMU  E-SMLC.
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+Criticality
+Assigned Criticality
+Message Type
+M
+
+9.2.2
+
+YES
+reject
+SLmAP Transaction ID
+M
+
+9.2.3
+
+-
+
+E-SMLC Measurement ID
+M
+
+9.2.12
+
+YES
+reject
+UL RTOA measurements
+M
+
+9.2.5
+
+YES
+reject
+Criticality Diagnostics
+O
+
+9.2.11
+
+YES
+ignore
+
+9.1.3	MEASUREMENT FAILURE
+This message is sent by the LMU to report measurement failure.
+Direction: LMU  E-SMLC.
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+Criticality
+Assigned Criticality
+Message Type
+M
+
+9.2.2
+
+YES
+reject
+SLmAP Transaction ID
+M
+
+9.2.3
+
+-
+
+E-SMLC Measurement ID
+M
+
+9.2.12
+
+YES
+reject
+Cause
+M
+
+9.2.10
+
+YES
+ignore
+Criticality Diagnostics
+O
+
+9.2.11
+
+YES
+ignore
+
+9.1.4	SLm SETUP REQUEST
+This message is sent by the LMU to setup SLm with E-SMLC.
+Direction: LMU  E-SMLC
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+Criticality
+Assigned Criticality
+Message Type
+M
+
+9.2.2
+
+YES
+reject
+SLmAP Transaction ID
+M
+
+9.2.3
+
+-
+
+LMU ID
+M
+
+9.2.6
+
+YES
+ignore
+LMU Information
+O
+
+9.2.8
+
+YES
+ignore
+
+9.1.5	SLm SETUP RESPONSE
+This message is sent by the E-SMLC to information LMU
+Direction: E-SMLC  LMU
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+Criticality
+Assigned Criticality
+Message Type
+M
+
+9.2.2
+
+YES
+reject
+SLmAP Transaction ID
+M
+
+9.2.3
+
+-
+
+E-SMLC ID
+M
+
+9.2.7
+
+YES
+reject
+Criticality Diagnostics
+O
+
+9.2.11
+
+YES
+ignore
+
+9.1.6	SLm SETUP FAILURE
+This message is sent by the E-SMLC to indicate SLm Setup failure.
+Direction: E-SMLC  LMU
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+Criticality
+Assigned Criticality
+Message Type
+M
+
+9.2.2
+
+YES
+reject
+SLmAP Transaction ID
+M
+
+9.2.3
+
+-
+
+Cause
+M
+
+9.2.10
+
+YES
+ignore
+Criticality Diagnostics
+O
+
+9.2.11
+
+YES
+ignore
+
+9.1.7	RESET REQUEST
+This message is sent from the E-SMLC to the LMU or vice versa in order to reset the SLm interface.
+Direction: E-SMLC  LMU or LMU  E-SMLC.
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+Criticality
+Assigned Criticality
+Message Type
+M
+
+9.2.2
+
+YES
+reject
+SLmAP Transaction ID
+M
+
+9.2.3
+
+-
+
+Cause 
+M
+
+9.2.10
+
+YES
+ignore
+
+9.1.8	RESET ACKNOWLEDGE
+This message is sent by the receiving entity as a response to a RESET REQUEST message.
+Direction: E-SMLC  LMU or LMU  E-SMLC.
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+Criticality
+Assigned Criticality
+Message Type
+M
+
+9.2.2
+
+YES
+reject
+SLmAP Transaction ID
+M
+
+9.2.3
+
+-
+
+Criticality Diagnostics
+O
+
+9.2.11
+
+YES
+ignore
+
+9.1.9	MEASUREMENT ABORT
+This message is sent by the E-SMLC to request the LMU to abort the measurement identified by the E-SMLC Measurement ID.
+Direction: E-SMLC   LMU.
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+Criticality
+Assigned Criticality
+Message Type
+M
+
+9.2.2
+
+YES
+reject
+SLmAP Transaction ID
+M
+
+9.2.3
+
+-
+
+E-SMLC Measurement ID
+M
+
+9.2.12
+
+YES
+reject
+
+9.1.10	MEASUREMENT UPDATE
+This message is sent by the E-SMLC to indicate to the LMU that the previously signalled measurement configuration for the target UE has changed for one or more cells, and to convey the SRS  configuration for all cells with periodic SRS configured for the target UE.
+Direction: E-SMLC   LMU.
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+Criticality
+Assigned Criticality
+Message Type
+M
+
+9.2.2
+
+YES
+reject
+SLmAP Transaction ID
+M
+
+9.2.3
+
+-
+
+E-SMLC Measurement ID
+M
+
+9.2.12
+
+YES
+reject
+UL RTOA Measurement Configuration
+M
+
+9.2.4
+
+YES
+reject
+
+9.1.11	ERROR INDICATION
+This message is used to indicate that some error has been detected in the eNB or in the E-SMLC.
+Direction: E-SMLC  eNB and eNB  E-SMLC.
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+Criticality
+Assigned Criticality
+Message Type
+M
+
+9.2.2
+
+YES
+ignore
+SLmAP Transaction ID
+M
+
+9.2.3
+
+-
+
+Cause
+O
+
+9.2.0
+
+YES
+ignore
+Criticality Diagnostics
+O
+
+9.2.11
+
+YES
+ignore
+
+9.2	Information Element Definitions
+9.2.1	General
+Subclause 9.2 presents the SLmAP IE definitions in tabular format. The corresponding ASN.1 definition is presented in subclause 9.3. In case there is contradiction between the tabular format in subclause 9.2 and the ASN.1 definition, the ASN.1 shall take precedence, except for the definition of conditions for the presence of conditional elements, where the tabular format shall take precedence.
+When specifying information elements which are to be represented by bitstrings, if not otherwise specifically stated in the semantics description of the concerned IE or elsewhere, the following principle applies with regards to the ordering of bits:
+-	The first bit (leftmost bit) contains the most significant bit (MSB);
+-	The last bit (rightmost bit) contains the least significant bit (LSB);
+-	When importing bitstrings from other specifications, the first bit of the bitstring contains the first bit of the concerned information;
+9.2.2	Message Type
+The Message Type IE uniquely identifies the message being sent. It is mandatory for all messages.
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+Message Type
+
+
+
+
+>Procedure Code
+M
+
+INTEGER (0..63)
+
+>Type of Message
+M
+
+CHOICE (Initiating Message, Successful Outcome, Unsuccessful Outcome, …)
+
+
+9.2.3	SLmAP Transaction ID
+The SLmAP Transaction ID IE is used to associate all the messages belonging to the same procedure. Messages belonging to the same procedure shall use the same Transaction ID.
+The SLmAP Transaction ID is determined by the initiating peer of a procedure.
+The SLmAP Transaction ID shall uniquely identify a procedure among all ongoing parallel procedures using the same procedure code, and initiated by the same peer.
+IE/Group Name
+Presence
+Range
+IE Type and Reference
+Semantics Description
+SLmAP Transaction ID
+M
+
+INTEGER (0..32767, …)
+
+
+9.2.4	UL RTOA Measurement Configuration
+The purpose of the UL RTOA Measurement Configuration IE is to convey the UL RTOA measurement parameters to the LMU.
+IE/Group Name
+Presence
+Range
+IE Type and Reference
+Semantics Description
+UL RTOA Reference Time
+M
+
+BIT STRING (64)
+Time in seconds relative to 00:00:00 on 1 January  1900 (calculated as continuous time without leap seconds and traceable to a common time reference) where binary encoding of the integer part is in the first 32 bits and binary encoding of the fraction part in the last 32 bits. The fraction part is expressed with a granularity of 1 /2**32 second. This IE is defined in reference to the SFN initialization time, TS 36.455 [4].
+Search Window Parameters
+O
+
+
+
+>Expected Propagation Delay
+O
+
+INTEGER 
+(1..1200,…)
+
+UL RTOA expected propagation delay as defined in TS 36.111 [9].
+>Delay Uncertainty
+O
+
+INTEGER 
+(1..100,…)
+
+The uncertainty of the propagation delay.
+Mapping is included in TS 36.111 [9].
+Number of Transmissions
+M
+
+INTEGER (1..500,…, 0)
+The number of periodic SRS transmissions. The value of ‘0’ represents an infinite number of SRS transmissions.
+SRS Configuration
+M
+<1..
+maxServCell>
+
+Configuration of SRS for corresponding serving cells.
+>PCI
+M
+
+INTEGER (0..503, …)
+Physical Cell ID TS 36.455 [4].
+>UL EARFCN
+M
+
+INTEGER (0..maxEARFCN, ...)
+Corresponds to NUL for FDD and NDL/UL for TDD in ref. TS 36.104 [10]
+>UL-bandwidth
+M
+
+ENUMERATED (n6, n15, n25, n50, n75, n100, ...)
+Cell transmission bandwidth configuration in uplink corresponding to an E-UTRA channel bandwidth TS 36.104 [10], Table 5.6-1. Value n6 corresponds to 6 resource blocks, n15 to 15 resource blocks and so on.
+>UL-CyclicPrefixLength
+M
+
+ENUMERATED (Normal, Extended)
+Uplink cyclic prefix TS 36.455 [4].
+>srs-BandwidthConfig
+M
+
+ENUMERATED (bw0, bw1, bw2, bw3, bw4, bw5, bw6, bw7, ...)
+Cell-specific SRS bandwidth configuration TS 36.211 [11]. bw0 corresponds to value 0, bw1 to value 1 and so on.
+>srs-Bandwidth
+M
+
+ENUMERATED (bw0, bw1, bw2, bw3, ...)
+UE-specific SRS bandwidth configuration TS 36.211 [11]
+>srs-AntennaPort
+M
+
+ENUMERATED
+(an1, an2, an4, , ...)
+Number of antenna ports for SRS transmission. TS 36.211 [11]
+>srs-HoppingBandwidth
+M
+
+ENUMERATED (hbw0, hbw1, hbw2, hbw3, ...)
+SRS frequency hopping bandwidth configuration TS 36.211 [11]
+>srs-cyclicShift
+M
+
+ENUMERATED (cs0, cs1, cs2, cs3, cs4, cs5, cs6, cs7, ...)
+SRS-Cyclic shift [36.211]
+>srs-ConfigIndex
+M
+
+INTEGER (0..1023)
+SRS configuration index [TS 36.213]
+>MaxUpPt
+C-IfTDD
+
+ENUMERATED (true)
+MaxUpPt TS 36.211 [11]
+>transmissionComb
+M
+
+INTEGER (0..1)
+Transmission comb TS 36.211 [11]
+>freqDomainPosition
+M
+
+INTEGER (0..23)
+Frequency domain position TS 36.211 [11]
+>groupHoppingEnabled
+M
+
+BOOLEAN
+Group-hopping-enabled TS 36.211 [11]
+>deltaSS
+O
+
+INTEGER (0..29)
+deltaSS TS 36.211 [11]
+
+Condition
+Explanation
+IfTDD
+This IE shall be present if the UL-EARFCN IE refers to TDD operation.
+
+
+9.2.5	UL RTOA Measurements
+The purpose of the UL RTOA Measurements IE is to signal UL RTOA measurement results to the E-SMLC.
+IE/Group Name
+Presence
+Range
+IE Type and Reference
+Semantics Description
+ULRTOAMeasurements
+M
+<0..maxNoULRTOA>
+
+Information below included for each UL RTOA measurement.
+>UL EARFCN
+M
+
+INTEGER (0..maxEARFCN,…)
+Corresponds to NUL for FDD and NDL/UL for TDD in TS 36.104.
+>UL RTOA
+M
+
+INTEGER (1..4800, …)
+LU RTOA Measruement. Mapping of the measured quantity is as defined in TS 36.111 [9]. 
+
+Range bound
+Explanation
+maxNoULRTOA
+Maximum no. of UL RTOA measurements  per UE is 5
+, one measurement per carrier.
+maxEARFCN
+Maximum value of UL EARFCN. Value is 262143.
+
+9.2.6	LMU ID
+This information element represents the LMU ID to uniquely identify an LMU within an E-UTRAN.
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+LMU ID
+M
+
+INTEGER (0..1048575)
+
+
+9.2.7	E-SMLC ID
+This information element represents the E-SMLC ID to uniquely identify an E-SMLC.
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+E-SMLC ID
+M
+
+INTEGER (0..255)
+
+
+9.2.8	LMU Information
+This information element represents the LMU Capability information.
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+LMU Position
+O
+
+9.2.9
+
+ListofRFBands
+M
+<1..maxNoLMURfBands.
+
+Information below included for each RF band supported
+>FreqBandIndicator
+M
+
+INTEGER (1..256, ...)
+Corresponds to E‑UTRA Operating Band 
+in TS 36.101 [5] Table 5.5-1.
+BWCombinationParameters
+O
+<1..maxBWComb>
+
+Applies for each UE in CA only. List of supported bandwidth combinations in which the LMU can perform UL RTOA measurements for UEs in CA.
+>SupportedBandwidthCombinationSet
+M
+
+INTEGER (1..maxBWCombSet)
+Supported bandwidth combination set as defined in 36.101.
+>BandCombination
+M
+<1 to maxSimultaneousBands>
+
+
+>>FreqBandIndicator
+M
+
+INTEGER (1..256,...)
+Corresponds to E‑UTRA Operating Band in the corresponding CA bandwidth combination.
+
+Range bound
+Explanation
+maxBWComb
+Maximum no. of Band Combinations is 128.
+maxBWCombSet
+Maximum index of the bandwidth combination set is 32.
+maxSimultaneousBands
+Maximum number of Simultaneous Bands is 4.
+maxNoLMURfBands
+Maximum number of LMU RF Bands is 256.
+
+9.2.9	LMU Position
+LMU Position IE is used to identify the geographical position of an E-UTRAN LMU. It is expressed as ellipsoid point with altitude and uncertainty ellipsoid, with parameters according to TS 23.032 [6].
+IE/Group Name
+Presence
+Range
+IE Type and Reference
+Semantics Description
+Latitude Sign
+M
+
+ENUMERATED (North, South)
+
+Degrees Of Latitude
+M
+
+INTEGER (0..223-1)
+
+Degrees Of Longitude
+M
+
+INTEGER (-223..223-1)
+
+Direction of Altitude
+M
+
+ENUMERATED (Height, Depth)
+
+Altitude
+M
+
+INTEGER (0..215-1)
+
+Uncertainty semi-major
+M
+
+INTEGER (0..127)
+
+Uncertainty semi-minor
+M
+
+INTEGER (0..127)
+
+Orientation of major axis
+M
+
+INTEGER (0..179)
+
+Uncertainty Altitude
+M
+
+INTEGER (0..127)
+
+Confidence
+M
+
+INTEGER (0..100)
+
+
+9.2.10	Cause
+The purpose of the Cause IE is to indicate the reason for a particular event for the SLmAP protocol.
+IE/Group Name
+Presence
+Range
+IE Type and Reference
+Semantics Description
+CHOICE Cause Group
+M
+
+
+
+>Radio Network Layer
+
+
+
+
+>>Radio Network Layer Cause
+M
+
+ENUMERATED
+(Unknown or already allocated SLmAP ID, 
+RF frequency bands not supported, 
+RF bandwidth combination for a CA UE not supported,
+Invalid SRS configuration,
+Unspecified,  …)
+
+>Protocol
+
+
+
+
+>>Protocol Cause
+M
+
+ENUMERATED
+(Transfer Syntax Error,
+Abstract Syntax Error (Reject),
+Abstract Syntax Error (Ignore and Notify),
+Message not Compatible with Receiver State,
+Semantic Error,
+Abstract Syntax Error (Falsely Constructed Message), Unspecified, …)
+
+>Misc
+
+
+
+
+>>Miscellaneous Cause
+M
+
+ENUMERATED
+(Control Processing Overload, 
+Processing Resources not available,
+Hardware Failure,
+O&M Intervention,
+Unspecified, …)
+
+
+The meaning of the different cause values is described in the following tables. In general, "not supported" cause values indicate that the related capability is missing. On the other hand, "not available" cause values indicate that the related capability is present, but insufficient resources were available to perform the requested action.
+Radio Network Layer cause
+Meaning
+Unknown or already allocated SLmAP ID
+The action failed because the SLmAP ID is either unknown, or (for a first message received at the LMU) is known and already allocated to an existing context.
+RF frequency bands not supported
+The LMU does not support UL RTOA measurements in the requested RF band or RF band combinations for a CA UE.
+RF bandwidth combination for a CA UE not supported
+The LMU does not support UL RTOA measurements for a CA UE over the requested RF bandwidth or RF bandwidth combinations.
+Invalid SRS configuration
+The received SRS configuration for the target UE was not valid.
+Unspecified
+Sent when none of the above cause values applies but still the cause is Location Measurement related.
+
+Protocol cause
+Meaning
+Transfer Syntax Error
+The received message included a transfer syntax error.
+Abstract Syntax Error (Reject)
+The received message included an abstract syntax error and the concerning criticality indicated "reject".
+Abstract Syntax Error (Ignore And Notify)
+The received message included an abstract syntax error and the concerning criticality indicated "ignore and notify".
+Message Not Compatible With LMU State
+The received message was not compatible with the LMU state.
+Semantic Error
+The received message included a semantic error.
+Abstract Syntax Error (Falsely Constructed Message)
+The received message contained IEs or IE groups in wrong order or with too many occurrences.
+Unspecified
+Sent when none of the above cause values applies but still the cause is Protocol related.
+
+Miscellaneous cause
+Meaning
+Control Processing Overload
+Control processing overload.
+Not Enough Processing Resources Available
+No enough resources are available related to location processing.
+Hardware Failure
+Action related to hardware failure.
+O&M Intervention
+The action is due to O&M intervention.
+Unspecified Failure
+Sent when none of the above cause values applies and the cause is not related to either the Location Processing or Protocol categories.
+
+9.2.11	Criticality Diagnostics
+The Criticality Diagnostics IE is sent by the E-SMLC or the LMU when parts of a received message have not been comprehended or were missing, or if the message contained logical errors. When applicable, it contains information about which IEs were not comprehended or were missing. The conditions for inclusion of the SLmAP Transaction ID IE are described in clause 10.
+For further details on how to use the Criticality Diagnostics IE, (see clause 10).
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+Procedure Code
+O
+
+INTEGER (0..63)
+Procedure Code is to be used if Criticality Diagnostics is part of Error Indication procedure, and not within the response message of the same procedure that caused the error
+Triggering Message
+O
+
+ENUMERATED(initiating message, successful outcome, unsuccessful outcome)
+The Triggering Message is used only if the Criticality Diagnostics is part of Error Indication procedure. 
+Procedure Criticality
+O
+
+ENUMERATED(reject, ignore, notify)
+This Procedure Criticality is used for reporting the Criticality of the Triggering message (Procedure).
+SLmAP Transaction ID
+O
+
+9.2.3
+
+Information Element Criticality Diagnostics
+
+0 to <maxnoof errors>
+
+
+>IE Criticality
+M
+
+ENUMERATED(reject, ignore, notify)
+The IE Criticality is used for reporting the criticality of the triggering IE. The value 'ignore' shall not be used.
+>IE ID
+M
+
+INTEGER (0..65535)
+The IE ID of the not understood or missing IE 
+>Type of Error
+M
+
+ENUMERATED(not understood, missing, …)
+
+
+Range bound
+Explanation
+maxnooferrors
+Maximum no. of IE errors allowed to be reported with a single message. The value for maxnooferrors is 256.
+
+9.2.12	E-SMLC Measurement ID
+The E-SMLC Measurement ID IE is used to associate all the procedures related to the same measurement initiated by the E-SMLC. Procedures related to the same measurement shall use the same E-SMLC Measurement ID.
+The E-SMLC Measurement ID is determined by the initiating peer of the measurement i.e. the E-SMLC.
+The E-SMLC Measurement ID shall uniquely identify a measurement among all ongoing parallel measurements initiated by the same peer.
+
+IE/Group Name
+Presence
+Range
+IE Type and Reference
+Semantics Description
+E-SMLC Measurement ID 
+M
+
+INTEGER(1..65535,…)
+
+
+9.3	Message and Information Element Abstract Syntax (with ASN.1)
+9.3.1	General
+Sub clause 9.3 presents the Abstract Syntax of the SLmAP protocol with ASN.1. In case there is contradiction between the ASN.1 definition in this sub clause and the tabular format in sub clause 9.1 and 9.2, the ASN.1 shall take precedence, except for the definition of conditions for the presence of conditional elements, in which the tabular format shall take precedence.
+The ASN.1 definition specifies the structure and content of SLmAP messages. SLmAP messages can contain any IEs specified in the object set definitions for that message without the order or number of occurrence being restricted by ASN.1. However, for this version of the standard, a sending entity shall construct a SLmAP message according to the PDU definitions module and with the following additional rules (Note that in the following IE means an IE in the object set with an explicit id. If one IE needed to appear more than once in one object set, then the different occurrences have different IE ids):
+-	IEs shall be ordered (in an IE container) in the order they appear in object set definitions.
+-	Object set definitions specify how many times IEs may appear. An IE shall appear exactly once if the presence field in an object has value "mandatory". An IE may appear at most once if the presence field in an object has value "optional" or "conditional". If in a tabular format there is multiplicity specified for an IE (i.e. an IE list) then in the corresponding ASN.1 definition the list definition is separated into two parts. The first part defines an IE container list in which the list elements reside. The second part defines list elements. The IE container list appears as an IE of its own. For this version of the standard an IE container list may contain only one kind of list elements.
+If a SLmAP message that is not constructed as defined above is received, this shall be considered as Abstract Syntax Error, and the message shall be handled as defined for Abstract Syntax Error in clause 10.
+9.3.2	Usage of Private Message Mechanism for Non-standard Use
+The private message mechanism for non-standard use may be used:
+-	for special operator (and/or vendor) specific features considered not to be part of the basic functionality, i.e. the functionality required for a complete and high-quality specification in order to guarantee multivendor inter-operability.
+-	by vendors for research purposes, e.g. to implement and evaluate new algorithms/features before such features are proposed for standardisation.
+The private message mechanism shall not be used for basic functionality. Such functionality shall be standardised.
+9.3.3	Elementary Procedure Definitions
+-- **************************************************************
+--
+-- Elementary Procedure definitions
+--
+-- **************************************************************
+
+SLMAP-PDU-Descriptions {
+itu-t (0) identified-organization (4) etsi (0) mobileDomain (0)
+eps-Access (21) modules (3) slmap (50) version1 (1) slmap-PDU-Descriptions (0) }
+
+
+DEFINITIONS AUTOMATIC TAGS ::= 
+
+BEGIN
+
+-- **************************************************************
+--
+-- IE parameter types from other modules.
+--
+-- **************************************************************
+
+IMPORTS
+	Criticality,
+	ProcedureCode,
+	SLMAPTransactionID
+
+FROM SLMAP-CommonDataTypes
+
+
+	ErrorIndication,
+	PrivateMessage,
+	SLMSetupRequest,
+	SLMSetupResponse,
+	SLMSetupFailure,
+	MeasurementRequest,
+	MeasurementResponse,
+	MeasurementFailure,
+	MeasurementUpdate,
+	MeasurementAbort,
+	ResetRequest,
+	ResetAcknowledge
+
+FROM SLMAP-PDU-Contents
+
+
+	id-errorIndication,
+	id-privateMessage,
+	id-measurement,
+	id-slmSetup,
+	id-reset,
+	id-measurementUpdate,
+	id-measurementAbort
+
+FROM SLMAP-Constants;
+
+
+-- **************************************************************
+--
+-- Interface Elementary Procedure Class
+--
+-- **************************************************************
+
+SLMAP-ELEMENTARY-PROCEDURE ::= CLASS {
+	&InitiatingMessage				,
+	&SuccessfulOutcome						OPTIONAL,
+	&UnsuccessfulOutcome					OPTIONAL,
+	&procedureCode			ProcedureCode	UNIQUE,
+	&criticality			Criticality		DEFAULT ignore
+}
+WITH SYNTAX {
+	INITIATING MESSAGE		&InitiatingMessage
+	[SUCCESSFUL OUTCOME		&SuccessfulOutcome]
+	[UNSUCCESSFUL OUTCOME	&UnsuccessfulOutcome]
+	PROCEDURE CODE			&procedureCode
+	[CRITICALITY			&criticality]
+}
+
+-- **************************************************************
+--
+-- Interface PDU Definition
+--
+-- **************************************************************
+
+SLMAP-PDU ::= CHOICE {
+	initiatingMessage	InitiatingMessage,
+	successfulOutcome	SuccessfulOutcome,
+	unsuccessfulOutcome	UnsuccessfulOutcome,
+	...
+}
+
+InitiatingMessage ::= SEQUENCE {
+	procedureCode		SLMAP-ELEMENTARY-PROCEDURE.&procedureCode		({SLMAP-ELEMENTARY-PROCEDURES}),
+	criticality			SLMAP-ELEMENTARY-PROCEDURE.&criticality			({SLMAP-ELEMENTARY-PROCEDURES}{@procedureCode}),
+	slmapTransactionID	SLMAPTransactionID,
+	value				SLMAP-ELEMENTARY-PROCEDURE.&InitiatingMessage	({SLMAP-ELEMENTARY-PROCEDURES}{@procedureCode})
+}
+
+SuccessfulOutcome ::= SEQUENCE {
+	procedureCode		SLMAP-ELEMENTARY-PROCEDURE.&procedureCode		({SLMAP-ELEMENTARY-PROCEDURES}),
+	criticality			SLMAP-ELEMENTARY-PROCEDURE.&criticality			({SLMAP-ELEMENTARY-PROCEDURES}{@procedureCode}),
+	slmapTransactionID	SLMAPTransactionID,
+	value				SLMAP-ELEMENTARY-PROCEDURE.&SuccessfulOutcome	({SLMAP-ELEMENTARY-PROCEDURES}{@procedureCode})
+}
+
+UnsuccessfulOutcome ::= SEQUENCE {
+	procedureCode		SLMAP-ELEMENTARY-PROCEDURE.&procedureCode		({SLMAP-ELEMENTARY-PROCEDURES}),
+	criticality			SLMAP-ELEMENTARY-PROCEDURE.&criticality			({SLMAP-ELEMENTARY-PROCEDURES}{@procedureCode}),
+	slmapTransactionID	SLMAPTransactionID,
+	value				SLMAP-ELEMENTARY-PROCEDURE.&UnsuccessfulOutcome	({SLMAP-ELEMENTARY-PROCEDURES}{@procedureCode})
+}
+
+
+-- **************************************************************
+--
+-- Interface Elementary Procedure List
+--
+-- **************************************************************
+
+SLMAP-ELEMENTARY-PROCEDURES SLMAP-ELEMENTARY-PROCEDURE ::= {
+	SLMAP-ELEMENTARY-PROCEDURES-CLASS-1			|
+	SLMAP-ELEMENTARY-PROCEDURES-CLASS-2			,
+	...
+}
+
+SLMAP-ELEMENTARY-PROCEDURES-CLASS-1 SLMAP-ELEMENTARY-PROCEDURE ::= {
+	measurement					|
+	slmSetup					|
+	reset						,
+	...
+}
+
+SLMAP-ELEMENTARY-PROCEDURES-CLASS-2 SLMAP-ELEMENTARY-PROCEDURE ::= {
+	measurementUpdate				|
+	measurementAbort				|
+	errorIndication					|
+	privateMessage					,
+	...
+}
+
+
+-- **************************************************************
+--
+-- Interface Elementary Procedures
+--
+-- **************************************************************
+
+measurement 			SLMAP-ELEMENTARY-PROCEDURE ::= {
+	INITIATING MESSAGE		MeasurementRequest
+	SUCCESSFUL OUTCOME		MeasurementResponse
+	UNSUCCESSFUL OUTCOME	MeasurementFailure
+	PROCEDURE CODE			id-measurement
+	CRITICALITY				reject
+}
+
+slmSetup 					SLMAP-ELEMENTARY-PROCEDURE ::= {
+	INITIATING MESSAGE		SLMSetupRequest
+	SUCCESSFUL OUTCOME		SLMSetupResponse
+	UNSUCCESSFUL OUTCOME	SLMSetupFailure
+	PROCEDURE CODE			id-slmSetup
+	CRITICALITY				reject
+}
+
+reset 						SLMAP-ELEMENTARY-PROCEDURE ::= {
+	INITIATING MESSAGE		ResetRequest
+	SUCCESSFUL OUTCOME		ResetAcknowledge
+	PROCEDURE CODE			id-reset
+	CRITICALITY				reject
+}
+
+measurementUpdate SLMAP-ELEMENTARY-PROCEDURE ::= {
+	INITIATING MESSAGE		MeasurementUpdate
+	PROCEDURE CODE			id-measurementUpdate
+	CRITICALITY				ignore
+}
+
+measurementAbort 		SLMAP-ELEMENTARY-PROCEDURE ::= {
+	INITIATING MESSAGE		MeasurementAbort
+	PROCEDURE CODE			id-measurementAbort
+	CRITICALITY				ignore
+}
+
+errorIndication 			SLMAP-ELEMENTARY-PROCEDURE ::= {
+	INITIATING MESSAGE		ErrorIndication
+	PROCEDURE CODE			id-errorIndication
+	CRITICALITY				ignore
+}
+
+privateMessage 				SLMAP-ELEMENTARY-PROCEDURE ::= {
+	INITIATING MESSAGE		PrivateMessage
+	PROCEDURE CODE			id-privateMessage
+	CRITICALITY				ignore
+}
+
+END
+9.3.4	PDU Definitions
+-- **************************************************************
+--
+-- PDU definitions for SLmAP.
+--
+-- **************************************************************
+
+SLMAP-PDU-Contents {
+itu-t (0) identified-organization (4) etsi (0) mobileDomain (0) 
+eps-Access (21) modules (3) slmap (50) version1 (1) slmap-PDU-Contents (1) }
+
+DEFINITIONS AUTOMATIC TAGS ::= 
+
+BEGIN
+
+-- **************************************************************
+--
+-- IE parameter types from other modules.
+--
+-- **************************************************************
+
+IMPORTS		
+	
+	ESMLC-MeasurementID,
+	UL-RTOAMeasurementConfiguration,
+	CriticalityDiagnostics,
+	UL-RTOAMeasurements,
+	Cause,
+	LMU-ID,
+	LMUInformation,
+	ESMLC-ID,
+	ESMLC-MeasurementID
+	
+FROM SLMAP-IEs
+
+
+	PrivateIE-Container{},
+	ProtocolExtensionContainer{},
+	ProtocolIE-Container{},
+	ProtocolIE-ContainerList{},
+	ProtocolIE-ContainerPair{},
+	ProtocolIE-ContainerPairList{},
+	ProtocolIE-Single-Container{},
+	SLMAP-PRIVATE-IES,
+	SLMAP-PROTOCOL-EXTENSION,
+	SLMAP-PROTOCOL-IES,
+	SLMAP-PROTOCOL-IES-PAIR
+FROM SLMAP-Containers
+
+
+	id-ESMLC-MeasurementID,
+	id-UL-RTOAMeasurementConfiguration,
+	id-CriticalityDiagnostics,
+	id-UL-RTOAMeasurements,
+	id-Cause,
+	id-LMU-ID,
+	id-LMUInformation,
+	id-ESMLC-ID
+
+FROM SLMAP-Constants;
+
+
+-- **************************************************************
+--
+-- MEASUREMENT REQUEST
+--
+-- **************************************************************
+
+MeasurementRequest ::= SEQUENCE {
+	protocolIEs		ProtocolIE-Container		{{MeasurementRequest-IEs}},
+	...
+}
+
+MeasurementRequest-IEs SLMAP-PROTOCOL-IES ::= {
+	{ ID id-ESMLC-MeasurementID					CRITICALITY reject	TYPE ESMLC-MeasurementID				PRESENCE mandatory}|
+	{ ID id-UL-RTOAMeasurementConfiguration		CRITICALITY reject	TYPE UL-RTOAMeasurementConfiguration		PRESENCE mandatory},
+	...
+}
+
+
+-- **************************************************************
+--
+-- MEASUREMENT RESPONSE
+--
+-- **************************************************************
+
+MeasurementResponse ::= SEQUENCE {
+	protocolIEs		ProtocolIE-Container		{{MeasurementResponse-IEs}},
+	...
+}
+
+MeasurementResponse-IEs SLMAP-PROTOCOL-IES ::= {
+	{ ID id-ESMLC-MeasurementID			CRITICALITY reject	TYPE ESMLC-MeasurementID			PRESENCE mandatory}|
+	{ ID id-UL-RTOAMeasurements			CRITICALITY reject	TYPE UL-RTOAMeasurements			PRESENCE mandatory}|
+	{ ID id-CriticalityDiagnostics		CRITICALITY ignore	TYPE CriticalityDiagnostics			PRESENCE optional},
+	...
+}
+
+
+-- **************************************************************
+--
+-- MEASUREMENT FAILURE
+--
+-- **************************************************************
+
+MeasurementFailure ::= SEQUENCE {
+	protocolIEs						ProtocolIE-Container		{{MeasurementFailure-IEs}},
+	...
+}
+
+MeasurementFailure-IEs SLMAP-PROTOCOL-IES ::= {
+	{ ID id-ESMLC-MeasurementID			CRITICALITY reject	TYPE ESMLC-MeasurementID			PRESENCE mandatory}|
+	{ ID id-Cause						CRITICALITY ignore	TYPE Cause							PRESENCE mandatory}|
+	{ ID id-CriticalityDiagnostics		CRITICALITY ignore	TYPE CriticalityDiagnostics			PRESENCE optional},
+	...
+}
+
+
+-- **************************************************************
+--
+-- SLM SETUP REQUEST
+--
+-- **************************************************************
+
+SLMSetupRequest ::= SEQUENCE {
+	protocolIEs						ProtocolIE-Container		{{SLMSetupRequest-IEs}},
+	...
+}
+
+SLMSetupRequest-IEs SLMAP-PROTOCOL-IES ::= {
+	{ ID id-LMU-ID				CRITICALITY ignore	TYPE LMU-ID					PRESENCE mandatory}|
+	{ ID id-LMUInformation		CRITICALITY ignore	TYPE LMUInformation			PRESENCE optional},
+	...
+}
+
+
+-- **************************************************************
+--
+-- SLM SETUP RESPONSE
+--
+-- **************************************************************
+
+SLMSetupResponse ::= SEQUENCE {
+	protocolIEs						ProtocolIE-Container		{{SLMSetupResponse-IEs}},
+	...
+}
+
+SLMSetupResponse-IEs SLMAP-PROTOCOL-IES ::= {
+	{ ID id-ESMLC-ID					CRITICALITY reject	TYPE ESMLC-ID						PRESENCE mandatory}|
+	{ ID id-CriticalityDiagnostics		CRITICALITY ignore	TYPE CriticalityDiagnostics			PRESENCE optional},
+	...
+}
+
+
+-- **************************************************************
+--
+-- SLM SETUP FAILURE
+--
+-- **************************************************************
+
+SLMSetupFailure ::= SEQUENCE {
+	protocolIEs						ProtocolIE-Container		{{SLMSetupFailure-IEs}},
+	...
+}
+
+SLMSetupFailure-IEs SLMAP-PROTOCOL-IES ::= {
+	{ ID id-Cause						CRITICALITY ignore	TYPE Cause							PRESENCE mandatory}|
+	{ ID id-CriticalityDiagnostics		CRITICALITY ignore	TYPE CriticalityDiagnostics			PRESENCE optional},
+	...
+}
+
+
+
+-- **************************************************************
+--
+-- RESET REQUEST
+--
+-- **************************************************************
+
+ResetRequest ::= SEQUENCE {
+	protocolIEs						ProtocolIE-Container		{{ResetRequest-IEs}},
+	...
+}
+
+ResetRequest-IEs SLMAP-PROTOCOL-IES ::= {
+	{ ID id-Cause				CRITICALITY ignore	TYPE Cause					PRESENCE mandatory},
+	...
+}
+
+
+-- **************************************************************
+--
+-- RESET ACKNOWLEDGE
+--
+-- **************************************************************
+
+ResetAcknowledge ::= SEQUENCE {
+	protocolIEs						ProtocolIE-Container		{{ResetAcknowledge-IEs}},
+	...
+}
+
+ResetAcknowledge-IEs SLMAP-PROTOCOL-IES ::= {
+	{ ID id-CriticalityDiagnostics		CRITICALITY ignore	TYPE CriticalityDiagnostics			PRESENCE optional},
+	...
+}
+
+
+-- **************************************************************
+--
+-- MEASUREMENT ABORT
+--
+-- **************************************************************
+
+MeasurementAbort ::= SEQUENCE {
+	protocolIEs						ProtocolIE-Container		{{MeasurementAbort-IEs}},
+	...
+}
+
+MeasurementAbort-IEs SLMAP-PROTOCOL-IES ::= {
+	{ ID id-ESMLC-MeasurementID			CRITICALITY reject	TYPE ESMLC-MeasurementID			PRESENCE mandatory},
+	...
+}
+
+
+-- **************************************************************
+--
+-- MEASUREMENT UPDATE
+--
+-- **************************************************************
+
+MeasurementUpdate ::= SEQUENCE {
+	protocolIEs						ProtocolIE-Container		{{ MeasurementUpdate-IEs}},
+	...
+}
+
+MeasurementUpdate-IEs SLMAP-PROTOCOL-IES ::= {
+	{ ID id-ESMLC-MeasurementID					CRITICALITY reject	TYPE ESMLC-MeasurementID				PRESENCE mandatory}|
+	{ ID id-UL-RTOAMeasurementConfiguration		CRITICALITY reject	TYPE UL-RTOAMeasurementConfiguration		PRESENCE mandatory},
+	...
+}
+
+
+-- **************************************************************
+--
+-- ERROR INDICATION
+--
+-- **************************************************************
+
+ErrorIndication ::= SEQUENCE {
+	protocolIEs						ProtocolIE-Container		{{ErrorIndication-IEs}},
+	...
+}
+
+ErrorIndication-IEs SLMAP-PROTOCOL-IES ::= {
+	{ ID id-Cause						CRITICALITY ignore	TYPE Cause						PRESENCE optional}|
+	{ ID id-CriticalityDiagnostics		CRITICALITY ignore	TYPE CriticalityDiagnostics		PRESENCE optional},
+	...
+}
+
+
+-- **************************************************************
+--
+-- PRIVATE MESSAGE
+--
+-- **************************************************************
+
+PrivateMessage ::= SEQUENCE {
+	privateIEs		PrivateIE-Container  {{PrivateMessage-IEs}},
+	...
+}
+
+PrivateMessage-IEs SLMAP-PRIVATE-IES ::= {
+	...
+}
+
+END
+
+9.3.5	Information Element definitions
+-- **************************************************************
+--
+-- Information Element Definitions
+--
+-- **************************************************************
+
+SLMAP-IEs {
+itu-t (0) identified-organization (4) etsi (0) mobileDomain (0) 
+eps-Access (21) modules (3) slmap (50) version1 (1) slmap-IEs (2) }
+
+DEFINITIONS AUTOMATIC TAGS ::= 
+
+BEGIN
+
+IMPORTS	
+
+	maxNrOfErrors,
+	maxServCell,
+	maxEARFCN,
+	maxNoULRTOA,
+	maxNoLMURfBands,
+	maxBWCombSet,
+	maxBWComb,
+	maxSimultaneousBands
+
+FROM SLMAP-Constants
+
+	Criticality,
+	SLMAPTransactionID,
+	ProcedureCode,
+	ProtocolIE-ID,
+	TriggeringMessage
+FROM SLMAP-CommonDataTypes
+
+	ProtocolExtensionContainer{},
+	ProtocolIE-Single-Container{},
+	SLMAP-PROTOCOL-EXTENSION,
+	SLMAP-PROTOCOL-IES
+FROM SLMAP-Containers;
+
+
+Cause ::= CHOICE {
+	radioNetworkLayer	RadioNetworkLayerCause,
+	protocol			ProtocolCause,
+	misc				MiscCause,
+	...
+}
+
+RadioNetworkLayerCause::= ENUMERATED {
+	unknown-or-already-allocated-slmap-id,
+	rf-frequency-band-not-supported,
+	rf-bandwidth-not-supported,
+	invalid-srs-coniguration,
+	unspecified,
+	...
+}
+
+ProtocolCause ::= ENUMERATED {
+	transfer-syntax-error,
+	abstract-syntax-error-reject,
+	abstract-syntax-error-ignore-and-notify,
+	message-not-compatible-with-receiver-state,
+	semantic-error,
+	abstract-syntax-error-falsely-constructed-message,
+	unspecified,
+	...
+}
+
+MiscCause ::= ENUMERATED {
+	control-processing-overload,
+	processing-resources-not-available,
+	hardware-failure,
+	o-and-m-intervention,
+	unspecified,
+	...
+}
+
+
+CriticalityDiagnostics ::= SEQUENCE {
+	procedureCode					ProcedureCode					OPTIONAL,
+	triggeringMessage				TriggeringMessage				OPTIONAL,
+	procedureCriticality			Criticality						OPTIONAL,
+	slmapTransactionID				SLMAPTransactionID				OPTIONAL,
+	iEsCriticalityDiagnostics		CriticalityDiagnostics-IE-List	OPTIONAL,
+	iE-Extensions					ProtocolExtensionContainer { {CriticalityDiagnostics-ExtIEs} }	OPTIONAL,
+	...
+}
+
+
+CriticalityDiagnostics-ExtIEs SLMAP-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+CriticalityDiagnostics-IE-List ::= SEQUENCE (SIZE (1..maxNrOfErrors)) OF
+	SEQUENCE {
+		iECriticality			Criticality,
+		iE-ID					ProtocolIE-ID,
+		typeOfError				TypeOfError,
+		iE-Extensions			ProtocolExtensionContainer { {CriticalityDiagnostics-IE-List-ExtIEs} } OPTIONAL,
+		...
+}
+
+CriticalityDiagnostics-IE-List-ExtIEs SLMAP-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+TypeOfError ::= ENUMERATED {
+	not-understood,
+	missing,
+	...
+}
+
+
+
+UL-RTOAMeasurementConfiguration ::= SEQUENCE {
+	ulRtoaReferenceTime			BIT STRING (SIZE (64)),
+	searchWindowParameters		SearchWindowParameters						OPTIONAL,
+	numberOfTransmissions		INTEGER (1..500,..., 0),
+	srsConfiguration			SRSConfiguration,
+	...
+}
+
+SearchWindowParameters ::= SEQUENCE {
+	expectedPropagationDelay	INTEGER (1..1200, ...)						OPTIONAL,
+	delayUncertainty			INTEGER (1..100, ...)						OPTIONAL,
+	...
+}
+
+SRSConfiguration ::= SEQUENCE (SIZE (1.. maxServCell)) OF SRSConfigurationForOneCell
+
+SRSConfigurationForOneCell ::= SEQUENCE {
+	pci							PCI,
+	ulEarfcn					EARFCN,
+	ulBandwidth					ChannelBandwidth,
+	ulCyclicPrefixLength		CPLength,
+	srsBandwidthConfig			BandwidthConfig,
+	srsBandwidth				SRSBandwidth,
+	srsAntennaPort				AntennaPort,
+	srsHoppingBandwidth			HoppingBandwidth,
+	srsCyclicShift				CyclicShift,
+	srsConfigIndex				INTEGER (0..1023),
+	srsMaxUpPts					ENUMERATED {true}			OPTIONAL, -- present if TDD
+	transmissionComb			INTEGER (0..1),
+	freqDomainPosition			INTEGER (0..23),
+	groupHoppingEnabled			BOOLEAN,
+	deltaSS						INTEGER (0..29)			OPTIONAL,
+	...
+}
+
+PCI ::= INTEGER (0..503, ...)
+
+EARFCN ::= INTEGER (0..maxEARFCN, ...)
+
+ChannelBandwidth ::= ENUMERATED {
+	n6,
+	n15,
+	n25,
+	n50,
+	n75,
+	n100,
+	...
+}
+
+CPLength ::= ENUMERATED {
+	normal,
+	extended,
+	...
+}
+
+BandwidthConfig ::= ENUMERATED {
+	bw0,
+	bw1,
+	bw2,
+	bw3,
+	bw4,
+	bw5,
+	bw6,
+	bw7,
+	...
+}
+
+SRSBandwidth ::= ENUMERATED {
+	bw0,
+	bw1,
+	bw2,
+	bw3,
+	...
+}
+
+AntennaPort ::= ENUMERATED {
+	an1,
+	an2,
+	an4,
+	...
+}
+
+HoppingBandwidth ::= ENUMERATED {
+	hbw0,
+	hbw1,
+	hbw2,
+	hbw3,
+	...
+}
+
+CyclicShift ::= ENUMERATED {
+	cs0,
+	cs1,
+	cs2,
+	cs3,
+	cs4,
+	cs5,
+	cs6,
+	cs7,
+	...
+}
+
+
+UL-RTOAMeasurements ::= SEQUENCE (SIZE (1.. maxNoULRTOA)) OF UL-RTOAMeasurement
+
+UL-RTOAMeasurement ::= SEQUENCE {
+	ulEarfcn					EARFCN,
+	ulRtoa						INTEGER (1.. 4800, ...),
+	...
+}
+
+LMU-ID ::= INTEGER (0..1048575)
+
+ESMLC-ID ::= INTEGER (0..255)
+
+ESMLC-MeasurementID ::= INTEGER (0.. 65535, ...)
+
+
+LMUInformation ::= SEQUENCE {
+	lmuPosition					LMUPosition						OPTIONAL,
+	listOfRfBands				ListOfRfBands,
+	bWCombinationParameters		BWCombinationParameters			OPTIONAL,
+	...
+}
+
+ListOfRfBands ::= SEQUENCE (SIZE (1.. maxNoLMURfBands)) OF FreqBandIndicator
+
+FreqBandIndicator ::= INTEGER (1.. 256)
+
+BWCombinationParameters ::= SEQUENCE (SIZE (1.. maxBWComb)) OF
+	SupportedBandwidthCombinationSet
+
+
+SupportedBandwidthCombinationSet ::= SEQUENCE (SIZE (1.. maxBWCombSet)) OF
+	BandCombination
+	
+
+
+BandCombination ::= SEQUENCE (SIZE (1.. maxSimultaneousBands)) OF
+	FreqBandIndicator
+
+LMUPosition ::= SEQUENCE {
+	latitudeSign				ENUMERATED {north, south},
+	latitude					INTEGER (0..8388607),
+	longitude					INTEGER (-8388608..8388607),
+	directionOfAltitude			ENUMERATED {height, depth},
+	altitude					INTEGER (0..32767),
+	uncertaintySemi-major		INTEGER (0..127),
+	uncertaintySemi-minor		INTEGER (0..127),
+	orientationOfMajorAxis		INTEGER (0..179),
+	uncertaintyAltitude			INTEGER (0..127),
+	confidence					INTEGER (0..100),
+	...
+}
+
+END
+
+
+9.3.6	Common definitions
+-- **************************************************************
+--
+-- Common definitions
+--
+-- **************************************************************
+
+SLMAP-CommonDataTypes {
+itu-t (0) identified-organization (4) etsi (0) mobileDomain (0) 
+eps-Access (21) modules (3) slmap (50) version1 (1) slmap-CommonDataTypes (3)  }
+
+DEFINITIONS AUTOMATIC TAGS ::= 
+
+BEGIN
+
+-- **************************************************************
+--
+-- Extension constants
+--
+-- **************************************************************
+
+maxPrivateIEs 									INTEGER ::= 65535
+maxProtocolExtensions 							INTEGER ::= 65535
+maxProtocolIEs									INTEGER ::= 65535
+
+-- **************************************************************
+--
+-- Common Data Types
+--
+-- **************************************************************
+
+Criticality		::= ENUMERATED { reject, ignore, notify }
+
+SLMAPTransactionID		::= INTEGER (0..32767, ...)
+
+Presence		::= ENUMERATED { optional, conditional, mandatory }
+
+PrivateIE-ID	::= CHOICE {
+	local				INTEGER (0.. maxPrivateIEs),
+	global				OBJECT IDENTIFIER
+}
+
+ProcedureCode		::= INTEGER (0..63)
+
+ProtocolIE-ID		::= INTEGER (0..maxProtocolIEs)
+
+TriggeringMessage	::= ENUMERATED { initiating-message, successful-outcome, unsuccessful-outcome}
+
+END
+
+
+9.3.7	Constant definitions
+-- **************************************************************
+--
+-- Constant definitions
+--
+-- **************************************************************
+
+SLMAP-Constants {
+itu-t (0) identified-organization (4) etsi (0) mobileDomain (0) 
+eps-Access (21) modules (3) slmap (50) version1 (1) slmap-Constants (4) }
+
+DEFINITIONS AUTOMATIC TAGS ::= 
+
+BEGIN
+
+IMPORTS
+	ProcedureCode,
+	ProtocolIE-ID
+FROM SLMAP-CommonDataTypes;
+
+
+
+-- **************************************************************
+--
+-- Elementary Procedures
+--
+-- **************************************************************
+
+id-errorIndication							ProcedureCode ::= 0
+id-privateMessage							ProcedureCode ::= 1
+id-measurement								ProcedureCode ::= 2
+id-slmSetup									ProcedureCode ::= 3
+id-reset									ProcedureCode ::= 4
+id-measurementUpdate						ProcedureCode ::= 5
+id-measurementAbort							ProcedureCode ::= 6
+
+
+-- **************************************************************
+--
+-- Lists
+--
+-- **************************************************************
+
+maxNrOfErrors								INTEGER ::= 256
+maxServCell									INTEGER ::= 5
+maxEARFCN									INTEGER ::= 262143
+maxNoULRTOA									INTEGER ::= 5
+maxNoLMURfBands								INTEGER ::= 256
+maxBWComb									INTEGER ::= 128
+maxBWCombSet								INTEGER ::= 32
+maxSimultaneousBands						INTEGER ::= 4
+
+
+-- **************************************************************
+--
+-- IEs
+--
+-- **************************************************************
+
+id-ESMLC-MeasurementID						ProtocolIE-ID ::= 0
+id-UL-RTOAMeasurementConfiguration			ProtocolIE-ID ::= 1
+id-CriticalityDiagnostics					ProtocolIE-ID ::= 2
+id-UL-RTOAMeasurements						ProtocolIE-ID ::= 3
+id-Cause									ProtocolIE-ID ::= 4
+id-LMU-ID									ProtocolIE-ID ::= 5
+id-LMUInformation							ProtocolIE-ID ::= 6
+id-ESMLC-ID									ProtocolIE-ID ::= 7
+
+END
+
+9.3.8	Container definitions
+-- **************************************************************
+--
+-- Container definitions
+--
+-- **************************************************************
+
+SLMAP-Containers {
+itu-t (0) identified-organization (4) etsi (0) mobileDomain (0) 
+eps-Access (21) modules (3) slmap (50) version1 (1) slmap-Containers (5) }
+
+DEFINITIONS AUTOMATIC TAGS ::= 
+
+BEGIN
+
+-- **************************************************************
+--
+-- IE parameter types from other modules.
+--
+-- **************************************************************
+
+IMPORTS
+	maxPrivateIEs,
+	maxProtocolExtensions,
+	maxProtocolIEs,
+	Criticality,
+	Presence,
+	PrivateIE-ID,
+	ProtocolIE-ID
+FROM SLMAP-CommonDataTypes;
+
+-- **************************************************************
+--
+-- Class Definition for Protocol IEs
+--
+-- **************************************************************
+
+SLMAP-PROTOCOL-IES ::= CLASS {
+	&id				ProtocolIE-ID			UNIQUE,
+	&criticality	Criticality,
+	&Value,
+	&presence		Presence
+}
+WITH SYNTAX {
+	ID				&id
+	CRITICALITY		&criticality
+	TYPE			&Value
+	PRESENCE		&presence
+}
+
+-- **************************************************************
+--
+-- Class Definition for Protocol IEs
+--
+-- **************************************************************
+
+SLMAP-PROTOCOL-IES-PAIR ::= CLASS {
+	&id						ProtocolIE-ID 		UNIQUE,
+	&firstCriticality		Criticality,
+	&FirstValue,
+	&secondCriticality		Criticality,
+	&SecondValue,
+	&presence				Presence
+}
+WITH SYNTAX {
+	ID						&id
+	FIRST CRITICALITY 		&firstCriticality
+	FIRST TYPE				&FirstValue
+	SECOND CRITICALITY 		&secondCriticality
+	SECOND TYPE				&SecondValue
+	PRESENCE				&presence
+}
+
+-- **************************************************************
+--
+-- Class Definition for Protocol Extensions
+--
+-- **************************************************************
+
+SLMAP-PROTOCOL-EXTENSION ::= CLASS {
+	&id					ProtocolIE-ID 		UNIQUE,
+	&criticality		Criticality,
+	&Extension,
+	&presence			Presence
+}
+WITH SYNTAX {
+	ID					&id
+	CRITICALITY			&criticality
+	EXTENSION			&Extension
+	PRESENCE			&presence
+}
+
+-- **************************************************************
+--
+-- Class Definition for Private IEs
+--
+-- **************************************************************
+
+SLMAP-PRIVATE-IES ::= CLASS {
+	&id					PrivateIE-ID,
+	&criticality		Criticality,
+	&Value,
+	&presence			Presence
+}
+WITH SYNTAX {
+	ID					&id
+	CRITICALITY			&criticality
+	TYPE				&Value
+	PRESENCE			&presence
+}
+
+-- **************************************************************
+--
+-- Container for Protocol IEs
+--
+-- **************************************************************
+
+ProtocolIE-Container { SLMAP-PROTOCOL-IES : IEsSetParam} ::= 
+	SEQUENCE (SIZE (0..maxProtocolIEs)) OF
+	ProtocolIE-Field {{IEsSetParam}}
+
+ProtocolIE-Single-Container { SLMAP-PROTOCOL-IES : IEsSetParam} ::= 
+	ProtocolIE-Field {{IEsSetParam}}
+
+ProtocolIE-Field { SLMAP-PROTOCOL-IES : IEsSetParam} ::= SEQUENCE {
+	id				SLMAP-PROTOCOL-IES.&id					({IEsSetParam}),
+	criticality		SLMAP-PROTOCOL-IES.&criticality			({IEsSetParam}{@id}),
+	value			SLMAP-PROTOCOL-IES.&Value				({IEsSetParam}{@id})
+}
+
+-- **************************************************************
+--
+-- Container for Protocol IE Pairs
+--
+-- **************************************************************
+
+ProtocolIE-ContainerPair { SLMAP-PROTOCOL-IES-PAIR : IEsSetParam} ::= 
+	SEQUENCE (SIZE (0..maxProtocolIEs)) OF
+	ProtocolIE-FieldPair {{IEsSetParam}}
+
+ProtocolIE-FieldPair { SLMAP-PROTOCOL-IES-PAIR : IEsSetParam} ::= SEQUENCE {
+	id					SLMAP-PROTOCOL-IES-PAIR.&id					({IEsSetParam}),
+	firstCriticality	SLMAP-PROTOCOL-IES-PAIR.&firstCriticality	({IEsSetParam}{@id}),
+	firstValue			SLMAP-PROTOCOL-IES-PAIR.&FirstValue			({IEsSetParam}{@id}),
+	secondCriticality	SLMAP-PROTOCOL-IES-PAIR.&secondCriticality	({IEsSetParam}{@id}),
+	secondValue			SLMAP-PROTOCOL-IES-PAIR.&SecondValue		({IEsSetParam}{@id})
+}
+
+-- **************************************************************
+--
+-- Container Lists for Protocol IE Containers
+--
+-- **************************************************************
+
+ProtocolIE-ContainerList {INTEGER : lowerBound, INTEGER : upperBound, SLMAP-PROTOCOL-IES : IEsSetParam} ::=
+	SEQUENCE (SIZE (lowerBound..upperBound)) OF
+	ProtocolIE-Container {{IEsSetParam}}
+
+ProtocolIE-ContainerPairList {INTEGER : lowerBound, INTEGER : upperBound, SLMAP-PROTOCOL-IES-PAIR : IEsSetParam} ::=
+	SEQUENCE (SIZE (lowerBound..upperBound)) OF
+	ProtocolIE-ContainerPair {{IEsSetParam}}
+
+-- **************************************************************
+--
+-- Container for Protocol Extensions
+--
+-- **************************************************************
+
+ProtocolExtensionContainer { SLMAP-PROTOCOL-EXTENSION : ExtensionSetParam} ::= 
+	SEQUENCE (SIZE (1..maxProtocolExtensions)) OF
+	ProtocolExtensionField {{ExtensionSetParam}}
+
+ProtocolExtensionField { SLMAP-PROTOCOL-EXTENSION : ExtensionSetParam} ::= SEQUENCE {
+	id					SLMAP-PROTOCOL-EXTENSION.&id			({ExtensionSetParam}),
+	criticality			SLMAP-PROTOCOL-EXTENSION.&criticality	({ExtensionSetParam}{@id}),
+	extensionValue		SLMAP-PROTOCOL-EXTENSION.&Extension		({ExtensionSetParam}{@id})
+}
+
+-- **************************************************************
+--
+-- Container for Private IEs
+--
+-- **************************************************************
+
+PrivateIE-Container { SLMAP-PRIVATE-IES : IEsSetParam} ::= 
+	SEQUENCE (SIZE (1..maxPrivateIEs)) OF
+	PrivateIE-Field {{IEsSetParam}}
+
+PrivateIE-Field { SLMAP-PRIVATE-IES : IEsSetParam} ::= SEQUENCE {
+	id				SLMAP-PRIVATE-IES.&id				({IEsSetParam}),
+	criticality		SLMAP-PRIVATE-IES.&criticality		({IEsSetParam}{@id}),
+	value			SLMAP-PRIVATE-IES.&Value			({IEsSetParam}{@id})
+}
+
+END
+
+9.4	Message Transfer Syntax
+SLmAP shall use the ASN.1 Basic Packed Encoding Rules (BASIC-PER) Aligned Variant as transfer syntax as specified in ref. ITU-T Rec. X.691 [8].
+9.5	Timers
+Void.
+10	Handling of Unknown, Unforeseen and Erroneous Protocol Data
+Section 10 of TS 36.413 [7] is applicable for the purposes of the present document, with the following additions:
+-	In case of Abstract Syntax Error, when reporting the Criticality Diagnostics IE for not comprehended IE/IE groups or missing IE/IE groups, the SLmAP Transaction ID IE shall also be included;
+-	In case of Logical Error, when reporting the Criticality Diagnostics IE, the SLmAP Transaction ID IE shall also be included.
+Annex A (informative):
+Change history
+Change history
+Date
+TSG #
+TSG Doc.
+CR
+Rev
+Subject/Comment
+New
+2012-12
+58
+RP-121769
+
+
+Approved in RAN#58 and put under change control
+11.0.0
+2013-03
+59
+RP-130209
+0001
+-
+Correction on Setup and Reset
+11.1.0
+2013-03
+59
+RP-130237
+0002
+1
+Extending maxEARFCN
+11.1.0
+2013-03
+59
+RP-130209
+0003
+1
+NBPS in LTE, UL RTOA Measurement Configuration in Measurement Request
+11.1.0
+2013-03
+59
+RP-130316
+0004
+-
+NBPS in LTE, Identifier for SLmAP
+11.1.0
+2013-06
+60
+RP-130642
+0005
+3
+Abnormal Conditions for Reset
+11.2.0
+2013-09
+61
+RP-131182
+0006
+1
+Correction on Measurement Abort
+11.3.0
+2013-09
+61
+RP-131182
+0007
+1
+Correction on Measurement Update
+11.3.0
+2013-09
+61
+RP-131182
+0008
+1
+ASN.1 correction Section 9.3.5 UL-RTOA Measurement Configuration
+11.3.0
+2014-09
+
+
+
+
+Update to Rel-12 version (MCC)
+12.0.0
+2015-03
+67
+RP-150356
+0009
+-
+Correction of Error Indication
+12.1.0
+2015-12
+
+
+
+
+Update to Rel-13 version (MCC)
+13.0.0
+2016-03
+71
+RP-160449
+0010
+-
+Correction of tabular for Procedure Code in the Message Type IE
+13.1.0
+
+Change history
+Date
+Meeting
+TDoc
+CR
+Rev
+Cat
+Subject/Comment
+New version
+2017-03
+SA#75
+
+
+
+
+Promotion to Release 14 without technical change
+14.0.0
+2018-06
+SA#80
+-
+-
+-
+-
+Promotion to Release 15 without technical change
+15.0.0
+2020-07
+SA#88-e
+-
+-
+-
+-
+Update to Rel-16 version (MCC)
+16.0.0
+

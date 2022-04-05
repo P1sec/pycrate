@@ -1,0 +1,41 @@
+-- ETSI TS 103 300-3 V2.1.1 (2020-11)
+
+-- This module defines a special container for motorcycles, to be integrated into the 
+-- Cooperative Awareness Message (CAM) defined in EN 302 637-2
+
+VRU-Motorcyclist-Special-Container {itu-t(0) identified-organization(4) etsi(0) itsDomain(5)
+    wg1(1) ts(103300) motorcyclist-special-container(2) version1(1)}
+
+
+DEFINITIONS AUTOMATIC TAGS ::= 
+
+BEGIN
+
+IMPORTS
+    SequenceOfVruPathPoint, SequenceOfVruSafeDistanceIndication,
+    StabilityChangeIndication, VruOrientation, VruRollAngle,
+    VruSizeClass, VruSubProfileMotorcyclist
+FROM VAM-PDU-Descriptions 
+    {itu-t(0) identified-organization(4) etsi(0) itsDomain(5)
+     wg1(1) ts(103300) vam(1) version1(1)}
+
+    PathHistory
+FROM ITS-Container 
+    {itu-t(0) identified-organization(4) etsi(0)
+     itsDomain(5) wg1(1) ts(102894) cdd(2) version(2)}
+;
+
+MotorcylistSpecialContainer ::= SEQUENCE {
+   vruSubProfileMotorcyclist   VruSubProfileMotorcyclist,
+   vruSizeClass                VruSizeClass,
+   rollAngle                   VruRollAngle OPTIONAL, 
+   orientation                 VruOrientation OPTIONAL,
+   vruSafeDistance             SequenceOfVruSafeDistanceIndication OPTIONAL,
+   pathPrediction              SequenceOfVruPathPoint OPTIONAL,
+   stabilityChangeIndication   StabilityChangeIndication OPTIONAL,
+   ...
+}
+
+
+
+END

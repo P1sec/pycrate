@@ -513,11 +513,15 @@ class RNA_IEs:
     ___CriticalityDiagnostics_iE_Extensions__item__id._const_tab_at = None
     ___CriticalityDiagnostics_iE_Extensions__item__id._const_tab_id = u'id'
     ___CriticalityDiagnostics_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('RNA-Containers', 'RNA-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___CriticalityDiagnostics_iE_Extensions__item__criticality._const_tab = ____CriticalityDiagnostics_iE_Extensions__item__id_tab
+    ____CriticalityDiagnostics_iE_Extensions__item__criticality_tab = CLASS(name='_tab_RNA-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('RNA-Containers', 'RNA-PROTOCOL-EXTENSION')))
+    ____CriticalityDiagnostics_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___CriticalityDiagnostics_iE_Extensions__item__criticality._const_tab = ____CriticalityDiagnostics_iE_Extensions__item__criticality_tab
     ___CriticalityDiagnostics_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___CriticalityDiagnostics_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___CriticalityDiagnostics_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('RNA-Containers', 'RNA-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___CriticalityDiagnostics_iE_Extensions__item__extensionValue._const_tab = ____CriticalityDiagnostics_iE_Extensions__item__id_tab
+    ____CriticalityDiagnostics_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_RNA-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('RNA-Containers', 'RNA-PROTOCOL-EXTENSION')))
+    ____CriticalityDiagnostics_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___CriticalityDiagnostics_iE_Extensions__item__extensionValue._const_tab = ____CriticalityDiagnostics_iE_Extensions__item__extensionValue_tab
     ___CriticalityDiagnostics_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___CriticalityDiagnostics_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __CriticalityDiagnostics_iE_Extensions__item_._cont = ASN1Dict([
@@ -552,11 +556,15 @@ class RNA_IEs:
     ____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__id._const_tab_at = None
     ____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__id._const_tab_id = u'id'
     ____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('RNA-Containers', 'RNA-PROTOCOL-EXTENSION'), [u'criticality']))
-    ____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__criticality._const_tab = _____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__id_tab
+    _____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__criticality_tab = CLASS(name='_tab_RNA-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('RNA-Containers', 'RNA-PROTOCOL-EXTENSION')))
+    _____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__criticality._const_tab = _____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__criticality_tab
     ____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('RNA-Containers', 'RNA-PROTOCOL-EXTENSION'), [u'Extension']))
-    ____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__extensionValue._const_tab = _____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__id_tab
+    _____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_RNA-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('RNA-Containers', 'RNA-PROTOCOL-EXTENSION')))
+    _____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__extensionValue._const_tab = _____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__extensionValue_tab
     ____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     ___CriticalityDiagnostics_IE_List__item__iE_Extensions__item_._cont = ASN1Dict([
@@ -637,11 +645,15 @@ class RNA_IEs:
     ___HNB_Cell_Identifier_iE_Extensions__item__id._const_tab_at = None
     ___HNB_Cell_Identifier_iE_Extensions__item__id._const_tab_id = u'id'
     ___HNB_Cell_Identifier_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('RNA-Containers', 'RNA-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___HNB_Cell_Identifier_iE_Extensions__item__criticality._const_tab = ____HNB_Cell_Identifier_iE_Extensions__item__id_tab
+    ____HNB_Cell_Identifier_iE_Extensions__item__criticality_tab = CLASS(name='_tab_RNA-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('RNA-Containers', 'RNA-PROTOCOL-EXTENSION')))
+    ____HNB_Cell_Identifier_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___HNB_Cell_Identifier_iE_Extensions__item__criticality._const_tab = ____HNB_Cell_Identifier_iE_Extensions__item__criticality_tab
     ___HNB_Cell_Identifier_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___HNB_Cell_Identifier_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___HNB_Cell_Identifier_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('RNA-Containers', 'RNA-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___HNB_Cell_Identifier_iE_Extensions__item__extensionValue._const_tab = ____HNB_Cell_Identifier_iE_Extensions__item__id_tab
+    ____HNB_Cell_Identifier_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_RNA-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('RNA-Containers', 'RNA-PROTOCOL-EXTENSION')))
+    ____HNB_Cell_Identifier_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___HNB_Cell_Identifier_iE_Extensions__item__extensionValue._const_tab = ____HNB_Cell_Identifier_iE_Extensions__item__extensionValue_tab
     ___HNB_Cell_Identifier_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___HNB_Cell_Identifier_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __HNB_Cell_Identifier_iE_Extensions__item_._cont = ASN1Dict([
@@ -685,11 +697,15 @@ class RNA_IEs:
     ___GlobalRNC_ID_iE_Extensions__item__id._const_tab_at = None
     ___GlobalRNC_ID_iE_Extensions__item__id._const_tab_id = u'id'
     ___GlobalRNC_ID_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('RNA-Containers', 'RNA-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___GlobalRNC_ID_iE_Extensions__item__criticality._const_tab = ____GlobalRNC_ID_iE_Extensions__item__id_tab
+    ____GlobalRNC_ID_iE_Extensions__item__criticality_tab = CLASS(name='_tab_RNA-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('RNA-Containers', 'RNA-PROTOCOL-EXTENSION')))
+    ____GlobalRNC_ID_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___GlobalRNC_ID_iE_Extensions__item__criticality._const_tab = ____GlobalRNC_ID_iE_Extensions__item__criticality_tab
     ___GlobalRNC_ID_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___GlobalRNC_ID_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___GlobalRNC_ID_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('RNA-Containers', 'RNA-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___GlobalRNC_ID_iE_Extensions__item__extensionValue._const_tab = ____GlobalRNC_ID_iE_Extensions__item__id_tab
+    ____GlobalRNC_ID_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_RNA-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('RNA-Containers', 'RNA-PROTOCOL-EXTENSION')))
+    ____GlobalRNC_ID_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___GlobalRNC_ID_iE_Extensions__item__extensionValue._const_tab = ____GlobalRNC_ID_iE_Extensions__item__extensionValue_tab
     ___GlobalRNC_ID_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___GlobalRNC_ID_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __GlobalRNC_ID_iE_Extensions__item_._cont = ASN1Dict([
@@ -737,7 +753,9 @@ class RNA_IEs:
         _CriticalityDiagnostics_iEsCriticalityDiagnostics,
         ____CriticalityDiagnostics_iE_Extensions__item__id_tab,
         ___CriticalityDiagnostics_iE_Extensions__item__id,
+        ____CriticalityDiagnostics_iE_Extensions__item__criticality_tab,
         ___CriticalityDiagnostics_iE_Extensions__item__criticality,
+        ____CriticalityDiagnostics_iE_Extensions__item__extensionValue_tab,
         ___CriticalityDiagnostics_iE_Extensions__item__extensionValue,
         __CriticalityDiagnostics_iE_Extensions__item_,
         _CriticalityDiagnostics_iE_Extensions,
@@ -747,7 +765,9 @@ class RNA_IEs:
         __CriticalityDiagnostics_IE_List__item__typeOfError,
         _____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__id_tab,
         ____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__id,
+        _____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__criticality_tab,
         ____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__criticality,
+        _____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__extensionValue_tab,
         ____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__extensionValue,
         ___CriticalityDiagnostics_IE_List__item__iE_Extensions__item_,
         __CriticalityDiagnostics_IE_List__item__iE_Extensions,
@@ -770,7 +790,9 @@ class RNA_IEs:
         _HNB_Cell_Identifier_cell_ID,
         ____HNB_Cell_Identifier_iE_Extensions__item__id_tab,
         ___HNB_Cell_Identifier_iE_Extensions__item__id,
+        ____HNB_Cell_Identifier_iE_Extensions__item__criticality_tab,
         ___HNB_Cell_Identifier_iE_Extensions__item__criticality,
+        ____HNB_Cell_Identifier_iE_Extensions__item__extensionValue_tab,
         ___HNB_Cell_Identifier_iE_Extensions__item__extensionValue,
         __HNB_Cell_Identifier_iE_Extensions__item_,
         _HNB_Cell_Identifier_iE_Extensions,
@@ -782,7 +804,9 @@ class RNA_IEs:
         _GlobalRNC_ID_rnc_ID,
         ____GlobalRNC_ID_iE_Extensions__item__id_tab,
         ___GlobalRNC_ID_iE_Extensions__item__id,
+        ____GlobalRNC_ID_iE_Extensions__item__criticality_tab,
         ___GlobalRNC_ID_iE_Extensions__item__criticality,
+        ____GlobalRNC_ID_iE_Extensions__item__extensionValue_tab,
         ___GlobalRNC_ID_iE_Extensions__item__extensionValue,
         __GlobalRNC_ID_iE_Extensions__item_,
         _GlobalRNC_ID_iE_Extensions,
@@ -916,11 +940,15 @@ class RNA_PDU_Contents:
     ___IurhSetupRequest_protocolExtensions__item__id._const_tab_at = None
     ___IurhSetupRequest_protocolExtensions__item__id._const_tab_id = u'id'
     ___IurhSetupRequest_protocolExtensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('RNA-Containers', 'RNA-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___IurhSetupRequest_protocolExtensions__item__criticality._const_tab = ____IurhSetupRequest_protocolExtensions__item__id_tab
+    ____IurhSetupRequest_protocolExtensions__item__criticality_tab = CLASS(name='_tab_RNA-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('RNA-Containers', 'RNA-PROTOCOL-EXTENSION')))
+    ____IurhSetupRequest_protocolExtensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___IurhSetupRequest_protocolExtensions__item__criticality._const_tab = ____IurhSetupRequest_protocolExtensions__item__criticality_tab
     ___IurhSetupRequest_protocolExtensions__item__criticality._const_tab_at = ('..', u'id')
     ___IurhSetupRequest_protocolExtensions__item__criticality._const_tab_id = u'criticality'
     ___IurhSetupRequest_protocolExtensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('RNA-Containers', 'RNA-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___IurhSetupRequest_protocolExtensions__item__extensionValue._const_tab = ____IurhSetupRequest_protocolExtensions__item__id_tab
+    ____IurhSetupRequest_protocolExtensions__item__extensionValue_tab = CLASS(name='_tab_RNA-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('RNA-Containers', 'RNA-PROTOCOL-EXTENSION')))
+    ____IurhSetupRequest_protocolExtensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___IurhSetupRequest_protocolExtensions__item__extensionValue._const_tab = ____IurhSetupRequest_protocolExtensions__item__extensionValue_tab
     ___IurhSetupRequest_protocolExtensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___IurhSetupRequest_protocolExtensions__item__extensionValue._const_tab_id = u'Extension'
     __IurhSetupRequest_protocolExtensions__item_._cont = ASN1Dict([
@@ -984,11 +1012,15 @@ class RNA_PDU_Contents:
     ___IurhSetupResponse_protocolExtensions__item__id._const_tab_at = None
     ___IurhSetupResponse_protocolExtensions__item__id._const_tab_id = u'id'
     ___IurhSetupResponse_protocolExtensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('RNA-Containers', 'RNA-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___IurhSetupResponse_protocolExtensions__item__criticality._const_tab = ____IurhSetupResponse_protocolExtensions__item__id_tab
+    ____IurhSetupResponse_protocolExtensions__item__criticality_tab = CLASS(name='_tab_RNA-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('RNA-Containers', 'RNA-PROTOCOL-EXTENSION')))
+    ____IurhSetupResponse_protocolExtensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___IurhSetupResponse_protocolExtensions__item__criticality._const_tab = ____IurhSetupResponse_protocolExtensions__item__criticality_tab
     ___IurhSetupResponse_protocolExtensions__item__criticality._const_tab_at = ('..', u'id')
     ___IurhSetupResponse_protocolExtensions__item__criticality._const_tab_id = u'criticality'
     ___IurhSetupResponse_protocolExtensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('RNA-Containers', 'RNA-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___IurhSetupResponse_protocolExtensions__item__extensionValue._const_tab = ____IurhSetupResponse_protocolExtensions__item__id_tab
+    ____IurhSetupResponse_protocolExtensions__item__extensionValue_tab = CLASS(name='_tab_RNA-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('RNA-Containers', 'RNA-PROTOCOL-EXTENSION')))
+    ____IurhSetupResponse_protocolExtensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___IurhSetupResponse_protocolExtensions__item__extensionValue._const_tab = ____IurhSetupResponse_protocolExtensions__item__extensionValue_tab
     ___IurhSetupResponse_protocolExtensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___IurhSetupResponse_protocolExtensions__item__extensionValue._const_tab_id = u'Extension'
     __IurhSetupResponse_protocolExtensions__item_._cont = ASN1Dict([
@@ -1055,11 +1087,15 @@ class RNA_PDU_Contents:
     ___IurhSetupFailure_protocolExtensions__item__id._const_tab_at = None
     ___IurhSetupFailure_protocolExtensions__item__id._const_tab_id = u'id'
     ___IurhSetupFailure_protocolExtensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('RNA-Containers', 'RNA-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___IurhSetupFailure_protocolExtensions__item__criticality._const_tab = ____IurhSetupFailure_protocolExtensions__item__id_tab
+    ____IurhSetupFailure_protocolExtensions__item__criticality_tab = CLASS(name='_tab_RNA-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('RNA-Containers', 'RNA-PROTOCOL-EXTENSION')))
+    ____IurhSetupFailure_protocolExtensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___IurhSetupFailure_protocolExtensions__item__criticality._const_tab = ____IurhSetupFailure_protocolExtensions__item__criticality_tab
     ___IurhSetupFailure_protocolExtensions__item__criticality._const_tab_at = ('..', u'id')
     ___IurhSetupFailure_protocolExtensions__item__criticality._const_tab_id = u'criticality'
     ___IurhSetupFailure_protocolExtensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('RNA-Containers', 'RNA-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___IurhSetupFailure_protocolExtensions__item__extensionValue._const_tab = ____IurhSetupFailure_protocolExtensions__item__id_tab
+    ____IurhSetupFailure_protocolExtensions__item__extensionValue_tab = CLASS(name='_tab_RNA-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('RNA-Containers', 'RNA-PROTOCOL-EXTENSION')))
+    ____IurhSetupFailure_protocolExtensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___IurhSetupFailure_protocolExtensions__item__extensionValue._const_tab = ____IurhSetupFailure_protocolExtensions__item__extensionValue_tab
     ___IurhSetupFailure_protocolExtensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___IurhSetupFailure_protocolExtensions__item__extensionValue._const_tab_id = u'Extension'
     __IurhSetupFailure_protocolExtensions__item_._cont = ASN1Dict([
@@ -1128,11 +1164,15 @@ class RNA_PDU_Contents:
     ___Connect_protocolExtensions__item__id._const_tab_at = None
     ___Connect_protocolExtensions__item__id._const_tab_id = u'id'
     ___Connect_protocolExtensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('RNA-Containers', 'RNA-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___Connect_protocolExtensions__item__criticality._const_tab = ____Connect_protocolExtensions__item__id_tab
+    ____Connect_protocolExtensions__item__criticality_tab = CLASS(name='_tab_RNA-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('RNA-Containers', 'RNA-PROTOCOL-EXTENSION')))
+    ____Connect_protocolExtensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___Connect_protocolExtensions__item__criticality._const_tab = ____Connect_protocolExtensions__item__criticality_tab
     ___Connect_protocolExtensions__item__criticality._const_tab_at = ('..', u'id')
     ___Connect_protocolExtensions__item__criticality._const_tab_id = u'criticality'
     ___Connect_protocolExtensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('RNA-Containers', 'RNA-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___Connect_protocolExtensions__item__extensionValue._const_tab = ____Connect_protocolExtensions__item__id_tab
+    ____Connect_protocolExtensions__item__extensionValue_tab = CLASS(name='_tab_RNA-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('RNA-Containers', 'RNA-PROTOCOL-EXTENSION')))
+    ____Connect_protocolExtensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___Connect_protocolExtensions__item__extensionValue._const_tab = ____Connect_protocolExtensions__item__extensionValue_tab
     ___Connect_protocolExtensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___Connect_protocolExtensions__item__extensionValue._const_tab_id = u'Extension'
     __Connect_protocolExtensions__item_._cont = ASN1Dict([
@@ -1199,11 +1239,15 @@ class RNA_PDU_Contents:
     ___DirectTransfer_protocolExtensions__item__id._const_tab_at = None
     ___DirectTransfer_protocolExtensions__item__id._const_tab_id = u'id'
     ___DirectTransfer_protocolExtensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('RNA-Containers', 'RNA-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___DirectTransfer_protocolExtensions__item__criticality._const_tab = ____DirectTransfer_protocolExtensions__item__id_tab
+    ____DirectTransfer_protocolExtensions__item__criticality_tab = CLASS(name='_tab_RNA-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('RNA-Containers', 'RNA-PROTOCOL-EXTENSION')))
+    ____DirectTransfer_protocolExtensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___DirectTransfer_protocolExtensions__item__criticality._const_tab = ____DirectTransfer_protocolExtensions__item__criticality_tab
     ___DirectTransfer_protocolExtensions__item__criticality._const_tab_at = ('..', u'id')
     ___DirectTransfer_protocolExtensions__item__criticality._const_tab_id = u'criticality'
     ___DirectTransfer_protocolExtensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('RNA-Containers', 'RNA-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___DirectTransfer_protocolExtensions__item__extensionValue._const_tab = ____DirectTransfer_protocolExtensions__item__id_tab
+    ____DirectTransfer_protocolExtensions__item__extensionValue_tab = CLASS(name='_tab_RNA-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('RNA-Containers', 'RNA-PROTOCOL-EXTENSION')))
+    ____DirectTransfer_protocolExtensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___DirectTransfer_protocolExtensions__item__extensionValue._const_tab = ____DirectTransfer_protocolExtensions__item__extensionValue_tab
     ___DirectTransfer_protocolExtensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___DirectTransfer_protocolExtensions__item__extensionValue._const_tab_id = u'Extension'
     __DirectTransfer_protocolExtensions__item_._cont = ASN1Dict([
@@ -1270,11 +1314,15 @@ class RNA_PDU_Contents:
     ___Disconnect_protocolExtensions__item__id._const_tab_at = None
     ___Disconnect_protocolExtensions__item__id._const_tab_id = u'id'
     ___Disconnect_protocolExtensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('RNA-Containers', 'RNA-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___Disconnect_protocolExtensions__item__criticality._const_tab = ____Disconnect_protocolExtensions__item__id_tab
+    ____Disconnect_protocolExtensions__item__criticality_tab = CLASS(name='_tab_RNA-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('RNA-Containers', 'RNA-PROTOCOL-EXTENSION')))
+    ____Disconnect_protocolExtensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___Disconnect_protocolExtensions__item__criticality._const_tab = ____Disconnect_protocolExtensions__item__criticality_tab
     ___Disconnect_protocolExtensions__item__criticality._const_tab_at = ('..', u'id')
     ___Disconnect_protocolExtensions__item__criticality._const_tab_id = u'criticality'
     ___Disconnect_protocolExtensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('RNA-Containers', 'RNA-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___Disconnect_protocolExtensions__item__extensionValue._const_tab = ____Disconnect_protocolExtensions__item__id_tab
+    ____Disconnect_protocolExtensions__item__extensionValue_tab = CLASS(name='_tab_RNA-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('RNA-Containers', 'RNA-PROTOCOL-EXTENSION')))
+    ____Disconnect_protocolExtensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___Disconnect_protocolExtensions__item__extensionValue._const_tab = ____Disconnect_protocolExtensions__item__extensionValue_tab
     ___Disconnect_protocolExtensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___Disconnect_protocolExtensions__item__extensionValue._const_tab_id = u'Extension'
     __Disconnect_protocolExtensions__item_._cont = ASN1Dict([
@@ -1341,11 +1389,15 @@ class RNA_PDU_Contents:
     ___ConnectionlessTransfer_protocolExtensions__item__id._const_tab_at = None
     ___ConnectionlessTransfer_protocolExtensions__item__id._const_tab_id = u'id'
     ___ConnectionlessTransfer_protocolExtensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('RNA-Containers', 'RNA-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___ConnectionlessTransfer_protocolExtensions__item__criticality._const_tab = ____ConnectionlessTransfer_protocolExtensions__item__id_tab
+    ____ConnectionlessTransfer_protocolExtensions__item__criticality_tab = CLASS(name='_tab_RNA-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('RNA-Containers', 'RNA-PROTOCOL-EXTENSION')))
+    ____ConnectionlessTransfer_protocolExtensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___ConnectionlessTransfer_protocolExtensions__item__criticality._const_tab = ____ConnectionlessTransfer_protocolExtensions__item__criticality_tab
     ___ConnectionlessTransfer_protocolExtensions__item__criticality._const_tab_at = ('..', u'id')
     ___ConnectionlessTransfer_protocolExtensions__item__criticality._const_tab_id = u'criticality'
     ___ConnectionlessTransfer_protocolExtensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('RNA-Containers', 'RNA-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___ConnectionlessTransfer_protocolExtensions__item__extensionValue._const_tab = ____ConnectionlessTransfer_protocolExtensions__item__id_tab
+    ____ConnectionlessTransfer_protocolExtensions__item__extensionValue_tab = CLASS(name='_tab_RNA-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('RNA-Containers', 'RNA-PROTOCOL-EXTENSION')))
+    ____ConnectionlessTransfer_protocolExtensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___ConnectionlessTransfer_protocolExtensions__item__extensionValue._const_tab = ____ConnectionlessTransfer_protocolExtensions__item__extensionValue_tab
     ___ConnectionlessTransfer_protocolExtensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___ConnectionlessTransfer_protocolExtensions__item__extensionValue._const_tab_id = u'Extension'
     __ConnectionlessTransfer_protocolExtensions__item_._cont = ASN1Dict([
@@ -1412,11 +1464,15 @@ class RNA_PDU_Contents:
     ___ErrorIndication_protocolExtensions__item__id._const_tab_at = None
     ___ErrorIndication_protocolExtensions__item__id._const_tab_id = u'id'
     ___ErrorIndication_protocolExtensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('RNA-Containers', 'RNA-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___ErrorIndication_protocolExtensions__item__criticality._const_tab = ____ErrorIndication_protocolExtensions__item__id_tab
+    ____ErrorIndication_protocolExtensions__item__criticality_tab = CLASS(name='_tab_RNA-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('RNA-Containers', 'RNA-PROTOCOL-EXTENSION')))
+    ____ErrorIndication_protocolExtensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___ErrorIndication_protocolExtensions__item__criticality._const_tab = ____ErrorIndication_protocolExtensions__item__criticality_tab
     ___ErrorIndication_protocolExtensions__item__criticality._const_tab_at = ('..', u'id')
     ___ErrorIndication_protocolExtensions__item__criticality._const_tab_id = u'criticality'
     ___ErrorIndication_protocolExtensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('RNA-Containers', 'RNA-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___ErrorIndication_protocolExtensions__item__extensionValue._const_tab = ____ErrorIndication_protocolExtensions__item__id_tab
+    ____ErrorIndication_protocolExtensions__item__extensionValue_tab = CLASS(name='_tab_RNA-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('RNA-Containers', 'RNA-PROTOCOL-EXTENSION')))
+    ____ErrorIndication_protocolExtensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___ErrorIndication_protocolExtensions__item__extensionValue._const_tab = ____ErrorIndication_protocolExtensions__item__extensionValue_tab
     ___ErrorIndication_protocolExtensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___ErrorIndication_protocolExtensions__item__extensionValue._const_tab_id = u'Extension'
     __ErrorIndication_protocolExtensions__item_._cont = ASN1Dict([
@@ -1456,11 +1512,15 @@ class RNA_PDU_Contents:
     ___PrivateMessage_privateIEs__item__id._const_tab_at = None
     ___PrivateMessage_privateIEs__item__id._const_tab_id = u'id'
     ___PrivateMessage_privateIEs__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('RNA-Containers', 'RNA-PRIVATE-IES'), [u'criticality']))
-    ___PrivateMessage_privateIEs__item__criticality._const_tab = ____PrivateMessage_privateIEs__item__id_tab
+    ____PrivateMessage_privateIEs__item__criticality_tab = CLASS(name='_tab_RNA-PRIVATE-IES', mode=MODE_SET, typeref=ASN1RefType(('RNA-Containers', 'RNA-PRIVATE-IES')))
+    ____PrivateMessage_privateIEs__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___PrivateMessage_privateIEs__item__criticality._const_tab = ____PrivateMessage_privateIEs__item__criticality_tab
     ___PrivateMessage_privateIEs__item__criticality._const_tab_at = ('..', u'id')
     ___PrivateMessage_privateIEs__item__criticality._const_tab_id = u'criticality'
     ___PrivateMessage_privateIEs__item__value = OPEN(name=u'value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('RNA-Containers', 'RNA-PRIVATE-IES'), [u'Value']))
-    ___PrivateMessage_privateIEs__item__value._const_tab = ____PrivateMessage_privateIEs__item__id_tab
+    ____PrivateMessage_privateIEs__item__value_tab = CLASS(name='_tab_RNA-PRIVATE-IES', mode=MODE_SET, typeref=ASN1RefType(('RNA-Containers', 'RNA-PRIVATE-IES')))
+    ____PrivateMessage_privateIEs__item__value_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___PrivateMessage_privateIEs__item__value._const_tab = ____PrivateMessage_privateIEs__item__value_tab
     ___PrivateMessage_privateIEs__item__value._const_tab_at = ('..', u'id')
     ___PrivateMessage_privateIEs__item__value._const_tab_id = u'Value'
     __PrivateMessage_privateIEs__item_._cont = ASN1Dict([
@@ -1491,7 +1551,9 @@ class RNA_PDU_Contents:
         _IurhSetupRequest_protocolIEs,
         ____IurhSetupRequest_protocolExtensions__item__id_tab,
         ___IurhSetupRequest_protocolExtensions__item__id,
+        ____IurhSetupRequest_protocolExtensions__item__criticality_tab,
         ___IurhSetupRequest_protocolExtensions__item__criticality,
+        ____IurhSetupRequest_protocolExtensions__item__extensionValue_tab,
         ___IurhSetupRequest_protocolExtensions__item__extensionValue,
         __IurhSetupRequest_protocolExtensions__item_,
         _IurhSetupRequest_protocolExtensions,
@@ -1510,7 +1572,9 @@ class RNA_PDU_Contents:
         _IurhSetupResponse_protocolIEs,
         ____IurhSetupResponse_protocolExtensions__item__id_tab,
         ___IurhSetupResponse_protocolExtensions__item__id,
+        ____IurhSetupResponse_protocolExtensions__item__criticality_tab,
         ___IurhSetupResponse_protocolExtensions__item__criticality,
+        ____IurhSetupResponse_protocolExtensions__item__extensionValue_tab,
         ___IurhSetupResponse_protocolExtensions__item__extensionValue,
         __IurhSetupResponse_protocolExtensions__item_,
         _IurhSetupResponse_protocolExtensions,
@@ -1532,7 +1596,9 @@ class RNA_PDU_Contents:
         _IurhSetupFailure_protocolIEs,
         ____IurhSetupFailure_protocolExtensions__item__id_tab,
         ___IurhSetupFailure_protocolExtensions__item__id,
+        ____IurhSetupFailure_protocolExtensions__item__criticality_tab,
         ___IurhSetupFailure_protocolExtensions__item__criticality,
+        ____IurhSetupFailure_protocolExtensions__item__extensionValue_tab,
         ___IurhSetupFailure_protocolExtensions__item__extensionValue,
         __IurhSetupFailure_protocolExtensions__item_,
         _IurhSetupFailure_protocolExtensions,
@@ -1556,7 +1622,9 @@ class RNA_PDU_Contents:
         _Connect_protocolIEs,
         ____Connect_protocolExtensions__item__id_tab,
         ___Connect_protocolExtensions__item__id,
+        ____Connect_protocolExtensions__item__criticality_tab,
         ___Connect_protocolExtensions__item__criticality,
+        ____Connect_protocolExtensions__item__extensionValue_tab,
         ___Connect_protocolExtensions__item__extensionValue,
         __Connect_protocolExtensions__item_,
         _Connect_protocolExtensions,
@@ -1578,7 +1646,9 @@ class RNA_PDU_Contents:
         _DirectTransfer_protocolIEs,
         ____DirectTransfer_protocolExtensions__item__id_tab,
         ___DirectTransfer_protocolExtensions__item__id,
+        ____DirectTransfer_protocolExtensions__item__criticality_tab,
         ___DirectTransfer_protocolExtensions__item__criticality,
+        ____DirectTransfer_protocolExtensions__item__extensionValue_tab,
         ___DirectTransfer_protocolExtensions__item__extensionValue,
         __DirectTransfer_protocolExtensions__item_,
         _DirectTransfer_protocolExtensions,
@@ -1600,7 +1670,9 @@ class RNA_PDU_Contents:
         _Disconnect_protocolIEs,
         ____Disconnect_protocolExtensions__item__id_tab,
         ___Disconnect_protocolExtensions__item__id,
+        ____Disconnect_protocolExtensions__item__criticality_tab,
         ___Disconnect_protocolExtensions__item__criticality,
+        ____Disconnect_protocolExtensions__item__extensionValue_tab,
         ___Disconnect_protocolExtensions__item__extensionValue,
         __Disconnect_protocolExtensions__item_,
         _Disconnect_protocolExtensions,
@@ -1622,7 +1694,9 @@ class RNA_PDU_Contents:
         _ConnectionlessTransfer_protocolIEs,
         ____ConnectionlessTransfer_protocolExtensions__item__id_tab,
         ___ConnectionlessTransfer_protocolExtensions__item__id,
+        ____ConnectionlessTransfer_protocolExtensions__item__criticality_tab,
         ___ConnectionlessTransfer_protocolExtensions__item__criticality,
+        ____ConnectionlessTransfer_protocolExtensions__item__extensionValue_tab,
         ___ConnectionlessTransfer_protocolExtensions__item__extensionValue,
         __ConnectionlessTransfer_protocolExtensions__item_,
         _ConnectionlessTransfer_protocolExtensions,
@@ -1644,7 +1718,9 @@ class RNA_PDU_Contents:
         _ErrorIndication_protocolIEs,
         ____ErrorIndication_protocolExtensions__item__id_tab,
         ___ErrorIndication_protocolExtensions__item__id,
+        ____ErrorIndication_protocolExtensions__item__criticality_tab,
         ___ErrorIndication_protocolExtensions__item__criticality,
+        ____ErrorIndication_protocolExtensions__item__extensionValue_tab,
         ___ErrorIndication_protocolExtensions__item__extensionValue,
         __ErrorIndication_protocolExtensions__item_,
         _ErrorIndication_protocolExtensions,
@@ -1657,7 +1733,9 @@ class RNA_PDU_Contents:
         ErrorIndicationExtensions,
         ____PrivateMessage_privateIEs__item__id_tab,
         ___PrivateMessage_privateIEs__item__id,
+        ____PrivateMessage_privateIEs__item__criticality_tab,
         ___PrivateMessage_privateIEs__item__criticality,
+        ____PrivateMessage_privateIEs__item__value_tab,
         ___PrivateMessage_privateIEs__item__value,
         __PrivateMessage_privateIEs__item_,
         _PrivateMessage_privateIEs,

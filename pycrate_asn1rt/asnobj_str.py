@@ -1,7 +1,7 @@
 # -*- coding: UTF-8 -*-
 #/**
 # * Software Name : pycrate
-# * Version : 0.3
+# * Version : 0.4
 # *
 # * Copyright 2017. Benoit Michau. ANSSI.
 # * Copyright 2018. Benoit Michau. P1Sec.
@@ -117,7 +117,7 @@ Specific constraints attributes:
         else:
             try:
                 return GLOBAL.MOD[ref[0]][ref[1]]
-            except:
+            except Exception:
                 raise(ASN1ObjErr('{0}: invalid object reference, {1!r}'\
                       .format(self.fullname(), ref)))
     
@@ -130,54 +130,33 @@ Specific constraints attributes:
             else:
                 # CONTAINING value
                 self._get_val_obj(val[0])._safechk_val(val[1])
+        elif isinstance(val, set):
+            # named bits
+            if not self._cont:
+                raise(ASN1ObjErr('{0}: invalid named bits, {1!r}'.format(self.fullname(), val)))
+            elif any([nb not in self._cont for nb in val]):
+                raise(ASN1ObjErr('{0}: invalid named bits, {1!r}'.format(self.fullname(), val)))
         else:
             raise(ASN1ObjErr('{0}: invalid value, {1!r}'.format(self.fullname(), val)))
     
     def _safechk_bnd(self, val):
-        if isinstance(val[0], integer_types):
-            # check val against potential constraints
-            ASN1Obj._safechk_bnd(self, val)
-            if self._const_sz and \
-            self._const_sz.ext is None and \
-            val[1] not in self._const_sz:
-                raise(ASN1ObjErr('{0}: value out of size constraint, {1!r}'\
-                      .format(self.fullname(), val)))
-        elif self._const_cont:
-            if self._const_cont._typeref:
-                ident = self._const_cont._typeref.called[1]
-            else:
-                ident = self._const_cont.TYPE 
-            if val[0] != ident:
-                raise(ASN1ObjErr('{0}: value out of containing constraint, {1!r}'\
-                      .format(self.fullname(), val)))
-    
-    def set_val(self, val):
-        if isinstance(val, set):
-            off = []
-            for name in val:
-                try:
-                    off.append(self._cont[name])
-                except:
-                    raise(ASN1ObjErr('{0}: invalid named bit, {1!r}'.format(self.fullname(), val)))
-            if off:
-                moff = max(off)
-                val  = (sum([1<<(moff-i) for i in off]), 1+moff)
-            else:
-                moff = 0
-                val  = (0, 0)
-            if self._const_sz and self._const_sz.ext is None \
-            and self._const_sz.lb and val[1] < self._const_sz.lb:
-                # need to extend the value to the lower bound of the size constraint
-                diff = self._const_sz.lb - val[1]
-                self._val = (val[0] << diff, val[1] + diff)
-            else:
-                self._val = val
-        else:
-            self._val = val
-        if self._SAFE_VAL:
-            self._safechk_val(self._val)
-        if self._SAFE_BND:
-            self._safechk_bnd(self._val)
+        if isinstance(val, tuple):
+            if isinstance(val[0], integer_types):
+                # check val against potential constraints
+                ASN1Obj._safechk_bnd(self, val)
+                if self._const_sz and \
+                self._const_sz.ext is None and \
+                val[1] not in self._const_sz:
+                    raise(ASN1ObjErr('{0}: value out of size constraint, {1!r}'\
+                          .format(self.fullname(), val)))
+            elif self._const_cont:
+                if self._const_cont._typeref:
+                    ident = self._const_cont._typeref.called[1]
+                else:
+                    ident = self._const_cont.TYPE 
+                if val[0] != ident:
+                    raise(ASN1ObjErr('{0}: value out of containing constraint, {1!r}'\
+                          .format(self.fullname(), val)))
     
     def get_names(self):
         """Returns the set of names from the NamedBitList corresponding to the 
@@ -191,9 +170,30 @@ Specific constraints attributes:
             # self._val has not the correct format
             return names
         for off, bit in enumerate(uint_to_bitstr(self._val[0], self._val[1])):
-            if bit == '1':
+            if bit == '1' and off in self._cont_rev:
                 names.add(self._cont_rev[off])
         return names
+    
+    def _names_to_val(self):
+        off, val = [], self._val
+        for name in val:
+            try:
+                off.append(self._cont[name])
+            except Exception:
+                raise(ASN1ObjErr('{0}: invalid named bits, {1!r}'.format(self.fullname(), val)))
+        if off:
+            moff = max(off)
+            val  = (sum([1<<(moff-i) for i in off]), 1+moff)
+        else:
+            moff = 0
+            val  = (0, 0)
+        if self._const_sz and self._const_sz.ext is None \
+        and self._const_sz.lb and val[1] < self._const_sz.lb:
+            # need to extend the value to the lower bound of the size constraint
+            diff = self._const_sz.lb - val[1]
+            self._val = (val[0] << diff, val[1] + diff)
+        else:
+            self._val = val
     
     ###
     # conversion between internal value and ASN.1 syntax
@@ -228,11 +228,24 @@ Specific constraints attributes:
             if m:
                 # named offsets
                 off = set(map(str.strip, m.group(1).split(',')))
-                # converting to integral offsets (starting from 0)
-                off  = [self._cont[no] for no in off]
-                moff = max(off)
-                self._val = (sum([1<<(moff-i) for i in off]), 1+moff)
-                return txt[m.end():].strip()
+                if len(off) == 1 and '' in off:
+                    # empty content
+                    bval  = 0
+                    bsize = 0
+                else:
+                    # converting to integral offsets (starting from 0)
+                    off   = [self._cont[no] for no in off]
+                    moff  = max(off)
+                    bval  = sum([1<<(moff-i) for i in off])
+                    bsize = 1+moff
+                if self._const_sz is not None and self._const_sz.ext is None \
+                and self._const_sz.lb is not None and bsize < self._const_sz.lb:
+                    # non extensible size constraint that requires bsize to be extended
+                    # and bval to be shifted accordingly
+                    bval <<= (self._const_sz.lb - bsize)
+                    bsize = self._const_sz.lb
+                self._val = (bval, bsize)
+                return txt[m.end():].lstrip()
         elif self._const_cont:
             # CHOICE-like value notation
             if self._const_cont._typeref:
@@ -248,6 +261,8 @@ Specific constraints attributes:
         raise(ASN1ASNDecodeErr('{0}: invalid text, {1!r}'.format(self.fullname(), txt)))
     
     def _to_asn1(self):
+        if isinstance(self._val, set):
+            self._names_to_val()
         if isinstance(self._val[0], integer_types):
             uint = Uint('bs', val=self._val[0], bl=self._val[1])
             if self._val[1] % 4 == 0:
@@ -257,7 +272,7 @@ Specific constraints attributes:
                 # BSTRING
                 ret = '\'%s\'B' % uint_to_bitstr(self._val[0], self._val[1])
             if self._cont:
-                # add flags in comment
+                # add named bits in comment
                 flags = []
                 for i, v in enumerate(uint_to_bitstr(self._val[0], self._val[1])):
                     if i in self._cont_rev and v == '1':
@@ -271,10 +286,10 @@ Specific constraints attributes:
                     else:
                         s = uint_to_bytes(self._val[0], self._val[1]).decode('ascii')
                     if is_printable(s):
-                        return ret + ' -- %s --' % s
+                        return ret + ' -- %s --' % repr(s)[1:-1]
                     else:
                         return ret
-                except:
+                except Exception:
                     return ret
             else:
                 return ret
@@ -293,6 +308,20 @@ Specific constraints attributes:
     ###
     # conversion between internal value and ASN.1 unaligned PER encoding
     ###
+    
+    def __val_from_buf(self, buf, bl):
+        if bl:
+            self._val = (bytes_to_uint(buf, bl), bl)
+        else:
+            # empty BIT STRING
+            self._val = (0, 0)
+    
+    def __val_from_buf_struct(self, Buf):
+        if Buf._bl:
+            self._val = (Buf.to_uint(), Buf.get_bl())
+        else:
+            # empty BIT STRING
+            self._val = (0, 0)
     
     def _from_per_ws(self, char):
         GEN, ldet = [], None
@@ -315,7 +344,7 @@ Specific constraints attributes:
                     self.__from_per_ws_szunconst(char, GEN)
                     return
                 else:
-                    ldet, _gen = ASN1CodecPER.decode_intconst_ws(char, self._const_sz)
+                    ldet, _gen = ASN1CodecPER.decode_intconst_ws(char, self._const_sz, name='C')
                     GEN.extend(_gen)
                     if ASN1CodecPER.ALIGNED:
                         # realignment
@@ -383,10 +412,7 @@ Specific constraints attributes:
                 if not self._SILENT:
                     asnlog('BIT_STR.__from_per_ws_buf: %s, specific CONTAINING encoder unhandled'\
                            % self._name)
-                if Buf._bl:
-                    self._val = (Buf.to_uint(), Buf.get_bl())
-                else:
-                    self._val = (0, 0)
+                self.__val_from_buf_struct(Buf)
             else:
                 char = Charpy(Buf())
                 char._len_bit = Buf.get_bl()
@@ -395,11 +421,12 @@ Specific constraints attributes:
                         self._const_cont.from_aper_ws(char)
                     else:
                         self._const_cont.from_uper_ws(char)
-                except:
+                except Exception:
                     if not self._SILENT:
                         asnlog('BIT_STR.__from_per_ws_buf: %s, CONTAINING object decoding failed'\
                                % self._name)
-                    self._val = (bytes_to_uint(buf, bl), bl)
+                    #
+                    self.__val_from_buf_struct(Buf)
                 else:
                     if self._const_cont._typeref:
                         ident = self._const_cont._typeref.called[1]
@@ -407,10 +434,7 @@ Specific constraints attributes:
                         ident = self._const_cont.TYPE
                     self._val = (ident, self._const_cont._val)
         else:
-            if Buf._bl:
-                self._val = (Buf.to_uint(), Buf.get_bl())
-            else:
-                self._val = (0, 0)
+            self.__val_from_buf_struct(Buf)
     
     def _from_per(self, char):
         ldet = None
@@ -486,11 +510,7 @@ Specific constraints attributes:
                 if not self._SILENT:
                     asnlog('BIT_STR.__from_per_buf: %s, specific CONTAINING encoder unhandled'\
                            % self._name)
-                if bl:
-                    self._val = (bytes_to_uint(buf, bl), bl)
-                else:
-                    # empty bit string
-                    self._val = (0, 0)
+                self.__val_from_buf(buf, bl)
             else:
                 char = Charpy(buf)
                 char._len_bit = bl
@@ -499,15 +519,11 @@ Specific constraints attributes:
                         self._const_cont.from_aper(char)
                     else:
                         self._const_cont.from_uper(char)
-                except:
+                except Exception:
                     if not self._SILENT:
                         asnlog('BIT_STR.__from_per_buf: %s, CONTAINING object decoding failed'\
                                % self._name)
-                    if bl:
-                        self._val = (bytes_to_uint(buf, bl), bl)
-                    else:
-                        # empty bit string
-                        self._val = (0, 0)
+                    self.__val_from_buf(buf, bl)
                 else:
                     if self._const_cont._typeref:
                         ident = self._const_cont._typeref.called[1]
@@ -515,13 +531,13 @@ Specific constraints attributes:
                         ident = self._const_cont.TYPE 
                     self._val = (ident, self._const_cont._val)
         else:
-            if bl:
-                self._val = (bytes_to_uint(buf, bl), bl)
-            else:
-                # empty bit string
-                self._val = (0, 0)
+            self.__val_from_buf(buf, bl)
     
+    # TODO: _to_per_ws() does not copy the structure of a potential wrapped
+    # object into self._struct
     def _to_per_ws(self):
+        if isinstance(self._val, set):
+            self._names_to_val()
         buf, ldet = self.__to_per_ws_buf()
         GEN = []
         if self._const_sz:
@@ -614,6 +630,8 @@ Specific constraints attributes:
         self._struct = Envelope(self._name, GEN=tuple(GEN))
     
     def _to_per(self):
+        if isinstance(self._val, set):
+            self._names_to_val()
         buf, ldet = self.__to_per_buf()
         GEN = []
         if self._const_sz:
@@ -713,35 +731,36 @@ Specific constraints attributes:
             Frag, bsfrag = [], []
             for tlv in vs:
                 Tag, cl, pc, tval, Len, lval = tlv[0:6]
-                if pc != 0:
-                    # fragmenting the fragment... damned BER recursivity !
-                    raise(ASN1NotSuppErr('{0}: BIT STRING fragments of fragments'\
-                          .format(self.fullname())))
-                elif cl != 0:
+                if cl != 0:
                     raise(ASN1BERDecodeErr('{0}: invalid BIT STRING fragment tag class, {1!r}'\
                           .format(self.fullname(), cl)))
-                elif (tval, lval) == (0, 0):
-                    # EOC marker
-                    assert( tlv == v[-1] )
-                    Frag.append( Envelope('EOC', GEN=(Tag, Len)) )
-                elif lval == 0:
-                    raise(ASN1BERDecodeErr('{0}: invalid BIT STRING fragment length'\
-                          .format(self.fullname())))
                 elif tval != 3:
                     raise(ASN1BERDecodeErr('{0}: invalid BIT STRING fragment tag value, {1!r}'\
                           .format(self.fullname(), tval)))
+                elif lval == 0:
+                    raise(ASN1BERDecodeErr('{0}: invalid BIT STRING fragment length'\
+                          .format(self.fullname())))
+                elif pc != 0:
+                    # fragmenting the fragment... damned BER recursivity !
+                    raise(ASN1NotSuppErr('{0}: BIT STRING fragments within fragments'\
+                          .format(self.fullname())))
+                elif (tval, lval) == (0, 0):
+                    # EOC marker
+                    if tlv != vs[-1]:
+                        raise(ASN1BERDecodeErr('{0}: invalid EOC within BIT STRING fragments'))
+                    Frag.append( Envelope('EOC', GEN=(Tag, Len)) )
                 else:
-                    char._cur, char._len_bit = tlv[-1][0], tlv[-1][1]
+                    char._cur, char._len_bit = tlv[6][0], tlv[6][1]
                     Bu = Uint8('BU')
                     Bu._from_char(char)
                     bu = Bu()
                     if bu > 7:
                         raise(ASN1BERDecodeErr('{0}: invalid BIT STRING counter for unused bits'\
                               .format(self.fullname())))
-                    Bs = Buf('BS', bl=tlv[-1][1]-tlv[-1][0]-8, rep=REPR_HEX)
+                    Bs = Buf('BS', bl=tlv[6][1]-tlv[6][0]-8, rep=REPR_HEX)
                     Bs._from_char(char)
                     # concat the fragment of bit string
-                    bsfrag.append( (T_BYTES, Bs.to_bytes(), tlv[-1][1]-tlv[-1][0]-8-bu) )
+                    bsfrag.append( (T_BYTES, Bs.to_bytes(), tlv[6][1]-tlv[6][0]-8-bu) )
                     # generate the fragment envelope
                     Frag.append( Envelope('TLV', GEN=(Tag, Len, Envelope('V', GEN=(Bu, Bs)))) )
             # generate the complete V envelope
@@ -776,32 +795,32 @@ Specific constraints attributes:
             bsfrag = []
             for tlv in vs:
                 cl, pc, tval, lval = tlv[0:4]
-                if pc != 0:
-                    # fragmenting the fragment... damned BER recursivity !
-                    raise(ASN1NotSuppErr('{0}: BIT STRING fragments of fragments'\
-                          .format(self.fullname())))
-                elif cl != 0:
+                if cl != 0:
                     raise(ASN1BERDecodeErr('{0}: invalid BIT STRING fragment tag class, {1!r}'\
                           .format(self.fullname(), cl)))
-                elif (tval, lval) == (0, 0):
-                    # EOC marker
-                    assert( tlv == v[-1] )
-                    pass
-                elif lval == 0:
-                    raise(ASN1BERDecodeErr('{0}: invalid BIT STRING fragment length'\
-                          .format(self.fullname())))
                 elif tval != 3:
                     raise(ASN1BERDecodeErr('{0}: invalid BIT STRING fragment tag value, {1!r}'\
                           .format(self.fullname(), tval)))
+                elif lval == 0:
+                    raise(ASN1BERDecodeErr('{0}: invalid BIT STRING fragment length'\
+                          .format(self.fullname())))
+                elif pc != 0:
+                    # fragmenting the fragment... damned BER recursivity !
+                    raise(ASN1NotSuppErr('{0}: BIT STRING fragments within fragments'\
+                          .format(self.fullname())))
+                elif (tval, lval) == (0, 0):
+                    # EOC marker
+                    if tlv != vs[-1]:
+                        raise(ASN1BERDecodeErr('{0}: invalid EOC within BIT STRING fragments'))
                 else:
-                    char._cur, char._len_bit = tlv[-1][0], tlv[-1][1]
+                    char._cur, char._len_bit = tlv[4][0], tlv[4][1]
                     bu = char.get_uint(8)
                     if bu > 7:
                         raise(ASN1BERDecodeErr('{0}: invalid BIT STRING counter for unused bits'\
                               .format(self.fullname())))
                     bs = char.get_bytes(8*(lval-1))
                     # concat the fragment of bit string
-                    bsfrag.append( (T_BYTES, bs, tlv[-1][1]-tlv[-1][0]-8-bu) )
+                    bsfrag.append( (T_BYTES, bs, tlv[4][1]-tlv[4][0]-8-bu) )
             # process the defragmented bit string
             self.__from_ber_buf( *pack_val(*bsfrag) )
         else:
@@ -827,11 +846,7 @@ Specific constraints attributes:
                 if not self._SILENT:
                     asnlog('BIT_STR.__from_ber_buf: %s, specific CONTAINING encoder unhandled'\
                            % self._name)
-                if bl:
-                    self._val = (bytes_to_uint(buf, bl), bl)
-                else:
-                    # empty bit string
-                    self._val = (0, 0)
+                self.__val_from_buf(buf, bl)
             else:
                 Obj, char = self._const_cont, Charpy(buf)
                 char._len_bit = bl
@@ -839,29 +854,30 @@ Specific constraints attributes:
                 Obj._parent = self._parent
                 try:
                     Obj.from_ber(char, single=False)
-                except:
+                except Exception:
                     if not self._SILENT:
                         asnlog('BIT_STR.__from_ber_buf: %s, CONTAINING object decoding failed'\
                                % self._name)
-                    if bl:
-                        self._val = (bytes_to_uint(buf, bl), bl)
-                    else:
-                        # empty bit string
-                        self._val = (0, 0)
+                    Obj._parent = _const_cont_par
+                    self.__val_from_buf(buf, bl)
                 else:
-                    if Obj._typeref:
-                        ident = Obj._typeref.called[1]
+                    Obj._parent = _const_cont_par
+                    #
+                    if Obj.TYPE == TYPE_OPEN and Obj._val[0].startswith('_unk'):
+                        # content was decoded to an unknown BER TLV
+                        # here we prefer to fallback to the standard BIT STRING value
+                        self.__val_from_buf(buf, bl)
                     else:
-                        ident = Obj.TYPE
-                    self._val = (ident, self._const_cont._val)
+                        if Obj._typeref is not None:
+                            self._val = (Obj._typeref.called[1], Obj._val)
+                        else:
+                            self._val = (Obj.TYPE, Obj._val)
         else:
-            if bl:
-                self._val = (bytes_to_uint(buf, bl), bl)
-            else:
-                # empty bit string
-                self._val = (0, 0)
+            self.__val_from_buf(buf, bl)
     
     def _encode_ber_cont_ws(self):
+        if isinstance(self._val, set):
+            self._names_to_val()
         buf, bl = self.__to_ber_buf()
         if bl % 8:
             bu = 8 - (bl%8)
@@ -888,6 +904,8 @@ Specific constraints attributes:
                                                Buf('BS', val=buf, bl=8*len(buf), rep=REPR_HEX)))
     
     def _encode_ber_cont(self):
+        if isinstance(self._val, set):
+            self._names_to_val()
         buf, bl = self.__to_ber_buf()
         if bl % 8:
             bu = 8 - (bl%8)
@@ -984,6 +1002,8 @@ Specific constraints attributes:
                 self._val = (val, bl)
         
         def _to_jval(self):
+            if isinstance(self._val, set):
+                self._names_to_val()
             if not isinstance(self._val[0], integer_types):
                 # value is for a contained object to be encoded
                 # using a CHOICE-like encoding
@@ -1014,6 +1034,167 @@ Specific constraints attributes:
                         return {'value': uint_to_hex(val<<bl_rnd, bl+bl_rnd), 'length': bl}
                     else:
                         return {'value': uint_to_hex(val, bl), 'length': bl}
+
+    ###
+    # conversion between internal value and ASN.1 OER/COER encoding
+    ###
+
+    def _to_oer(self):
+        if isinstance(self._val, set):
+            self._names_to_val()
+
+        ## Now check if the value is contained object or just number
+        if not isinstance(self._val[0], integer_types):
+            # 1) value is for a contained object to be encoded
+            Cont = self._get_val_obj(self._val[0])
+            if Cont == self._const_cont and self._const_cont_enc is not None:
+                # TODO: different codec to be used
+                raise(ASN1NotSuppErr('{0}: specific CONTAINING encoder unhandled' \
+                                     .format(self.fullname())))
+            Cont._val = self._val[1]
+            buf = Cont.to_oer()
+            l_val = len(buf) * 8
+            pad_bits = 0
+            _gen = [(T_BYTES, buf, l_val)]
+            if Cont == self._const_cont:
+                return _gen
+        else:
+            # 2) value is the standard (uint, bit length)
+            if self._val[1]:
+                l_val = self._val[1]
+                _gen = [(T_UINT, self._val[0], l_val)]
+                # padding bits
+                pad_bits = (l_val % 8)
+                pad_bits = (8 - pad_bits) if pad_bits else 0
+                _gen.append((T_UINT, 0, pad_bits))
+            else:
+                # empty bit string
+                pad_bits = 0
+                l_val = 0
+                _gen = [(T_BYTES, b'', l_val)]
+
+        if self._const_sz:
+            if (self._const_sz._ev is None) and (self._const_sz.ra == 1):
+                # Fixed size constrains
+                return _gen
+
+        # Variable size constrains
+        GEN = ASN1CodecOER.encode_length_determinant(((l_val + pad_bits) // 8)
+                                                     + 1)
+        GEN.append((T_UINT, pad_bits, 8))  # Initial octet
+        GEN.extend(_gen)
+        return GEN
+
+    def _to_oer_ws(self):
+        if isinstance(self._val, set):
+            self._names_to_val()
+
+        ## Now check if the value is contained object or just number
+        if not isinstance(self._val[0], integer_types):
+            # 1) value is for a contained object to be encoded
+            Cont = self._get_val_obj(self._val[0])
+            if Cont == self._const_cont and self._const_cont_enc is not None:
+                # TODO: different codec to be used
+                raise (
+                    ASN1NotSuppErr('{0}: specific CONTAINING encoder unhandled' \
+                                   .format(self.fullname())))
+            Cont._val = self._val[1]
+            buf = Cont.to_oer()
+            l_val = len(buf) * 8
+            pad_bits = 0
+            _gen = [Buf('V', val=buf, bl=l_val)]
+            if Cont == self._const_cont:
+                self._struct = Envelope(self._name, GEN=tuple(_gen))
+                return self._struct
+        else:
+            # 2) value is the standard (uint, bit length)
+            if self._val[1]:
+                l_val = self._val[1]
+                _gen = [Uint('V', val=self._val[0], bl=l_val)]
+                # padding bits
+                pad_bits = (l_val % 8)
+                pad_bits = (8 - pad_bits) if pad_bits else 0
+                _gen.append(Uint('Zero-pad', val=0, bl=pad_bits))
+            else:
+                # empty bit string
+                pad_bits = 0
+                l_val = 0
+                _gen = [Buf('V', b'', l_val)]
+
+        if self._const_sz:
+            if (self._const_sz._ev is None) and (self._const_sz.ra == 1):
+                # Fixed size constrains
+                self._struct = Envelope(self._name, GEN=tuple(_gen))
+                return self._struct
+
+        # Variable size constrains
+        GEN = [ASN1CodecOER.encode_length_determinant_ws(
+            ((l_val + pad_bits) // 8) + 1)]
+        GEN.append(Uint('Initial octet', val=pad_bits, bl=8))
+        GEN.extend(_gen)
+        self._struct = Envelope(self._name, GEN=tuple(GEN))
+        return self._struct
+
+    def _from_oer(self, char):
+        if self._const_sz:
+            if (self._const_sz._ev is None) and (self._const_sz.ra == 1):
+                # Fixed
+                l_val = self._const_sz.lb
+                pad_bits = (l_val % 8)
+                pad_bits = (8 - pad_bits) if pad_bits else 0
+                buf = char.get_uint(l_val+pad_bits)
+                self._val = (buf >> pad_bits, l_val)
+                return
+        elif self._const_cont:
+            # Contained by constraint
+            Cont = self._get_val_obj(self._const_cont._typeref.called)
+            Cont.from_oer(char)
+            self._val = (self._const_cont._typeref.called, Cont._val)
+            return
+
+        # Variable size constraints
+        l_det = ASN1CodecOER.decode_length_determinant(char)
+        pad_bits = char.get_uint(8)
+        l_val = 8*(l_det - 1) - pad_bits
+        self._val = (char.get_uint(l_val+pad_bits) >> pad_bits, l_val)
+
+    def _from_oer_ws(self, char):
+        if self._const_sz:
+            if (self._const_sz._ev is None) and (self._const_sz.ra == 1):
+                # Fixed
+                l_val = self._const_sz.lb
+                pad_bits = (l_val % 8)
+                pad_bits = (8 - pad_bits) if pad_bits else 0
+                val = Uint('V', bl=l_val)
+                val._from_char(char)
+                zero_pad = Uint('Zero-pad', bl=pad_bits)
+                zero_pad._from_char(char)
+                self._val = (val.get_val(), val.get_bl())
+                self._struct = Envelope(self._name, GEN=(val, zero_pad))
+                return
+        elif self._const_cont:
+            # Contained by constraint
+            Cont = self._get_val_obj(self._const_cont._typeref.called)
+            Cont.from_oer_ws(char)
+            _gen = Cont._struct
+            self._val = (self._const_cont._typeref.called, Cont._val)
+            self._struct = Envelope(self._name, GEN=(_gen,))
+            return
+
+        # Variable size constraints
+        l_det, _gen = ASN1CodecOER.decode_length_determinant_ws(char)
+        _gen = [_gen]
+        i_oct = Uint('Initial octet', bl=8)
+        i_oct._from_char(char)
+        pad_bits = i_oct.get_val()
+        l_val = 8*(l_det - 1) - pad_bits
+        val = Uint('V', bl=l_val)
+        val._from_char(char)
+        zero_pad = Uint('Zero-pad', bl=pad_bits)
+        zero_pad._from_char(char)
+        _gen.extend((i_oct, val, zero_pad))
+        self._val = (val.get_val(), val.get_bl())
+        self._struct = Envelope(self._name, GEN=tuple(_gen))
 
 
 class OCT_STR(ASN1Obj):
@@ -1055,7 +1236,6 @@ Specific constraints attributes:
     
     def _get_val_obj(self, ref):
         if isinstance(ref, str_types) and self._const_cont:
-        
             if self._const_cont._typeref:
                 ident = self._const_cont._typeref.called[1]
             else:
@@ -1068,7 +1248,7 @@ Specific constraints attributes:
         else:
             try:
                 return GLOBAL.MOD[ref[0]][ref[1]]
-            except:
+            except Exception:
                 raise(ASN1ObjErr('{0}: invalid object reference, {1!r}'\
                       .format(self.fullname(), ref)))
     
@@ -1089,7 +1269,7 @@ Specific constraints attributes:
             if self._const_cont._typeref:
                 ident = self._const_cont._typeref.called[1]
             else:
-                ident = self._const_cont.TYPE 
+                ident = self._const_cont.TYPE
             if val[0] != ident:
                 raise(ASN1ObjErr('{0}: value out of containing constraint, {1!r}'\
                       .format(self.fullname(), val)))
@@ -1144,10 +1324,10 @@ Specific constraints attributes:
                 try:
                     s = self._val.decode('ascii')
                     if is_printable(s):
-                        return ret + ' -- %s --' % s
+                        return ret + ' -- %s --' % repr(s)[1:-1]
                     else:
                         return ret
-                except:
+                except Exception:
                     return ret
             else:
                 return ret
@@ -1369,9 +1549,9 @@ Specific constraints attributes:
     
     def _to_per(self):
         if not isinstance(self._val, bytes_types):
-            buf = self.__to_per_buf()
+            buf, wrapped = self.__to_per_buf()
         else:
-            buf = self._val
+            buf, wrapped = self._val, None
         GEN = []
         if self._const_sz:
             if self._const_sz._ev is not None:
@@ -1435,23 +1615,24 @@ Specific constraints attributes:
             Frag, osfrag = [], []
             for tlv in vs:
                 Tag, cl, pc, tval, Len, lval = tlv[0:6]
-                if pc != 0:
-                    # fragmenting the fragment... damned BER recursivity !
-                    raise(ASN1NotSuppErr('{0}: OCTET STRING fragments of fragments'\
-                          .format(self.fullname())))
-                elif cl != 0:
+                if cl != 0:
                     raise(ASN1BERDecodeErr('{0}: invalid OCTET STRING fragment tag class, {1!r}'\
                           .format(self.fullname(), cl)))
-                elif (tval, lval) == (0, 0):
-                    # EOC marker
-                    assert( tlv == v[-1] )
-                    Frag.append( Envelope('EOC', GEN=(Tag, Len)) )
                 elif tval != 4:
                     raise(ASN1BERDecodeErr('{0}: invalid OCTET STRING fragment tag value, {1!r}'\
                           .format(self.fullname(), tval)))
+                elif pc != 0:
+                    # fragmenting the fragment... damned BER recursivity !
+                    raise(ASN1NotSuppErr('{0}: OCTET STRING fragments within fragments'\
+                          .format(self.fullname())))
+                elif (tval, lval) == (0, 0):
+                    # EOC marker
+                    if tlv != vs[-1]:
+                        raise(ASN1BERDecodeErr('{0}: invalid EOC within OCTET STRING fragments'))
+                    Frag.append( Envelope('EOC', GEN=(Tag, Len)) )
                 else:
-                    char._cur, char._len_bit = tlv[-1][0], tlv[-1][1]
-                    Val = Buf('V', bl=tlv[-1][1]-tlv[-1][0], rep=REPR_HEX)
+                    char._cur, char._len_bit = tlv[6][0], tlv[6][1]
+                    Val = Buf('V', bl=tlv[6][1]-tlv[6][0], rep=REPR_HEX)
                     Val._from_char(char)
                     osfrag.append( Val.to_bytes() )
                     Frag.append( Envelope('TLV', GEN=(Tag, Len, Val)) )
@@ -1476,23 +1657,23 @@ Specific constraints attributes:
             osfrag = []
             for tlv in vs:
                 cl, pc, tval, lval = tlv[0:4]
-                if pc != 0:
-                    # fragmenting the fragment... damned BER recursivity !
-                    raise(ASN1NotSuppErr('{0}: OCTET STRING fragments of fragments'\
-                          .format(self.fullname())))
-                elif cl != 0:
+                if cl != 0:
                     raise(ASN1BERDecodeErr('{0}: invalid OCTET STRING fragment tag class, {1!r}'\
                           .format(self.fullname(), cl)))
-                elif (tval, lval) == (0, 0):
-                    # EOC marker
-                    assert( tlv == v[-1] )
-                    pass
                 elif tval != 4:
                     raise(ASN1BERDecodeErr('{0}: invalid OCTET STRING fragment tag value, {1!r}'\
                           .format(self.fullname(), tval)))
+                elif pc != 0:
+                    # fragmenting the fragment... damned BER recursivity !
+                    raise(ASN1NotSuppErr('{0}: OCTET STRING fragments within fragments'\
+                          .format(self.fullname())))
+                elif (tval, lval) == (0, 0):
+                    # EOC marker
+                    if tlv != vs[-1]:
+                        raise(ASN1BERDecodeErr('{0}: invalid EOC within OCTET STRING fragments'))
                 else:
-                    char._cur, char._len_bit = tlv[-1][0], tlv[-1][1]
-                    osfrag.append( char.get_bytes(tlv[-1][1]-tlv[-1][0]) )
+                    char._cur, char._len_bit = tlv[4][0], tlv[4][1]
+                    osfrag.append( char.get_bytes() )
             # process the defragmented octet string
             self.__from_ber_buf( b''.join(osfrag) )
         else:
@@ -1516,7 +1697,7 @@ Specific constraints attributes:
                 Obj._parent = self._parent
                 try:
                     Obj.from_ber(char, single=False)
-                except:
+                except Exception:
                     if not self._SILENT:
                         asnlog('OCT_STR.__from_ber_buf: %s, CONTAINING object decoding failed'\
                                % self._name)
@@ -1524,10 +1705,16 @@ Specific constraints attributes:
                     self._val = buf
                 else:
                     Obj._parent = _const_cont_par
-                    if Obj._typeref is not None:
-                        self._val = (Obj._typeref.called[1], Obj._val)
+                    #
+                    if Obj.TYPE == TYPE_OPEN and Obj._val[0].startswith('_unk'):
+                        # content was decoded to an unknown BER TLV
+                        # here we prefer to fallback to the standard OCTET STRING value
+                        self._val = buf
                     else:
-                        self._val = (Obj.TYPE, Obj._val)
+                        if Obj._typeref is not None:
+                            self._val = (Obj._typeref.called[1], Obj._val)
+                        else:
+                            self._val = (Obj.TYPE, Obj._val)
         else:
             self._val = buf
     
@@ -1639,6 +1826,123 @@ Specific constraints attributes:
                 else:
                     return {Cont.TYPE: val}
 
+    ###
+    # conversion between internal value and ASN.1 OER/COER encoding
+    ###
+
+    def _from_oer(self, char):
+        if self._const_sz:
+            if (self._const_sz._ev is None) and (self._const_sz.ra == 1):
+                # Fixed
+                self._val = char.get_bytes(self._const_sz.lb * 8)
+                return
+
+        # Variable size constraint
+        l_val = ASN1CodecOER.decode_length_determinant(char)
+        val = char.get_bytes(l_val * 8)
+
+        if self._const_cont:
+            # Contained by constraint
+            Cont = self._get_val_obj(self._const_cont._typeref.called)
+            _const_cont_par = Cont._parent
+            Cont._parent = self._parent
+            Cont.from_oer(val)
+            Cont._parent = _const_cont_par
+            self._val = (self._const_cont._typeref.called[1], Cont._val)
+        else:
+            self._val = val
+
+    def _from_oer_ws(self, char):
+        if self._const_sz:
+            if (self._const_sz._ev is None) and (self._const_sz.ra == 1):
+                # Fixed
+                val = Buf('V', bl=self._const_sz.lb * 8)
+                val._from_char(char)
+                self._val = val.get_val()
+                self._struct = Envelope(self._name, GEN=(val,))
+                return
+
+        # Variable size constraints
+        l_val, _gen = ASN1CodecOER.decode_length_determinant_ws(char)
+        val = Buf('V', bl=8 * l_val)
+        val._from_char(char)
+
+        if self._const_cont:
+            # Contained by constraint
+            Cont = self._get_val_obj(self._const_cont._typeref.called)
+            _const_cont_par = Cont._parent
+            Cont._parent = self._parent
+            Cont.from_oer_ws(val.get_val())
+            Cont._parent = _const_cont_par
+            _gen.append(Cont._struct)
+            self._val = (self._const_cont._typeref.called[1], Cont._val)
+        else:
+            _gen.append(val)
+            self._val = val.get_val()
+
+        self._struct = Envelope(self._name, GEN=(_gen,))
+
+    def __to_coer_buf(self):
+        Cont = self._get_val_obj(self._val[0])
+        if Cont == self._const_cont and self._const_cont_enc is not None:
+            # TODO: different codec to be used
+            raise (
+                ASN1NotSuppErr('{0}: specific CONTAINING encoder unhandled' \
+                               .format(self.fullname())))
+        Cont._val = self._val[1]
+        buf = Cont.to_coer()
+        return buf, Cont
+
+    def __to_coer_ws_buf(self):
+        Cont = self._get_val_obj(self._val[0])
+        if Cont == self._const_cont and self._const_cont_enc is not None:
+            # TODO: different codec to be used
+            raise (
+                ASN1NotSuppErr('{0}: specific CONTAINING encoder unhandled' \
+                               .format(self.fullname())))
+        Cont._val = self._val[1]
+        buf = Cont.to_coer_ws()
+        return buf, Cont
+
+    def _to_oer(self):
+        if not isinstance(self._val, bytes_types):
+            buf, wrapped = self.__to_coer_buf()
+        else:
+            buf, wrapped = self._val, None
+
+        try:
+            if ((self._const_sz._ev is None) and
+                    (self._const_sz.lb == self._const_sz.ub)):
+                return [(T_BYTES, buf, len(buf)*8)]
+        except AttributeError:
+            pass
+
+        # Means that it has variable constraint or no constraint
+        GEN = ASN1CodecOER.encode_length_determinant(len(buf))
+        GEN.append((T_BYTES, buf, len(buf) * 8))
+        return GEN
+
+    def _to_oer_ws(self):
+        if not isinstance(self._val, bytes_types):
+            buf, wrapped = self.__to_coer_ws_buf()
+        else:
+            buf, wrapped = self._val, None
+
+        _gen = Buf('V', val=buf, bl=len(buf)*8)
+
+        try:
+            if ((self._const_sz._ev is None) and
+                    (self._const_sz.lb == self._const_sz.ub)):
+                self._struct = Envelope(self._name, GEN=(_gen,))
+                return self._struct
+        except AttributeError:
+            pass
+
+        # Means that it has variable constraint or no constraint
+        GEN = ASN1CodecOER.encode_length_determinant_ws(len(buf))
+        GEN.append(_gen)
+        self._struct = Envelope(self._name, GEN=(GEN,))
+        return self._struct
 
 #------------------------------------------------------------------------------#
 # All *String
@@ -1810,7 +2114,7 @@ Virtual parent for any ASN.1 *String object
                 # character remapping required
                 try:
                     self._val = ''.join([self._const_alpha.root[i] for i in val])
-                except:
+                except Exception:
                     raise(ASN1PERDecodeErr('{0}: character out of alphabet constraint'\
                           .format(self.fullname())))
             elif cdyn == 4:
@@ -1819,7 +2123,7 @@ Virtual parent for any ASN.1 *String object
                 # numeric string
                 try:
                     self._val = ''.join([self._ALPHA_RE[i] for i in val])
-                except:
+                except Exception:
                     raise(ASN1PERDecodeErr('{0}: character out of alphabet'\
                           .format(self.fullname())))
             elif cdyn == 7:
@@ -1828,7 +2132,7 @@ Virtual parent for any ASN.1 *String object
                 # ascii encoding
                 try:
                     self._val = ''.join(map(chr, val))
-                except:
+                except Exception:
                     raise(ASN1PERDecodeErr('{0}: character out of alphabet'\
                           .format(self.fullname())))
             else:
@@ -1873,7 +2177,7 @@ Virtual parent for any ASN.1 *String object
             # character remapping required
             try:
                 self._val = ''.join([self._const_alpha.root[i] for i in V()])
-            except:
+            except Exception:
                 raise(ASN1PERDecodeErr('{0}: character out of alphabet constraint, {1!r}'\
                       .format(self.fullname(), V())))
         elif cdyn == 4:
@@ -1885,7 +2189,7 @@ Virtual parent for any ASN.1 *String object
             # numeric string
             try:
                 self._val = ''.join([self._ALPHA_RE[i] for i in V()])
-            except:
+            except Exception:
                 raise(ASN1PERDecodeErr('{0}: character out of alphabet, {1!r}'\
                       .format(self.fullname(), V())))
         elif cdyn == 7:
@@ -1897,7 +2201,7 @@ Virtual parent for any ASN.1 *String object
             # ascii encoding
             try:    
                 self._val = ''.join(map(chr, V()))
-            except:
+            except Exception:
                 raise(ASN1PERDecodeErr('{0}: character out of alphabet, {1!r}'\
                       .format(self.fullname(), V())))
         else:
@@ -1984,7 +2288,7 @@ Virtual parent for any ASN.1 *String object
                 # character remapping required
                 try:
                     self._val = ''.join([self._const_alpha.root[i] for i in val])
-                except:
+                except Exception:
                     raise(ASN1PERDecodeErr('{0}: character out of alphabet constraint'\
                           .format(self.fullname())))
             elif cdyn == 4:
@@ -1993,7 +2297,7 @@ Virtual parent for any ASN.1 *String object
                 # numeric string
                 try:
                     self._val = ''.join([self._ALPHA_RE[i] for i in val])
-                except:
+                except Exception:
                     raise(ASN1PERDecodeErr('{0}: character out of alphabet'\
                           .format(self.fullname())))
             elif cdyn == 7:
@@ -2002,7 +2306,7 @@ Virtual parent for any ASN.1 *String object
                 # ascii encoding
                 try:
                     self._val = ''.join(map(chr, val))
-                except:
+                except Exception:
                     raise(ASN1PERDecodeErr('{0}: character out of alphabet'\
                           .format(self.fullname())))
             else:
@@ -2043,7 +2347,7 @@ Virtual parent for any ASN.1 *String object
             # character remapping required
             try:
                 self._val = ''.join([self._const_alpha.root[i] for i in val])
-            except:
+            except Exception:
                 raise(ASN1PERDecodeErr('{0}: character out of alphabet constraint, {1!r}'\
                       .format(self.fullname(), V())))
         elif cdyn == 4:
@@ -2054,7 +2358,7 @@ Virtual parent for any ASN.1 *String object
             # numeric string
             try:
                 self._val = ''.join([self._ALPHA_RE[i] for i in val])
-            except:
+            except Exception:
                 raise(ASN1PERDecodeErr('{0}: character out of alphabet, {1!r}'\
                       .format(self.fullname(), V())))
         elif cdyn == 7:
@@ -2065,7 +2369,7 @@ Virtual parent for any ASN.1 *String object
             # ascii encoding
             try:    
                 self._val = ''.join(map(chr, val))
-            except:
+            except Exception:
                 raise(ASN1PERDecodeErr('{0}: character out of alphabet, {1!r}'\
                       .format(self.fullname(), V())))
         else:
@@ -2149,21 +2453,21 @@ Virtual parent for any ASN.1 *String object
                 # character remapping required
                 try:
                     val = [self._const_alpha.root.index(c) for c in self._val]
-                except:
+                except Exception:
                     raise(ASN1PEREncodeErr('{0}: character out of alphabet constraint, {1!r}'\
                           .format(self.fullname(), self._val)))
             elif cdyn == 4:
                 # numeric string
                 try:
                     val = [self._ALPHA_RE.find(c) for c in self._val]
-                except:
+                except Exception:
                     raise(ASN1PEREncodeErr('{0}: character out of alphabet, {1!r}'\
                           .format(self.fullname(), self._val)))
             elif cdyn == 7:
                 # ascii encoding
                 try:
                     val = list(map(ord, self._val))
-                except:
+                except Exception:
                     raise(ASN1PEREncodeErr('{0}: character out of alphabet, {1!r}'\
                           .format(self.fullname(), self._val)))
             else:
@@ -2306,23 +2610,24 @@ Virtual parent for any ASN.1 *String object
             Frag, sfrag = [], []
             for tlv in vs:
                 Tag, cl, pc, tval, Len, lval = tlv[0:6]
-                if pc != 0:
-                    # fragmenting the fragment... damned BER recursivity !
-                    raise(ASN1NotSuppErr('{0}: String fragments of fragments'\
-                          .format(self.fullname())))
-                elif cl != 0:
+                if cl != 0:
                     raise(ASN1BERDecodeErr('{0}: invalid String fragment tag class, {1!r}'\
                           .format(self.fullname(), cl)))
-                elif (tval, lval) == (0, 0):
-                    # EOC marker
-                    assert( tlv == v[-1] )
-                    Frag.append( Envelope('EOC', GEN=(Tag, Len)) )
                 elif tval != self.TAG:
                     raise(ASN1BERDecodeErr('{0}: invalid String fragment tag value, {1!r}'\
                           .format(self.fullname(), tval)))
+                elif pc != 0:
+                    # fragmenting the fragment... damned BER recursivity !
+                    raise(ASN1NotSuppErr('{0}: String fragments within fragments'\
+                          .format(self.fullname())))
+                elif (tval, lval) == (0, 0):
+                    # EOC marker
+                    if tlv != vs[-1]:
+                        raise(ASN1BERDecodeErr('{0}: invalid EOC within String fragments'))
+                    Frag.append( Envelope('EOC', GEN=(Tag, Len)) )
                 else:
-                    char._cur, char._len_bit = tlv[-1][0], tlv[-1][1]
-                    Val = Buf('V', bl=tlv[-1][1]*tlv[-1][0])
+                    char._cur, char._len_bit = tlv[6][0], tlv[6][1]
+                    Val = Buf('V', bl=tlv[6][1]-tlv[6][0])
                     Val._from_char(char)
                     sfrag.append( Val.to_bytes() )
                     Frag.append( Envelope('TLV', GEN=(Tag, Len, Val)) )
@@ -2361,22 +2666,23 @@ Virtual parent for any ASN.1 *String object
             sfrag = []
             for tlv in vs:
                 cl, pc, tval, lval = tlv[0:4]
-                if pc != 0:
-                    # fragmenting the fragment... damned BER recursivity !
-                    raise(ASN1NotSuppErr('{0}: String fragments of fragments'\
-                          .format(self.fullname())))
-                elif cl != 0:
+                if cl != 0:
                     raise(ASN1BERDecodeErr('{0}: invalid String fragment tag class, {1!r}'\
                           .format(self.fullname(), cl)))
-                elif (tval, lval) == (0, 0):
-                    # EOC marker
-                    assert( tlv == v[-1] )
                 elif tval != self.TAG:
                     raise(ASN1BERDecodeErr('{0}: invalid String fragment tag value, {1!r}'\
                           .format(self.fullname(), tval)))
+                elif pc != 0:
+                    # fragmenting the fragment... damned BER recursivity !
+                    raise(ASN1NotSuppErr('{0}: String fragments of fragments'\
+                          .format(self.fullname())))
+                elif (tval, lval) == (0, 0):
+                    # EOC marker
+                    if tlv != vs[-1]:
+                        raise(ASN1BERDecodeErr('{0}: invalid EOC within String fragments'))
                 else:
-                    char._cur, char._len_bit = tlv[-1][0], tlv[-1][1]
-                    sfrag.append( char.get_bytes(tlv[-1][1]-tlv[-1][0]) )
+                    char._cur, char._len_bit = tlv[4][0], tlv[4][1]
+                    sfrag.append( char.get_bytes() )
             # process the defragmented string
             if self._codec is None:
                 raise(ASN1NotSuppErr('{0}: ISO 2022 codec not supported'\
@@ -2462,6 +2768,110 @@ Virtual parent for any ASN.1 *String object
         
         def _to_jval(self):
             return self._val
+
+    ###
+    # conversion between internal value and ASN.1 OER/COER encoding
+    ###
+
+    def _from_oer(self, char):
+        try:
+            if ((self._const_sz.rdyn == 0) and
+                    (self._const_sz._ev is None) and
+                    (self._clen is not None)):
+                # Fixed size
+                b_len = round_p2(self._clen) * self._const_sz.lb
+                self._val = self._decode_oer_cont(char.get_bytes(b_len))
+                return
+        except AttributeError:
+            pass
+
+        # All other variants
+        l_det = ASN1CodecOER.decode_length_determinant(char)
+        self._val = self._decode_oer_cont(char.get_bytes(l_det * 8))
+
+    def _from_oer_ws(self, char):
+        try:
+            if ((self._const_sz.rdyn == 0) and
+                    (self._const_sz._ev is None) and
+                    (self._clen is not None)):
+                # Fixed size
+                b_len = round_p2(self._clen) * self._const_sz.lb
+                buf = Buf('V', bl=b_len)
+                buf._from_char(char)
+                self._struct = Envelope(self._name, GEN=(buf,))
+                self._val = self._decode_oer_cont(buf.to_bytes())
+                return
+        except AttributeError:
+            pass
+
+        # All other variants
+        l_det, _gen = ASN1CodecOER.decode_length_determinant_ws(char)
+        _gen = [_gen]
+        buf = Buf('V', bl=l_det*8)
+        buf._from_char(char)
+        _gen.append(buf)
+        self._struct = Envelope(self._name, GEN=tuple(_gen))
+        self._val = self._decode_oer_cont(buf.to_bytes())
+
+    def _decode_oer_cont(self, content_bytes):
+        if self._codec is None:
+            raise(ASN1NotSuppErr('{0}: ISO 2022 codec not supported' \
+                                 .format(self.fullname())))
+        try:
+            return content_bytes.decode(self._codec)
+        except Exception as err:
+            raise(ASN1OERDecodeErr('{0}: invalid character, Python codec error, {1}' \
+                                   .format(self.fullname(), err)))
+
+    def _encode_oer_cont(self):
+        if self._codec is None:
+            raise(ASN1NotSuppErr('{0}: ISO 2022 codec not supported' \
+                                 .format(self.fullname())))
+        try:
+            return self._val.encode(self._codec)
+        except Exception as err:
+            raise(ASN1OEREncodeErr('{0}: invalid character, Python codec error, {1}' \
+                                   .format(self.fullname(), err)))
+
+    def _to_oer(self):
+        buf = self._encode_oer_cont()
+        l_buf = len(buf)
+        buf = [(T_BYTES, buf, l_buf * 8)]
+
+        try:
+            if ((self._const_sz.rdyn == 0) and
+                    (self._const_sz._ev is None) and
+                    (self._clen is not None)):
+                # Fixed size
+                return buf
+        except AttributeError:
+            pass
+
+        # All other variants
+        GEN = ASN1CodecOER.encode_length_determinant(l_buf)
+        GEN.extend(buf)
+        return GEN
+
+    def _to_oer_ws(self):
+        buf = self._encode_oer_cont()
+        l_buf = len(buf)
+        buf = Buf('V', val=buf, bl=l_buf * 8)
+
+        try:
+            if ((self._const_sz.rdyn == 0) and
+                    (self._const_sz._ev is None) and
+                    (self._clen is not None)):
+                # Fixed size
+                self._struct = Envelope(self._name, GEN=(buf,))
+                return self._struct
+        except AttributeError:
+            pass
+
+        # All other variants
+        GEN = [ASN1CodecOER.encode_length_determinant_ws(l_buf)]
+        GEN.append(buf)
+        self._struct = Envelope(self._name, GEN=tuple(GEN))
+        return self._struct
 
 
 # Python does not provide a complete support for ISO2022 encoding
@@ -2799,7 +3209,7 @@ Single value: Python 7-tuple of str or None
                         i = ' -- %s --' % asctime(strptime(s[1:-2], '%y%m%d%H%M'))
                     else:
                         i = ' -- %s --' % asctime(strptime(s[1:-1], '%y%m%d%H%M%Z'))
-                except:
+                except Exception:
                     i = ''
                 return s + i
             else:
@@ -2812,7 +3222,7 @@ Single value: Python 7-tuple of str or None
                         i = ' -- %s --' % asctime(strptime(s[1:-2], '%y%m%d%H%M%S'))
                     else:
                         i = ' -- %s --' % asctime(strptime(s[1:-1], '%y%m%d%H%M%S%Z'))
-                except:
+                except Exception:
                     i = ''
                 return s + i
             else:
@@ -2825,7 +3235,7 @@ Single value: Python 7-tuple of str or None
     def _decode_cont(self, asc):
         try:
             self._from_asn1('"' + asc + '"')
-        except Exception as err:
+        except Exception:
             raise(ASN1BERDecodeErr('{0}: invalid UTCTime ascii encoding'\
                   .format(self.fullname())))
     
@@ -2907,7 +3317,7 @@ Single value: Python 8-tuple of str or None
     def _decode_cont(self, asc):
         try:
             self._from_asn1('"' + asc + '"')
-        except Exception as err:
+        except Exception:
             raise(ASN1BERDecodeErr('{0}: invalid GeneralizedTime ascii encoding'\
                   .format(self.fullname())))
     

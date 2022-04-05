@@ -5,12 +5,30 @@
 # file used by ServerAuC.py
 # 
 # csv'style file, with the following fields:
-# IMSI (digits);
-# K (hex, 16-bytes authentication key);
-# 2G algorithm id (int, 0 for Milenage, 1, 2 and 3 for comp128v1, 2 and 3)
-# SQN (int, Milenage authentication counter, -1 if Milenage is not supported)
-# OP (hex, optional, subscriber-specific OP parameter)
+#  - IMSI (digits);
+#  - K (hex), subscriber authentication key,
+#      16-bytes when using Milenage or comp128
+#      16 or 32-bytes when using TUAK;
+#  - algorithm id (uint)
+#      0 for Milenage
+#      1 for comp123v1 (only for 2G / 3G)
+#      2 for comp128v2 (only for 2G / 3G)
+#      3 for comp128v3 (only for 2G / 3G)
+#      4 for TUAK;
+#  - SQN (int), Milenage / TUAK authentication counter,
+#      -1 if Milenage / TUAK is not supported (i.e. comp128 is used) or counter is to be disabled (i.e. for testing purpose)
+#      >= 0 otherwise and will be incremented;
+#  - OP / TOP (hex, optional),
+#      subscriber-specific OP parameter (16 bytes for Milenage) or TOP parameter (32 bytes for TUAK);
 #
 # examples:
+# Milenage:
 #001010000000001;0123456789abcdef0123456789abcdef;0;1;
+# Milenage with subscriber-specific OP:
 #001010000000002;0123456789abcdef0123456789abcdef;0;1;00112233445566778899aabbccddeeff;
+# TUAK:
+#001010000000003;0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef;4;1;
+# TUAK with subscriber-specific TOP:
+#001010000000004;0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef;4;1;0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef;
+# COMP128-3:
+#001010000000005;0123456789abcdef0123456789abcdef;3;-1;

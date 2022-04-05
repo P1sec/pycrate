@@ -1,7 +1,7 @@
 # -*- coding: UTF-8 -*-
 #/**
 # * Software Name : pycrate
-# * Version : 0.3
+# * Version : 0.4
 # *
 # * Copyright 2017. Benoit Michau. ANSSI.
 # *
@@ -33,7 +33,6 @@ from .refobj import *
 from .setobj import *
 from .codecs import ASN1CodecBER
 
-import inspect
 
 def init_modules(*args, **kwargs):
     """
@@ -72,7 +71,7 @@ def init_modules(*args, **kwargs):
         for Obj in Mod._all_:
             #
             # useful for debugging...
-            Obj._mod = Mod.__name__
+            Obj._mod = Mod._name_
             #
             # setting additional attributes
             if Obj.TYPE == TYPE_INT:
@@ -520,15 +519,23 @@ def build_classset_dict(Obj):
         return
     # check the key (UNIQUE) component
     Obj._lut = {'__key__': key}
-    __build_classet_dict(Obj, key, Obj._val.root)
+    __build_classset_dict(Obj, key, Obj._val.root)
     if Obj._val.ext:
-        __build_classet_dict(Obj, key, Obj._val.ext)
+        __build_classset_dict(Obj, key, Obj._val.ext)
 
 
-def __build_classet_dict(Obj, key, valset):
+def __build_classset_dict(Obj, key, valset):
     for val in valset:
         if key in val:
             keyval = val[key]
+            # WARNING: keyval is not always a basic value (e.g. INTEGER),
+            # but can be a constructed value, hence a dict or a list
+            # We need to make it hashable for Python
+            if isinstance(keyval, list):
+                keyval = tuple(keyval)
+            elif isinstance(keyval, dict):
+                keyval = tuple(sorted(keyval.items()))
+            #
             if keyval in Obj._lut:
                 # this is not as UNIQUE as one can think...
                 lutval = Obj._lut[keyval]

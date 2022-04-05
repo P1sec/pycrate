@@ -348,14 +348,14 @@ securityModeControl RANAP-ELEMENTARY-PROCEDURE ::= {
 	PROCEDURE CODE		id-SecurityModeControl
 	CRITICALITY		reject
 }
-	
+
 dataVolumeReport RANAP-ELEMENTARY-PROCEDURE ::= {
 	INITIATING MESSAGE	DataVolumeReportRequest
 	SUCCESSFUL OUTCOME	DataVolumeReport
 	PROCEDURE CODE		id-DataVolumeReport
 	CRITICALITY		reject
 }
-	
+
 
 reset RANAP-ELEMENTARY-PROCEDURE ::= {
 	INITIATING MESSAGE	Reset

@@ -1,0 +1,303 @@
+MAPv2-SS-DataTypes {
+   ccitt identified-organization (4) etsi (0) mobileDomain (0)
+   gsm-Network (1) modules (3) map-SS-DataTypes (14) version2 (2)}
+
+DEFINITIONS
+
+IMPLICIT TAGS
+
+::=
+
+BEGIN
+
+EXPORTS
+	RegisterSS-Arg,
+	SS-Info,
+	SS-Status,
+	CUG-Index,
+	CUG-Interlock,
+	SS-SubscriptionOption,
+	SS-ForBS-Code,
+	InterrogateSS-Res,
+	SS-UserData,
+	USSD-Arg,
+	USSD-Res,
+	Password,
+	GuidanceInfo,
+	BeginSubscriberActivityArg,
+	SS-List,
+	SS-InfoList,
+	ForwardingData,
+	IntraCUG-Options,
+	InterCUG-Restrictions,
+	OverrideCategory,
+	CliRestrictionOption,
+	NoReplyConditionTime,
+	ForwardingOptions;
+
+IMPORTS
+	AddressString,
+	ISDN-AddressString,
+	ISDN-SubaddressString,
+	maxSignalInfoLength,
+	IMSI,
+	BasicServiceCode,
+	BasicServiceGroupList,
+	maxNumOfBasicServiceGroups
+FROM MAPv2-CommonDataTypes {
+   ccitt identified-organization (4) etsi (0) mobileDomain (0)
+   gsm-Network (1) modules (3) map-CommonDataTypes (18) version2 (2)}
+
+	SS-Code
+FROM MAPv2-SS-Code {
+   ccitt identified-organization (4) etsi (0) mobileDomain (0)
+   gsm-Network (1) modules (3) map-SS-Code (15) version2 (2)}
+;
+
+
+RegisterSS-Arg ::= SEQUENCE{
+	ss-Code		SS-Code,
+	basicService	BasicServiceCode	OPTIONAL,
+	forwardedToNumber	[4] AddressString	OPTIONAL,
+	forwardedToSubaddress	[6] ISDN-SubaddressString	OPTIONAL,
+	-- OA1 forwardedToSubaddress must be absent in version 1
+	noReplyConditionTime	[5] NoReplyConditionTime	OPTIONAL,
+	...}
+
+NoReplyConditionTime ::= INTEGER (5..30)
+
+SS-Info ::= CHOICE {
+	forwardingInfo	[0] ForwardingInfo,
+	callBarringInfo	[1] CallBarringInfo,
+	cug-Info		[2] CUG-Info,
+		-- NU1 cug-info must not be used in version 1
+	ss-Data		[3] SS-Data}
+
+ForwardingInfo ::= SEQUENCE {
+	ss-Code		SS-Code		OPTIONAL,
+	forwardingFeatureList	ForwardingFeatureList,
+	...}
+
+ForwardingFeatureList ::= 
+	SEQUENCE SIZE (1..maxNumOfBasicServiceGroups) OF
+				ForwardingFeature
+
+ForwardingFeature ::= SEQUENCE {
+	basicService	BasicServiceCode	OPTIONAL,
+	ss-Status	[4] SS-Status	OPTIONAL,
+	-- OP1 ss-Status must be present in version 1
+	forwardedToNumber	[5] ISDN-AddressString	OPTIONAL,
+	forwardedToSubaddress	[8] ISDN-SubaddressString	OPTIONAL,
+	-- OA1 forwardedToSubaddress must be absent in version 1
+	forwardingOptions	[6] ForwardingOptions	OPTIONAL,
+	noReplyConditionTime	[7] NoReplyConditionTime	OPTIONAL,
+	...}
+
+SS-Status ::= OCTET STRING (SIZE (1))
+	-- bits 8765: 0000 (unused)
+	-- bits 4321: Used to convey the "P bit","R bit","A bit" and "Q bit",
+	--		    representing supplementary service state information
+	--		    as defined in GSM 03.11
+
+	-- bit 4: "Q bit"
+
+	-- bit 3: "P bit"
+
+	-- bit 2: "R bit"
+
+	-- bit 1: "A bit"
+
+ForwardingOptions ::= OCTET STRING (SIZE (1))
+	-- v1: bits 87: notification to forwarding party
+	--	00  no notification
+	--	01  notification
+	--	10  notification
+
+	-- v2: bit 8: notification to forwarding party
+	--	0  no notification
+	--	1  notification
+
+	-- v2: bit 7: 0 (unused)
+
+	-- v1: bits 65: notification to calling party
+	--	00  no notification
+	--	01  notification
+	--	10  notification
+
+	-- v2: bit 6: v2: notification to calling party
+	--	0  no notification
+	--	1  notification
+
+	-- v2: bit 5: 0 (unused)
+
+	-- v2: bits 43: forwarding reason
+	--	00  ms not reachable
+	--	01  ms busy
+	--	10  no reply
+	--	11  unconditional
+	-- bits 21: 00 (unused)
+
+CallBarringInfo ::= SEQUENCE {
+	ss-Code		SS-Code		OPTIONAL,
+	-- OP1 ss-Code must be present in version 1
+	callBarringFeatureList	CallBarringFeatureList,
+	...}
+
+CallBarringFeatureList ::= 
+	SEQUENCE SIZE (1..maxNumOfBasicServiceGroups) OF
+				CallBarringFeature
+
+CallBarringFeature ::= SEQUENCE {
+	basicService	BasicServiceCode	OPTIONAL,
+	ss-Status	[4] SS-Status	OPTIONAL,
+	-- OP1 ss-Status must be present in version 1
+	...}
+
+CUG-Info ::= SEQUENCE {
+	cug-SubscriptionList	CUG-SubscriptionList,
+	cug-FeatureList	CUG-FeatureList	OPTIONAL,
+	...}
+
+CUG-SubscriptionList ::= SEQUENCE SIZE (1..maxNumOfCUG) OF
+				CUG-Subscription
+
+CUG-Subscription ::= SEQUENCE {
+	cug-Index	CUG-Index,
+	cug-Interlock	CUG-Interlock,
+	intraCUG-Options	IntraCUG-Options,
+	basicServiceGroupList	BasicServiceGroupList	OPTIONAL,
+	...}
+
+CUG-Index ::= INTEGER (0..32767)
+	-- The internal structure is defined in ETS 300 138.
+
+CUG-Interlock ::= OCTET STRING (SIZE (4))
+
+IntraCUG-Options ::= ENUMERATED {
+	noCUG-Restrictions  (0),
+	cugIC-CallBarred  (1),
+	cugOG-CallBarred  (2)}
+
+maxNumOfCUG  INTEGER ::= 10
+
+CUG-FeatureList ::= SEQUENCE SIZE (1..maxNumOfBasicServiceGroups) OF
+				CUG-Feature
+
+CUG-Feature ::= SEQUENCE {
+	basicService	BasicServiceCode	OPTIONAL,
+	preferentialCUG-Indicator	CUG-Index	OPTIONAL,
+	interCUG-Restrictions	InterCUG-Restrictions,
+	...}
+
+InterCUG-Restrictions::= OCTET STRING (SIZE (1))
+
+	-- bits 876543: 000000 (unused)
+
+	-- bits 21
+	--	00  CUG only facilities
+	--	01  CUG with outgoing access
+	--	10  CUG with incoming access
+	--	11  CUG with both outgoing and incoming access
+
+SS-Data ::= SEQUENCE {
+	ss-Code		SS-Code		OPTIONAL,
+	-- OP1 ss-Code must be present in version 1
+	ss-Status	[4] SS-Status	OPTIONAL,
+	ss-SubscriptionOption	SS-SubscriptionOption	OPTIONAL,
+	-- OA1 ss-SubscriptionOption must be absent in version 1
+	basicServiceGroupList	BasicServiceGroupList	OPTIONAL,
+	-- OA1 basicServiceGroupList must be absent in version 1
+	...}
+
+SS-SubscriptionOption ::= CHOICE {
+	cliRestrictionOption	[2] CliRestrictionOption,
+	overrideCategory	[1] OverrideCategory}
+
+CliRestrictionOption ::= ENUMERATED {
+	permanent  (0),
+	temporaryDefaultRestricted  (1),
+	temporaryDefaultAllowed  (2)}
+
+OverrideCategory ::= ENUMERATED {
+	overrideEnabled  (0),
+	overrideDisabled  (1)}
+
+SS-ForBS-Code ::= SEQUENCE {
+	ss-Code		SS-Code,
+	basicService	BasicServiceCode	OPTIONAL,
+	...}
+
+Cli-RestrictionInfo ::= SEQUENCE {
+	ss-Status	SS-Status,
+	cliRestrictionOption	CliRestrictionOption	OPTIONAL,
+	...}
+
+InterrogateSS-Res ::= CHOICE {
+	ss-Status	[0] SS-Status,
+	forwardedToNumber	[1] ISDN-AddressString,
+	-- NU>1 forwardedToNumber must not be used in version greater 1
+	basicServiceGroupList	[2] BasicServiceGroupList,
+	forwardingFeatureList	[3] ForwardingFeatureList,
+	cli-RestrictionInfo	[4] Cli-RestrictionInfo}
+	-- NU=1 cli-RestrictionInfo must not be used in version 1
+
+SS-UserData ::= IA5String (SIZE (1.. maxSignalInfoLength))
+
+USSD-Arg ::= SEQUENCE {
+	ussd-DataCodingScheme	USSD-DataCodingScheme,
+	ussd-String	USSD-String,
+	...}
+
+USSD-Res ::= SEQUENCE {
+	ussd-DataCodingScheme	USSD-DataCodingScheme,
+	ussd-String	USSD-String,
+	...}
+
+USSD-DataCodingScheme ::= OCTET STRING (SIZE (1))
+	-- The structure of the USSD-DataCodingScheme is defined by
+	-- the Cell Broadcast Data Coding Scheme as described in
+	-- GSM 03.38
+
+USSD-String ::= OCTET STRING (SIZE (1..maxUSSD-StringLength))
+	-- The structure of the contents of the USSD-String is dependent
+	-- on the USSD-DataCodingScheme as described in GSM 03.38.
+
+maxUSSD-StringLength  INTEGER ::= 160
+
+Password ::= NumericString
+	(FROM ("0"|"1"|"2"|"3"|"4"|"5"|"6"|"7"|"8"|"9"))
+	(SIZE (4))
+
+GuidanceInfo ::= ENUMERATED {
+	enterPW  (0),
+	enterNewPW  (1),
+	enterNewPW-Again  (2),
+	badPW-TryAgain  (3),
+	-- NU>1 badPW-TryAgain must not be used in version greater 1
+	badPW-FormatTryAgain  (4)}
+	-- NU>1 badPW-FormatTryAgain must not be used in version greater 1
+	-- How this information is really delivered to the subscriber
+	-- (display, announcement, ...) is not part of this
+	-- specification.
+
+BeginSubscriberActivityArg ::= SEQUENCE {
+	imsi			IMSI,
+	originatingEntityNumber	ISDN-AddressString}
+
+SS-List ::= SEQUENCE SIZE (1..maxNumOfSS) OF
+				SS-Code
+
+maxNumOfSS  INTEGER ::= 30
+
+SS-InfoList ::= SEQUENCE SIZE (1..maxNumOfSS) OF
+				SS-Info
+
+ForwardingData ::= SEQUENCE {
+	forwardedToNumber	[5] ISDN-AddressString	OPTIONAL,
+	-- OP1 forwardedToNumber must be present in version 1
+	forwardedToSubaddress	[4] ISDN-SubaddressString	OPTIONAL,
+	-- OA1 forwardedToSubaddress must be absent in version 1
+	forwardingOptions	[6] ForwardingOptions	OPTIONAL,
+	...}
+
+END

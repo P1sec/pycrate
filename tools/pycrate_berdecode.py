@@ -1,9 +1,9 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 
 # -*- coding: UTF-8 -*-
 #/**
 # * Software Name : pycrate
-# * Version : 0.3
+# * Version : 0.4
 # *
 # * Copyright 2017. Benoit Michau. ANSSI.
 # *
@@ -40,17 +40,20 @@ from pycrate_asn1rt.codecs import ASN1CodecBER
         
 
 pprint.stdprinter = pprint.PrettyPrinter
-#
+
 class MyPrettyPrinter(pprint.stdprinter):
-    RA = range(128)
+    
     def _format(self, obj, *args, **kwargs):
-        if isinstance(obj, str_types + bytes_types) and \
-        not all([c in self.RA for c in obj]):
+        if isinstance(obj, bytes_types):
             obj = hexlify(obj)
+        elif isinstance(obj, list):
+            # this is required for the Python3 pretty-printer which works line-by-line
+            # and not object-by-object
+            for i, objsub in enumerate(obj[:]):
+                if isinstance(objsub, bytes_types):
+                    del obj[i]
+                    obj.insert(i, hexlify(objsub))
         return pprint.stdprinter._format(self, obj, *args, **kwargs)
-#
-# enabling this will print hex stream for what looks like non-ascii str / bytes
-#pprint.PrettyPrinter=MyPrettyPrinter
 
 
 def main():
@@ -60,8 +63,10 @@ def main():
     
     parser.add_argument('-i', dest='input', type=str,
                         help='file containing the binary encoded objects')
-    parser.add_argument('-s', dest='stream', type=bytes,
+    parser.add_argument('-s', dest='stream', type=str,
                         help='hexadecimal string encoding the objects')
+    parser.add_argument('-x', dest='hex', action='store_true',
+                        help='print non-ascii strings in hexadecimal form')
     #
     args = parser.parse_args()
     if args.input:
@@ -76,19 +81,26 @@ def main():
         try:
             buf = unhexlify(args.stream)
         except:
-            print('%s, args error: invalid hex stream' % (sys.argv[0], args.stream))
+            print('%s, args error: invalid hex stream %s' % (sys.argv[0], args.stream))
             return 0
     else:
         print('%s, args error: missing input encoded object' % sys.argv[0])
         return 0
+    if args.hex:
+        pprint.PrettyPrinter=MyPrettyPrinter
     #
     char = Charpy(buf)
     cnt  = 0 
     while char.len_bit() >= 16:
-        Obj, V = ASN1CodecBER.decode_tlv_ws(char)
-        print('\n' + 14*'--' + ' object %i ' % cnt + 14*'--' + '\n')
-        pprint.pprint(V)
-        cnt += 1
+        try:
+            Obj, V = ASN1CodecBER.decode_tlv_ws(char)
+        except Exception as err:
+            print('Invalid BER buffer: %s' % err)
+            char._cur += 16
+        else:
+            print('\n' + 14*'--' + ' object %i ' % cnt + 14*'--' + '\n')
+            pprint.pprint(V)
+            cnt += 1
     return 0
     
 if __name__ == '__main__':

@@ -1,0 +1,203 @@
+MBMSUmtsHI2Operations {itu-t(0) identified-organization(4) etsi(0) securityDomain(2) lawfulintercept(2) threeGPP(4) hi2mbms(7) r16 (16) version0 (0)}
+
+DEFINITIONS IMPLICIT TAGS ::=
+
+BEGIN
+
+IMPORTS
+
+
+		LawfulInterceptionIdentifier,
+		TimeStamp,
+		Network-Identifier,
+		National-Parameters,
+		National-HI2-ASN1parameters,
+		IPAddress
+
+			FROM HI2Operations
+			{itu-t(0) identified-organization(4) etsi(0) securityDomain(2)
+ 				  lawfulIntercept(2) hi2(1) version18 (18)};
+											-- Imported from TS 101 671 V3.12.1
+
+-- Object Identifier Definitions
+
+-- Security DomainId
+lawfulInterceptDomainId OBJECT IDENTIFIER ::= {itu-t(0) identified-organization(4) etsi(0)
+securityDomain(2) lawfulIntercept(2)}
+
+-- Security Subdomains
+threeGPPSUBDomainId OBJECT IDENTIFIER ::= {lawfulInterceptDomainId threeGPP(4)}
+hi2mbmsDomainId OBJECT IDENTIFIER	::= {threeGPPSUBDomainId hi2mbms(7)  r16 (16) version0 (0)}
+
+MBMSUmtsIRIsContent		::= CHOICE
+{
+	mBMSumtsiRIContent		[1] MBMSUmtsIRIContent,
+	mBMSumtsIRISequence		[2] MBMSUmtsIRISequence
+}
+
+MBMSUmtsIRISequence		::= SEQUENCE OF MBMSUmtsIRIContent
+
+-- Aggregation of MBMSUmtsIRIContent is an optional feature.
+-- It may be applied in cases when at a given point in time
+-- several IRI records are available for delivery to the same LEA destination.
+-- As a general rule, records created at any event shall be sent
+-- immediately and not withheld in the DF or MF in order to
+-- apply aggragation.
+-- When aggregation is not to be applied,
+-- MBMSUmtsIRIContent needs to be chosen.
+
+
+MBMSUmtsIRIContent		::= CHOICE
+{
+	iRI-Begin-record		[1] IRI-Parameters,	
+	iRI-End-record			[2] IRI-Parameters,
+	iRI-Report-record		[3] IRI-Parameters,	
+   ...
+}
+
+IRI-Parameters		::= SEQUENCE
+{
+	hi2mbmsDomainId 				[0]	OBJECT IDENTIFIER,  -- 3GPP HI2 MBMS domain
+	lawfulInterceptionIdentifier	[2] LawfulInterceptionIdentifier,
+		-- This identifier is associated to the target.
+	timeStamp				[3] TimeStamp,
+		-- date and time of the event triggering the report.
+	initiator 				[4] ENUMERATED
+	{
+		not-Available		(0),
+		originating-Target	(1),
+			-- in case of MBMS, this indicates that the MBMS UE has initiated the MBMS session
+			-- or initiated the subscription management event.
+		network-initiated	(2),
+			-- in case of MBMS, this indicates that the MBMS has initiated the MBMS session.
+		off-online-action   (3),
+			-- in case of MBMS, this indicates a subscription management event has occurred as the
+            -- result of an MBMS operator customer services function or other subscription updates
+            -- not initiated by the MBMS UE.
+	...
+	} OPTIONAL,
+
+	partyInformation 		[5] SET SIZE (1..10) OF PartyInformation OPTIONAL,
+		-- This parameter provides the concerned party, the identiy(ies) of the party
+		-- and all the information provided by the party.
+
+	national-Parameters		[6] National-Parameters OPTIONAL,
+	networkIdentifier		[7] Network-Identifier OPTIONAL,
+	mBMSevent				[8] MBMSEvent	OPTIONAL,
+	correlationNumber		[9] CorrelationNumber OPTIONAL,
+	mbmsInformation		    [10] MBMSinformation OPTIONAL,
+	visitedPLMNID			[11] VisitedPLMNID 	OPTIONAL,
+	national-HI2-ASN1parameters	[12]	National-HI2-ASN1parameters	OPTIONAL,
+...
+}
+
+
+-- PARAMETERS FORMATS
+
+PartyInformation 			::= SEQUENCE
+{
+	party-Qualifier 	[0]  ENUMERATED
+	{
+		mBMS-Target(1),
+	...
+	},
+	partyIdentity 		[1] SEQUENCE
+	{
+		imsi					[1] OCTET STRING (SIZE (3..8)) OPTIONAL,
+			-- See MAP format [4] International Mobile
+			-- Station Identity E.212 number beginning with Mobile Country Code
+
+	...
+
+	},
+	...
+
+
+}
+
+CorrelationNumber ::= OCTET STRING (SIZE(8..20))
+
+MBMSEvent ::= ENUMERATED
+{
+	mBMSServiceJoining 		  				(1),
+	mBMSServiceLeaving						(2),
+	mBMSSubscriptionActivation				(3),
+	mBMSSubscriptionModification			(4),
+	mBMSSubscriptionTermination				(5),
+	startofInterceptWithMBMSServiceActive	(6),
+
+	...
+}
+
+Services-Data-Information ::= SEQUENCE
+{
+	mBMSparameters [1] MBMSparameters OPTIONAL,
+	...
+
+}
+
+MBMSparameters ::= SEQUENCE
+{
+	aPN 								[1] UTF8String	OPTIONAL,
+	-- The Access Point Name (APN) is coded in accordance with
+		-- 3GPP TS 24.008 [9] without the APN IEI (only the last 100 octets are used).
+		-- Octets are coded according to 3GPP TS 23.003 [25].
+		...
+}
+
+MBMSinformation ::= SEQUENCE
+{
+	mbmsServiceName 					[1] UTF8String		OPTIONAL,
+	mbms-join-time  					[2] UTF8String		OPTIONAL,
+	mbms-Mode  							[3] ENUMERATED			
+	{
+		multicast	(0),
+		broadcast	(1),
+	...
+	} OPTIONAL,
+	mbmsIPIPv6Address					[4]	IPAddress			OPTIONAL,
+	mbmsLeavingReason					[5]	ENUMERATED			
+	{
+		uEinitiatedRequested	(0),
+		bMSCorNetworkTerminated	(1),
+	...
+	} OPTIONAL,
+	mbmsSubsTermReason					[6]	ENUMERATED			
+	{
+		userInitiated			(0),
+		subscriptionExpired		(1),
+	...
+	} OPTIONAL,
+	mBMSapn 							[7] UTF8String						OPTIONAL,	
+	-- The Access Point Name (APN) is coded in accordance with
+		-- 3GPP TS 24.008 [9] without the APN IEI (only the last 100 octets are used).
+		-- Octets are coded according to 3GPP TS 23.003 [25].
+	mbmsSerSubscriberList				[8] MBMSSerSubscriberList			OPTIONAL,
+	mbmsNodeList						[9] MBMSNodeList					OPTIONAL,
+
+...
+
+}
+
+MBMSSerSubscriberList ::= SEQUENCE OF SEQUENCE
+	{
+		mBMSSERSUBSCRIBERLIST	[1]	UTF8String,
+		...
+	}
+
+
+MBMSNodeList ::= SEQUENCE OF SEQUENCE
+	{
+		mBMSNODELIST	[1]	SEQUENCE
+		{
+			mbmsnodeIPAdress	[1]  	IPAddress 	OPTIONAL,
+			mbmsnodeName		[2]		UTF8String	OPTIONAL,
+			...
+		},
+		...
+	}
+
+VisitedPLMNID ::= UTF8String
+
+
+END

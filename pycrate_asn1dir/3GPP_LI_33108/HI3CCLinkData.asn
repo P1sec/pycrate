@@ -1,0 +1,50 @@
+HI3CCLinkData
+{ itu-t (0) identified-organization (4) etsi (0) securityDomain (2) lawfulIntercept (2) hi3 (2) cclinkLI (4) version2 (2)}
+
+DEFINITIONS IMPLICIT TAGS ::=
+
+BEGIN
+
+IMPORTS
+	LawfulInterceptionIdentifier,
+	CommunicationIdentifier,
+	CC-Link-Identifier
+		FROM
+		HI2Operations
+		{ itu-t (0) identified-organization (4) etsi (0) securityDomain (2) lawfulIntercept (2) hi2 (1) version2 (2)};
+
+UUS1-Content	::= SEQUENCE
+{
+	lawfullInterceptionIdentifier	[1] LawfulInterceptionIdentifier,
+	communicationIdentifier			[2] CommunicationIdentifier,
+	cC-Link-Identifier				[3] CC-Link-Identifier OPTIONAL,
+	direction-Indication			[4] Direction-Indication,
+	bearer-capability				[5] OCTET STRING (SIZE(1..12)) OPTIONAL,
+		-- transport the Bearer capability information element (value part)
+		-- Protocol: ETS [6]
+	service-Information				[7] Service-Information OPTIONAL,
+	...
+}
+
+Direction-Indication	::= ENUMERATED
+{
+	mono-mode(0),
+	cc-from-target(1),
+	cc-from-other-party(2),
+	...
+}
+
+Service-Information ::= SET
+{
+	high-layer-capability	[0]	OCTET STRING (SIZE(1)) OPTIONAL,
+		-- HLC (octet 4 only)
+		-- Protocol: ETS [6]
+	tMR 					[1]	OCTET STRING (SIZE(1)) OPTIONAL,
+		-- Transmission Medium Required
+		-- Protocol: ISUP [5]
+	bearerServiceCode 		[2]	OCTET STRING (SIZE(1)) OPTIONAL,
+	teleServiceCode			[3]	OCTET STRING (SIZE(1)) OPTIONAL
+		-- from MAP, ETS 300 974, clause 14.7.9 and clause 14.7.10
+}
+
+END

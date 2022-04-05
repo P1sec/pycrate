@@ -1,6 +1,6 @@
 MAP-DialogueInformation {
    itu-t identified-organization (4) etsi (0) mobileDomain (0)
-   gsm-Network (1) modules (3) map-DialogueInformation (3) version16 (16)}
+   gsm-Network (1) modules (3) map-DialogueInformation (3) version19 (19)}
 
 DEFINITIONS
 
@@ -26,12 +26,12 @@ FROM MobileDomainDefinitions {
 	AddressString
 FROM MAP-CommonDataTypes {
    itu-t identified-organization (4) etsi (0) mobileDomain (0)
-   gsm-Network(1) modules (3) map-CommonDataTypes (18) version16 (16)}
+   gsm-Network(1) modules (3) map-CommonDataTypes (18) version19 (19)}
 
 	ExtensionContainer
 FROM MAP-ExtensionDataTypes {
    itu-t identified-organization (4) etsi (0) mobileDomain (0)
-   gsm-Network (1) modules (3) map-ExtensionDataTypes (21) version16 (16)}
+   gsm-Network (1) modules (3) map-ExtensionDataTypes (21) version19 (19)}
 
 
 ;
@@ -43,9 +43,9 @@ map-DialogueAS  OBJECT IDENTIFIER ::=
 	{gsm-NetworkId as-Id map-DialoguePDU (1) version1 (1)}
 
 MAP-DialoguePDU ::= CHOICE {
-	map-open		[0] MAP-OpenInfo,
+	map-open	[0] MAP-OpenInfo,
 	map-accept	[1] MAP-AcceptInfo,
-	map-close		[2] MAP-CloseInfo,
+	map-close	[2] MAP-CloseInfo,
 	map-refuse	[3] MAP-RefuseInfo,
 	map-userAbort	[4] MAP-UserAbortInfo,
 	map-providerAbort	[5] MAP-ProviderAbortInfo}

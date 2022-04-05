@@ -1,2383 +1,0 @@
-﻿3GPP TS 25.419 V13.0.0 (2015-12)
-Technical Specification
-3rd Generation Partnership Project;
-Technical Specification Group Radio Access Network;
-UTRAN Iu-BC Interface: Service Area Broadcast Protocol (SABP)
-(Release 13)
-
-	
-The present document has been developed within the 3rd Generation Partnership Project (3GPP TM) and may be further elaborated for the purposes of 3GPP.
-The present document has not been subject to any approval process by the 3GPP Organisational Partners and shall not be implemented.
-This Specification is provided for future development work within 3GPP only. The Organisational Partners accept no liability for any use of this Specification.
-Specifications and reports for implementation of the 3GPP TM system should be obtained via the 3GPP Organisational Partners' Publications Offices.
-
-
-
-
-Keywords
-UMTS, radio
-
-3GPP
-Postal address
-
-3GPP support office address
-650 Route des Lucioles - Sophia Antipolis
-Valbonne - FRANCE
-Tel.: +33 4 92 94 42 00 Fax: +33 4 93 65 47 16
-Internet
-http://www.3gpp.org
-
-Copyright Notification
-No part may be reproduced except as authorized by written permission.
-The copyright and the foregoing restriction extend to reproduction in all media.
-
-© 2015, 3GPP Organizational Partners (ARIB, ATIS, CCSA, ETSI, TSDSI, TTA, TTC).
-All rights reserved.
-
-UMTS™ is a Trade Mark of ETSI registered for the benefit of its members
-3GPP™ is a Trade Mark of ETSI registered for the benefit of its Members and of the 3GPP Organizational Partners
-LTE™ is a Trade Mark of ETSI registered for the benefit of its Members and of the 3GPP Organizational Partners
-GSM® and the GSM logo are registered and owned by the GSM Association
-
-
-Contents
-Foreword	6
-1	Scope	7
-2	References	7
-3	Definitions and abbreviations	7
-3.1	Definitions	7
-3.2	Abbreviations	8
-4	General	8
-4.1	Procedure Specification Principles	8
-4.2	Forwards and Backwards Compatibility	9
-4.3	Specification Notations	9
-5	Services provided by SABP	9
-6	Services expected from the Transport layer	9
-7	Functions of SABP	10
-8	SABP Procedures	10
-8.1	Elementary Procedures	10
-8.2	Write-Replace	10
-8.2.1	General	10
-8.2.2	Successful Operation	11
-8.2.3	Unsuccessful Operation	12
-8.2.4	Abnormal Conditions	13
-8.3	Kill	13
-8.3.1	General	13
-8.3.2	Successful Operation	13
-8.3.3	Unsuccessful Operation	14
-8.3.4	Abnormal Conditions	14
-8.4	Load Status Enquiry	14
-8.4.1	General	14
-8.4.2	Successful Operation	14
-8.4.3	Unsuccessful Operation	15
-8.4.4	Abnormal Conditions	15
-8.5	Message Status Query	15
-8.5.1	General	15
-8.5.2	Successful Operation	16
-8.5.3	Unsuccessful Operation	16
-8.5.4	Abnormal Conditions	17
-8.6	Reset	17
-8.6.1	General	17
-8.6.2	Successful Operation	17
-8.6.3	Unsuccessful Operation	17
-8.6.4	Abnormal Conditions	18
-8.7	Restart Indication	18
-8.7.1	General	18
-8.7.2	Successful Operation	18
-8.7.3	Abnormal Conditions	18
-8.8	Failure Indication	18
-8.8.1	General	18
-8.8.2	Successful Operation	19
-8.8.3	Abnormal Conditions	19
-8.9	Error Indication	19
-8.9.1	General	19
-8.9.2	Successful Operation	19
-8.9.3	Abnormal Conditions	20
-9	Elements for SABP Communication	20
-9.1	Message Functional Definition and Content	20
-9.1.1	General	20
-9.1.2	Message Contents	20
-9.1.2.1	Presence	20
-9.1.2.2	Criticality	20
-9.1.2.3	Range	20
-9.1.2.4	Assigned Criticality	21
-9.1.3	WRITE-REPLACE	21
-9.1.4	WRITE-REPLACE COMPLETE	21
-9.1.5	WRITE-REPLACE FAILURE	21
-9.1.6	KILL	22
-9.1.7	KILL COMPLETE	22
-9.1.8	KILL FAILURE	22
-9.1.9	LOAD QUERY	22
-9.1.10	LOAD QUERY COMPLETE	23
-9.1.11	LOAD QUERY FAILURE	23
-9.1.12	MESSAGE STATUS QUERY	23
-9.1.13	MESSAGE STATUS QUERY COMPLETE	23
-9.1.14	MESSAGE STATUS QUERY FAILURE	24
-9.1.15	RESET	24
-9.1.16	RESET COMPLETE	24
-9.1.17	RESET FAILURE	24
-9.1.18	RESTART	25
-9.1.19	FAILURE	25
-9.1.20	ERROR INDICATION	25
-9.2	Information Element Definitions	25
-9.2.0	General	25
-9.2.1	MessageType	26
-9.2.2	Broadcast Message Content	26
-9.2.3	Serial Number	26
-9.2.4	Old Serial Number	26
-9.2.5	New Serial Number	27
-9.2.6	Service Areas List	27
-9.2.7	Category	27
-9.2.8	Repetition Period	27
-9.2.9	Number of Broadcasts Requested	27
-9.2.10	Number of Broadcasts Completed List	28
-9.2.11	Service Area Identifier	29
-9.2.12	Failure List	29
-9.2.13	Radio Resource Loading List	29
-9.2.14	Cause	30
-9.2.15	Data Coding Scheme	32
-9.2.16	Recovery Indication	32
-9.2.17	Criticality Diagnostics	32
-9.2.18	Available Bandwidth	34
-9.2.19	Message Identifier	34
-9.2.20	Message Structure	34
-9.2.21	Paging ETWS Indicator	35
-9.2.22	Warning Type	35
-9.2.23	Warning Security Information	36
-9.2.24	Broadcast Message Content Validity Indicator	36
-9.3	Message and Information Element Abstract Syntax (with ASN.1)	36
-9.3.0	General	36
-9.3.1	Usage of protocol extension mechanism for non-standard use	36
-9.3.2	Elementary Procedure Definitions	38
-9.3.3	PDU Definitions	41
-9.3.4	Information Element Definitions	51
-9.3.5	Common Definitions	56
-9.3.6	Constant Definitions	57
-9.3.7	Container Definitions	58
-9.4	Message Transfer Syntax	61
-10	Handling of Unknown, Unforeseen or Erroneous Protocol Data	61
-10.1	General	61
-10.2	Transfer Syntax Error	61
-10.3	Abstract Syntax Error	61
-10.3.1	General	61
-10.3.2	Criticality Information	62
-10.3.3	Presence Information	62
-10.3.4	Not comprehended IE/IE group	63
-10.3.4.1	Procedure Code	63
-10.3.4.1A	Type of Message	63
-10.3.4.2	IEs other than the Procedure Code and Type of Message	63
-10.3.5	Missing IE or IE group	64
-10.3.6	IEs or IE groups received in wrong order or with too many occurrences or erroneously present	65
-10.4	Logical Error	66
-10.5	Exceptions	66
-Annex A (informative):	Guidelines for Usage of the Criticality Diagnostics IE	67
-A.1	EXAMPLE MESSAGE Layout	67
-A.2	Example on a Received EXAMPLE MESSAGE	68
-A.3	Content of Criticality Diagnostics	69
-A.3.1	Example 1	69
-A.3.2	Example 2	70
-A.3.3	Example 3	71
-A.3.4	Example 4	72
-A.3.5	Example 5	73
-A.4	ASN.1 of EXAMPLE MESSAGE	74
-Annex B (informative):	Change history	77
-
-
-Foreword
-This Technical Specification (TS) has been produced by the 3rd Generation Partnership Project (3GPP).
-The contents of the present document are subject to continuing work within the TSG and may change following formal TSG approval. Should the TSG modify the contents of the present document, it will be re-released by the TSG with an identifying change of release date and an increase in version number as follows:
-Version x.y.z
-where:
-x	the first digit:
-1	presented to TSG for information;
-2	presented to TSG for approval;
-3	or greater indicates TSG approved document under change control.
-y	the second digit is incremented for all changes of substance, i.e. technical enhancements, corrections, updates, etc.
-z	the third digit is incremented when editorial only changes have been incorporated in the document.
-
-1	Scope
-The present document specifies the Service Area Broadcast Protocol (SABP) between the Cell Broadcast Centre (CBC) and the Radio Network Controller (RNC). It fulfils the CBC - RNC communication requirements specified in TS 23.041 [5] and is defined over the Iu-BC – reference point.
-2	References
-The following documents contain provisions which, through reference in this text, constitute provisions of the present document.
-•	References are either specific (identified by date of publication, edition number, version number, etc.) or nonspecific.
-•	For a specific reference, subsequent revisions do not apply.
-•	For a non-specific reference, the latest version applies.  In the case of a reference to a 3GPP document (including a GSM document), a non-specific reference implicitly refers to the latest version of that document in the same Release as the present document.
-[1]	Void
-[2]	Void
-[3]	Void
-[4]	3GPP TR 25.931: "UTRAN Functions: Examples on Signalling Procedures".
-[5]	3GPP TS 23.041: "Technical realization of Cell Broadcast Service (CBS)".
-[6]	3GPP TS 25.414: "UTRAN Iu Interface Data Transport and Transport Signalling".
-[7]	ITU-T Recommendation X.680 (2002-07): "Information Technology - Abstract Syntax Notation One (ASN.1): Specification of basic notation".
-[8]	ITU-T Recommendation X.681 (2002-07): "Information Technology - Abstract Syntax Notation One (ASN.1): Information object specification".
-[9]	ITU-T Recommendation X.691 (2002-07): "Information Technology - ASN.1 encoding rules - Specification of Packed Encoding Rules (PER)".
-[10]	3GPP TR 25.921 (Version 7.0.0): "Guidelines and Principles for Protocol Description and Error Handling".
-[11]	3GPP TS 25.324: "Broadcast/Multicast Control BMC".
-[12]	3GPP TS 23.003: "Numbering, addressing and identification".
-3	Definitions and abbreviations
-3.1	Definitions
-For the purposes of the present document, the following terms and definitions apply:
-Elementary Procedure: SABP consists of Elementary Procedures (EPs). An Elementary Procedure is a unit of interaction between the CN (CBC) and the RNC. These EPs are defined separately and are intended to be used to build up complete sequences in a flexible manner. If the independence between some EPs is restricted, it is described under the relevant EP description. Unless otherwise stated by the restrictions, the EPs may be invoked independently of each other as stand alone procedures, which can be active in parallel. Examples on using several SABP EPs together with each other and EPs from other interfaces can be found in reference TR 25.931 [4].
-An EP consists of an initiating message and possibly a response message. Two kinds of EPs are used:
--	Class 1: Elementary Procedures with response (success or failure).
--	Class 2: Elementary Procedures without response.
-For Class 1 EPs, the types of responses can be as follows:
-   Successful
--	A signalling message explicitly indicates that the elementary procedure successfully completed with the receipt of the response.
-   Unsuccessful
--	A signalling message explicitly indicates that the EP failed.
--	On time supervision expiry (i.e. absence of expected response).
-Class 2 EPs are considered always successful.
-Message Reference: This is defined as consisting of the following parameters: Message Identifier, Serial Number, and SAI (Service Area Identifier).
-3.2	Abbreviations
-For the purposes of the present document, the following abbreviations apply:
-CBC	Cell Broadcast Centre
-CBS	Cell Broadcast Service
-CN	Core Network
-EP	Elementary Procedure
-FP	Frame Protocol
-PDU	Protocol Data Unit
-RNC	Radio Network Controller
-SA	Service Area
-SABP	Service Area Broadcast Protocol
-4	General
-The protocol described in the present document is the protocol between CN (CBC) and RNC needed for the CBC Application. The CBC Application is described in TS 23.041 [5].
-4.1	Procedure Specification Principles
-The principle for specifying the procedure logic is to specify the functional behaviour of the RNC exactly and completely. The CN functional behaviour is left unspecified.
-The following specification principles have been applied for the procedure text in clause 8:
--	The procedure text discriminates between:
-1)	Functionality which "shall" be executed:
--	The procedure text indicates that the receiving node "shall" perform a certain function Y under a certain condition. If the receiving node supports procedure X but cannot perform functionality Y requested in the REQUEST message of a Class 1 EP, the receiving node shall respond with the message used to report unsuccessful outcome for this procedure, containing an appropriate cause value.
-2)	Functionality which "shall, if supported" be executed:
--	The procedure text indicates that the receiving node "shall, if supported," perform a certain function Y under a certain condition. If the receiving node supports procedure X, but does not support functionality Y, the receiving node shall proceed with the execution of the EP, possibly informing the requesting node about the not supported functionality.
--	Any required inclusion of an optional IE in a response message is explicitly indicated in the procedure text. If the procedure text does not explicitly indicate that an optional IE shall be included in a response message, the optional IE shall not be included.
-4.2	Forwards and Backwards Compatibility
-The forwards and backwards compatibility of the protocol is assured by mechanism where all current and future messages, and IEs or groups of related IEs, include Id and criticality fields that are coded in a standard format that will not be changed in the future. These parts can always be decoded regardless of the standard version.
-4.3	Specification Notations
-For the purposes of the present document, the following notations apply:
-Procedure	When referring to an elementary procedure in the specification the Procedure Name is written with the first letters in each word in upper case characters followed by the word  "procedure", e.g. Write-Replace procedure.
-Message	When referring to a message in the specification the MESSAGE NAME is written with all letters in upper case characters followed by the word  "message", e.g. WRITE-REPLACE message.
-IE	When referring to an information element (IE) in the specification the Information Element Name is written with the first letters in each word in upper case characters and all letters in Italic font followed by the abbreviation "IE", e.g. Old Serial Number IE.
-Value of an IE	When referring to the value of an information element (IE) in the specification the "Value" is written as it is specified in subclause 9.2 enclosed by quotation marks, e.g. "Abstract Syntax Error (Reject)" or "Background ".
-5	Services provided by SABP
-•	During normal operation the CN (CBC) initiates all message transfer and query operations. The RNC responds to the message transfer and query operations initiated by the CBC.
-•	The RNC will open the connection only in case an error (Failure Indication Procedure) or recovery (Restart Indication Procedure) is to be reported.
-•	The initiator of a connection is responsible for the termination of the connection.
-6	Services expected from the Transport layer
-Following service is expected from the transport layer:
--	in sequence delivery of Signalling data TS 25.414 [6].
-7	Functions of SABP
-The SABP has the following functions:
-•	Message Handling. This function is responsible for the broadcast of new messages, amend existing broadcasted messages and to stop the broadcasting of specific messages.
-•	Load Handling. This function is responsible for determining the loading of the broadcast channels at any particular point in time.
-•	Reset. This function permits the CBC to end broadcasting in one or more Service Areas.
-•	Error Handling. This function allows the reporting of general error situations, for which function specific error messages have not been defined.
-These functions are implemented by one or several SABP elementary procedures described in the following clauses.
-8	SABP Procedures
-8.1	Elementary Procedures
-In the following tables, all EPs are divided into Class 1 and Class 2 Procedures.
-Table 1: Class 1
-Elementary ProcedureInitiating MessageSuccessful OutcomeUnsuccessful OutcomeResponse messageResponse messageWrite-ReplaceWRITE-REPLACEWRITE-REPLACE COMPLETEWRITE-REPLACE FAILUREKillKILLKILL COMPLETEKILL FAILURELoad Status EnquiryLOAD QUERYLOAD QUERY COMPLETELOAD QUERY FAILUREMessage Status QueryMESSAGE QUERYMESSAGE QUERY COMPLETEMESSAGE QUERY FAILUREResetRESETRESET COMPLETERESET FAILURE
-Table 2: Class 2
-Elementary ProcedureMessageRestart IndicationRESTARTFailure IndicationFAILUREError IndicationERROR INDICATION
-8.2	Write-Replace
-8.2.1	General
-The purpose of this Write-Replace procedure is to broadcast new information or replace a message already broadcast to a chosen Service Area(s).
-8.2.2	Successful Operation
-
-Figure 1: Write-Replace Procedure: Successful Operation
-The CN shall initiate the procedure by sending a WRITE-REPLACE message to the RNC. 
-The presence of a New Serial Number IE will indicate that this is a new broadcast. The presence of both the Old Serial Number IE and a New Serial Number IE will indicate that this message is a replacement of an existing broadcast.
-The RNC will initiate broadcasting of a new message or replace a message already broadcast as requested to the service areas as indicated in the Service Areas List IE.
-The RNC shall uniquely identify the CBS message by the Message Identifier IE together with the twelve leftmost bits of the serial number in the New Serial Number IE and the Service Area Identifier IE.
-The RNC shall perform the broadcast according to the value of the Category IE as follows:
--	The Category IE, if given in the WRITE-REPLACE message, shall be treated as follows:
-1.	If the value of Category IE is indicated as "High Priority", the RNC shall perform the broadcast immediately;
-2.	If the value of Category IE is indicated as "Background", the RNC shall perform the broadcast when no other broadcast message indicated as "High Priority" or "Normal";
-3.	If the value of Category IE is indicated as "Normal", the RNC shall perform the broadcast according to the Repetition Period IE.
--	If the Category IE is not given in the WRITE-REPLACE message, the RNC shall perform the broadcast as the same category indicated as "Normal".
-The RNC shall pass the Data Coding Scheme IE transparently to the radio interface protocol.
-The RNC shall pass the Broadcast Message Content IE Transparently to the radio interface protocol.
-The RNC shall broadcast the message frequently according to the value of the Number of Broadcasts Requested IE. If the value is set to "0", the RNC shall broadcast the message until the CN requests otherwise. If the value is different than “0”, the RNC shall broadcast the message as many times as indicated in the Number of Broadcasts Requested IE, and after the completion of the broadcast, the RNC shall release the involved messages and their status stored for each service area.
-Upon receipt of the WRITE-REPLACE message the RNC shall respond using the WRITE-REPLACE COMPLETE message containing a New Serial Number IE indicating that resources are available as requested for the Service Area(s) specified and a Number of Broadcasts Completed List IE to indicate the number of times the version of the old CBS message identified by the Message Identifier IE and the Old Serial Number IE, has been successfully broadcast to the particular Service Area(s). If the version corresponding to the Old Serial Number IE value is not recognized for a particular service area, the number of broadcast completed shall be reported as ‘0’ and the Number of Broadcasts Compl Info IE set to ‘unknown’.
-If the WRITE-REPLACE message sent from the CN:
--	contained a New Serial Number IE but not an Old Serial Number IE, the Number of Broadcasts IE within the Number of Broadcasts Completed List IE is set to "0" for each included Service Area in the corresponding WRITE-REPLACE COMPLETE message..
--	contained both the New Serial Number IE and the Old Serial Number IE, an entry is made in the Number of Broadcasts IE in the Number of Broadcasts Completed List IE for each included Service Area in the corresponding WRITE-REPLACE COMPLETE message. The RNC shall also release the involved old messages and their status stored for each service area.
-If Paging ETWS Indicator IE is included in the WRITE-REPLACE message, the RNC shall construct and send paging message towards the UE. The paging message contains warning information based on Warning Type IE. If the Broadcast Message Content Validity Indicator IE is included in the WRITE-REPLACE message then the RNC shall ignore the contents of the Broadcast Message Content IE, Repetition Period IE and Number of Broadcasts Requested IE.
-If the Warning Security Information IE is included in the WRITE-REPLACE message sent from the CN, the RNC shall send the Warning Security Information IE together with the paging message.
-8.2.3	Unsuccessful Operation
-
-Figure 2: Write-Replace Procedure: Un-Successful Operation
-If there is at least one Service Area specified in the WRITE-REPLACE message for which the RNC cannot allocate all the resources requested or for which the RNC cannot complete as requested, then the RNC shall return a WRITE-REPLACE FAILURE message to the CN as an outcome of the procedure. A list of Service Area(s) where the requested resources are unavailable or for which the RNC cannot complete as requested and appropriate cause value shall be provided in this WRITE-REPLACE FAILURE message in the Failure List IE.
-This WRITE-REPLACE FAILURE message may also include those Service Area(s) where the requested resources were available and shall indicate in the Number of Broadcasts Completed List IE those Service Area(s) which completed the request successfully.
-If the WRITE-REPLACE message sent from the CN:
--	contained a New Serial Number IE but not an Old Serial Number IE, the Number of Broadcasts IE within the Number of Broadcasts Completed List IE is set to ‘0’ for each included Service Area in the corresponding WRITE-REPLACE FAILURE message.
--	contained a New Serial Number IE but not an Old Serial Number IE, and the CBS message is already used by the RNC, it shall consider the Write Replace procedure as failed for this Service Area and return a WRITE-REPLACE-FAILURE message with the Service Area Identifier of this particular Service Area included in the Failure List IE together with the cause value “Message-reference already-used”.
--	contained both the New Serial Number IE and the Old Serial Number IE, an entry is made in Number of Broadcasts IE in the Number of Broadcasts Completed List IE for each included Service Area in the corresponding WRITE-REPLACE FAILURE message.
--	contained both the New Serial Number IE and the Old Serial Number IE, but if the old CBS message is unknown to the RNC (i.e. it can not execute the kill request) for a particular Service Area, it shall consider the Write Replace procedure as failed for this Service Area. When the procedure is completed, the RNC shall return a WRITE-REPLACE-FAILURE message which includes the Service Area Identifier of this particular Service Area in the Failure List IE together with the cause value “Valid-CN-message-not-identified”.
-8.2.4	Abnormal Conditions
-8.3	Kill
-8.3.1	General
-The purpose of the Kill procedure is to stop the broadcast of the indicated message.
-8.3.2	Successful Operation
-
-Figure 3: Kill Procedure: Successful Operation
-The CN shall initiate the procedure by sending a KILL message to the RNC.
-Upon receipt of the KILL message the RNC shall stop broadcasting the CBS message, which is indicated in the Message Identifier IE and the twelve leftmost bits of the Old Serial Number IE, in the indicated Service Area(s) as indicated in the Service Areas List IE.
-The RNC shall respond using the KILL COMPLETE message, containing the Old Serial Number IE copied from the request and the Number of Broadcast Completed List IE when all Service Areas successfully stopped the broadcast. It shall indicate in the Number of Broadcast Completed List IE for each of these Service Area(s), the number of times the version of the CBS message identified by the Message Identifier IE and the Old Serial Number IE received has been sent to this particular Service Area(s) for broadcast. The RNC shall also release the involved messages and their status stored for each service area. If the version corresponding to the Old Serial Number IE value is not recognized for a particular service area, the number of broadcast completed shall be reported as ‘0’ and the Number of Broadcasts Compl Info IE set to ‘unknown’.
-8.3.3	Unsuccessful Operation
-
-Figure 4: Kill Procedure: Un-Successful Operation
-If the RNC fails to stop broadcasting the CBS message as indicated in the KILL message in at least one service area, the RNC shall return the KILL FAILURE message to the CN. A Failure List IE indicating the list of Service Area(s) where the CBS message was not recognized or the broadcast could not be stopped together with the appropriate cause value shall be provided in the KILL FAILURE message. This response message may also – if applicable - indicate in the Number of Broadcasts Completed List IE those Service Area(s) where the KILL message successfully stopped the broadcast.
-8.3.4	Abnormal Conditions
-8.4	Load Status Enquiry
-8.4.1	General
-The purpose of this Load Status Enquiry procedure is to obtain the current permissible bandwidth available for broadcast within particular Service Area(s).
-8.4.2	Successful Operation
-
-Figure 5: Load Status Enquiry Procedure: Successful Operation
-The CN shall initiate the procedure by sending a LOAD QUERY message to the RNC. The message shall include a Service Areas List IE. Upon reception of the LOAD QUERY message the RNC shall respond with a LOAD QUERY COMPLETE message containing the Radio Resource Loading List IE indicating the available bandwidth of the Service Area(s).
-8.4.3	Unsuccessful Operation
-
-Figure 6: Load Status Enquiry Procedure: Un-Successful Operation
-If the RNC contains Service Area(s) for which the RNC was not able to respond to, it shall respond with a LOAD QUERY FAILURE message which includes the Failure List IE.
-The LOAD QUERY FAILURE response message may – if applicable - also contain a Radio Resource Loading List IE for which the LOAD STATUS QUERY reporting was successful.
-8.4.4	Abnormal Conditions
-8.5	Message Status Query
-8.5.1	General
-The Message Status Query procedure is used by the CN to obtain the message status of a broadcast message.
-8.5.2	Successful Operation
-
-Figure 7: Message Status Query Procedure: Successful Operation
-The CN shall initiate the procedure by sending a MESSAGE STATUS QUERY message to the RNC. The message shall contain the Old Serial Number IE along with the Service Areas List IE containing the Service Area Identifiers the status query is intended for. The status is requested for the version of the CBS message identified by the Message Identifier IE and the full value of the Old Version Number IE.
-Upon receipt of the MESSAGE STATUS QUERY message the RNC shall respond using the MESSAGE STATUS QUERY COMPLETE message.
-Within this message the Number of Broadcasts Completed List IE contains each Service Area which successfully performed the requested operation and for each of these Service Area(s), the number of times the version of this CBS message has been sent to this particular Service Area(s) for broadcast. If the version corresponding to the Old Serial Number IE value is not recognized for a particular service area, the number of broadcast completed shall be reported as ‘0’ and the Number of Broadcasts Compl Info IE set to ‘unknown’.
-8.5.3	Unsuccessful Operation
-
-Figure 8: Message Status Query Procedure: Un-Successful Operation
-If the requested operation fails (e.g. because the CBS message is unknown, or when the RNC cannot send the status for a known CBS message) the RNC shall send a MESSAGE STATUS QUERY FAILURE message to the CN containing a Failure List IE for Service Area(s) for which the requested operation failed.
-The MESSAGE STATUS QUERY FAILURE message may – if applicable - also include the Number of Broadcasts Completed List IE indicating those Service Area(s) for which the MESSAGE STATUS QUERY message was successful.
-8.5.4	Abnormal Conditions
-8.6	Reset
-8.6.1	General
-The purpose of the Reset procedure is to end broadcasting in one or more Service Areas in the RNC.
-8.6.2	Successful Operation
-
-Figure 9: Reset Procedure: Successful Operation
-The CN shall initiate the procedure by sending a RESET message to the RNC, in order to end broadcasting in one or more Service Areas of the RNC.
-Upon receipt of this message the RNC shall end broadcasting in the indicated Service Area(s) and shall respond using a RESET COMPLETE message.
-8.6.3	Unsuccessful Operation
-
-Figure 10: Reset Procedure: Un-Successful Operation
-If upon receipt of this message the RNC can not end broadcasting in the indicated Service Area(s), it shall respond using a RESET FAILURE message. The RESET FAILURE message may contain the Service Areas List IE and shall contain the Failure List  IE indicating the relevant Service Area(s) in which the RESET message was successful and unsuccessful respectively, along with the appropriate cause value. 
-The sum of the Service Area(s) included in the Service Areas List and Failure List IEs shall be the same as indicated in the Service Areas List IE of the initiating RESET message.
-8.6.4	Abnormal Conditions
-8.7	Restart Indication
-8.7.1	General
-The purpose of the Restart Indication procedure is for the RNC to indicate to the CN that a Service Area broadcasting related restart situation has occurred in one or more of its Service Areas e.g. when a Service Area becomes operational or when the RNC is initialised.
-8.7.2	Successful Operation
-
-Figure 11: Restart Indication Procedure: Successful Operation
-The RNC shall initiate the procedure by sending a RESTART message to the CN. This message shall contain a Service Areas List IE for reference and may also include the Recovery Indication IE to indicate whether the previous broadcast information needs to be loaded. In the absence of the Recovery Indication IE, the CN shall interpret it as "lost".
-8.7.3	Abnormal Conditions
-8.8	Failure Indication
-8.8.1	General
-The purpose of the Failure Indication procedure is to indicate to the CN from the RNC that a Service Area broadcasting related problem is occurring in one or more of its Service Areas.
-8.8.2	Successful Operation
-
-Figure 12: Failure Indication Procedure: Successful Operation
-The RNC shall initiate the procedure by sending a FAILURE message to the CN. The FAILURE message shall contain the Service Areas List IE to indicate which Service Area(s) has a Service Area broadcasting related problem.
-Upon receipt of this FAILURE message, the CN will not generate further WRITE or REPLACE messages for these Service Area(s) until the CN is informed by a RESTART message that the Service Area can resume normal Service Area broadcasting operation.
-8.8.3	Abnormal Conditions
-8.9	Error Indication
-8.9.1	General
-The Error Indication procedure is initiated by the RNC to report detected errors in one incoming message, provided they cannot be reported by an appropriate failure message.
-8.9.2	Successful Operation
-
-Figure 13: Error Indication Procedure: Successful Operation
-When the conditions defined in chapter 10 are fulfilled, the Error Indication procedure is initiated by an ERROR INDICATION message sent from the receiving node.
-The ERROR INDICATION message shall contain at least either the Cause IE or the Criticality Diagnostics IE.
-Examples for possible cause values for protocol error indications are:
--	"Transfer Syntax Error".
--	"Abstract Syntax Error (reject)".
-8.9.3	Abnormal Conditions
-9	Elements for SABP Communication
-9.1	Message Functional Definition and Content
-9.1.1	General
-Section 9.1 presents the contents of SABP messages in tabular format. The corresponding ASN.1 definition is presented in section 9.3. In case there is contradiction between the tabular format in section 9.1 and the ASN.1 definition, the ASN.1 shall take precedence, except for the definition of conditions for the presence of conditional IEs, where the tabular format shall take precedence.
-NOTE:	The messages have been defined in accordance to the guidelines specified in TR 25.921 [10].
-For each message there is, a table listing the signalling elements in their order of appearance in the transmitted message.
-9.1.2	Message Contents
-9.1.2.1	Presence
-All information elements in the message descriptions below are marked mandatory, optional or conditional according to table 3
-Table 3: Meaning of abbreviations used in SABP messages
-AbbreviationMeaningMIE's marked as Mandatory (M) will always be included in the message.OIE's marked as Optional (O) may or may not be included in the message.CIE's marked as Conditional (C) will be included in a message only if the condition is satisfied. Otherwise the IE is not included.
-9.1.2.2	Criticality
-Each Information Element or Group of Information Elements may have a criticality information applied to it.
-Following cases are possible.
-Table 4: Meaning of content within "Criticality" column
-AbbreviationMeaning
-–No criticality information is applied explicitly.YESCriticality information is applied. This is usable only for non-repeatable IEs GLOBALThe IE and all its repetitions together have one common criticality information. This is usable only for repeatable IEs.EACHEach repetition of the IE has its own criticality information. It is not allowed to assign different criticality values to the repetitions. This is usable only for repeatable IEs.
-9.1.2.3	Range
-The Range column indicates the allowed number of copies of repetitive IEs/IE groups.
-9.1.2.4	Assigned Criticality
-This column provides the actual criticality information as defined in subclause 10.3.2, if applicable.
-9.1.3	WRITE-REPLACE
-This message is sent by the CN to the RNC.
-Direction: CN → RNC
-PARAMETERPRESENCERANGEIE Type and ReferenceSemantics DescriptionCriticalityAssigned CriticalityMessage TypeM9.2.1yesrejectMessage IdentifierM9.2.19yesrejectNew Serial NumberM9.2.5yesrejectOld Serial NumberO9.2.4yesignoreService Areas ListM9.2.6yesrejectCategoryO9.2.7yesignoreRepetition PeriodM9.2.8yesrejectNumber of Broadcasts RequestedM9.2.9yesrejectData Coding SchemeM9.2.15yesrejectBroadcast Message ContentM9.2.2yesrejectWarning Security InformationO9.2.23See TS 23.041 [5].yesignorePaging ETWS IndicatorO9.2.21yesignoreWarning TypeO9.2.22yesignoreBroadcast Message Content Validity IndicatorO9.2.24yesignore
-9.1.4	WRITE-REPLACE COMPLETE
-This message will be sent by the RNC to the CN in a successful response to a WRITE-REPLACE message.
-Direction: RNC → CN
-PARAMETERPRESENCERANGE IE Type and ReferenceSemantics DescriptionCriticalityAssigned CriticalityMessage TypeM9.2.1yesrejectMessage IdentifierM9.2.19yesrejectNew Serial NumberM9.2.5yesrejectNumber of Broadcasts Completed ListM9.210yesrejectCriticality DiagnosticsO9.2.17yesignore
-9.1.5	WRITE-REPLACE FAILURE
-This message will be sent by the RNC to the CN as an unsuccessful response to a WRITE-REPLACE message.
-Direction: RNC → CN
-PARAMETERPRESENCERANGE IE Type and ReferenceSemantics DescriptionCriticalityAssigned CriticalityMessage TypeM9.2.1yesrejectMessage IdentifierM9.2.19yesrejectNew Serial NumberM9.2.5yesrejectFailure ListM9.2.12yesrejectNumber of Broadcasts Completed ListO9.2.10yesignoreCriticality DiagnosticsO9.2.17yesignore
-9.1.6	KILL
-This message is sent by the CN to the RNC to stop broadcasting of a specific message.
-Direction: CN → RNC
-PARAMETERPRESENCERANGEIE Type and ReferenceSemantics DescriptionCriticalityAssigned CriticalityMessage TypeM9.2.1yesrejectMessage IdentifierM9.2.19yesrejectOld Serial NumberM9.2.4yesrejectService Areas ListM9.2.6yesreject
-9.1.7	KILL COMPLETE
-This message is sent by the RNC to the CN as a successful response to a KILL message.
-Direction: RNC → CN
-PARAMETERPRESENCERANGE IE Type and ReferenceSemantics DescriptionCriticalityAssigned CriticalityMessage TypeM9.2.1yesrejectMessage IdentifierM9.2.19yesrejectOld Serial NumberM9.2.4yesrejectNumber of Broadcasts Completed ListM9.2.10yesrejectCriticality DiagnosticsO9.2.17yesignore
-9.1.8	KILL FAILURE
-This message is sent by the RNC to the CN as unsuccessful response to a KILL message.
-Direction: RNC → CN
-PARAMETERPRESENCERANGE IE Type and ReferenceSemantics DescriptionCriticalityAssigned CriticalityMessage TypeM9.2.1yesrejectMessage IdentifierM9.2.19yesrejectOld Serial NumberM9.2.4yesrejectFailure ListM9.2.12yesrejectNumber of Broadcasts Completed ListO9.2.10yesignoreCriticality DiagnosticsO9.2.17yesignore
-9.1.9	LOAD QUERY
-This message is sent by the CN to the RNC to gain an indication of broadcast resources available.
-Direction: CN → RNC
-PARAMETERPRESENCERANGE IE Type and ReferenceSemantics DescriptionCriticalityAssigned CriticalityMessage TypeM9.2.1yesrejectService Areas ListM9.2.6yesreject
-9.1.10	LOAD QUERY COMPLETE
-This message will be sent by the RNC as a successful response to the LOAD QUERY message.
-Direction: RNC → CN
-PARAMETERPRESENCERANGE IE Type and ReferenceSemantics DescriptionCriticalityAssigned CriticalityMessage TypeM9.2.1yesrejectRadio Resource Loading ListM9.2.13yesrejectCriticality DiagnosticsO9.2.17yesignore
-9.1.11	LOAD QUERY FAILURE
-This message is sent by the RNC to the CN as an unsuccessful response to a LOAD QUERY message.
-Direction: RNC → CN
-PARAMETERPRESENCERANGE IE Type and ReferenceSemantics DescriptionCriticalityAssigned CriticalityMessage TypeM9.2.1yesrejectFailure ListM9.2.12yesrejectRadio Resource Loading ListO9.2.13yesignoreCriticality DiagnosticsO9.2.17yesignore
-9.1.12	MESSAGE STATUS QUERY
-This message is sent by the CN to the RNC to obtain the current status of a Service Area broadcasting message.
-Direction: CN → RNC
-PARAMETERPRESENCERANGE IE Type and ReferenceSemantics DescriptionCriticalityAssigned CriticalityMessage TypeM9.2.1yesrejectMessage IdentifierM9.2.19yesrejectOld Serial NumberM9.2.4yesrejectService Areas ListM9.2.6yesreject
-9.1.13	MESSAGE STATUS QUERY COMPLETE
-This message is sent by the RNC to the CN as a successful response to a MESSAGE QUERY message.
-Direction: RNC → CN
-PARAMETERPRESENCERANGE IE Type and ReferenceSemantics DescriptionCriticalityAssigned CriticalityMessage TypeM9.2.1yesrejectMessage IdentifierM9.2.19yesrejectOld Serial NumberM9.2.4yesrejectNumber of Broadcasts Completed ListM9.2.10yesrejectCriticality DiagnosticsO9.2.17yesignore
-9.1.14	MESSAGE STATUS QUERY FAILURE
-This message is sent by the RNC to the CN in an unsuccessful response to a MESSAGE QUERY message.
-Direction: RNC → CN
-PARAMETERPRESENCERANGE IE Type and ReferenceSemantics DescriptionCriticalityAssigned CriticalityMessage TypeM9.2.1yesrejectMessage IdentifierM9.2.19yesrejectFailure ListM9.2.12yesrejectOld Serial NumberM9.2.4yesrejectNumber of Broadcasts Completed ListO9.2.10yesignoreCriticality DiagnosticsO9.2.17yesignore
-9.1.15	RESET
-The message is sent by the CN to the RNC to request that the RNC end broadcasting in one or more Service Areas.
-Direction: CN → RNC
-PARAMETERPRESENCERANGE IE Type and ReferenceSemantics DescriptionCriticalityAssigned CriticalityMessage TypeM9.2.1yesrejectService Areas ListM9.2.6yesreject
-9.1.16	RESET COMPLETE
-This message is sent from the RNC to the CN as a successful response to a RESET message where indicated Service-Area(s) are now not broadcasting any messages.
-Direction: RNC → CN
-PARAMETERPRESENCERANGE IE Type and ReferenceSemantics DescriptionCriticalityAssigned CriticalityMessage TypeM9.2.1yesrejectService Areas ListM9.2.6yesrejectCriticality DiagnosticsO9.2.17yesignore
-9.1.17	RESET FAILURE
-This message is sent from the RNC to the CN as an unsuccessful response to a RESET message to indicate that a Service Area broadcasting related problem exists in one or more of its Service Areas.
-Direction: RNC → CN
-PARAMETERPRESENCERANGE IE Type and ReferenceSemantics DescriptionCriticalityAssigned CriticalityMessage TypeM9.2.1yesrejectFailure ListM9.2.12yesrejectService Areas ListO9.2.6yesignoreCriticality DiagnosticsO9.2.17yesignore
-9.1.18	RESTART
-This message is sent from the RNC to the CN to indicate a Service Area broadcasting related restart situation in one or more of its Service-Areas.
-Direction: RNC → CN
-PARAMETERPRESENCERANGE IE Type and ReferenceSemantics DescriptionCriticalityAssigned CriticalityMessage TypeM9.2.1yesignoreService Areas ListM9.2.6yesignoreRecovery IndicationO9.2.16yesignore
-9.1.19	FAILURE
-This message is sent from the RNC to the CN to indicate that a Service Area broadcasting related problem exists in one or more of its Service-Areas.
-Direction: RNC → CN
-PARAMETERPRESENCERANGE IE Type and ReferenceSemantics DescriptionCriticalityAssigned CriticalityMessage TypeM9.2.1yesignoreService Areas ListM9.2.6yesignore
-9.1.20	ERROR INDICATION
-This message is sent by the RNC to CN and is used to indicate that some errors have been detected in the node.
-Direction: RNC → CN
-PARAMETERPRESENCERANGE IE Type and ReferenceSemantics DescriptionCriticalityAssigned CriticalityMessage Type M9.2.1yesignoreMessage Identifier O9.2.19yesignoreSerial Number O9.2.3yesignoreCauseO9.2.14yesignoreCriticality DiagnosticsO9.2.17yesignore
-9.2	Information Element Definitions
-9.2.0	General
-Section 9.2 presents the SABP IE definitions in tabular format. The corresponding ASN.1 definition is presented in section 9.3. In case there is contradiction between the tabular format in section 9.2 and the ASN.1 definition, the ASN.1 shall take precedence, except for the definition of conditions for the presence of conditional elements, where the tabular format shall take precedence.
-When specifying information elements which are to be represented by bitstrings, if not otherwise specifically stated in the semantics description of the concerned IE or elsewhere, the following principle applies with regards to the ordering of bits:
--	The first bit (leftmost bit) contains the most significant bit (MSB);
--	The last bit (rightmost bit) contains the least significant bit (LSB);
--	When importing bitstrings from other specifications, the first bit of the bitstring contains the first bit of the concerned information;
-9.2.1	MessageType
-Message Type IE uniquely identifies the message being sent. It is mandatory for all messages.
-IE/GROUP NAMEPRESENCERANGE IE Type and ReferenceSemantics DescriptionMessage Type>Procedure CodeMENUMERATED (Write-Replace,
-Kill,
-Load Status Enquiry,
-Message Status Query,
-Reset,
-Restart Indication,
-Failure Indication,
-Error Indication
-,…)>Type of Message MENUMERATED (Initiating Message, Successful Outcome, Unsuccessful Outcome, Outcome)
-9.2.2	Broadcast Message Content
-Broadcast Message Content IE is sent from the CN to the RNC containing user information i.e. the message, and will be broadcast over the radio interface.
-IE/GROUP NAMEPRESENCERANGE IE Type and ReferenceSemantics DescriptionBroadcast Message ContentMBIT STRING (1..9968)The size of the received bitstring shall be  multiple of 8.
-9.2.3	Serial Number
-Serial Number IE is a 16-bit integer which identifies a particular message from the source and type indicated by the Message Identifier and is altered every time the message with a given Message Identifier is changed.
-IE/GROUP NAMEPRESENCERANGE IE Type and ReferenceSemantics DescriptionSerial NumberOBIT STRING(16)
-9.2.4	Old Serial Number
-Old Serial Number IE enables identification of an existing message to be identified. The format of this IE is defined in subclause 9.2.3.
-IE/GROUP NAMEPRESENCERANGE IE Type and ReferenceSemantics DescriptionOld Serial NumberM9.2.3
-9.2.5	New Serial Number
-New Serial Number IE enables identification of a new message for broadcast to be identified, and is altered every time the message is changes. The format of this IE is defined in subclause 9.2.3.
-IE/GROUP NAMEPRESENCERANGE IE Type and ReferenceSemantics DescriptionNew Serial NumberO9.2.3
-9.2.6	Service Areas List
-The Service Areas List IE identifies a sequence of one or more Service Areas to which the message(s) apply. The Service Areas List IE must include at least one Service Area.
-IE/GROUP NAMEPRESENCERANGE IE Type and ReferenceSemantics DescriptionService Areas List1 to <maxnoof SAI>>Service Area IdentifierM9.2.11
-Range boundExplanationMaxnoofSAIMaximum no. of SAI in Service Areas List. Value is 65535
-9.2.7	Category
-Category IE is sent from the CN to the RNC, and is used to indicate the priority of the message.
-IE/GROUP NAMEPRESENCERANGE IE Type and ReferenceSemantics DescriptionCategoryOEnumerated (High Priority, Background, Normal, Default)This IE contains the broadcast priority of the message.
-The value “Default” shall not be used
-9.2.8	Repetition Period
-Repetition Period IE is sent from the CN to the RNC and indicates the periodicity of message broadcasts.
-IE/GROUP NAMEPRESENCERANGE IE Type and ReferenceSemantics DescriptionRepetition PeriodMINTEGER (1..4096)Range is 1 to 4096 where each unit will represent a repetition of one second to a maximum of once per ~1 hour 
-9.2.9	Number of Broadcasts Requested
-Number of Broadcasts Requested IE is sent from the CN to the RNC and indicates the number of times a message is to be broadcast.
-IE/GROUP NAMEPRESENCERANGE IE Type and ReferenceSemantics DescriptionNumber of Broadcasts RequestedM0 to 65535INTEGER (0..65535)This specifies the number of times the message is to be broadcast.
-"0" indicates the message shall be broadcasted until CN request otherwise.
-9.2.10	Number of Broadcasts Completed List
-Number of Broadcasts Completed List IE is sent from the RNC to the CN, and indicates the number of times that a CN message (all pages) has been sent to each Service Area specified in the Service Areas List IE of the request message for broadcast over the radio interface.
-IE/GROUP NAMEPRESENCERANGE IE Type and ReferenceSemantics DescriptionNumber of-Broadcasts Completed List1 to <maxnoof SAI>>Service Area Identifier MOCTET STRING (7)>Number of Broadcasts CompletedMINTEGER (0.. 65535 )>Number of Broadcasts Compl InfoOENUMERATED (overflow, unknown)Overflow indicates that the number of times that CN message sent to the radio interface has been overflow.
-Unknown indicates that no information regarding the number of times that CN message sent to the radio interface.
-Range boundExplanationMaxnoofSAIMaximum no. of SAI in Service Areas List Value is 65535
-9.2.11	Service Area Identifier
-Service Area Identifier IE in BC domain is used to identify an area consisting of one cell TS 23.003 [12]. Such an area is called a Service Area. For this protocol, only a Service Area that is defined to be applicable to the BC domain shall be used.
-IE/Group NamePresenceRangeIE type and ReferenceSemantics descriptionSAI>PLMN identityMOCTET STRING (SIZE (3))- digits 0 to 9, two digits per octet,
-- each digit encoded 0000 to 1001,
-- 1111 used as filler
-- bit 4 to 1 of octet n encoding digit 2n-1
-- bit 8 to 5 of octet n encoding digit 2n
-
--The PLMN identity consists of 3 digits from MCC followed by either 
--a filler plus 2 digits from MNC (in case of 2 digit MNC) or 
--3 digits from MNC (in case of a 3 digit MNC).>LAC MOCTET STRING (2)0000 and FFFE not allowed.>SACMOCTET STRING (2)
-9.2.12	Failure List
-Failure List IE identifies the list of Service-Area(s) for which the RNC could not complete as requested.
-IE/GROUP NAMEPRESENCERANGE IE Type and ReferenceSemantics DescriptionFailure List1 to <maxnoof SAI>>Service Area IdentifierM9.2.11 >CauseM9.2.14
-Range boundExplanationMaxnoofSAIMaximum no. of SAI in Service-Area-List. Value is 65535
-9.2.13	Radio Resource Loading List
-Radio Resource Loading List IE presents the available bandwidth available for Broadcast purposes of a specific Service Area.
-IE/GROUP NAMEPRESENCERANGE IE Type and ReferenceSemantics DescriptionRadio Resource Loading List1 to <maxnoof SAI>>Service Area IdentifierM9.2.11>Available BandwidthM9.2.18
-Range boundExplanationMaxnoofSAIMaximum no. of SAI in Service Area List. Value is 65535
-9.2.14	Cause
-Cause IE indicates the reason for a particular error event for the SABP protocol.
-IE/GROUP NAMEPRESENCERANGE IE Type and ReferenceSemantics Description>CauseMINTEGER (
-
-Parameter-not-recognised(0),
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Parameter-value invalid(1),
-
-
-
-
-
-
-
-
-
-
-Valid-CN-message-not- identified(2),
-
-
-
-Service-Area-identity-not-valid(3),
-
-
-
-
-Unrecognised-message(4)
-
-
-
-Missing-mandatory-element(5),
-
-
-
-RNC-capacity-exceeded(6),
-
-
-
-
-
-
-
-
-
-RNC-memory-exceeded(7),
-
-
-
-
-
-
-Service-Area-broadcast-not-supported(8),
-
-
-
-
-Service-Area-broadcast-not-operational(9),
-
-
-
-
-
-
-
-
-Message-reference already-used(10),
-
-
-
-
-
-
-
-
-
-Unspecified-error(11),
-
-
-
-
-(Transfer Syntax Error(12), 
-
-
-
-
-Semantic Error (12),
-
-
-
-
-Message not compatible with receiver state (14),
-
-
-Abstract Syntax Error (Reject) (15),
-
-
-
-Abstract Syntax Error (Ignore and Notify) (16),
-
-
-
-Abstract Syntax Error (Falsely Constructed Message) (17))Range is 0-255
-
-Sent when the recipient (CN or RNC) was unable to act upon the message received due to an unrecognised parameter. A message should not be rejected only because a parameter is not recognised as this would prevent extensions to the service
-
-Sent when a failure occurred due to the value of a parameter being invalid, e.g. out of range, or in Write-Replace, the parameter "no of pages" does not equal the number of pages received
-
-Sent when the RNC does not recognise the CN message reference
-
-Sent when the RNC does not recognise a Service-Area Identity
-
-
-Sent when the RNC did not recognise the message at all
-
-Sent when a mandatory element is missing from the message
-
-
-Sent when a write-replace fails because the RNC cannot meet the requested repetition period because of the cell loading
-
-
-
-
-Sent when the RNC is unable to store a CBS message as the RNC memory has been exceeded.
-
-
-Sent when the SABCH/CN related Radio Resource is not configured for a Service-Area
-
-Sent when the SABCH/CN related radio resource is not available because of error conditions or due to maintenance activities
-
-
-Sent when the recipient was unable to act upon the Write-Replace message received due to a previous Write-Replace received with the same message reference.
-
-Sent when none of the above cause values apply.
-
-
-Sent to indicate transfer syntax error in any message
-
-
-Sent to indicate semantic error any message
-
-
-
-Sent to indicate that received message is not compatible with the receiver state
-
-Sent to indicate rejection due to Abstract Syntax Error
-
-
-Sent to indicate Abstract Syntax Error in some IE that has been ignored
-
-Sent to indicate Abstract Syntax Error due to false message construction
-9.2.15	Data Coding Scheme
-Data Coding Scheme IE is sent from the RNC to the CN and identifies the alphabet or coding employed for the message characters and message handling at the UE (it is passed transparently from the CN to the UE).
-IE/GROUP NAMEPRESENCERANGE IE Type and ReferenceSemantics DescriptionData Coding SchemeMBIT STRING(8)
-9.2.16	Recovery Indication
-Recovery Indication IE is used to indicate whether the CN related data was lost or is still available.
-IE/GROUP NAMEPRESENCERANGE IE Type and ReferenceSemantics DescriptionRecovery IndicationOENUMERATED (Lost, Available)
-9.2.17	Criticality Diagnostics
-For further details on how to use the Criticality Diagnostics IE, see annex A.
-The Criticality Diagnostics IE is sent by the RNC or the CN when parts of a received message have not been comprehended or were missing, or if the message contained logical errors. When applicable, it contains information about which IEs that were not comprehended or were missing.
-IE/Group NamePresenceRangeIE type and referenceSemantics descriptionCriticality Diagnostics>Procedure CodeOINTEGER (0..255)Procedure Code is to be used if Criticality Diagnostics is part of Error Indication procedure, and not within the response message of the same procedure that caused the error>Triggering Message OENUMERATED(initiating message, successful outcome, unsuccessful outcome, outcome)The Triggering Message is used only if the Criticality Diagnostics is part of Error Indication procedure.>Procedure CriticalityOENUMERATED(reject, ignore, notify)This Procedure Criticality is used for reporting the Criticality of the Triggering message (Procedure). Information Element Criticality Diagnostics0 to <maxnoof errors>>IE CriticalityMENUMERATED(reject, ignore, notify)The IE Criticality is used for reporting the criticality of the triggering IE. The value 'ignore' shall not be used.>IE IDMINTEGER (0..65535)The IE Id of the not understood or missing IE >Repetition NumberOINTEGER (0..255)The Repetition Number IE gives
-
-• in case of a not understood IE: 
-The number of occurrences of the reported IE up to and including the not understood occurrence
-
-• in case of a missing IE:
-The number of occurrences up to but not including the missing occurrence.
-
-Note: All the counted occurrences of the reported IE must have the same topdown hierachical message structure of IEs with assigned criticality above them.>Message StructureO9.2.20The Message Structure IE describes the structure where the not understood or missing IE was detected.
-This IE is included if the not understood IE is not the top level of the message.>Type of ErrorMENUMERATED(not understood, missing, …)
-Range boundExplanationMaxnooferrorsMaximum no. of IE errors allowed to be reported with a single message. The value for maxnooferrors is 256.
-9.2.18	Available Bandwidth
-Available Bandwidth IE is used to indicate the Bandwidth available for the broadcast of messages.
-IE/GROUP NAMEPRESENCERANGE IE Type and ReferenceSemantics DescriptionAvailable BandwidthOINTEGER (0..20480)The unit is: bit/second
-9.2.19	Message Identifier
-Message Identifier IE is set by the CN, transfer to the UE by the RNC.
-IE/GROUP NAMEPRESENCERANGE IE Type and ReferenceSemantics DescriptionMessage IdentifierMBIT STRING(16)This IE is set by the CN, transfer to the UE by the RNC, the RNC needs not to understand what is the meaning of the value but shall treat it as a identifier of a message.
-The Message Identifier is defined in TS 25.324 [11].
-9.2.20	Message Structure
-The Message Structure IE gives information for each level with assigned criticality in an hierachical message structure from top level down to the lowest level above the reported level for the occured error (reported in the Information Element Criticality Diagnostics IE).
-IE/Group NamePresenceRangeIE type and referenceSemantics descriptionCriticalityAssigned CriticalityMessage structure1 to <maxnooflevels>The first repetition of the Message Structure IE corresponds to the top level of the message. The last repetition of the Message Structure IE corresponds to the level above the reported level for the occured error of the message.GLOBALignore>IE IDMINTEGER (0..65535)The IE ID of this level’s IE containing the not understood or missing IE.->Repetition NumberOINTEGER (1..256)The Repetition Number IE gives, if applicable, the number of occurrences of this level’s reported IE up to and including the occurrence containing the not understood or missing IE. 
-
-Note: All the counted occurrences of the reported IE must have the same topdown hierachical message structure of IEs with assigned criticality above them.-
-Range boundExplanationmaxnooflevelsMaximum no. of message levels to report.  The value for maxnooflevels is 256.
-9.2.21	Paging ETWS Indicator
-Paging ETWS Indicator IE is used to indicate to the RNC that the received SABP message contains ETWS contents that need to be sent via paging message towards the UE.
-IE/GROUP NAMEPRESENCERANGE IE Type and ReferenceSemantics DescriptionPaging ETWS IndicatorMENUMERATED (Paging, …)
-9.2.22	Warning Type
-Warning Type IE indicates the types of the disaster. This IE can be used by the UE to differentiate tye type of alert according to the type of disaster.
-IE/GROUP NAMEPRESENCERANGE IE Type and ReferenceSemantics DescriptionWarning TypeMOCTET STRING (2)
-9.2.23	Warning Security Information
-Warning Security Information IE is set by the CN, transferred to the UE by the RNC.
-IE/GROUP NAMEPRESENCERANGE IE Type and ReferenceSemantics DescriptionWarning Security InformationMOCTET STRING(50)
-9.2.24	Broadcast Message Content Validity Indicator
-The Broadcast Message Content Validity Indicator IE indicates that the Broadcast Message Content IE does not contain any valid information.
-IE/GROUP NAMEPRESENCERANGE IE Type and ReferenceSemantics DescriptionBroadcast Message Content Validity IndicatorMENUMERATED 
-(Broadcast Message Content not valid)
-
-9.3	Message and Information Element Abstract Syntax (with ASN.1)
-9.3.0	General
-SABP ASN.1 definition conforms with ITU-T Rec. X.680 [7] and ITU-T Rec. X.681 [8].
-The ASN.1 definition specifies the structure and content of SABP messages. SABP messages can contain any IEs specified in the object set definitions for that message without the order or number of occurrence being restricted by ASN.1. However, for this version of the standard, a sending entity shall construct a SABP message according to the PDU definitions module and with the following additional rules (Note that in the following IE means an IE in the object set with an explicit id. If one IE needed to appear more than once in one object set, then the different occurrences have different IE ids):
--	IEs shall be ordered (in an IE container) in the order they appear in object set definitions.
--	Object set definitions specify how many times IEs may appear. An IE shall appear exactly once if the presence field in an object has value "mandatory". An IE may appear at most once if the presence field in an object has value "optional" or "conditional". If in a tabular format there is multiplicity specified for an IE (i.e. an IE list) then in the corresponding ASN.1 definition the list definition is separated into two parts. The first part defines an IE container list where the list elements reside. The second part defines list elements. The IE container list appears as an IE of its own. For this version of the standard an IE container list may contain only one kind of list elements.
-If a SABP message that is not constructed as defined above is received, this shall be considered as Abstract Syntax Error, and the message shall be handled as defined for Abstract Syntax error in subclause 10.3.6.
-9.3.1	Usage of protocol extension mechanism for non-standard use
-The protocol extension mechanism for non-standard use may be used:
--	for special operator- (and/or vendor) specific features considered not to be part of the basic functionality, i.e. the functionality required for a complete and high-quality specification in order to guarantee multivendor interoperability.
--	by vendors for research purposes, e.g. to implement and evaluate new algorithms/features before such features are proposed for standardisation.
-The extension mechanism shall not be used for basic functionality. Such functionality shall be standardised.
-
-9.3.2	Elementary Procedure Definitions
-
-
--- **************************************************************
---
--- Elementary Procedure definitions
---
--- **************************************************************
-
-SABP-PDU-Descriptions {
-itu-t (0) identified-organization (4) etsi (0) mobileDomain (0) 
-umts-Access (20) modules (3) sabp (3) version1 (1) sabp-PDU-Descriptions (0)}
-
-DEFINITIONS AUTOMATIC TAGS ::= 
-
-BEGIN
-
--- **************************************************************
---
--- IE parameter types from other modules.
---
--- **************************************************************
-
-IMPORTS
-	Criticality,
-	ProcedureCode
-FROM SABP-CommonDataTypes
-
-	Error-Indication,
-	Failure,
-	Kill,
-	Kill-Complete,
-	Kill-Failure,
-	Load-Query,
-	Load-Query-Complete,
-	Load-Query-Failure,
-	Reset,
-	Reset-Complete,
-	Reset-Failure,
-	Restart,
-	Message-Status-Query,
-	Message-Status-Query-Complete,
-	Message-Status-Query-Failure,
-	Write-Replace,
-	Write-Replace-Complete,
-	Write-Replace-Failure
-FROM SABP-PDU-Contents
-
-	id-Error-Indication,
-	id-Failure-Indication,
-	id-Kill,
-	id-Reset,
-	id-Restart-Indication,
-	id-Load-Status-Enquiry,
-	id-Message-Status-Query,
-	id-Write-Replace
-FROM SABP-Constants;
-
--- **************************************************************
---
--- Interface Elementary Procedure Class
---
--- **************************************************************
-
-SABP-ELEMENTARY-PROCEDURE ::= CLASS {
-	&InitiatingMessage				,
-	&SuccessfulOutcome				OPTIONAL,
-	&UnsuccessfulOutcome				OPTIONAL,
-	&procedureCode			ProcedureCode 	UNIQUE,
-	&criticality			Criticality 	DEFAULT ignore
-}
-WITH SYNTAX {
-	INITIATING MESSAGE		&InitiatingMessage
-	[SUCCESSFUL OUTCOME		
-
-&SuccessfulOutcome]
-	[UNSUCCESSFUL OUTCOME		&UnsuccessfulOutcome]
-	PROCEDURE CODE			&procedureCode
-	[CRITICALITY			&criticality]
-}
-
--- **************************************************************
---
--- Interface PDU Definition
---
--- **************************************************************
-
-SABP-PDU ::= CHOICE {
-	initiatingMessage	InitiatingMessage,
-	successfulOutcome	SuccessfulOutcome,
-	unsuccessfulOutcome	UnsuccessfulOutcome,
-	...
-}
-
-InitiatingMessage ::= SEQUENCE {
-	procedureCode	SABP-ELEMENTARY-PROCEDURE.&procedureCode	({SABP-ELEMENTARY-PROCEDURES}),
-	criticality	SABP-ELEMENTARY-PROCEDURE.&criticality		({SABP-ELEMENTARY-PROCEDURES}{@procedureCode}),
-	value		SABP-ELEMENTARY-PROCEDURE.&InitiatingMessage	({SABP-ELEMENTARY-PROCEDURES}{@procedureCode})
-}
-
-SuccessfulOutcome ::= SEQUENCE {
-	procedureCode	SABP-ELEMENTARY-PROCEDURE.&procedureCode	({SABP-ELEMENTARY-PROCEDURES}),
-	criticality	SABP-ELEMENTARY-PROCEDURE.&criticality		({SABP-ELEMENTARY-PROCEDURES}{@procedureCode}),
-	value		SABP-ELEMENTARY-PROCEDURE.&SuccessfulOutcome	({SABP-ELEMENTARY-PROCEDURES}{@procedureCode})
-}
-
-UnsuccessfulOutcome ::= SEQUENCE {
-	procedureCode	SABP-ELEMENTARY-PROCEDURE.&procedureCode	({SABP-ELEMENTARY-PROCEDURES}),
-	criticality	SABP-ELEMENTARY-PROCEDURE.&criticality		({SABP-ELEMENTARY-PROCEDURES}{@procedureCode}),
-	value		SABP-ELEMENTARY-PROCEDURE.&UnsuccessfulOutcome	({SABP-ELEMENTARY-PROCEDURES}{@procedureCode})
-}
-
--- **************************************************************
---
--- Interface Elementary Procedure List
---
--- **************************************************************
-
-SABP-ELEMENTARY-PROCEDURES SABP-ELEMENTARY-PROCEDURE ::= {
-	SABP-ELEMENTARY-PROCEDURES-CLASS-1	|
-	SABP-ELEMENTARY-PROCEDURES-CLASS-2	,
-	...
-}
-
-SABP-ELEMENTARY-PROCEDURES-CLASS-1 SABP-ELEMENTARY-PROCEDURE ::= {
-	write-Replace		|
-	kill			|
-	load-Status-Enquiry	|
-	message-Status-Query	|
-	reset			,
-	...
-}
-
-SABP-ELEMENTARY-PROCEDURES-CLASS-2 SABP-ELEMENTARY-PROCEDURE ::= {
-	restart-Indication	|
-	failure-Indication	|
-	error-Indication	,
-	...
-}
-
-write-Replace SABP-ELEMENTARY-PROCEDURE ::= {
-	INITIATING MESSAGE	Write-Replace
-	SUCCESSFUL OUTCOME	Write-Replace-Complete
-	UNSUCCESSFUL OUTCOME	Write-Replace-Failure
-	PROCEDURE CODE		id-Write-Replace
-	CRITICALITY			reject
-}
-
-kill SABP-ELEMENTARY-PROCEDURE ::= {
-	INITIATING MESSAGE	Kill
-	SUCCESSFUL OUTCOME	Kill-Complete
-	UNSUCCESSFUL OUTCOME	Kill-Failure
-	PROCEDURE CODE			id-Kill
-	CRITICALITY			reject
-}
-
-load-Status-Enquiry SABP-ELEMENTARY-PROCEDURE ::= {
-	INITIATING MESSAGE	Load-Query
-	SUCCESSFUL OUTCOME	Load-Query-Complete
-	UNSUCCESSFUL OUTCOME	Load-Query-Failure
-	PROCEDURE CODE			id-Load-Status-Enquiry
-	CRITICALITY			reject
-}
-
-message-Status-Query SABP-ELEMENTARY-PROCEDURE ::= {
-	INITIATING MESSAGE	Message-Status-Query
-	SUCCESSFUL OUTCOME	Message-Status-Query-Complete
-	UNSUCCESSFUL OUTCOME	Message-Status-Query-Failure
-	PROCEDURE CODE			id-Message-Status-Query
-	CRITICALITY			reject
-}
-
-reset SABP-ELEMENTARY-PROCEDURE ::= {
-	INITIATING MESSAGE	Reset
-	SUCCESSFUL OUTCOME	Reset-Complete
-	UNSUCCESSFUL OUTCOME	Reset-Failure
-	PROCEDURE CODE			id-Reset
-	CRITICALITY			reject
-}
-
-restart-Indication SABP-ELEMENTARY-PROCEDURE ::= {
-	INITIATING MESSAGE	Restart
-	PROCEDURE CODE			id-Restart-Indication
-	CRITICALITY				ignore
-}
-
-failure-Indication SABP-ELEMENTARY-PROCEDURE ::= {
-	INITIATING MESSAGE	Failure
-	PROCEDURE CODE			id-Failure-Indication
-	CRITICALITY				ignore
-}
-
-error-Indication SABP-ELEMENTARY-PROCEDURE ::= {
-	INITIATING MESSAGE	Error-Indication
-	PROCEDURE CODE			id-Error-Indication
-	CRITICALITY				ignore
-}
-
-END
-
-9.3.3	PDU Definitions
--- **************************************************************
---
--- PDU definitions for SABP.
---
--- **************************************************************
-
-SABP-PDU-Contents {
-itu-t (0) identified-organization (4) etsi (0) mobileDomain (0) 
-umts-Access (20) modules (3) sabp (3) version1 (1) sabp-PDU-Contents (1) } 
-
-DEFINITIONS AUTOMATIC TAGS ::= 
-
-BEGIN
-
--- **************************************************************
---
--- IE parameter types from other modules.
---
--- **************************************************************
-
-IMPORTS
-	Broadcast-Message-Content,
-	Category,
-	Cause,
-Criticality-Diagnostics,
-	Data-Coding-Scheme,
-	Failure-List,
-	Message-Identifier,
-	New-Serial-Number,
-	Number-of-Broadcasts-Completed-List,
-	Number-of-Broadcasts-Requested,
-	Old-Serial-Number,
-	Paging-ETWS-Indicator,
-	Radio-Resource-Loading-List,
-	Recovery-Indication,
-	Repetition-Period,
-	Serial-Number,
-	Service-Areas-List,
-	WarningSecurityInfo,
-	Warning-Type,
-	Broadcast-Message-Content-Validity-Indicator
-FROM SABP-IEs
-
-	ProtocolExtensionContainer{},
-	ProtocolIE-Container{},
-	SABP-PROTOCOL-EXTENSION,
-	SABP-PROTOCOL-IES
-FROM SABP-Containers
-
-	id-Broadcast-Message-Content,
-	id-Category,
-	id-Criticality-Diagnostics,
-	id-Cause,
-	id-Data-Coding-Scheme,
-	id-Failure-List,
-	id-Message-Identifier,
-	id-New-Serial-Number,
-	id-Number-of-Broadcasts-Completed-List,
-	id-Number-of-Broadcasts-Requested,
-	id-Old-Serial-Number,
-	id-Paging-ETWS-Indicator,
-	id-Radio-Resource-Loading-List,
-	id-Recovery-Indication,
-	id-Repetition-Period,
-	id-Serial-Number,
-	id-Service-Areas-List,
-	id-WarningSecurityInfo,
-	id-Warning-Type,
-	id-Broadcast-Message-Content-Validity-Indicator
-FROM SABP-Constants;
-
--- **************************************************************
---
--- Write-Replace
---
--- **************************************************************
-
-Write-Replace ::= SEQUENCE {
-	protocolIEs			ProtocolIE-Container      { {Write-Replace-IEs} },
-	protocolExtensions		ProtocolExtensionContainer { {Write-Replace-Extensions} } OPTIONAL,
-	...
-}
-
-Write-Replace-IEs SABP-PROTOCOL-IES ::= {
-	{ ID id-Message-Identifier	CRITICALITY reject	TYPE Message-Identifier			PRESENCE mandatory } |
-	{ ID id-New-Serial-Number	CRITICALITY reject	TYPE New-Serial-Number			PRESENCE mandatory } |
-	{ ID id-Old-Serial-Number	CRITICALITY ignore	TYPE Old-Serial-Number			PRESENCE optional } |
-	{ ID id-Service-Areas-List	CRITICALITY reject	TYPE Service-Areas-List			PRESENCE mandatory } |
-	{ ID id-Category 			CRITICALITY ignore	TYPE Category					PRESENCE optional  } |
-	{ ID id-Repetition-Period	CRITICALITY reject	TYPE Repetition-Period			PRESENCE mandatory  } |
-	{ ID id-Number-of-Broadcasts-Requested
-					CRITICALITY reject	TYPE Number-of-Broadcasts-Requested	PRESENCE mandatory } |
-	{ ID id-Data-Coding-Scheme	CRITICALITY reject	TYPE Data-Coding-Scheme			PRESENCE mandatory } |
-	{ ID id-Broadcast-Message-Content
-					CRITICALITY reject	TYPE Broadcast-Message-Content				PRESENCE mandatory },
-	...
-}
-
-Write-Replace-Extensions SABP-PROTOCOL-EXTENSION ::= {
-	{ ID id-WarningSecurityInfo		CRITICALITY ignore	EXTENSION WarningSecurityInfo	PRESENCE optional } |
-	{ ID id-Paging-ETWS-Indicator	CRITICALITY ignore	EXTENSION Paging-ETWS-Indicator	PRESENCE optional } |
-	{ ID id-Warning-Type			CRITICALITY ignore	EXTENSION Warning-Type			PRESENCE optional } |
-	{ ID id-Broadcast-Message-Content-Validity-Indicator	CRITICALITY ignore	EXTENSION Broadcast-Message-Content-Validity-Indicator		PRESENCE optional },
-	...
-}
-
--- **************************************************************
---
--- Write-Replace-Complete
---
--- **************************************************************
-
-Write-Replace-Complete ::= SEQUENCE {
-	protocolIEs			ProtocolIE-Container       { {Write-Replace-Complete-IEs} },
-	protocolExtensions		ProtocolExtensionContainer { {Write-Replace-Complete-Extensions} } OPTIONAL,
-	...
-}
-
-Write-Replace-Complete-IEs SABP-PROTOCOL-IES ::= {
-	{ ID id-Message-Identifier	CRITICALITY reject	TYPE Message-Identifier		PRESENCE mandatory } |
-	{ ID id-New-Serial-Number	CRITICALITY reject	TYPE New-Serial-Number		PRESENCE mandatory } |
-	{ ID id-Number-of-Broadcasts-Completed-List
-						CRITICALITY reject	TYPE Number-of-Broadcasts-Completed-List
-															PRESENCE mandatory  }|
-{ ID id-Criticality-Diagnostics	
-CRITICALITY ignore	TYPE Criticality-Diagnostics	PRESENCE optional },
-	...
-}
-
-Write-Replace-Complete-Extensions SABP-PROTOCOL-EXTENSION ::= {
-	...
-}
-
--- **************************************************************
---
--- Write-Replace-Failure
---
--- **************************************************************
-
-Write-Replace-Failure ::= SEQUENCE {
-	protocolIEs			ProtocolIE-Container       { {Write-Replace-Failure-IEs} },
-	protocolExtensions		ProtocolExtensionContainer { {Write-Replace-Failure-Extensions} } OPTIONAL,
-	...
-}
-
-Write-Replace-Failure-IEs SABP-PROTOCOL-IES ::= {
-	{ ID id-Message-Identifier	CRITICALITY reject	TYPE Message-Identifier		PRESENCE mandatory } |
-	{ ID id-New-Serial-Number	CRITICALITY reject	TYPE New-Serial-Number		PRESENCE mandatory } |
-	{ ID id-Failure-List 		CRITICALITY reject	TYPE Failure-List 	 	PRESENCE mandatory } |
-	{ ID id-Number-of-Broadcasts-Completed-List
-					CRITICALITY ignore	TYPE Number-of-Broadcasts-Completed-List
-												PRESENCE optional  } |
-{ ID id-Criticality-Diagnostics	
-CRITICALITY ignore	TYPE Criticality-Diagnostics		PRESENCE optional },
-	...
-}
-Write-Replace-Failure-Extensions SABP-PROTOCOL-EXTENSION ::= {
-	...
-}
-
--- **************************************************************
---
--- Kill
---
--- **************************************************************
-
-Kill ::= SEQUENCE {
-	protocolIEs			ProtocolIE-Container       {{Kill-IEs}},
-	protocolExtensions		ProtocolExtensionContainer {{Kill-Extensions}}		OPTIONAL,
-	...
-}
-
-Kill-IEs SABP-PROTOCOL-IES ::= {
-	{ ID id-Message-Identifier 	CRITICALITY reject	TYPE Message-Identifier 	PRESENCE mandatory } |
-	{ ID id-Old-Serial-Number 	CRITICALITY reject	TYPE Old-Serial-Number 		PRESENCE mandatory } |
-	{ ID id-Service-Areas-List 	CRITICALITY reject	TYPE Service-Areas-List		PRESENCE mandatory } ,
-	...
-}
-
-Kill-Extensions SABP-PROTOCOL-EXTENSION ::= {
-	...
-}
-
--- **************************************************************
---
--- Kill-Complete
---
--- **************************************************************
-
-Kill-Complete ::= SEQUENCE {
-	protocolIEs			ProtocolIE-Container       {{Kill-Complete-IEs}},
-	protocolExtensions		ProtocolExtensionContainer {{Kill-Complete-Extensions}}		OPTIONAL,
-	...
-}
-
-Kill-Complete-IEs SABP-PROTOCOL-IES ::= {
-	{ ID id-Message-Identifier 	CRITICALITY reject	TYPE Message-Identifier 	PRESENCE mandatory } |
-	{ ID id-Old-Serial-Number 	CRITICALITY reject	TYPE Old-Serial-Number 		PRESENCE mandatory } |
-	{ ID id-Number-of-Broadcasts-Completed-List
-					CRITICALITY reject		TYPE Number-of-Broadcasts-Completed-List
-															PRESENCE mandatory }|
-{ ID id-Criticality-Diagnostics	
-CRITICALITY ignore	TYPE Criticality-Diagnostics		PRESENCE optional },
-	...
-}
-
-Kill-Complete-Extensions SABP-PROTOCOL-EXTENSION ::= {
-	...
-}
-
--- **************************************************************
---
--- Kill-Failure
---
--- **************************************************************
-
-Kill-Failure ::= SEQUENCE {
-	protocolIEs			ProtocolIE-Container       {{Kill-Failure-IEs}},
-	protocolExtensions		ProtocolExtensionContainer {{Kill-Failure-Extensions}}		OPTIONAL,
-	...
-}
-
-Kill-Failure-IEs SABP-PROTOCOL-IES ::= {
-	{ ID id-Message-Identifier	CRITICALITY reject	TYPE Message-Identifier		PRESENCE mandatory } |
-	{ ID id-Old-Serial-Number	CRITICALITY reject	TYPE Old-Serial-Number 		PRESENCE mandatory } |
-	{ ID id-Failure-List 		CRITICALITY reject	TYPE Failure-List 	 	PRESENCE mandatory } |
-	{ ID id-Number-of-Broadcasts-Completed-List
-						CRITICALITY ignore	TYPE Number-of-Broadcasts-Completed-List
-															PRESENCE optional } |
-{ ID id-Criticality-Diagnostics	
-CRITICALITY ignore	TYPE Criticality-Diagnostics		PRESENCE optional },
-	...
-}
-
-Kill-Failure-Extensions SABP-PROTOCOL-EXTENSION ::= {
-	...
-}
-
--- **************************************************************
---
--- Load-Query
---
--- **************************************************************
-
-Load-Query ::= SEQUENCE {
-	protocolIEs			ProtocolIE-Container       {{Load-Query-IEs}},
-	protocolExtensions 		ProtocolExtensionContainer {{Load-Query-Extensions}} 	OPTIONAL,
-	...
-}
-
-Load-Query-IEs SABP-PROTOCOL-IES ::= {
-	{ ID id-Service-Areas-List 	CRITICALITY reject	TYPE Service-Areas-List	 	PRESENCE mandatory } ,
-	...
-}
-
-Load-Query-Extensions SABP-PROTOCOL-EXTENSION ::= {
-	...
-}
-
--- **************************************************************
---
--- Load-Query-Complete
---
--- **************************************************************
-
-Load-Query-Complete ::= SEQUENCE {
-	protocolIEs			ProtocolIE-Container       {{Load-Query-Complete-IEs}},
-	protocolExtensions		ProtocolExtensionContainer {{Load-Query-Complete-Extensions}} OPTIONAL,
-	...
-}
-
-Load-Query-Complete-IEs SABP-PROTOCOL-IES ::= {
-	{ ID id-Radio-Resource-Loading-List 	
-						CRITICALITY reject	TYPE Radio-Resource-Loading-List  
-															PRESENCE mandatory }  |
-{ ID id-Criticality-Diagnostics	
-CRITICALITY ignore	TYPE Criticality-Diagnostics		PRESENCE optional },
-	...
-}
-
-Load-Query-Complete-Extensions SABP-PROTOCOL-EXTENSION ::= {
-	...
-}
-
--- **************************************************************
---
--- Load-Query-Failure
---
--- **************************************************************
-
-Load-Query-Failure ::= SEQUENCE {
-	protocolIEs			ProtocolIE-Container       {{Load-Query-Failure-IEs}},
-	protocolExtensions		ProtocolExtensionContainer {{Load-Query-Failure-Extensions}} OPTIONAL,
-	...
-}
-
-Load-Query-Failure-IEs SABP-PROTOCOL-IES ::= {
-	
-	{ ID id-Failure-List 		CRITICALITY reject	TYPE Failure-List  		PRESENCE mandatory } |
-	{ ID id-Radio-Resource-Loading-List 	
-						CRITICALITY ignore	TYPE Radio-Resource-Loading-List  
-												PRESENCE optional  } |
-{ ID id-Criticality-Diagnostics	
-CRITICALITY ignore	TYPE Criticality-Diagnostics		PRESENCE optional },
-	...
-}
-
-Load-Query-Failure-Extensions SABP-PROTOCOL-EXTENSION ::= {
-	...
-}
-
--- **************************************************************
---
--- Message-Status-Query
---
--- **************************************************************
-
-Message-Status-Query ::= SEQUENCE {
-	protocolIEs			ProtocolIE-Container       {{Message-Status-Query-IEs}},
-	protocolExtensions 		ProtocolExtensionContainer {{Message-Status-Query-Extensions}} OPTIONAL,
-	...
-}
-
-Message-Status-Query-IEs SABP-PROTOCOL-IES ::= {
-	{ ID id-Message-Identifier 	CRITICALITY reject	TYPE Message-Identifier 	PRESENCE mandatory } |
-	{ ID id-Old-Serial-Number	CRITICALITY reject	TYPE Old-Serial-Number 		PRESENCE mandatory } |
-	{ ID id-Service-Areas-List 	CRITICALITY reject	TYPE Service-Areas-List 	PRESENCE mandatory } ,
-	...
-}
-
-Message-Status-Query-Extensions SABP-PROTOCOL-EXTENSION ::= {
-	...
-}
-
--- **************************************************************
---
--- Message-Status-Query-Complete
---
--- **************************************************************
-
-Message-Status-Query-Complete ::= SEQUENCE {
-	protocolIEs 			ProtocolIE-Container       {{Message-Status-Query-Complete-IEs}},
-	protocolExtensions 		ProtocolExtensionContainer {{Message-Status-Query-Complete-Extensions}} OPTIONAL,
-	...
-}
-
-Message-Status-Query-Complete-IEs SABP-PROTOCOL-IES ::= {
-	{ ID id-Message-Identifier 	CRITICALITY reject	TYPE Message-Identifier 	PRESENCE mandatory } |
-	{ ID id-Old-Serial-Number 	CRITICALITY reject	TYPE Old-Serial-Number 		PRESENCE mandatory } |
-	{ ID id-Number-of-Broadcasts-Completed-List
-						CRITICALITY reject	TYPE Number-of-Broadcasts-Completed-List 
-															PRESENCE mandatory } |
-{ ID id-Criticality-Diagnostics	
-CRITICALITY ignore	TYPE Criticality-Diagnostics		PRESENCE optional },
-	...
-}
-
-Message-Status-Query-Complete-Extensions SABP-PROTOCOL-EXTENSION ::= {
-	...
-}
-
--- **************************************************************
---
--- Message-Status-Query-Failure
---
--- **************************************************************
-
-Message-Status-Query-Failure ::= SEQUENCE {
-	protocolIEs 			ProtocolIE-Container       {{Message-Status-Query-Failure-IEs}},
-	protocolExtensions 		ProtocolExtensionContainer {{Message-Status-Query-Failure-Extensions}} OPTIONAL,
-	...
-}
-
-Message-Status-Query-Failure-IEs SABP-PROTOCOL-IES ::= {
-	{ ID id-Message-Identifier	CRITICALITY reject	TYPE Message-Identifier		PRESENCE mandatory } |
-	{ ID id-Failure-List 		CRITICALITY reject	TYPE Failure-List  		PRESENCE mandatory } |
-	{ ID id-Old-Serial-Number	CRITICALITY reject	TYPE Old-Serial-Number		PRESENCE mandatory } |
-	{ ID id-Number-of-Broadcasts-Completed-List
-					CRITICALITY ignore	TYPE Number-of-Broadcasts-Completed-List 
-															PRESENCE optional  } |
-{ ID id-Criticality-Diagnostics	
-CRITICALITY ignore	TYPE Criticality-Diagnostics		PRESENCE optional },
-	...
-}
-
-Message-Status-Query-Failure-Extensions SABP-PROTOCOL-EXTENSION ::= {
-	...
-}
-
--- **************************************************************
---
--- Reset
---
--- **************************************************************
-
-Reset ::= SEQUENCE {
-	protocolIEs			ProtocolIE-Container       {{Reset-IEs}},
-	protocolExtensions 		ProtocolExtensionContainer {{Reset-Extensions}} 	OPTIONAL,
-	...
-}
-
-Reset-IEs SABP-PROTOCOL-IES ::= {
-	{ ID id-Service-Areas-List 	CRITICALITY reject	TYPE Service-Areas-List 		PRESENCE mandatory } ,
-	...
-}
-
-Reset-Extensions SABP-PROTOCOL-EXTENSION ::= {
-	...
-}
-
--- **************************************************************
---
--- Reset-Complete
---
--- **************************************************************
-
-Reset-Complete ::= SEQUENCE {
-	protocolIEs			ProtocolIE-Container       {{Reset-Complete-IEs}},
-	protocolExtensions 		ProtocolExtensionContainer {{Reset-Complete-Extensions}} 	OPTIONAL,
-	...
-}
-
-Reset-Complete-IEs SABP-PROTOCOL-IES ::= {
-	{ ID id-Service-Areas-List 	CRITICALITY reject	TYPE Service-Areas-List 	PRESENCE mandatory } |
-{ ID id-Criticality-Diagnostics	
-CRITICALITY ignore	TYPE Criticality-Diagnostics		PRESENCE optional },
-	...
-}
-
-Reset-Complete-Extensions SABP-PROTOCOL-EXTENSION ::= {
-	...
-}
-
--- **************************************************************
---
--- Reset-Failure
---
--- **************************************************************
-
-Reset-Failure ::= SEQUENCE {
-	protocolIEs			ProtocolIE-Container       {{Reset-Failure-IEs}},
-	protocolExtensions 		ProtocolExtensionContainer {{Reset-Failure-Extensions}} 	OPTIONAL,
-	...
-}
-
-Reset-Failure-IEs SABP-PROTOCOL-IES ::= {
-	{ ID id-Failure-List 		CRITICALITY reject	TYPE Failure-List  		PRESENCE mandatory } |
-	{ ID id-Service-Areas-List 	CRITICALITY reject	TYPE Service-Areas-List 	PRESENCE optional  } |
-{ ID id-Criticality-Diagnostics	
-CRITICALITY ignore	TYPE Criticality-Diagnostics	PRESENCE optional } ,
-	...
-}
-
-Reset-Failure-Extensions SABP-PROTOCOL-EXTENSION ::= {
-	...
-}
-
--- **************************************************************
---
--- Restart
---
--- **************************************************************
-
-Restart ::= SEQUENCE {
-	protocolIEs 			ProtocolIE-Container       {{Restart-IEs}},
-	protocolExtensions 		ProtocolExtensionContainer {{Restart-Extensions}}	OPTIONAL,
-	...
-}
-
-Restart-IEs SABP-PROTOCOL-IES ::= {
-	{ ID id-Service-Areas-List 	CRITICALITY ignore	TYPE Service-Areas-List	 	PRESENCE mandatory } |
-	{ ID id-Recovery-Indication 	CRITICALITY ignore	TYPE Recovery-Indication 	PRESENCE optional  } ,
-	...
-}
-
-Restart-Extensions SABP-PROTOCOL-EXTENSION ::= {
-	...
-}
-
--- **************************************************************
---
--- Failure
---
--- **************************************************************
-
-Failure ::= SEQUENCE {
-	protocolIEs 			ProtocolIE-Container       {{Failure-IEs}},
-	protocolExtensions 		ProtocolExtensionContainer {{Failure-Extensions}} 	OPTIONAL,
-	...
-}
-
-Failure-IEs SABP-PROTOCOL-IES ::= {
-	{ ID id-Service-Areas-List 	CRITICALITY ignore	TYPE Service-Areas-List 	PRESENCE mandatory } ,
-	...
-}
-
-Failure-Extensions SABP-PROTOCOL-EXTENSION ::= {
-	...
-}
-
--- **************************************************************
---
--- Error-Indication
---
--- **************************************************************
-
-Error-Indication ::= SEQUENCE {
-	protocolIEs 			ProtocolIE-Container       {{Error-Indication-IEs}},
-	protocolExtensions 		ProtocolExtensionContainer {{Error-Indication-Extensions}} 	OPTIONAL,
-	...
-}
-
-Error-Indication-IEs SABP-PROTOCOL-IES ::= {
-	{ ID id-Message-Identifier 	CRITICALITY ignore	TYPE Message-Identifier 	PRESENCE optional } |
-	{ ID id-Serial-Number		CRITICALITY ignore	TYPE Serial-Number 		PRESENCE optional  } |
-	{ ID id-Cause			CRITICALITY ignore	TYPE Cause		 		PRESENCE optional  } |
-{ ID id-Criticality-Diagnostics	
-CRITICALITY ignore	TYPE Criticality-Diagnostics	PRESENCE optional },
-	...
-}
-
-Error-Indication-Extensions SABP-PROTOCOL-EXTENSION ::= {
-	...
-}
-
-END
-
-
-9.3.4	Information Element Definitions
-
--- **************************************************************
---
--- Information Element Definitions
---
--- **************************************************************
-
-
-SABP-IEs {
-itu-t (0) identified-organization (4) etsi (0) mobileDomain (0) 
-umts-Access (20) modules (3) sabp (3) version1 (1) sabp-IEs (2) } 
-
-DEFINITIONS AUTOMATIC TAGS ::= 
-
-BEGIN
-
-IMPORTS
-	maxNrOfErrors,
-	maxnoofSAI,
-	maxNrOfLevels,
-
-	id-MessageStructure,
-	id-TypeOfError
-
-FROM SABP-Constants
-
-	Criticality,
-	ProcedureCode,
-	TriggeringMessage,
-	ProtocolIE-ID
-FROM SABP-CommonDataTypes
-
-	ProtocolExtensionContainer{},
-
-	SABP-PROTOCOL-EXTENSION
-FROM SABP-Containers;
-
-
--- A
-
-Available-Bandwidth			::= INTEGER (0..20480)
--- bits/sec
-
--- B
-
-Broadcast-Message-Content ::= BIT STRING (SIZE (1..9968))-- This IE is sent from the CN to the RNC containing user information i.e.
--- the message.
-
-Broadcast-Message-Content-Validity-Indicator ::= ENUMERATED {
-	broadcast-Message-Content-not-valid,
-	...
-}
-
--- C
-
-Category ::= ENUMERATED { 
-	high-priority, 
-	background-priority,
-	normal-priority, 
-	default-priority,
-	...
-}
-
-Cause 					::= INTEGER {
-	parameter-not-recognised							(0),
-	parameter-value-invalid								(1),
-	valid-CN-message-not-identified 					(2),
-	service-area-identity-not-valid 					(3),
-	unrecognised-message 								(4),
-	missing-mandatory-element 							(5),
-	rNC-capacity-exceeded 								(6),
-	rNC-memory-exceeded 								(7),
-	service-area-broadcast-not-supported 				(8),
-	service-area-broadcast-not-operational 				(9),
-	message-reference-already-used 						(10),
-	unspecifed-error 									(11),
-	transfer-syntax-error								(12),
-	semantic-error										(13),
-	message-not-compatible-with-receiver-state			(14),
-	abstract-syntax-error-reject						(15),
-	abstract-syntax-error-ignore-and-notify				(16),
-	abstract-syntax-error-falsely-constructed-message	(17)
-} (0..255)
-
-Criticality-Diagnostics			::= SEQUENCE {
-	procedureCode			ProcedureCode			OPTIONAL,
-	triggeringMessage		TriggeringMessage		OPTIONAL,
-	procedureCriticality		Criticality			OPTIONAL,
-	iEsCriticalityDiagnostics		CriticalityDiagnostics-IE-List 	OPTIONAL,
-	iE-Extensions			ProtocolExtensionContainer { {CriticalityDiagnostics-ExtIEs} } OPTIONAL,
-	...
-}
-
-CriticalityDiagnostics-ExtIEs SABP-PROTOCOL-EXTENSION ::= {
-	...
-}
-
-CriticalityDiagnostics-IE-List ::= SEQUENCE (SIZE (1..maxNrOfErrors)) OF
-	SEQUENCE {
-		iECriticality		Criticality,
-		iE-ID				ProtocolIE-ID,
-		repetitionNumber		RepetitionNumber0		OPTIONAL,
-		iE-Extensions			ProtocolExtensionContainer { {CriticalityDiagnostics-IE-List-ExtIEs} } OPTIONAL,
-		...
-	}
-
-CriticalityDiagnostics-IE-List-ExtIEs SABP-PROTOCOL-EXTENSION ::= {
-	{	ID id-MessageStructure		CRITICALITY ignore		EXTENSION MessageStructure		PRESENCE optional	}|
-	{	ID id-TypeOfError			CRITICALITY ignore		EXTENSION TypeOfError			PRESENCE mandatory	},
-	...
-}
-
-
-MessageStructure ::= SEQUENCE (SIZE (1..maxNrOfLevels)) OF
-	SEQUENCE { 
-		iE-ID					ProtocolIE-ID,
-		repetitionNumber		RepetitionNumber1		OPTIONAL,
-		iE-Extensions			ProtocolExtensionContainer { {MessageStructure-ExtIEs} } OPTIONAL,
-		...
-	}
-
-
-MessageStructure-ExtIEs SABP-PROTOCOL-EXTENSION ::= {
-	...
-}
-
-
--- D
-
-Data-Coding-Scheme			::= BIT STRING (SIZE (8))
-
--- E
-
--- F
-
-Failure-List ::= SEQUENCE (SIZE (1..maxnoofSAI)) OF Failure-List-Item
-
-Failure-List-Item ::= SEQUENCE {
-	service-area-identifier		Service-Area-Identifier,
-	cause					Cause,
-		iE-Extensions		ProtocolExtensionContainer { {FailureListItemIE-ExtIEs} } OPTIONAL,
-		...
-}
-
-FailureListItemIE-ExtIEs SABP-PROTOCOL-EXTENSION ::= {
-...
-}
-
--- G
-
--- H
-
--- I
-
--- J
-
--- K
-
--- L
-
--- M
-
-Message-Identifier ::= BIT STRING (SIZE (16))
-
--- N
-
-New-Serial-Number				::= Serial-Number
-
-Number-of-Broadcasts-Completed-List ::=	SEQUENCE (SIZE (1..maxnoofSAI)) OF 
-	Number-of-Broadcasts-Completed-List-Item
-
-Number-of-Broadcasts-Completed-List-Item ::= SEQUENCE {
-	service-area-identifier		Service-Area-Identifier,
-	number-of-broadcasts-completed		INTEGER (0..65535),
-	number-of-broadcasts-completed-info	Number-Of-Broadcasts-Completed-Info			OPTIONAL,
-	iE-Extensions		ProtocolExtensionContainer { {NoOfBroadcastsCompletedListItemIE-ExtIEs} } OPTIONAL,
-		...
-}
-
-NoOfBroadcastsCompletedListItemIE-ExtIEs SABP-PROTOCOL-EXTENSION ::= {
-...
-}
-
-Number-Of-Broadcasts-Completed-Info		::= ENUMERATED {
-	overflow,
-	unknown,
-	...
-} 
-
-Number-of-Broadcasts-Requested		::= INTEGER {
-	broadcast-indefinitely (0)
-} (0..65535)
-
--- O
-
-Old-Serial-Number				::= Serial-Number
-
--- P
-
-Paging-ETWS-Indicator	::= ENUMERATED {
-	paging,
-	...
-}
-
--- Q
-
--- R
-
-Radio-Resource-Loading-List ::= SEQUENCE (SIZE (1..maxnoofSAI)) OF 
-	Radio-Resource-Loading-List-Item
-
-Radio-Resource-Loading-List-Item ::= SEQUENCE {
-	service-area-identifier		Service-Area-Identifier,
-	available-bandwidth		Available-Bandwidth,
-	iE-Extensions		ProtocolExtensionContainer { {RadioResourceLoadingListItemIE-ExtIEs} } OPTIONAL,
-		...
-}
-
-RadioResourceLoadingListItemIE-ExtIEs SABP-PROTOCOL-EXTENSION ::= {
-...
-}
-
-Recovery-Indication ::= ENUMERATED {
-	data-lost,
-	data-available
-}
-
-RepetitionNumber0			::= INTEGER(0..255)
-
-RepetitionNumber1			::= INTEGER(1..256)
-
-Repetition-Period			::= INTEGER (1..4096)
--- Each unit represents a repetition of one second to a maximum of
--- once per 4096 seconds (~1 hour).
-
-
--- S
-
-Serial-Number				::= BIT STRING (SIZE (16))
-
-
-Service-Area-Identifier	::= SEQUENCE {
-	pLMNidentity				OCTET STRING (SIZE (3))
-					-- Digits 0 to 9, two digits per octet.          --
-					-- Each octet encoded 0000 to 1001.              --
-					-- 1111 used as filler                           --
-					-- Bit 4 to 1 of octet n encoding digit 2n-1.    --
-					-- Bit 8 to 5 of octet n encoding digit 2n.      --
-					-- The PLMN identity consists of 3 digits from MCC     --
-					-- followed by either a filler plus 2 digits     --
-					-- from MNC (in case of 2 digit MNC) or 3 digits --
-					-- from MNC (in case of 3 digit MNC).            -- ,
-	lac				OCTET STRING (SIZE (2))
-					-- 0000 and FFFE not allowed                     -- ,
-	sac				OCTET STRING (SIZE (2))
-}
-
--- **TODO** The IE type for these parameters is not known as yet
-Service-Areas-List ::= SEQUENCE (SIZE (1..maxnoofSAI)) OF Service-Area-Identifier 
-
-
-
--- T
-
-TypeOfError ::= ENUMERATED {
-	not-understood,
-	missing,
-	...
-}
-
--- U
-
--- V
-
--- W
-
-WarningSecurityInfo ::= OCTET STRING (SIZE (50))
-
-Warning-Type ::= OCTET STRING (SIZE(2)) 
-
--- X
-
--- Y
-
-END
-9.3.5	Common Definitions
--- **************************************************************
---
--- Common definitions
---
--- **************************************************************
-
-SABP-CommonDataTypes {
-itu-t (0) identified-organization (4) etsi (0) mobileDomain (0) 
-umts-Access (20) modules (3) sabp (3) version1 (1) sabp-CommonDataTypes (3) } 
-
-DEFINITIONS AUTOMATIC TAGS ::= 
-
-BEGIN
-
-Criticality		::= ENUMERATED { reject, ignore, notify }
-
-Presence		::= ENUMERATED { optional, conditional, mandatory }
-
-ProcedureCode		::= INTEGER (0..255)
-
-ProtocolExtensionID	::= INTEGER (0..65535)
-
-ProtocolIE-ID		::= INTEGER (0..65535)
-
-TriggeringMessage		::= ENUMERATED {initiating-message, successful-outcome, unsuccessful-outcome, outcome}
-
-END
-9.3.6	Constant Definitions
-
--- **************************************************************
---
--- Constant definitions
---
--- **************************************************************
-
-SABP-Constants {
-itu-t (0) identified-organization (4) etsi (0) mobileDomain (0) 
-umts-Access (20) modules (3) sabp (3) version1 (1) sabp-Constants (4) } 
-
-DEFINITIONS AUTOMATIC TAGS ::= 
-
-BEGIN
-
--- **************************************************************
---
--- Elementary Procedures
---
--- **************************************************************
-
-id-Write-Replace 			INTEGER ::= 0
-id-Kill 				INTEGER ::= 1
-id-Load-Status-Enquiry 			INTEGER ::= 2
-id-Message-Status-Query 		INTEGER ::= 3
-id-Restart-Indication			INTEGER ::= 4
-id-Reset 				INTEGER ::= 5
-id-Failure-Indication			INTEGER ::= 6
-id-Error-Indication			INTEGER ::= 7
-
--- **************************************************************
---
--- IEs
---
--- **************************************************************
-
-id-Broadcast-Message-Content		INTEGER ::= 0
-id-Category 				INTEGER ::= 1
-id-Cause 				INTEGER ::= 2
-id-Criticality-Diagnostics	INTEGER ::=3
-id-Data-Coding-Scheme 			INTEGER ::= 4
-id-Failure-List 			INTEGER ::= 5
-id-Message-Identifier 			INTEGER ::= 6
-id-New-Serial-Number			INTEGER ::= 7
-id-Number-of-Broadcasts-Completed-List 	INTEGER ::= 8
-id-Number-of-Broadcasts-Requested 		INTEGER ::= 9
-id-Old-Serial-Number				INTEGER ::= 10
-id-Radio-Resource-Loading-List 		INTEGER ::= 11
-id-Recovery-Indication 			INTEGER ::= 12
-id-Repetition-Period 			INTEGER ::= 13
-id-Serial-Number 			INTEGER ::= 14
-id-Service-Areas-List 			INTEGER ::= 15
-id-MessageStructure				INTEGER ::= 16
-id-TypeOfError					INTEGER ::= 17
-id-Paging-ETWS-Indicator		INTEGER ::= 18
-id-Warning-Type					INTEGER ::= 19
-id-WarningSecurityInfo			INTEGER ::= 20 
-id-Broadcast-Message-Content-Validity-Indicator 	INTEGER ::= 21
-
--- **************************************************************
---
--- Extension constants
---
--- **************************************************************
-
--- **************************************************************
---
--- Lists
---
--- **************************************************************
-
-maxNrOfErrors				INTEGER ::= 256 
-maxnoofSAI			INTEGER ::= 65535 
-
-maxProtocolExtensions 			INTEGER ::= 65535
-maxProtocolIEs				INTEGER ::= 65535
-maxNrOfLevels						INTEGER ::= 256
-
-END
-9.3.7	Container Definitions
-
--- **************************************************************
---
--- Container definitions
---
--- **************************************************************
-
-SABP-Containers {
-itu-t (0) identified-organization (4) etsi (0) mobileDomain (0) 
-umts-Access (20) modules (3) sabp (3) version1 (1) sabp-Containers (5) } 
-
-DEFINITIONS AUTOMATIC TAGS ::= 
-
-BEGIN
-
--- **************************************************************
---
--- IE parameter types from other modules.
---
--- **************************************************************
-
-IMPORTS
-	Criticality,
-	Presence,
-	ProtocolExtensionID,
-	ProtocolIE-ID
-FROM SABP-CommonDataTypes
-
-	maxProtocolExtensions,
-	maxProtocolIEs
-FROM SABP-Constants;
-
--- **************************************************************
---
--- Class Definition for Protocol IEs
---
--- **************************************************************
-
-SABP-PROTOCOL-IES ::= CLASS {
-	&id				ProtocolIE-ID 		UNIQUE,
-	&criticality			Criticality		DEFAULT ignore,
-	&Value,
-	&presence			Presence
-}
-WITH SYNTAX {
-	ID				&id
-	CRITICALITY			&criticality
-	TYPE				&Value
-	PRESENCE			&presence
-}
-
--- **************************************************************
---
--- Class Definition for Protocol Extensions
---
--- **************************************************************
-
-SABP-PROTOCOL-EXTENSION ::= CLASS {
-	&id				ProtocolExtensionID 	UNIQUE,
-	&criticality			Criticality		DEFAULT ignore,
-	&Extension,
-	&presence		Presence
-}
-WITH SYNTAX {
-	ID				&id
-	CRITICALITY			&criticality
-	EXTENSION			&Extension
-	PRESENCE			&presence
-}
-
--- **************************************************************
---
--- Container for Protocol IEs
---
--- **************************************************************
-
-ProtocolIE-Container {SABP-PROTOCOL-IES : IEsSetParam} ::= 
-	SEQUENCE (SIZE (0..maxProtocolIEs)) OF
-	ProtocolIE-Field {{IEsSetParam}}
-
-ProtocolIE-Field {SABP-PROTOCOL-IES : IEsSetParam} ::= SEQUENCE {
-	id				SABP-PROTOCOL-IES.&id				({IEsSetParam}),
-	criticality			SABP-PROTOCOL-IES.&criticality			({IEsSetParam}{@id}),
-	value				SABP-PROTOCOL-IES.&Value	        	({IEsSetParam}{@id})
-}
-
--- **************************************************************
---
--- Container Lists for Protocol IE Containers
---
--- **************************************************************
-
-ProtocolIE-ContainerList {INTEGER : lowerBound, INTEGER : upperBound, SABP-PROTOCOL-IES : IEsSetParam} ::=
-	SEQUENCE (SIZE (lowerBound..upperBound)) OF
-	ProtocolIE-Container {{IEsSetParam}}
-
--- **************************************************************
---
--- Container for Protocol Extensions
---
--- **************************************************************
-
-ProtocolExtensionContainer {SABP-PROTOCOL-EXTENSION : ExtensionSetParam} ::= 
-	SEQUENCE (SIZE (1..maxProtocolExtensions)) OF
-	ProtocolExtensionField {{ExtensionSetParam}}
-
-ProtocolExtensionField {SABP-PROTOCOL-EXTENSION : ExtensionSetParam} ::= SEQUENCE {
-	id				SABP-PROTOCOL-EXTENSION.&id			({ExtensionSetParam}),
-	criticality			SABP-PROTOCOL-EXTENSION.&criticality		({ExtensionSetParam}{@id}),
-	extensionValue			SABP-PROTOCOL-EXTENSION.&Extension		({ExtensionSetParam}{@id})
-}
-
-
-END
-
-9.4	Message Transfer Syntax
-SABP shall use the ASN.1 Basic Packed Encoding Rules (BASIC-PER) Aligned Variant as transfer syntax as specified in ref. ITU-T Rec. X.691 [9].
-10	Handling of Unknown, Unforeseen or Erroneous Protocol Data
-10.1	General
-Protocol Error cases can be divided into three classes:
-•	Transfer Syntax Error;
-•	Abstract Syntax Error;
-•	Logical Error.
-Protocol errors can occur in the following functions within a receiving node:
-
-Figure 14: Protocol Errors in SABP
-The information stated in subclauses 10.2, 10.3 and 10.4, to be included in the message used when reporting an error, is what at minimum shall be included. Other optional information elements within the message may also be included, if available. This is also valid for the case when the reporting is done with a response message. The latter is an exception to what is stated in subclause 4.1.
-10.2	Transfer Syntax Error
-A Transfer Syntax Error occurs when the receiver is not able to decode the received physical message Transfer syntax errors are always detected in the process of ASN.1 decoding. If a Transfer Syntax Error occurs, the receiver should initiate Error Indication procedure with appropriate cause value for the Transfer Syntax protocol error.
-10.3	Abstract Syntax Error
-10.3.1	General
-An Abstract Syntax Error occurs when the receiving functional SABP entity:
-1.	receives IEs or IE groups that cannot be understood (unknown IE id);
-2.	receives IEs for which the logical range is violated (e.g.: ASN.1 definition: 0 to 15, the logical range is 0 to 10 (values 11 to 15 are undefined), and 12 will be received; this case will be handled as an abstract syntax error using criticality information sent by the originator of the message);
-3.	does not receive IEs or IE groups but according to the specified presence of the concerning object, the IEs or IE groups should have been present in the received message;
-4.	receives IEs or IE groups that are defined to be part of that message in wrong order or with too many occurrences of the same IE or IE group;
-5.	receives IEs or IE groups but according to the conditional presence of the concerning object and the specified condition, the IEs or IE groups should not have been present in the received message.
-Cases 1 and 2 (not comprehended IE/IE group) are handled based on received Criticality information. Case 3 (missing IE/IE group) is handled based on Criticality information and Presence information for the missing IE/IE group specified in the version of the specification used by the receiver. Case 4 (IEs or IE groups in wrong order or with too many occurrences) and Case 5 (erroneously present conditional IEs or IE groups) result in rejecting the procedure.
-If an Abstract Syntax Error occurs, the receiver shall read the remaining message and shall then for each detected Abstract Syntax Error act according to the Criticality Information and Presence Information for the IE/IE group due to which Abstract Syntax Error occurred in accordance with subclauses 10.3.4 and 10.3.5. The handling of cases 4 and 5 is specified in subclause 10.3.6.
-10.3.2	Criticality Information
-In the SABP messages there is criticality information set for individual IEs and/or IE groups. This criticality information instructs the receiver how to act when receiving an IE or an IE group that is not comprehended i.e. the entire item (IE or IE group) which is not (fully or partially) comprehended shall be treated in accordance with its own criticality information as specified in subclause 10.3.4.
-In addition, the criticality information is used in case of the missing IE/IE group abstract syntax error (see subclause 10.3.5).
-The receiving node shall take different actions depending on the value of the Criticality Information. The three possible values of the Criticality Information for an IE/IE group are:
--	Reject IE;
--	Ignore IE and Notify Sender;
--	Ignore IE.
-The following rules restrict when a receiving entity may consider an IE, an IE group or an EP not comprehended (not implemented), and when action based on criticality information is applicable:
-1.	IE or IE group: When one new or modified IE or IE group is implemented for one EP from a standard version, then other new or modified IEs or IE groups specified for that EP in that standard version shall be considered comprehended by the receiving entity (some may still remain unsupported).
-2.	EP: The comprehension of different EPs within a standard version or between different standard versions is not mandated. Any EP that is not supported may be considered not comprehended, even if another EP from that standard version is comprehended, and action based on criticality shall be applied.
-10.3.3	Presence Information
-For many IEs/IE groups which are optional according to the ASN.1 transfer syntax, SABP specifies separately if the presence of these IEs/IE groups is optional or mandatory with respect to RNS application by means of the presence field of the concerning object of class SABP-PROTOCOL-IES, SABP-PROTOCOL-IES-PAIR, SABP-PROTOCOL-EXTENSION or SABP-PRIVATE-IES.
-The presence field of the indicated classes supports three values:
-1.	Optional;
-2.	Conditional;
-3.	Mandatory.
-If an IE/IE group is not included in a received message and the presence of the IE/IE group is mandatory or the presence is conditional and the condition is true according to the version of the specification used by the receiver, an abstract syntax error occurs due to a missing IE/IE group.
-10.3.4	Not comprehended IE/IE group
-10.3.4.1	Procedure Code
-The receiving node shall treat the different types of received criticality information of the Procedure Code according to the following:
-Reject IE:
--	If a message is received with a Procedure Code marked with "Reject IE" which the receiving node does not comprehend, the receiving node shall reject the procedure using the Error Indication procedure.
-Ignore IE and Notify Sender:
--	If a message is received with a Procedure Code marked with "Ignore IE and Notify Sender" which the receiving node does not comprehend, the receiving node shall ignore the procedure and initiate the Error Indication procedure.
-Ignore IE:
--	If a message is received with a Procedure Code marked with "Ignore IE" which the receiving node does not comprehend, the receiving node shall ignore the procedure.
-When using the Error Indication procedure to reject a procedure or to report an ignored procedure it shall include the Procedure Code IE, the Triggering Message IE, and the Procedure Criticality IE in the Criticality Diagnostics IE.
-10.3.4.1A	Type of Message
-When the receiving node cannot decode the Type of Message IE, the Error Indication procedure shall be initiated with an appropriate cause value.
-10.3.4.2	IEs other than the Procedure Code and Type of Message
-The receiving node shall treat the different types of received criticality information of an IE/IE group other than the Procedure Code IE and Type of Message IE according to the following:
-Reject IE:
--	If a message initiating a procedure is received containing one or more IEs/IE groups marked with "Reject IE" which the receiving node does not comprehend; none of the functional requests of the message shall be executed. The receiving node shall reject the procedure and report the rejection of one or more IEs/IE groups using the message normally used to report unsuccessful outcome of the procedure. In case the information received in the initiating message was insufficient to determine a value for all IEs that are required to be present in the message used to report the unsuccessful outcome of the procedure, the receiving node shall instead terminate the procedure and initiate the Error Indication procedure.
--	If a message initiating a procedure that does not have a message to report unsuccessful outcome is received containing one or more IEs/IE groups marked with "Reject IE" which the receiving node does not comprehend, the receiving node shall terminate the procedure and initiate the Error Indication procedure.
--	If a response message is received containing one or more IEs marked with "Reject IE" which the receiving node does no comprehend, the receiving node shall consider the procedure as unsuccessfully terminated and initiate local error handling.
-Ignore IE and Notify Sender:
--	If a message initiating a procedure is received containing one or more Ies/IE groups marked with "Ignore IE and Notify Sender" which the receiving node does not comprehend, the receiving node shall ignore the content of the not comprehended IEs/IE groups, continue with the procedure as if the not comprehended IEs/IE groups were not received (except for the reporting) using the understood IEs/IE groups, and report in the response message of the procedure that one or more IEs/IE groups have been ignored. In case the information received in the initiating message was insufficient to determine a value for all IEs that are required to be present in the response message, the receiving node shall instead terminate the procedure and initiate the Error Indication procedure.
--	if a message initiating a procedure that does not have a message to report the outcome of the procedure is received containing one or more IEs/IE groups marked with "Ignore IE and Notify Sender" which the receiving node does not comprehend, the receiving node shall ignore the content of the not comprehended IEs/IE groups, continue with the procedure as if the not comprehended IEs/IE groups were not received (except for the reporting) using the understood IEs/IE groups, and initiate the Error Indication procedure to report that one or more IEs/IE groups have been ignored.
--	If a response message is received containing one or more IEs/IE groups marked with "Ignore IE and Notify Sender" which the receiving node does not comprehend, the receiving node shall ignore the content of the not comprehended IE/IE groups, continue with the procedure as if the not comprehended IEs/IE groups were not received (except for the reporting) using the understood IEs/IE groups and initiate the Error Indication procedure.
-Ignore IE:
--	If a message initiating a procedure is received containing one or more IEs/IE groups marked with "Ignore IE" which the receiving node does not comprehend, the receiving node shall ignore the content of the not comprehended IEs/IE groups and continue with the procedure as if the not comprehended IEs/IE groups were not received using only the understood IEs/IE groups.
--	If a response message is received containing one or more IEs/IE groups marked with "Ignore IE" which the receiving node does not comprehend, the receiving node shall ignore the content of the not comprehended IEs/IE groups and continue with the procedure as if the not comprehended IEs/IE groups were not received using the understood IEs/IE groups.
-When reporting not comprehended IEs/IE groups marked with "Reject IE" or "Ignore IE and Notify Sender" using a response message defined for the procedure, the Information Element Criticality Diagnostics IE shall be included in the Criticality Diagnostics IE for each reported IE/IE group. In the Information Element Criticality Diagnostics IE the Repetition Number IE shall be included and in addition, if the not comprehended IE/IE group is not at message hierarchy level 1 (top level; see annex A) also the Message Structure IE shall be included.
-When reporting not comprehended IEs/IE groups marked with "Reject IE" or "Ignore IE and Notify Sender" using the Error Indication procedure, the Procedure Code IE, the Triggering Message IE, Procedure Criticality IE, and the Information Element Criticality Diagnostics IE shall be included in the Criticality Diagnostics IE for each reported IE/IE group. In the Information Element Criticality Diagnostics IE the Repetition Number IE shall be included and in addition, if the not comprehended IE/IE group is not at message hierarchy level 1 (top level; see annex A) also the Message Structure IE shall be included.
-10.3.5	Missing IE or IE group
-The receiving node shall treat the missing IE/IE group according to the criticality information for the missing IE/IE group in the received message specified in the version of the present document used by the receiver:
-Reject IE:
--	if a received message initiating a procedure is missing one or more IEs/IE groups with specified criticality "Reject IE"; none of the functional requests of the message shall be executed. The receiving node shall reject the procedure and report the missing IEs/IE groups using the message normally used to report unsuccessful outcome of the procedure. In case the information received in the initiating message was insufficient to determine a value for all IEs that are required to be present in the message used to report the unsuccessful outcome of the procedure, the receiving node shall instead terminate the procedure and initiate the Error Indication procedure.
--	if a received message initiating a procedure that does not have a message to report unsuccessful outcome is missing one or more IEs/IE groups with specified criticality "Reject IE", the receiving node shall terminate the procedure and initiate the Error Indication procedure.
--	if a received response message is missing one or more IEs/IE groups with specified criticality "Reject IE, the receiving node shall consider the procedure as unsuccessfully terminated and initiate local error handling.
-Ignore IE and Notify Sender:
--	if a received message initiating a procedure is missing one or more IEs/IE groups with specified criticality "Ignore IE and Notify Sender", the receiving node shall ignore that those IEs are missing and continue with the procedure based on the other IEs/IE groups present in the message and report in the response message of the procedure that one or more IEs/IE groups were missing. In case the information received in the initiating message was insufficient to determine a value for all IEs that are required to be present in the response message, the receiving node shall instead terminate the procedure and initiate the Error Indication procedure.
--	if a received message initiating a procedure that does not have a message to report the outcome of the procedure is missing one or more IEs/IE groups with specified criticality "Ignore IE and Notify Sender", the receiving node shall ignore that those IEs are missing and continue with the procedure based on the other IEs/IE groups present in the message and initiate the Error Indication procedure to report that one or more IEs/IE groups were missing.
--	if a received response message is missing one or more IEs/IE groups with specified criticality "Ignore IE and Notify Sender", the receiving node shall ignore that those IEs are missing and continue with the procedure based on the other IEs/IE groups present in the message and initiate the Error Indication procedure to report that one or more IEs/IE groups were missing.
-Ignore IE:
--	if a received message initiating a procedure is missing one or more IEs/IE groups with specified criticality "Ignore IE", the receiving node shall ignore that those IEs are missing and continue with the procedure based on the other IEs/IE groups present in the message.
--	if a received response message is missing one or more IEs/IE groups with specified criticality "Ignore IE", the receiving node shall ignore that those IEs/IE groups are missing and continue with the procedure based on the other IEs/IE groups present in the message.
-When reporting missing IEs/IE groups with specified criticality "Reject IE" or "Ignore IE and Notify Sender" using a response message defined for the procedure, the Information Element Criticality Diagnostics IE shall be included in the Criticality Diagnostics IE for each reported IE/IE group. In the Information Element Criticality Diagnostics IE the Repetition Number IE shall be included and in addition, if the missing IE/IE group is not at message hierarchy level 1 (top level; see annex A) also the Message Structure IE shall be included.
-When reporting missing IEs/IE groups with specified criticality "Reject IE" or "Ignore IE and Notify Sender" using the Error Indication procedure, the Procedure Code IE, the Triggering Message IE, Procedure Criticality IE, and the Information Element Criticality Diagnostics IE shall be included in the Criticality Diagnostics IE for each reported IE/IE group. In the Information Element Criticality Diagnostics IE  the Repetition Number IE shall be included and in addition, if the missing IE/IE group is not at message hierarchy level 1 (top level; see annex A) also the Message Structure IE shall be included.
-10.3.6	IEs or IE groups received in wrong order or with too many occurrences or erroneously present
-If a message with IEs or IE groups in wrong order or with too many occurrences is received or if IEs or IE groups with a conditional presence are present when the condition is not met (i.e. erroneously present), the receiving node shall behave according to the following:
--	If a message initiating a procedure is received containing IEs or IE groups in wrong order or with too many occurrences or erroneously present, none of the functional requests of the message shall be executed. The receiving node shall reject the procedure and report the cause value "Abstract Syntax Error (Falsely Constructed Message)" using the message normally used to report unsuccessful outcome of the procedure. In case the information received in the initiating message was insufficient to determine a value for all IEs that are required to be present in the message used to report the unsuccessful outcome of the procedure, the receiving node shall instead terminate the procedure and initiate the Error Indication procedure.
--	If a message initiating a procedure that does not have a message to report unsuccessful outcome is received containing IEs or IE groups in wrong order or with too many occurrences or erroneously present, the receiving node shall terminate the procedure and initiate the Error Indication procedure, and use cause value "Abstract Syntax Error (Falsely Constructed Message)".
--	If a response message is received containing IEs or IE groups in wrong order or with too many occurrences or erroneously present, the receiving node shall consider the procedure as unsuccessfully terminated and initiate local error handling.
-When determining the correct order only the IEs specified in the specification version used by the receiver shall be considered.
-10.4	Logical Error
-Logical error situations occur when a message is comprehended correctly, but the information contained within the message is not valid (i.e. semantic error), or describes a procedure which is not compatible with the state of the receiver. In these conditions, the following behaviour shall be performed (unless otherwise specified) as defined by the class of the elementary procedure, irrespective of the criticality information of the IE's/IE groups containing the erroneous values.
-Class 1:
-Where the logical error occurs in a request message of a class 1 procedure, and the procedure has a message to report this unsuccessful outcome, this message shall be sent with an appropriate cause value. Typical cause values are:
--	Semantic Error;
--	Message not compatible with receiver state.
-Where the logical error is contained in a request message of a class 1 procedure, and the procedure does not have a message to report this unsuccessful outcome, the procedure shall be terminated and the Error Indication procedure shall be initiated with an appropriate cause value. The Procedure Code IE and the Triggering Message IE within the Criticality Diagnostics IE shall then be included in order to identify the message containing the logical error.
-Where the logical error exists in a response message of a class 1 procedure, the procedure shall be considered as unsuccessfully terminated and local error handling shall be initiated.
-Class 2:
-Where the logical error occurs in a message of a class 2 procedure, the procedure shall be terminated and the Error Indication procedure shall be initiated with an appropriate cause value. The Procedure Code IE and the Triggering Message IE within the Criticality Diagnostics IE shall then be included in order to identify the message containing the logical error.
-10.5	Exceptions
-The error handling for all the cases described hereafter shall take precedence over any other error handling described in the other subclauses of clause 10.
--	If any type of error (Transfer Syntax Error, Abstract Syntax Error or Logical Error) is detected in the ERROR INDICATION message, it shall not trigger the Error Indication procedure in the receiving Node but local error handling.
--	In case a response message or Error Indication message needs to be returned, but the information necessary to determine the receiver of that message is missing, the procedure shall be considered as unsuccessfully terminated and local error handling shall be initiated.
--	If an error that terminates a procedure occurs, the returned cause value shall reflect the error that caused the termination of the procedure even if one or more abstract syntax errors with criticality “ignore and notify” have earlier occurred within the same procedure.
-
-Annex A (informative):
-Guidelines for Usage of the Criticality Diagnostics IE
-A.1	EXAMPLE MESSAGE Layout
-Assume the following message format:
-IE/Group NamePresenceRangeIE type and referenceSemantics descriptionCriticalityAssigned CriticalityMessage TypeMYESrejectAMYESrejectBMYESreject >E1..<maxE>EACHignore>>F1..<maxF>->>>G0..3, …EACHignore>>H1..<maxH>EACHignore>>>G0..3, …EACHignore and notify>>GMYESreject>>J1..<maxJ>->>>G0..3, …EACHrejectCMYESreject >K1..<maxK>EACHignore and notify>>L1..<maxL>->>>MO-DMYESreject
-Note 1.	The IEs F, J, and L do not have assigned criticality. The IEs F, J, and L are consequently realised as the ASN.1 type SEQUENCE OF of "ordinary" ASN.1 type, e.g. INTEGER. On the other hand, the repeatable IEs with assigned criticality are realised as the ASN.1 type SEQUENCE OF of an IE object, e.g. ProtocolIE-Container.
-For the corresponding ASN.1 layout, see subclause A.4.
-
-A.2	Example on a Received EXAMPLE MESSAGE
-Assume further more that a received message based on the above tabular format is according to figure A.1.
-
-Figure A.1: Example of content of a received SABP message based on the EXAMPLE MESSAGE
-
-A.3	Content of Criticality Diagnostics 
-A.3.1	Example 1
-
-Figure A.2: Example of a received SABP message containing a not comprehended IE
-If there is an error within the instance marked as grey in the IE G in the IE J shown in the figure A.2, this will be reported within the Information Element Criticality Diagnostics IE within the Criticality Diagnostics IE as follows:
-IE nameValueCommentIE CriticalityrejectCriticality for IE on the reported level, i.e. level 4.IE IDid-GIE ID from the reported level, i.e. level 4.Repetition Number11Repetition number on the reported level, i.e. level 4. 
-(Since the IE E (level 2) is the lowest level included in the Message Structure IE this is the eleventh occurrence of IE G within the IE E (level 2).Type of Errornot understoodMessage Structure, first repetition>IE IDid-BIE ID from level 1. Message Structure, second repetition>IE IDid-EIE ID from the lowest level above the reported level, i.e. level 2. >Repetition Number3Repetition number from the lowest level above the reported level, i.e. level 2. 
-Note 2.	The IE J on level 3 cannot be included in the Message Structure IE since they have no criticality of their own.
-Note 3.	The repetition number of the reported IE indicates the number of repetitions of IE G received up to the detected erroneous repetition, counting all occurrences of the IE G below the same instance of the previous level with assigned criticality (instance 3 of IE E on level 2).
-
-A.3.2	Example 2
-
-Figure A.3: Example of a received SABP message containing a not comprehended IE
-If there is an error within the second instance (marked as grey) in the sequence (IE L in the tabular format) on level 3 below IE K in the structure shown in the figure A.3, this will be reported within the Information Element Criticality Diagnostics IE within the Criticality Diagnostics IE as follows:
-IE nameValueCommentIE Criticalityignore and notifyCriticality for IE on the reported level, i.e. level 2.IE IDid-KIE ID from the reported level, i.e. level 2.Repetition Number3Repetition number on the reported level, i.e. level 2. Type of Errornot understoodMessage Structure, first repetition>IE IDid-CIE ID from the lowest level above the reported level, i.e. level 1. 
-Note 4.	The IE L on level 3 cannot be reported individually included in the Message Structure IE since it has no criticality of its own.
-
-
-A.3.3	Example 3
-
-Figure A.4: Example of a received SABP message containing a not comprehended IE
-If there is an error within the instance marked as grey in the IE G in the IE H shown in the figure A.4, this will be reported within the Information Element Criticality Diagnostics IE within the Criticality Diagnostics IE as follows:
-IE nameValueCommentIE Criticalityignore and notifyCriticality for IE on the reported level, i.e. level 4.IE IDid-GIE ID from the reported level, i.e. level 4.Repetition Number2Repetition number on the reported level, i.e. level 4. Type of Errornot understoodMessage Structure, first repetition>IE IDid-BIE ID from level 1. Message Structure, second repetition>IE IDid-EIE ID from level 2. >Repetition Number3Repetition number from level 2. Message Structure, third repetition>IE IDid-HIE ID from the lowest level above the reported level, i.e. level 3. >Repetition Number1Repetition number from the lowest level above the reported level, i.e. level 3. 
-Note 5.	The repetition number of level 4 indicates the number of repetitions of IE G received up to the detected erroneous repetition, counted below the same instance of the previous level with assigned criticality (instance 1 of IE H on level 3).
-
-
-A.3.4	Example 4
-
-Figure A.5: Example of a received SABP message containing a not comprehended IE
-If there is an error within the instance marked as grey in the IE G in the IE E shown in the figure A.5, this will be reported within the Information Element Criticality Diagnostics IE within the Criticality Diagnostics IE as follows:
-IE nameValueCommentIE CriticalityrejectCriticality for IE on the reported level, i.e. level 3.IE IDid-GIE ID from the reported level, i.e. level 3.Repetition Number5Repetition number on the reported level, i.e. level 3. 
-(Since the IE E (level 2) is the lowest level included in the Message Structure IE this is the fifth occurrence of IE G within the IE E (level 2).Type of Errornot understoodMessage Structure, first repetition>IE IDid-BIE ID from level 1. Message Structure, second repetition>IE IDid-EIE ID from the lowest level above the reported level, i.e. level 2. >Repetition Number3Repetition number from the lowest level above the reported level, i.e. level 2. 
-Note 6.	The repetition number of the reported IE indicates the number of repetitions of IE G received up to the detected erroneous repetition, counting all occurrences of the IE G below the same instance of the previous level with assigned criticality (instance 3 of IE E on level 2).
-
-A.3.5	Example 5
-
-Figure A.6: Example of a received SABP message with a missing IE
-If the instance marked as grey in the IE G in the IE E shown in the figure A.6, is missing this will be reported within the Information Element Criticality Diagnostics IE within the Criticality Diagnostics IE as follows:
-IE nameValueCommentIE CriticalityrejectCriticality for IE on the reported level, i.e. level 3.IE IDid-GIE ID from the reported level, i.e. level 3.Repetition Number4Repetition number up to the missing IE on the reported level, i.e. level 3. 
-(Since the IE E (level 2) is the lowest level included in the Message Structure IE there have been four occurrences of IE G within the IE E (level 2) up to the missing occurrence.Type of ErrormissingMessage Structure, first repetition>IE IDid-BIE ID from level 1. Message Structure, second repetition>IE IDid-EIE ID from the lowest level above the reported level, i.e. level 2. >Repetition Number3Repetition number from the lowest level above the reported level, i.e. level 2. 
-Note 7.	The repetition number of the reported IE indicates the number of repetitions of IE G received up to but not including the missing occurrence, counting all occurrences of the IE G below the same instance of the previous level with assigned criticality (instance 3 of IE E on level 2).
-
-A.4	ASN.1 of EXAMPLE MESSAGE
-ExampleMessage ::= SEQUENCE {
-	ProtocolIEs			ProtocolIE-Container		{{ExampleMessage-IEs}},
-	ProtocolExtensions	ProtocolExtensionContainer	{{ExampleMessage-Extensions}}	OPTIONAL,
-	...
-}
-
-ExampleMessage-IEs SABP-PROTOCOL-IES ::= {
-	{ ID id-A	CRITICALITY reject	TYPE A	PRESENCE mandatory} |
-	{ ID id-B	CRITICALITY reject	TYPE B	PRESENCE mandatory} |
-	{ ID id-C	CRITICALITY reject	TYPE C	PRESENCE mandatory} |
-	{ ID id-D	CRITICALITY reject	TYPE D	PRESENCE mandatory} ,
-	...
-}
-
-B ::= SEQUENCE {
-	e				E-List,
-	iE-Extensions	ProtocolExtensionContainer { {B-ExtIEs} }	OPTIONAL,
-	...
-}
-
-B-ExtIEs SABP-PROTOCOL-EXTENSION ::= {
-	...
-}
-
-E-List ::= SEQUENCE (SIZE (1..maxE)) OF ProtocolIE-Container { {E-IEs} }
-
-E-IEs SABP-PROTOCOL-IES ::= {
-	{ ID id-E	CRITICALITY ignore	TYPE E	PRESENCE mandatory	},
-	...
-}
-
-E ::= SEQUENCE {
-	f				F-List,
-	h				H-List,
-	g				G-List1,
-	j				J-List,
-	iE-Extensions	ProtocolExtensionContainer { {E-ExtIEs} }	OPTIONAL,
-	...
-}
-
-E-ExtIEs SABP-PROTOCOL-EXTENSION ::= {
-	...
-}
-
-F-List ::= SEQUENCE (SIZE (1..maxF)) OF F
-
-F ::= SEQUENCE {
-	g				G-List2	OPTIONAL,
-	iE-Extensions	ProtocolExtensionContainer { {F-ExtIEs} }	OPTIONAL,
-	...
-}
-
-F-ExtIEs	SABP-PROTOCOL-EXTENSION ::= {
-	...
-}
-
-G-List2 ::= SEQUENCE (SIZE (1..3, ...)) OF ProtocolIE-Container { {G2-IEs} }
-
-G2-IEs SABP-PROTOCOL-IES ::= {
-	{ ID id-G	CRITICALITY ignore	TYPE G	PRESENCE mandatory	}
-	...
-}
-
-H-List ::= SEQUENCE (SIZE (1..maxH)) OF ProtocolIE-Container { {H-IEs} }
-
-H-IEs SABP-PROTOCOL-IES ::= {
-	{ ID id-H	CRITICALITY ignore	TYPE H	PRESENCE mandatory	},
-	...
-}
-
-H ::= SEQUENCE {
-	g				G-List3	OPTIONAL,
-	iE-Extensions					ProtocolExtensionContainer { {H-ExtIEs} } OPTIONAL,
-	...
-}
-
-H-ExtIEs SABP-PROTOCOL-EXTENSION ::= {
-	...
-}
-
-G-List3 ::= SEQUENCE (SIZE (1..3, ...)) OF ProtocolIE-Container { {G3-IEs} }
-
-G3-IEs SABP-PROTOCOL-IES ::= {
-	{ ID id-G	CRITICALITY notify	TYPE G	PRESENCE mandatory	},
-	...
-}
-
-G-List1 ::= ProtocolIE-Container { {G1-IEs} }
-
-G1-IEs SABP-PROTOCOL-IES ::= {
-	{ ID id-G	CRITICALITY reject	TYPE G	PRESENCE mandatory	},
-	...
-}
-
-J-List ::= SEQUENCE (SIZE (1..maxJ)) OF J
-
-J ::= SEQUENCE {
-	g				G-List4	OPTIONAL,
-	iE-Extensions	ProtocolExtensionContainer { {J-ExtIEs} }	OPTIONAL,
-	...
-}
-
-J-ExtIEs	SABP-PROTOCOL-EXTENSION ::= {
-	...
-}
-
-G-List4 ::= SEQUENCE (SIZE (1..3, ...)) OF ProtocolIE-Container { {G4-IEs} }
-
-G4-IEs SABP-PROTOCOL-IES ::= {
-	{ ID id-G	CRITICALITY reject	TYPE G	PRESENCE mandatory	},
-	...
-}
-
-C ::= SEQUENCE {
-	k				K-List,
-	iE-Extensions	ProtocolExtensionContainer { {C-ExtIEs} }	OPTIONAL,
-	...
-}
-
-C-ExtIEsA -PROTOCOL-EXTENSION ::= {
-	...
-}
-
-K-List ::= SEQUENCE (SIZE (1..maxK)) OF ProtocolIE-Container { {K-IEs} }
-
-K-IEs SABP-PROTOCOL-IES ::= {
-	{ ID id-K	CRITICALITY notify	TYPE K	PRESENCE mandatory	},
-	...
-}
-
-K ::= SEQUENCE {
-	l				L-List,
-	iE-Extensions	ProtocolExtensionContainer { {K-ExtIEs} }	OPTIONAL,
-	...
-}
-
-K-ExtIEs SABP-PROTOCOL-EXTENSION ::= {
-	...
-}
-
-L-List ::= SEQUENCE (SIZE (1..maxL)) OF L
-
-L ::= SEQUENCE {
-	m				M	OPTIONAL,
-	iE-Extensions	ProtocolExtensionContainer { {L-ExtIEs} }	OPTIONAL,
-	...
-}
-
-L-ExtIEs SABP-PROTOCOL-EXTENSION ::= {
-	...
-}
-
-ExampleMessage-Extensions SABP-PROTOCOL-EXTENSION ::= {
-	...
-}
-
-
-Annex B (informative):
-Change history
-Change historyTSG RAN#VersionCRTdoc RANNew VersionSubject/CommentRAN_07---3.0.0Approved at TSG RAN #7 and placed under Change ControlRAN_083.0.0-RP-0002393.1.0Approved at TSG RAN #8RAN_093.1.0011
-012
-014
-015
-016
-017
-018
-019
-020
-021
-022
-023RP-0003773.2.0Approved at TSG RAN #9RAN_103.2.0024
-025
-026
-027
-028
-029RP-0006163.3.0Approved at TSG RAN #10RAN_113.3.0030031
-032
-033
-034RP-0101143.4.0Approved at TSG RAN #11
-Change historyDateTSG #TSG Doc.CRRevSubject/CommentOldNewMarch 0111--Approved at TSG RAN #11 and placed under Change Control-4.0.006/200112RP-010377036,038,040,042,043,044,048,050Approved at TSG RAN #124.0.04.1.009/200113RP-0105820511SABP criticality4.1.04.2.009/200113RP-0105820521Correction to the Error handling of the ERROR INDICATION message4.1.04.2.009/200113RP-0105820561Error handling of the Erroneously Present Conditional Ies4.1.04.2.009/200113RP-0105820581Clarification of chapter 104.1.04.2.009/200113RP-0105820601SABP General Corrections4.1.04.2.009/200113RP-0105820622Clarification of the usage of the Number of Broadcasts Requested IE4.1.04.2.009/200113RP-0105820641Clarification of the usage of the SABP Reset Procedure4.1.04.2.009/200113RP-0105820662Clarification of the usage of the Service Areas List IE within the Reset Procedure4.1.04.2.012/200114RP-0108520681SAI Clarification4.2.04.3.012/200114RP-010852070Bitstrings ordering4.2.04.3.012/200114RP-010852072Procedure Code Criticality in Error Indication4.2.04.3.012/200114RP-0108520742Addition of amendment to clarify the PER encoding of bitstrings4.2.04.3.012/200114RP-010852076Section 9.2.0 missing4.2.04.3.012/200114RP-0108520782CR on 25.419 (R4) Usage of ''Number of Broadcasts Completed List' IE4.2.04.3.012/200114RP-010852080Correction the Clause 10 Error Handling4.2.04.3.003/200215RP-020167082Correction of the value Default in Category IE4.3.04.4.003/200215RP-0201670841Correction of the wording of maximum value4.3.04.4.003/200215RP-020167086Service expected from the transport layer4.3.04.4.003/200215RP-0201670881ASN.1 take precedence if contradiction between ASN.1 and tabular4.3.04.4.003/200215RP-0201670901Mismatch the type of some IE between 24.419 and 25.3244.3.04.4.003/200215RP-020167092Correction of the usage of Write-Replace Failure message4.3.04.4.003/200215RP-020167094Error Indication correction4.3.04.4.003/200215--Approved at TSG RAN #15 and placed under Change Control-5.0.006/200216RP-020404097Criticality Information Decoding Failure Handling5.0.05.1.006/200216RP-0204041001Clarification for the usage of the cause value5.0.05.1.006/200216RP-020404103SABP: WRITE-REPLACE Procedure Clarification5.0.05.1.009/200217RP-0206021061Correction to ASN.1 coding: criticality information missing5.1.05.2.003/200319RP-0300571081Correction of Write and Replace functions5.2.05.3.006/200320RP-0303151121Correction of Kill Unsuccessful Outcome5.3.05.4.006/200320RP-030326117Correction of Failure message used for logical errors5.3.05.4.009/200321RP-030445118Alignment of title and sub-clause text of chapter 10.3.4.25.4.05.5.009/200321RP-0304461191Removal of the note in chapter 105.4.05.5.009/200321RP-0304381242Correction of number of broadcast to be reported 5.4.05.5.012/200322RP-030673130Correction of finite number of broadcast5.5.05.6.012/200322---Introduction of Release 6 specification5.6.06.0.003/200423RP-0400631321Correction to 25.419 for Broadcast Message Content IE6.0.06.1.012/200426RP-040441133outdated ITU-T reference6.1.06.2.003/200631---Introduction of Release 7 specification6.2.07.0.012/200842RP-0808571352CR on ETWS support in UTRAN SABP7.0.08.0.012/200842RP-0808571361CR on Security Information for Primary Notification7.0.08.0.012/200946RP-0911791381Correction of ETWS for Rel8 HSPA8.0.08.1.012/2009----Creation of Rel-9 version based on v8.1.08.1.09.0.003/2011SP-49SP-100629Clarification on the use of References (TS 21.801 CR#0030)9.0.09.0.103/2011Creation of Rel-10 version based on v9.0.19.0.110.0.006/201152RP-110685140-Removal of unused references10.0.010.1.009/201153RP-1112231411Correction of a typo in ASN.1 code10.1.010.2.009/2012Update to Rel-11 version (MCC)10.2.011.0.003/201359RP-1302121512Invalidation of ETWS with security feature11.0.011.1.009/2014Update to Rel-12 version (MCC)11.1.012.0.001/201466RP-1420941523Adding a new reference of TS 25.92112.0.012.1.012/2015Update to Rel-13 version (MCC)12.1.013.0.0
-3GPP TS 25.419 V13.0.0 (2015-12)
-60
-Release 13
-
-
-3GPP
-
-3GPP TS 25.419 V13.0.0 (2015-12)
-78
-Release 13
-
-
-3GPP
-

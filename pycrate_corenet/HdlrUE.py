@@ -1,9 +1,10 @@
 # -*- coding: UTF-8 -*-
 #/**
 # * Software Name : pycrate
-# * Version : 0.3
+# * Version : 0.4
 # *
 # * Copyright 2017. Benoit Michau. ANSSI.
+# * Copyright 2020. Benoit Michau. P1Sec.
 # *
 # * This library is free software; you can redistribute it and/or
 # * modify it under the terms of the GNU Lesser General Public
@@ -27,10 +28,11 @@
 # *--------------------------------------------------------
 #*/
 
-from .utils      import *
 from .HdlrUEIuCS import *
 from .HdlrUEIuPS import *
 from .HdlrUES1   import *
+from .HdlrUENG   import *
+from .utils      import *
 
 
 class UEd(SigStack):
@@ -43,11 +45,12 @@ class UEd(SigStack):
     #--------------------------------------------------------------------------#
     #
     # verbosity level
-    DEBUG              = ('ERR', 'WNG', 'INF', 'DBG')
-    # to log UE-related RANAP and S1AP for all UE
+    DEBUG              = ('VLN', 'ERR', 'WNG', 'INF', 'DBG')
+    # to log UE-related RANAP, S1AP and NGAP for all UE
     TRACE_ASN_RANAP_CS = False
     TRACE_ASN_RANAP_PS = False
     TRACE_ASN_S1AP     = False
+    TRACE_ASN_NGAP     = False
     # to log UE NAS over IuCS (except SMS) for all UE
     TRACE_NAS_CS       = False
     # to log UE NAS over IuPS for all UE
@@ -58,6 +61,10 @@ class UEd(SigStack):
     TRACE_NAS_EPS      = False
     # to log UE NAS containing SMS for all UE
     TRACE_NAS_SMS      = False
+    # to log UE 5G NAS (potentially) encrypted signalling for all UE
+    TRACE_NAS_5GS_SEC  = False
+    # to log UE 5G NAS clear-text signalling for all UE
+    TRACE_NAS_5GS      = False
     
     
     #--------------------------------------------------------------------------#
@@ -68,10 +75,11 @@ class UEd(SigStack):
     IMSI   = None
     IMEI   = None
     IMEISV = None
-    # temporary identities (TMSI / PTMSI are uint32)
-    TMSI   = None
-    PTMSI  = None
-    MTMSI  = None
+    # temporary identities (TMSI / PTMSI / MTMSI / FGTMSI are uint32)
+    TMSI   = None # CS domain
+    PTMSI  = None # PS domain
+    MTMSI  = None # EPS domain
+    FGTMSI = None # 5GS domain
     
     #--------------------------------------------------------------------------#
     # CorenetServer reference
@@ -84,18 +92,19 @@ class UEd(SigStack):
     #--------------------------------------------------------------------------#
     # 
     # Radio Access Technology (str)
-    RAT = None
-    # specific Iu / S1 signaling handler
+    RAT  = None
+    # specific Iu / S1 / NG signaling handler
     IuCS = None
     IuPS = None
     S1   = None
+    NG   = None
     #
     # location parameters
     PLMN = None # string of digits
     LAC  = None # uint16
     RAC  = None # uint8
     SAC  = None # uintX
-    TAC  = None # uintX
+    TAC  = None # uint16 (S1) or uint24 (NG)
     
     def _log(self, logtype, msg):
         if logtype[:3] == 'TRA':
@@ -110,11 +119,17 @@ class UEd(SigStack):
         if imsi:
             self.IMSI = imsi
         elif 'tmsi' in kw:
+            # CS domain, 3G
             self.TMSI = kw['tmsi']
         elif 'ptmsi' in kw:
+            # PS domain, 3G
             self.PTMSI = kw['ptmsi']
         elif 'mtmsi' in kw:
+            # EPS domain, 4G
             self.MTMSI = kw['mtmsi']
+        elif 'fgtmsi' in kw:
+            # 5GS domain, 5G
+            self.FGTMSI = kw['fgtmsi']
         #
         # init capabilities
         self.Cap = {}
@@ -123,6 +138,7 @@ class UEd(SigStack):
         self.IuCS = UEIuCSd(self)
         self.IuPS = UEIuPSd(self)
         self.S1   = UES1d(self)
+        self.NG   = UENGd(self)
         self._last_ran = None
         #
         if 'config' in kw:
@@ -168,6 +184,11 @@ class UEd(SigStack):
                 apncfg['RAB'] = cpdict(self.S1.ESM.RABConfig[apn])
                 apncfg['RAB']['QCI'] = apncfg['QCI']
                 self.S1.ESM.PDNConfig[apn] = apncfg
+        #
+        self.NG.FGSM.PDUConfig = {}
+        for pduconfig in config['PDU']:
+            # TODO: initialize 5G SM config with allowed PDU Sessions
+            pass
     
     def set_ran(self, ran, ctx_id, sid=None, dom=None):
         # UE going connected
@@ -176,6 +197,8 @@ class UEd(SigStack):
             if self.S1.is_connected():
                 # error: already linked with another ran
                 raise(CorenetErr('UE already connected through a S1 link'))
+            elif self.NG.is_connected():
+                raise(CorenetErr('UE already connected through a NG link'))
             #
             if dom != 'PS':
                 # IuCS stack
@@ -204,6 +227,8 @@ class UEd(SigStack):
             if self.IuCS.is_connected() or self.IuPS.is_connected():
                 # error: already linked with another ran
                 raise(CorenetErr('UE already connected through an Iu link'))
+            elif self.NG.is_connected():
+                raise(CorenetErr('UE already connected through a NG link'))
             #
             # S1 stack
             if not self.S1.is_connected():
@@ -215,6 +240,25 @@ class UEd(SigStack):
                 # error: already linked with another ENB
                 raise(CorenetErr('UE already connected through another S1 link'))
             self._last_ran = self.S1
+        #
+        elif ran.__class__.__name__ == 'GNBd':
+            #
+            if self.IuCS.is_connected() or self.IuPS.is_connected():
+                # error: already linked with another ran
+                raise(CorenetErr('UE already connected through an Iu link'))
+            elif self.S1.is_connected():
+                raise(CorenetErr('UE already connected through a S1 link'))
+            #
+            # NG stack
+            if not self.NG.is_connected():
+                self.NG.set_ran(ran)
+                self.NG.set_ctx(ctx_id, sid)
+            elif self.NG.GNB == ran:
+                self.NG.set_ctx(ctx_id, sid)
+            else:
+                # error: already linked with another GNB
+                raise(CorenetErr('UE already connected through another NG link'))
+            self._last_ran = self.NG
         #
         else:
             assert()
@@ -232,6 +276,9 @@ class UEd(SigStack):
         if self.S1.is_connected():
             self.S1.unset_ran()
             self.S1.unset_ctx()
+        if self.NG.is_connected():
+            self.NG.unset_ran()
+            self.NG.unset_ctx()
         del self.RAT
     
     def merge_cs_handler(self, iucsd):
@@ -316,6 +363,10 @@ class UEd(SigStack):
         s1d.SMS.UE = self
         return True
     
+    def merge_5gs_handler(self, ngd):
+        # TODO
+        pass
+    
     #--------------------------------------------------------------------------#
     # UE identity
     #--------------------------------------------------------------------------#
@@ -356,11 +407,15 @@ class UEd(SigStack):
                     self.MTMSI = ident[3]
                 elif ident[3] != self.MTMSI:
                     self._log('WNG', 'incorrect M-TMSI, %s instead of %s' % (ident, self.MTMSI))
+        # TODO: check what we can have within the 5GS domain
+        # as per TS 24.501, 9.11.3.4
         else:
             self._log('INF', 'unhandled identity, type %i, ident %s' % (idtype, ident))
     
     def get_new_tmsi(self):
         # use the Python random generator
+        # WARNING: not good for randomness, but good enough for corenet
+        # and at least with some good uniqueness 
         return random.getrandbits(32)
     
     def set_tmsi(self, tmsi):
@@ -368,7 +423,7 @@ class UEd(SigStack):
         if self.TMSI is not None:
             try:
                 del self.Server.TMSI[self.TMSI]
-            except:
+            except Exception:
                 pass
         # set the new TMSI
         self.TMSI = tmsi
@@ -380,7 +435,7 @@ class UEd(SigStack):
         if self.PTMSI is not None:
             try:
                 del self.Server.PTMSI[self.PTMSI]
-            except:
+            except Exception:
                 pass
         # set the new PTMSI
         self.PTMSI = ptmsi
@@ -392,12 +447,25 @@ class UEd(SigStack):
         if self.MTMSI is not None:
             try:
                 del self.Server.MTMSI[self.MTMSI]
-            except:
+            except Exception:
                 pass
-        # set the new PTMSI
+        # set the new MTMSI
         self.MTMSI = mtmsi
         # update the Server LUT
         self.Server.MTMSI[mtmsi] = self.IMSI
+    
+    def set_fgtmsi(self, fgtmsi):
+        # delete current 5GTMSI from the Server LUT
+        if self.FGTMSI is not None:
+            try:
+                del self.Server.FGTMSI[self.FGTMSI]
+            except Exception:
+                pass
+        # set the new 5G TMSI
+        self.FGTMSI = fgtmsi
+        # update the Server LUT
+        self.Server.FGTMSI[fgtmsi] = self.FGTMSI
+    
     
     #--------------------------------------------------------------------------#
     # UE location
@@ -406,22 +474,22 @@ class UEd(SigStack):
     def set_plmn(self, plmn):
         if plmn != self.PLMN:
             self.PLMN = plmn
-            self._log('INF', 'locate on PLMN %s' % self.PLMN)
+            self._log('INF', 'located in PLMN %s' % self.PLMN)
     
     def set_lac(self, lac):
         if lac != self.LAC:
             self.LAC = lac
-            self._log('INF', 'locate on LAC %.4x' % self.LAC)
+            self._log('INF', 'located in LAC %.4x' % self.LAC)
     
     def set_rac(self, rac):
         if rac != self.RAC:
             self.RAC = rac
-            self._log('INF', 'route on RAC %.2x' % self.RAC)
+            self._log('INF', 'routed in RAC %.2x' % self.RAC)
     
     def set_tac(self, tac):
         if tac != self.TAC:
             self.TAC = tac
-            self._log('INF', 'track on TAC %.4x' % self.TAC)
+            self._log('INF', 'tracked in TAC %.6x' % self.TAC)
     
     def set_lai(self, plmn, lac):
         self.set_plmn(plmn)
@@ -683,7 +751,7 @@ class UEd(SigStack):
         """
         try:
             from IPython.lib.pretty import pretty
-        except:
+        except Exception:
             pretty = repr
         else:
             txt = []
@@ -725,3 +793,4 @@ class UEd(SigStack):
                 return '\n\n'.join(txt)
             else:
                 return ''
+

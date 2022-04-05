@@ -1,9 +1,10 @@
 # -*- coding: UTF-8 -*-
 #/**
 # * Software Name : pycrate
-# * Version : 0.3
+# * Version : 0.4
 # *
 # * Copyright 2016. Benoit Michau. ANSSI.
+# * Copyright 2019. Benoit Michau. P1Sec.
 # *
 # * This library is free software; you can redistribute it and/or
 # * modify it under the terms of the GNU Lesser General Public
@@ -28,14 +29,8 @@
 #*/
 
 # These are dictionnaries referencing all ASN.1 specifications that are supported 
-# by the compiler in proc.py, and stored in the pycrate_asn1dir/ directory
+# by the compiler in asnproc.py, and stored in the pycrate_asn1dir/ directory
 
-# For 3GPP specs, extraction scripts are provided in the subdirs to make it easy 
-# to move to new versions provided by the 3gpp.org portal
-# In order to use them, it is first required to convert the .doc file of the specification
-# to a .txt file with Microsoft Word, then the extract.py script can be run as is 
-# from the subdir:
-# $ python ./extract.py
 
 # 3GPP RRLP (2G)
 ASN_SPECS_2G = {
@@ -60,7 +55,7 @@ ASN_SPECS_LTE = {
     'RRCLTE'    : '3GPP_EUTRAN_RRC_36331',
     'S1AP'      : '3GPP_EUTRAN_S1AP_36413',
     'X2AP'      : '3GPP_EUTRAN_X2AP_36423',
-    'LPP'       : '3GPP_EUTRAN_LPP_36355',
+    #'LPP'       : '3GPP_EUTRAN_LPP_36355', # moved to 37355 starting with release 15
     'LPPa'      : '3GPP_EUTRAN_LPPa_36455',
     'M2AP'      : '3GPP_EUTRAN_M2AP_36443',
     'M3AP'      : '3GPP_EUTRAN_M3AP_36444',
@@ -71,7 +66,16 @@ ASN_SPECS_LTE = {
 # 3GPP NR (5G)
 ASN_SPECS_5G = {
     'RRCNR'     : '3GPP_NR_RRC_38331',
-    'F1AP'      : '3GPP_NR_F1AP_38473',
+    'NGAP'      : '3GPP_NR_NGAP_38413',
+    'XnAP'      : '3GPP_NR_XnAP_38423',
+    'NRPPa'     : '3GPP_NR_NRPPa_38455',
+    'E1AP'      : '3GPP_NR_E1AP_38463',
+    'F1AP'      : '3GPP_NR_F1AP_38473'
+    }
+
+# 3GPP multi-techno
+ASN_SPECS_MULT = {
+    'LPP'       : '3GPP_MULT_LPP_37355',
     }
 
 # ITU-T various recommendations
@@ -84,6 +88,10 @@ ASN_SPECS_ITUT = {
     'X509'      : 'ITUT_X509_2012-10',
     'X509_2016' : 'ITUT_X509_2016-10',
     'X520'      : 'ITUT_X520_2016-10',
+    # teleconferencing
+    'T124'      : 'ITUT_T124_2007-01',
+    'T125'      : 'ITUT_T125_1998-02',
+    'T128'      : 'ITUT_T128_1998-02'
     }
 
 # IETF specs
@@ -128,21 +136,32 @@ ASN_SPECS_CORE = {
     'MAP'       : '3GPP_MAP_29002',
     'CAP'       : '3GPP_CAP_29078',
     'CDR'       : '3GPP_CDR_32298',
+    'LI3GPP'    : '3GPP_LI_33108',
+    'LIX3GPP'   : '3GPP_LIX_33128',
+    'LIETSI'    : 'ETSI_LI_101671',
     # old ETSI spec
     'MAPv2'     : 'ETSI_MAP_0902',
     # custom built spec from ETSI / 3GPP 29.002 and 24.080 standards
-    'SS'        : '3GPP_SS_24080-c00',
+    'SS'        : '3GPP_SS_24080-g10',
     # GSMA spec
     'TAP3'      : 'GSMA_TAP3_17102014',
     # Pycrate TCAP-specific modules
-    'TCAP_RAW'  : 'Pycrate_TCAP',
-    'TCAP_MAP'  : 'Pycrate_TCAP_MAP',
-    'TCAP_CAP'  : 'Pycrate_TCAP_CAP',
+    'TCAP_RAW'      : 'Pycrate_TCAP',         # TCAP-only, with each component kept as OCTET STRING
+    'TCAP_MAP'      : 'Pycrate_TCAP_MAP',     # MAPv3 and further (based on 3GPP specs)
+    'TCAP_MAPv2'    : 'Pycrate_TCAP_MAPv2',   # MAPv1 and v2 (based on old ETSI specs)
+    'TCAP_MAPv2v3'  : 'Pycrate_TCAP_MAPv2v3', # all MAPv1, v2, v3 and further into a single Python module
+    'TCAP_CAP'      : 'Pycrate_TCAP_CAP',
     }
 
 # ETSI Intelligent Transport System
 ASN_SPECS_ITS = {
-    'ITS'       : 'ETSI_ITS_r1318',
+    'ITS_r1318'       : 'ETSI_ITS_r1318',     # Old all-in-one ITS release from ETSI
+    'ITS_IEEE1609_2'  : 'ETSI_ITS_IEEE1609_2',
+    #'ITS_IEEE1609_21' : 'ETSI_ITS_IEEE1609_2_1',
+    'ITS_CAM_2'       : 'ETSI_ITS_CAM_EN302637_2',
+    'ITS_DENM_3'      : 'ETSI_ITS_DENM_EN302637_3',
+    'ITS_VAM_3'       : 'ETSI_ITS_VAM_TS103300_3',
+    'ITS_IS'          : 'ETSI_ITS_IS_TS103301',
     }
 
 # Open Mobile Alliance geolocation protocols
@@ -150,6 +169,12 @@ ASN_SPECS_OMA = {
     'ILP'       : 'OMA_ILP',
     'ULP'       : 'OMA_ULP',
     'LPPe'      : 'OMA_LPPe',
+    }
+
+# eUICC-related specs
+ASN_SPECS_EUICC = {
+    'eUICCPP_IFTv2' : 'TCA_eUICCPP_IFTv2',
+    'eUICCPP_IFTv3' : 'TCA_eUICCPP_IFTv3',
     }
 
 # various biotechnologies specs
@@ -175,11 +200,13 @@ ASN_SPECS.update( ASN_SPECS_2G )
 ASN_SPECS.update( ASN_SPECS_3G )
 ASN_SPECS.update( ASN_SPECS_LTE )
 ASN_SPECS.update( ASN_SPECS_5G )
+ASN_SPECS.update( ASN_SPECS_MULT )
 ASN_SPECS.update( ASN_SPECS_ITUT )
 ASN_SPECS.update( ASN_SPECS_IETF )
 ASN_SPECS.update( ASN_SPECS_CORE )
 ASN_SPECS.update( ASN_SPECS_ITS )
 ASN_SPECS.update( ASN_SPECS_OMA )
+ASN_SPECS.update( ASN_SPECS_EUICC )
 ASN_SPECS.update( ASN_SPECS_BIO )
 #ASN_SPECS.update( _ASN_SPECS_PROP )
 

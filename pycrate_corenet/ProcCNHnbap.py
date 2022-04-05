@@ -1,7 +1,7 @@
 # -*- coding: UTF-8 -*-
 #/**
 # * Software Name : pycrate
-# * Version : 0.3
+# * Version : 0.4
 # *
 # * Copyright 2017. Benoit Michau. ANSSI.
 # *
@@ -469,13 +469,13 @@ class HNBAPErrorIndHNB(HNBAPSigProc):
     
     def recv(self, pdu_rx):
         self._recv(pdu_rx)
-        if not self.errcause:
+        if not self.errcause and 'Cause' in self.HNBInfo:
             self._log('WNG', 'error ind received: %s.%s' % self.HNBInfo['Cause'])
             # if it corresponds to a previously CN-initiated class 1 procedure
             # abort it
             try:
                 self.ProcHnbap[self.HNB.ProcHnbapLast].abort()
-            except:
+            except Exception:
                 pass
 
 

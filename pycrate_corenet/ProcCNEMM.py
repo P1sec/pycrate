@@ -1,7 +1,7 @@
 # -*- coding: UTF-8 -*-
 #/**
 # * Software Name : pycrate
-# * Version : 0.3
+# * Version : 0.4
 # *
 # * Copyright 2017. Benoit Michau. ANSSI.
 # *
@@ -147,7 +147,7 @@ class EMMSigProc(NASSigProc):
         try:
             if self.EMM.Proc[-1] == self:
                 del self.EMM.Proc[-1]
-        except:
+        except Exception:
             self._log('WNG', 'EMM stack corrupted')
         else:
             if self._emm_preempt:
@@ -268,10 +268,10 @@ class EMMSigProc(NASSigProc):
         if secctx and 'UESecCap' in self.UE.Cap:
             # create the KeNB
             self._log('DBG', 'NAS UL count for Kenb derivation, %i' % secctx['UL_enb'])
-            Kenb, UESecCap = conv_A3(secctx['Kasme'], secctx['UL_enb']), self.UE.Cap['UESecCap'][1]
+            Kenb, UESecCap = conv_401_A3(secctx['Kasme'], secctx['UL_enb']), self.UE.Cap['UESecCap'][1]
             secctx['Kenb'] = Kenb
             secctx['NCC']  = 0
-            secctx['NH']   = conv_A4(secctx['Kasme'], Kenb)
+            secctx['NH']   = conv_401_A4(secctx['Kasme'], Kenb)
         else:
             self._log('WNG', 'no active NAS security context, using the null AS security context')
             Kenb, UESecCap = self.S1.SECAS_NULL_CTX
@@ -514,10 +514,10 @@ class EMMAuthentication(EMMSigProc):
                           % (hexlify(self.vect[1][:4]).decode('ascii'),
                              hexlify(self.UEInfo['RES']).decode('ascii')))
                 self.encode_msg(8, 20)
-                rej = True
+                self.success = False
             else:
                 self._log('WNG', '2G authentication accepted')
-                rej = False
+                self.success = True
                 # set a 2G security context
                 self.EMM.set_sec_ctx(self.ksi, 2, self.vect)
         #
@@ -903,7 +903,7 @@ class EMMAttach(EMMSigProc):
             # -> we need to get its IMSI before continuing
             try:
                 del self.UE.Server._UEpre[self.UE.MTMSI]
-            except:
+            except Exception:
                 pass
             #
             if self.UEInfo['EPSID'][0] == 1:
@@ -924,7 +924,7 @@ class EMMAttach(EMMSigProc):
             try:
                 secctx = self.S1.SEC[self.S1.SEC['KSI']]
                 secctx['UL_enb'] = self._nas_rx._ulcnt
-            except:
+            except Exception:
                 pass
             if self.EMM.require_smc(self):
                 return self._ret_smc(self.UEInfo['NAS_KSI'])
@@ -966,7 +966,7 @@ class EMMAttach(EMMSigProc):
                 try:
                     secctx = self.S1.SEC[self.S1.SEC['KSI']]
                     secctx['UL_enb'] = self._nas_rx._ulcnt
-                except:
+                except Exception:
                     pass
                 if self.EMM.require_smc(self):
                     return self._ret_smc(self.UEInfo['NAS_KSI'])
@@ -1049,7 +1049,7 @@ class EMMAttach(EMMSigProc):
             if isinstance(self.S1.Config['EmergNumList'], bytes_types):
                 IEs['EmergNumList'] = self.S1.Config['EmergNumList']
             elif self.S1.Config['EmergNumList'] is not None:
-                IEs['EmergNumList'] = [{'ServiceCat': uint_to_bitlist(cat), 'Num': num} for \
+                IEs['EmergNumList'] = [{'ServiceCat': {c:1 for c in cat}, 'Num': num} for \
                                        (cat, num) in self.S1.Config['EmergNumList']]
             #
             if self.EMM.ATT_EPS_NETFEAT_SUPP:
@@ -1147,7 +1147,7 @@ class EMMDetachUE(EMMSigProc):
                 # just delete it
                 try:
                     del self.UE.Server._UEpre[self.UE.MTMSI]
-                except:
+                except Exception:
                     pass
     
     def process(self, pdu):
@@ -1378,7 +1378,7 @@ class EMMTrackingAreaUpdate(EMMSigProc):
             # -> we need to get its IMSI before continuing
             try:
                 del self.UE.Server._UEpre[self.UE.MTMSI]
-            except:
+            except Exception:
                 pass
             # need to request the IMSI, prepare an id request procedure
             return self._ret_req_imsi()
@@ -1391,7 +1391,7 @@ class EMMTrackingAreaUpdate(EMMSigProc):
             try:
                 secctx = self.S1.SEC[self.S1.SEC['KSI']]
                 secctx['UL_enb'] = self._nas_rx._ulcnt
-            except:
+            except Exception:
                 pass
             if self.EMM.require_smc(self):
                 return self._ret_smc(self.UEInfo['NAS_KSI'])
@@ -1426,7 +1426,7 @@ class EMMTrackingAreaUpdate(EMMSigProc):
                 try:
                     secctx = self.S1.SEC[self.S1.SEC['KSI']]
                     secctx['UL_enb'] = self._nas_rx._ulcnt
-                except:
+                except Exception:
                     pass
                 if self.EMM.require_smc(self):
                     return self._ret_smc(self.UEInfo['NAS_KSI'])
@@ -1542,7 +1542,7 @@ class EMMTrackingAreaUpdate(EMMSigProc):
             if isinstance(self.S1.Config['EmergNumList'], bytes_types):
                 IEs['EmergNumList'] = self.S1.Config['EmergNumList']
             elif self.S1.Config['EmergNumList'] is not None:
-                IEs['EmergNumList'] = [{'ServiceCat': uint_to_bitlist(cat), 'Num': num} for \
+                IEs['EmergNumList'] = [{'ServiceCat': {c:1 for c in cat}, 'Num': num} for \
                                        (cat, num) in self.S1.Config['EmergNumList']]
             if self.EMM.TAU_EPS_NETFEAT_SUPP:
                 IEs['EPSNetFeat'] = self.EMM.TAU_EPS_NETFEAT_SUPP
@@ -1617,7 +1617,7 @@ class EMMServiceRequest(EMMSigProc):
             # -> we need to get its IMSI before continuing
             try:
                 del self.UE.Server._UEpre[self.UE.MTMSI]
-            except:
+            except Exception:
                 pass
             # need to request the IMSI, prepare an id request procedure
             return self._ret_req_imsi()
@@ -1630,7 +1630,7 @@ class EMMServiceRequest(EMMSigProc):
             try:
                 secctx = self.S1.SEC[self.S1.SEC['KSI']]
                 secctx['UL_enb'] = self._nas_rx._ulcnt
-            except:
+            except Exception:
                 pass
             if self.EMM.require_smc(self) and self.EMM.SER_SMC_ALW:
                 return self._ret_smc((0, self.UEInfo['KSI'].get_val()))
@@ -1655,7 +1655,7 @@ class EMMServiceRequest(EMMSigProc):
                 try:
                     secctx = self.S1.SEC[self.S1.SEC['KSI']]
                     secctx['UL_enb'] = self._nas_rx._ulcnt
-                except:
+                except Exception:
                     pass
                 if self.EMM.require_smc(self) and self.EMM.SER_SMC_ALW:
                     return self._ret_smc((0, self.UEInfo['KSI'].get_val()))

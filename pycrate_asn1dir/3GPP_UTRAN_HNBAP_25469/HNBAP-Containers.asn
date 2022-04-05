@@ -7,10 +7,10 @@
 -- **************************************************************
 
 HNBAP-Containers {
-itu-t (0) identified-organization (4) etsi (0) mobileDomain (0) 
+itu-t (0) identified-organization (4) etsi (0) mobileDomain (0)
 umts-Access (20) modules (3) hnbap(6) version1 (1) hnbap-Containers (5) }
 
-DEFINITIONS AUTOMATIC TAGS ::= 
+DEFINITIONS AUTOMATIC TAGS ::=
 
 BEGIN
 
@@ -93,11 +93,11 @@ WITH SYNTAX {
 --
 -- **************************************************************
 
-ProtocolIE-Container {HNBAP-PROTOCOL-IES : IEsSetParam} ::= 
+ProtocolIE-Container {HNBAP-PROTOCOL-IES : IEsSetParam} ::=
 	SEQUENCE (SIZE (0..maxProtocolIEs)) OF
 		ProtocolIE-Field {{IEsSetParam}}
 
-ProtocolIE-Single-Container {HNBAP-PROTOCOL-IES : IEsSetParam} ::= 
+ProtocolIE-Single-Container {HNBAP-PROTOCOL-IES : IEsSetParam} ::=
 	ProtocolIE-Field {{IEsSetParam}}
 
 ProtocolIE-Field {HNBAP-PROTOCOL-IES : IEsSetParam} ::= SEQUENCE {
@@ -122,7 +122,7 @@ ProtocolIE-ContainerList {INTEGER : lowerBound, INTEGER : upperBound, HNBAP-PROT
 --
 -- **************************************************************
 
-ProtocolExtensionContainer {HNBAP-PROTOCOL-EXTENSION : ExtensionSetParam} ::= 
+ProtocolExtensionContainer {HNBAP-PROTOCOL-EXTENSION : ExtensionSetParam} ::=
 	SEQUENCE (SIZE (1..maxProtocolExtensions)) OF
 		ProtocolExtensionField {{ExtensionSetParam}}
 
@@ -138,7 +138,7 @@ ProtocolExtensionField {HNBAP-PROTOCOL-EXTENSION : ExtensionSetParam} ::= SEQUEN
 --
 -- **************************************************************
 
-PrivateIE-Container {HNBAP-PRIVATE-IES : IEsSetParam } ::= 
+PrivateIE-Container {HNBAP-PRIVATE-IES : IEsSetParam } ::=
 	SEQUENCE (SIZE (1.. maxPrivateIEs)) OF
 		PrivateIE-Field {{IEsSetParam}}
 

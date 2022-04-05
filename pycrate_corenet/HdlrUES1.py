@@ -1,7 +1,7 @@
 # -*- coding: UTF-8 -*-
 #/**
 # * Software Name : pycrate
-# * Version : 0.3
+# * Version : 0.4
 # *
 # * Copyright 2017. Benoit Michau. ANSSI.
 # *
@@ -68,17 +68,18 @@ class UEEMMd(SigStack):
     
     # list of EMM message types that do not require NAS security to be
     # activated to be processed
-    SEC_NOTNEED = {'EMMAttachRequest',
-                   'EMMIdentityResponse', # only for IMSI
-                   'EMMAuthenticationResponse',
-                   'EMMAuthenticationFailure',
-                   'EMMSecurityModeReject',
-                   'EMMDetachRequestMO', # if sent before security activation
-                   'EMMDetachAccept',
-                   'EMMTrackingAreaUpdateRequest',
-                   'EMMServiceRequest',
-                   'EMMExtServiceRequest'
-                   }
+    SEC_NOTNEED = {
+        'EMMAttachRequest',
+        'EMMIdentityResponse', # only for IMSI
+        'EMMAuthenticationResponse',
+        'EMMAuthenticationFailure',
+        'EMMSecurityModeReject',
+        'EMMDetachRequestMO', # if sent before security activation
+        'EMMDetachAccept',
+        'EMMTrackingAreaUpdateRequest',
+        'EMMServiceRequest',
+        'EMMExtServiceRequest'
+       }
     # to disable completely the check for secured NAS message
     SEC_DISABLED = False
     
@@ -481,7 +482,7 @@ class UEEMMd(SigStack):
                 snid = plmn_str_to_buf(self.AUTH_PLMN)
             else:
                 snid = plmn_str_to_buf(self.UE.PLMN)
-            Kasme  = conv_A2(vect[3], vect[4], snid, vect[2][:6])
+            Kasme  = conv_401_A2(vect[3], vect[4], snid, vect[2][:6])
             secctx = {'VEC'  : vect,
                       'CTX'  : ctx,
                       'CK'   : vect[3],
@@ -489,12 +490,12 @@ class UEEMMd(SigStack):
                       'Kasme': Kasme}
         elif ctx == 2:
             # WNG: this is undefined / illegal and won't work (hopefully)
-            CK, IK = conv_C4(vect[2]), conv_C5(vect[2])
+            CK, IK = conv_102_C4(vect[2]), conv_102_C5(vect[2])
             if self.AUTH_PLMN:
                 snid = plmn_str_to_buf(self.AUTH_PLMN)
             else:
                 snid = plmn_str_to_buf(self.UE.PLMN)
-            Kasme  = conv_A2(CK, IK, snid, b'\0\0\0\0\0\0')
+            Kasme  = conv_401_A2(CK, IK, snid, b'\0\0\0\0\0\0')
             secctx = {'VEC'  : vect,
                       'CTX'  : ctx,
                       'Kc'   : vect[2],
@@ -526,12 +527,12 @@ class UEEMMd(SigStack):
     def set_sec_ctx_smc(self, ksi):
         try:
             secctx = self.S1.SEC[ksi]
-        except:
+        except Exception:
             pass
         else:
             secctx['EEA'], secctx['EIA'] = self._get_sec_eea(), self._get_sec_eia()
-            secctx['Knasenc'] = conv_A7(secctx['Kasme'], 1, secctx['EEA'])[16:32]
-            secctx['Knasint'] = conv_A7(secctx['Kasme'], 2, secctx['EIA'])[16:32]
+            secctx['Knasenc'] = conv_401_A7(secctx['Kasme'], 1, secctx['EEA'])[16:32]
+            secctx['Knasint'] = conv_401_A7(secctx['Kasme'], 2, secctx['EIA'])[16:32]
     
     def set_sec_cap(self):
         # build UESecCap from UENetCap
@@ -639,7 +640,7 @@ class UEEMMd(SigStack):
         Proc = self.init_proc(ProcClass, encod={ProcClass.Init: IEs}, emm_preempt=True, sec=sec)
         try:
             S1apTxProc = Proc.output()
-        except:
+        except Exception:
             self._log('ERR', 'invalid IEs for network-initiated procedure %s' % Proc.Name)
             Proc.abort()
             return False, Proc
@@ -953,7 +954,7 @@ class UEESMd(SigStack):
         """
         try:
             trans = self.Trans[trans_id]
-        except:
+        except Exception:
             # err cause 47: PTI mismatch
             return None, 47
         #
@@ -1308,7 +1309,7 @@ class UES1d(SigStack):
             # eNB-initiated procedure, instantiate it
             try:
                 Proc = S1APProcEnbDispatcher[pdu_rx[1]['procedureCode']](self)
-            except:
+            except Exception:
                 self._log('ERR', 'invalid S1AP PDU, initiatingMessage, code %i'\
                           % pdu_rx[1]['procedureCode'])
                 errcause = ('protocol', 'abstract-syntax-error-reject')
@@ -1340,7 +1341,7 @@ class UES1d(SigStack):
             # CN-initiated procedure, transfer the PDU to it
             try:
                 Proc = self.Proc[pdu_rx[1]['procedureCode']]
-            except:
+            except Exception:
                 self._log('ERR', 'invalid S1AP PDU, %s, code %i'\
                           % (pdu_rx[0], pdu_rx[1]['procedureCode']))
                 errcause = ('protocol', 'message-not-compatible-with-receiver-state')
@@ -1385,7 +1386,7 @@ class UES1d(SigStack):
             return None
         try:
             Proc = ProcClass(self)
-        except:
+        except Exception:
             # no active S1 link
             self._log('ERR', 'no active S1 link to initialize the S1AP procedure %s'\
                       % ProcClass.__name__)
@@ -1755,7 +1756,7 @@ class UES1d(SigStack):
                     if sh == 2:
                         NasTxSec.encrypt(secctx['Knasenc'], 1, secctx['EEA'], sqnmsb)
                     NasTxSec.mac_compute(secctx['Knasint'], 1, secctx['EIA'], sqnmsb)
-                except:
+                except Exception:
                     self._log('ERR', 'NAS SEC DL: unable to protect the NAS message %s' % NasTx._name)
                     #self.reset_sec_ctx()
                     return None
@@ -1788,14 +1789,14 @@ class UES1d(SigStack):
             if buf is None:
                 return self._s1ap_nas_sec_err()
             IEs['NAS_PDU'] = buf
-            S1apProc = self.init_s1ap_proc(S1APDownlinkNASTransport, **IEs)
+            NgapProc = self.init_ngap_proc(NGAPDownlinkNASTransport, **IEs)
             if S1apProc:
                 return [S1apProc]
             else:
                 return []
     
     def _s1ap_nas_sec_err(self):
-        # TODO: maybe shutdown the S1 link ?
+        # TODO: maybe release the S1-UE link ?
         return []
     
     def clear_nas_proc(self):
@@ -1866,10 +1867,11 @@ class UES1d(SigStack):
             self._log('DBG', 'paging: UE already connected')
             return
         # get the set of eNBs serving the UE TAI
+        # eNB id is 2-tuple whereas gNB id is 3-tuple
         tai = (self.UE.PLMN, self.UE.TAC)
         try:
-            enbs = [self.Server.RAN[enbid] for enbid in self.Server.TAI[tai]]
-        except:
+            enbs = [self.Server.RAN[enbid] for enbid in self.Server.TAI[tai] if len(enbid) == 2]
+        except Exception:
             self._log('ERR', 'paging: no eNB serving the UE TAI %s.%.4x' % tai)
             return
         #
@@ -1878,7 +1880,7 @@ class UES1d(SigStack):
             self._log('ERR', 'paging: missing basic information')
             return
         #
-        # start an S1APPaging procedure on all RNCs
+        # start an S1APPaging procedure on all eNBs
         for enb in enbs:
             enb.page(**IEs)
         self._log('INF', 'paging: ongoing')
@@ -1892,10 +1894,11 @@ class UES1d(SigStack):
             self._log('DBG', 'paging: UE already connected')
             return True
         # get the set of eNBs serving the UE TAI
+        # eNB id is 2-tuple whereas gNB id is 3-tuple
         tai = (self.UE.PLMN, self.UE.TAC)
         try:
-            enbs = [self.Server.RAN[enbid] for enbid in self.Server.TAI[tai]]
-        except:
+            enbs = [self.Server.RAN[enbid] for enbid in self.Server.TAI[tai] if len(enbid) == 2]
+        except Exception:
             self._log('ERR', 'paging: no eNB serving the UE TAI %s.%.4x' % tai)
             return False
         #
@@ -2160,10 +2163,10 @@ class UES1d(SigStack):
         if secctx and 'UESecCap' in self.UE.Cap:
             # create the KeNB
             self._log('DBG', 'NAS UL count for Kenb derivation, %i' % secctx['UL_enb'])
-            Kenb, UESecCap = conv_A3(secctx['Kasme'], secctx['UL_enb']), self.UE.Cap['UESecCap'][1]
+            Kenb, UESecCap = conv_401_A3(secctx['Kasme'], secctx['UL_enb']), self.UE.Cap['UESecCap'][1]
             secctx['Kenb'] = Kenb
             secctx['NCC']  = 0
-            secctx['NH']   = conv_A4(secctx['Kasme'], Kenb)
+            secctx['NH']   = conv_401_A4(secctx['Kasme'], Kenb)
         else:
             self._log('WNG', 'no active NAS security context, using the null AS security context')
             Kenb, UESecCap = self.SECAS_NULL_CTX

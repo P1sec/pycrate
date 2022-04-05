@@ -74,7 +74,7 @@ class DialoguePDUs:
     
     #-----< AARQ-apdu >-----#
     AARQ_apdu = SEQ(name=u'AARQ-apdu', mode=MODE_TYPE, tag=(0, TAG_APPLICATION, TAG_IMPLICIT))
-    _AARQ_apdu_protocol_version = BIT_STR(name=u'protocol-version', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), default=(1, 0))
+    _AARQ_apdu_protocol_version = BIT_STR(name=u'protocol-version', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), default=(1, 1))
     _AARQ_apdu_protocol_version._cont = ASN1Dict([(u'version1', 0)])
     _AARQ_apdu_application_context_name = OID(name=u'application-context-name', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
     _AARQ_apdu_user_information = SEQ_OF(name=u'user-information', mode=MODE_TYPE, tag=(30, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
@@ -89,7 +89,7 @@ class DialoguePDUs:
     
     #-----< AARE-apdu >-----#
     AARE_apdu = SEQ(name=u'AARE-apdu', mode=MODE_TYPE, tag=(1, TAG_APPLICATION, TAG_IMPLICIT))
-    _AARE_apdu_protocol_version = BIT_STR(name=u'protocol-version', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), default=(1, 0))
+    _AARE_apdu_protocol_version = BIT_STR(name=u'protocol-version', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), default=(1, 1))
     _AARE_apdu_protocol_version._cont = ASN1Dict([(u'version1', 0)])
     _AARE_apdu_application_context_name = OID(name=u'application-context-name', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
     _AARE_apdu_result = INT(name=u'result', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('DialoguePDUs', 'Associate-result')))
@@ -247,7 +247,7 @@ class UnidialoguePDUs:
     
     #-----< AUDT-apdu >-----#
     AUDT_apdu = SEQ(name=u'AUDT-apdu', mode=MODE_TYPE, tag=(0, TAG_APPLICATION, TAG_IMPLICIT))
-    _AUDT_apdu_protocol_version = BIT_STR(name=u'protocol-version', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), default=(1, 0))
+    _AUDT_apdu_protocol_version = BIT_STR(name=u'protocol-version', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), default=(1, 1))
     _AUDT_apdu_protocol_version._cont = ASN1Dict([(u'version1', 0)])
     _AUDT_apdu_application_context_name = OID(name=u'application-context-name', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
     _AUDT_apdu_user_information = SEQ_OF(name=u'user-information', mode=MODE_TYPE, tag=(30, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
@@ -916,7 +916,9 @@ class TCAP_Messages:
     ______TCAP_Message_unidirectional_components__item__basicROS_invoke_opcode._const_tab_at = None
     ______TCAP_Message_unidirectional_components__item__basicROS_invoke_opcode._const_tab_id = u'operationCode'
     ______TCAP_Message_unidirectional_components__item__basicROS_invoke_argument = OPEN(name=u'argument', mode=MODE_TYPE, typeref=ASN1RefClassField(('Remote-Operations-Information-Objects', 'OPERATION'), [u'ArgumentType']), opt=True)
-    ______TCAP_Message_unidirectional_components__item__basicROS_invoke_argument._const_tab = _______TCAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab
+    _______TCAP_Message_unidirectional_components__item__basicROS_invoke_argument_tab = CLASS(name='_tab_OPERATION', mode=MODE_SET, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
+    _______TCAP_Message_unidirectional_components__item__basicROS_invoke_argument_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ______TCAP_Message_unidirectional_components__item__basicROS_invoke_argument._const_tab = _______TCAP_Message_unidirectional_components__item__basicROS_invoke_argument_tab
     ______TCAP_Message_unidirectional_components__item__basicROS_invoke_argument._const_tab_at = ('..', u'opcode')
     ______TCAP_Message_unidirectional_components__item__basicROS_invoke_argument._const_tab_id = u'ArgumentType'
     _____TCAP_Message_unidirectional_components__item__basicROS_invoke._cont = ASN1Dict([
@@ -930,11 +932,15 @@ class TCAP_Messages:
     ______TCAP_Message_unidirectional_components__item__basicROS_returnResult_invokeId = CHOICE(name=u'invokeId', mode=MODE_TYPE, typeref=ASN1RefType(('Remote-Operations-Generic-ROS-PDUs', 'InvokeId')))
     ______TCAP_Message_unidirectional_components__item__basicROS_returnResult_result = SEQ(name=u'result', mode=MODE_TYPE, opt=True)
     _______TCAP_Message_unidirectional_components__item__basicROS_returnResult_result_opcode = CHOICE(name=u'opcode', mode=MODE_TYPE, typeref=ASN1RefClassField(('Remote-Operations-Information-Objects', 'OPERATION'), [u'operationCode']))
-    _______TCAP_Message_unidirectional_components__item__basicROS_returnResult_result_opcode._const_tab = _______TCAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab
+    ________TCAP_Message_unidirectional_components__item__basicROS_returnResult_result_opcode_tab = CLASS(name='_tab_OPERATION', mode=MODE_SET, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
+    ________TCAP_Message_unidirectional_components__item__basicROS_returnResult_result_opcode_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    _______TCAP_Message_unidirectional_components__item__basicROS_returnResult_result_opcode._const_tab = ________TCAP_Message_unidirectional_components__item__basicROS_returnResult_result_opcode_tab
     _______TCAP_Message_unidirectional_components__item__basicROS_returnResult_result_opcode._const_tab_at = None
     _______TCAP_Message_unidirectional_components__item__basicROS_returnResult_result_opcode._const_tab_id = u'operationCode'
     _______TCAP_Message_unidirectional_components__item__basicROS_returnResult_result_result = OPEN(name=u'result', mode=MODE_TYPE, typeref=ASN1RefClassField(('Remote-Operations-Information-Objects', 'OPERATION'), [u'ResultType']))
-    _______TCAP_Message_unidirectional_components__item__basicROS_returnResult_result_result._const_tab = _______TCAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab
+    ________TCAP_Message_unidirectional_components__item__basicROS_returnResult_result_result_tab = CLASS(name='_tab_OPERATION', mode=MODE_SET, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
+    ________TCAP_Message_unidirectional_components__item__basicROS_returnResult_result_result_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    _______TCAP_Message_unidirectional_components__item__basicROS_returnResult_result_result._const_tab = ________TCAP_Message_unidirectional_components__item__basicROS_returnResult_result_result_tab
     _______TCAP_Message_unidirectional_components__item__basicROS_returnResult_result_result._const_tab_at = ('..', u'opcode')
     _______TCAP_Message_unidirectional_components__item__basicROS_returnResult_result_result._const_tab_id = u'ResultType'
     ______TCAP_Message_unidirectional_components__item__basicROS_returnResult_result._cont = ASN1Dict([
@@ -950,11 +956,15 @@ class TCAP_Messages:
     _____TCAP_Message_unidirectional_components__item__basicROS_returnError = SEQ(name=u'returnError', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('Remote-Operations-Generic-ROS-PDUs', 'ReturnError')))
     ______TCAP_Message_unidirectional_components__item__basicROS_returnError_invokeId = CHOICE(name=u'invokeId', mode=MODE_TYPE, typeref=ASN1RefType(('Remote-Operations-Generic-ROS-PDUs', 'InvokeId')))
     ______TCAP_Message_unidirectional_components__item__basicROS_returnError_errcode = CHOICE(name=u'errcode', mode=MODE_TYPE, typeref=ASN1RefClassField(('Remote-Operations-Information-Objects', 'ERROR'), [u'errorCode']))
-    ______TCAP_Message_unidirectional_components__item__basicROS_returnError_errcode._const_tab = _______TCAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab
+    _______TCAP_Message_unidirectional_components__item__basicROS_returnError_errcode_tab = CLASS(name='_tab_ERROR', mode=MODE_SET, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'ERROR')))
+    _______TCAP_Message_unidirectional_components__item__basicROS_returnError_errcode_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ______TCAP_Message_unidirectional_components__item__basicROS_returnError_errcode._const_tab = _______TCAP_Message_unidirectional_components__item__basicROS_returnError_errcode_tab
     ______TCAP_Message_unidirectional_components__item__basicROS_returnError_errcode._const_tab_at = None
     ______TCAP_Message_unidirectional_components__item__basicROS_returnError_errcode._const_tab_id = u'errorCode'
     ______TCAP_Message_unidirectional_components__item__basicROS_returnError_parameter = OPEN(name=u'parameter', mode=MODE_TYPE, typeref=ASN1RefClassField(('Remote-Operations-Information-Objects', 'ERROR'), [u'ParameterType']), opt=True)
-    ______TCAP_Message_unidirectional_components__item__basicROS_returnError_parameter._const_tab = _______TCAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab
+    _______TCAP_Message_unidirectional_components__item__basicROS_returnError_parameter_tab = CLASS(name='_tab_ERROR', mode=MODE_SET, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'ERROR')))
+    _______TCAP_Message_unidirectional_components__item__basicROS_returnError_parameter_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ______TCAP_Message_unidirectional_components__item__basicROS_returnError_parameter._const_tab = _______TCAP_Message_unidirectional_components__item__basicROS_returnError_parameter_tab
     ______TCAP_Message_unidirectional_components__item__basicROS_returnError_parameter._const_tab_at = ('..', u'errcode')
     ______TCAP_Message_unidirectional_components__item__basicROS_returnError_parameter._const_tab_id = u'ParameterType'
     _____TCAP_Message_unidirectional_components__item__basicROS_returnError._cont = ASN1Dict([
@@ -975,11 +985,15 @@ class TCAP_Messages:
     _____TCAP_Message_unidirectional_components__item__returnResultNotLast_invokeId = CHOICE(name=u'invokeId', mode=MODE_TYPE, typeref=ASN1RefType(('Remote-Operations-Generic-ROS-PDUs', 'InvokeId')))
     _____TCAP_Message_unidirectional_components__item__returnResultNotLast_result = SEQ(name=u'result', mode=MODE_TYPE, opt=True)
     ______TCAP_Message_unidirectional_components__item__returnResultNotLast_result_opcode = CHOICE(name=u'opcode', mode=MODE_TYPE, typeref=ASN1RefClassField(('Remote-Operations-Information-Objects', 'OPERATION'), [u'operationCode']))
-    ______TCAP_Message_unidirectional_components__item__returnResultNotLast_result_opcode._const_tab = _______TCAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab
+    _______TCAP_Message_unidirectional_components__item__returnResultNotLast_result_opcode_tab = CLASS(name='_tab_OPERATION', mode=MODE_SET, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
+    _______TCAP_Message_unidirectional_components__item__returnResultNotLast_result_opcode_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ______TCAP_Message_unidirectional_components__item__returnResultNotLast_result_opcode._const_tab = _______TCAP_Message_unidirectional_components__item__returnResultNotLast_result_opcode_tab
     ______TCAP_Message_unidirectional_components__item__returnResultNotLast_result_opcode._const_tab_at = None
     ______TCAP_Message_unidirectional_components__item__returnResultNotLast_result_opcode._const_tab_id = u'operationCode'
     ______TCAP_Message_unidirectional_components__item__returnResultNotLast_result_result = OPEN(name=u'result', mode=MODE_TYPE, typeref=ASN1RefClassField(('Remote-Operations-Information-Objects', 'OPERATION'), [u'ResultType']))
-    ______TCAP_Message_unidirectional_components__item__returnResultNotLast_result_result._const_tab = _______TCAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab
+    _______TCAP_Message_unidirectional_components__item__returnResultNotLast_result_result_tab = CLASS(name='_tab_OPERATION', mode=MODE_SET, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
+    _______TCAP_Message_unidirectional_components__item__returnResultNotLast_result_result_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ______TCAP_Message_unidirectional_components__item__returnResultNotLast_result_result._const_tab = _______TCAP_Message_unidirectional_components__item__returnResultNotLast_result_result_tab
     ______TCAP_Message_unidirectional_components__item__returnResultNotLast_result_result._const_tab_at = ('..', u'opcode')
     ______TCAP_Message_unidirectional_components__item__returnResultNotLast_result_result._const_tab_id = u'ResultType'
     _____TCAP_Message_unidirectional_components__item__returnResultNotLast_result._cont = ASN1Dict([
@@ -1022,11 +1036,15 @@ class TCAP_Messages:
         ])
     ______TCAP_Message_begin_components__item__basicROS_invoke_linkedId._ext = None
     ______TCAP_Message_begin_components__item__basicROS_invoke_opcode = CHOICE(name=u'opcode', mode=MODE_TYPE, typeref=ASN1RefClassField(('Remote-Operations-Information-Objects', 'OPERATION'), [u'operationCode']))
-    ______TCAP_Message_begin_components__item__basicROS_invoke_opcode._const_tab = _______TCAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab
+    _______TCAP_Message_begin_components__item__basicROS_invoke_opcode_tab = CLASS(name='_tab_OPERATION', mode=MODE_SET, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
+    _______TCAP_Message_begin_components__item__basicROS_invoke_opcode_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ______TCAP_Message_begin_components__item__basicROS_invoke_opcode._const_tab = _______TCAP_Message_begin_components__item__basicROS_invoke_opcode_tab
     ______TCAP_Message_begin_components__item__basicROS_invoke_opcode._const_tab_at = None
     ______TCAP_Message_begin_components__item__basicROS_invoke_opcode._const_tab_id = u'operationCode'
     ______TCAP_Message_begin_components__item__basicROS_invoke_argument = OPEN(name=u'argument', mode=MODE_TYPE, typeref=ASN1RefClassField(('Remote-Operations-Information-Objects', 'OPERATION'), [u'ArgumentType']), opt=True)
-    ______TCAP_Message_begin_components__item__basicROS_invoke_argument._const_tab = _______TCAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab
+    _______TCAP_Message_begin_components__item__basicROS_invoke_argument_tab = CLASS(name='_tab_OPERATION', mode=MODE_SET, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
+    _______TCAP_Message_begin_components__item__basicROS_invoke_argument_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ______TCAP_Message_begin_components__item__basicROS_invoke_argument._const_tab = _______TCAP_Message_begin_components__item__basicROS_invoke_argument_tab
     ______TCAP_Message_begin_components__item__basicROS_invoke_argument._const_tab_at = ('..', u'opcode')
     ______TCAP_Message_begin_components__item__basicROS_invoke_argument._const_tab_id = u'ArgumentType'
     _____TCAP_Message_begin_components__item__basicROS_invoke._cont = ASN1Dict([
@@ -1040,11 +1058,15 @@ class TCAP_Messages:
     ______TCAP_Message_begin_components__item__basicROS_returnResult_invokeId = CHOICE(name=u'invokeId', mode=MODE_TYPE, typeref=ASN1RefType(('Remote-Operations-Generic-ROS-PDUs', 'InvokeId')))
     ______TCAP_Message_begin_components__item__basicROS_returnResult_result = SEQ(name=u'result', mode=MODE_TYPE, opt=True)
     _______TCAP_Message_begin_components__item__basicROS_returnResult_result_opcode = CHOICE(name=u'opcode', mode=MODE_TYPE, typeref=ASN1RefClassField(('Remote-Operations-Information-Objects', 'OPERATION'), [u'operationCode']))
-    _______TCAP_Message_begin_components__item__basicROS_returnResult_result_opcode._const_tab = _______TCAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab
+    ________TCAP_Message_begin_components__item__basicROS_returnResult_result_opcode_tab = CLASS(name='_tab_OPERATION', mode=MODE_SET, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
+    ________TCAP_Message_begin_components__item__basicROS_returnResult_result_opcode_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    _______TCAP_Message_begin_components__item__basicROS_returnResult_result_opcode._const_tab = ________TCAP_Message_begin_components__item__basicROS_returnResult_result_opcode_tab
     _______TCAP_Message_begin_components__item__basicROS_returnResult_result_opcode._const_tab_at = None
     _______TCAP_Message_begin_components__item__basicROS_returnResult_result_opcode._const_tab_id = u'operationCode'
     _______TCAP_Message_begin_components__item__basicROS_returnResult_result_result = OPEN(name=u'result', mode=MODE_TYPE, typeref=ASN1RefClassField(('Remote-Operations-Information-Objects', 'OPERATION'), [u'ResultType']))
-    _______TCAP_Message_begin_components__item__basicROS_returnResult_result_result._const_tab = _______TCAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab
+    ________TCAP_Message_begin_components__item__basicROS_returnResult_result_result_tab = CLASS(name='_tab_OPERATION', mode=MODE_SET, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
+    ________TCAP_Message_begin_components__item__basicROS_returnResult_result_result_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    _______TCAP_Message_begin_components__item__basicROS_returnResult_result_result._const_tab = ________TCAP_Message_begin_components__item__basicROS_returnResult_result_result_tab
     _______TCAP_Message_begin_components__item__basicROS_returnResult_result_result._const_tab_at = ('..', u'opcode')
     _______TCAP_Message_begin_components__item__basicROS_returnResult_result_result._const_tab_id = u'ResultType'
     ______TCAP_Message_begin_components__item__basicROS_returnResult_result._cont = ASN1Dict([
@@ -1060,11 +1082,15 @@ class TCAP_Messages:
     _____TCAP_Message_begin_components__item__basicROS_returnError = SEQ(name=u'returnError', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('Remote-Operations-Generic-ROS-PDUs', 'ReturnError')))
     ______TCAP_Message_begin_components__item__basicROS_returnError_invokeId = CHOICE(name=u'invokeId', mode=MODE_TYPE, typeref=ASN1RefType(('Remote-Operations-Generic-ROS-PDUs', 'InvokeId')))
     ______TCAP_Message_begin_components__item__basicROS_returnError_errcode = CHOICE(name=u'errcode', mode=MODE_TYPE, typeref=ASN1RefClassField(('Remote-Operations-Information-Objects', 'ERROR'), [u'errorCode']))
-    ______TCAP_Message_begin_components__item__basicROS_returnError_errcode._const_tab = _______TCAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab
+    _______TCAP_Message_begin_components__item__basicROS_returnError_errcode_tab = CLASS(name='_tab_ERROR', mode=MODE_SET, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'ERROR')))
+    _______TCAP_Message_begin_components__item__basicROS_returnError_errcode_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ______TCAP_Message_begin_components__item__basicROS_returnError_errcode._const_tab = _______TCAP_Message_begin_components__item__basicROS_returnError_errcode_tab
     ______TCAP_Message_begin_components__item__basicROS_returnError_errcode._const_tab_at = None
     ______TCAP_Message_begin_components__item__basicROS_returnError_errcode._const_tab_id = u'errorCode'
     ______TCAP_Message_begin_components__item__basicROS_returnError_parameter = OPEN(name=u'parameter', mode=MODE_TYPE, typeref=ASN1RefClassField(('Remote-Operations-Information-Objects', 'ERROR'), [u'ParameterType']), opt=True)
-    ______TCAP_Message_begin_components__item__basicROS_returnError_parameter._const_tab = _______TCAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab
+    _______TCAP_Message_begin_components__item__basicROS_returnError_parameter_tab = CLASS(name='_tab_ERROR', mode=MODE_SET, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'ERROR')))
+    _______TCAP_Message_begin_components__item__basicROS_returnError_parameter_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ______TCAP_Message_begin_components__item__basicROS_returnError_parameter._const_tab = _______TCAP_Message_begin_components__item__basicROS_returnError_parameter_tab
     ______TCAP_Message_begin_components__item__basicROS_returnError_parameter._const_tab_at = ('..', u'errcode')
     ______TCAP_Message_begin_components__item__basicROS_returnError_parameter._const_tab_id = u'ParameterType'
     _____TCAP_Message_begin_components__item__basicROS_returnError._cont = ASN1Dict([
@@ -1085,11 +1111,15 @@ class TCAP_Messages:
     _____TCAP_Message_begin_components__item__returnResultNotLast_invokeId = CHOICE(name=u'invokeId', mode=MODE_TYPE, typeref=ASN1RefType(('Remote-Operations-Generic-ROS-PDUs', 'InvokeId')))
     _____TCAP_Message_begin_components__item__returnResultNotLast_result = SEQ(name=u'result', mode=MODE_TYPE, opt=True)
     ______TCAP_Message_begin_components__item__returnResultNotLast_result_opcode = CHOICE(name=u'opcode', mode=MODE_TYPE, typeref=ASN1RefClassField(('Remote-Operations-Information-Objects', 'OPERATION'), [u'operationCode']))
-    ______TCAP_Message_begin_components__item__returnResultNotLast_result_opcode._const_tab = _______TCAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab
+    _______TCAP_Message_begin_components__item__returnResultNotLast_result_opcode_tab = CLASS(name='_tab_OPERATION', mode=MODE_SET, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
+    _______TCAP_Message_begin_components__item__returnResultNotLast_result_opcode_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ______TCAP_Message_begin_components__item__returnResultNotLast_result_opcode._const_tab = _______TCAP_Message_begin_components__item__returnResultNotLast_result_opcode_tab
     ______TCAP_Message_begin_components__item__returnResultNotLast_result_opcode._const_tab_at = None
     ______TCAP_Message_begin_components__item__returnResultNotLast_result_opcode._const_tab_id = u'operationCode'
     ______TCAP_Message_begin_components__item__returnResultNotLast_result_result = OPEN(name=u'result', mode=MODE_TYPE, typeref=ASN1RefClassField(('Remote-Operations-Information-Objects', 'OPERATION'), [u'ResultType']))
-    ______TCAP_Message_begin_components__item__returnResultNotLast_result_result._const_tab = _______TCAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab
+    _______TCAP_Message_begin_components__item__returnResultNotLast_result_result_tab = CLASS(name='_tab_OPERATION', mode=MODE_SET, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
+    _______TCAP_Message_begin_components__item__returnResultNotLast_result_result_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ______TCAP_Message_begin_components__item__returnResultNotLast_result_result._const_tab = _______TCAP_Message_begin_components__item__returnResultNotLast_result_result_tab
     ______TCAP_Message_begin_components__item__returnResultNotLast_result_result._const_tab_at = ('..', u'opcode')
     ______TCAP_Message_begin_components__item__returnResultNotLast_result_result._const_tab_id = u'ResultType'
     _____TCAP_Message_begin_components__item__returnResultNotLast_result._cont = ASN1Dict([
@@ -1133,11 +1163,15 @@ class TCAP_Messages:
         ])
     ______TCAP_Message_end_components__item__basicROS_invoke_linkedId._ext = None
     ______TCAP_Message_end_components__item__basicROS_invoke_opcode = CHOICE(name=u'opcode', mode=MODE_TYPE, typeref=ASN1RefClassField(('Remote-Operations-Information-Objects', 'OPERATION'), [u'operationCode']))
-    ______TCAP_Message_end_components__item__basicROS_invoke_opcode._const_tab = _______TCAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab
+    _______TCAP_Message_end_components__item__basicROS_invoke_opcode_tab = CLASS(name='_tab_OPERATION', mode=MODE_SET, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
+    _______TCAP_Message_end_components__item__basicROS_invoke_opcode_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ______TCAP_Message_end_components__item__basicROS_invoke_opcode._const_tab = _______TCAP_Message_end_components__item__basicROS_invoke_opcode_tab
     ______TCAP_Message_end_components__item__basicROS_invoke_opcode._const_tab_at = None
     ______TCAP_Message_end_components__item__basicROS_invoke_opcode._const_tab_id = u'operationCode'
     ______TCAP_Message_end_components__item__basicROS_invoke_argument = OPEN(name=u'argument', mode=MODE_TYPE, typeref=ASN1RefClassField(('Remote-Operations-Information-Objects', 'OPERATION'), [u'ArgumentType']), opt=True)
-    ______TCAP_Message_end_components__item__basicROS_invoke_argument._const_tab = _______TCAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab
+    _______TCAP_Message_end_components__item__basicROS_invoke_argument_tab = CLASS(name='_tab_OPERATION', mode=MODE_SET, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
+    _______TCAP_Message_end_components__item__basicROS_invoke_argument_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ______TCAP_Message_end_components__item__basicROS_invoke_argument._const_tab = _______TCAP_Message_end_components__item__basicROS_invoke_argument_tab
     ______TCAP_Message_end_components__item__basicROS_invoke_argument._const_tab_at = ('..', u'opcode')
     ______TCAP_Message_end_components__item__basicROS_invoke_argument._const_tab_id = u'ArgumentType'
     _____TCAP_Message_end_components__item__basicROS_invoke._cont = ASN1Dict([
@@ -1151,11 +1185,15 @@ class TCAP_Messages:
     ______TCAP_Message_end_components__item__basicROS_returnResult_invokeId = CHOICE(name=u'invokeId', mode=MODE_TYPE, typeref=ASN1RefType(('Remote-Operations-Generic-ROS-PDUs', 'InvokeId')))
     ______TCAP_Message_end_components__item__basicROS_returnResult_result = SEQ(name=u'result', mode=MODE_TYPE, opt=True)
     _______TCAP_Message_end_components__item__basicROS_returnResult_result_opcode = CHOICE(name=u'opcode', mode=MODE_TYPE, typeref=ASN1RefClassField(('Remote-Operations-Information-Objects', 'OPERATION'), [u'operationCode']))
-    _______TCAP_Message_end_components__item__basicROS_returnResult_result_opcode._const_tab = _______TCAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab
+    ________TCAP_Message_end_components__item__basicROS_returnResult_result_opcode_tab = CLASS(name='_tab_OPERATION', mode=MODE_SET, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
+    ________TCAP_Message_end_components__item__basicROS_returnResult_result_opcode_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    _______TCAP_Message_end_components__item__basicROS_returnResult_result_opcode._const_tab = ________TCAP_Message_end_components__item__basicROS_returnResult_result_opcode_tab
     _______TCAP_Message_end_components__item__basicROS_returnResult_result_opcode._const_tab_at = None
     _______TCAP_Message_end_components__item__basicROS_returnResult_result_opcode._const_tab_id = u'operationCode'
     _______TCAP_Message_end_components__item__basicROS_returnResult_result_result = OPEN(name=u'result', mode=MODE_TYPE, typeref=ASN1RefClassField(('Remote-Operations-Information-Objects', 'OPERATION'), [u'ResultType']))
-    _______TCAP_Message_end_components__item__basicROS_returnResult_result_result._const_tab = _______TCAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab
+    ________TCAP_Message_end_components__item__basicROS_returnResult_result_result_tab = CLASS(name='_tab_OPERATION', mode=MODE_SET, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
+    ________TCAP_Message_end_components__item__basicROS_returnResult_result_result_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    _______TCAP_Message_end_components__item__basicROS_returnResult_result_result._const_tab = ________TCAP_Message_end_components__item__basicROS_returnResult_result_result_tab
     _______TCAP_Message_end_components__item__basicROS_returnResult_result_result._const_tab_at = ('..', u'opcode')
     _______TCAP_Message_end_components__item__basicROS_returnResult_result_result._const_tab_id = u'ResultType'
     ______TCAP_Message_end_components__item__basicROS_returnResult_result._cont = ASN1Dict([
@@ -1171,11 +1209,15 @@ class TCAP_Messages:
     _____TCAP_Message_end_components__item__basicROS_returnError = SEQ(name=u'returnError', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('Remote-Operations-Generic-ROS-PDUs', 'ReturnError')))
     ______TCAP_Message_end_components__item__basicROS_returnError_invokeId = CHOICE(name=u'invokeId', mode=MODE_TYPE, typeref=ASN1RefType(('Remote-Operations-Generic-ROS-PDUs', 'InvokeId')))
     ______TCAP_Message_end_components__item__basicROS_returnError_errcode = CHOICE(name=u'errcode', mode=MODE_TYPE, typeref=ASN1RefClassField(('Remote-Operations-Information-Objects', 'ERROR'), [u'errorCode']))
-    ______TCAP_Message_end_components__item__basicROS_returnError_errcode._const_tab = _______TCAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab
+    _______TCAP_Message_end_components__item__basicROS_returnError_errcode_tab = CLASS(name='_tab_ERROR', mode=MODE_SET, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'ERROR')))
+    _______TCAP_Message_end_components__item__basicROS_returnError_errcode_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ______TCAP_Message_end_components__item__basicROS_returnError_errcode._const_tab = _______TCAP_Message_end_components__item__basicROS_returnError_errcode_tab
     ______TCAP_Message_end_components__item__basicROS_returnError_errcode._const_tab_at = None
     ______TCAP_Message_end_components__item__basicROS_returnError_errcode._const_tab_id = u'errorCode'
     ______TCAP_Message_end_components__item__basicROS_returnError_parameter = OPEN(name=u'parameter', mode=MODE_TYPE, typeref=ASN1RefClassField(('Remote-Operations-Information-Objects', 'ERROR'), [u'ParameterType']), opt=True)
-    ______TCAP_Message_end_components__item__basicROS_returnError_parameter._const_tab = _______TCAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab
+    _______TCAP_Message_end_components__item__basicROS_returnError_parameter_tab = CLASS(name='_tab_ERROR', mode=MODE_SET, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'ERROR')))
+    _______TCAP_Message_end_components__item__basicROS_returnError_parameter_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ______TCAP_Message_end_components__item__basicROS_returnError_parameter._const_tab = _______TCAP_Message_end_components__item__basicROS_returnError_parameter_tab
     ______TCAP_Message_end_components__item__basicROS_returnError_parameter._const_tab_at = ('..', u'errcode')
     ______TCAP_Message_end_components__item__basicROS_returnError_parameter._const_tab_id = u'ParameterType'
     _____TCAP_Message_end_components__item__basicROS_returnError._cont = ASN1Dict([
@@ -1196,11 +1238,15 @@ class TCAP_Messages:
     _____TCAP_Message_end_components__item__returnResultNotLast_invokeId = CHOICE(name=u'invokeId', mode=MODE_TYPE, typeref=ASN1RefType(('Remote-Operations-Generic-ROS-PDUs', 'InvokeId')))
     _____TCAP_Message_end_components__item__returnResultNotLast_result = SEQ(name=u'result', mode=MODE_TYPE, opt=True)
     ______TCAP_Message_end_components__item__returnResultNotLast_result_opcode = CHOICE(name=u'opcode', mode=MODE_TYPE, typeref=ASN1RefClassField(('Remote-Operations-Information-Objects', 'OPERATION'), [u'operationCode']))
-    ______TCAP_Message_end_components__item__returnResultNotLast_result_opcode._const_tab = _______TCAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab
+    _______TCAP_Message_end_components__item__returnResultNotLast_result_opcode_tab = CLASS(name='_tab_OPERATION', mode=MODE_SET, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
+    _______TCAP_Message_end_components__item__returnResultNotLast_result_opcode_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ______TCAP_Message_end_components__item__returnResultNotLast_result_opcode._const_tab = _______TCAP_Message_end_components__item__returnResultNotLast_result_opcode_tab
     ______TCAP_Message_end_components__item__returnResultNotLast_result_opcode._const_tab_at = None
     ______TCAP_Message_end_components__item__returnResultNotLast_result_opcode._const_tab_id = u'operationCode'
     ______TCAP_Message_end_components__item__returnResultNotLast_result_result = OPEN(name=u'result', mode=MODE_TYPE, typeref=ASN1RefClassField(('Remote-Operations-Information-Objects', 'OPERATION'), [u'ResultType']))
-    ______TCAP_Message_end_components__item__returnResultNotLast_result_result._const_tab = _______TCAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab
+    _______TCAP_Message_end_components__item__returnResultNotLast_result_result_tab = CLASS(name='_tab_OPERATION', mode=MODE_SET, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
+    _______TCAP_Message_end_components__item__returnResultNotLast_result_result_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ______TCAP_Message_end_components__item__returnResultNotLast_result_result._const_tab = _______TCAP_Message_end_components__item__returnResultNotLast_result_result_tab
     ______TCAP_Message_end_components__item__returnResultNotLast_result_result._const_tab_at = ('..', u'opcode')
     ______TCAP_Message_end_components__item__returnResultNotLast_result_result._const_tab_id = u'ResultType'
     _____TCAP_Message_end_components__item__returnResultNotLast_result._cont = ASN1Dict([
@@ -1245,11 +1291,15 @@ class TCAP_Messages:
         ])
     ______TCAP_Message_continue__components__item__basicROS_invoke_linkedId._ext = None
     ______TCAP_Message_continue__components__item__basicROS_invoke_opcode = CHOICE(name=u'opcode', mode=MODE_TYPE, typeref=ASN1RefClassField(('Remote-Operations-Information-Objects', 'OPERATION'), [u'operationCode']))
-    ______TCAP_Message_continue__components__item__basicROS_invoke_opcode._const_tab = _______TCAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab
+    _______TCAP_Message_continue__components__item__basicROS_invoke_opcode_tab = CLASS(name='_tab_OPERATION', mode=MODE_SET, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
+    _______TCAP_Message_continue__components__item__basicROS_invoke_opcode_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ______TCAP_Message_continue__components__item__basicROS_invoke_opcode._const_tab = _______TCAP_Message_continue__components__item__basicROS_invoke_opcode_tab
     ______TCAP_Message_continue__components__item__basicROS_invoke_opcode._const_tab_at = None
     ______TCAP_Message_continue__components__item__basicROS_invoke_opcode._const_tab_id = u'operationCode'
     ______TCAP_Message_continue__components__item__basicROS_invoke_argument = OPEN(name=u'argument', mode=MODE_TYPE, typeref=ASN1RefClassField(('Remote-Operations-Information-Objects', 'OPERATION'), [u'ArgumentType']), opt=True)
-    ______TCAP_Message_continue__components__item__basicROS_invoke_argument._const_tab = _______TCAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab
+    _______TCAP_Message_continue__components__item__basicROS_invoke_argument_tab = CLASS(name='_tab_OPERATION', mode=MODE_SET, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
+    _______TCAP_Message_continue__components__item__basicROS_invoke_argument_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ______TCAP_Message_continue__components__item__basicROS_invoke_argument._const_tab = _______TCAP_Message_continue__components__item__basicROS_invoke_argument_tab
     ______TCAP_Message_continue__components__item__basicROS_invoke_argument._const_tab_at = ('..', u'opcode')
     ______TCAP_Message_continue__components__item__basicROS_invoke_argument._const_tab_id = u'ArgumentType'
     _____TCAP_Message_continue__components__item__basicROS_invoke._cont = ASN1Dict([
@@ -1263,11 +1313,15 @@ class TCAP_Messages:
     ______TCAP_Message_continue__components__item__basicROS_returnResult_invokeId = CHOICE(name=u'invokeId', mode=MODE_TYPE, typeref=ASN1RefType(('Remote-Operations-Generic-ROS-PDUs', 'InvokeId')))
     ______TCAP_Message_continue__components__item__basicROS_returnResult_result = SEQ(name=u'result', mode=MODE_TYPE, opt=True)
     _______TCAP_Message_continue__components__item__basicROS_returnResult_result_opcode = CHOICE(name=u'opcode', mode=MODE_TYPE, typeref=ASN1RefClassField(('Remote-Operations-Information-Objects', 'OPERATION'), [u'operationCode']))
-    _______TCAP_Message_continue__components__item__basicROS_returnResult_result_opcode._const_tab = _______TCAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab
+    ________TCAP_Message_continue__components__item__basicROS_returnResult_result_opcode_tab = CLASS(name='_tab_OPERATION', mode=MODE_SET, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
+    ________TCAP_Message_continue__components__item__basicROS_returnResult_result_opcode_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    _______TCAP_Message_continue__components__item__basicROS_returnResult_result_opcode._const_tab = ________TCAP_Message_continue__components__item__basicROS_returnResult_result_opcode_tab
     _______TCAP_Message_continue__components__item__basicROS_returnResult_result_opcode._const_tab_at = None
     _______TCAP_Message_continue__components__item__basicROS_returnResult_result_opcode._const_tab_id = u'operationCode'
     _______TCAP_Message_continue__components__item__basicROS_returnResult_result_result = OPEN(name=u'result', mode=MODE_TYPE, typeref=ASN1RefClassField(('Remote-Operations-Information-Objects', 'OPERATION'), [u'ResultType']))
-    _______TCAP_Message_continue__components__item__basicROS_returnResult_result_result._const_tab = _______TCAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab
+    ________TCAP_Message_continue__components__item__basicROS_returnResult_result_result_tab = CLASS(name='_tab_OPERATION', mode=MODE_SET, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
+    ________TCAP_Message_continue__components__item__basicROS_returnResult_result_result_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    _______TCAP_Message_continue__components__item__basicROS_returnResult_result_result._const_tab = ________TCAP_Message_continue__components__item__basicROS_returnResult_result_result_tab
     _______TCAP_Message_continue__components__item__basicROS_returnResult_result_result._const_tab_at = ('..', u'opcode')
     _______TCAP_Message_continue__components__item__basicROS_returnResult_result_result._const_tab_id = u'ResultType'
     ______TCAP_Message_continue__components__item__basicROS_returnResult_result._cont = ASN1Dict([
@@ -1283,11 +1337,15 @@ class TCAP_Messages:
     _____TCAP_Message_continue__components__item__basicROS_returnError = SEQ(name=u'returnError', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('Remote-Operations-Generic-ROS-PDUs', 'ReturnError')))
     ______TCAP_Message_continue__components__item__basicROS_returnError_invokeId = CHOICE(name=u'invokeId', mode=MODE_TYPE, typeref=ASN1RefType(('Remote-Operations-Generic-ROS-PDUs', 'InvokeId')))
     ______TCAP_Message_continue__components__item__basicROS_returnError_errcode = CHOICE(name=u'errcode', mode=MODE_TYPE, typeref=ASN1RefClassField(('Remote-Operations-Information-Objects', 'ERROR'), [u'errorCode']))
-    ______TCAP_Message_continue__components__item__basicROS_returnError_errcode._const_tab = _______TCAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab
+    _______TCAP_Message_continue__components__item__basicROS_returnError_errcode_tab = CLASS(name='_tab_ERROR', mode=MODE_SET, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'ERROR')))
+    _______TCAP_Message_continue__components__item__basicROS_returnError_errcode_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ______TCAP_Message_continue__components__item__basicROS_returnError_errcode._const_tab = _______TCAP_Message_continue__components__item__basicROS_returnError_errcode_tab
     ______TCAP_Message_continue__components__item__basicROS_returnError_errcode._const_tab_at = None
     ______TCAP_Message_continue__components__item__basicROS_returnError_errcode._const_tab_id = u'errorCode'
     ______TCAP_Message_continue__components__item__basicROS_returnError_parameter = OPEN(name=u'parameter', mode=MODE_TYPE, typeref=ASN1RefClassField(('Remote-Operations-Information-Objects', 'ERROR'), [u'ParameterType']), opt=True)
-    ______TCAP_Message_continue__components__item__basicROS_returnError_parameter._const_tab = _______TCAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab
+    _______TCAP_Message_continue__components__item__basicROS_returnError_parameter_tab = CLASS(name='_tab_ERROR', mode=MODE_SET, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'ERROR')))
+    _______TCAP_Message_continue__components__item__basicROS_returnError_parameter_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ______TCAP_Message_continue__components__item__basicROS_returnError_parameter._const_tab = _______TCAP_Message_continue__components__item__basicROS_returnError_parameter_tab
     ______TCAP_Message_continue__components__item__basicROS_returnError_parameter._const_tab_at = ('..', u'errcode')
     ______TCAP_Message_continue__components__item__basicROS_returnError_parameter._const_tab_id = u'ParameterType'
     _____TCAP_Message_continue__components__item__basicROS_returnError._cont = ASN1Dict([
@@ -1308,11 +1366,15 @@ class TCAP_Messages:
     _____TCAP_Message_continue__components__item__returnResultNotLast_invokeId = CHOICE(name=u'invokeId', mode=MODE_TYPE, typeref=ASN1RefType(('Remote-Operations-Generic-ROS-PDUs', 'InvokeId')))
     _____TCAP_Message_continue__components__item__returnResultNotLast_result = SEQ(name=u'result', mode=MODE_TYPE, opt=True)
     ______TCAP_Message_continue__components__item__returnResultNotLast_result_opcode = CHOICE(name=u'opcode', mode=MODE_TYPE, typeref=ASN1RefClassField(('Remote-Operations-Information-Objects', 'OPERATION'), [u'operationCode']))
-    ______TCAP_Message_continue__components__item__returnResultNotLast_result_opcode._const_tab = _______TCAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab
+    _______TCAP_Message_continue__components__item__returnResultNotLast_result_opcode_tab = CLASS(name='_tab_OPERATION', mode=MODE_SET, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
+    _______TCAP_Message_continue__components__item__returnResultNotLast_result_opcode_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ______TCAP_Message_continue__components__item__returnResultNotLast_result_opcode._const_tab = _______TCAP_Message_continue__components__item__returnResultNotLast_result_opcode_tab
     ______TCAP_Message_continue__components__item__returnResultNotLast_result_opcode._const_tab_at = None
     ______TCAP_Message_continue__components__item__returnResultNotLast_result_opcode._const_tab_id = u'operationCode'
     ______TCAP_Message_continue__components__item__returnResultNotLast_result_result = OPEN(name=u'result', mode=MODE_TYPE, typeref=ASN1RefClassField(('Remote-Operations-Information-Objects', 'OPERATION'), [u'ResultType']))
-    ______TCAP_Message_continue__components__item__returnResultNotLast_result_result._const_tab = _______TCAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab
+    _______TCAP_Message_continue__components__item__returnResultNotLast_result_result_tab = CLASS(name='_tab_OPERATION', mode=MODE_SET, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
+    _______TCAP_Message_continue__components__item__returnResultNotLast_result_result_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ______TCAP_Message_continue__components__item__returnResultNotLast_result_result._const_tab = _______TCAP_Message_continue__components__item__returnResultNotLast_result_result_tab
     ______TCAP_Message_continue__components__item__returnResultNotLast_result_result._const_tab_at = ('..', u'opcode')
     ______TCAP_Message_continue__components__item__returnResultNotLast_result_result._const_tab_id = u'ResultType'
     _____TCAP_Message_continue__components__item__returnResultNotLast_result._cont = ASN1Dict([
@@ -1357,21 +1419,28 @@ class TCAP_Messages:
         ______TCAP_Message_unidirectional_components__item__basicROS_invoke_linkedId,
         _______TCAP_Message_unidirectional_components__item__basicROS_invoke_opcode_tab,
         ______TCAP_Message_unidirectional_components__item__basicROS_invoke_opcode,
+        _______TCAP_Message_unidirectional_components__item__basicROS_invoke_argument_tab,
         ______TCAP_Message_unidirectional_components__item__basicROS_invoke_argument,
         _____TCAP_Message_unidirectional_components__item__basicROS_invoke,
         ______TCAP_Message_unidirectional_components__item__basicROS_returnResult_invokeId,
+        ________TCAP_Message_unidirectional_components__item__basicROS_returnResult_result_opcode_tab,
         _______TCAP_Message_unidirectional_components__item__basicROS_returnResult_result_opcode,
+        ________TCAP_Message_unidirectional_components__item__basicROS_returnResult_result_result_tab,
         _______TCAP_Message_unidirectional_components__item__basicROS_returnResult_result_result,
         ______TCAP_Message_unidirectional_components__item__basicROS_returnResult_result,
         _____TCAP_Message_unidirectional_components__item__basicROS_returnResult,
         ______TCAP_Message_unidirectional_components__item__basicROS_returnError_invokeId,
+        _______TCAP_Message_unidirectional_components__item__basicROS_returnError_errcode_tab,
         ______TCAP_Message_unidirectional_components__item__basicROS_returnError_errcode,
+        _______TCAP_Message_unidirectional_components__item__basicROS_returnError_parameter_tab,
         ______TCAP_Message_unidirectional_components__item__basicROS_returnError_parameter,
         _____TCAP_Message_unidirectional_components__item__basicROS_returnError,
         _____TCAP_Message_unidirectional_components__item__basicROS_reject,
         ____TCAP_Message_unidirectional_components__item__basicROS,
         _____TCAP_Message_unidirectional_components__item__returnResultNotLast_invokeId,
+        _______TCAP_Message_unidirectional_components__item__returnResultNotLast_result_opcode_tab,
         ______TCAP_Message_unidirectional_components__item__returnResultNotLast_result_opcode,
+        _______TCAP_Message_unidirectional_components__item__returnResultNotLast_result_result_tab,
         ______TCAP_Message_unidirectional_components__item__returnResultNotLast_result_result,
         _____TCAP_Message_unidirectional_components__item__returnResultNotLast_result,
         ____TCAP_Message_unidirectional_components__item__returnResultNotLast,
@@ -1384,22 +1453,30 @@ class TCAP_Messages:
         _______TCAP_Message_begin_components__item__basicROS_invoke_linkedId_present,
         _______TCAP_Message_begin_components__item__basicROS_invoke_linkedId_absent,
         ______TCAP_Message_begin_components__item__basicROS_invoke_linkedId,
+        _______TCAP_Message_begin_components__item__basicROS_invoke_opcode_tab,
         ______TCAP_Message_begin_components__item__basicROS_invoke_opcode,
+        _______TCAP_Message_begin_components__item__basicROS_invoke_argument_tab,
         ______TCAP_Message_begin_components__item__basicROS_invoke_argument,
         _____TCAP_Message_begin_components__item__basicROS_invoke,
         ______TCAP_Message_begin_components__item__basicROS_returnResult_invokeId,
+        ________TCAP_Message_begin_components__item__basicROS_returnResult_result_opcode_tab,
         _______TCAP_Message_begin_components__item__basicROS_returnResult_result_opcode,
+        ________TCAP_Message_begin_components__item__basicROS_returnResult_result_result_tab,
         _______TCAP_Message_begin_components__item__basicROS_returnResult_result_result,
         ______TCAP_Message_begin_components__item__basicROS_returnResult_result,
         _____TCAP_Message_begin_components__item__basicROS_returnResult,
         ______TCAP_Message_begin_components__item__basicROS_returnError_invokeId,
+        _______TCAP_Message_begin_components__item__basicROS_returnError_errcode_tab,
         ______TCAP_Message_begin_components__item__basicROS_returnError_errcode,
+        _______TCAP_Message_begin_components__item__basicROS_returnError_parameter_tab,
         ______TCAP_Message_begin_components__item__basicROS_returnError_parameter,
         _____TCAP_Message_begin_components__item__basicROS_returnError,
         _____TCAP_Message_begin_components__item__basicROS_reject,
         ____TCAP_Message_begin_components__item__basicROS,
         _____TCAP_Message_begin_components__item__returnResultNotLast_invokeId,
+        _______TCAP_Message_begin_components__item__returnResultNotLast_result_opcode_tab,
         ______TCAP_Message_begin_components__item__returnResultNotLast_result_opcode,
+        _______TCAP_Message_begin_components__item__returnResultNotLast_result_result_tab,
         ______TCAP_Message_begin_components__item__returnResultNotLast_result_result,
         _____TCAP_Message_begin_components__item__returnResultNotLast_result,
         ____TCAP_Message_begin_components__item__returnResultNotLast,
@@ -1412,22 +1489,30 @@ class TCAP_Messages:
         _______TCAP_Message_end_components__item__basicROS_invoke_linkedId_present,
         _______TCAP_Message_end_components__item__basicROS_invoke_linkedId_absent,
         ______TCAP_Message_end_components__item__basicROS_invoke_linkedId,
+        _______TCAP_Message_end_components__item__basicROS_invoke_opcode_tab,
         ______TCAP_Message_end_components__item__basicROS_invoke_opcode,
+        _______TCAP_Message_end_components__item__basicROS_invoke_argument_tab,
         ______TCAP_Message_end_components__item__basicROS_invoke_argument,
         _____TCAP_Message_end_components__item__basicROS_invoke,
         ______TCAP_Message_end_components__item__basicROS_returnResult_invokeId,
+        ________TCAP_Message_end_components__item__basicROS_returnResult_result_opcode_tab,
         _______TCAP_Message_end_components__item__basicROS_returnResult_result_opcode,
+        ________TCAP_Message_end_components__item__basicROS_returnResult_result_result_tab,
         _______TCAP_Message_end_components__item__basicROS_returnResult_result_result,
         ______TCAP_Message_end_components__item__basicROS_returnResult_result,
         _____TCAP_Message_end_components__item__basicROS_returnResult,
         ______TCAP_Message_end_components__item__basicROS_returnError_invokeId,
+        _______TCAP_Message_end_components__item__basicROS_returnError_errcode_tab,
         ______TCAP_Message_end_components__item__basicROS_returnError_errcode,
+        _______TCAP_Message_end_components__item__basicROS_returnError_parameter_tab,
         ______TCAP_Message_end_components__item__basicROS_returnError_parameter,
         _____TCAP_Message_end_components__item__basicROS_returnError,
         _____TCAP_Message_end_components__item__basicROS_reject,
         ____TCAP_Message_end_components__item__basicROS,
         _____TCAP_Message_end_components__item__returnResultNotLast_invokeId,
+        _______TCAP_Message_end_components__item__returnResultNotLast_result_opcode_tab,
         ______TCAP_Message_end_components__item__returnResultNotLast_result_opcode,
+        _______TCAP_Message_end_components__item__returnResultNotLast_result_result_tab,
         ______TCAP_Message_end_components__item__returnResultNotLast_result_result,
         _____TCAP_Message_end_components__item__returnResultNotLast_result,
         ____TCAP_Message_end_components__item__returnResultNotLast,
@@ -1441,22 +1526,30 @@ class TCAP_Messages:
         _______TCAP_Message_continue__components__item__basicROS_invoke_linkedId_present,
         _______TCAP_Message_continue__components__item__basicROS_invoke_linkedId_absent,
         ______TCAP_Message_continue__components__item__basicROS_invoke_linkedId,
+        _______TCAP_Message_continue__components__item__basicROS_invoke_opcode_tab,
         ______TCAP_Message_continue__components__item__basicROS_invoke_opcode,
+        _______TCAP_Message_continue__components__item__basicROS_invoke_argument_tab,
         ______TCAP_Message_continue__components__item__basicROS_invoke_argument,
         _____TCAP_Message_continue__components__item__basicROS_invoke,
         ______TCAP_Message_continue__components__item__basicROS_returnResult_invokeId,
+        ________TCAP_Message_continue__components__item__basicROS_returnResult_result_opcode_tab,
         _______TCAP_Message_continue__components__item__basicROS_returnResult_result_opcode,
+        ________TCAP_Message_continue__components__item__basicROS_returnResult_result_result_tab,
         _______TCAP_Message_continue__components__item__basicROS_returnResult_result_result,
         ______TCAP_Message_continue__components__item__basicROS_returnResult_result,
         _____TCAP_Message_continue__components__item__basicROS_returnResult,
         ______TCAP_Message_continue__components__item__basicROS_returnError_invokeId,
+        _______TCAP_Message_continue__components__item__basicROS_returnError_errcode_tab,
         ______TCAP_Message_continue__components__item__basicROS_returnError_errcode,
+        _______TCAP_Message_continue__components__item__basicROS_returnError_parameter_tab,
         ______TCAP_Message_continue__components__item__basicROS_returnError_parameter,
         _____TCAP_Message_continue__components__item__basicROS_returnError,
         _____TCAP_Message_continue__components__item__basicROS_reject,
         ____TCAP_Message_continue__components__item__basicROS,
         _____TCAP_Message_continue__components__item__returnResultNotLast_invokeId,
+        _______TCAP_Message_continue__components__item__returnResultNotLast_result_opcode_tab,
         ______TCAP_Message_continue__components__item__returnResultNotLast_result_opcode,
+        _______TCAP_Message_continue__components__item__returnResultNotLast_result_result_tab,
         ______TCAP_Message_continue__components__item__returnResultNotLast_result_result,
         _____TCAP_Message_continue__components__item__returnResultNotLast_result,
         ____TCAP_Message_continue__components__item__returnResultNotLast,

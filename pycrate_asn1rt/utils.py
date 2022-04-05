@@ -1,7 +1,7 @@
 # -*- coding: UTF-8 -*-
 # /**
 # * Software Name : pycrate
-# * Version : 0.3
+# * Version : 0.4
 # *
 # * Copyright 2017. Benoit Michau. ANSSI.
 # *
@@ -62,6 +62,7 @@ def asnlog(msg):
     customizable logging function for the whole asn1 part
     '''
     log(msg)
+
 
 # -----------------------------------------------------------------------------#
 # asn1-wide Python variables and identifiers
@@ -360,11 +361,11 @@ def extract_charstr(text=''):
                            re.subn('\s{0,}\n\s{0,}', '', text[1:cur])[0]
 
 
-printable_str = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'\
-                '!"#$%&\'()*+,-./:;<=>?@[\\]^_`{|}~ \t\n\r\x0b\x0c'
+_printable_str = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'\
+                 '!"#$%&\'()*+,-./:;<=>?@[\\]^_`{|}~ \t\n\r\x0b\x0c'
 
 def is_printable(w):
-    return all(c in printable_str for c in w)
+    return all(c in _printable_str for c in w)
 
 #------------------------------------------------------------------------------#
 # integer factorization and rounding routine
@@ -380,6 +381,7 @@ def factor_perfrag(val):
         val -= f * frags[-1][1]
     return frags, val
 
+
 # for PER integer encoding
 def int_bitlen(val):
     # get the length in bits required for the absolute value of val
@@ -392,13 +394,17 @@ def int_bitlen(val):
         # 1+bl bits required
         return 1+bl
 
+
 # for PER and BER integer encoding
 def uint_bytelen(val):
+    if val == 0:
+        return 1
     bl = val.bit_length()
     if bl % 8:
         return 1 + (bl>>3)
     else:
         return bl>>3
+
 
 def int_bytelen(val):
     # get the length in bits required for the absolute value of val
@@ -420,6 +426,7 @@ def int_bytelen(val):
             return 1 + (bl>>3)
         else:
             return bl>>3
+
 
 # for APER character rounding
 def round_p2(val):
@@ -466,7 +473,7 @@ def match_tag(Obj, tag):
                 if ret:
                     return ret
             else:
-                # const_obj_type == CLASET_MULT:
+                #const_obj_type == CLASET_MULT
                 for obj in const_obj:
                     ret = match_tag(obj, tag)
                     if ret:
@@ -489,10 +496,15 @@ def match_tag(Obj, tag):
         elif hasattr(Obj, '_defby') and Obj._defby is not None:
             # DEFINED BY construction, not supported yet
             return 5
+        else:
+            # OPEN / ANY internal content cannot be determined
+            # so we suppose we have a match
+            return 1
     else:
         # we should never come here
         assert()
     return 0
+
 
 def get_obj_by_tag(ObjOpen, tag, ConstList=None):
     """Check within the value constraint of an OPEN / ANY object ObjOpen 
@@ -550,6 +562,7 @@ def get_obj_at(Obj, path):
             raise(ASN1Err('invalid object selection with path {0!r}, from {1}'\
                   .format(path, p)))
     return Obj  
+
 
 def get_val_at(Obj, path):
     """return the value within `Obj' value according to the given path
@@ -699,4 +712,64 @@ def get_referees(filepath, objname):
         if link['source'] == objname:
             ret.append(link['target'])
     return ret
+
+
+#------------------------------------------------------------------------------#
+# IEEE 754 float routines, used for REAL with OER codec
+#------------------------------------------------------------------------------#
+
+def decode_ieee754_32(char):
+    """ Converts IEE754 single precision float to a pycrate REAL tuple:
+    """
+    sign = (-1) ** char.get_uint(1)
+    exponent = char.get_uint(8) - 127
+    fraction = char.get_uint(23)
+    lsb = 0
+    ifrac = 1
+    for i in range(23):
+        lb = fraction & 1
+        if lb and (lsb == 0):
+            lsb = 23 - i
+        ifrac += 2 ** (-(23 - i)) * lb
+        fraction = fraction >> 1
+
+    # Convert the normalized mantissa (1.xxx) to a integer mantissa by multiplying 2
+    ifrac = int((sign * ifrac) * (2 ** lsb))
+    return (ifrac, 2, exponent - lsb)
+
+
+def encode_ieee754_32(val):
+    """ Converts pycrate REAL tuple into IEEE754 single precision value.
+    """
+    # There is of course a more efficient method going straight from mantissa,
+    # but sorry, no time. This at least works for arbitrary base.
+    return pack('>f', val[0] * (val[1] ** val[2]))
+
+
+def decode_ieee754_64(char):
+    """ Converts IEE754 single precision float to a pycrate REAL tuple:
+    """
+    sign = (-1) ** char.get_uint(1)
+    exponent = char.get_uint(11) - 1023
+    fraction = char.get_uint(52)
+    lsb = 0
+    ifrac = 1
+    for i in range(52):
+        lb = fraction & 1
+        if lb and (lsb == 0):
+            lsb = 53 - i
+        ifrac += 2 ** (-(52 - i)) * lb
+        fraction = fraction >> 1
+
+    # Convert the normalized mantissa (1.xxx) to a integer mantissa by multiplying 2
+    ifrac = int((sign * ifrac) * (2 ** lsb))
+    return (ifrac, 2, exponent - lsb)
+
+
+def encode_ieee754_64(val):
+    """ Converts pycrate REAL tuple into IEEE754 single precision value.
+    """
+    # There is of course a more efficient method going straight from mantissa,
+    # but sorry, no time. This at least works for arbitrary base.
+    return pack('>d', val[0] * (val[1] ** val[2]))
 

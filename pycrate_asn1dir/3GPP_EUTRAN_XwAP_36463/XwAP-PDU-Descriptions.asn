@@ -4,11 +4,11 @@
 --
 -- **************************************************************
 
-XwAP-PDU-Descriptions  { 
-itu-t (0) identified-organization (4) etsi (0) mobileDomain (0) 
+XwAP-PDU-Descriptions  {
+itu-t (0) identified-organization (4) etsi (0) mobileDomain (0)
 eps-Access (21) modules (3) xwap (8) version1 (1) xwap-PDU-Descriptions (0)}
 
-DEFINITIONS AUTOMATIC TAGS ::= 
+DEFINITIONS AUTOMATIC TAGS ::=
 
 BEGIN
 
@@ -24,8 +24,17 @@ IMPORTS
 
 FROM XwAP-CommonDataTypes
 
-	
+
 	ErrorIndication,
+	LWIPAdditionRequest,
+	LWIPAdditionRequestAcknowledge,
+	LWIPAdditionRequestReject,
+	LWIPModificationRequest,
+	LWIPModificationRequestAcknowledge,
+	LWIPModificationRequestReject,
+	LWIPReleaseRequest,
+	LWIPReleaseRequired,
+	LWIPReleaseConfirm,
 	PrivateMessage,
 	Reset,
 	ResetResponse,
@@ -52,7 +61,7 @@ FROM XwAP-CommonDataTypes
 	WTStatusResponse,
 	WTStatusFailure,
 	WTStatusReport
-	
+
 FROM XwAP-PDU-Contents
 
 	id-eNBInitiatedWTModification,
@@ -67,8 +76,12 @@ FROM XwAP-PDU-Contents
 	id-wTInitiatedWTModification,
 	id-wTInitiatedWTRelease,
 	id-wTStatusReporting,
-	id-wTStatusReportingInitiation
-	
+	id-wTStatusReportingInitiation,
+	id-lWIPAdditionPreparation,
+	id-eNBInitiatedLWIPModification,
+	id-eNBInitiatedLWIPRelease,
+	id-wTInitiatedLWIPRelease
+
 FROM XwAP-Constants;
 
 
@@ -132,7 +145,7 @@ UnsuccessfulOutcome ::= SEQUENCE {
 
 XWAP-ELEMENTARY-PROCEDURES XWAP-ELEMENTARY-PROCEDURE ::= {
 	XWAP-ELEMENTARY-PROCEDURES-CLASS-1			|
-	XWAP-ELEMENTARY-PROCEDURES-CLASS-2,	
+	XWAP-ELEMENTARY-PROCEDURES-CLASS-2,
 	...
 }
 
@@ -145,17 +158,21 @@ XWAP-ELEMENTARY-PROCEDURES-CLASS-1 XWAP-ELEMENTARY-PROCEDURE ::= {
 	wTAdditionPreparation			|
 	eNBInitiatedWTModification		|
 	wTInitiatedWTModification		|
-	wTInitiatedWTRelease			,
+	wTInitiatedWTRelease			|
+	lWIPAdditionPreparation			|
+	eNBInitiatedLWIPModification				|
+	wTInitiatedLWIPRelease			,
 
 	...
 }
 
-XWAP-ELEMENTARY-PROCEDURES-CLASS-2 XWAP-ELEMENTARY-PROCEDURE ::= {	
+XWAP-ELEMENTARY-PROCEDURES-CLASS-2 XWAP-ELEMENTARY-PROCEDURE ::= {
 	wTStatusReporting				|
 	errorIndication					|
 	eNBInitiatedWTRelease			|
 	wTAssociationConfirmation		|
-	privateMessage					,
+	privateMessage					|
+	eNBInitiatedLWIPRelease			,
 	...
 }
 
@@ -255,6 +272,34 @@ privateMessage				XWAP-ELEMENTARY-PROCEDURE ::= {
 	INITIATING MESSAGE		PrivateMessage
 	PROCEDURE CODE			id-privateMessage
 	CRITICALITY				ignore
+}
+
+lWIPAdditionPreparation		XWAP-ELEMENTARY-PROCEDURE ::= {
+	INITIATING MESSAGE		LWIPAdditionRequest
+	SUCCESSFUL OUTCOME		LWIPAdditionRequestAcknowledge
+	UNSUCCESSFUL OUTCOME	LWIPAdditionRequestReject
+	PROCEDURE CODE			id-lWIPAdditionPreparation
+	CRITICALITY				reject
+}
+eNBInitiatedLWIPModification	XWAP-ELEMENTARY-PROCEDURE ::= {
+	INITIATING MESSAGE			LWIPModificationRequest
+	SUCCESSFUL OUTCOME			LWIPModificationRequestAcknowledge
+	UNSUCCESSFUL OUTCOME 		LWIPModificationRequestReject
+	PROCEDURE CODE				id-eNBInitiatedLWIPModification
+	CRITICALITY					reject
+}
+
+eNBInitiatedLWIPRelease		XWAP-ELEMENTARY-PROCEDURE ::= {
+	INITIATING MESSAGE		LWIPReleaseRequest
+	PROCEDURE CODE			id-eNBInitiatedLWIPRelease
+	CRITICALITY				ignore
+}
+
+wTInitiatedLWIPRelease		XWAP-ELEMENTARY-PROCEDURE ::= {
+	INITIATING MESSAGE		LWIPReleaseRequired
+	SUCCESSFUL OUTCOME		LWIPReleaseConfirm
+	PROCEDURE CODE			id-wTInitiatedLWIPRelease
+	CRITICALITY				reject
 }
 
 END

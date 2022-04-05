@@ -1,7 +1,7 @@
 # -*- coding: UTF-8 -*-
 #/**
 # * Software Name : pycrate
-# * Version : 0.3
+# * Version : 0.4
 # *
 # * Copyright 2017. Benoit Michau. ANSSI.
 # *
@@ -32,11 +32,15 @@
 # release 13 (d90)
 #------------------------------------------------------------------------------#
 
-from binascii import unhexlify
+from binascii import hexlify, unhexlify
+from time     import struct_time
+from socket   import inet_ntop, inet_pton, AF_INET, AF_INET6
 
 from pycrate_core.utils  import *
-from pycrate_core.elt    import Envelope, Array, Sequence, REPR_RAW, REPR_HEX, \
-                                REPR_BIN, REPR_HD, REPR_HUM
+from pycrate_core.elt    import (
+    Envelope, Array, Sequence, Alt,
+    REPR_RAW, REPR_HEX, REPR_BIN, REPR_HD, REPR_HUM
+    )
 from pycrate_core.base   import *
 from pycrate_core.repr   import *
 from pycrate_core.charpy import Charpy
@@ -105,10 +109,12 @@ class BufBCD(Buf):
     """
     
     _rep = REPR_HUM
-    _dic = None # dict lookup not supported for repr()
+    _dic = None     # dict lookup not supported for repr()
     
     # characters accepted in a BCD number
-    _chars = '0123456789*#abc'
+    _chars  = ('0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '*', '#', 'a', 'b', 'c')
+    # filler character for odd length number encoding
+    _filler = 0xF
     
     def __init__(self, *args, **kw):
         # element name in kw, or first args
@@ -148,6 +154,8 @@ class BufBCD(Buf):
             Buf.set_val(self, val)
         elif isinstance(val, str_types):
             self.encode(val)
+        else:
+            raise(PycrateErr('{0}: invalid BufBCD value'.format(self._name)))
     
     def decode(self):
         """returns the encoded string of digits
@@ -175,12 +183,12 @@ class BufBCD(Buf):
         """
         # encode the chars
         try:
-            ret = [self._chars.find(c) for c in bcd]
-        except:
-            raise(PycrateErr('{0}: invalid BCD string to encode, {1!r}'\
+            ret = [self._chars.index(c) for c in bcd]
+        except Exception:
+            raise(PycrateErr('{0}: invalid character in BCD string to encode, {1!r}'\
                   .format(self._name, bcd)))
         if len(ret) % 2:
-            ret.append( 0xF )
+            ret.append( self._filler )
         #
         if python_version < 3:
             self._val = ''.join([chr(c) for c in map(lambda x,y:x+(y<<4), ret[::2], ret[1::2])])
@@ -222,14 +230,16 @@ class BufBCD(Buf):
 # with additionnal methods: encode(), decode()
 
 class PLMN(Buf):
-    """Child of pycrate_core.base.Buf object
-    with additional encode() and decode() capabilities in order to handle
-    PLMN encoding
+    """Custom `Buf' subclass supporting custom encode(), decode(), set_val() and repr() methods
+    specific for encoding a PLMN MCC-MNC code into 3 bytes in the std 3GPP BCD format
     """
     
     _bl  = 24 # 3 bytes
     _rep = REPR_HUM
     _dic = MNC_dict
+    
+    # default to PLMN 001.01
+    DEFAULT_VAL = b'\x00\xf1\x10'
     
     def __init__(self, *args, **kw):
         # element name in kw, or first args
@@ -269,26 +279,40 @@ class PLMN(Buf):
             Buf.set_val(self, val)
         elif isinstance(val, str_types):
             self.encode(val)
+        else:
+            raise(PycrateErr('{0}: invalid PLMN value'.format(self._name)))
     
     def decode(self):
         """returns the encoded string of digits
         """
-        if python_version < 3:
-            num = [ord(c) for c in self.get_val()]
-            join_init = u''
-        else:
-            num = self.get_val()
-            join_init = ''
         plmn = []
-        [plmn.extend((o>>4, o&0xF)) for o in num]
-        if plmn[2] == 15:
-            # 3-digits MNC
-            return join_init.join((str(plmn[1]), str(plmn[0]), str(plmn[3]),
-                                   str(plmn[5]), str(plmn[4])))
+        if python_version < 3:
+            for c in self.get_val():
+                b = ord(c)
+                plmn.append(b>>4)
+                plmn.append(b&0xf)
+            try:
+                if plmn[2] == 0xf:
+                    return u'%i%i%i%i%i' % (plmn[1], plmn[0], plmn[3], plmn[5], plmn[4])
+                else:
+                    return u'%i%i%i%i%i%i' % (plmn[1], plmn[0], plmn[3], plmn[5], plmn[4], plmn[2])
+            except IndexError:
+                # an invalid value has been set, _SAFE_STAT / DYN is probably disabled
+                # for e.g. fuzzing purpose, but there is still need to not break here
+                return '0x%s' % hexlify(self.to_bytes()).decode('ascii')
         else:
-            # 3-digits MNC
-            return join_init.join((str(plmn[1]), str(plmn[0]), str(plmn[3]),
-                                   str(plmn[5]), str(plmn[4]), str(plmn[2])))
+            for b in self.get_val():
+                plmn.append(b>>4)
+                plmn.append(b&0xf)
+            try:
+                if plmn[2] == 0xf:
+                    return '%i%i%i%i%i' % (plmn[1], plmn[0], plmn[3], plmn[5], plmn[4])
+                else:
+                    return '%i%i%i%i%i%i' % (plmn[1], plmn[0], plmn[3], plmn[5], plmn[4], plmn[2])
+            except IndexError:
+                # an invalid value has been set, _SAFE_STAT / DYN is probably disabled
+                # for e.g. fuzzing purpose, but there is still need to not break here
+                return '0x%s' % hexlify(self.to_bytes()).decode('ascii')
     
     def encode(self, plmn=u'00101'):
         """encode the given PLMN string and store the resulting buffer in 
@@ -302,12 +326,9 @@ class PLMN(Buf):
         elif len(plmn) != 6:
             raise(PycrateErr('{0}: invalid PLMN string to encode, {1!r}'\
                   .format(self._name, plmn)))
-        #
-        if python_version > 2:
-            plmn = tuple(plmn)
-            self._val = unhexlify(''.join((plmn[1], plmn[0], plmn[5], plmn[2], plmn[4], plmn[3])))
-        else:
-            self._val = unhexlify(str(''.join((plmn[1], plmn[0], plmn[5], plmn[2], plmn[4], plmn[3]))))
+        # no need to distinguish Python version as join() and unhexlify() seems to
+        # do a good job here in both cases
+        self._val = unhexlify(''.join((plmn[1], plmn[0], plmn[5], plmn[2], plmn[4], plmn[3])))
     
     def repr(self):
         # special hexdump representation
@@ -338,6 +359,58 @@ class PLMN(Buf):
         if self.REPR_MAXLEN > 0 and len(val_repr) > self.REPR_MAXLEN:
             val_repr = val_repr[:self.REPR_MAXLEN] + '...'
         return '<%s%s%s : %s>' % (self._name, desc, trans, val_repr)
+    
+    __repr__ = repr
+
+
+class IPAddr(Buf):
+    """Custom `Buf' subclass supporting custom encode(), decode(), set_val() and repr() methods
+    specific for an IP address:
+    - IPv4 when length is 4 bytes
+    - IPv6 when length is 16 bytes
+    """
+    
+    _rep = REPR_HUM
+    
+    def encode(self, val):
+        try:
+            if val.count('.') == 3:
+                Buf.set_val(self, inet_pton(AF_INET, val))
+            elif val.count(':'):
+                Buf.set_val(self, inet_pton(AF_INET6, val))
+            else:
+                Buf.set_val(val)
+        except Exception as err:
+            raise(PycrateErr('invalid IP address string'))
+    
+    def decode(self):
+        val = self.get_val()
+        if len(val) == 4:
+            return inet_ntop(AF_INET, val)
+        elif len(val) == 16:
+            return inet_ntop(AF_INET6, val)
+        else:
+            return val
+    
+    def set_val(self, val):
+        if python_version == 2 and isinstance(val, unicode) \
+        or python_version > 2 and isinstance(val, str_types):
+            self.encode(val)
+        else:
+            Buf.set_val(self, val)
+    
+    def repr(self):
+        vallen = self.get_len()
+        if self._rep == REPR_HUM and vallen in {4, 16}:
+            # element transparency
+            if self.get_trans():
+                trans = ' [transparent]'
+            else:
+                trans = ''
+            val_repr = self.decode()
+            return '<%s%s : %s>' % (self._name, trans, val_repr)
+        else:
+            return Buf.repr(self)
     
     __repr__ = repr
 
@@ -1002,7 +1075,9 @@ class _TP_SCTS_Comp(Envelope):
 
 
 class TimeZoneTime(Envelope):
+    
     YEAR_BASE = 2000
+    
     _GEN = (
         _TP_SCTS_Comp('Year', GEN=(Uint('Y1', bl=4), Uint('Y0', bl=4))),
         _TP_SCTS_Comp('Mon',  GEN=(Uint('M1', bl=4), Uint('M0', bl=4))),
@@ -1035,9 +1110,14 @@ class TimeZoneTime(Envelope):
         """decode the value of the TimeZoneTime into a Python struct_time and 
         timezone shift
         """
-        ts = struct_time((self.YEAR_BASE+self['Year'].decode(), self['Mon'].decode(),
-                          self['Day'].decode(), self['Hour'].decode(), self['Min'].decode(),
-                          self['Sec'].decode(), 0, 0, 0))
+        ts = struct_time((
+            self.YEAR_BASE+self['Year'].decode(),
+            self['Mon'].decode(),
+            self['Day'].decode(),
+            self['Hour'].decode(),
+            self['Min'].decode(),
+            self['Sec'].decode(),
+            0, 0, 0))
         return ts, self['TimeZone'].decode()
 
 
@@ -1160,6 +1240,19 @@ class MMTimer(Envelope):
         Uint('Unit', bl=3, dic=_MMTimerUnit_dict),
         Uint('Value', bl=5)
         )
+    
+    def get_time(self):
+        """returns the timer set in seconds
+        """
+        unit, val = self.get_val()
+        if unit == 0:
+            return val*2
+        elif unit == 1:
+            return val*60
+        elif unit == 2:
+            return val*360
+        else:
+            return 0
 
 
 #------------------------------------------------------------------------------#
@@ -1586,8 +1679,8 @@ _BCDType_dict = {
     2 : 'national number',
     3 : 'network specific number',
     4 : 'dedicated access, short code',
-    5 : 'alphanumeric',
-    6 : 'abbreviated number',
+    5 : 'alphanumeric',         # only for SMS
+    6 : 'abbreviated number',   # only for SMS
     7 : _str_reserved
     }
 
@@ -1597,11 +1690,11 @@ _NumPlan_dict = {
     2 : 'generic numbering plan',
     3 : 'data numbering plan (X.121)',
     4 : 'telex numbering plan (F.69)',
-    5 : 'service center specific',
-    6 : 'service center specific',
+    5 : 'service center specific',  # only for SMS
+    6 : 'service center specific',  # only for SMS
     8 : 'national numbering plan',
     9 : 'private numbering plan',
-    10: 'ERMES numbering plan',
+    10: 'ERMES numbering plan',     # only for SMS
     11: 'reserved for CTS',
     15: _str_reserved
     }
@@ -2135,6 +2228,8 @@ class CodecSysID(Envelope):
         l = self[1]()
         clen = char._len_bit
         char._len_bit = char._cur + 8*l
+        if char._len_bit > clen:
+            raise(EltErr('{0} [_from_char]: bit length overflow'.format(self._name)))
         if l == 1:
             for b in self[8:16]:
                 b.set_trans(True)
@@ -2340,6 +2435,18 @@ class ForceStdby(Envelope):
     _GEN = (
         Uint('spare', bl=1),
         Uint('Value', bl=3, dic=ForceStdby_dict)
+        )
+
+
+#------------------------------------------------------------------------------#
+# IMEISV request
+# TS 24.008, 10.5.5.10
+#------------------------------------------------------------------------------#
+
+class IMEISVReq(Envelope):
+    _GEN = (
+        Uint('spare', bl=1),
+        Uint('Value', bl=3, dic={0:'IMEISV not requested', 1:'IMEISV requested'})
         )
 
 
@@ -2590,6 +2697,33 @@ class UPIntegrityInd(Envelope):
 
 
 #------------------------------------------------------------------------------#
+# DCN-ID
+# TS 24.008, 10.5.5.35
+#------------------------------------------------------------------------------#
+# Dedicated Core Network ID
+
+class DCNID(Uint16):
+    pass
+
+
+#------------------------------------------------------------------------------#
+# Non-3GPP NW provided policies
+# TS 24.008, 10.5.5.37
+#------------------------------------------------------------------------------#
+
+_Non3GPPNWProvPol_dict = {
+    0 : 'use of non-3GPP emergency numbers not permitted', 
+    1 : 'use of non-3GPP emergency numbers permitted'
+    }
+
+class Non3GPPNWProvPol(Envelope):
+    _GEN = (
+        Uint('spare', bl=3),
+        Uint('Value', bl=1, dic=_Non3GPPNWProvPol_dict)
+        )
+
+
+#------------------------------------------------------------------------------#
 # Access point name
 # TS 24.008, 10.5.6.1
 #------------------------------------------------------------------------------#
@@ -2600,13 +2734,47 @@ class _APNItem(Envelope):
         Uint8('Len'),
         Buf('Value')
         )
+    
     def __init__(self, *args, **kwargs):
         Envelope.__init__(self, *args, **kwargs)
         self[0].set_valauto(self[1].get_len)
         self[1].set_blauto(lambda: 8*self[0].get_val())
 
+
 class APN(Sequence):
     _GEN = _APNItem('APNItem')
+    
+    def set_val(self, val):
+        if isinstance(val, str_types):
+            self.encode(val)
+        else:
+            Sequence.set_val(self, val)
+    
+    def encode(self, val):
+        apn_items = val.split('.')
+        Sequence.set_val(self, [{'Value': apn_item.encode()} for apn_item in apn_items])
+    
+    def decode(self):
+        return '.'.join([apn_item[1].decode() for apn_item in self.get_val()])
+    
+    def repr(self):
+        # element transparency
+        if self.get_trans():
+            trans = ' [transparent]'
+        else:
+            trans = ''
+        # additional description
+        if self._desc:
+            desc = ' [%s]' % self._desc
+        else:
+            desc = ''
+        #
+        return '<%s%s%s : %s>' % (self._name, desc, trans, self.decode())
+    
+    __repr__ = repr
+    
+    def show(self):
+        return self.get_hier_abs() * '    ' + self.repr()
 
 
 #------------------------------------------------------------------------------#
@@ -2707,14 +2875,14 @@ class ProtConfigElt(Envelope):
             cont = self._ContLUT[ident]('Cont')
             ccur, clen = char._cur, char._len_bit
             char._len_bit = ccur + 8*self[1].get_val()
+            if char._len_bit > clen:
+                raise(EltErr('{0} [_from_char]: bit length overflow'.format(self._name)))
             try:
                 cont._from_char(char)
-            except:
-                cont = None
+            except Exception:
                 char._cur, char._len_bit = ccur, clen
             else:
                 if char._cur < char._len_bit:
-                    cont = None
                     char._cur, char._len_bit = ccur, clen
                 else:
                     self.replace(self[2], cont)
@@ -2741,50 +2909,27 @@ _PDPTypeOrg_dict = {
     1 : 'IETF allocated',
     15 : 'Empty PDP type',
     }
-_PDPTypeNum0_dict = {
+
+_PDPTypeNum_dict = {
+    # ETSI allocated
     0 : 'reserved',
     1 : 'PPP',
-    }
-_PDPTypeNum1_dict = {
+    # IETF allocated
     33 : 'IPv4',
     87 : 'IPv6',
     141 : 'IPv4v6',
     }
 
+
 class PDPAddr(Envelope):
     _GEN = (
-        Uint('spare', bl=4),
+        Uint('spare', val=0, bl=4, rep=REPR_HEX),
         Uint('TypeOrg', val=1, bl=4, dic=_PDPTypeOrg_dict),
-        Uint8('Type', val=33),
-        Buf('Addr', val=b'', rep=REPR_HEX)
+        Uint8('Type', val=33, dic=_PDPTypeNum_dict),
+        IPAddr('Addr', val=b'') # empty when used in a Request, 4, 16, 20... up to 64 bytes otherwise
         )
-    
-    def __init__(self, *args, **kwargs):
-        Envelope.__init__(self, *args, **kwargs)
-        self[2].set_dicauto(self._set_pdpt_dic)
-        # Addr can be empty, when PDPAddr is used within a request
-        #self[3].set_blauto(self._set_addr_len)
-    
-    def _set_pdpt_dic(self):
-        to = self[1]()
-        if to == 0:
-            return _PDPTypeNum0_dict
-        elif to == 1:
-            return _PDPTypeNum1_dict
-        else:
-            return None
-    
-    #def _set_addr_len(self):
-    #    to, t = self[1](), self[2]()
-    #    if to == 1:
-    #        if t == 33:
-    #            return 32
-    #        elif t == 87:
-    #            return 128
-    #        elif t == 141:
-    #            return 160
-    #    return None
-    
+
+
 #------------------------------------------------------------------------------#
 # Quality of service
 # TS 24.008, 10.5.6.5
@@ -3222,7 +3367,7 @@ _PktFilterCompType_dict = {
     35 : 'IPv6 local address/prefix length type',
     48 : 'Protocol identifier/Next header type',
     64 : 'Single local port type',
-    65 : 'Local port range type',
+    65 : 'Local port range type',   
     80 : 'Single remote port type',
     81 : 'Remote port range type',
     96 : 'Security parameter index type',
@@ -3240,23 +3385,27 @@ class TFTPktFilterId(Envelope):
         Uint('Id', bl=4)
         )
 
+
 class _CompIPv4(Envelope):
     _GEN = (
-        Buf('Address', bl=32, rep=REPR_HEX),
+        IPAddr('Address', bl=32),
         Buf('Netmask', bl=32, rep=REPR_HEX)
         )
 
+
 class _CompIPv6(Envelope):
     _GEN = (
-        Buf('Address', bl=128, rep=REPR_HEX),
+        IPAddr('Address', bl=128),
         Buf('Netmask', bl=128, rep=REPR_HEX)
         )
 
+
 class _CompIPv6Pref(Envelope):
     _GEN = (
-        Buf('Address', bl=128, rep=REPR_HEX),
+        IPAddr('Address', bl=128),
         Uint8('PrefixLen')
         )
+
 
 class _CompPortRange(Envelope):
     _GEN = (
@@ -3264,107 +3413,65 @@ class _CompPortRange(Envelope):
         Uint16('PortHi')
         )
 
+
 class _CompTrafficClass(Envelope):
     _GEN = (
         Uint8('Class'),
         Uint8('Mask')
         )
 
+
 class TFTPktFilterComp(Envelope):
-    _ValueLUT = {
-        16 : _CompIPv4('IPv4'),
-        17 : _CompIPv4('IPv4'),
-        32 : _CompIPv6('IPv6'),
-        33 : _CompIPv6Pref('IPv6Pref'),
-        35 : _CompIPv6Pref('IPv6Pref'),
-        48 : Uint8('ProtId'),
-        64 : Uint16('Port'),
-        65 : _CompPortRange('PortRange'),
-        80 : Uint16('Port'),
-        81 : _CompPortRange('PortRange'),
-        96 : Uint32('IPsecSPI'),
-        112 : _CompTrafficClass('TrafficClass'),
-        128 : Uint24('FlowLabel')
-        }
     _GEN = (
         Uint8('Type', dic=_PktFilterCompType_dict),
-        Buf('Value', val=b'', rep=REPR_HEX)
+        Alt('Value', GEN={
+            16 : _CompIPv4('IPv4'),
+            17 : _CompIPv4('IPv4'),
+            32 : _CompIPv6('IPv6'),
+            33 : _CompIPv6Pref('IPv6Pref'),
+            35 : _CompIPv6Pref('IPv6Pref'),
+            48 : Uint8('ProtId'),
+            64 : Uint16('Port'),
+            65 : _CompPortRange('PortRange'),
+            80 : Uint16('Port'),
+            81 : _CompPortRange('PortRange'),
+            96 : Uint32('SPI'),
+            112 : _CompTrafficClass('TrafficClass'),
+            128 : Uint24('FlowLabel')
+            },
+            DEFAULT=Buf('unk', val=b'', rep=REPR_HEX),
+            sel=lambda self: self.get_env()['Type'].get_val())
         )
-        
-    def set_val(self, vals):
-        if isinstance(vals, (tuple, list)) and len(vals) > 1 and \
-        vals[0] in self._ValueLUT and not isinstance(vals[1], bytes_types):
-            # replace Buf with the specific structure
-            self.replace(self[1], self._ValueLUT[vals[0]].clone())
-        elif isinstance(vals, dict) and 'Type' in vals and 'Value' in vals and \
-        vals['Type'] in self._ValueLUT and not isinstance(vals['Value'], bytes_types):
-            # replace Buf with the specific structure
-            self.replace(self[1], self._ValueLUT[vals[0]].clone())
-        Envelope.set_val(self, vals)
-    
-    def _from_char(self, char):
-        self[0]._from_char(char)
-        t = self[0]()
-        if t in self._ValueLUT:
-            self.replace(self[1], self._ValueLUT[t].clone())
-        self[1]._from_char(char)
+
 
 class TFTPktFilter(Envelope):
-    _Cont = Sequence('Cont', GEN=TFTPktFilterComp())
     _GEN = (
         Uint('spare', bl=2),
         Uint('Dir', bl=2, dic=_PktFilterDir_dict),
         Uint('Id', bl=4),
         Uint8('Precedence'),
         Uint8('Len'),
-        Buf('Cont', val=b'', rep=REPR_HEX)
+        Sequence('Cont', GEN=TFTPktFilterComp())
         )
     
     def __init__(self, *args, **kwargs):
         Envelope.__init__(self, *args, **kwargs)
-        self._Cont = self.__class__._Cont.clone()
-        self[4].set_valauto(lambda: self[5].get_len())
-        self[5].set_blauto(lambda: 8*self[4]())
-    
-    def set_val(self, vals):
-        if isinstance(vals, (tuple, list)) and len(vals) > 5 and \
-        not isinstance(vals[5], bytes_types):
-            # replace Cont with the specific structure
-            self.replace(self[5], self._Cont)
-        elif isinstance(vals, dict) and 'Cont' in vals and \
-        not isinstance(vals['Cont'], bytes_types):
-            # replace Cont with the specific structure
-            self.replace(self[5], self._Cont)
-        Envelope.set_val(self, vals)
-    
-    def _from_char(self, char):
-        Envelope._from_char(self, char)
-        # saves char settings
-        ccur, clen, cont_bl = char._cur, char._len_bit, self[5].get_bl()
-        # rewind it to parse again with a sequence of TFTPktFilterComp()
-        char._len_bit = char._cur
-        char._cur -= cont_bl
-        try:
-            self._Cont._from_char(char)
-        except:
-            char._cur, char._len_bit = ccur, clen
-        else:
-            if char._cur == ccur:
-                self.replace(self[5], self._Cont)
-            else:
-                char._cur = ccur
-            char._len_bit = clen
+        self['Len'].set_valauto(lambda: self['Cont'].get_len())
+        self['Cont'].set_blauto(lambda: self['Len'].get_val()<<3)
+
 
 class TFTParameter(Envelope):
     _GEN = (
         Uint8('Id'),
         Uint8('Len'),
-        Buf('Cont', val=b'')
+        Buf('Cont', val=b'', rep=REPR_HEX)
         )
+    
     def __init__(self, *args, **kwargs):
         Envelope.__init__(self, *args, **kwargs)
         self[1].set_valauto(self[2].get_len)
         self[2].set_blauto(lambda: 8*self[1]())
+
 
 class TFT(Envelope):
     ENV_SEL_TRANS = False
@@ -3376,6 +3483,7 @@ class TFT(Envelope):
         Sequence('PktFilters', GEN=TFTPktFilter()),
         Sequence('Parameters', GEN=TFTParameter())
         )
+    
     def __init__(self, *args, **kwargs):
         Envelope.__init__(self, *args, **kwargs)
         self[2].set_valauto(lambda: self[3].get_num() if \
@@ -3411,7 +3519,8 @@ class TMGI(Envelope):
         if char.len_bit() < 48:
             self[1].set_trans(True)
         Envelope._from_char(self, char)
-        
+
+
 #------------------------------------------------------------------------------#
 # MBMS bearer capabilities
 # TS 24.008, 10.5.6.14
@@ -3495,6 +3604,40 @@ class WLANOffloadAccept(Envelope):
 
 
 #------------------------------------------------------------------------------#
+# NBIFOM container
+# TS 24.008, 10.5.6.21
+#------------------------------------------------------------------------------#
+
+_NBIFOMParamID_dict = {
+    0 : 'Not assigned',
+    1 : 'NBIFOM mode',
+    2 : 'NBIFOM default access',
+    3 : 'NBIFOM status',
+    4 : 'NBIFOM routing rules',
+    5 : 'NBIFOM IP flow mapping',
+    6 : 'NBIFOM RAN rules handling',
+    7 : 'NBIFOM Access stratum status',
+    8 : 'NBIFOM access usability indication',
+    }
+
+class NBIFOMParameter(Envelope):
+    _GEN = (
+        Uint8('ParamID', dic=_NBIFOMParamID_dict),
+        Uint8('ParamLen'),
+        Buf('Param', rep=REPR_HEX)
+        )
+    
+    def __init__(self, *args, **kwargs):
+        Envelope.__init__(self, *args, **kwargs)
+        self[1].set_valauto(lambda: self[2].get_len())
+        self[2].set_blauto(lambda: self[1].get_val()<<3)
+
+
+class NBIFOMContainer(Sequence):
+    _GEN = NBIFOMParameter()
+
+
+#------------------------------------------------------------------------------#
 # PDP Context Status
 # TS 24.008, 10.5.7.1
 #------------------------------------------------------------------------------#
@@ -3556,6 +3699,19 @@ class GPRSTimer(Envelope):
         Uint('Unit', bl=3, dic=_GPRSTimerUnit_dict),
         Uint('Value', bl=5)
         )
+    
+    def get_time(self):
+        """returns the timer set in seconds
+        """
+        unit, val = self.get_val()
+        if unit == 0:
+            return val*2
+        elif unit == 1:
+            return val*60
+        elif unit == 2:
+            return val*360
+        else:
+            return 0
 
 
 #------------------------------------------------------------------------------#
@@ -3574,11 +3730,29 @@ _GPRSTimer3Unit_dict = {
     7 : 'timer deactivated'
     }
 
+_GPRSTimer3Unit_mult = {
+    0 : 600,
+    1 : 3600,
+    2 : 36000,
+    3 : 2,
+    4 : 30,
+    5 : 60,
+    6 : 1152000,
+    7 : 0
+    }
+
+
 class GPRSTimer3(Envelope):
     _GEN = (
         Uint('Unit', bl=3, dic=_GPRSTimer3Unit_dict),
         Uint('Value', bl=5)
         )
+    
+    def get_time(self):
+        """returns the timer set in seconds
+        """
+        unit, val = self.get_val()
+        return val * _GPRSTimer3Unit_mult[unit]
 
 
 #------------------------------------------------------------------------------#

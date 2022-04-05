@@ -1,9 +1,10 @@
 # -*- coding: UTF-8 -*-
 #/**
 # * Software Name : pycrate
-# * Version : 0.3
+# * Version : 0.4
 # *
 # * Copyright 2017. Benoit Michau. ANSSI.
+# * Copyright 2018. Benoit Michau. P1Sec.
 # *
 # * This library is free software; you can redistribute it and/or
 # * modify it under the terms of the GNU Lesser General Public
@@ -26,6 +27,8 @@
 # * Authors : Benoit Michau 
 # *--------------------------------------------------------
 #*/
+
+from binascii import unhexlify
 
 from pycrate_core.utils  import *
 from pycrate_core.repr   import *
@@ -131,6 +134,15 @@ class SrcLocalRef(Uint24):
 # ITU-T Q.713, section 3.4 / 3.5
 #------------------------------------------------------------------------------#
 
+class SCCPBufBCD(BufBCD):
+    # as given in 3.4.2.3.1
+    _chars  = ('0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
+               '_spare10_', '_code11_', '_code12_', '_spare13_', '_spare14_', '_ST_')
+    # TODO: make something that can be re-encoded
+    
+    _filler = 0x0
+
+
 # GTInd 0001
 # section 3.4.2.3.1
 
@@ -150,8 +162,25 @@ class _GlobalTitle0001(Envelope):
     _GEN = (
         Uint('OE', bl=1, dic={0:'even number of address signals', 1:'odd number of address signals'}),
         Uint('NAI', val=1, bl=7, dic=_GTNAI_dict),
-        BufBCD('Addr', val=b'')
+        SCCPBufBCD('Addr', val=b'')
         )
+    
+    def get_addr(self):
+        """return BCD-encoded Addr, properly decoded according to OE
+        """
+        if self[0].get_val():
+            return self[2].decode()[:-1]
+        else:
+            return self[2].decode()
+    
+    def set_addr(self, addr):
+        """set the BCD-encoded Addr and OE
+        """
+        if len(addr) % 2:
+            self[0].set_val(1)
+        self[2].encode(addr)
+    
+    set_attr_bcd = set_addr
 
 
 # GTInd 0010
@@ -162,6 +191,16 @@ class _GlobalTitle0010(Envelope):
         Uint8('TranslationType'),
         Buf('Addr', val=b'', rep=REPR_HEX)
         )
+    
+    def get_addr(self):
+        """return the hex-encoded Addr
+        """
+        return self[1].hex()
+    
+    def set_addr(self, addr):
+        """set the hex-encoded Addr
+        """
+        self[1].set_val(unhexlify(addr))
 
 
 # GTInd 0011
@@ -179,6 +218,12 @@ _NumPlan_dict = {
     14 : 'private network or network-specific numbering plan'
     }
 
+# kind reminder:
+# from https://en.wikipedia.org/wiki/Global_title
+# E.164 : MSISDN (CC + NDC + SN)
+# E.212 : IMSI (MCC + MNC + MSIN)
+# E.214 : MGT (CC + NDC + MSIN)
+
 _EncScheme_dict = {
     0 : 'unknown',
     1 : 'BCD, odd number of digits',
@@ -190,34 +235,34 @@ class _GlobalTitle0011(Envelope):
     ENV_SEL_TRANS = False
     _GEN = (
         Uint8('TranslationType'),
-        Uint('NumberingPlan', val=1, bl=4, dic=_NumPlan_dict), # 1: ISDN
-        Uint('EncodingScheme', val=1, bl=4), # 1: BCD odd, 2: BCD even 
-        BufBCD('Addr', val=b''), # if BCD encoding
-        Buf('Addr', val=b'', rep=REPR_HEX) # otherwise
+        Uint('NumberingPlan', val=1, bl=4, dic=_NumPlan_dict),
+        Uint('EncodingScheme', val=1, bl=4, dic=_EncScheme_dict),
+        Alt('Addr', GEN={
+            1 : SCCPBufBCD('BCD', val=b''),
+            2 : SCCPBufBCD('BCD', val=b'')},
+            DEFAULT=Buf('Raw', val=b'', rep=REPR_HEX),
+            sel=lambda self: self.get_env()[2].get_val())
         )
-    def __init__(self, *args, **kwargs):
-        Envelope.__init__(self, *args, **kwargs)
-        self[3].set_transauto(lambda: False if self[2].get_val() in (1, 2) else True)
-        self[4].set_transauto(lambda: True if self[2].get_val() in (1, 2) else False)
-    
-    def set_val(self, vals):
-        if isinstance(vals, dict):
-            addr = None
-            for key, val in vals.items():
-                if key == 'Addr':
-                    addr = val
-                else:
-                    self.__setitem__(key, val)
-            if addr is not None:
-                self.get_addr().set_val(addr)
-        else:
-            Envelope.set_val(self, vals)
-    
+
     def get_addr(self):
-        if self[2].get_val() in (1, 2):
-            return self[3]
+        """return the BCD- or hex-encoded Addr, properly decoded according to EncodingScheme
+        """
+        enc = self[2].get_val()
+        if enc == 1:
+            return self[3].get_alt().decode()[:-1]
+        elif enc == 2:
+            return self[3].get_alt().decode()
         else:
-            return self[4]
+            return self[3].get_alt().hex()
+    
+    def set_addr_bcd(self, addr):
+        """set the BCD-encoded Addr and EncodingScheme
+        """
+        if len(addr) % 2:
+            self[2].set_val(1)
+        else:
+            self[2].set_val(2)
+        self[3].get_alt().encode(addr)
 
 
 # GTInd 0100
@@ -238,36 +283,36 @@ class _GlobalTitle0100(Envelope):
     ENV_SEL_TRANS = False
     _GEN = (
         Uint8('TranslationType', val=1, dic=_GTIntTransType_dict),
-        Uint('NumberingPlan', val=1, bl=4, dic=_NumPlan_dict), # 1: ISDN
-        Uint('EncodingScheme', val=1, bl=4), # 1: BCD
+        Uint('NumberingPlan', val=1, bl=4, dic=_NumPlan_dict),
+        Uint('EncodingScheme', val=1, bl=4, dic=_EncScheme_dict),
         Uint('spare', bl=1),
         Uint('NAI', val=1, bl=7, dic=_GTNAI_dict),
-        BufBCD('Addr', val=b''), # if BCD encoding
-        Buf('Addr', val=b'', rep=REPR_HEX) # otherwise
+        Alt('Addr', GEN={
+            1 : SCCPBufBCD('BCD', val=b''),
+            2 : SCCPBufBCD('BCD', val=b'')},
+            DEFAULT=Buf('Raw', val=b'', rep=REPR_HEX),
+            sel=lambda self: self.get_env()[2].get_val())
         )
-    def __init__(self, *args, **kwargs):
-        Envelope.__init__(self, *args, **kwargs)
-        self[5].set_transauto(lambda: False if self[2].get_val() in (1, 2) else True)
-        self[6].set_transauto(lambda: True if self[2].get_val() in (1, 2) else False)
-    
-    def set_val(self, vals):
-        if isinstance(vals, dict):
-            addr = None
-            for key, val in vals.items():
-                if key == 'Addr':
-                    addr = val
-                else:
-                    self.__setitem__(key, val)
-            if addr is not None:
-                self.get_addr().set_val(addr)
-        else:
-            Envelope.set_val(self, vals)
-    
+
     def get_addr(self):
-        if self[2].get_val() in (1, 2):
-            return self[5]
+        """return the BCD- or hex-encoded Addr, properly decoded according to EncodingScheme
+        """
+        enc = self[2].get_val()
+        if enc == 1:
+            return self[5].get_alt().decode()[:-1]
+        elif enc == 2:
+            return self[5].get_alt().decode()
         else:
-            return self[6]
+            return self[5].get_alt().hex()
+    
+    def set_addr_bcd(self, addr):
+        """set the BCD-encoded Addr and EncodingScheme
+        """
+        if len(addr) % 2:
+            self[2].set_val(1)
+        else:
+            self[2].set_val(2)
+        self[5].get_alt().encode(addr)
 
 
 # SCCP called / calling party address
@@ -337,42 +382,20 @@ class _SCCPAddr(Envelope):
             )),
         Uint16LE('PC'), # presence depends on PCInd
         Uint8('SSN', val=0, dic=_SSN_dict), # presence depends on SSNInd
-        _GlobalTitle0001('GT'),
-        _GlobalTitle0010('GT'),
-        _GlobalTitle0011('GT'),
-        _GlobalTitle0100('GT')
+        Alt('GT', GEN={
+            1 : _GlobalTitle0001('GT_1'),
+            2 : _GlobalTitle0010('GT_2'),
+            3 : _GlobalTitle0011('GT_3'),
+            4 : _GlobalTitle0100('GT_4')},
+            DEFAULT=Buf('GT_unk', val=b'', rep=REPR_HEX),
+            sel=lambda self: self.get_env()[0][2].get_val())
         )
     
     def __init__(self, *args, **kwargs):
         Envelope.__init__(self, *args, **kwargs)
-        self[1].set_transauto(lambda: False if self[0][4].get_val() == 1 else True)
-        self[2].set_transauto(lambda: False if self[0][3].get_val() == 1 else True)
-        self[3].set_transauto(lambda: False if self[0][2].get_val() == 1 else True)
-        self[4].set_transauto(lambda: False if self[0][2].get_val() == 2 else True)
-        self[5].set_transauto(lambda: False if self[0][2].get_val() == 3 else True)
-        self[6].set_transauto(lambda: False if self[0][2].get_val() == 4 else True)
-    
-    def set_val(self, vals):
-        if isinstance(vals, dict):
-            gt = None
-            for key, val in vals.items():
-                if key == 'GT':
-                    gt = val
-                else:
-                    self.__setitem__(key, val)
-            if gt is not None:
-                self.get_gt().set_val(gt)
-        else:
-            Envelope.set_val(self, vals)
-    
-    def get_gt(self):
-        # GTInd + SSNInd + PCInd
-        cur = 2 + self[0][2].get_val()
-        try:
-            return self[cur]
-        except:
-            # this is dirty
-            return self[-1]
+        self[1].set_transauto(lambda: False if self[0][4].get_val() != 0 else True)
+        self[2].set_transauto(lambda: False if self[0][3].get_val() != 0 else True)
+        self[3].set_transauto(lambda: False if self[0][2].get_val() != 0 else True)
     
     def _from_char(self, char):
         if not self.GT_DONT_DECODE:
@@ -381,50 +404,33 @@ class _SCCPAddr(Envelope):
             self[0]._from_char(char)
             self[1]._from_char(char)
             self[2]._from_char(char)
-            del self[3:]
-            gt = Buf('GT')
+            del self[3]
+            gt = Buf('GT', rep=REPR_HEX)
             gt._from_char(char)
             self.append( gt )
 
 
-class CallingPartyAddr(Envelope):
+class SCCPPartyAddr(Envelope):
     _GEN = (
         Uint8('Len'),
         _SCCPAddr('Value')
         )
+    
     def __init__(self, *args, **kwargs):
         Envelope.__init__(self, *args, **kwargs)
         self[0].set_valauto(lambda: self[1].get_len())
-    
-    def _from_char(self, char):
-        self[0]._from_char(char)
-        clen = char._len_bit
-        char._len_bit = char._cur + 8*self[0].get_val()
-        self[1]._from_char(char)
-        char._len_bit = clen
+        self[1].set_blauto(lambda: self[0].get_val()<<3)
     
     def get_gt(self):
-        return self[1].get_gt()
+        return self[1][3].get_alt()
 
 
-class CalledPartyAddr(Envelope):
-    _GEN = (
-        Uint8('Len'),
-        _SCCPAddr('Value')
-        )
-    def __init__(self, *args, **kwargs):
-        Envelope.__init__(self, *args, **kwargs)
-        self[0].set_valauto(lambda: self[1].get_len())
-    
-    def _from_char(self, char):
-        self[0]._from_char(char)
-        clen = char._len_bit
-        char._len_bit = char._cur + 8*self[0].get_val()
-        self[1]._from_char(char)
-        char._len_bit = clen
-    
-    def get_gt(self):
-        return self[1].get_gt()
+class CallingPartyAddr(SCCPPartyAddr):
+    pass
+
+
+class CalledPartyAddr(SCCPPartyAddr):
+    pass
 
 
 #------------------------------------------------------------------------------#
@@ -439,19 +445,21 @@ _ProtClass_dict = {
     3 : 'Class 3 (connection-oriented)'
     }
 
-_ProtConLess_dict = {
-    0 : 'no special options',
-    8 : 'return message on error'
-    }
+_ProtCon_dict = {i: 'spare' for i in range(16)}
+_ProtConLess_dict = {i: 'spare' for i in range(16)}
+_ProtConLess_dict[0] = 'no special options'
+_ProtConLess_dict[8] = 'return message on error'
+
 
 class ProtocolClass(Envelope):
     _GEN = (
-        Uint('spare', bl=4),
+        Uint('Handling', bl=4),
         Uint('Class', bl=4, dic=_ProtClass_dict)
         )
+    
     def __init__(self, *args, **kwargs):
         Envelope.__init__(self, *args, **kwargs)
-        self[0].set_dicauto(lambda: _ProtConLess_dict if self[1].get_val() < 2 else {})
+        self[0].set_dicauto(lambda: _ProtConLess_dict if self[1].get_val() < 2 else _ProtCon_dict)
 
 
 #------------------------------------------------------------------------------#
@@ -639,18 +647,13 @@ class RefCause(Uint8):
 class Data(Envelope):
     _GEN = (
         Uint8('Len'),
-        Buf('Value')
+        Buf('Value', val=b'', rep=REPR_HEX)
         )
+    
     def __init__(self, *args, **kwargs):
         Envelope.__init__(self, *args, **kwargs)
         self[0].set_valauto(lambda: self[1].get_len())
-    
-    def _from_char(self, char):
-        self[0]._from_char(char)
-        clen = char._len_bit
-        char._len_bit = char._cur + 8*self[0].get_val()
-        self[1]._from_char(char)
-        char._len_bit = clen
+        self[1].set_blauto(lambda: self[0].get_val()<<3)
 
 
 #------------------------------------------------------------------------------#
@@ -696,19 +699,16 @@ class Importance(Envelope):
 
 class LongData(Envelope):
     _GEN = (
-        Uint16('Len'),
+        # WNG: Q.713 does not say if it is in BE or LE, we guess LE similarly to Ptr16
+        Uint16LE('Len'),
         Buf('Value', val=b'', rep=REPR_HEX)
         )
+    
     def __init__(self, *args, **kwargs):
         Envelope.__init__(self, *args, **kwargs)
         self[0].set_valauto(lambda: self[1].get_len())
-    
-    def _from_char(self, char):
-        self[0]._from_char(char)
-        clen = char._len_bit
-        char._len_bit = char._cur + 8*self[0].get_val()
-        self[1]._from_char(char)
-        char._len_bit = clen
+        self[1].set_blauto(lambda: self[0].get_val()<<3)
+
 
 #------------------------------------------------------------------------------#
 # SCCP messages and codes
@@ -743,17 +743,27 @@ class _Ptr(UintLE):
             if self._field == 'Opt' and all([o.get_trans() for o in self._env._env['Opt']._content]):
                 return val
             #
-            # get the length of following pointers
-            for ptr in self._env._content[1+self._env.index(self):]:
-                val += ptr.get_len()
-            # get the length of following fields, up to self._field
-            ind = 1+self._env._env.index(self._env)
+            # get the length of the following pointers (including self) within the Pointers envelope
+            ind = self._env._content.index(self)
+            for ptr in self._env._content[ind:]:
+                val += ptr._bl//8
+                #print('%s: %s, %i' % (self._name, ptr._name, val))
+            if self._bl == 16:
+                # see Q.713, section 2.3:
+                # pointer value is between the MSB (LE) of the pointer and the parameter
+                # hence removing 1 bytes for Ptr16
+                val -= 1
+            #
+            # get the length of the fields after the Pointers field, up to self._field
+            ind = 1 + self._env._env._content.index(self._env)
             for field in self._env._env._content[ind:]:
                 if field._name == self._field:
                     break
                 else:
                     val += field.get_len()
-            return min(self._max, 1+val)
+                #print('%s: %s, %i' % (self._name, field._name, val))
+            #
+            return min(self._max, val)
     
     _valauto = _make_val
 
@@ -767,7 +777,7 @@ class Ptr16(_Ptr):
 
 
 # constructor for an optional parameter wrapper
-def Optional(param, name, trans=True):
+def Optional(param, name):
     """prefix the parameter element `param' with an uint8 as name, and eventually
     an uint8 as len, and make it transparent by default
     """
@@ -789,6 +799,8 @@ def Optional(param, name, trans=True):
             def __init__(self, *args, **kwargs):
                 Envelope.__init__(self, *args, **kwargs)
                 self[1].set_valauto(lambda: self[2].get_len())
+                if not hasattr(param, '_bl') or param._bl is None:
+                    self[2].set_blauto(lambda: self[1].get_val()<<3)
                 self.set_trans(True)
         w = Option(param._name)
     return w
@@ -801,26 +813,75 @@ class SCCPMessage(Envelope):
     """
     
     def _from_char(self, char):
+        if self.get_trans():
+            return
         # parse the fixed content up the the pointers
         start = 0
         for e in self._content:
             e._from_char(char)
             if e._name == 'Pointers':
-                start = 1+self.index(e)
+                # e: envelope containing all Ptr8 or Ptr16 values
+                start = 1 + self.index(e)
                 break
         if not start:
             return
         # parse the variable-length and optional content according to the pointers
         # this is done non-sequentially
         ccur, numptr = char._cur, len(e._content)
+        # ccur: cursor at the end of the Pointers field
+        # numptr: number of pointers
         for ind, ptr in enumerate(e._content):
             if ptr._field == 'Opt' and ptr._val == 0:
                 break
             # update the charpy cursor
-            char._cur = ccur + 8*ptr.get_val() - (numptr-ind)*ptr._bl
+            char._cur = ccur + (8 * ptr.get_val()) - ((numptr-ind) * ptr._bl)
+            if ptr._bl == 16:
+                # see Q.713, section 2.3:
+                # pointer value is between the MSB (LE) of the pointer and the parameter
+                # hence removing 1 bytes for Ptr16
+                char._cur += 8
             # select the corresponding field
-            f = self._content[start+ind]
-            f._from_char(char)
+            field = self._content[start+ind]
+            #print('%s: %s, %i' % (ptr._name, field._name, char._cur))
+            field._from_char(char)
+    
+    def is_valid(self):
+        """Ensures an SCCP message has a valid layout,
+        i.e. its mandatory parameters with variable length (those with pointers) 
+        do not overlap
+        
+        Args:
+            None
+        
+        Returns:
+            result: bool
+        """
+        if 'Pointers' in self._by_name:
+            ptrs_ind = self._by_name.index('Pointers')
+            ptrs  = self._content[ptrs_ind].get_val()
+            prms  = self._content[1+ptrs_ind:]
+            areas, len_ptrs = [], len(ptrs)
+            for i in range(len_ptrs):
+                prm = prms[i]
+                if prm._name == 'Opt':
+                    # Options have no global length prefix, but are always the last parameter
+                    # moreover, if their pointer is null, the parameter is not present
+                    ptr = ptrs[i]
+                    if ptr != 0:
+                        areas.append( (ptr-(len_ptrs-i), None) )
+                else:
+                    areas.append( (ptrs[i]-(len_ptrs-i), 1+prm._content[0].get_val()) )
+            areas.sort(key=lambda x: x[0])
+            # areas: list of (prm_offset, prm_length), sorted by prm_offset
+            #print(areas)
+            off = 0
+            for prm in areas:
+                if prm[0] < off:
+                    return False
+                else:
+                    if prm[1] is not None:
+                        off += prm[1]
+        return True
 
 
 # parent class for SCCP messages options
@@ -836,6 +897,8 @@ class SCCPOpt(Envelope):
         self._opts = {e[0]._val: e for e in self._content}
     
     def _from_char(self, char):
+        if self.get_trans():
+            return
         # parse the different options in the given order
         ind = 0
         while char.len_bit() >= 8:
@@ -843,18 +906,21 @@ class SCCPOpt(Envelope):
             if name not in self._opts:
                 #raise(PycrateErr('SCCP option: invalid identifier %i' % name))
                 # unknown option
-                opt = Optional(Buf('_unk_%i' % name), name)
-                # automate the length of Buf() to its Len() prefix
-                opt[2].set_blauto(lambda: opt[1].get_val()<<3)
+                opt = Optional(Buf('_unk_%i' % name, rep=REPR_HEX), name)
+                unk = True
             else:
                 opt = self._opts[name]
-                opt.set_trans(False)
+                unk = False
+            opt.set_trans(False)
             opt[0].set_val(name)
             # parse the rest of the option
             for e in opt._content[1:]:
                 e._from_char(char)
-            # eventually reorder the optional fields
-            if self.index(opt) != ind:
+            if unk:
+                # insert unknown optional field
+                self.insert(ind, opt)
+            elif self.index(opt) != ind:
+                # reorder optional field
                 self.remove(opt)
                 self.insert(ind, opt)
             ind += 1
@@ -1234,7 +1300,44 @@ class SCCPLongUnitData(SCCPMessage):
             Optional(EOO(), 0)
             ))
         )
+    
+    def is_valid(self):
+        """Ensures an SCCP message has a valid layout,
+        i.e. its mandatory parameters with variable length (those with pointers) 
+        do not overlap
         
+        Args:
+            None
+        
+        Returns:
+            result: bool
+        """
+        # for LUDT / LUDTS, pointer and length prefix are 2 bytes long
+        ptrs = self._content[3].get_val()
+        prms = self._content[4:]
+        areas = []
+        for i in range(4):
+            prm = prms[i]
+            if prm._name == 'Opt':
+                # Options have no global length prefix, but are always the last parameter
+                # moreover, if their pointer is null, the parameter is not present
+                ptr = ptrs[i]
+                if ptr != 0:
+                    areas.append( (ptr-2*(4-i), None) )
+            else:
+                areas.append( (ptrs[i]-2*(4-i), 2+prm._content[0].get_val()) )
+        areas.sort(key=lambda x: x[0])
+        # areas: list of (prm_offset, prm_length), sorted by prm_offset
+        #print(areas)
+        off = 0
+        for prm in areas:
+            if prm[0] < off:
+                return False
+            else:
+                if prm[1] is not None:
+                    off += prm[1]
+        return True
+
 
 #------------------------------------------------------------------------------#
 # Long unitdata service (LUDTS)
@@ -1261,7 +1364,45 @@ class SCCPLongUnitDataService(SCCPMessage):
             Optional(EOO(), 0)
             ))
         )
+    
+    def is_valid(self):
+        """Ensures an SCCP message has a valid layout,
+        i.e. its mandatory parameters with variable length (those with pointers) 
+        do not overlap
         
+        Args:
+            None
+        
+        Returns:
+            result: bool
+        """
+        # for LUDT / LUDTS, pointer and length prefix are 2 bytes long
+        ptrs = self._content[3].get_val()
+        prms = self._content[4:]
+        areas = []
+        for i in range(4):
+            prm = prms[i]
+            if prm._name == 'Opt':
+                # Options have no global length prefix, but are always the last parameter
+                # moreover, if their pointer is null, the parameter is not present
+                ptr = ptrs[i]
+                if ptr != 0:
+                    areas.append( (ptr-2*(4-i), None) )
+            else:
+                areas.append( (ptrs[i]-2*(4-i), 2+prm._content[0].get_val()) )
+        areas.sort(key=lambda x: x[0])
+        # areas: list of (prm_offset, prm_length), sorted by prm_offset
+        #print(areas)
+        off = 0
+        for prm in areas:
+            if prm[0] < off:
+                return False
+            elif prm[1] is None:
+                return False
+            else:
+                off = prm[1]
+        return True
+
 
 #------------------------------------------------------------------------------#
 # SCCP Message dispatcher
@@ -1413,7 +1554,7 @@ def get_scmg_msg_instances():
 # SCPP Message parser
 #------------------------------------------------------------------------------#
 
-def parse_SCCP(buf):
+def parse_SCCP(buf, w_scmg=True):
     """Parses an SCCP message bytes' buffer
     
     Args:
@@ -1443,17 +1584,18 @@ def parse_SCCP(buf):
         return None, 2
     #
     # if SCMG, parses it further (UDT/XUDT/LUDT, ProtocolClass 0, both addresses on SSN 1)
-    try:
-        if Msg[0].get_val() in (9, 17, 19) and Msg[1][1].get_val() == 0 and \
-        Msg[3][1][0]['RoutingInd'].get_val() == 1 and  Msg[3][1][0]['SSNInd'].get_val() == 1 and Msg[3][1]['SSN'].get_val() == 1 and \
-        Msg[4][1][0]['RoutingInd'].get_val() == 1 and  Msg[4][1][0]['SSNInd'].get_val() == 1 and Msg[4][1]['SSN'].get_val() == 1:
-            data = Msg[5]
-            dataval = data[1]
-            scmg, err = parse_SCMG(dataval.get_val())
-            if err == 0:
-                data.replace(dataval, scmg)
-    except:
-        pass
+    if w_scmg:
+        try:
+            if Msg[0].get_val() in (9, 17, 19) and Msg[1][1].get_val() == 0 and \
+            Msg[3][1][0]['RoutingInd'].get_val() == 1 and  Msg[3][1][0]['SSNInd'].get_val() == 1 and Msg[3][1]['SSN'].get_val() == 1 and \
+            Msg[4][1][0]['RoutingInd'].get_val() == 1 and  Msg[4][1][0]['SSNInd'].get_val() == 1 and Msg[4][1]['SSN'].get_val() == 1:
+                data = Msg[5]
+                dataval = data[1]
+                scmg, err = parse_SCMG(dataval.get_val())
+                if err == 0:
+                    data.replace(dataval, scmg)
+        except:
+            pass
     #
     return Msg, 0
 
@@ -1487,4 +1629,5 @@ def parse_SCMG(buf):
     except:
         return None, 2
     return Msg, 0
+
 

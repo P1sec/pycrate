@@ -1,0 +1,2471 @@
+MAPv2v3-Application
+
+DEFINITIONS
+
+::=
+
+BEGIN
+
+IMPORTS
+    
+-- custom OPERATION-PACKAGE defined locally
+--    OPERATION-PACKAGE,
+    OPERATION
+FROM Remote-Operations-Information-Objects
+
+-- import all MAP operations
+
+    updateLocation,
+    cancelLocation,
+    purgeMS,
+    sendIdentification,
+    performHandover,
+    prepareHandover,
+    sendEndSignal,
+    processAccessSignalling,
+    forwardAccessSignalling,
+    performSubsequentHandover,
+    prepareSubsequentHandover,
+    sendAuthenticationInfo,
+    checkIMEI,
+    sendParameters,
+    insertSubscriberData,
+    deleteSubscriberData,
+    reset,
+    forwardCheckSS-Indication,
+    restoreData
+FROM MAPv2-MobileServiceOperations --{
+   --ccitt identified-organization (4) etsi (0) mobileDomain (0)
+   --gsm-Network (1) modules (3) map-MobileServiceOperations (5)
+   --version2 (2)}
+
+    activateTraceMode,
+    deactivateTraceMode,
+    traceSubscriberActivity,
+    noteInternalHandover,
+    sendIMSI
+FROM MAPv2-OperationAndMaintenanceOperations --{
+   --ccitt identified-organization (4) etsi (0) mobileDomain (0)
+   --gsm-Network (1) modules (3) map-OperationAndMaintenanceOperations (6)
+   --version2 (2)}
+
+    sendRoutingInfo,
+    provideRoamingNumber
+FROM MAPv2-CallHandlingOperations --{
+   --ccitt identified-organization (4) etsi (0) mobileDomain (0)
+   --gsm-Network (1) modules (3) map-CallHandlingOperations (7)
+   --version2 (2)}
+
+    registerSS,
+    eraseSS,
+    activateSS,
+    deactivateSS,
+    interrogateSS,
+    processUnstructuredSS-Data,
+    processUnstructuredSS-Request,
+    unstructuredSS-Request,
+    unstructuredSS-Notify,
+    registerPassword,
+    getPassword,
+    beginSubscriberActivity
+FROM MAPv2-SupplementaryServiceOperations --{
+   --ccitt identified-organization (4) etsi (0) mobileDomain (0)
+   --gsm-Network (1) modules (3) map-SupplementaryServiceOperations (8)
+   --version2 (2)}
+
+    sendRoutingInfoForSM,
+    forwardSM,
+    reportSM-DeliveryStatus,
+    noteSubscriberPresent,
+    alertServiceCentreWithoutResult,
+    alertServiceCentre,
+    informServiceCentre,
+    readyForSM
+FROM MAPv2-ShortMessageServiceOperations --{
+   --ccitt identified-organization (4) etsi (0) mobileDomain (0)
+   --gsm-Network (1) modules (3) map-ShortMessageServiceOperations (9)
+   --version2 (2)}
+
+
+    updateLocation,
+    cancelLocation,
+    cancelVcsgLocation,
+    purgeMS,
+    sendIdentification,
+    updateGprsLocation,
+    updateVcsgLocation,
+    prepareHandover,
+    sendEndSignal,
+    processAccessSignalling,
+    forwardAccessSignalling,
+    prepareSubsequentHandover,
+    sendAuthenticationInfo,
+    authenticationFailureReport,
+    checkIMEI,
+    insertSubscriberData,
+    deleteSubscriberData,
+    reset,
+    forwardCheckSS-Indication,
+    restoreData,
+    provideSubscriberInfo,
+    anyTimeInterrogation,
+    anyTimeSubscriptionInterrogation,
+    anyTimeModification,
+    sendRoutingInfoForGprs,
+    failureReport,
+    noteMsPresentForGprs,
+    noteMM-Event,
+    noteSubscriberDataModified
+FROM MAP-MobileServiceOperations {
+   itu-t identified-organization (4) etsi (0) mobileDomain (0)
+   gsm-Network (1) modules (3) map-MobileServiceOperations (5)
+   version16 (16)}
+
+    activateTraceMode,
+    deactivateTraceMode,
+    sendIMSI
+FROM MAP-OperationAndMaintenanceOperations {
+   itu-t identified-organization (4) etsi (0) mobileDomain (0)
+   gsm-Network (1) modules (3) map-OperationAndMaintenanceOperations (6)
+   version16 (16)}
+
+    sendRoutingInfo,
+    provideRoamingNumber,
+    resumeCallHandling,
+    setReportingState,
+    statusReport,
+    remoteUserFree,
+    ist-Alert,
+    ist-Command,
+    releaseResources
+FROM MAP-CallHandlingOperations {
+   itu-t identified-organization (4) etsi (0) mobileDomain (0)
+   gsm-Network (1) modules (3) map-CallHandlingOperations (7)
+   version16 (16)}
+
+    registerSS,
+    eraseSS,
+    activateSS,
+    deactivateSS,
+    interrogateSS,
+    processUnstructuredSS-Request,
+    unstructuredSS-Request,
+    unstructuredSS-Notify,
+    registerPassword,
+    getPassword,
+    ss-InvocationNotification,
+    registerCC-Entry,
+    eraseCC-Entry
+FROM MAP-SupplementaryServiceOperations {
+   itu-t identified-organization (4) etsi (0) mobileDomain (0)
+   gsm-Network (1) modules (3) map-SupplementaryServiceOperations (8)
+   version16 (16)}
+
+    sendRoutingInfoForSM,
+    mo-ForwardSM,
+    mt-ForwardSM,
+    reportSM-DeliveryStatus,
+    alertServiceCentre,
+    informServiceCentre,
+    readyForSM,
+    mt-ForwardSM-VGCS
+FROM MAP-ShortMessageServiceOperations {
+   itu-t identified-organization (4) etsi (0) mobileDomain (0)
+   gsm-Network (1) modules (3) map-ShortMessageServiceOperations (9)
+   version16 (16)}
+
+    prepareGroupCall,
+    processGroupCallSignalling,
+    forwardGroupCallSignalling,
+    sendGroupCallEndSignal,
+    sendGroupCallInfo
+FROM MAP-Group-Call-Operations {
+   itu-t identified-organization (4) etsi (0) mobileDomain (0)
+   gsm-Network (1) modules (3) map-Group-Call-Operations (22)
+   version16 (16)}
+
+    provideSubscriberLocation,
+    sendRoutingInfoForLCS,
+    subscriberLocationReport
+FROM MAP-LocationServiceOperations {
+   itu-t identified-organization (4) etsi (0) mobileDomain (0)
+   gsm-Network (1) modules (3) map-LocationServiceOperations (24)
+   version16 (16)}
+
+    map-ac
+FROM MAP-ApplicationContexts {
+   itu-t identified-organization (4) etsi (0) mobileDomain (0)
+   gsm-Network (1) modules (3) map-ApplicationContexts (2) version16 (16)}
+   
+   ;
+
+
+--//////////////////////////////////////\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--
+--          Custom OPERATION-PACKAGE and APPLICATION-CONTEXT classes
+--\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\//////////////////////////////////////--
+
+
+-- this is mapped to the SCCP SSN code
+MapAppCtxtEquipment ::= ENUMERATED {
+    hlr (6),
+    vlr (7),
+    msc (8),
+    eir (9), -- identical to EIC
+    auc (10),
+    gmlc (145),
+    gsmscf (147),
+    sgsn (149),
+    ggsn (150),
+    ...,
+    smsc, -- SMS-Center
+    nplr, -- Number Portability Location Center
+    css   -- CSG Subscriber Server
+    
+    }
+
+
+OPERATION-PACKAGE ::= CLASS {
+    &Both         OPERATION OPTIONAL,
+    &Consumer     OPERATION OPTIONAL,
+    &ConsumerIn   MapAppCtxtEquipment OPTIONAL,
+    &Supplier     OPERATION OPTIONAL,
+    &SupplierIn   MapAppCtxtEquipment OPTIONAL,
+    &id           OBJECT IDENTIFIER UNIQUE OPTIONAL }
+WITH SYNTAX {
+    [ OPERATIONS &Both ]
+    [ CONSUMER INVOKES &Supplier ] [ CONSUMER IN &ConsumerIn ]
+    [ SUPPLIER INVOKES &Consumer ] [ SUPPLIER IN &SupplierIn ]
+    [ ID &id ] }
+
+
+APPLICATION-CONTEXT ::= CLASS {
+    &Symmetric           OPERATION-PACKAGE OPTIONAL,
+    &InitiatorConsumerOf OPERATION-PACKAGE OPTIONAL,
+    &InitiatorIn         MapAppCtxtEquipment OPTIONAL,
+    &ResponderConsumerOf OPERATION-PACKAGE OPTIONAL,
+    &ResponderIn         MapAppCtxtEquipment OPTIONAL,
+    &code                OBJECT IDENTIFIER UNIQUE } 
+WITH SYNTAX {
+    [ OPERATIONS OF         &Symmetric ]
+    [ INITIATOR CONSUMER OF &InitiatorConsumerOf ] [ INITIATOR IN &InitiatorIn ]
+    [ RESPONDER CONSUMER OF &ResponderConsumerOf ] [ RESPONDER IN &ResponderIn ]
+    ID &code }
+
+
+--//////////////////////////////////////\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--
+--                            MAP operation packages
+--\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\//////////////////////////////////////--
+
+
+--
+-- Location updating
+-- 17.2.2.1
+--
+
+locationUpdatingPackage-v3  OPERATION-PACKAGE ::= {
+    -- Supplier is HLR if Consumer is VLR
+    CONSUMER INVOKES {
+        MAP-MobileServiceOperations.updateLocation }
+    CONSUMER IN { vlr }
+    SUPPLIER INVOKES {
+        MAP-MobileServiceOperations.forwardCheckSS-Indication }
+    SUPPLIER IN { hlr }
+    }
+
+locationUpdatingPackage-v2  OPERATION-PACKAGE ::= {
+    -- Supplier is HLR if Consumer is VLR
+    CONSUMER INVOKES {
+        MAPv2-MobileServiceOperations.updateLocation }
+    CONSUMER IN { vlr }
+    SUPPLIER INVOKES {
+        MAPv2-MobileServiceOperations.forwardCheckSS-Indication }
+    SUPPLIER IN { hlr }
+    }
+
+locationUpdatingPackage-v1  OPERATION-PACKAGE ::=
+    locationUpdatingPackage-v2
+
+
+--
+-- Location cancellation
+-- 17.2.2.2
+--
+
+locationCancellationPackage-v3  OPERATION-PACKAGE ::= {
+    -- Supplier is VLR or SGSN if Consumer is HLR
+    CONSUMER INVOKES {
+        MAP-MobileServiceOperations.cancelLocation }
+    CONSUMER IN { hlr }
+    SUPPLIER IN { vlr | sgsn }
+    }
+
+locationCancellationPackage-v2  OPERATION-PACKAGE ::= {
+    -- Supplier is VLR or SGSN if Consumer is HLR
+    CONSUMER INVOKES {
+        MAPv2-MobileServiceOperations.cancelLocation }
+    CONSUMER IN { hlr }
+    SUPPLIER IN { vlr | sgsn }
+    }
+
+locationCancellationPackage-v1  OPERATION-PACKAGE ::=
+    locationCancellationPackage-v2
+
+
+--
+-- Roaming number enquiry
+-- 17.2.2.3
+--
+
+roamingNumberEnquiryPackage-v3  OPERATION-PACKAGE ::= {
+    -- Supplier is VLR if Consumer is HLR or old VLR
+    CONSUMER INVOKES {
+        MAP-CallHandlingOperations.provideRoamingNumber }
+    CONSUMER IN { hlr | vlr }
+    SUPPLIER IN { vlr }
+    }
+
+roamingNumberEnquiryPackage-v2  OPERATION-PACKAGE ::= {
+    -- Supplier is VLR if Consumer is HLR or old VLR
+    CONSUMER INVOKES {
+        MAPv2-CallHandlingOperations.provideRoamingNumber }
+    CONSUMER IN { hlr | vlr }
+    SUPPLIER IN { vlr }
+    }
+
+roamingNumberEnquiryPackage-v1  OPERATION-PACKAGE ::=
+    roamingNumberEnquiryPackage-v2
+
+
+--
+-- Information retrieval
+-- 17.2.2.4
+--
+
+infoRetrievalPackage-v3  OPERATION-PACKAGE ::= {
+    -- Supplier is HLR if Consumer is VLR
+    -- Supplier is HLR if Consumer is SGSN
+    CONSUMER INVOKES {
+        MAP-MobileServiceOperations.sendAuthenticationInfo }
+    CONSUMER IN { vlr | sgsn }
+    SUPPLIER IN { hlr }
+    }
+
+infoRetrievalPackage-v2  OPERATION-PACKAGE ::= {
+    -- Supplier is HLR if Consumer is VLR
+    -- Supplier is HLR if Consumer is SGSN
+    CONSUMER INVOKES {
+        MAPv2-MobileServiceOperations.sendAuthenticationInfo }
+    CONSUMER IN { vlr | sgsn }
+    SUPPLIER IN { hlr }
+    }
+
+infoRetrievalPackage-v1  OPERATION-PACKAGE ::= {
+    -- Supplier is HLR or VLR if Consumer is VLR
+    -- Supplier is HLR if Consumer is SGSN
+    CONSUMER INVOKES {
+        MAPv2-MobileServiceOperations.sendParameters }
+    CONSUMER IN { vlr | sgsn }
+    SUPPLIER IN { vlr | hlr }
+    }
+
+
+--
+-- Inter-VLR information retrieval
+-- 17.2.2.5
+--
+
+interVlrInfoRetrievalPackage-v3  OPERATION-PACKAGE ::= {
+    -- Supplier is VLR if Consumer is VLR
+    CONSUMER INVOKES {
+        MAP-MobileServiceOperations.sendIdentification }
+    CONSUMER IN { vlr }
+    SUPPLIER IN { vlr }
+    }
+
+interVlrInfoRetrievalPackage-v2  OPERATION-PACKAGE ::= {
+    -- Supplier is VLR if Consumer is VLR
+    CONSUMER INVOKES {
+        MAPv2-MobileServiceOperations.sendIdentification }
+    CONSUMER IN { vlr }
+    SUPPLIER IN { vlr }
+    }
+
+-- infoRetrievalPackage-v1
+
+
+--
+-- IMSI retrieval
+-- 17.2.2.6
+--
+
+imsiRetrievalPackage-v2  OPERATION-PACKAGE ::= {
+    -- Supplier is HLR if Consumer is VLR
+    CONSUMER INVOKES {
+        MAPv2-OperationAndMaintenanceOperations.sendIMSI }
+    CONSUMER IN { vlr }
+    SUPPLIER IN { hlr }
+    }
+
+
+--
+-- Call control transfer
+-- 17.2.2.7
+--
+
+callControlTransferPackage-v4  OPERATION-PACKAGE ::= {
+    -- Supplier is GMSC if Consumer is VMSC
+    CONSUMER INVOKES {
+        MAP-CallHandlingOperations.resumeCallHandling }
+    CONSUMER IN { msc }
+    SUPPLIER IN { msc }
+    }
+
+callControlTransferPackage-v3  OPERATION-PACKAGE ::=
+    callControlTransferPackage-v4
+
+
+--
+-- Interrogation
+-- 17.2.2.10
+--
+
+interrogationPackage-v3  OPERATION-PACKAGE ::= {
+    -- Supplier is HLR or NPLR if Consumer is MSC
+    -- Supplier is HLR if Consumer is gsmSCF
+    CONSUMER INVOKES {
+        MAP-CallHandlingOperations.sendRoutingInfo }
+    CONSUMER IN { msc | gsmscf }
+    SUPPLIER IN { hlr | nplr }
+    }
+
+interrogationPackage-v2  OPERATION-PACKAGE ::= {
+    -- Supplier is HLR or NPLR if Consumer is MSC
+    -- Supplier is HLR if Consumer is gsmSCF
+    CONSUMER INVOKES {
+        MAPv2-CallHandlingOperations.sendRoutingInfo }
+    CONSUMER IN { msc | gsmscf }
+    SUPPLIER IN { hlr | nplr }
+    }
+
+interrogationPackage-v1  OPERATION-PACKAGE ::=
+    interrogationPackage-v2
+
+
+--
+-- Handover Control
+-- 17.2.2.12
+--
+
+handoverControlPackage-v3  OPERATION-PACKAGE ::= {
+    -- Supplier is MSCB if Consumer is MSCA
+    CONSUMER INVOKES {
+        MAP-MobileServiceOperations.prepareHandover |
+        MAP-MobileServiceOperations.forwardAccessSignalling }
+    CONSUMER IN { msc }
+    SUPPLIER INVOKES {
+        MAP-MobileServiceOperations.sendEndSignal |
+        MAP-MobileServiceOperations.processAccessSignalling |
+        MAP-MobileServiceOperations.prepareSubsequentHandover }
+    SUPPLIER IN { msc }
+    }
+
+handoverControlPackage-v2  OPERATION-PACKAGE ::= {
+    -- Supplier is MSCB if Consumer is MSCA
+    CONSUMER INVOKES {
+        MAPv2-MobileServiceOperations.prepareHandover |
+        MAPv2-MobileServiceOperations.forwardAccessSignalling }
+    CONSUMER IN { msc }
+    SUPPLIER INVOKES {
+        MAPv2-MobileServiceOperations.sendEndSignal |
+        MAPv2-MobileServiceOperations.processAccessSignalling |
+        MAPv2-MobileServiceOperations.prepareSubsequentHandover }
+    SUPPLIER IN { msc }
+    }
+
+handoverControlPackage-v1  OPERATION-PACKAGE ::= {
+    -- Supplier is MSCB if Consumer is MSCA
+    CONSUMER INVOKES {
+        MAPv2-MobileServiceOperations.performHandover |
+        MAPv2-MobileServiceOperations.forwardAccessSignalling |
+        MAPv2-OperationAndMaintenanceOperations.traceSubscriberActivity }
+    CONSUMER IN { msc }
+    SUPPLIER INVOKES {
+        MAPv2-MobileServiceOperations.sendEndSignal |
+        MAPv2-OperationAndMaintenanceOperations.noteInternalHandover |
+        MAPv2-MobileServiceOperations.processAccessSignalling |
+        MAPv2-MobileServiceOperations.prepareSubsequentHandover }
+    SUPPLIER IN { msc }
+    }
+
+
+--
+-- Subscriber Data management stand alone
+-- 17.2.2.13
+--
+
+subscriberDataMngtStandAlonePackage-v3  OPERATION-PACKAGE ::= {
+    -- Supplier is VLR or SGSN if Consumer is HLR or CSS
+    CONSUMER INVOKES {
+        MAP-MobileServiceOperations.insertSubscriberData |
+        MAP-MobileServiceOperations.deleteSubscriberData }
+    CONSUMER IN { hlr | css }
+    SUPPLIER IN { vlr | sgsn }
+    }
+
+subscriberDataMngtStandAlonePackage-v2  OPERATION-PACKAGE ::= {
+    -- Supplier is VLR or SGSN if Consumer is HLR or CSS
+    CONSUMER INVOKES {
+        MAPv2-MobileServiceOperations.insertSubscriberData |
+        MAPv2-MobileServiceOperations.deleteSubscriberData }
+    CONSUMER IN { hlr | css }
+    SUPPLIER IN { vlr | sgsn }
+    }
+
+subscriberDataMngtStandAlonePackage-v1  OPERATION-PACKAGE ::=
+    subscriberDataMngtStandAlonePackage-v2
+
+
+--
+-- Equipment management
+-- 17.2.2.14
+--
+
+equipmentMngtPackage-v3  OPERATION-PACKAGE ::= {
+    -- Supplier is EIR if Consumer is MSC
+    -- Supplier is EIR if Consumer is SGSN
+    CONSUMER INVOKES {
+        MAP-MobileServiceOperations.checkIMEI }
+    CONSUMER IN { msc | sgsn }
+    SUPPLIER IN { eir }
+    }
+
+equipmentMngtPackage-v2  OPERATION-PACKAGE ::= {
+    -- Supplier is EIR if Consumer is MSC
+    -- Supplier is EIR if Consumer is SGSN
+    CONSUMER INVOKES {
+        MAPv2-MobileServiceOperations.checkIMEI }
+    CONSUMER IN { msc | sgsn }
+    SUPPLIER IN { eir }
+    }
+
+equipmentMngtPackage-v1  OPERATION-PACKAGE ::=
+    equipmentMngtPackage-v2
+
+
+--
+-- Subscriber data management
+-- 17.2.2.15
+--
+
+subscriberDataMngtPackage-v3  OPERATION-PACKAGE ::= {
+    -- Supplier is VLR or SGSN if Consumer is HLR or CSS
+    CONSUMER INVOKES {
+        MAP-MobileServiceOperations.insertSubscriberData }
+    CONSUMER IN { hlr | css }
+    SUPPLIER IN { vlr | sgsn }
+    }
+
+subscriberDataMngtPackage-v2  OPERATION-PACKAGE ::= {
+    -- Supplier is VLR or SGSN if Consumer is HLR or CSS
+    CONSUMER INVOKES {
+        MAPv2-MobileServiceOperations.insertSubscriberData }
+    CONSUMER IN { hlr | css }
+    SUPPLIER IN { vlr | sgsn }
+    }
+
+subscriberDataMngtPackage-v1  OPERATION-PACKAGE ::=
+    subscriberDataMngtPackage-v2
+
+
+--
+-- Location register restart
+-- 17.2.2.16
+--
+
+resetPackage-v3  OPERATION-PACKAGE ::= {
+    -- Supplier is VLR or SGSN if Consumer is HLR or CSS
+    CONSUMER INVOKES {
+        MAP-MobileServiceOperations.reset }
+    CONSUMER IN { hlr | css }
+    SUPPLIER IN { vlr | sgsn }
+    }
+
+resetPackage-v2  OPERATION-PACKAGE ::= {
+    -- Supplier is VLR or SGSN if Consumer is HLR or CSS
+    CONSUMER INVOKES {
+        MAPv2-MobileServiceOperations.reset }
+    CONSUMER IN { hlr | css }
+    SUPPLIER IN { vlr | sgsn }
+    }
+
+resetPackage-v1  OPERATION-PACKAGE ::=
+    resetPackage-v2
+
+
+--
+-- Tracing stand-alone
+-- 17.2.2.17
+--
+
+tracingStandAlonePackage-v3  OPERATION-PACKAGE ::= {
+    -- Supplier is VLR or SGSN if Consumer is HLR
+    CONSUMER INVOKES {
+        MAP-OperationAndMaintenanceOperations.activateTraceMode |
+        MAP-OperationAndMaintenanceOperations.deactivateTraceMode }
+    CONSUMER IN { hlr }
+    SUPPLIER IN { vlr | sgsn }
+    }
+
+tracingStandAlonePackage-v2  OPERATION-PACKAGE ::= {
+    -- Supplier is VLR or SGSN if Consumer is HLR
+    CONSUMER INVOKES {
+        MAPv2-OperationAndMaintenanceOperations.activateTraceMode |
+        MAPv2-OperationAndMaintenanceOperations.deactivateTraceMode }
+    CONSUMER IN { hlr }
+    SUPPLIER IN { vlr | sgsn }
+    }
+
+tracingStandAlonePackage-v1  OPERATION-PACKAGE ::=
+    tracingStandAlonePackage-v2
+
+
+--
+-- Functional SS handling
+-- 17.2.2.18
+--
+
+functionalSsPackage-v2  OPERATION-PACKAGE ::= {
+    -- Supplier is HLR if Consumer is VLR
+    CONSUMER INVOKES {
+        MAPv2-SupplementaryServiceOperations.registerSS |
+        MAPv2-SupplementaryServiceOperations.eraseSS |
+        MAPv2-SupplementaryServiceOperations.activateSS |
+        MAPv2-SupplementaryServiceOperations.deactivateSS |
+        MAPv2-SupplementaryServiceOperations.registerPassword |
+        MAPv2-SupplementaryServiceOperations.interrogateSS }
+    CONSUMER IN { vlr }
+    SUPPLIER INVOKES {
+        MAPv2-SupplementaryServiceOperations.getPassword }
+    SUPPLIER IN { hlr }
+    }
+
+functionalSsPackage-v1  OPERATION-PACKAGE ::=
+    functionalSsPackage-v2
+
+
+--
+-- Tracing
+-- 17.2.2.19
+--
+
+tracingPackage-v3  OPERATION-PACKAGE ::= {
+    -- Supplier is VLR or SGSN if Consumer is HLR
+    CONSUMER INVOKES {
+        MAP-OperationAndMaintenanceOperations.activateTraceMode }
+    CONSUMER IN { hlr }
+    SUPPLIER IN { vlr | sgsn }
+    }
+
+tracingPackage-v2  OPERATION-PACKAGE ::= {
+    -- Supplier is VLR or SGSN if Consumer is HLR
+    CONSUMER INVOKES {
+        MAPv2-OperationAndMaintenanceOperations.activateTraceMode }
+    CONSUMER IN { hlr }
+    SUPPLIER IN { vlr | sgsn }
+    }
+
+tracingPackage-v1  OPERATION-PACKAGE ::=
+    tracingPackage-v2
+
+
+--
+-- Binding
+-- 17.2.2.20
+--
+
+bindingPackage-v1  OPERATION-PACKAGE ::= {
+    -- Supplier is HLR if Consumer is VLR
+    -- Supplier is gsmSCF if Consumer is HLR
+    CONSUMER INVOKES {
+        MAPv2-SupplementaryServiceOperations.beginSubscriberActivity }
+    CONSUMER IN { vlr | hlr }
+    SUPPLIER IN { hlr | gsmscf }
+    }
+
+
+--
+-- Unstructured SS handling
+-- 17.2.2.21
+--
+
+unstructuredSsPackage-v2  OPERATION-PACKAGE ::= {
+    -- Supplier is HLR if Consumer is VLR
+    -- Supplier is gsmSCF or HLR if Consumer is HLR
+    CONSUMER INVOKES {
+        MAPv2-SupplementaryServiceOperations.processUnstructuredSS-Request }
+    CONSUMER IN { vlr | hlr }
+    SUPPLIER INVOKES {
+        MAPv2-SupplementaryServiceOperations.unstructuredSS-Request |
+        MAPv2-SupplementaryServiceOperations.unstructuredSS-Notify }
+    SUPPLIER IN { hlr | gsmscf }
+    }
+
+unstructuredSsPackage-v1  OPERATION-PACKAGE ::= {
+    -- Supplier is HLR if Consumer is VLR
+    -- Supplier is gsmSCF if Consumer is HLR
+    CONSUMER INVOKES {
+        MAPv2-SupplementaryServiceOperations.processUnstructuredSS-Data }
+    CONSUMER IN { vlr | hlr }
+    SUPPLIER IN { hlr | gsmscf }
+    }
+
+
+--
+-- MO Short message relay services
+-- 17.2.2.22
+--
+
+mo-ShortMsgRelayPackage-v3  OPERATION-PACKAGE ::= {
+    -- Supplier is IWMSC if Consumer is MSC
+    -- Supplier is IWMSC if Consumer is SGSN
+    CONSUMER INVOKES {
+        MAP-ShortMessageServiceOperations.mo-ForwardSM }
+    CONSUMER IN { msc | sgsn }
+    SUPPLIER IN { msc }
+    }
+
+shortMsgRelayPackage-v2  OPERATION-PACKAGE ::= {
+    -- Supplier is IWMSC if Consumer is MSC
+    -- Supplier is MSC or SGSN if Consumer is GMSC
+    -- Supplier is IWMSC if Consumer is SGSN
+    CONSUMER INVOKES {
+        MAPv2-ShortMessageServiceOperations.forwardSM }
+    CONSUMER IN { msc | sgsn }
+    SUPPLIER IN { msc }
+    }
+
+shortMsgRelayPackage-v1  OPERATION-PACKAGE ::=
+    shortMsgRelayPackage-v2
+
+
+--
+-- Short message gateway services
+-- 17.2.2.23
+--
+
+shortMsgGatewayPackage-v3  OPERATION-PACKAGE ::= {
+    -- Supplier is HLR if Consumer is GMSC
+    CONSUMER INVOKES {
+        MAP-ShortMessageServiceOperations.sendRoutingInfoForSM |
+        MAP-ShortMessageServiceOperations.reportSM-DeliveryStatus }
+    CONSUMER IN { msc }
+    SUPPLIER INVOKES {
+        MAP-ShortMessageServiceOperations.informServiceCentre }
+    SUPPLIER IN { hlr }
+    }
+
+shortMsgGatewayPackage-v2  OPERATION-PACKAGE ::= {
+    -- Supplier is HLR if Consumer is GMSC
+    CONSUMER INVOKES {
+        MAPv2-ShortMessageServiceOperations.sendRoutingInfoForSM |
+        MAPv2-ShortMessageServiceOperations.reportSM-DeliveryStatus }
+    CONSUMER IN { msc }
+    SUPPLIER INVOKES {
+        MAPv2-ShortMessageServiceOperations.informServiceCentre }
+    SUPPLIER IN { hlr }
+    }
+
+shortMsgGatewayPackage-v1  OPERATION-PACKAGE ::= {
+    -- Supplier is HLR if Consumer is GMSC
+    CONSUMER INVOKES {
+        MAPv2-ShortMessageServiceOperations.sendRoutingInfoForSM |
+        MAPv2-ShortMessageServiceOperations.reportSM-DeliveryStatus }
+    CONSUMER IN { msc }
+    SUPPLIER IN { hlr }
+    }
+
+
+--
+-- MT Short message relay services
+-- 17.2.2.24
+--
+
+mt-ShortMsgRelayPackage-v3  OPERATION-PACKAGE ::= {
+    -- Supplier is MSC or SGSN or SMS-Router or IP-SM-GW if Consumer is GMSC
+    CONSUMER INVOKES {
+        MAP-ShortMessageServiceOperations.mt-ForwardSM }
+    CONSUMER IN { msc }
+    SUPPLIER IN { msc | sgsn | smsc }
+    }
+
+-- shortMsgRelayPackage-v2
+-- shortMsgRelayPackage-v1
+
+
+--
+-- Message waiting data management
+-- 17.2.2.26
+--
+
+mwdMngtPackage-v3  OPERATION-PACKAGE ::= {
+    -- Supplier is HLR if Consumer is SGSN
+    -- Supplier is HLR if Consumer is VLR
+    CONSUMER INVOKES {
+        MAP-ShortMessageServiceOperations.readyForSM }
+    CONSUMER IN { vlr | sgsn }
+    SUPPLIER IN { hlr }
+    }
+
+mwdMngtPackage-v2  OPERATION-PACKAGE ::= {
+    -- Supplier is HLR if Consumer is SGSN
+    -- Supplier is HLR if Consumer is VLR
+    CONSUMER INVOKES {
+        MAPv2-ShortMessageServiceOperations.readyForSM }
+    CONSUMER IN { vlr | sgsn }
+    SUPPLIER IN { hlr }
+    }
+
+mwdMngtPackage-v1  OPERATION-PACKAGE ::= {
+    -- Supplier is HLR if Consumer is VLR
+    CONSUMER INVOKES {
+        MAPv2-ShortMessageServiceOperations.noteSubscriberPresent }
+    CONSUMER IN { vlr }
+    SUPPLIER IN { hlr }
+    }
+
+
+--
+-- Alerting
+-- 17.2.2.27
+--
+
+alertingPackage-v2  OPERATION-PACKAGE ::= {
+    -- Supplier is IWMSC if Consumer is HLR
+    CONSUMER INVOKES {
+        MAPv2-ShortMessageServiceOperations.alertServiceCentre }
+    CONSUMER IN { hlr }
+    SUPPLIER IN { msc }
+    }
+
+alertingPackage-v1  OPERATION-PACKAGE ::= {
+    -- Supplier is IWMSC if Consumer is HLR
+    CONSUMER INVOKES {
+        MAPv2-ShortMessageServiceOperations.alertServiceCentreWithoutResult }
+    CONSUMER IN { hlr }
+    SUPPLIER IN { msc }
+    }
+
+
+--
+-- Data restoration
+-- 17.2.2.28
+--
+
+dataRestorationPackage-v3  OPERATION-PACKAGE ::= {
+    -- Supplier is HLR if Consumer is VLR
+    CONSUMER INVOKES {
+        MAP-MobileServiceOperations.restoreData }
+    CONSUMER IN { vlr }
+    SUPPLIER IN { hlr }
+    }
+
+dataRestorationPackage-v2  OPERATION-PACKAGE ::= {
+    -- Supplier is HLR if Consumer is VLR
+    CONSUMER INVOKES {
+        MAPv2-MobileServiceOperations.restoreData }
+    CONSUMER IN { vlr }
+    SUPPLIER IN { hlr }
+    }
+
+dataRestorationPackage-v1  OPERATION-PACKAGE ::=
+    infoRetrievalPackage-v1
+
+
+--
+-- Purging
+-- 17.2.2.29
+--
+
+purgingPackage-v3  OPERATION-PACKAGE ::= {
+    -- Supplier is HLR if Consumer is VLR
+    -- Supplier is HLR if Consumer is SGSN
+    CONSUMER INVOKES {
+        MAP-MobileServiceOperations.purgeMS } 
+    CONSUMER IN { vlr | sgsn }
+    SUPPLIER IN { hlr }
+    }
+
+purgingPackage-v2  OPERATION-PACKAGE ::= {
+    -- Supplier is HLR if Consumer is VLR
+    -- Supplier is HLR if Consumer is SGSN
+    CONSUMER INVOKES {
+        MAPv2-MobileServiceOperations.purgeMS } 
+    CONSUMER IN { vlr | sgsn }
+    SUPPLIER IN { hlr }
+    }
+
+
+--
+-- Subscriber information enquiry
+-- 17.2.2.30
+--
+
+subscriberInformationEnquiryPackage-v3 OPERATION-PACKAGE ::= {
+    -- Supplier is VLR or SGSN if Consumer is HLR
+    CONSUMER INVOKES {
+        MAP-MobileServiceOperations.provideSubscriberInfo }
+    CONSUMER IN { hlr }
+    SUPPLIER IN { vlr | sgsn }
+    }
+
+
+--
+-- Any time information enquiry
+-- 17.2.2.31
+--
+
+anyTimeInformationEnquiryPackage-v3 OPERATION-PACKAGE ::= {
+    -- Supplier is HLR or GMLC or NPLR if Consumer is gsmSCF
+    CONSUMER INVOKES {
+        MAP-MobileServiceOperations.anyTimeInterrogation }
+    CONSUMER IN { gsmscf }
+    SUPPLIER IN { hlr | gmlc | nplr }
+    }
+
+
+--
+-- Group Call Control
+-- 17.2.2.32
+--
+
+groupCallControlPackage-v3  OPERATION-PACKAGE ::= {
+    -- Supplier is relay MSC if Consumer is anchor MSC
+    CONSUMER INVOKES {
+        MAP-Group-Call-Operations.prepareGroupCall |
+        MAP-Group-Call-Operations.forwardGroupCallSignalling }
+    CONSUMER IN { msc }
+    SUPPLIER INVOKES {
+        MAP-Group-Call-Operations.sendGroupCallEndSignal |
+        MAP-Group-Call-Operations.processGroupCallSignalling }
+    SUPPLIER IN { msc }
+    }
+
+
+--
+-- Group Call Info Retrieval
+-- 17.2.2.32A
+--
+
+groupCallInfoRetrievalPackage-v3  OPERATION-PACKAGE ::= {
+    -- Supplier is group call serving MSC if Consumer is visited MSC
+    -- Supplier is visited MSC if Consumer is group call serving MSC
+    CONSUMER INVOKES {
+        MAP-Group-Call-Operations.sendGroupCallInfo }
+    CONSUMER IN { msc }
+    SUPPLIER IN { msc }
+    }
+
+
+--
+-- Gprs location updating
+-- 17.2.2.35
+--
+
+gprsLocationUpdatingPackage-v3  OPERATION-PACKAGE ::= {
+    -- Supplier is HLR if Consumer is SGSN
+    CONSUMER INVOKES {
+        MAP-MobileServiceOperations.updateGprsLocation }
+    CONSUMER IN { sgsn }
+    SUPPLIER IN { hlr }
+    }
+
+
+--
+-- Gprs Interrogation
+-- 17.2.2.36
+--
+
+gprsInterrogationPackage-v4  OPERATION-PACKAGE ::= {
+    -- Supplier is HLR if Consumer is GGSN
+    CONSUMER INVOKES {
+        MAP-MobileServiceOperations.sendRoutingInfoForGprs }
+    CONSUMER IN { ggsn }
+    SUPPLIER IN { hlr }
+    }
+
+gprsInterrogationPackage-v3  OPERATION-PACKAGE ::=
+    gprsInterrogationPackage-v4
+
+
+--
+-- Failure reporting
+-- 17.2.2.37
+--
+
+failureReportingPackage-v3  OPERATION-PACKAGE ::= {
+    -- Supplier is HLR if Consumer is GGSN
+    CONSUMER INVOKES {
+        MAP-MobileServiceOperations.failureReport }
+    CONSUMER IN { ggsn }
+    SUPPLIER IN { hlr }
+    }
+
+
+--
+-- GPRS notifying
+-- 17.2.2.38
+--
+
+gprsNotifyingPackage-v3  OPERATION-PACKAGE ::= {
+    -- Supplier is GGSN if Consumer is HLR
+    CONSUMER INVOKES {
+        MAP-MobileServiceOperations.noteMsPresentForGprs }
+    CONSUMER IN { hlr }
+    SUPPLIER IN { ggsn }
+    }
+
+
+--
+-- Supplementary Service invocation notification
+-- 17.2.2.39
+--
+
+ss-InvocationNotificationPackage-v3 OPERATION-PACKAGE ::= {
+    -- Supplier is gsmSCF if Consumer is MSC
+    -- Supplier is gsmSCF if Consumer is HLR
+    CONSUMER INVOKES {
+        MAP-SupplementaryServiceOperations.ss-InvocationNotification }
+    CONSUMER IN { msc | hlr }
+    SUPPLIER IN { gsmscf }
+    }
+
+
+--
+-- Set Reporting State
+-- 17.2.2.40
+--
+
+setReportingStatePackage-v3 OPERATION-PACKAGE ::= {
+    -- Supplier is VLR if Consumer is HLR
+    CONSUMER INVOKES {
+        MAP-CallHandlingOperations.setReportingState }
+    CONSUMER IN { hlr }
+    SUPPLIER IN { vlr }
+    }
+
+
+--
+-- Status Report
+-- 17.2.2.41
+--
+
+statusReportPackage-v3 OPERATION-PACKAGE ::= {
+    -- Supplier is HLR if Consumer is VLR
+    CONSUMER INVOKES {
+        MAP-CallHandlingOperations.statusReport }
+    CONSUMER IN { vlr }
+    SUPPLIER IN { hlr }
+    }
+
+
+--
+-- Remote User Free
+-- 17.2.2.42
+--
+
+remoteUserFreePackage-v3 OPERATION-PACKAGE ::= {
+    -- Supplier is VLR if Consumer is HLR
+    CONSUMER INVOKES {
+        MAP-CallHandlingOperations.remoteUserFree }
+    CONSUMER IN { hlr }
+    SUPPLIER IN { vlr }
+    }
+
+
+--
+-- Call Completion
+-- 17.2.2.43
+--
+
+callCompletionPackage-v3 OPERATION-PACKAGE ::= {
+    -- Supplier is HLR if Consumer is VLR
+    CONSUMER INVOKES {
+        MAP-SupplementaryServiceOperations.registerCC-Entry |
+        MAP-SupplementaryServiceOperations.eraseCC-Entry }
+    CONSUMER IN { vlr }
+    SUPPLIER IN { hlr }
+    }
+
+
+--
+-- Location service gateway services
+-- 17.2.2.44
+--
+
+locationSvcGatewayPackage-v3  OPERATION-PACKAGE ::= {
+    -- Supplier is HLR if Consumer is GMLC
+    CONSUMER INVOKES {
+        MAP-LocationServiceOperations.sendRoutingInfoForLCS }
+    CONSUMER IN { gmlc }
+    SUPPLIER IN { hlr }
+    }
+
+
+--
+-- Location service enquiry
+-- 17.2.2.45
+--
+
+locationSvcEnquiryPackage-v3 OPERATION-PACKAGE ::= {
+    -- Supplier is MSC or SGSN if Consumer is GMLC
+    CONSUMER INVOKES {
+        MAP-LocationServiceOperations.provideSubscriberLocation }
+    CONSUMER IN { gmlc }
+    SUPPLIER IN { msc | sgsn }
+    }
+
+
+--
+-- Location service reporting
+-- 17.2.2.45A
+--
+
+locationSvcReportingPackage-v3 OPERATION-PACKAGE ::= {
+    -- Supplier is GMLC if Consumer is MSC
+    -- Supplier is GMLC if Consumer is SGSN
+    CONSUMER INVOKES {
+        MAP-LocationServiceOperations.subscriberLocationReport }
+    CONSUMER IN { msc | sgsn }
+    SUPPLIER IN { gmlc }
+    }
+
+
+--
+-- IST Alerting
+-- 17.2.2.49
+--
+
+ist-AlertingPackage-v3 OPERATION-PACKAGE ::= {
+    -- Supplier is HLR if Consumer is VMSC
+    -- Supplier is HLR if Consumer is GMSC
+    CONSUMER INVOKES {
+        MAP-CallHandlingOperations.ist-Alert }
+    CONSUMER IN { msc }
+    SUPPLIER IN { hlr }
+    }
+
+
+--
+-- Service Termination
+-- 17.2.2.50
+--
+
+serviceTerminationPackage-v3 OPERATION-PACKAGE ::= {
+    -- Supplier is VMSC or GMSC if Consumer is HLR
+    CONSUMER INVOKES {
+        MAP-CallHandlingOperations.ist-Command }
+    CONSUMER IN { hlr }
+    SUPPLIER IN { msc }
+    }
+
+
+--
+-- Mobility Management event notification
+-- 17.2.2.51
+--
+
+mm-EventReportingPackage-v3 OPERATION-PACKAGE ::= {
+    -- Supplier is gsmSCF if Consumer is VLR
+    CONSUMER INVOKES {
+        MAP-MobileServiceOperations.noteMM-Event }
+    CONSUMER IN { vlr }
+    SUPPLIER IN { gsmscf }
+    }
+
+
+--
+-- Any time information handling
+-- 17.2.2.52
+--
+
+anyTimeInformationHandlingPackage-v3 OPERATION-PACKAGE ::= {
+    -- Supplier is HLR if Consumer is gsmSCF
+    CONSUMER INVOKES {
+        MAP-MobileServiceOperations.anyTimeSubscriptionInterrogation |
+        MAP-MobileServiceOperations.anyTimeModification }
+    CONSUMER IN { gsmscf }
+    SUPPLIER IN { hlr }
+    }
+
+
+--
+-- Subscriber Data modification notification
+-- 17.2.2.53
+--
+
+subscriberDataModificationNotificationPackage-v3 OPERATION-PACKAGE ::= {
+    -- Supplier is gsmSCF if Consumer is HLR
+    CONSUMER INVOKES {
+        MAP-MobileServiceOperations.noteSubscriberDataModified }
+    CONSUMER IN { hlr }
+    SUPPLIER IN { gsmscf }
+    }
+
+
+--
+-- Authentication Failure Report
+-- 17.2.2.54
+--
+
+authenticationFailureReportPackage-v3 OPERATION-PACKAGE ::= {
+    -- Supplier is HLR if Consumer is VLR
+    -- Supplier is HLR if Consumer is SGSN
+    CONSUMER INVOKES {
+        MAP-MobileServiceOperations.authenticationFailureReport }
+    CONSUMER IN { vlr | sgsn }
+    SUPPLIER IN { hlr }
+    }
+
+
+--
+-- Resource Management
+-- 17.2.2.55
+--
+
+resourceManagementPackage-v3 OPERATION-PACKAGE ::= {
+    -- Supplier is VMSC if Consumer is GMSC
+    CONSUMER INVOKES {
+        MAP-CallHandlingOperations.releaseResources }
+    CONSUMER IN { msc }
+    SUPPLIER IN { msc }
+    }
+
+
+--
+-- MT Short message relay VGCS services
+-- 17.2.2.56
+--
+
+mt-ShortMsgRelay-VGCS-Package-v3  OPERATION-PACKAGE ::= {
+    -- Supplier is MSC if Consumer is GMSC
+    CONSUMER INVOKES {
+        MAP-ShortMessageServiceOperations.mt-ForwardSM-VGCS }
+    CONSUMER IN { msc }
+    SUPPLIER IN { msc }
+    }
+
+
+--
+-- Vcsg location updating
+-- 17.2.2.57
+--
+
+vcsgLocationUpdatingPackage-v3  OPERATION-PACKAGE ::= {
+    -- Supplier is CSS if Consumer is VLR or SGSN
+    CONSUMER INVOKES {
+        MAP-MobileServiceOperations.updateVcsgLocation }
+    CONSUMER IN { vlr | sgsn }
+    SUPPLIER IN { css }
+    }
+
+
+--
+-- Vcsg location cancellation
+-- 17.2.2.58
+--
+
+vcsgLocationCancellationPackage-v3  OPERATION-PACKAGE ::= {
+    -- Supplier is VLR or SGSN if Consumer is CSS 
+    CONSUMER INVOKES {
+        MAP-MobileServiceOperations.cancelVcsgLocation }
+    CONSUMER IN { css }
+    SUPPLIER IN { vlr | sgsn }
+    }
+
+
+--
+-- All MAP operation packages
+--
+
+Supported-MAP-OperationPackages OPERATION-PACKAGE ::= {
+    locationUpdatingPackage-v3 |
+    locationUpdatingPackage-v2 |
+    locationUpdatingPackage-v1 |
+    locationCancellationPackage-v3 |
+    locationCancellationPackage-v2 |
+    locationCancellationPackage-v1 |
+    roamingNumberEnquiryPackage-v3 |
+    roamingNumberEnquiryPackage-v2 |
+    roamingNumberEnquiryPackage-v1 |
+    infoRetrievalPackage-v3 |
+    infoRetrievalPackage-v2 |
+    infoRetrievalPackage-v1 |
+    interVlrInfoRetrievalPackage-v3 |
+    interVlrInfoRetrievalPackage-v2 |
+    imsiRetrievalPackage-v2 |
+    callControlTransferPackage-v4 |
+    callControlTransferPackage-v3 |
+    interrogationPackage-v3 |
+    interrogationPackage-v2 |
+    interrogationPackage-v1 |
+    handoverControlPackage-v3 |
+    handoverControlPackage-v2 |
+    handoverControlPackage-v1 |
+    subscriberDataMngtStandAlonePackage-v3 |
+    subscriberDataMngtStandAlonePackage-v2 |
+    subscriberDataMngtStandAlonePackage-v1 |
+    equipmentMngtPackage-v3 |
+    equipmentMngtPackage-v2 |
+    equipmentMngtPackage-v1 |
+    subscriberDataMngtPackage-v3 |
+    subscriberDataMngtPackage-v2 |
+    subscriberDataMngtPackage-v1 |
+    resetPackage-v3 |
+    resetPackage-v2 |
+    resetPackage-v1 |
+    tracingStandAlonePackage-v3 |
+    tracingStandAlonePackage-v2 |
+    tracingStandAlonePackage-v1 |
+    functionalSsPackage-v2 |
+    functionalSsPackage-v1 |
+    tracingPackage-v3 |
+    tracingPackage-v2 |
+    tracingPackage-v1 |
+    bindingPackage-v1 |
+    unstructuredSsPackage-v2 |
+    unstructuredSsPackage-v1 |
+    mo-ShortMsgRelayPackage-v3 |
+    shortMsgRelayPackage-v2 |
+    shortMsgRelayPackage-v1 |
+    shortMsgGatewayPackage-v3 |
+    shortMsgGatewayPackage-v2 |
+    shortMsgGatewayPackage-v1 |
+    mt-ShortMsgRelayPackage-v3 |
+    mwdMngtPackage-v3 |
+    mwdMngtPackage-v2 |
+    mwdMngtPackage-v1 |
+    alertingPackage-v2 |
+    alertingPackage-v1 |
+    dataRestorationPackage-v3 |
+    dataRestorationPackage-v2 |
+    dataRestorationPackage-v1 |
+    purgingPackage-v3 |
+    purgingPackage-v2 |
+    subscriberInformationEnquiryPackage-v3 |
+    anyTimeInformationEnquiryPackage-v3 |
+    groupCallControlPackage-v3 |
+    groupCallInfoRetrievalPackage-v3 |
+    gprsLocationUpdatingPackage-v3 |
+    gprsInterrogationPackage-v4 |
+    failureReportingPackage-v3 |
+    gprsNotifyingPackage-v3 |
+    ss-InvocationNotificationPackage-v3 |
+    setReportingStatePackage-v3 |
+    statusReportPackage-v3 |
+    remoteUserFreePackage-v3 |
+    callCompletionPackage-v3 |
+    locationSvcGatewayPackage-v3 |
+    locationSvcEnquiryPackage-v3 |
+    locationSvcReportingPackage-v3 |
+    ist-AlertingPackage-v3 |
+    serviceTerminationPackage-v3 |
+    mm-EventReportingPackage-v3 |
+    anyTimeInformationHandlingPackage-v3 |
+    subscriberDataModificationNotificationPackage-v3 |
+    authenticationFailureReportPackage-v3 |
+    resourceManagementPackage-v3 |
+    mt-ShortMsgRelay-VGCS-Package-v3 |
+    vcsgLocationUpdatingPackage-v3 |
+    vcsgLocationCancellationPackage-v3
+    }
+
+
+--//////////////////////////////////////\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--
+--                           MAP application contexts
+--\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\//////////////////////////////////////--
+
+
+--
+-- Location Updating
+-- 17.3.2.2
+--
+
+networkLocUpContext-v3 APPLICATION-CONTEXT ::= {
+    -- Responder is HLR if Initiator is VLR
+    INITIATOR CONSUMER OF {
+        locationUpdatingPackage-v3 |
+        dataRestorationPackage-v3 }
+    INITIATOR IN { vlr }
+    RESPONDER CONSUMER OF {
+        subscriberDataMngtPackage-v3 |
+        tracingPackage-v3 }
+    RESPONDER IN { hlr }
+    ID  {map-ac networkLocUp (1) version3 (3)}
+    }
+
+networkLocUpContext-v2 APPLICATION-CONTEXT ::= {
+    INITIATOR CONSUMER OF {
+        locationUpdatingPackage-v2 |
+        dataRestorationPackage-v2 }
+    INITIATOR IN { vlr }
+    RESPONDER CONSUMER OF {
+        subscriberDataMngtPackage-v2 |
+        tracingPackage-v2 }
+    RESPONDER IN { hlr }
+    ID  {map-ac networkLocUp (1) version2 (2)}
+    }
+
+networkLocUpContext-v1 APPLICATION-CONTEXT ::= {
+    INITIATOR CONSUMER OF {
+        locationUpdatingPackage-v1 |
+        dataRestorationPackage-v1 }
+    INITIATOR IN { vlr }
+    RESPONDER CONSUMER OF {
+        subscriberDataMngtPackage-v1 |
+        tracingPackage-v1 }
+    RESPONDER IN { hlr }
+    ID  {map-ac networkLocUp (1) version1 (1)}
+    }
+
+
+--
+-- Location Cancellation
+-- 17.3.2.3
+--
+
+locationCancellationContext-v3 APPLICATION-CONTEXT ::= {
+    -- Responder is VLR or SGSN if Initiator is HLR
+    INITIATOR CONSUMER OF {
+        locationCancellationPackage-v3 }
+    INITIATOR IN { hlr }
+    RESPONDER IN { vlr | sgsn }
+    ID  {map-ac locationCancel (2) version3 (3)}
+    }
+
+locationCancellationContext-v2 APPLICATION-CONTEXT ::= {
+    INITIATOR CONSUMER OF {
+        locationCancellationPackage-v2 }
+    INITIATOR IN { hlr }
+    RESPONDER IN { vlr | sgsn }
+    ID  {map-ac locationCancellation (2) version2 (2)}
+    }
+
+locationCancellationContext-v1 APPLICATION-CONTEXT ::= {
+    INITIATOR CONSUMER OF {
+        locationCancellationPackage-v1 }
+    INITIATOR IN { hlr }
+    RESPONDER IN { vlr | sgsn }
+    ID  {map-ac locationCancellation (2) version1 (1)}
+    }
+
+
+--
+-- Roaming number enquiry
+-- 17.3.2.4
+--
+
+roamingNumberEnquiryContext-v3 APPLICATION-CONTEXT ::= {
+    -- Responder is VLR if Initiator is HLR
+    INITIATOR CONSUMER OF {
+        roamingNumberEnquiryPackage-v3 }
+    INITIATOR IN { hlr }
+    RESPONDER IN { vlr }
+    ID  {map-ac roamingNbEnquiry (3) version3 (3)}
+    }
+
+roamingNumberEnquiryContext-v2 APPLICATION-CONTEXT ::= {
+    INITIATOR CONSUMER OF {
+        roamingNumberEnquiryPackage-v2 }
+    INITIATOR IN { hlr }
+    RESPONDER IN { vlr }
+    ID  {map-ac roamingNumberEnquiry (3) version2 (2)}
+    }
+
+roamingNumberEnquiryContext-v1 APPLICATION-CONTEXT ::= {
+    INITIATOR CONSUMER OF {
+        roamingNumberEnquiryPackage-v1 }
+    INITIATOR IN { hlr }
+    RESPONDER IN { vlr }
+    ID  {map-ac roamingNumberEnquiry (3) version2 (1)}
+    }
+
+
+--
+-- Location Information Retrieval
+-- 17.3.2.6
+--
+
+locationInfoRetrievalContext-v3 APPLICATION-CONTEXT ::= {
+    -- Responder is HLR or NPLR if Initiator is GMSC
+    -- Responder is HLR if Initiator is gsmSCF
+    INITIATOR CONSUMER OF {
+        interrogationPackage-v3 }
+    INITIATOR IN { msc | gsmscf }
+    RESPONDER IN { hlr | nplr }
+    ID  {map-ac locInfoRetrieval (5) version3 (3)}
+    }
+
+locationInfoRetrievalContext-v2 APPLICATION-CONTEXT ::= {
+    INITIATOR CONSUMER OF {
+        interrogationPackage-v2 }
+    INITIATOR IN { msc | gsmscf }
+    RESPONDER IN { hlr | nplr }
+    ID  {map-ac locationInfoRetrieval (5) version2 (2)}
+    }
+
+locationInfoRetrievalContext-v1 APPLICATION-CONTEXT ::= {
+    INITIATOR CONSUMER OF {
+        interrogationPackage-v1 }
+    INITIATOR IN { msc | gsmscf }
+    RESPONDER IN { hlr | nplr }
+    ID  {map-ac locationInfoRetrieval (5) version2 (1)}
+    }
+
+
+--
+-- Call control transfer
+-- 17.3.2.7
+--
+
+callControlTransferContext-v4 APPLICATION-CONTEXT ::= {
+    -- Responder is GMSC if Initiator is VMSC
+    INITIATOR CONSUMER OF {
+        callControlTransferPackage-v4 }
+    INITIATOR IN { msc }
+    RESPONDER IN { msc }
+    ID  {map-ac callControlTransfer (6) version4 (4)}
+    }
+
+callControlTransferContext-v3 APPLICATION-CONTEXT ::= {
+    INITIATOR CONSUMER OF {
+        callControlTransferPackage-v3 }
+    INITIATOR IN { msc }
+    RESPONDER IN { msc }
+    ID  {map-ac callControlTransferContext (6) version3 (3)}
+    }
+
+
+--
+-- Location registers restart
+-- 17.3.2.11
+--
+
+resetContext-v3 APPLICATION-CONTEXT ::= {
+    -- Responder is VLR or SGSN if Initiator is HLR or CSS
+    INITIATOR CONSUMER OF {
+        resetPackage-v3 }
+    INITIATOR IN { hlr | css }
+    RESPONDER IN { vlr | sgsn }
+    ID  {map-ac reset (10) version3 (3)}
+    }
+
+resetContext-v2 APPLICATION-CONTEXT ::= {
+    INITIATOR CONSUMER OF {
+        resetPackage-v2 }
+    INITIATOR IN { hlr | css }
+    RESPONDER IN { vlr | sgsn }
+    ID  {map-ac reset (10)	version2 (2)}
+    }
+
+resetContext-v1 APPLICATION-CONTEXT ::= {
+    INITIATOR CONSUMER OF {
+        resetPackage-v1 }
+    INITIATOR IN { hlr | css }
+    RESPONDER IN { vlr | sgsn }
+    ID  {map-ac reset (10)	version2 (1)}
+    }
+
+
+--
+-- Handover control
+-- 17.3.2.12
+--
+
+handoverControlContext-v3 APPLICATION-CONTEXT ::= {
+    -- Responder is MSCB if Initiator is MSCA
+    INITIATOR CONSUMER OF {
+        handoverControlPackage-v3 }
+    INITIATOR IN { msc }
+    RESPONDER IN { msc }
+    ID  {map-ac handoverControl (11) version3 (3)}
+    }
+
+handoverControlContext-2 APPLICATION-CONTEXT ::= {
+    INITIATOR CONSUMER OF {
+        handoverControlPackage-v2 }
+    INITIATOR IN { msc }
+    RESPONDER IN { msc }
+    ID  {map-ac handoverControl (11) version2 (2)}
+    }
+
+handoverControlContext-v1 APPLICATION-CONTEXT ::= {
+    INITIATOR CONSUMER OF {
+        handoverControlPackage-v1 }
+    INITIATOR IN { msc }
+    RESPONDER IN { msc }
+    ID  {map-ac handoverControl (11) version2 (1)}
+    }
+
+
+--
+-- IMSI Retrieval
+-- 17.3.2.13
+--
+
+imsiRetrievalContext-v2 APPLICATION-CONTEXT ::= {
+    -- Responder is HLR if Initiator is VLR
+    INITIATOR CONSUMER OF {
+        imsiRetrievalPackage-v2 }
+    INITIATOR IN { vlr }
+    RESPONDER IN { hlr }
+    ID  {map-ac imsiRetrieval (26) version2 (2)}
+    }
+
+
+--
+-- Equipment Management
+-- 17.3.2.14
+--
+
+equipmentMngtContext-v3 APPLICATION-CONTEXT ::= {
+    -- Responder is EIR if Initiator is MSC
+    -- Responder is EIR if Initiator is SGSN
+    INITIATOR CONSUMER OF {
+        equipmentMngtPackage-v3 }
+    INITIATOR IN { msc | sgsn }
+    RESPONDER IN { eir }
+    ID  {map-ac equipmentMngt (13) version3 (3)}
+    }
+
+equipmentMngtContext-v2 APPLICATION-CONTEXT ::= {
+    INITIATOR CONSUMER OF {
+        equipmentMngtPackage-v2 }
+    INITIATOR IN { msc | sgsn }
+    RESPONDER IN { eir }
+    ID  {map-ac equipmentMngt (13) version2 (2)}
+    }
+
+equipmentMngtContext-v1 APPLICATION-CONTEXT ::= {
+    INITIATOR CONSUMER OF {
+        equipmentMngtPackage-v1 }
+    INITIATOR IN { msc | sgsn }
+    RESPONDER IN { eir }
+    ID  {map-ac equipmentMngt (13) version1 (1)}
+    }
+
+
+--
+-- Information retrieval
+-- 17.3.2.15
+--
+
+infoRetrievalContext-v3 APPLICATION-CONTEXT ::= {
+    -- Responder is HLR if Initiator is VLR
+    -- Responder is HLR if Initiator is SGSN
+    INITIATOR CONSUMER OF {
+        infoRetrievalPackage-v3 }
+    INITIATOR IN { vlr | sgsn }
+    RESPONDER IN { hlr }
+    ID  {map-ac infoRetrieval (14) version3 (3)}
+    }
+
+infoRetrievalContext-v2 APPLICATION-CONTEXT ::= {
+    INITIATOR CONSUMER OF {
+        infoRetrievalPackage-v2 }
+    INITIATOR IN { vlr | sgsn }
+    RESPONDER IN { hlr }
+    ID  {map-ac infoRetrieval (14) version2 (2)}
+    }
+
+infoRetrievalContext-v1 APPLICATION-CONTEXT ::= {
+    INITIATOR CONSUMER OF {
+        infoRetrievalPackage-v1 }
+    INITIATOR IN { vlr | sgsn }
+    RESPONDER IN { hlr }
+    ID  {map-ac infoRetrieval (14) version1 (1)}
+    }
+
+
+--
+-- Inter-VLR information retrieval
+-- 17.3.2.16
+--
+
+interVlrInfoRetrievalContext-v3 APPLICATION-CONTEXT ::= {
+    -- Responder is VLR if Initiator is VLR
+    INITIATOR CONSUMER OF {
+        interVlrInfoRetrievalPackage-v3 }
+    INITIATOR IN { vlr }
+    RESPONDER IN { vlr }
+    ID  {map-ac interVlrInfoRetrieval (15) version3 (3)}
+    }
+
+interVlrInfoRetrievalContext-v2 APPLICATION-CONTEXT ::= {
+    INITIATOR CONSUMER OF {
+        interVlrInfoRetrievalPackage-v2 }
+    INITIATOR IN { vlr }
+    RESPONDER IN { vlr }
+    ID  {map-ac interVlrInfoRetrieval (15) version2 (2)}
+    }
+
+
+--
+-- Stand Alone Subscriber Data Management
+-- 17.3.2.17
+--
+
+subscriberDataMngtContext-v3 APPLICATION-CONTEXT ::= {
+    -- Responder is VLR or SGSN if Initiator is HLR or CSS
+    INITIATOR CONSUMER OF {
+        subscriberDataMngtStandAlonePackage-v3 }
+    INITIATOR IN { hlr | css }
+    RESPONDER IN { vlr | sgsn }
+    ID  {map-ac subscriberDataMngt (16) version3 (3)}
+    }
+
+subscriberDataMngtContext-v2 APPLICATION-CONTEXT ::= {
+    INITIATOR CONSUMER OF {
+        subscriberDataMngtStandAlonePackage-v2 }
+    INITIATOR IN { hlr }
+    RESPONDER IN { vlr }
+    ID  {map-ac subscriberDataMngt (16)	version2 (2)}
+    }
+
+subscriberDataMngtContext-v1 APPLICATION-CONTEXT ::= {
+    INITIATOR CONSUMER OF {
+        subscriberDataMngtStandAlonePackage-v1 }
+    INITIATOR IN { hlr }
+    RESPONDER IN { vlr }
+    ID  {map-ac subscriberDataMngt (16)	version1 (1)}
+    }
+
+
+--
+-- Tracing
+-- 17.3.2.18
+--
+
+tracingContext-v3 APPLICATION-CONTEXT ::= {
+    -- Responder is VLR or SGSN if Initiator is HLR
+    INITIATOR CONSUMER OF {
+        tracingStandAlonePackage-v3 }
+    INITIATOR IN { hlr }
+    RESPONDER IN { vlr | sgsn }
+    ID  {map-ac tracing (17) version3 (3)}
+    }
+
+tracingContext-v2 APPLICATION-CONTEXT ::= {
+    INITIATOR CONSUMER OF {
+        tracingStandAlonePackage-v2 }
+    INITIATOR IN { hlr }
+    RESPONDER IN { vlr | sgsn }
+    ID  {map-ac tracing (17) version2 (2)}
+    }
+
+tracingContext-v1 APPLICATION-CONTEXT ::= {
+    INITIATOR CONSUMER OF {
+        tracingStandAlonePackage-v1 }
+    INITIATOR IN { hlr }
+    RESPONDER IN { vlr | sgsn }
+    ID  {map-ac tracing (17) version2 (1)}
+    }
+
+
+--
+-- Network functional SS handling
+-- 17.3.2.19
+--
+
+networkFunctionalSsContext-v2 APPLICATION-CONTEXT ::= {
+    -- Responder is HLR, Initiator is VLR
+    INITIATOR CONSUMER OF {
+        functionalSsPackage-v2 }
+    INITIATOR IN { vlr }
+    RESPONDER IN { hlr }
+    ID  {map-ac networkFunctionalSs (18) version2 (2)}
+    }
+
+networkFunctionalSsContext-v1 APPLICATION-CONTEXT ::= {
+    INITIATOR CONSUMER OF {
+        functionalSsPackage-v1 |
+        unstructuredSsPackage-v1 |
+        bindingPackage-v1 }
+    INITIATOR IN { vlr | hlr | gsmscf }
+    RESPONDER IN { vlr | hlr | gsmscf }
+    ID  {map-ac networkFunctionalSs (18) version1 (1)}
+    }
+
+
+--
+-- Network unstructured SS handling
+-- 17.3.2.20
+--
+
+networkUnstructuredSsContext-v2 APPLICATION-CONTEXT ::= {
+    -- Responder is HLR, Initiator is VLR
+    -- Responder is VLR, Initiator is HLR
+    -- Responder is gsmSCF, Initiator is HLR
+    -- Responder is HLR, Initiator is gsmSCF
+    -- Responder is HLR, Initiator is HLR
+    OPERATIONS OF {
+        unstructuredSsPackage-v2 }
+    INITIATOR IN { vlr | hlr | gsmscf }
+    RESPONDER IN { vlr | hlr | gsmscf }
+    ID  {map-ac networkUnstructuredSs (19) version2 (2)}
+    }
+
+
+--
+-- Short Message Gateway
+-- 17.3.2.21
+--
+
+shortMsgGatewayContext-v3 APPLICATION-CONTEXT ::= {
+    -- Responder is HLR if Initiator is GMSC
+    INITIATOR CONSUMER OF {
+        shortMsgGatewayPackage-v3 }
+    INITIATOR IN { msc }
+    RESPONDER IN { hlr }
+    ID  {map-ac shortMsgGateway (20) version3 (3)}
+    }
+
+shortMsgGatewayContext-v2 APPLICATION-CONTEXT ::= {
+    -- Responder is HLR if Initiator is GMSC
+    INITIATOR CONSUMER OF {
+        shortMsgGatewayPackage-v2 }
+    INITIATOR IN { msc }
+    RESPONDER IN { hlr }
+    ID  {map-ac shortMsgGateway (20) version2 (2)}
+    }
+
+shortMsgGatewayContext-v1 APPLICATION-CONTEXT ::= {
+    -- Responder is HLR if Initiator is GMSC
+    INITIATOR CONSUMER OF {
+        shortMsgGatewayPackage-v1 }
+    INITIATOR IN { msc }
+    RESPONDER IN { hlr }
+    ID  {map-ac shortMsgGateway (20) version1 (1)}
+    }
+
+
+--
+-- Mobile originating Short Message Relay
+-- 17.3.2.22
+--
+
+shortMsgMO-RelayContext-v3 APPLICATION-CONTEXT ::= {
+    -- Responder is IWMSC if Initiator is MSC
+    -- Responder is IWMSC if Initiator is SGSN
+    INITIATOR CONSUMER OF {
+        mo-ShortMsgRelayPackage-v3 }
+    INITIATOR IN { msc | sgsn }
+    RESPONDER IN { msc }
+    ID  {map-ac shortMsgMO-Relay (21) version3 (3)}
+    }
+
+shortMsg-RelayContext-v2 APPLICATION-CONTEXT ::= {
+    INITIATOR CONSUMER OF {
+        shortMsgRelayPackage-v2 }
+    INITIATOR IN { msc | sgsn }
+    RESPONDER IN { msc }
+    ID  {map-ac shortMsg-Relay (21) version1 (2)}
+    }
+
+shortMsg-RelayContext-v1 APPLICATION-CONTEXT ::= {
+    INITIATOR CONSUMER OF {
+        shortMsgRelayPackage-v1 }
+    INITIATOR IN { msc | sgsn }
+    RESPONDER IN { msc | sgsn }
+    ID  {map-ac shortMsg-Relay (21) version1 (1)}
+    }
+
+
+--
+-- Short message alert
+-- 17.3.2.24
+--
+
+shortMsgAlertContext-v2 APPLICATION-CONTEXT ::= {
+    -- Responder is IWMSC if Initiator is HLR
+    INITIATOR CONSUMER OF {
+        alertingPackage-v2 }
+    INITIATOR IN { hlr }
+    RESPONDER IN { msc }
+    ID  {map-ac shortMsgAlert (23) version2 (2)}
+    }
+
+shortMsgAlertContext-v1 APPLICATION-CONTEXT ::= {
+    INITIATOR CONSUMER OF {
+        alertingPackage-v1 }
+    INITIATOR IN { hlr }
+    RESPONDER IN { msc }
+    ID  {map-ac shortMsgAlert (23) version1 (1)}
+    }
+
+
+--
+-- Short message waiting data management
+-- 17.3.2.25
+--
+
+mwdMngtContext-v3 APPLICATION-CONTEXT ::= {
+    -- Responder is HLR if Initiator is SGSN
+    -- Responder is HLR if Initiator is VLR
+    INITIATOR CONSUMER OF {
+        mwdMngtPackage-v3 }
+    INITIATOR IN { vlr | sgsn }
+    RESPONDER IN { hlr }
+    ID  {map-ac mwdMngt (24) version3 (3)}
+    }
+
+mwdMngtContext-v2 APPLICATION-CONTEXT ::= {
+    INITIATOR CONSUMER OF {
+        mwdMngtPackage-v2 }
+    INITIATOR IN { vlr }
+    RESPONDER IN { hlr }
+    ID  {map-ac mwdMngt (24) version2 (2)}
+    }
+
+mwdMngtContext-v1 APPLICATION-CONTEXT ::= {
+    INITIATOR CONSUMER OF {
+        mwdMngtPackage-v1 }
+    INITIATOR IN { vlr }
+    RESPONDER IN { hlr }
+    ID  {map-ac mwdMngt (24) version1 (1)}
+    }
+
+
+--
+-- Mobile terminating Short Message Relay
+-- 17.3.2.26
+--
+
+shortMsgMT-RelayContext-v3 APPLICATION-CONTEXT ::= {
+    -- Responder is MSC or SGSN if Initiator is GMSC
+    INITIATOR CONSUMER OF {
+        mt-ShortMsgRelayPackage-v3 }
+    INITIATOR IN { msc }
+    RESPONDER IN { msc | sgsn }
+    ID  {map-ac shortMsgMT-Relay (25) version3 (3)}
+    }
+
+shortMsgMT-RelayContext-v2 APPLICATION-CONTEXT ::= {
+    INITIATOR CONSUMER OF {
+        shortMsgRelayPackage-v2 }
+    INITIATOR IN { msc }
+    RESPONDER IN { msc | sgsn }
+    ID  {map-ac shortMsgMT-Relay (25) version2 (2)}
+    }
+
+shortMsgMT-RelayContext-v1 APPLICATION-CONTEXT ::= {
+    INITIATOR CONSUMER OF {
+        shortMsgRelayPackage-v1 }
+    INITIATOR IN { msc | sgsn }
+    RESPONDER IN { msc | sgsn }
+    ID  {map-ac shortMsgMT-Relay (25) version2 (1)}
+    }
+
+
+--
+-- MS purging
+-- 17.3.2.27
+--
+
+msPurgingContext-v3 APPLICATION-CONTEXT ::= {
+    -- Responder is HLR if Initiator is VLR
+    -- Responder is HLR if Initiator is SGSN
+    INITIATOR CONSUMER OF {
+        purgingPackage-v3 }
+    INITIATOR IN { vlr | sgsn }
+    RESPONDER IN { hlr }
+    ID  {map-ac msPurging (27) version3 (3)}
+    }
+
+msPurgingContext-v2 APPLICATION-CONTEXT ::= {
+    INITIATOR CONSUMER OF {
+        purgingPackage-v2 }
+    INITIATOR IN { vlr }
+    RESPONDER IN { hlr }
+    ID  {map-ac msPurging (27) version2 (2)}
+    }
+
+
+--
+-- Subscriber information enquiry
+-- 17.3.2.28
+--
+
+subscriberInfoEnquiryContext-v3 APPLICATION-CONTEXT ::= {
+    -- Responder is VLR or SGSN if Initiator is HLR
+    INITIATOR CONSUMER OF {
+        subscriberInformationEnquiryPackage-v3 }
+    INITIATOR IN { hlr }
+    RESPONDER IN { vlr | sgsn }
+    ID  {map-ac subscriberInfoEnquiry (28) version3 (3)}
+    }
+
+
+--
+-- Any time information enquiry
+-- 17.3.2.29
+--
+
+anyTimeInfoEnquiryContext-v3 APPLICATION-CONTEXT ::= {
+    -- Responder is HLR or GMLC or NPLR if Initiator is gsmSCF
+    INITIATOR CONSUMER OF {
+        anyTimeInformationEnquiryPackage-v3 }
+    INITIATOR IN { gsmscf }
+    RESPONDER IN { hlr | gmlc | nplr }
+    ID  {map-ac anyTimeInfoEnquiry (29) version3 (3)}
+    }
+
+
+--
+-- Group Call Control
+-- 17.3.2.30
+--
+
+groupCallControlContext-v3 APPLICATION-CONTEXT ::= {
+    -- Responder is relay MSC if Initiator is anchor MSC
+    INITIATOR CONSUMER OF {
+        groupCallControlPackage-v3 }
+    INITIATOR IN { msc }
+    RESPONDER IN { msc }
+    ID  {map-ac groupCallControl (31) version3 (3)}
+    }
+
+
+--
+-- Group Call Info Retrieval
+-- 17.3.2.30A
+--
+
+groupCallInfoRetControlContext-v3 APPLICATION-CONTEXT ::= {
+    -- Responder is group call serving MSC if Initiator is visited MSC
+    -- Responder is visited MSC if Initiator is group call serving MSC
+    INITIATOR CONSUMER OF {
+        groupCallInfoRetrievalPackage-v3 }
+    INITIATOR IN { msc }
+    RESPONDER IN { msc }
+    ID  {map-ac groupCallInfoRetrieval (45) version3(3)}
+    }
+
+
+--
+-- Gprs Location Updating
+-- 17.3.2.32
+--
+
+gprsLocationUpdateContext-v3 APPLICATION-CONTEXT ::= {
+    -- Responder is HLR if Initiator is SGSN
+    INITIATOR CONSUMER OF {
+        gprsLocationUpdatingPackage-v3 }
+    INITIATOR IN { sgsn }
+    RESPONDER CONSUMER OF {
+        subscriberDataMngtPackage-v3 |
+        tracingPackage-v3 }
+    RESPONDER IN { hlr }
+    ID  {map-ac gprsLocationUpdate (32) version3 (3)}
+    }
+
+
+--
+-- Gprs Location Information Retreival
+-- 17.3.2.33
+--
+
+gprsLocationInfoRetrievalContext-v4 APPLICATION-CONTEXT ::= {
+    -- Responder is HLR if Initiator is GGSN
+    INITIATOR CONSUMER OF {
+        gprsInterrogationPackage-v4 }
+    INITIATOR IN { ggsn }
+    RESPONDER IN { hlr }
+    ID  {map-ac gprsLocationInfoRetrieval (33) version4 (4)}
+    }
+
+gprsLocationInfoRetrievalContext-v3 APPLICATION-CONTEXT ::= {
+    -- Responder is HLR if Initiator is GGSN
+    INITIATOR CONSUMER OF {
+        gprsInterrogationPackage-v3 }
+    INITIATOR IN { ggsn }
+    RESPONDER IN { hlr }
+    ID  {map-ac gprsLocationInfoRetrieval (33) version3 (3)} 
+    }
+
+
+--
+-- Failure Reporting
+-- 17.3.2.34
+--
+
+failureReportContext-v3 APPLICATION-CONTEXT ::= {
+    -- Responder is HLR if Initiator is GGSN
+    INITIATOR CONSUMER OF {
+        failureReportingPackage-v3 }
+    INITIATOR IN { ggsn }
+    RESPONDER IN { hlr }
+    ID  {map-ac failureReport (34) version3 (3)}
+    }
+
+
+--
+-- GPRS Notifying
+-- 17.3.2.35
+--
+
+gprsNotifyContext-v3 APPLICATION-CONTEXT ::= {
+    -- Responder is GGSN if Initiator is HLR
+    INITIATOR CONSUMER OF {
+        gprsNotifyingPackage-v3 }
+    INITIATOR IN { hlr }
+    RESPONDER IN { ggsn }
+    ID  {map-ac gprsNotify (35) version3 (3)}
+    }
+
+
+--
+-- Supplementary Service invocation notification
+-- 17.3.2.36
+--
+
+ss-InvocationNotificationContext-v3 APPLICATION-CONTEXT ::= {
+    -- Responder is gsmSCF, Initiator is MSC
+    -- Responder is gsmSCF, Initiator is HLR
+    INITIATOR CONSUMER OF {
+        ss-InvocationNotificationPackage-v3 }
+    INITIATOR IN { msc | hlr }
+    RESPONDER IN { gsmscf }
+    ID  {map-ac ss-InvocationNotification (36) version3 (3)}
+    }
+
+
+--
+-- Reporting
+-- 17.3.2.37
+--
+
+reportingContext-v3 APPLICATION-CONTEXT ::= {
+    -- Responder is VLR if Initiator is HLR
+    -- Responder is HLR if Initiator is VLR
+    INITIATOR CONSUMER OF {
+        setReportingStatePackage-v3 |
+        statusReportPackage-v3 |
+        remoteUserFreePackage-v3 }
+    INITIATOR IN { vlr | hlr }
+    RESPONDER CONSUMER OF {
+        setReportingStatePackage-v3 |
+        statusReportPackage-v3 }
+    RESPONDER IN { vlr | hlr }
+    ID  {map-ac reporting (7) version3 (3)}
+    }
+
+
+--
+-- Call Completion
+-- 17.3.2.38
+--
+
+callCompletionContext-v3 APPLICATION-CONTEXT ::= {
+    -- Responder is HLR if Initiator is VLR
+    INITIATOR CONSUMER OF {
+        callCompletionPackage-v3 }
+    INITIATOR IN { vlr }
+    RESPONDER IN { hlr }
+    ID  {map-ac callCompletion (8) version3 (3)}
+    }
+
+
+--
+-- Location Service Gateway
+-- 17.3.2.39
+--
+
+locationSvcGatewayContext-v3 APPLICATION-CONTEXT ::= {
+    -- Responder is HLR if Initiator is GMLC
+    INITIATOR CONSUMER OF {
+        locationSvcGatewayPackage-v3 }
+    INITIATOR IN { gmlc }
+    RESPONDER IN { hlr }
+    ID  {map-ac locationSvcGateway (37) version3 (3)}
+    }
+
+
+--
+-- Location Service Enquiry
+-- 17.3.2.40
+--
+
+locationSvcEnquiryContext-v3 APPLICATION-CONTEXT ::= {
+    -- Responder is MSC or SGSN if Initiator is GMLC
+    -- Responder is GMLC if Initiator is MSC
+    -- Responder is GMLC if Initiator is SGSN
+    INITIATOR CONSUMER OF {
+        locationSvcEnquiryPackage-v3 |
+        locationSvcReportingPackage-v3 }
+    INITIATOR IN { gmlc | msc | sgsn }
+    RESPONDER IN { gmlc | msc | sgsn }
+    ID  {map-ac locationSvcEnquiry (38) version3 (3)}
+    }
+
+
+--
+-- IST Alerting
+-- 17.3.2.44
+--
+
+istAlertingContext-v3 APPLICATION-CONTEXT ::= {
+    -- Responder is HLR if Initiator is VMSC
+    -- Responder is HLR if Initiator is GMSC
+    INITIATOR CONSUMER OF {
+        ist-AlertingPackage-v3 }
+    INITIATOR IN { msc }
+    RESPONDER IN { hlr }
+    ID  {map-ac istAlerting (4) version3 (3)}
+    }
+
+
+--
+-- Service Termination
+-- 17.3.2.45
+--
+
+serviceTerminationContext-v3 APPLICATION-CONTEXT ::= {
+    -- Responder is VMSC or GMSC if Initiator is HLR
+    INITIATOR CONSUMER OF {
+        serviceTerminationPackage-v3 }
+    INITIATOR IN { hlr }
+    RESPONDER IN { msc }
+    ID  {map-ac immediateTermination (9) version3 (3)}
+    }
+
+
+--
+-- Mobility Management event notification
+-- 17.3.2.46
+--
+
+mm-EventReportingContext-v3 APPLICATION-CONTEXT ::= {
+    -- Responder is gsmSCF, Initiator is VLR
+    INITIATOR CONSUMER OF {
+        mm-EventReportingPackage-v3 }
+    INITIATOR IN { vlr }
+    RESPONDER IN { gsmscf }
+    ID  {map-ac mm-EventReporting (42) version3 (3)}
+    }
+
+
+--
+-- Any time information handling
+-- 17.3.2.47
+--
+
+anyTimeInfohandlingContext-v3 APPLICATION-CONTEXT ::= {
+    -- Responder is HLR if Initiator is gsmSCF
+    INITIATOR CONSUMER OF {
+        anyTimeInformationHandlingPackage-v3 }
+    INITIATOR IN { gsmscf }
+    RESPONDER IN { hlr }
+    ID  {map-ac anyTimeInfoHandling (43) version3 (3)}
+    }
+
+
+--
+-- Subscriber Data modification notification
+-- 17.3.2.48
+--
+
+subscriberDataModificationNotificationContext-v3 APPLICATION-CONTEXT ::= {
+    -- Responder is gsmSCF, Initiator is HLR
+    INITIATOR CONSUMER OF {
+        subscriberDataModificationNotificationPackage-v3 }
+    INITIATOR IN { hlr }
+    RESPONDER IN { gsmscf }
+    ID  {map-ac subscriberDataModificationNotification (22) version3 (3)}
+    }
+
+
+--
+-- Authentication Failure Report
+-- 17.3.2.49
+--
+
+authenticationFailureReportContext-v3 APPLICATION-CONTEXT ::= {
+    -- Responder is HLR if Initiator is VLR
+    -- Responder is HLR if Initiator is SGSN
+    INITIATOR CONSUMER OF {
+        authenticationFailureReportPackage-v3 }
+    INITIATOR IN { vlr | sgsn }
+    RESPONDER IN { hlr }
+    ID  {map-ac authenticationFailureReport (39) version3 (3)}
+    }
+
+
+--
+-- Resource Management
+-- 17.3.2.50
+--
+
+resourceManagementContext-v3 APPLICATION-CONTEXT ::= {
+    -- Responder is VMSC if Initiator is GMSC
+    INITIATOR CONSUMER OF {
+        resourceManagementPackage-v3 }
+    INITIATOR IN { msc }
+    RESPONDER IN { msc }
+    ID  {map-ac resourceManagement (44) version3 (3)}
+    }
+
+
+--
+-- Mobile terminating Short Message Relay VGCS
+-- 17.3.2.51
+--
+
+shortMsgMT-Relay-VGCS-Context-v3 APPLICATION-CONTEXT ::= {
+    -- Responder is MSC if Initiator is SMS-GMSC
+    INITIATOR CONSUMER OF {
+        mt-ShortMsgRelay-VGCS-Package-v3 }
+    INITIATOR IN { msc }
+    RESPONDER IN { msc }
+    ID  {map-ac shortMsgMT-Relay-VGCS (41) version3 (3)}
+    }
+
+
+--
+-- Vcsg Location Updating
+-- 17.3.2.52
+--
+
+vcsgLocationUpdateContext-v3 APPLICATION-CONTEXT ::= {
+    -- Responder is CSS if Initiator is VLR or SGSN
+    INITIATOR CONSUMER OF {
+        vcsgLocationUpdatingPackage-v3 }
+    INITIATOR IN { vlr | sgsn }
+    RESPONDER CONSUMER OF {
+        subscriberDataMngtPackage-v3 }
+    RESPONDER IN { css }
+    ID  {map-ac vcsgLocationUpdate (46) version3 (3)}
+    }
+
+
+--
+-- Vcsg Location Cancellation
+-- 17.3.2.53
+--
+
+vcsgLocationCancellationContext-v3 APPLICATION-CONTEXT ::= {
+    -- Responder is VLR or SGSN if Initiator is CSS
+    INITIATOR CONSUMER OF {
+        vcsgLocationCancellationPackage-v3 }
+    INITIATOR IN { css }
+    RESPONDER IN { vlr | sgsn }
+    ID  {map-ac vcsgLocationCancel (47) version3 (3)}
+    }
+
+
+--
+-- All MAP application contexts
+--
+
+-- 1 error below (1 non-existent)
+
+Supported-MAP-ApplicationContexts APPLICATION-CONTEXT ::= {
+    networkLocUpContext-v3 |
+    networkLocUpContext-v2 |
+    networkLocUpContext-v1 |
+    locationCancellationContext-v3 |
+    locationCancellationContext-v2 |
+    locationCancellationContext-v1 |
+    roamingNumberEnquiryContext-v3 |
+    roamingNumberEnquiryContext-v2 |
+    roamingNumberEnquiryContext-v1 |
+    locationInfoRetrievalContext-v3 |
+    locationInfoRetrievalContext-v2 |
+    locationInfoRetrievalContext-v1 |
+    callControlTransferContext-v4 |
+    callControlTransferContext-v3 |
+    resetContext-v3 |
+    resetContext-v2 |
+    resetContext-v1 |
+    handoverControlContext-v3 |
+    handoverControlContext-2 |
+    handoverControlContext-v1 |
+    imsiRetrievalContext-v2 |
+    equipmentMngtContext-v3 |
+    equipmentMngtContext-v2 |
+    equipmentMngtContext-v1 |
+    infoRetrievalContext-v3 |
+    infoRetrievalContext-v2 |
+    infoRetrievalContext-v1 |
+    interVlrInfoRetrievalContext-v3 |
+    interVlrInfoRetrievalContext-v2 |
+    subscriberDataMngtContext-v3 |
+    subscriberDataMngtContext-v2 |
+    subscriberDataMngtContext-v1 |
+    tracingContext-v3 |
+    tracingContext-v2 |
+    tracingContext-v1 |
+    networkFunctionalSsContext-v2 |
+    networkFunctionalSsContext-v1 |
+    networkUnstructuredSsContext-v2 |
+    shortMsgGatewayContext-v3 |
+    shortMsgGatewayContext-v2 |
+    shortMsgGatewayContext-v1 |
+    shortMsgMO-RelayContext-v3 |
+    shortMsg-RelayContext-v2 |
+    shortMsg-RelayContext-v1 |
+    shortMsgAlertContext-v2 |
+    shortMsgAlertContext-v1 |
+    mwdMngtContext-v3 |
+    mwdMngtContext-v2 |
+    mwdMngtContext-v1 |
+    shortMsgMT-RelayContext-v3 |
+    shortMsgMT-RelayContext-v2 |
+    shortMsgMT-RelayContext-v1 |
+    msPurgingContext-v3 |
+    msPurgingContext-v2 |
+    subscriberInfoEnquiryContext-v3 |
+    anyTimeInfoEnquiryContext-v3 |
+    groupCallControlContext-v3 |
+    groupCallInfoRetControlContext-v3 |
+    gprsLocationUpdateContext-v3 |
+    gprsLocationInfoRetrievalContext-v4 |
+    gprsLocationInfoRetrievalContext-v3 |
+    failureReportContext-v3 |
+    gprsNotifyContext-v3 |
+    ss-InvocationNotificationContext-v3 |
+    reportingContext-v3 |
+    callCompletionContext-v3 |
+    locationSvcGatewayContext-v3 |
+    locationSvcEnquiryContext-v3 |
+    istAlertingContext-v3 |
+    serviceTerminationContext-v3 |
+    mm-EventReportingContext-v3 |
+    anyTimeInfohandlingContext-v3 |
+    subscriberDataModificationNotificationContext-v3 |
+    authenticationFailureReportContext-v3 |
+    resourceManagementContext-v3 |
+    shortMsgMT-Relay-VGCS-Context-v3 |
+    vcsgLocationUpdateContext-v3 |
+    vcsgLocationCancellationContext-v3
+    }
+
+
+--//////////////////////////////////////\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--
+--                                 MAP timers
+--\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\//////////////////////////////////////--
+
+
+-- MAP timer, expressed in seconds
+MAP-Timer ::= SEQUENCE {
+    from INTEGER (0..262143),
+    to   INTEGER (0..262143)
+    }
+
+map-timer-s  MAP-Timer  ::= {from 3,      to 10}
+map-timer-m  MAP-Timer  ::= {from 15,     to 30}
+map-timer-ml MAP-Timer  ::= {from 60,     to 600}
+map-timer-l  MAP-Timer  ::= {from 100800, to 136800}
+
+
+END
+

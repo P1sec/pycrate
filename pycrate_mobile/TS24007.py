@@ -1,7 +1,7 @@
 # -*- coding: UTF-8 -*-
 #/**
 # * Software Name : pycrate
-# * Version : 0.3
+# * Version : 0.4
 # *
 # * Copyright 2017. Benoit Michau. ANSSI. P1sec.
 # *
@@ -29,7 +29,7 @@
 
 __all__ = [
     'Layer3',
-    'Layer3EPS',
+    'Layer3E',
     'IE',
     'Type1V',
     'Type1TV',
@@ -70,8 +70,8 @@ class Layer3(Envelope):
     ENV_SEL_TRANS = False
     
     # this is to break the decoding routine when an unknown IE is encountered
+    # this needs to be set to True for 2G RR signaling message (due to rest octets)
     DEC_BREAK_ON_UNK_IE = False
-    
     
     def __init__(self, *args, **kw):
         if 'val' in kw:
@@ -102,30 +102,16 @@ class Layer3(Envelope):
                     self._rest = ie
         else:
             for ie in self._content:
-                if isinstance(ie, (Type1V, Type1TV)):
-                    rawtype = integer_types
-                else:
-                    rawtype = bytes_types
                 if isinstance(ie, (Type1V, Type3V, Type4LV, Type6LVE)) and ie._name in val:
                     # setting value for non-optional IE
-                    if isinstance(val[ie._name], rawtype):
-                        # setting raw value
-                        ie['V'].set_val(val[ie._name])
-                    else:
-                        # setting embedded IE structure
-                        ie.set_IE(val=val[ie._name])
+                    ie.set_val({'V': val[ie._name]})
                 elif isinstance(ie, (Type1TV, Type3TV, Type4TLV, Type6TLVE)):
                     # optional IE
                     T = ie[0]
                     self._opts.append( (T.get_bl(), T(), ie) )
                     if ie._name in val:
                         ie._trans = False
-                        if isinstance(val[ie._name], rawtype):
-                            # setting raw value
-                            ie['V'].set_val(val[ie._name])
-                        else:
-                            # setting embedded IE structure
-                            ie.set_IE(val=val[ie._name])
+                        ie.set_val({'V': val[ie._name]})
                 elif isinstance(ie, Type2):
                     # optional Tag-only IE
                     self._opts.append( (8, ie[0](), ie) )
@@ -185,16 +171,16 @@ class Layer3(Envelope):
     
     def _dec_unk_ie(self, T8, char):
         if T8 & 0x80:
-            # 1 byte IE
-            log('%s, _dec_unk_ie: unknown Type2 IE, 0x%x' % (self._name, T8))
-            self.append( Type2('_T_%i' % T8, val=[T8]) )
+            # Type1TV IE, could also be a Type2 IE
+            log('%s, _dec_unk_ie: unknown Type1TV IE, 0x%.2x' % (self._name, T8))
+            self.append( Type1TV('_T_%X' % (T8>>4), val={'T':T8>>4, 'V':T8&0xf}) )
         else:
             # Type4TLV IE
             L = char.get_uint(8)
             V = char.get_bytes(8*L)
-            log('%s, _dec_unk_ie: unknown Type4TLV IE, T: 0x%x, V: 0x%s' \
+            log('%s, _dec_unk_ie: unknown Type4TLV IE, T: 0x%.2x, V: 0x%s' \
                 % (self._name, T8, hexlify(V).decode('ascii')))
-            self.append( Type4TLV('_T_%i' % T8, val=[T8, L, V]) )
+            self.append( Type4TLV('_T_%X' % T8, val=[T8, L, V]) )
     
     def repr(self):
         # element transparency
@@ -214,27 +200,30 @@ class Layer3(Envelope):
     __repr__ = repr
 
 
-class Layer3EPS(Layer3):
+class Layer3E(Layer3):
+    
+    # list of clear-text IEs, used for 5GMM NAS message
+    _ies_ct = set()
     
     def _dec_unk_ie(self, T8, char):
         if T8 & 0x80:
-            # 1 byte IE
-            log('%s, _dec_unk_ie: unknown Type2 IE, 0x%x' % (self._name, T8))
-            self.append( Type2('_T_%i' % T8, val=[T8]) )
+            # Type1TV IE, could also be a Type2 IE
+            log('%s, _dec_unk_ie: unknown Type1TV IE, 0x%.2x' % (self._name, T8))
+            self.append( Type1TV('_T_%X' % (T8>>4), val={'T':T8>>4, 'V':T8&0xf}) )
         elif T8 & 0x70 == 0x70:
-            # Type6 TLV IE
+            # Type6TLV IE
             L = char.get_uint(16)
             V = char.get_bytes(8*L)
-            log('%s, _dec_unk_ie: unknown Type6TLVE IE, T: 0x%x, V: 0x%s' \
+            log('%s, _dec_unk_ie: unknown Type6TLVE IE, T: 0x%.2x, V: 0x%s' \
                 % (self._name, T8, hexlify(V)))
             self.append( Type6TLVE('_T_%i' % T8, val=[T8, L, V]) )
         else:
             # Type4TLV IE
             L = char.get_uint(8)
             V = char.get_bytes(8*L)
-            log('%s, _dec_unk_ie: unknown Type4TLV IE, T: 0x%x, V: 0x%s' \
-                % (self._name, T8, hexlify(V)))
-            self.append( Type4TLV('_T_%i' % T8, val=[T8, L, V]) )
+            log('%s, _dec_unk_ie: unknown Type4TLV IE, T: 0x%.2x, V: 0x%s' \
+                % (self._name, T8, hexlify(V).decode('ascii')))
+            self.append( Type4TLV('_T_%X' % T8, val=[T8, L, V]) )
 
 
 class IE(Envelope):
@@ -267,24 +256,27 @@ class IE(Envelope):
             self.unset_IE()
             [elt.set_val(None) for elt in self.__iter__()]
         elif isinstance(vals, (tuple, list)):
-            ind = 0
-            for elt in self.__iter__():
+            for ind, elt in enumerate(self.__iter__()):
                 val = vals[ind]
-                if elt._name == 'V' and not isinstance(val, bytes_types):
+                if elt._name == 'V' and not isinstance(val, elt.TYPES):
+                    # keep value for setting the inner IE
                     ie_val = val
                 else:
+                    # set raw V value
                     elt.set_val(val)
-                ind += 1
         elif isinstance(vals, dict):
             for key, val in vals.items():
-                if key == 'V' and not isinstance(val, bytes_types):
+                if key == 'V' and not isinstance(val, self['V'].TYPES):
+                    # keep value for setting the inner IE
                     ie_val = val
                 else:
+                    # set raw V value
                     self.__setitem__(key, val)
         elif self._SAFE_STAT:
             raise(EltErr('{0} [set_val]: vals type is {1}, expecting None, tuple, list or dict'\
                   .format(self._name, type(vals).__name__)))
         if ie_val is not None:
+            # set the value to the inner IE
             self.set_IE(val=ie_val)
     
     def _from_char(self, char):
@@ -616,21 +608,23 @@ class TI(Envelope):
 
 
 ProtDisc_dict = {
-    0 : 'GCC',
-    1 : 'BCC',
-    2 : 'ESM',
-    3 : 'CC',
-    4 : 'GTTP',
-    5 : 'MM',
-    6 : 'RRM',
-    7 : 'EMM',
-    8 : 'GMM',
-    9 : 'SMS',
-    10: 'SM',
-    11: 'SS',
-    12: 'LCS',
-    13: 'extended ProtDisc',
-    14: 'testing',
+    0  : 'GCC',
+    1  : 'BCC',
+    2  : 'ESM',
+    3  : 'CC',
+    4  : 'GTTP',
+    5  : 'MM',
+    6  : 'RRM',
+    7  : 'EMM',
+    8  : 'GMM',
+    9  : 'SMS',
+    10 : 'SM',
+    11 : 'SS',
+    12 : 'LCS',
+    14 : 'extended ProtDisc',
+    15 : 'testing',
+    46 : '5GSM',
+    126: '5GMM'
     }
 
 class TIPD(TI):

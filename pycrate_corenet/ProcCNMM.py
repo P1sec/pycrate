@@ -1,7 +1,7 @@
 # -*- coding: UTF-8 -*-
 #/**
 # * Software Name : pycrate
-# * Version : 0.3
+# * Version : 0.4
 # *
 # * Copyright 2017. Benoit Michau. ANSSI.
 # *
@@ -139,7 +139,7 @@ class MMSigProc(NASSigProc):
         try:
             if self.MM.Proc[-1] == self:
                 del self.MM.Proc[-1]
-        except:
+        except Exception:
             self._log('WNG', 'MM stack corrupted')
         else:
             if self._mm_preempt:
@@ -760,7 +760,7 @@ class MMLocationUpdating(MMSigProc):
             # we remove it from the Server's provisory dict of UE
             try:
                 del self.UE.Server._UEpre[self.UE.TMSI]
-            except:
+            except Exception:
                 pass
             #
             if self.UEInfo['ID'][0] == 1:
@@ -879,7 +879,7 @@ class MMLocationUpdating(MMSigProc):
             if isinstance(self.Iu.Config['EmergNumList'], bytes_types):
                 IEs['EmergNumList'] = self.Iu.Config['EmergNumList']
             elif self.Iu.Config['EmergNumList'] is not None:
-                IEs['EmergNumList'] = [{'ServiceCat': uint_to_bitlist(cat), 'Num': num} for \
+                IEs['EmergNumList'] = [{'ServiceCat': {c:1 for c in cat}, 'Num': num} for \
                                        (cat, num) in self.Iu.Config['EmergNumList']]
             if self.MM.LU_T3212 is not None:
                 IEs['MST3212'] = self.MM.LU_T3212

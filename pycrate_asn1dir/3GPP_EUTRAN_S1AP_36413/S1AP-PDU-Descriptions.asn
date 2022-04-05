@@ -4,11 +4,11 @@
 --
 -- **************************************************************
 
-S1AP-PDU-Descriptions  { 
-itu-t (0) identified-organization (4) etsi (0) mobileDomain (0) 
+S1AP-PDU-Descriptions  {
+itu-t (0) identified-organization (4) etsi (0) mobileDomain (0)
 eps-Access (21) modules (3) s1ap (1) version1 (1) s1ap-PDU-Descriptions (0)}
 
-DEFINITIONS AUTOMATIC TAGS ::= 
+DEFINITIONS AUTOMATIC TAGS ::=
 
 BEGIN
 
@@ -64,7 +64,7 @@ FROM S1AP-CommonDataTypes
 	Paging,
 	PathSwitchRequest,
 	PathSwitchRequestAcknowledge,
-	PathSwitchRequestFailure,	
+	PathSwitchRequestFailure,
 	PrivateMessage,
 	Reset,
 	ResetAcknowledge,
@@ -109,11 +109,22 @@ FROM S1AP-CommonDataTypes
 	UEContextResumeRequest,
 	UEContextResumeResponse,
 	UEContextResumeFailure,
-	ConnectionEstablishmentIndication
+	ConnectionEstablishmentIndication,
+	NASDeliveryIndication,
+	RetrieveUEInformation,
+	UEInformationTransfer,
+	ENBCPRelocationIndication,
+	MMECPRelocationIndication,
+	SecondaryRATDataUsageReport,
+	UERadioCapabilityIDMappingRequest,
+	UERadioCapabilityIDMappingResponse,
+	HandoverSuccess,
+	ENBEarlyStatusTransfer,
+	MMEEarlyStatusTransfer
 
 
 FROM S1AP-PDU-Contents
-	
+
 	id-CellTrafficTrace,
 	id-DeactivateTrace,
 	id-downlinkUEAssociatedLPPaTransport,
@@ -170,7 +181,19 @@ FROM S1AP-PDU-Contents
 	id-PWSFailureIndication,
 	id-UEContextSuspend,
 	id-UEContextResume,
-	id-ConnectionEstablishmentIndication
+	id-ConnectionEstablishmentIndication,
+	id-NASDeliveryIndication,
+	id-RetrieveUEInformation,
+	id-UEInformationTransfer,
+	id-eNBCPRelocationIndication,
+	id-MMECPRelocationIndication,
+	id-SecondaryRATDataUsageReport,
+	id-UERadioCapabilityIDMapping,
+	id-HandoverSuccess,
+	id-eNBEarlyStatusTransfer,
+	id-MMEEarlyStatusTransfer
+
+
 FROM S1AP-Constants;
 
 
@@ -234,7 +257,7 @@ UnsuccessfulOutcome ::= SEQUENCE {
 
 S1AP-ELEMENTARY-PROCEDURES S1AP-ELEMENTARY-PROCEDURE ::= {
 	S1AP-ELEMENTARY-PROCEDURES-CLASS-1			|
-	S1AP-ELEMENTARY-PROCEDURES-CLASS-2,	
+	S1AP-ELEMENTARY-PROCEDURES-CLASS-2,
 	...
 }
 
@@ -261,10 +284,11 @@ S1AP-ELEMENTARY-PROCEDURES-CLASS-1 S1AP-ELEMENTARY-PROCEDURE ::= {
 	e-RABModificationIndication					|
 	uEContextModificationIndication				|
 	uEContextSuspend							|
-	uEContextResume
+	uEContextResume								|
+	uERadioCapabilityIDMapping
 }
 
-S1AP-ELEMENTARY-PROCEDURES-CLASS-2 S1AP-ELEMENTARY-PROCEDURE ::= {	
+S1AP-ELEMENTARY-PROCEDURES-CLASS-2 S1AP-ELEMENTARY-PROCEDURE ::= {
 	handoverNotification			|
 	e-RABReleaseIndication			|
 	paging 							|
@@ -301,7 +325,16 @@ S1AP-ELEMENTARY-PROCEDURES-CLASS-2 S1AP-ELEMENTARY-PROCEDURE ::= {
 	pWSRestartIndication			|
 	rerouteNASRequest				|
 	pWSFailureIndication						|
-	connectionEstablishmentIndication
+	connectionEstablishmentIndication	|
+	nASDeliveryIndication			|
+	retrieveUEInformation			|
+	uEInformationTransfer			|
+	eNBCPRelocationIndication					|
+	mMECPRelocationIndication		|
+	secondaryRATDataUsageReport					|
+	handoverSuccess								|
+	eNBEarlyStatusTransfer						|
+	mMEEarlyStatusTransfer
 }
 
 -- **************************************************************
@@ -517,9 +550,9 @@ traceFailureIndication S1AP-ELEMENTARY-PROCEDURE ::= {
 	CRITICALITY				ignore
 }
 cellTrafficTrace S1AP-ELEMENTARY-PROCEDURE ::={
-     INITIATING MESSAGE		CellTrafficTrace
-     PROCEDURE CODE			id-CellTrafficTrace
-     CRITICALITY				ignore
+INITIATING MESSAGE		CellTrafficTrace
+PROCEDURE CODE			id-CellTrafficTrace
+CRITICALITY				ignore
 }
 
 locationReportingControl S1AP-ELEMENTARY-PROCEDURE ::= {
@@ -678,6 +711,67 @@ connectionEstablishmentIndication S1AP-ELEMENTARY-PROCEDURE ::= {
 	INITIATING MESSAGE		ConnectionEstablishmentIndication
 	PROCEDURE CODE			id-ConnectionEstablishmentIndication
 	CRITICALITY				reject
+}
+
+nASDeliveryIndication S1AP-ELEMENTARY-PROCEDURE ::= {
+	INITIATING MESSAGE		NASDeliveryIndication
+	PROCEDURE CODE			id-NASDeliveryIndication
+	CRITICALITY				ignore
+}
+
+retrieveUEInformation S1AP-ELEMENTARY-PROCEDURE ::= {
+	INITIATING MESSAGE		RetrieveUEInformation
+	PROCEDURE CODE			id-RetrieveUEInformation
+	CRITICALITY				reject
+}
+
+uEInformationTransfer S1AP-ELEMENTARY-PROCEDURE ::= {
+	INITIATING MESSAGE		UEInformationTransfer
+	PROCEDURE CODE			id-UEInformationTransfer
+	CRITICALITY				reject
+}
+
+eNBCPRelocationIndication S1AP-ELEMENTARY-PROCEDURE ::= {
+	INITIATING MESSAGE		ENBCPRelocationIndication
+	PROCEDURE CODE			id-eNBCPRelocationIndication
+	CRITICALITY				reject
+}
+
+mMECPRelocationIndication S1AP-ELEMENTARY-PROCEDURE ::= {
+	INITIATING MESSAGE		MMECPRelocationIndication
+	PROCEDURE CODE			id-MMECPRelocationIndication
+	CRITICALITY				reject
+}
+
+secondaryRATDataUsageReport S1AP-ELEMENTARY-PROCEDURE ::= {
+	INITIATING MESSAGE		SecondaryRATDataUsageReport
+	PROCEDURE CODE			id-SecondaryRATDataUsageReport
+	CRITICALITY			ignore
+}
+
+uERadioCapabilityIDMapping S1AP-ELEMENTARY-PROCEDURE ::= {
+	INITIATING MESSAGE		UERadioCapabilityIDMappingRequest
+	SUCCESSFUL OUTCOME		UERadioCapabilityIDMappingResponse
+	PROCEDURE CODE			id-UERadioCapabilityIDMapping
+	CRITICALITY				reject
+}
+
+handoverSuccess S1AP-ELEMENTARY-PROCEDURE ::= {
+	INITIATING MESSAGE		HandoverSuccess
+	PROCEDURE CODE			id-HandoverSuccess
+	CRITICALITY				ignore
+}
+
+eNBEarlyStatusTransfer S1AP-ELEMENTARY-PROCEDURE ::= {
+	INITIATING MESSAGE		ENBEarlyStatusTransfer
+	PROCEDURE CODE			id-eNBEarlyStatusTransfer
+	CRITICALITY				reject
+}
+
+mMEEarlyStatusTransfer S1AP-ELEMENTARY-PROCEDURE ::= {
+	INITIATING MESSAGE		MMEEarlyStatusTransfer
+	PROCEDURE CODE			id-MMEEarlyStatusTransfer
+	CRITICALITY				ignore
 }
 
 END

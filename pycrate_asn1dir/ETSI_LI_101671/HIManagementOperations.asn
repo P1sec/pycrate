@@ -1,0 +1,75 @@
+HIManagementOperations
+{itu-t(0) identified-organization(4) etsi(0) securityDomain(2) lawfulIntercept(2) him(3) version3(3)}
+
+DEFINITIONS IMPLICIT TAGS ::=
+BEGIN
+	
+EXPORTS					sending-of-Password,
+	data-Link-Test,
+	end-Of-Connection;
+
+IMPORTS					OPERATION,
+	ERROR
+		FROM Remote-Operations-Information-Objects
+		{joint-iso-itu-t(2) remote-operations(4) informationObjects(5) version1(0)};
+
+-- =============================
+-- Object Identifier definitions
+-- =============================
+
+-- LawfulIntercept DomainId
+lawfulInterceptDomainId OBJECT IDENTIFIER ::= {itu-t(0) identified-organization(4) etsi(0) securityDomain(2) lawfulIntercept(2)}
+
+-- him Domain
+himDomainId OBJECT IDENTIFIER ::= {lawfulInterceptDomainId him(3)}
+himOperationId OBJECT IDENTIFIER ::= {himDomainId version3(3)}
+
+sending-of-Password		OPERATION ::=
+{
+	ARGUMENT	Password-Name
+	ERRORS		{ErrorsHim}
+	CODE		global:{himDomainId sending-of-Password(1) version1(1)}
+}
+-- Class 2 operation. The timer must be set to a value between 3s and 240s.
+-- The timer default value is 60s.
+
+data-Link-Test			OPERATION ::=
+{
+	ERRORS 		{other-failure-causes}
+	CODE		global:{himDomainId data-link-test(2) version1(1)}
+}
+-- Class 2 operation. The timer must be set to a value between 3s and 240s.
+-- The timer default value is 60s.
+
+end-Of-Connection		OPERATION ::=
+{
+	ERRORS 		{other-failure-causes}
+	CODE		global:{himDomainId end-of-connection(3) version1(1)}
+}
+-- Class 2 operation. The timer must be set to a value between 3s and 240s.
+-- The timer default value is 60s.
+
+other-failure-causes	ERROR ::= {CODE local:0}
+missing-parameter		ERROR ::= {CODE local:1}
+unknown-parameter		ERROR ::= {CODE local:2}
+erroneous-parameter		ERROR ::= {CODE local:3}
+
+ErrorsHim				ERROR ::=
+{
+	other-failure-causes |
+	missing-parameter |
+	unknown-parameter |
+	erroneous-parameter
+}
+
+Password-Name			::= SEQUENCE
+{
+	domainID	[0] OBJECT IDENTIFIER (himOperationId) OPTIONAL,
+		-- Once using FTP delivery mechanism
+	password	[1] OCTET STRING (SIZE (1..25)),
+	name		[2] OCTET STRING (SIZE (1..25)),
+	...
+}
+	-- IA5 string recommended
+
+END -- end of HIManagementOperations

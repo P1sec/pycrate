@@ -1,1369 +1,0 @@
-﻿3GPP TS 25.468 V13.1.0 (2016-03)
-Technical Specification
-3rd Generation Partnership Project;
-Technical Specification Group Radio Access Network;
-UTRAN Iuh Interface RANAP User Adaption (RUA) signalling
-(Release 13)
-
-	
-
-The present document has been developed within the 3rd Generation Partnership Project (3GPP TM) and may be further elaborated for the purposes of 3GPP.
-The present document has not been subject to any approval process by the 3GPP Organizational Partners and shall not be implemented.
-This Specification is provided for future development work within 3GPP only. The Organizational Partners accept no liability for any use of this Specification.
-Specifications and reports for implementation of the 3GPP TM system should be obtained via the 3GPP Organizational Partners' Publications Offices.
-
-
-
-
-
-Keywords
-UMTS, radio
-.
-
-3GPP
-Postal address
-
-3GPP support office address
-650 Route des Lucioles - Sophia Antipolis
-Valbonne - FRANCE
-Tel.: +33 4 92 94 42 00 Fax: +33 4 93 65 47 16
-Internet
-http://www.3gpp.org
-
-Copyright Notification
-No part may be reproduced except as authorized by written permission.
-The copyright and the foregoing restriction extend to reproduction in all media.
-
-© 2016, 3GPP Organizational Partners (ARIB, ATIS, CCSA, ETSI, TSDSI, TTA, TTC).
-All rights reserved.
-
-UMTS™ is a Trade Mark of ETSI registered for the benefit of its members
-3GPP™ is a Trade Mark of ETSI registered for the benefit of its Members and of the 3GPP Organizational Partners
-LTE™ is a Trade Mark of ETSI registered for the benefit of its Members and of the 3GPP Organizational Partners
-GSM® and the GSM logo are registered and owned by the GSM Association
-
-Contents
-Foreword	5
-1	Scope	6
-2	References	6
-3	Definitions and abbreviations	6
-3.1	Definitions	6
-3.2	Abbreviations	6
-4	General	7
-4.1	Procedure specification principles	7
-4.2	Forwards and backwards compatibility	7
-4.3	Specification notations	7
-5	RUA services	8
-6	Services expected from the transport layer	8
-7	Functions of RUA	8
-8	RUA procedures	8
-8.1	Elementary Procedures	8
-8.2	Connect	8
-8.2.1	General	8
-8.2.2	Successful Operation	9
-8.2.2.1	HNB Originated	9
-8.2.2.2	HNB-GW Originated	9
-8.3	Direct Transfer	10
-8.3.1	General	10
-8.3.2	Successful Operation (HNB-GW Originated)	10
-8.3.3	Successful Operation (HNB Originated)	10
-8.3.4	Abnormal Conditions	10
-8.4	Disconnect	10
-8.4.1	General	10
-8.4.2	Successful Operation (HNB Originated)	11
-8.4.3	Successful Operation (HNB-GW Originated)	11
-8.4.4	Abnormal Conditions	11
-8.5	Connectionless Transfer	11
-8.5.1	General	11
-8.5.2	Successful Operation (HNB-GW Originated)	11
-8.5.3	Successful Operation (HNB Originated)	12
-8.5.4	Abnormal Conditions	12
-8.6	Error Indication	12
-8.6.1	General	12
-8.6.2	Successful Operation	12
-9	Elements for RUA communication	13
-9.1	Message functional definition and content	13
-9.1.1	General	13
-9.1.2	Message contents	13
-9.1.2.1	Presence	13
-9.1.2.2	Criticality	13
-9.1.2.3	Range	13
-9.1.2.4	Assigned Criticality	13
-9.1.3	CONNECT	14
-9.1.4	DIRECT TRANSFER	14
-9.1.5	DISCONNECT	14
-9.1.6	CONNECTIONLESS TRANSFER	14
-9.1.7	ERROR INDICATION	15
-9.2	Information Element Definitions	15
-9.2.0	General	15
-9.2.1	Message Type	15
-9.2.2	Context ID	15
-9.2.3	Establishment Cause	16
-9.2.4	Intra Domain NAS Node Selector	16
-9.2.5	RANAP Message	18
-9.2.6	CN Domain Indicator	18
-9.2.7	Cause	18
-9.2.8	Criticality Diagnostics	20
-9.2.9	CSG Membership Status	21
-9.3	Message and Information Element Abstract Syntax (with ASN.1)	22
-9.3.0	General	22
-9.3.1	Usage of private message mechanism for non-standard use	22
-9.3.2	Elementary Procedure Definitions	22
-9.3.3	PDU definitions	25
-9.3.4	Information Element definitions	29
-9.3.5	Common definitions	33
-9.3.6	Constant definitions	34
-9.3.7	Container definitions	35
-9.4	Message transfer syntax	38
-10	Handling of unknown, unforeseen, and erroneous protocol data	39
-10.1	General	39
-10.2	Transfer Syntax Error	39
-10.3	Abstract Syntax Error	39
-10.3.1	General	39
-10.3.2	Criticality Information	40
-10.3.3	Presence Information	40
-10.3.4	Not comprehended IE/IE group	41
-10.3.4.1	Procedure Code	41
-10.3.4.1A	Type of Message	41
-10.3.4.2	IEs other than the Procedure Code and Type of Message	41
-10.3.5	Missing IE or IE group	42
-10.3.6	IEs or IE groups received in wrong order or with too many occurrences or erroneously present	43
-10.4	Logical Error	44
-10.5	Exceptions	44
-Annex A (informative):	Change History	45
-
-
-Foreword
-This Technical Specification (TS) has been produced by the 3rd Generation Partnership Project (3GPP).
-The contents of the present document are subject to continuing work within the TSG and may change following formal TSG approval. Should the TSG modify the contents of the present document, it will be re-released by the TSG with an identifying change of release date and an increase in version number as follows:
-Version x.y.z
-where:
-x	the first digit:
-1	presented to TSG for information;
-2	presented to TSG for approval;
-3	or greater indicates TSG approved document under change control.
-y	the second digit is incremented for all changes of substance, i.e. technical enhancements, corrections, updates, etc.
-z	the third digit is incremented when editorial only changes have been incorporated in the document.
-
-1	Scope
-The present document specifies the RANAP User Adaption (RUA) between the Home Node B (HNB) and the Home Node B Gateway (HNB-GW). It fulfils the HNB- HNB-GW communication requirements specified in TS 25.467 [3] and is defined over the Iuh – reference point. It provides transparent transport for RANAP messages.
-2	References
-The following documents contain provisions which, through reference in this text, constitute provisions of the present document.
-•	References are either specific (identified by date of publication, edition number, version number, etc.) or nonspecific.
-•	For a specific reference, subsequent revisions do not apply.
-•	For a non-specific reference, the latest version applies.  In the case of a reference to a 3GPP document (including a GSM document), a non-specific reference implicitly refers to the latest version of that document in the same Release as the present document.
-[1]	Void
-[2]	3GPP TS 25.413: "UTRAN Iu interface Radio Access Network Application Part (RANAP) signalling".
-[3]	3GPP TS 25.467: "UTRAN architecture for 3G Home NodeB; Stage 2".
-[4]	3GPP TR 25.921 (version.7.0.0): "Guidelines and principles for protocol description and error handling".
-[5]	3GPP TR 21.905: "Vocabulary for 3GPP Specifications".
-[6]	ITU-T Recommendation X.691 (2002-07): "Information technology - ASN.1 encoding rules: Specification of Packed Encoding Rules (PER)".
-[7]	ITU-T Recommendation X.680 (2002-07): "Information technology - Abstract Syntax Notation One (ASN.1): Specification of basic notation".
-[8]	ITU-T Recommendation X.681 (2002-07): "Information technology - Abstract Syntax Notation One (ASN.1): Information object specification".
-[9]	IETF RFC 4960 (2007-09): "Stream Control Transmission Protocol".
-3	Definitions and abbreviations
-3.1	Definitions
-For the purposes of the present document, the following terms and definitions below apply. Terms and definitions not defined below can be found in TR 21.905 [5].
-UE-associated Signalling Connection: UE-associated Signalling Connection is a logical connection between HNB and HNB-GW associated to an Iu signalling connection for a particular UE over the single signalling connection between the HNB and HNB-GW, identified by the identities Context ID and CN Domain ID.
-3.2	Abbreviations
-For the purposes of the present document, the following abbreviations apply:
-CN	Core Network
-EP	Elementary Procedure
-HNB	Home Node B
-HNB-GW	Home Node B Gateway
-PDU	Protocol Data Unit
-RUA	RANAP User Adaption
-SCTP	Stream Control Transmission Protocol
-4	General
-The protocol described in the present document is the protocol between HNB-GW and HNB.
-4.1	Procedure specification principles
-The principle for specifying the procedure logic is to specify the functional behaviour of the HNB & HNB-GW exactly and completely..
-The following specification principles have been applied for the procedure text in clause 8:
--	The procedure text discriminates between:
-1)	Functionality which "shall" be executed:
--	The procedure text indicates that the receiving node "shall" perform a certain function Y under a certain condition. If the receiving node supports procedure X but cannot perform functionality Y requested in the REQUEST message of a Class 1 EP, the receiving node shall respond with the message used to report unsuccessful outcome for this procedure, containing an appropriate cause value.
-2)	Functionality which "shall, if supported" be executed:
--	The procedure text indicates that the receiving node "shall, if supported," perform a certain function Y under a certain condition. If the receiving node supports procedure X, but does not support functionality Y, the receiving node shall proceed with the execution of the EP, possibly informing the requesting node about the not supported functionality.
--	Any required inclusion of an optional IE in a response message is explicitly indicated in the procedure text. If the procedure text does not explicitly indicate that an optional IE shall be included in a response message, the optional IE shall not be included.
-4.2	Forwards and backwards compatibility
-The forwards and backwards compatibility of the protocol is assured by mechanism where all current and future messages, and IEs or groups of related IEs, include Id and criticality fields that are coded in a standard format that will not be changed in the future. These parts can always be decoded regardless of the standard version.
-4.3	Specification notations
-For the purposes of the present document, the following notations apply:
-Procedure	When referring to an elementary procedure in the specification the Procedure Name is written with the first letters in each word in upper case characters followed by the word  "procedure", e.g. HNB Registration procedure.
-Message	When referring to a message in the specification the MESSAGE NAME is written with all letters in upper case characters followed by the word  "message", e.g. CONNECT message.
-IE	When referring to an information element (IE) in the specification the Information Element Name is written with the first letters in each word in upper case characters and all letters in Italic font followed by the abbreviation "IE", e.g. HNB Identity IE.
-Value of an IE	When referring to the value of an information element (IE) in the specification the "Value" is written as it is specified in subclause 9.2 enclosed by quotation marks, e.g. "Abstract Syntax Error (Reject)" or "Background ".
-5	RUA services
-RUA provides the signalling service between the HNB and the HNB-GW that is required to fulfil the RUA functions described in Clause 7.
-6	Services expected from the transport layer
-Following service is expected from the transport layer:
--	reliable and in sequence delivery of Signalling data using SCTP (IETF RFC 4960 [9])
-7	Functions of RUA
-The RUA has the following functions:
--	Transparent transfer of RANAP messages
--	Error Handling. This function allows the reporting of general error situations, for which function specific error messages have not been defined.
-These functions are implemented by one or several RUA elementary procedures described in the following clauses.
-8	RUA procedures
-8.1	Elementary Procedures
-Table 1 summarizes the EPs.
-Table 1; Elementary procedures
-Elementary ProcedureMessageConnectCONNECTDirect TransferDIRECT TRANSFERDisconnectDISCONNECTConnectionless TransferCONNECTIONLESS TRANSFERError IndicationERROR INDICATION
-8.2	Connect
-8.2.1	General
-The HNB or HNB-GW can initiate this procedure to establish an UE-associated Signalling Connection and carry a RANAP message.
-8.2.2	Successful Operation
-8.2.2.1	HNB Originated
-
-
-Figure 1: Connect to HNB-GW procedure
-This procedure is used to carry the first RANAP message from the HNB to the HNB-GW. 
-Additional information is provided to enable the HNB-GW to handle the RANAP message without it being necessary to inspect the contents and trigger the establishment of a new UE-associated Signalling Connection between HNB and HNB-GW, which is directly mapped to the Iu Signalling Connection the RANAP message refers to.
-If HNB receives the Intra Domain NAS Node Selector IE in the RRC message, the HNB shall, if supported, include the Intra Domain NAS Node Selector IE in the CONNECT message.
-NOTE:	The Context ID is used as the Iu Signalling Connection identifier in the corresponding RANAP messages. 
-8.2.2.2	HNB-GW Originated
-
-
-Figure 1A: Connect to HNB procedure
-This procedure is used to carry the first RANAP message from the HNB-GW to an HNB for a particular UE, e.g. RANAP RELOCATION REQUEST. This shall trigger the establishment of a new UE-associated Signalling Connection between HNB-GW and HNB, which is directly mapped to the Iu Signalling Connection the RANAP message refers to.
-The HNB-GW allocates the context id.
-If the first RANAP message received by the HNB GW is a RELOCATION REQUEST message and the RELOCATION REQUEST does not contain the CSG ID of the target cell the RUA CONNECT message may contain the CSG Membership Status IE.
-Additional information is provided by the HNB-GW to the HNB to assist the HNB in handling the RANAP message.
-8.3	Direct Transfer
-8.3.1	General
-This procedure is initiated by either the HNB or HNB-GW to transport a RANAP message between the two nodes. The HNB-GW can initiate this procedure to establish an UE-associated Signalling Connection when carrying the second RANAP RELOCATION REQUEST message.
-8.3.2	Successful Operation (HNB-GW Originated)
-
-Figure 2: Direct Transfer to HNB
-This procedure is used to carry any DL connection-oriented RANAP message defined in TS 25.413 [2] from the HNB-GW to the HNB. 
-This procedure can be used to carry the second RANAP RELOCATION REQUEST message from the HNB-GW to an HNB for a particular UE. This shall trigger the establishment of a second UE-associated Signalling Connection between HNB-GW and HNB, which is directly mapped to the Iu Signalling Connection the RANAP message refers to.
-8.3.3	Successful Operation (HNB Originated)
-
-Figure 3: Direct Transfer to HNB-GW
-This procedure is used to carry any UL connection-oriented RANAP message defined in TS 25.413 [2], except those carried in CONNECT or DISCONNECT messages, from the HNB to the HNB-GW. 
-8.3.4	Abnormal Conditions
--
-8.4	Disconnect
-8.4.1	General
-This procedure is initiated by either the HNB or the HNB-GW to terminate an UE-associated Signalling Connection between these nodes.
-8.4.2	Successful Operation (HNB Originated)
-
-Figure 4: Disconnect to HNB-GW
-This procedure is used to carry the last RANAP (TS 25.413 [2]) UL connection-oriented message of a given Iu Signalling Connection to the HNB-GW over the Iuh interface. This procedure may also be used to indicate error conditions at the HNB. 
-8.4.3	Successful Operation (HNB-GW Originated)
-
-Figure 5: Disconnect to HNB
-This procedure is initiated by the HNB-GW to close a given Iu Signalling Connection either in case of error or in case of normal operation when an Iu Signalling Connection request towards the CN is refused.
-8.4.4	Abnormal Conditions
--
-8.5	Connectionless Transfer
-8.5.1	General
-This procedure is initiated by either the HNB or the HNB-GW to transfer connectionless RANAP messages between the HNB and HNB-GW.
-8.5.2	Successful Operation (HNB-GW Originated)
-
-Figure 6: Connectionless Transfer to HNB
-This procedure is used to carry any DL connectionless RANAP message defined in TS 25.413 [2] from the HNB-GW to the HNB.
-8.5.3	Successful Operation (HNB Originated)
-
-Figure 7: Connectionless Transfer to HNB-GW
-This procedure is used to carry any UL connectionless RANAP message defined in TS 25.413 [2] from the HNB to the HNB-GW.
-8.5.4	Abnormal Conditions
--
-8.6	Error Indication
-8.6.1	General
-The Error Indication procedure is initiated by either HNB or HNB-GW to report detected errors in one incoming message.
-8.6.2	Successful Operation
-
-Figure 8 Error Indication HNB Originated, Successful Operation
-
-Figure 9 Error Indication HNB-GW Originated, Successful Operation
-9	Elements for RUA communication
-9.1	Message functional definition and content
-9.1.1	General
-Section 9.1 presents the contents of RUA messages in tabular format. The corresponding ASN.1 definition is presented in section 9.3. In case there is contradiction between the tabular format in section 9.1 and the ASN.1 definition, the ASN.1 shall take precedence, except for the definition of conditions for the presence of conditional IEs, where the tabular format shall take precedence.
-NOTE:	The messages have been defined in accordance to the guidelines specified in TR 25.921 [4].
-For each message there is, a table listing the signalling elements in their order of appearance in the transmitted message.
-9.1.2	Message contents
-9.1.2.1	Presence
-All information elements in the message descriptions below are marked mandatory, optional or conditional according to table 3
-Table 2: Meaning of abbreviations used in RUA messages
-AbbreviationMeaningMIE's marked as Mandatory (M) will always be included in the message.OIE's marked as Optional (O) may or may not be included in the message.CIE's marked as Conditional (C) will be included in a message only if the condition is satisfied. Otherwise the IE is not included.
-9.1.2.2	Criticality
-Each Information Element or Group of Information Elements may have a criticality information applied to it.
-Following cases are possible.
-Table 3: Meaning of content within "Criticality" column
-AbbreviationMeaning–No criticality information is applied explicitly.YESCriticality information is applied. This is usable only for non-repeatable IEs GLOBALThe IE and all its repetitions together have one common criticality information. This is usable only for repeatable IEs.EACHEach repetition of the IE has its own criticality information. It is not allowed to assign different criticality values to the repetitions. This is usable only for repeatable IEs.
-9.1.2.3	Range
-The Range column indicates the allowed number of copies of repetitive IEs/IE groups.
-9.1.2.4	Assigned Criticality
-This column provides the actual criticality information as defined in subclause 10.3.2, if applicable.
-9.1.3	CONNECT
-This message is sent by either the HNB to the HNB-GW or the HNB-GW to the HNB to establish a signalling connection and carry a RANAP message.
-Direction: HNB → HNB-GW and HNB-GW → HNB
-PARAMETERPRESENCERANGEIE Type and ReferenceSemantics DescriptionCriticalityAssigned CriticalityMessage TypeM9.2.1YESignoreCN Domain IndicatorM9.2.6YESrejectContext IDM9.2.2YESrejectIntra Domain NAS Node SelectorO9.2.4YESignoreEstablishment CauseM9.2.3YESrejectRANAP MessageM9.2.5YESrejectCSG Membership StatusO9.2.9YESignore
-9.1.4	DIRECT TRANSFER
-This message is sent by either the HNB to the HNB-GW  or the HNB-GW to the HNB to transport a connection-oriented RANAP message between the two nodes.
-Direction: HNB → HNB-GW and HNB-GW → HNB
-PARAMETERPRESENCERANGEIE Type and ReferenceSemantics DescriptionCriticalityAssigned CriticalityMessage TypeM9.2.1YESignoreCN Domain IndicatorM9.2.6YESrejectContext IDM9.2.2YESrejectRANAP MessageM9.2.5YESreject
-9.1.5	DISCONNECT
-This message is sent by either the HNB to the HNB-GW  or the HNB-GW to the HNB to close the signaling connection between the two nodes.
-Direction:	HNB → HNB-GW and HNB-GW → HNB
-PARAMETERPRESENCERANGEIE Type and ReferenceSemantics DescriptionCriticalityAssigned CriticalityMessage TypeM9.2.1YESignoreCN Domain IndicatorM9.2.6YESrejectContext IDM9.2.2YESrejectCauseM9.2.7YESrejectRANAP MessageC - IfNormal9.2.5YESreject
-ConditionExplanationIfNormalThis IE shall be present if the Cause IE is set to "Normal".
-9.1.6	CONNECTIONLESS TRANSFER
-This message is sent by either the HNB to the HNB-GW or the HNB-GW to the HNB to transport a connectionless RANAP message between the two nodes.
-Direction:	HNB → HNB-GW and HNB-GW → HNB
-PARAMETERPRESENCERANGEIE Type and ReferenceSemantics DescriptionCriticalityAssigned CriticalityMessage TypeM9.2.1YESignoreRANAP MessageM9.2.5YESreject
-9.1.7	ERROR INDICATION
-This message is sent by either the HNB to HNB-GW or the HNB-GW to the HNB and is used to indicate that some errors have been detected.
-Direction: 	HNB → HNB-GW, HNB-GW → HNB
-PARAMETERPRESENCERANGE IE Type and ReferenceSemantics DescriptionCriticalityAssigned CriticalityMessage TypeM9.2.1YESignoreCauseM9.2.7YESignoreCriticality DiagnosticsO9.2.8YESignore
-9.2	Information Element Definitions
-9.2.0	General
-Section 9.2 presents the RUA IE definitions in tabular format. The corresponding ASN.1 definition is presented in section 9.3. In case there is contradiction between the tabular format in section 9.2 and the ASN.1 definition, the ASN.1 shall take precedence, except for the definition of conditions for the presence of conditional elements, where the tabular format shall take precedence.
-When specifying information elements which are to be represented by bitstrings, if not otherwise specifically stated in the semantics description of the concerned IE or elsewhere, the following principle applies with regards to the ordering of bits:
--	The first bit (leftmost bit) contains the most significant bit (MSB);
--	The last bit (rightmost bit) contains the least significant bit (LSB);
--	When importing bitstrings from other specifications, the first bit of the bitstring contains the first bit of the concerned information;
-9.2.1	Message Type
-Message Type IE uniquely identifies the message being sent. It is mandatory for all messages.
-IE/GROUP NAMEPRESENCERANGE IE Type and ReferenceSemantics DescriptionMessage Type>Procedure CodeMINTEGER(0..255)>Type of Message MENUMERATED (Initiating Message, Successful Outcome, Unsuccessful Outcome, Outcome)
-9.2.2	Context ID
-Context ID IE uniquely identifies a particular UE in the HNB and HNB-GW. This unique Context ID is used for both CS and PS domain. 
-IE/GROUP NAMEPRESENCERANGE IE Type and ReferenceSemantics DescriptionContext IDBIT STRING(24)
-9.2.3	Establishment Cause
-Establishment Cause IE identifies a the priority of call establishment
-IE/GROUP NAMEPRESENCERANGE IE Type and ReferenceSemantics DescriptionEstablishment CauseENUMERATED 
-(emergency call,
-Normal,
-…
-)
-9.2.4	Intra Domain NAS Node Selector
-This IE carries information to be used to route the establishment of a signalling connection to a CN node within a CN domain.
-IE/GROUP NAMEPresenceRANGEIE Type and referenceSemantics descriptionCHOICE versionM>R99This choice shall also be used by mobiles that are compliant to this version of the protocol>>CHOICE CN type M>>>GSM-MAP>>>>CHOICE Routing basisM>>>>>local (P)TMSITMSI allocated in the current LA or PTMSI allocated in the current RA>>>>>>Routing parameterMBit string (10)The TMSI/ PTMSI consists of 4 octets (32bits). This can be represented by a string of bits numbered from b0 to b31, with bit b0 being the least significant
-The "Routing parameter" bit string consists of bits b14 through b23 of the TMSI/ PTMSI. The first/leftmost/most significant bit of the bit string contains bit b23 of the TMSI/PTMSI.>>>>>(P)TMSI of same PLMN, different (RA)LATMSI allocated in another LA of this PLMN or PTMSI allocated in another RA this PLMN>>>>>>Routing parameterMBit string (10)The TMSI/ PTMSI consists of 4 octets (32bits). This can be represented by a string of bits numbered from b0 to b31, with bit b0 being the least significant
-The "Routing parameter" bit string consists of bits b14 through b23 of the TMSI/ PTMSI. The first/leftmost/most significant bit of the bit string contains bit b23 of the TMSI/ PTMSI.>>>>>(P)TMSI of different PLMNTMSI or a PTMSI allocated in another PLMN>>>>>>Routing parameterMBit string (10)The TMSI/ PTMSI consists of 4 octets (32bits). This can be represented by a string of bits numbered from b0 to b31, with bit b0 being the least significant.
-The "Routing parameter" bit string consists of bits b14 through b23 of the TMSI/ PTMSI. The first/leftmost/most significant bit of the bit string contains bit b23 of the TMSI/ PTMSI.>>>>>IMSI(response to IMSI paging)NAS identity is IMSI>>>>>>Routing parameterMBit string (10)The "Routing parameter" bit string consists of DecimalToBinary [(IMSI div 10) mod 1000]. The first/leftmost bit of the bit string contains the most significant bit of the result.>>>>>IMSI(cause UE initiated event)NAS identity is IMSI>>>>>>Routing parameterMBit string (10)The "Routing parameter" bit string consists of DecimalToBinary [(IMSI div 10) mod 1000]. The first/leftmost bit of the bit string contains the most significant bit of the result.>>>>>IMEINAS parameter is IMEI>>>>>>Routing parameterMBit string (10)The "Routing parameter" bit string consists of DecimalToBinary [(IMEI div 10) mod 1000]. The first/leftmost bit of the bit string contains the most significant bit of the result.>>>>>Spare 1Bit string (10)This choice shall not be used in this version>>>>>Spare 2Bit string (10)This choice shall not be used in this version>>>ANSI-41Bit string (14)All bits shall be set to 0>LaterBit string(15)This bit string shall not be sent by mobiles that are compliant to this version of the protocol.
-9.2.5	RANAP Message
-RANAP Message IE contains the transferred RANAP message.
-IE/GROUP NAMEPRESENCERANGE IE Type and ReferenceSemantics DescriptionRANAP MessageOCTET STRING
-9.2.6	CN Domain Indicator
-Indicates the CN domain from which the message originates or to which the message is sent.
-IE/Group NamePresenceRangeIE type and referenceSemantics descriptionCN Domain IndicatorMENUMERATED (CS domain, PS domain)
-9.2.7	Cause
-Cause IE indicates the reason for a particular error event for the RUA protocol.
-
-IE/Group NamePresenceRangeIE Type and ReferenceSemantics DescriptionCHOICE Cause Group>Radio Network Layer>>Radio Network Layer CauseMENUMERATED
-(
-Normal,
-Connect failed,
-Network release,
-Unspecified,
-...,
-)>Transport Layer >>Transport Layer Cause MENUMERATED
-(Transport Resource Unavailable,
-Unspecified,
-...)>Protocol>>Protocol Cause MENUMERATED
-(Transfer Syntax Error,
-Abstract Syntax Error (Reject),
-Abstract Syntax Error (Ignore and Notify),
-Message not Compatible with Receiver State,
-Semantic Error,
-Unspecified,
-Abstract Syntax Error (Falsely Constructed Message),
-...)>Misc>>Misc Cause MENUMERATED
-(Processing Overload,
-Hardware Failure,
-O&M Intervention,
-Unspecified,
-...)
-The meaning of the different cause values is described in the following table. Cause values for information 'not valid' indicates that the information is not valid in the context that it was received.
-Radio Network Layer causeMeaningNormalNo error has occurredConnect failedConnect attempt failedNetwork releaseConnection released by networkUnspecifiedSent when none of the above cause values applies but still the cause is Radio Network layer related.
-Transport Network Layer causeMeaningTransport resource unavailableThe required transport resources are not available.UnspecifiedSent when none of the above cause values applies but still the cause is Transport Network layer related.
-Protocol causeMeaningAbstract Syntax Error (Reject)The received message included an abstract syntax error and the concerned criticality indicated "reject".Abstract Syntax Error (Ignore and Notify)The received message included an abstract syntax error and the concerned criticality indicated "ignore and notify" .Abstract syntax error (falsely constructed message)The received message contained IEs in wrong order or with too many occurrences.Message not Compatible with Receiver StateThe received message was not compatible with the receiver state.Semantic ErrorThe received message included a semantic error.Transfer Syntax ErrorThe received message included a transfer syntax error.UnspecifiedSent when none of the above cause values applies but still the cause is protocol related.
-Miscellaneous causeMeaningProcessing OverloadControl processing overload.Hardware FailureHNB hardware failure.O&M InterventionOperation and Maintenance intervention related to HNB.UnspecifiedSent when none of the above cause values applies and the cause is not related to any of the categories Radio Network Layer, Transport Network Layer or Protocol.
-9.2.8	Criticality Diagnostics
-The Criticality Diagnostics IE is sent by the RNC or the CN when parts of a received message have not been comprehended or were missing, or if the message contained logical errors. When applicable, it contains information about which IEs were not comprehended or were missing.
-IE/Group NamePresenceRangeIE type and referenceSemantics descriptionCriticality Diagnostics>Procedure CodeOINTEGER (0..255)Procedure Code is to be used if Criticality Diagnostics is part of Error Indication procedure, and not within the response message of the same procedure that caused the error>Triggering Message OENUMERATED
-(initiating message, successful outcome, unsuccessful outcome)The Triggering Message is used only if the Criticality Diagnostics is part of Error Indication procedure.>Procedure CriticalityOENUMERATED(reject, ignore, notify)This Procedure Criticality is used for reporting the Criticality of the Triggering message (Procedure). Information Element Criticality Diagnostics0 to <maxNrOfErrors>>IE CriticalityMENUMERATED(reject, ignore, notify)The IE Criticality is used for reporting the criticality of the triggering IE. The value 'ignore' shall not be used.>IE IDMINTEGER (0..65535)The IE Id of the not understood or missing IE >Type of ErrorMENUMERATED(not understood, missing, …)
-Range boundExplanationmaxNrOfErrorsMaximum no. of IE errors allowed to be reported with a single message. The value for maxNrOfErrors is 256.
-9.2.9	CSG Membership Status
-This element indicates the Membership status of the UE to a particular CSG.
-IE/Group NamePresenceRangeIE type and referenceSemantics descriptionCSG Membership StatusMENUMERATED (member, non-member,…) 
-
-9.3	Message and Information Element Abstract Syntax (with ASN.1)
-9.3.0	General
-RUA ASN.1 definition conforms with ITU-T Rec. X.680 [7] and ITU-T Rec. X.681 [8].
-The ASN.1 definition specifies the structure and content of RUA messages. RUA messages can contain any IEs specified in the object set definitions for that message without the order or number of occurrence being restricted by ASN.1. However, for this version of the standard, a sending entity shall construct a RUA message according to the PDU definitions module and with the following additional rules (Note that in the following IE means an IE in the object set with an explicit id. If one IE needed to appear more than once in one object set, then the different occurrences have different IE ids):
--	IEs shall be ordered (in an IE container) in the order they appear in object set definitions.
--	Object set definitions specify how many times IEs may appear. An IE shall appear exactly once if the presence field in an object has value "mandatory". An IE may appear at most once if the presence field in an object has value "optional" or "conditional". If in a tabular format there is multiplicity specified for an IE (i.e. an IE list) then in the corresponding ASN.1 definition the list definition is separated into two parts. The first part defines an IE container list where the list elements reside. The second part defines list elements. The IE container list appears as an IE of its own. For this version of the standard an IE container list may contain only one kind of list elements.
-If a RUA message that is not constructed as defined above is received, this shall be considered as Abstract Syntax Error, and the message shall be handled as defined for Abstract Syntax error in subclause 10.3.6.
-9.3.1	Usage of private message mechanism for non-standard use
-The private message mechanism for non-standard use may be used:
--	for special operator- (and/or vendor) specific features considered not to be part of the basic functionality, i.e. the functionality required for a complete and high-quality specification in order to guarantee multivendor interoperability;
--	by vendors for research purposes, e.g. to implement and evaluate new algorithms/features before such features are proposed for standardisation.
-The private message mechanism shall not be used for basic functionality. Such functionality shall be standardised.
-9.3.2	Elementary Procedure Definitions
-
--- **************************************************************
---
--- Elementary Procedure definitions
---
--- **************************************************************
-
-RUA-PDU-Descriptions  { 
-itu-t (0) identified-organization (4) etsi (0) mobileDomain (0) 
-umts-Access (20) modules (3) rua(5) version1 (1) rUA-PDU-Descriptions (0)}
-
-DEFINITIONS AUTOMATIC TAGS ::= 
-
-BEGIN
-
--- **************************************************************
---
--- IE parameter types from other modules.
---
--- **************************************************************
-
-IMPORTS
-	Criticality,
-	ProcedureCode
-FROM RUA-CommonDataTypes
-	Connect,
-	DirectTransfer,
-	Disconnect,
-	ConnectionlessTransfer,		
-	ErrorIndication,
-	PrivateMessage
-
-
-FROM RUA-PDU-Contents
-	id-Connect,
-	id-DirectTransfer,
-	id-Disconnect,
-	id-ConnectionlessTransfer,
-	id-ErrorIndication,
-	id-privateMessage
-FROM RUA-Constants;
-
--- **************************************************************
---
--- Interface Elementary Procedure Class
---
--- **************************************************************
-
-RUA-ELEMENTARY-PROCEDURE ::= CLASS {
-	&InitiatingMessage			,
-	&SuccessfulOutcome			OPTIONAL,
-	&UnsuccessfulOutcome		OPTIONAL,
-	&procedureCode				ProcedureCode 	UNIQUE,
-	&criticality				Criticality 	DEFAULT ignore
-}
-
-WITH SYNTAX {
-	INITIATING MESSAGE			&InitiatingMessage
-	[SUCCESSFUL OUTCOME			&SuccessfulOutcome]
-	[UNSUCCESSFUL OUTCOME		&UnsuccessfulOutcome]
-	PROCEDURE CODE				&procedureCode
-	[CRITICALITY				&criticality]
-}
-
--- **************************************************************
---
--- Interface PDU definitions
---
--- **************************************************************
-
-RUA-PDU ::= CHOICE {
-	initiatingMessage		InitiatingMessage,
-	successfulOutcome		SuccessfulOutcome,
-	unsuccessfulOutcome		UnsuccessfulOutcome,
-	...
-}
-
-
-InitiatingMessage ::= SEQUENCE {
-	procedureCode	RUA-ELEMENTARY-PROCEDURE.&procedureCode		({RUA-ELEMENTARY-PROCEDURES}),
-	criticality		RUA-ELEMENTARY-PROCEDURE.&criticality		({RUA-ELEMENTARY-PROCEDURES}{@procedureCode}),
-	value			RUA-ELEMENTARY-PROCEDURE.&InitiatingMessage	({RUA-ELEMENTARY-PROCEDURES}{@procedureCode})
-}
-
-SuccessfulOutcome ::= SEQUENCE {
-	procedureCode	RUA-ELEMENTARY-PROCEDURE.&procedureCode		({RUA-ELEMENTARY-PROCEDURES}),
-	criticality		RUA-ELEMENTARY-PROCEDURE.&criticality		({RUA-ELEMENTARY-PROCEDURES}{@procedureCode}),
-	value			RUA-ELEMENTARY-PROCEDURE.&SuccessfulOutcome	({RUA-ELEMENTARY-PROCEDURES}{@procedureCode})
-}
-
-UnsuccessfulOutcome ::= SEQUENCE {
-	procedureCode	RUA-ELEMENTARY-PROCEDURE.&procedureCode			({RUA-ELEMENTARY-PROCEDURES}),
-	criticality		RUA-ELEMENTARY-PROCEDURE.&criticality			({RUA-ELEMENTARY-PROCEDURES}{@procedureCode}),
-	value			RUA-ELEMENTARY-PROCEDURE.&UnsuccessfulOutcome	({RUA-ELEMENTARY-PROCEDURES}{@procedureCode})
-}
-
--- **************************************************************
---
--- Interface Elementary Procedure List
---
--- **************************************************************
-
-RUA-ELEMENTARY-PROCEDURES RUA-ELEMENTARY-PROCEDURE ::= {
-	RUA-ELEMENTARY-PROCEDURES-CLASS-1	|
-	RUA-ELEMENTARY-PROCEDURES-CLASS-2	,
-	...
-}
-
-RUA-ELEMENTARY-PROCEDURES-CLASS-1 RUA-ELEMENTARY-PROCEDURE ::= {
-	...
-}
-
-
-RUA-ELEMENTARY-PROCEDURES-CLASS-2 RUA-ELEMENTARY-PROCEDURE ::= {
-	connectionRequest |
-	directTransfer |
-	disconnectRequest |
-	connectionlessTransfer |	
-	errorIndication |
-	privateMessage,
-	...
-}
-
--- **************************************************************
---
--- Interface Elementary Procedures
---
--- **************************************************************
-
-
-connectionRequest RUA-ELEMENTARY-PROCEDURE ::= {
-	INITIATING MESSAGE		Connect
-	PROCEDURE CODE			id-Connect
-	CRITICALITY				ignore
-}
-
-directTransfer RUA-ELEMENTARY-PROCEDURE ::= {
-	INITIATING MESSAGE		DirectTransfer
-	PROCEDURE CODE			id-DirectTransfer
-	CRITICALITY				ignore
-}
-
-disconnectRequest RUA-ELEMENTARY-PROCEDURE ::= {
-	INITIATING MESSAGE		Disconnect
-	PROCEDURE CODE			id-Disconnect
-	CRITICALITY				ignore
-}
-connectionlessTransfer RUA-ELEMENTARY-PROCEDURE ::= {
-	INITIATING MESSAGE		ConnectionlessTransfer
-	PROCEDURE CODE			id-ConnectionlessTransfer
-	CRITICALITY				ignore
-}
-
-errorIndication RUA-ELEMENTARY-PROCEDURE ::= {
-	INITIATING MESSAGE		ErrorIndication
-	PROCEDURE CODE			id-ErrorIndication
-	CRITICALITY				ignore
-}
-
-privateMessage RUA-ELEMENTARY-PROCEDURE ::= {
-	INITIATING MESSAGE		PrivateMessage
-	PROCEDURE CODE			id-privateMessage
-	CRITICALITY				ignore
-}
-
-
-END
-9.3.3	PDU definitions
-
--- **************************************************************
---
--- PDU definitions for RUA.
---
--- **************************************************************
-
-RUA-PDU-Contents {
-itu-t (0) identified-organization (4) etsi (0) mobileDomain (0) 
-umts-Access (20) modules (3) rua(5) version1 (1) rUA-PDU-Contents (1) }
-
-DEFINITIONS AUTOMATIC TAGS ::= 
-
-BEGIN
-
--- **************************************************************
---
--- IE parameter types from other modules.
---
--- **************************************************************
-
-IMPORTS
-	Cause,
-	CriticalityDiagnostics,
-	Context-ID,
-	CN-DomainIndicator, 
-	CSGMembershipStatus,
-	IntraDomainNasNodeSelector,
-	RANAP-Message,
-	Establishment-Cause
-
-FROM RUA-IEs
-
-
-	ProtocolExtensionContainer{},
-	ProtocolIE-ContainerList{},
-	ProtocolIE-Container{},
-	ProtocolIE-Single-Container{},
-	PrivateIE-Container{},
-	RUA-PRIVATE-IES,
-	RUA-PROTOCOL-EXTENSION,
-	RUA-PROTOCOL-IES
-FROM RUA-Containers
-
-	id-Cause,
-	id-CriticalityDiagnostics,
-	id-Context-ID,
-	id-CN-DomainIndicator, 
- 	id-CSGMembershipStatus,
-	id-RANAP-Message,
-	id-IntraDomainNasNodeSelector,
-	id-Establishment-Cause
-
-FROM RUA-Constants;
-
-
--- **************************************************************
---
--- Connect
---
--- **************************************************************
-
-Connect ::= SEQUENCE {
-	protocolIEs			ProtocolIE-Container       { {ConnectIEs} },
-	protocolExtensions	ProtocolExtensionContainer { {ConnectExtensions} } 	OPTIONAL,
-	...
-}
-
-ConnectIEs RUA-PROTOCOL-IES ::= {
-	{ ID id-CN-DomainIndicator				CRITICALITY reject	TYPE CN-DomainIndicator				PRESENCE mandatory } |
-	{ ID id-Context-ID						CRITICALITY reject	TYPE Context-ID						PRESENCE mandatory } |
-	{ ID id-IntraDomainNasNodeSelector 		CRITICALITY ignore	TYPE IntraDomainNasNodeSelector		PRESENCE optional } |
-	{ ID id-Establishment-Cause				CRITICALITY reject	TYPE Establishment-Cause			PRESENCE mandatory } |
-	{ ID id-RANAP-Message					CRITICALITY reject	TYPE RANAP-Message					PRESENCE mandatory },
-	...
-}
-
-ConnectExtensions RUA-PROTOCOL-EXTENSION ::= {
-	{ ID id-CSGMembershipStatus		CRITICALITY	 ignore		EXTENSION CSGMembershipStatus		PRESENCE optional	},
-
-	...
-}
-
-
--- **************************************************************
---
--- Direct Transfer
---
--- **************************************************************
-
-DirectTransfer ::= SEQUENCE {
-	protocolIEs			ProtocolIE-Container       { {DirectTransferIEs} },
-	protocolExtensions	ProtocolExtensionContainer { {DirectTransferExtensions} } 	OPTIONAL,
-	...
-}
-
-DirectTransferIEs RUA-PROTOCOL-IES ::= {
-	{ ID id-CN-DomainIndicator				CRITICALITY reject	TYPE CN-DomainIndicator		PRESENCE mandatory } |
-	{ ID id-Context-ID						CRITICALITY reject	TYPE Context-ID				PRESENCE mandatory } |
-	{ ID id-RANAP-Message					CRITICALITY reject	TYPE RANAP-Message			PRESENCE mandatory  },
-	...
-}
-
-DirectTransferExtensions RUA-PROTOCOL-EXTENSION ::= {
-	...
-}
-
-
-
--- **************************************************************
---
--- Disconnect
---
--- **************************************************************
-
-Disconnect ::= SEQUENCE {
-	protocolIEs			ProtocolIE-Container       { {DisconnectIEs} },
-	protocolExtensions	ProtocolExtensionContainer { {DisconnectExtensions} } 	OPTIONAL,
-	...
-}
-
-DisconnectIEs RUA-PROTOCOL-IES ::= {
-	{ ID id-CN-DomainIndicator				CRITICALITY reject	TYPE CN-DomainIndicator		PRESENCE mandatory } |
-	{ ID id-Context-ID						CRITICALITY reject	TYPE Context-ID				PRESENCE mandatory } |
-	{ ID id-Cause							CRITICALITY reject	TYPE Cause					PRESENCE mandatory } |
-	{ ID id-RANAP-Message					CRITICALITY reject	TYPE RANAP-Message			PRESENCE conditional  },
-	-- RANAP message shall be included if Cause value is "normal"
-	...
-}
-
-DisconnectExtensions RUA-PROTOCOL-EXTENSION ::= {
-	...
-}
-
--- **************************************************************
---
--- Connectionless Transfer
---
--- **************************************************************
-
-ConnectionlessTransfer ::= SEQUENCE {
-	protocolIEs			ProtocolIE-Container       { {ConnectionlessTransferIEs} },
-	protocolExtensions	ProtocolExtensionContainer { {ConnectionlessTransferExtensions} } 	OPTIONAL,
-	...
-}
-
-ConnectionlessTransferIEs RUA-PROTOCOL-IES ::= {
-	{ ID id-RANAP-Message					CRITICALITY reject	TYPE RANAP-Message			PRESENCE mandatory  },
-	...
-}
-
-ConnectionlessTransferExtensions RUA-PROTOCOL-EXTENSION ::= {
-	...
-}
-
-
-
-
--- **************************************************************
---
--- ERROR INDICATION
---
--- **************************************************************
-
-ErrorIndication ::= SEQUENCE {
-	protocolIEs			ProtocolIE-Container       { {ErrorIndicationIEs} },
-	protocolExtensions	ProtocolExtensionContainer { {ErrorIndicationExtensions} } 	OPTIONAL,
-	...
-}
-
-ErrorIndicationIEs RUA-PROTOCOL-IES ::= {
-	{ ID id-Cause						CRITICALITY ignore	TYPE Cause						PRESENCE mandatory } |
-	{ ID id-CriticalityDiagnostics		CRITICALITY ignore	TYPE CriticalityDiagnostics		PRESENCE optional },
-		...
-}
-
-ErrorIndicationExtensions RUA-PROTOCOL-EXTENSION ::= {
-	...
-}
-
--- **************************************************************
---
--- PRIVATE MESSAGE
---
--- **************************************************************
-
-PrivateMessage ::= SEQUENCE {
-	privateIEs		PrivateIE-Container  {{PrivateMessage-IEs}},
-	...
-}
-
-PrivateMessage-IEs RUA-PRIVATE-IES ::= {
-	...
-}
-
-
-END
-
-9.3.4	Information Element definitions
-
-
--- **************************************************************
---
--- Information Element Definitions
---
--- **************************************************************
-
-RUA-IEs {
-itu-t (0) identified-organization (4) etsi (0) mobileDomain (0) 
-umts-Access (20) modules (3) rua(5) version1 (1) rUA-IEs (2) }
-
-DEFINITIONS AUTOMATIC TAGS ::= 
-
-BEGIN
-
-IMPORTS
-	maxNrOfErrors
-FROM RUA-Constants
-
-	Criticality,
-	ProcedureCode,
-	ProtocolIE-ID,
-	TriggeringMessage
-FROM RUA-CommonDataTypes
-
-	ProtocolExtensionContainer{},
-	RUA-PROTOCOL-EXTENSION
-FROM RUA-Containers;
-
-
-CN-DomainIndicator ::= ENUMERATED { 
-	cs-domain, 
-	ps-domain 
-}
-
-CSGMembershipStatus ::= ENUMERATED { 
-	member, 
-	non-member,
-	...
-}
-
-Establishment-Cause		::= ENUMERATED {
-							emergency-call,
-							normal-call,
-							... 
-							}
-
-
-
-
-
-Context-ID	::=	 BIT STRING (SIZE(24))
-
-IntraDomainNasNodeSelector ::=					SEQUENCE {
-	version											CHOICE {
-		release99										SEQUENCE {
-			cn-Type											CHOICE {
-				gsm-Map-IDNNS									Gsm-map-IDNNS,
-				ansi-41-IDNNS									Ansi-41-IDNNS
-			}
-		},
-		later											SEQUENCE {
-			futurecoding									BIT STRING (SIZE (15))
-		}
-	}
-}
-
-Gsm-map-IDNNS ::=							SEQUENCE {
-	routingbasis									CHOICE {
-		localPTMSI										SEQUENCE {
-			routingparameter								RoutingParameter
-		},
-		tMSIofsamePLMN									SEQUENCE {
-			routingparameter								RoutingParameter
-		},
-		tMSIofdifferentPLMN								SEQUENCE {
-			routingparameter								RoutingParameter
-		},
-		iMSIresponsetopaging							SEQUENCE {
-			routingparameter								RoutingParameter
-		},
-		iMSIcauseUEinitiatedEvent						SEQUENCE {
-			routingparameter								RoutingParameter
-		},
-		iMEI											SEQUENCE {
-			routingparameter								RoutingParameter
-		},
-		spare2											SEQUENCE {
-			routingparameter								RoutingParameter
-		},
-		spare1											SEQUENCE {
-			routingparameter								RoutingParameter
-		}
-	},
-	-- dummy is not used in this version of the specification and
-	-- it should be ignored by the receiver.
-	dummy									BOOLEAN
-}
-
-
-Ansi-41-IDNNS ::=			BIT STRING (SIZE (14))
-
-RANAP-Message	::=			OCTET STRING
-
-RoutingParameter ::=		BIT STRING (SIZE (10))
-
-
--- **************************************************************
---
--- Cause IE
---
--- **************************************************************
-
-Cause ::= CHOICE {
-	radioNetwork			CauseRadioNetwork,
-	transport				CauseTransport,
-	protocol				CauseProtocol,
-	misc					CauseMisc,
-	...
-}
-CauseRadioNetwork ::= ENUMERATED {
-	normal,
-	connect-failed,
-	network-release,
-	unspecified,
-	...
-}
-CauseTransport ::= ENUMERATED {
-	transport-resource-unavailable,
-	unspecified,
-	...
-}
-
-CauseProtocol ::= ENUMERATED {
-	transfer-syntax-error,
-	abstract-syntax-error-reject,
-	abstract-syntax-error-ignore-and-notify,
-	message-not-compatible-with-receiver-state,
-	semantic-error,
-	unspecified,
-	abstract-syntax-error-falsely-constructed-message,
-	...
-}
-
-CauseMisc ::= ENUMERATED {
-	processing-overload,
-	hardware-failure,
-	o-and-m-intervention,
-	unspecified,
-	...
-}
-
--- **************************************************************
---
--- CriticalityDiagnostics
---
--- **************************************************************
-
-CriticalityDiagnostics ::= SEQUENCE {
-	procedureCode	ProcedureCode	OPTIONAL,
-	triggeringMessage	TriggeringMessage	OPTIONAL,
-	procedureCriticality	Criticality	OPTIONAL,
-	iEsCriticalityDiagnostics	CriticalityDiagnostics-IE-List	OPTIONAL,
-	iE-Extensions	ProtocolExtensionContainer { {CriticalityDiagnostics-ExtIEs} } 	OPTIONAL,
-	...
-}
-
-CriticalityDiagnostics-IE-List ::= SEQUENCE (SIZE (1..maxNrOfErrors)) OF
-	SEQUENCE {
-		iECriticality			Criticality,
-		iE-ID					ProtocolIE-ID,
-		typeOfError				TypeOfError,
-		iE-Extensions			ProtocolExtensionContainer { {CriticalityDiagnostics-IE-List-ExtIEs} }	OPTIONAL,
-		...
-	}
-
-CriticalityDiagnostics-IE-List-ExtIEs RUA-PROTOCOL-EXTENSION ::= {
-	...
-}
-
-CriticalityDiagnostics-ExtIEs RUA-PROTOCOL-EXTENSION ::= {
-	...
-}
-
-
-TypeOfError ::= ENUMERATED {
-	not-understood,
-	missing,
-	...
-}
-
-END
-9.3.5	Common definitions
-
-
--- **************************************************************
---
--- Common definitions
---
--- **************************************************************
-
-RUA-CommonDataTypes {
-itu-t (0) identified-organization (4) etsi (0) mobileDomain (0) 
-umts-Access (20) modules (3) rua(5) version1 (1) rUA-CommonDataTypes (3)  }
-
-DEFINITIONS AUTOMATIC TAGS ::= 
-
-BEGIN
-
--- **************************************************************
---
--- Extension constants
---
--- **************************************************************
-
-maxPrivateIEs 									INTEGER ::= 65535
-maxProtocolExtensions 							INTEGER ::= 65535
-maxProtocolIEs									INTEGER ::= 65535
-
--- **************************************************************
---
--- Common Data Types
---
--- **************************************************************
-Criticality		::= ENUMERATED { reject, ignore, notify }
-
-Presence		::= ENUMERATED { optional, conditional, mandatory }
-
-
-ProcedureCode		::= INTEGER (0..255)
-
-PrivateIE-ID	::= CHOICE {
-	local				INTEGER (0..65535),
-	global				OBJECT IDENTIFIER
-}
-
-ProtocolIE-ID		::= INTEGER (0..maxProtocolIEs)
-
-TriggeringMessage	::= ENUMERATED { initiating-message, successful-outcome, unsuccessful-outcome }
-
-END
-
-9.3.6	Constant definitions
-
-
--- **************************************************************
---
--- Constant definitions
---
--- **************************************************************
-
-RUA-Constants { 
-itu-t (0) identified-organization (4) etsi (0) mobileDomain (0) 
-umts-Access (20) modules (3) rua(5) version1 (1) rUA-Constants (4) } 
-
-DEFINITIONS AUTOMATIC TAGS ::= 
-
-BEGIN
-
-IMPORTS
-	ProcedureCode,
-	ProtocolIE-ID
-FROM RUA-CommonDataTypes;
-
-
--- **************************************************************
---
--- Elementary Procedures
---
-id-Connect							ProcedureCode ::= 1
-id-DirectTransfer					ProcedureCode ::= 2
-id-Disconnect						ProcedureCode ::= 3
-id-ConnectionlessTransfer			ProcedureCode ::= 4
-id-ErrorIndication					ProcedureCode ::= 5
-id-privateMessage					ProcedureCode ::= 6
-
--- **************************************************************
---
--- Lists
---
--- **************************************************************
-maxNrOfErrors						INTEGER ::= 256
-
--- **************************************************************
---
--- IEs
---
--- **************************************************************
-
-id-Cause										ProtocolIE-ID ::= 1
-id-CriticalityDiagnostics						ProtocolIE-ID ::= 2
-id-Context-ID									ProtocolIE-ID ::= 3
-id-RANAP-Message								ProtocolIE-ID ::= 4
-id-IntraDomainNasNodeSelector					ProtocolIE-ID ::= 5
-id-Establishment-Cause							ProtocolIE-ID ::= 6
-id-CN-DomainIndicator							ProtocolIE-ID ::= 7
-id-CSGMembershipStatus 							ProtocolIE-ID ::= 9
-
- 
-END
-
-9.3.7	Container definitions
-
-
--- **************************************************************
---
--- Container definitions
---
--- **************************************************************
-
-RUA-Containers {
-itu-t (0) identified-organization (4) etsi (0) mobileDomain (0) 
-umts-Access (20) modules (3) rua(5) version1 (1) rUA-Containers (5) }
-
-DEFINITIONS AUTOMATIC TAGS ::= 
-
-BEGIN
-
--- **************************************************************
---
--- IE parameter types from other modules.
---
--- **************************************************************
-
-IMPORTS
-	Criticality,
-	Presence,
-	PrivateIE-ID,
-	ProtocolIE-ID,
-	maxPrivateIEs,
-	maxProtocolExtensions,
-	maxProtocolIEs
-FROM RUA-CommonDataTypes;
-
--- **************************************************************
---
--- Class Definition for Private IEs
---
--- **************************************************************
-
-RUA-PRIVATE-IES ::= CLASS {
-	&id					PrivateIE-ID,
-	&criticality		Criticality,
-	&Value,
-	&presence			Presence
-}
-WITH SYNTAX {
-	ID					&id
-	CRITICALITY			&criticality
-	TYPE				&Value
-	PRESENCE			&presence
-}
-
-
--- **************************************************************
---
--- Class Definition for Protocol IEs
---
--- **************************************************************
-
-RUA-PROTOCOL-IES ::= CLASS {
-	&id					ProtocolIE-ID		UNIQUE,
-	&criticality		Criticality,
-	&Value,
-	&presence			Presence
-}
-WITH SYNTAX {
-	ID					&id
-	CRITICALITY			&criticality
-	TYPE				&Value
-	PRESENCE			&presence
-}
-
--- **************************************************************
---
--- Class Definition for Protocol Extensions
---
--- **************************************************************
-
-RUA-PROTOCOL-EXTENSION ::= CLASS {
-	&id					ProtocolIE-ID UNIQUE,
-	&criticality		Criticality,
-	&Extension,
-	&presence			Presence
-}
-WITH SYNTAX {
-	ID					&id
-	CRITICALITY			&criticality
-	EXTENSION			&Extension
-	PRESENCE			&presence
-}
-
-
--- **************************************************************
---
--- Container for Protocol IEs
---
--- **************************************************************
-
-ProtocolIE-Container {RUA-PROTOCOL-IES : IEsSetParam} ::= 
-	SEQUENCE (SIZE (0..maxProtocolIEs)) OF
-		ProtocolIE-Field {{IEsSetParam}}
-
-ProtocolIE-Single-Container {RUA-PROTOCOL-IES : IEsSetParam} ::= 
-	ProtocolIE-Field {{IEsSetParam}}
-
-ProtocolIE-Field {RUA-PROTOCOL-IES : IEsSetParam} ::= SEQUENCE {
-	id					RUA-PROTOCOL-IES.&id				({IEsSetParam}),
-	criticality			RUA-PROTOCOL-IES.&criticality		({IEsSetParam}{@id}),
-	value				RUA-PROTOCOL-IES.&Value				({IEsSetParam}{@id})
-}
-
--- **************************************************************
---
--- Container Lists for Protocol IE Containers
---
--- **************************************************************
-
-ProtocolIE-ContainerList {INTEGER : lowerBound, INTEGER : upperBound, RUA-PROTOCOL-IES : IEsSetParam} ::=
-	SEQUENCE (SIZE (lowerBound..upperBound)) OF
-		ProtocolIE-Container {{IEsSetParam}}
-
--- **************************************************************
---
--- Container for Protocol Extensions
---
--- **************************************************************
-
-ProtocolExtensionContainer {RUA-PROTOCOL-EXTENSION : ExtensionSetParam} ::= 
-	SEQUENCE (SIZE (1..maxProtocolExtensions)) OF
-		ProtocolExtensionField {{ExtensionSetParam}}
-
-ProtocolExtensionField {RUA-PROTOCOL-EXTENSION : ExtensionSetParam} ::= SEQUENCE {
-	id					RUA-PROTOCOL-EXTENSION.&id				({ExtensionSetParam}),
-	criticality			RUA-PROTOCOL-EXTENSION.&criticality		({ExtensionSetParam}{@id}),
-	extensionValue		RUA-PROTOCOL-EXTENSION.&Extension		({ExtensionSetParam}{@id})
-}
-
-
--- **************************************************************
---
--- Container for Private IEs
---
--- **************************************************************
-
-PrivateIE-Container {RUA-PRIVATE-IES : IEsSetParam } ::= 
-	SEQUENCE (SIZE (1.. maxPrivateIEs)) OF
-		PrivateIE-Field {{IEsSetParam}}
-
-PrivateIE-Field {RUA-PRIVATE-IES : IEsSetParam} ::= SEQUENCE {
-	id					RUA-PRIVATE-IES.&id					({IEsSetParam}),
-	criticality			RUA-PRIVATE-IES.&criticality		({IEsSetParam}{@id}),
-	value				RUA-PRIVATE-IES.&Value				({IEsSetParam}{@id})
-}
-
-
-END
-
-
-
-9.4	Message transfer syntax
-RUA shall use the ASN.1 Basic Packed Encoding Rules (BASIC-PER) Aligned Variant as transfer syntax as specified in ref. ITU-T Rec. X.691 [6].
-
-10	Handling of unknown, unforeseen, and erroneous protocol data
-10.1	General
-Protocol Error cases can be divided into three classes:
--	Transfer Syntax Error;
--	Abstract Syntax Error;
--	Logical Error.
-Protocol errors can occur in the following functions within a receiving node:
-
-Figure 10: Protocol errors in RUA
-The information stated in subclauses 10.2, 10.3 and 10.4, to be included in the message used when reporting an error, is what at minimum shall be included. Other optional information elements within the message may also be included, if available. This is also valid for the case when the reporting is done with a response message. The latter is an exception to what is stated in subclause 4.1.
-10.2	Transfer Syntax Error
-A Transfer Syntax Error occurs when the receiver is not able to decode the received physical message Transfer syntax errors are always detected in the process of ASN.1 decoding. If a Transfer Syntax Error occurs, the receiver should initiate Error Indication procedure with appropriate cause value for the Transfer Syntax protocol error.
-10.3	Abstract Syntax Error
-10.3.1	General
-An Abstract Syntax Error occurs when the receiving functional RUA entity:
-1.	receives IEs or IE groups that cannot be understood (unknown IE id);
-2.	receives IEs for which the logical range is violated (e.g.: ASN.1 definition: 0 to 15, the logical range is 0 to 10 (values 11 to 15 are undefined), and 12 will be received; this case will be handled as an abstract syntax error using criticality information sent by the originator of the message);
-3.	does not receive IEs or IE groups but according to the specified presence of the concerning object, the IEs or IE groups should have been present in the received message;
-4.	receives IEs or IE groups that are defined to be part of that message in wrong order or with too many occurrences of the same IE or IE group;
-5.	receives IEs or IE groups but according to the conditional presence of the concerning object and the specified condition, the IEs or IE groups should not have been present in the received message.
-Cases 1 and 2 (not comprehended IE/IE group) are handled based on received Criticality information. Case 3 (missing IE/IE group) is handled based on Criticality information and Presence information for the missing IE/IE group specified in the version of the specification used by the receiver. Case 4 (IEs or IE groups in wrong order or with too many occurrences) and Case 5 (erroneously present conditional IEs or IE groups) result in rejecting the procedure.
-If an Abstract Syntax Error occurs, the receiver shall read the remaining message and shall then for each detected Abstract Syntax Error act according to the Criticality Information and Presence Information for the IE/IE group due to which Abstract Syntax Error occurred in accordance with subclauses 10.3.4 and 10.3.5. The handling of cases 4 and 5 is specified in subclause 10.3.6.
-10.3.2	Criticality Information
-In the RUA messages there is criticality information set for individual IEs and/or IE groups. This criticality information instructs the receiver how to act when receiving an IE or an IE group that is not comprehended i.e. the entire item (IE or IE group) which is not (fully or partially) comprehended shall be treated in accordance with its own criticality information as specified in subclause 10.3.4.
-In addition, the criticality information is used in case of the missing IE/IE group abstract syntax error (see subclause 10.3.5).
-The receiving node shall take different actions depending on the value of the Criticality Information. The three possible values of the Criticality Information for an IE/IE group are:
--	Reject IE;
--	Ignore IE and Notify Sender;
--	Ignore IE.
-The following rules restrict when a receiving entity may consider an IE, an IE group or an EP not comprehended (not implemented), and when action based on criticality information is applicable:
-1.	IE or IE group: When one new or modified IE or IE group is implemented for one EP from a standard version, then other new or modified IEs or IE groups specified for that EP in that standard version shall be considered comprehended by the receiving entity (some may still remain unsupported).
-2.	EP: The comprehension of different EPs within a standard version or between different standard versions is not mandated. Any EP that is not supported may be considered not comprehended, even if another EP from that standard version is comprehended, and action based on criticality shall be applied.
-10.3.3	Presence Information
-For many IEs/IE groups which are optional according to the ASN.1 transfer syntax, RUA specifies separately if the presence of these IEs/IE groups is optional or mandatory with respect to RNS application by means of the presence field of the concerning object of class RUA-PROTOCOL-IES, RUA-PROTOCOL-IES-PAIR, RUA-PROTOCOL-EXTENSION or RUA-PRIVATE-IES.
-The presence field of the indicated classes supports three values:
-1.	Optional;
-2.	Conditional;
-3.	Mandatory.
-If an IE/IE group is not included in a received message and the presence of the IE/IE group is mandatory or the presence is conditional and the condition is true according to the version of the specification used by the receiver, an abstract syntax error occurs due to a missing IE/IE group.
-10.3.4	Not comprehended IE/IE group
-10.3.4.1	Procedure Code
-The receiving node shall treat the different types of received criticality information of the Procedure Code according to the following:
-Reject IE:
--	If a message is received with a Procedure Code marked with "Reject IE" which the receiving node does not comprehend, the receiving node shall reject the procedure using the Error Indication procedure.
-Ignore IE and Notify Sender:
--	If a message is received with a Procedure Code marked with "Ignore IE and Notify Sender" which the receiving node does not comprehend, the receiving node shall ignore the procedure and initiate the Error Indication procedure.
-Ignore IE:
--	If a message is received with a Procedure Code marked with "Ignore IE" which the receiving node does not comprehend, the receiving node shall ignore the procedure.
-When using the Error Indication procedure to reject a procedure or to report an ignored procedure it shall include the Procedure Code IE, the Triggering Message IE, and the Procedure Criticality IE in the Criticality Diagnostics IE.
-10.3.4.1A	Type of Message
-When the receiving node cannot decode the Type of Message IE, the Error Indication procedure shall be initiated with an appropriate cause value.
-10.3.4.2	IEs other than the Procedure Code and Type of Message
-The receiving node shall treat the different types of received criticality information of an IE/IE group other than the Procedure Code IE and Type of Message IE according to the following:
-Reject IE:
--	If a message initiating a procedure is received containing one or more IEs/IE groups marked with "Reject IE" which the receiving node does not comprehend; none of the functional requests of the message shall be executed. The receiving node shall reject the procedure and report the rejection of one or more IEs/IE groups using the message normally used to report unsuccessful outcome of the procedure. In case the information received in the initiating message was insufficient to determine a value for all IEs that are required to be present in the message used to report the unsuccessful outcome of the procedure, the receiving node shall instead terminate the procedure and initiate the Error Indication procedure.
--	If a message initiating a procedure that does not have a message to report unsuccessful outcome is received containing one or more IEs/IE groups marked with "Reject IE" which the receiving node does not comprehend, the receiving node shall terminate the procedure and initiate the Error Indication procedure.
--	If a response message is received containing one or more IEs marked with "Reject IE" which the receiving node does no comprehend, the receiving node shall consider the procedure as unsuccessfully terminated and initiate local error handling.
-Ignore IE and Notify Sender:
--	If a message initiating a procedure is received containing one or more Ies/IE groups marked with "Ignore IE and Notify Sender" which the receiving node does not comprehend, the receiving node shall ignore the content of the not comprehended IEs/IE groups, continue with the procedure as if the not comprehended IEs/IE groups were not received (except for the reporting) using the understood IEs/IE groups, and report in the response message of the procedure that one or more IEs/IE groups have been ignored. In case the information received in the initiating message was insufficient to determine a value for all IEs that are required to be present in the response message, the receiving node shall instead terminate the procedure and initiate the Error Indication procedure.
--	if a message initiating a procedure that does not have a message to report the outcome of the procedure is received containing one or more IEs/IE groups marked with "Ignore IE and Notify Sender" which the receiving node does not comprehend, the receiving node shall ignore the content of the not comprehended IEs/IE groups, continue with the procedure as if the not comprehended IEs/IE groups were not received (except for the reporting) using the understood IEs/IE groups, and initiate the Error Indication procedure to report that one or more IEs/IE groups have been ignored.
--	If a response message is received containing one or more IEs/IE groups marked with "Ignore IE and Notify Sender" which the receiving node does not comprehend, the receiving node shall ignore the content of the not comprehended IE/IE groups, continue with the procedure as if the not comprehended IEs/IE groups were not received (except for the reporting) using the understood IEs/IE groups and initiate the Error Indication procedure.
-Ignore IE:
--	If a message initiating a procedure is received containing one or more IEs/IE groups marked with "Ignore IE" which the receiving node does not comprehend, the receiving node shall ignore the content of the not comprehended IEs/IE groups and continue with the procedure as if the not comprehended IEs/IE groups were not received using only the understood IEs/IE groups.
--	If a response message is received containing one or more IEs/IE groups marked with "Ignore IE" which the receiving node does not comprehend, the receiving node shall ignore the content of the not comprehended IEs/IE groups and continue with the procedure as if the not comprehended IEs/IE groups were not received using the understood IEs/IE groups.
-When reporting not comprehended IEs/IE groups marked with "Reject IE" or "Ignore IE and Notify Sender" using a response message defined for the procedure, the Information Element Criticality Diagnostics IE shall be included in the Criticality Diagnostics IE for each reported IE/IE group.
-When reporting not comprehended IEs/IE groups marked with "Reject IE" or "Ignore IE and Notify Sender" using the Error Indication procedure, the Procedure Code IE, the Triggering Message IE, Procedure Criticality IE, and the Information Element Criticality Diagnostics IE shall be included in the Criticality Diagnostics IE for each reported IE/IE group.
-10.3.5	Missing IE or IE group
-The receiving node shall treat the missing IE/IE group according to the criticality information for the missing IE/IE group in the received message specified in the version of the present document used by the receiver:
-Reject IE:
--	if a received message initiating a procedure is missing one or more IEs/IE groups with specified criticality "Reject IE"; none of the functional requests of the message shall be executed. The receiving node shall reject the procedure and report the missing IEs/IE groups using the message normally used to report unsuccessful outcome of the procedure. In case the information received in the initiating message was insufficient to determine a value for all IEs that are required to be present in the message used to report the unsuccessful outcome of the procedure, the receiving node shall instead terminate the procedure and initiate the Error Indication procedure.
--	if a received message initiating a procedure that does not have a message to report unsuccessful outcome is missing one or more IEs/IE groups with specified criticality "Reject IE", the receiving node shall terminate the procedure and initiate the Error Indication procedure.
--	if a received response message is missing one or more IEs/IE groups with specified criticality "Reject IE, the receiving node shall consider the procedure as unsuccessfully terminated and initiate local error handling.
-Ignore IE and Notify Sender:
--	if a received message initiating a procedure is missing one or more IEs/IE groups with specified criticality "Ignore IE and Notify Sender", the receiving node shall ignore that those IEs are missing and continue with the procedure based on the other IEs/IE groups present in the message and report in the response message of the procedure that one or more IEs/IE groups were missing. In case the information received in the initiating message was insufficient to determine a value for all IEs that are required to be present in the response message, the receiving node shall instead terminate the procedure and initiate the Error Indication procedure.
--	if a received message initiating a procedure that does not have a message to report the outcome of the procedure is missing one or more IEs/IE groups with specified criticality "Ignore IE and Notify Sender", the receiving node shall ignore that those IEs are missing and continue with the procedure based on the other IEs/IE groups present in the message and initiate the Error Indication procedure to report that one or more IEs/IE groups were missing.
--	if a received response message is missing one or more IEs/IE groups with specified criticality "Ignore IE and Notify Sender", the receiving node shall ignore that those IEs are missing and continue with the procedure based on the other IEs/IE groups present in the message and initiate the Error Indication procedure to report that one or more IEs/IE groups were missing.
-Ignore IE:
--	if a received message initiating a procedure is missing one or more IEs/IE groups with specified criticality "Ignore IE", the receiving node shall ignore that those IEs are missing and continue with the procedure based on the other IEs/IE groups present in the message.
--	if a received response message is missing one or more IEs/IE groups with specified criticality "Ignore IE", the receiving node shall ignore that those IEs/IE groups are missing and continue with the procedure based on the other IEs/IE groups present in the message.
-When reporting missing IEs/IE groups with specified criticality "Reject IE" or "Ignore IE and Notify Sender" using a response message defined for the procedure, the Information Element Criticality Diagnostics IE shall be included in the Criticality Diagnostics IE for each reported IE/IE group.
-When reporting missing IEs/IE groups with specified criticality "Reject IE" or "Ignore IE and Notify Sender" using the Error Indication procedure, the Procedure Code IE, the Triggering Message IE, Procedure Criticality IE, and the Information Element Criticality Diagnostics IE shall be included in the Criticality Diagnostics IE for each reported IE/IE group. 
-10.3.6	IEs or IE groups received in wrong order or with too many occurrences or erroneously present
-If a message with IEs or IE groups in wrong order or with too many occurrences is received or if IEs or IE groups with a conditional presence are present when the condition is not met (i.e. erroneously present), the receiving node shall behave according to the following:
--	If a message initiating a procedure is received containing IEs or IE groups in wrong order or with too many occurrences or erroneously present, none of the functional requests of the message shall be executed. The receiving node shall reject the procedure and report the cause value "Abstract Syntax Error (Falsely Constructed Message)" using the message normally used to report unsuccessful outcome of the procedure. In case the information received in the initiating message was insufficient to determine a value for all IEs that are required to be present in the message used to report the unsuccessful outcome of the procedure, the receiving node shall instead terminate the procedure and initiate the Error Indication procedure.
--	If a message initiating a procedure that does not have a message to report unsuccessful outcome is received containing IEs or IE groups in wrong order or with too many occurrences or erroneously present, the receiving node shall terminate the procedure and initiate the Error Indication procedure, and use cause value "Abstract Syntax Error (Falsely Constructed Message)".
--	If a response message is received containing IEs or IE groups in wrong order or with too many occurrences or erroneously present, the receiving node shall consider the procedure as unsuccessfully terminated and initiate local error handling.
-When determining the correct order only the IEs specified in the specification version used by the receiver shall be considered.
-10.4	Logical Error
-Logical error situations occur when a message is comprehended correctly, but the information contained within the message is not valid (i.e. semantic error), or describes a procedure which is not compatible with the state of the receiver. In these conditions, the following behaviour shall be performed (unless otherwise specified) as defined by the class of the elementary procedure, irrespective of the criticality information of the IE's/IE groups containing the erroneous values.
-Class 1:
-Where the logical error occurs in a request message of a class 1 procedure, and the procedure has a message to report this unsuccessful outcome, this message shall be sent with an appropriate cause value. Typical cause values are:
--	Semantic Error;
--	Message not compatible with receiver state.
-Where the logical error is contained in a request message of a class 1 procedure, and the procedure does not have a message to report this unsuccessful outcome, the procedure shall be terminated and the Error Indication procedure shall be initiated with an appropriate cause value. The Procedure Code IE and the Triggering Message IE within the Criticality Diagnostics IE shall then be included in order to identify the message containing the logical error.
-Where the logical error exists in a response message of a class 1 procedure, the procedure shall be considered as unsuccessfully terminated and local error handling shall be initiated.
-Class 2:
-Where the logical error occurs in a message of a class 2 procedure, the procedure shall be terminated and the Error Indication procedure shall be initiated with an appropriate cause value. The Procedure Code IE and the Triggering Message IE within the Criticality Diagnostics IE shall then be included in order to identify the message containing the logical error.
-10.5	Exceptions
-The error handling for all the cases described hereafter shall take precedence over any other error handling described in the other subclauses of clause 10.
--	If any type of error (Transfer Syntax Error, Abstract Syntax Error or Logical Error) is detected in the ERROR INDICATION message, it shall not trigger the Error Indication procedure in the receiving Node but local error handling.
--	In case a response message or Error Indication message needs to be returned, but the information necessary to determine the receiver of that message is missing, the procedure shall be considered as unsuccessfully terminated and local error handling shall be initiated.
--	If an error that terminates a procedure occurs, the returned cause value shall reflect the error that caused the termination of the procedure even if one or more abstract syntax errors with criticality "ignore and notify" have earlier occurred within the same procedure.
-
-Annex A (informative):
-Change History
-TSG #TSG Doc.CRRevSubject/CommentNew2008-12RP-080833Approved at TSG-RAN#42 and placed under change control8.0.02009-01Editorial corrections, including spec number shown on cover8.0.143RP-0902440001Add Object Identifier for RUA ASN.18.1.043RP-09008100041Clarification on Uniqueness of Context ID8.1.043RP-09008200072Adding the definitaion of Iuh Signalling Connection8.1.043RP-0902440008Correction of IE presence in ASN.18.1.043RP-0902440009Clarification of operation of RUA disconnect8.1.046Raised to version 9.0.09.0.046RP-09119100201RUA enhancement to handle inbound Mobility9.0.046RP-09119100212CSG Membership signalling during UE implicit registration9.0.047RP-10023000231Minor corrections for RUA9.1.048RP-10059500291Some Clarifications on RUA Direct Transfer9.2.049RP-10090900301Add missing cause value descriptions9.3.003/2011Raised to version 10.0.010.0.0SP-49SP-100629Clarification on the use of References (TS 21.801 CR#0030)10.0.051RP-11023100331RUA Connect Message for Enhanced H2H Mobility10.0.052RP-11068400341Correction of References10.1.052RP-11068900351IDNNS usage in the CONNECT message10.1.052RP-11068900362Clarification of usage of RUA DISCONNECT10.1.053RP-11119200401Remaining UE Context Issue during Mobility10.2.009/2012Update to Rel-11 version (MCC)11.0.058RP-1217370041Editorial and minor corrections11.1.059RP-1302110042Corrections from ASN.1 Review11.2.009/2014Update to Rel-12 version (MCC)12.0.066RP-1420930047Update of reference12.1.012/2015Update to Rel-13 version (MCC)13.0.071RP-1604190049Correction of tabular for Procedure Code in the Message Type IE13.1.0
-1
-3GPP
-
-Release 11
-2
-3GPP TS 25.468 V11.2.0 (2013-03)
-
-
-Release 13
-2
-3GPP TS 25.468 V13.1.0 (2016-03)
-
-
-3GPP TS 25.468 V13.1.0 (2016-03)
-38
-Release 13
-
-
-3GPP
-
-3GPP TS 25.468 V13.1.0 (2016-03)
-39
-Release 13
-
-
-3GPP
-

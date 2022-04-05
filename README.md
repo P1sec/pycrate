@@ -1,11 +1,12 @@
 What is pycrate
 ===============
 
-Pycrate is a french word for qualifying bad wine.
-The present software library has nothing to do with bad wine, it is simply a
-Python library for manipulating various digital formats in an easy way.
+Pycrate is a french word for qualifying bad wine (when it's close to vinegar !).
+The present software library has nothing to do with wine (except it is developped in France), 
+it is simply a Python library for manipulating various digital formats in an easy way,
+with a funny name.
 It is the glorious successor of [libmich](https://github.com/mitshell/libmich), 
-which was started 8 years ago and served well.
+which was started back in 2009, served well and retired in 2017.
 
 It provides basically a runtime for encoding and decoding data structures, including
 CSN.1 and ASN.1. Additionally, it features a 3G and LTE mobile core network.
@@ -17,13 +18,15 @@ License
 The whole library is licensed under LGPL v2.1 and is compatible with more recent 
 version of the LGPL: all licensed files have an header making it self-explanatory.
 For more details, please report to the 
-[license.txt](https://github.com/p1sec/pycrate/license.txt) file.
+[license.txt](https://github.com/P1sec/pycrate/blob/master/license.txt) file.
 
 
 Wiki
 ====
 
 Pycrate has a growing [wiki](https://github.com/p1sec/pycrate/wiki/The-pycrate-wiki).
+Use it as much as possible before opening an issue.
+Feel free also to propose some additional content.
 
 
 Installation
@@ -34,36 +37,60 @@ Operating systems and Python version
 
 The library is designed to work with both Python 2 (2.7) and Python 3 (3.4, 3.5 and greater), 
 from the official Python implementation [CPython](https://www.python.org/).
-It is also supporting alternative Python engine such as [pypy](http://pypy.org/) or
-[nuitka](http://nuitka.net/).
+It is also supporting alternative Python engine such as [pypy](http://pypy.org/),
+[nuitka](http://nuitka.net/) or [Cython](https://cython.org/).
 It is regularly tested both on Linux and Windows, and should actually work on any
-operating system which has [r|d]ecent Python support (as in 2017).
+operating system which has [r|d]ecent Python support (as in 2017, 2018 and more...).
 
 
 Dependencies
 ------------
 
 Currently none. Only the Python builtins and few internal modules of Python 
-(e.g. os, system, re) are required for most of the features.
-The pycrate_corenet part requires pysctp and CryptoMobile.
+(e.g. os, system, re, struct, datetime) are required for most of the features. 
+The json internal module is required for supporting the JSON API.
+If you want to run pycrate in Python2 (which is bad !), you will however need to
+install the [enum34](https://pypi.org/project/enum34/) package.
+
+The _pycrate\_ether/SCTP_ module can optionally use the external 
+[crc32c](https://pypi.org/project/crc32c/) module from ICRAR.
+
+The _pycrate\_mobile/TS24301\_EMM_ and _pycrate\_mobile/TS24501\_FGMM_ modules use 
+[CryptoMobile](https://github.com/p1sec/CryptoMobile) as optional dependency to 
+encrypt and decrypt LTE and 5G NAS messages.
+
+The _pycrate\_corenet_ part requires also [pysctp](https://pypi.org/project/pysctp/) 
+and [CryptoMobile](https://github.com/p1sec/CryptoMobile) to run.
+
+The _pycrate\_diameter/parse\_iana\_diameter\_xml.py_ file uses 
+[lxml](https://pypi.org/project/lxml/) to translate xml files from IANA to Python 
+dictionnaries ; this is however not required for standard runtime.
+
+The _pycrate\_osmo/SEDebugMux.py_ module relies on the [crcmod](https://pypi.org/project/crcmod/)
+to compute CRC in the frame format.
 
 
 Automatic installation
 ----------------------
 
 An installation script is available.
-It installs the library within your Python package directory:
+As soon as you have cloned or downloaded the repository, you can use it to install
+the library within your Python package directory:
 
 ```
 python setup.py install
 ```
+
+Run it as superuser for a system-wide install, or as-is for a user home-directory 
+level install. You can also run _develop_ instead of _install_ if you want a 
+developer-friendly installation.
 
 It is also possible to test the library before installing it
 (this will create two local directories *./test_asn/* and *./pycrate.egg-info/* that
 you can just delete afterwards):
 
 ```
-python setup.py test
+python -m unittest test.test_pycrate
 ```
 
 Or to build the library without installing it in the system:
@@ -77,8 +104,23 @@ It is also possible to recompile all ASN.1 modules, this will take few minutes
 should have been compiled with the latest version of the compiler):
 
 ```
-python -m pycrate_asn1c.proc
+python -m pycrate_asn1c.asnproc
 ```
+
+More generally, installation is not required, and simply having all _pycrate\_*_ 
+subdirectories into the PYTHONPATH enables to use the entire library.
+
+
+Installation with pip
+---------------------
+
+Alternatively, you can install the library with the `pip` command:
+```
+pip install pycrate
+```
+
+The install package is available on [pypi](https://pypi.org/project/pycrate/).
+It contains the library from the last tagged release on github.
 
 
 Contributing
@@ -93,16 +135,31 @@ check the wiki ; moreover many classes, methods and functions are documented wit
 docstrings, and finally you can have a look at the source code.
 
 If after all those steps, you still have a question or you think you found a bug,
-please open an issue. When filling an issue, please provide precise information
-about your case.
-
-Specific support requires time and may not be always possible. 
-In case you require such support, please consider also contributing in one way or 
-another (see below).
+please open an issue (see below). Specific support requires time and may not be always 
+possible. In case you require such support, please consider also contributing in one 
+way or another (see below, too).
 
 In case you are using this library in any of your project and you find it useful,
 do not hesitate to send me an email. It is always a pleasure to know where 
 code provided on the Internet can end up...
+
+
+Filling an issue
+---------------
+
+When filling an issue, please provide precise and contextual information about 
+your case and the error you potentially encounter:
+- indicate the version (or commit-level) of pycrate your are using, together with 
+the version of Python.
+- provide a code snippet that leads to the error you are facing, so that it can be
+reproduced.
+- provide the eventual stacktrace you are getting from Python
+- provide additional and contextual information as needed (e.g. a specific ASN.1 
+specification being used...)
+
+This is the bare minimum if you want to get help.
+And when you consider your issue has been addressed, please close it: "A good issue
+is a closed one !" as would have said my great grandmother.
 
 
 Extending the library
@@ -159,9 +216,11 @@ pycrate_ether
 -------------
 
 The modules provided here implement Ethernet and IP-oriented protocols and formats.
+* *MPLS* with structures for MPLS label and header
 * *Ethernet* with structures for Ethernet and VLAN headers
 * *ARP* simply providing the structure for ARP
 * *IP* with structures for IPv4, IPv6, ICMP, UDP and TCP
+* *SCTP* with structures for SCTP headers and various chunks
 * *PCAP* with structures for the PCAP global header and the record header
 
 
@@ -192,7 +251,7 @@ The most important ones are:
    file to be used with the pycrate ASN.1 runtime (in *pycrate_asn1rt*), 
    and *JSONDepGraphGenerator* which produces json file listing object dependencies 
    (which then can be browsed dynamically thanks to D3).
-* *proc* which is the top-level module for the compiler, it contains for example 
+* *asnproc* which is the top-level module for the compiler, it contains for example 
    the *compile_text()* function which compiles a serie of ASN.1 modules into
    Python objects
    
@@ -210,7 +269,7 @@ This subdirectory contains several ASN.1 specifications that are supported and
 precompiled for pycrate. Very few specifications have been changed in order to
 work with pycrate :
 * Q.775, in which the terrible *AllPackagesAS* is commented out
-* Q.773 and Q.775, in which the *TCInvokeIdSet* constraint is modified to be easier
+* Q.773 and Q.775, in which the *TCInvokeIdSet* constraint is modified to be
    used as a set of values
 That's all !
 
@@ -220,8 +279,8 @@ pycrate_asn1rt
 
 This subdirectory contains the ASN.1 runtime, that is loaded and used by the ASN.1 
 specifications compiled with the compiler in *pycrate_asn1c*. It supports 
-the PER encoding rules (aligned and not, canonical also), and the BER, CER and 
-DER encoding rules.
+the PER encoding rules (aligned and not, canonical also), and the BER, CER, DER 
+and JER encoding rules.
 
 
 pycrate_csn1
@@ -245,36 +304,69 @@ pycrate_mobile
 
 This subdirectory implements most of the 3GPP NAS protocol formats:
 * *GSMTAP*: gsmtap header format
-* *MCC_MNC*: dictionnaries for MCC and MNC look-ups
+* *MCC_MNC*: dictionnaries for MCC and MNC look-up
 * *NAS*: provides two functions to parse any uplink and downlink mobile NAS messages
 * *NASLTE*: provides two functions to parse LTE uplink and downlink NAS messages
+* *NAS5G*: provides one function to parse 5G uplink and downlink mobile NAS messages
 * *PPP*: structures for NCP and LCP protocols used for PPP connection estabishment
 * *SCCP*: structures for SCCP user-data and management messages
 * *SIGTRAN*: structures for SIGTRAN (mostly M2PA and M3UA) messages
-* *TS23038*: structures and routines for SMS encoding
-* *TS23040_SMS*: structures for the SMS transport protocol
-* *TS23041_CBS*: structures for the Cell Broadcast Service protocol
+* *TS102225*: structures for SIM card's Secured Packets from ETSI TS 102.225
+* *TS23038*: structures and routines for SMS encoding from TS 23.038
+* *TS23040_SMS*: structures for the SMS transport protocol from TS 23.040
+* *TS23041_CBS*: structures for the Cell Broadcast Service protocol from TS 23.041
 * *TS24007*: basic structures from the TS 24.007 specification, reused in most of the NAS protocols
 * *TS24008_CC* : structures for call control messages from TS 24.008
 * *TS24008_GMM*: structures for GPRS mobility management messages from TS 24.008
 * *TS24008_IE*: structures for many information elements from TS 24.008
 * *TS24008_MM*: structures for mobility management messages from TS 24.008
 * *TS24008_SM*: structures for GPRS session management messages from TS 24.008
-* *TS24011_PPSMS*: structures for the SMS point-to-point protocol
-* *TS24080_SS*: structures for the Supplementary Services protocol, wrapping some MAP ASN.1 objects
+* *TS24011_PPSMS*: structures for the SMS point-to-point protocol from TS 24.011
+* *TS24080_SS*: structures for the Supplementary Services protocol from TS 24.080, wrapping some MAP ASN.1 objects
 * *TS24301_EMM*: structures for the EPS mobility management messages from TS 24.301
-* *TS24301_ESM*: structures for the EPS mobility management messages from TS 24.301
+* *TS24301_ESM*: structures for the EPS session management messages from TS 24.301
 * *TS24301_IE*: structures for many information elements from TS 24.301
+* *TS24501_FGMM*: structures for the 5G mobility management messages from TS 24.501
+* *TS24501_FGSM*: structures for the 5G session management messages from TS 24.501
+* *TS24501_IE*: structures for many information elements from TS 24.501
+* *TS24501_UEPOL*, *TS24526_UEPOL* and *TS24588_UEPOL*: structures for the 5G UE policy protocol from TS 24.501, 526 and 588
+* *TS29002_MAPAppCtx*: functions that relies on the Pycrate_TCAP_MAPv2v3 ASN.1 module, dealing mostly with MAP application-contexts
+* *TS29002_MAPIE*: structure for the MAP AddressString object from TS 29.002
+* *TS29244_PFCP*: structure for PFCP messages from TS 29.244
+* *TS29274_GTPC*: structures for LTE/EPC GTP-C messages from TS 29.274
+* *TS29281_GTPU*: structures for LTE/EPC GTP-U messages from TS 29.281
+* *TS31111_SAT*: basic structures and dict for the SIM application toolkit from TS 31.111
+* *TS31115*: structures for SIM card's Secured Packets over SMS from TS 31.115
+* *TS38415_PDUSess*: structure used in 5G user-place traffic (i.e. GTP-U) from TS 38.415
 * *TS44018_GTTP*: structure for the single GSM GTTP message from TS 44.018
 * *TS44018_IE*: structures for many information elements from TS 44.018
 * *TS44018_RR*: structures for the GSM and GPRS radio ressources messages from TS 44.018
+
+
+pycrate_diameter
+----------------
+
+This subdirectory contains the following modules:
+* *parse_iana_diameter_xml*: to translate XML Diameter structures from IANA to Python
+* *iana_diameter_dicts.py*: that is automatically created by the former, containing Diameter Python dicts
+* *Diameter*: a generic Diameter module which implements DiameterGeneric and AVPGeneric structures
+* *DiameterIETF*: a Diameter module which relies on AVP types provided in all IETF RFC
+* *Diameter3GPP*: a Diameter module which relies on AVP types provided in all 3GPP TS
+
+
+pycrate_osmo
+------------
+
+This subdirectory contains the following modules:
+* *L1CTL*: structures used by osmocom-bb to communicate with the embedded stack from the host
+* *SEDebugMux*: structure used by Sony-Ericsson SoC and basebands to wrap logs
 
 
 pycrate_corenet
 ---------------
 
 This subdirectory implements a signaling server that supports IuCS and IuPS over Iuh interfaces
-(including HNBAP and RUA/RANAP) for interfacing with 3G femtocells and S1 interfaces 
+(including HNBAP and RUA/RANAP) for interfacing with 3G femtocells, and S1 interfaces 
 (including S1AP) for interfacing with LTE eNodeBs.
 It handles many procedures to drive femtocells, eNodeBs and mobile terminals connecting
 through them. In terms of services, it mostly support short messages and data connectivity.
@@ -291,10 +383,18 @@ Usage
 Most of the modules have doc strings. I try also to write readable sources and to
 comment them as much as possible for understanding them easily (and to allow also
 myself to understand my own code years after...).
-A wiki is provided and extended from time to time, to bring examples and methods on 
-how to use the different modules (any contribution on this would be very welcomed, too).
+A [wiki](https://github.com/p1sec/pycrate/wiki/The-pycrate-wiki) is provided 
+and extended from time to time, to bring examples and methods on how to use the 
+different modules (any contribution on this would be very welcome, too).
 Finally, the code provided in the *test/* subdirectory is also representative on
 how to use the different modules.
+
+Basically, a pycrate's object exposes the following methods:
+* set_val() / get_val(), which sets and gets a value into the object
+* from_bytes() / to_bytes(), which converts a buffer into values according to the internal structure of the object, and back
+* from_json() / to_json(), for working with JSON-encoded values
+* hex() / bin(), for getting hexadecimal and binary representation of the serialized obect's value
+* repr() / show(), for providing nice python's internal representation, and printable representation of the object's value
 
 
 ASN.1 usage
@@ -309,6 +409,9 @@ Each ASN.1 object has a corresponding Python instance, exposing the following me
 * from_ber() / to_ber(), which converts BER
 * from_cer() / to_cer(), which converts CER
 * from_der() / to_der(), which converts DER
+* from_jer() / to_jer(), which converts JER
+* set_val() / get_val(), to set and get Python's values into the ASN.1 object
+* get_proto(), to return to internal structure of the ASN.1 object
 
 All the methods useful for working with ASN.1 objects at runtime can be found in 
 the file *pycrate_asn1rt/asnobj.py*.
@@ -317,7 +420,7 @@ the file *pycrate_asn1rt/asnobj.py*.
 Tools
 =====
 
-Three different tools are provided (yet):
+Four different tools are provided (yet):
 * *pycrate_showmedia.py* parses some media files (jpg, bmp, gif, mp3, png, 
    tiff, mpeg4) and pretty print the file structure on the standard output.
 * *pycrate_asn1compile.py* compiles ASN.1 source file(s) and produce a Python
@@ -326,6 +429,8 @@ Three different tools are provided (yet):
    specification.
 * *pycrate_berdecode.py* parses any BER/CER/DER encoded binary value of ASN.1 
    objects and prints the corresponding structure.
+* *pycrate_map_op_info.py* prints prototypes and various information related to
+   TCAP-MAP (Mobile Application Part) and CAMEL operations and application-contexts.
 
 
 Examples
@@ -412,69 +517,82 @@ choice.
 
 ```console
 $ ./tools/pycrate_asn1compile.py --help
-usage: pycrate_asn1compile.py [-h] [-i INPUT [INPUT ...]] [-o OUTPUT]
-                              [-fautotags] [-fextimpl] [-fverifwarn]
+usage: pycrate_asn1compile.py [-h] [-s SPEC] [-i INPUT [INPUT ...]] [-o OUTPUT] [-g GENERATOR_PATH] [-j] [-fautotags] [-fextimpl] [-fverifwarn]
 
 compile ASN.1 input file(s) for the pycrate ASN.1 runtime
 
 optional arguments:
   -h, --help            show this help message and exit
+  -s SPEC               provide a specification shortname, instead of ASN.1 input file(s)
   -i INPUT [INPUT ...]  ASN.1 input file(s) or directory
-  -o OUTPUT             compiled output Python source file
+  -o OUTPUT             compiled output Python (and json) source file(s)
+  -g GENERATOR_PATH, --generator GENERATOR_PATH
+                        provide an alternative python generator file path
+  -j                    output a json file with information on ASN.1 objects dependency
   -fautotags            force AUTOMATIC TAGS for all ASN.1 modules
   -fextimpl             force EXTENSIBILITY IMPLIED for all ASN.1 modules
-  -fverifwarn           force warning instead of raising during the
-                        verification stage
+  -fverifwarn           force warning instead of raising during the verification stage
+
+$ ./tools/pycrate_asn1compile.py -i ./test/res/Hardcore.asn -o Hardcore
+[proc] [./test/res/Hardcore.asn] module HardcoreSyntax (oid: []): 116 ASN.1 assignments found
+--- compilation cycle ---
+--- compilation cycle ---
+--- compilation cycle ---
+--- verifications ---
+[proc] ASN.1 modules processed: ['HardcoreSyntax']
+[proc] ASN.1 objects compiled: 75 types, 3 sets, 37 values
+[proc] done
 ```
 
 After compiling a module, it is possible to load it in Python and use it for
 encoding / decoding any objects defined in it.
 
 ```python
-Python 3.4.3 (default, Nov 17 2016, 01:08:31) 
-[GCC 4.8.4] on linux
+Python 3.8.5 (default, Jul 28 2020, 12:59:40) 
+[GCC 9.3.0] on linux
 Type "help", "copyright", "credits" or "license" for more information.
+>>> from Hardcore import HardcoreSyntax
 >>> HardcoreSyntax # this is the only ASN.1 module provided in Hardcore.asn
 <class 'Hardcore.HardcoreSyntax'>
 >>> Final = HardcoreSyntax.Final # this is the Final object defined at line 115
 >>> Final
 <Final (SEQUENCE)>
 >>> Final.get_proto() # warning: this can return very laaaaaaarge definitions
-{
-w1: {
- r10: {
+('SEQUENCE', {
+w1: ('SEQUENCE', {
+ r10: ('SEQUENCE', {
   low: 'INTEGER',
   high: 'INTEGER',
   bool: 'BOOLEAN',
-  null: 'NULL'
-  },
- r90: {
+  null (OPT): 'NULL'
+  }),
+ r90: ('SEQUENCE', {
   low: 'INTEGER',
   high: 'INTEGER',
   bool: 'BOOLEAN',
-  null: 'NULL'
-  }
- },
-w2: {
- r10: {
+  null (OPT): 'NULL'
+  })
+ }),
+w2: ('SEQUENCE', {
+ r10: ('SEQUENCE', {
   low: 'INTEGER',
   high: 'INTEGER',
   bool: 'BOOLEAN',
-  null: 'NULL'
-  },
- r90: {
+  null (OPT): 'NULL'
+  }),
+ r90: ('SEQUENCE', {
   low: 'INTEGER',
   high: 'INTEGER',
   bool: 'BOOLEAN',
-  null: 'NULL'
-  }
- },
+  null (OPT): 'NULL'
+  })
+ }),
 bool: 'BOOLEAN'
-}
->>> V = { \
-... 'w1':{'r10':{'low':5, 'high':50, 'bool':False}, 'r90':{'low':50, 'high':95, 'bool':False, 'null':0}}, \
-... 'w2':{'r10':{'low':1, 'high':10, 'bool':False}, 'r90':{'low':90, 'high':100, 'bool':True}}, \
-... 'bool': True})
+})
+>>> V = {
+... 'w1':{'r10':{'low':5, 'high':50, 'bool':False}, 'r90':{'low':50, 'high':95, 'bool':False, 'null':0}},
+... 'w2':{'r10':{'low':1, 'high':10, 'bool':False}, 'r90':{'low':90, 'high':100, 'bool':True}},
+... 'bool': True}
 >>> Final.set_val(V)
 >>> print(Final.to_asn1()) # .to_asn1() returns a printable ASN.1 representation of the value
 {
@@ -522,3 +640,4 @@ True
 
 For more information about the API exposed for each ASN.1 object, you can check
 the docstrings of all ASN.1 objects, and also read the source file *pycrate_asn1rt/asnobj.py*.
+Do not forget to have a look at the [wiki](https://github.com/p1sec/pycrate/wiki/The-pycrate-wiki), too!

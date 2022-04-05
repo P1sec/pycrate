@@ -1,7 +1,7 @@
 # -*- coding: UTF-8 -*-
 #/**
 # * Software Name : pycrate
-# * Version : 0.3
+# * Version : 0.4
 # *
 # * Copyright 2017. Benoit Michau. ANSSI.
 # *
@@ -365,7 +365,7 @@ class UEGMMd(SigStack):
         Proc = self.init_proc(ProcClass, encod={ProcClass.Init: IEs}, mm_preempt=True)
         try:
             RanapTxProc = Proc.output()
-        except:
+        except Exception:
             self._log('ERR', 'invalid IEs for network-initiated procedure %s' % Proc.Name)
             Proc.abort()
             return False, Proc
@@ -996,7 +996,7 @@ class UEIuPSd(UEIuSigStack):
         if isinstance(cause, integer_types):
             try:
                 IEs['PagingCause'] = RANAP.RANAP_IEs.PagingCause._cont_rev[cause]
-            except:
+            except Exception:
                 pass
         elif isinstance(cause, str_types):
             IEs['PagingCause'] = cause
@@ -1015,7 +1015,7 @@ class UEIuPSd(UEIuSigStack):
         rai = (self.UE.PLMN, self.UE.LAC, self.UE.RAC)
         try:
             rncs = [self.Server.RAN[rncid] for rncid in self.Server.RAI[rai]]
-        except:
+        except Exception:
             self._log('ERR', 'paging: no RNC serving the UE RAI %s.%.4x.%.2x' % rai)
             return
         #
@@ -1039,7 +1039,7 @@ class UEIuPSd(UEIuSigStack):
         rai = (self.UE.PLMN, self.UE.LAC, self.UE.RAC)
         try:
             rncs = [self.Server.RAN[rncid] for rncid in self.Server.RAI[rai]]
-        except:
+        except Exception:
             self._log('ERR', 'paging: no RNC serving the UE RAI %s.%.4x.%.2x' % rai)
             return False
         #

@@ -118,6 +118,7 @@ maxNrOfLAIs							INTEGER ::= 8
 maxSizeOfIMSInfo					INTEGER ::= 32
 maxnoofMDTPLMNs						INTEGER ::= 16
 maxAddPosSet						INTEGER ::= 8
+maxnoofPLMNs						INTEGER ::= 16
 
 -- **************************************************************
 --
@@ -408,5 +409,11 @@ id-P-TMSI												INTEGER ::= 287
 id-RANAP-Message										INTEGER ::= 288
 id-PowerSavingIndicator									INTEGER ::= 289
 id-UE-Usage-Type										INTEGER ::= 290
+id-DCN-ID												INTEGER ::= 291
+id-UE-Application-Layer-Measurement-Configuration		INTEGER ::= 292
+id-UE-Application-Layer-Measurement-Configuration-For-Relocation				INTEGER ::= 293
+id-UE-Application-Layer-Measurement-Capability			INTEGER ::= 294
+id-UeApplicationLayerMeasurementSupportIndication		INTEGER ::= 295
+id-SRVCCSource											INTEGER ::= 296
 
 END

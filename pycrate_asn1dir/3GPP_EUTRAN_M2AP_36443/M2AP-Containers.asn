@@ -5,10 +5,10 @@
 -- **************************************************************
 
 M2AP-Containers {
-itu-t (0) identified-organization (4) etsi (0) mobileDomain (0) 
+itu-t (0) identified-organization (4) etsi (0) mobileDomain (0)
 eps-Access (21) modules (3) m2ap (4) version1 (1) m2ap-Containers (5)  }
 
-DEFINITIONS AUTOMATIC TAGS ::= 
+DEFINITIONS AUTOMATIC TAGS ::=
 
 BEGIN
 
@@ -25,12 +25,12 @@ IMPORTS
 	Criticality,
 	Presence,
 	PrivateIE-ID,
-	ProtocolIE-ID	
+	ProtocolIE-ID
 FROM M2AP-CommonDataTypes;
 
 -- **************************************************************
 --
--- Class Definition for Protocol IEs
+-- Class Definition for Protocol Ies
 --
 -- **************************************************************
 
@@ -49,7 +49,7 @@ WITH SYNTAX {
 
 -- **************************************************************
 --
--- Class Definition for Protocol IEs
+-- Class Definition for Protocol Ies
 --
 -- **************************************************************
 
@@ -91,7 +91,7 @@ WITH SYNTAX {
 
 -- **************************************************************
 --
--- Class Definition for Private IEs
+-- Class Definition for Private Ies
 --
 -- **************************************************************
 
@@ -110,21 +110,21 @@ WITH SYNTAX {
 
 -- **************************************************************
 --
--- Container for Protocol IEs
+-- Container for Protocol Ies
 --
 -- **************************************************************
 
-ProtocolIE-Container {M2AP-PROTOCOL-IES : IEsSetParam} ::= 
+ProtocolIE-Container {M2AP-PROTOCOL-IES : IesSetParam} ::=
 	SEQUENCE (SIZE (0..maxProtocolIEs)) OF
-	ProtocolIE-Field {{IEsSetParam}}
+	ProtocolIE-Field {{IesSetParam}}
 
-ProtocolIE-Single-Container {M2AP-PROTOCOL-IES : IEsSetParam} ::= 
-	ProtocolIE-Field {{IEsSetParam}}
+ProtocolIE-Single-Container {M2AP-PROTOCOL-IES : IesSetParam} ::=
+	ProtocolIE-Field {{IesSetParam}}
 
-ProtocolIE-Field {M2AP-PROTOCOL-IES : IEsSetParam} ::= SEQUENCE {
-	id				M2AP-PROTOCOL-IES.&id					({IEsSetParam}),
-	criticality		M2AP-PROTOCOL-IES.&criticality			({IEsSetParam}{@id}),
-	value			M2AP-PROTOCOL-IES.&Value				({IEsSetParam}{@id})
+ProtocolIE-Field {M2AP-PROTOCOL-IES : IesSetParam} ::= SEQUENCE {
+	id				M2AP-PROTOCOL-IES.&id					({IesSetParam}),
+	criticality		M2AP-PROTOCOL-IES.&criticality			({IesSetParam}{@id}),
+	value			M2AP-PROTOCOL-IES.&Value				({IesSetParam}{@id})
 }
 
 -- **************************************************************
@@ -133,16 +133,16 @@ ProtocolIE-Field {M2AP-PROTOCOL-IES : IEsSetParam} ::= SEQUENCE {
 --
 -- **************************************************************
 
-ProtocolIE-ContainerPair {M2AP-PROTOCOL-IES-PAIR : IEsSetParam} ::= 
+ProtocolIE-ContainerPair {M2AP-PROTOCOL-IES-PAIR : IesSetParam} ::=
 	SEQUENCE (SIZE (0..maxProtocolIEs)) OF
-	ProtocolIE-FieldPair {{IEsSetParam}}
+	ProtocolIE-FieldPair {{IesSetParam}}
 
-ProtocolIE-FieldPair {M2AP-PROTOCOL-IES-PAIR : IEsSetParam} ::= SEQUENCE {
-	id					M2AP-PROTOCOL-IES-PAIR.&id					({IEsSetParam}),
-	firstCriticality	M2AP-PROTOCOL-IES-PAIR.&firstCriticality	({IEsSetParam}{@id}),
-	firstValue			M2AP-PROTOCOL-IES-PAIR.&FirstValue			({IEsSetParam}{@id}),
-	secondCriticality	M2AP-PROTOCOL-IES-PAIR.&secondCriticality	({IEsSetParam}{@id}),
-	secondValue			M2AP-PROTOCOL-IES-PAIR.&SecondValue			({IEsSetParam}{@id})
+ProtocolIE-FieldPair {M2AP-PROTOCOL-IES-PAIR : IesSetParam} ::= SEQUENCE {
+	id					M2AP-PROTOCOL-IES-PAIR.&id					({IesSetParam}),
+	firstCriticality	M2AP-PROTOCOL-IES-PAIR.&firstCriticality	({IesSetParam}{@id}),
+	firstValue			M2AP-PROTOCOL-IES-PAIR.&FirstValue			({IesSetParam}{@id}),
+	secondCriticality	M2AP-PROTOCOL-IES-PAIR.&secondCriticality	({IesSetParam}{@id}),
+	secondValue			M2AP-PROTOCOL-IES-PAIR.&SecondValue			({IesSetParam}{@id})
 }
 
 -- **************************************************************
@@ -151,13 +151,13 @@ ProtocolIE-FieldPair {M2AP-PROTOCOL-IES-PAIR : IEsSetParam} ::= SEQUENCE {
 --
 -- **************************************************************
 
-ProtocolIE-ContainerList {INTEGER : lowerBound, INTEGER : upperBound, M2AP-PROTOCOL-IES : IEsSetParam} ::=
+ProtocolIE-ContainerList {INTEGER : lowerBound, INTEGER : upperBound, M2AP-PROTOCOL-IES : IesSetParam} ::=
 	SEQUENCE (SIZE (lowerBound..upperBound)) OF
-	ProtocolIE-Container {{IEsSetParam}}
+	ProtocolIE-Container {{IesSetParam}}
 
-ProtocolIE-ContainerPairList {INTEGER : lowerBound, INTEGER : upperBound, M2AP-PROTOCOL-IES-PAIR : IEsSetParam} ::=
+ProtocolIE-ContainerPairList {INTEGER : lowerBound, INTEGER : upperBound, M2AP-PROTOCOL-IES-PAIR : IesSetParam} ::=
 	SEQUENCE (SIZE (lowerBound..upperBound)) OF
-	ProtocolIE-ContainerPair {{IEsSetParam}}
+	ProtocolIE-ContainerPair {{IesSetParam}}
 
 -- **************************************************************
 --
@@ -165,7 +165,7 @@ ProtocolIE-ContainerPairList {INTEGER : lowerBound, INTEGER : upperBound, M2AP-P
 --
 -- **************************************************************
 
-ProtocolExtensionContainer {M2AP-PROTOCOL-EXTENSION : ExtensionSetParam} ::= 
+ProtocolExtensionContainer {M2AP-PROTOCOL-EXTENSION : ExtensionSetParam} ::=
 	SEQUENCE (SIZE (1..maxProtocolExtensions)) OF
 	ProtocolExtensionField {{ExtensionSetParam}}
 
@@ -177,18 +177,18 @@ ProtocolExtensionField {M2AP-PROTOCOL-EXTENSION : ExtensionSetParam} ::= SEQUENC
 
 -- **************************************************************
 --
--- Container for Private IEs
+-- Container for Private Ies
 --
 -- **************************************************************
 
-PrivateIE-Container {M2AP-PRIVATE-IES : IEsSetParam} ::= 
+PrivateIE-Container {M2AP-PRIVATE-IES : IesSetParam} ::=
 	SEQUENCE (SIZE (1..maxPrivateIEs)) OF
-	PrivateIE-Field {{IEsSetParam}}
+	PrivateIE-Field {{IesSetParam}}
 
-PrivateIE-Field {M2AP-PRIVATE-IES : IEsSetParam} ::= SEQUENCE {
-	id				M2AP-PRIVATE-IES.&id			({IEsSetParam}),
-	criticality		M2AP-PRIVATE-IES.&criticality	({IEsSetParam}{@id}),
-	value			M2AP-PRIVATE-IES.&Value			({IEsSetParam}{@id})
+PrivateIE-Field {M2AP-PRIVATE-IES : IesSetParam} ::= SEQUENCE {
+	id				M2AP-PRIVATE-IES.&id			({IesSetParam}),
+	criticality		M2AP-PRIVATE-IES.&criticality	({IesSetParam}{@id}),
+	value			M2AP-PRIVATE-IES.&Value			({IesSetParam}{@id})
 }
 
 END

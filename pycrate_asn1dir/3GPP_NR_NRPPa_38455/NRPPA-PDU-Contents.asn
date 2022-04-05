@@ -1,0 +1,746 @@
+-- ASN1START
+-- **************************************************************
+--
+-- PDU definitions for NRPPa
+--
+-- **************************************************************
+
+NRPPA-PDU-Contents {
+itu-t (0) identified-organization (4) etsi (0) mobileDomain (0)
+ngran-access (22) modules (3) nrppa (4) version1 (1) nrppa-PDU-Contents (1) }
+
+DEFINITIONS AUTOMATIC TAGS ::=
+
+BEGIN
+
+-- **************************************************************
+--
+-- IE parameter types from other modules
+--
+-- **************************************************************
+
+IMPORTS
+
+	Cause,
+	CriticalityDiagnostics,
+	E-CID-MeasurementResult,
+	OTDOACells,
+	OTDOA-Information-Item,
+	Measurement-ID,
+	UE-Measurement-ID,
+	MeasurementPeriodicity,
+	MeasurementQuantities,
+	ReportCharacteristics,
+	RequestedSRSTransmissionCharacteristics,
+	Cell-Portion-ID,
+	OtherRATMeasurementQuantities,
+	OtherRATMeasurementResult,
+	WLANMeasurementQuantities,
+	WLANMeasurementResult,
+	Assistance-Information,
+	Broadcast,
+	AssistanceInformationFailureList,
+	SRSConfiguration,
+	TRPMeasurementQuantities,
+	TrpMeasurementResult,
+	TRP-ID,
+	TRPInformationTypeListTRPReq,
+	TRPInformationListTRPResp,
+	TRP-MeasurementRequestList,
+	TRP-MeasurementResponseList,
+	MeasurementBeamInfoRequest,
+	PositioningBroadcastCells,
+	SRSResourceSetID,
+	SpatialRelationInfo,
+	SRSResourceTrigger,
+	TRPList,
+	AbortTransmission,
+	SystemFrameNumber,
+	SlotNumber,
+	RelativeTime1900
+
+
+FROM NRPPA-IEs
+
+	PrivateIE-Container{},
+	ProtocolExtensionContainer{},
+	ProtocolIE-Container{},
+	ProtocolIE-ContainerList{},
+	ProtocolIE-Single-Container{},
+	NRPPA-PRIVATE-IES,
+	NRPPA-PROTOCOL-EXTENSION,
+	NRPPA-PROTOCOL-IES
+FROM NRPPA-Containers
+
+
+	maxnoOTDOAtypes,
+	id-Cause,
+	id-CriticalityDiagnostics,
+	id-LMF-Measurement-ID,
+	id-LMF-UE-Measurement-ID,
+	id-OTDOACells,
+	id-OTDOA-Information-Type-Group,
+	id-OTDOA-Information-Type-Item,
+	id-ReportCharacteristics,
+	id-MeasurementPeriodicity,
+	id-MeasurementQuantities,
+	id-RAN-Measurement-ID,
+	id-RAN-UE-Measurement-ID,
+	id-E-CID-MeasurementResult,
+	id-RequestedSRSTransmissionCharacteristics,
+	id-Cell-Portion-ID,
+	id-OtherRATMeasurementQuantities,
+	id-OtherRATMeasurementResult,
+	id-WLANMeasurementQuantities,
+	id-WLANMeasurementResult,
+	id-Assistance-Information,
+	id-Broadcast,
+	id-AssistanceInformationFailureList,
+	id-SRSConfiguration,
+	id-TRPMeasurementQuantities,
+	id-MeasurementResult,
+	id-TRP-ID,
+	id-TRPInformationTypeListTRPReq,
+	id-TRPInformationListTRPResp,
+	id-TRP-MeasurementRequestList,
+	id-TRP-MeasurementResponseList,
+	id-TRP-MeasurementReportList,
+	id-MeasurementBeamInfoRequest,
+	id-PositioningBroadcastCells,
+	id-SRSType,
+	id-ActivationTime,
+	id-SRSResourceSetID,
+	id-TRPList,
+	id-SRSSpatialRelation,
+	id-AbortTransmission,
+	id-SystemFrameNumber,
+	id-SlotNumber,
+	id-SRSResourceTrigger,
+	id-SFNInitialisationTime
+
+
+
+FROM NRPPA-Constants;
+
+-- **************************************************************
+--
+-- E-CID MEASUREMENT INITIATION REQUEST
+--
+-- **************************************************************
+
+E-CIDMeasurementInitiationRequest ::= SEQUENCE {
+	protocolIEs		ProtocolIE-Container	{{E-CIDMeasurementInitiationRequest-IEs}},
+	...
+}
+
+E-CIDMeasurementInitiationRequest-IEs NRPPA-PROTOCOL-IES ::= {
+	{ ID id-LMF-UE-Measurement-ID			CRITICALITY reject	TYPE UE-Measurement-ID						PRESENCE mandatory}|
+	{ ID id-ReportCharacteristics			CRITICALITY reject	TYPE ReportCharacteristics				PRESENCE mandatory}|
+	{ ID id-MeasurementPeriodicity			CRITICALITY reject	TYPE MeasurementPeriodicity				PRESENCE conditional}|
+-- The IE shall be present if the Report Characteritics IE is set to “periodic” --
+	{ ID id-MeasurementQuantities			CRITICALITY reject	TYPE MeasurementQuantities				PRESENCE mandatory}|
+	{ ID id-OtherRATMeasurementQuantities	CRITICALITY ignore	TYPE OtherRATMeasurementQuantities		PRESENCE optional}|
+	{ ID id-WLANMeasurementQuantities		CRITICALITY ignore	TYPE WLANMeasurementQuantities			PRESENCE optional},
+	...
+}
+
+-- **************************************************************
+--
+-- E-CID MEASUREMENT INITIATION RESPONSE
+--
+-- **************************************************************
+
+E-CIDMeasurementInitiationResponse ::= SEQUENCE {
+	protocolIEs		ProtocolIE-Container	{{E-CIDMeasurementInitiationResponse-IEs}},
+	...
+}
+
+E-CIDMeasurementInitiationResponse-IEs NRPPA-PROTOCOL-IES ::= {
+	{ ID id-LMF-UE-Measurement-ID		CRITICALITY reject	TYPE UE-Measurement-ID					PRESENCE mandatory}|
+	{ ID id-RAN-UE-Measurement-ID		CRITICALITY reject	TYPE UE-Measurement-ID					PRESENCE mandatory}|
+	{ ID id-E-CID-MeasurementResult		CRITICALITY ignore	TYPE E-CID-MeasurementResult			PRESENCE optional}|
+	{ ID id-CriticalityDiagnostics		CRITICALITY ignore	TYPE CriticalityDiagnostics			PRESENCE optional}|
+	{ ID id-Cell-Portion-ID				CRITICALITY ignore	TYPE Cell-Portion-ID					PRESENCE optional}|
+	{ ID id-OtherRATMeasurementResult	CRITICALITY ignore	TYPE OtherRATMeasurementResult		PRESENCE optional}|
+	{ ID id-WLANMeasurementResult		CRITICALITY ignore	TYPE WLANMeasurementResult			PRESENCE optional},
+	...
+}
+
+-- **************************************************************
+--
+-- E-CID MEASUREMENT INITIATION FAILURE
+--
+-- **************************************************************
+
+E-CIDMeasurementInitiationFailure ::= SEQUENCE {
+	protocolIEs						ProtocolIE-Container		{{E-CIDMeasurementInitiationFailure-IEs}},
+	...
+}
+
+
+E-CIDMeasurementInitiationFailure-IEs NRPPA-PROTOCOL-IES ::= {
+	{ ID id-LMF-UE-Measurement-ID		CRITICALITY reject	TYPE UE-Measurement-ID				PRESENCE mandatory}|
+	{ ID id-Cause							CRITICALITY ignore	TYPE Cause							PRESENCE mandatory}|
+	{ ID id-CriticalityDiagnostics		CRITICALITY ignore	TYPE CriticalityDiagnostics		PRESENCE optional},
+	...
+}
+
+-- **************************************************************
+--
+-- E-CID MEASUREMENT FAILURE INDICATION
+--
+-- **************************************************************
+
+E-CIDMeasurementFailureIndication ::= SEQUENCE {
+	protocolIEs						ProtocolIE-Container		{{E-CIDMeasurementFailureIndication-IEs}},
+	...
+}
+
+
+E-CIDMeasurementFailureIndication-IEs NRPPA-PROTOCOL-IES ::= {
+	{ ID id-LMF-UE-Measurement-ID		CRITICALITY reject	TYPE UE-Measurement-ID				PRESENCE mandatory}|
+	{ ID id-RAN-UE-Measurement-ID		CRITICALITY reject	TYPE UE-Measurement-ID				PRESENCE mandatory}|
+	{ ID id-Cause							CRITICALITY ignore	TYPE Cause							PRESENCE mandatory},
+	...
+}
+
+-- **************************************************************
+--
+-- E-CID MEASUREMENT REPORT
+--
+-- **************************************************************
+
+E-CIDMeasurementReport ::= SEQUENCE {
+	protocolIEs						ProtocolIE-Container		{{E-CIDMeasurementReport-IEs}},
+	...
+}
+
+
+E-CIDMeasurementReport-IEs NRPPA-PROTOCOL-IES ::= {
+	{ ID id-LMF-UE-Measurement-ID		CRITICALITY reject	TYPE UE-Measurement-ID				PRESENCE mandatory}|
+	{ ID id-RAN-UE-Measurement-ID		CRITICALITY reject	TYPE UE-Measurement-ID				PRESENCE mandatory}|
+	{ ID id-E-CID-MeasurementResult		CRITICALITY ignore	TYPE E-CID-MeasurementResult		PRESENCE mandatory}|
+	{ ID id-Cell-Portion-ID				CRITICALITY ignore	TYPE Cell-Portion-ID				PRESENCE optional},
+	...
+}
+
+-- **************************************************************
+--
+-- E-CID MEASUREMENT TERMINATION
+--
+-- **************************************************************
+
+E-CIDMeasurementTerminationCommand ::= SEQUENCE {
+	protocolIEs						ProtocolIE-Container		{{E-CIDMeasurementTerminationCommand-IEs}},
+	...
+}
+
+
+E-CIDMeasurementTerminationCommand-IEs NRPPA-PROTOCOL-IES ::= {
+	{ ID id-LMF-UE-Measurement-ID		CRITICALITY reject	TYPE UE-Measurement-ID				PRESENCE mandatory}|
+	{ ID id-RAN-UE-Measurement-ID		CRITICALITY reject	TYPE UE-Measurement-ID				PRESENCE mandatory},
+	...
+}
+
+-- **************************************************************
+--
+-- OTDOA INFORMATION REQUEST
+--
+-- **************************************************************
+
+OTDOAInformationRequest ::= SEQUENCE {
+	protocolIEs		ProtocolIE-Container	{{OTDOAInformationRequest-IEs}},
+	...
+}
+
+OTDOAInformationRequest-IEs NRPPA-PROTOCOL-IES ::= {
+	{ ID id-OTDOA-Information-Type-Group		CRITICALITY reject	TYPE OTDOA-Information-Type			PRESENCE mandatory},
+	...
+}
+
+OTDOA-Information-Type ::= SEQUENCE (SIZE(1..maxnoOTDOAtypes)) OF ProtocolIE-Single-Container { { OTDOA-Information-TypeIEs} }
+
+OTDOA-Information-TypeIEs	NRPPA-PROTOCOL-IES ::= {
+	{ ID id-OTDOA-Information-Type-Item		CRITICALITY reject	TYPE OTDOA-Information-Type-Item	PRESENCE mandatory},
+	...
+}
+
+OTDOA-Information-Type-Item ::= SEQUENCE {
+	oTDOA-Information-Type-Item		OTDOA-Information-Item,
+	iE-Extensions					ProtocolExtensionContainer { { OTDOA-Information-Type-ItemExtIEs} } OPTIONAL,
+	...
+}
+
+OTDOA-Information-Type-ItemExtIEs NRPPA-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+-- **************************************************************
+--
+-- OTDOA INFORMATION RESPONSE
+--
+-- **************************************************************
+
+OTDOAInformationResponse ::= SEQUENCE {
+	protocolIEs		ProtocolIE-Container	{{OTDOAInformationResponse-IEs}},
+	...
+}
+
+OTDOAInformationResponse-IEs NRPPA-PROTOCOL-IES ::= {
+	{ ID id-OTDOACells						CRITICALITY ignore	TYPE OTDOACells					PRESENCE mandatory}|
+	{ ID id-CriticalityDiagnostics			CRITICALITY ignore	TYPE CriticalityDiagnostics		PRESENCE optional},
+	...
+}
+
+-- **************************************************************
+--
+-- OTDOA INFORMATION FAILURE
+--
+-- **************************************************************
+
+OTDOAInformationFailure ::= SEQUENCE {
+	protocolIEs						ProtocolIE-Container		{{OTDOAInformationFailure-IEs}},
+	...
+}
+
+
+OTDOAInformationFailure-IEs NRPPA-PROTOCOL-IES ::= {
+	{ ID id-Cause							CRITICALITY ignore	TYPE Cause						PRESENCE mandatory}|
+	{ ID id-CriticalityDiagnostics			CRITICALITY ignore	TYPE CriticalityDiagnostics		PRESENCE optional},
+	...
+}
+
+-- **************************************************************
+--
+-- ASSISTANCE INFORMATION CONTROL
+--
+-- **************************************************************
+
+AssistanceInformationControl ::= SEQUENCE {
+	protocolIEs		ProtocolIE-Container	{{AssistanceInformationControl-IEs}},
+	...
+}
+
+AssistanceInformationControl-IEs NRPPA-PROTOCOL-IES ::= {
+	{ ID id-Assistance-Information	CRITICALITY reject	TYPE Assistance-Information		PRESENCE optional}|
+	{ ID id-Broadcast				CRITICALITY reject	TYPE Broadcast					PRESENCE optional}|
+	{ ID id-PositioningBroadcastCells				CRITICALITY reject	TYPE PositioningBroadcastCells					PRESENCE optional},
+	...
+}
+
+-- **************************************************************
+--
+-- ASSISTANCE INFORMATION FEEDBACK
+--
+-- **************************************************************
+
+AssistanceInformationFeedback ::= SEQUENCE {
+	protocolIEs		ProtocolIE-Container	{{AssistanceInformationFeedback-IEs}},
+	...
+}
+
+AssistanceInformationFeedback-IEs NRPPA-PROTOCOL-IES ::= {
+	{ ID id-AssistanceInformationFailureList	CRITICALITY reject	TYPE AssistanceInformationFailureList	PRESENCE optional}|
+	{ ID id-PositioningBroadcastCells				CRITICALITY reject	TYPE PositioningBroadcastCells					PRESENCE optional}|
+	{ ID id-CriticalityDiagnostics				CRITICALITY ignore	TYPE CriticalityDiagnostics					PRESENCE optional},
+	...
+}
+
+
+-- **************************************************************
+--
+-- ERROR INDICATION
+--
+-- **************************************************************
+
+ErrorIndication ::= SEQUENCE {
+	protocolIEs		ProtocolIE-Container	{{ErrorIndication-IEs}},
+	...
+}
+
+ErrorIndication-IEs NRPPA-PROTOCOL-IES ::= {
+
+	{ ID id-Cause							CRITICALITY ignore	TYPE Cause						PRESENCE optional}|
+	{ ID id-CriticalityDiagnostics		CRITICALITY ignore	TYPE CriticalityDiagnostics	PRESENCE optional},
+	...
+}
+
+-- **************************************************************
+--
+-- PRIVATE MESSAGE
+--
+-- **************************************************************
+
+PrivateMessage ::= SEQUENCE {
+	privateIEs		PrivateIE-Container	{{PrivateMessage-IEs}},
+	...
+}
+
+PrivateMessage-IEs NRPPA-PRIVATE-IES ::= {
+	...
+}
+
+-- **************************************************************
+--
+-- POSITIONING INFORMATION REQUEST
+--
+-- **************************************************************
+
+PositioningInformationRequest ::= SEQUENCE {
+	protocolIEs		ProtocolIE-Container	{{PositioningInformationRequest-IEs}},
+	...
+}
+
+PositioningInformationRequest-IEs NRPPA-PROTOCOL-IES ::= {
+	{ ID id-RequestedSRSTransmissionCharacteristics	CRITICALITY ignore	TYPE RequestedSRSTransmissionCharacteristics	PRESENCE optional},
+	...
+}
+
+-- **************************************************************
+--
+-- POSITIONING INFORMATION RESPONSE
+--
+-- **************************************************************
+
+PositioningInformationResponse ::= SEQUENCE {
+	protocolIEs		ProtocolIE-Container	{{PositioningInformationResponse-IEs}},
+	...
+}
+
+PositioningInformationResponse-IEs NRPPA-PROTOCOL-IES ::= {
+	{ ID id-SRSConfiguration			CRITICALITY ignore	TYPE SRSConfiguration			PRESENCE optional}|
+	{ ID id-SFNInitialisationTime		CRITICALITY ignore	TYPE RelativeTime1900		PRESENCE optional}|
+	{ ID id-CriticalityDiagnostics		CRITICALITY ignore	TYPE CriticalityDiagnostics		PRESENCE optional},
+	...
+}
+
+-- **************************************************************
+--
+-- POSITIONING INFORMATION FAILURE
+--
+-- **************************************************************
+
+PositioningInformationFailure ::= SEQUENCE {
+	protocolIEs						ProtocolIE-Container		{{PositioningInformationFailure-IEs}},
+	...
+}
+
+PositioningInformationFailure-IEs NRPPA-PROTOCOL-IES ::= {
+	{ ID id-Cause						CRITICALITY ignore	TYPE Cause						PRESENCE mandatory}|
+	{ ID id-CriticalityDiagnostics		CRITICALITY ignore	TYPE CriticalityDiagnostics		PRESENCE optional},
+	...
+}
+
+-- **************************************************************
+--
+-- POSITIONING INFORMATION UPDATE
+--
+-- **************************************************************
+
+PositioningInformationUpdate ::= SEQUENCE {
+	protocolIEs		ProtocolIE-Container	{{PositioningInformationUpdate-IEs}},
+	...
+}
+
+PositioningInformationUpdate-IEs NRPPA-PROTOCOL-IES ::= {
+	{ ID id-SRSConfiguration			CRITICALITY ignore	TYPE SRSConfiguration			PRESENCE optional}|
+	{ ID id-SFNInitialisationTime		CRITICALITY ignore	TYPE RelativeTime1900		PRESENCE optional},
+	...
+}
+
+-- **************************************************************
+--
+-- MEASUREMENT REQUEST
+--
+-- **************************************************************
+
+MeasurementRequest ::= SEQUENCE {
+	protocolIEs		ProtocolIE-Container	{{MeasurementRequest-IEs}},
+	...
+}
+
+MeasurementRequest-IEs NRPPA-PROTOCOL-IES ::= {
+	{ ID id-LMF-Measurement-ID			CRITICALITY reject	TYPE Measurement-ID				PRESENCE mandatory}|
+	{ ID id-TRP-MeasurementRequestList		CRITICALITY reject	TYPE TRP-MeasurementRequestList PRESENCE mandatory}|
+	{ ID id-ReportCharacteristics			CRITICALITY reject	TYPE ReportCharacteristics		PRESENCE mandatory}|
+	{ ID id-MeasurementPeriodicity			CRITICALITY reject	TYPE MeasurementPeriodicity		PRESENCE conditional}|
+-- The IE shall be present if the Report Characteritics IE is set to “periodic” –
+	{ ID id-TRPMeasurementQuantities			CRITICALITY reject	TYPE TRPMeasurementQuantities		PRESENCE mandatory}|
+	{ ID id-SFNInitialisationTime			CRITICALITY ignore	TYPE RelativeTime1900		PRESENCE optional}|
+	{ ID id-SRSConfiguration				CRITICALITY ignore	TYPE SRSConfiguration			PRESENCE optional}|
+	{ ID id-MeasurementBeamInfoRequest		CRITICALITY ignore	TYPE MeasurementBeamInfoRequest	PRESENCE optional}|
+	{ ID id-SystemFrameNumber				CRITICALITY ignore	TYPE SystemFrameNumber			PRESENCE optional}|
+	{ ID id-SlotNumber						CRITICALITY ignore	TYPE SlotNumber					PRESENCE optional},
+	...
+}
+
+-- **************************************************************
+--
+-- MEASUREMENT RESPONSE
+--
+-- **************************************************************
+
+MeasurementResponse ::= SEQUENCE {
+	protocolIEs		ProtocolIE-Container	{{MeasurementResponse-IEs}},
+	...
+}
+
+MeasurementResponse-IEs NRPPA-PROTOCOL-IES ::= {
+	{ ID id-LMF-Measurement-ID		CRITICALITY reject	TYPE Measurement-ID				PRESENCE mandatory}|
+	{ ID id-RAN-Measurement-ID		CRITICALITY reject	TYPE Measurement-ID				PRESENCE mandatory}|
+	{ ID id-TRP-MeasurementResponseList	CRITICALITY reject	TYPE TRP-MeasurementResponseList PRESENCE optional}|
+	{ ID id-CriticalityDiagnostics		CRITICALITY ignore	TYPE CriticalityDiagnostics		PRESENCE optional},
+	...
+}
+
+-- **************************************************************
+--
+-- MEASUREMENT FAILURE
+--
+-- **************************************************************
+
+MeasurementFailure ::= SEQUENCE {
+	protocolIEs						ProtocolIE-Container		{{MeasurementFailure-IEs}},
+	...
+}
+
+MeasurementFailure-IEs NRPPA-PROTOCOL-IES ::= {
+	{ ID id-LMF-Measurement-ID		CRITICALITY reject	TYPE Measurement-ID				PRESENCE mandatory}|
+	{ ID id-Cause						CRITICALITY ignore	TYPE Cause						PRESENCE mandatory}|
+	{ ID id-CriticalityDiagnostics		CRITICALITY ignore	TYPE CriticalityDiagnostics		PRESENCE optional},
+	...
+}
+
+-- **************************************************************
+--
+-- MEASUREMENT REPORT
+--
+-- **************************************************************
+
+MeasurementReport ::= SEQUENCE {
+	protocolIEs		ProtocolIE-Container	{{MeasurementReport-IEs}},
+	...
+}
+
+MeasurementReport-IEs NRPPA-PROTOCOL-IES ::= {
+	{ ID id-LMF-Measurement-ID		CRITICALITY reject	TYPE Measurement-ID				PRESENCE mandatory}|
+	{ ID id-RAN-Measurement-ID		CRITICALITY reject	TYPE Measurement-ID				PRESENCE mandatory}|
+	{ ID id-TRP-MeasurementReportList			CRITICALITY reject	TYPE TRP-MeasurementResponseList PRESENCE mandatory},
+
+	...
+}
+
+-- **************************************************************
+--
+-- MEASUREMENT UPDATE
+--
+-- **************************************************************
+
+MeasurementUpdate ::= SEQUENCE {
+	protocolIEs		ProtocolIE-Container	{{MeasurementUpdate-IEs}},
+	...
+}
+
+MeasurementUpdate-IEs NRPPA-PROTOCOL-IES ::= {
+	{ ID id-LMF-Measurement-ID		CRITICALITY reject	TYPE Measurement-ID				PRESENCE mandatory}|
+	{ ID id-RAN-Measurement-ID		CRITICALITY reject	TYPE Measurement-ID				PRESENCE mandatory}|
+	{ ID id-SRSConfiguration		CRITICALITY ignore	TYPE SRSConfiguration			PRESENCE optional},
+	...
+}
+
+-- **************************************************************
+--
+-- MEASUREMENT ABORT
+--
+-- **************************************************************
+
+MeasurementAbort ::= SEQUENCE {
+	protocolIEs		ProtocolIE-Container	{{MeasurementAbort-IEs}},
+	...
+}
+
+MeasurementAbort-IEs NRPPA-PROTOCOL-IES ::= {
+	{ ID id-LMF-Measurement-ID		CRITICALITY reject	TYPE Measurement-ID				PRESENCE mandatory}|
+	{ ID id-RAN-Measurement-ID		CRITICALITY reject	TYPE Measurement-ID				PRESENCE mandatory},
+
+	...
+}
+
+-- **************************************************************
+--
+-- MEASUREMENT FAILURE INDICATION
+--
+-- **************************************************************
+
+MeasurementFailureIndication ::= SEQUENCE {
+	protocolIEs						ProtocolIE-Container		{{MeasurementFailureIndication-IEs}},
+	...
+}
+
+MeasurementFailureIndication-IEs NRPPA-PROTOCOL-IES ::= {
+	{ ID id-LMF-Measurement-ID		CRITICALITY reject	TYPE Measurement-ID				PRESENCE mandatory}|
+	{ ID id-RAN-Measurement-ID		CRITICALITY reject	TYPE Measurement-ID				PRESENCE mandatory}|
+	{ ID id-Cause					CRITICALITY ignore	TYPE Cause						PRESENCE mandatory},
+	...
+}
+
+-- **************************************************************
+--
+-- TRP INFORMATION REQUEST
+--
+-- **************************************************************
+
+TRPInformationRequest ::= SEQUENCE {
+	protocolIEs		ProtocolIE-Container	{{TRPInformationRequest-IEs}},
+	...
+}
+
+TRPInformationRequest-IEs NRPPA-PROTOCOL-IES ::= {
+	{ ID id-TRPList							CRITICALITY ignore	TYPE TRPList				PRESENCE optional}|
+	{ ID id-TRPInformationTypeListTRPReq	CRITICALITY reject	TYPE TRPInformationTypeListTRPReq	PRESENCE mandatory},
+	...
+}
+
+-- **************************************************************
+--
+-- TRP INFORMATION RESPONSE
+--
+-- **************************************************************
+
+TRPInformationResponse ::= SEQUENCE {
+	protocolIEs		ProtocolIE-Container	{{TRPInformationResponse-IEs}},
+	...
+}
+
+TRPInformationResponse-IEs NRPPA-PROTOCOL-IES ::= {
+	{ ID id-TRPInformationListTRPResp				CRITICALITY ignore	TYPE TRPInformationListTRPResp			PRESENCE mandatory}|
+	{ ID id-CriticalityDiagnostics			CRITICALITY ignore	TYPE CriticalityDiagnostics		PRESENCE optional},
+	...
+}
+
+-- **************************************************************
+--
+-- TRP INFORMATION FAILURE
+--
+-- **************************************************************
+
+TRPInformationFailure ::= SEQUENCE {
+	protocolIEs						ProtocolIE-Container		{{TRPInformationFailure-IEs}},
+	...
+}
+
+TRPInformationFailure-IEs NRPPA-PROTOCOL-IES ::= {
+	{ ID id-Cause						CRITICALITY ignore	TYPE Cause						PRESENCE mandatory}|
+	{ ID id-CriticalityDiagnostics		CRITICALITY ignore	TYPE CriticalityDiagnostics		PRESENCE optional},
+	...
+}
+
+
+
+-- **************************************************************
+--
+-- POSITIONING ACTIVATION REQUEST
+--
+-- **************************************************************
+
+PositioningActivationRequest ::= SEQUENCE {
+	protocolIEs			ProtocolIE-Container       { { PositioningActivationRequestIEs} },
+	...
+}
+
+PositioningActivationRequestIEs NRPPA-PROTOCOL-IES ::= {
+	{ ID id-SRSType					CRITICALITY reject	TYPE SRSType					PRESENCE mandatory	} |
+	{ ID id-ActivationTime			CRITICALITY ignore	TYPE RelativeTime1900				PRESENCE optional	},
+	...
+}
+
+SRSType ::= CHOICE {
+	semipersistentSRS				SemipersistentSRS,
+	aperiodicSRS					AperiodicSRS,
+	sRSType-extension				ProtocolIE-Single-Container { { SRSType-ExtIEs} }
+}
+
+SRSType-ExtIEs NRPPA-PROTOCOL-IES ::= {
+	...
+}
+
+SemipersistentSRS ::= SEQUENCE {
+	sRSResourceSetID			SRSResourceSetID,
+	iE-Extensions				ProtocolExtensionContainer { {SemipersistentSRS-ExtIEs} } OPTIONAL,
+	...
+}
+
+SemipersistentSRS-ExtIEs NRPPA-PROTOCOL-EXTENSION ::= {
+{ ID id-SRSSpatialRelation	CRITICALITY ignore	EXTENSION SpatialRelationInfo PRESENCE optional},
+...
+}
+
+AperiodicSRS ::= SEQUENCE {
+	aperiodic					ENUMERATED{true,...},
+	sRSResourceTrigger			SRSResourceTrigger OPTIONAL,
+	iE-Extensions				ProtocolExtensionContainer { {AperiodicSRS-ExtIEs} } OPTIONAL,
+	...
+}
+
+AperiodicSRS-ExtIEs NRPPA-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+
+-- **************************************************************
+--
+-- POSITIONING ACTIVATION RESPONSE
+--
+-- **************************************************************
+
+PositioningActivationResponse ::= SEQUENCE {
+	protocolIEs			ProtocolIE-Container       { { PositioningActivationResponseIEs} },
+	...
+}
+
+
+PositioningActivationResponseIEs NRPPA-PROTOCOL-IES ::= {
+	{ ID id-CriticalityDiagnostics		CRITICALITY ignore	TYPE CriticalityDiagnostics		PRESENCE optional }|
+	{ ID id-SystemFrameNumber			CRITICALITY ignore	TYPE SystemFrameNumber			PRESENCE optional }|
+	{ ID id-SlotNumber					CRITICALITY ignore	TYPE SlotNumber					PRESENCE optional },
+	...
+}
+
+
+
+-- **************************************************************
+--
+-- POSITIONING ACTIVATION FAILURE
+--
+-- **************************************************************
+
+PositioningActivationFailure ::= SEQUENCE {
+	protocolIEs			ProtocolIE-Container       { { PositioningActivationFailureIEs} },
+	...
+}
+
+PositioningActivationFailureIEs NRPPA-PROTOCOL-IES ::= {
+	{ ID id-Cause						CRITICALITY ignore	TYPE Cause						PRESENCE mandatory	}|
+	{ ID id-CriticalityDiagnostics		CRITICALITY ignore	TYPE CriticalityDiagnostics		PRESENCE optional },
+	...
+}
+
+
+-- **************************************************************
+--
+-- POSITIONING DEACTIVATION
+--
+-- **************************************************************
+
+PositioningDeactivation ::= SEQUENCE {
+	protocolIEs			ProtocolIE-Container       { { PositioningDeactivationIEs} },
+	...
+}
+
+PositioningDeactivationIEs NRPPA-PROTOCOL-IES ::= {
+	{ ID id-AbortTransmission			CRITICALITY ignore	TYPE AbortTransmission		PRESENCE mandatory	} ,
+	...
+}
+
+
+END

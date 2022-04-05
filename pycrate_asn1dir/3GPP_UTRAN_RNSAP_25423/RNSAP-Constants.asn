@@ -5,10 +5,10 @@
 -- **************************************************************
 
 RNSAP-Constants {
-itu-t (0) identified-organization (4) etsi (0) mobileDomain (0) 
+itu-t (0) identified-organization (4) etsi (0) mobileDomain (0)
 umts-Access (20) modules (3) rnsap (1) version1 (1) rnsap-Constants (4) }
 
-DEFINITIONS AUTOMATIC TAGS ::= 
+DEFINITIONS AUTOMATIC TAGS ::=
 
 BEGIN
 
@@ -1045,6 +1045,7 @@ id-Downlink-TPC-enhancements-Reconf											ProtocolIE-ID ::= 984
 id-TPC-slot-position														ProtocolIE-ID ::= 985
 id-DL-TBS																	ProtocolIE-ID ::= 986
 id-Selected-PLMN-Identity													ProtocolIE-ID ::= 987
+id-Dual-Cell-EDCH-Enhancements-Information									ProtocolIE-ID ::= 988
 id-SpeechVersion															ProtocolIE-ID ::= 2048
 id-SourceID																	ProtocolIE-ID ::= 2049
 id-TargetID																	ProtocolIE-ID ::= 2050
@@ -1062,4 +1063,5 @@ id-GsmCellList-CM-Rqst														ProtocolIE-ID ::= 2061
 id-GsmCellList-CM-Rsp														ProtocolIE-ID ::= 2062
 id-LoadValue																ProtocolIE-ID ::= 2063
 id-EventH																	ProtocolIE-ID ::= 2064
+
 END

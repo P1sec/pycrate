@@ -1,3 +1,4 @@
+-- ASN1START
 -- **************************************************************
 --
 -- Constant definitions
@@ -5,10 +6,10 @@
 -- **************************************************************
 
 LPPA-Constants {
-itu-t (0) identified-organization (4) etsi (0) mobileDomain (0) 
+itu-t (0) identified-organization (4) etsi (0) mobileDomain (0)
 eps-Access (21) modules (3) lppa (6) version1 (1) lppa-Constants (4) }
 
-DEFINITIONS AUTOMATIC TAGS ::= 
+DEFINITIONS AUTOMATIC TAGS ::=
 
 BEGIN
 
@@ -32,6 +33,8 @@ id-e-CIDMeasurementTermination									ProcedureCode ::= 5
 id-oTDOAInformationExchange										ProcedureCode ::= 6
 id-uTDOAInformationExchange										ProcedureCode ::= 7
 id-uTDOAInformationUpdate										ProcedureCode ::= 8
+id-assistanceInformationControl									ProcedureCode ::= 9
+id-assistanceInformationFeedback								ProcedureCode ::= 10
 
 -- **************************************************************
 --
@@ -47,6 +50,16 @@ maxnoOTDOAtypes								INTEGER ::= 63
 maxServCell									INTEGER ::= 5
 maxGERANMeas								INTEGER ::= 8
 maxUTRANMeas								INTEGER ::= 8
+maxCellineNB-ext							INTEGER ::= 3840
+maxMBSFN-Allocations						INTEGER ::= 8
+maxWLANchannels								INTEGER ::= 16
+maxnoFreqHoppingBandsMinusOne				INTEGER ::= 7
+maxNrOfPosSImessage							INTEGER ::= 32
+maxnoAssistInfoFailureListItems				INTEGER ::= 32
+maxNrOfSegments								INTEGER ::= 64
+maxNrOfPosSIBs								INTEGER ::= 32
+maxNRmeas									INTEGER ::= 32
+maxResultsPerSSBIndex						INTEGER	::=	64
 
 -- **************************************************************
 --
@@ -72,5 +85,15 @@ id-Cell-Portion-ID															ProtocolIE-ID ::= 14
 id-InterRATMeasurementQuantities											ProtocolIE-ID ::= 15
 id-InterRATMeasurementQuantities-Item										ProtocolIE-ID ::= 16
 id-InterRATMeasurementResult												ProtocolIE-ID ::= 17
+id-AddOTDOACells															ProtocolIE-ID ::= 18
+id-WLANMeasurementQuantities												ProtocolIE-ID ::= 19
+id-WLANMeasurementQuantities-Item											ProtocolIE-ID ::= 20
+id-WLANMeasurementResult													ProtocolIE-ID ::= 21
+id-Assistance-Information													ProtocolIE-ID ::= 22
+id-Broadcast																ProtocolIE-ID ::= 23
+id-AssistanceInformationFailureList											ProtocolIE-ID ::= 24
+id-ResultsPerSSB-Index-List													ProtocolIE-ID ::= 25
+id-ResultsPerSSB-Index-Item													ProtocolIE-ID ::= 26
+id-NR-CGI																	ProtocolIE-ID ::= 27
 
 END

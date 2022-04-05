@@ -1,7 +1,7 @@
 # -*- coding: UTF-8 -*-
 #/**
 # * Software Name : pycrate
-# * Version : 0.3
+# * Version : 0.4
 # *
 # * Copyright 2017. Benoit Michau. ANSSI.
 # *
@@ -31,17 +31,12 @@
 # ASN.1 runtime errors
 #------------------------------------------------------------------------------#
 
-try:
-    from pycrate_core.utils import PycrateErr
-except:
-    print('pycrate_core not found, ASN1Err will not inherit from PycrateErr')
-    # generic ASN.1 error
-    class ASN1Err(Exception):
-        pass
-else:
-    # generic ASN.1 error
-    class ASN1Err(PycrateErr):
-        pass
+from pycrate_core.utils import PycrateErr
+
+
+# generic ASN.1 error
+class ASN1Err(PycrateErr):
+    pass
 
 # error when manipulating an existing ASN1 object
 class ASN1ObjErr(ASN1Err):
@@ -85,3 +80,8 @@ class ASN1JERDecodeErr(ASN1CodecErr):
 #class ASN1GSERDecodeErr(ASN1CodecErr):
 #    pass
 
+class ASN1OERDecodeErr(ASN1CodecErr):
+    pass
+
+class ASN1OEREncodeErr(ASN1CodecErr):
+    pass

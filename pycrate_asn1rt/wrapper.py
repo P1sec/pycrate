@@ -1,7 +1,7 @@
 # -*- coding: UTF-8 -*-
 #/**
 # * Software Name : pycrate
-# * Version : 0.3
+# * Version : 0.4
 # *
 # * Copyright 2017. Benoit Michau. ANSSI.
 # *
@@ -27,7 +27,7 @@
 # *--------------------------------------------------------
 #*/
 
-from pycrate_core.utils import TYPE_BYTES
+from pycrate_core.utils import TYPE_BYTES, uint_to_hex, bytes_to_uint, bytes_to_bitstr
 from pycrate_core.elt   import Element
 from pycrate_core.elt   import _with_json
 

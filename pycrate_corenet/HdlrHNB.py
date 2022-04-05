@@ -1,7 +1,7 @@
 # -*- coding: UTF-8 -*-
 #/**
 # * Software Name : pycrate
-# * Version : 0.3
+# * Version : 0.4
 # *
 # * Copyright 2017. Benoit Michau. ANSSI.
 # *
@@ -143,7 +143,7 @@ class HNBd(SigStack):
             # HNB-initiated procedure, instantiate it
             try:
                 Proc = HNBAPProcHnbDispatcher[pdu_rx[1]['procedureCode']](self)
-            except:
+            except Exception:
                 self._log('ERR', 'invalid HNBAP PDU, initiatingMessage, code %i'\
                           % pdu_rx[1]['procedureCode'])
                 errcause = ('protocol', 'abstract-syntax-error-reject')
@@ -168,7 +168,7 @@ class HNBd(SigStack):
             # GW-initiated procedure, transfer the response PDU to it
             try:
                 Proc = self.ProcHnbap[pdu_rx[1]['procedureCode']]
-            except:
+            except Exception:
                 self._log('ERR', 'invalid HNBAP PDU, %s, code %i'\
                           % (pdu_rx[0], pdu_rx[1]['procedureCode']))
                 errcause = ('protocol', 'message-not-compatible-with-receiver-state')
@@ -239,7 +239,7 @@ class HNBd(SigStack):
         else:
             try:
                 Proc = RUAProcDispatcher[pdu_rx[1]['procedureCode']](self)
-            except:
+            except Exception:
                 self._log('ERR', 'invalid RUA PDU, initiatingMessage, code %i'\
                           % pdu_rx[1]['procedureCode'])
                 errcause = ('protocol', 'abstract-syntax-error-reject')
@@ -318,7 +318,7 @@ class HNBd(SigStack):
             return []
         try:
             PDU_RANAP.from_aper(buf)
-        except:
+        except Exception:
             asn_ranap_release()
             self._log('WNG', 'invalid RANAP PDU transfer-syntax: %s'\
                       % hexlify(buf).decode('ascii'))
@@ -338,7 +338,7 @@ class HNBd(SigStack):
             # RNC-initiated procedure, instantiate it
             try:
                 Proc = RANAPConlessProcRncDispatcher[pdu_rx[1]['procedureCode']](self)
-            except:
+            except Exception:
                 self._log('ERR', 'invalid connect-less RANAP PDU, initiatingMessage, code %i'\
                           % pdu_rx[1]['procedureCode'])
                 # error cause: protocol, abstract-syntax-error-reject
@@ -367,7 +367,7 @@ class HNBd(SigStack):
             # CN-initiated procedure, transfer the PDU to it
             try:
                 Proc = self.ProcRanap[pdu_rx[1]['procedureCode']]
-            except:
+            except Exception:
                 self._log('ERR', 'invalid connect-less RANAP PDU, %s, code %i'\
                           % (pdu_rx[0], pdu_rx[1]['procedureCode']))
                 # error cause: protocol, message-not-compatible-with-receiver-state
@@ -448,19 +448,19 @@ class HNBd(SigStack):
     def unset_ue_hnbap(self, ctx_id):
         try:
             del self.UE_HNBAP[ctx_id]
-        except:
+        except Exception:
             self._log('WNG', 'no UE with HNBAP context-id %i to unset' % ctx_id)
     
     def unset_ue_iucs(self, ctx_id):
         try:
             del self.UE_IuCS[ctx_id]
-        except:
+        except Exception:
             self._log('WNG', 'no UE with IuCS context-id %i to unset' % ctx_id)
     
     def unset_ue_iups(self, ctx_id):
         try:
             del self.UE_IuPS[ctx_id]
-        except:
+        except Exception:
             self._log('WNG', 'no UE with IuPS context-id %i to unset' % ctx_id)
     
     #--------------------------------------------------------------------------#
@@ -523,7 +523,7 @@ class HNBd(SigStack):
             for ctx_id in reslist:
                 try:
                     ue = self.UE_IuPS[ctx_id]
-                except:
+                except Exception:
                     pass
                 else:
                     ue.IuPS.unset_ran()
@@ -536,7 +536,7 @@ class HNBd(SigStack):
             for ctx_id in reslist:
                 try:
                     ue = self.UE_IuCS[ctx_id]
-                except:
+                except Exception:
                     pass
                 else:
                     ue.IuCS.unset_ran()

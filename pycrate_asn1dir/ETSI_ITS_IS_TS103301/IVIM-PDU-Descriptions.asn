@@ -1,0 +1,40 @@
+-- @brief Specification of the In vehicle information Message ETSI TS 103 301
+-- Latest version available at @url https://forge.etsi.org/rep/ITS/asn1/is_ts103301.git
+
+IVIM-PDU-Descriptions {
+    itu-t (0) identified-organization (4) etsi (0) itsDomain (5) wg1 (1) ts103301 (103301) ivim (2) version2 (2)
+}
+
+DEFINITIONS AUTOMATIC TAGS ::=
+
+BEGIN
+
+IMPORTS
+
+-- @brief Include ISO 19321
+-- Include references from @url https://standards.iso.org/iso/ts/19321/ed-2/en/ISO19321IVIv2.asn
+IviStructure
+FROM IVI { iso (1) standard (0) ivi (19321) version2 (2) }
+
+-- @brief Include ETSI TS 102 894-2
+-- Include references from @url https://forge.etsi.org/rep/ITS/ITS_ASN1/blob/master/CDD_TS102894-2/ITS-Container.asn
+ItsPduHeader
+FROM ITS-Container { itu-t (0) identified-organization (4) etsi (0) itsDomain (5) wg1 (1) ts (102894) cdd (2) version (2)};
+
+-- In vehicle information Message Message
+
+-- @brief In vehicle information Message Root
+-- This DF includes DEs for the IVIM protocolVersion, the IVI message type identifier _messageID_,
+-- the station identifier _stationID_ of the originating ITS-S and the IVI data from ISO TS 19321.
+IVIM ::= SEQUENCE {
+    -- @details header
+    -- The DE _protocolVersion_ is used to select the appropriate protocol decoder at the receiving ITS-S.
+    --   It shall be set to 2.
+    -- The DE _messageID_ shall be ivim(6).
+    header  ItsPduHeader,
+    -- @details ivi
+    -- The DE _ivi_ contains the IVI data as defined in ISO TS 19321.
+    ivi     IviStructure
+}
+
+END

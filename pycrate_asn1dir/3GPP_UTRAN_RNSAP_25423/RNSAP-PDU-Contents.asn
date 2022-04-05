@@ -5,10 +5,10 @@
 -- **************************************************************
 
 RNSAP-PDU-Contents {
-itu-t (0) identified-organization (4) etsi (0) mobileDomain (0) 
+itu-t (0) identified-organization (4) etsi (0) mobileDomain (0)
 umts-Access (20) modules (3) rnsap (1) version1 (1) rnsap-PDU-Contents (1) }
 
-DEFINITIONS AUTOMATIC TAGS ::= 
+DEFINITIONS AUTOMATIC TAGS ::=
 
 BEGIN
 
@@ -66,7 +66,7 @@ IMPORTS
 	Continuous-Packet-Connectivity-HS-SCCH-Less-Information-Response,
 	CPC-Information,
 	CoverageIndicator,
-	CriticalityDiagnostics, 
+	CriticalityDiagnostics,
 	CellPortionLCRID,
 	D-RNTI,
 	D-RNTI-ReleaseIndication,
@@ -165,7 +165,7 @@ IMPORTS
 	HSDSCH-Information-to-Modify-Unsynchronised,
 	HSDSCH-MACdFlow-ID,
 	HSDSCH-MACdFlows-Information,
-	HSDSCH-MACdFlows-to-Delete, 
+	HSDSCH-MACdFlows-to-Delete,
 	HSDSCH-Physical-Layer-Category,
 	HSDSCH-RNTI,
 	HS-DSCH-serving-cell-change-information,
@@ -270,7 +270,7 @@ IMPORTS
 	Secondary-CCPCH-System-Information-MBMS,
 	Secondary-CPICH-Information,
 	Secondary-CPICH-Information-Change,
-	Secondary-LCR-CCPCH-Info-TDD, 
+	Secondary-LCR-CCPCH-Info-TDD,
 	Secondary-Serving-Cell-List,
 	SNA-Information,
 	SpecialBurstScheduling,
@@ -508,7 +508,7 @@ FROM RNSAP-Containers
 	maxNrofSigSeqERGHICH-1,
 	maxNrOfCells,
 	maxNrOfHSDSCH-1,
-	maxNrOfEDCH-1, 
+	maxNrOfEDCH-1,
 	maxNrOfULCarriersLCR-1,
 	maxNoOfGsmCell,
 	maxNrOfANRCells,
@@ -537,7 +537,7 @@ FROM RNSAP-Containers
 	id-CauseLevel-RL-SetupFailureTDD,
 	id-CCTrCH-InformationItem-RL-FailureInd,
 	id-CCTrCH-InformationItem-RL-RestoreInd,
-	id-CellCapabilityContainer-FDD, 
+	id-CellCapabilityContainer-FDD,
 	id-CellCapabilityContainerExtension-FDD,
 	id-CellCapabilityContainer-TDD,
 	id-CellCapabilityContainer-TDD-LCR,
@@ -559,7 +559,7 @@ FROM RNSAP-Containers
 	id-Continuous-Packet-Connectivity-HS-SCCH-Less-Information-Response,
 	id-CPC-Information,
 	id-CoverageIndicator,
-	id-CriticalityDiagnostics, 
+	id-CriticalityDiagnostics,
 	id-CellPortionLCRID,
 	id-D-RNTI,
 	id-D-RNTI-ReleaseIndication,
@@ -690,7 +690,7 @@ FROM RNSAP-Containers
 	id-HSDSCH-MACdFlows-to-Add,
 	id-HSDSCH-MACdFlows-to-Delete,
 	id-HSDSCHMacdFlowSpecificInformationList-RL-PreemptRequiredInd,
-	id-HSDSCHMacdFlowSpecificInformationItem-RL-PreemptRequiredInd, 
+	id-HSDSCHMacdFlowSpecificInformationItem-RL-PreemptRequiredInd,
 	id-HSDSCH-Physical-Layer-Category,
 	id-HSDSCH-RNTI,
 	id-HS-DSCH-serving-cell-change-information,
@@ -825,7 +825,7 @@ FROM RNSAP-Containers
 	id-S-RNTI,
 	id-SAI,
 	id-Secondary-CPICH-Information,
-	id-Secondary-CPICH-Information-Change, 
+	id-Secondary-CPICH-Information-Change,
 	id-Secondary-Serving-Cell-List,
 	id-SixtyfourQAM-DL-SupportIndicator,
 	id-SFN,
@@ -1785,7 +1785,7 @@ USCH-InformationList-RL-SetupRspTDD RNSAP-PROTOCOL-IES ::= {
 	{ ID id-USCH-InformationListIEs-RL-SetupRspTDD		CRITICALITY ignore	TYPE USCH-InformationListIEs-RL-SetupRspTDD PRESENCE mandatory }
 }
 
-USCH-InformationListIEs-RL-SetupRspTDD ::= SEQUENCE (SIZE(0..maxNoOfUSCHs)) OF USCHInformationItem-RL-SetupRspTDD 
+USCH-InformationListIEs-RL-SetupRspTDD ::= SEQUENCE (SIZE(0..maxNoOfUSCHs)) OF USCHInformationItem-RL-SetupRspTDD
 
 USCHInformationItem-RL-SetupRspTDD ::= SEQUENCE {
 	usch-ID						USCH-ID,
@@ -1852,7 +1852,7 @@ RL-LCR-InformationResponse-RL-SetupRspTDD ::= SEQUENCE {
 	neighbouring-UMTS-CellInformation		Neighbouring-UMTS-CellInformation				OPTIONAL,
 	neighbouring-GSM-CellInformation		Neighbouring-GSM-CellInformation				OPTIONAL,
 	iE-Extensions							ProtocolExtensionContainer { { RL-LCR-InformationResponseList-RL-SetupRspTDD-ExtIEs} }	OPTIONAL,
-	... 
+	...
 }
 
 RL-LCR-InformationResponseList-RL-SetupRspTDD-ExtIEs RNSAP-PROTOCOL-EXTENSION ::= {
@@ -1975,7 +1975,7 @@ USCH-LCR-InformationList-RL-SetupRspTDD RNSAP-PROTOCOL-IES ::= {
 	{ ID id-USCH-LCR-InformationListIEs-RL-SetupRspTDD		CRITICALITY ignore	TYPE USCH-LCR-InformationListIEs-RL-SetupRspTDD PRESENCE mandatory }
 }
 
-USCH-LCR-InformationListIEs-RL-SetupRspTDD ::= SEQUENCE (SIZE(0..maxNoOfUSCHsLCR)) OF USCH-LCR-InformationItem-RL-SetupRspTDD 
+USCH-LCR-InformationListIEs-RL-SetupRspTDD ::= SEQUENCE (SIZE(0..maxNoOfUSCHsLCR)) OF USCH-LCR-InformationItem-RL-SetupRspTDD
 
 USCH-LCR-InformationItem-RL-SetupRspTDD ::= SEQUENCE {
 	usch-ID						USCH-ID,
@@ -2205,7 +2205,7 @@ SuccessfulRL-InformationResponse-RL-SetupFailureFDD ::= SEQUENCE {
 	received-total-wide-band-power			Received-total-wide-band-power,
 	not-Used-secondary-CCPCH-Info					NULL				OPTIONAL,
 	dl-CodeInformation						FDD-DL-CodeInformation,
-	diversityIndication						DiversityIndication-RL-SetupFailureFDD, 
+	diversityIndication						DiversityIndication-RL-SetupFailureFDD,
 	sSDT-SupportIndicator					SSDT-SupportIndicator,
 	maxUL-SIR								UL-SIR,
 	minUL-SIR								UL-SIR,
@@ -2537,7 +2537,7 @@ UL-CCTrCH-InformationItemIEs-RL-AdditionRqstTDD RNSAP-PROTOCOL-IES ::= {
 
 UL-CCTrCH-InformationItem-RL-AdditionRqstTDD ::= SEQUENCE {
 	cCTrCH-ID					CCTrCH-ID,
-	uplinkStepSizeLCR			TDD-TPC-UplinkStepSize-LCR	OPTIONAL, 
+	uplinkStepSizeLCR			TDD-TPC-UplinkStepSize-LCR	OPTIONAL,
 	-- Applicable to 1.28Mcps TDD only
 	iE-Extensions				ProtocolExtensionContainer { {UL-CCTrCH-InformationItem-RL-AdditionRqstTDD-ExtIEs} } OPTIONAL,
 	...
@@ -2599,7 +2599,7 @@ RL-InformationResponseItem-RL-AdditionRspFDD ::= SEQUENCE {
 	received-total-wide-band-power	Received-total-wide-band-power,
 	not-Used-secondary-CCPCH-Info			NULL		OPTIONAL,
 	dl-CodeInformation				DL-CodeInformationList-RL-AdditionRspFDD,
-	diversityIndication				DiversityIndication-RL-AdditionRspFDD, 
+	diversityIndication				DiversityIndication-RL-AdditionRspFDD,
 
 	sSDT-SupportIndicator				SSDT-SupportIndicator,
 	minUL-SIR							UL-SIR,
@@ -2871,7 +2871,7 @@ DSCH-InformationListIEs-RL-AdditionRspTDD RNSAP-PROTOCOL-IES ::= {
 	{ ID id-DSCH-InformationListIE-RL-AdditionRspTDD	CRITICALITY ignore	TYPE DSCH-InformationListIE-RL-AdditionRspTDD		PRESENCE mandatory }
 }
 
-DSCH-InformationListIE-RL-AdditionRspTDD ::= SEQUENCE (SIZE(0..maxNoOfDSCHs)) OF DSCHInformationItem-RL-AdditionRspTDD 
+DSCH-InformationListIE-RL-AdditionRspTDD ::= SEQUENCE (SIZE(0..maxNoOfDSCHs)) OF DSCHInformationItem-RL-AdditionRspTDD
 
 DSCHInformationItem-RL-AdditionRspTDD ::= SEQUENCE {
 	dsch-ID					DSCH-ID,
@@ -2903,7 +2903,7 @@ USCH-InformationListIEs-RL-AdditionRspTDD RNSAP-PROTOCOL-IES ::= {
 	{ ID id-USCH-InformationListIE-RL-AdditionRspTDD	CRITICALITY ignore	TYPE USCH-InformationListIE-RL-AdditionRspTDD		PRESENCE mandatory }
 }
 
-USCH-InformationListIE-RL-AdditionRspTDD ::= SEQUENCE (SIZE(0..maxNoOfUSCHs)) OF USCHInformationItem-RL-AdditionRspTDD 
+USCH-InformationListIE-RL-AdditionRspTDD ::= SEQUENCE (SIZE(0..maxNoOfUSCHs)) OF USCHInformationItem-RL-AdditionRspTDD
 
 USCHInformationItem-RL-AdditionRspTDD ::= SEQUENCE {
 	uSCH-ID					USCH-ID,
@@ -2939,7 +2939,7 @@ RadioLinkAdditionResponseTDD-Extensions RNSAP-PROTOCOL-EXTENSION ::= {
 	...
 }
 
-RL-LCR-InformationResponse-RL-AdditionRspTDD ::= SEQUENCE { 
+RL-LCR-InformationResponse-RL-AdditionRspTDD ::= SEQUENCE {
 	rL-ID						RL-ID,
 	uRA-Information				URA-Information,
 	sAI							SAI,
@@ -3093,7 +3093,7 @@ USCH-LCR-InformationList-RL-AdditionRspTDD RNSAP-PROTOCOL-IES ::= {
 	{ ID id-USCH-LCR-InformationListIEs-RL-AdditionRspTDD		CRITICALITY ignore	TYPE USCH-LCR-InformationListIEs-RL-AdditionRspTDD PRESENCE mandatory }
 }
 
-USCH-LCR-InformationListIEs-RL-AdditionRspTDD ::= SEQUENCE (SIZE(0..maxNoOfUSCHsLCR)) OF USCH-LCR-InformationItem-RL-AdditionRspTDD 
+USCH-LCR-InformationListIEs-RL-AdditionRspTDD ::= SEQUENCE (SIZE(0..maxNoOfUSCHsLCR)) OF USCH-LCR-InformationItem-RL-AdditionRspTDD
 
 USCH-LCR-InformationItem-RL-AdditionRspTDD ::= SEQUENCE {
 	usch-ID						USCH-ID,
@@ -3107,7 +3107,7 @@ USCH-LCR-InformationItem-RL-AdditionRspTDD-ExtIEs RNSAP-PROTOCOL-EXTENSION ::= {
 	...
 }
 
-RL-InformationResponse-RL-AdditionRspTDD768 ::= SEQUENCE { 
+RL-InformationResponse-RL-AdditionRspTDD768 ::= SEQUENCE {
 	rL-ID								RL-ID,
 	uRA-Information						URA-Information		OPTIONAL,
 	sAI									SAI,
@@ -3300,8 +3300,8 @@ SuccessfulRL-InformationResponse-RL-AdditionFailureFDD ::= SEQUENCE {
 	received-total-wide-band-power		Received-total-wide-band-power,
 	not-Used-secondary-CCPCH-Info				NULL		OPTIONAL,
 	dl-CodeInformation					DL-CodeInformationList-RL-AdditionFailureFDD,
-	diversityIndication					DiversityIndication-RL-AdditionFailureFDD, 
-	-- This IE represents both the Diversity Indication IE and the choice based on the diversity indication as described in 
+	diversityIndication					DiversityIndication-RL-AdditionFailureFDD,
+	-- This IE represents both the Diversity Indication IE and the choice based on the diversity indication as described in
 	-- the tabular message format in subclause 9.1.
 	sSDT-SupportIndicator				SSDT-SupportIndicator,
 	minUL-SIR							UL-SIR,
@@ -4274,7 +4274,7 @@ TDD-UL-Code-LCR-InformationModifyItem-RL-ReconfReadyTDD ::= SEQUENCE {
 }
 
 TDD-UL-Code-LCR-InformationModifyItem-RL-ReconfReadyTDD-ExtIEs RNSAP-PROTOCOL-EXTENSION ::= {
-     { ID id-TDD-UL-DPCH-TimeSlotFormatModifyItem-LCR-RL-ReconfReadyTDD	CRITICALITY reject	EXTENSION TDD-UL-DPCH-TimeSlotFormat-LCR	PRESENCE optional},
+{ ID id-TDD-UL-DPCH-TimeSlotFormatModifyItem-LCR-RL-ReconfReadyTDD	CRITICALITY reject	EXTENSION TDD-UL-DPCH-TimeSlotFormat-LCR	PRESENCE optional},
 	...
 }
 
@@ -4357,7 +4357,7 @@ UL-DPCH-InformationDeleteList-RL-ReconfReadyTDD-ExtIEs RNSAP-PROTOCOL-EXTENSION 
 	...
 }
 
-DL-CCTrCH-InformationList-RL-ReconfReadyTDD 		::= ProtocolIE-Single-Container {{DL-CCTrCHInformationListIEs-RL-ReconfReadyTDD}} 
+DL-CCTrCH-InformationList-RL-ReconfReadyTDD 		::= ProtocolIE-Single-Container {{DL-CCTrCHInformationListIEs-RL-ReconfReadyTDD}}
 
 DL-CCTrCHInformationListIEs-RL-ReconfReadyTDD RNSAP-PROTOCOL-IES ::= {
 	{ ID id-DL-CCTrCH-InformationListIE-RL-ReconfReadyTDD	CRITICALITY ignore	TYPE DL-CCTrCHInformationListIE-RL-ReconfReadyTDD	PRESENCE mandatory}
@@ -4876,7 +4876,7 @@ Additional-EDCH-Cell-Information-RL-Reconf-Req-ExtIEs	RNSAP-PROTOCOL-EXTENSION :
 	...
 }
 
-RL-ReconfigurationRequestFDD-RL-InformationList ::= SEQUENCE (SIZE (0..maxNrOfRLs)) OF ProtocolIE-Single-Container { 
+RL-ReconfigurationRequestFDD-RL-InformationList ::= SEQUENCE (SIZE (0..maxNrOfRLs)) OF ProtocolIE-Single-Container {
 	{RL-ReconfigurationRequestFDD-RL-Information-ListItem} }
 
 RL-ReconfigurationRequestFDD-RL-Information-ListItem RNSAP-PROTOCOL-IES ::= {
@@ -4939,7 +4939,7 @@ UL-CCTrCH-InformationModifyItem-RL-ReconfRqstTDD ::= SEQUENCE {
 }
 
 UL-CCTrCH-InformationModifyItem-RL-ReconfRqstTDD-ExtIEs RNSAP-PROTOCOL-EXTENSION ::= {
-    { ID id-UL-SIRTarget		CRITICALITY reject	EXTENSION UL-SIR		PRESENCE optional},
+{ ID id-UL-SIRTarget		CRITICALITY reject	EXTENSION UL-SIR		PRESENCE optional},
 	-- Applicable to 1.28Mcps TDD only
 	...
 }
@@ -5006,7 +5006,7 @@ DCH-DeleteItem-RL-ReconfRqstTDD-ExtIEs RNSAP-PROTOCOL-EXTENSION ::= {
 }
 
 RadioLinkReconfigurationRequestTDD-Extensions RNSAP-PROTOCOL-EXTENSION ::= {
-  { ID id-RL-ReconfigurationRequestTDD-RL-Information	CRITICALITY ignore	EXTENSION Multiple-RL-ReconfigurationRequestTDD-RL-Information	PRESENCE optional}|
+{ ID id-RL-ReconfigurationRequestTDD-RL-Information	CRITICALITY ignore	EXTENSION Multiple-RL-ReconfigurationRequestTDD-RL-Information	PRESENCE optional}|
 	{ ID id-HSDSCH-TDD-Information				CRITICALITY reject	EXTENSION HSDSCH-TDD-Information		PRESENCE optional}|
 	{ ID id-HSDSCH-Information-to-Modify-Unsynchronised	CRITICALITY reject	EXTENSION HSDSCH-Information-to-Modify-Unsynchronised	PRESENCE optional}|
 	{ ID id-HSDSCH-MACdFlows-to-Add				CRITICALITY reject	EXTENSION HSDSCH-MACdFlows-Information		PRESENCE optional}|
@@ -5163,7 +5163,7 @@ DL-CCTrCH-InformationItem-RL-ReconfRspTDD ::= SEQUENCE {
 	...
 }
 
-DL-CCTrCH-InformationItem-RL-ReconfRspTDD-ExtIEs RNSAP-PROTOCOL-EXTENSION ::= { 
+DL-CCTrCH-InformationItem-RL-ReconfRspTDD-ExtIEs RNSAP-PROTOCOL-EXTENSION ::= {
 	...
 }
 
@@ -5175,7 +5175,7 @@ DL-DPCH-InformationModifyListIEs-LCR-RL-ReconfRspTDD RNSAP-PROTOCOL-IES ::= {
 }
 
 DL-DPCH-InformationModifyItem-LCR-RL-ReconfRspTDD ::= SEQUENCE {
-	dL-Timeslot-LCR-InformationModifyList-RL-ReconfRqstTDD		DL-Timeslot-LCR-InformationModifyList-RL-ReconfRspTDD			OPTIONAL, 
+	dL-Timeslot-LCR-InformationModifyList-RL-ReconfRqstTDD		DL-Timeslot-LCR-InformationModifyList-RL-ReconfRspTDD			OPTIONAL,
 	iE-Extensions	ProtocolExtensionContainer { { DL-DPCH-InformationModifyItem-LCR-RL-ReconfRspTDD-ExtIEs} }		OPTIONAL,
 	...
 }
@@ -5259,7 +5259,7 @@ RL-RL-FailureInd		 	::= SEQUENCE {
 	rL-InformationList-RL-FailureInd		RL-InformationList-RL-FailureInd,
 	iE-Extensions							ProtocolExtensionContainer { { RLItem-RL-FailureInd-ExtIEs} } OPTIONAL,
 	...
-} 
+}
 
 RLItem-RL-FailureInd-ExtIEs RNSAP-PROTOCOL-EXTENSION ::= {
 	...
@@ -5276,7 +5276,7 @@ RL-Information-RL-FailureInd ::= SEQUENCE {
 	cause						Cause,
 	iE-Extensions					ProtocolExtensionContainer { {RL-Information-RL-FailureInd-ExtIEs} } OPTIONAL,
 	...
-} 
+}
 
 RL-Information-RL-FailureInd-ExtIEs RNSAP-PROTOCOL-EXTENSION ::= {
 	...
@@ -5286,7 +5286,7 @@ RL-Set-RL-FailureInd		 	::= SEQUENCE {
 	rL-Set-InformationList-RL-FailureInd	RL-Set-InformationList-RL-FailureInd,
 	iE-Extensions							ProtocolExtensionContainer { { RL-SetItem-RL-FailureInd-ExtIEs} } OPTIONAL,
 	...
-} 
+}
 
 RL-SetItem-RL-FailureInd-ExtIEs RNSAP-PROTOCOL-EXTENSION ::= {
 	...
@@ -5303,7 +5303,7 @@ RL-Set-Information-RL-FailureInd ::= SEQUENCE {
 	cause							Cause,
 	iE-Extensions					ProtocolExtensionContainer { {RL-Set-Information-RL-FailureInd-ExtIEs} } OPTIONAL,
 	...
-} 
+}
 
 RL-Set-Information-RL-FailureInd-ExtIEs RNSAP-PROTOCOL-EXTENSION ::= {
 	...
@@ -5441,7 +5441,7 @@ RL-RL-RestoreInd ::= SEQUENCE {
 	rL-InformationList-RL-RestoreInd		RL-InformationList-RL-RestoreInd,
 	iE-Extensions							ProtocolExtensionContainer { { RLItem-RL-RestoreInd-ExtIEs} } OPTIONAL,
 	...
-} 
+}
 
 RLItem-RL-RestoreInd-ExtIEs RNSAP-PROTOCOL-EXTENSION ::= {
 	...
@@ -5457,7 +5457,7 @@ RL-Information-RL-RestoreInd ::= SEQUENCE {
 	rL-ID						RL-ID,
 	iE-Extensions					ProtocolExtensionContainer { {RL-Information-RL-RestoreInd-ExtIEs} } OPTIONAL,
 	...
-} 
+}
 
 RL-Information-RL-RestoreInd-ExtIEs RNSAP-PROTOCOL-EXTENSION ::= {
 	...
@@ -5467,7 +5467,7 @@ RL-Set-RL-RestoreInd ::= SEQUENCE {
 	rL-Set-InformationList-RL-RestoreInd	RL-Set-InformationList-RL-RestoreInd,
 	iE-Extensions							ProtocolExtensionContainer { { RL-SetItem-RL-RestoreInd-ExtIEs} } OPTIONAL,
 	...
-} 
+}
 
 RL-SetItem-RL-RestoreInd-ExtIEs RNSAP-PROTOCOL-EXTENSION ::= {
 	...
@@ -5483,7 +5483,7 @@ RL-Set-Information-RL-RestoreInd ::= SEQUENCE {
 	rL-Set-ID						RL-Set-ID,
 	iE-Extensions					ProtocolExtensionContainer { {RL-Set-Information-RL-RestoreInd-ExtIEs} } OPTIONAL,
 	...
-} 
+}
 
 RL-Set-Information-RL-RestoreInd-ExtIEs RNSAP-PROTOCOL-EXTENSION ::= {
 	...
@@ -6445,7 +6445,7 @@ DedicatedMeasurementInitiationResponse-Extensions RNSAP-PROTOCOL-EXTENSION ::= {
 Multiple-DedicatedMeasurementValueList-TDD-DM-Rsp ::= SEQUENCE (SIZE (1.. maxNrOfDPCHsPerRL-1)) OF Multiple-DedicatedMeasurementValueItem-TDD-DM-Rsp
 
 Multiple-DedicatedMeasurementValueItem-TDD-DM-Rsp ::= SEQUENCE {
-	dPCH-ID								DPCH-ID, 
+	dPCH-ID								DPCH-ID,
 	dedicatedMeasurementValue			DedicatedMeasurementValue,
 	iE-Extensions						ProtocolExtensionContainer { { Multiple-DedicatedMeasurementValueItem-TDD-DM-Rsp-ExtIEs} }		OPTIONAL,
 	...
@@ -6459,7 +6459,7 @@ Multiple-DedicatedMeasurementValueItem-TDD-DM-Rsp-ExtIEs RNSAP-PROTOCOL-EXTENSIO
 Multiple-DedicatedMeasurementValueList-LCR-TDD-DM-Rsp ::= SEQUENCE (SIZE (1.. maxNrOfDPCHsLCRPerRL-1)) OF Multiple-DedicatedMeasurementValueItem-LCR-TDD-DM-Rsp
 
 Multiple-DedicatedMeasurementValueItem-LCR-TDD-DM-Rsp ::= SEQUENCE {
-	dPCH-ID								DPCH-ID, 
+	dPCH-ID								DPCH-ID,
 	dedicatedMeasurementValue			DedicatedMeasurementValue,
 	iE-Extensions						ProtocolExtensionContainer { { Multiple-DedicatedMeasurementValueItem-LCR-TDD-DM-Rsp-ExtIEs} }		OPTIONAL,
 	...
@@ -6472,7 +6472,7 @@ Multiple-DedicatedMeasurementValueItem-LCR-TDD-DM-Rsp-ExtIEs RNSAP-PROTOCOL-EXTE
 Multiple-HSSICHMeasurementValueList-TDD-DM-Rsp ::= SEQUENCE (SIZE (1.. maxNrOfHSSICHs-1)) OF Multiple-HSSICHMeasurementValueItem-TDD-DM-Rsp
 
 Multiple-HSSICHMeasurementValueItem-TDD-DM-Rsp ::= SEQUENCE {
-	hsSICH-ID							HS-SICH-ID, 
+	hsSICH-ID							HS-SICH-ID,
 	dedicatedMeasurementValue			DedicatedMeasurementValue,
 	iE-Extensions						ProtocolExtensionContainer { { Multiple-HSSICHMeasurementValueItem-TDD-DM-Rsp-ExtIEs} }		OPTIONAL,
 	...
@@ -6488,7 +6488,7 @@ Multiple-HSSICHMeasurementValueItem-TDD-DM-Rsp-ExtIEs RNSAP-PROTOCOL-EXTENSION :
 Multiple-DedicatedMeasurementValueList-TDD768-DM-Rsp ::= SEQUENCE (SIZE (1.. maxNrOfDPCHs768PerRL-1)) OF Multiple-DedicatedMeasurementValueItem-TDD768-DM-Rsp
 
 Multiple-DedicatedMeasurementValueItem-TDD768-DM-Rsp ::= SEQUENCE {
-	dPCH-ID768							DPCH-ID768, 
+	dPCH-ID768							DPCH-ID768,
 	dedicatedMeasurementValue			DedicatedMeasurementValue,
 	iE-Extensions						ProtocolExtensionContainer { { Multiple-DedicatedMeasurementValueItem-TDD768-DM-Rsp-ExtIEs} }		OPTIONAL,
 	...
@@ -7839,7 +7839,7 @@ ContextType-Reset ::= CHOICE {
 	sRNTI			S-RNTI,
 	dRNTI			D-RNTI,
 	...,
-	extension-ContextType-Reset	Extension-ContextType-Reset	
+	extension-ContextType-Reset	Extension-ContextType-Reset
 }
 
 Extension-ContextType-Reset	::= ProtocolIE-Single-Container {{ Extension-ContextType-ResetIE }}
@@ -7920,7 +7920,7 @@ RadioLinkActivationCommandFDD-Extensions RNSAP-PROTOCOL-EXTENSION ::= {
 	...
 }
 
-DelayedActivationInformationList-RL-ActivationCmdFDD ::= SEQUENCE (SIZE (1..maxNrOfRLs)) OF ProtocolIE-Single-Container { 
+DelayedActivationInformationList-RL-ActivationCmdFDD ::= SEQUENCE (SIZE (1..maxNrOfRLs)) OF ProtocolIE-Single-Container {
 	{ DelayedActivationInformation-RL-ActivationCmdFDD-IEs} }
 
 DelayedActivationInformation-RL-ActivationCmdFDD-IEs RNSAP-PROTOCOL-IES ::= {
@@ -7959,7 +7959,7 @@ RadioLinkActivationCommandTDD-Extensions RNSAP-PROTOCOL-EXTENSION ::= {
 	...
 }
 
-DelayedActivationInformationList-RL-ActivationCmdTDD ::= SEQUENCE (SIZE (1..maxNrOfRLs)) OF ProtocolIE-Single-Container { 
+DelayedActivationInformationList-RL-ActivationCmdTDD ::= SEQUENCE (SIZE (1..maxNrOfRLs)) OF ProtocolIE-Single-Container {
 	{ DelayedActivationInformation-RL-ActivationCmdTDD-IEs} }
 
 DelayedActivationInformation-RL-ActivationCmdTDD-IEs RNSAP-PROTOCOL-IES ::= {

@@ -1,9 +1,10 @@
 # -*- coding: UTF-8 -*-
 #/**
 # * Software Name : pycrate
-# * Version : 0.3
+# * Version : 0.4
 # *
 # * Copyright 2017. Benoit Michau. ANSSI.
+# * Copyright 2019. Benoit Michau. P1Sec.
 # *
 # * This library is free software; you can redistribute it and/or
 # * modify it under the terms of the GNU Lesser General Public
@@ -38,6 +39,7 @@ __all__ = [
     'TP_VPe',
     'TP_DT',
     'TP_RA',
+    'TP_UDH_IE',
     'TP_UDH',
     'TP_UD',
     'TP_PI',
@@ -82,18 +84,76 @@ class SMS_TP(Envelope):
 # TS 23.040, section 9.1.2.5	
 #------------------------------------------------------------------------------#
 
+class BufTPNum(BufBCD):
+    
+    _ALNUM_PAD = 0
+    
+    def get_tpnum_type(self):
+        try:
+            return self.get_env()['Type'].get_val()
+        except Exception:
+            # international BCD number
+            return 1
+    
+    def decode(self):
+        if self.get_tpnum_type() == 5:
+            # alphanumeric
+            dec = decode_7b(self._val)
+            if self._ALNUM_PAD and dec[-1] == '@':
+                return dec[:-1]
+            else:
+                return dec
+        else:
+            # BCD
+            return BufBCD.decode(self)
+    
+    def encode(self, val=''):
+        if self.get_tpnum_type() == 5:
+            # alphanumeric
+            self._val, cnt = encode_7b(val)
+            if 1 <= (7*cnt) % 8 <= 3:
+                self._ALNUM_PAD = 1
+            else:
+                self._ALNUM_PAD = 0
+        else:
+            # BCD
+            BufBCD.encode(self, val)
+
+
 class _TPAddress(Envelope):
     _GEN = (
-        Uint8('Len'), # WNG: number of digits in Num
+        Uint8('Len'), # WNG: number of nibbles (4-bits) in Num
         Uint('Ext', val=1, bl=1),
         Uint('Type', val=1, bl=3, dic=_BCDType_dict),
         Uint('NumberingPlan', val=1, bl=4, dic=_NumPlan_dict),
-        BufBCD('Num')
+        BufTPNum('Num')
         )
+    
     def __init__(self, *args, **kwargs):
         Envelope.__init__(self, *args, **kwargs)
-        self[0].set_valauto(lambda: len(self['Num'].decode()))
-        self[4].set_blauto(lambda: 8*int(ceil(self[0]()/2.0)))
+        self[0].set_valauto(lambda: self._len_set())
+        self[4].set_blauto(lambda: self._len_get())
+    
+    def _len_set(self):
+        if self[2].get_val() == 5:
+            # alphanumeric
+            l = 2 * self[4].get_len()
+            if hasattr(self[4], '_ALNUM_PAD') and self[4]._ALNUM_PAD:
+                return l-1
+            else:
+                return l
+        else:
+            # BCD
+            return len(self[4].decode())
+    
+    def _len_get(self):
+        l = self[0].get_val()
+        if l%2:
+            if self[2].get_val() == 5 and hasattr(self[4], '_ALNUM_PAD'):
+                self[4]._ALNUM_PAD = 1
+            return (1+l)<<2
+        else:
+            return l<<2
 
 
 #------------------------------------------------------------------------------#
@@ -345,6 +405,7 @@ class _TP_SCTS_TZ(Envelope):
         return '<TZ: %s%.2f>' % (self._Sign_dict[self[1]()], 0.25 * (self[0]() + (self[2]()<<4)))
         
     __repr__ = repr
+
 
 class TP_SCTS(Envelope):
     YEAR_BASE = 2000
@@ -694,55 +755,174 @@ for i in range(0xC0, 0xE0):
     _TP_UDHType_dict[i] = 'SC specific use'
 
 
-class _TP_UDH_IE(Envelope):
+# 9.2.3.24.1, Concatenated Short Messages
+
+class TP_UDH_IE_0(Envelope):
+    _GEN = (
+        Uint8('MsgRef'),
+        Uint8('MsgParts'),
+        Uint8('MsgNum', val=1)
+        )
+
+
+# 9.2.3.24.2, Special SMS Message Indication
+
+IE1MsgType_dict = {
+    0 : 'Voice Message Waiting',
+    1 : 'Fax Message Waiting',
+    2 : 'Electronic Mail Message Waiting',
+    3 : 'Extended Message Type Waiting',
+    }
+
+class TP_UDH_IE_1(Envelope):
+    _GEN = (
+        Uint('Store', bl=1),
+        Uint('ProfileID', bl=2),
+        Uint('ExtMsgType', bl=3, dic={0: 'No Extended Message', 1: 'Video Message Waiting'}),
+        Uint('MsgType', bl=2, dic=IE1MsgType_dict),
+        Uint8('MsgCnt')
+        )
+
+
+# 9.2.3.24.3, Application Port Addressing 8 bit address
+
+class TP_UDH_IE_4(Envelope):
+    _GEN = (
+        Uint8('Dest'),
+        Uint8('Origin')
+        )
+
+
+# 9.2.3.24.4, Application Port Addressing 16 bit address
+
+class TP_UDH_IE_5(Envelope):
+    _GEN = (
+        Uint16('Dest'),
+        Uint16('Origin')
+        )
+
+
+# 9.2.3.24.8, Concatenated short messages, 16-bit reference number
+
+class TP_UDH_IE_8(Envelope):
+    _GEN = (
+        Uint16('MsgRef'),
+        Uint8('MsgParts'),
+        Uint8('MsgNum', val=1)
+        )
+
+
+# 9.2.3.24.10.1.1, Text Formatting
+
+class TP_UDH_IE_A(Envelope):
+    _GEN = (
+        Uint8('StartPos'),
+        Uint8('Len'),
+        Uint8('FmtMode'),
+        Uint8('Colour')
+        )
+
+
+# 9.2.3.24.10.1.13, Extended Object
+
+IE14Type_dict = {
+    0x00 : 'Predefined sound',
+    0x01 : 'iMelody',
+    0x02 : 'Black and white bitmap',
+    0x03 : '2-bit greyscale bitmap',
+    0x04 : '6-bit colour bitmap',
+    0x05 : 'Predefined animation',
+    0x06 : 'Black and white bitmap animation',
+    0x07 : '2-bit greyscale bitmap animation',
+    0x08 : '6-bit colour bitmap animation',
+    0x09 : 'vCard',
+    0x0A : 'vCalendar',
+    0x0B : 'Standard WVG object',
+    0x0C : 'Polyphonic melody',
+    0xFF : 'Data Format Delivery Request'
+    }
+
+class TP_UDH_IE_14(Envelope):
+    _GEN = (
+        Uint8('Ref'),
+        Uint16('Len'),
+        Uint8('Ctrl'),
+        Uint8('Type', dict=IE14Type_dict),
+        Uint16('Pos'),
+        Buf('Data', rep=REPR_HEX)
+        )
+    
+    def __init__(self, *args, **kwargs):
+        Envelope.__init__(self, *args, **kwargs)
+        self[1].set_valauto(lambda: self[-1].get_len())
+        self[-1].set_blauto(lambda: 8*self[1].get_val())
+
+
+# 9.2.3.24.10.1.15, Compression Control
+
+class TP_UDH_IE_16(Envelope):
+    _GEN = (
+        Uint('Param', bl=4),
+        Uint('Algo', bl=4, dic={0: 'LZSS'}),
+        Uint16('Len'),
+        Buf('Data', rep=REPR_HEX)
+        )
+    
+    def __init__(self, *args, **kwargs):
+        Envelope.__init__(self, *args, **kwargs)
+        self[2].set_valauto(lambda: self[-1].get_len())
+        self[-1].set_blauto(lambda: 8*self[2].get_val())
+
+
+class TP_UDH_IE(Envelope):
     _GEN = (
         Uint8('T', dic=_TP_UDHType_dict),
         Uint8('L'),
-        Buf('V', rep=REPR_HEX)
+        Alt('V', GEN={
+            0x00 : TP_UDH_IE_0(),
+            0x01 : TP_UDH_IE_1(),
+            0x04 : TP_UDH_IE_4(),
+            0x05 : TP_UDH_IE_5(),
+            0x08 : TP_UDH_IE_8(),
+            0x0A : TP_UDH_IE_A(),
+            0x14 : TP_UDH_IE_14(),
+            0x16 : TP_UDH_IE_16()
+            },
+            DEFAULT=Buf('raw', rep=REPR_HEX),
+            sel=lambda self: self.get_env()[0].get_val()),
         )
+    
     def __init__(self, *args, **kwargs):
         Envelope.__init__(self, *args, **kwargs)
         self[1].set_valauto(self[2].get_len)
-        self[2].set_blauto(lambda: 8*self[1].get_val())
+    
+    def _from_char(self, char):
+        if self.get_trans():
+            return
+        self[0]._from_char(char)
+        self[1]._from_char(char)
+        char_lb = char._len_bit
+        char._len_bit = char._cur + (self[1].get_val()<<3)
+        self[2]._from_char(char)
+        if char._cur < char._len_bit:
+            # length was longer than the expected structure
+            self.append( Buf('unk', rep=REPR_HEX) )
+            self[3]._from_char(char)
+        char._len_bit = char_lb
 
 
 class TP_UDH(Envelope):
     _GEN = (
         Uint8('UDHL'),
-        Sequence('UDH', GEN=_TP_UDH_IE('UDHIE')),
-        Uint('fill', rep=REPR_BIN), # WNG: not sure this will be aligned in the correct way 
+        Sequence('UDH', GEN=TP_UDH_IE('UDHIE')),
         )
+    
     def __init__(self, *args, **kwargs):
         Envelope.__init__(self, *args, **kwargs)
-        self[0].set_valauto(self[1].get_len)
-        self[2].set_blauto(self._set_fill_bl)
-    
-    def _set_fill_bl(self):
-        try:
-            dcs = self.get_env().get_env()['TP_DCS']
-        except:
-            return 0
-        else:
-            grp, cs = dcs['Group'](), dcs['Charset']()
-            if grp in (0, 1, 4, 5, 15) and cs == 0:
-                # DCS_7B
-                return (7 - (self[1].get_bl()%7)) % 7
-            elif grp in (12, 13) and cs in (0, 2):
-                # DCS_7B
-                return (7 - (self[1].get_bl()%7)) % 7
-            else:
-                return 0
-    
-    def _from_char(self, char):
-        if not self.get_trans():
-            self[0]._from_char(char)
-            clen = char._len_bit
-            char._len_bit = char._cur + 8*self[0]()
-            self[1]._from_char(char)
-            char._len_bit = clen
-            self[2]._from_char(char)
+        self[0].set_valauto(lambda: self[1].get_len())
+        self[1].set_blauto(lambda: self[0].get_val()<<3)
 
-    
+
 class BufUD(Buf):
     
     # default encoding, required in SMS REPORT without TP-DCS
@@ -751,7 +931,9 @@ class BufUD(Buf):
     _ENC_BL = 0
     
     def set_val(self, val):
-        if isinstance(val, bytes_types):
+        if val is None:
+            self._val = None
+        elif isinstance(val, bytes_types):
             Buf.set_val(self, val)
             if self.get_dcs() == DCS_7B:
                 self._ENC_BL = 8*len(val)
@@ -763,7 +945,7 @@ class BufUD(Buf):
     def get_dcs(self):
         try:
             dcs = self.get_env().get_env()['TP_DCS']
-        except:
+        except Exception:
             return self.DEFAULT_DCS
         else:
             grp, cs = dcs['Group'](), dcs['Charset']()
@@ -777,11 +959,23 @@ class BufUD(Buf):
             elif grp == 14 and cs in (0, 2):
                 return DCS_UCS
             return DCS_8B
-        
+    
+    def get_dcs7b_off(self):
+        try:
+            udh = self.get_env()['UDH']
+        except Exception:
+            return 0
+        else:
+            if udh.get_trans():
+                return 0
+            else:
+                len_udh = 8 + (udh[0].get_val() << 3)
+                return (7 - (len_udh%7)) % 7
+    
     def encode(self, val):
         dcs = self.get_dcs()
         if dcs == DCS_7B:
-            enc, cnt = encode_7b(val)
+            enc, cnt = encode_7b(val, self.get_dcs7b_off())
             self.set_val(enc)
             self._ENC_BL = 7*cnt
         elif dcs == DCS_UCS:
@@ -796,12 +990,12 @@ class BufUD(Buf):
         if dcs == DCS_7B:
             try:
                 udhbl = self.get_env()['UDH'].get_bl()
-            except:
+            except Exception:
                 udhbl = 0
             if (udhbl + self._ENC_BL) % 8 == 1:
-                return decode_7b(self.get_val())[:-1]
+                return decode_7b(self.get_val(), self.get_dcs7b_off())[:-1]
             else:
-                return decode_7b(self.get_val())
+                return decode_7b(self.get_val(), self.get_dcs7b_off())
         elif dcs == DCS_UCS:
             return str(self.get_val(), 'utf-16-be')
         else:
@@ -829,7 +1023,7 @@ class TP_UD(Envelope):
     
     def __init__(self, *args, **kwargs):
         Envelope.__init__(self, *args, **kwargs)
-        self[0].set_valauto(self._set_udl)
+        self[0].set_valauto(lambda: self._set_udl())
         self[1].set_transauto(lambda: True if self.get_udhi() == 0 else False)
     
     def _set_udl(self):
@@ -862,7 +1056,7 @@ class TP_UD(Envelope):
     def get_udhi(self):
         try:
             udhi = self.get_env()['TP_UDHI']
-        except:
+        except Exception:
             return 0
         else:
             return udhi()
@@ -870,7 +1064,7 @@ class TP_UD(Envelope):
     def get_dcs(self):
         try:
             dcs = self.get_env()['TP_DCS']
-        except:
+        except Exception:
             return self[2].DEFAULT_DCS
         else:
             grp, cs = dcs['Group'](), dcs['Charset']()
@@ -884,6 +1078,34 @@ class TP_UD(Envelope):
             elif grp == 14 and cs in (0, 2):
                 return DCS_UCS
             return DCS_8B
+
+
+#------------------------------------------------------------------------------#
+# TP‑Command‑Data (TP‑CD)
+# TS 23.040, section 9.2.3.21
+#------------------------------------------------------------------------------#
+
+class TP_CD(Envelope):
+    ENV_SEL_TRANS = False
+    _GEN = (
+        Uint8('CDL'),
+        TP_UDH('UDH'),
+        Buf('CD')
+        )
+    
+    def __init__(self, *args, **kwargs):
+        Envelope.__init__(self, *args, **kwargs)
+        self[0].set_valauto(lambda: self[1].get_len() + self[2].get_len())
+        self[1].set_transauto(lambda: True if self.get_udhi() == 0 else False)
+        self[2].set_blauto(lambda: self[0].get_val() - self[1].get_len())
+
+    def get_udhi(self):
+        try:
+            udhi = self.get_env()['TP_UDHI']
+        except Exception:
+            return 0
+        else:
+            return udhi()
 
 
 #------------------------------------------------------------------------------#
@@ -920,13 +1142,13 @@ class TP_PI(Envelope):
 
 class SMS_DELIVER(SMS_TP):
     _GEN = (
-        Uint('TP_SRI', bl=1, dic=_TP_SRI_dict),
-        Uint('TP_UDHI', desc='UDH Indicator', bl=1),
         Uint('TP_RP', bl=1, dic=_TP_RP_dict),
-        Uint('TP_LP', desc='Loop Prevention', bl=1),
+        Uint('TP_UDHI', desc='UDH Indicator', bl=1),
+        Uint('TP_SRI', bl=1, dic=_TP_SRI_dict),
         Uint('spare', bl=1),
+        Uint('TP_LP', desc='Loop Prevention', bl=1),
         Uint('TP_MMS', desc='no More Message to Send', bl=1),
-        Uint('TP_MTI', bl=2, dic=_TP_MTI_MT_dict),
+        Uint('TP_MTI', val=0, bl=2, dic=_TP_MTI_MT_dict),
         TP_OA(desc='Originating Address'),
         TP_PID(),
         TP_DCS(),
@@ -947,7 +1169,7 @@ class SMS_DELIVER_REPORT_RP_ERROR(SMS_TP):
         Uint('spare', bl=1),
         Uint('TP_UDHI', desc='UDH Indicator', bl=1),
         Uint('spare', bl=4),
-        Uint('TP_MTI', bl=2, dic=_TP_MTI_MO_dict),
+        Uint('TP_MTI', val=0, bl=2, dic=_TP_MTI_MO_dict),
         Uint8('TP_FCS', dic=_TP_FCS_dict),
         TP_PI(),
         TP_PID(),
@@ -956,7 +1178,7 @@ class SMS_DELIVER_REPORT_RP_ERROR(SMS_TP):
         )
     def __init__(self, *args, **kwargs):
         Envelope.__init__(self, *args, **kwargs)
-        self['TP_PDI'].set_transauto(lambda: False if self['TP_PI']['TP_PID']() else True)
+        self['TP_PID'].set_transauto(lambda: False if self['TP_PI']['TP_PID']() else True)
         self['TP_DCS'].set_transauto(lambda: False if self['TP_PI']['TP_DCS']() else True)
         self['TP_UD'].set_transauto(lambda: False if self['TP_PI']['TP_UDL']() else True)
 
@@ -973,7 +1195,7 @@ class SMS_DELIVER_REPORT_RP_ACK(SMS_TP):
         Uint('spare', bl=1),
         Uint('TP_UDHI', desc='UDH Indicator', bl=1),
         Uint('spare', bl=4),
-        Uint('TP_MTI', bl=2, dic=_TP_MTI_MO_dict),
+        Uint('TP_MTI', val=0, bl=2, dic=_TP_MTI_MO_dict),
         TP_PI(),
         TP_PID(),
         TP_DCS(),
@@ -995,9 +1217,9 @@ class SMS_DELIVER_REPORT_RP_ACK(SMS_TP):
 class SMS_SUBMIT(SMS_TP):
     ENV_SEL_TRANS = False
     _GEN = (
-        Uint('TP_SRR', bl=1, dic=_TP_SRR_dict),
-        Uint('TP_UDHI', desc='UDH Indicator', bl=1),
         Uint('TP_RP', bl=1, dic=_TP_RP_dict),
+        Uint('TP_UDHI', desc='UDH Indicator', bl=1),
+        Uint('TP_SRR', bl=1, dic=_TP_SRR_dict),
         Uint('TP_VPF', bl=2, dic=_TP_VPF_dict),
         Uint('TP_RD', desc='Reject Duplicates', bl=1),
         Uint('TP_MTI', val=1, bl=2, dic=_TP_MTI_MT_dict),
@@ -1083,8 +1305,8 @@ class SMS_STATUS_REPORT(SMS_TP):
         Uint('spare', bl=1),
         Uint('TP_UDHI', desc='UDH Indicator', bl=1),
         Uint('TP_SRQ', bl=1, dic=_TP_SRQ_dict),
-        Uint('TP_LP', desc='Loop Prevention', bl=1),
         Uint('spare', bl=1),
+        Uint('TP_LP', desc='Loop Prevention', bl=1),
         Uint('TP_MMS', desc='no More Message to Send', bl=1),
         Uint('TP_MTI', val=2, bl=2, dic=_TP_MTI_MT_dict),
         Uint8('TP_MR', desc='Message Reference'),
@@ -1135,11 +1357,6 @@ class SMS_COMMAND(SMS_TP):
         Uint8('TP_CT', dic=_TP_CT_dict),
         Uint8('TP_MN', desc='Message Number'),
         TP_DA(desc='Destination Address'),
-        Uint8('TP_CDL'),
-        Buf('TP_CD', val=b'', rep=REPR_HEX) 
+        TP_CD()
         )
-    def __init__(self, *args, **kwargs):
-        Envelope.__init__(self, *args, **kwargs)
-        self[10].set_valauto(self[11].get_len)
-        self[11].set_blauto(lambda: 8*self[10]())
 

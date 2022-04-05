@@ -5,10 +5,10 @@
 -- **************************************************************
 
 HNBAP-IEs {
-itu-t (0) identified-organization (4) etsi (0) mobileDomain (0) 
+itu-t (0) identified-organization (4) etsi (0) mobileDomain (0)
 umts-Access (20) modules (3) hnbap(6) version1 (1) hnbap-IEs (2) }
 
-DEFINITIONS AUTOMATIC TAGS ::= 
+DEFINITIONS AUTOMATIC TAGS ::=
 
 BEGIN
 
@@ -23,7 +23,7 @@ IMPORTS
 	id-HNB-Cell-Identifier,
 	id-S-RNTIPrefix,
 	id-URAIdentityList
-	
+
 FROM HNBAP-Constants
 
 	Criticality,
@@ -107,11 +107,11 @@ CauseMisc ::= ENUMERATED {
 	unspecified,
 	...
 }
-						
+
 CellIdentity ::=		BIT STRING (SIZE (28))
 
 CELL-FACHMobilitySupport	::= ENUMERATED {
-	supported, 
+	supported,
 	...
 }
 
@@ -151,8 +151,8 @@ CSG-Capability	::=	ENUMERATED {
 				...
 			}
 
-CSGMembershipStatus ::= ENUMERATED { 
-	member, 
+CSGMembershipStatus ::= ENUMERATED {
+	member,
 	non-member,
 	...
 }
@@ -171,9 +171,9 @@ CGI-ExtIEs HNBAP-PROTOCOL-EXTENSION ::= {
 CI					::= OCTET STRING (SIZE (2))
 
 
-CN-DomainIndicator ::= ENUMERATED { 
-	cs-domain, 
-	ps-domain 
+CN-DomainIndicator ::= ENUMERATED {
+	cs-domain,
+	ps-domain
 }
 --D
 --E
@@ -213,7 +213,7 @@ HNB-Cell-Access-Mode::= ENUMERATED {
 	closed,
 	hybrid,
 	open,
-	... 
+	...
 }
 
 HNB-Cell-Identifier	::= 	SEQUENCE	{
@@ -321,7 +321,7 @@ IMSIDS41				::= OCTET STRING (SIZE (5..7))
 IMSIESN				::= SEQUENCE {
 	iMSIDS41		IMSIDS41,
 	eSN				ESN
-}	
+}
 
 
 IP-Address		::=SEQUENCE {
@@ -355,7 +355,7 @@ LAI			::= SEQUENCE {
 	lAC			LAC,
 	...
 			}
-			
+
 -- M
 
 MacroCoverageInformation	::= SEQUENCE {
@@ -369,7 +369,7 @@ MacroCoverageInformation-ExtIEs HNBAP-PROTOCOL-EXTENSION ::= {
 }
 
 MacroCellID ::= CHOICE {
-	uTRANCellID			UTRANCellID, 
+	uTRANCellID			UTRANCellID,
 	gERANCellID			CGI,
 	...
 }
@@ -415,7 +415,7 @@ PTMSIRAI		::= SEQUENCE {
 	rAI			RAI,
 	...
 	}
-	
+
 
 --Q
 --R
@@ -457,7 +457,7 @@ RNC-ID	::=	INTEGER(0..65535)
 
 --S
 
-SAC			::= OCTET STRING(SIZE(2)) 
+SAC			::= OCTET STRING(SIZE(2))
 
 S-RNTIPrefix	::= BIT STRING(SIZE(1..16, ...))
 
@@ -528,7 +528,7 @@ UTRANCellID ::= SEQUENCE {
 UTRANCellID-ExtIEs HNBAP-PROTOCOL-EXTENSION ::= {
 	...
 }
-							
+
 
 
 UE-Identity	::=	CHOICE {

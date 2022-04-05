@@ -1,9 +1,10 @@
 # -*- coding: UTF-8 -*-
 #/**
 # * Software Name : pycrate
-# * Version : 0.3
+# * Version : 0.4
 # *
 # * Copyright 2016. Benoit Michau. ANSSI.
+# * Copyright 2019. Benoit Michau. P1Sec.
 # *
 # * This library is free software; you can redistribute it and/or
 # * modify it under the terms of the GNU Lesser General Public
@@ -40,19 +41,20 @@ from test.test_csn1   import *
 from test.test_asn1rt import *
 from test.test_mobile import *
 from test.test_gsmrr  import *
-from pycrate_asn1c.proc import compile_text, compile_spec, compile_all, \
-                               generate_modules, PycrateGenerator, \
-                               GLOBAL, ASN_SPECS
+from pycrate_asn1c.specdir import ASN_SPECS
+from pycrate_asn1c.asnproc import compile_text, compile_spec, compile_all, \
+    generate_modules, PycrateGenerator, GLOBAL
 from pycrate_asn1rt.asnobj import ASN1Obj
 
 Element._SAFE_STAT = True
 Element._SAFE_DYN  = True
 ASN1Obj._SAFE_INIT = True
 
-# enabling the compilation of all ASN.1 modules from pycrate_asn1dir
-# takes few minutes
-#global TEST_ASN1C_ALL
-TEST_ASN1C_ALL = False
+# enabling the compilation of all ASN.1 modules from pycrate_asn1dir, taking few minutes
+TEST_ASN1C_ALL_COMP = False
+# enabling the loading of all ASN.1 modules from pycrate_asn1dir
+TEST_ASN1C_ALL_LOAD = False
+
 
 class TestPycrate(unittest.TestCase):
     
@@ -72,6 +74,7 @@ class TestPycrate(unittest.TestCase):
         test_elt_1()
         test_elt_2()
         test_elt_3()
+        test_elt_4()
     
     # fmt_media objects
     def test_media(self):
@@ -87,43 +90,53 @@ class TestPycrate(unittest.TestCase):
     # fmt_ip objects
     def test_ether(self):
         print('[<>] testing pycrate_ether')
-        test_ip(eth_frames)
+        test_ether(eth_frames)
     
     # asn1c
-    def test_asn1c(self):
+    def test_asn1c(self, test_all_comp=TEST_ASN1C_ALL_COMP, test_all_load=TEST_ASN1C_ALL_LOAD):
         print('[<>] testing pycrate_asn1c')
         # create an "asn" dir for storing compiled specifications
-        if 'test_asn' not in os.listdir('.'):
-            os.mkdir('test_asn')
+        if 'test_asn_todelete' not in os.listdir('.'):
+            os.mkdir('test_asn_todelete')
         # compile and generate the Hardcore ASN.1 module
         fd = open('./test/res/Hardcore.asn', 'r')
         asntext = fd.read()
         fd.close()
-        fd_init = open('./test_asn/__init__.py', 'w')
+        fd_init = open('./test_asn_todelete/__init__.py', 'w')
         fd_init.write('__all__ = [')
         compile_text(asntext)
-        generate_modules(PycrateGenerator, './test_asn/Hardcore.py')
+        generate_modules(PycrateGenerator, './test_asn_todelete/Hardcore.py')
         GLOBAL.clear()
         fd_init.write('\'Hardcore\', ')
-        if TEST_ASN1C_ALL:
+        if test_all_comp:
+            print(ASN_SPECS)
             # compile and generate all specifications from the asndir
             for sn in ASN_SPECS:
                 compile_spec(shortname=sn)
-                generate_modules(PycrateGenerator, './test_asn/%s.py' % sn)
+                generate_modules(PycrateGenerator, './test_asn_todelete/%s.py' % sn)
                 GLOBAL.clear()
                 fd_init.write('\'%s\',' % sn)
         fd_init.write(']\n')
         fd_init.close()
-        print('[<>] all ASN.1 modules generated to ./test_asn/')
+        print('[<>] all ASN.1 modules generated to ./test_asn_todelete/')
         # load all specification
         print('[<>] loading all compiled module')
-        importlib.import_module('test_asn.Hardcore')
-        del sys.modules['test_asn.Hardcore']
-        if TEST_ASN1C_ALL:
-            for sn in ASN_SPECS:
-                importlib.import_module('test_asn.%s' % sn)
-                del sys.modules['test_asn.%s' % sn]
-        print('[<>] all ASN.1 modules loaded successfully from ./test_asn/')
+        importlib.import_module('test_asn_todelete.Hardcore')
+        del sys.modules['test_asn_todelete.Hardcore']
+        if test_all_load:
+            if test_all_comp:
+                # test loading modules freshly compiled
+                for sn in ASN_SPECS:
+                    importlib.import_module('test_asn_todelete.%s' % sn)
+                    del sys.modules['test_asn_todelete.%s' % sn]
+                    print('  - loaded %s' % sn)
+            else:
+                for sn in ASN_SPECS:
+                    importlib.import_module('pycrate_asn1dir.%s' % sn)
+                    del sys.modules['pycrate_asn1dir.%s' % sn]
+                    print('  - loaded %s' % sn)
+        print('[<>] all ASN.1 modules loaded successfully')
+        GLOBAL.clear()
     
     # asn1rt
     def test_asn1rt(self):
@@ -131,9 +144,11 @@ class TestPycrate(unittest.TestCase):
         test_rt_base()
         test_rrc3g()
         test_lteran()
+        test_nrran()
         test_tcap_map()
         test_tcap_cap()
         test_X509()
+        GLOBAL.clear()
     
     # csn1
     def test_csn1(self):
@@ -145,14 +160,21 @@ class TestPycrate(unittest.TestCase):
         test_msracap()
         test_si2qr()
         test_si13r()
-        
+    
     # mobile
     def test_mobile(self):
         print('[<>] testing pycrate_mobile')
         test_nas_mo()
         test_nas_mt()
+        test_nas_5g()
         test_sigtran()
         test_sccp()
+        test_isup()
+        test_gtp()
+        test_gtpu()
+        test_gtpc()
+        test_diameter()
+        test_pfcp()
     
     # mobile / GSM RR
     def test_gsmrr(self):
@@ -178,7 +200,8 @@ def test_perf_all():
     test_perf_csn1()
     test_perf_mobile()
     test_perf_gsmrr()
-    print('[<<<>>>] total time: %.4f' % (time.time() - T0))
+    print('[<<<>>>] test_perf_all total time: %.4f' % (time.time() - T0))
+
 
 if __name__ == '__main__':
     #unittest.main()

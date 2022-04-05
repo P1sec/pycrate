@@ -1,7 +1,7 @@
 # -*- coding: UTF-8 -*-
 #/**
 # * Software Name : pycrate
-# * Version : 0.3
+# * Version : 0.4
 # *
 # * Copyright 2017. Benoit Michau. ANSSI.
 # * Copyright 2018. Benoit Michau. P1Sec.
@@ -136,6 +136,22 @@ Single value: int 0
         def _to_jval(self):
             return None
 
+    ###
+    # conversion between internal value and ASN.1 OER/COER encoding
+    ###
+
+    def _from_oer(self, char):
+        self._from_per(char)
+
+    def _from_oer_ws(self, char):
+        self._from_per_ws()
+
+    def _to_oer(self):
+        return self._to_per()
+
+    def _to_oer_ws(self):
+        return self._to_per_ws()
+
 
 class BOOL(ASN1Obj):
     __doc__ = """
@@ -152,6 +168,8 @@ Single value: Python bool
     _ASN_LUT  = {'FALSE': False, 'TRUE': True, False: 'FALSE', True: 'TRUE'}
     _PER_LUT  = {0: False, 1: True}
     _PER_LUTR = {False: 0, True: 1}
+    _OER_LUT = {ASN1CodecOER.TRUE: True, ASN1CodecOER.FALSE: False}
+    _OER_LUTS = {ASN1CodecOER.FALSE: 'FALSE', ASN1CodecOER.TRUE: 'TRUE'}
     
     def _safechk_val(self, val):
         if not isinstance(val, bool):
@@ -263,7 +281,31 @@ Single value: Python bool
         
         def _to_jval(self):
             return self._val
-    
+
+    ###
+    # conversion between internal value and ASN.1 OER/COER encoding
+    ###
+
+    def _from_oer(self, char):
+        self._val = (char.get_uint(8) > ASN1CodecOER.FALSE)
+
+    def _from_oer_ws(self, char):
+        self._struct = Envelope(self._name, GEN=(
+            Uint('V', bl=8, dic=self._OER_LUTS), ))
+        self._struct._from_char(char)
+        self._val = self._OER_LUT[self._struct[0]._val]
+
+    def _to_oer(self):
+        # actually, COER only
+        val = ASN1CodecOER.TRUE if (self._val is True) else ASN1CodecOER.FALSE
+        return [(T_UINT, val, 8)]
+
+    def _to_oer_ws(self):
+        # actually, COER only
+        val = ASN1CodecOER.TRUE if (self._val is True) else ASN1CodecOER.FALSE
+        self._struct = Envelope(self._name, GEN=(
+            Uint('V', bl=8, val=val, dic=self._OER_LUTS), ))
+        return self._struct
 
 #------------------------------------------------------------------------------#
 # INTEGER and REAL
@@ -292,28 +334,32 @@ Specific attribute:
     _ASN_RE = re.compile('\-{0,1}[0-9]{1,}')
     
     def _safechk_val(self, val):
-        self._safechk_val_int(val)
-    
-    def set_val(self, val):
         if isinstance(val, str_types):
-            try:
-                self._val = self._cont[val]
-            except:
+            if not self._cont:
+                raise(ASN1ObjErr('{0}: invalid named value, {1!r}'.format(self.fullname(), val)))
+            elif val not in self._cont:
                 raise(ASN1ObjErr('{0}: invalid named value, {1!r}'.format(self.fullname(), val)))
         else:
-            self._val = val
-        if self._SAFE_VAL:
-            self._safechk_val(self._val)
-        if self._SAFE_BND:
-            self._safechk_bnd(self._val)
+            self._safechk_val_int(val)
+    
+    def _safechk_bnd(self, val):
+        # only check bound when an integer is set as value
+        if isinstance(val, integer_types):
+            ASN1Obj._safechk_bnd(self, val)
     
     def get_name(self):
         """Returns the NamedNumber corresponding to the internal value
         """
         try:
             return self._cont_rev[self._val]
-        except:
+        except Exception:
             return None
+    
+    def _name_to_val(self):
+        try:
+            self._val = self._cont[self._val]
+        except:
+            raise(ASN1ObjErr('{0}: invalid named value, {1!r}'.format(self.fullname(), val)))
     
     ###
     # conversion between internal value and ASN.1 syntax
@@ -336,8 +382,14 @@ Specific attribute:
         raise(ASN1ASNDecodeErr('{0}: invalid text, {1!r}'.format(self.fullname(), txt)))
     
     def _to_asn1(self):
-        if self._cont and self._val in self._cont_rev:
-            return '%i -- %s --' % (self._val, self._cont_rev[self._val])
+        name = None
+        if isinstance(self._val, str_types):
+            name = self._val
+            self._name_to_val()
+        elif self._cont and self._val in self._cont_rev:
+            name = self._cont_rev[self._val]
+        if name:
+            return '%i -- %s --' % (self._val, name)
         else:
             return '%i' % self._val
     
@@ -410,6 +462,8 @@ Specific attribute:
         return
     
     def _to_per_ws(self):
+        if isinstance(self._val, str_types):
+            self._name_to_val()
         GEN = []
         if self._const_val:
             if self._const_val.ext is not None:
@@ -445,6 +499,8 @@ Specific attribute:
         return self._struct
     
     def _to_per(self):
+        if isinstance(self._val, str_types):
+            self._name_to_val()
         GEN = []
         if self._const_val:
             if self._const_val.ext is not None:
@@ -483,7 +539,7 @@ Specific attribute:
                   .format(self.fullname())))
         if vbnd[1] - vbnd[0] <= 0:
             raise(ASN1BERDecodeErr('{0}: invalid INTEGER length, {1!r}'\
-                  .format(self.fullname(), lval)))
+                  .format(self.fullname(), vbnd[1]-vbnd[0])))
         char._cur, char._len_bit = vbnd[0], vbnd[1]
         V = Int('V', bl=vbnd[1]-vbnd[0])
         V._from_char(char)
@@ -496,15 +552,19 @@ Specific attribute:
                   .format(self.fullname())))
         if vbnd[1] - vbnd[0] <= 0:
             raise(ASN1BERDecodeErr('{0}: invalid INTEGER length, {1!r}'\
-                  .format(self.fullname(), lval)))
+                  .format(self.fullname(), vbnd[1]-vbnd[0])))
         char._cur, char._len_bit = vbnd[0], vbnd[1]
         self._val = char.get_int(vbnd[1]-vbnd[0])
     
     def _encode_ber_cont_ws(self):
+        if isinstance(self._val, str_types):
+            self._name_to_val()
         lval = int_bytelen(self._val)
         return 0, lval, Int('V', val=self._val, bl=8*lval)
     
     def _encode_ber_cont(self):
+        if isinstance(self._val, str_types):
+            self._name_to_val()
         lval = int_bytelen(self._val)
         return 0, lval, [(T_INT, self._val, 8*lval)]
 
@@ -522,7 +582,81 @@ Specific attribute:
                       .format(self.fullname(), val)))
         
         def _to_jval(self):
+            if isinstance(self._val, set):
+                self._names_to_val()
             return self._val
+
+    ###
+    # conversion between internal value and ASN.1 OER/COER encoding
+    ###
+
+    def _to_oer(self):
+        if self._const_val:
+            # Constraints defined
+            if self._const_val.ext is not None:
+                # Extensible OER-visible constraints are encoded as integer
+                # type with no bounds
+                return ASN1CodecOER.encode_intunconst(self._val)
+
+            # Constrained
+            return ASN1CodecOER.encode_intconst(self._val, self._const_val)
+        else:
+            # Unconstrained
+            return ASN1CodecOER.encode_intunconst(self._val)
+
+    def _to_oer_ws(self):
+        if self._const_val:
+            # Constraints defined
+            if self._const_val.ext is not None:
+                # Extensible OER-visible constraints are encoded as integer
+                # type with no bounds
+                self._struct = Envelope(
+                    self._name,
+                    GEN=ASN1CodecOER.encode_intunconst_ws(self._val))
+                return self._struct
+
+            # Constrained
+            self._struct = Envelope(
+                self._name,
+                GEN=ASN1CodecOER.encode_intconst_ws(self._val, self._const_val)
+            )
+            return self._struct
+        else:
+            # Unconstrained
+            self._struct = Envelope(
+                self._name,
+                GEN=ASN1CodecOER.encode_intunconst_ws(self._val)
+            )
+            return self._struct
+
+    def _from_oer(self, char):
+        if self._const_val:
+            if self._const_val.ext is not None:
+                self._val = ASN1CodecOER.decode_intunconst(char)
+                return
+
+            # Constrained
+            self._val = ASN1CodecOER.decode_intconst(char, self._const_val)
+            return
+        else:
+            # Unconstrained
+            self._val = ASN1CodecOER.decode_intunconst(char)
+            return
+
+    def _from_oer_ws(self, char):
+        if self._const_val:
+            if self._const_val.ext is not None:
+                self._val, _gen = ASN1CodecOER.decode_intunconst_ws(char)
+                self._struct = Envelope(self._name, GEN=_gen)
+                return
+
+            # Constrained
+            self._val, _gen = ASN1CodecOER.decode_intconst_ws(char, self._const_val)
+            self._struct = Envelope(self._name, GEN=_gen)
+        else:
+            # Unconstrained
+            self._val, _gen = ASN1CodecOER.decode_intunconst_ws(char)
+            self._struct = Envelope(self._name, GEN=_gen)
 
 
 class REAL(ASN1Obj):
@@ -910,13 +1044,174 @@ Specific attribute:
                 if self._val[2] >= 0:
                     return self._val[0] * (2<<self._val[2])
                 else:
-                    return {'base10Value': '%s' % (self._val[0]*(2**self._val[2]))}
+                    return {'base10Value': '%.16e' % (self._val[0]*(2**self._val[2]))}
             else:
-                #self._val[1] == 10
+                #self._val[1] == 10
                 # TODO: some constraints on the mantissa / base / exponent should
                 # lead to an integer encoding instead of this scientific notation
                 return {'base10Value': '%ie%i' % (self._val[0], self._val[2])}
 
+    ###
+    # conversion between internal value and ASN.1 OER/COER encoding
+    ###
+
+    def _from_oer_ws(self, char):
+        # Assuming pycrate takes care of constraints
+        if ((self._const_val is not None) and
+                (not self._const_val.in_root(None)) and
+                (self._const_val.ext is None)):
+            # Check for constraints
+            lb = self._const_val.root[0].lb
+            ub = self._const_val.root[0].ub
+            if lb[1] == ub[1] == 2:  # Automatically excludes +/- Inf
+                if (((min(lb[3], ub[3]) >=
+                      ASN1CodecOER.REAL_IEEE754_32_EXP_MIN) and
+                     (max(lb[3], ub[3]) <=
+                      ASN1CodecOER.REAL_IEEE754_32_EXP_MAX)) and
+                        ((min(lb[0], ub[0]) >=
+                          ASN1CodecOER.REAL_IEEE754_32_MANTIS_MIN) and
+                         (max(lb[3], ub[3]) <=
+                          ASN1CodecOER.REAL_IEEE754_32_MANTIS_MAX))):
+                    buf = Buf('V', bl=32)
+                    buf._from_char(char)
+                    self._struct = Envelope(self._name, GEN=(buf,))
+                    self._val = decode_ieee754_32(Charpy(buf.to_bytes()))
+                    return
+
+                if (((min(lb[3], ub[3]) >=
+                      ASN1CodecOER.REAL_IEEE754_64_EXP_MIN) and
+                     (max(lb[3], ub[3]) <=
+                      ASN1CodecOER.REAL_IEEE754_64_EXP_MAX)) and
+                        ((min(lb[0], ub[0]) >=
+                          ASN1CodecOER.REAL_IEEE754_64_MANTIS_MIN) and
+                         (max(lb[3], ub[3]) <=
+                          ASN1CodecOER.REAL_IEEE754_64_MANTIS_MAX))):
+                    buf = Buf('V', bl=64)
+                    buf._from_char(char)
+                    self._struct = Envelope(self._name, GEN=(buf,))
+                    self._val = decode_ieee754_64(Charpy(buf.to_bytes()))
+                    return
+
+        # else DER
+        l_val, _gen = ASN1CodecOER.decode_length_determinant_ws(char)
+        buf = Buf('V', bl=l_val*8)
+        buf._from_char(char)
+        _gen.append(buf)
+        self._struct = Envelope(self._name, GEN=(_gen,))
+        self.from_der(buf.to_bytes())
+
+    def _from_oer(self, char):
+        # Assuming pycrate takes care of constraints
+        if ((self._const_val is not None) and
+                (not self._const_val.in_root(None)) and
+                (self._const_val.ext is None)):
+            # Check for constraints
+            lb = self._const_val.root[0].lb
+            ub = self._const_val.root[0].ub
+            if lb[1] == ub[1] == 2:  # Automatically excludes +/- Inf
+                if (((min(lb[3], ub[3]) >=
+                      ASN1CodecOER.REAL_IEEE754_32_EXP_MIN) and
+                     (max(lb[3], ub[3]) <=
+                      ASN1CodecOER.REAL_IEEE754_32_EXP_MAX)) and
+                        ((min(lb[0], ub[0]) >=
+                          ASN1CodecOER.REAL_IEEE754_32_MANTIS_MIN) and
+                         (max(lb[3], ub[3]) <=
+                          ASN1CodecOER.REAL_IEEE754_32_MANTIS_MAX))):
+                    self._val = decode_ieee754_32(char)
+                    return
+
+                if (((min(lb[3], ub[3]) >=
+                      ASN1CodecOER.REAL_IEEE754_64_EXP_MIN) and
+                     (max(lb[3], ub[3]) <=
+                      ASN1CodecOER.REAL_IEEE754_64_EXP_MAX)) and
+                        ((min(lb[0], ub[0]) >=
+                          ASN1CodecOER.REAL_IEEE754_64_MANTIS_MIN) and
+                         (max(lb[3], ub[3]) <=
+                          ASN1CodecOER.REAL_IEEE754_64_MANTIS_MAX))):
+                    self._val = decode_ieee754_64(char)
+                    return
+
+        # else DER
+        l_val = ASN1CodecOER.decode_length_determinant(char)
+        val = char.get_bytes(l_val*8)
+        self.from_der(val)
+
+    def _to_oer_ws(self):
+        # Assuming pycrate takes care of constraints
+        if ((self._const_val is not None) and
+                (not self._const_val.in_root(None)) and
+                (self._const_val.ext is None)):
+            # Check for constraints
+            lb = self._const_val.root[0].lb
+            ub = self._const_val.root[0].ub
+            if lb[1] == ub[1] == 2:  # Automatically excludes +/- Inf
+                if (((min(lb[3], ub[3]) >=
+                      ASN1CodecOER.REAL_IEEE754_32_EXP_MIN) and
+                     (max(lb[3], ub[3]) <=
+                      ASN1CodecOER.REAL_IEEE754_32_EXP_MAX)) and
+                        ((min(lb[0], ub[0]) >=
+                          ASN1CodecOER.REAL_IEEE754_32_MANTIS_MIN) and
+                         (max(lb[3], ub[3]) <=
+                          ASN1CodecOER.REAL_IEEE754_32_MANTIS_MAX))):
+                    _gen = (Buf('V', val=encode_ieee754_32(self._val), bl=32),)
+                    self._struct = Envelope(self._name, GEN=_gen)
+                    return self._struct
+
+                if (((min(lb[3], ub[3]) >=
+                      ASN1CodecOER.REAL_IEEE754_64_EXP_MIN) and
+                     (max(lb[3], ub[3]) <=
+                      ASN1CodecOER.REAL_IEEE754_64_EXP_MAX)) and
+                        ((min(lb[0], ub[0]) >=
+                          ASN1CodecOER.REAL_IEEE754_64_MANTIS_MIN) and
+                         (max(lb[3], ub[3]) <=
+                          ASN1CodecOER.REAL_IEEE754_64_MANTIS_MAX))):
+                    _gen = (Buf('V', val=encode_ieee754_64(self._val), bl=64),)
+                    self._struct = Envelope(self._name, GEN=_gen)
+                    return self._struct
+
+        # else DER
+        val = self.to_der()  # not to_det_ws!!!, we are only interested in buf
+        l_val = len(val)
+        _gen = ASN1CodecOER.encode_length_determinant_ws(len(val))
+        _gen.append(Buf('V', val=val, bl=l_val*8))
+        self._struct = Envelope(self._name, GEN=(_gen,))
+        return self._struct
+
+    def _to_oer(self):
+        # Assuming pycrate takes care of constraints
+        if ((self._const_val is not None) and
+                (not self._const_val.in_root(None)) and
+                (self._const_val.ext is None)):
+            # Check for constraints
+            lb = self._const_val.root[0].lb
+            ub = self._const_val.root[0].ub
+            if lb[1] == ub[1] == 2:  # Automatically excludes +/- Inf
+                if (((min(lb[3], ub[3]) >=
+                      ASN1CodecOER.REAL_IEEE754_32_EXP_MIN) and
+                     (max(lb[3], ub[3]) <=
+                      ASN1CodecOER.REAL_IEEE754_32_EXP_MAX)) and
+                    ((min(lb[0], ub[0]) >=
+                      ASN1CodecOER.REAL_IEEE754_32_MANTIS_MIN) and
+                     (max(lb[3], ub[3]) <=
+                      ASN1CodecOER.REAL_IEEE754_32_MANTIS_MAX))):
+                    return [(T_BYTES, encode_ieee754_32(self._val), 32)]
+
+                if (((min(lb[3], ub[3]) >=
+                      ASN1CodecOER.REAL_IEEE754_64_EXP_MIN) and
+                     (max(lb[3], ub[3]) <=
+                      ASN1CodecOER.REAL_IEEE754_64_EXP_MAX)) and
+                    ((min(lb[0], ub[0]) >=
+                      ASN1CodecOER.REAL_IEEE754_64_MANTIS_MIN) and
+                     (max(lb[3], ub[3]) <=
+                      ASN1CodecOER.REAL_IEEE754_64_MANTIS_MAX))):
+                    return [(T_BYTES, encode_ieee754_64(self._val), 64)]
+
+        # else DER
+        val = self.to_der()
+        l_val = len(val)
+        GEN = ASN1CodecOER.encode_length_determinant(len(val))
+        GEN.append((T_BYTES, val, l_val*8))
+        return GEN
 
 #------------------------------------------------------------------------------#
 # ENUMERATED, OID and RELATIVE-OID
@@ -1027,7 +1322,10 @@ Specific attribute:
         else:
             # 6) decode the enum index in the minimum number of bits
             ind, _gen = ASN1CodecPER.decode_intconst_ws(char, self._const_ind, name='I')
-            self._val = self._root[ind]
+            try:
+                self._val = self._root[ind]
+            except IndexError:
+                raise(ASN1PERDecodeErr('{0}: invalid ENUMERATED index, %r'.format(self.fullname(), ind)))
             self._struct = Envelope(self._name, GEN=tuple(GEN + _gen))
             return
     
@@ -1067,7 +1365,10 @@ Specific attribute:
         else:
             # 6) decode the enum index in the minimum number of bits
             ind = ASN1CodecPER.decode_intconst(char, self._const_ind)
-            self._val = self._root[ind]
+            try:
+                self._val = self._root[ind]
+            except IndexError:
+                raise(ASN1PERDecodeErr('{0}: invalid ENUMERATED index, %r'.format(self.fullname(), ind)))
             return
     
     def _to_per_ws(self):
@@ -1086,7 +1387,7 @@ Specific attribute:
                 if self._val in self._ext:
                     ind = self._ext.index(self._val)
                 else:
-                    #self._val[:5] == '_ext_':
+                    #self._val[:5] == '_ext_'
                     ind = int(self._val[5:])
                 if ind < 64:
                     # 4) normally small index
@@ -1125,7 +1426,8 @@ Specific attribute:
                 if self._val in self._ext:
                     GEN.append( (T_UINT, 1, 1) )
                     ind = self._ext.index(self._val)
-                elif self._val[:5] == '_ext_':
+                else:
+                    # self._val[:5] == '_ext_'
                     GEN.append( (T_UINT, 1, 1) )
                     ind = int(self._val[5:])
                 if ind < 64:
@@ -1194,18 +1496,20 @@ Specific attribute:
             self._val = self._cont_rev[val]
     
     def _encode_ber_cont_ws(self):
-        if self._val[:5] == '_ext_':
-            val = int(self._val[5:])
-        else:
+        if self._val in self._cont:
             val = self._cont[self._val]
+        else:
+            # self._val[:5] == '_ext_'
+            val = int(self._val[5:])
         lval = int_bytelen(val)
         return 0, lval, Int('V', val=val, bl=8*lval)
     
     def _encode_ber_cont(self):
-        if self._val[:5] == '_ext_':
-            val = int(self._val[5:])
-        else:
+        if self._val in self._cont:
             val = self._cont[self._val]
+        else:
+            # self._val[:5] == '_ext_'
+            val = int(self._val[5:])
         lval = int_bytelen(val)
         return 0, lval, [ (T_INT, val, 8*lval) ]
     
@@ -1225,6 +1529,63 @@ Specific attribute:
         def _to_jval(self):
             return self._val
 
+    ###
+    # conversion between internal value and ASN.1 OER/COER encoding
+    ###
+
+    def _get_index(self):
+        try:
+            ind = self._cont[self._val]
+        except KeyError:
+            if self._ext is not None:
+                # Just try to convert the value into an index
+                try:
+                    ind = int(self._val)
+                except ValueError:
+                    try:
+                        # The pycrate "_ext_" format
+                        ind = int(self._val[5:])
+                    except ValueError:
+                        raise ASN1OEREncodeErr(
+                            "{0}: invalid ENUMERATED value, {1}".format(
+                                self.fullname(),
+                                self._val))
+        return ind
+
+    def _get_index_value(self, index):
+        try:
+            val = self._cont_rev[index]
+        except (KeyError):
+            if self._ext is not None:
+                if not self._SILENT:
+                    asnlog('ENUM._from_oer: %s, unknown extension value %r' \
+                           % (self._name, index))
+                # Just try to convert the value into an index
+                val = '_ext_%r' % index
+            else:
+                raise (ASN1OERDecodeErr(
+                    '{0}: invalid ENUMERATED value, {1}'.format(self.fullname(),
+                                                               index)))
+
+        return val
+
+    def _from_oer_ws(self, char):
+        index, _gen = ASN1CodecOER.decode_enumerated_ws(char)
+        self._val = self._get_index_value(index)
+        self._struct = Envelope(self._name, GEN=(_gen,))
+
+    def _from_oer(self, char):
+        self._val = self._get_index_value(ASN1CodecOER.decode_enumerated(char))
+
+    def _to_oer_ws(self):
+        self._struct = Envelope(self._name, GEN=(
+            ASN1CodecOER.encode_enumerated_ws(self._get_index()),
+        ))
+        return self._struct
+
+    def _to_oer(self):
+        return ASN1CodecOER.encode_enumerated(self._get_index())
+
 
 class _OID(ASN1Obj):
     
@@ -1233,6 +1594,10 @@ class _OID(ASN1Obj):
     _ASN_RE = re.compile('\{([a-zA-Z0-9\-\(\)\s]{1,})\}')
     _ASN_RE_COMP = re.compile(
     '([0-9]{1,})|(?:([a-zA-Z]{1}[a-zA-Z0-9\-]{0,})\s{0,}(?:\(([0-9]{1,})\)){0,1})')
+    
+    # _ASN_WASC potentially add the name of the OID in ascii in comment
+    # when returned by _to_asn1() 
+    _ASN_WASC = True
     
     def _safechk_val(self, val):
         if not isinstance(val, tuple) or \
@@ -1272,7 +1637,7 @@ class _OID(ASN1Obj):
                   .format(self.fullname(), txt)))
     
     def _to_asn1(self):
-        if self.TYPE == TYPE_OID and self._val in GLOBAL.OID:
+        if self.TYPE == TYPE_OID and self._ASN_WASC and self._val in GLOBAL.OID:
             return '{%s} -- %s --' % (' '.join(map(str, self._val)), GLOBAL.OID[self._val])
         else:
             return '{%s}' % ' '.join(map(str, self._val))
@@ -1338,12 +1703,41 @@ class _OID(ASN1Obj):
         def _from_jval(self, val):
             try:
                 self._val = tuple(map(int, val.split('.')))
-            except:
+            except Exception:
                 raise(ASN1JERDecodeErr('{0}: invalid json value, {1!r}'\
                       .format(self.fullname(), val)))
         
         def _to_jval(self):
             return '.'.join(map(str, self._val))
+
+    ###
+    # conversion between internal value and ASN.1 OER/COER encoding
+    ###
+    def _to_oer(self):
+        _, l_val, _gen = self._encode_ber_cont()
+        det = ASN1CodecOER.encode_length_determinant(l_val)
+        det.extend(_gen)
+        return det
+
+    def _to_oer_ws(self):
+        _, l_val, _gen = self._encode_ber_cont_ws()
+        det = ASN1CodecOER.encode_length_determinant_ws(l_val)
+        det.append(_gen)
+        self._struct = Envelope(self._name, GEN=tuple(det))
+        return self._struct
+
+    def _from_oer(self, char):
+        l_val = ASN1CodecOER.decode_length_determinant(char)
+        buf = char.get_bytes(l_val * 8)
+        self._decode_cont(buf)
+
+    def _from_oer_ws(self, char):
+        l_val, det = ASN1CodecOER.decode_length_determinant_ws(char)
+        buf = Buf('V', bl=l_val*8)
+        buf._from_char(char)
+        det.append(buf)
+        self._decode_cont(buf.to_bytes())
+        return Envelope(self._name, GEN=tuple(det))
 
 
 class OID(_OID):
@@ -1374,7 +1768,7 @@ Single value: Python tuple of int
                     e = char.get_uint(1)
                     v <<= 7
                     v += char.get_uint(7)
-                except Exception as err:
+                except Exception:
                     raise(ASN1BERDecodeErr('{0}: invalid OID integer value'\
                           .format(self.fullname())))
             arcs.append(v)
@@ -1405,6 +1799,8 @@ Single value: Python tuple of int
         by = []
         for i in arcs:
             fact = decompose_uint_sl(7, i)
+            if ASN1CodecBER.ENC_OID_LEXT and len(fact) < ASN1CodecBER.ENC_OID_LEXT:
+                fact.extend([0]*(ASN1CodecBER.ENC_OID_LEXT-len(fact)))
             fact.reverse()
             for f in fact[:-1]:
                 by.append( 0x80 + f )
@@ -1443,7 +1839,7 @@ Single value: Python tuple of int
                     e = char.get_uint(1)
                     v <<= 7
                     v += char.get_uint(7)
-                except Exception as err:
+                except Exception:
                     raise(ASN1BERDecodeErr('{0}: invalid OID integer value'\
                           .format(self.fullname())))
             arcs.append(v)
@@ -1454,6 +1850,8 @@ Single value: Python tuple of int
         by = []
         for i in self._val:
             fact = decompose_uint_sl(7, i)
+            if ASN1CodecBER.ENC_OID_LEXT and len(fact) < ASN1CodecBER.ENC_OID_LEXT:
+                fact.extend([0]*(ASN1CodecBER.ENC_OID_LEXT-len(fact)))
             fact.reverse()
             for f in fact[:-1]:
                 by.append( 0x80 + f )

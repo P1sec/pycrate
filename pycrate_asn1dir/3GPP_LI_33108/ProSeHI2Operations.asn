@@ -1,0 +1,135 @@
+ProSeHI2Operations {itu-t(0) identified-organization(4) etsi(0) securityDomain(2) lawfulintercept(2) threeGPP(4) hi2prose(15) r16 (16) version0(0)}
+
+DEFINITIONS IMPLICIT TAGS ::=
+
+BEGIN
+
+IMPORTS
+
+
+		LawfulInterceptionIdentifier,
+		TimeStamp,
+		Network-Identifier,
+		National-Parameters,
+		National-HI2-ASN1parameters,
+		IPAddress
+
+			FROM HI2Operations
+			{itu-t(0) identified-organization(4) etsi(0) securityDomain(2)
+ 				  lawfulIntercept(2) hi2(1) version18(18)}; -- Imported from TS 101 671
+
+-- Object Identifier Definitions
+
+-- Security DomainId
+lawfulInterceptDomainId OBJECT IDENTIFIER ::= {itu-t(0) identified-organization(4) etsi(0)
+securityDomain(2) lawfulIntercept(2)}
+
+-- Security Subdomains
+threeGPPSUBDomainId OBJECT IDENTIFIER ::= {lawfulInterceptDomainId threeGPP(4)}
+hi2ProSeDomainId OBJECT IDENTIFIER	::= {threeGPPSUBDomainId hi2prose(15) r16 (16) version0(0)}
+
+ProSeIRIsContent		::= CHOICE
+{
+	proseIRIContent			[1] ProSeIRIContent,
+	proseIRISequence		[2] ProSeIRISequence
+}
+
+ProSeIRISequence		::= SEQUENCE OF ProSeIRIContent
+
+-- Aggregation of ProSeIRIContent is an optional feature.
+-- It may be applied in cases when at a given point in time
+-- several IRI records are available for delivery to the same LEA destination.
+-- As a general rule, records created at any event shall be sent
+-- immediately and not withheld in the DF or MF in order to
+-- apply aggregation.
+-- When aggregation is not to be applied,
+-- ProSeIRIContent needs to be chosen.
+
+ProSeIRIContent		::= CHOICE
+{
+	iRI-Report-record		[1] IRI-Parameters,	
+   ...
+}
+
+
+IRI-Parameters		::= SEQUENCE
+{
+	hi2ProSeDomainId 				[0]	OBJECT IDENTIFIER,  -- 3GPP HI2 ProSe domain
+	lawfulInterceptionIdentifier	[1] LawfulInterceptionIdentifier,
+		-- This identifier is associated with the target.
+	timeStamp						[2] TimeStamp,
+		-- date and time of the event triggering the report.
+	networkIdentifier				[3] Network-Identifier,
+	proseEventData					[4] ProSeEventData,
+	national-Parameters				[5] National-Parameters OPTIONAL,
+	national-HI2-ASN1parameters		[6]	National-HI2-ASN1parameters	OPTIONAL,
+...
+}
+
+-- PARAMETERS FORMATS
+
+ProSeEventData			::= CHOICE
+{
+	proseDirectDiscovery 	[0]  ProSeDirectDiscovery,
+
+	...
+
+}
+
+ProSeDirectDiscovery ::= SEQUENCE
+{
+	proseDirectDiscoveryEvent	[0] ProSeDirectDiscoveryEvent,
+	targetImsi					[1] OCTET STRING (SIZE (3..8)),
+			-- See MAP format [4] International Mobile
+			-- Station Identity E.212 number beginning with Mobile Country Code
+	targetRole					[2] TargetRole,
+	directDiscoveryData			[3] DirectDiscoveryData,
+	metadata					[4] UTF8String OPTIONAL,
+	otherUeImsi					[5] OCTET STRING (SIZE (3..8)) OPTIONAL,
+			-- See MAP format [4] International Mobile
+			-- Station Identity E.212 number beginning with Mobile Country Code
+
+	...
+
+
+}
+
+ProSeDirectDiscoveryEvent ::= ENUMERATED
+{
+	proseDiscoveryRequest 		  	(1),
+	proseMatchReport				(2),
+
+	...
+}
+
+TargetRole ::= ENUMERATED
+{
+	announcingUE				(1),
+	monitoringUE				(2),
+	...
+}
+
+DirectDiscoveryData::= SEQUENCE
+{
+	discoveryPLMNID 			[1] UTF8String,
+	proseAppIdName				[2] UTF8String,
+	proseAppCode				[3] OCTET STRING (SIZE (23)),
+            -- See format in TS 23.003 [25]
+	proseAppMask				[4] ProSeAppMask OPTIONAL,
+	timer						[5] INTEGER,
+	
+	...
+}
+
+ProSeAppMask		::= CHOICE
+{
+	proseMask				[1] OCTET STRING (SIZE (23)),
+	-- formatted like the proseappcode; used in conjuction with the corresponding
+	-- proseappcode bitstring to form a filter.
+	proseMaskSequence		[2] ProSeMaskSequence
+}
+
+ProSeMaskSequence		::= SEQUENCE OF OCTET STRING (SIZE (23))
+-- There can be multiple masks for a ProSe App code at the monitoring UE
+
+END

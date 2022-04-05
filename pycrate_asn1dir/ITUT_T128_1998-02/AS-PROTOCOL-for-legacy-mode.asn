@@ -1,0 +1,1310 @@
+-- Module AS-PROTOCOL-for-legacy-mode (T.128:06/2008)
+-- See also ITU-T T.128 (06/2008)
+-- See also the index of all ASN.1 assignments needed in this document
+
+--|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+--
+--               Begin AS Definitions
+--
+--|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+
+AS-PROTOCOL-for-legacy-mode {itu-t(0) recommendation(0) t(20) t128(128)
+  version(0) 2 as-protocol-for-legacy-mode(2)} DEFINITIONS AUTOMATIC TAGS ::=
+BEGIN
+
+-- NOTE – =====================================================
+-- NOTE – All abstract types defined shall be exported
+-- NOTE – =====================================================
+
+-- Constants
+maxSourceDescriptor INTEGER ::=
+  48
+
+maxTerminalDescriptor INTEGER ::= 16
+
+maxFonts INTEGER ::= 700
+
+maxPassword INTEGER ::= 9
+
+maxFaceName INTEGER ::= 32
+
+maxTitleString INTEGER ::= 50
+
+maxInputEvents INTEGER ::= 50
+
+-- Base Types
+BitString8 ::= BIT STRING(SIZE (0..7))
+
+BitString16 ::= BIT STRING(SIZE (0..15))
+
+BitString32 ::= BIT STRING(SIZE (0..31))
+
+Coordinate8 ::= INTEGER(127..128)
+
+Coordinate16 ::= INTEGER(32767..32768)
+
+Integer4 ::= INTEGER(0..15)
+
+Integer8 ::= INTEGER(0..255)
+
+Integer12 ::= INTEGER(0..4095)
+
+Integer16 ::= INTEGER(0..65535)
+
+Integer32 ::= INTEGER(0..4294967295)
+
+Boolean16 ::= INTEGER {false(0), true(1)}(0..65535)
+
+UserID ::= Integer16
+
+ShareID ::= Integer32
+
+WindowID ::= Integer32
+
+T50String ::= OCTET STRING(SIZE (0..255)) -- T.50 String
+                          
+
+ASString ::= OCTET STRING(SIZE (0..255)) -- AS Protocol CodePage String
+                         
+
+-- Bit Flag Types
+BitmapCompressionCapabilityFlags ::= BIT STRING {bitmapCompressionSupported(0)
+}(SIZE (0..15))
+
+BoundsOrderFlags ::= BIT STRING {
+  absoluteLeftPresent(0), absoluteTopPresent(1), absoluteRightPresent(2),
+  absoluteBottomPresent(3), deltaLeftPresent(4), deltaTopPresent(5),
+  deltaRightPresent(6), deltaBottomPresent(7)}(SIZE (0..7))
+
+ControlCapabilityFlags ::= BIT STRING {allowMediatedControl(0)}(SIZE (0..15))
+
+ControlOrderFlags ::= BIT STRING {
+  standard(0), -- Mandatory this flag is set
+  secondary(1), bounds(2), typeChange(3), deltaCoordinates(4)}(SIZE (0..7))
+
+ExtraOrderFlags ::= BIT STRING {secondary(3)}(SIZE (0..15))
+
+ExtraTextFlags ::= BIT STRING {
+  opaqueRectangle(1), clipToRectangle(2), deltaXPresent(15)}(SIZE (0..15))
+
+FontAttributeFlags ::= BIT STRING {fixedPitch(0), fixedSize(1)}(SIZE (0..15))
+
+KeyboardFlags ::= BIT STRING {right(0), quiet(12), down(14), release(15)
+}(SIZE (0..15))
+
+OrderCapabilityFlags ::= BIT STRING {
+  negotiateOrderSupport(1), -- Mandatory this flag is set
+  cannotReceiveOrders(2)}(SIZE (0..15))
+
+PointingDeviceFlags ::= BIT STRING {
+  move(11), button1(12), button2(13), button3(14), down(15)}(SIZE (0..15))
+
+TextAttributeFlags ::= BIT STRING {
+  italic(2), underline(3), strikeout(4), useBaselineStart(8)}(SIZE (0..15))
+
+TextCapabilityFlags ::= BIT STRING {
+  checkFontAspect(0), allowDeltaXSimulation(5), checkFontSignatures(7),
+  useBaselineStart(9)}(SIZE (0..15))
+
+WindowAttributeFlags ::= BIT STRING {
+  minimized(0), taggable(1), hosted(2), shadow(3), local(4), topmost(5),
+  windowManagerMinimized(16), windowManagerInvisible(17)}(SIZE (0..31))
+
+-- General Types
+ApplicationAction ::= INTEGER {
+  notifyHostedApplications(1), unhostApplication(2)}(0..65535)
+
+BackgroundMixMode ::= INTEGER {transparent(1), opaque(2)}(0..65535)
+
+BitmapData ::= CHOICE {
+  uncompressedBitmapData  OCTET STRING,
+  compressedBitmapData    CompressedBitmapData
+}
+
+Brush ::= SEQUENCE {
+  originX  Integer8 OPTIONAL,
+  originY  Integer8 OPTIONAL,
+  style    BrushStyle OPTIONAL,
+  hatch    BrushHatch OPTIONAL,
+  pattern  OCTET STRING(SIZE (7)) OPTIONAL
+}
+
+BrushHatch ::= CHOICE {style        HatchStyle,
+                       patternZero  Integer8
+}
+
+BrushStyle ::= INTEGER {solid(0), null(1), hatched(2), pattern(3)}(0..255)
+
+Color ::= SEQUENCE {red    Integer8,
+                    green  Integer8,
+                    blue   Integer8
+}
+
+ColorQuad ::= SEQUENCE {
+  blue       Integer8,
+  green      Integer8,
+  red        Integer8,
+  pad1octet  Integer8
+}
+
+ColorPointerAttribute ::= SEQUENCE {
+  cacheIndex        Integer16,
+  hotSpot           Point16,
+  width             Integer16,
+  height            Integer16,
+  lengthANDMAsk     Integer16,
+  -- length in octets of AND mask in colorPointerData
+  lengthXORMAsk     Integer16,
+  -- length in octets of XOR mask in colorPointerData
+  colorPointerData  OCTET STRING
+}
+
+CompressedBitmapData ::= SEQUENCE {
+  pad2octets        Integer16(0),
+  mainBodySize      Integer16,
+  rowSize           Integer16,
+  uncompressedSize  Integer16,
+  compressedBitmap  OCTET STRING
+}
+
+ControlAction ::= INTEGER {
+  requestControl(1), detach(3), grantControl(2), cooperate(4)}(0..65535)
+
+ControlPriority ::= INTEGER {always(1), never(2), confirm(3)}(0..65535)
+
+Coordinate ::= CHOICE {absolute  Coordinate16,
+                       delta     Coordinate8
+}
+
+DesktopSaveAction ::= INTEGER {desktopSave(0), desktopRestore(1)}(0..255)
+
+FontAttribute ::= SEQUENCE {
+  faceName      T50String(SIZE (1..maxFaceName)),
+  fontFlags     FontAttributeFlags,
+  averageWidth  Integer16,
+  height        Integer16,
+  aspectX       Integer16,
+  aspectY       Integer16,
+  signature1    Integer8,
+  signature2    Integer8,
+  signature3    Integer16,
+  codePage      FontCodePage,
+  ascent        Integer16
+}
+
+FontCodePage ::= INTEGER {allCodePoints(0), coreCodePoints(255)}(0..65535)
+
+HatchStyle ::= INTEGER {
+  horizontal(0), vertical(1), forward(2), backward(3), cross(4), diagonal(5)
+}(0..255)
+
+InputMessageType ::= INTEGER {
+  inputSynchronize(0), inputCodePoint(1), inputVirtualKey(2),
+  inputPointingDevice(32769) -- ('8001'H)--}(0..65535)
+
+MediatedControlAction ::= INTEGER {
+  takeControlRequest(1), passControlRequest(2), detachRequest(3),
+  confirmTakeResponse(5), denyTakeResponse(6), confirmDetachResponse(7),
+  denyDetachResponse(8), denyPassResponse(9), remoteDetachRequest(10),
+  denyRemoteDetachRequest(11)}(0..65535)
+
+MonoPointerAttribute ::= SEQUENCE {
+  hotSpot            Point16,
+  width              Integer16,
+  height             Integer16,
+  lengthPointerData  Integer16,
+  -- length in octets of monoPointerData
+  monoPointerData    OCTET STRING
+}
+
+OSMajorType ::= INTEGER {
+  unspecified(0), windows(1), oS2(2), macintosh(3), unix(4)}(0..65535)
+
+OSMinorType ::= INTEGER {
+  unspecified(0), windows-31x(1), windows-95(2), windows-NT(3), oOS2-V21(4),
+  power-pc(5), macintosh(6), native-XServer(7), pseudo-XServer(8)}(0..65535)
+
+PDUType ::= INTEGER {
+  confirmActivePDU(3), dataPDU(7), deactivateAllPDU(6), deactivateOtherPDU(4),
+  deactivateSelfPDU(5), demandActivePDU(1), requestActivePDU(2)}(0..15)
+
+PDUType2 ::= INTEGER {
+  application(25), control(20), font(11), input(28), mediatedControl(29),
+  pointer(27), remoteShare(30), synchronize(31), update(2),
+  updateCapability(32), windowActivation(23), windowList(24)}(0..255)
+
+PDUTypeFlow ::= INTEGER {flowResponsePDU(66), flowStopPDU(67), flowTestPDU(65)
+}(0..255)
+
+Pen ::= SEQUENCE {
+  style  PenStyle OPTIONAL,
+  width  Integer8(1) OPTIONAL,
+  color  Color OPTIONAL
+}
+
+PenStyle ::= ENUMERATED {
+  solid(0), dashed(1), dotted(2), dash-dot(3), dash-dot-dot(4), null(5)
+}
+
+Point16 ::= SEQUENCE {x  Coordinate16,
+                      y  Coordinate16
+}
+
+PointerMessageType ::= INTEGER {
+  cachedPointer(7), colorPointer(6), monoPointer(2), pointerPosition(3),
+  systemPointer(1)}(0..65535)
+
+PrimaryOrderType ::= INTEGER {
+  destinationBlt(0), patternBlt(1), screenBlt(2), memoryBlt(13),
+  memoryThreeWayBlt(14), text(5), extendedText(6), frame(9), rectangle(7),
+  line(8), opaqueRectangle(10), desktopSave(11), desktopOrigin(32)}(0..255)
+
+Rectangle16 ::= SEQUENCE {
+  left    Coordinate16,
+  top     Coordinate16,
+  right   Coordinate16,
+  bottom  Coordinate16
+}
+
+RemoteShareAction ::= INTEGER {
+  requestRemoteShare(1), confirmRemoteShare(2), denyRemoteShare(3)}(0..65535)
+
+RemoteShareDenial ::= INTEGER {
+  incorrectPassword(1), remoteShareNotEnabled(2),
+  remoteShareInOperationIncoming(3), remoteShareInOperationOutgoing(4)
+}(0..65535)
+
+ROP2 ::= INTEGER {
+  r2BLACK(1), r2DPon(2), r2DPna(3), r2Pn(4), r2PDna(5), r2Dn(6), r2DPx(7),
+  r2DPan(8), r2DPa(9), r2DPxn(10), r2D(11), r2DPno(12), r2P(13), r2PDno(14),
+  r2DPo(15), r2WHITE(16)}(0..255)
+
+ROP3 ::= INTEGER {
+  r3BLACK(0), -- ('00'H)
+  r3DPSoon(1), -- ('01'H)
+  r3DPSona(2), -- ('02'H)
+  r3PSon(3), -- ('03'H)
+  r3SDPona(4), -- ('04'H)
+  r3DPon(5), -- ('05'H)
+  r3PDSxnon(6), -- ('06'H)
+  r3PDSaon(7), -- ('07'H)
+  r3SDPnaa(8), -- ('08'H)
+  r3PDSxon(9), -- ('09'H)
+  r3DPna(10), -- ('0A'H)
+  r3PSDnaon(11), -- ('0B'H)
+  r3SPna(12), -- ('0C'H)
+  r3PDSnaon(13), -- ('0D'H)
+  r3PDSonon(14), -- ('0E'H)
+  r3Pn(15), -- ('0F'H)
+  r3PDSona(16), -- ('10'H)
+  r3DSon(17), -- ('11'H)
+  r3SDPxnon(18), -- ('12'H)
+  r3SDPaon(19), -- ('13'H)
+  r3DPSxnon(20), -- ('14'H)
+  r3DPSaon(21), -- ('15'H)
+  r3PSDPSanaxx(22), -- ('16'H)
+  r3SSPxDSxaxn(23), -- ('17'H)
+  r3SPxPDxa(24), -- ('18'H)
+  r3SDPSanaxn(25), -- ('19'H)
+  r3PDSPaox(26), -- ('1A'H)
+  r3SDPSxaxn(27), -- ('1B'H)
+  r3PSDPaox(28), -- ('1C'H)
+  r3DSPDxaxn(29), -- ('1D'H)
+  r3PDSox(30), -- ('1E'H)
+  r3PDSoan(31), -- ('1F'H)
+  r3DPSnaa(32), -- ('20'H)
+  r3SDPxon(33), -- ('21'H)
+  r3DSna(34), -- ('22'H)
+  r3SPDnaon(35), -- ('23'H)
+  r3SPxDSxa(36), -- ('24'H)
+  r3PDSPanaxn(37), -- ('25'H)
+  r3SDPSaox(38), -- ('26'H)
+  r3SDPSxnox(39), -- ('27'H)
+  r3DPSxa(40), -- ('28'H)
+  r3PSDPSaoxxn(41), -- ('29'H)
+  r3DPSana(42), -- ('2A'H)
+  r3SSPxPDxaxn(43), -- ('2B'H)
+  r3SPDSoax(44), -- ('2C'H)
+  r3PSDnox(45), -- ('2D'H)
+  r3PSDPxox(46), -- ('2E'H)
+  r3PSDnoan(47), -- ('2F'H)
+  r3PSna(48), -- ('30'H)
+  r3SDPnaon(49), -- ('31'H)
+  r3SDPSoox(50), -- ('32'H)
+  r3Sn(51), -- ('33'H)
+  r3SPDSaox(52), -- ('34'H)
+  r3SPDSxnox(53), -- ('35'H)
+  r3SDPox(54), -- ('36'H)
+  r3SDPoan(55), -- ('37'H)
+  r3PSDPoax(56), -- ('38'H)
+  r3SPDnox(57), -- ('39'H)
+  r3SPDSxox(58), -- ('3A'H)
+  r3SPDnoan(59), -- ('3B'H)
+  r3PSx(60), -- ('3C'H)
+  r3SPDSonox(61), -- ('3D'H)
+  r3SPDSnaox(62), -- ('3E'H)
+  r3PSan(63), -- ('3F'H)
+  r3PSDnaa(64), -- ('40'H)
+  r3DPSxon(65), -- ('41'H)
+  r3SDxPDxa(66), -- ('42'H)
+  r3SPDSanaxn(67), -- ('43'H)
+  r3SDna(68), -- ('44'H)
+  r3DPSnaon(69), -- ('45'H)
+  r3DSPDaox(70), -- ('46'H)
+  r3PSDPxaxn(71), -- ('47'H)
+  r3SDPxa(72), -- ('48'H)
+  r3PDSPDaoxxn(73), -- ('49'H)
+  r3DPSDoax(74), -- ('4A'H)
+  r3PDSnox(75), -- ('4B'H)
+  r3SDPana(76), -- ('4C'H)
+  r3SSPxDSxoxn(77), -- ('4D'H)
+  r3PDSPxox(78), -- ('4E'H)
+  r3PDSnoan(79), -- ('4F'H)
+  r3PDna(80), -- ('50'H)
+  r3DSPnaon(81), -- ('51'H)
+  r3DPSDaox(82), -- ('52'H)
+  r3SPDSxaxn(83), -- ('53'H)
+  r3DPSonon(84), -- ('54'H)
+  r3Dn(85), -- ('55'H)
+  r3DPSox(86), -- ('56'H)
+  r3DPSoan(87), -- ('57'H)
+  r3PDSPoax(88), -- ('58'H)
+  r3DPSnox(89), -- ('59'H)
+  r3DPx(90), -- ('5A'H)
+  r3DPSDonox(91), -- ('5B'H)
+  r3DPSDxox(92), -- ('5C'H)
+  r3DPSnoan(93), -- ('5D'H)
+  r3DPSDnaox(94), -- ('5E'H)
+  r3DPan(95), -- ('5F'H)
+  r3PDSxa(96), -- ('60'H)
+  r3DSPDSaoxxn(97), -- ('61'H)
+  r3DSPDoax(98), -- ('62'H)
+  r3SDPnox(99), -- ('63'H)
+  r3SDPSoax(100), -- ('64'H)
+  r3DSPnox(101), -- ('65'H)
+  r3DSx(102), -- ('66'H)
+  r3SDPSonox(103), -- ('67'H)
+  r3DSPDSonoxxn(104), -- ('68'H)
+  r3PDSxxn(105), -- ('69'H)
+  r3DPSax(106), -- ('6A'H)
+  r3PSDPSoaxxn(107), -- ('6B'H)
+  r3SDPax(108), -- ('6C'H)
+  r3PDSPDoaxxn(109), -- ('6D'H)
+  r3SDPSnoax(110), -- ('6E'H)
+  r3PDSxnan(111), -- ('6F'H)
+  r3PDSana(112), -- ('70'H)
+  r3SSDxPDxaxn(113), -- ('71'H)
+  r3SDPSxox(114), -- ('72'H)
+  r3SDPnoan(115), -- ('73'H)
+  r3DSPDxox(116), -- ('74'H)
+  r3DSPnoan(117), -- ('75'H)
+  r3SDPSnaox(118), -- ('76'H)
+  r3DSan(119), -- ('77'H)
+  r3PDSax(120), -- ('78'H)
+  r3DSPDSoaxxn(121), -- ('79'H)
+  r3DPSDnoax(122), -- ('7A'H)
+  r3SDPxnan(123), -- ('7B'H)
+  r3SPDSnoax(124), -- ('7C'H)
+  r3DPSxnan(125), -- ('7D'H)
+  r3SPxDSxo(126), -- ('7E'H)
+  r3DPSaan(127), -- ('7F'H)
+  r3DPSaa(128), -- ('80'H)
+  r3SPxDSxon(129), -- ('81'H)
+  r3DPSxna(130), -- ('82'H)
+  r3SPDSnoaxn(131), -- ('83'H)
+  r3SDPxna(132), -- ('84'H)
+  r3PDSPnoaxn(133), -- ('85'H)
+  r3DSPDSoaxx(134), -- ('86'H)
+  r3PDSaxn(135), -- ('87'H)
+  r3DSa(136), -- ('88'H)
+  r3SDPSnaoxn(137), -- ('89'H)
+  r3DSPnoa(138), -- ('8A'H)
+  r3DSPDxoxn(139), -- ('8B'H)
+  r3SDPnoa(140), -- ('8C'H)
+  r3SDPSxoxn(141), -- ('8D'H)
+  r3SSDxPDxax(142), -- ('8E'H)
+  r3PDSanan(143), -- ('8F'H)
+  r3PDSxna(144), -- ('90'H)
+  r3SDPSnoaxn(145), -- ('91'H)
+  r3DPSDPoaxx(146), -- ('92'H)
+  r3SPDaxn(147), -- ('93'H)
+  r3PSDPSoaxx(148), -- ('94'H)
+  r3DPSaxn(149), -- ('95'H)
+  r3DPSxx(150), -- ('96'H)
+  r3PSDPSonoxx(151), -- ('97'H)
+  r3SDPSonoxn(152), -- ('98'H)
+  r3DSxn(153), -- ('99'H)
+  r3DPSnax(154), -- ('9A'H)
+  r3SDPSoaxn(155), -- ('9B'H)
+  r3SPDnax(156), -- ('9C'H)
+  r3DSPDoaxn(157), -- ('9D'H)
+  r3DSPDSaoxx(158), -- ('9E'H)
+  r3PDSxan(159), -- ('9F'H)
+  r3DPa(160), -- ('A0'H)
+  r3PDSPnaoxn(161), -- ('A1'H)
+  r3DPSnoa(162), -- ('A2'H)
+  r3DPSDxoxn(163), -- ('A3'H)
+  r3PDSPonoxn(164), -- ('A4'H)
+  r3PDxn(165), -- ('A5'H)
+  r3DSPnax(166), -- ('A6'H)
+  r3PDSPoaxn(167), -- ('A7'H)
+  r3DPSoa(168), -- ('A8'H)
+  r3DPSoxn(169), -- ('A9'H)
+  r3D(170), -- ('AA'H)
+  r3DPSono(171), -- ('AB'H)
+  r3SPDSxax(172), -- ('AC'H)
+  r3DPSDaoxn(173), -- ('AD'H)
+  r3DSPnao(174), -- ('AE'H)
+  r3DPno(175), -- ('AF'H)
+  r3PDSnoa(176), -- ('B0'H)
+  r3PDSPxoxn(177), -- ('B1'H)
+  r3SSPxDSxox(178), -- ('B2'H)
+  r3SDPanan(179), -- ('B3'H)
+  r3PSDnax(180), -- ('B4'H)
+  r3DPSDoaxn(181), -- ('B5'H)
+  r3DPSDPaoxx(182), -- ('B6'H)
+  r3SDPxan(183), -- ('B7'H)
+  r3PSDPxax(184), -- ('B8'H)
+  r3DSPDaoxn(185), -- ('B9'H)
+  r3DPSnao(186), -- ('BA'H)
+  r3DSno(187), -- ('BB'H)
+  r3SPDSanax(188), -- ('BC'H)
+  r3SDxPDxan(189), -- ('BD'H)
+  r3DPSxo(190), -- ('BE'H)
+  r3DPSano(191), -- ('BF'H)
+  r3PSa(192), -- ('C0'H)
+  r3SPDSnaoxn(193), -- ('C1'H)
+  r3SPDSonoxn(194), -- ('C2'H)
+  r3PSxn(195), -- ('C3'H)
+  r3SPDnoa(196), -- ('C4'H)
+  r3SPDSxoxn(197), -- ('C5'H)
+  r3SDPnax(198), -- ('C6'H)
+  r3PSDPoaxn(199), -- ('C7'H)
+  r3SDPoa(200), -- ('C8'H)
+  r3SPDoxn(201), -- ('C9'H)
+  r3DPSDxax(202), -- ('CA'H)
+  r3SPDSaoxn(203), -- ('CB'H)
+  r3S(204), -- ('CC'H)
+  r3SDPono(205), -- ('CD'H)
+  r3SDPnao(206), -- ('CE'H)
+  r3SPno(207), -- ('CF'H)
+  r3PSDnoa(208), -- ('D0'H)
+  r3PSDPxoxn(209), -- ('D1'H)
+  r3PDSnax(210), -- ('D2'H)
+  r3SPDSoaxn(211), -- ('D3'H)
+  r3SSPxPDxax(212), -- ('D4'H)
+  r3DPSanan(213), -- ('D5'H)
+  r3PSDPSaoxx(214), -- ('D6'H)
+  r3DPSxan(215), -- ('D7'H)
+  r3PDSPxax(216), -- ('D8'H)
+  r3SDPSaoxn(217), -- ('D9'H)
+  r3DPSDanax(218), -- ('DA'H)
+  r3SPxDSxan(219), -- ('DB'H)
+  r3SPDnao(220), -- ('DC'H)
+  r3SDno(221), -- ('DD'H)
+  r3SDPxo(222), -- ('DE'H)
+  r3SDPano(223), -- ('DF'H)
+  r3PDSoa(224), -- ('E0'H)
+  r3PDSoxn(225), -- ('E1'H)
+  r3DSPDxax(226), -- ('E2'H)
+  r3PSDPaoxn(227), -- ('E3'H)
+  r3SDPSxax(228), -- ('E4'H)
+  r3PDSPaoxn(229), -- ('E5'H)
+  r3SDPSanax(230), -- ('E6'H)
+  r3SPxPDxan(231), -- ('E7'H)
+  r3SSPxDSxax(232), -- ('E8'H)
+  r3DSPDSanaxxn(233), -- ('E9'H)
+  r3DPSao(234), -- ('EA'H)
+  r3DPSxno(235), -- ('EB'H)
+  r3SDPao(236), -- ('EC'H)
+  r3SDPxno(237), -- ('ED'H)
+  r3DSo(238), -- ('EE'H)
+  r3SDPnoo(239), -- ('EF'H)
+  r3P(240), -- ('F0'H)
+  r3PDSono(241), -- ('F1'H)
+  r3PDSnao(242), -- ('F2'H)
+  r3PSno(243), -- ('F3'H)
+  r3PSDnao(244), -- ('F4'H)
+  r3PDno(245), -- ('F5'H)
+  r3PDSxo(246), -- ('F6'H)
+  r3PDSano(247), -- ('F7'H)
+  r3PDSao(248), -- ('F8'H)
+  r3PDSxno(249), -- ('F9'H)
+  r3DPo(250), -- ('FA'H)
+  r3DPSnoo(251), -- ('FB'H)
+  r3PSo(252), -- ('FC'H)
+  r3PSDnoo(253), -- ('FD'H)
+  r3DPSoo(254), -- ('FE'H)
+  r3WHITE(255) -- ('FF'H)--}(0..255)
+
+SecondaryOrderType ::= INTEGER {
+  cacheBitmapUncompressed(0), cacheColorTable(1), cacheBitmapCompressed(2)
+}(0..255)
+
+StreamID ::= INTEGER {
+  streamLowPriority(1), streamMediumPriority(2), streamHighPriority(4)
+}(0..255)
+
+SynchronizeMessageType ::= INTEGER {synchronize(1)}(0..65535)
+
+SystemPointerType ::= INTEGER {nullPointer(0), defaultPointer(32512)
+                                               
+-- ('00007F00'H)--}(0..4294967295)
+
+UpdateType ::= INTEGER {orders(0), bitmap(1), palette(2), synchronize(3)
+}(0..65535)
+
+WindowActivationAction ::= INTEGER {
+  localWindowActive(1), hostedWindowActive(2), hostedWindowInvisible(3),
+  pointerDeviceCapture(4),
+  activateWindow(32769), -- ('8001'H)
+  closeWindow(32770), -- ('8002'H)
+  restoreWindow(32771), -- ('8003'H)
+  windowManagerMenu(32772), -- ('8004'H)
+  activationHelpKey(32785), -- ('8011'H)
+  activationHelpIndexKey(32786), -- ('8012'H)
+  activationHelpExtendedKey(32787) -- ('8013'H)--}(0..65535)
+
+WindowAttribute ::= SEQUENCE {
+  windowID         WindowID,
+  windowExtra      Integer32,
+  windowOwner      WindowID,
+  windowFlags      WindowAttributeFlags,
+  windowRectangle  Rectangle16
+}
+
+WindowListMessageType ::= INTEGER {updateWindowList(1)}(0..65535)
+
+WindowTitle ::= CHOICE {
+  noTitle      Integer8(255),
+  titleString  T50String(SIZE (1..maxTitleString))
+}
+
+-- Capability Types
+CapabilitySetType ::= INTEGER {
+  bitmapCacheCapabilitySet(4), bitmapCapabilitySet(2),
+  colorCacheCapabilitySet(10), controlCapabilitySet(5),
+  generalCapabilitySet(1), orderCapabilitySet(3), pointerCapabilitySet(8),
+  activationCapabilitySet(7), shareCapabilitySet(9)}(0..65535)
+
+GeneralCapabilitySet ::= SEQUENCE {
+  capabilitySetType        CapabilitySetType(generalCapabilitySet),
+  lengthCapability         Integer16,
+  -- length of capability set in octets
+  -- (including type and length parameters)
+  osMajorType              OSMajorType,
+  osMinorType              OSMinorType,
+  protocolVersion          Integer16(512), -- ('0200'H)
+  pad2octetsA              Integer16,
+  generalCompressionTypes  Integer16,
+  pad2octetsB              Integer16,
+  updatecapabilityFlag     Boolean16,
+  remoteUnshareFlag        Boolean16,
+  generalCompressionLevel  Integer16,
+  pad2octetsC              Integer16
+}
+
+BitmapCapabilitySet ::= SEQUENCE {
+  capabilitySetType         CapabilitySetType(bitmapCapabilitySet),
+  lengthCapability          Integer16,
+  -- length of capability set in octets
+  -- (including type and length parameters)
+  preferredBitsPerPixel     Integer16(1..8),
+  receive1BitPerPixelFlag   Boolean16,
+  receive4BitsPerPixelFlag  Boolean16,
+  receive8BitsPerPixelFlag  Boolean16,
+  desktopWidth              Integer16,
+  desktopHeight             Integer16,
+  pad2octetsA               Integer16,
+  desktopResizeFlag         Boolean16,
+  bitmapCompressionType     BitmapCompressionCapabilityFlags,
+  pad2octetsC               Integer16
+}
+
+OrderCapabilitySet ::= SEQUENCE {
+  capabilitySetType    CapabilitySetType(orderCapabilitySet),
+  lengthCapability     Integer16,
+  -- length of capability set in octets
+  -- (including type and length parameters)
+  terminalDescriptor   T50String(SIZE (1..maxTerminalDescriptor)),
+  pad4octetsA          Integer32(0),
+  desktopXGranularity  Integer16,
+  desktopYGranularity  Integer16,
+  pad2octetsA          Integer16(0),
+  maximumOrderLevel    Integer16,
+  numberFonts          Integer16(1..maxFonts),
+  orderFlags           OrderCapabilityFlags,
+  orderSupport
+    SEQUENCE {destinationBltSupport     Integer8,
+              patternBltSupport         Integer8,
+              screenBltSupport          Integer8,
+              memoryBltSupport          Integer8,
+              memoryThreeWayBltSupport  Integer8,
+              textSupport               Integer8,
+              extendedTextSupport       Integer8,
+              rectangleSupport          Integer8,
+              lineSupport               Integer8,
+              frameSupport              Integer8,
+              opaqueRectangleSupport    Integer8,
+              desktopSaveSupport        Integer8,
+              undefinedOrder12          Integer8(0),
+              undefinedOrder13          Integer8(0),
+              undefinedOrder14          Integer8(0),
+              undefinedOrder15          Integer8(0),
+              undefinedOrder16          Integer8(0),
+              undefinedOrder17          Integer8(0),
+              undefinedOrder18          Integer8(0),
+              undefinedOrder19          Integer8(0),
+              undefinedOrder20          Integer8(0),
+              undefinedOrder21          Integer8(0),
+              undefinedOrder22          Integer8(0),
+              undefinedOrder23          Integer8(0),
+              undefinedOrder24          Integer8(0),
+              undefinedOrder25          Integer8(0),
+              undefinedOrder26          Integer8(0),
+              undefinedOrder27          Integer8(0),
+              undefinedOrder28          Integer8(0),
+              undefinedOrder29          Integer8(0),
+              undefinedOrder30          Integer8(0),
+              undefinedOrder31          Integer8(0)},
+  textFlags            TextCapabilityFlags,
+  pad2octetsB          Integer16(0),
+  pad4octetsB          Integer32(0),
+  desktopSaveSize      Integer32,
+  pad4octetsC          Integer32(0)
+}
+
+BitmapCacheCapabilitySet ::= SEQUENCE {
+  capabilitySetType      CapabilitySetType(bitmapCacheCapabilitySet),
+  lengthCapability       Integer16,
+  -- length of capability set in octets
+  -- (including type and length parameters)
+  pad4octetsA            Integer32(0),
+  pad4octetsB            Integer32(0),
+  pad4octetsC            Integer32(0),
+  pad4octetsD            Integer32(0),
+  pad4octetsE            Integer32(0),
+  pad4octetsF            Integer32(0),
+  cache1Entries          Integer16,
+  cache1MaximumCellSize  Integer16(256..16384),
+  cache2Entries          Integer16,
+  cache2MaximumCellSize  Integer16(256..16384),
+  cache3Entries          Integer16,
+  cache3MaximumCellSize  Integer16(256..16384)
+}
+
+ColorCacheCapabilitySet ::= SEQUENCE {
+  capabilitySetType    CapabilitySetType(colorCacheCapabilitySet),
+  lengthCapability     Integer16,
+  -- length of capability set in octets
+  -- (including type and length parameters)
+  colorTablecacheSize  Integer16(1..255),
+  pad2octetsA          Integer16
+}
+
+ActivationCapabilitySet ::= SEQUENCE {
+  capabilitySetType    CapabilitySetType(activationCapabilitySet),
+  lengthCapability     Integer16,
+  -- length of capability set in octets
+  -- (including type and length parameters)
+  helpKeyFlag          Boolean16,
+  helpIndexKeyFlag     Boolean16,
+  helpExtendedKeyFlag  Boolean16,
+  windowActivateFlag   Boolean16
+}
+
+ControlCapabilitySet ::= SEQUENCE {
+  capabilitySetType  CapabilitySetType(controlCapabilitySet),
+  lengthCapability   Integer16,
+  -- length of capability set in octets
+  -- (including type and length parameters)
+  controlFlags       ControlCapabilityFlags,
+  remoteDetachFlag   Boolean16,
+  controlInterest    ControlPriority,
+  detachInterest     ControlPriority
+}
+
+PointerCapabilitySet ::= SEQUENCE {
+  capabilitySetType  CapabilitySetType(pointerCapabilitySet),
+  lengthCapability   Integer16,
+  -- length of capability set in octets
+  -- (including type and length parameters)
+  colorPointerFlag   Boolean16,
+  pointerCacheSize   Integer16(1..500)
+}
+
+ShareCapabilitySet ::= SEQUENCE {
+  capabilitySetType  CapabilitySetType(shareCapabilitySet),
+  lengthCapability   Integer16,
+  -- length of capability set in octets
+  -- (including type and length parameters)
+  nodeID             Integer32
+}
+
+NonStandardCapabilitySet ::= SEQUENCE {
+  capabilitySetType      Integer16,
+  -- defined by ASCE
+  lengthCapability       Integer16,
+  -- length of capability set in octets
+  -- (including type and length parameters)
+  nonStandardParameters  OCTET STRING
+}
+
+CombinedCapabilities ::= SEQUENCE {
+  numberCapabilities    Integer16,
+  -- number of capabilities in combinedCapabilities set
+  pad2octets            Integer16(0),
+  combinedCapabilities
+    SET {generalCapabilitySet      GeneralCapabilitySet,
+         bitmapCapabilitySet       BitmapCapabilitySet,
+         orderCapabilitySet        OrderCapabilitySet,
+         bitmapCacheCapabilitySet  BitmapCacheCapabilitySet,
+         colorCacheCapabilitySet   ColorCacheCapabilitySet,
+         activationCapabilitySet   ActivationCapabilitySet,
+         controlCapabilitySet      ControlCapabilitySet,
+         pointerCapabilitySet      PointerCapabilitySet,
+         shareCapabilitySet        ShareCapabilitySet,
+         nonStandardCapabilitySet  NonStandardCapabilitySet OPTIONAL}
+}
+
+UpdateCapabilitySet ::= CHOICE {bitmapCapabilitySet  BitmapCapabilitySet
+}
+
+-- Input Types
+InputEvent ::= CHOICE {
+  pointingDeviceEvent  PointingDeviceEvent,
+  keyboardEvent        KeyboardEvent,
+  synchronizeEvent     SynchronizeEvent
+}
+
+KeyboardEvent ::= SEQUENCE {
+  eventTime      Integer32,
+  messageType    InputMessageType(inputCodePoint | inputVirtualKey),
+  keyboardFlags  KeyboardFlags,
+  keyCode        Integer16
+  -- AS protocol code page codepoint or virtual keycode
+}
+
+PointingDeviceEvent ::= SEQUENCE {
+  eventTime            Integer32,
+  messageType          InputMessageType(inputPointingDevice),
+  pointingDeviceFlags  PointingDeviceFlags,
+  pointingDeviceX      Coordinate16,
+  pointingDeviceY      Coordinate16
+}
+
+SynchronizeEvent ::= SEQUENCE {
+  eventTime    Integer32,
+  messageType  InputMessageType(inputSynchronize)
+}
+
+-- Common Header Types
+PrimaryOrderHeader ::= SEQUENCE {
+  controlFlags   ControlOrderFlags,
+  orderType      PrimaryOrderType OPTIONAL,
+  encodingFlags  SEQUENCE (SIZE (1..3)) OF BitString8,
+  boundsFlags    BoundsOrderFlags OPTIONAL,
+  boundsLeft     Coordinate OPTIONAL,
+  boundsTop      Coordinate OPTIONAL,
+  boundsRight    Coordinate OPTIONAL,
+  boundsBottom   Coordinate OPTIONAL
+}
+
+SecondaryOrderHeader ::= SEQUENCE {
+  controlFlags  ControlOrderFlags,
+  orderLength   Integer16,
+  -- length in octets, from and including orderType, minus eight
+  extraFlags    ExtraOrderFlags,
+  orderType     SecondaryOrderType
+}
+
+ShareControlHeader ::= SEQUENCE {
+  totalLength      Integer16(0..32767),
+  protocolVersion  Integer4(1),
+  pduType          PDUType,
+  pad1octet        Integer8(0),
+  pduSource        UserID
+}
+
+ShareDataHeader ::= SEQUENCE {
+  shareControlHeader       ShareControlHeader, -- PDUType = dataPDU
+  shareID                  ShareID,
+  pad1octet                Integer8(0),
+  streamID                 StreamID,
+  uncompressedLength       Integer16,
+  pduType2                 PDUType2,
+  generalCompressedType    Integer8,
+  generalCompressedLength  Integer16
+}
+
+-- Order Types
+DestinationBltOrder ::= SEQUENCE {
+  header      PrimaryOrderHeader, -- PrimaryOrderType = destinationBlt
+  destLeft    Coordinate OPTIONAL,
+  destTop     Coordinate OPTIONAL,
+  destWidth   Coordinate OPTIONAL,
+  destHeight  Coordinate OPTIONAL,
+  rop3        ROP3 OPTIONAL
+}
+
+PatternBltOrder ::= SEQUENCE {
+  header           PrimaryOrderHeader, -- PrimaryOrderType = patternBlt
+  destLeft         Coordinate OPTIONAL,
+  destTop          Coordinate OPTIONAL,
+  destWidth        Coordinate OPTIONAL,
+  destHeight       Coordinate OPTIONAL,
+  rop3             ROP3 OPTIONAL,
+  backgroundColor  Color OPTIONAL,
+  foregroundColor  Color OPTIONAL,
+  brush            Brush OPTIONAL
+}
+
+ScreenBltOrder ::= SEQUENCE {
+  header      PrimaryOrderHeader, -- PrimaryOrderType = screenBlt
+  destLeft    Coordinate OPTIONAL,
+  destTop     Coordinate OPTIONAL,
+  destWidth   Coordinate OPTIONAL,
+  destHeight  Coordinate OPTIONAL,
+  rop3        ROP3 OPTIONAL,
+  sourceX     Coordinate OPTIONAL,
+  sourceY     Coordinate OPTIONAL
+}
+
+CacheBitmapOrder ::= SEQUENCE {
+  header            SecondaryOrderHeader, -- SecondaryOrderType =
+  
+  -- cacheBitmapUncompressed | cacheBitmapCompressed
+  cacheId           Integer8(0..2),
+  pad1octet         Integer8(0),
+  bitmapWidth       Integer8,
+  bitmapHeight      Integer8,
+  bitmapBitsPerPel  Integer8(1 | 4 | 8),
+  bitmapLength      Integer16,
+  -- length of bitmapData in octets (after any compression)
+  cacheIndex        Integer16,
+  bitmapData        BitmapData
+}
+
+CacheColorTableOrder ::= SEQUENCE {
+  header        SecondaryOrderHeader, -- SecondaryOrderType = cacheColorTable
+  cacheIndex    Integer8,
+  numberColors  Integer16(16 | 256),
+  colorTable    SEQUENCE (SIZE (16 | 256)) OF ColorQuad
+}
+
+MemoryBltOrder ::= SEQUENCE {
+  header                PrimaryOrderHeader, -- PrimaryOrderType = memoryBlt
+  colorTableCacheIndex  Integer8 OPTIONAL,
+  bitmapCacheID         Integer8 OPTIONAL,
+  destLeft              Coordinate OPTIONAL,
+  destTop               Coordinate OPTIONAL,
+  destWidth             Coordinate OPTIONAL,
+  destHeight            Coordinate OPTIONAL,
+  rop3                  ROP3 OPTIONAL,
+  sourceX               Coordinate OPTIONAL,
+  sourceY               Coordinate OPTIONAL,
+  bitmapCacheIndex      Integer16 OPTIONAL
+}
+
+MemoryThreeWayBltOrder ::= SEQUENCE {
+  header                PrimaryOrderHeader,
+  -- PrimaryOrderType = memoryThreeWayBlt
+  colorTableCacheIndex  Integer8 OPTIONAL,
+  bitmapCacheID         Integer8 OPTIONAL,
+  destLeft              Coordinate OPTIONAL,
+  destTop               Coordinate OPTIONAL,
+  destWidth             Coordinate OPTIONAL,
+  destHeight            Coordinate OPTIONAL,
+  rop3                  ROP3 OPTIONAL,
+  sourceX               Coordinate OPTIONAL,
+  sourceY               Coordinate OPTIONAL,
+  backgroundColor       Color OPTIONAL,
+  foregroundColor       Color OPTIONAL,
+  brush                 Brush OPTIONAL,
+  bitmapCacheIndex      Integer16 OPTIONAL
+}
+
+TextOrder ::= SEQUENCE {
+  header             PrimaryOrderHeader, -- PrimaryOrderType = text
+  backMixMode        BackgroundMixMode OPTIONAL,
+  startX             Coordinate OPTIONAL,
+  startY             Coordinate OPTIONAL,
+  backgroundColor    Color OPTIONAL,
+  foregroundColor    Color OPTIONAL,
+  extraSpacing       Integer16 OPTIONAL,
+  totalBreakSpacing  Integer16 OPTIONAL,
+  breakCount         Integer16 OPTIONAL,
+  fontHeight         Integer16 OPTIONAL,
+  fontWidth          Integer16 OPTIONAL,
+  fontWeight         Integer16 OPTIONAL,
+  textFlags          TextAttributeFlags OPTIONAL,
+  fontID             Integer16 OPTIONAL,
+  numberCodePoints   Integer8(1..255) OPTIONAL,
+  -- number of codepoints in codePointList
+  codePointList      ASString(SIZE (1..255)) OPTIONAL
+}
+
+ExtendedTextOrder ::= SEQUENCE {
+  header             PrimaryOrderHeader, -- PrimaryOrderType = extendedText
+  backMixMode        BackgroundMixMode OPTIONAL,
+  startX             Coordinate OPTIONAL,
+  startY             Coordinate OPTIONAL,
+  backgroundColor    Color OPTIONAL,
+  foregroundColor    Color OPTIONAL,
+  extraSpacing       Integer16 OPTIONAL,
+  totalBreakSpacing  Integer16 OPTIONAL,
+  breakCount         Integer16 OPTIONAL,
+  fontHeight         Integer16 OPTIONAL,
+  fontWidth          Integer16 OPTIONAL,
+  fontWeight         Integer16 OPTIONAL,
+  textFlags1         TextAttributeFlags OPTIONAL,
+  fontID             Integer16 OPTIONAL,
+  textFlags2         ExtraTextFlags OPTIONAL,
+  clipLeft           Coordinate OPTIONAL,
+  clipTop            Coordinate OPTIONAL,
+  clipRight          Coordinate OPTIONAL,
+  clipBottom         Coordinate OPTIONAL,
+  numberCodePoints   Integer8(1..255) OPTIONAL,
+  -- number of codepoints in codePointList; where deltaX values
+  -- are present maximum number of codepoints is 127
+  codePointList      ASString(SIZE (1..255)) OPTIONAL,
+  numberDeltaX       Integer8(1..127) OPTIONAL,
+  -- number of deltaX values in deltaXList
+  deltaXList         SEQUENCE (SIZE (1..127)) OF Coordinate OPTIONAL
+}
+
+FrameOrder ::= SEQUENCE {
+  header           PrimaryOrderHeader, -- PrimaryOrderType = frame
+  destLeft         Coordinate OPTIONAL,
+  destTop          Coordinate OPTIONAL,
+  destWidth        Coordinate OPTIONAL,
+  destHeight       Coordinate OPTIONAL,
+  rop3             ROP3 OPTIONAL,
+  backgroundColor  Color OPTIONAL,
+  foregroundColor  Color OPTIONAL,
+  brush            Brush OPTIONAL
+}
+
+RectangleOrder ::= SEQUENCE {
+  header           PrimaryOrderHeader, -- PrimaryOrderType = rectangle
+  backMixMode      BackgroundMixMode OPTIONAL,
+  destLeft         Coordinate OPTIONAL,
+  destTop          Coordinate OPTIONAL,
+  destRight        Coordinate OPTIONAL,
+  destBottom       Coordinate OPTIONAL,
+  backgroundColor  Color OPTIONAL,
+  foregroundColor  Color OPTIONAL,
+  brush            Brush OPTIONAL,
+  rop2             ROP2 OPTIONAL,
+  pen              Pen OPTIONAL
+}
+
+OpaqueRectangleOrder ::= SEQUENCE {
+  header      PrimaryOrderHeader, -- PrimaryOrderType = opaqueRectangle
+  destLeft    Coordinate OPTIONAL,
+  destTop     Coordinate OPTIONAL,
+  destWidth   Coordinate OPTIONAL,
+  destHeight  Coordinate OPTIONAL,
+  color       Color OPTIONAL
+}
+
+LineOrder ::= SEQUENCE {
+  header           PrimaryOrderHeader, -- PrimaryOrderType = line
+  backMixMode      BackgroundMixMode OPTIONAL,
+  startX           Coordinate OPTIONAL,
+  startY           Coordinate OPTIONAL,
+  endX             Coordinate OPTIONAL,
+  endY             Coordinate OPTIONAL,
+  backgroundColor  Color OPTIONAL,
+  rop2             ROP2 OPTIONAL,
+  pen              Pen OPTIONAL
+}
+
+DesktopSaveOrder ::= SEQUENCE {
+  header      PrimaryOrderHeader, -- PrimaryOrderType = desktopSave
+  saveOffset  Integer32 OPTIONAL,
+  destLeft    Coordinate OPTIONAL,
+  destTop     Coordinate OPTIONAL,
+  destWidth   Coordinate OPTIONAL,
+  destHeight  Coordinate OPTIONAL,
+  action      DesktopSaveAction OPTIONAL
+}
+
+DesktopOriginOrder ::= SEQUENCE {
+  header       PrimaryOrderHeader, -- PrimaryOrderType = desktopOrigin
+  desktopLeft  Coordinate OPTIONAL,
+  desktopTop   Coordinate OPTIONAL
+}
+
+PrimaryOrder ::= CHOICE {
+  destinationBlt     DestinationBltOrder,
+  patternBlt         PatternBltOrder,
+  screenBlt          ScreenBltOrder,
+  memoryBlt          MemoryBltOrder,
+  memoryThreeWayBlt  MemoryThreeWayBltOrder,
+  text               TextOrder,
+  extendedText       ExtendedTextOrder,
+  frame              FrameOrder,
+  rectangle          RectangleOrder,
+  line               LineOrder,
+  opaqueRectangle    OpaqueRectangleOrder,
+  desktopSave        DesktopSaveOrder,
+  desktopOrigin      DesktopOriginOrder
+}
+
+SecondaryOrder ::= CHOICE {
+  cacheBitmap      CacheBitmapOrder,
+  cacheColorTable  CacheColorTableOrder
+}
+
+UpdateOrder ::= CHOICE {
+  primaryOrder    PrimaryOrder,
+  secondaryOrder  SecondaryOrder
+}
+
+--|||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+--
+--              Begin AS PDU Definitions
+--
+--||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+ApplicationPDU ::= SEQUENCE {
+  shareDataHeader     ShareDataHeader, -- PDUType2 = application
+  action              ApplicationAction,
+  numberApplications  Integer16,
+  windowID            WindowID
+}
+
+ConfirmActivePDU ::= SEQUENCE {
+  shareControlHeader          ShareControlHeader, -- PDUType = confirmActivePDU
+  shareID                     ShareID,
+  originatorID                UserID,
+  lengthSourceDescriptor      Integer16(1..maxSourceDescriptor),
+  -- length of sourceDescriptor in octets
+  -- (including null terminator)
+  lengthCombinedCapabilities  Integer16,
+  -- length of combinedCapabilities in octets
+  sourceDescriptor            T50String(SIZE (1..maxSourceDescriptor)),
+  combinedCapabilities        CombinedCapabilities
+}
+
+ControlPDU ::= SEQUENCE {
+  shareDataHeader  ShareDataHeader, -- PDUType2 = control
+  action           ControlAction,
+  grantID          UserID,
+  controlID        Integer32(0..2147483647)
+}
+
+DeactivateAllPDU ::= SEQUENCE {
+  shareControlHeader      ShareControlHeader, -- PDUType = deactivateAllPDU
+  shareID                 ShareID,
+  lengthSourceDescriptor  Integer16(1..maxSourceDescriptor),
+  -- length of sourceDescriptor in octets
+  -- (including null terminator)
+  sourceDescriptor        T50String(SIZE (1..maxSourceDescriptor))
+}
+
+DeactivateOtherPDU ::= SEQUENCE {
+  shareControlHeader      ShareControlHeader, -- PDUType = deactivateOtherPDU
+  shareID                 ShareID,
+  deactivateID            UserID,
+  lengthSourceDescriptor  Integer16(1..maxSourceDescriptor),
+  -- length of sourceDescriptor in octets
+  -- (including null terminator)
+  sourceDescriptor        T50String(SIZE (1..maxSourceDescriptor))
+}
+
+DeactivateSelfPDU ::= SEQUENCE {
+  shareControlHeader  ShareControlHeader, -- PDUType = deactivateSelfPDU
+  shareID             ShareID
+}
+
+DemandActivePDU ::= SEQUENCE {
+  shareControlHeader          ShareControlHeader, -- PDUType = demandActivePDU
+  shareID                     ShareID,
+  lengthSourceDescriptor      Integer16(1..maxSourceDescriptor),
+  -- length of sourceDescriptor in octets
+  -- (including null terminator)
+  lengthCombinedCapabilities  Integer16,
+  -- length of combinedCapabilities in octets
+  sourceDescriptor            T50String(SIZE (1..maxSourceDescriptor)),
+  combinedCapabilities        CombinedCapabilities
+}
+
+FlowPDU ::= SEQUENCE {
+  flowMarker      Integer16(32768), -- ('8000'H),
+  
+  -- distinguishes FlowPDUs from ASPDUs
+  -- containing ShareControlHeaders
+  pad8bits        Integer8(0),
+  pduTypeFlow     PDUTypeFlow(flowResponsePDU | flowStopPDU | flowTestPDU),
+  flowIdentifier  Integer8(0..127),
+  flowNumber      Integer8,
+  -- shall be zero for PDUType FlowStopPDU
+  pduSource       UserID
+  -- MCS User ID of sending ASCE
+}
+
+FontPDU ::= SEQUENCE {
+  shareDataHeader  ShareDataHeader, -- PDUType2 = font
+  numberFonts      Integer16(1..maxFonts),
+  -- number of FontAttributes in fontList
+  entrySize        Integer16,
+  fontList         SEQUENCE (SIZE (1..maxFonts)) OF FontAttribute
+}
+
+InputPDU ::= SEQUENCE {
+  shareDataHeader  ShareDataHeader, -- PDUType2 = input
+  numberEvents     Integer16,
+  -- number of InputEvents in eventList
+  pad2octets       Integer16(0),
+  eventList        SEQUENCE (SIZE (1..maxInputEvents)) OF InputEvent
+}
+
+MediatedControlPDU ::= SEQUENCE {
+  shareDataHeader      ShareDataHeader, -- PDUType2 = mediatedControl
+  action               MediatedControlAction,
+  passControlFlag      Boolean16,
+  sendingReference     Integer16,
+  originatorReference  Integer16,
+  originatorID         UserID
+}
+
+PointerPDU ::= SEQUENCE {
+  shareDataHeader  ShareDataHeader, -- PDUType2 = pointer
+  messageType      PointerMessageType,
+  pad2octets       Integer16(0),
+  pointerData
+    CHOICE {systemPointerType      SystemPointerType,
+            monoPointerAttribute   MonoPointerAttribute,
+            colorPointerAttribute  ColorPointerAttribute,
+            cachedPointerIndex     Integer16,
+            pointerPosition        Point16}
+}
+
+RemoteSharePDU ::= SEQUENCE {
+  shareDataHeader    ShareDataHeader, -- PDUType2 = remoteShare
+  action             RemoteShareAction,
+  additionalData
+    CHOICE {requestingID  UserID,
+            pad2octets    Integer16(0),
+            denialCode    RemoteShareDenial},
+  encryptedPassword  OCTET STRING(SIZE (1..maxPassword))
+}
+
+RequestActivePDU ::= SEQUENCE {
+  shareControlHeader          ShareControlHeader, -- PDUType = requestActivePDU
+  lengthSourceDescriptor      Integer16(1..maxSourceDescriptor),
+  -- length of sourceDescriptor in octets
+  -- (including null terminator)
+  lengthCombinedCapabilities  Integer16,
+  -- length of combinedCapabilities in octets
+  sourceDescriptor            T50String(SIZE (1..maxSourceDescriptor)),
+  combinedCapabilities        CombinedCapabilities
+}
+
+SynchronizePDU ::= SEQUENCE {
+  shareDataHeader  ShareDataHeader, -- PDUType2 = synchronize
+  messageType      SynchronizeMessageType,
+  targetUser       UserID
+}
+
+UpdateBitmapPDU ::= SEQUENCE {
+  shareDataHeader  ShareDataHeader, -- PDUType2=update
+  updateType       UpdateType(bitmap),
+  pad2octets       Integer16(0),
+  destLeft         Coordinate16,
+  destTop          Coordinate16,
+  destRight        Coordinate16,
+  destBottom       Coordinate16,
+  width            Integer16,
+  height           Integer16,
+  bitsPerPixel     Integer16(1 | 4 | 8),
+  compressedFlag   Boolean16,
+  bitmapLength     Integer16,
+  -- length in octets of bitmapData (after any compression)
+  bitmapData       BitmapData
+}
+
+UpdateCapabilityPDU ::= SEQUENCE {
+  shareDataHeader      ShareDataHeader, -- PDUType2 = updateCapability
+  updateCapabilitySet  UpdateCapabilitySet
+}
+
+UpdateOrdersPDU ::= SEQUENCE {
+  shareDataHeader  ShareDataHeader, -- PDUType2 = update
+  updateType       UpdateType(orders),
+  pad2octetsA      Integer16(0),
+  numberOrders     Integer16,
+  -- number of UpdateOrders in orderList
+  pad2octetsB      Integer16(0),
+  orderList        SEQUENCE OF UpdateOrder
+}
+
+UpdatePalettePDU ::= SEQUENCE {
+  shareDataHeader  ShareDataHeader, -- PDUType2 = update
+  updateType       UpdateType(palette),
+  pad2octets       Integer16(0),
+  numberColors     Integer32(16 | 256),
+  palette          SEQUENCE (SIZE (16 | 256)) OF Color
+}
+
+UpdateSynchronizePDU ::= SEQUENCE {
+  shareDataHeader  ShareDataHeader, -- PDUType2 = update
+  updateType       UpdateType(synchronize),
+  pad2octets       Integer16(0)
+}
+
+WindowActivationPDU ::= SEQUENCE {
+  shareDataHeader   ShareDataHeader, -- PDUType2 = windowActivation
+  action            WindowActivationAction,
+  activationID      Integer16,
+  activationWindow  WindowID,
+  activationPoint   Point16
+}
+
+WindowListPDU ::= SEQUENCE {
+  shareDataHeader      ShareDataHeader, -- PDUType2 = windowList
+  messageType          WindowListMessageType,
+  pad2octetsA          Integer16,
+  numberWindows        Integer16,
+  -- number of WindowAttributes/Titles in lists
+  listTime             Integer16,
+  listID               Integer16,
+  pad2octetsB          Integer16,
+  windowAttributeList  SEQUENCE OF WindowAttribute,
+  windowTitleList      SEQUENCE OF WindowTitle
+}
+
+SharePDU ::= CHOICE {
+  applicationPDU        ApplicationPDU,
+  confirmActivePDU      ConfirmActivePDU,
+  controlPDU            ControlPDU,
+  deactivateAllPDU      DeactivateAllPDU,
+  deactivateOtherPDU    DeactivateOtherPDU,
+  deactivateSelfPDU     DeactivateSelfPDU,
+  demandActivePDU       DemandActivePDU,
+  flowPDU               FlowPDU,
+  fontPDU               FontPDU,
+  inputPDU              InputPDU,
+  mediatedControlPDU    MediatedControlPDU,
+  pointerPDU            PointerPDU,
+  remoteSharePDU        RemoteSharePDU,
+  requestActivePDU      RequestActivePDU,
+  synchronizePDU        SynchronizePDU,
+  updateCapabilityPDU   UpdateCapabilityPDU,
+  updateBitmapPDU       UpdateBitmapPDU,
+  updateOrdersPDU       UpdateOrdersPDU,
+  updateSynchronizePDU  UpdateSynchronizePDU,
+  updatePalettePDU      UpdatePalettePDU,
+  windowActivationPDU   WindowActivationPDU,
+  windowListPDU         WindowListPDU
+}
+
+--||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+--
+--                 End AS Definitions
+--
+--||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+END
+
+-- Generated by Asnp, the ASN.1 pretty-printer of France Telecom R&D 

@@ -1,3 +1,5 @@
-NR-UE-Variables.asn
-NR-RRC-Definitions.asn
 NR-InterNodeDefinitions.asn
+NR-RRC-Definitions.asn
+NR-Sidelink-Preconf.asn
+NR-UE-Variables.asn
+PC5-RRC-Definitions.asn

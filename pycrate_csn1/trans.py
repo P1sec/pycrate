@@ -1,7 +1,7 @@
 # -*- coding: UTF-8 -*-
 #/**
 # * Software Name : pycrate
-# * Version : 0.3
+# * Version : 0.4
 # *
 # * Copyright 2017. Benoit Michau. ANSSI. P1sec.
 # *
@@ -696,7 +696,6 @@ class CSN1Obj(object):
                     raise(CSN1Err('unsupported'))
             else:
                 raise(CSN1Err('unsupported'))
-            return (tok_ref, (a, b))
     
     @classmethod
     def _process_arithm_grp(cls, tok0, tok1, tok2):

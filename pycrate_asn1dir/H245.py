@@ -6669,6 +6669,7 @@ class MULTIMEDIA_SYSTEM_CONTROL:
     _UserInputIndication_signal = SEQ(name=u'signal', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     __UserInputIndication_signal_signalType = STR_IA5(name=u'signalType', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     __UserInputIndication_signal_signalType._const_sz = ASN1Set(rv=[1], rr=[], ev=None, er=[])
+    __UserInputIndication_signal_signalType._const_alpha = ASN1Set(rv=[u'0', u'1', u'2', u'3', u'4', u'5', u'6', u'7', u'8', u'9', u'#', u'*', u'A', u'B', u'C', u'D', u'!'], rr=[], ev=None, er=[])
     __UserInputIndication_signal_duration = INT(name=u'duration', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     __UserInputIndication_signal_duration._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=65535)], ev=None, er=[])
     __UserInputIndication_signal_rtp = SEQ(name=u'rtp', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)

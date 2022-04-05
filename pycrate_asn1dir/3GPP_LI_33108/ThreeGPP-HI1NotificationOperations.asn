@@ -1,0 +1,180 @@
+ThreeGPP-HI1NotificationOperations
+{itu-t(0) identified-organization(4) etsi(0) securityDomain(2) lawfulIntercept(2) threeGPP(4) hi1(0) notificationOperations(1) r16 (16) version-0(0)}
+
+DEFINITIONS IMPLICIT TAGS ::=
+
+BEGIN
+
+IMPORTS
+	
+		LawfulInterceptionIdentifier,
+		TimeStamp,
+		CommunicationIdentifier,
+		Network-Identifier,
+				CalledPartyNumber,
+		IPAddress
+		
+		FROM HI2Operations
+			{itu-t(0) identified-organization(4) etsi(0) securityDomain(2)
+ 				  lawfulIntercept(2) hi2(1) version18(18)}; -- Imported from TS 101 671v3.12.1
+
+
+-- =============================
+-- Object Identifier Definitions
+-- =============================
+
+-- LawfulIntercept DomainId
+lawfulInterceptDomainId OBJECT IDENTIFIER ::= {itu-t(0) identified-organization(4) etsi(0) securityDomain(2) lawfulIntercept(2)}
+-- Security Subdomains
+threeGPPSUBDomainId OBJECT IDENTIFIER ::= {lawfulInterceptDomainId threeGPP(4)}
+-- hi1 Domain
+threeGPP-hi1NotificationOperationsId OBJECT IDENTIFIER ::= {threeGPPSUBDomainId hi1(0) notificationOperations(1)}
+threeGPP-hi1OperationId OBJECT IDENTIFIER ::= {threeGPP-hi1NotificationOperationsId r16 (16) version-0(0)}
+
+
+ThreeGPP-HI1-Operation ::= CHOICE
+{
+	liActivated					[1] Notification,
+	liDeactivated				[2] Notification,
+	liModified					[3] Notification,
+	alarms-indicator			[4] Alarm-Indicator,
+	threeGPP-National-HI1-ASN1parameters	[5] ThreeGPP-National-HI1-ASN1parameters,
+...}
+
+-- ==================
+-- PARAMETERS FORMATS
+-- ==================
+
+Notification ::= SEQUENCE
+{
+	domainID						[0] OBJECT IDENTIFIER OPTIONAL,
+		-- Once using FTP delivery mechanism
+	lawfulInterceptionIdentifier	[1] LawfulInterceptionIdentifier,
+	-- This identifier is the LIID identity provided with the lawful authorization for each
+	-- target.
+	communicationIdentifier			[2] CommunicationIdentifier OPTIONAL,
+		-- Only the NO/AP/SP Identifier is provided (the one provided with the Lawful
+		-- authorization) in CS domain.		
+	timeStamp						[3] TimeStamp,
+	-- date and time of the report.
+	threeGPP-National-HI1-ASN1parameters		[5] ThreeGPP-National-HI1-ASN1parameters OPTIONAL,
+	target-Information				[6] Target-Information OPTIONAL,
+	network-Identifier				[7] Network-Identifier OPTIONAL,
+		-- Same definition of annexes B3, B8, B9, B.11.1. It is recommended to use the same value
+		-- than those decided by the CSP and the LEA as the NWO/PA/SvPIdentifier of
+		-- communicationIdentifier used in CS domain.
+	broadcastStatus					[8] BroadcastStatus OPTIONAL,
+...}
+
+Alarm-Indicator ::= SEQUENCE
+{
+	domainID						[0] OBJECT IDENTIFIER OPTIONAL,
+		-- Once using FTP delivery mechanism
+	communicationIdentifier			[1] CommunicationIdentifier OPTIONAL,
+		-- Only the NO/AP/SP Identifier is provided (the one provided with the
+		-- Lawful authorization)
+	timeStamp						[2] TimeStamp,
+		-- date and time of the report.
+	alarm-information				[3] OCTET STRING (SIZE (1..25)),
+		-- Provides information about alarms (free format).
+	lawfulInterceptionIdentifier	[4] LawfulInterceptionIdentifier OPTIONAL,
+		-- This identifier is the LIID identity provided with the lawful authorization
+		-- for each target in according to national law
+	threeGPP-National-HI1-ASN1parameters		[5] ThreeGPP-National-HI1-ASN1parameters OPTIONAL,
+	target-Information				[6] Target-Information OPTIONAL,
+	network-Identifier				[7] Network-Identifier OPTIONAL,
+	-- the NO/AP/SP Identifier,
+		-- Same definition as annexes B3, B8, B9, B.11.1
+	network-Element-Information		[8] OCTET STRING (SIZE (1..256)) OPTIONAL,
+		-- This identifier may be a network element identifier such an IP address with its IP value,
+		-- that may not work properly. To be defined between the CSP and the LEA.
+...}
+
+ThreeGPP-National-HI1-ASN1parameters ::= SEQUENCE
+{
+	domainID		[0] OBJECT IDENTIFIER OPTIONAL,
+		-- Once using FTP delivery mechanism.
+	countryCode		[1] PrintableString (SIZE (2)),
+		-- Country Code according to ISO 3166-1 [39],
+		-- the country to which the parameters inserted after the extension marker apply.
+		-- In case a given country wants to use additional national parameters according to its law,
+		-- these national parameters should be defined using the ASN.1 syntax and added after the
+		-- extension marker (...).
+		-- It is recommended that "version parameter" and "vendor identification parameter" are
+		-- included in the national parameters definition. Vendor identifications can be
+		-- retrieved from IANA web site. Besides, it is recommended to avoid
+		-- using tags from 240 to 255 in a formal type definition.
+...}
+
+Target-Information ::= SEQUENCE
+{
+	communicationIdentifier	[0] CommunicationIdentifier OPTIONAL,
+		-- Only the NO/AP/SP Identifier is provided (the one provided with the
+		-- Lawful authorization)
+	network-Identifier	[1] Network-Identifier OPTIONAL,
+		-- the NO/PA/SPIdentifier,
+		-- Same definition of annexes B3, B8, B9, B.11.1
+	broadcastArea		[2] OCTET STRING (SIZE (1..256)) OPTIONAL,
+		-- A Broadcast Area is used to select the group of NEs (network elements) which an
+		-- interception applies to. This group may be built on the basis of network type, technology
+		-- type or geographic details to fit national regulation and jurisdiction. The pre-defined
+		-- values may be decided by the CSP and the LEA to determinate the specific part of the
+		-- network or plateform on which the target identity(ies) has to be activated or
+		-- desactivated.
+	targetType			[3] TargetType OPTIONAL,
+	deliveryInformation	[4] DeliveryInformation OPTIONAL,
+	liActivatedTime		[5] TimeStamp OPTIONAL,
+	liDeactivatedTime	[6] TimeStamp OPTIONAL,
+	liModificationTime	[7] TimeStamp OPTIONAL,
+	interceptionType	[8] InterceptionType OPTIONAL,
+...,
+	liSetUpTime        [9] TimeStamp OPTIONAL
+	-- date and time when the warrant is entered into the ADMF
+}
+
+TargetType ::= ENUMERATED
+{
+	mSISDN(0),
+	iMSI(1),
+	iMEI(2),
+	e164-Format(3),
+	nAI(4),
+	sip-URI(5),
+	tel-URI(6),
+	iMPU (7),
+	iMPI (8),
+...
+}
+
+DeliveryInformation ::= SEQUENCE
+{
+	hi2DeliveryNumber 		[0] CalledPartyNumber OPTIONAL,
+	-- Circuit switch IRI delivery E164 number
+	hi3DeliveryNumber 		[1] CalledPartyNumber OPTIONAL,
+	-- Circuit switch voice content delivery E164 number
+	hi2DeliveryIpAddress 	[2] IPAddress OPTIONAL,
+	-- HI2 address of the LEMF.
+	hi3DeliveryIpAddress	[3] IPAddress OPTIONAL,
+	-- HI3 address of the LEMF.
+...}
+
+InterceptionType ::= ENUMERATED
+{
+      voiceIriCc(0),
+      voiceIriOnly(1),
+      dataIriCc(2),
+      dataIriOnly(3),
+      voiceAndDataIriCc(4),
+      voiceAndDataIriOnly(5),
+...}
+
+BroadcastStatus ::= ENUMERATED
+{
+	succesfull(0),
+	-- Example of usage: following a broadcasted command at least the target list of one node with a LI function has
+	-- been modified or confirm to include the target id requested by the LEA.
+	unsuccesfull(1),
+	-- case of usage: such information could be provided to the LEMF following the impossibility to get a positive confirmation from at least one node with an LI function on the broadcasted command made by the operator's mediation or the management of mediation.
+...}
+
+END

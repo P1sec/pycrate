@@ -1,7 +1,7 @@
 # -*- coding: UTF-8 -*-
 #/**
 # * Software Name : pycrate
-# * Version : 0.3
+# * Version : 0.4
 # *
 # * Copyright 2016. Benoit Michau. ANSSI.
 # * Copyright 2018. Benoit Michau. P1sec.
@@ -300,7 +300,7 @@ class gsmtap_hdr(Envelope):
         )
     def __init__(self, *args, **kwargs):
         Envelope.__init__(self, *args, **kwargs)
-        self[9].set_dicauto(self._set_subtype_dic)
+        self['sub_type'].set_dicauto(self._set_subtype_dic)
     
     def _set_subtype_dic(self):
         return SubTypeDictLU_dict.get(self[2].get_val(), {})

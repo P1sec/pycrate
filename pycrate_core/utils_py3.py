@@ -1,7 +1,7 @@
 # -*- coding: UTF-8 -*-
 #/**
 # * Software Name : pycrate
-# * Version : 0.3
+# * Version : 0.4
 # *
 # * Copyright 2016. Benoit Michau. ANSSI.
 # *
@@ -1596,7 +1596,7 @@ def pack_val(*val):
                 else:
                     # a.b) unaligned access
                     assert( 0 <= junc < 256 )
-                    head, buf, trail = bytes_lshift_bnd(pack_buf, pack_len_le, 8-rest_bit)
+                    head, buf, trail = bytes_lshift_bnd(pack_buf, pack_len, 8-rest_bit)
                     # complete the junction byte and append it 
                     # with the shifted buffer
                     len_bit += pack_len
@@ -1996,7 +1996,7 @@ def pack_val(*val):
                     u = v[1]+(1<<v[2])
                     if u < (1<<(v[2]-1)):
                         u = 1<<(v[2]-1)
-                v_bytes = int_le_to_bytes(v[1], v[2])
+                v_bytes = uint_le_to_bytes(u, v[2])
             # a) append pack_val first, if exist
             if pack_fmt is not None:
                 pack_buf = pack(''.join(pack_fmt), *pack_val)
@@ -2113,3 +2113,4 @@ def pack_val(*val):
     #
     # 7) return the length in bits and bytes buffer
     return b''.join(concat), len_bit
+

@@ -6,7 +6,7 @@
 import sys
 
 dirpath = './'
-path = dirpath + '29002-d40.txt'
+path = dirpath + '29002-g30.txt'
 
 def main():
     
@@ -16,10 +16,10 @@ def main():
         fd = open(path, 'r', encoding='utf-8')
     speclines = fd.readlines()
     fd.close()
-
+    
     inside = False
     module = []
-
+    
     for line in speclines:
         if line[:6] == '.$MAP-':
             if inside:

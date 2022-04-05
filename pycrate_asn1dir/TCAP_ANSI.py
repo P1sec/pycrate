@@ -495,7 +495,9 @@ class TCAPPackage:
     ___ComponentSequence__item__invokeLast_opcode._const_tab_at = None
     ___ComponentSequence__item__invokeLast_opcode._const_tab_id = u'operationCode'
     ___ComponentSequence__item__invokeLast_parameter = OPEN(name=u'parameter', mode=MODE_TYPE, typeref=ASN1RefClassField(('TCAP-Remote-Operations-Information-Objects', 'OPERATION'), [u'ResultType']), opt=True)
-    ___ComponentSequence__item__invokeLast_parameter._const_tab = ____ComponentSequence__item__invokeLast_opcode_tab
+    ____ComponentSequence__item__invokeLast_parameter_tab = CLASS(name='_tab_OPERATION', mode=MODE_SET, typeref=ASN1RefType(('TCAP-Remote-Operations-Information-Objects', 'OPERATION')))
+    ____ComponentSequence__item__invokeLast_parameter_tab._val = ASN1Set(rv=[], rr=[], ev=[], er=[])
+    ___ComponentSequence__item__invokeLast_parameter._const_tab = ____ComponentSequence__item__invokeLast_parameter_tab
     ___ComponentSequence__item__invokeLast_parameter._const_tab_at = ('..', u'opcode')
     ___ComponentSequence__item__invokeLast_parameter._const_tab_id = u'ResultType'
     __ComponentSequence__item__invokeLast._cont = ASN1Dict([
@@ -517,11 +519,15 @@ class TCAPPackage:
     ___ComponentSequence__item__returnError_componentID = OCT_STR(name=u'componentID', mode=MODE_TYPE, tag=(15, TAG_PRIVATE, TAG_IMPLICIT))
     ___ComponentSequence__item__returnError_componentID._const_sz = ASN1Set(rv=[1], rr=[], ev=None, er=[])
     ___ComponentSequence__item__returnError_errorCode = CHOICE(name=u'errorCode', mode=MODE_TYPE, typeref=ASN1RefClassField(('TCAP-Remote-Operations-Information-Objects', 'ERROR'), [u'errorCode']))
-    ___ComponentSequence__item__returnError_errorCode._const_tab = ____ComponentSequence__item__invokeLast_opcode_tab
+    ____ComponentSequence__item__returnError_errorCode_tab = CLASS(name='_tab_ERROR', mode=MODE_SET, typeref=ASN1RefType(('TCAP-Remote-Operations-Information-Objects', 'ERROR')))
+    ____ComponentSequence__item__returnError_errorCode_tab._val = ASN1Set(rv=[], rr=[], ev=[], er=[])
+    ___ComponentSequence__item__returnError_errorCode._const_tab = ____ComponentSequence__item__returnError_errorCode_tab
     ___ComponentSequence__item__returnError_errorCode._const_tab_at = None
     ___ComponentSequence__item__returnError_errorCode._const_tab_id = u'errorCode'
     ___ComponentSequence__item__returnError_parameter = OPEN(name=u'parameter', mode=MODE_TYPE, typeref=ASN1RefClassField(('TCAP-Remote-Operations-Information-Objects', 'ERROR'), [u'ParameterType']), opt=True)
-    ___ComponentSequence__item__returnError_parameter._const_tab = ____ComponentSequence__item__invokeLast_opcode_tab
+    ____ComponentSequence__item__returnError_parameter_tab = CLASS(name='_tab_ERROR', mode=MODE_SET, typeref=ASN1RefType(('TCAP-Remote-Operations-Information-Objects', 'ERROR')))
+    ____ComponentSequence__item__returnError_parameter_tab._val = ASN1Set(rv=[], rr=[], ev=[], er=[])
+    ___ComponentSequence__item__returnError_parameter._const_tab = ____ComponentSequence__item__returnError_parameter_tab
     ___ComponentSequence__item__returnError_parameter._const_tab_at = ('..', u'errorCode')
     ___ComponentSequence__item__returnError_parameter._const_tab_id = u'ParameterType'
     __ComponentSequence__item__returnError._cont = ASN1Dict([
@@ -535,11 +541,15 @@ class TCAPPackage:
     ___ComponentSequence__item__invokeNotLast_componentIDs = OCT_STR(name=u'componentIDs', mode=MODE_TYPE, tag=(15, TAG_PRIVATE, TAG_IMPLICIT), opt=True)
     ___ComponentSequence__item__invokeNotLast_componentIDs._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=2)], ev=None, er=[])
     ___ComponentSequence__item__invokeNotLast_opcode = CHOICE(name=u'opcode', mode=MODE_TYPE, typeref=ASN1RefClassField(('TCAP-Remote-Operations-Information-Objects', 'OPERATION'), [u'operationCode']))
-    ___ComponentSequence__item__invokeNotLast_opcode._const_tab = ____ComponentSequence__item__invokeLast_opcode_tab
+    ____ComponentSequence__item__invokeNotLast_opcode_tab = CLASS(name='_tab_OPERATION', mode=MODE_SET, typeref=ASN1RefType(('TCAP-Remote-Operations-Information-Objects', 'OPERATION')))
+    ____ComponentSequence__item__invokeNotLast_opcode_tab._val = ASN1Set(rv=[], rr=[], ev=[], er=[])
+    ___ComponentSequence__item__invokeNotLast_opcode._const_tab = ____ComponentSequence__item__invokeNotLast_opcode_tab
     ___ComponentSequence__item__invokeNotLast_opcode._const_tab_at = None
     ___ComponentSequence__item__invokeNotLast_opcode._const_tab_id = u'operationCode'
     ___ComponentSequence__item__invokeNotLast_parameter = OPEN(name=u'parameter', mode=MODE_TYPE, typeref=ASN1RefClassField(('TCAP-Remote-Operations-Information-Objects', 'OPERATION'), [u'ResultType']), opt=True)
-    ___ComponentSequence__item__invokeNotLast_parameter._const_tab = ____ComponentSequence__item__invokeLast_opcode_tab
+    ____ComponentSequence__item__invokeNotLast_parameter_tab = CLASS(name='_tab_OPERATION', mode=MODE_SET, typeref=ASN1RefType(('TCAP-Remote-Operations-Information-Objects', 'OPERATION')))
+    ____ComponentSequence__item__invokeNotLast_parameter_tab._val = ASN1Set(rv=[], rr=[], ev=[], er=[])
+    ___ComponentSequence__item__invokeNotLast_parameter._const_tab = ____ComponentSequence__item__invokeNotLast_parameter_tab
     ___ComponentSequence__item__invokeNotLast_parameter._const_tab_at = ('..', u'opcode')
     ___ComponentSequence__item__invokeNotLast_parameter._const_tab_id = u'ResultType'
     __ComponentSequence__item__invokeNotLast._cont = ASN1Dict([
@@ -575,7 +585,15 @@ class TCAPPackage:
     Invoke = SEQ(name=u'Invoke', mode=MODE_TYPE, param=True)
     
     #-----< ReturnResult >-----#
-    ReturnResult = SEQ(name=u'ReturnResult', mode=MODE_TYPE, param=True)
+    ReturnResult = SEQ(name=u'ReturnResult', mode=MODE_TYPE)
+    _ReturnResult_componentID = OCT_STR(name=u'componentID', mode=MODE_TYPE, tag=(15, TAG_PRIVATE, TAG_IMPLICIT))
+    _ReturnResult_componentID._const_sz = ASN1Set(rv=[1], rr=[], ev=None, er=[])
+    _ReturnResult_parameter = OPEN(name=u'parameter', mode=MODE_TYPE, typeref=ASN1RefClassField(('TCAP-Remote-Operations-Information-Objects', 'OPERATION'), [u'ResultType']), opt=True)
+    ReturnResult._cont = ASN1Dict([
+        (u'componentID', _ReturnResult_componentID),
+        (u'parameter', _ReturnResult_parameter),
+        ])
+    ReturnResult._ext = None
     
     #-----< ReturnError >-----#
     ReturnError = SEQ(name=u'ReturnError', mode=MODE_TYPE, param=True)
@@ -662,18 +680,23 @@ class TCAPPackage:
         ___ComponentSequence__item__invokeLast_componentIDs,
         ____ComponentSequence__item__invokeLast_opcode_tab,
         ___ComponentSequence__item__invokeLast_opcode,
+        ____ComponentSequence__item__invokeLast_parameter_tab,
         ___ComponentSequence__item__invokeLast_parameter,
         __ComponentSequence__item__invokeLast,
         ___ComponentSequence__item__returnResultLast_componentID,
         ___ComponentSequence__item__returnResultLast_parameter,
         __ComponentSequence__item__returnResultLast,
         ___ComponentSequence__item__returnError_componentID,
+        ____ComponentSequence__item__returnError_errorCode_tab,
         ___ComponentSequence__item__returnError_errorCode,
+        ____ComponentSequence__item__returnError_parameter_tab,
         ___ComponentSequence__item__returnError_parameter,
         __ComponentSequence__item__returnError,
         __ComponentSequence__item__reject,
         ___ComponentSequence__item__invokeNotLast_componentIDs,
+        ____ComponentSequence__item__invokeNotLast_opcode_tab,
         ___ComponentSequence__item__invokeNotLast_opcode,
+        ____ComponentSequence__item__invokeNotLast_parameter_tab,
         ___ComponentSequence__item__invokeNotLast_parameter,
         __ComponentSequence__item__invokeNotLast,
         ___ComponentSequence__item__returnResultNotLast_componentID,
@@ -681,6 +704,9 @@ class TCAPPackage:
         __ComponentSequence__item__returnResultNotLast,
         _ComponentSequence__item_,
         ComponentSequence,
+        _ReturnResult_componentID,
+        _ReturnResult_parameter,
+        ReturnResult,
         _Reject_componentID,
         _Reject_rejectProblem,
         __Reject_parameter_paramSequence,

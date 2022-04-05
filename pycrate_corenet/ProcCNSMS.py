@@ -1,7 +1,7 @@
 # -*- coding: UTF-8 -*-
 #/**
 # * Software Name : pycrate
-# * Version : 0.3
+# * Version : 0.4
 # *
 # * Copyright 2017. Benoit Michau. ANSSI.
 # *
@@ -83,7 +83,7 @@ class CMSMSProc(NASSigProc):
     def rm_from_sms_stack(self):
         try:
             del self.SMS.Proc[self.TID]
-        except:
+        except Exception:
             pass
     
     def init_timer(self):

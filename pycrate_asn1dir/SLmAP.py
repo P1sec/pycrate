@@ -607,11 +607,15 @@ class SLMAP_IEs:
     ___CriticalityDiagnostics_iE_Extensions__item__id._const_tab_at = None
     ___CriticalityDiagnostics_iE_Extensions__item__id._const_tab_id = u'id'
     ___CriticalityDiagnostics_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('SLMAP-Containers', 'SLMAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___CriticalityDiagnostics_iE_Extensions__item__criticality._const_tab = ____CriticalityDiagnostics_iE_Extensions__item__id_tab
+    ____CriticalityDiagnostics_iE_Extensions__item__criticality_tab = CLASS(name='_tab_SLMAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('SLMAP-Containers', 'SLMAP-PROTOCOL-EXTENSION')))
+    ____CriticalityDiagnostics_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___CriticalityDiagnostics_iE_Extensions__item__criticality._const_tab = ____CriticalityDiagnostics_iE_Extensions__item__criticality_tab
     ___CriticalityDiagnostics_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___CriticalityDiagnostics_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___CriticalityDiagnostics_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('SLMAP-Containers', 'SLMAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___CriticalityDiagnostics_iE_Extensions__item__extensionValue._const_tab = ____CriticalityDiagnostics_iE_Extensions__item__id_tab
+    ____CriticalityDiagnostics_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_SLMAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('SLMAP-Containers', 'SLMAP-PROTOCOL-EXTENSION')))
+    ____CriticalityDiagnostics_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___CriticalityDiagnostics_iE_Extensions__item__extensionValue._const_tab = ____CriticalityDiagnostics_iE_Extensions__item__extensionValue_tab
     ___CriticalityDiagnostics_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___CriticalityDiagnostics_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __CriticalityDiagnostics_iE_Extensions__item_._cont = ASN1Dict([
@@ -651,11 +655,15 @@ class SLMAP_IEs:
     ____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__id._const_tab_at = None
     ____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__id._const_tab_id = u'id'
     ____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('SLMAP-Containers', 'SLMAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__criticality._const_tab = _____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__id_tab
+    _____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__criticality_tab = CLASS(name='_tab_SLMAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('SLMAP-Containers', 'SLMAP-PROTOCOL-EXTENSION')))
+    _____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__criticality._const_tab = _____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__criticality_tab
     ____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('SLMAP-Containers', 'SLMAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__extensionValue._const_tab = _____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__id_tab
+    _____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_SLMAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('SLMAP-Containers', 'SLMAP-PROTOCOL-EXTENSION')))
+    _____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__extensionValue._const_tab = _____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__extensionValue_tab
     ____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     ___CriticalityDiagnostics_IE_List__item__iE_Extensions__item_._cont = ASN1Dict([
@@ -926,7 +934,9 @@ class SLMAP_IEs:
         _CriticalityDiagnostics_iEsCriticalityDiagnostics,
         ____CriticalityDiagnostics_iE_Extensions__item__id_tab,
         ___CriticalityDiagnostics_iE_Extensions__item__id,
+        ____CriticalityDiagnostics_iE_Extensions__item__criticality_tab,
         ___CriticalityDiagnostics_iE_Extensions__item__criticality,
+        ____CriticalityDiagnostics_iE_Extensions__item__extensionValue_tab,
         ___CriticalityDiagnostics_iE_Extensions__item__extensionValue,
         __CriticalityDiagnostics_iE_Extensions__item_,
         _CriticalityDiagnostics_iE_Extensions,
@@ -937,7 +947,9 @@ class SLMAP_IEs:
         __CriticalityDiagnostics_IE_List__item__typeOfError,
         _____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__id_tab,
         ____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__id,
+        _____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__criticality_tab,
         ____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__criticality,
+        _____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__extensionValue_tab,
         ____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__extensionValue,
         ___CriticalityDiagnostics_IE_List__item__iE_Extensions__item_,
         __CriticalityDiagnostics_IE_List__item__iE_Extensions,
@@ -1530,11 +1542,15 @@ class SLMAP_PDU_Contents:
     ___PrivateMessage_privateIEs__item__id._const_tab_at = None
     ___PrivateMessage_privateIEs__item__id._const_tab_id = u'id'
     ___PrivateMessage_privateIEs__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('SLMAP-Containers', 'SLMAP-PRIVATE-IES'), [u'criticality']))
-    ___PrivateMessage_privateIEs__item__criticality._const_tab = ____PrivateMessage_privateIEs__item__id_tab
+    ____PrivateMessage_privateIEs__item__criticality_tab = CLASS(name='_tab_SLMAP-PRIVATE-IES', mode=MODE_SET, typeref=ASN1RefType(('SLMAP-Containers', 'SLMAP-PRIVATE-IES')))
+    ____PrivateMessage_privateIEs__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___PrivateMessage_privateIEs__item__criticality._const_tab = ____PrivateMessage_privateIEs__item__criticality_tab
     ___PrivateMessage_privateIEs__item__criticality._const_tab_at = ('..', u'id')
     ___PrivateMessage_privateIEs__item__criticality._const_tab_id = u'criticality'
     ___PrivateMessage_privateIEs__item__value = OPEN(name=u'value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('SLMAP-Containers', 'SLMAP-PRIVATE-IES'), [u'Value']))
-    ___PrivateMessage_privateIEs__item__value._const_tab = ____PrivateMessage_privateIEs__item__id_tab
+    ____PrivateMessage_privateIEs__item__value_tab = CLASS(name='_tab_SLMAP-PRIVATE-IES', mode=MODE_SET, typeref=ASN1RefType(('SLMAP-Containers', 'SLMAP-PRIVATE-IES')))
+    ____PrivateMessage_privateIEs__item__value_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___PrivateMessage_privateIEs__item__value._const_tab = ____PrivateMessage_privateIEs__item__value_tab
     ___PrivateMessage_privateIEs__item__value._const_tab_at = ('..', u'id')
     ___PrivateMessage_privateIEs__item__value._const_tab_id = u'Value'
     __PrivateMessage_privateIEs__item_._cont = ASN1Dict([
@@ -1687,7 +1703,9 @@ class SLMAP_PDU_Contents:
         _ErrorIndication_IEs_val_Value_1,
         ____PrivateMessage_privateIEs__item__id_tab,
         ___PrivateMessage_privateIEs__item__id,
+        ____PrivateMessage_privateIEs__item__criticality_tab,
         ___PrivateMessage_privateIEs__item__criticality,
+        ____PrivateMessage_privateIEs__item__value_tab,
         ___PrivateMessage_privateIEs__item__value,
         __PrivateMessage_privateIEs__item_,
         _PrivateMessage_privateIEs,

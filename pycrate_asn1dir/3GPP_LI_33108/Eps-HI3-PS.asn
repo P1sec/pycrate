@@ -1,0 +1,85 @@
+Eps-HI3-PS {itu-t(0) identified-organization(4) etsi(0) securityDomain(2) lawfulintercept(2) threeGPP(4) hi3eps(9)  r12(12) version-0(0)}
+
+DEFINITIONS IMPLICIT TAGS ::=
+
+BEGIN
+
+IMPORTS
+		
+EPSCorrelationNumber
+	FROM EpsHI2Operations
+	{itu-t(0) identified-organization(4) etsi(0) securityDomain(2) lawfulintercept(2) threeGPP(4) 	hi2eps(8) r12(12) version-55(55)}    -- Imported from TS 33.108 v.12.5.0
+
+LawfulInterceptionIdentifier,
+	
+TimeStamp
+	FROM HI2Operations
+	{itu-t(0) identified-organization(4) etsi(0) securityDomain(2) lawfulIntercept(2) hi2(1) 	version18(18)};  -- from ETSI HI2Operations TS 101 671 v3.12.1
+
+-- Object Identifier Definitions
+
+-- Security DomainId
+lawfulInterceptDomainId OBJECT IDENTIFIER ::= {itu-t(0) identified-organization(4) etsi(0)
+securityDomain(2) lawfulIntercept(2)}
+
+-- Security Subdomains
+threeGPPSUBDomainId OBJECT IDENTIFIER ::= {lawfulInterceptDomainId threeGPP(4)}
+hi3DomainId OBJECT IDENTIFIER  ::= {threeGPPSUBDomainId hi3eps(9) r12(12) version-0(0)}
+
+CC-PDU	::= SEQUENCE
+{
+ 	uLIC-header		[1] ULIC-header,
+	payload			[2] OCTET STRING
+}
+
+ULIC-header ::= SEQUENCE
+{
+	hi3DomainId				[0]	OBJECT IDENTIFIER,  -- 3GPP HI3 Domain
+	lIID					[2] LawfulInterceptionIdentifier OPTIONAL,
+	correlation-Number		[3]	EPSCorrelationNumber,
+	timeStamp				[4]	TimeStamp OPTIONAL,
+	sequence-number			[5]	INTEGER (0..65535),
+	t-PDU-direction			[6] TPDU-direction,
+	...,
+	national-HI3-ASN1parameters		[7] National-HI3-ASN1parameters OPTIONAL,
+	--  encoded per national requirements
+	ice-type				[8] ICE-type OPTIONAL
+		-- The ICE-type indicates the applicable Intercepting Control Element(see ref [19]) in which
+		-- the T-PDU is intercepted.
+}
+
+
+TPDU-direction ::= ENUMERATED
+{
+	from-target 	(1),
+	to-target 		(2),
+	unknown 		(3)
+}
+
+National-HI3-ASN1parameters	::= SEQUENCE
+{
+	countryCode		[1] PrintableString (SIZE (2)),
+		-- Country Code according to ISO 3166-1 [39],
+		-- the country to which the parameters inserted after the extension marker apply
+	...
+		-- In case a given country wants to use additional national parameters according to its law,
+		-- these national parameters should be defined using the ASN.1 syntax and added after the
+		-- extension marker (...).
+		-- It is recommended that "version parameter" and "vendor identification parameter" are
+		-- included in the national parameters definition. Vendor identifications can be
+		-- retrieved from IANA web site. It is recommended to avoid
+		-- using tags from 240 to 255 in a formal type definition.
+}
+
+ICE-type ::= ENUMERATED
+{
+	sgsn			(1),
+	ggsn			(2),
+	...,
+    s-GW            (3),
+    pDN-GW          (4),
+    colocated-SAE-GWs (5) ,
+    ePDG            (6)
+}
+
+END

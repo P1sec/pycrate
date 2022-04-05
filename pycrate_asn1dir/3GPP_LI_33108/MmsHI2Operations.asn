@@ -1,0 +1,481 @@
+MmsHI2Operations {itu-t(0) identified-organization(4) etsi(0) securityDomain(2) lawfulintercept(2) threeGPP(4) hi2mms(16) r16 (16) version-0 (0)}
+
+DEFINITIONS IMPLICIT TAGS ::=
+
+BEGIN
+
+IMPORTS
+
+
+		LawfulInterceptionIdentifier,
+		TimeStamp,
+		Network-Identifier,
+		National-Parameters,
+		National-HI2-ASN1parameters,
+		DataNodeAddress,
+		IPAddress,
+		IP-value
+
+			FROM HI2Operations
+			{itu-t(0) identified-organization(4) etsi(0) securityDomain(2)
+ 				  lawfulIntercept(2) hi2(1) version18(18)} -- Imported from TS 101 671 v3.14.1
+		
+  		Location
+
+			FROM UmtsHI2Operations
+    		{itu-t(0) identified-organization(4) etsi(0) securityDomain(2)
+   				lawfulintercept(2) threeGPP(4) hi2(1)  r16 (16) version-0 (0)};
+    			-- Imported from 3GPP TS 33.108, UMTS PS HI2
+	
+-- Object Identifier Definitions
+
+-- Security DomainId
+lawfulInterceptDomainId OBJECT IDENTIFIER ::= {itu-t(0) identified-organization(4) etsi(0)
+
+securityDomain(2) lawfulIntercept(2)}
+
+-- Security Subdomains
+threeGPPSUBDomainId OBJECT IDENTIFIER ::= {lawfulInterceptDomainId threeGPP(4)}
+hi2mmsDomainId OBJECT IDENTIFIER	::= {threeGPPSUBDomainId hi2mms(16) r16(16) version-0 (0)}
+
+MmsIRIsContent		::= CHOICE
+{
+	mmsiRIContent			MmsIRIContent,
+	mmsIRISequence			MmsIRISequence
+}
+
+MmsIRISequence		::= SEQUENCE OF MmsIRIContent
+
+-- Aggregation of MmsIRIContent is an optional feature.
+-- It may be applied in cases when at a given point in time
+-- several IRI records are available for delivery to the same LEA destination.
+-- As a general rule, records created at any event shall be sent
+-- immediately and not withheld in the DF or MF in order to
+-- apply aggragation.
+-- When aggregation is not to be applied,
+-- MmsIRIContent needs to be chosen.
+-- MmsIRIContent includes events that correspond to MMS.
+
+MmsIRIContent		::= CHOICE
+{
+	iRI-Begin-record		[1] IRI-Parameters,	-- not applicable for the present document
+	iRI-End-record		[2] IRI-Parameters, -- not applicable for the present document
+	iRI-Continue-record		[3] IRI-Parameters,	-- not applicable for the present document
+
+	iRI-Report-record		[4] IRI-Parameters	-- include at least one optional parameter
+}
+-- the MmsIRIContent may provide events that correspond to UMTS/GPRS as well as EPS.
+
+-- Parameters having the same tag numbers have to be identical in Rel-14 and onwards modules.
+IRI-Parameters		::= SEQUENCE
+{
+	hi2mmsDomainId				[0]	OBJECT IDENTIFIER,  -- 3GPP HI2 MMS domain
+	lawfulInterceptionIdentifier			[1] LawfulInterceptionIdentifier,
+		-- This identifier is associated to the target.
+	timeStamp					[3] TimeStamp,
+		-- date and time of the event triggering the report.
+	locationOfTheTarget				[4] Location OPTIONAL,
+		-- location of the target
+	partyInformation 				[5] SET SIZE (1..10) OF PartyInformation OPTIONAL,
+		-- This parameter provides the concerned party, the identiy(ies) of the party
+		-- and all the information provided by the party.
+	mMSevent 				[7] MMSEvent OPTIONAL,
+
+	serviceCenterAddress				[8] PartyInformation OPTIONAL,
+		-- this parameter provides the address of the relevant MMS server
+	mMSParties				[9] MMSParties OPTIONAL,
+		-- this parameter provides the MMS parties (To, CC, BCC, and From) in the communication. 
+	mMSVersion				[10] INTEGER OPTIONAL,
+	transactionID				[11] UTF8String OPTIONAL,
+
+	messageID					[12] UTF8String OPTIONAL,
+		-- In accordance with [90] it is encoded as in email address as per RFC2822 [92]. 
+		-- The characters "<" and ">" are not included. 
+	mMSDateTime				[13] GeneralizedTime OPTIONAL,
+	messageClass				[14] MessageClass OPTIONAL,
+	expiry					[15] GeneralizedTime OPTIONAL,
+	distributionIndicator				[16] YesNo OPTIONAL,
+	elementDescriptor				[17] ElementDescriptor OPTIONAL,
+	retrievalMode				[18] YesNo OPTIONAL,
+	-- if retrievalMode is included, it has to be coded to Yes indicating Manual retreival mode 
+	-- recommended. 
+	retrievalModeText				[19] EncodedString OPTIONAL,
+	senderVisibility				[20] YesNo OPTIONAL,
+	-- Yes indicates Show and No indicates Do Not Show.
+	deliveryReport				[21] YesNo OPTIONAL,
+	readReport				[22] YesNo OPTIONAL,
+	applicID					[23] UTF8String OPTIONAL,
+	replyApplicID				[24] UTF8String OPTIONAL,
+	auxApplicInfo				[25] UTF8String OPTIONAL,
+	contentClass				[26] ContentClass OPTIONAL,
+	dRMContent				[27] YesNo OPTIONAL,
+	replaceID					[28] UTF8String OPTIONAL,
+	contentLocation				[29] ContentLocation OPTIONAL,
+	mMSStatus				[30] MMSStatus OPTIONAL,
+	reportAllowed				[31] YesNo OPTIONAL,
+	previouslySentBy				[32] PreviouslySentBy OPTIONAL,
+	previouslySentByDateTime 			[33] PreviouslySentByDateTime OPTIONAL,
+	mMState					[34] MMSState OPTIONAL,
+	desiredDeliveryTime				[35] GeneralizedTime OPTIONAL,
+	deliveryReportAllowed			[36] YesNo OPTIONAL,
+	store					[37] YesNo OPTIONAL,
+	responseStatus				[38] ResponseStatus OPTIONAL,
+	responseStatusText				[39] ResponseStatusText OPTIONAL,
+	storeStatus				[40] StoreStatus OPTIONAL,
+	storeStatusText				[41] EncodedString OPTIONAL,
+	-- mMState				[42] MMSState OPTIONAL,  
+	mMFlags					[43] MMFlags OPTIONAL,
+	mMBoxDescriptionPdus			[44] SEQUENCE OF MMBoxDescriptionPdus  OPTIONAL,
+	cancelID					[45] UTF8String OPTIONAL,
+
+	cancelStatus				[46] YesNo OPTIONAL,
+	-- Yes indicates cancel successfully received and No indicates cancel request corrupted.
+	mMSStart					[47] INTEGER OPTIONAL,
+	mMSLimit					[48] INTEGER OPTIONAL,
+	mMSAttributes				[49] MMSAttributes OPTIONAL,
+	mMSTotals				[50] YesNo OPTIONAL,
+	mMSQuotas				[51] YesNo OPTIONAL,
+	mMSMessageCount				[52] INTEGER OPTIONAL,
+	messageSize				[53] INTEGER OPTIONAL,
+	mMSForwardReqDateTime			[54] GeneralizedTime OPTIONAL,
+	adaptationAllowed				[55] YesNo OPTIONAL,
+	priority					[56] Priority OPTIONAL,
+	mMSCorrelationNumber			[57] MMSCorrelationNumber OPTIONAL,
+		-- this parameter provides MMS Correlation number when the event will also provide CC.
+	contentType				[58] OCTET STRING OPTIONAL,
+	national-Parameters				[59] National-Parameters OPTIONAL
+}
+-- Parameters having the same tag numbers have to be identical in Rel-14 and onwards modules
+
+-- PARAMETERS FORMATS
+PartyInformation 			::= SEQUENCE
+{
+	party-Qualifier 	[0]  ENUMERATED
+	{
+		mMS-Target(1),
+		...
+	},
+	partyIdentity 		[1] SEQUENCE
+	{
+		mSISDN					[1] OCTET STRING OPTIONAL,
+			-- MSISDN, based on the value of
+			-- global-phone-number found in the MMS (see OMA Multimedia Messaging
+			-- Service Encapsulation Protocol [90]).
+		mMSAddress				[2] OCTET STRING OPTIONAL,
+			-- See clause 8 of OMA Multimedia Messaging Service Encapsulation Protocol [90]. It
+			-- may be each value of a user defined identifier, that will be an external
+			-- representation of an address processed by the MMS Proxy Relay.
+		mMSAddressNonLocalID	[3] OCTET STRING OPTIONAL,
+			-- see table 15.3.6.1.2: Mapping between Events information and IRI information
+		e-Mail					[4] OCTET STRING OPTIONAL,
+			-- it is described in section 3.4 of IETF RFC 2822 [92], but excluding the obsolete
+			-- definitions as indicated by the "obs-"prefix.(see clause 8 of Multimedia Messaging
+			-- Service Encapsulation Protocol OMA-TS-MMS_ENC-V1_3-20110913-A [90].)
+		e164-Format				[5] OCTET STRING (SIZE (1 .. 25)) OPTIONAL,
+			-- E164 address but based on value of global-phone-number the found in the MMS.
+		iPAddress 				[6] IPAddress OPTIONAL,
+			-- IP Address may be an IPv4 or IPv6.
+		alphanum-Shortcode 		[8] OCTET STRING OPTIONAL,
+			-- see clause 8 of OMA Multimedia Messaging Service Encapsulation Protocol [90].
+		num-Shortcode			[9] OCTET STRING OPTIONAL,
+			-- see clause 8 of OMA Multimedia Messaging Service Encapsulation Protocol [90].
+		iMSI					[10] OCTET STRING OPTIONAL,
+		...
+	},
+	...
+}
+
+Address::= EncodedString
+
+Addresses::= SEQUENCE OF Address
+
+ClassIdentifier ::= ENUMERATED
+{
+	personal 			(0),
+	advertisement	 	(1),
+	informational		(2),
+	auto				(3),
+...
+}
+
+ContentClass ::= ENUMERATED
+{
+	text 			(0),
+	image-basic 	(1),
+	image-rich		(2),
+
+	video-basic		(3),
+	video-rich		(4),
+	megapixel		(5),
+	content-basic	(6),
+	content-rich	(7),
+...
+}
+
+ContentLocation ::= SEQUENCE
+{
+	contentLocationURI		[1] OCTET STRING,
+-- See Clause 7.3.10 of [90] for the coding of the contentLocationURI.
+	statusCount				[2] INTEGER OPTIONAL,
+-- the statusCount is included only for the MMS Delete event.
+...
+}
+
+ElementDescriptor ::= SEQUENCE
+{
+	contentReferenceValue [1] UTF8String,
+	parameterName		  [2] ParameterName,
+	parameterValue		  [3] ParameterValue,
+...
+}
+
+EncodedString::= CHOICE
+{
+	text	[1] UTF8String,
+	encodedTextString	[2] EncodedTextString,
+...
+}
+
+EncodedTextString::= SEQUENCE
+{
+	stringType	[1] OCTET STRING,
+	-- stringType shall be encoded with MIBEnum values as registered with IANA as defined in [90].
+	actualString	[2] OCTET STRING,
+...
+}
+
+From ::= SEQUENCE OF FromAddresses
+
+FromAddresses ::= CHOICE
+{
+	actualAddress	[1] EncodedString,
+	insertToken		[2] NULL,
+...
+}
+
+MessageClass ::= CHOICE
+{
+	classIdentifier	[1] ClassIdentifier,
+	tokenText		[2] OCTET STRING,
+...
+}
+
+MMBoxDescriptionPdus ::= SEQUENCE
+{
+	mMSCorrelation		[1] MMSCorrelationNumber OPTIONAL,
+	toAddresses			[2] Addresses,
+	cCAddresses			[3] Addresses OPTIONAL,
+	bCCAddresses		[4] Addresses OPTIONAL,
+	fromAddress			[5] From,
+	messageID			[6] UTF8String,
+	mMSDateTime			[7] GeneralizedTime OPTIONAL,
+	previouslySentBy		[8] PreviouslySentBy OPTIONAL,
+	previouslySentByDateTime	[9] PreviouslySentByDateTime OPTIONAL,
+	mMState			[10] MMSState OPTIONAL,
+	mMFlags			[11] MMFlags OPTIONAL,
+	messageClass		[12] MessageClass OPTIONAL,
+	priority			[13] Priority OPTIONAL,
+	deliveryTime		[14] GeneralizedTime OPTIONAL,
+	expiry			[15] GeneralizedTime OPTIONAL,
+	deliveryReport		[16] YesNo OPTIONAL,
+	readReport			[17] YesNo OPTIONAL,
+	messageSize			[18] INTEGER OPTIONAL,
+	contentLocation		[19] ContentLocation OPTIONAL,
+	contentType			[20] OCTET STRING OPTIONAL,
+
+...
+}
+
+MMFlags ::= SEQUENCE
+{
+	tokenAction		[1] TokenAction,
+	mmFlagkeywords	[2] EncodedString
+}
+
+MMSAttributes ::= CHOICE
+{
+	attributeApplicID		[1] UTF8String,
+	attributeAuxApplicInfo		[2] UTF8String,
+	attributeBCC		[3] Address,
+	attributeCC			[4] Address,
+	attributeContent		[5] OCTET STRING,
+	attributeContentType		[6] OCTET STRING,
+	attributeDate		[7] GeneralizedTime,
+	attributeDeliveryReport		[8] YesNo,
+	attributeDeliveryTime		[9] GeneralizedTime,
+	attributeExpiry		[10] GeneralizedTime,
+	attributeFrom		[11] From,
+	attributeMessageClass		[12] MessageClass,
+	attributeMessageID		[13] UTF8String,
+	attributeMessageSize		[14] INTEGER,
+	attributePriority		[15] Priority,
+	attributeReadReport		[16] YesNo,
+	attributeTo			[17] Address,
+	attributeReplyApplicID		[18] UTF8String,
+	attributePreviouslySentBy	[19] PreviouslySentBy,
+	attributePreviouslySentByDateTime	[20] PreviouslySentByDateTime,
+	attributeAdditionalHeaders	[21] OCTET STRING,
+...
+}
+
+MMSCorrelationNumber ::= OCTET STRING
+
+MMSEvent ::= ENUMERATED
+{
+	send 		(0),
+	notification	(1),
+	notificationResponse	(2),
+	retrieval		(3),
+	retrievalAcknowledgement(4),
+	forwarding		(5),
+	store		(6),
+	upload		(7),
+	delete		(8),
+	delivery		(9),
+	readReplyFromTarget	(10),
+	readReplyToTarget	(11),
+	cancel		(12),
+	viewRequest		(13),
+	viewConfirm		(14),
+...
+}
+
+MMSParties::= SEQUENCE
+{
+	toAddresses		[1] Addresses OPTIONAL,
+	cCAddresses		[2]	Addresses OPTIONAL,
+	bCCAddresses	[3] Addresses OPTIONAL,
+	fromAddresses	[4] From OPTIONAL,
+...
+}
+
+MMSState::= ENUMERATED
+{
+	draft 		(0),
+	sent		(1),
+	new			(2),
+	retreived	(3),
+	forwarded	(4),
+
+...
+}
+
+MMSStatus::= ENUMERATED
+{
+	expired 		(0),
+	retrieved		(1),
+	rejected		(2),
+	deferred		(3),
+	unrecognised	(4),
+	indeterminate	(5),
+	forwarded		(6),
+	unreachable		(7),
+...
+}
+
+ParameterName::= CHOICE
+{
+	integername [1] INTEGER,
+	textName	[2] UTF8String,
+...
+}
+
+ParameterValue::= CHOICE
+{
+	intValue  [1] OCTET STRING,
+	textValue [2] UTF8String,
+...
+}
+
+PreviouslySentBy::= SEQUENCE
+{
+	forwardedCount		[1] INTEGER,
+	forwardedPartyID	[2] EncodedString,
+...
+}
+
+PreviouslySentByDateTime::= SEQUENCE
+{
+	forwardedCount		[1] INTEGER,
+	forwardedDateTime	[2] GeneralizedTime,
+...
+}
+
+
+Priority ::= ENUMERATED
+{
+	low 	(0),
+	normal 	(1),
+	high	(2),
+...
+}
+
+ResponseStatus::= SEQUENCE
+{
+	statusCount	[1]	EncodedString OPTIONAL,
+	-- the statusCount shall only be included for the Delete event.
+	actualResponseStatus	[2] ActualResponseStatus,
+...
+}
+
+ResponseStatusText::= SEQUENCE
+{
+	statusCount	[1]	EncodedString OPTIONAL,
+	-- the statusCount shall only be included for the Delete event.
+	actualResponseStatusText	[2] EncodedString,
+...
+}
+
+ActualResponseStatus ::= ENUMERATED
+{
+	ok 													(0),
+	errorUnspecified									(1),
+	errorServiceDenied									(2),
+	errorMessageFormatCorrupt							(3),
+
+	errorSendingAddressUnresolved						(4),
+	errorMessageNotFound								(5),
+	errorNetworkProblem								(6),
+	errorContentNotAccepted							(7),
+	errorUnsuportedMessage								(8),
+	errorTransientFailure								(9),
+	errorTransientSendingAddressUnresolved				(10),
+	errorTransientMessageNotFound						(11),
+	errorTransientNetworkProblem						(12),
+	errorTransientPartialSucess						(13),
+	errorPermanentFailure								(14),
+	errorPermanentServiceDenied						(15),
+	errorPermanentMessageFormatCorrupt					(16),
+	errorPermanentSendingAddressUnresolved				(17),
+	errorPermanentMessageNotFound						(18),
+	errorPermanentContentNotAccepted					(19),
+	errorPermanentReplyChargingLimitationsNotMet		(20),
+	errorPermanentReplyChargingRequestNotAccepted		(21),
+	errorPermanentReplyChargingForwardingDenied		(22),
+	errorPermanentReplyChargingNotSupported			(23),
+	errorPermanentAddressHidingNotSupported			(24),
+	errorPermanentLackOfPrepaid						(25),
+...
+}
+
+StoreStatus ::= ENUMERATED
+{
+	success 		(0),
+	errorTransient 	(1),
+	high			(2),
+...
+}
+
+TokenAction::= ENUMERATED
+{
+	addToken 		(0),
+	removeToken 	(1),
+	filterToken		(2),
+
+...
+}
+
+YesNo::= BOOLEAN 
+-- TRUE indicates Yes and FALSE indicates No.
+
+END

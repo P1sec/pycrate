@@ -1,0 +1,78 @@
+GCSE-HI3 {itu-t(0) identified-organization(4) etsi(0) securityDomain(2) lawfulIntercept(2) threeGPP(4) hi3gcse(14) r13(13) version-0(0)}
+
+DEFINITIONS IMPLICIT TAGS ::=
+
+BEGIN
+
+IMPORTS
+
+LawfulInterceptionIdentifier,
+	
+TimeStamp
+	FROM HI2Operations
+	{itu-t(0) identified-organization(4) etsi(0) securityDomain(2) lawfulIntercept(2) hi2(1)  version18(18)}-- from ETSI HI2Operations TS 101 671, version 3.12.1
+
+GcseCorrelation,
+GcsePartyIdentity
+	
+	FROM GCSEHI2Operations
+	{itu-t(0) identified-organization(4) etsi(0) securityDomain(2) lawfulintercept(2)
+    threeGPP(4) hi2gcse(13)  r13(13) version-0 (0)}
+    -- Imported from Gcse HI2 Operations part of this standard
+
+National-HI3-ASN1parameters
+
+	FROM Eps-HI3-PS
+	{itu-t(0) identified-organization(4) etsi(0) securityDomain(2) lawfulintercept(2) 	threeGPP(4) hi3eps(9) r12 (12) version-0(0)};
+
+-- Object Identifier Definitions
+
+-- Security DomainId
+lawfulInterceptDomainId OBJECT IDENTIFIER ::= {itu-t(0) identified-organization(4) etsi(0)
+securityDomain(2) lawfulIntercept(2)}
+
+-- Security Subdomains
+threeGPPSUBDomainId OBJECT IDENTIFIER ::= {lawfulInterceptDomainId threeGPP(4)}
+hi3gcseDomainId OBJECT IDENTIFIER  ::= {threeGPPSUBDomainId hi3gcse(14) r13(13) version-0(0)}
+
+Gcse-CC-PDU	::= SEQUENCE
+{
+ 	gcseLIC-header		[1] GcseLIC-header,
+	payload			[2] OCTET STRING
+}
+
+GcseLIC-header ::= SEQUENCE
+{
+	hi3gcseDomainId					[1]	OBJECT IDENTIFIER,  -- 3GPP HI3 gcse Domain ID
+	lIID							[2] LawfulInterceptionIdentifier OPTIONAL,
+	correlation						[3]	GcseCorrelation,
+	timeStamp						[4]	TimeStamp OPTIONAL,
+	sequence-number					[5]	INTEGER (0..65535),
+	t-PDU-direction					[6] TPDU-direction,
+	national-HI3-ASN1parameters	[7] National-HI3-ASN1parameters OPTIONAL,
+	--  encoded per national requirements
+	mediaID							[8] MediaID  OPTIONAL,
+		-- Identifies the media being exchanged by parties on the GCSE group communications.
+...
+	
+}
+
+MediaID ::= SEQUENCE
+{
+		sourceUserID	[1] GcsePartyIdentity	OPTIONAL,  -- include SDP information
+			-- describing GCSE Server Side characteristics.
+
+		streamID		[2] OCTET STRING 	OPTIONAL,  -- include streamID from SDP information.
+			
+	...
+}
+
+TPDU-direction ::= ENUMERATED
+{
+	from-target 	(1),
+	to-target 		(2),
+	unknown 		(3),
+...
+}
+
+END

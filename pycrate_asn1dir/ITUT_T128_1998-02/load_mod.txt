@@ -1,0 +1,5 @@
+# downloaded from ITU-T ASN.1 module database
+# https://www.itu.int/ITU-T/recommendations/rec.aspx?id=9515&lang=en
+AS-PROTOCOL-for-legacy-mode.asn
+GCC-PROTOCOL.asn
+AS-PROTOCOL-for-PER-encoding.asn

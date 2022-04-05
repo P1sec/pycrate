@@ -1,0 +1,293 @@
+-- Module MAP-PROTOCOL (T.125:02/1998)
+-- See also ITU-T T.125 (02/1998)
+-- See also the index of all ASN.1 assignments needed in this document
+
+MAP-PROTOCOL DEFINITIONS AUTOMATIC TAGS ::=
+BEGIN
+
+H221NonStandardIdentifier ::= OCTET STRING(SIZE (4..255))
+
+Key ::= CHOICE {
+  object           OBJECT IDENTIFIER,
+  h221NonStandard  H221NonStandardIdentifier
+}
+
+NonStandardParameter ::= SEQUENCE {key   Key,
+                                   data  OCTET STRING
+}
+
+NonStandardPDU ::= SEQUENCE {data  NonStandardParameter,
+                             ...
+}
+
+VersionNumber ::= SEQUENCE {
+  majorVersionNumber     INTEGER(0..65535),
+  minorVersionNumber     INTEGER(0..65535),
+  nonStandardParameters  SEQUENCE OF NonStandardParameter OPTIONAL,
+  ...
+}
+
+Priority ::= INTEGER(0..15)
+
+PriorityRange ::= SEQUENCE {
+  highPriority           Priority,
+  lowPriority            Priority,
+  nonStandardParameters  SEQUENCE OF NonStandardParameter OPTIONAL,
+  ...
+}
+
+MAPConnectRequestPDU ::= SEQUENCE {
+  versionNumber          VersionNumber,
+  connectionMAPSAP       INTEGER(0..65535),
+  domainReferenceID      INTEGER(0..65535),
+  priorityRange          PriorityRange,
+  nonStandardParameters  SEQUENCE OF NonStandardParameter OPTIONAL,
+  ...
+}
+
+MAPConnectConfirmPDU ::= SEQUENCE {
+  versionNumber          VersionNumber,
+  connectionMAPSAP       INTEGER(0..65535),
+  nonStandardParameters  SEQUENCE OF NonStandardParameter OPTIONAL,
+  ...
+}
+
+Reason ::= CHOICE {
+  providerInitiated         NULL,
+  userRejected              NULL,
+  userInitiated             NULL,
+  invalidMAPSAP             NULL,
+  invalidDomainReferenceID  NULL,
+  unicastTransition         NULL,
+  unspecifiedFailure        NULL,
+  nonStandardReason         NonStandardParameter,
+  ...
+}
+
+MAPDisconnectRequestPDU ::= SEQUENCE {
+  reason                 Reason,
+  confirmRequired        BOOLEAN,
+  nonStandardParameters  SEQUENCE OF NonStandardParameter OPTIONAL,
+  ...
+}
+
+MAPDisconnectConfirmPDU ::= SEQUENCE {
+  nonStandardParameters  SEQUENCE OF NonStandardParameter OPTIONAL,
+  ...
+}
+
+TransportProtocolID ::= CHOICE {
+  objectProtocolID           OBJECT IDENTIFIER,
+  h221NonStandardProtocolID  H221NonStandardIdentifier,
+  snapProtocolID             OCTET STRING(SIZE (5)),
+  nonStandardProtocolID      NonStandardParameter,
+  ...
+}
+
+TransportProtocolType ::= CHOICE {
+  reliableUnicast          NULL,
+  unreliableUnicast        NULL,
+  reliableMulticast        NULL,
+  unreliableMulticast      NULL,
+  nonStandardProtocolType  NonStandardParameter,
+  ...
+}
+
+NetworkAddress ::= SEQUENCE {
+  nsapAddress            OCTET STRING(SIZE (1..20)),
+  nonStandardParameters  SEQUENCE OF NonStandardParameter OPTIONAL,
+  ...
+}
+
+PayloadSize ::= INTEGER(128..65535)
+
+TransportProtocolRequestEntry ::= SEQUENCE {
+  transportProtocolID      TransportProtocolID,
+  transportProtocolType    TransportProtocolType,
+  networkAddress           NetworkAddress,
+  maximumPayloadFixedFlag  BOOLEAN,
+  maximumPayloadSize       PayloadSize,
+  preferenceWeighting      INTEGER(0..65535) OPTIONAL,
+  nodeCount                INTEGER(0..65535) OPTIONAL,
+  numberOfConnections      INTEGER(0..65535) OPTIONAL,
+  configurationData        OCTET STRING OPTIONAL,
+  nonStandardParameters    SEQUENCE OF NonStandardParameter OPTIONAL,
+  ...
+}
+
+MAPArbitrateProtocolsRequestPDU ::= SEQUENCE {
+  domainReferenceID      INTEGER(0..65535),
+  moreToComeFlag         BOOLEAN,
+  transportProtocolMenu  SEQUENCE OF TransportProtocolRequestEntry,
+  nonStandardParameters  SEQUENCE OF NonStandardParameter OPTIONAL,
+  ...
+}
+
+TransportProtocolConfirmEntry ::= SEQUENCE {
+  transportProtocolID    TransportProtocolID,
+  transportProtocolType  TransportProtocolType,
+  networkAddress         NetworkAddress,
+  maximumPayloadSize     PayloadSize,
+  preferenceWeighting    INTEGER(0..65535) OPTIONAL,
+  nodeCount              INTEGER(0..65535) OPTIONAL,
+  numberOfConnections    INTEGER(0..65535) OPTIONAL,
+  configurationData      OCTET STRING OPTIONAL,
+  nonStandardParameters  SEQUENCE OF NonStandardParameter OPTIONAL,
+  ...
+}
+
+MAPArbitrateProtocolsConfirmPDU ::= SEQUENCE {
+  domainReferenceID      INTEGER(0..65535),
+  moreToComeFlag         BOOLEAN,
+  transportProtocolMenu  SEQUENCE OF TransportProtocolConfirmEntry,
+  nonStandardParameters  SEQUENCE OF NonStandardParameter OPTIONAL,
+  ...
+}
+
+SenderID ::= INTEGER(1001..65535)
+
+ChannelID ::= INTEGER(1..65535)
+
+ReliabilityLevel ::= CHOICE {
+  reliable                     NULL,
+  unreliable                   NULL,
+  nonStandardReliabilityLevel  NonStandardParameter,
+  ...
+}
+
+DataType ::= CHOICE {
+  nonuniform           NULL,
+  uniform              NULL,
+  proxy                NULL,
+  nonStandardDataType  NonStandardParameter,
+  ...
+}
+
+DataFlowIdentifier ::= SEQUENCE {
+  senderID               SenderID OPTIONAL,
+  metachannelID
+    SEQUENCE {channelID         ChannelID,
+              reliabilityLevel  ReliabilityLevel,
+              priority          Priority,
+              ...} OPTIONAL,
+  dataType               DataType OPTIONAL,
+  nonStandardParameters  SEQUENCE OF NonStandardParameter OPTIONAL,
+  ...
+}
+
+SequenceNumber ::= INTEGER(0..65535)
+
+DataDescriptor ::= SEQUENCE {
+  unicastForwardFlag      BOOLEAN,
+  startingSequenceNumber  SequenceNumber,
+  dataFlowIdentifier      DataFlowIdentifier OPTIONAL,
+  domainReferenceID       INTEGER(0..65535) OPTIONAL,
+  nonStandardParameters   SEQUENCE OF NonStandardParameter OPTIONAL,
+  ...
+}
+
+DataFrameEntry ::= SEQUENCE {
+  firstSegmentFlag       BOOLEAN,
+  lastSegmentFlag        BOOLEAN,
+  userData               OCTET STRING,
+  nonStandardParameters  SEQUENCE OF NonStandardParameter OPTIONAL,
+  ...
+}
+
+MAPDataPDU ::= SEQUENCE {
+  dataDescriptor         DataDescriptor OPTIONAL,
+  dataFrameArray         SEQUENCE OF DataFrameEntry,
+  nonStandardParameters  SEQUENCE OF NonStandardParameter OPTIONAL,
+  ...
+}
+
+Metachannel ::= SEQUENCE {
+  channelID              ChannelID,
+  reliabilityLevel       ReliabilityLevel,
+  priorityRange          PriorityRange,
+  nonStandardParameters  SEQUENCE OF NonStandardParameter OPTIONAL,
+  ...
+}
+
+MAPAddGroupRequestPDU ::= SEQUENCE {
+  metachannel            Metachannel,
+  transportProtocolID    TransportProtocolID,
+  multicastGroupAddress  NetworkAddress,
+  nonStandardParameters  SEQUENCE OF NonStandardParameter OPTIONAL,
+  ...
+}
+
+MAPRemoveGroupRequestPDU ::= SEQUENCE {
+  metachannel            Metachannel,
+  nonStandardParameters  SEQUENCE OF NonStandardParameter OPTIONAL,
+  ...
+}
+
+MAPDisableUnicastRequestPDU ::= SEQUENCE {
+  dataFlowIdentifier     DataFlowIdentifier,
+  nonStandardParameters  SEQUENCE OF NonStandardParameter OPTIONAL,
+  ...
+}
+
+MAPEnableUnicastRequestPDU ::= SEQUENCE {
+  dataFlowIdentifier     DataFlowIdentifier,
+  nonStandardParameters  SEQUENCE OF NonStandardParameter OPTIONAL,
+  ...
+}
+
+MAPEnableUnicastConfirmPDU ::= SEQUENCE {
+  dataFlowIdentifier     DataFlowIdentifier,
+  sequenceNumber         SequenceNumber,
+  nonStandardParameters  SEQUENCE OF NonStandardParameter OPTIONAL,
+  ...
+}
+
+MAPDisableMulticastRequestPDU ::= SEQUENCE {
+  metachannel            Metachannel,
+  nonStandardParameters  SEQUENCE OF NonStandardParameter OPTIONAL,
+  ...
+}
+
+MAPDisableMulticastConfirmPDU ::= SEQUENCE {
+  metachannel            Metachannel,
+  nonStandardParameters  SEQUENCE OF NonStandardParameter OPTIONAL,
+  ...
+}
+
+MAPEnableMulticastRequestPDU ::= SEQUENCE {
+  metachannel            Metachannel,
+  nonStandardParameters  SEQUENCE OF NonStandardParameter OPTIONAL,
+  ...
+}
+
+MAPSequenceNumberPDU ::= SEQUENCE {
+  dataFlowIdentifier     DataFlowIdentifier,
+  sequenceNumber         SequenceNumber,
+  nonStandardParameters  SEQUENCE OF NonStandardParameter OPTIONAL,
+  ...
+}
+
+MAPPDU ::= CHOICE {
+  mapConnectRequest             MAPConnectRequestPDU,
+  mapConnectConfirm             MAPConnectConfirmPDU,
+  mapDisconnectRequest          MAPDisconnectRequestPDU,
+  mapDisconnectConfirm          MAPDisconnectConfirmPDU,
+  mapArbitrateProtocolsRequest  MAPArbitrateProtocolsRequestPDU,
+  mapArbitrateProtocolsConfirm  MAPArbitrateProtocolsConfirmPDU,
+  mapData                       MAPDataPDU,
+  mapAddGroupRequest            MAPAddGroupRequestPDU,
+  mapRemoveGroupRequest         MAPRemoveGroupRequestPDU,
+  mapDisableUnicastRequest      MAPDisableUnicastRequestPDU,
+  mapEnableUnicastRequest       MAPEnableUnicastRequestPDU,
+  mapEnableUnicastConfirm       MAPEnableUnicastConfirmPDU,
+  mapDisableMulticastRequest    MAPDisableMulticastRequestPDU,
+  mapDisableMulticastConfirm    MAPDisableMulticastConfirmPDU,
+  mapEnableMulticastRequest     MAPEnableMulticastRequestPDU,
+  mapSequenceNumber             MAPSequenceNumberPDU,
+  nonStandardPDU                NonStandardPDU,
+  ...
+}
+
+END
+
+-- Generated by Asnp, the ASN.1 pretty-printer of France Telecom R&D 

@@ -1,7 +1,7 @@
 # -*- coding: UTF-8 -*-
 #/**
 # * Software Name : pycrate
-# * Version : 0.3
+# * Version : 0.4
 # *
 # * Copyright 2016. Benoit Michau. ANSSI.
 # *
@@ -60,7 +60,7 @@ class IHDR(Envelope):
       Uint8('depth', desc='bit depth'),
       Uint8('color', desc='color type', dic=_Colour_dict),
       Uint8('comp', desc='compression method', dic=_CompMeth_dict),
-      Uint8('filter', desc='filter method', dic=_InterMeth_dict),
+      Uint8('filter', desc='filter method', dic=_FilterMeth_dict),
       Uint8('interlace', desc='interlace method', dic=_InterMeth_dict)
       )
 

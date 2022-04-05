@@ -1,0 +1,130 @@
+Ieee1609Dot2CrlBaseTypes {iso(1) identified-organization(3) ieee(111) 
+standards-association-numbered-series-standards(2) wave-stds(1609)  
+dot2(2) crl(3) base-types(2) major-version-2(2) minor-version-2(2)}
+
+DEFINITIONS AUTOMATIC TAGS ::= BEGIN 
+
+EXPORTS ALL;
+ 
+IMPORTS 
+  CrlSeries,
+  GeographicRegion,
+  HashedId8,
+  HashedId10,
+  IValue,
+  LaId,
+  LinkageSeed,
+  Opaque,
+  Psid,
+  Signature,
+  Time32,
+  Uint3,
+  Uint8,
+  Uint16, 
+  Uint32,
+  ValidityPeriod
+FROM Ieee1609Dot2BaseTypes {iso(1) identified-organization(3) ieee(111) 
+    standards-association-numbered-series-standards(2) wave-stds(1609)  
+    dot2(2) base(1) base-types(2) major-version-2 (2) minor-version-3(3)}
+;
+
+--
+--
+--  CRL contents
+--
+--
+
+CrlContents ::= SEQUENCE {
+    version            Uint8 (1),
+    crlSeries          CrlSeries,
+    cracaId            HashedId8,
+    issueDate          Time32,   
+    nextCrl            Time32,  
+    priorityInfo       CrlPriorityInfo,
+    typeSpecific       CHOICE {
+        fullHashCrl          ToBeSignedHashIdCrl,            
+        deltaHashCrl         ToBeSignedHashIdCrl,            
+        fullLinkedCrl        ToBeSignedLinkageValueCrl,
+        deltaLinkedCrl       ToBeSignedLinkageValueCrl,
+        ...
+    }
+}    
+
+CrlPriorityInfo ::= SEQUENCE {  
+    priority          Uint8 OPTIONAL,
+    ...
+}
+
+
+ToBeSignedHashIdCrl ::= SEQUENCE {  
+    crlSerial         Uint32,
+    entries           SequenceOfHashBasedRevocationInfo,
+    ...
+}
+
+HashBasedRevocationInfo ::= SEQUENCE {
+    id         HashedId10,
+    expiry     Time32
+}
+
+SequenceOfHashBasedRevocationInfo ::= 
+    SEQUENCE OF HashBasedRevocationInfo
+
+
+ToBeSignedLinkageValueCrl ::= SEQUENCE {  
+    iRev               IValue,
+    indexWithinI       Uint8,
+    individual         SequenceOfJMaxGroup OPTIONAL,
+    groups             SequenceOfGroupCrlEntry OPTIONAL,
+    ...
+} 
+(WITH COMPONENTS {..., individual PRESENT} |
+ WITH COMPONENTS {..., groups PRESENT})
+
+
+JMaxGroup ::= SEQUENCE {
+    jmax              Uint8,
+    contents          SequenceOfLAGroup,
+    ...
+}
+
+
+SequenceOfJMaxGroup ::= SEQUENCE OF JMaxGroup
+
+LAGroup ::= SEQUENCE {
+    la1Id            LaId,
+    la2Id            LaId,
+    contents         SequenceOfIMaxGroup,
+    ...
+}
+
+SequenceOfLAGroup ::= SEQUENCE OF LAGroup
+
+IMaxGroup ::= SEQUENCE {
+    iMax              Uint16,
+    contents          SequenceOfIndividualRevocation,
+    ...
+}
+
+SequenceOfIMaxGroup ::= SEQUENCE OF IMaxGroup
+
+IndividualRevocation ::= SEQUENCE { 
+    linkage-seed1    LinkageSeed,
+    linkage-seed2    LinkageSeed,
+    ...
+}
+
+SequenceOfIndividualRevocation ::= SEQUENCE OF IndividualRevocation
+
+GroupCrlEntry ::= SEQUENCE {
+    iMax             Uint16,
+    la1Id            LaId,
+    linkageSeed1     LinkageSeed,
+    la2Id            LaId,
+    linkageSeed2     LinkageSeed,
+    ...
+}
+
+SequenceOfGroupCrlEntry ::= SEQUENCE OF GroupCrlEntry
+
+END

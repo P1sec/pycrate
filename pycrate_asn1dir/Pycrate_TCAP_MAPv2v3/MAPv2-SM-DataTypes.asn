@@ -1,0 +1,123 @@
+MAPv2-SM-DataTypes {
+   ccitt identified-organization (4) etsi (0) mobileDomain (0)
+   gsm-Network (1) modules (3) map-SM-DataTypes (16) version2 (2)}
+
+DEFINITIONS
+
+IMPLICIT TAGS
+
+::=
+
+BEGIN
+
+EXPORTS
+	RoutingInfoForSM-Arg,
+	RoutingInfoForSM-Res,
+	ForwardSM-Arg,
+	ReportSM-DeliveryStatusArg,
+	AlertServiceCentreArg,
+	InformServiceCentreArg,
+	ReadyForSM-Arg,
+	SM-DeliveryOutcome,
+	AlertReason
+;
+
+IMPORTS
+	AddressString,
+	ISDN-AddressString,
+	SignalInfo,
+	IMSI,
+	LocationInfo,
+	LMSI
+FROM MAPv2-CommonDataTypes {
+   ccitt identified-organization (4) etsi (0) mobileDomain (0)
+   gsm-Network (1) modules (3) map-CommonDataTypes (18) version2 (2)}
+
+	TeleserviceCode
+FROM MAPv2-TS-Code {
+   ccitt identified-organization (4) etsi (0) mobileDomain (0)
+   gsm-Network (1) modules (3) map-TS-Code (19) version2 (2)}
+;
+
+
+RoutingInfoForSM-Arg ::= SEQUENCE {
+	msisdn		[0] ISDN-AddressString,
+	sm-RP-PRI	[1] BOOLEAN,
+	serviceCentreAddress	[2] AddressString,
+	teleservice	[5] TeleserviceCode	OPTIONAL,
+	-- OA>1 teleservice must be absent in version greater 1
+	...}
+
+RoutingInfoForSM-Res::= SEQUENCE {
+	imsi			IMSI,
+	locationInfoWithLMSI		[0] LocationInfoWithLMSI,
+	mwd-Set		[2] BOOLEAN	OPTIONAL,
+	-- OA>1 mwd-Set must be absent in version greater 1
+	...}
+
+LocationInfoWithLMSI ::= SEQUENCE {
+		locationInfo	LocationInfo,
+		lmsi		LMSI			OPTIONAL,
+	...}
+
+ForwardSM-Arg ::= SEQUENCE {
+	sm-RP-DA	SM-RP-DA,
+	sm-RP-OA	SM-RP-OA,
+	sm-RP-UI	SignalInfo,
+	moreMessagesToSend	NULL			OPTIONAL,
+	-- OA1 moreMessagesToSend must be absent in version 1
+	...}
+
+SM-RP-DA ::= CHOICE {
+	imsi			[0] IMSI,
+	lmsi			[1] LMSI,
+	roamingNumber	[3] ISDN-AddressString,
+	-- NU>1 roaming number must not be used in version greater 1
+	serviceCentreAddressDA	[4] AddressString,
+	noSM-RP-DA	[5] NULL}
+	-- NU1 noSM-RP-DA must not be used in version 1
+
+SM-RP-OA ::= CHOICE {
+	msisdn		[2] ISDN-AddressString,
+	serviceCentreAddressOA	[4] AddressString,
+	noSM-RP-OA	[5] NULL}
+	-- NU1 noSM-RP-OA must not be used in version 1
+
+ReportSM-DeliveryStatusArg ::= SEQUENCE {
+	msisdn		ISDN-AddressString,
+	serviceCentreAddress	AddressString,
+	sm-DeliveryOutcome	SM-DeliveryOutcome	OPTIONAL,
+	-- OA1 sm-DeliveryOutcome must be absent in version 1
+	-- OP>1 sm-DeliveryOutcome must be present in version greater 1
+	...}
+
+SM-DeliveryOutcome ::= ENUMERATED {
+	memoryCapacityExceeded  (0),
+	absentSubscriber  (1),
+	successfulTransfer  (2)}
+
+AlertServiceCentreArg ::= SEQUENCE {
+	msisdn		ISDN-AddressString,
+	serviceCentreAddress	AddressString,
+	...}
+
+InformServiceCentreArg ::= SEQUENCE {
+	storedMSISDN	ISDN-AddressString	OPTIONAL,
+	mw-Status	MW-Status	OPTIONAL,
+	...}
+
+MW-Status ::= BIT STRING {
+	sc-AddressNotIncluded  (0),
+	mnrf-Set  (1),
+	mcef-Set  (2)} (SIZE (6))
+
+ReadyForSM-Arg ::= SEQUENCE {
+	imsi			[0] IMSI,
+	alertReason		AlertReason,
+	...}
+
+AlertReason ::= ENUMERATED {
+	ms-Present  (0),
+	memoryAvailable  (1)}
+
+END

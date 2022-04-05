@@ -1,7 +1,7 @@
 # -*- coding: UTF-8 -*-
 #/**
 # * Software Name : pycrate
-# * Version : 0.3
+# * Version : 0.4
 # *
 # * Copyright 2018. Benoit Michau. P1sec.
 # *
@@ -65,6 +65,7 @@ rr_pdu_l2_mt = tuple(map(unhexlify, (
     '55061900000000000000000001c00001ff80007900002b',
     '01060080005847eb4a93f51a298a16ab2b2b2b2b2b2b2b', # SI type 13
     '59061a10000000000000000000000000007effff790000', # SI type 2
+    '59061A9B3200C69087E0000000000000000000FFB90000', # SI type 2 BAList range256
     '550602afe85f7000000ba000000000000000007900002b', # SI type 2bis
     '05060700e046e508007e5170c1879fe259742c5e182d53', # SI type 2quater
     '010603cf8a30000000000000000000005000002b2b2b2b', # SI type 2ter
@@ -132,10 +133,10 @@ def test_perf_gsmrr():
     print('test_gsmrr_mt: {0:.4f}'.format(Tb))
     
     print('[+] GSM RR L2 MT decoding and re-encoding')
-    Tb = timeit(test_gsmrr_l2_mt, number=8)
-    print('test_gsmrr_l2_mt: {0:.4f}'.format(Tb))
+    Tc = timeit(test_gsmrr_l2_mt, number=8)
+    print('test_gsmrr_l2_mt: {0:.4f}'.format(Tc))
     
-    print('[+] test_gsmrr total time: {0:.4f}'.format(Ta+Tb))
+    print('[+] test_gsmrr total time: {0:.4f}'.format(Ta+Tb+Tc))
 
 
 if __name__ == '__main__':

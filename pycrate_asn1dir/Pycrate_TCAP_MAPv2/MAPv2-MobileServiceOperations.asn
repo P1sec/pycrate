@@ -1,0 +1,328 @@
+MAPv2-MobileServiceOperations --{
+   --ccitt identified-organization (4) etsi (0) mobileDomain (0)
+   --gsm-Network (1) modules (3) map-MobileServiceOperations (5)
+   --version2 (2)}
+
+DEFINITIONS
+
+::=
+
+BEGIN
+
+EXPORTS
+
+	updateLocation,
+	cancelLocation,
+	purgeMS,
+	sendIdentification,
+
+	performHandover,
+	prepareHandover,
+	sendEndSignal,
+	processAccessSignalling,
+	forwardAccessSignalling,
+	performSubsequentHandover,
+	prepareSubsequentHandover,
+
+	sendAuthenticationInfo,
+
+	checkIMEI,
+
+	sendParameters,
+	insertSubscriberData,
+	deleteSubscriberData,
+
+	reset,
+	forwardCheckSS-Indication,
+	restoreData
+;
+
+IMPORTS
+	OPERATION
+FROM Remote-Operations-Information-Objects {
+    joint-iso-itu-t remote-operations(4) informationObjects(5) version1(0)} 
+
+	systemFailure,
+	dataMissing,
+	unexpectedDataValue,
+	unknownSubscriber,
+	unknownBaseStation,
+	unknownMSC,
+	unidentifiedSubscriber,
+	unknownEquipment,
+	roamingNotAllowed,
+	invalidTargetBaseStation,
+	noRadioResourceAvailable,
+	noHandoverNumberAvailable,
+	subsequentHandoverFailure
+FROM MAPv2-Errors --{
+   --ccitt identified-organization (4) etsi (0) mobileDomain (0)
+   --gsm-Network (1) modules (3) map-Errors (10) version2 (2)}
+
+	UpdateLocationArg,
+	UpdateLocationRes,
+	CancelLocationArg,
+	PurgeMS-Arg,
+	SendIdentificationRes,
+	PerformHO-Arg,
+	PrepareHO-Arg,
+	PerformHO-Res,
+	PrepareHO-Res,
+	PerformSubsequentHO-Arg,
+	PrepareSubsequentHO-Arg,
+	SendAuthenticationInfoArg,
+	SendAuthenticationInfoRes,
+	EquipmentStatus,
+	SendParametersArg,
+	SentParameterList,
+	InsertSubscriberDataArg,
+	InsertSubscriberDataRes,
+	DeleteSubscriberDataArg,
+	DeleteSubscriberDataRes,
+	ResetArg,
+	RestoreDataArg,
+	RestoreDataRes
+FROM MAPv2-MS-DataTypes {
+   ccitt identified-organization (4) etsi (0) mobileDomain (0)
+   gsm-Network (1) modules (3) map-MS-DataTypes (11) version2 (2)}
+
+	ExternalSignalInfo,
+	TMSI,
+	IMEI
+FROM MAPv2-CommonDataTypes {
+   ccitt identified-organization (4) etsi (0) mobileDomain (0)
+   gsm-Network (1) modules (3) map-CommonDataTypes (18) version2 (2)}
+;
+
+
+
+updateLocation OPERATION ::= {				--Timer m--
+	ARGUMENT
+		UpdateLocationArg
+	RESULT
+		UpdateLocationRes
+	ERRORS {
+		systemFailure |
+		dataMissing |
+		-- NU1 DataMissing must not be used in version 1
+		unexpectedDataValue |
+		unknownSubscriber |
+		roamingNotAllowed
+		}
+    CODE    local: 2
+    }
+
+cancelLocation OPERATION ::= {				--Timer m--
+	ARGUMENT
+		CancelLocationArg
+	ERRORS {
+		dataMissing |
+		-- NU1 DataMissing must not be used in version 1
+		unexpectedDataValue |
+		unidentifiedSubscriber 
+		-- NU>1 UnidentifiedSubscriber must not be used in version
+		-- greater 1
+		}
+	CODE    local: 3
+    }
+
+purgeMS OPERATION ::= {				--Timer m--
+	ARGUMENT
+		PurgeMS-Arg
+	CODE    local: 67
+    }
+
+sendIdentification OPERATION ::= {				--Timer s--
+	ARGUMENT
+		TMSI
+	RESULT
+		SendIdentificationRes
+	ERRORS {
+		dataMissing |
+		unidentifiedSubscriber
+		}
+    CODE    local: 55
+    }
+
+prepareHandover OPERATION ::= {				--Timer m--
+	ARGUMENT
+		PrepareHO-Arg
+	RESULT
+		PrepareHO-Res
+	ERRORS {
+		systemFailure |
+		dataMissing |
+		unexpectedDataValue |
+		noHandoverNumberAvailable
+		}
+	CODE    local: 68
+    }
+
+performHandover OPERATION ::= {				--Timer s--
+	ARGUMENT
+		PerformHO-Arg
+	RESULT
+		PerformHO-Res
+	ERRORS {
+		systemFailure |
+		unexpectedDataValue |
+		unknownBaseStation |
+		invalidTargetBaseStation |
+		noRadioResourceAvailable |
+		noHandoverNumberAvailable
+		}
+	CODE    local: 28
+    }
+
+sendEndSignal OPERATION ::= {				--Timer l--
+	ARGUMENT
+		ExternalSignalInfo
+		-- optional
+		-- OA1 bss-APDU must be absent in version 1
+		-- OP>1 bss-APDU must be present in version greater 1
+	CODE    local: 29
+    }
+
+processAccessSignalling OPERATION ::= {			--Timer s--
+	ARGUMENT
+		ExternalSignalInfo
+	CODE    local: 33
+    }
+
+forwardAccessSignalling OPERATION ::= {			--Timer s--
+	ARGUMENT
+		ExternalSignalInfo
+	CODE    local: 34
+    }
+
+prepareSubsequentHandover OPERATION ::= {			--Timer m--
+	ARGUMENT
+		PrepareSubsequentHO-Arg
+	RESULT
+		ExternalSignalInfo
+	ERRORS {
+		unexpectedDataValue |
+		dataMissing |
+		unknownMSC |
+		subsequentHandoverFailure
+		}
+	CODE    local: 69
+    }
+
+performSubsequentHandover OPERATION ::= {			--Timer m--
+	ARGUMENT
+		PerformSubsequentHO-Arg
+	RESULT
+		ExternalSignalInfo
+	ERRORS {
+		unexpectedDataValue |
+		unknownBaseStation |
+		unknownMSC |
+		invalidTargetBaseStation |
+		subsequentHandoverFailure
+		}
+	CODE    local: 30
+    }
+
+sendAuthenticationInfo OPERATION ::= {			--Timer m--
+	ARGUMENT
+		SendAuthenticationInfoArg
+	RESULT
+		SendAuthenticationInfoRes
+		-- optional
+	ERRORS {
+		systemFailure |
+		dataMissing |
+		unexpectedDataValue |
+		unknownSubscriber
+		}
+	CODE    local: 56
+    }
+
+checkIMEI OPERATION ::= {				--Timer m--
+	ARGUMENT
+		IMEI
+	RESULT
+		EquipmentStatus
+	ERRORS {
+		systemFailure |
+		dataMissing |
+		-- NU1 DataMissing must not be used in version 1
+		unexpectedDataValue |
+		-- NU>1 UnexpectedDataValue must not be used in version greater 1
+		unknownEquipment
+		}
+	CODE    local: 43
+    }
+
+sendParameters OPERATION ::= {				--Timer m--
+	ARGUMENT
+		SendParametersArg
+	RESULT
+		SentParameterList
+		-- optional
+		-- nothing is returned, if no requested parameter is
+		-- available or exists
+	ERRORS {
+		unexpectedDataValue |
+		unknownSubscriber |
+		unidentifiedSubscriber
+		}
+	CODE    local: 9
+    }
+
+insertSubscriberData OPERATION ::= {				--Timer m--
+	ARGUMENT
+		InsertSubscriberDataArg
+	RESULT
+		InsertSubscriberDataRes
+		-- optional
+		-- OA1 insertSubscriberDataRes must be absent in version 1
+	ERRORS {
+		dataMissing |
+		unexpectedDataValue |
+		unidentifiedSubscriber
+		}
+	CODE    local: 7
+    }
+
+deleteSubscriberData OPERATION ::= {				--Timer m--
+	ARGUMENT
+		DeleteSubscriberDataArg
+	RESULT
+		DeleteSubscriberDataRes
+		-- optional
+		-- OA1 deleteSubscriberDataRes must be absent in version 1
+	ERRORS {
+		dataMissing |
+		unexpectedDataValue |
+		unidentifiedSubscriber
+		}
+	CODE    local: 8
+    }
+
+reset OPERATION ::= {				--Timer m--
+	ARGUMENT
+		ResetArg
+	CODE    local: 37
+    }
+
+forwardCheckSS-Indication OPERATION ::= {		--Timer s--
+    CODE    local: 38
+    }
+
+restoreData OPERATION ::= {				--Timer m--
+	ARGUMENT
+		RestoreDataArg
+	RESULT
+		RestoreDataRes
+	ERRORS {
+		systemFailure |
+		dataMissing |
+		unexpectedDataValue |
+		unknownSubscriber
+		}
+	CODE    local: 57
+    }
+
+END

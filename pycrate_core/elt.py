@@ -1,9 +1,10 @@
 # -*- coding: UTF-8 -*-
 #/**
 # * Software Name : pycrate
-# * Version : 0.3
+# * Version : 0.4
 # *
 # * Copyright 2016. Benoit Michau. ANSSI.
+# * Copyright 2019. Benoit Michau. P1Sec.
 # *
 # * This library is free software; you can redistribute it and/or
 # * modify it under the terms of the GNU Lesser General Public
@@ -31,17 +32,25 @@ __all__ = ['EltErr', 'REPR_RAW', 'REPR_HEX', 'REPR_BIN', 'REPR_HD', 'REPR_HUM',
            'Element', 'Atom', 'Envelope', 'Array', 'Sequence', 'Alt']
 
 
+from binascii import hexlify
+
 try:
-    from json import JSONEncoder, JSONDecoder, JSONDecodeError
+    from json import JSONEncoder, JSONDecoder
 except ImportError:
     _with_json = False
 else:
     _with_json = True
     JsonEnc = JSONEncoder(sort_keys=True, indent=1)
     JsonDec = JSONDecoder()
+    try:
+        import JSONDecodeError
+    except ImportError:
+        # it seems Python2.7 removed support for JSONDecodeError at some point
+        JSONDecodeError = ValueError
 
 from .utils  import *
 from .charpy import Charpy, CharpyErr
+
 
 #------------------------------------------------------------------------------#
 # Elt specific error
@@ -215,7 +224,10 @@ class Element(object):
             return None
         
         # get index of self within its envelope
-        ind = self._env.index(self)
+        try:
+            ind = self._env.index(self)
+        except Exception:
+            return None
         try:
             if self.ENV_SEL_TRANS:
                 return self._env[ind+val]
@@ -226,9 +238,10 @@ class Element(object):
                     if not self._env[ind+i].get_trans():
                         i += 1
                 return self._env[ind+i]
-        except EltErr as err:
-            raise(EltErr('{0} [get_next]: invalid index {1} within envelope {2}'\
-                  .format(self._name, ind+val, self._env._name)))
+        except EltErr:
+            #raise(EltErr('{0} [get_next]: invalid index {1} within envelope {2}'\
+            #      .format(self._name, ind+val, self._env._name)))
+            return None
     
     def get_prev(self, val=1):
         """Returns the previous element in the envelope around self
@@ -247,7 +260,12 @@ class Element(object):
             return None
         
         # get index of self within its envelope
-        ind = self._env.index(self)
+        try:
+            ind = self._env.index(self)
+        except Exception:
+            return None
+        if ind-val < 0:
+            return None
         try:
             if self.ENV_SEL_TRANS:
                 return self._env[ind-val]
@@ -258,9 +276,10 @@ class Element(object):
                     if not self._env[ind-i].get_trans():
                         i += 1
                 return self._env[ind-i]
-        except EltErr as err:
-            raise(EltErr('{0} [get_prev]: invalid index {1} within envelope {2}'\
-                  .format(self._name, ind-val, self._env._name)))
+        except EltErr:
+            #raise(EltErr('{0} [get_prev]: invalid index {1} within envelope {2}'\
+            #      .format(self._name, ind-val, self._env._name)))
+            return None
     
     def set_hier(self, hier):
         """Set the hierarchical level of self, relative to the one of the 
@@ -376,7 +395,10 @@ class Element(object):
         #
         if self.ENV_SEL_TRANS:
             while env is not None:
-                ind = env.index(elt)
+                try:
+                    ind = env.index(elt)
+                except Exception:
+                    return None
                 for elt in env[ind-1::-1]:
                     if elt._hier < hier:
                         return elt
@@ -385,7 +407,10 @@ class Element(object):
                 env  = elt._env
         else:
             while env is not None:
-                ind = env.index(elt)
+                try:
+                    ind = env.index(elt)
+                except Exception:
+                    return None
                 for elt in env[ind-1::-1]:
                     if not elt.get_trans() and elt._hier < hier:
                         return elt
@@ -417,7 +442,10 @@ class Element(object):
         #
         if self.ENV_SEL_TRANS:
             while env is not None:
-                ind_start = env.index(elt)
+                try:
+                    ind_start = env.index(elt)
+                except Exception:
+                    return None
                 ind = 1+ind_start
                 ind_pay = [None, None]
                 for elt in env[1+ind_start:]:
@@ -437,7 +465,10 @@ class Element(object):
                     env  = elt._env
         else:
             while env is not None:
-                ind_start = env.index(elt)
+                try:
+                    ind_start = env.index(elt)
+                except Exception:
+                    return None
                 ind = 1+ind_start
                 ind_pay = [None, None]
                 for elt in env[1+ind_start:]:
@@ -651,7 +682,13 @@ class Element(object):
         Returns:
             uint (int) : unsigned integer
         """
-        return bytes_to_uint(self.to_bytes(), self.get_bl())
+        try:
+            return bytes_to_uint(self.to_bytes(), self.get_bl())
+        except PycrateErr:
+            # an invalid value has been set, _SAFE_STAT / DYN is probably disabled
+            # for e.g. fuzzing purpose, but there is still need to not break here
+            b = self.to_bytes()
+            return bytes_to_uint(b, len(b)<<3)
     
     def from_int(self, integ, bl=None):
         """Consume a signed integer or charpy instance `integ' and sets the 
@@ -689,7 +726,13 @@ class Element(object):
         Returns:
             integ (int) : signed integer
         """
-        return bytes_to_int(self.to_bytes(), self.get_bl())
+        try:
+            return bytes_to_int(self.to_bytes(), self.get_bl())
+        except PycrateErr:
+            # an invalid value has been set, _SAFE_STAT / DYN is probably disabled
+            # for e.g. fuzzing purpose, but there is still need to not break here
+            b = self.to_bytes()
+            return bytes_to_int(b, len(b)<<3)
     
     if python_version < 3:
         __str__ = to_bytes
@@ -716,7 +759,12 @@ class Element(object):
         if bl == 0:
             return ''
         else:
-            return uint_to_hex(bytes_to_uint(self.to_bytes(), bl), bl)
+            try:
+                return uint_to_hex(bytes_to_uint(self.to_bytes(), bl), bl)
+            except PycrateErr:
+                # an invalid value has been set, _SAFE_STAT / DYN is probably disabled
+                # for e.g. fuzzing purpose, but there is still need to not break here
+                return hexlify(self.to_bytes()).decode('ascii')
     
     __bin__ = bin
     __hex__ = hex
@@ -734,7 +782,7 @@ class Element(object):
             try:
                 val = val[self._name]
             except Exception:
-                raise(EltErr('{0} [_from_jval]: invalid value, {1!r}'.format(self._name, val)))
+                raise(EltErr('{0} [_from_jval]: invalid value, {1!r}'.format(self._name, val)))
             else:
                 self._from_jval(val)
         
@@ -744,7 +792,7 @@ class Element(object):
             else:
                 try:
                     val = JsonDec.decode(txt)
-                except JSONDecodeError as err:
+                except JSONDecodeError:
                     raise(EltErr('{0} [from_json]: invalid format, {1!r}'.format(self._name, txt)))
                 else:
                     self._from_jval_wrap(val)
@@ -860,7 +908,7 @@ class Atom(Element):
         elif 'name' in kw:
             self._name = str(kw['name'])
         # if not provided, it's the class name
-        else:
+        elif not hasattr(self, '_name'):
             self._name = self.__class__.__name__
         
         # element description customization
@@ -987,6 +1035,9 @@ class Atom(Element):
         # 3) default value
         else:
             return self.DEFAULT_VAL
+    
+    # for atomic element, no dict to be returned, but just the standard value
+    get_val_d = get_val
     
     def set_bl(self, bl=None):
         """Set the raw length in bits of self
@@ -1423,10 +1474,10 @@ class Atom(Element):
     
     __call__ = get_val
     __repr__ = repr
-    if python_implementation != 'PyPy':
+    #if python_implementation != 'PyPy':
         # PyPy iterator implementation leads to an infinite loop
         # __iter__() calls __len__(), but here, get_bl() calls __iter__()
-        __len__ = get_bl
+    #    __len__ = get_bl
 
 
 #------------------------------------------------------------------------------#
@@ -1468,6 +1519,7 @@ class Envelope(Element):
     _env       = None
     _hier      = 0
     _desc      = ''
+    _blauto    = None
     _trans     = None
     _transauto = None
     _GEN       = tuple()
@@ -1476,6 +1528,7 @@ class Envelope(Element):
                  '_name',
                  '_desc',
                  '_hier',
+                 '_blauto',
                  '_trans',
                  '_transauto',
                  '_GEN',
@@ -1515,7 +1568,7 @@ class Envelope(Element):
         elif 'name' in kw:
             self._name = str(kw['name'])
         # if not provided, it's the class name
-        else:
+        elif not hasattr(self, '_name'):
             self._name = self.__class__.__name__
         
         # envelope description customization
@@ -1598,10 +1651,8 @@ class Envelope(Element):
         if vals is None:
             [elt.set_val(None) for elt in self.__iter__()]
         elif isinstance(vals, (tuple, list)):
-            ind = 0
-            for elt in self.__iter__():
+            for ind, elt in enumerate(self.__iter__()):
                 elt.set_val(vals[ind])
-                ind += 1
         elif isinstance(vals, dict):
             # ordered values is sometimes required, depending of the structure
             # -> happens in particular when an Alt() is present in the envelope
@@ -1634,6 +1685,22 @@ class Envelope(Element):
         """
         return [elt() for elt in self.__iter__()]
     
+    def get_val_d(self):
+        """Returns the dict of element names and values of the content of self
+        Wanrning: in case several elements have the same name, the returned value 
+        won't be complete.
+        
+        Args:
+            None
+        
+        Returns:
+            value (dict) : dict of names and values
+        
+        Raises:
+            EltErr : if one element within the content raises
+        """
+        return {elt._name: elt.get_val_d() for elt in self.__iter__()}
+    
     def set_bl(self, bl):
         """Set the raw bit length to the given elements of the content of self
         
@@ -1651,16 +1718,39 @@ class Envelope(Element):
                 setting raises
         """
         if isinstance(bl, (tuple, list)):
-            ind = 0
-            for elt in self.__iter__():
+            for ind, elt in enumerate(self.__iter__()):
                 elt.set_bl(bl[ind])
-                ind += 1
         elif isinstance(bl, dict):
             for key, val in bl.items():
                 self.__getitem__(key).set_bl(val)
         elif self._SAFE_STAT:
             raise(EltErr('{0} [set_bl]: bl type is {1}, expecting tuple, list '\
                          'or dict'.format(self._name, type(bl).__name__)))
+    
+    def set_blauto(self, blauto=None):
+        """Set an automation for the length in bits of self, used only when 
+        mapping an external buffer to it.
+        
+        Args:
+            blauto (callable) : automate the bl computation,
+                call blauto() to compute the bit length, default to None
+        
+        Returns:
+            None
+        
+        Raises:
+            EltErr : if self._SAFE_STAT is enabled and blauto is not a callable
+        """
+        if blauto is None:
+            try:
+                del self._blauto
+            except Exception:
+                pass
+        else:
+            if self._SAFE_STAT and not callable(blauto):
+                raise(EltErr('{0} [set_blauto]: blauto type is {1}, expecting callable'\
+                      .format(self._name, type(blauto).__name__)))
+            self._blauto = blauto
     
     def get_bl(self):
         """Returns the total length in bits of self
@@ -1715,9 +1805,21 @@ class Envelope(Element):
         # TODO: in cases some ranges of elt within self have a fixed _bl
         # it would be more efficient to unpack them in a single shot, 
         # especially if these are int / uint on 8, 16, 32, 64 bits
-        if not self.get_trans():
-            for elt in self.__iter__():
-                elt._from_char(char)
+        if self.get_trans():
+            return
+        # truncate char if length automation is set
+        if self._blauto is not None:
+            char_lb = char._len_bit
+            char._len_bit = char._cur + self._blauto()
+            if char._len_bit > char_lb:
+                raise(EltErr('{0} [_from_char]: bit length overflow'.format(self._name)))
+        #
+        for elt in self.__iter__():
+            elt._from_char(char)
+        #
+        # in case of length automation, set the original length back
+        if self._blauto is not None:
+            char._len_bit = char_lb
     
     #--------------------------------------------------------------------------#
     # copy / cloning routines
@@ -2048,6 +2150,7 @@ class Envelope(Element):
             except Exception as err:
                 raise(EltErr('{0} [__getitem__] str item: {1}'.format(self._name, err)))
         elif isinstance(key, integer_types):
+            #print(self._name, self._content, len(self._content), key) #len(self), key)
             try:
                 return self._content[key]
             except Exception as err:
@@ -2161,10 +2264,10 @@ class Envelope(Element):
     
     __call__ = get_val
     __repr__ = repr
-    if python_implementation != 'PyPy':
+    #if python_implementation != 'PyPy':
         # PyPy iterator implementation lead to an infinite loop
         # __iter__() calls __len__(), but here, get_bl() calls __iter__()
-        __len__ = get_bl
+    #    __len__ = get_bl
     
     #--------------------------------------------------------------------------#
     # json interface
@@ -2180,7 +2283,7 @@ class Envelope(Element):
                 if not e.get_trans():
                     try:
                         e._from_jval_wrap(val[i])
-                    except IndexError:
+                    except Exception:
                         break
                     else:
                         i += 1
@@ -2215,6 +2318,7 @@ class Array(Element):
     automation attribute:
     - numauto: callable, to automate the determination of the number of 
     template's iteration
+    - blauto: callable, to automate the length in bits to be decoded
     - transauto: callable, to automate the determination of array's 
     transparency
     
@@ -2239,6 +2343,7 @@ class Array(Element):
     _transauto = None
     _num       = None
     _numauto   = None
+    _blauto    = None
     _GEN       = Atom()
     
     __attrs__ = ('_env',
@@ -2249,6 +2354,7 @@ class Array(Element):
                  '_transauto',
                  '_num',
                  '_numauto',
+                 '_blauto',
                  '_GEN',
                  '_tmpl',
                  '_tmpl_val',
@@ -2289,7 +2395,7 @@ class Array(Element):
         elif 'name' in kw:
             self._name = str(kw['name'])
         # if not provided, it's the class name
-        else:
+        elif not hasattr(self, '_name'):
             self._name = self.__class__.__name__
         
         # array description customization
@@ -2326,13 +2432,13 @@ class Array(Element):
         if 'tmpl_val' in kw:
             try:
                 self._tmpl.set_val(kw['tmpl_val'])
-            except Exception:
+            except Exception as err:
                 raise(EltErr('{0} [__init__] set template value error: {1}'\
                       .format(self._name, err)))
         if 'tmpl_bl' in kw:
             try:
                 self._tmpl.set_bl(kw['tmpl_bl'])
-            except Exception:
+            except Exception as err:
                 raise(EltErr('{0} [__init__] set template bl error: {1}'\
                       .format(self._name, err)))
         
@@ -2424,6 +2530,9 @@ class Array(Element):
         """
         return self._val
     
+    # for array element, no dict to be returned, but just the standard list of values
+    get_val_d = get_val
+    
     def set_num(self, num=None):
         """Set the raw number of iteration of the template in the array's value
         
@@ -2498,6 +2607,31 @@ class Array(Element):
         # 3) no num defined, return the num from the values already set
         else:
             return len(self._val)
+    
+    def set_blauto(self, blauto=None):
+        """Set an automation for the length in bits of self, used only when 
+        mapping an external buffer to it.
+        
+        Args:
+            blauto (callable) : automate the bl computation,
+                call blauto() to compute the bit length, default to None
+        
+        Returns:
+            None
+        
+        Raises:
+            EltErr : if self._SAFE_STAT is enabled and blauto is not a callable
+        """
+        if blauto is None:
+            try:
+                del self._blauto
+            except Exception:
+                pass
+        else:
+            if self._SAFE_STAT and not callable(blauto):
+                raise(EltErr('{0} [set_blauto]: blauto type is {1}, expecting callable'\
+                      .format(self._name, type(blauto).__name__)))
+            self._blauto = blauto
     
     def get_bl(self):
         """Returns the length in bits of self
@@ -2581,9 +2715,15 @@ class Array(Element):
             # num is None, _from_char will consume the charpy instance until
             # it raises
             num = None
-        # 2) init value
+        # 2) truncate char if length automation is set
+        if self._blauto is not None:
+            char_lb = char._len_bit
+            char._len_bit = char._cur + self._blauto()
+            if char._len_bit > char_lb:
+                raise(EltErr('{0} [_from_char]: bit length overflow'.format(self._name)))
+        # 3) init value
         self._val = []
-        # 3) consume char and fill in self._val
+        # 4) consume char and fill in self._val
         if num is not None:
             for i in range(num):
                 self._tmpl._from_char(char)
@@ -2596,12 +2736,15 @@ class Array(Element):
                 cur = char._cur
                 try:
                     self._tmpl._from_char(char)
-                except CharpyErr as err:
+                except CharpyErr:
                     char._cur = cur
                     break
                 else:
                     self._val.append(self._tmpl())
         self._tmpl.set_val(None)
+        # 5) in case of length automation, set the original length back
+        if self._blauto is not None:
+            char._len_bit = char_lb
     
     #--------------------------------------------------------------------------#
     # copy / cloning routines
@@ -2863,7 +3006,7 @@ class Array(Element):
         """
         try:
             ind = self._val.index(old)
-        except Exception:
+        except Exception as err:
             raise(EltErr('{0} [replace] invalid old: {1}'.format(self._name, err)))
         # use the template to format the value
         if new != self._tmpl_val:
@@ -3011,10 +3154,10 @@ class Array(Element):
     
     __call__ = get_val
     __repr__ = repr
-    if python_implementation != 'PyPy':
+    #if python_implementation != 'PyPy':
         # PyPy iterator implementation lead to an infinite loop
         # __iter__() calls __len__(), but here, get_bl() calls __iter__()
-        __len__ = get_bl
+    #    __len__ = get_bl
     
     #--------------------------------------------------------------------------#
     # json interface
@@ -3077,6 +3220,7 @@ class Sequence(Element):
     automation attribute:
     - numauto: callable, to automate the determination of the number of content's 
     iteration
+    - blauto: callable, to automate the length in bits to be decoded
     - transauto: callable, to automate the determination of sequence's 
     transparency
     
@@ -3105,6 +3249,7 @@ class Sequence(Element):
     _transauto = None
     _num       = None
     _numauto   = None
+    _blauto    = None
     _GEN       = Atom()
     
     __attrs__ = ('_env',
@@ -3115,6 +3260,7 @@ class Sequence(Element):
                  '_transauto',
                  '_num',
                  '_numauto',
+                 '_blauto',
                  '_tmpl',
                  '_content',
                  '_it',
@@ -3154,7 +3300,7 @@ class Sequence(Element):
         elif 'name' in kw:
             self._name = str(kw['name'])
         # if not provided, it's the class name
-        else:
+        elif not hasattr(self, '_name'):
             self._name = self.__class__.__name__
         
         # sequence description customization
@@ -3297,6 +3443,22 @@ class Sequence(Element):
         """
         return [elt() for elt in self._content]  
     
+    def get_val_d(self):
+        """Returns the list of values obtained with get_val_d() from the content of self
+        Wanrning: in case several elements have the same name, the returned value 
+        won't be complete.
+        
+        Args:
+            None
+        
+        Returns:
+            value (list) : list of values obtained with get_val_d()
+        
+        Raises:
+            EltErr : if one element within the content raises
+        """
+        return [elt.get_val_d() for elt in self._content]
+    
     def set_num(self, num=None):
         """Set the raw number of iteration of the template in the sequence's 
         content
@@ -3375,6 +3537,31 @@ class Sequence(Element):
         else:
             return len(self._content)
     
+    def set_blauto(self, blauto=None):
+        """Set an automation for the length in bits of self, used only when 
+        mapping an external buffer to it.
+        
+        Args:
+            blauto (callable) : automate the bl computation,
+                call blauto() to compute the bit length, default to None
+        
+        Returns:
+            None
+        
+        Raises:
+            EltErr : if self._SAFE_STAT is enabled and blauto is not a callable
+        """
+        if blauto is None:
+            try:
+                del self._blauto
+            except Exception:
+                pass
+        else:
+            if self._SAFE_STAT and not callable(blauto):
+                raise(EltErr('{0} [set_blauto]: blauto type is {1}, expecting callable'\
+                      .format(self._name, type(blauto).__name__)))
+            self._blauto = blauto
+    
     def get_bl(self):
         """Returns the length in bits of self
         
@@ -3446,15 +3633,21 @@ class Sequence(Element):
             # num is None, _from_char will consume the charpy instance until
             # it raises
             num = None
-        # 2) init content
+        # 2) truncate char if length automation is set
+        if self._blauto is not None:
+            char_lb = char._len_bit
+            char._len_bit = char._cur + self._blauto()
+            if char._len_bit > char_lb:
+                raise(EltErr('{0} [_from_char]: bit length overflow'.format(self._name)))
+        # 3) init content
         self._content = []
-        # 3) consume char and fill in self._content
+        # 4) consume char and fill in self._content
         if num is not None:
             for i in range(num):
                 clone = self._tmpl.clone()
+                clone._env = self
                 clone._from_char(char)
                 self._content.append(clone)
-                clone._env = self
         else:
             # there is no predefined limit in the number of repeated content
             # consume the charpy instance until its empty and raises
@@ -3462,14 +3655,17 @@ class Sequence(Element):
                 # remember charpy cursor position, to restore it when it raises
                 cur = char._cur
                 clone = self._tmpl.clone()
+                clone._env = self
                 try:
                     clone._from_char(char)
-                except CharpyErr as err:
+                except CharpyErr:
                     char._cur = cur
                     break
                 else:
                     self._content.append(clone)
-                    clone._env = self
+        # 5) in case of length automation, set the original length back
+        if self._blauto is not None:
+            char._len_bit = char_lb
     
     #--------------------------------------------------------------------------#
     # copy / cloning routines
@@ -3592,7 +3788,6 @@ class Sequence(Element):
         Raises:
             EltErr
         """
-        
         if self._SAFE_STAT:
             if not isinstance(elt, Element):
                 raise(EltErr('{0} [append]: elt type is {1}, expecting element'\
@@ -3642,7 +3837,7 @@ class Sequence(Element):
             EltErr : if `elt' is not in self._content
         """
         try:
-            return self._val.index(elt)
+            return self._content.index(elt)
         except Exception as err:
             raise(EltErr('{0} [index]: {1}'.format(self._name, err)))
     
@@ -3716,7 +3911,7 @@ class Sequence(Element):
             raise(EltErr('{0} [remove] content length {1} underflow (num {2})'\
                   .format(self._name, len(self._content)-1, self._num)))
         try:
-            self._val.remove(elt)
+            self._content.remove(elt)
         except Exception as err:
             raise(EltErr('{0} [remove]: {1}'.format(self._name, err)))
         else:
@@ -3728,7 +3923,8 @@ class Sequence(Element):
         content
         
         Args:
-            old (element) : element to be removed
+            old (element) : element to be removed,
+                alternatively, old can be the element's index (int)
             new (element) : element to be inserted
         
         Returns:
@@ -3738,12 +3934,19 @@ class Sequence(Element):
             EltErr : if element `old' is not in self or
                 if `new' is not an element
         """.format(self.__class__.__name__)
-        try:
-            ind = self._val.index(old)
-        except Exception:
-            raise(EltErr('{0} [replace] invalid old: {1}'.format(self._name, err)))
-        if self._SAFE_STAT and not isinstance(new, Element):
-            raise(EltErr('{0} [insert]: elt type is {1}, expecting element'\
+        if isinstance(old, Elt):
+            try:
+                ind = self._content.index(old)
+            except Exception as err:
+                raise(EltErr('{0} [replace] invalid old: {1}'.format(self._name, err)))
+        elif isinstance(old, integer_types):
+            ind = old
+            try:
+                old = self._content[ind]
+            except Exception:
+                raise(EltErr('{0} [replace] invalid old index: {1}'.format(self._name, ind)))
+        elif self._SAFE_STAT:
+            raise(EltErr('{0} [replace]: elt type is {1}, expecting element or index'\
                          .format(self._name, type(elt).__name__)))
         del self._content[ind]
         if old != self._tmpl:
@@ -3836,7 +4039,7 @@ class Sequence(Element):
         if isinstance(key, integer_types):
             try:
                 elt = self._content[key]
-            except Exception:
+            except Exception as err:
                 raise(EltErr('{0} [__delitem__] int item: {1}'.format(self._name, err)))
             del self._content[key]
             if elt != self._tmpl:
@@ -3893,10 +4096,10 @@ class Sequence(Element):
     
     __call__ = get_val
     __repr__ = repr
-    if python_implementation != 'PyPy':
+    #if python_implementation != 'PyPy':
         # PyPy iterator implementation lead to an infinite loop
         # __iter__() calls __len__(), but here, get_bl() calls __iter__()
-        __len__ = get_bl
+    #    __len__ = get_bl
     
     #--------------------------------------------------------------------------#
     # json interface
@@ -3950,7 +4153,7 @@ class Alt(Element):
     initialization, keys are values that must correspond to the selector element
     
     universal attributes:
-    - sel: callback to get the value which is used to select one of the 
+    - sel: selector callback to get the value which is used to select one of the 
     alternatives
     - content: dict of selector values and elements cloned from the GEN dict
     - trans: bool, transparency of the alternative
@@ -3981,20 +4184,29 @@ class Alt(Element):
     
     # default element in case of invalid selection value
     # if set to None, each invalid selection will raise an EltErr
-    DEFAULT_ALT = Envelope('none')
+    DEFAULT = Envelope('none')
     
     # default attributes value
     _env       = None
     _hier      = 0
     _desc      = ''
+    _blauto    = None
     _trans     = None
     _transauto = None
     _GEN       = {}
+    _sel       = lambda a, b: None
+    
+    # Warning:
+    # When setting the selection callback as class attribute _sel, prototype is
+    # lambda a, b: ..., both a & b being self, when instantiated
+    # When setting the selection callback during / after initialization, prototype is
+    # lambda a: ..., a being self
     
     __attrs__ = ('_env',
                  '_name',
                  '_desc',
                  '_hier',
+                 '_blauto',
                  '_trans',
                  '_transauto',
                  '_GEN',
@@ -4026,7 +4238,7 @@ class Alt(Element):
         elif 'name' in kw:
             self._name = str(kw['name'])
         # if not provided, it's the class name
-        else:
+        elif not hasattr(self, '_name'):
             self._name = self.__class__.__name__
         
         # alt description customization
@@ -4046,26 +4258,16 @@ class Alt(Element):
         
         # default alternative
         if 'DEFAULT' in kw:
-            self.DEFAULT_ALT = kw['DEFAULT']
-        elif self.__class__.DEFAULT_ALT:
-            self.DEFAULT_ALT = self.__class__.DEFAULT_ALT.clone()
-        
-        # content is populated with clones from GEN in a lazy way
-        # through calling get_alt()
-        # however, during clone(), content is used to duplicate an existing
-        # instance
-        if 'content' in kw:
-            self._content = kw['content']
-        else:
-            self._content = {}
+            self.DEFAULT = kw['DEFAULT']
+        elif self.__class__.DEFAULT:
+            self.DEFAULT = self.__class__.DEFAULT.clone()
         
         if self._SAFE_STAT:
             self._chk_hier()
             self._chk_trans()
             self._chk_gen(self._GEN)
-            self._chk_gen(self._content)
-            if self.DEFAULT_ALT is not None and \
-            not isinstance(self.DEFAULT_ALT, Element):
+            if self.DEFAULT is not None and \
+            not isinstance(self.DEFAULT, Element):
                 raise(EltErr('{0} [__init__]: invalid DEFAULT element'\
                       .format(self._name)))
         
@@ -4076,9 +4278,6 @@ class Alt(Element):
         # alternative selection callback
         if 'sel' in kw:
             self.set_sel( kw['sel'] )
-        else:
-            self._sel = lambda: None
-        # currently, selection callback needs to be set after initialization
         
         # if a val dict is passed as argument
         # broadcast it to given content items
@@ -4127,12 +4326,11 @@ class Alt(Element):
         """
         try:
             return self._sel(self)
-        except:
+        except Exception:
             return None
     
     def get_alt(self):
-        """Gets the selected alternative, if sv is not None, forces the 
-        alternative selected
+        """Gets the selected alternative
         
         Args:
             None
@@ -4141,20 +4339,48 @@ class Alt(Element):
             elt : selected alternative element
         
         Raises:
-            EltErr : if the selection value is invalid and no DEFAULT_ALT is set
+            EltErr : if the selection value is invalid and no DEFAULT is set
         """
         sv = self.get_sel()
         if sv in self._content:
-            return self._content[sv]
+            elt = self._content[sv]
+            elt.set_env(self.get_env())
+            return elt
         elif sv in self._GEN:
             elt = self._GEN[sv].clone()
             self.insert(sv, elt)
             return elt
-        elif self.DEFAULT_ALT is not None:
-            return self.DEFAULT_ALT
+        elif self.DEFAULT is not None:
+            self.DEFAULT.set_env(self.get_env())
+            return self.DEFAULT
         else:
             raise(EltErr('{0} [set_val]: invalid selection value {1!r}'\
-                  .format(self._name, sv)))    
+                  .format(self._name, sv)))
+    
+    def set_blauto(self, blauto=None):
+        """Set an automation for the length in bits of self, used only when 
+        mapping an external buffer to it.
+        
+        Args:
+            blauto (callable) : automate the bl computation,
+                call blauto() to compute the bit length, default to None
+        
+        Returns:
+            None
+        
+        Raises:
+            EltErr : if self._SAFE_STAT is enabled and blauto is not a callable
+        """
+        if blauto is None:
+            try:
+                del self._blauto
+            except Exception:
+                pass
+        else:
+            if self._SAFE_STAT and not callable(blauto):
+                raise(EltErr('{0} [set_blauto]: blauto type is {1}, expecting callable'\
+                      .format(self._name, type(blauto).__name__)))
+            self._blauto = blauto
     
     # standard methods passthrough
     def set_val(self, val=None):
@@ -4163,11 +4389,19 @@ class Alt(Element):
     def _chk_val(self, *args):
         self.get_alt()._chk_val(*args)
     
-    def set_valauto(self, valauto=None):
-        self.get_alt().set_valauto(valauto)
+    #def set_valauto(self, valauto=None):
+    #    self.get_alt().set_valauto(valauto)
     
     def get_val(self):
         return self.get_alt().get_val()
+    
+    # for alt element, no dict to be returned, but just the standard list of values
+    def get_val_d(self):
+        alt = self.get_alt()
+        if isinstance(alt, Envelope):
+            return alt.get_val_d()
+        else:
+            return alt.get_val()
     
     def set_bl(self, bl=None):
         self.get_alt().set_bl(bl)
@@ -4175,8 +4409,8 @@ class Alt(Element):
     def _chk_bl(self, *args):
         self.get_alt()._chk_bl(*args)
     
-    def set_blauto(self, blauto=None):
-        self.get_alt().set_blauto(blauto)
+    #def set_blauto(self, blauto=None):
+    #    self.get_alt().set_blauto(blauto)
     
     def set_len(self, l=None):
         self.get_alt().set_len(l)
@@ -4193,8 +4427,8 @@ class Alt(Element):
     def _chk_dic(self, *args):
         self.get_alt()._chk_dic(*args)
     
-    def set_dicauto(self, dicauto=None):
-        self.get_alt()._chk_dicauto(dicauto)
+    #def set_dicauto(self, dicauto=None):
+    #    self.get_alt()._chk_dicauto(dicauto)
     
     def get_dic(self):
         return self.get_alt().get_dic()
@@ -4234,7 +4468,16 @@ class Alt(Element):
         within the content
         """
         if not self.get_trans():
+            # truncate char if length automation is set
+            if self._blauto is not None:
+                char_lb = char._len_bit
+                char._len_bit = char._cur + self._blauto()
+                if char._len_bit > char_lb:
+                    raise(EltErr('{0} [_from_char]: bit length overflow'.format(self._name)))
             self.get_alt()._from_char(char)
+            # in case of length automation, set the original length back
+            if self._blauto is not None:
+                char._len_bit = char_lb
     
     #--------------------------------------------------------------------------#
     # copy / cloning routines
@@ -4316,7 +4559,7 @@ class Alt(Element):
         """
         kw = {
             'GEN': self._GEN,
-            'DEFAULT': self.DEFAULT_ALT.clone(),
+            'DEFAULT': self.DEFAULT.clone(),
             'sel': self._sel
             }
         if self._desc != self.__class__._desc:
@@ -4325,11 +4568,9 @@ class Alt(Element):
             kw['hier'] = self._hier
         if self._trans != self.__class__._trans:
             kw['trans'] = self._trans
-        if self._content:
-            kw['content'] = {i: e.clone() for (i, e) in self._content.items()}
-        # substitute the Envelope generator with clones of the current 
-        # envelope's content
-        return self.__class__(self._name, **kw)
+        clone = self.__class__(self._name, **kw)
+        clone.insert(self.get_sel(), self.get_alt().clone())
+        return clone
     
     #--------------------------------------------------------------------------#
     # Python list / dict methods emulation
@@ -4339,7 +4580,7 @@ class Alt(Element):
         """Updates the dict of alternatives element with the content of `elt_alt'
         
         Args:
-            elt_alt (dict of {selection valud: element}) : dict of alternatives
+            elt_alt (dict of {selection value: element}) : dict of alternatives
                 to update self._content with
         
         Returns:
@@ -4376,7 +4617,7 @@ class Alt(Element):
                   .format(self._name, type(elt).__name__)))
         try:
             self._content[sv] = elt
-        except Exception as err:
+        except Exception:
             raise(EltErr('{0} [insert]: selection value is invalid, {1}'.format(self._name, sv)))
         else:
             elt.set_env(self.get_env())
@@ -4458,13 +4699,20 @@ class Alt(Element):
                 desc = ''
             #
             alts = alt.show()
-            if alts[:4] == '### ':
+            if alts.lstrip()[:4] == '### ':
+                # when the alternative is a constructed element
                 return alts.replace('### ', '### %s%s%s : %r -> ' % (self._name, desc, trans, sv), 1)
             else:
-                # case when the selected alternative is a base element
-                return '### %s%s%s : %r -> . ###\n %s' % (self._name, desc, trans, sv, alts)
+                # when the alternative is a base element
+                spaces = self.get_hier_abs() * '    '
+                return '%s### %s%s%s : %r ###\n %s' % (spaces, self._name, desc, trans, sv, alts)
         else:
-            return self.get_alt().show()
+            alt = self.get_alt()
+            _hier = alt._hier
+            alt._hier = self._hier
+            s = alt.show()
+            alt._hier = _hier
+            return s
     
     #--------------------------------------------------------------------------#
     # Python built-ins override
@@ -4472,10 +4720,10 @@ class Alt(Element):
     
     __call__ = get_val
     __repr__ = repr
-    if python_implementation != 'PyPy':
+    #if python_implementation != 'PyPy':
         # PyPy iterator implementation lead to an infinite loop
         # __iter__() calls __len__(), but here, get_bl() calls __iter__()
-        __len__ = get_bl
+    #    __len__ = get_bl
 
     #--------------------------------------------------------------------------#
     # json interface

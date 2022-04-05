@@ -575,11 +575,15 @@ class SABP_IEs:
     ___Criticality_Diagnostics_iE_Extensions__item__id._const_tab_at = None
     ___Criticality_Diagnostics_iE_Extensions__item__id._const_tab_id = u'id'
     ___Criticality_Diagnostics_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('SABP-Containers', 'SABP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___Criticality_Diagnostics_iE_Extensions__item__criticality._const_tab = ____Criticality_Diagnostics_iE_Extensions__item__id_tab
+    ____Criticality_Diagnostics_iE_Extensions__item__criticality_tab = CLASS(name='_tab_SABP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('SABP-Containers', 'SABP-PROTOCOL-EXTENSION')))
+    ____Criticality_Diagnostics_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___Criticality_Diagnostics_iE_Extensions__item__criticality._const_tab = ____Criticality_Diagnostics_iE_Extensions__item__criticality_tab
     ___Criticality_Diagnostics_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___Criticality_Diagnostics_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___Criticality_Diagnostics_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('SABP-Containers', 'SABP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___Criticality_Diagnostics_iE_Extensions__item__extensionValue._const_tab = ____Criticality_Diagnostics_iE_Extensions__item__id_tab
+    ____Criticality_Diagnostics_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_SABP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('SABP-Containers', 'SABP-PROTOCOL-EXTENSION')))
+    ____Criticality_Diagnostics_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___Criticality_Diagnostics_iE_Extensions__item__extensionValue._const_tab = ____Criticality_Diagnostics_iE_Extensions__item__extensionValue_tab
     ___Criticality_Diagnostics_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___Criticality_Diagnostics_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __Criticality_Diagnostics_iE_Extensions__item_._cont = ASN1Dict([
@@ -665,11 +669,15 @@ class SABP_IEs:
     ____MessageStructure__item__iE_Extensions__item__id._const_tab_at = None
     ____MessageStructure__item__iE_Extensions__item__id._const_tab_id = u'id'
     ____MessageStructure__item__iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('SABP-Containers', 'SABP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ____MessageStructure__item__iE_Extensions__item__criticality._const_tab = _____MessageStructure__item__iE_Extensions__item__id_tab
+    _____MessageStructure__item__iE_Extensions__item__criticality_tab = CLASS(name='_tab_SABP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('SABP-Containers', 'SABP-PROTOCOL-EXTENSION')))
+    _____MessageStructure__item__iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ____MessageStructure__item__iE_Extensions__item__criticality._const_tab = _____MessageStructure__item__iE_Extensions__item__criticality_tab
     ____MessageStructure__item__iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ____MessageStructure__item__iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ____MessageStructure__item__iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('SABP-Containers', 'SABP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ____MessageStructure__item__iE_Extensions__item__extensionValue._const_tab = _____MessageStructure__item__iE_Extensions__item__id_tab
+    _____MessageStructure__item__iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_SABP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('SABP-Containers', 'SABP-PROTOCOL-EXTENSION')))
+    _____MessageStructure__item__iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ____MessageStructure__item__iE_Extensions__item__extensionValue._const_tab = _____MessageStructure__item__iE_Extensions__item__extensionValue_tab
     ____MessageStructure__item__iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ____MessageStructure__item__iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     ___MessageStructure__item__iE_Extensions__item_._cont = ASN1Dict([
@@ -716,11 +724,15 @@ class SABP_IEs:
     ___Failure_List_Item_iE_Extensions__item__id._const_tab_at = None
     ___Failure_List_Item_iE_Extensions__item__id._const_tab_id = u'id'
     ___Failure_List_Item_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('SABP-Containers', 'SABP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___Failure_List_Item_iE_Extensions__item__criticality._const_tab = ____Failure_List_Item_iE_Extensions__item__id_tab
+    ____Failure_List_Item_iE_Extensions__item__criticality_tab = CLASS(name='_tab_SABP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('SABP-Containers', 'SABP-PROTOCOL-EXTENSION')))
+    ____Failure_List_Item_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___Failure_List_Item_iE_Extensions__item__criticality._const_tab = ____Failure_List_Item_iE_Extensions__item__criticality_tab
     ___Failure_List_Item_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___Failure_List_Item_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___Failure_List_Item_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('SABP-Containers', 'SABP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___Failure_List_Item_iE_Extensions__item__extensionValue._const_tab = ____Failure_List_Item_iE_Extensions__item__id_tab
+    ____Failure_List_Item_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_SABP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('SABP-Containers', 'SABP-PROTOCOL-EXTENSION')))
+    ____Failure_List_Item_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___Failure_List_Item_iE_Extensions__item__extensionValue._const_tab = ____Failure_List_Item_iE_Extensions__item__extensionValue_tab
     ___Failure_List_Item_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___Failure_List_Item_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __Failure_List_Item_iE_Extensions__item_._cont = ASN1Dict([
@@ -770,11 +782,15 @@ class SABP_IEs:
     ___Number_of_Broadcasts_Completed_List_Item_iE_Extensions__item__id._const_tab_at = None
     ___Number_of_Broadcasts_Completed_List_Item_iE_Extensions__item__id._const_tab_id = u'id'
     ___Number_of_Broadcasts_Completed_List_Item_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('SABP-Containers', 'SABP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___Number_of_Broadcasts_Completed_List_Item_iE_Extensions__item__criticality._const_tab = ____Number_of_Broadcasts_Completed_List_Item_iE_Extensions__item__id_tab
+    ____Number_of_Broadcasts_Completed_List_Item_iE_Extensions__item__criticality_tab = CLASS(name='_tab_SABP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('SABP-Containers', 'SABP-PROTOCOL-EXTENSION')))
+    ____Number_of_Broadcasts_Completed_List_Item_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___Number_of_Broadcasts_Completed_List_Item_iE_Extensions__item__criticality._const_tab = ____Number_of_Broadcasts_Completed_List_Item_iE_Extensions__item__criticality_tab
     ___Number_of_Broadcasts_Completed_List_Item_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___Number_of_Broadcasts_Completed_List_Item_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___Number_of_Broadcasts_Completed_List_Item_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('SABP-Containers', 'SABP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___Number_of_Broadcasts_Completed_List_Item_iE_Extensions__item__extensionValue._const_tab = ____Number_of_Broadcasts_Completed_List_Item_iE_Extensions__item__id_tab
+    ____Number_of_Broadcasts_Completed_List_Item_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_SABP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('SABP-Containers', 'SABP-PROTOCOL-EXTENSION')))
+    ____Number_of_Broadcasts_Completed_List_Item_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___Number_of_Broadcasts_Completed_List_Item_iE_Extensions__item__extensionValue._const_tab = ____Number_of_Broadcasts_Completed_List_Item_iE_Extensions__item__extensionValue_tab
     ___Number_of_Broadcasts_Completed_List_Item_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___Number_of_Broadcasts_Completed_List_Item_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __Number_of_Broadcasts_Completed_List_Item_iE_Extensions__item_._cont = ASN1Dict([
@@ -834,11 +850,15 @@ class SABP_IEs:
     ___Radio_Resource_Loading_List_Item_iE_Extensions__item__id._const_tab_at = None
     ___Radio_Resource_Loading_List_Item_iE_Extensions__item__id._const_tab_id = u'id'
     ___Radio_Resource_Loading_List_Item_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('SABP-Containers', 'SABP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___Radio_Resource_Loading_List_Item_iE_Extensions__item__criticality._const_tab = ____Radio_Resource_Loading_List_Item_iE_Extensions__item__id_tab
+    ____Radio_Resource_Loading_List_Item_iE_Extensions__item__criticality_tab = CLASS(name='_tab_SABP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('SABP-Containers', 'SABP-PROTOCOL-EXTENSION')))
+    ____Radio_Resource_Loading_List_Item_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___Radio_Resource_Loading_List_Item_iE_Extensions__item__criticality._const_tab = ____Radio_Resource_Loading_List_Item_iE_Extensions__item__criticality_tab
     ___Radio_Resource_Loading_List_Item_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___Radio_Resource_Loading_List_Item_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___Radio_Resource_Loading_List_Item_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('SABP-Containers', 'SABP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___Radio_Resource_Loading_List_Item_iE_Extensions__item__extensionValue._const_tab = ____Radio_Resource_Loading_List_Item_iE_Extensions__item__id_tab
+    ____Radio_Resource_Loading_List_Item_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_SABP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('SABP-Containers', 'SABP-PROTOCOL-EXTENSION')))
+    ____Radio_Resource_Loading_List_Item_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___Radio_Resource_Loading_List_Item_iE_Extensions__item__extensionValue._const_tab = ____Radio_Resource_Loading_List_Item_iE_Extensions__item__extensionValue_tab
     ___Radio_Resource_Loading_List_Item_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___Radio_Resource_Loading_List_Item_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __Radio_Resource_Loading_List_Item_iE_Extensions__item_._cont = ASN1Dict([
@@ -927,7 +947,9 @@ class SABP_IEs:
         _Criticality_Diagnostics_iEsCriticalityDiagnostics,
         ____Criticality_Diagnostics_iE_Extensions__item__id_tab,
         ___Criticality_Diagnostics_iE_Extensions__item__id,
+        ____Criticality_Diagnostics_iE_Extensions__item__criticality_tab,
         ___Criticality_Diagnostics_iE_Extensions__item__criticality,
+        ____Criticality_Diagnostics_iE_Extensions__item__extensionValue_tab,
         ___Criticality_Diagnostics_iE_Extensions__item__extensionValue,
         __Criticality_Diagnostics_iE_Extensions__item_,
         _Criticality_Diagnostics_iE_Extensions,
@@ -953,7 +975,9 @@ class SABP_IEs:
         __MessageStructure__item__repetitionNumber,
         _____MessageStructure__item__iE_Extensions__item__id_tab,
         ____MessageStructure__item__iE_Extensions__item__id,
+        _____MessageStructure__item__iE_Extensions__item__criticality_tab,
         ____MessageStructure__item__iE_Extensions__item__criticality,
+        _____MessageStructure__item__iE_Extensions__item__extensionValue_tab,
         ____MessageStructure__item__iE_Extensions__item__extensionValue,
         ___MessageStructure__item__iE_Extensions__item_,
         __MessageStructure__item__iE_Extensions,
@@ -967,7 +991,9 @@ class SABP_IEs:
         _Failure_List_Item_cause,
         ____Failure_List_Item_iE_Extensions__item__id_tab,
         ___Failure_List_Item_iE_Extensions__item__id,
+        ____Failure_List_Item_iE_Extensions__item__criticality_tab,
         ___Failure_List_Item_iE_Extensions__item__criticality,
+        ____Failure_List_Item_iE_Extensions__item__extensionValue_tab,
         ___Failure_List_Item_iE_Extensions__item__extensionValue,
         __Failure_List_Item_iE_Extensions__item_,
         _Failure_List_Item_iE_Extensions,
@@ -982,7 +1008,9 @@ class SABP_IEs:
         _Number_of_Broadcasts_Completed_List_Item_number_of_broadcasts_completed_info,
         ____Number_of_Broadcasts_Completed_List_Item_iE_Extensions__item__id_tab,
         ___Number_of_Broadcasts_Completed_List_Item_iE_Extensions__item__id,
+        ____Number_of_Broadcasts_Completed_List_Item_iE_Extensions__item__criticality_tab,
         ___Number_of_Broadcasts_Completed_List_Item_iE_Extensions__item__criticality,
+        ____Number_of_Broadcasts_Completed_List_Item_iE_Extensions__item__extensionValue_tab,
         ___Number_of_Broadcasts_Completed_List_Item_iE_Extensions__item__extensionValue,
         __Number_of_Broadcasts_Completed_List_Item_iE_Extensions__item_,
         _Number_of_Broadcasts_Completed_List_Item_iE_Extensions,
@@ -998,7 +1026,9 @@ class SABP_IEs:
         _Radio_Resource_Loading_List_Item_available_bandwidth,
         ____Radio_Resource_Loading_List_Item_iE_Extensions__item__id_tab,
         ___Radio_Resource_Loading_List_Item_iE_Extensions__item__id,
+        ____Radio_Resource_Loading_List_Item_iE_Extensions__item__criticality_tab,
         ___Radio_Resource_Loading_List_Item_iE_Extensions__item__criticality,
+        ____Radio_Resource_Loading_List_Item_iE_Extensions__item__extensionValue_tab,
         ___Radio_Resource_Loading_List_Item_iE_Extensions__item__extensionValue,
         __Radio_Resource_Loading_List_Item_iE_Extensions__item_,
         _Radio_Resource_Loading_List_Item_iE_Extensions,
@@ -1311,11 +1341,15 @@ class SABP_PDU_Contents:
     ___Write_Replace_Complete_protocolExtensions__item__id._const_tab_at = None
     ___Write_Replace_Complete_protocolExtensions__item__id._const_tab_id = u'id'
     ___Write_Replace_Complete_protocolExtensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('SABP-Containers', 'SABP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___Write_Replace_Complete_protocolExtensions__item__criticality._const_tab = ____Write_Replace_Complete_protocolExtensions__item__id_tab
+    ____Write_Replace_Complete_protocolExtensions__item__criticality_tab = CLASS(name='_tab_SABP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('SABP-Containers', 'SABP-PROTOCOL-EXTENSION')))
+    ____Write_Replace_Complete_protocolExtensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___Write_Replace_Complete_protocolExtensions__item__criticality._const_tab = ____Write_Replace_Complete_protocolExtensions__item__criticality_tab
     ___Write_Replace_Complete_protocolExtensions__item__criticality._const_tab_at = ('..', u'id')
     ___Write_Replace_Complete_protocolExtensions__item__criticality._const_tab_id = u'criticality'
     ___Write_Replace_Complete_protocolExtensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('SABP-Containers', 'SABP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___Write_Replace_Complete_protocolExtensions__item__extensionValue._const_tab = ____Write_Replace_Complete_protocolExtensions__item__id_tab
+    ____Write_Replace_Complete_protocolExtensions__item__extensionValue_tab = CLASS(name='_tab_SABP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('SABP-Containers', 'SABP-PROTOCOL-EXTENSION')))
+    ____Write_Replace_Complete_protocolExtensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___Write_Replace_Complete_protocolExtensions__item__extensionValue._const_tab = ____Write_Replace_Complete_protocolExtensions__item__extensionValue_tab
     ___Write_Replace_Complete_protocolExtensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___Write_Replace_Complete_protocolExtensions__item__extensionValue._const_tab_id = u'Extension'
     __Write_Replace_Complete_protocolExtensions__item_._cont = ASN1Dict([
@@ -1384,11 +1418,15 @@ class SABP_PDU_Contents:
     ___Write_Replace_Failure_protocolExtensions__item__id._const_tab_at = None
     ___Write_Replace_Failure_protocolExtensions__item__id._const_tab_id = u'id'
     ___Write_Replace_Failure_protocolExtensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('SABP-Containers', 'SABP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___Write_Replace_Failure_protocolExtensions__item__criticality._const_tab = ____Write_Replace_Failure_protocolExtensions__item__id_tab
+    ____Write_Replace_Failure_protocolExtensions__item__criticality_tab = CLASS(name='_tab_SABP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('SABP-Containers', 'SABP-PROTOCOL-EXTENSION')))
+    ____Write_Replace_Failure_protocolExtensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___Write_Replace_Failure_protocolExtensions__item__criticality._const_tab = ____Write_Replace_Failure_protocolExtensions__item__criticality_tab
     ___Write_Replace_Failure_protocolExtensions__item__criticality._const_tab_at = ('..', u'id')
     ___Write_Replace_Failure_protocolExtensions__item__criticality._const_tab_id = u'criticality'
     ___Write_Replace_Failure_protocolExtensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('SABP-Containers', 'SABP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___Write_Replace_Failure_protocolExtensions__item__extensionValue._const_tab = ____Write_Replace_Failure_protocolExtensions__item__id_tab
+    ____Write_Replace_Failure_protocolExtensions__item__extensionValue_tab = CLASS(name='_tab_SABP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('SABP-Containers', 'SABP-PROTOCOL-EXTENSION')))
+    ____Write_Replace_Failure_protocolExtensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___Write_Replace_Failure_protocolExtensions__item__extensionValue._const_tab = ____Write_Replace_Failure_protocolExtensions__item__extensionValue_tab
     ___Write_Replace_Failure_protocolExtensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___Write_Replace_Failure_protocolExtensions__item__extensionValue._const_tab_id = u'Extension'
     __Write_Replace_Failure_protocolExtensions__item_._cont = ASN1Dict([
@@ -1456,11 +1494,15 @@ class SABP_PDU_Contents:
     ___Kill_protocolExtensions__item__id._const_tab_at = None
     ___Kill_protocolExtensions__item__id._const_tab_id = u'id'
     ___Kill_protocolExtensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('SABP-Containers', 'SABP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___Kill_protocolExtensions__item__criticality._const_tab = ____Kill_protocolExtensions__item__id_tab
+    ____Kill_protocolExtensions__item__criticality_tab = CLASS(name='_tab_SABP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('SABP-Containers', 'SABP-PROTOCOL-EXTENSION')))
+    ____Kill_protocolExtensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___Kill_protocolExtensions__item__criticality._const_tab = ____Kill_protocolExtensions__item__criticality_tab
     ___Kill_protocolExtensions__item__criticality._const_tab_at = ('..', u'id')
     ___Kill_protocolExtensions__item__criticality._const_tab_id = u'criticality'
     ___Kill_protocolExtensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('SABP-Containers', 'SABP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___Kill_protocolExtensions__item__extensionValue._const_tab = ____Kill_protocolExtensions__item__id_tab
+    ____Kill_protocolExtensions__item__extensionValue_tab = CLASS(name='_tab_SABP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('SABP-Containers', 'SABP-PROTOCOL-EXTENSION')))
+    ____Kill_protocolExtensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___Kill_protocolExtensions__item__extensionValue._const_tab = ____Kill_protocolExtensions__item__extensionValue_tab
     ___Kill_protocolExtensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___Kill_protocolExtensions__item__extensionValue._const_tab_id = u'Extension'
     __Kill_protocolExtensions__item_._cont = ASN1Dict([
@@ -1527,11 +1569,15 @@ class SABP_PDU_Contents:
     ___Kill_Complete_protocolExtensions__item__id._const_tab_at = None
     ___Kill_Complete_protocolExtensions__item__id._const_tab_id = u'id'
     ___Kill_Complete_protocolExtensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('SABP-Containers', 'SABP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___Kill_Complete_protocolExtensions__item__criticality._const_tab = ____Kill_Complete_protocolExtensions__item__id_tab
+    ____Kill_Complete_protocolExtensions__item__criticality_tab = CLASS(name='_tab_SABP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('SABP-Containers', 'SABP-PROTOCOL-EXTENSION')))
+    ____Kill_Complete_protocolExtensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___Kill_Complete_protocolExtensions__item__criticality._const_tab = ____Kill_Complete_protocolExtensions__item__criticality_tab
     ___Kill_Complete_protocolExtensions__item__criticality._const_tab_at = ('..', u'id')
     ___Kill_Complete_protocolExtensions__item__criticality._const_tab_id = u'criticality'
     ___Kill_Complete_protocolExtensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('SABP-Containers', 'SABP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___Kill_Complete_protocolExtensions__item__extensionValue._const_tab = ____Kill_Complete_protocolExtensions__item__id_tab
+    ____Kill_Complete_protocolExtensions__item__extensionValue_tab = CLASS(name='_tab_SABP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('SABP-Containers', 'SABP-PROTOCOL-EXTENSION')))
+    ____Kill_Complete_protocolExtensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___Kill_Complete_protocolExtensions__item__extensionValue._const_tab = ____Kill_Complete_protocolExtensions__item__extensionValue_tab
     ___Kill_Complete_protocolExtensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___Kill_Complete_protocolExtensions__item__extensionValue._const_tab_id = u'Extension'
     __Kill_Complete_protocolExtensions__item_._cont = ASN1Dict([
@@ -1600,11 +1646,15 @@ class SABP_PDU_Contents:
     ___Kill_Failure_protocolExtensions__item__id._const_tab_at = None
     ___Kill_Failure_protocolExtensions__item__id._const_tab_id = u'id'
     ___Kill_Failure_protocolExtensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('SABP-Containers', 'SABP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___Kill_Failure_protocolExtensions__item__criticality._const_tab = ____Kill_Failure_protocolExtensions__item__id_tab
+    ____Kill_Failure_protocolExtensions__item__criticality_tab = CLASS(name='_tab_SABP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('SABP-Containers', 'SABP-PROTOCOL-EXTENSION')))
+    ____Kill_Failure_protocolExtensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___Kill_Failure_protocolExtensions__item__criticality._const_tab = ____Kill_Failure_protocolExtensions__item__criticality_tab
     ___Kill_Failure_protocolExtensions__item__criticality._const_tab_at = ('..', u'id')
     ___Kill_Failure_protocolExtensions__item__criticality._const_tab_id = u'criticality'
     ___Kill_Failure_protocolExtensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('SABP-Containers', 'SABP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___Kill_Failure_protocolExtensions__item__extensionValue._const_tab = ____Kill_Failure_protocolExtensions__item__id_tab
+    ____Kill_Failure_protocolExtensions__item__extensionValue_tab = CLASS(name='_tab_SABP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('SABP-Containers', 'SABP-PROTOCOL-EXTENSION')))
+    ____Kill_Failure_protocolExtensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___Kill_Failure_protocolExtensions__item__extensionValue._const_tab = ____Kill_Failure_protocolExtensions__item__extensionValue_tab
     ___Kill_Failure_protocolExtensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___Kill_Failure_protocolExtensions__item__extensionValue._const_tab_id = u'Extension'
     __Kill_Failure_protocolExtensions__item_._cont = ASN1Dict([
@@ -1670,11 +1720,15 @@ class SABP_PDU_Contents:
     ___Load_Query_protocolExtensions__item__id._const_tab_at = None
     ___Load_Query_protocolExtensions__item__id._const_tab_id = u'id'
     ___Load_Query_protocolExtensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('SABP-Containers', 'SABP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___Load_Query_protocolExtensions__item__criticality._const_tab = ____Load_Query_protocolExtensions__item__id_tab
+    ____Load_Query_protocolExtensions__item__criticality_tab = CLASS(name='_tab_SABP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('SABP-Containers', 'SABP-PROTOCOL-EXTENSION')))
+    ____Load_Query_protocolExtensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___Load_Query_protocolExtensions__item__criticality._const_tab = ____Load_Query_protocolExtensions__item__criticality_tab
     ___Load_Query_protocolExtensions__item__criticality._const_tab_at = ('..', u'id')
     ___Load_Query_protocolExtensions__item__criticality._const_tab_id = u'criticality'
     ___Load_Query_protocolExtensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('SABP-Containers', 'SABP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___Load_Query_protocolExtensions__item__extensionValue._const_tab = ____Load_Query_protocolExtensions__item__id_tab
+    ____Load_Query_protocolExtensions__item__extensionValue_tab = CLASS(name='_tab_SABP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('SABP-Containers', 'SABP-PROTOCOL-EXTENSION')))
+    ____Load_Query_protocolExtensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___Load_Query_protocolExtensions__item__extensionValue._const_tab = ____Load_Query_protocolExtensions__item__extensionValue_tab
     ___Load_Query_protocolExtensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___Load_Query_protocolExtensions__item__extensionValue._const_tab_id = u'Extension'
     __Load_Query_protocolExtensions__item_._cont = ASN1Dict([
@@ -1737,11 +1791,15 @@ class SABP_PDU_Contents:
     ___Load_Query_Complete_protocolExtensions__item__id._const_tab_at = None
     ___Load_Query_Complete_protocolExtensions__item__id._const_tab_id = u'id'
     ___Load_Query_Complete_protocolExtensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('SABP-Containers', 'SABP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___Load_Query_Complete_protocolExtensions__item__criticality._const_tab = ____Load_Query_Complete_protocolExtensions__item__id_tab
+    ____Load_Query_Complete_protocolExtensions__item__criticality_tab = CLASS(name='_tab_SABP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('SABP-Containers', 'SABP-PROTOCOL-EXTENSION')))
+    ____Load_Query_Complete_protocolExtensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___Load_Query_Complete_protocolExtensions__item__criticality._const_tab = ____Load_Query_Complete_protocolExtensions__item__criticality_tab
     ___Load_Query_Complete_protocolExtensions__item__criticality._const_tab_at = ('..', u'id')
     ___Load_Query_Complete_protocolExtensions__item__criticality._const_tab_id = u'criticality'
     ___Load_Query_Complete_protocolExtensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('SABP-Containers', 'SABP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___Load_Query_Complete_protocolExtensions__item__extensionValue._const_tab = ____Load_Query_Complete_protocolExtensions__item__id_tab
+    ____Load_Query_Complete_protocolExtensions__item__extensionValue_tab = CLASS(name='_tab_SABP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('SABP-Containers', 'SABP-PROTOCOL-EXTENSION')))
+    ____Load_Query_Complete_protocolExtensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___Load_Query_Complete_protocolExtensions__item__extensionValue._const_tab = ____Load_Query_Complete_protocolExtensions__item__extensionValue_tab
     ___Load_Query_Complete_protocolExtensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___Load_Query_Complete_protocolExtensions__item__extensionValue._const_tab_id = u'Extension'
     __Load_Query_Complete_protocolExtensions__item_._cont = ASN1Dict([
@@ -1806,11 +1864,15 @@ class SABP_PDU_Contents:
     ___Load_Query_Failure_protocolExtensions__item__id._const_tab_at = None
     ___Load_Query_Failure_protocolExtensions__item__id._const_tab_id = u'id'
     ___Load_Query_Failure_protocolExtensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('SABP-Containers', 'SABP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___Load_Query_Failure_protocolExtensions__item__criticality._const_tab = ____Load_Query_Failure_protocolExtensions__item__id_tab
+    ____Load_Query_Failure_protocolExtensions__item__criticality_tab = CLASS(name='_tab_SABP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('SABP-Containers', 'SABP-PROTOCOL-EXTENSION')))
+    ____Load_Query_Failure_protocolExtensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___Load_Query_Failure_protocolExtensions__item__criticality._const_tab = ____Load_Query_Failure_protocolExtensions__item__criticality_tab
     ___Load_Query_Failure_protocolExtensions__item__criticality._const_tab_at = ('..', u'id')
     ___Load_Query_Failure_protocolExtensions__item__criticality._const_tab_id = u'criticality'
     ___Load_Query_Failure_protocolExtensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('SABP-Containers', 'SABP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___Load_Query_Failure_protocolExtensions__item__extensionValue._const_tab = ____Load_Query_Failure_protocolExtensions__item__id_tab
+    ____Load_Query_Failure_protocolExtensions__item__extensionValue_tab = CLASS(name='_tab_SABP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('SABP-Containers', 'SABP-PROTOCOL-EXTENSION')))
+    ____Load_Query_Failure_protocolExtensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___Load_Query_Failure_protocolExtensions__item__extensionValue._const_tab = ____Load_Query_Failure_protocolExtensions__item__extensionValue_tab
     ___Load_Query_Failure_protocolExtensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___Load_Query_Failure_protocolExtensions__item__extensionValue._const_tab_id = u'Extension'
     __Load_Query_Failure_protocolExtensions__item_._cont = ASN1Dict([
@@ -1876,11 +1938,15 @@ class SABP_PDU_Contents:
     ___Message_Status_Query_protocolExtensions__item__id._const_tab_at = None
     ___Message_Status_Query_protocolExtensions__item__id._const_tab_id = u'id'
     ___Message_Status_Query_protocolExtensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('SABP-Containers', 'SABP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___Message_Status_Query_protocolExtensions__item__criticality._const_tab = ____Message_Status_Query_protocolExtensions__item__id_tab
+    ____Message_Status_Query_protocolExtensions__item__criticality_tab = CLASS(name='_tab_SABP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('SABP-Containers', 'SABP-PROTOCOL-EXTENSION')))
+    ____Message_Status_Query_protocolExtensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___Message_Status_Query_protocolExtensions__item__criticality._const_tab = ____Message_Status_Query_protocolExtensions__item__criticality_tab
     ___Message_Status_Query_protocolExtensions__item__criticality._const_tab_at = ('..', u'id')
     ___Message_Status_Query_protocolExtensions__item__criticality._const_tab_id = u'criticality'
     ___Message_Status_Query_protocolExtensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('SABP-Containers', 'SABP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___Message_Status_Query_protocolExtensions__item__extensionValue._const_tab = ____Message_Status_Query_protocolExtensions__item__id_tab
+    ____Message_Status_Query_protocolExtensions__item__extensionValue_tab = CLASS(name='_tab_SABP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('SABP-Containers', 'SABP-PROTOCOL-EXTENSION')))
+    ____Message_Status_Query_protocolExtensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___Message_Status_Query_protocolExtensions__item__extensionValue._const_tab = ____Message_Status_Query_protocolExtensions__item__extensionValue_tab
     ___Message_Status_Query_protocolExtensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___Message_Status_Query_protocolExtensions__item__extensionValue._const_tab_id = u'Extension'
     __Message_Status_Query_protocolExtensions__item_._cont = ASN1Dict([
@@ -1947,11 +2013,15 @@ class SABP_PDU_Contents:
     ___Message_Status_Query_Complete_protocolExtensions__item__id._const_tab_at = None
     ___Message_Status_Query_Complete_protocolExtensions__item__id._const_tab_id = u'id'
     ___Message_Status_Query_Complete_protocolExtensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('SABP-Containers', 'SABP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___Message_Status_Query_Complete_protocolExtensions__item__criticality._const_tab = ____Message_Status_Query_Complete_protocolExtensions__item__id_tab
+    ____Message_Status_Query_Complete_protocolExtensions__item__criticality_tab = CLASS(name='_tab_SABP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('SABP-Containers', 'SABP-PROTOCOL-EXTENSION')))
+    ____Message_Status_Query_Complete_protocolExtensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___Message_Status_Query_Complete_protocolExtensions__item__criticality._const_tab = ____Message_Status_Query_Complete_protocolExtensions__item__criticality_tab
     ___Message_Status_Query_Complete_protocolExtensions__item__criticality._const_tab_at = ('..', u'id')
     ___Message_Status_Query_Complete_protocolExtensions__item__criticality._const_tab_id = u'criticality'
     ___Message_Status_Query_Complete_protocolExtensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('SABP-Containers', 'SABP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___Message_Status_Query_Complete_protocolExtensions__item__extensionValue._const_tab = ____Message_Status_Query_Complete_protocolExtensions__item__id_tab
+    ____Message_Status_Query_Complete_protocolExtensions__item__extensionValue_tab = CLASS(name='_tab_SABP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('SABP-Containers', 'SABP-PROTOCOL-EXTENSION')))
+    ____Message_Status_Query_Complete_protocolExtensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___Message_Status_Query_Complete_protocolExtensions__item__extensionValue._const_tab = ____Message_Status_Query_Complete_protocolExtensions__item__extensionValue_tab
     ___Message_Status_Query_Complete_protocolExtensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___Message_Status_Query_Complete_protocolExtensions__item__extensionValue._const_tab_id = u'Extension'
     __Message_Status_Query_Complete_protocolExtensions__item_._cont = ASN1Dict([
@@ -2020,11 +2090,15 @@ class SABP_PDU_Contents:
     ___Message_Status_Query_Failure_protocolExtensions__item__id._const_tab_at = None
     ___Message_Status_Query_Failure_protocolExtensions__item__id._const_tab_id = u'id'
     ___Message_Status_Query_Failure_protocolExtensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('SABP-Containers', 'SABP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___Message_Status_Query_Failure_protocolExtensions__item__criticality._const_tab = ____Message_Status_Query_Failure_protocolExtensions__item__id_tab
+    ____Message_Status_Query_Failure_protocolExtensions__item__criticality_tab = CLASS(name='_tab_SABP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('SABP-Containers', 'SABP-PROTOCOL-EXTENSION')))
+    ____Message_Status_Query_Failure_protocolExtensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___Message_Status_Query_Failure_protocolExtensions__item__criticality._const_tab = ____Message_Status_Query_Failure_protocolExtensions__item__criticality_tab
     ___Message_Status_Query_Failure_protocolExtensions__item__criticality._const_tab_at = ('..', u'id')
     ___Message_Status_Query_Failure_protocolExtensions__item__criticality._const_tab_id = u'criticality'
     ___Message_Status_Query_Failure_protocolExtensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('SABP-Containers', 'SABP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___Message_Status_Query_Failure_protocolExtensions__item__extensionValue._const_tab = ____Message_Status_Query_Failure_protocolExtensions__item__id_tab
+    ____Message_Status_Query_Failure_protocolExtensions__item__extensionValue_tab = CLASS(name='_tab_SABP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('SABP-Containers', 'SABP-PROTOCOL-EXTENSION')))
+    ____Message_Status_Query_Failure_protocolExtensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___Message_Status_Query_Failure_protocolExtensions__item__extensionValue._const_tab = ____Message_Status_Query_Failure_protocolExtensions__item__extensionValue_tab
     ___Message_Status_Query_Failure_protocolExtensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___Message_Status_Query_Failure_protocolExtensions__item__extensionValue._const_tab_id = u'Extension'
     __Message_Status_Query_Failure_protocolExtensions__item_._cont = ASN1Dict([
@@ -2090,11 +2164,15 @@ class SABP_PDU_Contents:
     ___Reset_protocolExtensions__item__id._const_tab_at = None
     ___Reset_protocolExtensions__item__id._const_tab_id = u'id'
     ___Reset_protocolExtensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('SABP-Containers', 'SABP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___Reset_protocolExtensions__item__criticality._const_tab = ____Reset_protocolExtensions__item__id_tab
+    ____Reset_protocolExtensions__item__criticality_tab = CLASS(name='_tab_SABP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('SABP-Containers', 'SABP-PROTOCOL-EXTENSION')))
+    ____Reset_protocolExtensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___Reset_protocolExtensions__item__criticality._const_tab = ____Reset_protocolExtensions__item__criticality_tab
     ___Reset_protocolExtensions__item__criticality._const_tab_at = ('..', u'id')
     ___Reset_protocolExtensions__item__criticality._const_tab_id = u'criticality'
     ___Reset_protocolExtensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('SABP-Containers', 'SABP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___Reset_protocolExtensions__item__extensionValue._const_tab = ____Reset_protocolExtensions__item__id_tab
+    ____Reset_protocolExtensions__item__extensionValue_tab = CLASS(name='_tab_SABP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('SABP-Containers', 'SABP-PROTOCOL-EXTENSION')))
+    ____Reset_protocolExtensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___Reset_protocolExtensions__item__extensionValue._const_tab = ____Reset_protocolExtensions__item__extensionValue_tab
     ___Reset_protocolExtensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___Reset_protocolExtensions__item__extensionValue._const_tab_id = u'Extension'
     __Reset_protocolExtensions__item_._cont = ASN1Dict([
@@ -2157,11 +2235,15 @@ class SABP_PDU_Contents:
     ___Reset_Complete_protocolExtensions__item__id._const_tab_at = None
     ___Reset_Complete_protocolExtensions__item__id._const_tab_id = u'id'
     ___Reset_Complete_protocolExtensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('SABP-Containers', 'SABP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___Reset_Complete_protocolExtensions__item__criticality._const_tab = ____Reset_Complete_protocolExtensions__item__id_tab
+    ____Reset_Complete_protocolExtensions__item__criticality_tab = CLASS(name='_tab_SABP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('SABP-Containers', 'SABP-PROTOCOL-EXTENSION')))
+    ____Reset_Complete_protocolExtensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___Reset_Complete_protocolExtensions__item__criticality._const_tab = ____Reset_Complete_protocolExtensions__item__criticality_tab
     ___Reset_Complete_protocolExtensions__item__criticality._const_tab_at = ('..', u'id')
     ___Reset_Complete_protocolExtensions__item__criticality._const_tab_id = u'criticality'
     ___Reset_Complete_protocolExtensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('SABP-Containers', 'SABP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___Reset_Complete_protocolExtensions__item__extensionValue._const_tab = ____Reset_Complete_protocolExtensions__item__id_tab
+    ____Reset_Complete_protocolExtensions__item__extensionValue_tab = CLASS(name='_tab_SABP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('SABP-Containers', 'SABP-PROTOCOL-EXTENSION')))
+    ____Reset_Complete_protocolExtensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___Reset_Complete_protocolExtensions__item__extensionValue._const_tab = ____Reset_Complete_protocolExtensions__item__extensionValue_tab
     ___Reset_Complete_protocolExtensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___Reset_Complete_protocolExtensions__item__extensionValue._const_tab_id = u'Extension'
     __Reset_Complete_protocolExtensions__item_._cont = ASN1Dict([
@@ -2226,11 +2308,15 @@ class SABP_PDU_Contents:
     ___Reset_Failure_protocolExtensions__item__id._const_tab_at = None
     ___Reset_Failure_protocolExtensions__item__id._const_tab_id = u'id'
     ___Reset_Failure_protocolExtensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('SABP-Containers', 'SABP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___Reset_Failure_protocolExtensions__item__criticality._const_tab = ____Reset_Failure_protocolExtensions__item__id_tab
+    ____Reset_Failure_protocolExtensions__item__criticality_tab = CLASS(name='_tab_SABP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('SABP-Containers', 'SABP-PROTOCOL-EXTENSION')))
+    ____Reset_Failure_protocolExtensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___Reset_Failure_protocolExtensions__item__criticality._const_tab = ____Reset_Failure_protocolExtensions__item__criticality_tab
     ___Reset_Failure_protocolExtensions__item__criticality._const_tab_at = ('..', u'id')
     ___Reset_Failure_protocolExtensions__item__criticality._const_tab_id = u'criticality'
     ___Reset_Failure_protocolExtensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('SABP-Containers', 'SABP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___Reset_Failure_protocolExtensions__item__extensionValue._const_tab = ____Reset_Failure_protocolExtensions__item__id_tab
+    ____Reset_Failure_protocolExtensions__item__extensionValue_tab = CLASS(name='_tab_SABP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('SABP-Containers', 'SABP-PROTOCOL-EXTENSION')))
+    ____Reset_Failure_protocolExtensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___Reset_Failure_protocolExtensions__item__extensionValue._const_tab = ____Reset_Failure_protocolExtensions__item__extensionValue_tab
     ___Reset_Failure_protocolExtensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___Reset_Failure_protocolExtensions__item__extensionValue._const_tab_id = u'Extension'
     __Reset_Failure_protocolExtensions__item_._cont = ASN1Dict([
@@ -2295,11 +2381,15 @@ class SABP_PDU_Contents:
     ___Restart_protocolExtensions__item__id._const_tab_at = None
     ___Restart_protocolExtensions__item__id._const_tab_id = u'id'
     ___Restart_protocolExtensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('SABP-Containers', 'SABP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___Restart_protocolExtensions__item__criticality._const_tab = ____Restart_protocolExtensions__item__id_tab
+    ____Restart_protocolExtensions__item__criticality_tab = CLASS(name='_tab_SABP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('SABP-Containers', 'SABP-PROTOCOL-EXTENSION')))
+    ____Restart_protocolExtensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___Restart_protocolExtensions__item__criticality._const_tab = ____Restart_protocolExtensions__item__criticality_tab
     ___Restart_protocolExtensions__item__criticality._const_tab_at = ('..', u'id')
     ___Restart_protocolExtensions__item__criticality._const_tab_id = u'criticality'
     ___Restart_protocolExtensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('SABP-Containers', 'SABP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___Restart_protocolExtensions__item__extensionValue._const_tab = ____Restart_protocolExtensions__item__id_tab
+    ____Restart_protocolExtensions__item__extensionValue_tab = CLASS(name='_tab_SABP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('SABP-Containers', 'SABP-PROTOCOL-EXTENSION')))
+    ____Restart_protocolExtensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___Restart_protocolExtensions__item__extensionValue._const_tab = ____Restart_protocolExtensions__item__extensionValue_tab
     ___Restart_protocolExtensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___Restart_protocolExtensions__item__extensionValue._const_tab_id = u'Extension'
     __Restart_protocolExtensions__item_._cont = ASN1Dict([
@@ -2362,11 +2452,15 @@ class SABP_PDU_Contents:
     ___Failure_protocolExtensions__item__id._const_tab_at = None
     ___Failure_protocolExtensions__item__id._const_tab_id = u'id'
     ___Failure_protocolExtensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('SABP-Containers', 'SABP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___Failure_protocolExtensions__item__criticality._const_tab = ____Failure_protocolExtensions__item__id_tab
+    ____Failure_protocolExtensions__item__criticality_tab = CLASS(name='_tab_SABP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('SABP-Containers', 'SABP-PROTOCOL-EXTENSION')))
+    ____Failure_protocolExtensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___Failure_protocolExtensions__item__criticality._const_tab = ____Failure_protocolExtensions__item__criticality_tab
     ___Failure_protocolExtensions__item__criticality._const_tab_at = ('..', u'id')
     ___Failure_protocolExtensions__item__criticality._const_tab_id = u'criticality'
     ___Failure_protocolExtensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('SABP-Containers', 'SABP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___Failure_protocolExtensions__item__extensionValue._const_tab = ____Failure_protocolExtensions__item__id_tab
+    ____Failure_protocolExtensions__item__extensionValue_tab = CLASS(name='_tab_SABP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('SABP-Containers', 'SABP-PROTOCOL-EXTENSION')))
+    ____Failure_protocolExtensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___Failure_protocolExtensions__item__extensionValue._const_tab = ____Failure_protocolExtensions__item__extensionValue_tab
     ___Failure_protocolExtensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___Failure_protocolExtensions__item__extensionValue._const_tab_id = u'Extension'
     __Failure_protocolExtensions__item_._cont = ASN1Dict([
@@ -2431,11 +2525,15 @@ class SABP_PDU_Contents:
     ___Error_Indication_protocolExtensions__item__id._const_tab_at = None
     ___Error_Indication_protocolExtensions__item__id._const_tab_id = u'id'
     ___Error_Indication_protocolExtensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('SABP-Containers', 'SABP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___Error_Indication_protocolExtensions__item__criticality._const_tab = ____Error_Indication_protocolExtensions__item__id_tab
+    ____Error_Indication_protocolExtensions__item__criticality_tab = CLASS(name='_tab_SABP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('SABP-Containers', 'SABP-PROTOCOL-EXTENSION')))
+    ____Error_Indication_protocolExtensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___Error_Indication_protocolExtensions__item__criticality._const_tab = ____Error_Indication_protocolExtensions__item__criticality_tab
     ___Error_Indication_protocolExtensions__item__criticality._const_tab_at = ('..', u'id')
     ___Error_Indication_protocolExtensions__item__criticality._const_tab_id = u'criticality'
     ___Error_Indication_protocolExtensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('SABP-Containers', 'SABP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___Error_Indication_protocolExtensions__item__extensionValue._const_tab = ____Error_Indication_protocolExtensions__item__id_tab
+    ____Error_Indication_protocolExtensions__item__extensionValue_tab = CLASS(name='_tab_SABP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('SABP-Containers', 'SABP-PROTOCOL-EXTENSION')))
+    ____Error_Indication_protocolExtensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___Error_Indication_protocolExtensions__item__extensionValue._const_tab = ____Error_Indication_protocolExtensions__item__extensionValue_tab
     ___Error_Indication_protocolExtensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___Error_Indication_protocolExtensions__item__extensionValue._const_tab_id = u'Extension'
     __Error_Indication_protocolExtensions__item_._cont = ASN1Dict([
@@ -2518,7 +2616,9 @@ class SABP_PDU_Contents:
         _Write_Replace_Complete_protocolIEs,
         ____Write_Replace_Complete_protocolExtensions__item__id_tab,
         ___Write_Replace_Complete_protocolExtensions__item__id,
+        ____Write_Replace_Complete_protocolExtensions__item__criticality_tab,
         ___Write_Replace_Complete_protocolExtensions__item__criticality,
+        ____Write_Replace_Complete_protocolExtensions__item__extensionValue_tab,
         ___Write_Replace_Complete_protocolExtensions__item__extensionValue,
         __Write_Replace_Complete_protocolExtensions__item_,
         _Write_Replace_Complete_protocolExtensions,
@@ -2542,7 +2642,9 @@ class SABP_PDU_Contents:
         _Write_Replace_Failure_protocolIEs,
         ____Write_Replace_Failure_protocolExtensions__item__id_tab,
         ___Write_Replace_Failure_protocolExtensions__item__id,
+        ____Write_Replace_Failure_protocolExtensions__item__criticality_tab,
         ___Write_Replace_Failure_protocolExtensions__item__criticality,
+        ____Write_Replace_Failure_protocolExtensions__item__extensionValue_tab,
         ___Write_Replace_Failure_protocolExtensions__item__extensionValue,
         __Write_Replace_Failure_protocolExtensions__item_,
         _Write_Replace_Failure_protocolExtensions,
@@ -2565,7 +2667,9 @@ class SABP_PDU_Contents:
         _Kill_protocolIEs,
         ____Kill_protocolExtensions__item__id_tab,
         ___Kill_protocolExtensions__item__id,
+        ____Kill_protocolExtensions__item__criticality_tab,
         ___Kill_protocolExtensions__item__criticality,
+        ____Kill_protocolExtensions__item__extensionValue_tab,
         ___Kill_protocolExtensions__item__extensionValue,
         __Kill_protocolExtensions__item_,
         _Kill_protocolExtensions,
@@ -2587,7 +2691,9 @@ class SABP_PDU_Contents:
         _Kill_Complete_protocolIEs,
         ____Kill_Complete_protocolExtensions__item__id_tab,
         ___Kill_Complete_protocolExtensions__item__id,
+        ____Kill_Complete_protocolExtensions__item__criticality_tab,
         ___Kill_Complete_protocolExtensions__item__criticality,
+        ____Kill_Complete_protocolExtensions__item__extensionValue_tab,
         ___Kill_Complete_protocolExtensions__item__extensionValue,
         __Kill_Complete_protocolExtensions__item_,
         _Kill_Complete_protocolExtensions,
@@ -2611,7 +2717,9 @@ class SABP_PDU_Contents:
         _Kill_Failure_protocolIEs,
         ____Kill_Failure_protocolExtensions__item__id_tab,
         ___Kill_Failure_protocolExtensions__item__id,
+        ____Kill_Failure_protocolExtensions__item__criticality_tab,
         ___Kill_Failure_protocolExtensions__item__criticality,
+        ____Kill_Failure_protocolExtensions__item__extensionValue_tab,
         ___Kill_Failure_protocolExtensions__item__extensionValue,
         __Kill_Failure_protocolExtensions__item_,
         _Kill_Failure_protocolExtensions,
@@ -2632,7 +2740,9 @@ class SABP_PDU_Contents:
         _Load_Query_protocolIEs,
         ____Load_Query_protocolExtensions__item__id_tab,
         ___Load_Query_protocolExtensions__item__id,
+        ____Load_Query_protocolExtensions__item__criticality_tab,
         ___Load_Query_protocolExtensions__item__criticality,
+        ____Load_Query_protocolExtensions__item__extensionValue_tab,
         ___Load_Query_protocolExtensions__item__extensionValue,
         __Load_Query_protocolExtensions__item_,
         _Load_Query_protocolExtensions,
@@ -2650,7 +2760,9 @@ class SABP_PDU_Contents:
         _Load_Query_Complete_protocolIEs,
         ____Load_Query_Complete_protocolExtensions__item__id_tab,
         ___Load_Query_Complete_protocolExtensions__item__id,
+        ____Load_Query_Complete_protocolExtensions__item__criticality_tab,
         ___Load_Query_Complete_protocolExtensions__item__criticality,
+        ____Load_Query_Complete_protocolExtensions__item__extensionValue_tab,
         ___Load_Query_Complete_protocolExtensions__item__extensionValue,
         __Load_Query_Complete_protocolExtensions__item_,
         _Load_Query_Complete_protocolExtensions,
@@ -2670,7 +2782,9 @@ class SABP_PDU_Contents:
         _Load_Query_Failure_protocolIEs,
         ____Load_Query_Failure_protocolExtensions__item__id_tab,
         ___Load_Query_Failure_protocolExtensions__item__id,
+        ____Load_Query_Failure_protocolExtensions__item__criticality_tab,
         ___Load_Query_Failure_protocolExtensions__item__criticality,
+        ____Load_Query_Failure_protocolExtensions__item__extensionValue_tab,
         ___Load_Query_Failure_protocolExtensions__item__extensionValue,
         __Load_Query_Failure_protocolExtensions__item_,
         _Load_Query_Failure_protocolExtensions,
@@ -2691,7 +2805,9 @@ class SABP_PDU_Contents:
         _Message_Status_Query_protocolIEs,
         ____Message_Status_Query_protocolExtensions__item__id_tab,
         ___Message_Status_Query_protocolExtensions__item__id,
+        ____Message_Status_Query_protocolExtensions__item__criticality_tab,
         ___Message_Status_Query_protocolExtensions__item__criticality,
+        ____Message_Status_Query_protocolExtensions__item__extensionValue_tab,
         ___Message_Status_Query_protocolExtensions__item__extensionValue,
         __Message_Status_Query_protocolExtensions__item_,
         _Message_Status_Query_protocolExtensions,
@@ -2713,7 +2829,9 @@ class SABP_PDU_Contents:
         _Message_Status_Query_Complete_protocolIEs,
         ____Message_Status_Query_Complete_protocolExtensions__item__id_tab,
         ___Message_Status_Query_Complete_protocolExtensions__item__id,
+        ____Message_Status_Query_Complete_protocolExtensions__item__criticality_tab,
         ___Message_Status_Query_Complete_protocolExtensions__item__criticality,
+        ____Message_Status_Query_Complete_protocolExtensions__item__extensionValue_tab,
         ___Message_Status_Query_Complete_protocolExtensions__item__extensionValue,
         __Message_Status_Query_Complete_protocolExtensions__item_,
         _Message_Status_Query_Complete_protocolExtensions,
@@ -2737,7 +2855,9 @@ class SABP_PDU_Contents:
         _Message_Status_Query_Failure_protocolIEs,
         ____Message_Status_Query_Failure_protocolExtensions__item__id_tab,
         ___Message_Status_Query_Failure_protocolExtensions__item__id,
+        ____Message_Status_Query_Failure_protocolExtensions__item__criticality_tab,
         ___Message_Status_Query_Failure_protocolExtensions__item__criticality,
+        ____Message_Status_Query_Failure_protocolExtensions__item__extensionValue_tab,
         ___Message_Status_Query_Failure_protocolExtensions__item__extensionValue,
         __Message_Status_Query_Failure_protocolExtensions__item_,
         _Message_Status_Query_Failure_protocolExtensions,
@@ -2758,7 +2878,9 @@ class SABP_PDU_Contents:
         _Reset_protocolIEs,
         ____Reset_protocolExtensions__item__id_tab,
         ___Reset_protocolExtensions__item__id,
+        ____Reset_protocolExtensions__item__criticality_tab,
         ___Reset_protocolExtensions__item__criticality,
+        ____Reset_protocolExtensions__item__extensionValue_tab,
         ___Reset_protocolExtensions__item__extensionValue,
         __Reset_protocolExtensions__item_,
         _Reset_protocolExtensions,
@@ -2776,7 +2898,9 @@ class SABP_PDU_Contents:
         _Reset_Complete_protocolIEs,
         ____Reset_Complete_protocolExtensions__item__id_tab,
         ___Reset_Complete_protocolExtensions__item__id,
+        ____Reset_Complete_protocolExtensions__item__criticality_tab,
         ___Reset_Complete_protocolExtensions__item__criticality,
+        ____Reset_Complete_protocolExtensions__item__extensionValue_tab,
         ___Reset_Complete_protocolExtensions__item__extensionValue,
         __Reset_Complete_protocolExtensions__item_,
         _Reset_Complete_protocolExtensions,
@@ -2796,7 +2920,9 @@ class SABP_PDU_Contents:
         _Reset_Failure_protocolIEs,
         ____Reset_Failure_protocolExtensions__item__id_tab,
         ___Reset_Failure_protocolExtensions__item__id,
+        ____Reset_Failure_protocolExtensions__item__criticality_tab,
         ___Reset_Failure_protocolExtensions__item__criticality,
+        ____Reset_Failure_protocolExtensions__item__extensionValue_tab,
         ___Reset_Failure_protocolExtensions__item__extensionValue,
         __Reset_Failure_protocolExtensions__item_,
         _Reset_Failure_protocolExtensions,
@@ -2816,7 +2942,9 @@ class SABP_PDU_Contents:
         _Restart_protocolIEs,
         ____Restart_protocolExtensions__item__id_tab,
         ___Restart_protocolExtensions__item__id,
+        ____Restart_protocolExtensions__item__criticality_tab,
         ___Restart_protocolExtensions__item__criticality,
+        ____Restart_protocolExtensions__item__extensionValue_tab,
         ___Restart_protocolExtensions__item__extensionValue,
         __Restart_protocolExtensions__item_,
         _Restart_protocolExtensions,
@@ -2834,7 +2962,9 @@ class SABP_PDU_Contents:
         _Failure_protocolIEs,
         ____Failure_protocolExtensions__item__id_tab,
         ___Failure_protocolExtensions__item__id,
+        ____Failure_protocolExtensions__item__criticality_tab,
         ___Failure_protocolExtensions__item__criticality,
+        ____Failure_protocolExtensions__item__extensionValue_tab,
         ___Failure_protocolExtensions__item__extensionValue,
         __Failure_protocolExtensions__item_,
         _Failure_protocolExtensions,
@@ -2854,7 +2984,9 @@ class SABP_PDU_Contents:
         _Error_Indication_protocolIEs,
         ____Error_Indication_protocolExtensions__item__id_tab,
         ___Error_Indication_protocolExtensions__item__id,
+        ____Error_Indication_protocolExtensions__item__criticality_tab,
         ___Error_Indication_protocolExtensions__item__criticality,
+        ____Error_Indication_protocolExtensions__item__extensionValue_tab,
         ___Error_Indication_protocolExtensions__item__extensionValue,
         __Error_Indication_protocolExtensions__item_,
         _Error_Indication_protocolExtensions,

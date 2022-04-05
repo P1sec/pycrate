@@ -1,7 +1,7 @@
 # -*- coding: UTF-8 -*-
 #/**
 # * Software Name : pycrate
-# * Version : 0.3
+# * Version : 0.4
 # *
 # * Copyright 2016. Benoit Michau. ANSSI.
 # *
@@ -27,7 +27,7 @@
 # *--------------------------------------------------------
 #*/
 
-from keyword import iskeyword
+import copy
 
 from .utils  import *
 from .glob   import *
@@ -315,11 +315,6 @@ def typeref_to_defin(Obj):
         else:
             assert()
 
-def name_to_defin(n):
-    if iskeyword(n):
-        # n is a Python keyword
-        n += '_'
-    return n.replace('-', '_').replace(' ', '_')
 
 class PycrateGenerator(_Generator):
     """
@@ -480,6 +475,12 @@ class PycrateGenerator(_Generator):
             self._allobj_[InstSeq._pyname] = InstSeq
             return
         #
+        # 3bis) in case of parameterized object with no referrers
+        # need to consider it as a standard object
+        if Obj._param and \
+        sum([len(param['ref']) for param in Obj._param.values()]) == 0:
+            Obj._param = None
+        #
         # 4) initialize the object Python instance
         self.wrl('{0} = {1}({2})'.format(Obj._pyname,
                                          Obj.__class__.__name__,
@@ -600,9 +601,10 @@ class PycrateGenerator(_Generator):
         self.gen_const_val(Obj)
     
     def gen_type_real(self, Obj):
+        # components constraint
+        self.gen_const_comps(Obj)
         # value constraint
         self.gen_const_val(Obj)
-        # TODO: apply CONST_COMPS if exists
     
     def gen_type_enum(self, Obj):
         # enum content
@@ -655,9 +657,10 @@ class PycrateGenerator(_Generator):
         self.gen_const_val(Obj)
     
     def gen_type_choice(self, Obj):
+        # components constraint
+        self.gen_const_comps(Obj)
         # content: ASN1Dict of {name: ASN1Obj}
         if Obj._cont is not None:
-            # TODO: apply CONST_COMPS if exists
             # create all objects of the content first
             links = ASN1Dict()
             for name in Obj._cont:
@@ -679,9 +682,10 @@ class PycrateGenerator(_Generator):
         self.gen_const_val(Obj)
     
     def gen_type_seq(self, Obj):
+        # components constraint
+        self.gen_const_comps(Obj)
         # content: ASN1Dict of {name: ASN1Obj}
         if Obj._cont is not None:
-            # TODO: apply CONST_COMPS if exists
             # create all objects of the content first
             links = ASN1Dict()
             for name in Obj._cont:
@@ -703,9 +707,10 @@ class PycrateGenerator(_Generator):
         self.gen_const_val(Obj)
     
     def gen_type_seqof(self, Obj):
+        # component constraint
+        self.gen_const_comp(Obj)
         # content: ASN1Obj
         if Obj._cont is not None:
-            # TODO: apply CONST_COMP if exists
             # create the object of the content first
             Cont = Obj._cont
             Cont._pyname = '_{0}_{1}'.format(Obj._pyname, name_to_defin(Cont._name))
@@ -740,7 +745,7 @@ class PycrateGenerator(_Generator):
         Consts_val = [C for C in Obj._const if C['type'] == CONST_VAL]
         if Consts_val:
             if len(Consts_val) > 1:
-                asnlog('WNG, {0}.{1}: multiple OPEN type value constraints, compiling only '\
+                asnlog('WNG: {0}.{1}: multiple OPEN type value constraints, compiling only '\
                        'the first'.format(self._mod_name, Obj._name))
             Const = Consts_val[0]
             # process the root part of the constraint
@@ -812,9 +817,15 @@ class PycrateGenerator(_Generator):
         if not [C for C in Obj._const if C['type'] == CONST_VAL]:
             return
         # value constraint: reducing all value constraint to a single one
-        Consts_val = [C for C in Obj.get_const() if C['type'] == CONST_VAL]
+        Consts_val = [C for C in Obj.get_const() if C['type'] == CONST_VAL \
+                      and ('excl' not in C or C['excl'] == False)]
+        Consts_val_excl = [C for C in Obj.get_const() if C['type'] == CONST_VAL \
+                           and ('excl' in C and C['excl'] == True)]
         if Consts_val:
             Sval = reduce_setdicts(Consts_val)
+            if Consts_val_excl:
+                # TODO: support removing excluded values
+                pass
             self.wrl('{0}._const_val = {1}'.format(Obj._pyname, set_to_defin(Sval, Obj, self)))
     
     def gen_const_table(self, Obj):
@@ -822,20 +833,22 @@ class PycrateGenerator(_Generator):
         Consts_tab = [C for C in Obj._const if C['type'] == CONST_TABLE]
         if Consts_tab:
             if len(Consts_tab) > 1:
-                asnlog('WNG, {0}.{1}: multiple table constraint, but compiling only the first'\
+                asnlog('WNG: {0}.{1}: multiple table constraint, but compiling only the first'\
                        .format(self._mod_name, Obj._name))
             Const = Consts_tab[0]
-            #ConstTab = Const['tab']
             link_name = None
             # check if the same constraint was already defined somewhere in the root object
             if hasattr(self, '_const_tabs'):
                 ConstTabVal = Const['tab'].get_val()
-                for ct in self._const_tabs:
-                    # HOLLY PYTHON: comparing damned complex dict values...
-                    if ConstTabVal == ct[1]:
-                        # the table of values get already compiled, just need to link it
-                        link_name = ct[0]
-                        break
+                if len(ConstTabVal['root']) \
+                or ConstTabVal['ext'] is not None and len(ConstTabVal['ext']):
+                    # ensure the table as actual value(s) inside 
+                    for ct in self._const_tabs:
+                        # HOLLY PYTHON: comparing damned complex dict values...
+                        if ConstTabVal == ct[1]:
+                            # the table of values get already compiled, just need to link it
+                            link_name = ct[0]
+                            break
             if link_name is None:
                 # create the table set object
                 Const['tab']._pyname = '_{0}_tab'.format(Obj._pyname)
@@ -856,7 +869,7 @@ class PycrateGenerator(_Generator):
             try:
                 self.wrl('{0}._const_tab_id = {1}'.format(Obj._pyname, repr(Obj._typeref.ced_path[-1])))
             except:
-                asnlog('WNG, {0}.{1}: unavailable table constraint ident, not compiling it'\
+                asnlog('WNG: {0}.{1}: unavailable table constraint ident, not compiling it'\
                        .format(self._mod_name, Obj._name))
                 self.wrl('{0}._const_tab_id = None')
     
@@ -865,7 +878,7 @@ class PycrateGenerator(_Generator):
         Consts_contain = [C for C in Obj._const if C['type'] == CONST_CONTAINING]
         if Consts_contain:
             if len(Consts_contain) > 1:
-                asnlog('WNG, {0}.{1}: multiple CONTAINING constraint, compiling only '\
+                asnlog('WNG: {0}.{1}: multiple CONTAINING constraint, compiling only '\
                        'the first'.format(self._mod_name, Obj._name))
             Const = Consts_contain[0]
             if Const['enc'] is not None:
@@ -879,6 +892,93 @@ class PycrateGenerator(_Generator):
                 self.gen_type(Const['obj'])
                 # now link it to the Obj constraint
                 self.wrl('{0}._const_cont = {1}'.format(Obj._pyname, Const['obj']._pyname))
+    
+    def gen_const_comp(self, Obj):
+        # WITH COMPONENT constraint
+        Consts_comp = [C for C in Obj._const if C['type'] == CONST_COMP]
+        if Consts_comp:
+            # TODO: need to add support for WITH COMPONENT in the compiler
+            pass
+    
+    def gen_const_comps(self, Obj):
+        # WITH COMPONENTS constraint: processing only a single constraint
+        Consts_comps = [C for C in Obj._const if C['type'] == CONST_COMPS]
+        if Consts_comps:
+            if len(Consts_comps) > 1:
+                asnlog('WNG: {0}.{1}: multiple WITH COMPONENTS constraints, '\
+                       'generating only the first'.format(self._mod_name, Obj._name))
+            if Consts_comps[0]['ext'] is not None:
+                asnlog('INF: {0}.{1}: extensible WITH COMPONENTS constraint, '\
+                       'not generating extension'.format(self._mod_name, Obj._name))
+            if not Consts_comps[0]['root']:
+                return
+            '''
+            if len(Consts_comps[0]['root']) > 1:
+                asnlog('WNG: {0}.{1}: multiple root parts in WITH COMPONENTS constraint, '\
+                       'processing only the common components'.format(self._mod_name, Obj._name))
+            '''
+            #
+            '''
+            # this is not required as both step 2 and 3 are commented out
+            #
+            # 1) duplicate the content structure of the object
+            if not Obj._cont:
+                cont, Obj._ext = Obj.get_cont(wext=True)
+                Obj._cont = cont.copy()
+            else:
+                Obj._cont = Obj._cont.copy()
+            for ident, Comp in Obj._cont.items():
+                Obj._cont[ident] = Comp.__class__(Comp)
+            '''
+            #
+            '''
+            # TODO: components need actually to stay there, and be kept OPTIONAL
+            # this is required for proper encoding (mainly PER, OER)
+            # These COMPONENTS constraints need actually to be checked at runtime 
+            # in addition to existing ones, without impacting the structure
+            # of objects content.
+            #
+            # 2) handle absent / present components
+            # gathering present / absent components from the potentially 
+            # multiple possibilities, and keeping only the ones in common
+            pres, abse = set(Consts_comps[0]['root'][0]['_pre']), set(Consts_comps[0]['root'][0]['_abs'])
+            for Const in Consts_comps[0]['root'][1:]:
+                pres.intersection_update(Const['_pre'])
+                abse.intersection_update(Const['_abs'])
+            for ident in abse:
+                # remove the component
+                del Obj._cont[ident]
+            if Obj.TYPE != TYPE_CHOICE:
+                # for CHOICE, the constraint parsing takes care to set in _abs
+                # all components to be removed, when a component is set in _pre
+                # therefore, present components only need to be set as non optional
+                # for SEQUENCE
+                for ident in pres:
+                    if FLAG_OPT in Obj._cont[ident]._flag:
+                        del Obj._cont[ident]._flag[FLAG_OPT]
+            #
+            if len(Consts_comps[0]['root']) > 1:
+                asnlog('WNG: {0}.{1}: multiple root parts in WITH COMPONENTS constraint, '\
+                       'unable to compile them'.format(self._mod_name, Obj._name))
+                return
+            '''
+            #
+            '''
+            # TODO: additional constraints provided through WITH COMPONENTS are not
+            # PER visible and must not be mixed with existing constraints which are
+            # PER visible
+            #
+            # 3) apply additional constraint on components
+            # only if we have a single root component in the constraint
+            Const    = Consts_comps[0]['root'][0]
+            Const_kw = set(Const.keys())
+            Const_kw.remove('_pre')
+            Const_kw.remove('_abs')
+            for ident in Const_kw:
+                Obj._cont[ident]._const = list(Obj._cont[ident]._const)
+                Obj._cont[ident]._const.extend(Const[ident]['const'])
+                #print('%s.%s: %r' % (Obj._name, ident, Obj._cont[ident]._const))
+            '''
 
 #------------------------------------------------------------------------------#
 # JSON graph dependency generator
@@ -917,6 +1017,7 @@ def asnmod_build_dep(mods):
                     else:
                         CallerDict[objname] = [ Ref ]
     return CallerDict, CalledDict
+
 
 class JSONDepGraphGenerator(_Generator):
     """

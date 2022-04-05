@@ -7,10 +7,10 @@
 -- **************************************************************
 
 RNA-Containers {
-itu-t (0) identified-organization (4) etsi (0) mobileDomain (0) 
+itu-t (0) identified-organization (4) etsi (0) mobileDomain (0)
 umts-Access (20) modules (3) rna(7) version1 (1) rna-Containers (5) }
 
-DEFINITIONS AUTOMATIC TAGS ::= 
+DEFINITIONS AUTOMATIC TAGS ::=
 
 BEGIN
 
@@ -93,11 +93,11 @@ WITH SYNTAX {
 --
 -- **************************************************************
 
-ProtocolIE-Container {RNA-PROTOCOL-IES : IEsSetParam} ::= 
+ProtocolIE-Container {RNA-PROTOCOL-IES : IEsSetParam} ::=
 	SEQUENCE (SIZE (0..maxProtocolIEs)) OF
 		ProtocolIE-Field {{IEsSetParam}}
 
-ProtocolIE-Single-Container {RNA-PROTOCOL-IES : IEsSetParam} ::= 
+ProtocolIE-Single-Container {RNA-PROTOCOL-IES : IEsSetParam} ::=
 	ProtocolIE-Field {{IEsSetParam}}
 
 ProtocolIE-Field {RNA-PROTOCOL-IES : IEsSetParam} ::= SEQUENCE {
@@ -122,7 +122,7 @@ ProtocolIE-ContainerList {INTEGER : lowerBound, INTEGER : upperBound, RNA-PROTOC
 --
 -- **************************************************************
 
-ProtocolExtensionContainer {RNA-PROTOCOL-EXTENSION : ExtensionSetParam} ::= 
+ProtocolExtensionContainer {RNA-PROTOCOL-EXTENSION : ExtensionSetParam} ::=
 	SEQUENCE (SIZE (1..maxProtocolExtensions)) OF
 		ProtocolExtensionField {{ExtensionSetParam}}
 
@@ -138,7 +138,7 @@ ProtocolExtensionField {RNA-PROTOCOL-EXTENSION : ExtensionSetParam} ::= SEQUENCE
 --
 -- **************************************************************
 
-PrivateIE-Container {RNA-PRIVATE-IES : IEsSetParam } ::= 
+PrivateIE-Container {RNA-PRIVATE-IES : IEsSetParam } ::=
 	SEQUENCE (SIZE (1.. maxPrivateIEs)) OF
 		PrivateIE-Field {{IEsSetParam}}
 

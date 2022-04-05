@@ -5,10 +5,10 @@
 -- **************************************************************
 
 XwAP-IEs {
-itu-t (0) identified-organization (4) etsi (0) mobileDomain (0) 
+itu-t (0) identified-organization (4) etsi (0) mobileDomain (0)
 eps-Access (21) modules (3) xwap (8) version1 (1) xwap-IEs (2) }
 
-DEFINITIONS AUTOMATIC TAGS ::= 
+DEFINITIONS AUTOMATIC TAGS ::=
 
 BEGIN
 
@@ -23,6 +23,8 @@ IMPORTS
 	id-WLANIdentifier-Item,
 	id-WLANIdentifiersToDelete-Item,
 	id-WLANIdentifiersToDeleteExtension-Item,
+	id-WLANUsage,
+	id-eNBNeighbour-Item,
 
 	maxnoofBands,
 	maxnoofBearers,
@@ -30,7 +32,8 @@ IMPORTS
 	maxnoofErrors,
 	maxnoofFailedMeasObjects,
 	maxnoofMobilitySetItems,
-	maxnoofWLANIdentifierItems
+	maxnoofWLANIdentifierItems,
+	maxnoofeNBNeighbours
 FROM XwAP-Constants
 
 	Criticality,
@@ -43,7 +46,7 @@ FROM XwAP-CommonDataTypes
 	XWAP-PROTOCOL-EXTENSION,
 	ProtocolIE-SingleContainer{},
 	XWAP-PROTOCOL-IES
-FROM XwAP-Containers;	
+FROM XwAP-Containers;
 
 -- A
 
@@ -170,8 +173,8 @@ CauseProtocol ::= ENUMERATED {
 }
 
 CauseRadioNetwork ::= ENUMERATED {
-	unknown-eNB-UE-XwAP-ID, 
-	unknown-WT-UE-XwAP-ID, 
+	unknown-eNB-UE-XwAP-ID,
+	unknown-WT-UE-XwAP-ID,
 	unknown-pair-of-UE-XwAP-ID,
 	wLAN-not-available,
 	security-failure,
@@ -193,7 +196,8 @@ CauseRadioNetwork ::= ENUMERATED {
 	radio-connection-with-UE-lost,
 	failure-in-the-radio-interface-procedure,
 	...,
-	no-report-periodicity
+	no-report-periodicity,
+	wrong-wlan-interworking-mode
 }
 
 CauseTransport ::= ENUMERATED {
@@ -249,11 +253,34 @@ CriticalityDiagnostics-IE-Item-ExtIEs XWAP-PROTOCOL-EXTENSION ::= {
 }
 
 
+-- D
+
+DRB-Identity ::= INTEGER (1..32, ...)
+
 -- E
 
 ENB-ID ::= CHOICE {
 	macroENB-ID			BIT STRING (SIZE(20)),
 	otherENB-ID			ProtocolIE-SingleContainer { {OtherENB-IDIEs} },
+	...,
+	short-macroENB-ID		BIT STRING (SIZE(18)),
+	long-macroENB-ID			BIT STRING (SIZE(21))
+}
+
+ENBNeighbour-List ::= SEQUENCE (SIZE (0.. maxnoofeNBNeighbours)) OF ProtocolIE-SingleContainer { { ENBNeighbour-ItemIEs} }
+
+ENBNeighbour-ItemIEs XWAP-PROTOCOL-IES ::= {
+	{ ID id-eNBNeighbour-Item	CRITICALITY ignore	TYPE ENBNeighbour-Item	PRESENCE mandatory},
+	...
+}
+
+ENBNeighbour-Item ::= SEQUENCE {
+		glogal-eNB-ID			Global-ENB-ID,
+	iE-Extensions			ProtocolExtensionContainer { { ENBNeighbour-Item-ExtIEs} }	OPTIONAL,
+	...
+}
+
+ENBNeighbour-Item-ExtIEs XWAP-PROTOCOL-EXTENSION ::= {
 	...
 }
 
@@ -330,6 +357,29 @@ GTP-TEID	::= OCTET STRING (SIZE (4))
 -- H
 
 HESSID ::= OCTET STRING (SIZE(6))
+
+-- I
+
+IKE-Initiator-Identity ::= OCTET STRING
+
+-- L
+
+LWA-WLAN-AC ::= ENUMERATED {
+	ac-bk, ac-be, ac-vi, ac-vo, ...
+}
+
+LWIP-SeGWSecurityInfo ::= SEQUENCE {
+	lWIP-PSK					LWIP-PSK,
+	iKE-Initiator-Identity		IKE-Initiator-Identity,
+	iE-Extensions				ProtocolExtensionContainer { {LWIP-SeGWSecurityInfo-ExtIEs} }		OPTIONAL,
+	...
+}
+
+LWIP-SeGWSecurityInfo-ExtIEs XWAP-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+LWIP-PSK ::= BIT STRING(SIZE(256))
 
 -- M
 
@@ -444,8 +494,23 @@ TypeOfError ::= ENUMERATED {
 	...
 }
 
+TimeToWait ::= ENUMERATED {
+	v1s,
+	v2s,
+	v5s,
+	v10s,
+	v20s,
+	v60s,
+	...
+}
+
 
 -- U
+
+UE-ContextKeptIndicator ::= ENUMERATED {
+	true,
+	...
+}
 
 UE-Identity ::= OCTET STRING (SIZE (6))
 
@@ -468,7 +533,7 @@ WANMetrics-Item-ExtIEs XWAP-PROTOCOL-EXTENSION ::= {
 
 WLAN-Backhaul-Rate ::= ENUMERATED {r0, r4, r8, r16, r32, r64, r128, r256, r512, r1024, r2048, r4096, r8192, r16384, r32768, r65536, r131072, r262144, r524288, r1048576, r2097152, r4194304, r8388608, r16777216, r33554432, r67108864, r134217728, r268435456, r536870912, r1073741824, r2147483648, r4294967296}
 
-WLANband  ::= ENUMERATED {band2dot4, band5, ...}
+WLANband  ::= ENUMERATED {band2dot4, band5, ..., band60}
 
 WLANBandInformationList ::= SEQUENCE (SIZE (1..maxnoofBands)) OF ProtocolIE-SingleContainer { { WLANBandInformation-ItemIEs} }
 
@@ -554,6 +619,7 @@ WLANInformation ::= SEQUENCE {
 }
 
 WLANInformation-ExtIEs XWAP-PROTOCOL-EXTENSION ::= {
+	{ ID id-WLANUsage	CRITICALITY reject	EXTENSION	WLANUsage	PRESENCE optional},
 	...
 }
 
@@ -566,6 +632,15 @@ WLANSecurityInfo ::= SEQUENCE {
 WLANSecurityInfo-Item-ExtIEs XWAP-PROTOCOL-EXTENSION ::= {
 	...
 }
+
+WLANUsage ::=	ENUMERATED {
+	lWAandLWIP,
+	lWIPonly,
+	...
+}
+
+
+WT-MAC-Address ::= OCTET STRING (SIZE (6))
 
 WTID ::= CHOICE {
 	wTID-Type1			WTID-Type1,

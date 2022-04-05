@@ -1,0 +1,5637 @@
+﻿
+
+
+
+Contents
+Foreword	6
+1	Scope	7
+2	References	7
+3	Definitions, symbols and abbreviations	8
+3.1	Definitions	8
+3.2	Abbreviations	9
+4	General	9
+4.1	Procedure Specification Principles	9
+4.2	Forwards and Backwards Compatibility	9
+4.3	Specification Notations	9
+5	M2AP Services	11
+5.1	M2AP procedure modules	11
+5.2	Parallel transactions	11
+6	Services Expected from Signalling Transport	12
+7	Functions of M2AP	13
+8	M2AP Procedures	14
+8.1	List of M2AP Elementary procedures	14
+8.2	MBMS Session Start	14
+8.2.1	General	14
+8.2.2	Successful Operation	15
+8.2.3	Unsuccessful Operation	16
+8.2.4	Abnormal Conditions	16
+8.3	MBMS Session Stop	16
+8.3.1	General	16
+8.3.2	Successful Operation	16
+8.3.3	Abnormal Conditions	16
+8.4	MBMS Scheduling Information	17
+8.4.1	General	17
+8.4.2	Successful Operation	17
+8.4.3	Abnormal Conditions	17
+8.5	Reset	17
+8.5.1	General	17
+8.5.2	Successful Operation	18
+8.5.2.1	Reset Procedure Initiated from the MCE	18
+8.5.2.2	Reset Procedure Initiated from the eNB	19
+8.5.3	Abnormal Conditions	19
+8.5.3.1 	Abnormal Condition at the MCE	19
+8.5.3.2 	Abnormal Condition at the eNB	20
+8.5.3.3 	Crossing of Reset Messages	20
+8.6	M2 Setup	20
+8.6.1	General	20
+8.6.2	Successful Operation	20
+8.6.3	Unsuccessful Operation	21
+8.6.4	Abnormal Conditions	21
+8.7	eNB Configuration Update	21
+8.7.1	General	21
+8.7.2	Successful Operation	22
+8.7.3	Unsuccessful Operation	23
+8.7.4	Abnormal Conditions	23
+8.8	MCE Configuration Update	23
+8.8.1	General	23
+8.8.2	Successful Operation	24
+8.8.3	Unsuccessful Operation	25
+8.8.4	Abnormal Conditions	25
+8.9	Error Indication	25
+8.9.1	General	25
+8.9.2	Successful Operation	25
+8.9.3	Abnormal Conditions	26
+8.10	MBMS Session Update	26
+8.10.1	General	26
+8.10.2	Successful Operation	26
+8.10.3	Unsuccessful Operation	27
+8.10.4	Abnormal Conditions	27
+8.11	MBMS Service Counting	27
+8.11.1	General	27
+8.11.2	Successful Operation	27
+8.11.3	Unsuccessful Operation	28
+8.11.4	Abnormal Conditions	28
+8.12	MBMS Service Counting Results Report	28
+8.12.1	General	28
+8.12.2	Successful Operation	29
+8.12.3	Abnormal Conditions	29
+8.13	MBMS Overload Notification	29
+8.13.1	General	29
+8.13.2	Successful Operation	29
+8.13.3	Abnormal Conditions	30
+9	Elements for M2AP Communication	31
+9.1	Message Functional Definition and Content	31
+9.1.1	General	31
+9.1.1	Message Contents	31
+9.1.1.1	Presence	31
+9.1.1.2	Criticality	31
+9.1.1.3	Range	31
+9.1.1.4	Assigned Criticality	31
+9.1.2	MBMS SESSION START REQUEST	31
+9.1.3	MBMS SESSION START RESPONSE	32
+9.1.4	MBMS SESSION START FAILURE	32
+9.1.5	MBMS SESSION STOP REQUEST	33
+9.1.6	MBMS SESSION STOP RESPONSE	33
+9.1.7	MBMS SCHEDULING INFORMATION	33
+9.1.8	MBMS SCHEDULING INFORMATION RESPONSE	35
+9.1.9	RESET	35
+9.1.10	RESET ACKNOWLEDGE	35
+9.1.11	M2 SETUP REQUEST	36
+9.1.12	M2 SETUP RESPONSE	36
+9.1.13	M2 SETUP FAILURE	37
+9.1.14	ENB CONFIGURATION UPDATE	37
+9.1.15	ENB CONFIGURATION UPDATE ACKNOWLEDGE	38
+9.1.16	ENB CONFIGURATION UPDATE FAILURE	39
+9.1.17	MCE CONFIGURATION UPDATE	39
+9.1.18	MCE CONFIGURATION UPDATE ACKNOWLEDGE	39
+9.1.19	MCE CONFIGURATION UPDATE FAILURE	40
+9.1.20	ERROR INDICATION	40
+9.1.21	MBMS SESSION UPDATE REQUEST	40
+9.1.22	MBMS SESSION UPDATE RESPONSE	40
+9.1.23	MBMS SESSION UPDATE FAILURE	41
+9.1.24	MBMS SERVICE COUNTING REQUEST	41
+9.1.25	MBMS SERVICE COUNTING RESPONSE	41
+9.1.26	MBMS SERVICE COUNTING FAILURE	42
+9.1.27	MBMS SERVICE COUNTING RESULTS REPORT	42
+9.1.28	MBMS OVERLOAD NOTIFICATION	42
+9.2	Information Element Definitions	43
+9.2.1	Radio Network Layer Related Ies	43
+9.2.1.1	Message Type	43
+9.2.1.2	Cause	43
+9.2.1.3	Void	45
+9.2.1.4	Void	45
+9.2.1.5	Void	46
+9.2.1.6	Void	46
+9.2.1.7	Criticality Diagnostics	46
+9.2.1.8	PMCH Configuration	46
+9.2.1.9	MBMS Session List per PMCH	47
+9.2.1.10	Global eNB ID	48
+9.2.1.11	E-UTRAN CGI	48
+9.2.1.12	eNB MBMS Configuration data Item	48
+9.2.1.13	MCCH related BCCH Configuration Item	49
+9.2.1.14	MBSFN Area Id	50
+9.2.1.15	Time to Wait	50
+9.2.1.16	Global MCE ID	50
+9.2.1.17	MBSFN Subframe Configuration	51
+9.2.1.18	Common Subframe Allocation Period	51
+9.2.1.19	MCCH Update Time	52
+9.2.1.20	MBSFN Synchronisation Area Id	52
+9.2.1.21	Counting Result	52
+9.2.1.22	SC-PTM information	52
+9.2.1.23	MBMS E-RAB QoS parameters	52
+9.2.1.24	GBR QoS Information	53
+9.2.1.25	Bit Rate	53
+9.2.1.26	Allocation and Retention Priority	53
+9.2.1.27	MCCH related BCCH Extended Configuration Item	54
+9.2.2	Transport Network Layer Related Ies	55
+9.2.2.1	IP Address	55
+9.2.2.2	GTP-TEID	56
+9.2.3	NAS Related Ies	56
+9.2.3.1	MCE MBMS M2AP ID	56
+9.2.3.2	eNB MBMS M2AP ID	56
+9.2.3.3	TMGI	56
+9.2.3.4	MBMS Session Identity	56
+9.2.3.5	Void	56
+9.2.3.6	MBMS Service Area	56
+9.2.3.7	PLMN Identity	57
+9.3	Message and Information Element Abstract Syntax (with ASN.1)	58
+9.3.1	General	58
+9.3.2	Usage of Private Message Mechanism for Non-standard Use	58
+9.3.3	Elementary Procedure Definitions	58
+9.3.4	PDU Definitions	63
+9.3.5	Information Element definitions	79
+9.3.6	Common definitions	89
+9.3.7	Constant definitions	90
+9.3.8	Container definitions	92
+9.4	Message Transfer Syntax	97
+9.5	Timers	97
+10	Handling of Unknown, Unforeseen and Erroneous Protocol Data	98
+Annex A (informative): Change history	99
+
+Foreword
+This Technical Specification has been produced by the 3rd Generation Partnership Project (3GPP).
+The contents of the present document are subject to continuing work within the TSG and may change following formal TSG approval. Should the TSG modify the contents of the present document, it will be re-released by the TSG with an identifying change of release date and an increase in version number as follows:
+Version x.y.z
+where:
+x	the first digit:
+1	presented to TSG for information;
+2	presented to TSG for approval;
+3	or greater indicates TSG approved document under change control.
+Y	the second digit is incremented for all changes of substance, i.e. technical enhancements, corrections, updates, etc.
+z	the third digit is incremented when editorial only changes have been incorporated in the document.
+1	Scope
+The present document specifies the E-UTRAN radio network layer signalling protocol for the M2 interface. The M2 Application Protocol (M2AP) supports the functions of the M2 interface by signalling procedures defined in this document. M2AP is developed in accordance to the general principles stated in TS 36.401 [2] and TS 36.300 [3].
+2	References
+The following documents contain provisions which, through reference in this text, constitute provisions of the present document.
+-	References are either specific (identified by date of publication, edition number, version number, etc.) or non‑specific.
+-	For a specific reference, subsequent revisions do not apply.
+-	For a non-specific reference, the latest version applies. In the case of a reference to a 3GPP document (including a GSM document), a non-specific reference implicitly refers to the latest version of that document in the same Release as the present document.
+[1]	3GPP TR 21.905: “Vocabulary for 3GPP Specifications”.
+[2]	3GPP TS 36.401: “E-UTRAN Architecture Description”. 
+[3]	3GPP TS 36.300: “Evolved Universal Terrestrial Radio Access (E-UTRA) and Evolved Universal Terrestrial Radio Access Network (E-UTRAN); Overall description; Stage 2”. 
+[4]	3GPP TS 36.413:  “Evolved Universal Terrestrial Radio Access Network (E-UTRAN); S1 Application Protocol (S1AP)”.
+[5]	ITU-T Recommendation X.691 (07/2002): “Information technology – ASN.1 encoding rules – Specification of Packed Encoding Rules (PER) “.
+[6]	ITU-T Recommendation X.680 (07/2002): “Information technology – Abstract Syntax Notation One (ASN.1): Specification of basic notation”.
+[7]	Void
+[8]	3GPP TS 23.246: “Multimedia Broadcast/Multicast Service (MBMS); Architecture and functional description”.
+[9]	3GPP TS 29.061 “Interworking between the Public Land Mobile Network (PLMN) supporting packet based services and Packet Data Networks (PDN)”.
+[10]	Void
+[11]	3GPP TS 36.331: “Evolved Universal Terrestrial Radio Access (E-UTRAN); Radio Resource Control (RRC) Protocol Specification”.
+[12]	3GPP TS 36.211: “Evolved Universal Terrestrial Radio Access (E-UTRAN); Physical Channels and Modulation”.
+[13]	3GPP TS 36.445: “Evolved Universal Terrestrial Radio Access Network (E-UTRAN); M1 Data Transport”.
+[14]	3GPP TS 29.281: “General Packet Radio Service (GPRS); Tunnelling Protocol User Plane (GTPv1-U)”.
+[15]	3GPP TS 23.203: “Policy and charging control architecture”.
+3	Definitions, symbols and abbreviations
+3.1	Definitions
+For the purposes of the present document, the terms and definitions given in TR 21.905 [1] and the following apply. A term defined in the present document takes precedence over the definition of the same term, if any, in TR 21.905 [1].
+Elementary Procedure: M2AP consists of Elementary Procedures (Eps). An Elementary Procedure is a unit of interaction between eNBs and the MCE. These Elementary Procedures are defined separately and are intended to be used to build up complete sequences in a flexible manner. If the independence between some Eps is restricted, it is described under the relevant EP description. Unless otherwise stated by the restrictions, the Eps may be invoked independently of each other as standalone procedures, which can be active in parallel. The usage of several M2AP Eps together or together with Eps from other interfaces is specified in stage 2 specifications (e.g. TS 36.300 [3] and TS 23.246 [8]).
+An EP consists of an initiating message and possibly a response message. Two kinds of Eps are used:
+-	Class 1: Elementary Procedures with response (success and/or failure).
+-	Class 2: Elementary Procedures without response.
+For Class 1 Eps, the types of responses can be as follows:
+Successful:
+-	A signalling message explicitly indicates that the elementary procedure successfully completed with the receipt of the response.
+Unsuccessful:
+-	A signalling message explicitly indicates that the EP failed.
+-	On time supervision expiry (i.e. absence of expected response).
+Successful and Unsuccessful:
+-	One signalling message reports both successful and unsuccessful outcome for the different included requests. The response message used is the one defined for successful outcome.
+Class 2 Eps are considered always successful.
+eNB MBMS M2AP ID: Unique identity, referencing the MBMS-service-associated logical M2-connection within an eNB.
+MCE MBMS M2AP ID: Unique identity, referencing the MBMS-service-associated logical M2-connection within an MCE.
+MBMS E-RAB: denotes both, the data bearer established between the eNB and the UE(s) to transport MBMS data and the MBMS M1 data bearer.
+MBMS-service-associated signalling: When M2AP messages associated to one MBMS service uses the MBMS-service-associated logical M2-connection for association of the message to the respective MBMS service in eNB and EPC.
+MBMS-service-associated logical M2-connection: The MBMS-service-associated logical M2-connection uses the identities eNB MBMS M2AP ID and MCE MBMS M2AP ID. For a received M2AP message the MCE identifies the associated MBMS E-RAB based on the MCE MBMS M2AP ID IE and the eNB identifies the associated MBMS-RAB based on the eNB MBMS M2AP ID IE.
+
+3.2	Abbreviations
+For the purposes of the present document, the abbreviations given in TR 21.905 [1] and the following apply. An abbreviation defined in the present document takes precedence over the definition of the same abbreviation, if any, in TR 21.905 [1].
+MCCH	Multicast Control Channel 
+PMCH	Physical Multicast Channel 
+SC-PTM	Single Cell Point to Multipoint
+4	General
+4.1	Procedure Specification Principles
+The principle for specifying the procedure logic is to specify the functional behaviour of the terminating node exactly and completely. Any rule that specifies the behaviour of the originating node shall be possible to be verified with information that is visible within the system.
+The following specification principles have been applied for the procedure text in clause 8:
+-	The procedure text discriminates between:
+1)	Functionality which “shall” be executed
+	The procedure text indicates that the receiving node “shall” perform a certain function Y under a certain condition. If the receiving node supports procedure X but cannot perform functionality Y requested in the REQUEST message of a Class 1 EP, the receiving node shall respond with the message used to report unsuccessful outcome for this procedure, containing an appropriate cause value.
+2)	Functionality which “shall, if supported” be executed
+	The procedure text indicates that the receiving node “shall, if supported,” perform a certain function Y under a certain condition. If the receiving node supports procedure X, but does not support functionality Y, the receiving node shall proceed with the execution of the EP, possibly informing the requesting node about the not supported functionality.
+-	Any required inclusion of an optional IE in a response message is explicitly indicated in the procedure text. If the procedure text does not explicitly indicate that an optional IE shall be included in a response message, the optional IE shall not be included. For requirements on including Criticality Diagnostics IE, see section 10 in TS 36.413 [4].
+4.2	Forwards and Backwards Compatibility
+The forwards and backwards compatibility of the protocol is assured by mechanism where all current and future messages, and Ies or groups of related Ies, include ID and criticality fields that are coded in a standard format that will not be changed in the future. These parts can always be decoded regardless of the standard version.
+4.3	Specification Notations
+For the purposes of the present document, the following notations apply:
+Procedure	When referring to an elementary procedure in the specification the Procedure Name is written with the first letters in each word in upper case characters followed by the word “procedure”, e.g. E-RAB procedure.
+Message	When referring to a message in the specification the MESSAGE NAME is written with all letters in upper case characters followed by the word “message”, e.g. MESSAGE NAME message.
+IE	When referring to an information element (IE) in the specification the Information Element Name is written with the first letters in each word in upper case characters and all letters in Italic font followed by the abbreviation “IE”, e.g. Information Element IE.
+Value of an IE	When referring to the value of an information element (IE) in the specification the “Value” is written as it is specified in subclause 9.2 enclosed by quotation marks, e.g. “Value”.
+5	M2AP Services
+The present clause describes the services an eNB offers to its associated MCE.
+5.1	M2AP procedure modules
+The M2 interface M2AP procedures may be sub-divided as follows:
+1.	M2AP MBMS session control procedures;
+2.	M2AP global procedures;
+The M2AP session control procedures are related to MBMS services.
+The Global Procedures module contains procedures that are not related to a specific MBMS service.
+5.2	Parallel transactions
+Unless explicitly indicated in the procedure specification, at any instance in time one protocol peer shall have a maximum of one ongoing M2AP procedure related to a certain MBMS service.
+6	Services Expected from Signalling Transport
+The signalling connection shall provide in sequence delivery of M2AP messages. M2AP shall be notified if the signalling connection breaks.
+7	Functions of M2AP
+The M2AP protocol provides the following functions:
+-	MBMS Session Handling. This function supports start, stop and modify of an MBMS session, as well as configuration and modification of basic radio transmission parameters related to that service.
+-	MBMS Scheduling Information. This function provides MCCH related information, and optional session suspension decision to the eNB.
+-	Reporting of General Error Situations. This function allows reporting of general error situations, for which function specific error messages have not been defined.
+-	Resetting the M2. This function is used to reset the M2 interface. 
+-	Setting up the M2. This function is used to exchange necessary data for the eNB for setup the M2 interface, provides basic configuration of radio parameters for transmission of MBMS data and implicitly perform an M2 Reset.
+-	eNB and MCE Configuration Update functions are to update configuration data exchanged during setup of M2.
+-	MBMS Service Counting. This function enables the MCE to perform counting and to receive the counting results for the MBMS service(s) per MBSFN area.
+-	MBMS Overload Notification. This function enables the eNB to notify the MCE about the MBMS overload status.
+The mapping between the above functions and M2 Eps is shown in the table below.
+Table 1: Mapping between M2AP functions and M2AP Eps
+Function
+Elementary Procedure(s)
+MBMS Session Handling
+a) MBMS Session Start
+b) MBMS Session Stop 
+c) MBMS Session Update
+MBMS Scheduling Information
+MBMS Scheduling Information
+Reporting of General Error Situations
+Error Indication
+Resetting the M2
+Reset
+Setting up the M2
+M2 Setup
+Configuration Update
+a) eNB Configuration Update
+b) MCE Configuration Update
+MBMS Service Counting
+a) MBMS Service Counting
+b) MBMS Service Counting Results Report
+MBMS Overload Notification
+MBMS Overload Notification
+
+8	M2AP Procedures
+8.1	List of M2AP Elementary procedures
+In the following tables, all Eps are divided into Class 1 and Class 2 Eps (see subclause 3.1 for explanation of the different classes):
+Table 2: Class 1 procedures
+Elementary Procedure
+Initiating Message
+Successful Outcome
+Unsuccessful Outcome
+
+
+Response message
+Response message
+MBMS Session Start
+MBMS SESSION START REQUEST
+MBMS SESSION START RESPONSE
+MBMS SESSION START FAILURE
+MBMS Session Stop
+MBMS SESSION STOP REQUEST
+MBMS SESSION STOP RESPONSE
+
+MBMS Session Update
+MBMS SESSION UPDATE REQUEST
+MBMS SESSION UPDATE RESPONSE
+MBMS SESSION UPDATE FAILURE
+MBMS Scheduling Information
+MBMS SCHEDULING INFORMATION 
+MBMS SCHEDULING INFORMATION RESPONSE
+
+Reset
+RESET
+RESET ACKNOWLEDGE
+
+M2 Setup
+M2 SETUP REQUEST
+M2 SETUP RESPONSE
+M2 SETUP FAILURE
+eNB Configuration Update
+ENB CONFIGURATION UPDATE
+ENB CONFIGURATION UPDATE ACKNOWLEDGE
+ENB CONFIGURATION UPDATE FAILURE
+MCE Configuration Update
+MCE CONFIGURATION UPDATE
+MCE CONFIGURATION UPDATE ACKNOWLEDGE
+MCE CONFIGURATION UPDATE FAILURE
+MBMS Service Counting
+MBMS SERVICE COUNTING REQUEST
+MBMS SERVICE COUNTING RESPONSE
+MBMS SERVICE COUNTING FAILURE
+
+Table 3: Class 2 procedures
+Elementary Procedure
+Message
+Error Indication
+ERROR INDICATION
+MBMS Service Counting Results Report
+MBMS SERVICE COUNTING RESULTS REPORT
+MBMS Overload Notification
+MBMS OVERLOAD NOTIFICATION
+
+The following applies concerning interference between Elementary Procedures:
+-	The Reset procedure takes precedence over all other Eps.
+8.2	MBMS Session Start
+8.2.1	General
+The purpose of the MBMS Session Start procedure is to request the eNB to notify Ues about an upcoming MBMS Session of a given MBMS Bearer Service and to establish an MBMS E-RAB and an MBMS-service-associated logical M2-connection. The MBMS Session Start procedure is triggered by the MCE.
+The procedure uses MBMS-Service-associated signalling.
+8.2.2	Successful Operation
+
+Figure 8.2.2-1. MBMS Session Start procedure. Successful operation.
+The MCE initiates the procedure by sending an MBMS SESSION START REQUEST message. If the eNB accepts the MBMS session start request, the eNB responds with the MBMS SESSION START RESPONSE message. The eNB shall select and join the IP multicast (identified by the IP multicast address and the IP address of the multicast source as described by the TNL Information IE or, if present, the Alternative TNL Information IE) to enable the reception of MBMS data.
+If the MBMS SESSION START REQUEST message contains the MBMS Session Identity IE, the eNB shall use it for broadcast of the MBMS Session Identity on the air interface.
+If the MBMS SESSION START REQUEST message contains the SC-PTM information IE, the eNB shall use SC-PTM for the related MBMS service in the relevant cells. The eNB shall establish or modify the resources according to the values of the Allocation and Retention Priority IE (priority level and pre-emption indicators) and the resource situation as follows:
+-	The eNB shall consider the priority level of the requested session, when deciding on the resource allocation.
+-	The priority levels and the pre-emption indicators may (individually or in combination) be used to determine whether the session has to be started unconditionally and immediately. If the requested session is marked as “may trigger pre-emption” and the resource situation requires so, the eNB may trigger the pre-emption procedure which may then cause the forced release of a lower priority session which is marked as “pre-emptable”. Whilst the process and the extent of the pre-emption procedure is operator-dependent, the pre-emption indicators shall be treated as follows:
+1.	If the Pre-emption Capability IE is set to “may trigger pre-emption”, then this allocation request is allowed to trigger a pre-emption procedure.
+2.	If the Pre-emption Capability IE is set to “shall not trigger pre-emption”, then this allocation request is not allowed to trigger a pre-emption procedure.
+3.	If the Pre-emption Vulnerability IE is set to “pre-emptable”, then this session shall be included in the pre-emption process.
+4.	If the Pre-emption Vulnerability IE is set to “not pre-emptable”, then this session shall not be included in the pre-emption process.
+5.	If the Priority Level IE is set to “no priority” the given values for the Pre-emption Capability IE and Pre-emption Vulnerability IE shall not be considered. Instead the values “shall not trigger pre-emption” and “not pre-emptable” shall prevail.
+-	The E-UTRAN pre-emption process shall keep the following rule: E-UTRAN shall only pre-empt sessions with lower priority, in ascending order of priority.
+The eNB shall report to the MCE, in the MBMS SESSION START RESPONSE message the result of the requested MBMS E-RAB.
+8.2.3	Unsuccessful Operation
+
+Figure 8.2.3-1. MBMS Session Start procedure. Unsuccessful operation.
+If the eNB is not capable of correctly processing the request (e.g. the MBMS resources could not be established at all in any cell), the MCE shall be informed by the MBMS SESSION START FAILURE message.
+8.2.4	Abnormal Conditions
+In case the SC-PTM information IE is received, but does not contain any cell of the eNB, the MCE shall be informed by the MBMS SESSION START FAILURE message.
+8.3	MBMS Session Stop
+8.3.1	General
+The purpose of the MBMS Session Stop procedure is to release the corresponding MBMS E-RAB and the MBMS-service-associated logical M2-connection. The MBMS Session Stop procedure is triggered by the MCE.
+The procedure uses MBMS-Service-associated signalling.
+8.3.2	Successful Operation
+
+Figure 8.3.2-1. MBMS Session Stop procedure. Successful operation.
+The MCE initiates the procedure by sending a MBMS SESSION STOP REQUEST message. Upon receipt of the MBMS SESSION STOP REQUEST message, the eNB shall respond with the MBMS SESSION STOP RESPONSE message. The eNB shall disable the reception from the IP backbone of the particular MBMS bearer service, release the affected resources and remove the MBMS bearer context.
+8.3.3	Abnormal Conditions
+Void.
+8.4	MBMS Scheduling Information
+8.4.1	General
+The purpose of the MBMS Scheduling Information Procedure is to provide MCCH related information, and optional session suspension decision to the eNB.
+The procedure uses non MBMS-Service-associated signalling.
+8.4.2	Successful Operation
+
+Figure 8.4.2-1. MBMS Scheduling Information procedure. Successful operation.
+The MCE initiates the procedure by sending the MBMS SCHEDULING INFORMATION message to the eNB. The eNB shall store the MBSFN Area Configuration Item IE, apply the MCCH update from the modification period defined in the MCCH Update Time IE, and transmit the MCCH according to the MCCH configuration for the given MBSFN area indicated by the MCE. If an empty PMCH Configuration List IE is contained in this message for an MBSFN area, the eNB shall update the content of the corresponding MCCH so as not to include PMCH related information over the corresponding MCCH. If the Modulation and Coding Scheme 2 IE is included, the eNB shall ignore the Modulation and Coding Scheme IE and use the Modulation and Coding Scheme 2 IE instead. If the received PMCH Configuration IE contains the MCH Scheduling Period Extended IE, the eNB shall take its value into account instead of the value signalled in the MCH Scheduling Period IE. If the received PMCH Configuration IE contains the MCH Scheduling Period Extended 2 IE, the eNB shall take its value into account instead of the value signalled in the MCH Scheduling Period IE. The eNB shall schedule the MBMS services in the MCCH according to the order defined in the MBMS Session List per PMCH IE. If the MBMS Suspension Notification List IE is included in this message for an MBSFN area, the eNB shall broadcast the suspension decision over the air interface from the radio frame defined by the SFN IE, until the end of the Modification Period just before the "MCCH Update Time".
+If the MBMS SCHEDULING INFORMATION message contains the Subframe Allocation Extended IE included in the MBSFN Subframe Configuration IE, the eNB shall, if supported, store it and take it into account.
+8.4.3	Abnormal Conditions
+Void.
+8.5	Reset
+8.5.1	General
+The purpose of the Reset procedure is to initialise or re-initialise the eNB or part of eNB M2AP MBMS-service-related contexts, in the event of a failure in the MCE or vice versa. This procedure does not affect the application level configuration data exchanged during, e.g., the M2 Setup procedure.
+The procedure uses non MBMS-service-associated signalling.
+8.5.2	Successful Operation
+8.5.2.1	Reset Procedure Initiated from the MCE
+
+Figure 8.5.2.1-1. Reset procedure initiated from the MCE. Successful operation.
+In the event of a failure at the MCE, which has resulted in the loss of some or all transaction reference information, a RESET message shall be sent to the eNB.
+At reception of RESET message the eNB shall release all allocated resources on M2 and M1/Uu related to MBMS-service association(s) indicated explicitly or implicitly in the RESET message and remove the indicated MBMS-service contexts including MBMS M2AP IDs.
+After the eNB has released all assigned M2 and M1 resources and MBMS-service contexts for all indicated MBMS-service association(s), the eNB shall respond with the RESET ACKNOWLEDGE message. The eNB does not need to wait for the release of radio resources to be completed before returning the RESET ACKNOWLEDGE message. 
+If the RESET message contains the MBMS-Service-associated logical M2-connection list IE, then:
+-	The eNB shall use the MCE MBMS M2AP ID IE and/or the eNB MBMS M2AP ID IE to explicitly identify the MBMS service association(s) to be reset.
+-	The eNB shall in the RESET ACKNOWLEDGE message include, for each MBMS service association to be reset, the MBMS-Service-associated logical M2-connection Item IE in the MBMS-Service-associated logical M2-connection list IE. The MBMS-Service-associated logical M2-connection Item Ies shall be in the same order as received in the RESET message and shall include also unknown MBMS-Service-associated logical M2-connections. Empty MBMS-Service-associated logical M2-connection Item Ies, received in the RESET message, may be omitted in the RESET ACKNOWLEDGE message.
+-	If the MCE MBMS M2AP ID IE is included in the MBMS-Service-associated logical M2-connection Item IE for an MBMS service association, the eNB shall include the MCE MBMS M2AP ID IE in the corresponding MBMS-Service-associated logical M2-connection Item IE in the RESET ACKNOWLEDGE message.
+-	If the eNB MBMS M2AP ID IE is included in an MBMS-Service-associated logical M2-connection Item IE for an MBMS service association, the eNB shall include the eNB MBMS M2AP ID IE in the corresponding MBMS-Service-associated logical M2-connection Item IE in the RESET ACKNOWLEDGE message.
+Interactions with other procedures:
+If the RESET message is received, any other ongoing procedure (except another Reset procedure) on the same M2 interface related to a MBMS service association, indicated explicitly or implicitly in the RESET message, shall be aborted.
+8.5.2.2	Reset Procedure Initiated from the eNB
+
+Figure 8.5.2.2-1. Reset procedure initiated from the eNB. Successful operation.
+In the event of a failure at the eNB, which has resulted in the loss of some or all transaction reference information, a RESET message shall be sent to the MCE.
+At reception of RESET message the MCE shall release all allocated resources on M2 related to MBMS-service association(s) indicated explicitly or implicitly in the RESET message and the indicated MBMS-service contexts on M2 for the eNB.
+After the MCE has released all assigned M2 resources and MBMS-service contexts for all the eNB indicated MBMS-service association(s), the MCE shall respond with the RESET ACKNOWLEDGE message.
+If the RESET message contains the MBMS-Service-associated logical M2-connection list IE, then:
+-	The MCE shall use the MCE MBMS M2AP ID IE and/or the eNB MBMS M2AP ID IE to explicitly identify the MBMS service association(s) to be reset.
+-	The MCE shall in the RESET ACKNOWLEDGE message include, for each MBMS service association to be reset, the MBMS-Service-associated logical M2-connection Item IE in the MBMS-Service-associated logical M2-connection list IE. The MBMS-Service-associated logical M2-connection Item Ies shall be in the same order as received in the RESET message and shall include also unknown MBMS-Service-associated logical M2-connections. Empty MBMS-Service-associated logical M2-connection Item Ies, received in the RESET message, may be omitted in the RESET ACKNOWLEDGE message.
+-	If the MCE MBMS M2AP ID IE is included in the MBMS-Service-associated logical M2-connection Item IE for an MBMS service association, the MCE shall include the MCE MBMS M2AP ID IE in the corresponding MBMS-Service-associated logical M2-connection Item IE in the RESET ACKNOWLEDGE message.
+-	If the eNB MBMS M2AP ID IE is included in an MBMS-Service-associated logical M2-connection Item IE for an MBMS service association, the MCE shall include the eNB MBMS M2AP ID IE in the corresponding MBMS-Service-associated logical M2-connection Item IE in the RESET ACKNOWLEDGE message.
+Interactions with other procedures:
+If the RESET message is received, any other ongoing procedure (except another Reset procedure) on same M2 interface related to a MBMS service association, indicated explicitly or implicitly in the RESET message, shall be aborted.
+8.5.3	Abnormal Conditions
+8.5.3.1 	Abnormal Condition at the MCE 
+If the RESET message includes the MBMS-Service-associated logical M2-connection list IE, but neither the MCE MBMS M2AP ID IE nor the eNB MBMS M2AP ID IE is present for a MBMS-Service-associated logical M2-connection Item IE, then the MCE shall ignore the MBMS-Service-associated logical M2-connection Item IE. The MCE may return the empty MBMS-Service-associated logical M2-connection Item IE in the MBMS-Service-associated logical M2-connection list IE in the RESET ACKNOWLEDGE message. 
+8.5.3.2 	Abnormal Condition at the eNB 
+If the RESET message includes the MBMS-Service-associated logical M2-connection list IE, but neither the MCE MBMS M2AP ID IE nor the eNB MBMS M2AP ID IE is present for a MBMS-Service-associated logical M2-connection Item IE, then the eNB shall ignore the MBMS-Service-associated logical M2-connection Item IE. The eNB may return the empty MBMS-Service-associated logical M2-connection Item IE in the MBMS-Service-associated logical M2-connection list IE in the RESET ACKNOWLEDGE message. 
+8.5.3.3 	Crossing of Reset Messages 
+If Reset procedure is ongoing in eNB and the eNB receives a RESET message from the peer entity on the same M2 interface related to one or several MBMS service associations previously requested to be reset, indicated explicitly or implicitly in the received RESET message, the eNB shall respond with RESET ACKNOWLEDGE message as described in 8.5.2.1.
+If Reset procedure is ongoing in MCE and the MCE receives a RESET message from the peer entity on the same M2 interface related to one or several MBMS service associations previously requested to be reset, indicated explicitly or implicitly in the received RESET message, the MCE shall respond with RESET ACKNOWLEDGE message as described in 8.5.2.2.
+8.6	M2 Setup
+8.6.1	General
+The purpose of the M2 Setup procedure is to exchange application level data needed for the eNB and MCE to interoperate correctly on the M2 interface and to configure MCCH related content on the BCCH for each of the cells controlled by the eNB which is foreseen to participate in MBMS service data transmission. This procedure shall be the first M2AP procedure triggered after the TNL association has become operational. The procedure uses non MBMS-service-associated signalling.
+This procedure erases any existing application level configuration data in the eNB and the MCE and MCCH related BCCH data in all cells served by the eNB. This procedure also re-initialises the E-UTRAN M2AP MBMS service related contexts (if any) and erases all related signalling connections in the two nodes like a Reset procedure would do.
+8.6.2	Successful Operation
+
+Figure 8.6.2-1. M2 Setup procedure. Successful operation.
+The eNB initiates the procedure by sending a M2 SETUP REQUEST message including the appropriate data to the MCE. The eNB shall include in the M2 SETUP REQUEST message the cell(s) which is (are) foreseen to participate in MBMS service data transmission.
+The MCE responds with M2 SETUP RESPONSE message including the appropriate data. The MCE shall provide the MCCH related BCCH configuration (and, if required, the MCCH related BCCH extended configuration) for all cells indicated in the M2 SETUP REQUEST message.
+The exchanged data shall be stored in the respective node, MCCH related BCCH configuration broadcasted as provided by the MCE in the respective cell(s), and used for the duration of the TNL association or until any further configuration update procedure is performed.
+When this procedure is finished the M2 interface is operational, all affected cells are ready for MBMS service data transmission and other M2 messages can be exchanged.
+If the M2 SETUP REQUEST message contains the eNB Name IE the MCE may use this IE as a human readable name of the eNB.
+If the M2 SETUP RESPONSE message contains the MCE Name IE the eNB may use this IE as a human readable name of the MCE.
+The eNB shall broadcast the MCCH related BCCH configuration only in those cells indicated in the Cell Information List IE contained in the M2 SETUP RESPONSE message for which the Cell Reservation Info IE within the MCCH related BCCH Configuration Item IE is not set to “reserved Cell”.
+If the M2 SETUP RESPONSE message contains the Modification Period Extended IE within the MCCH related BCCH Configuration Item IE, the eNB shall take its value into account instead of the value signalled in the Modification Period IE.
+If the M2 SETUP RESPONSE message contains the Repetition Period Extended IE within the MCCH related BCCH Configuration Item IE, the eNB shall take its value into account instead of the value signalled in the Repetition Period IE.
+If the M2 SETUP RESPONSE message contains the MCCH related BCCH Extended Configuration Data per MBSFN Area IE, the eNB shall, if supported, broadcast and store the included corresponding configuration of MBSFN area(s) and use it for the duration of the TNL association or until any further configuration update procedure is performed. The eNB shall broadcast the MCCH related BCCH extended configuration only in those cells indicated in the Cell Information List IE contained in the M2 SETUP RESPONSE message for which the Cell Reservation Info IE within the MCCH related BCCH Extended Configuration Item IE is not set to "reserved Cell".
+8.6.3	Unsuccessful Operation
+
+Figure 8.6.2-1. M2 Setup procedure. Unsuccessful operation.
+If the MCE cannot accept the setup it should respond with a M2 SETUP FAILURE message and appropriate cause value.
+If the M2 SETUP FAILURE message includes the Time To Wait IE the eNB shall wait at least for the indicated time before reinitiating the M2 setup towards the same MCE.
+8.6.4	Abnormal Conditions
+Void.
+8.7	eNB Configuration Update
+8.7.1	General
+The purpose of the eNB Configuration Update procedure is to update application level configuration data needed for the eNB and MCE to interoperate correctly on the M2 interface. This procedure does not affect existing MBMS-service-related contexts, if any.
+The procedure uses non MBMS-service-associated signalling.
+8.7.2	Successful Operation
+
+Figure 8.7.2-1. eNB Configuration Update procedure. Successful operation.
+The eNB initiates the procedure by sending an ENB CONFIGURATION UPDATE message to the MCE including an appropriate set of updated configuration data that it has just taken into operational use. The eNB CONFIGURATION UPDATE message may contain:
+-	the Global eNB ID IE,
+-	the eNB Name IE,
+-	the eNB MBMS Configuration data per cell IE.
+If the Global eNB ID IE is not included in the ENB CONFIGURATION UPDATE message, the MCE shall interpret that the existing eNB ID is not changed.
+If the eNB Name IE is not included in the ENB CONFIGURATION UPDATE message, the MCE shall interpret that the existing eNB name, if any, is not changed.
+The MCE responds with the ENB CONFIGURATION UPDATE ACKNOWLEDGE message to acknowledge that it successfully updated the configuration data. If the ENB CONFIGURATION UPDATE message does not contain the information for an existing cell, the MCE shall interpret that the corresponding configuration data for that cell is not changed and shall continue to operate the M2 with the existing related configuration data for that cell.
+If the ENB CONFIGURATION UPDATE ACKNOWLEDGE message contains the Cell Information List IE within the MCCH related BCCH Configuration Item IE or within the MCCH related BCCH Extended Configuration Item IE, the eNB shall broadcast that MCCH related BCCH configuration only in those cells indicated in the IE for which the Cell Reservation Info IE is not set to “reservedCell”. If the ENB CONFIGURATION UPDATE ACKNOWLEDGE message does not contain the Cell Information List IE within the MCCH related BCCH Configuration Item IE or within the MCCH related BCCH Extended Configuration Item IE, the eNB shall not broadcast that MCCH related BCCH configuration in any cell. If the ENB CONFIGURATION UPDATE ACKNOWLEDGE message contains the Modification Period Extended IE within the MCCH related BCCH Configuration Item IE, the eNB shall take its value into account instead of the value signalled in the Modification Period IE. If the ENB CONFIGURATION UPDATE ACKNOWLEDGE message contains the Repetition Period Extended IE within the MCCH related BCCH Configuration Item IE, the eNB shall take its value into account instead of the value signalled in the Repetition Period IE. If the ENB CONFIGURATION UPDATE ACKNOWLEDGE message does not contain the MCCH related BCCH Configuration Item IE or the MCCH related BCCH Extended Configuration Item IE for an existing MBSFN area, the eNB shall interpret that the corresponding configuration data for that MBSFN area is not changed and shall continue to operate the M2 with the existing related configuration data for that MBSFN area.
+The eNB may update the configured MBMS Services Areas and the MBSFN Synchronisation Area per cell:
+-	If the eNB includes the E-UTRAN CGI IE for a cell within the ENB CONFIGURATION UPDATE message, the MCE shall assume that the eNB does neither broadcast MCCH related configuration in the BCCH nor any MBMS service data in that cell any more.
+-	If the eNB includes the eNB MBMS Configuration data Item IE for a cell within the ENB CONFIGURATION UPDATE message, the MCE may decide to include in the ENB CONFIGURATION UPDATE ACKNOWLEDGE message the MCCH related BCCH configuration or the MCCH related BCCH extended configuration for the related MBSFN area(s).
+If the eNB CONFIGURATION UPDATE message contains the eNB Name IE, the MCE may use this IE as a human readable name of the eNB.
+The updated configuration data shall be stored in both eNB and MCE and used for the duration of the TNL association or until any further update is triggered by the eNB or the MCE.
+The eNB may initiate a further eNB Configuration Update procedure only after a previous eNB Configuration Update procedure has been completed.
+8.7.3	Unsuccessful Operation
+
+Figure 8.7.3-1. eNB Configuration Update procedure. Unsuccessful operation.
+If the MCE cannot accept the update it shall respond with an ENB CONFIGURATION UPDATE FAILURE message and appropriate cause value.
+If the ENB CONFIGURATION UPDATE FAILURE message includes the Time To Wait IE the eNB shall wait at least for the indicated time before reinitiating the ENB Configuration Update procedure towards the MCE. Both nodes shall continue to operate the M2 interface with their respective configuration data.
+8.7.4	Abnormal Conditions
+If the eNB after initiating eNB Configuration Update procedure receives neither an ENB CONFIGURATION UPDATE ACKOWLEDGE nor an ENB CONFIGURATION UPDATE FAILURE message, the eNB may reinitiate a further eNB Configuration Update procedure towards the same MCE, provided that the content of the new ENB CONFIGURATION UPDATE message is identical to the content of the previously unacknowledged ENB CONFIGURATION UPDATE message.
+8.8	MCE Configuration Update
+8.8.1	General
+The purpose of the MCE Configuration Update procedure is to update application level configuration data needed for the eNB and MCE to interoperate correctly on the M2 interface and to re-configure MCCH related content on the BCCH for the MBSFN areas contributed by the eNB which is foreseen to participate in MBMS service data transmission. The procedure uses non MBMS-service-associated signalling. This procedure does not affect existing MBMS-service-related contexts, if any.
+8.8.2	Successful Operation
+
+Figure 8.8.2-1. MCE Configuration Update procedure. Successful operation.
+The MCE initiates the procedure by sending an MCE CONFIGURATION UPDATE message to the eNB including an appropriate set of updated configuration data. The MCE CONFIGURATION UPDATE message may contain:
+-	the Global MCE ID IE,
+-	the MCE Name IE,
+-	the MCCH related BCCH Configuration data per MBSFN area IE.
+If the Global MCE ID IE is not included in the MCE CONFIGURATION UPDATE message, the eNB shall interpret that the existing MCE ID is not changed.
+If the MCE Name IE is not included in the MCE CONFIGURATION UPDATE message, the eNB shall interpret that the existing MCE name, if any, is not changed.
+The eNB responds with the MCE CONFIGURATION UPDATE ACKNOWLEDGE message to acknowledge that it successfully updated the configuration data.
+If the MCE CONFIGURATION UPDATE message contains the Cell Information List IE within the MCCH related BCCH Configuration Item IE, or within the MCCH related BCCH Extended Configuration Item IE, the eNB shall broadcast that MCCH related BCCH configuration only in those cells indicated in the IE for which the Cell Reservation Info IE is not set to “reservedCell”. If the MCE CONFIGURATION UPDATE message does not contain the Cell Information List IE within the MCCH related BCCH Configuration Item IE, or within the MCCH related BCCH Extended Configuration Item IE, the eNB shall not broadcast that MCCH related BCCH configuration in any cell. If the MCE CONFIGURATION UPDATE message contains the Modification Period Extended IE within the MCCH related BCCH Confiruation Item IE, the eNB shall take its value into account instead of the value signalled in the Modification Period IE. If the MCE CONFIGURATION UPDATE message contains the Repetition Period Extended IE within the MCCH related BCCH Confiruation Item IE, the eNB shall take its value into account instead of the value signalled in the Repetition Period IE. If the MCE CONFIGURATION UPDATE message does not contain the MCCH related BCCH Configuration Item IE, or the MCCH related BCCH Extended Configuration Item IE, for an existing MBSFN area, the eNB shall interpret that the corresponding configuration data for that MBSFN area is not changed and shall continue to operate the M2 with the existing related configuration data for that MBSFN area.
+If the MCE CONFIGURATION UPDATE message contains the MCE Name IE, the eNB may use this IE as a human readable name of the MCE.
+The updated configuration data shall be stored in both eNB and MCE and used for the duration of the TNL association or until any further update is triggered by the MCE or the eNB.
+The MCE may initiate a further MCE Configuration Update procedure only after a previous MCE Configuration Update procedure has been completed.
+If the MCE CONFIGURATION UPDATE message contains the Subcarrier Spacing MBMS IE within the MCCH related BCCH Configuration Item IE, the eNB shall, if supported, store this value and use it in MBMS operation.
+8.8.3	Unsuccessful Operation
+
+Figure 8.8.3-1. MCE Configuration Update procedure. Unsuccessful operation.
+If the eNB cannot accept the update it shall respond with an MCE CONFIGURATION UPDATE FAILURE message and appropriate cause value.
+If the MCE CONFIGURATION UPDATE FAILURE message includes the Time To Wait IE the MCE shall wait at least for the indicated time before reinitiating the MCE Configuration Update procedure towards the eNB. Both nodes shall continue to operate the M2 interface with their respective configuration data.
+
+8.8.4	Abnormal Conditions
+If the MCE neither receives an MCE CONFIGURATION UPDATE ACKNOWLEDGE nor an MCE CONFIGURATION UPDATE FAILURE message, the MCE may reinitiate MCE Configuration Update procedure towards the same eNB provided that the content of the new MCE CONFIGURATION UPDATE message is identical to the content of the previously unacknowledged MCE CONFIGURATION UPDATE message.
+8.9	Error Indication
+8.9.1	General
+The Error Indication procedure is initiated by a node to report detected errors in one incoming message, provided they cannot be reported by an appropriate failure message.
+If the error situation arises due to reception of a message utilising MBMS-service-associated signalling, then the Error Indication procedure uses MBMS-service-associated signalling. Otherwise the procedure uses non MBMS-service-associated signalling.
+8.9.2	Successful Operation
+
+Figure 8.9.2-1. Error Indication procedure, MCE originated. Successful operation.
+
+Figure 8.9.2.1-2. Error Indication procedure, eNB originated. Successful operation.
+When the conditions defined in clause 10 are fulfilled, the Error Indication procedure is initiated by an ERROR INDICATION message sent from the receiving node.
+The ERROR INDICATION message shall contain at least either the Cause IE or the Criticality Diagnostics IE.
+In case the Error Indication procedure is triggered by utilising MBMS-service-associated signalling the MCE MBMS M2AP ID IE and the eNB MBMS M2AP ID IE shall be included in the ERROR INDICATION message. If one or both of MCE MBMS M2AP ID IE and the eNB MBMS M2AP ID IE are not correct, the cause shall be set to appropriate value e.g. “Unknown or already allocated MCE MBMS M2AP ID”, “Unknown or already allocated eNB MBMS M2AP ID” or “Unknown or inconsistent pair of MBMS M2AP ID”. 
+8.9.3	Abnormal Conditions 
+Void.
+8.10	MBMS Session Update
+8.10.1	General
+The purpose of the MBMS Session Update procedure is to inform the eNB about changing characteristics of the MBMS session.
+The procedure uses MBMS-Service-associated signalling.
+8.10.2	Successful Operation
+
+Figure 8.10.2-1. MBMS Session Update procedure. Successful operation.
+The MCE initiates the procedure by sending a MBMS SESSION UPDATE REQUEST message.
+If the MBMS Service Area IE is included in the MBMS SESSION UPDATE REQUEST message, the eNB shall check the involvement of its cells in the new service area, update correspondingly the MBMS context and resources, join or leave the IP multicast if needed and send the MBMS SESSION UPDATE RESPONSE message.
+If the TNL Information IE is included in the MBMS SESSION UPDATE REQUEST message, the eNB shall ignore the contained information.
+If the MBMS SESSION UPDATE REQUEST message contains the MBMS Session Identity IE for an MBMS service, the eNB shall ignore the contained information. 
+If the MBMS SESSION UPDATE REQUEST message contains the SC-PTM information IE, the eNB shall check the SC-PTM related involvement of its cells in the new list of Cell identities, update correspondingly the MBMS context and resources, join or leave the IP multicast if needed and send the MBMS SESSION UPDATE RESPONSE message. If the ARP parameter is updated, the corresponding update of resources shall follow the principles described for the MBMS Session Start procedure. The eNB shall provide the MBMS session only in those cells included in the new list of Cell identities.
+8.10.3	Unsuccessful Operation
+
+Figure 8.10.3-1. MBMS Session Update procedure. Unsuccessful operation.
+If the eNB fails to update the MBMS session, it shall return a MBMS SESSION UPDATE FAILURE message.
+8.10.4	Abnormal Conditions
+Void.
+8.11	MBMS Service Counting 
+8.11.1	General
+The purpose of the MBMS Service Counting procedure is to request the eNB to report the number of connected mode Ues that either are receiving the MBMS service(s) or are interested in the reception of the MBMS service(s).
+The procedure uses non MBMS-Service-associated signalling.
+8.11.2	Successful Operation
+
+
+Figure 8.11.2-1. MBMS Service Counting procedure. Successful operation.
+The MCE initiates the procedure by sending the MBMS SERVICE COUNTING REQUEST message to the eNB.
+After receiving the MBMS SERVICE COUNTING REQUEST message successfully, the eNB shall respond the MCE with the MBMS SERVICE COUNTING RESPONSE message, apply the MCCH update from the modification period defined in the MCCH Update Time IE, and perform counting as specified in TS 36.300 [3].
+8.11.3	Unsuccessful Operation
+
+Figure 8.11.3-1. MBMS Service Counting procedure. Unsuccessful operation.
+If the eNB is not capable of correctly processing the request, it shall return a MBMS SERVICE COUNTING FAILURE message.
+8.11.4	Abnormal Conditions
+If the eNB has received a MBMS SERVICE COUNTING REQUEST message for a MBSFN Area ID and MCCH Update Time pair, the eNB shall ignore subsequent MBMS SERVICE COUNTING REQUEST messages containing the same MBSFN Area ID and MCCH Update Time, and a different MBMS Counting Request Session IE.
+8.12	MBMS Service Counting Results Report 
+8.12.1	General
+The purpose of the MBMS Service Counting Results Report procedure is for the eNB to provide the counting results to the MCE.
+The procedure uses non MBMS-Service-associated signalling.
+8.12.2	Successful Operation
+
+Figure 8.12.2-1. MBMS Service Counting Results Report procedure. Successful operation.
+The eNB initiates the procedure by sending an MBMS SERVICE COUNTING RESULTS REPORT message.
+The MBMS SERVICE COUNTING RESULTS REPORT message contains the counting results according to the counting configuration in the respective MBMS SERVICE COUNTING REQUEST message.
+8.12.3	Abnormal Conditions
+If, for a given MBSFN area, the MBMS SERVICE COUNTING RESULTS REPORT message contains one or more TMGIs corresponding to the configuration of one MBMS SERVICE COUNTING REQUEST message and some other TMGIs not part of this configuration, the MCE shall ignore the result corresponding to those other TMGIs.
+8.13	MBMS Overload Notification
+8.13.1	General
+The purpose of the MBMS Overload Notification procedure is to enable the eNB to notify the MCE about MBMS overload status.
+The procedure uses non MBMS-Service-associated signalling.
+8.13.2	Successful Operation
+
+Figure 8.13.2-1. MBMS Overload Notification procedure. Successful operation.
+The eNB initiates the procedure by sending an MBMS OVERLOAD NOTIFICATION message to the MCE.
+If a PMCH Overload Status IE is set to “Overload”, the MCE shall consider that the corresponding PMCH is overloaded, i.e. the user plane data for ongoing sessions could not be transported over the air interface in the scheduling period. If a PMCH Overload Status IE is set to “Normal”, the MCE shall consider that the corresponding PMCH is not overloaded.
+8.13.3	Abnormal Conditions
+Void.
+9	Elements for M2AP Communication
+9.1	Message Functional Definition and Content
+9.1.1	General
+Sub clauses 9.1 and 9.2 describe the structure of the messages and information elements required for the M2AP protocol in tabular format. Sub clause 9.3 provides the corresponding ASN.1 definition. 
+The following attributes are used for the tabular description of the messages and information elements: Presence, Range Criticality and Assigned Criticality.
+9.1.1	Message Contents
+9.1.1.1	Presence
+All information elements in the message descriptions below are marked mandatory, optional or conditional according to table 4.
+Table 4. Meaning of abbreviations used in M2AP messages
+Abbreviation
+Meaning
+M
+Ies marked as Mandatory (M) shall always be included in the message.
+O
+Ies marked as Optional (O) may or may not be included in the message.
+C
+Ies marked as Conditional (C) shall be included in a message only if the condition is satisfied. Otherwise the IE shall not be included.
+
+
+9.1.1.2	Criticality
+Each Information Element or Group of Information Elements may have criticality information applied to it.
+Following cases are possible:
+Table 5. Meaning of content within “Criticality” column
+Abbreviation
+Meaning
+
+–
+No criticality information is applied explicitly.
+YES
+Criticality information is applied. This is usable only for non-repeatable Ies. 
+GLOBAL
+The IE and all its repetitions together have one common criticality information. This is usable only for repeatable Ies.
+EACH
+Each repetition of the IE has its own criticality information. It is not allowed to assign different criticality values to the repetitions. This is usable only for repeatable Ies.
+
+9.1.1.3	Range
+The Range column indicates the allowed number of copies of repetitive Ies/IE groups.
+9.1.1.4	Assigned Criticality
+This column provides the actual criticality information as defined in subclause 10.3.2 in TS 36.413 [4], if applicable.
+9.1.2	MBMS SESSION START REQUEST
+This message is sent by the MCE to establish an MBMS-service-associated logical M2-connection.
+Direction: MCE  eNB.
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+Criticality
+Assigned Criticality
+Message Type
+M
+
+9.2.1.1
+
+YES
+reject
+MCE MBMS M2AP ID
+M
+
+9.2.3.1
+
+YES
+reject
+TMGI
+M
+
+9.2.3.3
+
+YES
+reject
+MBMS Session Identity
+O
+
+9.2.3.4
+
+YES
+ignore
+MBMS Service Area
+M
+
+9.2.3.6
+
+YES
+reject
+TNL Information
+
+1
+
+
+YES
+reject
+>IP Multicast Address
+M
+
+IP Address
+9.2.2.1
+
+-
+
+>IP Source Address
+M
+
+IP Address
+9.2.2.1
+
+-
+
+>GTP DL TEID
+M
+
+GTP-TEID
+9.2.2.2
+
+-
+
+Alternative TNL Information
+O
+
+
+
+YES
+ignore
+>Alternative IP Multicast Address
+M
+
+IP Address
+9.2.2.1
+
+-
+
+>Alternative IP Source Address
+M
+
+IP Address
+9.2.2.1
+
+-
+
+>GTP DL TEID
+M
+
+GTP-TEID
+9.2.2.2 
+Shall be set to same value as the GTP DL TEID IE of the TNL Information IE.
+-
+
+SC-PTM information
+O
+
+9.2.1.22
+
+YES
+reject
+
+9.1.3	MBMS SESSION START RESPONSE
+This message is sent by the eNB to report the successful outcome of the request from the MBMS SESSION START REQUEST message.
+Direction: eNB  MCE.
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+Criticality
+Assigned Criticality
+Message Type
+M
+
+9.2.1.1
+
+YES
+reject
+MCE MBMS M2AP ID
+M
+
+9.2.3.1
+
+YES
+ignore
+eNB MBMS M2AP ID
+M
+
+9.2.3.2
+
+YES
+ignore
+Criticality Diagnostics
+O
+
+9.2.1.7
+
+YES
+ignore
+
+9.1.4	MBMS SESSION START FAILURE
+This message is sent by the eNB to report the unsuccessful outcome of the request from the MBMS SESSION START REQUEST message.
+Direction: eNB  MCE.
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+Criticality
+Assigned Criticality
+Message Type
+M
+
+9.2.1.1
+
+YES
+reject
+MCE MBMS M2AP ID
+M
+
+9.2.3.1
+
+YES
+ignore
+Cause
+M
+
+9.2.1.2
+
+YES
+ignore
+Criticality Diagnostics
+O
+
+9.2.1.7
+
+YES
+ignore
+
+9.1.5	MBMS SESSION STOP REQUEST
+This message is sent by the MCE to release the corresponding MBMS E-RAB and the MBMS-service-associated logical M2-connection.
+Direction: MCE  eNB.
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+Criticality
+Assigned Criticality
+Message Type
+M
+
+9.2.1.1
+
+YES
+reject
+MCE MBMS M2AP ID
+M
+
+9.2.3.1
+
+YES
+reject
+eNB MBMS M2AP ID
+M
+
+9.2.3.2
+
+YES
+reject
+
+9.1.6	MBMS SESSION STOP RESPONSE
+This message is sent by the eNB to acknowledge the MBMS SESSION STOP message.
+Direction: eNB  MCE.
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+Criticality
+Assigned Criticality
+Message Type
+M
+
+9.2.1.1
+
+YES
+reject
+MCE MBMS M2AP ID
+M
+
+9.2.3.1
+
+YES
+ignore
+eNB MBMS M2AP ID
+M
+
+9.2.3.2
+
+YES
+ignore
+Criticality Diagnostics
+O
+
+9.2.1.7
+
+YES
+ignore
+
+9.1.7	MBMS SCHEDULING INFORMATION
+This message is sent by the MCE to provide MCCH related information to the eNB.
+Direction: MCE  eNB.
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+Criticality
+Assigned Criticality
+Message Type
+M
+
+9.2.1.1
+
+YES
+reject
+MCCH Update Time
+M
+
+9.2.1.19
+
+YES
+reject
+MBSFN Area Configuration List
+
+1
+
+
+YES
+reject
+>MBSFN Area Configuration Item Ies
+
+1 to <maxnoofMBSFNareas>
+
+
+
+
+>>PMCH Configuration List
+
+1
+
+
+YES
+reject
+>>>PMCH Configuration Item Ies
+
+0 to <maxnoofPMCHsperMBSFNarea>
+
+
+EACH 
+reject
+>>>>PMCH Configuration
+M
+
+9.2.1.8
+
+-
+
+>>>>MBMS Session List per PMCH
+M
+
+9.2.1.9
+
+-
+
+>>Subframes Configuration List
+
+1
+
+
+YES
+reject
+>>>Subframes Configuration Item Ies
+
+1 to <maxnoofMBSFN-Allocations>
+
+
+EACH 
+reject
+>>>>MBSFN Subframe Configuration
+M
+
+9.2.1.17
+
+-
+
+>>Common Subframe Allocation Period
+M
+
+9.2.1.18
+
+YES
+reject
+>>MBSFN Area ID
+M
+
+9.2.1.14
+
+YES
+reject
+>>MBMS Suspension Notification List
+
+0..1
+
+
+YES
+ignore
+>>>MBMS Suspension Notification Item Ies
+
+1 to <maxnoofPMCHsperMBSFNarea>
+
+
+EACH 
+ignore
+>>>>SFN
+M
+
+INTEGER (0..1023)
+SFN of the first radio frame containing the information that the MBMS session(s) are to be suspended. 
+-
+-
+>>>>MBMS Sessions To Be Suspended List per PMCH
+
+1
+
+
+-
+-
+>>>>>MBMS Sessions To Be Suspended List per PMCH Item
+
+1 to <maxnoofSessionsPerPMCH>
+
+
+-
+-
+>>>>>>MBMS Service Identity
+M
+
+TMGI
+9.2.3.3
+
+-
+-
+
+Range bound
+Explanation
+maxnoofMBSFNareas
+Maximum no. of MBSFN areas served by a single eNB. The value for maxnoofMBSFNareas is 256.
+maxnoofPMCHsperMBSFNarea
+Maximum no. of PMCHs possible per MBSFN .The value for maxnoofMCHsperMBSFNarea is 15.
+maxnoofMBSFN-Allocations
+Maximum no. of MBSFN frame allocations with different offset. The value for maxnoofMBSFN-Allocations is 8.
+maxnoofSessionsPerPMCH
+Maximum no. of Sessions per PMCH. The value for maxnoofSessionsPerPMCH is 29.
+
+9.1.8	MBMS SCHEDULING INFORMATION RESPONSE
+This message is sent by the eNB to acknowledge the MBMS SCHEDULING INFORMATION message.
+Direction: eNB  MCE.
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+Criticality
+Assigned Criticality
+Message Type
+M
+
+9.2.1.1
+
+YES
+reject
+Criticality Diagnostics
+O
+
+9.2.1.7
+
+YES
+ignore
+
+9.1.9	RESET
+This message is either sent by the eNB or the MCE and is used to request the M2 interface or part of M2 interface to be reset.
+Direction: eNB  MCE, MCE  eNB
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+Criticality
+Assigned Criticality
+Message Type
+M
+
+9.2.1.1
+
+YES
+reject
+Cause
+M
+
+9.2.1.2
+
+YES
+ignore
+CHOICE Reset Type
+M
+
+
+
+YES
+reject
+>M2 interface
+
+
+
+
+
+
+>>Reset All
+M
+
+ENUMERATED (Reset all, …)
+
+–
+–
+>Part of M2 interface
+
+
+
+
+
+
+>>MBMS-Service-associated logical M2-connection list
+
+1
+
+
+–
+–
+>>>MBMS-Service –associated logical M2-connection Item
+
+1 to < maxNrOfIndividualM2ConnectionsToReset >
+
+
+EACH
+reject
+>>>>eNB MBMS M2AP ID
+O
+
+9.2.3.2
+
+–
+–
+>>>>MCE MBMS M2AP ID
+O
+
+9.2.3.1
+
+–
+–
+
+Range bound
+Explanation
+maxNrOfIndividualM2ConnectionsToReset
+Maximum no. of MBMS-Service-associated logical M2-connections allowed to reset in one message. Value is 256.
+
+9.1.10	RESET ACKNOWLEDGE
+This message is sent as a response to the RESET message.
+Direction : MCE  eNB, eNB  MCE.
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+Criticality
+Assigned Criticality
+Message Type
+M
+
+9.2.1.1
+
+YES
+reject
+MBMS-Service-associated logical M2-connection list
+
+0..1
+
+
+YES
+ignore
+>MBMS-Service –associated logical M2-connection Item
+
+1 to < maxNrOfIndividualM2ConnectionsToReset >
+
+
+EACH
+ignore
+>>eNB MBMS M2AP ID
+O
+
+9.2.3.2
+
+–
+–
+>>MCE MBMS M2AP ID
+O
+
+9.2.3.1
+
+–
+–
+Criticality Diagnostics
+O
+
+9.2.1.7
+
+YES
+ignore
+
+Range bound
+Explanation
+maxNrOfIndividualM2ConnectionsToReset
+Maximum no. of MBMS-Service-associated logical M2-connections allowed to reset in one message. Value is 256.
+
+9.1.11	M2 SETUP REQUEST
+This message is sent by the eNB to initiate the M2 interface instance.
+Direction: eNB  MCE.
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+Criticality
+Assigned Criticality
+Message Type
+M
+
+9.2.1.1
+
+YES
+reject
+Global eNB ID
+M
+
+9.2.1.10
+
+YES
+reject
+eNB Name
+O
+
+Printable String (1..150,…)
+
+YES
+ignore
+eNB MBMS Configuration data per cell
+
+1
+
+
+YES
+reject
+>eNB MBMS Configuration data Item Ies
+
+1 to <maxnoofCells>
+
+
+EACH 
+reject
+>>eNB MBMS Configuration data Item
+M
+
+9.2.1.12
+
+-
+
+
+Range bound
+Explanation
+maxnoofCells
+Maximum no. of cells that may be served by an eNB. The value for maxnoofCells is 256.
+
+9.1.12	M2 SETUP RESPONSE
+This message is sent by the MCE to complete the initiation of an M2 interface instance, providing MCCH related BCCH information.
+Direction: MCE  eNB.
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+Criticality
+Assigned Criticality
+Message Type
+M
+
+9.2.1.1
+
+YES
+reject
+Global MCE ID
+M
+
+9.2.1.16
+
+YES
+reject
+MCE Name
+O
+
+Printable String (1..150,…)
+
+YES
+ignore
+MCCH related BCCH Configuration data per MBSFN area
+
+1
+
+
+YES
+reject
+>MCCH related BCCH Configuration data Item Ies
+
+1 to <maxnoofMBSFNareas>
+
+
+EACH 
+reject
+>> MCCH related BCCH Configuration Item
+M
+
+9.2.1.13
+
+-
+
+Criticality Diagnostics
+O
+
+9.2.1.7
+
+YES
+ignore
+MCCH related BCCH Extended Configuration data per MBSFN area
+
+0..1
+
+
+YES
+reject
+>MCCH related BCCH Extended Configuration data Item Ies
+
+1 to <maxnoofMBSFNareas>
+
+
+EACH 
+reject
+>>MCCH related BCCH Extended Configuration Item
+M
+
+9.2.1.27
+
+-
+
+
+Range bound
+Explanation
+maxnoofMBSFNareas
+Maximum no. of MBSFN areas served by a single eNB. The value for maxnoofMBSFNareas is 256.
+
+9.1.13	M2 SETUP FAILURE
+This message is sent by the MCE to indicate non acceptance of the M2 Setup Request.
+Direction: MCE  eNB.
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+Criticality
+Assigned Criticality
+Message Type
+M
+
+9.2.1.1
+
+YES
+reject
+Cause
+M
+
+9.2.1.2
+
+YES
+ignore
+Time To Wait
+O
+
+9.2.1.15
+
+YES
+ignore
+Criticality Diagnostics
+O
+
+9.2.1.7
+
+YES
+ignore
+
+9.1.14	ENB CONFIGURATION UPDATE
+This message is sent by the eNB to indicate that application level configuration data has changed in the eNB.
+Direction: eNB  MCE.
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+Criticality
+Assigned Criticality
+Message Type
+M
+
+9.2.1.1
+
+YES
+reject
+Global eNB ID
+O
+
+9.2.1.10
+
+YES
+reject
+eNB Name
+O
+
+Printable String (1..150,…)
+
+YES
+ignore
+eNB MBMS Configuration data per cell
+
+0..1
+
+
+YES
+reject
+>eNB MBMS Configuration data per cell Item Ies
+
+1 to <maxnoofCells>
+
+
+EACH 
+reject
+>>CHOICE MBMS Configuration Update
+M
+
+
+
+
+
+>>>Configuration Data
+
+
+
+
+
+
+>>>>eNB MBMS Configuration data Item
+
+
+9.2.1.12
+
+
+
+>>>E-CGI
+
+
+
+
+
+
+>>>>E-UTRAN CGI
+
+
+9.2.1.11
+
+
+
+
+Range bound
+Explanation
+maxnoofCells
+Maximum no. of cells that may be served by an eNB. The value for maxnoofCells is 256.
+
+9.1.15	ENB CONFIGURATION UPDATE ACKNOWLEDGE
+This message acknowledges the ENB CONFIGURATION UPDATE message.
+Direction: MCE  eNB.
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+Criticality
+Assigned Criticality
+Message Type
+M
+
+9.2.1.1
+
+YES
+reject
+MCCH related BCCH Configuration data per MBSFN area
+
+0..1
+
+
+YES
+reject
+>MCCH related BCCH Configuration data Item Ies
+
+1 to <maxnoofMBSFNareas>
+
+
+EACH 
+reject
+>>MCCH related BCCH Configuration Item
+M
+
+9.2.1.13
+
+-
+
+Criticality Diagnostics
+O
+
+9.2.1.7
+
+YES
+ignore
+MCCH related BCCH Extended Configuration data per MBSFN area
+
+0..1
+
+
+YES
+reject
+>MCCH related BCCH Extended Configuration data Item Ies
+
+1 to <maxnoofMBSFNareas>
+
+
+EACH 
+reject
+>>MCCH related BCCH Extended Configuration Item
+M
+
+9.2.1.27
+
+-
+
+
+Range bound
+Explanation
+maxnoofMBSFNareas
+Maximum no. of MBSFN areas served by a single eNB. The value for maxnoofMBSFNareas is 256. 
+
+9.1.16	ENB CONFIGURATION UPDATE FAILURE
+This message is sent by the MCE to indicate non acceptance of the eNB Configuration Update.
+Direction: MCE  eNB.
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+Criticality
+Assigned Criticality
+Message Type
+M
+
+9.2.1.1
+
+YES
+reject
+Cause
+M
+
+9.2.1.2
+
+YES
+ignore
+Time To Wait
+O
+
+9.2.1.15
+
+YES
+ignore
+Criticality Diagnostics
+O
+
+9.2.1.7
+
+YES
+ignore
+
+9.1.17	MCE CONFIGURATION UPDATE
+This message is sent by the MCE to indicate that application level configuration data has changed in the MCE.
+Direction: MCE  eNB.
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+Criticality
+Assigned Criticality
+Message Type
+M
+
+9.2.1.1
+
+YES
+reject
+Global MCE ID
+O
+
+9.2.1.16
+
+YES
+reject
+MCE Name
+O
+
+Printable String (1..150,…)
+
+YES
+ignore
+MCCH related BCCH Configuration data per MBSFN area
+
+0..1
+
+
+YES
+reject
+>MCCH related BCCH Configuration data Item Ies
+
+1 to <maxnoofMBSFNareas>
+
+
+EACH 
+reject
+>>MCCH related BCCH Configuration Item
+M
+
+9.2.1.13
+
+-
+
+MCCH related BCCH Extended Configuration data per MBSFN area
+
+0..1
+
+
+YES
+reject
+>MCCH related BCCH Extended Configuration data Item Ies
+
+1 to <maxnoofMBSFNareas>
+
+
+EACH
+reject
+>>MCCH related BCCH Extended Configuration Item
+M
+
+9.2.1.27
+
+-
+
+
+Range bound
+Explanation
+maxnoofMBSFNareas
+Maximum no. of MBSFN areas served by a single eNB. The value for maxnoofMBSFNareas is 256.
+
+9.1.18	MCE CONFIGURATION UPDATE ACKNOWLEDGE
+This message acknowledges the MCE CONFIGURATION UPDATE message.
+Direction: eNB  MCE.
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+Criticality
+Assigned Criticality
+Message Type
+M
+
+9.2.1.1
+
+YES
+reject
+Criticality Diagnostics
+O
+
+9.2.1.7
+
+YES
+ignore
+
+9.1.19	MCE CONFIGURATION UPDATE FAILURE
+This message is sent by the eNB to indicate non acceptance of the MCE Configuration Update.
+Direction: eNB  MCE.
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+Criticality
+Assigned Criticality
+Message Type
+M
+
+9.2.1.1
+
+YES
+reject
+Cause
+M
+
+9.2.1.2
+
+YES
+ignore
+Time To Wait
+O
+
+9.2.1.15
+
+YES
+ignore
+Criticality Diagnostics
+O
+
+9.2.1.7
+
+YES
+ignore
+
+9.1.20	ERROR INDICATION
+This message is sent by both the MCE and the eNB and is used to indicate that some error has been detected in the node.
+Direction: MCE  eNB and eNB  MCE.
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+Criticality
+Assigned Criticality
+Message Type
+M
+
+9.2.1.1
+
+YES
+ignore
+MCE MBMS M2AP ID
+O
+
+9.2.3.1
+
+YES
+ignore
+eNB MBMS M2AP ID
+O
+
+9.2.3.2
+
+YES
+ignore
+Cause
+O
+
+9.2.1.2
+
+YES
+ignore
+Criticality Diagnostics
+O
+
+9.2.1.7
+
+YES
+ignore
+
+9.1.21	MBMS SESSION UPDATE REQUEST
+This message is sent by the MCE to the eNB in order to inform of the change of session characteristics e.g. service area of one MBMS service session.
+Direction: MCE  eNB.
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+Criticality
+Assigned Criticality
+Message Type
+M
+
+9.2.1.1
+
+YES
+reject
+MCE MBMS M2AP ID
+M
+
+9.2.3.1
+
+YES
+reject
+eNB MBMS M2AP ID
+M
+
+9.2.3.2
+
+YES
+reject
+TMGI
+M
+
+9.2.3.3
+
+YES
+reject
+MBMS Session Identity
+O
+
+9.2.3.4
+
+YES
+ignore
+MBMS Service Area
+O
+
+9.2.3.6
+
+YES
+ignore
+TNL Information
+O
+
+
+
+YES
+reject
+>IP Multicast Address
+M
+
+9.2.2.1
+
+-
+
+>IP Source Address
+M
+
+IP Address
+9.2.2.1
+
+-
+
+>GTP DL TEID
+M
+
+GTP-TEID
+9.2.2.2
+
+-
+
+SC-PTM information
+O
+
+9.2.1.22
+
+YES
+reject
+
+9.1.22	MBMS SESSION UPDATE RESPONSE
+This message is sent by the eNB to report the successful outcome of the request from the MBMS SESSION UPDATE REQUEST message.
+Direction: eNB  MCE.
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+Criticality
+Assigned Criticality
+Message Type
+M
+
+9.2.1.1
+
+YES
+reject
+MCE MBMS M2AP ID
+M
+
+9.2.3.1
+
+YES
+ignore
+eNB MBMS M2AP ID
+M
+
+9.2.3.2
+
+YES
+ignore
+Criticality Diagnostics
+O
+
+9.2.1.7
+
+YES
+ignore
+
+9.1.23	MBMS SESSION UPDATE FAILURE
+This message is sent by the eNB to report the unsuccessful outcome of the request from the MBMS SESSION UPDATE REQUEST message.
+Direction: eNB  MCE.
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+Criticality
+Assigned Criticality
+Message Type
+M
+
+9.2.1.1
+
+YES
+reject
+MCE MBMS M2AP ID
+M
+
+9.2.3.1
+
+YES
+ignore
+eNB MBMS M2AP ID
+M
+
+9.2.3.2
+
+YES
+ignore
+Cause
+M
+
+9.2.1.2
+
+YES
+ignore
+Criticality Diagnostics
+O
+
+9.2.1.7
+
+YES
+ignore
+
+9.1.24	MBMS SERVICE COUNTING REQUEST
+This message is sent by the MCE to request the eNB to report the number of connected mode Ues that are receiving or interested in the MBMS service(s).
+Direction: MCE  eNB.
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+Criticality
+Assigned Criticality
+Message Type
+M
+
+9.2.1.1
+
+YES
+reject
+MCCH Update Time
+M
+
+9.2.1.19
+
+YES
+reject
+MBSFN Area ID
+M
+
+9.2.1.14
+
+YES
+reject
+MBMS Counting Request Session 
+M
+
+
+
+YES
+reject
+>MBMS Counting Request Session Item
+
+1 to <maxnoofcountingservice>
+
+
+EACH
+reject
+>>TMGI
+M
+
+9.2.3.3
+
+-
+-
+
+Range bound
+Explanation
+maxnoofcountingservice
+Maximum no. of the services that are counted by RAN. The value for maxnoofcountingservice is 16.
+
+9.1.25	MBMS SERVICE COUNTING RESPONSE
+This message is sent by the eNB to acknowledge the MBMS SERVICE COUNTING REQUEST message.
+Direction: eNBMCE.
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+Criticality
+Assigned Criticality
+Message Type
+M
+
+9.2.1.1
+
+YES
+reject
+Criticality Diagnostics
+O
+
+9.2.1.7
+
+YES
+ignore
+
+9.1.26	MBMS SERVICE COUNTING FAILURE
+This message is sent by the eNB to report the unsuccessful outcome of the request from the MBMS SERVICE COUNTING REQUEST message.
+Direction: eNB  MCE.
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+Criticality
+Assigned Criticality
+Message Type
+M
+
+9.2.1.1
+
+YES
+reject
+Cause
+M
+
+9.2.1.2
+
+YES
+ignore
+Criticality Diagnostics
+O
+
+9.2.1.7
+
+YES
+ignore
+
+9.1.27	MBMS SERVICE COUNTING RESULTS REPORT
+This message is sent by the eNB to report the number of connected mode Ues that are receiving or interested in the MBMS service(s) as indicated in the MBMS SERVICE COUNTING REQUEST message.
+Direction: eNBMCE.
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+Criticality
+Assigned Criticality
+Message Type
+M
+
+9.2.1.1
+
+YES
+reject
+MBSFN Area ID
+M
+
+9.2.1.14
+
+YES
+reject
+MBMS Counting Result List
+M
+
+
+
+YES
+reject
+>MBMS Counting Result Item
+
+1 to <maxnoofcountingservice>
+
+
+EACH
+reject
+>>TMGI
+M
+
+9.2.3.3
+
+-
+
+>>Counting Result
+M
+
+9.2.1.21
+
+-
+
+
+Range bound
+Explanation
+Maxnoofcountingservice
+Maximum no. of the services that are counted by RAN. The value for maxnoofcountingservice is 16.
+
+9.1.28	MBMS OVERLOAD NOTIFICATION
+This message is sent by the eNB to notify the MCE about MBMS overload status.
+Direction: eNBMCE.
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+Criticality
+Assigned Criticality
+Message Type
+M
+
+9.2.1.1
+
+YES
+reject
+MBSFN Area ID
+M
+
+9.2.1.14
+
+YES
+reject
+Overload Status Per PMCH List
+
+1
+
+
+YES
+reject
+>Overload Status Per PMCH Item Ies
+
+1..<maxnoofPMCHsperMBSFNarea>
+
+
+-
+-
+>>PMCH Overload Status
+M
+
+ENUMERATED (Normal, Overload, …)
+
+YES
+reject
+>>Active MBMS Session List
+
+0..1
+
+
+YES
+reject
+>>>Active MBMS Session Item Ies
+
+1 to <maxnoofSessionsPerPMCH>
+
+
+-
+-
+>>>>MBMS Service Identity
+M
+
+TMGI
+9.2.3.3
+
+YES
+reject
+
+Range bound
+Explanation
+maxnoofPMCHsperMBSFNarea
+Maximum no. of PMCHs possible per MBSFN .The value is 15.
+maxnoofSessionsPerPMCH
+Maximum no. of Sessions per PMCH. The value for maxnoofSessionsPerPMCH is 29.
+
+9.2	Information Element Definitions
+9.2.1	Radio Network Layer Related Ies
+9.2.1.1	Message Type
+The Message Type IE uniquely identifies the message being sent. It is mandatory for all messages.
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+Message Type
+
+
+
+
+>Procedure Code
+M
+
+INTEGER (0..255)
+
+>Type of Message
+M
+
+CHOICE (Initiating Message, Successful Outcome, Unsuccessful Outcome, …)
+
+
+9.2.1.2	Cause
+The purpose of the Cause IE is to indicate the reason for a particular event for the M2AP protocol.
+IE/Group Name
+Presence
+Range
+IE Type and Reference
+Semantics Description
+CHOICE Cause Group
+M
+
+
+
+>Radio Network Layer
+
+
+
+
+>>Radio Network Layer Cause 
+M
+
+ENUMERATED
+(Unknown or already allocated MCE MBMS M2AP ID,
+Unknown or already allocated eNB MBMS M2AP ID,
+Unknown or inconsistent pair of MBMS M2AP IDs, 
+Radio resources not available,
+Interaction with other procedure,
+Unspecified,
+…,
+Invalid QoS combination,
+Not supported QCI value)
+
+>Transport Layer
+
+
+
+
+>>Transport Layer Cause
+M
+
+ENUMERATED
+(Transport Resource Unavailable,
+Unspecified,
+…)
+
+>NAS
+
+
+
+
+>>NAS Cause
+M
+
+ENUMERATED 
+(Unspecified, 
+…)
+
+>Protocol
+
+
+
+
+>>Protocol Cause
+M
+
+ENUMERATED
+(Transfer Syntax Error,
+Abstract Syntax Error (Reject),
+Abstract Syntax Error (Ignore and Notify),
+Message not Compatible with Receiver State,
+Semantic Error,
+Abstract Syntax Error (Falsely Constructed Message),
+Unspecified,
+…)
+
+>Misc
+
+
+
+
+>>Miscellaneous Cause
+M
+
+ENUMERATED
+(Control Processing Overload,
+Hardware Failure,
+O&M Intervention,
+Unspecified,
+…)
+
+
+The meaning of the different cause values is described in the following table. In general, “not supported” cause values indicate that the related capability is missing. On the other hand, “not available” cause values indicate that the related capability is present, but insufficient resources were available to perform the requested action.
+Radio Network Layer cause
+Meaning
+Unknown or already allocated MCE MBMS M2AP ID
+The action failed because the MCE MBMS M2AP ID is either unknown, or (for a first message received at the eNB) is known and already allocated to an existing MBMS service related context.
+Unknown or already allocated eNB MBMS M2AP ID
+The action failed because the eNB MBMS M2AP ID is either unknown, or (for a first message received at the MCE) is known and already allocated to an existing context.
+Unknown or inconsistent pair of MBMS M2AP IDs
+The action failed because both MBMS M2AP IDs are unknown, or are known but do not define a single MBMS context.
+Radio resources not available
+No requested radio resources are available
+Interaction with other procedure
+The action is due to an ongoing interaction with another procedure
+Unspecified
+Sent for radio network layer cause when none of the specified cause values applies
+Invalid QoS combination
+The action was failed because of invalid QoS combination. 
+Not supported QCI Value
+The E-RAB setup failed because the requested QCI is not supported.
+
+Transport Layer cause
+Meaning
+Transport Resource Unavailable
+The required transport resources are not available.
+Unspecified
+Sent for transport network layer cause when none of the specified cause values applies.
+
+NAS cause
+Meaning
+Unspecified
+Sent for NAS cause when none of the specified cause values applies.
+
+Protocol cause
+Meaning
+Transfer Syntax Error
+The received message included a transfer syntax error.
+Abstract Syntax Error (Reject)
+The received message included an abstract syntax error and the concerning criticality indicated “reject”.
+Abstract Syntax Error (Ignore And Notify)
+The received message included an abstract syntax error and the concerning criticality indicated “ignore and notify”.
+Message Not Compatible With Receiver State
+The received message was not compatible with the receiver state.
+Semantic Error
+The received message included a semantic error.
+Abstract Syntax Error (Falsely Constructed Message)
+The received message contained Ies or IE groups in wrong order or with too many occurrences.
+Unspecified
+Sent for protocol cause when none of the specified cause values applies.
+
+Miscellaneous cause
+Meaning
+Control Processing Overload
+Control processing overload.
+Hardware Failure
+Action related to hardware failure
+O&M Intervention
+The action is due to O&M intervention.
+Unspecified
+Sent when none of the above cause values applies and the cause is not related to any of the categories Radio Network Layer, Transport Network Layer, NAS or Protocol.
+
+9.2.1.3	Void
+
+9.2.1.4	Void
+
+9.2.1.5	Void
+
+9.2.1.6	Void
+
+9.2.1.7	Criticality Diagnostics
+The Criticality Diagnostics IE is sent by the eNB or the MCE when parts of a received message have not been comprehended or were missing, or if the message contained logical errors. When applicable, it contains information about which Ies were not comprehended or were missing.
+For further details on how to use the Criticality Diagnostics IE, (see section 10 in TS 36.413 [4]). 
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+Procedure Code
+O
+
+INTEGER (0..255)
+Procedure Code is to be used if Criticality Diagnostics is part of Error Indication procedure, and not within the response message of the same procedure that caused the error.
+Triggering Message 
+O
+
+ENUMERATED (initiating message, successful outcome, unsuccessful outcome)
+The Triggering Message is used only if the Criticality Diagnostics is part of Error Indication procedure. 
+Procedure Criticality 
+O
+
+ENUMERATED (reject, ignore, notify)
+This Procedure Criticality is used for reporting the Criticality of the Triggering message (Procedure).
+Information Element Criticality Diagnostics
+
+0 to <maxnooferrors>
+
+
+>IE Criticality
+M
+
+ENUMERATED(reject, ignore, notify)
+The IE Criticality is used for reporting the criticality of the triggering IE. The value ‘ignore’ shall not be used.
+>IE ID
+M
+
+INTEGER (0..65535)
+The IE ID of the not understood or missing IE.
+>Type of Error
+M
+
+ENUMERATED(not understood, missing, …)
+
+
+Range bound
+Explanation
+maxnooferrors
+Maximum no. of IE errors allowed to be reported with a single message. The value for maxnooferrors is 256.
+
+9.2.1.8	PMCH Configuration
+This information element provided PMCH configuration related content for MCCH. 
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+Criticality
+Assigned Criticality
+Allocated Subframes End
+M
+
+INTEGER (0..1535)
+Encoded as the sf-AllocEnd
+IE in TS 36.331 [11].
+−
+−
+Modulation and Coding Scheme
+M
+
+INTEGER (0..28)
+Encoded as the dataMCS
+IE in TS 36.331 [11].
+−
+−
+MCH Scheduling Period
+M
+
+ENUMERATED (rf8, rf16, rf32, rf64, rf128, rf256, rf512, rf1024)
+Encoded as the mch-SchedulingPeriod IE in TS 36.331 [11].
+−
+−
+Modulation and Coding Scheme 2
+O
+
+INTEGER (0..27)
+Encoded as the t2 in the dataMCS IE in TS 36.331 [11]. If this IE is present, the value signalled in the Modulation and Coding Scheme IE is ignored.
+YES
+reject
+MCH Scheduling Period Extended
+O
+
+ENUMERATED (rf4, …)
+Encoded as the mch-SchedulingPeriod-r12 IE in TS 36.331 [11]. If this IE is present, the value signalled in the MCH Scheduling Period IE is ignored.
+YES
+reject
+MCH Scheduling Period Extended 2
+O
+
+ENUMERATED (rf1, rf2, …)
+Encoded as the mch-SchedulingPeriod-v14x0 IE in TS 36.331 [11]. If this IE is present, the value signalled in the MCH Scheduling Period IE is ignored.
+YES
+reject
+
+9.2.1.9	MBMS Session List per PMCH
+This information element provided PMCH configuration related content for MCCH. 
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+MBMS Session List per PMCH Item Ies
+
+1 to <maxnoofSessionsPerPMCH>
+
+
+>MBMS Service Identity
+M
+
+TMGI
+9.2.3.3
+
+>LCID
+M
+
+INTEGER (0..28)
+Logical Channel Identity.
+
+Range bound
+Explanation
+maxnoofSessionsPerPMCH
+Maximum no. of Sessions per PMCH. The value for maxnoofSessionsPerPMCH is 29.
+
+9.2.1.10	Global eNB ID
+This information element is used to globally identify an eNB (see TS 36.401 [2]).
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+PLMN Identity
+M
+
+9.2.3.7
+
+CHOICE eNB ID
+M
+
+
+
+>eNB ID
+
+
+
+
+>>Macro eNB ID
+
+
+BIT STRING (20)
+Equal to the 20 leftmost bits of the Cell Identity IE contained in the E-UTRAN CGI IE (see section 9.2.1.11) of each cell served by the eNB.
+>Short Macro eNB ID
+
+
+
+
+>>Short Macro eNB ID
+M
+
+BIT STRING (SIZE(18))
+Equal to the 18 leftmost bits of the Cell Identity IE contained in the E-UTRAN CGI IE (see section 9.2.1.11) of each cell served by the eNB.
+>Long Macro eNB ID
+
+
+
+
+>>Long Macro eNB ID
+M
+
+BIT STRING (SIZE(21))
+Equal to the 21 leftmost bits of the Cell Identity IE contained in the E-UTRAN CGI IE (see section 9.2.1.11) of each cell served by the eNB.
+
+9.2.1.11	E-UTRAN CGI
+This information element is used to globally identify a cell (see TS 36.401 [2]).
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+PLMN Identity
+M
+
+9.2.3.7
+
+Cell Identity
+M
+
+BIT STRING (28)
+The 20 leftmost bits of the Cell Identity correspond to the eNB ID (Global eNB ID IE defined in section 9.2.1.10).
+
+9.2.1.12	eNB MBMS Configuration data Item
+This information element provides MBMS related configuration information from the eNB.
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+E-UTRAN CGI
+M
+
+9.2.1.11
+
+MBSFN Synchronisation Area Id 
+M
+
+9.2.1.20
+
+MBMS Service Area List
+
+1
+
+
+>MBMS Service Area Item
+
+1 to <maxnoofMBMSServiceAreasPerCell>
+
+
+>>MBMS Service Area
+M
+
+9.2.3.6
+
+
+Range bound
+Explanation
+maxnoofMBMSServiceAreasPerCell
+Maximum no. of Service Areas per cell. The value for maxnoofMBMSServiceAreasPerCell is 256.
+
+9.2.1.13	MCCH related BCCH Configuration Item
+This information element provides MCCH related BCCH configuration information to the eNB.
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+Criticality
+Assigned Criticality
+MBSFN Area Id
+M
+
+9.2.1.14
+
+−
+−
+PDCCH Length
+M
+
+ENUMERATED (s1, s2,…)
+This IE is encoded along the number of OFDM symbols for PDCCH as of table 6.7-1. In TS 36.211 [12].
+−
+−
+Repetition Period 
+M
+
+ENUMERATED (rf32, rf64, rf128, rf256)
+The same encoding as the mcch-RepetitionPeriod IE in the mcch-Config IE as specified in TS 36.331 [11].
+−
+−
+Repetition Period Extended
+O
+
+ENUMERATED (rf1, rf2, rf4, rf8, rf16, …)
+The same encoding as the mcch-RepetitionPeriod-v14x0 IE in the mcch-Config IE as specified in TS 36.331 [11]. If this IE is present, the value signalled in the Repetition Period IE is ignored.
+YES
+reject
+Offset
+M
+
+INTEGER (0..10)
+The same encoding as the mcch-Offset in mcch-Config IE as specified in TS 36.331 [11].
+−
+−
+Modification Period
+M
+
+ENUMERATED (rf512, rf1024)
+The same encoding as the mcch-ModificationPeriod IE in the mcch-Config IE as specified in TS 36.331 [11].
+−
+−
+Modification Period Extended
+O
+
+ENUMERATED (rf1, rf2, rf4, rf8, rf16, rf32, rf64, rf128, rf256, …)
+The same encoding as the mcch-ModificationPeriod-v14x0 IE in the mcch-Config IE as specified in TS 36.331 [11]. If this IE is present, the value signalled in the Modification Period IE is ignored.
+YES
+reject
+Subframe Allocation Info
+M
+
+BIT STRING (SIZE(6))
+The same encoding as the sf-AllocInfo IE specified in TS 36.331 [11].
+−
+−
+Modulation and Coding Scheme
+M
+
+ENUMERATED (n2, n7, n13, n19)
+The same encoding as the signallingMCS IE specified in TS 36.331 [11].
+−
+−
+Cell Information List 
+
+0..1
+
+
+
+
+>Cell Information
+
+1 to <maxnoofCells>
+
+
+
+
+>>E-UTRAN CGI 
+M
+
+9.2.1.11
+
+−
+−
+>>Cell Reservation Info
+M
+
+ENUMERATED (reservedCell, nonReservedCell, …)
+
+−
+−
+Subcarrier Spacing MBMS
+O
+
+ENUMERATED (khz-7dot5, khz-1dot25, …)
+Semantics along the definition of the subcarrierSpacingMBMS-r14 IE as specified in TS 36.331 [11].
+YES
+reject
+
+Range bound
+Explanation
+maxnoofCells
+Maximum no. of cells that may be served by an eNB. The value for maxnoofCells is 256.
+
+9.2.1.14	MBSFN Area Id
+This IE defines the MBSFN Area Id.
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+MBSFN Area Id
+M
+
+INTEGER (0..255)
+The same encoding as the mbsfn-AreaId IE specified in TS 36.331 [11].
+
+9.2.1.15	Time to Wait
+This IE defines the minimum allowed waiting time.
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+Time to Wait
+M
+
+ENUMERATED(1s, 2s, 5s, 10s, 20s, 60s,…)
+
+
+9.2.1.16	Global MCE ID
+This IE is used to globally identify an MCE.
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+PLMN Identity
+M
+
+9.2.3.8
+
+MCE ID
+M
+
+OCTET STRING (SIZE(2))
+
+
+9.2.1.17	MBSFN Subframe Configuration
+This IE indicates the MBSFN Subframe Configuration, as defined in TS 36.331 [11].
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+Radio Frame Allocation Period
+M
+
+ENUMERATED (n1, n2, n4, n8, n16, n32)
+Semantics along the IE definition in TS 36.331 [11].
+Radio Frame Allocation Offset
+M
+
+INTEGER (0..7)
+Semantics along the IE definition in TS 36.331 [11].
+CHOICE Subframe Allocation
+M
+
+
+
+>One Frame
+
+
+
+
+>>One Frame Item
+M
+
+BIT STRING (SIZE(6))
+Semantics along the IE definition in TS 36.331 [11].
+>Four Frames
+
+
+
+
+>>Four Frame Item
+M
+
+BIT STRING (SIZE(24))
+Semantics along the IE definition in TS 36.331 [11].
+CHOICE Subframe Allocation Extended
+O
+
+
+
+>One Frame Extension
+
+
+
+
+>>One Frame Extension Item
+M
+
+BIT STRING (SIZE(2))
+Semantics along the definition of the MBSFN-SubframeConfig-v1430 IE as specified in TS 36.331 [11].
+>Four Frames Extension
+
+
+
+
+>>Four Frame Extension Item
+M
+
+BIT STRING (SIZE(8))
+Semantics along the definition of the MBSFN-SubframeConfig-v1430 IE as specified in TS 36.331 [11].
+CHOICE Subframe Allocation Further Extension
+O
+
+
+
+>One Frame Further Extension
+
+
+
+
+>>One Frame Further Extension Item
+M
+
+BIT STRING (SIZE(2))
+Semantics along the definition of the MBSFN-SubframeConfig-v1610 IE as specified in TS 36.331 [11].
+>Four Frames Further Extension
+
+
+
+
+>>Four Frame Further Extension Item
+M
+
+BIT STRING (SIZE(8))
+Semantics along the definition of the MBSFN-SubframeConfig-v1610 IE as specified in TS 36.331 [11].
+
+9.2.1.18	Common Subframe Allocation Period
+This IE defines the period during which allocated subframes are divided between PMCHs configured for the MBSFN area, see TS 36.331 [11].
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+Common Subframe Allocation Period
+M
+
+ENUMERATED (rf4, rf8, rf16, rf32, rf64, rf128, rf256)
+The same encoding as the commonSF-AllocPeriod IE as specified in TS 36.331 [11].
+
+9.2.1.19	MCCH Update Time
+This IE indicates the time at which the eNB shall apply the update of the MCCH as specified in TS 36.300 [3].
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+MCCH Update Time
+M
+
+INTEGER (0..255)
+This IE indicates the modification period, as an absolute value, from when the MCCH update should be applied. 
+Note: The duration of the modification period is configured in eNB and MCE.
+
+9.2.1.20	MBSFN Synchronisation Area Id
+This IE defines the MBSFN Synchronisation Area Identity as specified in TS 36.300 [3].
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+MBSFN Synchronisation Area Id
+M
+
+INTEGER (0..65535)
+The MBSFN Synchronisation Area is defined in TS 36.300 [3].
+
+9.2.1.21	Counting Result
+This IE defines the number of connected mode Ues that are receiving or interested in a MBMS service.
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+Counting Result
+M
+
+INTEGER(0..1023)
+This IE indicates the number of connected mode Ues that are receiving or interested in a MBMS service. The value 1023 is used if the UE number is equal to or more than 1023.
+
+9.2.1.22	SC-PTM information
+This IE defines the SC-PTM information.
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+MBMS Cell List Item
+
+1 .. < maxnoofCellsforMBMS >
+
+
+>Cell ID
+M
+
+E-UTRAN CGI
+9.2.1.11
+Global ID of the cell.
+MBMS E-RAB QoS parameters
+M
+
+9.2.1.23
+
+
+Range bound
+Explanation
+maxnoofCellsforMBMS
+Maximum no. of cells for the MBMS service. The value for maxnoofCellsforMBMS is 4096.
+
+9.2.1.23	MBMS E-RAB QoS parameters
+This IE defines the QoS to be applied to an MBMS E-RAB.
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+MBMS E-RAB QoS Parameters
+
+
+
+
+>QCI
+M
+
+INTEGER (0..255)
+QoS Class Identifier defined in TS 23.246 [8].
+Coding is specified in TS 23.203 [15].
+>GBR QoS Information
+O
+
+9.2.1.24
+This IE applies to GBR bearers only and shall be ignored otherwise.
+>Allocation and Retention Priority
+M
+
+9.2.1.26
+
+
+9.2.1.24	GBR QoS Information
+This IE indicates the maximum and guaranteed bit rates of a GBR bearer for downlink.
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+MBMS E-RAB Maximum Bit Rate Downlink
+M
+
+Bit Rate 9.2.1.25
+Desc.: This IE indicates the maximum downlink MBMS E-RAB Bit Rate (i.e. from the EPC to E-UTRAN) for this bearer.
+MBMS E-RAB Guaranteed Bit Rate Downlink
+M
+
+Bit Rate 9.2.1.25
+Desc.: This IE indicates the downlink guaranteed MBMS E-RAB Bit Rate (provided that there is data to deliver) from the EPC to the E-UTRAN for this bearer.
+
+9.2.1.25	Bit Rate
+This IE indicates the number of bits delivered by E-UTRAN in DL within a period of time, divided by the duration of the period. It is used, for example, to indicate the maximum or guaranteed bit rate for a GBR bearer, or an aggregated maximum bit rate.
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+Bit Rate
+
+
+INTEGER (0..10,000,000,000)
+The unit is: bit/s 
+
+9.2.1.26	Allocation and Retention Priority
+This IE specifies the relative importance of an MBMS E-RAB compared to other MBMS E-RABs for allocation and retention of the MBMS E-RAB.
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+Allocation/Retention Priority
+
+
+
+
+>Priority Level
+M
+
+INTEGER (0..15)
+Desc.: This IE should be understood as the “priority of allocation and retention” (see TS 23.246 [6]).
+Usage:
+Value 15 means “no priority”.
+Values between 1 and 14 are ordered in decreasing order of priority, i.e. 1 is the highest and 14 the lowest.
+Value 0 shall be treated as a logical error if received.
+>Pre-emption Capability
+M
+
+ENUMERATED(shall not trigger pre-emption, may trigger pre-emption)
+This IE indicates the pre-emption capability of the request on other MBMS E-RABs.
+>Pre-emption Vulnerability
+M
+
+ENUMERATED(not pre-emptable, pre-emptable)
+This IE indicates the vulnerability of the MBMS E-RAB to 54ehaviour54n of other MBMS E-RABs.
+
+9.2.1.27	MCCH related BCCH Extended Configuration Item
+This information element provides MCCH related BCCH configuration information to the eNB in line with the MBSFN-AreaInfo-r16 IE as defined in TS 36.331 [11].
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+MBSFN Area Id
+M
+
+9.2.1.14
+
+Repetition Period Expanded
+M
+
+ENUMERATED (rf1, rf2, rf4, rf8, rf16, rf32, rf64, rf128, rf256, …)
+The same encoding as the mcch-RepetitionPeriod-r16 IE in the mcch-Config-r16 IE as specified in TS 36.331 [11].
+Offset
+M
+
+INTEGER (0..10)
+The same encoding as the mcch-Offset-r16 IE in the mcch-Config-r16 IE as specified in TS 36.331 [11].
+Modification Period Expanded
+M
+
+ENUMERATED (rf1, rf2, rf4, rf8, rf16, rf32, rf64, rf128, rf256, rf512, rf1024, …)
+The same encoding as the mcch-ModificationPeriod-r16 IE in the mcch-Config-r16 IE as specified in TS 36.331 [11].
+Subframe Allocation Info Expanded
+M
+
+BIT STRING (SIZE(10))
+The same encoding as the sf-AllocInfo-r16  IE in the mcch-Config-r16 IE as specified in TS 36.331 [11].
+Modulation and Coding Scheme
+M
+
+ENUMERATED (n2, n7, n13, n19)
+The same encoding as the signallingMCS-r16 IE in the mcch-Config-r16 IE as specified in TS 36.331 [11].
+Subcarrier Spacing MBMS Expanded
+M
+
+ENUMERATED (khz-7dot5, khz-2dot5, khz-1dot25, khz-0dot37, …)
+The same encoding as the subcarrierSpacingMBMS-r16 IE in the mcch-Config-r16 IE as specified in TS 36.331 [11].
+Time separation
+O
+
+ENUMERATED (sl2, sl4, … )
+The same encoding as the timeSeparation-r16 IE in the mcch-Config-r16 IE as specified in TS 36.331 [11]. 
+Cell Information List 
+
+0..1
+
+
+>Cell Information
+
+1 to <maxnoofCells>
+
+
+>>E-UTRAN CGI 
+M
+
+9.2.1.11
+
+>>Cell Reservation Info
+M
+
+ENUMERATED (reservedCell, nonReservedCell, …)
+
+
+Range bound
+Explanation
+maxnoofCells
+Maximum no. of cells that may be served by an eNB. The value for maxnoofCells is 256.
+
+9.2.2	Transport Network Layer Related Ies
+9.2.2.1	IP Address
+This information element is an IP address. 
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+IP Address
+M
+
+OCTET STRING (4..16)
+The Radio Network Layer is not supposed to interpret the address information. It should pass it to the transport layer for interpretation.
+For details on the IP Address, see ref. TS 36.445 [13].
+
+9.2.2.2	GTP-TEID
+This information element is the GTP Tunnel Endpoint Identifier to be used for the user plane transport between eNB and the MBMS-GW.
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+GTP TEID
+M
+
+OCTET STRING (4)
+For details and range, see TS 29.281 [14].
+
+9.2.3	NAS Related Ies
+9.2.3.1	MCE MBMS M2AP ID
+The MCE MBMS M2AP ID uniquely identifies the MBMS Service association over the M2 interface within the MCE.
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+MCE MBMS M2AP ID
+M
+
+INTEGER (0 .. 224 -1)
+
+
+9.2.3.2	eNB MBMS M2AP ID
+The eNB MBMS M2AP ID uniquely identifies the MBMS Service association over the M2 interface within the eNB.
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+eNB MBMS M2AP ID
+M
+
+INTEGER (0 .. 65535)
+
+
+9.2.3.3	TMGI
+The TMGI uniquely identifies the MBMS Bearer Service.
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+TMGI
+
+
+
+
+>PLMN identity
+M
+
+9.2.3.7
+
+>Service ID
+M
+
+OCTET STRING (SIZE (3))
+
+
+9.2.3.4	MBMS Session Identity
+The MBMS Session Identity identifies the session of an MBMS Bearer Service in E-UTRAN and is used by the UE to recognise repetitions of the session.
+This IE is transparent to RAN.
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+MBMS Session Identity
+M
+
+OCTET STRING (SIZE (1))
+Coded same way as the MBMS Session Identity IE as defined in TS 29.061 [9].
+
+9.2.3.5	Void
+9.2.3.6	MBMS Service Area
+The MBMS Service Area IE consists of a list of one or several MBMS Service Area Identities where each MBMS Service Area Identity is frequency agnostic and can be mapped onto one or more cells.
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+MBMS Service Area
+M
+
+OCTET STRING
+Value part coded per MBMS Service Area AVP as defined in TS 29.061 [9].
+
+9.2.3.7	PLMN Identity
+This information element indicates the PLMN Identity.
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+PLMN identity
+M
+
+OCTET STRING (SIZE (3))
+- digits 0 to 9, encoded 0000 to 1001,
+- 1111 used as filler digit,
+two digits per octet,
+- bits 4 to 1 of octet n encoding digit 2n-1
+- bits 8 to 5 of octet n encoding digit 2n
+
+-The Selected PLMN identity consists of 3 digits from MCC followed by either 
+-a filler digit plus 2 digits from MNC (in case of 2 digit MNC) or 
+-3 digits from MNC (in case of a 3 digit MNC).
+
+9.3	Message and Information Element Abstract Syntax (with ASN.1)
+9.3.1	General
+M2AP ASN.1 definition conforms with ITU-T Rec. X.691 [5] and ITU-T Rec. X.680 [6].
+Sub clause 9.3 presents the Abstract Syntax of the M2AP protocol with ASN.1. In case there is contradiction between the ASN.1 definition in this sub clause and the tabular format in sub clause 9.1 and 9.2, the ASN.1 shall take precedence, except for the definition of conditions for the presence of conditional elements, in which the tabular format shall take precedence.
+The ASN.1 definition specifies the structure and content of M2AP messages. M2AP messages can contain any Ies specified in the object set definitions for that message without the order or number of occurrence being restricted by ASN.1. However, for this version of the standard, a sending entity shall construct an M2AP message according to the PDU definitions module and with the following additional rules (Note that in the following IE means an IE in the object set with an explicit id. If one IE needed to appear more than once in one object set, then the different occurrences have different IE ids):
+-	Ies shall be ordered (in an IE container) in the order they appear in object set definitions.
+-	Object set definitions specify how many times Ies may appear. An IE shall appear exactly once if the presence field in an object has value “mandatory”. An IE may appear at most once if the presence field in an object has value “optional” or “conditional”. If in a tabular format there is multiplicity specified for an IE (i.e. an IE list) then in the corresponding ASN.1 definition the list definition is separated into two parts. The first part defines an IE container list in which the list elements reside. The second part defines list elements. The IE container list appears as an IE of its own. For this version of the standard an IE container list may contain only one kind of list elements.
+If an M2AP message that is not constructed as defined above is received, this shall be considered as Abstract Syntax Error, and the message shall be handled as defined for Abstract Syntax Error in clause 10.
+9.3.2	Usage of Private Message Mechanism for Non-standard Use
+The private message mechanism for non-standard use may be used:
+-	for special operator (and/or vendor) specific features considered not to be part of the basic functionality, i.e. the functionality required for a complete and high-quality specification in order to guarantee multivendor inter-operability.
+-	by vendors for research purposes, e.g. to implement and evaluate new algorithms/features before such features are proposed for standardisation.
+The private message mechanism shall not be used for basic functionality. Such functionality shall be standardised.
+9.3.3	Elementary Procedure Definitions
+-- **************************************************************
+--
+-- Elementary Procedure definitions
+--
+-- **************************************************************
+
+M2AP-PDU-Descriptions {
+itu-t (0) identified-organization (4) etsi (0) mobileDomain (0) 
+eps-Access (21) modules (3) m2ap (4) version1 (1) m2ap-PDU-Descriptions (0) }
+
+DEFINITIONS AUTOMATIC TAGS ::= 
+
+BEGIN
+
+-- **************************************************************
+--
+-- IE parameter types from other modules.
+--
+-- **************************************************************
+
+IMPORTS
+	Criticality,
+	ProcedureCode
+FROM M2AP-CommonDataTypes
+
+
+	SessionStartRequest,
+	SessionStartResponse,
+	SessionStartFailure,
+	SessionStopRequest,
+	SessionStopResponse, 
+	SessionUpdateRequest,
+	SessionUpdateResponse,
+	SessionUpdateFailure,
+	MbmsSchedulingInformation,
+	MbmsSchedulingInformationResponse,
+	ErrorIndication,
+	Reset,
+	ResetAcknowledge,
+	M2SetupRequest,
+	M2SetupResponse,
+	M2SetupFailure,
+	ENBConfigurationUpdate,
+	ENBConfigurationUpdateAcknowledge,
+	ENBConfigurationUpdateFailure,
+	MCEConfigurationUpdate,
+	MCEConfigurationUpdateAcknowledge,
+	MCEConfigurationUpdateFailure,
+	MbmsServiceCountingRequest,
+	MbmsServiceCountingResponse,
+	MbmsServiceCountingFailure,
+	MbmsServiceCountingResultsReport,
+	PrivateMessage,
+	MbmsOverloadNotification
+FROM M2AP-PDU-Contents
+
+	id-sessionStart,
+	id-sessionStop, 
+	id-sessionUpdate,
+	id-mbmsServiceCounting,
+	id-mbmsServiceCountingResultsReport,
+	id-mbmsSchedulingInformation,
+	id-errorIndication,
+	id-reset,
+	id-m2Setup,
+	id-eNBConfigurationUpdate,
+	id-mCEConfigurationUpdate,
+	id-privateMessage,
+	id-mbmsOverloadNotification
+FROM M2AP-Constants;
+
+
+-- **************************************************************
+--
+-- Interface Elementary Procedure Class
+--
+-- **************************************************************
+
+M2AP-ELEMENTARY-PROCEDURE ::= CLASS {
+	&InitiatingMessage				,
+	&SuccessfulOutcome				OPTIONAL,
+	&UnsuccessfulOutcome				OPTIONAL,
+	&procedureCode			ProcedureCode 	UNIQUE,
+	&criticality			Criticality 	DEFAULT ignore
+}
+WITH SYNTAX {
+	INITIATING MESSAGE		&InitiatingMessage
+	[SUCCESSFUL OUTCOME		&SuccessfulOutcome]
+	[UNSUCCESSFUL OUTCOME		&UnsuccessfulOutcome]
+	PROCEDURE CODE			&procedureCode
+	[CRITICALITY			&criticality]
+}
+
+-- **************************************************************
+--
+-- Interface PDU Definition
+--
+-- **************************************************************
+
+M2AP-PDU ::= CHOICE {
+	initiatingMessage	InitiatingMessage,
+	successfulOutcome	SuccessfulOutcome,
+	unsuccessfulOutcome	UnsuccessfulOutcome,
+	...
+}
+
+InitiatingMessage ::= SEQUENCE {
+	procedureCode	M2AP-ELEMENTARY-PROCEDURE.&procedureCode		({M2AP-ELEMENTARY-PROCEDURES}),
+	criticality		M2AP-ELEMENTARY-PROCEDURE.&criticality			({M2AP-ELEMENTARY-PROCEDURES}{@procedureCode}),
+	value			M2AP-ELEMENTARY-PROCEDURE.&InitiatingMessage	({M2AP-ELEMENTARY-PROCEDURES}{@procedureCode})
+}
+
+SuccessfulOutcome ::= SEQUENCE {
+	procedureCode	M2AP-ELEMENTARY-PROCEDURE.&procedureCode		({M2AP-ELEMENTARY-PROCEDURES}),
+	criticality		M2AP-ELEMENTARY-PROCEDURE.&criticality			({M2AP-ELEMENTARY-PROCEDURES}{@procedureCode}),
+	value			M2AP-ELEMENTARY-PROCEDURE.&SuccessfulOutcome	({M2AP-ELEMENTARY-PROCEDURES}{@procedureCode})
+}
+
+UnsuccessfulOutcome ::= SEQUENCE {
+	procedureCode	M2AP-ELEMENTARY-PROCEDURE.&procedureCode		({M2AP-ELEMENTARY-PROCEDURES}),
+	criticality		M2AP-ELEMENTARY-PROCEDURE.&criticality			({M2AP-ELEMENTARY-PROCEDURES}{@procedureCode}),
+	value			M2AP-ELEMENTARY-PROCEDURE.&UnsuccessfulOutcome	({M2AP-ELEMENTARY-PROCEDURES}{@procedureCode})
+}
+
+
+-- **************************************************************
+--
+-- Interface Elementary Procedure List
+--
+-- **************************************************************
+
+M2AP-ELEMENTARY-PROCEDURES M2AP-ELEMENTARY-PROCEDURE ::= {
+	M2AP-ELEMENTARY-PROCEDURES-CLASS-1			|
+	M2AP-ELEMENTARY-PROCEDURES-CLASS-2			,
+	...
+}
+
+M2AP-ELEMENTARY-PROCEDURES-CLASS-1 M2AP-ELEMENTARY-PROCEDURE ::= {
+	sessionStart											|
+	sessionStop												|
+	sessionUpdate											|
+	mbmsSchedulingInformation								|
+	reset													|
+	m2Setup													|
+	eNBConfigurationUpdate									|
+	mCEConfigurationUpdate									|
+	mbmsServiceCounting										,
+	...
+}
+
+M2AP-ELEMENTARY-PROCEDURES-CLASS-2 M2AP-ELEMENTARY-PROCEDURE ::= {
+	errorIndication							|
+	privateMessage							|
+	mbmsServiceCountingResultsReport		|
+	mbmsOverloadNotification				,
+	...
+
+}
+
+
+-- **************************************************************
+--
+-- Interface Elementary Procedures
+--
+-- **************************************************************
+
+sessionStart M2AP-ELEMENTARY-PROCEDURE ::= {
+	INITIATING MESSAGE		SessionStartRequest
+	SUCCESSFUL OUTCOME		SessionStartResponse
+	UNSUCCESSFUL OUTCOME	SessionStartFailure
+	PROCEDURE CODE			id-sessionStart
+	CRITICALITY				reject
+}
+
+sessionStop M2AP-ELEMENTARY-PROCEDURE ::= {
+	INITIATING MESSAGE		SessionStopRequest
+	SUCCESSFUL OUTCOME		SessionStopResponse
+	PROCEDURE CODE			id-sessionStop
+	CRITICALITY				reject
+}
+
+sessionUpdate M2AP-ELEMENTARY-PROCEDURE ::= {
+	INITIATING MESSAGE		SessionUpdateRequest
+	SUCCESSFUL OUTCOME		SessionUpdateResponse
+	UNSUCCESSFUL OUTCOME	SessionUpdateFailure
+	PROCEDURE CODE			id-sessionUpdate
+	CRITICALITY				reject
+}
+
+mbmsSchedulingInformation M2AP-ELEMENTARY-PROCEDURE ::= {
+	INITIATING MESSAGE		MbmsSchedulingInformation
+	SUCCESSFUL OUTCOME		MbmsSchedulingInformationResponse
+	PROCEDURE CODE			id-mbmsSchedulingInformation
+	CRITICALITY				reject
+}
+
+errorIndication M2AP-ELEMENTARY-PROCEDURE ::= {
+	INITIATING MESSAGE		ErrorIndication
+	PROCEDURE CODE			id-errorIndication
+	CRITICALITY				ignore
+}
+
+reset	M2AP-ELEMENTARY-PROCEDURE ::= {
+	INITIATING MESSAGE		Reset
+	SUCCESSFUL OUTCOME		ResetAcknowledge
+	PROCEDURE CODE			id-reset
+	CRITICALITY				reject
+}
+
+m2Setup	M2AP-ELEMENTARY-PROCEDURE ::= {
+	INITIATING MESSAGE		M2SetupRequest
+	SUCCESSFUL OUTCOME		M2SetupResponse
+	UNSUCCESSFUL OUTCOME	M2SetupFailure
+	PROCEDURE CODE			id-m2Setup
+	CRITICALITY				reject
+}
+
+eNBConfigurationUpdate		M2AP-ELEMENTARY-PROCEDURE ::= {
+	INITIATING MESSAGE		ENBConfigurationUpdate
+	SUCCESSFUL OUTCOME		ENBConfigurationUpdateAcknowledge
+	UNSUCCESSFUL OUTCOME	ENBConfigurationUpdateFailure
+	PROCEDURE CODE			id-eNBConfigurationUpdate
+	CRITICALITY				reject
+}
+
+mCEConfigurationUpdate		M2AP-ELEMENTARY-PROCEDURE ::= {
+	INITIATING MESSAGE		MCEConfigurationUpdate
+	SUCCESSFUL OUTCOME		MCEConfigurationUpdateAcknowledge
+	UNSUCCESSFUL OUTCOME	MCEConfigurationUpdateFailure
+	PROCEDURE CODE			id-mCEConfigurationUpdate
+	CRITICALITY				reject
+}
+
+mbmsServiceCounting			M2AP-ELEMENTARY-PROCEDURE ::= {
+	INITIATING MESSAGE		MbmsServiceCountingRequest
+	SUCCESSFUL OUTCOME		MbmsServiceCountingResponse
+	UNSUCCESSFUL OUTCOME	MbmsServiceCountingFailure
+	PROCEDURE CODE			id-mbmsServiceCounting
+	CRITICALITY				reject
+}
+
+mbmsServiceCountingResultsReport	M2AP-ELEMENTARY-PROCEDURE ::= {
+	INITIATING MESSAGE		MbmsServiceCountingResultsReport
+	PROCEDURE CODE			id-mbmsServiceCountingResultsReport
+	CRITICALITY				reject
+}
+
+privateMessage			M2AP-ELEMENTARY-PROCEDURE ::= {
+	INITIATING MESSAGE		PrivateMessage
+	PROCEDURE CODE			id-privateMessage
+	CRITICALITY				ignore
+}
+
+mbmsOverloadNotification	M2AP-ELEMENTARY-PROCEDURE ::= {
+	INITIATING MESSAGE		MbmsOverloadNotification
+	PROCEDURE CODE			id-mbmsOverloadNotification
+	CRITICALITY				reject
+}
+
+END
+
+9.3.4	PDU Definitions
+-- **************************************************************
+--
+-- PDU definitions for M2AP.
+--
+-- **************************************************************
+
+M2AP-PDU-Contents {
+itu-t (0) identified-organization (4) etsi (0) mobileDomain (0) 
+eps-Access (21) modules (3) m2ap (4) version1 (1) m2ap-PDU-Contents (1) }
+
+DEFINITIONS AUTOMATIC TAGS ::= 
+
+BEGIN
+
+-- **************************************************************
+--
+-- IE parameter types from other modules.
+--
+-- **************************************************************
+
+IMPORTS
+	
+	Cause,
+	CriticalityDiagnostics,
+	ENB-MBMS-Configuration-data-Item,
+	ENB-MBMS-Configuration-data-ConfigUpdate-Item,
+	ENB-MBMS-M2AP-ID,
+	ENBname,
+	GlobalENB-ID,
+	GlobalMCE-ID,
+	MBSFN-Area-ID,
+	MBMS-Service-Area,
+	MBMS-Session-ID,
+	MBMSsessionListPerPMCH-Item, 
+	MBMS-Service-associatedLogicalM2-ConnectionItem,
+	MBSFN-Subframe-Configuration,
+	MCCH-Update-Time,
+	MCCHrelatedBCCH-ConfigPerMBSFNArea-Item,
+	MCCHrelatedBCCH-ExtConfigPerMBSFNArea-Item,
+	MCE-MBMS-M2AP-ID,
+	MCEname,
+	PMCH-Configuration,
+	Common-Subframe-Allocation-Period,
+	TimeToWait,
+	TMGI,
+	TNL-Information,
+	SFN,
+	MBMSsessionsToBeSuspendedListPerPMCH-Item,
+	SC-PTM-Information
+
+FROM M2AP-Ies
+
+	PrivateIE-Container{},
+	ProtocolExtensionContainer{},
+	ProtocolIE-Container{},
+	ProtocolIE-ContainerList{},
+	ProtocolIE-ContainerPair{},
+	ProtocolIE-ContainerPairList{},
+	ProtocolIE-Single-Container{},
+	M2AP-PRIVATE-IES,
+	M2AP-PROTOCOL-EXTENSION,
+	M2AP-PROTOCOL-IES,
+	M2AP-PROTOCOL-IES-PAIR
+FROM M2AP-Containers
+
+	id-MCE-MBMS-M2AP-ID,
+	id-ENB-MBMS-M2AP-ID,
+	id-TMGI,
+	id-MBMS-Session-ID,
+	id-MBMS-Service-Area,
+	id-TNL-Information,
+	id-Alternative-TNL-Information,
+	id-CriticalityDiagnostics,
+	id-Cause,
+	id-MBSFN-Area-Configuration-List,
+	id-MBSFN-Subframe-Configuration-Item,
+	id-MBSFN-Subframe-Configuration-List,
+	id-MCCH-Update-Time,
+	id-PMCH-Configuration-List,
+	id-PMCH-Configuration-Item,
+	id-Common-Subframe-Allocation-Period,
+	id-GlobalENB-ID,
+	id-ENBname,
+	id-ENB-MBMS-Configuration-data-List,
+	id-ENB-MBMS-Configuration-data-Item,
+	id-GlobalMCE-ID,
+	id-MCEname,
+	id-MCCHrelatedBCCH-ConfigPerMBSFNArea,
+	id-MCCHrelatedBCCH-ConfigPerMBSFNArea-Item,
+	id-MCCHrelatedBCCH-ExtConfigPerMBSFNArea,
+	id-MCCHrelatedBCCH-ExtConfigPerMBSFNArea-Item,
+	id-TimeToWait,
+	id-ENB-MBMS-Configuration-data-List-ConfigUpdate,
+	id-ENB-MBMS-Configuration-data-ConfigUpdate-Item,
+	id-MBSFN-Area-ID,
+	id-ResetType,
+	id-MBMS-Service-associatedLogicalM2-ConnectionItem,
+	id-MBMS-Service-associatedLogicalM2-ConnectionListResAck,
+	id-MBMS-Counting-Request-Session,
+	id-MBMS-Counting-Request-Session-Item,
+	id-MBMS-Counting-Result-List,
+	id-MBMS-Counting-Result-Item,
+	id-MBMS-Suspension-Notification-List,
+	id-MBMS-Suspension-Notification-Item,
+	id-PMCH-Overload-Status,
+	id-Overload-Status-Per-PMCH-List,
+	id-Active-MBMS-Session-List,
+	id-SC-PTM-Information,
+	maxnoofMBSFN-Allocations,
+	maxnoofMBSFNareas,
+	maxnoofPMCHsperMBSFNarea,
+	maxnoofCells,
+	maxnoofMBMSServiceAreasPerCell,
+	maxnoofSessionsPerPMCH,
+	maxnooferrors,
+	maxNrOfIndividualM2ConnectionsToReset,
+	maxnoofCountingService
+
+FROM M2AP-Constants;
+
+-- **************************************************************
+--
+-- SESSION START REQUEST
+--
+-- **************************************************************
+
+SessionStartRequest ::= SEQUENCE {
+	protocolIEs                     ProtocolIE-Container       {{SessionStartRequest-Ies}},
+	...
+}
+
+SessionStartRequest-Ies M2AP-PROTOCOL-IES ::= {
+	{ ID id-MCE-MBMS-M2AP-ID					CRITICALITY reject	TYPE MCE-MBMS-M2AP-ID					PRESENCE mandatory}|
+	{ ID id-TMGI								CRITICALITY reject	TYPE TMGI								PRESENCE mandatory}|
+	{ ID id-MBMS-Session-ID						CRITICALITY ignore	TYPE MBMS-Session-ID					PRESENCE optional}|
+	{ ID id-MBMS-Service-Area					CRITICALITY reject	TYPE MBMS-Service-Area					PRESENCE mandatory}|
+	{ ID id-TNL-Information						CRITICALITY reject	TYPE TNL-Information					PRESENCE mandatory}|
+	{ ID id-Alternative-TNL-Information			CRITICALITY ignore	TYPE TNL-Information					PRESENCE optional}|
+	{ ID id-SC-PTM-Information					CRITICALITY reject	TYPE SC-PTM-Information					PRESENCE optional},
+	...
+}
+
+-- **************************************************************
+--
+-- SESSION START RESPONSE
+--
+-- **************************************************************
+
+SessionStartResponse ::= SEQUENCE {
+	protocolIEs                     ProtocolIE-Container       {{ SessionStartResponse-Ies}},
+	...
+}
+
+SessionStartResponse-Ies M2AP-PROTOCOL-IES ::= {
+	{ ID id-MCE-MBMS-M2AP-ID					CRITICALITY ignore	TYPE MCE-MBMS-M2AP-ID					PRESENCE mandatory } |
+	{ ID id-ENB-MBMS-M2AP-ID					CRITICALITY ignore	TYPE ENB-MBMS-M2AP-ID					PRESENCE mandatory } |
+	{ ID id-CriticalityDiagnostics				CRITICALITY ignore	TYPE CriticalityDiagnostics				PRESENCE optional  },
+	...
+}
+
+
+-- **************************************************************
+--
+-- SESSION START FAILURE
+--
+-- **************************************************************
+
+SessionStartFailure ::= SEQUENCE {
+	protocolIEs                     ProtocolIE-Container       {{ SessionStartFailure-Ies}},
+	...
+}
+
+SessionStartFailure-Ies M2AP-PROTOCOL-IES ::= {
+	{ ID id-MCE-MBMS-M2AP-ID					CRITICALITY ignore	TYPE MCE-MBMS-M2AP-ID					PRESENCE mandatory } |
+	{ ID id-Cause								CRITICALITY ignore	TYPE Cause								PRESENCE mandatory } |
+	{ ID id-CriticalityDiagnostics				CRITICALITY ignore	TYPE CriticalityDiagnostics				PRESENCE optional  },
+	...
+}
+
+
+-- **************************************************************
+--
+-- SESSION STOP REQUEST
+--
+-- **************************************************************
+
+SessionStopRequest ::= SEQUENCE {
+	protocolIEs                     ProtocolIE-Container       {{SessionStopRequest-Ies}},
+	...
+}
+
+SessionStopRequest-Ies M2AP-PROTOCOL-IES ::= {
+	{ ID id-MCE-MBMS-M2AP-ID					CRITICALITY reject	TYPE MCE-MBMS-M2AP-ID					PRESENCE mandatory } |
+	{ ID id-ENB-MBMS-M2AP-ID					CRITICALITY reject	TYPE ENB-MBMS-M2AP-ID					PRESENCE mandatory } ,
+	...
+}
+
+-- **************************************************************
+--
+-- SESSION STOP RESPONSE
+--
+-- **************************************************************
+
+SessionStopResponse ::= SEQUENCE {
+	protocolIEs                     ProtocolIE-Container       {{ SessionStopResponse-Ies}},
+	...
+}
+
+SessionStopResponse-Ies M2AP-PROTOCOL-IES ::= {
+	{ ID id-MCE-MBMS-M2AP-ID					CRITICALITY ignore	TYPE MCE-MBMS-M2AP-ID					PRESENCE mandatory } |
+	{ ID id-ENB-MBMS-M2AP-ID					CRITICALITY ignore	TYPE ENB-MBMS-M2AP-ID					PRESENCE mandatory } |
+	{ ID id-CriticalityDiagnostics				CRITICALITY ignore	TYPE CriticalityDiagnostics				PRESENCE optional  } ,
+	...
+}
+
+-- **************************************************************
+--
+-- SESSION UPDATE REQUEST
+--
+-- **************************************************************
+
+SessionUpdateRequest ::= SEQUENCE {
+	protocolIEs                     ProtocolIE-Container       {{SessionUpdateRequest-Ies}},
+	...
+}
+
+SessionUpdateRequest-Ies M2AP-PROTOCOL-IES ::= {
+	{ ID id-MCE-MBMS-M2AP-ID			CRITICALITY reject	TYPE MCE-MBMS-M2AP-ID					PRESENCE mandatory}|
+	{ ID id-ENB-MBMS-M2AP-ID			CRITICALITY reject	TYPE ENB-MBMS-M2AP-ID					PRESENCE mandatory}|
+	{ ID id-TMGI						CRITICALITY reject	TYPE TMGI		 						PRESENCE mandatory}|
+	{ ID id-MBMS-Session-ID				CRITICALITY ignore	TYPE MBMS-Session-ID					PRESENCE optional}|
+	{ ID id-MBMS-Service-Area			CRITICALITY ignore	TYPE MBMS-Service-Area					PRESENCE optional}|
+	{ ID id-TNL-Information				CRITICALITY reject	TYPE TNL-Information					PRESENCE optional}|
+	{ ID id-SC-PTM-Information			CRITICALITY reject	TYPE SC-PTM-Information					PRESENCE optional},
+	...
+}
+
+-- **************************************************************
+--
+-- SESSION UPDATE RESPONSE
+--
+-- **************************************************************
+
+SessionUpdateResponse ::= SEQUENCE {
+	protocolIEs                     ProtocolIE-Container       {{ SessionUpdateResponse-Ies}},
+	...
+}
+
+SessionUpdateResponse-Ies M2AP-PROTOCOL-IES ::= {
+	{ ID id-MCE-MBMS-M2AP-ID					CRITICALITY ignore	TYPE MCE-MBMS-M2AP-ID					PRESENCE mandatory } |
+	{ ID id-ENB-MBMS-M2AP-ID					CRITICALITY ignore	TYPE ENB-MBMS-M2AP-ID					PRESENCE mandatory } |
+	{ ID id-CriticalityDiagnostics				CRITICALITY ignore	TYPE CriticalityDiagnostics				PRESENCE optional  },
+	...
+}
+-- **************************************************************
+--
+-- SESSION UPDATE FAILURE
+--
+-- **************************************************************
+
+SessionUpdateFailure ::= SEQUENCE {
+	protocolIEs                     ProtocolIE-Container       {{ SessionUpdateFailure-Ies}},
+	...
+}
+
+SessionUpdateFailure-Ies M2AP-PROTOCOL-IES ::= {
+	{ ID id-MCE-MBMS-M2AP-ID					CRITICALITY ignore	TYPE MCE-MBMS-M2AP-ID					PRESENCE mandatory } |
+	{ ID id-ENB-MBMS-M2AP-ID					CRITICALITY ignore	TYPE ENB-MBMS-M2AP-ID					PRESENCE mandatory } |
+	{ ID id-Cause								CRITICALITY ignore	TYPE Cause								PRESENCE mandatory } |
+	{ ID id-CriticalityDiagnostics				CRITICALITY ignore	TYPE CriticalityDiagnostics				PRESENCE optional  },
+	...
+}
+
+-- **************************************************************
+--
+-- MBMS SCHEDULING INFORMATION
+--
+-- **************************************************************
+
+MbmsSchedulingInformation ::= SEQUENCE {
+	protocolIEs                     ProtocolIE-Container       {{ MbmsSchedulingInformation-Ies}},
+	...
+}
+
+MbmsSchedulingInformation-Ies M2AP-PROTOCOL-IES ::= {
+	{ ID id-MCCH-Update-Time					CRITICALITY reject	TYPE MCCH-Update-Time						PRESENCE mandatory }|
+	{ ID id-MBSFN-Area-Configuration-List		CRITICALITY reject	TYPE MBSFN-Area-Configuration-List			PRESENCE mandatory },
+	...
+}
+
+MBSFN-Area-Configuration-List ::= SEQUENCE (SIZE(1.. maxnoofMBSFNareas)) OF ProtocolIE-Container { { MBSFN-Area-Configuration-Item } }
+
+MBSFN-Area-Configuration-Item M2AP-PROTOCOL-IES ::= {
+	{ ID id-PMCH-Configuration-List				CRITICALITY reject	TYPE PMCH-Configuration-List				PRESENCE mandatory }|
+	{ ID id-MBSFN-Subframe-Configuration-List	CRITICALITY reject	TYPE MBSFN-Subframe-ConfigurationList		PRESENCE mandatory }|
+	{ ID id-Common-Subframe-Allocation-Period	CRITICALITY reject	TYPE Common-Subframe-Allocation-Period		PRESENCE mandatory }|
+	{ ID id-MBSFN-Area-ID						CRITICALITY reject	TYPE MBSFN-Area-ID							PRESENCE mandatory }|
+	{ ID id-MBMS-Suspension-Notification-List	CRITICALITY ignore	TYPE MBMS-Suspension-Notification-List		PRESENCE optional },
+	...
+}
+
+PMCH-Configuration-List ::= SEQUENCE (SIZE(0.. maxnoofPMCHsperMBSFNarea)) OF ProtocolIE-Single-Container { { PMCH-Configuration-ItemIEs } }
+
+PMCH-Configuration-ItemIEs M2AP-PROTOCOL-IES ::= {
+	{ ID id-PMCH-Configuration-Item	 CRITICALITY reject	TYPE PMCH-Configuration-Item	PRESENCE mandatory },
+	...
+}
+
+PMCH-Configuration-Item ::= SEQUENCE {
+	pmch-Configuration				PMCH-Configuration,
+	mbms-Session-List				MBMSsessionListPerPMCH-Item,
+	iE-Extensions					ProtocolExtensionContainer { { PMCH-Configuration-ItemExtIEs} } OPTIONAL,
+	...
+}
+
+PMCH-Configuration-ItemExtIEs M2AP-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+MBSFN-Subframe-ConfigurationList ::= SEQUENCE (SIZE(1.. maxnoofMBSFN-Allocations)) OF ProtocolIE-Single-Container { { MBSFN-Subframe-ConfigurationItem } }
+
+MBSFN-Subframe-ConfigurationItem M2AP-PROTOCOL-IES ::= {
+	{ ID id-MBSFN-Subframe-Configuration-Item		CRITICALITY reject	TYPE MBSFN-Subframe-Configuration		PRESENCE mandatory },
+	...
+}
+
+MBMS-Suspension-Notification-List ::= SEQUENCE (SIZE(1.. maxnoofPMCHsperMBSFNarea)) OF ProtocolIE-Single-Container { { MBMS-Suspension-Notification-ItemIEs } }
+
+MBMS-Suspension-Notification-ItemIEs M2AP-PROTOCOL-IES ::= {
+	{ ID id-MBMS-Suspension-Notification-Item	CRITICALITY ignore	TYPE MBMS-Suspension-Notification-Item	PRESENCE optional},
+	...
+}
+
+MBMS-Suspension-Notification-Item ::= SEQUENCE {
+	sfn											SFN,
+	mbms-Sessions-To-Be-Suspended-List			MBMSsessionsToBeSuspendedListPerPMCH-Item,
+	iE-Extensions								ProtocolExtensionContainer { { MBMS-Suspension-Notification-ItemExtIEs} } OPTIONAL,
+	...
+}
+
+MBMS-Suspension-Notification-ItemExtIEs M2AP-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+-- **************************************************************
+--
+-- MBMS SCHEDULING INFORMATION RESPONSE
+--
+-- **************************************************************
+
+MbmsSchedulingInformationResponse ::= SEQUENCE {
+	protocolIEs                     ProtocolIE-Container       {{ MbmsSchedulingInformationResponse-Ies}},
+	...
+}
+
+MbmsSchedulingInformationResponse-Ies M2AP-PROTOCOL-IES ::= {
+	{ ID id-CriticalityDiagnostics				CRITICALITY ignore	TYPE CriticalityDiagnostics			PRESENCE optional },
+	...
+}
+
+
+-- **************************************************************
+--
+-- M2 SETUP REQUEST
+--
+-- **************************************************************
+
+M2SetupRequest ::= SEQUENCE {
+	protocolIEs                     ProtocolIE-Container       {{M2SetupRequest-Ies}},
+	...
+}
+
+M2SetupRequest-Ies M2AP-PROTOCOL-IES ::= {
+	{ ID id-GlobalENB-ID							CRITICALITY reject	TYPE GlobalENB-ID						PRESENCE mandatory}|
+	{ ID id-ENBname									CRITICALITY ignore	TYPE ENBname 							PRESENCE optional}|
+	{ ID id-ENB-MBMS-Configuration-data-List		CRITICALITY reject	TYPE ENB-MBMS-Configuration-data-List		PRESENCE mandatory},
+	...
+}
+
+ENB-MBMS-Configuration-data-List ::= SEQUENCE (SIZE(1.. maxnoofCells)) OF ProtocolIE-Single-Container { { ENB-MBMS-Configuration-data-ItemIEs } }
+
+ENB-MBMS-Configuration-data-ItemIEs M2AP-PROTOCOL-IES ::= {
+	{ ID id-ENB-MBMS-Configuration-data-Item	CRITICALITY reject	TYPE ENB-MBMS-Configuration-data-Item		PRESENCE mandatory },
+	...
+}
+
+
+-- **************************************************************
+--
+-- M2 SETUP RESPONSE
+--
+-- **************************************************************
+
+M2SetupResponse ::= SEQUENCE {
+	protocolIEs                     ProtocolIE-Container       {{ M2SetupResponse-Ies}},
+	...
+}
+
+M2SetupResponse-Ies M2AP-PROTOCOL-IES ::= {
+	{ ID id-GlobalMCE-ID							CRITICALITY reject	TYPE GlobalMCE-ID							PRESENCE mandatory }|
+	{ ID id-MCEname									CRITICALITY ignore	TYPE MCEname								PRESENCE optional }|
+	{ ID id-MCCHrelatedBCCH-ConfigPerMBSFNArea		CRITICALITY reject	TYPE MCCHrelatedBCCH-ConfigPerMBSFNArea			PRESENCE mandatory }|
+	{ ID id-CriticalityDiagnostics					CRITICALITY ignore	TYPE CriticalityDiagnostics				PRESENCE optional }|
+	{ ID id-MCCHrelatedBCCH-ExtConfigPerMBSFNArea	CRITICALITY reject	TYPE MCCHrelatedBCCH-ExtConfigPerMBSFNArea		PRESENCE optional },
+	...
+}
+
+MCCHrelatedBCCH-ConfigPerMBSFNArea ::= SEQUENCE (SIZE(1.. maxnoofMBSFNareas)) OF ProtocolIE-Single-Container { { MCCHrelatedBCCH-ConfigPerMBSFNArea-ItemIEs } }
+
+MCCHrelatedBCCH-ConfigPerMBSFNArea-ItemIEs 	M2AP-PROTOCOL-IES ::= {
+	{ ID id-MCCHrelatedBCCH-ConfigPerMBSFNArea-Item		CRITICALITY reject	TYPE MCCHrelatedBCCH-ConfigPerMBSFNArea-Item	PRESENCE mandatory },
+	...
+}
+
+MCCHrelatedBCCH-ExtConfigPerMBSFNArea ::= SEQUENCE (SIZE(1.. maxnoofMBSFNareas)) OF ProtocolIE-Single-Container { { MCCHrelatedBCCH-ExtConfigPerMBSFNArea-ItemIEs } }
+
+MCCHrelatedBCCH-ExtConfigPerMBSFNArea-ItemIEs 	M2AP-PROTOCOL-IES ::= {
+	{ ID id-MCCHrelatedBCCH-ExtConfigPerMBSFNArea-Item	CRITICALITY reject	TYPE MCCHrelatedBCCH-ExtConfigPerMBSFNArea-Item		PRESENCE mandatory },
+	...
+}
+
+-- **************************************************************
+--
+-- M2 SETUP FAILURE
+--
+-- **************************************************************
+
+M2SetupFailure ::= SEQUENCE {
+	protocolIEs                     ProtocolIE-Container       {{ M2SetupFailure-Ies}},
+	...
+}
+
+M2SetupFailure-Ies M2AP-PROTOCOL-IES ::= {
+	{ ID id-Cause						CRITICALITY ignore	TYPE Cause						PRESENCE mandatory}|
+	{ ID id-TimeToWait					CRITICALITY ignore	TYPE TimeToWait					PRESENCE optional}|
+	{ ID id-CriticalityDiagnostics		CRITICALITY ignore	TYPE CriticalityDiagnostics		PRESENCE optional},
+
+	...
+}
+
+-- **************************************************************
+--
+-- ENB CONFIGURATION UPDATE
+--
+-- **************************************************************
+
+ENBConfigurationUpdate ::= SEQUENCE {
+	protocolIEs                     ProtocolIE-Container       {{ENBConfigurationUpdate-Ies}},
+	...
+}
+
+ENBConfigurationUpdate-Ies M2AP-PROTOCOL-IES ::= {
+	{ ID id-GlobalENB-ID									CRITICALITY reject	TYPE GlobalENB-ID					PRESENCE optional }|
+	{ ID id-ENBname											CRITICALITY ignore	TYPE ENBname						PRESENCE optional }|
+	{ ID id-ENB-MBMS-Configuration-data-List-ConfigUpdate	CRITICALITY reject	TYPE ENB-MBMS-Configuration-data-List-ConfigUpdate	PRESENCE optional },
+	...
+}
+ENB-MBMS-Configuration-data-List-ConfigUpdate ::= SEQUENCE (SIZE(1.. maxnoofCells)) OF ProtocolIE-Single-Container { { ENB-MBMS-Configuration-data-ConfigUpdate-ItemIEs } }
+
+ENB-MBMS-Configuration-data-ConfigUpdate-ItemIEs 	M2AP-PROTOCOL-IES ::= {
+	{ ID id-ENB-MBMS-Configuration-data-ConfigUpdate-Item	CRITICALITY reject	TYPE ENB-MBMS-Configuration-data-ConfigUpdate-Item	PRESENCE mandatory },
+	...
+}
+
+-- **************************************************************
+--
+-- ENB CONFIGURATION UPDATE ACKNOWLEDGE
+--
+-- **************************************************************
+
+ENBConfigurationUpdateAcknowledge ::= SEQUENCE {
+	protocolIEs                     ProtocolIE-Container       {{ ENBConfigurationUpdateAcknowledge-Ies}},
+	...
+}
+
+ENBConfigurationUpdateAcknowledge-Ies M2AP-PROTOCOL-IES ::= {
+	{ ID id-MCCHrelatedBCCH-ConfigPerMBSFNArea				CRITICALITY reject	TYPE MCCHrelatedBCCH-ConfigPerMBSFNArea		PRESENCE optional }|
+	{ ID id-CriticalityDiagnostics							CRITICALITY ignore	TYPE CriticalityDiagnostics			PRESENCE optional }|
+	{ ID id-MCCHrelatedBCCH-ExtConfigPerMBSFNArea	CRITICALITY reject	TYPE MCCHrelatedBCCH-ExtConfigPerMBSFNArea		PRESENCE optional },
+	...
+}
+
+
+-- **************************************************************
+--
+-- ENB CONFIGURATION UPDATE FAILURE
+--
+-- **************************************************************
+
+ENBConfigurationUpdateFailure ::= SEQUENCE {
+	protocolIEs                     ProtocolIE-Container       {{ ENBConfigurationUpdateFailure-Ies}},
+	...
+}
+
+ENBConfigurationUpdateFailure-Ies M2AP-PROTOCOL-IES ::= {
+	{ ID id-Cause						CRITICALITY ignore	TYPE Cause						PRESENCE mandatory}|
+	{ ID id-TimeToWait					CRITICALITY ignore	TYPE TimeToWait					PRESENCE optional}|
+	{ ID id-CriticalityDiagnostics		CRITICALITY ignore	TYPE CriticalityDiagnostics		PRESENCE optional},
+
+	...
+}
+
+
+-- **************************************************************
+--
+-- MCE CONFIGURATION UPDATE
+--
+-- **************************************************************
+
+MCEConfigurationUpdate ::= SEQUENCE {
+	protocolIEs                     ProtocolIE-Container       {{MCEConfigurationUpdate-Ies}},
+	...
+}
+
+MCEConfigurationUpdate-Ies M2AP-PROTOCOL-IES ::= {
+	{ ID id-GlobalMCE-ID							CRITICALITY reject	TYPE GlobalMCE-ID						PRESENCE optional }|
+	{ ID id-MCEname									CRITICALITY ignore	TYPE MCEname							PRESENCE optional }|
+	{ ID id-MCCHrelatedBCCH-ConfigPerMBSFNArea		CRITICALITY reject	TYPE MCCHrelatedBCCH-ConfigPerMBSFNArea		PRESENCE optional }|
+	{ ID id-MCCHrelatedBCCH-ExtConfigPerMBSFNArea	CRITICALITY reject	TYPE MCCHrelatedBCCH-ExtConfigPerMBSFNArea		PRESENCE optional },
+	...
+}
+
+-- **************************************************************
+--
+-- MCE CONFIGURATION UPDATE ACKNOWLEDGE
+--
+-- **************************************************************
+
+MCEConfigurationUpdateAcknowledge ::= SEQUENCE {
+	protocolIEs                     ProtocolIE-Container       {{ MCEConfigurationUpdateAcknowledge-Ies}},
+	...
+}
+
+MCEConfigurationUpdateAcknowledge-Ies M2AP-PROTOCOL-IES ::= {
+	{ ID id-CriticalityDiagnostics				CRITICALITY ignore	TYPE CriticalityDiagnostics		PRESENCE optional},
+	...
+}
+
+
+-- **************************************************************
+--
+-- MCE CONFIGURATION UPDATE FAILURE
+--
+-- **************************************************************
+
+MCEConfigurationUpdateFailure ::= SEQUENCE {
+	protocolIEs                     ProtocolIE-Container       {{ MCEConfigurationUpdateFailure-Ies}},
+	...
+}
+
+MCEConfigurationUpdateFailure-Ies M2AP-PROTOCOL-IES ::= {
+	{ ID id-Cause						CRITICALITY ignore	TYPE Cause						PRESENCE mandatory}|
+	{ ID id-TimeToWait					CRITICALITY ignore	TYPE TimeToWait					PRESENCE optional}|
+	{ ID id-CriticalityDiagnostics		CRITICALITY ignore	TYPE CriticalityDiagnostics		PRESENCE optional},
+
+	...
+}
+
+
+-- **************************************************************
+--
+-- ERROR INDICATION
+--
+-- **************************************************************
+
+ErrorIndication ::= SEQUENCE {
+	protocolIEs                     ProtocolIE-Container       {{ErrorIndication-Ies}},
+	...
+}
+
+ErrorIndication-Ies M2AP-PROTOCOL-IES ::= {
+	{ ID id-MCE-MBMS-M2AP-ID				CRITICALITY ignore	TYPE MCE-MBMS-M2AP-ID				PRESENCE optional}|
+	{ ID id-ENB-MBMS-M2AP-ID				CRITICALITY ignore	TYPE ENB-MBMS-M2AP-ID				PRESENCE optional}|
+	{ ID id-Cause							CRITICALITY ignore	TYPE Cause							PRESENCE optional}|
+	{ ID id-CriticalityDiagnostics			CRITICALITY ignore	TYPE CriticalityDiagnostics			PRESENCE optional},
+	...
+}
+
+-- **************************************************************
+--
+-- RESET
+--
+-- **************************************************************
+
+Reset ::= SEQUENCE {
+	protocolIEs                     ProtocolIE-Container       {{Reset-Ies}},
+	...
+}
+
+Reset-Ies M2AP-PROTOCOL-IES ::= {
+	{ ID id-Cause					CRITICALITY ignore	TYPE Cause				PRESENCE mandatory}|
+	{ ID id-ResetType				CRITICALITY reject	TYPE ResetType			PRESENCE mandatory},
+	...
+}
+
+ResetType ::= CHOICE {
+	m2-Interface			ResetAll,
+	partOfM2-Interface		MBMS-Service-associatedLogicalM2-ConnectionListRes,
+	...
+}
+
+ResetAll ::= ENUMERATED {
+	reset-all,
+	...
+}
+
+MBMS-Service-associatedLogicalM2-ConnectionListRes ::= SEQUENCE (SIZE(1.. maxNrOfIndividualM2ConnectionsToReset)) OF ProtocolIE-Single-Container { { MBMS-Service-associatedLogicalM2-ConnectionItemRes } }
+
+MBMS-Service-associatedLogicalM2-ConnectionItemRes 	M2AP-PROTOCOL-IES ::= {
+	{ ID id-MBMS-Service-associatedLogicalM2-ConnectionItem	CRITICALITY reject	TYPE MBMS-Service-associatedLogicalM2-ConnectionItem	PRESENCE mandatory},
+	...
+}
+
+-- **************************************************************
+--
+-- RESET ACKNOWLEDGE
+--
+-- **************************************************************
+
+ResetAcknowledge ::= SEQUENCE {
+	protocolIEs                     ProtocolIE-Container       {{ResetAcknowledge-Ies}},
+	...
+}
+
+ResetAcknowledge-Ies M2AP-PROTOCOL-IES ::= {
+	{ ID id-MBMS-Service-associatedLogicalM2-ConnectionListResAck	CRITICALITY ignore	TYPE MBMS-Service-associatedLogicalM2-ConnectionListResAck		PRESENCE optional}|
+	{ ID id-CriticalityDiagnostics		CRITICALITY ignore	TYPE CriticalityDiagnostics			PRESENCE optional},
+	...
+}
+
+MBMS-Service-associatedLogicalM2-ConnectionListResAck ::= SEQUENCE (SIZE(1.. maxNrOfIndividualM2ConnectionsToReset)) OF ProtocolIE-Single-Container { { MBMS-Service-associatedLogicalM2-ConnectionItemResAck } }
+
+MBMS-Service-associatedLogicalM2-ConnectionItemResAck 	M2AP-PROTOCOL-IES ::= {
+	{ ID id-MBMS-Service-associatedLogicalM2-ConnectionItem	CRITICALITY ignore	TYPE MBMS-Service-associatedLogicalM2-ConnectionItem	PRESENCE mandatory},
+	...
+}
+
+
+-- **************************************************************
+--
+-- PRIVATE MESSAGE
+--
+-- **************************************************************
+
+PrivateMessage ::= SEQUENCE {
+	privateIEs		PrivateIE-Container  {{PrivateMessage-Ies}},
+	...
+}
+
+PrivateMessage-Ies M2AP-PRIVATE-IES ::= {
+	...
+}
+
+
+-- **************************************************************
+--
+-- MBMS SERVICE COUNTING REQUEST
+--
+-- **************************************************************
+
+MbmsServiceCountingRequest ::= SEQUENCE {
+	protocolIEs			ProtocolIE-Container	{{MbmsServiceCountingRequest-Ies}},
+	...
+}
+
+MbmsServiceCountingRequest-Ies M2AP-PROTOCOL-IES ::= {
+	{ ID id-MCCH-Update-Time						CRITICALITY reject	TYPE MCCH-Update-Time				PRESENCE mandatory }|
+	{ ID id-MBSFN-Area-ID							CRITICALITY reject	TYPE MBSFN-Area-ID					PRESENCE mandatory }|
+	{ ID id-MBMS-Counting-Request-Session			CRITICALITY reject	TYPE MBMS-Counting-Request-Session	PRESENCE mandatory },
+	...
+}
+
+MBMS-Counting-Request-Session ::= SEQUENCE (SIZE(1.. maxnoofCountingService)) OF ProtocolIE-Container { { MBMS-Counting-Request-Session-Item } }
+
+MBMS-Counting-Request-Session-Item M2AP-PROTOCOL-IES ::= { 
+	{ ID id-MBMS-Counting-Request-Session-Item	CRITICALITY reject	TYPE MBMS-Counting-Request-SessionIE		PRESENCE mandatory },
+	...
+}
+
+MBMS-Counting-Request-SessionIE ::= SEQUENCE{
+	tmgi					TMGI,
+	iE-Extensions			ProtocolExtensionContainer { { MBMS-Counting-Request-SessionIE-ExtIEs} } OPTIONAL,
+	...
+}
+
+MBMS-Counting-Request-SessionIE-ExtIEs M2AP-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+-- **************************************************************
+--
+-- MBMS SERVICE COUNTING RESPONSE
+--
+-- **************************************************************
+
+MbmsServiceCountingResponse ::= SEQUENCE {
+	protocolIEs		ProtocolIE-Container		{{MbmsServiceCountingResponse-Ies}},
+	...
+}
+
+MbmsServiceCountingResponse-Ies M2AP-PROTOCOL-IES ::= {
+
+	{ ID id-CriticalityDiagnostics		CRITICALITY ignore	TYPE CriticalityDiagnostics			PRESENCE optional },
+	...
+}
+
+
+-- **************************************************************
+--
+-- MBMS SERVICE COUNTING FAILURE
+--
+-- **************************************************************
+
+MbmsServiceCountingFailure ::= SEQUENCE {
+	protocolIEs		ProtocolIE-Container		{{ MbmsServiceCountingFailure-Ies}},
+	...
+}
+
+MbmsServiceCountingFailure-Ies M2AP-PROTOCOL-IES ::= {
+
+	{ ID id-Cause								CRITICALITY ignore	TYPE Cause							PRESENCE mandatory}|
+	{ ID id-CriticalityDiagnostics				CRITICALITY ignore	TYPE CriticalityDiagnostics			PRESENCE optional},
+	...
+}
+
+
+-- **************************************************************
+--
+-- MBMS SERVICE COUNTING RESULTS REPORT
+--
+-- **************************************************************
+
+MbmsServiceCountingResultsReport ::= SEQUENCE {
+	protocolIEs			ProtocolIE-Container		{{ MbmsServiceCountingResultsReport-Ies}},
+	...
+}
+
+MbmsServiceCountingResultsReport-Ies M2AP-PROTOCOL-IES ::= {
+	{ ID id-MBSFN-Area-ID					CRITICALITY reject	TYPE MBSFN-Area-ID						PRESENCE mandatory}|
+	{ ID id-MBMS-Counting-Result-List		CRITICALITY reject	TYPE MBMS-Counting-Result-List			PRESENCE mandatory},
+	...
+}
+
+MBMS-Counting-Result-List ::= SEQUENCE (SIZE(1.. maxnoofCountingService)) OF ProtocolIE-Container { { MBMS-Counting-Result-Item } }
+
+MBMS-Counting-Result-Item M2AP-PROTOCOL-IES ::= { 
+	{ ID id-MBMS-Counting-Result-Item		CRITICALITY reject	TYPE MBMS-Counting-Result		PRESENCE mandatory },
+	...
+}
+
+MBMS-Counting-Result ::= SEQUENCE{
+	tmgi				TMGI,
+	countingResult		CountingResult,
+	iE-Extensions		ProtocolExtensionContainer { { MBMS-Counting-Result-ExtIEs} } OPTIONAL,
+	...
+}
+
+MBMS-Counting-Result-ExtIEs M2AP-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+CountingResult ::= INTEGER (0..1023)
+
+-- **************************************************************
+--
+-- MBMS OVERLOAD NOTIFICATION
+--
+-- **************************************************************
+
+MbmsOverloadNotification ::= SEQUENCE {
+	protocolIEs			ProtocolIE-Container		{{ MbmsOverloadNotification-Ies}},
+	...
+}
+
+MbmsOverloadNotification-Ies M2AP-PROTOCOL-IES ::= {
+	{ ID id-MBSFN-Area-ID						CRITICALITY reject	TYPE MBSFN-Area-ID						PRESENCE mandatory}|
+	{ ID id-Overload-Status-Per-PMCH-List		CRITICALITY reject	TYPE Overload-Status-Per-PMCH-List		PRESENCE mandatory},
+	...
+}
+
+Overload-Status-Per-PMCH-List ::= SEQUENCE (SIZE(1..maxnoofPMCHsperMBSFNarea)) OF ProtocolIE-Container { { Overload-Status-Per-PMCH-Item } }
+
+Overload-Status-Per-PMCH-Item M2AP-PROTOCOL-IES ::= { 
+	{ ID id-PMCH-Overload-Status			CRITICALITY reject	TYPE PMCH-Overload-Status			PRESENCE mandatory }|
+	{ ID id-Active-MBMS-Session-List		CRITICALITY reject	TYPE Active-MBMS-Session-List		PRESENCE optional },
+	...
+}
+
+PMCH-Overload-Status ::= ENUMERATED {normal, overload, ...}
+
+Active-MBMS-Session-List ::= SEQUENCE (SIZE(1..maxnoofSessionsPerPMCH)) OF ProtocolIE-Container { { Active-MBMS-Session-Item } }
+
+Active-MBMS-Session-Item M2AP-PROTOCOL-IES ::= { 
+	{ ID id-TMGI		CRITICALITY reject	TYPE TMGI		PRESENCE mandatory },
+	...
+}
+
+END
+
+9.3.5	Information Element definitions
+-- **************************************************************
+--
+-- Information Element Definitions
+--
+-- **************************************************************
+
+M2AP-Ies {
+itu-t (0) identified-organization (4) etsi (0) mobileDomain (0) 
+eps-Access (21) modules (3) m2ap (4) version1 (1) m2ap-Ies (2) }
+
+DEFINITIONS AUTOMATIC TAGS ::= 
+
+BEGIN
+
+IMPORTS
+	id-MCH-Scheduling-PeriodExtended,
+	id-MCH-Scheduling-PeriodExtended2,
+	id-Modification-PeriodExtended,
+	id-Modulation-Coding-Scheme2,
+	id-Repetition-PeriodExtended,
+	id-Subcarrier-SpacingMBMS,
+	id-SubframeAllocationExtended,
+	id-SubframeAllocationFurtherExtension,
+	maxnoofMBSFNareas,
+	maxnoofPMCHsperMBSFNarea,
+	maxnoofCells,
+	maxnoofMBMSServiceAreasPerCell,
+	maxnoofSessionsPerPMCH,
+	maxnooferrors,
+	maxnoofCellsforMBMS
+
+FROM M2AP-Constants
+
+	Criticality,
+	ProcedureCode,
+	ProtocolIE-ID,
+	TriggeringMessage
+FROM M2AP-CommonDataTypes
+
+	ProtocolExtensionContainer{},
+	ProtocolIE-Single-Container{},
+	M2AP-PROTOCOL-EXTENSION,
+	M2AP-PROTOCOL-IES
+FROM M2AP-Containers;
+
+-- A
+
+AllocatedSubframesEnd ::= INTEGER (0..1535)
+
+AllocationAndRetentionPriority ::= SEQUENCE {
+	priorityLevel				PriorityLevel,
+	pre-emptionCapability		Pre-emptionCapability,
+	pre-emptionVulnerability	Pre-emptionVulnerability,
+	iE-Extensions				ProtocolExtensionContainer { {AllocationAndRetentionPriority-ExtIEs} } OPTIONAL
+}
+
+AllocationAndRetentionPriority-ExtIEs M2AP-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+-- B
+
+BitRate ::= INTEGER (0..10000000000)
+
+-- C
+
+Cause ::= CHOICE {
+	radioNetwork		CauseRadioNetwork,
+	transport			CauseTransport,
+	nAS					CauseNAS,
+	protocol			CauseProtocol,
+	misc				CauseMisc,
+	...
+}
+
+CauseMisc ::= ENUMERATED {
+	control-processing-overload,
+	hardware-failure,
+	om-intervention,
+	unspecified,
+	...
+}
+
+CauseNAS ::= ENUMERATED {
+	unspecified,
+	...
+}
+
+CauseProtocol ::= ENUMERATED {
+	transfer-syntax-error,
+	abstract-syntax-error-reject,
+	abstract-syntax-error-ignore-and-notify,
+	message-not-compatible-with-receiver-state,
+	semantic-error,
+	abstract-syntax-error-falsely-constructed-message,
+	unspecified,
+	...
+}
+
+CauseRadioNetwork ::= ENUMERATED {
+	unknown-or-already-allocated-MCE-MBMS-M2AP-ID,
+	unknown-or-already-allocated-eNB-MBMS-M2AP-ID,
+	unknown-or-inconsistent-pair-of-MBMS-M2AP-IDs,
+	radio-resources-not-available,
+	interaction-with-other-procedure,
+	unspecified,
+	...,
+	invalid-QoS-combination,
+	not-supported-QCI-value
+
+}
+
+CauseTransport ::= ENUMERATED {
+	transport-resource-unavailable,
+	unspecified,
+	...
+}
+
+Cell-Information ::= SEQUENCE {
+	eCGI							ECGI,
+	cellReservationInfo			ENUMERATED {reservedCell, nonReservedCell, ...},
+	iE-Extensions					ProtocolExtensionContainer { { Cell-Information-ExtIEs} } OPTIONAL,
+	...
+}
+
+Cell-Information-ExtIEs M2AP-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+Cell-Information-List ::= SEQUENCE (SIZE(1..maxnoofCells)) OF Cell-Information
+
+CriticalityDiagnostics ::= SEQUENCE {
+	procedureCode					ProcedureCode					OPTIONAL,
+	triggeringMessage				TriggeringMessage				OPTIONAL,
+	procedureCriticality			Criticality						OPTIONAL,
+	iEsCriticalityDiagnostics		CriticalityDiagnostics-IE-List	OPTIONAL,
+	iE-Extensions					ProtocolExtensionContainer { {CriticalityDiagnostics-ExtIEs} }	OPTIONAL,
+	...
+}
+
+
+CriticalityDiagnostics-ExtIEs M2AP-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+CriticalityDiagnostics-IE-List ::= SEQUENCE (SIZE (1..maxnooferrors)) OF
+	SEQUENCE {
+		iECriticality			Criticality,
+		iE-ID					ProtocolIE-ID,
+		typeOfError				TypeOfError,
+		iE-Extensions			ProtocolExtensionContainer { {CriticalityDiagnostics-IE-List-ExtIEs} } OPTIONAL,
+		...
+}
+
+CriticalityDiagnostics-IE-List-ExtIEs M2AP-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+
+-- D
+-- E
+
+ECGI ::= SEQUENCE {
+	pLMN-Identity				PLMN-Identity,
+	eUTRANcellIdentifier		EUTRANCellIdentifier,
+	iE-Extensions				ProtocolExtensionContainer { {ECGI-ExtIEs} } OPTIONAL,
+	...
+}
+
+ECGI-ExtIEs M2AP-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+
+ENB-ID ::= CHOICE {
+	macro-eNB-ID	BIT STRING (SIZE (20)),
+	... ,
+	short-Macro-eNB-ID		BIT STRING (SIZE(18)),
+	long-Macro-eNB-ID		BIT STRING (SIZE(21))
+}
+
+ENB-MBMS-Configuration-data-Item ::= SEQUENCE {
+	eCGI							ECGI,
+	mbsfnSynchronisationArea		MBSFN-SynchronisationArea-ID,
+	mbmsServiceAreaList				MBMS-Service-Area-ID-List,
+	iE-Extensions					ProtocolExtensionContainer { { ENB-MBMS-Configuration-data-Item-ExtIEs} } OPTIONAL,
+	...
+}
+
+ENB-MBMS-Configuration-data-Item-ExtIEs M2AP-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+ENB-MBMS-Configuration-data-ConfigUpdate-Item ::= CHOICE {
+	mBMSConfigData					ENB-MBMS-Configuration-data-Item,
+	eCGI							ECGI,
+	...
+}
+
+ENB-MBMS-M2AP-ID ::= INTEGER (0..65535)
+
+ENBname ::= PrintableString (SIZE (1..150,...))
+
+EUTRANCellIdentifier ::= BIT STRING (SIZE (28))
+
+
+-- F
+-- G
+
+GBR-QosInformation ::= SEQUENCE {
+	mBMS-E-RAB-MaximumBitrateDL			BitRate,
+	mBMS-E-RAB-GuaranteedBitrateDL		BitRate,
+	iE-Extensions						ProtocolExtensionContainer { { GBR-QosInformation-ExtIEs} } OPTIONAL,
+	...
+}
+
+GBR-QosInformation-ExtIEs M2AP-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+GlobalENB-ID ::= SEQUENCE {
+	pLMN-Identity			PLMN-Identity,
+	eNB-ID					ENB-ID,
+	iE-Extensions			ProtocolExtensionContainer { {GlobalENB-ID-ExtIEs} } OPTIONAL,
+	...
+}
+
+GlobalENB-ID-ExtIEs M2AP-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+GlobalMCE-ID ::= SEQUENCE {
+	pLMN-Identity			PLMN-Identity,
+	mCE-ID					MCE-ID,
+	iE-Extensions			ProtocolExtensionContainer { {GlobalMCE-ID-ExtIEs} } OPTIONAL,
+	...
+}
+
+GlobalMCE-ID-ExtIEs M2AP-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+GTP-TEID ::= OCTET STRING (SIZE (4))
+
+-- H
+-- I
+
+IPAddress ::= OCTET STRING (SIZE(4..16))
+
+-- J
+-- K
+-- L
+
+LCID ::= INTEGER (0..28)
+
+-- M
+
+MBMS-Cell-List ::= SEQUENCE (SIZE(1.. maxnoofCellsforMBMS)) OF ECGI
+
+MBMS-E-RAB-QoS-Parameters ::= SEQUENCE {
+	qCI								QCI,
+	gbrQosInformation				GBR-QosInformation		OPTIONAL,
+	allocationAndRetentionPriority	AllocationAndRetentionPriority,
+	iE-Extensions					ProtocolExtensionContainer { { MBMS-E-RAB-QoS-Parameters-ExtIEs} }	OPTIONAL,
+	...
+}
+
+MBMS-E-RAB-QoS-Parameters-ExtIEs M2AP-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+MBMS-Service-associatedLogicalM2-ConnectionItem ::= SEQUENCE {
+	eNB-MBMS-M2AP-ID				ENB-MBMS-M2AP-ID OPTIONAL,
+	mCE-MBMS-M2AP-ID				MCE-MBMS-M2AP-ID OPTIONAL,
+	iE-Extensions					ProtocolExtensionContainer { { MBMS-Service-associatedLogicalM2-ConnectionItemExtIEs} } OPTIONAL,
+	...
+}
+
+
+MBMS-Service-associatedLogicalM2-ConnectionItemExtIEs M2AP-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+MBMS-Service-Area ::= OCTET STRING
+
+MBMS-Service-Area-ID-List ::= SEQUENCE (SIZE(1..maxnoofMBMSServiceAreasPerCell)) OF MBMS-Service-Area
+
+MBMS-Session-ID ::= OCTET STRING (SIZE (1))
+
+MBMSsessionListPerPMCH-Item ::= SEQUENCE (SIZE(1..maxnoofSessionsPerPMCH)) OF SEQUENCE {
+	tmgi							TMGI,
+	lcid							LCID,
+	iE-Extensions					ProtocolExtensionContainer { { MBMSsessionListPerPMCH-Item-ExtIEs} } OPTIONAL,
+	...
+}
+
+MBMSsessionListPerPMCH-Item-ExtIEs M2AP-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+MBMSsessionsToBeSuspendedListPerPMCH-Item ::= SEQUENCE (SIZE(1..maxnoofSessionsPerPMCH)) OF SEQUENCE {
+	tmgi							TMGI,
+	iE-Extensions					ProtocolExtensionContainer { { MBMSsessionsToBeSuspendedListPerPMCH-Item-ExtIEs} } OPTIONAL,
+	...
+}
+
+MBMSsessionsToBeSuspendedListPerPMCH-Item-ExtIEs M2AP-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+MBSFN-Area-ID ::= INTEGER (0..255)
+
+MBSFN-SynchronisationArea-ID ::= INTEGER (0..65535)
+
+MBSFN-Subframe-Configuration ::= SEQUENCE {
+	radioframeAllocationPeriod		ENUMERATED {n1, n2, n4, n8, n16, n32},
+	radioframeAllocationOffset		INTEGER (0..7),
+	subframeAllocation				CHOICE {
+		oneFrame						BIT STRING (SIZE (6)  ),
+		fourFrames						BIT STRING (SIZE (24) ) },
+	iE-Extensions					ProtocolExtensionContainer { { MBSFN-Subframe-Configuration-ExtIEs} } OPTIONAL,
+	...
+}
+
+MBSFN-Subframe-Configuration-ExtIEs M2AP-PROTOCOL-EXTENSION ::= {
+	{ID id-SubframeAllocationExtended			CRITICALITY reject	EXTENSION SubframeAllocationExtended			PRESENCE optional}|
+	{ID id-SubframeAllocationFurtherExtension	CRITICALITY reject	EXTENSION SubframeAllocationFurtherExtension		PRESENCE optional},
+	...
+}
+
+MCCH-Update-Time ::= INTEGER (0..255)
+
+MCCHrelatedBCCH-ConfigPerMBSFNArea-Item ::= SEQUENCE {
+	mbsfnArea						MBSFN-Area-ID,
+	pdcchLength						ENUMERATED {s1, s2, ...},
+	repetitionPeriod				ENUMERATED {rf32, rf64, rf128, rf256},
+	offset							INTEGER (0..10),
+	modificationPeriod				ENUMERATED {rf512, rf1024},
+	subframeAllocationInfo			BIT STRING (SIZE(6)),
+	modulationAndCodingScheme		ENUMERATED {n2, n7, n13, n19},
+	cellInformationList				Cell-Information-List	OPTIONAL,
+	iE-Extensions					ProtocolExtensionContainer { { MCCHrelatedBCCH-ConfigPerMBSFNArea-Item-ExtIEs} } OPTIONAL,
+	...
+}
+
+MCCHrelatedBCCH-ConfigPerMBSFNArea-Item-ExtIEs M2AP-PROTOCOL-EXTENSION ::= {
+-- Extension for Rel-14 to support MCCH repetition period values –-
+	{ID id-Repetition-PeriodExtended			CRITICALITY reject	EXTENSION Repetition-PeriodExtended	PRESENCE optional}|
+-- Extension for Rel-14 to support MCCH modification period values –-
+	{ID id-Modification-PeriodExtended			CRITICALITY reject	EXTENSION Modification-PeriodExtended	PRESENCE optional}|
+	{ID id-Subcarrier-SpacingMBMS				CRITICALITY reject	EXTENSION Subcarrier-SpacingMBMS		PRESENCE optional},
+	...
+}
+
+MCCHrelatedBCCH-ExtConfigPerMBSFNArea-Item ::= SEQUENCE {
+	mbsfnArea						MBSFN-Area-ID,
+	repetitionPeriodExpanded		ENUMERATED {rf1, rf2, rf4, rf8, rf16, rf32, rf64, rf128, rf256, ...},
+	offset							INTEGER (0..10),
+	modificationPeriodExpanded		ENUMERATED {rf1, rf2, rf4, rf8, rf16, rf32, rf64, rf128, rf256, rf512, rf1024, ...},
+	subframeAllocationInfoExpanded	BIT STRING (SIZE(10)),
+	modulationAndCodingScheme		ENUMERATED {n2, n7, n13, n19},
+	subcarrier-SpacingMBMSExpanded	ENUMERATED {khz-7dot5, khz-2dot5, khz-1dot25, khz-0dot37, ...},
+	timeSeparation					ENUMERATED {sl2, sl4, ...}		OPTIONAL,
+	cellInformationList				Cell-Information-List			OPTIONAL,
+	iE-Extensions					ProtocolExtensionContainer { { MCCHrelatedBCCH-ExtConfigPerMBSFNArea-Item-ExtIEs} } OPTIONAL,
+	...
+}
+
+MCCHrelatedBCCH-ExtConfigPerMBSFNArea-Item-ExtIEs M2AP-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+MCE-ID ::= OCTET STRING (SIZE(2))
+
+MCE-MBMS-M2AP-ID ::= INTEGER (0.. 16777215)
+
+MCEname ::= PrintableString (SIZE (1..150,...))
+
+
+MCH-Scheduling-Period ::= ENUMERATED {rf8, rf16, rf32, rf64, rf128, rf256, rf512, rf1024}
+
+MCH-Scheduling-PeriodExtended ::= ENUMERATED {rf4, ...}
+
+MCH-Scheduling-PeriodExtended2 ::= ENUMERATED {rf1, rf2, ...}
+
+
+Modulation-Coding-Scheme2 ::= INTEGER (0..27)
+
+Modification-PeriodExtended ::= ENUMERATED {rf1, rf2, rf4, rf8, rf16, rf32, rf64, rf128, rf256, ...}
+
+-- N
+-- O
+-- P
+
+PLMN-Identity ::= OCTET STRING (SIZE(3))
+
+PMCH-Configuration ::= SEQUENCE {
+	allocatedSubframesEnd			AllocatedSubframesEnd,
+	dataMCS							INTEGER (0..28),
+	mchSchedulingPeriod				MCH-Scheduling-Period,
+	iE-Extensions					ProtocolExtensionContainer { {PMCH-Configuration-ExtIEs} } OPTIONAL,
+	...
+}
+
+PMCH-Configuration-ExtIEs M2AP-PROTOCOL-EXTENSION ::= {
+-- Extension for Rel-12 to support 256QAM for MTCH –
+	{ID id-Modulation-Coding-Scheme2			CRITICALITY reject	EXTENSION Modulation-Coding-Scheme2		PRESENCE optional}|
+-- Extension for Rel-12 to support shorter MCH scheduling period –
+	{ID id-MCH-Scheduling-PeriodExtended		CRITICALITY reject	EXTENSION MCH-Scheduling-PeriodExtended	PRESENCE optional}|
+-- Extension for Rel-14 to support shorter MCH scheduling period values –
+	{ID id-MCH-Scheduling-PeriodExtended2		CRITICALITY	reject	EXTENSION MCH-Scheduling-PeriodExtended2	PRESENCE optional},
+	...
+}
+
+Common-Subframe-Allocation-Period ::= ENUMERATED {rf4, rf8, rf16, rf32, rf64, rf128, rf256}
+
+Pre-emptionCapability ::= ENUMERATED {
+	shall-not-trigger-pre-emption,
+	may-trigger-pre-emption
+}
+
+Pre-emptionVulnerability ::= ENUMERATED {
+	not-pre-emptable,
+	pre-emptable
+}
+
+PriorityLevel ::= INTEGER { spare (0), highest (1), lowest (14), no-priority (15) } (0..15)
+
+-- Q
+
+QCI ::= INTEGER (0..255)
+
+-- R
+
+Repetition-PeriodExtended ::= ENUMERATED {rf1, rf2, rf4, rf8, rf16, ...}
+
+-- S
+
+SC-PTM-Information ::= SEQUENCE {
+	mbmsCellList					MBMS-Cell-List,
+	mbms-E-RAB-QoS-Parameters		MBMS-E-RAB-QoS-Parameters,
+	iE-Extensions					ProtocolExtensionContainer { {SC-PTM-Information-ExtIEs} } OPTIONAL,
+	...
+}
+
+SC-PTM-Information-ExtIEs M2AP-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+SFN ::= INTEGER (0..1023)
+
+Subcarrier-SpacingMBMS ::= ENUMERATED {khz-7dot5, khz-1dot25, ...}
+
+SubframeAllocationExtended	::=	CHOICE {
+		oneFrameExtension				BIT STRING (SIZE(2)),
+		fourFrameExtension				BIT STRING (SIZE(8)),
+		choice-extension				ProtocolIE-Single-Container { { SubframeAllocationExtended-ExtIEs} },
+
+		...
+}
+
+
+SubframeAllocationExtended-ExtIEs M2AP-PROTOCOL-IES ::= {	...
+}
+
+SubframeAllocationFurtherExtension	::=	CHOICE {
+		oneFrameFurtherExtension				BIT STRING (SIZE(2)),
+		fourFrameFurtherExtension				BIT STRING (SIZE(8)),
+		choice-extension				ProtocolIE-Single-Container { { SubframeAllocationFurtherExtension-ExtIEs} },
+
+		...
+}
+
+
+SubframeAllocationFurtherExtension-ExtIEs M2AP-PROTOCOL-IES ::= {	...
+}
+
+
+-- T
+
+TimeToWait ::= ENUMERATED {v1s, v2s, v5s, v10s, v20s, v60s, ...}
+
+TMGI ::= SEQUENCE {
+	pLMNidentity			PLMN-Identity,
+	serviceID				OCTET STRING (SIZE (3)),
+	iE-Extensions			ProtocolExtensionContainer { {TMGI-ExtIEs} } OPTIONAL,
+	...
+}
+
+TMGI-ExtIEs M2AP-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+
+TNL-Information ::= SEQUENCE {
+	iPMCAddress						IPAddress,
+	iPSourceAddress					IPAddress,
+	gTP-TEID						GTP-TEID,
+	iE-Extensions					ProtocolExtensionContainer { {TNL-Information-ExtIEs} } OPTIONAL,
+	...
+}
+
+TNL-Information-ExtIEs M2AP-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+TypeOfError ::= ENUMERATED {
+	not-understood,
+	missing,
+	...
+}
+
+
+-- U
+-- V
+-- W
+-- X
+-- Y
+-- Z
+
+END
+
+9.3.6	Common definitions
+-- **************************************************************
+--
+-- Common definitions
+--
+-- **************************************************************
+
+M2AP-CommonDataTypes {
+itu-t (0) identified-organization (4) etsi (0) mobileDomain (0) 
+eps-Access (21) modules (3) m2ap (4) version1 (1) m2ap-CommonDataTypes (3)  }
+
+DEFINITIONS AUTOMATIC TAGS ::= 
+
+BEGIN
+
+-- **************************************************************
+--
+-- Extension constants
+--
+-- **************************************************************
+
+maxPrivateIEs 									INTEGER ::= 65535
+maxProtocolExtensions 							INTEGER ::= 65535
+maxProtocolIEs									INTEGER ::= 65535
+
+-- **************************************************************
+--
+-- Common Data Types
+--
+-- **************************************************************
+
+Criticality		::= ENUMERATED { reject, ignore, notify }
+
+Presence		::= ENUMERATED { optional, conditional, mandatory }
+
+PrivateIE-ID	::= CHOICE {
+	local				INTEGER (0.. maxPrivateIEs),
+	global				OBJECT IDENTIFIER
+}
+
+ProcedureCode		::= INTEGER (0..255)
+
+
+ProtocolIE-ID		::= INTEGER (0..maxProtocolIEs)
+
+
+TriggeringMessage	::= ENUMERATED { initiating-message, successful-outcome, unsuccessful-outcome}
+
+END
+
+9.3.7	Constant definitions
+-- **************************************************************
+--
+-- Constant definitions
+--
+-- **************************************************************
+
+M2AP-Constants {
+itu-t (0) identified-organization (4) etsi (0) mobileDomain (0) 
+eps-Access (21) modules (3) m2ap (4) version1 (1) m2ap-Constants (4) }
+
+DEFINITIONS AUTOMATIC TAGS ::= 
+
+BEGIN
+
+IMPORTS
+	ProcedureCode,
+	ProtocolIE-ID
+FROM M2AP-CommonDataTypes;
+
+-- **************************************************************
+--
+-- Elementary Procedures
+--
+-- **************************************************************
+
+id-sessionStart													ProcedureCode ::= 0
+id-sessionStop													ProcedureCode ::= 1
+id-mbmsSchedulingInformation									ProcedureCode ::= 2
+id-errorIndication												ProcedureCode ::= 3
+id-reset														ProcedureCode ::= 4
+id-m2Setup														ProcedureCode ::= 5
+id-eNBConfigurationUpdate										ProcedureCode ::= 6
+id-mCEConfigurationUpdate										ProcedureCode ::= 7
+id-privateMessage												ProcedureCode ::= 8
+id-sessionUpdate												ProcedureCode ::= 9
+id-mbmsServiceCounting											ProcedureCode ::= 10
+id-mbmsServiceCountingResultsReport								ProcedureCode ::= 11
+id-mbmsOverloadNotification										ProcedureCode ::= 12
+
+-- **************************************************************
+--
+-- Lists
+--
+-- **************************************************************
+
+maxnoofMBSFNareas							INTEGER ::= 256 
+maxnoofMBSFN-Allocations					INTEGER ::= 8
+maxnoofPMCHsperMBSFNarea					INTEGER ::= 15
+maxnoofCells								INTEGER ::= 256
+maxnoofMBMSServiceAreasPerCell				INTEGER ::= 256 
+maxnoofSessionsPerPMCH						INTEGER ::= 29
+maxnooferrors								INTEGER ::= 256
+maxNrOfIndividualM2ConnectionsToReset		INTEGER ::= 256
+maxnoofCountingService						INTEGER ::= 16
+maxnoofCellsforMBMS							INTEGER ::= 4096
+
+
+-- **************************************************************
+--
+-- Ies
+--
+-- **************************************************************
+
+id-MCE-MBMS-M2AP-ID															ProtocolIE-ID ::= 0
+id-ENB-MBMS-M2AP-ID															ProtocolIE-ID ::= 1
+id-TMGI																		ProtocolIE-ID ::= 2
+id-MBMS-Session-ID															ProtocolIE-ID ::= 3
+id-MBMS-Service-Area														ProtocolIE-ID ::= 6
+id-TNL-Information															ProtocolIE-ID ::= 7
+id-CriticalityDiagnostics													ProtocolIE-ID ::= 8
+id-Cause																	ProtocolIE-ID ::= 9
+id-MBSFN-Area-Configuration-List											ProtocolIE-ID ::= 10
+id-PMCH-Configuration-List													ProtocolIE-ID ::= 11
+id-PMCH-Configuration-Item													ProtocolIE-ID ::= 12
+id-GlobalENB-ID																ProtocolIE-ID ::= 13
+id-ENBname																	ProtocolIE-ID ::= 14
+id-ENB-MBMS-Configuration-data-List											ProtocolIE-ID ::= 15
+id-ENB-MBMS-Configuration-data-Item											ProtocolIE-ID ::= 16
+id-GlobalMCE-ID																ProtocolIE-ID ::= 17
+id-MCEname																	ProtocolIE-ID ::= 18
+id-MCCHrelatedBCCH-ConfigPerMBSFNArea										ProtocolIE-ID ::= 19
+id-MCCHrelatedBCCH-ConfigPerMBSFNArea-Item									ProtocolIE-ID ::= 20
+id-TimeToWait																ProtocolIE-ID ::= 21
+id-MBSFN-Subframe-Configuration-List										ProtocolIE-ID ::= 22
+id-MBSFN-Subframe-Configuration-Item										ProtocolIE-ID ::= 23
+id-Common-Subframe-Allocation-Period										ProtocolIE-ID ::= 24
+id-MCCH-Update-Time															ProtocolIE-ID ::= 25
+id-ENB-MBMS-Configuration-data-List-ConfigUpdate							ProtocolIE-ID ::= 26
+id-ENB-MBMS-Configuration-data-ConfigUpdate-Item							ProtocolIE-ID ::= 27
+id-MBMS-Service-associatedLogicalM2-ConnectionItem							ProtocolIE-ID ::= 28
+id-MBSFN-Area-ID															ProtocolIE-ID ::= 29
+id-ResetType																ProtocolIE-ID ::= 30
+id-MBMS-Service-associatedLogicalM2-ConnectionListResAck					ProtocolIE-ID ::= 31
+id-MBMS-Counting-Request-Session											ProtocolIE-ID ::= 32
+id-MBMS-Counting-Request-Session-Item										ProtocolIE-ID ::= 33
+id-MBMS-Counting-Result-List												ProtocolIE-ID ::= 34
+id-MBMS-Counting-Result-Item												ProtocolIE-ID ::= 35
+id-Modulation-Coding-Scheme2												ProtocolIE-ID ::= 36
+id-MCH-Scheduling-PeriodExtended											ProtocolIE-ID ::= 37
+id-Alternative-TNL-Information												ProtocolIE-ID ::= 38
+id-Overload-Status-Per-PMCH-List											ProtocolIE-ID ::= 39
+id-PMCH-Overload-Status														ProtocolIE-ID ::= 41
+id-Active-MBMS-Session-List													ProtocolIE-ID ::= 42
+id-MBMS-Suspension-Notification-List 										ProtocolIE-ID ::= 43
+id-MBMS-Suspension-Notification-Item										ProtocolIE-ID ::= 44
+id-SC-PTM-Information														ProtocolIE-ID ::= 45
+id-Modification-PeriodExtended												ProtocolIE-ID ::= 46
+id-Repetition-PeriodExtended												ProtocolIE-ID ::= 47
+id-MCH-Scheduling-PeriodExtended2											ProtocolIE-ID ::= 48
+id-Subcarrier-SpacingMBMS													ProtocolIE-ID ::= 49
+id-SubframeAllocationExtended												ProtocolIE-ID ::= 50
+id-MCCHrelatedBCCH-ExtConfigPerMBSFNArea-Item 								ProtocolIE-ID ::= 51
+id-MCCHrelatedBCCH-ExtConfigPerMBSFNArea									ProtocolIE-ID ::= 52
+id-SubframeAllocationFurtherExtension										ProtocolIE-ID ::= 53
+
+END
+
+
+9.3.8	Container definitions
+-- **************************************************************
+--
+-- Container definitions
+--
+-- **************************************************************
+
+M2AP-Containers {
+itu-t (0) identified-organization (4) etsi (0) mobileDomain (0) 
+eps-Access (21) modules (3) m2ap (4) version1 (1) m2ap-Containers (5)  }
+
+DEFINITIONS AUTOMATIC TAGS ::= 
+
+BEGIN
+
+-- **************************************************************
+--
+-- IE parameter types from other modules.
+--
+-- **************************************************************
+
+IMPORTS
+	maxPrivateIEs,
+	maxProtocolExtensions,
+	maxProtocolIEs,
+	Criticality,
+	Presence,
+	PrivateIE-ID,
+	ProtocolIE-ID	
+FROM M2AP-CommonDataTypes;
+
+-- **************************************************************
+--
+-- Class Definition for Protocol Ies
+--
+-- **************************************************************
+
+M2AP-PROTOCOL-IES ::= CLASS {
+	&id				ProtocolIE-ID 			UNIQUE,
+	&criticality	Criticality,
+	&Value,
+	&presence		Presence
+}
+WITH SYNTAX {
+	ID				&id
+	CRITICALITY		&criticality
+	TYPE			&Value
+	PRESENCE		&presence
+}
+
+-- **************************************************************
+--
+-- Class Definition for Protocol Ies
+--
+-- **************************************************************
+
+M2AP-PROTOCOL-IES-PAIR ::= CLASS {
+	&id						ProtocolIE-ID 		UNIQUE,
+	&firstCriticality		Criticality,
+	&FirstValue,
+	&secondCriticality		Criticality,
+	&SecondValue,
+	&presence				Presence
+}
+WITH SYNTAX {
+	ID						&id
+	FIRST CRITICALITY 		&firstCriticality
+	FIRST TYPE				&FirstValue
+	SECOND CRITICALITY 		&secondCriticality
+	SECOND TYPE				&SecondValue
+	PRESENCE				&presence
+}
+
+-- **************************************************************
+--
+-- Class Definition for Protocol Extensions
+--
+-- **************************************************************
+
+M2AP-PROTOCOL-EXTENSION ::= CLASS {
+	&id					ProtocolIE-ID 		UNIQUE,
+	&criticality		Criticality,
+	&Extension,
+	&presence			Presence
+}
+WITH SYNTAX {
+	ID					&id
+	CRITICALITY			&criticality
+	EXTENSION			&Extension
+	PRESENCE			&presence
+}
+
+-- **************************************************************
+--
+-- Class Definition for Private Ies
+--
+-- **************************************************************
+
+M2AP-PRIVATE-IES ::= CLASS {
+	&id					PrivateIE-ID,
+	&criticality		Criticality,
+	&Value,
+	&presence			Presence
+}
+WITH SYNTAX {
+	ID					&id
+	CRITICALITY			&criticality
+	TYPE				&Value
+	PRESENCE			&presence
+}
+
+-- **************************************************************
+--
+-- Container for Protocol Ies
+--
+-- **************************************************************
+
+ProtocolIE-Container {M2AP-PROTOCOL-IES : IesSetParam} ::= 
+	SEQUENCE (SIZE (0..maxProtocolIEs)) OF
+	ProtocolIE-Field {{IesSetParam}}
+
+ProtocolIE-Single-Container {M2AP-PROTOCOL-IES : IesSetParam} ::= 
+	ProtocolIE-Field {{IesSetParam}}
+
+ProtocolIE-Field {M2AP-PROTOCOL-IES : IesSetParam} ::= SEQUENCE {
+	id				M2AP-PROTOCOL-IES.&id					({IesSetParam}),
+	criticality		M2AP-PROTOCOL-IES.&criticality			({IesSetParam}{@id}),
+	value			M2AP-PROTOCOL-IES.&Value				({IesSetParam}{@id})
+}
+
+-- **************************************************************
+--
+-- Container for Protocol IE Pairs
+--
+-- **************************************************************
+
+ProtocolIE-ContainerPair {M2AP-PROTOCOL-IES-PAIR : IesSetParam} ::= 
+	SEQUENCE (SIZE (0..maxProtocolIEs)) OF
+	ProtocolIE-FieldPair {{IesSetParam}}
+
+ProtocolIE-FieldPair {M2AP-PROTOCOL-IES-PAIR : IesSetParam} ::= SEQUENCE {
+	id					M2AP-PROTOCOL-IES-PAIR.&id					({IesSetParam}),
+	firstCriticality	M2AP-PROTOCOL-IES-PAIR.&firstCriticality	({IesSetParam}{@id}),
+	firstValue			M2AP-PROTOCOL-IES-PAIR.&FirstValue			({IesSetParam}{@id}),
+	secondCriticality	M2AP-PROTOCOL-IES-PAIR.&secondCriticality	({IesSetParam}{@id}),
+	secondValue			M2AP-PROTOCOL-IES-PAIR.&SecondValue			({IesSetParam}{@id})
+}
+
+-- **************************************************************
+--
+-- Container Lists for Protocol IE Containers
+--
+-- **************************************************************
+
+ProtocolIE-ContainerList {INTEGER : lowerBound, INTEGER : upperBound, M2AP-PROTOCOL-IES : IesSetParam} ::=
+	SEQUENCE (SIZE (lowerBound..upperBound)) OF
+	ProtocolIE-Container {{IesSetParam}}
+
+ProtocolIE-ContainerPairList {INTEGER : lowerBound, INTEGER : upperBound, M2AP-PROTOCOL-IES-PAIR : IesSetParam} ::=
+	SEQUENCE (SIZE (lowerBound..upperBound)) OF
+	ProtocolIE-ContainerPair {{IesSetParam}}
+
+-- **************************************************************
+--
+-- Container for Protocol Extensions
+--
+-- **************************************************************
+
+ProtocolExtensionContainer {M2AP-PROTOCOL-EXTENSION : ExtensionSetParam} ::= 
+	SEQUENCE (SIZE (1..maxProtocolExtensions)) OF
+	ProtocolExtensionField {{ExtensionSetParam}}
+
+ProtocolExtensionField {M2AP-PROTOCOL-EXTENSION : ExtensionSetParam} ::= SEQUENCE {
+	id					M2AP-PROTOCOL-EXTENSION.&id				({ExtensionSetParam}),
+	criticality			M2AP-PROTOCOL-EXTENSION.&criticality	({ExtensionSetParam}{@id}),
+	extensionValue		M2AP-PROTOCOL-EXTENSION.&Extension		({ExtensionSetParam}{@id})
+}
+
+-- **************************************************************
+--
+-- Container for Private Ies
+--
+-- **************************************************************
+
+PrivateIE-Container {M2AP-PRIVATE-IES : IesSetParam} ::= 
+	SEQUENCE (SIZE (1..maxPrivateIEs)) OF
+	PrivateIE-Field {{IesSetParam}}
+
+PrivateIE-Field {M2AP-PRIVATE-IES : IesSetParam} ::= SEQUENCE {
+	id				M2AP-PRIVATE-IES.&id			({IesSetParam}),
+	criticality		M2AP-PRIVATE-IES.&criticality	({IesSetParam}{@id}),
+	value			M2AP-PRIVATE-IES.&Value			({IesSetParam}{@id})
+}
+
+END
+9.4	Message Transfer Syntax
+M2AP shall use the ASN.1 Basic Packed Encoding Rules (BASIC-PER) Aligned Variant as transfer syntax as specified in ref. ITU-T Rec. X.691 [5].
+9.5	Timers
+10	Handling of Unknown, Unforeseen and Erroneous Protocol Data
+Section 10 of TS 36.413 [4] is applicable for the purposes of the present document. 
+
+Annex A (informative):
+Change history
+TSG #
+TSG Doc.
+CR
+Rev
+Subject/Comment
+New
+2008-02
+
+
+
+First draft
+0.0.0
+2009-10
+
+
+
+Second draft
+0.0.1
+2009-10
+
+
+
+Draft with first content
+0.0.2
+2009-10
+
+
+
+Including comments from RAN3#65bis
+0.0.3
+2009-10
+
+
+
+Preparing RAN3#66
+0.0.4
+2009-10
+
+
+
+Submission to RAN3#66, based on received comments
+0.0.5
+2009-11
+
+
+
+Update following discussions at RAN3#66
+0.0.6
+2009-11
+
+
+
+further revisions along RAN2 agreements, step to v100
+1.0.0
+2009-11
+
+
+
+incorporating comments along email discussions before RAN#46
+1.1.0
+2009-12
+
+
+
+stepping the version to 2.0.0 for approval at RAN#46
+2.0.0
+46
+RP-091200
+
+
+Approved at RAN#46
+9.0.0
+47
+RP-100226
+0001
+1
+Some minor description corrections for M2AP
+9.1.0
+47
+RP-100226
+0002
+1
+Removal of QoS information in MBMS Session Start message
+9.1.0
+47
+RP-100226
+0003
+
+Clarification of MCCH Update Time
+9.1.0
+47
+RP-100226
+0004
+
+Correct the descripton of Error Indication and misspelt of BIT STRING
+9.1.0
+47
+RP-100227
+0005
+1
+Some corrections to TS36.443
+9.1.0
+47
+RP-100226
+0006
+1
+MBSFN subframe configuration
+9.1.0
+47
+RP-100227
+0008
+2
+MBSFN Area Configuration
+9.1.0
+47
+RP-100227
+0009
+1
+Miscellaneous corrections to TS36.443
+9.1.0
+47
+RP-100227
+0010
+2
+Optional MBMS Session ID
+9.1.0
+47
+RP-100227
+0013
+3
+Remove the MBMS Session Duration IE from the MBMS Session Start Request message
+9.1.0
+47
+RP-100227
+0015
+3
+Misc corrections
+9.1.0
+47
+RP-100227
+0016
+2
+Introduction of MBMS Session Update in M2AP
+9.1.0
+47
+RP-100227
+0019
+3
+Rapporteur’s update for M2AP protocol
+9.1.0
+49
+RP-100906
+0027
+
+Alignment of tabulars to agreed notation for TS36.413 and TS36.423
+9.2.0
+2010-12
+
+
+
+Created Rel-10 version based on v. 9.2.0
+10.0.0
+SP-49
+SP-100629
+
+
+Clarification on the use of References (TS 21.801 CR#0030)
+10.1.0
+51
+RP-110240
+0033
+2
+Introduction of MBMS counting procedure
+10.1.0
+51
+RP-110221
+0037
+
+Addition of Criticality Diagnostics IE in the M2 Setup Response message
+10.1.0
+51
+RP-110223
+0040
+1
+Correction on MBMS Reset procedure
+10.1.0
+51
+RP-110222
+0042
+1
+Correction of M2 Setup
+10.1.0
+51
+RP-110226
+0043
+1
+Clarification on TEID value range
+10.1.0
+52
+RP-110692
+0044
+1
+Completion of MBMS new functions
+10.2.0
+52
+RP-110692
+0045
+1
+Mismatch in Counting Report
+10.2.0
+52
+RP-110686
+0047
+1
+Removal of unused references and text clean-up for Rel-10
+10.2.0
+53
+RP-111197
+0050
+2
+Clarification on the M2 Reset Procedure
+10.3.0
+53
+RP-111196
+0053
+1
+Correction to the eNB Configuration Update procedure, and the MCE Configuration Update procedure
+10.3.0
+53
+RP-111195
+0054
+1
+Abnormal condition UE Counting Request
+10.3.0
+54
+RP-111648
+0060
+
+Correction of Counting Request
+10.4.0
+54
+RP-111651
+0061
+1
+Correction to the eNB Configuration Update procedure, and the MCE Configuration Update procedure
+10.4.0
+55
+RP-120234
+0062
+
+Correct of reset
+10.5.0
+2012-06
+
+
+
+Created Rel-11 version based on v. 10.5.0
+
+56
+RP-120752
+0063
+2
+Correction on MBMS Session Start and Stop procedures in M2 interface
+11.0.0
+58
+RP-121737
+0064
+
+Rapporteur editorial corrections
+11.1.0
+59
+RP-130212
+0065
+1
+Correction for Session Update procedure
+11.2.0
+60
+RP-130643
+0067
+
+Correction of Update of Session Identity and TNL Address
+11.3.0
+2014-09
+
+
+
+Created Rel-12 version based on v. 11.3.0
+12.0.0
+66
+RP-142088
+0074
+3
+Introduction of 256QAM for PMCH
+12.1.0
+66
+RP-142093
+0075
+3
+CR for shortening MCH scheduling period
+12.1.0
+67
+RP-150356
+0092
+1
+Add missing 99ehaviour for MBMS Service Counting procedure
+12.2.0
+67
+RP-150347
+0099
+
+Correction of M2AP Scheduling Information
+12.2.0
+67
+RP-150355
+0101
+1
+Support for eMBMS congestion management, via MBMS Scheduling Information procedure
+12.2.0
+2015-06
+
+
+
+Created Rel-13 version based on v. 12.2.0
+13.0.0
+68
+RP-150946
+0093
+5
+eMBMS Alternative IP Multicast distribution address
+13.0.0
+69
+RP-151456
+0113
+
+Correction on ASN.1 inconsistency of mbmsServiceCountingResultsReport
+13.1.0
+70
+RP-152101
+0109
+5
+Introduction of SC-PTM
+13.2.0
+71
+RP-160449
+0118
+
+Rapporteur Review on 36.443
+13.3.0
+
+Change history
+Date
+Meeting
+Tdoc
+CR
+Rev
+Cat
+Subject/Comment
+New version
+2017-03
+RP-75
+RP-170538
+0124
+ 
+B
+Introduction of new period values for MBMS
+14.0.0
+2017-03
+RP-75
+RP-170542
+0125
+ 
+B
+Introduction of New types of eNB ID
+14.0.0
+2017-04
+
+
+
+
+
+Editorial Correction: “rejcet” to “reject” in ASN code
+14.0.1
+2018-09
+RP-81
+RP-181926
+0126
+1
+F
+Introduction of release 14 eMBMS enhancements
+14.1.0
+2018-09
+-
+-
+-
+-
+-
+Update to Rel-15 version (MCC)
+15.0.0
+2020-03
+RP-87-e
+RP-200421
+0127
+1
+B
+Introduction of LTE-based 5G terrestrial broadcast 
+16.0.0
+2020-12
+RP-90-e
+RP-202314
+0129
+3
+F
+Correction on the configuration of subframe #0 and #5 for MCH in MBMS dedicated cell 
+16.1.0
+

@@ -1,7 +1,7 @@
 # -*- coding: UTF-8 -*-
 #/**
 # * Software Name : pycrate
-# * Version : 0.3
+# * Version : 0.4
 # *
 # * Copyright 2016. Benoit Michau. ANSSI.
 # *
@@ -41,7 +41,7 @@ from pycrate_asn1rt.asnobj_str       import *
 from pycrate_asn1rt.asnobj_construct import *
 from pycrate_asn1rt.asnobj_class     import *
 from pycrate_asn1rt.asnobj_ext       import *
-from pycrate_asn1rt.init             import init_modules
+#from pycrate_asn1rt.init             import init_modules
 from pycrate_asn1rt.codecs           import _with_json
 
 
@@ -57,11 +57,13 @@ OCT_STR._ASN_WASC = False
 
 
 def _load_rt_base():
-    try:
-        GLOBAL.clear()
-    except:
-        pass
+    #try:
+    #    GLOBAL.clear()
+    #except:
+    #    pass
     from test import test_asn1rt_mod
+    #print(list(GLOBAL.MOD.keys()))
+
 
 def _test_rt_base():
     Mod = GLOBAL.MOD['Test-Asn1rt']
@@ -75,6 +77,8 @@ def _test_rt_base():
     assert( Boo01.to_ber() == Boo01.to_ber_ws() == b'\x01\x01\xff' )
     assert( Boo01.to_cer() == Boo01.to_cer_ws() == b'\x01\x01\xff' )
     assert( Boo01.to_der() == Boo01.to_der_ws() == b'\x01\x01\xff' )
+    assert( Boo01.to_oer() == Boo01.to_oer_ws() == b'\xff' )
+    assert( Boo01.to_coer() == Boo01.to_coer_ws() == b'\xff' )
     # decoding
     Boo01.from_aper(b'\x80')
     assert( Boo01._val == True )
@@ -101,9 +105,63 @@ def _test_rt_base():
         assert( Boo01.to_jer() == 'true' )
         Boo01.from_jer( 'true' )
         assert( Boo01._val == True )
-    
+    # OER/COER
+    Boo01.from_oer(b'\xff')
+    assert( Boo01._val == True )
+    Boo01.from_oer_ws(b'\xff')
+    assert( Boo01._val == True )
+    Boo01.from_coer(b'\xff')
+    assert( Boo01._val == True )
+    Boo01.from_coer_ws(b'\xff')
+    assert( Boo01._val == True )
+
     # Int01 ::= INTEGER
     Int01 = Mod['Int01']
+    Int01.from_asn1('0')
+    # encoding
+    assert( Int01.to_aper() == Int01.to_aper_ws() == b'\x01\x00' )
+    assert( Int01.to_uper() == Int01.to_uper_ws() == b'\x01\x00' )
+    assert( Int01.to_ber() == Int01.to_ber_ws() == b'\x02\x01\x00' )
+    assert( Int01.to_cer() == Int01.to_cer_ws() == b'\x02\x01\x00' )
+    assert( Int01.to_der() == Int01.to_der_ws() == b'\x02\x01\x00' )
+    assert( Int01.to_oer() == Int01.to_oer_ws() == b'\x01\x00' )
+    assert( Int01.to_coer() == Int01.to_coer_ws() == b'\x01\x00' )
+    # decoding
+    Int01.from_aper(b'\x01\x00')
+    assert( Int01._val == 0 )
+    Int01.from_aper_ws(b'\x01\x00')
+    assert( Int01._val == 0 )
+    Int01.from_uper(b'\x01\x00')
+    assert( Int01._val == 0 )
+    Int01.from_uper_ws(b'\x01\x00')
+    assert( Int01._val == 0 )
+    Int01.from_ber(b'\x02\x01\x00')
+    assert( Int01._val == 0 )
+    Int01.from_ber_ws(b'\x02\x01\x00')
+    assert( Int01._val == 0 )
+    Int01.from_cer(b'\x02\x01\x00')
+    assert( Int01._val == 0 )
+    Int01.from_cer_ws(b'\x02\x01\x00')
+    assert( Int01._val == 0 )
+    Int01.from_der(b'\x02\x01\x00')
+    assert( Int01._val == 0 )
+    Int01.from_der_ws(b'\x02\x01\x00')
+    assert( Int01._val == 0 )
+    # jer
+    if _with_json:
+        assert( Int01.to_jer() == '0' )
+        Int01.from_jer('0')
+        assert( Int01._val == 0 )
+    # OER/COER
+    Int01.from_oer(b'\x01\x00')
+    assert( Int01._val == 0 )
+    Int01.from_oer_ws(b'\x01\x00')
+    assert( Int01._val == 0 )
+    Int01.from_coer(b'\x01\x00')
+    assert( Int01._val == 0 )
+    Int01.from_coer_ws(b'\x01\x00')
+    assert( Int01._val == 0 )
+    #
     Int01.from_asn1('4096')
     # encoding
     assert( Int01.to_aper() == Int01.to_aper_ws() == b'\x02\x10\x00' )
@@ -111,6 +169,8 @@ def _test_rt_base():
     assert( Int01.to_ber() == Int01.to_ber_ws() == b'\x02\x02\x10\x00' )
     assert( Int01.to_cer() == Int01.to_cer_ws() == b'\x02\x02\x10\x00' )
     assert( Int01.to_der() == Int01.to_der_ws() == b'\x02\x02\x10\x00' )
+    assert( Int01.to_oer() == Int01.to_oer_ws() == b'\x02\x10\x00' )
+    assert( Int01.to_coer() == Int01.to_coer_ws() == b'\x02\x10\x00' )
     # decoding
     Int01.from_aper(b'\x02\x10\x00')
     assert( Int01._val == 4096 )
@@ -137,6 +197,15 @@ def _test_rt_base():
         assert( Int01.to_jer() == '4096' )
         Int01.from_jer('4096')
         assert( Int01._val == 4096 )
+    # OER/COER
+    Int01.from_oer(b'\x02\x10\x00')
+    assert( Int01._val == 4096 )
+    Int01.from_oer_ws(b'\x02\x10\x00')
+    assert( Int01._val == 4096 )
+    Int01.from_coer(b'\x02\x10\x00')
+    assert( Int01._val == 4096 )
+    Int01.from_coer_ws(b'\x02\x10\x00')
+    assert( Int01._val == 4096 )
     
     # Int02 ::= INTEGER (MIN..65535)
     Int02 = Mod['Int02']
@@ -147,6 +216,8 @@ def _test_rt_base():
     assert( Int02.to_ber() == Int02.to_ber_ws() == b'\x02\x01\x7f' )
     assert( Int02.to_cer() == Int02.to_cer_ws() == b'\x02\x01\x7f' )
     assert( Int02.to_der() == Int02.to_der_ws() == b'\x02\x01\x7f' )
+    assert( Int02.to_oer() == Int02.to_oer_ws() == b'\x01\x7f' )
+    assert( Int02.to_coer() == Int02.to_coer_ws() == b'\x01\x7f' )
     # decoding
     Int02.from_aper(b'\x01\x7f')
     assert( Int02._val == 127 )
@@ -173,6 +244,15 @@ def _test_rt_base():
         assert( Int02.to_jer() == '127' )
         Int02.from_jer( '127' )
         assert( Int02._val == 127 )
+    # OER/COER
+    Int02.from_oer(b'\x01\x7f')
+    assert( Int02._val == 127 )
+    Int02.from_oer_ws(b'\x01\x7f')
+    assert( Int02._val == 127 )
+    Int02.from_coer(b'\x01\x7f')
+    assert( Int02._val == 127 )
+    Int02.from_coer_ws(b'\x01\x7f')
+    assert( Int02._val == 127 )
     #
     Int02.from_asn1('-128')
     # encoding
@@ -181,6 +261,8 @@ def _test_rt_base():
     assert( Int02.to_ber() == Int02.to_ber_ws() == b'\x02\x01\x80' )
     assert( Int02.to_cer() == Int02.to_cer_ws() == b'\x02\x01\x80' )
     assert( Int02.to_der() == Int02.to_der_ws() == b'\x02\x01\x80' )
+    assert( Int02.to_oer() == Int02.to_oer_ws() == b'\x01\x80' )
+    assert( Int02.to_coer() == Int02.to_coer_ws() == b'\x01\x80' )
     # decoding
     Int02.from_aper(b'\x01\x80')
     assert( Int02._val == -128 )
@@ -207,6 +289,15 @@ def _test_rt_base():
         assert( Int02.to_jer() == '-128' )
         Int02.from_jer('-128')
         assert( Int02._val == -128 )
+    # OER/COER
+    Int02.from_oer(b'\x01\x80')
+    assert( Int02._val == -128 )
+    Int02.from_oer_ws(b'\x01\x80')
+    assert( Int02._val == -128 )
+    Int02.from_coer(b'\x01\x80')
+    assert( Int02._val == -128 )
+    Int02.from_coer_ws(b'\x01\x80')
+    assert( Int02._val == -128 )
     #
     Int02.from_asn1('128')
     # encoding
@@ -215,6 +306,8 @@ def _test_rt_base():
     assert( Int02.to_ber() == Int02.to_ber_ws() == b'\x02\x02\x00\x80' )
     assert( Int02.to_cer() == Int02.to_cer_ws() == b'\x02\x02\x00\x80' )
     assert( Int02.to_der() == Int02.to_der_ws() == b'\x02\x02\x00\x80' )
+    assert( Int02.to_oer() == Int02.to_oer_ws() == b'\x02\x00\x80' )
+    assert( Int02.to_coer() == Int02.to_coer_ws() == b'\x02\x00\x80' )
     # decoding
     Int02.from_aper(b'\x02\x00\x80')
     assert( Int02._val == 128 )
@@ -236,6 +329,14 @@ def _test_rt_base():
     assert( Int02._val == 128 )
     Int02.from_der_ws(b'\x02\x02\x00\x80')
     assert( Int02._val == 128 )
+    Int02.from_oer(b'\x02\x00\x80')
+    assert( Int02._val == 128 )
+    Int02.from_oer_ws(b'\x02\x00\x80')
+    assert( Int02._val == 128 )
+    Int02.from_coer(b'\x02\x00\x80')
+    assert( Int02._val == 128 )
+    Int02.from_coer_ws(b'\x02\x00\x80')
+    assert( Int02._val == 128 )
     
     # Int03 ::= INTEGER (-1..MAX)
     Int03 = Mod['Int03']
@@ -246,6 +347,8 @@ def _test_rt_base():
     assert( Int03.to_ber() == Int03.to_ber_ws() == b'\x02\x02\x10\x00' )
     assert( Int03.to_cer() == Int03.to_cer_ws() == b'\x02\x02\x10\x00' )
     assert( Int03.to_der() == Int03.to_der_ws() == b'\x02\x02\x10\x00' )
+    assert( Int03.to_oer() == Int03.to_oer_ws() == b'\x02\x10\x00' )
+    assert( Int03.to_coer() == Int03.to_coer_ws() == b'\x02\x10\x00' )
     # decoding
     Int03.from_aper(b'\x02\x10\x01')
     assert( Int03._val == 4096 )
@@ -271,10 +374,64 @@ def _test_rt_base():
     if _with_json:
         assert( Int03.to_jer() == '4096' )
         Int03.from_jer('4096')
-        assert( Int03._val == 4096 ) 
+        assert( Int03._val == 4096 )
+    # OER/COER
+    Int03.from_oer(b'\x02\x10\x00')
+    assert( Int03._val == 4096 )
+    Int03.from_oer_ws(b'\x02\x10\x00')
+    assert( Int03._val == 4096 )
+    Int03.from_coer(b'\x02\x10\x00')
+    assert( Int03._val == 4096 )
+    Int03.from_coer_ws(b'\x02\x10\x00')
+    assert( Int03._val == 4096 )
     
     # Int04 ::= INTEGER (1..MAX)
     Int04 = Mod['Int04']
+    Int04.from_asn1('1')
+    # encoding
+    assert( Int04.to_aper() == Int04.to_aper_ws() == b'\x01\x00' )
+    assert( Int04.to_uper() == Int04.to_uper_ws() == b'\x01\x00' )
+    assert( Int04.to_ber() == Int04.to_ber_ws() == b'\x02\x01\x01' )
+    assert( Int04.to_cer() == Int04.to_cer_ws() == b'\x02\x01\x01' )
+    assert( Int04.to_der() == Int04.to_der_ws() == b'\x02\x01\x01' )
+    assert( Int04.to_oer() == Int04.to_oer_ws() == b'\x01\x01' )
+    assert( Int04.to_coer() == Int04.to_coer_ws() == b'\x01\x01' )
+    # decoding
+    Int04.from_aper(b'\x01\x00')
+    assert( Int04._val == 1)
+    Int04.from_aper_ws(b'\x01\x00')
+    assert( Int04._val == 1 )
+    Int04.from_uper(b'\x01\x00')
+    assert( Int04._val == 1 )
+    Int04.from_uper_ws(b'\x01\x00')
+    assert( Int04._val == 1 )
+    Int04.from_ber(b'\x02\x01\x01')
+    assert( Int04._val == 1 )
+    Int04.from_ber_ws(b'\x02\x01\x01')
+    assert( Int04._val == 1 )
+    Int04.from_cer(b'\x02\x01\x01')
+    assert( Int04._val == 1 )
+    Int04.from_cer_ws(b'\x02\x01\x01')
+    assert( Int04._val == 1 )
+    Int04.from_der(b'\x02\x01\x01')
+    assert( Int04._val == 1 )
+    Int04.from_der_ws(b'\x02\x01\x01')
+    assert( Int04._val == 1 )
+    # jer
+    if _with_json:
+        assert( Int04.to_jer() == '1' )
+        Int04.from_jer('1')
+        assert( Int04._val == 1 )
+    # OER/COER
+    Int04.from_oer(b'\x01\x01')
+    assert( Int04._val == 1)
+    Int04.from_oer_ws(b'\x01\x01')
+    assert( Int04._val == 1)
+    Int04.from_coer(b'\x01\x01')
+    assert( Int04._val == 1 )
+    Int04.from_coer_ws(b'\x01\x01')
+    assert( Int04._val == 1 )
+    #
     Int04.from_asn1('127')
     # encoding
     assert( Int04.to_aper() == Int04.to_aper_ws() == b'\x01~' )
@@ -282,6 +439,8 @@ def _test_rt_base():
     assert( Int04.to_ber() == Int04.to_ber_ws() == b'\x02\x01\x7f' )
     assert( Int04.to_cer() == Int04.to_cer_ws() == b'\x02\x01\x7f' )
     assert( Int04.to_der() == Int04.to_der_ws() == b'\x02\x01\x7f' )
+    assert( Int04.to_oer() == Int04.to_oer_ws() == b'\x01\x7f' )
+    assert( Int04.to_coer() == Int04.to_coer_ws() == b'\x01\x7f' )
     # decoding
     Int04.from_aper(b'\x01~')
     assert( Int04._val == 127 )
@@ -308,6 +467,15 @@ def _test_rt_base():
         assert( Int04.to_jer() == '127' )
         Int04.from_jer('127')
         assert( Int04._val == 127 )
+    # OER/COER
+    Int04.from_oer(b'\x01\x7f')
+    assert( Int04._val == 127)
+    Int04.from_oer_ws(b'\x01\x7f')
+    assert( Int04._val == 127)
+    Int04.from_coer(b'\x01\x7f')
+    assert( Int04._val == 127 )
+    Int04.from_coer_ws(b'\x01\x7f')
+    assert( Int04._val == 127 )
     
     # Int05 ::= INTEGER (0..MAX)
     Int05 = Mod['Int05']
@@ -318,6 +486,8 @@ def _test_rt_base():
     assert( Int05.to_ber() == Int05.to_ber_ws() == b'\x02\x02\x00\x80' )
     assert( Int05.to_cer() == Int05.to_cer_ws() == b'\x02\x02\x00\x80' )
     assert( Int05.to_der() == Int05.to_der_ws() == b'\x02\x02\x00\x80' )
+    assert( Int05.to_oer() == Int05.to_oer_ws() == b'\x01\x80' )
+    assert( Int05.to_coer() == Int05.to_coer_ws() == b'\x01\x80' )
     # decoding
     Int05.from_aper(b'\x01\x80')
     assert( Int05._val == 128 )
@@ -344,6 +514,15 @@ def _test_rt_base():
         assert( Int05.to_jer() == '128' )
         Int05.from_jer('128')
         assert( Int05._val == 128 )
+    # OER/COER
+    Int05.from_oer(b'\x01\x80')
+    assert( Int05._val == 128 )
+    Int05.from_oer_ws(b'\x01\x80')
+    assert( Int05._val == 128 )
+    Int05.from_coer(b'\x01\x80')
+    assert( Int05._val == 128 )
+    Int05.from_coer_ws(b'\x01\x80')
+    assert( Int05._val == 128 )
     
     # Int06 ::= INTEGER (3..6)
     Int06 = Mod['Int06']
@@ -354,6 +533,8 @@ def _test_rt_base():
     assert( Int06.to_ber() == Int06.to_ber_ws() == b'\x02\x01\x03' )
     assert( Int06.to_cer() == Int06.to_cer_ws() == b'\x02\x01\x03' )
     assert( Int06.to_der() == Int06.to_der_ws() == b'\x02\x01\x03' )
+    assert( Int06.to_oer() == Int06.to_oer_ws() == b'\x03' )
+    assert( Int06.to_coer() == Int06.to_coer_ws() == b'\x03' )
     # decoding
     Int06.from_aper(b'\x00')
     assert( Int06._val == 3 )
@@ -375,6 +556,14 @@ def _test_rt_base():
     assert( Int06._val == 3 )
     Int06.from_der_ws(b'\x02\x01\x03')
     assert( Int06._val == 3 )
+    Int06.from_oer(b'\x03')
+    assert( Int06._val == 3 )
+    Int06.from_oer_ws(b'\x03')
+    assert( Int06._val == 3 )
+    Int06.from_coer(b'\x03')
+    assert( Int06._val == 3 )
+    Int06.from_coer_ws(b'\x03')
+    assert( Int06._val == 3 )
     #
     Int06.from_asn1('6')
     # encoding
@@ -383,6 +572,8 @@ def _test_rt_base():
     assert( Int06.to_ber() == Int06.to_ber_ws() == b'\x02\x01\x06' )
     assert( Int06.to_cer() == Int06.to_cer_ws() == b'\x02\x01\x06' )
     assert( Int06.to_der() == Int06.to_der_ws() == b'\x02\x01\x06' )
+    assert( Int06.to_oer() == Int06.to_oer_ws() == b'\x06' )
+    assert( Int06.to_coer() == Int06.to_coer_ws() == b'\x06' )
     # decoding
     Int06.from_aper(b'\xc0')
     assert( Int06._val == 6 )
@@ -404,6 +595,14 @@ def _test_rt_base():
     assert( Int06._val == 6 )
     Int06.from_der_ws(b'\x02\x01\x06')
     assert( Int06._val == 6 )
+    Int06.from_oer(b'\x06')
+    assert( Int06._val == 6 )
+    Int06.from_oer_ws(b'\x06')
+    assert( Int06._val == 6 )
+    Int06.from_coer(b'\x06')
+    assert( Int06._val == 6 )
+    Int06.from_coer_ws(b'\x06')
+    assert( Int06._val == 6 )
     
     # Int07 ::= INTEGER (4000..4254)
     Int07 = Mod['Int07']
@@ -414,6 +613,8 @@ def _test_rt_base():
     assert( Int07.to_ber() == Int07.to_ber_ws() == b'\x02\x02\x0f\xa2' )
     assert( Int07.to_cer() == Int07.to_cer_ws() == b'\x02\x02\x0f\xa2' )
     assert( Int07.to_der() == Int07.to_der_ws() == b'\x02\x02\x0f\xa2' )
+    assert( Int07.to_oer() == Int07.to_oer_ws() == b'\x0f\xa2' )
+    assert( Int07.to_coer() == Int07.to_coer_ws() == b'\x0f\xa2' )
     # decoding
     Int07.from_aper(b'\x02')
     assert( Int07._val == 4002 )
@@ -435,6 +636,14 @@ def _test_rt_base():
     assert( Int07._val == 4002 )
     Int07.from_der_ws(b'\x02\x02\x0f\xa2')
     assert( Int07._val == 4002 )
+    Int07.from_oer(b'\x0f\xa2')
+    assert( Int07._val == 4002 )
+    Int07.from_oer_ws(b'\x0f\xa2')
+    assert( Int07._val == 4002 )
+    Int07.from_coer(b'\x0f\xa2')
+    assert( Int07._val == 4002 )
+    Int07.from_coer_ws(b'\x0f\xa2')
+    assert( Int07._val == 4002 )
     #
     Int07.from_asn1('4129')
     # encoding
@@ -443,6 +652,8 @@ def _test_rt_base():
     assert( Int07.to_ber() == Int07.to_ber_ws() == b'\x02\x02\x10!' )
     assert( Int07.to_cer() == Int07.to_cer_ws() == b'\x02\x02\x10!' )
     assert( Int07.to_der() == Int07.to_der_ws() == b'\x02\x02\x10!' )
+    assert( Int07.to_oer() == Int07.to_oer_ws() == b'\x10!' )
+    assert( Int07.to_coer() == Int07.to_coer_ws() == b'\x10!' )
     # decoding
     Int07.from_aper(b'\x81')
     assert( Int07._val == 4129 )
@@ -464,6 +675,14 @@ def _test_rt_base():
     assert( Int07._val == 4129 )
     Int07.from_der_ws(b'\x02\x02\x10!')
     assert( Int07._val == 4129 )
+    Int07.from_oer(b'\x10!')
+    assert( Int07._val == 4129 )
+    Int07.from_oer_ws(b'\x10!')
+    assert( Int07._val == 4129 )
+    Int07.from_coer(b'\x10!')
+    assert( Int07._val == 4129 )
+    Int07.from_coer_ws(b'\x10!')
+    assert( Int07._val == 4129 )
     
     # Int08 ::= INTEGER (4000..4255)
     Int08 = Mod['Int08']
@@ -474,6 +693,8 @@ def _test_rt_base():
     assert( Int08.to_ber() == Int08.to_ber_ws() == b'\x02\x02\x10\x9f' )
     assert( Int08.to_cer() == Int08.to_cer_ws() == b'\x02\x02\x10\x9f' )
     assert( Int08.to_der() == Int08.to_der_ws() == b'\x02\x02\x10\x9f' )
+    assert( Int08.to_oer() == Int08.to_oer_ws() == b'\x10\x9f' )
+    assert( Int08.to_coer() == Int08.to_coer_ws() == b'\x10\x9f' )
     # decoding
     Int08.from_aper(b'\xff')
     assert( Int08._val == 4255 )
@@ -495,6 +716,14 @@ def _test_rt_base():
     assert( Int08._val == 4255 )
     Int08.from_der_ws(b'\x02\x02\x10\x9f')
     assert( Int08._val == 4255 )
+    Int08.from_oer(b'\x10\x9f')
+    assert( Int08._val == 4255 )
+    Int08.from_oer_ws(b'\x10\x9f')
+    assert( Int08._val == 4255 )
+    Int08.from_coer(b'\x10\x9f')
+    assert( Int08._val == 4255 )
+    Int08.from_coer_ws(b'\x10\x9f')
+    assert( Int08._val == 4255 )
     
     # Int09 ::= INTEGER (0..32000)
     Int09 = Mod['Int09']
@@ -505,6 +734,8 @@ def _test_rt_base():
     assert( Int09.to_ber() == Int09.to_ber_ws() == b'\x02\x02y\x18' )
     assert( Int09.to_cer() == Int09.to_cer_ws() == b'\x02\x02y\x18' )
     assert( Int09.to_der() == Int09.to_der_ws() == b'\x02\x02y\x18' )
+    assert( Int09.to_oer() == Int09.to_oer_ws() == b'y\x18' )
+    assert( Int09.to_coer() == Int09.to_coer_ws() == b'y\x18' )
     # decoding
     Int09.from_aper(b'y\x18')
     assert( Int09._val == 31000 )
@@ -526,6 +757,14 @@ def _test_rt_base():
     assert( Int09._val == 31000 )
     Int09.from_der_ws(b'\x02\x02y\x18')
     assert( Int09._val == 31000 )
+    Int09.from_oer(b'y\x18')
+    assert( Int09._val == 31000 )
+    Int09.from_oer_ws(b'y\x18')
+    assert( Int09._val == 31000 )
+    Int09.from_coer(b'y\x18')
+    assert( Int09._val == 31000 )
+    Int09.from_coer_ws(b'y\x18')
+    assert( Int09._val == 31000 )
     
     # Int10 ::= INTEGER (1..65538)
     Int10 = Mod['Int10']
@@ -536,6 +775,8 @@ def _test_rt_base():
     assert( Int10.to_ber() == Int10.to_ber_ws() == b'\x02\x01\x01' )
     assert( Int10.to_cer() == Int10.to_cer_ws() == b'\x02\x01\x01' )
     assert( Int10.to_der() == Int10.to_der_ws() == b'\x02\x01\x01' )
+    assert( Int10.to_oer() == Int10.to_oer_ws() == b'\x00\x00\x00\x01' )
+    assert( Int10.to_coer() == Int10.to_coer_ws() == b'\x00\x00\x00\x01' )
     # decoding
     Int10.from_aper(b'\x00\x00')
     assert( Int10._val == 1 )
@@ -557,6 +798,14 @@ def _test_rt_base():
     assert( Int10._val == 1 )
     Int10.from_der_ws(b'\x02\x01\x01')
     assert( Int10._val == 1 )
+    Int10.from_oer(b'\x00\x00\x00\x01')
+    assert( Int10._val == 1 )
+    Int10.from_oer_ws(b'\x00\x00\x00\x01')
+    assert( Int10._val == 1 )
+    Int10.from_coer(b'\x00\x00\x00\x01')
+    assert( Int10._val == 1 )
+    Int10.from_coer_ws(b'\x00\x00\x00\x01')
+    assert( Int10._val == 1 )
     #
     Int10.from_asn1('257')
     # encoding
@@ -565,6 +814,8 @@ def _test_rt_base():
     assert( Int10.to_ber() == Int10.to_ber_ws() == b'\x02\x02\x01\x01' )
     assert( Int10.to_cer() == Int10.to_cer_ws() == b'\x02\x02\x01\x01' )
     assert( Int10.to_der() == Int10.to_der_ws() == b'\x02\x02\x01\x01' )
+    assert( Int10.to_oer() == Int10.to_oer_ws() == b'\x00\x00\x01\x01' )
+    assert( Int10.to_coer() == Int10.to_coer_ws() == b'\x00\x00\x01\x01' )
     # decoding
     Int10.from_aper(b'@\x01\x00')
     assert( Int10._val == 257 )
@@ -586,6 +837,14 @@ def _test_rt_base():
     assert( Int10._val == 257 )
     Int10.from_der_ws(b'\x02\x02\x01\x01')
     assert( Int10._val == 257 )
+    Int10.from_oer(b'\x00\x00\x01\x01')
+    assert( Int10._val == 257 )
+    Int10.from_oer_ws(b'\x00\x00\x01\x01')
+    assert( Int10._val == 257 )
+    Int10.from_coer(b'\x00\x00\x01\x01')
+    assert( Int10._val == 257 )
+    Int10.from_coer_ws(b'\x00\x00\x01\x01')
+    assert( Int10._val == 257 )
     #
     Int10.from_asn1('65538')
     # encoding
@@ -594,6 +853,8 @@ def _test_rt_base():
     assert( Int10.to_ber() == Int10.to_ber_ws() == b'\x02\x03\x01\x00\x02' )
     assert( Int10.to_cer() == Int10.to_cer_ws() == b'\x02\x03\x01\x00\x02' )
     assert( Int10.to_der() == Int10.to_der_ws() == b'\x02\x03\x01\x00\x02' )
+    assert( Int10.to_oer() == Int10.to_oer_ws() == b'\x00\x01\x00\x02' )
+    assert( Int10.to_coer() == Int10.to_coer_ws() == b'\x00\x01\x00\x02' )
     # decoding
     Int10.from_aper(b'\x80\x01\x00\x01')
     assert( Int10._val == 65538 )
@@ -615,6 +876,14 @@ def _test_rt_base():
     assert( Int10._val == 65538 )
     Int10.from_der_ws(b'\x02\x03\x01\x00\x02')
     assert( Int10._val == 65538 )
+    Int10.from_oer(b'\x00\x01\x00\x02')
+    assert( Int10._val == 65538 )
+    Int10.from_oer_ws(b'\x00\x01\x00\x02')
+    assert( Int10._val == 65538 )
+    Int10.from_coer(b'\x00\x01\x00\x02')
+    assert( Int10._val == 65538 )
+    Int10.from_coer_ws(b'\x00\x01\x00\x02')
+    assert( Int10._val == 65538 )
     
     # Int12 ::= INTEGER (-1..MAX, ...)
     Int12 = Mod['Int12']
@@ -625,6 +894,8 @@ def _test_rt_base():
     assert( Int12.to_ber() == Int12.to_ber_ws() == b'\x02\x01\x9c' )
     assert( Int12.to_cer() == Int12.to_cer_ws() == b'\x02\x01\x9c' )
     assert( Int12.to_der() == Int12.to_der_ws() == b'\x02\x01\x9c' )
+    assert( Int12.to_oer() == Int12.to_oer_ws() == b'\x01\x9c' )
+    assert( Int12.to_coer() == Int12.to_coer_ws() == b'\x01\x9c' )
     # decoding
     Int12.from_aper(b'\x80\x01\x9c')
     assert( Int12._val == -100 )
@@ -651,6 +922,15 @@ def _test_rt_base():
         assert( Int12.to_jer() == '-100' )
         Int12.from_jer('-100')
         assert( Int12._val == -100 )
+    # OER/COER
+    Int12.from_oer(b'\x01\x9c')
+    assert( Int12._val == -100 )
+    Int12.from_oer_ws(b'\x01\x9c')
+    assert( Int12._val == -100 )
+    Int12.from_coer(b'\x01\x9c')
+    assert( Int12._val == -100 )
+    Int12.from_coer_ws(b'\x01\x9c')
+    assert( Int12._val == -100 )
     
     # Int13 ::= INTEGER (3..6, ...)
     # encoding untested against commercial tools (often bound to 32 bits integers)
@@ -662,6 +942,8 @@ def _test_rt_base():
     assert( Int13.to_ber() == Int13.to_ber_ws() == b'\x02\x11\x03\xa0\xc9 u\xc0\xdb\xf3\xb8\xac\xbc_\x96\xce?\n\xd2' )
     assert( Int13.to_cer() == Int13.to_cer_ws() == b'\x02\x11\x03\xa0\xc9 u\xc0\xdb\xf3\xb8\xac\xbc_\x96\xce?\n\xd2' )
     assert( Int13.to_der() == Int13.to_der_ws() == b'\x02\x11\x03\xa0\xc9 u\xc0\xdb\xf3\xb8\xac\xbc_\x96\xce?\n\xd2' )
+    assert( Int13.to_oer() == Int13.to_oer_ws() == b'\x11\x03\xa0\xc9 u\xc0\xdb\xf3\xb8\xac\xbc_\x96\xce?\n\xd2' )
+    assert( Int13.to_coer() == Int13.to_coer_ws() == b'\x11\x03\xa0\xc9 u\xc0\xdb\xf3\xb8\xac\xbc_\x96\xce?\n\xd2' )
     # decoding
     Int13.from_aper(b'\x80\x11\x03\xa0\xc9 u\xc0\xdb\xf3\xb8\xac\xbc_\x96\xce?\n\xd2')
     assert( Int13._val == 1234567890123456789012345678901234567890 )
@@ -688,6 +970,15 @@ def _test_rt_base():
         assert( Int13.to_jer() == '1234567890123456789012345678901234567890' )
         Int13.from_jer('1234567890123456789012345678901234567890')
         assert( Int13._val == 1234567890123456789012345678901234567890 )
+    # OER/COER
+    Int13.from_oer(b'\x11\x03\xa0\xc9 u\xc0\xdb\xf3\xb8\xac\xbc_\x96\xce?\n\xd2')
+    assert( Int13._val == 1234567890123456789012345678901234567890 )
+    Int13.from_oer_ws(b'\x11\x03\xa0\xc9 u\xc0\xdb\xf3\xb8\xac\xbc_\x96\xce?\n\xd2')
+    assert( Int13._val == 1234567890123456789012345678901234567890 )
+    Int13.from_coer(b'\x11\x03\xa0\xc9 u\xc0\xdb\xf3\xb8\xac\xbc_\x96\xce?\n\xd2')
+    assert( Int13._val == 1234567890123456789012345678901234567890 )
+    Int13.from_coer_ws(b'\x11\x03\xa0\xc9 u\xc0\xdb\xf3\xb8\xac\xbc_\x96\xce?\n\xd2')
+    assert( Int13._val == 1234567890123456789012345678901234567890 )
     
     # Rea01 ::= REAL
     Rea01 = Mod['Rea01']
@@ -734,6 +1025,8 @@ def _test_rt_base():
     assert( Rea01.to_ber() == Rea01.to_ber_ws() == b'\t\x04\x80\xd1\x07\x89' )
     assert( Rea01.to_cer() == Rea01.to_cer_ws() == b'\t\x04\x80\xd1\x07\x89' )
     assert( Rea01.to_der() == Rea01.to_der_ws() == b'\t\x04\x80\xd1\x07\x89' )
+    assert( Rea01.to_oer() == Rea01.to_oer_ws() == b'\x06\t\x04\x80\xd1\x07\x89' )
+    assert( Rea01.to_coer() == Rea01.to_coer_ws() == b'\x06\t\x04\x80\xd1\x07\x89' )
     # decoding
     Rea01.from_aper(b'\x04\x80\xd1\x07\x89')
     assert( Rea01._val == (1929, 2, -47) )
@@ -761,6 +1054,15 @@ def _test_rt_base():
         assert( Rea01._to_jval() == {'base10Value': '1.3706369372812333e-11'} )
         Rea01.from_jer( '{"base10Value": "1.3706369372812333e-11"}' )
         assert( Rea01._val == (13706369372812333, 10, -27) )
+    # OER/COER
+    Rea01.from_oer(b'\x06\t\x04\x80\xd1\x07\x89')
+    assert( Rea01._val == (1929, 2, -47) )
+    Rea01.from_oer_ws(b'\x06\t\x04\x80\xd1\x07\x89')
+    assert( Rea01._val == (1929, 2, -47) )
+    Rea01.from_coer(b'\x06\t\x04\x80\xd1\x07\x89')
+    assert( Rea01._val == (1929, 2, -47) )
+    Rea01.from_coer_ws(b'\x06\t\x04\x80\xd1\x07\x89')
+    assert( Rea01._val == (1929, 2, -47) )
     
     # Enu01 ::= ENUMERATED {cheese, cake, coffee, tea}
     Enu01 = Mod['Enu01']
@@ -771,6 +1073,8 @@ def _test_rt_base():
     assert( Enu01.to_ber() == Enu01.to_ber_ws() == b'\n\x01\x02' )
     assert( Enu01.to_cer() == Enu01.to_cer_ws() == b'\n\x01\x02' )
     assert( Enu01.to_der() == Enu01.to_der_ws() == b'\n\x01\x02' )
+    assert( Enu01.to_oer() == Enu01.to_oer_ws() == b'\x02' )
+    assert( Enu01.to_coer() == Enu01.to_coer_ws() == b'\x02' )
     # decoding
     Enu01.from_aper(b'\x80')
     assert( Enu01._val == 'coffee' )
@@ -797,6 +1101,15 @@ def _test_rt_base():
         assert( Enu01.to_jer() == '"coffee"' )
         Enu01.from_jer('"coffee"')
         assert( Enu01._val == 'coffee' )
+    # OER/COER
+    Enu01.from_oer(b'\x02')
+    assert( Enu01._val == 'coffee' )
+    Enu01.from_oer_ws(b'\x02')
+    assert( Enu01._val == 'coffee' )
+    Enu01.from_coer(b'\x02')
+    assert( Enu01._val == 'coffee' )
+    Enu01.from_coer_ws(b'\x02')
+    assert( Enu01._val == 'coffee' )
     
     # Enu04 ::= ENUMERATED {cheese, ..., cake, coffee, tea}
     Enu04 = Mod['Enu04']
@@ -807,6 +1120,8 @@ def _test_rt_base():
     assert( Enu04.to_ber() == Enu04.to_ber_ws() == b'\n\x01\x03' )
     assert( Enu04.to_cer() == Enu04.to_cer_ws() == b'\n\x01\x03' )
     assert( Enu04.to_der() == Enu04.to_der_ws() == b'\n\x01\x03' )
+    assert( Enu04.to_oer() == Enu04.to_oer_ws() == b'\x03' )
+    assert( Enu04.to_coer() == Enu04.to_coer_ws() == b'\x03' )
     # decoding
     Enu04.from_aper(b'\x82')
     assert( Enu04._val == 'tea' )
@@ -828,6 +1143,14 @@ def _test_rt_base():
     assert( Enu04._val == 'tea' )
     Enu04.from_der_ws(b'\n\x01\x03')
     assert( Enu04._val == 'tea' )
+    Enu04.from_oer(b'\x03')
+    assert( Enu04._val == 'tea' )
+    Enu04.from_oer_ws(b'\x03')
+    assert( Enu04._val == 'tea' )
+    Enu04.from_coer(b'\x03')
+    assert( Enu04._val == 'tea' )
+    Enu04.from_coer_ws(b'\x03')
+    assert( Enu04._val == 'tea' )
     
     # Oid01 ::= OBJECT IDENTIFIER
     Oid01 = Mod['Oid01']
@@ -838,6 +1161,8 @@ def _test_rt_base():
     assert( Oid01.to_ber() == Oid01.to_ber_ws() == b'\x06\x04*\x81z\x01' )
     assert( Oid01.to_cer() == Oid01.to_cer_ws() == b'\x06\x04*\x81z\x01' )
     assert( Oid01.to_der() == Oid01.to_der_ws() == b'\x06\x04*\x81z\x01' )
+    assert( Oid01.to_oer() == Oid01.to_oer_ws() == b'\x04*\x81z\x01' )
+    assert( Oid01.to_coer() == Oid01.to_coer_ws() == b'\x04*\x81z\x01' )
     # decoding
     Oid01.from_aper(b'\x04*\x81z\x01')
     assert( Oid01._val == (1, 2, 250, 1) )
@@ -864,6 +1189,15 @@ def _test_rt_base():
         assert( Oid01.to_jer() == '"1.2.250.1"' )
         Oid01.from_jer('"1.2.250.1"')
         assert( Oid01._val == (1, 2, 250, 1) )
+    # OER/COER
+    Oid01.from_oer(b'\x04*\x81z\x01')
+    assert( Oid01._val == (1, 2, 250, 1) )
+    Oid01.from_oer_ws(b'\x04*\x81z\x01')
+    assert( Oid01._val == (1, 2, 250, 1) )
+    Oid01.from_coer(b'\x04*\x81z\x01')
+    assert( Oid01._val == (1, 2, 250, 1) )
+    Oid01.from_coer_ws(b'\x04*\x81z\x01')
+    assert( Oid01._val == (1, 2, 250, 1) )
     
     # Oid02 ::= RELATIVE-OID
     Oid02 = Mod['Oid02']
@@ -874,6 +1208,8 @@ def _test_rt_base():
     assert( Oid02.to_ber() == Oid02.to_ber_ws() == b'\r\x04+\x0c\x14\x07' )
     assert( Oid02.to_cer() == Oid02.to_cer_ws() == b'\r\x04+\x0c\x14\x07' )
     assert( Oid02.to_der() == Oid02.to_der_ws() == b'\r\x04+\x0c\x14\x07' )
+    assert( Oid02.to_oer() == Oid02.to_oer_ws() == b'\x04+\x0c\x14\x07' )
+    assert( Oid02.to_coer() == Oid02.to_coer_ws() == b'\x04+\x0c\x14\x07' )
     # decoding
     Oid02.from_aper(b'\x04+\x0c\x14\x07')
     assert( Oid02._val == (43, 12, 20, 7) )
@@ -895,6 +1231,14 @@ def _test_rt_base():
     assert( Oid02._val == (43, 12, 20, 7) )
     Oid02.from_der_ws(b'\r\x04+\x0c\x14\x07')
     assert( Oid02._val == (43, 12, 20, 7) )
+    Oid02.from_oer(b'\x04+\x0c\x14\x07')
+    assert( Oid02._val == (43, 12, 20, 7) )
+    Oid02.from_oer_ws(b'\x04+\x0c\x14\x07')
+    assert( Oid02._val == (43, 12, 20, 7) )
+    Oid02.from_coer(b'\x04+\x0c\x14\x07')
+    assert( Oid02._val == (43, 12, 20, 7) )
+    Oid02.from_coer_ws(b'\x04+\x0c\x14\x07')
+    assert( Oid02._val == (43, 12, 20, 7) )
     
     # Bst01 ::= BIT STRING
     Bst01 = Mod['Bst01']
@@ -905,6 +1249,8 @@ def _test_rt_base():
     assert( Bst01.to_ber() == Bst01.to_ber_ws() == b'\x03\x04\x06<\x96\x80' )
     assert( Bst01.to_cer() == Bst01.to_cer_ws() == b'\x03\x04\x06<\x96\x80' )
     assert( Bst01.to_der() == Bst01.to_der_ws() == b'\x03\x04\x06<\x96\x80' )
+    assert( Bst01.to_oer() == Bst01.to_oer_ws() == b'\x04\x06<\x96\x80' )
+    assert( Bst01.to_coer() == Bst01.to_coer_ws() == b'\x04\x06<\x96\x80' )
     # decoding
     Bst01.from_aper(b'\x12<\x96\x80')
     assert( Bst01._val == (62042, 18) )
@@ -931,6 +1277,15 @@ def _test_rt_base():
         assert( Bst01._to_jval() == {'length': 18, 'value': '3c9680'} )
         Bst01.from_jer('{"length": 18, "value": "3c9680"}')
         assert(  Bst01._val == (62042, 18) )
+    # OER/COER
+    Bst01.from_oer(b'\x04\x06<\x96\x80')
+    assert( Bst01._val == (62042, 18) )
+    Bst01.from_oer_ws(b'\x04\x06<\x96\x80')
+    assert( Bst01._val == (62042, 18) )
+    Bst01.from_coer(b'\x04\x06<\x96\x80')
+    assert( Bst01._val == (62042, 18) )
+    Bst01.from_coer_ws(b'\x04\x06<\x96\x80')
+    assert( Bst01._val == (62042, 18) )
     
     # Bst03 ::= BIT STRING (SIZE (0..24, ...))
     Bst03 = Mod['Bst03']
@@ -941,6 +1296,8 @@ def _test_rt_base():
     assert( Bst03.to_ber() == Bst03.to_ber_ws() == b'\x03\x05\x00<\x96\xa5\x0f' )
     assert( Bst03.to_cer() == Bst03.to_cer_ws() == b'\x03\x05\x00<\x96\xa5\x0f' )
     assert( Bst03.to_der() == Bst03.to_der_ws() == b'\x03\x05\x00<\x96\xa5\x0f' )
+    assert( Bst03.to_oer() == Bst03.to_oer_ws() == b'\x05\x00<\x96\xa5\x0f' )
+    assert( Bst03.to_coer() == Bst03.to_coer_ws() == b'\x05\x00<\x96\xa5\x0f' )
     # decoding
     Bst03.from_aper(b'\x80 <\x96\xa5\x0f')
     assert( Bst03._val == (1016505615, 32) )
@@ -967,6 +1324,62 @@ def _test_rt_base():
         assert( Bst03._to_jval() == {'length': 32, 'value': '3c96a50f'} )
         Bst03.from_jer('{"length": 32, "value": "3c96a50f"}')
         assert( Bst03._val == (1016505615, 32) )
+    # OER/COER
+    Bst03.from_oer(b'\x05\x00<\x96\xa5\x0f')
+    assert( Bst03._val == (1016505615, 32) )
+    Bst03.from_oer_ws(b'\x05\x00<\x96\xa5\x0f')
+    assert( Bst03._val == (1016505615, 32) )
+    Bst03.from_coer(b'\x05\x00<\x96\xa5\x0f')
+    assert( Bst03._val == (1016505615, 32) )
+    Bst03.from_coer_ws(b'\x05\x00<\x96\xa5\x0f')
+    assert( Bst03._val == (1016505615, 32) )
+    
+    # Bst06 ::= BIT STRING (SIZE (16))
+    Bst06 = Mod['Bst06']
+    Bst06.from_asn1('\'0011110010010110\'B')
+    # encoding
+    assert( Bst06.to_aper() == Bst06.to_aper_ws() == b'<\x96' )
+    assert( Bst06.to_uper() == Bst06.to_uper_ws() == b'<\x96' )
+    assert( Bst06.to_ber() == Bst06.to_ber_ws() == b'\x03\x03\x00<\x96')
+    assert( Bst06.to_cer() == Bst06.to_cer_ws() == b'\x03\x03\x00<\x96' )
+    assert( Bst06.to_der() == Bst06.to_der_ws() == b'\x03\x03\x00<\x96')
+    assert( Bst06.to_oer() == Bst06.to_oer_ws() == b'<\x96' )
+    assert( Bst06.to_coer() == Bst06.to_coer_ws() == b'<\x96' )
+    # decoding
+    Bst06.from_aper(b'<\x96')
+    assert( Bst06._val == (15510, 16) )
+    Bst06.from_aper_ws(b'<\x96')
+    assert( Bst06._val == (15510, 16) )
+    Bst06.from_uper(b'<\x96')
+    assert( Bst06._val == (15510, 16) )
+    Bst06.from_uper_ws(b'<\x96')
+    assert( Bst06._val == (15510, 16) )
+    Bst06.from_ber(b'\x03\x03\x00<\x96')
+    assert( Bst06._val == (15510, 16) )
+    Bst06.from_ber_ws(b'\x03\x03\x00<\x96')
+    assert( Bst06._val == (15510, 16) )
+    Bst06.from_cer(b'\x03\x03\x00<\x96')
+    assert( Bst06._val == (15510, 16) )
+    Bst06.from_cer_ws(b'\x03\x03\x00<\x96')
+    assert( Bst06._val == (15510, 16) )
+    Bst06.from_der(b'\x03\x03\x00<\x96')
+    assert( Bst06._val == (15510, 16) )
+    Bst06.from_der_ws(b'\x03\x03\x00<\x96')
+    assert( Bst06._val == (15510, 16) )
+    # jer
+    if _with_json:
+        assert( Bst06._to_jval() == '3c96' )
+        Bst06.from_jer('"3c96"')
+        assert( Bst06._val == (15510, 16) )
+    # OER/COER
+    Bst06.from_oer(b'<\x96' )
+    assert( Bst06._val == (15510, 16) )
+    Bst06.from_oer_ws(b'<\x96' )
+    assert( Bst06._val == (15510, 16) )
+    Bst06.from_coer(b'<\x96' )
+    assert( Bst06._val == (15510, 16) )
+    Bst06.from_coer_ws(b'<\x96' )
+    assert( Bst06._val == (15510, 16) )
     
     # Ost01 ::= OCTET STRING
     Ost01 = Mod['Ost01']
@@ -977,6 +1390,8 @@ def _test_rt_base():
     assert( Ost01.to_ber() == Ost01.to_ber_ws() == b'\x04\x10\x01#Eg\x89\xab\xcd\xef\xfe\xdc\xba\x98vT2\x10' )
     assert( Ost01.to_cer() == Ost01.to_cer_ws() == b'\x04\x10\x01#Eg\x89\xab\xcd\xef\xfe\xdc\xba\x98vT2\x10' )
     assert( Ost01.to_der() == Ost01.to_der_ws() == b'\x04\x10\x01#Eg\x89\xab\xcd\xef\xfe\xdc\xba\x98vT2\x10' )
+    assert( Ost01.to_oer() == Ost01.to_oer_ws() == b'\x10\x01#Eg\x89\xab\xcd\xef\xfe\xdc\xba\x98vT2\x10' )
+    assert( Ost01.to_coer() == Ost01.to_coer_ws() == b'\x10\x01#Eg\x89\xab\xcd\xef\xfe\xdc\xba\x98vT2\x10' )
     # decoding
     Ost01.from_aper(b'\x10\x01#Eg\x89\xab\xcd\xef\xfe\xdc\xba\x98vT2\x10')
     assert( Ost01._val == b'\x01#Eg\x89\xab\xcd\xef\xfe\xdc\xba\x98vT2\x10' )
@@ -1003,6 +1418,62 @@ def _test_rt_base():
         assert( Ost01.to_jer() == '"0123456789abcdeffedcba9876543210"' )
         Ost01.from_jer('"0123456789abcdeffedcba9876543210"')
         assert(  Ost01._val == b'\x01#Eg\x89\xab\xcd\xef\xfe\xdc\xba\x98vT2\x10' )
+    # OER/COER
+    Ost01.from_oer(b'\x10\x01#Eg\x89\xab\xcd\xef\xfe\xdc\xba\x98vT2\x10')
+    assert( Ost01._val == b'\x01#Eg\x89\xab\xcd\xef\xfe\xdc\xba\x98vT2\x10' )
+    Ost01.from_oer_ws(b'\x10\x01#Eg\x89\xab\xcd\xef\xfe\xdc\xba\x98vT2\x10')
+    assert( Ost01._val == b'\x01#Eg\x89\xab\xcd\xef\xfe\xdc\xba\x98vT2\x10' )
+    Ost01.from_coer(b'\x10\x01#Eg\x89\xab\xcd\xef\xfe\xdc\xba\x98vT2\x10')
+    assert( Ost01._val == b'\x01#Eg\x89\xab\xcd\xef\xfe\xdc\xba\x98vT2\x10' )
+    Ost01.from_coer_ws(b'\x10\x01#Eg\x89\xab\xcd\xef\xfe\xdc\xba\x98vT2\x10')
+    assert( Ost01._val == b'\x01#Eg\x89\xab\xcd\xef\xfe\xdc\xba\x98vT2\x10' )
+    
+    # Ost06 ::= OCTET STRING (SIZE (16))
+    Ost06 = Mod['Ost06']
+    Ost06.from_asn1('\'01234567890123456789012345678901\'H')
+    # encoding
+    assert( Ost06.to_aper() == Ost06.to_aper_ws() == b'\x01#Eg\x89\x01#Eg\x89\x01#Eg\x89\x01')
+    assert( Ost06.to_uper() == Ost06.to_uper_ws() == b'\x01#Eg\x89\x01#Eg\x89\x01#Eg\x89\x01' )
+    assert( Ost06.to_ber() == Ost06.to_ber_ws() == b'\x04\x10\x01#Eg\x89\x01#Eg\x89\x01#Eg\x89\x01')
+    assert( Ost06.to_cer() == Ost06.to_cer_ws() == b'\x04\x10\x01#Eg\x89\x01#Eg\x89\x01#Eg\x89\x01')
+    assert( Ost06.to_der() == Ost06.to_der_ws() == b'\x04\x10\x01#Eg\x89\x01#Eg\x89\x01#Eg\x89\x01' )
+    assert( Ost06.to_oer() == Ost06.to_oer_ws() == b'\x01#Eg\x89\x01#Eg\x89\x01#Eg\x89\x01' )
+    assert( Ost06.to_coer() == Ost06.to_coer_ws() == b'\x01#Eg\x89\x01#Eg\x89\x01#Eg\x89\x01' )
+    # decoding
+    Ost06.from_aper(b'\x01#Eg\x89\x01#Eg\x89\x01#Eg\x89\x01')
+    assert( Ost06._val == b'\x01#Eg\x89\x01#Eg\x89\x01#Eg\x89\x01')
+    Ost06.from_aper_ws(b'\x01#Eg\x89\x01#Eg\x89\x01#Eg\x89\x01')
+    assert( Ost06._val == b'\x01#Eg\x89\x01#Eg\x89\x01#Eg\x89\x01')
+    Ost06.from_uper(b'\x01#Eg\x89\x01#Eg\x89\x01#Eg\x89\x01')
+    assert( Ost06._val == b'\x01#Eg\x89\x01#Eg\x89\x01#Eg\x89\x01')
+    Ost06.from_uper_ws(b'\x01#Eg\x89\x01#Eg\x89\x01#Eg\x89\x01')
+    assert( Ost06._val == b'\x01#Eg\x89\x01#Eg\x89\x01#Eg\x89\x01')
+    Ost06.from_ber(b'\x04\x10\x01#Eg\x89\x01#Eg\x89\x01#Eg\x89\x01')
+    assert( Ost06._val == b'\x01#Eg\x89\x01#Eg\x89\x01#Eg\x89\x01')
+    Ost06.from_ber_ws(b'\x04\x10\x01#Eg\x89\x01#Eg\x89\x01#Eg\x89\x01')
+    assert( Ost06._val == b'\x01#Eg\x89\x01#Eg\x89\x01#Eg\x89\x01')
+    Ost06.from_cer(b'\x04\x10\x01#Eg\x89\x01#Eg\x89\x01#Eg\x89\x01')
+    assert( Ost06._val == b'\x01#Eg\x89\x01#Eg\x89\x01#Eg\x89\x01')
+    Ost06.from_cer_ws(b'\x04\x10\x01#Eg\x89\x01#Eg\x89\x01#Eg\x89\x01')
+    assert( Ost06._val == b'\x01#Eg\x89\x01#Eg\x89\x01#Eg\x89\x01')
+    Ost06.from_der(b'\x04\x10\x01#Eg\x89\x01#Eg\x89\x01#Eg\x89\x01')
+    assert( Ost06._val == b'\x01#Eg\x89\x01#Eg\x89\x01#Eg\x89\x01')
+    Ost06.from_der_ws(b'\x04\x10\x01#Eg\x89\x01#Eg\x89\x01#Eg\x89\x01')
+    assert( Ost06._val == b'\x01#Eg\x89\x01#Eg\x89\x01#Eg\x89\x01')
+    # jer
+    if _with_json:
+        assert( Ost06.to_jer() == '"01234567890123456789012345678901"')
+        Ost06.from_jer('"01234567890123456789012345678901"')
+        assert( Ost06._val == b'\x01#Eg\x89\x01#Eg\x89\x01#Eg\x89\x01')
+    # OER/COER
+    Ost06.from_oer(b'\x01#Eg\x89\x01#Eg\x89\x01#Eg\x89\x01')
+    assert( Ost06._val == b'\x01#Eg\x89\x01#Eg\x89\x01#Eg\x89\x01')
+    Ost06.from_oer_ws(b'\x01#Eg\x89\x01#Eg\x89\x01#Eg\x89\x01')
+    assert( Ost06._val == b'\x01#Eg\x89\x01#Eg\x89\x01#Eg\x89\x01')
+    Ost06.from_coer(b'\x01#Eg\x89\x01#Eg\x89\x01#Eg\x89\x01')
+    assert( Ost06._val == b'\x01#Eg\x89\x01#Eg\x89\x01#Eg\x89\x01')
+    Ost06.from_coer_ws(b'\x01#Eg\x89\x01#Eg\x89\x01#Eg\x89\x01')
+    assert( Ost06._val == b'\x01#Eg\x89\x01#Eg\x89\x01#Eg\x89\x01')
     
     # Nus01 ::= NumericString
     Nus01 = Mod['Nus01']
@@ -1013,6 +1484,8 @@ def _test_rt_base():
     assert( Nus01.to_ber() == Nus01.to_ber_ws() == b'\x12\x0e01 02 03 04 05' )
     assert( Nus01.to_cer() == Nus01.to_cer_ws() == b'\x12\x0e01 02 03 04 05' )
     assert( Nus01.to_der() == Nus01.to_der_ws() == b'\x12\x0e01 02 03 04 05' )
+    assert( Nus01.to_oer() == Nus01.to_oer_ws() == b'\x0e01 02 03 04 05' )
+    assert( Nus01.to_coer() == Nus01.to_coer_ws() == b'\x0e01 02 03 04 05' )
     # decoding
     Nus01.from_aper(b'\x0e\x12\x010\x14\x01P\x16')
     assert( Nus01._val == '01 02 03 04 05' )
@@ -1039,6 +1512,15 @@ def _test_rt_base():
         assert( Nus01.to_jer() == '"01 02 03 04 05"' )
         Nus01.from_jer('"01 02 03 04 05"')
         assert( Nus01._val == '01 02 03 04 05' )
+    # OER/COER
+    Nus01.from_oer(b'\x0e01 02 03 04 05')
+    assert( Nus01._val == '01 02 03 04 05' )
+    Nus01.from_oer_ws(b'\x0e01 02 03 04 05')
+    assert( Nus01._val == '01 02 03 04 05' )
+    Nus01.from_coer(b'\x0e01 02 03 04 05')
+    assert( Nus01._val == '01 02 03 04 05' )
+    Nus01.from_coer_ws(b'\x0e01 02 03 04 05')
+    assert( Nus01._val == '01 02 03 04 05' )
     
     # Nus02 ::= NumericString (FROM ("0123"))
     Nus02 = Mod['Nus02']
@@ -1049,6 +1531,8 @@ def _test_rt_base():
     assert( Nus02.to_ber() == Nus02.to_ber_ws() == b'\x12\x0800113322' )
     assert( Nus02.to_cer() == Nus02.to_cer_ws() == b'\x12\x0800113322' )
     assert( Nus02.to_der() == Nus02.to_der_ws() == b'\x12\x0800113322' )
+    assert( Nus02.to_oer() == Nus02.to_oer_ws() == b'\x0800113322' )
+    assert( Nus02.to_coer() == Nus02.to_coer_ws() == b'\x0800113322' )
     # decoding
     Nus02.from_aper(b'\x08\x05\xfa')
     assert( Nus02._val == '00113322' )
@@ -1069,7 +1553,15 @@ def _test_rt_base():
     Nus02.from_der(b'\x12\x0800113322')
     assert( Nus02._val == '00113322' )
     Nus02.from_der_ws(b'\x12\x0800113322')
-    assert( Nus02._val == '00113322' ) 
+    assert( Nus02._val == '00113322' )
+    Nus02.from_oer(b'\x0800113322')
+    assert( Nus02._val == '00113322' )
+    Nus02.from_oer_ws(b'\x0800113322')
+    assert( Nus02._val == '00113322' )
+    Nus02.from_coer(b'\x0800113322')
+    assert( Nus02._val == '00113322' )
+    Nus02.from_coer_ws(b'\x0800113322')
+    assert( Nus02._val == '00113322' )
     
     # Prs01 ::= PrintableString
     Prs01 = Mod['Prs01']
@@ -1080,6 +1572,8 @@ def _test_rt_base():
     assert( Prs01.to_ber() == Prs01.to_ber_ws() == b'\x13\tambiguite' )
     assert( Prs01.to_cer() == Prs01.to_cer_ws() == b'\x13\tambiguite' )
     assert( Prs01.to_der() == Prs01.to_der_ws() == b'\x13\tambiguite' )
+    assert( Prs01.to_oer() == Prs01.to_oer_ws() == b'\tambiguite' )
+    assert( Prs01.to_coer() == Prs01.to_coer_ws() == b'\tambiguite' )
     # decoding
     Prs01.from_aper(b'\tambiguite')
     assert( Prs01._val == 'ambiguite' )
@@ -1100,7 +1594,15 @@ def _test_rt_base():
     Prs01.from_der(b'\x13\tambiguite')
     assert( Prs01._val == 'ambiguite' )
     Prs01.from_der_ws(b'\x13\tambiguite')
-    assert( Prs01._val == 'ambiguite' ) 
+    assert( Prs01._val == 'ambiguite' )
+    Prs01.from_oer(b'\tambiguite')
+    assert( Prs01._val == 'ambiguite' )
+    Prs01.from_oer_ws(b'\tambiguite')
+    assert( Prs01._val == 'ambiguite' )
+    Prs01.from_coer(b'\tambiguite')
+    assert( Prs01._val == 'ambiguite' )
+    Prs01.from_coer_ws(b'\tambiguite')
+    assert( Prs01._val == 'ambiguite' )
     
     # Prs02 ::= PrintableString (FROM ("ATCG"))
     Prs02 = Mod['Prs02']
@@ -1111,6 +1613,8 @@ def _test_rt_base():
     assert( Prs02.to_ber() == Prs02.to_ber_ws() == b'\x13\x12ATCGATTGAGCTCTAGCG' )
     assert( Prs02.to_cer() == Prs02.to_cer_ws() == b'\x13\x12ATCGATTGAGCTCTAGCG' )
     assert( Prs02.to_der() == Prs02.to_der_ws() == b'\x13\x12ATCGATTGAGCTCTAGCG' )
+    assert( Prs02.to_oer() == Prs02.to_oer_ws() == b'\x12ATCGATTGAGCTCTAGCG' )
+    assert( Prs02.to_coer() == Prs02.to_coer_ws() == b'\x12ATCGATTGAGCTCTAGCG' )
     # decoding
     Prs02.from_aper(b"\x126>'r`")
     assert( Prs02._val == 'ATCGATTGAGCTCTAGCG' )
@@ -1132,6 +1636,14 @@ def _test_rt_base():
     assert( Prs02._val == 'ATCGATTGAGCTCTAGCG' )
     Prs02.from_der_ws(b'\x13\x12ATCGATTGAGCTCTAGCG')
     assert( Prs02._val == 'ATCGATTGAGCTCTAGCG' )
+    Prs02.from_oer(b'\x12ATCGATTGAGCTCTAGCG')
+    assert( Prs02._val == 'ATCGATTGAGCTCTAGCG' )
+    Prs02.from_oer_ws(b'\x12ATCGATTGAGCTCTAGCG')
+    assert( Prs02._val == 'ATCGATTGAGCTCTAGCG' )
+    Prs02.from_coer(b'\x12ATCGATTGAGCTCTAGCG')
+    assert( Prs02._val == 'ATCGATTGAGCTCTAGCG' )
+    Prs02.from_coer_ws(b'\x12ATCGATTGAGCTCTAGCG')
+    assert( Prs02._val == 'ATCGATTGAGCTCTAGCG' )
     
     # Ias01 ::= IA5String
     Ias01 = Mod['Ias01']
@@ -1142,6 +1654,8 @@ def _test_rt_base():
     assert( Ias01.to_ber() == Ias01.to_ber_ws() == b'\x16\tambiguite' )
     assert( Ias01.to_cer() == Ias01.to_cer_ws() == b'\x16\tambiguite' )
     assert( Ias01.to_der() == Ias01.to_der_ws() == b'\x16\tambiguite' )
+    assert( Ias01.to_oer() == Ias01.to_oer_ws() == b'\tambiguite' )
+    assert( Ias01.to_coer() == Ias01.to_coer_ws() == b'\tambiguite' )
     # decoding
     Ias01.from_aper(b'\tambiguite')
     assert( Ias01._val == 'ambiguite' )
@@ -1163,6 +1677,55 @@ def _test_rt_base():
     assert( Ias01._val == 'ambiguite' )
     Ias01.from_der_ws(b'\x16\tambiguite')
     assert( Ias01._val == 'ambiguite' )
+    Ias01.from_oer(b'\tambiguite')
+    assert( Ias01._val == 'ambiguite' )
+    Ias01.from_oer_ws(b'\tambiguite')
+    assert( Ias01._val == 'ambiguite' )
+    Ias01.from_coer(b'\tambiguite')
+    assert( Ias01._val == 'ambiguite' )
+    Ias01.from_coer_ws(b'\tambiguite')
+    assert( Ias01._val == 'ambiguite' )
+    
+    # Ias04 ::= IA5String (SIZE (32))
+    Ias04 = Mod['Ias04']
+    Ias04.from_asn1('"This is a sentence of 32 chars:)"')
+    # encoding
+    assert( Ias04.to_aper() == Ias04.to_aper_ws() == b'This is a sentence of 32 chars:)' )
+    assert( Ias04.to_uper() == Ias04.to_uper_ws() == b'\xa9\xa3O4\x1ay\xa0\xc2\x83\x9e]\xdd2\xee\xc7\x95\x06\xfc\xc8\x19\xb2A\x8fF\x1e\\\xdd)' )
+    assert( Ias04.to_ber() == Ias04.to_ber_ws() == b'\x16 This is a sentence of 32 chars:)' )
+    assert( Ias04.to_cer() == Ias04.to_cer_ws() == b'\x16 This is a sentence of 32 chars:)' )
+    assert( Ias04.to_der() == Ias04.to_der_ws() == b'\x16 This is a sentence of 32 chars:)' )
+    assert( Ias04.to_oer() == Ias04.to_oer_ws() == b'This is a sentence of 32 chars:)')
+    assert( Ias04.to_coer() == Ias04.to_coer_ws() == b'This is a sentence of 32 chars:)')
+    # decoding
+    Ias04.from_aper(b'This is a sentence of 32 chars:)')
+    assert( Ias04._val == 'This is a sentence of 32 chars:)' )
+    Ias04.from_aper_ws(b'This is a sentence of 32 chars:)')
+    assert( Ias04._val == 'This is a sentence of 32 chars:)' )
+    Ias04.from_uper(b'\xa9\xa3O4\x1ay\xa0\xc2\x83\x9e]\xdd2\xee\xc7\x95\x06\xfc\xc8\x19\xb2A\x8fF\x1e\\\xdd)')
+    assert( Ias04._val == 'This is a sentence of 32 chars:)' )
+    Ias04.from_uper_ws(b'\xa9\xa3O4\x1ay\xa0\xc2\x83\x9e]\xdd2\xee\xc7\x95\x06\xfc\xc8\x19\xb2A\x8fF\x1e\\\xdd)')
+    assert( Ias04._val == 'This is a sentence of 32 chars:)' )
+    Ias04.from_ber(b'\x16 This is a sentence of 32 chars:)' )
+    assert( Ias04._val == 'This is a sentence of 32 chars:)' )
+    Ias04.from_ber_ws(b'\x16 This is a sentence of 32 chars:)' )
+    assert( Ias04._val == 'This is a sentence of 32 chars:)' )
+    Ias04.from_cer(b'\x16 This is a sentence of 32 chars:)' )
+    assert( Ias04._val == 'This is a sentence of 32 chars:)' )
+    Ias04.from_cer_ws(b'\x16 This is a sentence of 32 chars:)' )
+    assert( Ias04._val == 'This is a sentence of 32 chars:)' )
+    Ias04.from_der(b'\x16 This is a sentence of 32 chars:)' )
+    assert( Ias04._val == 'This is a sentence of 32 chars:)' )
+    Ias04.from_der_ws(b'\x16 This is a sentence of 32 chars:)' )
+    assert( Ias04._val == 'This is a sentence of 32 chars:)' )
+    Ias04.from_oer(b'This is a sentence of 32 chars:)')
+    assert( Ias04._val == 'This is a sentence of 32 chars:)' )
+    Ias04.from_oer_ws(b'This is a sentence of 32 chars:)')
+    assert( Ias04._val == 'This is a sentence of 32 chars:)' )
+    Ias04.from_coer(b'This is a sentence of 32 chars:)')
+    assert( Ias04._val == 'This is a sentence of 32 chars:)' )
+    Ias04.from_coer_ws(b'This is a sentence of 32 chars:)')
+    assert( Ias04._val == 'This is a sentence of 32 chars:)' )
     
     # U8s01 ::= UTF8String
     U8s01 = Mod['U8s01']
@@ -1173,6 +1736,8 @@ def _test_rt_base():
     assert( U8s01.to_ber() == U8s01.to_ber_ws() == b'\x0c\x0bambigu\xc3\xaft\xc3\xa9' )
     assert( U8s01.to_cer() == U8s01.to_cer_ws() == b'\x0c\x0bambigu\xc3\xaft\xc3\xa9' )
     assert( U8s01.to_der() == U8s01.to_der_ws() == b'\x0c\x0bambigu\xc3\xaft\xc3\xa9' )
+    assert( U8s01.to_oer() == U8s01.to_oer_ws() == b'\x0bambigu\xc3\xaft\xc3\xa9' )
+    assert( U8s01.to_coer() == U8s01.to_coer_ws() == b'\x0bambigu\xc3\xaft\xc3\xa9' )
     # decoding
     U8s01.from_aper(b'\x0bambigu\xc3\xaft\xc3\xa9')
     assert( U8s01._val == u'ambiguïté' )
@@ -1199,6 +1764,15 @@ def _test_rt_base():
         assert( U8s01.to_jer() == '"ambigu\\u00eft\\u00e9"' )
         U8s01.from_jer('"ambigu\\u00eft\\u00e9"')
         assert( U8s01._val == u'ambiguïté' )
+    # OER/COER
+    U8s01.from_oer(b'\x0bambigu\xc3\xaft\xc3\xa9')
+    assert( U8s01._val == u'ambiguïté' )
+    U8s01.from_oer_ws(b'\x0bambigu\xc3\xaft\xc3\xa9')
+    assert( U8s01._val == u'ambiguïté' )
+    U8s01.from_coer(b'\x0bambigu\xc3\xaft\xc3\xa9')
+    assert( U8s01._val == u'ambiguïté' )
+    U8s01.from_coer_ws(b'\x0bambigu\xc3\xaft\xc3\xa9')
+    assert( U8s01._val == u'ambiguïté' )
     
     # Uns01 ::= UniversalString
     Uns01 = Mod['Uns01']
@@ -1209,6 +1783,8 @@ def _test_rt_base():
     assert( Uns01.to_ber() == Uns01.to_ber_ws() == b'\x1c$\x00\x00\x00a\x00\x00\x00m\x00\x00\x00b\x00\x00\x00i\x00\x00\x00g\x00\x00\x00u\x00\x00\x00\xef\x00\x00\x00t\x00\x00\x00\xe9' )
     assert( Uns01.to_cer() == Uns01.to_cer_ws() == b'\x1c$\x00\x00\x00a\x00\x00\x00m\x00\x00\x00b\x00\x00\x00i\x00\x00\x00g\x00\x00\x00u\x00\x00\x00\xef\x00\x00\x00t\x00\x00\x00\xe9' )
     assert( Uns01.to_der() == Uns01.to_der_ws() == b'\x1c$\x00\x00\x00a\x00\x00\x00m\x00\x00\x00b\x00\x00\x00i\x00\x00\x00g\x00\x00\x00u\x00\x00\x00\xef\x00\x00\x00t\x00\x00\x00\xe9' )
+    assert( Uns01.to_oer() == Uns01.to_oer_ws() == b'$\x00\x00\x00a\x00\x00\x00m\x00\x00\x00b\x00\x00\x00i\x00\x00\x00g\x00\x00\x00u\x00\x00\x00\xef\x00\x00\x00t\x00\x00\x00\xe9' )
+    assert( Uns01.to_coer() == Uns01.to_coer_ws() == b'$\x00\x00\x00a\x00\x00\x00m\x00\x00\x00b\x00\x00\x00i\x00\x00\x00g\x00\x00\x00u\x00\x00\x00\xef\x00\x00\x00t\x00\x00\x00\xe9' )
     # decoding
     Uns01.from_aper(b'\t\x00\x00\x00a\x00\x00\x00m\x00\x00\x00b\x00\x00\x00i\x00\x00\x00g\x00\x00\x00u\x00\x00\x00\xef\x00\x00\x00t\x00\x00\x00\xe9')
     assert( Uns01._val == u'ambiguïté' )
@@ -1229,6 +1805,14 @@ def _test_rt_base():
     Uns01.from_der(b'\x1c$\x00\x00\x00a\x00\x00\x00m\x00\x00\x00b\x00\x00\x00i\x00\x00\x00g\x00\x00\x00u\x00\x00\x00\xef\x00\x00\x00t\x00\x00\x00\xe9')
     assert( Uns01._val == u'ambiguïté' )
     Uns01.from_der_ws(b'\x1c$\x00\x00\x00a\x00\x00\x00m\x00\x00\x00b\x00\x00\x00i\x00\x00\x00g\x00\x00\x00u\x00\x00\x00\xef\x00\x00\x00t\x00\x00\x00\xe9')
+    assert( Uns01._val == u'ambiguïté' )
+    Uns01.from_oer(b'$\x00\x00\x00a\x00\x00\x00m\x00\x00\x00b\x00\x00\x00i\x00\x00\x00g\x00\x00\x00u\x00\x00\x00\xef\x00\x00\x00t\x00\x00\x00\xe9')
+    assert( Uns01._val == u'ambiguïté' )
+    Uns01.from_oer_ws(b'$\x00\x00\x00a\x00\x00\x00m\x00\x00\x00b\x00\x00\x00i\x00\x00\x00g\x00\x00\x00u\x00\x00\x00\xef\x00\x00\x00t\x00\x00\x00\xe9')
+    assert( Uns01._val == u'ambiguïté' )
+    Uns01.from_coer(b'$\x00\x00\x00a\x00\x00\x00m\x00\x00\x00b\x00\x00\x00i\x00\x00\x00g\x00\x00\x00u\x00\x00\x00\xef\x00\x00\x00t\x00\x00\x00\xe9')
+    assert( Uns01._val == u'ambiguïté' )
+    Uns01.from_coer_ws(b'$\x00\x00\x00a\x00\x00\x00m\x00\x00\x00b\x00\x00\x00i\x00\x00\x00g\x00\x00\x00u\x00\x00\x00\xef\x00\x00\x00t\x00\x00\x00\xe9')
     assert( Uns01._val == u'ambiguïté' )
     
     # Uti01 ::= UTCTime
@@ -1302,6 +1886,8 @@ def _test_rt_base():
     assert( Cho01.to_ber() == Cho01.to_ber_ws() == b'\xaa\x07\x7fP\x04\x02\x02\x07\xd0' )
     assert( Cho01.to_cer() == Cho01.to_cer_ws() == b'\xaa\x80\x7fP\x80\x02\x02\x07\xd0\x00\x00\x00\x00' )
     assert( Cho01.to_der() == Cho01.to_der_ws() == b'\xaa\x07\x7fP\x04\x02\x02\x07\xd0' )
+    assert( Cho01.to_oer() == Cho01.to_oer_ws() == b'\x8a\x02\x07\xd0' )
+    assert( Cho01.to_coer() == Cho01.to_coer_ws() == b'\x8a\x02\x07\xd0' )
     # decoding
     Cho01.from_aper(b' \x02\x07\xcf')
     assert( Cho01._val == ('int', 2000) )
@@ -1328,6 +1914,15 @@ def _test_rt_base():
         assert( Cho01._to_jval() == {'int': 2000} )
         Cho01.from_jer('{"int": 2000}')
         assert( Cho01._val == ('int', 2000) )
+    # OER/COER
+    Cho01.from_oer(b'\x8a\x02\x07\xd0')
+    assert( Cho01._val == ('int', 2000) )
+    Cho01.from_oer_ws(b'\x8a\x02\x07\xd0')
+    assert( Cho01._val == ('int', 2000) )
+    Cho01.from_coer(b'\x8a\x02\x07\xd0')
+    assert( Cho01._val == ('int', 2000) )
+    Cho01.from_coer_ws(b'\x8a\x02\x07\xd0')
+    assert( Cho01._val == ('int', 2000) )
     
     # Seq01 ::= SEQUENCE { --check test_asn1rt_mod.asn file-- }
     Seq01 = Mod['Seq01']
@@ -1339,6 +1934,8 @@ def _test_rt_base():
     assert( Seq01.to_ber() == Seq01.to_ber_ws() == b'0\x0e\x01\x01\x00\xbf\x81\x00\x04\x02\x02\x04\x00\n\x01\x01' )
     assert( Seq01.to_cer() == Seq01.to_cer_ws() == b'0\x80\x01\x01\x00\xbf\x81\x00\x80\x02\x02\x04\x00\x00\x00\n\x01\x01\x00\x00' )
     assert( Seq01.to_der() == Seq01.to_der_ws() == b'0\x0e\x01\x01\x00\xbf\x81\x00\x04\x02\x02\x04\x00\n\x01\x01' )
+    assert( Seq01.to_oer() == Seq01.to_oer_ws() == b'`\x00\x02\x04\x00\x01' )
+    assert( Seq01.to_coer() == Seq01.to_coer_ws() == b'`\x00\x02\x04\x00\x01' )
     # decoding
     Seq01.from_aper(b'`\x02\x03\xff@')
     assert( Seq01._val == S_val )
@@ -1365,6 +1962,15 @@ def _test_rt_base():
         assert( Seq01._to_jval() == {'boo': False, 'enu': 'cake', 'int': 1024} )
         Seq01.from_jer('{"boo": false, "enu": "cake", "int": 1024}')
         assert( Seq01._val == S_val )
+    # OER/COER
+    Seq01.from_oer(b'`\x00\x02\x04\x00\x01')
+    assert( Seq01._val == S_val )
+    Seq01.from_oer_ws(b'`\x00\x02\x04\x00\x01')
+    assert( Seq01._val == S_val )
+    Seq01.from_coer(b'`\x00\x02\x04\x00\x01')
+    assert( Seq01._val == S_val )
+    Seq01.from_coer_ws(b'`\x00\x02\x04\x00\x01')
+    assert( Seq01._val == S_val )
     
     # Seq02 ::= SEQUENCE (SIZE (2..5)) OF Ias02
     Seq02 = Mod['Seq02']
@@ -1376,6 +1982,8 @@ def _test_rt_base():
     assert( Seq02.to_ber() == Seq02.to_ber_ws() == b'0\x18\x16\x02un\x16\x04gros\x16\x0cpterodactyle' )
     assert( Seq02.to_cer() == Seq02.to_cer_ws() ==  b'0\x80\x16\x02un\x16\x04gros\x16\x0cpterodactyle\x00\x00' )
     assert( Seq02.to_der() == Seq02.to_der_ws() == b'0\x18\x16\x02un\x16\x04gros\x16\x0cpterodactyle' )
+    assert( Seq02.to_oer() == Seq02.to_oer_ws() == b'\x01\x03\x02un\x04gros\x0cpterodactyle' )
+    assert( Seq02.to_coer() == Seq02.to_coer_ws() == b'\x01\x03\x02un\x04gros\x0cpterodactyle' )
     # decoding
     Seq02.from_aper(b'Dun gros`pterodactyle')
     assert( Seq02._val == S_val )
@@ -1402,6 +2010,15 @@ def _test_rt_base():
         assert( Seq02._to_jval() == ['un', 'gros', 'pterodactyle'] )
         Seq02.from_jer('["un", "gros", "pterodactyle"]')
         assert( Seq02._val == S_val )
+    # OER/COER
+    Seq02.from_oer(b'\x01\x03\x02un\x04gros\x0cpterodactyle')
+    assert( Seq02._val == S_val )
+    Seq02.from_oer_ws(b'\x01\x03\x02un\x04gros\x0cpterodactyle')
+    assert( Seq02._val == S_val )
+    Seq02.from_coer(b'\x01\x03\x02un\x04gros\x0cpterodactyle')
+    assert( Seq02._val == S_val )
+    Seq02.from_coer_ws(b'\x01\x03\x02un\x04gros\x0cpterodactyle')
+    assert( Seq02._val == S_val )
     
     # Set01 ::= SET { --check test_asn1rt_mod.asn file-- }
     Set01 = Mod['Set01']
@@ -1413,6 +2030,8 @@ def _test_rt_base():
     assert( Set01.to_ber() == Set01.to_ber_ws() == b'1\x0e\x01\x01\xff\n\x01\x00\x82\x01\x01\x9f@\x02\x15\xbd' )
     assert( Set01.to_cer() == Set01.to_cer_ws() == b'1\x80\x01\x01\xff\n\x01\x00\x82\x01\x01\x9f@\x02\x15\xbd\x00\x00' )
     assert( Set01.to_der() == Set01.to_der_ws() == b'1\x0e\x01\x01\xff\n\x01\x00\x82\x01\x01\x9f@\x02\x15\xbd' )
+    assert( Set01.to_oer() == Set01.to_oer_ws() == b'`\xff\x00\x82\x01\x02\x15\xbd' )
+    assert( Set01.to_coer() == Set01.to_coer_ws() == b'`\xff\x00\x82\x01\x02\x15\xbd' )
     # decoding
     Set01.from_aper(b'r@\x02\x15\xbc')
     assert( Set01._val == S_val )
@@ -1439,6 +2058,15 @@ def _test_rt_base():
         assert( Set01._to_jval() == {'boo': True, 'cho': {'enu': 'cake'}, 'enu': 'cheese', 'int': 5565} )
         Set01.from_jer('{"boo": true, "cho": {"enu": "cake"}, "enu": "cheese", "int": 5565}')
         assert( Set01._val == S_val )
+    # OER/COER
+    Set01.from_oer(b'`\xff\x00\x82\x01\x02\x15\xbd')
+    assert( Set01._val == S_val )
+    Set01.from_oer_ws(b'`\xff\x00\x82\x01\x02\x15\xbd')
+    assert( Set01._val == S_val )
+    Set01.from_coer(b'`\xff\x00\x82\x01\x02\x15\xbd')
+    assert( Set01._val == S_val )
+    Set01.from_coer_ws(b'`\xff\x00\x82\x01\x02\x15\xbd')
+    assert( Set01._val == S_val )
     
     return 0
 
@@ -1505,10 +2133,10 @@ pkts_rrc3g_nc = tuple(map(unhexlify, (
     )))
 
 def _load_rrc3g():
-    try:
-        GLOBAL.clear()
-    except:
-        pass
+    #try:
+    #    GLOBAL.clear()
+    #except:
+    #    pass
     from pycrate_asn1dir import RRC3G
 
 def _test_rrc3g():
@@ -1621,25 +2249,40 @@ pkts_s1ap = tuple(map(unhexlify, (
     '2017000f000002000040020064000840020001'
     )))
 
-# X2AP packets contributed by Alexandre DeOliveira, originally in libmich
+
 pkts_x2ap = tuple(map(unhexlify, (
-    '000600808a000004001500080011f1110001013000140051020000330011f11101011010029011f111004c2c05dc330000340011f1110101102000a011f111004c2c05dc444000350011f1110101103000a011f111005eec189c3300010011f1110a0ab010002705dc001800060011f1118000a8dd4018000002100040030001031001400a0001c006001008020100',
+   # X2AP packets contributed by Alexandre DeOliveira, originally in libmich
+   '000600808a000004001500080011f1110001013000140051020000330011f11101011010029011f111004c2c05dc330000340011f1110101102000a011f111004c2c05dc444000350011f1110101103000a011f111005eec189c3300010011f1110a0ab010002705dc001800060011f1118000a8dd4018000002100040030001031001400a0001c006001008020100',
     '0000007b000006000a00020001000540020000000b000800522018000000200017000700522018000102000e004100010000000000303132333435363738393031323334353637383930313233343536373839303120000000000004400e0000010a03e01401a8c000000002020000000f400c000052201800000021800003',
+    # https://github.com/P1sec/pycrate/issues/84
+    '001b008376000008006f0002078300f800051c000e000000cb0020ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff00cc000a184c096c70604c096c7000cd001f0000d1001a0a2000c0072d01f02a6d0fd4ea69f4fa03e00ac612798083809d00ce0082f982f718988169210229ce400000028ebc0606000002809049a3000481a0603100d00980406228040530805502c46d618c21a0c54083e500892d931541439f60478c73e618f28581c0e1e04fc0000003f00000000a00e0540b40f78e3087000a8f3f140453ed98aa9041e3c471e00438820c22a051fbf90202e3718120180a816826f1c610e00151e7e2808a7db31552083c788e3c0087104184540a3f7f20405c6e30240300020058030a80242080108c062023727802203014008000008818268000e7cc31e50b0302801000802320304d4000438820c22a0407c010040000040280000530058115ba400410000075d240400004000040150288aed40104800d028010a16000102030406070b0c11121318191b252627282d2f4146400542041f0220900834120e230000002220980802412e230000012201002c01854012104008460310118140f40a24e9d3b639f0e24e9d3b639f0c00044000100000080202004008800020100010000400801000907e568262acbde3802000003fcd4ff816e0c814f5c40b04431c55fc8120dc4e81fa6400018c304108502041e6d80835ba74ee20b1a0fcad01181f5d00000033636c9158b11b82010000008400d0146c0118219c0000003371b648b104400e30350f6643182f18437106fb34d0b163a420a08dc575c004048092616d40247fc0000000004001041c0dc2108003c4459483832081001102009000080a0202c3113a80038e0c00ca00080099aaa2400600082061300001990a0181000cc9500c100066528060c00332d40308001998a0100601821349a47493400800c10ec610dc41bc7fe851ce6293940a0802015c000200004000000000422b5515810c0004210003880b1c30060202208001c4058e18030201084000e202c7100181808820007101638800c108a950007101638204110030001020300400403809c001c704000000801000201400880a000802f000416e208208208208784ff907f8198cc00100000002a8000f00007e56820084000814230000102240ac0fc000000112928091409289f8fc5174d870116000100011700080013200614d09010',
+    # https://github.com/P1sec/pycrate/issues/61
+    '201b008203000004006f0002000800cf0002000d00d240360000d540310a003b81f00a6ce901001a001303e00a6ce901401b0017007c0a6ce901601b001300071f000001012e400140013740014000d30081b581b3186c0ce0440ccae2078e3190437630d061e6407c0204a83c430106b7509cc613349a9e0026933a800000620c65d26a0c0a500a201b4064d202680001886ae32e932a31000d6267bfe2e0049de15bc2c5876f0f1625bc4c58d6f1b15414c09a70300442a03a0093ffea1db600203805930165004048204004808009302071a232c08966113704030000080801a500a201b40646d40007fffc000000043b8621800004041b84218000100b2802024102002404004981038d12b88960709242c1c1821c200e065c089665462001ac4cf7fc5c0093bc2b7858b0ede1e2c4b7898b1ade362a8298134e35524940408221061028004a01a01198068086601803132f68104cbd80b132f6c8230308807235600007f4210840080402581c2490b070608708038940e000010af7a008001000007a00098801c0080c0600203115514010800c12ca007e4026b143810086200072084d40005c0c0451000390426a0002e0802188001c82135008170501144000e4109a804082000000a1860406080b0382b001f9628000000200400182e001809006600b400016488822cf1fffff83f0340050a06946fd7e39b8e614000000002104d4f000',
     )))
 
+
+pkts_nbiot = tuple(map(unhexlify, (
+    # https://github.com/P1sec/pycrate/issues/87
+    '6040008090d20004345a20500ba010300e00',
+    )))
+
+
 def _load_lteran():
-    try:
-        GLOBAL.clear()
-    except:
-        pass
+    #try:
+    #    GLOBAL.clear()
+    #except:
+    #    pass
     from pycrate_asn1dir import S1AP
     from pycrate_asn1dir import X2AP
+    from pycrate_asn1dir import RRCLTE
 
 def _test_lteran():
     S1PDU = GLOBAL.MOD['S1AP-PDU-Descriptions']['S1AP-PDU']
     for p in pkts_s1ap:
         S1PDU.from_aper(p)
         val = S1PDU()
+        S1PDU.reset_val()
+        S1PDU.set_val(val)
         ret = S1PDU.to_aper()
         assert( ret == p )
         S1PDU.from_aper_ws(p)
@@ -1662,6 +2305,8 @@ def _test_lteran():
     for p in pkts_x2ap:
         X2PDU.from_aper(p)
         val = X2PDU()
+        X2PDU.reset_val()
+        X2PDU.set_val(val)
         ret = X2PDU.to_aper()
         assert( ret == p )
         X2PDU.from_aper_ws(p)
@@ -1679,10 +2324,77 @@ def _test_lteran():
             txt = X2PDU.to_jer()
             X2PDU.from_jer(txt)
             assert( X2PDU() == val )
+    #
+    NBIoT_SIB1 = GLOBAL.MOD['NBIOT-RRC-Definitions']['BCCH-DL-SCH-Message-NB']
+    for p in pkts_nbiot:
+        NBIoT_SIB1.from_uper(p)
+        val = NBIoT_SIB1()
+        ret = NBIoT_SIB1.to_uper()
+        assert( ret == p )
+        NBIoT_SIB1.from_uper_ws(p)
+        val_ws = NBIoT_SIB1()
+        struct = NBIoT_SIB1._struct()
+        ret = NBIoT_SIB1.to_uper_ws()
+        assert( ret == p )
+        assert( val == val_ws )
+        assert( NBIoT_SIB1._struct() == struct )
+        txt = NBIoT_SIB1.to_asn1()
+        NBIoT_SIB1.from_asn1(txt)
+        assert( NBIoT_SIB1() == val )
+        # jer
+        if _with_json:
+            txt = NBIoT_SIB1.to_jer()
+            NBIoT_SIB1.from_jer(txt)
+            assert( NBIoT_SIB1() == val )
 
 def test_lteran():
     _load_lteran()
     _test_lteran()
+
+
+pkts_rrc_nr = tuple(map(unhexlify, (
+    # https://github.com/P1sec/pycrate/issues/84, it seems this buffer does not correspond to an exact canonical structure from Rel.16
+    '18988169210229ce400000028ebc0606000002809049a3000481a0603100d00980406228040530805502c46d618c21a0c54083e500892d931541439f60478c73e618f28581c0e1e04fc0000003f00000000a00e0540b40f78e3087000a8f3f140453ed98aa9041e3c471e00438820c22a051fbf90202e3718120180a816826f1c610e00151e7e2808a7db31552083c788e3c0087104184540a3f7f20405c6e30240300020058030a80242080108c062023727802203014008000008818268000e7cc31e50b0302801000802320304d4000438820c22a0407c010040000040280000530058115ba400410000075d240400004000040150288aed40104800d028010a16000102030406070b0c11121318191b252627282d2f4146400542041f0220900834120e230000002220980802412e230000012201002c01854012104008460310118140f40a24e9d3b639f0e24e9d3b639f0c00044000100000080202004008800020100010000400801000907e568262acbde3802000003fcd4ff816e0c814f5c40b04431c55fc8120dc4e81fa6400018c304108502041e6d80835ba74ee20b1a0fcad01181f5d00000033636c9158b11b82010000008400d0146c0118219c0000003371b648b104400e30350f6643182f18437106fb34d0b163a420a08dc575c004048092616d40247fc0000000004001041c0dc2108003c4459483832081001102009000080a0202c3113a80038e0c00ca00080099aaa2400600082061300001990a0181000cc9500c100066528060c00332d40308001998a0100601821349a47493400800c10ec610dc41bc7fe851ce6293940a0802015c000200004000000000422b5515810c0004210003880b1c30060202208001c4058e18030201084000e202c7100181808820007101638800c108a950007101638204110030001020300400403809c001c704000000801000201400880a000802f000416e208208208208784ff907f8198cc00100000002a8000f00007e56820084000814230000102240ac0fc000000112928091409289f8fc5174d87',
+    )))
+
+
+def _load_nrran():
+    #try:
+    #    GLOBAL.clear()
+    #except:
+    #    pass
+    from pycrate_asn1dir import RRCNR
+    from pycrate_asn1dir import NGAP
+    from pycrate_asn1dir import XnAP
+
+def _test_nrran():
+    CGCfgInf = GLOBAL.MOD['NR-InterNodeDefinitions']['CG-ConfigInfo']
+    for p in pkts_rrc_nr:
+        CGCfgInf.from_uper(p)
+        val = CGCfgInf()
+        ret = CGCfgInf.to_uper()
+        #assert( ret == p )
+        CGCfgInf.from_uper_ws(p)
+        val_ws = CGCfgInf()
+        struct = CGCfgInf._struct()
+        ret = CGCfgInf.to_uper_ws()
+        #assert( ret == p )
+        assert( val == val_ws )
+        # TODO: BIT STRING / OCTET STRING (CONTAINING(...)) does not keep full structure 
+        # of contained object during encoding
+        #assert( CGCfgInf._struct() == struct )
+        txt = CGCfgInf.to_asn1()
+        CGCfgInf.from_asn1(txt)
+        assert( CGCfgInf() == val )
+        # jer
+        if _with_json:
+            txt = CGCfgInf.to_jer()
+            CGCfgInf.from_jer(txt)
+            assert( CGCfgInf() == val )
+
+def test_nrran():
+    _load_nrran()
+    _test_nrran()
 
 
 # https://wiki.wireshark.org/SampleCaptures?action=AttachFile&do=view&target=gsm_map_with_ussd_string.pcap
@@ -1696,10 +2408,10 @@ pkts_tcap_map = tuple(map(unhexlify, (
     )))
 
 def _load_tcap_map():
-    try:
-        GLOBAL.clear()
-    except:
-        pass
+    #try:
+    #    GLOBAL.clear()
+    #except:
+    #    pass
     from pycrate_asn1dir import TCAP_MAP
 
 def _test_tcap_map():
@@ -1707,6 +2419,8 @@ def _test_tcap_map():
     for p in pkts_tcap_map:
         M.from_ber(p)
         val = M()
+        M.reset_val()
+        M.set_val(val)
         ret = M.to_ber()
         # hopefully here, BER re-encoding does not diverge from the original packet
         assert( ret == p )
@@ -1747,10 +2461,10 @@ pkts_tcap_cap = tuple(map(unhexlify, (
     )))
 
 def _load_tcap_cap():
-    try:
-        GLOBAL.clear()
-    except:
-        pass
+    #try:
+    #    GLOBAL.clear()
+    #except:
+    #    pass
     from pycrate_asn1dir import TCAP_CAP
 
 def _test_tcap_cap():
@@ -1758,6 +2472,8 @@ def _test_tcap_cap():
     for p in pkts_tcap_cap:
         M.from_ber(p)
         val = M()
+        M.reset_val()
+        M.set_val(val)
         ret = M.to_ber()
         # hopefully here, BER re-encoding does not diverge from the original packet
         assert( ret == p )
@@ -1790,10 +2506,10 @@ pkts_X509 = tuple(map(unhexlify, (
 )))
 
 def _load_X509():
-    try:
-        GLOBAL.clear()
-    except:
-        pass
+    #try:
+    #    GLOBAL.clear()
+    #except:
+    #    pass
     from pycrate_asn1dir import RFC5912
 
 def _test_X509():
@@ -1829,36 +2545,41 @@ def test_X509():
 def test_perf_asn1rt():
     
     _load_rt_base()
-    print('[+] ASN.1 base type encoding / decoding (BER, CER, DER, UPER, APER)')
-    Ta = timeit(_test_rt_base, number=10)
+    print('[+] ASN.1 base type encoding / decoding (BER, CER, DER, UPER, APER, OER, COER)')
+    Ta = timeit(_test_rt_base, number=20)
     print('test_rt_base: {0:.4f}'.format(Ta))
     
     _load_rrc3g()
     print('[+] RRC 3G encoding / decoding (UPER)')
-    Tb = timeit(_test_rrc3g, number=3)
+    Tb = timeit(_test_rrc3g, number=10)
     print('test_rrc3g: {0:.4f}'.format(Tb))
     
     _load_lteran()
     print('[+] LTE S1AP and X2AP encoding / decoding (APER)')
-    Tc = timeit(_test_lteran, number=10)
+    Tc = timeit(_test_lteran, number=2)
     print('test_lteran: {0:.4f}'.format(Tc))
+    
+    _load_nrran()
+    print('[+] NR RRC inter-node encoding / decoding (UPER)')
+    Td = timeit(_test_nrran, number=20)
+    print('test_lteran: {0:.4f}'.format(Td))
     
     _load_tcap_map()
     print('[+] TCAP MAP encoding / decoding (BER)')
-    Td = timeit(_test_tcap_map, number=10)
-    print('test_tcap_map: {0:.4f}'.format(Td))
+    Te = timeit(_test_tcap_map, number=3)
+    print('test_tcap_map: {0:.4f}'.format(Te))
     
     _load_tcap_cap()
     print('[+] TCAP CAP encoding / decoding (BER)')
-    Te = timeit(_test_tcap_cap, number=5)
-    print('test_tcap_cap: {0:.4f}'.format(Te))
+    Tf = timeit(_test_tcap_cap, number=10)
+    print('test_tcap_cap: {0:.4f}'.format(Tf))
     
     _load_X509()
     print('[+] X.509 encoding / decoding (DER)')
-    Tf = timeit(_test_X509, number=4)
-    print('test_x509: {0:.4f}'.format(Tf))
+    Tg = timeit(_test_X509, number=10)
+    print('test_x509: {0:.4f}'.format(Tg))
     
-    print('[+] test_asn1rt total time: {0:.4f}'.format(Ta+Tb+Tc+Td+Te+Tf))
+    print('[+] test_asn1rt total time: {0:.4f}'.format(Ta+Tb+Tc+Td+Te+Tf+Tg))
 
 if __name__ == '__main__':
     test_perf_asn1rt()

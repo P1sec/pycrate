@@ -1,9 +1,9 @@
 # −*− coding: UTF−8 −*−
 #/**
 # * Software Name : pycrate 
-# * Version : 0.3
+# * Version : 0.4
 # *
-# * Copyright © 2013. Benoit Michau. ANSSI.
+# * Copyright 2013. Benoit Michau. ANSSI.
 # *
 # * This library is free software; you can redistribute it and/or
 # * modify it under the terms of the GNU Lesser General Public
@@ -227,7 +227,7 @@ class SMSd(object):
         # 1) reassociate to the SMS SUBMIT of the initial sender
         try:
             tp_oa = rp_req[5][1]['TP_OA']['Num'].decode()
-        except:
+        except Exception:
             self._log('WNG', 'report_status: unable to retrieve the TP originating address')
         else:
             if tp_oa in self.Proc:
@@ -471,7 +471,7 @@ class SMSd(object):
             else:
                 data = ud
             tp_msg['TP_UD']['UD'].set_val(data)
-        except:
+        except Exception:
             self._log('WNG', 'invalid TP UD')
         else:
             self._inject_tp(tp_msg, num)

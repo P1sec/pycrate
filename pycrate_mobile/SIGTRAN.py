@@ -1,9 +1,10 @@
 # -*- coding: UTF-8 -*-
 #/**
 # * Software Name : pycrate
-# * Version : 0.3
+# * Version : 0.4
 # *
 # * Copyright 2017. Benoit Michau. ANSSI.
+# * Copyright 2018. Benoit Michau. P1Sec.
 # *
 # * This library is free software; you can redistribute it and/or
 # * modify it under the terms of the GNU Lesser General Public
@@ -94,7 +95,7 @@ TypeMGMT_dict = {
     }
 
 # SIGTRAN TRANS message type
-TRANS_DATA = 2
+TRANS_DATA = 1
 
 TypeTRANS_dict = {
     TRANS_DATA : 'Payload data'
@@ -455,6 +456,7 @@ Params_dict = {
 }
 
 # SIGTRAN message structure
+# works for both M2UA (RFC 3331) and M3UA (RFC 4666)
 
 class Param(Envelope):
     _pad = b'\0'
@@ -469,14 +471,25 @@ class Param(Envelope):
         Envelope.__init__(self, *args, **kwargs)
         self[1].set_valauto(lambda: 4+self[2].get_len())
         self[2].set_blauto(lambda:  8*max(0, self[1].get_val()-4))
-        self[3].set_valauto(lambda: (4-self[2].get_len()%4)%4 * self._pad) 
-        self[3].set_blauto(lambda:  8*((4-self[2].get_len()%4)%4))
+        self[3].set_valauto(lambda: (-self[2].get_len()%4) * self._pad)
+        self[3].set_blauto(lambda:  8*(-self[2].get_len()%4))
+    
+    def _from_char(self, char):
+        self[0]._from_char(char)
+        self[1]._from_char(char)
+        self[2]._from_char(char)
+        # this is to enable the decoding of some SIGTRAN implementations
+        # were padding of the last parameter is omitted
+        if not char.len_bit():
+            self[3].set_trans(True)
 
 
 class SIGTRAN(Envelope):
-    # this enforces the Length field in the Header at decoding
-    # warning RFC 4666: this length must take padding into account, 
-    # otherwise there will be a mismatch with Len fields in following Params
+
+    # warning RFC 4666: the length must take padding into account, 
+    # otherwise there will be a mismatch with `Len' fields in the sequence of
+    # parameters
+    # this class attribute enforces the Length field in the Header at decoding
     _LEN_ENFORCE = True
     
     _TypeUndef_dict = {}
@@ -557,10 +570,19 @@ class M2PA(Envelope):
     
     def __init__(self, *args, **kwargs):
         Envelope.__init__(self, *args, **kwargs)
-        self[0][4].set_valauto(lambda: 16 + self[2].get_len())
+        self[0][4].set_valauto(lambda: 16 + self[2].get_len() if not self[2].get_trans() else 16)
         self[2]._GEN[1][2].set_blauto(lambda: 8*(self[0][4].get_val()-18))
         self[2]._GEN[2][1].set_blauto(lambda: 8*(self[0][4].get_val()-17))
-        self[2].DEFAULT_ALT.set_blauto(lambda: 8*(self[0][4].get_val()-16))
+        self[2].DEFAULT.set_blauto(lambda: 8*(self[0][4].get_val()-16))
+    
+    def _from_char(self, char):
+        self[0]._from_char(char)
+        self[1]._from_char(char)
+        if self[0][4].get_val() > 16:
+            self[2].set_trans(False)
+            self[2]._from_char(char)
+        else:
+            self[2].set_trans(True)
 
 
 MTP3SubServInd_dict = {
@@ -573,14 +595,17 @@ MTP3SubServInd_dict = {
 MTP3ServInd_dict = {
     0 : 'Signalling network management messages',
     1 : 'Signalling network testing and maintenance messages',
+    2 : 'Signaling Network Testing and Maintenance Special Messages (ANSI)',
     3 : 'Signalling Connection Control Part',
     4 : 'Telephone User Part',
     5 : 'ISDN User Part',
     6 : 'DUP (call and circuit-related messages)',
     7 : 'DUP (facility registration and cancellation)',
+    8 : 'Reserved for MTP Testing User Part',
     9 : 'Broadband ISDN User Part',
     10: 'Satellite ISDN User Part',
     }
+
 
 class MTP3(Envelope):
     # ITU-T Q.2210, peer-to-peer info of user parts
@@ -598,6 +623,9 @@ class MTP3(Envelope):
         Uint16('DPC', trans=True),
         Uint16('OPC', trans=True)
         )
+    
+    # additional class attribute for the size in bytes
+    _SZ = 5
     
     def __init__(self, *args, **kwargs):
         Envelope.__init__(self, *args, **kwargs)
@@ -620,4 +648,38 @@ class MTP3(Envelope):
                 self[8].set_val(opc>>10)
         if vals:
             Envelope.set_val(self, vals)
+
+
+class MTP3_JPN(Envelope):
+    # MTP3 Japanese variant : DPC / OPC are on 16 bits and SLS is on 8 bits
+    
+    _GEN = (
+        Uint('SubServiceInd', bl=2, dic=MTP3SubServInd_dict),
+        Uint('SubServiceSpare', bl=2),
+        Uint('ServiceInd', bl=4, dic=MTP3ServInd_dict),
+        Uint16LE('DPC'),
+        Uint16LE('OPC'),
+        Uint('SLSSpare', bl=4),
+        Uint('SLS', bl=4)
+        )
+    
+    # additional class attribute for the size in bytes
+    _SZ = 6
+
+
+class MTP3_ANSI(Envelope):
+    # MTP3 ANSI T1.111.1 variant
+    # Seems Chinese variant format has the same layout (with priority being spare)
+    
+    _GEN = (
+        Uint('SubServiceInd', bl=2, dic=MTP3SubServInd_dict),
+        Uint('SubServicePriority', bl=2),
+        Uint('ServiceInd', bl=4, dic=MTP3ServInd_dict),
+        Uint24('DPC'),
+        Uint24('OPC'),
+        Uint8('SLS')
+        )
+    
+    # additional class attribute for the size in bytes
+    _SZ = 8
 

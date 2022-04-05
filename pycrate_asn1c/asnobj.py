@@ -1,7 +1,7 @@
 # -*- coding: UTF-8 -*-
 #/**
 # * Software Name : pycrate
-# * Version : 0.3
+# * Version : 0.4
 # *
 # * Copyright 2016. Benoit Michau. ANSSI.
 # *
@@ -28,7 +28,7 @@
 #*/
 
 from binascii  import hexlify, unhexlify
-  
+
 from .utils   import *
 from .utils   import _RE_IDENT, _RE_TYPEREF, _RE_WORD
 from .err     import *
@@ -43,17 +43,21 @@ from .dictobj import *
 #------------------------------------------------------------------------------#
 #\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\///////////////////////////////////////#
 
-_DEBUG_PARAM       = False
-_DEBUG_PARAM_PT    = False
-_DEBUG_PARAM_VAL   = False
-_DEBUG_PARAM_SET   = False
-_DEBUG_PARAM_TYPE  = False
-_DEBUG_SYNTAX_GRP  = False
-_DEBUG_SYNTAX_OGRP = False
+_DEBUG_PARAM        = False
+_DEBUG_PARAM_PT     = False
+_DEBUG_PARAM_VAL    = False
+_DEBUG_PARAM_SET    = False
+_DEBUG_PARAM_TYPE   = False
+#
+_DEBUG_SYNTAX_GRP   = False
+_DEBUG_SYNTAX_OGRP  = False
+#
+_DEBUG_SET_VAL      = False
+
 
 # method tracer, to be used as a decorator
-_TRACE_NAME = ['chained', 'chainedRead', ]
-#_TRACE_NAME = None
+#_TRACE_NAME = ['ROS', ]
+_TRACE_NAME = None
 def tracemethod(meth, *args, **kwargs):
     def wrapper(*args, **kwargs):
         if _TRACE_NAME is None or GLOBAL.COMP['NS']['name'] in _TRACE_NAME:
@@ -370,8 +374,8 @@ class ASN1Obj(object):
     %s
     """ % (ASN1Obj_docstring, ASN1SyntaxForm_docstring)
     
-    # to cache internal structures, enable it only after the compilation stage
-    # has ended
+    # to cache internal structures
+    # enable it only after the compilation stage has ended
     _CACHE_ENABLED = False
     
     # content parser dispatcher
@@ -410,7 +414,7 @@ class ASN1Obj(object):
         TYPE_STR_GRAPH  : '_parse_value_str',
         TYPE_STR_T61    : '_parse_value_str',
         TYPE_STR_GENE   : '_parse_value_str',
-        TYPE_STR_UNIV   : '_parse_value_str',
+        TYPE_STR_UNIV   : '_parse_value_str_univ',
         TYPE_OBJ_DESC   : '_parse_value_str',
         TYPE_TIME_GEN   : '_parse_value_timegen',
         TYPE_TIME_UTC   : '_parse_value_timeutc',
@@ -439,15 +443,18 @@ class ASN1Obj(object):
     # WNG: for _String types, only ascii characters are supported
     _RANGE_TYPE_STR = (TYPE_STR_IA5, TYPE_STR_PRINT, TYPE_STR_VIS)
     _RANGE_TYPE     = (TYPE_INT, TYPE_REAL) + _RANGE_TYPE_STR
-                   
+    
     
     # the following keywords are used to identify all ASN.1 object attributes
-    KW = ('name', 'mode', 'parnum', 'param', 'tag', 'type', 'typeref', 'cont',
-          'ext', 'const', 'val', 'ref', 'parent', 'flag', 'group', 'msg')
-    
-    # error reporting
-    def _raise(self, error, msg=''):
-        raise(error('{0}: {1}'.format(self.fullname(), msg)))
+    KW = ('name', 'mode',
+          'parnum', 'param',
+          'tag', 'type', 'typeref',
+          'cont', 'ext', 'parent',
+          'const', 
+          'val',
+          'flag', 'group',
+          'ref', 'msg'
+          'cache')
         
     #--------------------------------------------------------------------------#
     # initialization and generation methods
@@ -614,7 +621,7 @@ class ASN1Obj(object):
                 if self._val['ext'] is not None:
                     ext = ', ...'
                 elif self._val['ext']:
-                    ext += ', %s' % repr(self._val['ext'])[1:-1]
+                    ext = ', ..., %s' % repr(self._val['ext'])[1:-1]
                 else:
                     ext = ''
                 val = repr(self._val['root'])[1:-1] + ext
@@ -1261,25 +1268,41 @@ class ASN1Obj(object):
         """
         raise(ASN1NotSuppErr())
     
-    def get_cont(self):
+    def get_cont(self, wext=False):
         """
         returns the content of self
         """
         if self._cont is not None:
             # 1) get local content if exists
-            return self._cont
-        elif self._CACHE_ENABLED and 'cont' in self._cache:
-            return self._cache['cont']
-        else:
-            # 2) or inherited content if exists
-            tr = self.get_typeref()
-            if tr is None:
-                cont = None
+            if wext:
+                return self._cont, self._ext
             else:
-                self._verif_typeref()
-                # 3) get the content from typeref
-                cont = tr.get_cont()
-            self._cache['cont'] = cont
+                return self._cont
+        #
+        elif self._CACHE_ENABLED:
+            # 2) get cached content if already set
+            if wext and 'cont' in self._cache and 'ext' in self._cache:
+                return self._cache['cont'], self._cache['ext']
+            elif 'cont' in self._cache:
+                return self._cache['cont']
+        #
+        # 3) or inherited content if exists
+        tr = self.get_typeref()
+        if tr is None:
+            cont = None
+        else:
+            self._verif_typeref()
+            # 3) get the content from typeref
+            if wext:
+                cont, ext = tr.get_cont(wext)
+                self._cache['cont'] = cont
+                self._cache['ext']  = ext
+            else:
+                cont = tr.get_cont(wext)
+                self._cache['cont'] = cont
+        if wext:
+            return cont, ext
+        else:
             return cont
     
     def get_cont_tags(self):
@@ -1530,7 +1553,7 @@ class ASN1Obj(object):
     
     # methods specific to constructed components or CLASS fields
     def is_opt(self):
-        if self._flag:
+        if self._flag is not None:
             return FLAG_OPT in self._flag or FLAG_DEF in self._flag
         else:
             return False
@@ -2266,7 +2289,7 @@ class ASN1Obj(object):
                   .format(self.fullname())))
             #asnlog('WNG: {0}.{1}, missing actual parameters'\
             #       .format(GLOBAL.COMP['NS']['mod'], self.fullname()))
-            return text
+            #return text
         #
         if len(params_act) != len(self._params_form):
             raise(ASN1ProcTextErr('{0}: invalid number of parameters, {1} instead of {2}'\
@@ -2412,7 +2435,7 @@ class ASN1Obj(object):
             assert( path[-2] in ('root', 'ext') )
             if dom == 'root':
                 dom = path[-2]
-            ind  = path[-1]
+            ind = path[-1]
             assert( isinstance(ind, integer_types) and ind >= 0 )
             #
             # 2.2) select the root / ext dict containing the set of values
@@ -2601,7 +2624,7 @@ class ASN1Obj(object):
         for path in self._pathes:
             #
             if path[0] == 'param':
-                raise(ASN1NotSuppErr('{0}: formal parameter passthrough parameterization, {1}'\
+                raise(ASN1NotSuppErr('{0}: formal parameter pass-through parameterization, {1}'\
                       .format(self.fullname(), path)))
             #
             # 4.1) take potential current path into account (especially when
@@ -2885,7 +2908,7 @@ class ASN1Obj(object):
             objects.append( Obj )
         #
         if _DEBUG_PARAM_TYPE:
-            asnlog('DBG: __parameterize_type({0}), {2}.{3}'.format(
+            asnlog('DBG: __parameterize_type({0}), {1}.{2}'.format(
                    typedef,
                    GLOBAL.COMP['NS']['mod'],
                    GLOBAL.COMP['NS']['name']))
@@ -2894,12 +2917,12 @@ class ASN1Obj(object):
                    GLOBAL.COMP['NS']['setdisp'],
                    GLOBAL.COMP['NS']['setpar']))
             asnlog('    referrers: {0!r}'.format(self._pathes))
-            asnlog('    objects  : {0!r}'.format(objval))
+            asnlog('    objects  : {0!r}'.format(objects))
     
     def __parameterize_transfer_obj(self, OldObj, NewObj, clone=False, ClassRef=None):
         # transfer existing flags, constraints and tag from OldObj to NewObj
         cloned = False
-        if OldObj._flag:
+        if OldObj._flag is not None:
             assert(NewObj._flag is None)
             if clone:
                 NewObj = NewObj.copy()
@@ -4083,7 +4106,7 @@ class ASN1Obj(object):
                 const['at'] = ['..'] * lvl + at_name
                 parent = obj
             for atn in at_name:
-                if parent is None or atn not in parent._cont:
+                if parent is None or parent._cont is None or atn not in parent._cont:
                     raise(ASN1ProcTextErr(
                           '{0}: undefined field reference for table constraint, {1}'\
                           .format(self.fullname(), at_name)))
@@ -4136,6 +4159,23 @@ class ASN1Obj(object):
         # 4) transfer references from ObjProxy to self
         if ObjProxy._ref:
             self._ref.update( ObjProxy._ref )
+        #
+        # 5) check for some more funny constraint
+        m = SYNT_RE_CONST_EXT.match(rest)
+        if m:
+            # previous constraint must be considered extensible
+            const = self.select(['const', const_index])
+            if const['ext'] is None:
+                const['ext'] = []
+            rest = rest[m.end():].lstrip()
+        elif rest[0:1] == '^':
+            # intersection with a 2nd constraint
+            self._parse_const('(%s)' % rest[1:].lstrip())
+            # this is a hack, and this is bad
+            rest = ''
+        if rest:
+            raise(ASN1ProcTextErr('{0}: remaining text for SIZE constraint, {1}'\
+                 .format(self.fullname(), rest)))
     
     def _parse_const_alphabet(self, const):
         const_index = len(self._const)
@@ -4188,6 +4228,23 @@ class ASN1Obj(object):
         # 4) transfer references from ObjProxy to self
         if ObjProxy._ref:
             self._ref.update( ObjProxy._ref )
+        #
+        # 5) check for some more funny constraint
+        m = SYNT_RE_CONST_EXT.match(rest)
+        if m:
+            # previous constraint must be considered extensible
+            const = self.select(['const', const_index])
+            if const['ext'] is None:
+                const['ext'] = []
+            rest = rest[m.end():].lstrip()
+        elif rest[0:1] == '^':
+            # intersection with a 2nd constraint
+            self._parse_const('(%s)' % rest[1:].lstrip())
+            # this is a hack, and this is bad
+            rest = ''
+        if rest:
+            raise(ASN1ProcTextErr('{0}: remaining text for SIZE constraint, {1}'\
+                 .format(self.fullname(), rest)))
     
     def _parse_const_withcomp(self, const):
         const_index = len(self._const)
@@ -4259,6 +4316,15 @@ class ASN1Obj(object):
         #
         # 3) get the content of the original constructed object
         cont = self.get_cont()
+        if cont is None:
+            # warning: it seems there is this quite bad practice of using WITH COMPONENTS
+            # constraint applied to formal parameters, which are undefined by nature.
+            # so we do our best here to manage the constraint definition when there is
+            # no available content defined
+            # TODO: the constraint should be parsed after parameterization has happened
+            asnlog('INF: {0}.{1}, unprocessed WITH COMPONENTS constraint on formal parameter'\
+               .format(GLOBAL.COMP['NS']['mod'], self.fullname()))
+            return
         #
         # 4) check for partial components
         if comps[0] == '...':
@@ -4278,10 +4344,12 @@ class ASN1Obj(object):
         for comp in comps:
             ident = comp.split(' ', 1)[0]
             if ident not in cont:
-                raise(ASN1ProcTextErr(
-                      '{0}: invalid ident in WITH COMPONENTS constraint, {1}'\
-                      .format(self.fullname(), ident)))
-            elif ident in done:
+                ident = comp.split('(', 1)[0]
+                if ident not in cont:
+                    raise(ASN1ProcTextErr(
+                          '{0}: invalid ident in WITH COMPONENTS constraint, {1}'\
+                          .format(self.fullname(), ident)))
+            if ident in done:
                 raise(ASN1ProcTextErr(
                       '{0}: duplicated ident in WITH COMPONENTS constraint, {1}'\
                       .format(self.fullname(), ident)))
@@ -4406,8 +4474,6 @@ class ASN1Obj(object):
         if not partial:
             # ensure all mandatory components have been constrained
             if not all([ident in done for ident in self.get_root_mand()]):
-                asnlog('WNG: {0}.{1}, missing mandatory components in WITH COMPONENTS'\
-                       .format(GLOBAL.COMP['NS']['mod'], self.fullname()))
                 raise(ASN1ProcTextErr(
                       '{0}: missing mandatory components in WITH COMPONENTS'\
                       .format(self.fullname())))
@@ -4425,11 +4491,12 @@ class ASN1Obj(object):
             if cont[ident].is_opt():
                 const['_pre'].append(ident)
         for ident in absent:
-            if FLAG_OPT not in cont[ident]._flag or FLAG_DEF in cont[ident]._flag:
+            if cont[ident]._flag is not None and \
+            (FLAG_OPT not in cont[ident]._flag or FLAG_DEF in cont[ident]._flag):
                 raise(ASN1ProcTextErr('{0}: invalid ABSENT component, {1}'\
                       .format(self.fullname(), ident)))
             else:
-                const['_abs'].append(ident) 
+                const['_abs'].append(ident)
     
     def _parse_const_regexp(self, const):
         const_index = len(self._const)
@@ -4955,15 +5022,32 @@ class ASN1Obj(object):
               .format(self.fullname(), text)))
         
     def __parse_value_bitstr_offsets(self, val):
+        # val: set of offsets
         # returns the integral value and the minimum number of bits 
         # for the set of offsets
-        # TODO: take SIZE constraint into account ?
         if val is None:
             # null length bit string
             val = [0, 0]
         else:
-            blen = max(val)
-            val = [sum([1<<(blen-i) for i in val]), blen]
+            moff = max(val)
+            val  = [sum([1<<(moff-i) for i in val]), 1+moff]
+        # take potential SIZE constraint into account
+        Consts_sz = [C for C in self.get_const() if C['type'] == CONST_SIZE]
+        if Consts_sz:
+            # size is a set of INTEGER values
+            Const_sz = reduce_setdicts(Consts_sz)
+            # check if there is a root lower bound, without defined extension
+            if Const_sz.root and Const_sz.ext is None:
+                lb = Const_sz.root[0]
+                # lb can be a single int value or an ASN1RangeInt
+                if hasattr(lb, 'lb'):
+                    lb = lb.lb
+                if lb is None:
+                    lb = 0
+                assert( isinstance(lb, integer_types) and lb >= 0 )
+                if val[1] < lb:
+                    diff = lb - val[1]
+                    val = [val[0] << diff, val[1] + diff]
         self.select_set(_path_cur(), val)
     
     def _parse_value_octstr(self, text):
@@ -5095,10 +5179,12 @@ class ASN1Obj(object):
         m = SYNT_RE_IDENT.match(text)
         if m:
             return self._parse_value_ref(text)
+            #return self._parse_value_ref(text, type_expected=TYPE_STRINGS)
         m = SYNT_RE_IDENTEXT.match(text)
         if m:
             # reference to an external module value
             return self._parse_value_ref(text)
+            #return self._parse_value_ref(text, type_expected=TYPE_STRINGS)
         else:
             text, val = extract_charstr(text)
             if val is None:
@@ -5106,6 +5192,33 @@ class ASN1Obj(object):
                       .format(self.fullname(), self._type, text)))
             self.select_set(_path_cur(), val)
         return text
+    
+    def _parse_value_str_univ(self, text):
+        """
+        parses the UniversalString object value
+        
+        value is a string (Python str) or code-point (4 uint8 tuples)
+        """
+        try:
+            text = self._parse_value_str(text)
+        except ASN1ProcTextErr:
+            # try with the code-point notation {W, X, Y, Z}
+            m = SYNT_RE_UNIVSTR.match(text)
+            if m:
+                # convert to a std Python str
+                try:
+                    val = pack('>BBBB', *map(int, m.groups())).decode('utf-32-be')
+                except Exception:
+                    raise(ASN1ProcTextErr('{0}: invalid UniversalString value, {2}'\
+                          .format(self.fullname(), text)))
+                else:
+                    self.select_set(_path_cur(), val)
+                    return text[m.end():].strip()
+            else:
+                raise(ASN1ProcTextErr('{0}: invalid UniversalString value, {2}'\
+                      .format(self.fullname(), text)))
+        else:
+            return text
     
     def _parse_value_timeutc(self, text):
         """
@@ -5734,9 +5847,10 @@ class ASN1Obj(object):
                 # because parse_value() is used and cannot implement such control
                 if len(val[dom]) >= 2 and len(val[dom]) == len_val + 1 \
                 and val[dom][-1] in val[dom][:-1]:
-                    print('WNG: {0}.{1}, duplicated value in {2} set: {3}'\
-                          .format(GLOBAL.COMP['NS']['mod'], self.fullname(), dom,
-                                  repr(val[dom][-1]).replace('\n', '')))
+                    if _DEBUG_SET_VAL:
+                        asnlog('DBG: {0}.{1}, duplicated value in {2} set: {3}'\
+                               .format(GLOBAL.COMP['NS']['mod'], self.fullname(), dom,
+                                       repr(val[dom][-1]).replace('\n', '')))
                     del val[dom][-1]
             # 
             self.__parse_set_comp_path_unconfig()
@@ -5770,9 +5884,10 @@ class ASN1Obj(object):
                 # because parse_value() is used and cannot implement such control
                 if len(val[dom]) >= 2 and len(val[dom]) == len_val + 1 \
                 and val[dom][-1] in val[dom][:-1]:
-                    print('WNG: {0}.{1}, duplicated value in {2} set: {3}'\
-                          .format(GLOBAL.COMP['NS']['mod'], self.fullname(), dom,
-                                  repr(val[dom][-1]).replace('\n', '')))
+                    if _DEBUG_SET_VAL:
+                        asnlog('DBG: {0}.{1}, duplicated value in {2} set: {3}'\
+                               .format(GLOBAL.COMP['NS']['mod'], self.fullname(), dom,
+                                       repr(val[dom][-1]).replace('\n', '')))
                     del val[dom][-1]
             #
             self.__parse_set_comp_path_unconfig()
@@ -5937,11 +6052,6 @@ class ASN1Obj(object):
                     else:
                         objval = ObjProxy_val
                     #
-                    
-                    if self._name == 'Supported-MAP-Operations':
-                        print(objval)
-                    
-                    
                     # 3.4.4) dispatch the root / ext values from objval into self within val
                     if objval['root']:
                         self.__parse_set_insert(val[dom], objval['root'], dom)

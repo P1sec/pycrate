@@ -1,7 +1,7 @@
 # -*- coding: UTF-8 -*-
 #/**
 # * Software Name : pycrate
-# * Version : 0.3
+# * Version : 0.4
 # *
 # * Copyright 2017. Benoit Michau. ANSSI.
 # *
@@ -157,7 +157,7 @@ class RUAConnect(RUASigProc):
             ctx_id = self.ConInfo['Context_ID'][0]
             try:
                 ued = self.HNB.UE_HNBAP[ctx_id]
-            except:
+            except Exception:
                 self._log('ERR', 'no UE associated to context-id %i'\
                           % self.ConInfo['Context_ID'][0])
                 self.errcause = ('radioNetwork', 'connect-failed')
@@ -236,7 +236,7 @@ class RUADirectTransfer(RUASigProc):
             if self.ConInfo['CN_DomainIndicator'] == 'cs-domain':
                 try:
                     ued = self.HNB.UE_IuCS[self.ConInfo['Context_ID'][0]]
-                except:
+                except Exception:
                     self._log('ERR', 'no UE associated to context-id %i'\
                               % self.ConInfo['Context_ID'][0])
                     self.errcause = ('protocol', 'abstract-syntax-error-reject')
@@ -245,7 +245,7 @@ class RUADirectTransfer(RUASigProc):
             else:
                 try:
                     ued = self.HNB.UE_IuPS[self.ConInfo['Context_ID'][0]]
-                except:
+                except Exception:
                     self._log('ERR', 'no UE associated to context-id %i'\
                               % self.ConInfo['Context_ID'][0])
                     self.errcause = ('protocol', 'abstract-syntax-error-reject')
@@ -307,7 +307,7 @@ class RUADisconnect(RUASigProc):
             if self.ConInfo['CN_DomainIndicator'] == 'cs-domain':
                 try:
                     ued = self.HNB.UE_IuCS[self.ConInfo['Context_ID'][0]]
-                except:
+                except Exception:
                     self._log('ERR', 'no UE associated to context-id %i'\
                               % self.ConInfo['Context_ID'][0])
                     self.errcause = ('protocol', 'abstract-syntax-error-reject')
@@ -321,7 +321,7 @@ class RUADisconnect(RUASigProc):
             else:
                 try:
                     ued = self.HNB.UE_IuPS[self.ConInfo['Context_ID'][0]]
-                except:
+                except Exception:
                     self._log('ERR', 'no UE associated to context-id %i'\
                               % self.ConInfo['Context_ID'][0])
                     self.errcause = ('protocol', 'abstract-syntax-error-reject')

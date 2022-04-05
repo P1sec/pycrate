@@ -2963,7 +2963,7 @@ class PKIXAttributeCertificate:
     #-----< Clearance >-----#
     Clearance = SEQ(name=u'Clearance', mode=MODE_TYPE)
     _Clearance_policyId = OID(name=u'policyId', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _Clearance_classList = BIT_STR(name=u'classList', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PKIXAttributeCertificate', 'ClassList')), default=(1, 1))
+    _Clearance_classList = BIT_STR(name=u'classList', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PKIXAttributeCertificate', 'ClassList')), default=(1, 2))
     _Clearance_securityCategories = SET_OF(name=u'securityCategories', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     __Clearance_securityCategories__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('PKIXAttributeCertificate', 'SecurityCategory')))
     _Clearance_securityCategories._cont = __Clearance_securityCategories__item_
@@ -4532,7 +4532,7 @@ class PKIXAttributeCertificate_2008:
     #-----< Clearance >-----#
     Clearance = SEQ(name=u'Clearance', mode=MODE_TYPE)
     _Clearance_policyId = OID(name=u'policyId', mode=MODE_TYPE)
-    _Clearance_classList = BIT_STR(name=u'classList', mode=MODE_TYPE, typeref=ASN1RefType(('PKIXAttributeCertificate-2008', 'ClassList')), default=(1, 1))
+    _Clearance_classList = BIT_STR(name=u'classList', mode=MODE_TYPE, typeref=ASN1RefType(('PKIXAttributeCertificate-2008', 'ClassList')), default=(1, 2))
     _Clearance_securityCategories = SET_OF(name=u'securityCategories', mode=MODE_TYPE, opt=True)
     __Clearance_securityCategories__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('PKIXAttributeCertificate-2008', 'SecurityCategory')))
     _Clearance_securityCategories._cont = __Clearance_securityCategories__item_

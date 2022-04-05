@@ -1,7 +1,7 @@
 # -*- coding: UTF-8 -*-
 #/**
 # * Software Name : pycrate
-# * Version : 0.3
+# * Version : 0.4
 # *
 # * Copyright 2017. Benoit Michau. ANSSI.
 # *
@@ -143,7 +143,7 @@ class SMSigProc(NASSigProc):
                 ProcStack = self.SM.Proc[self._tid]
                 if ProcStack[-1] == self:
                     del ProcStack[-1]
-        except:
+        except Exception:
             self._log('WNG', 'SM stack corrupted')
     
     def init_timer(self):

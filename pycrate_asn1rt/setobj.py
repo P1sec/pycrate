@@ -1,7 +1,7 @@
 # -*- coding: UTF-8 -*-
 #/**
 # * Software Name : pycrate
-# * Version : 0.3
+# * Version : 0.4
 # *
 # * Copyright 2017. Benoit Michau. ANSSI.
 # *
@@ -331,7 +331,7 @@ class ASN1RangeStr(ASN1Range):
         # disjoint sets:
         if ub < ralb:
             return self, ra
-        else:
+        elif raub < lb:
             return ra, self
         #
         # intersecting sets:
@@ -683,48 +683,61 @@ class ASN1Set(object):
     
     _CONTAIN_WEXT = False # use extension to test for containment
     
-    def __init__(self, rv=[], rr=[], ev=None, er=[]):
+    def __init__(self, rv=[], rr=[], ev=None, er=[], name=b''):
         self._rr = reduce_rangelist(rr)
         self._rv = []
+        sort_root, sort_ext = True, True
         for v in rv:
-            if not any([v in _rr for _rr in self._rr]):
+            if isinstance(v, dict):
+                # dictionnary of heterogeneous values:
+                # not comparable neither sortable
+                self._rv.append(v)
+                sort_root = False
+            elif not any([v in _rr for _rr in self._rr]):
                 self._rv.append(v)
         if ev is not None:
             self._er = reduce_rangelist(er)
             self._ev = []
             for v in ev:
-                if not any([v in _er for _er in self._er]):
+                if isinstance(v, dict):
+                    # dictionnary of heterogeneous values:
+                    # not comparable neither sortable
+                    self._ev.append(v)
+                    sort_ext = False
+                elif not any([v in _er for _er in self._er]):
                     self._ev.append(v)
         else:
             self._er = []
             self._ev = None
-        self._init()
+        self._init(sort_root, sort_ext)
     
-    def _init(self):
+    def _init(self, sort_root, sort_ext):
         """
         creates the `root' and `ext' attributes which lists all values and 
         ranges of their domain in order
         """
-        if self._rv:
-            try:
-                self._rv.sort()
-            except:
-                pass
-        if self._rr:
-            try:
-                self._rr.sort()
-            except:
-                pass
-        if self._ev:
-            try:
-                self._ev.sort()
-            except:
-                pass
-        if self._er:
-            try:
-                self._er.sort()
-            except:
-                pass
+        if sort_root:
+            if self._rv:
+                try:
+                    self._rv.sort()
+                except Exception:
+                    pass
+            if self._rr:
+                try:
+                    self._rr.sort()
+                except Exception:
+                    pass
+        if sort_ext:
+            if self._ev:
+                try:
+                    self._ev.sort()
+                except Exception:
+                    pass
+            if self._er:
+                try:
+                    self._er.sort()
+                except Exception:
+                    pass
         #
         self.root = []
         if self._rv and isinstance(self._rv[0], str_types) or \
@@ -818,7 +831,7 @@ class ASN1Set(object):
     def __get_root_bnd(self, bnd='lb'):
         bnd_ind = {'lb':0, 'ub':-1}[bnd]
         if isinstance(self.root[bnd_ind], (ASN1RangeInt, ASN1RangeStr)):
-            return getattr(self.root[bnd_ind], bnd) 
+            return getattr(self.root[bnd_ind], bnd)
         elif isinstance(self.root[bnd_ind], integer_types):
             return self.root[bnd_ind]
         elif isinstance(self.root[bnd_ind], str_types) and len(self.root[bnd_ind]) == 1:
@@ -937,4 +950,14 @@ class ASN1Set(object):
             else:
                 return None
         return num.bit_length()
+    
+    def getv(self):
+        """
+        returns the list of individual values in the root and ext part, omitting
+        any values in ranges
+        """
+        ret = self._rv[:]
+        if self._ev is not None:
+            ret.extend( self._ev )
+        return ret
 

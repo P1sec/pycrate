@@ -1,0 +1,4774 @@
+﻿
+
+
+
+
+Contents
+Foreword	6
+1	Scope	7
+2	References	7
+3	Definitions and abbreviations	8
+3.1	Definitions	8
+3.2	Abbreviations	8
+4	General	8
+4.1	Procedure Specification Principles	8
+4.2	Forwards and Backwards Compatibility	9
+4.3	Specification Notations	9
+5	HNBAP Services	9
+6	Services expected from the Transport layer	9
+7	Functions of HNBAP	10
+8	HNBAP Procedures	10
+8.1	Elementary Procedures	10
+8.2	HNB Registration Procedure	10
+8.2.1	General	10
+8.2.2	Successful Operation	11
+8.2.3	Unsuccessful Operation	12
+8.2.4	Abnormal Conditions	12
+8.3	HNB De-registration Procedure	12
+8.3.1	Successful Operation (HNB Originated)	12
+8.3.2	Successful Operation (HNB-GW Originated)	13
+8.3.3	Abnormal Conditions	13
+8.4	UE Registration	13
+8.4.1	General	13
+8.4.2	Successful Operation	14
+8.4.3	Unsuccessful Operation	14
+8.4.4	Abnormal Conditions	15
+8.5	UE De-Registration	15
+8.5.1	General	15
+8.5.2	Successful Operation (HNB Originated)	15
+8.5.3	Successful Operation (HNB-GW Originated)	15
+8.5.4	Abnormal Conditions	16
+8.6	Error Indication	16
+8.6.1	General	16
+8.6.2	Successful Operation	16
+8.7	CSG Membership Update Procedure	17
+8.7.1	Successful Operation	17
+8.7.2	Abnormal Conditions	17
+8.8	Void	17
+8.8.1	Void	17
+8.8.2	Void	17
+8.8.3	Void	17
+8.9	TNL Update	17
+8.9.1	General	17
+8.9.2	Successful Operation	18
+8.9.3	Unsuccessful Operation	18
+8.9.4	Abnormal Conditions	18
+8.10	HNB Configuration Transfer Procedure	18
+8.10.1	General	18
+8.10.2	Successful Operation	18
+8.10.3	Void	19
+8.10.4	Abnormal Conditions	19
+8.11	Relocation Complete	19
+8.11.1	General	19
+8.11.2	Successful Operation	20
+8.12	U-RNTI Query	20
+8.12.1	General	20
+8.12.2	Successful Operation	20
+9	Elements for HNBAP Communication	20
+9.1	Message Functional Definition and Content	20
+9.1.1	General	20
+9.1.2	Message Contents	21
+9.1.2.1	Presence	21
+9.1.2.2	Criticality	21
+9.1.2.3	Range	21
+9.1.2.4	Assigned Criticality	21
+9.1.3	HNB REGISTER REQUEST	21
+9.1.4	HNB REGISTER ACCEPT	22
+9.1.5	HNB REGISTER REJECT	23
+9.1.6	UE REGISTER REQUEST	23
+9.1.7	UE REGISTER ACCEPT	23
+9.1.8	UE REGISTER REJECT	23
+9.1.9	HNB DE-REGISTER	24
+9.1.10	UE DE-REGISTER	24
+9.1.11	ERROR INDICATION	24
+9.1.12	CSG MEMBERSHIP UPDATE	24
+9.1.13	Void	25
+9.1.14	Void	25
+9.1.15	TNL UPDATE REQUEST	25
+9.1.16	TNL UPDATE RESPONSE	25
+9.1.17	TNL UPDATE FAILURE	25
+9.1.18	HNB CONFIGURATION TRANSFER REQUEST	25
+9.1.19	HNB CONFIGURATION TRANSFER RESPONSE	26
+9.1.20	Void	26
+9.1.21	RELOCATION COMPLETE	26
+9.1.22	U-RNTI QUERY REQUEST	27
+9.1.23	U-RNTI QUERY RESPONSE	27
+9.2	Information Element Definitions	27
+9.2.0	General	27
+9.2.1	Message Type	28
+9.2.2	HNB Identity	28
+9.2.3	HNB Location Information	28
+9.2.4	Geographical Location	28
+9.2.5	Geographical Coordinates	29
+9.2.6	Altitude and Direction	29
+9.2.7	Macro Coverage Information	29
+9.2.8	IP Address	30
+9.2.9	Context-ID	30
+9.2.10	IMSI	30
+9.2.11	LAC	31
+9.2.12	RAC	31
+9.2.13	SAC	31
+9.2.14	PLMN-ID	31
+9.2.15	Cause	32
+9.2.16	Criticality Diagnostics	34
+9.2.17	UE Identity	35
+9.2.18	IMEI	36
+9.2.19	TMSI (GSM-MAP)	36
+9.2.20	LAI	36
+9.2.21	Registration Cause	37
+9.2.22	P-TMSI (GSM-MAP)	37
+9.2.23	Routing Area Identification	37
+9.2.24	UE Capabilities	37
+9.2.25	Cell-ID	37
+9.2.26	RNC-ID	38
+9.2.27	CSG-ID	38
+9.2.28	Backoff Timer	38
+9.2.29	Mux Port Number	38
+9.2.30	CSG Membership Status	38
+9.2.31	HNB Cell Access Mode	38
+9.2.32	RAB List	39
+9.2.33	Transport Info	39
+9.2.34	Transport Layer Address	39
+9.2.35	Transport Association	39
+9.2.36	HNB RNL Identity	40
+9.2.37	CN Domain Indicator	40
+9.2.38	Void	40
+9.2.39	Update Cause	40
+9.2.40	HNB Configuration Information	40
+9.2.41	PSC	41
+9.2.42	HNB Cell Identifier	41
+9.2.43	RAB ID	41
+9.2.44	Tunnel Information	42
+9.2.45	CELL_FACH Mobility Support	42
+9.2.46	S-RNTI Prefix	42
+9.2.47	URA Identity	42
+9.2.48	U-RNTI	42
+9.2.49	Unknown U-RNTI Indication	42
+9.2.50	HNB Capacity	43
+9.2.51	Neighbour Identity	43
+9.3	Message and Information Element Abstract Syntax (with ASN.1)	43
+9.3.0	General	43
+9.3.1	Usage of private message mechanism for non-standard use	43
+9.3.2	Elementary Procedure Definitions	45
+9.3.3	PDU Definitions	49
+9.3.4	Information Element Definitions	60
+9.3.5	Common Definitions	71
+9.3.6	Constant Definitions	72
+9.3.7	Container Definitions	74
+9.4	Message Transfer Syntax	78
+10	Handling of unknown, unforeseen, and erroneous protocol data	78
+10.1	General	78
+10.2	Transfer Syntax Error	78
+10.3	Abstract Syntax Error	78
+10.3.1	General	78
+10.3.2	Criticality Information	79
+10.3.3	Presence Information	79
+10.3.4	Not comprehended IE/IE group	80
+10.3.4.1	Procedure Code	80
+10.3.4.1A	Type of Message	80
+10.3.4.2	IEs other than the Procedure Code and Type of Message	80
+10.3.5	Missing IE or IE group	81
+10.3.6	IEs or IE groups received in wrong order or with too many occurrences or erroneously present	82
+10.4	Logical Error	83
+10.5	Exceptions	83
+Annex A (informative):	Change History	84
+
+Foreword
+This Technical Specification (TS) has been produced by the 3rd Generation Partnership Project (3GPP).
+The contents of the present document are subject to continuing work within the TSG and may change following formal TSG approval. Should the TSG modify the contents of the present document, it will be re-released by the TSG with an identifying change of release date and an increase in version number as follows:
+Version x.y.z
+where:
+x	the first digit:
+1	presented to TSG for information;
+2	presented to TSG for approval;
+3	or greater indicates TSG approved document under change control.
+y	the second digit is incremented for all changes of substance, i.e. technical enhancements, corrections, updates, etc.
+z	the third digit is incremented when editorial only changes have been incorporated in the document.
+1	Scope
+The present document specifies the Home Node B Application Part (HNBAP) between the Home Node B (HNB) and the Home Node B Gateway (HNB-GW). It fulfils the HNB- HNB-GW communication requirements specified in TS 25.467 [3] and is defined over the Iuh – reference point. It provides control and management procedures between HNB and HNB-GW.
+2	References
+The following documents contain provisions which, through reference in this text, constitute provisions of the present document.
+	References are either specific (identified by date of publication, edition number, version number, etc.) or non‑specific.
+	For a specific reference, subsequent revisions do not apply.
+	For a non-specific reference, the latest version applies.  In the case of a reference to a 3GPP document (including a GSM document), a non-specific reference implicitly refers to the latest version of that document in the same Release as the present document.
+[1]	Void
+[2]	Void
+[3]	3GPP TS 25.467: “UTRAN architecture for 3G Home Node B”
+[4]	3GPP TS 23.032: "Universal Geographical Area Description (GAD)".
+[5]	3GPP TR 25.921 (Version 7.0.0): "Guidelines and Principles for Protocol Description and Error Handling".
+[6]	3GPP TR 21.905: "Vocabulary for 3GPP Specifications".
+[7]	ITU-T Recommendation X.691 (2002-07): "Information technology - ASN.1 encoding rules: Specification of Packed Encoding Rules (PER)".
+[8]	ITU-T Recommendation X.680 (2002-07): "Information technology - Abstract Syntax Notation One (ASN.1): Specification of basic notation".
+[9]	ITU-T Recommendation X.681 (2002-07): "Information technology - Abstract Syntax Notation One (ASN.1): Information object specification".
+[10]	3GPP TS 25.331: “Radio Resource Control (RRC) Protocol Specification”
+[11]	IETF RFC 4960 (2007-09): "Stream Control Transmission Protocol".
+[12]	3GPP TS 23.003: "Numbering, addressing and identification".
+[13]	IETF RFC 4282 (2005-12): "The Network Access Identifier".
+[14]	Broadband Forum TR-069 Amendment 2, CPE WAN Management Protocol, Broadband Forum Technical Report, 2007.
+[15]	3GPP TS 22.220: "Service requirements for Home Node Bs and Home eNode Bs".
+3	Definitions and abbreviations
+3.1	Definitions
+For the purposes of the present document, the terms and definitions given in TR 21.905 [6] and the following terms and definitions apply:
+Elementary Procedure: HNBAP consists of Elementary Procedures (EPs). An Elementary Procedure is a unit of interaction between the HNB and HNB-GW. These EPs are defined separately and are intended to be used to build up complete sequences in a flexible manner. If the independence between some EPs is restricted, it is described under the relevant EP description. Unless otherwise stated by the restrictions, the EPs may be invoked independently of each other as stand-alone procedures, which can be active in parallel. 
+An EP consists of an initiating message and possibly a response message. Two kinds of EPs are used:
+-	Class 1: Elementary Procedures with response (success or failure).
+-	Class 2: Elementary Procedures without response.
+For Class 1 EPs, the types of responses can be as follows:
+Successful
+-	A signalling message explicitly indicates that the elementary procedure successfully completed with the receipt of the response.
+Unsuccessful
+-	A signalling message explicitly indicates that the EP failed.
+-	On time supervision expiry (i.e. absence of expected response).
+Class 2 EPs are considered always successful.
+RNSAP Relocation: see definition in TS 25.467 [3].
+3.2	Abbreviations
+For the purposes of the present document, the abbreviations given in TR 21.905 [6] and the following abbreviations apply:
+EP	Elementary Procedure
+ESN	Electronic Serial Number
+HNB	Home Node B
+HNB-GW	Home Node B Gateway
+HNBAP	HNB Application Part
+PDU	Protocol Data Unit
+PER	Packed Encoding Rules
+SAC	Service Area Code
+4	General
+The protocol described in the present document is the protocol between HNB-GW and HNB.
+4.1	Procedure Specification Principles
+The principle for specifying the procedure logic is to specify the functional behaviour of the HNB & HNB-GW exactly and completely.
+The following specification principles have been applied for the procedure text in clause 8:
+-	The procedure text discriminates between:
+1)	Functionality which "shall" be executed:
+-	The procedure text indicates that the receiving node "shall" perform a certain function Y under a certain condition. If the receiving node supports procedure X but cannot perform functionality Y requested in the REQUEST message of a Class 1 EP, the receiving node shall respond with the message used to report unsuccessful outcome for this procedure, containing an appropriate cause value.
+2)	Functionality which "shall, if supported" be executed:
+-	The procedure text indicates that the receiving node "shall, if supported," perform a certain function Y under a certain condition. If the receiving node supports procedure X, but does not support functionality Y, the receiving node shall proceed with the execution of the EP, possibly informing the requesting node about the not supported functionality.
+-	Any required inclusion of an optional IE in a response message is explicitly indicated in the procedure text. If the procedure text does not explicitly indicate that an optional IE shall be included in a response message, the optional IE shall not be included.
+4.2	Forwards and Backwards Compatibility
+The forwards and backwards compatibility of the protocol is assured by mechanism where all current and future messages, and IEs or groups of related IEs, include Id and criticality fields that are coded in a standard format that will not be changed in the future. These parts can always be decoded regardless of the standard version.
+4.3	Specification Notations
+For the purposes of the present document, the following notations apply:
+Procedure	When referring to an elementary procedure in the specification the Procedure Name is written with the first letters in each word in upper case characters followed by the word  "procedure", e.g. HNB Registration procedure.
+Message	When referring to a message in the specification the MESSAGE NAME is written with all letters in upper case characters followed by the word "message", e.g. HNB REGISTRATION REQUEST message.
+IE	When referring to an information element (IE) in the specification the Information Element Name is written with the first letters in each word in upper case characters and all letters in Italic font followed by the abbreviation "IE", e.g. HNB Identity IE.
+Value of an IE	When referring to the value of an information element (IE) in the specification the "Value" is written as it is specified in subclause 9.2 enclosed by quotation marks, e.g., "Abstract Syntax Error (Reject)" or "Background ".
+5	HNBAP Services
+HNBAP provides the signalling service between the HNB and the HNB-GW that is required to fulfil the HNBAP functions in Clause 7.
+6	Services expected from the Transport layer
+Following service is expected from the transport layer:
+-	reliable and in sequence delivery of HNBAP messages. HNBAP shall be notified if the signalling connection breaks.
+7	Functions of HNBAP
+The HNBAP has the following functions:
+-	HNB Registration
+-	UE Registration
+-	Support RNSAP relocation (TS 25.467 [3])
+-	Error Handling. This function allows the reporting of general error situations, for which function specific error messages have not been defined.
+These functions are implemented by one or several HNBAP elementary procedures described in the following clauses.
+8	HNBAP Procedures
+8.1	Elementary Procedures
+In the following tables, all EPs are divided into Class 1 and Class 2 Procedures.
+Table 1: Class 1
+Elementary Procedure
+Initiating Message
+Successful Outcome
+Unsuccessful Outcome
+
+
+Response message
+Response message
+HNB Registration
+HNB REGISTER REQUEST
+HNB REGISTER ACCEPT
+HNB REGISTER REJECT
+UE Registration
+UE REGISTER REQUEST
+UE REGISTER ACCEPT
+UE REGISTER REJECT
+TNL Update
+TNL UPDATE REQUEST
+TNL UPDATE RESPONSE
+TNL UPDATE FAILURE
+HNB Configuration Transfer
+HNB CONFIGURATION TRANSFER REQUEST
+HNB CONFIGURATION TRANSFER RESPONSE
+
+
+Table 2: Class 2
+Elementary Procedure
+Message
+HNB De-Registration
+HNB DE-REGISTER
+UE De-Registration
+UE DE-REGISTER
+Error Indication
+ERROR INDICATION
+CSG Membership Update
+CSG MEMBERSHIP UPDATE
+Relocation Complete
+RELOCATION COMPLETE
+
+8.2	HNB Registration Procedure
+8.2.1	General
+The purpose of the HNB Registration Procedure is to register the HNB with the HNB-GW to enable the HNB-GW to provide service and core network connectivity for the HNB and if supported and configured, to enable Iurh connectivity via/to the HNB-GW. This procedure shall be the first HNBAP procedure triggered after the Iuh signalling transport has been successfully established.
+8.2.2	Successful Operation
+
+Figure 8.2.2-1: HNB Register Procedure: Successful Operation
+The HNB shall initiate this procedure by sending a HNB REGISTER REQUEST message whenever it needs to commence operations and requiring service from the HNB-GW.
+If the HNB is CSG capable and operates in a Closed access mode as defined in TS 22.220 [15], then it shall provide the CSG-ID IE and may provide the HNB Cell Access Mode IE within the HNB REGISTER REQUEST message.
+If the HNB is supporting PWS it shall provide the Service Area For Broadcast IE within the HNB REGISTER REQUEST message.
+If the HNB operates in a Hybrid access mode as defined in TS 22.220 [15], then it shall provide the CSG-ID IE and HNB Cell Access Mode IE within the HNB REGISTER REQUEST message.
+If the HNB operates in an Open access mode as defined in TS 22.220 [15], then it shall provide the HNB Cell Access Mode IE within the HNB REGISTER REQUEST message.
+If the HNB supports direct Iurh connectivity it shall provide the Iurh signalling TNL Address IE to the HNB-GW within the HNB REGISTER REQUEST message.
+If supported, the HNB shall include the PSC IE in the HNB REGISTER REQUEST message.
+If the registration is successful, the HNB-GW will respond with a HNB REGISTER ACCEPT message indicating acceptance and registration. If the Iurh signalling TNL Address IE is included in the HNB REGISTER ACCEPT message, the HNB shall, if supported, establish a transport layer session to the indicated address to support Iurh connectivity via/to the HNB-GW.
+If the HNB-GW is capable of de-multiplexing, then the Mux Port Number IE may be included in the HNB REGISTER ACCEPT message.
+If supported, the HNB may include the Tunnel Information IE in the HNB REGISTER REQUEST message.
+If the CELL_FACH Mobility Support IE is included in the HNB REGISTER REQUEST message, the HNB-GW shall, if supported, include the S-RNTI Prefix IE and in the HNB REGISTER ACCEPT message.
+If included in the HNB REGISTER REQUEST message, the HNB-GW may use the Neighbour Cell Identity List IE, the URA Identity List IE or the HNB Capacity IE when assigning the S-RNTI Prefix IE to the HNB.
+8.2.3	Unsuccessful Operation
+
+Figure 8.2.3-1: HNB Register Procedure: Un-Successful Operation
+If the HNB-GW cannot register the HNB, the HNB-GW will respond with a HNB REGISTER REJECT message.
+Typical cause values are:
+Radio Network Layer Cause:
+-	Unauthorised Location
+-	Unauthorised HNB
+-	Overload
+-	HNB Parameter Mismatch
+-	Unspecified
+If the Cause IE in the HNB REGISTER REJECT message is set to "overload", the HNB shall not retry registration to the same HNB-GW for at least the duration indicated in the Backoff Timer IE.
+8.2.4	Abnormal Conditions
+If the HNB-GW receives a duplicate HNB REGISTER REQUEST (i.e. for an already registered HNB identified by the same unique HNB identity), then the new HNB REGISTER REQUEST shall override the existing registration and the handling of the new HNB REGISTER REQUEST shall be performed according to subclause 8.2.
+8.3	HNB De-registration Procedure
+8.3.1	Successful Operation (HNB Originated)
+
+Figure 8.3.1-1: HNB De-register Procedure: Successful Operation
+The HNB will initiate this procedure whenever it needs to terminate operations.
+The HNB-GW shall clear all related resources associated with the HNB.
+Typical cause values are:
+Radio Network Layer Cause:
+-	Normal
+-	Unspecified
+8.3.2	Successful Operation (HNB-GW Originated)
+
+Figure 8.3.2-1: HNB De-register Procedure: Successful Operation
+The HNB-GW will initiate this procedure whenever it needs to terminate operations with a HNB.
+The HNB-GW shall clear all related resources associated with the HNB.
+Typical cause values are:
+Radio Network Layer Cause:
+-	Overload
+-	Unspecified
+If the Cause IE in the HNB DE-REGISTER message is set to "overload", the HNB shall not retry registration to the same HNB-GW for at least the duration indicated in the Backoff Timer IE.
+8.3.3	Abnormal Conditions
+-
+8.4	UE Registration
+8.4.1	General
+The UE Registration procedure provides means for the HNB to convey UE identification data to the HNB-GW in order to perform access control for the UE in the HNB-GW.  The UE Registration also establishes a UE specific context identifier to be used between HNB and HNB-GW. The procedure is triggered when the UE attempts to access the HNB via an initial NAS message and there is no context in the HNB allocated for that UE.
+8.4.2	Successful Operation
+
+Figure 8.4.2-1: UE Register Procedure: Successful Operation
+The HNB shall initiate the procedure by sending a UE REGISTER REQUEST message to the HNB-GW including UE specific data. The HNB shall always include within the UE Identity IE the UE permanent identity (i.e. IMSI) if it does not serve a CSG cell or for registration of UEs without CSG capability except if the Registration Cause IE indicates "emergency call".
+The HNB-GW shall perform access control or membership verification in case of non-CSG UEs or non-CSG HNBs. If the HNB does not operate in closed access mode or access control is successful, the HNB-GW shall respond with a UE REGISTER ACCEPT message including the Context-ID IE. 
+The UE REGISTER ACCEPT message may include the CSG Membership Status IE for the UE registering to the cell.
+The HNB-GW shall not perform access control if the Registration Cause IE indicates "emergency call".
+8.4.3	Unsuccessful Operation
+
+Figure 8.4.3-1: UE Register Procedure: Unsuccessful Operation
+If the HNB-GW is unable to accept the UE registration it shall reject the procedure with a UE REGISTER REJECT message. 
+Typical Cause values:
+Radio Network Layer Cause:
+-	Invalid UE identity
+-	UE not allowed on this HNB
+-	HNB not registered
+-	Unspecified
+8.4.4	Abnormal Conditions
+-
+8.5	UE De-Registration
+8.5.1	General
+The purpose of the UE De-Registration Procedure is to request the release of a UE context in the HNB-GW or the HNB.
+8.5.2	Successful Operation (HNB Originated)
+
+Figure 8.5.2-1: UE De-Register Procedure: HNB Originated Successful Operation 
+The HNB shall initiate the procedure by sending a UE DE-REGISTER message. When receiving the UE DE-REGISTER message the HNB-GW shall release the resources associated with that UE including the Context-ID.
+Typical Cause values:
+Radio Network Layer Cause:
+-	Connection with UE lost
+-	UE RRC Release
+-	Unspecified
+-	UE relocated
+8.5.3	Successful Operation (HNB-GW Originated)
+
+Figure 8.5.3-1: UE De-Register Procedure: HNB-GW Originated Successful Operation 
+The HNB-GW shall initiate the procedure by sending a UE DE-REGISTER message. When receiving the UE DE-REGISTER message the HNB shall release the resources associated with the provided Context-ID.
+Typical Cause values:
+Radio Network Layer Cause:
+-	UE Registered in another HNB
+-	Unspecified
+-	UE not allowed on this HNB
+8.5.4	Abnormal Conditions
+--
+8.6	Error Indication
+8.6.1	General
+The Error Indication procedure is initiated by either the HNB or the HNB-GW to report detected errors in one incoming message, provided they cannot be reported by an appropriate failure message.
+8.6.2	Successful Operation
+
+Figure 8.6.2-1 Error Indication HNB Originated, Successful Operation
+
+Figure 8.6.2-2: Error Indication HNB-GW Originated, Successful Operation
+When the conditions defined in clause 10 are fulfilled, the Error Indication procedure is initiated by an ERROR INDICATION message sent from the node receiving an erroneous HNBAP message.
+8.7	CSG Membership Update Procedure
+8.7.1	Successful Operation
+
+Figure 8.7.1-1: CSG Membership Update: Successful Operation
+The HNB-GW shall initiate this procedure whenever it needs to indicate a change of a UE's CSG membership status to the HNB.
+8.7.2	Abnormal Conditions
+-
+8.8	Void
+8.8.1	Void
+8.8.2	Void
+8.8.3	Void
+8.9	TNL Update
+8.9.1	General
+The purpose of the TNL Update procedure is to provide the HNB-GW with updated TNL information for the indicated RABs.
+8.9.2	Successful Operation
+
+Figure 8.9.2-1: TNL Update procedure: Successful operation.
+The HNB initiates the procedure by sending the TNL UPDATE REQUEST message to the HNB-GW.
+Upon reception of the TNL UPDATE REQUEST message, the HNB-GW may start sending user data on the user plane to the target HNB. The HNB-GW shall respond with a TNL UPDATE RESPONSE message if the HNB-GW succeeds to establish TNL resources for the RABs indicated within the TNL UPDATE REQUEST message.
+8.9.3	Unsuccessful Operation
+
+
+Figure 8.9.3-1: TNL Update: Unsuccessful operation.
+If the HNB-GW fails to establish TNL resources for the RABs indicated within the TNL UPDATE REQUEST message the HNB-GW shall send the TNL UPDATE FAILURE message to the HNB with an appropriate cause value. 
+8.9.4	Abnormal Conditions
+-
+8.10	HNB Configuration Transfer Procedure
+8.10.1	General
+The purpose of the HNB Configuration Transfer procedure is to obtain IP address information and other necessary information for establishing Iurh connections between HNBs.
+8.10.2	Successful Operation
+
+
+Figure 8.10.2-1: HNB Configuration Transfer Procedure: Successful Operation
+The HNB initiates this procedure by sending an HNB CONFIGURATION TRANSFER REQUEST message to the HNB-GW in order to retrieve the IP address and other necessary information for each neighbour HNB indicated in the Neighbour Information Request List IE. The HNB shall only request configuration information for those neighbour HNBs for which information has not already been received.
+The HNB CONFIGURATION TRANSFER REQUEST shall contain information for all requested neighbour HNBs in the Neighbour Information Request List IE. Available neighbour information shall be indicated in the HNB Configuration Information Provided IE, if no neighbour information is available this shall be indicated in the HNB Configuration Information Missing IE with the Cause IE set to an appropriate value.
+If the HNB indicated the support for CELL_FACH/CELL_PCH/URA_PCH mobility at registration, the HNB-GW shall include the S-RNTI prefixes of the neighbour HNBs in the Neighbour Information List IE of the HNB CONFIGURATION TRANSFER RESPONSE message. If the HNB is also configured with a URA, the HNB-GW may include in the Neighbour Information List IE of the HNB CONFIGURATION TRANSFER RESPONSE message the URA Identity List IE of the neighbour HNBs.
+For each available neighbour information within the Neighbour Information List IE in the HNB CONFIGURATION TRANSFER RESPONSE message the HNB attempts establishing a transport layer session using the addresses provided in an ordered manner starting with the first entry of the list, if none is established yet, and an Iurh connection towards the related neighbour HNB.
+8.10.3	Void
+8.10.4	Abnormal Conditions
+-
+8.11	Relocation Complete
+8.11.1	General
+The purpose of the Relocation Complete procedure is to inform the HNB-GW that RNSAP Relocation at the Target-HNB has completed. The message indicates the RABs successfully established at the Target-HNB.
+8.11.2	Successful Operation
+
+Figure 8.11.2-1: Relocation Complete procedure. Successful operation.
+The Target-HNB initiates the procedure by sending the RELOCATION COMPLETE message to the HNB-GW.
+8.12	U-RNTI Query
+8.12.1	General
+The purpose of the U-RNTI Query procedure is to allow the target HNB to query the HNB-GW about the source HNB of a UE in CELL_FACH, CELL_PCH or URA_PCH state with unknown U-RNTI.
+8.12.2	Successful Operation
+
+
+Figure 8.12.2-1: U-RNTI Query procedure: Successful Operation
+The target HNB initiates this procedure by sending a U-RNTI QUERY REQUEST message to the HNB-GW in order to request configuration information for a specific U-RNTI from the HNB-GW.
+9	Elements for HNBAP Communication
+9.1	Message Functional Definition and Content
+9.1.1	General
+Subclause 9.1 presents the contents of HNBAP messages in tabular format. The corresponding ASN.1 definition is presented in subclause 9.3. In case there is contradiction between the tabular format in subclause 9.1 and the ASN.1 definition, the ASN.1 shall take precedence, except for the definition of conditions for the presence of conditional IEs, where the tabular format shall take precedence.
+NOTE:	The messages have been defined in accordance to the guidelines specified in TR 25.921 [5].
+For each message there is, a table listing the signalling elements in their order of appearance in the transmitted message.
+9.1.2	Message Contents
+9.1.2.1	Presence
+All information elements in the message descriptions below are marked mandatory, optional or conditional according to table 3
+Table 3: Meaning of abbreviations used in HNBAP messages
+Abbreviation
+Meaning
+M
+IE's marked as Mandatory (M) will always be included in the message.
+O
+IE's marked as Optional (O) may or may not be included in the message.
+C
+IE's marked as Conditional (C) will be included in a message only if the condition is satisfied. Otherwise the IE is not included.
+
+9.1.2.2	Criticality
+Each Information Element or Group of Information Elements may have criticality information applied to it.
+Following cases are possible.
+Table 4: Meaning of content within "Criticality" column
+Abbreviation
+Meaning
+
+–
+No criticality information is applied explicitly.
+YES
+Criticality information is applied. This is usable only for non-repeatable IEs 
+GLOBAL
+The IE and all its repetitions together have one common criticality information. This is usable only for repeatable IEs.
+EACH
+Each repetition of the IE has its own criticality information. It is not allowed to assign different criticality values to the repetitions. This is usable only for repeatable IEs.
+
+9.1.2.3	Range
+The Range column indicates the allowed number of copies of repetitive IEs/IE groups.
+9.1.2.4	Assigned Criticality
+This column provides the actual criticality information as defined in subclause 10.3.2, if applicable.
+9.1.3	HNB REGISTER REQUEST
+This message is sent by the HNB to the HNB-GW to register the HNB at the HNB-GW.
+Direction: 	HNB  HNB-GW
+PARAMETER
+PRESENCE
+RANGE
+IE Type and Reference
+Semantics Description
+Criticality
+Assigned Criticality
+Message Type
+M
+
+9.2.1
+
+YES
+reject
+HNB Identity
+M
+
+9.2.2
+
+YES
+reject
+HNB Location Information
+M
+
+9.2.3
+
+YES
+reject
+PLMN-ID
+M
+
+9.2.14
+
+YES
+reject
+Cell-ID
+M
+
+9.2.25
+
+YES
+reject
+LAC
+M
+
+9.2.11
+
+YES
+reject
+RAC
+M
+
+9.2.12
+
+YES
+reject
+SAC
+M
+
+9.2.13
+
+YES
+reject
+CSG-ID
+O
+
+9.2.27
+
+YES
+reject
+Service Area For Broadcast
+O
+
+SAC
+9.2.13
+
+YES
+ignore
+HNB Cell Access Mode
+O
+
+9.2.31
+
+YES
+reject
+PSC
+O
+
+9.2.41
+
+YES
+ignore
+Iurh signalling TNL Address
+O
+
+IP Address
+9.2.8
+HNB IP address used for direct Iurh connectivity
+YES
+ignore
+Tunnel Information
+O
+
+9.2.44
+
+YES
+ignore
+CELL_FACH Mobility Support
+O
+
+9.2.45
+
+YES
+ignore
+Neighbour Cell Identity List
+
+0 to <maxnoofAdditionalNeighbours>
+
+
+GLOBAL
+ignore
+>Neighbour Identity
+
+
+9.2.51
+
+
+
+URA Identity List
+
+0 to <maxnoofURAIdentities>
+
+
+GLOBAL
+ignore
+>URA Identity
+
+
+9.2.47
+
+
+
+HNB Capacity
+O
+
+9.2.50
+
+YES
+ignore
+
+Range bound
+Explanation
+maxnoofAdditionalNeighbours
+Maximum number of additional neighbour cells associated to a given HNB. Value is 128.
+maxnoofURAIdentities
+Maximum number of URA Identities assigned to a HNB. Value is 8.
+
+9.1.4	HNB REGISTER ACCEPT
+This message is sent by the HNB-GW to the HNB as a successful response to a HNB REGISTER REQUEST message.
+Direction: 	HNB-GW  HNB
+PARAMETER
+PRESENCE
+RANGE 
+IE Type and Reference
+Semantics Description
+Criticality
+Assigned Criticality
+Message Type
+M
+
+9.2.1
+
+YES
+reject
+RNC-ID
+M
+
+9.2.26
+
+YES
+reject
+Mux Port Number
+O
+
+9.2.29
+The mux port number at which HNB-GW expects to receive multiplexed packets.
+YES
+ignore
+Iurh signalling TNL Address
+O
+
+IP Address
+9.2.8
+HNB-GW IP address used for Iurh connectivity via/to the HNB-GW
+YES
+ignore
+S-RNTI Prefix
+O
+
+9.2.46
+To be used together with the HNB-GW RNC-ID when assigning U-RNTI to UE.
+YES
+ignore
+
+9.1.5	HNB REGISTER REJECT
+This message is sent by the HNB-GW to the HNB as unsuccessful response to a HNB REGISTER REQUEST message.
+Direction: 	HNB-GW  HNB
+PARAMETER
+PRESENCE
+RANGE 
+IE Type and Reference
+Semantics Description
+Criticality
+Assigned Criticality
+Message Type
+M
+
+9.2.1
+
+YES
+reject
+Cause
+M
+
+9.2.15
+
+YES
+ignore
+Criticality Diagnostics
+O
+
+9.2.16
+
+YES
+ignore
+Backoff Timer
+C-ifOverload
+
+9.2.28
+
+YES
+reject
+
+Condition
+Explanation
+IfOverload
+This IE shall be present if the Cause IE is set to "Overload".
+
+9.1.6	UE REGISTER REQUEST
+This message is sent by the HNB to the HNB-GW to register a UE at HNB-GW for service.
+Direction: 	HNB  HNB-GW
+PARAMETER
+PRESENCE
+RANGE
+IE Type and Reference
+Semantics Description
+Criticality
+Assigned Criticality
+Message Type
+M
+
+9.2.1
+
+YES
+reject
+UE Identity
+M
+
+9.2.17
+
+YES
+reject
+Registration Cause
+M
+
+9.2.21
+
+YES
+ignore
+UE Capabilities
+M
+
+9.2.24
+
+YES
+reject
+
+9.1.7	UE REGISTER ACCEPT
+This message is sent by the HNB-GW to the HNB as a successful response to a UE REGISTER REQUEST message.
+Direction: 	HNB-GW  HNB
+PARAMETER
+PRESENCE
+RANGE 
+IE Type and Reference
+Semantics Description
+Criticality
+Assigned Criticality
+Message Type
+M
+
+9.2.1
+
+YES
+reject
+UE Identity
+M
+
+9.2.17
+
+YES
+reject
+Context-ID
+M
+
+9.2.9
+
+YES
+reject
+CSG Membership Status
+O
+
+9.2.30
+
+YES
+reject
+
+9.1.8	UE REGISTER REJECT
+This message is sent by the HNB-GW to the HNB as unsuccessful response to a UE REGISTER REQUEST message.
+Direction: 	HNB-GW  HNB
+PARAMETER
+PRESENCE
+RANGE 
+IE Type and Reference
+Semantics Description
+Criticality
+Assigned Criticality
+Message Type
+M
+
+9.2.1
+
+YES
+reject
+UE Identity
+M
+
+9.2.17
+
+YES
+reject
+Cause
+M
+
+9.2.15
+
+YES
+ignore
+Criticality Diagnostics
+O
+
+9.2.16
+
+YES
+ignore
+
+9.1.9	HNB DE-REGISTER 
+This message is sent by the HNB to the HNB-GW or HNB-GW to HNB to deregister the HNB,
+Direction: 	HNB  HNB-GW or HNB-GW  HNB
+PARAMETER
+PRESENCE
+RANGE 
+IE Type and Reference
+Semantics Description
+Criticality
+Assigned Criticality
+Message Type
+M
+
+9.2.1
+
+YES
+ignore
+Cause
+M
+
+9.2.15
+
+YES
+ignore
+Backoff Timer
+C-ifOverload
+
+9.2.28
+
+YES
+reject
+
+Condition
+Explanation
+IfOverload
+This IE shall be present if the Cause IE is set to "Overload".
+
+9.1.10	UE DE-REGISTER
+This message is sent by the HNB to the HNB-GW or HNB-GW to HNB to de-register a UE.
+Direction: 	HNB  HNB-GW, HNB-GW  HNB
+PARAMETER
+PRESENCE
+RANGE
+IE Type and Reference
+Semantics Description
+Criticality
+Assigned Criticality
+Message Type
+M
+
+9.2.1
+
+YES
+ignore
+Context-ID
+M
+
+9.2.9
+
+YES
+reject
+Cause
+M
+
+9.2.15
+
+YES
+ignore
+
+9.1.11	ERROR INDICATION
+This message is sent by the HNB to HNB-GW or HNB-GW to HNB and is used to indicate that some errors have been detected.
+Direction: 	HNB  HNB-GW, HNB-GW  HNB
+PARAMETER
+PRESENCE
+RANGE 
+IE Type and Reference
+Semantics Description
+Criticality
+Assigned Criticality
+Message Type
+M
+
+9.2.1
+
+YES
+ignore
+Cause
+M
+
+9.2.15
+
+YES
+ignore
+Criticality Diagnostics
+O
+
+9.2.16
+
+YES
+ignore
+
+9.1.12	CSG MEMBERSHIP UPDATE
+This message is sent by the HNB-GW to HNB to indicate CSG Membership changes to the HNB.
+Direction: 	HNB-GW  HNB
+PARAMETER
+PRESENCE
+RANGE
+IE Type and Reference
+Semantics Description
+Criticality
+Assigned Criticality
+Message Type
+M
+
+9.2.1
+
+YES
+ignore
+Context-ID
+M
+
+9.2.9
+
+YES
+reject
+CSG Membership Status
+M
+
+9.2.30
+
+YES
+reject
+
+9.1.13	Void
+9.1.14	Void
+9.1.15	TNL UPDATE REQUEST
+This message is sent by the HNB to the HNB-GW to inform the GW of new TNL information for the referenced RABs.
+Direction: 	HNB  HNB-GW
+PARAMETER
+PRESENCE
+RANGE
+IE Type and Reference
+Semantics Description
+Criticality
+Assigned Criticality
+Message Type
+M
+
+9.2.1
+
+YES
+reject
+Context-ID
+M
+
+9.2.9
+
+YES
+reject
+RAB List 
+M
+
+9.2.32
+
+YES
+reject
+Update Cause
+M
+
+9.2.39
+
+YES
+reject
+
+9.1.16	TNL UPDATE RESPONSE
+This message is sent by the HNB-GW to inform the HNB that a TNL update switch has been successfully completed in the HNB-GW.
+Direction: 	HNB-GW  HNB
+PARAMETER
+PRESENCE
+RANGE
+IE Type and Reference
+Semantics Description
+Criticality
+Assigned Criticality
+Message Type
+M
+
+9.2.1
+
+YES
+reject
+Context-ID
+M
+
+9.2.9
+
+YES
+reject
+
+9.1.17	TNL UPDATE FAILURE
+This message is sent by the HNB-GW to inform the HNB that a failure has occurred during the TNL update procedure.
+Direction: 	HNB-GW  HNB
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+Criticality
+Assigned Criticality
+Message Type
+M
+
+9.2.1
+
+YES
+reject
+Context-ID
+M
+
+9.2.9
+
+YES
+reject
+Cause
+M
+
+9.2.15
+
+YES
+ignore
+Criticality Diagnostics
+O
+
+9.2.16
+
+YES
+ignore
+
+9.1.18	HNB CONFIGURATION TRANSFER REQUEST
+This message is sent by the HNB to the HNB-GW to request configuration information for neighbouring HNBs.
+Direction: 	HNB  HNB-GW 
+PARAMETER
+PRESENCE
+RANGE
+IE Type and Reference
+Semantics Description
+Criticality
+Assigned Criticality
+Message Type
+M
+
+9.2.1
+
+YES
+reject
+Neighbour Information Request List
+M
+
+
+
+YES
+reject
+>Neighbour Information Request
+
+1 to <maxnoofNeighbours>
+HNB RNL Identity
+9.2.36
+
+-
+
+
+Range bound
+Explanation
+maxnoofNeighbours
+Maximum number of neighbour cells associated to a given HNB. Value is 32.
+
+9.1.19	HNB CONFIGURATION TRANSFER RESPONSE
+This message is sent by the HNB-GW to the HNB as a response to a HNB CONFIGURATION TRANSFER REQUEST message.
+Direction: 	HNB-GW  HNB 
+PARAMETER
+PRESENCE
+RANGE
+IE Type and Reference
+Semantics Description
+Criticality
+Assigned Criticality
+Message Type
+M
+
+9.2.1
+
+YES
+reject
+Neighbour Information List
+M
+
+
+
+YES
+reject
+>Neighbour Information
+
+1 to <maxnoofNeighbours>
+HNB Configuration Information 9.2.40
+
+-
+
+Additional Neighbour Information List
+O
+
+
+
+YES
+ignore
+>Neighbour Information
+
+1 to <maxnoofAdditionalNeighbours>
+HNB Configuration Information 9.2.40
+
+-
+
+
+Range bound
+Explanation
+maxnoofNeighbours
+Maximum number of neighbour cells associated to a given HNB. Value is 32.
+maxnoofAdditionalNeighbours
+Maximum number of additional neighbour cells associated to a given HNB. Value is 128.
+
+9.1.20	Void
+9.1.21	RELOCATION COMPLETE 
+This message is sent by the HNB to inform the HNB-GW that a relocation is completed.
+Direction: HNB  HNB GW
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+Criticality
+Assigned Criticality
+Message Type
+M
+
+9.2.1
+
+YES
+ignore
+Context-ID
+M
+
+9.2.9
+
+YES
+ignore
+
+9.1.22	U-RNTI QUERY REQUEST 
+This message is sent by the HNB to request configuration information for a specific U-RNTI from the HNB-GW.
+Direction: HNB  HNB GW
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+Criticality
+Assigned Criticality
+Message Type
+M
+
+9.2.1
+
+YES
+reject
+U-RNTI
+M
+
+9.2.48
+
+YES
+reject
+
+9.1.23	U-RNTI QUERY RESPONSE
+This message is sent by the HNB-GW to provide the requested information for a specific U-RNTI.
+Direction: HNB-GW  HNB
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+Criticality
+Assigned Criticality
+Message Type
+M
+
+9.2.1
+
+YES
+reject
+CHOICE HNB-GW response
+M
+
+
+
+YES
+reject
+>HNB
+
+
+
+
+
+
+>>HNB Configuration Information
+M
+
+9.2.40
+
+-
+
+>Macro RNC
+
+
+
+
+
+
+>>RNC-ID
+M
+
+9.2.26
+
+-
+
+>Unknown U-RNTI Indication
+
+
+
+
+
+
+>>Unknown U-RNTI Indication
+M
+
+9.2.49
+
+-
+
+
+9.2	Information Element Definitions
+9.2.0	General
+Subclause 9.2 presents the HNBAP IE definitions in tabular format. The corresponding ASN.1 definition is presented in subclause 9.3. In case there is contradiction between the tabular format in subclause 9.2 and the ASN.1 definition, the ASN.1 shall take precedence, except for the definition of conditions for the presence of conditional elements, where the tabular format shall take precedence.
+When specifying information elements which are to be represented by bit strings, if not otherwise specifically stated in the semantics description of the concerned IE or elsewhere, the following principle applies with regards to the ordering of bits:
+-	The first bit (leftmost bit) contains the most significant bit (MSB);
+-	The last bit (rightmost bit) contains the least significant bit (LSB);
+-	When importing bit strings from other specifications, the first bit of the bit string contains the first bit of the concerned information;
+9.2.1	Message Type
+Message Type IE uniquely identifies the message being sent. It is mandatory for all messages.
+IE/GROUP NAME
+Presence
+Range
+IE Type and Reference
+Semantics Description
+Message Type
+
+
+
+
+>Procedure Code
+M
+
+INTEGER(0..255)
+
+>Type of Message 
+M
+
+ENUMERATED (Initiating Message, Successful Outcome, Unsuccessful Outcome, Outcome)
+
+
+9.2.2	HNB Identity
+HNB Identity IE is sent from the HNB to the HNB-GW and identities the HNB.
+IE/GROUP NAME
+Presence
+Range 
+IE Type and Reference
+Semantics Description
+HNB Identity
+
+
+OCTET STRING (SIZE(1..255))
+See note below.
+
+Note:
+The octet string shall take form of a Network Access Identifier (NAI) as defined in IETF RFC 4282 [13]. The format of the HNB-Identity will be:
+0<IMSI>@<realm>
+Or 
+1<OUI>-<SerialNumber>@<realm>
+Where <IMSI> is a 16 digit number coded as specified in TS 23.003 [12];
+and <OUI> and <SerialNumber> are coded as specified in TR-069 [14].
+9.2.3	HNB Location Information
+The HNB Location Information IE is sent from the HNB to HNB-GW to provide information on the location of the HNB.
+IE/GROUP NAME
+PRESENCE
+RANGE 
+IE Type and Reference
+Semantics Description
+Criticality
+Assigned Criticality
+HNB Location Information
+
+1
+
+
+-
+-
+>Macro Coverage Information
+O
+
+9.2.7
+
+-
+-
+>Geographic Location
+O
+
+9.2.4
+
+-
+-
+>HNB Internet Information
+O
+
+IP Address
+9.2.8
+
+YES
+reject
+
+9.2.4	Geographical Location
+This IE identifies the Ellipsoid point with altitude as in ref TS 23.032 [4].
+IE/GROUP NAME
+PRESENCE
+RANGE
+IE type and reference
+Semantics description
+Geographical Coordinates
+M
+
+9.2.5
+
+Altitude and Direction
+M
+
+9.2.6
+
+
+9.2.5	Geographical Coordinates
+This IE contains the geographical coordinates of an ellipsoid point.
+IE/GROUP NAME
+PRESENCE
+RANGE
+IE type and reference
+Semantics description
+Latitude Sign
+M
+
+ENUMERATED (North, South)
+
+Degrees Of Latitude
+M
+
+INTEGER (
+0..223-1)
+The IE value (N) is derived by this formula:
+N223 X /90  N+1
+X being the latitude in degree (0°.. 90°)
+Degrees Of Longitude
+M
+
+INTEGER (
+-223..223-1)
+The IE value (N) is derived by this formula:
+N224 X /360  N+1
+X being the longitude in degree (-180°..+180°)
+
+9.2.6	Altitude and Direction
+This IE contains the altitude and direction of an ellipsoid point.
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+Altitude and direction
+
+1
+
+
+>Direction of Altitude
+M
+
+ENUMERATED (Height, Depth)
+
+
+>Altitude
+M
+
+INTEGER (
+0..215-1)
+The relation between the value (N) and the altitude (a) in meters it describes is N a <N+1, except for N=215-1 for which the range is extended to include all grater values of (a).
+
+9.2.7	Macro Coverage Information
+The Macro Coverage Information IE identifies the macro cell used by the HNB for location. This may be e.g. a GERAN Cell ID or a UTRAN Cell ID.
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+CHOICE Cell Identifier
+
+
+
+
+>UTRAN Cell ID Information
+
+
+
+
+>>LAC
+M
+
+9.2.11
+
+>>RAC
+M
+
+9.2.12
+
+>>PLMN-ID
+M
+
+9.2.14
+
+>>Cell-ID
+M
+
+9.2.25
+
+>GERAN Cell ID Information
+
+
+
+
+>>PLMN-ID
+M
+
+9.2.14
+
+>>LAC
+M
+
+9.2.11
+0000 and FFFE not allowed.
+>>CI
+M
+
+OCTET STRING (SIZE(2))
+
+
+9.2.8	IP Address
+This IE defines an IP address.
+IE/GROUP NAME
+Presence
+Range 
+IE Type and Reference
+Semantics Description
+CHOICE IP Address
+
+
+
+
+>IPV4
+
+
+
+
+>>Internet Address ipv4
+M
+
+OCTET STRING(SIZE(4))
+
+>IPV6
+
+
+
+
+>>Internet Address ipv6
+M
+
+OCTET STRING(SIZE(16))
+
+
+9.2.9	Context-ID
+The Context-ID IE uniquely identifies a particular UE in the HNB and HNB-GW. This unique Context-ID is used for PS and CS domain.
+IE/GROUP NAME
+Presence
+Range 
+IE Type and Reference
+Semantics Description
+Context-ID
+
+
+BIT STRING(SIZE(24))
+
+
+9.2.10	IMSI
+The IMSI is used to uniquely identify a UE.
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+IMSI
+
+
+OCTET STRING (SIZE (3..8))
+- digits 0 to 9, encoded 0000 to 1001,
+- 1111 used as filler digit,
+two digits per octet,
+- bit 4 to 1 of octet n encoding digit 2n-1
+- bit 8 to 5 of octet n encoding digit 2n
+
+-Number of decimal digits shall be from 6 to 15 starting with the digits from the PLMN identity.
+When the IMSI is made of an odd number of digits, the filler digit shall be added at the end to make an even number of digits of length 2N. The filler digit shall then be consequently encoded as bit 8 to 5 of octet N.
+
+9.2.11	LAC
+This element is used to identify a Location Area.
+IE/GROUP NAME
+Presence
+Range 
+IE Type and Reference
+Semantics Description
+LAC
+
+
+OCTET STRING(SIZE(2))
+
+
+9.2.12	RAC
+This element is used to identify a Routing Area within a Location Area. It is used for PS services.
+IE/GROUP NAME
+Presence
+Range 
+IE Type and Reference
+Semantics Description
+RAC
+
+
+OCTET STRING(SIZE(1))
+
+
+9.2.13	SAC
+The SAC identifies the Service Area.
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+SAC
+
+
+OCTET STRING (SIZE(2))
+
+
+9.2.14	PLMN-ID
+The PLMN-ID identifies a Public Land Mobile Network.
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+PLMN-ID
+
+
+OCTET STRING (SIZE (3))
+- digits 0 to 9, encoded 0000 to 1001,
+- 1111 used as filler digit, two digits per octet,
+- bits 4 to 1 of octet n encoding digit 2n-1- bits 8 to 5 of octet n encoding digit 2n
+
+-The PLMN identity consists of 3 digits from MCC followed by either 
+- a filler digit plus 2 digits from MNC (in case of 2 digit MNC) or 
+- 3 digits from MNC (in case of a 3 digit MNC).
+
+9.2.15	Cause
+The Cause IE indicates the reason for a particular error event for the HNBAP protocol.
+IE/Group Name
+Presence
+Range
+IE Type and Reference
+Semantics Description
+CHOICE Cause Group
+
+
+
+
+>Radio Network Layer
+
+
+
+
+>>Radio Network Layer Cause
+M
+
+ENUMERATED
+(
+overload,
+unauthorised-Location,
+unauthorised-HNB,
+HNB Parameter mismatch,
+Invalid UE identity,
+UE not allowed on this HNB,
+UE unauthorised,
+Connection with UE lost,
+UE RRC Release,
+HNB not registered,
+unspecified,
+Normal,
+UE relocated,
+UE Registered in another HNB,
+...,
+No Neighbour Information available,
+Iurh connection to that Neighbour not Allowed
+)
+
+>Transport Layer 
+
+
+
+
+>>Transport Layer Cause 
+M
+
+ENUMERATED
+(Transport Resource Unavailable,
+Unspecified,
+...)
+
+>Protocol
+
+
+
+
+>>Protocol Cause 
+M
+
+ENUMERATED
+(Transfer Syntax Error,
+Abstract Syntax Error (Reject),
+Abstract Syntax Error (Ignore and Notify),
+Message not Compatible with Receiver State,
+Semantic Error,
+Unspecified,
+Abstract Syntax Error (Falsely Constructed Message),
+...)
+
+>Misc
+
+
+
+
+>>Misc Cause 
+M
+
+ENUMERATED
+(Processing Overload,
+Hardware Failure,
+O&M Intervention,
+Unspecified,
+...)
+
+
+The meaning of the different cause values is described in the following table. Cause values for information ‘not valid’ indicates that the information is not valid in the context that it was received.
+Radio Network Layer cause
+Meaning
+Connection with UE lost
+The connection to a Registered UE has been lost
+HNB not registered
+The HNB is not registered on this gateway
+HNB Parameter Mismatch
+The HNB-GW cannot register the HNB because of mismatch in parameters between HNB and HNB-GW
+Invalid UE identity
+The UE ID supplied for UE registration is not valid
+Iurh connection to that Neighbour not Allowed
+Any Iurh connection to the indicated neighbour is not allowed.
+No Neighbour Information available
+The requested neighbour information is not available.
+Normal
+No error has occurred
+Overload
+The HNB-GW cannot handle the HNB due to overload.
+UE not allowed on this HNB
+The UE is identified as not being allowed to use services on this HNB. (temporary rejection)
+UE not authorised
+The UE is identified as not being allowed to use services on a HNB (permanent rejection).
+UE Registered in another HNB
+The UE has already registered in another HNB on same HNB-GW.
+UE relocated
+The UE has been relocated to a neighbouring cell
+UE RRC release
+The Registered UE’s RRC is released (e.g. due to IMSI detach NAS procedure)
+Unauthorised-HNB
+The HNB-GW cannot register the HNB because its supplied information is not considered valid
+Unauthorised-Location
+The HNB-GW cannot register the HNB because the location information provided is not valid.
+Unspecified
+Sent when none of the above cause values applies but still the cause is Radio Network layer related.
+
+Transport Network Layer cause
+Meaning
+Transport resource unavailable
+The required transport resources are not available.
+Unspecified
+Sent when none of the above cause values applies but still the cause is Transport Network layer related.
+
+Protocol cause
+Meaning
+Abstract Syntax Error (Reject)
+The received message included an abstract syntax error and the concerned criticality indicated "reject".
+Abstract Syntax Error (Ignore and Notify)
+The received message included an abstract syntax error and the concerned criticality indicated "ignore and notify".
+Abstract syntax error (falsely constructed message)
+The received message contained IEs in wrong order or with too many occurrences.
+Message not Compatible with Receiver State
+The received message was not compatible with the receiver state.
+Semantic Error
+The received message included a semantic error.
+Transfer Syntax Error
+The received message included a transfer syntax error.
+Unspecified
+Sent when none of the above cause values applies but still the cause is protocol related.
+
+Miscellaneous cause
+Meaning
+Hardware Failure
+HNB hardware failure.
+O&M Intervention
+Operation and Maintenance intervention related to HNB.
+Processing Overload
+Control processing overload.
+Unspecified
+Sent when none of the above cause values applies and the cause is not related to any of the categories Radio Network Layer, Transport Network Layer or Protocol.
+
+9.2.16	Criticality Diagnostics
+The Criticality Diagnostics IE is sent by the HNB or the HNB-GW when parts of a received message have not been comprehended or were missing, or if the message contained logical errors. When applicable, it contains information about which IEs were not comprehended or were missing.
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+Criticality Diagnostics
+
+1
+
+
+>Procedure Code
+O
+
+INTEGER (0..255)
+Procedure Code is to be used if Criticality Diagnostics is part of Error Indication procedure, and not within the response message of the same procedure that caused the error
+>Triggering Message 
+O
+
+ENUMERATED
+(initiating message, successful outcome, unsuccessful outcome)
+The Triggering Message is used only if the Criticality Diagnostics is part of Error Indication procedure.
+>Procedure Criticality
+O
+
+ENUMERATED(reject, ignore, notify)
+This Procedure Criticality is used for reporting the Criticality of the Triggering message (Procedure). 
+Information Element Criticality Diagnostics
+
+0 to <maxNrOfErrors>
+
+
+>IE Criticality
+M
+
+ENUMERATED(reject, ignore, notify)
+The IE Criticality is used for reporting the criticality of the triggering IE. The value ’ignore’ shall not be used.
+>IE ID
+M
+
+INTEGER (0..65535)
+The IE Id of the not understood or missing IE 
+>Type of Error
+M
+
+ENUMERATED(not understood, missing, …)
+
+
+Range bound
+Explanation
+maxNrOfErrors
+Maximum no. of IE errors allowed to be reported with a single message. The value for maxNrOfErrors is 256.
+
+9.2.17	UE Identity
+This is a unique identifier for the UE. 
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+CHOICE UE Identity
+
+
+
+
+>IMSI
+
+
+
+
+>>IMSI
+
+
+9.2.10
+
+>TMSI and LAI (GSM-MAP)
+
+
+
+
+>>TMSI (GSM-MAP)
+M
+
+9.2.19
+
+>>LAI
+M
+
+9.2.20
+
+>P-TMSI and RAI (GSM-MAP)
+
+
+
+
+>>P-TMSI (GSM-MAP)
+M
+
+9.2.22
+
+>>RAI (GSM-MAP)
+M
+
+9.2.23
+
+>IMEI
+
+
+
+
+>>IMEI
+
+
+9.2.18
+
+>ESN (DS-41)
+
+
+
+
+>>ESN (DS-41)
+
+
+BIT STRING (SIZE (32))
+
+>IMSI(DS-41)
+
+
+
+
+>>IMSI (DS-41)
+
+
+OCTET STRING (SIZE (5..7))
+
+>IMSI and ESN (DS-41)
+
+
+
+
+>>ESN (DS-41)
+M
+
+BIT STRING(SIZE (32))
+
+>>IMSI (DS-41)
+M
+
+OCTET STRING (SIZE (5..7))
+
+>TMSI(DS-41)
+
+
+
+
+>>TMSI (DS-41)
+
+
+OCTET STRING (SIZE (2..17))
+
+
+9.2.18	IMEI
+This IE contains an International Mobile Equipment Identity.
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+IMEI
+
+
+BIT STRING(SIZE(60))
+
+
+9.2.19	TMSI (GSM-MAP)
+This IE contains a Temporary Mobile Subscriber Identity, used towards a GSM-MAP type of PLMN.
+Information Element/Group name
+Presence
+Range
+Type and reference
+Semantics description
+TMSI (GSM-MAP)
+
+
+
+BIT STRING (SIZE(32))
+The first/leftmost bit of the bit string contains the most significant bit of the TMSI.
+
+9.2.20	LAI
+Location Area Identification identifies uniquely a location area for a GSM-MAP type of PLMN.
+Information Element/Group name
+Presence
+Range
+Type and reference
+Semantics description
+PLMN-ID
+M
+
+9.2.14
+
+LAC
+M
+
+9.2.11
+ 
+
+9.2.21	Registration Cause
+This IE indicates if a UE registration is for an emergency call.
+Information Element/Group name
+Presence
+Range
+Type and reference
+Semantics description
+Registration cause
+
+
+Enumerated ( emergency call, normal, ...,
+ue-relocation)
+
+
+9.2.22	P-TMSI (GSM-MAP)
+This IE contains a Packet Temporary Mobile Subscriber Identity (P-TMSI), used towards a GSM-MAP type of PLMN.
+Information Element/Group name
+Presence
+Range
+Type and reference
+Semantics description
+P-TMSI
+
+
+BIT STRING (SIZE(32))
+The first/leftmost bit of the bit string contains the most significant bit of the P-TMSI.
+
+9.2.23	Routing Area Identification
+This IE identifies uniquely a routing area for a GSM-MAP type of PLMN.
+Information Element/Group name
+Presence
+Range
+Type and reference
+Semantics description
+LAI
+M
+
+9.2.20
+
+RAC
+M
+
+9.2.12
+
+
+9.2.24	UE Capabilities
+This IE identifies UE capabilities and release.
+Information Element/Group name
+Presence
+Range
+Type and reference
+Semantics description
+UE Capabilities
+
+1
+
+
+ >Access Stratum Release Indicator
+M
+
+Enumerated { R99, Rel-4, Rel-5, Rel-6, Rel-7, Rel-8-and-beyond,  …}
+Values as defined in TS 25.331 [10]
+ >CSG Capability 
+M
+
+Enumerated {CSG capable,
+Not CSG capable,
+…}
+Indicates a CSG capable UE.
+
+9.2.25	Cell-ID
+This IE identifies uniquely a cell within a PLMN, as defined in TS 25.331 [10].
+Information Element/Group name
+Presence
+Range
+Type and reference
+Semantics description
+Cell-ID
+
+
+BIT STRING (SIZE (28))
+This information element identifies a cell uniquely within a PLMN.
+
+9.2.26	RNC-ID
+The HNB uses the RNC-ID as specified in TS 25.467 [3].
+Information Element/Group name
+Presence
+Range
+Type and reference
+Semantics description
+RNC-ID
+
+
+INTEGER (0..65535)
+Values greater than 4095 are extended (16bit) RNC Ids.
+
+9.2.27	CSG-ID
+This IE indicates the CSG-ID of a particular HNB, as defined in TS 23.003 [12]
+Information Element/Group name
+Need
+Multi
+Type and reference
+Semantics description
+CSG-ID
+
+
+BIT STRING (SIZE(27))
+
+
+9.2.28	Backoff Timer
+The Backoff Timer IE indicates in seconds the minimum duration for which the HNB registration shall not be retried.
+Information Element/Group name
+Need
+Multi
+Type and reference
+Semantics description
+Backoff Timer
+
+
+INTEGER (0..3600)
+Value ‘0’ indicates no specified time.
+
+9.2.29	Mux Port Number
+This IE identifies the mux port number on which the HNB-GW expects the multiplexed packets from the HNB
+Information Element/Group name
+Presence
+Range
+Type and reference
+Semantics description
+Mux port number
+
+
+INTEGER (1024..65535)
+
+
+9.2.30	CSG Membership Status
+This element indicates the Membership status of the UE to a particular CSG.
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+CSG Membership Status
+M
+
+ENUMERATED (member, non-member,…) 
+
+
+9.2.31	HNB Cell Access Mode
+This information element indicates whether the cell of the HNB operates in a Closed, Hybrid, or Open Access mode as defined in TS 22.220 [15].
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+HNB Cell Access Mode
+M
+
+ENUMERATED(closed, hybrid, open, …)
+
+
+9.2.32	RAB List
+The RAB List IE indicates a list of old and new RAB transport information.
+IE/Group name
+Presence
+Range
+IE Type and reference
+Semantics description
+RAB List
+
+1 to <maxnoofRABs>
+
+
+>RAB ID
+M
+
+9.2.43
+
+>Old Transport Info
+M
+
+Transport Info
+9.2.33
+This IE shall be ignored by the HNB-GW.
+>New Transport Info
+M
+
+Transport Info
+9.2.33
+
+>CN Domain Indicator
+M
+
+9.2.37
+
+
+Range bound
+Explanation
+maxnoofRABs
+Maximum no. of RABs for one UE. Value is 256.
+
+9.2.33	Transport Info
+The Transport Info IE indicates transport network layer related information.
+IE/Group name
+Presence
+Range
+IE Type and reference
+Semantics description
+Transport Layer Address
+M
+
+9.2.34
+
+Transport Association
+M
+
+9.2.35
+
+
+9.2.34	Transport Layer Address
+This information element is an IP address to be used for the user plane transport. 
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+Transport Layer Address
+M
+
+BIT STRING (SIZE(1..160, …))
+
+
+9.2.35	Transport Association
+This element is used to associate the RAB and the corresponding transport bearer. For the CS domain this information element is the UDP port. In PS domain this information element is the GTP Tunnel Endpoint Identifier.
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+CHOICE Transport Association
+
+
+
+
+>GTP TEID
+
+
+OCTET STRING (SIZE(4))
+
+>Binding ID
+
+
+OCTET STRING (SIZE(1..4, ...))
+The UDP port is included in octet 1 and 2. The first octet of the UDP port field shall be included in the first octet of the Binding ID.
+
+9.2.36	HNB RNL Identity
+The HNB RNL Identity IE globally identifies an HNB.
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+Criticality
+Assigned Criticality
+CHOICE HNB RNL Identity
+
+
+
+
+-
+-
+>HNB Cell Identifier
+
+
+
+
+
+
+>>HNB Cell Identifier
+M
+
+9.2.42
+
+YES
+reject
+
+9.2.37	CN Domain Indicator
+The CN Domain Indicator IE globally identifies a CN domain.
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+CN Domain Indicator
+M
+
+ENUMERATED (CS domain, PS domain)
+
+
+9.2.38	Void
+
+9.2.39	Update Cause
+This IE indicates the reason for TNL update request.
+Information Element/Group name
+Presence
+Range
+Type and reference
+Semantics description
+Update cause
+
+
+ENUMERATED ( Relocation preparation, ...)
+
+
+9.2.40	HNB Configuration Information
+This IE contains configuration information of a HNB.
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+Criticality
+Assigned Criticality
+HNB RNL Identity
+M
+
+9.2.36
+
+-
+-
+CHOICE Configuration Information
+M
+
+
+
+-
+-
+>HNB Configuration Information Provided
+
+
+
+
+-
+-
+>>PSC
+O
+
+9.2.41
+
+-
+-
+>>CSG-ID
+O
+
+9.2.27
+
+-
+-
+>>HNB Cell Access Mode
+M
+
+9.2.31
+
+-
+-
+>>Iurh signalling TNL Address List
+
+1 to <maxnoofIurhAddresses>
+
+
+-
+-
+>>>Iurh signalling TNL address
+M
+
+IP address
+9.2.8
+
+-
+-
+>>S-RNTI Prefix
+O
+
+9.2.46
+
+YES
+ignore
+>>URA Identity List
+
+0 to <maxnoofURAIdentities>
+
+
+GLOBAL 
+ignore
+>>>URA Identity
+
+
+9.2.47
+
+-
+-
+>HNB Configuration Information Missing
+
+
+
+
+-
+-
+>>Cause
+M
+
+9.2.15
+
+-
+-
+
+Range bound
+Explanation
+maxnoofIurhAddresses
+Maximum no. of Iurh signalling TNL addresses provided. The value for MaxnoofIurhAddresses is 3.
+maxnoofURAIdentities
+Maximum number of URA Identities assigned to a HNB. Value is 8.
+
+9.2.41	PSC
+This IE contains the Primary Scrambling Code of the cell served by the HNB.
+Information Element/Group name
+Presence
+Range
+Type and reference
+Semantics description
+PSC
+
+
+BIT STRING (SIZE(9))
+
+
+9.2.42	HNB Cell Identifier
+This IE contains the information which identifies a HNB for which configuration information is requested.
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+PLMN-ID
+M
+
+9.2.14
+
+Cell-ID
+M
+
+9.2.25
+
+
+9.2.43	RAB ID
+This IE shall be used and encoded as defined in TS 25.413 [2].
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+RAB ID
+M
+
+BIT STRING (SIZE(8))
+
+
+9.2.44	Tunnel Information
+This information element contains the IP address and UDP port information.
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+IP Address
+M
+
+9.2.8
+HNB’s local IP Address assigned by the broadband access provider.
+UDP Port Number
+O
+
+OCTET STRING (SIZE(2))
+UDP Port Number if NAT/NAPT is deployed in the BBF access network.
+
+9.2.45	CELL_FACH Mobility Support
+This information element contains the indication of whether a HNB supports or not CELL_FACH/CELL_PCH/URA_PCH mobility.
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+CELL_FACH Mobility Support
+M
+
+ENUMERATED (Supported, ...)
+
+
+9.2.46	S-RNTI Prefix
+This information element contains the S-RNTI prefix assigned by the HNB-GW to the HNB. 
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+S-RNTI Prefix
+M
+
+BIT STRING (SIZE (1..16, …))
+
+
+9.2.47	URA Identity
+This information element contains the indication of the identity of a URA an HNB belongs to.
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+URA Identity
+M
+
+INTEGER (0..65535)
+
+
+9.2.48	U-RNTI
+This information element contains the U-RNTI. 
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+U-RNTI
+M
+
+BIT STRING (SIZE (32))
+
+
+9.2.49	Unknown U-RNTI Indication
+This information element contains the indication from the HNB-GW of whether a certain U-RNTI is unknown or not.
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+Unknown U-RNTI Indication
+M
+
+ENUMERATED (Unknown, ...)
+
+
+9.2.50	HNB Capacity
+This information element contains the indication of the HNB capacity for S-RNTI prefix assignment.
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+HNB Capacity
+M
+
+INTEGER (0...1000)
+HNB capacity in terms of supported concurrent RRC connections
+
+9.2.51	Neighbour Identity
+This information element contains the HNB RNL Identity or the macro Cell-ID the HNB indicates to the HNB-GW in order to obtain the S-RNTI Prefix.
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+CHOICE Neighbour Identity
+M
+
+
+
+>HNB
+
+
+
+
+>>HNB RNL Identity
+M
+
+9.2.36
+
+>Macro RNC
+
+
+
+
+>>Cell-ID
+M
+
+9.2.25
+
+
+9.3	Message and Information Element Abstract Syntax (with ASN.1)
+9.3.0	General
+HNBAP ASN.1 definition conforms with ITU-T Rec. X.680 [8] and ITU-T Rec. X.681 [9].
+The ASN.1 definition specifies the structure and content of HNBAP messages. HNBAP messages can contain any IEs specified in the object set definitions for that message without the order or number of occurrence being restricted by ASN.1. However, for this version of the standard, a sending entity shall construct a HNBAP message according to the PDU definitions module and with the following additional rules (Note that in the following IE means an IE in the object set with an explicit id. If one IE needed to appear more than once in one object set, then the different occurrences have different IE ids):
+-	IEs shall be ordered (in an IE container) in the order they appear in object set definitions.
+-	Object set definitions specify how many times IEs may appear. An IE shall appear exactly once if the presence field in an object has value "mandatory". An IE may appear at most once if the presence field in an object has value "optional" or "conditional". If in a tabular format there is multiplicity specified for an IE (i.e. an IE list) then in the corresponding ASN.1 definition the list definition is separated into two parts. The first part defines an IE container list where the list elements reside. The second part defines list elements. The IE container list appears as an IE of its own. For this version of the standard an IE container list may contain only one kind of list elements.
+If a HNBAP message that is not constructed as defined above is received, this shall be considered as Abstract Syntax Error, and the message shall be handled as defined for Abstract Syntax error in subclause 10.3.6.
+9.3.1	Usage of private message mechanism for non-standard use
+The private message mechanism for non-standard use may be used:
+-	for special operator- (and/or vendor) specific features considered not to be part of the basic functionality, i.e. the functionality required for a complete and high-quality specification in order to guarantee multivendor interoperability;
+-	by vendors for research purposes, e.g. to implement and evaluate new algorithms/features before such features are proposed for standardisation.
+The private message mechanism shall not be used for basic functionality. Such functionality shall be standardised.
+9.3.2	Elementary Procedure Definitions
+-- **************************************************************
+--
+-- Elementary Procedure definitions
+--
+-- **************************************************************
+HNBAP-PDU-Descriptions  { 
+itu-t (0) identified-organization (4) etsi (0) mobileDomain (0) 
+umts-Access (20) modules (3) hnbap(6) version1 (1) hnbap-PDU-Descriptions (0)}
+
+DEFINITIONS AUTOMATIC TAGS ::= 
+
+BEGIN
+
+-- **************************************************************
+--
+-- IE parameter types from other modules.
+--
+-- **************************************************************
+
+IMPORTS
+	Criticality,
+	ProcedureCode
+FROM HNBAP-CommonDataTypes
+
+	HNBRegisterRequest,
+	HNBRegisterAccept,
+	HNBRegisterReject,
+	HNBDe-Register,
+	UERegisterRequest,
+	UERegisterAccept,
+	UERegisterReject,
+	UEDe-Register,
+	ErrorIndication,
+	PrivateMessage,
+	CSGMembershipUpdate,
+	TNLUpdateRequest,
+	TNLUpdateResponse,
+	TNLUpdateFailure,
+	HNBConfigTransferRequest,
+	HNBConfigTransferResponse,
+	RelocationComplete,
+	U-RNTIQueryRequest,
+	U-RNTIQueryResponse
+
+
+FROM HNBAP-PDU-Contents
+	id-HNBRegister,
+	id-UERegister,
+	id-UEDe-Register,
+	id-HNBDe-Register,
+	id-ErrorIndication,
+	id-privateMessage,
+	id-CSGMembershipUpdate,
+	id-TNLUpdate,
+	id-HNBConfigTransfer,
+	id-RelocationComplete,
+	id-U-RNTIQuery
+
+FROM HNBAP-Constants;
+
+-- **************************************************************
+--
+-- Interface Elementary Procedure Class
+--
+-- **************************************************************
+
+HNBAP-ELEMENTARY-PROCEDURE ::= CLASS {
+	&InitiatingMessage			,
+	&SuccessfulOutcome			OPTIONAL,
+	&UnsuccessfulOutcome		OPTIONAL,
+	&procedureCode				ProcedureCode 	UNIQUE,
+	&criticality				Criticality 	DEFAULT ignore
+}
+
+WITH SYNTAX {
+	INITIATING MESSAGE			&InitiatingMessage
+	[SUCCESSFUL OUTCOME			&SuccessfulOutcome]
+	[UNSUCCESSFUL OUTCOME		&UnsuccessfulOutcome]
+	PROCEDURE CODE				&procedureCode
+	[CRITICALITY				&criticality]
+}
+
+-- **************************************************************
+--
+-- Interface PDU definitions
+--
+-- **************************************************************
+
+HNBAP-PDU ::= CHOICE {
+	initiatingMessage		InitiatingMessage,
+	successfulOutcome		SuccessfulOutcome,
+	unsuccessfulOutcome		UnsuccessfulOutcome,
+	...
+}
+
+
+InitiatingMessage ::= SEQUENCE {
+	procedureCode	HNBAP-ELEMENTARY-PROCEDURE.&procedureCode		({HNBAP-ELEMENTARY-PROCEDURES}),
+	criticality		HNBAP-ELEMENTARY-PROCEDURE.&criticality			({HNBAP-ELEMENTARY-PROCEDURES}{@procedureCode}),
+	value			HNBAP-ELEMENTARY-PROCEDURE.&InitiatingMessage	({HNBAP-ELEMENTARY-PROCEDURES}{@procedureCode})
+}
+
+SuccessfulOutcome ::= SEQUENCE {
+	procedureCode	HNBAP-ELEMENTARY-PROCEDURE.&procedureCode		({HNBAP-ELEMENTARY-PROCEDURES}),
+	criticality		HNBAP-ELEMENTARY-PROCEDURE.&criticality			({HNBAP-ELEMENTARY-PROCEDURES}{@procedureCode}),
+	value			HNBAP-ELEMENTARY-PROCEDURE.&SuccessfulOutcome	({HNBAP-ELEMENTARY-PROCEDURES}{@procedureCode})
+}
+
+UnsuccessfulOutcome ::= SEQUENCE {
+	procedureCode	HNBAP-ELEMENTARY-PROCEDURE.&procedureCode		({HNBAP-ELEMENTARY-PROCEDURES}),
+	criticality		HNBAP-ELEMENTARY-PROCEDURE.&criticality			({HNBAP-ELEMENTARY-PROCEDURES}{@procedureCode}),
+	value			HNBAP-ELEMENTARY-PROCEDURE.&UnsuccessfulOutcome	({HNBAP-ELEMENTARY-PROCEDURES}{@procedureCode})
+}
+
+-- **************************************************************
+--
+-- Interface Elementary Procedure List
+--
+-- **************************************************************
+
+HNBAP-ELEMENTARY-PROCEDURES HNBAP-ELEMENTARY-PROCEDURE ::= {
+	HNBAP-ELEMENTARY-PROCEDURES-CLASS-1	|
+	HNBAP-ELEMENTARY-PROCEDURES-CLASS-2	,
+	...
+}
+
+HNBAP-ELEMENTARY-PROCEDURES-CLASS-1 HNBAP-ELEMENTARY-PROCEDURE ::= {
+	hNBRegister|
+	uERegister,
+	...,
+	tnlUpdate|
+	hNBConfigTransfer|
+	u-RNTIQuery
+}
+
+
+HNBAP-ELEMENTARY-PROCEDURES-CLASS-2 HNBAP-ELEMENTARY-PROCEDURE ::= {
+	uEDe-Register |
+	hNBDe-Register |
+	errorIndication	|
+	privateMessage,
+	...,
+	csg-membership-update|
+	relocationComplete
+}
+
+-- **************************************************************
+--
+-- Interface Elementary Procedures
+--
+-- **************************************************************
+
+
+hNBRegister HNBAP-ELEMENTARY-PROCEDURE ::= {
+	INITIATING MESSAGE		HNBRegisterRequest
+	SUCCESSFUL OUTCOME		HNBRegisterAccept
+	UNSUCCESSFUL OUTCOME	HNBRegisterReject
+	PROCEDURE CODE			id-HNBRegister
+	CRITICALITY				reject
+}
+
+uERegister HNBAP-ELEMENTARY-PROCEDURE ::= {
+	INITIATING MESSAGE		UERegisterRequest
+	SUCCESSFUL OUTCOME		UERegisterAccept
+	UNSUCCESSFUL OUTCOME	UERegisterReject
+	PROCEDURE CODE			id-UERegister
+	CRITICALITY				reject
+}
+
+uEDe-Register HNBAP-ELEMENTARY-PROCEDURE ::= {
+	INITIATING MESSAGE		UEDe-Register
+	PROCEDURE CODE			id-UEDe-Register
+	CRITICALITY				ignore
+}
+
+hNBDe-Register HNBAP-ELEMENTARY-PROCEDURE ::= {
+	INITIATING MESSAGE		HNBDe-Register
+	PROCEDURE CODE			id-HNBDe-Register
+	CRITICALITY				ignore
+}
+
+errorIndication HNBAP-ELEMENTARY-PROCEDURE ::= {
+	INITIATING MESSAGE		ErrorIndication
+	PROCEDURE CODE			id-ErrorIndication
+	CRITICALITY				ignore
+}
+
+csg-membership-update HNBAP-ELEMENTARY-PROCEDURE ::= {
+	INITIATING MESSAGE		CSGMembershipUpdate
+	PROCEDURE CODE			id-CSGMembershipUpdate
+	CRITICALITY				ignore
+}
+
+tnlUpdate HNBAP-ELEMENTARY-PROCEDURE ::= {
+	INITIATING MESSAGE		TNLUpdateRequest
+	SUCCESSFUL OUTCOME		TNLUpdateResponse
+	UNSUCCESSFUL OUTCOME	TNLUpdateFailure
+	PROCEDURE CODE			id-TNLUpdate
+	CRITICALITY				reject
+}
+
+hNBConfigTransfer HNBAP-ELEMENTARY-PROCEDURE ::= {
+	INITIATING MESSAGE		HNBConfigTransferRequest
+	SUCCESSFUL OUTCOME		HNBConfigTransferResponse
+	PROCEDURE CODE			id-HNBConfigTransfer
+	CRITICALITY				reject
+}
+
+relocationComplete HNBAP-ELEMENTARY-PROCEDURE ::= {
+	INITIATING MESSAGE		RelocationComplete
+	PROCEDURE CODE			id-RelocationComplete
+	CRITICALITY				ignore
+}
+
+u-RNTIQuery HNBAP-ELEMENTARY-PROCEDURE ::= {
+	INITIATING MESSAGE		U-RNTIQueryRequest
+	SUCCESSFUL OUTCOME		U-RNTIQueryResponse
+	PROCEDURE CODE			id-U-RNTIQuery
+	CRITICALITY				reject
+}
+
+privateMessage HNBAP-ELEMENTARY-PROCEDURE ::= {
+	INITIATING MESSAGE		PrivateMessage
+	PROCEDURE CODE			id-privateMessage
+	CRITICALITY				ignore
+}
+
+END
+9.3.3	PDU Definitions
+
+-- **************************************************************
+--
+-- PDU definitions for HNBAP.
+--
+-- **************************************************************
+
+HNBAP-PDU-Contents {
+itu-t (0) identified-organization (4) etsi (0) mobileDomain (0) 
+umts-Access (20) modules (3) hnbap(6) version1 (1) hnbap-PDU-Contents (1) }
+
+DEFINITIONS AUTOMATIC TAGS ::= 
+
+BEGIN
+
+-- **************************************************************
+--
+-- IE parameter types from other modules.
+--
+-- **************************************************************
+
+IMPORTS
+	Cause,
+	CriticalityDiagnostics, 
+	CSGMembershipStatus,
+	HNB-Location-Information,
+	HNB-Identity,
+	Context-ID,
+	UE-Identity,
+	LAC,
+	RAC,
+	SAC,
+	CN-DomainIndicator,
+	IP-Address,
+	Registration-Cause,
+	UE-Capabilities,
+	PLMNidentity,
+	CellIdentity,
+	RNC-ID,
+	CSG-ID,
+	HNB-Cell-Access-Mode,
+	BackoffTimer,
+	MuxPortNumber,
+	RABList,
+	HNBConfigInfo,
+	AccessResult,
+	Update-cause,
+	NeighbourInfoList,
+	NeighbourInfoRequestList,
+	PSC,
+	Tunnel-Information,
+	CELL-FACHMobilitySupport,
+	S-RNTIPrefix,
+	NeighbourIdentity,
+	NeighbourCellIdentityList,
+	URAIdentity,
+	URAIdentityList,
+	HNBCapacity,
+	AdditionalNeighbourInfoList,
+	U-RNTI,
+	UnknownU-RNTIIndication,
+	HNB-GWResponse
+
+
+
+FROM HNBAP-IEs
+
+
+	ProtocolExtensionContainer{},
+	ProtocolIE-ContainerList{},
+	ProtocolIE-Container{},
+	ProtocolIE-Single-Container{},
+	PrivateIE-Container{},
+	HNBAP-PRIVATE-IES,
+	HNBAP-PROTOCOL-EXTENSION,
+	HNBAP-PROTOCOL-IES
+
+FROM HNBAP-Containers
+
+	id-Cause,
+	id-CriticalityDiagnostics, 
+	id-CSGMembershipStatus,
+	id-HNB-Location-Information,
+	id-HNB-Identity,
+	id-Context-ID,
+	id-PLMNidentity,
+	id-UE-Identity,
+	id-LAC,
+	id-RAC,
+	id-SAC,
+	id-UE-Capabilities,
+	id-Registration-Cause,
+	id-CellIdentity,
+	id-RNC-ID,
+	id-CSG-ID,
+	id-HNB-Cell-Access-Mode,
+	id-BackoffTimer,
+	id-Service-Area-For-Broadcast,
+	id-MuxPortNumber,
+	id-RABList,
+	id-HNBConfigInfo,
+	id-AccessResult,
+	id-Update-cause,
+	id-NeighbourInfoList,
+	id-NeighbourInfoRequestList,
+	id-Iurh-Signalling-TNL-Address,
+	id-PSC,
+	id-Tunnel-Information,
+	id-CELL-FACHMobilitySupport,
+	id-S-RNTIPrefix,
+	id-URAIdentity,
+	id-URAIdentityList,
+	id-NeighbourIdentity, 
+	id-NeighbourCellIdentityList,
+	id-HNBCapacity,
+	id-AdditionalNeighbourInfoList,
+	id-U-RNTI,
+	id-UnknownU-RNTIIndication,
+	id-HNB-GWResponse
+
+
+FROM HNBAP-Constants;
+
+-- **************************************************************
+--
+-- HNB Register REQUEST
+--
+-- **************************************************************
+
+HNBRegisterRequest ::= SEQUENCE {
+	protocolIEs			ProtocolIE-Container       { {HNBRegisterRequestIEs} },
+	protocolExtensions	ProtocolExtensionContainer { {HNBRegisterRequestExtensions} } 	OPTIONAL,
+	...
+}
+
+HNBRegisterRequestIEs HNBAP-PROTOCOL-IES ::= {
+	{ ID id-HNB-Identity						CRITICALITY reject	TYPE HNB-Identity					PRESENCE mandatory } |
+	{ ID id-HNB-Location-Information			CRITICALITY reject	TYPE HNB-Location-Information		PRESENCE mandatory } |
+	{ ID id-PLMNidentity						CRITICALITY reject	TYPE PLMNidentity					PRESENCE mandatory } |
+	{ ID id-CellIdentity						CRITICALITY reject	TYPE CellIdentity					PRESENCE mandatory } |
+	{ ID id-LAC									CRITICALITY reject	TYPE LAC							PRESENCE mandatory } |
+	{ ID id-RAC									CRITICALITY reject	TYPE RAC							PRESENCE mandatory } |
+	{ ID id-SAC									CRITICALITY reject	TYPE SAC							PRESENCE mandatory } |
+	{ ID id-CSG-ID								CRITICALITY reject	TYPE CSG-ID							PRESENCE optional } ,
+	...
+}
+
+HNBRegisterRequestExtensions HNBAP-PROTOCOL-EXTENSION ::= {
+	{ ID id-Service-Area-For-Broadcast		CRITICALITY ignore	EXTENSION SAC								PRESENCE optional }|
+	{ ID id-HNB-Cell-Access-Mode			CRITICALITY reject	EXTENSION HNB-Cell-Access-Mode				PRESENCE optional }|
+	{ ID id-PSC								CRITICALITY ignore	EXTENSION PSC								PRESENCE optional }|
+	{ ID id-Iurh-Signalling-TNL-Address		CRITICALITY ignore	EXTENSION IP-Address						PRESENCE optional }|
+	{ ID id-Tunnel-Information				CRITICALITY ignore	EXTENSION Tunnel-Information				PRESENCE optional }|
+	{ ID id-CELL-FACHMobilitySupport		CRITICALITY ignore	EXTENSION CELL-FACHMobilitySupport		PRESENCE optional }|
+	{ ID id-NeighbourCellIdentityList		CRITICALITY ignore	EXTENSION NeighbourCellIdentityList		PRESENCE optional }|
+	{ ID id-URAIdentityList					CRITICALITY ignore	EXTENSION URAIdentityList					PRESENCE optional }|
+	{ ID id-HNBCapacity						CRITICALITY ignore	EXTENSION HNBCapacity						PRESENCE optional },
+	...
+}
+
+-- **************************************************************
+--
+-- HNB Register Accept
+--
+-- **************************************************************
+
+HNBRegisterAccept ::= SEQUENCE {
+	protocolIEs			ProtocolIE-Container		{ {HNBRegisterResponseIEs} },
+	protocolExtensions	ProtocolExtensionContainer	{ {HNBRegisterResponseExtensions} }	OPTIONAL,
+	...
+}
+
+HNBRegisterResponseIEs HNBAP-PROTOCOL-IES ::= {
+	{ ID id-RNC-ID						CRITICALITY reject	TYPE RNC-ID				PRESENCE mandatory },
+	...
+}
+
+HNBRegisterResponseExtensions HNBAP-PROTOCOL-EXTENSION ::= {
+-- Extension for Release 9 to support CS Multiplexing --
+	{ ID id-MuxPortNumber				CRITICALITY ignore	EXTENSION MuxPortNumber		PRESENCE optional}|
+	{ ID id-Iurh-Signalling-TNL-Address	CRITICALITY ignore	EXTENSION IP-Address		PRESENCE optional}|
+	{ ID id-S-RNTIPrefix				CRITICALITY ignore	EXTENSION S-RNTIPrefix		PRESENCE optional},
+	...
+}
+
+-- **************************************************************
+--
+-- HNB Register REJECT
+--
+-- **************************************************************
+
+HNBRegisterReject ::= SEQUENCE {
+	protocolIEs			ProtocolIE-Container       { {HNBRegisterRejectIEs} },
+	protocolExtensions	ProtocolExtensionContainer { {HNBRegisterRejectExtensions} } 	OPTIONAL,
+	...
+}
+
+HNBRegisterRejectIEs HNBAP-PROTOCOL-IES ::= {
+	{ ID id-Cause						CRITICALITY ignore	TYPE Cause						PRESENCE mandatory} |
+	{ ID id-CriticalityDiagnostics		CRITICALITY ignore	TYPE CriticalityDiagnostics		PRESENCE optional } |
+	{ ID id-BackoffTimer				CRITICALITY reject	TYPE BackoffTimer				PRESENCE conditional },
+	-- This IE shall be present if the Cause IE is set to "Overload".
+	...
+}
+
+HNBRegisterRejectExtensions HNBAP-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+
+
+-- **************************************************************
+--
+-- HNB De- Register
+--
+-- **************************************************************
+
+HNBDe-Register ::= SEQUENCE {
+	protocolIEs			ProtocolIE-Container       { {HNBDe-RegisterIEs} },
+	protocolExtensions	ProtocolExtensionContainer { {HNBDe-RegisterExtensions} } 	OPTIONAL,
+	...
+}
+
+HNBDe-RegisterIEs HNBAP-PROTOCOL-IES ::= {
+	{ ID id-Cause				CRITICALITY ignore	TYPE Cause			PRESENCE mandatory } |
+	{ ID id-BackoffTimer		CRITICALITY reject	TYPE BackoffTimer	PRESENCE conditional },
+	-- This IE shall be present if the Cause IE is set to "Overload".
+	...
+}
+
+HNBDe-RegisterExtensions HNBAP-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+
+-- **************************************************************
+--
+-- UE Register REQUEST
+--
+-- **************************************************************
+
+UERegisterRequest ::= SEQUENCE {
+	protocolIEs			ProtocolIE-Container       { {UERegisterRequestIEs} },
+	protocolExtensions	ProtocolExtensionContainer { {UERegisterRequestExtensions} } 	OPTIONAL,
+	...
+}
+
+UERegisterRequestIEs HNBAP-PROTOCOL-IES ::= {
+	{ ID id-UE-Identity						CRITICALITY reject	TYPE UE-Identity				PRESENCE mandatory } |
+	{ ID id-Registration-Cause				CRITICALITY ignore	TYPE Registration-Cause			PRESENCE mandatory } |
+	{ ID id-UE-Capabilities					CRITICALITY reject	TYPE UE-Capabilities			PRESENCE mandatory },
+	...
+}
+
+UERegisterRequestExtensions HNBAP-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+-- **************************************************************
+--
+-- UE Register ACCEPT
+--
+-- **************************************************************
+
+UERegisterAccept ::= SEQUENCE {
+	protocolIEs			ProtocolIE-Container		{ {UERegisterAcceptIEs} },
+	protocolExtensions	ProtocolExtensionContainer	{ {UERegisterAcceptExtensions} } 	OPTIONAL,
+	...
+}
+
+UERegisterAcceptIEs HNBAP-PROTOCOL-IES ::= {
+	{ ID id-UE-Identity				CRITICALITY reject	TYPE UE-Identity		PRESENCE mandatory } |
+	{ ID id-Context-ID				CRITICALITY reject	TYPE Context-ID			PRESENCE mandatory },
+	...
+}
+
+
+UERegisterAcceptExtensions HNBAP-PROTOCOL-EXTENSION ::= {
+	{ ID id-CSGMembershipStatus		CRITICALITY	 reject		EXTENSION CSGMembershipStatus			PRESENCE optional	},
+	...
+}
+
+-- **************************************************************
+--
+-- UE Register REJECT
+--
+-- **************************************************************
+
+UERegisterReject ::= SEQUENCE {
+	protocolIEs			ProtocolIE-Container		{ {UERegisterRejectIEs} },
+	protocolExtensions	ProtocolExtensionContainer	{ {UERegisterRejectExtensions} } 	OPTIONAL,
+	...
+}
+
+UERegisterRejectIEs HNBAP-PROTOCOL-IES ::= {
+	{ ID id-UE-Identity					CRITICALITY reject	TYPE UE-Identity				PRESENCE mandatory } |
+	{ ID id-Cause						CRITICALITY ignore	TYPE Cause						PRESENCE mandatory} |
+	{ ID id-CriticalityDiagnostics		CRITICALITY ignore	TYPE CriticalityDiagnostics		PRESENCE optional },
+	...
+}
+
+UERegisterRejectExtensions HNBAP-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+
+-- **************************************************************
+--
+-- UE De-Register
+--
+-- **************************************************************
+
+UEDe-Register ::= SEQUENCE {
+	protocolIEs			ProtocolIE-Container		{ {UEDe-RegisterIEs} },
+	protocolExtensions	ProtocolExtensionContainer	{ {UEDe-RegisterExtensions} } 	OPTIONAL,
+	...
+}
+
+UEDe-RegisterIEs HNBAP-PROTOCOL-IES ::= {
+	{ ID id-Context-ID						CRITICALITY reject	TYPE Context-ID				PRESENCE mandatory } |
+	{ ID id-Cause							CRITICALITY ignore	TYPE Cause					PRESENCE mandatory } ,
+	...
+}
+
+UEDe-RegisterExtensions HNBAP-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+-- **************************************************************
+--
+-- CSG Membership Update
+--
+-- **************************************************************
+
+CSGMembershipUpdate ::= SEQUENCE {
+	protocolIEs			ProtocolIE-Container		{ {CSGMembershipUpdateIEs} },
+	protocolExtensions	ProtocolExtensionContainer	{ {CSGMembershipUpdateExtensions} } 	OPTIONAL,
+	...
+}
+
+CSGMembershipUpdateIEs HNBAP-PROTOCOL-IES ::= {
+	{ ID id-Context-ID					CRITICALITY reject	TYPE Context-ID					PRESENCE mandatory } |
+	{ ID id-CSGMembershipStatus			CRITICALITY	reject	TYPE CSGMembershipStatus		PRESENCE mandatory },
+	...
+}
+
+CSGMembershipUpdateExtensions HNBAP-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+-- **************************************************************
+--
+-- TNL Update Request
+--
+-- **************************************************************
+
+TNLUpdateRequest ::= SEQUENCE {
+	protocolIEs			ProtocolIE-Container		{ {TNLUpdateRequestIEs} },
+	protocolExtensions	ProtocolExtensionContainer	{ {TNLUpdateExtensions} } 	OPTIONAL,
+	...
+}
+
+TNLUpdateRequestIEs HNBAP-PROTOCOL-IES ::= {
+	{ ID id-Context-ID					CRITICALITY reject	TYPE Context-ID					PRESENCE mandatory } |
+	{ ID id-RABList						CRITICALITY reject	TYPE RABList					PRESENCE mandatory } |
+	{ ID id-Update-cause				CRITICALITY reject	TYPE Update-cause				PRESENCE mandatory } ,
+		...
+}
+
+TNLUpdateExtensions HNBAP-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+-- **************************************************************
+--
+-- TNL UPDATE RESPONSE
+--
+-- **************************************************************
+
+TNLUpdateResponse ::= SEQUENCE {
+	protocolIEs			ProtocolIE-Container		{ { TNLUpdateResponseIEs} },
+	protocolExtensions	ProtocolExtensionContainer	{ { TNLUpdateResponseExtensions} } 	OPTIONAL,
+	...
+}
+
+TNLUpdateResponseIEs HNBAP-PROTOCOL-IES ::= {
+	{ ID id-Context-ID					CRITICALITY reject	TYPE Context-ID				PRESENCE mandatory } ,
+		...
+}
+
+TNLUpdateResponseExtensions HNBAP-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+-- **************************************************************
+--
+-- TNL UPDATE FAILURE
+--
+-- **************************************************************
+
+TNLUpdateFailure ::= SEQUENCE {
+	protocolIEs			ProtocolIE-Container		{ {TNLUpdateFailureIEs} },
+	protocolExtensions	ProtocolExtensionContainer	{ {TNLUpdateFailureExtensions} } 	OPTIONAL,
+	...
+}
+
+TNLUpdateFailureIEs HNBAP-PROTOCOL-IES ::= {
+	{ ID id-Context-ID					CRITICALITY reject	TYPE Context-ID					PRESENCE mandatory } |
+	{ ID id-Cause						CRITICALITY ignore	TYPE Cause						PRESENCE mandatory } |
+	{ ID id-CriticalityDiagnostics		CRITICALITY ignore	TYPE CriticalityDiagnostics		PRESENCE optional } ,
+		...
+}
+
+TNLUpdateFailureExtensions HNBAP-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+-- **************************************************************
+--
+-- HNB Configuration Transfer Request
+--
+-- **************************************************************
+
+HNBConfigTransferRequest ::= SEQUENCE {
+	protocolIEs			ProtocolIE-Container       { {HNBConfigTransferRequestIEs} },
+	protocolExtensions	ProtocolExtensionContainer { {HNBConfigTransferRequestExtensions} } 	OPTIONAL,
+	...
+}
+
+HNBConfigTransferRequestIEs HNBAP-PROTOCOL-IES ::= {
+	{ ID id-NeighbourInfoRequestList		CRITICALITY reject	TYPE NeighbourInfoRequestList			PRESENCE mandatory } ,
+	...
+}
+
+HNBConfigTransferRequestExtensions HNBAP-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+-- **************************************************************
+--
+-- HNB Configuration Transfer Response
+--
+-- **************************************************************
+
+HNBConfigTransferResponse ::= SEQUENCE {
+	protocolIEs			ProtocolIE-Container       { { HNBConfigTransferResponseIEs} },
+	protocolExtensions	ProtocolExtensionContainer { { HNBConfigTransferResponseExtensions} } 	OPTIONAL,
+	...
+}
+
+HNBConfigTransferResponseIEs HNBAP-PROTOCOL-IES ::= {
+	{ ID id-NeighbourInfoList			CRITICALITY reject	TYPE NeighbourInfoList				PRESENCE mandatory } ,
+	...
+}
+
+HNBConfigTransferResponseExtensions HNBAP-PROTOCOL-EXTENSION ::= {
+	{ ID id-AdditionalNeighbourInfoList		CRITICALITY ignore	EXTENSION AdditionalNeighbourInfoList		PRESENCE optional},
+	...
+}
+
+-- **************************************************************
+--
+-- RELOCATION COMPLETE
+--
+-- **************************************************************
+
+RelocationComplete ::= SEQUENCE {
+	protocolIEs			ProtocolIE-Container		{ { RelocationCompleteIEs} },
+	protocolExtensions	ProtocolExtensionContainer	{ { RelocationCompleteExtensions} } 	OPTIONAL,
+	...
+}
+
+RelocationCompleteIEs HNBAP-PROTOCOL-IES ::= {
+	{ ID id-Context-ID					CRITICALITY ignore	TYPE Context-ID			PRESENCE mandatory } ,
+	...
+}
+
+
+RelocationCompleteExtensions HNBAP-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+-- **************************************************************
+--
+-- ERROR INDICATION
+--
+-- **************************************************************
+
+ErrorIndication ::= SEQUENCE {
+	protocolIEs			ProtocolIE-Container		{ {ErrorIndicationIEs} },
+	protocolExtensions	ProtocolExtensionContainer	{ {ErrorIndicationExtensions} } 	OPTIONAL,
+	...
+}
+
+ErrorIndicationIEs HNBAP-PROTOCOL-IES ::= {
+	{ ID id-Cause						CRITICALITY ignore	TYPE Cause						PRESENCE mandatory } |
+	{ ID id-CriticalityDiagnostics		CRITICALITY ignore	TYPE CriticalityDiagnostics		PRESENCE optional },
+		...
+}
+
+ErrorIndicationExtensions HNBAP-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+-- **************************************************************
+--
+-- PRIVATE MESSAGE
+--
+-- **************************************************************
+
+PrivateMessage ::= SEQUENCE {
+	privateIEs		PrivateIE-Container  {{PrivateMessage-IEs}},
+	...
+}
+
+PrivateMessage-IEs HNBAP-PRIVATE-IES ::= {
+	...
+}
+
+-- **************************************************************
+--
+-- U-RNTI Query Request
+--
+-- **************************************************************
+
+U-RNTIQueryRequest ::= SEQUENCE {
+	protocolIEs			ProtocolIE-Container       { {U-RNTIQueryRequestIEs} },
+	protocolExtensions	ProtocolExtensionContainer { {U-RNTIQueryRequestExtensions} }	OPTIONAL,
+	...
+}
+
+U-RNTIQueryRequestIEs HNBAP-PROTOCOL-IES ::= {
+	{ ID id-U-RNTI		CRITICALITY reject	TYPE U-RNTI			PRESENCE mandatory } ,
+	...
+}
+
+U-RNTIQueryRequestExtensions HNBAP-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+-- **************************************************************
+--
+-- U-RNTI Query Response
+--
+-- **************************************************************
+
+U-RNTIQueryResponse ::= SEQUENCE {
+	protocolIEs			ProtocolIE-Container       { { U-RNTIQueryResponseIEs} },
+	protocolExtensions	ProtocolExtensionContainer { { U-RNTIQueryResponseExtensions} } 	OPTIONAL,
+	...
+}
+
+U-RNTIQueryResponseIEs HNBAP-PROTOCOL-IES ::= {
+	{ ID id-HNB-GWResponse			CRITICALITY reject	TYPE HNB-GWResponse			PRESENCE mandatory } ,
+	...
+}
+
+U-RNTIQueryResponseExtensions HNBAP-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+END
+
+
+9.3.4	Information Element Definitions
+-- **************************************************************
+--
+-- Information Element Definitions
+--
+-- **************************************************************
+
+HNBAP-IEs {
+itu-t (0) identified-organization (4) etsi (0) mobileDomain (0) 
+umts-Access (20) modules (3) hnbap(6) version1 (1) hnbap-IEs (2) }
+
+DEFINITIONS AUTOMATIC TAGS ::= 
+
+BEGIN
+
+IMPORTS
+	maxNrOfErrors,
+	maxnoofRABs,
+	maxnoofNeighbours,
+	maxnoofIurhAddresses,
+	maxnoofAdditionalNeighbours,
+	maxnoofURAIdentities,
+	id-HNB-Internet-Information,
+	id-HNB-Cell-Identifier,
+	id-S-RNTIPrefix,
+	id-URAIdentityList
+	
+FROM HNBAP-Constants
+
+	Criticality,
+	ProcedureCode,
+	ProtocolIE-ID,
+	TriggeringMessage
+FROM HNBAP-CommonDataTypes
+
+	ProtocolExtensionContainer{},
+	HNBAP-PROTOCOL-EXTENSION
+FROM HNBAP-Containers;
+
+
+--A
+Access-stratum-release-indicator ::=	ENUMERATED {r99,
+										rel-4, rel-5, rel-6, rel-7, rel-8-and-beyond,
+										...}
+
+AccessResult	::=		ENUMERATED {allowed, notAllowed, ...}
+
+AltitudeAndDirection ::= SEQUENCE {
+	directionOfAltitude		ENUMERATED {height, depth},
+	altitude		INTEGER (0..32767),
+	...
+}
+
+--B
+BackoffTimer ::= INTEGER(0..3600)
+
+BindingID	::= OCTET STRING(SIZE(1..4,...))
+
+--C
+Cause ::= CHOICE {
+	radioNetwork			CauseRadioNetwork,
+	transport				CauseTransport,
+	protocol				CauseProtocol,
+	misc					CauseMisc,
+	...
+}
+CauseRadioNetwork ::= ENUMERATED {
+	overload,
+	unauthorised-Location,
+	unauthorised-HNB,
+	hNB-parameter-mismatch,
+	invalid-UE-identity,
+	uE-not-allowed-on-this-HNB,
+	uE-unauthorised,
+	connection-with-UE-lost,
+	ue-RRC-release,
+	hNB-not-registered,
+	unspecified,
+	normal,
+	uE-relocated,
+	ue-registered-in-another-HNB,
+	...,
+	no-neighbour-information-available,
+	iurh-connection-to-that-neighbour-not-Allowed
+}
+
+CauseTransport ::= ENUMERATED {
+	transport-resource-unavailable,
+	unspecified,
+	...
+}
+
+CauseProtocol ::= ENUMERATED {
+	transfer-syntax-error,
+	abstract-syntax-error-reject,
+	abstract-syntax-error-ignore-and-notify,
+	message-not-compatible-with-receiver-state,
+	semantic-error,
+	unspecified,
+	abstract-syntax-error-falsely-constructed-message,
+	...
+}
+
+CauseMisc ::= ENUMERATED {
+	processing-overload,
+	hardware-failure,
+	o-and-m-intervention,
+	unspecified,
+	...
+}
+						
+CellIdentity ::=		BIT STRING (SIZE (28))
+
+CELL-FACHMobilitySupport	::= ENUMERATED {
+	supported, 
+	...
+}
+
+Context-ID	::=	 BIT STRING (SIZE(24))
+
+CriticalityDiagnostics ::= SEQUENCE {
+	procedureCode				ProcedureCode													OPTIONAL,
+	triggeringMessage			TriggeringMessage												OPTIONAL,
+	procedureCriticality		Criticality														OPTIONAL,
+	iEsCriticalityDiagnostics	CriticalityDiagnostics-IE-List									OPTIONAL,
+	iE-Extensions				ProtocolExtensionContainer { {CriticalityDiagnostics-ExtIEs} } 	OPTIONAL,
+	...
+}
+
+CriticalityDiagnostics-IE-List ::= SEQUENCE (SIZE (1..maxNrOfErrors)) OF
+	SEQUENCE {
+		iECriticality			Criticality,
+		iE-ID					ProtocolIE-ID,
+		typeOfError				TypeOfError,
+		iE-Extensions			ProtocolExtensionContainer { {CriticalityDiagnostics-IE-List-ExtIEs} }	OPTIONAL,
+		...
+	}
+
+CriticalityDiagnostics-IE-List-ExtIEs HNBAP-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+CriticalityDiagnostics-ExtIEs HNBAP-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+CSG-ID			::=	BIT STRING (SIZE (27))
+
+CSG-Capability	::=	ENUMERATED {
+				csg-capable,
+				not-csg-capable,
+				...
+			}
+
+CSGMembershipStatus ::= ENUMERATED { 
+	member, 
+	non-member,
+	...
+}
+
+CGI ::= SEQUENCE {
+	pLMNidentity		PLMNidentity,
+	lAC					LAC,
+	cI					CI,
+	iE-Extensions		ProtocolExtensionContainer { {CGI-ExtIEs} } OPTIONAL
+}
+
+CGI-ExtIEs HNBAP-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+CI					::= OCTET STRING (SIZE (2))
+
+
+CN-DomainIndicator ::= ENUMERATED { 
+	cs-domain, 
+	ps-domain 
+}
+--D
+--E
+ESN		::=	BIT STRING (SIZE(32))
+--F
+--G
+GeographicalLocation ::= SEQUENCE {
+	geographicalCoordinates		GeographicalCoordinates,
+	altitudeAndDirection		AltitudeAndDirection,
+	iE-Extensions				ProtocolExtensionContainer { { GeographicLocation-ExtIEs} } OPTIONAL,
+	...
+}
+
+GeographicLocation-ExtIEs HNBAP-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+GeographicalCoordinates ::= SEQUENCE {
+	latitudeSign			ENUMERATED {north, south},
+	latitude				INTEGER (0..8388607),
+	longitude				INTEGER (-8388608..8388607),
+	iE-Extensions			ProtocolExtensionContainer { {GeographicalCoordinates-ExtIEs} }		OPTIONAL,
+	...
+}
+
+GeographicalCoordinates-ExtIEs HNBAP-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+GTP-TEI					::= OCTET STRING (SIZE (4))
+
+--H
+
+HNBCapacity ::= INTEGER(0..1000)
+
+HNB-Cell-Access-Mode::= ENUMERATED {
+	closed,
+	hybrid,
+	open,
+	... 
+}
+
+HNB-Cell-Identifier	::= 	SEQUENCE	{
+	pLMNidentity			PLMNidentity,
+	cellIdentity			CellIdentity,
+	iE-Extensions			ProtocolExtensionContainer { { HNB-Cell-Identifier-ExtIEs } }		OPTIONAL,
+	...
+}
+
+HNB-Cell-Identifier-ExtIEs HNBAP-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+HNB-GWResponse ::=	CHOICE {
+	hNB						HNBConfigInfo,
+	macroRNC				RNC-ID,
+	unknownU-RNTIIndication	UnknownU-RNTIIndication,
+	...
+}
+
+HNB-RNL-Identity	::= 	CHOICE	{
+	hNB-Identity-as-Cell-Identifier	HNB-Cell-Identifier,
+	...
+}
+
+HNBConfigInfo	::= 	SEQUENCE	{
+	hnb-RNL-Identity					HNB-RNL-Identity,
+	configurationInformation			ConfigurationInformation,
+	iE-Extensions						ProtocolExtensionContainer { { HNBConfigInfo-ExtIEs } }		OPTIONAL,
+	...
+}
+
+HNBConfigInfo-ExtIEs HNBAP-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+ConfigurationInformation ::= CHOICE {
+	provided	HNBConfigurationInformationProvided,
+	missing		HNBConfigurationInformationMissing,
+	...
+}
+
+HNBConfigurationInformationProvided ::= SEQUENCE {
+
+	psc									PSC				OPTIONAL,
+	cSG-ID								CSG-ID				OPTIONAL,
+	hNB-Cell-Access-Mode				HNB-Cell-Access-Mode,
+	iurh-Signalling-TNL-AddressList		Iurh-Signalling-TNL-AddressList,
+	iE-Extensions						ProtocolExtensionContainer { { HNBConfigurationInformationProvided-ExtIEs } }		OPTIONAL,
+	...
+}
+
+HNBConfigurationInformationProvided-ExtIEs HNBAP-PROTOCOL-EXTENSION ::= {
+	{ ID id-S-RNTIPrefix	CRITICALITY ignore	EXTENSION S-RNTIPrefix		PRESENCE optional }|
+	{ ID id-URAIdentityList	CRITICALITY ignore	EXTENSION URAIdentityList	PRESENCE optional },
+	...
+}
+
+HNBConfigurationInformationMissing ::= SEQUENCE {
+	cause					Cause,
+	iE-Extensions			ProtocolExtensionContainer { { HNBConfigurationInformationMissing-ExtIEs } }		OPTIONAL,
+	...
+}
+
+HNBConfigurationInformationMissing-ExtIEs HNBAP-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+HNB-Location-Information	::=	SEQUENCE	{
+	macroCoverageInfo		MacroCoverageInformation	OPTIONAL,
+	geographicalCoordinates	GeographicalLocation	OPTIONAL,
+	iE-Extensions			ProtocolExtensionContainer { { HNB-Location-Information-ExtIEs } }		OPTIONAL,
+		...
+}
+
+HNB-Location-Information-ExtIEs HNBAP-PROTOCOL-EXTENSION ::= {
+-- Extension for release-8 to support IP address for location verification --
+{ID id-HNB-Internet-Information	CRITICALITY reject	EXTENSION IP-Address	PRESENCE optional	},
+	...
+}
+
+
+
+HNB-Identity	::=		SEQUENCE {
+	hNB-Identity-Info		HNB-Identity-Info,
+	iE-Extensions		ProtocolExtensionContainer { { HNB-Identity-ExtIEs } }		OPTIONAL,
+	...
+}
+
+HNB-Identity-ExtIEs HNBAP-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+
+HNB-Identity-Info ::= OCTET STRING (SIZE (1..255))
+
+--I
+
+IMEI					::= BIT STRING (SIZE(60))
+
+IMSI					::= OCTET STRING (SIZE (3..8))
+-- Reference: 23.003
+IMSIDS41				::= OCTET STRING (SIZE (5..7))
+
+IMSIESN				::= SEQUENCE {
+	iMSIDS41		IMSIDS41,
+	eSN				ESN
+}	
+
+
+IP-Address		::=SEQUENCE {
+		ipaddress		CHOICE {
+		ipv4info		Ipv4Address,
+		ipv6info		Ipv6Address,
+		...
+		},
+	iE-Extensions		ProtocolExtensionContainer { { IP-Address-ExtIEs } }		OPTIONAL,
+		...
+}
+
+IP-Address-ExtIEs HNBAP-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+Ipv4Address		::= OCTET STRING (SIZE (4))
+
+Ipv6Address		::= OCTET STRING (SIZE (16))
+
+Iurh-Signalling-TNL-AddressList ::= SEQUENCE (SIZE(1..maxnoofIurhAddresses)) OF	IP-Address
+
+
+--J
+--K
+--L
+LAC			::= OCTET STRING(SIZE(2))
+
+LAI			::= SEQUENCE {
+	pLMNID		PLMNidentity,
+	lAC			LAC,
+	...
+			}
+			
+-- M
+
+MacroCoverageInformation	::= SEQUENCE {
+		cellIdentity		MacroCellID,
+		iE-Extensions		ProtocolExtensionContainer { { MacroCoverageInformation-ExtIEs } }		OPTIONAL,
+		...
+}
+
+MacroCoverageInformation-ExtIEs HNBAP-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+MacroCellID ::= CHOICE {
+	uTRANCellID			UTRANCellID, 
+	gERANCellID			CGI,
+	...
+}
+
+MuxPortNumber ::= INTEGER (1024..65535)
+
+--N
+
+NeighbourCellIdentityList		::= SEQUENCE (SIZE(0..maxnoofAdditionalNeighbours)) OF 	NeighbourIdentity
+
+NeighbourIdentity		::= CHOICE {
+	hNB-RNL-Identity	HNB-RNL-Identity,
+	cell-ID				CellIdentity,
+	...
+}
+
+NeighbourInfoList			::= SEQUENCE (SIZE(1..maxnoofNeighbours)) OF	HNBConfigInfo
+
+AdditionalNeighbourInfoList	::= SEQUENCE (SIZE(1..maxnoofAdditionalNeighbours)) OF HNBConfigInfo
+
+NeighbourInfoRequestList	::= SEQUENCE (SIZE(1..maxnoofNeighbours)) OF	NeighbourInfoRequestItem
+
+NeighbourInfoRequestItem ::= SEQUENCE {
+	hnb-RNL-Identity	HNB-RNL-Identity,
+	iE-Extensions		ProtocolExtensionContainer { { NeighbourInfoRequestItem-ExtIEs } }		OPTIONAL,
+	...
+}
+
+NeighbourInfoRequestItem-ExtIEs HNBAP-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+--O
+--P
+PLMNidentity 				::= OCTET STRING (SIZE (3))
+
+PSC			::= BIT STRING (SIZE(9))
+
+PTMSI		::=	BIT STRING (SIZE(32))
+
+PTMSIRAI		::= SEQUENCE {
+	pTMSI		PTMSI,
+	rAI			RAI,
+	...
+	}
+	
+
+--Q
+--R
+
+RAB-ID		::= BIT STRING (SIZE (8))
+
+RABList		::= SEQUENCE (SIZE(1..maxnoofRABs)) OF RABListItem
+
+RABListItem	::= SEQUENCE {
+	rAB-ID						RAB-ID,
+	old-transport-Info			TransportInfo,
+	new-transport-Info			TransportInfo,
+	cn-domain-indicator			CN-DomainIndicator,
+	iE-Extensions		ProtocolExtensionContainer { { RABListItem-ExtIEs } }		OPTIONAL,
+...
+}
+
+RABListItem-ExtIEs HNBAP-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+RAC			::= OCTET STRING(SIZE(1))
+
+RAI			::= SEQUENCE {
+	lAI			LAI,
+	rAC			RAC,
+	...
+}
+
+
+Registration-Cause	::= ENUMERATED {
+				emergency-call,
+				normal,
+				...,
+				ue-relocation
+			}
+
+RNC-ID	::=	INTEGER(0..65535)
+
+--S
+
+SAC			::= OCTET STRING(SIZE(2)) 
+
+S-RNTIPrefix	::= BIT STRING(SIZE(1..16, ...))
+
+--T
+TMSILAI		::=	SEQUENCE {
+	tMSI		BIT STRING(SIZE (32)),
+	lAI			LAI
+}
+
+TMSIDS41	::=		OCTET STRING (SIZE (2..17))
+
+TransportInfo	::= SEQUENCE {
+	transportLayerAddress		TransportLayerAddress,
+	transportAssociation		CHOICE	{
+	gtp-TEI						GTP-TEI,
+	bindingID					BindingID,
+	...
+	},
+	iE-Extensions		ProtocolExtensionContainer { { TransportInfo-ExtIEs } }		OPTIONAL,
+...
+}
+
+TransportInfo-ExtIEs HNBAP-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+TransportLayerAddress	::= BIT STRING(SIZE(1..160,...))
+
+Tunnel-Information ::= SEQUENCE {
+	iP-Address			IP-Address,
+	uDP-Port-Number		UDP-Port-Number	OPTIONAL,
+	iE-Extensions		ProtocolExtensionContainer { { Tunnel-Information-ExtIEs } }		OPTIONAL,
+	...
+}
+
+Tunnel-Information-ExtIEs HNBAP-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+TypeOfError ::= ENUMERATED {
+	not-understood,
+	missing,
+	...
+}
+--U
+
+UDP-Port-Number ::= OCTET STRING(SIZE(2))
+
+UE-Capabilities ::= SEQUENCE {
+	access-stratum-release-indicator	Access-stratum-release-indicator,
+	csg-capability						CSG-Capability,
+	iE-Extensions		ProtocolExtensionContainer { { UE-Capabilities-ExtIEs } }		OPTIONAL,
+...
+}
+
+UE-Capabilities-ExtIEs HNBAP-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+UTRANCellID ::= SEQUENCE {
+	lAC						LAC,
+	rAC						RAC,
+	pLMNidentity			PLMNidentity,
+	uTRANcellID				CellIdentity,
+	iE-Extensions			ProtocolExtensionContainer { {UTRANCellID-ExtIEs} } OPTIONAL
+}
+
+UTRANCellID-ExtIEs HNBAP-PROTOCOL-EXTENSION ::= {
+	...
+}
+							
+
+
+UE-Identity	::=	CHOICE {
+	iMSI		IMSI,
+	tMSILAI		TMSILAI,
+	pTMSIRAI	PTMSIRAI,
+	iMEI		IMEI,
+	eSN			ESN,
+	iMSIDS41	IMSIDS41,
+	iMSIESN		IMSIESN,
+	tMSIDS41	TMSIDS41,
+	...
+}
+
+Update-cause ::=	ENUMERATED {
+	relocation-preparation,
+	...
+}
+
+URAIdentityList ::= SEQUENCE (SIZE (0..maxnoofURAIdentities)) OF URAIdentity
+
+URAIdentity	::= INTEGER(0..65535)
+
+U-RNTI ::= BIT STRING (SIZE (32))
+
+UnknownU-RNTIIndication ::= ENUMERATED {
+	unknown,
+	...
+}
+
+--V
+--W
+--X
+--Y
+--Z
+
+
+END
+
+9.3.5	Common Definitions
+
+-- **************************************************************
+--
+-- Common definitions
+--
+-- **************************************************************
+
+HNBAP-CommonDataTypes {
+itu-t (0) identified-organization (4) etsi (0) mobileDomain (0) 
+umts-Access (20) modules (3) hnbap(6) version1 (1) hnbap-CommonDataTypes (3)  }
+
+DEFINITIONS AUTOMATIC TAGS ::= 
+
+BEGIN
+
+-- **************************************************************
+--
+-- Extension constants
+--
+-- **************************************************************
+
+maxPrivateIEs 									INTEGER ::= 65535
+maxProtocolExtensions 							INTEGER ::= 65535
+maxProtocolIEs									INTEGER ::= 65535
+
+-- **************************************************************
+--
+-- Common Data Types
+--
+-- **************************************************************
+Criticality		::= ENUMERATED { reject, ignore, notify }
+
+Presence		::= ENUMERATED { optional, conditional, mandatory }
+
+PrivateIE-ID	::= CHOICE {
+	local				INTEGER (0..65535),
+	global				OBJECT IDENTIFIER
+}
+
+
+ProcedureCode		::= INTEGER (0..255)
+
+
+ProtocolIE-ID		::= INTEGER (0..maxProtocolIEs)
+
+TriggeringMessage	::= ENUMERATED { initiating-message, successful-outcome, unsuccessful-outcome }
+
+END
+
+9.3.6	Constant Definitions
+
+-- **************************************************************
+--
+-- Constant definitions
+--
+-- **************************************************************
+
+HNBAP-Constants { 
+itu-t (0) identified-organization (4) etsi (0) mobileDomain (0) 
+umts-Access (20) modules (3) hnbap(6) version1 (1) hnbap-Constants (4) } 
+
+DEFINITIONS AUTOMATIC TAGS ::= 
+
+BEGIN
+
+IMPORTS
+	ProcedureCode,
+	ProtocolIE-ID
+FROM HNBAP-CommonDataTypes;
+
+
+-- **************************************************************
+--
+-- Elementary Procedures
+--
+id-HNBRegister						ProcedureCode ::= 1
+id-HNBDe-Register					ProcedureCode ::= 2
+id-UERegister						ProcedureCode ::= 3
+id-UEDe-Register					ProcedureCode ::= 4
+id-ErrorIndication					ProcedureCode ::= 5
+id-privateMessage					ProcedureCode ::= 6 
+id-CSGMembershipUpdate				ProcedureCode ::= 7
+id-TNLUpdate						ProcedureCode ::= 9
+id-HNBConfigTransfer				ProcedureCode ::= 10
+id-RelocationComplete				ProcedureCode ::= 11
+id-U-RNTIQuery						ProcedureCode ::= 14
+
+-- **************************************************************
+--
+-- Lists
+--
+-- **************************************************************
+maxNrOfErrors						INTEGER ::= 256
+maxnoofRABs							INTEGER ::= 256
+maxnoofAdditionalNeighbours			INTEGER ::= 128
+maxnoofURAIdentities				INTEGER ::= 8
+maxnoofNeighbours					INTEGER ::= 32
+maxnoofIurhAddresses				INTEGER ::= 3
+
+-- **************************************************************
+--
+-- IEs
+--
+-- **************************************************************
+
+id-Cause										ProtocolIE-ID ::= 1
+id-CriticalityDiagnostics						ProtocolIE-ID ::= 2
+id-HNB-Identity									ProtocolIE-ID ::= 3
+id-Context-ID									ProtocolIE-ID ::= 4
+id-UE-Identity									ProtocolIE-ID ::= 5
+id-LAC											ProtocolIE-ID ::= 6
+id-RAC											ProtocolIE-ID ::= 7
+id-HNB-Location-Information						ProtocolIE-ID ::= 8
+id-PLMNidentity									ProtocolIE-ID ::= 9
+id-SAC											ProtocolIE-ID ::= 10
+id-CellIdentity									ProtocolIE-ID ::= 11
+id-Registration-Cause							ProtocolIE-ID ::= 12
+id-UE-Capabilities								ProtocolIE-ID ::= 13
+id-RNC-ID										ProtocolIE-ID ::= 14
+id-CSG-ID										ProtocolIE-ID ::= 15
+id-BackoffTimer									ProtocolIE-ID ::= 16
+id-HNB-Internet-Information						ProtocolIE-ID ::= 17
+id-HNB-Cell-Access-Mode							ProtocolIE-ID ::= 18
+id-MuxPortNumber								ProtocolIE-ID ::= 19
+id-Service-Area-For-Broadcast					ProtocolIE-ID ::= 20
+id-CSGMembershipStatus							ProtocolIE-ID ::= 21
+id-RABList										ProtocolIE-ID ::= 22
+id-HNBConfigInfo								ProtocolIE-ID ::= 23
+id-AccessResult									ProtocolIE-ID ::= 25
+id-Update-cause									ProtocolIE-ID ::= 26
+id-NeighbourInfoList							ProtocolIE-ID ::= 27
+id-NeighbourInfoRequestList						ProtocolIE-ID ::= 28
+id-Iurh-Signalling-TNL-Address					ProtocolIE-ID ::= 29
+id-PSC											ProtocolIE-ID ::= 30
+id-HNB-Cell-Identifier							ProtocolIE-ID ::= 31
+id-Tunnel-Information							ProtocolIE-ID ::= 41
+id-CELL-FACHMobilitySupport						ProtocolIE-ID ::= 42
+id-S-RNTIPrefix									ProtocolIE-ID ::= 43
+id-URAIdentity									ProtocolIE-ID ::= 44
+id-NeighbourIdentity							ProtocolIE-ID ::= 45
+id-HNBCapacity									ProtocolIE-ID ::= 46
+id-NeighbourCellIdentityList					ProtocolIE-ID ::= 47
+id-AdditionalNeighbourInfoList					ProtocolIE-ID ::= 48
+id-U-RNTI										ProtocolIE-ID ::= 49
+id-UnknownU-RNTIIndication						ProtocolIE-ID ::= 50
+id-HNB-GWResponse								ProtocolIE-ID ::= 51
+id-URAIdentityList								ProtocolIE-ID ::= 52
+
+END
+9.3.7	Container Definitions
+
+
+-- **************************************************************
+--
+-- Container definitions
+--
+-- **************************************************************
+
+HNBAP-Containers {
+itu-t (0) identified-organization (4) etsi (0) mobileDomain (0) 
+umts-Access (20) modules (3) hnbap(6) version1 (1) hnbap-Containers (5) }
+
+DEFINITIONS AUTOMATIC TAGS ::= 
+
+BEGIN
+
+-- **************************************************************
+--
+-- IE parameter types from other modules.
+--
+-- **************************************************************
+
+IMPORTS
+	Criticality,
+	Presence,
+	PrivateIE-ID,
+	ProtocolIE-ID,
+	maxPrivateIEs,
+	maxProtocolExtensions,
+	maxProtocolIEs
+FROM HNBAP-CommonDataTypes;
+
+-- **************************************************************
+--
+-- Class Definition for Protocol IEs
+--
+-- **************************************************************
+
+HNBAP-PROTOCOL-IES ::= CLASS {
+	&id					ProtocolIE-ID 		UNIQUE,
+	&criticality		Criticality,
+	&Value,
+	&presence			Presence
+}
+WITH SYNTAX {
+	ID					&id
+	CRITICALITY			&criticality
+	TYPE				&Value
+	PRESENCE			&presence
+}
+
+-- **************************************************************
+--
+-- Class Definition for Protocol Extensions
+--
+-- **************************************************************
+
+HNBAP-PROTOCOL-EXTENSION ::= CLASS {
+	&id					ProtocolIE-ID UNIQUE,
+	&criticality		Criticality,
+	&Extension,
+	&presence			Presence
+}
+WITH SYNTAX {
+	ID					&id
+	CRITICALITY			&criticality
+	EXTENSION			&Extension
+	PRESENCE			&presence
+}
+
+-- **************************************************************
+--
+-- Class Definition for Private IEs
+--
+-- **************************************************************
+
+HNBAP-PRIVATE-IES ::= CLASS {
+	&id					PrivateIE-ID,
+	&criticality		Criticality,
+	&Value,
+	&presence			Presence
+}
+WITH SYNTAX {
+	ID					&id
+	CRITICALITY			&criticality
+	TYPE				&Value
+	PRESENCE			&presence
+}
+
+-- **************************************************************
+--
+-- Container for Protocol IEs
+--
+-- **************************************************************
+
+ProtocolIE-Container {HNBAP-PROTOCOL-IES : IEsSetParam} ::= 
+	SEQUENCE (SIZE (0..maxProtocolIEs)) OF
+		ProtocolIE-Field {{IEsSetParam}}
+
+ProtocolIE-Single-Container {HNBAP-PROTOCOL-IES : IEsSetParam} ::= 
+	ProtocolIE-Field {{IEsSetParam}}
+
+ProtocolIE-Field {HNBAP-PROTOCOL-IES : IEsSetParam} ::= SEQUENCE {
+	id					HNBAP-PROTOCOL-IES.&id				({IEsSetParam}),
+	criticality			HNBAP-PROTOCOL-IES.&criticality		({IEsSetParam}{@id}),
+	value				HNBAP-PROTOCOL-IES.&Value			({IEsSetParam}{@id})
+}
+
+-- **************************************************************
+--
+-- Container Lists for Protocol IE Containers
+--
+-- **************************************************************
+
+ProtocolIE-ContainerList {INTEGER : lowerBound, INTEGER : upperBound, HNBAP-PROTOCOL-IES : IEsSetParam} ::=
+	SEQUENCE (SIZE (lowerBound..upperBound)) OF
+		ProtocolIE-Container {{IEsSetParam}}
+
+-- **************************************************************
+--
+-- Container for Protocol Extensions
+--
+-- **************************************************************
+
+ProtocolExtensionContainer {HNBAP-PROTOCOL-EXTENSION : ExtensionSetParam} ::= 
+	SEQUENCE (SIZE (1..maxProtocolExtensions)) OF
+		ProtocolExtensionField {{ExtensionSetParam}}
+
+ProtocolExtensionField {HNBAP-PROTOCOL-EXTENSION : ExtensionSetParam} ::= SEQUENCE {
+	id					HNBAP-PROTOCOL-EXTENSION.&id				({ExtensionSetParam}),
+	criticality			HNBAP-PROTOCOL-EXTENSION.&criticality		({ExtensionSetParam}{@id}),
+	extensionValue		HNBAP-PROTOCOL-EXTENSION.&Extension			({ExtensionSetParam}{@id})
+}
+
+-- **************************************************************
+--
+-- Container for Private IEs
+--
+-- **************************************************************
+
+PrivateIE-Container {HNBAP-PRIVATE-IES : IEsSetParam } ::= 
+	SEQUENCE (SIZE (1.. maxPrivateIEs)) OF
+		PrivateIE-Field {{IEsSetParam}}
+
+PrivateIE-Field {HNBAP-PRIVATE-IES : IEsSetParam} ::= SEQUENCE {
+	id					HNBAP-PRIVATE-IES.&id					({IEsSetParam}),
+	criticality			HNBAP-PRIVATE-IES.&criticality			({IEsSetParam}{@id}),
+	value				HNBAP-PRIVATE-IES.&Value				({IEsSetParam}{@id})
+}
+
+END
+9.4	Message Transfer Syntax
+HNBAP shall use the ASN.1 Basic Packed Encoding Rules (BASIC-PER) Aligned Variant as transfer syntax as specified in ref. ITU-T Rec. X.691 [7].
+10	Handling of unknown, unforeseen, and erroneous protocol data
+10.1	General
+Protocol Error cases can be divided into three classes:
+-	Transfer Syntax Error;
+-	Abstract Syntax Error;
+-	Logical Error.
+Protocol errors can occur in the following functions within a receiving node:
+
+Figure 10.1-1: Protocol Errors in HNBAP
+The information stated in subclauses 10.2, 10.3 and 10.4, to be included in the message used when reporting an error, is what at minimum shall be included. Other optional information elements within the message may also be included, if available. This is also valid for the case when the reporting is done with a response message. The latter is an exception to what is stated in subclause 4.1.
+10.2	Transfer Syntax Error
+A Transfer Syntax Error occurs when the receiver is not able to decode the received physical message Transfer syntax errors are always detected in the process of ASN.1 decoding. If a Transfer Syntax Error occurs, the receiver should initiate Error Indication procedure with appropriate cause value for the Transfer Syntax protocol error.
+10.3	Abstract Syntax Error
+10.3.1	General
+An Abstract Syntax Error occurs when the receiving functional HNBAP entity:
+1.	receives IEs or IE groups that cannot be understood (unknown IE id);
+2.	receives IEs for which the logical range is violated (e.g.: ASN.1 definition: 0 to 15, the logical range is 0 to 10 (values 11 to 15 are undefined), and 12 will be received; this case will be handled as an abstract syntax error using criticality information sent by the originator of the message);
+3.	does not receive IEs or IE groups but according to the specified presence of the concerning object, the IEs or IE groups should have been present in the received message;
+4.	receives IEs or IE groups that are defined to be part of that message in wrong order or with too many occurrences of the same IE or IE group;
+5.	receives IEs or IE groups but according to the conditional presence of the concerning object and the specified condition, the IEs or IE groups should not have been present in the received message.
+Cases 1 and 2 (not comprehended IE/IE group) are handled based on received Criticality information. Case 3 (missing IE/IE group) is handled based on Criticality information and Presence information for the missing IE/IE group specified in the version of the specification used by the receiver. Case 4 (IEs or IE groups in wrong order or with too many occurrences) and Case 5 (erroneously present conditional IEs or IE groups) result in rejecting the procedure.
+If an Abstract Syntax Error occurs, the receiver shall read the remaining message and shall then for each detected Abstract Syntax Error act according to the Criticality Information and Presence Information for the IE/IE group due to which Abstract Syntax Error occurred in accordance with subclauses 10.3.4 and 10.3.5. The handling of cases 4 and 5 is specified in subclause 10.3.6.
+10.3.2	Criticality Information
+In the HNBAP messages there is criticality information set for individual IEs and/or IE groups. This criticality information instructs the receiver how to act when receiving an IE or an IE group that is not comprehended i.e. the entire item (IE or IE group) which is not (fully or partially) comprehended shall be treated in accordance with its own criticality information as specified in subclause 10.3.4.
+In addition, the criticality information is used in case of the missing IE/IE group abstract syntax error (see subclause 10.3.5).
+The receiving node shall take different actions depending on the value of the Criticality Information. The three possible values of the Criticality Information for an IE/IE group are:
+-	Reject IE;
+-	Ignore IE and Notify Sender;
+-	Ignore IE.
+The following rules restrict when a receiving entity may consider an IE, an IE group or an EP not comprehended (not implemented), and when action based on criticality information is applicable:
+1.	IE or IE group: When one new or modified IE or IE group is implemented for one EP from a standard version, then other new or modified IEs or IE groups specified for that EP in that standard version shall be considered comprehended by the receiving entity (some may still remain unsupported).
+2.	EP: The comprehension of different EPs within a standard version or between different standard versions is not mandated. Any EP that is not supported may be considered not comprehended, even if another EP from that standard version is comprehended, and action based on criticality shall be applied.
+10.3.3	Presence Information
+For many IEs/IE groups which are optional according to the ASN.1 transfer syntax, HNBAP specifies separately if the presence of these IEs/IE groups is optional or mandatory with respect to RNS application by means of the presence field of the concerning object of class HNBAP-PROTOCOL-IES, HNBAP-PROTOCOL-IES-PAIR, HNBAP-PROTOCOL-EXTENSION or HNBAP-PRIVATE-IES.
+The presence field of the indicated classes supports three values:
+1.	Optional;
+2.	Conditional;
+3.	Mandatory.
+If an IE/IE group is not included in a received message and the presence of the IE/IE group is mandatory or the presence is conditional and the condition is true according to the version of the specification used by the receiver, an abstract syntax error occurs due to a missing IE/IE group.
+10.3.4	Not comprehended IE/IE group
+10.3.4.1	Procedure Code
+The receiving node shall treat the different types of received criticality information of the Procedure Code according to the following:
+Reject IE:
+-	If a message is received with a Procedure Code marked with "Reject IE" which the receiving node does not comprehend, the receiving node shall reject the procedure using the Error Indication procedure.
+Ignore IE and Notify Sender:
+-	If a message is received with a Procedure Code marked with "Ignore IE and Notify Sender" which the receiving node does not comprehend, the receiving node shall ignore the procedure and initiate the Error Indication procedure.
+Ignore IE:
+-	If a message is received with a Procedure Code marked with "Ignore IE" which the receiving node does not comprehend, the receiving node shall ignore the procedure.
+When using the Error Indication procedure to reject a procedure or to report an ignored procedure it shall include the Procedure Code IE, the Triggering Message IE, and the Procedure Criticality IE in the Criticality Diagnostics IE.
+10.3.4.1A	Type of Message
+When the receiving node cannot decode the Type of Message IE, the Error Indication procedure shall be initiated with an appropriate cause value.
+10.3.4.2	IEs other than the Procedure Code and Type of Message
+The receiving node shall treat the different types of received criticality information of an IE/IE group other than the Procedure Code IE and Type of Message IE according to the following:
+Reject IE:
+-	If a message initiating a procedure is received containing one or more IEs/IE groups marked with "Reject IE" which the receiving node does not comprehend; none of the functional requests of the message shall be executed. The receiving node shall reject the procedure and report the rejection of one or more IEs/IE groups using the message normally used to report unsuccessful outcome of the procedure. In case the information received in the initiating message was insufficient to determine a value for all IEs that are required to be present in the message used to report the unsuccessful outcome of the procedure, the receiving node shall instead terminate the procedure and initiate the Error Indication procedure.
+-	If a message initiating a procedure that does not have a message to report unsuccessful outcome is received containing one or more IEs/IE groups marked with "Reject IE" which the receiving node does not comprehend, the receiving node shall terminate the procedure and initiate the Error Indication procedure.
+-	If a response message is received containing one or more IEs marked with "Reject IE" which the receiving node does no comprehend, the receiving node shall consider the procedure as unsuccessfully terminated and initiate local error handling.
+Ignore IE and Notify Sender:
+-	If a message initiating a procedure is received containing one or more Ies/IE groups marked with "Ignore IE and Notify Sender" which the receiving node does not comprehend, the receiving node shall ignore the content of the not comprehended IEs/IE groups, continue with the procedure as if the not comprehended IEs/IE groups were not received (except for the reporting) using the understood IEs/IE groups, and report in the response message of the procedure that one or more IEs/IE groups have been ignored. In case the information received in the initiating message was insufficient to determine a value for all IEs that are required to be present in the response message, the receiving node shall instead terminate the procedure and initiate the Error Indication procedure.
+-	if a message initiating a procedure that does not have a message to report the outcome of the procedure is received containing one or more IEs/IE groups marked with "Ignore IE and Notify Sender" which the receiving node does not comprehend, the receiving node shall ignore the content of the not comprehended IEs/IE groups, continue with the procedure as if the not comprehended IEs/IE groups were not received (except for the reporting) using the understood IEs/IE groups, and initiate the Error Indication procedure to report that one or more IEs/IE groups have been ignored.
+-	If a response message is received containing one or more IEs/IE groups marked with "Ignore IE and Notify Sender" which the receiving node does not comprehend, the receiving node shall ignore the content of the not comprehended IE/IE groups, continue with the procedure as if the not comprehended IEs/IE groups were not received (except for the reporting) using the understood IEs/IE groups and initiate the Error Indication procedure.
+Ignore IE:
+-	If a message initiating a procedure is received containing one or more IEs/IE groups marked with "Ignore IE" which the receiving node does not comprehend, the receiving node shall ignore the content of the not comprehended IEs/IE groups and continue with the procedure as if the not comprehended IEs/IE groups were not received using only the understood IEs/IE groups.
+-	If a response message is received containing one or more IEs/IE groups marked with "Ignore IE" which the receiving node does not comprehend, the receiving node shall ignore the content of the not comprehended IEs/IE groups and continue with the procedure as if the not comprehended IEs/IE groups were not received using the understood IEs/IE groups.
+When reporting not comprehended IEs/IE groups marked with "Reject IE" or "Ignore IE and Notify Sender" using a response message defined for the procedure, the Information Element Criticality Diagnostics IE shall be included in the Criticality Diagnostics IE for each reported IE/IE group.
+When reporting not comprehended IEs/IE groups marked with "Reject IE" or "Ignore IE and Notify Sender" using the Error Indication procedure, the Procedure Code IE, the Triggering Message IE, Procedure Criticality IE, and the Information Element Criticality Diagnostics IE shall be included in the Criticality Diagnostics IE for each reported IE/IE group.
+10.3.5	Missing IE or IE group
+The receiving node shall treat the missing IE/IE group according to the criticality information for the missing IE/IE group in the received message specified in the version of the present document used by the receiver:
+Reject IE:
+-	if a received message initiating a procedure is missing one or more IEs/IE groups with specified criticality "Reject IE"; none of the functional requests of the message shall be executed. The receiving node shall reject the procedure and report the missing IEs/IE groups using the message normally used to report unsuccessful outcome of the procedure. In case the information received in the initiating message was insufficient to determine a value for all IEs that are required to be present in the message used to report the unsuccessful outcome of the procedure, the receiving node shall instead terminate the procedure and initiate the Error Indication procedure.
+-	if a received message initiating a procedure that does not have a message to report unsuccessful outcome is missing one or more IEs/IE groups with specified criticality "Reject IE", the receiving node shall terminate the procedure and initiate the Error Indication procedure.
+-	if a received response message is missing one or more IEs/IE groups with specified criticality "Reject IE, the receiving node shall consider the procedure as unsuccessfully terminated and initiate local error handling.
+Ignore IE and Notify Sender:
+-	if a received message initiating a procedure is missing one or more IEs/IE groups with specified criticality "Ignore IE and Notify Sender", the receiving node shall ignore that those IEs are missing and continue with the procedure based on the other IEs/IE groups present in the message and report in the response message of the procedure that one or more IEs/IE groups were missing. In case the information received in the initiating message was insufficient to determine a value for all IEs that are required to be present in the response message, the receiving node shall instead terminate the procedure and initiate the Error Indication procedure.
+-	if a received message initiating a procedure that does not have a message to report the outcome of the procedure is missing one or more IEs/IE groups with specified criticality "Ignore IE and Notify Sender", the receiving node shall ignore that those IEs are missing and continue with the procedure based on the other IEs/IE groups present in the message and initiate the Error Indication procedure to report that one or more IEs/IE groups were missing.
+-	if a received response message is missing one or more IEs/IE groups with specified criticality "Ignore IE and Notify Sender", the receiving node shall ignore that those IEs are missing and continue with the procedure based on the other IEs/IE groups present in the message and initiate the Error Indication procedure to report that one or more IEs/IE groups were missing.
+Ignore IE:
+-	if a received message initiating a procedure is missing one or more IEs/IE groups with specified criticality "Ignore IE", the receiving node shall ignore that those IEs are missing and continue with the procedure based on the other IEs/IE groups present in the message.
+-	if a received response message is missing one or more IEs/IE groups with specified criticality "Ignore IE", the receiving node shall ignore that those IEs/IE groups are missing and continue with the procedure based on the other IEs/IE groups present in the message.
+When reporting missing IEs/IE groups with specified criticality "Reject IE" or "Ignore IE and Notify Sender" using a response message defined for the procedure, the Information Element Criticality Diagnostics IE shall be included in the Criticality Diagnostics IE for each reported IE/IE group.
+When reporting missing IEs/IE groups with specified criticality "Reject IE" or "Ignore IE and Notify Sender" using the Error Indication procedure, the Procedure Code IE, the Triggering Message IE, Procedure Criticality IE, and the Information Element Criticality Diagnostics IE shall be included in the Criticality Diagnostics IE for each reported IE/IE group.
+10.3.6	IEs or IE groups received in wrong order or with too many occurrences or erroneously present
+If a message with IEs or IE groups in wrong order or with too many occurrences is received or if IEs or IE groups with a conditional presence are present when the condition is not met (i.e. erroneously present), the receiving node shall behave according to the following:
+-	If a message initiating a procedure is received containing IEs or IE groups in wrong order or with too many occurrences or erroneously present, none of the functional requests of the message shall be executed. The receiving node shall reject the procedure and report the cause value "Abstract Syntax Error (Falsely Constructed Message)" using the message normally used to report unsuccessful outcome of the procedure. In case the information received in the initiating message was insufficient to determine a value for all IEs that are required to be present in the message used to report the unsuccessful outcome of the procedure, the receiving node shall instead terminate the procedure and initiate the Error Indication procedure.
+-	If a message initiating a procedure that does not have a message to report unsuccessful outcome is received containing IEs or IE groups in wrong order or with too many occurrences or erroneously present, the receiving node shall terminate the procedure and initiate the Error Indication procedure, and use cause value "Abstract Syntax Error (Falsely Constructed Message)".
+-	If a response message is received containing IEs or IE groups in wrong order or with too many occurrences or erroneously present, the receiving node shall consider the procedure as unsuccessfully terminated and initiate local error handling.
+When determining the correct order only the IEs specified in the specification version used by the receiver shall be considered.
+10.4	Logical Error
+Logical error situations occur when a message is comprehended correctly, but the information contained within the message is not valid (i.e. semantic error), or describes a procedure which is not compatible with the state of the receiver. In these conditions, the following behaviour shall be performed (unless otherwise specified) as defined by the class of the elementary procedure, irrespective of the criticality information of the IE's/IE groups containing the erroneous values.
+Class 1:
+Where the logical error occurs in a request message of a class 1 procedure, and the procedure has a message to report this unsuccessful outcome, this message shall be sent with an appropriate cause value. Typical cause values are:
+-	Semantic Error;
+-	Message not compatible with receiver state.
+Where the logical error is contained in a request message of a class 1 procedure, and the procedure does not have a message to report this unsuccessful outcome, the procedure shall be terminated and the Error Indication procedure shall be initiated with an appropriate cause value. The Procedure Code IE and the Triggering Message IE within the Criticality Diagnostics IE shall then be included in order to identify the message containing the logical error.
+Where the logical error exists in a response message of a class 1 procedure, the procedure shall be considered as unsuccessfully terminated and local error handling shall be initiated.
+Class 2:
+Where the logical error occurs in a message of a class 2 procedure, the procedure shall be terminated and the Error Indication procedure shall be initiated with an appropriate cause value. The Procedure Code IE and the Triggering Message IE within the Criticality Diagnostics IE shall then be included in order to identify the message containing the logical error.
+10.5	Exceptions
+The error handling for all the cases described hereafter shall take precedence over any other error handling described in the other subclauses of clause 10.
+-	If any type of error (Transfer Syntax Error, Abstract Syntax Error or Logical Error) is detected in the ERROR INDICATION message, it shall not trigger the Error Indication procedure in the receiving Node but local error handling.
+-	In case a response message or Error Indication message needs to be returned, but the information necessary to determine the receiver of that message is missing, the procedure shall be considered as unsuccessfully terminated and local error handling shall be initiated.
+-	If an error that terminates a procedure occurs, the returned cause value shall reflect the error that caused the termination of the procedure even if one or more abstract syntax errors with criticality “ignore and notify” have earlier occurred within the same procedure.
+Annex A (informative):
+Change History
+TSG #
+TSG Doc.
+CR
+Rev
+Subject/Comment
+New
+42
+RP-080834
+
+
+Approved at TSG-RAN42 and placed under change control
+8.0.0
+43
+RP-090244
+0001
+
+Add Object Identifier for HNBAP ASN.1
+8.1.0
+43
+RP-090081
+0005
+1
+Clarification on Uniqueness of Context ID
+8.1.0
+43
+RP-090244
+0007
+1
+Update to HNB deregistration cause codes and descriptions
+8.1.0
+43
+RP-090081
+0008
+1
+Update to HNB initiated UE deregistration cause code and description
+8.1.0
+43
+RP-090082
+0009
+2
+Abnormal condition handling associated with HNB registration
+8.1.0
+43
+RP-090082
+0012
+2
+Clarification on access control and inclusion of IMSI for UE registration.
+8.1.0
+43
+RP-090244
+0013
+1
+Adding Cause Values for UE Deregistration
+8.1.0
+43
+RP-090244
+0014
+1
+Updating of CSG Identity Leghth
+8.1.0
+43
+RP-090082
+0016
+1
+Clarification on the HNB Identity
+8.1.0
+43
+RP-090244
+0018
+
+Correction of wrong reference in TMSI-IE description
+8.1.0
+43
+RP-090082
+0019
+2
+CSG-ID optional in HNB register request
+8.1.0
+43
+RP-090082
+0020
+1
+Backoff timer for HNB registration
+8.1.0
+44
+RP-090626
+0022
+2
+Correction to HNB Identity definition
+8.2.0
+45
+RP-090769
+0031
+2
+ASN.1 correction for HNB Location Information IE
+8.3.0
+46
+RP-091184
+0033
+
+Correction to ASN.1 references
+8.4.0
+46
+RP-091184
+0034
+1
+Addition of cause value for Invalid UE identity
+8.4.0
+12/2009
+-
+-
+-
+Creation of version 9.0.0 based on version 8.4.0
+9.0.0
+46
+RP-091191
+0027
+4
+CS Mux port exchange
+9.0.0
+46
+RP-091191
+0030
+4
+Support for multiple access mode HNBs
+9.0.0
+46
+RP-091191
+0037
+1
+Introducing changes for supporting ETWS in Home Node B in 25.469
+9.0.0
+46
+RP-091191
+0039
+1
+Hybrid access signalling during UE and HNB registration
+9.0.0
+47
+RP-100229
+0041
+
+Minor corrections for HNBAP
+9.1.0
+47
+RP-100222
+0042
+2
+Extend ASRI for Release 9
+9.1.0
+47
+RP-100222
+0045
+1
+Introduction of Support for CSG membership notification
+9.1.0
+48
+RP-100595
+0049
+2
+UE Registration for Open and Hybrid cells
+9.2.0
+49
+RP-100909
+0051
+1
+Add missing cause value descriptions
+9.3.0
+03/2011
+-
+-
+-
+Creation of version 10.0.0 based on version 9.3.0
+10.0.0
+SP-49
+SP-100629
+
+
+Clarification on the use of References (TS 21.801 CR#0030)
+10.0.0
+51
+RP-110226
+0059
+
+Correct definition of Cell-ID
+10.0.0
+51
+RP-110231
+0062
+2
+Additional messages to support direct HNB-HNB HO in HNBAP
+10.0.0
+51
+RP-110226
+0063
+2
+Identifying the Cell Identity
+10.0.0
+52
+RP-110691
+0065
+1
+Removal of Access Query Procedure for Intra-CSG Handover
+10.1.0
+52
+RP-110684
+0067
+1
+Correction of References
+10.1.0
+52
+RP-110691
+0068
+1
+ASN.1 Corrections and Tabular alignment
+10.1.0
+52
+RP-110691
+0069
+2
+Review Changes
+10.1.0
+52
+RP-110691
+0072
+3
+Final specification of the provision of Iurh-connectivity related TNL addresses
+10.1.0
+57
+RP-121131
+0083
+
+Corrections on the provision of TNL address for direct Iurh-connectivity
+10.2.0
+09/2012
+-
+-
+-
+Creation of version 11.0.0 based on version 10.2.0
+11.0.0
+57
+RP-121136
+0084
+1
+Introduction of connectivity between HNBs and RNCs via the HNB-GW for RNSAP signaling
+11.0.0
+58
+RP-121724
+0090
+
+Add missing cause values for Iurh support
+11.1.0
+58
+RP-121737
+0091
+
+Editorial and minor corrections
+11.1.0
+58
+RP-121739
+0093
+2
+New Information for BBF access
+11.1.0
+59
+RP-130212
+0096
+2
+Corrections from ASN.1 Review
+11.2.0
+59
+RP-130213
+0098
+1
+PWS in HNB
+11.2.0
+62
+RP-131908
+0100
+2
+Introduction of CELL_FACH, CELL_PCH and URA_PCH mobility support for HNBs
+12.0.0
+64
+RP-140896
+0103
+-
+Transport Info in Iurh Relocation
+12.1.0
+65
+RP-141608
+0104
+1
+Rapporteur’s corrections
+12.2.0
+66
+RP-142093
+0105
+-
+Rapporteur Review
+12.3.0
+67
+RP-150356
+0106
+2
+Rapporteur Review-ASN.1 consistency check
+12.4.0
+12/2015
+-
+-
+-
+Creation of version 13.0.0 based on version 12.2.0
+13.0.0
+01/2016
+-
+-
+-
+Typo in the change history table corrected
+13.0.1
+71
+RP-160449
+0108
+1
+Rapporteur Review of TS 25.469
+13.1.0
+
+Change history
+Date
+Meeting
+TDoc
+CR
+Rev
+Cat
+Subject/Comment
+New version
+2017-03
+SA#75
+
+
+
+
+Promotion to Release 14 without technical change
+14.0.0
+2018-07
+SA#80
+-
+-
+-
+-
+Promotion to Release 15 without technical change
+15.0.0
+2020-07
+SA#88-e
+-
+-
+-
+-
+Update to Rel-16 version (MCC)
+16.0.0
+

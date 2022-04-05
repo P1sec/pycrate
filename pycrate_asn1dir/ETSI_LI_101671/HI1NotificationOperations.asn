@@ -1,0 +1,128 @@
+HI1NotificationOperations
+{itu-t(0) identified-organization(4) etsi(0) securityDomain(2) lawfulIntercept(2) hi1(0) notificationOperations(1) version7(7)}
+
+DEFINITIONS IMPLICIT TAGS ::=
+BEGIN
+
+IMPORTS
+	OPERATION,
+	ERROR
+		FROM Remote-Operations-Information-Objects
+		{joint-iso-itu-t(2) remote-operations(4) informationObjects(5) version1(0)}
+
+	-- from clauseÂ D.5
+	CommunicationIdentifier,
+	TimeStamp,
+	LawfulInterceptionIdentifier
+		FROM HI2Operations
+		{itu-t(0) identified-organization(4) etsi(0) securityDomain(2) lawfulIntercept(2) hi2(1) version10(10)};
+
+-- =============================
+-- Object Identifier Definitions
+-- =============================
+
+-- LawfulIntercept DomainId
+lawfulInterceptDomainId OBJECT IDENTIFIER ::= {itu-t(0) identified-organization(4) etsi(0) securityDomain(2) lawfulIntercept(2)}
+
+-- hi1 Domain
+hi1NotificationOperationsId OBJECT IDENTIFIER ::= {lawfulInterceptDomainId hi1(0) notificationOperations(1)}
+hi1OperationId OBJECT IDENTIFIER ::= {hi1NotificationOperationsId version6(6)}
+
+sending-of-HI1-Notification 	OPERATION ::=
+{
+	ARGUMENT	HI1-Operation
+	ERRORS		{ErrorHI1Notifications}
+	CODE		global:{hi1NotificationOperationsId version1(1)}
+}
+-- Class 2 operation. The timer shall be set to a value between 3s and 240s.
+-- The timer default value is 60s.
+-- NOTE: The value for this timer is to be set on the equipment waiting for the returned message;
+-- its value shall be agreed between the NWO/AP/SvP and the LEA, depending on their equipment
+-- properties.
+
+other-failure-causes 	ERROR ::= {CODE local:0}
+missing-parameter		ERROR ::= {CODE local:1}
+unknown-parameter		ERROR ::= {CODE local:2}
+erroneous-parameter		ERROR ::= {CODE local:3}
+
+ErrorHI1Notifications ERROR ::=
+{
+	other-failure-causes |
+	missing-parameter |
+	unknown-parameter |
+	erroneous-parameter
+}
+
+HI1-Operation 	::= CHOICE
+{
+	liActivated						[1] Notification,
+	liDeactivated					[2] Notification,
+	liModified						[3] Notification,
+	alarms-indicator				[4] Alarm-Indicator,
+	...,
+	national-HI1-ASN1parameters		[5] National-HI1-ASN1parameters
+}
+
+-- ==================
+-- PARAMETERS FORMATS
+-- ==================
+
+Notification 	::= SEQUENCE
+{
+	domainID						[0] OBJECT IDENTIFIER (hi1OperationId) OPTIONAL,
+		-- Once using FTP delivery mechanism
+	lawfulInterceptionIdentifier 	[1] LawfulInterceptionIdentifier,
+		-- This identifier is the LIID identity provided with the lawful authorization
+		-- for each target.
+	communicationIdentifier 		[2] CommunicationIdentifier OPTIONAL,
+		-- Only the NWO/PA/SvPIdentifier is provided (the one provided with the Lawful
+		-- authorization).
+		-- Called "callIdentifier" in V1.1.1 of ES 201 671
+	timeStamp						[3] TimeStamp,
+		-- date and time of the report.
+	...,
+	national-HI1-ASN1parameters		[5] National-HI1-ASN1parameters OPTIONAL,
+	target-Information				[6] OCTET STRING (SIZE (1..256)) OPTIONAL
+		-- provides information about the number or the characteristic of the target 
+		-- (e.g. E-mail address, E.164 number), ASCII format
+}
+
+Alarm-Indicator 	::= SEQUENCE
+{
+	domainID						[0] OBJECT IDENTIFIER (hi1OperationId) OPTIONAL,
+		-- Once using FTP delivery mechanism
+	communicationIdentifier					[1] CommunicationIdentifier OPTIONAL,
+		-- Only the NWO/PA/SvPIdentifier is provided (the one provided with the
+		-- Lawful authorization)
+	timeStamp						[2] TimeStamp,
+		-- date and time of the report.
+	alarm-information					[3] OCTET STRING (SIZE (1..256)),
+		-- Provides information about alarms (free format).
+		-- Until ASN.1 version 6 (document version v3.12.1) the octet string
+		-- was limited to a size of 25
+	...,
+	lawfulInterceptionIdentifier				[4] LawfulInterceptionIdentifier OPTIONAL,
+		-- This identifier is the LIID identity provided with the lawful authorization
+		-- for each target in according to national law.
+	national-HI1-ASN1parameters				[5] National-HI1-ASN1parameters OPTIONAL
+}
+
+National-HI1-ASN1parameters		::= SEQUENCE
+{
+	domainID		[0] OBJECT IDENTIFIER (hi1OperationId) OPTIONAL,
+		-- Once using FTP delivery mechanism.
+	countryCode		[1] PrintableString (SIZE (2)),
+		-- Country Code according to ISO 3166-1 [67],
+		-- the country to which the parameters inserted after the extension marker apply.
+	...
+		-- In case a given country wants to use additional national parameters according to its law,
+		-- these national parameters should be defined using the ASN.1 syntax and added after the
+		-- extension marker (...).
+		-- It is recommended that "version parameter" and "vendor identification parameter" are
+		-- included in the national parameters definition. Vendor identifications can be
+		-- retrieved from IANA web site (seeÂ annexÂ K). Besides, it is recommended to avoid
+		-- using tags from 240 to 255 in a formal type definition.
+}
+
+END -- end of HI1NotificationOperations
+

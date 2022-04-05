@@ -1,7 +1,7 @@
 # -*- coding: UTF-8 -*-
 #/**
 # * Software Name : pycrate
-# * Version : 0.3
+# * Version : 0.4
 # *
 # * Copyright 2017. Benoit Michau. ANSSI.
 # *
@@ -27,15 +27,14 @@
 # *--------------------------------------------------------
 #*/
 
+from .utils import integer_types, NoneType
 from .err  import ASN1Err
 from .glob import GLOBAL
 
 
 RefObj_docstring = """
 Init args:
-    called (2-tuple or ASN1RefParam): name of the referenced ASN.1 module and 
-        object if 2-tuple,
-        or ASN1RefParam referring the name of the formal parameter
+    called (2-tuple): name of the referenced ASN.1 module and object
     ced_path (list of str or int): path of the specific content referenced 
         inside the called object, can be empty
 """
@@ -71,9 +70,6 @@ class ASN1Ref(object):
     
     def __eq__(self, other):
         # enable ASN1Ref equality test
-        if hasattr(self, 'name'):
-            # ASN1RefParam
-            return False
         if type(other) != type(self):
             return False
         if other.called != self.called:
@@ -90,10 +86,10 @@ class ASN1Ref(object):
             return hash(self.called) + hash(tuple(self.ced_path))
     
     def _safechk(self):
-        if not isinstance(self.called, (NoneType, tuple, ASN1RefParam)):
+        if not isinstance(self.called, (NoneType, tuple)):
             raise(ASN1Err('{0}: invalid called'.format(self.__class__.__name__)))
         if not isinstance(self.ced_path, list) or \
-        not all([isinstance(e, (str, integer_types))]):
+        not all([isinstance(e, (str, integer_types)) for e in self.ced_path]):
             raise(ASN1Err('{0}: invalid ced_path'.format(self.__class__.__name__)))
     
     def copy(self):
@@ -102,8 +98,6 @@ class ASN1Ref(object):
         """
         if isinstance(self.called, tuple):
             return self.__class__(tuple(self.called), self.ced_path[:])
-        elif isinstance(self.called, ASN1RefParam):
-            return self.__class__(self.called.copy(), self.ced_path[:])
         else:
             assert()
 
@@ -117,12 +111,10 @@ class ASN1RefType(ASN1Ref):
     """ % RefObj_docstring
     
     def __repr__(self):
-        # self.called is 2-tuple or ASN1RefParam
+        # self.called is 2-tuple
         # self.ced_path is empty
-        if isinstance(self.called, tuple):
-            return 'ASN1RefType({0}.{1})'.format(self.called[0], self.called[1])
-        else:
-            return 'ASN1RefType({0!r})'.format(self.called)
+        assert(isinstance(self.called, tuple))
+        return 'ASN1RefType({0}.{1})'.format(self.called[0], self.called[1])
     
     def get(self):
         try:
@@ -156,14 +148,11 @@ class ASN1RefChoiceComp(ASN1Ref):
     """ % RefObj_docstring
     
     def __repr__(self):
-        # self.called is 2-tuple or ASN1RefParam
+        # self.called is 2-tuple
         # self.ced_path is not empty
-        if isinstance(self.called, tuple):
-            return 'ASN1RefChoiceComp({0}<{1}.{2})'\
-                   .format('<'.join(self.ced_path), self.called[0], self.called[1])
-        else:
-            return 'ASN1RefChoiceComp({0}<{1!r})'\
-                   .format('<'.join(self.ced_path), self.called)
+        assert(isinstance(self.called, tuple))
+        return 'ASN1RefChoiceComp({0}<{1}.{2})'\
+               .format('<'.join(self.ced_path), self.called[0], self.called[1])
     
     def get(self):
         try:
@@ -183,14 +172,11 @@ class ASN1RefClassField(ASN1Ref):
     """ %  RefObj_docstring
     
     def __repr__(self):
-        # self.called is 2-tuple or ASN1RefParam
+        # self.called is 2-tuple
         # self.ced_path is not empty
-        if isinstance(self.called, tuple):
-            return 'ASN1RefClassField({0}.{1}.&{2})'\
-                   .format(self.called[0], self.called[1], '.&'.join(self.ced_path))
-        else:
-            return 'ASN1RefClassField({0!r}.&{1})'\
-                   .format(self.called, '.&'.join(self.ced_path))
+        assert(isinstance(self.called, tuple))
+        return 'ASN1RefClassField({0}.{1}.&{2})'\
+               .format(self.called[0], self.called[1], '.&'.join(self.ced_path))
     
     def get(self):
         try:
@@ -227,12 +213,9 @@ class ASN1RefClassValField(ASN1Ref):
     """ % RefObj_docstring
     
     def __repr__(self):
-        # self.called is 2-tuple or ASN1RefParam
+        # self.called is 2-tuple
         # self.ced_path is not empty
-        if isinstance(self.called, tuple):
-            return 'ASN1RefClassValField({0}.{1}.&{2})'\
-                   .format(self.called[0], self.called[1], '.&'.join(self.ced_path))
-        else:
-            return 'ASN1RefClassValField({0!r}.&{1})'\
-                   .format(self.called, '.&'.join(self.ced_path))
+        assert(isinstance(self.called, tuple))
+        return 'ASN1RefClassValField({0}.{1}.&{2})'\
+               .format(self.called[0], self.called[1], '.&'.join(self.ced_path))
 

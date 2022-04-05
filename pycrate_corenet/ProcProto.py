@@ -1,7 +1,7 @@
 # -*- coding: UTF-8 -*-
 #/**
 # * Software Name : pycrate
-# * Version : 0.3
+# * Version : 0.4
 # *
 # * Copyright 2017. Benoit Michau. ANSSI.
 # *
@@ -27,8 +27,23 @@
 # *--------------------------------------------------------
 #*/
 
-from pycrate_mobile.TS24007 import *
-from .utils import *
+from pycrate_mobile.TS24007     import *
+from pycrate_corenet.utils_fmt  import *
+
+
+#------------------------------------------------------------------------------#
+# wrapping classes
+#------------------------------------------------------------------------------#
+
+# Signaling stack handler (e.g. for HNBd, ENBd, GNBd, UEd)
+class SigStack(object):
+    pass
+
+
+# Signaling procedure handler
+class SigProc(object):
+    pass
+
 
 #------------------------------------------------------------------------------#
 # RAN-supported procedures (HNBAP, RUA, RANAP, S1AP)
@@ -111,40 +126,46 @@ class LinkSigProc(SigProc):
                 if 'protocolIEs' in content._cont:
                     # get the ASN.1 set of defined {ident : value's type}
                     set_ies = content._cont['protocolIEs']._cont._cont['value']._const_tab
-                    for ident in set_ies('id'):
+                    ord_ies = set_ies('id')
+                    for ident in ord_ies:
                         cont_ies[ident] = set_ies('id', ident)
                         if cont_ies[ident]['presence'] == 'mandatory':
                             mand.append( ident )
                         try:
                             pyname = pythonize_name(cont_ies[ident]['Value']._tr._name)
-                        except:
+                        except Exception:
                             pass
                         else:
                             if pyname in encod[0]:
                                 encod[0][ident] = encod[0][pyname]
                             if pyname in decod[0]:
                                 decod[0][ident] = decod[0][pyname]
+                else:
+                    ord_ies = []
                 if 'protocolExtensions' in content._cont:
                     # get the ASN.1 set of defined {ident : extvalue's type}
                     set_exts = content._cont['protocolExtensions']._cont._cont['extensionValue']._const_tab
-                    for ident in set_exts('id'):
+                    ord_exts = set_exts('id')
+                    for ident in ord_exts:
                         cont_exts[ident] = set_exts('id', ident)
                         if cont_exts[ident]['presence'] == 'mandatory':
                             mand.append( ident )
                         try:
                             pyname = pythonize_name(cont_exts[ident]['Extension']._tr._name)
-                        except:
+                        except Exception:
                             pass
                         else:
                             if pyname in encod[1]:
                                 encod[1][ident] = encod[1][pyname]
                             if pyname in decod[1]:
                                 decod[1][ident] = decod[1][pyname]
+                else:
+                    ord_exts = []
                 if not cont_ies:
                     cont_ies = None
                 if not cont_exts:
                     cont_exts = None
-                cls.Cont[ptype[1]] = (content, cont_ies, cont_exts, mand)
+                cls.Cont[ptype[1]] = (content, cont_ies, cont_exts, mand, ord_ies, ord_exts)
     
     #--------------------------------------------------------------------------#
     
@@ -153,7 +174,7 @@ class LinkSigProc(SigProc):
         
         select the expected content in self.Cont, according to the pdu type
         select the potential decoders in self.Decod
-        raise HNBAPErr if an error requiring procedure rejection is found
+        raise Exception if an error requiring procedure rejection is found
         
         when unknown identifiers are encountered:
         IE buffer value is set with key 'id_%id',
@@ -164,11 +185,11 @@ class LinkSigProc(SigProc):
         """
         # 1) select the correct PDU and content
         ptype = pdu[0][:3]
-        if ptype == 'out':  
+        if ptype == 'out':
             # some 3G RAN procedure have only 'outcome' pdu
             # which are changed to 'suc'
             ptype = 'suc'
-        Cont, IEs, Extensions, mand = self.Cont[ptype]
+        Cont, IEs, Extensions, mand, ord_ies, ord_exts = self.Cont[ptype]
         Decod = self.Decod[ptype]
         #
         val = pdu[1]
@@ -182,8 +203,8 @@ class LinkSigProc(SigProc):
         #    self._log('WNG', 'decode_pdu: incorrect PDU criticality, %s' % val['criticality'])
         #
         # 3) ensure the PDU content has been properly decoded
-        if not isinstance(val['value'], tuple) or \
-        val['value'][0] != Cont._tr._name:
+        if not isinstance(val, dict) or 'value' not in val \
+        or not isinstance(val['value'], tuple) or val['value'][0] != Cont._tr._name:
             raise(CorenetErr('invalid PDU content'))
         #
         # 4) get the value part of the PDU with IEs and Extensions,
@@ -197,7 +218,7 @@ class LinkSigProc(SigProc):
                 ident = ie['id']
                 try:
                     IE = IEs[ident]
-                except:
+                except Exception:
                     # unknown IE, c'est pas grave...
                     self._log('INF', 'decode_pdu: unknown IE ident in PDU, %r' % ie)
                     ret['id_%i' % ident] = ie['value']
@@ -227,7 +248,7 @@ class LinkSigProc(SigProc):
                 ident = ie['id']
                 try:
                     IE = Extensions[ident]
-                except:
+                except Exception:
                     # unknown Extension, c'est pas grave non plus...
                     self._log('INF', 'decode_pdu: unknown Ext ident in PDU, %r' % ie)
                     ret['idext_%i' % ident] = ie['extensionValue']
@@ -276,32 +297,16 @@ class LinkSigProc(SigProc):
         original ASN.1 specification
         """
         # 1) select the correct PDU and content
-        Cont, IEs, Extensions, mand = self.Cont[ptype]
+        Cont, IEs, Extensions, mand, ord_ies, ord_exts = self.Cont[ptype]
         self._NetInfo, Encod, pdu_ies, pdu_exts = kw.copy(), self.Encod[ptype], [], []
         #
         # 2) encode the list of IEs' values
         if IEs is not None:
-            for (ident, IE) in IEs.items():
-                name, val = IE['Value']._tr._name, None
-                pyname, idname = pythonize_name(name), 'id_%i' % ident
-                if pyname in Encod[0]:
-                    # static object value provided
-                    val = (IE['Value']._tr._name, Encod[0][pyname])
-                    if pyname in kw:
-                        del kw[pyname]
-                elif idname in Encod[0]:
-                    # static buffer value provided
-                    val = Encod[0][idname]
-                    if idname in kw:
-                        del kw[idname]
-                elif pyname in kw:
-                    # object value provided at runtime
-                    val = (IE['Value']._tr._name, kw[pyname])
-                    del kw[pyname]
-                elif idname in kw:
-                    # buffer value provided at runtime
-                    val = kw[idname]
-                    del kw[idname]
+            #for (ident, IE) in IEs.items():
+            for ident in ord_ies:
+                IE = IEs[ident]
+                idname = 'id_%i' % ident
+                val = self._get_ie_val(idname, IE, Encod[0], kw)
                 if val is not None:
                     pdu_ies.append({'id': ident,
                                     'criticality': IE['criticality'],
@@ -309,31 +314,15 @@ class LinkSigProc(SigProc):
                 elif ident in mand:
                     self._log('WNG', 'encode_pdu: missing mandatory IE, ident %i' % ident)
             # sort pdu_ies in order according to 'id'
-            pdu_ies.sort(key=lambda x:x['id'])
+            #pdu_ies.sort(key=lambda x:x['id'])
         #
         # 3) encode the list of Extensions' values
         if Extensions is not None:
-            for (ident, IE) in Extensions.items():
-                name, val = IE['Extension']._tr._name, None
-                pyname, idname = pythonize_name(name), 'idext_%i' % ident
-                if pyname in Encod[1]:
-                    # static object value provided
-                    val = (IE['Value']._tr._name, Encod[1][pyname])
-                    if pyname in kw:
-                        del kw[pyname]
-                elif idname in Encod[0]:
-                    # static buffer value provided
-                    val = Encod[0][idname]
-                    if idname in kw:
-                        del kw[idname]
-                elif pyname in kw:
-                    # object value provided at runtime
-                    val = (IE['Value']._tr._name, kw[pyname])
-                    del val[pyname]
-                elif idname in kw:
-                    # buffer value provided at runtime
-                    val = kw[idname]
-                    del kw[idname]
+            #for (ident, IE) in Extensions.items():
+            for ident in ord_exts:
+                IE = Extensions[ident]
+                idname = 'idext_%i' % ident
+                val = self._get_ie_val(idname, IE, Encod[1], kw)
                 if val is not None:
                     pdu_exts.append({'id': ident,
                                      'criticality': IE['criticality'],
@@ -341,7 +330,7 @@ class LinkSigProc(SigProc):
                 elif ident in mand:
                     self._log('WNG', 'encode_pdu: missing mandatory Ext, ident %i' % ident)
             # sort pdu_exts in order according to 'id'
-            pdu_exts.sort(key=lambda x:x['id'])
+            #pdu_exts.sort(key=lambda x:x['id'])
         #
         # 4) enable also undefined buffer values passed at runtime to be encoded
         for name in kw:
@@ -376,6 +365,38 @@ class LinkSigProc(SigProc):
                               {'procedureCode': self.Code,
                                'criticality': self.Crit,
                                'value': (Cont._tr._name, val)}) )
+    
+    
+    def _get_ie_val(self, idname, IE, Encod, kw):
+        val = None
+        if IE['Value']._tr is not None:
+            # IE refers to a sub object, that can be assigned by name
+            iename = IE['Value']._tr._name
+            pyname = pythonize_name(iename)
+            if pyname in Encod:
+                # static object value provided at the procedure class level
+                # referred by its name
+                val = (iename, Encod[pyname])
+                if pyname in kw:
+                    del kw[pyname]
+            elif pyname in kw:
+                # object value provided at runtime
+                # referred by its name
+                val = (iename, kw[pyname])
+                del kw[pyname]
+        if val is None:
+            if idname in Encod:
+                # static object value provided at the procedure class level
+                # referred by its ident
+                val = Encod[idname]
+                if idname in kw:
+                    del kw[idname]
+            elif idname in kw:
+                # object value provided at runtime
+                # referred by its ident
+                val = kw[idname]
+                del kw[idname]
+        return val
     
     #--------------------------------------------------------------------------#
     
@@ -464,8 +485,10 @@ class NASSigProc(SigProc):
                 mhdr = msg[0]
                 if mhdr[0]._name == 'TIPD':
                     mid = (mhdr[0]['ProtDisc'].get_val(), mhdr['Type'].get_val())
-                else:
+                elif 'ProtDisc' in mhdr._by_name:
                     mid = (mhdr['ProtDisc'].get_val(), mhdr['Type'].get_val())
+                else:
+                    mid = (mhdr['EPD'].get_val(), mhdr['Type'].get_val())
                 mies = msg[1:]
                 ContLUT[mid] = (0, i)
                 if mid not in cls.Encod:
@@ -495,8 +518,10 @@ class NASSigProc(SigProc):
                 mhdr = msg[0]
                 if mhdr[0]._name == 'TIPD':
                     mid = (mhdr[0]['ProtDisc'].get_val(), mhdr['Type'].get_val())
-                else:
+                elif 'ProtDisc' in mhdr._by_name:
                     mid = (mhdr['ProtDisc'].get_val(), mhdr['Type'].get_val())
+                else:
+                    mid = (mhdr['EPD'].get_val(), mhdr['Type'].get_val())
                 mies = msg[1:]
                 ContLUT[mid] = (1, i)
                 if mid not in cls.Encod:
@@ -528,8 +553,10 @@ class NASSigProc(SigProc):
                 mhdr = msg[0]
                 if mhdr[0]._name == 'TIPD':
                     mid = (mhdr[0]['ProtDisc'].get_val(), mhdr['Type'].get_val())
-                else:
+                elif 'ProtDisc' in mhdr._by_name:
                     mid = (mhdr['ProtDisc'].get_val(), mhdr['Type'].get_val())
+                else:
+                    mid = (mhdr['EPD'].get_val(), mhdr['Type'].get_val())
                 Filter.add(mid)
                 FilterStr.add(msg._name)
         if Filter:
@@ -578,7 +605,7 @@ class NASSigProc(SigProc):
             return
         try:
             Decod = self.Decod[(pd, typ)]
-        except:
+        except Exception:
             self._log('WNG', 'decode_msg: no decoder dict found')
             Decod = {}
         #
@@ -608,7 +635,7 @@ class NASSigProc(SigProc):
         # get the instance encoder
         try:
             Encod = self.Encod[mid]
-        except:
+        except Exception:
             self._log('WNG', 'encode_msg: no encoder dict found')
             Encod = {}
         # get the class encoder and update the instance's one
@@ -623,21 +650,23 @@ class NASSigProc(SigProc):
         # add potential unspecified extension
         ext = [k for k in Encod.keys() if k[:3] == '_T_']
         if ext:
-            if isinstance(self._nas_tx, Layer3):
+            if isinstance(self._nas_tx, Layer3E):
                 for k in ext:
                     tag = int(k[3:])
                     if tag & 0x80:
-                        self._nas_tx.append( Type2(k, val=[tag]) )
+                        self._nas_tx.append(
+                            Type1TV(k, val={'T':tag>>4, 'V':tag&0xf}) )
+                    elif tag & 0x70 == 0x70:
+                        self._nas_tx.append( Type6TLVE(k, val={'T':tag, 'V':Encod[k]}) )
                     else:
                         self._nas_tx.append( Type4TLV(k, val={'T':tag, 'V':Encod[k]}) )
             else:
-                #isinstance(self._nas_tx, Layer3EPS)
+                #isinstance(self._nas_tx, Layer3)
                 for k in ext:
                     tag = int(k[3:])
                     if tag & 0x80:
-                        self._nas_tx.append( Type2(k, val=[tag]) )
-                    elif tag & 0x70 == 0x70:
-                        self._nas_tx.append( Type6TLVE(k, val={'T':tag, 'V':Encod[k]}) )
+                        self._nas_tx.append(
+                            Type1TV(k, val={'T':tag>>4, 'V':tag&0xf}) )
                     else:
                         self._nas_tx.append( Type4TLV(k, val={'T':tag, 'V':Encod[k]}) )
     
@@ -650,7 +679,7 @@ class NASSigProc(SigProc):
         # select the encoder and duplicate it
         try:
             Encod = self.Encod[(pd, typ)]
-        except:
+        except Exception:
             return
         Encod.update(kw)
     

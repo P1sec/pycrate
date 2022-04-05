@@ -45,6 +45,7 @@ IMPORTS
 	maxSizeOfIMSInfo,
 	maxnoofMDTPLMNs,
 	maxAddPosSet,
+	maxnoofPLMNs,
 
 	id-CN-DomainIndicator,
 	id-MessageStructure,
@@ -74,6 +75,7 @@ IMPORTS
 	id-GANSS-PositioningDataSet,
 	id-d-RNTI-for-NoIuCSUP,
 	id-UE-History-Information,
+	id-UeApplicationLayerMeasurementSupportIndication,
 	id-SubscriberProfileIDforRFP,
 	id-Alt-RAB-Parameter-SupportedGuaranteedBitrateInf,
 	id-Alt-RAB-Parameter-SupportedMaxBitrateInf,
@@ -106,7 +108,8 @@ IMPORTS
 	id-LastE-UTRANPLMNIdentity,
 	id-RSRQ-Type,
 	id-RSRQ-Extension,
-	id-Additional-PositioningDataSet
+	id-Additional-PositioningDataSet,
+	id-SRVCCSource
 
 
 FROM RANAP-Constants
@@ -282,8 +285,38 @@ AlternativeRABConfigurationRequest ::= ENUMERATED{
 	...
 }
 
+UE-Application-Layer-Measurement-Configuration	::= SEQUENCE {
+		applicationLayerContainerForMeasurementConfiguration		OCTET STRING ( SIZE (1..1000)),
+		areaScopeForUEApplicationLayerMeasurementConfiguration					AreaScopeForUEApplicationLayerMeasurementConfiguration,
+		...,
+		serviceType													ServiceType
+}
+
+UE-Application-Layer-Measurement-Configuration-For-Relocation	::= SEQUENCE {
+		areaScopeForUEApplicationLayerMeasurementConfiguration					AreaScopeForUEApplicationLayerMeasurementConfiguration,
+		traceReference						TraceReference,
+		tracePropagationParameters			TracePropagationParameters OPTIONAL,
+		traceCollectionEntityIPAddress		TransportLayerAddress			OPTIONAL,
+		...,
+		serviceType							ServiceType
+}
+
+ServiceType ::= ENUMERATED{
+	qMC-for-streaming-service,
+	qMC-for-MSTI-service,
+	...
+}
+
 APN	::= OCTET STRING (SIZE (1..255))
 -- Reference: 23.003
+
+AreaScopeForUEApplicationLayerMeasurementConfiguration ::=	CHOICE {
+	cellbased			CellBased,
+	labased				LABased,
+	rabased				RABased,
+	plmn-area-based		PLMNBased,
+	...
+}
 
 AreaIdentity ::= CHOICE {
 	sAI				SAI,
@@ -478,7 +511,7 @@ CauseTransmissionNetwork ::= INTEGER {
 
 Cell-Access-Mode::= ENUMERATED {
 	hybrid,
-	... 
+	...
 }
 
 CellBased::= SEQUENCE {
@@ -630,8 +663,8 @@ CSG-Id		::= BIT STRING (SIZE (27))
 CSG-Id-List ::= SEQUENCE (SIZE (1..maxNrOfCSGs)) OF
 	CSG-Id
 
-CSG-Membership-Status ::= ENUMERATED { 
-	member, 
+CSG-Membership-Status ::= ENUMERATED {
+	member,
 	non-member,
 	...
 }
@@ -652,6 +685,9 @@ DataVolumeReportingIndication ::= ENUMERATED {
 }
 
 DCH-ID ::= INTEGER (0..255)
+
+DCN-ID ::= INTEGER (0..65535)
+
 
 DeliveryOfErroneousSDU ::= ENUMERATED {
 	yes,
@@ -709,7 +745,10 @@ E-DCH-MAC-d-Flow-ID		::= INTEGER (0.. maxNrOfEDCHMACdFlows-1)
 ENB-ID ::= CHOICE {
 	macroENB-ID			BIT STRING (SIZE(20)),
 	homeENB-ID			BIT STRING (SIZE(28)),
-	...
+	...,
+	short-macroENB-ID		BIT STRING (SIZE(18)),
+	long-macroENB-ID		BIT STRING (SIZE(21))
+
 }
 
 EncryptionAlgorithm 			::= INTEGER { no-encryption (0), standard-UMTS-encryption-algorith-UEA1 (1), standard-UMTS-encryption-algorithm-UEA2 (2) } (0..15)
@@ -995,7 +1034,7 @@ ImmediateMDT	::= SEQUENCE {
 	iE-Extensions		ProtocolExtensionContainer { { ImmediateMDT-ExtIEs} } OPTIONAL
 }
 
-ImmediateMDT-ExtIEs RANAP-PROTOCOL-EXTENSION ::= {	
+ImmediateMDT-ExtIEs RANAP-PROTOCOL-EXTENSION ::= {
 	{ID id-M4Report		CRITICALITY ignore	EXTENSION M4Report		PRESENCE optional}|
 	-- Included in case that measurement M4 is activated
 	{ID id-M5Report		CRITICALITY ignore	EXTENSION M5Report		PRESENCE optional}|
@@ -1123,7 +1162,7 @@ LAI-ExtIEs RANAP-PROTOCOL-EXTENSION ::= {
 LastKnownServiceArea	::= SEQUENCE {
 	sAI			SAI,
 	ageOfSAI	INTEGER (0..32767),
-	iE-Extensions	ProtocolExtensionContainer { {LastKnownServiceArea-ExtIEs} } OPTIONAL,	
+	iE-Extensions	ProtocolExtensionContainer { {LastKnownServiceArea-ExtIEs} } OPTIONAL,
 	...
 }
 
@@ -1292,7 +1331,7 @@ M7Report-ExtIEs RANAP-PROTOCOL-EXTENSION ::= {
 
 M7-Period ::= ENUMERATED {ms1000, ms2000, ms3000, ms4000, ms6000, ms8000, ms12000, ms16000, ms20000, ms24000, ms28000, ms32000, ms64000, ...}
 
-Management-Based-MDT-Allowed ::= ENUMERATED { 
+Management-Based-MDT-Allowed ::= ENUMERATED {
 	allowed, ... }
 
 MaxBitrate				::= INTEGER (1..16000000)
@@ -1396,7 +1435,7 @@ MDT-Report-Parameters ::= SEQUENCE {
 
 MeasurementQuantity ::= ENUMERATED {
 		cpichEcNo,
-		cpichRSCP,	
+		cpichRSCP,
 		pathloss,
 		...
 }
@@ -1566,6 +1605,21 @@ LoggingDuration	::=	ENUMERATED {
 		min90,
 		min120,
 ...}
+
+
+
+PLMNBased::= SEQUENCE {
+	plmnList				PLMNList,
+	iE-Extensions		ProtocolExtensionContainer { {PLMNBased-ExtIEs} } OPTIONAL,
+	...
+}
+
+PLMNBased-ExtIEs RANAP-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+PLMNList ::= SEQUENCE (SIZE (1.. maxnoofPLMNs)) OF
+	PLMNidentity
 
 
 
@@ -2225,7 +2279,13 @@ SourceRNC-ToTargetRNC-TransparentContainer-ExtIEs RANAP-PROTOCOL-EXTENSION ::= {
 -- Extension for Release 11 to indicate Management Based MDT PLMN List --
 	{ID id-Management-Based-MDT-PLMN-List		CRITICALITY ignore	EXTENSION MDT-PLMN-List								PRESENCE optional}|
 -- Extension for Release 11 to indicate the last E-UTRAN PLMN Identity --
-	{ID id-LastE-UTRANPLMNIdentity				CRITICALITY ignore	EXTENSION PLMNidentity								PRESENCE optional},
+	{ID id-LastE-UTRANPLMNIdentity				CRITICALITY ignore	EXTENSION PLMNidentity								PRESENCE optional}|
+	{ID id-SRVCCSource							CRITICALITY ignore	EXTENSION SRVCCSource								PRESENCE optional},
+	...
+}
+
+SRVCCSource ::= ENUMERATED{
+	v5G,
 	...
 }
 
@@ -2370,7 +2430,7 @@ TargetCellId				::= INTEGER (0..268435455)
 TargetID ::= CHOICE {
 	targetRNC-ID			TargetRNC-ID,
 	cGI				CGI,
-	
+
 	...,
 	targeteNB-ID	TargetENB-ID
 }
@@ -2410,8 +2470,17 @@ TargetRNC-ToSourceRNC-TransparentContainer ::= SEQUENCE {
 }
 
 TargetRNC-ToSourceRNC-TransparentContainer-ExtIEs RANAP-PROTOCOL-EXTENSION ::= {
+	{ ID id-UeApplicationLayerMeasurementSupportIndication	CRITICALITY ignore	EXTENSION  UeApplicationLayerMeasurementSupportIndication		PRESENCE optional},
 	...
 }
+
+
+UeApplicationLayerMeasurementSupportIndication::= BIT STRING (SIZE (8))
+-- First bit: QoE Measurement for streaming service
+-- Second bit: QoE Measurement for MSTI service
+
+
+-- Note that undefined bits are considered as a spare bit and spare bits shall be set to 0 by the transmitter and shall be ignored by the receiver.
 
 TBCD-STRING 				::= OCTET STRING
 
@@ -2560,6 +2629,14 @@ UE-AggregateMaximumBitRateDownlink			::= INTEGER (1..1000000000)
 
 UE-AggregateMaximumBitRateUplink			::= INTEGER (1..1000000000)
 -- Unit is bits per sec
+
+UE-Application-Layer-Measurement-Capability ::= BIT STRING (SIZE (8))
+
+-- First bit: QoE Measurement for streaming service
+-- Second bit: QoE Measurement for MSTI service
+
+
+-- Note that undefined bits are considered as a spare bit and spare bits shall be set to 0 by the transmitter and shall be ignored by the receiver.
 
 
 UE-History-Information ::= OCTET STRING
@@ -2734,7 +2811,7 @@ VerticalSpeedDirection ::= ENUMERATED {
 
 VerticalAccuracyCode			::= INTEGER (0..127)
 
-VoiceSupportMatchIndicator ::= ENUMERATED { 
+VoiceSupportMatchIndicator ::= ENUMERATED {
 	supported,
 	not-supported,
 	...

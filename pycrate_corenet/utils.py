@@ -1,9 +1,10 @@
 # -*- coding: UTF-8 -*-
 #/**
 # * Software Name : pycrate
-# * Version : 0.3
+# * Version : 0.4
 # *
 # * Copyright 2017. Benoit Michau. ANSSI.
+# * Copyright 2020. Benoit Michau. P1Sec.
 # *
 # * This library is free software; you can redistribute it and/or
 # * modify it under the terms of the GNU Lesser General Public
@@ -38,27 +39,25 @@ from threading import Thread, Lock, Event
 from random    import SystemRandom, randint
 from time      import time, sleep
 from datetime  import datetime
-from binascii  import hexlify, unhexlify
-from struct    import pack, unpack
-from socket    import AF_INET, AF_INET6, AF_PACKET, ntohl, htonl, ntohs, htons, \
-                      inet_aton, inet_ntoa, inet_pton, inet_ntop
+from socket    import AF_INET, AF_INET6, AF_PACKET, ntohl, htonl, ntohs, htons
 
-# SCTP support for S1AP / RUA interfaces
+# SCTP support for NGAP / S1AP / HNBAP / RUA interfaces
 try:
     import sctp
 except ImportError as err:
     print('pysctp library required for CorenetServer')
-    print('check on github: pysctp from philpraxis for python2, from lilydjwg for python3')
+    print('check on github: https://github.com/P1sec/pysctp')
     raise(err)
 
 # conversion function for security context
 try:
-    from CryptoMobile.Milenage import conv_C2, conv_C3, conv_C4, conv_C5, \
-                                      conv_A2, conv_A3, conv_A4, conv_A7
+    from CryptoMobile.conv import *
 except ImportError as err:
     print('CryptoMobile library required for CorenetServer')
+    print('check on github: https://github.com/P1sec/CryptoMobile')
     raise(err)
 
+# all pycrate stuffs
 from pycrate_core.utils import *
 from pycrate_core.repr  import *
 from pycrate_core.elt   import Element, Envelope
@@ -66,17 +65,23 @@ from pycrate_core.base  import Buf, Uint8
 Element._SAFE_STAT = True
 Element._SAFE_DYN  = True
 
-log('CorenetServer: loading all ASN.1 and NAS modules, be patient...')
+from pycrate_corenet.utils_fmt  import *
+from pycrate_corenet.ProcProto  import SigStack, SigProc
+
+log('pycrate_corenet: loading all ASN.1 and NAS modules, be patient...')
 # import ASN.1 modules
+# to drive gNodeB and ng-eNodeB
+from pycrate_asn1dir import NGAP
 # to drive eNodeB and Home-eNodeB
 from pycrate_asn1dir import S1AP
 # to drive Home-NodeB
 from pycrate_asn1dir import HNBAP
 from pycrate_asn1dir import RUA
 from pycrate_asn1dir import RANAP
-# to decode UE 3G and LTE radio capability
+# to decode UE 3G, LTE and NR radio capability
 from pycrate_asn1dir import RRC3G
 from pycrate_asn1dir import RRCLTE
+from pycrate_asn1dir import RRCNR
 # to handle SS messages
 from pycrate_asn1dir import SS
 #
@@ -98,6 +103,10 @@ from pycrate_mobile  import TS24008_SM
 from pycrate_mobile  import TS24301_EMM
 from pycrate_mobile  import TS24301_ESM
 #
+# to drive 5G UE
+from pycrate_mobile  import TS24501_FGMM
+from pycrate_mobile  import TS24501_FGSM
+#
 from pycrate_mobile  import TS24007
 from pycrate_mobile  import NAS
 
@@ -110,6 +119,7 @@ from pycrate_mobile  import NAS
 ASN_GLOBAL = S1AP.GLOBAL.MOD
 
 # ASN.1 PDU encoders / decoders
+PDU_NGAP  = NGAP.NGAP_PDU_Descriptions.NGAP_PDU
 PDU_S1AP  = S1AP.S1AP_PDU_Descriptions.S1AP_PDU
 PDU_HNBAP = HNBAP.HNBAP_PDU_Descriptions.HNBAP_PDU
 PDU_RUA   = RUA.RUA_PDU_Descriptions.RUA_PDU
@@ -120,16 +130,34 @@ PDU_SS_Facility = SS.SS_Facility.Facility
 # objects' value will be mixed in case a thread ctxt switch occurs between 
 # the fg interpreter and the bg CorenetServer loop, and both accesses the same
 # ASN.1 modules / objects
+ASN_READY_NGAP  = Event()
 ASN_READY_S1AP  = Event()
 ASN_READY_HNBAP = Event()
 ASN_READY_RUA   = Event()
 ASN_READY_RANAP = Event()
+ASN_READY_NGAP.set()
 ASN_READY_S1AP.set()
 ASN_READY_HNBAP.set()
 ASN_READY_RUA.set()
 ASN_READY_RANAP.set()
 
 ASN_ACQUIRE_TO = 0.01 # in sec
+
+def asn_ngap_acquire():
+    if ASN_READY_NGAP.is_set():
+        ASN_READY_NGAP.clear()
+        return True
+    else:
+        ready = ASN_READY_NGAP.wait(ASN_ACQUIRE_TO)
+        if not ready:
+            # timeout, module is still locked
+            return False
+        else:
+            ASN_READY_NGAP.clear()
+            return True
+
+def asn_ngap_release():
+    ASN_READY_NGAP.set()
 
 def asn_s1ap_acquire():
     if ASN_READY_S1AP.is_set():
@@ -200,7 +228,7 @@ def decode_ue_rad_cap(buf):
     UERadCap = RRCLTE.EUTRA_InterNodeDefinitions.UERadioAccessCapabilityInformation
     try:
         UERadCap.from_uper(buf)
-    except:
+    except Exception:
         return None
     uecapinfo = {}
     try:
@@ -213,7 +241,7 @@ def decode_ue_rad_cap(buf):
                                            'criticalExtensions',
                                            'c1',
                                            'ueCapabilityInformation-r8'))
-    except:
+    except Exception:
         return UERadCap._val, uecapinfo
     # decode each ueCapabilityRAT-Container
     for caprat in radcapinfo['ue-CapabilityRAT-ContainerList']:
@@ -222,7 +250,7 @@ def decode_ue_rad_cap(buf):
             UEEUTRACap = RRCLTE.EUTRA_RRC_Definitions.UE_EUTRA_Capability
             try:
                 UEEUTRACap.from_uper(caprat['ueCapabilityRAT-Container'])
-            except:
+            except Exception:
                 uecapinfo[rattype] = caprat['ueCapabilityRAT-Container']
             else:
                 uecapinfo[rattype] = UEEUTRACap._val
@@ -230,7 +258,7 @@ def decode_ue_rad_cap(buf):
             UEUTRACap  = RRC3G.PDU_definitions.InterRATHandoverInfo
             try:
                 UEUTRACap.from_uper(caprat['ueCapabilityRAT-Container'])
-            except:
+            except Exception:
                 uecapinfo[rattype] = caprat['ueCapabilityRAT-Container']
             else:
                 uecapinfo[rattype] = UEUTRACap._val
@@ -247,7 +275,7 @@ def decode_ue_rad_cap(buf):
                 try:
                     m2.from_bytes(buf_m2)
                     m3.from_bytes(buf_m3)
-                except:
+                except Exception:
                     uecapinfo[rattype] = caprat['ueCapabilityRAT-Container']
                 else:
                     uecapinfo[rattype] = (m2, m3)
@@ -255,7 +283,7 @@ def decode_ue_rad_cap(buf):
             mrc = NAS.ms_ra_capability_value_part.clone()
             try:
                 mrc.from_bytes(caprat['ueCapabilityRAT-Container'])
-            except:
+            except Exception:
                 uecapinfo[rattype] = caprat['ueCapabilityRAT-Container']
             else:
                 uecapinfo[rattype] = mrc
@@ -309,16 +337,6 @@ def meas_params_to_asn1_restore():
 class CorenetErr(PycrateErr):
     pass
 
-class HNBAPErr(CorenetErr):
-    pass
-
-class RUAErr(CorenetErr):
-    pass
-
-class RANAPErr(CorenetErr):
-    pass
-
-
 # coloured logs
 TRACE_COLOR_START = '\x1b[94m'
 TRACE_COLOR_END = '\x1b[0m'
@@ -356,17 +374,20 @@ def threadit(f, *args, **kwargs):
 RAT_GERA  = 'GERAN'
 RAT_UTRA  = 'UTRAN'
 RAT_EUTRA = 'E-UTRAN'
+RAT_NR    = 'NR'
 
 # SCTP payload protocol identifiers
 SCTP_PPID_HNBAP = 20
 SCTP_PPID_RUA   = 19
 SCTP_PPID_S1AP  = 18
+SCTP_PPID_NGAP  = 60
 
 # HNB / ENB protocol identifiers
 PROTO_HNBAP = 'HNBAP'
 PROTO_RUA   = 'RUA'
 PROTO_RANAP = 'RANAP'
 PROTO_S1AP  = 'S1AP'
+PROTO_NGAP  = 'NGAP'
 
 
 #------------------------------------------------------------------------------#
@@ -397,158 +418,6 @@ def cplist(l):
 
 
 #------------------------------------------------------------------------------#
-# various routines
-#------------------------------------------------------------------------------#
-
-def pythonize_name(name):
-    return name.replace('-', '_')
-
-
-__PLMN = TS24008_IE.PLMN()
-def plmn_buf_to_str(buf):
-    __PLMN.from_bytes(buf)
-    return __PLMN.decode()
-
-def plmn_str_to_buf(s):
-    __PLMN.encode(s)
-    return __PLMN.to_bytes()
-
-
-__IMSI = TS24008_IE.ID()
-def imsi_buf_to_str(buf):
-    __IMSI.from_bytes(buf)
-    return __IMSI.decode()[1]
-
-def imsi_str_to_buf(s):
-    __IMSI.encode(type=TS24008_IE.IDTYPE_IMSI, ident=s)
-    return __IMSI.to_bytes()
-
-
-def get_ueseccap_null_alg():
-    seccap = NAS.UESecCap(val={'EEA0': 1, 'EIA0': 1, 'UEA0': 1})
-    return seccap
-
-def get_ueseccap_null_alg_lte():
-    seccap = NAS.UESecCap(val={'EEA0': 1, 'EIA0': 1})
-    seccap.disable_from('UEA0')
-    return seccap
-
-def cellid_bstr_to_str(bstr):
-    # 20 or 28 bits
-    return hexlify(int_to_bytes(*bstr)).decode('ascii')[:-1]
-
-
-def globenbid_to_hum(seq):
-    return {'pLMNidentity': plmn_buf_to_str(seq['pLMNidentity']),
-            'eNB-ID': (seq['eNB-ID'][0], cellid_bstr_to_str(seq['eNB-ID'][1]))}
-
-
-def supptas_to_hum(seqof):
-    return [{'broadcastPLMNs': [plmn_buf_to_str(plmn) for plmn in sta['broadcastPLMNs']],
-             'tAC': bytes_to_uint(sta['tAC'], 16)} for sta in seqof]
-
-
-def gummei_to_asn(plmnid, mmegid, mmec):
-    return {'pLMN-Identity': plmn_str_to_buf(plmnid),
-            'mME-Group-ID' : uint_to_bytes(mmegid, 16),
-            'mME-Code'     : uint_to_bytes(mmec, 8)}
-            
-def served_gummei_to_asn(val):
-    return {'servedGroupIDs': [uint_to_bytes(gid, 16) for gid in val['GroupIDs']],
-            'servedMMECs'   : [uint_to_bytes(mmec, 8) for mmec in val['MMECs']],
-            'servedPLMNs'   : [plmn_str_to_buf(plmn) for plmn in val['PLMNs']]}
-
-
-def mac_aton(mac='00:00:00:00:00:00'):
-    return unhexlify(mac.replace(':', ''))
-
-def inet_aton_cn(*pdnaddr, **kw):
-    """convert a PDN / PDP address tuple to a buffer
-    kw can be:
-        - dom: 'PS' or 'EPS'
-    """
-    if pdnaddr[0] == 0:
-        # PPP address
-        return pdnaddr[1]
-    elif pdnaddr[0] == 1:
-        # IPv4 address
-        try:
-            return inet_aton(pdnaddr[1])
-        except:
-            log('WNG: IPv4 address conversion error, %r' % pdnaddr[1])
-            return pdnaddr[1]
-    elif pdnaddr[0] == 2:
-        # accept 64-bit IPv6 prefix / subnet or full 128-bit IPv6 address
-        ipaddr = pdnaddr[1]
-        if ipaddr.count(':') == 3:
-            # IPv6 prefix / subnet only
-            return pack('>HHHH', *map(lambda x:int(x, 16), ipaddr.split(':')))
-        else:
-            try:
-                return inet_pton(AF_INET6, ipaddr)
-            except:
-                log('WNG: IPv6 address conversion error, %r' % pdnaddr[1])
-                return ipaddr
-    elif pdnaddr[0] == 3:
-        # IPv4v6 addresses
-        if 'dom' in kw and kw['dom'] == 'EPS':
-            # PDN address
-            try:
-                return inet_aton_cn(2, pdnaddr[2]) + inet_aton_cn(1, pdnaddr[1])
-            except:
-                log('WNG: IPv4v6 PDN address conversion error, %r' % pdnaddr[1])
-                return pdnaddr[1]
-        else:
-            # PDP address
-            try:
-                return inet_aton_cn(1, pdnaddr[1]) + inet_aton_cn(2, pdnaddr[2])
-            except:
-                log('WNG: IPv4v6 PDP address conversion error, %r' % pdnaddr[1])
-                return pdnaddr[1]
-    else:
-        # unknown address type
-        return pdnaddr[1]
-
-def inet_ntoa_cn(pdntype, buf, dom='EPS'):
-    """convert a buffer for a given pdntype and domain to a humane-readable address
-    """
-    if pdntype == 0:
-        # PPP address
-        return (pdntype, buf)
-    if pdntype == 1:
-        # IPv4 address
-        try:
-            return (1, inet_ntoa(buf))
-        except:
-            log('WNG: IPv4 buffer conversion error, %s' % hexlify(buf).decode('ascii'))
-            return None
-    elif pdntype == 2:
-        # accept 64-bit IPv6 local if or full 128-bit IPv6 address
-        if len(buf) == 8:
-            return (2, '%x:%x:%x:%x' % unpack('>HHHH', buf))
-        else:
-            try:
-                return (2, inet_ntop(AF_INET6, buf))
-            except:
-                log('WNG: IPv6 buffer conversion error, %s' % hexlify(buf).decode('ascii'))
-                return None
-    elif pdntype == 3:
-        if dom == 'EPS':
-            # PDN address
-            try:
-                return (3, inet_ntoa(buf[8:12]), inet_ntoa_cn(2, buf[:8])[1])
-            except:
-                log('WNG: IPv4v6 PDN buffer conversion error, %s' % hexlify(buf).decode('ascii'))
-        else:
-            # PDP address
-            try:
-                return (3, inet_ntoa(buf[:4]), inet_ntop(AF_INET6, buf[4:20]))
-            except:
-                log('WNG: IPv4v6 PDP buffer conversion error, %s' % hexlify(buf).decode('ascii'))
-    else:
-        return (pdntype, buf)
-
-#------------------------------------------------------------------------------#
 # ASN.1 object handling facilities
 #------------------------------------------------------------------------------#
 
@@ -564,12 +433,12 @@ def print_pduies(desc):
                 IEs = []
                 for ident in ies('id'):
                     try:
-                        info = '  - %i: %s (%s)'\
+                        info = '  - %2i: %s (%s)'\
                                % (ident,
                                   pythonize_name(ies('id', ident)['Value']._tr._name),
                                   ies('id', ident)['presence'][0].upper())
-                    except:
-                        info = '  - %i: [%s] (%s)'\
+                    except Exception:
+                        info = '  - %2i: [%s] (%s)'\
                                % (ident,
                                   ies('id', ident)['Value'].TYPE,
                                   ies('id', ident)['presence'][0].upper())
@@ -586,12 +455,12 @@ def print_pduies(desc):
                 Exts = []
                 for ident in ies('id'):
                     try:
-                        info = '  - %i: %s (%s)'\
+                        info = '  - %2i: %s (%s)'\
                                % (ident,
                                   pythonize_name(ies('id', ident)['Extension']._tr._name),
                                   ies('id', ident)['presence'][0].upper())
-                    except:
-                        info = '  - %i: [%s] (%s)'\
+                    except Exception:
+                        info = '  - %2i: [%s] (%s)'\
                                % (ident,
                                   pythonize_name(ies('id', ident)['Extension'].TYPE),
                                   ies('id', ident)['presence'][0].upper())
@@ -606,49 +475,52 @@ def print_pduies(desc):
                 print('  None')
 
 
-def print_nasies(nasmsg):
+def print_nasies(nasmsg, indent=''):
     # go after the header (last field: Type), and print IE type, tag if defined,
     # and name
     # WNG: Type1V (Uint4), Type2 (Uint8), Type3V(Buf) are not wrapped
     hdr = nasmsg[0]
     if 'ProtDisc' in hdr._by_name:
         pd = hdr['ProtDisc'].get_val()
+    elif 'EPD' in hdr._by_name:
+        pd = hdr['EPD'].get_val()
     else:
         pd = hdr[0]['ProtDisc'].get_val()
     typ = hdr['Type'].get_val()
-    print('%s (PD %i, Type %i), IEs:' % (nasmsg._name, pd, typ))
+    print('%s%s (PD %i, Type %i), IEs:' % (indent, nasmsg._name, pd, typ))
     #
     if len(nasmsg._content) == 1:
-        print('  None')
+        print('%s  None' % indent)
     else:
         for ie in nasmsg._content[1:]:
             if ie.get_trans():
                 # optional IE
-                print('- %-9s : %s (T: %i)'\
-                      % (ie.__class__.__name__, ie._name, ie[0].get_val()))
+                print('%s- %-9s : %s (T: %i)'\
+                      % (indent, ie.__class__.__name__, ie._name, ie[0].get_val()))
             elif isinstance(ie, TS24007.IE):
                 # mandatory IE
-                print('- %-9s : %s' % (ie.__class__.__name__, ie._name))
+                print('%s- %-9s : %s' % (indent, ie.__class__.__name__, ie._name))
             elif ie.get_bl() == 4:
                 # uint / spare bits
-                print('- %-9s : %s' % ('Type1V', 'spare'))
+                print('%s- %-9s : %s' % (indent, 'Type1V', 'spare'))
             else:
                 assert()
 
 
-#------------------------------------------------------------------------------#
-# wrapping classes
-#------------------------------------------------------------------------------#
-
-# Signaling stack handler (e.g. for HNBd, ENBd, UEd)
-class SigStack(object):
-    pass
-
-
-# Signaling procedure handler
-class SigProc(object):
-    pass
-
-# See ProcProto.py for prototype classes for the various mobile network procedures
-# and other Proc*.py for the procedures themselves
+def print_nasproc_docs(nasproc):
+    msgcn, msgue = nasproc.Cont
+    print('CN message:')
+    if msgcn is None:
+        print('    None')
+    else:
+        for m in msgcn:
+            print_nasies(m(), indent='    ')
+            print('    ')
+    print('UE message:')
+    if msgue is None:
+        print('    None')
+    else:
+        for m in msgue:
+            print_nasies(m(), indent='    ')
+            print('    ')
 

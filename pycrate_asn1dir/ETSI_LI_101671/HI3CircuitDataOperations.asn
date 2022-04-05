@@ -1,0 +1,81 @@
+HI3CircuitDataOperations
+{itu-t(0) identified-organization(4) etsi(0) securityDomain(2) lawfulIntercept(2) hi3(2) circuitLI(1) version4(4)}
+
+DEFINITIONS IMPLICIT TAGS ::=
+
+-- The following operations are used to transmit user data which can be exchanged via the DSS1, ISUP
+-- or MAP signalling (e.g. UUS, SMS).
+
+BEGIN
+
+IMPORTS OPERATION,
+	ERROR
+		FROM Remote-Operations-Information-Objects
+		{joint-iso-itu-t(2) remote-operations(4) informationObjects(5) version1(0)}
+
+	-- from clause D.5
+	LawfulInterceptionIdentifier,
+	CommunicationIdentifier,
+	TimeStamp,
+	OperationErrors,
+	Supplementary-Services,
+	SMS-report
+		FROM HI2Operations
+		{itu-t(0) identified-organization(4) etsi(0) securityDomain(2) lawfulIntercept(2) hi2(1) version13(13)};
+
+-- =============================
+-- Object Identifier definitions
+-- =============================
+
+-- LawfulIntercept DomainId
+lawfulInterceptDomainId OBJECT IDENTIFIER ::= {itu-t(0) identified-organization(4) etsi(0) securityDomain(2) lawfulIntercept(2)}
+
+-- hi3 Domain
+hi3CircuitLIId OBJECT IDENTIFIER ::= {lawfulInterceptDomainId hi3(2) circuitLI(1)}
+hi3CircuitLIOperationId OBJECT IDENTIFIER ::= {hi3CircuitLIId version3(3)}
+
+circuit-Call-related-Services	OPERATION ::=
+{
+	ARGUMENT	Content-Report
+	ERRORS		{OperationErrors}
+	CODE		global:{hi3CircuitLIId circuit-Call-Serv(1) version1(1)}
+}
+-- Class 2 operation. The timer shall be set to a value between 3s and 240s.
+-- The timer default value is 60s.
+-- NOTE: The same note as for HI management operation applies.
+
+no-Circuit-Call-related-Services	OPERATION ::=
+{
+	ARGUMENT	Content-Report
+	ERRORS		{OperationErrors}
+	CODE		global:{hi3CircuitLIId no-Circuit-Call-Serv(2) version1(1)}
+}
+-- Class 2 operation. The timer must be set to a value between 10s and 120s.
+-- The timer default value is 60s.
+
+Content-Report ::= SEQUENCE
+{
+	domainID						[0] OBJECT IDENTIFIER (hi3CircuitLIOperationId) OPTIONAL,
+		-- Once using FTP delivery mechanism
+	lawfulInterceptionIdentifier	[6] LawfulInterceptionIdentifier OPTIONAL,
+	communicationIdentifier			[1] CommunicationIdentifier,
+		-- Used to uniquely identify an intercepted call: the same as used for the relevant IRI.
+		-- Called "callIdentifier" in V1.1.1 of ES 201 671 [i.5]
+	timeStamp						[2] TimeStamp,
+	initiator						[3] ENUMERATED
+	{
+		originating-party(0),
+		terminating-party(1),
+		forwarded-to-party(2),
+		undefined-party(3),
+		...
+	} OPTIONAL,
+	content							[4] Supplementary-Services OPTIONAL,
+		-- UUI are encoded in the format defined for the User-to-user information parameter
+		-- of the ISUP protocol (see EN 300 356 [5]). Only one UUI parameter is sent per message.
+	sMS-report						[5] SMS-report OPTIONAL,
+	...
+}
+
+END -- end of HI3CircuitDataOperations
+

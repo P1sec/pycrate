@@ -1,0 +1,353 @@
+-- ETSI TS 103 300-3 V2.1.1 (2020-11)
+
+VAM-PDU-Descriptions {itu-t(0) identified-organization(4) etsi(0) itsDomain(5)
+    wg1(1) ts(103300) vam(1) version1(1)}
+DEFINITIONS AUTOMATIC TAGS ::=
+BEGIN
+
+    IMPORTS
+    Curvature, CurvatureCalculationMode, ExteriorLights, Heading,
+    LanePosition, LateralAcceleration, LongitudinalAcceleration, 
+    PathDeltaTime, PathHistory, ReferencePosition, Speed,
+    StationID, VerticalAcceleration, YawRate
+    FROM ITS-Container {itu-t(0) identified-organization(4) etsi(0)
+        itsDomain(5) wg1(1) ts(102894) cdd(2) version(2)}
+
+    GenerationDeltaTime
+    FROM CAM-PDU-Descriptions {itu-t(0) identified-organization(4) etsi(0)
+        itsDomain(5) wg1(1) en(302637) cam(2) version(2)}
+
+
+    -- Note: sVAM-Temp-Imports defines types that are intended to be updated within 
+    -- or added to the Common Data Dictionary. Once the CDD has been updated, 
+    -- VAM-Temp-Imports will also be updated to import the new types directly 
+    -- from the CDD. The use of WITH SUCCESSORS ensures that the import 
+    -- statement below will not have to change.
+
+    AreaCircular, AreaPolygon, AreaRectangle, BasicContainer, ItsPduHeader
+    FROM VAM-Temp-Imports {itu-t(0) identified-organization(4) etsi(0) 
+        itsDomain(5) wg1(1) ts(103300) temp-imports(255) version1(1)}
+        WITH SUCCESSORS
+
+    IntersectionReferenceID, LaneID 
+    FROM DSRC {iso (1) standard (0) signalizedIntersection (19091) profilec(2)
+        dsrc (2) version (2)}
+
+    ;
+
+
+    VAM ::= SEQUENCE {
+        header ItsPduHeaderVam,
+        vam    VruAwareness
+    }
+
+    ItsPduHeaderVam ::= ItsPduHeader(WITH COMPONENTS {
+        ...,
+        messageID(vam)
+    })
+
+    VruAwareness ::= SEQUENCE {
+        generationDeltaTime  GenerationDeltaTime, -- from CAM-PDU-Descriptions
+        vamParameters        VamParameters 
+    }
+
+    VamParameters ::= SEQUENCE {
+        basicContainer                 BasicContainer, -- from VAM-Temp-Imports
+        vruHighFrequencyContainer      VruHighFrequencyContainer OPTIONAL, 
+        vruLowFrequencyContainer       VruLowFrequencyContainer OPTIONAL,
+        vruClusterInformationContainer VruClusterInformationContainer OPTIONAL,
+        vruClusterOperationContainer   VruClusterOperationContainer OPTIONAL,
+        vruMotionPredictionContainer   VruMotionPredictionContainer OPTIONAL,
+        ...
+    }
+ 
+
+    VruProfile ::= ENUMERATED {
+        unavailable(0), pedestrian(1), cyclist(2), motorcyclist(3), animal(4),
+        max(15)
+    }
+    
+    VruHighFrequencyContainer ::= SEQUENCE {
+        heading                  Heading,  -- from ITS-Container
+        speed                    Speed, -- from ITS-Container
+        longitudinalAcceleration LongitudinalAcceleration, -- from ITS-Container
+        curvature                Curvature OPTIONAL, -- from ITS-Container
+        curvatureCalculationMode CurvatureCalculationMode OPTIONAL, -- from ITS-Container
+        yawRate                  YawRate OPTIONAL, -- from ITS-Container
+        lateralAcceleration      LateralAcceleration OPTIONAL, -- from ITS-Container
+        verticalAcceleration     VerticalAcceleration OPTIONAL, -- from ITS-Container
+        vruLanePosition          VruLanePosition OPTIONAL,
+        environment              VruEnvironment OPTIONAL,
+        movementControl          VruMovementControl OPTIONAL,
+        orientation              VruOrientation OPTIONAL,
+        rollAngle                VruRollAngle OPTIONAL, 
+        deviceUsage              VruDeviceUsage OPTIONAL,
+        ...
+    }
+
+    VruLanePosition ::= CHOICE {
+        offRoadLanePosition    OffRoadLanePosition,
+        vehicularLanePosition  LanePosition, -- from ITS-Container
+        trafficIslandPosition  TrafficIslandPosition,
+        mapPosition            MapPosition,
+        ...
+    }
+
+    OffRoadLanePosition ::= ENUMERATED {
+        unavailable(0), sidewalk(1), parkingLane(2), bikeLane(3), 
+        max(15)
+    }
+
+    TrafficIslandPosition ::= SEQUENCE {
+        oneSide    NonIslandLanePosition,
+        otherSide  NonIslandLanePosition,
+        ...
+    }
+  
+    NonIslandLanePosition ::= CHOICE {
+        offRoadLanePosition    OffRoadLanePosition,
+        vehicularLanePosition  LanePosition, -- from ITS-Container
+        mapPosition            MapPosition,
+        ...
+    }
+
+    MapPosition ::= SEQUENCE {
+        intersectionId    IntersectionReferenceID,
+        lane              LaneID
+    }
+
+    VruEnvironment ::= ENUMERATED {
+        unavailable (0), intersectionCrossing(1), zebraCrossing(2), sidewalk (3),
+        onVehicleRoad(4), protectedGeographicArea(5), max (255)
+        -- values 6-254 reserved for later use
+    }
+
+    VruMovementControl ::= ENUMERATED {
+        unavailable (0), braking(1), hardBraking(2), stopPedaling (3),
+        brakingAndStopPedaling(4), hardBrakingAndStopPedaling (5), 
+        noReaction(6),   max (255)
+        -- values 7-254 reserved for later use
+    }
+
+    VruOrientation ::= Heading -- from ITS-Container
+
+    VruRollAngle ::= Heading -- from ITS-Container
+
+    VruDeviceUsage ::= ENUMERATED {
+        unavailable(0), other(1), idle(2), listeningToAudio(3), typing(4),
+        calling(5), playingGames(6), reading(7), viewing(8), max(255)
+        -- values 9-254 reserved for later use
+    }
+
+    VruLowFrequencyContainer ::= SEQUENCE {
+        profileAndSubprofile     VruProfileAndSubprofile OPTIONAL,
+        exteriorLights           VruExteriorLights OPTIONAL,
+        sizeClass                VruSizeClass OPTIONAL,
+       ...
+    }
+
+    VruProfileAndSubprofile ::= CHOICE {
+      pedestrian  VruSubProfilePedestrian,
+      bicyclist     VruSubProfileBicyclist,
+      motorcylist VruSubProfileMotorcyclist,
+      animal      VruSubProfileAnimal,
+      ...
+    }
+
+    VruSubProfilePedestrian ::= ENUMERATED {
+      unavailable(0), ordinary-pedestrian(1),
+      road-worker(2), first-responder(3),
+      max(15)
+    }
+
+    VruSubProfileBicyclist ::= ENUMERATED {
+      unavailable(0), bicyclist(1), wheelchair-user(2), horse-and-rider(3), 
+      rollerskater(4), e-scooter(5), personal-transporter(6),
+      pedelec(7), speed-pedelec(8),
+      max(15)
+    }
+
+    VruSubProfileMotorcyclist ::= ENUMERATED {
+      unavailable(0), moped(1), motorcycle(2), motorcycle-and-sidecar-right(3), 
+      motorcycle-and-sidecar-left(4), max(15)
+    }
+
+    VruSubProfileAnimal ::= ENUMERATED {
+      unavailable(0), wild-animal(1), farm-animal(2), service-animal(3),   max(15)
+    }
+
+    VruExteriorLights ::= SEQUENCE {
+        vruSpecific     VruSpecificExteriorLights, -- defined below
+        vehicular         ExteriorLights
+    }
+
+    VruSpecificExteriorLights ::= BIT STRING {
+        unavailable (0),
+        backFlashLight (1),
+        helmetLight (2),
+        armLight (3),
+        legLight (4),
+        wheelLight (5)
+    } (SIZE(8))
+
+    VruSizeClass ::= ENUMERATED {
+        unavailable (0), low(1), medium(2), high (3), max(15)
+        -- values 4-14 reserved for later use
+    }
+
+    VruClusterInformationContainer ::= SEQUENCE {
+        clusterId                     ClusterId,
+        clusterBoundingBoxShape       ClusterBoundingBoxShape,
+        clusterCardinalitySize        ClusterCardinalitySize, -- 0 means unknown
+        clusterProfiles               ClusterProfiles,
+        ...
+    }
+
+    ClusterId ::= INTEGER(0..255)
+
+    ClusterBoundingBoxShape::= CHOICE {
+        clusterRectangle AreaRectangle, -- from VAM-Temp-Imports
+        clusterCircle    AreaCircular, -- from VAM-Temp-Imports
+        clusterPolygon   AreaPolygon, -- from VAM-Temp-Imports
+        ...
+    }
+
+    ClusterCardinalitySize   ::= INTEGER {unavailable(0), onlyLeader(1)} (0..255) 
+
+    ClusterProfiles ::= BIT STRING {
+        pedestrian(0),
+        bicyclist(1),
+        motorcyclist(2),
+        animal(3)
+    } (SIZE(4))
+
+    -- this is OPTIONAL elements rather than a CHOICE because a
+    -- VRU ITS-S could be leaving one cluster and joining another.
+    VruClusterOperationContainer ::= SEQUENCE {
+        clusterJoinInfo         ClusterJoinInfo OPTIONAL,
+        clusterLeaveInfo        ClusterLeaveInfo OPTIONAL,
+        clusterBreakupInfo      ClusterBreakupInfo OPTIONAL,
+        clusterIdChangeTimeInfo VruClusterOpTimestamp OPTIONAL,
+        ...
+    }
+
+    VruClusterOpTimestamp ::= INTEGER (1..255)
+
+    ClusterJoinInfo ::= SEQUENCE {
+        clusterId       ClusterId,
+        joinTime        VruClusterOpTimestamp,
+        ...
+    }
+
+    ClusterLeaveInfo ::= SEQUENCE {
+        clusterId               ClusterId,
+        clusterLeaveReason      ClusterLeaveReason,
+        ...
+    }
+
+    ClusterBreakupInfo ::= SEQUENCE {
+        clusterBreakupReason  ClusterBreakupReason,
+        breakupTime           VruClusterOpTimestamp,
+        ...
+    }
+
+    ClusterLeaveReason ::= ENUMERATED {
+         notProvided                   (0),
+         clusterLeaderLost             (1),    
+         clusterDisbandedByLeader      (2),    
+         outOfClusterBoundingBox       (3),    
+         outOfClusterSpeedRange        (4),
+         joiningAnotherCluster         (5),
+         cancelledJoin                 (6),
+         failedJoin                    (7),
+         safetyCondition               (8),
+         max(15)            
+    }
+
+    ClusterBreakupReason ::= ENUMERATED {
+         notProvided                        (0),
+         clusteringPurposeCompleted         (1),
+         leaderMovedOutOfClusterBoundingBox (2),    
+         joiningAnotherCluster              (3),
+         enteringLowRiskAreaBasedOnMaps     (4),
+         receptionOfCpmContainingCluster    (5),
+         max(15)                                                                 
+    }
+
+    VruMotionPredictionContainer ::= SEQUENCE {
+        pathHistory                      PathHistory OPTIONAL,
+        pathPrediction                   SequenceOfVruPathPoint OPTIONAL,
+        safeDistance                     SequenceOfVruSafeDistanceIndication OPTIONAL,
+        trajectoryInterceptionIndication SequenceOfTrajectoryInterceptionIndication OPTIONAL,
+        accelerationChangeIndication     AccelerationChangeIndication OPTIONAL,
+        headingChangeIndication          HeadingChangeIndication OPTIONAL,
+        stabilityChangeIndication        StabilityChangeIndication OPTIONAL,
+        ...
+    }
+
+    SequenceOfVruPathPoint ::= SEQUENCE OF VruPathPoint
+
+    VruPathPoint ::=  SEQUENCE {
+        pathPosition           ReferencePosition,                   
+        pathDeltaTime          PathDeltaTime     OPTIONAL
+    }
+
+
+    SequenceOfVruSafeDistanceIndication ::= 
+        SEQUENCE(SIZE(1..8)) OF VruSafeDistanceIndication
+
+    VruSafeDistanceIndication ::= SEQUENCE {
+        subjectStation                 StationID OPTIONAL,
+        stationSafeDistanceIndication  StationSafeDistanceIndication,
+        timeToCollision                ActionDeltaTime OPTIONAL,
+        ...
+    }
+
+    StationSafeDistanceIndication ::= BOOLEAN
+
+    SequenceOfTrajectoryInterceptionIndication ::= 
+        SEQUENCE (SIZE(1..8)) OF TrajectoryInterceptionIndication
+
+    TrajectoryInterceptionIndication  ::= SEQUENCE {
+        subjectStation                    StationID OPTIONAL, 
+        trajectoryInterceptionProbability TrajectoryInterceptionProbability,
+        trajectoryInterceptionConfidence  TrajectoryInterceptionConfidence OPTIONAL,
+        ... 
+    }
+
+    TrajectoryInterceptionProbability ::= INTEGER { zero(0), twoPercent(1), 
+        fourPercent(2), oneHundredPercent(50), unavailable (63) } (0..63) 
+
+    TrajectoryInterceptionConfidence ::= INTEGER { lessthan50percent(0), 
+        between50and70Percent(1), between70and90Percent(2), above90Percent(3) } (0..3)
+
+    HeadingChangeIndication ::= SEQUENCE {
+        direction        LeftOrRight,
+        actionDeltaTime  ActionDeltaTime,
+        ...
+    }
+
+    LeftOrRight ::= ENUMERATED { left, right }
+
+    ActionDeltaTime ::= INTEGER {zero(0), hundredMs(1), twoHundredMs(2),
+        unavailable (127) } (0..127)
+
+    AccelerationChangeIndication ::= SEQUENCE {
+         accelOrDecel    AccelOrDecel,
+         actionDeltaTime ActionDeltaTime,
+         ...
+    }
+
+    AccelOrDecel ::= ENUMERATED { accelerate, decelerate }
+ 
+    StabilityChangeIndication ::= SEQUENCE {
+       lossProbability     StabilityLossProbability,
+       actionDeltaTime     ActionDeltaTime,
+       ...
+    } 
+
+    StabilityLossProbability ::= INTEGER { zero(0), twoPercent (1),
+        fourPercent(2), unavailable (63) } (0..63) 
+
+
+END

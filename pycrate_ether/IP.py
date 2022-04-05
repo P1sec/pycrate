@@ -1,7 +1,7 @@
 # −*− coding: UTF−8 −*−
 #/**
 # * Software Name : pycrate 
-# * Version : 0.3
+# * Version : 0.4
 # *
 # * Copyright 2016. Benoit Michau. ANSSI.
 # *
@@ -30,18 +30,19 @@
 from socket import inet_aton, inet_ntoa, AF_INET, AF_INET6
 from struct import pack
 from array import array
+
+from pycrate_core.utils import reverse_dict, log
+from pycrate_core.elt   import Envelope, Sequence, REPR_RAW, REPR_HEX, REPR_BIN
+from pycrate_core.base  import *
+from pycrate_core.repr  import *
+
 try:
     from socket import inet_pton, inet_ntop
 except ImportError:
     try:
         from win_inet_pton import inet_pton, inet_ntop
     except ImportError:
-        print('[pycrate_ether/IP.py] inet_pton() and inet_ntop() not available')
-
-from pycrate_core.utils import reverse_dict
-from pycrate_core.elt import Envelope, Array, REPR_RAW, REPR_HEX, REPR_BIN
-from pycrate_core.base import *
-from pycrate_core.repr import *
+        log('pycrate_ether/IP.py: inet_pton() and inet_ntop() not available')
 
 
 #------------------------------------------------------------------------------#
@@ -270,42 +271,34 @@ class IPv4Option(Envelope):
     _GEN = (
         Uint8('CCN', dic=IPv4Opt_dict),
         Uint8('len'), # trans and val automated
-        Buf('val', val=b'') # trans and bl automated
+        Buf('val', val=b'', rep=REPR_HEX) # trans and bl automated
         )
+    
     def __init__(self, *args, **kwargs):
         Envelope.__init__(self, *args, **kwargs)
-        self[1].set_transauto(self._set_trans)
-        self[1].set_valauto(self._set_len_val)
-        self[2].set_transauto(self._set_trans)
-        self[2].set_blauto(self._set_val_bl)
-    
-    def _set_trans(self):
-        if self[0].get_val() in (0, 1):
-            return True
-        else:
-            return False
-    
-    def _set_len_val(self):
-        return 2 + self[2].get_len()
-    
-    def _set_val_bl(self):
-        return max(0, 8 * (self[1].get_val()-2))
+        self[1].set_transauto(lambda: True if self[0]() in (0, 1) else False)
+        self[1].set_valauto(lambda: 2 + self[2].get_len())
+        self[2].set_transauto(lambda: True if self[0]() in (0, 1) else False)
+        self[2].set_blauto(lambda: max(0, (self[1]()-2)<<3))
+
 
 class IPv4Options(Envelope):
     _GEN = (
-        Array('opts', GEN=IPv4Option()),
+        Sequence('opts', GEN=IPv4Option()),
         Buf('pad') # bl automated
         )
+    
     def __init__(self, *args, **kwargs):
         Envelope.__init__(self, *args, **kwargs)
-        self[1].set_blauto(self._set_pad_bl)
+        self[1].set_blauto(lambda: self._pad_bl())
     
-    def _set_pad_bl(self):
+    def _pad_bl(self):
         opts_ext = self[0].get_bl() % 32
         if opts_ext:
             return 32 - opts_ext
         else:
             return 0
+
 
 class IPv4(Envelope):
     _GEN = (
@@ -327,61 +320,53 @@ class IPv4(Envelope):
         Uint16('hdr_cs', rep=REPR_HEX), # val automated
         Buf('src', val=b'\x7f\0\0\x01', bl=32, rep=REPR_HEX),
         Buf('dst', val=b'\x7f\0\0\x01', bl=32, rep=REPR_HEX),
-        Buf('opt', val=b''), # bl automated
+        Buf('opt', val=b'', rep=REPR_HEX), # bl automated
         )
+    
     def __init__(self, *args, **kwargs):
-        # enable to pass IPv4 addr in human-readable format
         if 'val' in kwargs:
+            # enable to pass IPv4 addr in human-readable format and convert them
             if 'src' in kwargs['val'] and len(kwargs['val']['src']) > 4:
                 try:
                     kwargs['val']['src'] = inet_aton(kwargs['val']['src'])
-                except:
+                except Exception:
                     pass
             if 'dst' in kwargs['val'] and len(kwargs['val']['dst']) > 4:
                 try:
                     kwargs['val']['dst'] = inet_aton(kwargs['val']['dst'])
-                except:
+                except Exception:
                     pass
         Envelope.__init__(self, *args, **kwargs)
-        self[1].set_valauto(self._set_hdrwlen_val)
+        self['hdr_wlen'].set_valauto(lambda: 5 + (self['opt'].get_len()>>2))
         if 'val' not in kwargs or 'len' not in kwargs['val']:
-            self[7].set_valauto(self._set_len_val)
+            self['len'].set_valauto(lambda: self._len_val())
         if 'val' not in kwargs or 'proto' not in kwargs['val']:
-            self[14].set_valauto(self._set_prot_val)
-        self[15].set_valauto(self.checksum)
-        self[18].set_blauto(self._set_opt_bl)
+            self['proto'].set_valauto(lambda: self._proto_val())
+        self['hdr_cs'].set_valauto(lambda: checksum(self[:15].to_bytes() + b'\0\0' + self[16:].to_bytes()))
+        self['opt'].set_blauto(lambda: max(0, (self['hdr_wlen'].get_val()-5)<<5))
     
-    def _set_hdrwlen_val(self):
-        return 5 + (self[18].get_len() // 4)
-    
-    def _set_len_val(self):
+    def _len_val(self):
         pay = self.get_payload()
         if pay is not None:
-            return 20 + self[18].get_len() + pay.get_len()
+            return 20 + self['opt'].get_len() + pay.get_len()
         else:
-            return 20 + self[18].get_len()
+            return 20 + self['opt'].get_len()
     
-    def _set_prot_val(self):
+    def _proto_val(self):
         pay = self.get_payload()
         if pay is not None and pay[0]._name in IPProtRev_dict:
             return IPProtRev_dict[pay[0]._name]
         else:
             return 0xff
     
-    def checksum(self):
-        return checksum(self[:15].to_bytes() + b'\0\0' + self[16:].to_bytes())
-    
-    def _set_opt_bl(self):
-        return max(0, 32 * (self[1].get_val()-5))
-    
     def _from_char(self, char):
         Envelope._from_char(self, char)
-        opts_buf = self[18].get_val()
+        opts_buf = self['opt'].get_val()
         if opts_buf:
-            opts = IPv4Options()
+            opts = IPv4Options('opt')
             opts.from_bytes(opts_buf)
             if opts.to_bytes() == opts_buf:
-                self.replace(self[18], opts)
+                self.replace(self['opt'], opts)
 
 
 class ICMP(Envelope):
@@ -391,16 +376,10 @@ class ICMP(Envelope):
         Uint16('cs', rep=REPR_HEX), # val automated
         Buf('data', val=b'\0\0coucou')
         )
+    
     def __init__(self, *args, **kwargs):
         Envelope.__init__(self, *args, **kwargs)
-        self[2].set_valauto(self.checksum)
-    
-    def checksum(self):
-        cs_old = self[2]._val
-        self[2]._val = 0
-        icmp = self.to_bytes()
-        self[2]._val = cs_old
-        return checksum(icmp)
+        self[2].set_valauto(lambda: checksum(pack('>BB', self[0](), self[1]()) + b'\0\0' + self[3].to_bytes()))
 
 
 class IPv6(Envelope):
@@ -414,6 +393,7 @@ class IPv6(Envelope):
         Buf('src', val=15*b'\0'+b'\x01', bl=128, rep=REPR_HEX),
         Buf('dst', val=15*b'\0'+b'\x01', bl=128, rep=REPR_HEX)
         )
+    
     def __init__(self, *args, **kwargs):
         # enable to pass IPv4 addr in human-readable format
         if 'val' in kwargs:
@@ -429,23 +409,25 @@ class IPv6(Envelope):
                     pass
         Envelope.__init__(self, *args, **kwargs)
         if 'val' not in kwargs or 'plen' not in kwargs['val']:
-            self[3].set_valauto(self._set_plen_val)
+            self[3].set_valauto(lambda: self._plen_val())
         if 'val' not in kwargs or 'next' not in kwargs['val']:
-            self[4].set_valauto(self._set_next_val)
+            self[4].set_valauto(lambda: self._next_val())
     
-    def _set_plen_val(self):
+    def _plen_val(self):
         pay = self.get_payload()
         if pay is not None:
             return pay.get_len()
         else:
             return 0
     
-    def _set_next_val(self):
+    def _next_val(self):
         pay = self.get_payload()
         if pay is not None and pay[0]._name in IPProtRev_dict:
             return IPProtRev_dict[pay[0]._name]
         else:
             return 0xff
+
+# TODO: define structures for IPv6 options
 
 
 class UDP(Envelope):
@@ -456,13 +438,14 @@ class UDP(Envelope):
         Uint16('len'), # val automated, unless initialized to fixed value
         Uint16('cs', rep=REPR_HEX) # val automated
         )
+    
     def __init__(self, *args, **kwargs):
         Envelope.__init__(self, *args, **kwargs)
         if 'val' not in kwargs or 'len' not in kwargs['val']:
-            self[2].set_valauto(self._set_len_val)
-        self[3].set_valauto(self.checksum)
+            self[2].set_valauto(lambda: self._len_val())
+        self[3].set_valauto(lambda: self.checksum())
     
-    def _set_len_val(self):
+    def _len_val(self):
         pay = self.get_payload()
         if pay is not None:
             return 8 + pay.get_len()
@@ -473,36 +456,30 @@ class UDP(Envelope):
         if self._CS_OFF:
             return 0
         # get UDP and payload buffer
+        udp = pack('>HHH', self[0](), self[1](), self[2]()) + b'\0\0'
         pay = self.get_payload()
         if pay is not None:
-            udp = b''.join((self[:3].to_bytes(),
-                            b'\0\0',
-                            pay.to_bytes()))
-        else:
-            udp = self[:3].to_bytes() + b'\0\0'
+            udp += pay.to_bytes()
         # get pseudo hdr buffer
         ludp =  len(udp)
         hdr = self.get_header()
+        while hdr is not None and not isinstance(hdr, (IPv4, IPv6)):
+            # this is mostly to jump over IPv6 options
+            hdr = hdr.get_header()
         if hdr is not None:
-            # keep only src addr, dst addr and prot
+            # keep only src addr, dst addr and proto
             vers = hdr[0].get_val()
             if vers == 4:
-                phdr = b''.join((hdr[16].to_bytes(),
-                                 hdr[17].to_bytes(),
-                                 b'\0\x11',
-                                 pack('>H', ludp)))
+                phdr = hdr['src'].to_bytes() + hdr['dst'].to_bytes() + b'\0\x11' + pack('>H', ludp)
             elif vers == 6:
                 # WNG: in case of IPv6 routing header, dst addr is incorrect
-                phdr = b''.join((hdr[6].to_bytes(),
-                                 hdr[7].to_bytes(),
-                                 b'\0\x11',
-                                 pack('>H', ludp)))
+                phdr = hdr['src'].to_bytes() + hdr['dst'].to_bytes() + b'\0\x11' + pack('>H', ludp)
             else:
                 phdr = b''
         else:
             phdr = b''
         # compute checksum
-        return checksum(b''.join((phdr, udp)))
+        return checksum(phdr + udp)
 
 
 class TCP(Envelope):
@@ -526,56 +503,42 @@ class TCP(Envelope):
         Uint16('win', val=8192),
         Uint16('cs', rep=REPR_HEX), # val automated
         Uint16('urg'),
-        Buf('opt', val=b'') # bl automated
+        Buf('opt', val=b'', rep=REPR_HEX) # bl automated
         )
+    
     def __init__(self, *args, **kwargs):
         Envelope.__init__(self, *args, **kwargs)
         if 'val' not in kwargs or 'off' not in kwargs['val']:
-            self[4].set_valauto(self._set_off_val)
-        self[16].set_valauto(self.checksum)
-        self[18].set_blauto(self._set_opt_bl)
-    
-    def _set_off_val(self):
-        return 5 + (self[18].get_len() // 4)
+            self['off'].set_valauto(lambda: 5 + (self['opt'].get_len()>>2))
+        self['cs'].set_valauto(lambda: self.checksum())
+        self['opt'].set_blauto(lambda: max(0, (self['off'].get_val()-5)<<5))
     
     def checksum(self):
         if self._CS_OFF:
             return 0
-        # get TCP and payload buffer
+        # get TCP header and payload buffer
+        tcp = self[:16].to_bytes() + b'\0\0' + self[17].to_bytes() + self[18].to_bytes()
         pay = self.get_payload()
         if pay is not None:
-            tcp = b''.join((self[:16].to_bytes(),
-                            b'\0\0',
-                            self[17:].to_bytes(),
-                            pay.to_bytes()))
-        else:
-            tcp = b''.join((self[:16].to_bytes(),
-                            b'\0\0',
-                            self[17:].to_bytes()))
+            tcp += pay.to_bytes()
         # get pseudo hdr buffer
         ltcp =  len(tcp)
         hdr = self.get_header()
+        while hdr is not None and not isinstance(hdr, (IPv4, IPv6)):
+            # this is mostly to jump over IPv6 options
+            hdr = hdr.get_header()
         if hdr is not None:
             # keep only src addr, dst addr and prot
             vers = hdr[0].get_val()
             if vers == 4:
-                phdr = b''.join((hdr[16].to_bytes(),
-                                 hdr[17].to_bytes(),
-                                 b'\0\x06',
-                                 pack('>H', ltcp)))
+                phdr = hdr['src'].to_bytes() + hdr['dst'].to_bytes() + b'\0\x06' + pack('>H', ltcp)
             elif vers == 6:
                 # WNG: in case of IPv6 routing header, dst addr is incorrect
-                phdr = b''.join((hdr[6].to_bytes(),
-                                 hdr[7].to_bytes(),
-                                 b'\0\x06',
-                                 pack('>H', ltcp)))
+                phdr = hdr['src'].to_bytes() + hdr['dst'].to_bytes() + b'\0\x06' + pack('>H', ltcp)
             else:
                 phdr = b''
         else:
             phdr = b''
         # compute checksum
         return checksum(phdr + tcp)
-    
-    def _set_opt_bl(self):
-        return max(0, 32 * (self[4].get_val()-5))
 

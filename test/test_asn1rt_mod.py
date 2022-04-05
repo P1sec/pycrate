@@ -50,11 +50,13 @@ class Test_Asn1rt:
         'Bst03',
         'Bst04',
         'Bst05',
+        'Bst06',
         'Ost01',
         'Ost02',
         'Ost03',
         'Ost04',
         'Ost05',
+        'Ost06',
         'Nus01',
         'Nus02',
         'Prs01',
@@ -62,6 +64,7 @@ class Test_Asn1rt:
         'Ias01',
         'Ias02',
         'Ias03',
+        'Ias04',
         'U8s01',
         'U8s02',
         'U8s03',
@@ -106,11 +109,13 @@ class Test_Asn1rt:
         'Bst03',
         'Bst04',
         'Bst05',
+        'Bst06',
         'Ost01',
         'Ost02',
         'Ost03',
         'Ost04',
         'Ost05',
+        'Ost06',
         'Nus01',
         'Nus02',
         'Prs01',
@@ -118,6 +123,7 @@ class Test_Asn1rt:
         'Ias01',
         'Ias02',
         'Ias03',
+        'Ias04',
         'U8s01',
         'U8s02',
         'U8s03',
@@ -258,6 +264,10 @@ class Test_Asn1rt:
     _Bst05_contain = ENUM(name='_cont_Bst05', mode=MODE_TYPE, typeref=ASN1RefType(('Test-Asn1rt', 'Enu01')))
     Bst05._const_cont = _Bst05_contain
     
+    #-----< Bst06 >-----#
+    Bst06 = BIT_STR(name='Bst06', mode=MODE_TYPE)
+    Bst06._const_sz = ASN1Set(rv=[16], rr=[], ev=None, er=[])
+    
     #-----< Ost01 >-----#
     Ost01 = OCT_STR(name='Ost01', mode=MODE_TYPE)
     
@@ -277,6 +287,10 @@ class Test_Asn1rt:
     Ost05 = OCT_STR(name='Ost05', mode=MODE_TYPE)
     _Ost05_contain = ENUM(name='_cont_Ost05', mode=MODE_TYPE, typeref=ASN1RefType(('Test-Asn1rt', 'Enu01')))
     Ost05._const_cont = _Ost05_contain
+    
+    #-----< Ost06 >-----#
+    Ost06 = OCT_STR(name='Ost06', mode=MODE_TYPE)
+    Ost06._const_sz = ASN1Set(rv=[16], rr=[], ev=None, er=[])
     
     #-----< Nus01 >-----#
     Nus01 = STR_NUM(name='Nus01', mode=MODE_TYPE)
@@ -302,6 +316,10 @@ class Test_Asn1rt:
     #-----< Ias03 >-----#
     Ias03 = STR_IA5(name='Ias03', mode=MODE_TYPE)
     Ias03._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=65535)], ev=[], er=[])
+    
+    #-----< Ias04 >-----#
+    Ias04 = STR_IA5(name='Ias04', mode=MODE_TYPE)
+    Ias04._const_sz = ASN1Set(rv=[32], rr=[], ev=None, er=[])
     
     #-----< U8s01 >-----#
     U8s01 = STR_UTF8(name='U8s01', mode=MODE_TYPE)
@@ -425,12 +443,14 @@ class Test_Asn1rt:
         Bst04,
         _Bst05_contain,
         Bst05,
+        Bst06,
         Ost01,
         Ost02,
         Ost03,
         Ost04,
         _Ost05_contain,
         Ost05,
+        Ost06,
         Nus01,
         Nus02,
         Prs01,
@@ -438,6 +458,7 @@ class Test_Asn1rt:
         Ias01,
         Ias02,
         Ias03,
+        Ias04,
         U8s01,
         U8s02,
         U8s03,

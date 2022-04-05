@@ -3366,11 +3366,15 @@ class PCAP_IEs:
     _____AddPos_MeasuredResults_Element_type_barometricPressure_iE_Extensions__item__id._const_tab_at = None
     _____AddPos_MeasuredResults_Element_type_barometricPressure_iE_Extensions__item__id._const_tab_id = u'id'
     _____AddPos_MeasuredResults_Element_type_barometricPressure_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    _____AddPos_MeasuredResults_Element_type_barometricPressure_iE_Extensions__item__criticality._const_tab = ______AddPos_MeasuredResults_Element_type_barometricPressure_iE_Extensions__item__id_tab
+    ______AddPos_MeasuredResults_Element_type_barometricPressure_iE_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ______AddPos_MeasuredResults_Element_type_barometricPressure_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    _____AddPos_MeasuredResults_Element_type_barometricPressure_iE_Extensions__item__criticality._const_tab = ______AddPos_MeasuredResults_Element_type_barometricPressure_iE_Extensions__item__criticality_tab
     _____AddPos_MeasuredResults_Element_type_barometricPressure_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     _____AddPos_MeasuredResults_Element_type_barometricPressure_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     _____AddPos_MeasuredResults_Element_type_barometricPressure_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    _____AddPos_MeasuredResults_Element_type_barometricPressure_iE_Extensions__item__extensionValue._const_tab = ______AddPos_MeasuredResults_Element_type_barometricPressure_iE_Extensions__item__id_tab
+    ______AddPos_MeasuredResults_Element_type_barometricPressure_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ______AddPos_MeasuredResults_Element_type_barometricPressure_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    _____AddPos_MeasuredResults_Element_type_barometricPressure_iE_Extensions__item__extensionValue._const_tab = ______AddPos_MeasuredResults_Element_type_barometricPressure_iE_Extensions__item__extensionValue_tab
     _____AddPos_MeasuredResults_Element_type_barometricPressure_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     _____AddPos_MeasuredResults_Element_type_barometricPressure_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     ____AddPos_MeasuredResults_Element_type_barometricPressure_iE_Extensions__item_._cont = ASN1Dict([
@@ -3391,15 +3395,21 @@ class PCAP_IEs:
     ___AddPos_MeasuredResults_Element_type_wlan_iE_Extensions = SEQ_OF(name=u'iE-Extensions', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PCAP-Containers', 'ProtocolExtensionContainer')), opt=True)
     ____AddPos_MeasuredResults_Element_type_wlan_iE_Extensions__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('PCAP-Containers', 'ProtocolExtensionField')))
     _____AddPos_MeasuredResults_Element_type_wlan_iE_Extensions__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'id']))
-    _____AddPos_MeasuredResults_Element_type_wlan_iE_Extensions__item__id._const_tab = ______AddPos_MeasuredResults_Element_type_barometricPressure_iE_Extensions__item__id_tab
+    ______AddPos_MeasuredResults_Element_type_wlan_iE_Extensions__item__id_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ______AddPos_MeasuredResults_Element_type_wlan_iE_Extensions__item__id_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    _____AddPos_MeasuredResults_Element_type_wlan_iE_Extensions__item__id._const_tab = ______AddPos_MeasuredResults_Element_type_wlan_iE_Extensions__item__id_tab
     _____AddPos_MeasuredResults_Element_type_wlan_iE_Extensions__item__id._const_tab_at = None
     _____AddPos_MeasuredResults_Element_type_wlan_iE_Extensions__item__id._const_tab_id = u'id'
     _____AddPos_MeasuredResults_Element_type_wlan_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    _____AddPos_MeasuredResults_Element_type_wlan_iE_Extensions__item__criticality._const_tab = ______AddPos_MeasuredResults_Element_type_barometricPressure_iE_Extensions__item__id_tab
+    ______AddPos_MeasuredResults_Element_type_wlan_iE_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ______AddPos_MeasuredResults_Element_type_wlan_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    _____AddPos_MeasuredResults_Element_type_wlan_iE_Extensions__item__criticality._const_tab = ______AddPos_MeasuredResults_Element_type_wlan_iE_Extensions__item__criticality_tab
     _____AddPos_MeasuredResults_Element_type_wlan_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     _____AddPos_MeasuredResults_Element_type_wlan_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     _____AddPos_MeasuredResults_Element_type_wlan_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    _____AddPos_MeasuredResults_Element_type_wlan_iE_Extensions__item__extensionValue._const_tab = ______AddPos_MeasuredResults_Element_type_barometricPressure_iE_Extensions__item__id_tab
+    ______AddPos_MeasuredResults_Element_type_wlan_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ______AddPos_MeasuredResults_Element_type_wlan_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    _____AddPos_MeasuredResults_Element_type_wlan_iE_Extensions__item__extensionValue._const_tab = ______AddPos_MeasuredResults_Element_type_wlan_iE_Extensions__item__extensionValue_tab
     _____AddPos_MeasuredResults_Element_type_wlan_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     _____AddPos_MeasuredResults_Element_type_wlan_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     ____AddPos_MeasuredResults_Element_type_wlan_iE_Extensions__item_._cont = ASN1Dict([
@@ -3420,15 +3430,21 @@ class PCAP_IEs:
     ___AddPos_MeasuredResults_Element_type_bt_iE_Extensions = SEQ_OF(name=u'iE-Extensions', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PCAP-Containers', 'ProtocolExtensionContainer')), opt=True)
     ____AddPos_MeasuredResults_Element_type_bt_iE_Extensions__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('PCAP-Containers', 'ProtocolExtensionField')))
     _____AddPos_MeasuredResults_Element_type_bt_iE_Extensions__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'id']))
-    _____AddPos_MeasuredResults_Element_type_bt_iE_Extensions__item__id._const_tab = ______AddPos_MeasuredResults_Element_type_barometricPressure_iE_Extensions__item__id_tab
+    ______AddPos_MeasuredResults_Element_type_bt_iE_Extensions__item__id_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ______AddPos_MeasuredResults_Element_type_bt_iE_Extensions__item__id_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    _____AddPos_MeasuredResults_Element_type_bt_iE_Extensions__item__id._const_tab = ______AddPos_MeasuredResults_Element_type_bt_iE_Extensions__item__id_tab
     _____AddPos_MeasuredResults_Element_type_bt_iE_Extensions__item__id._const_tab_at = None
     _____AddPos_MeasuredResults_Element_type_bt_iE_Extensions__item__id._const_tab_id = u'id'
     _____AddPos_MeasuredResults_Element_type_bt_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    _____AddPos_MeasuredResults_Element_type_bt_iE_Extensions__item__criticality._const_tab = ______AddPos_MeasuredResults_Element_type_barometricPressure_iE_Extensions__item__id_tab
+    ______AddPos_MeasuredResults_Element_type_bt_iE_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ______AddPos_MeasuredResults_Element_type_bt_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    _____AddPos_MeasuredResults_Element_type_bt_iE_Extensions__item__criticality._const_tab = ______AddPos_MeasuredResults_Element_type_bt_iE_Extensions__item__criticality_tab
     _____AddPos_MeasuredResults_Element_type_bt_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     _____AddPos_MeasuredResults_Element_type_bt_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     _____AddPos_MeasuredResults_Element_type_bt_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    _____AddPos_MeasuredResults_Element_type_bt_iE_Extensions__item__extensionValue._const_tab = ______AddPos_MeasuredResults_Element_type_barometricPressure_iE_Extensions__item__id_tab
+    ______AddPos_MeasuredResults_Element_type_bt_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ______AddPos_MeasuredResults_Element_type_bt_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    _____AddPos_MeasuredResults_Element_type_bt_iE_Extensions__item__extensionValue._const_tab = ______AddPos_MeasuredResults_Element_type_bt_iE_Extensions__item__extensionValue_tab
     _____AddPos_MeasuredResults_Element_type_bt_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     _____AddPos_MeasuredResults_Element_type_bt_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     ____AddPos_MeasuredResults_Element_type_bt_iE_Extensions__item_._cont = ASN1Dict([
@@ -3449,15 +3465,21 @@ class PCAP_IEs:
     ___AddPos_MeasuredResults_Element_type_mbs_iE_Extensions = SEQ_OF(name=u'iE-Extensions', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PCAP-Containers', 'ProtocolExtensionContainer')), opt=True)
     ____AddPos_MeasuredResults_Element_type_mbs_iE_Extensions__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('PCAP-Containers', 'ProtocolExtensionField')))
     _____AddPos_MeasuredResults_Element_type_mbs_iE_Extensions__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'id']))
-    _____AddPos_MeasuredResults_Element_type_mbs_iE_Extensions__item__id._const_tab = ______AddPos_MeasuredResults_Element_type_barometricPressure_iE_Extensions__item__id_tab
+    ______AddPos_MeasuredResults_Element_type_mbs_iE_Extensions__item__id_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ______AddPos_MeasuredResults_Element_type_mbs_iE_Extensions__item__id_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    _____AddPos_MeasuredResults_Element_type_mbs_iE_Extensions__item__id._const_tab = ______AddPos_MeasuredResults_Element_type_mbs_iE_Extensions__item__id_tab
     _____AddPos_MeasuredResults_Element_type_mbs_iE_Extensions__item__id._const_tab_at = None
     _____AddPos_MeasuredResults_Element_type_mbs_iE_Extensions__item__id._const_tab_id = u'id'
     _____AddPos_MeasuredResults_Element_type_mbs_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    _____AddPos_MeasuredResults_Element_type_mbs_iE_Extensions__item__criticality._const_tab = ______AddPos_MeasuredResults_Element_type_barometricPressure_iE_Extensions__item__id_tab
+    ______AddPos_MeasuredResults_Element_type_mbs_iE_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ______AddPos_MeasuredResults_Element_type_mbs_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    _____AddPos_MeasuredResults_Element_type_mbs_iE_Extensions__item__criticality._const_tab = ______AddPos_MeasuredResults_Element_type_mbs_iE_Extensions__item__criticality_tab
     _____AddPos_MeasuredResults_Element_type_mbs_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     _____AddPos_MeasuredResults_Element_type_mbs_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     _____AddPos_MeasuredResults_Element_type_mbs_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    _____AddPos_MeasuredResults_Element_type_mbs_iE_Extensions__item__extensionValue._const_tab = ______AddPos_MeasuredResults_Element_type_barometricPressure_iE_Extensions__item__id_tab
+    ______AddPos_MeasuredResults_Element_type_mbs_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ______AddPos_MeasuredResults_Element_type_mbs_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    _____AddPos_MeasuredResults_Element_type_mbs_iE_Extensions__item__extensionValue._const_tab = ______AddPos_MeasuredResults_Element_type_mbs_iE_Extensions__item__extensionValue_tab
     _____AddPos_MeasuredResults_Element_type_mbs_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     _____AddPos_MeasuredResults_Element_type_mbs_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     ____AddPos_MeasuredResults_Element_type_mbs_iE_Extensions__item_._cont = ASN1Dict([
@@ -3535,11 +3557,15 @@ class PCAP_IEs:
     ___WLANMeasurementList_Element_iE_Extensions__item__id._const_tab_at = None
     ___WLANMeasurementList_Element_iE_Extensions__item__id._const_tab_id = u'id'
     ___WLANMeasurementList_Element_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___WLANMeasurementList_Element_iE_Extensions__item__criticality._const_tab = ____WLANMeasurementList_Element_iE_Extensions__item__id_tab
+    ____WLANMeasurementList_Element_iE_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____WLANMeasurementList_Element_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___WLANMeasurementList_Element_iE_Extensions__item__criticality._const_tab = ____WLANMeasurementList_Element_iE_Extensions__item__criticality_tab
     ___WLANMeasurementList_Element_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___WLANMeasurementList_Element_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___WLANMeasurementList_Element_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___WLANMeasurementList_Element_iE_Extensions__item__extensionValue._const_tab = ____WLANMeasurementList_Element_iE_Extensions__item__id_tab
+    ____WLANMeasurementList_Element_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____WLANMeasurementList_Element_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___WLANMeasurementList_Element_iE_Extensions__item__extensionValue._const_tab = ____WLANMeasurementList_Element_iE_Extensions__item__extensionValue_tab
     ___WLANMeasurementList_Element_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___WLANMeasurementList_Element_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __WLANMeasurementList_Element_iE_Extensions__item_._cont = ASN1Dict([
@@ -3588,11 +3614,15 @@ class PCAP_IEs:
     ___BTMeasurementList_Element_iE_Extensions__item__id._const_tab_at = None
     ___BTMeasurementList_Element_iE_Extensions__item__id._const_tab_id = u'id'
     ___BTMeasurementList_Element_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___BTMeasurementList_Element_iE_Extensions__item__criticality._const_tab = ____BTMeasurementList_Element_iE_Extensions__item__id_tab
+    ____BTMeasurementList_Element_iE_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____BTMeasurementList_Element_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___BTMeasurementList_Element_iE_Extensions__item__criticality._const_tab = ____BTMeasurementList_Element_iE_Extensions__item__criticality_tab
     ___BTMeasurementList_Element_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___BTMeasurementList_Element_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___BTMeasurementList_Element_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___BTMeasurementList_Element_iE_Extensions__item__extensionValue._const_tab = ____BTMeasurementList_Element_iE_Extensions__item__id_tab
+    ____BTMeasurementList_Element_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____BTMeasurementList_Element_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___BTMeasurementList_Element_iE_Extensions__item__extensionValue._const_tab = ____BTMeasurementList_Element_iE_Extensions__item__extensionValue_tab
     ___BTMeasurementList_Element_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___BTMeasurementList_Element_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __BTMeasurementList_Element_iE_Extensions__item_._cont = ASN1Dict([
@@ -3637,11 +3667,15 @@ class PCAP_IEs:
     ___MBSMeasurementList_Element_iE_Extensions__item__id._const_tab_at = None
     ___MBSMeasurementList_Element_iE_Extensions__item__id._const_tab_id = u'id'
     ___MBSMeasurementList_Element_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___MBSMeasurementList_Element_iE_Extensions__item__criticality._const_tab = ____MBSMeasurementList_Element_iE_Extensions__item__id_tab
+    ____MBSMeasurementList_Element_iE_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____MBSMeasurementList_Element_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___MBSMeasurementList_Element_iE_Extensions__item__criticality._const_tab = ____MBSMeasurementList_Element_iE_Extensions__item__criticality_tab
     ___MBSMeasurementList_Element_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___MBSMeasurementList_Element_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___MBSMeasurementList_Element_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___MBSMeasurementList_Element_iE_Extensions__item__extensionValue._const_tab = ____MBSMeasurementList_Element_iE_Extensions__item__id_tab
+    ____MBSMeasurementList_Element_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____MBSMeasurementList_Element_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___MBSMeasurementList_Element_iE_Extensions__item__extensionValue._const_tab = ____MBSMeasurementList_Element_iE_Extensions__item__extensionValue_tab
     ___MBSMeasurementList_Element_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___MBSMeasurementList_Element_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __MBSMeasurementList_Element_iE_Extensions__item_._cont = ASN1Dict([
@@ -3684,11 +3718,15 @@ class PCAP_IEs:
     ___AlmanacAndSatelliteHealthSIB_iE_Extensions__item__id._const_tab_at = None
     ___AlmanacAndSatelliteHealthSIB_iE_Extensions__item__id._const_tab_id = u'id'
     ___AlmanacAndSatelliteHealthSIB_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___AlmanacAndSatelliteHealthSIB_iE_Extensions__item__criticality._const_tab = ____AlmanacAndSatelliteHealthSIB_iE_Extensions__item__id_tab
+    ____AlmanacAndSatelliteHealthSIB_iE_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____AlmanacAndSatelliteHealthSIB_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___AlmanacAndSatelliteHealthSIB_iE_Extensions__item__criticality._const_tab = ____AlmanacAndSatelliteHealthSIB_iE_Extensions__item__criticality_tab
     ___AlmanacAndSatelliteHealthSIB_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___AlmanacAndSatelliteHealthSIB_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___AlmanacAndSatelliteHealthSIB_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___AlmanacAndSatelliteHealthSIB_iE_Extensions__item__extensionValue._const_tab = ____AlmanacAndSatelliteHealthSIB_iE_Extensions__item__id_tab
+    ____AlmanacAndSatelliteHealthSIB_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____AlmanacAndSatelliteHealthSIB_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___AlmanacAndSatelliteHealthSIB_iE_Extensions__item__extensionValue._const_tab = ____AlmanacAndSatelliteHealthSIB_iE_Extensions__item__extensionValue_tab
     ___AlmanacAndSatelliteHealthSIB_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___AlmanacAndSatelliteHealthSIB_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __AlmanacAndSatelliteHealthSIB_iE_Extensions__item_._cont = ASN1Dict([
@@ -3873,11 +3911,15 @@ class PCAP_IEs:
     ___RoundTripTimeInfoWithType1_iE_Extensions__item__id._const_tab_at = None
     ___RoundTripTimeInfoWithType1_iE_Extensions__item__id._const_tab_id = u'id'
     ___RoundTripTimeInfoWithType1_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___RoundTripTimeInfoWithType1_iE_Extensions__item__criticality._const_tab = ____RoundTripTimeInfoWithType1_iE_Extensions__item__id_tab
+    ____RoundTripTimeInfoWithType1_iE_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____RoundTripTimeInfoWithType1_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___RoundTripTimeInfoWithType1_iE_Extensions__item__criticality._const_tab = ____RoundTripTimeInfoWithType1_iE_Extensions__item__criticality_tab
     ___RoundTripTimeInfoWithType1_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___RoundTripTimeInfoWithType1_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___RoundTripTimeInfoWithType1_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___RoundTripTimeInfoWithType1_iE_Extensions__item__extensionValue._const_tab = ____RoundTripTimeInfoWithType1_iE_Extensions__item__id_tab
+    ____RoundTripTimeInfoWithType1_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____RoundTripTimeInfoWithType1_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___RoundTripTimeInfoWithType1_iE_Extensions__item__extensionValue._const_tab = ____RoundTripTimeInfoWithType1_iE_Extensions__item__extensionValue_tab
     ___RoundTripTimeInfoWithType1_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___RoundTripTimeInfoWithType1_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __RoundTripTimeInfoWithType1_iE_Extensions__item_._cont = ASN1Dict([
@@ -3925,11 +3967,15 @@ class PCAP_IEs:
     ___UE_PositioningMeasQuality_iE_Extensions__item__id._const_tab_at = None
     ___UE_PositioningMeasQuality_iE_Extensions__item__id._const_tab_id = u'id'
     ___UE_PositioningMeasQuality_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___UE_PositioningMeasQuality_iE_Extensions__item__criticality._const_tab = ____UE_PositioningMeasQuality_iE_Extensions__item__id_tab
+    ____UE_PositioningMeasQuality_iE_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____UE_PositioningMeasQuality_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___UE_PositioningMeasQuality_iE_Extensions__item__criticality._const_tab = ____UE_PositioningMeasQuality_iE_Extensions__item__criticality_tab
     ___UE_PositioningMeasQuality_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___UE_PositioningMeasQuality_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___UE_PositioningMeasQuality_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___UE_PositioningMeasQuality_iE_Extensions__item__extensionValue._const_tab = ____UE_PositioningMeasQuality_iE_Extensions__item__id_tab
+    ____UE_PositioningMeasQuality_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____UE_PositioningMeasQuality_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___UE_PositioningMeasQuality_iE_Extensions__item__extensionValue._const_tab = ____UE_PositioningMeasQuality_iE_Extensions__item__extensionValue_tab
     ___UE_PositioningMeasQuality_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___UE_PositioningMeasQuality_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __UE_PositioningMeasQuality_iE_Extensions__item_._cont = ASN1Dict([
@@ -3973,11 +4019,15 @@ class PCAP_IEs:
     ___UTRANAccessPointPositionAltitude_iE_Extensions__item__id._const_tab_at = None
     ___UTRANAccessPointPositionAltitude_iE_Extensions__item__id._const_tab_id = u'id'
     ___UTRANAccessPointPositionAltitude_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___UTRANAccessPointPositionAltitude_iE_Extensions__item__criticality._const_tab = ____UTRANAccessPointPositionAltitude_iE_Extensions__item__id_tab
+    ____UTRANAccessPointPositionAltitude_iE_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____UTRANAccessPointPositionAltitude_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___UTRANAccessPointPositionAltitude_iE_Extensions__item__criticality._const_tab = ____UTRANAccessPointPositionAltitude_iE_Extensions__item__criticality_tab
     ___UTRANAccessPointPositionAltitude_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___UTRANAccessPointPositionAltitude_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___UTRANAccessPointPositionAltitude_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___UTRANAccessPointPositionAltitude_iE_Extensions__item__extensionValue._const_tab = ____UTRANAccessPointPositionAltitude_iE_Extensions__item__id_tab
+    ____UTRANAccessPointPositionAltitude_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____UTRANAccessPointPositionAltitude_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___UTRANAccessPointPositionAltitude_iE_Extensions__item__extensionValue._const_tab = ____UTRANAccessPointPositionAltitude_iE_Extensions__item__extensionValue_tab
     ___UTRANAccessPointPositionAltitude_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___UTRANAccessPointPositionAltitude_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __UTRANAccessPointPositionAltitude_iE_Extensions__item_._cont = ASN1Dict([
@@ -4012,11 +4062,15 @@ class PCAP_IEs:
     ___RxTimingDeviationInfo_iE_Extensions__item__id._const_tab_at = None
     ___RxTimingDeviationInfo_iE_Extensions__item__id._const_tab_id = u'id'
     ___RxTimingDeviationInfo_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___RxTimingDeviationInfo_iE_Extensions__item__criticality._const_tab = ____RxTimingDeviationInfo_iE_Extensions__item__id_tab
+    ____RxTimingDeviationInfo_iE_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____RxTimingDeviationInfo_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___RxTimingDeviationInfo_iE_Extensions__item__criticality._const_tab = ____RxTimingDeviationInfo_iE_Extensions__item__criticality_tab
     ___RxTimingDeviationInfo_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___RxTimingDeviationInfo_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___RxTimingDeviationInfo_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___RxTimingDeviationInfo_iE_Extensions__item__extensionValue._const_tab = ____RxTimingDeviationInfo_iE_Extensions__item__id_tab
+    ____RxTimingDeviationInfo_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____RxTimingDeviationInfo_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___RxTimingDeviationInfo_iE_Extensions__item__extensionValue._const_tab = ____RxTimingDeviationInfo_iE_Extensions__item__extensionValue_tab
     ___RxTimingDeviationInfo_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___RxTimingDeviationInfo_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __RxTimingDeviationInfo_iE_Extensions__item_._cont = ASN1Dict([
@@ -4096,11 +4150,15 @@ class PCAP_IEs:
     ___RxTimingDeviation768Info_iE_Extensions__item__id._const_tab_at = None
     ___RxTimingDeviation768Info_iE_Extensions__item__id._const_tab_id = u'id'
     ___RxTimingDeviation768Info_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___RxTimingDeviation768Info_iE_Extensions__item__criticality._const_tab = ____RxTimingDeviation768Info_iE_Extensions__item__id_tab
+    ____RxTimingDeviation768Info_iE_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____RxTimingDeviation768Info_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___RxTimingDeviation768Info_iE_Extensions__item__criticality._const_tab = ____RxTimingDeviation768Info_iE_Extensions__item__criticality_tab
     ___RxTimingDeviation768Info_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___RxTimingDeviation768Info_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___RxTimingDeviation768Info_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___RxTimingDeviation768Info_iE_Extensions__item__extensionValue._const_tab = ____RxTimingDeviation768Info_iE_Extensions__item__id_tab
+    ____RxTimingDeviation768Info_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____RxTimingDeviation768Info_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___RxTimingDeviation768Info_iE_Extensions__item__extensionValue._const_tab = ____RxTimingDeviation768Info_iE_Extensions__item__extensionValue_tab
     ___RxTimingDeviation768Info_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___RxTimingDeviation768Info_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __RxTimingDeviation768Info_iE_Extensions__item_._cont = ASN1Dict([
@@ -4135,11 +4193,15 @@ class PCAP_IEs:
     ___RxTimingDeviation384extInfo_iE_Extensions__item__id._const_tab_at = None
     ___RxTimingDeviation384extInfo_iE_Extensions__item__id._const_tab_id = u'id'
     ___RxTimingDeviation384extInfo_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___RxTimingDeviation384extInfo_iE_Extensions__item__criticality._const_tab = ____RxTimingDeviation384extInfo_iE_Extensions__item__id_tab
+    ____RxTimingDeviation384extInfo_iE_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____RxTimingDeviation384extInfo_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___RxTimingDeviation384extInfo_iE_Extensions__item__criticality._const_tab = ____RxTimingDeviation384extInfo_iE_Extensions__item__criticality_tab
     ___RxTimingDeviation384extInfo_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___RxTimingDeviation384extInfo_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___RxTimingDeviation384extInfo_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___RxTimingDeviation384extInfo_iE_Extensions__item__extensionValue._const_tab = ____RxTimingDeviation384extInfo_iE_Extensions__item__id_tab
+    ____RxTimingDeviation384extInfo_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____RxTimingDeviation384extInfo_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___RxTimingDeviation384extInfo_iE_Extensions__item__extensionValue._const_tab = ____RxTimingDeviation384extInfo_iE_Extensions__item__extensionValue_tab
     ___RxTimingDeviation384extInfo_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___RxTimingDeviation384extInfo_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __RxTimingDeviation384extInfo_iE_Extensions__item_._cont = ASN1Dict([
@@ -4174,11 +4236,15 @@ class PCAP_IEs:
     ___AddMeasurementInfo_iE_Extensions__item__id._const_tab_at = None
     ___AddMeasurementInfo_iE_Extensions__item__id._const_tab_id = u'id'
     ___AddMeasurementInfo_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___AddMeasurementInfo_iE_Extensions__item__criticality._const_tab = ____AddMeasurementInfo_iE_Extensions__item__id_tab
+    ____AddMeasurementInfo_iE_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____AddMeasurementInfo_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___AddMeasurementInfo_iE_Extensions__item__criticality._const_tab = ____AddMeasurementInfo_iE_Extensions__item__criticality_tab
     ___AddMeasurementInfo_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___AddMeasurementInfo_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___AddMeasurementInfo_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___AddMeasurementInfo_iE_Extensions__item__extensionValue._const_tab = ____AddMeasurementInfo_iE_Extensions__item__id_tab
+    ____AddMeasurementInfo_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____AddMeasurementInfo_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___AddMeasurementInfo_iE_Extensions__item__extensionValue._const_tab = ____AddMeasurementInfo_iE_Extensions__item__extensionValue_tab
     ___AddMeasurementInfo_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___AddMeasurementInfo_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __AddMeasurementInfo_iE_Extensions__item_._cont = ASN1Dict([
@@ -4213,11 +4279,15 @@ class PCAP_IEs:
     ___AngleOfArrivalLCR_iE_Extensions__item__id._const_tab_at = None
     ___AngleOfArrivalLCR_iE_Extensions__item__id._const_tab_id = u'id'
     ___AngleOfArrivalLCR_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___AngleOfArrivalLCR_iE_Extensions__item__criticality._const_tab = ____AngleOfArrivalLCR_iE_Extensions__item__id_tab
+    ____AngleOfArrivalLCR_iE_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____AngleOfArrivalLCR_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___AngleOfArrivalLCR_iE_Extensions__item__criticality._const_tab = ____AngleOfArrivalLCR_iE_Extensions__item__criticality_tab
     ___AngleOfArrivalLCR_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___AngleOfArrivalLCR_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___AngleOfArrivalLCR_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___AngleOfArrivalLCR_iE_Extensions__item__extensionValue._const_tab = ____AngleOfArrivalLCR_iE_Extensions__item__id_tab
+    ____AngleOfArrivalLCR_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____AngleOfArrivalLCR_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___AngleOfArrivalLCR_iE_Extensions__item__extensionValue._const_tab = ____AngleOfArrivalLCR_iE_Extensions__item__extensionValue_tab
     ___AngleOfArrivalLCR_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___AngleOfArrivalLCR_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __AngleOfArrivalLCR_iE_Extensions__item_._cont = ASN1Dict([
@@ -4310,11 +4380,15 @@ class PCAP_IEs:
     ___CellId_IRATMeasuredResultsInfoList_iE_Extenstions__item__id._const_tab_at = None
     ___CellId_IRATMeasuredResultsInfoList_iE_Extenstions__item__id._const_tab_id = u'id'
     ___CellId_IRATMeasuredResultsInfoList_iE_Extenstions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___CellId_IRATMeasuredResultsInfoList_iE_Extenstions__item__criticality._const_tab = ____CellId_IRATMeasuredResultsInfoList_iE_Extenstions__item__id_tab
+    ____CellId_IRATMeasuredResultsInfoList_iE_Extenstions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____CellId_IRATMeasuredResultsInfoList_iE_Extenstions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___CellId_IRATMeasuredResultsInfoList_iE_Extenstions__item__criticality._const_tab = ____CellId_IRATMeasuredResultsInfoList_iE_Extenstions__item__criticality_tab
     ___CellId_IRATMeasuredResultsInfoList_iE_Extenstions__item__criticality._const_tab_at = ('..', u'id')
     ___CellId_IRATMeasuredResultsInfoList_iE_Extenstions__item__criticality._const_tab_id = u'criticality'
     ___CellId_IRATMeasuredResultsInfoList_iE_Extenstions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___CellId_IRATMeasuredResultsInfoList_iE_Extenstions__item__extensionValue._const_tab = ____CellId_IRATMeasuredResultsInfoList_iE_Extenstions__item__id_tab
+    ____CellId_IRATMeasuredResultsInfoList_iE_Extenstions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____CellId_IRATMeasuredResultsInfoList_iE_Extenstions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___CellId_IRATMeasuredResultsInfoList_iE_Extenstions__item__extensionValue._const_tab = ____CellId_IRATMeasuredResultsInfoList_iE_Extenstions__item__extensionValue_tab
     ___CellId_IRATMeasuredResultsInfoList_iE_Extenstions__item__extensionValue._const_tab_at = ('..', u'id')
     ___CellId_IRATMeasuredResultsInfoList_iE_Extenstions__item__extensionValue._const_tab_id = u'Extension'
     __CellId_IRATMeasuredResultsInfoList_iE_Extenstions__item_._cont = ASN1Dict([
@@ -4355,11 +4429,15 @@ class PCAP_IEs:
     ___GERAN_MeasuredResultsInfo_iE_Extenstions__item__id._const_tab_at = None
     ___GERAN_MeasuredResultsInfo_iE_Extenstions__item__id._const_tab_id = u'id'
     ___GERAN_MeasuredResultsInfo_iE_Extenstions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___GERAN_MeasuredResultsInfo_iE_Extenstions__item__criticality._const_tab = ____GERAN_MeasuredResultsInfo_iE_Extenstions__item__id_tab
+    ____GERAN_MeasuredResultsInfo_iE_Extenstions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____GERAN_MeasuredResultsInfo_iE_Extenstions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___GERAN_MeasuredResultsInfo_iE_Extenstions__item__criticality._const_tab = ____GERAN_MeasuredResultsInfo_iE_Extenstions__item__criticality_tab
     ___GERAN_MeasuredResultsInfo_iE_Extenstions__item__criticality._const_tab_at = ('..', u'id')
     ___GERAN_MeasuredResultsInfo_iE_Extenstions__item__criticality._const_tab_id = u'criticality'
     ___GERAN_MeasuredResultsInfo_iE_Extenstions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___GERAN_MeasuredResultsInfo_iE_Extenstions__item__extensionValue._const_tab = ____GERAN_MeasuredResultsInfo_iE_Extenstions__item__id_tab
+    ____GERAN_MeasuredResultsInfo_iE_Extenstions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____GERAN_MeasuredResultsInfo_iE_Extenstions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___GERAN_MeasuredResultsInfo_iE_Extenstions__item__extensionValue._const_tab = ____GERAN_MeasuredResultsInfo_iE_Extenstions__item__extensionValue_tab
     ___GERAN_MeasuredResultsInfo_iE_Extenstions__item__extensionValue._const_tab_at = ('..', u'id')
     ___GERAN_MeasuredResultsInfo_iE_Extenstions__item__extensionValue._const_tab_id = u'Extension'
     __GERAN_MeasuredResultsInfo_iE_Extenstions__item_._cont = ASN1Dict([
@@ -4398,11 +4476,15 @@ class PCAP_IEs:
     ___GERANCellGlobalID_iE_Extenstions__item__id._const_tab_at = None
     ___GERANCellGlobalID_iE_Extenstions__item__id._const_tab_id = u'id'
     ___GERANCellGlobalID_iE_Extenstions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___GERANCellGlobalID_iE_Extenstions__item__criticality._const_tab = ____GERANCellGlobalID_iE_Extenstions__item__id_tab
+    ____GERANCellGlobalID_iE_Extenstions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____GERANCellGlobalID_iE_Extenstions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___GERANCellGlobalID_iE_Extenstions__item__criticality._const_tab = ____GERANCellGlobalID_iE_Extenstions__item__criticality_tab
     ___GERANCellGlobalID_iE_Extenstions__item__criticality._const_tab_at = ('..', u'id')
     ___GERANCellGlobalID_iE_Extenstions__item__criticality._const_tab_id = u'criticality'
     ___GERANCellGlobalID_iE_Extenstions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___GERANCellGlobalID_iE_Extenstions__item__extensionValue._const_tab = ____GERANCellGlobalID_iE_Extenstions__item__id_tab
+    ____GERANCellGlobalID_iE_Extenstions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____GERANCellGlobalID_iE_Extenstions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___GERANCellGlobalID_iE_Extenstions__item__extensionValue._const_tab = ____GERANCellGlobalID_iE_Extenstions__item__extensionValue_tab
     ___GERANCellGlobalID_iE_Extenstions__item__extensionValue._const_tab_at = ('..', u'id')
     ___GERANCellGlobalID_iE_Extenstions__item__extensionValue._const_tab_id = u'Extension'
     __GERANCellGlobalID_iE_Extenstions__item_._cont = ASN1Dict([
@@ -4515,11 +4597,15 @@ class PCAP_IEs:
     ____RequestedCellIDMeasurements_fdd_iE_Extensions__item__id._const_tab_at = None
     ____RequestedCellIDMeasurements_fdd_iE_Extensions__item__id._const_tab_id = u'id'
     ____RequestedCellIDMeasurements_fdd_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ____RequestedCellIDMeasurements_fdd_iE_Extensions__item__criticality._const_tab = _____RequestedCellIDMeasurements_fdd_iE_Extensions__item__id_tab
+    _____RequestedCellIDMeasurements_fdd_iE_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    _____RequestedCellIDMeasurements_fdd_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ____RequestedCellIDMeasurements_fdd_iE_Extensions__item__criticality._const_tab = _____RequestedCellIDMeasurements_fdd_iE_Extensions__item__criticality_tab
     ____RequestedCellIDMeasurements_fdd_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ____RequestedCellIDMeasurements_fdd_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ____RequestedCellIDMeasurements_fdd_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ____RequestedCellIDMeasurements_fdd_iE_Extensions__item__extensionValue._const_tab = _____RequestedCellIDMeasurements_fdd_iE_Extensions__item__id_tab
+    _____RequestedCellIDMeasurements_fdd_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    _____RequestedCellIDMeasurements_fdd_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ____RequestedCellIDMeasurements_fdd_iE_Extensions__item__extensionValue._const_tab = _____RequestedCellIDMeasurements_fdd_iE_Extensions__item__extensionValue_tab
     ____RequestedCellIDMeasurements_fdd_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ____RequestedCellIDMeasurements_fdd_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     ___RequestedCellIDMeasurements_fdd_iE_Extensions__item_._cont = ASN1Dict([
@@ -4550,15 +4636,21 @@ class PCAP_IEs:
     __RequestedCellIDMeasurements_tdd_iE_Extensions = SEQ_OF(name=u'iE-Extensions', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PCAP-Containers', 'ProtocolExtensionContainer')), opt=True)
     ___RequestedCellIDMeasurements_tdd_iE_Extensions__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('PCAP-Containers', 'ProtocolExtensionField')))
     ____RequestedCellIDMeasurements_tdd_iE_Extensions__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'id']))
-    ____RequestedCellIDMeasurements_tdd_iE_Extensions__item__id._const_tab = _____RequestedCellIDMeasurements_fdd_iE_Extensions__item__id_tab
+    _____RequestedCellIDMeasurements_tdd_iE_Extensions__item__id_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    _____RequestedCellIDMeasurements_tdd_iE_Extensions__item__id_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ____RequestedCellIDMeasurements_tdd_iE_Extensions__item__id._const_tab = _____RequestedCellIDMeasurements_tdd_iE_Extensions__item__id_tab
     ____RequestedCellIDMeasurements_tdd_iE_Extensions__item__id._const_tab_at = None
     ____RequestedCellIDMeasurements_tdd_iE_Extensions__item__id._const_tab_id = u'id'
     ____RequestedCellIDMeasurements_tdd_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ____RequestedCellIDMeasurements_tdd_iE_Extensions__item__criticality._const_tab = _____RequestedCellIDMeasurements_fdd_iE_Extensions__item__id_tab
+    _____RequestedCellIDMeasurements_tdd_iE_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    _____RequestedCellIDMeasurements_tdd_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ____RequestedCellIDMeasurements_tdd_iE_Extensions__item__criticality._const_tab = _____RequestedCellIDMeasurements_tdd_iE_Extensions__item__criticality_tab
     ____RequestedCellIDMeasurements_tdd_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ____RequestedCellIDMeasurements_tdd_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ____RequestedCellIDMeasurements_tdd_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ____RequestedCellIDMeasurements_tdd_iE_Extensions__item__extensionValue._const_tab = _____RequestedCellIDMeasurements_fdd_iE_Extensions__item__id_tab
+    _____RequestedCellIDMeasurements_tdd_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    _____RequestedCellIDMeasurements_tdd_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ____RequestedCellIDMeasurements_tdd_iE_Extensions__item__extensionValue._const_tab = _____RequestedCellIDMeasurements_tdd_iE_Extensions__item__extensionValue_tab
     ____RequestedCellIDMeasurements_tdd_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ____RequestedCellIDMeasurements_tdd_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     ___RequestedCellIDMeasurements_tdd_iE_Extensions__item_._cont = ASN1Dict([
@@ -4606,11 +4698,15 @@ class PCAP_IEs:
     ___RequestedCellIDGERANMeasurements_iE_Extensions__item__id._const_tab_at = None
     ___RequestedCellIDGERANMeasurements_iE_Extensions__item__id._const_tab_id = u'id'
     ___RequestedCellIDGERANMeasurements_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___RequestedCellIDGERANMeasurements_iE_Extensions__item__criticality._const_tab = ____RequestedCellIDGERANMeasurements_iE_Extensions__item__id_tab
+    ____RequestedCellIDGERANMeasurements_iE_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____RequestedCellIDGERANMeasurements_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___RequestedCellIDGERANMeasurements_iE_Extensions__item__criticality._const_tab = ____RequestedCellIDGERANMeasurements_iE_Extensions__item__criticality_tab
     ___RequestedCellIDGERANMeasurements_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___RequestedCellIDGERANMeasurements_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___RequestedCellIDGERANMeasurements_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___RequestedCellIDGERANMeasurements_iE_Extensions__item__extensionValue._const_tab = ____RequestedCellIDGERANMeasurements_iE_Extensions__item__id_tab
+    ____RequestedCellIDGERANMeasurements_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____RequestedCellIDGERANMeasurements_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___RequestedCellIDGERANMeasurements_iE_Extensions__item__extensionValue._const_tab = ____RequestedCellIDGERANMeasurements_iE_Extensions__item__extensionValue_tab
     ___RequestedCellIDGERANMeasurements_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___RequestedCellIDGERANMeasurements_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __RequestedCellIDGERANMeasurements_iE_Extensions__item_._cont = ASN1Dict([
@@ -4652,11 +4748,15 @@ class PCAP_IEs:
     ___CriticalityDiagnostics_iE_Extensions__item__id._const_tab_at = None
     ___CriticalityDiagnostics_iE_Extensions__item__id._const_tab_id = u'id'
     ___CriticalityDiagnostics_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___CriticalityDiagnostics_iE_Extensions__item__criticality._const_tab = ____CriticalityDiagnostics_iE_Extensions__item__id_tab
+    ____CriticalityDiagnostics_iE_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____CriticalityDiagnostics_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___CriticalityDiagnostics_iE_Extensions__item__criticality._const_tab = ____CriticalityDiagnostics_iE_Extensions__item__criticality_tab
     ___CriticalityDiagnostics_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___CriticalityDiagnostics_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___CriticalityDiagnostics_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___CriticalityDiagnostics_iE_Extensions__item__extensionValue._const_tab = ____CriticalityDiagnostics_iE_Extensions__item__id_tab
+    ____CriticalityDiagnostics_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____CriticalityDiagnostics_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___CriticalityDiagnostics_iE_Extensions__item__extensionValue._const_tab = ____CriticalityDiagnostics_iE_Extensions__item__extensionValue_tab
     ___CriticalityDiagnostics_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___CriticalityDiagnostics_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __CriticalityDiagnostics_iE_Extensions__item_._cont = ASN1Dict([
@@ -4694,11 +4794,15 @@ class PCAP_IEs:
     ____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__id._const_tab_at = None
     ____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__id._const_tab_id = u'id'
     ____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__criticality._const_tab = _____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__id_tab
+    _____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    _____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__criticality._const_tab = _____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__criticality_tab
     ____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__extensionValue._const_tab = _____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__id_tab
+    _____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    _____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__extensionValue._const_tab = _____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__extensionValue_tab
     ____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     ___CriticalityDiagnostics_IE_List__item__iE_Extensions__item_._cont = ASN1Dict([
@@ -4753,11 +4857,15 @@ class PCAP_IEs:
     ___DGPSCorrections_iE_Extensions__item__id._const_tab_at = None
     ___DGPSCorrections_iE_Extensions__item__id._const_tab_id = u'id'
     ___DGPSCorrections_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___DGPSCorrections_iE_Extensions__item__criticality._const_tab = ____DGPSCorrections_iE_Extensions__item__id_tab
+    ____DGPSCorrections_iE_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____DGPSCorrections_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___DGPSCorrections_iE_Extensions__item__criticality._const_tab = ____DGPSCorrections_iE_Extensions__item__criticality_tab
     ___DGPSCorrections_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___DGPSCorrections_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___DGPSCorrections_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___DGPSCorrections_iE_Extensions__item__extensionValue._const_tab = ____DGPSCorrections_iE_Extensions__item__id_tab
+    ____DGPSCorrections_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____DGPSCorrections_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___DGPSCorrections_iE_Extensions__item__extensionValue._const_tab = ____DGPSCorrections_iE_Extensions__item__extensionValue_tab
     ___DGPSCorrections_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___DGPSCorrections_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __DGPSCorrections_iE_Extensions__item_._cont = ASN1Dict([
@@ -4853,11 +4961,15 @@ class PCAP_IEs:
     ___DGNSS_ValidityPeriod_iE_Extensions__item__id._const_tab_at = None
     ___DGNSS_ValidityPeriod_iE_Extensions__item__id._const_tab_id = u'id'
     ___DGNSS_ValidityPeriod_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___DGNSS_ValidityPeriod_iE_Extensions__item__criticality._const_tab = ____DGNSS_ValidityPeriod_iE_Extensions__item__id_tab
+    ____DGNSS_ValidityPeriod_iE_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____DGNSS_ValidityPeriod_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___DGNSS_ValidityPeriod_iE_Extensions__item__criticality._const_tab = ____DGNSS_ValidityPeriod_iE_Extensions__item__criticality_tab
     ___DGNSS_ValidityPeriod_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___DGNSS_ValidityPeriod_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___DGNSS_ValidityPeriod_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___DGNSS_ValidityPeriod_iE_Extensions__item__extensionValue._const_tab = ____DGNSS_ValidityPeriod_iE_Extensions__item__id_tab
+    ____DGNSS_ValidityPeriod_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____DGNSS_ValidityPeriod_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___DGNSS_ValidityPeriod_iE_Extensions__item__extensionValue._const_tab = ____DGNSS_ValidityPeriod_iE_Extensions__item__extensionValue_tab
     ___DGNSS_ValidityPeriod_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___DGNSS_ValidityPeriod_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __DGNSS_ValidityPeriod_iE_Extensions__item_._cont = ASN1Dict([
@@ -4948,11 +5060,15 @@ class PCAP_IEs:
     ___GeographicalCoordinates_iE_Extensions__item__id._const_tab_at = None
     ___GeographicalCoordinates_iE_Extensions__item__id._const_tab_id = u'id'
     ___GeographicalCoordinates_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___GeographicalCoordinates_iE_Extensions__item__criticality._const_tab = ____GeographicalCoordinates_iE_Extensions__item__id_tab
+    ____GeographicalCoordinates_iE_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____GeographicalCoordinates_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___GeographicalCoordinates_iE_Extensions__item__criticality._const_tab = ____GeographicalCoordinates_iE_Extensions__item__criticality_tab
     ___GeographicalCoordinates_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___GeographicalCoordinates_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___GeographicalCoordinates_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___GeographicalCoordinates_iE_Extensions__item__extensionValue._const_tab = ____GeographicalCoordinates_iE_Extensions__item__id_tab
+    ____GeographicalCoordinates_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____GeographicalCoordinates_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___GeographicalCoordinates_iE_Extensions__item__extensionValue._const_tab = ____GeographicalCoordinates_iE_Extensions__item__extensionValue_tab
     ___GeographicalCoordinates_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___GeographicalCoordinates_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __GeographicalCoordinates_iE_Extensions__item_._cont = ASN1Dict([
@@ -5010,11 +5126,15 @@ class PCAP_IEs:
     ___GA_EllipsoidArc_iE_Extensions__item__id._const_tab_at = None
     ___GA_EllipsoidArc_iE_Extensions__item__id._const_tab_id = u'id'
     ___GA_EllipsoidArc_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___GA_EllipsoidArc_iE_Extensions__item__criticality._const_tab = ____GA_EllipsoidArc_iE_Extensions__item__id_tab
+    ____GA_EllipsoidArc_iE_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____GA_EllipsoidArc_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___GA_EllipsoidArc_iE_Extensions__item__criticality._const_tab = ____GA_EllipsoidArc_iE_Extensions__item__criticality_tab
     ___GA_EllipsoidArc_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___GA_EllipsoidArc_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___GA_EllipsoidArc_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___GA_EllipsoidArc_iE_Extensions__item__extensionValue._const_tab = ____GA_EllipsoidArc_iE_Extensions__item__id_tab
+    ____GA_EllipsoidArc_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____GA_EllipsoidArc_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___GA_EllipsoidArc_iE_Extensions__item__extensionValue._const_tab = ____GA_EllipsoidArc_iE_Extensions__item__extensionValue_tab
     ___GA_EllipsoidArc_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___GA_EllipsoidArc_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __GA_EllipsoidArc_iE_Extensions__item_._cont = ASN1Dict([
@@ -5052,11 +5172,15 @@ class PCAP_IEs:
     ___GA_Point_iE_Extensions__item__id._const_tab_at = None
     ___GA_Point_iE_Extensions__item__id._const_tab_id = u'id'
     ___GA_Point_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___GA_Point_iE_Extensions__item__criticality._const_tab = ____GA_Point_iE_Extensions__item__id_tab
+    ____GA_Point_iE_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____GA_Point_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___GA_Point_iE_Extensions__item__criticality._const_tab = ____GA_Point_iE_Extensions__item__criticality_tab
     ___GA_Point_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___GA_Point_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___GA_Point_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___GA_Point_iE_Extensions__item__extensionValue._const_tab = ____GA_Point_iE_Extensions__item__id_tab
+    ____GA_Point_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____GA_Point_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___GA_Point_iE_Extensions__item__extensionValue._const_tab = ____GA_Point_iE_Extensions__item__extensionValue_tab
     ___GA_Point_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___GA_Point_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __GA_Point_iE_Extensions__item_._cont = ASN1Dict([
@@ -5090,11 +5214,15 @@ class PCAP_IEs:
     ___GA_PointWithAltitude_iE_Extensions__item__id._const_tab_at = None
     ___GA_PointWithAltitude_iE_Extensions__item__id._const_tab_id = u'id'
     ___GA_PointWithAltitude_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___GA_PointWithAltitude_iE_Extensions__item__criticality._const_tab = ____GA_PointWithAltitude_iE_Extensions__item__id_tab
+    ____GA_PointWithAltitude_iE_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____GA_PointWithAltitude_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___GA_PointWithAltitude_iE_Extensions__item__criticality._const_tab = ____GA_PointWithAltitude_iE_Extensions__item__criticality_tab
     ___GA_PointWithAltitude_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___GA_PointWithAltitude_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___GA_PointWithAltitude_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___GA_PointWithAltitude_iE_Extensions__item__extensionValue._const_tab = ____GA_PointWithAltitude_iE_Extensions__item__id_tab
+    ____GA_PointWithAltitude_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____GA_PointWithAltitude_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___GA_PointWithAltitude_iE_Extensions__item__extensionValue._const_tab = ____GA_PointWithAltitude_iE_Extensions__item__extensionValue_tab
     ___GA_PointWithAltitude_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___GA_PointWithAltitude_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __GA_PointWithAltitude_iE_Extensions__item_._cont = ASN1Dict([
@@ -5134,11 +5262,15 @@ class PCAP_IEs:
     ___GA_PointWithAltitudeAndUncertaintyEllipsoid_iE_Extensions__item__id._const_tab_at = None
     ___GA_PointWithAltitudeAndUncertaintyEllipsoid_iE_Extensions__item__id._const_tab_id = u'id'
     ___GA_PointWithAltitudeAndUncertaintyEllipsoid_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___GA_PointWithAltitudeAndUncertaintyEllipsoid_iE_Extensions__item__criticality._const_tab = ____GA_PointWithAltitudeAndUncertaintyEllipsoid_iE_Extensions__item__id_tab
+    ____GA_PointWithAltitudeAndUncertaintyEllipsoid_iE_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____GA_PointWithAltitudeAndUncertaintyEllipsoid_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___GA_PointWithAltitudeAndUncertaintyEllipsoid_iE_Extensions__item__criticality._const_tab = ____GA_PointWithAltitudeAndUncertaintyEllipsoid_iE_Extensions__item__criticality_tab
     ___GA_PointWithAltitudeAndUncertaintyEllipsoid_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___GA_PointWithAltitudeAndUncertaintyEllipsoid_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___GA_PointWithAltitudeAndUncertaintyEllipsoid_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___GA_PointWithAltitudeAndUncertaintyEllipsoid_iE_Extensions__item__extensionValue._const_tab = ____GA_PointWithAltitudeAndUncertaintyEllipsoid_iE_Extensions__item__id_tab
+    ____GA_PointWithAltitudeAndUncertaintyEllipsoid_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____GA_PointWithAltitudeAndUncertaintyEllipsoid_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___GA_PointWithAltitudeAndUncertaintyEllipsoid_iE_Extensions__item__extensionValue._const_tab = ____GA_PointWithAltitudeAndUncertaintyEllipsoid_iE_Extensions__item__extensionValue_tab
     ___GA_PointWithAltitudeAndUncertaintyEllipsoid_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___GA_PointWithAltitudeAndUncertaintyEllipsoid_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __GA_PointWithAltitudeAndUncertaintyEllipsoid_iE_Extensions__item_._cont = ASN1Dict([
@@ -5177,11 +5309,15 @@ class PCAP_IEs:
     ___GA_PointWithUnCertainty_iE_Extensions__item__id._const_tab_at = None
     ___GA_PointWithUnCertainty_iE_Extensions__item__id._const_tab_id = u'id'
     ___GA_PointWithUnCertainty_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___GA_PointWithUnCertainty_iE_Extensions__item__criticality._const_tab = ____GA_PointWithUnCertainty_iE_Extensions__item__id_tab
+    ____GA_PointWithUnCertainty_iE_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____GA_PointWithUnCertainty_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___GA_PointWithUnCertainty_iE_Extensions__item__criticality._const_tab = ____GA_PointWithUnCertainty_iE_Extensions__item__criticality_tab
     ___GA_PointWithUnCertainty_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___GA_PointWithUnCertainty_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___GA_PointWithUnCertainty_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___GA_PointWithUnCertainty_iE_Extensions__item__extensionValue._const_tab = ____GA_PointWithUnCertainty_iE_Extensions__item__id_tab
+    ____GA_PointWithUnCertainty_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____GA_PointWithUnCertainty_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___GA_PointWithUnCertainty_iE_Extensions__item__extensionValue._const_tab = ____GA_PointWithUnCertainty_iE_Extensions__item__extensionValue_tab
     ___GA_PointWithUnCertainty_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___GA_PointWithUnCertainty_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __GA_PointWithUnCertainty_iE_Extensions__item_._cont = ASN1Dict([
@@ -5218,11 +5354,15 @@ class PCAP_IEs:
     ___GA_PointWithUnCertaintyEllipse_iE_Extensions__item__id._const_tab_at = None
     ___GA_PointWithUnCertaintyEllipse_iE_Extensions__item__id._const_tab_id = u'id'
     ___GA_PointWithUnCertaintyEllipse_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___GA_PointWithUnCertaintyEllipse_iE_Extensions__item__criticality._const_tab = ____GA_PointWithUnCertaintyEllipse_iE_Extensions__item__id_tab
+    ____GA_PointWithUnCertaintyEllipse_iE_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____GA_PointWithUnCertaintyEllipse_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___GA_PointWithUnCertaintyEllipse_iE_Extensions__item__criticality._const_tab = ____GA_PointWithUnCertaintyEllipse_iE_Extensions__item__criticality_tab
     ___GA_PointWithUnCertaintyEllipse_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___GA_PointWithUnCertaintyEllipse_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___GA_PointWithUnCertaintyEllipse_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___GA_PointWithUnCertaintyEllipse_iE_Extensions__item__extensionValue._const_tab = ____GA_PointWithUnCertaintyEllipse_iE_Extensions__item__id_tab
+    ____GA_PointWithUnCertaintyEllipse_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____GA_PointWithUnCertaintyEllipse_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___GA_PointWithUnCertaintyEllipse_iE_Extensions__item__extensionValue._const_tab = ____GA_PointWithUnCertaintyEllipse_iE_Extensions__item__extensionValue_tab
     ___GA_PointWithUnCertaintyEllipse_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___GA_PointWithUnCertaintyEllipse_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __GA_PointWithUnCertaintyEllipse_iE_Extensions__item_._cont = ASN1Dict([
@@ -5258,11 +5398,15 @@ class PCAP_IEs:
     ____GA_Polygon__item__iE_Extensions__item__id._const_tab_at = None
     ____GA_Polygon__item__iE_Extensions__item__id._const_tab_id = u'id'
     ____GA_Polygon__item__iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ____GA_Polygon__item__iE_Extensions__item__criticality._const_tab = _____GA_Polygon__item__iE_Extensions__item__id_tab
+    _____GA_Polygon__item__iE_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    _____GA_Polygon__item__iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ____GA_Polygon__item__iE_Extensions__item__criticality._const_tab = _____GA_Polygon__item__iE_Extensions__item__criticality_tab
     ____GA_Polygon__item__iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ____GA_Polygon__item__iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ____GA_Polygon__item__iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ____GA_Polygon__item__iE_Extensions__item__extensionValue._const_tab = _____GA_Polygon__item__iE_Extensions__item__id_tab
+    _____GA_Polygon__item__iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    _____GA_Polygon__item__iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ____GA_Polygon__item__iE_Extensions__item__extensionValue._const_tab = _____GA_Polygon__item__iE_Extensions__item__extensionValue_tab
     ____GA_Polygon__item__iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ____GA_Polygon__item__iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     ___GA_Polygon__item__iE_Extensions__item_._cont = ASN1Dict([
@@ -5403,11 +5547,15 @@ class PCAP_IEs:
     ___Cell_Timing_iE_Extensions__item__id._const_tab_at = None
     ___Cell_Timing_iE_Extensions__item__id._const_tab_id = u'id'
     ___Cell_Timing_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___Cell_Timing_iE_Extensions__item__criticality._const_tab = ____Cell_Timing_iE_Extensions__item__id_tab
+    ____Cell_Timing_iE_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____Cell_Timing_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___Cell_Timing_iE_Extensions__item__criticality._const_tab = ____Cell_Timing_iE_Extensions__item__criticality_tab
     ___Cell_Timing_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___Cell_Timing_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___Cell_Timing_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___Cell_Timing_iE_Extensions__item__extensionValue._const_tab = ____Cell_Timing_iE_Extensions__item__id_tab
+    ____Cell_Timing_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____Cell_Timing_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___Cell_Timing_iE_Extensions__item__extensionValue._const_tab = ____Cell_Timing_iE_Extensions__item__extensionValue_tab
     ___Cell_Timing_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___Cell_Timing_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __Cell_Timing_iE_Extensions__item_._cont = ASN1Dict([
@@ -5443,11 +5591,15 @@ class PCAP_IEs:
     ___GANSS_Reference_Time_Only_iE_Extensions__item__id._const_tab_at = None
     ___GANSS_Reference_Time_Only_iE_Extensions__item__id._const_tab_id = u'id'
     ___GANSS_Reference_Time_Only_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___GANSS_Reference_Time_Only_iE_Extensions__item__criticality._const_tab = ____GANSS_Reference_Time_Only_iE_Extensions__item__id_tab
+    ____GANSS_Reference_Time_Only_iE_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____GANSS_Reference_Time_Only_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___GANSS_Reference_Time_Only_iE_Extensions__item__criticality._const_tab = ____GANSS_Reference_Time_Only_iE_Extensions__item__criticality_tab
     ___GANSS_Reference_Time_Only_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___GANSS_Reference_Time_Only_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___GANSS_Reference_Time_Only_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___GANSS_Reference_Time_Only_iE_Extensions__item__extensionValue._const_tab = ____GANSS_Reference_Time_Only_iE_Extensions__item__id_tab
+    ____GANSS_Reference_Time_Only_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____GANSS_Reference_Time_Only_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___GANSS_Reference_Time_Only_iE_Extensions__item__extensionValue._const_tab = ____GANSS_Reference_Time_Only_iE_Extensions__item__extensionValue_tab
     ___GANSS_Reference_Time_Only_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___GANSS_Reference_Time_Only_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __GANSS_Reference_Time_Only_iE_Extensions__item_._cont = ASN1Dict([
@@ -5482,11 +5634,15 @@ class PCAP_IEs:
     ___PositionDataUEbased_iE_Extensions__item__id._const_tab_at = None
     ___PositionDataUEbased_iE_Extensions__item__id._const_tab_id = u'id'
     ___PositionDataUEbased_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___PositionDataUEbased_iE_Extensions__item__criticality._const_tab = ____PositionDataUEbased_iE_Extensions__item__id_tab
+    ____PositionDataUEbased_iE_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____PositionDataUEbased_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___PositionDataUEbased_iE_Extensions__item__criticality._const_tab = ____PositionDataUEbased_iE_Extensions__item__criticality_tab
     ___PositionDataUEbased_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___PositionDataUEbased_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___PositionDataUEbased_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___PositionDataUEbased_iE_Extensions__item__extensionValue._const_tab = ____PositionDataUEbased_iE_Extensions__item__id_tab
+    ____PositionDataUEbased_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____PositionDataUEbased_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___PositionDataUEbased_iE_Extensions__item__extensionValue._const_tab = ____PositionDataUEbased_iE_Extensions__item__extensionValue_tab
     ___PositionDataUEbased_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___PositionDataUEbased_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __PositionDataUEbased_iE_Extensions__item_._cont = ASN1Dict([
@@ -5708,11 +5864,15 @@ class PCAP_IEs:
     ___ExtraDopplerInfo_iE_Extensions__item__id._const_tab_at = None
     ___ExtraDopplerInfo_iE_Extensions__item__id._const_tab_id = u'id'
     ___ExtraDopplerInfo_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___ExtraDopplerInfo_iE_Extensions__item__criticality._const_tab = ____ExtraDopplerInfo_iE_Extensions__item__id_tab
+    ____ExtraDopplerInfo_iE_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____ExtraDopplerInfo_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___ExtraDopplerInfo_iE_Extensions__item__criticality._const_tab = ____ExtraDopplerInfo_iE_Extensions__item__criticality_tab
     ___ExtraDopplerInfo_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___ExtraDopplerInfo_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___ExtraDopplerInfo_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___ExtraDopplerInfo_iE_Extensions__item__extensionValue._const_tab = ____ExtraDopplerInfo_iE_Extensions__item__id_tab
+    ____ExtraDopplerInfo_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____ExtraDopplerInfo_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___ExtraDopplerInfo_iE_Extensions__item__extensionValue._const_tab = ____ExtraDopplerInfo_iE_Extensions__item__extensionValue_tab
     ___ExtraDopplerInfo_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___ExtraDopplerInfo_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __ExtraDopplerInfo_iE_Extensions__item_._cont = ASN1Dict([
@@ -5748,11 +5908,15 @@ class PCAP_IEs:
     ___ExtraDopplerInfoExtension_iE_Extensions__item__id._const_tab_at = None
     ___ExtraDopplerInfoExtension_iE_Extensions__item__id._const_tab_id = u'id'
     ___ExtraDopplerInfoExtension_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___ExtraDopplerInfoExtension_iE_Extensions__item__criticality._const_tab = ____ExtraDopplerInfoExtension_iE_Extensions__item__id_tab
+    ____ExtraDopplerInfoExtension_iE_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____ExtraDopplerInfoExtension_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___ExtraDopplerInfoExtension_iE_Extensions__item__criticality._const_tab = ____ExtraDopplerInfoExtension_iE_Extensions__item__criticality_tab
     ___ExtraDopplerInfoExtension_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___ExtraDopplerInfoExtension_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___ExtraDopplerInfoExtension_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___ExtraDopplerInfoExtension_iE_Extensions__item__extensionValue._const_tab = ____ExtraDopplerInfoExtension_iE_Extensions__item__id_tab
+    ____ExtraDopplerInfoExtension_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____ExtraDopplerInfoExtension_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___ExtraDopplerInfoExtension_iE_Extensions__item__extensionValue._const_tab = ____ExtraDopplerInfoExtension_iE_Extensions__item__extensionValue_tab
     ___ExtraDopplerInfoExtension_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___ExtraDopplerInfoExtension_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __ExtraDopplerInfoExtension_iE_Extensions__item_._cont = ASN1Dict([
@@ -5847,11 +6011,15 @@ class PCAP_IEs:
     ___AzimuthAndElevationLSB_iE_Extensions__item__id._const_tab_at = None
     ___AzimuthAndElevationLSB_iE_Extensions__item__id._const_tab_id = u'id'
     ___AzimuthAndElevationLSB_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___AzimuthAndElevationLSB_iE_Extensions__item__criticality._const_tab = ____AzimuthAndElevationLSB_iE_Extensions__item__id_tab
+    ____AzimuthAndElevationLSB_iE_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____AzimuthAndElevationLSB_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___AzimuthAndElevationLSB_iE_Extensions__item__criticality._const_tab = ____AzimuthAndElevationLSB_iE_Extensions__item__criticality_tab
     ___AzimuthAndElevationLSB_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___AzimuthAndElevationLSB_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___AzimuthAndElevationLSB_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___AzimuthAndElevationLSB_iE_Extensions__item__extensionValue._const_tab = ____AzimuthAndElevationLSB_iE_Extensions__item__id_tab
+    ____AzimuthAndElevationLSB_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____AzimuthAndElevationLSB_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___AzimuthAndElevationLSB_iE_Extensions__item__extensionValue._const_tab = ____AzimuthAndElevationLSB_iE_Extensions__item__extensionValue_tab
     ___AzimuthAndElevationLSB_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___AzimuthAndElevationLSB_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __AzimuthAndElevationLSB_iE_Extensions__item_._cont = ASN1Dict([
@@ -5898,11 +6066,15 @@ class PCAP_IEs:
     ___AuxInfoGANSS_ID1_element_ie_Extensions__item__id._const_tab_at = None
     ___AuxInfoGANSS_ID1_element_ie_Extensions__item__id._const_tab_id = u'id'
     ___AuxInfoGANSS_ID1_element_ie_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___AuxInfoGANSS_ID1_element_ie_Extensions__item__criticality._const_tab = ____AuxInfoGANSS_ID1_element_ie_Extensions__item__id_tab
+    ____AuxInfoGANSS_ID1_element_ie_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____AuxInfoGANSS_ID1_element_ie_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___AuxInfoGANSS_ID1_element_ie_Extensions__item__criticality._const_tab = ____AuxInfoGANSS_ID1_element_ie_Extensions__item__criticality_tab
     ___AuxInfoGANSS_ID1_element_ie_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___AuxInfoGANSS_ID1_element_ie_Extensions__item__criticality._const_tab_id = u'criticality'
     ___AuxInfoGANSS_ID1_element_ie_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___AuxInfoGANSS_ID1_element_ie_Extensions__item__extensionValue._const_tab = ____AuxInfoGANSS_ID1_element_ie_Extensions__item__id_tab
+    ____AuxInfoGANSS_ID1_element_ie_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____AuxInfoGANSS_ID1_element_ie_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___AuxInfoGANSS_ID1_element_ie_Extensions__item__extensionValue._const_tab = ____AuxInfoGANSS_ID1_element_ie_Extensions__item__extensionValue_tab
     ___AuxInfoGANSS_ID1_element_ie_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___AuxInfoGANSS_ID1_element_ie_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __AuxInfoGANSS_ID1_element_ie_Extensions__item_._cont = ASN1Dict([
@@ -5947,11 +6119,15 @@ class PCAP_IEs:
     ___AuxInfoGANSS_ID3_element_ie_Extensions__item__id._const_tab_at = None
     ___AuxInfoGANSS_ID3_element_ie_Extensions__item__id._const_tab_id = u'id'
     ___AuxInfoGANSS_ID3_element_ie_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___AuxInfoGANSS_ID3_element_ie_Extensions__item__criticality._const_tab = ____AuxInfoGANSS_ID3_element_ie_Extensions__item__id_tab
+    ____AuxInfoGANSS_ID3_element_ie_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____AuxInfoGANSS_ID3_element_ie_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___AuxInfoGANSS_ID3_element_ie_Extensions__item__criticality._const_tab = ____AuxInfoGANSS_ID3_element_ie_Extensions__item__criticality_tab
     ___AuxInfoGANSS_ID3_element_ie_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___AuxInfoGANSS_ID3_element_ie_Extensions__item__criticality._const_tab_id = u'criticality'
     ___AuxInfoGANSS_ID3_element_ie_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___AuxInfoGANSS_ID3_element_ie_Extensions__item__extensionValue._const_tab = ____AuxInfoGANSS_ID3_element_ie_Extensions__item__id_tab
+    ____AuxInfoGANSS_ID3_element_ie_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____AuxInfoGANSS_ID3_element_ie_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___AuxInfoGANSS_ID3_element_ie_Extensions__item__extensionValue._const_tab = ____AuxInfoGANSS_ID3_element_ie_Extensions__item__extensionValue_tab
     ___AuxInfoGANSS_ID3_element_ie_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___AuxInfoGANSS_ID3_element_ie_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __AuxInfoGANSS_ID3_element_ie_Extensions__item_._cont = ASN1Dict([
@@ -6015,11 +6191,15 @@ class PCAP_IEs:
     ___CNAVclockModel_ie_Extensions__item__id._const_tab_at = None
     ___CNAVclockModel_ie_Extensions__item__id._const_tab_id = u'id'
     ___CNAVclockModel_ie_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___CNAVclockModel_ie_Extensions__item__criticality._const_tab = ____CNAVclockModel_ie_Extensions__item__id_tab
+    ____CNAVclockModel_ie_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____CNAVclockModel_ie_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___CNAVclockModel_ie_Extensions__item__criticality._const_tab = ____CNAVclockModel_ie_Extensions__item__criticality_tab
     ___CNAVclockModel_ie_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___CNAVclockModel_ie_Extensions__item__criticality._const_tab_id = u'criticality'
     ___CNAVclockModel_ie_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___CNAVclockModel_ie_Extensions__item__extensionValue._const_tab = ____CNAVclockModel_ie_Extensions__item__id_tab
+    ____CNAVclockModel_ie_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____CNAVclockModel_ie_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___CNAVclockModel_ie_Extensions__item__extensionValue._const_tab = ____CNAVclockModel_ie_Extensions__item__extensionValue_tab
     ___CNAVclockModel_ie_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___CNAVclockModel_ie_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __CNAVclockModel_ie_Extensions__item_._cont = ASN1Dict([
@@ -6069,11 +6249,15 @@ class PCAP_IEs:
     ___DeltaUT1_ie_Extensions__item__id._const_tab_at = None
     ___DeltaUT1_ie_Extensions__item__id._const_tab_id = u'id'
     ___DeltaUT1_ie_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___DeltaUT1_ie_Extensions__item__criticality._const_tab = ____DeltaUT1_ie_Extensions__item__id_tab
+    ____DeltaUT1_ie_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____DeltaUT1_ie_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___DeltaUT1_ie_Extensions__item__criticality._const_tab = ____DeltaUT1_ie_Extensions__item__criticality_tab
     ___DeltaUT1_ie_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___DeltaUT1_ie_Extensions__item__criticality._const_tab_id = u'criticality'
     ___DeltaUT1_ie_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___DeltaUT1_ie_Extensions__item__extensionValue._const_tab = ____DeltaUT1_ie_Extensions__item__id_tab
+    ____DeltaUT1_ie_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____DeltaUT1_ie_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___DeltaUT1_ie_Extensions__item__extensionValue._const_tab = ____DeltaUT1_ie_Extensions__item__extensionValue_tab
     ___DeltaUT1_ie_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___DeltaUT1_ie_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __DeltaUT1_ie_Extensions__item_._cont = ASN1Dict([
@@ -6109,11 +6293,15 @@ class PCAP_IEs:
     ___DGANSS_Corrections_ie_Extensions__item__id._const_tab_at = None
     ___DGANSS_Corrections_ie_Extensions__item__id._const_tab_id = u'id'
     ___DGANSS_Corrections_ie_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___DGANSS_Corrections_ie_Extensions__item__criticality._const_tab = ____DGANSS_Corrections_ie_Extensions__item__id_tab
+    ____DGANSS_Corrections_ie_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____DGANSS_Corrections_ie_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___DGANSS_Corrections_ie_Extensions__item__criticality._const_tab = ____DGANSS_Corrections_ie_Extensions__item__criticality_tab
     ___DGANSS_Corrections_ie_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___DGANSS_Corrections_ie_Extensions__item__criticality._const_tab_id = u'criticality'
     ___DGANSS_Corrections_ie_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___DGANSS_Corrections_ie_Extensions__item__extensionValue._const_tab = ____DGANSS_Corrections_ie_Extensions__item__id_tab
+    ____DGANSS_Corrections_ie_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____DGANSS_Corrections_ie_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___DGANSS_Corrections_ie_Extensions__item__extensionValue._const_tab = ____DGANSS_Corrections_ie_Extensions__item__extensionValue_tab
     ___DGANSS_Corrections_ie_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___DGANSS_Corrections_ie_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __DGANSS_Corrections_ie_Extensions__item_._cont = ASN1Dict([
@@ -6155,11 +6343,15 @@ class PCAP_IEs:
     ___DGANSS_InformationItem_ie_Extensions__item__id._const_tab_at = None
     ___DGANSS_InformationItem_ie_Extensions__item__id._const_tab_id = u'id'
     ___DGANSS_InformationItem_ie_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___DGANSS_InformationItem_ie_Extensions__item__criticality._const_tab = ____DGANSS_InformationItem_ie_Extensions__item__id_tab
+    ____DGANSS_InformationItem_ie_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____DGANSS_InformationItem_ie_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___DGANSS_InformationItem_ie_Extensions__item__criticality._const_tab = ____DGANSS_InformationItem_ie_Extensions__item__criticality_tab
     ___DGANSS_InformationItem_ie_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___DGANSS_InformationItem_ie_Extensions__item__criticality._const_tab_id = u'criticality'
     ___DGANSS_InformationItem_ie_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___DGANSS_InformationItem_ie_Extensions__item__extensionValue._const_tab = ____DGANSS_InformationItem_ie_Extensions__item__id_tab
+    ____DGANSS_InformationItem_ie_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____DGANSS_InformationItem_ie_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___DGANSS_InformationItem_ie_Extensions__item__extensionValue._const_tab = ____DGANSS_InformationItem_ie_Extensions__item__extensionValue_tab
     ___DGANSS_InformationItem_ie_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___DGANSS_InformationItem_ie_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __DGANSS_InformationItem_ie_Extensions__item_._cont = ASN1Dict([
@@ -6285,11 +6477,15 @@ class PCAP_IEs:
     ___GANSS_Additional_Ionospheric_Model_ie_Extensions__item__id._const_tab_at = None
     ___GANSS_Additional_Ionospheric_Model_ie_Extensions__item__id._const_tab_id = u'id'
     ___GANSS_Additional_Ionospheric_Model_ie_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___GANSS_Additional_Ionospheric_Model_ie_Extensions__item__criticality._const_tab = ____GANSS_Additional_Ionospheric_Model_ie_Extensions__item__id_tab
+    ____GANSS_Additional_Ionospheric_Model_ie_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____GANSS_Additional_Ionospheric_Model_ie_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___GANSS_Additional_Ionospheric_Model_ie_Extensions__item__criticality._const_tab = ____GANSS_Additional_Ionospheric_Model_ie_Extensions__item__criticality_tab
     ___GANSS_Additional_Ionospheric_Model_ie_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___GANSS_Additional_Ionospheric_Model_ie_Extensions__item__criticality._const_tab_id = u'criticality'
     ___GANSS_Additional_Ionospheric_Model_ie_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___GANSS_Additional_Ionospheric_Model_ie_Extensions__item__extensionValue._const_tab = ____GANSS_Additional_Ionospheric_Model_ie_Extensions__item__id_tab
+    ____GANSS_Additional_Ionospheric_Model_ie_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____GANSS_Additional_Ionospheric_Model_ie_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___GANSS_Additional_Ionospheric_Model_ie_Extensions__item__extensionValue._const_tab = ____GANSS_Additional_Ionospheric_Model_ie_Extensions__item__extensionValue_tab
     ___GANSS_Additional_Ionospheric_Model_ie_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___GANSS_Additional_Ionospheric_Model_ie_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __GANSS_Additional_Ionospheric_Model_ie_Extensions__item_._cont = ASN1Dict([
@@ -6326,11 +6522,15 @@ class PCAP_IEs:
     ___GANSS_Additional_Navigation_Models_ie_Extensions__item__id._const_tab_at = None
     ___GANSS_Additional_Navigation_Models_ie_Extensions__item__id._const_tab_id = u'id'
     ___GANSS_Additional_Navigation_Models_ie_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___GANSS_Additional_Navigation_Models_ie_Extensions__item__criticality._const_tab = ____GANSS_Additional_Navigation_Models_ie_Extensions__item__id_tab
+    ____GANSS_Additional_Navigation_Models_ie_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____GANSS_Additional_Navigation_Models_ie_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___GANSS_Additional_Navigation_Models_ie_Extensions__item__criticality._const_tab = ____GANSS_Additional_Navigation_Models_ie_Extensions__item__criticality_tab
     ___GANSS_Additional_Navigation_Models_ie_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___GANSS_Additional_Navigation_Models_ie_Extensions__item__criticality._const_tab_id = u'criticality'
     ___GANSS_Additional_Navigation_Models_ie_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___GANSS_Additional_Navigation_Models_ie_Extensions__item__extensionValue._const_tab = ____GANSS_Additional_Navigation_Models_ie_Extensions__item__id_tab
+    ____GANSS_Additional_Navigation_Models_ie_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____GANSS_Additional_Navigation_Models_ie_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___GANSS_Additional_Navigation_Models_ie_Extensions__item__extensionValue._const_tab = ____GANSS_Additional_Navigation_Models_ie_Extensions__item__extensionValue_tab
     ___GANSS_Additional_Navigation_Models_ie_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___GANSS_Additional_Navigation_Models_ie_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __GANSS_Additional_Navigation_Models_ie_Extensions__item_._cont = ASN1Dict([
@@ -6384,11 +6584,15 @@ class PCAP_IEs:
     ___GANSS_ALM_BDSKeplericanset_ie_Extensions__item__id._const_tab_at = None
     ___GANSS_ALM_BDSKeplericanset_ie_Extensions__item__id._const_tab_id = u'id'
     ___GANSS_ALM_BDSKeplericanset_ie_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___GANSS_ALM_BDSKeplericanset_ie_Extensions__item__criticality._const_tab = ____GANSS_ALM_BDSKeplericanset_ie_Extensions__item__id_tab
+    ____GANSS_ALM_BDSKeplericanset_ie_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____GANSS_ALM_BDSKeplericanset_ie_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___GANSS_ALM_BDSKeplericanset_ie_Extensions__item__criticality._const_tab = ____GANSS_ALM_BDSKeplericanset_ie_Extensions__item__criticality_tab
     ___GANSS_ALM_BDSKeplericanset_ie_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___GANSS_ALM_BDSKeplericanset_ie_Extensions__item__criticality._const_tab_id = u'criticality'
     ___GANSS_ALM_BDSKeplericanset_ie_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___GANSS_ALM_BDSKeplericanset_ie_Extensions__item__extensionValue._const_tab = ____GANSS_ALM_BDSKeplericanset_ie_Extensions__item__id_tab
+    ____GANSS_ALM_BDSKeplericanset_ie_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____GANSS_ALM_BDSKeplericanset_ie_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___GANSS_ALM_BDSKeplericanset_ie_Extensions__item__extensionValue._const_tab = ____GANSS_ALM_BDSKeplericanset_ie_Extensions__item__extensionValue_tab
     ___GANSS_ALM_BDSKeplericanset_ie_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___GANSS_ALM_BDSKeplericanset_ie_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __GANSS_ALM_BDSKeplericanset_ie_Extensions__item_._cont = ASN1Dict([
@@ -6450,11 +6654,15 @@ class PCAP_IEs:
     ___Satellite_Information_BDS_KP_Item_ie_Extensions__item__id._const_tab_at = None
     ___Satellite_Information_BDS_KP_Item_ie_Extensions__item__id._const_tab_id = u'id'
     ___Satellite_Information_BDS_KP_Item_ie_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___Satellite_Information_BDS_KP_Item_ie_Extensions__item__criticality._const_tab = ____Satellite_Information_BDS_KP_Item_ie_Extensions__item__id_tab
+    ____Satellite_Information_BDS_KP_Item_ie_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____Satellite_Information_BDS_KP_Item_ie_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___Satellite_Information_BDS_KP_Item_ie_Extensions__item__criticality._const_tab = ____Satellite_Information_BDS_KP_Item_ie_Extensions__item__criticality_tab
     ___Satellite_Information_BDS_KP_Item_ie_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___Satellite_Information_BDS_KP_Item_ie_Extensions__item__criticality._const_tab_id = u'criticality'
     ___Satellite_Information_BDS_KP_Item_ie_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___Satellite_Information_BDS_KP_Item_ie_Extensions__item__extensionValue._const_tab = ____Satellite_Information_BDS_KP_Item_ie_Extensions__item__id_tab
+    ____Satellite_Information_BDS_KP_Item_ie_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____Satellite_Information_BDS_KP_Item_ie_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___Satellite_Information_BDS_KP_Item_ie_Extensions__item__extensionValue._const_tab = ____Satellite_Information_BDS_KP_Item_ie_Extensions__item__extensionValue_tab
     ___Satellite_Information_BDS_KP_Item_ie_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___Satellite_Information_BDS_KP_Item_ie_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __Satellite_Information_BDS_KP_Item_ie_Extensions__item_._cont = ASN1Dict([
@@ -6498,11 +6706,15 @@ class PCAP_IEs:
     ___GANSS_ALM_ECEFsbasAlmanacSet_ie_Extensions__item__id._const_tab_at = None
     ___GANSS_ALM_ECEFsbasAlmanacSet_ie_Extensions__item__id._const_tab_id = u'id'
     ___GANSS_ALM_ECEFsbasAlmanacSet_ie_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___GANSS_ALM_ECEFsbasAlmanacSet_ie_Extensions__item__criticality._const_tab = ____GANSS_ALM_ECEFsbasAlmanacSet_ie_Extensions__item__id_tab
+    ____GANSS_ALM_ECEFsbasAlmanacSet_ie_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____GANSS_ALM_ECEFsbasAlmanacSet_ie_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___GANSS_ALM_ECEFsbasAlmanacSet_ie_Extensions__item__criticality._const_tab = ____GANSS_ALM_ECEFsbasAlmanacSet_ie_Extensions__item__criticality_tab
     ___GANSS_ALM_ECEFsbasAlmanacSet_ie_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___GANSS_ALM_ECEFsbasAlmanacSet_ie_Extensions__item__criticality._const_tab_id = u'criticality'
     ___GANSS_ALM_ECEFsbasAlmanacSet_ie_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___GANSS_ALM_ECEFsbasAlmanacSet_ie_Extensions__item__extensionValue._const_tab = ____GANSS_ALM_ECEFsbasAlmanacSet_ie_Extensions__item__id_tab
+    ____GANSS_ALM_ECEFsbasAlmanacSet_ie_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____GANSS_ALM_ECEFsbasAlmanacSet_ie_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___GANSS_ALM_ECEFsbasAlmanacSet_ie_Extensions__item__extensionValue._const_tab = ____GANSS_ALM_ECEFsbasAlmanacSet_ie_Extensions__item__extensionValue_tab
     ___GANSS_ALM_ECEFsbasAlmanacSet_ie_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___GANSS_ALM_ECEFsbasAlmanacSet_ie_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __GANSS_ALM_ECEFsbasAlmanacSet_ie_Extensions__item_._cont = ASN1Dict([
@@ -6535,11 +6747,15 @@ class PCAP_IEs:
     ___GANSS_ALM_GlonassAlmanacSet_ie_Extensions__item__id._const_tab_at = None
     ___GANSS_ALM_GlonassAlmanacSet_ie_Extensions__item__id._const_tab_id = u'id'
     ___GANSS_ALM_GlonassAlmanacSet_ie_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___GANSS_ALM_GlonassAlmanacSet_ie_Extensions__item__criticality._const_tab = ____GANSS_ALM_GlonassAlmanacSet_ie_Extensions__item__id_tab
+    ____GANSS_ALM_GlonassAlmanacSet_ie_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____GANSS_ALM_GlonassAlmanacSet_ie_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___GANSS_ALM_GlonassAlmanacSet_ie_Extensions__item__criticality._const_tab = ____GANSS_ALM_GlonassAlmanacSet_ie_Extensions__item__criticality_tab
     ___GANSS_ALM_GlonassAlmanacSet_ie_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___GANSS_ALM_GlonassAlmanacSet_ie_Extensions__item__criticality._const_tab_id = u'criticality'
     ___GANSS_ALM_GlonassAlmanacSet_ie_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___GANSS_ALM_GlonassAlmanacSet_ie_Extensions__item__extensionValue._const_tab = ____GANSS_ALM_GlonassAlmanacSet_ie_Extensions__item__id_tab
+    ____GANSS_ALM_GlonassAlmanacSet_ie_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____GANSS_ALM_GlonassAlmanacSet_ie_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___GANSS_ALM_GlonassAlmanacSet_ie_Extensions__item__extensionValue._const_tab = ____GANSS_ALM_GlonassAlmanacSet_ie_Extensions__item__extensionValue_tab
     ___GANSS_ALM_GlonassAlmanacSet_ie_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___GANSS_ALM_GlonassAlmanacSet_ie_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __GANSS_ALM_GlonassAlmanacSet_ie_Extensions__item_._cont = ASN1Dict([
@@ -6574,11 +6790,15 @@ class PCAP_IEs:
     ___GANSS_ALM_MidiAlmanacSet_ie_Extensions__item__id._const_tab_at = None
     ___GANSS_ALM_MidiAlmanacSet_ie_Extensions__item__id._const_tab_id = u'id'
     ___GANSS_ALM_MidiAlmanacSet_ie_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___GANSS_ALM_MidiAlmanacSet_ie_Extensions__item__criticality._const_tab = ____GANSS_ALM_MidiAlmanacSet_ie_Extensions__item__id_tab
+    ____GANSS_ALM_MidiAlmanacSet_ie_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____GANSS_ALM_MidiAlmanacSet_ie_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___GANSS_ALM_MidiAlmanacSet_ie_Extensions__item__criticality._const_tab = ____GANSS_ALM_MidiAlmanacSet_ie_Extensions__item__criticality_tab
     ___GANSS_ALM_MidiAlmanacSet_ie_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___GANSS_ALM_MidiAlmanacSet_ie_Extensions__item__criticality._const_tab_id = u'criticality'
     ___GANSS_ALM_MidiAlmanacSet_ie_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___GANSS_ALM_MidiAlmanacSet_ie_Extensions__item__extensionValue._const_tab = ____GANSS_ALM_MidiAlmanacSet_ie_Extensions__item__id_tab
+    ____GANSS_ALM_MidiAlmanacSet_ie_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____GANSS_ALM_MidiAlmanacSet_ie_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___GANSS_ALM_MidiAlmanacSet_ie_Extensions__item__extensionValue._const_tab = ____GANSS_ALM_MidiAlmanacSet_ie_Extensions__item__extensionValue_tab
     ___GANSS_ALM_MidiAlmanacSet_ie_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___GANSS_ALM_MidiAlmanacSet_ie_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __GANSS_ALM_MidiAlmanacSet_ie_Extensions__item_._cont = ASN1Dict([
@@ -6614,11 +6834,15 @@ class PCAP_IEs:
     ___GANSS_ALM_NAVKeplerianSet_ie_Extensions__item__id._const_tab_at = None
     ___GANSS_ALM_NAVKeplerianSet_ie_Extensions__item__id._const_tab_id = u'id'
     ___GANSS_ALM_NAVKeplerianSet_ie_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___GANSS_ALM_NAVKeplerianSet_ie_Extensions__item__criticality._const_tab = ____GANSS_ALM_NAVKeplerianSet_ie_Extensions__item__id_tab
+    ____GANSS_ALM_NAVKeplerianSet_ie_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____GANSS_ALM_NAVKeplerianSet_ie_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___GANSS_ALM_NAVKeplerianSet_ie_Extensions__item__criticality._const_tab = ____GANSS_ALM_NAVKeplerianSet_ie_Extensions__item__criticality_tab
     ___GANSS_ALM_NAVKeplerianSet_ie_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___GANSS_ALM_NAVKeplerianSet_ie_Extensions__item__criticality._const_tab_id = u'criticality'
     ___GANSS_ALM_NAVKeplerianSet_ie_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___GANSS_ALM_NAVKeplerianSet_ie_Extensions__item__extensionValue._const_tab = ____GANSS_ALM_NAVKeplerianSet_ie_Extensions__item__id_tab
+    ____GANSS_ALM_NAVKeplerianSet_ie_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____GANSS_ALM_NAVKeplerianSet_ie_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___GANSS_ALM_NAVKeplerianSet_ie_Extensions__item__extensionValue._const_tab = ____GANSS_ALM_NAVKeplerianSet_ie_Extensions__item__extensionValue_tab
     ___GANSS_ALM_NAVKeplerianSet_ie_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___GANSS_ALM_NAVKeplerianSet_ie_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __GANSS_ALM_NAVKeplerianSet_ie_Extensions__item_._cont = ASN1Dict([
@@ -6654,11 +6878,15 @@ class PCAP_IEs:
     ___GANSS_ALM_ReducedKeplerianSet_ie_Extensions__item__id._const_tab_at = None
     ___GANSS_ALM_ReducedKeplerianSet_ie_Extensions__item__id._const_tab_id = u'id'
     ___GANSS_ALM_ReducedKeplerianSet_ie_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___GANSS_ALM_ReducedKeplerianSet_ie_Extensions__item__criticality._const_tab = ____GANSS_ALM_ReducedKeplerianSet_ie_Extensions__item__id_tab
+    ____GANSS_ALM_ReducedKeplerianSet_ie_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____GANSS_ALM_ReducedKeplerianSet_ie_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___GANSS_ALM_ReducedKeplerianSet_ie_Extensions__item__criticality._const_tab = ____GANSS_ALM_ReducedKeplerianSet_ie_Extensions__item__criticality_tab
     ___GANSS_ALM_ReducedKeplerianSet_ie_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___GANSS_ALM_ReducedKeplerianSet_ie_Extensions__item__criticality._const_tab_id = u'criticality'
     ___GANSS_ALM_ReducedKeplerianSet_ie_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___GANSS_ALM_ReducedKeplerianSet_ie_Extensions__item__extensionValue._const_tab = ____GANSS_ALM_ReducedKeplerianSet_ie_Extensions__item__id_tab
+    ____GANSS_ALM_ReducedKeplerianSet_ie_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____GANSS_ALM_ReducedKeplerianSet_ie_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___GANSS_ALM_ReducedKeplerianSet_ie_Extensions__item__extensionValue._const_tab = ____GANSS_ALM_ReducedKeplerianSet_ie_Extensions__item__extensionValue_tab
     ___GANSS_ALM_ReducedKeplerianSet_ie_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___GANSS_ALM_ReducedKeplerianSet_ie_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __GANSS_ALM_ReducedKeplerianSet_ie_Extensions__item_._cont = ASN1Dict([
@@ -6889,11 +7117,15 @@ class PCAP_IEs:
     ___GANSS_Data_Bit_Assistance_ie_Extensions__item__id._const_tab_at = None
     ___GANSS_Data_Bit_Assistance_ie_Extensions__item__id._const_tab_id = u'id'
     ___GANSS_Data_Bit_Assistance_ie_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___GANSS_Data_Bit_Assistance_ie_Extensions__item__criticality._const_tab = ____GANSS_Data_Bit_Assistance_ie_Extensions__item__id_tab
+    ____GANSS_Data_Bit_Assistance_ie_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____GANSS_Data_Bit_Assistance_ie_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___GANSS_Data_Bit_Assistance_ie_Extensions__item__criticality._const_tab = ____GANSS_Data_Bit_Assistance_ie_Extensions__item__criticality_tab
     ___GANSS_Data_Bit_Assistance_ie_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___GANSS_Data_Bit_Assistance_ie_Extensions__item__criticality._const_tab_id = u'criticality'
     ___GANSS_Data_Bit_Assistance_ie_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___GANSS_Data_Bit_Assistance_ie_Extensions__item__extensionValue._const_tab = ____GANSS_Data_Bit_Assistance_ie_Extensions__item__id_tab
+    ____GANSS_Data_Bit_Assistance_ie_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____GANSS_Data_Bit_Assistance_ie_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___GANSS_Data_Bit_Assistance_ie_Extensions__item__extensionValue._const_tab = ____GANSS_Data_Bit_Assistance_ie_Extensions__item__extensionValue_tab
     ___GANSS_Data_Bit_Assistance_ie_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___GANSS_Data_Bit_Assistance_ie_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __GANSS_Data_Bit_Assistance_ie_Extensions__item_._cont = ASN1Dict([
@@ -6935,11 +7167,15 @@ class PCAP_IEs:
     ___GANSS_DataBitAssistanceItem_ie_Extensions__item__id._const_tab_at = None
     ___GANSS_DataBitAssistanceItem_ie_Extensions__item__id._const_tab_id = u'id'
     ___GANSS_DataBitAssistanceItem_ie_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___GANSS_DataBitAssistanceItem_ie_Extensions__item__criticality._const_tab = ____GANSS_DataBitAssistanceItem_ie_Extensions__item__id_tab
+    ____GANSS_DataBitAssistanceItem_ie_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____GANSS_DataBitAssistanceItem_ie_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___GANSS_DataBitAssistanceItem_ie_Extensions__item__criticality._const_tab = ____GANSS_DataBitAssistanceItem_ie_Extensions__item__criticality_tab
     ___GANSS_DataBitAssistanceItem_ie_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___GANSS_DataBitAssistanceItem_ie_Extensions__item__criticality._const_tab_id = u'criticality'
     ___GANSS_DataBitAssistanceItem_ie_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___GANSS_DataBitAssistanceItem_ie_Extensions__item__extensionValue._const_tab = ____GANSS_DataBitAssistanceItem_ie_Extensions__item__id_tab
+    ____GANSS_DataBitAssistanceItem_ie_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____GANSS_DataBitAssistanceItem_ie_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___GANSS_DataBitAssistanceItem_ie_Extensions__item__extensionValue._const_tab = ____GANSS_DataBitAssistanceItem_ie_Extensions__item__extensionValue_tab
     ___GANSS_DataBitAssistanceItem_ie_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___GANSS_DataBitAssistanceItem_ie_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __GANSS_DataBitAssistanceItem_ie_Extensions__item_._cont = ASN1Dict([
@@ -6981,11 +7217,15 @@ class PCAP_IEs:
     ___GANSS_DataBitAssistanceSgnItem_ie_Extensions__item__id._const_tab_at = None
     ___GANSS_DataBitAssistanceSgnItem_ie_Extensions__item__id._const_tab_id = u'id'
     ___GANSS_DataBitAssistanceSgnItem_ie_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___GANSS_DataBitAssistanceSgnItem_ie_Extensions__item__criticality._const_tab = ____GANSS_DataBitAssistanceSgnItem_ie_Extensions__item__id_tab
+    ____GANSS_DataBitAssistanceSgnItem_ie_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____GANSS_DataBitAssistanceSgnItem_ie_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___GANSS_DataBitAssistanceSgnItem_ie_Extensions__item__criticality._const_tab = ____GANSS_DataBitAssistanceSgnItem_ie_Extensions__item__criticality_tab
     ___GANSS_DataBitAssistanceSgnItem_ie_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___GANSS_DataBitAssistanceSgnItem_ie_Extensions__item__criticality._const_tab_id = u'criticality'
     ___GANSS_DataBitAssistanceSgnItem_ie_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___GANSS_DataBitAssistanceSgnItem_ie_Extensions__item__extensionValue._const_tab = ____GANSS_DataBitAssistanceSgnItem_ie_Extensions__item__id_tab
+    ____GANSS_DataBitAssistanceSgnItem_ie_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____GANSS_DataBitAssistanceSgnItem_ie_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___GANSS_DataBitAssistanceSgnItem_ie_Extensions__item__extensionValue._const_tab = ____GANSS_DataBitAssistanceSgnItem_ie_Extensions__item__extensionValue_tab
     ___GANSS_DataBitAssistanceSgnItem_ie_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___GANSS_DataBitAssistanceSgnItem_ie_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __GANSS_DataBitAssistanceSgnItem_ie_Extensions__item_._cont = ASN1Dict([
@@ -7032,11 +7272,15 @@ class PCAP_IEs:
     ___GANSS_Earth_Orientation_Parameters_ie_Extensions__item__id._const_tab_at = None
     ___GANSS_Earth_Orientation_Parameters_ie_Extensions__item__id._const_tab_id = u'id'
     ___GANSS_Earth_Orientation_Parameters_ie_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___GANSS_Earth_Orientation_Parameters_ie_Extensions__item__criticality._const_tab = ____GANSS_Earth_Orientation_Parameters_ie_Extensions__item__id_tab
+    ____GANSS_Earth_Orientation_Parameters_ie_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____GANSS_Earth_Orientation_Parameters_ie_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___GANSS_Earth_Orientation_Parameters_ie_Extensions__item__criticality._const_tab = ____GANSS_Earth_Orientation_Parameters_ie_Extensions__item__criticality_tab
     ___GANSS_Earth_Orientation_Parameters_ie_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___GANSS_Earth_Orientation_Parameters_ie_Extensions__item__criticality._const_tab_id = u'criticality'
     ___GANSS_Earth_Orientation_Parameters_ie_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___GANSS_Earth_Orientation_Parameters_ie_Extensions__item__extensionValue._const_tab = ____GANSS_Earth_Orientation_Parameters_ie_Extensions__item__id_tab
+    ____GANSS_Earth_Orientation_Parameters_ie_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____GANSS_Earth_Orientation_Parameters_ie_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___GANSS_Earth_Orientation_Parameters_ie_Extensions__item__extensionValue._const_tab = ____GANSS_Earth_Orientation_Parameters_ie_Extensions__item__extensionValue_tab
     ___GANSS_Earth_Orientation_Parameters_ie_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___GANSS_Earth_Orientation_Parameters_ie_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __GANSS_Earth_Orientation_Parameters_ie_Extensions__item_._cont = ASN1Dict([
@@ -7079,11 +7323,15 @@ class PCAP_IEs:
     ___GANSS_ExtraDoppler_ie_Extensions__item__id._const_tab_at = None
     ___GANSS_ExtraDoppler_ie_Extensions__item__id._const_tab_id = u'id'
     ___GANSS_ExtraDoppler_ie_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___GANSS_ExtraDoppler_ie_Extensions__item__criticality._const_tab = ____GANSS_ExtraDoppler_ie_Extensions__item__id_tab
+    ____GANSS_ExtraDoppler_ie_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____GANSS_ExtraDoppler_ie_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___GANSS_ExtraDoppler_ie_Extensions__item__criticality._const_tab = ____GANSS_ExtraDoppler_ie_Extensions__item__criticality_tab
     ___GANSS_ExtraDoppler_ie_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___GANSS_ExtraDoppler_ie_Extensions__item__criticality._const_tab_id = u'criticality'
     ___GANSS_ExtraDoppler_ie_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___GANSS_ExtraDoppler_ie_Extensions__item__extensionValue._const_tab = ____GANSS_ExtraDoppler_ie_Extensions__item__id_tab
+    ____GANSS_ExtraDoppler_ie_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____GANSS_ExtraDoppler_ie_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___GANSS_ExtraDoppler_ie_Extensions__item__extensionValue._const_tab = ____GANSS_ExtraDoppler_ie_Extensions__item__extensionValue_tab
     ___GANSS_ExtraDoppler_ie_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___GANSS_ExtraDoppler_ie_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __GANSS_ExtraDoppler_ie_Extensions__item_._cont = ASN1Dict([
@@ -7121,11 +7369,15 @@ class PCAP_IEs:
     ___GANSS_ExtraDopplerExtension_ie_Extensions__item__id._const_tab_at = None
     ___GANSS_ExtraDopplerExtension_ie_Extensions__item__id._const_tab_id = u'id'
     ___GANSS_ExtraDopplerExtension_ie_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___GANSS_ExtraDopplerExtension_ie_Extensions__item__criticality._const_tab = ____GANSS_ExtraDopplerExtension_ie_Extensions__item__id_tab
+    ____GANSS_ExtraDopplerExtension_ie_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____GANSS_ExtraDopplerExtension_ie_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___GANSS_ExtraDopplerExtension_ie_Extensions__item__criticality._const_tab = ____GANSS_ExtraDopplerExtension_ie_Extensions__item__criticality_tab
     ___GANSS_ExtraDopplerExtension_ie_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___GANSS_ExtraDopplerExtension_ie_Extensions__item__criticality._const_tab_id = u'criticality'
     ___GANSS_ExtraDopplerExtension_ie_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___GANSS_ExtraDopplerExtension_ie_Extensions__item__extensionValue._const_tab = ____GANSS_ExtraDopplerExtension_ie_Extensions__item__id_tab
+    ____GANSS_ExtraDopplerExtension_ie_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____GANSS_ExtraDopplerExtension_ie_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___GANSS_ExtraDopplerExtension_ie_Extensions__item__extensionValue._const_tab = ____GANSS_ExtraDopplerExtension_ie_Extensions__item__extensionValue_tab
     ___GANSS_ExtraDopplerExtension_ie_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___GANSS_ExtraDopplerExtension_ie_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __GANSS_ExtraDopplerExtension_ie_Extensions__item_._cont = ASN1Dict([
@@ -7233,11 +7485,15 @@ class PCAP_IEs:
     ___BDS_Ionospheric_Grid_Model_ie_Extensions__item__id._const_tab_at = None
     ___BDS_Ionospheric_Grid_Model_ie_Extensions__item__id._const_tab_id = u'id'
     ___BDS_Ionospheric_Grid_Model_ie_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___BDS_Ionospheric_Grid_Model_ie_Extensions__item__criticality._const_tab = ____BDS_Ionospheric_Grid_Model_ie_Extensions__item__id_tab
+    ____BDS_Ionospheric_Grid_Model_ie_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____BDS_Ionospheric_Grid_Model_ie_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___BDS_Ionospheric_Grid_Model_ie_Extensions__item__criticality._const_tab = ____BDS_Ionospheric_Grid_Model_ie_Extensions__item__criticality_tab
     ___BDS_Ionospheric_Grid_Model_ie_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___BDS_Ionospheric_Grid_Model_ie_Extensions__item__criticality._const_tab_id = u'criticality'
     ___BDS_Ionospheric_Grid_Model_ie_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___BDS_Ionospheric_Grid_Model_ie_Extensions__item__extensionValue._const_tab = ____BDS_Ionospheric_Grid_Model_ie_Extensions__item__id_tab
+    ____BDS_Ionospheric_Grid_Model_ie_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____BDS_Ionospheric_Grid_Model_ie_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___BDS_Ionospheric_Grid_Model_ie_Extensions__item__extensionValue._const_tab = ____BDS_Ionospheric_Grid_Model_ie_Extensions__item__extensionValue_tab
     ___BDS_Ionospheric_Grid_Model_ie_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___BDS_Ionospheric_Grid_Model_ie_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __BDS_Ionospheric_Grid_Model_ie_Extensions__item_._cont = ASN1Dict([
@@ -7281,11 +7537,15 @@ class PCAP_IEs:
     ____BDS_Ionospheric_Grid_Information__item__ie_Extensions__item__id._const_tab_at = None
     ____BDS_Ionospheric_Grid_Information__item__ie_Extensions__item__id._const_tab_id = u'id'
     ____BDS_Ionospheric_Grid_Information__item__ie_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ____BDS_Ionospheric_Grid_Information__item__ie_Extensions__item__criticality._const_tab = _____BDS_Ionospheric_Grid_Information__item__ie_Extensions__item__id_tab
+    _____BDS_Ionospheric_Grid_Information__item__ie_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    _____BDS_Ionospheric_Grid_Information__item__ie_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ____BDS_Ionospheric_Grid_Information__item__ie_Extensions__item__criticality._const_tab = _____BDS_Ionospheric_Grid_Information__item__ie_Extensions__item__criticality_tab
     ____BDS_Ionospheric_Grid_Information__item__ie_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ____BDS_Ionospheric_Grid_Information__item__ie_Extensions__item__criticality._const_tab_id = u'criticality'
     ____BDS_Ionospheric_Grid_Information__item__ie_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ____BDS_Ionospheric_Grid_Information__item__ie_Extensions__item__extensionValue._const_tab = _____BDS_Ionospheric_Grid_Information__item__ie_Extensions__item__id_tab
+    _____BDS_Ionospheric_Grid_Information__item__ie_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    _____BDS_Ionospheric_Grid_Information__item__ie_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ____BDS_Ionospheric_Grid_Information__item__ie_Extensions__item__extensionValue._const_tab = _____BDS_Ionospheric_Grid_Information__item__ie_Extensions__item__extensionValue_tab
     ____BDS_Ionospheric_Grid_Information__item__ie_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ____BDS_Ionospheric_Grid_Information__item__ie_Extensions__item__extensionValue._const_tab_id = u'Extension'
     ___BDS_Ionospheric_Grid_Information__item__ie_Extensions__item_._cont = ASN1Dict([
@@ -7323,11 +7583,15 @@ class PCAP_IEs:
     ___DBDS_Correction_Information_ie_Extensions__item__id._const_tab_at = None
     ___DBDS_Correction_Information_ie_Extensions__item__id._const_tab_id = u'id'
     ___DBDS_Correction_Information_ie_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___DBDS_Correction_Information_ie_Extensions__item__criticality._const_tab = ____DBDS_Correction_Information_ie_Extensions__item__id_tab
+    ____DBDS_Correction_Information_ie_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____DBDS_Correction_Information_ie_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___DBDS_Correction_Information_ie_Extensions__item__criticality._const_tab = ____DBDS_Correction_Information_ie_Extensions__item__criticality_tab
     ___DBDS_Correction_Information_ie_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___DBDS_Correction_Information_ie_Extensions__item__criticality._const_tab_id = u'criticality'
     ___DBDS_Correction_Information_ie_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___DBDS_Correction_Information_ie_Extensions__item__extensionValue._const_tab = ____DBDS_Correction_Information_ie_Extensions__item__id_tab
+    ____DBDS_Correction_Information_ie_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____DBDS_Correction_Information_ie_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___DBDS_Correction_Information_ie_Extensions__item__extensionValue._const_tab = ____DBDS_Correction_Information_ie_Extensions__item__extensionValue_tab
     ___DBDS_Correction_Information_ie_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___DBDS_Correction_Information_ie_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __DBDS_Correction_Information_ie_Extensions__item_._cont = ASN1Dict([
@@ -7363,11 +7627,15 @@ class PCAP_IEs:
     ____DBDS_Information__item__ie_Extensions__item__id._const_tab_at = None
     ____DBDS_Information__item__ie_Extensions__item__id._const_tab_id = u'id'
     ____DBDS_Information__item__ie_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ____DBDS_Information__item__ie_Extensions__item__criticality._const_tab = _____DBDS_Information__item__ie_Extensions__item__id_tab
+    _____DBDS_Information__item__ie_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    _____DBDS_Information__item__ie_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ____DBDS_Information__item__ie_Extensions__item__criticality._const_tab = _____DBDS_Information__item__ie_Extensions__item__criticality_tab
     ____DBDS_Information__item__ie_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ____DBDS_Information__item__ie_Extensions__item__criticality._const_tab_id = u'criticality'
     ____DBDS_Information__item__ie_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ____DBDS_Information__item__ie_Extensions__item__extensionValue._const_tab = _____DBDS_Information__item__ie_Extensions__item__id_tab
+    _____DBDS_Information__item__ie_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    _____DBDS_Information__item__ie_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ____DBDS_Information__item__ie_Extensions__item__extensionValue._const_tab = _____DBDS_Information__item__ie_Extensions__item__extensionValue_tab
     ____DBDS_Information__item__ie_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ____DBDS_Information__item__ie_Extensions__item__extensionValue._const_tab_id = u'Extension'
     ___DBDS_Information__item__ie_Extensions__item_._cont = ASN1Dict([
@@ -7411,11 +7679,15 @@ class PCAP_IEs:
     ____DGANSS_Signal_Information__item__ie_Extensions__item__id._const_tab_at = None
     ____DGANSS_Signal_Information__item__ie_Extensions__item__id._const_tab_id = u'id'
     ____DGANSS_Signal_Information__item__ie_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ____DGANSS_Signal_Information__item__ie_Extensions__item__criticality._const_tab = _____DGANSS_Signal_Information__item__ie_Extensions__item__id_tab
+    _____DGANSS_Signal_Information__item__ie_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    _____DGANSS_Signal_Information__item__ie_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ____DGANSS_Signal_Information__item__ie_Extensions__item__criticality._const_tab = _____DGANSS_Signal_Information__item__ie_Extensions__item__criticality_tab
     ____DGANSS_Signal_Information__item__ie_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ____DGANSS_Signal_Information__item__ie_Extensions__item__criticality._const_tab_id = u'criticality'
     ____DGANSS_Signal_Information__item__ie_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ____DGANSS_Signal_Information__item__ie_Extensions__item__extensionValue._const_tab = _____DGANSS_Signal_Information__item__ie_Extensions__item__id_tab
+    _____DGANSS_Signal_Information__item__ie_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    _____DGANSS_Signal_Information__item__ie_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ____DGANSS_Signal_Information__item__ie_Extensions__item__extensionValue._const_tab = _____DGANSS_Signal_Information__item__ie_Extensions__item__extensionValue_tab
     ____DGANSS_Signal_Information__item__ie_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ____DGANSS_Signal_Information__item__ie_Extensions__item__extensionValue._const_tab_id = u'Extension'
     ___DGANSS_Signal_Information__item__ie_Extensions__item_._cont = ASN1Dict([
@@ -7455,11 +7727,15 @@ class PCAP_IEs:
     ____GANSS_GenericMeasurementInfo__item__ie_Extensions__item__id._const_tab_at = None
     ____GANSS_GenericMeasurementInfo__item__ie_Extensions__item__id._const_tab_id = u'id'
     ____GANSS_GenericMeasurementInfo__item__ie_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ____GANSS_GenericMeasurementInfo__item__ie_Extensions__item__criticality._const_tab = _____GANSS_GenericMeasurementInfo__item__ie_Extensions__item__id_tab
+    _____GANSS_GenericMeasurementInfo__item__ie_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    _____GANSS_GenericMeasurementInfo__item__ie_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ____GANSS_GenericMeasurementInfo__item__ie_Extensions__item__criticality._const_tab = _____GANSS_GenericMeasurementInfo__item__ie_Extensions__item__criticality_tab
     ____GANSS_GenericMeasurementInfo__item__ie_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ____GANSS_GenericMeasurementInfo__item__ie_Extensions__item__criticality._const_tab_id = u'criticality'
     ____GANSS_GenericMeasurementInfo__item__ie_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ____GANSS_GenericMeasurementInfo__item__ie_Extensions__item__extensionValue._const_tab = _____GANSS_GenericMeasurementInfo__item__ie_Extensions__item__id_tab
+    _____GANSS_GenericMeasurementInfo__item__ie_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    _____GANSS_GenericMeasurementInfo__item__ie_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ____GANSS_GenericMeasurementInfo__item__ie_Extensions__item__extensionValue._const_tab = _____GANSS_GenericMeasurementInfo__item__ie_Extensions__item__extensionValue_tab
     ____GANSS_GenericMeasurementInfo__item__ie_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ____GANSS_GenericMeasurementInfo__item__ie_Extensions__item__extensionValue._const_tab_id = u'Extension'
     ___GANSS_GenericMeasurementInfo__item__ie_Extensions__item_._cont = ASN1Dict([
@@ -7496,11 +7772,15 @@ class PCAP_IEs:
     ___GANSSID_ie_Extensions__item__id._const_tab_at = None
     ___GANSSID_ie_Extensions__item__id._const_tab_id = u'id'
     ___GANSSID_ie_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___GANSSID_ie_Extensions__item__criticality._const_tab = ____GANSSID_ie_Extensions__item__id_tab
+    ____GANSSID_ie_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____GANSSID_ie_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___GANSSID_ie_Extensions__item__criticality._const_tab = ____GANSSID_ie_Extensions__item__criticality_tab
     ___GANSSID_ie_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___GANSSID_ie_Extensions__item__criticality._const_tab_id = u'criticality'
     ___GANSSID_ie_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___GANSSID_ie_Extensions__item__extensionValue._const_tab = ____GANSSID_ie_Extensions__item__id_tab
+    ____GANSSID_ie_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____GANSSID_ie_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___GANSSID_ie_Extensions__item__extensionValue._const_tab = ____GANSSID_ie_Extensions__item__extensionValue_tab
     ___GANSSID_ie_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___GANSSID_ie_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __GANSSID_ie_Extensions__item_._cont = ASN1Dict([
@@ -7581,11 +7861,15 @@ class PCAP_IEs:
     ___GanssCodePhaseAmbiguityExt_ie_Extensions__item__id._const_tab_at = None
     ___GanssCodePhaseAmbiguityExt_ie_Extensions__item__id._const_tab_id = u'id'
     ___GanssCodePhaseAmbiguityExt_ie_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___GanssCodePhaseAmbiguityExt_ie_Extensions__item__criticality._const_tab = ____GanssCodePhaseAmbiguityExt_ie_Extensions__item__id_tab
+    ____GanssCodePhaseAmbiguityExt_ie_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____GanssCodePhaseAmbiguityExt_ie_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___GanssCodePhaseAmbiguityExt_ie_Extensions__item__criticality._const_tab = ____GanssCodePhaseAmbiguityExt_ie_Extensions__item__criticality_tab
     ___GanssCodePhaseAmbiguityExt_ie_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___GanssCodePhaseAmbiguityExt_ie_Extensions__item__criticality._const_tab_id = u'criticality'
     ___GanssCodePhaseAmbiguityExt_ie_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___GanssCodePhaseAmbiguityExt_ie_Extensions__item__extensionValue._const_tab = ____GanssCodePhaseAmbiguityExt_ie_Extensions__item__id_tab
+    ____GanssCodePhaseAmbiguityExt_ie_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____GanssCodePhaseAmbiguityExt_ie_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___GanssCodePhaseAmbiguityExt_ie_Extensions__item__extensionValue._const_tab = ____GanssCodePhaseAmbiguityExt_ie_Extensions__item__extensionValue_tab
     ___GanssCodePhaseAmbiguityExt_ie_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___GanssCodePhaseAmbiguityExt_ie_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __GanssCodePhaseAmbiguityExt_ie_Extensions__item_._cont = ASN1Dict([
@@ -7624,11 +7908,15 @@ class PCAP_IEs:
     ___GANSS_Ionospheric_Model_ie_Extensions__item__id._const_tab_at = None
     ___GANSS_Ionospheric_Model_ie_Extensions__item__id._const_tab_id = u'id'
     ___GANSS_Ionospheric_Model_ie_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___GANSS_Ionospheric_Model_ie_Extensions__item__criticality._const_tab = ____GANSS_Ionospheric_Model_ie_Extensions__item__id_tab
+    ____GANSS_Ionospheric_Model_ie_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____GANSS_Ionospheric_Model_ie_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___GANSS_Ionospheric_Model_ie_Extensions__item__criticality._const_tab = ____GANSS_Ionospheric_Model_ie_Extensions__item__criticality_tab
     ___GANSS_Ionospheric_Model_ie_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___GANSS_Ionospheric_Model_ie_Extensions__item__criticality._const_tab_id = u'criticality'
     ___GANSS_Ionospheric_Model_ie_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___GANSS_Ionospheric_Model_ie_Extensions__item__extensionValue._const_tab = ____GANSS_Ionospheric_Model_ie_Extensions__item__id_tab
+    ____GANSS_Ionospheric_Model_ie_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____GANSS_Ionospheric_Model_ie_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___GANSS_Ionospheric_Model_ie_Extensions__item__extensionValue._const_tab = ____GANSS_Ionospheric_Model_ie_Extensions__item__extensionValue_tab
     ___GANSS_Ionospheric_Model_ie_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___GANSS_Ionospheric_Model_ie_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __GANSS_Ionospheric_Model_ie_Extensions__item_._cont = ASN1Dict([
@@ -7668,11 +7956,15 @@ class PCAP_IEs:
     ___GANSS_IonosphereRegionalStormFlags_ie_Extensions__item__id._const_tab_at = None
     ___GANSS_IonosphereRegionalStormFlags_ie_Extensions__item__id._const_tab_id = u'id'
     ___GANSS_IonosphereRegionalStormFlags_ie_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___GANSS_IonosphereRegionalStormFlags_ie_Extensions__item__criticality._const_tab = ____GANSS_IonosphereRegionalStormFlags_ie_Extensions__item__id_tab
+    ____GANSS_IonosphereRegionalStormFlags_ie_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____GANSS_IonosphereRegionalStormFlags_ie_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___GANSS_IonosphereRegionalStormFlags_ie_Extensions__item__criticality._const_tab = ____GANSS_IonosphereRegionalStormFlags_ie_Extensions__item__criticality_tab
     ___GANSS_IonosphereRegionalStormFlags_ie_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___GANSS_IonosphereRegionalStormFlags_ie_Extensions__item__criticality._const_tab_id = u'criticality'
     ___GANSS_IonosphereRegionalStormFlags_ie_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___GANSS_IonosphereRegionalStormFlags_ie_Extensions__item__extensionValue._const_tab = ____GANSS_IonosphereRegionalStormFlags_ie_Extensions__item__id_tab
+    ____GANSS_IonosphereRegionalStormFlags_ie_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____GANSS_IonosphereRegionalStormFlags_ie_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___GANSS_IonosphereRegionalStormFlags_ie_Extensions__item__extensionValue._const_tab = ____GANSS_IonosphereRegionalStormFlags_ie_Extensions__item__extensionValue_tab
     ___GANSS_IonosphereRegionalStormFlags_ie_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___GANSS_IonosphereRegionalStormFlags_ie_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __GANSS_IonosphereRegionalStormFlags_ie_Extensions__item_._cont = ASN1Dict([
@@ -7713,11 +8005,15 @@ class PCAP_IEs:
     ___GANSS_KeplerianParametersAlm_ie_Extensions__item__id._const_tab_at = None
     ___GANSS_KeplerianParametersAlm_ie_Extensions__item__id._const_tab_id = u'id'
     ___GANSS_KeplerianParametersAlm_ie_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___GANSS_KeplerianParametersAlm_ie_Extensions__item__criticality._const_tab = ____GANSS_KeplerianParametersAlm_ie_Extensions__item__id_tab
+    ____GANSS_KeplerianParametersAlm_ie_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____GANSS_KeplerianParametersAlm_ie_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___GANSS_KeplerianParametersAlm_ie_Extensions__item__criticality._const_tab = ____GANSS_KeplerianParametersAlm_ie_Extensions__item__criticality_tab
     ___GANSS_KeplerianParametersAlm_ie_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___GANSS_KeplerianParametersAlm_ie_Extensions__item__criticality._const_tab_id = u'criticality'
     ___GANSS_KeplerianParametersAlm_ie_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___GANSS_KeplerianParametersAlm_ie_Extensions__item__extensionValue._const_tab = ____GANSS_KeplerianParametersAlm_ie_Extensions__item__id_tab
+    ____GANSS_KeplerianParametersAlm_ie_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____GANSS_KeplerianParametersAlm_ie_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___GANSS_KeplerianParametersAlm_ie_Extensions__item__extensionValue._const_tab = ____GANSS_KeplerianParametersAlm_ie_Extensions__item__extensionValue_tab
     ___GANSS_KeplerianParametersAlm_ie_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___GANSS_KeplerianParametersAlm_ie_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __GANSS_KeplerianParametersAlm_ie_Extensions__item_._cont = ASN1Dict([
@@ -7783,11 +8079,15 @@ class PCAP_IEs:
     ___GANSS_KeplerianParametersOrb_ie_Extensions__item__id._const_tab_at = None
     ___GANSS_KeplerianParametersOrb_ie_Extensions__item__id._const_tab_id = u'id'
     ___GANSS_KeplerianParametersOrb_ie_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___GANSS_KeplerianParametersOrb_ie_Extensions__item__criticality._const_tab = ____GANSS_KeplerianParametersOrb_ie_Extensions__item__id_tab
+    ____GANSS_KeplerianParametersOrb_ie_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____GANSS_KeplerianParametersOrb_ie_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___GANSS_KeplerianParametersOrb_ie_Extensions__item__criticality._const_tab = ____GANSS_KeplerianParametersOrb_ie_Extensions__item__criticality_tab
     ___GANSS_KeplerianParametersOrb_ie_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___GANSS_KeplerianParametersOrb_ie_Extensions__item__criticality._const_tab_id = u'criticality'
     ___GANSS_KeplerianParametersOrb_ie_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___GANSS_KeplerianParametersOrb_ie_Extensions__item__extensionValue._const_tab = ____GANSS_KeplerianParametersOrb_ie_Extensions__item__id_tab
+    ____GANSS_KeplerianParametersOrb_ie_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____GANSS_KeplerianParametersOrb_ie_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___GANSS_KeplerianParametersOrb_ie_Extensions__item__extensionValue._const_tab = ____GANSS_KeplerianParametersOrb_ie_Extensions__item__extensionValue_tab
     ___GANSS_KeplerianParametersOrb_ie_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___GANSS_KeplerianParametersOrb_ie_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __GANSS_KeplerianParametersOrb_ie_Extensions__item_._cont = ASN1Dict([
@@ -7907,11 +8207,15 @@ class PCAP_IEs:
     ___GanssIntegerCodePhaseExt_ie_Extensions__item__id._const_tab_at = None
     ___GanssIntegerCodePhaseExt_ie_Extensions__item__id._const_tab_id = u'id'
     ___GanssIntegerCodePhaseExt_ie_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___GanssIntegerCodePhaseExt_ie_Extensions__item__criticality._const_tab = ____GanssIntegerCodePhaseExt_ie_Extensions__item__id_tab
+    ____GanssIntegerCodePhaseExt_ie_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____GanssIntegerCodePhaseExt_ie_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___GanssIntegerCodePhaseExt_ie_Extensions__item__criticality._const_tab = ____GanssIntegerCodePhaseExt_ie_Extensions__item__criticality_tab
     ___GanssIntegerCodePhaseExt_ie_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___GanssIntegerCodePhaseExt_ie_Extensions__item__criticality._const_tab_id = u'criticality'
     ___GanssIntegerCodePhaseExt_ie_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___GanssIntegerCodePhaseExt_ie_Extensions__item__extensionValue._const_tab = ____GanssIntegerCodePhaseExt_ie_Extensions__item__id_tab
+    ____GanssIntegerCodePhaseExt_ie_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____GanssIntegerCodePhaseExt_ie_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___GanssIntegerCodePhaseExt_ie_Extensions__item__extensionValue._const_tab = ____GanssIntegerCodePhaseExt_ie_Extensions__item__extensionValue_tab
     ___GanssIntegerCodePhaseExt_ie_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___GanssIntegerCodePhaseExt_ie_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __GanssIntegerCodePhaseExt_ie_Extensions__item_._cont = ASN1Dict([
@@ -7958,11 +8262,15 @@ class PCAP_IEs:
     ___GANSS_MeasuredResults_ie_Extensions__item__id._const_tab_at = None
     ___GANSS_MeasuredResults_ie_Extensions__item__id._const_tab_id = u'id'
     ___GANSS_MeasuredResults_ie_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___GANSS_MeasuredResults_ie_Extensions__item__criticality._const_tab = ____GANSS_MeasuredResults_ie_Extensions__item__id_tab
+    ____GANSS_MeasuredResults_ie_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____GANSS_MeasuredResults_ie_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___GANSS_MeasuredResults_ie_Extensions__item__criticality._const_tab = ____GANSS_MeasuredResults_ie_Extensions__item__criticality_tab
     ___GANSS_MeasuredResults_ie_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___GANSS_MeasuredResults_ie_Extensions__item__criticality._const_tab_id = u'criticality'
     ___GANSS_MeasuredResults_ie_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___GANSS_MeasuredResults_ie_Extensions__item__extensionValue._const_tab = ____GANSS_MeasuredResults_ie_Extensions__item__id_tab
+    ____GANSS_MeasuredResults_ie_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____GANSS_MeasuredResults_ie_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___GANSS_MeasuredResults_ie_Extensions__item__extensionValue._const_tab = ____GANSS_MeasuredResults_ie_Extensions__item__extensionValue_tab
     ___GANSS_MeasuredResults_ie_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___GANSS_MeasuredResults_ie_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __GANSS_MeasuredResults_ie_Extensions__item_._cont = ASN1Dict([
@@ -7999,11 +8307,15 @@ class PCAP_IEs:
     ___GANSS_Navigation_Model_ie_Extensions__item__id._const_tab_at = None
     ___GANSS_Navigation_Model_ie_Extensions__item__id._const_tab_id = u'id'
     ___GANSS_Navigation_Model_ie_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___GANSS_Navigation_Model_ie_Extensions__item__criticality._const_tab = ____GANSS_Navigation_Model_ie_Extensions__item__id_tab
+    ____GANSS_Navigation_Model_ie_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____GANSS_Navigation_Model_ie_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___GANSS_Navigation_Model_ie_Extensions__item__criticality._const_tab = ____GANSS_Navigation_Model_ie_Extensions__item__criticality_tab
     ___GANSS_Navigation_Model_ie_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___GANSS_Navigation_Model_ie_Extensions__item__criticality._const_tab_id = u'criticality'
     ___GANSS_Navigation_Model_ie_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___GANSS_Navigation_Model_ie_Extensions__item__extensionValue._const_tab = ____GANSS_Navigation_Model_ie_Extensions__item__id_tab
+    ____GANSS_Navigation_Model_ie_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____GANSS_Navigation_Model_ie_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___GANSS_Navigation_Model_ie_Extensions__item__extensionValue._const_tab = ____GANSS_Navigation_Model_ie_Extensions__item__extensionValue_tab
     ___GANSS_Navigation_Model_ie_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___GANSS_Navigation_Model_ie_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __GANSS_Navigation_Model_ie_Extensions__item_._cont = ASN1Dict([
@@ -8054,11 +8366,15 @@ class PCAP_IEs:
     ___GANSS_RealTimeInformationItem_ie_Extensions__item__id._const_tab_at = None
     ___GANSS_RealTimeInformationItem_ie_Extensions__item__id._const_tab_id = u'id'
     ___GANSS_RealTimeInformationItem_ie_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___GANSS_RealTimeInformationItem_ie_Extensions__item__criticality._const_tab = ____GANSS_RealTimeInformationItem_ie_Extensions__item__id_tab
+    ____GANSS_RealTimeInformationItem_ie_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____GANSS_RealTimeInformationItem_ie_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___GANSS_RealTimeInformationItem_ie_Extensions__item__criticality._const_tab = ____GANSS_RealTimeInformationItem_ie_Extensions__item__criticality_tab
     ___GANSS_RealTimeInformationItem_ie_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___GANSS_RealTimeInformationItem_ie_Extensions__item__criticality._const_tab_id = u'criticality'
     ___GANSS_RealTimeInformationItem_ie_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___GANSS_RealTimeInformationItem_ie_Extensions__item__extensionValue._const_tab = ____GANSS_RealTimeInformationItem_ie_Extensions__item__id_tab
+    ____GANSS_RealTimeInformationItem_ie_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____GANSS_RealTimeInformationItem_ie_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___GANSS_RealTimeInformationItem_ie_Extensions__item__extensionValue._const_tab = ____GANSS_RealTimeInformationItem_ie_Extensions__item__extensionValue_tab
     ___GANSS_RealTimeInformationItem_ie_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___GANSS_RealTimeInformationItem_ie_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __GANSS_RealTimeInformationItem_ie_Extensions__item_._cont = ASN1Dict([
@@ -8092,11 +8408,15 @@ class PCAP_IEs:
     ___GANSS_Reference_Location_iE_Extensions__item__id._const_tab_at = None
     ___GANSS_Reference_Location_iE_Extensions__item__id._const_tab_id = u'id'
     ___GANSS_Reference_Location_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___GANSS_Reference_Location_iE_Extensions__item__criticality._const_tab = ____GANSS_Reference_Location_iE_Extensions__item__id_tab
+    ____GANSS_Reference_Location_iE_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____GANSS_Reference_Location_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___GANSS_Reference_Location_iE_Extensions__item__criticality._const_tab = ____GANSS_Reference_Location_iE_Extensions__item__criticality_tab
     ___GANSS_Reference_Location_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___GANSS_Reference_Location_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___GANSS_Reference_Location_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___GANSS_Reference_Location_iE_Extensions__item__extensionValue._const_tab = ____GANSS_Reference_Location_iE_Extensions__item__id_tab
+    ____GANSS_Reference_Location_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____GANSS_Reference_Location_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___GANSS_Reference_Location_iE_Extensions__item__extensionValue._const_tab = ____GANSS_Reference_Location_iE_Extensions__item__extensionValue_tab
     ___GANSS_Reference_Location_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___GANSS_Reference_Location_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __GANSS_Reference_Location_iE_Extensions__item_._cont = ASN1Dict([
@@ -8230,11 +8550,15 @@ class PCAP_IEs:
     ___GANSS_ReferenceTimeOnly_ie_Extensions__item__id._const_tab_at = None
     ___GANSS_ReferenceTimeOnly_ie_Extensions__item__id._const_tab_id = u'id'
     ___GANSS_ReferenceTimeOnly_ie_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___GANSS_ReferenceTimeOnly_ie_Extensions__item__criticality._const_tab = ____GANSS_ReferenceTimeOnly_ie_Extensions__item__id_tab
+    ____GANSS_ReferenceTimeOnly_ie_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____GANSS_ReferenceTimeOnly_ie_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___GANSS_ReferenceTimeOnly_ie_Extensions__item__criticality._const_tab = ____GANSS_ReferenceTimeOnly_ie_Extensions__item__criticality_tab
     ___GANSS_ReferenceTimeOnly_ie_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___GANSS_ReferenceTimeOnly_ie_Extensions__item__criticality._const_tab_id = u'criticality'
     ___GANSS_ReferenceTimeOnly_ie_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___GANSS_ReferenceTimeOnly_ie_Extensions__item__extensionValue._const_tab = ____GANSS_ReferenceTimeOnly_ie_Extensions__item__id_tab
+    ____GANSS_ReferenceTimeOnly_ie_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____GANSS_ReferenceTimeOnly_ie_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___GANSS_ReferenceTimeOnly_ie_Extensions__item__extensionValue._const_tab = ____GANSS_ReferenceTimeOnly_ie_Extensions__item__extensionValue_tab
     ___GANSS_ReferenceTimeOnly_ie_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___GANSS_ReferenceTimeOnly_ie_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __GANSS_ReferenceTimeOnly_ie_Extensions__item_._cont = ASN1Dict([
@@ -8282,11 +8606,15 @@ class PCAP_IEs:
     ___GANSS_SatelliteClockModelItem_ie_Extensions__item__id._const_tab_at = None
     ___GANSS_SatelliteClockModelItem_ie_Extensions__item__id._const_tab_id = u'id'
     ___GANSS_SatelliteClockModelItem_ie_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___GANSS_SatelliteClockModelItem_ie_Extensions__item__criticality._const_tab = ____GANSS_SatelliteClockModelItem_ie_Extensions__item__id_tab
+    ____GANSS_SatelliteClockModelItem_ie_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____GANSS_SatelliteClockModelItem_ie_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___GANSS_SatelliteClockModelItem_ie_Extensions__item__criticality._const_tab = ____GANSS_SatelliteClockModelItem_ie_Extensions__item__criticality_tab
     ___GANSS_SatelliteClockModelItem_ie_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___GANSS_SatelliteClockModelItem_ie_Extensions__item__criticality._const_tab_id = u'criticality'
     ___GANSS_SatelliteClockModelItem_ie_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___GANSS_SatelliteClockModelItem_ie_Extensions__item__extensionValue._const_tab = ____GANSS_SatelliteClockModelItem_ie_Extensions__item__id_tab
+    ____GANSS_SatelliteClockModelItem_ie_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____GANSS_SatelliteClockModelItem_ie_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___GANSS_SatelliteClockModelItem_ie_Extensions__item__extensionValue._const_tab = ____GANSS_SatelliteClockModelItem_ie_Extensions__item__extensionValue_tab
     ___GANSS_SatelliteClockModelItem_ie_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___GANSS_SatelliteClockModelItem_ie_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __GANSS_SatelliteClockModelItem_ie_Extensions__item_._cont = ASN1Dict([
@@ -8416,11 +8744,15 @@ class PCAP_IEs:
     ___GANSS_SatelliteInformationKPItem_ie_Extensions__item__id._const_tab_at = None
     ___GANSS_SatelliteInformationKPItem_ie_Extensions__item__id._const_tab_id = u'id'
     ___GANSS_SatelliteInformationKPItem_ie_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___GANSS_SatelliteInformationKPItem_ie_Extensions__item__criticality._const_tab = ____GANSS_SatelliteInformationKPItem_ie_Extensions__item__id_tab
+    ____GANSS_SatelliteInformationKPItem_ie_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____GANSS_SatelliteInformationKPItem_ie_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___GANSS_SatelliteInformationKPItem_ie_Extensions__item__criticality._const_tab = ____GANSS_SatelliteInformationKPItem_ie_Extensions__item__criticality_tab
     ___GANSS_SatelliteInformationKPItem_ie_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___GANSS_SatelliteInformationKPItem_ie_Extensions__item__criticality._const_tab_id = u'criticality'
     ___GANSS_SatelliteInformationKPItem_ie_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___GANSS_SatelliteInformationKPItem_ie_Extensions__item__extensionValue._const_tab = ____GANSS_SatelliteInformationKPItem_ie_Extensions__item__id_tab
+    ____GANSS_SatelliteInformationKPItem_ie_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____GANSS_SatelliteInformationKPItem_ie_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___GANSS_SatelliteInformationKPItem_ie_Extensions__item__extensionValue._const_tab = ____GANSS_SatelliteInformationKPItem_ie_Extensions__item__extensionValue_tab
     ___GANSS_SatelliteInformationKPItem_ie_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___GANSS_SatelliteInformationKPItem_ie_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __GANSS_SatelliteInformationKPItem_ie_Extensions__item_._cont = ASN1Dict([
@@ -8495,11 +8827,15 @@ class PCAP_IEs:
     ___GANSS_SAT_Info_Almanac_GLOkp_ie_Extensions__item__id._const_tab_at = None
     ___GANSS_SAT_Info_Almanac_GLOkp_ie_Extensions__item__id._const_tab_id = u'id'
     ___GANSS_SAT_Info_Almanac_GLOkp_ie_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___GANSS_SAT_Info_Almanac_GLOkp_ie_Extensions__item__criticality._const_tab = ____GANSS_SAT_Info_Almanac_GLOkp_ie_Extensions__item__id_tab
+    ____GANSS_SAT_Info_Almanac_GLOkp_ie_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____GANSS_SAT_Info_Almanac_GLOkp_ie_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___GANSS_SAT_Info_Almanac_GLOkp_ie_Extensions__item__criticality._const_tab = ____GANSS_SAT_Info_Almanac_GLOkp_ie_Extensions__item__criticality_tab
     ___GANSS_SAT_Info_Almanac_GLOkp_ie_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___GANSS_SAT_Info_Almanac_GLOkp_ie_Extensions__item__criticality._const_tab_id = u'criticality'
     ___GANSS_SAT_Info_Almanac_GLOkp_ie_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___GANSS_SAT_Info_Almanac_GLOkp_ie_Extensions__item__extensionValue._const_tab = ____GANSS_SAT_Info_Almanac_GLOkp_ie_Extensions__item__id_tab
+    ____GANSS_SAT_Info_Almanac_GLOkp_ie_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____GANSS_SAT_Info_Almanac_GLOkp_ie_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___GANSS_SAT_Info_Almanac_GLOkp_ie_Extensions__item__extensionValue._const_tab = ____GANSS_SAT_Info_Almanac_GLOkp_ie_Extensions__item__extensionValue_tab
     ___GANSS_SAT_Info_Almanac_GLOkp_ie_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___GANSS_SAT_Info_Almanac_GLOkp_ie_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __GANSS_SAT_Info_Almanac_GLOkp_ie_Extensions__item_._cont = ASN1Dict([
@@ -8575,11 +8911,15 @@ class PCAP_IEs:
     ___GANSS_SAT_Info_Almanac_MIDIkp_ie_Extensions__item__id._const_tab_at = None
     ___GANSS_SAT_Info_Almanac_MIDIkp_ie_Extensions__item__id._const_tab_id = u'id'
     ___GANSS_SAT_Info_Almanac_MIDIkp_ie_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___GANSS_SAT_Info_Almanac_MIDIkp_ie_Extensions__item__criticality._const_tab = ____GANSS_SAT_Info_Almanac_MIDIkp_ie_Extensions__item__id_tab
+    ____GANSS_SAT_Info_Almanac_MIDIkp_ie_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____GANSS_SAT_Info_Almanac_MIDIkp_ie_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___GANSS_SAT_Info_Almanac_MIDIkp_ie_Extensions__item__criticality._const_tab = ____GANSS_SAT_Info_Almanac_MIDIkp_ie_Extensions__item__criticality_tab
     ___GANSS_SAT_Info_Almanac_MIDIkp_ie_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___GANSS_SAT_Info_Almanac_MIDIkp_ie_Extensions__item__criticality._const_tab_id = u'criticality'
     ___GANSS_SAT_Info_Almanac_MIDIkp_ie_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___GANSS_SAT_Info_Almanac_MIDIkp_ie_Extensions__item__extensionValue._const_tab = ____GANSS_SAT_Info_Almanac_MIDIkp_ie_Extensions__item__id_tab
+    ____GANSS_SAT_Info_Almanac_MIDIkp_ie_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____GANSS_SAT_Info_Almanac_MIDIkp_ie_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___GANSS_SAT_Info_Almanac_MIDIkp_ie_Extensions__item__extensionValue._const_tab = ____GANSS_SAT_Info_Almanac_MIDIkp_ie_Extensions__item__extensionValue_tab
     ___GANSS_SAT_Info_Almanac_MIDIkp_ie_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___GANSS_SAT_Info_Almanac_MIDIkp_ie_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __GANSS_SAT_Info_Almanac_MIDIkp_ie_Extensions__item_._cont = ASN1Dict([
@@ -8651,11 +8991,15 @@ class PCAP_IEs:
     ___GANSS_SAT_Info_Almanac_NAVkp_ie_Extensions__item__id._const_tab_at = None
     ___GANSS_SAT_Info_Almanac_NAVkp_ie_Extensions__item__id._const_tab_id = u'id'
     ___GANSS_SAT_Info_Almanac_NAVkp_ie_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___GANSS_SAT_Info_Almanac_NAVkp_ie_Extensions__item__criticality._const_tab = ____GANSS_SAT_Info_Almanac_NAVkp_ie_Extensions__item__id_tab
+    ____GANSS_SAT_Info_Almanac_NAVkp_ie_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____GANSS_SAT_Info_Almanac_NAVkp_ie_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___GANSS_SAT_Info_Almanac_NAVkp_ie_Extensions__item__criticality._const_tab = ____GANSS_SAT_Info_Almanac_NAVkp_ie_Extensions__item__criticality_tab
     ___GANSS_SAT_Info_Almanac_NAVkp_ie_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___GANSS_SAT_Info_Almanac_NAVkp_ie_Extensions__item__criticality._const_tab_id = u'criticality'
     ___GANSS_SAT_Info_Almanac_NAVkp_ie_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___GANSS_SAT_Info_Almanac_NAVkp_ie_Extensions__item__extensionValue._const_tab = ____GANSS_SAT_Info_Almanac_NAVkp_ie_Extensions__item__id_tab
+    ____GANSS_SAT_Info_Almanac_NAVkp_ie_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____GANSS_SAT_Info_Almanac_NAVkp_ie_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___GANSS_SAT_Info_Almanac_NAVkp_ie_Extensions__item__extensionValue._const_tab = ____GANSS_SAT_Info_Almanac_NAVkp_ie_Extensions__item__extensionValue_tab
     ___GANSS_SAT_Info_Almanac_NAVkp_ie_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___GANSS_SAT_Info_Almanac_NAVkp_ie_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __GANSS_SAT_Info_Almanac_NAVkp_ie_Extensions__item_._cont = ASN1Dict([
@@ -8717,11 +9061,15 @@ class PCAP_IEs:
     ___GANSS_SAT_Info_Almanac_REDkp_ie_Extensions__item__id._const_tab_at = None
     ___GANSS_SAT_Info_Almanac_REDkp_ie_Extensions__item__id._const_tab_id = u'id'
     ___GANSS_SAT_Info_Almanac_REDkp_ie_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___GANSS_SAT_Info_Almanac_REDkp_ie_Extensions__item__criticality._const_tab = ____GANSS_SAT_Info_Almanac_REDkp_ie_Extensions__item__id_tab
+    ____GANSS_SAT_Info_Almanac_REDkp_ie_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____GANSS_SAT_Info_Almanac_REDkp_ie_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___GANSS_SAT_Info_Almanac_REDkp_ie_Extensions__item__criticality._const_tab = ____GANSS_SAT_Info_Almanac_REDkp_ie_Extensions__item__criticality_tab
     ___GANSS_SAT_Info_Almanac_REDkp_ie_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___GANSS_SAT_Info_Almanac_REDkp_ie_Extensions__item__criticality._const_tab_id = u'criticality'
     ___GANSS_SAT_Info_Almanac_REDkp_ie_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___GANSS_SAT_Info_Almanac_REDkp_ie_Extensions__item__extensionValue._const_tab = ____GANSS_SAT_Info_Almanac_REDkp_ie_Extensions__item__id_tab
+    ____GANSS_SAT_Info_Almanac_REDkp_ie_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____GANSS_SAT_Info_Almanac_REDkp_ie_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___GANSS_SAT_Info_Almanac_REDkp_ie_Extensions__item__extensionValue._const_tab = ____GANSS_SAT_Info_Almanac_REDkp_ie_Extensions__item__extensionValue_tab
     ___GANSS_SAT_Info_Almanac_REDkp_ie_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___GANSS_SAT_Info_Almanac_REDkp_ie_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __GANSS_SAT_Info_Almanac_REDkp_ie_Extensions__item_._cont = ASN1Dict([
@@ -8785,11 +9133,15 @@ class PCAP_IEs:
     ___GANSS_SAT_Info_Almanac_SBASecef_ie_Extensions__item__id._const_tab_at = None
     ___GANSS_SAT_Info_Almanac_SBASecef_ie_Extensions__item__id._const_tab_id = u'id'
     ___GANSS_SAT_Info_Almanac_SBASecef_ie_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___GANSS_SAT_Info_Almanac_SBASecef_ie_Extensions__item__criticality._const_tab = ____GANSS_SAT_Info_Almanac_SBASecef_ie_Extensions__item__id_tab
+    ____GANSS_SAT_Info_Almanac_SBASecef_ie_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____GANSS_SAT_Info_Almanac_SBASecef_ie_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___GANSS_SAT_Info_Almanac_SBASecef_ie_Extensions__item__criticality._const_tab = ____GANSS_SAT_Info_Almanac_SBASecef_ie_Extensions__item__criticality_tab
     ___GANSS_SAT_Info_Almanac_SBASecef_ie_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___GANSS_SAT_Info_Almanac_SBASecef_ie_Extensions__item__criticality._const_tab_id = u'criticality'
     ___GANSS_SAT_Info_Almanac_SBASecef_ie_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___GANSS_SAT_Info_Almanac_SBASecef_ie_Extensions__item__extensionValue._const_tab = ____GANSS_SAT_Info_Almanac_SBASecef_ie_Extensions__item__id_tab
+    ____GANSS_SAT_Info_Almanac_SBASecef_ie_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____GANSS_SAT_Info_Almanac_SBASecef_ie_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___GANSS_SAT_Info_Almanac_SBASecef_ie_Extensions__item__extensionValue._const_tab = ____GANSS_SAT_Info_Almanac_SBASecef_ie_Extensions__item__extensionValue_tab
     ___GANSS_SAT_Info_Almanac_SBASecef_ie_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___GANSS_SAT_Info_Almanac_SBASecef_ie_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __GANSS_SAT_Info_Almanac_SBASecef_ie_Extensions__item_._cont = ASN1Dict([
@@ -8839,11 +9191,15 @@ class PCAP_IEs:
     ____Ganss_Sat_Info_AddNavList__item__ie_Extensions__item__id._const_tab_at = None
     ____Ganss_Sat_Info_AddNavList__item__ie_Extensions__item__id._const_tab_id = u'id'
     ____Ganss_Sat_Info_AddNavList__item__ie_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ____Ganss_Sat_Info_AddNavList__item__ie_Extensions__item__criticality._const_tab = _____Ganss_Sat_Info_AddNavList__item__ie_Extensions__item__id_tab
+    _____Ganss_Sat_Info_AddNavList__item__ie_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    _____Ganss_Sat_Info_AddNavList__item__ie_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ____Ganss_Sat_Info_AddNavList__item__ie_Extensions__item__criticality._const_tab = _____Ganss_Sat_Info_AddNavList__item__ie_Extensions__item__criticality_tab
     ____Ganss_Sat_Info_AddNavList__item__ie_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ____Ganss_Sat_Info_AddNavList__item__ie_Extensions__item__criticality._const_tab_id = u'criticality'
     ____Ganss_Sat_Info_AddNavList__item__ie_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ____Ganss_Sat_Info_AddNavList__item__ie_Extensions__item__extensionValue._const_tab = _____Ganss_Sat_Info_AddNavList__item__ie_Extensions__item__id_tab
+    _____Ganss_Sat_Info_AddNavList__item__ie_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    _____Ganss_Sat_Info_AddNavList__item__ie_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ____Ganss_Sat_Info_AddNavList__item__ie_Extensions__item__extensionValue._const_tab = _____Ganss_Sat_Info_AddNavList__item__ie_Extensions__item__extensionValue_tab
     ____Ganss_Sat_Info_AddNavList__item__ie_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ____Ganss_Sat_Info_AddNavList__item__ie_Extensions__item__extensionValue._const_tab_id = u'Extension'
     ___Ganss_Sat_Info_AddNavList__item__ie_Extensions__item_._cont = ASN1Dict([
@@ -8890,11 +9246,15 @@ class PCAP_IEs:
     ____GANSS_Sat_Info_Nav__item__ie_Extensions__item__id._const_tab_at = None
     ____GANSS_Sat_Info_Nav__item__ie_Extensions__item__id._const_tab_id = u'id'
     ____GANSS_Sat_Info_Nav__item__ie_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ____GANSS_Sat_Info_Nav__item__ie_Extensions__item__criticality._const_tab = _____GANSS_Sat_Info_Nav__item__ie_Extensions__item__id_tab
+    _____GANSS_Sat_Info_Nav__item__ie_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    _____GANSS_Sat_Info_Nav__item__ie_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ____GANSS_Sat_Info_Nav__item__ie_Extensions__item__criticality._const_tab = _____GANSS_Sat_Info_Nav__item__ie_Extensions__item__criticality_tab
     ____GANSS_Sat_Info_Nav__item__ie_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ____GANSS_Sat_Info_Nav__item__ie_Extensions__item__criticality._const_tab_id = u'criticality'
     ____GANSS_Sat_Info_Nav__item__ie_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ____GANSS_Sat_Info_Nav__item__ie_Extensions__item__extensionValue._const_tab = _____GANSS_Sat_Info_Nav__item__ie_Extensions__item__id_tab
+    _____GANSS_Sat_Info_Nav__item__ie_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    _____GANSS_Sat_Info_Nav__item__ie_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ____GANSS_Sat_Info_Nav__item__ie_Extensions__item__extensionValue._const_tab = _____GANSS_Sat_Info_Nav__item__ie_Extensions__item__extensionValue_tab
     ____GANSS_Sat_Info_Nav__item__ie_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ____GANSS_Sat_Info_Nav__item__ie_Extensions__item__extensionValue._const_tab_id = u'Extension'
     ___GANSS_Sat_Info_Nav__item__ie_Extensions__item_._cont = ASN1Dict([
@@ -8934,11 +9294,15 @@ class PCAP_IEs:
     ___GANSS_SignalID_ie_Extensions__item__id._const_tab_at = None
     ___GANSS_SignalID_ie_Extensions__item__id._const_tab_id = u'id'
     ___GANSS_SignalID_ie_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___GANSS_SignalID_ie_Extensions__item__criticality._const_tab = ____GANSS_SignalID_ie_Extensions__item__id_tab
+    ____GANSS_SignalID_ie_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____GANSS_SignalID_ie_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___GANSS_SignalID_ie_Extensions__item__criticality._const_tab = ____GANSS_SignalID_ie_Extensions__item__criticality_tab
     ___GANSS_SignalID_ie_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___GANSS_SignalID_ie_Extensions__item__criticality._const_tab_id = u'criticality'
     ___GANSS_SignalID_ie_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___GANSS_SignalID_ie_Extensions__item__extensionValue._const_tab = ____GANSS_SignalID_ie_Extensions__item__id_tab
+    ____GANSS_SignalID_ie_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____GANSS_SignalID_ie_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___GANSS_SignalID_ie_Extensions__item__extensionValue._const_tab = ____GANSS_SignalID_ie_Extensions__item__extensionValue_tab
     ___GANSS_SignalID_ie_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___GANSS_SignalID_ie_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __GANSS_SignalID_ie_Extensions__item_._cont = ASN1Dict([
@@ -9042,11 +9406,15 @@ class PCAP_IEs:
     ___GANSS_UTRAN_TRU_ie_Extensions__item__id._const_tab_at = None
     ___GANSS_UTRAN_TRU_ie_Extensions__item__id._const_tab_id = u'id'
     ___GANSS_UTRAN_TRU_ie_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___GANSS_UTRAN_TRU_ie_Extensions__item__criticality._const_tab = ____GANSS_UTRAN_TRU_ie_Extensions__item__id_tab
+    ____GANSS_UTRAN_TRU_ie_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____GANSS_UTRAN_TRU_ie_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___GANSS_UTRAN_TRU_ie_Extensions__item__criticality._const_tab = ____GANSS_UTRAN_TRU_ie_Extensions__item__criticality_tab
     ___GANSS_UTRAN_TRU_ie_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___GANSS_UTRAN_TRU_ie_Extensions__item__criticality._const_tab_id = u'criticality'
     ___GANSS_UTRAN_TRU_ie_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___GANSS_UTRAN_TRU_ie_Extensions__item__extensionValue._const_tab = ____GANSS_UTRAN_TRU_ie_Extensions__item__id_tab
+    ____GANSS_UTRAN_TRU_ie_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____GANSS_UTRAN_TRU_ie_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___GANSS_UTRAN_TRU_ie_Extensions__item__extensionValue._const_tab = ____GANSS_UTRAN_TRU_ie_Extensions__item__extensionValue_tab
     ___GANSS_UTRAN_TRU_ie_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___GANSS_UTRAN_TRU_ie_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __GANSS_UTRAN_TRU_ie_Extensions__item_._cont = ASN1Dict([
@@ -9095,11 +9463,15 @@ class PCAP_IEs:
     ___GANSS_UTC_Model_ie_Extensions__item__id._const_tab_at = None
     ___GANSS_UTC_Model_ie_Extensions__item__id._const_tab_id = u'id'
     ___GANSS_UTC_Model_ie_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___GANSS_UTC_Model_ie_Extensions__item__criticality._const_tab = ____GANSS_UTC_Model_ie_Extensions__item__id_tab
+    ____GANSS_UTC_Model_ie_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____GANSS_UTC_Model_ie_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___GANSS_UTC_Model_ie_Extensions__item__criticality._const_tab = ____GANSS_UTC_Model_ie_Extensions__item__criticality_tab
     ___GANSS_UTC_Model_ie_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___GANSS_UTC_Model_ie_Extensions__item__criticality._const_tab_id = u'criticality'
     ___GANSS_UTC_Model_ie_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___GANSS_UTC_Model_ie_Extensions__item__extensionValue._const_tab = ____GANSS_UTC_Model_ie_Extensions__item__id_tab
+    ____GANSS_UTC_Model_ie_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____GANSS_UTC_Model_ie_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___GANSS_UTC_Model_ie_Extensions__item__extensionValue._const_tab = ____GANSS_UTC_Model_ie_Extensions__item__extensionValue_tab
     ___GANSS_UTC_Model_ie_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___GANSS_UTC_Model_ie_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __GANSS_UTC_Model_ie_Extensions__item_._cont = ASN1Dict([
@@ -9149,11 +9521,15 @@ class PCAP_IEs:
     ___GLONASSclockModel_ie_Extensions__item__id._const_tab_at = None
     ___GLONASSclockModel_ie_Extensions__item__id._const_tab_id = u'id'
     ___GLONASSclockModel_ie_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___GLONASSclockModel_ie_Extensions__item__criticality._const_tab = ____GLONASSclockModel_ie_Extensions__item__id_tab
+    ____GLONASSclockModel_ie_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____GLONASSclockModel_ie_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___GLONASSclockModel_ie_Extensions__item__criticality._const_tab = ____GLONASSclockModel_ie_Extensions__item__criticality_tab
     ___GLONASSclockModel_ie_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___GLONASSclockModel_ie_Extensions__item__criticality._const_tab_id = u'criticality'
     ___GLONASSclockModel_ie_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___GLONASSclockModel_ie_Extensions__item__extensionValue._const_tab = ____GLONASSclockModel_ie_Extensions__item__id_tab
+    ____GLONASSclockModel_ie_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____GLONASSclockModel_ie_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___GLONASSclockModel_ie_Extensions__item__extensionValue._const_tab = ____GLONASSclockModel_ie_Extensions__item__extensionValue_tab
     ___GLONASSclockModel_ie_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___GLONASSclockModel_ie_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __GLONASSclockModel_ie_Extensions__item_._cont = ASN1Dict([
@@ -9197,11 +9573,15 @@ class PCAP_IEs:
     ___NAVclockModel_ie_Extensions__item__id._const_tab_at = None
     ___NAVclockModel_ie_Extensions__item__id._const_tab_id = u'id'
     ___NAVclockModel_ie_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___NAVclockModel_ie_Extensions__item__criticality._const_tab = ____NAVclockModel_ie_Extensions__item__id_tab
+    ____NAVclockModel_ie_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____NAVclockModel_ie_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___NAVclockModel_ie_Extensions__item__criticality._const_tab = ____NAVclockModel_ie_Extensions__item__criticality_tab
     ___NAVclockModel_ie_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___NAVclockModel_ie_Extensions__item__criticality._const_tab_id = u'criticality'
     ___NAVclockModel_ie_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___NAVclockModel_ie_Extensions__item__extensionValue._const_tab = ____NAVclockModel_ie_Extensions__item__id_tab
+    ____NAVclockModel_ie_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____NAVclockModel_ie_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___NAVclockModel_ie_Extensions__item__extensionValue._const_tab = ____NAVclockModel_ie_Extensions__item__extensionValue_tab
     ___NAVclockModel_ie_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___NAVclockModel_ie_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __NAVclockModel_ie_Extensions__item_._cont = ASN1Dict([
@@ -9275,11 +9655,15 @@ class PCAP_IEs:
     ___NavModel_CNAVKeplerianSet_ie_Extensions__item__id._const_tab_at = None
     ___NavModel_CNAVKeplerianSet_ie_Extensions__item__id._const_tab_id = u'id'
     ___NavModel_CNAVKeplerianSet_ie_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___NavModel_CNAVKeplerianSet_ie_Extensions__item__criticality._const_tab = ____NavModel_CNAVKeplerianSet_ie_Extensions__item__id_tab
+    ____NavModel_CNAVKeplerianSet_ie_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____NavModel_CNAVKeplerianSet_ie_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___NavModel_CNAVKeplerianSet_ie_Extensions__item__criticality._const_tab = ____NavModel_CNAVKeplerianSet_ie_Extensions__item__criticality_tab
     ___NavModel_CNAVKeplerianSet_ie_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___NavModel_CNAVKeplerianSet_ie_Extensions__item__criticality._const_tab_id = u'criticality'
     ___NavModel_CNAVKeplerianSet_ie_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___NavModel_CNAVKeplerianSet_ie_Extensions__item__extensionValue._const_tab = ____NavModel_CNAVKeplerianSet_ie_Extensions__item__id_tab
+    ____NavModel_CNAVKeplerianSet_ie_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____NavModel_CNAVKeplerianSet_ie_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___NavModel_CNAVKeplerianSet_ie_Extensions__item__extensionValue._const_tab = ____NavModel_CNAVKeplerianSet_ie_Extensions__item__extensionValue_tab
     ___NavModel_CNAVKeplerianSet_ie_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___NavModel_CNAVKeplerianSet_ie_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __NavModel_CNAVKeplerianSet_ie_Extensions__item_._cont = ASN1Dict([
@@ -9355,11 +9739,15 @@ class PCAP_IEs:
     ___NavModel_GLONASSecef_ie_Extensions__item__id._const_tab_at = None
     ___NavModel_GLONASSecef_ie_Extensions__item__id._const_tab_id = u'id'
     ___NavModel_GLONASSecef_ie_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___NavModel_GLONASSecef_ie_Extensions__item__criticality._const_tab = ____NavModel_GLONASSecef_ie_Extensions__item__id_tab
+    ____NavModel_GLONASSecef_ie_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____NavModel_GLONASSecef_ie_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___NavModel_GLONASSecef_ie_Extensions__item__criticality._const_tab = ____NavModel_GLONASSecef_ie_Extensions__item__criticality_tab
     ___NavModel_GLONASSecef_ie_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___NavModel_GLONASSecef_ie_Extensions__item__criticality._const_tab_id = u'criticality'
     ___NavModel_GLONASSecef_ie_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___NavModel_GLONASSecef_ie_Extensions__item__extensionValue._const_tab = ____NavModel_GLONASSecef_ie_Extensions__item__id_tab
+    ____NavModel_GLONASSecef_ie_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____NavModel_GLONASSecef_ie_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___NavModel_GLONASSecef_ie_Extensions__item__extensionValue._const_tab = ____NavModel_GLONASSecef_ie_Extensions__item__extensionValue_tab
     ___NavModel_GLONASSecef_ie_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___NavModel_GLONASSecef_ie_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __NavModel_GLONASSecef_ie_Extensions__item_._cont = ASN1Dict([
@@ -9439,11 +9827,15 @@ class PCAP_IEs:
     ___NavModel_NAVKeplerianSet_ie_Extensions__item__id._const_tab_at = None
     ___NavModel_NAVKeplerianSet_ie_Extensions__item__id._const_tab_id = u'id'
     ___NavModel_NAVKeplerianSet_ie_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___NavModel_NAVKeplerianSet_ie_Extensions__item__criticality._const_tab = ____NavModel_NAVKeplerianSet_ie_Extensions__item__id_tab
+    ____NavModel_NAVKeplerianSet_ie_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____NavModel_NAVKeplerianSet_ie_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___NavModel_NAVKeplerianSet_ie_Extensions__item__criticality._const_tab = ____NavModel_NAVKeplerianSet_ie_Extensions__item__criticality_tab
     ___NavModel_NAVKeplerianSet_ie_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___NavModel_NAVKeplerianSet_ie_Extensions__item__criticality._const_tab_id = u'criticality'
     ___NavModel_NAVKeplerianSet_ie_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___NavModel_NAVKeplerianSet_ie_Extensions__item__extensionValue._const_tab = ____NavModel_NAVKeplerianSet_ie_Extensions__item__id_tab
+    ____NavModel_NAVKeplerianSet_ie_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____NavModel_NAVKeplerianSet_ie_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___NavModel_NAVKeplerianSet_ie_Extensions__item__extensionValue._const_tab = ____NavModel_NAVKeplerianSet_ie_Extensions__item__extensionValue_tab
     ___NavModel_NAVKeplerianSet_ie_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___NavModel_NAVKeplerianSet_ie_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __NavModel_NAVKeplerianSet_ie_Extensions__item_._cont = ASN1Dict([
@@ -9514,11 +9906,15 @@ class PCAP_IEs:
     ___NavModel_SBASecef_ie_Extensions__item__id._const_tab_at = None
     ___NavModel_SBASecef_ie_Extensions__item__id._const_tab_id = u'id'
     ___NavModel_SBASecef_ie_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___NavModel_SBASecef_ie_Extensions__item__criticality._const_tab = ____NavModel_SBASecef_ie_Extensions__item__id_tab
+    ____NavModel_SBASecef_ie_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____NavModel_SBASecef_ie_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___NavModel_SBASecef_ie_Extensions__item__criticality._const_tab = ____NavModel_SBASecef_ie_Extensions__item__criticality_tab
     ___NavModel_SBASecef_ie_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___NavModel_SBASecef_ie_Extensions__item__criticality._const_tab_id = u'criticality'
     ___NavModel_SBASecef_ie_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___NavModel_SBASecef_ie_Extensions__item__extensionValue._const_tab = ____NavModel_SBASecef_ie_Extensions__item__id_tab
+    ____NavModel_SBASecef_ie_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____NavModel_SBASecef_ie_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___NavModel_SBASecef_ie_Extensions__item__extensionValue._const_tab = ____NavModel_SBASecef_ie_Extensions__item__extensionValue_tab
     ___NavModel_SBASecef_ie_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___NavModel_SBASecef_ie_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __NavModel_SBASecef_ie_Extensions__item_._cont = ASN1Dict([
@@ -9596,11 +9992,15 @@ class PCAP_IEs:
     ___NavModel_BDSKeplerianSet_ie_Extensions__item__id._const_tab_at = None
     ___NavModel_BDSKeplerianSet_ie_Extensions__item__id._const_tab_id = u'id'
     ___NavModel_BDSKeplerianSet_ie_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___NavModel_BDSKeplerianSet_ie_Extensions__item__criticality._const_tab = ____NavModel_BDSKeplerianSet_ie_Extensions__item__id_tab
+    ____NavModel_BDSKeplerianSet_ie_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____NavModel_BDSKeplerianSet_ie_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___NavModel_BDSKeplerianSet_ie_Extensions__item__criticality._const_tab = ____NavModel_BDSKeplerianSet_ie_Extensions__item__criticality_tab
     ___NavModel_BDSKeplerianSet_ie_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___NavModel_BDSKeplerianSet_ie_Extensions__item__criticality._const_tab_id = u'criticality'
     ___NavModel_BDSKeplerianSet_ie_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___NavModel_BDSKeplerianSet_ie_Extensions__item__extensionValue._const_tab = ____NavModel_BDSKeplerianSet_ie_Extensions__item__id_tab
+    ____NavModel_BDSKeplerianSet_ie_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____NavModel_BDSKeplerianSet_ie_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___NavModel_BDSKeplerianSet_ie_Extensions__item__extensionValue._const_tab = ____NavModel_BDSKeplerianSet_ie_Extensions__item__extensionValue_tab
     ___NavModel_BDSKeplerianSet_ie_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___NavModel_BDSKeplerianSet_ie_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __NavModel_BDSKeplerianSet_ie_Extensions__item_._cont = ASN1Dict([
@@ -9655,11 +10055,15 @@ class PCAP_IEs:
     ___SBASclockModel_ie_Extensions__item__id._const_tab_at = None
     ___SBASclockModel_ie_Extensions__item__id._const_tab_id = u'id'
     ___SBASclockModel_ie_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___SBASclockModel_ie_Extensions__item__criticality._const_tab = ____SBASclockModel_ie_Extensions__item__id_tab
+    ____SBASclockModel_ie_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____SBASclockModel_ie_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___SBASclockModel_ie_Extensions__item__criticality._const_tab = ____SBASclockModel_ie_Extensions__item__criticality_tab
     ___SBASclockModel_ie_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___SBASclockModel_ie_Extensions__item__criticality._const_tab_id = u'criticality'
     ___SBASclockModel_ie_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___SBASclockModel_ie_Extensions__item__extensionValue._const_tab = ____SBASclockModel_ie_Extensions__item__id_tab
+    ____SBASclockModel_ie_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____SBASclockModel_ie_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___SBASclockModel_ie_Extensions__item__extensionValue._const_tab = ____SBASclockModel_ie_Extensions__item__extensionValue_tab
     ___SBASclockModel_ie_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___SBASclockModel_ie_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __SBASclockModel_ie_Extensions__item_._cont = ASN1Dict([
@@ -9705,11 +10109,15 @@ class PCAP_IEs:
     ___BDSClockModel_ie_Extensions__item__id._const_tab_at = None
     ___BDSClockModel_ie_Extensions__item__id._const_tab_id = u'id'
     ___BDSClockModel_ie_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___BDSClockModel_ie_Extensions__item__criticality._const_tab = ____BDSClockModel_ie_Extensions__item__id_tab
+    ____BDSClockModel_ie_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____BDSClockModel_ie_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___BDSClockModel_ie_Extensions__item__criticality._const_tab = ____BDSClockModel_ie_Extensions__item__criticality_tab
     ___BDSClockModel_ie_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___BDSClockModel_ie_Extensions__item__criticality._const_tab_id = u'criticality'
     ___BDSClockModel_ie_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___BDSClockModel_ie_Extensions__item__extensionValue._const_tab = ____BDSClockModel_ie_Extensions__item__id_tab
+    ____BDSClockModel_ie_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____BDSClockModel_ie_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___BDSClockModel_ie_Extensions__item__extensionValue._const_tab = ____BDSClockModel_ie_Extensions__item__extensionValue_tab
     ___BDSClockModel_ie_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___BDSClockModel_ie_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __BDSClockModel_ie_Extensions__item_._cont = ASN1Dict([
@@ -9764,11 +10172,15 @@ class PCAP_IEs:
     ___UTCmodelSet1_ie_Extensions__item__id._const_tab_at = None
     ___UTCmodelSet1_ie_Extensions__item__id._const_tab_id = u'id'
     ___UTCmodelSet1_ie_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___UTCmodelSet1_ie_Extensions__item__criticality._const_tab = ____UTCmodelSet1_ie_Extensions__item__id_tab
+    ____UTCmodelSet1_ie_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____UTCmodelSet1_ie_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___UTCmodelSet1_ie_Extensions__item__criticality._const_tab = ____UTCmodelSet1_ie_Extensions__item__criticality_tab
     ___UTCmodelSet1_ie_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___UTCmodelSet1_ie_Extensions__item__criticality._const_tab_id = u'criticality'
     ___UTCmodelSet1_ie_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___UTCmodelSet1_ie_Extensions__item__extensionValue._const_tab = ____UTCmodelSet1_ie_Extensions__item__id_tab
+    ____UTCmodelSet1_ie_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____UTCmodelSet1_ie_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___UTCmodelSet1_ie_Extensions__item__extensionValue._const_tab = ____UTCmodelSet1_ie_Extensions__item__extensionValue_tab
     ___UTCmodelSet1_ie_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___UTCmodelSet1_ie_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __UTCmodelSet1_ie_Extensions__item_._cont = ASN1Dict([
@@ -9815,11 +10227,15 @@ class PCAP_IEs:
     ___UTCmodelSet2_ie_Extensions__item__id._const_tab_at = None
     ___UTCmodelSet2_ie_Extensions__item__id._const_tab_id = u'id'
     ___UTCmodelSet2_ie_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___UTCmodelSet2_ie_Extensions__item__criticality._const_tab = ____UTCmodelSet2_ie_Extensions__item__id_tab
+    ____UTCmodelSet2_ie_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____UTCmodelSet2_ie_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___UTCmodelSet2_ie_Extensions__item__criticality._const_tab = ____UTCmodelSet2_ie_Extensions__item__criticality_tab
     ___UTCmodelSet2_ie_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___UTCmodelSet2_ie_Extensions__item__criticality._const_tab_id = u'criticality'
     ___UTCmodelSet2_ie_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___UTCmodelSet2_ie_Extensions__item__extensionValue._const_tab = ____UTCmodelSet2_ie_Extensions__item__id_tab
+    ____UTCmodelSet2_ie_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____UTCmodelSet2_ie_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___UTCmodelSet2_ie_Extensions__item__extensionValue._const_tab = ____UTCmodelSet2_ie_Extensions__item__extensionValue_tab
     ___UTCmodelSet2_ie_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___UTCmodelSet2_ie_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __UTCmodelSet2_ie_Extensions__item_._cont = ASN1Dict([
@@ -9872,11 +10288,15 @@ class PCAP_IEs:
     ___UTCmodelSet3_ie_Extensions__item__id._const_tab_at = None
     ___UTCmodelSet3_ie_Extensions__item__id._const_tab_id = u'id'
     ___UTCmodelSet3_ie_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___UTCmodelSet3_ie_Extensions__item__criticality._const_tab = ____UTCmodelSet3_ie_Extensions__item__id_tab
+    ____UTCmodelSet3_ie_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____UTCmodelSet3_ie_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___UTCmodelSet3_ie_Extensions__item__criticality._const_tab = ____UTCmodelSet3_ie_Extensions__item__criticality_tab
     ___UTCmodelSet3_ie_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___UTCmodelSet3_ie_Extensions__item__criticality._const_tab_id = u'criticality'
     ___UTCmodelSet3_ie_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___UTCmodelSet3_ie_Extensions__item__extensionValue._const_tab = ____UTCmodelSet3_ie_Extensions__item__id_tab
+    ____UTCmodelSet3_ie_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____UTCmodelSet3_ie_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___UTCmodelSet3_ie_Extensions__item__extensionValue._const_tab = ____UTCmodelSet3_ie_Extensions__item__extensionValue_tab
     ___UTCmodelSet3_ie_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___UTCmodelSet3_ie_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __UTCmodelSet3_ie_Extensions__item_._cont = ASN1Dict([
@@ -9932,11 +10352,15 @@ class PCAP_IEs:
     ___UTCmodelSet4_ie_Extensions__item__id._const_tab_at = None
     ___UTCmodelSet4_ie_Extensions__item__id._const_tab_id = u'id'
     ___UTCmodelSet4_ie_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___UTCmodelSet4_ie_Extensions__item__criticality._const_tab = ____UTCmodelSet4_ie_Extensions__item__id_tab
+    ____UTCmodelSet4_ie_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____UTCmodelSet4_ie_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___UTCmodelSet4_ie_Extensions__item__criticality._const_tab = ____UTCmodelSet4_ie_Extensions__item__criticality_tab
     ___UTCmodelSet4_ie_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___UTCmodelSet4_ie_Extensions__item__criticality._const_tab_id = u'criticality'
     ___UTCmodelSet4_ie_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___UTCmodelSet4_ie_Extensions__item__extensionValue._const_tab = ____UTCmodelSet4_ie_Extensions__item__id_tab
+    ____UTCmodelSet4_ie_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____UTCmodelSet4_ie_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___UTCmodelSet4_ie_Extensions__item__extensionValue._const_tab = ____UTCmodelSet4_ie_Extensions__item__extensionValue_tab
     ___UTCmodelSet4_ie_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___UTCmodelSet4_ie_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __UTCmodelSet4_ie_Extensions__item_._cont = ASN1Dict([
@@ -9980,11 +10404,15 @@ class PCAP_IEs:
     ___UTRAN_GANSSReferenceTimeDL_ie_Extensions__item__id._const_tab_at = None
     ___UTRAN_GANSSReferenceTimeDL_ie_Extensions__item__id._const_tab_id = u'id'
     ___UTRAN_GANSSReferenceTimeDL_ie_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___UTRAN_GANSSReferenceTimeDL_ie_Extensions__item__criticality._const_tab = ____UTRAN_GANSSReferenceTimeDL_ie_Extensions__item__id_tab
+    ____UTRAN_GANSSReferenceTimeDL_ie_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____UTRAN_GANSSReferenceTimeDL_ie_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___UTRAN_GANSSReferenceTimeDL_ie_Extensions__item__criticality._const_tab = ____UTRAN_GANSSReferenceTimeDL_ie_Extensions__item__criticality_tab
     ___UTRAN_GANSSReferenceTimeDL_ie_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___UTRAN_GANSSReferenceTimeDL_ie_Extensions__item__criticality._const_tab_id = u'criticality'
     ___UTRAN_GANSSReferenceTimeDL_ie_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___UTRAN_GANSSReferenceTimeDL_ie_Extensions__item__extensionValue._const_tab = ____UTRAN_GANSSReferenceTimeDL_ie_Extensions__item__id_tab
+    ____UTRAN_GANSSReferenceTimeDL_ie_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____UTRAN_GANSSReferenceTimeDL_ie_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___UTRAN_GANSSReferenceTimeDL_ie_Extensions__item__extensionValue._const_tab = ____UTRAN_GANSSReferenceTimeDL_ie_Extensions__item__extensionValue_tab
     ___UTRAN_GANSSReferenceTimeDL_ie_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___UTRAN_GANSSReferenceTimeDL_ie_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __UTRAN_GANSSReferenceTimeDL_ie_Extensions__item_._cont = ASN1Dict([
@@ -10026,11 +10454,15 @@ class PCAP_IEs:
     ___UTRAN_GANSSReferenceTimeUL_ie_Extensions__item__id._const_tab_at = None
     ___UTRAN_GANSSReferenceTimeUL_ie_Extensions__item__id._const_tab_id = u'id'
     ___UTRAN_GANSSReferenceTimeUL_ie_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___UTRAN_GANSSReferenceTimeUL_ie_Extensions__item__criticality._const_tab = ____UTRAN_GANSSReferenceTimeUL_ie_Extensions__item__id_tab
+    ____UTRAN_GANSSReferenceTimeUL_ie_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____UTRAN_GANSSReferenceTimeUL_ie_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___UTRAN_GANSSReferenceTimeUL_ie_Extensions__item__criticality._const_tab = ____UTRAN_GANSSReferenceTimeUL_ie_Extensions__item__criticality_tab
     ___UTRAN_GANSSReferenceTimeUL_ie_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___UTRAN_GANSSReferenceTimeUL_ie_Extensions__item__criticality._const_tab_id = u'criticality'
     ___UTRAN_GANSSReferenceTimeUL_ie_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___UTRAN_GANSSReferenceTimeUL_ie_Extensions__item__extensionValue._const_tab = ____UTRAN_GANSSReferenceTimeUL_ie_Extensions__item__id_tab
+    ____UTRAN_GANSSReferenceTimeUL_ie_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____UTRAN_GANSSReferenceTimeUL_ie_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___UTRAN_GANSSReferenceTimeUL_ie_Extensions__item__extensionValue._const_tab = ____UTRAN_GANSSReferenceTimeUL_ie_Extensions__item__extensionValue_tab
     ___UTRAN_GANSSReferenceTimeUL_ie_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___UTRAN_GANSSReferenceTimeUL_ie_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __UTRAN_GANSSReferenceTimeUL_ie_Extensions__item_._cont = ASN1Dict([
@@ -10146,11 +10578,15 @@ class PCAP_IEs:
     ___AlmanacSatInfo_iE_Extensions__item__id._const_tab_at = None
     ___AlmanacSatInfo_iE_Extensions__item__id._const_tab_id = u'id'
     ___AlmanacSatInfo_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___AlmanacSatInfo_iE_Extensions__item__criticality._const_tab = ____AlmanacSatInfo_iE_Extensions__item__id_tab
+    ____AlmanacSatInfo_iE_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____AlmanacSatInfo_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___AlmanacSatInfo_iE_Extensions__item__criticality._const_tab = ____AlmanacSatInfo_iE_Extensions__item__criticality_tab
     ___AlmanacSatInfo_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___AlmanacSatInfo_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___AlmanacSatInfo_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___AlmanacSatInfo_iE_Extensions__item__extensionValue._const_tab = ____AlmanacSatInfo_iE_Extensions__item__id_tab
+    ____AlmanacSatInfo_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____AlmanacSatInfo_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___AlmanacSatInfo_iE_Extensions__item__extensionValue._const_tab = ____AlmanacSatInfo_iE_Extensions__item__extensionValue_tab
     ___AlmanacSatInfo_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___AlmanacSatInfo_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __AlmanacSatInfo_iE_Extensions__item_._cont = ASN1Dict([
@@ -10251,11 +10687,15 @@ class PCAP_IEs:
     ___GPS_ClockAndEphemerisParameters_iE_Extensions__item__id._const_tab_at = None
     ___GPS_ClockAndEphemerisParameters_iE_Extensions__item__id._const_tab_id = u'id'
     ___GPS_ClockAndEphemerisParameters_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___GPS_ClockAndEphemerisParameters_iE_Extensions__item__criticality._const_tab = ____GPS_ClockAndEphemerisParameters_iE_Extensions__item__id_tab
+    ____GPS_ClockAndEphemerisParameters_iE_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____GPS_ClockAndEphemerisParameters_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___GPS_ClockAndEphemerisParameters_iE_Extensions__item__criticality._const_tab = ____GPS_ClockAndEphemerisParameters_iE_Extensions__item__criticality_tab
     ___GPS_ClockAndEphemerisParameters_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___GPS_ClockAndEphemerisParameters_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___GPS_ClockAndEphemerisParameters_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___GPS_ClockAndEphemerisParameters_iE_Extensions__item__extensionValue._const_tab = ____GPS_ClockAndEphemerisParameters_iE_Extensions__item__id_tab
+    ____GPS_ClockAndEphemerisParameters_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____GPS_ClockAndEphemerisParameters_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___GPS_ClockAndEphemerisParameters_iE_Extensions__item__extensionValue._const_tab = ____GPS_ClockAndEphemerisParameters_iE_Extensions__item__extensionValue_tab
     ___GPS_ClockAndEphemerisParameters_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___GPS_ClockAndEphemerisParameters_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __GPS_ClockAndEphemerisParameters_iE_Extensions__item_._cont = ASN1Dict([
@@ -10349,11 +10789,15 @@ class PCAP_IEs:
     ___GPS_Ionospheric_Model_iE_Extensions__item__id._const_tab_at = None
     ___GPS_Ionospheric_Model_iE_Extensions__item__id._const_tab_id = u'id'
     ___GPS_Ionospheric_Model_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___GPS_Ionospheric_Model_iE_Extensions__item__criticality._const_tab = ____GPS_Ionospheric_Model_iE_Extensions__item__id_tab
+    ____GPS_Ionospheric_Model_iE_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____GPS_Ionospheric_Model_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___GPS_Ionospheric_Model_iE_Extensions__item__criticality._const_tab = ____GPS_Ionospheric_Model_iE_Extensions__item__criticality_tab
     ___GPS_Ionospheric_Model_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___GPS_Ionospheric_Model_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___GPS_Ionospheric_Model_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___GPS_Ionospheric_Model_iE_Extensions__item__extensionValue._const_tab = ____GPS_Ionospheric_Model_iE_Extensions__item__id_tab
+    ____GPS_Ionospheric_Model_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____GPS_Ionospheric_Model_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___GPS_Ionospheric_Model_iE_Extensions__item__extensionValue._const_tab = ____GPS_Ionospheric_Model_iE_Extensions__item__extensionValue_tab
     ___GPS_Ionospheric_Model_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___GPS_Ionospheric_Model_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __GPS_Ionospheric_Model_iE_Extensions__item_._cont = ASN1Dict([
@@ -10461,11 +10905,15 @@ class PCAP_IEs:
     ___GPS_MeasurementParam_iE_Extensions__item__id._const_tab_at = None
     ___GPS_MeasurementParam_iE_Extensions__item__id._const_tab_id = u'id'
     ___GPS_MeasurementParam_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___GPS_MeasurementParam_iE_Extensions__item__criticality._const_tab = ____GPS_MeasurementParam_iE_Extensions__item__id_tab
+    ____GPS_MeasurementParam_iE_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____GPS_MeasurementParam_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___GPS_MeasurementParam_iE_Extensions__item__criticality._const_tab = ____GPS_MeasurementParam_iE_Extensions__item__criticality_tab
     ___GPS_MeasurementParam_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___GPS_MeasurementParam_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___GPS_MeasurementParam_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___GPS_MeasurementParam_iE_Extensions__item__extensionValue._const_tab = ____GPS_MeasurementParam_iE_Extensions__item__id_tab
+    ____GPS_MeasurementParam_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____GPS_MeasurementParam_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___GPS_MeasurementParam_iE_Extensions__item__extensionValue._const_tab = ____GPS_MeasurementParam_iE_Extensions__item__extensionValue_tab
     ___GPS_MeasurementParam_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___GPS_MeasurementParam_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __GPS_MeasurementParam_iE_Extensions__item_._cont = ASN1Dict([
@@ -10518,11 +10966,15 @@ class PCAP_IEs:
     ___NavigationModelSatInfo_iE_Extensions__item__id._const_tab_at = None
     ___NavigationModelSatInfo_iE_Extensions__item__id._const_tab_id = u'id'
     ___NavigationModelSatInfo_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___NavigationModelSatInfo_iE_Extensions__item__criticality._const_tab = ____NavigationModelSatInfo_iE_Extensions__item__id_tab
+    ____NavigationModelSatInfo_iE_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____NavigationModelSatInfo_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___NavigationModelSatInfo_iE_Extensions__item__criticality._const_tab = ____NavigationModelSatInfo_iE_Extensions__item__criticality_tab
     ___NavigationModelSatInfo_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___NavigationModelSatInfo_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___NavigationModelSatInfo_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___NavigationModelSatInfo_iE_Extensions__item__extensionValue._const_tab = ____NavigationModelSatInfo_iE_Extensions__item__id_tab
+    ____NavigationModelSatInfo_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____NavigationModelSatInfo_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___NavigationModelSatInfo_iE_Extensions__item__extensionValue._const_tab = ____NavigationModelSatInfo_iE_Extensions__item__extensionValue_tab
     ___NavigationModelSatInfo_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___NavigationModelSatInfo_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __NavigationModelSatInfo_iE_Extensions__item_._cont = ASN1Dict([
@@ -10582,11 +11034,15 @@ class PCAP_IEs:
     ___GPS_ReferenceLocation_iE_Extensions__item__id._const_tab_at = None
     ___GPS_ReferenceLocation_iE_Extensions__item__id._const_tab_id = u'id'
     ___GPS_ReferenceLocation_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___GPS_ReferenceLocation_iE_Extensions__item__criticality._const_tab = ____GPS_ReferenceLocation_iE_Extensions__item__id_tab
+    ____GPS_ReferenceLocation_iE_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____GPS_ReferenceLocation_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___GPS_ReferenceLocation_iE_Extensions__item__criticality._const_tab = ____GPS_ReferenceLocation_iE_Extensions__item__criticality_tab
     ___GPS_ReferenceLocation_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___GPS_ReferenceLocation_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___GPS_ReferenceLocation_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___GPS_ReferenceLocation_iE_Extensions__item__extensionValue._const_tab = ____GPS_ReferenceLocation_iE_Extensions__item__id_tab
+    ____GPS_ReferenceLocation_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____GPS_ReferenceLocation_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___GPS_ReferenceLocation_iE_Extensions__item__extensionValue._const_tab = ____GPS_ReferenceLocation_iE_Extensions__item__extensionValue_tab
     ___GPS_ReferenceLocation_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___GPS_ReferenceLocation_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __GPS_ReferenceLocation_iE_Extensions__item_._cont = ASN1Dict([
@@ -10689,11 +11145,15 @@ class PCAP_IEs:
     ___GPS_TOW_Assist_iE_Extensions__item__id._const_tab_at = None
     ___GPS_TOW_Assist_iE_Extensions__item__id._const_tab_id = u'id'
     ___GPS_TOW_Assist_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___GPS_TOW_Assist_iE_Extensions__item__criticality._const_tab = ____GPS_TOW_Assist_iE_Extensions__item__id_tab
+    ____GPS_TOW_Assist_iE_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____GPS_TOW_Assist_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___GPS_TOW_Assist_iE_Extensions__item__criticality._const_tab = ____GPS_TOW_Assist_iE_Extensions__item__criticality_tab
     ___GPS_TOW_Assist_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___GPS_TOW_Assist_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___GPS_TOW_Assist_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___GPS_TOW_Assist_iE_Extensions__item__extensionValue._const_tab = ____GPS_TOW_Assist_iE_Extensions__item__id_tab
+    ____GPS_TOW_Assist_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____GPS_TOW_Assist_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___GPS_TOW_Assist_iE_Extensions__item__extensionValue._const_tab = ____GPS_TOW_Assist_iE_Extensions__item__extensionValue_tab
     ___GPS_TOW_Assist_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___GPS_TOW_Assist_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __GPS_TOW_Assist_iE_Extensions__item_._cont = ASN1Dict([
@@ -10736,11 +11196,15 @@ class PCAP_IEs:
     ___GPSReferenceTimeUncertainty_iE_Extensions__item__id._const_tab_at = None
     ___GPSReferenceTimeUncertainty_iE_Extensions__item__id._const_tab_id = u'id'
     ___GPSReferenceTimeUncertainty_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___GPSReferenceTimeUncertainty_iE_Extensions__item__criticality._const_tab = ____GPSReferenceTimeUncertainty_iE_Extensions__item__id_tab
+    ____GPSReferenceTimeUncertainty_iE_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____GPSReferenceTimeUncertainty_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___GPSReferenceTimeUncertainty_iE_Extensions__item__criticality._const_tab = ____GPSReferenceTimeUncertainty_iE_Extensions__item__criticality_tab
     ___GPSReferenceTimeUncertainty_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___GPSReferenceTimeUncertainty_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___GPSReferenceTimeUncertainty_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___GPSReferenceTimeUncertainty_iE_Extensions__item__extensionValue._const_tab = ____GPSReferenceTimeUncertainty_iE_Extensions__item__id_tab
+    ____GPSReferenceTimeUncertainty_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____GPSReferenceTimeUncertainty_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___GPSReferenceTimeUncertainty_iE_Extensions__item__extensionValue._const_tab = ____GPSReferenceTimeUncertainty_iE_Extensions__item__extensionValue_tab
     ___GPSReferenceTimeUncertainty_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___GPSReferenceTimeUncertainty_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __GPSReferenceTimeUncertainty_iE_Extensions__item_._cont = ASN1Dict([
@@ -10792,11 +11256,15 @@ class PCAP_IEs:
     ___GPS_UTC_Model_iE_Extensions__item__id._const_tab_at = None
     ___GPS_UTC_Model_iE_Extensions__item__id._const_tab_id = u'id'
     ___GPS_UTC_Model_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___GPS_UTC_Model_iE_Extensions__item__criticality._const_tab = ____GPS_UTC_Model_iE_Extensions__item__id_tab
+    ____GPS_UTC_Model_iE_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____GPS_UTC_Model_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___GPS_UTC_Model_iE_Extensions__item__criticality._const_tab = ____GPS_UTC_Model_iE_Extensions__item__criticality_tab
     ___GPS_UTC_Model_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___GPS_UTC_Model_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___GPS_UTC_Model_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___GPS_UTC_Model_iE_Extensions__item__extensionValue._const_tab = ____GPS_UTC_Model_iE_Extensions__item__id_tab
+    ____GPS_UTC_Model_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____GPS_UTC_Model_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___GPS_UTC_Model_iE_Extensions__item__extensionValue._const_tab = ____GPS_UTC_Model_iE_Extensions__item__extensionValue_tab
     ___GPS_UTC_Model_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___GPS_UTC_Model_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __GPS_UTC_Model_iE_Extensions__item_._cont = ASN1Dict([
@@ -10850,11 +11318,15 @@ class PCAP_IEs:
     ___AdditionalGPSAssistDataRequired_iE_Extensions__item__id._const_tab_at = None
     ___AdditionalGPSAssistDataRequired_iE_Extensions__item__id._const_tab_id = u'id'
     ___AdditionalGPSAssistDataRequired_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___AdditionalGPSAssistDataRequired_iE_Extensions__item__criticality._const_tab = ____AdditionalGPSAssistDataRequired_iE_Extensions__item__id_tab
+    ____AdditionalGPSAssistDataRequired_iE_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____AdditionalGPSAssistDataRequired_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___AdditionalGPSAssistDataRequired_iE_Extensions__item__criticality._const_tab = ____AdditionalGPSAssistDataRequired_iE_Extensions__item__criticality_tab
     ___AdditionalGPSAssistDataRequired_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___AdditionalGPSAssistDataRequired_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___AdditionalGPSAssistDataRequired_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___AdditionalGPSAssistDataRequired_iE_Extensions__item__extensionValue._const_tab = ____AdditionalGPSAssistDataRequired_iE_Extensions__item__id_tab
+    ____AdditionalGPSAssistDataRequired_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____AdditionalGPSAssistDataRequired_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___AdditionalGPSAssistDataRequired_iE_Extensions__item__extensionValue._const_tab = ____AdditionalGPSAssistDataRequired_iE_Extensions__item__extensionValue_tab
     ___AdditionalGPSAssistDataRequired_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___AdditionalGPSAssistDataRequired_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __AdditionalGPSAssistDataRequired_iE_Extensions__item_._cont = ASN1Dict([
@@ -10944,11 +11416,15 @@ class PCAP_IEs:
     ___GANSSReq_AddIonosphericModel_iE_Extensions__item__id._const_tab_at = None
     ___GANSSReq_AddIonosphericModel_iE_Extensions__item__id._const_tab_id = u'id'
     ___GANSSReq_AddIonosphericModel_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___GANSSReq_AddIonosphericModel_iE_Extensions__item__criticality._const_tab = ____GANSSReq_AddIonosphericModel_iE_Extensions__item__id_tab
+    ____GANSSReq_AddIonosphericModel_iE_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____GANSSReq_AddIonosphericModel_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___GANSSReq_AddIonosphericModel_iE_Extensions__item__criticality._const_tab = ____GANSSReq_AddIonosphericModel_iE_Extensions__item__criticality_tab
     ___GANSSReq_AddIonosphericModel_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___GANSSReq_AddIonosphericModel_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___GANSSReq_AddIonosphericModel_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___GANSSReq_AddIonosphericModel_iE_Extensions__item__extensionValue._const_tab = ____GANSSReq_AddIonosphericModel_iE_Extensions__item__id_tab
+    ____GANSSReq_AddIonosphericModel_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____GANSSReq_AddIonosphericModel_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___GANSSReq_AddIonosphericModel_iE_Extensions__item__extensionValue._const_tab = ____GANSSReq_AddIonosphericModel_iE_Extensions__item__extensionValue_tab
     ___GANSSReq_AddIonosphericModel_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___GANSSReq_AddIonosphericModel_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __GANSSReq_AddIonosphericModel_iE_Extensions__item_._cont = ASN1Dict([
@@ -11064,11 +11540,15 @@ class PCAP_IEs:
     ___DBDSCorrection_iE_Extensions__item__id._const_tab_at = None
     ___DBDSCorrection_iE_Extensions__item__id._const_tab_id = u'id'
     ___DBDSCorrection_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___DBDSCorrection_iE_Extensions__item__criticality._const_tab = ____DBDSCorrection_iE_Extensions__item__id_tab
+    ____DBDSCorrection_iE_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____DBDSCorrection_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___DBDSCorrection_iE_Extensions__item__criticality._const_tab = ____DBDSCorrection_iE_Extensions__item__criticality_tab
     ___DBDSCorrection_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___DBDSCorrection_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___DBDSCorrection_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___DBDSCorrection_iE_Extensions__item__extensionValue._const_tab = ____DBDSCorrection_iE_Extensions__item__id_tab
+    ____DBDSCorrection_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____DBDSCorrection_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___DBDSCorrection_iE_Extensions__item__extensionValue._const_tab = ____DBDSCorrection_iE_Extensions__item__extensionValue_tab
     ___DBDSCorrection_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___DBDSCorrection_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __DBDSCorrection_iE_Extensions__item_._cont = ASN1Dict([
@@ -11117,11 +11597,15 @@ class PCAP_IEs:
     ___GANSS_AddADchoices_iE_Extensions__item__id._const_tab_at = None
     ___GANSS_AddADchoices_iE_Extensions__item__id._const_tab_id = u'id'
     ___GANSS_AddADchoices_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___GANSS_AddADchoices_iE_Extensions__item__criticality._const_tab = ____GANSS_AddADchoices_iE_Extensions__item__id_tab
+    ____GANSS_AddADchoices_iE_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____GANSS_AddADchoices_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___GANSS_AddADchoices_iE_Extensions__item__criticality._const_tab = ____GANSS_AddADchoices_iE_Extensions__item__criticality_tab
     ___GANSS_AddADchoices_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___GANSS_AddADchoices_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___GANSS_AddADchoices_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___GANSS_AddADchoices_iE_Extensions__item__extensionValue._const_tab = ____GANSS_AddADchoices_iE_Extensions__item__id_tab
+    ____GANSS_AddADchoices_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____GANSS_AddADchoices_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___GANSS_AddADchoices_iE_Extensions__item__extensionValue._const_tab = ____GANSS_AddADchoices_iE_Extensions__item__extensionValue_tab
     ___GANSS_AddADchoices_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___GANSS_AddADchoices_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __GANSS_AddADchoices_iE_Extensions__item_._cont = ASN1Dict([
@@ -11163,11 +11647,15 @@ class PCAP_IEs:
     ___GanssDataBits_iE_Extensions__item__id._const_tab_at = None
     ___GanssDataBits_iE_Extensions__item__id._const_tab_id = u'id'
     ___GanssDataBits_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___GanssDataBits_iE_Extensions__item__criticality._const_tab = ____GanssDataBits_iE_Extensions__item__id_tab
+    ____GanssDataBits_iE_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____GanssDataBits_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___GanssDataBits_iE_Extensions__item__criticality._const_tab = ____GanssDataBits_iE_Extensions__item__criticality_tab
     ___GanssDataBits_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___GanssDataBits_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___GanssDataBits_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___GanssDataBits_iE_Extensions__item__extensionValue._const_tab = ____GanssDataBits_iE_Extensions__item__id_tab
+    ____GanssDataBits_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____GanssDataBits_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___GanssDataBits_iE_Extensions__item__extensionValue._const_tab = ____GanssDataBits_iE_Extensions__item__extensionValue_tab
     ___GanssDataBits_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___GanssDataBits_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __GanssDataBits_iE_Extensions__item_._cont = ASN1Dict([
@@ -11209,11 +11697,15 @@ class PCAP_IEs:
     ___ReqDataBitAssistanceList_iE_Extensions__item__id._const_tab_at = None
     ___ReqDataBitAssistanceList_iE_Extensions__item__id._const_tab_id = u'id'
     ___ReqDataBitAssistanceList_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___ReqDataBitAssistanceList_iE_Extensions__item__criticality._const_tab = ____ReqDataBitAssistanceList_iE_Extensions__item__id_tab
+    ____ReqDataBitAssistanceList_iE_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____ReqDataBitAssistanceList_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___ReqDataBitAssistanceList_iE_Extensions__item__criticality._const_tab = ____ReqDataBitAssistanceList_iE_Extensions__item__criticality_tab
     ___ReqDataBitAssistanceList_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___ReqDataBitAssistanceList_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___ReqDataBitAssistanceList_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___ReqDataBitAssistanceList_iE_Extensions__item__extensionValue._const_tab = ____ReqDataBitAssistanceList_iE_Extensions__item__id_tab
+    ____ReqDataBitAssistanceList_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____ReqDataBitAssistanceList_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___ReqDataBitAssistanceList_iE_Extensions__item__extensionValue._const_tab = ____ReqDataBitAssistanceList_iE_Extensions__item__extensionValue_tab
     ___ReqDataBitAssistanceList_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___ReqDataBitAssistanceList_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __ReqDataBitAssistanceList_iE_Extensions__item_._cont = ASN1Dict([
@@ -11326,11 +11818,15 @@ class PCAP_IEs:
     ___DganssCorrectionsReq_iE_Extensions__item__id._const_tab_at = None
     ___DganssCorrectionsReq_iE_Extensions__item__id._const_tab_id = u'id'
     ___DganssCorrectionsReq_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___DganssCorrectionsReq_iE_Extensions__item__criticality._const_tab = ____DganssCorrectionsReq_iE_Extensions__item__id_tab
+    ____DganssCorrectionsReq_iE_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____DganssCorrectionsReq_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___DganssCorrectionsReq_iE_Extensions__item__criticality._const_tab = ____DganssCorrectionsReq_iE_Extensions__item__criticality_tab
     ___DganssCorrectionsReq_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___DganssCorrectionsReq_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___DganssCorrectionsReq_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___DganssCorrectionsReq_iE_Extensions__item__extensionValue._const_tab = ____DganssCorrectionsReq_iE_Extensions__item__id_tab
+    ____DganssCorrectionsReq_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____DganssCorrectionsReq_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___DganssCorrectionsReq_iE_Extensions__item__extensionValue._const_tab = ____DganssCorrectionsReq_iE_Extensions__item__extensionValue_tab
     ___DganssCorrectionsReq_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___DganssCorrectionsReq_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __DganssCorrectionsReq_iE_Extensions__item_._cont = ASN1Dict([
@@ -11364,11 +11860,15 @@ class PCAP_IEs:
     ___Ganss_almanacAndSatelliteHealthReq_iE_Extensions__item__id._const_tab_at = None
     ___Ganss_almanacAndSatelliteHealthReq_iE_Extensions__item__id._const_tab_id = u'id'
     ___Ganss_almanacAndSatelliteHealthReq_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___Ganss_almanacAndSatelliteHealthReq_iE_Extensions__item__criticality._const_tab = ____Ganss_almanacAndSatelliteHealthReq_iE_Extensions__item__id_tab
+    ____Ganss_almanacAndSatelliteHealthReq_iE_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____Ganss_almanacAndSatelliteHealthReq_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___Ganss_almanacAndSatelliteHealthReq_iE_Extensions__item__criticality._const_tab = ____Ganss_almanacAndSatelliteHealthReq_iE_Extensions__item__criticality_tab
     ___Ganss_almanacAndSatelliteHealthReq_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___Ganss_almanacAndSatelliteHealthReq_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___Ganss_almanacAndSatelliteHealthReq_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___Ganss_almanacAndSatelliteHealthReq_iE_Extensions__item__extensionValue._const_tab = ____Ganss_almanacAndSatelliteHealthReq_iE_Extensions__item__id_tab
+    ____Ganss_almanacAndSatelliteHealthReq_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____Ganss_almanacAndSatelliteHealthReq_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___Ganss_almanacAndSatelliteHealthReq_iE_Extensions__item__extensionValue._const_tab = ____Ganss_almanacAndSatelliteHealthReq_iE_Extensions__item__extensionValue_tab
     ___Ganss_almanacAndSatelliteHealthReq_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___Ganss_almanacAndSatelliteHealthReq_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __Ganss_almanacAndSatelliteHealthReq_iE_Extensions__item_._cont = ASN1Dict([
@@ -11453,11 +11953,15 @@ class PCAP_IEs:
     ___GANSS_AddIonoModelReq_iE_Extensions__item__id._const_tab_at = None
     ___GANSS_AddIonoModelReq_iE_Extensions__item__id._const_tab_id = u'id'
     ___GANSS_AddIonoModelReq_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___GANSS_AddIonoModelReq_iE_Extensions__item__criticality._const_tab = ____GANSS_AddIonoModelReq_iE_Extensions__item__id_tab
+    ____GANSS_AddIonoModelReq_iE_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____GANSS_AddIonoModelReq_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___GANSS_AddIonoModelReq_iE_Extensions__item__criticality._const_tab = ____GANSS_AddIonoModelReq_iE_Extensions__item__criticality_tab
     ___GANSS_AddIonoModelReq_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___GANSS_AddIonoModelReq_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___GANSS_AddIonoModelReq_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___GANSS_AddIonoModelReq_iE_Extensions__item__extensionValue._const_tab = ____GANSS_AddIonoModelReq_iE_Extensions__item__id_tab
+    ____GANSS_AddIonoModelReq_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____GANSS_AddIonoModelReq_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___GANSS_AddIonoModelReq_iE_Extensions__item__extensionValue._const_tab = ____GANSS_AddIonoModelReq_iE_Extensions__item__extensionValue_tab
     ___GANSS_AddIonoModelReq_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___GANSS_AddIonoModelReq_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __GANSS_AddIonoModelReq_iE_Extensions__item_._cont = ASN1Dict([
@@ -11492,11 +11996,15 @@ class PCAP_IEs:
     ___GANSS_EarthOrientParaReq_iE_Extensions__item__id._const_tab_at = None
     ___GANSS_EarthOrientParaReq_iE_Extensions__item__id._const_tab_id = u'id'
     ___GANSS_EarthOrientParaReq_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___GANSS_EarthOrientParaReq_iE_Extensions__item__criticality._const_tab = ____GANSS_EarthOrientParaReq_iE_Extensions__item__id_tab
+    ____GANSS_EarthOrientParaReq_iE_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____GANSS_EarthOrientParaReq_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___GANSS_EarthOrientParaReq_iE_Extensions__item__criticality._const_tab = ____GANSS_EarthOrientParaReq_iE_Extensions__item__criticality_tab
     ___GANSS_EarthOrientParaReq_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___GANSS_EarthOrientParaReq_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___GANSS_EarthOrientParaReq_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___GANSS_EarthOrientParaReq_iE_Extensions__item__extensionValue._const_tab = ____GANSS_EarthOrientParaReq_iE_Extensions__item__id_tab
+    ____GANSS_EarthOrientParaReq_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____GANSS_EarthOrientParaReq_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___GANSS_EarthOrientParaReq_iE_Extensions__item__extensionValue._const_tab = ____GANSS_EarthOrientParaReq_iE_Extensions__item__extensionValue_tab
     ___GANSS_EarthOrientParaReq_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___GANSS_EarthOrientParaReq_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __GANSS_EarthOrientParaReq_iE_Extensions__item_._cont = ASN1Dict([
@@ -11577,11 +12085,15 @@ class PCAP_IEs:
     ___AddNavigationModelsGANSS_iE_Extensions__item__id._const_tab_at = None
     ___AddNavigationModelsGANSS_iE_Extensions__item__id._const_tab_id = u'id'
     ___AddNavigationModelsGANSS_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___AddNavigationModelsGANSS_iE_Extensions__item__criticality._const_tab = ____AddNavigationModelsGANSS_iE_Extensions__item__id_tab
+    ____AddNavigationModelsGANSS_iE_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____AddNavigationModelsGANSS_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___AddNavigationModelsGANSS_iE_Extensions__item__criticality._const_tab = ____AddNavigationModelsGANSS_iE_Extensions__item__criticality_tab
     ___AddNavigationModelsGANSS_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___AddNavigationModelsGANSS_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___AddNavigationModelsGANSS_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___AddNavigationModelsGANSS_iE_Extensions__item__extensionValue._const_tab = ____AddNavigationModelsGANSS_iE_Extensions__item__id_tab
+    ____AddNavigationModelsGANSS_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____AddNavigationModelsGANSS_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___AddNavigationModelsGANSS_iE_Extensions__item__extensionValue._const_tab = ____AddNavigationModelsGANSS_iE_Extensions__item__extensionValue_tab
     ___AddNavigationModelsGANSS_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___AddNavigationModelsGANSS_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __AddNavigationModelsGANSS_iE_Extensions__item_._cont = ASN1Dict([
@@ -11626,11 +12138,15 @@ class PCAP_IEs:
     ___AddSatelliteRelatedDataGANSS_iE_Extensions__item__id._const_tab_at = None
     ___AddSatelliteRelatedDataGANSS_iE_Extensions__item__id._const_tab_id = u'id'
     ___AddSatelliteRelatedDataGANSS_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___AddSatelliteRelatedDataGANSS_iE_Extensions__item__criticality._const_tab = ____AddSatelliteRelatedDataGANSS_iE_Extensions__item__id_tab
+    ____AddSatelliteRelatedDataGANSS_iE_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____AddSatelliteRelatedDataGANSS_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___AddSatelliteRelatedDataGANSS_iE_Extensions__item__criticality._const_tab = ____AddSatelliteRelatedDataGANSS_iE_Extensions__item__criticality_tab
     ___AddSatelliteRelatedDataGANSS_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___AddSatelliteRelatedDataGANSS_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___AddSatelliteRelatedDataGANSS_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___AddSatelliteRelatedDataGANSS_iE_Extensions__item__extensionValue._const_tab = ____AddSatelliteRelatedDataGANSS_iE_Extensions__item__id_tab
+    ____AddSatelliteRelatedDataGANSS_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____AddSatelliteRelatedDataGANSS_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___AddSatelliteRelatedDataGANSS_iE_Extensions__item__extensionValue._const_tab = ____AddSatelliteRelatedDataGANSS_iE_Extensions__item__extensionValue_tab
     ___AddSatelliteRelatedDataGANSS_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___AddSatelliteRelatedDataGANSS_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __AddSatelliteRelatedDataGANSS_iE_Extensions__item_._cont = ASN1Dict([
@@ -11671,11 +12187,15 @@ class PCAP_IEs:
     ___DBDS_Corrections_iE_Extensions__item__id._const_tab_at = None
     ___DBDS_Corrections_iE_Extensions__item__id._const_tab_id = u'id'
     ___DBDS_Corrections_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___DBDS_Corrections_iE_Extensions__item__criticality._const_tab = ____DBDS_Corrections_iE_Extensions__item__id_tab
+    ____DBDS_Corrections_iE_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____DBDS_Corrections_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___DBDS_Corrections_iE_Extensions__item__criticality._const_tab = ____DBDS_Corrections_iE_Extensions__item__criticality_tab
     ___DBDS_Corrections_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___DBDS_Corrections_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___DBDS_Corrections_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___DBDS_Corrections_iE_Extensions__item__extensionValue._const_tab = ____DBDS_Corrections_iE_Extensions__item__id_tab
+    ____DBDS_Corrections_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____DBDS_Corrections_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___DBDS_Corrections_iE_Extensions__item__extensionValue._const_tab = ____DBDS_Corrections_iE_Extensions__item__extensionValue_tab
     ___DBDS_Corrections_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___DBDS_Corrections_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __DBDS_Corrections_iE_Extensions__item_._cont = ASN1Dict([
@@ -11709,11 +12229,15 @@ class PCAP_IEs:
     ___GANSS_AddUtcModelsReq_iE_Extensions__item__id._const_tab_at = None
     ___GANSS_AddUtcModelsReq_iE_Extensions__item__id._const_tab_id = u'id'
     ___GANSS_AddUtcModelsReq_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___GANSS_AddUtcModelsReq_iE_Extensions__item__criticality._const_tab = ____GANSS_AddUtcModelsReq_iE_Extensions__item__id_tab
+    ____GANSS_AddUtcModelsReq_iE_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____GANSS_AddUtcModelsReq_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___GANSS_AddUtcModelsReq_iE_Extensions__item__criticality._const_tab = ____GANSS_AddUtcModelsReq_iE_Extensions__item__criticality_tab
     ___GANSS_AddUtcModelsReq_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___GANSS_AddUtcModelsReq_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___GANSS_AddUtcModelsReq_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___GANSS_AddUtcModelsReq_iE_Extensions__item__extensionValue._const_tab = ____GANSS_AddUtcModelsReq_iE_Extensions__item__id_tab
+    ____GANSS_AddUtcModelsReq_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____GANSS_AddUtcModelsReq_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___GANSS_AddUtcModelsReq_iE_Extensions__item__extensionValue._const_tab = ____GANSS_AddUtcModelsReq_iE_Extensions__item__extensionValue_tab
     ___GANSS_AddUtcModelsReq_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___GANSS_AddUtcModelsReq_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __GANSS_AddUtcModelsReq_iE_Extensions__item_._cont = ASN1Dict([
@@ -11746,11 +12270,15 @@ class PCAP_IEs:
     ___GANSS_AuxInfoReq_iE_Extensions__item__id._const_tab_at = None
     ___GANSS_AuxInfoReq_iE_Extensions__item__id._const_tab_id = u'id'
     ___GANSS_AuxInfoReq_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___GANSS_AuxInfoReq_iE_Extensions__item__criticality._const_tab = ____GANSS_AuxInfoReq_iE_Extensions__item__id_tab
+    ____GANSS_AuxInfoReq_iE_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____GANSS_AuxInfoReq_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___GANSS_AuxInfoReq_iE_Extensions__item__criticality._const_tab = ____GANSS_AuxInfoReq_iE_Extensions__item__criticality_tab
     ___GANSS_AuxInfoReq_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___GANSS_AuxInfoReq_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___GANSS_AuxInfoReq_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___GANSS_AuxInfoReq_iE_Extensions__item__extensionValue._const_tab = ____GANSS_AuxInfoReq_iE_Extensions__item__id_tab
+    ____GANSS_AuxInfoReq_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____GANSS_AuxInfoReq_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___GANSS_AuxInfoReq_iE_Extensions__item__extensionValue._const_tab = ____GANSS_AuxInfoReq_iE_Extensions__item__extensionValue_tab
     ___GANSS_AuxInfoReq_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___GANSS_AuxInfoReq_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __GANSS_AuxInfoReq_iE_Extensions__item_._cont = ASN1Dict([
@@ -11788,11 +12316,15 @@ class PCAP_IEs:
     ___Ganss_utcModelReq_iE_Extensions__item__id._const_tab_at = None
     ___Ganss_utcModelReq_iE_Extensions__item__id._const_tab_id = u'id'
     ___Ganss_utcModelReq_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___Ganss_utcModelReq_iE_Extensions__item__criticality._const_tab = ____Ganss_utcModelReq_iE_Extensions__item__id_tab
+    ____Ganss_utcModelReq_iE_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____Ganss_utcModelReq_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___Ganss_utcModelReq_iE_Extensions__item__criticality._const_tab = ____Ganss_utcModelReq_iE_Extensions__item__criticality_tab
     ___Ganss_utcModelReq_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___Ganss_utcModelReq_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___Ganss_utcModelReq_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___Ganss_utcModelReq_iE_Extensions__item__extensionValue._const_tab = ____Ganss_utcModelReq_iE_Extensions__item__id_tab
+    ____Ganss_utcModelReq_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____Ganss_utcModelReq_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___Ganss_utcModelReq_iE_Extensions__item__extensionValue._const_tab = ____Ganss_utcModelReq_iE_Extensions__item__extensionValue_tab
     ___Ganss_utcModelReq_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___Ganss_utcModelReq_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __Ganss_utcModelReq_iE_Extensions__item_._cont = ASN1Dict([
@@ -11825,11 +12357,15 @@ class PCAP_IEs:
     ___Ganss_realTimeIntegrityReq_iE_Extensions__item__id._const_tab_at = None
     ___Ganss_realTimeIntegrityReq_iE_Extensions__item__id._const_tab_id = u'id'
     ___Ganss_realTimeIntegrityReq_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___Ganss_realTimeIntegrityReq_iE_Extensions__item__criticality._const_tab = ____Ganss_realTimeIntegrityReq_iE_Extensions__item__id_tab
+    ____Ganss_realTimeIntegrityReq_iE_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____Ganss_realTimeIntegrityReq_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___Ganss_realTimeIntegrityReq_iE_Extensions__item__criticality._const_tab = ____Ganss_realTimeIntegrityReq_iE_Extensions__item__criticality_tab
     ___Ganss_realTimeIntegrityReq_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___Ganss_realTimeIntegrityReq_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___Ganss_realTimeIntegrityReq_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___Ganss_realTimeIntegrityReq_iE_Extensions__item__extensionValue._const_tab = ____Ganss_realTimeIntegrityReq_iE_Extensions__item__id_tab
+    ____Ganss_realTimeIntegrityReq_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____Ganss_realTimeIntegrityReq_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___Ganss_realTimeIntegrityReq_iE_Extensions__item__extensionValue._const_tab = ____Ganss_realTimeIntegrityReq_iE_Extensions__item__extensionValue_tab
     ___Ganss_realTimeIntegrityReq_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___Ganss_realTimeIntegrityReq_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __Ganss_realTimeIntegrityReq_iE_Extensions__item_._cont = ASN1Dict([
@@ -11862,11 +12398,15 @@ class PCAP_IEs:
     ___Ganss_referenceMeasurementInfoReq_iE_Extensions__item__id._const_tab_at = None
     ___Ganss_referenceMeasurementInfoReq_iE_Extensions__item__id._const_tab_id = u'id'
     ___Ganss_referenceMeasurementInfoReq_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___Ganss_referenceMeasurementInfoReq_iE_Extensions__item__criticality._const_tab = ____Ganss_referenceMeasurementInfoReq_iE_Extensions__item__id_tab
+    ____Ganss_referenceMeasurementInfoReq_iE_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____Ganss_referenceMeasurementInfoReq_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___Ganss_referenceMeasurementInfoReq_iE_Extensions__item__criticality._const_tab = ____Ganss_referenceMeasurementInfoReq_iE_Extensions__item__criticality_tab
     ___Ganss_referenceMeasurementInfoReq_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___Ganss_referenceMeasurementInfoReq_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___Ganss_referenceMeasurementInfoReq_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___Ganss_referenceMeasurementInfoReq_iE_Extensions__item__extensionValue._const_tab = ____Ganss_referenceMeasurementInfoReq_iE_Extensions__item__id_tab
+    ____Ganss_referenceMeasurementInfoReq_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____Ganss_referenceMeasurementInfoReq_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___Ganss_referenceMeasurementInfoReq_iE_Extensions__item__extensionValue._const_tab = ____Ganss_referenceMeasurementInfoReq_iE_Extensions__item__extensionValue_tab
     ___Ganss_referenceMeasurementInfoReq_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___Ganss_referenceMeasurementInfoReq_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __Ganss_referenceMeasurementInfoReq_iE_Extensions__item_._cont = ASN1Dict([
@@ -11901,11 +12441,15 @@ class PCAP_IEs:
     ___Ganss_TimeModel_Gnss_Gnss_iE_Extensions__item__id._const_tab_at = None
     ___Ganss_TimeModel_Gnss_Gnss_iE_Extensions__item__id._const_tab_id = u'id'
     ___Ganss_TimeModel_Gnss_Gnss_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___Ganss_TimeModel_Gnss_Gnss_iE_Extensions__item__criticality._const_tab = ____Ganss_TimeModel_Gnss_Gnss_iE_Extensions__item__id_tab
+    ____Ganss_TimeModel_Gnss_Gnss_iE_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____Ganss_TimeModel_Gnss_Gnss_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___Ganss_TimeModel_Gnss_Gnss_iE_Extensions__item__criticality._const_tab = ____Ganss_TimeModel_Gnss_Gnss_iE_Extensions__item__criticality_tab
     ___Ganss_TimeModel_Gnss_Gnss_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___Ganss_TimeModel_Gnss_Gnss_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___Ganss_TimeModel_Gnss_Gnss_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___Ganss_TimeModel_Gnss_Gnss_iE_Extensions__item__extensionValue._const_tab = ____Ganss_TimeModel_Gnss_Gnss_iE_Extensions__item__id_tab
+    ____Ganss_TimeModel_Gnss_Gnss_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____Ganss_TimeModel_Gnss_Gnss_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___Ganss_TimeModel_Gnss_Gnss_iE_Extensions__item__extensionValue._const_tab = ____Ganss_TimeModel_Gnss_Gnss_iE_Extensions__item__extensionValue_tab
     ___Ganss_TimeModel_Gnss_Gnss_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___Ganss_TimeModel_Gnss_Gnss_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __Ganss_TimeModel_Gnss_Gnss_iE_Extensions__item_._cont = ASN1Dict([
@@ -11947,11 +12491,15 @@ class PCAP_IEs:
     ___UtcModel_iE_Extensions__item__id._const_tab_at = None
     ___UtcModel_iE_Extensions__item__id._const_tab_id = u'id'
     ___UtcModel_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___UtcModel_iE_Extensions__item__criticality._const_tab = ____UtcModel_iE_Extensions__item__id_tab
+    ____UtcModel_iE_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____UtcModel_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___UtcModel_iE_Extensions__item__criticality._const_tab = ____UtcModel_iE_Extensions__item__criticality_tab
     ___UtcModel_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___UtcModel_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___UtcModel_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___UtcModel_iE_Extensions__item__extensionValue._const_tab = ____UtcModel_iE_Extensions__item__id_tab
+    ____UtcModel_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____UtcModel_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___UtcModel_iE_Extensions__item__extensionValue._const_tab = ____UtcModel_iE_Extensions__item__extensionValue_tab
     ___UtcModel_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___UtcModel_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __UtcModel_iE_Extensions__item_._cont = ASN1Dict([
@@ -11984,11 +12532,15 @@ class PCAP_IEs:
     ___IonosphericModel_iE_Extensions__item__id._const_tab_at = None
     ___IonosphericModel_iE_Extensions__item__id._const_tab_id = u'id'
     ___IonosphericModel_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___IonosphericModel_iE_Extensions__item__criticality._const_tab = ____IonosphericModel_iE_Extensions__item__id_tab
+    ____IonosphericModel_iE_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____IonosphericModel_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___IonosphericModel_iE_Extensions__item__criticality._const_tab = ____IonosphericModel_iE_Extensions__item__criticality_tab
     ___IonosphericModel_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___IonosphericModel_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___IonosphericModel_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___IonosphericModel_iE_Extensions__item__extensionValue._const_tab = ____IonosphericModel_iE_Extensions__item__id_tab
+    ____IonosphericModel_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____IonosphericModel_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___IonosphericModel_iE_Extensions__item__extensionValue._const_tab = ____IonosphericModel_iE_Extensions__item__extensionValue_tab
     ___IonosphericModel_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___IonosphericModel_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __IonosphericModel_iE_Extensions__item_._cont = ASN1Dict([
@@ -12022,11 +12574,15 @@ class PCAP_IEs:
     ___NavigationModel_iE_Extensions__item__id._const_tab_at = None
     ___NavigationModel_iE_Extensions__item__id._const_tab_id = u'id'
     ___NavigationModel_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___NavigationModel_iE_Extensions__item__criticality._const_tab = ____NavigationModel_iE_Extensions__item__id_tab
+    ____NavigationModel_iE_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____NavigationModel_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___NavigationModel_iE_Extensions__item__criticality._const_tab = ____NavigationModel_iE_Extensions__item__criticality_tab
     ___NavigationModel_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___NavigationModel_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___NavigationModel_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___NavigationModel_iE_Extensions__item__extensionValue._const_tab = ____NavigationModel_iE_Extensions__item__id_tab
+    ____NavigationModel_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____NavigationModel_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___NavigationModel_iE_Extensions__item__extensionValue._const_tab = ____NavigationModel_iE_Extensions__item__extensionValue_tab
     ___NavigationModel_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___NavigationModel_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __NavigationModel_iE_Extensions__item_._cont = ASN1Dict([
@@ -12066,11 +12622,15 @@ class PCAP_IEs:
     ___NavModelAdditionalData_iE_Extensions__item__id._const_tab_at = None
     ___NavModelAdditionalData_iE_Extensions__item__id._const_tab_id = u'id'
     ___NavModelAdditionalData_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___NavModelAdditionalData_iE_Extensions__item__criticality._const_tab = ____NavModelAdditionalData_iE_Extensions__item__id_tab
+    ____NavModelAdditionalData_iE_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____NavModelAdditionalData_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___NavModelAdditionalData_iE_Extensions__item__criticality._const_tab = ____NavModelAdditionalData_iE_Extensions__item__criticality_tab
     ___NavModelAdditionalData_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___NavModelAdditionalData_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___NavModelAdditionalData_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___NavModelAdditionalData_iE_Extensions__item__extensionValue._const_tab = ____NavModelAdditionalData_iE_Extensions__item__id_tab
+    ____NavModelAdditionalData_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____NavModelAdditionalData_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___NavModelAdditionalData_iE_Extensions__item__extensionValue._const_tab = ____NavModelAdditionalData_iE_Extensions__item__extensionValue_tab
     ___NavModelAdditionalData_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___NavModelAdditionalData_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __NavModelAdditionalData_iE_Extensions__item_._cont = ASN1Dict([
@@ -12115,11 +12675,15 @@ class PCAP_IEs:
     ___SatelliteRelatedData_iE_Extensions__item__id._const_tab_at = None
     ___SatelliteRelatedData_iE_Extensions__item__id._const_tab_id = u'id'
     ___SatelliteRelatedData_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___SatelliteRelatedData_iE_Extensions__item__criticality._const_tab = ____SatelliteRelatedData_iE_Extensions__item__id_tab
+    ____SatelliteRelatedData_iE_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____SatelliteRelatedData_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___SatelliteRelatedData_iE_Extensions__item__criticality._const_tab = ____SatelliteRelatedData_iE_Extensions__item__criticality_tab
     ___SatelliteRelatedData_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___SatelliteRelatedData_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___SatelliteRelatedData_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___SatelliteRelatedData_iE_Extensions__item__extensionValue._const_tab = ____SatelliteRelatedData_iE_Extensions__item__id_tab
+    ____SatelliteRelatedData_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____SatelliteRelatedData_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___SatelliteRelatedData_iE_Extensions__item__extensionValue._const_tab = ____SatelliteRelatedData_iE_Extensions__item__extensionValue_tab
     ___SatelliteRelatedData_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___SatelliteRelatedData_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __SatelliteRelatedData_iE_Extensions__item_._cont = ASN1Dict([
@@ -12159,11 +12723,15 @@ class PCAP_IEs:
     ___NavigationModelGANSS_iE_Extensions__item__id._const_tab_at = None
     ___NavigationModelGANSS_iE_Extensions__item__id._const_tab_id = u'id'
     ___NavigationModelGANSS_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___NavigationModelGANSS_iE_Extensions__item__criticality._const_tab = ____NavigationModelGANSS_iE_Extensions__item__id_tab
+    ____NavigationModelGANSS_iE_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____NavigationModelGANSS_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___NavigationModelGANSS_iE_Extensions__item__criticality._const_tab = ____NavigationModelGANSS_iE_Extensions__item__criticality_tab
     ___NavigationModelGANSS_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___NavigationModelGANSS_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___NavigationModelGANSS_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___NavigationModelGANSS_iE_Extensions__item__extensionValue._const_tab = ____NavigationModelGANSS_iE_Extensions__item__id_tab
+    ____NavigationModelGANSS_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____NavigationModelGANSS_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___NavigationModelGANSS_iE_Extensions__item__extensionValue._const_tab = ____NavigationModelGANSS_iE_Extensions__item__extensionValue_tab
     ___NavigationModelGANSS_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___NavigationModelGANSS_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __NavigationModelGANSS_iE_Extensions__item_._cont = ASN1Dict([
@@ -12208,11 +12776,15 @@ class PCAP_IEs:
     ___SatelliteRelatedDataGANSS_iE_Extensions__item__id._const_tab_at = None
     ___SatelliteRelatedDataGANSS_iE_Extensions__item__id._const_tab_id = u'id'
     ___SatelliteRelatedDataGANSS_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___SatelliteRelatedDataGANSS_iE_Extensions__item__criticality._const_tab = ____SatelliteRelatedDataGANSS_iE_Extensions__item__id_tab
+    ____SatelliteRelatedDataGANSS_iE_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____SatelliteRelatedDataGANSS_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___SatelliteRelatedDataGANSS_iE_Extensions__item__criticality._const_tab = ____SatelliteRelatedDataGANSS_iE_Extensions__item__criticality_tab
     ___SatelliteRelatedDataGANSS_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___SatelliteRelatedDataGANSS_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___SatelliteRelatedDataGANSS_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___SatelliteRelatedDataGANSS_iE_Extensions__item__extensionValue._const_tab = ____SatelliteRelatedDataGANSS_iE_Extensions__item__id_tab
+    ____SatelliteRelatedDataGANSS_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____SatelliteRelatedDataGANSS_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___SatelliteRelatedDataGANSS_iE_Extensions__item__extensionValue._const_tab = ____SatelliteRelatedDataGANSS_iE_Extensions__item__extensionValue_tab
     ___SatelliteRelatedDataGANSS_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___SatelliteRelatedDataGANSS_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __SatelliteRelatedDataGANSS_iE_Extensions__item_._cont = ASN1Dict([
@@ -12258,11 +12830,15 @@ class PCAP_IEs:
     ___AlmanacAndSatelliteHealthSIB_InfoType_iE_Extensions__item__id._const_tab_at = None
     ___AlmanacAndSatelliteHealthSIB_InfoType_iE_Extensions__item__id._const_tab_id = u'id'
     ___AlmanacAndSatelliteHealthSIB_InfoType_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___AlmanacAndSatelliteHealthSIB_InfoType_iE_Extensions__item__criticality._const_tab = ____AlmanacAndSatelliteHealthSIB_InfoType_iE_Extensions__item__id_tab
+    ____AlmanacAndSatelliteHealthSIB_InfoType_iE_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____AlmanacAndSatelliteHealthSIB_InfoType_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___AlmanacAndSatelliteHealthSIB_InfoType_iE_Extensions__item__criticality._const_tab = ____AlmanacAndSatelliteHealthSIB_InfoType_iE_Extensions__item__criticality_tab
     ___AlmanacAndSatelliteHealthSIB_InfoType_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___AlmanacAndSatelliteHealthSIB_InfoType_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___AlmanacAndSatelliteHealthSIB_InfoType_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___AlmanacAndSatelliteHealthSIB_InfoType_iE_Extensions__item__extensionValue._const_tab = ____AlmanacAndSatelliteHealthSIB_InfoType_iE_Extensions__item__id_tab
+    ____AlmanacAndSatelliteHealthSIB_InfoType_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____AlmanacAndSatelliteHealthSIB_InfoType_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___AlmanacAndSatelliteHealthSIB_InfoType_iE_Extensions__item__extensionValue._const_tab = ____AlmanacAndSatelliteHealthSIB_InfoType_iE_Extensions__item__extensionValue_tab
     ___AlmanacAndSatelliteHealthSIB_InfoType_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___AlmanacAndSatelliteHealthSIB_InfoType_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __AlmanacAndSatelliteHealthSIB_InfoType_iE_Extensions__item_._cont = ASN1Dict([
@@ -12305,11 +12881,15 @@ class PCAP_IEs:
     ____MessageStructure__item__iE_Extensions__item__id._const_tab_at = None
     ____MessageStructure__item__iE_Extensions__item__id._const_tab_id = u'id'
     ____MessageStructure__item__iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ____MessageStructure__item__iE_Extensions__item__criticality._const_tab = _____MessageStructure__item__iE_Extensions__item__id_tab
+    _____MessageStructure__item__iE_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    _____MessageStructure__item__iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ____MessageStructure__item__iE_Extensions__item__criticality._const_tab = _____MessageStructure__item__iE_Extensions__item__criticality_tab
     ____MessageStructure__item__iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ____MessageStructure__item__iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ____MessageStructure__item__iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ____MessageStructure__item__iE_Extensions__item__extensionValue._const_tab = _____MessageStructure__item__iE_Extensions__item__id_tab
+    _____MessageStructure__item__iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    _____MessageStructure__item__iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ____MessageStructure__item__iE_Extensions__item__extensionValue._const_tab = _____MessageStructure__item__iE_Extensions__item__extensionValue_tab
     ____MessageStructure__item__iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ____MessageStructure__item__iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     ___MessageStructure__item__iE_Extensions__item_._cont = ASN1Dict([
@@ -12349,11 +12929,15 @@ class PCAP_IEs:
     ___MeasInstructionsUsed_iE_Extensions__item__id._const_tab_at = None
     ___MeasInstructionsUsed_iE_Extensions__item__id._const_tab_id = u'id'
     ___MeasInstructionsUsed_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___MeasInstructionsUsed_iE_Extensions__item__criticality._const_tab = ____MeasInstructionsUsed_iE_Extensions__item__id_tab
+    ____MeasInstructionsUsed_iE_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____MeasInstructionsUsed_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___MeasInstructionsUsed_iE_Extensions__item__criticality._const_tab = ____MeasInstructionsUsed_iE_Extensions__item__criticality_tab
     ___MeasInstructionsUsed_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___MeasInstructionsUsed_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___MeasInstructionsUsed_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___MeasInstructionsUsed_iE_Extensions__item__extensionValue._const_tab = ____MeasInstructionsUsed_iE_Extensions__item__id_tab
+    ____MeasInstructionsUsed_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____MeasInstructionsUsed_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___MeasInstructionsUsed_iE_Extensions__item__extensionValue._const_tab = ____MeasInstructionsUsed_iE_Extensions__item__extensionValue_tab
     ___MeasInstructionsUsed_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___MeasInstructionsUsed_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __MeasInstructionsUsed_iE_Extensions__item_._cont = ASN1Dict([
@@ -12388,11 +12972,15 @@ class PCAP_IEs:
     ___MeasurementValidity_iE_Extensions__item__id._const_tab_at = None
     ___MeasurementValidity_iE_Extensions__item__id._const_tab_id = u'id'
     ___MeasurementValidity_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___MeasurementValidity_iE_Extensions__item__criticality._const_tab = ____MeasurementValidity_iE_Extensions__item__id_tab
+    ____MeasurementValidity_iE_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____MeasurementValidity_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___MeasurementValidity_iE_Extensions__item__criticality._const_tab = ____MeasurementValidity_iE_Extensions__item__criticality_tab
     ___MeasurementValidity_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___MeasurementValidity_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___MeasurementValidity_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___MeasurementValidity_iE_Extensions__item__extensionValue._const_tab = ____MeasurementValidity_iE_Extensions__item__id_tab
+    ____MeasurementValidity_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____MeasurementValidity_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___MeasurementValidity_iE_Extensions__item__extensionValue._const_tab = ____MeasurementValidity_iE_Extensions__item__extensionValue_tab
     ___MeasurementValidity_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___MeasurementValidity_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __MeasurementValidity_iE_Extensions__item_._cont = ASN1Dict([
@@ -12432,11 +13020,15 @@ class PCAP_IEs:
     ___OTDOA_MeasurementGroup_iE_Extensions__item__id._const_tab_at = None
     ___OTDOA_MeasurementGroup_iE_Extensions__item__id._const_tab_id = u'id'
     ___OTDOA_MeasurementGroup_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___OTDOA_MeasurementGroup_iE_Extensions__item__criticality._const_tab = ____OTDOA_MeasurementGroup_iE_Extensions__item__id_tab
+    ____OTDOA_MeasurementGroup_iE_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____OTDOA_MeasurementGroup_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___OTDOA_MeasurementGroup_iE_Extensions__item__criticality._const_tab = ____OTDOA_MeasurementGroup_iE_Extensions__item__criticality_tab
     ___OTDOA_MeasurementGroup_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___OTDOA_MeasurementGroup_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___OTDOA_MeasurementGroup_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___OTDOA_MeasurementGroup_iE_Extensions__item__extensionValue._const_tab = ____OTDOA_MeasurementGroup_iE_Extensions__item__id_tab
+    ____OTDOA_MeasurementGroup_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____OTDOA_MeasurementGroup_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___OTDOA_MeasurementGroup_iE_Extensions__item__extensionValue._const_tab = ____OTDOA_MeasurementGroup_iE_Extensions__item__extensionValue_tab
     ___OTDOA_MeasurementGroup_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___OTDOA_MeasurementGroup_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __OTDOA_MeasurementGroup_iE_Extensions__item_._cont = ASN1Dict([
@@ -12516,11 +13108,15 @@ class PCAP_IEs:
     ___OTDOA_ReferenceCellInfoSAS_centric_iE_Extensions__item__id._const_tab_at = None
     ___OTDOA_ReferenceCellInfoSAS_centric_iE_Extensions__item__id._const_tab_id = u'id'
     ___OTDOA_ReferenceCellInfoSAS_centric_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___OTDOA_ReferenceCellInfoSAS_centric_iE_Extensions__item__criticality._const_tab = ____OTDOA_ReferenceCellInfoSAS_centric_iE_Extensions__item__id_tab
+    ____OTDOA_ReferenceCellInfoSAS_centric_iE_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____OTDOA_ReferenceCellInfoSAS_centric_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___OTDOA_ReferenceCellInfoSAS_centric_iE_Extensions__item__criticality._const_tab = ____OTDOA_ReferenceCellInfoSAS_centric_iE_Extensions__item__criticality_tab
     ___OTDOA_ReferenceCellInfoSAS_centric_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___OTDOA_ReferenceCellInfoSAS_centric_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___OTDOA_ReferenceCellInfoSAS_centric_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___OTDOA_ReferenceCellInfoSAS_centric_iE_Extensions__item__extensionValue._const_tab = ____OTDOA_ReferenceCellInfoSAS_centric_iE_Extensions__item__id_tab
+    ____OTDOA_ReferenceCellInfoSAS_centric_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____OTDOA_ReferenceCellInfoSAS_centric_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___OTDOA_ReferenceCellInfoSAS_centric_iE_Extensions__item__extensionValue._const_tab = ____OTDOA_ReferenceCellInfoSAS_centric_iE_Extensions__item__extensionValue_tab
     ___OTDOA_ReferenceCellInfoSAS_centric_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___OTDOA_ReferenceCellInfoSAS_centric_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __OTDOA_ReferenceCellInfoSAS_centric_iE_Extensions__item_._cont = ASN1Dict([
@@ -12561,11 +13157,15 @@ class PCAP_IEs:
     ___OTDOA_NeighbourCellInfo_iE_Extensions__item__id._const_tab_at = None
     ___OTDOA_NeighbourCellInfo_iE_Extensions__item__id._const_tab_id = u'id'
     ___OTDOA_NeighbourCellInfo_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___OTDOA_NeighbourCellInfo_iE_Extensions__item__criticality._const_tab = ____OTDOA_NeighbourCellInfo_iE_Extensions__item__id_tab
+    ____OTDOA_NeighbourCellInfo_iE_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____OTDOA_NeighbourCellInfo_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___OTDOA_NeighbourCellInfo_iE_Extensions__item__criticality._const_tab = ____OTDOA_NeighbourCellInfo_iE_Extensions__item__criticality_tab
     ___OTDOA_NeighbourCellInfo_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___OTDOA_NeighbourCellInfo_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___OTDOA_NeighbourCellInfo_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___OTDOA_NeighbourCellInfo_iE_Extensions__item__extensionValue._const_tab = ____OTDOA_NeighbourCellInfo_iE_Extensions__item__id_tab
+    ____OTDOA_NeighbourCellInfo_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____OTDOA_NeighbourCellInfo_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___OTDOA_NeighbourCellInfo_iE_Extensions__item__extensionValue._const_tab = ____OTDOA_NeighbourCellInfo_iE_Extensions__item__extensionValue_tab
     ___OTDOA_NeighbourCellInfo_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___OTDOA_NeighbourCellInfo_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __OTDOA_NeighbourCellInfo_iE_Extensions__item_._cont = ASN1Dict([
@@ -12653,11 +13253,15 @@ class PCAP_IEs:
     ___OTDOA_AddMeasuredResultsInfo_iE_Extensions__item__id._const_tab_at = None
     ___OTDOA_AddMeasuredResultsInfo_iE_Extensions__item__id._const_tab_id = u'id'
     ___OTDOA_AddMeasuredResultsInfo_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___OTDOA_AddMeasuredResultsInfo_iE_Extensions__item__criticality._const_tab = ____OTDOA_AddMeasuredResultsInfo_iE_Extensions__item__id_tab
+    ____OTDOA_AddMeasuredResultsInfo_iE_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____OTDOA_AddMeasuredResultsInfo_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___OTDOA_AddMeasuredResultsInfo_iE_Extensions__item__criticality._const_tab = ____OTDOA_AddMeasuredResultsInfo_iE_Extensions__item__criticality_tab
     ___OTDOA_AddMeasuredResultsInfo_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___OTDOA_AddMeasuredResultsInfo_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___OTDOA_AddMeasuredResultsInfo_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___OTDOA_AddMeasuredResultsInfo_iE_Extensions__item__extensionValue._const_tab = ____OTDOA_AddMeasuredResultsInfo_iE_Extensions__item__id_tab
+    ____OTDOA_AddMeasuredResultsInfo_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____OTDOA_AddMeasuredResultsInfo_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___OTDOA_AddMeasuredResultsInfo_iE_Extensions__item__extensionValue._const_tab = ____OTDOA_AddMeasuredResultsInfo_iE_Extensions__item__extensionValue_tab
     ___OTDOA_AddMeasuredResultsInfo_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___OTDOA_AddMeasuredResultsInfo_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __OTDOA_AddMeasuredResultsInfo_iE_Extensions__item_._cont = ASN1Dict([
@@ -12694,11 +13298,15 @@ class PCAP_IEs:
     ___UE_SFNSFNTimeDifferenceType2Info_iE_Extensions__item__id._const_tab_at = None
     ___UE_SFNSFNTimeDifferenceType2Info_iE_Extensions__item__id._const_tab_id = u'id'
     ___UE_SFNSFNTimeDifferenceType2Info_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___UE_SFNSFNTimeDifferenceType2Info_iE_Extensions__item__criticality._const_tab = ____UE_SFNSFNTimeDifferenceType2Info_iE_Extensions__item__id_tab
+    ____UE_SFNSFNTimeDifferenceType2Info_iE_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____UE_SFNSFNTimeDifferenceType2Info_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___UE_SFNSFNTimeDifferenceType2Info_iE_Extensions__item__criticality._const_tab = ____UE_SFNSFNTimeDifferenceType2Info_iE_Extensions__item__criticality_tab
     ___UE_SFNSFNTimeDifferenceType2Info_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___UE_SFNSFNTimeDifferenceType2Info_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___UE_SFNSFNTimeDifferenceType2Info_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___UE_SFNSFNTimeDifferenceType2Info_iE_Extensions__item__extensionValue._const_tab = ____UE_SFNSFNTimeDifferenceType2Info_iE_Extensions__item__id_tab
+    ____UE_SFNSFNTimeDifferenceType2Info_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____UE_SFNSFNTimeDifferenceType2Info_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___UE_SFNSFNTimeDifferenceType2Info_iE_Extensions__item__extensionValue._const_tab = ____UE_SFNSFNTimeDifferenceType2Info_iE_Extensions__item__extensionValue_tab
     ___UE_SFNSFNTimeDifferenceType2Info_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___UE_SFNSFNTimeDifferenceType2Info_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __UE_SFNSFNTimeDifferenceType2Info_iE_Extensions__item_._cont = ASN1Dict([
@@ -12795,11 +13403,15 @@ class PCAP_IEs:
     ___SFNSFNMeasurementValueInfo_iE_Extensions__item__id._const_tab_at = None
     ___SFNSFNMeasurementValueInfo_iE_Extensions__item__id._const_tab_id = u'id'
     ___SFNSFNMeasurementValueInfo_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___SFNSFNMeasurementValueInfo_iE_Extensions__item__criticality._const_tab = ____SFNSFNMeasurementValueInfo_iE_Extensions__item__id_tab
+    ____SFNSFNMeasurementValueInfo_iE_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____SFNSFNMeasurementValueInfo_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___SFNSFNMeasurementValueInfo_iE_Extensions__item__criticality._const_tab = ____SFNSFNMeasurementValueInfo_iE_Extensions__item__criticality_tab
     ___SFNSFNMeasurementValueInfo_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___SFNSFNMeasurementValueInfo_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___SFNSFNMeasurementValueInfo_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___SFNSFNMeasurementValueInfo_iE_Extensions__item__extensionValue._const_tab = ____SFNSFNMeasurementValueInfo_iE_Extensions__item__id_tab
+    ____SFNSFNMeasurementValueInfo_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____SFNSFNMeasurementValueInfo_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___SFNSFNMeasurementValueInfo_iE_Extensions__item__extensionValue._const_tab = ____SFNSFNMeasurementValueInfo_iE_Extensions__item__extensionValue_tab
     ___SFNSFNMeasurementValueInfo_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___SFNSFNMeasurementValueInfo_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __SFNSFNMeasurementValueInfo_iE_Extensions__item_._cont = ASN1Dict([
@@ -12855,11 +13467,15 @@ class PCAP_IEs:
     ___TUTRANGPSMeasurementValueInfo_iE_Extensions__item__id._const_tab_at = None
     ___TUTRANGPSMeasurementValueInfo_iE_Extensions__item__id._const_tab_id = u'id'
     ___TUTRANGPSMeasurementValueInfo_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___TUTRANGPSMeasurementValueInfo_iE_Extensions__item__criticality._const_tab = ____TUTRANGPSMeasurementValueInfo_iE_Extensions__item__id_tab
+    ____TUTRANGPSMeasurementValueInfo_iE_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____TUTRANGPSMeasurementValueInfo_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___TUTRANGPSMeasurementValueInfo_iE_Extensions__item__criticality._const_tab = ____TUTRANGPSMeasurementValueInfo_iE_Extensions__item__criticality_tab
     ___TUTRANGPSMeasurementValueInfo_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___TUTRANGPSMeasurementValueInfo_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___TUTRANGPSMeasurementValueInfo_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___TUTRANGPSMeasurementValueInfo_iE_Extensions__item__extensionValue._const_tab = ____TUTRANGPSMeasurementValueInfo_iE_Extensions__item__id_tab
+    ____TUTRANGPSMeasurementValueInfo_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____TUTRANGPSMeasurementValueInfo_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___TUTRANGPSMeasurementValueInfo_iE_Extensions__item__extensionValue._const_tab = ____TUTRANGPSMeasurementValueInfo_iE_Extensions__item__extensionValue_tab
     ___TUTRANGPSMeasurementValueInfo_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___TUTRANGPSMeasurementValueInfo_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __TUTRANGPSMeasurementValueInfo_iE_Extensions__item_._cont = ASN1Dict([
@@ -12932,11 +13548,15 @@ class PCAP_IEs:
     ___TUTRANGANSSMeasurementValueInfo_iE_Extensions__item__id._const_tab_at = None
     ___TUTRANGANSSMeasurementValueInfo_iE_Extensions__item__id._const_tab_id = u'id'
     ___TUTRANGANSSMeasurementValueInfo_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___TUTRANGANSSMeasurementValueInfo_iE_Extensions__item__criticality._const_tab = ____TUTRANGANSSMeasurementValueInfo_iE_Extensions__item__id_tab
+    ____TUTRANGANSSMeasurementValueInfo_iE_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____TUTRANGANSSMeasurementValueInfo_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___TUTRANGANSSMeasurementValueInfo_iE_Extensions__item__criticality._const_tab = ____TUTRANGANSSMeasurementValueInfo_iE_Extensions__item__criticality_tab
     ___TUTRANGANSSMeasurementValueInfo_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___TUTRANGANSSMeasurementValueInfo_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___TUTRANGANSSMeasurementValueInfo_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___TUTRANGANSSMeasurementValueInfo_iE_Extensions__item__extensionValue._const_tab = ____TUTRANGANSSMeasurementValueInfo_iE_Extensions__item__id_tab
+    ____TUTRANGANSSMeasurementValueInfo_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____TUTRANGANSSMeasurementValueInfo_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___TUTRANGANSSMeasurementValueInfo_iE_Extensions__item__extensionValue._const_tab = ____TUTRANGANSSMeasurementValueInfo_iE_Extensions__item__extensionValue_tab
     ___TUTRANGANSSMeasurementValueInfo_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___TUTRANGANSSMeasurementValueInfo_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __TUTRANGANSSMeasurementValueInfo_iE_Extensions__item_._cont = ASN1Dict([
@@ -12988,11 +13608,15 @@ class PCAP_IEs:
     ___AdditionalMeasurementInforLCR_iE_Extensions__item__id._const_tab_at = None
     ___AdditionalMeasurementInforLCR_iE_Extensions__item__id._const_tab_id = u'id'
     ___AdditionalMeasurementInforLCR_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___AdditionalMeasurementInforLCR_iE_Extensions__item__criticality._const_tab = ____AdditionalMeasurementInforLCR_iE_Extensions__item__id_tab
+    ____AdditionalMeasurementInforLCR_iE_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____AdditionalMeasurementInforLCR_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___AdditionalMeasurementInforLCR_iE_Extensions__item__criticality._const_tab = ____AdditionalMeasurementInforLCR_iE_Extensions__item__criticality_tab
     ___AdditionalMeasurementInforLCR_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___AdditionalMeasurementInforLCR_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___AdditionalMeasurementInforLCR_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___AdditionalMeasurementInforLCR_iE_Extensions__item__extensionValue._const_tab = ____AdditionalMeasurementInforLCR_iE_Extensions__item__id_tab
+    ____AdditionalMeasurementInforLCR_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____AdditionalMeasurementInforLCR_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___AdditionalMeasurementInforLCR_iE_Extensions__item__extensionValue._const_tab = ____AdditionalMeasurementInforLCR_iE_Extensions__item__extensionValue_tab
     ___AdditionalMeasurementInforLCR_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___AdditionalMeasurementInforLCR_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __AdditionalMeasurementInforLCR_iE_Extensions__item_._cont = ASN1Dict([
@@ -13036,11 +13660,15 @@ class PCAP_IEs:
     ___PeriodicPosCalcInfo_iE_Extensions__item__id._const_tab_at = None
     ___PeriodicPosCalcInfo_iE_Extensions__item__id._const_tab_id = u'id'
     ___PeriodicPosCalcInfo_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___PeriodicPosCalcInfo_iE_Extensions__item__criticality._const_tab = ____PeriodicPosCalcInfo_iE_Extensions__item__id_tab
+    ____PeriodicPosCalcInfo_iE_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____PeriodicPosCalcInfo_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___PeriodicPosCalcInfo_iE_Extensions__item__criticality._const_tab = ____PeriodicPosCalcInfo_iE_Extensions__item__criticality_tab
     ___PeriodicPosCalcInfo_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___PeriodicPosCalcInfo_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___PeriodicPosCalcInfo_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___PeriodicPosCalcInfo_iE_Extensions__item__extensionValue._const_tab = ____PeriodicPosCalcInfo_iE_Extensions__item__id_tab
+    ____PeriodicPosCalcInfo_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____PeriodicPosCalcInfo_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___PeriodicPosCalcInfo_iE_Extensions__item__extensionValue._const_tab = ____PeriodicPosCalcInfo_iE_Extensions__item__extensionValue_tab
     ___PeriodicPosCalcInfo_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___PeriodicPosCalcInfo_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __PeriodicPosCalcInfo_iE_Extensions__item_._cont = ASN1Dict([
@@ -13078,11 +13706,15 @@ class PCAP_IEs:
     ___PeriodicLocationInfo_iE_Extensions__item__id._const_tab_at = None
     ___PeriodicLocationInfo_iE_Extensions__item__id._const_tab_id = u'id'
     ___PeriodicLocationInfo_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___PeriodicLocationInfo_iE_Extensions__item__criticality._const_tab = ____PeriodicLocationInfo_iE_Extensions__item__id_tab
+    ____PeriodicLocationInfo_iE_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____PeriodicLocationInfo_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___PeriodicLocationInfo_iE_Extensions__item__criticality._const_tab = ____PeriodicLocationInfo_iE_Extensions__item__criticality_tab
     ___PeriodicLocationInfo_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___PeriodicLocationInfo_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___PeriodicLocationInfo_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___PeriodicLocationInfo_iE_Extensions__item__extensionValue._const_tab = ____PeriodicLocationInfo_iE_Extensions__item__id_tab
+    ____PeriodicLocationInfo_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____PeriodicLocationInfo_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___PeriodicLocationInfo_iE_Extensions__item__extensionValue._const_tab = ____PeriodicLocationInfo_iE_Extensions__item__extensionValue_tab
     ___PeriodicLocationInfo_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___PeriodicLocationInfo_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __PeriodicLocationInfo_iE_Extensions__item_._cont = ASN1Dict([
@@ -13184,11 +13816,15 @@ class PCAP_IEs:
     ___RRCstateChange_iE_Extensions__item__id._const_tab_at = None
     ___RRCstateChange_iE_Extensions__item__id._const_tab_id = u'id'
     ___RRCstateChange_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___RRCstateChange_iE_Extensions__item__criticality._const_tab = ____RRCstateChange_iE_Extensions__item__id_tab
+    ____RRCstateChange_iE_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____RRCstateChange_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___RRCstateChange_iE_Extensions__item__criticality._const_tab = ____RRCstateChange_iE_Extensions__item__criticality_tab
     ___RRCstateChange_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___RRCstateChange_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___RRCstateChange_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___RRCstateChange_iE_Extensions__item__extensionValue._const_tab = ____RRCstateChange_iE_Extensions__item__id_tab
+    ____RRCstateChange_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____RRCstateChange_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___RRCstateChange_iE_Extensions__item__extensionValue._const_tab = ____RRCstateChange_iE_Extensions__item__extensionValue_tab
     ___RRCstateChange_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___RRCstateChange_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __RRCstateChange_iE_Extensions__item_._cont = ASN1Dict([
@@ -13292,11 +13928,15 @@ class PCAP_IEs:
     ___InformationAvailable_iE_Extensions__item__id._const_tab_at = None
     ___InformationAvailable_iE_Extensions__item__id._const_tab_id = u'id'
     ___InformationAvailable_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___InformationAvailable_iE_Extensions__item__criticality._const_tab = ____InformationAvailable_iE_Extensions__item__id_tab
+    ____InformationAvailable_iE_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____InformationAvailable_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___InformationAvailable_iE_Extensions__item__criticality._const_tab = ____InformationAvailable_iE_Extensions__item__criticality_tab
     ___InformationAvailable_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___InformationAvailable_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___InformationAvailable_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___InformationAvailable_iE_Extensions__item__extensionValue._const_tab = ____InformationAvailable_iE_Extensions__item__id_tab
+    ____InformationAvailable_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____InformationAvailable_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___InformationAvailable_iE_Extensions__item__extensionValue._const_tab = ____InformationAvailable_iE_Extensions__item__extensionValue_tab
     ___InformationAvailable_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___InformationAvailable_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __InformationAvailable_iE_Extensions__item_._cont = ASN1Dict([
@@ -13334,11 +13974,15 @@ class PCAP_IEs:
     ___RequestType_iE_Extensions__item__id._const_tab_at = None
     ___RequestType_iE_Extensions__item__id._const_tab_id = u'id'
     ___RequestType_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___RequestType_iE_Extensions__item__criticality._const_tab = ____RequestType_iE_Extensions__item__id_tab
+    ____RequestType_iE_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____RequestType_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___RequestType_iE_Extensions__item__criticality._const_tab = ____RequestType_iE_Extensions__item__criticality_tab
     ___RequestType_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___RequestType_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___RequestType_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___RequestType_iE_Extensions__item__extensionValue._const_tab = ____RequestType_iE_Extensions__item__id_tab
+    ____RequestType_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____RequestType_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___RequestType_iE_Extensions__item__extensionValue._const_tab = ____RequestType_iE_Extensions__item__extensionValue_tab
     ___RequestType_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___RequestType_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __RequestType_iE_Extensions__item_._cont = ASN1Dict([
@@ -13533,11 +14177,15 @@ class PCAP_IEs:
     ___GANSS_SBAS_IDs_iE_Extensions__item__id._const_tab_at = None
     ___GANSS_SBAS_IDs_iE_Extensions__item__id._const_tab_id = u'id'
     ___GANSS_SBAS_IDs_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___GANSS_SBAS_IDs_iE_Extensions__item__criticality._const_tab = ____GANSS_SBAS_IDs_iE_Extensions__item__id_tab
+    ____GANSS_SBAS_IDs_iE_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____GANSS_SBAS_IDs_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___GANSS_SBAS_IDs_iE_Extensions__item__criticality._const_tab = ____GANSS_SBAS_IDs_iE_Extensions__item__criticality_tab
     ___GANSS_SBAS_IDs_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___GANSS_SBAS_IDs_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___GANSS_SBAS_IDs_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___GANSS_SBAS_IDs_iE_Extensions__item__extensionValue._const_tab = ____GANSS_SBAS_IDs_iE_Extensions__item__id_tab
+    ____GANSS_SBAS_IDs_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____GANSS_SBAS_IDs_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___GANSS_SBAS_IDs_iE_Extensions__item__extensionValue._const_tab = ____GANSS_SBAS_IDs_iE_Extensions__item__extensionValue_tab
     ___GANSS_SBAS_IDs_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___GANSS_SBAS_IDs_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __GANSS_SBAS_IDs_iE_Extensions__item_._cont = ASN1Dict([
@@ -13571,11 +14219,15 @@ class PCAP_IEs:
     ___GANSS_Signal_IDs_iE_Extensions__item__id._const_tab_at = None
     ___GANSS_Signal_IDs_iE_Extensions__item__id._const_tab_id = u'id'
     ___GANSS_Signal_IDs_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___GANSS_Signal_IDs_iE_Extensions__item__criticality._const_tab = ____GANSS_Signal_IDs_iE_Extensions__item__id_tab
+    ____GANSS_Signal_IDs_iE_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____GANSS_Signal_IDs_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___GANSS_Signal_IDs_iE_Extensions__item__criticality._const_tab = ____GANSS_Signal_IDs_iE_Extensions__item__criticality_tab
     ___GANSS_Signal_IDs_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___GANSS_Signal_IDs_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___GANSS_Signal_IDs_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___GANSS_Signal_IDs_iE_Extensions__item__extensionValue._const_tab = ____GANSS_Signal_IDs_iE_Extensions__item__id_tab
+    ____GANSS_Signal_IDs_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____GANSS_Signal_IDs_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___GANSS_Signal_IDs_iE_Extensions__item__extensionValue._const_tab = ____GANSS_Signal_IDs_iE_Extensions__item__extensionValue_tab
     ___GANSS_Signal_IDs_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___GANSS_Signal_IDs_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __GANSS_Signal_IDs_iE_Extensions__item_._cont = ASN1Dict([
@@ -13612,11 +14264,15 @@ class PCAP_IEs:
     ___UTDOAPositioning_iE_Extensions__item__id._const_tab_at = None
     ___UTDOAPositioning_iE_Extensions__item__id._const_tab_id = u'id'
     ___UTDOAPositioning_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___UTDOAPositioning_iE_Extensions__item__criticality._const_tab = ____UTDOAPositioning_iE_Extensions__item__id_tab
+    ____UTDOAPositioning_iE_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____UTDOAPositioning_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___UTDOAPositioning_iE_Extensions__item__criticality._const_tab = ____UTDOAPositioning_iE_Extensions__item__criticality_tab
     ___UTDOAPositioning_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___UTDOAPositioning_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___UTDOAPositioning_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___UTDOAPositioning_iE_Extensions__item__extensionValue._const_tab = ____UTDOAPositioning_iE_Extensions__item__id_tab
+    ____UTDOAPositioning_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____UTDOAPositioning_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___UTDOAPositioning_iE_Extensions__item__extensionValue._const_tab = ____UTDOAPositioning_iE_Extensions__item__extensionValue_tab
     ___UTDOAPositioning_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___UTDOAPositioning_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __UTDOAPositioning_iE_Extensions__item_._cont = ASN1Dict([
@@ -13664,11 +14320,15 @@ class PCAP_IEs:
     ___GPSPositioning_iE_Extensions__item__id._const_tab_at = None
     ___GPSPositioning_iE_Extensions__item__id._const_tab_id = u'id'
     ___GPSPositioning_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___GPSPositioning_iE_Extensions__item__criticality._const_tab = ____GPSPositioning_iE_Extensions__item__id_tab
+    ____GPSPositioning_iE_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____GPSPositioning_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___GPSPositioning_iE_Extensions__item__criticality._const_tab = ____GPSPositioning_iE_Extensions__item__criticality_tab
     ___GPSPositioning_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___GPSPositioning_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___GPSPositioning_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___GPSPositioning_iE_Extensions__item__extensionValue._const_tab = ____GPSPositioning_iE_Extensions__item__id_tab
+    ____GPSPositioning_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____GPSPositioning_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___GPSPositioning_iE_Extensions__item__extensionValue._const_tab = ____GPSPositioning_iE_Extensions__item__extensionValue_tab
     ___GPSPositioning_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___GPSPositioning_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __GPSPositioning_iE_Extensions__item_._cont = ASN1Dict([
@@ -13748,11 +14408,15 @@ class PCAP_IEs:
     ___GANSSPositioning_iE_Extensions__item__id._const_tab_at = None
     ___GANSSPositioning_iE_Extensions__item__id._const_tab_id = u'id'
     ___GANSSPositioning_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___GANSSPositioning_iE_Extensions__item__criticality._const_tab = ____GANSSPositioning_iE_Extensions__item__id_tab
+    ____GANSSPositioning_iE_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____GANSSPositioning_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___GANSSPositioning_iE_Extensions__item__criticality._const_tab = ____GANSSPositioning_iE_Extensions__item__criticality_tab
     ___GANSSPositioning_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___GANSSPositioning_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___GANSSPositioning_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___GANSSPositioning_iE_Extensions__item__extensionValue._const_tab = ____GANSSPositioning_iE_Extensions__item__id_tab
+    ____GANSSPositioning_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____GANSSPositioning_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___GANSSPositioning_iE_Extensions__item__extensionValue._const_tab = ____GANSSPositioning_iE_Extensions__item__extensionValue_tab
     ___GANSSPositioning_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___GANSSPositioning_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __GANSSPositioning_iE_Extensions__item_._cont = ASN1Dict([
@@ -13845,11 +14509,15 @@ class PCAP_IEs:
     ___OTDOAAssistanceData_iE_Extensions__item__id._const_tab_at = None
     ___OTDOAAssistanceData_iE_Extensions__item__id._const_tab_id = u'id'
     ___OTDOAAssistanceData_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___OTDOAAssistanceData_iE_Extensions__item__criticality._const_tab = ____OTDOAAssistanceData_iE_Extensions__item__id_tab
+    ____OTDOAAssistanceData_iE_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____OTDOAAssistanceData_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___OTDOAAssistanceData_iE_Extensions__item__criticality._const_tab = ____OTDOAAssistanceData_iE_Extensions__item__criticality_tab
     ___OTDOAAssistanceData_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___OTDOAAssistanceData_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___OTDOAAssistanceData_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___OTDOAAssistanceData_iE_Extensions__item__extensionValue._const_tab = ____OTDOAAssistanceData_iE_Extensions__item__id_tab
+    ____OTDOAAssistanceData_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____OTDOAAssistanceData_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___OTDOAAssistanceData_iE_Extensions__item__extensionValue._const_tab = ____OTDOAAssistanceData_iE_Extensions__item__extensionValue_tab
     ___OTDOAAssistanceData_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___OTDOAAssistanceData_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __OTDOAAssistanceData_iE_Extensions__item_._cont = ASN1Dict([
@@ -13883,11 +14551,15 @@ class PCAP_IEs:
     ___UE_Positioning_OTDOA_AssistanceData_iE_Extensions__item__id._const_tab_at = None
     ___UE_Positioning_OTDOA_AssistanceData_iE_Extensions__item__id._const_tab_id = u'id'
     ___UE_Positioning_OTDOA_AssistanceData_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___UE_Positioning_OTDOA_AssistanceData_iE_Extensions__item__criticality._const_tab = ____UE_Positioning_OTDOA_AssistanceData_iE_Extensions__item__id_tab
+    ____UE_Positioning_OTDOA_AssistanceData_iE_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____UE_Positioning_OTDOA_AssistanceData_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___UE_Positioning_OTDOA_AssistanceData_iE_Extensions__item__criticality._const_tab = ____UE_Positioning_OTDOA_AssistanceData_iE_Extensions__item__criticality_tab
     ___UE_Positioning_OTDOA_AssistanceData_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___UE_Positioning_OTDOA_AssistanceData_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___UE_Positioning_OTDOA_AssistanceData_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___UE_Positioning_OTDOA_AssistanceData_iE_Extensions__item__extensionValue._const_tab = ____UE_Positioning_OTDOA_AssistanceData_iE_Extensions__item__id_tab
+    ____UE_Positioning_OTDOA_AssistanceData_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____UE_Positioning_OTDOA_AssistanceData_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___UE_Positioning_OTDOA_AssistanceData_iE_Extensions__item__extensionValue._const_tab = ____UE_Positioning_OTDOA_AssistanceData_iE_Extensions__item__extensionValue_tab
     ___UE_Positioning_OTDOA_AssistanceData_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___UE_Positioning_OTDOA_AssistanceData_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __UE_Positioning_OTDOA_AssistanceData_iE_Extensions__item_._cont = ASN1Dict([
@@ -14043,11 +14715,15 @@ class PCAP_IEs:
     ___UE_Positioning_IPDL_Parameters_iE_Extensions__item__id._const_tab_at = None
     ___UE_Positioning_IPDL_Parameters_iE_Extensions__item__id._const_tab_id = u'id'
     ___UE_Positioning_IPDL_Parameters_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___UE_Positioning_IPDL_Parameters_iE_Extensions__item__criticality._const_tab = ____UE_Positioning_IPDL_Parameters_iE_Extensions__item__id_tab
+    ____UE_Positioning_IPDL_Parameters_iE_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____UE_Positioning_IPDL_Parameters_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___UE_Positioning_IPDL_Parameters_iE_Extensions__item__criticality._const_tab = ____UE_Positioning_IPDL_Parameters_iE_Extensions__item__criticality_tab
     ___UE_Positioning_IPDL_Parameters_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___UE_Positioning_IPDL_Parameters_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___UE_Positioning_IPDL_Parameters_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___UE_Positioning_IPDL_Parameters_iE_Extensions__item__extensionValue._const_tab = ____UE_Positioning_IPDL_Parameters_iE_Extensions__item__id_tab
+    ____UE_Positioning_IPDL_Parameters_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____UE_Positioning_IPDL_Parameters_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___UE_Positioning_IPDL_Parameters_iE_Extensions__item__extensionValue._const_tab = ____UE_Positioning_IPDL_Parameters_iE_Extensions__item__extensionValue_tab
     ___UE_Positioning_IPDL_Parameters_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___UE_Positioning_IPDL_Parameters_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __UE_Positioning_IPDL_Parameters_iE_Extensions__item_._cont = ASN1Dict([
@@ -14096,11 +14772,15 @@ class PCAP_IEs:
     ___BurstModeParameters_iE_Extensions__item__id._const_tab_at = None
     ___BurstModeParameters_iE_Extensions__item__id._const_tab_id = u'id'
     ___BurstModeParameters_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___BurstModeParameters_iE_Extensions__item__criticality._const_tab = ____BurstModeParameters_iE_Extensions__item__id_tab
+    ____BurstModeParameters_iE_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____BurstModeParameters_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___BurstModeParameters_iE_Extensions__item__criticality._const_tab = ____BurstModeParameters_iE_Extensions__item__criticality_tab
     ___BurstModeParameters_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___BurstModeParameters_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___BurstModeParameters_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___BurstModeParameters_iE_Extensions__item__extensionValue._const_tab = ____BurstModeParameters_iE_Extensions__item__id_tab
+    ____BurstModeParameters_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____BurstModeParameters_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___BurstModeParameters_iE_Extensions__item__extensionValue._const_tab = ____BurstModeParameters_iE_Extensions__item__extensionValue_tab
     ___BurstModeParameters_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___BurstModeParameters_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __BurstModeParameters_iE_Extensions__item_._cont = ASN1Dict([
@@ -14241,11 +14921,15 @@ class PCAP_IEs:
     ___SFN_SFN_RelTimeDifference1_iE_Extensions__item__id._const_tab_at = None
     ___SFN_SFN_RelTimeDifference1_iE_Extensions__item__id._const_tab_id = u'id'
     ___SFN_SFN_RelTimeDifference1_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___SFN_SFN_RelTimeDifference1_iE_Extensions__item__criticality._const_tab = ____SFN_SFN_RelTimeDifference1_iE_Extensions__item__id_tab
+    ____SFN_SFN_RelTimeDifference1_iE_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____SFN_SFN_RelTimeDifference1_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___SFN_SFN_RelTimeDifference1_iE_Extensions__item__criticality._const_tab = ____SFN_SFN_RelTimeDifference1_iE_Extensions__item__criticality_tab
     ___SFN_SFN_RelTimeDifference1_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___SFN_SFN_RelTimeDifference1_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___SFN_SFN_RelTimeDifference1_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___SFN_SFN_RelTimeDifference1_iE_Extensions__item__extensionValue._const_tab = ____SFN_SFN_RelTimeDifference1_iE_Extensions__item__id_tab
+    ____SFN_SFN_RelTimeDifference1_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____SFN_SFN_RelTimeDifference1_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___SFN_SFN_RelTimeDifference1_iE_Extensions__item__extensionValue._const_tab = ____SFN_SFN_RelTimeDifference1_iE_Extensions__item__extensionValue_tab
     ___SFN_SFN_RelTimeDifference1_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___SFN_SFN_RelTimeDifference1_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __SFN_SFN_RelTimeDifference1_iE_Extensions__item_._cont = ASN1Dict([
@@ -14304,11 +14988,15 @@ class PCAP_IEs:
     ___UTDOA_Group_iE_Extensions__item__id._const_tab_at = None
     ___UTDOA_Group_iE_Extensions__item__id._const_tab_id = u'id'
     ___UTDOA_Group_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___UTDOA_Group_iE_Extensions__item__criticality._const_tab = ____UTDOA_Group_iE_Extensions__item__id_tab
+    ____UTDOA_Group_iE_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____UTDOA_Group_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___UTDOA_Group_iE_Extensions__item__criticality._const_tab = ____UTDOA_Group_iE_Extensions__item__criticality_tab
     ___UTDOA_Group_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___UTDOA_Group_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___UTDOA_Group_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___UTDOA_Group_iE_Extensions__item__extensionValue._const_tab = ____UTDOA_Group_iE_Extensions__item__id_tab
+    ____UTDOA_Group_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____UTDOA_Group_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___UTDOA_Group_iE_Extensions__item__extensionValue._const_tab = ____UTDOA_Group_iE_Extensions__item__extensionValue_tab
     ___UTDOA_Group_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___UTDOA_Group_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __UTDOA_Group_iE_Extensions__item_._cont = ASN1Dict([
@@ -14350,11 +15038,15 @@ class PCAP_IEs:
     ___FrequencyInfo_iE_Extensions__item__id._const_tab_at = None
     ___FrequencyInfo_iE_Extensions__item__id._const_tab_id = u'id'
     ___FrequencyInfo_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___FrequencyInfo_iE_Extensions__item__criticality._const_tab = ____FrequencyInfo_iE_Extensions__item__id_tab
+    ____FrequencyInfo_iE_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____FrequencyInfo_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___FrequencyInfo_iE_Extensions__item__criticality._const_tab = ____FrequencyInfo_iE_Extensions__item__criticality_tab
     ___FrequencyInfo_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___FrequencyInfo_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___FrequencyInfo_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___FrequencyInfo_iE_Extensions__item__extensionValue._const_tab = ____FrequencyInfo_iE_Extensions__item__id_tab
+    ____FrequencyInfo_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____FrequencyInfo_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___FrequencyInfo_iE_Extensions__item__extensionValue._const_tab = ____FrequencyInfo_iE_Extensions__item__extensionValue_tab
     ___FrequencyInfo_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___FrequencyInfo_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __FrequencyInfo_iE_Extensions__item_._cont = ASN1Dict([
@@ -14388,11 +15080,15 @@ class PCAP_IEs:
     ___FrequencyInfoFDD_iE_Extensions__item__id._const_tab_at = None
     ___FrequencyInfoFDD_iE_Extensions__item__id._const_tab_id = u'id'
     ___FrequencyInfoFDD_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___FrequencyInfoFDD_iE_Extensions__item__criticality._const_tab = ____FrequencyInfoFDD_iE_Extensions__item__id_tab
+    ____FrequencyInfoFDD_iE_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____FrequencyInfoFDD_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___FrequencyInfoFDD_iE_Extensions__item__criticality._const_tab = ____FrequencyInfoFDD_iE_Extensions__item__criticality_tab
     ___FrequencyInfoFDD_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___FrequencyInfoFDD_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___FrequencyInfoFDD_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___FrequencyInfoFDD_iE_Extensions__item__extensionValue._const_tab = ____FrequencyInfoFDD_iE_Extensions__item__id_tab
+    ____FrequencyInfoFDD_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____FrequencyInfoFDD_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___FrequencyInfoFDD_iE_Extensions__item__extensionValue._const_tab = ____FrequencyInfoFDD_iE_Extensions__item__extensionValue_tab
     ___FrequencyInfoFDD_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___FrequencyInfoFDD_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __FrequencyInfoFDD_iE_Extensions__item_._cont = ASN1Dict([
@@ -14426,11 +15122,15 @@ class PCAP_IEs:
     ___FrequencyInfoTDD_iE_Extensions__item__id._const_tab_at = None
     ___FrequencyInfoTDD_iE_Extensions__item__id._const_tab_id = u'id'
     ___FrequencyInfoTDD_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___FrequencyInfoTDD_iE_Extensions__item__criticality._const_tab = ____FrequencyInfoTDD_iE_Extensions__item__id_tab
+    ____FrequencyInfoTDD_iE_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____FrequencyInfoTDD_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___FrequencyInfoTDD_iE_Extensions__item__criticality._const_tab = ____FrequencyInfoTDD_iE_Extensions__item__criticality_tab
     ___FrequencyInfoTDD_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___FrequencyInfoTDD_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___FrequencyInfoTDD_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___FrequencyInfoTDD_iE_Extensions__item__extensionValue._const_tab = ____FrequencyInfoTDD_iE_Extensions__item__id_tab
+    ____FrequencyInfoTDD_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____FrequencyInfoTDD_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___FrequencyInfoTDD_iE_Extensions__item__extensionValue._const_tab = ____FrequencyInfoTDD_iE_Extensions__item__extensionValue_tab
     ___FrequencyInfoTDD_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___FrequencyInfoTDD_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __FrequencyInfoTDD_iE_Extensions__item_._cont = ASN1Dict([
@@ -14476,11 +15176,15 @@ class PCAP_IEs:
     ___UTDOA_CELLDCH_iE_Extensions__item__id._const_tab_at = None
     ___UTDOA_CELLDCH_iE_Extensions__item__id._const_tab_id = u'id'
     ___UTDOA_CELLDCH_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___UTDOA_CELLDCH_iE_Extensions__item__criticality._const_tab = ____UTDOA_CELLDCH_iE_Extensions__item__id_tab
+    ____UTDOA_CELLDCH_iE_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____UTDOA_CELLDCH_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___UTDOA_CELLDCH_iE_Extensions__item__criticality._const_tab = ____UTDOA_CELLDCH_iE_Extensions__item__criticality_tab
     ___UTDOA_CELLDCH_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___UTDOA_CELLDCH_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___UTDOA_CELLDCH_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___UTDOA_CELLDCH_iE_Extensions__item__extensionValue._const_tab = ____UTDOA_CELLDCH_iE_Extensions__item__id_tab
+    ____UTDOA_CELLDCH_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____UTDOA_CELLDCH_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___UTDOA_CELLDCH_iE_Extensions__item__extensionValue._const_tab = ____UTDOA_CELLDCH_iE_Extensions__item__extensionValue_tab
     ___UTDOA_CELLDCH_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___UTDOA_CELLDCH_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __UTDOA_CELLDCH_iE_Extensions__item_._cont = ASN1Dict([
@@ -14520,11 +15224,15 @@ class PCAP_IEs:
     ____UL_DPCHInfo_fdd_iE_Extensions__item__id._const_tab_at = None
     ____UL_DPCHInfo_fdd_iE_Extensions__item__id._const_tab_id = u'id'
     ____UL_DPCHInfo_fdd_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ____UL_DPCHInfo_fdd_iE_Extensions__item__criticality._const_tab = _____UL_DPCHInfo_fdd_iE_Extensions__item__id_tab
+    _____UL_DPCHInfo_fdd_iE_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    _____UL_DPCHInfo_fdd_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ____UL_DPCHInfo_fdd_iE_Extensions__item__criticality._const_tab = _____UL_DPCHInfo_fdd_iE_Extensions__item__criticality_tab
     ____UL_DPCHInfo_fdd_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ____UL_DPCHInfo_fdd_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ____UL_DPCHInfo_fdd_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ____UL_DPCHInfo_fdd_iE_Extensions__item__extensionValue._const_tab = _____UL_DPCHInfo_fdd_iE_Extensions__item__id_tab
+    _____UL_DPCHInfo_fdd_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    _____UL_DPCHInfo_fdd_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ____UL_DPCHInfo_fdd_iE_Extensions__item__extensionValue._const_tab = _____UL_DPCHInfo_fdd_iE_Extensions__item__extensionValue_tab
     ____UL_DPCHInfo_fdd_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ____UL_DPCHInfo_fdd_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     ___UL_DPCHInfo_fdd_iE_Extensions__item_._cont = ASN1Dict([
@@ -14556,15 +15264,21 @@ class PCAP_IEs:
     __UL_DPCHInfo_tdd_iE_Extensions = SEQ_OF(name=u'iE-Extensions', mode=MODE_TYPE, tag=(9, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PCAP-Containers', 'ProtocolExtensionContainer')), opt=True)
     ___UL_DPCHInfo_tdd_iE_Extensions__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('PCAP-Containers', 'ProtocolExtensionField')))
     ____UL_DPCHInfo_tdd_iE_Extensions__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'id']))
-    ____UL_DPCHInfo_tdd_iE_Extensions__item__id._const_tab = _____UL_DPCHInfo_fdd_iE_Extensions__item__id_tab
+    _____UL_DPCHInfo_tdd_iE_Extensions__item__id_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    _____UL_DPCHInfo_tdd_iE_Extensions__item__id_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ____UL_DPCHInfo_tdd_iE_Extensions__item__id._const_tab = _____UL_DPCHInfo_tdd_iE_Extensions__item__id_tab
     ____UL_DPCHInfo_tdd_iE_Extensions__item__id._const_tab_at = None
     ____UL_DPCHInfo_tdd_iE_Extensions__item__id._const_tab_id = u'id'
     ____UL_DPCHInfo_tdd_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ____UL_DPCHInfo_tdd_iE_Extensions__item__criticality._const_tab = _____UL_DPCHInfo_fdd_iE_Extensions__item__id_tab
+    _____UL_DPCHInfo_tdd_iE_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    _____UL_DPCHInfo_tdd_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ____UL_DPCHInfo_tdd_iE_Extensions__item__criticality._const_tab = _____UL_DPCHInfo_tdd_iE_Extensions__item__criticality_tab
     ____UL_DPCHInfo_tdd_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ____UL_DPCHInfo_tdd_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ____UL_DPCHInfo_tdd_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ____UL_DPCHInfo_tdd_iE_Extensions__item__extensionValue._const_tab = _____UL_DPCHInfo_fdd_iE_Extensions__item__id_tab
+    _____UL_DPCHInfo_tdd_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    _____UL_DPCHInfo_tdd_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ____UL_DPCHInfo_tdd_iE_Extensions__item__extensionValue._const_tab = _____UL_DPCHInfo_tdd_iE_Extensions__item__extensionValue_tab
     ____UL_DPCHInfo_tdd_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ____UL_DPCHInfo_tdd_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     ___UL_DPCHInfo_tdd_iE_Extensions__item_._cont = ASN1Dict([
@@ -14615,11 +15329,15 @@ class PCAP_IEs:
     ___Compressed_Mode_Assistance_Data_iE_Extensions__item__id._const_tab_at = None
     ___Compressed_Mode_Assistance_Data_iE_Extensions__item__id._const_tab_id = u'id'
     ___Compressed_Mode_Assistance_Data_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___Compressed_Mode_Assistance_Data_iE_Extensions__item__criticality._const_tab = ____Compressed_Mode_Assistance_Data_iE_Extensions__item__id_tab
+    ____Compressed_Mode_Assistance_Data_iE_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____Compressed_Mode_Assistance_Data_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___Compressed_Mode_Assistance_Data_iE_Extensions__item__criticality._const_tab = ____Compressed_Mode_Assistance_Data_iE_Extensions__item__criticality_tab
     ___Compressed_Mode_Assistance_Data_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___Compressed_Mode_Assistance_Data_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___Compressed_Mode_Assistance_Data_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___Compressed_Mode_Assistance_Data_iE_Extensions__item__extensionValue._const_tab = ____Compressed_Mode_Assistance_Data_iE_Extensions__item__id_tab
+    ____Compressed_Mode_Assistance_Data_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____Compressed_Mode_Assistance_Data_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___Compressed_Mode_Assistance_Data_iE_Extensions__item__extensionValue._const_tab = ____Compressed_Mode_Assistance_Data_iE_Extensions__item__extensionValue_tab
     ___Compressed_Mode_Assistance_Data_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___Compressed_Mode_Assistance_Data_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __Compressed_Mode_Assistance_Data_iE_Extensions__item_._cont = ASN1Dict([
@@ -14655,11 +15373,15 @@ class PCAP_IEs:
     ___DL_InformationFDD_iE_Extensions__item__id._const_tab_at = None
     ___DL_InformationFDD_iE_Extensions__item__id._const_tab_id = u'id'
     ___DL_InformationFDD_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___DL_InformationFDD_iE_Extensions__item__criticality._const_tab = ____DL_InformationFDD_iE_Extensions__item__id_tab
+    ____DL_InformationFDD_iE_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____DL_InformationFDD_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___DL_InformationFDD_iE_Extensions__item__criticality._const_tab = ____DL_InformationFDD_iE_Extensions__item__criticality_tab
     ___DL_InformationFDD_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___DL_InformationFDD_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___DL_InformationFDD_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___DL_InformationFDD_iE_Extensions__item__extensionValue._const_tab = ____DL_InformationFDD_iE_Extensions__item__id_tab
+    ____DL_InformationFDD_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____DL_InformationFDD_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___DL_InformationFDD_iE_Extensions__item__extensionValue._const_tab = ____DL_InformationFDD_iE_Extensions__item__extensionValue_tab
     ___DL_InformationFDD_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___DL_InformationFDD_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __DL_InformationFDD_iE_Extensions__item_._cont = ASN1Dict([
@@ -14696,11 +15418,15 @@ class PCAP_IEs:
     ___UL_InformationFDD_iE_Extensions__item__id._const_tab_at = None
     ___UL_InformationFDD_iE_Extensions__item__id._const_tab_id = u'id'
     ___UL_InformationFDD_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___UL_InformationFDD_iE_Extensions__item__criticality._const_tab = ____UL_InformationFDD_iE_Extensions__item__id_tab
+    ____UL_InformationFDD_iE_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____UL_InformationFDD_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___UL_InformationFDD_iE_Extensions__item__criticality._const_tab = ____UL_InformationFDD_iE_Extensions__item__criticality_tab
     ___UL_InformationFDD_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___UL_InformationFDD_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___UL_InformationFDD_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___UL_InformationFDD_iE_Extensions__item__extensionValue._const_tab = ____UL_InformationFDD_iE_Extensions__item__id_tab
+    ____UL_InformationFDD_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____UL_InformationFDD_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___UL_InformationFDD_iE_Extensions__item__extensionValue._const_tab = ____UL_InformationFDD_iE_Extensions__item__extensionValue_tab
     ___UL_InformationFDD_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___UL_InformationFDD_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __UL_InformationFDD_iE_Extensions__item_._cont = ASN1Dict([
@@ -14742,11 +15468,15 @@ class PCAP_IEs:
     ____Transmission_Gap_Pattern_Sequence_Information__item__iE_Extensions__item__id._const_tab_at = None
     ____Transmission_Gap_Pattern_Sequence_Information__item__iE_Extensions__item__id._const_tab_id = u'id'
     ____Transmission_Gap_Pattern_Sequence_Information__item__iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ____Transmission_Gap_Pattern_Sequence_Information__item__iE_Extensions__item__criticality._const_tab = _____Transmission_Gap_Pattern_Sequence_Information__item__iE_Extensions__item__id_tab
+    _____Transmission_Gap_Pattern_Sequence_Information__item__iE_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    _____Transmission_Gap_Pattern_Sequence_Information__item__iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ____Transmission_Gap_Pattern_Sequence_Information__item__iE_Extensions__item__criticality._const_tab = _____Transmission_Gap_Pattern_Sequence_Information__item__iE_Extensions__item__criticality_tab
     ____Transmission_Gap_Pattern_Sequence_Information__item__iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ____Transmission_Gap_Pattern_Sequence_Information__item__iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ____Transmission_Gap_Pattern_Sequence_Information__item__iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ____Transmission_Gap_Pattern_Sequence_Information__item__iE_Extensions__item__extensionValue._const_tab = _____Transmission_Gap_Pattern_Sequence_Information__item__iE_Extensions__item__id_tab
+    _____Transmission_Gap_Pattern_Sequence_Information__item__iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    _____Transmission_Gap_Pattern_Sequence_Information__item__iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ____Transmission_Gap_Pattern_Sequence_Information__item__iE_Extensions__item__extensionValue._const_tab = _____Transmission_Gap_Pattern_Sequence_Information__item__iE_Extensions__item__extensionValue_tab
     ____Transmission_Gap_Pattern_Sequence_Information__item__iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ____Transmission_Gap_Pattern_Sequence_Information__item__iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     ___Transmission_Gap_Pattern_Sequence_Information__item__iE_Extensions__item_._cont = ASN1Dict([
@@ -14817,11 +15547,15 @@ class PCAP_IEs:
     ___Active_Pattern_Sequence_Information_iE_Extensions__item__id._const_tab_at = None
     ___Active_Pattern_Sequence_Information_iE_Extensions__item__id._const_tab_id = u'id'
     ___Active_Pattern_Sequence_Information_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___Active_Pattern_Sequence_Information_iE_Extensions__item__criticality._const_tab = ____Active_Pattern_Sequence_Information_iE_Extensions__item__id_tab
+    ____Active_Pattern_Sequence_Information_iE_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____Active_Pattern_Sequence_Information_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___Active_Pattern_Sequence_Information_iE_Extensions__item__criticality._const_tab = ____Active_Pattern_Sequence_Information_iE_Extensions__item__criticality_tab
     ___Active_Pattern_Sequence_Information_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___Active_Pattern_Sequence_Information_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___Active_Pattern_Sequence_Information_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___Active_Pattern_Sequence_Information_iE_Extensions__item__extensionValue._const_tab = ____Active_Pattern_Sequence_Information_iE_Extensions__item__id_tab
+    ____Active_Pattern_Sequence_Information_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____Active_Pattern_Sequence_Information_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___Active_Pattern_Sequence_Information_iE_Extensions__item__extensionValue._const_tab = ____Active_Pattern_Sequence_Information_iE_Extensions__item__extensionValue_tab
     ___Active_Pattern_Sequence_Information_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___Active_Pattern_Sequence_Information_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __Active_Pattern_Sequence_Information_iE_Extensions__item_._cont = ASN1Dict([
@@ -14858,11 +15592,15 @@ class PCAP_IEs:
     ____Transmission_Gap_Pattern_Sequence_Status_List__item__iE_Extensions__item__id._const_tab_at = None
     ____Transmission_Gap_Pattern_Sequence_Status_List__item__iE_Extensions__item__id._const_tab_id = u'id'
     ____Transmission_Gap_Pattern_Sequence_Status_List__item__iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ____Transmission_Gap_Pattern_Sequence_Status_List__item__iE_Extensions__item__criticality._const_tab = _____Transmission_Gap_Pattern_Sequence_Status_List__item__iE_Extensions__item__id_tab
+    _____Transmission_Gap_Pattern_Sequence_Status_List__item__iE_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    _____Transmission_Gap_Pattern_Sequence_Status_List__item__iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ____Transmission_Gap_Pattern_Sequence_Status_List__item__iE_Extensions__item__criticality._const_tab = _____Transmission_Gap_Pattern_Sequence_Status_List__item__iE_Extensions__item__criticality_tab
     ____Transmission_Gap_Pattern_Sequence_Status_List__item__iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ____Transmission_Gap_Pattern_Sequence_Status_List__item__iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ____Transmission_Gap_Pattern_Sequence_Status_List__item__iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ____Transmission_Gap_Pattern_Sequence_Status_List__item__iE_Extensions__item__extensionValue._const_tab = _____Transmission_Gap_Pattern_Sequence_Status_List__item__iE_Extensions__item__id_tab
+    _____Transmission_Gap_Pattern_Sequence_Status_List__item__iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    _____Transmission_Gap_Pattern_Sequence_Status_List__item__iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ____Transmission_Gap_Pattern_Sequence_Status_List__item__iE_Extensions__item__extensionValue._const_tab = _____Transmission_Gap_Pattern_Sequence_Status_List__item__iE_Extensions__item__extensionValue_tab
     ____Transmission_Gap_Pattern_Sequence_Status_List__item__iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ____Transmission_Gap_Pattern_Sequence_Status_List__item__iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     ___Transmission_Gap_Pattern_Sequence_Status_List__item__iE_Extensions__item_._cont = ASN1Dict([
@@ -14900,11 +15638,15 @@ class PCAP_IEs:
     ___DCH_Information_iE_Extensions__item__id._const_tab_at = None
     ___DCH_Information_iE_Extensions__item__id._const_tab_id = u'id'
     ___DCH_Information_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___DCH_Information_iE_Extensions__item__criticality._const_tab = ____DCH_Information_iE_Extensions__item__id_tab
+    ____DCH_Information_iE_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____DCH_Information_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___DCH_Information_iE_Extensions__item__criticality._const_tab = ____DCH_Information_iE_Extensions__item__criticality_tab
     ___DCH_Information_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___DCH_Information_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___DCH_Information_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___DCH_Information_iE_Extensions__item__extensionValue._const_tab = ____DCH_Information_iE_Extensions__item__id_tab
+    ____DCH_Information_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____DCH_Information_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___DCH_Information_iE_Extensions__item__extensionValue._const_tab = ____DCH_Information_iE_Extensions__item__extensionValue_tab
     ___DCH_Information_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___DCH_Information_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __DCH_Information_iE_Extensions__item_._cont = ASN1Dict([
@@ -14945,11 +15687,15 @@ class PCAP_IEs:
     ___UL_TrCHInfo_iE_Extensions__item__id._const_tab_at = None
     ___UL_TrCHInfo_iE_Extensions__item__id._const_tab_id = u'id'
     ___UL_TrCHInfo_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___UL_TrCHInfo_iE_Extensions__item__criticality._const_tab = ____UL_TrCHInfo_iE_Extensions__item__id_tab
+    ____UL_TrCHInfo_iE_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____UL_TrCHInfo_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___UL_TrCHInfo_iE_Extensions__item__criticality._const_tab = ____UL_TrCHInfo_iE_Extensions__item__criticality_tab
     ___UL_TrCHInfo_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___UL_TrCHInfo_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___UL_TrCHInfo_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___UL_TrCHInfo_iE_Extensions__item__extensionValue._const_tab = ____UL_TrCHInfo_iE_Extensions__item__id_tab
+    ____UL_TrCHInfo_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____UL_TrCHInfo_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___UL_TrCHInfo_iE_Extensions__item__extensionValue._const_tab = ____UL_TrCHInfo_iE_Extensions__item__extensionValue_tab
     ___UL_TrCHInfo_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___UL_TrCHInfo_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __UL_TrCHInfo_iE_Extensions__item_._cont = ASN1Dict([
@@ -14992,11 +15738,15 @@ class PCAP_IEs:
     ___E_DPCH_Information_iE_Extensions__item__id._const_tab_at = None
     ___E_DPCH_Information_iE_Extensions__item__id._const_tab_id = u'id'
     ___E_DPCH_Information_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___E_DPCH_Information_iE_Extensions__item__criticality._const_tab = ____E_DPCH_Information_iE_Extensions__item__id_tab
+    ____E_DPCH_Information_iE_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____E_DPCH_Information_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___E_DPCH_Information_iE_Extensions__item__criticality._const_tab = ____E_DPCH_Information_iE_Extensions__item__criticality_tab
     ___E_DPCH_Information_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___E_DPCH_Information_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___E_DPCH_Information_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___E_DPCH_Information_iE_Extensions__item__extensionValue._const_tab = ____E_DPCH_Information_iE_Extensions__item__id_tab
+    ____E_DPCH_Information_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____E_DPCH_Information_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___E_DPCH_Information_iE_Extensions__item__extensionValue._const_tab = ____E_DPCH_Information_iE_Extensions__item__extensionValue_tab
     ___E_DPCH_Information_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___E_DPCH_Information_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __E_DPCH_Information_iE_Extensions__item_._cont = ASN1Dict([
@@ -15039,11 +15789,15 @@ class PCAP_IEs:
     ___E_TFCS_Information_iE_Extensions__item__id._const_tab_at = None
     ___E_TFCS_Information_iE_Extensions__item__id._const_tab_id = u'id'
     ___E_TFCS_Information_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___E_TFCS_Information_iE_Extensions__item__criticality._const_tab = ____E_TFCS_Information_iE_Extensions__item__id_tab
+    ____E_TFCS_Information_iE_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____E_TFCS_Information_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___E_TFCS_Information_iE_Extensions__item__criticality._const_tab = ____E_TFCS_Information_iE_Extensions__item__criticality_tab
     ___E_TFCS_Information_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___E_TFCS_Information_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___E_TFCS_Information_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___E_TFCS_Information_iE_Extensions__item__extensionValue._const_tab = ____E_TFCS_Information_iE_Extensions__item__id_tab
+    ____E_TFCS_Information_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____E_TFCS_Information_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___E_TFCS_Information_iE_Extensions__item__extensionValue._const_tab = ____E_TFCS_Information_iE_Extensions__item__extensionValue_tab
     ___E_TFCS_Information_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___E_TFCS_Information_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __E_TFCS_Information_iE_Extensions__item_._cont = ASN1Dict([
@@ -15088,11 +15842,15 @@ class PCAP_IEs:
     ___Reference_E_TFCI_Information_Item_iE_Extensions__item__id._const_tab_at = None
     ___Reference_E_TFCI_Information_Item_iE_Extensions__item__id._const_tab_id = u'id'
     ___Reference_E_TFCI_Information_Item_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___Reference_E_TFCI_Information_Item_iE_Extensions__item__criticality._const_tab = ____Reference_E_TFCI_Information_Item_iE_Extensions__item__id_tab
+    ____Reference_E_TFCI_Information_Item_iE_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____Reference_E_TFCI_Information_Item_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___Reference_E_TFCI_Information_Item_iE_Extensions__item__criticality._const_tab = ____Reference_E_TFCI_Information_Item_iE_Extensions__item__criticality_tab
     ___Reference_E_TFCI_Information_Item_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___Reference_E_TFCI_Information_Item_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___Reference_E_TFCI_Information_Item_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___Reference_E_TFCI_Information_Item_iE_Extensions__item__extensionValue._const_tab = ____Reference_E_TFCI_Information_Item_iE_Extensions__item__id_tab
+    ____Reference_E_TFCI_Information_Item_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____Reference_E_TFCI_Information_Item_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___Reference_E_TFCI_Information_Item_iE_Extensions__item__extensionValue._const_tab = ____Reference_E_TFCI_Information_Item_iE_Extensions__item__extensionValue_tab
     ___Reference_E_TFCI_Information_Item_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___Reference_E_TFCI_Information_Item_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __Reference_E_TFCI_Information_Item_iE_Extensions__item_._cont = ASN1Dict([
@@ -15186,11 +15944,15 @@ class PCAP_IEs:
     ___UL_Timeslot_InformationItem_iE_Extensions__item__id._const_tab_at = None
     ___UL_Timeslot_InformationItem_iE_Extensions__item__id._const_tab_id = u'id'
     ___UL_Timeslot_InformationItem_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___UL_Timeslot_InformationItem_iE_Extensions__item__criticality._const_tab = ____UL_Timeslot_InformationItem_iE_Extensions__item__id_tab
+    ____UL_Timeslot_InformationItem_iE_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____UL_Timeslot_InformationItem_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___UL_Timeslot_InformationItem_iE_Extensions__item__criticality._const_tab = ____UL_Timeslot_InformationItem_iE_Extensions__item__criticality_tab
     ___UL_Timeslot_InformationItem_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___UL_Timeslot_InformationItem_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___UL_Timeslot_InformationItem_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___UL_Timeslot_InformationItem_iE_Extensions__item__extensionValue._const_tab = ____UL_Timeslot_InformationItem_iE_Extensions__item__id_tab
+    ____UL_Timeslot_InformationItem_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____UL_Timeslot_InformationItem_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___UL_Timeslot_InformationItem_iE_Extensions__item__extensionValue._const_tab = ____UL_Timeslot_InformationItem_iE_Extensions__item__extensionValue_tab
     ___UL_Timeslot_InformationItem_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___UL_Timeslot_InformationItem_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __UL_Timeslot_InformationItem_iE_Extensions__item_._cont = ASN1Dict([
@@ -15316,11 +16078,15 @@ class PCAP_IEs:
     ___TDD_UL_Code_InformationItem_iE_Extensions__item__id._const_tab_at = None
     ___TDD_UL_Code_InformationItem_iE_Extensions__item__id._const_tab_id = u'id'
     ___TDD_UL_Code_InformationItem_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___TDD_UL_Code_InformationItem_iE_Extensions__item__criticality._const_tab = ____TDD_UL_Code_InformationItem_iE_Extensions__item__id_tab
+    ____TDD_UL_Code_InformationItem_iE_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____TDD_UL_Code_InformationItem_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___TDD_UL_Code_InformationItem_iE_Extensions__item__criticality._const_tab = ____TDD_UL_Code_InformationItem_iE_Extensions__item__criticality_tab
     ___TDD_UL_Code_InformationItem_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___TDD_UL_Code_InformationItem_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___TDD_UL_Code_InformationItem_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___TDD_UL_Code_InformationItem_iE_Extensions__item__extensionValue._const_tab = ____TDD_UL_Code_InformationItem_iE_Extensions__item__id_tab
+    ____TDD_UL_Code_InformationItem_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____TDD_UL_Code_InformationItem_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___TDD_UL_Code_InformationItem_iE_Extensions__item__extensionValue._const_tab = ____TDD_UL_Code_InformationItem_iE_Extensions__item__extensionValue_tab
     ___TDD_UL_Code_InformationItem_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___TDD_UL_Code_InformationItem_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __TDD_UL_Code_InformationItem_iE_Extensions__item_._cont = ASN1Dict([
@@ -15364,11 +16130,15 @@ class PCAP_IEs:
     ___UTDOA_CELLFACH_iE_Extensions__item__id._const_tab_at = None
     ___UTDOA_CELLFACH_iE_Extensions__item__id._const_tab_id = u'id'
     ___UTDOA_CELLFACH_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___UTDOA_CELLFACH_iE_Extensions__item__criticality._const_tab = ____UTDOA_CELLFACH_iE_Extensions__item__id_tab
+    ____UTDOA_CELLFACH_iE_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____UTDOA_CELLFACH_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___UTDOA_CELLFACH_iE_Extensions__item__criticality._const_tab = ____UTDOA_CELLFACH_iE_Extensions__item__criticality_tab
     ___UTDOA_CELLFACH_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___UTDOA_CELLFACH_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___UTDOA_CELLFACH_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___UTDOA_CELLFACH_iE_Extensions__item__extensionValue._const_tab = ____UTDOA_CELLFACH_iE_Extensions__item__id_tab
+    ____UTDOA_CELLFACH_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____UTDOA_CELLFACH_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___UTDOA_CELLFACH_iE_Extensions__item__extensionValue._const_tab = ____UTDOA_CELLFACH_iE_Extensions__item__extensionValue_tab
     ___UTDOA_CELLFACH_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___UTDOA_CELLFACH_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __UTDOA_CELLFACH_iE_Extensions__item_._cont = ASN1Dict([
@@ -15411,11 +16181,15 @@ class PCAP_IEs:
     ___PRACH_ChannelInfo_iE_Extensions__item__id._const_tab_at = None
     ___PRACH_ChannelInfo_iE_Extensions__item__id._const_tab_id = u'id'
     ___PRACH_ChannelInfo_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___PRACH_ChannelInfo_iE_Extensions__item__criticality._const_tab = ____PRACH_ChannelInfo_iE_Extensions__item__id_tab
+    ____PRACH_ChannelInfo_iE_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____PRACH_ChannelInfo_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___PRACH_ChannelInfo_iE_Extensions__item__criticality._const_tab = ____PRACH_ChannelInfo_iE_Extensions__item__criticality_tab
     ___PRACH_ChannelInfo_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___PRACH_ChannelInfo_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___PRACH_ChannelInfo_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___PRACH_ChannelInfo_iE_Extensions__item__extensionValue._const_tab = ____PRACH_ChannelInfo_iE_Extensions__item__id_tab
+    ____PRACH_ChannelInfo_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____PRACH_ChannelInfo_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___PRACH_ChannelInfo_iE_Extensions__item__extensionValue._const_tab = ____PRACH_ChannelInfo_iE_Extensions__item__extensionValue_tab
     ___PRACH_ChannelInfo_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___PRACH_ChannelInfo_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __PRACH_ChannelInfo_iE_Extensions__item_._cont = ASN1Dict([
@@ -15455,11 +16229,15 @@ class PCAP_IEs:
     ____PRACH_Info_fdd_iE_Extensions__item__id._const_tab_at = None
     ____PRACH_Info_fdd_iE_Extensions__item__id._const_tab_id = u'id'
     ____PRACH_Info_fdd_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ____PRACH_Info_fdd_iE_Extensions__item__criticality._const_tab = _____PRACH_Info_fdd_iE_Extensions__item__id_tab
+    _____PRACH_Info_fdd_iE_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    _____PRACH_Info_fdd_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ____PRACH_Info_fdd_iE_Extensions__item__criticality._const_tab = _____PRACH_Info_fdd_iE_Extensions__item__criticality_tab
     ____PRACH_Info_fdd_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ____PRACH_Info_fdd_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ____PRACH_Info_fdd_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ____PRACH_Info_fdd_iE_Extensions__item__extensionValue._const_tab = _____PRACH_Info_fdd_iE_Extensions__item__id_tab
+    _____PRACH_Info_fdd_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    _____PRACH_Info_fdd_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ____PRACH_Info_fdd_iE_Extensions__item__extensionValue._const_tab = _____PRACH_Info_fdd_iE_Extensions__item__extensionValue_tab
     ____PRACH_Info_fdd_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ____PRACH_Info_fdd_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     ___PRACH_Info_fdd_iE_Extensions__item_._cont = ASN1Dict([
@@ -15487,15 +16265,21 @@ class PCAP_IEs:
     __PRACH_Info_tdd_iE_Extensions = SEQ_OF(name=u'iE-Extensions', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PCAP-Containers', 'ProtocolExtensionContainer')), opt=True)
     ___PRACH_Info_tdd_iE_Extensions__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('PCAP-Containers', 'ProtocolExtensionField')))
     ____PRACH_Info_tdd_iE_Extensions__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'id']))
-    ____PRACH_Info_tdd_iE_Extensions__item__id._const_tab = _____PRACH_Info_fdd_iE_Extensions__item__id_tab
+    _____PRACH_Info_tdd_iE_Extensions__item__id_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    _____PRACH_Info_tdd_iE_Extensions__item__id_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ____PRACH_Info_tdd_iE_Extensions__item__id._const_tab = _____PRACH_Info_tdd_iE_Extensions__item__id_tab
     ____PRACH_Info_tdd_iE_Extensions__item__id._const_tab_at = None
     ____PRACH_Info_tdd_iE_Extensions__item__id._const_tab_id = u'id'
     ____PRACH_Info_tdd_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ____PRACH_Info_tdd_iE_Extensions__item__criticality._const_tab = _____PRACH_Info_fdd_iE_Extensions__item__id_tab
+    _____PRACH_Info_tdd_iE_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    _____PRACH_Info_tdd_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ____PRACH_Info_tdd_iE_Extensions__item__criticality._const_tab = _____PRACH_Info_tdd_iE_Extensions__item__criticality_tab
     ____PRACH_Info_tdd_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ____PRACH_Info_tdd_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ____PRACH_Info_tdd_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ____PRACH_Info_tdd_iE_Extensions__item__extensionValue._const_tab = _____PRACH_Info_fdd_iE_Extensions__item__id_tab
+    _____PRACH_Info_tdd_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    _____PRACH_Info_tdd_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ____PRACH_Info_tdd_iE_Extensions__item__extensionValue._const_tab = _____PRACH_Info_tdd_iE_Extensions__item__extensionValue_tab
     ____PRACH_Info_tdd_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ____PRACH_Info_tdd_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     ___PRACH_Info_tdd_iE_Extensions__item_._cont = ASN1Dict([
@@ -15577,11 +16361,15 @@ class PCAP_IEs:
     ___TransportFormatSet_iE_Extensions__item__id._const_tab_at = None
     ___TransportFormatSet_iE_Extensions__item__id._const_tab_id = u'id'
     ___TransportFormatSet_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___TransportFormatSet_iE_Extensions__item__criticality._const_tab = ____TransportFormatSet_iE_Extensions__item__id_tab
+    ____TransportFormatSet_iE_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____TransportFormatSet_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___TransportFormatSet_iE_Extensions__item__criticality._const_tab = ____TransportFormatSet_iE_Extensions__item__criticality_tab
     ___TransportFormatSet_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___TransportFormatSet_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___TransportFormatSet_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___TransportFormatSet_iE_Extensions__item__extensionValue._const_tab = ____TransportFormatSet_iE_Extensions__item__id_tab
+    ____TransportFormatSet_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____TransportFormatSet_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___TransportFormatSet_iE_Extensions__item__extensionValue._const_tab = ____TransportFormatSet_iE_Extensions__item__extensionValue_tab
     ___TransportFormatSet_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___TransportFormatSet_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __TransportFormatSet_iE_Extensions__item_._cont = ASN1Dict([
@@ -15620,11 +16408,15 @@ class PCAP_IEs:
     ____TransportFormatSet_DynamicPartList__item__iE_Extensions__item__id._const_tab_at = None
     ____TransportFormatSet_DynamicPartList__item__iE_Extensions__item__id._const_tab_id = u'id'
     ____TransportFormatSet_DynamicPartList__item__iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ____TransportFormatSet_DynamicPartList__item__iE_Extensions__item__criticality._const_tab = _____TransportFormatSet_DynamicPartList__item__iE_Extensions__item__id_tab
+    _____TransportFormatSet_DynamicPartList__item__iE_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    _____TransportFormatSet_DynamicPartList__item__iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ____TransportFormatSet_DynamicPartList__item__iE_Extensions__item__criticality._const_tab = _____TransportFormatSet_DynamicPartList__item__iE_Extensions__item__criticality_tab
     ____TransportFormatSet_DynamicPartList__item__iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ____TransportFormatSet_DynamicPartList__item__iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ____TransportFormatSet_DynamicPartList__item__iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ____TransportFormatSet_DynamicPartList__item__iE_Extensions__item__extensionValue._const_tab = _____TransportFormatSet_DynamicPartList__item__iE_Extensions__item__id_tab
+    _____TransportFormatSet_DynamicPartList__item__iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    _____TransportFormatSet_DynamicPartList__item__iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ____TransportFormatSet_DynamicPartList__item__iE_Extensions__item__extensionValue._const_tab = _____TransportFormatSet_DynamicPartList__item__iE_Extensions__item__extensionValue_tab
     ____TransportFormatSet_DynamicPartList__item__iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ____TransportFormatSet_DynamicPartList__item__iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     ___TransportFormatSet_DynamicPartList__item__iE_Extensions__item_._cont = ASN1Dict([
@@ -15661,11 +16453,15 @@ class PCAP_IEs:
     ___TbsTTIInfo_iE_Extensions__item__id._const_tab_at = None
     ___TbsTTIInfo_iE_Extensions__item__id._const_tab_id = u'id'
     ___TbsTTIInfo_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___TbsTTIInfo_iE_Extensions__item__criticality._const_tab = ____TbsTTIInfo_iE_Extensions__item__id_tab
+    ____TbsTTIInfo_iE_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____TbsTTIInfo_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___TbsTTIInfo_iE_Extensions__item__criticality._const_tab = ____TbsTTIInfo_iE_Extensions__item__criticality_tab
     ___TbsTTIInfo_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___TbsTTIInfo_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___TbsTTIInfo_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___TbsTTIInfo_iE_Extensions__item__extensionValue._const_tab = ____TbsTTIInfo_iE_Extensions__item__id_tab
+    ____TbsTTIInfo_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____TbsTTIInfo_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___TbsTTIInfo_iE_Extensions__item__extensionValue._const_tab = ____TbsTTIInfo_iE_Extensions__item__extensionValue_tab
     ___TbsTTIInfo_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___TbsTTIInfo_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __TbsTTIInfo_iE_Extensions__item_._cont = ASN1Dict([
@@ -15711,11 +16507,15 @@ class PCAP_IEs:
     ___TransportFormatSet_Semi_staticPart_iE_Extensions__item__id._const_tab_at = None
     ___TransportFormatSet_Semi_staticPart_iE_Extensions__item__id._const_tab_id = u'id'
     ___TransportFormatSet_Semi_staticPart_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___TransportFormatSet_Semi_staticPart_iE_Extensions__item__criticality._const_tab = ____TransportFormatSet_Semi_staticPart_iE_Extensions__item__id_tab
+    ____TransportFormatSet_Semi_staticPart_iE_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____TransportFormatSet_Semi_staticPart_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___TransportFormatSet_Semi_staticPart_iE_Extensions__item__criticality._const_tab = ____TransportFormatSet_Semi_staticPart_iE_Extensions__item__criticality_tab
     ___TransportFormatSet_Semi_staticPart_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___TransportFormatSet_Semi_staticPart_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___TransportFormatSet_Semi_staticPart_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___TransportFormatSet_Semi_staticPart_iE_Extensions__item__extensionValue._const_tab = ____TransportFormatSet_Semi_staticPart_iE_Extensions__item__id_tab
+    ____TransportFormatSet_Semi_staticPart_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____TransportFormatSet_Semi_staticPart_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___TransportFormatSet_Semi_staticPart_iE_Extensions__item__extensionValue._const_tab = ____TransportFormatSet_Semi_staticPart_iE_Extensions__item__extensionValue_tab
     ___TransportFormatSet_Semi_staticPart_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___TransportFormatSet_Semi_staticPart_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __TransportFormatSet_Semi_staticPart_iE_Extensions__item_._cont = ASN1Dict([
@@ -15866,11 +16666,15 @@ class PCAP_IEs:
     ___UschParameters_iE_Extensions__item__id._const_tab_at = None
     ___UschParameters_iE_Extensions__item__id._const_tab_id = u'id'
     ___UschParameters_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___UschParameters_iE_Extensions__item__criticality._const_tab = ____UschParameters_iE_Extensions__item__id_tab
+    ____UschParameters_iE_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____UschParameters_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___UschParameters_iE_Extensions__item__criticality._const_tab = ____UschParameters_iE_Extensions__item__criticality_tab
     ___UschParameters_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___UschParameters_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___UschParameters_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___UschParameters_iE_Extensions__item__extensionValue._const_tab = ____UschParameters_iE_Extensions__item__id_tab
+    ____UschParameters_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____UschParameters_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___UschParameters_iE_Extensions__item__extensionValue._const_tab = ____UschParameters_iE_Extensions__item__extensionValue_tab
     ___UschParameters_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___UschParameters_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __UschParameters_iE_Extensions__item_._cont = ASN1Dict([
@@ -15953,11 +16757,15 @@ class PCAP_IEs:
     ___HorizontalVelocity_iE_Extensions__item__id._const_tab_at = None
     ___HorizontalVelocity_iE_Extensions__item__id._const_tab_id = u'id'
     ___HorizontalVelocity_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___HorizontalVelocity_iE_Extensions__item__criticality._const_tab = ____HorizontalVelocity_iE_Extensions__item__id_tab
+    ____HorizontalVelocity_iE_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____HorizontalVelocity_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___HorizontalVelocity_iE_Extensions__item__criticality._const_tab = ____HorizontalVelocity_iE_Extensions__item__criticality_tab
     ___HorizontalVelocity_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___HorizontalVelocity_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___HorizontalVelocity_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___HorizontalVelocity_iE_Extensions__item__extensionValue._const_tab = ____HorizontalVelocity_iE_Extensions__item__id_tab
+    ____HorizontalVelocity_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____HorizontalVelocity_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___HorizontalVelocity_iE_Extensions__item__extensionValue._const_tab = ____HorizontalVelocity_iE_Extensions__item__extensionValue_tab
     ___HorizontalVelocity_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___HorizontalVelocity_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __HorizontalVelocity_iE_Extensions__item_._cont = ASN1Dict([
@@ -15991,11 +16799,15 @@ class PCAP_IEs:
     ___HorizontalWithVerticalVelocity_iE_Extensions__item__id._const_tab_at = None
     ___HorizontalWithVerticalVelocity_iE_Extensions__item__id._const_tab_id = u'id'
     ___HorizontalWithVerticalVelocity_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___HorizontalWithVerticalVelocity_iE_Extensions__item__criticality._const_tab = ____HorizontalWithVerticalVelocity_iE_Extensions__item__id_tab
+    ____HorizontalWithVerticalVelocity_iE_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____HorizontalWithVerticalVelocity_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___HorizontalWithVerticalVelocity_iE_Extensions__item__criticality._const_tab = ____HorizontalWithVerticalVelocity_iE_Extensions__item__criticality_tab
     ___HorizontalWithVerticalVelocity_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___HorizontalWithVerticalVelocity_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___HorizontalWithVerticalVelocity_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___HorizontalWithVerticalVelocity_iE_Extensions__item__extensionValue._const_tab = ____HorizontalWithVerticalVelocity_iE_Extensions__item__id_tab
+    ____HorizontalWithVerticalVelocity_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____HorizontalWithVerticalVelocity_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___HorizontalWithVerticalVelocity_iE_Extensions__item__extensionValue._const_tab = ____HorizontalWithVerticalVelocity_iE_Extensions__item__extensionValue_tab
     ___HorizontalWithVerticalVelocity_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___HorizontalWithVerticalVelocity_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __HorizontalWithVerticalVelocity_iE_Extensions__item_._cont = ASN1Dict([
@@ -16031,11 +16843,15 @@ class PCAP_IEs:
     ___HorizontalVelocityWithUncertainty_iE_Extensions__item__id._const_tab_at = None
     ___HorizontalVelocityWithUncertainty_iE_Extensions__item__id._const_tab_id = u'id'
     ___HorizontalVelocityWithUncertainty_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___HorizontalVelocityWithUncertainty_iE_Extensions__item__criticality._const_tab = ____HorizontalVelocityWithUncertainty_iE_Extensions__item__id_tab
+    ____HorizontalVelocityWithUncertainty_iE_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____HorizontalVelocityWithUncertainty_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___HorizontalVelocityWithUncertainty_iE_Extensions__item__criticality._const_tab = ____HorizontalVelocityWithUncertainty_iE_Extensions__item__criticality_tab
     ___HorizontalVelocityWithUncertainty_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___HorizontalVelocityWithUncertainty_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___HorizontalVelocityWithUncertainty_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___HorizontalVelocityWithUncertainty_iE_Extensions__item__extensionValue._const_tab = ____HorizontalVelocityWithUncertainty_iE_Extensions__item__id_tab
+    ____HorizontalVelocityWithUncertainty_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____HorizontalVelocityWithUncertainty_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___HorizontalVelocityWithUncertainty_iE_Extensions__item__extensionValue._const_tab = ____HorizontalVelocityWithUncertainty_iE_Extensions__item__extensionValue_tab
     ___HorizontalVelocityWithUncertainty_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___HorizontalVelocityWithUncertainty_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __HorizontalVelocityWithUncertainty_iE_Extensions__item_._cont = ASN1Dict([
@@ -16074,11 +16890,15 @@ class PCAP_IEs:
     ___HorizontalWithVerticalVelocityAndUncertainty_iE_Extensions__item__id._const_tab_at = None
     ___HorizontalWithVerticalVelocityAndUncertainty_iE_Extensions__item__id._const_tab_id = u'id'
     ___HorizontalWithVerticalVelocityAndUncertainty_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___HorizontalWithVerticalVelocityAndUncertainty_iE_Extensions__item__criticality._const_tab = ____HorizontalWithVerticalVelocityAndUncertainty_iE_Extensions__item__id_tab
+    ____HorizontalWithVerticalVelocityAndUncertainty_iE_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____HorizontalWithVerticalVelocityAndUncertainty_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___HorizontalWithVerticalVelocityAndUncertainty_iE_Extensions__item__criticality._const_tab = ____HorizontalWithVerticalVelocityAndUncertainty_iE_Extensions__item__criticality_tab
     ___HorizontalWithVerticalVelocityAndUncertainty_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___HorizontalWithVerticalVelocityAndUncertainty_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___HorizontalWithVerticalVelocityAndUncertainty_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___HorizontalWithVerticalVelocityAndUncertainty_iE_Extensions__item__extensionValue._const_tab = ____HorizontalWithVerticalVelocityAndUncertainty_iE_Extensions__item__id_tab
+    ____HorizontalWithVerticalVelocityAndUncertainty_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____HorizontalWithVerticalVelocityAndUncertainty_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___HorizontalWithVerticalVelocityAndUncertainty_iE_Extensions__item__extensionValue._const_tab = ____HorizontalWithVerticalVelocityAndUncertainty_iE_Extensions__item__extensionValue_tab
     ___HorizontalWithVerticalVelocityAndUncertainty_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___HorizontalWithVerticalVelocityAndUncertainty_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __HorizontalWithVerticalVelocityAndUncertainty_iE_Extensions__item_._cont = ASN1Dict([
@@ -16146,11 +16966,15 @@ class PCAP_IEs:
     ___UTRAN_GPSReferenceTime_iE_Extensions__item__id._const_tab_at = None
     ___UTRAN_GPSReferenceTime_iE_Extensions__item__id._const_tab_id = u'id'
     ___UTRAN_GPSReferenceTime_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___UTRAN_GPSReferenceTime_iE_Extensions__item__criticality._const_tab = ____UTRAN_GPSReferenceTime_iE_Extensions__item__id_tab
+    ____UTRAN_GPSReferenceTime_iE_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____UTRAN_GPSReferenceTime_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___UTRAN_GPSReferenceTime_iE_Extensions__item__criticality._const_tab = ____UTRAN_GPSReferenceTime_iE_Extensions__item__criticality_tab
     ___UTRAN_GPSReferenceTime_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___UTRAN_GPSReferenceTime_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___UTRAN_GPSReferenceTime_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___UTRAN_GPSReferenceTime_iE_Extensions__item__extensionValue._const_tab = ____UTRAN_GPSReferenceTime_iE_Extensions__item__id_tab
+    ____UTRAN_GPSReferenceTime_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____UTRAN_GPSReferenceTime_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___UTRAN_GPSReferenceTime_iE_Extensions__item__extensionValue._const_tab = ____UTRAN_GPSReferenceTime_iE_Extensions__item__extensionValue_tab
     ___UTRAN_GPSReferenceTime_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___UTRAN_GPSReferenceTime_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __UTRAN_GPSReferenceTime_iE_Extensions__item_._cont = ASN1Dict([
@@ -16189,11 +17013,15 @@ class PCAP_IEs:
     ___UTRAN_GPSReferenceTimeResult_iE_Extensions__item__id._const_tab_at = None
     ___UTRAN_GPSReferenceTimeResult_iE_Extensions__item__id._const_tab_id = u'id'
     ___UTRAN_GPSReferenceTimeResult_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___UTRAN_GPSReferenceTimeResult_iE_Extensions__item__criticality._const_tab = ____UTRAN_GPSReferenceTimeResult_iE_Extensions__item__id_tab
+    ____UTRAN_GPSReferenceTimeResult_iE_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____UTRAN_GPSReferenceTimeResult_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___UTRAN_GPSReferenceTimeResult_iE_Extensions__item__criticality._const_tab = ____UTRAN_GPSReferenceTimeResult_iE_Extensions__item__criticality_tab
     ___UTRAN_GPSReferenceTimeResult_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___UTRAN_GPSReferenceTimeResult_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___UTRAN_GPSReferenceTimeResult_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___UTRAN_GPSReferenceTimeResult_iE_Extensions__item__extensionValue._const_tab = ____UTRAN_GPSReferenceTimeResult_iE_Extensions__item__id_tab
+    ____UTRAN_GPSReferenceTimeResult_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____UTRAN_GPSReferenceTimeResult_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___UTRAN_GPSReferenceTimeResult_iE_Extensions__item__extensionValue._const_tab = ____UTRAN_GPSReferenceTimeResult_iE_Extensions__item__extensionValue_tab
     ___UTRAN_GPSReferenceTimeResult_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___UTRAN_GPSReferenceTimeResult_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __UTRAN_GPSReferenceTimeResult_iE_Extensions__item_._cont = ASN1Dict([
@@ -16235,11 +17063,15 @@ class PCAP_IEs:
     ___UTRAN_GANSSReferenceTimeResult_iE_Extensions__item__id._const_tab_at = None
     ___UTRAN_GANSSReferenceTimeResult_iE_Extensions__item__id._const_tab_id = u'id'
     ___UTRAN_GANSSReferenceTimeResult_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___UTRAN_GANSSReferenceTimeResult_iE_Extensions__item__criticality._const_tab = ____UTRAN_GANSSReferenceTimeResult_iE_Extensions__item__id_tab
+    ____UTRAN_GANSSReferenceTimeResult_iE_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____UTRAN_GANSSReferenceTimeResult_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___UTRAN_GANSSReferenceTimeResult_iE_Extensions__item__criticality._const_tab = ____UTRAN_GANSSReferenceTimeResult_iE_Extensions__item__criticality_tab
     ___UTRAN_GANSSReferenceTimeResult_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___UTRAN_GANSSReferenceTimeResult_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___UTRAN_GANSSReferenceTimeResult_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___UTRAN_GANSSReferenceTimeResult_iE_Extensions__item__extensionValue._const_tab = ____UTRAN_GANSSReferenceTimeResult_iE_Extensions__item__id_tab
+    ____UTRAN_GANSSReferenceTimeResult_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____UTRAN_GANSSReferenceTimeResult_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___UTRAN_GANSSReferenceTimeResult_iE_Extensions__item__extensionValue._const_tab = ____UTRAN_GANSSReferenceTimeResult_iE_Extensions__item__extensionValue_tab
     ___UTRAN_GANSSReferenceTimeResult_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___UTRAN_GANSSReferenceTimeResult_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __UTRAN_GANSSReferenceTimeResult_iE_Extensions__item_._cont = ASN1Dict([
@@ -16273,28 +17105,39 @@ class PCAP_IEs:
         ___AddPos_MeasuredResults_Element_type_barometricPressure_uncompensatedBarometricPressure,
         ______AddPos_MeasuredResults_Element_type_barometricPressure_iE_Extensions__item__id_tab,
         _____AddPos_MeasuredResults_Element_type_barometricPressure_iE_Extensions__item__id,
+        ______AddPos_MeasuredResults_Element_type_barometricPressure_iE_Extensions__item__criticality_tab,
         _____AddPos_MeasuredResults_Element_type_barometricPressure_iE_Extensions__item__criticality,
+        ______AddPos_MeasuredResults_Element_type_barometricPressure_iE_Extensions__item__extensionValue_tab,
         _____AddPos_MeasuredResults_Element_type_barometricPressure_iE_Extensions__item__extensionValue,
         ____AddPos_MeasuredResults_Element_type_barometricPressure_iE_Extensions__item_,
         ___AddPos_MeasuredResults_Element_type_barometricPressure_iE_Extensions,
         __AddPos_MeasuredResults_Element_type_barometricPressure,
         ___AddPos_MeasuredResults_Element_type_wlan_wlanMeasurementList,
+        ______AddPos_MeasuredResults_Element_type_wlan_iE_Extensions__item__id_tab,
         _____AddPos_MeasuredResults_Element_type_wlan_iE_Extensions__item__id,
+        ______AddPos_MeasuredResults_Element_type_wlan_iE_Extensions__item__criticality_tab,
         _____AddPos_MeasuredResults_Element_type_wlan_iE_Extensions__item__criticality,
+        ______AddPos_MeasuredResults_Element_type_wlan_iE_Extensions__item__extensionValue_tab,
         _____AddPos_MeasuredResults_Element_type_wlan_iE_Extensions__item__extensionValue,
         ____AddPos_MeasuredResults_Element_type_wlan_iE_Extensions__item_,
         ___AddPos_MeasuredResults_Element_type_wlan_iE_Extensions,
         __AddPos_MeasuredResults_Element_type_wlan,
         ___AddPos_MeasuredResults_Element_type_bt_btMeasurementList,
+        ______AddPos_MeasuredResults_Element_type_bt_iE_Extensions__item__id_tab,
         _____AddPos_MeasuredResults_Element_type_bt_iE_Extensions__item__id,
+        ______AddPos_MeasuredResults_Element_type_bt_iE_Extensions__item__criticality_tab,
         _____AddPos_MeasuredResults_Element_type_bt_iE_Extensions__item__criticality,
+        ______AddPos_MeasuredResults_Element_type_bt_iE_Extensions__item__extensionValue_tab,
         _____AddPos_MeasuredResults_Element_type_bt_iE_Extensions__item__extensionValue,
         ____AddPos_MeasuredResults_Element_type_bt_iE_Extensions__item_,
         ___AddPos_MeasuredResults_Element_type_bt_iE_Extensions,
         __AddPos_MeasuredResults_Element_type_bt,
         ___AddPos_MeasuredResults_Element_type_mbs_mbsMeasurementList,
+        ______AddPos_MeasuredResults_Element_type_mbs_iE_Extensions__item__id_tab,
         _____AddPos_MeasuredResults_Element_type_mbs_iE_Extensions__item__id,
+        ______AddPos_MeasuredResults_Element_type_mbs_iE_Extensions__item__criticality_tab,
         _____AddPos_MeasuredResults_Element_type_mbs_iE_Extensions__item__criticality,
+        ______AddPos_MeasuredResults_Element_type_mbs_iE_Extensions__item__extensionValue_tab,
         _____AddPos_MeasuredResults_Element_type_mbs_iE_Extensions__item__extensionValue,
         ____AddPos_MeasuredResults_Element_type_mbs_iE_Extensions__item_,
         ___AddPos_MeasuredResults_Element_type_mbs_iE_Extensions,
@@ -16317,7 +17160,9 @@ class PCAP_IEs:
         _WLANMeasurementList_Element_wlanServingFlag,
         ____WLANMeasurementList_Element_iE_Extensions__item__id_tab,
         ___WLANMeasurementList_Element_iE_Extensions__item__id,
+        ____WLANMeasurementList_Element_iE_Extensions__item__criticality_tab,
         ___WLANMeasurementList_Element_iE_Extensions__item__criticality,
+        ____WLANMeasurementList_Element_iE_Extensions__item__extensionValue_tab,
         ___WLANMeasurementList_Element_iE_Extensions__item__extensionValue,
         __WLANMeasurementList_Element_iE_Extensions__item_,
         _WLANMeasurementList_Element_iE_Extensions,
@@ -16329,7 +17174,9 @@ class PCAP_IEs:
         _BTMeasurementList_Element_btRSSI,
         ____BTMeasurementList_Element_iE_Extensions__item__id_tab,
         ___BTMeasurementList_Element_iE_Extensions__item__id,
+        ____BTMeasurementList_Element_iE_Extensions__item__criticality_tab,
         ___BTMeasurementList_Element_iE_Extensions__item__criticality,
+        ____BTMeasurementList_Element_iE_Extensions__item__extensionValue_tab,
         ___BTMeasurementList_Element_iE_Extensions__item__extensionValue,
         __BTMeasurementList_Element_iE_Extensions__item_,
         _BTMeasurementList_Element_iE_Extensions,
@@ -16342,7 +17189,9 @@ class PCAP_IEs:
         _MBSMeasurementList_Element_codephaseRMS,
         ____MBSMeasurementList_Element_iE_Extensions__item__id_tab,
         ___MBSMeasurementList_Element_iE_Extensions__item__id,
+        ____MBSMeasurementList_Element_iE_Extensions__item__criticality_tab,
         ___MBSMeasurementList_Element_iE_Extensions__item__criticality,
+        ____MBSMeasurementList_Element_iE_Extensions__item__extensionValue_tab,
         ___MBSMeasurementList_Element_iE_Extensions__item__extensionValue,
         __MBSMeasurementList_Element_iE_Extensions__item_,
         _MBSMeasurementList_Element_iE_Extensions,
@@ -16354,7 +17203,9 @@ class PCAP_IEs:
         _AlmanacAndSatelliteHealthSIB_lsbTOW,
         ____AlmanacAndSatelliteHealthSIB_iE_Extensions__item__id_tab,
         ___AlmanacAndSatelliteHealthSIB_iE_Extensions__item__id,
+        ____AlmanacAndSatelliteHealthSIB_iE_Extensions__item__criticality_tab,
         ___AlmanacAndSatelliteHealthSIB_iE_Extensions__item__criticality,
+        ____AlmanacAndSatelliteHealthSIB_iE_Extensions__item__extensionValue_tab,
         ___AlmanacAndSatelliteHealthSIB_iE_Extensions__item__extensionValue,
         __AlmanacAndSatelliteHealthSIB_iE_Extensions__item_,
         _AlmanacAndSatelliteHealthSIB_iE_Extensions,
@@ -16416,7 +17267,9 @@ class PCAP_IEs:
         _RoundTripTimeInfoWithType1_extendedRoundTripTime,
         ____RoundTripTimeInfoWithType1_iE_Extensions__item__id_tab,
         ___RoundTripTimeInfoWithType1_iE_Extensions__item__id,
+        ____RoundTripTimeInfoWithType1_iE_Extensions__item__criticality_tab,
         ___RoundTripTimeInfoWithType1_iE_Extensions__item__criticality,
+        ____RoundTripTimeInfoWithType1_iE_Extensions__item__extensionValue_tab,
         ___RoundTripTimeInfoWithType1_iE_Extensions__item__extensionValue,
         __RoundTripTimeInfoWithType1_iE_Extensions__item_,
         _RoundTripTimeInfoWithType1_iE_Extensions,
@@ -16429,7 +17282,9 @@ class PCAP_IEs:
         _UE_PositioningMeasQuality_stdOfMeasurements,
         ____UE_PositioningMeasQuality_iE_Extensions__item__id_tab,
         ___UE_PositioningMeasQuality_iE_Extensions__item__id,
+        ____UE_PositioningMeasQuality_iE_Extensions__item__criticality_tab,
         ___UE_PositioningMeasQuality_iE_Extensions__item__criticality,
+        ____UE_PositioningMeasQuality_iE_Extensions__item__extensionValue_tab,
         ___UE_PositioningMeasQuality_iE_Extensions__item__extensionValue,
         __UE_PositioningMeasQuality_iE_Extensions__item_,
         _UE_PositioningMeasQuality_iE_Extensions,
@@ -16441,7 +17296,9 @@ class PCAP_IEs:
         _UTRANAccessPointPositionAltitude_ga_AltitudeAndDirection,
         ____UTRANAccessPointPositionAltitude_iE_Extensions__item__id_tab,
         ___UTRANAccessPointPositionAltitude_iE_Extensions__item__id,
+        ____UTRANAccessPointPositionAltitude_iE_Extensions__item__criticality_tab,
         ___UTRANAccessPointPositionAltitude_iE_Extensions__item__criticality,
+        ____UTRANAccessPointPositionAltitude_iE_Extensions__item__extensionValue_tab,
         ___UTRANAccessPointPositionAltitude_iE_Extensions__item__extensionValue,
         __UTRANAccessPointPositionAltitude_iE_Extensions__item_,
         _UTRANAccessPointPositionAltitude_iE_Extensions,
@@ -16451,7 +17308,9 @@ class PCAP_IEs:
         _RxTimingDeviationInfo_timingAdvance,
         ____RxTimingDeviationInfo_iE_Extensions__item__id_tab,
         ___RxTimingDeviationInfo_iE_Extensions__item__id,
+        ____RxTimingDeviationInfo_iE_Extensions__item__criticality_tab,
         ___RxTimingDeviationInfo_iE_Extensions__item__criticality,
+        ____RxTimingDeviationInfo_iE_Extensions__item__extensionValue_tab,
         ___RxTimingDeviationInfo_iE_Extensions__item__extensionValue,
         __RxTimingDeviationInfo_iE_Extensions__item_,
         _RxTimingDeviationInfo_iE_Extensions,
@@ -16474,7 +17333,9 @@ class PCAP_IEs:
         _RxTimingDeviation768Info_timingAdvance768,
         ____RxTimingDeviation768Info_iE_Extensions__item__id_tab,
         ___RxTimingDeviation768Info_iE_Extensions__item__id,
+        ____RxTimingDeviation768Info_iE_Extensions__item__criticality_tab,
         ___RxTimingDeviation768Info_iE_Extensions__item__criticality,
+        ____RxTimingDeviation768Info_iE_Extensions__item__extensionValue_tab,
         ___RxTimingDeviation768Info_iE_Extensions__item__extensionValue,
         __RxTimingDeviation768Info_iE_Extensions__item_,
         _RxTimingDeviation768Info_iE_Extensions,
@@ -16484,7 +17345,9 @@ class PCAP_IEs:
         _RxTimingDeviation384extInfo_timingAdvance384ext,
         ____RxTimingDeviation384extInfo_iE_Extensions__item__id_tab,
         ___RxTimingDeviation384extInfo_iE_Extensions__item__id,
+        ____RxTimingDeviation384extInfo_iE_Extensions__item__criticality_tab,
         ___RxTimingDeviation384extInfo_iE_Extensions__item__criticality,
+        ____RxTimingDeviation384extInfo_iE_Extensions__item__extensionValue_tab,
         ___RxTimingDeviation384extInfo_iE_Extensions__item__extensionValue,
         __RxTimingDeviation384extInfo_iE_Extensions__item_,
         _RxTimingDeviation384extInfo_iE_Extensions,
@@ -16494,7 +17357,9 @@ class PCAP_IEs:
         _AddMeasurementInfo_cpich_EcNo,
         ____AddMeasurementInfo_iE_Extensions__item__id_tab,
         ___AddMeasurementInfo_iE_Extensions__item__id,
+        ____AddMeasurementInfo_iE_Extensions__item__criticality_tab,
         ___AddMeasurementInfo_iE_Extensions__item__criticality,
+        ____AddMeasurementInfo_iE_Extensions__item__extensionValue_tab,
         ___AddMeasurementInfo_iE_Extensions__item__extensionValue,
         __AddMeasurementInfo_iE_Extensions__item_,
         _AddMeasurementInfo_iE_Extensions,
@@ -16504,7 +17369,9 @@ class PCAP_IEs:
         _AngleOfArrivalLCR_aOA_LCR_Accuracy_Class,
         ____AngleOfArrivalLCR_iE_Extensions__item__id_tab,
         ___AngleOfArrivalLCR_iE_Extensions__item__id,
+        ____AngleOfArrivalLCR_iE_Extensions__item__criticality_tab,
         ___AngleOfArrivalLCR_iE_Extensions__item__criticality,
+        ____AngleOfArrivalLCR_iE_Extensions__item__extensionValue_tab,
         ___AngleOfArrivalLCR_iE_Extensions__item__extensionValue,
         __AngleOfArrivalLCR_iE_Extensions__item_,
         _AngleOfArrivalLCR_iE_Extensions,
@@ -16528,7 +17395,9 @@ class PCAP_IEs:
         _CellId_IRATMeasuredResultsInfoList_gERAN_MeasuredResultsInfoList,
         ____CellId_IRATMeasuredResultsInfoList_iE_Extenstions__item__id_tab,
         ___CellId_IRATMeasuredResultsInfoList_iE_Extenstions__item__id,
+        ____CellId_IRATMeasuredResultsInfoList_iE_Extenstions__item__criticality_tab,
         ___CellId_IRATMeasuredResultsInfoList_iE_Extenstions__item__criticality,
+        ____CellId_IRATMeasuredResultsInfoList_iE_Extenstions__item__extensionValue_tab,
         ___CellId_IRATMeasuredResultsInfoList_iE_Extenstions__item__extensionValue,
         __CellId_IRATMeasuredResultsInfoList_iE_Extenstions__item_,
         _CellId_IRATMeasuredResultsInfoList_iE_Extenstions,
@@ -16541,7 +17410,9 @@ class PCAP_IEs:
         _GERAN_MeasuredResultsInfo_gSM_RSSI,
         ____GERAN_MeasuredResultsInfo_iE_Extenstions__item__id_tab,
         ___GERAN_MeasuredResultsInfo_iE_Extenstions__item__id,
+        ____GERAN_MeasuredResultsInfo_iE_Extenstions__item__criticality_tab,
         ___GERAN_MeasuredResultsInfo_iE_Extenstions__item__criticality,
+        ____GERAN_MeasuredResultsInfo_iE_Extenstions__item__extensionValue_tab,
         ___GERAN_MeasuredResultsInfo_iE_Extenstions__item__extensionValue,
         __GERAN_MeasuredResultsInfo_iE_Extenstions__item_,
         _GERAN_MeasuredResultsInfo_iE_Extenstions,
@@ -16552,7 +17423,9 @@ class PCAP_IEs:
         _GERANCellGlobalID_cellIdentity,
         ____GERANCellGlobalID_iE_Extenstions__item__id_tab,
         ___GERANCellGlobalID_iE_Extenstions__item__id,
+        ____GERANCellGlobalID_iE_Extenstions__item__criticality_tab,
         ___GERANCellGlobalID_iE_Extenstions__item__criticality,
+        ____GERANCellGlobalID_iE_Extenstions__item__extensionValue_tab,
         ___GERANCellGlobalID_iE_Extenstions__item__extensionValue,
         __GERANCellGlobalID_iE_Extenstions__item_,
         _GERANCellGlobalID_iE_Extenstions,
@@ -16585,7 +17458,9 @@ class PCAP_IEs:
         __RequestedCellIDMeasurements_fdd_cpicEcNoWanted,
         _____RequestedCellIDMeasurements_fdd_iE_Extensions__item__id_tab,
         ____RequestedCellIDMeasurements_fdd_iE_Extensions__item__id,
+        _____RequestedCellIDMeasurements_fdd_iE_Extensions__item__criticality_tab,
         ____RequestedCellIDMeasurements_fdd_iE_Extensions__item__criticality,
+        _____RequestedCellIDMeasurements_fdd_iE_Extensions__item__extensionValue_tab,
         ____RequestedCellIDMeasurements_fdd_iE_Extensions__item__extensionValue,
         ___RequestedCellIDMeasurements_fdd_iE_Extensions__item_,
         __RequestedCellIDMeasurements_fdd_iE_Extensions,
@@ -16597,8 +17472,11 @@ class PCAP_IEs:
         __RequestedCellIDMeasurements_tdd_rxTimingDeviation384extInfoWanted,
         __RequestedCellIDMeasurements_tdd_angleOfArrivalLCRWanted,
         __RequestedCellIDMeasurements_tdd_timingAdvanceLCRWanted,
+        _____RequestedCellIDMeasurements_tdd_iE_Extensions__item__id_tab,
         ____RequestedCellIDMeasurements_tdd_iE_Extensions__item__id,
+        _____RequestedCellIDMeasurements_tdd_iE_Extensions__item__criticality_tab,
         ____RequestedCellIDMeasurements_tdd_iE_Extensions__item__criticality,
+        _____RequestedCellIDMeasurements_tdd_iE_Extensions__item__extensionValue_tab,
         ____RequestedCellIDMeasurements_tdd_iE_Extensions__item__extensionValue,
         ___RequestedCellIDMeasurements_tdd_iE_Extensions__item_,
         __RequestedCellIDMeasurements_tdd_iE_Extensions,
@@ -16609,7 +17487,9 @@ class PCAP_IEs:
         _RequestedCellIDGERANMeasurements_rSSIMeasurementsWanted,
         ____RequestedCellIDGERANMeasurements_iE_Extensions__item__id_tab,
         ___RequestedCellIDGERANMeasurements_iE_Extensions__item__id,
+        ____RequestedCellIDGERANMeasurements_iE_Extensions__item__criticality_tab,
         ___RequestedCellIDGERANMeasurements_iE_Extensions__item__criticality,
+        ____RequestedCellIDGERANMeasurements_iE_Extensions__item__extensionValue_tab,
         ___RequestedCellIDGERANMeasurements_iE_Extensions__item__extensionValue,
         __RequestedCellIDGERANMeasurements_iE_Extensions__item_,
         _RequestedCellIDGERANMeasurements_iE_Extensions,
@@ -16623,7 +17503,9 @@ class PCAP_IEs:
         _CriticalityDiagnostics_iEsCriticalityDiagnostics,
         ____CriticalityDiagnostics_iE_Extensions__item__id_tab,
         ___CriticalityDiagnostics_iE_Extensions__item__id,
+        ____CriticalityDiagnostics_iE_Extensions__item__criticality_tab,
         ___CriticalityDiagnostics_iE_Extensions__item__criticality,
+        ____CriticalityDiagnostics_iE_Extensions__item__extensionValue_tab,
         ___CriticalityDiagnostics_iE_Extensions__item__extensionValue,
         __CriticalityDiagnostics_iE_Extensions__item_,
         _CriticalityDiagnostics_iE_Extensions,
@@ -16635,7 +17517,9 @@ class PCAP_IEs:
         __CriticalityDiagnostics_IE_List__item__typeOfError,
         _____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__id_tab,
         ____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__id,
+        _____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__criticality_tab,
         ____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__criticality,
+        _____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__extensionValue_tab,
         ____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__extensionValue,
         ___CriticalityDiagnostics_IE_List__item__iE_Extensions__item_,
         __CriticalityDiagnostics_IE_List__item__iE_Extensions,
@@ -16650,7 +17534,9 @@ class PCAP_IEs:
         _DGPSCorrections_dgps_CorrectionSatInfoList,
         ____DGPSCorrections_iE_Extensions__item__id_tab,
         ___DGPSCorrections_iE_Extensions__item__id,
+        ____DGPSCorrections_iE_Extensions__item__criticality_tab,
         ___DGPSCorrections_iE_Extensions__item__criticality,
+        ____DGPSCorrections_iE_Extensions__item__extensionValue_tab,
         ___DGPSCorrections_iE_Extensions__item__extensionValue,
         __DGPSCorrections_iE_Extensions__item_,
         _DGPSCorrections_iE_Extensions,
@@ -16678,7 +17564,9 @@ class PCAP_IEs:
         _DGNSS_ValidityPeriod_udreValidityTime,
         ____DGNSS_ValidityPeriod_iE_Extensions__item__id_tab,
         ___DGNSS_ValidityPeriod_iE_Extensions__item__id,
+        ____DGNSS_ValidityPeriod_iE_Extensions__item__criticality_tab,
         ___DGNSS_ValidityPeriod_iE_Extensions__item__criticality,
+        ____DGNSS_ValidityPeriod_iE_Extensions__item__extensionValue_tab,
         ___DGNSS_ValidityPeriod_iE_Extensions__item__extensionValue,
         __DGNSS_ValidityPeriod_iE_Extensions__item_,
         _DGNSS_ValidityPeriod_iE_Extensions,
@@ -16704,7 +17592,9 @@ class PCAP_IEs:
         _GeographicalCoordinates_longitude,
         ____GeographicalCoordinates_iE_Extensions__item__id_tab,
         ___GeographicalCoordinates_iE_Extensions__item__id,
+        ____GeographicalCoordinates_iE_Extensions__item__criticality_tab,
         ___GeographicalCoordinates_iE_Extensions__item__criticality,
+        ____GeographicalCoordinates_iE_Extensions__item__extensionValue_tab,
         ___GeographicalCoordinates_iE_Extensions__item__extensionValue,
         __GeographicalCoordinates_iE_Extensions__item_,
         _GeographicalCoordinates_iE_Extensions,
@@ -16721,7 +17611,9 @@ class PCAP_IEs:
         _GA_EllipsoidArc_confidence,
         ____GA_EllipsoidArc_iE_Extensions__item__id_tab,
         ___GA_EllipsoidArc_iE_Extensions__item__id,
+        ____GA_EllipsoidArc_iE_Extensions__item__criticality_tab,
         ___GA_EllipsoidArc_iE_Extensions__item__criticality,
+        ____GA_EllipsoidArc_iE_Extensions__item__extensionValue_tab,
         ___GA_EllipsoidArc_iE_Extensions__item__extensionValue,
         __GA_EllipsoidArc_iE_Extensions__item_,
         _GA_EllipsoidArc_iE_Extensions,
@@ -16730,7 +17622,9 @@ class PCAP_IEs:
         _GA_Point_geographicalCoordinates,
         ____GA_Point_iE_Extensions__item__id_tab,
         ___GA_Point_iE_Extensions__item__id,
+        ____GA_Point_iE_Extensions__item__criticality_tab,
         ___GA_Point_iE_Extensions__item__criticality,
+        ____GA_Point_iE_Extensions__item__extensionValue_tab,
         ___GA_Point_iE_Extensions__item__extensionValue,
         __GA_Point_iE_Extensions__item_,
         _GA_Point_iE_Extensions,
@@ -16740,7 +17634,9 @@ class PCAP_IEs:
         _GA_PointWithAltitude_altitudeAndDirection,
         ____GA_PointWithAltitude_iE_Extensions__item__id_tab,
         ___GA_PointWithAltitude_iE_Extensions__item__id,
+        ____GA_PointWithAltitude_iE_Extensions__item__criticality_tab,
         ___GA_PointWithAltitude_iE_Extensions__item__criticality,
+        ____GA_PointWithAltitude_iE_Extensions__item__extensionValue_tab,
         ___GA_PointWithAltitude_iE_Extensions__item__extensionValue,
         __GA_PointWithAltitude_iE_Extensions__item_,
         _GA_PointWithAltitude_iE_Extensions,
@@ -16753,7 +17649,9 @@ class PCAP_IEs:
         _GA_PointWithAltitudeAndUncertaintyEllipsoid_confidence,
         ____GA_PointWithAltitudeAndUncertaintyEllipsoid_iE_Extensions__item__id_tab,
         ___GA_PointWithAltitudeAndUncertaintyEllipsoid_iE_Extensions__item__id,
+        ____GA_PointWithAltitudeAndUncertaintyEllipsoid_iE_Extensions__item__criticality_tab,
         ___GA_PointWithAltitudeAndUncertaintyEllipsoid_iE_Extensions__item__criticality,
+        ____GA_PointWithAltitudeAndUncertaintyEllipsoid_iE_Extensions__item__extensionValue_tab,
         ___GA_PointWithAltitudeAndUncertaintyEllipsoid_iE_Extensions__item__extensionValue,
         __GA_PointWithAltitudeAndUncertaintyEllipsoid_iE_Extensions__item_,
         _GA_PointWithAltitudeAndUncertaintyEllipsoid_iE_Extensions,
@@ -16763,7 +17661,9 @@ class PCAP_IEs:
         _GA_PointWithUnCertainty_uncertaintyCode,
         ____GA_PointWithUnCertainty_iE_Extensions__item__id_tab,
         ___GA_PointWithUnCertainty_iE_Extensions__item__id,
+        ____GA_PointWithUnCertainty_iE_Extensions__item__criticality_tab,
         ___GA_PointWithUnCertainty_iE_Extensions__item__criticality,
+        ____GA_PointWithUnCertainty_iE_Extensions__item__extensionValue_tab,
         ___GA_PointWithUnCertainty_iE_Extensions__item__extensionValue,
         __GA_PointWithUnCertainty_iE_Extensions__item_,
         _GA_PointWithUnCertainty_iE_Extensions,
@@ -16774,7 +17674,9 @@ class PCAP_IEs:
         _GA_PointWithUnCertaintyEllipse_confidence,
         ____GA_PointWithUnCertaintyEllipse_iE_Extensions__item__id_tab,
         ___GA_PointWithUnCertaintyEllipse_iE_Extensions__item__id,
+        ____GA_PointWithUnCertaintyEllipse_iE_Extensions__item__criticality_tab,
         ___GA_PointWithUnCertaintyEllipse_iE_Extensions__item__criticality,
+        ____GA_PointWithUnCertaintyEllipse_iE_Extensions__item__extensionValue_tab,
         ___GA_PointWithUnCertaintyEllipse_iE_Extensions__item__extensionValue,
         __GA_PointWithUnCertaintyEllipse_iE_Extensions__item_,
         _GA_PointWithUnCertaintyEllipse_iE_Extensions,
@@ -16783,7 +17685,9 @@ class PCAP_IEs:
         __GA_Polygon__item__geographicalCoordinates,
         _____GA_Polygon__item__iE_Extensions__item__id_tab,
         ____GA_Polygon__item__iE_Extensions__item__id,
+        _____GA_Polygon__item__iE_Extensions__item__criticality_tab,
         ____GA_Polygon__item__iE_Extensions__item__criticality,
+        _____GA_Polygon__item__iE_Extensions__item__extensionValue_tab,
         ____GA_Polygon__item__iE_Extensions__item__extensionValue,
         ___GA_Polygon__item__iE_Extensions__item_,
         __GA_Polygon__item__iE_Extensions,
@@ -16827,7 +17731,9 @@ class PCAP_IEs:
         _Cell_Timing_uC_ID,
         ____Cell_Timing_iE_Extensions__item__id_tab,
         ___Cell_Timing_iE_Extensions__item__id,
+        ____Cell_Timing_iE_Extensions__item__criticality_tab,
         ___Cell_Timing_iE_Extensions__item__criticality,
+        ____Cell_Timing_iE_Extensions__item__extensionValue_tab,
         ___Cell_Timing_iE_Extensions__item__extensionValue,
         __Cell_Timing_iE_Extensions__item_,
         _Cell_Timing_iE_Extensions,
@@ -16837,7 +17743,9 @@ class PCAP_IEs:
         _GANSS_Reference_Time_Only_ganssTimeID,
         ____GANSS_Reference_Time_Only_iE_Extensions__item__id_tab,
         ___GANSS_Reference_Time_Only_iE_Extensions__item__id,
+        ____GANSS_Reference_Time_Only_iE_Extensions__item__criticality_tab,
         ___GANSS_Reference_Time_Only_iE_Extensions__item__criticality,
+        ____GANSS_Reference_Time_Only_iE_Extensions__item__extensionValue_tab,
         ___GANSS_Reference_Time_Only_iE_Extensions__item__extensionValue,
         __GANSS_Reference_Time_Only_iE_Extensions__item_,
         _GANSS_Reference_Time_Only_iE_Extensions,
@@ -16846,7 +17754,9 @@ class PCAP_IEs:
         _PositionDataUEbased_positionData,
         ____PositionDataUEbased_iE_Extensions__item__id_tab,
         ___PositionDataUEbased_iE_Extensions__item__id,
+        ____PositionDataUEbased_iE_Extensions__item__criticality_tab,
         ___PositionDataUEbased_iE_Extensions__item__criticality,
+        ____PositionDataUEbased_iE_Extensions__item__extensionValue_tab,
         ___PositionDataUEbased_iE_Extensions__item__extensionValue,
         __PositionDataUEbased_iE_Extensions__item_,
         _PositionDataUEbased_iE_Extensions,
@@ -16916,7 +17826,9 @@ class PCAP_IEs:
         _ExtraDopplerInfo_dopplerUncertainty,
         ____ExtraDopplerInfo_iE_Extensions__item__id_tab,
         ___ExtraDopplerInfo_iE_Extensions__item__id,
+        ____ExtraDopplerInfo_iE_Extensions__item__criticality_tab,
         ___ExtraDopplerInfo_iE_Extensions__item__criticality,
+        ____ExtraDopplerInfo_iE_Extensions__item__extensionValue_tab,
         ___ExtraDopplerInfo_iE_Extensions__item__extensionValue,
         __ExtraDopplerInfo_iE_Extensions__item_,
         _ExtraDopplerInfo_iE_Extensions,
@@ -16926,7 +17838,9 @@ class PCAP_IEs:
         _ExtraDopplerInfoExtension_dopplerUncertaintyExtension,
         ____ExtraDopplerInfoExtension_iE_Extensions__item__id_tab,
         ___ExtraDopplerInfoExtension_iE_Extensions__item__id,
+        ____ExtraDopplerInfoExtension_iE_Extensions__item__criticality_tab,
         ___ExtraDopplerInfoExtension_iE_Extensions__item__criticality,
+        ____ExtraDopplerInfoExtension_iE_Extensions__item__extensionValue_tab,
         ___ExtraDopplerInfoExtension_iE_Extensions__item__extensionValue,
         __ExtraDopplerInfoExtension_iE_Extensions__item_,
         _ExtraDopplerInfoExtension_iE_Extensions,
@@ -16951,7 +17865,9 @@ class PCAP_IEs:
         _AzimuthAndElevationLSB_elevationLSB,
         ____AzimuthAndElevationLSB_iE_Extensions__item__id_tab,
         ___AzimuthAndElevationLSB_iE_Extensions__item__id,
+        ____AzimuthAndElevationLSB_iE_Extensions__item__criticality_tab,
         ___AzimuthAndElevationLSB_iE_Extensions__item__criticality,
+        ____AzimuthAndElevationLSB_iE_Extensions__item__extensionValue_tab,
         ___AzimuthAndElevationLSB_iE_Extensions__item__extensionValue,
         __AzimuthAndElevationLSB_iE_Extensions__item_,
         _AzimuthAndElevationLSB_iE_Extensions,
@@ -16964,7 +17880,9 @@ class PCAP_IEs:
         _AuxInfoGANSS_ID1_element_signalsAvailable,
         ____AuxInfoGANSS_ID1_element_ie_Extensions__item__id_tab,
         ___AuxInfoGANSS_ID1_element_ie_Extensions__item__id,
+        ____AuxInfoGANSS_ID1_element_ie_Extensions__item__criticality_tab,
         ___AuxInfoGANSS_ID1_element_ie_Extensions__item__criticality,
+        ____AuxInfoGANSS_ID1_element_ie_Extensions__item__extensionValue_tab,
         ___AuxInfoGANSS_ID1_element_ie_Extensions__item__extensionValue,
         __AuxInfoGANSS_ID1_element_ie_Extensions__item_,
         _AuxInfoGANSS_ID1_element_ie_Extensions,
@@ -16977,7 +17895,9 @@ class PCAP_IEs:
         _AuxInfoGANSS_ID3_element_channelNumber,
         ____AuxInfoGANSS_ID3_element_ie_Extensions__item__id_tab,
         ___AuxInfoGANSS_ID3_element_ie_Extensions__item__id,
+        ____AuxInfoGANSS_ID3_element_ie_Extensions__item__criticality_tab,
         ___AuxInfoGANSS_ID3_element_ie_Extensions__item__criticality,
+        ____AuxInfoGANSS_ID3_element_ie_Extensions__item__extensionValue_tab,
         ___AuxInfoGANSS_ID3_element_ie_Extensions__item__extensionValue,
         __AuxInfoGANSS_ID3_element_ie_Extensions__item_,
         _AuxInfoGANSS_ID3_element_ie_Extensions,
@@ -17000,7 +17920,9 @@ class PCAP_IEs:
         _CNAVclockModel_cnavISCl5q5,
         ____CNAVclockModel_ie_Extensions__item__id_tab,
         ___CNAVclockModel_ie_Extensions__item__id,
+        ____CNAVclockModel_ie_Extensions__item__criticality_tab,
         ___CNAVclockModel_ie_Extensions__item__criticality,
+        ____CNAVclockModel_ie_Extensions__item__extensionValue_tab,
         ___CNAVclockModel_ie_Extensions__item__extensionValue,
         __CNAVclockModel_ie_Extensions__item_,
         _CNAVclockModel_ie_Extensions,
@@ -17010,7 +17932,9 @@ class PCAP_IEs:
         _DeltaUT1_b2,
         ____DeltaUT1_ie_Extensions__item__id_tab,
         ___DeltaUT1_ie_Extensions__item__id,
+        ____DeltaUT1_ie_Extensions__item__criticality_tab,
         ___DeltaUT1_ie_Extensions__item__criticality,
+        ____DeltaUT1_ie_Extensions__item__extensionValue_tab,
         ___DeltaUT1_ie_Extensions__item__extensionValue,
         __DeltaUT1_ie_Extensions__item_,
         _DeltaUT1_ie_Extensions,
@@ -17020,7 +17944,9 @@ class PCAP_IEs:
         _DGANSS_Corrections_dGANSS_Information,
         ____DGANSS_Corrections_ie_Extensions__item__id_tab,
         ___DGANSS_Corrections_ie_Extensions__item__id,
+        ____DGANSS_Corrections_ie_Extensions__item__criticality_tab,
         ___DGANSS_Corrections_ie_Extensions__item__criticality,
+        ____DGANSS_Corrections_ie_Extensions__item__extensionValue_tab,
         ___DGANSS_Corrections_ie_Extensions__item__extensionValue,
         __DGANSS_Corrections_ie_Extensions__item_,
         _DGANSS_Corrections_ie_Extensions,
@@ -17033,7 +17959,9 @@ class PCAP_IEs:
         _DGANSS_InformationItem_dGANSS_SignalInformation,
         ____DGANSS_InformationItem_ie_Extensions__item__id_tab,
         ___DGANSS_InformationItem_ie_Extensions__item__id,
+        ____DGANSS_InformationItem_ie_Extensions__item__criticality_tab,
         ___DGANSS_InformationItem_ie_Extensions__item__criticality,
+        ____DGANSS_InformationItem_ie_Extensions__item__extensionValue_tab,
         ___DGANSS_InformationItem_ie_Extensions__item__extensionValue,
         __DGANSS_InformationItem_ie_Extensions__item_,
         _DGANSS_InformationItem_ie_Extensions,
@@ -17072,7 +18000,9 @@ class PCAP_IEs:
         _GANSS_Additional_Ionospheric_Model_alpha_beta_parameters,
         ____GANSS_Additional_Ionospheric_Model_ie_Extensions__item__id_tab,
         ___GANSS_Additional_Ionospheric_Model_ie_Extensions__item__id,
+        ____GANSS_Additional_Ionospheric_Model_ie_Extensions__item__criticality_tab,
         ___GANSS_Additional_Ionospheric_Model_ie_Extensions__item__criticality,
+        ____GANSS_Additional_Ionospheric_Model_ie_Extensions__item__extensionValue_tab,
         ___GANSS_Additional_Ionospheric_Model_ie_Extensions__item__extensionValue,
         __GANSS_Additional_Ionospheric_Model_ie_Extensions__item_,
         _GANSS_Additional_Ionospheric_Model_ie_Extensions,
@@ -17082,7 +18012,9 @@ class PCAP_IEs:
         _GANSS_Additional_Navigation_Models_ganssSatInfoNavList,
         ____GANSS_Additional_Navigation_Models_ie_Extensions__item__id_tab,
         ___GANSS_Additional_Navigation_Models_ie_Extensions__item__id,
+        ____GANSS_Additional_Navigation_Models_ie_Extensions__item__criticality_tab,
         ___GANSS_Additional_Navigation_Models_ie_Extensions__item__criticality,
+        ____GANSS_Additional_Navigation_Models_ie_Extensions__item__extensionValue_tab,
         ___GANSS_Additional_Navigation_Models_ie_Extensions__item__extensionValue,
         __GANSS_Additional_Navigation_Models_ie_Extensions__item_,
         _GANSS_Additional_Navigation_Models_ie_Extensions,
@@ -17098,7 +18030,9 @@ class PCAP_IEs:
         _GANSS_ALM_BDSKeplericanset_satellite_Information_BDS_KP_List,
         ____GANSS_ALM_BDSKeplericanset_ie_Extensions__item__id_tab,
         ___GANSS_ALM_BDSKeplericanset_ie_Extensions__item__id,
+        ____GANSS_ALM_BDSKeplericanset_ie_Extensions__item__criticality_tab,
         ___GANSS_ALM_BDSKeplericanset_ie_Extensions__item__criticality,
+        ____GANSS_ALM_BDSKeplericanset_ie_Extensions__item__extensionValue_tab,
         ___GANSS_ALM_BDSKeplericanset_ie_Extensions__item__extensionValue,
         __GANSS_ALM_BDSKeplericanset_ie_Extensions__item_,
         _GANSS_ALM_BDSKeplericanset_ie_Extensions,
@@ -17120,7 +18054,9 @@ class PCAP_IEs:
         _Satellite_Information_BDS_KP_Item_hea_BDS,
         ____Satellite_Information_BDS_KP_Item_ie_Extensions__item__id_tab,
         ___Satellite_Information_BDS_KP_Item_ie_Extensions__item__id,
+        ____Satellite_Information_BDS_KP_Item_ie_Extensions__item__criticality_tab,
         ___Satellite_Information_BDS_KP_Item_ie_Extensions__item__criticality,
+        ____Satellite_Information_BDS_KP_Item_ie_Extensions__item__extensionValue_tab,
         ___Satellite_Information_BDS_KP_Item_ie_Extensions__item__extensionValue,
         __Satellite_Information_BDS_KP_Item_ie_Extensions__item_,
         _Satellite_Information_BDS_KP_Item_ie_Extensions,
@@ -17129,7 +18065,9 @@ class PCAP_IEs:
         _GANSS_ALM_ECEFsbasAlmanacSet_sat_info_SBASecefList,
         ____GANSS_ALM_ECEFsbasAlmanacSet_ie_Extensions__item__id_tab,
         ___GANSS_ALM_ECEFsbasAlmanacSet_ie_Extensions__item__id,
+        ____GANSS_ALM_ECEFsbasAlmanacSet_ie_Extensions__item__criticality_tab,
         ___GANSS_ALM_ECEFsbasAlmanacSet_ie_Extensions__item__criticality,
+        ____GANSS_ALM_ECEFsbasAlmanacSet_ie_Extensions__item__extensionValue_tab,
         ___GANSS_ALM_ECEFsbasAlmanacSet_ie_Extensions__item__extensionValue,
         __GANSS_ALM_ECEFsbasAlmanacSet_ie_Extensions__item_,
         _GANSS_ALM_ECEFsbasAlmanacSet_ie_Extensions,
@@ -17138,7 +18076,9 @@ class PCAP_IEs:
         _GANSS_ALM_GlonassAlmanacSet_sat_info_GLOkpList,
         ____GANSS_ALM_GlonassAlmanacSet_ie_Extensions__item__id_tab,
         ___GANSS_ALM_GlonassAlmanacSet_ie_Extensions__item__id,
+        ____GANSS_ALM_GlonassAlmanacSet_ie_Extensions__item__criticality_tab,
         ___GANSS_ALM_GlonassAlmanacSet_ie_Extensions__item__criticality,
+        ____GANSS_ALM_GlonassAlmanacSet_ie_Extensions__item__extensionValue_tab,
         ___GANSS_ALM_GlonassAlmanacSet_ie_Extensions__item__extensionValue,
         __GANSS_ALM_GlonassAlmanacSet_ie_Extensions__item_,
         _GANSS_ALM_GlonassAlmanacSet_ie_Extensions,
@@ -17148,7 +18088,9 @@ class PCAP_IEs:
         _GANSS_ALM_MidiAlmanacSet_sat_info_MIDIkpList,
         ____GANSS_ALM_MidiAlmanacSet_ie_Extensions__item__id_tab,
         ___GANSS_ALM_MidiAlmanacSet_ie_Extensions__item__id,
+        ____GANSS_ALM_MidiAlmanacSet_ie_Extensions__item__criticality_tab,
         ___GANSS_ALM_MidiAlmanacSet_ie_Extensions__item__criticality,
+        ____GANSS_ALM_MidiAlmanacSet_ie_Extensions__item__extensionValue_tab,
         ___GANSS_ALM_MidiAlmanacSet_ie_Extensions__item__extensionValue,
         __GANSS_ALM_MidiAlmanacSet_ie_Extensions__item_,
         _GANSS_ALM_MidiAlmanacSet_ie_Extensions,
@@ -17158,7 +18100,9 @@ class PCAP_IEs:
         _GANSS_ALM_NAVKeplerianSet_sat_info_NAVkpList,
         ____GANSS_ALM_NAVKeplerianSet_ie_Extensions__item__id_tab,
         ___GANSS_ALM_NAVKeplerianSet_ie_Extensions__item__id,
+        ____GANSS_ALM_NAVKeplerianSet_ie_Extensions__item__criticality_tab,
         ___GANSS_ALM_NAVKeplerianSet_ie_Extensions__item__criticality,
+        ____GANSS_ALM_NAVKeplerianSet_ie_Extensions__item__extensionValue_tab,
         ___GANSS_ALM_NAVKeplerianSet_ie_Extensions__item__extensionValue,
         __GANSS_ALM_NAVKeplerianSet_ie_Extensions__item_,
         _GANSS_ALM_NAVKeplerianSet_ie_Extensions,
@@ -17168,7 +18112,9 @@ class PCAP_IEs:
         _GANSS_ALM_ReducedKeplerianSet_sat_info_REDkpList,
         ____GANSS_ALM_ReducedKeplerianSet_ie_Extensions__item__id_tab,
         ___GANSS_ALM_ReducedKeplerianSet_ie_Extensions__item__id,
+        ____GANSS_ALM_ReducedKeplerianSet_ie_Extensions__item__criticality_tab,
         ___GANSS_ALM_ReducedKeplerianSet_ie_Extensions__item__criticality,
+        ____GANSS_ALM_ReducedKeplerianSet_ie_Extensions__item__extensionValue_tab,
         ___GANSS_ALM_ReducedKeplerianSet_ie_Extensions__item__extensionValue,
         __GANSS_ALM_ReducedKeplerianSet_ie_Extensions__item_,
         _GANSS_ALM_ReducedKeplerianSet_ie_Extensions,
@@ -17243,7 +18189,9 @@ class PCAP_IEs:
         _GANSS_Data_Bit_Assistance_dataBitAssistancelist,
         ____GANSS_Data_Bit_Assistance_ie_Extensions__item__id_tab,
         ___GANSS_Data_Bit_Assistance_ie_Extensions__item__id,
+        ____GANSS_Data_Bit_Assistance_ie_Extensions__item__criticality_tab,
         ___GANSS_Data_Bit_Assistance_ie_Extensions__item__criticality,
+        ____GANSS_Data_Bit_Assistance_ie_Extensions__item__extensionValue_tab,
         ___GANSS_Data_Bit_Assistance_ie_Extensions__item__extensionValue,
         __GANSS_Data_Bit_Assistance_ie_Extensions__item_,
         _GANSS_Data_Bit_Assistance_ie_Extensions,
@@ -17255,7 +18203,9 @@ class PCAP_IEs:
         _GANSS_DataBitAssistanceItem_dataBitAssistanceSgnList,
         ____GANSS_DataBitAssistanceItem_ie_Extensions__item__id_tab,
         ___GANSS_DataBitAssistanceItem_ie_Extensions__item__id,
+        ____GANSS_DataBitAssistanceItem_ie_Extensions__item__criticality_tab,
         ___GANSS_DataBitAssistanceItem_ie_Extensions__item__criticality,
+        ____GANSS_DataBitAssistanceItem_ie_Extensions__item__extensionValue_tab,
         ___GANSS_DataBitAssistanceItem_ie_Extensions__item__extensionValue,
         __GANSS_DataBitAssistanceItem_ie_Extensions__item_,
         _GANSS_DataBitAssistanceItem_ie_Extensions,
@@ -17267,7 +18217,9 @@ class PCAP_IEs:
         _GANSS_DataBitAssistanceSgnItem_ganssDataBits,
         ____GANSS_DataBitAssistanceSgnItem_ie_Extensions__item__id_tab,
         ___GANSS_DataBitAssistanceSgnItem_ie_Extensions__item__id,
+        ____GANSS_DataBitAssistanceSgnItem_ie_Extensions__item__criticality_tab,
         ___GANSS_DataBitAssistanceSgnItem_ie_Extensions__item__criticality,
+        ____GANSS_DataBitAssistanceSgnItem_ie_Extensions__item__extensionValue_tab,
         ___GANSS_DataBitAssistanceSgnItem_ie_Extensions__item__extensionValue,
         __GANSS_DataBitAssistanceSgnItem_ie_Extensions__item_,
         _GANSS_DataBitAssistanceSgnItem_ie_Extensions,
@@ -17282,7 +18234,9 @@ class PCAP_IEs:
         _GANSS_Earth_Orientation_Parameters_deltaUT1dot,
         ____GANSS_Earth_Orientation_Parameters_ie_Extensions__item__id_tab,
         ___GANSS_Earth_Orientation_Parameters_ie_Extensions__item__id,
+        ____GANSS_Earth_Orientation_Parameters_ie_Extensions__item__criticality_tab,
         ___GANSS_Earth_Orientation_Parameters_ie_Extensions__item__criticality,
+        ____GANSS_Earth_Orientation_Parameters_ie_Extensions__item__extensionValue_tab,
         ___GANSS_Earth_Orientation_Parameters_ie_Extensions__item__extensionValue,
         __GANSS_Earth_Orientation_Parameters_ie_Extensions__item_,
         _GANSS_Earth_Orientation_Parameters_ie_Extensions,
@@ -17292,7 +18246,9 @@ class PCAP_IEs:
         _GANSS_ExtraDoppler_dopplerUncertainty,
         ____GANSS_ExtraDoppler_ie_Extensions__item__id_tab,
         ___GANSS_ExtraDoppler_ie_Extensions__item__id,
+        ____GANSS_ExtraDoppler_ie_Extensions__item__criticality_tab,
         ___GANSS_ExtraDoppler_ie_Extensions__item__criticality,
+        ____GANSS_ExtraDoppler_ie_Extensions__item__extensionValue_tab,
         ___GANSS_ExtraDoppler_ie_Extensions__item__extensionValue,
         __GANSS_ExtraDoppler_ie_Extensions__item_,
         _GANSS_ExtraDoppler_ie_Extensions,
@@ -17302,7 +18258,9 @@ class PCAP_IEs:
         _GANSS_ExtraDopplerExtension_dopplerUncertaintyExtension,
         ____GANSS_ExtraDopplerExtension_ie_Extensions__item__id_tab,
         ___GANSS_ExtraDopplerExtension_ie_Extensions__item__id,
+        ____GANSS_ExtraDopplerExtension_ie_Extensions__item__criticality_tab,
         ___GANSS_ExtraDopplerExtension_ie_Extensions__item__criticality,
+        ____GANSS_ExtraDopplerExtension_ie_Extensions__item__extensionValue_tab,
         ___GANSS_ExtraDopplerExtension_ie_Extensions__item__extensionValue,
         __GANSS_ExtraDopplerExtension_ie_Extensions__item_,
         _GANSS_ExtraDopplerExtension_ie_Extensions,
@@ -17345,7 +18303,9 @@ class PCAP_IEs:
         _BDS_Ionospheric_Grid_Model_bDS_Ionospheric_Grid_Information,
         ____BDS_Ionospheric_Grid_Model_ie_Extensions__item__id_tab,
         ___BDS_Ionospheric_Grid_Model_ie_Extensions__item__id,
+        ____BDS_Ionospheric_Grid_Model_ie_Extensions__item__criticality_tab,
         ___BDS_Ionospheric_Grid_Model_ie_Extensions__item__criticality,
+        ____BDS_Ionospheric_Grid_Model_ie_Extensions__item__extensionValue_tab,
         ___BDS_Ionospheric_Grid_Model_ie_Extensions__item__extensionValue,
         __BDS_Ionospheric_Grid_Model_ie_Extensions__item_,
         _BDS_Ionospheric_Grid_Model_ie_Extensions,
@@ -17357,7 +18317,9 @@ class PCAP_IEs:
         __BDS_Ionospheric_Grid_Information__item__gIVEI_BDS,
         _____BDS_Ionospheric_Grid_Information__item__ie_Extensions__item__id_tab,
         ____BDS_Ionospheric_Grid_Information__item__ie_Extensions__item__id,
+        _____BDS_Ionospheric_Grid_Information__item__ie_Extensions__item__criticality_tab,
         ____BDS_Ionospheric_Grid_Information__item__ie_Extensions__item__criticality,
+        _____BDS_Ionospheric_Grid_Information__item__ie_Extensions__item__extensionValue_tab,
         ____BDS_Ionospheric_Grid_Information__item__ie_Extensions__item__extensionValue,
         ___BDS_Ionospheric_Grid_Information__item__ie_Extensions__item_,
         __BDS_Ionospheric_Grid_Information__item__ie_Extensions,
@@ -17368,7 +18330,9 @@ class PCAP_IEs:
         _DBDS_Correction_Information_dBDS_Information,
         ____DBDS_Correction_Information_ie_Extensions__item__id_tab,
         ___DBDS_Correction_Information_ie_Extensions__item__id,
+        ____DBDS_Correction_Information_ie_Extensions__item__criticality_tab,
         ___DBDS_Correction_Information_ie_Extensions__item__criticality,
+        ____DBDS_Correction_Information_ie_Extensions__item__extensionValue_tab,
         ___DBDS_Correction_Information_ie_Extensions__item__extensionValue,
         __DBDS_Correction_Information_ie_Extensions__item_,
         _DBDS_Correction_Information_ie_Extensions,
@@ -17378,7 +18342,9 @@ class PCAP_IEs:
         __DBDS_Information__item__dGANSS_Signal_Information,
         _____DBDS_Information__item__ie_Extensions__item__id_tab,
         ____DBDS_Information__item__ie_Extensions__item__id,
+        _____DBDS_Information__item__ie_Extensions__item__criticality_tab,
         ____DBDS_Information__item__ie_Extensions__item__criticality,
+        _____DBDS_Information__item__ie_Extensions__item__extensionValue_tab,
         ____DBDS_Information__item__ie_Extensions__item__extensionValue,
         ___DBDS_Information__item__ie_Extensions__item_,
         __DBDS_Information__item__ie_Extensions,
@@ -17391,7 +18357,9 @@ class PCAP_IEs:
         __DGANSS_Signal_Information__item__delta_t_BDS,
         _____DGANSS_Signal_Information__item__ie_Extensions__item__id_tab,
         ____DGANSS_Signal_Information__item__ie_Extensions__item__id,
+        _____DGANSS_Signal_Information__item__ie_Extensions__item__criticality_tab,
         ____DGANSS_Signal_Information__item__ie_Extensions__item__criticality,
+        _____DGANSS_Signal_Information__item__ie_Extensions__item__extensionValue_tab,
         ____DGANSS_Signal_Information__item__ie_Extensions__item__extensionValue,
         ___DGANSS_Signal_Information__item__ie_Extensions__item_,
         __DGANSS_Signal_Information__item__ie_Extensions,
@@ -17402,7 +18370,9 @@ class PCAP_IEs:
         __GANSS_GenericMeasurementInfo__item__ganssMeasurementSignalList,
         _____GANSS_GenericMeasurementInfo__item__ie_Extensions__item__id_tab,
         ____GANSS_GenericMeasurementInfo__item__ie_Extensions__item__id,
+        _____GANSS_GenericMeasurementInfo__item__ie_Extensions__item__criticality_tab,
         ____GANSS_GenericMeasurementInfo__item__ie_Extensions__item__criticality,
+        _____GANSS_GenericMeasurementInfo__item__ie_Extensions__item__extensionValue_tab,
         ____GANSS_GenericMeasurementInfo__item__ie_Extensions__item__extensionValue,
         ___GANSS_GenericMeasurementInfo__item__ie_Extensions__item_,
         __GANSS_GenericMeasurementInfo__item__ie_Extensions,
@@ -17412,7 +18382,9 @@ class PCAP_IEs:
         _GANSSID_ganss_ID,
         ____GANSSID_ie_Extensions__item__id_tab,
         ___GANSSID_ie_Extensions__item__id,
+        ____GANSSID_ie_Extensions__item__criticality_tab,
         ___GANSSID_ie_Extensions__item__criticality,
+        ____GANSSID_ie_Extensions__item__extensionValue_tab,
         ___GANSSID_ie_Extensions__item__extensionValue,
         __GANSSID_ie_Extensions__item_,
         _GANSSID_ie_Extensions,
@@ -17435,7 +18407,9 @@ class PCAP_IEs:
         _GanssCodePhaseAmbiguityExt_ganssCodePhaseAmbiguity_ext,
         ____GanssCodePhaseAmbiguityExt_ie_Extensions__item__id_tab,
         ___GanssCodePhaseAmbiguityExt_ie_Extensions__item__id,
+        ____GanssCodePhaseAmbiguityExt_ie_Extensions__item__criticality_tab,
         ___GanssCodePhaseAmbiguityExt_ie_Extensions__item__criticality,
+        ____GanssCodePhaseAmbiguityExt_ie_Extensions__item__extensionValue_tab,
         ___GanssCodePhaseAmbiguityExt_ie_Extensions__item__extensionValue,
         __GanssCodePhaseAmbiguityExt_ie_Extensions__item_,
         _GanssCodePhaseAmbiguityExt_ie_Extensions,
@@ -17447,7 +18421,9 @@ class PCAP_IEs:
         _GANSS_Ionospheric_Model_gANSS_IonosphereRegionalStormFlags,
         ____GANSS_Ionospheric_Model_ie_Extensions__item__id_tab,
         ___GANSS_Ionospheric_Model_ie_Extensions__item__id,
+        ____GANSS_Ionospheric_Model_ie_Extensions__item__criticality_tab,
         ___GANSS_Ionospheric_Model_ie_Extensions__item__criticality,
+        ____GANSS_Ionospheric_Model_ie_Extensions__item__extensionValue_tab,
         ___GANSS_Ionospheric_Model_ie_Extensions__item__extensionValue,
         __GANSS_Ionospheric_Model_ie_Extensions__item_,
         _GANSS_Ionospheric_Model_ie_Extensions,
@@ -17460,7 +18436,9 @@ class PCAP_IEs:
         _GANSS_IonosphereRegionalStormFlags_storm_flag_five,
         ____GANSS_IonosphereRegionalStormFlags_ie_Extensions__item__id_tab,
         ___GANSS_IonosphereRegionalStormFlags_ie_Extensions__item__id,
+        ____GANSS_IonosphereRegionalStormFlags_ie_Extensions__item__criticality_tab,
         ___GANSS_IonosphereRegionalStormFlags_ie_Extensions__item__criticality,
+        ____GANSS_IonosphereRegionalStormFlags_ie_Extensions__item__extensionValue_tab,
         ___GANSS_IonosphereRegionalStormFlags_ie_Extensions__item__extensionValue,
         __GANSS_IonosphereRegionalStormFlags_ie_Extensions__item_,
         _GANSS_IonosphereRegionalStormFlags_ie_Extensions,
@@ -17471,7 +18449,9 @@ class PCAP_IEs:
         _GANSS_KeplerianParametersAlm_gANSS_SatelliteInformationKP,
         ____GANSS_KeplerianParametersAlm_ie_Extensions__item__id_tab,
         ___GANSS_KeplerianParametersAlm_ie_Extensions__item__id,
+        ____GANSS_KeplerianParametersAlm_ie_Extensions__item__criticality_tab,
         ___GANSS_KeplerianParametersAlm_ie_Extensions__item__criticality,
+        ____GANSS_KeplerianParametersAlm_ie_Extensions__item__extensionValue_tab,
         ___GANSS_KeplerianParametersAlm_ie_Extensions__item__extensionValue,
         __GANSS_KeplerianParametersAlm_ie_Extensions__item_,
         _GANSS_KeplerianParametersAlm_ie_Extensions,
@@ -17495,7 +18475,9 @@ class PCAP_IEs:
         _GANSS_KeplerianParametersOrb_c_uc_nav,
         ____GANSS_KeplerianParametersOrb_ie_Extensions__item__id_tab,
         ___GANSS_KeplerianParametersOrb_ie_Extensions__item__id,
+        ____GANSS_KeplerianParametersOrb_ie_Extensions__item__criticality_tab,
         ___GANSS_KeplerianParametersOrb_ie_Extensions__item__criticality,
+        ____GANSS_KeplerianParametersOrb_ie_Extensions__item__extensionValue_tab,
         ___GANSS_KeplerianParametersOrb_ie_Extensions__item__extensionValue,
         __GANSS_KeplerianParametersOrb_ie_Extensions__item_,
         _GANSS_KeplerianParametersOrb_ie_Extensions,
@@ -17525,7 +18507,9 @@ class PCAP_IEs:
         _GanssIntegerCodePhaseExt_ganssIntegerCodePhase_ext,
         ____GanssIntegerCodePhaseExt_ie_Extensions__item__id_tab,
         ___GanssIntegerCodePhaseExt_ie_Extensions__item__id,
+        ____GanssIntegerCodePhaseExt_ie_Extensions__item__criticality_tab,
         ___GanssIntegerCodePhaseExt_ie_Extensions__item__criticality,
+        ____GanssIntegerCodePhaseExt_ie_Extensions__item__extensionValue_tab,
         ___GanssIntegerCodePhaseExt_ie_Extensions__item__extensionValue,
         __GanssIntegerCodePhaseExt_ie_Extensions__item_,
         _GanssIntegerCodePhaseExt_ie_Extensions,
@@ -17539,7 +18523,9 @@ class PCAP_IEs:
         _GANSS_MeasuredResults_ganssGenericMeasurementInfo,
         ____GANSS_MeasuredResults_ie_Extensions__item__id_tab,
         ___GANSS_MeasuredResults_ie_Extensions__item__id,
+        ____GANSS_MeasuredResults_ie_Extensions__item__criticality_tab,
         ___GANSS_MeasuredResults_ie_Extensions__item__criticality,
+        ____GANSS_MeasuredResults_ie_Extensions__item__extensionValue_tab,
         ___GANSS_MeasuredResults_ie_Extensions__item__extensionValue,
         __GANSS_MeasuredResults_ie_Extensions__item_,
         _GANSS_MeasuredResults_ie_Extensions,
@@ -17549,7 +18535,9 @@ class PCAP_IEs:
         _GANSS_Navigation_Model_ganssSatInfoNav,
         ____GANSS_Navigation_Model_ie_Extensions__item__id_tab,
         ___GANSS_Navigation_Model_ie_Extensions__item__id,
+        ____GANSS_Navigation_Model_ie_Extensions__item__criticality_tab,
         ___GANSS_Navigation_Model_ie_Extensions__item__criticality,
+        ____GANSS_Navigation_Model_ie_Extensions__item__extensionValue_tab,
         ___GANSS_Navigation_Model_ie_Extensions__item__extensionValue,
         __GANSS_Navigation_Model_ie_Extensions__item_,
         _GANSS_Navigation_Model_ie_Extensions,
@@ -17563,7 +18551,9 @@ class PCAP_IEs:
         _GANSS_RealTimeInformationItem_bad_ganss_signalId,
         ____GANSS_RealTimeInformationItem_ie_Extensions__item__id_tab,
         ___GANSS_RealTimeInformationItem_ie_Extensions__item__id,
+        ____GANSS_RealTimeInformationItem_ie_Extensions__item__criticality_tab,
         ___GANSS_RealTimeInformationItem_ie_Extensions__item__criticality,
+        ____GANSS_RealTimeInformationItem_ie_Extensions__item__extensionValue_tab,
         ___GANSS_RealTimeInformationItem_ie_Extensions__item__extensionValue,
         __GANSS_RealTimeInformationItem_ie_Extensions__item_,
         _GANSS_RealTimeInformationItem_ie_Extensions,
@@ -17572,7 +18562,9 @@ class PCAP_IEs:
         _GANSS_Reference_Location_ue_PositionEstimate,
         ____GANSS_Reference_Location_iE_Extensions__item__id_tab,
         ___GANSS_Reference_Location_iE_Extensions__item__id,
+        ____GANSS_Reference_Location_iE_Extensions__item__criticality_tab,
         ___GANSS_Reference_Location_iE_Extensions__item__criticality,
+        ____GANSS_Reference_Location_iE_Extensions__item__extensionValue_tab,
         ___GANSS_Reference_Location_iE_Extensions__item__extensionValue,
         __GANSS_Reference_Location_iE_Extensions__item_,
         _GANSS_Reference_Location_iE_Extensions,
@@ -17612,7 +18604,9 @@ class PCAP_IEs:
         _GANSS_ReferenceTimeOnly_gANSS_TimeUncertainty,
         ____GANSS_ReferenceTimeOnly_ie_Extensions__item__id_tab,
         ___GANSS_ReferenceTimeOnly_ie_Extensions__item__id,
+        ____GANSS_ReferenceTimeOnly_ie_Extensions__item__criticality_tab,
         ___GANSS_ReferenceTimeOnly_ie_Extensions__item__criticality,
+        ____GANSS_ReferenceTimeOnly_ie_Extensions__item__extensionValue_tab,
         ___GANSS_ReferenceTimeOnly_ie_Extensions__item__extensionValue,
         __GANSS_ReferenceTimeOnly_ie_Extensions__item_,
         _GANSS_ReferenceTimeOnly_ie_Extensions,
@@ -17627,7 +18621,9 @@ class PCAP_IEs:
         _GANSS_SatelliteClockModelItem_model_id,
         ____GANSS_SatelliteClockModelItem_ie_Extensions__item__id_tab,
         ___GANSS_SatelliteClockModelItem_ie_Extensions__item__id,
+        ____GANSS_SatelliteClockModelItem_ie_Extensions__item__criticality_tab,
         ___GANSS_SatelliteClockModelItem_ie_Extensions__item__criticality,
+        ____GANSS_SatelliteClockModelItem_ie_Extensions__item__extensionValue_tab,
         ___GANSS_SatelliteClockModelItem_ie_Extensions__item__extensionValue,
         __GANSS_SatelliteClockModelItem_ie_Extensions__item_,
         _GANSS_SatelliteClockModelItem_ie_Extensions,
@@ -17668,7 +18664,9 @@ class PCAP_IEs:
         _GANSS_SatelliteInformationKPItem_ganss_af_one_alm,
         ____GANSS_SatelliteInformationKPItem_ie_Extensions__item__id_tab,
         ___GANSS_SatelliteInformationKPItem_ie_Extensions__item__id,
+        ____GANSS_SatelliteInformationKPItem_ie_Extensions__item__criticality_tab,
         ___GANSS_SatelliteInformationKPItem_ie_Extensions__item__criticality,
+        ____GANSS_SatelliteInformationKPItem_ie_Extensions__item__extensionValue_tab,
         ___GANSS_SatelliteInformationKPItem_ie_Extensions__item__extensionValue,
         __GANSS_SatelliteInformationKPItem_ie_Extensions__item_,
         _GANSS_SatelliteInformationKPItem_ie_Extensions,
@@ -17691,7 +18689,9 @@ class PCAP_IEs:
         _GANSS_SAT_Info_Almanac_GLOkp_gloAlmMA,
         ____GANSS_SAT_Info_Almanac_GLOkp_ie_Extensions__item__id_tab,
         ___GANSS_SAT_Info_Almanac_GLOkp_ie_Extensions__item__id,
+        ____GANSS_SAT_Info_Almanac_GLOkp_ie_Extensions__item__criticality_tab,
         ___GANSS_SAT_Info_Almanac_GLOkp_ie_Extensions__item__criticality,
+        ____GANSS_SAT_Info_Almanac_GLOkp_ie_Extensions__item__extensionValue_tab,
         ___GANSS_SAT_Info_Almanac_GLOkp_ie_Extensions__item__extensionValue,
         __GANSS_SAT_Info_Almanac_GLOkp_ie_Extensions__item_,
         _GANSS_SAT_Info_Almanac_GLOkp_ie_Extensions,
@@ -17714,7 +18714,9 @@ class PCAP_IEs:
         _GANSS_SAT_Info_Almanac_MIDIkp_midiAlmL5Health,
         ____GANSS_SAT_Info_Almanac_MIDIkp_ie_Extensions__item__id_tab,
         ___GANSS_SAT_Info_Almanac_MIDIkp_ie_Extensions__item__id,
+        ____GANSS_SAT_Info_Almanac_MIDIkp_ie_Extensions__item__criticality_tab,
         ___GANSS_SAT_Info_Almanac_MIDIkp_ie_Extensions__item__criticality,
+        ____GANSS_SAT_Info_Almanac_MIDIkp_ie_Extensions__item__extensionValue_tab,
         ___GANSS_SAT_Info_Almanac_MIDIkp_ie_Extensions__item__extensionValue,
         __GANSS_SAT_Info_Almanac_MIDIkp_ie_Extensions__item_,
         _GANSS_SAT_Info_Almanac_MIDIkp_ie_Extensions,
@@ -17735,7 +18737,9 @@ class PCAP_IEs:
         _GANSS_SAT_Info_Almanac_NAVkp_navAlmaf1,
         ____GANSS_SAT_Info_Almanac_NAVkp_ie_Extensions__item__id_tab,
         ___GANSS_SAT_Info_Almanac_NAVkp_ie_Extensions__item__id,
+        ____GANSS_SAT_Info_Almanac_NAVkp_ie_Extensions__item__criticality_tab,
         ___GANSS_SAT_Info_Almanac_NAVkp_ie_Extensions__item__criticality,
+        ____GANSS_SAT_Info_Almanac_NAVkp_ie_Extensions__item__extensionValue_tab,
         ___GANSS_SAT_Info_Almanac_NAVkp_ie_Extensions__item__extensionValue,
         __GANSS_SAT_Info_Almanac_NAVkp_ie_Extensions__item_,
         _GANSS_SAT_Info_Almanac_NAVkp_ie_Extensions,
@@ -17752,7 +18756,9 @@ class PCAP_IEs:
         _GANSS_SAT_Info_Almanac_REDkp_redAlmL5Health,
         ____GANSS_SAT_Info_Almanac_REDkp_ie_Extensions__item__id_tab,
         ___GANSS_SAT_Info_Almanac_REDkp_ie_Extensions__item__id,
+        ____GANSS_SAT_Info_Almanac_REDkp_ie_Extensions__item__criticality_tab,
         ___GANSS_SAT_Info_Almanac_REDkp_ie_Extensions__item__criticality,
+        ____GANSS_SAT_Info_Almanac_REDkp_ie_Extensions__item__extensionValue_tab,
         ___GANSS_SAT_Info_Almanac_REDkp_ie_Extensions__item__extensionValue,
         __GANSS_SAT_Info_Almanac_REDkp_ie_Extensions__item_,
         _GANSS_SAT_Info_Almanac_REDkp_ie_Extensions,
@@ -17772,7 +18778,9 @@ class PCAP_IEs:
         _GANSS_SAT_Info_Almanac_SBASecef_sbasAlmTo,
         ____GANSS_SAT_Info_Almanac_SBASecef_ie_Extensions__item__id_tab,
         ___GANSS_SAT_Info_Almanac_SBASecef_ie_Extensions__item__id,
+        ____GANSS_SAT_Info_Almanac_SBASecef_ie_Extensions__item__criticality_tab,
         ___GANSS_SAT_Info_Almanac_SBASecef_ie_Extensions__item__criticality,
+        ____GANSS_SAT_Info_Almanac_SBASecef_ie_Extensions__item__extensionValue_tab,
         ___GANSS_SAT_Info_Almanac_SBASecef_ie_Extensions__item__extensionValue,
         __GANSS_SAT_Info_Almanac_SBASecef_ie_Extensions__item_,
         _GANSS_SAT_Info_Almanac_SBASecef_ie_Extensions,
@@ -17785,7 +18793,9 @@ class PCAP_IEs:
         __Ganss_Sat_Info_AddNavList__item__ganssAddOrbitModels,
         _____Ganss_Sat_Info_AddNavList__item__ie_Extensions__item__id_tab,
         ____Ganss_Sat_Info_AddNavList__item__ie_Extensions__item__id,
+        _____Ganss_Sat_Info_AddNavList__item__ie_Extensions__item__criticality_tab,
         ____Ganss_Sat_Info_AddNavList__item__ie_Extensions__item__criticality,
+        _____Ganss_Sat_Info_AddNavList__item__ie_Extensions__item__extensionValue_tab,
         ____Ganss_Sat_Info_AddNavList__item__ie_Extensions__item__extensionValue,
         ___Ganss_Sat_Info_AddNavList__item__ie_Extensions__item_,
         __Ganss_Sat_Info_AddNavList__item__ie_Extensions,
@@ -17799,7 +18809,9 @@ class PCAP_IEs:
         __GANSS_Sat_Info_Nav__item__ganssOrbitModel,
         _____GANSS_Sat_Info_Nav__item__ie_Extensions__item__id_tab,
         ____GANSS_Sat_Info_Nav__item__ie_Extensions__item__id,
+        _____GANSS_Sat_Info_Nav__item__ie_Extensions__item__criticality_tab,
         ____GANSS_Sat_Info_Nav__item__ie_Extensions__item__criticality,
+        _____GANSS_Sat_Info_Nav__item__ie_Extensions__item__extensionValue_tab,
         ____GANSS_Sat_Info_Nav__item__ie_Extensions__item__extensionValue,
         ___GANSS_Sat_Info_Nav__item__ie_Extensions__item_,
         __GANSS_Sat_Info_Nav__item__ie_Extensions,
@@ -17809,7 +18821,9 @@ class PCAP_IEs:
         _GANSS_SignalID_ganssSignalID,
         ____GANSS_SignalID_ie_Extensions__item__id_tab,
         ___GANSS_SignalID_ie_Extensions__item__id,
+        ____GANSS_SignalID_ie_Extensions__item__criticality_tab,
         ___GANSS_SignalID_ie_Extensions__item__criticality,
+        ____GANSS_SignalID_ie_Extensions__item__extensionValue_tab,
         ___GANSS_SignalID_ie_Extensions__item__extensionValue,
         __GANSS_SignalID_ie_Extensions__item_,
         _GANSS_SignalID_ie_Extensions,
@@ -17838,7 +18852,9 @@ class PCAP_IEs:
         _GANSS_UTRAN_TRU_ganssId,
         ____GANSS_UTRAN_TRU_ie_Extensions__item__id_tab,
         ___GANSS_UTRAN_TRU_ie_Extensions__item__id,
+        ____GANSS_UTRAN_TRU_ie_Extensions__item__criticality_tab,
         ___GANSS_UTRAN_TRU_ie_Extensions__item__criticality,
+        ____GANSS_UTRAN_TRU_ie_Extensions__item__extensionValue_tab,
         ___GANSS_UTRAN_TRU_ie_Extensions__item__extensionValue,
         __GANSS_UTRAN_TRU_ie_Extensions__item_,
         _GANSS_UTRAN_TRU_ie_Extensions,
@@ -17854,7 +18870,9 @@ class PCAP_IEs:
         _GANSS_UTC_Model_delta_t_lsf_utc,
         ____GANSS_UTC_Model_ie_Extensions__item__id_tab,
         ___GANSS_UTC_Model_ie_Extensions__item__id,
+        ____GANSS_UTC_Model_ie_Extensions__item__criticality_tab,
         ___GANSS_UTC_Model_ie_Extensions__item__criticality,
+        ____GANSS_UTC_Model_ie_Extensions__item__extensionValue_tab,
         ___GANSS_UTC_Model_ie_Extensions__item__extensionValue,
         __GANSS_UTC_Model_ie_Extensions__item_,
         _GANSS_UTC_Model_ie_Extensions,
@@ -17866,7 +18884,9 @@ class PCAP_IEs:
         _GLONASSclockModel_gloDeltaTau,
         ____GLONASSclockModel_ie_Extensions__item__id_tab,
         ___GLONASSclockModel_ie_Extensions__item__id,
+        ____GLONASSclockModel_ie_Extensions__item__criticality_tab,
         ___GLONASSclockModel_ie_Extensions__item__criticality,
+        ____GLONASSclockModel_ie_Extensions__item__extensionValue_tab,
         ___GLONASSclockModel_ie_Extensions__item__extensionValue,
         __GLONASSclockModel_ie_Extensions__item_,
         _GLONASSclockModel_ie_Extensions,
@@ -17879,7 +18899,9 @@ class PCAP_IEs:
         _NAVclockModel_navTgd,
         ____NAVclockModel_ie_Extensions__item__id_tab,
         ___NAVclockModel_ie_Extensions__item__id,
+        ____NAVclockModel_ie_Extensions__item__criticality_tab,
         ___NAVclockModel_ie_Extensions__item__criticality,
+        ____NAVclockModel_ie_Extensions__item__extensionValue_tab,
         ___NAVclockModel_ie_Extensions__item__extensionValue,
         __NAVclockModel_ie_Extensions__item_,
         _NAVclockModel_ie_Extensions,
@@ -17906,7 +18928,9 @@ class PCAP_IEs:
         _NavModel_CNAVKeplerianSet_cnavCuc,
         ____NavModel_CNAVKeplerianSet_ie_Extensions__item__id_tab,
         ___NavModel_CNAVKeplerianSet_ie_Extensions__item__id,
+        ____NavModel_CNAVKeplerianSet_ie_Extensions__item__criticality_tab,
         ___NavModel_CNAVKeplerianSet_ie_Extensions__item__criticality,
+        ____NavModel_CNAVKeplerianSet_ie_Extensions__item__extensionValue_tab,
         ___NavModel_CNAVKeplerianSet_ie_Extensions__item__extensionValue,
         __NavModel_CNAVKeplerianSet_ie_Extensions__item_,
         _NavModel_CNAVKeplerianSet_ie_Extensions,
@@ -17927,7 +18951,9 @@ class PCAP_IEs:
         _NavModel_GLONASSecef_gloZdotdot,
         ____NavModel_GLONASSecef_ie_Extensions__item__id_tab,
         ___NavModel_GLONASSecef_ie_Extensions__item__id,
+        ____NavModel_GLONASSecef_ie_Extensions__item__criticality_tab,
         ___NavModel_GLONASSecef_ie_Extensions__item__criticality,
+        ____NavModel_GLONASSecef_ie_Extensions__item__extensionValue_tab,
         ___NavModel_GLONASSecef_ie_Extensions__item__extensionValue,
         __NavModel_GLONASSecef_ie_Extensions__item_,
         _NavModel_GLONASSecef_ie_Extensions,
@@ -17953,7 +18979,9 @@ class PCAP_IEs:
         _NavModel_NAVKeplerianSet_navCuc,
         ____NavModel_NAVKeplerianSet_ie_Extensions__item__id_tab,
         ___NavModel_NAVKeplerianSet_ie_Extensions__item__id,
+        ____NavModel_NAVKeplerianSet_ie_Extensions__item__criticality_tab,
         ___NavModel_NAVKeplerianSet_ie_Extensions__item__criticality,
+        ____NavModel_NAVKeplerianSet_ie_Extensions__item__extensionValue_tab,
         ___NavModel_NAVKeplerianSet_ie_Extensions__item__extensionValue,
         __NavModel_NAVKeplerianSet_ie_Extensions__item_,
         _NavModel_NAVKeplerianSet_ie_Extensions,
@@ -17972,7 +19000,9 @@ class PCAP_IEs:
         _NavModel_SBASecef_sbasZgDotDot,
         ____NavModel_SBASecef_ie_Extensions__item__id_tab,
         ___NavModel_SBASecef_ie_Extensions__item__id,
+        ____NavModel_SBASecef_ie_Extensions__item__criticality_tab,
         ___NavModel_SBASecef_ie_Extensions__item__criticality,
+        ____NavModel_SBASecef_ie_Extensions__item__extensionValue_tab,
         ___NavModel_SBASecef_ie_Extensions__item__extensionValue,
         __NavModel_SBASecef_ie_Extensions__item_,
         _NavModel_SBASecef_ie_Extensions,
@@ -17998,7 +19028,9 @@ class PCAP_IEs:
         _NavModel_BDSKeplerianSet_aODE_BDS,
         ____NavModel_BDSKeplerianSet_ie_Extensions__item__id_tab,
         ___NavModel_BDSKeplerianSet_ie_Extensions__item__id,
+        ____NavModel_BDSKeplerianSet_ie_Extensions__item__criticality_tab,
         ___NavModel_BDSKeplerianSet_ie_Extensions__item__criticality,
+        ____NavModel_BDSKeplerianSet_ie_Extensions__item__extensionValue_tab,
         ___NavModel_BDSKeplerianSet_ie_Extensions__item__extensionValue,
         __NavModel_BDSKeplerianSet_ie_Extensions__item_,
         _NavModel_BDSKeplerianSet_ie_Extensions,
@@ -18009,7 +19041,9 @@ class PCAP_IEs:
         _SBASclockModel_sbasAgf1,
         ____SBASclockModel_ie_Extensions__item__id_tab,
         ___SBASclockModel_ie_Extensions__item__id,
+        ____SBASclockModel_ie_Extensions__item__criticality_tab,
         ___SBASclockModel_ie_Extensions__item__criticality,
+        ____SBASclockModel_ie_Extensions__item__extensionValue_tab,
         ___SBASclockModel_ie_Extensions__item__extensionValue,
         __SBASclockModel_ie_Extensions__item_,
         _SBASclockModel_ie_Extensions,
@@ -18023,7 +19057,9 @@ class PCAP_IEs:
         _BDSClockModel_aODC_BDS,
         ____BDSClockModel_ie_Extensions__item__id_tab,
         ___BDSClockModel_ie_Extensions__item__id,
+        ____BDSClockModel_ie_Extensions__item__criticality_tab,
         ___BDSClockModel_ie_Extensions__item__criticality,
+        ____BDSClockModel_ie_Extensions__item__extensionValue_tab,
         ___BDSClockModel_ie_Extensions__item__extensionValue,
         __BDSClockModel_ie_Extensions__item_,
         _BDSClockModel_ie_Extensions,
@@ -18040,7 +19076,9 @@ class PCAP_IEs:
         _UTCmodelSet1_utcDeltaTlsf,
         ____UTCmodelSet1_ie_Extensions__item__id_tab,
         ___UTCmodelSet1_ie_Extensions__item__id,
+        ____UTCmodelSet1_ie_Extensions__item__criticality_tab,
         ___UTCmodelSet1_ie_Extensions__item__criticality,
+        ____UTCmodelSet1_ie_Extensions__item__extensionValue_tab,
         ___UTCmodelSet1_ie_Extensions__item__extensionValue,
         __UTCmodelSet1_ie_Extensions__item_,
         _UTCmodelSet1_ie_Extensions,
@@ -18052,7 +19090,9 @@ class PCAP_IEs:
         _UTCmodelSet2_kp,
         ____UTCmodelSet2_ie_Extensions__item__id_tab,
         ___UTCmodelSet2_ie_Extensions__item__id,
+        ____UTCmodelSet2_ie_Extensions__item__criticality_tab,
         ___UTCmodelSet2_ie_Extensions__item__criticality,
+        ____UTCmodelSet2_ie_Extensions__item__extensionValue_tab,
         ___UTCmodelSet2_ie_Extensions__item__extensionValue,
         __UTCmodelSet2_ie_Extensions__item_,
         _UTCmodelSet2_ie_Extensions,
@@ -18069,7 +19109,9 @@ class PCAP_IEs:
         _UTCmodelSet3_utcStandardID,
         ____UTCmodelSet3_ie_Extensions__item__id_tab,
         ___UTCmodelSet3_ie_Extensions__item__id,
+        ____UTCmodelSet3_ie_Extensions__item__criticality_tab,
         ___UTCmodelSet3_ie_Extensions__item__criticality,
+        ____UTCmodelSet3_ie_Extensions__item__extensionValue_tab,
         ___UTCmodelSet3_ie_Extensions__item__extensionValue,
         __UTCmodelSet3_ie_Extensions__item_,
         _UTCmodelSet3_ie_Extensions,
@@ -18085,7 +19127,9 @@ class PCAP_IEs:
         _UTCmodelSet4_utcDeltaTlsf_BDS,
         ____UTCmodelSet4_ie_Extensions__item__id_tab,
         ___UTCmodelSet4_ie_Extensions__item__id,
+        ____UTCmodelSet4_ie_Extensions__item__criticality_tab,
         ___UTCmodelSet4_ie_Extensions__item__criticality,
+        ____UTCmodelSet4_ie_Extensions__item__extensionValue_tab,
         ___UTCmodelSet4_ie_Extensions__item__extensionValue,
         __UTCmodelSet4_ie_Extensions__item_,
         _UTCmodelSet4_ie_Extensions,
@@ -18096,7 +19140,9 @@ class PCAP_IEs:
         _UTRAN_GANSSReferenceTimeDL_referenceSfn,
         ____UTRAN_GANSSReferenceTimeDL_ie_Extensions__item__id_tab,
         ___UTRAN_GANSSReferenceTimeDL_ie_Extensions__item__id,
+        ____UTRAN_GANSSReferenceTimeDL_ie_Extensions__item__criticality_tab,
         ___UTRAN_GANSSReferenceTimeDL_ie_Extensions__item__criticality,
+        ____UTRAN_GANSSReferenceTimeDL_ie_Extensions__item__extensionValue_tab,
         ___UTRAN_GANSSReferenceTimeDL_ie_Extensions__item__extensionValue,
         __UTRAN_GANSSReferenceTimeDL_ie_Extensions__item_,
         _UTRAN_GANSSReferenceTimeDL_ie_Extensions,
@@ -18109,7 +19155,9 @@ class PCAP_IEs:
         _UTRAN_GANSSReferenceTimeUL_referenceSfn,
         ____UTRAN_GANSSReferenceTimeUL_ie_Extensions__item__id_tab,
         ___UTRAN_GANSSReferenceTimeUL_ie_Extensions__item__id,
+        ____UTRAN_GANSSReferenceTimeUL_ie_Extensions__item__criticality_tab,
         ___UTRAN_GANSSReferenceTimeUL_ie_Extensions__item__criticality,
+        ____UTRAN_GANSSReferenceTimeUL_ie_Extensions__item__extensionValue_tab,
         ___UTRAN_GANSSReferenceTimeUL_ie_Extensions__item__extensionValue,
         __UTRAN_GANSSReferenceTimeUL_ie_Extensions__item_,
         _UTRAN_GANSSReferenceTimeUL_ie_Extensions,
@@ -18146,7 +19194,9 @@ class PCAP_IEs:
         _AlmanacSatInfo_af1,
         ____AlmanacSatInfo_iE_Extensions__item__id_tab,
         ___AlmanacSatInfo_iE_Extensions__item__id,
+        ____AlmanacSatInfo_iE_Extensions__item__criticality_tab,
         ___AlmanacSatInfo_iE_Extensions__item__criticality,
+        ____AlmanacSatInfo_iE_Extensions__item__extensionValue_tab,
         ___AlmanacSatInfo_iE_Extensions__item__extensionValue,
         __AlmanacSatInfo_iE_Extensions__item_,
         _AlmanacSatInfo_iE_Extensions,
@@ -18183,7 +19233,9 @@ class PCAP_IEs:
         _GPS_ClockAndEphemerisParameters_iDot,
         ____GPS_ClockAndEphemerisParameters_iE_Extensions__item__id_tab,
         ___GPS_ClockAndEphemerisParameters_iE_Extensions__item__id,
+        ____GPS_ClockAndEphemerisParameters_iE_Extensions__item__criticality_tab,
         ___GPS_ClockAndEphemerisParameters_iE_Extensions__item__criticality,
+        ____GPS_ClockAndEphemerisParameters_iE_Extensions__item__extensionValue_tab,
         ___GPS_ClockAndEphemerisParameters_iE_Extensions__item__extensionValue,
         __GPS_ClockAndEphemerisParameters_iE_Extensions__item_,
         _GPS_ClockAndEphemerisParameters_iE_Extensions,
@@ -18204,7 +19256,9 @@ class PCAP_IEs:
         _GPS_Ionospheric_Model_beta3,
         ____GPS_Ionospheric_Model_iE_Extensions__item__id_tab,
         ___GPS_Ionospheric_Model_iE_Extensions__item__id,
+        ____GPS_Ionospheric_Model_iE_Extensions__item__criticality_tab,
         ___GPS_Ionospheric_Model_iE_Extensions__item__criticality,
+        ____GPS_Ionospheric_Model_iE_Extensions__item__extensionValue_tab,
         ___GPS_Ionospheric_Model_iE_Extensions__item__extensionValue,
         __GPS_Ionospheric_Model_iE_Extensions__item_,
         _GPS_Ionospheric_Model_iE_Extensions,
@@ -18237,7 +19291,9 @@ class PCAP_IEs:
         _GPS_MeasurementParam_pseudorangeRMS_Error,
         ____GPS_MeasurementParam_iE_Extensions__item__id_tab,
         ___GPS_MeasurementParam_iE_Extensions__item__id,
+        ____GPS_MeasurementParam_iE_Extensions__item__criticality_tab,
         ___GPS_MeasurementParam_iE_Extensions__item__criticality,
+        ____GPS_MeasurementParam_iE_Extensions__item__extensionValue_tab,
         ___GPS_MeasurementParam_iE_Extensions__item__extensionValue,
         __GPS_MeasurementParam_iE_Extensions__item_,
         _GPS_MeasurementParam_iE_Extensions,
@@ -18251,7 +19307,9 @@ class PCAP_IEs:
         _NavigationModelSatInfo_gps_clockAndEphemerisParms,
         ____NavigationModelSatInfo_iE_Extensions__item__id_tab,
         ___NavigationModelSatInfo_iE_Extensions__item__id,
+        ____NavigationModelSatInfo_iE_Extensions__item__criticality_tab,
         ___NavigationModelSatInfo_iE_Extensions__item__criticality,
+        ____NavigationModelSatInfo_iE_Extensions__item__extensionValue_tab,
         ___NavigationModelSatInfo_iE_Extensions__item__extensionValue,
         __NavigationModelSatInfo_iE_Extensions__item_,
         _NavigationModelSatInfo_iE_Extensions,
@@ -18267,7 +19325,9 @@ class PCAP_IEs:
         _GPS_ReferenceLocation_ue_PositionEstimate,
         ____GPS_ReferenceLocation_iE_Extensions__item__id_tab,
         ___GPS_ReferenceLocation_iE_Extensions__item__id,
+        ____GPS_ReferenceLocation_iE_Extensions__item__criticality_tab,
         ___GPS_ReferenceLocation_iE_Extensions__item__criticality,
+        ____GPS_ReferenceLocation_iE_Extensions__item__extensionValue_tab,
         ___GPS_ReferenceLocation_iE_Extensions__item__extensionValue,
         __GPS_ReferenceLocation_iE_Extensions__item_,
         _GPS_ReferenceLocation_iE_Extensions,
@@ -18304,7 +19364,9 @@ class PCAP_IEs:
         _GPS_TOW_Assist_tlm_Reserved,
         ____GPS_TOW_Assist_iE_Extensions__item__id_tab,
         ___GPS_TOW_Assist_iE_Extensions__item__id,
+        ____GPS_TOW_Assist_iE_Extensions__item__criticality_tab,
         ___GPS_TOW_Assist_iE_Extensions__item__criticality,
+        ____GPS_TOW_Assist_iE_Extensions__item__extensionValue_tab,
         ___GPS_TOW_Assist_iE_Extensions__item__extensionValue,
         __GPS_TOW_Assist_iE_Extensions__item_,
         _GPS_TOW_Assist_iE_Extensions,
@@ -18314,7 +19376,9 @@ class PCAP_IEs:
         _GPSReferenceTimeUncertainty_gps_RefTimeUNC,
         ____GPSReferenceTimeUncertainty_iE_Extensions__item__id_tab,
         ___GPSReferenceTimeUncertainty_iE_Extensions__item__id,
+        ____GPSReferenceTimeUncertainty_iE_Extensions__item__criticality_tab,
         ___GPSReferenceTimeUncertainty_iE_Extensions__item__criticality,
+        ____GPSReferenceTimeUncertainty_iE_Extensions__item__extensionValue_tab,
         ___GPSReferenceTimeUncertainty_iE_Extensions__item__extensionValue,
         __GPSReferenceTimeUncertainty_iE_Extensions__item_,
         _GPSReferenceTimeUncertainty_iE_Extensions,
@@ -18331,7 +19395,9 @@ class PCAP_IEs:
         _GPS_UTC_Model_delta_t_LSF,
         ____GPS_UTC_Model_iE_Extensions__item__id_tab,
         ___GPS_UTC_Model_iE_Extensions__item__id,
+        ____GPS_UTC_Model_iE_Extensions__item__criticality_tab,
         ___GPS_UTC_Model_iE_Extensions__item__criticality,
+        ____GPS_UTC_Model_iE_Extensions__item__extensionValue_tab,
         ___GPS_UTC_Model_iE_Extensions__item__extensionValue,
         __GPS_UTC_Model_iE_Extensions__item_,
         _GPS_UTC_Model_iE_Extensions,
@@ -18350,7 +19416,9 @@ class PCAP_IEs:
         _AdditionalGPSAssistDataRequired_navModelAddDataRequest,
         ____AdditionalGPSAssistDataRequired_iE_Extensions__item__id_tab,
         ___AdditionalGPSAssistDataRequired_iE_Extensions__item__id,
+        ____AdditionalGPSAssistDataRequired_iE_Extensions__item__criticality_tab,
         ___AdditionalGPSAssistDataRequired_iE_Extensions__item__criticality,
+        ____AdditionalGPSAssistDataRequired_iE_Extensions__item__extensionValue_tab,
         ___AdditionalGPSAssistDataRequired_iE_Extensions__item__extensionValue,
         __AdditionalGPSAssistDataRequired_iE_Extensions__item_,
         _AdditionalGPSAssistDataRequired_iE_Extensions,
@@ -18375,7 +19443,9 @@ class PCAP_IEs:
         _GANSSReq_AddIonosphericModel_ganss_add_iono_mode_req,
         ____GANSSReq_AddIonosphericModel_iE_Extensions__item__id_tab,
         ___GANSSReq_AddIonosphericModel_iE_Extensions__item__id,
+        ____GANSSReq_AddIonosphericModel_iE_Extensions__item__criticality_tab,
         ___GANSSReq_AddIonosphericModel_iE_Extensions__item__criticality,
+        ____GANSSReq_AddIonosphericModel_iE_Extensions__item__extensionValue_tab,
         ___GANSSReq_AddIonosphericModel_iE_Extensions__item__extensionValue,
         __GANSSReq_AddIonosphericModel_iE_Extensions__item_,
         _GANSSReq_AddIonosphericModel_iE_Extensions,
@@ -18420,7 +19490,9 @@ class PCAP_IEs:
         _DBDSCorrection_dGANSSSignalBDS,
         ____DBDSCorrection_iE_Extensions__item__id_tab,
         ___DBDSCorrection_iE_Extensions__item__id,
+        ____DBDSCorrection_iE_Extensions__item__criticality_tab,
         ___DBDSCorrection_iE_Extensions__item__criticality,
+        ____DBDSCorrection_iE_Extensions__item__extensionValue_tab,
         ___DBDSCorrection_iE_Extensions__item__extensionValue,
         __DBDSCorrection_iE_Extensions__item_,
         _DBDSCorrection_iE_Extensions,
@@ -18435,7 +19507,9 @@ class PCAP_IEs:
         _GANSS_AddADchoices_almanacModelID,
         ____GANSS_AddADchoices_iE_Extensions__item__id_tab,
         ___GANSS_AddADchoices_iE_Extensions__item__id,
+        ____GANSS_AddADchoices_iE_Extensions__item__criticality_tab,
         ___GANSS_AddADchoices_iE_Extensions__item__criticality,
+        ____GANSS_AddADchoices_iE_Extensions__item__extensionValue_tab,
         ___GANSS_AddADchoices_iE_Extensions__item__extensionValue,
         __GANSS_AddADchoices_iE_Extensions__item_,
         _GANSS_AddADchoices_iE_Extensions,
@@ -18446,7 +19520,9 @@ class PCAP_IEs:
         _GanssDataBits_dataBitAssistancelist,
         ____GanssDataBits_iE_Extensions__item__id_tab,
         ___GanssDataBits_iE_Extensions__item__id,
+        ____GanssDataBits_iE_Extensions__item__criticality_tab,
         ___GanssDataBits_iE_Extensions__item__criticality,
+        ____GanssDataBits_iE_Extensions__item__extensionValue_tab,
         ___GanssDataBits_iE_Extensions__item__extensionValue,
         __GanssDataBits_iE_Extensions__item_,
         _GanssDataBits_iE_Extensions,
@@ -18458,7 +19534,9 @@ class PCAP_IEs:
         _ReqDataBitAssistanceList_ganssSatelliteInfo,
         ____ReqDataBitAssistanceList_iE_Extensions__item__id_tab,
         ___ReqDataBitAssistanceList_iE_Extensions__item__id,
+        ____ReqDataBitAssistanceList_iE_Extensions__item__criticality_tab,
         ___ReqDataBitAssistanceList_iE_Extensions__item__criticality,
+        ____ReqDataBitAssistanceList_iE_Extensions__item__extensionValue_tab,
         ___ReqDataBitAssistanceList_iE_Extensions__item__extensionValue,
         __ReqDataBitAssistanceList_iE_Extensions__item_,
         _ReqDataBitAssistanceList_iE_Extensions,
@@ -18494,7 +19572,9 @@ class PCAP_IEs:
         _DganssCorrectionsReq_dganss_sig_id_req,
         ____DganssCorrectionsReq_iE_Extensions__item__id_tab,
         ___DganssCorrectionsReq_iE_Extensions__item__id,
+        ____DganssCorrectionsReq_iE_Extensions__item__criticality_tab,
         ___DganssCorrectionsReq_iE_Extensions__item__criticality,
+        ____DganssCorrectionsReq_iE_Extensions__item__extensionValue_tab,
         ___DganssCorrectionsReq_iE_Extensions__item__extensionValue,
         __DganssCorrectionsReq_iE_Extensions__item_,
         _DganssCorrectionsReq_iE_Extensions,
@@ -18503,7 +19583,9 @@ class PCAP_IEs:
         _Ganss_almanacAndSatelliteHealthReq_transmissionGanssTimeIndicator,
         ____Ganss_almanacAndSatelliteHealthReq_iE_Extensions__item__id_tab,
         ___Ganss_almanacAndSatelliteHealthReq_iE_Extensions__item__id,
+        ____Ganss_almanacAndSatelliteHealthReq_iE_Extensions__item__criticality_tab,
         ___Ganss_almanacAndSatelliteHealthReq_iE_Extensions__item__criticality,
+        ____Ganss_almanacAndSatelliteHealthReq_iE_Extensions__item__extensionValue_tab,
         ___Ganss_almanacAndSatelliteHealthReq_iE_Extensions__item__extensionValue,
         __Ganss_almanacAndSatelliteHealthReq_iE_Extensions__item_,
         _Ganss_almanacAndSatelliteHealthReq_iE_Extensions,
@@ -18527,7 +19609,9 @@ class PCAP_IEs:
         _GANSS_AddIonoModelReq_dataID,
         ____GANSS_AddIonoModelReq_iE_Extensions__item__id_tab,
         ___GANSS_AddIonoModelReq_iE_Extensions__item__id,
+        ____GANSS_AddIonoModelReq_iE_Extensions__item__criticality_tab,
         ___GANSS_AddIonoModelReq_iE_Extensions__item__criticality,
+        ____GANSS_AddIonoModelReq_iE_Extensions__item__extensionValue_tab,
         ___GANSS_AddIonoModelReq_iE_Extensions__item__extensionValue,
         __GANSS_AddIonoModelReq_iE_Extensions__item_,
         _GANSS_AddIonoModelReq_iE_Extensions,
@@ -18536,7 +19620,9 @@ class PCAP_IEs:
         _GANSS_EarthOrientParaReq_eopReq,
         ____GANSS_EarthOrientParaReq_iE_Extensions__item__id_tab,
         ___GANSS_EarthOrientParaReq_iE_Extensions__item__id,
+        ____GANSS_EarthOrientParaReq_iE_Extensions__item__criticality_tab,
         ___GANSS_EarthOrientParaReq_iE_Extensions__item__criticality,
+        ____GANSS_EarthOrientParaReq_iE_Extensions__item__extensionValue_tab,
         ___GANSS_EarthOrientParaReq_iE_Extensions__item__extensionValue,
         __GANSS_EarthOrientParaReq_iE_Extensions__item_,
         _GANSS_EarthOrientParaReq_iE_Extensions,
@@ -18566,7 +19652,9 @@ class PCAP_IEs:
         _AddNavigationModelsGANSS_addSatRelatedDataListGANSS,
         ____AddNavigationModelsGANSS_iE_Extensions__item__id_tab,
         ___AddNavigationModelsGANSS_iE_Extensions__item__id,
+        ____AddNavigationModelsGANSS_iE_Extensions__item__criticality_tab,
         ___AddNavigationModelsGANSS_iE_Extensions__item__criticality,
+        ____AddNavigationModelsGANSS_iE_Extensions__item__extensionValue_tab,
         ___AddNavigationModelsGANSS_iE_Extensions__item__extensionValue,
         __AddNavigationModelsGANSS_iE_Extensions__item_,
         _AddNavigationModelsGANSS_iE_Extensions,
@@ -18578,7 +19666,9 @@ class PCAP_IEs:
         _AddSatelliteRelatedDataGANSS_iod,
         ____AddSatelliteRelatedDataGANSS_iE_Extensions__item__id_tab,
         ___AddSatelliteRelatedDataGANSS_iE_Extensions__item__id,
+        ____AddSatelliteRelatedDataGANSS_iE_Extensions__item__criticality_tab,
         ___AddSatelliteRelatedDataGANSS_iE_Extensions__item__criticality,
+        ____AddSatelliteRelatedDataGANSS_iE_Extensions__item__extensionValue_tab,
         ___AddSatelliteRelatedDataGANSS_iE_Extensions__item__extensionValue,
         __AddSatelliteRelatedDataGANSS_iE_Extensions__item_,
         _AddSatelliteRelatedDataGANSS_iE_Extensions,
@@ -18589,7 +19679,9 @@ class PCAP_IEs:
         _DBDS_Corrections_dGANSS_Signal,
         ____DBDS_Corrections_iE_Extensions__item__id_tab,
         ___DBDS_Corrections_iE_Extensions__item__id,
+        ____DBDS_Corrections_iE_Extensions__item__criticality_tab,
         ___DBDS_Corrections_iE_Extensions__item__criticality,
+        ____DBDS_Corrections_iE_Extensions__item__extensionValue_tab,
         ___DBDS_Corrections_iE_Extensions__item__extensionValue,
         __DBDS_Corrections_iE_Extensions__item_,
         _DBDS_Corrections_iE_Extensions,
@@ -18598,7 +19690,9 @@ class PCAP_IEs:
         _GANSS_AddUtcModelsReq_transmissionGanssTimeIndicator,
         ____GANSS_AddUtcModelsReq_iE_Extensions__item__id_tab,
         ___GANSS_AddUtcModelsReq_iE_Extensions__item__id,
+        ____GANSS_AddUtcModelsReq_iE_Extensions__item__criticality_tab,
         ___GANSS_AddUtcModelsReq_iE_Extensions__item__criticality,
+        ____GANSS_AddUtcModelsReq_iE_Extensions__item__extensionValue_tab,
         ___GANSS_AddUtcModelsReq_iE_Extensions__item__extensionValue,
         __GANSS_AddUtcModelsReq_iE_Extensions__item_,
         _GANSS_AddUtcModelsReq_iE_Extensions,
@@ -18607,7 +19701,9 @@ class PCAP_IEs:
         _GANSS_AuxInfoReq_transmissionGanssTimeIndicator,
         ____GANSS_AuxInfoReq_iE_Extensions__item__id_tab,
         ___GANSS_AuxInfoReq_iE_Extensions__item__id,
+        ____GANSS_AuxInfoReq_iE_Extensions__item__criticality_tab,
         ___GANSS_AuxInfoReq_iE_Extensions__item__criticality,
+        ____GANSS_AuxInfoReq_iE_Extensions__item__extensionValue_tab,
         ___GANSS_AuxInfoReq_iE_Extensions__item__extensionValue,
         __GANSS_AuxInfoReq_iE_Extensions__item_,
         _GANSS_AuxInfoReq_iE_Extensions,
@@ -18617,7 +19713,9 @@ class PCAP_IEs:
         _Ganss_utcModelReq_transmissionGanssTimeIndicator,
         ____Ganss_utcModelReq_iE_Extensions__item__id_tab,
         ___Ganss_utcModelReq_iE_Extensions__item__id,
+        ____Ganss_utcModelReq_iE_Extensions__item__criticality_tab,
         ___Ganss_utcModelReq_iE_Extensions__item__criticality,
+        ____Ganss_utcModelReq_iE_Extensions__item__extensionValue_tab,
         ___Ganss_utcModelReq_iE_Extensions__item__extensionValue,
         __Ganss_utcModelReq_iE_Extensions__item_,
         _Ganss_utcModelReq_iE_Extensions,
@@ -18626,7 +19724,9 @@ class PCAP_IEs:
         _Ganss_realTimeIntegrityReq_transmissionGanssTimeIndicator,
         ____Ganss_realTimeIntegrityReq_iE_Extensions__item__id_tab,
         ___Ganss_realTimeIntegrityReq_iE_Extensions__item__id,
+        ____Ganss_realTimeIntegrityReq_iE_Extensions__item__criticality_tab,
         ___Ganss_realTimeIntegrityReq_iE_Extensions__item__criticality,
+        ____Ganss_realTimeIntegrityReq_iE_Extensions__item__extensionValue_tab,
         ___Ganss_realTimeIntegrityReq_iE_Extensions__item__extensionValue,
         __Ganss_realTimeIntegrityReq_iE_Extensions__item_,
         _Ganss_realTimeIntegrityReq_iE_Extensions,
@@ -18635,7 +19735,9 @@ class PCAP_IEs:
         _Ganss_referenceMeasurementInfoReq_transmissionGanssTimeIndicator,
         ____Ganss_referenceMeasurementInfoReq_iE_Extensions__item__id_tab,
         ___Ganss_referenceMeasurementInfoReq_iE_Extensions__item__id,
+        ____Ganss_referenceMeasurementInfoReq_iE_Extensions__item__criticality_tab,
         ___Ganss_referenceMeasurementInfoReq_iE_Extensions__item__criticality,
+        ____Ganss_referenceMeasurementInfoReq_iE_Extensions__item__extensionValue_tab,
         ___Ganss_referenceMeasurementInfoReq_iE_Extensions__item__extensionValue,
         __Ganss_referenceMeasurementInfoReq_iE_Extensions__item_,
         _Ganss_referenceMeasurementInfoReq_iE_Extensions,
@@ -18645,7 +19747,9 @@ class PCAP_IEs:
         _Ganss_TimeModel_Gnss_Gnss_transmissionGanssTimeIndicator,
         ____Ganss_TimeModel_Gnss_Gnss_iE_Extensions__item__id_tab,
         ___Ganss_TimeModel_Gnss_Gnss_iE_Extensions__item__id,
+        ____Ganss_TimeModel_Gnss_Gnss_iE_Extensions__item__criticality_tab,
         ___Ganss_TimeModel_Gnss_Gnss_iE_Extensions__item__criticality,
+        ____Ganss_TimeModel_Gnss_Gnss_iE_Extensions__item__extensionValue_tab,
         ___Ganss_TimeModel_Gnss_Gnss_iE_Extensions__item__extensionValue,
         __Ganss_TimeModel_Gnss_Gnss_iE_Extensions__item_,
         _Ganss_TimeModel_Gnss_Gnss_iE_Extensions,
@@ -18656,7 +19760,9 @@ class PCAP_IEs:
         _UtcModel_transmissionTOWIndicator,
         ____UtcModel_iE_Extensions__item__id_tab,
         ___UtcModel_iE_Extensions__item__id,
+        ____UtcModel_iE_Extensions__item__criticality_tab,
         ___UtcModel_iE_Extensions__item__criticality,
+        ____UtcModel_iE_Extensions__item__extensionValue_tab,
         ___UtcModel_iE_Extensions__item__extensionValue,
         __UtcModel_iE_Extensions__item_,
         _UtcModel_iE_Extensions,
@@ -18665,7 +19771,9 @@ class PCAP_IEs:
         _IonosphericModel_transmissionTOWIndicator,
         ____IonosphericModel_iE_Extensions__item__id_tab,
         ___IonosphericModel_iE_Extensions__item__id,
+        ____IonosphericModel_iE_Extensions__item__criticality_tab,
         ___IonosphericModel_iE_Extensions__item__criticality,
+        ____IonosphericModel_iE_Extensions__item__extensionValue_tab,
         ___IonosphericModel_iE_Extensions__item__extensionValue,
         __IonosphericModel_iE_Extensions__item_,
         _IonosphericModel_iE_Extensions,
@@ -18675,7 +19783,9 @@ class PCAP_IEs:
         _NavigationModel_navModelAdditionalData,
         ____NavigationModel_iE_Extensions__item__id_tab,
         ___NavigationModel_iE_Extensions__item__id,
+        ____NavigationModel_iE_Extensions__item__criticality_tab,
         ___NavigationModel_iE_Extensions__item__criticality,
+        ____NavigationModel_iE_Extensions__item__extensionValue_tab,
         ___NavigationModel_iE_Extensions__item__extensionValue,
         __NavigationModel_iE_Extensions__item_,
         _NavigationModel_iE_Extensions,
@@ -18687,7 +19797,9 @@ class PCAP_IEs:
         _NavModelAdditionalData_satRelatedDataList,
         ____NavModelAdditionalData_iE_Extensions__item__id_tab,
         ___NavModelAdditionalData_iE_Extensions__item__id,
+        ____NavModelAdditionalData_iE_Extensions__item__criticality_tab,
         ___NavModelAdditionalData_iE_Extensions__item__criticality,
+        ____NavModelAdditionalData_iE_Extensions__item__extensionValue_tab,
         ___NavModelAdditionalData_iE_Extensions__item__extensionValue,
         __NavModelAdditionalData_iE_Extensions__item_,
         _NavModelAdditionalData_iE_Extensions,
@@ -18699,7 +19811,9 @@ class PCAP_IEs:
         _SatelliteRelatedData_iode,
         ____SatelliteRelatedData_iE_Extensions__item__id_tab,
         ___SatelliteRelatedData_iE_Extensions__item__id,
+        ____SatelliteRelatedData_iE_Extensions__item__criticality_tab,
         ___SatelliteRelatedData_iE_Extensions__item__criticality,
+        ____SatelliteRelatedData_iE_Extensions__item__extensionValue_tab,
         ___SatelliteRelatedData_iE_Extensions__item__extensionValue,
         __SatelliteRelatedData_iE_Extensions__item_,
         _SatelliteRelatedData_iE_Extensions,
@@ -18711,7 +19825,9 @@ class PCAP_IEs:
         _NavigationModelGANSS_satRelatedDataListGANSS,
         ____NavigationModelGANSS_iE_Extensions__item__id_tab,
         ___NavigationModelGANSS_iE_Extensions__item__id,
+        ____NavigationModelGANSS_iE_Extensions__item__criticality_tab,
         ___NavigationModelGANSS_iE_Extensions__item__criticality,
+        ____NavigationModelGANSS_iE_Extensions__item__extensionValue_tab,
         ___NavigationModelGANSS_iE_Extensions__item__extensionValue,
         __NavigationModelGANSS_iE_Extensions__item_,
         _NavigationModelGANSS_iE_Extensions,
@@ -18723,7 +19839,9 @@ class PCAP_IEs:
         _SatelliteRelatedDataGANSS_iod,
         ____SatelliteRelatedDataGANSS_iE_Extensions__item__id_tab,
         ___SatelliteRelatedDataGANSS_iE_Extensions__item__id,
+        ____SatelliteRelatedDataGANSS_iE_Extensions__item__criticality_tab,
         ___SatelliteRelatedDataGANSS_iE_Extensions__item__criticality,
+        ____SatelliteRelatedDataGANSS_iE_Extensions__item__extensionValue_tab,
         ___SatelliteRelatedDataGANSS_iE_Extensions__item__extensionValue,
         __SatelliteRelatedDataGANSS_iE_Extensions__item_,
         _SatelliteRelatedDataGANSS_iE_Extensions,
@@ -18736,7 +19854,9 @@ class PCAP_IEs:
         _AlmanacAndSatelliteHealthSIB_InfoType_transmissionTOWIndicator,
         ____AlmanacAndSatelliteHealthSIB_InfoType_iE_Extensions__item__id_tab,
         ___AlmanacAndSatelliteHealthSIB_InfoType_iE_Extensions__item__id,
+        ____AlmanacAndSatelliteHealthSIB_InfoType_iE_Extensions__item__criticality_tab,
         ___AlmanacAndSatelliteHealthSIB_InfoType_iE_Extensions__item__criticality,
+        ____AlmanacAndSatelliteHealthSIB_InfoType_iE_Extensions__item__extensionValue_tab,
         ___AlmanacAndSatelliteHealthSIB_InfoType_iE_Extensions__item__extensionValue,
         __AlmanacAndSatelliteHealthSIB_InfoType_iE_Extensions__item_,
         _AlmanacAndSatelliteHealthSIB_InfoType_iE_Extensions,
@@ -18748,7 +19868,9 @@ class PCAP_IEs:
         __MessageStructure__item__repetitionNumber,
         _____MessageStructure__item__iE_Extensions__item__id_tab,
         ____MessageStructure__item__iE_Extensions__item__id,
+        _____MessageStructure__item__iE_Extensions__item__criticality_tab,
         ____MessageStructure__item__iE_Extensions__item__criticality,
+        _____MessageStructure__item__iE_Extensions__item__extensionValue_tab,
         ____MessageStructure__item__iE_Extensions__item__extensionValue,
         ___MessageStructure__item__iE_Extensions__item_,
         __MessageStructure__item__iE_Extensions,
@@ -18759,7 +19881,9 @@ class PCAP_IEs:
         _MeasInstructionsUsed_measurementValidity,
         ____MeasInstructionsUsed_iE_Extensions__item__id_tab,
         ___MeasInstructionsUsed_iE_Extensions__item__id,
+        ____MeasInstructionsUsed_iE_Extensions__item__criticality_tab,
         ___MeasInstructionsUsed_iE_Extensions__item__criticality,
+        ____MeasInstructionsUsed_iE_Extensions__item__extensionValue_tab,
         ___MeasInstructionsUsed_iE_Extensions__item__extensionValue,
         __MeasInstructionsUsed_iE_Extensions__item_,
         _MeasInstructionsUsed_iE_Extensions,
@@ -18768,7 +19892,9 @@ class PCAP_IEs:
         _MeasurementValidity_ue_State,
         ____MeasurementValidity_iE_Extensions__item__id_tab,
         ___MeasurementValidity_iE_Extensions__item__id,
+        ____MeasurementValidity_iE_Extensions__item__criticality_tab,
         ___MeasurementValidity_iE_Extensions__item__criticality,
+        ____MeasurementValidity_iE_Extensions__item__extensionValue_tab,
         ___MeasurementValidity_iE_Extensions__item__extensionValue,
         __MeasurementValidity_iE_Extensions__item_,
         _MeasurementValidity_iE_Extensions,
@@ -18780,7 +19906,9 @@ class PCAP_IEs:
         _OTDOA_MeasurementGroup_otdoa_MeasuredResultsSets,
         ____OTDOA_MeasurementGroup_iE_Extensions__item__id_tab,
         ___OTDOA_MeasurementGroup_iE_Extensions__item__id,
+        ____OTDOA_MeasurementGroup_iE_Extensions__item__criticality_tab,
         ___OTDOA_MeasurementGroup_iE_Extensions__item__criticality,
+        ____OTDOA_MeasurementGroup_iE_Extensions__item__extensionValue_tab,
         ___OTDOA_MeasurementGroup_iE_Extensions__item__extensionValue,
         __OTDOA_MeasurementGroup_iE_Extensions__item_,
         _OTDOA_MeasurementGroup_iE_Extensions,
@@ -18804,7 +19932,9 @@ class PCAP_IEs:
         _OTDOA_ReferenceCellInfoSAS_centric_uC_ID,
         ____OTDOA_ReferenceCellInfoSAS_centric_iE_Extensions__item__id_tab,
         ___OTDOA_ReferenceCellInfoSAS_centric_iE_Extensions__item__id,
+        ____OTDOA_ReferenceCellInfoSAS_centric_iE_Extensions__item__criticality_tab,
         ___OTDOA_ReferenceCellInfoSAS_centric_iE_Extensions__item__criticality,
+        ____OTDOA_ReferenceCellInfoSAS_centric_iE_Extensions__item__extensionValue_tab,
         ___OTDOA_ReferenceCellInfoSAS_centric_iE_Extensions__item__extensionValue,
         __OTDOA_ReferenceCellInfoSAS_centric_iE_Extensions__item_,
         _OTDOA_ReferenceCellInfoSAS_centric_iE_Extensions,
@@ -18817,7 +19947,9 @@ class PCAP_IEs:
         _OTDOA_NeighbourCellInfo_relativeTimingDifferenceInfo,
         ____OTDOA_NeighbourCellInfo_iE_Extensions__item__id_tab,
         ___OTDOA_NeighbourCellInfo_iE_Extensions__item__id,
+        ____OTDOA_NeighbourCellInfo_iE_Extensions__item__criticality_tab,
         ___OTDOA_NeighbourCellInfo_iE_Extensions__item__criticality,
+        ____OTDOA_NeighbourCellInfo_iE_Extensions__item__extensionValue_tab,
         ___OTDOA_NeighbourCellInfo_iE_Extensions__item__extensionValue,
         __OTDOA_NeighbourCellInfo_iE_Extensions__item_,
         _OTDOA_NeighbourCellInfo_iE_Extensions,
@@ -18842,7 +19974,9 @@ class PCAP_IEs:
         _OTDOA_AddMeasuredResultsInfo_primaryCPICH_Info,
         ____OTDOA_AddMeasuredResultsInfo_iE_Extensions__item__id_tab,
         ___OTDOA_AddMeasuredResultsInfo_iE_Extensions__item__id,
+        ____OTDOA_AddMeasuredResultsInfo_iE_Extensions__item__criticality_tab,
         ___OTDOA_AddMeasuredResultsInfo_iE_Extensions__item__criticality,
+        ____OTDOA_AddMeasuredResultsInfo_iE_Extensions__item__extensionValue_tab,
         ___OTDOA_AddMeasuredResultsInfo_iE_Extensions__item__extensionValue,
         __OTDOA_AddMeasuredResultsInfo_iE_Extensions__item_,
         _OTDOA_AddMeasuredResultsInfo_iE_Extensions,
@@ -18853,7 +19987,9 @@ class PCAP_IEs:
         _UE_SFNSFNTimeDifferenceType2Info_measurementDelay,
         ____UE_SFNSFNTimeDifferenceType2Info_iE_Extensions__item__id_tab,
         ___UE_SFNSFNTimeDifferenceType2Info_iE_Extensions__item__id,
+        ____UE_SFNSFNTimeDifferenceType2Info_iE_Extensions__item__criticality_tab,
         ___UE_SFNSFNTimeDifferenceType2Info_iE_Extensions__item__criticality,
+        ____UE_SFNSFNTimeDifferenceType2Info_iE_Extensions__item__extensionValue_tab,
         ___UE_SFNSFNTimeDifferenceType2Info_iE_Extensions__item__extensionValue,
         __UE_SFNSFNTimeDifferenceType2Info_iE_Extensions__item_,
         _UE_SFNSFNTimeDifferenceType2Info_iE_Extensions,
@@ -18882,7 +20018,9 @@ class PCAP_IEs:
         _SFNSFNMeasurementValueInfo_sFNSFNDriftRateQuality,
         ____SFNSFNMeasurementValueInfo_iE_Extensions__item__id_tab,
         ___SFNSFNMeasurementValueInfo_iE_Extensions__item__id,
+        ____SFNSFNMeasurementValueInfo_iE_Extensions__item__criticality_tab,
         ___SFNSFNMeasurementValueInfo_iE_Extensions__item__criticality,
+        ____SFNSFNMeasurementValueInfo_iE_Extensions__item__extensionValue_tab,
         ___SFNSFNMeasurementValueInfo_iE_Extensions__item__extensionValue,
         __SFNSFNMeasurementValueInfo_iE_Extensions__item_,
         _SFNSFNMeasurementValueInfo_iE_Extensions,
@@ -18899,7 +20037,9 @@ class PCAP_IEs:
         _TUTRANGPSMeasurementValueInfo_tUTRANGPSDriftRateQuality,
         ____TUTRANGPSMeasurementValueInfo_iE_Extensions__item__id_tab,
         ___TUTRANGPSMeasurementValueInfo_iE_Extensions__item__id,
+        ____TUTRANGPSMeasurementValueInfo_iE_Extensions__item__criticality_tab,
         ___TUTRANGPSMeasurementValueInfo_iE_Extensions__item__criticality,
+        ____TUTRANGPSMeasurementValueInfo_iE_Extensions__item__extensionValue_tab,
         ___TUTRANGPSMeasurementValueInfo_iE_Extensions__item__extensionValue,
         __TUTRANGPSMeasurementValueInfo_iE_Extensions__item_,
         _TUTRANGPSMeasurementValueInfo_iE_Extensions,
@@ -18920,7 +20060,9 @@ class PCAP_IEs:
         _TUTRANGANSSMeasurementValueInfo_tUTRANGANSSDriftRateQuality,
         ____TUTRANGANSSMeasurementValueInfo_iE_Extensions__item__id_tab,
         ___TUTRANGANSSMeasurementValueInfo_iE_Extensions__item__id,
+        ____TUTRANGANSSMeasurementValueInfo_iE_Extensions__item__criticality_tab,
         ___TUTRANGANSSMeasurementValueInfo_iE_Extensions__item__criticality,
+        ____TUTRANGANSSMeasurementValueInfo_iE_Extensions__item__extensionValue_tab,
         ___TUTRANGANSSMeasurementValueInfo_iE_Extensions__item__extensionValue,
         __TUTRANGANSSMeasurementValueInfo_iE_Extensions__item_,
         _TUTRANGANSSMeasurementValueInfo_iE_Extensions,
@@ -18934,7 +20076,9 @@ class PCAP_IEs:
         _AdditionalMeasurementInforLCR_angleOfArrivalLCR,
         ____AdditionalMeasurementInforLCR_iE_Extensions__item__id_tab,
         ___AdditionalMeasurementInforLCR_iE_Extensions__item__id,
+        ____AdditionalMeasurementInforLCR_iE_Extensions__item__criticality_tab,
         ___AdditionalMeasurementInforLCR_iE_Extensions__item__criticality,
+        ____AdditionalMeasurementInforLCR_iE_Extensions__item__extensionValue_tab,
         ___AdditionalMeasurementInforLCR_iE_Extensions__item__extensionValue,
         __AdditionalMeasurementInforLCR_iE_Extensions__item_,
         _AdditionalMeasurementInforLCR_iE_Extensions,
@@ -18946,7 +20090,9 @@ class PCAP_IEs:
         _PeriodicPosCalcInfo_reportingInterval,
         ____PeriodicPosCalcInfo_iE_Extensions__item__id_tab,
         ___PeriodicPosCalcInfo_iE_Extensions__item__id,
+        ____PeriodicPosCalcInfo_iE_Extensions__item__criticality_tab,
         ___PeriodicPosCalcInfo_iE_Extensions__item__criticality,
+        ____PeriodicPosCalcInfo_iE_Extensions__item__extensionValue_tab,
         ___PeriodicPosCalcInfo_iE_Extensions__item__extensionValue,
         __PeriodicPosCalcInfo_iE_Extensions__item_,
         _PeriodicPosCalcInfo_iE_Extensions,
@@ -18956,7 +20102,9 @@ class PCAP_IEs:
         _PeriodicLocationInfo_reportingInterval,
         ____PeriodicLocationInfo_iE_Extensions__item__id_tab,
         ___PeriodicLocationInfo_iE_Extensions__item__id,
+        ____PeriodicLocationInfo_iE_Extensions__item__criticality_tab,
         ___PeriodicLocationInfo_iE_Extensions__item__criticality,
+        ____PeriodicLocationInfo_iE_Extensions__item__extensionValue_tab,
         ___PeriodicLocationInfo_iE_Extensions__item__extensionValue,
         __PeriodicLocationInfo_iE_Extensions__item_,
         _PeriodicLocationInfo_iE_Extensions,
@@ -18984,7 +20132,9 @@ class PCAP_IEs:
         _RRCstateChange_new_ue_State,
         ____RRCstateChange_iE_Extensions__item__id_tab,
         ___RRCstateChange_iE_Extensions__item__id,
+        ____RRCstateChange_iE_Extensions__item__criticality_tab,
         ___RRCstateChange_iE_Extensions__item__criticality,
+        ____RRCstateChange_iE_Extensions__item__extensionValue_tab,
         ___RRCstateChange_iE_Extensions__item__extensionValue,
         __RRCstateChange_iE_Extensions__item_,
         _RRCstateChange_iE_Extensions,
@@ -19020,7 +20170,9 @@ class PCAP_IEs:
         _InformationAvailable_requestedDataValue,
         ____InformationAvailable_iE_Extensions__item__id_tab,
         ___InformationAvailable_iE_Extensions__item__id,
+        ____InformationAvailable_iE_Extensions__item__criticality_tab,
         ___InformationAvailable_iE_Extensions__item__criticality,
+        ____InformationAvailable_iE_Extensions__item__extensionValue_tab,
         ___InformationAvailable_iE_Extensions__item__extensionValue,
         __InformationAvailable_iE_Extensions__item_,
         _InformationAvailable_iE_Extensions,
@@ -19032,7 +20184,9 @@ class PCAP_IEs:
         _RequestType_horizontalaccuracyCode,
         ____RequestType_iE_Extensions__item__id_tab,
         ___RequestType_iE_Extensions__item__id,
+        ____RequestType_iE_Extensions__item__criticality_tab,
         ___RequestType_iE_Extensions__item__criticality,
+        ____RequestType_iE_Extensions__item__extensionValue_tab,
         ___RequestType_iE_Extensions__item__extensionValue,
         __RequestType_iE_Extensions__item_,
         _RequestType_iE_Extensions,
@@ -19092,7 +20246,9 @@ class PCAP_IEs:
         _GANSS_SBAS_IDs_ganss_sbas_ids,
         ____GANSS_SBAS_IDs_iE_Extensions__item__id_tab,
         ___GANSS_SBAS_IDs_iE_Extensions__item__id,
+        ____GANSS_SBAS_IDs_iE_Extensions__item__criticality_tab,
         ___GANSS_SBAS_IDs_iE_Extensions__item__criticality,
+        ____GANSS_SBAS_IDs_iE_Extensions__item__extensionValue_tab,
         ___GANSS_SBAS_IDs_iE_Extensions__item__extensionValue,
         __GANSS_SBAS_IDs_iE_Extensions__item_,
         _GANSS_SBAS_IDs_iE_Extensions,
@@ -19101,7 +20257,9 @@ class PCAP_IEs:
         _GANSS_Signal_IDs_ganss_signal_ids,
         ____GANSS_Signal_IDs_iE_Extensions__item__id_tab,
         ___GANSS_Signal_IDs_iE_Extensions__item__id,
+        ____GANSS_Signal_IDs_iE_Extensions__item__criticality_tab,
         ___GANSS_Signal_IDs_iE_Extensions__item__criticality,
+        ____GANSS_Signal_IDs_iE_Extensions__item__extensionValue_tab,
         ___GANSS_Signal_IDs_iE_Extensions__item__extensionValue,
         __GANSS_Signal_IDs_iE_Extensions__item_,
         _GANSS_Signal_IDs_iE_Extensions,
@@ -19112,7 +20270,9 @@ class PCAP_IEs:
         _UTDOAPositioning_utdoa_timeInterval,
         ____UTDOAPositioning_iE_Extensions__item__id_tab,
         ___UTDOAPositioning_iE_Extensions__item__id,
+        ____UTDOAPositioning_iE_Extensions__item__criticality_tab,
         ___UTDOAPositioning_iE_Extensions__item__criticality,
+        ____UTDOAPositioning_iE_Extensions__item__extensionValue_tab,
         ___UTDOAPositioning_iE_Extensions__item__extensionValue,
         __UTDOAPositioning_iE_Extensions__item_,
         _UTDOAPositioning_iE_Extensions,
@@ -19125,7 +20285,9 @@ class PCAP_IEs:
         _GPSPositioning_requestedDataValue,
         ____GPSPositioning_iE_Extensions__item__id_tab,
         ___GPSPositioning_iE_Extensions__item__id,
+        ____GPSPositioning_iE_Extensions__item__criticality_tab,
         ___GPSPositioning_iE_Extensions__item__criticality,
+        ____GPSPositioning_iE_Extensions__item__extensionValue_tab,
         ___GPSPositioning_iE_Extensions__item__extensionValue,
         __GPSPositioning_iE_Extensions__item_,
         _GPSPositioning_iE_Extensions,
@@ -19149,7 +20311,9 @@ class PCAP_IEs:
         _GANSSPositioning_requestedDataValue,
         ____GANSSPositioning_iE_Extensions__item__id_tab,
         ___GANSSPositioning_iE_Extensions__item__id,
+        ____GANSSPositioning_iE_Extensions__item__criticality_tab,
         ___GANSSPositioning_iE_Extensions__item__criticality,
+        ____GANSSPositioning_iE_Extensions__item__extensionValue_tab,
         ___GANSSPositioning_iE_Extensions__item__extensionValue,
         __GANSSPositioning_iE_Extensions__item_,
         _GANSSPositioning_iE_Extensions,
@@ -19177,7 +20341,9 @@ class PCAP_IEs:
         _OTDOAAssistanceData_uE_Positioning_OTDOA_AssistanceData,
         ____OTDOAAssistanceData_iE_Extensions__item__id_tab,
         ___OTDOAAssistanceData_iE_Extensions__item__id,
+        ____OTDOAAssistanceData_iE_Extensions__item__criticality_tab,
         ___OTDOAAssistanceData_iE_Extensions__item__criticality,
+        ____OTDOAAssistanceData_iE_Extensions__item__extensionValue_tab,
         ___OTDOAAssistanceData_iE_Extensions__item__extensionValue,
         __OTDOAAssistanceData_iE_Extensions__item_,
         _OTDOAAssistanceData_iE_Extensions,
@@ -19187,7 +20353,9 @@ class PCAP_IEs:
         _UE_Positioning_OTDOA_AssistanceData_ue_positioning_OTDOA_NeighbourCellList,
         ____UE_Positioning_OTDOA_AssistanceData_iE_Extensions__item__id_tab,
         ___UE_Positioning_OTDOA_AssistanceData_iE_Extensions__item__id,
+        ____UE_Positioning_OTDOA_AssistanceData_iE_Extensions__item__criticality_tab,
         ___UE_Positioning_OTDOA_AssistanceData_iE_Extensions__item__criticality,
+        ____UE_Positioning_OTDOA_AssistanceData_iE_Extensions__item__extensionValue_tab,
         ___UE_Positioning_OTDOA_AssistanceData_iE_Extensions__item__extensionValue,
         __UE_Positioning_OTDOA_AssistanceData_iE_Extensions__item_,
         _UE_Positioning_OTDOA_AssistanceData_iE_Extensions,
@@ -19235,7 +20403,9 @@ class PCAP_IEs:
         _UE_Positioning_IPDL_Parameters_burstModeParameters,
         ____UE_Positioning_IPDL_Parameters_iE_Extensions__item__id_tab,
         ___UE_Positioning_IPDL_Parameters_iE_Extensions__item__id,
+        ____UE_Positioning_IPDL_Parameters_iE_Extensions__item__criticality_tab,
         ___UE_Positioning_IPDL_Parameters_iE_Extensions__item__criticality,
+        ____UE_Positioning_IPDL_Parameters_iE_Extensions__item__extensionValue_tab,
         ___UE_Positioning_IPDL_Parameters_iE_Extensions__item__extensionValue,
         __UE_Positioning_IPDL_Parameters_iE_Extensions__item_,
         _UE_Positioning_IPDL_Parameters_iE_Extensions,
@@ -19248,7 +20418,9 @@ class PCAP_IEs:
         _BurstModeParameters_burstFreq,
         ____BurstModeParameters_iE_Extensions__item__id_tab,
         ___BurstModeParameters_iE_Extensions__item__id,
+        ____BurstModeParameters_iE_Extensions__item__criticality_tab,
         ___BurstModeParameters_iE_Extensions__item__criticality,
+        ____BurstModeParameters_iE_Extensions__item__extensionValue_tab,
         ___BurstModeParameters_iE_Extensions__item__extensionValue,
         __BurstModeParameters_iE_Extensions__item_,
         _BurstModeParameters_iE_Extensions,
@@ -19289,7 +20461,9 @@ class PCAP_IEs:
         _SFN_SFN_RelTimeDifference1_sfn_sfn_Reltimedifference,
         ____SFN_SFN_RelTimeDifference1_iE_Extensions__item__id_tab,
         ___SFN_SFN_RelTimeDifference1_iE_Extensions__item__id,
+        ____SFN_SFN_RelTimeDifference1_iE_Extensions__item__criticality_tab,
         ___SFN_SFN_RelTimeDifference1_iE_Extensions__item__criticality,
+        ____SFN_SFN_RelTimeDifference1_iE_Extensions__item__extensionValue_tab,
         ___SFN_SFN_RelTimeDifference1_iE_Extensions__item__extensionValue,
         __SFN_SFN_RelTimeDifference1_iE_Extensions__item_,
         _SFN_SFN_RelTimeDifference1_iE_Extensions,
@@ -19305,7 +20479,9 @@ class PCAP_IEs:
         _UTDOA_Group_uTDOA_ChannelSettings,
         ____UTDOA_Group_iE_Extensions__item__id_tab,
         ___UTDOA_Group_iE_Extensions__item__id,
+        ____UTDOA_Group_iE_Extensions__item__criticality_tab,
         ___UTDOA_Group_iE_Extensions__item__criticality,
+        ____UTDOA_Group_iE_Extensions__item__extensionValue_tab,
         ___UTDOA_Group_iE_Extensions__item__extensionValue,
         __UTDOA_Group_iE_Extensions__item_,
         _UTDOA_Group_iE_Extensions,
@@ -19316,7 +20492,9 @@ class PCAP_IEs:
         _FrequencyInfo_modeSpecificInfo,
         ____FrequencyInfo_iE_Extensions__item__id_tab,
         ___FrequencyInfo_iE_Extensions__item__id,
+        ____FrequencyInfo_iE_Extensions__item__criticality_tab,
         ___FrequencyInfo_iE_Extensions__item__criticality,
+        ____FrequencyInfo_iE_Extensions__item__extensionValue_tab,
         ___FrequencyInfo_iE_Extensions__item__extensionValue,
         __FrequencyInfo_iE_Extensions__item_,
         _FrequencyInfo_iE_Extensions,
@@ -19326,7 +20504,9 @@ class PCAP_IEs:
         _FrequencyInfoFDD_uarfcn_DL,
         ____FrequencyInfoFDD_iE_Extensions__item__id_tab,
         ___FrequencyInfoFDD_iE_Extensions__item__id,
+        ____FrequencyInfoFDD_iE_Extensions__item__criticality_tab,
         ___FrequencyInfoFDD_iE_Extensions__item__criticality,
+        ____FrequencyInfoFDD_iE_Extensions__item__extensionValue_tab,
         ___FrequencyInfoFDD_iE_Extensions__item__extensionValue,
         __FrequencyInfoFDD_iE_Extensions__item_,
         _FrequencyInfoFDD_iE_Extensions,
@@ -19335,7 +20515,9 @@ class PCAP_IEs:
         _FrequencyInfoTDD_uarfcn,
         ____FrequencyInfoTDD_iE_Extensions__item__id_tab,
         ___FrequencyInfoTDD_iE_Extensions__item__id,
+        ____FrequencyInfoTDD_iE_Extensions__item__criticality_tab,
         ___FrequencyInfoTDD_iE_Extensions__item__criticality,
+        ____FrequencyInfoTDD_iE_Extensions__item__extensionValue_tab,
         ___FrequencyInfoTDD_iE_Extensions__item__extensionValue,
         __FrequencyInfoTDD_iE_Extensions__item_,
         _FrequencyInfoTDD_iE_Extensions,
@@ -19350,7 +20532,9 @@ class PCAP_IEs:
         _UTDOA_CELLDCH_e_DPCH_Information,
         ____UTDOA_CELLDCH_iE_Extensions__item__id_tab,
         ___UTDOA_CELLDCH_iE_Extensions__item__id,
+        ____UTDOA_CELLDCH_iE_Extensions__item__criticality_tab,
         ___UTDOA_CELLDCH_iE_Extensions__item__criticality,
+        ____UTDOA_CELLDCH_iE_Extensions__item__extensionValue_tab,
         ___UTDOA_CELLDCH_iE_Extensions__item__extensionValue,
         __UTDOA_CELLDCH_iE_Extensions__item_,
         _UTDOA_CELLDCH_iE_Extensions,
@@ -19362,7 +20546,9 @@ class PCAP_IEs:
         __UL_DPCHInfo_fdd_numberOfFBI_Bits,
         _____UL_DPCHInfo_fdd_iE_Extensions__item__id_tab,
         ____UL_DPCHInfo_fdd_iE_Extensions__item__id,
+        _____UL_DPCHInfo_fdd_iE_Extensions__item__criticality_tab,
         ____UL_DPCHInfo_fdd_iE_Extensions__item__criticality,
+        _____UL_DPCHInfo_fdd_iE_Extensions__item__extensionValue_tab,
         ____UL_DPCHInfo_fdd_iE_Extensions__item__extensionValue,
         ___UL_DPCHInfo_fdd_iE_Extensions__item_,
         __UL_DPCHInfo_fdd_iE_Extensions,
@@ -19376,8 +20562,11 @@ class PCAP_IEs:
         __UL_DPCHInfo_tdd_uL_Timeslot_Information,
         __UL_DPCHInfo_tdd_frameOffset,
         __UL_DPCHInfo_tdd_specialBurstScheduling,
+        _____UL_DPCHInfo_tdd_iE_Extensions__item__id_tab,
         ____UL_DPCHInfo_tdd_iE_Extensions__item__id,
+        _____UL_DPCHInfo_tdd_iE_Extensions__item__criticality_tab,
         ____UL_DPCHInfo_tdd_iE_Extensions__item__criticality,
+        _____UL_DPCHInfo_tdd_iE_Extensions__item__extensionValue_tab,
         ____UL_DPCHInfo_tdd_iE_Extensions__item__extensionValue,
         ___UL_DPCHInfo_tdd_iE_Extensions__item_,
         __UL_DPCHInfo_tdd_iE_Extensions,
@@ -19389,7 +20578,9 @@ class PCAP_IEs:
         _Compressed_Mode_Assistance_Data_ul_information,
         ____Compressed_Mode_Assistance_Data_iE_Extensions__item__id_tab,
         ___Compressed_Mode_Assistance_Data_iE_Extensions__item__id,
+        ____Compressed_Mode_Assistance_Data_iE_Extensions__item__criticality_tab,
         ___Compressed_Mode_Assistance_Data_iE_Extensions__item__criticality,
+        ____Compressed_Mode_Assistance_Data_iE_Extensions__item__extensionValue_tab,
         ___Compressed_Mode_Assistance_Data_iE_Extensions__item__extensionValue,
         __Compressed_Mode_Assistance_Data_iE_Extensions__item_,
         _Compressed_Mode_Assistance_Data_iE_Extensions,
@@ -19400,7 +20591,9 @@ class PCAP_IEs:
         _DL_InformationFDD_frameOffset,
         ____DL_InformationFDD_iE_Extensions__item__id_tab,
         ___DL_InformationFDD_iE_Extensions__item__id,
+        ____DL_InformationFDD_iE_Extensions__item__criticality_tab,
         ___DL_InformationFDD_iE_Extensions__item__criticality,
+        ____DL_InformationFDD_iE_Extensions__item__extensionValue_tab,
         ___DL_InformationFDD_iE_Extensions__item__extensionValue,
         __DL_InformationFDD_iE_Extensions__item_,
         _DL_InformationFDD_iE_Extensions,
@@ -19411,7 +20604,9 @@ class PCAP_IEs:
         _UL_InformationFDD_cFN,
         ____UL_InformationFDD_iE_Extensions__item__id_tab,
         ___UL_InformationFDD_iE_Extensions__item__id,
+        ____UL_InformationFDD_iE_Extensions__item__criticality_tab,
         ___UL_InformationFDD_iE_Extensions__item__criticality,
+        ____UL_InformationFDD_iE_Extensions__item__extensionValue_tab,
         ___UL_InformationFDD_iE_Extensions__item__extensionValue,
         __UL_InformationFDD_iE_Extensions__item_,
         _UL_InformationFDD_iE_Extensions,
@@ -19426,7 +20621,9 @@ class PCAP_IEs:
         __Transmission_Gap_Pattern_Sequence_Information__item__uplink_Compressed_Mode_Method,
         _____Transmission_Gap_Pattern_Sequence_Information__item__iE_Extensions__item__id_tab,
         ____Transmission_Gap_Pattern_Sequence_Information__item__iE_Extensions__item__id,
+        _____Transmission_Gap_Pattern_Sequence_Information__item__iE_Extensions__item__criticality_tab,
         ____Transmission_Gap_Pattern_Sequence_Information__item__iE_Extensions__item__criticality,
+        _____Transmission_Gap_Pattern_Sequence_Information__item__iE_Extensions__item__extensionValue_tab,
         ____Transmission_Gap_Pattern_Sequence_Information__item__iE_Extensions__item__extensionValue,
         ___Transmission_Gap_Pattern_Sequence_Information__item__iE_Extensions__item_,
         __Transmission_Gap_Pattern_Sequence_Information__item__iE_Extensions,
@@ -19444,7 +20641,9 @@ class PCAP_IEs:
         _Active_Pattern_Sequence_Information_transmission_Gap_Pattern_Sequence_Status,
         ____Active_Pattern_Sequence_Information_iE_Extensions__item__id_tab,
         ___Active_Pattern_Sequence_Information_iE_Extensions__item__id,
+        ____Active_Pattern_Sequence_Information_iE_Extensions__item__criticality_tab,
         ___Active_Pattern_Sequence_Information_iE_Extensions__item__criticality,
+        ____Active_Pattern_Sequence_Information_iE_Extensions__item__extensionValue_tab,
         ___Active_Pattern_Sequence_Information_iE_Extensions__item__extensionValue,
         __Active_Pattern_Sequence_Information_iE_Extensions__item_,
         _Active_Pattern_Sequence_Information_iE_Extensions,
@@ -19455,7 +20654,9 @@ class PCAP_IEs:
         __Transmission_Gap_Pattern_Sequence_Status_List__item__tGCFN,
         _____Transmission_Gap_Pattern_Sequence_Status_List__item__iE_Extensions__item__id_tab,
         ____Transmission_Gap_Pattern_Sequence_Status_List__item__iE_Extensions__item__id,
+        _____Transmission_Gap_Pattern_Sequence_Status_List__item__iE_Extensions__item__criticality_tab,
         ____Transmission_Gap_Pattern_Sequence_Status_List__item__iE_Extensions__item__criticality,
+        _____Transmission_Gap_Pattern_Sequence_Status_List__item__iE_Extensions__item__extensionValue_tab,
         ____Transmission_Gap_Pattern_Sequence_Status_List__item__iE_Extensions__item__extensionValue,
         ___Transmission_Gap_Pattern_Sequence_Status_List__item__iE_Extensions__item_,
         __Transmission_Gap_Pattern_Sequence_Status_List__item__iE_Extensions,
@@ -19466,7 +20667,9 @@ class PCAP_IEs:
         _DCH_Information_trChInfo,
         ____DCH_Information_iE_Extensions__item__id_tab,
         ___DCH_Information_iE_Extensions__item__id,
+        ____DCH_Information_iE_Extensions__item__criticality_tab,
         ___DCH_Information_iE_Extensions__item__criticality,
+        ____DCH_Information_iE_Extensions__item__extensionValue_tab,
         ___DCH_Information_iE_Extensions__item__extensionValue,
         __DCH_Information_iE_Extensions__item_,
         _DCH_Information_iE_Extensions,
@@ -19478,7 +20681,9 @@ class PCAP_IEs:
         _UL_TrCHInfo_tfs,
         ____UL_TrCHInfo_iE_Extensions__item__id_tab,
         ___UL_TrCHInfo_iE_Extensions__item__id,
+        ____UL_TrCHInfo_iE_Extensions__item__criticality_tab,
         ___UL_TrCHInfo_iE_Extensions__item__criticality,
+        ____UL_TrCHInfo_iE_Extensions__item__extensionValue_tab,
         ___UL_TrCHInfo_iE_Extensions__item__extensionValue,
         __UL_TrCHInfo_iE_Extensions__item_,
         _UL_TrCHInfo_iE_Extensions,
@@ -19492,7 +20697,9 @@ class PCAP_IEs:
         _E_DPCH_Information_e_DPCCH_PO,
         ____E_DPCH_Information_iE_Extensions__item__id_tab,
         ___E_DPCH_Information_iE_Extensions__item__id,
+        ____E_DPCH_Information_iE_Extensions__item__criticality_tab,
         ___E_DPCH_Information_iE_Extensions__item__criticality,
+        ____E_DPCH_Information_iE_Extensions__item__extensionValue_tab,
         ___E_DPCH_Information_iE_Extensions__item__extensionValue,
         __E_DPCH_Information_iE_Extensions__item_,
         _E_DPCH_Information_iE_Extensions,
@@ -19503,7 +20710,9 @@ class PCAP_IEs:
         _E_TFCS_Information_reference_E_TFCI_Information,
         ____E_TFCS_Information_iE_Extensions__item__id_tab,
         ___E_TFCS_Information_iE_Extensions__item__id,
+        ____E_TFCS_Information_iE_Extensions__item__criticality_tab,
         ___E_TFCS_Information_iE_Extensions__item__criticality,
+        ____E_TFCS_Information_iE_Extensions__item__extensionValue_tab,
         ___E_TFCS_Information_iE_Extensions__item__extensionValue,
         __E_TFCS_Information_iE_Extensions__item_,
         _E_TFCS_Information_iE_Extensions,
@@ -19516,7 +20725,9 @@ class PCAP_IEs:
         _Reference_E_TFCI_Information_Item_reference_E_TFCI_PO,
         ____Reference_E_TFCI_Information_Item_iE_Extensions__item__id_tab,
         ___Reference_E_TFCI_Information_Item_iE_Extensions__item__id,
+        ____Reference_E_TFCI_Information_Item_iE_Extensions__item__criticality_tab,
         ___Reference_E_TFCI_Information_Item_iE_Extensions__item__criticality,
+        ____Reference_E_TFCI_Information_Item_iE_Extensions__item__extensionValue_tab,
         ___Reference_E_TFCI_Information_Item_iE_Extensions__item__extensionValue,
         __Reference_E_TFCI_Information_Item_iE_Extensions__item_,
         _Reference_E_TFCI_Information_Item_iE_Extensions,
@@ -19542,7 +20753,9 @@ class PCAP_IEs:
         _UL_Timeslot_InformationItem_uL_Code_InformationList,
         ____UL_Timeslot_InformationItem_iE_Extensions__item__id_tab,
         ___UL_Timeslot_InformationItem_iE_Extensions__item__id,
+        ____UL_Timeslot_InformationItem_iE_Extensions__item__criticality_tab,
         ___UL_Timeslot_InformationItem_iE_Extensions__item__criticality,
+        ____UL_Timeslot_InformationItem_iE_Extensions__item__extensionValue_tab,
         ___UL_Timeslot_InformationItem_iE_Extensions__item__extensionValue,
         __UL_Timeslot_InformationItem_iE_Extensions__item_,
         _UL_Timeslot_InformationItem_iE_Extensions,
@@ -19577,7 +20790,9 @@ class PCAP_IEs:
         _TDD_UL_Code_InformationItem_tdd_ChannelisationCode,
         ____TDD_UL_Code_InformationItem_iE_Extensions__item__id_tab,
         ___TDD_UL_Code_InformationItem_iE_Extensions__item__id,
+        ____TDD_UL_Code_InformationItem_iE_Extensions__item__criticality_tab,
         ___TDD_UL_Code_InformationItem_iE_Extensions__item__criticality,
+        ____TDD_UL_Code_InformationItem_iE_Extensions__item__extensionValue_tab,
         ___TDD_UL_Code_InformationItem_iE_Extensions__item__extensionValue,
         __TDD_UL_Code_InformationItem_iE_Extensions__item_,
         _TDD_UL_Code_InformationItem_iE_Extensions,
@@ -19590,7 +20805,9 @@ class PCAP_IEs:
         _UTDOA_CELLFACH_uschParameters,
         ____UTDOA_CELLFACH_iE_Extensions__item__id_tab,
         ___UTDOA_CELLFACH_iE_Extensions__item__id,
+        ____UTDOA_CELLFACH_iE_Extensions__item__criticality_tab,
         ___UTDOA_CELLFACH_iE_Extensions__item__criticality,
+        ____UTDOA_CELLFACH_iE_Extensions__item__extensionValue_tab,
         ___UTDOA_CELLFACH_iE_Extensions__item__extensionValue,
         __UTDOA_CELLFACH_iE_Extensions__item_,
         _UTDOA_CELLFACH_iE_Extensions,
@@ -19603,7 +20820,9 @@ class PCAP_IEs:
         _PRACH_ChannelInfo_tFCS,
         ____PRACH_ChannelInfo_iE_Extensions__item__id_tab,
         ___PRACH_ChannelInfo_iE_Extensions__item__id,
+        ____PRACH_ChannelInfo_iE_Extensions__item__criticality_tab,
         ___PRACH_ChannelInfo_iE_Extensions__item__criticality,
+        ____PRACH_ChannelInfo_iE_Extensions__item__extensionValue_tab,
         ___PRACH_ChannelInfo_iE_Extensions__item__extensionValue,
         __PRACH_ChannelInfo_iE_Extensions__item_,
         _PRACH_ChannelInfo_iE_Extensions,
@@ -19616,7 +20835,9 @@ class PCAP_IEs:
         __PRACH_Info_fdd_availableSubChannelNumbers,
         _____PRACH_Info_fdd_iE_Extensions__item__id_tab,
         ____PRACH_Info_fdd_iE_Extensions__item__id,
+        _____PRACH_Info_fdd_iE_Extensions__item__criticality_tab,
         ____PRACH_Info_fdd_iE_Extensions__item__criticality,
+        _____PRACH_Info_fdd_iE_Extensions__item__extensionValue_tab,
         ____PRACH_Info_fdd_iE_Extensions__item__extensionValue,
         ___PRACH_Info_fdd_iE_Extensions__item_,
         __PRACH_Info_fdd_iE_Extensions,
@@ -19625,8 +20846,11 @@ class PCAP_IEs:
         __PRACH_Info_tdd_tdd_ChannelisationCode,
         __PRACH_Info_tdd_maxPRACH_MidambleShifts,
         __PRACH_Info_tdd_pRACH_Midamble,
+        _____PRACH_Info_tdd_iE_Extensions__item__id_tab,
         ____PRACH_Info_tdd_iE_Extensions__item__id,
+        _____PRACH_Info_tdd_iE_Extensions__item__criticality_tab,
         ____PRACH_Info_tdd_iE_Extensions__item__criticality,
+        _____PRACH_Info_tdd_iE_Extensions__item__extensionValue_tab,
         ____PRACH_Info_tdd_iE_Extensions__item__extensionValue,
         ___PRACH_Info_tdd_iE_Extensions__item_,
         __PRACH_Info_tdd_iE_Extensions,
@@ -19646,7 +20870,9 @@ class PCAP_IEs:
         _TransportFormatSet_semi_staticPart,
         ____TransportFormatSet_iE_Extensions__item__id_tab,
         ___TransportFormatSet_iE_Extensions__item__id,
+        ____TransportFormatSet_iE_Extensions__item__criticality_tab,
         ___TransportFormatSet_iE_Extensions__item__criticality,
+        ____TransportFormatSet_iE_Extensions__item__extensionValue_tab,
         ___TransportFormatSet_iE_Extensions__item__extensionValue,
         __TransportFormatSet_iE_Extensions__item_,
         _TransportFormatSet_iE_Extensions,
@@ -19657,7 +20883,9 @@ class PCAP_IEs:
         __TransportFormatSet_DynamicPartList__item__numberOfTbsTTIList,
         _____TransportFormatSet_DynamicPartList__item__iE_Extensions__item__id_tab,
         ____TransportFormatSet_DynamicPartList__item__iE_Extensions__item__id,
+        _____TransportFormatSet_DynamicPartList__item__iE_Extensions__item__criticality_tab,
         ____TransportFormatSet_DynamicPartList__item__iE_Extensions__item__criticality,
+        _____TransportFormatSet_DynamicPartList__item__iE_Extensions__item__extensionValue_tab,
         ____TransportFormatSet_DynamicPartList__item__iE_Extensions__item__extensionValue,
         ___TransportFormatSet_DynamicPartList__item__iE_Extensions__item_,
         __TransportFormatSet_DynamicPartList__item__iE_Extensions,
@@ -19668,7 +20896,9 @@ class PCAP_IEs:
         _TbsTTIInfo_numberOfTbs,
         ____TbsTTIInfo_iE_Extensions__item__id_tab,
         ___TbsTTIInfo_iE_Extensions__item__id,
+        ____TbsTTIInfo_iE_Extensions__item__criticality_tab,
         ___TbsTTIInfo_iE_Extensions__item__criticality,
+        ____TbsTTIInfo_iE_Extensions__item__extensionValue_tab,
         ___TbsTTIInfo_iE_Extensions__item__extensionValue,
         __TbsTTIInfo_iE_Extensions__item_,
         _TbsTTIInfo_iE_Extensions,
@@ -19683,7 +20913,9 @@ class PCAP_IEs:
         _TransportFormatSet_Semi_staticPart_cRC_Size,
         ____TransportFormatSet_Semi_staticPart_iE_Extensions__item__id_tab,
         ___TransportFormatSet_Semi_staticPart_iE_Extensions__item__id,
+        ____TransportFormatSet_Semi_staticPart_iE_Extensions__item__criticality_tab,
         ___TransportFormatSet_Semi_staticPart_iE_Extensions__item__criticality,
+        ____TransportFormatSet_Semi_staticPart_iE_Extensions__item__extensionValue_tab,
         ___TransportFormatSet_Semi_staticPart_iE_Extensions__item__extensionValue,
         __TransportFormatSet_Semi_staticPart_iE_Extensions__item_,
         _TransportFormatSet_Semi_staticPart_iE_Extensions,
@@ -19728,7 +20960,9 @@ class PCAP_IEs:
         _UschParameters_trChInfo,
         ____UschParameters_iE_Extensions__item__id_tab,
         ___UschParameters_iE_Extensions__item__id,
+        ____UschParameters_iE_Extensions__item__criticality_tab,
         ___UschParameters_iE_Extensions__item__criticality,
+        ____UschParameters_iE_Extensions__item__extensionValue_tab,
         ___UschParameters_iE_Extensions__item__extensionValue,
         __UschParameters_iE_Extensions__item_,
         _UschParameters_iE_Extensions,
@@ -19748,7 +20982,9 @@ class PCAP_IEs:
         _HorizontalVelocity_horizontalSpeedAndBearing,
         ____HorizontalVelocity_iE_Extensions__item__id_tab,
         ___HorizontalVelocity_iE_Extensions__item__id,
+        ____HorizontalVelocity_iE_Extensions__item__criticality_tab,
         ___HorizontalVelocity_iE_Extensions__item__criticality,
+        ____HorizontalVelocity_iE_Extensions__item__extensionValue_tab,
         ___HorizontalVelocity_iE_Extensions__item__extensionValue,
         __HorizontalVelocity_iE_Extensions__item_,
         _HorizontalVelocity_iE_Extensions,
@@ -19758,7 +20994,9 @@ class PCAP_IEs:
         _HorizontalWithVerticalVelocity_verticalVelocity,
         ____HorizontalWithVerticalVelocity_iE_Extensions__item__id_tab,
         ___HorizontalWithVerticalVelocity_iE_Extensions__item__id,
+        ____HorizontalWithVerticalVelocity_iE_Extensions__item__criticality_tab,
         ___HorizontalWithVerticalVelocity_iE_Extensions__item__criticality,
+        ____HorizontalWithVerticalVelocity_iE_Extensions__item__extensionValue_tab,
         ___HorizontalWithVerticalVelocity_iE_Extensions__item__extensionValue,
         __HorizontalWithVerticalVelocity_iE_Extensions__item_,
         _HorizontalWithVerticalVelocity_iE_Extensions,
@@ -19768,7 +21006,9 @@ class PCAP_IEs:
         _HorizontalVelocityWithUncertainty_uncertaintySpeed,
         ____HorizontalVelocityWithUncertainty_iE_Extensions__item__id_tab,
         ___HorizontalVelocityWithUncertainty_iE_Extensions__item__id,
+        ____HorizontalVelocityWithUncertainty_iE_Extensions__item__criticality_tab,
         ___HorizontalVelocityWithUncertainty_iE_Extensions__item__criticality,
+        ____HorizontalVelocityWithUncertainty_iE_Extensions__item__extensionValue_tab,
         ___HorizontalVelocityWithUncertainty_iE_Extensions__item__extensionValue,
         __HorizontalVelocityWithUncertainty_iE_Extensions__item_,
         _HorizontalVelocityWithUncertainty_iE_Extensions,
@@ -19780,7 +21020,9 @@ class PCAP_IEs:
         _HorizontalWithVerticalVelocityAndUncertainty_verticalUncertaintySpeed,
         ____HorizontalWithVerticalVelocityAndUncertainty_iE_Extensions__item__id_tab,
         ___HorizontalWithVerticalVelocityAndUncertainty_iE_Extensions__item__id,
+        ____HorizontalWithVerticalVelocityAndUncertainty_iE_Extensions__item__criticality_tab,
         ___HorizontalWithVerticalVelocityAndUncertainty_iE_Extensions__item__criticality,
+        ____HorizontalWithVerticalVelocityAndUncertainty_iE_Extensions__item__extensionValue_tab,
         ___HorizontalWithVerticalVelocityAndUncertainty_iE_Extensions__item__extensionValue,
         __HorizontalWithVerticalVelocityAndUncertainty_iE_Extensions__item_,
         _HorizontalWithVerticalVelocityAndUncertainty_iE_Extensions,
@@ -19798,7 +21040,9 @@ class PCAP_IEs:
         _UTRAN_GPSReferenceTime_sfn,
         ____UTRAN_GPSReferenceTime_iE_Extensions__item__id_tab,
         ___UTRAN_GPSReferenceTime_iE_Extensions__item__id,
+        ____UTRAN_GPSReferenceTime_iE_Extensions__item__criticality_tab,
         ___UTRAN_GPSReferenceTime_iE_Extensions__item__criticality,
+        ____UTRAN_GPSReferenceTime_iE_Extensions__item__extensionValue_tab,
         ___UTRAN_GPSReferenceTime_iE_Extensions__item__extensionValue,
         __UTRAN_GPSReferenceTime_iE_Extensions__item_,
         _UTRAN_GPSReferenceTime_iE_Extensions,
@@ -19809,7 +21053,9 @@ class PCAP_IEs:
         _UTRAN_GPSReferenceTimeResult_sfn,
         ____UTRAN_GPSReferenceTimeResult_iE_Extensions__item__id_tab,
         ___UTRAN_GPSReferenceTimeResult_iE_Extensions__item__id,
+        ____UTRAN_GPSReferenceTimeResult_iE_Extensions__item__criticality_tab,
         ___UTRAN_GPSReferenceTimeResult_iE_Extensions__item__criticality,
+        ____UTRAN_GPSReferenceTimeResult_iE_Extensions__item__extensionValue_tab,
         ___UTRAN_GPSReferenceTimeResult_iE_Extensions__item__extensionValue,
         __UTRAN_GPSReferenceTimeResult_iE_Extensions__item_,
         _UTRAN_GPSReferenceTimeResult_iE_Extensions,
@@ -19822,7 +21068,9 @@ class PCAP_IEs:
         _UTRAN_GANSSReferenceTimeResult_sfn,
         ____UTRAN_GANSSReferenceTimeResult_iE_Extensions__item__id_tab,
         ___UTRAN_GANSSReferenceTimeResult_iE_Extensions__item__id,
+        ____UTRAN_GANSSReferenceTimeResult_iE_Extensions__item__criticality_tab,
         ___UTRAN_GANSSReferenceTimeResult_iE_Extensions__item__criticality,
+        ____UTRAN_GANSSReferenceTimeResult_iE_Extensions__item__extensionValue_tab,
         ___UTRAN_GANSSReferenceTimeResult_iE_Extensions__item__extensionValue,
         __UTRAN_GANSSReferenceTimeResult_iE_Extensions__item_,
         _UTRAN_GANSSReferenceTimeResult_iE_Extensions,
@@ -20253,11 +21501,15 @@ class PCAP_PDU_Contents:
     ___PositionCalculationFailure_protocolExtensions__item__id._const_tab_at = None
     ___PositionCalculationFailure_protocolExtensions__item__id._const_tab_id = u'id'
     ___PositionCalculationFailure_protocolExtensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___PositionCalculationFailure_protocolExtensions__item__criticality._const_tab = ____PositionCalculationFailure_protocolExtensions__item__id_tab
+    ____PositionCalculationFailure_protocolExtensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____PositionCalculationFailure_protocolExtensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___PositionCalculationFailure_protocolExtensions__item__criticality._const_tab = ____PositionCalculationFailure_protocolExtensions__item__criticality_tab
     ___PositionCalculationFailure_protocolExtensions__item__criticality._const_tab_at = ('..', u'id')
     ___PositionCalculationFailure_protocolExtensions__item__criticality._const_tab_id = u'criticality'
     ___PositionCalculationFailure_protocolExtensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___PositionCalculationFailure_protocolExtensions__item__extensionValue._const_tab = ____PositionCalculationFailure_protocolExtensions__item__id_tab
+    ____PositionCalculationFailure_protocolExtensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____PositionCalculationFailure_protocolExtensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___PositionCalculationFailure_protocolExtensions__item__extensionValue._const_tab = ____PositionCalculationFailure_protocolExtensions__item__extensionValue_tab
     ___PositionCalculationFailure_protocolExtensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___PositionCalculationFailure_protocolExtensions__item__extensionValue._const_tab_id = u'Extension'
     __PositionCalculationFailure_protocolExtensions__item_._cont = ASN1Dict([
@@ -20386,11 +21638,15 @@ class PCAP_PDU_Contents:
     ___RefPosition_InfEx_Rqst_iE_Extensions__item__id._const_tab_at = None
     ___RefPosition_InfEx_Rqst_iE_Extensions__item__id._const_tab_id = u'id'
     ___RefPosition_InfEx_Rqst_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___RefPosition_InfEx_Rqst_iE_Extensions__item__criticality._const_tab = ____RefPosition_InfEx_Rqst_iE_Extensions__item__id_tab
+    ____RefPosition_InfEx_Rqst_iE_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____RefPosition_InfEx_Rqst_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___RefPosition_InfEx_Rqst_iE_Extensions__item__criticality._const_tab = ____RefPosition_InfEx_Rqst_iE_Extensions__item__criticality_tab
     ___RefPosition_InfEx_Rqst_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___RefPosition_InfEx_Rqst_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___RefPosition_InfEx_Rqst_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___RefPosition_InfEx_Rqst_iE_Extensions__item__extensionValue._const_tab = ____RefPosition_InfEx_Rqst_iE_Extensions__item__id_tab
+    ____RefPosition_InfEx_Rqst_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____RefPosition_InfEx_Rqst_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___RefPosition_InfEx_Rqst_iE_Extensions__item__extensionValue._const_tab = ____RefPosition_InfEx_Rqst_iE_Extensions__item__extensionValue_tab
     ___RefPosition_InfEx_Rqst_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___RefPosition_InfEx_Rqst_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __RefPosition_InfEx_Rqst_iE_Extensions__item_._cont = ASN1Dict([
@@ -20454,11 +21710,15 @@ class PCAP_PDU_Contents:
     ___UC_ID_InfEx_Rqst_iE_Extensions__item__id._const_tab_at = None
     ___UC_ID_InfEx_Rqst_iE_Extensions__item__id._const_tab_id = u'id'
     ___UC_ID_InfEx_Rqst_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___UC_ID_InfEx_Rqst_iE_Extensions__item__criticality._const_tab = ____UC_ID_InfEx_Rqst_iE_Extensions__item__id_tab
+    ____UC_ID_InfEx_Rqst_iE_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____UC_ID_InfEx_Rqst_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___UC_ID_InfEx_Rqst_iE_Extensions__item__criticality._const_tab = ____UC_ID_InfEx_Rqst_iE_Extensions__item__criticality_tab
     ___UC_ID_InfEx_Rqst_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___UC_ID_InfEx_Rqst_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___UC_ID_InfEx_Rqst_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___UC_ID_InfEx_Rqst_iE_Extensions__item__extensionValue._const_tab = ____UC_ID_InfEx_Rqst_iE_Extensions__item__id_tab
+    ____UC_ID_InfEx_Rqst_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____UC_ID_InfEx_Rqst_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___UC_ID_InfEx_Rqst_iE_Extensions__item__extensionValue._const_tab = ____UC_ID_InfEx_Rqst_iE_Extensions__item__extensionValue_tab
     ___UC_ID_InfEx_Rqst_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___UC_ID_InfEx_Rqst_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __UC_ID_InfEx_Rqst_iE_Extensions__item_._cont = ASN1Dict([
@@ -20517,11 +21777,15 @@ class PCAP_PDU_Contents:
     ___InformationExchangeInitiationResponse_protocolExtensions__item__id._const_tab_at = None
     ___InformationExchangeInitiationResponse_protocolExtensions__item__id._const_tab_id = u'id'
     ___InformationExchangeInitiationResponse_protocolExtensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___InformationExchangeInitiationResponse_protocolExtensions__item__criticality._const_tab = ____InformationExchangeInitiationResponse_protocolExtensions__item__id_tab
+    ____InformationExchangeInitiationResponse_protocolExtensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____InformationExchangeInitiationResponse_protocolExtensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___InformationExchangeInitiationResponse_protocolExtensions__item__criticality._const_tab = ____InformationExchangeInitiationResponse_protocolExtensions__item__criticality_tab
     ___InformationExchangeInitiationResponse_protocolExtensions__item__criticality._const_tab_at = ('..', u'id')
     ___InformationExchangeInitiationResponse_protocolExtensions__item__criticality._const_tab_id = u'criticality'
     ___InformationExchangeInitiationResponse_protocolExtensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___InformationExchangeInitiationResponse_protocolExtensions__item__extensionValue._const_tab = ____InformationExchangeInitiationResponse_protocolExtensions__item__id_tab
+    ____InformationExchangeInitiationResponse_protocolExtensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____InformationExchangeInitiationResponse_protocolExtensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___InformationExchangeInitiationResponse_protocolExtensions__item__extensionValue._const_tab = ____InformationExchangeInitiationResponse_protocolExtensions__item__extensionValue_tab
     ___InformationExchangeInitiationResponse_protocolExtensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___InformationExchangeInitiationResponse_protocolExtensions__item__extensionValue._const_tab_id = u'Extension'
     __InformationExchangeInitiationResponse_protocolExtensions__item_._cont = ASN1Dict([
@@ -20569,11 +21833,15 @@ class PCAP_PDU_Contents:
     ___RefPosition_InfEx_Rsp_iE_Extensions__item__id._const_tab_at = None
     ___RefPosition_InfEx_Rsp_iE_Extensions__item__id._const_tab_id = u'id'
     ___RefPosition_InfEx_Rsp_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___RefPosition_InfEx_Rsp_iE_Extensions__item__criticality._const_tab = ____RefPosition_InfEx_Rsp_iE_Extensions__item__id_tab
+    ____RefPosition_InfEx_Rsp_iE_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____RefPosition_InfEx_Rsp_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___RefPosition_InfEx_Rsp_iE_Extensions__item__criticality._const_tab = ____RefPosition_InfEx_Rsp_iE_Extensions__item__criticality_tab
     ___RefPosition_InfEx_Rsp_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___RefPosition_InfEx_Rsp_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___RefPosition_InfEx_Rsp_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___RefPosition_InfEx_Rsp_iE_Extensions__item__extensionValue._const_tab = ____RefPosition_InfEx_Rsp_iE_Extensions__item__id_tab
+    ____RefPosition_InfEx_Rsp_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____RefPosition_InfEx_Rsp_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___RefPosition_InfEx_Rsp_iE_Extensions__item__extensionValue._const_tab = ____RefPosition_InfEx_Rsp_iE_Extensions__item__extensionValue_tab
     ___RefPosition_InfEx_Rsp_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___RefPosition_InfEx_Rsp_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __RefPosition_InfEx_Rsp_iE_Extensions__item_._cont = ASN1Dict([
@@ -20632,11 +21900,15 @@ class PCAP_PDU_Contents:
     ___InformationExchangeInitiationFailure_protocolExtensions__item__id._const_tab_at = None
     ___InformationExchangeInitiationFailure_protocolExtensions__item__id._const_tab_id = u'id'
     ___InformationExchangeInitiationFailure_protocolExtensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___InformationExchangeInitiationFailure_protocolExtensions__item__criticality._const_tab = ____InformationExchangeInitiationFailure_protocolExtensions__item__id_tab
+    ____InformationExchangeInitiationFailure_protocolExtensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____InformationExchangeInitiationFailure_protocolExtensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___InformationExchangeInitiationFailure_protocolExtensions__item__criticality._const_tab = ____InformationExchangeInitiationFailure_protocolExtensions__item__criticality_tab
     ___InformationExchangeInitiationFailure_protocolExtensions__item__criticality._const_tab_at = ('..', u'id')
     ___InformationExchangeInitiationFailure_protocolExtensions__item__criticality._const_tab_id = u'criticality'
     ___InformationExchangeInitiationFailure_protocolExtensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___InformationExchangeInitiationFailure_protocolExtensions__item__extensionValue._const_tab = ____InformationExchangeInitiationFailure_protocolExtensions__item__id_tab
+    ____InformationExchangeInitiationFailure_protocolExtensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____InformationExchangeInitiationFailure_protocolExtensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___InformationExchangeInitiationFailure_protocolExtensions__item__extensionValue._const_tab = ____InformationExchangeInitiationFailure_protocolExtensions__item__extensionValue_tab
     ___InformationExchangeInitiationFailure_protocolExtensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___InformationExchangeInitiationFailure_protocolExtensions__item__extensionValue._const_tab_id = u'Extension'
     __InformationExchangeInitiationFailure_protocolExtensions__item_._cont = ASN1Dict([
@@ -20859,11 +22131,15 @@ class PCAP_PDU_Contents:
     ___PositionInitiationFailure_protocolExtensions__item__id._const_tab_at = None
     ___PositionInitiationFailure_protocolExtensions__item__id._const_tab_id = u'id'
     ___PositionInitiationFailure_protocolExtensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___PositionInitiationFailure_protocolExtensions__item__criticality._const_tab = ____PositionInitiationFailure_protocolExtensions__item__id_tab
+    ____PositionInitiationFailure_protocolExtensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____PositionInitiationFailure_protocolExtensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___PositionInitiationFailure_protocolExtensions__item__criticality._const_tab = ____PositionInitiationFailure_protocolExtensions__item__criticality_tab
     ___PositionInitiationFailure_protocolExtensions__item__criticality._const_tab_at = ('..', u'id')
     ___PositionInitiationFailure_protocolExtensions__item__criticality._const_tab_id = u'criticality'
     ___PositionInitiationFailure_protocolExtensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___PositionInitiationFailure_protocolExtensions__item__extensionValue._const_tab = ____PositionInitiationFailure_protocolExtensions__item__id_tab
+    ____PositionInitiationFailure_protocolExtensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____PositionInitiationFailure_protocolExtensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___PositionInitiationFailure_protocolExtensions__item__extensionValue._const_tab = ____PositionInitiationFailure_protocolExtensions__item__extensionValue_tab
     ___PositionInitiationFailure_protocolExtensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___PositionInitiationFailure_protocolExtensions__item__extensionValue._const_tab_id = u'Extension'
     __PositionInitiationFailure_protocolExtensions__item_._cont = ASN1Dict([
@@ -21103,11 +22379,15 @@ class PCAP_PDU_Contents:
     ___PositionActivationFailure_protocolExtensions__item__id._const_tab_at = None
     ___PositionActivationFailure_protocolExtensions__item__id._const_tab_id = u'id'
     ___PositionActivationFailure_protocolExtensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___PositionActivationFailure_protocolExtensions__item__criticality._const_tab = ____PositionActivationFailure_protocolExtensions__item__id_tab
+    ____PositionActivationFailure_protocolExtensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____PositionActivationFailure_protocolExtensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___PositionActivationFailure_protocolExtensions__item__criticality._const_tab = ____PositionActivationFailure_protocolExtensions__item__criticality_tab
     ___PositionActivationFailure_protocolExtensions__item__criticality._const_tab_at = ('..', u'id')
     ___PositionActivationFailure_protocolExtensions__item__criticality._const_tab_id = u'criticality'
     ___PositionActivationFailure_protocolExtensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___PositionActivationFailure_protocolExtensions__item__extensionValue._const_tab = ____PositionActivationFailure_protocolExtensions__item__id_tab
+    ____PositionActivationFailure_protocolExtensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____PositionActivationFailure_protocolExtensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___PositionActivationFailure_protocolExtensions__item__extensionValue._const_tab = ____PositionActivationFailure_protocolExtensions__item__extensionValue_tab
     ___PositionActivationFailure_protocolExtensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___PositionActivationFailure_protocolExtensions__item__extensionValue._const_tab_id = u'Extension'
     __PositionActivationFailure_protocolExtensions__item_._cont = ASN1Dict([
@@ -21171,11 +22451,15 @@ class PCAP_PDU_Contents:
     ___InformationReport_protocolExtensions__item__id._const_tab_at = None
     ___InformationReport_protocolExtensions__item__id._const_tab_id = u'id'
     ___InformationReport_protocolExtensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___InformationReport_protocolExtensions__item__criticality._const_tab = ____InformationReport_protocolExtensions__item__id_tab
+    ____InformationReport_protocolExtensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____InformationReport_protocolExtensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___InformationReport_protocolExtensions__item__criticality._const_tab = ____InformationReport_protocolExtensions__item__criticality_tab
     ___InformationReport_protocolExtensions__item__criticality._const_tab_at = ('..', u'id')
     ___InformationReport_protocolExtensions__item__criticality._const_tab_id = u'criticality'
     ___InformationReport_protocolExtensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___InformationReport_protocolExtensions__item__extensionValue._const_tab = ____InformationReport_protocolExtensions__item__id_tab
+    ____InformationReport_protocolExtensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____InformationReport_protocolExtensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___InformationReport_protocolExtensions__item__extensionValue._const_tab = ____InformationReport_protocolExtensions__item__extensionValue_tab
     ___InformationReport_protocolExtensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___InformationReport_protocolExtensions__item__extensionValue._const_tab_id = u'Extension'
     __InformationReport_protocolExtensions__item_._cont = ASN1Dict([
@@ -21222,11 +22506,15 @@ class PCAP_PDU_Contents:
     ___RefPosition_InfEx_Rprt_iE_Extensions__item__id._const_tab_at = None
     ___RefPosition_InfEx_Rprt_iE_Extensions__item__id._const_tab_id = u'id'
     ___RefPosition_InfEx_Rprt_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___RefPosition_InfEx_Rprt_iE_Extensions__item__criticality._const_tab = ____RefPosition_InfEx_Rprt_iE_Extensions__item__id_tab
+    ____RefPosition_InfEx_Rprt_iE_Extensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____RefPosition_InfEx_Rprt_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___RefPosition_InfEx_Rprt_iE_Extensions__item__criticality._const_tab = ____RefPosition_InfEx_Rprt_iE_Extensions__item__criticality_tab
     ___RefPosition_InfEx_Rprt_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
     ___RefPosition_InfEx_Rprt_iE_Extensions__item__criticality._const_tab_id = u'criticality'
     ___RefPosition_InfEx_Rprt_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___RefPosition_InfEx_Rprt_iE_Extensions__item__extensionValue._const_tab = ____RefPosition_InfEx_Rprt_iE_Extensions__item__id_tab
+    ____RefPosition_InfEx_Rprt_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____RefPosition_InfEx_Rprt_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___RefPosition_InfEx_Rprt_iE_Extensions__item__extensionValue._const_tab = ____RefPosition_InfEx_Rprt_iE_Extensions__item__extensionValue_tab
     ___RefPosition_InfEx_Rprt_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___RefPosition_InfEx_Rprt_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __RefPosition_InfEx_Rprt_iE_Extensions__item_._cont = ASN1Dict([
@@ -21283,11 +22571,15 @@ class PCAP_PDU_Contents:
     ___InformationExchangeTerminationRequest_protocolExtensions__item__id._const_tab_at = None
     ___InformationExchangeTerminationRequest_protocolExtensions__item__id._const_tab_id = u'id'
     ___InformationExchangeTerminationRequest_protocolExtensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___InformationExchangeTerminationRequest_protocolExtensions__item__criticality._const_tab = ____InformationExchangeTerminationRequest_protocolExtensions__item__id_tab
+    ____InformationExchangeTerminationRequest_protocolExtensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____InformationExchangeTerminationRequest_protocolExtensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___InformationExchangeTerminationRequest_protocolExtensions__item__criticality._const_tab = ____InformationExchangeTerminationRequest_protocolExtensions__item__criticality_tab
     ___InformationExchangeTerminationRequest_protocolExtensions__item__criticality._const_tab_at = ('..', u'id')
     ___InformationExchangeTerminationRequest_protocolExtensions__item__criticality._const_tab_id = u'criticality'
     ___InformationExchangeTerminationRequest_protocolExtensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___InformationExchangeTerminationRequest_protocolExtensions__item__extensionValue._const_tab = ____InformationExchangeTerminationRequest_protocolExtensions__item__id_tab
+    ____InformationExchangeTerminationRequest_protocolExtensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____InformationExchangeTerminationRequest_protocolExtensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___InformationExchangeTerminationRequest_protocolExtensions__item__extensionValue._const_tab = ____InformationExchangeTerminationRequest_protocolExtensions__item__extensionValue_tab
     ___InformationExchangeTerminationRequest_protocolExtensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___InformationExchangeTerminationRequest_protocolExtensions__item__extensionValue._const_tab_id = u'Extension'
     __InformationExchangeTerminationRequest_protocolExtensions__item_._cont = ASN1Dict([
@@ -21350,11 +22642,15 @@ class PCAP_PDU_Contents:
     ___InformationExchangeFailureIndication_protocolExtensions__item__id._const_tab_at = None
     ___InformationExchangeFailureIndication_protocolExtensions__item__id._const_tab_id = u'id'
     ___InformationExchangeFailureIndication_protocolExtensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___InformationExchangeFailureIndication_protocolExtensions__item__criticality._const_tab = ____InformationExchangeFailureIndication_protocolExtensions__item__id_tab
+    ____InformationExchangeFailureIndication_protocolExtensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____InformationExchangeFailureIndication_protocolExtensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___InformationExchangeFailureIndication_protocolExtensions__item__criticality._const_tab = ____InformationExchangeFailureIndication_protocolExtensions__item__criticality_tab
     ___InformationExchangeFailureIndication_protocolExtensions__item__criticality._const_tab_at = ('..', u'id')
     ___InformationExchangeFailureIndication_protocolExtensions__item__criticality._const_tab_id = u'criticality'
     ___InformationExchangeFailureIndication_protocolExtensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___InformationExchangeFailureIndication_protocolExtensions__item__extensionValue._const_tab = ____InformationExchangeFailureIndication_protocolExtensions__item__id_tab
+    ____InformationExchangeFailureIndication_protocolExtensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____InformationExchangeFailureIndication_protocolExtensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___InformationExchangeFailureIndication_protocolExtensions__item__extensionValue._const_tab = ____InformationExchangeFailureIndication_protocolExtensions__item__extensionValue_tab
     ___InformationExchangeFailureIndication_protocolExtensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___InformationExchangeFailureIndication_protocolExtensions__item__extensionValue._const_tab_id = u'Extension'
     __InformationExchangeFailureIndication_protocolExtensions__item_._cont = ASN1Dict([
@@ -21418,11 +22714,15 @@ class PCAP_PDU_Contents:
     ___ErrorIndication_protocolExtensions__item__id._const_tab_at = None
     ___ErrorIndication_protocolExtensions__item__id._const_tab_id = u'id'
     ___ErrorIndication_protocolExtensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___ErrorIndication_protocolExtensions__item__criticality._const_tab = ____ErrorIndication_protocolExtensions__item__id_tab
+    ____ErrorIndication_protocolExtensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____ErrorIndication_protocolExtensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___ErrorIndication_protocolExtensions__item__criticality._const_tab = ____ErrorIndication_protocolExtensions__item__criticality_tab
     ___ErrorIndication_protocolExtensions__item__criticality._const_tab_at = ('..', u'id')
     ___ErrorIndication_protocolExtensions__item__criticality._const_tab_id = u'criticality'
     ___ErrorIndication_protocolExtensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___ErrorIndication_protocolExtensions__item__extensionValue._const_tab = ____ErrorIndication_protocolExtensions__item__id_tab
+    ____ErrorIndication_protocolExtensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____ErrorIndication_protocolExtensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___ErrorIndication_protocolExtensions__item__extensionValue._const_tab = ____ErrorIndication_protocolExtensions__item__extensionValue_tab
     ___ErrorIndication_protocolExtensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___ErrorIndication_protocolExtensions__item__extensionValue._const_tab_id = u'Extension'
     __ErrorIndication_protocolExtensions__item_._cont = ASN1Dict([
@@ -21530,11 +22830,15 @@ class PCAP_PDU_Contents:
     ___PrivateMessage_privateIEs__item__id._const_tab_at = None
     ___PrivateMessage_privateIEs__item__id._const_tab_id = u'id'
     ___PrivateMessage_privateIEs__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PRIVATE-IES'), [u'criticality']))
-    ___PrivateMessage_privateIEs__item__criticality._const_tab = ____PrivateMessage_privateIEs__item__id_tab
+    ____PrivateMessage_privateIEs__item__criticality_tab = CLASS(name='_tab_PCAP-PRIVATE-IES', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PRIVATE-IES')))
+    ____PrivateMessage_privateIEs__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___PrivateMessage_privateIEs__item__criticality._const_tab = ____PrivateMessage_privateIEs__item__criticality_tab
     ___PrivateMessage_privateIEs__item__criticality._const_tab_at = ('..', u'id')
     ___PrivateMessage_privateIEs__item__criticality._const_tab_id = u'criticality'
     ___PrivateMessage_privateIEs__item__value = OPEN(name=u'value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PRIVATE-IES'), [u'Value']))
-    ___PrivateMessage_privateIEs__item__value._const_tab = ____PrivateMessage_privateIEs__item__id_tab
+    ____PrivateMessage_privateIEs__item__value_tab = CLASS(name='_tab_PCAP-PRIVATE-IES', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PRIVATE-IES')))
+    ____PrivateMessage_privateIEs__item__value_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___PrivateMessage_privateIEs__item__value._const_tab = ____PrivateMessage_privateIEs__item__value_tab
     ___PrivateMessage_privateIEs__item__value._const_tab_at = ('..', u'id')
     ___PrivateMessage_privateIEs__item__value._const_tab_id = u'Value'
     __PrivateMessage_privateIEs__item_._cont = ASN1Dict([
@@ -21590,11 +22894,15 @@ class PCAP_PDU_Contents:
     ___Abort_protocolExtensions__item__id._const_tab_at = None
     ___Abort_protocolExtensions__item__id._const_tab_id = u'id'
     ___Abort_protocolExtensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___Abort_protocolExtensions__item__criticality._const_tab = ____Abort_protocolExtensions__item__id_tab
+    ____Abort_protocolExtensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____Abort_protocolExtensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___Abort_protocolExtensions__item__criticality._const_tab = ____Abort_protocolExtensions__item__criticality_tab
     ___Abort_protocolExtensions__item__criticality._const_tab_at = ('..', u'id')
     ___Abort_protocolExtensions__item__criticality._const_tab_id = u'criticality'
     ___Abort_protocolExtensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___Abort_protocolExtensions__item__extensionValue._const_tab = ____Abort_protocolExtensions__item__id_tab
+    ____Abort_protocolExtensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____Abort_protocolExtensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___Abort_protocolExtensions__item__extensionValue._const_tab = ____Abort_protocolExtensions__item__extensionValue_tab
     ___Abort_protocolExtensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___Abort_protocolExtensions__item__extensionValue._const_tab_id = u'Extension'
     __Abort_protocolExtensions__item_._cont = ASN1Dict([
@@ -21748,11 +23056,15 @@ class PCAP_PDU_Contents:
     ___PositionPeriodicResult_protocolExtensions__item__id._const_tab_at = None
     ___PositionPeriodicResult_protocolExtensions__item__id._const_tab_id = u'id'
     ___PositionPeriodicResult_protocolExtensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___PositionPeriodicResult_protocolExtensions__item__criticality._const_tab = ____PositionPeriodicResult_protocolExtensions__item__id_tab
+    ____PositionPeriodicResult_protocolExtensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____PositionPeriodicResult_protocolExtensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___PositionPeriodicResult_protocolExtensions__item__criticality._const_tab = ____PositionPeriodicResult_protocolExtensions__item__criticality_tab
     ___PositionPeriodicResult_protocolExtensions__item__criticality._const_tab_at = ('..', u'id')
     ___PositionPeriodicResult_protocolExtensions__item__criticality._const_tab_id = u'criticality'
     ___PositionPeriodicResult_protocolExtensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___PositionPeriodicResult_protocolExtensions__item__extensionValue._const_tab = ____PositionPeriodicResult_protocolExtensions__item__id_tab
+    ____PositionPeriodicResult_protocolExtensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____PositionPeriodicResult_protocolExtensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___PositionPeriodicResult_protocolExtensions__item__extensionValue._const_tab = ____PositionPeriodicResult_protocolExtensions__item__extensionValue_tab
     ___PositionPeriodicResult_protocolExtensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___PositionPeriodicResult_protocolExtensions__item__extensionValue._const_tab_id = u'Extension'
     __PositionPeriodicResult_protocolExtensions__item_._cont = ASN1Dict([
@@ -21818,11 +23130,15 @@ class PCAP_PDU_Contents:
     ___PositionPeriodicTermination_protocolExtensions__item__id._const_tab_at = None
     ___PositionPeriodicTermination_protocolExtensions__item__id._const_tab_id = u'id'
     ___PositionPeriodicTermination_protocolExtensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'criticality']))
-    ___PositionPeriodicTermination_protocolExtensions__item__criticality._const_tab = ____PositionPeriodicTermination_protocolExtensions__item__id_tab
+    ____PositionPeriodicTermination_protocolExtensions__item__criticality_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____PositionPeriodicTermination_protocolExtensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___PositionPeriodicTermination_protocolExtensions__item__criticality._const_tab = ____PositionPeriodicTermination_protocolExtensions__item__criticality_tab
     ___PositionPeriodicTermination_protocolExtensions__item__criticality._const_tab_at = ('..', u'id')
     ___PositionPeriodicTermination_protocolExtensions__item__criticality._const_tab_id = u'criticality'
     ___PositionPeriodicTermination_protocolExtensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION'), [u'Extension']))
-    ___PositionPeriodicTermination_protocolExtensions__item__extensionValue._const_tab = ____PositionPeriodicTermination_protocolExtensions__item__id_tab
+    ____PositionPeriodicTermination_protocolExtensions__item__extensionValue_tab = CLASS(name='_tab_PCAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('PCAP-Containers', 'PCAP-PROTOCOL-EXTENSION')))
+    ____PositionPeriodicTermination_protocolExtensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
+    ___PositionPeriodicTermination_protocolExtensions__item__extensionValue._const_tab = ____PositionPeriodicTermination_protocolExtensions__item__extensionValue_tab
     ___PositionPeriodicTermination_protocolExtensions__item__extensionValue._const_tab_at = ('..', u'id')
     ___PositionPeriodicTermination_protocolExtensions__item__extensionValue._const_tab_id = u'Extension'
     __PositionPeriodicTermination_protocolExtensions__item_._cont = ASN1Dict([
@@ -21925,7 +23241,9 @@ class PCAP_PDU_Contents:
         _PositionCalculationFailure_protocolIEs,
         ____PositionCalculationFailure_protocolExtensions__item__id_tab,
         ___PositionCalculationFailure_protocolExtensions__item__id,
+        ____PositionCalculationFailure_protocolExtensions__item__criticality_tab,
         ___PositionCalculationFailure_protocolExtensions__item__criticality,
+        ____PositionCalculationFailure_protocolExtensions__item__extensionValue_tab,
         ___PositionCalculationFailure_protocolExtensions__item__extensionValue,
         __PositionCalculationFailure_protocolExtensions__item_,
         _PositionCalculationFailure_protocolExtensions,
@@ -21971,7 +23289,9 @@ class PCAP_PDU_Contents:
         _RefPosition_InfEx_Rqst_referencePositionEstimate,
         ____RefPosition_InfEx_Rqst_iE_Extensions__item__id_tab,
         ___RefPosition_InfEx_Rqst_iE_Extensions__item__id,
+        ____RefPosition_InfEx_Rqst_iE_Extensions__item__criticality_tab,
         ___RefPosition_InfEx_Rqst_iE_Extensions__item__criticality,
+        ____RefPosition_InfEx_Rqst_iE_Extensions__item__extensionValue_tab,
         ___RefPosition_InfEx_Rqst_iE_Extensions__item__extensionValue,
         __RefPosition_InfEx_Rqst_iE_Extensions__item_,
         _RefPosition_InfEx_Rqst_iE_Extensions,
@@ -21990,7 +23310,9 @@ class PCAP_PDU_Contents:
         _UC_ID_InfEx_Rqst_referenceUC_ID,
         ____UC_ID_InfEx_Rqst_iE_Extensions__item__id_tab,
         ___UC_ID_InfEx_Rqst_iE_Extensions__item__id,
+        ____UC_ID_InfEx_Rqst_iE_Extensions__item__criticality_tab,
         ___UC_ID_InfEx_Rqst_iE_Extensions__item__criticality,
+        ____UC_ID_InfEx_Rqst_iE_Extensions__item__extensionValue_tab,
         ___UC_ID_InfEx_Rqst_iE_Extensions__item__extensionValue,
         __UC_ID_InfEx_Rqst_iE_Extensions__item_,
         _UC_ID_InfEx_Rqst_iE_Extensions,
@@ -22007,7 +23329,9 @@ class PCAP_PDU_Contents:
         _InformationExchangeInitiationResponse_protocolIEs,
         ____InformationExchangeInitiationResponse_protocolExtensions__item__id_tab,
         ___InformationExchangeInitiationResponse_protocolExtensions__item__id,
+        ____InformationExchangeInitiationResponse_protocolExtensions__item__criticality_tab,
         ___InformationExchangeInitiationResponse_protocolExtensions__item__criticality,
+        ____InformationExchangeInitiationResponse_protocolExtensions__item__extensionValue_tab,
         ___InformationExchangeInitiationResponse_protocolExtensions__item__extensionValue,
         __InformationExchangeInitiationResponse_protocolExtensions__item_,
         _InformationExchangeInitiationResponse_protocolExtensions,
@@ -22022,7 +23346,9 @@ class PCAP_PDU_Contents:
         _RefPosition_InfEx_Rsp_requestedDataValue,
         ____RefPosition_InfEx_Rsp_iE_Extensions__item__id_tab,
         ___RefPosition_InfEx_Rsp_iE_Extensions__item__id,
+        ____RefPosition_InfEx_Rsp_iE_Extensions__item__criticality_tab,
         ___RefPosition_InfEx_Rsp_iE_Extensions__item__criticality,
+        ____RefPosition_InfEx_Rsp_iE_Extensions__item__extensionValue_tab,
         ___RefPosition_InfEx_Rsp_iE_Extensions__item__extensionValue,
         __RefPosition_InfEx_Rsp_iE_Extensions__item_,
         _RefPosition_InfEx_Rsp_iE_Extensions,
@@ -22039,7 +23365,9 @@ class PCAP_PDU_Contents:
         _InformationExchangeInitiationFailure_protocolIEs,
         ____InformationExchangeInitiationFailure_protocolExtensions__item__id_tab,
         ___InformationExchangeInitiationFailure_protocolExtensions__item__id,
+        ____InformationExchangeInitiationFailure_protocolExtensions__item__criticality_tab,
         ___InformationExchangeInitiationFailure_protocolExtensions__item__criticality,
+        ____InformationExchangeInitiationFailure_protocolExtensions__item__extensionValue_tab,
         ___InformationExchangeInitiationFailure_protocolExtensions__item__extensionValue,
         __InformationExchangeInitiationFailure_protocolExtensions__item_,
         _InformationExchangeInitiationFailure_protocolExtensions,
@@ -22119,7 +23447,9 @@ class PCAP_PDU_Contents:
         _PositionInitiationFailure_protocolIEs,
         ____PositionInitiationFailure_protocolExtensions__item__id_tab,
         ___PositionInitiationFailure_protocolExtensions__item__id,
+        ____PositionInitiationFailure_protocolExtensions__item__criticality_tab,
         ___PositionInitiationFailure_protocolExtensions__item__criticality,
+        ____PositionInitiationFailure_protocolExtensions__item__extensionValue_tab,
         ___PositionInitiationFailure_protocolExtensions__item__extensionValue,
         __PositionInitiationFailure_protocolExtensions__item_,
         _PositionInitiationFailure_protocolExtensions,
@@ -22216,7 +23546,9 @@ class PCAP_PDU_Contents:
         _PositionActivationFailure_protocolIEs,
         ____PositionActivationFailure_protocolExtensions__item__id_tab,
         ___PositionActivationFailure_protocolExtensions__item__id,
+        ____PositionActivationFailure_protocolExtensions__item__criticality_tab,
         ___PositionActivationFailure_protocolExtensions__item__criticality,
+        ____PositionActivationFailure_protocolExtensions__item__extensionValue_tab,
         ___PositionActivationFailure_protocolExtensions__item__extensionValue,
         __PositionActivationFailure_protocolExtensions__item_,
         _PositionActivationFailure_protocolExtensions,
@@ -22235,7 +23567,9 @@ class PCAP_PDU_Contents:
         _InformationReport_protocolIEs,
         ____InformationReport_protocolExtensions__item__id_tab,
         ___InformationReport_protocolExtensions__item__id,
+        ____InformationReport_protocolExtensions__item__criticality_tab,
         ___InformationReport_protocolExtensions__item__criticality,
+        ____InformationReport_protocolExtensions__item__extensionValue_tab,
         ___InformationReport_protocolExtensions__item__extensionValue,
         __InformationReport_protocolExtensions__item_,
         _InformationReport_protocolExtensions,
@@ -22249,7 +23583,9 @@ class PCAP_PDU_Contents:
         _RefPosition_InfEx_Rprt_requestedDataValueInformation,
         ____RefPosition_InfEx_Rprt_iE_Extensions__item__id_tab,
         ___RefPosition_InfEx_Rprt_iE_Extensions__item__id,
+        ____RefPosition_InfEx_Rprt_iE_Extensions__item__criticality_tab,
         ___RefPosition_InfEx_Rprt_iE_Extensions__item__criticality,
+        ____RefPosition_InfEx_Rprt_iE_Extensions__item__extensionValue_tab,
         ___RefPosition_InfEx_Rprt_iE_Extensions__item__extensionValue,
         __RefPosition_InfEx_Rprt_iE_Extensions__item_,
         _RefPosition_InfEx_Rprt_iE_Extensions,
@@ -22264,7 +23600,9 @@ class PCAP_PDU_Contents:
         _InformationExchangeTerminationRequest_protocolIEs,
         ____InformationExchangeTerminationRequest_protocolExtensions__item__id_tab,
         ___InformationExchangeTerminationRequest_protocolExtensions__item__id,
+        ____InformationExchangeTerminationRequest_protocolExtensions__item__criticality_tab,
         ___InformationExchangeTerminationRequest_protocolExtensions__item__criticality,
+        ____InformationExchangeTerminationRequest_protocolExtensions__item__extensionValue_tab,
         ___InformationExchangeTerminationRequest_protocolExtensions__item__extensionValue,
         __InformationExchangeTerminationRequest_protocolExtensions__item_,
         _InformationExchangeTerminationRequest_protocolExtensions,
@@ -22282,7 +23620,9 @@ class PCAP_PDU_Contents:
         _InformationExchangeFailureIndication_protocolIEs,
         ____InformationExchangeFailureIndication_protocolExtensions__item__id_tab,
         ___InformationExchangeFailureIndication_protocolExtensions__item__id,
+        ____InformationExchangeFailureIndication_protocolExtensions__item__criticality_tab,
         ___InformationExchangeFailureIndication_protocolExtensions__item__criticality,
+        ____InformationExchangeFailureIndication_protocolExtensions__item__extensionValue_tab,
         ___InformationExchangeFailureIndication_protocolExtensions__item__extensionValue,
         __InformationExchangeFailureIndication_protocolExtensions__item_,
         _InformationExchangeFailureIndication_protocolExtensions,
@@ -22301,7 +23641,9 @@ class PCAP_PDU_Contents:
         _ErrorIndication_protocolIEs,
         ____ErrorIndication_protocolExtensions__item__id_tab,
         ___ErrorIndication_protocolExtensions__item__id,
+        ____ErrorIndication_protocolExtensions__item__criticality_tab,
         ___ErrorIndication_protocolExtensions__item__criticality,
+        ____ErrorIndication_protocolExtensions__item__extensionValue_tab,
         ___ErrorIndication_protocolExtensions__item__extensionValue,
         __ErrorIndication_protocolExtensions__item_,
         _ErrorIndication_protocolExtensions,
@@ -22333,7 +23675,9 @@ class PCAP_PDU_Contents:
         _PositionParameterModificationExtensions_val_Extension_0,
         ____PrivateMessage_privateIEs__item__id_tab,
         ___PrivateMessage_privateIEs__item__id,
+        ____PrivateMessage_privateIEs__item__criticality_tab,
         ___PrivateMessage_privateIEs__item__criticality,
+        ____PrivateMessage_privateIEs__item__value_tab,
         ___PrivateMessage_privateIEs__item__value,
         __PrivateMessage_privateIEs__item_,
         _PrivateMessage_privateIEs,
@@ -22348,7 +23692,9 @@ class PCAP_PDU_Contents:
         _Abort_protocolIEs,
         ____Abort_protocolExtensions__item__id_tab,
         ___Abort_protocolExtensions__item__id,
+        ____Abort_protocolExtensions__item__criticality_tab,
         ___Abort_protocolExtensions__item__criticality,
+        ____Abort_protocolExtensions__item__extensionValue_tab,
         ___Abort_protocolExtensions__item__extensionValue,
         __Abort_protocolExtensions__item_,
         _Abort_protocolExtensions,
@@ -22408,7 +23754,9 @@ class PCAP_PDU_Contents:
         _PositionPeriodicResult_protocolIEs,
         ____PositionPeriodicResult_protocolExtensions__item__id_tab,
         ___PositionPeriodicResult_protocolExtensions__item__id,
+        ____PositionPeriodicResult_protocolExtensions__item__criticality_tab,
         ___PositionPeriodicResult_protocolExtensions__item__criticality,
+        ____PositionPeriodicResult_protocolExtensions__item__extensionValue_tab,
         ___PositionPeriodicResult_protocolExtensions__item__extensionValue,
         __PositionPeriodicResult_protocolExtensions__item_,
         _PositionPeriodicResult_protocolExtensions,
@@ -22429,7 +23777,9 @@ class PCAP_PDU_Contents:
         _PositionPeriodicTermination_protocolIEs,
         ____PositionPeriodicTermination_protocolExtensions__item__id_tab,
         ___PositionPeriodicTermination_protocolExtensions__item__id,
+        ____PositionPeriodicTermination_protocolExtensions__item__criticality_tab,
         ___PositionPeriodicTermination_protocolExtensions__item__criticality,
+        ____PositionPeriodicTermination_protocolExtensions__item__extensionValue_tab,
         ___PositionPeriodicTermination_protocolExtensions__item__extensionValue,
         __PositionPeriodicTermination_protocolExtensions__item_,
         _PositionPeriodicTermination_protocolExtensions,
