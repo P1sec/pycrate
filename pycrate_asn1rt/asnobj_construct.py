@@ -2521,27 +2521,28 @@ Specific attributes:
                         lval += comp_tlv.get_bl() >> 3
                 val_ids.remove(ident)
         # encode extended component 1 by 1 in their definition order
-        for ident in self._ext:
-            if ident in self._val:
-                if ASN1CodecBER.ENC_DEF_CANON and self._val[ident] == self._cont[ident]._def:
-                    # the value provided equals the default one
-                    # hence will not be encoded
-                    if not self._SILENT:
-                        asnlog('SET._encode_ber_cont_ws: %s.%s, removing value equal '\
-                               'to the default one' % (self.fullname(), ident))
-                    del self._val[ident]
-                else:
-                    # component to be encoded
-                    Comp = self._cont[ident]
-                    _par = Comp._parent
-                    Comp._parent = self
-                    Comp._val = self._val[ident]
-                    comp_tlv = Comp._to_ber_ws()
-                    TLV.append( comp_tlv )
-                    Comp._parent = _par
-                    if lval >= 0:
-                        lval += comp_tlv.get_bl() >> 3
-                val_ids.remove(ident)
+        if self._ext:
+            for ident in self._ext:
+                if ident in self._val:
+                    if ASN1CodecBER.ENC_DEF_CANON and self._val[ident] == self._cont[ident]._def:
+                        # the value provided equals the default one
+                        # hence will not be encoded
+                        if not self._SILENT:
+                            asnlog('SET._encode_ber_cont_ws: %s.%s, removing value equal '\
+                                   'to the default one' % (self.fullname(), ident))
+                        del self._val[ident]
+                    else:
+                        # component to be encoded
+                        Comp = self._cont[ident]
+                        _par = Comp._parent
+                        Comp._parent = self
+                        Comp._val = self._val[ident]
+                        comp_tlv = Comp._to_ber_ws()
+                        TLV.append( comp_tlv )
+                        Comp._parent = _par
+                        if lval >= 0:
+                            lval += comp_tlv.get_bl() >> 3
+                    val_ids.remove(ident)
         #
         if val_ids:
             # encode unknown extended components
@@ -2584,27 +2585,28 @@ Specific attributes:
                         lval += sum([f[2] for f in comp_tlv]) >> 3
                 val_ids.remove(ident)
         # encode extended component 1 by 1 in their definition order
-        for ident in self._ext:
-            if ident in self._val:
-                if ASN1CodecBER.ENC_DEF_CANON and self._val[ident] == self._cont[ident]._def:
-                    # the value provided equals the default one
-                    # hence will not be encoded
-                    if not self._SILENT:
-                        asnlog('SET._encode_ber_cont: %s.%s, removing value equal '\
-                               'to the default one' % (self.fullname(), ident))
-                    del self._val[ident]
-                else:
-                    # component to be encoded
-                    Comp = self._cont[ident]
-                    _par = Comp._parent
-                    Comp._parent = self
-                    Comp._val = self._val[ident]
-                    comp_tlv = Comp._to_ber()
-                    TLV.extend( comp_tlv )
-                    Comp._parent = _par
-                    if lval >= 0:
-                        lval += sum([f[2] for f in comp_tlv]) >> 3
-                val_ids.remove(ident)
+        if self._ext:
+            for ident in self._ext:
+                if ident in self._val:
+                    if ASN1CodecBER.ENC_DEF_CANON and self._val[ident] == self._cont[ident]._def:
+                        # the value provided equals the default one
+                        # hence will not be encoded
+                        if not self._SILENT:
+                            asnlog('SET._encode_ber_cont: %s.%s, removing value equal '\
+                                   'to the default one' % (self.fullname(), ident))
+                        del self._val[ident]
+                    else:
+                        # component to be encoded
+                        Comp = self._cont[ident]
+                        _par = Comp._parent
+                        Comp._parent = self
+                        Comp._val = self._val[ident]
+                        comp_tlv = Comp._to_ber()
+                        TLV.extend( comp_tlv )
+                        Comp._parent = _par
+                        if lval >= 0:
+                            lval += sum([f[2] for f in comp_tlv]) >> 3
+                    val_ids.remove(ident)
         #
         if val_ids:
             # encode unknown extended components
