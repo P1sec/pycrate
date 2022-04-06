@@ -807,8 +807,8 @@ class IKEv2Pay(Envelope):
     def set_val(self, val):
         if isinstance(val, dict) and 'Type' in val and val['Type'] in self.LUTPay:
             self.Type = val['Type']
-            del val['Type']
             pay = self.LUTPay[val['Type']].clone()
+            del val['Type']
             pay.set_blauto(lambda: (self[3].get_val() - 4)<<3)
             self.replace(self[4], pay)
         Envelope.set_val(self, val)
