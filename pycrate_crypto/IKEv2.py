@@ -241,7 +241,7 @@ class Proposal(Envelope):
         Envelope.__init__(self, *args, **kwargs)
         self['Last'].set_valauto(lambda: 0 if self.get_next() is None else 2)
         self['Len'].set_valauto(lambda: 8 + self['SPI'].get_len() + self['Transforms'].get_len())
-        self['Num'].set_valauto(lambda: self.get_env().index(self))
+        self['Num'].set_valauto(lambda: 1 + self.get_env().index(self))
         self['SPISize'].set_valauto(lambda: self['SPI'].get_len())
         self['NumTrans'].set_valauto(lambda: self['Transforms'].get_num())
         self['SPI'].set_blauto(lambda: self['SPISize'].get_val()<<3)
