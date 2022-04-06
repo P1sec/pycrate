@@ -873,7 +873,7 @@ class IKEv2Hdr(Envelope):
         Uint8('ExchType', val=IKEv2ExchType.IKE_SA_INIT.value, dic=IKEv2ExchType_dict),
         IKEv2HdrFlags('Flags'),
         Uint32('MID', rep=REPR_HEX),
-        Uint32('Len', val=28)
+        Uint32('Len')
         )
 
 
