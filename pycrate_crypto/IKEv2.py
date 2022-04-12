@@ -492,6 +492,7 @@ class PayDelete(Envelope):
     def __init__(self, *args, **kwargs):
         Envelope.__init__(self, *args, **kwargs)
         self['SPISize'].set_valauto(lambda: self['SPIs'][0].get_len() if self['SPIs'].get_num() else 0)
+        self['SPIs']._tmpl.set_blauto(lambda: self['SPISize'].get_val()<<3)
         self['NumSPIs'].set_valauto(lambda: self['SPIs'].get_num())
         self['SPIs'].set_numauto(lambda: self['NumSPIs'].get_val())
     
@@ -564,8 +565,45 @@ class PayTS(Envelope):
 #------------------------------------------------------------------------------#
 
 # length of IV
-# Warning: some of those values are not confirmed / tested / verified
+# Warning: some of those values (incl. for CCM and GCM) are not confirmed / tested / verified
 IKEv2EncrIVLen_dict = {
+    IKEv2TransENCR.ENCR_DES_IV64 : 8,
+    IKEv2TransENCR.ENCR_DES : 8,
+    IKEv2TransENCR.ENCR_3DES : 8,
+    IKEv2TransENCR.ENCR_RC5 : 8,
+    IKEv2TransENCR.ENCR_IDEA : 8,
+    IKEv2TransENCR.ENCR_CAST : 8,
+    IKEv2TransENCR.ENCR_BLOWFISH : 8,
+    IKEv2TransENCR.ENCR_3IDEA : 8,
+    IKEv2TransENCR.ENCR_DES_IV32 : 4,
+    IKEv2TransENCR.ENCR_NULL : 0,
+    IKEv2TransENCR.ENCR_AES_CBC : 16,
+    IKEv2TransENCR.ENCR_AES_CTR : 16,
+    IKEv2TransENCR.ENCR_AES_CCM_8 : 8,
+    IKEv2TransENCR.ENCR_AES_CCM_12 : 12,
+    IKEv2TransENCR.ENCR_AES_CCM_16 : 16,
+    IKEv2TransENCR.ENCR_AES_GCM_8 : 8,
+    IKEv2TransENCR.ENCR_AES_GCM_12 : 12,
+    IKEv2TransENCR.ENCR_AES_GCM_16 : 16,
+    IKEv2TransENCR.ENCR_NULL_AUTH_AES_GMAC : 16,
+    IKEv2TransENCR.ENCR_IEEE_P1619_XT_AES : 16,
+    IKEv2TransENCR.ENCR_CAMELLIA_CBC : 16,
+    IKEv2TransENCR.ENCR_CAMELLIA_CTR : 16,
+    IKEv2TransENCR.ENCR_CAMELLIA_CCM_8 : 8,
+    IKEv2TransENCR.ENCR_CAMELLIA_CCM_12 : 12,
+    IKEv2TransENCR.ENCR_CAMELLIA_CCM_16 : 16,
+    IKEv2TransENCR.ENCR_CHACHA20_POLY1305 : 16,
+    IKEv2TransENCR.ENCR_AES_CCM_8_IIV : 8,
+    IKEv2TransENCR.ENCR_AES_GCM_16_IIV : 16,
+    IKEv2TransENCR.ENCR_CHACHA20_POLY1305_IIV : 16,
+    IKEv2TransENCR.ENCR_KUZNYECHIK_MGM_KTREE : 16,
+    IKEv2TransENCR.ENCR_MAGMA_MGM_KTREE : 8,
+    IKEv2TransENCR.ENCR_KUZNYECHIK_MGM_MAC_KTREE : 16,
+    IKEv2TransENCR.ENCR_MAGMA_MGM_MAC_KTREE : 8,
+    }
+
+
+IKEv2EncrBlockLen_dict = {
     IKEv2TransENCR.ENCR_DES_IV64 : 8,
     IKEv2TransENCR.ENCR_DES : 8,
     IKEv2TransENCR.ENCR_3DES : 8,
@@ -595,12 +633,11 @@ IKEv2EncrIVLen_dict = {
     IKEv2TransENCR.ENCR_AES_CCM_8_IIV : 16,
     IKEv2TransENCR.ENCR_AES_GCM_16_IIV : 16,
     IKEv2TransENCR.ENCR_CHACHA20_POLY1305_IIV : 16,
-    IKEv2TransENCR.ENCR_KUZNYECHIK_MGM_KTREE : 8,
+    IKEv2TransENCR.ENCR_KUZNYECHIK_MGM_KTREE : 16,
     IKEv2TransENCR.ENCR_MAGMA_MGM_KTREE : 8,
-    IKEv2TransENCR.ENCR_KUZNYECHIK_MGM_MAC_KTREE : 8,
+    IKEv2TransENCR.ENCR_KUZNYECHIK_MGM_MAC_KTREE : 16,
     IKEv2TransENCR.ENCR_MAGMA_MGM_MAC_KTREE : 8,
     }
-
 
 
 # length of ICS
@@ -640,9 +677,52 @@ class PayEncr(Envelope):
     
     def __init__(self, *args, **kwargs):
         Envelope.__init__(self, *args, **kwargs)
-        self['IV'].set_blauto(lambda: IKEv2EncrIVLen_dict.get(self.ALG_ENCR, 0))
-        self['PadLen'].set_valauto(lambda: self['Pad'].get_len())
-        self['ICS'].set_blauto(lambda: IKEv2AuthICSLen_dict.get(self.ALG_AUTH, 0))
+        # We only manage automation at encoding here, as decoding requires processing the buffer backward
+        # ... crappy IETF
+        #self['IV'].set_blauto(lambda: <<3)
+        #self['Pad'].set_blauto(lambda: self._pad_get_bl())
+        #self['ICS'].set_blauto(l
+        self['Pad'].set_valauto(lambda: self._pad_get_val())
+        self['PadLen'].set_valauto(lambda: self['Pad'].get_len()<<3)
+    
+    def _pad_get_len(self):
+        block_len = IKEv2EncrBlockLen.get(int(self.ALG_ENCR), 0)
+        if block_len:
+            return -(1 + self['Data'].get_len()) % block_len
+        else:
+            return 0
+    
+    def _pad_get_val(self):
+        return bytes(range(0, self._pad_get_len()))
+    
+    def _from_char(self, char):
+        iv_len  = IKEv2EncrIVLen_dict.get(self.ALG_ENCR, 0)
+        ics_len = IKEv2AuthICSLen_dict.get(self.ALG_AUTH, 0)
+        # ensure char is long enough
+        if char.len_byte() < 1 + iv_len + ics_len:
+            raise(PycrateErr('buffer not long enough, selected IKEv2 transforms ENCR: %s / AUTH: %s'\
+                              % (self.ALG_ENCR, self.ALG_AUTH)))
+        self['IV'].set_bl(iv_len<<3)
+        self['IV']._from_char(char)
+        # then processing the whole buffer backward...
+        buf = char.to_bytes()
+        self['ICS'].set_bl(ics_len<<3)
+        self['ICS'].from_bytes(buf[-ics_len:])
+        self['PadLen'].from_bytes(buf[-ics_len-1:-ics_len])
+        pad_len = self['PadLen'].get_val()
+        if len(buf) < 1 + pad_len + ics_len:
+            raise(PycrateErr('invalid padding length, selected IKEv2 transforms ENCR: %s / AUTH: %s'\
+                              % (self.ALG_ENCR, self.ALG_AUTH)))
+        self['Pad'].from_bytes(buf[-ics_len-1-pad_len:-ics_len-1])
+        self['Data'].from_bytes(buf[:-ics_len-1-pad_len])
+    
+    @classmethod
+    def set_alg(cls, alg_encr, alg_auth):
+        """class method to set ALG_ENCR and ALG_AUTH class attributes globally
+        Required for setting proper length to IV, Pad and ICS
+        """
+        cls.ALG_ENCR = alg_encr
+        cls.ALG_AUTH = alg_auth
     
     # TODO
     def encrypt(self, data, key):
@@ -807,8 +887,8 @@ class IKEv2Pay(Envelope):
     def set_val(self, val):
         if isinstance(val, dict) and 'Type' in val and val['Type'] in self.LUTPay:
             self.Type = val['Type']
-            pay = self.LUTPay[val['Type']].clone()
             del val['Type']
+            pay = self.LUTPay[self.Type].clone()
             pay.set_blauto(lambda: (self[3].get_val() - 4)<<3)
             self.replace(self[4], pay)
         Envelope.set_val(self, val)
@@ -831,6 +911,10 @@ class IKEv2Pay(Envelope):
                 pay = self.LUTPay[next].clone()
                 pay.set_blauto(lambda: (self[3].get_val() - 4)<<3)
                 self.replace(self[4], pay)
+        elif hasattr(self, 'Type') and self.Type in self.LUTPay:
+            pay = self.LUTPay[self.Type].clone()
+            pay.set_blauto(lambda: (self[3].get_val() - 4)<<3)
+            self.replace(self[4], pay)
         Envelope._from_char(self, char)
 
 
@@ -875,6 +959,25 @@ class IKEv2Hdr(Envelope):
         Uint32('MID', rep=REPR_HEX),
         Uint32('Len')
         )
+    
+    def __init__(self, *args, **kwargs):
+        Envelope.__init__(self, *args, **kwargs)
+        self['Next'].set_valauto(lambda: self._get_next())
+        self['Len'].set_valauto(lambda: self._get_len())
+    
+    def _get_next(self):
+        n = self.get_next()
+        if not n:
+            return 0
+        else:
+            return n[0].Type
+    
+    def _get_len(self):
+        n = self.get_next()
+        if not n:
+            return 28
+        else:
+            return 28 + n.get_len()
 
 
 #------------------------------------------------------------------------------#
@@ -892,4 +995,12 @@ class IKEv2(Envelope):
         self[0]['Next'].set_valauto(lambda: self[1][0].Type if self[1].get_num() else 0)
         self[0]['Len'].set_valauto(lambda: 28 + self[1].get_len())
         self[1].set_blauto(lambda: (self[0]['Len'].get_val()-28)<<3)
+    
+    def _from_char(self, char):
+        if self.get_trans():
+            return
+        if self['Payloads'].get_num():
+            # clear the payload sequence before decoding a new buffer
+            self['Payloads'].clear()
+        Envelope._from_char(self, char)
 
