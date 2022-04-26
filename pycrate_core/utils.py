@@ -383,6 +383,8 @@ def uint_to_hex(uint, bitlen):
 # structure duplication routine
 #------------------------------------------------------------------------------#
 
+_atomic_types = str_types + bytes_types + integer_types + (NoneType, bool)
+
 def cpstruct(struct, wobj=False):
     """Return an identical object to struct in terms of internal values, but with 
     copied wrapping structures. Values need to be integer or string (or any object
@@ -398,14 +400,14 @@ def cpstruct(struct, wobj=False):
         ValueError in case of invalid struct type
         except if wobj is set to True, where any object is returned as is
     """
-    atomic_types = str_types + integer_types + (NoneType, bool)
+    
     if isinstance(struct, (tuple, list, set)):
         return struct.__class__([cpstruct(i) for i in struct])
     elif isinstance(struct, dict):
         return {cpstruct(i): cpstruct(j) for i, j in struct.items()}
     elif wobj:
         return struct
-    elif isinstance(struct, atomic_types):
+    elif isinstance(struct, _atomic_types):
         return struct
     else:
         raise(ValueError('invalid argument of type %s' % type(struct)))
