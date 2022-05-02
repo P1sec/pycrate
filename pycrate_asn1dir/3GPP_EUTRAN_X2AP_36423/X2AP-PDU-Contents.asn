@@ -232,7 +232,10 @@ IMPORTS
 	IntendedTDD-DL-ULConfiguration-NR,
 	UERadioCapability,
 	SFN-Offset,
-	IMSvoiceEPSfallbackfrom5G
+	IMSvoiceEPSfallbackfrom5G,
+	Global-RAN-NODE-ID,
+	DirectForwardingPathAvailability
+
 
 
 
@@ -586,6 +589,10 @@ FROM X2AP-Containers
 	id-IntendedTDD-DL-ULConfiguration-NR,
 	id-UERadioCapability,
 	id-SFN-Offset,
+	id-DirectForwardingPathAvailability,
+	id-sourceNG-RAN-node-id,
+	id-SourceDLForwardingIPAddress,
+	id-SourceNodeDLForwardingIPAddress,
 	maxCellineNB,
 	maxnoofBearers,
 	maxnoofPDCP-SN,
@@ -689,11 +696,15 @@ E-RABs-ToBeSetup-Item ::= SEQUENCE {
 E-RABs-ToBeSetup-ItemExtIEs X2AP-PROTOCOL-EXTENSION ::= {
 	{ ID id-BearerType		CRITICALITY reject	EXTENSION BearerType		PRESENCE optional}|
 	{ ID id-DAPSRequestInfo		CRITICALITY ignore	EXTENSION DAPSRequestInfo			PRESENCE optional}|
-	{ ID id-Ethernet-Type	CRITICALITY ignore	EXTENSION Ethernet-Type		PRESENCE optional},
+	{ ID id-Ethernet-Type	CRITICALITY ignore	EXTENSION Ethernet-Type		PRESENCE optional}|
+	{ ID id-SourceDLForwardingIPAddress			CRITICALITY ignore	EXTENSION TransportLayerAddress		PRESENCE optional},
 	...
 }
 
 MobilityInformation ::= BIT STRING (SIZE(32))
+
+SourceDLForwardingIPAddress ::= BIT STRING (SIZE(1..160, ...))
+
 
 UE-ContextReferenceAtSeNB ::= SEQUENCE {
 	source-GlobalSeNB-ID		GlobalENB-ID,
@@ -838,7 +849,8 @@ EarlyStatusTransfer-IEs X2AP-PROTOCOL-IES ::= {
 	{ ID id-New-eNB-UE-X2AP-ID					CRITICALITY reject		TYPE UE-X2AP-ID									PRESENCE mandatory}|
 	{ ID id-Old-eNB-UE-X2AP-ID-Extension		CRITICALITY reject		TYPE UE-X2AP-ID-Extension						PRESENCE optional}|
 	{ ID id-New-eNB-UE-X2AP-ID-Extension		CRITICALITY reject		TYPE UE-X2AP-ID-Extension						PRESENCE optional}|
-	{ ID id-ProcedureStage						CRITICALITY reject		TYPE ProcedureStageChoice						PRESENCE mandatory},
+	{ ID id-ProcedureStage						CRITICALITY reject		TYPE ProcedureStageChoice						PRESENCE mandatory}|
+	{ ID id-SgNB-UE-X2AP-ID						CRITICALITY ignore		TYPE SgNB-UE-X2AP-ID							PRESENCE optional},
 	...
 }
 
@@ -1704,7 +1716,8 @@ E-RABs-ToBeAdded-Item-SCG-BearerExtIEs X2AP-PROTOCOL-EXTENSION ::= {
 	{ ID id-Correlation-ID				CRITICALITY ignore	EXTENSION Correlation-ID		PRESENCE optional}|
 	{ ID id-SIPTO-Correlation-ID		CRITICALITY ignore	EXTENSION Correlation-ID		PRESENCE optional}|
 	{ ID id-BearerType					CRITICALITY ignore	EXTENSION BearerType			PRESENCE optional}|
-	{ ID id-Ethernet-Type				CRITICALITY ignore	EXTENSION Ethernet-Type			PRESENCE optional},
+	{ ID id-Ethernet-Type				CRITICALITY ignore	EXTENSION Ethernet-Type			PRESENCE optional}|
+	{ ID id-SourceDLForwardingIPAddress			CRITICALITY ignore	EXTENSION TransportLayerAddress		PRESENCE optional},
 	...
 }
 
@@ -1717,6 +1730,7 @@ E-RABs-ToBeAdded-Item-Split-Bearer ::= SEQUENCE {
 }
 
 E-RABs-ToBeAdded-Item-Split-BearerExtIEs X2AP-PROTOCOL-EXTENSION ::= {
+	{ ID id-SourceDLForwardingIPAddress			CRITICALITY ignore	EXTENSION TransportLayerAddress		PRESENCE optional},
 	...
 }
 
@@ -1768,6 +1782,8 @@ E-RABs-Admitted-ToBeAdded-Item-SCG-Bearer ::= SEQUENCE {
 }
 
 E-RABs-Admitted-ToBeAdded-Item-SCG-BearerExtIEs X2AP-PROTOCOL-EXTENSION ::= {
+	{ ID id-SourceDLForwardingIPAddress				CRITICALITY ignore	EXTENSION TransportLayerAddress		PRESENCE optional}|
+	{ ID id-SourceNodeDLForwardingIPAddress			CRITICALITY ignore	EXTENSION TransportLayerAddress		PRESENCE optional},
 	...
 }
 
@@ -1779,6 +1795,7 @@ E-RABs-Admitted-ToBeAdded-Item-Split-Bearer ::= SEQUENCE {
 }
 
 E-RABs-Admitted-ToBeAdded-Item-Split-BearerExtIEs X2AP-PROTOCOL-EXTENSION ::= {
+	{ ID id-SourceDLForwardingIPAddress			CRITICALITY ignore	EXTENSION TransportLayerAddress		PRESENCE optional},
 	...
 }
 
@@ -2628,7 +2645,9 @@ SgNBAdditionRequest-IEs X2AP-PROTOCOL-IES ::= {
 	{ ID id-ManagementBasedMDTallowed				CRITICALITY ignore	TYPE ManagementBasedMDTallowed					PRESENCE optional }|
 	{ ID id-ManagementBasedMDTPLMNList				CRITICALITY ignore	TYPE MDTPLMNList									PRESENCE optional }|
 	{ ID id-UERadioCapabilityID						CRITICALITY reject	TYPE UERadioCapabilityID							PRESENCE optional}|
-	{ ID id-IABNodeIndication						CRITICALITY reject	TYPE IABNodeIndication								PRESENCE optional},	...
+	{ ID id-IABNodeIndication						CRITICALITY reject	TYPE IABNodeIndication								PRESENCE optional}|
+	{ ID id-sourceNG-RAN-node-id					CRITICALITY ignore		TYPE Global-RAN-NODE-ID							PRESENCE optional},
+	...
 }
 
 E-RABs-ToBeAdded-SgNBAddReqList ::= SEQUENCE (SIZE(1..maxnoofBearers)) OF ProtocolIE-Single-Container { {E-RABs-ToBeAdded-SgNBAddReq-ItemIEs} }
@@ -2670,7 +2689,8 @@ E-RABs-ToBeAdded-SgNBAddReq-Item-SgNBPDCPpresent ::= SEQUENCE {
 E-RABs-ToBeAdded-SgNBAddReq-Item-SgNBPDCPpresentExtIEs X2AP-PROTOCOL-EXTENSION ::= {
 	{ ID id-RLCMode-transferred					CRITICALITY ignore	EXTENSION RLCMode					PRESENCE optional}|
 	{ ID id-BearerType							CRITICALITY ignore	EXTENSION BearerType				PRESENCE optional}|
-	{ ID id-Ethernet-Type						CRITICALITY ignore	EXTENSION Ethernet-Type				PRESENCE optional},
+	{ ID id-Ethernet-Type						CRITICALITY ignore	EXTENSION Ethernet-Type				PRESENCE optional}|
+	{ ID id-SourceDLForwardingIPAddress			CRITICALITY ignore	EXTENSION TransportLayerAddress		PRESENCE optional},
 	...
 }
 
@@ -2715,7 +2735,8 @@ SgNBAdditionRequestAcknowledge-IEs X2AP-PROTOCOL-IES ::= {
 	{ ID id-SgNBResourceCoordinationInformation			CRITICALITY ignore	TYPE SgNBResourceCoordinationInformation				PRESENCE optional}|
 	{ ID id-RRCConfigIndication							CRITICALITY reject	TYPE RRC-Config-Ind												PRESENCE optional}|
 	{ ID id-LocationInformationSgNB						CRITICALITY ignore	TYPE LocationInformationSgNB								PRESENCE optional}|
-	{ ID id-AvailableFastMCGRecoveryViaSRB3				CRITICALITY ignore	TYPE AvailableFastMCGRecoveryViaSRB3						PRESENCE optional },
+	{ ID id-AvailableFastMCGRecoveryViaSRB3				CRITICALITY ignore	TYPE AvailableFastMCGRecoveryViaSRB3						PRESENCE optional }|
+	{ ID id-DirectForwardingPathAvailability			CRITICALITY ignore	TYPE DirectForwardingPathAvailability					PRESENCE optional },
 	...
 }
 
@@ -2759,7 +2780,8 @@ E-RABs-Admitted-ToBeAdded-SgNBAddReqAck-Item-SgNBPDCPpresent ::= SEQUENCE {
 
 E-RABs-Admitted-ToBeAdded-SgNBAddReqAck-Item-SgNBPDCPpresentExtIEs X2AP-PROTOCOL-EXTENSION ::= {
 	{ ID id-uLpDCPSnLength							CRITICALITY ignore	EXTENSION PDCPSnLength					PRESENCE optional}|
-	{ ID id-dLPDCPSnLength							CRITICALITY ignore	EXTENSION PDCPSnLength					PRESENCE optional},
+	{ ID id-dLPDCPSnLength							CRITICALITY ignore	EXTENSION PDCPSnLength					PRESENCE optional}|
+	{ ID id-SourceDLForwardingIPAddress			CRITICALITY ignore	EXTENSION TransportLayerAddress		PRESENCE optional},
 	...
 }
 
@@ -4687,7 +4709,8 @@ DataForwardingAddressIndication-IEs X2AP-PROTOCOL-IES ::= {
 	{ ID id-Old-eNB-UE-X2AP-ID-Extension		CRITICALITY ignore	TYPE UE-X2AP-ID-Extension						PRESENCE optional }|
 	{ ID id-E-RABs-DataForwardingAddress-List	CRITICALITY ignore	TYPE E-RABs-DataForwardingAddress-List		PRESENCE mandatory}|
 	{ ID id-CHO-DC-Indicator					CRITICALITY reject	TYPE CHO-DC-Indicator							PRESENCE optional}|
-	{ ID id-CHO-DC-EarlyDataForwarding			CRITICALITY ignore	TYPE CHO-DC-EarlyDataForwarding				PRESENCE optional},
+	{ ID id-CHO-DC-EarlyDataForwarding			CRITICALITY ignore	TYPE CHO-DC-EarlyDataForwarding				PRESENCE optional}|
+	{ ID id-SgNB-UE-X2AP-ID						CRITICALITY ignore	TYPE SgNB-UE-X2AP-ID							PRESENCE optional},
 	...
 }
 

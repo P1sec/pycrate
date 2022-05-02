@@ -39,8 +39,10 @@ from lxml import etree
 # those are the xml files taken from the IANA web pages
 # https://www.iana.org/assignments/aaa-parameters/aaa-parameters.xml
 FILENAME_aaa_parameters = os.path.dirname(__file__) + '/aaa-parameters.xml'
-# https://www.iana.org/assignments/address-family-numbers/address-family-numbers.xhtml
+#
+# https://www.iana.org/assignments/address-family-numbers/address-family-numbers.xml
 FILENAME_address_family_numbers = os.path.dirname(__file__) + '/address-family-numbers.xml'
+#
 # https://www.iana.org/assignments/radius-types/radius-types.xml
 FILENAME_radius_types = os.path.dirname(__file__) + '/radius-types.xml'
 #

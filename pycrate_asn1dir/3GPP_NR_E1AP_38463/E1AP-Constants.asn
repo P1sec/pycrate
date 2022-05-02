@@ -55,6 +55,7 @@ id-iAB-UPTNLAddressUpdate										ProcedureCode ::= 24
 id-CellTrafficTrace												ProcedureCode ::= 25
 id-earlyForwardingSNTransfer									ProcedureCode ::= 26
 id-gNB-CU-CPMeasurementResultsInformation						ProcedureCode ::= 27
+id-iABPSKNotification											ProcedureCode ::= 28
 
 
 -- **************************************************************
@@ -85,6 +86,7 @@ maxnoofQoSParaSets							INTEGER ::= 8
 maxnoofExtSliceItems						INTEGER ::= 65535
 maxnoofDataForwardingTunneltoE-UTRAN		INTEGER ::= 256
 maxnoofExtNRCGI 							INTEGER	::= 16384
+maxnoofPSKs									INTEGER	::= 256
 
 
 -- **************************************************************
@@ -229,6 +231,15 @@ id-QosMonitoringReportingFrequency								ProtocolIE-ID ::= 132
 id-QoSMonitoringDisabled										ProtocolIE-ID ::= 133
 id-AdditionalHandoverInfo										ProtocolIE-ID ::= 134
 id-Extended-NR-CGI-Support-List									ProtocolIE-ID ::= 135
+id-DataForwardingtoNG-RANQoSFlowInformationList					ProtocolIE-ID ::= 136
+id-MaxCIDEHCDL													ProtocolIE-ID ::= 137
+id-ignoreMappingRuleIndication									ProtocolIE-ID ::= 138
+id-DirectForwardingPathAvailability								ProtocolIE-ID ::= 139
+id-EarlyDataForwardingIndicator									ProtocolIE-ID ::= 140
+id-QoSFlowsDRBRemapping											ProtocolIE-ID ::= 141
+id-DataForwardingSourceIPAddress								ProtocolIE-ID ::= 142
+id-SecurityIndicationModify										ProtocolIE-ID ::= 143
+id-IAB-Donor-CU-UPPSKInfo											ProtocolIE-ID ::= 144
 
 
 END

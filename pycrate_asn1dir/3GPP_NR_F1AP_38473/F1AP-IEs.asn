@@ -106,6 +106,12 @@ IMPORTS
 	id-TransmissionStopIndicator,
 	id-SrsFrequency,
 	id-EstimatedArrivalProbability,
+	id-TRPType,
+	id-SRSSpatialRelationPerSRSResource,
+	id-PDCPTerminatingNodeDLTNLAddrInfo,
+	id-ENBDLTNLAddress,
+	id-PRS-Resource-ID,
+	id-LocationMeasurementInformation,
 	maxNRARFCN,
 	maxnoofErrors,
 	maxnoofBPLMNs,
@@ -1124,7 +1130,8 @@ CUtoDURRCInformation-ExtIEs F1AP-PROTOCOL-EXTENSION ::= {
 	{ ID id-MeasurementTimingConfiguration	CRITICALITY ignore	EXTENSION MeasurementTimingConfiguration		PRESENCE optional }|
 	{ ID id-UEAssistanceInformation			CRITICALITY ignore	EXTENSION UEAssistanceInformation					PRESENCE optional }|
 	{ ID id-CG-Config						CRITICALITY ignore	EXTENSION CG-Config									PRESENCE optional }|
-	{ ID id-UEAssistanceInformationEUTRA	CRITICALITY ignore	EXTENSION UEAssistanceInformationEUTRA			PRESENCE optional },
+	{ ID id-UEAssistanceInformationEUTRA	CRITICALITY ignore	EXTENSION UEAssistanceInformationEUTRA			PRESENCE optional }|
+	{ ID id-LocationMeasurementInformation	CRITICALITY ignore	EXTENSION LocationMeasurementInformation			PRESENCE optional },
 	...
 }
 
@@ -1861,6 +1868,7 @@ EUTRANQoS	::= SEQUENCE {
 }
 
 EUTRANQoS-ExtIEs F1AP-PROTOCOL-EXTENSION ::= {
+{ ID id-ENBDLTNLAddress		CRITICALITY ignore	EXTENSION TransportLayerAddress	PRESENCE optional	},
 	...
 }
 
@@ -2574,6 +2582,8 @@ LMF-MeasurementID ::= INTEGER (1.. 65536, ...)
 
 LMF-UE-MeasurementID ::= INTEGER (1.. 256, ...)
 
+LocationMeasurementInformation ::= OCTET STRING
+
 LocationUncertainty ::= SEQUENCE {
 	horizontalUncertainty		INTEGER (0..255),
 	horizontalConfidence		INTEGER (0..100),
@@ -3221,8 +3231,10 @@ PosBroadcast ::= ENUMERATED {
 PositioningBroadcastCells ::= SEQUENCE (SIZE (1..maxnoBcastCell)) OF NRCGI
 
 MeasurementPeriodicity ::= ENUMERATED
-{ms120, ms240, ms480, ms640, ms1024, ms2048, ms5120, ms10240, min1, min6, min12, min30, ..., ms20480, ms40960}
+{ms120, ms240, ms480, ms640, ms1024, ms2048, ms5120, ms10240, min1, min6, min12, min30, ..., ms20480, ms40960, extended }
 
+
+MeasurementPeriodicityExtended ::= ENUMERATED {ms160, ms320, ms1280, ms2560, ms61440, ms81920,	ms368640, ms737280, ms1843200,	...}
 
 PosMeasurementQuantities ::= SEQUENCE (SIZE(1.. maxnoofPosMeas)) OF PosMeasurementQuantities-Item
 
@@ -3422,6 +3434,7 @@ PRSAngleItem ::= SEQUENCE {
 }
 
 PRSAngleItem-ItemExtIEs 	F1AP-PROTOCOL-EXTENSION ::= {
+	{ ID id-PRS-Resource-ID		CRITICALITY ignore EXTENSION PRS-Resource-ID		PRESENCE optional },
 	...
 }
 
@@ -3581,7 +3594,8 @@ QoSFlowLevelQoSParameters	::= SEQUENCE {
 QoSFlowLevelQoSParameters-ExtIEs 	F1AP-PROTOCOL-EXTENSION ::= {
 	{ ID id-PDUSessionID								CRITICALITY ignore	EXTENSION PDUSessionID			PRESENCE optional}|
 	{ ID id-ULPDUSessionAggregateMaximumBitRate			CRITICALITY ignore	EXTENSION BitRate					PRESENCE optional}|
-	{ ID id-QosMonitoringRequest						CRITICALITY ignore	EXTENSION QosMonitoringRequest	PRESENCE optional},
+	{ ID id-QosMonitoringRequest						CRITICALITY ignore	EXTENSION QosMonitoringRequest	PRESENCE optional}|
+	{ ID id-PDCPTerminatingNodeDLTNLAddrInfo		CRITICALITY ignore	EXTENSION TransportLayerAddress	PRESENCE optional	},
 	...
 }
 
@@ -4133,7 +4147,8 @@ Served-Cell-Information-ExtIEs F1AP-PROTOCOL-EXTENSION ::= {
 	{	ID id-IAB-Info-IAB-DU				CRITICALITY ignore	EXTENSION IAB-Info-IAB-DU				PRESENCE optional}|
 	{	ID id-SSB-PositionsInBurst			CRITICALITY ignore	EXTENSION SSB-PositionsInBurst			PRESENCE optional }|
 	{	ID id-NRPRACHConfig					CRITICALITY ignore	EXTENSION NRPRACHConfig					PRESENCE optional }|
-	{	ID id-SFN-Offset					CRITICALITY ignore	EXTENSION SFN-Offset					PRESENCE optional },
+	{	ID id-SFN-Offset					CRITICALITY ignore	EXTENSION SFN-Offset					PRESENCE optional }|
+	{	ID id-NPNBroadcastInformation		CRITICALITY reject 	EXTENSION NPNBroadcastInformation		PRESENCE optional },
 	...
 }
 
@@ -4512,6 +4527,28 @@ SpatialRelationforResourceIDItem-ExtIEs F1AP-PROTOCOL-EXTENSION ::= {
 	...
 }
 
+SpatialRelationPerSRSResource ::= SEQUENCE {
+	spatialRelationPerSRSResource-List	SpatialRelationPerSRSResource-List,
+	iE-Extensions		ProtocolExtensionContainer { { SpatialRelationPerSRSResource-ExtIEs} }	OPTIONAL,
+	...
+}
+
+SpatialRelationPerSRSResource-ExtIEs F1AP-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+SpatialRelationPerSRSResource-List::= SEQUENCE(SIZE (1.. maxnoSRS-ResourcePerSet)) OF SpatialRelationPerSRSResourceItem
+
+SpatialRelationPerSRSResourceItem ::= SEQUENCE {
+	referenceSignal		ReferenceSignal,
+	iE-Extensions		ProtocolExtensionContainer { { SpatialRelationPerSRSResourceItem-ExtIEs} }	OPTIONAL,
+	...
+}
+
+SpatialRelationPerSRSResourceItem-ExtIEs F1AP-PROTOCOL-EXTENSION ::= {
+	...
+}
+
 SpatialRelationPos ::= CHOICE {
 	sSBPos					SSB,
 	pRSInformationPos		PRSInformationPos,
@@ -4716,6 +4753,7 @@ SRSResourceSetItem ::= SEQUENCE {
 }
 
 SRSResourceSetItemExtIEs	F1AP-PROTOCOL-EXTENSION ::= {
+	{ ID id-SRSSpatialRelationPerSRSResource	CRITICALITY ignore	EXTENSION SpatialRelationPerSRSResource PRESENCE optional},
 	...
 }
 
@@ -5143,7 +5181,9 @@ TRPInformationTypeItem ::= ENUMERATED {
 		sFNInitTime,
 		spatialDirectInfo,
 		geoCoord,
-...}
+		...,
+		trp-type
+}
 
 
 TRPInformationTypeResponseList ::= SEQUENCE (SIZE(1.. maxnoofTRPInfoTypes)) OF TRPInformationTypeResponseItem
@@ -5161,6 +5201,7 @@ TRPInformationTypeResponseItem ::= CHOICE {
 }
 
 TRPInformationTypeResponseItem-ExtIEs F1AP-PROTOCOL-IES ::= {
+	{ ID id-TRPType		CRITICALITY reject TYPE TRPType		PRESENCE mandatory },
 	...
 }
 
@@ -5270,6 +5311,15 @@ Transport-Layer-Address-Info ::= SEQUENCE {
 }
 
 Transport-Layer-Address-Info-ExtIEs 	F1AP-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+TRPType ::= ENUMERATED {
+	prsOnlyTP,
+	srsOnlyRP,
+	tp,
+	rp,
+	trp,
 	...
 }
 

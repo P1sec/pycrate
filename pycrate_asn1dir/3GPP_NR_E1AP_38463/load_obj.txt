@@ -36,6 +36,7 @@ E1AP-Constants.id-iAB-UPTNLAddressUpdate
 E1AP-Constants.id-CellTrafficTrace
 E1AP-Constants.id-earlyForwardingSNTransfer
 E1AP-Constants.id-gNB-CU-CPMeasurementResultsInformation
+E1AP-Constants.id-iABPSKNotification
 E1AP-Constants.maxnoofErrors
 E1AP-Constants.maxnoofSPLMNs
 E1AP-Constants.maxnoofSliceItems
@@ -58,6 +59,7 @@ E1AP-Constants.maxnoofQoSParaSets
 E1AP-Constants.maxnoofExtSliceItems
 E1AP-Constants.maxnoofDataForwardingTunneltoE-UTRAN
 E1AP-Constants.maxnoofExtNRCGI
+E1AP-Constants.maxnoofPSKs
 E1AP-Constants.id-Cause
 E1AP-Constants.id-CriticalityDiagnostics
 E1AP-Constants.id-gNB-CU-CP-UE-E1AP-ID
@@ -194,6 +196,15 @@ E1AP-Constants.id-QosMonitoringReportingFrequency
 E1AP-Constants.id-QoSMonitoringDisabled
 E1AP-Constants.id-AdditionalHandoverInfo
 E1AP-Constants.id-Extended-NR-CGI-Support-List
+E1AP-Constants.id-DataForwardingtoNG-RANQoSFlowInformationList
+E1AP-Constants.id-MaxCIDEHCDL
+E1AP-Constants.id-ignoreMappingRuleIndication
+E1AP-Constants.id-DirectForwardingPathAvailability
+E1AP-Constants.id-EarlyDataForwardingIndicator
+E1AP-Constants.id-QoSFlowsDRBRemapping
+E1AP-Constants.id-DataForwardingSourceIPAddress
+E1AP-Constants.id-SecurityIndicationModify
+E1AP-Constants.id-IAB-Donor-CU-UPPSKInfo
 E1AP-Containers.E1AP-PROTOCOL-IES
 E1AP-Containers.E1AP-PROTOCOL-EXTENSION
 E1AP-Containers.E1AP-PRIVATE-IES
@@ -240,6 +251,7 @@ E1AP-IEs.Data-Usage-per-QoS-Flow-Item-ExtIEs
 E1AP-IEs.Data-Usage-Report-List
 E1AP-IEs.Data-Usage-Report-ItemExtIEs
 E1AP-IEs.DefaultDRB
+E1AP-IEs.DirectForwardingPathAvailability
 E1AP-IEs.DiscardTimer
 E1AP-IEs.DLDiscarding-ExtIEs
 E1AP-IEs.DLUPTNLAddressToUpdateItemExtIEs
@@ -315,6 +327,7 @@ E1AP-IEs.DRB-Usage-Report-Item-ExtIEs
 E1AP-IEs.Duplication-Activation
 E1AP-IEs.Dynamic5QIDescriptor-ExtIEs
 E1AP-IEs.DataDiscardRequired
+E1AP-IEs.EarlyDataForwardingIndicator
 E1AP-IEs.EarlyForwardingCOUNTInfo-ExtIEs
 E1AP-IEs.EarlyForwardingCOUNTReq
 E1AP-IEs.EHC-Common-Parameters-ExtIEs
@@ -360,6 +373,7 @@ E1AP-IEs.GNB-CU-UP-OverloadInformation
 E1AP-IEs.GNB-DU-ID
 E1AP-IEs.HFN
 E1AP-IEs.HW-CapacityIndicator-ExtIEs
+E1AP-IEs.IgnoreMappingRuleIndication
 E1AP-IEs.IntegrityProtectionIndication
 E1AP-IEs.IntegrityProtectionAlgorithm
 E1AP-IEs.IntegrityProtectionKey
@@ -367,11 +381,14 @@ E1AP-IEs.IntegrityProtectionResult
 E1AP-IEs.Inactivity-Timer
 E1AP-IEs.InterfacesToTrace
 E1AP-IEs.ImmediateMDT-ExtIEs
+E1AP-IEs.IAB-donor-CU-UPPSKInfoItemExtIEs
+E1AP-IEs.IAB-donor-CU-UPPSK
 E1AP-IEs.Links-to-log
 E1AP-IEs.MaxDataBurstVolume
 E1AP-IEs.MaximumIPdatarate-ExtIEs
 E1AP-IEs.MaxIPrate
 E1AP-IEs.MaxPacketLossRate
+E1AP-IEs.MaxCIDEHCDL
 E1AP-IEs.MRDC-Data-Usage-Report-Item-ExtIEs
 E1AP-IEs.MRDC-Usage-Information-ExtIEs
 E1AP-IEs.M4Configuration-ExtIEs
@@ -468,6 +485,7 @@ E1AP-IEs.QoS-Flow-Failed-Item-ExtIEs
 E1AP-IEs.QoS-Flow-Mapping-List
 E1AP-IEs.QoS-Flow-Mapping-Item-ExtIEs
 E1AP-IEs.QoS-Flow-Mapping-Indication
+E1AP-IEs.QoS-Flows-DRB-Remapping
 E1AP-IEs.QoS-Parameters-Support-List-ItemExtIEs
 E1AP-IEs.QoSPriorityLevel
 E1AP-IEs.QoS-Flow-QoS-Parameter-List
@@ -480,6 +498,8 @@ E1AP-IEs.QoS-Flow-Removed-Item-ExtIEs
 E1AP-IEs.QoS-Flows-to-be-forwarded-List
 E1AP-IEs.QoS-Flows-to-be-forwarded-Item-ExtIEs
 E1AP-IEs.QoS-Mapping-Information
+E1AP-IEs.DataForwardingtoNG-RANQoSFlowInformationList
+E1AP-IEs.DataForwardingtoNG-RANQoSFlowInformationList-Item-ExtIEs
 E1AP-IEs.RANUEID
 E1AP-IEs.RAT-Type
 E1AP-IEs.RedundantQoSFlowIndicator
@@ -618,6 +638,8 @@ E1AP-PDU-Contents.IAB-UPTNLAddressUpdateAcknowledgeIEs
 E1AP-PDU-Contents.ULUPTNLAddressToUpdateList
 E1AP-PDU-Contents.IAB-UPTNLAddressUpdateFailureIEs
 E1AP-PDU-Contents.EarlyForwardingSNTransferIEs
+E1AP-PDU-Contents.IABPSKNotificationIEs
+E1AP-PDU-Contents.IAB-Donor-CU-UPPSKInfo
 E1AP-PDU-Descriptions.E1AP-ELEMENTARY-PROCEDURE
 E1AP-PDU-Descriptions.E1AP-PDU
 E1AP-PDU-Descriptions.reset
@@ -648,6 +670,7 @@ E1AP-PDU-Descriptions.resourceStatusReporting
 E1AP-PDU-Descriptions.iAB-UPTNLAddressUpdate
 E1AP-PDU-Descriptions.cellTrafficTrace
 E1AP-PDU-Descriptions.earlyForwardingSNTransfer
+E1AP-PDU-Descriptions.iABPSKNotification
 E1AP-Containers.ProtocolIE-Container
 E1AP-Containers.ProtocolIE-SingleContainer
 E1AP-Containers.ProtocolIE-ContainerList
@@ -729,6 +752,7 @@ E1AP-IEs.GTPTLA-Item
 E1AP-IEs.GTPTunnel
 E1AP-IEs.HW-CapacityIndicator
 E1AP-IEs.ImmediateMDT
+E1AP-IEs.IAB-Donor-CU-UPPSKInfo-Item
 E1AP-IEs.MaximumIPdatarate
 E1AP-IEs.MRDC-Data-Usage-Report-Item
 E1AP-IEs.MRDC-Usage-Information
@@ -776,6 +800,7 @@ E1AP-IEs.QoS-Flow-QoS-Parameter-Item
 E1AP-IEs.QoSFlowLevelQoSParameters
 E1AP-IEs.QoS-Flow-Removed-Item
 E1AP-IEs.QoS-Flows-to-be-forwarded-Item
+E1AP-IEs.DataForwardingtoNG-RANQoSFlowInformationList-Item
 E1AP-IEs.RedundantPDUSessionInformation
 E1AP-IEs.ROHC-Parameters
 E1AP-IEs.ROHC
@@ -859,6 +884,7 @@ E1AP-PDU-Contents.IAB-UPTNLAddressUpdate
 E1AP-PDU-Contents.IAB-UPTNLAddressUpdateAcknowledge
 E1AP-PDU-Contents.IAB-UPTNLAddressUpdateFailure
 E1AP-PDU-Contents.EarlyForwardingSNTransfer
+E1AP-PDU-Contents.IABPSKNotification
 E1AP-PDU-Descriptions.E1AP-ELEMENTARY-PROCEDURES-CLASS-1
 E1AP-PDU-Descriptions.E1AP-ELEMENTARY-PROCEDURES-CLASS-2
 E1AP-PDU-Descriptions.E1AP-ELEMENTARY-PROCEDURES

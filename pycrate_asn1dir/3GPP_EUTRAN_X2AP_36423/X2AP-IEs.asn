@@ -85,6 +85,7 @@ IMPORTS
 	id-IntendedTDD-DL-ULConfiguration-NR,
 	id-TraceCollectionEntityURI,
 	id-SFN-Offset,
+	id-AdditionLocationInformation,
 
 	maxnoofBearers,
 	maxCellineNB,
@@ -200,6 +201,11 @@ ABS-Status-ExtIEs X2AP-PROTOCOL-EXTENSION ::= {
 }
 
 ActivationID ::= INTEGER (0..255)
+
+AdditionLocationInformation ::= ENUMERATED {
+	includePSCell,
+	...
+}
 
 AdditionalRRMPriorityIndex ::= BIT STRING (SIZE(32))
 
@@ -834,6 +840,8 @@ DeliveryStatus-ExtIEs X2AP-PROTOCOL-EXTENSION ::= {
 
 DesiredActNotificationLevel	::= ENUMERATED {none, e-rab, ue-level, ...}
 
+DirectForwardingPathAvailability ::= ENUMERATED {direct-path-available, ...}
+
 DL-ABS-status::= INTEGER (0..100)
 
 DL-Forwarding ::= ENUMERATED {
@@ -1266,6 +1274,15 @@ GlobalGNB-ID-ExtIEs X2AP-PROTOCOL-EXTENSION ::= {
 	...
 }
 
+Global-RAN-NODE-ID ::= CHOICE {
+	gNB						GlobalGNB-ID,
+	choice-extension		ProtocolIE-Single-Container { { Global-RAN-NODE-ID-ExtIEs} }
+}
+
+Global-RAN-NODE-ID-ExtIEs X2AP-PROTOCOL-IES ::= {
+	...
+}
+
 GNBOverloadInformation ::= ENUMERATED {overloaded, not-overloaded, ...}
 
 GTPTLAs	::= SEQUENCE (SIZE(1.. maxnoofGTPTLAs)) OF	GTPTLA-Item
@@ -1478,6 +1495,7 @@ LocationReportingInformation ::= SEQUENCE {
 }
 
 LocationReportingInformation-ExtIEs X2AP-PROTOCOL-EXTENSION ::={
+	{ ID id-AdditionLocationInformation	CRITICALITY ignore	EXTENSION AdditionLocationInformation	PRESENCE optional},
 	...
 }
 
@@ -1871,7 +1889,7 @@ NRNeighbour-Information ::= SEQUENCE (SIZE (1.. maxofNRNeighbours))OF SEQUENCE {
 }
 
 NRNeighbour-Information-ExtIEs X2AP-PROTOCOL-EXTENSION ::= {
-	{ID id-CSI-RSTransmissionIndication		CRITICALITY ignore	EXTENSION EARFCNExtension	PRESENCE optional},
+	{ID id-CSI-RSTransmissionIndication		CRITICALITY ignore	EXTENSION CSI-RSTransmissionIndication	PRESENCE optional},
 	...
 }
 

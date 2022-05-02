@@ -565,14 +565,21 @@ F1AP-Constants.id-TRP-MeasurementRequestList
 F1AP-Constants.id-MeasurementBeamInfoRequest
 F1AP-Constants.id-E-CID-ReportCharacteristics
 F1AP-Constants.id-ConfiguredTACIndication
-F1AP-Constants.id-Extended-GNB-DU-Name
 F1AP-Constants.id-Extended-GNB-CU-Name
+F1AP-Constants.id-Extended-GNB-DU-Name
 F1AP-Constants.id-F1CTransferPath
 F1AP-Constants.id-SFN-Offset
 F1AP-Constants.id-TransmissionStopIndicator
 F1AP-Constants.id-SrsFrequency
 F1AP-Constants.id-SCGIndicator
 F1AP-Constants.id-EstimatedArrivalProbability
+F1AP-Constants.id-TRPType
+F1AP-Constants.id-SRSSpatialRelationPerSRSResource
+F1AP-Constants.id-PDCPTerminatingNodeDLTNLAddrInfo
+F1AP-Constants.id-ENBDLTNLAddress
+F1AP-Constants.id-PosMeasurementPeriodicityExtended
+F1AP-Constants.id-PRS-Resource-ID
+F1AP-Constants.id-LocationMeasurementInformation
 F1AP-Containers.F1AP-PROTOCOL-IES
 F1AP-Containers.F1AP-PROTOCOL-IES-PAIR
 F1AP-Containers.F1AP-PROTOCOL-EXTENSION
@@ -886,6 +893,7 @@ F1AP-IEs.LCStoGCSTranslationList
 F1AP-IEs.LCStoGCSTranslation-ExtIEs
 F1AP-IEs.LMF-MeasurementID
 F1AP-IEs.LMF-UE-MeasurementID
+F1AP-IEs.LocationMeasurementInformation
 F1AP-IEs.LocationUncertainty-ExtIEs
 F1AP-IEs.LongDRXCycleLength
 F1AP-IEs.LowerLayerPresenceStatusChange
@@ -997,6 +1005,7 @@ F1AP-IEs.PosAssistanceInformationFailureList
 F1AP-IEs.PosBroadcast
 F1AP-IEs.PositioningBroadcastCells
 F1AP-IEs.MeasurementPeriodicity
+F1AP-IEs.MeasurementPeriodicityExtended
 F1AP-IEs.PosMeasurementQuantities
 F1AP-IEs.PosMeasurementQuantities-ItemExtIEs
 F1AP-IEs.PosMeasurementResult
@@ -1183,6 +1192,9 @@ F1AP-IEs.SpatialDirectionInformation-ExtIEs
 F1AP-IEs.SpatialRelationInfo-ExtIEs
 F1AP-IEs.SpatialRelationforResourceID
 F1AP-IEs.SpatialRelationforResourceIDItem-ExtIEs
+F1AP-IEs.SpatialRelationPerSRSResource-ExtIEs
+F1AP-IEs.SpatialRelationPerSRSResource-List
+F1AP-IEs.SpatialRelationPerSRSResourceItem-ExtIEs
 F1AP-IEs.SpatialInformationPos-ExtIEs
 F1AP-IEs.SpectrumSharingGroupID
 F1AP-IEs.SRBID
@@ -1285,6 +1297,7 @@ F1AP-IEs.TRPPositionReferenced-ExtIEs
 F1AP-IEs.TRPReferencePointType-ExtIEs
 F1AP-IEs.TypeOfError
 F1AP-IEs.Transport-Layer-Address-Info-ExtIEs
+F1AP-IEs.TRPType
 F1AP-IEs.TSCAssistanceInformation-ExtIEs
 F1AP-IEs.TSCTrafficCharacteristics-ExtIEs
 F1AP-IEs.UAC-Assistance-InfoExtIEs
@@ -1890,6 +1903,8 @@ F1AP-IEs.SNSSAI
 F1AP-IEs.SpatialDirectionInformation
 F1AP-IEs.SpatialRelationInfo
 F1AP-IEs.SpatialRelationforResourceIDItem
+F1AP-IEs.SpatialRelationPerSRSResource
+F1AP-IEs.SpatialRelationPerSRSResourceItem
 F1AP-IEs.SpatialRelationPos
 F1AP-IEs.SRBs-FailedToBeSetup-Item
 F1AP-IEs.SRBs-FailedToBeSetupMod-Item

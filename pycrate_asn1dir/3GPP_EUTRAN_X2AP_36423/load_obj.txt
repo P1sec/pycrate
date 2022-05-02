@@ -517,6 +517,11 @@ X2AP-Constants.id-TraceCollectionEntityURI
 X2AP-Constants.id-SFN-Offset
 X2AP-Constants.id-CHO-DC-EarlyDataForwarding
 X2AP-Constants.id-IMSvoiceEPSfallbackfrom5G
+X2AP-Constants.id-AdditionLocationInformation
+X2AP-Constants.id-DirectForwardingPathAvailability
+X2AP-Constants.id-sourceNG-RAN-node-id
+X2AP-Constants.id-SourceDLForwardingIPAddress
+X2AP-Constants.id-SourceNodeDLForwardingIPAddress
 X2AP-Containers.X2AP-PROTOCOL-IES
 X2AP-Containers.X2AP-PROTOCOL-IES-PAIR
 X2AP-Containers.X2AP-PROTOCOL-EXTENSION
@@ -530,6 +535,7 @@ X2AP-IEs.ABSInformationFDD-ExtIEs
 X2AP-IEs.ABSInformationTDD-ExtIEs
 X2AP-IEs.ABS-Status-ExtIEs
 X2AP-IEs.ActivationID
+X2AP-IEs.AdditionLocationInformation
 X2AP-IEs.AdditionalRRMPriorityIndex
 X2AP-IEs.AdditionalSpecialSubframe-Info-ExtIEs
 X2AP-IEs.AdditionalSpecialSubframePatterns
@@ -613,6 +619,7 @@ X2AP-IEs.DAPSResponseInfo-ExtIEs
 X2AP-IEs.DeactivationIndication
 X2AP-IEs.DeliveryStatus-ExtIEs
 X2AP-IEs.DesiredActNotificationLevel
+X2AP-IEs.DirectForwardingPathAvailability
 X2AP-IEs.DL-ABS-status
 X2AP-IEs.DL-Forwarding
 X2AP-IEs.DL-GBR-PRB-usage
@@ -680,6 +687,7 @@ X2AP-IEs.FrequencyShift7p5khz
 X2AP-IEs.GBR-QosInformation-ExtIEs
 X2AP-IEs.GlobalENB-ID-ExtIEs
 X2AP-IEs.GlobalGNB-ID-ExtIEs
+X2AP-IEs.Global-RAN-NODE-ID-ExtIEs
 X2AP-IEs.GNBOverloadInformation
 X2AP-IEs.GTPTLAs
 X2AP-IEs.GTPTLA-Item-ExtIEs
@@ -1022,6 +1030,7 @@ X2AP-PDU-Contents.UE-ContextInformation-ExtIEs
 X2AP-PDU-Contents.E-RABs-ToBeSetup-ItemIEs
 X2AP-PDU-Contents.E-RABs-ToBeSetup-ItemExtIEs
 X2AP-PDU-Contents.MobilityInformation
+X2AP-PDU-Contents.SourceDLForwardingIPAddress
 X2AP-PDU-Contents.UE-ContextReferenceAtSeNB-ItemExtIEs
 X2AP-PDU-Contents.UE-ContextReferenceAtWT-ItemExtIEs
 X2AP-PDU-Contents.UE-ContextReferenceAtSgNB-ItemExtIEs
@@ -1451,6 +1460,7 @@ X2AP-IEs.FreqBandNrItem
 X2AP-IEs.GBR-QosInformation
 X2AP-IEs.GlobalENB-ID
 X2AP-IEs.GlobalGNB-ID
+X2AP-IEs.Global-RAN-NODE-ID
 X2AP-IEs.GTPTLA-Item
 X2AP-IEs.GTPtunnelEndpoint
 X2AP-IEs.GU-Group-ID

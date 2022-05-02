@@ -616,14 +616,21 @@ id-TRP-MeasurementRequestList						ProtocolIE-ID ::= 422
 id-MeasurementBeamInfoRequest						ProtocolIE-ID ::= 423
 id-E-CID-ReportCharacteristics						ProtocolIE-ID ::= 424
 id-ConfiguredTACIndication							ProtocolIE-ID ::= 425
-id-Extended-GNB-DU-Name								ProtocolIE-ID ::= 426
-id-Extended-GNB-CU-Name								ProtocolIE-ID ::= 427
+id-Extended-GNB-CU-Name								ProtocolIE-ID ::= 426
+id-Extended-GNB-DU-Name								ProtocolIE-ID ::= 427
 id-F1CTransferPath									ProtocolIE-ID ::= 428
 id-SFN-Offset										ProtocolIE-ID ::= 429
 id-TransmissionStopIndicator						ProtocolIE-ID ::= 430
 id-SrsFrequency										ProtocolIE-ID ::= 431
 id-SCGIndicator										ProtocolIE-ID ::= 432
 id-EstimatedArrivalProbability						ProtocolIE-ID ::= 433
+id-TRPType											ProtocolIE-ID ::= 434
+id-SRSSpatialRelationPerSRSResource					ProtocolIE-ID ::= 435
+id-PDCPTerminatingNodeDLTNLAddrInfo					ProtocolIE-ID ::= 436
+id-ENBDLTNLAddress									ProtocolIE-ID ::= 437
+id-PosMeasurementPeriodicityExtended				ProtocolIE-ID ::= 438
+id-PRS-Resource-ID									ProtocolIE-ID ::= 439
+id-LocationMeasurementInformation					ProtocolIE-ID ::= 440
 
 
 END

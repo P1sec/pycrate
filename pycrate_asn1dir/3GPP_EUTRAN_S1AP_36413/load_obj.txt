@@ -429,6 +429,8 @@ S1AP-Constants.id-WUS-Assistance-Information
 S1AP-Constants.id-NB-IoT-PagingDRX
 S1AP-Constants.id-TraceCollectionEntityURI
 S1AP-Constants.id-EmergencyIndicator
+S1AP-Constants.id-UERadioCapabilityForPaging-NR-Format
+S1AP-Constants.id-SourceTransportLayerAddress
 S1AP-Containers.S1AP-PROTOCOL-IES
 S1AP-Containers.S1AP-PROTOCOL-IES-PAIR
 S1AP-Containers.S1AP-PROTOCOL-EXTENSION

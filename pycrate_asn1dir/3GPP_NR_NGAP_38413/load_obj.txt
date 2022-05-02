@@ -412,6 +412,12 @@ NGAP-Constants.id-QosFlowParametersList
 NGAP-Constants.id-QosFlowFeedbackList
 NGAP-Constants.id-BurstArrivalTimeDownlink
 NGAP-Constants.id-ExtendedUEIdentityIndexValue
+NGAP-Constants.id-PduSessionExpectedUEActivityBehaviour
+NGAP-Constants.id-MicoAllPLMN
+NGAP-Constants.id-QosFlowFailedToSetupList
+NGAP-Constants.id-SourceTNLAddrInfo
+NGAP-Constants.id-ExtendedReportIntervalMDT
+NGAP-Constants.id-SourceNodeID
 NGAP-Containers.NGAP-PROTOCOL-IES
 NGAP-Containers.NGAP-PROTOCOL-IES-PAIR
 NGAP-Containers.NGAP-PROTOCOL-EXTENSION
@@ -713,6 +719,7 @@ NGAP-IEs.MaskedIMEISV
 NGAP-IEs.MaximumDataBurstVolume
 NGAP-IEs.MessageIdentifier
 NGAP-IEs.MaximumIntegrityProtectedDataRate
+NGAP-IEs.MicoAllPLMN
 NGAP-IEs.MICOModeIndication
 NGAP-IEs.MobilityInformation
 NGAP-IEs.MobilityRestrictionList-ExtIEs
@@ -979,6 +986,7 @@ NGAP-IEs.RepetitionPeriod
 NGAP-IEs.ResetAll
 NGAP-IEs.ReportAmountMDT
 NGAP-IEs.ReportIntervalMDT
+NGAP-IEs.ExtendedReportIntervalMDT
 NGAP-IEs.ResetType-ExtIEs
 NGAP-IEs.RGLevelWirelineAccessCharacteristics
 NGAP-IEs.RNC-ID
@@ -1023,6 +1031,7 @@ NGAP-IEs.SONInformationReply-ExtIEs
 NGAP-IEs.SONInformationReport-ExtIEs
 NGAP-IEs.SONInformationRequest
 NGAP-IEs.SourceNGRANNode-ToTargetNGRANNode-TransparentContainer-ExtIEs
+NGAP-IEs.SourceNodeID-ExtIEs
 NGAP-IEs.SourceOfUEActivityBehaviourInformation
 NGAP-IEs.SourceRANNodeID-ExtIEs
 NGAP-IEs.SourceToTarget-TransparentContainer
@@ -1615,6 +1624,7 @@ NGAP-IEs.SONInformation
 NGAP-IEs.SONInformationReply
 NGAP-IEs.SONInformationReport
 NGAP-IEs.SourceNGRANNode-ToTargetNGRANNode-TransparentContainer
+NGAP-IEs.SourceNodeID
 NGAP-IEs.SourceRANNodeID
 NGAP-IEs.SourceToTarget-AMFInformationReroute
 NGAP-IEs.SupportedTAItem

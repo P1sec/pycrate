@@ -549,6 +549,10 @@ id-TraceCollectionEntityURI													ProtocolIE-ID ::= 405
 id-SFN-Offset																ProtocolIE-ID ::= 406
 id-CHO-DC-EarlyDataForwarding												ProtocolIE-ID ::= 407
 id-IMSvoiceEPSfallbackfrom5G												ProtocolIE-ID ::= 408
-
+id-AdditionLocationInformation												ProtocolIE-ID ::= 409
+id-DirectForwardingPathAvailability											ProtocolIE-ID ::= 410
+id-sourceNG-RAN-node-id														ProtocolIE-ID ::= 411
+id-SourceDLForwardingIPAddress												ProtocolIE-ID ::= 412
+id-SourceNodeDLForwardingIPAddress											ProtocolIE-ID ::= 413
 
 END

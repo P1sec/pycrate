@@ -8,14 +8,14 @@ Contents
 Foreword	14
 1	Scope	15
 2	References	15
-3	Definitions and abbreviations	16
-3.1	Definitions	16
+3	Definitions and abbreviations	17
+3.1	Definitions	17
 3.2	Abbreviations	18
 4	General	19
 4.1	Procedure specification principles	19
 4.2	Forwards and backwards compatibility	19
 4.3	Specification notations	19
-5	F1AP services	19
+5	F1AP services	20
 6	Services expected from signalling transport	20
 7	Functions of F1AP	20
 8	F1AP procedures	20
@@ -82,12 +82,12 @@ Foreword	14
 8.3.2.1	General	46
 8.3.2.2	Successful Operation	46
 8.3.2.3	Abnormal Conditions	46
-8.3.3	UE Context Release (gNB-CU initiated)	46
-8.3.3.1	General	46
+8.3.3	UE Context Release (gNB-CU initiated)	47
+8.3.3.1	General	47
 8.3.3.2	Successful Operation	47
 8.3.3.4	Abnormal Conditions	47
-8.3.4	UE Context Modification (gNB-CU initiated)	47
-8.3.4.1	General	47
+8.3.4	UE Context Modification (gNB-CU initiated)	48
+8.3.4.1	General	48
 8.3.4.2	Successful Operation	48
 8.3.4.3	Unsuccessful Operation	54
 8.3.4.4	Abnormal Conditions	55
@@ -232,7 +232,7 @@ Foreword	14
 8.13.4.4	Abnormal Conditions	80
 8.13.5	Positioning Measurement Abort	80
 8.13.5.1	General	80
-8.13.5.2	Successful Operation	80
+8.13.5.2	Successful Operation	81
 8.13.5.3	Unsuccessful Operation	81
 8.13.5.4	Abnormal Conditions	81
 8.13.6	Positioning Measurement Failure Indication	81
@@ -240,394 +240,395 @@ Foreword	14
 8.13.6.2	Successful Operation	81
 8.13.6.3	Unsuccessful Operation	81
 8.13.6.4	Abnormal Conditions	81
-8.13.7	Positioning Measurement Update	81
-8.13.7.1	General	81
+8.13.7	Positioning Measurement Update	82
+8.13.7.1	General	82
 8.13.7.2	Successful Operation	82
 8.13.7.3	Unsuccessful Operation	82
 8.13.7.4	Abnormal Conditions	82
 8.13.8	TRP Information Exchange	82
 8.13.8.1	General	82
-8.13.8.2	Successful Operation	82
+8.13.8.2	Successful Operation	83
 8.13.8.3	Unsuccessful Operation	83
-8.13.9	Positioning Information Exchange	83
-8.13.9.1	General	83
-8.13.9.2	Successful Operation	83
+8.13.9	Positioning Information Exchange	84
+8.13.9.1	General	84
+8.13.9.2	Successful Operation	84
 8.13.9.3	Unsuccessful Operation	84
-8.13.10	Positioning Activation	84
-8.13.10.1	General	84
-8.13.10.2	Successful Operation	84
+8.13.10	Positioning Activation	85
+8.13.10.1	General	85
+8.13.10.2	Successful Operation	85
 8.13.10.3	Unsuccessful Operation	85
-8.13.10.4	Abnormal Conditions	85
-8.13.11	Positioning Deactivation	85
-8.13.11.1	General	85
-8.13.11.2	Successful Operation	85
-8.13.11.3	Unsuccessful Operation	85
+8.13.10.4	Abnormal Conditions	86
+8.13.11	Positioning Deactivation	86
+8.13.11.1	General	86
+8.13.11.2	Successful Operation	86
+8.13.11.3	Unsuccessful Operation	86
 8.13.11.4	Abnormal Conditions	86
 8.13.12	E-CID Measurement Initiation	86
 8.13.12.1	General	86
-8.13.12.2	Successful Operation	86
-8.13.12.3	Unsuccessful Operation	86
+8.13.12.2	Successful Operation	87
+8.13.12.3	Unsuccessful Operation	87
 8.13.13	E-CID Measurement Failure Indication	87
 8.13.13.1	General	87
-8.13.13.2	Successful Operation	87
-8.13.13.3	Unsuccessful Operation	87
-8.13.14	E-CID Measurement Report	87
-8.13.14.1	General	87
-8.13.14.2	Successful Operation	87
+8.13.13.2	Successful Operation	88
+8.13.13.3	Unsuccessful Operation	88
+8.13.14	E-CID Measurement Report	88
+8.13.14.1	General	88
+8.13.14.2	Successful Operation	88
 8.13.14.3	Unsuccessful Operation	88
-8.13.15	E-CID Measurement Termination	88
-8.13.15.1	General	88
-8.13.15.2	Successful Operation	88
-8.13.15.3	Unsuccessful Operation	88
-8.13.16	Positioning Information Update	88
-8.13.16.1	General	88
-8.13.16.2	Successful Operation	88
-8.13.16.3	Unsuccessful Operation	89
-8.13.16.4	Abnormal Conditions	89
-9	Elements for F1AP Communication	89
-9.1	General	89
-9.2	Message Functional Definition and Content	89
-9.2.1	Interface Management messages	89
-9.2.1.1	RESET	89
-9.2.1.2	RESET ACKNOWLEDGE	90
-9.2.1.3	ERROR INDICATION	90
-9.2.1.4	F1 SETUP REQUEST	91
-9.2.1.5	F1 SETUP RESPONSE	92
-9.2.1.6	F1 SETUP FAILURE	93
-9.2.1.7	GNB-DU CONFIGURATION UPDATE	93
-9.2.1.8	GNB-DU CONFIGURATION UPDATE ACKNOWLEDGE	95
-9.2.1.9	GNB-DU CONFIGURATION UPDATE FAILURE	96
-9.2.1.10	GNB-CU CONFIGURATION UPDATE	96
-9.2.1.11	GNB-CU CONFIGURATION UPDATE ACKNOWLEDGE	100
-9.2.1.12	GNB-CU CONFIGURATION UPDATE FAILURE	101
-9.2.1.13	GNB-DU RESOURCE COORDINATION REQUEST	101
-9.2.1.14	GNB-DU RESOURCE COORDINATION RESPONSE	101
-9.2.1.15	GNB-DU STATUS INDICATION	102
-9.2.1.16	F1 REMOVAL REQUEST	102
-9.2.1.17	F1 REMOVAL RESPONSE	102
-9.2.1.18	F1 REMOVAL FAILURE	102
-9.2.1.19	NETWORK ACCESS RATE REDUCTION	103
-9.2.1.20	RESOURCE STATUS REQUEST	103
-9.2.1.21	RESOURCE STATUS RESPONSE	105
-9.2.1.22	RESOURCE STATUS FAILURE	105
-9.2.1.23	RESOURCE STATUS UPDATE	106
-9.2.2	UE Context Management messages	106
-9.2.2.1	UE CONTEXT SETUP REQUEST	106
-9.2.2.2	UE CONTEXT SETUP RESPONSE	111
-9.2.2.3	UE CONTEXT SETUP FAILURE	114
-9.2.2.4	UE CONTEXT RELEASE REQUEST	115
-9.2.2.5	UE CONTEXT RELEASE COMMAND	115
-9.2.2.6	UE CONTEXT RELEASE COMPLETE	116
-9.2.2.7	UE CONTEXT MODIFICATION REQUEST	117
-9.2.2.8	UE CONTEXT MODIFICATION RESPONSE	125
-9.2.2.9	UE CONTEXT MODIFICATION FAILURE	130
-9.2.2.10	UE CONTEXT MODIFICATION REQUIRED	130
-9.2.2.11	UE CONTEXT MODIFICATION CONFIRM	132
-9.2.2.11A	UE CONTEXT MODIFICATION REFUSE	134
-9.2.2.12	UE INACTIVITY NOTIFICATION	134
-9.2.2.13	 NOTIFY	135
-9.2.2.14	ACCESS SUCCESS	135
-9.2.3	RRC Message Transfer messages	135
-9.2.3.1	INITIAL UL RRC MESSAGE TRANSFER	135
-9.2.3.2	DL RRC MESSAGE TRANSFER	136
-9.2.3.3	UL RRC MESSAGE TRANSFER	137
-9.2.3.4	RRC DELIVERY REPORT	137
-9.2.4	Warning Message Transmission Messages	137
-9.2.4.1	WRITE-REPLACE WARNING REQUEST	137
-9.2.4.2	WRITE-REPLACE WARNING RESPONSE	138
-9.2.4.3	PWS CANCEL REQUEST	139
-9.2.4.4	PWS CANCEL RESPONSE	140
-9.2.4.5	PWS RESTART INDICATION	141
-9.2.4.6	PWS FAILURE INDICATION	142
-9.2.5	System Information messages	142
-9.2.5.1	SYSTEM INFORMATION DELIVERY COMMAND	142
-9.2.6	Paging messages	142
-9.2.6.1	PAGING	142
-9.2.7	Trace Messages	143
-9.2.7.1	TRACE START	143
-9.2.7.2	DEACTIVATE TRACE	143
-9.2.7.3	CELL TRAFFIC TRACE	143
-9.2.8	Radio Information Transfer messages	144
-9.2.8.1	DU-CU RADIO INFORMATION TRANSFER	144
-9.2.8.2	CU-DU RADIO INFORMATION TRANSFER	144
-9.2.9	IAB messages	145
-9.2.9.1	BAP MAPPING CONFIGURATION	145
-9.2.9.2	BAP MAPPING CONFIGURATION ACKNOWLEDGE	145
-9.2.9.2A	BAP MAPPING CONFIGURATION FAILURE	146
-9.2.9.3	GNB-DU RESOURCE CONFIGURATION	146
-9.2.9.4	GNB-DU RESOURCE CONFIGURATION ACKNOWLEDGE	149
-9.2.9.4A	GNB-DU RESOURCE CONFIGURATION FAILURE	149
-9.2.9.5	IAB TNL ADDRESS REQUEST	149
-9.2.9.6	IAB TNL ADDRESS RESPONSE	150
-9.2.9.6A	IAB TNL ADDRESS FAILURE	151
-9.2.9.7	IAB UP CONFIGURATION UPDATE REQUEST	151
-9.2.9.8	IAB UP CONFIGURATION UPDATE RESPONSE	152
-9.2.9.9	IAB UP CONFIGURATION UPDATE FAILURE	153
-9.2.10	Self Optimisation Support Messages	153
-9.2.10.1	ACCESS AND MOBILITY INDICATION	153
-9.2.11	Reference Time Information Reporting messages	154
-9.2.11.1	REFERENCE TIME INFORMATION REPORTING CONTROL	154
-9.2.11.2	REFERENCE TIME INFORMATION REPORT	154
-9.2.12	Messages for Positioning Procedures	155
-9.2.12.1	POSITIONING ASSISTANCE INFORMATION CONTROL	155
-9.2.12.2	POSITIONING ASSISTANCE INFORMATION FEEDBACK	155
-9.2.12.3	POSITIONING MEASUREMENT REQUEST	156
-9.2.12.4	POSITIONING MEASUREMENT RESPONSE	157
-9.2.12.5	POSITIONING MEASUREMENT FAILURE	157
-9.2.12.6	POSITIONING MEASUREMENT REPORT	158
-9.2.12.7	POSITIONING MEASUREMENT ABORT	158
-9.2.12.8	POSITIONING MEASUREMENT FAILURE INDICATION	158
-9.2.12.9	POSITIONING MEASUREMENT UPDATE	159
-9.2.12.10	TRP INFORMATION REQUEST	159
-9.2.12.11	TRP INFORMATION RESPONSE	160
-9.2.12.12	TRP INFORMATION FAILURE	160
-9.2.12.13	POSITIONING INFORMATION REQUEST	160
-9.2.12.14	POSITIONING INFORMATION RESPONSE	160
-9.2.12.15	POSITIONING INFORMATION FAILURE	161
-9.2.12.16	POSITIONING ACTIVATION REQUEST	161
-9.2.12.17	POSITIONING ACTIVATION RESPONSE	161
-9.2.12.18	POSITIONING ACTIVATION FAILURE	162
-9.2.12.19	POSITIONING DEACTIVATION	162
-9.2.12.20	E-CID MEASUREMENT INITIATION REQUEST	162
-9.2.12.21	E-CID MEASUREMENT INITIATION RESPONSE	163
-9.2.12.22	E-CID MEASUREMENT INITIATION FAILURE	164
-9.2.12.23	E-CID MEASUREMENT FAILURE INDICATION	164
-9.2.12.24	E-CID MEASUREMENT REPORT	164
-9.2.12.25	E-CID MEASUREMENT TERMINATION COMMAND	164
-9.2.12.26	POSITIONING INFORMATION UPDATE	165
-9.3	Information Element Definitions	165
-9.3.1	Radio Network Layer Related IEs	165
-9.3.1.1	Message Type	165
-9.3.1.2	Cause	165
-9.3.1.3	Criticality Diagnostics	168
-9.3.1.4	gNB-CU UE F1AP ID	169
-9.3.1.5	gNB-DU UE F1AP ID	169
-9.3.1.6	RRC-Container	170
-9.3.1.7	SRB ID	170
-9.3.1.8	DRB ID	170
-9.3.1.9	gNB-DU ID	170
-9.3.1.10	Served Cell Information	170
-9.3.1.11	Transmission Action Indicator	173
-9.3.1.12	NR CGI	173
-9.3.1.13	Time To wait	174
-9.3.1.14	PLMN Identity	174
-9.3.1.15	Transmission Bandwidth	174
-9.3.1.16	Void	174
-9.3.1.17	NR Frequency Info	174
-9.3.1.18	gNB-DU System Information	176
-9.3.1.19	E-UTRAN QoS	176
-9.3.1.20	Allocation and Retention Priority	176
-9.3.1.21	GBR QoS Information	177
-9.3.1.22	Bit Rate	178
-9.3.1.23	Transaction ID	178
-9.3.1.24	DRX Cycle	178
-9.3.1.25	CU to DU RRC Information	178
-9.3.1.26	DU to CU RRC Information	179
-9.3.1.27	RLC Mode	181
-9.3.1.28	SUL Information	181
-9.3.1.29	5GS TAC	182
-9.3.1.29a	Configured EPS TAC	182
-9.3.1.30	RRC Reconfiguration Complete Indicator	182
-9.3.1.31	UL Configuration	183
-9.3.1.32	C-RNTI	183
-9.3.1.33	Cell UL Configured	183
-9.3.1.34	RAT-Frequency Priority Information	183
-9.3.1.35	LCID	184
-9.3.1.36	Duplication activation	184
-9.3.1.37	Slice Support List	184
-9.3.1.38	S-NSSAI	184
-9.3.1.39	UE Identity Index value	184
-9.3.1.40	Paging DRX	185
-9.3.1.41	Paging Priority	185
-9.3.1.42	gNB-CU System Information	185
-9.3.1.43	RAN UE Paging identity	186
-9.3.1.44	CN UE Paging Identity	186
-9.3.1.45	QoS Flow Level QoS Parameters	186
-9.3.1.46	GBR QoS Flow Information	187
-9.3.1.47	Dynamic 5QI Descriptor	188
-9.3.1.48	NG-RAN Allocation and Retention Priority	190
-9.3.1.49	Non Dynamic 5QI Descriptor	190
-9.3.1.50	Maximum Packet Loss Rate	191
-9.3.1.51	Packet Delay Budget	192
-9.3.1.52	Packet Error Rate	192
-9.3.1.53	Averaging Window	192
-9.3.1.54	Maximum Data Burst Volume	192
-9.3.1.55	Masked IMEISV	192
-9.3.1.56	Notification Control	192
-9.3.1.57	RAN Area Code	193
-9.3.1.58	PWS System Information	193
-9.3.1.59	Repetition Period	193
-9.3.1.60	Number of Broadcasts Requested	193
-9.3.1.61	Void	194
-9.3.1.62	SIType List	194
-9.3.1.63	QoS Flow Identifier	194
-9.3.1.64	Served E-UTRA Cell Information	194
-9.3.1.65	Available PLMN List	194
-9.3.1.66	RLC Failure Indication	195
-9.3.1.67	Uplink TxDirectCurrentList Information	195
-9.3.1.68	Service Status	195
-9.3.1.69	RLC Status	195
-9.3.1.70	RRC Version	196
-9.3.1.71	RRC Delivery Status	196
-9.3.1.72	QoS Flow Mapping Indication	196
-9.3.1.73	Resource Coordination Transfer Information	196
-9.3.1.74	E-UTRA PRACH Configuration	196
-9.3.1.75	Resource Coordination E-UTRA Cell Information	197
-9.3.1.76	Extended Available PLMN List	199
-9.3.1.77	Associated SCell List	199
-9.3.1.78	Cell Direction	199
-9.3.1.79	Paging Origin	199
-9.3.1.80	E-UTRA Transmission Bandwidth	199
-9.3.1.81	Message Identifier	200
-9.3.1.82	Serial Number	200
-9.3.1.83	UAC Assistance Information	200
-9.3.1.84	UAC Action	201
-9.3.1.85	 UAC reduction Indication	201
-9.3.1.86	Additional SIB Message List	201
-9.3.1.87	Cell Type	202
-9.3.1.87a	Configured TAC Indication	202
-9.3.1.88	Trace Activation	202
-9.3.1.89	Intended TDD DL-UL Configuration	204
-9.3.1.90	Additional RRM Policy Index	204
-9.3.1.91	DU-CU RIM Information	205
-9.3.1.92	CU-DU RIM Information	205
-9.3.1.93	gNB Set ID	205
-9.3.1.94	Lower Layer Presence Status Change	205
-9.3.1.95	Traffic Mapping Information	206
-9.3.1.96	IP-to-layer-2 traffic mapping Information List	206
-9.3.1.97	IP Header Information	206
-9.3.1.98	BAP layer BH RLC channel mapping Information List	207
-9.3.1.99	Mapping Information to Remove	207
-9.3.1.100	Mapping Information Index	208
-9.3.1.101	IAB TNL Addresses Requested	208
-9.3.1.102	IAB TNL Address	208
-9.3.1.103	Uplink BH Non-UP Traffic Mapping	208
-9.3.1.104	Non-UP Traffic Type	209
-9.3.1.105	IAB Info IAB-donor-CU	209
-9.3.1.106	IAB Info IAB-DU	209
-9.3.1.107	gNB-DU Cell Resource Configuration	209
-9.3.1.108	Multiplexing Info	211
-9.3.1.109	IAB STC Info	211
-9.3.1.110	BAP Routing ID	212
-9.3.1.111	BAP Address	212
-9.3.1.112	BAP Path ID	213
-9.3.1.113	BH RLC Channel ID	213
-9.3.1.114	BH Information	213
-9.3.1.115	Control Plane Traffic Type	213
-9.3.1.116	NR V2X Services Authorized	214
-9.3.1.117	LTE V2X Services Authorized	214
-9.3.1.118	LTE UE Sidelink Aggregate Maximum Bit Rate	214
-9.3.1.119	NR UE Sidelink Aggregate Maximum Bit Rate	214
-9.3.1.120	SL DRB ID	214
-9.3.1.121	PC5 QoS Flow Identifier	215
-9.3.1.122	PC5 QoS Parameters	215
-9.3.1.123	Alternative QoS Parameters Set Index	215
-9.3.1.124	Alternative QoS Parameters Set Notify Index	216
-9.3.1.125	Alternative QoS Parameters Set List	216
-9.3.1.126	Non Dynamic PQI Descriptor	216
-9.3.1.127	Dynamic PQI Descriptor	217
-9.3.1.128	TNL Capacity Indicator	217
-9.3.1.129	Radio Resource Status	217
-9.3.1.130	Composite Available Capacity Group	218
-9.3.1.131	Composite Available Capacity	218
-9.3.1.132	Cell Capacity Class Value	218
-9.3.1.133	Capacity Value	219
-9.3.1.134	Slice Available Capacity	219
-9.3.1.135	Number of Active UEs	220
-9.3.1.136	Hardware Load Indicator	220
-9.3.1.137	NR Carrier List	220
-9.3.1.138	SSB Positions In Burst	221
-9.3.1.139	NR PRACH Configuration	221
-9.3.1.140	NR PRACH Configuration List	222
-9.3.1.141	TSC Traffic Characteristics	224
-9.3.1.142	TSC Assistance Information	224
-9.3.1.143	Periodicity	224
-9.3.1.144	Burst Arrival Time	224
-9.3.1.145	Extended Packet Delay Budget	224
-9.3.1.146	RLC Duplication Information	224
-9.3.1.147	Reporting Request Type	225
-9.3.1.148	Time Reference Information	225
-9.3.1.149	Reference Time	225
-9.3.1.150	MDT Configuration	226
-9.3.1.151	MDT PLMN List	226
-9.3.1.152	M5 Configuration	227
-9.3.1.153	M6 Configuration	227
-9.3.1.154	M7 Configuration	227
-9.3.1.155	NID	227
-9.3.1.156	NPN Support Information	227
-9.3.1.157	NPN Broadcast Information	228
-9.3.1.158	Broadcast SNPN ID List	228
-9.3.1.159	Broadcast NID List	228
-9.3.1.160	Broadcast CAG-Identifier List	228
-9.3.1.161	CAG ID	229
-9.3.1.162	Broadcast PNI-NPN ID Information	229
-9.3.1.163	Available SNPN ID List	229
-9.3.1.164	Void	229
-9.3.1.165	Extended Slice Support List	230
-9.3.1.166	Positioning Measurement Result	230
-9.3.1.167	UL Angle of Arrival	230
-9.3.1.168	UL RTOA Measurement	231
-9.3.1.169	Additional Path List	231
-9.3.1.170	gNB Rx-Tx Time Difference	231
-9.3.1.171	Time Stamp	232
-9.3.1.172	TRP Measurement Quality	232
-9.3.1.173	Measurement Beam Information	232
-9.3.1.174	NG-RAN Access Point Position	233
-9.3.1.175	Requested SRS Transmission Characteristics	233
-9.3.1.176	TRP Information	235
-9.3.1.177	PRS Configuration	235
-9.3.1.178	DL-PRS Muting Pattern	237
-9.3.1.179	Spatial Direction Information	237
-9.3.1.180	SRS Resource Set ID	237
-9.3.1.181	Spatial Relation Information	237
-9.3.1.182	SRS Resource Trigger	238
-9.3.1.183	Relative Time 1900	238
-9.3.1.184	Geographical Coordinates	239
-9.3.1.185	DL-PRS Resource Coordinates	240
-9.3.1.186	Relative Geodetic Location	240
-9.3.1.187	Relative Cartesian Location	241
-9.3.1.188	Reference Point	241
-9.3.1.189	Location Uncertainty	242
-9.3.1.190	NG-RAN High Accuracy Access Point Position	242
-9.3.1.191	Positioning Broadcast Cells	243
-9.3.1.192	 SRS Configuration	243
-9.3.1.193	SRS Resource	245
-9.3.1.194	Positioning SRS Resource	245
-9.3.1.195	SRS Resource Set	247
-9.3.1.196	Positioning SRS Resource Set	247
-9.3.1.197	TRP ID	247
-9.3.1.198	NR-PRS Beam Information	248
-9.3.1.199	E-CID Measurement Result	248
-9.3.1.200	Cell Portion ID	249
-9.3.1.201	Pathloss Reference Information	249
-9.3.1.202	SSB Information	249
-9.3.1.203	SSB Time/Frequency Configuration	250
-9.3.1.204	Search Window Information	250
-9.3.1.205	Extended gNB-DU Name	251
-9.3.1.206	Extended gNB-CU Name	251
-9.3.1.207	F1-C Transfer Path	251
-9.3.1.208	SFN Offset	252
-9.3.1.209	Transmission Stop Indicator	252
-9.3.2	Transport Network Layer Related IEs	252
-9.3.2.1	UP Transport Layer Information	252
-9.3.2.2	GTP-TEID	252
-9.3.2.3	Transport Layer Address	253
-9.3.2.4	CP Transport Layer Information	253
-9.3.2.5	Transport Layer Address Info	253
-9.3.2.6	URI	254
-9.4	Message and Information Element Abstract Syntax (with ASN.1)	254
-9.4.1	General	254
-9.4.2	Usage of private message mechanism for non-standard use	255
-9.4.3	Elementary Procedure Definitions	256
-9.4.4	PDU Definitions	269
-9.4.5	Information Element Definitions	338
-9.4.6	Common Definitions	441
-9.4.7	Constant Definitions	442
-9.4.8	Container Definitions	454
-9.5	Message Transfer Syntax	458
-9.6	Timers	458
-10	Handling of unknown, unforeseen and erroneous protocol data	458
-Annex A (informative): Change History	459
+8.13.15	E-CID Measurement Termination	89
+8.13.15.1	General	89
+8.13.15.2	Successful Operation	89
+8.13.15.3	Unsuccessful Operation	89
+8.13.16	Positioning Information Update	89
+8.13.16.1	General	89
+8.13.16.2	Successful Operation	89
+8.13.16.3	Unsuccessful Operation	90
+8.13.16.4	Abnormal Conditions	90
+9	Elements for F1AP Communication	90
+9.1	General	90
+9.2	Message Functional Definition and Content	90
+9.2.1	Interface Management messages	90
+9.2.1.1	RESET	90
+9.2.1.2	RESET ACKNOWLEDGE	91
+9.2.1.3	ERROR INDICATION	91
+9.2.1.4	F1 SETUP REQUEST	92
+9.2.1.5	F1 SETUP RESPONSE	93
+9.2.1.6	F1 SETUP FAILURE	94
+9.2.1.7	GNB-DU CONFIGURATION UPDATE	94
+9.2.1.8	GNB-DU CONFIGURATION UPDATE ACKNOWLEDGE	96
+9.2.1.9	GNB-DU CONFIGURATION UPDATE FAILURE	97
+9.2.1.10	GNB-CU CONFIGURATION UPDATE	97
+9.2.1.11	GNB-CU CONFIGURATION UPDATE ACKNOWLEDGE	101
+9.2.1.12	GNB-CU CONFIGURATION UPDATE FAILURE	102
+9.2.1.13	GNB-DU RESOURCE COORDINATION REQUEST	102
+9.2.1.14	GNB-DU RESOURCE COORDINATION RESPONSE	102
+9.2.1.15	GNB-DU STATUS INDICATION	103
+9.2.1.16	F1 REMOVAL REQUEST	103
+9.2.1.17	F1 REMOVAL RESPONSE	103
+9.2.1.18	F1 REMOVAL FAILURE	103
+9.2.1.19	NETWORK ACCESS RATE REDUCTION	104
+9.2.1.20	RESOURCE STATUS REQUEST	104
+9.2.1.21	RESOURCE STATUS RESPONSE	106
+9.2.1.22	RESOURCE STATUS FAILURE	106
+9.2.1.23	RESOURCE STATUS UPDATE	107
+9.2.2	UE Context Management messages	107
+9.2.2.1	UE CONTEXT SETUP REQUEST	107
+9.2.2.2	UE CONTEXT SETUP RESPONSE	112
+9.2.2.3	UE CONTEXT SETUP FAILURE	115
+9.2.2.4	UE CONTEXT RELEASE REQUEST	116
+9.2.2.5	UE CONTEXT RELEASE COMMAND	116
+9.2.2.6	UE CONTEXT RELEASE COMPLETE	117
+9.2.2.7	UE CONTEXT MODIFICATION REQUEST	118
+9.2.2.8	UE CONTEXT MODIFICATION RESPONSE	126
+9.2.2.9	UE CONTEXT MODIFICATION FAILURE	131
+9.2.2.10	UE CONTEXT MODIFICATION REQUIRED	131
+9.2.2.11	UE CONTEXT MODIFICATION CONFIRM	133
+9.2.2.11A	UE CONTEXT MODIFICATION REFUSE	135
+9.2.2.12	UE INACTIVITY NOTIFICATION	135
+9.2.2.13	 NOTIFY	136
+9.2.2.14	ACCESS SUCCESS	136
+9.2.3	RRC Message Transfer messages	136
+9.2.3.1	INITIAL UL RRC MESSAGE TRANSFER	136
+9.2.3.2	DL RRC MESSAGE TRANSFER	137
+9.2.3.3	UL RRC MESSAGE TRANSFER	138
+9.2.3.4	RRC DELIVERY REPORT	138
+9.2.4	Warning Message Transmission Messages	138
+9.2.4.1	WRITE-REPLACE WARNING REQUEST	138
+9.2.4.2	WRITE-REPLACE WARNING RESPONSE	139
+9.2.4.3	PWS CANCEL REQUEST	140
+9.2.4.4	PWS CANCEL RESPONSE	141
+9.2.4.5	PWS RESTART INDICATION	142
+9.2.4.6	PWS FAILURE INDICATION	143
+9.2.5	System Information messages	143
+9.2.5.1	SYSTEM INFORMATION DELIVERY COMMAND	143
+9.2.6	Paging messages	143
+9.2.6.1	PAGING	143
+9.2.7	Trace Messages	144
+9.2.7.1	TRACE START	144
+9.2.7.2	DEACTIVATE TRACE	144
+9.2.7.3	CELL TRAFFIC TRACE	144
+9.2.8	Radio Information Transfer messages	145
+9.2.8.1	DU-CU RADIO INFORMATION TRANSFER	145
+9.2.8.2	CU-DU RADIO INFORMATION TRANSFER	145
+9.2.9	IAB messages	146
+9.2.9.1	BAP MAPPING CONFIGURATION	146
+9.2.9.2	BAP MAPPING CONFIGURATION ACKNOWLEDGE	146
+9.2.9.2A	BAP MAPPING CONFIGURATION FAILURE	147
+9.2.9.3	GNB-DU RESOURCE CONFIGURATION	147
+9.2.9.4	GNB-DU RESOURCE CONFIGURATION ACKNOWLEDGE	150
+9.2.9.4A	GNB-DU RESOURCE CONFIGURATION FAILURE	150
+9.2.9.5	IAB TNL ADDRESS REQUEST	150
+9.2.9.6	IAB TNL ADDRESS RESPONSE	151
+9.2.9.6A	IAB TNL ADDRESS FAILURE	152
+9.2.9.7	IAB UP CONFIGURATION UPDATE REQUEST	152
+9.2.9.8	IAB UP CONFIGURATION UPDATE RESPONSE	153
+9.2.9.9	IAB UP CONFIGURATION UPDATE FAILURE	154
+9.2.10	Self Optimisation Support Messages	154
+9.2.10.1	ACCESS AND MOBILITY INDICATION	154
+9.2.11	Reference Time Information Reporting messages	155
+9.2.11.1	REFERENCE TIME INFORMATION REPORTING CONTROL	155
+9.2.11.2	REFERENCE TIME INFORMATION REPORT	155
+9.2.12	Messages for Positioning Procedures	156
+9.2.12.1	POSITIONING ASSISTANCE INFORMATION CONTROL	156
+9.2.12.2	POSITIONING ASSISTANCE INFORMATION FEEDBACK	156
+9.2.12.3	POSITIONING MEASUREMENT REQUEST	157
+9.2.12.4	POSITIONING MEASUREMENT RESPONSE	159
+9.2.12.5	POSITIONING MEASUREMENT FAILURE	159
+9.2.12.6	POSITIONING MEASUREMENT REPORT	160
+9.2.12.7	POSITIONING MEASUREMENT ABORT	160
+9.2.12.8	POSITIONING MEASUREMENT FAILURE INDICATION	161
+9.2.12.9	POSITIONING MEASUREMENT UPDATE	161
+9.2.12.10	TRP INFORMATION REQUEST	161
+9.2.12.11	TRP INFORMATION RESPONSE	162
+9.2.12.12	TRP INFORMATION FAILURE	162
+9.2.12.13	POSITIONING INFORMATION REQUEST	162
+9.2.12.14	POSITIONING INFORMATION RESPONSE	162
+9.2.12.15	POSITIONING INFORMATION FAILURE	163
+9.2.12.16	POSITIONING ACTIVATION REQUEST	163
+9.2.12.17	POSITIONING ACTIVATION RESPONSE	164
+9.2.12.18	POSITIONING ACTIVATION FAILURE	164
+9.2.12.19	POSITIONING DEACTIVATION	165
+9.2.12.20	E-CID MEASUREMENT INITIATION REQUEST	165
+9.2.12.21	E-CID MEASUREMENT INITIATION RESPONSE	166
+9.2.12.22	E-CID MEASUREMENT INITIATION FAILURE	166
+9.2.12.23	E-CID MEASUREMENT FAILURE INDICATION	166
+9.2.12.24	E-CID MEASUREMENT REPORT	166
+9.2.12.25	E-CID MEASUREMENT TERMINATION COMMAND	167
+9.2.12.26	POSITIONING INFORMATION UPDATE	167
+9.3	Information Element Definitions	167
+9.3.1	Radio Network Layer Related IEs	167
+9.3.1.1	Message Type	167
+9.3.1.2	Cause	168
+9.3.1.3	Criticality Diagnostics	170
+9.3.1.4	gNB-CU UE F1AP ID	171
+9.3.1.5	gNB-DU UE F1AP ID	171
+9.3.1.6	RRC-Container	172
+9.3.1.7	SRB ID	172
+9.3.1.8	DRB ID	172
+9.3.1.9	gNB-DU ID	172
+9.3.1.10	Served Cell Information	172
+9.3.1.11	Transmission Action Indicator	175
+9.3.1.12	NR CGI	175
+9.3.1.13	Time To wait	176
+9.3.1.14	PLMN Identity	176
+9.3.1.15	Transmission Bandwidth	176
+9.3.1.16	Void	176
+9.3.1.17	NR Frequency Info	177
+9.3.1.18	gNB-DU System Information	179
+9.3.1.19	E-UTRAN QoS	179
+9.3.1.20	Allocation and Retention Priority	180
+9.3.1.21	GBR QoS Information	181
+9.3.1.22	Bit Rate	182
+9.3.1.23	Transaction ID	182
+9.3.1.24	DRX Cycle	182
+9.3.1.25	CU to DU RRC Information	182
+9.3.1.26	DU to CU RRC Information	183
+9.3.1.27	RLC Mode	185
+9.3.1.28	SUL Information	185
+9.3.1.29	5GS TAC	186
+9.3.1.29a	Configured EPS TAC	186
+9.3.1.30	RRC Reconfiguration Complete Indicator	186
+9.3.1.31	UL Configuration	187
+9.3.1.32	C-RNTI	187
+9.3.1.33	Cell UL Configured	187
+9.3.1.34	RAT-Frequency Priority Information	187
+9.3.1.35	LCID	188
+9.3.1.36	Duplication activation	188
+9.3.1.37	Slice Support List	188
+9.3.1.38	S-NSSAI	188
+9.3.1.39	UE Identity Index value	188
+9.3.1.40	Paging DRX	189
+9.3.1.41	Paging Priority	189
+9.3.1.42	gNB-CU System Information	189
+9.3.1.43	RAN UE Paging identity	190
+9.3.1.44	CN UE Paging Identity	190
+9.3.1.45	QoS Flow Level QoS Parameters	190
+9.3.1.46	GBR QoS Flow Information	191
+9.3.1.47	Dynamic 5QI Descriptor	192
+9.3.1.48	NG-RAN Allocation and Retention Priority	194
+9.3.1.49	Non Dynamic 5QI Descriptor	194
+9.3.1.50	Maximum Packet Loss Rate	195
+9.3.1.51	Packet Delay Budget	196
+9.3.1.52	Packet Error Rate	196
+9.3.1.53	Averaging Window	196
+9.3.1.54	Maximum Data Burst Volume	196
+9.3.1.55	Masked IMEISV	196
+9.3.1.56	Notification Control	196
+9.3.1.57	RAN Area Code	197
+9.3.1.58	PWS System Information	197
+9.3.1.59	Repetition Period	197
+9.3.1.60	Number of Broadcasts Requested	197
+9.3.1.61	Void	198
+9.3.1.62	SIType List	198
+9.3.1.63	QoS Flow Identifier	198
+9.3.1.64	Served E-UTRA Cell Information	198
+9.3.1.65	Available PLMN List	198
+9.3.1.66	RLC Failure Indication	199
+9.3.1.67	Uplink TxDirectCurrentList Information	199
+9.3.1.68	Service Status	199
+9.3.1.69	RLC Status	199
+9.3.1.70	RRC Version	200
+9.3.1.71	RRC Delivery Status	200
+9.3.1.72	QoS Flow Mapping Indication	200
+9.3.1.73	Resource Coordination Transfer Information	200
+9.3.1.74	E-UTRA PRACH Configuration	200
+9.3.1.75	Resource Coordination E-UTRA Cell Information	201
+9.3.1.76	Extended Available PLMN List	203
+9.3.1.77	Associated SCell List	203
+9.3.1.78	Cell Direction	203
+9.3.1.79	Paging Origin	203
+9.3.1.80	E-UTRA Transmission Bandwidth	203
+9.3.1.81	Message Identifier	204
+9.3.1.82	Serial Number	204
+9.3.1.83	UAC Assistance Information	204
+9.3.1.84	UAC Action	205
+9.3.1.85	 UAC reduction Indication	205
+9.3.1.86	Additional SIB Message List	205
+9.3.1.87	Cell Type	206
+9.3.1.87a	Configured TAC Indication	206
+9.3.1.88	Trace Activation	206
+9.3.1.89	Intended TDD DL-UL Configuration	208
+9.3.1.90	Additional RRM Policy Index	208
+9.3.1.91	DU-CU RIM Information	209
+9.3.1.92	CU-DU RIM Information	209
+9.3.1.93	gNB Set ID	209
+9.3.1.94	Lower Layer Presence Status Change	209
+9.3.1.95	Traffic Mapping Information	210
+9.3.1.96	IP-to-layer-2 traffic mapping Information List	210
+9.3.1.97	IP Header Information	210
+9.3.1.98	BAP layer BH RLC channel mapping Information List	211
+9.3.1.99	Mapping Information to Remove	211
+9.3.1.100	Mapping Information Index	212
+9.3.1.101	IAB TNL Addresses Requested	212
+9.3.1.102	IAB TNL Address	212
+9.3.1.103	Uplink BH Non-UP Traffic Mapping	212
+9.3.1.104	Non-UP Traffic Type	213
+9.3.1.105	IAB Info IAB-donor-CU	213
+9.3.1.106	IAB Info IAB-DU	213
+9.3.1.107	gNB-DU Cell Resource Configuration	213
+9.3.1.108	Multiplexing Info	215
+9.3.1.109	IAB STC Info	215
+9.3.1.110	BAP Routing ID	216
+9.3.1.111	BAP Address	216
+9.3.1.112	BAP Path ID	217
+9.3.1.113	BH RLC Channel ID	217
+9.3.1.114	BH Information	217
+9.3.1.115	Control Plane Traffic Type	217
+9.3.1.116	NR V2X Services Authorized	218
+9.3.1.117	LTE V2X Services Authorized	218
+9.3.1.118	LTE UE Sidelink Aggregate Maximum Bit Rate	218
+9.3.1.119	NR UE Sidelink Aggregate Maximum Bit Rate	218
+9.3.1.120	SL DRB ID	218
+9.3.1.121	PC5 QoS Flow Identifier	219
+9.3.1.122	PC5 QoS Parameters	219
+9.3.1.123	Alternative QoS Parameters Set Index	219
+9.3.1.124	Alternative QoS Parameters Set Notify Index	220
+9.3.1.125	Alternative QoS Parameters Set List	220
+9.3.1.126	Non Dynamic PQI Descriptor	220
+9.3.1.127	Dynamic PQI Descriptor	221
+9.3.1.128	TNL Capacity Indicator	221
+9.3.1.129	Radio Resource Status	221
+9.3.1.130	Composite Available Capacity Group	222
+9.3.1.131	Composite Available Capacity	222
+9.3.1.132	Cell Capacity Class Value	222
+9.3.1.133	Capacity Value	223
+9.3.1.134	Slice Available Capacity	223
+9.3.1.135	Number of Active UEs	224
+9.3.1.136	Hardware Load Indicator	224
+9.3.1.137	NR Carrier List	224
+9.3.1.138	SSB Positions In Burst	225
+9.3.1.139	NR PRACH Configuration	225
+9.3.1.140	NR PRACH Configuration List	226
+9.3.1.141	TSC Traffic Characteristics	228
+9.3.1.142	TSC Assistance Information	228
+9.3.1.143	Periodicity	228
+9.3.1.144	Burst Arrival Time	228
+9.3.1.145	Extended Packet Delay Budget	228
+9.3.1.146	RLC Duplication Information	228
+9.3.1.147	Reporting Request Type	229
+9.3.1.148	Time Reference Information	229
+9.3.1.149	Reference Time	229
+9.3.1.150	MDT Configuration	230
+9.3.1.151	MDT PLMN List	230
+9.3.1.152	M5 Configuration	231
+9.3.1.153	M6 Configuration	231
+9.3.1.154	M7 Configuration	231
+9.3.1.155	NID	231
+9.3.1.156	NPN Support Information	231
+9.3.1.157	NPN Broadcast Information	232
+9.3.1.158	Broadcast SNPN ID List	232
+9.3.1.159	Broadcast NID List	232
+9.3.1.160	Broadcast CAG-Identifier List	232
+9.3.1.161	CAG ID	233
+9.3.1.162	Broadcast PNI-NPN ID Information	233
+9.3.1.163	Available SNPN ID List	233
+9.3.1.164	Void	233
+9.3.1.165	Extended Slice Support List	234
+9.3.1.166	Positioning Measurement Result	234
+9.3.1.167	UL Angle of Arrival	234
+9.3.1.168	UL RTOA Measurement	235
+9.3.1.169	Additional Path List	235
+9.3.1.170	gNB Rx-Tx Time Difference	235
+9.3.1.171	Time Stamp	236
+9.3.1.172	TRP Measurement Quality	236
+9.3.1.173	Measurement Beam Information	236
+9.3.1.174	NG-RAN Access Point Position	237
+9.3.1.175	Requested SRS Transmission Characteristics	237
+9.3.1.176	TRP Information	239
+9.3.1.177	PRS Configuration	239
+9.3.1.178	DL-PRS Muting Pattern	241
+9.3.1.179	Spatial Direction Information	241
+9.3.1.180	SRS Resource Set ID	241
+9.3.1.181	Spatial Relation Information	241
+9.3.1.182	SRS Resource Trigger	242
+9.3.1.183	Relative Time 1900	242
+9.3.1.184	Geographical Coordinates	243
+9.3.1.185	DL-PRS Resource Coordinates	244
+9.3.1.186	Relative Geodetic Location	244
+9.3.1.187	Relative Cartesian Location	245
+9.3.1.188	Reference Point	245
+9.3.1.189	Location Uncertainty	246
+9.3.1.190	NG-RAN High Accuracy Access Point Position	246
+9.3.1.191	Positioning Broadcast Cells	247
+9.3.1.192	 SRS Configuration	247
+9.3.1.193	SRS Resource	249
+9.3.1.194	Positioning SRS Resource	249
+9.3.1.195	SRS Resource Set	251
+9.3.1.196	Positioning SRS Resource Set	251
+9.3.1.197	TRP ID	251
+9.3.1.198	NR-PRS Beam Information	252
+9.3.1.199	E-CID Measurement Result	253
+9.3.1.200	Cell Portion ID	253
+9.3.1.201	Pathloss Reference Information	253
+9.3.1.202	SSB Information	254
+9.3.1.203	SSB Time/Frequency Configuration	254
+9.3.1.204	Search Window Information	254
+9.3.1.205	Extended gNB-DU Name	255
+9.3.1.206	Extended gNB-CU Name	255
+9.3.1.207	F1-C Transfer Path	255
+9.3.1.208	SFN Offset	256
+9.3.1.209	Transmission Stop Indicator	256
+9.3.1.210	Spatial Relation Information per SRS Resource	256
+9.3.2	Transport Network Layer Related IEs	257
+9.3.2.1	UP Transport Layer Information	257
+9.3.2.2	GTP-TEID	257
+9.3.2.3	Transport Layer Address	258
+9.3.2.4	CP Transport Layer Information	258
+9.3.2.5	Transport Layer Address Info	258
+9.3.2.6	URI	259
+9.4	Message and Information Element Abstract Syntax (with ASN.1)	259
+9.4.1	General	259
+9.4.2	Usage of private message mechanism for non-standard use	260
+9.4.3	Elementary Procedure Definitions	261
+9.4.4	PDU Definitions	274
+9.4.5	Information Element Definitions	344
+9.4.6	Common Definitions	448
+9.4.7	Constant Definitions	448
+9.4.8	Container Definitions	460
+9.5	Message Transfer Syntax	465
+9.6	Timers	465
+10	Handling of unknown, unforeseen and erroneous protocol data	465
+Annex A (informative):	Change History	466
 	
 Foreword
 This Technical Specification has been produced by the 3rd Generation Partnership Project (3GPP).
@@ -688,6 +689,7 @@ The following documents contain provisions which, through reference in this text
 [39]	3GPP TS 37.355: "LTE Positioning Protocol (LPP)".
 [40]	3GPP TS 23.287: "Architecture enhancements for 5G System (5GS) to support Vehicle-to-Everything (V2X) services".
 [41]	3GPP TS 36.331: "Evolved Universal Terrestrial Radio Access (E-UTRA); Radio Resource Control (RRC); Protocol specification".
+[42]	3GPP TS 38.305: "NG Radio Access Network (NG-RAN); Stage 2 functional specification of User Equipment (UE) positioning in NG-RAN".
 
 3	Definitions and abbreviations
 3.1	Definitions
@@ -1174,18 +1176,18 @@ Figure 8.2.8-1: F1 Removal, gNB-DU initiated, successful operation
 
 Figure 8.2.8.2-2: F1 Removal, gNB-CU initiated, successful operation
 Successful F1 Removal, gNB-DU initiated
-The gNB-DU initiates the procedure by sending the F1 REMOVAL REQUEST message to the gNB-CU. Upon reception of the F1 REMOVAL REQUEST message the gNB-CU shall reply with the F1 REMOVAL RESPONSE message. After receiving the F1 REMOVAL RESPONSE message, the gNB-DU may initiate removal of the TNL association towards the gNB-CU, if applicable, and may remove all resources associated with that signaling connection. The gNB-CU may then remove all resources associated with that interface instance.
+The gNB-DU initiates the procedure by sending the F1 REMOVAL REQUEST message to the gNB-CU. Upon reception of the F1 REMOVAL REQUEST message the gNB-CU shall reply with the F1 REMOVAL RESPONSE message. After receiving the F1 REMOVAL RESPONSE message, the gNB-DU may initiate removal of the TNL association towards the gNB-CU, if applicable, and may remove all resources associated with that interface instance. The gNB-CU may then remove all resources associated with that interface instance.
 Successful F1 Removal, gNB-CU initiated
-The gNB-CU initiates the procedure by sending the F1 REMOVAL REQUEST message to the gNB-DU. Upon reception of the F1 REMOVAL REQUEST message the gNB-DU shall reply with the F1 REMOVAL RESPONSE message. After receiving the F1 REMOVAL RESPONSE message, the gNB-CU may initiate removal of the TNL association towards the gNB-DU, if applicable, and may remove all resources associated with that signaling connection. The gNB-DU may then remove all resources associated with that interface instance.
+The gNB-CU initiates the procedure by sending the F1 REMOVAL REQUEST message to the gNB-DU. Upon reception of the F1 REMOVAL REQUEST message the gNB-DU shall reply with the F1 REMOVAL RESPONSE message. After receiving the F1 REMOVAL RESPONSE message, the gNB-CU may initiate removal of the TNL association towards the gNB-DU, if applicable, and may remove all resources associated with that interface instance. The gNB-DU may then remove all resources associated with that interface instance.
 8.2.8.3	Unsuccessful Operation
 
 Figure 8.2.8.3-1: F1 Removal, gNB-DU initiated, unsuccessful operation
 
 Figure 8.2.8.3-2: F1 Removal, gNB-CU initiated, unsuccessful operation
 Unsuccessful F1 Removal, gNB-DU initiated
-If the gNB-CU cannot accept to remove the signaling connection with the gNB-DU it shall respond with an F1 REMOVAL FAILURE message with an appropriate cause value.
+If the gNB-CU cannot accept to remove the interface instance with the gNB-DU it shall respond with an F1 REMOVAL FAILURE message with an appropriate cause value.
 Unsuccessful F1 Removal, gNB-CU initiated
-If the gNB-DU cannot accept to remove the signaling connection with the gNB-CU it shall respond with an F1 REMOVAL FAILURE message with an appropriate cause value.
+If the gNB-DU cannot accept to remove the interface instance with the gNB-CU it shall respond with an F1 REMOVAL FAILURE message with an appropriate cause value.
 8.2.8.4	Abnormal Conditions
 Not applicable.
 8.2.9	Network Access Rate Reduction
@@ -1324,6 +1326,8 @@ If the Conditional Inter-DU Mobility Information IE is included in the UE CONTEX
 If the Target gNB-DU UE F1AP ID IE is contained in the Conditional Inter-DU Mobility Information IE included in the UE CONTEXT SETUP REQUEST message, then the gNB-DU shall replace the existing prepared conditional handover or conditional PSCell change identified by the Target gNB-DU UE F1AP ID IE and the SpCell ID IE.
 If the Serving NID IE is contained in the UE CONTEXT SETUP REQUEST message, the gNB-DU shall combine the Serving NID IE with the Serving PLMN IE to identify the serving NPN, and may take it into account for UE context establishment.
 If the Estimated Arrival Probability IE is contained in the Conditional Inter-DU Mobility Information IE included in the UE CONTEXT SETUP REQUEST message, then the gNB-DU may use the information to allocate necessary resources for the UE.
+If for a given E-RAB for EN-DC operation the ENB DL Transport Layer Address IE is included in the UE CONTEXT SETUP REQUEST message, the gNB-DU shall, if supported, use it as part of its ACL functionality configuration actions, if such ACL functionality is deployed.
+If for a given Qos flow for NG-RAN operation the PDCP Terminating Node DL Transport Layer Address IE is included in the UE CONTEXT SETUP REQUEST message, then the gNB-DU shall, if supported, use it as part of its ACL functionality configuration actions, if such ACL functionality is deployed.
 8.3.1.3	Unsuccessful Operation
 
 Figure 8.3.1.3-1: UE Context Setup Request procedure: unsuccessful Operation
@@ -1468,6 +1472,7 @@ If the Conditional Intra-DU Mobility Information IE is included in the UE CONTEX
 If the Transmission Stop Indicator IE is included within the DRB to Be Modified Item IE in the UE CONTEXT MODIFICATION REQUEST message and set to “true”, the gNB-DU shall, if supported, stop the data transmission for the DRB. It is up to gNB-DU implementation when to stop the UE scheduling for that DRB.
 If the SCG Indicator IE is contained in the UE CONTEXT MODIFICATION REQUEST message and it is set to “released”, the gNB-DU shall, if supported, deduce that an SCG is removed.
 If the Estimated Arrival Probability IE is contained in the Conditional Inter-DU Mobility Information IE included in the UE CONTEXT MODIFICATION REQUEST message, then the gNB-DU may use the information to allocate necessary resources for the UE.
+If the Location Measurement Information IE is included in the CU to DU RRC Information IE in the UE CONTEXT MODIFICATION REQUEST message, the gNB-DU shall, if supported, take it into account when configuring measurement gaps for the UE. 
 8.3.4.3	Unsuccessful Operation
 
 Figure 8.3.4.3-1: UE Context Modification procedure. Unsuccessful operation
@@ -1767,7 +1772,7 @@ If the GNB-DU RESOURCE CONFIGURATION FAILURE message includes the Time To Wait I
 Not applicable.
 8.10.3	IAB TNL Address Allocation
 8.10.3.1	General
-The purpose of the IAB TNL Address Allocation procedure is to allocate TNL addresses to be used by the IAB-node(s).
+The purpose of the IAB TNL Address Allocation procedure is to allocate TNL addresses to be used by the IAB-node(s). This procedure uses non-UE associated signalling.
 NOTE:	This procedure is applicable for IAB-donor-DU, where the term "gNB-DU" applies to IAB-donor-DU, and the term "gNB-CU" applies to IAB-donor-CU.
 8.10.3.2	Successful Operation
 
@@ -1775,7 +1780,7 @@ Figure 8.10.3.2-1: IAB TNL Address Allocation procedure: Successful Operation
 The gNB-CU initiates the procedure by sending the IAB TNL ADDRESS REQUEST message to the gNB-DU. 
 If the IAB TNL ADDRESS REQUEST message contains the IAB IPv4 Addresses Requested IE, the gNB-DU shall allocate the individual TNL address(es) accordingly and include these IPv4 address(es) in the IAB TNL ADDRESS RESPONSE message. 
 If the IAB TNL ADDRESS REQUEST message contains the IAB IPv6 Request Type IE, the gNB-DU shall allocate the individual IPv6 address(es) or IPv6 address prefix(es) accordingly and include these IPv6 address(es) or IPv6 address prefix(es) in the IAB TNL ADDRESS RESPONSE message.
-If the IAB TNL ADDRESS REQUEST message contains the IAB TNL Addresses to Remove List IE, the gNB-DU shall consider that the TNL address(es) and/or TNL address prefix(es) therein are no longer used by the IAB-node(s). 
+If the IAB TNL ADDRESS REQUEST message contains the IAB TNL Addresses to Remove List IE, the gNB-DU shall consider that the TNL address(es) and/or TNL address prefix(es) therein are no longer used by the IAB-node(s). In addition, if the IAB TNL ADDRESS REQUEST message only contains the IAB TNL Addresses to Remove List IE, the gNB-CU shall ignore the IAB Allocated TNL Address List IE in the IAB TNL ADDRESS RESPONSE message.
 If the IAB TNL ADDRESS RESPONSE message contains the IAB TNL Address Usage IE in the IAB Allocated TNL Address List Item IE, the gNB-CU shall consider the indicated TNL address usage when allocating a TNL addressto an IAB-node. Otherwise, the gNB-CU shall consider that the TNL address can be used for all traffic when allocating the TNL address to an IAB-node.
 8.10.3.C	Unsuccessful Operation
 
@@ -1877,6 +1882,7 @@ The gNB-CU initiates the procedure by sending a POSITIONING MEASUREMENT REQUEST 
 If the Positioning Report Characteristics IE is set to "OnDemand", the gNB-DU shall return the corresponding measurement results in the Positioning Measurement Result List IE in the POSITIONING MEASUREMENT RESPONSE message, and the gNB-CU shall consider that this reporting has been terminated by the gNB-DU.
 If the Measurement Beam Information Request IE is included in the POSITIONING MEASUREMENT REQUEST message, the gNB-DU node shall include the Measurement Beam Information IE in the Positioning Measurement Result IE of the POSITIONING MEASUREMENT RESPONSE message.
 If the Measurement Quality IE is included in the Measurement Result IE in the POSITIONING MEASUREMENT RESPONSE message, the gNB-CU may use it for further signalling. If the Measurement Quality IE includes the Zenith Quality IE, the gNB-CU may use it for further signalling.
+If the System Frame Number IE and/or the Slot Number IE are included in the POSITIONING MEASUREMENT REQUEST message, the gNB-DU node shall, if supported, consider that the respective information indicates the activation time of SRS transmission.
 Interaction with the Positioning Measurement Report procedure:
 If the Positioning Report Characteristics IE is set to "Periodic", the gNB-DU shall initiate the corresponding measurements, and it shall reply with the POSITIONING MEASUREMENT RESPONSE message without including any measurement results in the message. The gNB-DU shall then periodically initiate the Positioning Measurement Report procedure for the corresponding measurements, with the requested reporting periodicity.
 8.13.3.3	Unsuccessful Operation
@@ -1953,6 +1959,9 @@ The Positioning Information Exchange procedure is initiated by the gNB-CU to ind
 Figure 8.13.9.2-1: Positioning Information Exchange procedure, successful operation
 The gNB-CU initiates the procedure by sending a POSITIONING INFORMATION REQUEST message to the gNB-DU.
 If the Requested SRS Transmission Characteristics IE is included in the POSITIONING INFORMATION REQUEST message, the gNB-DU may take this information into account when configuring SRS transmissions for the UE, and it shall include the SRS Configuration IE and the SFN Initialisation Time IE in the POSITIONING INFORMATION RESPONSE message.
+If the Spatial Relation Information per SRS Resource IE and the Periodicity List IE are both included in the Requested SRS Transmission Characteristics IE, the gNB-DU shall consider that the Spatial Relation per SRS Resource Item IE and the Periodicity List Item IE have one-to-one mapping relation.
+Interaction with the UE Context Modification Required (gNB-DU initiated) procedure:
+The UE Context Modification Required (gNB-DU initiated) procedure may be performed before the POSITIONING INFORMATION RESPONSE message.
 8.13.9.3	Unsuccessful Operation
 
 Figure 8.13.9.3-1: Positioning Information Exchange procedure, unsuccessful operation
@@ -3230,7 +3239,7 @@ List of applicable E-UTRA cells.
 M
 
 BIT STRING (SIZE(28))
-Indicates the E-UTRAN Cell Global Identifier as defined in subclause 9.2.14 in TS 36.423 [9].
+Indicates the E-UTRAN Cell Identifier IE contained in the ECGI as defined in subclause 9.2.14 in TS 36.423 [9].
 -
 
 >>>>Served E-UTRA  Cell Information
@@ -5942,13 +5951,6 @@ O
 
 YES
 ignore
->>Transmission Stop Indicator
-O
-
-9.3.1.209
-
-YES
-ignore
 DRB to Be Modified List
 
 0..1
@@ -6168,6 +6170,13 @@ ignore
 O
 
 9.3.1.146
+
+YES
+ignore
+>>Transmission Stop Indicator
+O
+
+9.3.1.209
 
 YES
 ignore
@@ -10473,8 +10482,8 @@ reject
 Positioning Measurement Periodicity
 C-ifReportCharacteristicsPeriodic
 
-ENUMERATED (120ms, 240ms, 480ms, 640ms, 1024ms, 2048ms, 5120ms, 10240ms, 1min, 6min, 12min, 30min, …, 20480ms, 40960ms)
-
+ENUMERATED (120ms, 240ms, 480ms, 640ms, 1024ms, 2048ms, 5120ms, 10240ms, 1min, 6min, 12min, 30min, …, 20480ms, 40960ms, extended)
+The codepoint 120ms, 240ms, 480ms, 1024ms, 2048ms, 1min, 6min, 12min, and 30min are not applicable.
 YES
 reject
 Positioning Measurement Quantities
@@ -10541,6 +10550,14 @@ INTEGER(0..79)
 
 YES
 ignore
+Measurement Periodicity Extended
+C-ifMeasPerExt
+
+ENUMERATED (160ms, 320ms, 1280ms, 2560ms, 61440ms,
+81920ms, 368640ms, 737280ms, 1843200ms, …)
+
+YES
+reject
 
 Range bound
 Explanation
@@ -10553,6 +10570,8 @@ Condition
 Explanation
 ifReportCharacteristicsPeriodic
 This IE shall be present if the Positioning Report Characteristics IE is set to the value "Periodic".
+ifMeasPerExt
+This IE shall be present if the Measurement Periodicity IE is set to the value "extended".
 
 9.2.12.4	POSITIONING MEASUREMENT RESPONSE
 This message is sent by the gNB-DU to report positioning measurements for the target UE.
@@ -10965,7 +10984,7 @@ reject
 >>TRP Information Type Item
 M
 
-ENUMERATED (nr pci, ng-ran cgi, nr arfcn, prs config, ssb config, sfn init time, spatial direction info, geo-coordinates, …)
+ENUMERATED (nr pci, ng-ran cgi, nr arfcn, prs config, ssb config, sfn init time, spatial direction info, geo-coordinates, …, trp type)
 
 -
 
@@ -11270,9 +11289,16 @@ O
 
 Spatial Relation Information
 9.3.1.181
+This IE is ignored if the Spatial Relation Information per SRS Resource IE is present.
+-
+-
+>>Spatial Relation Information per SRS Resource
+O
 
--
--
+9.3.1.210
+
+YES
+ignore
 >Aperiodic
 
 
@@ -11517,8 +11543,8 @@ reject
 E-CID Measurement Periodicity
 C-ifReportCharacteristicsPeriodic
 
-ENUMERATED (120ms, 240ms, 480ms, 640ms, 1024ms, 2048ms, 5120ms, 10240ms, 1min, 6min, 12min, 30min, …, 20480ms, 40960ms)
-
+ENUMERATED (120ms, 240ms, 480ms, 640ms, 1024ms, 2048ms, 5120ms, 10240ms, 1min, 6min, 12min, 30min, …, 20480ms, 40960ms, extended)
+The codepoint “extended” is not applicable.
 YES
 reject
 E-CID Measurement Quantities
@@ -12322,7 +12348,7 @@ M
 
 NR Frequency Info
 9.3.1.17
-
+This IE is ignored if the Cell Direction IE is included and set to “dl-only”.
 -
 
 >>>DL FreqInfo
@@ -12330,7 +12356,7 @@ M
 
 NR Frequency Info
 9.3.1.17
-
+This IE is ignored if the Cell Direction IE is included and set to “ul-only”.
 -
 
 >>>UL Transmission Bandwidth
@@ -12338,7 +12364,7 @@ M
 
 Transmission Bandwidth
 9.3.1.15
-
+This IE is ignored if the Cell Direction IE is included and set to “dl-only”.
 -
 
 >>>DL Transmission Bandwidth
@@ -12346,7 +12372,7 @@ M
 
 Transmission Bandwidth
 9.3.1.15
-
+This IE is ignored if the Cell Direction IE is included and set to “ul-only”.
 -
 
 >>>UL Carrier List 
@@ -12599,6 +12625,13 @@ O
 
 YES
 ignore
+NPN Broadcast Information
+O
+
+9.3.1.157
+
+YES
+reject
 
 Range bound
 Explanation
@@ -12831,22 +12864,38 @@ Presence
 Range
 IE type and reference
 Semantics description
+Criticality
+Assigned Criticality
 QCI
 M
 
 INTEGER (0..255)
 QoS Class Identifier defined in TS 23.401 [10].
 Logical range and coding specified in TS 23.203 [11]. For a BH RLC channel, the Packet Delay Budget included in QCI defines the upper bound for the time that a packet may be delayed between the gNB-DU and its child IAB-MT.
+
+
 Allocation and Retention Priority
 M 
 
 9.3.1.20
+
+
 
 GBR QoS Information
 O
 
 9.3.1.21
 This IE shall be present for GBR bearers only and is ignored otherwise.
+
+
+ENB DL Transport Layer Address
+O
+
+Transport Layer Address
+9.3.2.3
+DL Transport Layer Address of node terminating PDCP. Included for MN-terminated SCG bearers.
+YES
+ignore
 
 9.3.1.20	Allocation and Retention Priority
 This IE specifies the relative importance compared to other E-RABs for allocation and retention of the E-UTRAN Radio Access Bearer.
@@ -13041,6 +13090,13 @@ O
 
 OCTET STRING
 UEAssistanceInformation, as defined in TS  36.331 [41].
+YES
+ignore
+Location Measurement Information
+O
+
+OCTET STRING
+LocationMeasurementInfo, as defined in TS 38.331[8] 
 YES
 ignore
 
@@ -13659,6 +13715,14 @@ ENUMERATED (UL, DL, Both, …, stop)
 Indicates to measure UL, or DL, or both UL/DL delays for the associated QoS flow or stop the corresponding QoS monitoring. 
 YES
 ignore
+PDCP Terminating Node DL Transport Layer Address
+O
+
+Transport Layer Address
+9.3.2.3
+DL Transport Layer Address of node terminating PDCP. Included for MN-terminated SCG bearers and SN-terminated MCG bearers.
+YES
+ignore
 
 9.3.1.46	GBR QoS Flow Information
 This IE indicates QoS parameters for a GBR QoS flow or GBR bearer for downlink and uplink.
@@ -13745,7 +13809,7 @@ Packet Delay Budget
 M
 
 9.3.1.51
-For details see TS 23.501 [21]. For a BH RLC channel, the Packet Delay Budget defines the upper bound for the time that a packet may be delayed between the gNB-DU and its child IAB-MT. This IE is ignored if the Extended Packet Delay Budget IE is present.
+For details see TS 23.501 [21]. For IAB, the Packet Delay Budget defines the upper bound for the time that a packet may be delayed between the IAB-DU/IAB-donor-DU and its child IAB-MT, or between the IAB-DU and its served UE. This IE is ignored if the Extended Packet Delay Budget IE is present.
 -
 
 Packet Error Rate
@@ -14326,7 +14390,7 @@ MeNB Cell ID
 M
 
 BIT STRING (SIZE(28))
-E-UTRAN Cell Global Identifier defined in TS 36.423 [9] clause 9.2.14
+E-UTRAN Cell Identifier IE contained in the ECGI as defined in TS 36.423 [9] clause 9.2.14
 Resource Coordination E-UTRA Cell Information
 O
 
@@ -15862,7 +15926,7 @@ M
 
 -
 
-PC5 Flow Bit Rates
+PC5 QoS Flow Bit Rates
 O
 
 
@@ -15874,7 +15938,7 @@ M
 
 Bit Rate
 9.3.1.22
-Guaranteed Bit Rate for the PC5 QoS flow. Details in TS 23.501 [21].
+Guaranteed Bit Rate for the PC5 QoS flow. Details in TS 23.287 [40].
 -
 
 >Maximum Flow Bit Rate
@@ -15882,7 +15946,7 @@ M
 
 Bit Rate
 9.3.1.22
-Maximum Bit Rate for the PC5 QoS flow. Details in TS 23.501 [21].
+Maximum Bit Rate for the PC5 QoS flow. Details in TS 23.287 [40].
 -
 
 
@@ -15973,7 +16037,7 @@ Semantics description
 M
 
 INTEGER (0..255,...)
-This IE contains the standardized or pre-configured 5QI as specified in TS 23.501 [21]
+This IE contains the standardized or pre-configured PQI as specified in TS 23.287 [40]
 QoS Priority Level
 O
 
@@ -16031,7 +16095,7 @@ For details see TS 23.501 [21]. This IE shall be included if the Delay Critical 
 Condition
 Explanation
 ifGBRflow
-This IE shall be present if the GBR QoS Flow Information IE is present in the QoS Flow Level QoS Parameters IE.
+This IE shall be present if the PC5 QoS Flow Bit Rates IE is present in the PC5 QoS parameters IE.
 
 9.3.1.128	TNL Capacity Indicator
 The TNL Capacity Indicator IE indicates the offered and available capacity of the Transport Network experienced by the gNB-DU.
@@ -17580,7 +17644,7 @@ Milli-seconds
 O
 
 9.3.1.181
-
+This IE is ignored if the Spatial Relation Information per SRS Resource IE is present.
 -
 
 >>Pathloss Reference Information
@@ -17590,6 +17654,13 @@ O
 
 -
 
+>>Spatial Relation Information per SRS Resource
+O
+
+9.3.1.210
+
+YES
+ignore
 SSB Information
 O
 
@@ -17626,50 +17697,70 @@ Presence
 Range
 IE Type and Reference
 Semantics Description
+Criticality
+Assigned Criticality
 TRP ID
 M
 
 9.3.1.197
+
+-
 
 TRP Information Type Response List
 
 1
 
 
+-
+
 >TRP Information Type Response Item
 
 1 .. <maxnoofTRPInfoTypes>
 
+
+-
 
 >>CHOICE TRP Information Type Response Item
 M
 
 
 
+-
+
 >>>NR PCI
 M
 
 INTEGER (0..1007)
 NR Physical Cell ID
+-
+
 >>>NR CGI
 
 
 9.3.1.12
+
+-
 
 >>>NR ARFCN
 M
 
 INTEGER (0..3279165)
 
+-
+
 >>>PRS Configuration
 M
 
 9.3.1.177
 
+-
+
 >>>SSB Information
 M
 
 9.3.1.202
+
+-
 
 >>>SFN Initialisation Time
 M
@@ -17677,16 +17768,29 @@ M
 Relative Time 1900
 9.3.1.183
 
+-
+
 >>>Spatial Direction Information
 M
 
 9.3.1.179
+
+-
 
 >>>Geographical Coordinates
 M
 
 9.3.1.184
 
+-
+
+>>>TRP Type
+M
+
+ENUMERATED (prs-only-tp, srs-only-rp, tp, rp, trp…)
+TS 38.305 [42]
+YES
+reject
 
 Range bound
 Explanation
@@ -19079,9 +19183,13 @@ Presence
 Range
 IE Type and Reference
 Semantics Description
+Criticality
+Assigned Criticality
 NR-PRS Beam Information List
 
 1
+
+
 
 
 >NR-PRS Beam Information Item
@@ -19089,14 +19197,20 @@ NR-PRS Beam Information List
 1 .. < maxnoofPRS-ResourceSets >
 
 
+
+
 >>PRS Resource Set ID
 M
 
 INTEGER (0..7)
 The resource set in which the resources are associated with the angle.
+
+
 >>PRS Angle List
 
 1
+
+
 
 
 >>>PRS Angle Item
@@ -19104,34 +19218,55 @@ The resource set in which the resources are associated with the angle.
 1..< maxnoofPRS-ResourcesPerSet >
  
 
+
+
 >>>>NR PRS Azimuth
 M
 
 INTEGER (0..359)
+
+
 
 >>>>NR PRS Azimuth fine
 O
 
 INTEGER (0..9)
 Fine angles
+
+
 >>>>NR PRS Elevation
 O
 
 INTEGER (0..180)
+
+
 
 >>>>NR PRS Elevation fine
 O
 
 INTEGER (0..9)
 Fine angles
+
+
+>>>PRS Resource ID
+O
+
+INTEGER(0..63)
+
+YES
+ignore
 LCS to GCS Translation List
 
 0..1
 
 If absent, the azimuth and elevation are provided in GCS.
+
+
 >LCS to GCS Translation
 
 1 .. <maxnooflcs-gcs-translation>
+
+
 
 
 >>Alpha
@@ -19139,31 +19274,43 @@ M
 
 INTEGER (0..359)
 
+
+
 >>Alpha-fine
 O
 
 INTEGER (0..9)
 Fine angles
+
+
 >>Beta
 M
 
 INTEGER (0..359)
+
+
 
 >>Beta-fine
 O
 
 INTEGER (0..9)
 Fine angles
+
+
 >>Gamma
 M
 
 INTEGER (0..359)
+
+
 
 >>Gamma-fine
 O
 
 INTEGER (0..9)
 Fine angles
+
+
 
 Range bound
 Explanation
@@ -19490,6 +19637,99 @@ M
 
 ENUMERATED (true, …)
 
+
+9.3.1.210	Spatial Relation Information per SRS Resource 
+This information element indicates a spatial relation for transmission of each UL SRS resource recommened by LMF.
+IE/Group Name
+Presence
+Range
+IE Type and Reference
+Semantics Description
+Spatial Relation per SRS Resource List 
+
+1
+
+
+> Spatial Relation per SRS Resource Item
+
+1..<maxnoSRS-ResourcePerSet>
+
+
+>CHOICE Reference Signal
+M
+
+
+
+>NZP CSI-RS
+
+
+
+
+>>NZP CSI-RS Resource ID
+M
+
+INTEGER (0..191)
+
+>SSB
+
+
+
+
+>> NR PCI
+M
+
+INTEGER (0..1007)
+
+>>SSB Index
+O
+
+INTEGER (0..63)
+
+>SRS
+
+
+
+
+>>SRS Resource ID
+M
+
+INTEGER (0..63)
+
+>Positioning SRS
+
+
+
+
+>> Positioning SRS Resource ID
+M
+
+INTEGER (0..63)
+
+>DL-PRS
+
+
+
+
+>>DL-PRS ID
+M
+
+INTEGER (0..255)
+
+>>DL-PRS Resource Set ID
+M
+
+INTEGER (0..7)
+
+>>DL-PRS Resource ID
+O
+
+INTEGER (0..63)
+
+
+Range bound
+Explanation
+maxnoSRS-ResourcePerSet
+Maximum no of SRS resources per SRS resource set. Value is 16.
 
 9.3.2	Transport Network Layer Related IEs
 9.3.2.1	UP Transport Layer Information
@@ -20699,7 +20939,9 @@ IMPORTS
 	Extended-GNB-CU-Name,
 	Extended-GNB-DU-Name,
 	F1CTransferPath,
-	SCGIndicator
+	SCGIndicator,
+	SpatialRelationPerSRSResource,
+	MeasurementPeriodicityExtended
 
 
 
@@ -21047,6 +21289,8 @@ FROM F1AP-Containers
 	id-E-CID-ReportCharacteristics,
 	id-F1CTransferPath,
 	id-SCGIndicator,
+	id-SRSSpatialRelationPerSRSResource,
+	id-PosMeasurementPeriodicityExtended,
 	maxCellingNBDU,
 	maxnoofCandidateSpCells,
 	maxnoofDRBs,
@@ -21199,7 +21443,7 @@ F1SetupRequestIEs F1AP-PROTOCOL-IES ::= {
 	{ ID id-GNB-DU-RRC-Version				CRITICALITY reject	TYPE RRC-Version						PRESENCE mandatory	}|
 	{ ID id-Transport-Layer-Address-Info	CRITICALITY ignore	TYPE Transport-Layer-Address-Info		PRESENCE optional	}|
 	{ ID id-BAPAddress						CRITICALITY ignore	TYPE BAPAddress							PRESENCE optional	}|
-	{ ID id-Extended-GNB-CU-Name			CRITICALITY ignore	TYPE Extended-GNB-CU-Name				PRESENCE optional	},
+	{ ID id-Extended-GNB-DU-Name			CRITICALITY ignore	TYPE Extended-GNB-DU-Name				PRESENCE optional	},
 	...
 } 
 
@@ -21232,7 +21476,7 @@ F1SetupResponseIEs F1AP-PROTOCOL-IES ::= {
 	{ ID id-Transport-Layer-Address-Info	CRITICALITY ignore	TYPE Transport-Layer-Address-Info		PRESENCE optional	}|
 	{ ID id-UL-BH-Non-UP-Traffic-Mapping	CRITICALITY reject	TYPE UL-BH-Non-UP-Traffic-Mapping		PRESENCE optional	}|
 	{ ID id-BAPAddress						CRITICALITY ignore	TYPE BAPAddress							PRESENCE optional	}|
-	{ ID id-Extended-GNB-DU-Name			CRITICALITY ignore	TYPE Extended-GNB-DU-Name				PRESENCE optional	},
+	{ ID id-Extended-GNB-CU-Name			CRITICALITY ignore	TYPE Extended-GNB-CU-Name				PRESENCE optional	},
 	...
 }
 
@@ -23530,7 +23774,10 @@ PositioningMeasurementRequestIEs F1AP-PROTOCOL-IES ::= {
 	{ ID id-SRSConfiguration						CRITICALITY ignore	TYPE SRSConfiguration								PRESENCE optional}|
 	{ ID id-MeasurementBeamInfoRequest				CRITICALITY ignore	TYPE MeasurementBeamInfoRequest	PRESENCE optional	}|
 	{ ID id-SystemFrameNumber						CRITICALITY ignore	TYPE SystemFrameNumber		PRESENCE optional}|
-	{ ID id-SlotNumber								CRITICALITY ignore	TYPE SlotNumber				PRESENCE optional},
+	{ ID id-SlotNumber								CRITICALITY ignore	TYPE SlotNumber				PRESENCE optional}|
+	{ ID id-PosMeasurementPeriodicityExtended		CRITICALITY reject	TYPE MeasurementPeriodicityExtended			PRESENCE conditional }
+	-- The IE shall be present the MeasurementPeriodicity IE is set to the value "extended"
+,
 	...
 } 
 
@@ -23866,6 +24113,7 @@ SemipersistentSRS ::= SEQUENCE {
 }
 
 SemipersistentSRS-ExtIEs F1AP-PROTOCOL-EXTENSION ::= {
+	{ ID id-SRSSpatialRelationPerSRSResource	CRITICALITY ignore	EXTENSION SpatialRelationPerSRSResource PRESENCE optional},
 	...
 }
 
@@ -24245,6 +24493,12 @@ IMPORTS
 	id-TransmissionStopIndicator,
 	id-SrsFrequency,
 	id-EstimatedArrivalProbability,
+	id-TRPType,
+	id-SRSSpatialRelationPerSRSResource,
+	id-PDCPTerminatingNodeDLTNLAddrInfo,
+	id-ENBDLTNLAddress,
+	id-PRS-Resource-ID,
+	id-LocationMeasurementInformation,
 	maxNRARFCN,
 	maxnoofErrors,
 	maxnoofBPLMNs,
@@ -25263,7 +25517,8 @@ CUtoDURRCInformation-ExtIEs F1AP-PROTOCOL-EXTENSION ::= {
 	{ ID id-MeasurementTimingConfiguration	CRITICALITY ignore	EXTENSION MeasurementTimingConfiguration		PRESENCE optional }|
 	{ ID id-UEAssistanceInformation			CRITICALITY ignore	EXTENSION UEAssistanceInformation					PRESENCE optional }|
 	{ ID id-CG-Config						CRITICALITY ignore	EXTENSION CG-Config									PRESENCE optional }|
-	{ ID id-UEAssistanceInformationEUTRA	CRITICALITY ignore	EXTENSION UEAssistanceInformationEUTRA			PRESENCE optional },
+	{ ID id-UEAssistanceInformationEUTRA	CRITICALITY ignore	EXTENSION UEAssistanceInformationEUTRA			PRESENCE optional }|
+	{ ID id-LocationMeasurementInformation	CRITICALITY ignore	EXTENSION LocationMeasurementInformation			PRESENCE optional },
 	...
 }
 
@@ -26000,6 +26255,7 @@ EUTRANQoS	::= SEQUENCE {
 }
 
 EUTRANQoS-ExtIEs F1AP-PROTOCOL-EXTENSION ::= {
+{ ID id-ENBDLTNLAddress		CRITICALITY ignore	EXTENSION TransportLayerAddress	PRESENCE optional	},
 	...
 }
 
@@ -26713,6 +26969,8 @@ LMF-MeasurementID ::= INTEGER (1.. 65536, ...)
 
 LMF-UE-MeasurementID ::= INTEGER (1.. 256, ...)
 
+LocationMeasurementInformation ::= OCTET STRING
+
 LocationUncertainty ::= SEQUENCE {
 	horizontalUncertainty		INTEGER (0..255),
 	horizontalConfidence		INTEGER (0..100),
@@ -27360,8 +27618,10 @@ PosBroadcast ::= ENUMERATED {
 PositioningBroadcastCells ::= SEQUENCE (SIZE (1..maxnoBcastCell)) OF NRCGI
 
 MeasurementPeriodicity ::= ENUMERATED
-{ms120, ms240, ms480, ms640, ms1024, ms2048, ms5120, ms10240, min1, min6, min12, min30, ..., ms20480, ms40960}
+{ms120, ms240, ms480, ms640, ms1024, ms2048, ms5120, ms10240, min1, min6, min12, min30, ..., ms20480, ms40960, extended }
 
+
+MeasurementPeriodicityExtended ::= ENUMERATED {ms160, ms320, ms1280, ms2560, ms61440, ms81920,	ms368640, ms737280, ms1843200,	...}
 
 PosMeasurementQuantities ::= SEQUENCE (SIZE(1.. maxnoofPosMeas)) OF PosMeasurementQuantities-Item
 
@@ -27561,6 +27821,7 @@ PRSAngleItem ::= SEQUENCE {
 }
 
 PRSAngleItem-ItemExtIEs 	F1AP-PROTOCOL-EXTENSION ::= {
+	{ ID id-PRS-Resource-ID		CRITICALITY ignore EXTENSION PRS-Resource-ID		PRESENCE optional },
 	...
 }
 
@@ -27720,7 +27981,8 @@ QoSFlowLevelQoSParameters	::= SEQUENCE {
 QoSFlowLevelQoSParameters-ExtIEs 	F1AP-PROTOCOL-EXTENSION ::= {
 	{ ID id-PDUSessionID								CRITICALITY ignore	EXTENSION PDUSessionID			PRESENCE optional}|
 	{ ID id-ULPDUSessionAggregateMaximumBitRate			CRITICALITY ignore	EXTENSION BitRate					PRESENCE optional}|
-	{ ID id-QosMonitoringRequest						CRITICALITY ignore	EXTENSION QosMonitoringRequest	PRESENCE optional},
+	{ ID id-QosMonitoringRequest						CRITICALITY ignore	EXTENSION QosMonitoringRequest	PRESENCE optional}|
+	{ ID id-PDCPTerminatingNodeDLTNLAddrInfo		CRITICALITY ignore	EXTENSION TransportLayerAddress	PRESENCE optional	},
 	...
 }
 
@@ -28272,7 +28534,8 @@ Served-Cell-Information-ExtIEs F1AP-PROTOCOL-EXTENSION ::= {
 	{	ID id-IAB-Info-IAB-DU				CRITICALITY ignore	EXTENSION IAB-Info-IAB-DU				PRESENCE optional}|
 	{	ID id-SSB-PositionsInBurst			CRITICALITY ignore	EXTENSION SSB-PositionsInBurst			PRESENCE optional }|
 	{	ID id-NRPRACHConfig					CRITICALITY ignore	EXTENSION NRPRACHConfig					PRESENCE optional }|
-	{	ID id-SFN-Offset					CRITICALITY ignore	EXTENSION SFN-Offset					PRESENCE optional },
+	{	ID id-SFN-Offset					CRITICALITY ignore	EXTENSION SFN-Offset					PRESENCE optional }|
+	{	ID id-NPNBroadcastInformation		CRITICALITY reject 	EXTENSION NPNBroadcastInformation		PRESENCE optional },
 	...
 }
 
@@ -28651,6 +28914,28 @@ SpatialRelationforResourceIDItem-ExtIEs F1AP-PROTOCOL-EXTENSION ::= {
 	...
 }
 
+SpatialRelationPerSRSResource ::= SEQUENCE {
+	spatialRelationPerSRSResource-List	SpatialRelationPerSRSResource-List,
+	iE-Extensions		ProtocolExtensionContainer { { SpatialRelationPerSRSResource-ExtIEs} }	OPTIONAL,
+	...
+}
+
+SpatialRelationPerSRSResource-ExtIEs F1AP-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+SpatialRelationPerSRSResource-List::= SEQUENCE(SIZE (1.. maxnoSRS-ResourcePerSet)) OF SpatialRelationPerSRSResourceItem
+
+SpatialRelationPerSRSResourceItem ::= SEQUENCE {
+	referenceSignal		ReferenceSignal,
+	iE-Extensions		ProtocolExtensionContainer { { SpatialRelationPerSRSResourceItem-ExtIEs} }	OPTIONAL,
+	...
+}
+
+SpatialRelationPerSRSResourceItem-ExtIEs F1AP-PROTOCOL-EXTENSION ::= {
+	...
+}
+
 SpatialRelationPos ::= CHOICE {
 	sSBPos					SSB,
 	pRSInformationPos		PRSInformationPos,
@@ -28855,6 +29140,7 @@ SRSResourceSetItem ::= SEQUENCE {
 }
 
 SRSResourceSetItemExtIEs	F1AP-PROTOCOL-EXTENSION ::= {
+	{ ID id-SRSSpatialRelationPerSRSResource	CRITICALITY ignore	EXTENSION SpatialRelationPerSRSResource PRESENCE optional},
 	...
 }
 
@@ -29282,7 +29568,9 @@ TRPInformationTypeItem ::= ENUMERATED {
 		sFNInitTime,
 		spatialDirectInfo,
 		geoCoord,
-...}
+		...,
+		trp-type
+}
 
 
 TRPInformationTypeResponseList ::= SEQUENCE (SIZE(1.. maxnoofTRPInfoTypes)) OF TRPInformationTypeResponseItem 
@@ -29300,6 +29588,7 @@ TRPInformationTypeResponseItem ::= CHOICE {
 }
 
 TRPInformationTypeResponseItem-ExtIEs F1AP-PROTOCOL-IES ::= {
+	{ ID id-TRPType		CRITICALITY reject TYPE TRPType		PRESENCE mandatory },
 	...
 }
 
@@ -29409,6 +29698,15 @@ Transport-Layer-Address-Info ::= SEQUENCE {
 }
 
 Transport-Layer-Address-Info-ExtIEs 	F1AP-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+TRPType ::= ENUMERATED {
+	prsOnlyTP, 
+	srsOnlyRP,
+	tp,
+	rp,
+	trp,
 	...
 }
 
@@ -30339,14 +30637,21 @@ id-TRP-MeasurementRequestList						ProtocolIE-ID ::= 422
 id-MeasurementBeamInfoRequest						ProtocolIE-ID ::= 423
 id-E-CID-ReportCharacteristics						ProtocolIE-ID ::= 424
 id-ConfiguredTACIndication							ProtocolIE-ID ::= 425
-id-Extended-GNB-DU-Name								ProtocolIE-ID ::= 426
-id-Extended-GNB-CU-Name								ProtocolIE-ID ::= 427
+id-Extended-GNB-CU-Name								ProtocolIE-ID ::= 426
+id-Extended-GNB-DU-Name								ProtocolIE-ID ::= 427
 id-F1CTransferPath									ProtocolIE-ID ::= 428
 id-SFN-Offset										ProtocolIE-ID ::= 429
 id-TransmissionStopIndicator						ProtocolIE-ID ::= 430
 id-SrsFrequency										ProtocolIE-ID ::= 431
 id-SCGIndicator										ProtocolIE-ID ::= 432
 id-EstimatedArrivalProbability						ProtocolIE-ID ::= 433
+id-TRPType											ProtocolIE-ID ::= 434
+id-SRSSpatialRelationPerSRSResource					ProtocolIE-ID ::= 435
+id-PDCPTerminatingNodeDLTNLAddrInfo					ProtocolIE-ID ::= 436
+id-ENBDLTNLAddress									ProtocolIE-ID ::= 437
+id-PosMeasurementPeriodicityExtended				ProtocolIE-ID ::= 438
+id-PRS-Resource-ID									ProtocolIE-ID ::= 439
+id-LocationMeasurementInformation					ProtocolIE-ID ::= 440
 
 
 END
@@ -32358,4 +32663,149 @@ RP-211317
 F
 Correction on MLB for TS 38.473
 16.6.0
+2021-09
+RP-93-e
+RP-211876
+
+0790
+1
+F
+Correction of served cell information for NPN
+16.7.0
+2021-09
+RP-93-e
+RP-211880
+0792
+1
+F
+Correction of wrong CR implementation for Stage-3 CR on transmission stop for Rel-16 DAPS handover
+16.7.0
+2021-09
+RP-93-e
+RP-211883
+0796
+1
+F
+Adding procedural text for System Frame Number and Slot Number
+16.7.0
+2021-09
+RP-93-e
+RP-211881
+0800
+-
+A
+Correction of the IE related to E-UTRA resource coordination in F1AP
+16.7.0
+2021-12
+RP-94-e
+RP-212864
+0804
+1
+A
+Correction on F1 Removal for RAN Sharing in Rel-16
+16.8.0
+2021-12
+RP-94-e
+RP-212864
+0811
+4
+F
+Incorrect Node Name IE in ASN.1
+16.8.0
+2021-12
+RP-94-e
+RP-213174
+0822
+3
+F
+Correction on PRS-only TRP
+16.8.0
+2021-12
+RP-94-e
+RP-212867
+0827
+1
+F
+Support of providing spatial relation per SRS resource from gNB-CU to gNB-DU
+16.8.0
+2022-03
+RP-95-e
+RP-220279
+0778
+4
+F
+Support of dynamic ACL during dual connectivity
+16.9.0
+2022-03
+RP-95-e
+RP-220276
+0837
+1
+F
+Correction on packet delay budget for IAB access link in TS 38.473
+16.9.0
+2022-03
+RP-95-e
+RP-220276
+0838
+-
+F
+CR to 38.473: Correction on IAB TNL Address Allocation procedure
+16.9.0
+2022-03
+RP-95-e
+RP-220242
+0844
+2
+F
+CR to TS38.473: Correction on PC5 QoS parameters for NR V2X
+16.9.0
+2022-03
+RP-95-e
+RP-220281
+0847
+1
+F
+Correction on positioning information configuration
+16.9.0
+2022-03
+RP-95-e
+RP-220281
+0848
+1
+F
+Correction on Measurement Periodicity
+16.9.0
+2022-03
+RP-95-e
+RP-220281
+0849
+1
+F
+Correction on PRS Beam Information
+16.9.0
+2022-03
+RP-95-e
+RP-220281
+0850
+
+F
+CR for the correction on measurement gap configuration for position
+16.9.0
+2022-03
+RP-95-e
+RP-220278
+0854
+1
+F
+Correction of frequency information for DL only or UL only cell
+16.9.0
+2022-03
+RP-95-e
+RP-220276
+0860
+
+F
+(Stage-3) Clarification on IAB Address Remove
+16.9.0
 

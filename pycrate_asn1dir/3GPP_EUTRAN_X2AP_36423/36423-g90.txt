@@ -69,21 +69,21 @@ Foreword	13
 8.3.2.4	Abnormal Conditions	41
 8.3.3	X2 Setup	41
 8.3.3.1	General	41
-8.3.3.2	Successful Operation	41
+8.3.3.2	Successful Operation	42
 8.3.3.3	Unsuccessful Operation	43
 8.3.3.4	Abnormal Conditions	43
-8.3.4	Reset	43
-8.3.4.1	General	43
+8.3.4	Reset	44
+8.3.4.1	General	44
 8.3.4.2	Successful Operation	44
 8.3.4.3	Unsuccessful Operation	44
-8.3.4.4	Abnormal Conditions	44
+8.3.4.4	Abnormal Conditions	45
 8.3.5	eNB Configuration Update	45
 8.3.5.1	General	45
 8.3.5.2	Successful Operation	45
 8.3.5.3	Unsuccessful Operation	47
 8.3.5.4	Abnormal Conditions	47
-8.3.6	Resource Status Reporting Initiation	47
-8.3.6.1	General	47
+8.3.6	Resource Status Reporting Initiation	48
+8.3.6.1	General	48
 8.3.6.2	Successful Operation	48
 8.3.6.3	Unsuccessful Operation	49
 8.3.6.4	Abnormal Conditions	49
@@ -95,12 +95,12 @@ Foreword	13
 8.3.8	Mobility Settings Change	51
 8.3.8.1	General	51
 8.3.8.2	Successful Operation	51
-8.3.8.3	Unsuccessful Operation	51
+8.3.8.3	Unsuccessful Operation	52
 8.3.8.4	Abnormal Conditions	52
 8.3.9	Radio Link Failure Indication	52
 8.3.9.1	General	52
 8.3.9.2	Successful Operation	52
-8.3.9.3	Unsuccessful Operation	52
+8.3.9.3	Unsuccessful Operation	53
 8.3.9.4	Abnormal Conditions	53
 8.3.10	Handover Report	53
 8.3.10.1	General	53
@@ -110,493 +110,494 @@ Foreword	13
 8.3.11	Cell Activation	54
 8.3.11.1	General	54
 8.3.11.2	Successful Operation	54
-8.3.11.3	Unsuccessful Operation	54
+8.3.11.3	Unsuccessful Operation	55
 8.3.11.4	Abnormal Conditions	55
 8.3.12	X2 Removal	55
 8.3.12.1	General	55
 8.3.12.2	Successful Operation	55
-8.3.12.3	Unsuccessful Operation	55
-8.3.12.4	Abnormal Conditions	55
+8.3.12.3	Unsuccessful Operation	56
+8.3.12.4	Abnormal Conditions	56
 8.3.13	Retrieve UE Context	56
 8.3.13.1	General	56
 8.3.13.2	Successful Operation	56
-8.3.13.3	Unsuccessful Operation	57
+8.3.13.3	Unsuccessful Operation	58
 8.3.13.4	Abnormal Conditions	58
 8.3.14	EN-DC X2 Removal	58
 8.3.14.1	General	58
 8.3.14.2	Successful Operation	58
 8.3.14.3	Unsuccessful Operation	59
-8.3.14.4	Abnormal Conditions	59
-8.3.15	Data Forwarding Address Indication	59
-8.3.15.1	General	59
+8.3.14.4	Abnormal Conditions	60
+8.3.15	Data Forwarding Address Indication	60
+8.3.15.1	General	60
 8.3.15.2	Successful Operation	60
-8.3.15.3	Unsuccessful Operation	60
-8.3.15.4	Abnormal Conditions	60
+8.3.15.3	Unsuccessful Operation	61
+8.3.15.4	Abnormal Conditions	61
 8.4	X2 Release	61
 8.4.1	General	61
-8.4.2	Successful Operation	61
-8.4.3	Unsuccessful Operation	61
-8.4.4	Abnormal Condition	61
-8.5	X2AP Message Transfer	61
-8.5.1	General	61
+8.4.2	Successful Operation	62
+8.4.3	Unsuccessful Operation	62
+8.4.4	Abnormal Condition	62
+8.5	X2AP Message Transfer	62
+8.5.1	General	62
 8.5.2	Successful Operation	62
-8.5.3	Unsuccessful Operation	62
-8.5.4	Abnormal Condition	62
-8.6	Procedures for Dual Connectivity	62
-8.6.1	SeNB Addition Preparation	62
-8.6.1.1	General	62
+8.5.3	Unsuccessful Operation	63
+8.5.4	Abnormal Condition	63
+8.6	Procedures for Dual Connectivity	63
+8.6.1	SeNB Addition Preparation	63
+8.6.1.1	General	63
 8.6.1.2	Successful Operation	63
-8.6.1.3	Unsuccessful Operation	64
-8.6.1.4	Abnormal Conditions	64
-8.6.2	SeNB Reconfiguration Completion	65
-8.6.2.1	General	65
-8.6.2.2	Successful Operation	65
+8.6.1.3	Unsuccessful Operation	65
+8.6.1.4	Abnormal Conditions	65
+8.6.2	SeNB Reconfiguration Completion	66
+8.6.2.1	General	66
+8.6.2.2	Successful Operation	66
 8.6.2.3	Abnormal Conditions	66
 8.6.3	MeNB initiated SeNB Modification Preparation	66
 8.6.3.1	General	66
-8.6.3.2	Successful Operation	66
-8.6.3.3	Unsuccessful Operation	68
-8.6.3.4	Abnormal Conditions	68
-8.6.4	SeNB initiated SeNB Modification	69
-8.6.4.1	General	69
-8.6.4.2	Successful Operation	69
-8.6.4.3	Unsuccessful Operation	70
-8.6.4.4	Abnormal Conditions	70
-8.6.5	MeNB initiated SeNB Release	71
-8.6.5.1	General	71
-8.6.5.2	Successful Operation	71
+8.6.3.2	Successful Operation	67
+8.6.3.3	Unsuccessful Operation	69
+8.6.3.4	Abnormal Conditions	69
+8.6.4	SeNB initiated SeNB Modification	70
+8.6.4.1	General	70
+8.6.4.2	Successful Operation	70
+8.6.4.3	Unsuccessful Operation	71
+8.6.4.4	Abnormal Conditions	71
+8.6.5	MeNB initiated SeNB Release	72
+8.6.5.1	General	72
+8.6.5.2	Successful Operation	72
 8.6.5.3	Unsuccessful Operation	72
 8.6.5.4	Abnormal Conditions	72
-8.6.6	SeNB initiated SeNB Release	72
-8.6.6.1	General	72
-8.6.6.2	Successful Operation	72
-8.6.6.3	Unsuccessful Operation	72
-8.6.6.4	Abnormal Conditions	72
+8.6.6	SeNB initiated SeNB Release	73
+8.6.6.1	General	73
+8.6.6.2	Successful Operation	73
+8.6.6.3	Unsuccessful Operation	73
+8.6.6.4	Abnormal Conditions	73
 8.6.7	SeNB Counter Check	73
 8.6.7.1	General	73
-8.6.7.2	Successful Operation	73
-8.6.7.3	Unsuccessful Operation	73
-8.6.7.4	Abnormal Conditions	73
-8.7	Procedures for E-UTRAN-NR Dual Connectivity	73
-8.7.1	EN-DC X2 Setup	73
-8.7.1.1	General	73
-8.7.1.2	Successful Operation	74
-8.7.1.3	Unsuccessful Operation	76
-8.7.1.4	Abnormal Conditions	76
-8.7.2	EN-DC Configuration Update	77
-8.7.2.1	General	77
-8.7.2.2	Successful Operation	77
-8.7.2.3	Unsuccessful Operation	80
-8.7.2.4	Abnormal Conditions	80
-8.7.3	EN-DC Cell Activation	81
-8.7.3.1	General	81
-8.7.3.2	Successful Operation	81
-8.7.3.3	Unsuccessful Operation	81
-8.7.3.4	Abnormal Conditions	82
-8.7.4	SgNB Addition Preparation	82
-8.7.4.1	General	82
-8.7.4.2	Successful Operation	82
-8.7.4.3	Unsuccessful Operation	85
-8.7.4.4	Abnormal Conditions	85
-8.7.5	SgNB Reconfiguration Completion	86
-8.7.5.1	General	86
-8.7.5.2	Successful Operation	86
-8.7.5.3	Abnormal Conditions	87
-8.7.6	MeNB initiated SgNB Modification Preparation	87
-8.7.6.1	General	87
-8.7.6.2	Successful Operation	87
-8.7.6.3	Unsuccessful Operation	91
-8.7.6.4	Abnormal Conditions	92
-8.7.7	SgNB initiated SgNB Modification	93
-8.7.7.1	General	93
-8.7.7.2	Successful Operation	93
-8.7.7.3	Unsuccessful Operation	95
-8.7.7.4	Abnormal Conditions	95
-8.7.8	SgNB Change	95
-8.7.8.1	General	95
-8.7.8.2	Successful Operation	96
-8.7.8.3	Unsuccessful Operation	96
-8.7.8.4	Abnormal Conditions	97
-8.7.9	MeNB initiated SgNB Release	97
-8.7.9.1	General	97
-8.7.9.2	Successful Operation	97
-8.7.9.3	Unsuccessful Operation	98
-8.7.9.4	Abnormal Conditions	98
-8.7.10	SgNB initiated SgNB Release	98
-8.7.10.1	General	98
-8.7.10.2	Successful Operation	99
-8.7.10.3	Unsuccessful Operation	99
-8.7.10.4	Abnormal Conditions	99
-8.7.11	SgNB Counter Check	99
-8.7.11.1	General	99
-8.7.11.2	Successful Operation	100
-8.7.11.3	Unsuccessful Operation	100
-8.7.11.4	Abnormal Conditions	100
-8.7.12	RRC Transfer	100
-8.7.12.1	General	100
-8.7.12.2	Successful Operation	101
-8.7.12.3	Abnormal Conditions	101
-8.7.13	Secondary RAT Data Usage Report	101
-8.7.13.1	General	101
-8.7.13.2	Successful Operation	101
-8.7.13.3	Unsuccessful Operation	102
-8.7.13.4	Abnormal Conditions	102
-8.7.14	Partial reset of EN-DC	102
-8.7.14.1	General	102
-8.7.14.2	Successful Operation	102
-8.7.14.3	Unsuccessful Operation	103
-8.7.14.4	Abnormal Conditions	103
-8.7.15	E-UTRA – NR Cell Resource Coordination	103
-8.7.15.1	General	103
-8.7.15.2	Successful Operation	104
-8.7.16	SgNB Activity Notification	105
-8.7.16.1	General	105
-8.7.16.2	Successful Operation	105
-8.7.16.3	Abnormal Conditions	105
-8.7.17	gNB Status Indication	105
-8.7.17.1	General	105
-8.7.17.2	Successful Operation	105
-8.7.17.3	Abnormal Conditions	106
-8.7.18	EN-DC Configuration Transfer	106
-8.7.18.1	General	106
-8.7.18.2	Successful Operation	106
-8.7.18.3	Abnormal Conditions	107
-8.7.19	Trace Start	107
-8.7.19.1	General	107
-8.7.19.2	Successful Operation	107
-8.7.19.3	Abnormal Conditions	107
-8.7.20	Deactivate Trace	108
-8.7.20.1	General	108
-8.7.20.2	Successful Operation	108
-8.7.20.3	Abnormal Conditions	108
-8.7.21	EN-DC Resource Status Reporting Initiation	108
-8.7.21.1	General	108
-8.7.21.2	Successful Operation	108
-8.7.21.2.1	Successful Operation - eNB-initiated	108
-8.7.21.2.2	Successful Operation - en-gNB-initiated	109
-8.7.21.3	Unsuccessful Operation	110
-8.7.21.4	Abnormal Conditions	111
-8.7.22	EN-DC Resource Status Reporting	111
-8.7.22.1	General	111
-8.7.22.2	Successful Operation	111
-8.7.22.3	Unsuccessful Operation	112
-8.7.22.4	Abnormal Conditions	112
-8.7.23	Cell Traffic Trace	112
-8.7.23.1	General	112
-8.7.23.2	Successful Operation	112
-8.7.24	UE Radio Capability ID Mapping	112
-8.7.24.1	General	112
-8.7.24.2	Successful Operation	113
-8.7.24.3	Unsuccessful Operation	113
-8.8	IAB Procedures	113
-8.8.1	F1-C Traffic Transfer	113
-8.8.1.1	General	113
-8.8.1.2	Successful Operation	113
-8.8.1.3	Unsuccessful Operation	114
-8.8.1.4	Abnormal Conditions	114
-9	Elements for X2AP Communication	114
-9.0	General	114
-9.1	Message Functional Definition and Content	114
-9.1.1	Messages for Basic Mobility Procedures	114
-9.1.1.1	HANDOVER REQUEST	114
-9.1.1.2	HANDOVER REQUEST ACKNOWLEDGE	117
-9.1.1.3	HANDOVER PREPARATION FAILURE	119
-9.1.1.4	SN STATUS TRANSFER	119
-9.1.1.5	UE CONTEXT RELEASE	122
-9.1.1.6	HANDOVER CANCEL	122
-9.1.1.7	HANDOVER SUCCESS	123
-9.1.1.8	CONDITIONAL HANDOVER CANCEL	123
-9.1.1.9	EARLY STATUS TRANSFER	124
-9.1.2	Messages for global procedures	126
-9.1.2.1	LOAD INFORMATION	126
-9.1.2.2	ERROR INDICATION	127
-9.1.2.3	X2 SETUP REQUEST	128
-9.1.2.4	X2 SETUP RESPONSE	129
-9.1.2.5	X2 SETUP FAILURE	130
-9.1.2.6	RESET REQUEST	131
-9.1.2.7	RESET RESPONSE	131
-9.1.2.8	ENB CONFIGURATION UPDATE	131
-9.1.2.9	ENB CONFIGURATION UPDATE ACKNOWLEDGE	134
-9.1.2.10	ENB CONFIGURATION UPDATE FAILURE	134
-9.1.2.11	RESOURCE STATUS REQUEST	134
-9.1.2.12	RESOURCE STATUS RESPONSE	136
-9.1.2.13	RESOURCE STATUS FAILURE	138
-9.1.2.14	RESOURCE STATUS UPDATE	139
-9.1.2.15	MOBILITY CHANGE REQUEST	139
-9.1.2.16	MOBILITY CHANGE ACKNOWLEDGE	140
-9.1.2.17	MOBILITY CHANGE FAILURE	140
-9.1.2.18	RLF INDICATION	140
-9.1.2.19	HANDOVER REPORT	141
-9.1.2.20	CELL ACTIVATION REQUEST	143
-9.1.2.21	CELL ACTIVATION RESPONSE	143
-9.1.2.22	CELL ACTIVATION FAILURE	143
-9.1.2.23	X2 RELEASE	143
-9.1.2.24	X2AP MESSAGE TRANSFER	144
-9.1.2.25	X2 REMOVAL REQUEST	144
-9.1.2.26	X2 REMOVAL RESPONSE	144
-9.1.2.27	X2 REMOVAL FAILURE	144
-9.1.2.28	RETRIEVE UE CONTEXT REQUEST	145
-9.1.2.29	RETRIEVE UE CONTEXT RESPONSE	146
-9.1.2.30	RETRIEVE UE CONTEXT FAILURE	148
-9.1.2.31	EN-DC X2 SETUP REQUEST	149
-9.1.2.32	EN-DC X2 SETUP RESPONSE	150
-9.1.2.33	EN-DC X2 SETUP FAILURE	150
-9.1.2.34	EN-DC CONFIGURATION UPDATE	151
-9.1.2.35	EN-DC CONFIGURATION UPDATE ACKNOWLEDGE	153
-9.1.2.36	EN-DC CONFIGURATION UPDATE FAILURE	154
-9.1.2.37	EN-DC CELL ACTIVATION REQUEST	155
-9.1.2.38	EN-DC CELL ACTIVATION RESPONSE	155
-9.1.2.39	EN-DC CELL ACTIVATION FAILURE	155
-9.1.2.40	EN-DC X2 REMOVAL REQUEST	156
-9.1.2.41	EN-DC X2 REMOVAL RESPONSE	156
-9.1.2.42	EN-DC X2 REMOVAL FAILURE	156
-9.1.2.43	DATA FORWARDING ADDRESS INDICATION	157
-9.1.2.44	EN-DC CONFIGURATION TRANSFER	158
-9.1.2.45	EN-DC RESOURCE STATUS REQUEST	158
-9.1.2.46	EN-DC RESOURCE STATUS RESPONSE	160
-9.1.2.47	EN-DC RESOURCE STATUS FAILURE	160
-9.1.2.48	EN-DC RESOURCE STATUS UPDATE	161
-9.1.2.49	CELL TRAFFIC TRACE	162
-9.1.3	Messages for Dual Connectivity Procedures	163
-9.1.3.1	SENB ADDITION REQUEST	163
-9.1.3.2	SENB ADDITION REQUEST ACKNOWLEDGE	165
-9.1.3.3	SENB ADDITION REQUEST REJECT	167
-9.1.3.4	SENB RECONFIGURATION COMPLETE	167
-9.1.3.5	SENB MODIFICATION REQUEST	168
-9.1.3.6	SENB MODIFICATION REQUEST ACKNOWLEDGE	170
-9.1.3.7	SENB MODIFICATION REQUEST REJECT	172
-9.1.3.8	SENB MODIFICATION REQUIRED	173
-9.1.3.9	SENB MODIFICATION CONFIRM	173
-9.1.3.10	SENB MODIFICATION REFUSE	174
-9.1.3.11	SENB RELEASE REQUEST	174
-9.1.3.12	SENB RELEASE REQUIRED	175
-9.1.3.13	SENB RELEASE CONFIRM	176
-9.1.3.14	SENB COUNTER CHECK REQUEST	177
-9.1.4	Messages for E-UTRAN-NR Dual Connectivity Procedures	178
-9.1.4.1	SGNB ADDITION REQUEST	178
-9.1.4.2	SGNB ADDITION REQUEST ACKNOWLEDGE	181
-9.1.4.3	SGNB ADDITION REQUEST REJECT	184
-9.1.4.4	SGNB RECONFIGURATION COMPLETE	184
-9.1.4.5	SGNB MODIFICATION REQUEST	185
-9.1.4.6	SGNB MODIFICATION REQUEST ACKNOWLEDGE	190
-9.1.4.7	SGNB MODIFICATION REQUEST REJECT	194
-9.1.4.8	SGNB MODIFICATION REQUIRED	194
-9.1.4.9	SGNB MODIFICATION CONFIRM	196
-9.1.4.10	SGNB MODIFICATION REFUSE	198
-9.1.4.11	SGNB RELEASE REQUEST	198
-9.1.4.12	SGNB RELEASE REQUEST ACKNOWLEDGE	200
-9.1.4.13	SGNB RELEASE REQUEST REJECT	200
-9.1.4.14	SGNB RELEASE REQUIRED	201
-9.1.4.15	SGNB RELEASE CONFIRM	201
-9.1.4.16	SGNB COUNTER CHECK REQUEST	203
-9.1.4.17	SGNB CHANGE REQUIRED	203
-9.1.4.18	SGNB CHANGE CONFIRM	204
-9.1.4.19	SGNB CHANGE REFUSE	206
-9.1.4.20	SECONDARY RAT DATA USAGE REPORT	206
-9.1.4.21	RRC TRANSFER	206
-9.1.4.22	PARTIAL RESET REQUIRED	208
-9.1.4.23	PARTIAL RESET CONFIRM	208
-9.1.4.24	E-UTRA – NR CELL RESOURCE COORDINATION REQUEST	209
-9.1.4.25	E-UTRA – NR CELL RESOURCE COORDINATION RESPONSE	210
-9.1.4.26	SGNB ACTIVITY NOTIFICATION	210
-9.1.4.27	GNB STATUS INDICATION	211
-9.1.4.28	TRACE START	211
-9.1.4.29	DEACTIVATE TRACE	212
-9.1.4.30	UE Radio Capability ID Mapping Request	212
-9.1.4.31	UE Radio Capability ID Mapping Response	212
-9.1.5	Messages for IAB Procedures	212
-9.1.5.1	F1-C TRAFFIC TRANSFER	212
-9.2	Information Element definitions	213
-9.2.0	General	213
-9.2.1	GTP Tunnel Endpoint	213
-9.2.2	Trace Activation	213
-9.2.3	Handover Restriction List	215
-9.2.4	PLMN Identity	217
-9.2.5	DL Forwarding	217
-9.2.6	Cause	218
-9.2.7	Criticality Diagnostics	223
-9.2.8	Served Cell Information	224
-9.2.9	E-RAB Level QoS Parameters	229
-9.2.10	GBR QoS Information	229
-9.2.11	Bit Rate	231
-9.2.12	UE Aggregate Maximum Bit Rate	231
-9.2.13	Message Type	232
-9.2.14	ECGI	232
-9.2.15	COUNT Value	232
-9.2.16	GUMMEI	232
-9.2.17	UL Interference Overload Indication	232
-9.2.18	UL High Interference Indication	233
-9.2.19	Relative Narrowband Tx Power (RNTP)	233
-9.2.20	GU Group Id	235
-9.2.21	Location Reporting Information	235
-9.2.22	Global eNB ID	236
-9.2.23	E-RAB ID	236
-9.2.24	eNB UE X2AP ID	236
-9.2.25	Subscriber Profile ID for RAT/Frequency priority	237
-9.2.25a	Additional RRM Policy Index	237
-9.2.26	EARFCN	237
-9.2.27	Transmission Bandwidth	237
-9.2.28	E-RAB List	237
-9.2.29	UE Security Capabilities	238
-9.2.30	AS Security Information	238
-9.2.31	Allocation and Retention Priority	238
-9.2.32	Time To Wait	239
-9.2.33	SRVCC Operation Possible	239
-9.2.34	Hardware Load Indicator	239
-9.2.35	S1 TNL Load Indicator	240
-9.2.36	Load Indicator	240
-9.2.37	Radio Resource Status	240
-9.2.38	UE History Information	240
-9.2.39	Last Visited Cell Information	241
-9.2.40	Last Visited E-UTRAN Cell Information	241
-9.2.41	Last Visited GERAN Cell Information	241
-9.2.42	Cell Type	242
-9.2.43	Number of Antenna Ports	242
-9.2.44	Composite Available Capacity Group	242
-9.2.45	Composite Available Capacity	242
-9.2.46	Cell Capacity Class Value	243
-9.2.47	Capacity Value	243
-9.2.48	Mobility Parameters Information	243
-9.2.49	Mobility Parameters Modification Range	243
-9.2.50	PRACH Configuration	244
-9.2.51	Subframe Allocation	244
-9.2.52	CSG Membership Status	244
-9.2.53	CSG ID	244
-9.2.54	ABS Information	244
-9.2.55	Invoke Indication	246
-9.2.56	MDT Configuration	246
-9.2.57	Void	249
-9.2.58	ABS Status	249
-9.2.59	Management Based MDT Allowed	250
-9.2.60	MultibandInfoList	251
-9.2.61	M3 Configuration	251
-9.2.62	M4 Configuration	251
-9.2.63	M5 Configuration	251
-9.2.64	MDT PLMN List	252
-9.2.65	EARFCN Extension	252
-9.2.66	COUNT Value Extended	252
-9.2.67	Extended UL Interference Overload Info	252
-9.2.68	RNL Header	253
-9.2.69	Masked IMEISV	253
-9.2.70	Expected UE Behaviour	254
-9.2.71	Expected UE Activity Behaviour	254
-9.2.72	SeNB Security Key	254
-9.2.73	SCG Change Indication	255
-9.2.74	CoMP Information	255
-9.2.75	CoMP Hypothesis Set	255
-9.2.76	RSRP Measurement Report List	256
-9.2.77	Dynamic DL transmission information	257
-9.2.78	ProSe Authorized	257
-9.2.79	CSI Report	257
-9.2.80	Wideband CQI	258
-9.2.81	Subband CQI	258
-9.2.82	COUNT Value for PDCP SN Length 18	259
-9.2.83	LHN ID	259
-9.2.84	Correlation ID	259
-9.2.85	UE Context Kept Indicator	259
-9.2.86	eNB UE X2AP ID Extension	260
-9.2.87	M6 Configuration	260
-9.2.88	M7 Configuration	260
-9.2.89	Tunnel Information	260
-9.2.90	X2 Benefit Value	261
-9.2.91	Resume ID	261
-9.2.92	Bearer Type	261
-9.2.93	V2X Services Authorized	262
-9.2.94	Offset of NB-IoT Channel Number to EARFCN	262
-9.2.95	WT ID	262
-9.2.96	WT UE XwAP ID	262
-9.2.97	UE Sidelink Aggregate Maximum Bit Rate	262
-9.2.98	NR Neighbour Information	263
-9.2.99	Extended Bit Rate	265
-9.2.100	en-gNB UE X2AP ID	265
-9.2.101	SgNB Security Key	265
-9.2.102	Target SgNB ID Information	265
-9.2.103	SCG Configuration Query	265
-9.2.104	Delivery Status	266
-9.2.105	Void	266
-9.2.106	NR Frequency Info	266
-9.2.107	NR UE Security Capabilities	267
-9.2.108	EN-DC Resource Configuration	267
-9.2.109	PDCP Change Indication	267
-9.2.110	Served NR Cell Information	268
-9.2.111	NR CGI	270
-9.2.112	Global en-gNB ID	271
-9.2.113	Void	271
-9.2.114	NR Transmission Bandwidth	271
-9.2.115	Cell Assistance Information	271
-9.2.116	MeNB Resource Coordination Information	272
-9.2.117	SgNB Resource Coordination Information	274
-9.2.118	UL Configuration	276
-9.2.119	RLC Mode	276
-9.2.120	Secondary RAT Usage Report List	276
-9.2.121	UE Application layer measurement configuration	277
-9.2.122	DRB ID	278
-9.2.123	SUL Information	278
-9.2.124	Packet Loss Rate	279
-9.2.125	Protected E-UTRA Resource Indication	279
-9.2.126	Data Traffic Resource Indication	283
-9.2.127	Data Traffic Resources	283
-9.2.128	Reserved Subframe Pattern	284
-9.2.129	Aerial UE subscription information	285
-9.2.130	User plane traffic activity report	285
-9.2.131	RLC Status	285
-9.2.132	RRC config indication	286
-9.2.133	PDCP SN Length	286
-9.2.134	Bluetooth Measurement Configuration	286
-9.2.135	WLAN Measurement Configuration	286
-9.2.136	Subscription Based UE Differentiation Information	287
-9.2.137	Duplication activation	288
-9.2.138	LCID	289
-9.2.139	MeNB Coordination Assistance Information	289
-9.2.140	SgNB Coordination Assistance Information	289
-9.2.141	Desired Activity Notification Level	289
-9.2.142	Location Information at SgNB	289
-9.2.143	Interface Instance Indication	290
-9.2.144	NB-IoT UL DL Alignment Offset	290
-9.2.145	Lower Layer presence status change	290
-9.2.146	Cell and Capacity Assistance Information	290
-9.2.147	Maximum Cell List Size	290
-9.2.148	Message Oversize Notification	291
-9.2.149	TNL Transport Layer Address Info	291
-9.2.150	CP Transport Layer Information	291
-9.2.151	TNL Association Usage	292
-9.2.152	RAN UE NGAP ID	292
-9.2.153	EPC Handover Restriction List Container	292
-9.2.154	DAPS Request Information	292
-9.2.155	DAPS Response Information	293
-9.2.156	Maximum Number of CHO Preparations	293
-9.2.157	Ethernet Type	293
-9.2.158	NR V2X Services Authorized	293
-9.2.159	NR UE Sidelink Aggregate Maximum Bit Rate	293
-9.2.160	PC5 QoS Parameters	293
-9.2.161	TNL Capacity Indicator	294
-9.2.162	NR Radio Resource Status	295
-9.2.163	NR Composite Available Capacity Group	295
-9.2.164	NR Composite Available Capacity	295
-9.2.165	NR Cell Capacity Class Value	296
-9.2.166	NR Capacity Value	296
-9.2.167	SSB Index	297
-9.2.168	NR Carrier List	297
-9.2.169	SSB Positions In Burst	297
-9.2.170	NPRACH Configuration	298
-9.2.171	UE Radio Capability ID	300
-9.2.172	QoS Mapping Information	300
-9.2.173	UE Radio Capability	300
-9.2.174	URI	300
-9.2.175	SFN Offset	300
-9.3	Message and Information Element Abstract Syntax (with ASN.1)	301
-9.3.1	General	301
-9.3.2	Usage of Private Message Mechanism for Non-standard Use	301
-9.3.3	Elementary Procedure Definitions	302
-9.3.4	PDU Definitions	316
-9.3.5	Information Element definitions	411
-9.3.6	Common definitions	477
-9.3.7	Constant definitions	478
-9.3.8	Container definitions	489
-9.4	Message transfer syntax	493
-9.5	Timers	493
-10	Handling of unknown, unforeseen and erroneous protocol data	493
-Annex A (informative): Change history	494
+8.6.7.2	Successful Operation	74
+8.6.7.3	Unsuccessful Operation	74
+8.6.7.4	Abnormal Conditions	74
+8.7	Procedures for E-UTRAN-NR Dual Connectivity	74
+8.7.1	EN-DC X2 Setup	74
+8.7.1.1	General	74
+8.7.1.2	Successful Operation	75
+8.7.1.3	Unsuccessful Operation	77
+8.7.1.4	Abnormal Conditions	77
+8.7.2	EN-DC Configuration Update	78
+8.7.2.1	General	78
+8.7.2.2	Successful Operation	78
+8.7.2.3	Unsuccessful Operation	81
+8.7.2.4	Abnormal Conditions	81
+8.7.3	EN-DC Cell Activation	82
+8.7.3.1	General	82
+8.7.3.2	Successful Operation	82
+8.7.3.3	Unsuccessful Operation	82
+8.7.3.4	Abnormal Conditions	83
+8.7.4	SgNB Addition Preparation	83
+8.7.4.1	General	83
+8.7.4.2	Successful Operation	83
+8.7.4.3	Unsuccessful Operation	86
+8.7.4.4	Abnormal Conditions	87
+8.7.5	SgNB Reconfiguration Completion	87
+8.7.5.1	General	87
+8.7.5.2	Successful Operation	88
+8.7.5.3	Abnormal Conditions	88
+8.7.6	MeNB initiated SgNB Modification Preparation	88
+8.7.6.1	General	88
+8.7.6.2	Successful Operation	88
+8.7.6.3	Unsuccessful Operation	93
+8.7.6.4	Abnormal Conditions	93
+8.7.7	SgNB initiated SgNB Modification	94
+8.7.7.1	General	94
+8.7.7.2	Successful Operation	94
+8.7.7.3	Unsuccessful Operation	96
+8.7.7.4	Abnormal Conditions	96
+8.7.8	SgNB Change	97
+8.7.8.1	General	97
+8.7.8.2	Successful Operation	97
+8.7.8.3	Unsuccessful Operation	98
+8.7.8.4	Abnormal Conditions	98
+8.7.9	MeNB initiated SgNB Release	98
+8.7.9.1	General	98
+8.7.9.2	Successful Operation	98
+8.7.9.3	Unsuccessful Operation	99
+8.7.9.4	Abnormal Conditions	99
+8.7.10	SgNB initiated SgNB Release	100
+8.7.10.1	General	100
+8.7.10.2	Successful Operation	100
+8.7.10.3	Unsuccessful Operation	100
+8.7.10.4	Abnormal Conditions	100
+8.7.11	SgNB Counter Check	101
+8.7.11.1	General	101
+8.7.11.2	Successful Operation	101
+8.7.11.3	Unsuccessful Operation	101
+8.7.11.4	Abnormal Conditions	101
+8.7.12	RRC Transfer	101
+8.7.12.1	General	101
+8.7.12.2	Successful Operation	102
+8.7.12.3	Abnormal Conditions	102
+8.7.13	Secondary RAT Data Usage Report	102
+8.7.13.1	General	102
+8.7.13.2	Successful Operation	102
+8.7.13.3	Unsuccessful Operation	103
+8.7.13.4	Abnormal Conditions	103
+8.7.14	Partial reset of EN-DC	103
+8.7.14.1	General	103
+8.7.14.2	Successful Operation	103
+8.7.14.3	Unsuccessful Operation	104
+8.7.14.4	Abnormal Conditions	104
+8.7.15	E-UTRA – NR Cell Resource Coordination	104
+8.7.15.1	General	104
+8.7.15.2	Successful Operation	105
+8.7.16	SgNB Activity Notification	106
+8.7.16.1	General	106
+8.7.16.2	Successful Operation	106
+8.7.16.3	Abnormal Conditions	106
+8.7.17	gNB Status Indication	106
+8.7.17.1	General	106
+8.7.17.2	Successful Operation	106
+8.7.17.3	Abnormal Conditions	107
+8.7.18	EN-DC Configuration Transfer	107
+8.7.18.1	General	107
+8.7.18.2	Successful Operation	107
+8.7.18.3	Abnormal Conditions	108
+8.7.19	Trace Start	108
+8.7.19.1	General	108
+8.7.19.2	Successful Operation	108
+8.7.19.3	Abnormal Conditions	108
+8.7.20	Deactivate Trace	109
+8.7.20.1	General	109
+8.7.20.2	Successful Operation	109
+8.7.20.3	Abnormal Conditions	109
+8.7.21	EN-DC Resource Status Reporting Initiation	109
+8.7.21.1	General	109
+8.7.21.2	Successful Operation	109
+8.7.21.2.1	Successful Operation - eNB-initiated	109
+8.7.21.2.2	Successful Operation - en-gNB-initiated	110
+8.7.21.3	Unsuccessful Operation	111
+8.7.21.4	Abnormal Conditions	112
+8.7.22	EN-DC Resource Status Reporting	112
+8.7.22.1	General	112
+8.7.22.2	Successful Operation	112
+8.7.22.3	Unsuccessful Operation	113
+8.7.22.4	Abnormal Conditions	113
+8.7.23	Cell Traffic Trace	113
+8.7.23.1	General	113
+8.7.23.2	Successful Operation	113
+8.7.24	UE Radio Capability ID Mapping	113
+8.7.24.1	General	113
+8.7.24.2	Successful Operation	114
+8.7.24.3	Unsuccessful Operation	114
+8.8	IAB Procedures	114
+8.8.1	F1-C Traffic Transfer	114
+8.8.1.1	General	114
+8.8.1.2	Successful Operation	114
+8.8.1.3	Unsuccessful Operation	115
+8.8.1.4	Abnormal Conditions	115
+9	Elements for X2AP Communication	115
+9.0	General	115
+9.1	Message Functional Definition and Content	115
+9.1.1	Messages for Basic Mobility Procedures	115
+9.1.1.1	HANDOVER REQUEST	115
+9.1.1.2	HANDOVER REQUEST ACKNOWLEDGE	118
+9.1.1.3	HANDOVER PREPARATION FAILURE	120
+9.1.1.4	SN STATUS TRANSFER	120
+9.1.1.5	UE CONTEXT RELEASE	123
+9.1.1.6	HANDOVER CANCEL	123
+9.1.1.7	HANDOVER SUCCESS	124
+9.1.1.8	CONDITIONAL HANDOVER CANCEL	124
+9.1.1.9	EARLY STATUS TRANSFER	125
+9.1.2	Messages for global procedures	127
+9.1.2.1	LOAD INFORMATION	127
+9.1.2.2	ERROR INDICATION	128
+9.1.2.3	X2 SETUP REQUEST	129
+9.1.2.4	X2 SETUP RESPONSE	130
+9.1.2.5	X2 SETUP FAILURE	131
+9.1.2.6	RESET REQUEST	132
+9.1.2.7	RESET RESPONSE	132
+9.1.2.8	ENB CONFIGURATION UPDATE	132
+9.1.2.9	ENB CONFIGURATION UPDATE ACKNOWLEDGE	135
+9.1.2.10	ENB CONFIGURATION UPDATE FAILURE	135
+9.1.2.11	RESOURCE STATUS REQUEST	135
+9.1.2.12	RESOURCE STATUS RESPONSE	137
+9.1.2.13	RESOURCE STATUS FAILURE	139
+9.1.2.14	RESOURCE STATUS UPDATE	140
+9.1.2.15	MOBILITY CHANGE REQUEST	140
+9.1.2.16	MOBILITY CHANGE ACKNOWLEDGE	141
+9.1.2.17	MOBILITY CHANGE FAILURE	141
+9.1.2.18	RLF INDICATION	141
+9.1.2.19	HANDOVER REPORT	142
+9.1.2.20	CELL ACTIVATION REQUEST	144
+9.1.2.21	CELL ACTIVATION RESPONSE	144
+9.1.2.22	CELL ACTIVATION FAILURE	144
+9.1.2.23	X2 RELEASE	144
+9.1.2.24	X2AP MESSAGE TRANSFER	145
+9.1.2.25	X2 REMOVAL REQUEST	145
+9.1.2.26	X2 REMOVAL RESPONSE	145
+9.1.2.27	X2 REMOVAL FAILURE	145
+9.1.2.28	RETRIEVE UE CONTEXT REQUEST	146
+9.1.2.29	RETRIEVE UE CONTEXT RESPONSE	147
+9.1.2.30	RETRIEVE UE CONTEXT FAILURE	149
+9.1.2.31	EN-DC X2 SETUP REQUEST	150
+9.1.2.32	EN-DC X2 SETUP RESPONSE	151
+9.1.2.33	EN-DC X2 SETUP FAILURE	151
+9.1.2.34	EN-DC CONFIGURATION UPDATE	152
+9.1.2.35	EN-DC CONFIGURATION UPDATE ACKNOWLEDGE	154
+9.1.2.36	EN-DC CONFIGURATION UPDATE FAILURE	155
+9.1.2.37	EN-DC CELL ACTIVATION REQUEST	156
+9.1.2.38	EN-DC CELL ACTIVATION RESPONSE	156
+9.1.2.39	EN-DC CELL ACTIVATION FAILURE	156
+9.1.2.40	EN-DC X2 REMOVAL REQUEST	157
+9.1.2.41	EN-DC X2 REMOVAL RESPONSE	157
+9.1.2.42	EN-DC X2 REMOVAL FAILURE	157
+9.1.2.43	DATA FORWARDING ADDRESS INDICATION	158
+9.1.2.44	EN-DC CONFIGURATION TRANSFER	159
+9.1.2.45	EN-DC RESOURCE STATUS REQUEST	160
+9.1.2.46	EN-DC RESOURCE STATUS RESPONSE	162
+9.1.2.47	EN-DC RESOURCE STATUS FAILURE	162
+9.1.2.48	EN-DC RESOURCE STATUS UPDATE	163
+9.1.2.49	CELL TRAFFIC TRACE	164
+9.1.3	Messages for Dual Connectivity Procedures	165
+9.1.3.1	SENB ADDITION REQUEST	165
+9.1.3.2	SENB ADDITION REQUEST ACKNOWLEDGE	167
+9.1.3.3	SENB ADDITION REQUEST REJECT	169
+9.1.3.4	SENB RECONFIGURATION COMPLETE	169
+9.1.3.5	SENB MODIFICATION REQUEST	170
+9.1.3.6	SENB MODIFICATION REQUEST ACKNOWLEDGE	172
+9.1.3.7	SENB MODIFICATION REQUEST REJECT	174
+9.1.3.8	SENB MODIFICATION REQUIRED	175
+9.1.3.9	SENB MODIFICATION CONFIRM	175
+9.1.3.10	SENB MODIFICATION REFUSE	176
+9.1.3.11	SENB RELEASE REQUEST	176
+9.1.3.12	SENB RELEASE REQUIRED	177
+9.1.3.13	SENB RELEASE CONFIRM	178
+9.1.3.14	SENB COUNTER CHECK REQUEST	179
+9.1.4	Messages for E-UTRAN-NR Dual Connectivity Procedures	180
+9.1.4.1	SGNB ADDITION REQUEST	180
+9.1.4.2	SGNB ADDITION REQUEST ACKNOWLEDGE	184
+9.1.4.3	SGNB ADDITION REQUEST REJECT	187
+9.1.4.4	SGNB RECONFIGURATION COMPLETE	187
+9.1.4.5	SGNB MODIFICATION REQUEST	188
+9.1.4.6	SGNB MODIFICATION REQUEST ACKNOWLEDGE	193
+9.1.4.7	SGNB MODIFICATION REQUEST REJECT	197
+9.1.4.8	SGNB MODIFICATION REQUIRED	197
+9.1.4.9	SGNB MODIFICATION CONFIRM	199
+9.1.4.10	SGNB MODIFICATION REFUSE	201
+9.1.4.11	SGNB RELEASE REQUEST	201
+9.1.4.12	SGNB RELEASE REQUEST ACKNOWLEDGE	203
+9.1.4.13	SGNB RELEASE REQUEST REJECT	203
+9.1.4.14	SGNB RELEASE REQUIRED	204
+9.1.4.15	SGNB RELEASE CONFIRM	204
+9.1.4.16	SGNB COUNTER CHECK REQUEST	206
+9.1.4.17	SGNB CHANGE REQUIRED	206
+9.1.4.18	SGNB CHANGE CONFIRM	207
+9.1.4.19	SGNB CHANGE REFUSE	209
+9.1.4.20	SECONDARY RAT DATA USAGE REPORT	209
+9.1.4.21	RRC TRANSFER	209
+9.1.4.22	PARTIAL RESET REQUIRED	211
+9.1.4.23	PARTIAL RESET CONFIRM	211
+9.1.4.24	E-UTRA – NR CELL RESOURCE COORDINATION REQUEST	212
+9.1.4.25	E-UTRA – NR CELL RESOURCE COORDINATION RESPONSE	213
+9.1.4.26	SGNB ACTIVITY NOTIFICATION	213
+9.1.4.27	GNB STATUS INDICATION	214
+9.1.4.28	TRACE START	214
+9.1.4.29	DEACTIVATE TRACE	215
+9.1.4.30	UE Radio Capability ID Mapping Request	215
+9.1.4.31	UE Radio Capability ID Mapping Response	215
+9.1.5	Messages for IAB Procedures	215
+9.1.5.1	F1-C TRAFFIC TRANSFER	215
+9.2	Information Element definitions	216
+9.2.0	General	216
+9.2.1	GTP Tunnel Endpoint	216
+9.2.2	Trace Activation	216
+9.2.3	Handover Restriction List	218
+9.2.4	PLMN Identity	220
+9.2.5	DL Forwarding	220
+9.2.6	Cause	221
+9.2.7	Criticality Diagnostics	226
+9.2.8	Served Cell Information	227
+9.2.9	E-RAB Level QoS Parameters	232
+9.2.10	GBR QoS Information	232
+9.2.11	Bit Rate	234
+9.2.12	UE Aggregate Maximum Bit Rate	234
+9.2.13	Message Type	235
+9.2.14	ECGI	235
+9.2.15	COUNT Value	235
+9.2.16	GUMMEI	235
+9.2.17	UL Interference Overload Indication	235
+9.2.18	UL High Interference Indication	236
+9.2.19	Relative Narrowband Tx Power (RNTP)	236
+9.2.20	GU Group Id	238
+9.2.21	Location Reporting Information	238
+9.2.22	Global eNB ID	239
+9.2.23	E-RAB ID	239
+9.2.24	eNB UE X2AP ID	239
+9.2.25	Subscriber Profile ID for RAT/Frequency priority	240
+9.2.25a	Additional RRM Policy Index	240
+9.2.26	EARFCN	240
+9.2.27	Transmission Bandwidth	240
+9.2.28	E-RAB List	240
+9.2.29	UE Security Capabilities	241
+9.2.30	AS Security Information	241
+9.2.31	Allocation and Retention Priority	241
+9.2.32	Time To Wait	242
+9.2.33	SRVCC Operation Possible	242
+9.2.34	Hardware Load Indicator	242
+9.2.35	S1 TNL Load Indicator	243
+9.2.36	Load Indicator	243
+9.2.37	Radio Resource Status	243
+9.2.38	UE History Information	243
+9.2.39	Last Visited Cell Information	244
+9.2.40	Last Visited E-UTRAN Cell Information	244
+9.2.41	Last Visited GERAN Cell Information	244
+9.2.42	Cell Type	245
+9.2.43	Number of Antenna Ports	245
+9.2.44	Composite Available Capacity Group	245
+9.2.45	Composite Available Capacity	245
+9.2.46	Cell Capacity Class Value	246
+9.2.47	Capacity Value	246
+9.2.48	Mobility Parameters Information	246
+9.2.49	Mobility Parameters Modification Range	246
+9.2.50	PRACH Configuration	247
+9.2.51	Subframe Allocation	247
+9.2.52	CSG Membership Status	247
+9.2.53	CSG ID	247
+9.2.54	ABS Information	247
+9.2.55	Invoke Indication	249
+9.2.56	MDT Configuration	249
+9.2.57	Void	252
+9.2.58	ABS Status	252
+9.2.59	Management Based MDT Allowed	253
+9.2.60	MultibandInfoList	254
+9.2.61	M3 Configuration	254
+9.2.62	M4 Configuration	254
+9.2.63	M5 Configuration	254
+9.2.64	MDT PLMN List	255
+9.2.65	EARFCN Extension	255
+9.2.66	COUNT Value Extended	255
+9.2.67	Extended UL Interference Overload Info	255
+9.2.68	RNL Header	256
+9.2.69	Masked IMEISV	256
+9.2.70	Expected UE Behaviour	257
+9.2.71	Expected UE Activity Behaviour	257
+9.2.72	SeNB Security Key	257
+9.2.73	SCG Change Indication	258
+9.2.74	CoMP Information	258
+9.2.75	CoMP Hypothesis Set	258
+9.2.76	RSRP Measurement Report List	259
+9.2.77	Dynamic DL transmission information	260
+9.2.78	ProSe Authorized	260
+9.2.79	CSI Report	260
+9.2.80	Wideband CQI	261
+9.2.81	Subband CQI	261
+9.2.82	COUNT Value for PDCP SN Length 18	262
+9.2.83	LHN ID	262
+9.2.84	Correlation ID	262
+9.2.85	UE Context Kept Indicator	262
+9.2.86	eNB UE X2AP ID Extension	263
+9.2.87	M6 Configuration	263
+9.2.88	M7 Configuration	263
+9.2.89	Tunnel Information	263
+9.2.90	X2 Benefit Value	264
+9.2.91	Resume ID	264
+9.2.92	Bearer Type	264
+9.2.93	V2X Services Authorized	265
+9.2.94	Offset of NB-IoT Channel Number to EARFCN	265
+9.2.95	WT ID	265
+9.2.96	WT UE XwAP ID	265
+9.2.97	UE Sidelink Aggregate Maximum Bit Rate	265
+9.2.98	NR Neighbour Information	266
+9.2.99	Extended Bit Rate	268
+9.2.100	en-gNB UE X2AP ID	268
+9.2.101	SgNB Security Key	268
+9.2.102	Target SgNB ID Information	268
+9.2.103	SCG Configuration Query	268
+9.2.104	Delivery Status	269
+9.2.105	Void	269
+9.2.106	NR Frequency Info	269
+9.2.107	NR UE Security Capabilities	270
+9.2.108	EN-DC Resource Configuration	270
+9.2.109	PDCP Change Indication	270
+9.2.110	Served NR Cell Information	271
+9.2.111	NR CGI	273
+9.2.112	Global en-gNB ID	274
+9.2.113	Void	274
+9.2.114	NR Transmission Bandwidth	274
+9.2.115	Cell Assistance Information	274
+9.2.116	MeNB Resource Coordination Information	275
+9.2.117	SgNB Resource Coordination Information	277
+9.2.118	UL Configuration	279
+9.2.119	RLC Mode	279
+9.2.120	Secondary RAT Usage Report List	279
+9.2.121	UE Application layer measurement configuration	280
+9.2.122	DRB ID	281
+9.2.123	SUL Information	281
+9.2.124	Packet Loss Rate	282
+9.2.125	Protected E-UTRA Resource Indication	282
+9.2.126	Data Traffic Resource Indication	286
+9.2.127	Data Traffic Resources	286
+9.2.128	Reserved Subframe Pattern	287
+9.2.129	Aerial UE subscription information	288
+9.2.130	User plane traffic activity report	288
+9.2.131	RLC Status	288
+9.2.132	RRC config indication	289
+9.2.133	PDCP SN Length	289
+9.2.134	Bluetooth Measurement Configuration	289
+9.2.135	WLAN Measurement Configuration	289
+9.2.136	Subscription Based UE Differentiation Information	290
+9.2.137	Duplication activation	291
+9.2.138	LCID	292
+9.2.139	MeNB Coordination Assistance Information	292
+9.2.140	SgNB Coordination Assistance Information	292
+9.2.141	Desired Activity Notification Level	292
+9.2.142	Location Information at SgNB	292
+9.2.143	Interface Instance Indication	293
+9.2.144	NB-IoT UL DL Alignment Offset	293
+9.2.145	Lower Layer presence status change	293
+9.2.146	Cell and Capacity Assistance Information	293
+9.2.147	Maximum Cell List Size	293
+9.2.148	Message Oversize Notification	294
+9.2.149	TNL Transport Layer Address Info	294
+9.2.150	CP Transport Layer Information	294
+9.2.151	TNL Association Usage	295
+9.2.152	RAN UE NGAP ID	295
+9.2.153	EPC Handover Restriction List Container	295
+9.2.154	DAPS Request Information	295
+9.2.155	DAPS Response Information	296
+9.2.156	Maximum Number of CHO Preparations	296
+9.2.157	Ethernet Type	296
+9.2.158	NR V2X Services Authorized	296
+9.2.159	NR UE Sidelink Aggregate Maximum Bit Rate	296
+9.2.160	PC5 QoS Parameters	296
+9.2.161	TNL Capacity Indicator	297
+9.2.162	NR Radio Resource Status	298
+9.2.163	NR Composite Available Capacity Group	298
+9.2.164	NR Composite Available Capacity	298
+9.2.165	NR Cell Capacity Class Value	299
+9.2.166	NR Capacity Value	299
+9.2.167	SSB Index	300
+9.2.168	NR Carrier List	300
+9.2.169	SSB Positions In Burst	300
+9.2.170	NPRACH Configuration	301
+9.2.171	UE Radio Capability ID	303
+9.2.172	QoS Mapping Information	303
+9.2.173	UE Radio Capability	303
+9.2.174	URI	303
+9.2.175	SFN Offset	303
+9.2.176	Global RAN Node ID	304
+9.3	Message and Information Element Abstract Syntax (with ASN.1)	305
+9.3.1	General	305
+9.3.2	Usage of Private Message Mechanism for Non-standard Use	305
+9.3.3	Elementary Procedure Definitions	306
+9.3.4	PDU Definitions	320
+9.3.5	Information Element definitions	415
+9.3.6	Common definitions	482
+9.3.7	Constant definitions	483
+9.3.8	Container definitions	494
+9.4	Message transfer syntax	498
+9.5	Timers	498
+10	Handling of unknown, unforeseen and erroneous protocol data	498
+Annex A (informative): Change history	499
 
 Foreword
 This Technical Specification has been produced by the 3rd Generation Partnership Project (3GPP).
@@ -1125,6 +1126,7 @@ If the PC5 QoS Parameters IE is contained in the HANDOVER REQUEST message, the t
 If the UE Radio Capability ID IE is contained in the HANDOVER REQUEST message, the target eNB shall, if supported, store this information in the UE context and use it as specified in TS 23.401 [12].
 If the IAB Node Indication IE is contained in the HANDOVER REQUEST message, the target eNB shall, if supported, consider that the request is for an IAB node.
 If the IMS Voice EPS Fallback from 5G IE is contained in the HANDOVER REQUEST message, the target eNB shall, if supported, store this information in the UE context and consider that the UE was previously handed over from NG-RAN to E-UTRAN due to an IMS voice fallback.
+If the target eNB receives a HANDOVER REQUEST message containing the Source DL Forwarding IP Address IE as part of the E-RABs To Be Setup Item IE, the target eNB shall, if supported, store this information and use it as part of its ACL functionality configuration actions, if such ACL functionality is deployed.
 Interaction with SN Status Transfer procedure:
 If the UE Context Kept Indicator IE set to "True" and the E-RABs transferred to MeNB IE are included in the HANDOVER REQUEST ACKNOWLEDGE message, then the source eNB shall, if supported, include the uplink/downlink PDCP SN and HFN status received from the SgNB in the SN Status Transfer procedure towards the target eNB, as specified in TS 37.340 [32].
 8.2.1.3	Unsuccessful Operation
@@ -1257,20 +1259,21 @@ If one or more candidate cells in the Candidate Cells To Be Cancelled List IE in
 8.2.7	Early Status Transfer 
 8.2.7.1	General
 The purpose of the Early Status Transfer procedure is to transfer the COUNT of the first downlink SDU that the source eNB forwards to the target eNB or the COUNT for discarding already forwarded downlink SDUs for respective E-RAB during DAPS Handover or Conditional Handover.
-For Dual Connectivity or EN-DC, the Early Status Transfer procedure is also used, during a Conditional Handover, from the SeNB to the MeNB as specified in TS 36.300 [15], or from the en-gNB to the eNB as specified in TS 37.340 [32].
+For Dual Connectivity or EN-DC, the Early Status Transfer procedure is also used, during a Conditional Handover, from the SeNB to the MeNB as specified in TS 36.300 [15], or from the en-gNB to the MeNB as specified in TS 37.340 [32].
 The procedure uses UE-associated signalling.
 8.2.7.2	Successful Operation
 
 Figure 8.2.7.2-1: Early Status Transfer during DAPS Handover or Conditional Handover, successful operation
- 
+
 Figure 8.2.7.2-2: Early Status Transfer during Conditional Handover in dual connectivity or EN-DC operation, successful operation
 From source eNB to target eNB
-The E-RABs Subject To Early Status Transfe List IE included in the EARLY STATUS TRANSFER message contains the E-RAB ID(s) corresponding to the E-RAB(s) subject to be simultaneously served by the source and the target eNBs during DAPS Handover or the E-RAB(s) transferred during Conditional Handover.
+The E-RABs Subject To Early Status Transfer List IE included in the EARLY STATUS TRANSFER message contains the E-RAB ID(s) corresponding to the E-RAB(s) subject to be simultaneously served by the source and the target eNBs during DAPS Handover or the E-RAB(s) transferred during Conditional Handover.
 For each E-RAB for which the FIRST DL COUNT Value IE is received in the EARLY STATUS TRANSFER message, the target eNB shall use it as the COUNT of the first downlink SDU that the source eNB forwards to the target eNB. If the FIRST DL COUNT Value Extended IE or FIRST DL COUNT Value for PDCP SN Length 18 IE is included in the E-RABs Subject To Early Status Transfer Item IE, the target eNB shall, if supported, use this value instead of the value contained in the FIRST DL COUNT Value IE.
 For each E-RAB for which the DISCARD DL COUNT Value IE is received in the EARLY STATUS TRANSFER message, the target eNB does not transmit forwarded downlink SDUs to the UE whose COUNT is less than the provided and discards them if transmission has not been attempted. If the DISCARD DL COUNT Value Extended IE or DISCARD DL COUNT Value for PDCP SN Length 18 IE is included in the E-RABs Subject To Early Status Transfer Item IE, the target eNB shall, if supported, use this value instead of the value contained in the DISCARD DL COUNT Value IE.
-From SeNB (respectively, en-gNB) to MeNB (respectively, eNB), the source eNB for Conditional Handover
+From SeNB (respectively, en-gNB) to MeNB, the source eNB for Conditional Handover
 The E-RABs Subject To Early Status Transfer List IE included in the EARLY STATUS TRANSFER message contains the E-RAB ID(s) corresponding to the E-RAB(s) transferred during Conditional Handover.
 For each E-RAB in the E-RABs Subject To Early Status Transfer List IE, the source eNB shall forward to the target, the value of the received FIRST DL COUNT Value IE or DISCARD DL COUNT Value IE. If the FIRST DL COUNT Value Extended IE or FIRST DL COUNT Value for PDCP SN Length 18 IE is included, if supported, this value is forwarded instead of the value contained in the FIRST DL COUNT Value IE. If the DISCARD DL COUNT Value Extended IE or DISCARD DL COUNT Value for PDCP SN Length 18 IE is included, if supported, this value is forwarded instead of the value contained in the DISCARD DL COUNT Value IE.
+If the en-gNB sends the message to the MeNB, then the SgNB UE X2AP ID IE shall be included in the EARLY STATUS TRANSFER message, while the Old eNB UE X2AP ID IE is ignored. The SgNB UE X2AP ID IE is used as the old UE ID.
 8.2.7.3	Abnormal Conditions
 If the target eNB receives this message for a UE for which no prepared DAPS Handover or Conditional Handover exists at the target eNB, the target eNB shall ignore the message.
 8.3	Global Procedures
@@ -1608,7 +1611,7 @@ If the old eNB is not able to identify the UE context by means of the Resume ID,
 Void.
 8.3.14	EN-DC X2 Removal
 8.3.14.1	General
-The purpose of the EN-DC X2 Removal procedure is to remove the signaling connection between eNB and en-gNB in a controlled manner. If successful, this procedure erases any existing application level configuration data in the two nodes.
+The purpose of the EN-DC X2 Removal procedure is to remove the interface instance between eNB and en-gNB in a controlled manner. If successful, this procedure erases any existing application level configuration data in the two nodes.
 NOTE:	In case the signalling transport is shared among several X2-C interface instances, and the TNL association is still used by one or more X2-C interface instances, the initiating node should not initiate the removal of the TNL association.
 The procedure uses non UE-associated signaling.
 8.3.14.2	Successful Operation
@@ -1618,24 +1621,24 @@ Figure 8.3.14.2-1: eNB Initiated EN-DC X2 Removal, successful operation
 Figure 8.3.14.2-2: en-gNB Initiated EN-DC X2 Removal, successful operation
 If case of network sharing with multiple cell ID broadcast with shared X2-C signalling transport, as specified in TS 36.300 [15], the EN-DC X2 REMOVAL REQUEST message and the EN-DC X2 REMOVAL RESPONSE message shall include the Interface Instance Indication IE to identify the corresponding interface instance.
 eNB initiated EN-DC X2 Removal:
-An eNB initiates the procedure by sending the EN-DC X2 REMOVAL REQUEST message to a candidate en-gNB. Upon reception of the EN-DC X2 REMOVAL REQUEST message the candidate en-gNB shall reply with the EN-DC X2 REMOVAL RESPONSE message. After receiving the EN-DC X2 REMOVAL RESPONSE message, the initiating eNB shall initiate removal of the TNL association towards en-gNB and may remove all resources associated with that signaling connection. The candidate eNB may then remove all resources associated with that signaling connection.
-If the X2 Removal Threshold IE is included in the EN-DC X2 REMOVAL REQUEST message, the candidate en-gNB shall, if supported, accept to remove the signalling connection with eNB if the X2 Benefit Value of the signalling connection determined at the candidate en-gNB is lower than the value of the X2 Removal Threshold IE.
+An eNB initiates the procedure by sending the EN-DC X2 REMOVAL REQUEST message to a candidate en-gNB. Upon reception of the EN-DC X2 REMOVAL REQUEST message the candidate en-gNB shall reply with the EN-DC X2 REMOVAL RESPONSE message. After receiving the EN-DC X2 REMOVAL RESPONSE message, the initiating eNB shall initiate removal of the TNL association towards en-gNB and may remove all resources associated with that interface instance. The candidate eNB may then remove all resources associated with that interface instance.
+If the X2 Removal Threshold IE is included in the EN-DC X2 REMOVAL REQUEST message, the candidate en-gNB shall, if supported, accept to remove the interface instance with eNB if the X2 Benefit Value of the interface instance determined at the candidate en-gNB is lower than the value of the X2 Removal Threshold IE.
 en-gNB initiated EN-DC X2 Removal:
-An en-gNB initiates the procedure by sending the EN-DC X2 REMOVAL REQUEST message to a candidate eNB. Upon reception of the EN-DC X2 REMOVAL REQUEST message the candidate eNB shall reply with the EN-DC X2 REMOVAL RESPONSE message. After receiving the EN-DC X2 REMOVAL RESPONSE message, the initiating en-gNB shall initiate removal of the TNL association towards eNB and may remove all resources associated with that signaling connection. The candidate eNB may then remove all resources associated with that signaling connection.
-If the X2 Removal Threshold IE is included in the EN-DC X2 REMOVAL REQUEST message, the candidate eNB shall, if supported, accept to remove the signalling connection with en-gNB if the X2 Benefit Value of the signalling connection determined at the candidate eNB is lower than the value of the X2 Removal Threshold IE.
+An en-gNB initiates the procedure by sending the EN-DC X2 REMOVAL REQUEST message to a candidate eNB. Upon reception of the EN-DC X2 REMOVAL REQUEST message the candidate eNB shall reply with the EN-DC X2 REMOVAL RESPONSE message. After receiving the EN-DC X2 REMOVAL RESPONSE message, the initiating en-gNB shall initiate removal of the TNL association towards eNB and may remove all resources associated with that interface instance. The candidate eNB may then remove all resources associated with that interface instance.
+If the X2 Removal Threshold IE is included in the EN-DC X2 REMOVAL REQUEST message, the candidate eNB shall, if supported, accept to remove the interface instance with en-gNB if the X2 Benefit Value of the interface instance determined at the candidate eNB is lower than the value of the X2 Removal Threshold IE.
 8.3.14.3	Unsuccessful Operation
 
 Figure 8.3.14.3-1: eNB Initiated EN-DC X2 Removal, unsuccessful operation
 
 Figure 8.3.14.3-2: en-gNB Initiated EN-DC X2 Removal, unsuccessful operation
-If the candidate receiving node cannot accept to remove the signaling connection with initiating node it shall respond with an EN-DC X2 REMOVAL FAILURE message with an appropriate cause value.
+If the candidate receiving node cannot accept to remove the interface instance with initiating node it shall respond with an EN-DC X2 REMOVAL FAILURE message with an appropriate cause value.
 If case of network sharing with multiple cell ID broadcast with shared X2-C signalling transport, as specified in TS 36.300 [15], the EN-DC X2 REMOVAL REQUEST message and the EN-DC X2 REMOVAL FAILURE message shall include the Interface Instance Indication IE to identify the corresponding interface instance.
 8.3.14.4	Abnormal Conditions
 Void.
 8.3.15	Data Forwarding Address Indication
 8.3.15.1	General
 The purpose of the Data Forwarding Address Indication procedure is to allow the new eNB to provide data forwarding addresses to the old eNB in case the RRC connection has been re-established, as specified in TS 36.300 [15].
-For Dual Connectivity or EN-DC, the Data Forwarding Address Indication procedure is used during a Conditional Handover to provide data forwarding related information from the MeNB to the SeNB as specified in TS 36.300 [15], or from the eNB to the en-gNB as specified in TS 37.340 [32].
+For Dual Connectivity or EN-DC, the Data Forwarding Address Indication procedure is used during a Conditional Handover to provide data forwarding related information from the MeNB to the SeNB as specified in TS 36.300 [15], or from the MeNB to the en-gNB as specified in TS 37.340 [32].
 The procedure uses UE-associated signalling.
 8.3.15.2	Successful Operation
 
@@ -1646,6 +1649,8 @@ The new eNB initiates the procedure by sending a DATA FORWARDING ADDRESS INDICAT
 For each E-RAB included in E-RABs Data Forwarding Address List IE, the new eNB indicates that it requests data forwarding of downlink packets to the GTP TEID indicated in the DL GTP Tunnel Endpoint IE. 
 If the DATA FORWARDING ADDRESS INDICATION message includes the CHO DC Indicator IE, the SeNB (respectively, the en-gNB for EN-DC) shall, if supported, consider that the DATA FORWARDING ADDRESS INDICATION message concerns a Conditional Handover, and act as specified in TS 36.300 [15] for dual connectivity (respectively, act as specified in TS 37.340 [32] for EN-DC).
 If the DATA FORWARDING ADDRESS INDICATION message includes the CHO DC Early Data Forwarding Indicator IE set to “stop”, the SeNB (respectively, the en-gNB for EN-DC) shall, if supported and if already initiated, stop early data forwarding for the provided E-RABs Data Forwarding Address information.
+EN-DC
+If the MeNB sends the message to the en-gNB, then the SgNB UE X2AP ID IE shall be included in the DATA FORWARDING ADDRESS INDICATION message, while the New eNB UE X2AP ID IE is ignored. The SgNB UE X2AP ID IE is used as the new UE ID.
 8.3.15.3	Unsuccessful Operation
 Not applicable.
 8.3.15.4	Abnormal Conditions
@@ -1707,6 +1712,8 @@ If the GW Transport Layer Address IE is received in the SENB ADDITION REQUEST AC
 If the SIPTO L-GW Transport Layer Address IE is received in the SENB ADDITION REQUEST ACKNOWLEDGE message, the MeNB stores this information and use it according to TS 36.300 [15].
 If the SeNB UE X2AP ID IE and/or SeNB UE X2AP ID Extension IE are contained in the SENB ADDITION REQUEST message, the SeNB shall, if supported, store this information and use it as defined in TS 36.300 [15].
 If the Tunnel Information for BBF IE is received in the SENB ADDITION REQUEST ACKNOWLEDGE message, the MeNB shall, if supported, transfer the tunnel information for BBF to the core network.
+If the Source DL Forwarding IP Address IE is included in the SENB ADDITION REQUEST message, the SeNB shall, if supported, store this information and use it as part of its ACL functionality configuration actions, if such ACL functionality is deployed.
+If the Source DL Forwarding IP Address IE is included in the SENB ADDITION REQUEST ACKNOWLEDGE message, the MeNB shall, if supported, store this information and use it as part of its ACL functionality configuration actions, if such ACL functionality is deployed.
 Interactions with the SeNB Reconfiguration Completion procedure:
 If the SeNB admits at least one E-RAB, the SeNB shall start the timer TDCoverall when sending the SENB ADDITION REQUEST ACKNOWLEDGE message to the MeNB. The reception of the SENB RECONFIGURATION COMPLETE message shall stop the timer TDCoverall.
 8.6.1.3	Unsuccessful Operation
@@ -2071,6 +2078,9 @@ If the Requested Fast MCG recovery via SRB3 IE set to "true" is included in the 
 If the UE Radio Capability ID IE is contained in the SGNB ADDITION REQUEST message, the en-gNB shall, if supported, store this information and use it as specified in TS 23.401 [12].
 If the SGNB ADDITION REQUEST message contains the IAB Node Indication IE, the en-gNB shall, if supported, consider that the request is for an IAB node.
 For each requested E-RAB configured as MN-terminated split bearer/SCG bearer, if the QoS Mapping Information IE is contained in the GTP Tunnel Endpoint IE in the SGNB ADDITION REQUEST ACKNOWLEDGE message, the MeNB shall, if supported, use it to set DSCP and/or flow label fields for the downlink IP packets which are transmitted from MeNB to en-gNB through the GTP tunnels indicated by the GTP Tunnel Endpoint IE.
+If the Source NG-RAN Node ID IE is included in the SGNB ADDITION REQUEST message, the en-gNB shall, if supported, use it to decide the direct data forwarding path availability with the indicated source NG-RAN node, and if the direct data forwarding path is available, include the Direct Forwarding Path Availability IE in the SGNB ADDITION REQUEST ACKNOWLEDGE message.
+If the Source DL Forwarding IP Address IE or both Source DL Forwarding IP Address IE and Source Node DL Forwarding IP Address IE is included in the SGNB ADDITION REQUEST message, the en-gNB shall, if supported, store this information and use it as part of its ACL functionality configuration actions, if such ACL functionality is deployed.
+If the Source DL Forwarding IP Address IE is included in the SGNB ADDITION REQUEST ACKNOWLEDGE message, the MeNB shall, if supported, store this information and use it as part of its ACL functionality configuration actions to identify source TNL address for data forwarding in case of subsequent handover preparation, if such ACL functionality is deployed.
 Interactions with the MeNB initiated SgNB Modification procedure:
 If the en-gNB provides for an E-RAB for which the PDCP entiy is allocated at the MeNB the Secondary SgNB DL GTP Tunnel Endpoint at SCG IE to the MeNB in the SGNB ADDITION REQUEST ACKNOWLEDGE message and the MeNB has not provided the Secondary MeNB UL GTP Tunnel Endpoint at PDCP IE in the SGNB ADDITION REQUEST message, the MeNB shall trigger the MeNB initiated SgNB Modification procedure to provide the Secondary MeNB UL GTP Tunnel Endpoint at PDCP IE to the SgNB.
 Interactions with the SgNB Reconfiguration Completion procedure:
@@ -2229,6 +2239,7 @@ If the MeNB is able to perform the change requested by the en-gNB, the MeNB shal
 If the SGNB MODIFICATION REQUIRED message contains the SgNB Resource Coordination Information IE, the MeNB may use it for the purpose of resource coordination with the en-gNB. The MeNB shall consider the received UL Coordination Information IE value valid until reception of a new update of the IE for the same UE. The MeNB shall consider the received DL Coordination Information IE value valid until reception of a new update of the IE for the same UE. If the SgNB Coordination Assistance Information IE is contained in the SgNB Resource Coordination Information IE, the MeNB shall, if supported, use the information to determine further coordination of resource utilisation between the en-gNB and the MeNB.
 If the en-gNB applied a full configuration or delta configuration, e.g. as part of a mobility procedure involving a change of DU, the en-gNB shall inform the MeNB by including the RRC config indication IE in the SGNB MODIFICATION REQUIRED message.
 For each E-RAB successfully modified as requested by the en-gNB, the MeNB shall inform the en-gNB, in the SGNB MODIFICATION CONFIRM message, the same value in the EN-DC Resource Configuration IE as received in the SGNB MODIFICATION REQUIRED message.
+If the SCG resources IE in the EN-DC Resource Configuration IE in the SGNB MODIFICATION REQUIRED message for all the E-RABs of the UE are set to “not present”, the MeNB shall, if supported, deduce that the SCG resources are removed.
 Upon reception of the SGNB MODIFICATION CONFIRM message the en-gNB shall stop the timer TDCoverall.
 If the SGNB MODIFICATION CONFIRM message contains the MeNB Resource Coordination Information IE, the en-gNB should forward it to lower layers and it may use it for the purpose of resource coordination with the MeNB, or to coordinate with sidelink resources used in the MeNB. The en-gNB shall consider the received UL Coordination Information IE value valid until reception of a new update of the IE for the same UE. The en-gNB shall consider the received DL Coordination Information IE value valid until reception of a new update of the IE for the same UE. If the MeNB Coordination Assistance Information IE is contained in the MeNB Resource Coordination Information IE, the en-gNB shall, if supported, use the information to determine further coordination of resource utilisation between the en-gNB and the MeNB.
 If the MeNB receives for an E-RAB for which the PDCP entiy is allocated at the MeNB the Secondary SgNB DL GTP Tunnel Endpoint at SCG IE in the SGNB MODIFICATION REQUIRED message, it shall provide the Secondary MeNB UL GTP Tunnel Endpoint at PDCP IE to the en-gNB in the SGNB MODIFICATION CONFIRM message. If the LCID IE is included in the SGNB MODIFICATION REQUIRED message, the MeNB should take it into account.
@@ -2237,6 +2248,7 @@ If the RLC Mode IE is included for an E-RAB within the E-RABs To Be Released Lis
 The MeNB shall include only E-RABs with the following IE in E-RABs Admitted To Be Modified List IE:
 -	the Secondary MeNB UL GTP Tunnel Endpoint at PDCP IE.
 If the Location Information at SgNB IE is included in the SGNB MODIFICATION REQUIRED, the MeNB shall store the included information so that it may be transferred towards the MME.
+For each requested E-RAB configured as MN-terminated split bearer/SCG bearer, if the QoS Mapping Information IE is included in the GTP Tunnel Endpoint IE in the SGNB MODIFICATION REQUIRED message, the MeNB shall, if supported, use it to set DSCP and/or flow label fields for the downlink IP packets which are transmitted from MeNB to SgNB through the GTP tunnels indicated by the GTP Tunnel Endpoint IE.
 Interaction with the MeNB initiated SgNB Modification Preparation procedure:
 If applicable, as specified in TS 37.340 [32], the en-gNB may receive, after having initiated the SgNB initiated SgNB Modification procedure, the SGNB MODIFICATION REQUEST message including the DL Forwarding GTP Tunnel Endpoint IE and the UL Forwarding GTP Tunnel Endpoint IE within the E-RABs To Be Released List IE.
 If applicable, as specified in TS 37.340 [32], the en-gNB may receive, after having initiated the SgNB initiated SgNB Modification procedure, the SGNB MODIFICATION REQUEST message including the SgNB Security Key IE within the UE Context Information IE.
@@ -2717,6 +2729,13 @@ O
 
 9.2.154
 
+YES
+ignore
+>>>Source DL Forwarding IP Address
+O
+
+BIT STRING (1..160, ...)
+Identifies the TNL address used by the source node for data forwarding.
 YES
 ignore
 >RRC Context
@@ -3706,7 +3725,7 @@ Maximum no. cells that can be prepared for a conditional handover. Value is 8.
 This message is sent by the source eNB to the target eNB to transfer the COUNT value related to the forwarded downlink SDUs during DAPS Handover or Conditional Handover.
 During a Conditional Handover with EN-DC or Dual Connectivity, this message is also used to transfer the COUNT value related to the forwarded downlink SDUs. In case of EN-DC, the COUNT value is transferred from the en-gNB to the eNB, while in case of Dual Connectivity, the COUNT value is transferred from the SeNB to the MeNB.
 Direction: source eNB  target eNB (DAPS Handover or Conditional Handover).
-Direction: en-gNB  eNB (Conditional Handover with EN-DC), SeNB  MeNB (Conditional Handover with Dual Connectivity)
+Direction: en-gNB  MeNB (Conditional Handover with EN-DC), SeNB  MeNB (Conditional Handover with Dual Connectivity)
 IE/Group Name
 Presence
 Range
@@ -3793,14 +3812,14 @@ M
 
 COUNT Value
 9.2.15
-PDCP-SN and Hyper frame number of the first DL SDU that the source eNB/MeNB forwards to the target eNB/en-gNB in case of 12 bit long PDCP-SN
+PDCP-SN and Hyper frame number of the first DL SDU that the source eNB/SeNB/en-gNB forwards to the target eNB/MeNB in case of 12 bit long PDCP-SN
 –
 
 >>>>FIRST DL COUNT Value Extended
 O
 
 COUNT Value Extended 9.2.66
-PDCP-SN and Hyper frame number of the first DL SDU that the source eNB/MeNB forwards to the target eNB/en-gNB in case of 15 bit long PDCP-SN
+PDCP-SN and Hyper frame number of the first DL SDU that the source eNB/SeNB/en-gNB forwards to the target eNB/MeNB in case of 15 bit long PDCP-SN
 –
 
 >>>>FIRST DL COUNT Value for PDCP SN Length 18
@@ -3808,7 +3827,7 @@ O
 
 COUNT Value for PDCP SN Length 18
 9.2.82
-PDCP-SN and Hyper frame number of the first DL SDU that the source eNB/MeNB forwards to the target eNB/en-gNB in case of 18 bit long PDCP-SN
+PDCP-SN and Hyper frame number of the first DL SDU that the source eNB/SeNB/en-gNB forwards to the target eNB/MeNB in case of 18 bit long PDCP-SN
 –
 
 >DL Discarding
@@ -3844,14 +3863,14 @@ M
 
 COUNT Value
 9.2.15
-PDCP-SN and Hyper frame number for which the target eNB/en-gNB should discard forwarded DL SDUs associated with lower values in case of 12 bit long PDCP-SN
+PDCP-SN and Hyper frame number for which the target eNB/MeNB should discard forwarded DL SDUs associated with lower values in case of 12 bit long PDCP-SN
 –
 
 >>>>DISCARD DL COUNT Value Extended
 O
 
 COUNT Value Extended 9.2.66
-PDCP-SN and Hyper frame number for which the target eNB/en-gNB should discard forwarded DL SDUs associated with lower values in case of 15 bit long PDCP-SN
+PDCP-SN and Hyper frame number for which the target eNB/MeNB should discard forwarded DL SDUs associated with lower values in case of 15 bit long PDCP-SN
 –
 
 >>>>DISCARD DL COUNT Value for PDCP SN Length 18
@@ -3859,9 +3878,17 @@ O
 
 COUNT Value for PDCP SN Length 18
 9.2.82
-PDCP-SN and Hyper frame number for which the target eNB/en-gNB should discard forwarded DL SDUs associated with lower values in case of 18 bit long PDCP-SN
+PDCP-SN and Hyper frame number for which the target eNB/MeNB should discard forwarded DL SDUs associated with lower values in case of 18 bit long PDCP-SN
 –
 
+SgNB UE X2AP ID
+O
+
+en-gNB UE X2AP ID
+9.2.100
+Allocated for EN-DC at the en-gNB.
+YES
+ignore
 
 Range bound
 Explanation
@@ -4015,7 +4042,7 @@ O
 
 eNB UE X2AP ID
 9.2.24
-Allocated for handover at the source eNB and for dual connectivity at the SeNB or the eNB from which the E-RAB context is transferred.
+Allocated for handover at the source eNB and for dual connectivity at the SeNB or for a SN Status Transfer procedure at the eNB from which the E-RAB context is transferred.
 YES
 ignore
 New eNB UE X2AP ID
@@ -4023,7 +4050,7 @@ O
 
 eNB UE X2AP ID
 9.2.24
-Allocated for handover at the target eNB and for dual connectivity/EN-DC at the MeNB or the eNB to which the E-RAB context is transferred.
+Allocated for handover at the target eNB and for dual connectivity/EN-DC at the MeNB or for a SN Status Transfer procedure at the eNB to which the E-RAB context is transferred.
 YES
 ignore
 Cause
@@ -4045,7 +4072,7 @@ O
 
 Extended eNB UE X2AP ID
 9.2.86
-Allocated for handover at the source eNB and for dual connectivity at the SeNB or the eNB from which the E-RAB context is transferred.
+Allocated for handover at the source eNB and for dual connectivity at the SeNB or for a SN Status Transfer procedure at the eNB from which the E-RAB context is transferred.
 YES
 ignore
 New eNB UE X2AP ID Extension
@@ -4053,7 +4080,7 @@ O
 
 Extended eNB UE X2AP ID
 9.2.86
-Allocated for handover at the target eNB and for dual connectivity at the MeNB or the eNB to which the E-RAB context is transferred.
+Allocated for handover at the target eNB and for dual connectivity/EN-DC at the MeNB or for a SN Status Transfer procedure at the eNB to which the E-RAB context is transferred.
 YES
 ignore
 Old en-gNB UE X2AP ID
@@ -7216,7 +7243,7 @@ YES
 reject
 
 9.1.2.40	EN-DC X2 REMOVAL REQUEST
-This message is sent by an initiating node to a neighbouring node to initiate the removal of the signaling connection.
+This message is sent by an initiating node to a neighbouring node to initiate the removal of the interface instance.
 Direction: eNB  en-gNB, en-gNB  eNB.
 IE/Group Name
 Presence
@@ -7283,7 +7310,7 @@ YES
 reject
 
 9.1.2.41	EN-DC X2 REMOVAL RESPONSE
-This message is sent by an initiating node to a neighbouring node to acknowledge the initiation of removal of the signaling connection.
+This message is sent by an initiating node to a neighbouring node to acknowledge the initiation of removal of the interface instance.
 Direction: eNB  en-gNB, en-gNB  eNB.
 IE/Group Name
 Presence
@@ -7350,7 +7377,7 @@ YES
 reject
 
 9.1.2.42	EN-DC X2 REMOVAL FAILURE
-This message is sent by the initiating node to indicate that removing the signaling connection cannot be accepted.
+This message is sent by the initiating node to indicate that removing the interface instance cannot be accepted.
 Direction: eNB  en-gNB, en-gNB  eNB.
 IE/Group Name
 Presence
@@ -7392,7 +7419,7 @@ reject
 This message is sent by the new eNB to indicate to the old eNB forwarding addresses for each E-RAB for which it admits data forwarding.
 During a Conditional Handover with EN-DC or Dual Connectivity, this message is also used to provide data forwarding related information. In case of EN-DC, the data forwarding related information is transferred from the eNB to the en-gNB, while in case of Dual Connectivity, the data forwarding related information is transferred from the MeNB to the SeNB.
 Direction: new eNB  old eNB.
-Direction: eNB  en-gNB (Conditional Handover with EN-DC), MeNB  SeNB (Conditional Handover with Dual Connectivity)
+Direction: MeNB  en-gNB (Conditional Handover with EN-DC), MeNB  SeNB (Conditional Handover with Dual Connectivity)
 IE/Group Name
 Presence
 Range
@@ -7479,6 +7506,14 @@ O
 
 ENUMERATED (stop, ...)
 
+YES
+ignore
+SgNB UE X2AP ID
+O
+
+en-gNB UE X2AP ID
+9.2.100
+Allocated for EN-DC at the en-gNB.
 YES
 ignore
 
@@ -8124,6 +8159,13 @@ O
 
 YES
 ignore
+>>>>Source DL Forwarding IP Address
+O
+
+BIT STRING (1..160, ...)
+Identifies the TNL address used by the source node for data forwarding.
+YES
+ignore
 >>>Split Bearer
 
 
@@ -8152,6 +8194,13 @@ GTP Tunnel Endpoint 9.2.1
 MeNB endpoint of the X2 transport bearer. For delivery of UL PDUs.
 –
 
+>>>>Source DL Forwarding IP Address
+O
+
+BIT STRING (1..160, ...)
+Identifies the TNL address used by the source node for data forwarding.
+YES
+ignore
 MeNB to SeNB Container
 M
 
@@ -8297,6 +8346,13 @@ GTP Tunnel Endpoint 9.2.1
 Identifies the X2 transport bearer used for forwarding of UL PDUs
 –
 
+>>>>Source DL Forwarding IP Address
+O
+
+BIT STRING (1..160, ...)
+Identifies the TNL address used by the source node for data forwarding.
+YES
+ignore
 >>>Split Bearer
 
 
@@ -8318,6 +8374,13 @@ GTP Tunnel Endpoint 9.2.1
 Endpoint of the X2 transport bearer at the SeNB.
 –
 
+>>>>Source DL Forwarding IP Address
+O
+
+BIT STRING (1..160, ...)
+Identifies the TNL address used by the source node for data forwarding.
+YES
+ignore
 E-RABs Not Admitted List
 O
 
@@ -10099,6 +10162,20 @@ O
 
 YES
 ignore
+>>>>Source DL Forwarding IP Address
+O
+
+BIT STRING (1..160, ...)
+Identifies the TNL address used by the source MN for data forwarding.
+YES
+ignore
+>>>>Source Node DL Forwarding IP Address
+O
+
+BIT STRING (1..160, ...)
+This IE is present only for the case of SA to EN-DC handover and it is used to identify the TNL address allocated by the source NG-RAN node for data forwarding.
+YES
+ignore
 >>>PDCP not present in SN
 
 
@@ -10309,6 +10386,14 @@ ENUMERATED (true, ...)
 
 YES
 reject
+Source NG-RAN Node ID
+O
+
+Global RAN Node ID
+9.2.176
+
+YES
+ignore
 
 Range bound
 Explanation
@@ -10466,6 +10551,13 @@ PDCP SN Length
 Indicates the PDCP SN length of the bearer for the DL.
 YES
 ignore
+>>>>Source DL Forwarding IP Address
+O
+
+BIT STRING (1..160, ...)
+Identifies the TNL address used by the source node for data forwarding.
+YES
+ignore
 >>>PDCP not present in SN
 
 
@@ -10556,7 +10648,14 @@ Available fast MCG recovery via SRB3
 O
 
 ENUMERATED (true, ...)
-Indicates the fast MCG recovery via SRB3 isenabled.
+Indicates the fast MCG recovery via SRB3 is enabled.
+YES
+ignore
+Direct Forwarding Path Availability
+O
+
+ENUMERATED (direct path available, …)
+Indicates direct forwarding path is available between the target en-gNB and source NG-RAN node for SA to EN-DC handover. 
 YES
 ignore
 
@@ -12303,14 +12402,14 @@ This choice tag is used if the PDCP at SgNB IE in the EN-DC Resource Configurati
 O
 
 GTP Tunnel Endpoint 9.2.1
-Identifies the X2 transport bearer used for forwarding of UL PDUs
+Identifies the transport bearer used for forwarding of UL PDUs
 –
 
 >>>>DL Forwarding GTP Tunnel Endpoint
 O
 
 GTP Tunnel Endpoint 9.2.1
-Identifies the X2 transport bearer. used for forwarding of DL PDUs
+Identifies the transport bearer used for forwarding of DL PDUs
 –
 
 >>>PDCP not present in SN
@@ -15387,6 +15486,13 @@ ENUMERATED (ECGI, …)
 
 –
 
+Additional Location Information
+O
+
+ENUMERATED (Include PSCell, ...)
+
+YES
+ignore
 
 9.2.22	Global eNB ID
 This IE is used to globally identify an eNB (see TS 36.401 [2]).
@@ -17631,7 +17737,7 @@ M
 
 NR ARFCN Frequency Info
 9.2.106
-
+This IE is ignored for NR operating bands for which uplink range of NREF is not defined in section 5.4.2.3 of TS 38.104 [37].
 –
 
 >>>>>DL ARFCNFreqInfo
@@ -17995,7 +18101,7 @@ M
 
 NR Frequency Info
 9.2.106
-
+This IE is ignored for NR operating bands for which uplink range of NREF is not defined in section 5.4.2.3 of TS 38.104 [37].
 –
 
 >>>DL FreqInfo
@@ -18011,7 +18117,7 @@ M
 
 NR Transmission Bandwidth
 9.2.114
-
+This IE is ignored for NR operating bands for which uplink range of NREF is not defined in section 5.4.2.3 of TS 38.104 [37].
 –
 
 >>>DL Transmission Bandwidth
@@ -19030,8 +19136,8 @@ Bluetooth Measurement Configuration Name List
 
 0..1
 
-
->Bluetooth Measurement Configuration Name Item IEs
+This IE is present if the Bluetooth Measurement Configuration IE is set to "Setup".
+>Bluetooth Measurement Configuration Name Item
 
 1 .. <maxnoofBluetoothName>
 
@@ -19068,8 +19174,8 @@ WLAN Measurement Configuration Name List
 
 0..1
 
-
->WLAN Measurement Configuration Name Item IEs
+This IE is present if the WLAN Measurement Configuration IE is set to "Setup".
+>WLAN Measurement Configuration Name Item
 
 1 .. <maxnoofWLANName>
 
@@ -19997,7 +20103,7 @@ OCTET STRING
 
 
 9.2.172	QoS Mapping Information
-This IE indicates the DSCP and/or IPv6 Flow Label field(s) of IP packets sent in the corresponding GTP-U tunnel.
+This IE indicates the DSCP and/or IPv6 Flow Label field(s) of IP packets sent in the corresponding GTP-U tunnel for IAB.
 IE/Group Name
 Presence
 Range
@@ -20055,6 +20161,30 @@ M
 BIT STRING (SIZE(24))
 Time offset in microseconds between the absolute time reference "1980-01-06 T00:00:19 International Atomic Time (TAI)” and the SFN0 start. The maximum usable value is (1024*10^4-1). Values higher than the maximum are discarded.
 
+
+
+9.2.176	Global RAN Node ID
+This IE is used to globally identify an NG-RAN node. 
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+CHOICE NG-RAN node
+M
+
+
+
+>gNB
+
+
+
+
+>>Global gNB ID
+M
+
+Global en-gNB ID
+9.2.112
 
 
 9.3	Message and Information Element Abstract Syntax (with ASN.1)
@@ -21043,7 +21173,10 @@ IMPORTS
 	IntendedTDD-DL-ULConfiguration-NR,
 	UERadioCapability,
 	SFN-Offset,
-	IMSvoiceEPSfallbackfrom5G
+	IMSvoiceEPSfallbackfrom5G,
+	Global-RAN-NODE-ID,
+	DirectForwardingPathAvailability
+
 
 
 
@@ -21397,6 +21530,10 @@ FROM X2AP-Containers
 	id-IntendedTDD-DL-ULConfiguration-NR,
 	id-UERadioCapability,
 	id-SFN-Offset,
+	id-DirectForwardingPathAvailability,
+	id-sourceNG-RAN-node-id,
+	id-SourceDLForwardingIPAddress,
+	id-SourceNodeDLForwardingIPAddress,
 	maxCellineNB,
 	maxnoofBearers,
 	maxnoofPDCP-SN,
@@ -21500,11 +21637,15 @@ E-RABs-ToBeSetup-Item ::= SEQUENCE {
 E-RABs-ToBeSetup-ItemExtIEs X2AP-PROTOCOL-EXTENSION ::= {
 	{ ID id-BearerType		CRITICALITY reject	EXTENSION BearerType		PRESENCE optional}|
 	{ ID id-DAPSRequestInfo		CRITICALITY ignore	EXTENSION DAPSRequestInfo			PRESENCE optional}|
-	{ ID id-Ethernet-Type	CRITICALITY ignore	EXTENSION Ethernet-Type		PRESENCE optional},
+	{ ID id-Ethernet-Type	CRITICALITY ignore	EXTENSION Ethernet-Type		PRESENCE optional}|
+	{ ID id-SourceDLForwardingIPAddress			CRITICALITY ignore	EXTENSION TransportLayerAddress		PRESENCE optional},
 	...
 }
 
 MobilityInformation ::= BIT STRING (SIZE(32))
+
+SourceDLForwardingIPAddress ::= BIT STRING (SIZE(1..160, ...))
+
 
 UE-ContextReferenceAtSeNB ::= SEQUENCE {
 	source-GlobalSeNB-ID		GlobalENB-ID,
@@ -21649,7 +21790,8 @@ EarlyStatusTransfer-IEs X2AP-PROTOCOL-IES ::= {
 	{ ID id-New-eNB-UE-X2AP-ID					CRITICALITY reject		TYPE UE-X2AP-ID									PRESENCE mandatory}|
 	{ ID id-Old-eNB-UE-X2AP-ID-Extension		CRITICALITY reject		TYPE UE-X2AP-ID-Extension						PRESENCE optional}|
 	{ ID id-New-eNB-UE-X2AP-ID-Extension		CRITICALITY reject		TYPE UE-X2AP-ID-Extension						PRESENCE optional}|
-	{ ID id-ProcedureStage						CRITICALITY reject		TYPE ProcedureStageChoice						PRESENCE mandatory},
+	{ ID id-ProcedureStage						CRITICALITY reject		TYPE ProcedureStageChoice						PRESENCE mandatory}|
+	{ ID id-SgNB-UE-X2AP-ID						CRITICALITY ignore		TYPE SgNB-UE-X2AP-ID							PRESENCE optional},
 	...
 }
 
@@ -22515,7 +22657,8 @@ E-RABs-ToBeAdded-Item-SCG-BearerExtIEs X2AP-PROTOCOL-EXTENSION ::= {
 	{ ID id-Correlation-ID				CRITICALITY ignore	EXTENSION Correlation-ID		PRESENCE optional}|
 	{ ID id-SIPTO-Correlation-ID		CRITICALITY ignore	EXTENSION Correlation-ID		PRESENCE optional}|
 	{ ID id-BearerType					CRITICALITY ignore	EXTENSION BearerType			PRESENCE optional}|
-	{ ID id-Ethernet-Type				CRITICALITY ignore	EXTENSION Ethernet-Type			PRESENCE optional},
+	{ ID id-Ethernet-Type				CRITICALITY ignore	EXTENSION Ethernet-Type			PRESENCE optional}|
+	{ ID id-SourceDLForwardingIPAddress			CRITICALITY ignore	EXTENSION TransportLayerAddress		PRESENCE optional},
 	...
 }
 
@@ -22528,6 +22671,7 @@ E-RABs-ToBeAdded-Item-Split-Bearer ::= SEQUENCE {
 }
 
 E-RABs-ToBeAdded-Item-Split-BearerExtIEs X2AP-PROTOCOL-EXTENSION ::= {
+	{ ID id-SourceDLForwardingIPAddress			CRITICALITY ignore	EXTENSION TransportLayerAddress		PRESENCE optional},
 	...
 }
 
@@ -22579,6 +22723,8 @@ E-RABs-Admitted-ToBeAdded-Item-SCG-Bearer ::= SEQUENCE {
 }
 
 E-RABs-Admitted-ToBeAdded-Item-SCG-BearerExtIEs X2AP-PROTOCOL-EXTENSION ::= {
+	{ ID id-SourceDLForwardingIPAddress				CRITICALITY ignore	EXTENSION TransportLayerAddress		PRESENCE optional}|
+	{ ID id-SourceNodeDLForwardingIPAddress			CRITICALITY ignore	EXTENSION TransportLayerAddress		PRESENCE optional},
 	...
 }
 
@@ -22590,6 +22736,7 @@ E-RABs-Admitted-ToBeAdded-Item-Split-Bearer ::= SEQUENCE {
 }
 
 E-RABs-Admitted-ToBeAdded-Item-Split-BearerExtIEs X2AP-PROTOCOL-EXTENSION ::= {
+	{ ID id-SourceDLForwardingIPAddress			CRITICALITY ignore	EXTENSION TransportLayerAddress		PRESENCE optional},
 	...
 }
 
@@ -23439,7 +23586,9 @@ SgNBAdditionRequest-IEs X2AP-PROTOCOL-IES ::= {
 	{ ID id-ManagementBasedMDTallowed				CRITICALITY ignore	TYPE ManagementBasedMDTallowed					PRESENCE optional }|
 	{ ID id-ManagementBasedMDTPLMNList				CRITICALITY ignore	TYPE MDTPLMNList									PRESENCE optional }|
 	{ ID id-UERadioCapabilityID						CRITICALITY reject	TYPE UERadioCapabilityID							PRESENCE optional}|
-	{ ID id-IABNodeIndication						CRITICALITY reject	TYPE IABNodeIndication								PRESENCE optional},	...
+	{ ID id-IABNodeIndication						CRITICALITY reject	TYPE IABNodeIndication								PRESENCE optional}|
+	{ ID id-sourceNG-RAN-node-id					CRITICALITY ignore		TYPE Global-RAN-NODE-ID							PRESENCE optional},
+	...
 }
 
 E-RABs-ToBeAdded-SgNBAddReqList ::= SEQUENCE (SIZE(1..maxnoofBearers)) OF ProtocolIE-Single-Container { {E-RABs-ToBeAdded-SgNBAddReq-ItemIEs} }
@@ -23481,7 +23630,8 @@ E-RABs-ToBeAdded-SgNBAddReq-Item-SgNBPDCPpresent ::= SEQUENCE {
 E-RABs-ToBeAdded-SgNBAddReq-Item-SgNBPDCPpresentExtIEs X2AP-PROTOCOL-EXTENSION ::= {
 	{ ID id-RLCMode-transferred					CRITICALITY ignore	EXTENSION RLCMode					PRESENCE optional}|
 	{ ID id-BearerType							CRITICALITY ignore	EXTENSION BearerType				PRESENCE optional}|
-	{ ID id-Ethernet-Type						CRITICALITY ignore	EXTENSION Ethernet-Type				PRESENCE optional},
+	{ ID id-Ethernet-Type						CRITICALITY ignore	EXTENSION Ethernet-Type				PRESENCE optional}|
+	{ ID id-SourceDLForwardingIPAddress			CRITICALITY ignore	EXTENSION TransportLayerAddress		PRESENCE optional},
 	...
 }
 
@@ -23526,7 +23676,8 @@ SgNBAdditionRequestAcknowledge-IEs X2AP-PROTOCOL-IES ::= {
 	{ ID id-SgNBResourceCoordinationInformation			CRITICALITY ignore	TYPE SgNBResourceCoordinationInformation				PRESENCE optional}|
 	{ ID id-RRCConfigIndication							CRITICALITY reject	TYPE RRC-Config-Ind												PRESENCE optional}|
 	{ ID id-LocationInformationSgNB						CRITICALITY ignore	TYPE LocationInformationSgNB								PRESENCE optional}|
-	{ ID id-AvailableFastMCGRecoveryViaSRB3				CRITICALITY ignore	TYPE AvailableFastMCGRecoveryViaSRB3						PRESENCE optional },
+	{ ID id-AvailableFastMCGRecoveryViaSRB3				CRITICALITY ignore	TYPE AvailableFastMCGRecoveryViaSRB3						PRESENCE optional }|
+	{ ID id-DirectForwardingPathAvailability			CRITICALITY ignore	TYPE DirectForwardingPathAvailability					PRESENCE optional },
 	...
 }
 
@@ -23570,7 +23721,8 @@ E-RABs-Admitted-ToBeAdded-SgNBAddReqAck-Item-SgNBPDCPpresent ::= SEQUENCE {
 
 E-RABs-Admitted-ToBeAdded-SgNBAddReqAck-Item-SgNBPDCPpresentExtIEs X2AP-PROTOCOL-EXTENSION ::= {
 	{ ID id-uLpDCPSnLength							CRITICALITY ignore	EXTENSION PDCPSnLength					PRESENCE optional}|
-	{ ID id-dLPDCPSnLength							CRITICALITY ignore	EXTENSION PDCPSnLength					PRESENCE optional},
+	{ ID id-dLPDCPSnLength							CRITICALITY ignore	EXTENSION PDCPSnLength					PRESENCE optional}|
+	{ ID id-SourceDLForwardingIPAddress			CRITICALITY ignore	EXTENSION TransportLayerAddress		PRESENCE optional},
 	...
 }
 
@@ -25498,7 +25650,8 @@ DataForwardingAddressIndication-IEs X2AP-PROTOCOL-IES ::= {
 	{ ID id-Old-eNB-UE-X2AP-ID-Extension		CRITICALITY ignore	TYPE UE-X2AP-ID-Extension						PRESENCE optional }|
 	{ ID id-E-RABs-DataForwardingAddress-List	CRITICALITY ignore	TYPE E-RABs-DataForwardingAddress-List		PRESENCE mandatory}|
 	{ ID id-CHO-DC-Indicator					CRITICALITY reject	TYPE CHO-DC-Indicator							PRESENCE optional}|
-	{ ID id-CHO-DC-EarlyDataForwarding			CRITICALITY ignore	TYPE CHO-DC-EarlyDataForwarding				PRESENCE optional},
+	{ ID id-CHO-DC-EarlyDataForwarding			CRITICALITY ignore	TYPE CHO-DC-EarlyDataForwarding				PRESENCE optional}|
+	{ ID id-SgNB-UE-X2AP-ID						CRITICALITY ignore	TYPE SgNB-UE-X2AP-ID							PRESENCE optional},
 	...
 }
 
@@ -25758,6 +25911,7 @@ IMPORTS
 	id-IntendedTDD-DL-ULConfiguration-NR,
 	id-TraceCollectionEntityURI,
 	id-SFN-Offset,
+	id-AdditionLocationInformation,
 
 	maxnoofBearers,
 	maxCellineNB,
@@ -25873,6 +26027,11 @@ ABS-Status-ExtIEs X2AP-PROTOCOL-EXTENSION ::= {
 }
 
 ActivationID ::= INTEGER (0..255)
+
+AdditionLocationInformation ::= ENUMERATED { 
+	includePSCell,
+	...
+}
 
 AdditionalRRMPriorityIndex ::= BIT STRING (SIZE(32))
 
@@ -26507,6 +26666,8 @@ DeliveryStatus-ExtIEs X2AP-PROTOCOL-EXTENSION ::= {
 
 DesiredActNotificationLevel	::= ENUMERATED {none, e-rab, ue-level, ...}
 
+DirectForwardingPathAvailability ::= ENUMERATED {direct-path-available, ...}
+
 DL-ABS-status::= INTEGER (0..100)
 
 DL-Forwarding ::= ENUMERATED {
@@ -26939,6 +27100,15 @@ GlobalGNB-ID-ExtIEs X2AP-PROTOCOL-EXTENSION ::= {
 	...
 }
 
+Global-RAN-NODE-ID ::= CHOICE {
+	gNB						GlobalGNB-ID,
+	choice-extension		ProtocolIE-Single-Container { { Global-RAN-NODE-ID-ExtIEs} }
+}
+
+Global-RAN-NODE-ID-ExtIEs X2AP-PROTOCOL-IES ::= {
+	...
+}
+
 GNBOverloadInformation ::= ENUMERATED {overloaded, not-overloaded, ...}
 
 GTPTLAs	::= SEQUENCE (SIZE(1.. maxnoofGTPTLAs)) OF	GTPTLA-Item
@@ -27151,6 +27321,7 @@ LocationReportingInformation ::= SEQUENCE {
 }
 
 LocationReportingInformation-ExtIEs X2AP-PROTOCOL-EXTENSION ::={
+	{ ID id-AdditionLocationInformation	CRITICALITY ignore	EXTENSION AdditionLocationInformation	PRESENCE optional},
 	...
 }
 
@@ -27544,7 +27715,7 @@ NRNeighbour-Information ::= SEQUENCE (SIZE (1.. maxofNRNeighbours))OF SEQUENCE {
 }
 
 NRNeighbour-Information-ExtIEs X2AP-PROTOCOL-EXTENSION ::= {
-	{ID id-CSI-RSTransmissionIndication		CRITICALITY ignore	EXTENSION EARFCNExtension	PRESENCE optional},
+	{ID id-CSI-RSTransmissionIndication		CRITICALITY ignore	EXTENSION CSI-RSTransmissionIndication	PRESENCE optional},
 	...
 }
 
@@ -29710,7 +29881,11 @@ id-TraceCollectionEntityURI													ProtocolIE-ID ::= 405
 id-SFN-Offset																ProtocolIE-ID ::= 406
 id-CHO-DC-EarlyDataForwarding												ProtocolIE-ID ::= 407
 id-IMSvoiceEPSfallbackfrom5G												ProtocolIE-ID ::= 408
-
+id-AdditionLocationInformation												ProtocolIE-ID ::= 409
+id-DirectForwardingPathAvailability											ProtocolIE-ID ::= 410
+id-sourceNG-RAN-node-id														ProtocolIE-ID ::= 411
+id-SourceDLForwardingIPAddress												ProtocolIE-ID ::= 412
+id-SourceNodeDLForwardingIPAddress											ProtocolIE-ID ::= 413
 
 END
 -- ASN1STOP
@@ -32597,4 +32772,100 @@ RP-211328
 F
 Addition of MeNB to SN sidelink resource coordination
 16.6.0
+2021-09
+RP-93-e
+RP-211874
+1612
+1
+F
+Correction on EN-DC case
+16.7.0
+2021-12
+RP-94-e
+RP-212863
+1630
+1
+A
+SN triggerred SCG release
+16.8.0
+2021-12
+RP-94-e
+RP-212863
+1637
+-
+A
+Transfer of PSCell Location Reporting control information at X2 mobility
+16.8.0
+2021-12
+RP-94-e
+RP-212860
+1645
+1
+F
+Direct data forwarding for mobility between DC and SA
+16.8.0
+2021-12
+RP-94-e
+RP-212864
+1648
+-
+A
+Correction on EN-DC X2 Removal for RAN Sharing in Rel-16
+16.8.0
+2022-03
+RP-95-e
+RP-220279
+1639
+3
+F
+Dynamic ACL over X2 CR 36.423
+16.9.0
+2022-03
+RP-95-e
+RP-220276
+1658
+1
+F
+Correction of Qos Mapping Information IE in X2AP message for IAB (CR to TS36.423, R16)
+16.9.0
+2022-03
+RP-95-e
+RP-220275
+1662
+2
+A
+Correction on UE X2AP ID in the ERROR INDICATION message
+16.9.0
+2022-03
+RP-95-e
+RP-220278
+1664
+2
+F
+Correction of indirect data forwarding for MR-DC
+16.9.0
+2022-03
+RP-95-e
+RP-220279
+1670
+1
+F
+Correction of frequency information for DL only cell for ENDC
+16.9.0
+2022-03
+RP-95-e
+RP-220279
+1672
+
+F
+Correction on the ASN.1 for neighbour cell information 
+16.9.0
+2022-03
+RP-95-e
+RP-220284
+1679
+1
+A
+Misalignment on M8 and M9 measurement configurations
+16.9.0
 

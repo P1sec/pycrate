@@ -14,7 +14,7 @@ Foreword	9
 4.1	Procedure specification principles	13
 4.2	Forwards and backwards compatibility	13
 4.3	Specification notations	13
-5	E1AP services	13
+5	E1AP services	14
 6	Services expected from signalling transport	14
 7	Functions of E1AP	14
 8	E1AP procedures	14
@@ -74,275 +74,282 @@ Foreword	9
 8.3.1	Bearer Context Setup	30
 8.3.1.1	General	30
 8.3.1.2	Successful Operation	30
-8.3.1.3	Unsuccessful Operation	34
-8.3.1.4	Abnormal Conditions	34
+8.3.1.3	Unsuccessful Operation	35
+8.3.1.4	Abnormal Conditions	35
 8.3.2	Bearer Context Modification (gNB-CU-CP initiated)	35
 8.3.2.1	General	35
-8.3.2.2	Successful Operation	35
-8.3.2.3	Unsuccessful Operation	39
-8.3.2.4	Abnormal Conditions	40
-8.3.3	Bearer Context Modification Required (gNB-CU-UP initiated)	40
-8.3.3.1	General	40
-8.3.3.2	Successful Operation	40
-8.3.3.3	Abnormal Conditions	40
-8.3.4	Bearer Context Release (gNB-CU-CP initiated)	41
-8.3.4.1	General	41
-8.3.4.2	Successful Operation	41
-8.3.4.3	Abnormal Conditions	41
-8.3.5	Bearer Context Release Request (gNB-CU-UP initiated)	41
-8.3.5.1	General	41
-8.3.5.2	Successful Operation	42
-8.3.5.3	Abnormal Conditions	42
-8.3.6	Bearer Context Inactivity Notification	42
-8.3.6.1	General	42
-8.3.6.2	Successful Operation	42
-8.3.6.3	Abnormal Conditions	43
-8.3.7	DL Data Notification	43
-8.3.7.1	General	43
-8.3.7.2	Successful Operation	43
-8.3.7.3	Abnormal Conditions	43
-8.3.8	Data Usage Report	43
-8.3.8.1	General	43
-8.3.8.2	Successful Operation	44
-8.3.8.3	Abnormal Conditions	44
-8.3.9	gNB-CU-UP Counter Check	44
-8.3.9.1	General	44
-8.3.9.2	Successful Operation	44
-8.3.9.3	Unsuccessful Operation	44
-8.3.9.4	Abnormal Conditions	44
-8.3.10	UL Data Notification	45
-8.3.10.1	General	45
-8.3.10.2	Successful Operation	45
-8.3.10.3	Abnormal Conditions	45
-8.3.11	MR-DC Data Usage Report	45
-8.3.11.1	General	45
-8.3.11.2	Successful Operation	45
-8.3.11.3	Abnormal Conditions	45
-8.3.12	Early Forwarding SN Transfer	46
-8.3.12.1	General	46
-8.3.12.2	Successful Operation	46
-8.3.12.3	Unsuccessful Operation	46
-8.3.12.4	Abnormal Conditions	46
-8.3.13	GNB-CU-CP Measurement Results Information	46
-8.3.13.1	General	46
-8.3.13.2	Successful Operation	47
-8.3.13.3	Abnormal Conditions	47
-8.4	Trace Procedures	47
-8.4.1	Trace Start	47
-8.4.1.1	General	47
-8.4.1.2	Successful Operation	47
-8.4.1.3	Abnormal Conditions	47
-8.4.2	Deactivate Trace	48
-8.4.2.1	General	48
-8.4.2.2	Successful Operation	48
-8.4.2.3	Abnormal Conditions	48
-8.4.3	Cell Traffic Trace	48
-8.4.3.1	General	48
-8.4.3.2	Successful Operation	48
-8.4.3.3	Abnormal Conditions	49
-8.5	IAB Procedures	49
-8.5.1	IAB UP TNL Address Update	49
-8.5.1.1	General	49
-8.5.1.2	Successful Operation	49
-8.5.1.3	Unsuccessful Operation	50
-8.5.1.4	Abnormal Conditions	50
-9	Elements for E1AP communication	50
-9.1	General	50
-9.2	Message Functional Definition and Content	51
-9.2.1	Interface Management messages	51
-9.2.1.1	RESET	51
-9.2.1.2	RESET ACKNOWLEDGE	51
-9.2.1.3	ERROR INDICATION	52
-9.2.1.4	GNB-CU-UP E1 SETUP REQUEST	52
-9.2.1.5	GNB-CU-UP E1 SETUP RESPONSE	53
-9.2.1.6	GNB-CU-UP E1 SETUP FAILURE	54
-9.2.1.7	GNB-CU-CP E1 SETUP REQUEST	54
-9.2.1.8	GNB-CU-CP E1 SETUP RESPONSE	54
-9.2.1.9	GNB-CU-CP E1 SETUP FAILURE	55
-9.2.1.10	GNB-CU-UP CONFIGURATION UPDATE	55
-9.2.1.11	GNB-CU-UP CONFIGURATION UPDATE ACKNOWLEDGE	56
-9.2.1.12	GNB-CU-UP CONFIGURATION UPDATE FAILURE	57
-9.2.1.13	GNB-CU-CP CONFIGURATION UPDATE	57
-9.2.1.14	GNB-CU-CP CONFIGURATION UPDATE ACKNOWLEDGE	59
-9.2.1.15	GNB-CU-CP CONFIGURATION UPDATE FAILURE	59
-9.2.1.16	E1 RELEASE REQUEST	60
-9.2.1.17	E1 RELEASE RESPONSE	60
-9.2.1.18	GNB-CU-UP STATUS INDICATION	60
-9.2.1.19	RESOURCE STATUS REQUEST	60
-9.2.1.20	RESOURCE STATUS RESPONSE	61
-9.2.1.21	RESOURCE STATUS FAILURE	62
-9.2.1.22	RESOURCE STATUS UPDATE	62
-9.2.2	Bearer Context Management messages	63
-9.2.2.1	BEARER CONTEXT SETUP REQUEST	63
-9.2.2.2	BEARER CONTEXT SETUP RESPONSE	65
-9.2.2.3	BEARER CONTEXT SETUP FAILURE	65
-9.2.2.4	BEARER CONTEXT MODIFICATION REQUEST	65
-9.2.2.5	BEARER CONTEXT MODIFICATION RESPONSE	67
-9.2.2.6	BEARER CONTEXT MODIFICATION FAILURE	68
-9.2.2.7	BEARER CONTEXT MODIFICATION REQUIRED	69
-9.2.2.8	BEARER CONTEXT MODIFICATION CONFIRM	69
-9.2.2.9	BEARER CONTEXT RELEASE COMMAND	70
-9.2.2.10	BEARER CONTEXT RELEASE COMPLETE	70
-9.2.2.11	BEARER CONTEXT RELEASE REQUEST	71
-9.2.2.12	BEARER CONTEXT INACTIVITY NOTIFICATION	71
-9.2.2.13	DL DATA NOTIFICATION	72
-9.2.2.14	DATA USAGE REPORT	73
-9.2.2.15	GNB-CU-UP COUNTER CHECK REQUEST	73
-9.2.2.16	UL DATA NOTIFICATION	74
-9.2.2.17	MR-DC DATA USAGE REPORT	75
-9.2.2.18	EARLY FORWARDING SN TRANSFER	75
-9.2.2.19	GNB-CU-CP MEASUREMENT RESULTS INFORMATION	76
-9.2.3	Trace Messages	76
-9.2.3.1	TRACE START	76
-9.2.3.2	DEACTIVATE TRACE	77
-9.2.3.3	CELL TRAFFIC TRACE	77
-9.2.4	IAB Messages	78
-9.2.4.1	IAB UP TNL ADDRESS UPDATE	78
-9.2.4.2	IAB UP TNL ADDRESS UPDATE ACKNOWLEDGE	79
-9.2.4.3	IAB UP TNL ADDRESS UPDATE FAILURE	79
-9.3	Information Element Definitions	79
-9.3.1	Radio Network Layer Related IEs	79
-9.3.1.1	Message Type	79
-9.3.1.2	Cause	80
-9.3.1.3	Criticality Diagnostics	84
-9.3.1.4	gNB-CU-CP UE E1AP ID	85
-9.3.1.5	gNB-CU-UP UE E1AP ID	85
-9.3.1.6	Time To wait	86
-9.3.1.7	PLMN Identity	86
-9.3.1.8	Slice Support List	86
-9.3.1.9	S-NSSAI	86
-9.3.1.10	Security Information	86
-9.3.1.11	Cell Group Information	87
-9.3.1.12	QoS Flow List	88
-9.3.1.13	UP Parameters	88
-9.3.1.14	NR CGI	88
-9.3.1.15	gNB-CU-UP ID	89
-9.3.1.16	DRB ID	89
-9.3.1.17	E-UTRAN QoS	89
-9.3.1.18	E-UTRAN Allocation and Retention Priority	89
-9.3.1.19	GBR QoS Information	90
-9.3.1.20	Bit Rate	91
-9.3.1.21	PDU Session ID	91
-9.3.1.22	PDU Session Type	91
-9.3.1.23	Security Indication	92
-9.3.1.24	QoS Flow Identifier	92
-9.3.1.25	QoS Flow QoS Parameters List	92
-9.3.1.26	QoS Flow Level QoS Parameters	93
-9.3.1.27	Non Dynamic 5QI Descriptor	94
-9.3.1.28	Dynamic 5QI Descriptor	95
-9.3.1.29	NG-RAN Allocation and Retention Priority	96
-9.3.1.30	GBR QoS Flow Information	97
-9.3.1.31	Security Algorithm	98
-9.3.1.32	User Plane Security Keys	98
-9.3.1.33	UL Configuration	98
-9.3.1.34	gNB-CU-UP Cell Group Related Configuration	99
-9.3.1.35	PDCP Count	99
-9.3.1.36	NR CGI Support List	100
-9.3.1.37	QoS Parameters Support List	100
-9.3.1.38	PDCP Configuration	100
-9.3.1.39	SDAP Configuration	102
-9.3.1.40	ROHC Parameters	102
-9.3.1.41	T-Reordering Timer	103
-9.3.1.42	Discard Timer	103
-9.3.1.43	UL Data Split Threshold	103
-9.3.1.44	Data Usage Report List	103
-9.3.1.45	 Flow Failed List	104
-9.3.1.46	Packet Loss Rate	105
-9.3.1.47	Packet Delay Budget	105
-9.3.1.48	Packet Error Rate	105
-9.3.1.49	Averaging Window	105
-9.3.1.50	Maximum Data Burst Volume	105
-9.3.1.51	Priority Level	105
-9.3.1.52	Security Result	106
-9.3.1.53	Transaction ID	106
-9.3.1.54	Inactivity timer	106
-9.3.1.55	Paging Priority Indicator (PPI)	106
-9.3.1.56	gNB-CU-UP Capacity	106
-9.3.1.58	PDCP SN Status Information	107
-9.3.1.59	QoS Flow Mapping List	107
-9.3.1.60	QoS Flow Mapping Indication	108
-9.3.1.61	PDCP SN Size	108
-9.3.1.62	Network Instance	108
-9.3.1.63	MR-DC Usage Information	108
-9.3.1.64	MR-DC Data Usage Report List	109
-9.3.1.65	gNB-DU ID	110
-9.3.1.66	Common Network Instance	110
-9.3.1.67	Activity Notification Level	110
-9.3.1.68	Trace Activation	110
-9.3.1.69	Subscriber Profile ID for RAT/Frequency priority	111
-9.3.1.70	Additional RRM Policy Index	112
-9.3.1.71	Retainability Measurements Information	112
-9.3.1.72	TNL Available Capacity Indicator	113
-9.3.1.73	HW Capacity Indicator	113
-9.3.1.75	TSC Traffic Characteristics	113
-9.3.1.76	TSC Assistance Information	114
-9.3.1.77	Periodicity	114
-9.3.1.78	Burst Arrival Time	114
-9.3.1.79	Extended Packet Delay Budget	114
-9.3.1.80	Redundant PDU Session Information	114
-9.3.1.81	QoS Mapping Information	114
-9.3.1.82	NID	115
-9.3.1.83	NPN Support Information	115
-9.3.1.84	NPN Context Information	115
-9.3.1.85	MDT Configuration	115
-9.3.1.86	M4 Configuration	116
-9.3.1.87	M6 Configuration	116
-9.3.1.88	M7 Configuration	117
-9.3.1.89	MDT PLMN List	117
-9.3.1.90	EHC Parameters	117
-9.3.1.91	DAPS Request Information	117
-9.3.1.92	Early Forwarding COUNT Information	118
-9.3.1.93	Alternative QoS Parameters Set List	118
-9.3.1.94	Extended Slice Support List	118
-9.3.1.95	Extended gNB-CU-CP Name	119
-9.3.1.96	Extended gNB-CU-UP Name	119
-9.3.1.97	Extended NR CGI Support List	119
-9.3.2	Transport Network Layer Related IEs	119
-9.3.2.1	UP Transport Layer Information	119
-9.3.2.2	CP Transport Layer Information	120
-9.3.2.3	GTP-TEID	120
-9.3.2.4	Transport Layer Address	120
-9.3.2.5	Data Forwarding Information Request	121
-9.3.2.6	Data Forwarding Information	121
-9.3.2.7	Transport Network Layer Address Info	121
-9.3.2.8	URI	122
-9.3.3	Container and List IE definitions	122
-9.3.3.1	DRB To Setup List E-UTRAN	122
-9.3.3.2	PDU Session Resource To Setup List	123
-9.3.3.3	DRB Setup List E-UTRAN	125
-9.3.3.4	DRB Failed List E-UTRAN	125
-9.3.3.5	PDU Session Resource Setup List	125
-9.3.3.6	PDU Session Resource Failed List	126
-9.3.3.7	DRB To Setup Modification List E-UTRAN	127
-9.3.3.8	DRB To Modify List E-UTRAN	127
-9.3.3.9	DRB To Remove List E-UTRAN	128
-9.3.3.10	PDU Session Resource To Setup Modification List	128
-9.3.3.11	PDU Session Resource To Modify List	130
-9.3.3.12	PDU Session Resource To Remove List	133
-9.3.3.13	DRB Setup Modification List E-UTRAN	134
-9.3.3.14	DRB Failed Modification List E-UTRAN	134
-9.3.3.15	DRB Modified List E-UTRAN	134
-9.3.3.16	DRB Failed To Modify List E-UTRAN	134
-9.3.3.17	PDU Session Resource Setup Modification List	135
-9.3.3.18	PDU Session Resource Failed Modification List	136
-9.3.3.19	PDU Session Resource Modified List	136
-9.3.3.20	PDU Session Resource Failed To Modify List	138
-9.3.3.21	DRB Required To Modify List E-UTRAN	138
-9.3.3.22	DRB Required To Remove List E-UTRAN	138
-9.3.3.23	PDU Session Resource Required To Modify List	139
-9.3.3.24	DRB Confirm Modified List E-UTRAN	139
-9.3.3.25	PDU Session Resource Confirm Modified List	140
-9.4	Message and Information Element Abstract Syntax (with ASN.1)	140
-9.4.1	General	140
-9.4.2	Usage of private message mechanism for non-standard use	140
-9.4.3	Elementary Procedure Definitions	142
-9.4.4	PDU Definitions	149
-9.4.5	Information Element Definitions	179
-9.4.6	Common Definitions	227
-9.4.7	Constant Definitions	228
-9.4.8	Container Definitions	233
-10	Handling of unknown, unforeseen and erroneous protocol data	237
-Annex A (informative): Change History	238
+8.3.2.2	Successful Operation	36
+8.3.2.3	Unsuccessful Operation	41
+8.3.2.4	Abnormal Conditions	41
+8.3.3	Bearer Context Modification Required (gNB-CU-UP initiated)	41
+8.3.3.1	General	41
+8.3.3.2	Successful Operation	42
+8.3.3.3	Abnormal Conditions	42
+8.3.4	Bearer Context Release (gNB-CU-CP initiated)	42
+8.3.4.1	General	42
+8.3.4.2	Successful Operation	43
+8.3.4.3	Abnormal Conditions	43
+8.3.5	Bearer Context Release Request (gNB-CU-UP initiated)	43
+8.3.5.1	General	43
+8.3.5.2	Successful Operation	43
+8.3.5.3	Abnormal Conditions	44
+8.3.6	Bearer Context Inactivity Notification	44
+8.3.6.1	General	44
+8.3.6.2	Successful Operation	44
+8.3.6.3	Abnormal Conditions	44
+8.3.7	DL Data Notification	45
+8.3.7.1	General	45
+8.3.7.2	Successful Operation	45
+8.3.7.3	Abnormal Conditions	45
+8.3.8	Data Usage Report	45
+8.3.8.1	General	45
+8.3.8.2	Successful Operation	46
+8.3.8.3	Abnormal Conditions	46
+8.3.9	gNB-CU-UP Counter Check	46
+8.3.9.1	General	46
+8.3.9.2	Successful Operation	46
+8.3.9.3	Unsuccessful Operation	46
+8.3.9.4	Abnormal Conditions	46
+8.3.10	UL Data Notification	47
+8.3.10.1	General	47
+8.3.10.2	Successful Operation	47
+8.3.10.3	Abnormal Conditions	47
+8.3.11	MR-DC Data Usage Report	47
+8.3.11.1	General	47
+8.3.11.2	Successful Operation	47
+8.3.11.3	Abnormal Conditions	47
+8.3.12	Early Forwarding SN Transfer	48
+8.3.12.1	General	48
+8.3.12.2	Successful Operation	48
+8.3.12.3	Unsuccessful Operation	48
+8.3.12.4	Abnormal Conditions	48
+8.3.13	GNB-CU-CP Measurement Results Information	48
+8.3.13.1	General	48
+8.3.13.2	Successful Operation	49
+8.3.13.3	Abnormal Conditions	49
+8.4	Trace Procedures	49
+8.4.1	Trace Start	49
+8.4.1.1	General	49
+8.4.1.2	Successful Operation	49
+8.4.1.3	Abnormal Conditions	49
+8.4.2	Deactivate Trace	50
+8.4.2.1	General	50
+8.4.2.2	Successful Operation	50
+8.4.2.3	Abnormal Conditions	50
+8.4.3	Cell Traffic Trace	50
+8.4.3.1	General	50
+8.4.3.2	Successful Operation	50
+8.4.3.3	Abnormal Conditions	51
+8.5	IAB Procedures	51
+8.5.1	IAB UP TNL Address Update	51
+8.5.1.1	General	51
+8.5.1.2	Successful Operation	51
+8.5.1.3	Unsuccessful Operation	52
+8.5.1.4	Abnormal Conditions	52
+8.5.2	IAB PSK Notification	52
+8.5.2.1	General	52
+8.5.2.2	Successful Operation	52
+8.5.2.3	Abnormal Conditions	53
+9	Elements for E1AP communication	53
+9.1	General	53
+9.2	Message Functional Definition and Content	53
+9.2.1	Interface Management messages	53
+9.2.1.1	RESET	53
+9.2.1.2	RESET ACKNOWLEDGE	54
+9.2.1.3	ERROR INDICATION	54
+9.2.1.4	GNB-CU-UP E1 SETUP REQUEST	55
+9.2.1.5	GNB-CU-UP E1 SETUP RESPONSE	56
+9.2.1.6	GNB-CU-UP E1 SETUP FAILURE	56
+9.2.1.7	GNB-CU-CP E1 SETUP REQUEST	56
+9.2.1.8	GNB-CU-CP E1 SETUP RESPONSE	56
+9.2.1.9	GNB-CU-CP E1 SETUP FAILURE	57
+9.2.1.10	GNB-CU-UP CONFIGURATION UPDATE	57
+9.2.1.11	GNB-CU-UP CONFIGURATION UPDATE ACKNOWLEDGE	58
+9.2.1.12	GNB-CU-UP CONFIGURATION UPDATE FAILURE	59
+9.2.1.13	GNB-CU-CP CONFIGURATION UPDATE	59
+9.2.1.14	GNB-CU-CP CONFIGURATION UPDATE ACKNOWLEDGE	61
+9.2.1.15	GNB-CU-CP CONFIGURATION UPDATE FAILURE	61
+9.2.1.16	E1 RELEASE REQUEST	62
+9.2.1.17	E1 RELEASE RESPONSE	62
+9.2.1.18	GNB-CU-UP STATUS INDICATION	62
+9.2.1.19	RESOURCE STATUS REQUEST	62
+9.2.1.20	RESOURCE STATUS RESPONSE	63
+9.2.1.21	RESOURCE STATUS FAILURE	64
+9.2.1.22	RESOURCE STATUS UPDATE	64
+9.2.2	Bearer Context Management messages	65
+9.2.2.1	BEARER CONTEXT SETUP REQUEST	65
+9.2.2.2	BEARER CONTEXT SETUP RESPONSE	67
+9.2.2.3	BEARER CONTEXT SETUP FAILURE	67
+9.2.2.4	BEARER CONTEXT MODIFICATION REQUEST	67
+9.2.2.5	BEARER CONTEXT MODIFICATION RESPONSE	70
+9.2.2.6	BEARER CONTEXT MODIFICATION FAILURE	71
+9.2.2.7	BEARER CONTEXT MODIFICATION REQUIRED	72
+9.2.2.8	BEARER CONTEXT MODIFICATION CONFIRM	72
+9.2.2.9	BEARER CONTEXT RELEASE COMMAND	73
+9.2.2.10	BEARER CONTEXT RELEASE COMPLETE	73
+9.2.2.11	BEARER CONTEXT RELEASE REQUEST	74
+9.2.2.12	BEARER CONTEXT INACTIVITY NOTIFICATION	74
+9.2.2.13	DL DATA NOTIFICATION	75
+9.2.2.14	DATA USAGE REPORT	76
+9.2.2.15	GNB-CU-UP COUNTER CHECK REQUEST	76
+9.2.2.16	UL DATA NOTIFICATION	77
+9.2.2.17	MR-DC DATA USAGE REPORT	78
+9.2.2.18	EARLY FORWARDING SN TRANSFER	78
+9.2.2.19	GNB-CU-CP MEASUREMENT RESULTS INFORMATION	79
+9.2.3	Trace Messages	79
+9.2.3.1	TRACE START	79
+9.2.3.2	DEACTIVATE TRACE	80
+9.2.3.3	CELL TRAFFIC TRACE	80
+9.2.4	IAB Messages	81
+9.2.4.1	IAB UP TNL ADDRESS UPDATE	81
+9.2.4.2	IAB UP TNL ADDRESS UPDATE ACKNOWLEDGE	82
+9.2.4.3	IAB UP TNL ADDRESS UPDATE FAILURE	82
+9.2.4.4	IAB PSK NOTIFICATION	82
+9.3	Information Element Definitions	83
+9.3.1	Radio Network Layer Related IEs	83
+9.3.1.1	Message Type	83
+9.3.1.2	Cause	83
+9.3.1.3	Criticality Diagnostics	87
+9.3.1.4	gNB-CU-CP UE E1AP ID	88
+9.3.1.5	gNB-CU-UP UE E1AP ID	88
+9.3.1.6	Time To wait	89
+9.3.1.7	PLMN Identity	89
+9.3.1.8	Slice Support List	89
+9.3.1.9	S-NSSAI	89
+9.3.1.10	Security Information	89
+9.3.1.11	Cell Group Information	90
+9.3.1.12	QoS Flow List	91
+9.3.1.13	UP Parameters	91
+9.3.1.14	NR CGI	91
+9.3.1.15	gNB-CU-UP ID	92
+9.3.1.16	DRB ID	92
+9.3.1.17	E-UTRAN QoS	92
+9.3.1.18	E-UTRAN Allocation and Retention Priority	92
+9.3.1.19	GBR QoS Information	93
+9.3.1.20	Bit Rate	94
+9.3.1.21	PDU Session ID	94
+9.3.1.22	PDU Session Type	94
+9.3.1.23	Security Indication	95
+9.3.1.24	QoS Flow Identifier	95
+9.3.1.25	QoS Flow QoS Parameters List	95
+9.3.1.26	QoS Flow Level QoS Parameters	96
+9.3.1.27	Non Dynamic 5QI Descriptor	97
+9.3.1.28	Dynamic 5QI Descriptor	98
+9.3.1.29	NG-RAN Allocation and Retention Priority	99
+9.3.1.30	GBR QoS Flow Information	100
+9.3.1.31	Security Algorithm	101
+9.3.1.32	User Plane Security Keys	101
+9.3.1.33	UL Configuration	101
+9.3.1.34	gNB-CU-UP Cell Group Related Configuration	102
+9.3.1.35	PDCP Count	102
+9.3.1.36	NR CGI Support List	103
+9.3.1.37	QoS Parameters Support List	103
+9.3.1.38	PDCP Configuration	103
+9.3.1.39	SDAP Configuration	105
+9.3.1.40	ROHC Parameters	105
+9.3.1.41	T-Reordering Timer	106
+9.3.1.42	Discard Timer	106
+9.3.1.43	UL Data Split Threshold	106
+9.3.1.44	Data Usage Report List	106
+9.3.1.45	 Flow Failed List	107
+9.3.1.46	Packet Loss Rate	108
+9.3.1.47	Packet Delay Budget	108
+9.3.1.48	Packet Error Rate	108
+9.3.1.49	Averaging Window	108
+9.3.1.50	Maximum Data Burst Volume	108
+9.3.1.51	Priority Level	108
+9.3.1.52	Security Result	109
+9.3.1.53	Transaction ID	109
+9.3.1.54	Inactivity timer	109
+9.3.1.55	Paging Priority Indicator (PPI)	109
+9.3.1.56	gNB-CU-UP Capacity	109
+9.3.1.58	PDCP SN Status Information	110
+9.3.1.59	QoS Flow Mapping List	110
+9.3.1.60	QoS Flow Mapping Indication	111
+9.3.1.61	PDCP SN Size	111
+9.3.1.62	Network Instance	111
+9.3.1.63	MR-DC Usage Information	111
+9.3.1.64	MR-DC Data Usage Report List	112
+9.3.1.65	gNB-DU ID	113
+9.3.1.66	Common Network Instance	113
+9.3.1.67	Activity Notification Level	113
+9.3.1.68	Trace Activation	113
+9.3.1.69	Subscriber Profile ID for RAT/Frequency priority	114
+9.3.1.70	Additional RRM Policy Index	115
+9.3.1.71	Retainability Measurements Information	115
+9.3.1.72	TNL Available Capacity Indicator	116
+9.3.1.73	HW Capacity Indicator	116
+9.3.1.75	TSC Traffic Characteristics	116
+9.3.1.76	TSC Assistance Information	117
+9.3.1.77	Periodicity	117
+9.3.1.78	Burst Arrival Time	117
+9.3.1.79	Extended Packet Delay Budget	117
+9.3.1.80	Redundant PDU Session Information	117
+9.3.1.81	QoS Mapping Information	117
+9.3.1.82	NID	118
+9.3.1.83	NPN Support Information	118
+9.3.1.84	NPN Context Information	118
+9.3.1.85	MDT Configuration	118
+9.3.1.86	M4 Configuration	119
+9.3.1.87	M6 Configuration	119
+9.3.1.88	M7 Configuration	120
+9.3.1.89	MDT PLMN List	120
+9.3.1.90	EHC Parameters	120
+9.3.1.91	DAPS Request Information	121
+9.3.1.92	Early Forwarding COUNT Information	121
+9.3.1.93	Alternative QoS Parameters Set List	122
+9.3.1.94	Extended Slice Support List	122
+9.3.1.95	Extended gNB-CU-CP Name	122
+9.3.1.96	Extended gNB-CU-UP Name	123
+9.3.1.97	Extended NR CGI Support List	123
+9.3.1.98	Direct Forwarding Path Availability	123
+9.3.1.99	IAB-donor-CU-UP PSK Info	123
+9.3.2	Transport Network Layer Related IEs	124
+9.3.2.1	UP Transport Layer Information	124
+9.3.2.2	CP Transport Layer Information	124
+9.3.2.3	GTP-TEID	124
+9.3.2.4	Transport Layer Address	124
+9.3.2.5	Data Forwarding Information Request	125
+9.3.2.6	Data Forwarding Information	125
+9.3.2.7	Transport Network Layer Address Info	125
+9.3.2.8	URI	126
+9.3.3	Container and List IE definitions	126
+9.3.3.1	DRB To Setup List E-UTRAN	126
+9.3.3.2	PDU Session Resource To Setup List	127
+9.3.3.3	DRB Setup List E-UTRAN	129
+9.3.3.4	DRB Failed List E-UTRAN	130
+9.3.3.5	PDU Session Resource Setup List	130
+9.3.3.6	PDU Session Resource Failed List	131
+9.3.3.7	DRB To Setup Modification List E-UTRAN	132
+9.3.3.8	DRB To Modify List E-UTRAN	132
+9.3.3.9	DRB To Remove List E-UTRAN	133
+9.3.3.10	PDU Session Resource To Setup Modification List	133
+9.3.3.11	PDU Session Resource To Modify List	135
+9.3.3.12	PDU Session Resource To Remove List	139
+9.3.3.13	DRB Setup Modification List E-UTRAN	139
+9.3.3.14	DRB Failed Modification List E-UTRAN	139
+9.3.3.15	DRB Modified List E-UTRAN	139
+9.3.3.16	DRB Failed To Modify List E-UTRAN	140
+9.3.3.17	PDU Session Resource Setup Modification List	140
+9.3.3.18	PDU Session Resource Failed Modification List	141
+9.3.3.19	PDU Session Resource Modified List	142
+9.3.3.20	PDU Session Resource Failed To Modify List	144
+9.3.3.21	DRB Required To Modify List E-UTRAN	144
+9.3.3.22	DRB Required To Remove List E-UTRAN	144
+9.3.3.23	PDU Session Resource Required To Modify List	145
+9.3.3.24	DRB Confirm Modified List E-UTRAN	145
+9.3.3.25	PDU Session Resource Confirm Modified List	146
+9.4	Message and Information Element Abstract Syntax (with ASN.1)	146
+9.4.1	General	146
+9.4.2	Usage of private message mechanism for non-standard use	146
+9.4.3	Elementary Procedure Definitions	148
+9.4.4	PDU Definitions	156
+9.4.5	Information Element Definitions	186
+9.4.6	Common Definitions	235
+9.4.7	Constant Definitions	236
+9.4.8	Container Definitions	241
+10	Handling of unknown, unforeseen and erroneous protocol data	245
+Annex A (informative): Change History	246
 
 Foreword
 This Technical Specification has been produced by the 3rd Generation Partnership Project (3GPP).
@@ -390,6 +397,7 @@ The following documents contain provisions which, through reference in this text
 [26]	3GPP TS 32.425: "Performance measurements; Evolved Universal Terrestrial Radio Access Network (E-UTRAN)".
 [27]	3GPP TS 37.320: "Universal Terrestrial Radio Access (UTRA) and Evolved Universal Terrestrial Radio Access (E-UTRA); Radio measurement collection for Minimization of Drive Tests (MDT);Overall description; Stage 2".
 [28]	3GPP TS 38.474: "NG-RAN; F1 data transport".
+[29]	3GPP TS 29.244: "Interface between the Control Plane and the User Plane Nodes; Stage 3".
 3	Definitions and abbreviations
 3.1	Definitions
 For the purposes of the present document, the terms and definitions given in 3GPP TR 21.905 [1] and the following apply. A term defined in the present document takes precedence over the definition of the same term, if any, in 3GPP TR 21.905 [1].
@@ -566,6 +574,8 @@ Early Forwarding SN Transfer
 EARLY FORWARDING SN TRANSFER
 GNB-CU-CP Measurement Results Information
 GNB-CU-CP MEASUREMENT RESULTS INFORMATION
+IAB PSK Notification
+IAB PSK NOTIFICATION
 
 8.2	Interface Management procedures
 8.2.1	Reset
@@ -822,6 +832,7 @@ For each requested DRB, if the PDCP Duplication IE is included in the PDCP Confi
 For each requested DRB, if the Additional PDCP duplication Information IE is included in the PDCP Configuration IE contained in the BEARER CONTEXT SETUP REQUEST message, then the gNB-CU-UP shall, if supported, include the same number of UP Transport Layer Information IEs indicated by the Additional PDCP duplication Information IE in the BEARER CONTEXT SETUP RESPONSE message to support packet duplication. If only one cell group is included in the Cell Group Information IE for the concerned DRB, then the gNB-CU-UP shall consider that the first UP Transport Layer Information IE of these UP Transport Layer Information IEs is for the primary path. If more than one cell group is included in the Cell Group Information IE, then the gNB-CU-UP shall consider that the number of duplication tunnels for each cell group is indicated by the Number of tunnels IE, and that the first UP Transport Layer Information IE for each cell group is for the primary path or the split secondary path.
 If the PDCP SN Status Information IE is contained within the DRB To Setup List IE in the BEARER CONTEXT SETUP REQUEST message, the gNB-CU-UP shall take it into account and act as specified in TS 38.401 [2].
 If the QoS Flow Mapping Indication IE is contained in the QoS Flows Information To Be Setup IE within the DRB To Setup List IE in the BEARER CONTEXT SETUP REQUEST message, the gNB-CU-UP may take it into account that only the uplink or downlink QoS flow is mapped to the DRB.
+If the QoS Flows Remapping IE is contained within the DRB To Setup List IE in the BEARER CONTEXT SETUP REQUEST message for a DRB and set to "update", the gNB-CU-UP shall, if supported, consider that QoS flows mapped for the DRB is updated to the QoS flow(s) included in the QoS Flows Information To Be Setup IE after finishing handling forwarded PDCP SDUs during an intra-system handover procedure. If the QoS Flows Remapping IE is contained within the DRB To Setup List IE in the BEARER CONTEXT SETUP REQUEST message for a DRB and set to "source configuration", the gNB-CU-UP shall, if supported, consider that no QoS flow is mapped to the DRB after finishing handling forwarded PDCP SDUs over that DRB during an intra-system handover procedure and ignore the information included in the QoS Flows Information To Be Setup IE for the concerned DRB.
 For each PDU Session Resource, if the Network Instance IE is included in the PDU Session Resource To Setup List IE in the BEARER CONTEXT SETUP REQUEST message and the Common Network Instance IE is not included, the gNB-CU-UP shall, if supported, use it when selecting transport network resource as specified in TS 23.501 [20].
 For each PDU session, if the Common Network Instance IE is included in the PDU Session Resource To Setup List IE in the BEARER CONTEXT SETUP REQUEST message, the gNB-CU-UP shall, if supported, use it when selecting transport network resource as specified in TS 23.501 [20].
 For each PDU session, if the Redundant NG UL UP Transport Layer Information IE is included in the PDU Session Resource To Setup List IE in the BEARER CONTEXT SETUP REQUEST message, the gNB-CU-UP shall, if supported, use it as the uplink termination point of the redundant tunnel for the user plane data of those QoS flows in this PDU session which need redundant transmission as described in TS 23.501 [20], and it shall include the Redundant NG DL UP Transport Layer Information IE in the PDU Session Resource Setup List IE in the BEARER CONTEXT SETUP RESPONSE message. 
@@ -840,7 +851,6 @@ If the Management Based MDT PLMN List IE is contained in the BEARER CONTEXT SETU
 For EN-DC, if the Subscriber Profile ID for RAT/Frequency priority IE is included in the BEARER CONTEXT SETUP REQUEST, the gNB-CU-UP may use it to apply specific RRM policies as specified in TS 36.300 [25]. If the Additional RRM Policy Index IE is included in the BEARER CONTEXT SETUP REQUEST, the gNB-CU-UP may use it to apply specific RRM policies as specified in TS 36.300 [25].
 If the TSC Traffic Characteristics IE is included in the BEARER CONTEXT SETUP REQUEST message, the gNB-CU-UP shall, if supported, take into account the corresponding information received in the TSC Traffic Characteristics IE.
 For each QoS flow whose DRB has been successfully established and the QoS Monitoring Request IE was included in the QoS Flow Level QoS Parameters IE contained in the BEARER CONTEXT SETUP REQUEST message, the gNB-CU-UP shall store this information, and, if supported, perform delay measurement and QoS monitoring, as specified in TS 23.501 [20]. If the QoS Monitoring Reporting Frequency IE was included in the QoS Flow Level QoS Parameters IE contained in the BEARER CONTEXT SETUP REQUEST message, the gNB-CU-UP shall store this information, and, if supported, use it for RAN part delay reporting.
-For each requested DRB, if the QoS Mapping Information IE is contained in the DL UP Parameters IE in the BEARER CONTEXT SETUP REQUEST message, the gNB-CU-UP shall use it to set DSCP and/or flow label fields in the downlink IP packets which are transmitted through the GTP tunnels indicated by the UP Transport Layer Information IE. The Diffserv code point (DSCP) marking is performed as specified in TS 38.474 [28].
 If the BEARER CONTEXT SETUP REQUEST message contains the NPN Context Information IE the gNB-CU-UP shall, if supported, take it into account when allocating UP resources for the bearer context.
 For each requested DRB, if the EHC Parameters IE is included in the PDCP Configuration IE, the gNB-CU-CP shall, if supported, also include ROHC Parameters IE in the PDCP Configuration IE in the BEARER CONTEXT SETUP REQUEST message, to enable the gNB-CU-UP to perform appropriate header compression.
 If the EHC parameters IE is included in the PDCP Configuration IE contained in the BEARER CONTEXT SETUP REQUEST message, the gNB-CU-UP may take these parameters into account to perform appropriate header compression for the concerned DRB.
@@ -848,6 +858,12 @@ If the DAPS Request Information IE is included for a DRB to be setup in the BEAR
 If the CHO Initiation IE is contained in the BEARER CONTEXT SETUP REQUEST message, the gNB-CU-UP shall consider that the request concerns conditional handover or conditional PSCell change and act as specified in TS 38.401 [2].
 If the MCG Offered GBR QoS Flow Information IE is contained in the QoS Flows Information To Be Setup IE within the DRB To Setup List IE in the BEARER CONTEXT SETUP REQUEST message, the gNB-CU-UP may take it into account when two cell groups are served by the gNB-CU-UP.
 If the Additional Handover Information IE is included in the BEARER CONTEXT SETUP REQUEST message and set to “Discard PDCP SN”, the gNB-CU-UP shall, if supported, remove the forwarded PDCP SNs if received in the forwarded GTP-U packets, and deliver the forwarded PDCP SDUs to the UE, as specified in TS 38.300 [8].
+If the Ignore Mapping Rule Indication IE is contained within the DRB To Setup List IE for a DRB in the BEARER CONTEXT SETUP REQUEST message, the gNB-CU-UP shall, if supported, ignore the QoS flow mapping information indicated by the QoS Flows Information To Be Setup IE for the concerned DRB.
+If the Direct Forwarding Path Availability IE set to "inter-system direct path available" is included in the BEARER CONTEXT SETUP REQUEST message, the gNB-CU-UP shall, if supported, assign the UP Transport Layer Information for inter-system direct data forwarding from the appropriate address space, if applicable.
+If the Direct Forwarding Path Availability IE set to “intra-system direct path available” is included in the BEARER CONTEXT SETUP REQUEST message, the gNB-CU-UP shall, if supported, assign the UP Transport Layer Information for intra-system direct data forwarding from the appropriate address space, if applicable.
+If the gNB-CU-UP UE E1AP ID IE is contained in the BEARER CONTEXT SETUP REQUEST message, the gNB-CU-UP may use it to identify the UE context as specified in TS 38.401 [2].
+If the Data Forwarding Source IP Address IE is included in the DRB To Setup List E-UTRAN IE or in the QoS Flow Level QoS Parameters IE contained in the BEARER CONTEXT SETUP REQUEST message, the gNB-CU-UP shall, if supported, store this information in the UE context and use it as part of its ACL functionality configuration actions, if such ACL functionality is deployed.
+If the Data Forwarding Source IP Address IE is included in the DRB Setup List E-UTRAN IE or in the Flow Setup List IE within the DRB Setup List IE in the PDU Session Resource Setup List IE of the BEARER CONTEXT SETUP RESPONSE message, the gNB-CU-CP shall, if supported, store this information in the UE context and use it as part of its ACL functionality configuration actions, if such ACL functionality is deployed.
 8.3.1.3	Unsuccessful Operation
 
 Figure 8.3.1.3-1: Bearer Context Setup procedure: Unsuccessful Operation.
@@ -885,6 +901,7 @@ If the UE DL Aggregate Maximum Bit Rate IE is contained in the BEARER CONTEXT MO
 If the UE DL Maximum Integrity Protected Data Rate IE is contained in the BEARER CONTEXT MODIFICATION REQUEST message, the gNB-CU-UP shall update the corresponding information.
 If the Bearer Context Status Change IE is contained in the BEARER CONTEXT MODIFICATION REQUEST message, the gNB-CU-UP shall consider the UE RRC state and act as specified in TS 38.401 [2]. 
 If the Data Forwarding Information Request IE, PDU Session Data Forwarding Information Request IE or the DRB Data Forwarding Information Request IE are included in the BEARER CONTEXT MODIFICATION REQUEST message, the gNB-CU-UP shall include the requested forwarding information in the Data Forwarding Information Response IE, PDU Session Data Forwarding Information Response IE or the DRB Data Forwarding Information Response IE in the BEARER CONTEXT MODIFICATION RESPONSE message.
+If the PDU Session Data Forwarding Information IE is included in the BEARER CONTEXT MODIFICATION REQUEST message, the gNB-CU-UP shall, if supported, consider that data forwarding is applicable for the indicated QoS flows for the concerned PDU session.
 If the PDCP Configuration IE is contained in the DRB To Modify List IE in the BEARER CONTEXT MODIFICATION REQUEST message, the gNB-CU-UP shall update the corresponding information, except for the PDCP SN UL Size IE, the PDCP SN DL Size IE and the RLC mode IE which shall be ignored. 
 If the E-UTRAN QoS IE is contained in the DRB To Modify List IE in the BEARER CONTEXT MODIFICATION REQUEST message, the gNB-CU-UP shall update the corresponding information. 
 If the PDCP SN Status Request IE is contained in the DRB To Modify List IE in the BEARER CONTEXT MODIFICATION REQUEST message, the gNB-CU-UP shall act as specified in TS 38.401 [2] and include the UL COUNT Value IE and the DL COUNT Value IE in the BEARER CONTEXT MODIFICATION RESPONSE message. 
@@ -898,9 +915,9 @@ If the Flow Mapping Information IE is contained in the DRB To Modify List IE in 
 For each requested DRB, if the PDCP Duplication IE or Additional PDCP duplication Information IE is included in the PDCP Configuration IE contained in the BEARER CONTEXT MODIFICATION REQUEST message, then the gNB-CU-CP shall include two or more UP Transport Layer Information IEs in the BEARER CONTEXT MODIFICATION REQUEST message, and the gNB-CU-UP shall, if supported, also include two or more UP Transport Layer Information IEs in the BEARER CONTEXT MODIFICATION RESPONSE message to support packet duplication. If only one cell group is included in the Cell Group Information IE for the concerned DRB, then the gNB-CU-UP shall consider that the first UP Transport Layer Information IE of these UP Transport Layer Information IEs is for the primary path. If more than one cell group is included in the Cell Group Information IE, then the gNB-CU-UP shall consider that the number of duplication tunnels for each cell group is indicated by the Number of tunnels IE, and that the first UP Transport Layer Information IE for each cell group is for the primary path or the split secondary path.
 For a certain DRB which was allocated with two or more GTP-U tunnels, if such DRB is modified and given one GTP-U tunnel via the Bearer Context Modification (gNB-CU-CP initiated) procedure, i.e. only one UP Transport Layer Information per Cell Group ID is present in DL UP Parameters IE for the concerned DRB, then the gNB-CU-UP shall consider that PDCP duplication is deconfigured for this DRB. If such Bearer Context Modification (gNB-CU-CP initiated) procedure occurs, the Duplication Activation IE shall not be included for the concerned DRB.
 If the New UL TNL Information Required IE is contained in the BEARER CONTEXT MODIFICATION REQUEST message, the gNB-CU-UP shall include the new UP Transport Layer Information in the BEARER CONTEXT MODIFICATION RESPONSE message. 
-For each PDU session for which the Security Indication IE is included in the PDU Session Resource To Setup List IE of the BEARER CONTEXT MODIFICATION REQUEST message, and the Integrity Protection Indication IE or Confidentiality Protection Indication IE is set to "preferred", then the gNB-CU-UP should, if supported, perform user plane integrity protection or ciphering, respectively, for the concerned PDU session and shall notify whether it performed the user plane integrity protection or ciphering by including the Integrity Protection Result IE or Confidentiality Protection Result IE, respectively, in the PDU Session Resource Setup List IE of the BEARER CONTEXT MODIFICATION RESPONSE message.
-For each PDU session for which the Security Indication IE is included in the PDU Session Resource To Setup List IE of the BEARER CONTEXT MODIFICATION REQUEST message, and the Integrity Protection Indication IE or Confidentiality Protection Indication IE is set to "required", then the gNB-CU-UP shall perform user plane integrity protection or ciphering, respectively, for the concerned PDU Session. If the gNB-CU-UP cannot perform the user plane integrity protection or ciphering, it shall reject the setup of the PDU Session Resources with an appropriate cause value. 
-For each PDU session for which the Security Indication IE is included in the PDU Session Resource To Setup List of the BEARER CONTEXT MODIFICATION REQUEST message: 
+For each PDU session for which the Security Indication IE is included in the PDU Session Resource To Setup List IE or the Security Indication Modify IE is included in the PDU Session Resource To Modify List IE of the BEARER CONTEXT MODIFICATION REQUEST message, and the Integrity Protection Indication IE or Confidentiality Protection Indication IE is set to "preferred", then the gNB-CU-UP should, if supported, perform user plane integrity protection or ciphering, respectively, for the concerned PDU session and shall notify whether it performed the user plane integrity protection or ciphering by including the Integrity Protection Result IE or Confidentiality Protection Result IE, respectively, in the PDU Session Resource Setup List IE or the PDU Session Resource Modified List IE of the BEARER CONTEXT MODIFICATION RESPONSE message.
+For each PDU session for which the Security Indication IE is included in the PDU Session Resource To Setup List IE or the Security Indication Modify IE is included in the PDU Session Resource To Modify List IE of the BEARER CONTEXT MODIFICATION REQUEST message, and the Integrity Protection Indication IE or Confidentiality Protection Indication IE is set to "required", then the gNB-CU-UP shall perform user plane integrity protection or ciphering, respectively, for the concerned PDU Session. If the gNB-CU-UP cannot perform the user plane integrity protection or ciphering, it shall reject the setup of the PDU Session Resources with an appropriate cause value. 
+For each PDU session for which the Security Indication IE is included in the PDU Session Resource To Setup List IE or the Security Indication Modify IE is included in the PDU Session Resource To Modify List IE of the BEARER CONTEXT MODIFICATION REQUEST message: 
 -	if the Integrity Protection Indication IE is set to "not needed", then the gNB-CU-UP shall not perform user plane integrity protection for the concerned PDU session; 
 -	if the Confidentiality Protection Indication IE is set to "not needed", then the gNB-CU-UP shall not perform user plane ciphering for the concerned PDU session.
 For each PDU Session Resource, if the Network Instance IE is included in the PDU Session Resource To Setup List IE or the PDU Session Resource To Modify List IE in the BEARER CONTEXT MODIFICATION REQUEST message and the Common Network Instance IE is not included, the gNB-CU-UP shall, if supported, use it when selecting transport network resource as specified in TS 23.501 [20].
@@ -927,13 +944,16 @@ For each QoS flow whose DRB has been successfully established or modified and th
 For each requested DRB, if the QoS Mapping Information IE is contained in the DL UP Parameters IE in the BEARER CONTEXT MODIFICATION REQUEST message, the gNB-CU-UP shall use it to set DSCP and/or flow label fields in the downlink IP packets which are transmitted through the GTP tunnels indicated by the UP Transport Layer Information IE. The Diffserv code point (DSCP) marking is performed as specified in TS 38.474 [28].
 If the Early Forwarding COUNT Request IE is contained in the DRB To Modify List IE in the BEARER CONTEXT MODIFICATION REQUEST message, the gNB-CU-UP shall act as specified in TS 38.401 [2] and include the requested FIRST DL COUNT Value IE or DISCARD DL COUNT Value IE in the BEARER CONTEXT MODIFICATION RESPONSE message.
 If the Early Forwarding COUNT Information IE is contained in the DRB To Modify List IE in the BEARER CONTEXT MODIFICATION REQUEST message, the gNB-CU-UP shall take it into account and act as specified in TS 38.401 [2].
+If the Ignore Mapping Rule Indication IE is contained within the DRB To Setup List IE for a DRB in the BEARER CONTEXT MODIFICATION REQUEST message, the gNB-CU-UP shall, if supported, ignore the QoS flow mapping information indicated by the QoS Flows Information To Be Setup IE for the concerned DRB.
+If the DAPS Request Information IE is included for a DRB to be modified in the BEARER CONTEXT MODIFICATION REQUEST message, the gNB-CU-UP shall consider that the request concerns a DAPS handover for that DRB and, if admitted, act as specified in TS 38.300 [4].
+If the Early Data Forwarding Indicator IE set to “stop” is contained in the DRB To Modify List IE in the BEARER CONTEXT MODIFICATION REQUEST message, the gNB-CU-UP shall, if supported and if already initiated, stop the early data forwarding for the concerned DRB. If the DRB Data forwarding information IE containing the DL Data Forwarding IE is included together in the DRB To Modify List IE, the gNB-CU-UP shall consider that the stop is only for the early data forwarding initiated toward that forwarding TNL.
 Interaction with the Bearer Context Modification (gNB-CU-CP initiated)
 If the BEARER CONTEXT MODIFICATION REQUEST message includes for a DRB in the DRB To Modify List IE the PDCP SN Status Request IE set to “requested” and if the gNB-CU-UP has not yet received a SDAP end marker packet for a QoS flow which has been previously re-configured to another DRB by means of a gNB-CU-CP initiated Bearer Context Modification procedure, the gNB-CU-UP shall includes the QoS Flow Identifier of that QoS flow in the Old QoS Flow List - UL End Marker expected IE in the PDU Session Resource Modified List IE in the BEARER CONTEXT MODIFICATION RESPONSE message.
 8.3.2.3	Unsuccessful Operation
 
 Figure 8.3.2.3-1: Bearer Context Modification procedure: Unsuccessful Operation.
 If the gNB-CU-UP cannot successfully perform any of the requested bearer context modifications, it shall respond with a BEARER CONTEXT MODIFICATION FAILURE message and appropriate cause value.
-
+If the gNB-CU-UP receives a BEARER CONTEXT MODIFICATION REQUEST message containing the Security Indication Modify IE in the PDU Session Resource To Modify List IE for a PDU session that may result in the change of security status that has been applied but the DRBs that have been established for that PDU session are not requested to be released via the DRB To Remove List IEs as specified in TS 38.331 [10], then the gNB-CU-UP shall respond with a BEARER CONTEXT MODIFICATION FAILURE message and appropriate cause value.
 8.3.2.4	Abnormal Conditions
 If the gNB-CU-UP receives a BEARER CONTEXT MODIFICATION REQUEST message containing a E-UTRAN QoS IE in the DRB To Setup List or the DRB To Modify List IE for a GBR QoS DRB but where the GBR QoS Information IE is not present, the gNB-CU-UP shall report the addition or the modification of the corresponding DRB as failed in the DRB Failed List IE or the DRB Failed To Modify List IE of the BEARER CONTEXT MODIFICATION RESPONSE message with an appropriate cause value.
 If the gNB-CU-UP receives a BEARER CONTEXT MODIFICATION REQUEST message containing a QoS Flow Level QoS Parameters IE in the PDU Session Resource To Setup List IE or the PDU Session Resource To Modify List IE for a GBR QoS Flow but where the GBR QoS Flow Information IE is not present, the gNB-CU-UP shall report the addition or the modification of the corresponding QoS Flow as failed in the corresponding  Flow Failed List IE of the BEARER CONTEXT MODIFICATION RESPONSE message with an appropriate cause value.
@@ -988,12 +1008,14 @@ If the Activity Notification Level was set to “UE” during the Bearer Context
 Not applicable.
 8.3.7	DL Data Notification
 8.3.7.1	General
-This procedure is initiated by the gNB-CU-UP to indicate the detection of DL data arrival for the UE. The procedure uses UE-associated signalling.
+This procedure is initiated by the gNB-CU-UP to indicate the detection of DL data arrival for the UE, or indicate that a DL packet including a QFI value in the NG-U header not configured by the QoS Flows Information To Be Setup IE or the Flow Mapping Information IE is received for the first time. The procedure uses UE-associated signalling.
 8.3.7.2	Successful Operation
 
 Figure 8.3.7.2-1: DL Data Notification procedure: Successful Operation.
 The gNB-CU-UP initiates the procedure by sending the DL DATA NOTIFICATION message to the gNB-CU-CP.
 If the PPI IE is included in the DL DATA NOTIFICATION message, the gNB-CU-CP shall use it for paging policy differentiation.
+If the PDU Session To Notify List IE is included in the DL DATA NOTIFICATION message, the gNB-CU-CP shall, if supported, either map the flow(s) included in PDU Session To Notify List IE to the existing DRB or establish a new DRB for the flow(s).
+NOTE: 	If a DL packet including a QFI value in the NG-U header not configured by the QoS Flows Information To Be Setup IE or the Flow Mapping Information IE is received, the gNB-CU-UP may deliver the DL packet via any existing configured DRB before it initiates DL Data Notification procedure.
 8.3.7.3	Abnormal Conditions
 Not applicable.
 8.3.8	Data Usage Report
@@ -1020,7 +1042,7 @@ Not applicable.
 Not applicable.
 8.3.10	UL Data Notification
 8.3.10.1	General
-This procedure is initiated by the gNB-CU-UP to notify the gNB-CU-CP that an UL packet including a QFI value in the SDAP header not configured by the Flow Mapping Information IE is received for the first time at the default DRB. The procedure uses UE-associated signalling.
+This procedure is initiated by the gNB-CU-UP to notify the gNB-CU-CP that an UL packet including a QFI value in the SDAP header not configured by the QoS Flows Information To Be Setup IE or the Flow Mapping Information IE is received for the first time at the default DRB. The procedure uses UE-associated signalling.
 8.3.10.2	Successful Operation
 
 Figure 8.3.10.2-1: UL Data Notification procedure: Successful Operation.
@@ -1108,6 +1130,17 @@ If the gNB-CU-UP receives an IAB UP TNL ADDRESS UPDATE message, but cannot perfo
 If the IAB UP TNL ADDRESS UPDATE FAILURE message includes the Time To Wait IE, the gNB-CU-CP shall wait at least for the indicated amount of time before reinitiating the IAB UP TNL Address Update procedure towards the same gNB-CU-UP.
 8.5.1.4	Abnormal Conditions
 Not Applicable.
+8.5.2	IAB PSK Notification
+8.5.2.1	General
+The purpose of the IAB PSK Notification procedure is to allow the gNB-CU-CP to send the security key info to the gNB-CU-UP, which will be used for the IKEv2 Pre-shared Secret Key (PSK) authentication to protect the F1-U interface of the IAB-node(s) as specified in TS 33.501 [13]. The procedure uses non-UE associated signalling.
+NOTE: 	This procedure is applicable for IAB-nodes, where the term "gNB-CU-CP" applies to IAB-donor-CU-CP, and the term “gNB-CU-UP” applies to IAB-donor-CU-UP.
+8.5.2.2	Successful Operation
+
+Figure 8.5.2.2-1: IAB PSK Notification procedure: Successful Operation.
+The gNB-CU-CP initiates the procedure by sending the IAB PSK NOTIFICATION message to the gNB-CU-UP.
+The gNB-CU-UP uses the IAB-Donor-CU-UP PSK Info IE included in the IAB PSK NOTIFICATION message as specified in TS 33.501 [13].
+8.5.2.3	Abnormal Conditions
+Not applicable. 
 9	Elements for E1AP communication
 9.1	General
 Subclauses 9.2 and 9.3 present the E1AP message and IE definitions in tabular format. The corresponding ASN.1 definition is presented in subclause 9.4. In case there is contradiction between the tabular format and the ASN.1 definition, the ASN.1 shall take precedence, except for the definition of conditions for the presence of conditional IEs, where the tabular format shall take precedence. 
@@ -2791,6 +2824,20 @@ ENUMERATED(Discard PDCP SN, …)
 If set to “Discard PDCP SN”, indicates that the forwarded PDCP SNs have to be removed
 YES
 ignore
+Direct Forwarding Path Availability
+O
+
+9.3.1.98
+
+YES
+ignore
+gNB-CU-UP UE E1AP ID
+O
+
+9.3.1.5
+
+YES
+ignore
 
 Range bound
 Explanation
@@ -2938,7 +2985,6 @@ ignore
 9.2.2.4	BEARER CONTEXT MODIFICATION REQUEST
 This message is sent by the gNB-CU-CP to request the gNB-CU-UP to modify a bearer context. 
 Direction: gNB-CU-CP  gNB-CU-UP
-
 IE/Group Name
 Presence
 Range
@@ -3377,7 +3423,7 @@ reject
 
 
 
->>PDU Session Resource To Modify List
+>>PDU Session Resource Required To Modify List
 O
 
 PDU Session Resource Required To Modify List
@@ -3789,6 +3835,39 @@ O
 
 YES
 ignore
+PDU Session To Notify List
+O
+
+
+
+YES
+ignore
+>PDU Session To Notify Item
+
+1..<maxnoofPDUSessionResource>
+
+
+-
+-
+>>PDU Session ID 
+M
+
+9.3.1.21
+
+-
+-
+>>QoS Flow List
+M
+
+9.3.1.12
+
+-
+-
+
+Range bound
+Explanation
+maxnoofPDUSessionResource 
+Maximum no. of PDU Sessions for a UE. Value is 256.
 
 9.2.2.14	DATA USAGE REPORT
 This message is sent by the gNB-CU-UP to report data volumes.
@@ -4203,7 +4282,7 @@ M
 
 -
 
->> UL D1 Result
+>>UL D1 Result
 O
 
 INTEGER (0 .. 10000,…)
@@ -4529,6 +4608,38 @@ O
 
 YES
 ignore
+
+9.2.4.4	IAB PSK NOTIFICATION
+This message is sent by the gNB-CU-CP to the gNB-CU-UP to transfer the security key info to be used for the IKEv2 Pre-shared Secret Key (PSK) authentication to protect the F1-U interface of the IAB-node(s).
+Direction: gNB-CU-CP  gNB-CU-UP
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+Criticality
+Assigned Criticality
+Message Type
+M
+
+9.3.1.1
+
+YES
+reject
+Transaction ID
+M
+
+9.3.1.23
+
+YES
+reject
+IAB-donor-CU-UP PSK Info
+M
+
+9.3.1.99
+
+YES
+reject
 
 9.3	Information Element Definitions
 9.3.1	Radio Network Layer Related IEs
@@ -5054,6 +5165,14 @@ O
 Indicates that only the uplink or downlink QoS flow is mapped to the DRB
 YES
 ignore
+>>Data Forwarding Source IP Address
+O
+
+Transport Layer Address
+9.3.2.4
+Identifies the TNL address used by the source node for data forwarding.
+YES
+ignore
 
 Range bound
 Explanation
@@ -5405,13 +5524,6 @@ O
 Traffic pattern information associated with the QFI. Details in TS 23.501 [20].
 YES
 ignore
->>MCG Offered GBR QoS Flow Information
-O
-
-GBR QoS Flow Information 9.3.1.30
-This IE contains M-Node offered GBR QoS Flow Information.
-YES
-ignore
 
 Range bound
 Explanation
@@ -5511,6 +5623,13 @@ ENUMERATED (UL, DL, Both, …)
 Indicates to measure UL, or DL, or both UL/DL delays for the associated QoS flow.
 YES
 ignore
+MCG Offered GBR QoS Flow Information
+O
+
+GBR QoS Flow Information 9.3.1.30
+This IE contains M-Node offered GBR QoS Flow Information.
+YES
+ignore
 QoS Monitoring Reporting Frequency
 O
 
@@ -5524,6 +5643,14 @@ O
 
 ENUMERATED (true, ...)
 Indicates to stop the QoS monitoring.
+YES
+ignore
+Data Forwarding Source IP Address
+O
+
+Transport Layer Address
+9.3.2.4
+Identifies the TNL address used by the source node for data forwarding.
 YES
 ignore
 
@@ -6740,7 +6867,7 @@ Common Network Instance
 M
 
 OCTET STRING
-
+The octets of OCTET STRING are encoded as the Network Instance field of the Network Instance IE specified in TS 29.244 [29]
 
 9.3.1.67	Activity Notification Level
 This IE contains information on which level activity notification shall be performed..
@@ -7294,43 +7421,64 @@ Explanation
 maxnoofMDTPLMNs
 Maximum no. of PLMNs in the MDT PLMN list. Value is 16.
 
-9.3.1.90	EHC Parameters 
+9.3.1.90	EHC Parameters
 This IE carries the EHC parameters for ethernet header compression.
 IE/Group Name
 Presence
 Range
 IE type and reference
 Semantics description
+Criticality
+Assigned Criticality
 EHC Common
 M
 
 
 
+-
+-
 >EHC-CID-Length
 M
 
 ENUMERATED { bits7, bits15, … }
 See description of ehc-CID-Length in TS 38.331 [10]
+-
+-
 EHC Downlink
 O
 
 
 
+-
+-
 >drb-ContinueEHC-DL
 M
 
 ENUMERATED { true, … }
 See description of drb-ContinueEHC-DL in TS 38.331 [10]
+-
+-
+>maxCID-EHC-DL
+O
+
+INTEGER(1..32767, …)
+Indicate the maximum number of DL EHC contexts that can be established for the DRB. The total value of maxCID-EHC-DL plus maxCID-EHC-UL(as specified in TS 38.331) across all bearers for the UE should be less than or equal to the value of maxNumberEHC-Contexts parameter as indicated by the UE.
+YES
+ignore
 EHC Uplink
 O
 
 
 
+-
+-
 >drb-ContinueEHC-UL
 M
 
 ENUMERATED { true, … }
 See description of drb-ContinueEHC-UL in TS 38.331 [10]
+-
+-
 
 9.3.1.91	DAPS Request Information
 The DAPS Indicator IE indicates that DAPS HO is requested for the concerned DRB.
@@ -7525,6 +7673,52 @@ Explanation
 maxnoofExtNRCGI
 Maximum no. of extended NR CGIs supported. Value is 16384. 
 
+9.3.1.98	Direct Forwarding Path Availability
+This IE indicates whether a direct forwarding path is available.
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+Direct Forwarding Path Availability
+M
+
+ENUMERATED (inter-system direct path available, …, intra-system direct path available)
+
+
+9.3.1.99	IAB-donor-CU-UP PSK Info
+This IE contains the IAB-Donor-CU-UP Pre-Shared Key generated by the gNB-CU-CP and IP addresses for IAB-donor-CU-UP and IAB-DU.
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+IAB-donor-CU-UP PSK Info Item IEs
+
+1..< maxnoofPSKs >
+
+
+>IAB-Donor-CU-UP PSK
+M
+
+OCTET STRING
+This IE contains the KIAB-CU-UP as defined in TS 33.501 [13].
+>IAB-Donor-CU-UP IP Address
+M
+
+9.3.2.4
+
+>IAB-DU IP Address
+M
+
+9.3.2.4
+
+
+Range bound
+Explanation
+maxnoofPSKs
+Maximum no. of PSKs to be updated in one E1AP procedure. Value is 256.
+
 9.3.2	Transport Network Layer Related IEs
 9.3.2.1	UP Transport Layer Information
 The UP Transport Layer Information IE identifies an transport bearer associated to a DRB. It contains a Transport Layer Address and a GTP Tunnel Endpoint Identifier. The Transport Layer Address is an IP address to be used for the user plane transport. 
@@ -7663,18 +7857,46 @@ Presence
 Range
 IE type and reference
 Semantics description
+Criticality
+Assigned Criticality
 UL Data Forwarding 
 O
 
 UP Transport Layer Information 
 9.3.2.1
 
+-
+-
 DL Data Forwarding 
 O
 
 UP Transport Layer Information 
 9.3.2.1
 
+-
+-
+Data Forwarding to NG-RAN QoS Flow Information List
+
+0..1
+
+Providing QoS flows accepted for data forwarding to the source gNB-CU-UP.
+YES
+ignore
+>Data Forwarding to NG-RAN QoS Flow Information List  Item
+
+1..<maxnoofQoSflows>
+
+
+-
+-
+>>QoS Flow Identifier
+M
+
+QoS Flow Identifier
+9.3.1.24
+
+-
+-
 
 9.3.2.7	Transport Network Layer Address Info
 This IE is used for signalling TNL address information.
@@ -7776,61 +7998,91 @@ Presence
 Range
 IE type and reference
 Semantics description
+Criticality
+Assigned Criticality
 DRB To Setup Item E-UTRAN 
 
 1..<maxnoofDRBs>
 
 
+-
+-
 >DRB ID 
 M
 
 9.3.1.16
 
+-
+-
 >PDCP Configuration 
 M
 
 9.3.1.38
 
 
+-
+-
 >E-UTRAN QoS
 M
 
 9.3.1.17
 
+-
+-
 >S1 UL UP Transport Layer Information 
 M
 
 UP Transport Layer Information
 9.3.2.1
 
+-
+-
 >Data Forwarding Information Request
 O
 
 9.3.2.5
 Requesting forwarding info from the target gNB-CU-UP.
+-
+-
 >Cell Group Information
 M
 
 9.3.1.11
 
+-
+-
 >DL UP Parameters
 O
 
 UP Parameters 
 9.3.1.13
 
+-
+-
 >DRB Inactivity Timer
 O
 
 Inactivity Timer 
 9.3.1.54
 Included if the Activity Notification Level is set to DRB.
+-
+-
 >Existing Allocated S1 DL UP Transport Layer Information
 O
 
 UP Transport Layer Information
 9.3.2.1
 This IE is not used in this version of the specification.
+-
+-
+>Data Forwarding Source IP Address
+O
+
+Transport Layer Address
+9.3.2.4
+Identifies the TNL address used by the source node for data forwarding.
+YES
+ignore
 
 Range bound
 Explanation
@@ -8022,6 +8274,20 @@ O
 
 YES
 ignore
+>>>Ignore Mapping Rule Indication
+O
+
+ENUMERATED (True, …)
+Included if the QoS flow mapping rule for the DRB has not been decided by gNB-CU-CP.
+YES
+reject
+>>>QoS Flows Remapping
+O
+
+ENUMERATED (update,  source configuration, …)
+Indicates that the target gNB-CU-CP requests QoS flow remapping during an intra-system lossless handover as specified in TS 38.300 [4].     
+YES
+reject
 >Redundant NG UL UP Transport Layer Information
 O
 
@@ -8060,39 +8326,61 @@ Presence
 Range
 IE type and reference
 Semantics description
+Criticality
+Assigned Criticality
 DRB Setup Item E-UTRAN
 
 1..<maxnoofDRBs>
 
 
+-
+-
 >DRB ID 
 M
 
 9.3.1.16
 
+-
+-
 >S1 DL UP Transport Layer Information 
 M
 
 UP Transport Layer Information 
 9.3.2.1
 
+-
+-
 >Data Forwarding Information Response
 O
 
 Data Forwarding Information
 9.3.2.6
 Providing forwarding info from the target gNB-CU-UP.
+-
+-
 >UL UP Parameters
 M
 
 UP Parameters 
 9.3.1.13
 
+-
+-
 >S1 DL UP Unchanged
 O
 
 ENUMERATED (True, …)
 This IE is not used in this version of the specification.
+-
+-
+>Data Forwarding Source IP Address
+O
+
+Transport Layer Address
+9.3.2.4
+Identifies the TNL address used by the source node for data forwarding.
+YES
+ignore
 
 Range bound
 Explanation
@@ -8647,6 +8935,20 @@ O
 Indicates the DRB QoS when more than one QoS Flow is mapped to the DRB
 YES
 ignore
+>>>Ignore Mapping Rule Indication
+O
+
+ENUMERATED (True, …)
+Included if the QoS flow mapping rule for the DRB has not been decided by gNB-CU-CP.
+YES
+reject
+>>>DAPS Request Information
+O
+
+9.3.1.91
+This IE is not used in this version of the specification.
+YES
+ignore
 >Redundant NG UL UP Transport Layer Information
 O
 
@@ -8834,6 +9136,27 @@ O
 Indicates the DRB QoS when more than one QoS Flow is mapped to the DRB 
 YES
 ignore
+>>>Ignore Mapping Rule Indication
+O
+
+ENUMERATED (True, …)
+Included if the QoS flow mapping rule for the DRB has not been decided by gNB-CU-CP.
+YES
+reject
+>>>DAPS Request Information
+O
+
+9.3.1.91
+This IE is not used in this version of the specification.
+YES
+ignore
+>>>QoS Flows Remapping
+O
+
+ENUMERATED (update, source configuration, …)
+This IE is not used in this version of the specification.
+YES
+reject
 >DRB To Modify List
 
 0.. 1
@@ -8969,6 +9292,20 @@ O
 Provides early data forwarding information to the target gNB-CU-UP.
 YES
 reject
+>>>DAPS Request Information
+O
+
+9.3.1.91
+Used to request intra-gNB-CU-UP DAPS HO
+YES
+ignore
+>>>Early Data Forwarding Indicator
+O
+
+ENUMERATED (stop, …)
+
+YES
+ignore
 >DRB To Remove List
 
 0.. 1
@@ -9057,6 +9394,14 @@ QoS Flow Identifier
 
 -
 -
+>Security Indication Modify
+O
+
+Security Indication
+9.3.1.23
+
+YES
+ignore
 
 Range bound
 Explanation
@@ -10022,7 +10367,8 @@ FROM E1AP-CommonDataTypes
 	IAB-UPTNLAddressUpdateFailure,
 	CellTrafficTrace,
 	EarlyForwardingSNTransfer,
-	GNB-CU-CPMeasurementResultsInformation
+	GNB-CU-CPMeasurementResultsInformation,
+	IABPSKNotification
 
 FROM E1AP-PDU-Contents
 	id-reset,
@@ -10052,7 +10398,8 @@ FROM E1AP-PDU-Contents
 	id-iAB-UPTNLAddressUpdate,
 	id-CellTrafficTrace,
 	id-earlyForwardingSNTransfer,
-	id-gNB-CU-CPMeasurementResultsInformation
+	id-gNB-CU-CPMeasurementResultsInformation,
+	id-iABPSKNotification
 
 FROM E1AP-Constants;
 
@@ -10154,7 +10501,8 @@ E1AP-ELEMENTARY-PROCEDURES-CLASS-2 E1AP-ELEMENTARY-PROCEDURE ::= {
 	cellTrafficTrace						|
 	resourceStatusReporting					|
 	earlyForwardingSNTransfer				|
-	gNB-CU-CPMeasurementResultsInformation,
+	gNB-CU-CPMeasurementResultsInformation	|
+	iABPSKNotification,
 	...
 }
 
@@ -10352,6 +10700,12 @@ earlyForwardingSNTransfer E1AP-ELEMENTARY-PROCEDURE ::= {
 	CRITICALITY				ignore
 }
 
+iABPSKNotification E1AP-ELEMENTARY-PROCEDURE ::= {
+	INITIATING MESSAGE		IABPSKNotification
+	PROCEDURE CODE			id-iABPSKNotification
+	CRITICALITY				reject
+}
+
 END
 -- ASN1STOP
 
@@ -10472,7 +10826,9 @@ IMPORTS
 	ExtendedSliceSupportList,
 	TransportLayerAddress,
 	AdditionalHandoverInfo,
-	Extended-NR-CGI-Support-List
+	Extended-NR-CGI-Support-List,
+	DirectForwardingPathAvailability,
+	IAB-Donor-CU-UPPSKInfo-Item
 
 
 FROM E1AP-IEs
@@ -10591,13 +10947,16 @@ FROM E1AP-Containers
 	id-ExtendedSliceSupportList,
 	id-AdditionalHandoverInfo,
 	id-Extended-NR-CGI-Support-List,
+	id-DirectForwardingPathAvailability,
+	id-IAB-Donor-CU-UPPSKInfo,
 
 	maxnoofErrors,
 	maxnoofSPLMNs,
 	maxnoofDRBs,
 	maxnoofTNLAssociations,
 	maxnoofIndividualE1ConnectionsToReset,
-	maxnoofTNLAddresses
+	maxnoofTNLAddresses,
+	maxnoofPSKs
 
 	
 FROM E1AP-Constants;
@@ -11062,7 +11421,9 @@ BearerContextSetupRequestIEs E1AP-PROTOCOL-IES ::= {
 	{ ID id-NPNContextInfo						CRITICALITY reject	TYPE NPNContextInfo									PRESENCE optional}|
 	{ ID id-ManagementBasedMDTPLMNList			CRITICALITY	ignore	TYPE MDTPLMNList									PRESENCE optional}|
 	{ ID id-CHOInitiation						CRITICALITY reject	TYPE CHOInitiation									PRESENCE optional }|
-	{ ID id-AdditionalHandoverInfo				CRITICALITY ignore	TYPE AdditionalHandoverInfo							PRESENCE optional },
+	{ ID id-AdditionalHandoverInfo				CRITICALITY ignore	TYPE AdditionalHandoverInfo							PRESENCE optional }|
+	{ ID id-DirectForwardingPathAvailability	CRITICALITY ignore	TYPE DirectForwardingPathAvailability			PRESENCE optional }|
+	{ ID id-gNB-CU-UP-UE-E1AP-ID				CRITICALITY ignore	TYPE GNB-CU-UP-UE-E1AP-ID							PRESENCE optional },
 	...
 } 
 
@@ -11483,7 +11844,8 @@ DLDataNotification ::= SEQUENCE {
 DLDataNotificationIEs E1AP-PROTOCOL-IES ::= {
 	{ ID id-gNB-CU-CP-UE-E1AP-ID			CRITICALITY reject	TYPE GNB-CU-CP-UE-E1AP-ID			PRESENCE mandatory }|
 	{ ID id-gNB-CU-UP-UE-E1AP-ID			CRITICALITY reject	TYPE GNB-CU-UP-UE-E1AP-ID			PRESENCE mandatory }|
-	{ ID id-PPI							CRITICALITY ignore	TYPE PPI							PRESENCE optional },
+	{ ID id-PPI								CRITICALITY ignore	TYPE PPI							PRESENCE optional }|
+	{ ID id-PDU-Session-To-Notify-List		CRITICALITY ignore	TYPE PDU-Session-To-Notify-List		PRESENCE optional },
 	...
 } 
 
@@ -11889,6 +12251,31 @@ EarlyForwardingSNTransferIEs E1AP-PROTOCOL-IES ::= {
 	...
 }
 
+-- **************************************************************
+--
+-- IAB PSK NOTIFICATION
+--
+-- **************************************************************
+
+-- **************************************************************
+--
+-- IAB PSK Notification
+--
+-- **************************************************************
+
+IABPSKNotification ::= SEQUENCE {
+	protocolIEs			ProtocolIE-Container       { { IABPSKNotificationIEs } },
+	...
+}
+
+IABPSKNotificationIEs E1AP-PROTOCOL-IES ::= {
+	{ ID id-TransactionID					CRITICALITY reject	TYPE TransactionID					PRESENCE mandatory }|
+	{ ID id-IAB-Donor-CU-UPPSKInfo			CRITICALITY reject	TYPE IAB-Donor-CU-UPPSKInfo			PRESENCE mandatory },
+	...
+}
+
+IAB-Donor-CU-UPPSKInfo	::= SEQUENCE (SIZE(1.. maxnoofPSKs)) OF IAB-Donor-CU-UPPSKInfo-Item
+
 END
 -- ASN1STOP
 
@@ -11945,6 +12332,13 @@ IMPORTS
 	id-MCG-OfferedGBRQoSFlowInfo,
 	id-Number-of-tunnels,
 	id-DataForwardingtoE-UTRANInformationList,
+	id-DataForwardingtoNG-RANQoSFlowInformationList,
+	id-MaxCIDEHCDL,
+	id-ignoreMappingRuleIndication,
+	id-EarlyDataForwardingIndicator,
+	id-QoSFlowsDRBRemapping,
+	id-SecurityIndicationModify,
+	id-DataForwardingSourceIPAddress,
 	maxnoofQoSParaSets,
 	maxnoofErrors,
 	maxnoofSliceItems,
@@ -12247,6 +12641,7 @@ Data-Forwarding-Information	::=	SEQUENCE {
 }
 
 Data-Forwarding-Information-ExtIEs		E1AP-PROTOCOL-EXTENSION ::= {
+	{ID id-DataForwardingtoNG-RANQoSFlowInformationList	CRITICALITY ignore	EXTENSION DataForwardingtoNG-RANQoSFlowInformationList	PRESENCE optional},
 	...
 }
 
@@ -12313,6 +12708,12 @@ DefaultDRB	::=	ENUMERATED	{
 	true,
 	false,
 	...
+}
+
+DirectForwardingPathAvailability ::= ENUMERATED {
+	inter-system-direct-path-available,
+	...,
+	intra-system-direct-path-available
 }
 
 DiscardTimer	::=	ENUMERATED {ms10, ms20, ms30, ms40, ms50, ms60, ms75, ms100, ms150, ms200, ms250, ms300, ms500, ms750, ms1500, infinity}
@@ -12569,6 +12970,7 @@ DRB-Setup-Item-EUTRAN	::=	SEQUENCE {
 }
 
 DRB-Setup-Item-EUTRAN-ExtIEs		E1AP-PROTOCOL-EXTENSION ::= {
+{ ID id-DataForwardingSourceIPAddress			CRITICALITY ignore	EXTENSION TransportLayerAddress		PRESENCE optional},
 	...
 }
 
@@ -12717,9 +13119,11 @@ DRB-To-Modify-Item-NG-RAN	::=	SEQUENCE {
 
 DRB-To-Modify-Item-NG-RAN-ExtIEs		E1AP-PROTOCOL-EXTENSION ::= {
 	{ID id-OldQoSFlowMap-ULendmarkerexpected	CRITICALITY reject	EXTENSION QoS-Flow-List	PRESENCE optional}|
-	{ID id-DRB-QoS						CRITICALITY ignore	EXTENSION QoSFlowLevelQoSParameters		PRESENCE optional}|
-	{ID id-EarlyForwardingCOUNTReq		CRITICALITY reject	EXTENSION EarlyForwardingCOUNTReq		PRESENCE optional}|
-	{ID id-EarlyForwardingCOUNTInfo		CRITICALITY reject	EXTENSION EarlyForwardingCOUNTInfo		PRESENCE optional},
+	{ID id-DRB-QoS						CRITICALITY ignore	EXTENSION QoSFlowLevelQoSParameters			PRESENCE optional}|
+	{ID id-EarlyForwardingCOUNTReq		CRITICALITY reject	EXTENSION EarlyForwardingCOUNTReq			PRESENCE optional}|
+	{ID id-EarlyForwardingCOUNTInfo		CRITICALITY reject	EXTENSION EarlyForwardingCOUNTInfo			PRESENCE optional}|
+	{ID id-DAPSRequestInfo				CRITICALITY ignore	EXTENSION DAPSRequestInfo					PRESENCE optional}|
+	{ID id-EarlyDataForwardingIndicator	CRITICALITY ignore	EXTENSION EarlyDataForwardingIndicator	PRESENCE optional},
 	...
 }
 
@@ -12790,6 +13194,7 @@ DRB-To-Setup-Item-EUTRAN	::=	SEQUENCE {
 }
 
 DRB-To-Setup-Item-EUTRAN-ExtIEs		E1AP-PROTOCOL-EXTENSION ::= {
+{ ID id-DataForwardingSourceIPAddress			CRITICALITY ignore	EXTENSION TransportLayerAddress		PRESENCE optional},
 	...
 }
 
@@ -12828,8 +13233,10 @@ DRB-To-Setup-Item-NG-RAN	::=	SEQUENCE {
 }
 
 DRB-To-Setup-Item-NG-RAN-ExtIEs		E1AP-PROTOCOL-EXTENSION ::= {
-		{ID id-DRB-QoS			CRITICALITY ignore	EXTENSION QoSFlowLevelQoSParameters	PRESENCE optional}|
-		{ID id-DAPSRequestInfo	CRITICALITY ignore	EXTENSION DAPSRequestInfo			PRESENCE optional},
+	{ID id-DRB-QoS						CRITICALITY ignore	EXTENSION QoSFlowLevelQoSParameters		PRESENCE optional}|
+	{ID id-DAPSRequestInfo				CRITICALITY ignore	EXTENSION DAPSRequestInfo					PRESENCE optional}|
+	{ID id-ignoreMappingRuleIndication	CRITICALITY reject	EXTENSION IgnoreMappingRuleIndication	PRESENCE optional}|
+	{ID id-QoSFlowsDRBRemapping			CRITICALITY reject	EXTENSION QoS-Flows-DRB-Remapping			PRESENCE optional},
 	...
 }
 
@@ -12849,7 +13256,9 @@ DRB-To-Setup-Mod-Item-NG-RAN	::=	SEQUENCE {
 }
 
 DRB-To-Setup-Mod-Item-NG-RAN-ExtIEs		E1AP-PROTOCOL-EXTENSION ::= {
-	{ID id-DRB-QoS	CRITICALITY ignore	EXTENSION QoSFlowLevelQoSParameters	PRESENCE optional},
+	{ID id-DRB-QoS						CRITICALITY ignore	EXTENSION QoSFlowLevelQoSParameters		PRESENCE optional}|
+	{ID id-ignoreMappingRuleIndication	CRITICALITY reject	EXTENSION IgnoreMappingRuleIndication	PRESENCE optional}|
+	{ID id-DAPSRequestInfo				CRITICALITY ignore	EXTENSION DAPSRequestInfo				PRESENCE optional},
 	...
 }
 
@@ -12900,6 +13309,8 @@ DataDiscardRequired	::= 	ENUMERATED {
 
 -- E
 
+EarlyDataForwardingIndicator ::= ENUMERATED {stop, ...}
+
 EarlyForwardingCOUNTInfo ::= CHOICE {
 	firstDLCount					FirstDLCount,
 	dLDiscardingCount				DLDiscarding,
@@ -12927,6 +13338,7 @@ EHC-Downlink-Parameters ::= SEQUENCE {
 }
 
 EHC-Downlink-Parameters-ExtIEs E1AP-PROTOCOL-EXTENSION ::= {
+{ID id-MaxCIDEHCDL			CRITICALITY ignore	EXTENSION	MaxCIDEHCDL		PRESENCE optional	},
 	...
 }
 
@@ -13207,6 +13619,11 @@ HW-CapacityIndicator-ExtIEs	E1AP-PROTOCOL-EXTENSION ::= {
 
 -- I 
 
+IgnoreMappingRuleIndication	::=	ENUMERATED	{
+	true,
+	...
+}
+
 IntegrityProtectionIndication ::= ENUMERATED {
 	required,
 	preferred,
@@ -13246,6 +13663,20 @@ ImmediateMDT-ExtIEs E1AP-PROTOCOL-EXTENSION ::= {
 	...
 }
 
+IAB-Donor-CU-UPPSKInfo-Item ::= SEQUENCE {
+	iAB-donor-CU-UPPSK			IAB-donor-CU-UPPSK,
+	iAB-donor-CU-UPIPAddress		TransportLayerAddress,
+	iAB-DUIPAddress				TransportLayerAddress,
+	iE-Extensions	ProtocolExtensionContainer { { IAB-donor-CU-UPPSKInfoItemExtIEs } }	OPTIONAL,
+	...
+}
+
+IAB-donor-CU-UPPSKInfoItemExtIEs 	E1AP-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+IAB-donor-CU-UPPSK	::= OCTET STRING
+
 -- J
 
 -- K
@@ -13280,6 +13711,8 @@ MaxIPrate ::= ENUMERATED {
 }
 
 MaxPacketLossRate ::= INTEGER (0..1000, ...)
+
+MaxCIDEHCDL ::= INTEGER (1..32767, ...)
 
 MRDC-Data-Usage-Report-Item ::= SEQUENCE {
 	startTimeStamp				OCTET STRING (SIZE(4)),
@@ -13789,11 +14222,12 @@ PDU-Session-Resource-To-Modify-Item	::=	SEQUENCE {
 }
 
 PDU-Session-Resource-To-Modify-Item-ExtIEs		E1AP-PROTOCOL-EXTENSION ::= {
-	{ID id-SNSSAI		CRITICALITY reject	EXTENSION SNSSAI		PRESENCE optional}|
-	{ ID id-CommonNetworkInstance						CRITICALITY ignore	EXTENSION CommonNetworkInstance								PRESENCE optional	}|
-	{ID id-redundant-nG-UL-UP-TNL-Information		CRITICALITY ignore	EXTENSION 	UP-TNL-Information			PRESENCE optional	}|
-	{ID id-RedundantCommonNetworkInstance				CRITICALITY ignore	EXTENSION 	CommonNetworkInstance		PRESENCE optional	}|
-	{ID id-DataForwardingtoE-UTRANInformationList				CRITICALITY ignore	EXTENSION 	DataForwardingtoE-UTRANInformationList		PRESENCE optional	},
+	{ID id-SNSSAI										CRITICALITY reject	EXTENSION 	SNSSAI												PRESENCE optional}|
+	{ID id-CommonNetworkInstance						CRITICALITY ignore	EXTENSION 	CommonNetworkInstance							PRESENCE optional	}|
+	{ID id-redundant-nG-UL-UP-TNL-Information			CRITICALITY ignore	EXTENSION 	UP-TNL-Information								PRESENCE optional	}|
+	{ID id-RedundantCommonNetworkInstance				CRITICALITY ignore	EXTENSION 	CommonNetworkInstance							PRESENCE optional	}|
+	{ID id-DataForwardingtoE-UTRANInformationList		CRITICALITY ignore	EXTENSION 	DataForwardingtoE-UTRANInformationList	PRESENCE optional	}|
+	{ID id-SecurityIndicationModify						CRITICALITY ignore	EXTENSION 	SecurityIndication								PRESENCE optional	},
 	...
 }
 
@@ -13931,7 +14365,8 @@ QoS-Flow-Item	::=	SEQUENCE {
 }
 
 QoS-Flow-Item-ExtIEs		E1AP-PROTOCOL-EXTENSION ::= {
-	{ID id-QoSFlowMappingIndication		CRITICALITY ignore	EXTENSION QoS-Flow-Mapping-Indication		PRESENCE optional},
+	{ID id-QoSFlowMappingIndication			CRITICALITY ignore	EXTENSION QoS-Flow-Mapping-Indication		PRESENCE optional}|
+	{ID id-DataForwardingSourceIPAddress	CRITICALITY ignore	EXTENSION TransportLayerAddress					PRESENCE optional},
 	...
 }
 
@@ -13962,6 +14397,8 @@ QoS-Flow-Mapping-Item-ExtIEs		E1AP-PROTOCOL-EXTENSION ::= {
 }
 
 QoS-Flow-Mapping-Indication ::= ENUMERATED {ul, dl, ...}
+
+QoS-Flows-DRB-Remapping ::= ENUMERATED {update, source-configuration, ...}
 
 QoS-Parameters-Support-List	::= SEQUENCE {
 	eUTRAN-QoS-Support-List			EUTRAN-QoS-Support-List			OPTIONAL,
@@ -14008,7 +14445,8 @@ QoSFlowLevelQoSParameters-ExtIEs 	E1AP-PROTOCOL-EXTENSION ::= {
 	{ID id-QoSMonitoringRequest				CRITICALITY ignore	EXTENSION QosMonitoringRequest					PRESENCE optional}|
 	{ID id-MCG-OfferedGBRQoSFlowInfo		CRITICALITY ignore	EXTENSION GBR-QoSFlowInformation				PRESENCE optional}|
 	{ID id-QosMonitoringReportingFrequency	CRITICALITY ignore	EXTENSION QosMonitoringReportingFrequency	PRESENCE optional}|
-	{ID id-QoSMonitoringDisabled			CRITICALITY ignore	EXTENSION QosMonitoringDisabled					PRESENCE optional},
+	{ID id-QoSMonitoringDisabled			CRITICALITY ignore	EXTENSION QosMonitoringDisabled					PRESENCE optional}|
+	{ID id-DataForwardingSourceIPAddress	CRITICALITY ignore	EXTENSION TransportLayerAddress					PRESENCE optional},
 	...
 }
 
@@ -14046,6 +14484,18 @@ QoS-Mapping-Information ::= SEQUENCE {
 dscp							BIT STRING (SIZE(6))		OPTIONAL,  
 flow-label						BIT STRING (SIZE(20))	OPTIONAL,
 ...
+}
+
+DataForwardingtoNG-RANQoSFlowInformationList		::= SEQUENCE (SIZE(1.. maxnoofQoSFlows)) OF DataForwardingtoNG-RANQoSFlowInformationList-Item
+
+DataForwardingtoNG-RANQoSFlowInformationList-Item	::=	SEQUENCE {
+	qoS-Flow-Identifier					QoS-Flow-Identifier,
+	iE-Extensions						ProtocolExtensionContainer	{ { DataForwardingtoNG-RANQoSFlowInformationList-Item-ExtIEs} }	OPTIONAL,
+	...
+}
+
+DataForwardingtoNG-RANQoSFlowInformationList-Item-ExtIEs E1AP-PROTOCOL-EXTENSION ::= {
+	...
 }
 
 -- R
@@ -14558,6 +15008,7 @@ id-iAB-UPTNLAddressUpdate										ProcedureCode ::= 24
 id-CellTrafficTrace												ProcedureCode ::= 25
 id-earlyForwardingSNTransfer									ProcedureCode ::= 26
 id-gNB-CU-CPMeasurementResultsInformation						ProcedureCode ::= 27
+id-iABPSKNotification											ProcedureCode ::= 28
 
 
 -- **************************************************************
@@ -14588,6 +15039,7 @@ maxnoofQoSParaSets							INTEGER ::= 8
 maxnoofExtSliceItems						INTEGER ::= 65535
 maxnoofDataForwardingTunneltoE-UTRAN		INTEGER ::= 256
 maxnoofExtNRCGI 							INTEGER	::= 16384
+maxnoofPSKs									INTEGER	::= 256
 
 
 -- **************************************************************
@@ -14732,6 +15184,15 @@ id-QosMonitoringReportingFrequency								ProtocolIE-ID ::= 132
 id-QoSMonitoringDisabled										ProtocolIE-ID ::= 133
 id-AdditionalHandoverInfo										ProtocolIE-ID ::= 134
 id-Extended-NR-CGI-Support-List									ProtocolIE-ID ::= 135
+id-DataForwardingtoNG-RANQoSFlowInformationList					ProtocolIE-ID ::= 136
+id-MaxCIDEHCDL													ProtocolIE-ID ::= 137
+id-ignoreMappingRuleIndication									ProtocolIE-ID ::= 138
+id-DirectForwardingPathAvailability								ProtocolIE-ID ::= 139
+id-EarlyDataForwardingIndicator									ProtocolIE-ID ::= 140
+id-QoSFlowsDRBRemapping											ProtocolIE-ID ::= 141
+id-DataForwardingSourceIPAddress								ProtocolIE-ID ::= 142
+id-SecurityIndicationModify										ProtocolIE-ID ::= 143
+id-IAB-Donor-CU-UPPSKInfo											ProtocolIE-ID ::= 144
 
 
 END
@@ -15629,4 +16090,156 @@ RP-211338
 C
 Maximum number of NR-CGI over E1 [EXT_NRCGI_E1]
 16.6.0
+2021-09
+RP-93-e
+RP-211877
+0589
+2
+F
+CR on E1AP handling for unmapped DL QoS flows
+16.7.0
+2021-09
+RP-93-e
+RP-211877
+0612
+1
+A
+Correction of PDU Session level Data Forwarding Information and QoS Flow list
+16.7.0
+2021-09
+RP-93-e
+RP-211879
+0614
+2
+F
+Restricting the number of DL EHC contexts 
+16.7.0
+2021-09
+RP-93-e
+RP-211881
+0622
+
+F
+Correction for UL Data Notification over E1
+16.7.0
+2021-09
+RP-93-e
+RP-211873
+0632
+1
+F
+Data forwarding address allocation for handover 
+16.7.0
+2021-09
+RP-93-e
+RP-211873
+0636
+1
+F
+Support of direct data forwarding for inter-system HO from 4G to 5G
+16.7.0
+2021-09
+RP-93-e
+RP-211881
+0638
+
+F
+Issue for Intra gNB-CU-UP DAPS HO
+16.7.0
+2021-12
+RP-94-e
+RP-212866
+0644
+3
+F
+DAPS Inconsistencies
+16.8.0
+2021-12
+RP-94-e
+RP-212870
+0645
+1
+F
+Adding reference for coding of Common Network Instance
+16.8.0
+2021-12
+RP-94-e
+RP-212864
+0653
+1
+F
+Direct data forwarding indication for intra-5GS handover
+16.8.0
+2021-12
+RP-94-e
+RP-213019
+0656
+1
+F
+Correction of Qos Mapping Information IE in E1AP message for IAB (CR to TS38.463, R16)
+16.8.0
+2021-12
+RP-94-e
+RP-212866
+0657
+1
+F
+E1 impact to support to stop CHO early data forwarding
+16.8.0
+2021-12
+RP-94-e
+RP-212870
+0662
+2
+F
+Correction CR for 38.463 on lossless intra-system HO with QoS flow remapping in CP-UP separated scenario
+16.8.0
+2022-03
+RP-95-e
+RP-220279
+0651
+2
+F
+Dynamic ACL over E1 CR 38.463
+16.9.0
+2022-03
+RP-95-e
+RP-220278
+0672
+1
+F
+Downlink unmapped QoS flows for E1
+16.9.0
+2022-03
+RP-95-e
+RP-220276
+0673
+1
+F
+Correction on support of Pre-shared key derivation for IAB-donor-CU-UP
+16.9.0
+2022-03
+RP-95-e
+RP-220279
+0675
+2
+A
+Security indication in the modification procedure over E1 interface
+16.9.0
+2022-03
+RP-95-e
+RP-220277
+0676
+
+F
+CR for 38.463 on fixing DAPS HO handling inconsistency during Bearer Context Modification procedure
+16.9.0
+2022-03
+RP-95-e
+RP-220282
+0682
+-
+F
+Offered GBR in NR-DC
+16.9.0
 

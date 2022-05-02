@@ -474,7 +474,8 @@ FROM S1AP-Containers
 	id-NotifySourceeNB,
 	id-eNB-EarlyStatusTransfer-TransparentContainer,
 	id-WUS-Assistance-Information,
-	id-NB-IoT-PagingDRX
+	id-NB-IoT-PagingDRX,
+	id-UERadioCapabilityForPaging-NR-Format
 
 
 
@@ -2253,7 +2254,8 @@ UECapabilityInfoIndicationIEs S1AP-PROTOCOL-IES ::= {
 	{ ID id-UERadioCapabilityForPaging	CRITICALITY ignore	TYPE UERadioCapabilityForPaging		PRESENCE optional}|
 	{ ID id-UE-Application-Layer-Measurement-Capability		CRITICALITY ignore	TYPE UE-Application-Layer-Measurement-Capability							PRESENCE optional}|
 	{ ID id-LTE-M-Indication				CRITICALITY ignore	TYPE LTE-M-Indication				PRESENCE optional}|
-	{ ID id-UERadioCapability-NR-Format	CRITICALITY ignore	TYPE UERadioCapability				PRESENCE optional},
+	{ ID id-UERadioCapability-NR-Format	CRITICALITY ignore	TYPE UERadioCapability				PRESENCE optional}|
+	{ ID id-UERadioCapabilityForPaging-NR-Format	CRITICALITY ignore	TYPE UERadioCapabilityForPaging				PRESENCE optional},
 	...
 }
 

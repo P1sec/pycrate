@@ -1261,7 +1261,8 @@ HandoverRequestAcknowledgeIEs NGAP-PROTOCOL-IES ::= {
 	{ ID id-PDUSessionResourceAdmittedList				CRITICALITY ignore	TYPE PDUSessionResourceAdmittedList					PRESENCE mandatory	}|
 	{ ID id-PDUSessionResourceFailedToSetupListHOAck	CRITICALITY ignore	TYPE PDUSessionResourceFailedToSetupListHOAck		PRESENCE optional		}|
 	{ ID id-TargetToSource-TransparentContainer			CRITICALITY reject	TYPE TargetToSource-TransparentContainer			PRESENCE mandatory	}|
-	{ ID id-CriticalityDiagnostics						CRITICALITY ignore	TYPE CriticalityDiagnostics								PRESENCE optional		},
+	{ ID id-CriticalityDiagnostics						CRITICALITY ignore	TYPE CriticalityDiagnostics								PRESENCE optional		}|
+	{ ID id-NPN-AccessInformation						CRITICALITY reject	TYPE NPN-AccessInformation								PRESENCE optional		},
 	...
 }
 
@@ -1375,7 +1376,8 @@ PathSwitchRequestAcknowledgeIEs NGAP-PROTOCOL-IES ::= {
 	{ ID id-PC5QoSParameters							CRITICALITY ignore	TYPE PC5QoSParameters									PRESENCE optional 	}|
 	{ ID id-CEmodeBrestricted							CRITICALITY ignore	TYPE CEmodeBrestricted								PRESENCE optional		}|
 	{ ID id-UE-UP-CIoT-Support							CRITICALITY ignore	TYPE UE-UP-CIoT-Support								PRESENCE optional		}|
-	{ ID id-UERadioCapabilityID							CRITICALITY reject	TYPE UERadioCapabilityID								PRESENCE optional		},
+	{ ID id-UERadioCapabilityID							CRITICALITY reject	TYPE UERadioCapabilityID								PRESENCE optional		}|
+	{ ID id-ManagementBasedMDTPLMNList					CRITICALITY ignore	TYPE MDTPLMNList										PRESENCE optional		},
 	...
 }
 

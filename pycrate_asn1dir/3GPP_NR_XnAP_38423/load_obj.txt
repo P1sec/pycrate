@@ -110,6 +110,7 @@ XnAP-Constants.maxnoofAdditionalPDCPDuplicationTNL
 XnAP-Constants.maxnoofRLCDuplicationstate
 XnAP-Constants.maxnoofWLANName
 XnAP-Constants.maxnoofNonAnchorCarrierFreqConfig
+XnAP-Constants.maxnoofDataForwardingTunneltoE-UTRAN
 XnAP-Constants.id-ActivatedServedCells
 XnAP-Constants.id-ActivationIDforCellActivation
 XnAP-Constants.id-admittedSplitSRB
@@ -358,6 +359,18 @@ XnAP-Constants.id-PagingeDRXInformation
 XnAP-Constants.id-CHO-MRDC-EarlyDataForwarding
 XnAP-Constants.id-SCGIndicator
 XnAP-Constants.id-UESpecificDRX
+XnAP-Constants.id-PDUSessionExpectedUEActivityBehaviour
+XnAP-Constants.id-QoS-Mapping-Information
+XnAP-Constants.id-AdditionLocationInformation
+XnAP-Constants.id-dataForwardingInfoFromTargetE-UTRANnode
+XnAP-Constants.id-DirectForwardingPathAvailability
+XnAP-Constants.id-SourceNG-RAN-node-ID
+XnAP-Constants.id-SourceDLForwardingIPAddress
+XnAP-Constants.id-SourceNodeDLForwardingIPAddress
+XnAP-Constants.id-ExtendedReportIntervalMDT
+XnAP-Constants.id-SecurityIndication
+XnAP-Constants.id-RRCConnReestab-Indicator
+XnAP-Constants.id-TargetNodeID
 XnAP-Containers.XNAP-PROTOCOL-IES
 XnAP-Containers.XNAP-PROTOCOL-IES-PAIR
 XnAP-Containers.XNAP-PROTOCOL-EXTENSION
@@ -366,6 +379,7 @@ XnAP-Containers.ProtocolIE-Field
 XnAP-Containers.ProtocolIE-FieldPair
 XnAP-Containers.ProtocolExtensionField
 XnAP-Containers.PrivateIE-Field
+XnAP-IEs.AdditionLocationInformation
 XnAP-IEs.Additional-PDCP-Duplication-TNL-List
 XnAP-IEs.Additional-PDCP-Duplication-TNL-ExtIEs
 XnAP-IEs.Additional-UL-NG-U-TNLatUPF-Item-ExtIEs
@@ -457,6 +471,11 @@ XnAP-IEs.CSI-RSTransmissionIndication
 XnAP-IEs.XnUAddressInfoperPDUSession-List
 XnAP-IEs.XnUAddressInfoperPDUSession-Item-ExtIEs
 XnAP-IEs.DataForwardingAccepted
+XnAP-IEs.DataForwardingInfoFromTargetE-UTRANnode-ExtIEs
+XnAP-IEs.DataForwardingInfoFromTargetE-UTRANnode-List
+XnAP-IEs.DataForwardingInfoFromTargetE-UTRANnode-Item-ExtIEs
+XnAP-IEs.QoSFlowsToBeForwarded-List
+XnAP-IEs.QoSFlowsToBeForwarded-Item-ExtIEs
 XnAP-IEs.DataForwardingInfoFromTargetNGRANnode-ExtIEs
 XnAP-IEs.QoSFLowsAcceptedToBeForwarded-List
 XnAP-IEs.QoSFLowsAcceptedToBeForwarded-Item-ExtIEs
@@ -473,6 +492,7 @@ XnAP-IEs.DAPSResponseInfo-Item-ExtIEs
 XnAP-IEs.DeliveryStatus
 XnAP-IEs.DesiredActNotificationLevel
 XnAP-IEs.DefaultDRB-Allowed
+XnAP-IEs.DirectForwardingPathAvailability
 XnAP-IEs.DLCountChoice-ExtIEs
 XnAP-IEs.DLForwarding
 XnAP-IEs.DL-GBR-PRB-usage
@@ -811,6 +831,7 @@ XnAP-IEs.QoSFlows-List
 XnAP-IEs.QoSFlow-Item-ExtIEs
 XnAP-IEs.QoSFlows-List-withCause
 XnAP-IEs.QoSFlowwithCause-Item-ExtIEs
+XnAP-IEs.QoS-Mapping-Information-ExtIEs
 XnAP-IEs.QoSParaSetIndex
 XnAP-IEs.QoSParaSetNotifyIndex
 XnAP-IEs.QoSFlowsAdmitted-List
@@ -843,6 +864,7 @@ XnAP-IEs.ReportAmountMDT
 XnAP-IEs.ReportArea
 XnAP-IEs.ReportIntervalMDT
 XnAP-IEs.ReportType
+XnAP-IEs.ExtendedReportIntervalMDT
 XnAP-IEs.ReportCharacteristics
 XnAP-IEs.ReportingPeriodicity
 XnAP-IEs.RegistrationRequest
@@ -867,6 +889,7 @@ XnAP-IEs.Reestablishment-Indication
 XnAP-IEs.RFSP-Index
 XnAP-IEs.RRCConfigIndication
 XnAP-IEs.RRCConnections-ExtIEs
+XnAP-IEs.RRCConnReestab-Indicator
 XnAP-IEs.RRCReestab-initiated-ExtIEs
 XnAP-IEs.RRCReestab-Initiated-Reporting-ExtIEs
 XnAP-IEs.RRCReestab-Initiated-Reporting-wo-UERLFReport-ExtIEs
@@ -1244,6 +1267,9 @@ XnAP-IEs.CPTransportLayerInformation
 XnAP-IEs.CriticalityDiagnostics
 XnAP-IEs.CriticalityDiagnostics-IE-List
 XnAP-IEs.XnUAddressInfoperPDUSession-Item
+XnAP-IEs.DataForwardingInfoFromTargetE-UTRANnode
+XnAP-IEs.DataForwardingInfoFromTargetE-UTRANnode-Item
+XnAP-IEs.QoSFlowsToBeForwarded-Item
 XnAP-IEs.DataForwardingInfoFromTargetNGRANnode
 XnAP-IEs.QoSFLowsAcceptedToBeForwarded-Item
 XnAP-IEs.DataforwardingandOffloadingInfofromSource
@@ -1421,6 +1447,7 @@ XnAP-IEs.QoSFlowLevelQoSParameters
 XnAP-IEs.QoSFlowNotify-Item
 XnAP-IEs.QoSFlow-Item
 XnAP-IEs.QoSFlowwithCause-Item
+XnAP-IEs.QoS-Mapping-Information
 XnAP-IEs.QoSFlowsAdmitted-Item
 XnAP-IEs.QoSFlowsToBeSetup-Item
 XnAP-IEs.QoSFlowsUsageReport-Item

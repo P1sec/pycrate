@@ -136,6 +136,7 @@ maxnoofAdditionalPDCPDuplicationTNL			INTEGER ::= 2
 maxnoofRLCDuplicationstate					INTEGER ::= 3
 maxnoofWLANName								INTEGER ::= 4
 maxnoofNonAnchorCarrierFreqConfig			INTEGER ::= 15
+maxnoofDataForwardingTunneltoE-UTRAN    	INTEGER ::= 256
 
 -- **************************************************************
 --
@@ -391,5 +392,17 @@ id-PagingeDRXInformation																			ProtocolIE-ID ::= 245
 id-CHO-MRDC-EarlyDataForwarding																		ProtocolIE-ID ::= 246
 id-SCGIndicator																						ProtocolIE-ID ::= 247
 id-UESpecificDRX																					ProtocolIE-ID ::= 248
+id-PDUSessionExpectedUEActivityBehaviour															ProtocolIE-ID ::= 249
+id-QoS-Mapping-Information																			ProtocolIE-ID ::= 250
+id-AdditionLocationInformation																		ProtocolIE-ID ::= 251
+id-dataForwardingInfoFromTargetE-UTRANnode															ProtocolIE-ID ::= 252
+id-DirectForwardingPathAvailability																	ProtocolIE-ID ::= 253
+id-SourceNG-RAN-node-ID																				ProtocolIE-ID ::= 254
+id-SourceDLForwardingIPAddress																		ProtocolIE-ID ::= 255
+id-SourceNodeDLForwardingIPAddress																	ProtocolIE-ID ::= 256
+id-ExtendedReportIntervalMDT																			ProtocolIE-ID ::= 257
+id-SecurityIndication																				ProtocolIE-ID ::= 258
+id-RRCConnReestab-Indicator																			ProtocolIE-ID ::= 259
+id-TargetNodeID																						ProtocolIE-ID ::= 260
 
 END

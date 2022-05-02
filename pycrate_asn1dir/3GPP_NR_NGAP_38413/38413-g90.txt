@@ -21,8 +21,8 @@ Foreword	16
 8.2.1	PDU Session Resource Setup	24
 8.2.1.1	General	24
 8.2.1.2	Successful Operation	25
-8.2.1.3	Unsuccessful Operation	28
-8.2.1.4	Abnormal Conditions	28
+8.2.1.3	Unsuccessful Operation	29
+8.2.1.4	Abnormal Conditions	29
 8.2.2	PDU Session Resource Release	29
 8.2.2.1	General	29
 8.2.2.2	Successful Operation	29
@@ -35,62 +35,62 @@ Foreword	16
 8.2.3.4	Abnormal Conditions	34
 8.2.4	PDU Session Resource Notify	34
 8.2.4.1	General	34
-8.2.4.2	Successful Operation	34
+8.2.4.2	Successful Operation	35
 8.2.4.3	Abnormal Conditions	35
-8.2.5	PDU Session Resource Modify Indication	35
-8.2.5.1	General	35
+8.2.5	PDU Session Resource Modify Indication	36
+8.2.5.1	General	36
 8.2.5.2	Successful Operation	36
 8.2.5.3	Unsuccessful Operation	37
 8.2.5.4	Abnormal Conditions	37
-8.3	UE Context Management Procedures	37
-8.3.1	Initial Context Setup	37
-8.3.1.1	General	37
+8.3	UE Context Management Procedures	38
+8.3.1	Initial Context Setup	38
+8.3.1.1	General	38
 8.3.1.2	Successful Operation	38
 8.3.1.3	Unsuccessful Operation	41
 8.3.1.4	Abnormal Conditions	41
-8.3.2	UE Context Release Request (NG-RAN node initiated)	41
-8.3.2.1	General	41
+8.3.2	UE Context Release Request (NG-RAN node initiated)	42
+8.3.2.1	General	42
 8.3.2.2	Successful Operation	42
 8.3.2.3	Abnormal Conditions	42
 8.3.3	UE Context Release (AMF initiated)	42
 8.3.3.1	General	42
-8.3.3.2	Successful Operation	42
+8.3.3.2	Successful Operation	43
 8.3.3.3	Unsuccessful Operation	43
 8.3.3.4	Abnormal Conditions	43
 8.3.4	UE Context Modification	43
 8.3.4.1	General	43
-8.3.4.2	Successful Operation	43
-8.3.4.3	Unsuccessful Operation	45
-8.3.4.4	Abnormal Conditions	45
+8.3.4.2	Successful Operation	44
+8.3.4.3	Unsuccessful Operation	46
+8.3.4.4	Abnormal Conditions	46
 8.3.5	RRC Inactive Transition Report	46
 8.3.5.1	General	46
 8.3.5.2	Successful Operation	46
-8.3.5.3	Abnormal Conditions	46
-8.3.6	Connection Establishment Indication	46
-8.3.6.1	General	46
-8.3.6.2	Successful Operation	46
-8.3.6.3	Abnormal Conditions	47
-8.3.7	AMF CP Relocation Indication	47
-8.3.7.1	General	47
+8.3.5.3	Abnormal Conditions	47
+8.3.6	Connection Establishment Indication	47
+8.3.6.1	General	47
+8.3.6.2	Successful Operation	47
+8.3.6.3	Abnormal Conditions	48
+8.3.7	AMF CP Relocation Indication	48
+8.3.7.1	General	48
 8.3.7.2	Successful Operation	48
 8.3.7.3	Abnormal Conditions	48
-8.3.8	RAN CP Relocation Indication	48
-8.3.8.1	General	48
-8.3.8.2	Successful Operation	48
+8.3.8	RAN CP Relocation Indication	49
+8.3.8.1	General	49
+8.3.8.2	Successful Operation	49
 8.3.8.3	Abnormal Conditions	49
 8.3.9	Retrieve UE Information	49
 8.3.9.1	General	49
-8.3.9.2	Successful Operation	49
-8.3.9.3	Abnormal Conditions	49
+8.3.9.2	Successful Operation	50
+8.3.9.3	Abnormal Conditions	50
 8.3.10	UE Information Transfer	50
 8.3.10.1	General	50
 8.3.10.2	Successful Operation	50
-8.3.10.3	Abnormal Conditions	50
-8.3.11	UE Context Suspend	50
-8.3.11.1	General	50
+8.3.10.3	Abnormal Conditions	51
+8.3.11	UE Context Suspend	51
+8.3.11.1	General	51
 8.3.11.2	Successful Operation	51
-8.3.11.3	Unsuccessful Operation	51
-8.3.11.4	Abnormal Conditions	51
+8.3.11.3	Unsuccessful Operation	52
+8.3.11.4	Abnormal Conditions	52
 8.3.12	UE Context Resume	52
 8.3.12.1	General	52
 8.3.12.2	Successful Operation	52
@@ -98,655 +98,657 @@ Foreword	16
 8.4	UE Mobility Management Procedures	53
 8.4.1	Handover Preparation	53
 8.4.1.1	General	53
-8.4.1.2	Successful Operation	53
-8.4.1.3	Unsuccessful Operation	55
+8.4.1.2	Successful Operation	54
+8.4.1.3	Unsuccessful Operation	56
 8.4.1.4	Abnormal Conditions	56
 8.4.2	Handover Resource Allocation	56
 8.4.2.1	General	56
-8.4.2.2	Successful Operation	56
-8.4.2.3	Unsuccessful Operation	60
-8.4.2.4	Abnormal Conditions	61
-8.4.3	Handover Notification	61
-8.4.3.1	General	61
-8.4.3.2	Successful Operation	61
-8.4.3.3	Abnormal Conditions	62
-8.4.4	Path Switch Request	62
-8.4.4.1	General	62
-8.4.4.2	Successful Operation	62
-8.4.4.3	Unsuccessful Operation	65
-8.4.4.4	Abnormal Conditions	66
-8.4.5	Handover Cancellation	66
-8.4.5.1	General	66
-8.4.5.2	Successful Operation	66
-8.4.5.3	Unsuccessful Operation	66
-8.4.5.4	Abnormal Conditions	66
-8.4.6	Uplink RAN Status Transfer	66
-8.4.6.1	General	66
-8.4.6.2	Successful Operation	67
-8.4.6.3	Abnormal Conditions	67
-8.4.7	Downlink RAN Status Transfer	67
-8.4.7.1	General	67
-8.4.7.2	Successful Operation	67
-8.4.7.3	Abnormal Conditions	68
-8.4.8	Handover Success	68
-8.4.8.1	General	68
-8.4.8.2	Successful Operation	68
-8.4.8.3	Abnormal Conditions	68
-8.4.9	Uplink RAN Early Status Transfer	68
-8.4.9.1	General	68
-8.4.9.2	Successful Operation	69
-8.4.9.3	Abnormal Conditions	69
-8.4.10	Downlink RAN Early Status Transfer	69
-8.4.10.1	General	69
-8.4.10.2	Successful Operation	69
-8.4.10.3	Abnormal Conditions	70
-8.5	Paging Procedures	70
-8.5.1	Paging	70
-8.5.1.1	General	70
-8.5.1.2	Successful Operation	70
-8.5.1.3	Abnormal Conditions	71
-8.6	Transport of NAS Messages Procedures	71
-8.6.1	Initial UE Message	71
-8.6.1.1	General	71
-8.6.1.2	Successful Operation	71
-8.6.1.3	Abnormal Conditions	72
-8.6.2	Downlink NAS Transport	72
-8.6.2.1	General	72
-8.6.2.2	Successful Operation	73
-8.6.2.3	Abnormal Conditions	74
-8.6.3	Uplink NAS Transport	74
-8.6.3.1	General	74
-8.6.3.2	Successful Operation	74
-8.6.3.3	Abnormal Conditions	75
-8.6.4	NAS Non Delivery Indication	75
-8.6.4.1	General	75
-8.6.4.2	Successful Operation	75
-8.6.4.3	Abnormal Conditions	75
-8.6.5	Reroute NAS Request	75
-8.6.5.1	General	75
-8.6.5.2	Successful Operation	75
-8.6.5.3	Abnormal Conditions	76
-8.7	Interface Management Procedures	76
-8.7.1	NG Setup	76
-8.7.1.1	General	76
-8.7.1.2	Successful Operation	76
-8.7.1.3	Unsuccessful Operation	77
-8.7.1.4	Abnormal Conditions	77
-8.7.2	RAN Configuration Update	78
-8.7.2.1	General	78
-8.7.2.2	Successful Operation	78
-8.7.2.3	Unsuccessful Operation	79
-8.7.2.4	Abnormal Conditions	79
-8.7.3	AMF Configuration Update	79
-8.7.3.1	General	79
-8.7.3.2	Successful Operation	79
-8.7.3.3	Unsuccessful Operation	81
-8.7.3.4	Abnormal Conditions	81
-8.7.4	NG Reset	81
-8.7.4.1	General	81
-8.7.4.2	Successful Operation	81
-8.7.4.2.1	NG Reset initiated by the AMF	81
-8.7.4.2.2	NG Reset initiated by the NG-RAN node	82
-8.7.4.3	Unsuccessful Operation	83
-8.7.4.4	Abnormal Conditions	83
-8.7.4.4.1	Abnormal Condition at the 5GC	83
-8.7.4.4.2	Abnormal Condition at the NG-RAN	83
-8.7.4.4.3	Crossing of NG RESET Messages	83
-8.7.5	Error Indication	84
-8.7.5.1	General	84
-8.7.5.2	Successful Operation	84
-8.7.5.3	Abnormal Conditions	84
-8.7.6	AMF Status Indication	84
-8.7.6.1	General	84
-8.7.6.2	Successful Operation	85
-8.7.6.3	Abnormal Conditions	85
-8.7.7	Overload Start	85
-8.7.7.1	General	85
-8.7.7.2	Successful Operation	85
-8.7.7.3	Abnormal Conditions	86
-8.7.8	Overload Stop	86
-8.7.8.1	General	86
-8.7.8.2	Successful Operation	87
-8.7.8.3	Abnormal Conditions	87
-8.8	Configuration Transfer Procedures	87
-8.8.1	Uplink RAN Configuration Transfer	87
-8.8.1.1	General	87
-8.8.1.2	Successful Operation	87
-8.8.1.3	Abnormal Conditions	88
-8.8.2	Downlink RAN Configuration Transfer	88
-8.8.2.1	General	88
-8.8.2.2	Successful Operation	88
-8.8.2.3	Abnormal Conditions	89
-8.9	Warning Message Transmission Procedures	89
-8.9.1	Write-Replace Warning	89
-8.9.1.1	General	89
-8.9.1.2	Successful Operation	89
-8.9.1.3	Unsuccessful Operation	90
-8.9.1.4	Abnormal Conditions	90
-8.9.2	PWS Cancel	90
-8.9.2.1	General	90
-8.9.2.2	Successful Operation	91
-8.9.2.3	Unsuccessful Operation	91
-8.9.2.4	Abnormal Conditions	91
-8.9.3	PWS Restart Indication	91
-8.9.3.1	General	91
-8.9.3.2	Successful Operation	92
-8.9.3.3	Abnormal Conditions	92
-8.9.4	PWS Failure Indication	92
-8.9.4.1	General	92
-8.9.4.2	Successful Operation	92
-8.9.4.3	Abnormal Conditions	92
-8.10	NRPPa Transport Procedures	93
-8.10.1	General	93
-8.10.2	Successful Operations	93
-8.10.2.1	DOWNLINK UE ASSOCIATED NRPPA TRANSPORT	93
-8.10.2.2	UPLINK UE ASSOCIATED NRPPA TRANSPORT	93
-8.10.2.3	DOWNLINK NON UE ASSOCIATED NRPPA TRANSPORT	94
-8.10.2.4	UPLINK NON UE ASSOCIATED NRPPA TRANSPORT	94
-8.10.3	Unsuccessful Operations	94
-8.10.4	Abnormal Conditions	94
-8.11	Trace Procedures	94
-8.11.1	Trace Start	94
-8.11.1.1	General	94
-8.11.1.2	Successful Operation	95
-8.11.1.3	Abnormal Conditions	95
-8.11.2	Trace Failure Indication	96
-8.11.2.1	General	96
-8.11.2.2	Successful Operation	96
-8.11.2.3	Abnormal Conditions	96
-8.11.3	Deactivate Trace	96
-8.11.3.1	General	96
-8.11.3.2	Successful Operation	96
-8.11.3.3	Abnormal Conditions	97
-8.11.4	Cell Traffic Trace	97
-8.11.4.1	General	97
-8.11.4.2	Successful Operation	97
-8.11.4.3	Abnormal Conditions	97
-8.12	Location Reporting Procedures	97
-8.12.1	Location Reporting Control	97
-8.12.1.1	General	97
-8.12.1.2	Successful Operation	98
-8.12.1.3	Abnormal Conditions	98
-8.12.2	Location Reporting Failure Indication	99
-8.12.2.1	General	99
-8.12.2.2	Successful Operation	99
-8.12.2.3	Abnormal Conditions	99
-8.12.3	Location Report	99
-8.12.3.1	General	99
-8.12.3.2	Successful Operation	99
-8.12.3.3	Abnormal Conditions	100
-8.13	UE TNLA Binding Procedures	100
-8.13.1	UE TNLA Binding Release	100
-8.13.1.1	General	100
-8.13.1.2	Successful Operation	100
-8.13.1.3	Abnormal Conditions	100
-8.14	UE Radio Capability Management Procedures	100
-8.14.1	UE Radio Capability Info Indication	100
-8.14.1.1	General	100
-8.14.1.2	Successful Operation	101
-8.14.1.3	Abnormal Conditions	101
-8.14.2	UE Radio Capability Check	101
-8.14.2.1	General	101
-8.14.2.2	Successful Operation	101
-8.14.2.3	Unsuccessful Operation	102
-8.14.2.4	Abnormal Conditions	102
-8.14.3	UE Radio Capability ID Mapping	102
-8.14.3.1	General	102
-8.14.3.2	Successful Operation	102
-8.14.3.3	Unsuccessful Operation	102
-8.14.3.4	Abnormal Conditions	102
-8.15	Data Usage Reporting Procedures	103
-8.15.1	Secondary RAT Data Usage Report	103
-8.15.1.1	General	103
-8.15.1.2	Successful Operation	103
-8.15.1.3	Abnormal Conditions	103
-8.16	RIM Information Transfer Procedures	103
-8.16.1	Uplink RIM Information Transfer	103
-8.16.1.1	General	103
-8.16.1.2	Successful Operation	104
-8.16.1.3	Abnormal Conditions	104
-8.16.2	Downlink RIM Information Transfer	104
-8.16.2.1	General	104
-8.16.2.2	Successful Operation	104
-8.16.2.3	Abnormal Conditions	104
-9	Elements for NGAP Communication	105
-9.0	General	105
-9.1	Tabular Format Contents	105
-9.1.1	Presence	105
-9.1.2	Criticality	105
-9.1.3	Range	105
-9.1.4	Assigned Criticality	106
-9.2	Message Functional Definition and Content	106
-9.2.1	PDU Session Management Messages	106
-9.2.1.1	PDU SESSION RESOURCE SETUP REQUEST	106
-9.2.1.2	PDU SESSION RESOURCE SETUP RESPONSE	106
-9.2.1.3	PDU SESSION RESOURCE RELEASE COMMAND	107
-9.2.1.4	PDU SESSION RESOURCE RELEASE RESPONSE	108
-9.2.1.5	PDU SESSION RESOURCE MODIFY REQUEST	108
-9.2.1.6	PDU SESSION RESOURCE MODIFY RESPONSE	110
-9.2.1.7	PDU SESSION RESOURCE NOTIFY	110
-9.2.1.8	PDU SESSION RESOURCE MODIFY INDICATION	111
-9.2.1.9	PDU SESSION RESOURCE MODIFY CONFIRM	112
-9.2.2	UE Context Management Messages	113
-9.2.2.1	INITIAL CONTEXT SETUP REQUEST	113
-9.2.2.2	INITIAL CONTEXT SETUP RESPONSE	115
-9.2.2.3	INITIAL CONTEXT SETUP FAILURE	116
-9.2.2.4	UE CONTEXT RELEASE REQUEST	117
-9.2.2.5	UE CONTEXT RELEASE COMMAND	117
-9.2.2.6	UE CONTEXT RELEASE COMPLETE	118
-9.2.2.7	UE CONTEXT MODIFICATION REQUEST	118
-9.2.2.8	UE CONTEXT MODIFICATION RESPONSE	119
-9.2.2.9	UE CONTEXT MODIFICATION FAILURE	120
-9.2.2.10	RRC INACTIVE TRANSITION REPORT	120
-9.2.2.11	CONNECTION ESTABLISHMENT INDICATION	120
-9.2.2.12	AMF CP RELOCATION INDICATION	121
-9.2.2.13	RAN CP RELOCATION INDICATION	121
-9.2.2.14	RETRIEVE UE INFORMATION	121
-9.2.2.15	UE INFORMATION TRANSFER	122
-9.2.2.16	UE CONTEXT SUSPEND REQUEST	122
-9.2.2.17	UE CONTEXT SUSPEND RESPONSE	123
-9.2.2.18	UE CONTEXT SUSPEND FAILURE	123
-9.2.2.19	UE CONTEXT RESUME REQUEST	123
-9.2.2.20	UE CONTEXT RESUME RESPONSE	124
-9.2.2.21	UE CONTEXT RESUME FAILURE	125
-9.2.3	UE Mobility Management Messages	125
-9.2.3.1	HANDOVER REQUIRED	125
-9.2.3.2	HANDOVER COMMAND	126
-9.2.3.3	HANDOVER PREPARATION FAILURE	127
-9.2.3.4	HANDOVER REQUEST	128
-9.2.3.5	HANDOVER REQUEST ACKNOWLEDGE	130
-9.2.3.6	HANDOVER FAILURE	131
-9.2.3.7	HANDOVER NOTIFY	131
-9.2.3.8	PATH SWITCH REQUEST	132
-9.2.3.9	PATH SWITCH REQUEST ACKNOWLEDGE	134
-9.2.3.10	PATH SWITCH REQUEST FAILURE	135
-9.2.3.11	HANDOVER CANCEL	135
-9.2.3.12	HANDOVER CANCEL ACKNOWLEDGE	136
-9.2.3.13	UPLINK RAN STATUS TRANSFER	136
-9.2.3.14	DOWNLINK RAN STATUS TRANSFER	136
-9.2.3.15	HANDOVER SUCCESS	136
-9.2.3.16	UPLINK RAN EARLY STATUS TRANSFER	137
-9.2.3.17	DOWNLINK RAN EARLY STATUS TRANSFER	137
-9.2.4	Paging Messages	137
-9.2.4.1	PAGING	137
-9.2.5	NAS Transport Messages	139
-9.2.5.1	INITIAL UE MESSAGE	139
-9.2.5.2	DOWNLINK NAS TRANSPORT	140
-9.2.5.3	UPLINK NAS TRANSPORT	140
-9.2.5.4	NAS NON DELIVERY INDICATION	141
-9.2.5.5	REROUTE NAS REQUEST	141
-9.2.6	Interface Management Messages	141
-9.2.6.1	NG SETUP REQUEST	141
-9.2.6.2	NG SETUP RESPONSE	142
-9.2.6.3	NG SETUP FAILURE	143
-9.2.6.4	RAN CONFIGURATION UPDATE	143
-9.2.6.5	RAN CONFIGURATION UPDATE ACKNOWLEDGE	145
-9.2.6.6	RAN CONFIGURATION UPDATE FAILURE	145
-9.2.6.7	AMF CONFIGURATION UPDATE	145
-9.2.6.8	AMF CONFIGURATION UPDATE ACKNOWLEDGE	147
-9.2.6.9	AMF CONFIGURATION UPDATE FAILURE	147
-9.2.6.10	AMF STATUS INDICATION	147
-9.2.6.11	NG RESET	148
-9.2.6.12	NG RESET ACKNOWLEDGE	148
-9.2.6.13	ERROR INDICATION	148
-9.2.6.14	OVERLOAD START	149
-9.2.6.15	OVERLOAD STOP	149
-9.2.7	Configuration Transfer Messages	149
-9.2.7.1	UPLINK RAN CONFIGURATION TRANSFER	149
-9.2.7.2	DOWNLINK RAN CONFIGURATION TRANSFER	150
-9.2.8	Warning Message Transmission Messages	150
-9.2.8.1	WRITE-REPLACE WARNING REQUEST	150
-9.2.8.2	WRITE-REPLACE WARNING RESPONSE	151
-9.2.8.3	PWS CANCEL REQUEST	151
-9.2.8.4	PWS CANCEL RESPONSE	151
-9.2.8.5	PWS RESTART INDICATION	152
-9.2.8.6	PWS FAILURE INDICATION	152
-9.2.9	NRPPa Transport Messages	153
-9.2.9.1	DOWNLINK UE ASSOCIATED NRPPA TRANSPORT	153
-9.2.9.2	UPLINK UE ASSOCIATED NRPPA TRANSPORT	153
-9.2.9.3	DOWNLINK NON UE ASSOCIATED NRPPA TRANSPORT	154
-9.2.9.4	UPLINK NON UE ASSOCIATED NRPPA TRANSPORT	154
-9.2.10	Trace Messages	154
-9.2.10.1	TRACE START	154
-9.2.10.2	TRACE FAILURE INDICATION	154
-9.2.10.3	DEACTIVATE TRACE	154
-9.2.10.4	CELL TRAFFIC TRACE	155
-9.2.11	Location Reporting Messages	155
-9.2.11.1	LOCATION REPORTING CONTROL	155
-9.2.11.2	LOCATION REPORTING FAILURE INDICATION	156
-9.2.11.3	LOCATION REPORT	156
-9.2.12	UE TNLA Binding Messages	156
-9.2.12.1	UE TNLA BINDING RELEASE REQUEST	156
-9.2.13	UE Radio Capability Management Messages	157
-9.2.13.1	UE RADIO CAPABILITY INFO INDICATION	157
-9.2.13.2	UE RADIO CAPABILITY CHECK REQUEST	157
-9.2.13.3	UE RADIO CAPABILITY CHECK RESPONSE	157
-9.2.13.4	UE RADIO CAPABILITY ID MAPPING REQUEST	157
-9.2.13.5	UE RADIO CAPABILITY ID MAPPING RESPONSE	158
-9.2.14	Data Usage Reporting Messages	158
-9.2.14.1	SECONDARY RAT DATA USAGE REPORT	158
-9.2.15	RIM Information Transfer Messages	158
-9.2.15.1	UPLINK RIM INFORMATION TRANSFER	158
-9.2.15.2	DOWNLINK RIM INFORMATION TRANSFER	159
-9.3	Information Element Definitions	159
-9.3.1	Radio Network Layer Related IEs	159
-9.3.1.1	Message Type	159
-9.3.1.2	Cause	159
-9.3.1.3	Criticality Diagnostics	164
-9.3.1.4	Bit Rate	164
-9.3.1.5	Global RAN Node ID	165
-9.3.1.6	Global gNB ID	165
-9.3.1.7	NR CGI	165
-9.3.1.8	Global ng-eNB ID	166
-9.3.1.9	E-UTRA CGI	166
-9.3.1.10	GBR QoS Flow Information	166
-9.3.1.11	Void	167
-9.3.1.12	QoS Flow Level QoS Parameters	167
-9.3.1.13	QoS Flow List with Cause	168
-9.3.1.14	Trace Activation	169
-9.3.1.15	Core Network Assistance Information for RRC INACTIVE	169
-9.3.1.16	User Location Information	170
-9.3.1.17	Slice Support List	172
-9.3.1.18	Dynamic 5QI Descriptor	172
-9.3.1.19	Allocation and Retention Priority	174
-9.3.1.20	Source to Target Transparent Container	174
-9.3.1.21	Target to Source Transparent Container	175
-9.3.1.22	Handover Type	175
-9.3.1.23	MICO Mode Indication	176
-9.3.1.24	S-NSSAI	176
-9.3.1.25	Target ID	176
-9.3.1.26	Emergency Fallback Indicator	176
-9.3.1.27	Security Indication	177
-9.3.1.28	Non Dynamic 5QI Descriptor	177
-9.3.1.29	Source NG-RAN Node to Target NG-RAN Node Transparent Container	178
-9.3.1.30	Target NG-RAN Node to Source NG-RAN Node Transparent Container	179
-9.3.1.31	Allowed NSSAI	180
-9.3.1.32	Relative AMF Capacity	180
-9.3.1.33	DL Forwarding	180
-9.3.1.34	DRBs to QoS Flows Mapping List	181
-9.3.1.35	Message Identifier	181
-9.3.1.36	Serial Number	181
-9.3.1.37	Warning Area List	181
-9.3.1.38	Number of Broadcasts Requested	182
-9.3.1.39	Warning Type	182
-9.3.1.40	Void	182
-9.3.1.41	Data Coding Scheme	182
-9.3.1.42	Warning Message Contents	183
-9.3.1.43	Broadcast Completed Area List	183
-9.3.1.44	Broadcast Cancelled Area List	184
-9.3.1.45	Number of Broadcasts	186
-9.3.1.46	Concurrent Warning Message Indicator	186
-9.3.1.47	Cancel-All Warning Messages Indicator	186
-9.3.1.48	Emergency Area ID	186
-9.3.1.49	Repetition Period	186
-9.3.1.50	PDU Session ID	187
-9.3.1.51	QoS Flow Identifier	187
-9.3.1.52	PDU Session Type	187
-9.3.1.53	DRB ID	187
-9.3.1.54	Masked IMEISV	187
-9.3.1.55	New Security Context Indicator	188
-9.3.1.56	Time to Wait	188
-9.3.1.57	Global N3IWF ID	188
-9.3.1.58	UE Aggregate Maximum Bit Rate	188
-9.3.1.59	Security Result	189
-9.3.1.60	User Plane Security Information	189
-9.3.1.61	Index to RAT/Frequency Selection Priority	189
-9.3.1.62	Data Forwarding Accepted	189
-9.3.1.63	Data Forwarding Not Possible	189
-9.3.1.64	Direct Forwarding Path Availability	190
-9.3.1.65	Location Reporting Request Type	190
-9.3.1.66	Area of Interest	191
-9.3.1.67	UE Presence in Area of Interest List	191
-9.3.1.68	UE Radio Capability for Paging	191
-9.3.1.69	Assistance Data for Paging	192
-9.3.1.70	Assistance Data for Recommended Cells	192
-9.3.1.71	Recommended Cells for Paging	192
-9.3.1.72	Paging Attempt Information	192
-9.3.1.73	NG-RAN CGI	193
-9.3.1.74	UE Radio Capability	193
-9.3.1.74a	UE Radio Capability – E-UTRA Format	193
-9.3.1.75	Time Stamp	193
-9.3.1.76	Location Reporting Reference ID	194
-9.3.1.77	Data Forwarding Response DRB List	194
-9.3.1.78	Paging Priority	194
-9.3.1.79	Packet Loss Rate	194
-9.3.1.80	Packet Delay Budget	194
-9.3.1.81	Packet Error Rate	195
-9.3.1.82	Averaging Window	195
-9.3.1.83	Maximum Data Burst Volume	195
-9.3.1.84	Priority Level	195
-9.3.1.85	Mobility Restriction List	195
-9.3.1.86	UE Security Capabilities	197
-9.3.1.87	Security Key	198
-9.3.1.88	Security Context	199
-9.3.1.89	IMS Voice Support Indicator	199
-9.3.1.90	Paging DRX	199
-9.3.1.91	RRC Inactive Transition Report Request	199
-9.3.1.92	RRC State	199
-9.3.1.93	Expected UE Behaviour	200
-9.3.1.94	Expected UE Activity Behaviour	200
-9.3.1.95	UE History Information	201
-9.3.1.96	Last Visited Cell Information	201
-9.3.1.97	Last Visited NG-RAN Cell Information	202
-9.3.1.98	Cell Type	202
-9.3.1.99	Associated QoS Flow List	202
-9.3.1.100	Information on Recommended Cells and RAN Nodes for Paging	202
-9.3.1.101	Recommended RAN Nodes for Paging	203
-9.3.1.102	PDU Session Aggregate Maximum Bit Rate	203
-9.3.1.103	Maximum Integrity Protected Data Rate	203
-9.3.1.104	Overload Response	204
-9.3.1.105	Overload Action	204
-9.3.1.106	Traffic Load Reduction Indication	204
-9.3.1.107	Slice Overload List	204
-9.3.1.108	RAN Status Transfer Transparent Container	205
-9.3.1.109	COUNT Value for PDCP SN Length 12	207
-9.3.1.110	COUNT Value for PDCP SN Length 18	207
-9.3.1.111	RRC Establishment Cause	208
-9.3.1.112	Warning Area Coordinates	208
-9.3.1.113	Network Instance	208
-9.3.1.114	Secondary RAT Usage Information	208
-9.3.1.115	Volume Timed Report List	209
-9.3.1.116	Redirection for Voice EPS Fallback	209
-9.3.1.117	UE Retention Information	210
-9.3.1.118	UL Forwarding	210
-9.3.1.119	CN Assisted RAN Parameters Tuning	210
-9.3.1.120	Common Network Instance	210
-9.3.1.121	Data Forwarding Response E-RAB List	210
-9.3.1.122	gNB Set ID	211
-9.3.1.123	RNC-ID	211
-9.3.1.124	Extended RNC-ID	211
-9.3.1.125	RAT Information	211
-9.3.1.126	Extended RAT Restriction Information	211
-9.3.1.127	SgNB UE X2AP ID	212
-9.3.1.128	SRVCC Operation Possible	212
-9.3.1.129	IAB Authorized	212
-9.3.1.130	TSC Traffic Characteristics	212
-9.3.1.131	TSC Assistance Information	213
-9.3.1.132	Periodicity	213
-9.3.1.133	Burst Arrival Time	213
-9.3.1.134	Redundant QoS Flow Indicator	213
-9.3.1.135	Extended Packet Delay Budget	213
-9.3.1.136	Redundant PDU Session Information	214
-9.3.1.137	NB-IoT Default Paging DRX	214
-9.3.1.138	NB-IoT Paging eDRX Information	214
-9.3.1.139	NB-IoT Paging DRX	214
-9.3.1.140	Enhanced Coverage Restriction	214
-9.3.1.141	Paging Assistance Data for CE Capable UE	215
-9.3.1.142	UE Radio Capability ID	215
-9.3.1.143	WUS Assistance Information	215
-9.3.1.144	UE Differentiation Information	215
-9.3.1.145	NB-IoT UE Priority	217
-9.3.1.146	NR V2X Services Authorized	217
-9.3.1.147	LTE V2X Services Authorized	217
-9.3.1.148	NR UE Sidelink Aggregate Maximum Bit Rate	217
-9.3.1.149	LTE UE Sidelink Aggregate Maximum Bit Rate	217
-9.3.1.150	PC5 QoS Parameters	218
-9.3.1.151	Alternative QoS Parameters Set List	218
-9.3.1.152	Alternative QoS Parameters Set Index	219
-9.3.1.153	Alternative QoS Parameters Set Notify Index	219
-9.3.1.154	Paging eDRX Information	219
-9.3.1.155	CE-mode-B Restricted	219
-9.3.1.156	CE-mode-B Support Indicator	220
-9.3.1.157	LTE-M Indication	220
-9.3.1.158	Suspend Request Indication	220
-9.3.1.159	Suspend Response Indication	220
-9.3.1.160	UE User Plane CIoT Support Indicator	220
-9.3.1.161	Global TNGF ID	221
-9.3.1.162	Global W-AGF ID	221
-9.3.1.163	Global TWIF ID	221
-9.3.1.164	W-AGF User Location Information	222
-9.3.1.165	Global eNB ID	222
-9.3.1.166	UE History Information from UE	222
-9.3.1.167	MDT Configuration	223
-9.3.1.168	MDT PLMN List	223
-9.3.1.169	MDT Configuration-NR	223
-9.3.1.170	MDT Configuration-EUTRA	225
-9.3.1.171	M1 Configuration	226
-9.3.1.172	M4 Configuration	226
-9.3.1.173	M5 Configuration	227
-9.3.1.174	M6 Configuration	227
-9.3.1.175	M7 Configuration	227
-9.3.1.176	MDT Location Information	227
-9.3.1.177	Bluetooth Measurement Configuration	228
-9.3.1.178	WLAN Measurement Configuration	228
-9.3.1.179	Sensor Measurement Configuration	229
-9.3.1.180	Event Trigger Logged MDT Configuration	229
-9.3.1.181	NR Frequency Info	230
-9.3.1.182	Area Scope of Neighbour Cells	230
-9.3.1.183	NPN Paging Assistance Information	230
-9.3.1.184	NPN Mobility Information	231
-9.3.1.185	Cell CAG Information	231
-9.3.1.186	Target to Source Failure Transparent Container	231
-9.3.1.187	Target NG-RAN Node to Source NG-RAN Node Failure Transparent Container	231
-9.3.1.188	DAPS Request Information	232
-9.3.1.189	DAPS Response Information	232
-9.3.1.190	Early Status Transfer Transparent Container	232
-9.3.1.191	Extended Slice Support List	233
-9.3.1.192	UE Capability Info Request	233
-9.3.1.193	Extended RAN Node Name	233
-9.3.2	Transport Network Layer Related IEs	233
-9.3.2.1	QoS Flow per TNL Information List	233
-9.3.2.2	UP Transport Layer Information	234
-9.3.2.3	E-RAB ID	234
-9.3.2.4	Transport Layer Address	234
-9.3.2.5	GTP-TEID	234
-9.3.2.6	CP Transport Layer Information	235
-9.3.2.7	TNL Association List	235
-9.3.2.8	QoS Flow per TNL Information	235
-9.3.2.9	TNL Association Usage	235
-9.3.2.10	TNL Address Weight Factor	236
-9.3.2.11	UP Transport Layer Information Pair List	236
-9.3.2.12	UP Transport Layer Information List	236
-9.3.2.13	QoS Flow List with Data Forwarding	236
-9.3.2.14	URI	237
-9.3.3	NAS Related IEs	237
-9.3.3.1	AMF UE NGAP ID	237
-9.3.3.2	RAN UE NGAP ID	237
-9.3.3.3	GUAMI	237
-9.3.3.4	NAS-PDU	238
-9.3.3.5	PLMN Identity	238
-9.3.3.6	SON Configuration Transfer	238
-9.3.3.7	SON Information	238
-9.3.3.8	SON Information Reply	239
-9.3.3.9	Xn TNL Configuration Info	239
-9.3.3.10	TAC	240
-9.3.3.11	TAI	240
-9.3.3.12	AMF Set ID	240
-9.3.3.13	Routing ID	240
-9.3.3.14	NRPPa-PDU	240
-9.3.3.15	RAN Paging Priority	241
-9.3.3.16	EPS TAC	241
-9.3.3.17	EPS TAI	241
-9.3.3.18	UE Paging Identity	241
-9.3.3.19	AMF Pointer	241
-9.3.3.20	5G-S-TMSI	241
-9.3.3.21	AMF Name	242
-9.3.3.22	Paging Origin	242
-9.3.3.23	UE Identity Index Value	242
-9.3.3.24	Periodic Registration Update Timer	243
-9.3.3.25	UE-associated Logical NG-connection List	243
-9.3.3.26	NAS Security Parameters from NG-RAN	243
-9.3.3.27	Source to Target AMF Information Reroute	244
-9.3.3.28	RIM Information Transfer	244
-9.3.3.29	RIM Information	244
-9.3.3.30	LAI	245
-9.3.3.31	Extended Connected Time	245
-9.3.3.32	End Indication	245
-9.3.3.33	Inter-system SON Configuration Transfer	245
-9.3.3.34	Inter-system SON Information	246
-9.3.3.35	SON Information Report	246
-9.3.3.36	Inter-system SON Information Report	246
-9.3.3.37	Failure Indication	247
-9.3.3.38	Inter-system Failure Indication	247
-9.3.3.39	HO Report	247
-9.3.3.40	Inter-system HO Report	248
-9.3.3.41	UE RLF Report Container	249
-9.3.3.42	NID	250
-9.3.3.43	CAG ID	250
-9.3.3.44	NPN Support	250
-9.3.3.45	Allowed PNI-NPN List	250
-9.3.3.46	NPN Access Information	251
-9.3.3.47	Cell CAG List	251
-9.3.3.48	UL CP Security Information	251
-9.3.3.49	DL CP Security Information	252
-9.3.3.50	Configured TAC Indication	252
-9.3.3.51	Extended AMF Name	252
-9.3.3.52	Extended UE Identity Index Value	252
-9.3.4	SMF Related IEs	252
-9.3.4.1	PDU Session Resource Setup Request Transfer	252
-9.3.4.2	PDU Session Resource Setup Response Transfer	254
-9.3.4.3	PDU Session Resource Modify Request Transfer	256
-9.3.4.4	PDU Session Resource Modify Response Transfer	258
-9.3.4.5	PDU Session Resource Notify Transfer	260
-9.3.4.6	PDU Session Resource Modify Indication Transfer	262
-9.3.4.7	PDU Session Resource Modify Confirm Transfer	262
-9.3.4.8	Path Switch Request Transfer	263
-9.3.4.9	Path Switch Request Acknowledge Transfer	265
-9.3.4.10	Handover Command Transfer	267
-9.3.4.11	Handover Request Acknowledge Transfer	267
-9.3.4.12	PDU Session Resource Release Command Transfer	269
-9.3.4.13	PDU Session Resource Notify Released Transfer	269
-9.3.4.14	Handover Required Transfer	269
-9.3.4.15	Path Switch Request Setup Failed Transfer	269
-9.3.4.16	PDU Session Resource Setup Unsuccessful Transfer	270
-9.3.4.17	PDU Session Resource Modify Unsuccessful Transfer	270
-9.3.4.18	Handover Preparation Unsuccessful Transfer	270
-9.3.4.19	Handover Resource Allocation Unsuccessful Transfer	270
-9.3.4.20	Path Switch Request Unsuccessful Transfer	270
-9.3.4.21	PDU Session Resource Release Response Transfer	270
-9.3.4.22	PDU Session Resource Modify Indication Unsuccessful Transfer	270
-9.3.4.23	Secondary RAT Data Usage Report Transfer	271
-9.3.4.24	UE Context Resume Request Transfer	271
-9.3.4.25	UE Context Resume Response Transfer	271
-9.3.4.26	UE Context Suspend Request Transfer	271
-9.4	Message and Information Element Abstract Syntax (with ASN.1)	271
-9.4.1	General	271
-9.4.2	Usage of private message mechanism for non-standard use	272
-9.4.3	Elementary Procedure Definitions	273
-9.4.4	PDU Definitions	288
-9.4.5	Information Element Definitions	342
-9.4.6	Common Definitions	448
-9.4.7	Constant Definitions	449
-9.4.8	Container Definitions	458
-9.5	Message Transfer Syntax	463
-9.6	Timers	463
-10	Handling of Unknown, Unforeseen and Erroneous Protocol Data	464
-10.1	General	464
-10.2	Transfer Syntax Error	464
-10.3	Abstract Syntax Error	464
-10.3.1	General	464
-10.3.2	Criticality Information	465
-10.3.3	Presence Information	465
-10.3.4	Not comprehended IE/IE group	466
-10.3.4.1	Procedure Code	466
-10.3.4.1A	Type of Message	466
-10.3.4.2	IEs other than the Procedure Code and Type of Message	466
-10.3.5	Missing IE or IE group	467
-10.3.6	IEs or IE groups received in wrong order or with too many occurrences or erroneously present	468
-10.4	Logical Error	469
-10.5	Exceptions	469
-10.6	Handling of AP ID	470
-Annex A (informative): Change history	471
+8.4.2.2	Successful Operation	57
+8.4.2.3	Unsuccessful Operation	61
+8.4.2.4	Abnormal Conditions	62
+8.4.3	Handover Notification	62
+8.4.3.1	General	62
+8.4.3.2	Successful Operation	62
+8.4.3.3	Abnormal Conditions	63
+8.4.4	Path Switch Request	63
+8.4.4.1	General	63
+8.4.4.2	Successful Operation	63
+8.4.4.3	Unsuccessful Operation	66
+8.4.4.4	Abnormal Conditions	67
+8.4.5	Handover Cancellation	67
+8.4.5.1	General	67
+8.4.5.2	Successful Operation	67
+8.4.5.3	Unsuccessful Operation	67
+8.4.5.4	Abnormal Conditions	67
+8.4.6	Uplink RAN Status Transfer	67
+8.4.6.1	General	67
+8.4.6.2	Successful Operation	68
+8.4.6.3	Abnormal Conditions	68
+8.4.7	Downlink RAN Status Transfer	68
+8.4.7.1	General	68
+8.4.7.2	Successful Operation	68
+8.4.7.3	Abnormal Conditions	69
+8.4.8	Handover Success	69
+8.4.8.1	General	69
+8.4.8.2	Successful Operation	69
+8.4.8.3	Abnormal Conditions	69
+8.4.9	Uplink RAN Early Status Transfer	69
+8.4.9.1	General	69
+8.4.9.2	Successful Operation	70
+8.4.9.3	Abnormal Conditions	70
+8.4.10	Downlink RAN Early Status Transfer	70
+8.4.10.1	General	70
+8.4.10.2	Successful Operation	70
+8.4.10.3	Abnormal Conditions	71
+8.5	Paging Procedures	71
+8.5.1	Paging	71
+8.5.1.1	General	71
+8.5.1.2	Successful Operation	71
+8.5.1.3	Abnormal Conditions	72
+8.6	Transport of NAS Messages Procedures	72
+8.6.1	Initial UE Message	72
+8.6.1.1	General	72
+8.6.1.2	Successful Operation	72
+8.6.1.3	Abnormal Conditions	73
+8.6.2	Downlink NAS Transport	73
+8.6.2.1	General	73
+8.6.2.2	Successful Operation	74
+8.6.2.3	Abnormal Conditions	75
+8.6.3	Uplink NAS Transport	75
+8.6.3.1	General	75
+8.6.3.2	Successful Operation	75
+8.6.3.3	Abnormal Conditions	76
+8.6.4	NAS Non Delivery Indication	76
+8.6.4.1	General	76
+8.6.4.2	Successful Operation	76
+8.6.4.3	Abnormal Conditions	76
+8.6.5	Reroute NAS Request	76
+8.6.5.1	General	76
+8.6.5.2	Successful Operation	76
+8.6.5.3	Abnormal Conditions	77
+8.7	Interface Management Procedures	77
+8.7.1	NG Setup	77
+8.7.1.1	General	77
+8.7.1.2	Successful Operation	77
+8.7.1.3	Unsuccessful Operation	78
+8.7.1.4	Abnormal Conditions	78
+8.7.2	RAN Configuration Update	79
+8.7.2.1	General	79
+8.7.2.2	Successful Operation	79
+8.7.2.3	Unsuccessful Operation	80
+8.7.2.4	Abnormal Conditions	80
+8.7.3	AMF Configuration Update	80
+8.7.3.1	General	80
+8.7.3.2	Successful Operation	80
+8.7.3.3	Unsuccessful Operation	82
+8.7.3.4	Abnormal Conditions	82
+8.7.4	NG Reset	82
+8.7.4.1	General	82
+8.7.4.2	Successful Operation	82
+8.7.4.2.1	NG Reset initiated by the AMF	82
+8.7.4.2.2	NG Reset initiated by the NG-RAN node	83
+8.7.4.3	Unsuccessful Operation	84
+8.7.4.4	Abnormal Conditions	84
+8.7.4.4.1	Abnormal Condition at the 5GC	84
+8.7.4.4.2	Abnormal Condition at the NG-RAN	84
+8.7.4.4.3	Crossing of NG RESET Messages	84
+8.7.5	Error Indication	85
+8.7.5.1	General	85
+8.7.5.2	Successful Operation	85
+8.7.5.3	Abnormal Conditions	85
+8.7.6	AMF Status Indication	85
+8.7.6.1	General	85
+8.7.6.2	Successful Operation	86
+8.7.6.3	Abnormal Conditions	86
+8.7.7	Overload Start	86
+8.7.7.1	General	86
+8.7.7.2	Successful Operation	86
+8.7.7.3	Abnormal Conditions	87
+8.7.8	Overload Stop	87
+8.7.8.1	General	87
+8.7.8.2	Successful Operation	88
+8.7.8.3	Abnormal Conditions	88
+8.8	Configuration Transfer Procedures	88
+8.8.1	Uplink RAN Configuration Transfer	88
+8.8.1.1	General	88
+8.8.1.2	Successful Operation	88
+8.8.1.3	Abnormal Conditions	89
+8.8.2	Downlink RAN Configuration Transfer	89
+8.8.2.1	General	89
+8.8.2.2	Successful Operation	89
+8.8.2.3	Abnormal Conditions	90
+8.9	Warning Message Transmission Procedures	90
+8.9.1	Write-Replace Warning	90
+8.9.1.1	General	90
+8.9.1.2	Successful Operation	90
+8.9.1.3	Unsuccessful Operation	91
+8.9.1.4	Abnormal Conditions	91
+8.9.2	PWS Cancel	91
+8.9.2.1	General	91
+8.9.2.2	Successful Operation	92
+8.9.2.3	Unsuccessful Operation	92
+8.9.2.4	Abnormal Conditions	92
+8.9.3	PWS Restart Indication	92
+8.9.3.1	General	92
+8.9.3.2	Successful Operation	93
+8.9.3.3	Abnormal Conditions	93
+8.9.4	PWS Failure Indication	93
+8.9.4.1	General	93
+8.9.4.2	Successful Operation	93
+8.9.4.3	Abnormal Conditions	93
+8.10	NRPPa Transport Procedures	94
+8.10.1	General	94
+8.10.2	Successful Operations	94
+8.10.2.1	DOWNLINK UE ASSOCIATED NRPPA TRANSPORT	94
+8.10.2.2	UPLINK UE ASSOCIATED NRPPA TRANSPORT	94
+8.10.2.3	DOWNLINK NON UE ASSOCIATED NRPPA TRANSPORT	95
+8.10.2.4	UPLINK NON UE ASSOCIATED NRPPA TRANSPORT	95
+8.10.3	Unsuccessful Operations	95
+8.10.4	Abnormal Conditions	95
+8.11	Trace Procedures	95
+8.11.1	Trace Start	95
+8.11.1.1	General	95
+8.11.1.2	Successful Operation	96
+8.11.1.3	Abnormal Conditions	96
+8.11.2	Trace Failure Indication	97
+8.11.2.1	General	97
+8.11.2.2	Successful Operation	97
+8.11.2.3	Abnormal Conditions	97
+8.11.3	Deactivate Trace	97
+8.11.3.1	General	97
+8.11.3.2	Successful Operation	97
+8.11.3.3	Abnormal Conditions	98
+8.11.4	Cell Traffic Trace	98
+8.11.4.1	General	98
+8.11.4.2	Successful Operation	98
+8.11.4.3	Abnormal Conditions	98
+8.12	Location Reporting Procedures	98
+8.12.1	Location Reporting Control	98
+8.12.1.1	General	98
+8.12.1.2	Successful Operation	99
+8.12.1.3	Abnormal Conditions	99
+8.12.2	Location Reporting Failure Indication	100
+8.12.2.1	General	100
+8.12.2.2	Successful Operation	100
+8.12.2.3	Abnormal Conditions	100
+8.12.3	Location Report	100
+8.12.3.1	General	100
+8.12.3.2	Successful Operation	100
+8.12.3.3	Abnormal Conditions	101
+8.13	UE TNLA Binding Procedures	101
+8.13.1	UE TNLA Binding Release	101
+8.13.1.1	General	101
+8.13.1.2	Successful Operation	101
+8.13.1.3	Abnormal Conditions	101
+8.14	UE Radio Capability Management Procedures	101
+8.14.1	UE Radio Capability Info Indication	101
+8.14.1.1	General	101
+8.14.1.2	Successful Operation	102
+8.14.1.3	Abnormal Conditions	102
+8.14.2	UE Radio Capability Check	102
+8.14.2.1	General	102
+8.14.2.2	Successful Operation	102
+8.14.2.3	Unsuccessful Operation	103
+8.14.2.4	Abnormal Conditions	103
+8.14.3	UE Radio Capability ID Mapping	103
+8.14.3.1	General	103
+8.14.3.2	Successful Operation	103
+8.14.3.3	Unsuccessful Operation	103
+8.14.3.4	Abnormal Conditions	103
+8.15	Data Usage Reporting Procedures	104
+8.15.1	Secondary RAT Data Usage Report	104
+8.15.1.1	General	104
+8.15.1.2	Successful Operation	104
+8.15.1.3	Abnormal Conditions	104
+8.16	RIM Information Transfer Procedures	104
+8.16.1	Uplink RIM Information Transfer	104
+8.16.1.1	General	104
+8.16.1.2	Successful Operation	105
+8.16.1.3	Abnormal Conditions	105
+8.16.2	Downlink RIM Information Transfer	105
+8.16.2.1	General	105
+8.16.2.2	Successful Operation	105
+8.16.2.3	Abnormal Conditions	105
+9	Elements for NGAP Communication	106
+9.0	General	106
+9.1	Tabular Format Contents	106
+9.1.1	Presence	106
+9.1.2	Criticality	106
+9.1.3	Range	106
+9.1.4	Assigned Criticality	107
+9.2	Message Functional Definition and Content	107
+9.2.1	PDU Session Management Messages	107
+9.2.1.1	PDU SESSION RESOURCE SETUP REQUEST	107
+9.2.1.2	PDU SESSION RESOURCE SETUP RESPONSE	107
+9.2.1.3	PDU SESSION RESOURCE RELEASE COMMAND	108
+9.2.1.4	PDU SESSION RESOURCE RELEASE RESPONSE	109
+9.2.1.5	PDU SESSION RESOURCE MODIFY REQUEST	109
+9.2.1.6	PDU SESSION RESOURCE MODIFY RESPONSE	111
+9.2.1.7	PDU SESSION RESOURCE NOTIFY	111
+9.2.1.8	PDU SESSION RESOURCE MODIFY INDICATION	112
+9.2.1.9	PDU SESSION RESOURCE MODIFY CONFIRM	113
+9.2.2	UE Context Management Messages	114
+9.2.2.1	INITIAL CONTEXT SETUP REQUEST	114
+9.2.2.2	INITIAL CONTEXT SETUP RESPONSE	116
+9.2.2.3	INITIAL CONTEXT SETUP FAILURE	117
+9.2.2.4	UE CONTEXT RELEASE REQUEST	118
+9.2.2.5	UE CONTEXT RELEASE COMMAND	118
+9.2.2.6	UE CONTEXT RELEASE COMPLETE	119
+9.2.2.7	UE CONTEXT MODIFICATION REQUEST	119
+9.2.2.8	UE CONTEXT MODIFICATION RESPONSE	120
+9.2.2.9	UE CONTEXT MODIFICATION FAILURE	121
+9.2.2.10	RRC INACTIVE TRANSITION REPORT	121
+9.2.2.11	CONNECTION ESTABLISHMENT INDICATION	121
+9.2.2.12	AMF CP RELOCATION INDICATION	122
+9.2.2.13	RAN CP RELOCATION INDICATION	122
+9.2.2.14	RETRIEVE UE INFORMATION	122
+9.2.2.15	UE INFORMATION TRANSFER	123
+9.2.2.16	UE CONTEXT SUSPEND REQUEST	123
+9.2.2.17	UE CONTEXT SUSPEND RESPONSE	124
+9.2.2.18	UE CONTEXT SUSPEND FAILURE	124
+9.2.2.19	UE CONTEXT RESUME REQUEST	124
+9.2.2.20	UE CONTEXT RESUME RESPONSE	125
+9.2.2.21	UE CONTEXT RESUME FAILURE	126
+9.2.3	UE Mobility Management Messages	126
+9.2.3.1	HANDOVER REQUIRED	126
+9.2.3.2	HANDOVER COMMAND	127
+9.2.3.3	HANDOVER PREPARATION FAILURE	128
+9.2.3.4	HANDOVER REQUEST	129
+9.2.3.5	HANDOVER REQUEST ACKNOWLEDGE	131
+9.2.3.6	HANDOVER FAILURE	132
+9.2.3.7	HANDOVER NOTIFY	133
+9.2.3.8	PATH SWITCH REQUEST	134
+9.2.3.9	PATH SWITCH REQUEST ACKNOWLEDGE	135
+9.2.3.10	PATH SWITCH REQUEST FAILURE	136
+9.2.3.11	HANDOVER CANCEL	137
+9.2.3.12	HANDOVER CANCEL ACKNOWLEDGE	137
+9.2.3.13	UPLINK RAN STATUS TRANSFER	137
+9.2.3.14	DOWNLINK RAN STATUS TRANSFER	137
+9.2.3.15	HANDOVER SUCCESS	137
+9.2.3.16	UPLINK RAN EARLY STATUS TRANSFER	138
+9.2.3.17	DOWNLINK RAN EARLY STATUS TRANSFER	138
+9.2.4	Paging Messages	138
+9.2.4.1	PAGING	138
+9.2.5	NAS Transport Messages	140
+9.2.5.1	INITIAL UE MESSAGE	140
+9.2.5.2	DOWNLINK NAS TRANSPORT	141
+9.2.5.3	UPLINK NAS TRANSPORT	141
+9.2.5.4	NAS NON DELIVERY INDICATION	142
+9.2.5.5	REROUTE NAS REQUEST	142
+9.2.6	Interface Management Messages	142
+9.2.6.1	NG SETUP REQUEST	142
+9.2.6.2	NG SETUP RESPONSE	143
+9.2.6.3	NG SETUP FAILURE	144
+9.2.6.4	RAN CONFIGURATION UPDATE	144
+9.2.6.5	RAN CONFIGURATION UPDATE ACKNOWLEDGE	146
+9.2.6.6	RAN CONFIGURATION UPDATE FAILURE	146
+9.2.6.7	AMF CONFIGURATION UPDATE	146
+9.2.6.8	AMF CONFIGURATION UPDATE ACKNOWLEDGE	148
+9.2.6.9	AMF CONFIGURATION UPDATE FAILURE	148
+9.2.6.10	AMF STATUS INDICATION	148
+9.2.6.11	NG RESET	149
+9.2.6.12	NG RESET ACKNOWLEDGE	149
+9.2.6.13	ERROR INDICATION	149
+9.2.6.14	OVERLOAD START	150
+9.2.6.15	OVERLOAD STOP	150
+9.2.7	Configuration Transfer Messages	150
+9.2.7.1	UPLINK RAN CONFIGURATION TRANSFER	150
+9.2.7.2	DOWNLINK RAN CONFIGURATION TRANSFER	151
+9.2.8	Warning Message Transmission Messages	151
+9.2.8.1	WRITE-REPLACE WARNING REQUEST	151
+9.2.8.2	WRITE-REPLACE WARNING RESPONSE	152
+9.2.8.3	PWS CANCEL REQUEST	152
+9.2.8.4	PWS CANCEL RESPONSE	152
+9.2.8.5	PWS RESTART INDICATION	153
+9.2.8.6	PWS FAILURE INDICATION	153
+9.2.9	NRPPa Transport Messages	154
+9.2.9.1	DOWNLINK UE ASSOCIATED NRPPA TRANSPORT	154
+9.2.9.2	UPLINK UE ASSOCIATED NRPPA TRANSPORT	154
+9.2.9.3	DOWNLINK NON UE ASSOCIATED NRPPA TRANSPORT	155
+9.2.9.4	UPLINK NON UE ASSOCIATED NRPPA TRANSPORT	155
+9.2.10	Trace Messages	155
+9.2.10.1	TRACE START	155
+9.2.10.2	TRACE FAILURE INDICATION	155
+9.2.10.3	DEACTIVATE TRACE	155
+9.2.10.4	CELL TRAFFIC TRACE	156
+9.2.11	Location Reporting Messages	156
+9.2.11.1	LOCATION REPORTING CONTROL	156
+9.2.11.2	LOCATION REPORTING FAILURE INDICATION	157
+9.2.11.3	LOCATION REPORT	157
+9.2.12	UE TNLA Binding Messages	157
+9.2.12.1	UE TNLA BINDING RELEASE REQUEST	157
+9.2.13	UE Radio Capability Management Messages	158
+9.2.13.1	UE RADIO CAPABILITY INFO INDICATION	158
+9.2.13.2	UE RADIO CAPABILITY CHECK REQUEST	158
+9.2.13.3	UE RADIO CAPABILITY CHECK RESPONSE	158
+9.2.13.4	UE RADIO CAPABILITY ID MAPPING REQUEST	158
+9.2.13.5	UE RADIO CAPABILITY ID MAPPING RESPONSE	159
+9.2.14	Data Usage Reporting Messages	159
+9.2.14.1	SECONDARY RAT DATA USAGE REPORT	159
+9.2.15	RIM Information Transfer Messages	159
+9.2.15.1	UPLINK RIM INFORMATION TRANSFER	159
+9.2.15.2	DOWNLINK RIM INFORMATION TRANSFER	160
+9.3	Information Element Definitions	160
+9.3.1	Radio Network Layer Related IEs	160
+9.3.1.1	Message Type	160
+9.3.1.2	Cause	160
+9.3.1.3	Criticality Diagnostics	165
+9.3.1.4	Bit Rate	165
+9.3.1.5	Global RAN Node ID	166
+9.3.1.6	Global gNB ID	166
+9.3.1.7	NR CGI	166
+9.3.1.8	Global ng-eNB ID	167
+9.3.1.9	E-UTRA CGI	167
+9.3.1.10	GBR QoS Flow Information	167
+9.3.1.11	Void	168
+9.3.1.12	QoS Flow Level QoS Parameters	168
+9.3.1.13	QoS Flow List with Cause	169
+9.3.1.14	Trace Activation	170
+9.3.1.15	Core Network Assistance Information for RRC INACTIVE	170
+9.3.1.16	User Location Information	171
+9.3.1.17	Slice Support List	173
+9.3.1.18	Dynamic 5QI Descriptor	173
+9.3.1.19	Allocation and Retention Priority	175
+9.3.1.20	Source to Target Transparent Container	175
+9.3.1.21	Target to Source Transparent Container	176
+9.3.1.22	Handover Type	176
+9.3.1.23	MICO Mode Indication	177
+9.3.1.24	S-NSSAI	177
+9.3.1.25	Target ID	177
+9.3.1.26	Emergency Fallback Indicator	177
+9.3.1.27	Security Indication	178
+9.3.1.28	Non Dynamic 5QI Descriptor	178
+9.3.1.29	Source NG-RAN Node to Target NG-RAN Node Transparent Container	179
+9.3.1.30	Target NG-RAN Node to Source NG-RAN Node Transparent Container	181
+9.3.1.31	Allowed NSSAI	181
+9.3.1.32	Relative AMF Capacity	182
+9.3.1.33	DL Forwarding	182
+9.3.1.34	DRBs to QoS Flows Mapping List	182
+9.3.1.35	Message Identifier	182
+9.3.1.36	Serial Number	182
+9.3.1.37	Warning Area List	183
+9.3.1.38	Number of Broadcasts Requested	183
+9.3.1.39	Warning Type	183
+9.3.1.40	Void	183
+9.3.1.41	Data Coding Scheme	183
+9.3.1.42	Warning Message Contents	184
+9.3.1.43	Broadcast Completed Area List	184
+9.3.1.44	Broadcast Cancelled Area List	185
+9.3.1.45	Number of Broadcasts	187
+9.3.1.46	Concurrent Warning Message Indicator	187
+9.3.1.47	Cancel-All Warning Messages Indicator	187
+9.3.1.48	Emergency Area ID	187
+9.3.1.49	Repetition Period	187
+9.3.1.50	PDU Session ID	188
+9.3.1.51	QoS Flow Identifier	188
+9.3.1.52	PDU Session Type	188
+9.3.1.53	DRB ID	188
+9.3.1.54	Masked IMEISV	188
+9.3.1.55	New Security Context Indicator	189
+9.3.1.56	Time to Wait	189
+9.3.1.57	Global N3IWF ID	189
+9.3.1.58	UE Aggregate Maximum Bit Rate	189
+9.3.1.59	Security Result	190
+9.3.1.60	User Plane Security Information	190
+9.3.1.61	Index to RAT/Frequency Selection Priority	190
+9.3.1.62	Data Forwarding Accepted	190
+9.3.1.63	Data Forwarding Not Possible	190
+9.3.1.64	Direct Forwarding Path Availability	191
+9.3.1.65	Location Reporting Request Type	191
+9.3.1.66	Area of Interest	192
+9.3.1.67	UE Presence in Area of Interest List	192
+9.3.1.68	UE Radio Capability for Paging	192
+9.3.1.69	Assistance Data for Paging	193
+9.3.1.70	Assistance Data for Recommended Cells	193
+9.3.1.71	Recommended Cells for Paging	193
+9.3.1.72	Paging Attempt Information	193
+9.3.1.73	NG-RAN CGI	194
+9.3.1.74	UE Radio Capability	194
+9.3.1.74a	UE Radio Capability – E-UTRA Format	194
+9.3.1.75	Time Stamp	194
+9.3.1.76	Location Reporting Reference ID	195
+9.3.1.77	Data Forwarding Response DRB List	195
+9.3.1.78	Paging Priority	195
+9.3.1.79	Packet Loss Rate	195
+9.3.1.80	Packet Delay Budget	195
+9.3.1.81	Packet Error Rate	196
+9.3.1.82	Averaging Window	196
+9.3.1.83	Maximum Data Burst Volume	196
+9.3.1.84	Priority Level	196
+9.3.1.85	Mobility Restriction List	196
+9.3.1.86	UE Security Capabilities	198
+9.3.1.87	Security Key	199
+9.3.1.88	Security Context	200
+9.3.1.89	IMS Voice Support Indicator	200
+9.3.1.90	Paging DRX	200
+9.3.1.91	RRC Inactive Transition Report Request	200
+9.3.1.92	RRC State	200
+9.3.1.93	Expected UE Behaviour	201
+9.3.1.94	Expected UE Activity Behaviour	201
+9.3.1.95	UE History Information	202
+9.3.1.96	Last Visited Cell Information	202
+9.3.1.97	Last Visited NG-RAN Cell Information	203
+9.3.1.98	Cell Type	203
+9.3.1.99	Associated QoS Flow List	203
+9.3.1.100	Information on Recommended Cells and RAN Nodes for Paging	203
+9.3.1.101	Recommended RAN Nodes for Paging	204
+9.3.1.102	PDU Session Aggregate Maximum Bit Rate	204
+9.3.1.103	Maximum Integrity Protected Data Rate	204
+9.3.1.104	Overload Response	205
+9.3.1.105	Overload Action	205
+9.3.1.106	Traffic Load Reduction Indication	205
+9.3.1.107	Slice Overload List	205
+9.3.1.108	RAN Status Transfer Transparent Container	206
+9.3.1.109	COUNT Value for PDCP SN Length 12	208
+9.3.1.110	COUNT Value for PDCP SN Length 18	208
+9.3.1.111	RRC Establishment Cause	209
+9.3.1.112	Warning Area Coordinates	209
+9.3.1.113	Network Instance	209
+9.3.1.114	Secondary RAT Usage Information	209
+9.3.1.115	Volume Timed Report List	210
+9.3.1.116	Redirection for Voice EPS Fallback	210
+9.3.1.117	UE Retention Information	211
+9.3.1.118	UL Forwarding	211
+9.3.1.119	CN Assisted RAN Parameters Tuning	211
+9.3.1.120	Common Network Instance	211
+9.3.1.121	Data Forwarding Response E-RAB List	211
+9.3.1.122	gNB Set ID	212
+9.3.1.123	RNC-ID	212
+9.3.1.124	Extended RNC-ID	212
+9.3.1.125	RAT Information	212
+9.3.1.126	Extended RAT Restriction Information	212
+9.3.1.127	SgNB UE X2AP ID	213
+9.3.1.128	SRVCC Operation Possible	213
+9.3.1.129	IAB Authorized	213
+9.3.1.130	TSC Traffic Characteristics	213
+9.3.1.131	TSC Assistance Information	214
+9.3.1.132	Periodicity	214
+9.3.1.133	Burst Arrival Time	214
+9.3.1.134	Redundant QoS Flow Indicator	214
+9.3.1.135	Extended Packet Delay Budget	214
+9.3.1.136	Redundant PDU Session Information	215
+9.3.1.137	NB-IoT Default Paging DRX	215
+9.3.1.138	NB-IoT Paging eDRX Information	215
+9.3.1.139	NB-IoT Paging DRX	215
+9.3.1.140	Enhanced Coverage Restriction	215
+9.3.1.141	Paging Assistance Data for CE Capable UE	216
+9.3.1.142	UE Radio Capability ID	216
+9.3.1.143	WUS Assistance Information	216
+9.3.1.144	UE Differentiation Information	216
+9.3.1.145	NB-IoT UE Priority	218
+9.3.1.146	NR V2X Services Authorized	218
+9.3.1.147	LTE V2X Services Authorized	218
+9.3.1.148	NR UE Sidelink Aggregate Maximum Bit Rate	218
+9.3.1.149	LTE UE Sidelink Aggregate Maximum Bit Rate	218
+9.3.1.150	PC5 QoS Parameters	219
+9.3.1.151	Alternative QoS Parameters Set List	219
+9.3.1.152	Alternative QoS Parameters Set Index	220
+9.3.1.153	Alternative QoS Parameters Set Notify Index	220
+9.3.1.154	Paging eDRX Information	220
+9.3.1.155	CE-mode-B Restricted	220
+9.3.1.156	CE-mode-B Support Indicator	221
+9.3.1.157	LTE-M Indication	221
+9.3.1.158	Suspend Request Indication	221
+9.3.1.159	Suspend Response Indication	221
+9.3.1.160	UE User Plane CIoT Support Indicator	221
+9.3.1.161	Global TNGF ID	222
+9.3.1.162	Global W-AGF ID	222
+9.3.1.163	Global TWIF ID	222
+9.3.1.164	W-AGF User Location Information	223
+9.3.1.165	Global eNB ID	223
+9.3.1.166	UE History Information from UE	223
+9.3.1.167	MDT Configuration	224
+9.3.1.168	MDT PLMN List	224
+9.3.1.169	MDT Configuration-NR	224
+9.3.1.170	MDT Configuration-EUTRA	226
+9.3.1.171	M1 Configuration	227
+9.3.1.172	M4 Configuration	228
+9.3.1.173	M5 Configuration	228
+9.3.1.174	M6 Configuration	228
+9.3.1.175	M7 Configuration	228
+9.3.1.176	MDT Location Information	229
+9.3.1.177	Bluetooth Measurement Configuration	229
+9.3.1.178	WLAN Measurement Configuration	229
+9.3.1.179	Sensor Measurement Configuration	230
+9.3.1.180	Event Trigger Logged MDT Configuration	230
+9.3.1.181	NR Frequency Info	231
+9.3.1.182	Area Scope of Neighbour Cells	231
+9.3.1.183	NPN Paging Assistance Information	232
+9.3.1.184	NPN Mobility Information	232
+9.3.1.185	Cell CAG Information	232
+9.3.1.186	Target to Source Failure Transparent Container	232
+9.3.1.187	Target NG-RAN Node to Source NG-RAN Node Failure Transparent Container	233
+9.3.1.188	DAPS Request Information	233
+9.3.1.189	DAPS Response Information	233
+9.3.1.190	Early Status Transfer Transparent Container	233
+9.3.1.191	Extended Slice Support List	234
+9.3.1.192	UE Capability Info Request	234
+9.3.1.193	Extended RAN Node Name	234
+9.3.1.194	MICO All PLMN	235
+9.3.1.195	Source Node ID	235
+9.3.2	Transport Network Layer Related IEs	235
+9.3.2.1	QoS Flow per TNL Information List	235
+9.3.2.2	UP Transport Layer Information	235
+9.3.2.3	E-RAB ID	236
+9.3.2.4	Transport Layer Address	236
+9.3.2.5	GTP-TEID	236
+9.3.2.6	CP Transport Layer Information	237
+9.3.2.7	TNL Association List	237
+9.3.2.8	QoS Flow per TNL Information	237
+9.3.2.9	TNL Association Usage	237
+9.3.2.10	TNL Address Weight Factor	238
+9.3.2.11	UP Transport Layer Information Pair List	238
+9.3.2.12	UP Transport Layer Information List	238
+9.3.2.13	QoS Flow List with Data Forwarding	238
+9.3.2.14	URI	239
+9.3.3	NAS Related IEs	239
+9.3.3.1	AMF UE NGAP ID	239
+9.3.3.2	RAN UE NGAP ID	239
+9.3.3.3	GUAMI	239
+9.3.3.4	NAS-PDU	240
+9.3.3.5	PLMN Identity	240
+9.3.3.6	SON Configuration Transfer	240
+9.3.3.7	SON Information	241
+9.3.3.8	SON Information Reply	241
+9.3.3.9	Xn TNL Configuration Info	241
+9.3.3.10	TAC	242
+9.3.3.11	TAI	242
+9.3.3.12	AMF Set ID	243
+9.3.3.13	Routing ID	243
+9.3.3.14	NRPPa-PDU	243
+9.3.3.15	RAN Paging Priority	243
+9.3.3.16	EPS TAC	243
+9.3.3.17	EPS TAI	243
+9.3.3.18	UE Paging Identity	244
+9.3.3.19	AMF Pointer	244
+9.3.3.20	5G-S-TMSI	244
+9.3.3.21	AMF Name	244
+9.3.3.22	Paging Origin	244
+9.3.3.23	UE Identity Index Value	245
+9.3.3.24	Periodic Registration Update Timer	245
+9.3.3.25	UE-associated Logical NG-connection List	245
+9.3.3.26	NAS Security Parameters from NG-RAN	246
+9.3.3.27	Source to Target AMF Information Reroute	246
+9.3.3.28	RIM Information Transfer	246
+9.3.3.29	RIM Information	247
+9.3.3.30	LAI	247
+9.3.3.31	Extended Connected Time	247
+9.3.3.32	End Indication	247
+9.3.3.33	Inter-system SON Configuration Transfer	248
+9.3.3.34	Inter-system SON Information	248
+9.3.3.35	SON Information Report	248
+9.3.3.36	Inter-system SON Information Report	249
+9.3.3.37	Failure Indication	249
+9.3.3.38	Inter-system Failure Indication	249
+9.3.3.39	HO Report	249
+9.3.3.40	Inter-system HO Report	250
+9.3.3.41	UE RLF Report Container	251
+9.3.3.42	NID	252
+9.3.3.43	CAG ID	252
+9.3.3.44	NPN Support	252
+9.3.3.45	Allowed PNI-NPN List	252
+9.3.3.46	NPN Access Information	253
+9.3.3.47	Cell CAG List	253
+9.3.3.48	UL CP Security Information	253
+9.3.3.49	DL CP Security Information	254
+9.3.3.50	Configured TAC Indication	254
+9.3.3.51	Extended AMF Name	254
+9.3.3.52	Extended UE Identity Index Value	254
+9.3.4	SMF Related IEs	254
+9.3.4.1	PDU Session Resource Setup Request Transfer	254
+9.3.4.2	PDU Session Resource Setup Response Transfer	256
+9.3.4.3	PDU Session Resource Modify Request Transfer	258
+9.3.4.4	PDU Session Resource Modify Response Transfer	260
+9.3.4.5	PDU Session Resource Notify Transfer	262
+9.3.4.6	PDU Session Resource Modify Indication Transfer	264
+9.3.4.7	PDU Session Resource Modify Confirm Transfer	264
+9.3.4.8	Path Switch Request Transfer	265
+9.3.4.9	Path Switch Request Acknowledge Transfer	267
+9.3.4.10	Handover Command Transfer	269
+9.3.4.11	Handover Request Acknowledge Transfer	269
+9.3.4.12	PDU Session Resource Release Command Transfer	271
+9.3.4.13	PDU Session Resource Notify Released Transfer	271
+9.3.4.14	Handover Required Transfer	271
+9.3.4.15	Path Switch Request Setup Failed Transfer	271
+9.3.4.16	PDU Session Resource Setup Unsuccessful Transfer	272
+9.3.4.17	PDU Session Resource Modify Unsuccessful Transfer	272
+9.3.4.18	Handover Preparation Unsuccessful Transfer	272
+9.3.4.19	Handover Resource Allocation Unsuccessful Transfer	272
+9.3.4.20	Path Switch Request Unsuccessful Transfer	272
+9.3.4.21	PDU Session Resource Release Response Transfer	272
+9.3.4.22	PDU Session Resource Modify Indication Unsuccessful Transfer	272
+9.3.4.23	Secondary RAT Data Usage Report Transfer	273
+9.3.4.24	UE Context Resume Request Transfer	273
+9.3.4.25	UE Context Resume Response Transfer	273
+9.3.4.26	UE Context Suspend Request Transfer	273
+9.4	Message and Information Element Abstract Syntax (with ASN.1)	273
+9.4.1	General	273
+9.4.2	Usage of private message mechanism for non-standard use	274
+9.4.3	Elementary Procedure Definitions	275
+9.4.4	PDU Definitions	290
+9.4.5	Information Element Definitions	344
+9.4.6	Common Definitions	451
+9.4.7	Constant Definitions	452
+9.4.8	Container Definitions	461
+9.5	Message Transfer Syntax	466
+9.6	Timers	466
+10	Handling of Unknown, Unforeseen and Erroneous Protocol Data	467
+10.1	General	467
+10.2	Transfer Syntax Error	467
+10.3	Abstract Syntax Error	467
+10.3.1	General	467
+10.3.2	Criticality Information	468
+10.3.3	Presence Information	468
+10.3.4	Not comprehended IE/IE group	469
+10.3.4.1	Procedure Code	469
+10.3.4.1A	Type of Message	469
+10.3.4.2	IEs other than the Procedure Code and Type of Message	469
+10.3.5	Missing IE or IE group	470
+10.3.6	IEs or IE groups received in wrong order or with too many occurrences or erroneously present	471
+10.4	Logical Error	472
+10.5	Exceptions	472
+10.6	Handling of AP ID	473
+Annex A (informative): Change history	474
 
 Foreword
 This Technical Specification has been produced by the 3rd Generation Partnership Project (3GPP).
@@ -808,6 +810,7 @@ The following documents contain provisions which, through reference in this text
 [40]	3GPP TS 36.423: "Evolved Universal Terrestrial Radio Access Network (E-UTRAN); X2 Application Protocol (X2AP) ".
 [41]	3GPP TS 37.320: "Universal Terrestrial Radio Access (UTRA), Evolved Universal Terrestrial Radio Access (E-UTRA) and NR; Radio measurement collection for Minimization of Drive Tests (MDT); Overall description; Stage 2".
 [42]	3GPP TS 36.306: "Evolved Universal Terrestrial Radio Access (E-UTRA); User Equipment (UE) radio access capabilities".
+[43]	3GPP TS 29.244: "Interface between the Control Plane and the User Plane Nodes; Stage 3".
 3	Definitions and abbreviations
 3.1	Definitions
 For the purposes of the present document, the terms and definitions given in 3GPP TR 21.905 [1] and the following apply. A term defined in the present document takes precedence over the definition of the same term, if any, in 3GPP TR 21.905 [1].
@@ -1117,12 +1120,12 @@ The PDU SESSION RESOURCE SETUP REQUEST message shall contain the information req
 Upon reception of the PDU SESSION RESOURCE SETUP REQUEST message, if resources are available for the requested configuration, the NG-RAN node shall execute the requested NG-RAN configuration and allocate associated resources over NG and over Uu for each PDU session listed in the PDU Session Resource Setup Request List IE. 
 If the RAN Paging Priority IE is included in the PDU SESSION RESOURCE SETUP REQUEST message, the NG-RAN node may use it to determine a priority for paging the UE in RRC_INACTIVE state.
 For each requested PDU session, if resources are available for the requested configuration, the NG-RAN node shall establish at least one DRB and associate each accepted QoS flow of the PDU session to a DRB established. 
-For each PDU session successfully established the NG-RAN node shall pass to the UE the PDU Session NAS-PDU IE, if included, and the value contained in the PDU Session ID IE received for the PDU session. The NG-RAN node shall not send to the UE the PDU Session NAS PDUs associated to the failed PDU sessions. 
+For each PDU session successfully established the NG-RAN node shall pass to the UE the PDU Session NAS-PDU IE, if included. The NG-RAN node shall not send to the UE the PDU Session NAS PDUs associated to the failed PDU sessions. 
 If the NAS-PDU IE is included in the PDU SESSION RESOURCE SETUP REQUEST message, the NG-RAN node shall pass it to the UE.
 For each PDU session the NG-RAN node shall store the UL NG-U UP TNL Information IE included in the PDU Session Resource Setup Request Transfer IE contained in the PDU SESSION RESOURCE SETUP REQUEST message and use it as the uplink termination point for the user plane data for this PDU session.
 For each PDU session, if the Additional UL NG-U UP TNL Information IE is included in the PDU Session Resource Setup Request Transfer IE contained in the PDU SESSION RESOURCE SETUP REQUEST message, the NG-RAN node may allocate for this split PDU session resources for an additional NG-U transport bearer for some or all of the QoS flows present in the QoS Flow Setup Request List IE and it shall indicate these QoS flows in the Additional DL QoS Flow per TNL Information IE in the PDU Session Resource Setup Response Transfer IE. In case the Additional DL QoS Flow per TNL Information IE is not included the SMF shall consider the proposed additional UL NG-U UP TNL information as available again.
 For each PDU session, if the Network Instance IE is included in the PDU Session Resource Setup Request Transfer IE contained in the PDU SESSION RESOURCE SETUP REQUEST message and the Common Network Instance IE is not present, the NG-RAN node shall, if supported, use it when selecting transport network resource as specified in TS 23.501 [9].
-For each PDU session, if the Common Network Instance IE is included in the PDU Session Resource Setup Request Transfer IE contained in the PDU SESSION RESOURCE SETUP REQUEST message, the NG-RAN node shall, if supported, use it when selecting transport network resource as specified in TS 23.501 [9].
+For each PDU session, if the Common Network Instance IE is included in the PDU Session Resource Setup Request Transfer IE or in the Additional UL NG-U UP TNL Information IE, or in the Additional Redundant UL NG-U UP TNL Information IE contained in the PDU SESSION RESOURCE SETUP REQUEST message, the NG-RAN node shall, if supported, use it when selecting transport network resource for the concerned NG-U transport bearer as specified in TS 23.501 [9].
 For each PDU session, if the Redundant UL NG-U UP TNL Information IE is included in the PDU Session Resource Setup Request Transfer IE of the PDU SESSION RESOURCE SETUP REQUEST message, the NG-RAN node shall, if supported, use it as the uplink termination point for the user plane data for this PDU session for the redundant transmission and it shall include the Redundant QoS Flow per TNL Information IE in the PDU Session Resource Setup Response Transfer IE as described in TS 23.501 [9]. 
 For each PDU session, if the Additional Redundant UL NG-U UP TNL Information IE is included in the PDU Session Resource Setup Request Transfer IE contained in the PDU SESSION RESOURCE SETUP REQUEST message, the NG-RAN node may allocate for this split PDU session resources for an additional redundant NG-U transport bearer for some or all of the QoS flows present in the QoS Flow Setup Request List IE and it shall indicate these QoS flows in the Additional Redundant DL QoS Flow per TNL Information IE in the PDU Session Resource Setup Response Transfer IE. In case the Additional Redundant DL QoS Flow per TNL Information IE is not included the SMF shall consider the proposed additional Redundant UL NG-U UP TNL information as available again.
 For each PDU session, if the Redundant Common Network Instance IE is included in the PDU Session Resource Setup Request Transfer IE contained in the PDU SESSION RESOURCE SETUP REQUEST message, the NG-RAN node shall, if supported, use it when selecting transport network resource for the redundant transmission as specified in TS 23.501 [9].
@@ -1162,6 +1165,7 @@ Upon reception of the PDU SESSION RESOURCE SETUP RESPONSE message the AMF shall,
 Upon reception of the PDU SESSION RESOURCE SETUP REQUEST message to setup a QoS flow for IMS voice, if the NG-RAN node is not able to support IMS voice, the NG-RAN node shall initiate EPS fallback or RAT fallback for IMS voice procedure as specified in TS 23.501 [9] and report unsuccessful establishment of the QoS flow in the PDU Session Resource Setup Response Transfer IE or in the PDU Session Resource Setup Unsuccessful Transfer IE with cause value "IMS voice EPS fallback or RAT fallback triggered".
 For each PDU session for which the Global RAN Node ID of Secondary NG-RAN Node IE is included in the PDU Session Resource Setup Response Transfer IE of the PDU SESSION RESOURCE SETUP RESPONSE message, the SMF shall, if supported, handle this information as specified in TS 23.501 [9].
 The UE Aggregate Maximum Bit Rate IE should be sent to the NG-RAN node if the AMF has not sent it previously. If it is included in the PDU SESSION RESOURCE SETUP REQUEST message, the NG-RAN node shall store the UE Aggregate Maximum Bit Rate in the UE context, and use the received UE Aggregate Maximum Bit Rate for all Non-GBR QoS flows for the concerned UE as specified in TS 23.501 [9].
+For each PDU session, if the PDU Session Expected UE Activity Behaviour IE is included in the PDU SESSION RESOURCE SETUP REQUEST message, the NG-RAN node shall, if supported, handle this information as specified in TS 23.501 [9].
 Interactions with Handover Preparation procedure:
 If a handover becomes necessary during the PDU Session Resource Setup procedure, the NG-RAN node may interrupt the ongoing PDU Session Resource Setup procedure and initiate the Handover Preparation procedure as follows:
 1.	The NG-RAN node shall send the PDU SESSION RESOURCE SETUP RESPONSE message in which the NG-RAN node shall indicate, if necessary, all the PDU session resources which failed to be setup with an appropriate cause value, e.g. "NG intra-system handover triggered", "NG inter-system handover triggered" or "Xn handover triggered".
@@ -1204,7 +1208,7 @@ Upon reception of the PDU SESSION RESOURCE MODIFY REQUEST message, if the NG-RAN
 If the RAN Paging Priority IE is included in the PDU SESSION RESOURCE MODIFY REQUEST message, the NG-RAN node may use it to determine a priority for paging the UE in RRC_INACTIVE state.
 For each PDU session, if the S-NSSAI IE is included in the PDU Session Resource Modify Request Item IE contained in the PDU SESSION RESOURCE MODIFY REQUEST message, the NG-RAN node shall replace the previously provided S-NSSAI by the received S-NSSAI for the concerned PDU session and use it as specified in TS 23.502 [10].
 For each PDU session, if the Network Instance IE is included in the PDU Session Resource Modify Request Transfer IE contained in the PDU SESSION RESOURCE MODIFY REQUEST message and the Common Network Instance IE is not present, the NG-RAN node shall, if supported, use it as specified in TS 23.501 [9].
-For each PDU session, if the Common Network Instance IE is included in the PDU Session Resource Modify Request Transfer IE contained in the PDU SESSION RESOURCE MODIFY REQUEST message, the NG-RAN node shall, if supported, use it as specified in TS 23.501 [9].
+For each PDU session, if the Common Network Instance IE is included in the PDU Session Resource Modify Request Transfer IE or in the Additional UL NG-U UP TNL Information IE, or in the Additional Redundant UL NG-U UP TNL Information IE contained in the PDU SESSION RESOURCE MODIFY REQUEST message, the NG-RAN node shall, if supported, use it when selecting transport network resource for the concerned NG-U transport bearer as specified in TS 23.501 [9].
 For each PDU session, if the Redundant Common Network Instance IE is included in the PDU Session Resource Modify Request Transfer IE contained in the PDU SESSION RESOURCE MODIFY REQUEST message, the NG-RAN node shall, if supported, use it for the redundant transmission as specified in TS 23.501 [9].
 For each PDU session, if the TSC Traffic Characteristics IE is included in the PDU Session Resource Modify Request Transfer IE contained in the PDU SESSION RESOURCE MODIFY REQUEST message, the NG-RAN node shall, if supported, store it and use it as specified in TS 23.501 [9].
 For each PDU session, if the Redundant QoS Flow Indicator IE is included and set to “false” for all QoS flows, the NG-RAN node shall, if supported, stop the redundant transmission and release the redundant tunnel for the concerned PDU session as specified in TS 23.501 [9].
@@ -1238,6 +1242,8 @@ The NG-RAN node shall, if supported, report in the PDU SESSION RESOURCE MODIFY R
 For a PDU session or a QoS flow which failed to be modified, the NG-RAN node shall fall back to the configuration of the PDU session or the QoS flow as it was configured prior to the reception of the PDU SESSION RESOURCE MODIFY REQUEST message.
 Upon reception of the PDU SESSION RESOURCE MODIFY REQUEST message to setup a QoS flow for IMS voice, if the NG-RAN node is not able to support IMS voice, the NG-RAN node shall initiate EPS fallback or RAT fallback for IMS voice procedure as specified in TS 23.501 [9] and report unsuccessful establishment of the QoS flow in the PDU Session Resource Modify Response Transfer IE or in the PDU Session Resource Modify Unsuccessful Transfer IE with cause value "IMS voice EPS fallback or RAT fallback triggered".
 If the User Location Information IE is included in the PDU SESSION RESOURCE MODIFY RESPONSE message, the AMF shall handle this information as specified in TS 23.501 [9].
+For each PDU session, if the PDU Session Expected UE Activity Behaviour IE is included in the PDU SESSION RESOURCE MODIFY REQUEST message, the NG-RAN node shall, if supported, handle this information as specified in TS 23.501 [9].
+For each PDU session for which the Secondary RAT Usage Information IE is included in the PDU Session Resource Modify Response Transfer IE, the SMF shall handle this information as specified in TS 23.502 [10].
 Interactions with Handover Preparation procedure:
 If a handover becomes necessary during the PDU Session Resource Modify procedure, the NG-RAN node may interrupt the ongoing PDU Session Resource Modify procedure and initiate the Handover Preparation procedure as follows:
 1.	The NG-RAN node shall send the PDU SESSION RESOURCE MODIFY RESPONSE message in which the NG-RAN node shall indicate, if necessary, all the PDU sessions failed with an appropriate cause value, e.g. "NG intra-system handover triggered", "NG inter-system handover triggered" or "Xn handover triggered".
@@ -1348,7 +1354,7 @@ If the Trace Activation IE is included in the INITIAL CONTEXT SETUP REQUEST mess
 -	if the Trace Activation IE includes the Sensor Measurement Configuration IE within the MDT Configuration IE, take it into account for MDT Configuration as described in TS 37.320 [41].
 -	if the Trace Activation IE includes the MDT Configuration IE and if the NG-RAN node is a gNB at least the MDT Configuration-NR IE shall be present, while if the NG-RAN node is an ng-eNB at least the MDT Configuration-EUTRA IE shall be present.
 If the UE Security Capabilities IE included in the INITIAL CONTEXT SETUP REQUEST message only contains the EIA0 or NIA0 algorithm as defined in TS 33.501 [13] and if the EIA0 or NIA0 algorithm is defined in the configured list of allowed integrity protection algorithms in the NG-RAN node (TS 33.501 [13]), the NG-RAN node shall take it into use and ignore the keys received in the Security Key IE.
-If the Core Network Assistance Information for RRC INACTIVE IE is included in the INITIAL CONTEXT SETUP REQUEST message, the NG-RAN node shall, if supported, store this information in the UE context and use it for the RRC_INACTIVE state decision and RNA configuration for the UE and RAN paging if any for a UE in RRC_INACTIVE state, as specified in TS 38.300 [8].
+If the Core Network Assistance Information for RRC INACTIVE IE is included in the INITIAL CONTEXT SETUP REQUEST message, the NG-RAN node shall, if supported, store this information in the UE context and use it for the RRC_INACTIVE state decision and RNA configuration for the UE and RAN paging if any for a UE in RRC_INACTIVE state, as specified in TS 38.300 [8]. If the MICO All PLMN IE is included in the Core Network Assistance Information for RRC INACTIVE IE the NG-RAN node shall, if supported, consider that the registration area for the UE is the full PLMN and ignore the TAI List for RRC Inactive IE.
 If the CN Assisted RAN Parameters Tuning IE is included in the INITIAL CONTEXT SETUP REQUEST message, the NG-RAN node may use it as described in TS 23.501 [9].
 If the RRC Inactive Transition Report Request IE is included in the INITIAL CONTEXT SETUP REQUEST message, the NG-RAN node shall, if supported, store this information in the UE context.
 If the Emergency Fallback Indicator IE is included in the INITIAL CONTEXT SETUP REQUEST message, it indicates that the UE context to be set up is subject to emergency service fallback as described in TS 23.501 [9] and the NG-RAN node may, if supported, take the appropriate mobility actions. 
@@ -1362,6 +1368,7 @@ If the CE-mode-B Restricted IE is included in the INITIAL CONTEXT SETUP REQUEST 
 If the UE User Plane CIoT Support Indicator IE is included in the INITIAL CONTEXT SETUP REQUEST message the NG-RAN node shall, if supported, store this information in the UE context and consider that User Plane CIoT 5GS Optimisation as specified in TS 23.501 [9] is supported for the UE. 
 If the Management Based MDT PLMN List IE is contained in the INITIAL CONTEXT SETUP REQUEST message, the NG-RAN node shall, if supported, use it to allow subsequent selection of the UE for management based MDT defined in TS 32.422 [11].
 If the INITIAL CONTEXT SETUP REQUEST message contains the UE Radio Capability ID IE, the NG-RAN node shall, if supported, use it as specified in TS 23.501 [9] and TS 23.502 [10].
+For each PDU session, if the PDU Session Expected UE Activity Behaviour IE is included in the INTIAL CONTEXT SETUP REQUEST message, the NG-RAN node shall, if supported, handle this information as specified in TS 23.501 [9].
 Interactions with Initial UE Message procedure:
 The NG-RAN node shall use the AMF UE NGAP ID IE and RAN UE NGAP ID IE received in the INITIAL CONTEXT SETUP REQUEST message as identification of the logical connection even if the RAN UE NGAP ID IE had been allocated in an INITIAL UE MESSAGE message sent over a different NG interface instance.
 Interactions with RRC Inactive Transition Report procedure:
@@ -1371,7 +1378,7 @@ If the RRC Inactive Transition Report Request IE is included in the INITIAL CONT
 Figure 8.3.1.3-1: Initial context setup: unsuccessful operation
 If the NG-RAN node is not able to establish an NG UE context, it shall consider the procedure as failed and reply with the INITIAL CONTEXT SETUP FAILURE message.
 If the PDU Session Resource Setup Request List IE is contained in the INITIAL CONTEXT SETUP REQUEST message, the NG-RAN node shall report to the AMF, in the INITIAL CONTEXT SETUP FAILURE message, the unsuccessful establishment result for each PDU session resource requested to be setup as defined in the PDU Session Resource Setup procedure.
-Upon reception of the INITIAL CONTEXT SETUP FAILURE message the AMF shall, for each PDU session indicated in the PDU Session ID IE, transfer transparently the PDU Session Resource Setup Unsuccessful Transfer IE to the SMF associated with the concerned PDU session.
+Upon reception of the INITIAL CONTEXT SETUP FAILURE message the AMF shall, for each PDU session indicated in the PDU Session ID IE, transfer transparently the PDU Session Resource Setup Unsuccessful Transfer IE to the SMF associated with the concerned PDU session and may consider that the NAS PDU included in the INITIAL CONTEXT SETUP REQUEST message was not delivered.
 8.3.1.4	Abnormal Conditions
 If the supported algorithms for encryption defined in the Encryption Algorithms IE in the UE Security Capabilities IE, plus the mandated support of EEA0 and NEA0 in all UEs (TS 33.501 [13]), do not match any allowed algorithms defined in the configured list of allowed encryption algorithms in the NG-RAN node (TS 33.501 [13]), the NG-RAN node shall reject the procedure using the INITIAL CONTEXT SETUP FAILURE message.
 If the supported algorithms for integrity defined in the Integrity Protection Algorithms IE in the UE Security Capabilities IE, plus the mandated support of the EIA0 and NIA0 algorithm in all UEs (TS 33.501 [13]), do not match any allowed algorithms defined in the configured list of allowed integrity protection algorithms in the NG-RAN node (TS 33.501 [13]), the NG-RAN node shall reject the procedure using the INITIAL CONTEXT SETUP FAILURE message.
@@ -1422,7 +1429,7 @@ If the RAN Paging Priority IE is included in the UE CONTEXT MODIFICATION REQUEST
 If the UE Aggregate Maximum Bit Rate IE is included in the UE CONTEXT MODIFICATION REQUEST message, the NG-RAN node shall
 -	replace the previously provided UE Aggregate Maximum Bit Rate by the received UE Aggregate Maximum Bit Rate in the UE context;
 -	use the received UE Aggregate Maximum Bit Rate for all Non-GBR QoS flows for the concerned UE as specified in TS 23.501 [9].
-If the Core Network Assistance Information for RRC INACTIVE IE is included in the UE CONTEXT MODIFICATION REQUEST message, the NG-RAN node shall, if supported, store this information in the UE context and use it for the RRC_INACTIVE state decision and RNA configuration for the UE and RAN paging if any for a UE in RRC_INACTIVE state, as specified in TS 38.300 [8].
+If the Core Network Assistance Information for RRC INACTIVE IE is included in the UE CONTEXT MODIFICATION REQUEST message, the NG-RAN node shall, if supported, replace the previously provided Core Network Assistance Information for RRC INACTIVE and use it for the RRC_INACTIVE state decision and RNA configuration for the UE and RAN paging if any for a UE in RRC_INACTIVE state, as specified in TS 38.300 [8]. If the MICO All PLMN IE is included in the Core Network Assistance Information for RRC INACTIVE IE the NG-RAN node shall, if supported, consider that the registration area for the UE is the full PLMN and ignore the TAI List for RRC Inactive IE.
 If the CN Assisted RAN Parameters Tuning IE is included in the UE CONTEXT MODIFICATION REQUEST message, the NG-RAN node may use it as described in TS 23.501 [9].
 If the RRC Inactive Transition Report Request IE is included in the UE CONTEXT MODIFICATION REQUEST message, the NG-RAN node shall, if supported, store this information in the UE context and report to the AMF the User Location Information IE and the RRC State IE in the UE CONTEXT MODIFICATION RESPONSE message.
 If the RRC Inactive Transition Report Request IE is included in the UE CONTEXT MODIFICATION REQUEST message and set to "cancel report", the NG-RAN node shall, if supported, stop reporting to the AMF the RRC state of the UE.
@@ -1587,6 +1594,7 @@ Upon reception of the HANDOVER REQUIRED message the AMF shall, for each PDU sess
 In case of intra-system handover, the information in the Source to Target Transparent Container IE shall be encoded according to the definition of the Source NG-RAN node to Target NG-RAN node Transparent Container IE.
 If the DL Forwarding IE is included for a given QoS flow in the PDU Session Resource Information Item IE within the Source NG-RAN node to Target NG-RAN node Transparent Container IE of the HANDOVER REQUIRED message and it is set to "DL forwarding proposed", it indicates that the source NG-RAN node proposes forwarding of downlink data for that QoS flow.
 If the UL Forwarding IE is included for a given QoS flow in the PDU Session Resource Information Item IE within the Source NG-RAN Node to Target NG-RAN Node Transparent Container IE of the HANDOVER REQUIRED message and it is set to "UL forwarding proposed", it indicates that the source NG-RAN node proposes forwarding of uplink data for that QoS flow.
+If for a given QoS flow the Source Transport Layer Address IE is included within the Source NG-RAN Node to Target NG-RAN Node Transparent Container IE of the HANDOVER REQUIRED message, the target NG-RAN node shall, if supported, store this information and use it as part of its ACL functionality configuration actions for direct data forwarding, if such ACL functionality is deployed.
 If the DRBs to QoS Flows Mapping List IE is included in the PDU Session Resource Information Item IE within the Source NG-RAN node to Target NG-RAN node Transparent Container IE of the HANDOVER REQUIRED message, it implicitly indicates that the source NG-RAN node proposes forwarding of downlink data for those DRBs. 
 If the QoS Flow Mapping Indication IE for a QoS flow is included in the Associated QoS Flow List IE within the DRBs to QoS Flows Mapping List IE within the Source NG-RAN node to Target NG-RAN node Transparent Container IE of the HANDOVER REQUIRED message, it indicates that the source NG-RAN node has mapped only the uplink or downlink of the QoS flow to the DRB. 
 In case of intra-system handover, if the HANDOVER COMMAND message contains the DL Forwarding UP TNL Information IE for a given DRB within the Data Forwarding Response DRB List IE in the Handover Command Transfer IE, the source NG-RAN node shall consider that the forwarding of downlink data for this DRB is accepted by the target NG-RAN node. If the HANDOVER COMMAND message contains the UL Forwarding UP TNL Information IE for a given DRB in the Data Forwarding Response DRB List IE within the Handover Command Transfer IE, it means the target NG-RAN node has requested the forwarding of uplink data for this DRB.
@@ -1599,11 +1607,12 @@ When the preparation, including the reservation of resources at the target side 
 Upon reception of the HANDOVER COMMAND message the source NG-RAN node shall stop the timer TNGRELOCprep and start the timer TNGRELOCoverall.
 If there are any PDU sessions that could not be admitted in the target, they shall be indicated in the PDU Session Resource to Release List IE.
 NOTE:	As an exception in case of inter-system handover to LTE, the AMF generates the Handover Preparation Unsuccessful Transfer IE in the PDU Session Resource to Release List IE.
-If the HANDOVER COMMAND message contains the QoS Flow to be Forwarded List IE within the Handover Command Transfer IE for a given PDU session, then the source NG-RAN node should initiate data forwarding for the listed QoS flows over the forwarding tunnel specified in the DL Forwarding UP TNL Information IE as specified in TS 38.300 [8].
+If the HANDOVER COMMAND message contains the QoS Flow to be Forwarded List IE and/or Data Forwarding Response DRB List IE within the Handover Command Transfer IE for a given PDU session, then the source NG-RAN node should initiate data forwarding for the QoS flows as specified in TS 38.300 [8].
 If the HANDOVER COMMAND message contains the Additional DL Forwarding UP TNL Information IE within the Handover Command Transfer IE, the source NG-RAN node should initiate data forwarding of the PDU session split in different tunnel and shall use the received UP transport layer information for the forwarding QoS flows associated to it.
 If the HANDOVER COMMAND message contains the Additional UL Forwarding UP TNL Information IE within the Handover Command Transfer IE, the source NG-RAN node should initiate data forwarding of the PDU session split in different tunnels using the received UP transport layer information.
 If the NAS Security Parameters from NG-RAN IE is included in the HANDOVER COMMAND message the NG-RAN node shall use it as specified in TS 33.501 [13].
 If the Target to Source Transparent Container IE has been received by the AMF from the handover target then the transparent container shall be included in the HANDOVER COMMAND message.
+If the HANDOVER COMMAND message contains the QoS Flow Failed to Setup List IE within the Handover Command Transfer IE, the source NG-RAN node shall consider that the listed QoS flows are failed to be handed over.
 In case of inter-system handover to LTE, the information in the Target to Source Transparent Container IE shall be encoded according to the definition of the Target eNB to Source eNB Transparent Container IE as specified in TS 36.413 [16]. 
 If the Index to RAT/Frequency Selection Priority IE is contained in the Source NG-RAN Node to Target NG-RAN Node Transparent Container IE, the target NG-RAN node shall store the content of the received Index to RAT/Frequency Selection Priority IE in the UE context and use it as defined in TS 23.501 [9].
 If the DAPS Request Information IE is included for a DRB in the Source NG-RAN Node to Target NG-RAN Node Transparent Container IE within the HANDOVER REQUIRED message, it indicates that the request concerns a DAPS Handover for that DRB, as described in TS 38.300 [8]. 
@@ -1655,10 +1664,12 @@ In case of intra-system handover, if the target NG-RAN node accepts the uplink d
 In case of intra-system handover, for each PDU session for which the Additional DL UP TNL Information for HO List IE is included in the Handover Request Acknowledge Transfer IE of the HANDOVER REQUEST ACKNOWLEDGE message, the SMF shall consider the included Additional DL NG-U UP TNL Information IE as the downlink termination point for the associated flows indicated in the Additional QoS Flow Setup Response List IE for this PDU session split in different tunnels and shall consider the Additional DL Forwarding UP TNL Information IE, if included, as the forwarding tunnel associated to these QoS flows.
 In case of intra-system handover, for each PDU session for which the Additional UL Forwarding UP TNL Information IE is included in the Handover Request Acknowledge Transfer IE of the HANDOVER REQUEST ACKNOWLEDGE message, the SMF shall consider it as the termination points for the uplink forwarding tunnels for this PDU session split in different tunnels. 
 In case of intra-system handover, if the target NG-RAN node accepts the data forwarding for a successfully configured DRB, the target NG-RAN node may include the DL Forwarding UP TNL Information IE for the DRB within the Data Forwarding Response DRB List IE within Handover Request Acknowledge Transfer IE of the HANDOVER REQUEST ACKNOWLEDGE message.
+In case of intra-system handover, if the target NG-RAN node receives the Direct Forwarding Path Availability IE set to "direct path available" within the PDU Session Resource Setup Request Transfer IE, the target NG-RAN node shall, if supported, assign the UP Transport Layer Information for intra-system direct data forwarding from the appropriate address space, if applicable.
 If the HANDOVER REQUEST ACKNOWLEDGE message contains the UL Forwarding UP TNL Information IE for a given DRB in the Data Forwarding Response DRB List IE within the Handover Request Acknowledge Transfer IE, it indicates the target NG-RAN node has requested the forwarding of uplink data for the DRB.
 In case of inter-system handover from E-UTRAN, if the PDU Session Resource Setup Request Transfer IE contains the Direct Forwarding Path Availability IE set to "direct path available", the target NG-RAN node shall, if supported, and if it accepts downlink data forwarding for the QoS flows mapped to an E-RAB of an admitted PDU session, include the DL Forwarding UP TNL Information IE in the Data Forwarding Response E-RAB List IE in the Handover Request Acknowledge Transfer IE in the HANDOVER REQUEST ACKNOWLEDGE message for that mapped E-RAB.
 In case of inter-system handover from E-UTRAN, the target NG-RAN node includes the Data Forwarding Accepted IE for each QoS flow that the DL Forwarding IE is set to "DL forwarding proposed" for the corresponding E-RAB in the Source NG-RAN Node to Target NG-RAN Node Transparent Container IE and that the target NG-RAN node has admitted the proposed forwarding of downlink data for the QoS flow. If indirect data forwarding is applied for inter-system handover, if the target NG-RAN node accepts the downlink data forwarding for at least one QoS flow of an admitted PDU session it shall include the DL Forwarding UP TNL Information IE in the PDU Session Resource Setup Response Transfer IE for that PDU session within the PDU Session Resources Admitted List IE of the HANDOVER REQUEST ACKNOWLEDGE message. 
 In case of inter-system handover from E-UTRAN with direct forwarding, if the target NG-RAN node receives the SgNB UE X2AP ID IE in the Source NG-RAN Node to Target NG-RAN Node Transparent Container IE, it may use it for internal forwarding as described in TS 37.340 [32].
+In case of inter-system handover from E-UTRAN, if the target cell is a CAG cell, the target NG-RAN node shall include the NPN Access Information IE in the HANDOVER REQUEST ACKNOWLEDGE message, and the AMF shall consider that the included information is associated to the target cell and to the UE’s serving PLMN identity, and use it as specified in TS 23.501 [9]. 
 The target NG-RAN node shall use the information in the Mobility Restriction List IE if present in the HANDOVER REQUEST message to
 -	determine a target for subsequent mobility action for which the target NG-RAN node provides information about the target of the mobility action towards the UE;
 -	select a proper SCG during dual connectivity operation;
@@ -1675,7 +1686,7 @@ If the Trace Activation IE is included in the HANDOVER REQUEST message the targe
 -	if the Trace Activation IE includes the Sensor Measurement Configuration IE within the MDT Configuration IE, take it into account for MDT Configuration as described in TS 37.320 [41].
 -	if the Trace Activation IE includes the MDT Configuration IE and if the NG-RAN node is a gNB at least the MDT Configuration-NR IE shall be present, while if the NG-RAN node is an ng-eNB at least the MDT Configuration-EUTRA IE shall be present.
 If the Location Reporting Request Type IE is included in the HANDOVER REQUEST message, the target NG-RAN node should perform the requested location reporting functionality for the UE as described in subclause 8.12.
-If the Core Network Assistance Information for RRC INACTIVE IE is included in the HANDOVER REQUEST message, the target NG-RAN node shall, if supported, store this information in the UE context and use it for the RRC_INACTIVE state decision and RNA configuration for the UE and RAN paging if any for a UE in RRC_INACTIVE state, as specified in TS 38.300 [8].
+If the Core Network Assistance Information for RRC INACTIVE IE is included in the HANDOVER REQUEST message, the target NG-RAN node shall, if supported, store this information in the UE context and use it for the RRC_INACTIVE state decision and RNA configuration for the UE and RAN paging if any for a UE in RRC_INACTIVE state, as specified in TS 38.300 [8]. If the MICO All PLMN IE is included in the Core Network Assistance Information for RRC INACTIVE IE the NG-RAN node shall, if supported, consider that the registration area for the UE is the full PLMN and ignore the TAI List for RRC Inactive IE.
 If the CN Assisted RAN Parameters Tuning IE is included in the HANDOVER REQUEST message, the NG-RAN node may use it as described in TS 23.501 [9].
 If the New Security Context Indicator IE is included in the HANDOVER REQUEST message, the target NG-RAN node shall use the information as specified in TS 33.501 [13].
 If the NASC IE is included in the HANDOVER REQUEST message, the target NG-RAN node shall use it towards the UE as specified in TS 33.501 [13].
@@ -1699,6 +1710,7 @@ If the Management Based MDT PLMN List IE is contained in the HANDOVER REQUEST me
 If the HANDOVER REQUEST message contains the UE Radio Capability ID IE, the NG-RAN node shall, if supported, use it as specified in TS 23.501 [9] and TS 23.502 [10].
 If the DAPS Request Information IE is included for a DRB in the Source NG-RAN Node to Target NG-RAN Node Transparent Container IE within the HANDOVER REQUEST message, the target NG-RAN node shall consider that the request concerns a DAPS Handover for that DRB, as described in in TS 38.300 [8]. The target NG-RAN node shall include the DAPS Response information List IE in the Target NG-RAN Node to Source NG-RAN Node Transparent Container IE within the HANDOVER REQUEST ACKNOWLEDGE message, containing the DAPS Response Information IE for each DRB requested to be configured with DAPS Handover. 
 If the Extended Connected Time IE is included in the HANDOVER REQUEST message, the NG-RAN node shall, if supported, use it as described in TS 23.501 [9].
+If the Source Node ID IE is included in the Source NG-RAN Node to Target NG-RAN Node Transparent Container IE within the HANDOVER REQUEST message, the target NG-RAN node shall, if supported, use it to decide whether direct forwarding path is available between the target NG-RAN node and this source RAN node. If the direct forwarding path is available, the target NG-RAN node shall include the Direct Forwarding Path Availability IE in the Target NG-RAN Node to Source NG-RAN Node Transparent Container IE within the HANDOVER REQUEST ACKNOWLEDGE message.
 Interactions with RRC Inactive Transition Report procedure:
 If the RRC Inactive Transition Report Request IE is included in the HANDOVER REQUEST message and set to "subsequent state transition report", the NG-RAN node shall, if supported, send the RRC INACTIVE TRANSITION REPORT message to the AMF to report the RRC state of the UE when the UE enters or leaves RRC_INACTIVE state.
 8.4.2.3	Unsuccessful Operation
@@ -1719,7 +1731,8 @@ The purpose of the Handover Notification procedure is to indicate to the AMF tha
 
 Figure 8.4.3.2-1: Handover notification
 The target NG-RAN node shall send the HANDOVER NOTIFY message to the AMF when the UE has been identified in the target cell and the NG-based handover has been successfully completed.
-If the Notify Source NG-RAN Node IE is included in the HANDOVER NOTIFY message, the AMF shall, if supported, notify the source NG-RAN node that the UE has successfully accessed the target NG-RAN node.
+Interactions with Handover Success procedure:
+If the Notify Source NG-RAN Node IE is included in the HANDOVER NOTIFY message, the AMF shall, if supported, notify the source NG-RAN node that the UE has successfully accessed the target NG-RAN node by sending the HANDOVER SUCCESS message.
 8.4.3.3	Abnormal Conditions
 Void.
 8.4.4	Path Switch Request
@@ -1748,7 +1761,7 @@ If the Additional Redundant NG-U UP TNL Information IE is included within the Pa
 If the CN Packet Delay Budget Downlink IE is included within the Path Switch Request Acknowledge Transfer IE of the PATH SWITCH REQUEST ACKNOWLEDGE message, the NG-RAN node shall, if supported, replace the previously provided CN Packet Delay Budget Downlink if any and use it as specified in TS 23.502 [10].
 If the CN Packet Delay Budget Uplink IE is included within the Path Switch Request Acknowledge Transfer IE of the PATH SWITCH REQUEST ACKNOWLEDGE message, the NG-RAN node shall, if supported, replace the previously provided CN Packet Delay Budget Uplink if any and use it as specified in TS 23.502 [10].
 If the Burst Arrival Time Downlink IE is included within the Path Switch Request Acknowledge Transfer IE of the PATH SWITCH REQUEST ACKNOWLEDGE message, the NG-RAN node shall, if supported, replace the previously provided value if any and use it as specified in TS 23.502 [10].
-If the Core Network Assistance Information for RRC INACTIVE IE is included in the PATH SWITCH REQUEST ACKNOWLEDGE message, the NG-RAN node shall, if supported, store this information in the UE context and use it for the RRC_INACTIVE state decision and RNA configuration for the UE and RAN paging if any for a UE in RRC_INACTIVE state, as specified in TS 38.300 [8].
+If the Core Network Assistance Information for RRC INACTIVE IE is included in the PATH SWITCH REQUEST ACKNOWLEDGE message, the NG-RAN node shall, if supported, store this information in the UE context and use it for the RRC_INACTIVE state decision and RNA configuration for the UE and RAN paging if any for a UE in RRC_INACTIVE state, as specified in TS 38.300 [8]. If the MICO All PLMN IE is included in the Core Network Assistance Information for RRC INACTIVE IE the NG-RAN node shall, if supported, consider that the registration area for the UE is the full PLMN and ignore the TAI List for RRC Inactive IE.
 If the CN Assisted RAN Parameters Tuning IE is included in the PATH SWITCH REQUEST ACKNOWLEDGE message, the NG-RAN node may use it as described in TS 23.501 [9].
 If the RRC Inactive Transition Report Request IE is included in the PATH SWITCH REQUEST ACKNOWLEDGE message, the NG-RAN node shall, if supported, store this information in the UE context.
 If the New Security Context Indicator IE is included in the PATH SWITCH REQUEST ACKNOWLEDGE message, the NG-RAN node shall use the information as specified in TS 33.501 [13].
@@ -1773,6 +1786,8 @@ If the CE-mode-B Restricted IE is included in the PATH SWITCH REQUEST ACKNOWLEDG
 If the UE User Plane CIoT Support Indicator IE is included in the PATH SWITCH REQUEST ACKNOWLEDGE message the NG-RAN node shall, if supported, store this information in the UE context and consider that User Plane CIoT 5GS Optimisation as specified in TS 23.501 [9] is supported for the UE.
 If the PATH SWITCH REQUEST ACKNOWLEDGE message contains the UE Radio Capability ID IE, the NG-RAN node shall, if supported, use it as specified in TS 23.501 [9] and TS 23.502 [10].
 If the PATH SWITCH REQUEST ACKNOWLEDGE message contains the Alternative QoS Parameters Set List IE, the NG-RAN node shall, if supported, use it as specified in TS 23.502 [10].
+For each PDU session, if the PDU Session Expected UE Activity Behaviour IE is included in the PATH SWITCH REQUEST ACKNOWLEDGE message, the NG-RAN node shall, if supported, handle this information as specified in TS 23.501 [9].
+If the PATH SWITCH REQUEST ACKNOWLEDGE message contains the Management Based MDT PLMN List IE, the NG-RAN node shall store it in the UE context, and if supported, use it to allow subsequent selection of the UE for management based MDT defined in TS 32.422 [11].
 Interactions with RRC Inactive Transition Report procedure:
 If the RRC Inactive Transition Report Request IE is included in the PATH SWITCH REQUEST ACKNOWLEDGE message and set to "single RRC connected state report" and the UE is in RRC_CONNECTED state, the NG-RAN node shall, if supported, send one RRC INACTIVE TRANSITION REPORT message to the AMF to report the RRC state of the UE.
 If the RRC Inactive Transition Report Request IE is included in the PATH SWITCH REQUEST ACKNOWLEDGE message and set to "single RRC connected state report" and the UE is in RRC_INACTIVE state, the NG-RAN node shall, if supported, send to the AMF one RRC INACTIVE TRANSITION REPORT message plus one subsequent RRC INACTIVE TRANSITION REPORT message when the RRC state transitions to RRC_CONNECTED state.
@@ -1988,7 +2003,7 @@ Figure 8.7.1.3-1: NG setup: unsuccessful operation
 If the AMF cannot accept the setup, it should respond with an NG SETUP FAILURE message and appropriate cause value.
 If the NG SETUP FAILURE message includes the Time to Wait IE, the NG-RAN node shall wait at least for the indicated time before reinitiating the NG Setup procedure towards the same AMF.
 8.7.1.4	Abnormal Conditions
-If the NG-RAN node initiates the procedure by sending an NG SETUP REQUEST message including the PLMN Identity IEs and none of the PLMNs provided by the NG-RAN node is identified by the AMF, then the AMF shall reject the NG Setup procedure with an appropriate cause value.
+If the AMF does not identify any of the PLMNs/SNPNs indicated in the NG SETUP REQUEST message, it shall reject the NG Setup procedure with an appropriate cause value.
 If none of the RATs indicated by the NG-RAN node in the NG SETUP REQUEST message is supported by the AMF, then the AMF shall fail the NG Setup procedure with an appropriate cause value.
 8.7.2	RAN Configuration Update
 8.7.2.1	General
@@ -2361,7 +2376,7 @@ The purpose of the UE Radio Capability Info Indication procedure is to enable th
 
 Figure 8.14.1.2-1: UE radio capability info indication
 The NG-RAN node controlling a UE-associated logical NG connection initiates the procedure by sending a UE RADIO CAPABILITY INFO INDICATION message to the AMF including the UE radio capability information.
-The UE RADIO CAPABILITY INFO INDICATION message may also include paging specific UE radio capability information within the UE Radio Capability for Paging IE.
+The UE RADIO CAPABILITY INFO INDICATION message may also include paging specific UE radio capability information within the UE Radio Capability for Paging IE. If the UE Radio Capability for Paging IE includes the UE Radio Capability for Paging of NR IE and the UE Radio Capability for Paging of E-UTRA IE, the AMF shall, if supported, use it as specified in TS 23.501 [9].
 The UE radio capability information received by the AMF shall replace previously stored corresponding UE radio capability information in the AMF for the UE, as described in TS 23.501 [9].
 If the UE RADIO CAPABILITY INFO INDICATION message includes the UE Radio Capability – E-UTRA Format IE, the AMF shall, if supported, use it as specified in TS 23.501 [9].
 8.14.1.3	Abnormal Conditions
@@ -2556,6 +2571,14 @@ OCTET STRING
 Containing the PDU Session Resource Setup Request Transfer IE specified in subclause 9.3.4.1.
 -
 
+>>PDU Session Expected UE Activity Behaviour
+O
+
+Expected UE Activity Behaviour
+9.3.1.94
+Expected UE Activity Behaviour for the PDU Session.
+YES
+ignore
 UE Aggregate Maximum Bit Rate
 O
 
@@ -2902,6 +2925,14 @@ O
 
 YES
 reject
+>>PDU Session Expected UE Activity Behaviour
+O
+
+Expected UE Activity Behaviour
+9.3.1.94
+Expected UE Activity Behaviour for the PDU Session.
+YES
+ignore
 
 Range bound
 Explanation
@@ -3392,6 +3423,14 @@ OCTET STRING
 Containing the PDU Session Resource Setup Request Transfer IE specified in subclause 9.3.4.1.
 -
 
+>>PDU Session Expected UE Activity Behaviour
+O
+
+Expected UE Activity Behaviour
+9.3.1.94
+Expected UE Activity Behaviour for the PDU Session.
+YES
+ignore
 Allowed NSSAI
 M
 
@@ -5479,6 +5518,14 @@ OCTET STRING
 Containing the PDU Session Resource Setup Request Transfer IE specified in subclause 9.3.4.1.
 -
 
+>>PDU Session Expected UE Activity Behaviour
+O
+
+Expected UE Activity Behaviour
+9.3.1.94
+Expected UE Activity Behaviour for the PDU Session.
+YES
+ignore
 Allowed NSSAI
 M
 
@@ -5755,6 +5802,13 @@ O
 
 YES
 ignore
+NPN Access Information
+O
+
+9.3.3.46
+
+YES
+reject
 
 Range bound
 Explanation
@@ -6049,6 +6103,14 @@ OCTET STRING
 Containing the Path Switch Request Acknowledge Transfer IE specified in subclause 9.3.4.9.
 -
 
+>>PDU Session Expected UE Activity Behaviour
+O
+
+Expected UE Activity Behaviour
+9.3.1.94
+Expected UE Activity Behaviour for the PDU Session.
+YES
+ignore
 PDU Session Resource Released List
 
 0..1
@@ -6203,6 +6265,14 @@ O
 
 YES
 reject
+Management Based MDT PLMN List
+O
+
+MDT PLMN List
+9.3.1.168
+
+YES
+ignore
 
 Range bound
 Explanation
@@ -7021,7 +7091,7 @@ YES
 reject
 
 9.2.5.4	NAS NON DELIVERY INDICATION
-This message is sent by the NG-RAN node and is used for reporting the non-delivery of a NAS PDU previously received within a DOWNLINK NAS TRANSPORT message over the NG interface.
+This message is sent by the NG-RAN node and is used for reporting the non-delivery of a NAS PDU previously received within a DOWNLINK NAS TRANSPORT message or the NAS-PDU IE previously received within the PDU SESSION RESOURCE SETUP REQUEST message over the NG interface.
 Direction: NG-RAN node  AMF
 IE/Group Name
 Presence
@@ -10585,6 +10655,13 @@ O
 
 YES
 ignore
+MICO All PLMN
+O
+
+9.3.1.194
+
+YES
+ignore
 
 Range bound
 Explanation
@@ -11262,7 +11339,16 @@ O
 9.3.1.118
 
 YES
-reject
+ignore
+>>>>Source Transport Layer Address
+O
+
+Transport Layer Address
+9.3.2.4
+Identifies the TNL address used by the sending node for direct data forwarding
+towards the target NG-RAN node
+YES
+ignore
 >>DRBs to QoS Flows Mapping List
 O
 
@@ -11334,6 +11420,13 @@ O
 
 YES
 ignore
+Source Node ID
+O
+
+9.3.1.195
+Source SN ID
+YES
+ignore
 
 Range bound
 Explanation
@@ -11368,7 +11461,7 @@ DAPS Response Information List
 
 
 YES
-reject
+ignore
 >DAPS Response Information Item
 
 1..<maxnoofDRBs>
@@ -11390,6 +11483,13 @@ M
 Indicates the response to a requested DAPS Handover
 -
 
+Direct Forwarding Path Availability
+O
+
+9.3.1.64
+Indicates whether a direct forwarding path between the source SN and the target NG-RAN node is available for inter-system handover
+YES
+ignore
 
 Range bound
 Explanation
@@ -13190,7 +13290,7 @@ maxnoofCellsUEMovingTrajectory
 Maximum no. of cells of UE moving trajectory. Value is 16.
 
 9.3.1.94	Expected UE Activity Behaviour
-This IE indicates information about the expected "UE activity behaviour" as defined in TS 23.501 [9].
+This IE indicates information about the expected "UE activity behaviour" of the UE or the PDU session as defined in TS 23.501 [9].
 IE/Group Name
 Presence
 Range
@@ -13696,7 +13796,7 @@ Associated QoS Flow List
 9.3.1.99
 Indicates that the source NG-RAN node has initiated QoS flow re-mapping and has not yet received SDAP end markers, as described in TS 38.300 [8].
 YES
-reject
+ignore
 
 Range bound
 Explanation
@@ -13946,7 +14046,7 @@ Common Network Instance
 M
 
 OCTET STRING
-
+The octets of OCTET STRING are encoded as the Network Instance field of the Network Instance IE specified in TS 29.244 [43]
 
 9.3.1.121	Data Forwarding Response E-RAB List
 This IE is used at inter-system HO to provide DL data forwarding address information, if direct data forwarding is applied.
@@ -13959,7 +14059,7 @@ Data Forwarding Response E-RAB List
 
 1..<maxnoofERABs>
 
-
+The list may include the same DL Forwarding UP TNL Information for multiple E-RABs.
 >E-RAB ID
 M
 
@@ -15263,22 +15363,32 @@ Presence
 Range
 IE type and reference
 Semantics description
+Criticality
+Assigned Criticality
 M1 Reporting Trigger
 M
 
 ENUMERATED (periodic, A2event-triggered, A2event-triggered periodic, …)
+
+–
 
 M1 Threshold Event A2
 C-ifM1A2trigger
 
 
 
+–
+
 >CHOICE Threshold Type
 M
 
 
 
+–
+
 >>RSRP
+
+
 
 
 
@@ -15288,7 +15398,11 @@ M
 
 INTEGER (0..127)
 This IE is defined in TS 38.331 [18].
+–
+
 >>RSRQ
+
+
 
 
 
@@ -15298,7 +15412,11 @@ M
 
 INTEGER (0..127)
 This IE is defined in TS 38.331 [18].
+–
+
 >>SINR
+
+
 
 
 
@@ -15308,21 +15426,37 @@ M
 
 INTEGER (0..127)
 This IE is defined in TS 38.331 [18].
+–
+
 M1 Periodic Reporting
 C-ifperiodicMDT
 
 
 
+–
+
 >Report Interval
 M
 
 ENUMERATED (ms120, ms240, ms480, ms640, ms1024, ms2048, ms5120, ms10240, min1, min6, min12, min30, min60)
-This IE is defined in TS 38.331 [18].
+This IE is defined in TS 38.331 [18]. The value min60 is not used in the specification.
+
+–
+
 >Report Amount
 M
 
 ENUMERATED (1, 2, 4, 8, 16, 32, 64, infinity)
 Number of reports.
+–
+
+>Extended Report Interval
+O
+
+ENUMERATED (ms20480, ms40960,...)
+This IE is the extension of the Report Interval IE. If this IE is present, the Report Interval IE is ignored.
+YES
+ignore
 
 Condition
 Explanation
@@ -15435,7 +15569,7 @@ Bluetooth Measurement Configuration Name List
 
 0..1
 
-
+This IE is present if the Bluetooth Measurement Configuration IE is set to “Setup”.
 >Bluetooth Measurement Configuration Name Item
 
 1..<maxnoofBluetoothName>
@@ -15473,7 +15607,7 @@ WLAN Measurement Configuration Name List
 
 0..1
 
-
+This IE is present if the Bluetooth Measurement Configuration IE is set to “Setup”.
 >WLAN Measurement Configuration Name Item
 
 1..<maxnoofWLANName>
@@ -15947,6 +16081,43 @@ O
 UTF8String (SIZE(1..150, …))
 
 
+9.3.1.194	MICO All PLMN
+This IE indicates that the UE is configured with MICO mode by the AMF for the “all PLMN” as specified in TS 23.501 [9].
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+MICO All PLMN
+M
+
+ENUMERATED (true, …)
+
+
+9.3.1.195	Source Node ID
+This IE identifies the source SN for the handover.
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+CHOICE Source Node ID
+M
+
+
+
+>Source E-UTRAN Node ID
+
+
+
+
+>>Source en-gNB ID
+M
+
+Global gNB ID
+9.3.1.6
+This IE is used for handover from EN-DC to SA. The source en-gNB ID is the identity of the source SN.
+
 9.3.2	Transport Network Layer Related IEs
 9.3.2.1	QoS Flow per TNL Information List
 This IE is used to provide a list of additional UP transport layer information for a split PDU session, along with the associated QoS flows.
@@ -16204,10 +16375,14 @@ Presence
 Range
 IE type and reference
 Semantics description
+Criticality
+Assigned Criticality
 UP Transport Layer Information Item
 
 1..<maxnoofMultiConnectivityMinusOne>
 
+
+-
 
 >NG-U UP TNL Information
 M
@@ -16215,6 +16390,15 @@ M
 UP Transport Layer Information
 9.3.2.2
 
+-
+
+>Common Network Instance
+O
+
+9.3.1.120
+
+YES
+ignore
 
 Range bound
 Explanation
@@ -16248,7 +16432,8 @@ M
 O
 
 9.3.1.62
-
+This IE is included for the QoS flows in the PDU session to be forwarded over the PDU session forwarding tunnel.
+It may be included for the QoS flows in the PDU session to be forwarded over the DRB forwarding tunnel(s).
 -
 
 >Current QoS Parameters Set Index
@@ -16628,7 +16813,7 @@ Routing ID
 M
 
 OCTET STRING
-
+The maximum length corresponds to NfInstanceId defined in TS 29.571 [35]
 
 9.3.3.14	NRPPa-PDU
 This IE contains an NG-RAN node – LMF or LMF – NG-RAN node message that is transferred without interpretation in the AMF.
@@ -17754,7 +17939,7 @@ Direct Forwarding Path Availability
 O
 
 9.3.1.64
-This IE may be present in case of inter-system handover and is ignored otherwise.
+This IE may be present in case of inter-system handover and intra-system handover.
 YES
 ignore
 Redundant UL NG-U UP TNL Information 
@@ -18155,6 +18340,13 @@ O
 UP Transport Layer Information Pair List
 9.3.2.11
 NG-RAN node endpoint of the NG-U transport bearer for delivery of redundant DL PDUs corresponding to the modified UPF endpoint(s) received in the UL NG-U UP TNL Modify List IE of the PDU Session Resource Modify Request Transfer IE in case of PDU session split. 
+YES
+ignore
+Secondary RAT Usage Information
+O
+
+9.3.1.114
+
 YES
 ignore
 
@@ -18654,14 +18846,14 @@ O
 
 UP Transport Layer Information
 9.3.2.2
-To deliver forwarded DL PDUs.
+To deliver forwarded DL PDUs per PDU session tunnel.
 -
 
 QoS Flow to be Forwarded List
 
 0..1
 
-QoS flows associated with the DL Forwarding UP TNL Information IE.
+
 -
 
 >QoS Flow to be Forwarded Item
@@ -18690,7 +18882,7 @@ O
 
 QoS Flow per TNL Information List
 9.3.2.1
-NG-RAN node endpoint to deliver forwarded DL PDUs for split PDU session, together with associated QoS flows to be forwarded.
+NG-RAN node endpoint to deliver forwarded DL PDUs for split PDU session tunnel, together with associated QoS flows to be forwarded.
 YES
 ignore
 UL Forwarding UP TNL Information
@@ -18706,13 +18898,21 @@ O
 
 UP Transport Layer Information List
 9.3.2.12
-NG-RAN node endpoint to deliver forwarded UL PDUs for split PDU session.
+NG-RAN node endpoint to deliver forwarded UL PDUs for split PDU session tunnel.
 YES
 reject
 Data Forwarding Response E-RAB List
 O
 
 9.3.1.121
+
+YES
+ignore
+QoS Flow Failed to Setup List
+O
+
+QoS Flow List with Cause
+9.3.1.13
 
 YES
 ignore
@@ -21154,7 +21354,8 @@ HandoverRequestAcknowledgeIEs NGAP-PROTOCOL-IES ::= {
 	{ ID id-PDUSessionResourceAdmittedList				CRITICALITY ignore	TYPE PDUSessionResourceAdmittedList					PRESENCE mandatory	}|
 	{ ID id-PDUSessionResourceFailedToSetupListHOAck	CRITICALITY ignore	TYPE PDUSessionResourceFailedToSetupListHOAck		PRESENCE optional		}|
 	{ ID id-TargetToSource-TransparentContainer			CRITICALITY reject	TYPE TargetToSource-TransparentContainer			PRESENCE mandatory	}|
-	{ ID id-CriticalityDiagnostics						CRITICALITY ignore	TYPE CriticalityDiagnostics								PRESENCE optional		},
+	{ ID id-CriticalityDiagnostics						CRITICALITY ignore	TYPE CriticalityDiagnostics								PRESENCE optional		}|
+	{ ID id-NPN-AccessInformation						CRITICALITY reject	TYPE NPN-AccessInformation								PRESENCE optional		},
 	...
 }
 
@@ -21268,7 +21469,8 @@ PathSwitchRequestAcknowledgeIEs NGAP-PROTOCOL-IES ::= {
 	{ ID id-PC5QoSParameters							CRITICALITY ignore	TYPE PC5QoSParameters									PRESENCE optional 	}|
 	{ ID id-CEmodeBrestricted							CRITICALITY ignore	TYPE CEmodeBrestricted								PRESENCE optional		}|
 	{ ID id-UE-UP-CIoT-Support							CRITICALITY ignore	TYPE UE-UP-CIoT-Support								PRESENCE optional		}|
-	{ ID id-UERadioCapabilityID							CRITICALITY reject	TYPE UERadioCapabilityID								PRESENCE optional		},
+	{ ID id-UERadioCapabilityID							CRITICALITY reject	TYPE UERadioCapabilityID								PRESENCE optional		}|
+	{ ID id-ManagementBasedMDTPLMNList					CRITICALITY ignore	TYPE MDTPLMNList										PRESENCE optional		},
 	...
 }
 
@@ -22673,6 +22875,7 @@ IMPORTS
 	id-EndpointIPAddressAndPort,
 	id-ExtendedPacketDelayBudget,
 	id-ExtendedRATRestrictionInformation,
+	id-ExtendedReportIntervalMDT,
 	id-ExtendedSliceSupportList,
 	id-ExtendedTAISliceSupportList,
 	id-ExtendedUEIdentityIndexValue,
@@ -22686,6 +22889,7 @@ IMPORTS
 	id-LocationReportingAdditionalInfo,
 	id-MaximumIntegrityProtectedDataRate-DL,
 	id-MDTConfiguration,
+	id-MicoAllPLMN,
 	id-NetworkInstance,
 	id-NID,
 	id-NPN-MobilityInformation,
@@ -22695,11 +22899,13 @@ IMPORTS
 	id-PagingAssisDataforCEcapabUE,
 	id-PagingeDRXInformation,
 	id-PDUSessionAggregateMaximumBitRate,
+	id-PduSessionExpectedUEActivityBehaviour,
 	id-PDUSessionResourceFailedToSetupListCxtFail,
 	id-PDUSessionResourceReleaseResponseTransfer,
 	id-PDUSessionType,
 	id-PSCellInformation,
 	id-QosFlowAddOrModifyRequestList,
+	id-QosFlowFailedToSetupList,
 	id-QosFlowFeedbackList,
 	id-QosFlowParametersList,
 	id-QosFlowSetupRequestList,
@@ -22721,6 +22927,8 @@ IMPORTS
 	id-SgNB-UE-X2AP-ID,
 	id-S-NSSAI,
 	id-SONInformationReport,
+	id-SourceNodeID,
+	id-SourceTNLAddrInfo,
 	id-TNLAssociationTransportLayerAddressNGRAN,
 	id-TargetRNC-ID,
 	id-TraceCollectionEntityURI,
@@ -23606,7 +23814,8 @@ CoreNetworkAssistanceInformationForInactive ::= SEQUENCE {
 CoreNetworkAssistanceInformationForInactive-ExtIEs NGAP-PROTOCOL-EXTENSION ::= {
 	{ ID id-PagingeDRXInformation				CRITICALITY ignore	EXTENSION PagingeDRXInformation					PRESENCE optional	}|
 	{ ID id-ExtendedUEIdentityIndexValue		CRITICALITY ignore	EXTENSION ExtendedUEIdentityIndexValue			PRESENCE optional	}|
-	{ ID id-UERadioCapabilityForPaging			CRITICALITY ignore	EXTENSION UERadioCapabilityForPaging			PRESENCE optional	},
+	{ ID id-UERadioCapabilityForPaging			CRITICALITY ignore	EXTENSION UERadioCapabilityForPaging			PRESENCE optional	}|
+	{ ID id-MicoAllPLMN							CRITICALITY ignore	EXTENSION MicoAllPLMN								PRESENCE optional	},
 	...
 }
 
@@ -23818,7 +24027,7 @@ DRBsSubjectToStatusTransferItem ::= SEQUENCE {
 }
 
 DRBsSubjectToStatusTransferItem-ExtIEs NGAP-PROTOCOL-EXTENSION ::= {
-	{ ID id-OldAssociatedQosFlowList-ULendmarkerexpected	CRITICALITY reject EXTENSION AssociatedQosFlowList	 PRESENCE optional },
+	{ ID id-OldAssociatedQosFlowList-ULendmarkerexpected	CRITICALITY ignore EXTENSION AssociatedQosFlowList	 PRESENCE optional },
 	...
 }
 
@@ -24514,7 +24723,8 @@ HandoverCommandTransfer-ExtIEs NGAP-PROTOCOL-EXTENSION ::= {
 	{ ID id-AdditionalDLForwardingUPTNLInformation		CRITICALITY ignore	EXTENSION QosFlowPerTNLInformationList			PRESENCE optional		}|
 	{ ID id-ULForwardingUP-TNLInformation				CRITICALITY reject	EXTENSION UPTransportLayerInformation			PRESENCE optional		}|
 	{ ID id-AdditionalULForwardingUPTNLInformation		CRITICALITY reject	EXTENSION UPTransportLayerInformationList		PRESENCE optional		}|
-	{ ID id-DataForwardingResponseERABList				CRITICALITY ignore	EXTENSION DataForwardingResponseERABList		PRESENCE optional		},
+	{ ID id-DataForwardingResponseERABList				CRITICALITY ignore	EXTENSION DataForwardingResponseERABList		PRESENCE optional		}|
+	{ ID id-QosFlowFailedToSetupList					CRITICALITY ignore	EXTENSION QosFlowListWithCause						PRESENCE optional		},
 	...
 }
 
@@ -24960,6 +25170,12 @@ MaximumIntegrityProtectedDataRate ::= ENUMERATED {
 	...
 }
 
+MicoAllPLMN ::= ENUMERATED {
+	true,
+	...
+}
+
+
 MICOModeIndication ::= ENUMERATED {
 	true,
 	...
@@ -25095,6 +25311,7 @@ M1PeriodicReporting ::= SEQUENCE {
 }
 
 M1PeriodicReporting-ExtIEs NGAP-PROTOCOL-EXTENSION ::= {
+	{ID id-ExtendedReportIntervalMDT		CRITICALITY ignore	EXTENSION ExtendedReportIntervalMDT		PRESENCE optional},
 	...
 }
 
@@ -25929,7 +26146,8 @@ PDUSessionResourceModifyResponseTransfer-ExtIEs NGAP-PROTOCOL-EXTENSION ::= {
 	{ ID id-RedundantDL-NGU-UP-TNLInformation				CRITICALITY ignore	EXTENSION UPTransportLayerInformation				PRESENCE optional	}|
 	{ ID id-RedundantUL-NGU-UP-TNLInformation				CRITICALITY ignore	EXTENSION UPTransportLayerInformation				PRESENCE optional	}|
 	{ ID id-AdditionalRedundantDLQosFlowPerTNLInformation	CRITICALITY ignore	EXTENSION QosFlowPerTNLInformationList				PRESENCE optional	}|
-	{ ID id-AdditionalRedundantNGU-UP-TNLInformation		CRITICALITY ignore	EXTENSION UPTransportLayerInformationPairList	PRESENCE optional	},
+	{ ID id-AdditionalRedundantNGU-UP-TNLInformation		CRITICALITY ignore	EXTENSION UPTransportLayerInformationPairList	PRESENCE optional	}|
+	{ ID id-SecondaryRATUsageInformation					CRITICALITY ignore	EXTENSION SecondaryRATUsageInformation				PRESENCE optional	},
 	...
 }
 
@@ -25986,7 +26204,8 @@ PDUSessionResourceModifyItemModReq ::= SEQUENCE {
 }
 
 PDUSessionResourceModifyItemModReq-ExtIEs NGAP-PROTOCOL-EXTENSION ::= {
-	{ID id-S-NSSAI		CRITICALITY reject	EXTENSION S-NSSAI		PRESENCE optional	},
+	{ ID id-S-NSSAI											CRITICALITY reject	EXTENSION S-NSSAI						PRESENCE optional	}|
+	{ ID id-PduSessionExpectedUEActivityBehaviour			CRITICALITY ignore	EXTENSION ExpectedUEActivityBehaviour	PRESENCE optional	},
 	...
 }
 
@@ -26174,6 +26393,7 @@ PDUSessionResourceSetupItemCxtReq ::= SEQUENCE {
 }
 
 PDUSessionResourceSetupItemCxtReq-ExtIEs NGAP-PROTOCOL-EXTENSION ::= {
+	{ ID id-PduSessionExpectedUEActivityBehaviour			CRITICALITY ignore	EXTENSION ExpectedUEActivityBehaviour	PRESENCE optional	},
 	...
 }
 
@@ -26201,6 +26421,7 @@ PDUSessionResourceSetupItemHOReq ::= SEQUENCE {
 }
 
 PDUSessionResourceSetupItemHOReq-ExtIEs NGAP-PROTOCOL-EXTENSION ::= {
+	{ ID id-PduSessionExpectedUEActivityBehaviour			CRITICALITY ignore	EXTENSION ExpectedUEActivityBehaviour	PRESENCE optional	},
 	...
 }
 
@@ -26216,6 +26437,7 @@ PDUSessionResourceSetupItemSUReq ::= SEQUENCE {
 }
 
 PDUSessionResourceSetupItemSUReq-ExtIEs NGAP-PROTOCOL-EXTENSION ::= {
+	{ ID id-PduSessionExpectedUEActivityBehaviour			CRITICALITY ignore	EXTENSION ExpectedUEActivityBehaviour	PRESENCE optional	},
 	...
 }
 
@@ -26306,6 +26528,7 @@ PDUSessionResourceSwitchedItem ::= SEQUENCE {
 }
 
 PDUSessionResourceSwitchedItem-ExtIEs NGAP-PROTOCOL-EXTENSION ::= {
+	{ ID id-PduSessionExpectedUEActivityBehaviour			CRITICALITY ignore	EXTENSION ExpectedUEActivityBehaviour	PRESENCE optional	},
 	...
 }
 
@@ -26507,7 +26730,8 @@ QosFlowInformationItem ::= SEQUENCE {
 }
 
 QosFlowInformationItem-ExtIEs NGAP-PROTOCOL-EXTENSION ::= {
-	{ID id-ULForwarding	CRITICALITY reject	EXTENSION ULForwarding	PRESENCE optional},
+	{ID id-ULForwarding			CRITICALITY ignore	EXTENSION ULForwarding			PRESENCE optional}|
+	{ID id-SourceTNLAddrInfo	CRITICALITY ignore	EXTENSION TransportLayerAddress	PRESENCE optional},
 	...
 }
 
@@ -26800,6 +27024,10 @@ ReportAmountMDT ::= ENUMERATED {
 ReportIntervalMDT ::= ENUMERATED {
 	ms120, ms240, ms480, ms640, ms1024, ms2048, ms5120, ms10240, min1, min6, min12, min30, min60
 } 
+
+ExtendedReportIntervalMDT ::= ENUMERATED {
+	ms20480, ms40960, ...
+}
 
 ResetType ::= CHOICE {
 	nG-Interface			ResetAll,
@@ -27128,8 +27356,18 @@ SourceNGRANNode-ToTargetNGRANNode-TransparentContainer ::= SEQUENCE {
 }
 
 SourceNGRANNode-ToTargetNGRANNode-TransparentContainer-ExtIEs NGAP-PROTOCOL-EXTENSION ::= {
-	{ ID id-SgNB-UE-X2AP-ID	CRITICALITY ignore	EXTENSION SgNB-UE-X2AP-ID 												PRESENCE optional		}|
-	{ ID id-UEHistoryInformationFromTheUE		CRITICALITY ignore	EXTENSION UEHistoryInformationFromTheUE		PRESENCE optional		},
+	{ ID id-SgNB-UE-X2AP-ID						CRITICALITY ignore	EXTENSION SgNB-UE-X2AP-ID 							PRESENCE optional		}|
+	{ ID id-UEHistoryInformationFromTheUE		CRITICALITY ignore	EXTENSION UEHistoryInformationFromTheUE		PRESENCE optional		}|
+	{ ID id-SourceNodeID						CRITICALITY ignore	EXTENSION SourceNodeID								PRESENCE optional		},
+	...
+}
+
+SourceNodeID ::= CHOICE {
+	sourceengNB-ID			GlobalGNB-ID,
+	choice-Extensions		ProtocolIE-SingleContainer { { SourceNodeID-ExtIEs} }
+}
+
+SourceNodeID-ExtIEs NGAP-PROTOCOL-IES ::= {
 	...
 }
 
@@ -27337,12 +27575,13 @@ TargetNGRANNode-ToSourceNGRANNode-TransparentContainer ::= SEQUENCE {
 }
 
 TargetNGRANNode-ToSourceNGRANNode-TransparentContainer-ExtIEs NGAP-PROTOCOL-EXTENSION ::= {
-	{ ID id-DAPSResponseInfoList						CRITICALITY reject	EXTENSION DAPSResponseInfoList	PRESENCE optional },
+	{ ID id-DAPSResponseInfoList						CRITICALITY ignore	EXTENSION DAPSResponseInfoList							PRESENCE optional }|
+	{ ID id-DirectForwardingPathAvailability			CRITICALITY ignore	EXTENSION DirectForwardingPathAvailability			PRESENCE optional },
 	...
 }
 
 TargetNGRANNode-ToSourceNGRANNode-FailureTransparentContainer ::= SEQUENCE {
-	cell-CAGInformation		Cell-CAGInformation,
+	cell-CAGInformation		Cell-CAGInformation			OPTIONAL,
 	iE-Extensions			ProtocolExtensionContainer { {TargetNGRANNode-ToSourceNGRANNode-FailureTransparentContainer-ExtIEs} } OPTIONAL,
 	...
 }
@@ -27807,6 +28046,7 @@ UPTransportLayerInformationItem ::= SEQUENCE {
 }
 
 UPTransportLayerInformationItem-ExtIEs NGAP-PROTOCOL-EXTENSION ::= {
+	{ ID id-CommonNetworkInstance				CRITICALITY ignore	EXTENSION  CommonNetworkInstance						PRESENCE optional		},
 	...
 }
 
@@ -28547,6 +28787,12 @@ maxProtocolIEs							INTEGER ::= 65535
 	id-QosFlowFeedbackList									ProtocolIE-ID ::= 278
 	id-BurstArrivalTimeDownlink								ProtocolIE-ID ::= 279
 	id-ExtendedUEIdentityIndexValue							ProtocolIE-ID ::= 280
+	id-PduSessionExpectedUEActivityBehaviour					ProtocolIE-ID ::= 281
+	id-MicoAllPLMN											ProtocolIE-ID ::= 282
+	id-QosFlowFailedToSetupList								ProtocolIE-ID ::= 283
+	id-SourceTNLAddrInfo										ProtocolIE-ID ::= 284
+	id-ExtendedReportIntervalMDT							ProtocolIE-ID ::= 285
+	id-SourceNodeID											ProtocolIE-ID ::= 286
 
 END
 -- ASN1STOP
@@ -30189,4 +30435,204 @@ RP-211324
 F
 Correction on Extended UE Identity Index Value
 16.6.0
+2021-09
+RP-93-e
+RP-211882
+0376
+7
+F
+NAS Non-Delivery
+16.7.0
+2021-09
+RP-93-e
+RP-211881
+0431
+4
+F
+Correction on Expected UE activity behaviour
+16.7.0
+2021-09
+RP-93-e
+RP-211881
+0626
+
+F
+Correction of MICO mode
+16.7.0
+2021-09
+RP-93-e
+RP-211876
+0631
+-
+F
+Correcting Presence of the Cell CAG Information IE in ASN.1
+16.7.0
+2021-09
+RP-93-e
+RP-211882
+0633
+1
+A
+Deactivation of the MICO mode indication
+16.7.0
+2021-09
+RP-93-e
+RP-211881
+0637
+1
+F
+Correction of NAS PDU Non Delivery
+16.7.0
+2021-09
+RP-93-e
+RP-211882
+0641
+1
+F
+On IEs with reject criticality in the source and target transparent container
+16.7.0
+2021-09
+RP-93-e
+RP-211881
+0645
+1
+F
+Missing QoS Flows not Admitted List in HANDOVER COMMAND  
+16.7.0
+2021-09
+RP-93-e
+RP-211883
+0646
+-
+F
+Clarification on the specified maximum length of the Routing ID Octet String
+16.7.0
+2021-09
+RP-93-e
+RP-211882
+0660
+
+F
+Correction CR on Network instance 
+16.7.0
+2021-12
+RP-94-e
+RP-212863
+0663
+1
+F
+Correction of Data Volume Report
+16.8.0
+2021-12
+RP-94-e
+RP-212863
+0671
+1
+F
+Adding reference for coding of Common Network Instance
+16.8.0
+2021-12
+RP-94-e
+RP-212869
+0679
+1
+F
+Clarification of UE with CAG information in UE subscription
+16.8.0
+2021-12
+RP-94-e
+RP-212868
+0688
+1
+F
+(NGAP CR) support the UE Radio Capability for Paging in RACS context 
+16.8.0
+2021-12
+RP-94-e
+RP-212871
+0693
+1
+F
+Redundant network instance for split PDU session
+16.8.0
+2021-12
+RP-94-e
+RP-212864
+0713
+1
+F
+Allocation of TNL addresses for intra-system data forwarding 
+16.8.0
+2022-03
+RP-95-e
+RP-220278
+0619
+3
+F
+Support of dynamic ACL during handover and dual connectivity
+16.9.0
+2022-03
+RP-95-e
+RP-220243
+0691
+2
+F
+Direct data forwarding for 4G to 5G handover
+16.9.0
+2022-03
+RP-95-e
+RP-220280
+0727
+1
+F
+Propagation of user consent related information during Xn inter-PLMN handover
+16.9.0
+2022-03
+RP-95-e
+RP-220278
+0735
+
+F
+Correction on PDU Session Resource Setup procedure
+16.9.0
+2022-03
+RP-95-e
+RP-220279
+0742
+2
+F
+Correction of SNPN setup failure
+16.9.0
+2022-03
+RP-95-e
+RP-220280
+0746
+1
+F
+Value range misalignment for MDT M1, M8 and M9 configuration
+16.9.0
+2022-03
+RP-95-e
+RP-220279
+0751
+1
+F
+Clarification of the usage of an IE in case of DAPS HO
+16.9.0
+2022-03
+RP-95-e
+RP-220277
+0752
+1
+F
+Correction of intra-system Data Forwarding
+16.9.0
+2022-03
+RP-95-e
+RP-220243
+0760
+2
+F
+Direct data forwarding for mobility between DC and SA
+16.9.0
 

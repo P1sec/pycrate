@@ -159,7 +159,7 @@ maxnoofWLANName							INTEGER ::= 4
 maxnoofConnectedengNBs					INTEGER ::= 256
 maxnoofPC5QoSFlows 						INTEGER ::= 2048
 maxnooffrequencies						INTEGER ::= 64
-maxNARFCN								INTEGER ::= 32
+maxNARFCN								INTEGER ::= 3279165
 maxRS-IndexCellQual						INTEGER ::= 16
 
 
@@ -476,5 +476,7 @@ id-WUS-Assistance-Information						ProtocolIE-ID ::= 323
 id-NB-IoT-PagingDRX									ProtocolIE-ID ::= 324
 id-TraceCollectionEntityURI							ProtocolIE-ID ::= 325
 id-EmergencyIndicator								ProtocolIE-ID ::= 326
+id-UERadioCapabilityForPaging-NR-Format 			ProtocolIE-ID ::= 327
+id-SourceTransportLayerAddress						ProtocolIE-ID ::= 328
 
 END

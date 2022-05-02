@@ -114,7 +114,9 @@ IMPORTS
 	ExtendedSliceSupportList,
 	TransportLayerAddress,
 	AdditionalHandoverInfo,
-	Extended-NR-CGI-Support-List
+	Extended-NR-CGI-Support-List,
+	DirectForwardingPathAvailability,
+	IAB-Donor-CU-UPPSKInfo-Item
 
 
 FROM E1AP-IEs
@@ -233,13 +235,16 @@ FROM E1AP-Containers
 	id-ExtendedSliceSupportList,
 	id-AdditionalHandoverInfo,
 	id-Extended-NR-CGI-Support-List,
+	id-DirectForwardingPathAvailability,
+	id-IAB-Donor-CU-UPPSKInfo,
 
 	maxnoofErrors,
 	maxnoofSPLMNs,
 	maxnoofDRBs,
 	maxnoofTNLAssociations,
 	maxnoofIndividualE1ConnectionsToReset,
-	maxnoofTNLAddresses
+	maxnoofTNLAddresses,
+	maxnoofPSKs
 
 
 FROM E1AP-Constants;
@@ -704,7 +709,9 @@ BearerContextSetupRequestIEs E1AP-PROTOCOL-IES ::= {
 	{ ID id-NPNContextInfo						CRITICALITY reject	TYPE NPNContextInfo									PRESENCE optional}|
 	{ ID id-ManagementBasedMDTPLMNList			CRITICALITY	ignore	TYPE MDTPLMNList									PRESENCE optional}|
 	{ ID id-CHOInitiation						CRITICALITY reject	TYPE CHOInitiation									PRESENCE optional }|
-	{ ID id-AdditionalHandoverInfo				CRITICALITY ignore	TYPE AdditionalHandoverInfo							PRESENCE optional },
+	{ ID id-AdditionalHandoverInfo				CRITICALITY ignore	TYPE AdditionalHandoverInfo							PRESENCE optional }|
+	{ ID id-DirectForwardingPathAvailability	CRITICALITY ignore	TYPE DirectForwardingPathAvailability			PRESENCE optional }|
+	{ ID id-gNB-CU-UP-UE-E1AP-ID				CRITICALITY ignore	TYPE GNB-CU-UP-UE-E1AP-ID							PRESENCE optional },
 	...
 }
 
@@ -1125,7 +1132,8 @@ DLDataNotification ::= SEQUENCE {
 DLDataNotificationIEs E1AP-PROTOCOL-IES ::= {
 	{ ID id-gNB-CU-CP-UE-E1AP-ID			CRITICALITY reject	TYPE GNB-CU-CP-UE-E1AP-ID			PRESENCE mandatory }|
 	{ ID id-gNB-CU-UP-UE-E1AP-ID			CRITICALITY reject	TYPE GNB-CU-UP-UE-E1AP-ID			PRESENCE mandatory }|
-	{ ID id-PPI							CRITICALITY ignore	TYPE PPI							PRESENCE optional },
+	{ ID id-PPI								CRITICALITY ignore	TYPE PPI							PRESENCE optional }|
+	{ ID id-PDU-Session-To-Notify-List		CRITICALITY ignore	TYPE PDU-Session-To-Notify-List		PRESENCE optional },
 	...
 }
 
@@ -1530,5 +1538,30 @@ EarlyForwardingSNTransferIEs E1AP-PROTOCOL-IES ::= {
 	{ ID id-DRBs-Subject-To-Early-Forwarding-List		CRITICALITY reject	 TYPE DRBs-Subject-To-Early-Forwarding-List		PRESENCE mandatory },
 	...
 }
+
+-- **************************************************************
+--
+-- IAB PSK NOTIFICATION
+--
+-- **************************************************************
+
+-- **************************************************************
+--
+-- IAB PSK Notification
+--
+-- **************************************************************
+
+IABPSKNotification ::= SEQUENCE {
+	protocolIEs			ProtocolIE-Container       { { IABPSKNotificationIEs } },
+	...
+}
+
+IABPSKNotificationIEs E1AP-PROTOCOL-IES ::= {
+	{ ID id-TransactionID					CRITICALITY reject	TYPE TransactionID					PRESENCE mandatory }|
+	{ ID id-IAB-Donor-CU-UPPSKInfo			CRITICALITY reject	TYPE IAB-Donor-CU-UPPSKInfo			PRESENCE mandatory },
+	...
+}
+
+IAB-Donor-CU-UPPSKInfo	::= SEQUENCE (SIZE(1.. maxnoofPSKs)) OF IAB-Donor-CU-UPPSKInfo-Item
 
 END
