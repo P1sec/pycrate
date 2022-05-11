@@ -45,14 +45,26 @@ def pythonize_name(name):
     return name.replace('-', '_')
 
 
-__PLMN = TS24008_IE.PLMN()
 def plmn_buf_to_str(buf):
-    __PLMN.from_bytes(buf)
-    return __PLMN.decode()
+    d = []
+    [d.extend([0x30 + (b&0xf), 0x30+(b>>4)]) for b in buf]
+    if d[3] == 0x3f:
+        # filler, 5 digits MCC MNC
+        del d[3]
+    return bytes(d).decode()
 
 def plmn_str_to_buf(s):
-    __PLMN.encode(s)
-    return __PLMN.to_bytes()
+    s = s.encode()
+    if len(s) == 5:
+        return bytes([
+            ((s[1]-0x30)<<4) + (s[0]-0x30),
+                        0xf0 + (s[2]-0x30),
+            ((s[4]-0x30)<<4) + (s[3]-0x30)])
+    else:
+        return bytes([
+            ((s[1]-0x30)<<4) + (s[0]-0x30),
+            ((s[3]-0x30)<<4) + (s[2]-0x30),
+            ((s[5]-0x30)<<4) + (s[4]-0x30)])
 
 
 __IMSI = TS24008_IE.ID()
