@@ -42,6 +42,8 @@ It is also supporting alternative Python engine such as [pypy](http://pypy.org/)
 It is regularly tested both on Linux and Windows, and should actually work on any
 operating system which has [r|d]ecent Python support (as in 2017, 2018 and more...).
 
+Starting from 2022, full Python2 support will not be abandonned slowly but progressively.
+
 
 Dependencies
 ------------
