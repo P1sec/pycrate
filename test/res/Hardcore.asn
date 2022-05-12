@@ -264,28 +264,35 @@ BEGIN
     bool BOOLEAN
     }
   
+  Recur3 ::= SEQUENCE {
+    /*int INTEGER OPTIONAL,*/
+    recur Recur3 OPTIONAL,
+    wrap OCTET STRING (CONTAINING Recur3) OPTIONAL
+    }
   
   -- recursive parameterized type, not supported yet
---  Seq0 {INTEGER:lo, INTEGER:hi} ::= SEQUENCE {
---    int INTEGER (lo..hi, ...)
---    seq Seq0 {lo, hi} OPTIONAL
---    }
---  Seq1 ::= Seq0 {0, 100}
-  
+  /*
+  Seq0 {INTEGER:lo, INTEGER:hi} ::= SEQUENCE {
+    int INTEGER (lo..hi, ...)
+    seq Seq0 {lo, hi} OPTIONAL
+    }
+  Seq1 ::= Seq0 {0, 100}
+  */
   
   -- (circular) recursive parameterized type, not supported yet
---  Seq2 {INTEGER:lo, INTEGER:hi} ::= SEQUENCE {
---    int2 INTEGER (lo..hi, ...),
---    seq3 Seq3 {lo, hi} OPTIONAL
---    }
---  Seq3 {INTEGER:lo, INTEGER:hi} ::= SEQUENCE {
---    int3 INTEGER (lo..hi),
---    bool3 BOOLEAN,
---    seq2 Seq2 {lo, hi} OPTIONAL,
---    ...
---    }
---  Seq4 ::= Seq3 {0, 100}
-  
+  /*
+  Seq2 {INTEGER:lo, INTEGER:hi} ::= SEQUENCE {
+    int2 INTEGER (lo..hi, ...),
+    seq3 Seq3 {lo, hi} OPTIONAL
+    }
+  Seq3 {INTEGER:lo, INTEGER:hi} ::= SEQUENCE {
+    int3 INTEGER (lo..hi),
+    bool3 BOOLEAN,
+    seq2 Seq2 {lo, hi} OPTIONAL,
+    ...
+    }
+  Seq4 ::= Seq3 {0, 100}
+  */
   
   -- ASN.1 wrapper objects
   ASNWrapper ::= SEQUENCE {
