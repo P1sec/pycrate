@@ -1295,13 +1295,12 @@ class _CONSTRUCT(ASN1Obj):
             if val_cp:
                 for ident, comp_val in val_cp.items():
                     sval['_ext_%s' % ident] = comp_val
+            self._val = sval
             try:
                 self._safechk_val(sval, rec=False)
             except Exception as err:
                 raise(ASN1JERDecodeErr('{0}: invalid json value, {1}'\
                       .format(self.fullname(), err)))
-            else:
-                self._val = sval
         
         def _to_jval(self):
             if not self._val:
@@ -1932,11 +1931,9 @@ Specific attributes:
             self._val = val
             return txt[1:].strip()
         elif self._ext is not None:
-            raise(ASN1ASNDecodeErr('{0}: unknown extension, {1!r}'\
-                  .format(self.fullname(), txt)))
+            raise(ASN1ASNDecodeErr('{0}: unknown extension, {1!r}'.format(self.fullname(), txt)))
         else:
-            raise(ASN1ASNDecodeErr('{0}: invalid text, {1!r}'\
-                  .format(self.fullname(), txt))) 
+            raise(ASN1ASNDecodeErr('{0}: invalid text, {1!r}'.format(self.fullname(), txt))) 
     
     ###
     # conversion between internal value and ASN.1 BER encoding
@@ -2296,9 +2293,10 @@ Specific attributes:
                   .format(self.fullname(), txt)))
         #
         # 1) init local value
-        txt, self._val = txt[1:].strip(), {}
+        txt, val = txt[1:].strip(), {}
         # empty set
         if txt[0:1] == '}':
+            self._val = val
             return txt[1:].strip()
         try:
             t_ident, t_rest = txt.split(' ', 1)
@@ -2318,7 +2316,7 @@ Specific attributes:
             Comp._parent = self
             txt = Comp._from_asn1(t_rest)
             Comp._parent = _par
-            self._val[t_ident] = Comp._val
+            val[t_ident] = Comp._val
             if txt[0:1] == ',':
                 txt = txt[1:].strip()
                 try:
@@ -2330,8 +2328,9 @@ Specific attributes:
                 break
         #
         # 3) ensure all expected values have been provided
+        self._val = val
         try:
-            self._safechk_valcompl(self._val)
+            self._safechk_valcompl(val)
         except Exception as err:
             raise(ASN1BERDecodeErr(err))
         return txt[1:].strip()
@@ -2347,7 +2346,7 @@ Specific attributes:
                   .format(self.fullname())))
         #
         # 1) init the local value and structure
-        self._val, TLV = {}, []
+        sval, TLV = {}, []
         #
         # 2) get over all tlv within TLV 1 by 1
         #    check if it corresponds to the a component of the SET
@@ -2374,7 +2373,7 @@ Specific attributes:
                         Comp[i] = _par[i]
                     for ident in reversed(path[1:]):
                         val = (ident, val)
-                    self._val[path[0]] = val
+                    sval[path[0]] = val
                     TLV.append( Comp[-1]._struct )
                 else:
                     # select tagged component
@@ -2385,7 +2384,7 @@ Specific attributes:
                     Comp._from_ber_ws(char, [comp_tlv])
                     # restore parent and set value
                     Comp._parent = _par
-                    self._val[path] = Comp._val
+                    sval[path] = Comp._val
                     TLV.append( Comp._struct )
             elif (cl, pc, tval, lval) == (0, 0, 0, 0):
                 # EOC marker
@@ -2413,14 +2412,15 @@ Specific attributes:
                 else:
                     raise(ASN1BERDecodeErr('{0}: invalid SEQUENCE extended tag and length, {1!r}, {2!r}'\
                           .format(self.fullname(), (cl, pc, tval), lval)))
-                self._val[ident] = val
+                sval[ident] = val
             else:
                 raise(ASN1BERDecodeErr('{0}: invalid SET tag according to the content, {1!r}'\
                       .format(self.fullname(), (cl, tval))))
         #
         # 3) ensure all expected values have been provided
+        self._val = sval
         try:
-            self._safechk_valcompl(self._val)
+            self._safechk_valcompl(sval)
         except Exception as err:
             raise(ASN1BERDecodeErr(err))
         #
@@ -2433,7 +2433,7 @@ Specific attributes:
                   .format(self.fullname())))
         #
         # 1) init the local value and structure
-        self._val= {}
+        sval= {}
         #
         # 2) get over all tlv within TLV 1 by 1
         #    check if it corresponds to the a component of the SET
@@ -2459,7 +2459,7 @@ Specific attributes:
                         Comp[i] = _par[i]
                     for ident in reversed(path[1:]):
                         val = (ident, val)
-                    self._val[path[0]] = val
+                    sval[path[0]] = val
                 else:
                     # select tagged component
                     Comp = self._cont[path]
@@ -2469,7 +2469,7 @@ Specific attributes:
                     Comp._from_ber(char, [comp_tlv])
                     # restore parent and set value
                     Comp._parent = _par
-                    self._val[path] = Comp._val
+                    sval[path] = Comp._val
             elif (cl, pc, tval, lval) == (0, 0, 0, 0):
                 # EOC marker
                 if comp_tlv != tlv[-1]:
@@ -2491,14 +2491,15 @@ Specific attributes:
                 else:
                     raise(ASN1BERDecodeErr('{0}: invalid SEQUENCE extended tag and length, {1!r}, {2!r}'\
                           .format(self.fullname(), (cl, pc, tval), lval)))
-                self._val[ident] = val
+                sval[ident] = val
             else:
                 raise(ASN1BERDecodeErr('{0}: invalid SET tag according to the content, {1!r}'\
                       .format(self.fullname(), (cl, tval))))
         #
         # 3) ensure all expected values have been provided
+        self._val = sval
         try:
-            self._safechk_valcompl(self._val)
+            self._safechk_valcompl(sval)
         except Exception as err:
             raise(ASN1BERDecodeErr(err))
 
@@ -2738,14 +2739,15 @@ class _CONSTRUCT_OF(ASN1Obj):
                     # 3) size has a single possible size
                     ldet = self._const_sz.ub
             if ldet is not None:
-                self._val = []
+                val = []
                 _par = self._cont._parent
                 self._cont._parent = self
                 for i in range(ldet):
                     self._cont._from_per_ws(char)
                     GEN.append(self._cont._struct)
-                    self._val.append(self._cont._val)
+                    val.append(self._cont._val)
                 self._cont._parent = _par
+                self._val    = val
                 self._struct = Envelope(self._name, GEN=tuple(GEN))
                 return
         # 4) size is semi-constrained or has no constraint
@@ -2760,7 +2762,7 @@ class _CONSTRUCT_OF(ASN1Obj):
             GEN.extend( ASN1CodecPER.decode_pad_ws(char) )
         ldet, _gen = ASN1CodecPER.decode_count_ws(char)
         GEN.extend(_gen)
-        self._val, L = [], ldet
+        val, L = [], ldet
         _par = self._cont._parent
         self._cont._parent = self
         while ldet in (65536, 49152, 32768, 16384):
@@ -2768,7 +2770,7 @@ class _CONSTRUCT_OF(ASN1Obj):
             for i in range(ldet):
                 self._cont._from_per_ws(char)
                 GEN.append(self._cont._struct)
-                self._val.append(self._cont._val)
+                val.append(self._cont._val)
             if ASN1CodecPER.ALIGNED and ASN1CodecPER._off[-1] % 8:
                 GEN.extend( ASN1CodecPER.decode_pad_ws(char) )
             ldet, _gen = ASN1CodecPER.decode_count_ws(char)
@@ -2779,8 +2781,9 @@ class _CONSTRUCT_OF(ASN1Obj):
         for i in range(ldet):
             self._cont._from_per_ws(char)
             GEN.append(self._cont._struct)
-            self._val.append(self._cont._val)
+            val.append(self._cont._val)
         self._cont._parent = _par
+        self._val    = val
         self._struct = Envelope(self._name, GEN=tuple(GEN))
     
     def _from_per(self, char):
@@ -2813,13 +2816,14 @@ class _CONSTRUCT_OF(ASN1Obj):
                     # 3) size has a single possible size
                     ldet = self._const_sz.ub
             if ldet is not None:
-                self._val = []
+                val = []
                 _par = self._cont._parent
                 self._cont._parent = self
                 for i in range(ldet):
                     self._cont._from_per(char)
-                    self._val.append(self._cont._val)
+                    val.append(self._cont._val)
                 self._cont._parent = _par
+                self._val = val
                 return
         # 4) size is semi-constrained or has no constraint
         # decoded as unconstrained
@@ -2832,14 +2836,14 @@ class _CONSTRUCT_OF(ASN1Obj):
         if ASN1CodecPER.ALIGNED and ASN1CodecPER._off[-1] % 8:
             ASN1CodecPER.decode_pad(char)
         ldet = ASN1CodecPER.decode_count(char)
-        self._val, L = [], ldet
+        val, L = [], ldet
         _par = self._cont._parent
         self._cont._parent = self
         while ldet in (65536, 49152, 32768, 16384):
             # requires defragmentation
             for i in range(ldet):
                 self._cont._from_per(char)
-                self._val.append(self._cont._val)
+                val.append(self._cont._val)
             if ASN1CodecPER.ALIGNED and ASN1CodecPER._off[-1] % 8:
                 ASN1CodecPER.decode_pad(char)
             ldet = ASN1CodecPER.decode_count(char)
@@ -2848,8 +2852,9 @@ class _CONSTRUCT_OF(ASN1Obj):
                 raise(ASN1PERDecodeErr('too much fragments, {0!r}'.format(L)))
         for i in range(ldet):
             self._cont._from_per(char)
-            self._val.append(self._cont._val)
+            val.append(self._cont._val)
         self._cont._parent = _par
+        self._val = val
     
     def _to_per_ws(self):
         GEN, ldet = [], len(self._val)
@@ -3055,7 +3060,7 @@ class _CONSTRUCT_OF(ASN1Obj):
                   .format(self.fullname())))
         #
         # 1) init the local value
-        Comp, self._val, TLV = self._cont, [], []
+        Comp, val, TLV = self._cont, [], []
         _par = Comp._parent
         Comp._parent = self
         #
@@ -3071,10 +3076,11 @@ class _CONSTRUCT_OF(ASN1Obj):
                 break
             else:
                 Comp._from_ber_ws(char, [comp_tlv])
-                self._val.append( Comp._val )
+                val.append( Comp._val )
                 TLV.append( Comp._struct )
         #
         Comp._parent = _par
+        self._val = val
         return Envelope('V', GEN=tuple(TLV))
     
     def _decode_ber_cont(self, char, tlv):
@@ -3084,7 +3090,7 @@ class _CONSTRUCT_OF(ASN1Obj):
                   .format(self.fullname())))
         #
         # 1) init the local value
-        Comp, self._val = self._cont, []
+        Comp, val = self._cont, []
         _par = Comp._parent
         Comp._parent = self
         #
@@ -3099,9 +3105,10 @@ class _CONSTRUCT_OF(ASN1Obj):
                 break
             else:
                 Comp._from_ber(char, [comp_tlv])
-                self._val.append( Comp._val )
+                val.append( Comp._val )
         #
         Comp._parent = _par
+        self._val = val
     
     def _encode_ber_cont_ws(self):
         Comp, TLV = self._cont, []
@@ -3187,11 +3194,12 @@ class _CONSTRUCT_OF(ASN1Obj):
                       .format(self.fullname(), val)))
             _par = self._cont._parent
             self._cont._parent = self
-            self._val = []
+            sval = []
             for v in val:
                 self._cont._from_jval(v)
-                self._val.append(self._cont._val)
+                sval.append(self._cont._val)
             self._cont._parent = _par
+            self._val = sval
         
         def _to_jval(self):
             if not self._val:
@@ -3204,56 +3212,53 @@ class _CONSTRUCT_OF(ASN1Obj):
                     ret.append( self._cont._to_jval() )
                 self._cont._parent = _par
                 return ret
-
+    
     ###
     # conversion between internal value and ASN.1 OER/COER encoding
     ###
-
+    
     def _to_oer(self):
         GEN, ldet = [], len(self._val)
         l_size = uint_bytelen(ldet)
         GEN.extend(ASN1CodecOER.encode_length_determinant(l_size))
         GEN.append( (T_UINT, ldet, l_size*8) )
-
+        
         # Iterate over items
         Comp = self._cont
         _par = Comp._parent
         Comp._parent = self
-
+        
         for val in self._val:
             Comp._val = val
             GEN.extend(Comp._to_oer())
-
+        
         Comp._parent = _par
-
         return GEN
-
+    
     def _to_oer_ws(self):
         GEN, ldet = [], len(self._val)
         l_size = uint_bytelen(ldet)
         GEN.append(ASN1CodecOER.encode_length_determinant_ws(l_size))
         GEN.append(Uint('Quantity', val=ldet, bl=l_size * 8))
-
         GEN = [Envelope('Quantity-field', GEN=tuple(GEN))]
-
+        
         # Iterate over items
         Comp = self._cont
         _par = Comp._parent
         Comp._parent = self
-
+        
         for val in self._val:
             Comp._val = val
             GEN.append(Comp._to_oer_ws())
-
+        
         Comp._parent = _par
-
         self._struct = Envelope(self._name, GEN=tuple(GEN))
         return self._struct
-
+    
     def _from_oer(self, char):
         l_size = ASN1CodecOER.decode_length_determinant(char)
         ldet = char.get_uint(l_size*8)
-
+        
         Comp = self._cont
         _par = Comp._parent
         Comp._parent = self
@@ -3262,11 +3267,10 @@ class _CONSTRUCT_OF(ASN1Obj):
             for i in range(ldet):
                 Comp._from_oer(char)
                 val.append(Comp._val)
-
+        
         Comp._parent = _par
-
         self._val = val
-
+    
     def _from_oer_ws(self, char):
         GEN = []
         l_size, l_size_struct = ASN1CodecOER.decode_length_determinant_ws(char)
@@ -3275,9 +3279,8 @@ class _CONSTRUCT_OF(ASN1Obj):
         ldet_struct._from_char(char)
         ldet = ldet_struct.get_val()
         GEN.append(ldet_struct)
-
         GEN = [Envelope('Quantity-field', GEN=tuple(GEN))]
-
+        
         Comp = self._cont
         _par = Comp._parent
         Comp._parent = self
@@ -3287,9 +3290,8 @@ class _CONSTRUCT_OF(ASN1Obj):
                 Comp._from_oer_ws(char)
                 GEN.append(Comp._struct)
                 val.append(Comp._val)
-
+        
         Comp._parent = _par
-
         self._struct = Envelope(self._name, GEN=tuple(GEN))
         self._val = val
 
