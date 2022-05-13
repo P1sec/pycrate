@@ -427,6 +427,7 @@ class L1CTLDataReq(Envelope):
 class L1CTL_H0(Envelope):
     _GEN = (
         ARFCNBand('ARFCN'),
+        Buf('Pad', bl=138 * 8, rep=REPR_HEX)
         )
 
 
