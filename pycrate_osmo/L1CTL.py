@@ -444,6 +444,7 @@ class L1CTL_H1(Envelope):
 
 class L1CTLDMEstReq(Envelope):
     _GEN = (
+        L1CTLInfoUL(),
         Uint8('TSC'),
         Uint8('H'),
         Alt('L1CTL_H', GEN={
@@ -458,6 +459,7 @@ class L1CTLDMEstReq(Envelope):
 
 class L1CTLDMFreqReq(Envelope):
     _GEN = (
+        L1CTLInfoUL(),
         Uint16('FN'),
         Uint8('TSC'),
         Uint8('H'),
@@ -472,6 +474,7 @@ class L1CTLDMFreqReq(Envelope):
 # SIM auth computation
 class L1CTLCryptoReq(Envelope):
     _GEN = (
+        L1CTLInfoUL(),
         Uint8('Algo'),
         Uint8('KeyLen'),
         Buf('Key', rep=REPR_HEX)
@@ -479,8 +482,8 @@ class L1CTLCryptoReq(Envelope):
     
     def __init__(self, *args, **kwargs):
         Envelope.__init__(self, *args, **kwargs)
-        self[1].set_valauto(lambda: self[2].get_len())
-        self[2].set_blauto(lambda: self[1].get_val()<<3)
+        self[2].set_valauto(lambda: self[3].get_len())
+        self[3].set_blauto(lambda: self[2].get_val()<<3)
 
 
 # power measurement
