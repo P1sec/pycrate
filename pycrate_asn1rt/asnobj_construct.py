@@ -1835,22 +1835,21 @@ Specific attributes:
     
     def _from_asn1(self, txt):
         if hasattr(self, '_gext'):
-            self._val = {}
+            val = {}
         else:
             if txt[0:1] != '{':
-                raise(ASN1ASNDecodeErr('{0}: invalid text, {1!r}'\
-                      .format(self.fullname(), txt)))
-            txt, self._val = txt[1:].strip(), {}
+                raise(ASN1ASNDecodeErr('{0}: invalid text, {1!r}'.format(self.fullname(), txt)))
+            txt, val = txt[1:].strip(), {}
         done = False if self._root_mand else True
         # empty sequence
         if done and txt[0:1] == '}':
+            self._val = val
             return txt[1:].strip()
         try:
             t_ident, t_rest = txt.split(' ', 1)
         except Exception:
-            raise(ASN1ASNDecodeErr('{0}: invalid text, {1!r}'\
-                  .format(self.fullname(), txt)))
-        val = self._val
+            raise(ASN1ASNDecodeErr('{0}: invalid text, {1!r}'.format(self.fullname(), txt)))
+        #
         # root part
         for ident in self._root:
             if not done and ident == self._root_mand[-1]:
@@ -1876,8 +1875,7 @@ Specific attributes:
                         else:
                             return txt[1:].strip()
                     else:
-                        raise(ASN1ASNDecodeErr(
-                              '{0}: missing mandatory value text, {1!r}'\
+                        raise(ASN1ASNDecodeErr('{0}: missing mandatory value text, {1!r}'\
                               .format(self.fullname(), txt)))
                 else:
                     raise(ASN1ASNDecodeErr('{0}: invalid text, {1!r}'\
@@ -1889,6 +1887,7 @@ Specific attributes:
         if hasattr(self, '_gext'):
             self._val = val
             return ', ' + txt
+        #
         # ext part
         if self._ext:
             i = 0
@@ -1930,6 +1929,7 @@ Specific attributes:
                         i += 1      
         # end of content
         if txt[0:1] == '}':
+            self._val = val
             return txt[1:].strip()
         elif self._ext is not None:
             raise(ASN1ASNDecodeErr('{0}: unknown extension, {1!r}'\
@@ -1949,13 +1949,14 @@ Specific attributes:
                   .format(self.fullname())))
         #
         # 1) init the local value and structure
-        self._val, TLV, ind, eoc = {}, [], 0, False
+        sval, TLV, ind, eoc = {}, [], 0, False
         if not tlv:
             # empty tlv, ensure there is no mandatory components
             if self._root_mand:
                 raise(ASN1BERDecodeErr('{0}: missing mandatory component, {1!r}'\
                       .format(self.fullname(), self._root_mand)))
             else:
+                self._val = sval
                 return Envelope('V', GEN=tuple(TLV))
         #
         Tag, cl, pc, tval, Len, lval = tlv[ind][0:6]
@@ -1997,7 +1998,7 @@ Specific attributes:
                 Comp._parent = self
                 Comp._from_ber_ws(char, [tlv[ind]])
                 Comp._parent = _par
-                self._val[Comp._name] = Comp._val
+                sval[Comp._name] = Comp._val
                 TLV.append(Comp._struct)
                 dec.append(Comp._name)
                 # get next tlv
@@ -2047,9 +2048,10 @@ Specific attributes:
                 else:
                     raise(ASN1BERDecodeErr('{0}: invalid SEQUENCE extended tag and length, {1!r}, {2!r}'\
                           .format(self.fullname(), (cl, pc, tval), lval)))
-                self._val[ident] = val
+                sval[ident] = val
             ind += 1
         #
+        self._val = sval
         return Envelope('V', GEN=tuple(TLV))
     
     def _decode_ber_cont(self, char, tlv):
@@ -2059,13 +2061,14 @@ Specific attributes:
                   .format(self.fullname())))
         #
         # 1) init the local value and structure
-        self._val, ind, eoc = {}, 0, False
+        sval, ind, eoc = {}, 0, False
         if not tlv:
             # empty tlv, ensure there is no mandatory components
             if self._root_mand:
                 raise(ASN1BERDecodeErr('{0}: missing mandatory component, {1!r}'\
                       .format(self.fullname(), self._root_mand)))
             else:
+                self._val = sval
                 return
         #
         cl, pc, tval, lval = tlv[ind][0:4]
@@ -2106,7 +2109,7 @@ Specific attributes:
                 Comp._parent = self
                 Comp._from_ber(char, [tlv[ind]])
                 Comp._parent = _par
-                self._val[Comp._name] = Comp._val
+                sval[Comp._name] = Comp._val
                 dec.append(Comp._name)
                 # and get next tlv
                 ind += 1
@@ -2150,8 +2153,10 @@ Specific attributes:
                 else:
                     raise(ASN1BERDecodeErr('{0}: invalid SEQUENCE extended tag and length, {1!r}, {2!r}'\
                           .format(self.fullname(), (cl, pc, tval), lval)))
-                self._val[ident] = val
+                sval[ident] = val
             ind += 1
+        #
+        self._val = sval
     
     def _encode_ber_cont_ws(self):
         TLV, val_ids = [], list(self._val.keys())
