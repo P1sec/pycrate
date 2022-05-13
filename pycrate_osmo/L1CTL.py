@@ -308,7 +308,6 @@ class L1CTLInfoUL(Envelope):
         ChannelNumber(),    # GSM 08.58 channel number (9.3.1)
         LinkIdentifier(),   # GSM 08.58 link identifier (9.3.2)
         Uint16('pad', rep=REPR_HEX),
-        Buf('Payload', rep=REPR_HEX)
         )
 
 
