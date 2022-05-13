@@ -642,11 +642,11 @@ Single value: Python 2-tuple
                 Obj = self._get_val_obj(self._val[0])
             Obj._val = self._val[1]
             return Obj._to_jval()
-
+    
     ###
     # conversion between internal value and ASN.1 OER/COER encoding
     ###
-
+    
     def _from_oer(self, char):
         # try to get a defined object from a table constraint
         if self._TAB_LUT and self._const_tab and self._const_tab_at:
@@ -671,7 +671,7 @@ Single value: Python 2-tuple
         #
         val_bytes = ASN1CodecOER.decode_open_type(char)
         val = Obj.from_oer(val_bytes) if (Obj is not None) else val_bytes
-
+        
         if Obj is None:
             if self._const_val:
                 asnlog('OPEN._from_per: %s, potential type constraint(s) available but unused' \
@@ -684,7 +684,7 @@ Single value: Python 2-tuple
             else:
                 self._val = (Obj.TYPE, val)
         return
-
+    
     def _from_oer_ws(self, char):
         # try to get a defined object from a table constraint
         if self._TAB_LUT and self._const_tab and self._const_tab_at:
@@ -720,7 +720,7 @@ Single value: Python 2-tuple
             else:
                 self._val = (Obj.TYPE, val)
         self._struct = Envelope(self._name, GEN=tuple(GEN))
-
+    
     def _to_oer(self):
         if isinstance(self._val[0], ASN1Obj):
             Obj = self._val[0]
@@ -730,7 +730,7 @@ Single value: Python 2-tuple
             Obj = self._get_val_obj(self._val[0])
         Obj._val = self._val[1]
         return ASN1CodecOER.encode_open_type(Obj.to_oer())
-
+    
     def _to_oer_ws(self):
         if isinstance(self._val[0], ASN1Obj):
             Obj = self._val[0]
