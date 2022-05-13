@@ -223,13 +223,13 @@ class ARFCNFlags(Envelope):
     _GEN = (
         Uint('PCS', bl=1),
         Uint('Uplink', bl=1),
-        Uint('spare', bl=6),
+        Uint('spare', bl=4),
         )
 
 class ARFCNBand(Envelope):
     _GEN = (
         ARFCNFlags('Flags'),
-        Uint('ARFCN', bl=11),
+        Uint('ARFCN', bl=10),
         )
 
 
