@@ -803,9 +803,10 @@ class _CONSTRUCT(ASN1Obj):
     ###
     
     def _from_per_ws(self, char):
-        GEN, self._val = [], {}
+        GEN, val = [], {}
         if not self._cont and self._ext is None:
             # empty sequence
+            self._val    = val
             self._struct = Envelope(self._name, GEN=tuple())
             return
         #
@@ -846,11 +847,11 @@ class _CONSTRUCT(ASN1Obj):
                 Comp._parent = self
                 Comp._from_per_ws(char)
                 GEN.append(Comp._struct)
-                self._val[ident] = Comp._val
+                val[ident] = Comp._val
                 Comp._parent = _par
             elif Comp._def is not None and ASN1CodecPER.GET_DEFVAL:
                 # component absent of the encoding, but with default value
-                self._val[ident] = Comp._def
+                val[ident] = Comp._def
         #
         # decode components in the extension part
         if extended:
@@ -893,29 +894,31 @@ class _CONSTRUCT(ASN1Obj):
                         if isinstance(ext, list):
                             # grouped extension
                             Comp = self._ext_group_obj[self._ext_ident[ext[0]]]
-                            val, _gen = ASN1CodecPER.decode_unconst_open_ws(char, wrapped=Comp)
-                            self._val.update(val)
+                            grp_val, _gen = ASN1CodecPER.decode_unconst_open_ws(char, wrapped=Comp)
+                            val.update(grp_val)
                         else:
                             # single extension, ident == ext
                             Comp = self._cont[ext]
                             _par = Comp._parent
                             Comp._parent = self
-                            val, _gen = ASN1CodecPER.decode_unconst_open_ws(char, wrapped=Comp)
+                            ext_val, _gen = ASN1CodecPER.decode_unconst_open_ws(char, wrapped=Comp)
                             Comp._parent = _par
-                            self._val[ext] = val
+                            val[ext] = ext_val
                     else:
                         # unknown extension
                         buf, _gen = ASN1CodecPER.decode_unconst_open_ws(char)
-                        self._val['_ext_%r' % i] = buf
+                        val['_ext_%r' % i] = buf
                     GEN.extend(_gen)
         #
+        self._val    = val
         self._struct = Envelope(self._name, GEN=tuple(GEN))
         return
     
     def _from_per(self, char):
-        GEN, self._val = [], {}
+        GEN, val = [], {}
         if not self._cont and self._ext is None:
             # empty sequence
+            self._val = val
             return
         #
         extended = False
@@ -949,11 +952,11 @@ class _CONSTRUCT(ASN1Obj):
                 _par = Comp._parent
                 Comp._parent = self
                 Comp._from_per(char)
-                self._val[ident] = Comp._val
+                val[ident] = Comp._val
                 Comp._parent = _par
             elif Comp._def is not None and ASN1CodecPER.GET_DEFVAL:
                 # component absent of the encoding, but with default value
-                self._val[ident] = Comp._def
+                val[ident] = Comp._def
         #
         # decode components in the extension part
         if extended:
@@ -986,18 +989,19 @@ class _CONSTRUCT(ASN1Obj):
                         if isinstance(ext, list):
                             # grouped extension
                             Comp = self._ext_group_obj[self._ext_ident[ext[0]]]
-                            self._val.update(ASN1CodecPER.decode_unconst_open(char, wrapped=Comp))
+                            val.update(ASN1CodecPER.decode_unconst_open(char, wrapped=Comp))
                         else:
                             # single extension, ident == ext
                             Comp = self._cont[ext]
                             _par = Comp._parent
                             Comp._parent = self
-                            self._val[ext] = ASN1CodecPER.decode_unconst_open(char, wrapped=Comp)
+                            val[ext] = ASN1CodecPER.decode_unconst_open(char, wrapped=Comp)
                             Comp._parent = _par
                     else:
                         # unknown extension
-                        self._val['_ext_%r' % i] = ASN1CodecPER.decode_unconst_open(char)
+                        val['_ext_%r' % i] = ASN1CodecPER.decode_unconst_open(char)
         #
+        self._val = val
         return
     
     def _to_per_ws(self):
@@ -1279,23 +1283,25 @@ class _CONSTRUCT(ASN1Obj):
             if not isinstance(val, dict):
                 raise(ASN1JERDecodeErr('{0}: invalid json value, {1!r}'\
                       .format(self.fullname(), val)))
-            self._val, val_cp = {}, dict(val)
+            sval, val_cp = {}, dict(val)
             for ident, Comp in self._cont.items():
                 if ident in val:
                     _par = Comp._parent
                     Comp._parent = self
                     Comp._from_jval( val[ident] )
                     Comp._parent = _par
-                    self._val[ident] = Comp._val
+                    sval[ident] = Comp._val
                     del val_cp[ident]
             if val_cp:
                 for ident, comp_val in val_cp.items():
-                    self._val['_ext_%s' % ident] = comp_val
+                    sval['_ext_%s' % ident] = comp_val
             try:
-                self._safechk_val(self._val, rec=False)
+                self._safechk_val(sval, rec=False)
             except Exception as err:
                 raise(ASN1JERDecodeErr('{0}: invalid json value, {1}'\
                       .format(self.fullname(), err)))
+            else:
+                self._val = sval
         
         def _to_jval(self):
             if not self._val:
@@ -1590,17 +1596,18 @@ class _CONSTRUCT(ASN1Obj):
         return self._struct
 
     def _from_oer(self, char):
-        GEN, self._val = [], {}
+        GEN, val = [], {}
         if not self._cont and self._ext is None:
             # empty sequence
+            self._val = val
             return
-
+        
         extended = False
         ext_bit = 0
         if self._ext is not None:
             extended = (1 == char.get_uint(1))
             ext_bit = 1
-
+        
         # get the bitmap preambule for optional / default components of the root part
         if self._root_opt:
             opt_len = len(self._root_opt)
@@ -1609,12 +1616,12 @@ class _CONSTRUCT(ASN1Obj):
         else:
             opt_len = 0
             opt_idents = []
-
+        
         # Get the padding bits
         pad_bits = 8 - ((opt_len + ext_bit) % 8)
         pad_bits = 0 if (pad_bits == 8) else pad_bits
         char.get_uint(pad_bits)
-
+        
         # decode components in the root part
         # for SET, use self._root_canon which is the canonical order of root components
         if self.TYPE == TYPE_SET:
@@ -1628,12 +1635,12 @@ class _CONSTRUCT(ASN1Obj):
                 _par = Comp._parent
                 Comp._parent = self
                 Comp._from_oer(char)
-                self._val[ident] = Comp._val
+                val[ident] = Comp._val
                 Comp._parent = _par
             elif Comp._def is not None and ASN1CodecOER.GET_DEFVAL:
                 # component absent of the encoding, but with default value
-                self._val[ident] = Comp._def
-
+                val[ident] = Comp._def
+        
         # decode components in the extension part
         if extended:
             # get the bitmap preambule for extended (group of) components
@@ -1643,7 +1650,7 @@ class _CONSTRUCT(ASN1Obj):
             Bv = char.get_uint(ldet)
             Bv = Bv >> pad_bits
             ldet = ldet - pad_bits
-
+            
             for i in range(ldet):
                 if Bv & (1<<(ldet-1-i)):
                     # extension present
@@ -1656,29 +1663,30 @@ class _CONSTRUCT(ASN1Obj):
                             val_bytes = ASN1CodecOER.decode_open_type(char)
                             if Comp:
                                 Comp.from_oer(val_bytes)
-                                self._val.update(Comp._val)
+                                val.update(Comp._val)
                             else:
-                                self._val.update(val_bytes)
+                                val.update(val_bytes)
                         else:
                             # single extension, ident == ext
                             Comp = self._cont[ext]
                             _par = Comp._parent
                             Comp._parent = self
                             Comp.from_oer(ASN1CodecOER.decode_open_type(char))
-                            self._val[ext] = Comp._val
+                            val[ext] = Comp._val
                             Comp._parent = _par
                     else:
                         # unknown extension
-                        self._val['_ext_%r' % i] = \
+                        val['_ext_%r' % i] = \
                             ASN1CodecOER.decode_open_type(char)
+        self._val = val
         return
-
+    
     def _from_oer_ws(self, char):
-        GEN, self._val = [], {}
+        GEN, val = [], {}
         if not self._cont and self._ext is None:
             # empty sequence
             return
-
+        
         extended = False
         ext_bit = 0
         if self._ext is not None:
@@ -1687,25 +1695,25 @@ class _CONSTRUCT(ASN1Obj):
             GEN.append(extension)
             extended = (1 == extension.get_val())
             ext_bit = 1
-
+        
         # get the bitmap preambule for optional / default components of the root part
         opt_len = len(self._root_opt) if self._root_opt else 0
         pad_bits = 8 - ((opt_len + ext_bit) % 8)
         pad_bits = 0 if (pad_bits == 8) else pad_bits
-
+        
         root_bmp = Uint('Root-bmp', bl=opt_len+pad_bits)
         root_bmp._from_char(char)
         GEN.append(root_bmp)
-
+        
         if self._root_opt:
             Bv = root_bmp.get_val() >> pad_bits
             opt_idents = [self._root_opt[i] for i in range(opt_len) if Bv & (1<<(opt_len-1-i))]
         else:
             opt_len = 0
             opt_idents = []
-
+        
         GEN = [Envelope('Preamble', GEN=tuple(GEN))]
-
+        
         # decode components in the root part
         # for SET, use self._root_canon which is the canonical order of root components
         if self.TYPE == TYPE_SET:
@@ -1719,13 +1727,13 @@ class _CONSTRUCT(ASN1Obj):
                 _par = Comp._parent
                 Comp._parent = self
                 Comp._from_oer_ws(char)
-                self._val[ident] = Comp._val
+                val[ident] = Comp._val
                 GEN.append(Comp._struct)
                 Comp._parent = _par
             elif Comp._def is not None and ASN1CodecOER.GET_DEFVAL:
                 # component absent of the encoding, but with default value
-                self._val[ident] = Comp._def
-
+                val[ident] = Comp._def
+        
         # decode components in the extension part
         if extended:
             # get the bitmap preambule for extended (group of) components
@@ -1739,10 +1747,9 @@ class _CONSTRUCT(ASN1Obj):
             Bv = ext_bmp.get_val()
             Bv = Bv >> pad_bits
             ldet = ldet - pad_bits
-
-            GEN.append(Envelope('Extension-bmp',
-                                GEN=(ldet_struct, i_oct, ext_bmp)))
-
+            #
+            GEN.append(Envelope('Extension-bmp', GEN=(ldet_struct, i_oct, ext_bmp)))
+            
             for i in range(ldet):
                 if Bv & (1<<(ldet-1-i)):
                     # extension present
@@ -1752,32 +1759,30 @@ class _CONSTRUCT(ASN1Obj):
                         if isinstance(ext, list):
                             # grouped extension
                             Comp = self._ext_group_obj[self._ext_ident[ext[0]]]
-                            val_bytes, _struct = \
-                                ASN1CodecOER.decode_open_type_ws(char)
+                            val_bytes, _struct = ASN1CodecOER.decode_open_type_ws(char)
                             if Comp:
                                 Comp.from_oer(val_bytes)
-                                self._val.update(Comp._val)
+                                val.update(Comp._val)
                             else:
-                                self._val.update(val_bytes)
+                                val.update(val_bytes)
                             GEN.append(_struct)
                         else:
                             # single extension, ident == ext
                             Comp = self._cont[ext]
                             _par = Comp._parent
                             Comp._parent = self
-                            val_bytes, _struct = \
-                                ASN1CodecOER.decode_open_type_ws(char)
+                            val_bytes, _struct = ASN1CodecOER.decode_open_type_ws(char)
                             Comp.from_oer(val_bytes)
-                            self._val[ext] = Comp._val
+                            val[ext] = Comp._val
                             Comp._parent = _par
                             GEN.append(_struct)
                     else:
                         # unknown extension
-                        val_bytes, _struct = \
-                            ASN1CodecOER.decode_open_type_ws(char)
-                        self._val['_ext_%r' % i] = val_bytes
+                        val_bytes, _struct = ASN1CodecOER.decode_open_type_ws(char)
+                        val['_ext_%r' % i] = val_bytes
                         GEN.append(_struct)
-
+        
+        self._val    = val
         self._struct = Envelope(self._name, GEN=tuple(GEN))
         return
 
