@@ -223,13 +223,13 @@ class ARFCNFlags(Envelope):
     _GEN = (
         Uint('PCS', bl=1),
         Uint('Uplink', bl=1),
-        Uint('spare', bl=6),
+        Uint('spare', bl=4),
         )
 
 class ARFCNBand(Envelope):
     _GEN = (
         ARFCNFlags('Flags'),
-        Uint('ARFCN', bl=11),
+        Uint('ARFCN', bl=10),
         )
 
 
@@ -308,7 +308,6 @@ class L1CTLInfoUL(Envelope):
         ChannelNumber(),    # GSM 08.58 channel number (9.3.1)
         LinkIdentifier(),   # GSM 08.58 link identifier (9.3.2)
         Uint16('pad', rep=REPR_HEX),
-        Buf('Payload', rep=REPR_HEX)
         )
 
 
@@ -428,6 +427,7 @@ class L1CTLDataReq(Envelope):
 class L1CTL_H0(Envelope):
     _GEN = (
         ARFCNBand('ARFCN'),
+        Buf('Pad', bl=138 * 8, rep=REPR_HEX)
         )
 
 
@@ -444,6 +444,7 @@ class L1CTL_H1(Envelope):
 
 class L1CTLDMEstReq(Envelope):
     _GEN = (
+        L1CTLInfoUL(),
         Uint8('TSC'),
         Uint8('H'),
         Alt('L1CTL_H', GEN={
@@ -458,6 +459,7 @@ class L1CTLDMEstReq(Envelope):
 
 class L1CTLDMFreqReq(Envelope):
     _GEN = (
+        L1CTLInfoUL(),
         Uint16('FN'),
         Uint8('TSC'),
         Uint8('H'),
@@ -472,6 +474,7 @@ class L1CTLDMFreqReq(Envelope):
 # SIM auth computation
 class L1CTLCryptoReq(Envelope):
     _GEN = (
+        L1CTLInfoUL(),
         Uint8('Algo'),
         Uint8('KeyLen'),
         Buf('Key', rep=REPR_HEX)
@@ -479,8 +482,8 @@ class L1CTLCryptoReq(Envelope):
     
     def __init__(self, *args, **kwargs):
         Envelope.__init__(self, *args, **kwargs)
-        self[1].set_valauto(lambda: self[2].get_len())
-        self[2].set_blauto(lambda: self[1].get_val()<<3)
+        self[2].set_valauto(lambda: self[3].get_len())
+        self[3].set_blauto(lambda: self[2].get_val()<<3)
 
 
 # power measurement
