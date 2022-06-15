@@ -109,7 +109,7 @@ class ASN1RangeInt(ASN1Range):
     
     def __repr__(self):
         return 'ASN1RangeInt({0!r}..{1!r})'.format(self.lb, self.ub)
-    
+        
     def expand(self):
         """
         returns a list of integers
@@ -186,7 +186,7 @@ class ASN1RangeInt(ASN1Range):
     
     def diff(self, ra):
         """
-        returns a 2-tuple of ASN1RangeStr or None, which are the exclusive 
+        returns a 2-tuple of ASN1RangeInt or None, which are the exclusive 
         parts of each self and `ra' ranges
         """
         if not isinstance(ra, ASN1RangeInt):
@@ -220,6 +220,12 @@ class ASN1RangeInt(ASN1Range):
             else:
                 uset = ASN1RangeInt(min(self.ub, ra.ub) + 1, max(self.ub, ra.ub))
         return lset, uset
+
+    def excl_val(self, val):
+        """
+        returns 2 ASN1RangeStr which exclude the value `val'
+        """
+        return ASN1RangeStr(self.lb, val-1), ASN1RangeStr(val+1, self.ub)
 
 
 class ASN1RangeStr(ASN1Range):
@@ -312,6 +318,12 @@ class ASN1RangeStr(ASN1Range):
         else:
             uset = ASN1RangeStr(min(self.ub, ra.ub) + 1, max(self.ub, ra.ub))
         return lset, uset
+    
+    def excl_val(self, val):
+        """
+        returns 2 ASN1RangeStr which exclude the value `val'
+        """
+        return ASN1RangeStr(self.lb, chr(ord(val)-1)), ASN1RangeStr(chr(ord(val)+1), self.ub)
 
 
 MINUS_INF = (-1, None, None)
@@ -573,6 +585,12 @@ class ASN1RangeReal(ASN1Range):
             uset = ASN1RangeReal(uset_lb, uset_ub, uset_lb_incl, uset_ub_incl)
         #
         return lset, uset
+    
+    def excl_val(self, val):
+        """
+        returns 2 ASN1RangeReal which exclude the value `val'
+        """
+        raise(ASN1NotSuppErr('exclude from a Real range'))
 
 
 def reduce_rangelist(rl=[]):
@@ -780,6 +798,39 @@ class ASN1Set(object):
                     ret._ev.append(v)
         ret._init()
         return ret
+    
+    def excl_val(self, val):
+        excl = False
+        if self.in_root(val):
+            if val in self._rv:
+                self._rv.remove(val)
+                excl = True
+            else:
+                for ra in self._rr[:]:
+                    if val in ra:
+                        ra_l, ra_u = ra.excl_val(val)
+                        idx = self._rr.index(ra)
+                        del self._rr[idx]
+                        self._rr.insert(idx, ra_l)
+                        self._rr.insert(idx, ra_u)
+                        excl = True
+                        break
+        elif self.in_ext(val):
+            if val in self._ev:
+                self._ev.remove(val)
+                excl = True
+            else:
+                for ra in self._er[:]:
+                    if val in ra:
+                        ra_l, ra_u = ra.excl_val(val)
+                        idx = self._er.index(ra)
+                        del self._er[idx]
+                        self._er.insert(idx, ra_l)
+                        self._er.insert(idx, ra_u)
+                        excl = True
+                        break
+        if excl:
+            self._init()
 
 
 def reduce_setdicts(sdl):
