@@ -6181,45 +6181,31 @@ class ASN1Obj(object):
             # we go over all constraints of the object and return a root / ext dict 
             # with integral values
             root, ext = set(), None
-            const = self.get_const()
-            for C in const:
-                 if C['type'] == CONST_VAL and not C['excl']:
-                    # get root values into a set
-                    for val in C['root']:
-                        self.__parse_set_from_const_comp(val, root)
-                    if C['ext']:
-                        if ext is None:
-                            ext = set()
-                        for val in C['ext']:
-                            self.__parse_set_from_const_comp(val, ext)
-            #if not root:
-            #    raise(ASN1ProcTextErr('{0}: no constraint with root values to defined a set'\
-            #          .format(self.fullname())))
-            if ext is not None:
-                return {'root': list(root), 'ext': list(ext)}
-            else:
-                return {'root': list(root), 'ext': None}
+            set_int = ASN1Set(d={'root': [ASN1RangeInt(None, None)], 'ext': None})
+            consts = self.get_const()
+            for const in consts:
+                if const['type'] != CONST_VAL:
+                    raise(ASN1NotSuppErr('{0}: non value constraint for integer-based type, {1!r}'\
+                          .format(self.fullname(), const)))
+                elif const['excl']:
+                    # need to exclude the given values
+                    for v in const['root']:
+                        if isinstance(v, ASN1RangeInt):
+                            # unsupported
+                            raise(ASN1NotSuppErr('{0}: unable to exclude range, {1}'\
+                                  .format(self.fullname(), v)))
+                        else:
+                            set_int.excl_val(v)
+                else:
+                    set_loc = ASN1Set(d={'root': const['root'], 'ext': const['ext']})
+                    set_int = set_int.intersect(set_loc)
+            return {'root': set_int.root, 'ext': set_int.ext}
         #
         # 2) otherwise unsupported, but stays nice, do not raise...
         else:
             asnlog('WNG: {0}.{1}, unprocessed set of values from constraint, {1}'\
                    .format(GLOBAL.COMP['NS']['mod'], self.fullname(), self._text_def))
             return {'root': [], 'ext': None}
-    
-    def __parse_set_from_const_comp(self, comp, values):
-        if isinstance(comp, ASN1Range):
-            try:
-                comp_exp = comp.expand()
-            except ASN1Err as err:
-                raise(ASN1NotSuppErr('{0}: unable to expand range, {1}'\
-                      .format(self.fullname(), err)))
-            else:
-                values.update(comp_exp)
-        elif isinstance(comp, ASN1Ref) and isinstance(comp.called, ASN1RefParam):
-            raise(ASN1NotSuppErr('{0}: parameterized constraint, unable to expand'\
-                  .format(self.fullname())))
-        else:
-            values.add(comp)
     
     def __parse_set_comp_open(self, text, val, dom):
         # specific case for OPEN TYPE: an ASN.1 set defined between { and }
