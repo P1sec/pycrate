@@ -16,166 +16,166 @@ from pycrate_asn1rt.init             import init_modules
 
 class PEDefinitions:
 
-    _name_  = 'PEDefinitions'
+    _name_  = u'PEDefinitions'
     _oid_   = [2, 23, 143, 1, 1, 2]
     
     _obj_ = [
-        'maxUInt8',
-        'UInt8',
-        'maxUInt15',
-        'UInt15',
-        'maxUInt16',
-        'UInt16',
-        'maxUInt31',
-        'UInt31',
-        'ApplicationIdentifier',
-        'PEHeader',
-        'ProfileElement',
-        'PE-Dummy',
-        'ProfileHeader',
-        'ServicesList',
-        'ProprietaryInfo',
-        'Fcp',
-        'File',
-        'PE-MF',
-        'PE-CD',
-        'PE-TELECOM',
-        'PE-USIM',
-        'PE-OPT-USIM',
-        'PE-PHONEBOOK',
-        'PE-GSM-ACCESS',
-        'PE-ISIM',
-        'PE-OPT-ISIM',
-        'PE-CSIM',
-        'PE-OPT-CSIM',
-        'PE-EAP',
-        'PE-GenericFileManagement',
-        'FileManagement',
-        'MappingParameter',
-        'AlgoParameter',
-        'PE-AKAParameter',
-        'PE-CDMAParameter',
-        'PINKeyReferenceValue',
-        'PINConfiguration',
-        'PE-PINCodes',
-        'PUKKeyReferenceValue',
-        'PUKConfiguration',
-        'PE-PUKCodes',
-        'PE-SecurityDomain',
-        'KeyObject',
-        'PE-Application',
-        'ApplicationLoadPackage',
-        'ApplicationInstance',
-        'ApplicationSystemParameters',
-        'UICCApplicationParameters',
-        'TS102226AdditionalContactlessParameters',
-        'PE-RFM',
-        'ADFRFMAccess',
-        'PE-NonStandard',
-        'PE-End',
-        'PEStatus',
-        'EUICCResponse',
-        'headerVal',
-        'mfVal',
-        'altMFVal',
-        'pukVal',
-        'pinVal',
-        'usimValue',
-        'altUsimValue',
-        'usimPin',
-        'akaMilenage',
-        'cdmaParam',
-        'mnoSdValue',
-        'mnoSdCompValue',
-        'ssdValue',
-        'applet1',
-        'applet2',
-        'rfmUicc',
-        'rfmUsim',
-        'gsmaProp',
-        'endVal',
-        'respValue',
+        u'maxUInt8',
+        u'UInt8',
+        u'maxUInt15',
+        u'UInt15',
+        u'maxUInt16',
+        u'UInt16',
+        u'maxUInt31',
+        u'UInt31',
+        u'ApplicationIdentifier',
+        u'PEHeader',
+        u'ProfileElement',
+        u'PE-Dummy',
+        u'ProfileHeader',
+        u'ServicesList',
+        u'ProprietaryInfo',
+        u'Fcp',
+        u'File',
+        u'PE-MF',
+        u'PE-CD',
+        u'PE-TELECOM',
+        u'PE-USIM',
+        u'PE-OPT-USIM',
+        u'PE-PHONEBOOK',
+        u'PE-GSM-ACCESS',
+        u'PE-ISIM',
+        u'PE-OPT-ISIM',
+        u'PE-CSIM',
+        u'PE-OPT-CSIM',
+        u'PE-EAP',
+        u'PE-GenericFileManagement',
+        u'FileManagement',
+        u'MappingParameter',
+        u'AlgoParameter',
+        u'PE-AKAParameter',
+        u'PE-CDMAParameter',
+        u'PINKeyReferenceValue',
+        u'PINConfiguration',
+        u'PE-PINCodes',
+        u'PUKKeyReferenceValue',
+        u'PUKConfiguration',
+        u'PE-PUKCodes',
+        u'PE-SecurityDomain',
+        u'KeyObject',
+        u'PE-Application',
+        u'ApplicationLoadPackage',
+        u'ApplicationInstance',
+        u'ApplicationSystemParameters',
+        u'UICCApplicationParameters',
+        u'TS102226AdditionalContactlessParameters',
+        u'PE-RFM',
+        u'ADFRFMAccess',
+        u'PE-NonStandard',
+        u'PE-End',
+        u'PEStatus',
+        u'EUICCResponse',
+        u'headerVal',
+        u'mfVal',
+        u'altMFVal',
+        u'pukVal',
+        u'pinVal',
+        u'usimValue',
+        u'altUsimValue',
+        u'usimPin',
+        u'akaMilenage',
+        u'cdmaParam',
+        u'mnoSdValue',
+        u'mnoSdCompValue',
+        u'ssdValue',
+        u'applet1',
+        u'applet2',
+        u'rfmUicc',
+        u'rfmUsim',
+        u'gsmaProp',
+        u'endVal',
+        u'respValue',
         ]
     _type_ = [
-        'UInt8',
-        'UInt15',
-        'UInt16',
-        'UInt31',
-        'ApplicationIdentifier',
-        'PEHeader',
-        'ProfileElement',
-        'PE-Dummy',
-        'ProfileHeader',
-        'ServicesList',
-        'ProprietaryInfo',
-        'Fcp',
-        'File',
-        'PE-MF',
-        'PE-CD',
-        'PE-TELECOM',
-        'PE-USIM',
-        'PE-OPT-USIM',
-        'PE-PHONEBOOK',
-        'PE-GSM-ACCESS',
-        'PE-ISIM',
-        'PE-OPT-ISIM',
-        'PE-CSIM',
-        'PE-OPT-CSIM',
-        'PE-EAP',
-        'PE-GenericFileManagement',
-        'FileManagement',
-        'MappingParameter',
-        'AlgoParameter',
-        'PE-AKAParameter',
-        'PE-CDMAParameter',
-        'PINKeyReferenceValue',
-        'PINConfiguration',
-        'PE-PINCodes',
-        'PUKKeyReferenceValue',
-        'PUKConfiguration',
-        'PE-PUKCodes',
-        'PE-SecurityDomain',
-        'KeyObject',
-        'PE-Application',
-        'ApplicationLoadPackage',
-        'ApplicationInstance',
-        'ApplicationSystemParameters',
-        'UICCApplicationParameters',
-        'TS102226AdditionalContactlessParameters',
-        'PE-RFM',
-        'ADFRFMAccess',
-        'PE-NonStandard',
-        'PE-End',
-        'PEStatus',
-        'EUICCResponse',
+        u'UInt8',
+        u'UInt15',
+        u'UInt16',
+        u'UInt31',
+        u'ApplicationIdentifier',
+        u'PEHeader',
+        u'ProfileElement',
+        u'PE-Dummy',
+        u'ProfileHeader',
+        u'ServicesList',
+        u'ProprietaryInfo',
+        u'Fcp',
+        u'File',
+        u'PE-MF',
+        u'PE-CD',
+        u'PE-TELECOM',
+        u'PE-USIM',
+        u'PE-OPT-USIM',
+        u'PE-PHONEBOOK',
+        u'PE-GSM-ACCESS',
+        u'PE-ISIM',
+        u'PE-OPT-ISIM',
+        u'PE-CSIM',
+        u'PE-OPT-CSIM',
+        u'PE-EAP',
+        u'PE-GenericFileManagement',
+        u'FileManagement',
+        u'MappingParameter',
+        u'AlgoParameter',
+        u'PE-AKAParameter',
+        u'PE-CDMAParameter',
+        u'PINKeyReferenceValue',
+        u'PINConfiguration',
+        u'PE-PINCodes',
+        u'PUKKeyReferenceValue',
+        u'PUKConfiguration',
+        u'PE-PUKCodes',
+        u'PE-SecurityDomain',
+        u'KeyObject',
+        u'PE-Application',
+        u'ApplicationLoadPackage',
+        u'ApplicationInstance',
+        u'ApplicationSystemParameters',
+        u'UICCApplicationParameters',
+        u'TS102226AdditionalContactlessParameters',
+        u'PE-RFM',
+        u'ADFRFMAccess',
+        u'PE-NonStandard',
+        u'PE-End',
+        u'PEStatus',
+        u'EUICCResponse',
         ]
     _set_ = [
         ]
     _val_ = [
-        'maxUInt8',
-        'maxUInt15',
-        'maxUInt16',
-        'maxUInt31',
-        'headerVal',
-        'mfVal',
-        'altMFVal',
-        'pukVal',
-        'pinVal',
-        'usimValue',
-        'altUsimValue',
-        'usimPin',
-        'akaMilenage',
-        'cdmaParam',
-        'mnoSdValue',
-        'mnoSdCompValue',
-        'ssdValue',
-        'applet1',
-        'applet2',
-        'rfmUicc',
-        'rfmUsim',
-        'gsmaProp',
-        'endVal',
-        'respValue',
+        u'maxUInt8',
+        u'maxUInt15',
+        u'maxUInt16',
+        u'maxUInt31',
+        u'headerVal',
+        u'mfVal',
+        u'altMFVal',
+        u'pukVal',
+        u'pinVal',
+        u'usimValue',
+        u'altUsimValue',
+        u'usimPin',
+        u'akaMilenage',
+        u'cdmaParam',
+        u'mnoSdValue',
+        u'mnoSdCompValue',
+        u'ssdValue',
+        u'applet1',
+        u'applet2',
+        u'rfmUicc',
+        u'rfmUsim',
+        u'gsmaProp',
+        u'endVal',
+        u'respValue',
         ]
     _class_ = [
         ]
@@ -183,1530 +183,1530 @@ class PEDefinitions:
         ]
     
     #-----< maxUInt8 >-----#
-    maxUInt8 = INT(name='maxUInt8', mode=MODE_VALUE)
+    maxUInt8 = INT(name=u'maxUInt8', mode=MODE_VALUE)
     maxUInt8._val = 255
     
     #-----< UInt8 >-----#
-    UInt8 = INT(name='UInt8', mode=MODE_TYPE)
+    UInt8 = INT(name=u'UInt8', mode=MODE_TYPE)
     UInt8._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=255)], ev=None, er=[])
     
     #-----< maxUInt15 >-----#
-    maxUInt15 = INT(name='maxUInt15', mode=MODE_VALUE)
+    maxUInt15 = INT(name=u'maxUInt15', mode=MODE_VALUE)
     maxUInt15._val = 32767
     
     #-----< UInt15 >-----#
-    UInt15 = INT(name='UInt15', mode=MODE_TYPE)
+    UInt15 = INT(name=u'UInt15', mode=MODE_TYPE)
     UInt15._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=32767)], ev=None, er=[])
     
     #-----< maxUInt16 >-----#
-    maxUInt16 = INT(name='maxUInt16', mode=MODE_VALUE)
+    maxUInt16 = INT(name=u'maxUInt16', mode=MODE_VALUE)
     maxUInt16._val = 65535
     
     #-----< UInt16 >-----#
-    UInt16 = INT(name='UInt16', mode=MODE_TYPE)
+    UInt16 = INT(name=u'UInt16', mode=MODE_TYPE)
     UInt16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=65535)], ev=None, er=[])
     
     #-----< maxUInt31 >-----#
-    maxUInt31 = INT(name='maxUInt31', mode=MODE_VALUE)
+    maxUInt31 = INT(name=u'maxUInt31', mode=MODE_VALUE)
     maxUInt31._val = 2147483647
     
     #-----< UInt31 >-----#
-    UInt31 = INT(name='UInt31', mode=MODE_TYPE)
+    UInt31 = INT(name=u'UInt31', mode=MODE_TYPE)
     UInt31._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=2147483647)], ev=None, er=[])
     
     #-----< ApplicationIdentifier >-----#
-    ApplicationIdentifier = OCT_STR(name='ApplicationIdentifier', mode=MODE_TYPE)
+    ApplicationIdentifier = OCT_STR(name=u'ApplicationIdentifier', mode=MODE_TYPE)
     ApplicationIdentifier._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=5, ub=16)], ev=None, er=[])
     
     #-----< PEHeader >-----#
-    PEHeader = SEQ(name='PEHeader', mode=MODE_TYPE)
-    _PEHeader_mandated = NULL(name='mandated', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _PEHeader_identification = INT(name='identification', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'UInt15')))
+    PEHeader = SEQ(name=u'PEHeader', mode=MODE_TYPE)
+    _PEHeader_mandated = NULL(name=u'mandated', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _PEHeader_identification = INT(name=u'identification', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'UInt15')))
     PEHeader._cont = ASN1Dict([
-        ('mandated', _PEHeader_mandated),
-        ('identification', _PEHeader_identification),
+        (u'mandated', _PEHeader_mandated),
+        (u'identification', _PEHeader_identification),
         ])
     PEHeader._ext = []
     
     #-----< ProfileElement >-----#
-    ProfileElement = CHOICE(name='ProfileElement', mode=MODE_TYPE)
-    _ProfileElement_header = SEQ(name='header', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'ProfileHeader')))
-    _ProfileElement_genericFileManagement = SEQ(name='genericFileManagement', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'PE-GenericFileManagement')))
-    _ProfileElement_pinCodes = SEQ(name='pinCodes', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'PE-PINCodes')))
-    _ProfileElement_pukCodes = SEQ(name='pukCodes', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'PE-PUKCodes')))
-    _ProfileElement_akaParameter = SEQ(name='akaParameter', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'PE-AKAParameter')))
-    _ProfileElement_cdmaParameter = SEQ(name='cdmaParameter', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'PE-CDMAParameter')))
-    _ProfileElement_securityDomain = SEQ(name='securityDomain', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'PE-SecurityDomain')))
-    _ProfileElement_rfm = SEQ(name='rfm', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'PE-RFM')))
-    _ProfileElement_application = SEQ(name='application', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'PE-Application')))
-    _ProfileElement_nonStandard = SEQ(name='nonStandard', mode=MODE_TYPE, tag=(9, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'PE-NonStandard')))
-    _ProfileElement_end = SEQ(name='end', mode=MODE_TYPE, tag=(10, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'PE-End')))
-    _ProfileElement_rfu1 = SEQ(name='rfu1', mode=MODE_TYPE, tag=(11, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'PE-Dummy')))
-    _ProfileElement_rfu2 = SEQ(name='rfu2', mode=MODE_TYPE, tag=(12, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'PE-Dummy')))
-    _ProfileElement_rfu3 = SEQ(name='rfu3', mode=MODE_TYPE, tag=(13, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'PE-Dummy')))
-    _ProfileElement_rfu4 = SEQ(name='rfu4', mode=MODE_TYPE, tag=(14, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'PE-Dummy')))
-    _ProfileElement_rfu5 = SEQ(name='rfu5', mode=MODE_TYPE, tag=(15, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'PE-Dummy')))
-    _ProfileElement_mf = SEQ(name='mf', mode=MODE_TYPE, tag=(16, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'PE-MF')))
-    _ProfileElement_cd = SEQ(name='cd', mode=MODE_TYPE, tag=(17, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'PE-CD')))
-    _ProfileElement_telecom = SEQ(name='telecom', mode=MODE_TYPE, tag=(18, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'PE-TELECOM')))
-    _ProfileElement_usim = SEQ(name='usim', mode=MODE_TYPE, tag=(19, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'PE-USIM')))
-    _ProfileElement_opt_usim = SEQ(name='opt-usim', mode=MODE_TYPE, tag=(20, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'PE-OPT-USIM')))
-    _ProfileElement_isim = SEQ(name='isim', mode=MODE_TYPE, tag=(21, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'PE-ISIM')))
-    _ProfileElement_opt_isim = SEQ(name='opt-isim', mode=MODE_TYPE, tag=(22, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'PE-OPT-ISIM')))
-    _ProfileElement_phonebook = SEQ(name='phonebook', mode=MODE_TYPE, tag=(23, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'PE-PHONEBOOK')))
-    _ProfileElement_gsm_access = SEQ(name='gsm-access', mode=MODE_TYPE, tag=(24, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'PE-GSM-ACCESS')))
-    _ProfileElement_csim = SEQ(name='csim', mode=MODE_TYPE, tag=(25, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'PE-CSIM')))
-    _ProfileElement_opt_csim = SEQ(name='opt-csim', mode=MODE_TYPE, tag=(26, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'PE-OPT-CSIM')))
-    _ProfileElement_eap = SEQ(name='eap', mode=MODE_TYPE, tag=(27, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'PE-EAP')))
+    ProfileElement = CHOICE(name=u'ProfileElement', mode=MODE_TYPE)
+    _ProfileElement_header = SEQ(name=u'header', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'ProfileHeader')))
+    _ProfileElement_genericFileManagement = SEQ(name=u'genericFileManagement', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'PE-GenericFileManagement')))
+    _ProfileElement_pinCodes = SEQ(name=u'pinCodes', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'PE-PINCodes')))
+    _ProfileElement_pukCodes = SEQ(name=u'pukCodes', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'PE-PUKCodes')))
+    _ProfileElement_akaParameter = SEQ(name=u'akaParameter', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'PE-AKAParameter')))
+    _ProfileElement_cdmaParameter = SEQ(name=u'cdmaParameter', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'PE-CDMAParameter')))
+    _ProfileElement_securityDomain = SEQ(name=u'securityDomain', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'PE-SecurityDomain')))
+    _ProfileElement_rfm = SEQ(name=u'rfm', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'PE-RFM')))
+    _ProfileElement_application = SEQ(name=u'application', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'PE-Application')))
+    _ProfileElement_nonStandard = SEQ(name=u'nonStandard', mode=MODE_TYPE, tag=(9, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'PE-NonStandard')))
+    _ProfileElement_end = SEQ(name=u'end', mode=MODE_TYPE, tag=(10, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'PE-End')))
+    _ProfileElement_rfu1 = SEQ(name=u'rfu1', mode=MODE_TYPE, tag=(11, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'PE-Dummy')))
+    _ProfileElement_rfu2 = SEQ(name=u'rfu2', mode=MODE_TYPE, tag=(12, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'PE-Dummy')))
+    _ProfileElement_rfu3 = SEQ(name=u'rfu3', mode=MODE_TYPE, tag=(13, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'PE-Dummy')))
+    _ProfileElement_rfu4 = SEQ(name=u'rfu4', mode=MODE_TYPE, tag=(14, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'PE-Dummy')))
+    _ProfileElement_rfu5 = SEQ(name=u'rfu5', mode=MODE_TYPE, tag=(15, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'PE-Dummy')))
+    _ProfileElement_mf = SEQ(name=u'mf', mode=MODE_TYPE, tag=(16, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'PE-MF')))
+    _ProfileElement_cd = SEQ(name=u'cd', mode=MODE_TYPE, tag=(17, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'PE-CD')))
+    _ProfileElement_telecom = SEQ(name=u'telecom', mode=MODE_TYPE, tag=(18, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'PE-TELECOM')))
+    _ProfileElement_usim = SEQ(name=u'usim', mode=MODE_TYPE, tag=(19, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'PE-USIM')))
+    _ProfileElement_opt_usim = SEQ(name=u'opt-usim', mode=MODE_TYPE, tag=(20, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'PE-OPT-USIM')))
+    _ProfileElement_isim = SEQ(name=u'isim', mode=MODE_TYPE, tag=(21, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'PE-ISIM')))
+    _ProfileElement_opt_isim = SEQ(name=u'opt-isim', mode=MODE_TYPE, tag=(22, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'PE-OPT-ISIM')))
+    _ProfileElement_phonebook = SEQ(name=u'phonebook', mode=MODE_TYPE, tag=(23, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'PE-PHONEBOOK')))
+    _ProfileElement_gsm_access = SEQ(name=u'gsm-access', mode=MODE_TYPE, tag=(24, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'PE-GSM-ACCESS')))
+    _ProfileElement_csim = SEQ(name=u'csim', mode=MODE_TYPE, tag=(25, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'PE-CSIM')))
+    _ProfileElement_opt_csim = SEQ(name=u'opt-csim', mode=MODE_TYPE, tag=(26, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'PE-OPT-CSIM')))
+    _ProfileElement_eap = SEQ(name=u'eap', mode=MODE_TYPE, tag=(27, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'PE-EAP')))
     ProfileElement._cont = ASN1Dict([
-        ('header', _ProfileElement_header),
-        ('genericFileManagement', _ProfileElement_genericFileManagement),
-        ('pinCodes', _ProfileElement_pinCodes),
-        ('pukCodes', _ProfileElement_pukCodes),
-        ('akaParameter', _ProfileElement_akaParameter),
-        ('cdmaParameter', _ProfileElement_cdmaParameter),
-        ('securityDomain', _ProfileElement_securityDomain),
-        ('rfm', _ProfileElement_rfm),
-        ('application', _ProfileElement_application),
-        ('nonStandard', _ProfileElement_nonStandard),
-        ('end', _ProfileElement_end),
-        ('rfu1', _ProfileElement_rfu1),
-        ('rfu2', _ProfileElement_rfu2),
-        ('rfu3', _ProfileElement_rfu3),
-        ('rfu4', _ProfileElement_rfu4),
-        ('rfu5', _ProfileElement_rfu5),
-        ('mf', _ProfileElement_mf),
-        ('cd', _ProfileElement_cd),
-        ('telecom', _ProfileElement_telecom),
-        ('usim', _ProfileElement_usim),
-        ('opt-usim', _ProfileElement_opt_usim),
-        ('isim', _ProfileElement_isim),
-        ('opt-isim', _ProfileElement_opt_isim),
-        ('phonebook', _ProfileElement_phonebook),
-        ('gsm-access', _ProfileElement_gsm_access),
-        ('csim', _ProfileElement_csim),
-        ('opt-csim', _ProfileElement_opt_csim),
-        ('eap', _ProfileElement_eap),
+        (u'header', _ProfileElement_header),
+        (u'genericFileManagement', _ProfileElement_genericFileManagement),
+        (u'pinCodes', _ProfileElement_pinCodes),
+        (u'pukCodes', _ProfileElement_pukCodes),
+        (u'akaParameter', _ProfileElement_akaParameter),
+        (u'cdmaParameter', _ProfileElement_cdmaParameter),
+        (u'securityDomain', _ProfileElement_securityDomain),
+        (u'rfm', _ProfileElement_rfm),
+        (u'application', _ProfileElement_application),
+        (u'nonStandard', _ProfileElement_nonStandard),
+        (u'end', _ProfileElement_end),
+        (u'rfu1', _ProfileElement_rfu1),
+        (u'rfu2', _ProfileElement_rfu2),
+        (u'rfu3', _ProfileElement_rfu3),
+        (u'rfu4', _ProfileElement_rfu4),
+        (u'rfu5', _ProfileElement_rfu5),
+        (u'mf', _ProfileElement_mf),
+        (u'cd', _ProfileElement_cd),
+        (u'telecom', _ProfileElement_telecom),
+        (u'usim', _ProfileElement_usim),
+        (u'opt-usim', _ProfileElement_opt_usim),
+        (u'isim', _ProfileElement_isim),
+        (u'opt-isim', _ProfileElement_opt_isim),
+        (u'phonebook', _ProfileElement_phonebook),
+        (u'gsm-access', _ProfileElement_gsm_access),
+        (u'csim', _ProfileElement_csim),
+        (u'opt-csim', _ProfileElement_opt_csim),
+        (u'eap', _ProfileElement_eap),
         ])
     ProfileElement._ext = []
     
     #-----< PE-Dummy >-----#
-    PE_Dummy = SEQ(name='PE-Dummy', mode=MODE_TYPE)
+    PE_Dummy = SEQ(name=u'PE-Dummy', mode=MODE_TYPE)
     PE_Dummy._cont = ASN1Dict([
         ])
     PE_Dummy._ext = []
     
     #-----< ProfileHeader >-----#
-    ProfileHeader = SEQ(name='ProfileHeader', mode=MODE_TYPE)
-    _ProfileHeader_major_version = INT(name='major-version', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'UInt8')))
-    _ProfileHeader_minor_version = INT(name='minor-version', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'UInt8')))
-    _ProfileHeader_profileType = STR_UTF8(name='profileType', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _ProfileHeader_iccid = OCT_STR(name='iccid', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    ProfileHeader = SEQ(name=u'ProfileHeader', mode=MODE_TYPE)
+    _ProfileHeader_major_version = INT(name=u'major-version', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'UInt8')))
+    _ProfileHeader_minor_version = INT(name=u'minor-version', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'UInt8')))
+    _ProfileHeader_profileType = STR_UTF8(name=u'profileType', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _ProfileHeader_iccid = OCT_STR(name=u'iccid', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     _ProfileHeader_iccid._const_sz = ASN1Set(rv=[10], rr=[], ev=None, er=[])
-    _ProfileHeader_pol = OCT_STR(name='pol', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _ProfileHeader_eUICC_Mandatory_services = SEQ(name='eUICC-Mandatory-services', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'ServicesList')))
-    _ProfileHeader_eUICC_Mandatory_GFSTEList = SEQ_OF(name='eUICC-Mandatory-GFSTEList', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _ProfileHeader_pol = OCT_STR(name=u'pol', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _ProfileHeader_eUICC_Mandatory_services = SEQ(name=u'eUICC-Mandatory-services', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'ServicesList')))
+    _ProfileHeader_eUICC_Mandatory_GFSTEList = SEQ_OF(name=u'eUICC-Mandatory-GFSTEList', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     __ProfileHeader_eUICC_Mandatory_GFSTEList__item_ = OID(name='_item_', mode=MODE_TYPE)
     _ProfileHeader_eUICC_Mandatory_GFSTEList._cont = __ProfileHeader_eUICC_Mandatory_GFSTEList__item_
-    _ProfileHeader_connectivityParameters = OCT_STR(name='connectivityParameters', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _ProfileHeader_eUICC_Mandatory_AIDs = SEQ_OF(name='eUICC-Mandatory-AIDs', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _ProfileHeader_connectivityParameters = OCT_STR(name=u'connectivityParameters', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _ProfileHeader_eUICC_Mandatory_AIDs = SEQ_OF(name=u'eUICC-Mandatory-AIDs', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     __ProfileHeader_eUICC_Mandatory_AIDs__item_ = SEQ(name='_item_', mode=MODE_TYPE)
-    ___ProfileHeader_eUICC_Mandatory_AIDs__item__aid = OCT_STR(name='aid', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'ApplicationIdentifier')))
-    ___ProfileHeader_eUICC_Mandatory_AIDs__item__version = OCT_STR(name='version', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    ___ProfileHeader_eUICC_Mandatory_AIDs__item__aid = OCT_STR(name=u'aid', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'ApplicationIdentifier')))
+    ___ProfileHeader_eUICC_Mandatory_AIDs__item__version = OCT_STR(name=u'version', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     ___ProfileHeader_eUICC_Mandatory_AIDs__item__version._const_sz = ASN1Set(rv=[2], rr=[], ev=None, er=[])
     __ProfileHeader_eUICC_Mandatory_AIDs__item_._cont = ASN1Dict([
-        ('aid', ___ProfileHeader_eUICC_Mandatory_AIDs__item__aid),
-        ('version', ___ProfileHeader_eUICC_Mandatory_AIDs__item__version),
+        (u'aid', ___ProfileHeader_eUICC_Mandatory_AIDs__item__aid),
+        (u'version', ___ProfileHeader_eUICC_Mandatory_AIDs__item__version),
         ])
     __ProfileHeader_eUICC_Mandatory_AIDs__item_._ext = []
     _ProfileHeader_eUICC_Mandatory_AIDs._cont = __ProfileHeader_eUICC_Mandatory_AIDs__item_
     ProfileHeader._cont = ASN1Dict([
-        ('major-version', _ProfileHeader_major_version),
-        ('minor-version', _ProfileHeader_minor_version),
-        ('profileType', _ProfileHeader_profileType),
-        ('iccid', _ProfileHeader_iccid),
-        ('pol', _ProfileHeader_pol),
-        ('eUICC-Mandatory-services', _ProfileHeader_eUICC_Mandatory_services),
-        ('eUICC-Mandatory-GFSTEList', _ProfileHeader_eUICC_Mandatory_GFSTEList),
-        ('connectivityParameters', _ProfileHeader_connectivityParameters),
-        ('eUICC-Mandatory-AIDs', _ProfileHeader_eUICC_Mandatory_AIDs),
+        (u'major-version', _ProfileHeader_major_version),
+        (u'minor-version', _ProfileHeader_minor_version),
+        (u'profileType', _ProfileHeader_profileType),
+        (u'iccid', _ProfileHeader_iccid),
+        (u'pol', _ProfileHeader_pol),
+        (u'eUICC-Mandatory-services', _ProfileHeader_eUICC_Mandatory_services),
+        (u'eUICC-Mandatory-GFSTEList', _ProfileHeader_eUICC_Mandatory_GFSTEList),
+        (u'connectivityParameters', _ProfileHeader_connectivityParameters),
+        (u'eUICC-Mandatory-AIDs', _ProfileHeader_eUICC_Mandatory_AIDs),
         ])
     ProfileHeader._ext = []
     
     #-----< ServicesList >-----#
-    ServicesList = SEQ(name='ServicesList', mode=MODE_TYPE)
-    _ServicesList_contactless = NULL(name='contactless', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _ServicesList_usim = NULL(name='usim', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _ServicesList_isim = NULL(name='isim', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _ServicesList_csim = NULL(name='csim', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _ServicesList_milenage = NULL(name='milenage', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _ServicesList_tuak128 = NULL(name='tuak128', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _ServicesList_cave = NULL(name='cave', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _ServicesList_gba_usim = NULL(name='gba-usim', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _ServicesList_gba_isim = NULL(name='gba-isim', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _ServicesList_mbms = NULL(name='mbms', mode=MODE_TYPE, tag=(9, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _ServicesList_eap = NULL(name='eap', mode=MODE_TYPE, tag=(10, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _ServicesList_javacard = NULL(name='javacard', mode=MODE_TYPE, tag=(11, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _ServicesList_multos = NULL(name='multos', mode=MODE_TYPE, tag=(12, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _ServicesList_multiple_usim = NULL(name='multiple-usim', mode=MODE_TYPE, tag=(13, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _ServicesList_multiple_isim = NULL(name='multiple-isim', mode=MODE_TYPE, tag=(14, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _ServicesList_multiple_csim = NULL(name='multiple-csim', mode=MODE_TYPE, tag=(15, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _ServicesList_tuak256 = NULL(name='tuak256', mode=MODE_TYPE, tag=(16, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _ServicesList_usim_test_algorithm = NULL(name='usim-test-algorithm', mode=MODE_TYPE, tag=(17, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _ServicesList_ber_tlv = NULL(name='ber-tlv', mode=MODE_TYPE, tag=(18, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _ServicesList_dfLink = NULL(name='dfLink', mode=MODE_TYPE, tag=(19, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _ServicesList_cat_tp = NULL(name='cat-tp', mode=MODE_TYPE, tag=(20, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    ServicesList = SEQ(name=u'ServicesList', mode=MODE_TYPE)
+    _ServicesList_contactless = NULL(name=u'contactless', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _ServicesList_usim = NULL(name=u'usim', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _ServicesList_isim = NULL(name=u'isim', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _ServicesList_csim = NULL(name=u'csim', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _ServicesList_milenage = NULL(name=u'milenage', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _ServicesList_tuak128 = NULL(name=u'tuak128', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _ServicesList_cave = NULL(name=u'cave', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _ServicesList_gba_usim = NULL(name=u'gba-usim', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _ServicesList_gba_isim = NULL(name=u'gba-isim', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _ServicesList_mbms = NULL(name=u'mbms', mode=MODE_TYPE, tag=(9, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _ServicesList_eap = NULL(name=u'eap', mode=MODE_TYPE, tag=(10, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _ServicesList_javacard = NULL(name=u'javacard', mode=MODE_TYPE, tag=(11, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _ServicesList_multos = NULL(name=u'multos', mode=MODE_TYPE, tag=(12, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _ServicesList_multiple_usim = NULL(name=u'multiple-usim', mode=MODE_TYPE, tag=(13, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _ServicesList_multiple_isim = NULL(name=u'multiple-isim', mode=MODE_TYPE, tag=(14, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _ServicesList_multiple_csim = NULL(name=u'multiple-csim', mode=MODE_TYPE, tag=(15, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _ServicesList_tuak256 = NULL(name=u'tuak256', mode=MODE_TYPE, tag=(16, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _ServicesList_usim_test_algorithm = NULL(name=u'usim-test-algorithm', mode=MODE_TYPE, tag=(17, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _ServicesList_ber_tlv = NULL(name=u'ber-tlv', mode=MODE_TYPE, tag=(18, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _ServicesList_dfLink = NULL(name=u'dfLink', mode=MODE_TYPE, tag=(19, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _ServicesList_cat_tp = NULL(name=u'cat-tp', mode=MODE_TYPE, tag=(20, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     ServicesList._cont = ASN1Dict([
-        ('contactless', _ServicesList_contactless),
-        ('usim', _ServicesList_usim),
-        ('isim', _ServicesList_isim),
-        ('csim', _ServicesList_csim),
-        ('milenage', _ServicesList_milenage),
-        ('tuak128', _ServicesList_tuak128),
-        ('cave', _ServicesList_cave),
-        ('gba-usim', _ServicesList_gba_usim),
-        ('gba-isim', _ServicesList_gba_isim),
-        ('mbms', _ServicesList_mbms),
-        ('eap', _ServicesList_eap),
-        ('javacard', _ServicesList_javacard),
-        ('multos', _ServicesList_multos),
-        ('multiple-usim', _ServicesList_multiple_usim),
-        ('multiple-isim', _ServicesList_multiple_isim),
-        ('multiple-csim', _ServicesList_multiple_csim),
-        ('tuak256', _ServicesList_tuak256),
-        ('usim-test-algorithm', _ServicesList_usim_test_algorithm),
-        ('ber-tlv', _ServicesList_ber_tlv),
-        ('dfLink', _ServicesList_dfLink),
-        ('cat-tp', _ServicesList_cat_tp),
+        (u'contactless', _ServicesList_contactless),
+        (u'usim', _ServicesList_usim),
+        (u'isim', _ServicesList_isim),
+        (u'csim', _ServicesList_csim),
+        (u'milenage', _ServicesList_milenage),
+        (u'tuak128', _ServicesList_tuak128),
+        (u'cave', _ServicesList_cave),
+        (u'gba-usim', _ServicesList_gba_usim),
+        (u'gba-isim', _ServicesList_gba_isim),
+        (u'mbms', _ServicesList_mbms),
+        (u'eap', _ServicesList_eap),
+        (u'javacard', _ServicesList_javacard),
+        (u'multos', _ServicesList_multos),
+        (u'multiple-usim', _ServicesList_multiple_usim),
+        (u'multiple-isim', _ServicesList_multiple_isim),
+        (u'multiple-csim', _ServicesList_multiple_csim),
+        (u'tuak256', _ServicesList_tuak256),
+        (u'usim-test-algorithm', _ServicesList_usim_test_algorithm),
+        (u'ber-tlv', _ServicesList_ber_tlv),
+        (u'dfLink', _ServicesList_dfLink),
+        (u'cat-tp', _ServicesList_cat_tp),
         ])
     ServicesList._ext = []
     
     #-----< ProprietaryInfo >-----#
-    ProprietaryInfo = SEQ(name='ProprietaryInfo', mode=MODE_TYPE)
-    _ProprietaryInfo_specialFileInformation = OCT_STR(name='specialFileInformation', mode=MODE_TYPE, tag=(0, TAG_PRIVATE, TAG_IMPLICIT), default=b'\x00')
+    ProprietaryInfo = SEQ(name=u'ProprietaryInfo', mode=MODE_TYPE)
+    _ProprietaryInfo_specialFileInformation = OCT_STR(name=u'specialFileInformation', mode=MODE_TYPE, tag=(0, TAG_PRIVATE, TAG_IMPLICIT), default=b'\x00')
     _ProprietaryInfo_specialFileInformation._const_sz = ASN1Set(rv=[1], rr=[], ev=None, er=[])
-    _ProprietaryInfo_fillPattern = OCT_STR(name='fillPattern', mode=MODE_TYPE, tag=(1, TAG_PRIVATE, TAG_IMPLICIT), opt=True)
+    _ProprietaryInfo_fillPattern = OCT_STR(name=u'fillPattern', mode=MODE_TYPE, tag=(1, TAG_PRIVATE, TAG_IMPLICIT), opt=True)
     _ProprietaryInfo_fillPattern._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=200)], ev=None, er=[])
-    _ProprietaryInfo_repeatPattern = OCT_STR(name='repeatPattern', mode=MODE_TYPE, tag=(2, TAG_PRIVATE, TAG_IMPLICIT), opt=True)
+    _ProprietaryInfo_repeatPattern = OCT_STR(name=u'repeatPattern', mode=MODE_TYPE, tag=(2, TAG_PRIVATE, TAG_IMPLICIT), opt=True)
     _ProprietaryInfo_repeatPattern._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=200)], ev=None, er=[])
     ProprietaryInfo._cont = ASN1Dict([
-        ('specialFileInformation', _ProprietaryInfo_specialFileInformation),
-        ('fillPattern', _ProprietaryInfo_fillPattern),
-        ('repeatPattern', _ProprietaryInfo_repeatPattern),
+        (u'specialFileInformation', _ProprietaryInfo_specialFileInformation),
+        (u'fillPattern', _ProprietaryInfo_fillPattern),
+        (u'repeatPattern', _ProprietaryInfo_repeatPattern),
         ])
     ProprietaryInfo._ext = []
     
     #-----< Fcp >-----#
-    Fcp = SEQ(name='Fcp', mode=MODE_TYPE)
-    _Fcp_fileDescriptor = OCT_STR(name='fileDescriptor', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    Fcp = SEQ(name=u'Fcp', mode=MODE_TYPE)
+    _Fcp_fileDescriptor = OCT_STR(name=u'fileDescriptor', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     _Fcp_fileDescriptor._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=2, ub=4)], ev=None, er=[])
-    _Fcp_fileID = OCT_STR(name='fileID', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _Fcp_fileID = OCT_STR(name=u'fileID', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     _Fcp_fileID._const_sz = ASN1Set(rv=[2], rr=[], ev=None, er=[])
-    _Fcp_dfName = OCT_STR(name='dfName', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'ApplicationIdentifier')), opt=True)
-    _Fcp_lcsi = OCT_STR(name='lcsi', mode=MODE_TYPE, tag=(10, TAG_CONTEXT_SPEC, TAG_IMPLICIT), default=b'\x05')
+    _Fcp_dfName = OCT_STR(name=u'dfName', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'ApplicationIdentifier')), opt=True)
+    _Fcp_lcsi = OCT_STR(name=u'lcsi', mode=MODE_TYPE, tag=(10, TAG_CONTEXT_SPEC, TAG_IMPLICIT), default=b'\x05')
     _Fcp_lcsi._const_sz = ASN1Set(rv=[1], rr=[], ev=None, er=[])
-    _Fcp_securityAttributesReferenced = OCT_STR(name='securityAttributesReferenced', mode=MODE_TYPE, tag=(11, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _Fcp_securityAttributesReferenced = OCT_STR(name=u'securityAttributesReferenced', mode=MODE_TYPE, tag=(11, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     _Fcp_securityAttributesReferenced._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=3)], ev=None, er=[])
-    _Fcp_efFileSize = OCT_STR(name='efFileSize', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _Fcp_pinStatusTemplateDO = OCT_STR(name='pinStatusTemplateDO', mode=MODE_TYPE, tag=(6, TAG_PRIVATE, TAG_IMPLICIT), opt=True)
-    _Fcp_shortEFID = OCT_STR(name='shortEFID', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _Fcp_efFileSize = OCT_STR(name=u'efFileSize', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _Fcp_pinStatusTemplateDO = OCT_STR(name=u'pinStatusTemplateDO', mode=MODE_TYPE, tag=(6, TAG_PRIVATE, TAG_IMPLICIT), opt=True)
+    _Fcp_shortEFID = OCT_STR(name=u'shortEFID', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     _Fcp_shortEFID._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=1)], ev=None, er=[])
-    _Fcp_proprietaryEFInfo = SEQ(name='proprietaryEFInfo', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'ProprietaryInfo')), opt=True)
-    _Fcp_linkPath = OCT_STR(name='linkPath', mode=MODE_TYPE, tag=(7, TAG_PRIVATE, TAG_IMPLICIT), opt=True)
-    _Fcp_unknownTag = OCT_STR(name='unknownTag', mode=MODE_TYPE, tag=(99, TAG_PRIVATE, TAG_IMPLICIT), opt=True)
+    _Fcp_proprietaryEFInfo = SEQ(name=u'proprietaryEFInfo', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'ProprietaryInfo')), opt=True)
+    _Fcp_linkPath = OCT_STR(name=u'linkPath', mode=MODE_TYPE, tag=(7, TAG_PRIVATE, TAG_IMPLICIT), opt=True)
+    _Fcp_unknownTag = OCT_STR(name=u'unknownTag', mode=MODE_TYPE, tag=(99, TAG_PRIVATE, TAG_IMPLICIT), opt=True)
     Fcp._cont = ASN1Dict([
-        ('fileDescriptor', _Fcp_fileDescriptor),
-        ('fileID', _Fcp_fileID),
-        ('dfName', _Fcp_dfName),
-        ('lcsi', _Fcp_lcsi),
-        ('securityAttributesReferenced', _Fcp_securityAttributesReferenced),
-        ('efFileSize', _Fcp_efFileSize),
-        ('pinStatusTemplateDO', _Fcp_pinStatusTemplateDO),
-        ('shortEFID', _Fcp_shortEFID),
-        ('proprietaryEFInfo', _Fcp_proprietaryEFInfo),
-        ('linkPath', _Fcp_linkPath),
-        ('unknownTag', _Fcp_unknownTag),
+        (u'fileDescriptor', _Fcp_fileDescriptor),
+        (u'fileID', _Fcp_fileID),
+        (u'dfName', _Fcp_dfName),
+        (u'lcsi', _Fcp_lcsi),
+        (u'securityAttributesReferenced', _Fcp_securityAttributesReferenced),
+        (u'efFileSize', _Fcp_efFileSize),
+        (u'pinStatusTemplateDO', _Fcp_pinStatusTemplateDO),
+        (u'shortEFID', _Fcp_shortEFID),
+        (u'proprietaryEFInfo', _Fcp_proprietaryEFInfo),
+        (u'linkPath', _Fcp_linkPath),
+        (u'unknownTag', _Fcp_unknownTag),
         ])
     Fcp._ext = []
     
     #-----< File >-----#
-    File = SEQ_OF(name='File', mode=MODE_TYPE)
+    File = SEQ_OF(name=u'File', mode=MODE_TYPE)
     _File__item_ = CHOICE(name='_item_', mode=MODE_TYPE)
-    __File__item__doNotCreate = NULL(name='doNotCreate', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    __File__item__fileDescriptor = SEQ(name='fileDescriptor', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'Fcp')))
-    __File__item__fillFileOffset = INT(name='fillFileOffset', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'UInt16')))
-    __File__item__fillFileContent = OCT_STR(name='fillFileContent', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __File__item__doNotCreate = NULL(name=u'doNotCreate', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __File__item__fileDescriptor = SEQ(name=u'fileDescriptor', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'Fcp')))
+    __File__item__fillFileOffset = INT(name=u'fillFileOffset', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'UInt16')))
+    __File__item__fillFileContent = OCT_STR(name=u'fillFileContent', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     _File__item_._cont = ASN1Dict([
-        ('doNotCreate', __File__item__doNotCreate),
-        ('fileDescriptor', __File__item__fileDescriptor),
-        ('fillFileOffset', __File__item__fillFileOffset),
-        ('fillFileContent', __File__item__fillFileContent),
+        (u'doNotCreate', __File__item__doNotCreate),
+        (u'fileDescriptor', __File__item__fileDescriptor),
+        (u'fillFileOffset', __File__item__fillFileOffset),
+        (u'fillFileContent', __File__item__fillFileContent),
         ])
     _File__item_._ext = []
     File._cont = _File__item_
     
     #-----< PE-MF >-----#
-    PE_MF = SEQ(name='PE-MF', mode=MODE_TYPE)
-    _PE_MF_mf_header = SEQ(name='mf-header', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'PEHeader')))
-    _PE_MF_templateID = OID(name='templateID', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _PE_MF_mf = SEQ_OF(name='mf', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')))
-    _PE_MF_ef_pl = SEQ_OF(name='ef-pl', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_MF_ef_iccid = SEQ_OF(name='ef-iccid', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')))
-    _PE_MF_ef_dir = SEQ_OF(name='ef-dir', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')))
-    _PE_MF_ef_arr = SEQ_OF(name='ef-arr', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')))
-    _PE_MF_ef_umpc = SEQ_OF(name='ef-umpc', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    PE_MF = SEQ(name=u'PE-MF', mode=MODE_TYPE)
+    _PE_MF_mf_header = SEQ(name=u'mf-header', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'PEHeader')))
+    _PE_MF_templateID = OID(name=u'templateID', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _PE_MF_mf = SEQ_OF(name=u'mf', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')))
+    _PE_MF_ef_pl = SEQ_OF(name=u'ef-pl', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_MF_ef_iccid = SEQ_OF(name=u'ef-iccid', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')))
+    _PE_MF_ef_dir = SEQ_OF(name=u'ef-dir', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')))
+    _PE_MF_ef_arr = SEQ_OF(name=u'ef-arr', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')))
+    _PE_MF_ef_umpc = SEQ_OF(name=u'ef-umpc', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
     PE_MF._cont = ASN1Dict([
-        ('mf-header', _PE_MF_mf_header),
-        ('templateID', _PE_MF_templateID),
-        ('mf', _PE_MF_mf),
-        ('ef-pl', _PE_MF_ef_pl),
-        ('ef-iccid', _PE_MF_ef_iccid),
-        ('ef-dir', _PE_MF_ef_dir),
-        ('ef-arr', _PE_MF_ef_arr),
-        ('ef-umpc', _PE_MF_ef_umpc),
+        (u'mf-header', _PE_MF_mf_header),
+        (u'templateID', _PE_MF_templateID),
+        (u'mf', _PE_MF_mf),
+        (u'ef-pl', _PE_MF_ef_pl),
+        (u'ef-iccid', _PE_MF_ef_iccid),
+        (u'ef-dir', _PE_MF_ef_dir),
+        (u'ef-arr', _PE_MF_ef_arr),
+        (u'ef-umpc', _PE_MF_ef_umpc),
         ])
     PE_MF._ext = []
     
     #-----< PE-CD >-----#
-    PE_CD = SEQ(name='PE-CD', mode=MODE_TYPE)
-    _PE_CD_cd_header = SEQ(name='cd-header', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'PEHeader')))
-    _PE_CD_templateID = OID(name='templateID', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _PE_CD_df_cd = SEQ_OF(name='df-cd', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')))
-    _PE_CD_ef_launchpad = SEQ_OF(name='ef-launchpad', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_CD_ef_icon = SEQ_OF(name='ef-icon', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    PE_CD = SEQ(name=u'PE-CD', mode=MODE_TYPE)
+    _PE_CD_cd_header = SEQ(name=u'cd-header', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'PEHeader')))
+    _PE_CD_templateID = OID(name=u'templateID', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _PE_CD_df_cd = SEQ_OF(name=u'df-cd', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')))
+    _PE_CD_ef_launchpad = SEQ_OF(name=u'ef-launchpad', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_CD_ef_icon = SEQ_OF(name=u'ef-icon', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
     PE_CD._cont = ASN1Dict([
-        ('cd-header', _PE_CD_cd_header),
-        ('templateID', _PE_CD_templateID),
-        ('df-cd', _PE_CD_df_cd),
-        ('ef-launchpad', _PE_CD_ef_launchpad),
-        ('ef-icon', _PE_CD_ef_icon),
+        (u'cd-header', _PE_CD_cd_header),
+        (u'templateID', _PE_CD_templateID),
+        (u'df-cd', _PE_CD_df_cd),
+        (u'ef-launchpad', _PE_CD_ef_launchpad),
+        (u'ef-icon', _PE_CD_ef_icon),
         ])
     PE_CD._ext = []
     
     #-----< PE-TELECOM >-----#
-    PE_TELECOM = SEQ(name='PE-TELECOM', mode=MODE_TYPE)
-    _PE_TELECOM_telecom_header = SEQ(name='telecom-header', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'PEHeader')))
-    _PE_TELECOM_templateID = OID(name='templateID', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _PE_TELECOM_df_telecom = SEQ_OF(name='df-telecom', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')))
-    _PE_TELECOM_ef_arr = SEQ_OF(name='ef-arr', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_TELECOM_ef_rma = SEQ_OF(name='ef-rma', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_TELECOM_ef_sume = SEQ_OF(name='ef-sume', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_TELECOM_ef_ice_dn = SEQ_OF(name='ef-ice-dn', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_TELECOM_ef_ice_ff = SEQ_OF(name='ef-ice-ff', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_TELECOM_ef_psismsc = SEQ_OF(name='ef-psismsc', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_TELECOM_df_graphics = SEQ_OF(name='df-graphics', mode=MODE_TYPE, tag=(9, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_TELECOM_ef_img = SEQ_OF(name='ef-img', mode=MODE_TYPE, tag=(10, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_TELECOM_ef_iidf = SEQ_OF(name='ef-iidf', mode=MODE_TYPE, tag=(11, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_TELECOM_ef_ice_graphics = SEQ_OF(name='ef-ice-graphics', mode=MODE_TYPE, tag=(12, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_TELECOM_ef_launch_scws = SEQ_OF(name='ef-launch-scws', mode=MODE_TYPE, tag=(13, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_TELECOM_ef_icon = SEQ_OF(name='ef-icon', mode=MODE_TYPE, tag=(14, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_TELECOM_df_phonebook = SEQ_OF(name='df-phonebook', mode=MODE_TYPE, tag=(15, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_TELECOM_ef_pbr = SEQ_OF(name='ef-pbr', mode=MODE_TYPE, tag=(16, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_TELECOM_ef_ext1 = SEQ_OF(name='ef-ext1', mode=MODE_TYPE, tag=(17, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_TELECOM_ef_aas = SEQ_OF(name='ef-aas', mode=MODE_TYPE, tag=(18, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_TELECOM_ef_gas = SEQ_OF(name='ef-gas', mode=MODE_TYPE, tag=(19, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_TELECOM_ef_psc = SEQ_OF(name='ef-psc', mode=MODE_TYPE, tag=(20, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_TELECOM_ef_cc = SEQ_OF(name='ef-cc', mode=MODE_TYPE, tag=(21, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_TELECOM_ef_puid = SEQ_OF(name='ef-puid', mode=MODE_TYPE, tag=(22, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_TELECOM_ef_iap = SEQ_OF(name='ef-iap', mode=MODE_TYPE, tag=(23, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_TELECOM_ef_adn = SEQ_OF(name='ef-adn', mode=MODE_TYPE, tag=(24, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_TELECOM_ef_pbc = SEQ_OF(name='ef-pbc', mode=MODE_TYPE, tag=(25, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_TELECOM_ef_anr = SEQ_OF(name='ef-anr', mode=MODE_TYPE, tag=(26, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_TELECOM_ef_puri = SEQ_OF(name='ef-puri', mode=MODE_TYPE, tag=(27, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_TELECOM_ef_email = SEQ_OF(name='ef-email', mode=MODE_TYPE, tag=(28, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_TELECOM_ef_sne = SEQ_OF(name='ef-sne', mode=MODE_TYPE, tag=(29, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_TELECOM_ef_uid = SEQ_OF(name='ef-uid', mode=MODE_TYPE, tag=(30, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_TELECOM_ef_grp = SEQ_OF(name='ef-grp', mode=MODE_TYPE, tag=(31, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_TELECOM_ef_ccp1 = SEQ_OF(name='ef-ccp1', mode=MODE_TYPE, tag=(32, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_TELECOM_df_multimedia = SEQ_OF(name='df-multimedia', mode=MODE_TYPE, tag=(33, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_TELECOM_ef_mml = SEQ_OF(name='ef-mml', mode=MODE_TYPE, tag=(34, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_TELECOM_ef_mmdf = SEQ_OF(name='ef-mmdf', mode=MODE_TYPE, tag=(35, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_TELECOM_df_mmss = SEQ_OF(name='df-mmss', mode=MODE_TYPE, tag=(36, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_TELECOM_ef_mlpl = SEQ_OF(name='ef-mlpl', mode=MODE_TYPE, tag=(37, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_TELECOM_ef_mspl = SEQ_OF(name='ef-mspl', mode=MODE_TYPE, tag=(38, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_TELECOM_ef_mmssmode = SEQ_OF(name='ef-mmssmode', mode=MODE_TYPE, tag=(39, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    PE_TELECOM = SEQ(name=u'PE-TELECOM', mode=MODE_TYPE)
+    _PE_TELECOM_telecom_header = SEQ(name=u'telecom-header', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'PEHeader')))
+    _PE_TELECOM_templateID = OID(name=u'templateID', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _PE_TELECOM_df_telecom = SEQ_OF(name=u'df-telecom', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')))
+    _PE_TELECOM_ef_arr = SEQ_OF(name=u'ef-arr', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_TELECOM_ef_rma = SEQ_OF(name=u'ef-rma', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_TELECOM_ef_sume = SEQ_OF(name=u'ef-sume', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_TELECOM_ef_ice_dn = SEQ_OF(name=u'ef-ice-dn', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_TELECOM_ef_ice_ff = SEQ_OF(name=u'ef-ice-ff', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_TELECOM_ef_psismsc = SEQ_OF(name=u'ef-psismsc', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_TELECOM_df_graphics = SEQ_OF(name=u'df-graphics', mode=MODE_TYPE, tag=(9, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_TELECOM_ef_img = SEQ_OF(name=u'ef-img', mode=MODE_TYPE, tag=(10, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_TELECOM_ef_iidf = SEQ_OF(name=u'ef-iidf', mode=MODE_TYPE, tag=(11, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_TELECOM_ef_ice_graphics = SEQ_OF(name=u'ef-ice-graphics', mode=MODE_TYPE, tag=(12, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_TELECOM_ef_launch_scws = SEQ_OF(name=u'ef-launch-scws', mode=MODE_TYPE, tag=(13, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_TELECOM_ef_icon = SEQ_OF(name=u'ef-icon', mode=MODE_TYPE, tag=(14, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_TELECOM_df_phonebook = SEQ_OF(name=u'df-phonebook', mode=MODE_TYPE, tag=(15, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_TELECOM_ef_pbr = SEQ_OF(name=u'ef-pbr', mode=MODE_TYPE, tag=(16, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_TELECOM_ef_ext1 = SEQ_OF(name=u'ef-ext1', mode=MODE_TYPE, tag=(17, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_TELECOM_ef_aas = SEQ_OF(name=u'ef-aas', mode=MODE_TYPE, tag=(18, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_TELECOM_ef_gas = SEQ_OF(name=u'ef-gas', mode=MODE_TYPE, tag=(19, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_TELECOM_ef_psc = SEQ_OF(name=u'ef-psc', mode=MODE_TYPE, tag=(20, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_TELECOM_ef_cc = SEQ_OF(name=u'ef-cc', mode=MODE_TYPE, tag=(21, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_TELECOM_ef_puid = SEQ_OF(name=u'ef-puid', mode=MODE_TYPE, tag=(22, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_TELECOM_ef_iap = SEQ_OF(name=u'ef-iap', mode=MODE_TYPE, tag=(23, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_TELECOM_ef_adn = SEQ_OF(name=u'ef-adn', mode=MODE_TYPE, tag=(24, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_TELECOM_ef_pbc = SEQ_OF(name=u'ef-pbc', mode=MODE_TYPE, tag=(25, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_TELECOM_ef_anr = SEQ_OF(name=u'ef-anr', mode=MODE_TYPE, tag=(26, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_TELECOM_ef_puri = SEQ_OF(name=u'ef-puri', mode=MODE_TYPE, tag=(27, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_TELECOM_ef_email = SEQ_OF(name=u'ef-email', mode=MODE_TYPE, tag=(28, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_TELECOM_ef_sne = SEQ_OF(name=u'ef-sne', mode=MODE_TYPE, tag=(29, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_TELECOM_ef_uid = SEQ_OF(name=u'ef-uid', mode=MODE_TYPE, tag=(30, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_TELECOM_ef_grp = SEQ_OF(name=u'ef-grp', mode=MODE_TYPE, tag=(31, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_TELECOM_ef_ccp1 = SEQ_OF(name=u'ef-ccp1', mode=MODE_TYPE, tag=(32, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_TELECOM_df_multimedia = SEQ_OF(name=u'df-multimedia', mode=MODE_TYPE, tag=(33, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_TELECOM_ef_mml = SEQ_OF(name=u'ef-mml', mode=MODE_TYPE, tag=(34, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_TELECOM_ef_mmdf = SEQ_OF(name=u'ef-mmdf', mode=MODE_TYPE, tag=(35, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_TELECOM_df_mmss = SEQ_OF(name=u'df-mmss', mode=MODE_TYPE, tag=(36, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_TELECOM_ef_mlpl = SEQ_OF(name=u'ef-mlpl', mode=MODE_TYPE, tag=(37, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_TELECOM_ef_mspl = SEQ_OF(name=u'ef-mspl', mode=MODE_TYPE, tag=(38, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_TELECOM_ef_mmssmode = SEQ_OF(name=u'ef-mmssmode', mode=MODE_TYPE, tag=(39, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
     PE_TELECOM._cont = ASN1Dict([
-        ('telecom-header', _PE_TELECOM_telecom_header),
-        ('templateID', _PE_TELECOM_templateID),
-        ('df-telecom', _PE_TELECOM_df_telecom),
-        ('ef-arr', _PE_TELECOM_ef_arr),
-        ('ef-rma', _PE_TELECOM_ef_rma),
-        ('ef-sume', _PE_TELECOM_ef_sume),
-        ('ef-ice-dn', _PE_TELECOM_ef_ice_dn),
-        ('ef-ice-ff', _PE_TELECOM_ef_ice_ff),
-        ('ef-psismsc', _PE_TELECOM_ef_psismsc),
-        ('df-graphics', _PE_TELECOM_df_graphics),
-        ('ef-img', _PE_TELECOM_ef_img),
-        ('ef-iidf', _PE_TELECOM_ef_iidf),
-        ('ef-ice-graphics', _PE_TELECOM_ef_ice_graphics),
-        ('ef-launch-scws', _PE_TELECOM_ef_launch_scws),
-        ('ef-icon', _PE_TELECOM_ef_icon),
-        ('df-phonebook', _PE_TELECOM_df_phonebook),
-        ('ef-pbr', _PE_TELECOM_ef_pbr),
-        ('ef-ext1', _PE_TELECOM_ef_ext1),
-        ('ef-aas', _PE_TELECOM_ef_aas),
-        ('ef-gas', _PE_TELECOM_ef_gas),
-        ('ef-psc', _PE_TELECOM_ef_psc),
-        ('ef-cc', _PE_TELECOM_ef_cc),
-        ('ef-puid', _PE_TELECOM_ef_puid),
-        ('ef-iap', _PE_TELECOM_ef_iap),
-        ('ef-adn', _PE_TELECOM_ef_adn),
-        ('ef-pbc', _PE_TELECOM_ef_pbc),
-        ('ef-anr', _PE_TELECOM_ef_anr),
-        ('ef-puri', _PE_TELECOM_ef_puri),
-        ('ef-email', _PE_TELECOM_ef_email),
-        ('ef-sne', _PE_TELECOM_ef_sne),
-        ('ef-uid', _PE_TELECOM_ef_uid),
-        ('ef-grp', _PE_TELECOM_ef_grp),
-        ('ef-ccp1', _PE_TELECOM_ef_ccp1),
-        ('df-multimedia', _PE_TELECOM_df_multimedia),
-        ('ef-mml', _PE_TELECOM_ef_mml),
-        ('ef-mmdf', _PE_TELECOM_ef_mmdf),
-        ('df-mmss', _PE_TELECOM_df_mmss),
-        ('ef-mlpl', _PE_TELECOM_ef_mlpl),
-        ('ef-mspl', _PE_TELECOM_ef_mspl),
-        ('ef-mmssmode', _PE_TELECOM_ef_mmssmode),
+        (u'telecom-header', _PE_TELECOM_telecom_header),
+        (u'templateID', _PE_TELECOM_templateID),
+        (u'df-telecom', _PE_TELECOM_df_telecom),
+        (u'ef-arr', _PE_TELECOM_ef_arr),
+        (u'ef-rma', _PE_TELECOM_ef_rma),
+        (u'ef-sume', _PE_TELECOM_ef_sume),
+        (u'ef-ice-dn', _PE_TELECOM_ef_ice_dn),
+        (u'ef-ice-ff', _PE_TELECOM_ef_ice_ff),
+        (u'ef-psismsc', _PE_TELECOM_ef_psismsc),
+        (u'df-graphics', _PE_TELECOM_df_graphics),
+        (u'ef-img', _PE_TELECOM_ef_img),
+        (u'ef-iidf', _PE_TELECOM_ef_iidf),
+        (u'ef-ice-graphics', _PE_TELECOM_ef_ice_graphics),
+        (u'ef-launch-scws', _PE_TELECOM_ef_launch_scws),
+        (u'ef-icon', _PE_TELECOM_ef_icon),
+        (u'df-phonebook', _PE_TELECOM_df_phonebook),
+        (u'ef-pbr', _PE_TELECOM_ef_pbr),
+        (u'ef-ext1', _PE_TELECOM_ef_ext1),
+        (u'ef-aas', _PE_TELECOM_ef_aas),
+        (u'ef-gas', _PE_TELECOM_ef_gas),
+        (u'ef-psc', _PE_TELECOM_ef_psc),
+        (u'ef-cc', _PE_TELECOM_ef_cc),
+        (u'ef-puid', _PE_TELECOM_ef_puid),
+        (u'ef-iap', _PE_TELECOM_ef_iap),
+        (u'ef-adn', _PE_TELECOM_ef_adn),
+        (u'ef-pbc', _PE_TELECOM_ef_pbc),
+        (u'ef-anr', _PE_TELECOM_ef_anr),
+        (u'ef-puri', _PE_TELECOM_ef_puri),
+        (u'ef-email', _PE_TELECOM_ef_email),
+        (u'ef-sne', _PE_TELECOM_ef_sne),
+        (u'ef-uid', _PE_TELECOM_ef_uid),
+        (u'ef-grp', _PE_TELECOM_ef_grp),
+        (u'ef-ccp1', _PE_TELECOM_ef_ccp1),
+        (u'df-multimedia', _PE_TELECOM_df_multimedia),
+        (u'ef-mml', _PE_TELECOM_ef_mml),
+        (u'ef-mmdf', _PE_TELECOM_ef_mmdf),
+        (u'df-mmss', _PE_TELECOM_df_mmss),
+        (u'ef-mlpl', _PE_TELECOM_ef_mlpl),
+        (u'ef-mspl', _PE_TELECOM_ef_mspl),
+        (u'ef-mmssmode', _PE_TELECOM_ef_mmssmode),
         ])
     PE_TELECOM._ext = []
     
     #-----< PE-USIM >-----#
-    PE_USIM = SEQ(name='PE-USIM', mode=MODE_TYPE)
-    _PE_USIM_usim_header = SEQ(name='usim-header', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'PEHeader')))
-    _PE_USIM_templateID = OID(name='templateID', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _PE_USIM_adf_usim = SEQ_OF(name='adf-usim', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')))
-    _PE_USIM_ef_imsi = SEQ_OF(name='ef-imsi', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')))
-    _PE_USIM_ef_arr = SEQ_OF(name='ef-arr', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')))
-    _PE_USIM_ef_keys = SEQ_OF(name='ef-keys', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_USIM_ef_keysPS = SEQ_OF(name='ef-keysPS', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_USIM_ef_hpplmn = SEQ_OF(name='ef-hpplmn', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_USIM_ef_ust = SEQ_OF(name='ef-ust', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')))
-    _PE_USIM_ef_fdn = SEQ_OF(name='ef-fdn', mode=MODE_TYPE, tag=(9, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_USIM_ef_sms = SEQ_OF(name='ef-sms', mode=MODE_TYPE, tag=(10, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_USIM_ef_smsp = SEQ_OF(name='ef-smsp', mode=MODE_TYPE, tag=(11, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_USIM_ef_smss = SEQ_OF(name='ef-smss', mode=MODE_TYPE, tag=(12, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_USIM_ef_spn = SEQ_OF(name='ef-spn', mode=MODE_TYPE, tag=(13, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')))
-    _PE_USIM_ef_est = SEQ_OF(name='ef-est', mode=MODE_TYPE, tag=(14, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')))
-    _PE_USIM_ef_start_hfn = SEQ_OF(name='ef-start-hfn', mode=MODE_TYPE, tag=(15, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_USIM_ef_threshold = SEQ_OF(name='ef-threshold', mode=MODE_TYPE, tag=(16, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_USIM_ef_psloci = SEQ_OF(name='ef-psloci', mode=MODE_TYPE, tag=(17, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_USIM_ef_acc = SEQ_OF(name='ef-acc', mode=MODE_TYPE, tag=(18, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')))
-    _PE_USIM_ef_fplmn = SEQ_OF(name='ef-fplmn', mode=MODE_TYPE, tag=(19, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_USIM_ef_loci = SEQ_OF(name='ef-loci', mode=MODE_TYPE, tag=(20, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_USIM_ef_ad = SEQ_OF(name='ef-ad', mode=MODE_TYPE, tag=(21, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_USIM_ef_ecc = SEQ_OF(name='ef-ecc', mode=MODE_TYPE, tag=(22, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')))
-    _PE_USIM_ef_netpar = SEQ_OF(name='ef-netpar', mode=MODE_TYPE, tag=(23, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_USIM_ef_epsloci = SEQ_OF(name='ef-epsloci', mode=MODE_TYPE, tag=(24, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_USIM_ef_epsnsc = SEQ_OF(name='ef-epsnsc', mode=MODE_TYPE, tag=(25, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    PE_USIM = SEQ(name=u'PE-USIM', mode=MODE_TYPE)
+    _PE_USIM_usim_header = SEQ(name=u'usim-header', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'PEHeader')))
+    _PE_USIM_templateID = OID(name=u'templateID', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _PE_USIM_adf_usim = SEQ_OF(name=u'adf-usim', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')))
+    _PE_USIM_ef_imsi = SEQ_OF(name=u'ef-imsi', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')))
+    _PE_USIM_ef_arr = SEQ_OF(name=u'ef-arr', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')))
+    _PE_USIM_ef_keys = SEQ_OF(name=u'ef-keys', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_USIM_ef_keysPS = SEQ_OF(name=u'ef-keysPS', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_USIM_ef_hpplmn = SEQ_OF(name=u'ef-hpplmn', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_USIM_ef_ust = SEQ_OF(name=u'ef-ust', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')))
+    _PE_USIM_ef_fdn = SEQ_OF(name=u'ef-fdn', mode=MODE_TYPE, tag=(9, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_USIM_ef_sms = SEQ_OF(name=u'ef-sms', mode=MODE_TYPE, tag=(10, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_USIM_ef_smsp = SEQ_OF(name=u'ef-smsp', mode=MODE_TYPE, tag=(11, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_USIM_ef_smss = SEQ_OF(name=u'ef-smss', mode=MODE_TYPE, tag=(12, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_USIM_ef_spn = SEQ_OF(name=u'ef-spn', mode=MODE_TYPE, tag=(13, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')))
+    _PE_USIM_ef_est = SEQ_OF(name=u'ef-est', mode=MODE_TYPE, tag=(14, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')))
+    _PE_USIM_ef_start_hfn = SEQ_OF(name=u'ef-start-hfn', mode=MODE_TYPE, tag=(15, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_USIM_ef_threshold = SEQ_OF(name=u'ef-threshold', mode=MODE_TYPE, tag=(16, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_USIM_ef_psloci = SEQ_OF(name=u'ef-psloci', mode=MODE_TYPE, tag=(17, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_USIM_ef_acc = SEQ_OF(name=u'ef-acc', mode=MODE_TYPE, tag=(18, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')))
+    _PE_USIM_ef_fplmn = SEQ_OF(name=u'ef-fplmn', mode=MODE_TYPE, tag=(19, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_USIM_ef_loci = SEQ_OF(name=u'ef-loci', mode=MODE_TYPE, tag=(20, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_USIM_ef_ad = SEQ_OF(name=u'ef-ad', mode=MODE_TYPE, tag=(21, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_USIM_ef_ecc = SEQ_OF(name=u'ef-ecc', mode=MODE_TYPE, tag=(22, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')))
+    _PE_USIM_ef_netpar = SEQ_OF(name=u'ef-netpar', mode=MODE_TYPE, tag=(23, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_USIM_ef_epsloci = SEQ_OF(name=u'ef-epsloci', mode=MODE_TYPE, tag=(24, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_USIM_ef_epsnsc = SEQ_OF(name=u'ef-epsnsc', mode=MODE_TYPE, tag=(25, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
     PE_USIM._cont = ASN1Dict([
-        ('usim-header', _PE_USIM_usim_header),
-        ('templateID', _PE_USIM_templateID),
-        ('adf-usim', _PE_USIM_adf_usim),
-        ('ef-imsi', _PE_USIM_ef_imsi),
-        ('ef-arr', _PE_USIM_ef_arr),
-        ('ef-keys', _PE_USIM_ef_keys),
-        ('ef-keysPS', _PE_USIM_ef_keysPS),
-        ('ef-hpplmn', _PE_USIM_ef_hpplmn),
-        ('ef-ust', _PE_USIM_ef_ust),
-        ('ef-fdn', _PE_USIM_ef_fdn),
-        ('ef-sms', _PE_USIM_ef_sms),
-        ('ef-smsp', _PE_USIM_ef_smsp),
-        ('ef-smss', _PE_USIM_ef_smss),
-        ('ef-spn', _PE_USIM_ef_spn),
-        ('ef-est', _PE_USIM_ef_est),
-        ('ef-start-hfn', _PE_USIM_ef_start_hfn),
-        ('ef-threshold', _PE_USIM_ef_threshold),
-        ('ef-psloci', _PE_USIM_ef_psloci),
-        ('ef-acc', _PE_USIM_ef_acc),
-        ('ef-fplmn', _PE_USIM_ef_fplmn),
-        ('ef-loci', _PE_USIM_ef_loci),
-        ('ef-ad', _PE_USIM_ef_ad),
-        ('ef-ecc', _PE_USIM_ef_ecc),
-        ('ef-netpar', _PE_USIM_ef_netpar),
-        ('ef-epsloci', _PE_USIM_ef_epsloci),
-        ('ef-epsnsc', _PE_USIM_ef_epsnsc),
+        (u'usim-header', _PE_USIM_usim_header),
+        (u'templateID', _PE_USIM_templateID),
+        (u'adf-usim', _PE_USIM_adf_usim),
+        (u'ef-imsi', _PE_USIM_ef_imsi),
+        (u'ef-arr', _PE_USIM_ef_arr),
+        (u'ef-keys', _PE_USIM_ef_keys),
+        (u'ef-keysPS', _PE_USIM_ef_keysPS),
+        (u'ef-hpplmn', _PE_USIM_ef_hpplmn),
+        (u'ef-ust', _PE_USIM_ef_ust),
+        (u'ef-fdn', _PE_USIM_ef_fdn),
+        (u'ef-sms', _PE_USIM_ef_sms),
+        (u'ef-smsp', _PE_USIM_ef_smsp),
+        (u'ef-smss', _PE_USIM_ef_smss),
+        (u'ef-spn', _PE_USIM_ef_spn),
+        (u'ef-est', _PE_USIM_ef_est),
+        (u'ef-start-hfn', _PE_USIM_ef_start_hfn),
+        (u'ef-threshold', _PE_USIM_ef_threshold),
+        (u'ef-psloci', _PE_USIM_ef_psloci),
+        (u'ef-acc', _PE_USIM_ef_acc),
+        (u'ef-fplmn', _PE_USIM_ef_fplmn),
+        (u'ef-loci', _PE_USIM_ef_loci),
+        (u'ef-ad', _PE_USIM_ef_ad),
+        (u'ef-ecc', _PE_USIM_ef_ecc),
+        (u'ef-netpar', _PE_USIM_ef_netpar),
+        (u'ef-epsloci', _PE_USIM_ef_epsloci),
+        (u'ef-epsnsc', _PE_USIM_ef_epsnsc),
         ])
     PE_USIM._ext = []
     
     #-----< PE-OPT-USIM >-----#
-    PE_OPT_USIM = SEQ(name='PE-OPT-USIM', mode=MODE_TYPE)
-    _PE_OPT_USIM_optusim_header = SEQ(name='optusim-header', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'PEHeader')))
-    _PE_OPT_USIM_templateID = OID(name='templateID', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _PE_OPT_USIM_ef_li = SEQ_OF(name='ef-li', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_OPT_USIM_ef_acmax = SEQ_OF(name='ef-acmax', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_OPT_USIM_ef_acm = SEQ_OF(name='ef-acm', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_OPT_USIM_ef_gid1 = SEQ_OF(name='ef-gid1', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_OPT_USIM_ef_gid2 = SEQ_OF(name='ef-gid2', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_OPT_USIM_ef_msisdn = SEQ_OF(name='ef-msisdn', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_OPT_USIM_ef_puct = SEQ_OF(name='ef-puct', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_OPT_USIM_ef_cbmi = SEQ_OF(name='ef-cbmi', mode=MODE_TYPE, tag=(9, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_OPT_USIM_ef_cbmid = SEQ_OF(name='ef-cbmid', mode=MODE_TYPE, tag=(10, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_OPT_USIM_ef_sdn = SEQ_OF(name='ef-sdn', mode=MODE_TYPE, tag=(11, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_OPT_USIM_ef_ext2 = SEQ_OF(name='ef-ext2', mode=MODE_TYPE, tag=(12, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_OPT_USIM_ef_ext3 = SEQ_OF(name='ef-ext3', mode=MODE_TYPE, tag=(13, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_OPT_USIM_ef_cbmir = SEQ_OF(name='ef-cbmir', mode=MODE_TYPE, tag=(14, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_OPT_USIM_ef_plmnwact = SEQ_OF(name='ef-plmnwact', mode=MODE_TYPE, tag=(15, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_OPT_USIM_ef_oplmnwact = SEQ_OF(name='ef-oplmnwact', mode=MODE_TYPE, tag=(16, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_OPT_USIM_ef_hplmnwact = SEQ_OF(name='ef-hplmnwact', mode=MODE_TYPE, tag=(17, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_OPT_USIM_ef_dck = SEQ_OF(name='ef-dck', mode=MODE_TYPE, tag=(18, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_OPT_USIM_ef_cnl = SEQ_OF(name='ef-cnl', mode=MODE_TYPE, tag=(19, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_OPT_USIM_ef_smsr = SEQ_OF(name='ef-smsr', mode=MODE_TYPE, tag=(20, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_OPT_USIM_ef_bdn = SEQ_OF(name='ef-bdn', mode=MODE_TYPE, tag=(21, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_OPT_USIM_ef_ext5 = SEQ_OF(name='ef-ext5', mode=MODE_TYPE, tag=(22, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_OPT_USIM_ef_ccp2 = SEQ_OF(name='ef-ccp2', mode=MODE_TYPE, tag=(23, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_OPT_USIM_ef_ext4 = SEQ_OF(name='ef-ext4', mode=MODE_TYPE, tag=(24, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_OPT_USIM_ef_acl = SEQ_OF(name='ef-acl', mode=MODE_TYPE, tag=(25, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_OPT_USIM_ef_cmi = SEQ_OF(name='ef-cmi', mode=MODE_TYPE, tag=(26, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_OPT_USIM_ef_ici = SEQ_OF(name='ef-ici', mode=MODE_TYPE, tag=(27, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_OPT_USIM_ef_oci = SEQ_OF(name='ef-oci', mode=MODE_TYPE, tag=(28, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_OPT_USIM_ef_ict = SEQ_OF(name='ef-ict', mode=MODE_TYPE, tag=(29, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_OPT_USIM_ef_oct = SEQ_OF(name='ef-oct', mode=MODE_TYPE, tag=(30, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_OPT_USIM_ef_vgcs = SEQ_OF(name='ef-vgcs', mode=MODE_TYPE, tag=(31, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_OPT_USIM_ef_vgcss = SEQ_OF(name='ef-vgcss', mode=MODE_TYPE, tag=(32, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_OPT_USIM_ef_vbs = SEQ_OF(name='ef-vbs', mode=MODE_TYPE, tag=(33, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_OPT_USIM_ef_vbss = SEQ_OF(name='ef-vbss', mode=MODE_TYPE, tag=(34, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_OPT_USIM_ef_emlpp = SEQ_OF(name='ef-emlpp', mode=MODE_TYPE, tag=(35, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_OPT_USIM_ef_aaem = SEQ_OF(name='ef-aaem', mode=MODE_TYPE, tag=(36, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_OPT_USIM_ef_hiddenkey = SEQ_OF(name='ef-hiddenkey', mode=MODE_TYPE, tag=(37, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_OPT_USIM_ef_pnn = SEQ_OF(name='ef-pnn', mode=MODE_TYPE, tag=(38, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_OPT_USIM_ef_opl = SEQ_OF(name='ef-opl', mode=MODE_TYPE, tag=(39, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_OPT_USIM_ef_mbdn = SEQ_OF(name='ef-mbdn', mode=MODE_TYPE, tag=(40, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_OPT_USIM_ef_ext6 = SEQ_OF(name='ef-ext6', mode=MODE_TYPE, tag=(41, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_OPT_USIM_ef_mbi = SEQ_OF(name='ef-mbi', mode=MODE_TYPE, tag=(42, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_OPT_USIM_ef_mwis = SEQ_OF(name='ef-mwis', mode=MODE_TYPE, tag=(43, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_OPT_USIM_ef_cfis = SEQ_OF(name='ef-cfis', mode=MODE_TYPE, tag=(44, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_OPT_USIM_ef_ext7 = SEQ_OF(name='ef-ext7', mode=MODE_TYPE, tag=(45, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_OPT_USIM_ef_spdi = SEQ_OF(name='ef-spdi', mode=MODE_TYPE, tag=(46, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_OPT_USIM_ef_mmsn = SEQ_OF(name='ef-mmsn', mode=MODE_TYPE, tag=(47, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_OPT_USIM_ef_ext8 = SEQ_OF(name='ef-ext8', mode=MODE_TYPE, tag=(48, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_OPT_USIM_ef_mmsicp = SEQ_OF(name='ef-mmsicp', mode=MODE_TYPE, tag=(49, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_OPT_USIM_ef_mmsup = SEQ_OF(name='ef-mmsup', mode=MODE_TYPE, tag=(50, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_OPT_USIM_ef_mmsucp = SEQ_OF(name='ef-mmsucp', mode=MODE_TYPE, tag=(51, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_OPT_USIM_ef_nia = SEQ_OF(name='ef-nia', mode=MODE_TYPE, tag=(52, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_OPT_USIM_ef_vgcsca = SEQ_OF(name='ef-vgcsca', mode=MODE_TYPE, tag=(53, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_OPT_USIM_ef_vbsca = SEQ_OF(name='ef-vbsca', mode=MODE_TYPE, tag=(54, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_OPT_USIM_ef_gbabp = SEQ_OF(name='ef-gbabp', mode=MODE_TYPE, tag=(55, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_OPT_USIM_ef_msk = SEQ_OF(name='ef-msk', mode=MODE_TYPE, tag=(56, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_OPT_USIM_ef_muk = SEQ_OF(name='ef-muk', mode=MODE_TYPE, tag=(57, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_OPT_USIM_ef_ehplmn = SEQ_OF(name='ef-ehplmn', mode=MODE_TYPE, tag=(58, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_OPT_USIM_ef_gbanl = SEQ_OF(name='ef-gbanl', mode=MODE_TYPE, tag=(59, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_OPT_USIM_ef_ehplmnpi = SEQ_OF(name='ef-ehplmnpi', mode=MODE_TYPE, tag=(60, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_OPT_USIM_ef_lrplmnsi = SEQ_OF(name='ef-lrplmnsi', mode=MODE_TYPE, tag=(61, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_OPT_USIM_ef_nafkca = SEQ_OF(name='ef-nafkca', mode=MODE_TYPE, tag=(62, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_OPT_USIM_ef_spni = SEQ_OF(name='ef-spni', mode=MODE_TYPE, tag=(63, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_OPT_USIM_ef_pnni = SEQ_OF(name='ef-pnni', mode=MODE_TYPE, tag=(64, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_OPT_USIM_ef_ncp_ip = SEQ_OF(name='ef-ncp-ip', mode=MODE_TYPE, tag=(65, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_OPT_USIM_ef_ufc = SEQ_OF(name='ef-ufc', mode=MODE_TYPE, tag=(66, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_OPT_USIM_ef_nasconfig = SEQ_OF(name='ef-nasconfig', mode=MODE_TYPE, tag=(67, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_OPT_USIM_ef_uicciari = SEQ_OF(name='ef-uicciari', mode=MODE_TYPE, tag=(68, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_OPT_USIM_ef_pws = SEQ_OF(name='ef-pws', mode=MODE_TYPE, tag=(69, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_OPT_USIM_ef_fdnuri = SEQ_OF(name='ef-fdnuri', mode=MODE_TYPE, tag=(70, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_OPT_USIM_ef_bdnuri = SEQ_OF(name='ef-bdnuri', mode=MODE_TYPE, tag=(71, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_OPT_USIM_ef_sdnuri = SEQ_OF(name='ef-sdnuri', mode=MODE_TYPE, tag=(72, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_OPT_USIM_ef_iwl = SEQ_OF(name='ef-iwl', mode=MODE_TYPE, tag=(73, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_OPT_USIM_ef_ips = SEQ_OF(name='ef-ips', mode=MODE_TYPE, tag=(74, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_OPT_USIM_ef_ipd = SEQ_OF(name='ef-ipd', mode=MODE_TYPE, tag=(75, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    PE_OPT_USIM = SEQ(name=u'PE-OPT-USIM', mode=MODE_TYPE)
+    _PE_OPT_USIM_optusim_header = SEQ(name=u'optusim-header', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'PEHeader')))
+    _PE_OPT_USIM_templateID = OID(name=u'templateID', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _PE_OPT_USIM_ef_li = SEQ_OF(name=u'ef-li', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_OPT_USIM_ef_acmax = SEQ_OF(name=u'ef-acmax', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_OPT_USIM_ef_acm = SEQ_OF(name=u'ef-acm', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_OPT_USIM_ef_gid1 = SEQ_OF(name=u'ef-gid1', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_OPT_USIM_ef_gid2 = SEQ_OF(name=u'ef-gid2', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_OPT_USIM_ef_msisdn = SEQ_OF(name=u'ef-msisdn', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_OPT_USIM_ef_puct = SEQ_OF(name=u'ef-puct', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_OPT_USIM_ef_cbmi = SEQ_OF(name=u'ef-cbmi', mode=MODE_TYPE, tag=(9, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_OPT_USIM_ef_cbmid = SEQ_OF(name=u'ef-cbmid', mode=MODE_TYPE, tag=(10, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_OPT_USIM_ef_sdn = SEQ_OF(name=u'ef-sdn', mode=MODE_TYPE, tag=(11, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_OPT_USIM_ef_ext2 = SEQ_OF(name=u'ef-ext2', mode=MODE_TYPE, tag=(12, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_OPT_USIM_ef_ext3 = SEQ_OF(name=u'ef-ext3', mode=MODE_TYPE, tag=(13, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_OPT_USIM_ef_cbmir = SEQ_OF(name=u'ef-cbmir', mode=MODE_TYPE, tag=(14, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_OPT_USIM_ef_plmnwact = SEQ_OF(name=u'ef-plmnwact', mode=MODE_TYPE, tag=(15, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_OPT_USIM_ef_oplmnwact = SEQ_OF(name=u'ef-oplmnwact', mode=MODE_TYPE, tag=(16, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_OPT_USIM_ef_hplmnwact = SEQ_OF(name=u'ef-hplmnwact', mode=MODE_TYPE, tag=(17, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_OPT_USIM_ef_dck = SEQ_OF(name=u'ef-dck', mode=MODE_TYPE, tag=(18, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_OPT_USIM_ef_cnl = SEQ_OF(name=u'ef-cnl', mode=MODE_TYPE, tag=(19, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_OPT_USIM_ef_smsr = SEQ_OF(name=u'ef-smsr', mode=MODE_TYPE, tag=(20, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_OPT_USIM_ef_bdn = SEQ_OF(name=u'ef-bdn', mode=MODE_TYPE, tag=(21, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_OPT_USIM_ef_ext5 = SEQ_OF(name=u'ef-ext5', mode=MODE_TYPE, tag=(22, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_OPT_USIM_ef_ccp2 = SEQ_OF(name=u'ef-ccp2', mode=MODE_TYPE, tag=(23, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_OPT_USIM_ef_ext4 = SEQ_OF(name=u'ef-ext4', mode=MODE_TYPE, tag=(24, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_OPT_USIM_ef_acl = SEQ_OF(name=u'ef-acl', mode=MODE_TYPE, tag=(25, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_OPT_USIM_ef_cmi = SEQ_OF(name=u'ef-cmi', mode=MODE_TYPE, tag=(26, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_OPT_USIM_ef_ici = SEQ_OF(name=u'ef-ici', mode=MODE_TYPE, tag=(27, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_OPT_USIM_ef_oci = SEQ_OF(name=u'ef-oci', mode=MODE_TYPE, tag=(28, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_OPT_USIM_ef_ict = SEQ_OF(name=u'ef-ict', mode=MODE_TYPE, tag=(29, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_OPT_USIM_ef_oct = SEQ_OF(name=u'ef-oct', mode=MODE_TYPE, tag=(30, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_OPT_USIM_ef_vgcs = SEQ_OF(name=u'ef-vgcs', mode=MODE_TYPE, tag=(31, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_OPT_USIM_ef_vgcss = SEQ_OF(name=u'ef-vgcss', mode=MODE_TYPE, tag=(32, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_OPT_USIM_ef_vbs = SEQ_OF(name=u'ef-vbs', mode=MODE_TYPE, tag=(33, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_OPT_USIM_ef_vbss = SEQ_OF(name=u'ef-vbss', mode=MODE_TYPE, tag=(34, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_OPT_USIM_ef_emlpp = SEQ_OF(name=u'ef-emlpp', mode=MODE_TYPE, tag=(35, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_OPT_USIM_ef_aaem = SEQ_OF(name=u'ef-aaem', mode=MODE_TYPE, tag=(36, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_OPT_USIM_ef_hiddenkey = SEQ_OF(name=u'ef-hiddenkey', mode=MODE_TYPE, tag=(37, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_OPT_USIM_ef_pnn = SEQ_OF(name=u'ef-pnn', mode=MODE_TYPE, tag=(38, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_OPT_USIM_ef_opl = SEQ_OF(name=u'ef-opl', mode=MODE_TYPE, tag=(39, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_OPT_USIM_ef_mbdn = SEQ_OF(name=u'ef-mbdn', mode=MODE_TYPE, tag=(40, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_OPT_USIM_ef_ext6 = SEQ_OF(name=u'ef-ext6', mode=MODE_TYPE, tag=(41, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_OPT_USIM_ef_mbi = SEQ_OF(name=u'ef-mbi', mode=MODE_TYPE, tag=(42, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_OPT_USIM_ef_mwis = SEQ_OF(name=u'ef-mwis', mode=MODE_TYPE, tag=(43, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_OPT_USIM_ef_cfis = SEQ_OF(name=u'ef-cfis', mode=MODE_TYPE, tag=(44, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_OPT_USIM_ef_ext7 = SEQ_OF(name=u'ef-ext7', mode=MODE_TYPE, tag=(45, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_OPT_USIM_ef_spdi = SEQ_OF(name=u'ef-spdi', mode=MODE_TYPE, tag=(46, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_OPT_USIM_ef_mmsn = SEQ_OF(name=u'ef-mmsn', mode=MODE_TYPE, tag=(47, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_OPT_USIM_ef_ext8 = SEQ_OF(name=u'ef-ext8', mode=MODE_TYPE, tag=(48, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_OPT_USIM_ef_mmsicp = SEQ_OF(name=u'ef-mmsicp', mode=MODE_TYPE, tag=(49, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_OPT_USIM_ef_mmsup = SEQ_OF(name=u'ef-mmsup', mode=MODE_TYPE, tag=(50, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_OPT_USIM_ef_mmsucp = SEQ_OF(name=u'ef-mmsucp', mode=MODE_TYPE, tag=(51, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_OPT_USIM_ef_nia = SEQ_OF(name=u'ef-nia', mode=MODE_TYPE, tag=(52, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_OPT_USIM_ef_vgcsca = SEQ_OF(name=u'ef-vgcsca', mode=MODE_TYPE, tag=(53, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_OPT_USIM_ef_vbsca = SEQ_OF(name=u'ef-vbsca', mode=MODE_TYPE, tag=(54, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_OPT_USIM_ef_gbabp = SEQ_OF(name=u'ef-gbabp', mode=MODE_TYPE, tag=(55, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_OPT_USIM_ef_msk = SEQ_OF(name=u'ef-msk', mode=MODE_TYPE, tag=(56, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_OPT_USIM_ef_muk = SEQ_OF(name=u'ef-muk', mode=MODE_TYPE, tag=(57, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_OPT_USIM_ef_ehplmn = SEQ_OF(name=u'ef-ehplmn', mode=MODE_TYPE, tag=(58, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_OPT_USIM_ef_gbanl = SEQ_OF(name=u'ef-gbanl', mode=MODE_TYPE, tag=(59, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_OPT_USIM_ef_ehplmnpi = SEQ_OF(name=u'ef-ehplmnpi', mode=MODE_TYPE, tag=(60, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_OPT_USIM_ef_lrplmnsi = SEQ_OF(name=u'ef-lrplmnsi', mode=MODE_TYPE, tag=(61, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_OPT_USIM_ef_nafkca = SEQ_OF(name=u'ef-nafkca', mode=MODE_TYPE, tag=(62, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_OPT_USIM_ef_spni = SEQ_OF(name=u'ef-spni', mode=MODE_TYPE, tag=(63, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_OPT_USIM_ef_pnni = SEQ_OF(name=u'ef-pnni', mode=MODE_TYPE, tag=(64, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_OPT_USIM_ef_ncp_ip = SEQ_OF(name=u'ef-ncp-ip', mode=MODE_TYPE, tag=(65, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_OPT_USIM_ef_ufc = SEQ_OF(name=u'ef-ufc', mode=MODE_TYPE, tag=(66, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_OPT_USIM_ef_nasconfig = SEQ_OF(name=u'ef-nasconfig', mode=MODE_TYPE, tag=(67, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_OPT_USIM_ef_uicciari = SEQ_OF(name=u'ef-uicciari', mode=MODE_TYPE, tag=(68, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_OPT_USIM_ef_pws = SEQ_OF(name=u'ef-pws', mode=MODE_TYPE, tag=(69, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_OPT_USIM_ef_fdnuri = SEQ_OF(name=u'ef-fdnuri', mode=MODE_TYPE, tag=(70, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_OPT_USIM_ef_bdnuri = SEQ_OF(name=u'ef-bdnuri', mode=MODE_TYPE, tag=(71, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_OPT_USIM_ef_sdnuri = SEQ_OF(name=u'ef-sdnuri', mode=MODE_TYPE, tag=(72, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_OPT_USIM_ef_iwl = SEQ_OF(name=u'ef-iwl', mode=MODE_TYPE, tag=(73, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_OPT_USIM_ef_ips = SEQ_OF(name=u'ef-ips', mode=MODE_TYPE, tag=(74, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_OPT_USIM_ef_ipd = SEQ_OF(name=u'ef-ipd', mode=MODE_TYPE, tag=(75, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
     PE_OPT_USIM._cont = ASN1Dict([
-        ('optusim-header', _PE_OPT_USIM_optusim_header),
-        ('templateID', _PE_OPT_USIM_templateID),
-        ('ef-li', _PE_OPT_USIM_ef_li),
-        ('ef-acmax', _PE_OPT_USIM_ef_acmax),
-        ('ef-acm', _PE_OPT_USIM_ef_acm),
-        ('ef-gid1', _PE_OPT_USIM_ef_gid1),
-        ('ef-gid2', _PE_OPT_USIM_ef_gid2),
-        ('ef-msisdn', _PE_OPT_USIM_ef_msisdn),
-        ('ef-puct', _PE_OPT_USIM_ef_puct),
-        ('ef-cbmi', _PE_OPT_USIM_ef_cbmi),
-        ('ef-cbmid', _PE_OPT_USIM_ef_cbmid),
-        ('ef-sdn', _PE_OPT_USIM_ef_sdn),
-        ('ef-ext2', _PE_OPT_USIM_ef_ext2),
-        ('ef-ext3', _PE_OPT_USIM_ef_ext3),
-        ('ef-cbmir', _PE_OPT_USIM_ef_cbmir),
-        ('ef-plmnwact', _PE_OPT_USIM_ef_plmnwact),
-        ('ef-oplmnwact', _PE_OPT_USIM_ef_oplmnwact),
-        ('ef-hplmnwact', _PE_OPT_USIM_ef_hplmnwact),
-        ('ef-dck', _PE_OPT_USIM_ef_dck),
-        ('ef-cnl', _PE_OPT_USIM_ef_cnl),
-        ('ef-smsr', _PE_OPT_USIM_ef_smsr),
-        ('ef-bdn', _PE_OPT_USIM_ef_bdn),
-        ('ef-ext5', _PE_OPT_USIM_ef_ext5),
-        ('ef-ccp2', _PE_OPT_USIM_ef_ccp2),
-        ('ef-ext4', _PE_OPT_USIM_ef_ext4),
-        ('ef-acl', _PE_OPT_USIM_ef_acl),
-        ('ef-cmi', _PE_OPT_USIM_ef_cmi),
-        ('ef-ici', _PE_OPT_USIM_ef_ici),
-        ('ef-oci', _PE_OPT_USIM_ef_oci),
-        ('ef-ict', _PE_OPT_USIM_ef_ict),
-        ('ef-oct', _PE_OPT_USIM_ef_oct),
-        ('ef-vgcs', _PE_OPT_USIM_ef_vgcs),
-        ('ef-vgcss', _PE_OPT_USIM_ef_vgcss),
-        ('ef-vbs', _PE_OPT_USIM_ef_vbs),
-        ('ef-vbss', _PE_OPT_USIM_ef_vbss),
-        ('ef-emlpp', _PE_OPT_USIM_ef_emlpp),
-        ('ef-aaem', _PE_OPT_USIM_ef_aaem),
-        ('ef-hiddenkey', _PE_OPT_USIM_ef_hiddenkey),
-        ('ef-pnn', _PE_OPT_USIM_ef_pnn),
-        ('ef-opl', _PE_OPT_USIM_ef_opl),
-        ('ef-mbdn', _PE_OPT_USIM_ef_mbdn),
-        ('ef-ext6', _PE_OPT_USIM_ef_ext6),
-        ('ef-mbi', _PE_OPT_USIM_ef_mbi),
-        ('ef-mwis', _PE_OPT_USIM_ef_mwis),
-        ('ef-cfis', _PE_OPT_USIM_ef_cfis),
-        ('ef-ext7', _PE_OPT_USIM_ef_ext7),
-        ('ef-spdi', _PE_OPT_USIM_ef_spdi),
-        ('ef-mmsn', _PE_OPT_USIM_ef_mmsn),
-        ('ef-ext8', _PE_OPT_USIM_ef_ext8),
-        ('ef-mmsicp', _PE_OPT_USIM_ef_mmsicp),
-        ('ef-mmsup', _PE_OPT_USIM_ef_mmsup),
-        ('ef-mmsucp', _PE_OPT_USIM_ef_mmsucp),
-        ('ef-nia', _PE_OPT_USIM_ef_nia),
-        ('ef-vgcsca', _PE_OPT_USIM_ef_vgcsca),
-        ('ef-vbsca', _PE_OPT_USIM_ef_vbsca),
-        ('ef-gbabp', _PE_OPT_USIM_ef_gbabp),
-        ('ef-msk', _PE_OPT_USIM_ef_msk),
-        ('ef-muk', _PE_OPT_USIM_ef_muk),
-        ('ef-ehplmn', _PE_OPT_USIM_ef_ehplmn),
-        ('ef-gbanl', _PE_OPT_USIM_ef_gbanl),
-        ('ef-ehplmnpi', _PE_OPT_USIM_ef_ehplmnpi),
-        ('ef-lrplmnsi', _PE_OPT_USIM_ef_lrplmnsi),
-        ('ef-nafkca', _PE_OPT_USIM_ef_nafkca),
-        ('ef-spni', _PE_OPT_USIM_ef_spni),
-        ('ef-pnni', _PE_OPT_USIM_ef_pnni),
-        ('ef-ncp-ip', _PE_OPT_USIM_ef_ncp_ip),
-        ('ef-ufc', _PE_OPT_USIM_ef_ufc),
-        ('ef-nasconfig', _PE_OPT_USIM_ef_nasconfig),
-        ('ef-uicciari', _PE_OPT_USIM_ef_uicciari),
-        ('ef-pws', _PE_OPT_USIM_ef_pws),
-        ('ef-fdnuri', _PE_OPT_USIM_ef_fdnuri),
-        ('ef-bdnuri', _PE_OPT_USIM_ef_bdnuri),
-        ('ef-sdnuri', _PE_OPT_USIM_ef_sdnuri),
-        ('ef-iwl', _PE_OPT_USIM_ef_iwl),
-        ('ef-ips', _PE_OPT_USIM_ef_ips),
-        ('ef-ipd', _PE_OPT_USIM_ef_ipd),
+        (u'optusim-header', _PE_OPT_USIM_optusim_header),
+        (u'templateID', _PE_OPT_USIM_templateID),
+        (u'ef-li', _PE_OPT_USIM_ef_li),
+        (u'ef-acmax', _PE_OPT_USIM_ef_acmax),
+        (u'ef-acm', _PE_OPT_USIM_ef_acm),
+        (u'ef-gid1', _PE_OPT_USIM_ef_gid1),
+        (u'ef-gid2', _PE_OPT_USIM_ef_gid2),
+        (u'ef-msisdn', _PE_OPT_USIM_ef_msisdn),
+        (u'ef-puct', _PE_OPT_USIM_ef_puct),
+        (u'ef-cbmi', _PE_OPT_USIM_ef_cbmi),
+        (u'ef-cbmid', _PE_OPT_USIM_ef_cbmid),
+        (u'ef-sdn', _PE_OPT_USIM_ef_sdn),
+        (u'ef-ext2', _PE_OPT_USIM_ef_ext2),
+        (u'ef-ext3', _PE_OPT_USIM_ef_ext3),
+        (u'ef-cbmir', _PE_OPT_USIM_ef_cbmir),
+        (u'ef-plmnwact', _PE_OPT_USIM_ef_plmnwact),
+        (u'ef-oplmnwact', _PE_OPT_USIM_ef_oplmnwact),
+        (u'ef-hplmnwact', _PE_OPT_USIM_ef_hplmnwact),
+        (u'ef-dck', _PE_OPT_USIM_ef_dck),
+        (u'ef-cnl', _PE_OPT_USIM_ef_cnl),
+        (u'ef-smsr', _PE_OPT_USIM_ef_smsr),
+        (u'ef-bdn', _PE_OPT_USIM_ef_bdn),
+        (u'ef-ext5', _PE_OPT_USIM_ef_ext5),
+        (u'ef-ccp2', _PE_OPT_USIM_ef_ccp2),
+        (u'ef-ext4', _PE_OPT_USIM_ef_ext4),
+        (u'ef-acl', _PE_OPT_USIM_ef_acl),
+        (u'ef-cmi', _PE_OPT_USIM_ef_cmi),
+        (u'ef-ici', _PE_OPT_USIM_ef_ici),
+        (u'ef-oci', _PE_OPT_USIM_ef_oci),
+        (u'ef-ict', _PE_OPT_USIM_ef_ict),
+        (u'ef-oct', _PE_OPT_USIM_ef_oct),
+        (u'ef-vgcs', _PE_OPT_USIM_ef_vgcs),
+        (u'ef-vgcss', _PE_OPT_USIM_ef_vgcss),
+        (u'ef-vbs', _PE_OPT_USIM_ef_vbs),
+        (u'ef-vbss', _PE_OPT_USIM_ef_vbss),
+        (u'ef-emlpp', _PE_OPT_USIM_ef_emlpp),
+        (u'ef-aaem', _PE_OPT_USIM_ef_aaem),
+        (u'ef-hiddenkey', _PE_OPT_USIM_ef_hiddenkey),
+        (u'ef-pnn', _PE_OPT_USIM_ef_pnn),
+        (u'ef-opl', _PE_OPT_USIM_ef_opl),
+        (u'ef-mbdn', _PE_OPT_USIM_ef_mbdn),
+        (u'ef-ext6', _PE_OPT_USIM_ef_ext6),
+        (u'ef-mbi', _PE_OPT_USIM_ef_mbi),
+        (u'ef-mwis', _PE_OPT_USIM_ef_mwis),
+        (u'ef-cfis', _PE_OPT_USIM_ef_cfis),
+        (u'ef-ext7', _PE_OPT_USIM_ef_ext7),
+        (u'ef-spdi', _PE_OPT_USIM_ef_spdi),
+        (u'ef-mmsn', _PE_OPT_USIM_ef_mmsn),
+        (u'ef-ext8', _PE_OPT_USIM_ef_ext8),
+        (u'ef-mmsicp', _PE_OPT_USIM_ef_mmsicp),
+        (u'ef-mmsup', _PE_OPT_USIM_ef_mmsup),
+        (u'ef-mmsucp', _PE_OPT_USIM_ef_mmsucp),
+        (u'ef-nia', _PE_OPT_USIM_ef_nia),
+        (u'ef-vgcsca', _PE_OPT_USIM_ef_vgcsca),
+        (u'ef-vbsca', _PE_OPT_USIM_ef_vbsca),
+        (u'ef-gbabp', _PE_OPT_USIM_ef_gbabp),
+        (u'ef-msk', _PE_OPT_USIM_ef_msk),
+        (u'ef-muk', _PE_OPT_USIM_ef_muk),
+        (u'ef-ehplmn', _PE_OPT_USIM_ef_ehplmn),
+        (u'ef-gbanl', _PE_OPT_USIM_ef_gbanl),
+        (u'ef-ehplmnpi', _PE_OPT_USIM_ef_ehplmnpi),
+        (u'ef-lrplmnsi', _PE_OPT_USIM_ef_lrplmnsi),
+        (u'ef-nafkca', _PE_OPT_USIM_ef_nafkca),
+        (u'ef-spni', _PE_OPT_USIM_ef_spni),
+        (u'ef-pnni', _PE_OPT_USIM_ef_pnni),
+        (u'ef-ncp-ip', _PE_OPT_USIM_ef_ncp_ip),
+        (u'ef-ufc', _PE_OPT_USIM_ef_ufc),
+        (u'ef-nasconfig', _PE_OPT_USIM_ef_nasconfig),
+        (u'ef-uicciari', _PE_OPT_USIM_ef_uicciari),
+        (u'ef-pws', _PE_OPT_USIM_ef_pws),
+        (u'ef-fdnuri', _PE_OPT_USIM_ef_fdnuri),
+        (u'ef-bdnuri', _PE_OPT_USIM_ef_bdnuri),
+        (u'ef-sdnuri', _PE_OPT_USIM_ef_sdnuri),
+        (u'ef-iwl', _PE_OPT_USIM_ef_iwl),
+        (u'ef-ips', _PE_OPT_USIM_ef_ips),
+        (u'ef-ipd', _PE_OPT_USIM_ef_ipd),
         ])
     PE_OPT_USIM._ext = []
     
     #-----< PE-PHONEBOOK >-----#
-    PE_PHONEBOOK = SEQ(name='PE-PHONEBOOK', mode=MODE_TYPE)
-    _PE_PHONEBOOK_phonebook_header = SEQ(name='phonebook-header', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'PEHeader')))
-    _PE_PHONEBOOK_templateID = OID(name='templateID', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _PE_PHONEBOOK_df_phonebook = SEQ_OF(name='df-phonebook', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')))
-    _PE_PHONEBOOK_ef_pbr = SEQ_OF(name='ef-pbr', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_PHONEBOOK_ef_ext1 = SEQ_OF(name='ef-ext1', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_PHONEBOOK_ef_aas = SEQ_OF(name='ef-aas', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_PHONEBOOK_ef_gas = SEQ_OF(name='ef-gas', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_PHONEBOOK_ef_psc = SEQ_OF(name='ef-psc', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_PHONEBOOK_ef_cc = SEQ_OF(name='ef-cc', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_PHONEBOOK_ef_puid = SEQ_OF(name='ef-puid', mode=MODE_TYPE, tag=(9, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_PHONEBOOK_ef_iap = SEQ_OF(name='ef-iap', mode=MODE_TYPE, tag=(10, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_PHONEBOOK_ef_adn = SEQ_OF(name='ef-adn', mode=MODE_TYPE, tag=(11, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_PHONEBOOK_ef_pbc = SEQ_OF(name='ef-pbc', mode=MODE_TYPE, tag=(12, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_PHONEBOOK_ef_anr = SEQ_OF(name='ef-anr', mode=MODE_TYPE, tag=(13, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_PHONEBOOK_ef_puri = SEQ_OF(name='ef-puri', mode=MODE_TYPE, tag=(14, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_PHONEBOOK_ef_email = SEQ_OF(name='ef-email', mode=MODE_TYPE, tag=(15, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_PHONEBOOK_ef_sne = SEQ_OF(name='ef-sne', mode=MODE_TYPE, tag=(16, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_PHONEBOOK_ef_uid = SEQ_OF(name='ef-uid', mode=MODE_TYPE, tag=(17, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_PHONEBOOK_ef_grp = SEQ_OF(name='ef-grp', mode=MODE_TYPE, tag=(18, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_PHONEBOOK_ef_ccp1 = SEQ_OF(name='ef-ccp1', mode=MODE_TYPE, tag=(19, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    PE_PHONEBOOK = SEQ(name=u'PE-PHONEBOOK', mode=MODE_TYPE)
+    _PE_PHONEBOOK_phonebook_header = SEQ(name=u'phonebook-header', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'PEHeader')))
+    _PE_PHONEBOOK_templateID = OID(name=u'templateID', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _PE_PHONEBOOK_df_phonebook = SEQ_OF(name=u'df-phonebook', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')))
+    _PE_PHONEBOOK_ef_pbr = SEQ_OF(name=u'ef-pbr', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_PHONEBOOK_ef_ext1 = SEQ_OF(name=u'ef-ext1', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_PHONEBOOK_ef_aas = SEQ_OF(name=u'ef-aas', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_PHONEBOOK_ef_gas = SEQ_OF(name=u'ef-gas', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_PHONEBOOK_ef_psc = SEQ_OF(name=u'ef-psc', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_PHONEBOOK_ef_cc = SEQ_OF(name=u'ef-cc', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_PHONEBOOK_ef_puid = SEQ_OF(name=u'ef-puid', mode=MODE_TYPE, tag=(9, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_PHONEBOOK_ef_iap = SEQ_OF(name=u'ef-iap', mode=MODE_TYPE, tag=(10, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_PHONEBOOK_ef_adn = SEQ_OF(name=u'ef-adn', mode=MODE_TYPE, tag=(11, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_PHONEBOOK_ef_pbc = SEQ_OF(name=u'ef-pbc', mode=MODE_TYPE, tag=(12, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_PHONEBOOK_ef_anr = SEQ_OF(name=u'ef-anr', mode=MODE_TYPE, tag=(13, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_PHONEBOOK_ef_puri = SEQ_OF(name=u'ef-puri', mode=MODE_TYPE, tag=(14, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_PHONEBOOK_ef_email = SEQ_OF(name=u'ef-email', mode=MODE_TYPE, tag=(15, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_PHONEBOOK_ef_sne = SEQ_OF(name=u'ef-sne', mode=MODE_TYPE, tag=(16, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_PHONEBOOK_ef_uid = SEQ_OF(name=u'ef-uid', mode=MODE_TYPE, tag=(17, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_PHONEBOOK_ef_grp = SEQ_OF(name=u'ef-grp', mode=MODE_TYPE, tag=(18, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_PHONEBOOK_ef_ccp1 = SEQ_OF(name=u'ef-ccp1', mode=MODE_TYPE, tag=(19, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
     PE_PHONEBOOK._cont = ASN1Dict([
-        ('phonebook-header', _PE_PHONEBOOK_phonebook_header),
-        ('templateID', _PE_PHONEBOOK_templateID),
-        ('df-phonebook', _PE_PHONEBOOK_df_phonebook),
-        ('ef-pbr', _PE_PHONEBOOK_ef_pbr),
-        ('ef-ext1', _PE_PHONEBOOK_ef_ext1),
-        ('ef-aas', _PE_PHONEBOOK_ef_aas),
-        ('ef-gas', _PE_PHONEBOOK_ef_gas),
-        ('ef-psc', _PE_PHONEBOOK_ef_psc),
-        ('ef-cc', _PE_PHONEBOOK_ef_cc),
-        ('ef-puid', _PE_PHONEBOOK_ef_puid),
-        ('ef-iap', _PE_PHONEBOOK_ef_iap),
-        ('ef-adn', _PE_PHONEBOOK_ef_adn),
-        ('ef-pbc', _PE_PHONEBOOK_ef_pbc),
-        ('ef-anr', _PE_PHONEBOOK_ef_anr),
-        ('ef-puri', _PE_PHONEBOOK_ef_puri),
-        ('ef-email', _PE_PHONEBOOK_ef_email),
-        ('ef-sne', _PE_PHONEBOOK_ef_sne),
-        ('ef-uid', _PE_PHONEBOOK_ef_uid),
-        ('ef-grp', _PE_PHONEBOOK_ef_grp),
-        ('ef-ccp1', _PE_PHONEBOOK_ef_ccp1),
+        (u'phonebook-header', _PE_PHONEBOOK_phonebook_header),
+        (u'templateID', _PE_PHONEBOOK_templateID),
+        (u'df-phonebook', _PE_PHONEBOOK_df_phonebook),
+        (u'ef-pbr', _PE_PHONEBOOK_ef_pbr),
+        (u'ef-ext1', _PE_PHONEBOOK_ef_ext1),
+        (u'ef-aas', _PE_PHONEBOOK_ef_aas),
+        (u'ef-gas', _PE_PHONEBOOK_ef_gas),
+        (u'ef-psc', _PE_PHONEBOOK_ef_psc),
+        (u'ef-cc', _PE_PHONEBOOK_ef_cc),
+        (u'ef-puid', _PE_PHONEBOOK_ef_puid),
+        (u'ef-iap', _PE_PHONEBOOK_ef_iap),
+        (u'ef-adn', _PE_PHONEBOOK_ef_adn),
+        (u'ef-pbc', _PE_PHONEBOOK_ef_pbc),
+        (u'ef-anr', _PE_PHONEBOOK_ef_anr),
+        (u'ef-puri', _PE_PHONEBOOK_ef_puri),
+        (u'ef-email', _PE_PHONEBOOK_ef_email),
+        (u'ef-sne', _PE_PHONEBOOK_ef_sne),
+        (u'ef-uid', _PE_PHONEBOOK_ef_uid),
+        (u'ef-grp', _PE_PHONEBOOK_ef_grp),
+        (u'ef-ccp1', _PE_PHONEBOOK_ef_ccp1),
         ])
     PE_PHONEBOOK._ext = []
     
     #-----< PE-GSM-ACCESS >-----#
-    PE_GSM_ACCESS = SEQ(name='PE-GSM-ACCESS', mode=MODE_TYPE)
-    _PE_GSM_ACCESS_gsm_access_header = SEQ(name='gsm-access-header', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'PEHeader')))
-    _PE_GSM_ACCESS_templateID = OID(name='templateID', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _PE_GSM_ACCESS_df_gsm_access = SEQ_OF(name='df-gsm-access', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')))
-    _PE_GSM_ACCESS_ef_kc = SEQ_OF(name='ef-kc', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_GSM_ACCESS_ef_kcgprs = SEQ_OF(name='ef-kcgprs', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_GSM_ACCESS_ef_cpbcch = SEQ_OF(name='ef-cpbcch', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_GSM_ACCESS_ef_invscan = SEQ_OF(name='ef-invscan', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    PE_GSM_ACCESS = SEQ(name=u'PE-GSM-ACCESS', mode=MODE_TYPE)
+    _PE_GSM_ACCESS_gsm_access_header = SEQ(name=u'gsm-access-header', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'PEHeader')))
+    _PE_GSM_ACCESS_templateID = OID(name=u'templateID', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _PE_GSM_ACCESS_df_gsm_access = SEQ_OF(name=u'df-gsm-access', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')))
+    _PE_GSM_ACCESS_ef_kc = SEQ_OF(name=u'ef-kc', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_GSM_ACCESS_ef_kcgprs = SEQ_OF(name=u'ef-kcgprs', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_GSM_ACCESS_ef_cpbcch = SEQ_OF(name=u'ef-cpbcch', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_GSM_ACCESS_ef_invscan = SEQ_OF(name=u'ef-invscan', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
     PE_GSM_ACCESS._cont = ASN1Dict([
-        ('gsm-access-header', _PE_GSM_ACCESS_gsm_access_header),
-        ('templateID', _PE_GSM_ACCESS_templateID),
-        ('df-gsm-access', _PE_GSM_ACCESS_df_gsm_access),
-        ('ef-kc', _PE_GSM_ACCESS_ef_kc),
-        ('ef-kcgprs', _PE_GSM_ACCESS_ef_kcgprs),
-        ('ef-cpbcch', _PE_GSM_ACCESS_ef_cpbcch),
-        ('ef-invscan', _PE_GSM_ACCESS_ef_invscan),
+        (u'gsm-access-header', _PE_GSM_ACCESS_gsm_access_header),
+        (u'templateID', _PE_GSM_ACCESS_templateID),
+        (u'df-gsm-access', _PE_GSM_ACCESS_df_gsm_access),
+        (u'ef-kc', _PE_GSM_ACCESS_ef_kc),
+        (u'ef-kcgprs', _PE_GSM_ACCESS_ef_kcgprs),
+        (u'ef-cpbcch', _PE_GSM_ACCESS_ef_cpbcch),
+        (u'ef-invscan', _PE_GSM_ACCESS_ef_invscan),
         ])
     PE_GSM_ACCESS._ext = []
     
     #-----< PE-ISIM >-----#
-    PE_ISIM = SEQ(name='PE-ISIM', mode=MODE_TYPE)
-    _PE_ISIM_isim_header = SEQ(name='isim-header', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'PEHeader')))
-    _PE_ISIM_templateID = OID(name='templateID', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _PE_ISIM_adf_isim = SEQ_OF(name='adf-isim', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')))
-    _PE_ISIM_ef_impi = SEQ_OF(name='ef-impi', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')))
-    _PE_ISIM_ef_impu = SEQ_OF(name='ef-impu', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')))
-    _PE_ISIM_ef_domain = SEQ_OF(name='ef-domain', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')))
-    _PE_ISIM_ef_ist = SEQ_OF(name='ef-ist', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')))
-    _PE_ISIM_ef_ad = SEQ_OF(name='ef-ad', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_ISIM_ef_arr = SEQ_OF(name='ef-arr', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')))
+    PE_ISIM = SEQ(name=u'PE-ISIM', mode=MODE_TYPE)
+    _PE_ISIM_isim_header = SEQ(name=u'isim-header', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'PEHeader')))
+    _PE_ISIM_templateID = OID(name=u'templateID', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _PE_ISIM_adf_isim = SEQ_OF(name=u'adf-isim', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')))
+    _PE_ISIM_ef_impi = SEQ_OF(name=u'ef-impi', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')))
+    _PE_ISIM_ef_impu = SEQ_OF(name=u'ef-impu', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')))
+    _PE_ISIM_ef_domain = SEQ_OF(name=u'ef-domain', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')))
+    _PE_ISIM_ef_ist = SEQ_OF(name=u'ef-ist', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')))
+    _PE_ISIM_ef_ad = SEQ_OF(name=u'ef-ad', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_ISIM_ef_arr = SEQ_OF(name=u'ef-arr', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')))
     PE_ISIM._cont = ASN1Dict([
-        ('isim-header', _PE_ISIM_isim_header),
-        ('templateID', _PE_ISIM_templateID),
-        ('adf-isim', _PE_ISIM_adf_isim),
-        ('ef-impi', _PE_ISIM_ef_impi),
-        ('ef-impu', _PE_ISIM_ef_impu),
-        ('ef-domain', _PE_ISIM_ef_domain),
-        ('ef-ist', _PE_ISIM_ef_ist),
-        ('ef-ad', _PE_ISIM_ef_ad),
-        ('ef-arr', _PE_ISIM_ef_arr),
+        (u'isim-header', _PE_ISIM_isim_header),
+        (u'templateID', _PE_ISIM_templateID),
+        (u'adf-isim', _PE_ISIM_adf_isim),
+        (u'ef-impi', _PE_ISIM_ef_impi),
+        (u'ef-impu', _PE_ISIM_ef_impu),
+        (u'ef-domain', _PE_ISIM_ef_domain),
+        (u'ef-ist', _PE_ISIM_ef_ist),
+        (u'ef-ad', _PE_ISIM_ef_ad),
+        (u'ef-arr', _PE_ISIM_ef_arr),
         ])
     PE_ISIM._ext = []
     
     #-----< PE-OPT-ISIM >-----#
-    PE_OPT_ISIM = SEQ(name='PE-OPT-ISIM', mode=MODE_TYPE)
-    _PE_OPT_ISIM_optisim_header = SEQ(name='optisim-header', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'PEHeader')))
-    _PE_OPT_ISIM_templateID = OID(name='templateID', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _PE_OPT_ISIM_ef_pcscf = SEQ_OF(name='ef-pcscf', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_OPT_ISIM_ef_sms = SEQ_OF(name='ef-sms', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_OPT_ISIM_ef_smsp = SEQ_OF(name='ef-smsp', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_OPT_ISIM_ef_smss = SEQ_OF(name='ef-smss', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_OPT_ISIM_ef_smsr = SEQ_OF(name='ef-smsr', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_OPT_ISIM_ef_gbabp = SEQ_OF(name='ef-gbabp', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_OPT_ISIM_ef_gbanl = SEQ_OF(name='ef-gbanl', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_OPT_ISIM_ef_nafkca = SEQ_OF(name='ef-nafkca', mode=MODE_TYPE, tag=(9, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_OPT_ISIM_ef_uicciari = SEQ_OF(name='ef-uicciari', mode=MODE_TYPE, tag=(10, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    PE_OPT_ISIM = SEQ(name=u'PE-OPT-ISIM', mode=MODE_TYPE)
+    _PE_OPT_ISIM_optisim_header = SEQ(name=u'optisim-header', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'PEHeader')))
+    _PE_OPT_ISIM_templateID = OID(name=u'templateID', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _PE_OPT_ISIM_ef_pcscf = SEQ_OF(name=u'ef-pcscf', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_OPT_ISIM_ef_sms = SEQ_OF(name=u'ef-sms', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_OPT_ISIM_ef_smsp = SEQ_OF(name=u'ef-smsp', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_OPT_ISIM_ef_smss = SEQ_OF(name=u'ef-smss', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_OPT_ISIM_ef_smsr = SEQ_OF(name=u'ef-smsr', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_OPT_ISIM_ef_gbabp = SEQ_OF(name=u'ef-gbabp', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_OPT_ISIM_ef_gbanl = SEQ_OF(name=u'ef-gbanl', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_OPT_ISIM_ef_nafkca = SEQ_OF(name=u'ef-nafkca', mode=MODE_TYPE, tag=(9, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_OPT_ISIM_ef_uicciari = SEQ_OF(name=u'ef-uicciari', mode=MODE_TYPE, tag=(10, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
     PE_OPT_ISIM._cont = ASN1Dict([
-        ('optisim-header', _PE_OPT_ISIM_optisim_header),
-        ('templateID', _PE_OPT_ISIM_templateID),
-        ('ef-pcscf', _PE_OPT_ISIM_ef_pcscf),
-        ('ef-sms', _PE_OPT_ISIM_ef_sms),
-        ('ef-smsp', _PE_OPT_ISIM_ef_smsp),
-        ('ef-smss', _PE_OPT_ISIM_ef_smss),
-        ('ef-smsr', _PE_OPT_ISIM_ef_smsr),
-        ('ef-gbabp', _PE_OPT_ISIM_ef_gbabp),
-        ('ef-gbanl', _PE_OPT_ISIM_ef_gbanl),
-        ('ef-nafkca', _PE_OPT_ISIM_ef_nafkca),
-        ('ef-uicciari', _PE_OPT_ISIM_ef_uicciari),
+        (u'optisim-header', _PE_OPT_ISIM_optisim_header),
+        (u'templateID', _PE_OPT_ISIM_templateID),
+        (u'ef-pcscf', _PE_OPT_ISIM_ef_pcscf),
+        (u'ef-sms', _PE_OPT_ISIM_ef_sms),
+        (u'ef-smsp', _PE_OPT_ISIM_ef_smsp),
+        (u'ef-smss', _PE_OPT_ISIM_ef_smss),
+        (u'ef-smsr', _PE_OPT_ISIM_ef_smsr),
+        (u'ef-gbabp', _PE_OPT_ISIM_ef_gbabp),
+        (u'ef-gbanl', _PE_OPT_ISIM_ef_gbanl),
+        (u'ef-nafkca', _PE_OPT_ISIM_ef_nafkca),
+        (u'ef-uicciari', _PE_OPT_ISIM_ef_uicciari),
         ])
     PE_OPT_ISIM._ext = []
     
     #-----< PE-CSIM >-----#
-    PE_CSIM = SEQ(name='PE-CSIM', mode=MODE_TYPE)
-    _PE_CSIM_csim_header = SEQ(name='csim-header', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'PEHeader')))
-    _PE_CSIM_templateID = OID(name='templateID', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _PE_CSIM_adf_csim = SEQ_OF(name='adf-csim', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')))
-    _PE_CSIM_ef_arr = SEQ_OF(name='ef-arr', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')))
-    _PE_CSIM_ef_call_count = SEQ_OF(name='ef-call-count', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')))
-    _PE_CSIM_ef_imsi_m = SEQ_OF(name='ef-imsi-m', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')))
-    _PE_CSIM_ef_imsi_t = SEQ_OF(name='ef-imsi-t', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')))
-    _PE_CSIM_ef_tmsi = SEQ_OF(name='ef-tmsi', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')))
-    _PE_CSIM_ef_ah = SEQ_OF(name='ef-ah', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')))
-    _PE_CSIM_ef_aop = SEQ_OF(name='ef-aop', mode=MODE_TYPE, tag=(9, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')))
-    _PE_CSIM_ef_aloc = SEQ_OF(name='ef-aloc', mode=MODE_TYPE, tag=(10, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')))
-    _PE_CSIM_ef_cdmahome = SEQ_OF(name='ef-cdmahome', mode=MODE_TYPE, tag=(11, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')))
-    _PE_CSIM_ef_znregi = SEQ_OF(name='ef-znregi', mode=MODE_TYPE, tag=(12, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')))
-    _PE_CSIM_ef_snregi = SEQ_OF(name='ef-snregi', mode=MODE_TYPE, tag=(13, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')))
-    _PE_CSIM_ef_distregi = SEQ_OF(name='ef-distregi', mode=MODE_TYPE, tag=(14, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')))
-    _PE_CSIM_ef_accolc = SEQ_OF(name='ef-accolc', mode=MODE_TYPE, tag=(15, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')))
-    _PE_CSIM_ef_term = SEQ_OF(name='ef-term', mode=MODE_TYPE, tag=(16, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')))
-    _PE_CSIM_ef_acp = SEQ_OF(name='ef-acp', mode=MODE_TYPE, tag=(17, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')))
-    _PE_CSIM_ef_prl = SEQ_OF(name='ef-prl', mode=MODE_TYPE, tag=(18, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')))
-    _PE_CSIM_ef_ruimid = SEQ_OF(name='ef-ruimid', mode=MODE_TYPE, tag=(19, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')))
-    _PE_CSIM_ef_csim_st = SEQ_OF(name='ef-csim-st', mode=MODE_TYPE, tag=(20, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')))
-    _PE_CSIM_ef_spc = SEQ_OF(name='ef-spc', mode=MODE_TYPE, tag=(21, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')))
-    _PE_CSIM_ef_otapaspc = SEQ_OF(name='ef-otapaspc', mode=MODE_TYPE, tag=(22, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')))
-    _PE_CSIM_ef_namlock = SEQ_OF(name='ef-namlock', mode=MODE_TYPE, tag=(23, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')))
-    _PE_CSIM_ef_ota = SEQ_OF(name='ef-ota', mode=MODE_TYPE, tag=(24, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')))
-    _PE_CSIM_ef_sp = SEQ_OF(name='ef-sp', mode=MODE_TYPE, tag=(25, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')))
-    _PE_CSIM_ef_esn_meid_me = SEQ_OF(name='ef-esn-meid-me', mode=MODE_TYPE, tag=(26, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')))
-    _PE_CSIM_ef_li = SEQ_OF(name='ef-li', mode=MODE_TYPE, tag=(27, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')))
-    _PE_CSIM_ef_usgind = SEQ_OF(name='ef-usgind', mode=MODE_TYPE, tag=(28, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')))
-    _PE_CSIM_ef_ad = SEQ_OF(name='ef-ad', mode=MODE_TYPE, tag=(29, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')))
-    _PE_CSIM_ef_max_prl = SEQ_OF(name='ef-max-prl', mode=MODE_TYPE, tag=(30, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')))
-    _PE_CSIM_ef_spcs = SEQ_OF(name='ef-spcs', mode=MODE_TYPE, tag=(31, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')))
-    _PE_CSIM_ef_mecrp = SEQ_OF(name='ef-mecrp', mode=MODE_TYPE, tag=(32, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')))
-    _PE_CSIM_ef_home_tag = SEQ_OF(name='ef-home-tag', mode=MODE_TYPE, tag=(33, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')))
-    _PE_CSIM_ef_group_tag = SEQ_OF(name='ef-group-tag', mode=MODE_TYPE, tag=(34, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')))
-    _PE_CSIM_ef_specific_tag = SEQ_OF(name='ef-specific-tag', mode=MODE_TYPE, tag=(35, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')))
-    _PE_CSIM_ef_call_prompt = SEQ_OF(name='ef-call-prompt', mode=MODE_TYPE, tag=(36, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')))
+    PE_CSIM = SEQ(name=u'PE-CSIM', mode=MODE_TYPE)
+    _PE_CSIM_csim_header = SEQ(name=u'csim-header', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'PEHeader')))
+    _PE_CSIM_templateID = OID(name=u'templateID', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _PE_CSIM_adf_csim = SEQ_OF(name=u'adf-csim', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')))
+    _PE_CSIM_ef_arr = SEQ_OF(name=u'ef-arr', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')))
+    _PE_CSIM_ef_call_count = SEQ_OF(name=u'ef-call-count', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')))
+    _PE_CSIM_ef_imsi_m = SEQ_OF(name=u'ef-imsi-m', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')))
+    _PE_CSIM_ef_imsi_t = SEQ_OF(name=u'ef-imsi-t', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')))
+    _PE_CSIM_ef_tmsi = SEQ_OF(name=u'ef-tmsi', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')))
+    _PE_CSIM_ef_ah = SEQ_OF(name=u'ef-ah', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')))
+    _PE_CSIM_ef_aop = SEQ_OF(name=u'ef-aop', mode=MODE_TYPE, tag=(9, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')))
+    _PE_CSIM_ef_aloc = SEQ_OF(name=u'ef-aloc', mode=MODE_TYPE, tag=(10, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')))
+    _PE_CSIM_ef_cdmahome = SEQ_OF(name=u'ef-cdmahome', mode=MODE_TYPE, tag=(11, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')))
+    _PE_CSIM_ef_znregi = SEQ_OF(name=u'ef-znregi', mode=MODE_TYPE, tag=(12, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')))
+    _PE_CSIM_ef_snregi = SEQ_OF(name=u'ef-snregi', mode=MODE_TYPE, tag=(13, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')))
+    _PE_CSIM_ef_distregi = SEQ_OF(name=u'ef-distregi', mode=MODE_TYPE, tag=(14, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')))
+    _PE_CSIM_ef_accolc = SEQ_OF(name=u'ef-accolc', mode=MODE_TYPE, tag=(15, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')))
+    _PE_CSIM_ef_term = SEQ_OF(name=u'ef-term', mode=MODE_TYPE, tag=(16, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')))
+    _PE_CSIM_ef_acp = SEQ_OF(name=u'ef-acp', mode=MODE_TYPE, tag=(17, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')))
+    _PE_CSIM_ef_prl = SEQ_OF(name=u'ef-prl', mode=MODE_TYPE, tag=(18, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')))
+    _PE_CSIM_ef_ruimid = SEQ_OF(name=u'ef-ruimid', mode=MODE_TYPE, tag=(19, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')))
+    _PE_CSIM_ef_csim_st = SEQ_OF(name=u'ef-csim-st', mode=MODE_TYPE, tag=(20, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')))
+    _PE_CSIM_ef_spc = SEQ_OF(name=u'ef-spc', mode=MODE_TYPE, tag=(21, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')))
+    _PE_CSIM_ef_otapaspc = SEQ_OF(name=u'ef-otapaspc', mode=MODE_TYPE, tag=(22, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')))
+    _PE_CSIM_ef_namlock = SEQ_OF(name=u'ef-namlock', mode=MODE_TYPE, tag=(23, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')))
+    _PE_CSIM_ef_ota = SEQ_OF(name=u'ef-ota', mode=MODE_TYPE, tag=(24, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')))
+    _PE_CSIM_ef_sp = SEQ_OF(name=u'ef-sp', mode=MODE_TYPE, tag=(25, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')))
+    _PE_CSIM_ef_esn_meid_me = SEQ_OF(name=u'ef-esn-meid-me', mode=MODE_TYPE, tag=(26, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')))
+    _PE_CSIM_ef_li = SEQ_OF(name=u'ef-li', mode=MODE_TYPE, tag=(27, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')))
+    _PE_CSIM_ef_usgind = SEQ_OF(name=u'ef-usgind', mode=MODE_TYPE, tag=(28, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')))
+    _PE_CSIM_ef_ad = SEQ_OF(name=u'ef-ad', mode=MODE_TYPE, tag=(29, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')))
+    _PE_CSIM_ef_max_prl = SEQ_OF(name=u'ef-max-prl', mode=MODE_TYPE, tag=(30, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')))
+    _PE_CSIM_ef_spcs = SEQ_OF(name=u'ef-spcs', mode=MODE_TYPE, tag=(31, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')))
+    _PE_CSIM_ef_mecrp = SEQ_OF(name=u'ef-mecrp', mode=MODE_TYPE, tag=(32, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')))
+    _PE_CSIM_ef_home_tag = SEQ_OF(name=u'ef-home-tag', mode=MODE_TYPE, tag=(33, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')))
+    _PE_CSIM_ef_group_tag = SEQ_OF(name=u'ef-group-tag', mode=MODE_TYPE, tag=(34, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')))
+    _PE_CSIM_ef_specific_tag = SEQ_OF(name=u'ef-specific-tag', mode=MODE_TYPE, tag=(35, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')))
+    _PE_CSIM_ef_call_prompt = SEQ_OF(name=u'ef-call-prompt', mode=MODE_TYPE, tag=(36, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')))
     PE_CSIM._cont = ASN1Dict([
-        ('csim-header', _PE_CSIM_csim_header),
-        ('templateID', _PE_CSIM_templateID),
-        ('adf-csim', _PE_CSIM_adf_csim),
-        ('ef-arr', _PE_CSIM_ef_arr),
-        ('ef-call-count', _PE_CSIM_ef_call_count),
-        ('ef-imsi-m', _PE_CSIM_ef_imsi_m),
-        ('ef-imsi-t', _PE_CSIM_ef_imsi_t),
-        ('ef-tmsi', _PE_CSIM_ef_tmsi),
-        ('ef-ah', _PE_CSIM_ef_ah),
-        ('ef-aop', _PE_CSIM_ef_aop),
-        ('ef-aloc', _PE_CSIM_ef_aloc),
-        ('ef-cdmahome', _PE_CSIM_ef_cdmahome),
-        ('ef-znregi', _PE_CSIM_ef_znregi),
-        ('ef-snregi', _PE_CSIM_ef_snregi),
-        ('ef-distregi', _PE_CSIM_ef_distregi),
-        ('ef-accolc', _PE_CSIM_ef_accolc),
-        ('ef-term', _PE_CSIM_ef_term),
-        ('ef-acp', _PE_CSIM_ef_acp),
-        ('ef-prl', _PE_CSIM_ef_prl),
-        ('ef-ruimid', _PE_CSIM_ef_ruimid),
-        ('ef-csim-st', _PE_CSIM_ef_csim_st),
-        ('ef-spc', _PE_CSIM_ef_spc),
-        ('ef-otapaspc', _PE_CSIM_ef_otapaspc),
-        ('ef-namlock', _PE_CSIM_ef_namlock),
-        ('ef-ota', _PE_CSIM_ef_ota),
-        ('ef-sp', _PE_CSIM_ef_sp),
-        ('ef-esn-meid-me', _PE_CSIM_ef_esn_meid_me),
-        ('ef-li', _PE_CSIM_ef_li),
-        ('ef-usgind', _PE_CSIM_ef_usgind),
-        ('ef-ad', _PE_CSIM_ef_ad),
-        ('ef-max-prl', _PE_CSIM_ef_max_prl),
-        ('ef-spcs', _PE_CSIM_ef_spcs),
-        ('ef-mecrp', _PE_CSIM_ef_mecrp),
-        ('ef-home-tag', _PE_CSIM_ef_home_tag),
-        ('ef-group-tag', _PE_CSIM_ef_group_tag),
-        ('ef-specific-tag', _PE_CSIM_ef_specific_tag),
-        ('ef-call-prompt', _PE_CSIM_ef_call_prompt),
+        (u'csim-header', _PE_CSIM_csim_header),
+        (u'templateID', _PE_CSIM_templateID),
+        (u'adf-csim', _PE_CSIM_adf_csim),
+        (u'ef-arr', _PE_CSIM_ef_arr),
+        (u'ef-call-count', _PE_CSIM_ef_call_count),
+        (u'ef-imsi-m', _PE_CSIM_ef_imsi_m),
+        (u'ef-imsi-t', _PE_CSIM_ef_imsi_t),
+        (u'ef-tmsi', _PE_CSIM_ef_tmsi),
+        (u'ef-ah', _PE_CSIM_ef_ah),
+        (u'ef-aop', _PE_CSIM_ef_aop),
+        (u'ef-aloc', _PE_CSIM_ef_aloc),
+        (u'ef-cdmahome', _PE_CSIM_ef_cdmahome),
+        (u'ef-znregi', _PE_CSIM_ef_znregi),
+        (u'ef-snregi', _PE_CSIM_ef_snregi),
+        (u'ef-distregi', _PE_CSIM_ef_distregi),
+        (u'ef-accolc', _PE_CSIM_ef_accolc),
+        (u'ef-term', _PE_CSIM_ef_term),
+        (u'ef-acp', _PE_CSIM_ef_acp),
+        (u'ef-prl', _PE_CSIM_ef_prl),
+        (u'ef-ruimid', _PE_CSIM_ef_ruimid),
+        (u'ef-csim-st', _PE_CSIM_ef_csim_st),
+        (u'ef-spc', _PE_CSIM_ef_spc),
+        (u'ef-otapaspc', _PE_CSIM_ef_otapaspc),
+        (u'ef-namlock', _PE_CSIM_ef_namlock),
+        (u'ef-ota', _PE_CSIM_ef_ota),
+        (u'ef-sp', _PE_CSIM_ef_sp),
+        (u'ef-esn-meid-me', _PE_CSIM_ef_esn_meid_me),
+        (u'ef-li', _PE_CSIM_ef_li),
+        (u'ef-usgind', _PE_CSIM_ef_usgind),
+        (u'ef-ad', _PE_CSIM_ef_ad),
+        (u'ef-max-prl', _PE_CSIM_ef_max_prl),
+        (u'ef-spcs', _PE_CSIM_ef_spcs),
+        (u'ef-mecrp', _PE_CSIM_ef_mecrp),
+        (u'ef-home-tag', _PE_CSIM_ef_home_tag),
+        (u'ef-group-tag', _PE_CSIM_ef_group_tag),
+        (u'ef-specific-tag', _PE_CSIM_ef_specific_tag),
+        (u'ef-call-prompt', _PE_CSIM_ef_call_prompt),
         ])
     PE_CSIM._ext = []
     
     #-----< PE-OPT-CSIM >-----#
-    PE_OPT_CSIM = SEQ(name='PE-OPT-CSIM', mode=MODE_TYPE)
-    _PE_OPT_CSIM_optcsim_header = SEQ(name='optcsim-header', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'PEHeader')))
-    _PE_OPT_CSIM_templateID = OID(name='templateID', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _PE_OPT_CSIM_ef_ssci = SEQ_OF(name='ef-ssci', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_OPT_CSIM_ef_fdn = SEQ_OF(name='ef-fdn', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_OPT_CSIM_ef_sms = SEQ_OF(name='ef-sms', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_OPT_CSIM_ef_smsp = SEQ_OF(name='ef-smsp', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_OPT_CSIM_ef_smss = SEQ_OF(name='ef-smss', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_OPT_CSIM_ef_ssfc = SEQ_OF(name='ef-ssfc', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_OPT_CSIM_ef_spn = SEQ_OF(name='ef-spn', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_OPT_CSIM_ef_mdn = SEQ_OF(name='ef-mdn', mode=MODE_TYPE, tag=(9, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_OPT_CSIM_ef_ecc = SEQ_OF(name='ef-ecc', mode=MODE_TYPE, tag=(10, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_OPT_CSIM_ef_me3gpdopc = SEQ_OF(name='ef-me3gpdopc', mode=MODE_TYPE, tag=(11, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_OPT_CSIM_ef_3gpdopm = SEQ_OF(name='ef-3gpdopm', mode=MODE_TYPE, tag=(12, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_OPT_CSIM_ef_sipcap = SEQ_OF(name='ef-sipcap', mode=MODE_TYPE, tag=(13, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_OPT_CSIM_ef_mipcap = SEQ_OF(name='ef-mipcap', mode=MODE_TYPE, tag=(14, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_OPT_CSIM_ef_sipupp = SEQ_OF(name='ef-sipupp', mode=MODE_TYPE, tag=(15, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_OPT_CSIM_ef_mipupp = SEQ_OF(name='ef-mipupp', mode=MODE_TYPE, tag=(16, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_OPT_CSIM_ef_sipsp = SEQ_OF(name='ef-sipsp', mode=MODE_TYPE, tag=(17, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_OPT_CSIM_ef_mipsp = SEQ_OF(name='ef-mipsp', mode=MODE_TYPE, tag=(18, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_OPT_CSIM_ef_sippapss = SEQ_OF(name='ef-sippapss', mode=MODE_TYPE, tag=(19, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_OPT_CSIM_ef_puzl = SEQ_OF(name='ef-puzl', mode=MODE_TYPE, tag=(20, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_OPT_CSIM_ef_maxpuzl = SEQ_OF(name='ef-maxpuzl', mode=MODE_TYPE, tag=(21, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_OPT_CSIM_ef_hrpdcap = SEQ_OF(name='ef-hrpdcap', mode=MODE_TYPE, tag=(22, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_OPT_CSIM_ef_hrpdupp = SEQ_OF(name='ef-hrpdupp', mode=MODE_TYPE, tag=(23, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_OPT_CSIM_ef_csspr = SEQ_OF(name='ef-csspr', mode=MODE_TYPE, tag=(24, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_OPT_CSIM_ef_atc = SEQ_OF(name='ef-atc', mode=MODE_TYPE, tag=(25, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_OPT_CSIM_ef_eprl = SEQ_OF(name='ef-eprl', mode=MODE_TYPE, tag=(26, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_OPT_CSIM_ef_bcsmscfg = SEQ_OF(name='ef-bcsmscfg', mode=MODE_TYPE, tag=(27, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_OPT_CSIM_ef_bcsmspref = SEQ_OF(name='ef-bcsmspref', mode=MODE_TYPE, tag=(28, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_OPT_CSIM_ef_bcsmstable = SEQ_OF(name='ef-bcsmstable', mode=MODE_TYPE, tag=(29, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_OPT_CSIM_ef_bcsmsp = SEQ_OF(name='ef-bcsmsp', mode=MODE_TYPE, tag=(30, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_OPT_CSIM_ef_bakpara = SEQ_OF(name='ef-bakpara', mode=MODE_TYPE, tag=(31, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_OPT_CSIM_ef_upbakpara = SEQ_OF(name='ef-upbakpara', mode=MODE_TYPE, tag=(32, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_OPT_CSIM_ef_mmsn = SEQ_OF(name='ef-mmsn', mode=MODE_TYPE, tag=(33, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_OPT_CSIM_ef_ext8 = SEQ_OF(name='ef-ext8', mode=MODE_TYPE, tag=(34, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_OPT_CSIM_ef_mmsicp = SEQ_OF(name='ef-mmsicp', mode=MODE_TYPE, tag=(35, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_OPT_CSIM_ef_mmsup = SEQ_OF(name='ef-mmsup', mode=MODE_TYPE, tag=(36, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_OPT_CSIM_ef_mmsucp = SEQ_OF(name='ef-mmsucp', mode=MODE_TYPE, tag=(37, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_OPT_CSIM_ef_auth_capability = SEQ_OF(name='ef-auth-capability', mode=MODE_TYPE, tag=(38, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_OPT_CSIM_ef_3gcik = SEQ_OF(name='ef-3gcik', mode=MODE_TYPE, tag=(39, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_OPT_CSIM_ef_dck = SEQ_OF(name='ef-dck', mode=MODE_TYPE, tag=(40, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_OPT_CSIM_ef_gid1 = SEQ_OF(name='ef-gid1', mode=MODE_TYPE, tag=(41, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_OPT_CSIM_ef_gid2 = SEQ_OF(name='ef-gid2', mode=MODE_TYPE, tag=(42, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_OPT_CSIM_ef_cdmacnl = SEQ_OF(name='ef-cdmacnl', mode=MODE_TYPE, tag=(43, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_OPT_CSIM_ef_sf_euimid = SEQ_OF(name='ef-sf-euimid', mode=MODE_TYPE, tag=(44, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_OPT_CSIM_ef_est = SEQ_OF(name='ef-est', mode=MODE_TYPE, tag=(45, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_OPT_CSIM_ef_hidden_key = SEQ_OF(name='ef-hidden-key', mode=MODE_TYPE, tag=(46, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_OPT_CSIM_ef_lcsver = SEQ_OF(name='ef-lcsver', mode=MODE_TYPE, tag=(47, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_OPT_CSIM_ef_lcscp = SEQ_OF(name='ef-lcscp', mode=MODE_TYPE, tag=(48, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_OPT_CSIM_ef_sdn = SEQ_OF(name='ef-sdn', mode=MODE_TYPE, tag=(49, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_OPT_CSIM_ef_ext2 = SEQ_OF(name='ef-ext2', mode=MODE_TYPE, tag=(50, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_OPT_CSIM_ef_ext3 = SEQ_OF(name='ef-ext3', mode=MODE_TYPE, tag=(51, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_OPT_CSIM_ef_ici = SEQ_OF(name='ef-ici', mode=MODE_TYPE, tag=(52, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_OPT_CSIM_ef_oci = SEQ_OF(name='ef-oci', mode=MODE_TYPE, tag=(53, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_OPT_CSIM_ef_ext5 = SEQ_OF(name='ef-ext5', mode=MODE_TYPE, tag=(54, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_OPT_CSIM_ef_ccp2 = SEQ_OF(name='ef-ccp2', mode=MODE_TYPE, tag=(55, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_OPT_CSIM_ef_applabels = SEQ_OF(name='ef-applabels', mode=MODE_TYPE, tag=(56, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_OPT_CSIM_ef_model = SEQ_OF(name='ef-model', mode=MODE_TYPE, tag=(57, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_OPT_CSIM_ef_rc = SEQ_OF(name='ef-rc', mode=MODE_TYPE, tag=(58, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_OPT_CSIM_ef_smscap = SEQ_OF(name='ef-smscap', mode=MODE_TYPE, tag=(59, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_OPT_CSIM_ef_mipflags = SEQ_OF(name='ef-mipflags', mode=MODE_TYPE, tag=(60, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_OPT_CSIM_ef_3gpduppext = SEQ_OF(name='ef-3gpduppext', mode=MODE_TYPE, tag=(61, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_OPT_CSIM_ef_ipv6cap = SEQ_OF(name='ef-ipv6cap', mode=MODE_TYPE, tag=(62, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_OPT_CSIM_ef_tcpconfig = SEQ_OF(name='ef-tcpconfig', mode=MODE_TYPE, tag=(63, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_OPT_CSIM_ef_dgc = SEQ_OF(name='ef-dgc', mode=MODE_TYPE, tag=(64, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_OPT_CSIM_ef_wapbrowsercp = SEQ_OF(name='ef-wapbrowsercp', mode=MODE_TYPE, tag=(65, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_OPT_CSIM_ef_wapbrowserbm = SEQ_OF(name='ef-wapbrowserbm', mode=MODE_TYPE, tag=(66, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_OPT_CSIM_ef_mmsconfig = SEQ_OF(name='ef-mmsconfig', mode=MODE_TYPE, tag=(67, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_OPT_CSIM_ef_jdl = SEQ_OF(name='ef-jdl', mode=MODE_TYPE, tag=(68, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    PE_OPT_CSIM = SEQ(name=u'PE-OPT-CSIM', mode=MODE_TYPE)
+    _PE_OPT_CSIM_optcsim_header = SEQ(name=u'optcsim-header', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'PEHeader')))
+    _PE_OPT_CSIM_templateID = OID(name=u'templateID', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _PE_OPT_CSIM_ef_ssci = SEQ_OF(name=u'ef-ssci', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_OPT_CSIM_ef_fdn = SEQ_OF(name=u'ef-fdn', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_OPT_CSIM_ef_sms = SEQ_OF(name=u'ef-sms', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_OPT_CSIM_ef_smsp = SEQ_OF(name=u'ef-smsp', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_OPT_CSIM_ef_smss = SEQ_OF(name=u'ef-smss', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_OPT_CSIM_ef_ssfc = SEQ_OF(name=u'ef-ssfc', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_OPT_CSIM_ef_spn = SEQ_OF(name=u'ef-spn', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_OPT_CSIM_ef_mdn = SEQ_OF(name=u'ef-mdn', mode=MODE_TYPE, tag=(9, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_OPT_CSIM_ef_ecc = SEQ_OF(name=u'ef-ecc', mode=MODE_TYPE, tag=(10, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_OPT_CSIM_ef_me3gpdopc = SEQ_OF(name=u'ef-me3gpdopc', mode=MODE_TYPE, tag=(11, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_OPT_CSIM_ef_3gpdopm = SEQ_OF(name=u'ef-3gpdopm', mode=MODE_TYPE, tag=(12, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_OPT_CSIM_ef_sipcap = SEQ_OF(name=u'ef-sipcap', mode=MODE_TYPE, tag=(13, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_OPT_CSIM_ef_mipcap = SEQ_OF(name=u'ef-mipcap', mode=MODE_TYPE, tag=(14, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_OPT_CSIM_ef_sipupp = SEQ_OF(name=u'ef-sipupp', mode=MODE_TYPE, tag=(15, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_OPT_CSIM_ef_mipupp = SEQ_OF(name=u'ef-mipupp', mode=MODE_TYPE, tag=(16, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_OPT_CSIM_ef_sipsp = SEQ_OF(name=u'ef-sipsp', mode=MODE_TYPE, tag=(17, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_OPT_CSIM_ef_mipsp = SEQ_OF(name=u'ef-mipsp', mode=MODE_TYPE, tag=(18, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_OPT_CSIM_ef_sippapss = SEQ_OF(name=u'ef-sippapss', mode=MODE_TYPE, tag=(19, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_OPT_CSIM_ef_puzl = SEQ_OF(name=u'ef-puzl', mode=MODE_TYPE, tag=(20, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_OPT_CSIM_ef_maxpuzl = SEQ_OF(name=u'ef-maxpuzl', mode=MODE_TYPE, tag=(21, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_OPT_CSIM_ef_hrpdcap = SEQ_OF(name=u'ef-hrpdcap', mode=MODE_TYPE, tag=(22, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_OPT_CSIM_ef_hrpdupp = SEQ_OF(name=u'ef-hrpdupp', mode=MODE_TYPE, tag=(23, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_OPT_CSIM_ef_csspr = SEQ_OF(name=u'ef-csspr', mode=MODE_TYPE, tag=(24, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_OPT_CSIM_ef_atc = SEQ_OF(name=u'ef-atc', mode=MODE_TYPE, tag=(25, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_OPT_CSIM_ef_eprl = SEQ_OF(name=u'ef-eprl', mode=MODE_TYPE, tag=(26, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_OPT_CSIM_ef_bcsmscfg = SEQ_OF(name=u'ef-bcsmscfg', mode=MODE_TYPE, tag=(27, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_OPT_CSIM_ef_bcsmspref = SEQ_OF(name=u'ef-bcsmspref', mode=MODE_TYPE, tag=(28, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_OPT_CSIM_ef_bcsmstable = SEQ_OF(name=u'ef-bcsmstable', mode=MODE_TYPE, tag=(29, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_OPT_CSIM_ef_bcsmsp = SEQ_OF(name=u'ef-bcsmsp', mode=MODE_TYPE, tag=(30, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_OPT_CSIM_ef_bakpara = SEQ_OF(name=u'ef-bakpara', mode=MODE_TYPE, tag=(31, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_OPT_CSIM_ef_upbakpara = SEQ_OF(name=u'ef-upbakpara', mode=MODE_TYPE, tag=(32, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_OPT_CSIM_ef_mmsn = SEQ_OF(name=u'ef-mmsn', mode=MODE_TYPE, tag=(33, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_OPT_CSIM_ef_ext8 = SEQ_OF(name=u'ef-ext8', mode=MODE_TYPE, tag=(34, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_OPT_CSIM_ef_mmsicp = SEQ_OF(name=u'ef-mmsicp', mode=MODE_TYPE, tag=(35, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_OPT_CSIM_ef_mmsup = SEQ_OF(name=u'ef-mmsup', mode=MODE_TYPE, tag=(36, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_OPT_CSIM_ef_mmsucp = SEQ_OF(name=u'ef-mmsucp', mode=MODE_TYPE, tag=(37, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_OPT_CSIM_ef_auth_capability = SEQ_OF(name=u'ef-auth-capability', mode=MODE_TYPE, tag=(38, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_OPT_CSIM_ef_3gcik = SEQ_OF(name=u'ef-3gcik', mode=MODE_TYPE, tag=(39, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_OPT_CSIM_ef_dck = SEQ_OF(name=u'ef-dck', mode=MODE_TYPE, tag=(40, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_OPT_CSIM_ef_gid1 = SEQ_OF(name=u'ef-gid1', mode=MODE_TYPE, tag=(41, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_OPT_CSIM_ef_gid2 = SEQ_OF(name=u'ef-gid2', mode=MODE_TYPE, tag=(42, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_OPT_CSIM_ef_cdmacnl = SEQ_OF(name=u'ef-cdmacnl', mode=MODE_TYPE, tag=(43, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_OPT_CSIM_ef_sf_euimid = SEQ_OF(name=u'ef-sf-euimid', mode=MODE_TYPE, tag=(44, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_OPT_CSIM_ef_est = SEQ_OF(name=u'ef-est', mode=MODE_TYPE, tag=(45, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_OPT_CSIM_ef_hidden_key = SEQ_OF(name=u'ef-hidden-key', mode=MODE_TYPE, tag=(46, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_OPT_CSIM_ef_lcsver = SEQ_OF(name=u'ef-lcsver', mode=MODE_TYPE, tag=(47, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_OPT_CSIM_ef_lcscp = SEQ_OF(name=u'ef-lcscp', mode=MODE_TYPE, tag=(48, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_OPT_CSIM_ef_sdn = SEQ_OF(name=u'ef-sdn', mode=MODE_TYPE, tag=(49, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_OPT_CSIM_ef_ext2 = SEQ_OF(name=u'ef-ext2', mode=MODE_TYPE, tag=(50, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_OPT_CSIM_ef_ext3 = SEQ_OF(name=u'ef-ext3', mode=MODE_TYPE, tag=(51, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_OPT_CSIM_ef_ici = SEQ_OF(name=u'ef-ici', mode=MODE_TYPE, tag=(52, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_OPT_CSIM_ef_oci = SEQ_OF(name=u'ef-oci', mode=MODE_TYPE, tag=(53, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_OPT_CSIM_ef_ext5 = SEQ_OF(name=u'ef-ext5', mode=MODE_TYPE, tag=(54, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_OPT_CSIM_ef_ccp2 = SEQ_OF(name=u'ef-ccp2', mode=MODE_TYPE, tag=(55, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_OPT_CSIM_ef_applabels = SEQ_OF(name=u'ef-applabels', mode=MODE_TYPE, tag=(56, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_OPT_CSIM_ef_model = SEQ_OF(name=u'ef-model', mode=MODE_TYPE, tag=(57, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_OPT_CSIM_ef_rc = SEQ_OF(name=u'ef-rc', mode=MODE_TYPE, tag=(58, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_OPT_CSIM_ef_smscap = SEQ_OF(name=u'ef-smscap', mode=MODE_TYPE, tag=(59, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_OPT_CSIM_ef_mipflags = SEQ_OF(name=u'ef-mipflags', mode=MODE_TYPE, tag=(60, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_OPT_CSIM_ef_3gpduppext = SEQ_OF(name=u'ef-3gpduppext', mode=MODE_TYPE, tag=(61, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_OPT_CSIM_ef_ipv6cap = SEQ_OF(name=u'ef-ipv6cap', mode=MODE_TYPE, tag=(62, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_OPT_CSIM_ef_tcpconfig = SEQ_OF(name=u'ef-tcpconfig', mode=MODE_TYPE, tag=(63, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_OPT_CSIM_ef_dgc = SEQ_OF(name=u'ef-dgc', mode=MODE_TYPE, tag=(64, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_OPT_CSIM_ef_wapbrowsercp = SEQ_OF(name=u'ef-wapbrowsercp', mode=MODE_TYPE, tag=(65, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_OPT_CSIM_ef_wapbrowserbm = SEQ_OF(name=u'ef-wapbrowserbm', mode=MODE_TYPE, tag=(66, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_OPT_CSIM_ef_mmsconfig = SEQ_OF(name=u'ef-mmsconfig', mode=MODE_TYPE, tag=(67, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_OPT_CSIM_ef_jdl = SEQ_OF(name=u'ef-jdl', mode=MODE_TYPE, tag=(68, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
     PE_OPT_CSIM._cont = ASN1Dict([
-        ('optcsim-header', _PE_OPT_CSIM_optcsim_header),
-        ('templateID', _PE_OPT_CSIM_templateID),
-        ('ef-ssci', _PE_OPT_CSIM_ef_ssci),
-        ('ef-fdn', _PE_OPT_CSIM_ef_fdn),
-        ('ef-sms', _PE_OPT_CSIM_ef_sms),
-        ('ef-smsp', _PE_OPT_CSIM_ef_smsp),
-        ('ef-smss', _PE_OPT_CSIM_ef_smss),
-        ('ef-ssfc', _PE_OPT_CSIM_ef_ssfc),
-        ('ef-spn', _PE_OPT_CSIM_ef_spn),
-        ('ef-mdn', _PE_OPT_CSIM_ef_mdn),
-        ('ef-ecc', _PE_OPT_CSIM_ef_ecc),
-        ('ef-me3gpdopc', _PE_OPT_CSIM_ef_me3gpdopc),
-        ('ef-3gpdopm', _PE_OPT_CSIM_ef_3gpdopm),
-        ('ef-sipcap', _PE_OPT_CSIM_ef_sipcap),
-        ('ef-mipcap', _PE_OPT_CSIM_ef_mipcap),
-        ('ef-sipupp', _PE_OPT_CSIM_ef_sipupp),
-        ('ef-mipupp', _PE_OPT_CSIM_ef_mipupp),
-        ('ef-sipsp', _PE_OPT_CSIM_ef_sipsp),
-        ('ef-mipsp', _PE_OPT_CSIM_ef_mipsp),
-        ('ef-sippapss', _PE_OPT_CSIM_ef_sippapss),
-        ('ef-puzl', _PE_OPT_CSIM_ef_puzl),
-        ('ef-maxpuzl', _PE_OPT_CSIM_ef_maxpuzl),
-        ('ef-hrpdcap', _PE_OPT_CSIM_ef_hrpdcap),
-        ('ef-hrpdupp', _PE_OPT_CSIM_ef_hrpdupp),
-        ('ef-csspr', _PE_OPT_CSIM_ef_csspr),
-        ('ef-atc', _PE_OPT_CSIM_ef_atc),
-        ('ef-eprl', _PE_OPT_CSIM_ef_eprl),
-        ('ef-bcsmscfg', _PE_OPT_CSIM_ef_bcsmscfg),
-        ('ef-bcsmspref', _PE_OPT_CSIM_ef_bcsmspref),
-        ('ef-bcsmstable', _PE_OPT_CSIM_ef_bcsmstable),
-        ('ef-bcsmsp', _PE_OPT_CSIM_ef_bcsmsp),
-        ('ef-bakpara', _PE_OPT_CSIM_ef_bakpara),
-        ('ef-upbakpara', _PE_OPT_CSIM_ef_upbakpara),
-        ('ef-mmsn', _PE_OPT_CSIM_ef_mmsn),
-        ('ef-ext8', _PE_OPT_CSIM_ef_ext8),
-        ('ef-mmsicp', _PE_OPT_CSIM_ef_mmsicp),
-        ('ef-mmsup', _PE_OPT_CSIM_ef_mmsup),
-        ('ef-mmsucp', _PE_OPT_CSIM_ef_mmsucp),
-        ('ef-auth-capability', _PE_OPT_CSIM_ef_auth_capability),
-        ('ef-3gcik', _PE_OPT_CSIM_ef_3gcik),
-        ('ef-dck', _PE_OPT_CSIM_ef_dck),
-        ('ef-gid1', _PE_OPT_CSIM_ef_gid1),
-        ('ef-gid2', _PE_OPT_CSIM_ef_gid2),
-        ('ef-cdmacnl', _PE_OPT_CSIM_ef_cdmacnl),
-        ('ef-sf-euimid', _PE_OPT_CSIM_ef_sf_euimid),
-        ('ef-est', _PE_OPT_CSIM_ef_est),
-        ('ef-hidden-key', _PE_OPT_CSIM_ef_hidden_key),
-        ('ef-lcsver', _PE_OPT_CSIM_ef_lcsver),
-        ('ef-lcscp', _PE_OPT_CSIM_ef_lcscp),
-        ('ef-sdn', _PE_OPT_CSIM_ef_sdn),
-        ('ef-ext2', _PE_OPT_CSIM_ef_ext2),
-        ('ef-ext3', _PE_OPT_CSIM_ef_ext3),
-        ('ef-ici', _PE_OPT_CSIM_ef_ici),
-        ('ef-oci', _PE_OPT_CSIM_ef_oci),
-        ('ef-ext5', _PE_OPT_CSIM_ef_ext5),
-        ('ef-ccp2', _PE_OPT_CSIM_ef_ccp2),
-        ('ef-applabels', _PE_OPT_CSIM_ef_applabels),
-        ('ef-model', _PE_OPT_CSIM_ef_model),
-        ('ef-rc', _PE_OPT_CSIM_ef_rc),
-        ('ef-smscap', _PE_OPT_CSIM_ef_smscap),
-        ('ef-mipflags', _PE_OPT_CSIM_ef_mipflags),
-        ('ef-3gpduppext', _PE_OPT_CSIM_ef_3gpduppext),
-        ('ef-ipv6cap', _PE_OPT_CSIM_ef_ipv6cap),
-        ('ef-tcpconfig', _PE_OPT_CSIM_ef_tcpconfig),
-        ('ef-dgc', _PE_OPT_CSIM_ef_dgc),
-        ('ef-wapbrowsercp', _PE_OPT_CSIM_ef_wapbrowsercp),
-        ('ef-wapbrowserbm', _PE_OPT_CSIM_ef_wapbrowserbm),
-        ('ef-mmsconfig', _PE_OPT_CSIM_ef_mmsconfig),
-        ('ef-jdl', _PE_OPT_CSIM_ef_jdl),
+        (u'optcsim-header', _PE_OPT_CSIM_optcsim_header),
+        (u'templateID', _PE_OPT_CSIM_templateID),
+        (u'ef-ssci', _PE_OPT_CSIM_ef_ssci),
+        (u'ef-fdn', _PE_OPT_CSIM_ef_fdn),
+        (u'ef-sms', _PE_OPT_CSIM_ef_sms),
+        (u'ef-smsp', _PE_OPT_CSIM_ef_smsp),
+        (u'ef-smss', _PE_OPT_CSIM_ef_smss),
+        (u'ef-ssfc', _PE_OPT_CSIM_ef_ssfc),
+        (u'ef-spn', _PE_OPT_CSIM_ef_spn),
+        (u'ef-mdn', _PE_OPT_CSIM_ef_mdn),
+        (u'ef-ecc', _PE_OPT_CSIM_ef_ecc),
+        (u'ef-me3gpdopc', _PE_OPT_CSIM_ef_me3gpdopc),
+        (u'ef-3gpdopm', _PE_OPT_CSIM_ef_3gpdopm),
+        (u'ef-sipcap', _PE_OPT_CSIM_ef_sipcap),
+        (u'ef-mipcap', _PE_OPT_CSIM_ef_mipcap),
+        (u'ef-sipupp', _PE_OPT_CSIM_ef_sipupp),
+        (u'ef-mipupp', _PE_OPT_CSIM_ef_mipupp),
+        (u'ef-sipsp', _PE_OPT_CSIM_ef_sipsp),
+        (u'ef-mipsp', _PE_OPT_CSIM_ef_mipsp),
+        (u'ef-sippapss', _PE_OPT_CSIM_ef_sippapss),
+        (u'ef-puzl', _PE_OPT_CSIM_ef_puzl),
+        (u'ef-maxpuzl', _PE_OPT_CSIM_ef_maxpuzl),
+        (u'ef-hrpdcap', _PE_OPT_CSIM_ef_hrpdcap),
+        (u'ef-hrpdupp', _PE_OPT_CSIM_ef_hrpdupp),
+        (u'ef-csspr', _PE_OPT_CSIM_ef_csspr),
+        (u'ef-atc', _PE_OPT_CSIM_ef_atc),
+        (u'ef-eprl', _PE_OPT_CSIM_ef_eprl),
+        (u'ef-bcsmscfg', _PE_OPT_CSIM_ef_bcsmscfg),
+        (u'ef-bcsmspref', _PE_OPT_CSIM_ef_bcsmspref),
+        (u'ef-bcsmstable', _PE_OPT_CSIM_ef_bcsmstable),
+        (u'ef-bcsmsp', _PE_OPT_CSIM_ef_bcsmsp),
+        (u'ef-bakpara', _PE_OPT_CSIM_ef_bakpara),
+        (u'ef-upbakpara', _PE_OPT_CSIM_ef_upbakpara),
+        (u'ef-mmsn', _PE_OPT_CSIM_ef_mmsn),
+        (u'ef-ext8', _PE_OPT_CSIM_ef_ext8),
+        (u'ef-mmsicp', _PE_OPT_CSIM_ef_mmsicp),
+        (u'ef-mmsup', _PE_OPT_CSIM_ef_mmsup),
+        (u'ef-mmsucp', _PE_OPT_CSIM_ef_mmsucp),
+        (u'ef-auth-capability', _PE_OPT_CSIM_ef_auth_capability),
+        (u'ef-3gcik', _PE_OPT_CSIM_ef_3gcik),
+        (u'ef-dck', _PE_OPT_CSIM_ef_dck),
+        (u'ef-gid1', _PE_OPT_CSIM_ef_gid1),
+        (u'ef-gid2', _PE_OPT_CSIM_ef_gid2),
+        (u'ef-cdmacnl', _PE_OPT_CSIM_ef_cdmacnl),
+        (u'ef-sf-euimid', _PE_OPT_CSIM_ef_sf_euimid),
+        (u'ef-est', _PE_OPT_CSIM_ef_est),
+        (u'ef-hidden-key', _PE_OPT_CSIM_ef_hidden_key),
+        (u'ef-lcsver', _PE_OPT_CSIM_ef_lcsver),
+        (u'ef-lcscp', _PE_OPT_CSIM_ef_lcscp),
+        (u'ef-sdn', _PE_OPT_CSIM_ef_sdn),
+        (u'ef-ext2', _PE_OPT_CSIM_ef_ext2),
+        (u'ef-ext3', _PE_OPT_CSIM_ef_ext3),
+        (u'ef-ici', _PE_OPT_CSIM_ef_ici),
+        (u'ef-oci', _PE_OPT_CSIM_ef_oci),
+        (u'ef-ext5', _PE_OPT_CSIM_ef_ext5),
+        (u'ef-ccp2', _PE_OPT_CSIM_ef_ccp2),
+        (u'ef-applabels', _PE_OPT_CSIM_ef_applabels),
+        (u'ef-model', _PE_OPT_CSIM_ef_model),
+        (u'ef-rc', _PE_OPT_CSIM_ef_rc),
+        (u'ef-smscap', _PE_OPT_CSIM_ef_smscap),
+        (u'ef-mipflags', _PE_OPT_CSIM_ef_mipflags),
+        (u'ef-3gpduppext', _PE_OPT_CSIM_ef_3gpduppext),
+        (u'ef-ipv6cap', _PE_OPT_CSIM_ef_ipv6cap),
+        (u'ef-tcpconfig', _PE_OPT_CSIM_ef_tcpconfig),
+        (u'ef-dgc', _PE_OPT_CSIM_ef_dgc),
+        (u'ef-wapbrowsercp', _PE_OPT_CSIM_ef_wapbrowsercp),
+        (u'ef-wapbrowserbm', _PE_OPT_CSIM_ef_wapbrowserbm),
+        (u'ef-mmsconfig', _PE_OPT_CSIM_ef_mmsconfig),
+        (u'ef-jdl', _PE_OPT_CSIM_ef_jdl),
         ])
     PE_OPT_CSIM._ext = []
     
     #-----< PE-EAP >-----#
-    PE_EAP = SEQ(name='PE-EAP', mode=MODE_TYPE)
-    _PE_EAP_eap_header = SEQ(name='eap-header', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'PEHeader')))
-    _PE_EAP_templateID = OID(name='templateID', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _PE_EAP_df_eap = SEQ_OF(name='df-eap', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')))
-    _PE_EAP_ef_eapkeys = SEQ_OF(name='ef-eapkeys', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_EAP_ef_eapstatus = SEQ_OF(name='ef-eapstatus', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')))
-    _PE_EAP_ef_puid = SEQ_OF(name='ef-puid', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_EAP_ef_ps = SEQ_OF(name='ef-ps', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_EAP_ef_curid = SEQ_OF(name='ef-curid', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_EAP_ef_reid = SEQ_OF(name='ef-reid', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
-    _PE_EAP_ef_realm = SEQ_OF(name='ef-realm', mode=MODE_TYPE, tag=(9, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    PE_EAP = SEQ(name=u'PE-EAP', mode=MODE_TYPE)
+    _PE_EAP_eap_header = SEQ(name=u'eap-header', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'PEHeader')))
+    _PE_EAP_templateID = OID(name=u'templateID', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _PE_EAP_df_eap = SEQ_OF(name=u'df-eap', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')))
+    _PE_EAP_ef_eapkeys = SEQ_OF(name=u'ef-eapkeys', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_EAP_ef_eapstatus = SEQ_OF(name=u'ef-eapstatus', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')))
+    _PE_EAP_ef_puid = SEQ_OF(name=u'ef-puid', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_EAP_ef_ps = SEQ_OF(name=u'ef-ps', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_EAP_ef_curid = SEQ_OF(name=u'ef-curid', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_EAP_ef_reid = SEQ_OF(name=u'ef-reid', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
+    _PE_EAP_ef_realm = SEQ_OF(name=u'ef-realm', mode=MODE_TYPE, tag=(9, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'File')), opt=True)
     PE_EAP._cont = ASN1Dict([
-        ('eap-header', _PE_EAP_eap_header),
-        ('templateID', _PE_EAP_templateID),
-        ('df-eap', _PE_EAP_df_eap),
-        ('ef-eapkeys', _PE_EAP_ef_eapkeys),
-        ('ef-eapstatus', _PE_EAP_ef_eapstatus),
-        ('ef-puid', _PE_EAP_ef_puid),
-        ('ef-ps', _PE_EAP_ef_ps),
-        ('ef-curid', _PE_EAP_ef_curid),
-        ('ef-reid', _PE_EAP_ef_reid),
-        ('ef-realm', _PE_EAP_ef_realm),
+        (u'eap-header', _PE_EAP_eap_header),
+        (u'templateID', _PE_EAP_templateID),
+        (u'df-eap', _PE_EAP_df_eap),
+        (u'ef-eapkeys', _PE_EAP_ef_eapkeys),
+        (u'ef-eapstatus', _PE_EAP_ef_eapstatus),
+        (u'ef-puid', _PE_EAP_ef_puid),
+        (u'ef-ps', _PE_EAP_ef_ps),
+        (u'ef-curid', _PE_EAP_ef_curid),
+        (u'ef-reid', _PE_EAP_ef_reid),
+        (u'ef-realm', _PE_EAP_ef_realm),
         ])
     PE_EAP._ext = []
     
     #-----< PE-GenericFileManagement >-----#
-    PE_GenericFileManagement = SEQ(name='PE-GenericFileManagement', mode=MODE_TYPE)
-    _PE_GenericFileManagement_gfm_header = SEQ(name='gfm-header', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'PEHeader')))
-    _PE_GenericFileManagement_fileManagementCMD = SEQ_OF(name='fileManagementCMD', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    PE_GenericFileManagement = SEQ(name=u'PE-GenericFileManagement', mode=MODE_TYPE)
+    _PE_GenericFileManagement_gfm_header = SEQ(name=u'gfm-header', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'PEHeader')))
+    _PE_GenericFileManagement_fileManagementCMD = SEQ_OF(name=u'fileManagementCMD', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     __PE_GenericFileManagement_fileManagementCMD__item_ = SEQ_OF(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('PEDefinitions', 'FileManagement')))
     _PE_GenericFileManagement_fileManagementCMD._cont = __PE_GenericFileManagement_fileManagementCMD__item_
     _PE_GenericFileManagement_fileManagementCMD._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=None)], ev=None, er=[])
     PE_GenericFileManagement._cont = ASN1Dict([
-        ('gfm-header', _PE_GenericFileManagement_gfm_header),
-        ('fileManagementCMD', _PE_GenericFileManagement_fileManagementCMD),
+        (u'gfm-header', _PE_GenericFileManagement_gfm_header),
+        (u'fileManagementCMD', _PE_GenericFileManagement_fileManagementCMD),
         ])
     PE_GenericFileManagement._ext = []
     
     #-----< FileManagement >-----#
-    FileManagement = SEQ_OF(name='FileManagement', mode=MODE_TYPE)
+    FileManagement = SEQ_OF(name=u'FileManagement', mode=MODE_TYPE)
     _FileManagement__item_ = CHOICE(name='_item_', mode=MODE_TYPE)
-    __FileManagement__item__filePath = OCT_STR(name='filePath', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    __FileManagement__item__createFCP = SEQ(name='createFCP', mode=MODE_TYPE, tag=(2, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'Fcp')))
-    __FileManagement__item__fillFileOffset = INT(name='fillFileOffset', mode=MODE_TYPE, typeref=ASN1RefType(('PEDefinitions', 'UInt16')))
-    __FileManagement__item__fillFileContent = OCT_STR(name='fillFileContent', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __FileManagement__item__filePath = OCT_STR(name=u'filePath', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __FileManagement__item__createFCP = SEQ(name=u'createFCP', mode=MODE_TYPE, tag=(2, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'Fcp')))
+    __FileManagement__item__fillFileOffset = INT(name=u'fillFileOffset', mode=MODE_TYPE, typeref=ASN1RefType(('PEDefinitions', 'UInt16')))
+    __FileManagement__item__fillFileContent = OCT_STR(name=u'fillFileContent', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     _FileManagement__item_._cont = ASN1Dict([
-        ('filePath', __FileManagement__item__filePath),
-        ('createFCP', __FileManagement__item__createFCP),
-        ('fillFileOffset', __FileManagement__item__fillFileOffset),
-        ('fillFileContent', __FileManagement__item__fillFileContent),
+        (u'filePath', __FileManagement__item__filePath),
+        (u'createFCP', __FileManagement__item__createFCP),
+        (u'fillFileOffset', __FileManagement__item__fillFileOffset),
+        (u'fillFileContent', __FileManagement__item__fillFileContent),
         ])
     _FileManagement__item_._ext = []
     FileManagement._cont = _FileManagement__item_
     FileManagement._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=None)], ev=None, er=[])
     
     #-----< MappingParameter >-----#
-    MappingParameter = SEQ(name='MappingParameter', mode=MODE_TYPE)
-    _MappingParameter_mappingOptions = OCT_STR(name='mappingOptions', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    MappingParameter = SEQ(name=u'MappingParameter', mode=MODE_TYPE)
+    _MappingParameter_mappingOptions = OCT_STR(name=u'mappingOptions', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     _MappingParameter_mappingOptions._const_sz = ASN1Set(rv=[1], rr=[], ev=None, er=[])
-    _MappingParameter_mappingSource = OCT_STR(name='mappingSource', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'ApplicationIdentifier')))
+    _MappingParameter_mappingSource = OCT_STR(name=u'mappingSource', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'ApplicationIdentifier')))
     MappingParameter._cont = ASN1Dict([
-        ('mappingOptions', _MappingParameter_mappingOptions),
-        ('mappingSource', _MappingParameter_mappingSource),
+        (u'mappingOptions', _MappingParameter_mappingOptions),
+        (u'mappingSource', _MappingParameter_mappingSource),
         ])
     MappingParameter._ext = []
     
     #-----< AlgoParameter >-----#
-    AlgoParameter = SEQ(name='AlgoParameter', mode=MODE_TYPE)
-    _AlgoParameter_algorithmID = INT(name='algorithmID', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _AlgoParameter_algorithmID._cont = ASN1Dict([('milenage', 1), ('tuak', 2), ('usim-test-algorithm', 3)])
-    _AlgoParameter_algorithmOptions = OCT_STR(name='algorithmOptions', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    AlgoParameter = SEQ(name=u'AlgoParameter', mode=MODE_TYPE)
+    _AlgoParameter_algorithmID = INT(name=u'algorithmID', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _AlgoParameter_algorithmID._cont = ASN1Dict([(u'milenage', 1), (u'tuak', 2), (u'usim-test-algorithm', 3)])
+    _AlgoParameter_algorithmOptions = OCT_STR(name=u'algorithmOptions', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     _AlgoParameter_algorithmOptions._const_sz = ASN1Set(rv=[1], rr=[], ev=None, er=[])
-    _AlgoParameter_key = OCT_STR(name='key', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _AlgoParameter_opc = OCT_STR(name='opc', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _AlgoParameter_rotationConstants = OCT_STR(name='rotationConstants', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), default=b'@\x00 @`')
+    _AlgoParameter_key = OCT_STR(name=u'key', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _AlgoParameter_opc = OCT_STR(name=u'opc', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _AlgoParameter_rotationConstants = OCT_STR(name=u'rotationConstants', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), default=b'@\x00 @`')
     _AlgoParameter_rotationConstants._const_sz = ASN1Set(rv=[5], rr=[], ev=None, er=[])
-    _AlgoParameter_xoringConstants = OCT_STR(name='xoringConstants', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), default=b'\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x01\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x02\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x04\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x08')
+    _AlgoParameter_xoringConstants = OCT_STR(name=u'xoringConstants', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), default=b'\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x01\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x02\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x04\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x08')
     _AlgoParameter_xoringConstants._const_sz = ASN1Set(rv=[80], rr=[], ev=None, er=[])
-    _AlgoParameter_authCounterMax = OCT_STR(name='authCounterMax', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _AlgoParameter_authCounterMax = OCT_STR(name=u'authCounterMax', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     _AlgoParameter_authCounterMax._const_sz = ASN1Set(rv=[3], rr=[], ev=None, er=[])
-    _AlgoParameter_numberOfKeccak = INT(name='numberOfKeccak', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'UInt8')), default=1)
+    _AlgoParameter_numberOfKeccak = INT(name=u'numberOfKeccak', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'UInt8')), default=1)
     AlgoParameter._cont = ASN1Dict([
-        ('algorithmID', _AlgoParameter_algorithmID),
-        ('algorithmOptions', _AlgoParameter_algorithmOptions),
-        ('key', _AlgoParameter_key),
-        ('opc', _AlgoParameter_opc),
-        ('rotationConstants', _AlgoParameter_rotationConstants),
-        ('xoringConstants', _AlgoParameter_xoringConstants),
-        ('authCounterMax', _AlgoParameter_authCounterMax),
-        ('numberOfKeccak', _AlgoParameter_numberOfKeccak),
+        (u'algorithmID', _AlgoParameter_algorithmID),
+        (u'algorithmOptions', _AlgoParameter_algorithmOptions),
+        (u'key', _AlgoParameter_key),
+        (u'opc', _AlgoParameter_opc),
+        (u'rotationConstants', _AlgoParameter_rotationConstants),
+        (u'xoringConstants', _AlgoParameter_xoringConstants),
+        (u'authCounterMax', _AlgoParameter_authCounterMax),
+        (u'numberOfKeccak', _AlgoParameter_numberOfKeccak),
         ])
     AlgoParameter._ext = []
     
     #-----< PE-AKAParameter >-----#
-    PE_AKAParameter = SEQ(name='PE-AKAParameter', mode=MODE_TYPE)
-    _PE_AKAParameter_aka_header = SEQ(name='aka-header', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'PEHeader')))
-    _PE_AKAParameter_algoConfiguration = CHOICE(name='algoConfiguration', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
-    __PE_AKAParameter_algoConfiguration_mappingParameter = SEQ(name='mappingParameter', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'MappingParameter')))
-    __PE_AKAParameter_algoConfiguration_algoParameter = SEQ(name='algoParameter', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'AlgoParameter')))
+    PE_AKAParameter = SEQ(name=u'PE-AKAParameter', mode=MODE_TYPE)
+    _PE_AKAParameter_aka_header = SEQ(name=u'aka-header', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'PEHeader')))
+    _PE_AKAParameter_algoConfiguration = CHOICE(name=u'algoConfiguration', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
+    __PE_AKAParameter_algoConfiguration_mappingParameter = SEQ(name=u'mappingParameter', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'MappingParameter')))
+    __PE_AKAParameter_algoConfiguration_algoParameter = SEQ(name=u'algoParameter', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'AlgoParameter')))
     _PE_AKAParameter_algoConfiguration._cont = ASN1Dict([
-        ('mappingParameter', __PE_AKAParameter_algoConfiguration_mappingParameter),
-        ('algoParameter', __PE_AKAParameter_algoConfiguration_algoParameter),
+        (u'mappingParameter', __PE_AKAParameter_algoConfiguration_mappingParameter),
+        (u'algoParameter', __PE_AKAParameter_algoConfiguration_algoParameter),
         ])
     _PE_AKAParameter_algoConfiguration._ext = []
-    _PE_AKAParameter_sqnOptions = OCT_STR(name='sqnOptions', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), default=b'\x02')
+    _PE_AKAParameter_sqnOptions = OCT_STR(name=u'sqnOptions', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), default=b'\x02')
     _PE_AKAParameter_sqnOptions._const_sz = ASN1Set(rv=[1], rr=[], ev=None, er=[])
-    _PE_AKAParameter_sqnDelta = OCT_STR(name='sqnDelta', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), default=b'\x00\x00\x10\x00\x00\x00')
+    _PE_AKAParameter_sqnDelta = OCT_STR(name=u'sqnDelta', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), default=b'\x00\x00\x10\x00\x00\x00')
     _PE_AKAParameter_sqnDelta._const_sz = ASN1Set(rv=[6], rr=[], ev=None, er=[])
-    _PE_AKAParameter_sqnAgeLimit = OCT_STR(name='sqnAgeLimit', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), default=b'\x00\x00\x10\x00\x00\x00')
+    _PE_AKAParameter_sqnAgeLimit = OCT_STR(name=u'sqnAgeLimit', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), default=b'\x00\x00\x10\x00\x00\x00')
     _PE_AKAParameter_sqnAgeLimit._const_sz = ASN1Set(rv=[6], rr=[], ev=None, er=[])
-    _PE_AKAParameter_sqnInit = SEQ_OF(name='sqnInit', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), default=[b'\x00\x00\x00\x00\x00\x00', b'\x00\x00\x00\x00\x00\x00', b'\x00\x00\x00\x00\x00\x00', b'\x00\x00\x00\x00\x00\x00', b'\x00\x00\x00\x00\x00\x00', b'\x00\x00\x00\x00\x00\x00', b'\x00\x00\x00\x00\x00\x00', b'\x00\x00\x00\x00\x00\x00', b'\x00\x00\x00\x00\x00\x00', b'\x00\x00\x00\x00\x00\x00', b'\x00\x00\x00\x00\x00\x00', b'\x00\x00\x00\x00\x00\x00', b'\x00\x00\x00\x00\x00\x00', b'\x00\x00\x00\x00\x00\x00', b'\x00\x00\x00\x00\x00\x00', b'\x00\x00\x00\x00\x00\x00', b'\x00\x00\x00\x00\x00\x00', b'\x00\x00\x00\x00\x00\x00', b'\x00\x00\x00\x00\x00\x00', b'\x00\x00\x00\x00\x00\x00', b'\x00\x00\x00\x00\x00\x00', b'\x00\x00\x00\x00\x00\x00', b'\x00\x00\x00\x00\x00\x00', b'\x00\x00\x00\x00\x00\x00', b'\x00\x00\x00\x00\x00\x00', b'\x00\x00\x00\x00\x00\x00', b'\x00\x00\x00\x00\x00\x00', b'\x00\x00\x00\x00\x00\x00', b'\x00\x00\x00\x00\x00\x00', b'\x00\x00\x00\x00\x00\x00', b'\x00\x00\x00\x00\x00\x00', b'\x00\x00\x00\x00\x00\x00'])
+    _PE_AKAParameter_sqnInit = SEQ_OF(name=u'sqnInit', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), default=[b'\x00\x00\x00\x00\x00\x00', b'\x00\x00\x00\x00\x00\x00', b'\x00\x00\x00\x00\x00\x00', b'\x00\x00\x00\x00\x00\x00', b'\x00\x00\x00\x00\x00\x00', b'\x00\x00\x00\x00\x00\x00', b'\x00\x00\x00\x00\x00\x00', b'\x00\x00\x00\x00\x00\x00', b'\x00\x00\x00\x00\x00\x00', b'\x00\x00\x00\x00\x00\x00', b'\x00\x00\x00\x00\x00\x00', b'\x00\x00\x00\x00\x00\x00', b'\x00\x00\x00\x00\x00\x00', b'\x00\x00\x00\x00\x00\x00', b'\x00\x00\x00\x00\x00\x00', b'\x00\x00\x00\x00\x00\x00', b'\x00\x00\x00\x00\x00\x00', b'\x00\x00\x00\x00\x00\x00', b'\x00\x00\x00\x00\x00\x00', b'\x00\x00\x00\x00\x00\x00', b'\x00\x00\x00\x00\x00\x00', b'\x00\x00\x00\x00\x00\x00', b'\x00\x00\x00\x00\x00\x00', b'\x00\x00\x00\x00\x00\x00', b'\x00\x00\x00\x00\x00\x00', b'\x00\x00\x00\x00\x00\x00', b'\x00\x00\x00\x00\x00\x00', b'\x00\x00\x00\x00\x00\x00', b'\x00\x00\x00\x00\x00\x00', b'\x00\x00\x00\x00\x00\x00', b'\x00\x00\x00\x00\x00\x00', b'\x00\x00\x00\x00\x00\x00'])
     __PE_AKAParameter_sqnInit__item_ = OCT_STR(name='_item_', mode=MODE_TYPE)
     __PE_AKAParameter_sqnInit__item_._const_sz = ASN1Set(rv=[6], rr=[], ev=None, er=[])
     _PE_AKAParameter_sqnInit._cont = __PE_AKAParameter_sqnInit__item_
     _PE_AKAParameter_sqnInit._const_sz = ASN1Set(rv=[32], rr=[], ev=None, er=[])
     PE_AKAParameter._cont = ASN1Dict([
-        ('aka-header', _PE_AKAParameter_aka_header),
-        ('algoConfiguration', _PE_AKAParameter_algoConfiguration),
-        ('sqnOptions', _PE_AKAParameter_sqnOptions),
-        ('sqnDelta', _PE_AKAParameter_sqnDelta),
-        ('sqnAgeLimit', _PE_AKAParameter_sqnAgeLimit),
-        ('sqnInit', _PE_AKAParameter_sqnInit),
+        (u'aka-header', _PE_AKAParameter_aka_header),
+        (u'algoConfiguration', _PE_AKAParameter_algoConfiguration),
+        (u'sqnOptions', _PE_AKAParameter_sqnOptions),
+        (u'sqnDelta', _PE_AKAParameter_sqnDelta),
+        (u'sqnAgeLimit', _PE_AKAParameter_sqnAgeLimit),
+        (u'sqnInit', _PE_AKAParameter_sqnInit),
         ])
     PE_AKAParameter._ext = []
     
     #-----< PE-CDMAParameter >-----#
-    PE_CDMAParameter = SEQ(name='PE-CDMAParameter', mode=MODE_TYPE)
-    _PE_CDMAParameter_cdma_header = SEQ(name='cdma-header', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'PEHeader')))
-    _PE_CDMAParameter_authenticationKey = OCT_STR(name='authenticationKey', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    PE_CDMAParameter = SEQ(name=u'PE-CDMAParameter', mode=MODE_TYPE)
+    _PE_CDMAParameter_cdma_header = SEQ(name=u'cdma-header', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'PEHeader')))
+    _PE_CDMAParameter_authenticationKey = OCT_STR(name=u'authenticationKey', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     _PE_CDMAParameter_authenticationKey._const_sz = ASN1Set(rv=[8], rr=[], ev=None, er=[])
-    _PE_CDMAParameter_ssd = OCT_STR(name='ssd', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _PE_CDMAParameter_ssd = OCT_STR(name=u'ssd', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     _PE_CDMAParameter_ssd._const_sz = ASN1Set(rv=[16], rr=[], ev=None, er=[])
-    _PE_CDMAParameter_hrpdAccessAuthenticationData = OCT_STR(name='hrpdAccessAuthenticationData', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _PE_CDMAParameter_hrpdAccessAuthenticationData = OCT_STR(name=u'hrpdAccessAuthenticationData', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     _PE_CDMAParameter_hrpdAccessAuthenticationData._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=2, ub=32)], ev=None, er=[])
-    _PE_CDMAParameter_simpleIPAuthenticationData = OCT_STR(name='simpleIPAuthenticationData', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _PE_CDMAParameter_simpleIPAuthenticationData = OCT_STR(name=u'simpleIPAuthenticationData', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     _PE_CDMAParameter_simpleIPAuthenticationData._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=3, ub=483)], ev=None, er=[])
-    _PE_CDMAParameter_mobileIPAuthenticationData = OCT_STR(name='mobileIPAuthenticationData', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _PE_CDMAParameter_mobileIPAuthenticationData = OCT_STR(name=u'mobileIPAuthenticationData', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     _PE_CDMAParameter_mobileIPAuthenticationData._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=12, ub=957)], ev=None, er=[])
     PE_CDMAParameter._cont = ASN1Dict([
-        ('cdma-header', _PE_CDMAParameter_cdma_header),
-        ('authenticationKey', _PE_CDMAParameter_authenticationKey),
-        ('ssd', _PE_CDMAParameter_ssd),
-        ('hrpdAccessAuthenticationData', _PE_CDMAParameter_hrpdAccessAuthenticationData),
-        ('simpleIPAuthenticationData', _PE_CDMAParameter_simpleIPAuthenticationData),
-        ('mobileIPAuthenticationData', _PE_CDMAParameter_mobileIPAuthenticationData),
+        (u'cdma-header', _PE_CDMAParameter_cdma_header),
+        (u'authenticationKey', _PE_CDMAParameter_authenticationKey),
+        (u'ssd', _PE_CDMAParameter_ssd),
+        (u'hrpdAccessAuthenticationData', _PE_CDMAParameter_hrpdAccessAuthenticationData),
+        (u'simpleIPAuthenticationData', _PE_CDMAParameter_simpleIPAuthenticationData),
+        (u'mobileIPAuthenticationData', _PE_CDMAParameter_mobileIPAuthenticationData),
         ])
     PE_CDMAParameter._ext = []
     
     #-----< PINKeyReferenceValue >-----#
-    PINKeyReferenceValue = INT(name='PINKeyReferenceValue', mode=MODE_TYPE)
-    PINKeyReferenceValue._cont = ASN1Dict([('pinAppl1', 1), ('pinAppl2', 2), ('pinAppl3', 3), ('pinAppl4', 4), ('pinAppl5', 5), ('pinAppl6', 6), ('pinAppl7', 7), ('pinAppl8', 8), ('adm1', 10), ('adm2', 11), ('adm3', 12), ('adm4', 13), ('adm5', 14), ('secondPINAppl1', 129), ('secondPINAppl2', 130), ('secondPINAppl3', 131), ('secondPINAppl4', 132), ('secondPINAppl5', 133), ('secondPINAppl6', 134), ('secondPINAppl7', 135), ('secondPINAppl8', 136), ('adm6', 138), ('adm7', 139), ('adm8', 140), ('adm9', 141), ('adm10', 142)])
+    PINKeyReferenceValue = INT(name=u'PINKeyReferenceValue', mode=MODE_TYPE)
+    PINKeyReferenceValue._cont = ASN1Dict([(u'pinAppl1', 1), (u'pinAppl2', 2), (u'pinAppl3', 3), (u'pinAppl4', 4), (u'pinAppl5', 5), (u'pinAppl6', 6), (u'pinAppl7', 7), (u'pinAppl8', 8), (u'adm1', 10), (u'adm2', 11), (u'adm3', 12), (u'adm4', 13), (u'adm5', 14), (u'secondPINAppl1', 129), (u'secondPINAppl2', 130), (u'secondPINAppl3', 131), (u'secondPINAppl4', 132), (u'secondPINAppl5', 133), (u'secondPINAppl6', 134), (u'secondPINAppl7', 135), (u'secondPINAppl8', 136), (u'adm6', 138), (u'adm7', 139), (u'adm8', 140), (u'adm9', 141), (u'adm10', 142)])
     
     #-----< PINConfiguration >-----#
-    PINConfiguration = SEQ(name='PINConfiguration', mode=MODE_TYPE)
-    _PINConfiguration_keyReference = INT(name='keyReference', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'PINKeyReferenceValue')))
-    _PINConfiguration_pinValue = OCT_STR(name='pinValue', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    PINConfiguration = SEQ(name=u'PINConfiguration', mode=MODE_TYPE)
+    _PINConfiguration_keyReference = INT(name=u'keyReference', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'PINKeyReferenceValue')))
+    _PINConfiguration_pinValue = OCT_STR(name=u'pinValue', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     _PINConfiguration_pinValue._const_sz = ASN1Set(rv=[8], rr=[], ev=None, er=[])
-    _PINConfiguration_unblockingPINReference = INT(name='unblockingPINReference', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'PUKKeyReferenceValue')), opt=True)
-    _PINConfiguration_pinAttributes = INT(name='pinAttributes', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'UInt8')), default=7)
-    _PINConfiguration_maxNumOfAttemps_retryNumLeft = INT(name='maxNumOfAttemps-retryNumLeft', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'UInt8')), default=51)
+    _PINConfiguration_unblockingPINReference = INT(name=u'unblockingPINReference', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'PUKKeyReferenceValue')), opt=True)
+    _PINConfiguration_pinAttributes = INT(name=u'pinAttributes', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'UInt8')), default=7)
+    _PINConfiguration_maxNumOfAttemps_retryNumLeft = INT(name=u'maxNumOfAttemps-retryNumLeft', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'UInt8')), default=51)
     PINConfiguration._cont = ASN1Dict([
-        ('keyReference', _PINConfiguration_keyReference),
-        ('pinValue', _PINConfiguration_pinValue),
-        ('unblockingPINReference', _PINConfiguration_unblockingPINReference),
-        ('pinAttributes', _PINConfiguration_pinAttributes),
-        ('maxNumOfAttemps-retryNumLeft', _PINConfiguration_maxNumOfAttemps_retryNumLeft),
+        (u'keyReference', _PINConfiguration_keyReference),
+        (u'pinValue', _PINConfiguration_pinValue),
+        (u'unblockingPINReference', _PINConfiguration_unblockingPINReference),
+        (u'pinAttributes', _PINConfiguration_pinAttributes),
+        (u'maxNumOfAttemps-retryNumLeft', _PINConfiguration_maxNumOfAttemps_retryNumLeft),
         ])
     PINConfiguration._ext = []
     
     #-----< PE-PINCodes >-----#
-    PE_PINCodes = SEQ(name='PE-PINCodes', mode=MODE_TYPE)
-    _PE_PINCodes_pin_Header = SEQ(name='pin-Header', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'PEHeader')))
-    _PE_PINCodes_pinCodes = CHOICE(name='pinCodes', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
-    __PE_PINCodes_pinCodes_pinconfig = SEQ_OF(name='pinconfig', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    PE_PINCodes = SEQ(name=u'PE-PINCodes', mode=MODE_TYPE)
+    _PE_PINCodes_pin_Header = SEQ(name=u'pin-Header', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'PEHeader')))
+    _PE_PINCodes_pinCodes = CHOICE(name=u'pinCodes', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
+    __PE_PINCodes_pinCodes_pinconfig = SEQ_OF(name=u'pinconfig', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     ___PE_PINCodes_pinCodes_pinconfig__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('PEDefinitions', 'PINConfiguration')))
     __PE_PINCodes_pinCodes_pinconfig._cont = ___PE_PINCodes_pinCodes_pinconfig__item_
     __PE_PINCodes_pinCodes_pinconfig._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=26)], ev=None, er=[])
-    __PE_PINCodes_pinCodes_filePath = OCT_STR(name='filePath', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __PE_PINCodes_pinCodes_filePath = OCT_STR(name=u'filePath', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     _PE_PINCodes_pinCodes._cont = ASN1Dict([
-        ('pinconfig', __PE_PINCodes_pinCodes_pinconfig),
-        ('filePath', __PE_PINCodes_pinCodes_filePath),
+        (u'pinconfig', __PE_PINCodes_pinCodes_pinconfig),
+        (u'filePath', __PE_PINCodes_pinCodes_filePath),
         ])
     _PE_PINCodes_pinCodes._ext = []
     PE_PINCodes._cont = ASN1Dict([
-        ('pin-Header', _PE_PINCodes_pin_Header),
-        ('pinCodes', _PE_PINCodes_pinCodes),
+        (u'pin-Header', _PE_PINCodes_pin_Header),
+        (u'pinCodes', _PE_PINCodes_pinCodes),
         ])
     PE_PINCodes._ext = []
     
     #-----< PUKKeyReferenceValue >-----#
-    PUKKeyReferenceValue = INT(name='PUKKeyReferenceValue', mode=MODE_TYPE)
-    PUKKeyReferenceValue._cont = ASN1Dict([('pukAppl1', 1), ('pukAppl2', 2), ('pukAppl3', 3), ('pukAppl4', 4), ('pukAppl5', 5), ('pukAppl6', 6), ('pukAppl7', 7), ('pukAppl8', 8), ('secondPUKAppl1', 129), ('secondPUKAppl2', 130), ('secondPUKAppl3', 131), ('secondPUKAppl4', 132), ('secondPUKAppl5', 133), ('secondPUKAppl6', 134), ('secondPUKAppl7', 135), ('secondPUKAppl8', 136)])
+    PUKKeyReferenceValue = INT(name=u'PUKKeyReferenceValue', mode=MODE_TYPE)
+    PUKKeyReferenceValue._cont = ASN1Dict([(u'pukAppl1', 1), (u'pukAppl2', 2), (u'pukAppl3', 3), (u'pukAppl4', 4), (u'pukAppl5', 5), (u'pukAppl6', 6), (u'pukAppl7', 7), (u'pukAppl8', 8), (u'secondPUKAppl1', 129), (u'secondPUKAppl2', 130), (u'secondPUKAppl3', 131), (u'secondPUKAppl4', 132), (u'secondPUKAppl5', 133), (u'secondPUKAppl6', 134), (u'secondPUKAppl7', 135), (u'secondPUKAppl8', 136)])
     
     #-----< PUKConfiguration >-----#
-    PUKConfiguration = SEQ(name='PUKConfiguration', mode=MODE_TYPE)
-    _PUKConfiguration_keyReference = INT(name='keyReference', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'PUKKeyReferenceValue')))
-    _PUKConfiguration_pukValue = OCT_STR(name='pukValue', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    PUKConfiguration = SEQ(name=u'PUKConfiguration', mode=MODE_TYPE)
+    _PUKConfiguration_keyReference = INT(name=u'keyReference', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'PUKKeyReferenceValue')))
+    _PUKConfiguration_pukValue = OCT_STR(name=u'pukValue', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     _PUKConfiguration_pukValue._const_sz = ASN1Set(rv=[8], rr=[], ev=None, er=[])
-    _PUKConfiguration_maxNumOfAttemps_retryNumLeft = INT(name='maxNumOfAttemps-retryNumLeft', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'UInt8')), default=170)
+    _PUKConfiguration_maxNumOfAttemps_retryNumLeft = INT(name=u'maxNumOfAttemps-retryNumLeft', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'UInt8')), default=170)
     PUKConfiguration._cont = ASN1Dict([
-        ('keyReference', _PUKConfiguration_keyReference),
-        ('pukValue', _PUKConfiguration_pukValue),
-        ('maxNumOfAttemps-retryNumLeft', _PUKConfiguration_maxNumOfAttemps_retryNumLeft),
+        (u'keyReference', _PUKConfiguration_keyReference),
+        (u'pukValue', _PUKConfiguration_pukValue),
+        (u'maxNumOfAttemps-retryNumLeft', _PUKConfiguration_maxNumOfAttemps_retryNumLeft),
         ])
     PUKConfiguration._ext = []
     
     #-----< PE-PUKCodes >-----#
-    PE_PUKCodes = SEQ(name='PE-PUKCodes', mode=MODE_TYPE)
-    _PE_PUKCodes_puk_Header = SEQ(name='puk-Header', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'PEHeader')))
-    _PE_PUKCodes_pukCodes = SEQ_OF(name='pukCodes', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    PE_PUKCodes = SEQ(name=u'PE-PUKCodes', mode=MODE_TYPE)
+    _PE_PUKCodes_puk_Header = SEQ(name=u'puk-Header', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'PEHeader')))
+    _PE_PUKCodes_pukCodes = SEQ_OF(name=u'pukCodes', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     __PE_PUKCodes_pukCodes__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('PEDefinitions', 'PUKConfiguration')))
     _PE_PUKCodes_pukCodes._cont = __PE_PUKCodes_pukCodes__item_
     _PE_PUKCodes_pukCodes._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=16)], ev=None, er=[])
     PE_PUKCodes._cont = ASN1Dict([
-        ('puk-Header', _PE_PUKCodes_puk_Header),
-        ('pukCodes', _PE_PUKCodes_pukCodes),
+        (u'puk-Header', _PE_PUKCodes_puk_Header),
+        (u'pukCodes', _PE_PUKCodes_pukCodes),
         ])
     PE_PUKCodes._ext = []
     
     #-----< PE-SecurityDomain >-----#
-    PE_SecurityDomain = SEQ(name='PE-SecurityDomain', mode=MODE_TYPE)
-    _PE_SecurityDomain_sd_Header = SEQ(name='sd-Header', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'PEHeader')))
-    _PE_SecurityDomain_instance = SEQ(name='instance', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'ApplicationInstance')))
-    _PE_SecurityDomain_keyList = SEQ_OF(name='keyList', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    PE_SecurityDomain = SEQ(name=u'PE-SecurityDomain', mode=MODE_TYPE)
+    _PE_SecurityDomain_sd_Header = SEQ(name=u'sd-Header', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'PEHeader')))
+    _PE_SecurityDomain_instance = SEQ(name=u'instance', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'ApplicationInstance')))
+    _PE_SecurityDomain_keyList = SEQ_OF(name=u'keyList', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     __PE_SecurityDomain_keyList__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('PEDefinitions', 'KeyObject')))
     _PE_SecurityDomain_keyList._cont = __PE_SecurityDomain_keyList__item_
     _PE_SecurityDomain_keyList._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=None)], ev=None, er=[])
-    _PE_SecurityDomain_sdPersoData = SEQ_OF(name='sdPersoData', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _PE_SecurityDomain_sdPersoData = SEQ_OF(name=u'sdPersoData', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     __PE_SecurityDomain_sdPersoData__item_ = OCT_STR(name='_item_', mode=MODE_TYPE)
     _PE_SecurityDomain_sdPersoData._cont = __PE_SecurityDomain_sdPersoData__item_
     _PE_SecurityDomain_sdPersoData._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=None)], ev=None, er=[])
-    _PE_SecurityDomain_openPersoData = SEQ(name='openPersoData', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    __PE_SecurityDomain_openPersoData_restrictParameter = OCT_STR(name='restrictParameter', mode=MODE_TYPE, tag=(25, TAG_PRIVATE, TAG_IMPLICIT), opt=True)
-    __PE_SecurityDomain_openPersoData_contactlessProtocolParameters = OCT_STR(name='contactlessProtocolParameters', mode=MODE_TYPE, opt=True)
+    _PE_SecurityDomain_openPersoData = SEQ(name=u'openPersoData', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    __PE_SecurityDomain_openPersoData_restrictParameter = OCT_STR(name=u'restrictParameter', mode=MODE_TYPE, tag=(25, TAG_PRIVATE, TAG_IMPLICIT), opt=True)
+    __PE_SecurityDomain_openPersoData_contactlessProtocolParameters = OCT_STR(name=u'contactlessProtocolParameters', mode=MODE_TYPE, opt=True)
     _PE_SecurityDomain_openPersoData._cont = ASN1Dict([
-        ('restrictParameter', __PE_SecurityDomain_openPersoData_restrictParameter),
-        ('contactlessProtocolParameters', __PE_SecurityDomain_openPersoData_contactlessProtocolParameters),
+        (u'restrictParameter', __PE_SecurityDomain_openPersoData_restrictParameter),
+        (u'contactlessProtocolParameters', __PE_SecurityDomain_openPersoData_contactlessProtocolParameters),
         ])
     _PE_SecurityDomain_openPersoData._ext = []
-    _PE_SecurityDomain_catTpParameters = SEQ(name='catTpParameters', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    __PE_SecurityDomain_catTpParameters_catTpMaxSduSize = INT(name='catTpMaxSduSize', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'UInt16')))
-    __PE_SecurityDomain_catTpParameters_catTpMaxPduSize = INT(name='catTpMaxPduSize', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'UInt16')))
+    _PE_SecurityDomain_catTpParameters = SEQ(name=u'catTpParameters', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    __PE_SecurityDomain_catTpParameters_catTpMaxSduSize = INT(name=u'catTpMaxSduSize', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'UInt16')))
+    __PE_SecurityDomain_catTpParameters_catTpMaxPduSize = INT(name=u'catTpMaxPduSize', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'UInt16')))
     _PE_SecurityDomain_catTpParameters._cont = ASN1Dict([
-        ('catTpMaxSduSize', __PE_SecurityDomain_catTpParameters_catTpMaxSduSize),
-        ('catTpMaxPduSize', __PE_SecurityDomain_catTpParameters_catTpMaxPduSize),
+        (u'catTpMaxSduSize', __PE_SecurityDomain_catTpParameters_catTpMaxSduSize),
+        (u'catTpMaxPduSize', __PE_SecurityDomain_catTpParameters_catTpMaxPduSize),
         ])
     _PE_SecurityDomain_catTpParameters._ext = []
     PE_SecurityDomain._cont = ASN1Dict([
-        ('sd-Header', _PE_SecurityDomain_sd_Header),
-        ('instance', _PE_SecurityDomain_instance),
-        ('keyList', _PE_SecurityDomain_keyList),
-        ('sdPersoData', _PE_SecurityDomain_sdPersoData),
-        ('openPersoData', _PE_SecurityDomain_openPersoData),
-        ('catTpParameters', _PE_SecurityDomain_catTpParameters),
+        (u'sd-Header', _PE_SecurityDomain_sd_Header),
+        (u'instance', _PE_SecurityDomain_instance),
+        (u'keyList', _PE_SecurityDomain_keyList),
+        (u'sdPersoData', _PE_SecurityDomain_sdPersoData),
+        (u'openPersoData', _PE_SecurityDomain_openPersoData),
+        (u'catTpParameters', _PE_SecurityDomain_catTpParameters),
         ])
     PE_SecurityDomain._ext = []
     
     #-----< KeyObject >-----#
-    KeyObject = SEQ(name='KeyObject', mode=MODE_TYPE)
-    _KeyObject_keyUsageQualifier = OCT_STR(name='keyUsageQualifier', mode=MODE_TYPE, tag=(21, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    KeyObject = SEQ(name=u'KeyObject', mode=MODE_TYPE)
+    _KeyObject_keyUsageQualifier = OCT_STR(name=u'keyUsageQualifier', mode=MODE_TYPE, tag=(21, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     _KeyObject_keyUsageQualifier._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=2)], ev=None, er=[])
-    _KeyObject_keyAccess = OCT_STR(name='keyAccess', mode=MODE_TYPE, tag=(22, TAG_CONTEXT_SPEC, TAG_IMPLICIT), default=b'\x00')
+    _KeyObject_keyAccess = OCT_STR(name=u'keyAccess', mode=MODE_TYPE, tag=(22, TAG_CONTEXT_SPEC, TAG_IMPLICIT), default=b'\x00')
     _KeyObject_keyAccess._const_sz = ASN1Set(rv=[1], rr=[], ev=None, er=[])
-    _KeyObject_keyIdentifier = OCT_STR(name='keyIdentifier', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _KeyObject_keyIdentifier = OCT_STR(name=u'keyIdentifier', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     _KeyObject_keyIdentifier._const_sz = ASN1Set(rv=[1], rr=[], ev=None, er=[])
-    _KeyObject_keyVersionNumber = OCT_STR(name='keyVersionNumber', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _KeyObject_keyVersionNumber = OCT_STR(name=u'keyVersionNumber', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     _KeyObject_keyVersionNumber._const_sz = ASN1Set(rv=[1], rr=[], ev=None, er=[])
-    _KeyObject_keyCounterValue = OCT_STR(name='keyCounterValue', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _KeyObject_keyCompontents = SEQ_OF(name='keyCompontents', mode=MODE_TYPE)
+    _KeyObject_keyCounterValue = OCT_STR(name=u'keyCounterValue', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _KeyObject_keyCompontents = SEQ_OF(name=u'keyCompontents', mode=MODE_TYPE)
     __KeyObject_keyCompontents__item_ = SEQ(name='_item_', mode=MODE_TYPE)
-    ___KeyObject_keyCompontents__item__keyType = OCT_STR(name='keyType', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    ___KeyObject_keyCompontents__item__keyData = OCT_STR(name='keyData', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    ___KeyObject_keyCompontents__item__macLength = INT(name='macLength', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'UInt8')), default=8)
+    ___KeyObject_keyCompontents__item__keyType = OCT_STR(name=u'keyType', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    ___KeyObject_keyCompontents__item__keyData = OCT_STR(name=u'keyData', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    ___KeyObject_keyCompontents__item__macLength = INT(name=u'macLength', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'UInt8')), default=8)
     __KeyObject_keyCompontents__item_._cont = ASN1Dict([
-        ('keyType', ___KeyObject_keyCompontents__item__keyType),
-        ('keyData', ___KeyObject_keyCompontents__item__keyData),
-        ('macLength', ___KeyObject_keyCompontents__item__macLength),
+        (u'keyType', ___KeyObject_keyCompontents__item__keyType),
+        (u'keyData', ___KeyObject_keyCompontents__item__keyData),
+        (u'macLength', ___KeyObject_keyCompontents__item__macLength),
         ])
     __KeyObject_keyCompontents__item_._ext = []
     _KeyObject_keyCompontents._cont = __KeyObject_keyCompontents__item_
     _KeyObject_keyCompontents._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=None)], ev=None, er=[])
     KeyObject._cont = ASN1Dict([
-        ('keyUsageQualifier', _KeyObject_keyUsageQualifier),
-        ('keyAccess', _KeyObject_keyAccess),
-        ('keyIdentifier', _KeyObject_keyIdentifier),
-        ('keyVersionNumber', _KeyObject_keyVersionNumber),
-        ('keyCounterValue', _KeyObject_keyCounterValue),
-        ('keyCompontents', _KeyObject_keyCompontents),
+        (u'keyUsageQualifier', _KeyObject_keyUsageQualifier),
+        (u'keyAccess', _KeyObject_keyAccess),
+        (u'keyIdentifier', _KeyObject_keyIdentifier),
+        (u'keyVersionNumber', _KeyObject_keyVersionNumber),
+        (u'keyCounterValue', _KeyObject_keyCounterValue),
+        (u'keyCompontents', _KeyObject_keyCompontents),
         ])
     KeyObject._ext = []
     
     #-----< PE-Application >-----#
-    PE_Application = SEQ(name='PE-Application', mode=MODE_TYPE)
-    _PE_Application_app_Header = SEQ(name='app-Header', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'PEHeader')))
-    _PE_Application_loadBlock = SEQ(name='loadBlock', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'ApplicationLoadPackage')), opt=True)
-    _PE_Application_instanceList = SEQ_OF(name='instanceList', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    PE_Application = SEQ(name=u'PE-Application', mode=MODE_TYPE)
+    _PE_Application_app_Header = SEQ(name=u'app-Header', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'PEHeader')))
+    _PE_Application_loadBlock = SEQ(name=u'loadBlock', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'ApplicationLoadPackage')), opt=True)
+    _PE_Application_instanceList = SEQ_OF(name=u'instanceList', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     __PE_Application_instanceList__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('PEDefinitions', 'ApplicationInstance')))
     _PE_Application_instanceList._cont = __PE_Application_instanceList__item_
     _PE_Application_instanceList._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=None)], ev=None, er=[])
     PE_Application._cont = ASN1Dict([
-        ('app-Header', _PE_Application_app_Header),
-        ('loadBlock', _PE_Application_loadBlock),
-        ('instanceList', _PE_Application_instanceList),
+        (u'app-Header', _PE_Application_app_Header),
+        (u'loadBlock', _PE_Application_loadBlock),
+        (u'instanceList', _PE_Application_instanceList),
         ])
     PE_Application._ext = []
     
     #-----< ApplicationLoadPackage >-----#
-    ApplicationLoadPackage = SEQ(name='ApplicationLoadPackage', mode=MODE_TYPE)
-    _ApplicationLoadPackage_loadPackageAID = OCT_STR(name='loadPackageAID', mode=MODE_TYPE, tag=(15, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'ApplicationIdentifier')))
-    _ApplicationLoadPackage_securityDomainAID = OCT_STR(name='securityDomainAID', mode=MODE_TYPE, tag=(15, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'ApplicationIdentifier')), opt=True)
-    _ApplicationLoadPackage_nonVolatileCodeLimitC6 = OCT_STR(name='nonVolatileCodeLimitC6', mode=MODE_TYPE, tag=(6, TAG_PRIVATE, TAG_IMPLICIT), opt=True)
-    _ApplicationLoadPackage_volatileDataLimitC7 = OCT_STR(name='volatileDataLimitC7', mode=MODE_TYPE, tag=(7, TAG_PRIVATE, TAG_IMPLICIT), opt=True)
-    _ApplicationLoadPackage_nonVolatileDataLimitC8 = OCT_STR(name='nonVolatileDataLimitC8', mode=MODE_TYPE, tag=(8, TAG_PRIVATE, TAG_IMPLICIT), opt=True)
-    _ApplicationLoadPackage_hashValue = OCT_STR(name='hashValue', mode=MODE_TYPE, tag=(1, TAG_PRIVATE, TAG_IMPLICIT), opt=True)
-    _ApplicationLoadPackage_loadBlockObject = OCT_STR(name='loadBlockObject', mode=MODE_TYPE, tag=(4, TAG_PRIVATE, TAG_IMPLICIT))
+    ApplicationLoadPackage = SEQ(name=u'ApplicationLoadPackage', mode=MODE_TYPE)
+    _ApplicationLoadPackage_loadPackageAID = OCT_STR(name=u'loadPackageAID', mode=MODE_TYPE, tag=(15, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'ApplicationIdentifier')))
+    _ApplicationLoadPackage_securityDomainAID = OCT_STR(name=u'securityDomainAID', mode=MODE_TYPE, tag=(15, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'ApplicationIdentifier')), opt=True)
+    _ApplicationLoadPackage_nonVolatileCodeLimitC6 = OCT_STR(name=u'nonVolatileCodeLimitC6', mode=MODE_TYPE, tag=(6, TAG_PRIVATE, TAG_IMPLICIT), opt=True)
+    _ApplicationLoadPackage_volatileDataLimitC7 = OCT_STR(name=u'volatileDataLimitC7', mode=MODE_TYPE, tag=(7, TAG_PRIVATE, TAG_IMPLICIT), opt=True)
+    _ApplicationLoadPackage_nonVolatileDataLimitC8 = OCT_STR(name=u'nonVolatileDataLimitC8', mode=MODE_TYPE, tag=(8, TAG_PRIVATE, TAG_IMPLICIT), opt=True)
+    _ApplicationLoadPackage_hashValue = OCT_STR(name=u'hashValue', mode=MODE_TYPE, tag=(1, TAG_PRIVATE, TAG_IMPLICIT), opt=True)
+    _ApplicationLoadPackage_loadBlockObject = OCT_STR(name=u'loadBlockObject', mode=MODE_TYPE, tag=(4, TAG_PRIVATE, TAG_IMPLICIT))
     ApplicationLoadPackage._cont = ASN1Dict([
-        ('loadPackageAID', _ApplicationLoadPackage_loadPackageAID),
-        ('securityDomainAID', _ApplicationLoadPackage_securityDomainAID),
-        ('nonVolatileCodeLimitC6', _ApplicationLoadPackage_nonVolatileCodeLimitC6),
-        ('volatileDataLimitC7', _ApplicationLoadPackage_volatileDataLimitC7),
-        ('nonVolatileDataLimitC8', _ApplicationLoadPackage_nonVolatileDataLimitC8),
-        ('hashValue', _ApplicationLoadPackage_hashValue),
-        ('loadBlockObject', _ApplicationLoadPackage_loadBlockObject),
+        (u'loadPackageAID', _ApplicationLoadPackage_loadPackageAID),
+        (u'securityDomainAID', _ApplicationLoadPackage_securityDomainAID),
+        (u'nonVolatileCodeLimitC6', _ApplicationLoadPackage_nonVolatileCodeLimitC6),
+        (u'volatileDataLimitC7', _ApplicationLoadPackage_volatileDataLimitC7),
+        (u'nonVolatileDataLimitC8', _ApplicationLoadPackage_nonVolatileDataLimitC8),
+        (u'hashValue', _ApplicationLoadPackage_hashValue),
+        (u'loadBlockObject', _ApplicationLoadPackage_loadBlockObject),
         ])
     ApplicationLoadPackage._ext = []
     
     #-----< ApplicationInstance >-----#
-    ApplicationInstance = SEQ(name='ApplicationInstance', mode=MODE_TYPE)
-    _ApplicationInstance_applicationLoadPackageAID = OCT_STR(name='applicationLoadPackageAID', mode=MODE_TYPE, tag=(15, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'ApplicationIdentifier')))
-    _ApplicationInstance_classAID = OCT_STR(name='classAID', mode=MODE_TYPE, tag=(15, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'ApplicationIdentifier')))
-    _ApplicationInstance_instanceAID = OCT_STR(name='instanceAID', mode=MODE_TYPE, tag=(15, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'ApplicationIdentifier')))
-    _ApplicationInstance_extraditeSecurityDomainAID = OCT_STR(name='extraditeSecurityDomainAID', mode=MODE_TYPE, tag=(15, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'ApplicationIdentifier')), opt=True)
-    _ApplicationInstance_applicationPrivileges = OCT_STR(name='applicationPrivileges', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _ApplicationInstance_lifeCycleState = OCT_STR(name='lifeCycleState', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), default=b'\x07')
+    ApplicationInstance = SEQ(name=u'ApplicationInstance', mode=MODE_TYPE)
+    _ApplicationInstance_applicationLoadPackageAID = OCT_STR(name=u'applicationLoadPackageAID', mode=MODE_TYPE, tag=(15, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'ApplicationIdentifier')))
+    _ApplicationInstance_classAID = OCT_STR(name=u'classAID', mode=MODE_TYPE, tag=(15, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'ApplicationIdentifier')))
+    _ApplicationInstance_instanceAID = OCT_STR(name=u'instanceAID', mode=MODE_TYPE, tag=(15, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'ApplicationIdentifier')))
+    _ApplicationInstance_extraditeSecurityDomainAID = OCT_STR(name=u'extraditeSecurityDomainAID', mode=MODE_TYPE, tag=(15, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'ApplicationIdentifier')), opt=True)
+    _ApplicationInstance_applicationPrivileges = OCT_STR(name=u'applicationPrivileges', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _ApplicationInstance_lifeCycleState = OCT_STR(name=u'lifeCycleState', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), default=b'\x07')
     _ApplicationInstance_lifeCycleState._const_sz = ASN1Set(rv=[1], rr=[], ev=None, er=[])
-    _ApplicationInstance_applicationSpecificParametersC9 = OCT_STR(name='applicationSpecificParametersC9', mode=MODE_TYPE, tag=(9, TAG_PRIVATE, TAG_IMPLICIT))
-    _ApplicationInstance_systemSpecificParameters = SEQ(name='systemSpecificParameters', mode=MODE_TYPE, tag=(15, TAG_PRIVATE, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'ApplicationSystemParameters')), opt=True)
-    _ApplicationInstance_applicationParameters = SEQ(name='applicationParameters', mode=MODE_TYPE, tag=(10, TAG_PRIVATE, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'UICCApplicationParameters')), opt=True)
-    _ApplicationInstance_processData = SEQ_OF(name='processData', mode=MODE_TYPE, opt=True)
+    _ApplicationInstance_applicationSpecificParametersC9 = OCT_STR(name=u'applicationSpecificParametersC9', mode=MODE_TYPE, tag=(9, TAG_PRIVATE, TAG_IMPLICIT))
+    _ApplicationInstance_systemSpecificParameters = SEQ(name=u'systemSpecificParameters', mode=MODE_TYPE, tag=(15, TAG_PRIVATE, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'ApplicationSystemParameters')), opt=True)
+    _ApplicationInstance_applicationParameters = SEQ(name=u'applicationParameters', mode=MODE_TYPE, tag=(10, TAG_PRIVATE, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'UICCApplicationParameters')), opt=True)
+    _ApplicationInstance_processData = SEQ_OF(name=u'processData', mode=MODE_TYPE, opt=True)
     __ApplicationInstance_processData__item_ = OCT_STR(name='_item_', mode=MODE_TYPE)
     _ApplicationInstance_processData._cont = __ApplicationInstance_processData__item_
     _ApplicationInstance_processData._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=None)], ev=None, er=[])
     ApplicationInstance._cont = ASN1Dict([
-        ('applicationLoadPackageAID', _ApplicationInstance_applicationLoadPackageAID),
-        ('classAID', _ApplicationInstance_classAID),
-        ('instanceAID', _ApplicationInstance_instanceAID),
-        ('extraditeSecurityDomainAID', _ApplicationInstance_extraditeSecurityDomainAID),
-        ('applicationPrivileges', _ApplicationInstance_applicationPrivileges),
-        ('lifeCycleState', _ApplicationInstance_lifeCycleState),
-        ('applicationSpecificParametersC9', _ApplicationInstance_applicationSpecificParametersC9),
-        ('systemSpecificParameters', _ApplicationInstance_systemSpecificParameters),
-        ('applicationParameters', _ApplicationInstance_applicationParameters),
-        ('processData', _ApplicationInstance_processData),
+        (u'applicationLoadPackageAID', _ApplicationInstance_applicationLoadPackageAID),
+        (u'classAID', _ApplicationInstance_classAID),
+        (u'instanceAID', _ApplicationInstance_instanceAID),
+        (u'extraditeSecurityDomainAID', _ApplicationInstance_extraditeSecurityDomainAID),
+        (u'applicationPrivileges', _ApplicationInstance_applicationPrivileges),
+        (u'lifeCycleState', _ApplicationInstance_lifeCycleState),
+        (u'applicationSpecificParametersC9', _ApplicationInstance_applicationSpecificParametersC9),
+        (u'systemSpecificParameters', _ApplicationInstance_systemSpecificParameters),
+        (u'applicationParameters', _ApplicationInstance_applicationParameters),
+        (u'processData', _ApplicationInstance_processData),
         ])
     ApplicationInstance._ext = []
     
     #-----< ApplicationSystemParameters >-----#
-    ApplicationSystemParameters = SEQ(name='ApplicationSystemParameters', mode=MODE_TYPE)
-    _ApplicationSystemParameters_volatileMemoryQuotaC7 = OCT_STR(name='volatileMemoryQuotaC7', mode=MODE_TYPE, tag=(7, TAG_PRIVATE, TAG_IMPLICIT), opt=True)
+    ApplicationSystemParameters = SEQ(name=u'ApplicationSystemParameters', mode=MODE_TYPE)
+    _ApplicationSystemParameters_volatileMemoryQuotaC7 = OCT_STR(name=u'volatileMemoryQuotaC7', mode=MODE_TYPE, tag=(7, TAG_PRIVATE, TAG_IMPLICIT), opt=True)
     _ApplicationSystemParameters_volatileMemoryQuotaC7._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=2, ub=4)], ev=None, er=[])
-    _ApplicationSystemParameters_nonVolatileMemoryQuotaC8 = OCT_STR(name='nonVolatileMemoryQuotaC8', mode=MODE_TYPE, tag=(8, TAG_PRIVATE, TAG_IMPLICIT), opt=True)
+    _ApplicationSystemParameters_nonVolatileMemoryQuotaC8 = OCT_STR(name=u'nonVolatileMemoryQuotaC8', mode=MODE_TYPE, tag=(8, TAG_PRIVATE, TAG_IMPLICIT), opt=True)
     _ApplicationSystemParameters_nonVolatileMemoryQuotaC8._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=2, ub=4)], ev=None, er=[])
-    _ApplicationSystemParameters_globalServiceParameters = OCT_STR(name='globalServiceParameters', mode=MODE_TYPE, tag=(11, TAG_PRIVATE, TAG_IMPLICIT), opt=True)
-    _ApplicationSystemParameters_implicitSelectionParameter = OCT_STR(name='implicitSelectionParameter', mode=MODE_TYPE, tag=(15, TAG_PRIVATE, TAG_IMPLICIT), opt=True)
-    _ApplicationSystemParameters_volatileReservedMemory = OCT_STR(name='volatileReservedMemory', mode=MODE_TYPE, tag=(23, TAG_PRIVATE, TAG_IMPLICIT), opt=True)
+    _ApplicationSystemParameters_globalServiceParameters = OCT_STR(name=u'globalServiceParameters', mode=MODE_TYPE, tag=(11, TAG_PRIVATE, TAG_IMPLICIT), opt=True)
+    _ApplicationSystemParameters_implicitSelectionParameter = OCT_STR(name=u'implicitSelectionParameter', mode=MODE_TYPE, tag=(15, TAG_PRIVATE, TAG_IMPLICIT), opt=True)
+    _ApplicationSystemParameters_volatileReservedMemory = OCT_STR(name=u'volatileReservedMemory', mode=MODE_TYPE, tag=(23, TAG_PRIVATE, TAG_IMPLICIT), opt=True)
     _ApplicationSystemParameters_volatileReservedMemory._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=2, ub=4)], ev=None, er=[])
-    _ApplicationSystemParameters_nonVolatileReservedMemory = OCT_STR(name='nonVolatileReservedMemory', mode=MODE_TYPE, tag=(24, TAG_PRIVATE, TAG_IMPLICIT), opt=True)
+    _ApplicationSystemParameters_nonVolatileReservedMemory = OCT_STR(name=u'nonVolatileReservedMemory', mode=MODE_TYPE, tag=(24, TAG_PRIVATE, TAG_IMPLICIT), opt=True)
     _ApplicationSystemParameters_nonVolatileReservedMemory._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=2, ub=4)], ev=None, er=[])
-    _ApplicationSystemParameters_ts102226SIMFileAccessToolkitParameter = OCT_STR(name='ts102226SIMFileAccessToolkitParameter', mode=MODE_TYPE, tag=(10, TAG_PRIVATE, TAG_IMPLICIT), opt=True)
-    _ApplicationSystemParameters_ts102226AdditionalContactlessParameters = SEQ(name='ts102226AdditionalContactlessParameters', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'TS102226AdditionalContactlessParameters')), opt=True)
-    _ApplicationSystemParameters_contactlessProtocolParameters = OCT_STR(name='contactlessProtocolParameters', mode=MODE_TYPE, tag=(25, TAG_PRIVATE, TAG_IMPLICIT), opt=True)
-    _ApplicationSystemParameters_userInteractionContactlessParameters = OCT_STR(name='userInteractionContactlessParameters', mode=MODE_TYPE, tag=(26, TAG_PRIVATE, TAG_IMPLICIT), opt=True)
-    _ApplicationSystemParameters_cumulativeGrantedVolatileMemory = OCT_STR(name='cumulativeGrantedVolatileMemory', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _ApplicationSystemParameters_ts102226SIMFileAccessToolkitParameter = OCT_STR(name=u'ts102226SIMFileAccessToolkitParameter', mode=MODE_TYPE, tag=(10, TAG_PRIVATE, TAG_IMPLICIT), opt=True)
+    _ApplicationSystemParameters_ts102226AdditionalContactlessParameters = SEQ(name=u'ts102226AdditionalContactlessParameters', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'TS102226AdditionalContactlessParameters')), opt=True)
+    _ApplicationSystemParameters_contactlessProtocolParameters = OCT_STR(name=u'contactlessProtocolParameters', mode=MODE_TYPE, tag=(25, TAG_PRIVATE, TAG_IMPLICIT), opt=True)
+    _ApplicationSystemParameters_userInteractionContactlessParameters = OCT_STR(name=u'userInteractionContactlessParameters', mode=MODE_TYPE, tag=(26, TAG_PRIVATE, TAG_IMPLICIT), opt=True)
+    _ApplicationSystemParameters_cumulativeGrantedVolatileMemory = OCT_STR(name=u'cumulativeGrantedVolatileMemory', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     _ApplicationSystemParameters_cumulativeGrantedVolatileMemory._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=2, ub=4)], ev=None, er=[])
-    _ApplicationSystemParameters_cumulativeGrantedNonVolatileMemory = OCT_STR(name='cumulativeGrantedNonVolatileMemory', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _ApplicationSystemParameters_cumulativeGrantedNonVolatileMemory = OCT_STR(name=u'cumulativeGrantedNonVolatileMemory', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     _ApplicationSystemParameters_cumulativeGrantedNonVolatileMemory._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=2, ub=4)], ev=None, er=[])
     ApplicationSystemParameters._cont = ASN1Dict([
-        ('volatileMemoryQuotaC7', _ApplicationSystemParameters_volatileMemoryQuotaC7),
-        ('nonVolatileMemoryQuotaC8', _ApplicationSystemParameters_nonVolatileMemoryQuotaC8),
-        ('globalServiceParameters', _ApplicationSystemParameters_globalServiceParameters),
-        ('implicitSelectionParameter', _ApplicationSystemParameters_implicitSelectionParameter),
-        ('volatileReservedMemory', _ApplicationSystemParameters_volatileReservedMemory),
-        ('nonVolatileReservedMemory', _ApplicationSystemParameters_nonVolatileReservedMemory),
-        ('ts102226SIMFileAccessToolkitParameter', _ApplicationSystemParameters_ts102226SIMFileAccessToolkitParameter),
-        ('ts102226AdditionalContactlessParameters', _ApplicationSystemParameters_ts102226AdditionalContactlessParameters),
-        ('contactlessProtocolParameters', _ApplicationSystemParameters_contactlessProtocolParameters),
-        ('userInteractionContactlessParameters', _ApplicationSystemParameters_userInteractionContactlessParameters),
-        ('cumulativeGrantedVolatileMemory', _ApplicationSystemParameters_cumulativeGrantedVolatileMemory),
-        ('cumulativeGrantedNonVolatileMemory', _ApplicationSystemParameters_cumulativeGrantedNonVolatileMemory),
+        (u'volatileMemoryQuotaC7', _ApplicationSystemParameters_volatileMemoryQuotaC7),
+        (u'nonVolatileMemoryQuotaC8', _ApplicationSystemParameters_nonVolatileMemoryQuotaC8),
+        (u'globalServiceParameters', _ApplicationSystemParameters_globalServiceParameters),
+        (u'implicitSelectionParameter', _ApplicationSystemParameters_implicitSelectionParameter),
+        (u'volatileReservedMemory', _ApplicationSystemParameters_volatileReservedMemory),
+        (u'nonVolatileReservedMemory', _ApplicationSystemParameters_nonVolatileReservedMemory),
+        (u'ts102226SIMFileAccessToolkitParameter', _ApplicationSystemParameters_ts102226SIMFileAccessToolkitParameter),
+        (u'ts102226AdditionalContactlessParameters', _ApplicationSystemParameters_ts102226AdditionalContactlessParameters),
+        (u'contactlessProtocolParameters', _ApplicationSystemParameters_contactlessProtocolParameters),
+        (u'userInteractionContactlessParameters', _ApplicationSystemParameters_userInteractionContactlessParameters),
+        (u'cumulativeGrantedVolatileMemory', _ApplicationSystemParameters_cumulativeGrantedVolatileMemory),
+        (u'cumulativeGrantedNonVolatileMemory', _ApplicationSystemParameters_cumulativeGrantedNonVolatileMemory),
         ])
     ApplicationSystemParameters._ext = []
     
     #-----< UICCApplicationParameters >-----#
-    UICCApplicationParameters = SEQ(name='UICCApplicationParameters', mode=MODE_TYPE)
-    _UICCApplicationParameters_uiccToolkitApplicationSpecificParametersField = OCT_STR(name='uiccToolkitApplicationSpecificParametersField', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _UICCApplicationParameters_uiccAccessApplicationSpecificParametersField = OCT_STR(name='uiccAccessApplicationSpecificParametersField', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _UICCApplicationParameters_uiccAdministrativeAccessApplicationSpecificParametersField = OCT_STR(name='uiccAdministrativeAccessApplicationSpecificParametersField', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    UICCApplicationParameters = SEQ(name=u'UICCApplicationParameters', mode=MODE_TYPE)
+    _UICCApplicationParameters_uiccToolkitApplicationSpecificParametersField = OCT_STR(name=u'uiccToolkitApplicationSpecificParametersField', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _UICCApplicationParameters_uiccAccessApplicationSpecificParametersField = OCT_STR(name=u'uiccAccessApplicationSpecificParametersField', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _UICCApplicationParameters_uiccAdministrativeAccessApplicationSpecificParametersField = OCT_STR(name=u'uiccAdministrativeAccessApplicationSpecificParametersField', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     UICCApplicationParameters._cont = ASN1Dict([
-        ('uiccToolkitApplicationSpecificParametersField', _UICCApplicationParameters_uiccToolkitApplicationSpecificParametersField),
-        ('uiccAccessApplicationSpecificParametersField', _UICCApplicationParameters_uiccAccessApplicationSpecificParametersField),
-        ('uiccAdministrativeAccessApplicationSpecificParametersField', _UICCApplicationParameters_uiccAdministrativeAccessApplicationSpecificParametersField),
+        (u'uiccToolkitApplicationSpecificParametersField', _UICCApplicationParameters_uiccToolkitApplicationSpecificParametersField),
+        (u'uiccAccessApplicationSpecificParametersField', _UICCApplicationParameters_uiccAccessApplicationSpecificParametersField),
+        (u'uiccAdministrativeAccessApplicationSpecificParametersField', _UICCApplicationParameters_uiccAdministrativeAccessApplicationSpecificParametersField),
         ])
     UICCApplicationParameters._ext = []
     
     #-----< TS102226AdditionalContactlessParameters >-----#
-    TS102226AdditionalContactlessParameters = SEQ(name='TS102226AdditionalContactlessParameters', mode=MODE_TYPE)
-    _TS102226AdditionalContactlessParameters_protocolParameterData = OCT_STR(name='protocolParameterData', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    TS102226AdditionalContactlessParameters = SEQ(name=u'TS102226AdditionalContactlessParameters', mode=MODE_TYPE)
+    _TS102226AdditionalContactlessParameters_protocolParameterData = OCT_STR(name=u'protocolParameterData', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     TS102226AdditionalContactlessParameters._cont = ASN1Dict([
-        ('protocolParameterData', _TS102226AdditionalContactlessParameters_protocolParameterData),
+        (u'protocolParameterData', _TS102226AdditionalContactlessParameters_protocolParameterData),
         ])
     TS102226AdditionalContactlessParameters._ext = []
     
     #-----< PE-RFM >-----#
-    PE_RFM = SEQ(name='PE-RFM', mode=MODE_TYPE)
-    _PE_RFM_rfm_header = SEQ(name='rfm-header', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'PEHeader')))
-    _PE_RFM_instanceAID = OCT_STR(name='instanceAID', mode=MODE_TYPE, tag=(15, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'ApplicationIdentifier')))
-    _PE_RFM_securityDomainAID = OCT_STR(name='securityDomainAID', mode=MODE_TYPE, tag=(15, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'ApplicationIdentifier')), opt=True)
-    _PE_RFM_tarList = SEQ_OF(name='tarList', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    PE_RFM = SEQ(name=u'PE-RFM', mode=MODE_TYPE)
+    _PE_RFM_rfm_header = SEQ(name=u'rfm-header', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'PEHeader')))
+    _PE_RFM_instanceAID = OCT_STR(name=u'instanceAID', mode=MODE_TYPE, tag=(15, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'ApplicationIdentifier')))
+    _PE_RFM_securityDomainAID = OCT_STR(name=u'securityDomainAID', mode=MODE_TYPE, tag=(15, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'ApplicationIdentifier')), opt=True)
+    _PE_RFM_tarList = SEQ_OF(name=u'tarList', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     __PE_RFM_tarList__item_ = OCT_STR(name='_item_', mode=MODE_TYPE)
     __PE_RFM_tarList__item_._const_sz = ASN1Set(rv=[3], rr=[], ev=None, er=[])
     _PE_RFM_tarList._cont = __PE_RFM_tarList__item_
     _PE_RFM_tarList._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=None)], ev=None, er=[])
-    _PE_RFM_minimumSecurityLevel = OCT_STR(name='minimumSecurityLevel', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _PE_RFM_minimumSecurityLevel = OCT_STR(name=u'minimumSecurityLevel', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     _PE_RFM_minimumSecurityLevel._const_sz = ASN1Set(rv=[1], rr=[], ev=None, er=[])
-    _PE_RFM_uiccAccessDomain = OCT_STR(name='uiccAccessDomain', mode=MODE_TYPE)
-    _PE_RFM_uiccAdminAccessDomain = OCT_STR(name='uiccAdminAccessDomain', mode=MODE_TYPE)
-    _PE_RFM_adfRFMAccess = SEQ(name='adfRFMAccess', mode=MODE_TYPE, typeref=ASN1RefType(('PEDefinitions', 'ADFRFMAccess')), opt=True)
+    _PE_RFM_uiccAccessDomain = OCT_STR(name=u'uiccAccessDomain', mode=MODE_TYPE)
+    _PE_RFM_uiccAdminAccessDomain = OCT_STR(name=u'uiccAdminAccessDomain', mode=MODE_TYPE)
+    _PE_RFM_adfRFMAccess = SEQ(name=u'adfRFMAccess', mode=MODE_TYPE, typeref=ASN1RefType(('PEDefinitions', 'ADFRFMAccess')), opt=True)
     PE_RFM._cont = ASN1Dict([
-        ('rfm-header', _PE_RFM_rfm_header),
-        ('instanceAID', _PE_RFM_instanceAID),
-        ('securityDomainAID', _PE_RFM_securityDomainAID),
-        ('tarList', _PE_RFM_tarList),
-        ('minimumSecurityLevel', _PE_RFM_minimumSecurityLevel),
-        ('uiccAccessDomain', _PE_RFM_uiccAccessDomain),
-        ('uiccAdminAccessDomain', _PE_RFM_uiccAdminAccessDomain),
-        ('adfRFMAccess', _PE_RFM_adfRFMAccess),
+        (u'rfm-header', _PE_RFM_rfm_header),
+        (u'instanceAID', _PE_RFM_instanceAID),
+        (u'securityDomainAID', _PE_RFM_securityDomainAID),
+        (u'tarList', _PE_RFM_tarList),
+        (u'minimumSecurityLevel', _PE_RFM_minimumSecurityLevel),
+        (u'uiccAccessDomain', _PE_RFM_uiccAccessDomain),
+        (u'uiccAdminAccessDomain', _PE_RFM_uiccAdminAccessDomain),
+        (u'adfRFMAccess', _PE_RFM_adfRFMAccess),
         ])
     PE_RFM._ext = []
     
     #-----< ADFRFMAccess >-----#
-    ADFRFMAccess = SEQ(name='ADFRFMAccess', mode=MODE_TYPE)
-    _ADFRFMAccess_adfAID = OCT_STR(name='adfAID', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'ApplicationIdentifier')))
-    _ADFRFMAccess_adfAccessDomain = OCT_STR(name='adfAccessDomain', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _ADFRFMAccess_adfAdminAccessDomain = OCT_STR(name='adfAdminAccessDomain', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    ADFRFMAccess = SEQ(name=u'ADFRFMAccess', mode=MODE_TYPE)
+    _ADFRFMAccess_adfAID = OCT_STR(name=u'adfAID', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'ApplicationIdentifier')))
+    _ADFRFMAccess_adfAccessDomain = OCT_STR(name=u'adfAccessDomain', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _ADFRFMAccess_adfAdminAccessDomain = OCT_STR(name=u'adfAdminAccessDomain', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     ADFRFMAccess._cont = ASN1Dict([
-        ('adfAID', _ADFRFMAccess_adfAID),
-        ('adfAccessDomain', _ADFRFMAccess_adfAccessDomain),
-        ('adfAdminAccessDomain', _ADFRFMAccess_adfAdminAccessDomain),
+        (u'adfAID', _ADFRFMAccess_adfAID),
+        (u'adfAccessDomain', _ADFRFMAccess_adfAccessDomain),
+        (u'adfAdminAccessDomain', _ADFRFMAccess_adfAdminAccessDomain),
         ])
     ADFRFMAccess._ext = []
     
     #-----< PE-NonStandard >-----#
-    PE_NonStandard = SEQ(name='PE-NonStandard', mode=MODE_TYPE)
-    _PE_NonStandard_nonStandard_header = SEQ(name='nonStandard-header', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'PEHeader')))
-    _PE_NonStandard_issuerID = OID(name='issuerID', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _PE_NonStandard_content = OCT_STR(name='content', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    PE_NonStandard = SEQ(name=u'PE-NonStandard', mode=MODE_TYPE)
+    _PE_NonStandard_nonStandard_header = SEQ(name=u'nonStandard-header', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'PEHeader')))
+    _PE_NonStandard_issuerID = OID(name=u'issuerID', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _PE_NonStandard_content = OCT_STR(name=u'content', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     PE_NonStandard._cont = ASN1Dict([
-        ('nonStandard-header', _PE_NonStandard_nonStandard_header),
-        ('issuerID', _PE_NonStandard_issuerID),
-        ('content', _PE_NonStandard_content),
+        (u'nonStandard-header', _PE_NonStandard_nonStandard_header),
+        (u'issuerID', _PE_NonStandard_issuerID),
+        (u'content', _PE_NonStandard_content),
         ])
     PE_NonStandard._ext = []
     
     #-----< PE-End >-----#
-    PE_End = SEQ(name='PE-End', mode=MODE_TYPE)
-    _PE_End_end_header = SEQ(name='end-header', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'PEHeader')))
+    PE_End = SEQ(name=u'PE-End', mode=MODE_TYPE)
+    _PE_End_end_header = SEQ(name=u'end-header', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'PEHeader')))
     PE_End._cont = ASN1Dict([
-        ('end-header', _PE_End_end_header),
+        (u'end-header', _PE_End_end_header),
         ])
     PE_End._ext = []
     
     #-----< PEStatus >-----#
-    PEStatus = SEQ(name='PEStatus', mode=MODE_TYPE)
-    _PEStatus_status = INT(name='status', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _PEStatus_status._cont = ASN1Dict([('ok', 0), ('pe-not-supported', 1), ('memory-failure', 2), ('bad-values', 3), ('not-enough-memory', 4), ('invalid-request-format', 5), ('invalid-parameter', 6), ('runtime-not-supported', 7), ('lib-not-supported', 8), ('template-not-supported', 9), ('feature-not-supported', 10), ('pin-code-missing', 11), ('unsupported-profile-version', 31)])
-    _PEStatus_identification = INT(name='identification', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'UInt15')), opt=True)
-    _PEStatus_additional_information = INT(name='additional-information', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'UInt8')), opt=True)
-    _PEStatus_offset = INT(name='offset', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'UInt31')), opt=True)
+    PEStatus = SEQ(name=u'PEStatus', mode=MODE_TYPE)
+    _PEStatus_status = INT(name=u'status', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _PEStatus_status._cont = ASN1Dict([(u'ok', 0), (u'pe-not-supported', 1), (u'memory-failure', 2), (u'bad-values', 3), (u'not-enough-memory', 4), (u'invalid-request-format', 5), (u'invalid-parameter', 6), (u'runtime-not-supported', 7), (u'lib-not-supported', 8), (u'template-not-supported', 9), (u'feature-not-supported', 10), (u'pin-code-missing', 11), (u'unsupported-profile-version', 31)])
+    _PEStatus_identification = INT(name=u'identification', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'UInt15')), opt=True)
+    _PEStatus_additional_information = INT(name=u'additional-information', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'UInt8')), opt=True)
+    _PEStatus_offset = INT(name=u'offset', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PEDefinitions', 'UInt31')), opt=True)
     PEStatus._cont = ASN1Dict([
-        ('status', _PEStatus_status),
-        ('identification', _PEStatus_identification),
-        ('additional-information', _PEStatus_additional_information),
-        ('offset', _PEStatus_offset),
+        (u'status', _PEStatus_status),
+        (u'identification', _PEStatus_identification),
+        (u'additional-information', _PEStatus_additional_information),
+        (u'offset', _PEStatus_offset),
         ])
     PEStatus._ext = []
     
     #-----< EUICCResponse >-----#
-    EUICCResponse = SEQ(name='EUICCResponse', mode=MODE_TYPE)
-    _EUICCResponse_peStatus = SEQ_OF(name='peStatus', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    EUICCResponse = SEQ(name=u'EUICCResponse', mode=MODE_TYPE)
+    _EUICCResponse_peStatus = SEQ_OF(name=u'peStatus', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     __EUICCResponse_peStatus__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('PEDefinitions', 'PEStatus')))
     _EUICCResponse_peStatus._cont = __EUICCResponse_peStatus__item_
-    _EUICCResponse_profileInstallationAborted = NULL(name='profileInstallationAborted', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _EUICCResponse_statusMessage = STR_UTF8(name='statusMessage', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _EUICCResponse_profileInstallationAborted = NULL(name=u'profileInstallationAborted', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _EUICCResponse_statusMessage = STR_UTF8(name=u'statusMessage', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     EUICCResponse._cont = ASN1Dict([
-        ('peStatus', _EUICCResponse_peStatus),
-        ('profileInstallationAborted', _EUICCResponse_profileInstallationAborted),
-        ('statusMessage', _EUICCResponse_statusMessage),
+        (u'peStatus', _EUICCResponse_peStatus),
+        (u'profileInstallationAborted', _EUICCResponse_profileInstallationAborted),
+        (u'statusMessage', _EUICCResponse_statusMessage),
         ])
     EUICCResponse._ext = []
     
     #-----< headerVal >-----#
-    headerVal = CHOICE(name='headerVal', mode=MODE_VALUE, typeref=ASN1RefType(('PEDefinitions', 'ProfileElement')))
-    headerVal._val = ('header', dict([('major-version', 2), ('minor-version', 100), ('profileType', 'SIMalliance Sample Profile'), ('iccid', b'\x89\x01\x99\x90\x00\x124Vx\x93'), ('eUICC-Mandatory-services', dict([('usim', 0), ('milenage', 0), ('javacard', 0)])), ('eUICC-Mandatory-GFSTEList', [(2, 23, 143, 1, 2, 1), (2, 23, 143, 1, 2, 4)])]))
+    headerVal = CHOICE(name=u'headerVal', mode=MODE_VALUE, typeref=ASN1RefType(('PEDefinitions', 'ProfileElement')))
+    headerVal._val = (u'header', dict([(u'major-version', 2), (u'minor-version', 100), (u'profileType', u'SIMalliance Sample Profile'), (u'iccid', b'\x89\x01\x99\x90\x00\x124Vx\x93'), (u'eUICC-Mandatory-services', dict([(u'usim', 0), (u'milenage', 0), (u'javacard', 0)])), (u'eUICC-Mandatory-GFSTEList', [(2, 23, 143, 1, 2, 1), (2, 23, 143, 1, 2, 4)])]))
     
     #-----< mfVal >-----#
-    mfVal = CHOICE(name='mfVal', mode=MODE_VALUE, typeref=ASN1RefType(('PEDefinitions', 'ProfileElement')))
-    mfVal._val = ('mf', dict([('mf-header', dict([('mandated', 0), ('identification', 1)])), ('templateID', (2, 23, 143, 1, 2, 1)), ('mf', [('fileDescriptor', dict([('pinStatusTemplateDO', b'\x01\x02\n')]))]), ('ef-pl', [('fileDescriptor', dict([('securityAttributesReferenced', b'\x0f')]))]), ('ef-iccid', [('fillFileContent', b'\x98\x10\x99\t\x00!Ce\x879')]), ('ef-dir', [('fileDescriptor', dict([('fileDescriptor', b'B!\x00&'), ('efFileSize', b'\x98')])), ('fillFileContent', b'a\x18O\x10\xa0\x00\x00\x00\x87\x10\x02\xff3\xff\x01\x89\x00\x00\x01\x00P\x04USIM')]), ('ef-arr', [('fileDescriptor', dict([('fileDescriptor', b'B!\x00%'), ('efFileSize', b'\x02+')])), ('fillFileContent', b'\x80\x01\x01\x90\x00\x80\x01\x02\xa4\x06\x83\x01\x01\x95\x01\x08\x80\x01X\xa4\x06\x83\x01\n\x95\x01\x08'), ('fillFileOffset', 10), ('fillFileContent', b'\x80\x01\x01\xa4\x06\x83\x01\x01\x95\x01\x08\x80\x01Z\xa4\x06\x83\x01\n\x95\x01\x08'), ('fillFileOffset', 15), ('fillFileContent', b'\x80\x01[\xa4\x06\x83\x01\n\x95\x01\x08'), ('fillFileOffset', 26), ('fillFileContent', b'\x80\x01\x01\x90\x00\x80\x01Z\x97\x00'), ('fillFileOffset', 27), ('fillFileContent', b'\x80\x01\x03\xa4\x06\x83\x01\x01\x95\x01\x08\x80\x01X\xa4\x06\x83\x01\n\x95\x01\x08'), ('fillFileOffset', 15), ('fillFileContent', b'\x80\x01\x11\xa4\x06\x83\x01\x01\x95\x01\x08\x80\x01J\xa4\x06\x83\x01\n\x95\x01\x08'), ('fillFileOffset', 15), ('fillFileContent', b'\x80\x01\x03\xa4\x06\x83\x01\x01\x95\x01\x08\x80\x01X\xa4\x06\x83\x01\n\x95\x01\x08\x84\x012\xa4\x06\x83\x01\x01\x95\x01\x08'), ('fillFileOffset', 4), ('fillFileContent', b'\x80\x01\x01\xa4\x06\x83\x01\x01\x95\x01\x08\x80\x01\x02\xa4\x06\x83\x01\x81\x95\x01\x08\x80\x01X\xa4\x06\x83\x01\n\x95\x01\x08'), ('fillFileOffset', 4), ('fillFileContent', b'\x80\x01\x01\x90\x00\x80\x01\x1a\xa4\x06\x83\x01\x01\x95\x01\x08\x80\x01@\xa4\x06\x83\x01\n\x95\x01\x08'), ('fillFileOffset', 10), ('fillFileContent', b'\x80\x01\x01\x90\x00\x80\x01Z\xa4\x06\x83\x01\n\x95\x01\x08'), ('fillFileOffset', 21), ('fillFileContent', b'\x80\x01\x01\x90\x00\x80\x01\x18\xa4\x06\x83\x01\n\x95\x01\x08\x80\x01B\x97\x00'), ('fillFileOffset', 16), ('fillFileContent', b'\x80\x01\x01\xa4\x06\x83\x01\x01\x95\x01\x08\x80\x01Z\x97\x00'), ('fillFileOffset', 21), ('fillFileContent', b'\x80\x01\x13\xa4\x06\x83\x01\x01\x95\x01\x08\x80\x01H\xa4\x06\x83\x01\n\x95\x01\x08'), ('fillFileOffset', 15), ('fillFileContent', b'\x80\x01^\xa4\x06\x83\x01\n\x95\x01\x08'), ('fillFileOffset', 26), ('fillFileContent', b'\x80\x01\x01\x90\x00\x80\x01\x02\xa0\x10\xa4\x06\x83\x01\x01\x95\x01\x08\xa4\x06\x83\x01\x02\x95\x01\x08\x80\x01X\xa4\x06\x83\x01\n\x95\x01\x08')])]))
+    mfVal = CHOICE(name=u'mfVal', mode=MODE_VALUE, typeref=ASN1RefType(('PEDefinitions', 'ProfileElement')))
+    mfVal._val = (u'mf', dict([(u'mf-header', dict([(u'mandated', 0), (u'identification', 1)])), (u'templateID', (2, 23, 143, 1, 2, 1)), (u'mf', [(u'fileDescriptor', dict([(u'pinStatusTemplateDO', b'\x01\x02\n')]))]), (u'ef-pl', [(u'fileDescriptor', dict([(u'securityAttributesReferenced', b'\x0f')]))]), (u'ef-iccid', [(u'fillFileContent', b'\x98\x10\x99\t\x00!Ce\x879')]), (u'ef-dir', [(u'fileDescriptor', dict([(u'fileDescriptor', b'B!\x00&'), (u'efFileSize', b'\x98')])), (u'fillFileContent', b'a\x18O\x10\xa0\x00\x00\x00\x87\x10\x02\xff3\xff\x01\x89\x00\x00\x01\x00P\x04USIM')]), (u'ef-arr', [(u'fileDescriptor', dict([(u'fileDescriptor', b'B!\x00%'), (u'efFileSize', b'\x02+')])), (u'fillFileContent', b'\x80\x01\x01\x90\x00\x80\x01\x02\xa4\x06\x83\x01\x01\x95\x01\x08\x80\x01X\xa4\x06\x83\x01\n\x95\x01\x08'), (u'fillFileOffset', 10), (u'fillFileContent', b'\x80\x01\x01\xa4\x06\x83\x01\x01\x95\x01\x08\x80\x01Z\xa4\x06\x83\x01\n\x95\x01\x08'), (u'fillFileOffset', 15), (u'fillFileContent', b'\x80\x01[\xa4\x06\x83\x01\n\x95\x01\x08'), (u'fillFileOffset', 26), (u'fillFileContent', b'\x80\x01\x01\x90\x00\x80\x01Z\x97\x00'), (u'fillFileOffset', 27), (u'fillFileContent', b'\x80\x01\x03\xa4\x06\x83\x01\x01\x95\x01\x08\x80\x01X\xa4\x06\x83\x01\n\x95\x01\x08'), (u'fillFileOffset', 15), (u'fillFileContent', b'\x80\x01\x11\xa4\x06\x83\x01\x01\x95\x01\x08\x80\x01J\xa4\x06\x83\x01\n\x95\x01\x08'), (u'fillFileOffset', 15), (u'fillFileContent', b'\x80\x01\x03\xa4\x06\x83\x01\x01\x95\x01\x08\x80\x01X\xa4\x06\x83\x01\n\x95\x01\x08\x84\x012\xa4\x06\x83\x01\x01\x95\x01\x08'), (u'fillFileOffset', 4), (u'fillFileContent', b'\x80\x01\x01\xa4\x06\x83\x01\x01\x95\x01\x08\x80\x01\x02\xa4\x06\x83\x01\x81\x95\x01\x08\x80\x01X\xa4\x06\x83\x01\n\x95\x01\x08'), (u'fillFileOffset', 4), (u'fillFileContent', b'\x80\x01\x01\x90\x00\x80\x01\x1a\xa4\x06\x83\x01\x01\x95\x01\x08\x80\x01@\xa4\x06\x83\x01\n\x95\x01\x08'), (u'fillFileOffset', 10), (u'fillFileContent', b'\x80\x01\x01\x90\x00\x80\x01Z\xa4\x06\x83\x01\n\x95\x01\x08'), (u'fillFileOffset', 21), (u'fillFileContent', b'\x80\x01\x01\x90\x00\x80\x01\x18\xa4\x06\x83\x01\n\x95\x01\x08\x80\x01B\x97\x00'), (u'fillFileOffset', 16), (u'fillFileContent', b'\x80\x01\x01\xa4\x06\x83\x01\x01\x95\x01\x08\x80\x01Z\x97\x00'), (u'fillFileOffset', 21), (u'fillFileContent', b'\x80\x01\x13\xa4\x06\x83\x01\x01\x95\x01\x08\x80\x01H\xa4\x06\x83\x01\n\x95\x01\x08'), (u'fillFileOffset', 15), (u'fillFileContent', b'\x80\x01^\xa4\x06\x83\x01\n\x95\x01\x08'), (u'fillFileOffset', 26), (u'fillFileContent', b'\x80\x01\x01\x90\x00\x80\x01\x02\xa0\x10\xa4\x06\x83\x01\x01\x95\x01\x08\xa4\x06\x83\x01\x02\x95\x01\x08\x80\x01X\xa4\x06\x83\x01\n\x95\x01\x08')])]))
     
     #-----< altMFVal >-----#
-    altMFVal = CHOICE(name='altMFVal', mode=MODE_VALUE, typeref=ASN1RefType(('PEDefinitions', 'ProfileElement')))
-    altMFVal._val = ('genericFileManagement', dict([('gfm-header', dict([('mandated', 0), ('identification', 1)])), ('fileManagementCMD', [[('createFCP', dict([('fileDescriptor', b'x!'), ('fileID', b'?\x00'), ('securityAttributesReferenced', b'\x0e'), ('pinStatusTemplateDO', b'\x01\x02\n')])), ('createFCP', dict([('fileDescriptor', b'A!'), ('fileID', b'/\x05'), ('securityAttributesReferenced', b'\x0f'), ('efFileSize', b'\x03'), ('shortEFID', b'(')])), ('createFCP', dict([('fileDescriptor', b'A!'), ('fileID', b'/\xe2'), ('securityAttributesReferenced', b'\x0b'), ('efFileSize', b'\n')])), ('fillFileContent', b'\x98\x10\x99\t\x00!Ce\x879'), ('createFCP', dict([('fileDescriptor', b'B!\x00&'), ('fileID', b'/\x00'), ('securityAttributesReferenced', b'\n'), ('efFileSize', b'\x98'), ('shortEFID', b'\xf0')])), ('fillFileContent', b'a\x18O\x10\xa0\x00\x00\x00\x87\x10\x02\xff3\xff\x01\x89\x00\x00\x01\x00P\x04USIM'), ('createFCP', dict([('fileDescriptor', b'B!\x00%'), ('fileID', b'/\x06'), ('securityAttributesReferenced', b'\n'), ('efFileSize', b'\x02+')])), ('fillFileContent', b'\x80\x01\x01\x90\x00\x80\x01\x02\xa4\x06\x83\x01\x01\x95\x01\x08\x80\x01X\xa4\x06\x83\x01\n\x95\x01\x08'), ('fillFileOffset', 10), ('fillFileContent', b'\x80\x01\x01\xa4\x06\x83\x01\x01\x95\x01\x08\x80\x01Z\xa4\x06\x83\x01\n\x95\x01\x08'), ('fillFileOffset', 15), ('fillFileContent', b'\x80\x01[\xa4\x06\x83\x01\n\x95\x01\x08'), ('fillFileOffset', 26), ('fillFileContent', b'\x80\x01\x01\x90\x00\x80\x01Z\x97\x00'), ('fillFileOffset', 27), ('fillFileContent', b'\x80\x01\x03\xa4\x06\x83\x01\x01\x95\x01\x08\x80\x01X\xa4\x06\x83\x01\n\x95\x01\x08'), ('fillFileOffset', 15), ('fillFileContent', b'\x80\x01\x11\xa4\x06\x83\x01\x01\x95\x01\x08\x80\x01J\xa4\x06\x83\x01\n\x95\x01\x08'), ('fillFileOffset', 15), ('fillFileContent', b'\x80\x01\x03\xa4\x06\x83\x01\x01\x95\x01\x08\x80\x01X\xa4\x06\x83\x01\n\x95\x01\x08\x84\x012\xa4\x06\x83\x01\x01\x95\x01\x08'), ('fillFileOffset', 4), ('fillFileContent', b'\x80\x01\x01\xa4\x06\x83\x01\x01\x95\x01\x08\x80\x01\x02\xa4\x06\x83\x01\x81\x95\x01\x08\x80\x01X\xa4\x06\x83\x01\n\x95\x01\x08'), ('fillFileOffset', 4), ('fillFileContent', b'\x80\x01\x01\x90\x00\x80\x01\x1a\xa4\x06\x83\x01\x01\x95\x01\x08\x80\x01@\xa4\x06\x83\x01\n\x95\x01\x08'), ('fillFileOffset', 10), ('fillFileContent', b'\x80\x01\x01\x90\x00\x80\x01Z\xa4\x06\x83\x01\n\x95\x01\x08'), ('fillFileOffset', 21), ('fillFileContent', b'\x80\x01\x01\x90\x00\x80\x01\x18\xa4\x06\x83\x01\n\x95\x01\x08\x80\x01B\x97\x00'), ('fillFileOffset', 16), ('fillFileContent', b'\x80\x01\x01\xa4\x06\x83\x01\x01\x95\x01\x08\x80\x01Z\x97\x00'), ('fillFileOffset', 21), ('fillFileContent', b'\x80\x01\x13\xa4\x06\x83\x01\x01\x95\x01\x08\x80\x01H\xa4\x06\x83\x01\n\x95\x01\x08'), ('fillFileOffset', 15), ('fillFileContent', b'\x80\x01^\xa4\x06\x83\x01\n\x95\x01\x08'), ('fillFileOffset', 26), ('fillFileContent', b'\x80\x01\x01\x90\x00\x80\x01\x02\xa0\x10\xa4\x06\x83\x01\x01\x95\x01\x08\xa4\x06\x83\x01\x02\x95\x01\x08\x80\x01X\xa4\x06\x83\x01\n\x95\x01\x08'), ('createFCP', dict([('fileDescriptor', b'A!'), ('fileID', b'/\x08'), ('securityAttributesReferenced', b'\n'), ('efFileSize', b'\x05')]))]])]))
+    altMFVal = CHOICE(name=u'altMFVal', mode=MODE_VALUE, typeref=ASN1RefType(('PEDefinitions', 'ProfileElement')))
+    altMFVal._val = (u'genericFileManagement', dict([(u'gfm-header', dict([(u'mandated', 0), (u'identification', 1)])), (u'fileManagementCMD', [[(u'createFCP', dict([(u'fileDescriptor', b'x!'), (u'fileID', b'?\x00'), (u'securityAttributesReferenced', b'\x0e'), (u'pinStatusTemplateDO', b'\x01\x02\n')])), (u'createFCP', dict([(u'fileDescriptor', b'A!'), (u'fileID', b'/\x05'), (u'securityAttributesReferenced', b'\x0f'), (u'efFileSize', b'\x03'), (u'shortEFID', b'(')])), (u'createFCP', dict([(u'fileDescriptor', b'A!'), (u'fileID', b'/\xe2'), (u'securityAttributesReferenced', b'\x0b'), (u'efFileSize', b'\n')])), (u'fillFileContent', b'\x98\x10\x99\t\x00!Ce\x879'), (u'createFCP', dict([(u'fileDescriptor', b'B!\x00&'), (u'fileID', b'/\x00'), (u'securityAttributesReferenced', b'\n'), (u'efFileSize', b'\x98'), (u'shortEFID', b'\xf0')])), (u'fillFileContent', b'a\x18O\x10\xa0\x00\x00\x00\x87\x10\x02\xff3\xff\x01\x89\x00\x00\x01\x00P\x04USIM'), (u'createFCP', dict([(u'fileDescriptor', b'B!\x00%'), (u'fileID', b'/\x06'), (u'securityAttributesReferenced', b'\n'), (u'efFileSize', b'\x02+')])), (u'fillFileContent', b'\x80\x01\x01\x90\x00\x80\x01\x02\xa4\x06\x83\x01\x01\x95\x01\x08\x80\x01X\xa4\x06\x83\x01\n\x95\x01\x08'), (u'fillFileOffset', 10), (u'fillFileContent', b'\x80\x01\x01\xa4\x06\x83\x01\x01\x95\x01\x08\x80\x01Z\xa4\x06\x83\x01\n\x95\x01\x08'), (u'fillFileOffset', 15), (u'fillFileContent', b'\x80\x01[\xa4\x06\x83\x01\n\x95\x01\x08'), (u'fillFileOffset', 26), (u'fillFileContent', b'\x80\x01\x01\x90\x00\x80\x01Z\x97\x00'), (u'fillFileOffset', 27), (u'fillFileContent', b'\x80\x01\x03\xa4\x06\x83\x01\x01\x95\x01\x08\x80\x01X\xa4\x06\x83\x01\n\x95\x01\x08'), (u'fillFileOffset', 15), (u'fillFileContent', b'\x80\x01\x11\xa4\x06\x83\x01\x01\x95\x01\x08\x80\x01J\xa4\x06\x83\x01\n\x95\x01\x08'), (u'fillFileOffset', 15), (u'fillFileContent', b'\x80\x01\x03\xa4\x06\x83\x01\x01\x95\x01\x08\x80\x01X\xa4\x06\x83\x01\n\x95\x01\x08\x84\x012\xa4\x06\x83\x01\x01\x95\x01\x08'), (u'fillFileOffset', 4), (u'fillFileContent', b'\x80\x01\x01\xa4\x06\x83\x01\x01\x95\x01\x08\x80\x01\x02\xa4\x06\x83\x01\x81\x95\x01\x08\x80\x01X\xa4\x06\x83\x01\n\x95\x01\x08'), (u'fillFileOffset', 4), (u'fillFileContent', b'\x80\x01\x01\x90\x00\x80\x01\x1a\xa4\x06\x83\x01\x01\x95\x01\x08\x80\x01@\xa4\x06\x83\x01\n\x95\x01\x08'), (u'fillFileOffset', 10), (u'fillFileContent', b'\x80\x01\x01\x90\x00\x80\x01Z\xa4\x06\x83\x01\n\x95\x01\x08'), (u'fillFileOffset', 21), (u'fillFileContent', b'\x80\x01\x01\x90\x00\x80\x01\x18\xa4\x06\x83\x01\n\x95\x01\x08\x80\x01B\x97\x00'), (u'fillFileOffset', 16), (u'fillFileContent', b'\x80\x01\x01\xa4\x06\x83\x01\x01\x95\x01\x08\x80\x01Z\x97\x00'), (u'fillFileOffset', 21), (u'fillFileContent', b'\x80\x01\x13\xa4\x06\x83\x01\x01\x95\x01\x08\x80\x01H\xa4\x06\x83\x01\n\x95\x01\x08'), (u'fillFileOffset', 15), (u'fillFileContent', b'\x80\x01^\xa4\x06\x83\x01\n\x95\x01\x08'), (u'fillFileOffset', 26), (u'fillFileContent', b'\x80\x01\x01\x90\x00\x80\x01\x02\xa0\x10\xa4\x06\x83\x01\x01\x95\x01\x08\xa4\x06\x83\x01\x02\x95\x01\x08\x80\x01X\xa4\x06\x83\x01\n\x95\x01\x08'), (u'createFCP', dict([(u'fileDescriptor', b'A!'), (u'fileID', b'/\x08'), (u'securityAttributesReferenced', b'\n'), (u'efFileSize', b'\x05')]))]])]))
     
     #-----< pukVal >-----#
-    pukVal = CHOICE(name='pukVal', mode=MODE_VALUE, typeref=ASN1RefType(('PEDefinitions', 'ProfileElement')))
-    pukVal._val = ('pukCodes', dict([('puk-Header', dict([('mandated', 0), ('identification', 2)])), ('pukCodes', [dict([('keyReference', 1), ('pukValue', b'00000000'), ('maxNumOfAttemps-retryNumLeft', 153)]), dict([('keyReference', 2), ('pukValue', b'12345678')]), dict([('keyReference', 129), ('pukValue', b'12345678'), ('maxNumOfAttemps-retryNumLeft', 136)])])]))
+    pukVal = CHOICE(name=u'pukVal', mode=MODE_VALUE, typeref=ASN1RefType(('PEDefinitions', 'ProfileElement')))
+    pukVal._val = (u'pukCodes', dict([(u'puk-Header', dict([(u'mandated', 0), (u'identification', 2)])), (u'pukCodes', [dict([(u'keyReference', 1), (u'pukValue', b'00000000'), (u'maxNumOfAttemps-retryNumLeft', 153)]), dict([(u'keyReference', 2), (u'pukValue', b'12345678')]), dict([(u'keyReference', 129), (u'pukValue', b'12345678'), (u'maxNumOfAttemps-retryNumLeft', 136)])])]))
     
     #-----< pinVal >-----#
-    pinVal = CHOICE(name='pinVal', mode=MODE_VALUE, typeref=ASN1RefType(('PEDefinitions', 'ProfileElement')))
-    pinVal._val = ('pinCodes', dict([('pin-Header', dict([('mandated', 0), ('identification', 3)])), ('pinCodes', ('pinconfig', [dict([('keyReference', 1), ('pinValue', b'1234\xff\xff\xff\xff'), ('unblockingPINReference', 1)]), dict([('keyReference', 2), ('pinValue', b'0000\xff\xff\xff\xff'), ('unblockingPINReference', 2)]), dict([('keyReference', 10), ('pinValue', b'5678\xff\xff\xff\xff'), ('pinAttributes', 1)])]))]))
+    pinVal = CHOICE(name=u'pinVal', mode=MODE_VALUE, typeref=ASN1RefType(('PEDefinitions', 'ProfileElement')))
+    pinVal._val = (u'pinCodes', dict([(u'pin-Header', dict([(u'mandated', 0), (u'identification', 3)])), (u'pinCodes', (u'pinconfig', [dict([(u'keyReference', 1), (u'pinValue', b'1234\xff\xff\xff\xff'), (u'unblockingPINReference', 1)]), dict([(u'keyReference', 2), (u'pinValue', b'0000\xff\xff\xff\xff'), (u'unblockingPINReference', 2)]), dict([(u'keyReference', 10), (u'pinValue', b'5678\xff\xff\xff\xff'), (u'pinAttributes', 1)])]))]))
     
     #-----< usimValue >-----#
-    usimValue = CHOICE(name='usimValue', mode=MODE_VALUE, typeref=ASN1RefType(('PEDefinitions', 'ProfileElement')))
-    usimValue._val = ('usim', dict([('usim-header', dict([('mandated', 0), ('identification', 4)])), ('templateID', (2, 23, 143, 1, 2, 4)), ('adf-usim', [('fileDescriptor', dict([('fileID', b'\x7f\xf1'), ('dfName', b'\xa0\x00\x00\x00\x87\x10\x02\xff3\xff\x01\x89\x00\x00\x01\x00'), ('pinStatusTemplateDO', b'\x01\x81\n')]))]), ('ef-imsi', [('fillFileContent', b'\x08)C\x01\x914\x87ge')]), ('ef-arr', [('fileDescriptor', dict([('linkPath', b'/\x06')]))]), ('ef-ust', [('fillFileContent', b'\n.\x17\x8c\xe72\x04\x00\x00\x00\x00\x00\x00')]), ('ef-spn', [('fillFileContent', b'\x02SIMalliance')]), ('ef-est', [('fillFileContent', b'\x00')]), ('ef-acc', [('fillFileContent', b'\x00@')]), ('ef-ecc', [('fillFileContent', b'\x19\xf1\xff\x01')])]))
+    usimValue = CHOICE(name=u'usimValue', mode=MODE_VALUE, typeref=ASN1RefType(('PEDefinitions', 'ProfileElement')))
+    usimValue._val = (u'usim', dict([(u'usim-header', dict([(u'mandated', 0), (u'identification', 4)])), (u'templateID', (2, 23, 143, 1, 2, 4)), (u'adf-usim', [(u'fileDescriptor', dict([(u'fileID', b'\x7f\xf1'), (u'dfName', b'\xa0\x00\x00\x00\x87\x10\x02\xff3\xff\x01\x89\x00\x00\x01\x00'), (u'pinStatusTemplateDO', b'\x01\x81\n')]))]), (u'ef-imsi', [(u'fillFileContent', b'\x08)C\x01\x914\x87ge')]), (u'ef-arr', [(u'fileDescriptor', dict([(u'linkPath', b'/\x06')]))]), (u'ef-ust', [(u'fillFileContent', b'\n.\x17\x8c\xe72\x04\x00\x00\x00\x00\x00\x00')]), (u'ef-spn', [(u'fillFileContent', b'\x02SIMalliance')]), (u'ef-est', [(u'fillFileContent', b'\x00')]), (u'ef-acc', [(u'fillFileContent', b'\x00@')]), (u'ef-ecc', [(u'fillFileContent', b'\x19\xf1\xff\x01')])]))
     
     #-----< altUsimValue >-----#
-    altUsimValue = CHOICE(name='altUsimValue', mode=MODE_VALUE, typeref=ASN1RefType(('PEDefinitions', 'ProfileElement')))
-    altUsimValue._val = ('genericFileManagement', dict([('gfm-header', dict([('mandated', 0), ('identification', 4)])), ('fileManagementCMD', [[('createFCP', dict([('fileDescriptor', b'x!'), ('fileID', b'\x7f\xf1'), ('dfName', b'\xa0\x00\x00\x00\x87\x10\x02\xff3\xff\x01\x89\x00\x00\x01\x00'), ('securityAttributesReferenced', b'\n'), ('pinStatusTemplateDO', b'\x01\x81\n')])), ('createFCP', dict([('fileDescriptor', b'A!'), ('fileID', b'o\x07'), ('securityAttributesReferenced', b'\x02'), ('efFileSize', b'\t'), ('shortEFID', b'8')])), ('fillFileContent', b'\x08)C\x01\x914\x87ge'), ('createFCP', dict([('fileDescriptor', b'B!\x00%'), ('fileID', b'o\x06'), ('securityAttributesReferenced', b'\n'), ('shortEFID', b'\xb8'), ('linkPath', b'/\x06')])), ('createFCP', dict([('fileDescriptor', b'A!'), ('fileID', b'o\x08'), ('securityAttributesReferenced', b'\x05'), ('efFileSize', b'!'), ('shortEFID', b'@'), ('proprietaryEFInfo', dict([('specialFileInformation', b'\x80'), ('fillPattern', b'\x07\xff')]))])), ('createFCP', dict([('fileDescriptor', b'A!'), ('fileID', b'o\t'), ('securityAttributesReferenced', b'\x05'), ('efFileSize', b'!'), ('shortEFID', b'H'), ('proprietaryEFInfo', dict([('specialFileInformation', b'\x80'), ('fillPattern', b'\x07\xff')]))])), ('createFCP', dict([('fileDescriptor', b'A!'), ('fileID', b'o1'), ('securityAttributesReferenced', b'\x02'), ('efFileSize', b'\x01'), ('shortEFID', b'\x90'), ('proprietaryEFInfo', dict([('specialFileInformation', b'\x00'), ('fillPattern', b'\n')]))])), ('createFCP', dict([('fileDescriptor', b'A!'), ('fileID', b'o8'), ('securityAttributesReferenced', b'\x02'), ('efFileSize', b'\x0e'), ('shortEFID', b' ')])), ('fillFileContent', b'\n.\x17\x8c\xe72\x04\x00\x00\x00\x00\x00\x00'), ('createFCP', dict([('fileDescriptor', b'B!\x00\x1a'), ('fileID', b'o;'), ('securityAttributesReferenced', b'\x08'), ('efFileSize', b'\x02\x08'), ('shortEFID', b''), ('proprietaryEFInfo', dict([('fillPattern', b'\x00\xff')]))])), ('createFCP', dict([('fileDescriptor', b'B!\x00\xb0'), ('fileID', b'o<'), ('securityAttributesReferenced', b'\x05'), ('efFileSize', b'\x06\xe0'), ('shortEFID', b''), ('proprietaryEFInfo', dict([('fillPattern', b'\x00\xff')]))])), ('createFCP', dict([('fileDescriptor', b'B!\x00&'), ('fileID', b'oB'), ('securityAttributesReferenced', b'\x05'), ('efFileSize', b'&'), ('shortEFID', b'')])), ('createFCP', dict([('fileDescriptor', b'A!'), ('fileID', b'oC'), ('securityAttributesReferenced', b'\x05'), ('efFileSize', b'\x02'), ('shortEFID', b''), ('proprietaryEFInfo', dict([('specialFileInformation', b'\x80')]))])), ('createFCP', dict([('fileDescriptor', b'A!'), ('fileID', b'oF'), ('securityAttributesReferenced', b'o\x06\n'), ('efFileSize', b'\x11'), ('shortEFID', b'')])), ('fillFileContent', b'\x02SIMalliance'), ('createFCP', dict([('fileDescriptor', b'A!'), ('fileID', b'oV'), ('securityAttributesReferenced', b'\x08'), ('efFileSize', b'\x01'), ('shortEFID', b'(')])), ('fillFileContent', b'\x00'), ('createFCP', dict([('fileDescriptor', b'A!'), ('fileID', b'o['), ('securityAttributesReferenced', b'\x05'), ('efFileSize', b'\x06'), ('shortEFID', b'x'), ('proprietaryEFInfo', dict([('specialFileInformation', b'\x80'), ('repeatPattern', b'\xf0\x00\x00')]))])), ('createFCP', dict([('fileDescriptor', b'A!'), ('fileID', b'o\\'), ('securityAttributesReferenced', b'\x02'), ('efFileSize', b'\x03'), ('shortEFID', b'\x80'), ('proprietaryEFInfo', dict([('specialFileInformation', b'\x80')]))])), ('createFCP', dict([('fileDescriptor', b'A!'), ('fileID', b'os'), ('securityAttributesReferenced', b'\x05'), ('efFileSize', b'\x0e'), ('shortEFID', b'`'), ('proprietaryEFInfo', dict([('specialFileInformation', b'\x80')]))])), ('fillFileOffset', 7), ('fillFileContent', b'\x00\xf1\x10\x00\x00\xff\x01'), ('createFCP', dict([('fileDescriptor', b'A!'), ('fileID', b'ox'), ('securityAttributesReferenced', b'\x02'), ('efFileSize', b'\x02'), ('shortEFID', b'0')])), ('fillFileContent', b'\x00@'), ('createFCP', dict([('fileDescriptor', b'A!'), ('fileID', b'o{'), ('securityAttributesReferenced', b'\x05'), ('efFileSize', b'\x0c'), ('shortEFID', b'h')])), ('createFCP', dict([('fileDescriptor', b'A!'), ('fileID', b'o~'), ('securityAttributesReferenced', b'\x05'), ('efFileSize', b'\x0b'), ('shortEFID', b'X'), ('proprietaryEFInfo', dict([('specialFileInformation', b'\x80')]))])), ('fillFileOffset', 7), ('fillFileContent', b'\x00\x00\xff\x01'), ('createFCP', dict([('fileDescriptor', b'A!'), ('fileID', b'o\xad'), ('securityAttributesReferenced', b'\n'), ('efFileSize', b'\x04'), ('shortEFID', b'\x18'), ('proprietaryEFInfo', dict([('fillPattern', b'\x00')]))])), ('fillFileOffset', 3), ('fillFileContent', b'\x02'), ('createFCP', dict([('fileDescriptor', b'B!\x00\x04'), ('fileID', b'o\xb7'), ('securityAttributesReferenced', b'\n'), ('efFileSize', b'\x04'), ('shortEFID', b'\x08')])), ('fillFileContent', b'\x19\xf1\xff\x01'), ('createFCP', dict([('fileDescriptor', b'A!'), ('fileID', b'o\xc4'), ('securityAttributesReferenced', b'\x05'), ('efFileSize', b'\x80'), ('shortEFID', b''), ('proprietaryEFInfo', dict([('specialFileInformation', b'\x80')]))])), ('createFCP', dict([('fileDescriptor', b'A!'), ('fileID', b'o\xe3'), ('securityAttributesReferenced', b'\x05'), ('efFileSize', b'\x12'), ('shortEFID', b'\xf0'), ('proprietaryEFInfo', dict([('specialFileInformation', b'\x80')]))])), ('fillFileOffset', 15), ('fillFileContent', b'\x00\x00\x01'), ('createFCP', dict([('fileDescriptor', b'A!'), ('fileID', b'o\xe4'), ('securityAttributesReferenced', b'\x05'), ('efFileSize', b'P'), ('shortEFID', b'\xc0'), ('proprietaryEFInfo', dict([('specialFileInformation', b'\x80')]))]))]])]))
+    altUsimValue = CHOICE(name=u'altUsimValue', mode=MODE_VALUE, typeref=ASN1RefType(('PEDefinitions', 'ProfileElement')))
+    altUsimValue._val = (u'genericFileManagement', dict([(u'gfm-header', dict([(u'mandated', 0), (u'identification', 4)])), (u'fileManagementCMD', [[(u'createFCP', dict([(u'fileDescriptor', b'x!'), (u'fileID', b'\x7f\xf1'), (u'dfName', b'\xa0\x00\x00\x00\x87\x10\x02\xff3\xff\x01\x89\x00\x00\x01\x00'), (u'securityAttributesReferenced', b'\n'), (u'pinStatusTemplateDO', b'\x01\x81\n')])), (u'createFCP', dict([(u'fileDescriptor', b'A!'), (u'fileID', b'o\x07'), (u'securityAttributesReferenced', b'\x02'), (u'efFileSize', b'\t'), (u'shortEFID', b'8')])), (u'fillFileContent', b'\x08)C\x01\x914\x87ge'), (u'createFCP', dict([(u'fileDescriptor', b'B!\x00%'), (u'fileID', b'o\x06'), (u'securityAttributesReferenced', b'\n'), (u'shortEFID', b'\xb8'), (u'linkPath', b'/\x06')])), (u'createFCP', dict([(u'fileDescriptor', b'A!'), (u'fileID', b'o\x08'), (u'securityAttributesReferenced', b'\x05'), (u'efFileSize', b'!'), (u'shortEFID', b'@'), (u'proprietaryEFInfo', dict([(u'specialFileInformation', b'\x80'), (u'fillPattern', b'\x07\xff')]))])), (u'createFCP', dict([(u'fileDescriptor', b'A!'), (u'fileID', b'o\t'), (u'securityAttributesReferenced', b'\x05'), (u'efFileSize', b'!'), (u'shortEFID', b'H'), (u'proprietaryEFInfo', dict([(u'specialFileInformation', b'\x80'), (u'fillPattern', b'\x07\xff')]))])), (u'createFCP', dict([(u'fileDescriptor', b'A!'), (u'fileID', b'o1'), (u'securityAttributesReferenced', b'\x02'), (u'efFileSize', b'\x01'), (u'shortEFID', b'\x90'), (u'proprietaryEFInfo', dict([(u'specialFileInformation', b'\x00'), (u'fillPattern', b'\n')]))])), (u'createFCP', dict([(u'fileDescriptor', b'A!'), (u'fileID', b'o8'), (u'securityAttributesReferenced', b'\x02'), (u'efFileSize', b'\x0e'), (u'shortEFID', b' ')])), (u'fillFileContent', b'\n.\x17\x8c\xe72\x04\x00\x00\x00\x00\x00\x00'), (u'createFCP', dict([(u'fileDescriptor', b'B!\x00\x1a'), (u'fileID', b'o;'), (u'securityAttributesReferenced', b'\x08'), (u'efFileSize', b'\x02\x08'), (u'shortEFID', b''), (u'proprietaryEFInfo', dict([(u'fillPattern', b'\x00\xff')]))])), (u'createFCP', dict([(u'fileDescriptor', b'B!\x00\xb0'), (u'fileID', b'o<'), (u'securityAttributesReferenced', b'\x05'), (u'efFileSize', b'\x06\xe0'), (u'shortEFID', b''), (u'proprietaryEFInfo', dict([(u'fillPattern', b'\x00\xff')]))])), (u'createFCP', dict([(u'fileDescriptor', b'B!\x00&'), (u'fileID', b'oB'), (u'securityAttributesReferenced', b'\x05'), (u'efFileSize', b'&'), (u'shortEFID', b'')])), (u'createFCP', dict([(u'fileDescriptor', b'A!'), (u'fileID', b'oC'), (u'securityAttributesReferenced', b'\x05'), (u'efFileSize', b'\x02'), (u'shortEFID', b''), (u'proprietaryEFInfo', dict([(u'specialFileInformation', b'\x80')]))])), (u'createFCP', dict([(u'fileDescriptor', b'A!'), (u'fileID', b'oF'), (u'securityAttributesReferenced', b'o\x06\n'), (u'efFileSize', b'\x11'), (u'shortEFID', b'')])), (u'fillFileContent', b'\x02SIMalliance'), (u'createFCP', dict([(u'fileDescriptor', b'A!'), (u'fileID', b'oV'), (u'securityAttributesReferenced', b'\x08'), (u'efFileSize', b'\x01'), (u'shortEFID', b'(')])), (u'fillFileContent', b'\x00'), (u'createFCP', dict([(u'fileDescriptor', b'A!'), (u'fileID', b'o['), (u'securityAttributesReferenced', b'\x05'), (u'efFileSize', b'\x06'), (u'shortEFID', b'x'), (u'proprietaryEFInfo', dict([(u'specialFileInformation', b'\x80'), (u'repeatPattern', b'\xf0\x00\x00')]))])), (u'createFCP', dict([(u'fileDescriptor', b'A!'), (u'fileID', b'o\\'), (u'securityAttributesReferenced', b'\x02'), (u'efFileSize', b'\x03'), (u'shortEFID', b'\x80'), (u'proprietaryEFInfo', dict([(u'specialFileInformation', b'\x80')]))])), (u'createFCP', dict([(u'fileDescriptor', b'A!'), (u'fileID', b'os'), (u'securityAttributesReferenced', b'\x05'), (u'efFileSize', b'\x0e'), (u'shortEFID', b'`'), (u'proprietaryEFInfo', dict([(u'specialFileInformation', b'\x80')]))])), (u'fillFileOffset', 7), (u'fillFileContent', b'\x00\xf1\x10\x00\x00\xff\x01'), (u'createFCP', dict([(u'fileDescriptor', b'A!'), (u'fileID', b'ox'), (u'securityAttributesReferenced', b'\x02'), (u'efFileSize', b'\x02'), (u'shortEFID', b'0')])), (u'fillFileContent', b'\x00@'), (u'createFCP', dict([(u'fileDescriptor', b'A!'), (u'fileID', b'o{'), (u'securityAttributesReferenced', b'\x05'), (u'efFileSize', b'\x0c'), (u'shortEFID', b'h')])), (u'createFCP', dict([(u'fileDescriptor', b'A!'), (u'fileID', b'o~'), (u'securityAttributesReferenced', b'\x05'), (u'efFileSize', b'\x0b'), (u'shortEFID', b'X'), (u'proprietaryEFInfo', dict([(u'specialFileInformation', b'\x80')]))])), (u'fillFileOffset', 7), (u'fillFileContent', b'\x00\x00\xff\x01'), (u'createFCP', dict([(u'fileDescriptor', b'A!'), (u'fileID', b'o\xad'), (u'securityAttributesReferenced', b'\n'), (u'efFileSize', b'\x04'), (u'shortEFID', b'\x18'), (u'proprietaryEFInfo', dict([(u'fillPattern', b'\x00')]))])), (u'fillFileOffset', 3), (u'fillFileContent', b'\x02'), (u'createFCP', dict([(u'fileDescriptor', b'B!\x00\x04'), (u'fileID', b'o\xb7'), (u'securityAttributesReferenced', b'\n'), (u'efFileSize', b'\x04'), (u'shortEFID', b'\x08')])), (u'fillFileContent', b'\x19\xf1\xff\x01'), (u'createFCP', dict([(u'fileDescriptor', b'A!'), (u'fileID', b'o\xc4'), (u'securityAttributesReferenced', b'\x05'), (u'efFileSize', b'\x80'), (u'shortEFID', b''), (u'proprietaryEFInfo', dict([(u'specialFileInformation', b'\x80')]))])), (u'createFCP', dict([(u'fileDescriptor', b'A!'), (u'fileID', b'o\xe3'), (u'securityAttributesReferenced', b'\x05'), (u'efFileSize', b'\x12'), (u'shortEFID', b'\xf0'), (u'proprietaryEFInfo', dict([(u'specialFileInformation', b'\x80')]))])), (u'fillFileOffset', 15), (u'fillFileContent', b'\x00\x00\x01'), (u'createFCP', dict([(u'fileDescriptor', b'A!'), (u'fileID', b'o\xe4'), (u'securityAttributesReferenced', b'\x05'), (u'efFileSize', b'P'), (u'shortEFID', b'\xc0'), (u'proprietaryEFInfo', dict([(u'specialFileInformation', b'\x80')]))]))]])]))
     
     #-----< usimPin >-----#
-    usimPin = CHOICE(name='usimPin', mode=MODE_VALUE, typeref=ASN1RefType(('PEDefinitions', 'ProfileElement')))
-    usimPin._val = ('pinCodes', dict([('pin-Header', dict([('mandated', 0), ('identification', 5)])), ('pinCodes', ('pinconfig', [dict([('keyReference', 129), ('pinValue', b'1234\xff\xff\xff\xff'), ('unblockingPINReference', 129), ('pinAttributes', 1), ('maxNumOfAttemps-retryNumLeft', 34)])]))]))
+    usimPin = CHOICE(name=u'usimPin', mode=MODE_VALUE, typeref=ASN1RefType(('PEDefinitions', 'ProfileElement')))
+    usimPin._val = (u'pinCodes', dict([(u'pin-Header', dict([(u'mandated', 0), (u'identification', 5)])), (u'pinCodes', (u'pinconfig', [dict([(u'keyReference', 129), (u'pinValue', b'1234\xff\xff\xff\xff'), (u'unblockingPINReference', 129), (u'pinAttributes', 1), (u'maxNumOfAttemps-retryNumLeft', 34)])]))]))
     
     #-----< akaMilenage >-----#
-    akaMilenage = CHOICE(name='akaMilenage', mode=MODE_VALUE, typeref=ASN1RefType(('PEDefinitions', 'ProfileElement')))
-    akaMilenage._val = ('akaParameter', dict([('aka-header', dict([('mandated', 0), ('identification', 6)])), ('algoConfiguration', ('algoParameter', dict([('algorithmID', 1), ('algorithmOptions', b'\x01'), ('key', b'\x00\x01\x02\x03\x04\x05\x06\x07\x08\t\n\x0b\x0c\r\x0e\x0f'), ('opc', b'\x01\x02\x03\x04\x05\x06\x07\x08\t\n\x0b\x0c\r\x0e\x0f\x00'), ('authCounterMax', b'\x01\x02\x03')])))]))
+    akaMilenage = CHOICE(name=u'akaMilenage', mode=MODE_VALUE, typeref=ASN1RefType(('PEDefinitions', 'ProfileElement')))
+    akaMilenage._val = (u'akaParameter', dict([(u'aka-header', dict([(u'mandated', 0), (u'identification', 6)])), (u'algoConfiguration', (u'algoParameter', dict([(u'algorithmID', 1), (u'algorithmOptions', b'\x01'), (u'key', b'\x00\x01\x02\x03\x04\x05\x06\x07\x08\t\n\x0b\x0c\r\x0e\x0f'), (u'opc', b'\x01\x02\x03\x04\x05\x06\x07\x08\t\n\x0b\x0c\r\x0e\x0f\x00'), (u'authCounterMax', b'\x01\x02\x03')])))]))
     
     #-----< cdmaParam >-----#
-    cdmaParam = CHOICE(name='cdmaParam', mode=MODE_VALUE, typeref=ASN1RefType(('PEDefinitions', 'ProfileElement')))
-    cdmaParam._val = ('cdmaParameter', dict([('cdma-header', dict([('mandated', 0), ('identification', 15)])), ('authenticationKey', b'\x01\x02\x03\x04\x05\x06\x07\x08'), ('ssd', b'\x01#Eg\x89\xab\xcd\xef\x01#Eg\x89\xab\xcd\xef'), ('hrpdAccessAuthenticationData', b'\x82\x1aB\n\x82\x1aB\n\x82\x1aB\n\x82\x1aB\n\x80'), ('simpleIPAuthenticationData', b'0\x82\x1aB\n\x82\x1aB\n\x82\x1aB\n\x82\x1aB\n\x80\xfd\x11U55e\x11U55e\x11U55e\x11U55e\x11U55e\x11U55e\x10\x90\x9c\x82\x88\x82\x9c\x82\x88\x82'), ('mobileIPAuthenticationData', b"0\x81\x89\x91\x99\xa1\xa9\xb1\xb9\xc1\xc9\x81\x89\x91\x99\xa1\xa9\xb4\x0c\x0c\x0cLL\x8c\x8c\xcc\xcd\r\rMM\x8d\x8d\xcd\xc7\xe8\x8a\xa9\xa9\xab(\x8a\xa9\xa9\xab(\x8a\xa9\xa9\xab(\x8a\xa9\xa9\xab(\x8a\xa9\xa9\xab(\x8a\xa9\xa9\xab(\x88NADANADA$' \xa2 \xa7 \xa2 \xfd\x11U55e\x11U55e\x11U55e\x11U55e\x11U55e\x11U55e\x10")]))
+    cdmaParam = CHOICE(name=u'cdmaParam', mode=MODE_VALUE, typeref=ASN1RefType(('PEDefinitions', 'ProfileElement')))
+    cdmaParam._val = (u'cdmaParameter', dict([(u'cdma-header', dict([(u'mandated', 0), (u'identification', 15)])), (u'authenticationKey', b'\x01\x02\x03\x04\x05\x06\x07\x08'), (u'ssd', b'\x01#Eg\x89\xab\xcd\xef\x01#Eg\x89\xab\xcd\xef'), (u'hrpdAccessAuthenticationData', b'\x82\x1aB\n\x82\x1aB\n\x82\x1aB\n\x82\x1aB\n\x80'), (u'simpleIPAuthenticationData', b'0\x82\x1aB\n\x82\x1aB\n\x82\x1aB\n\x82\x1aB\n\x80\xfd\x11U55e\x11U55e\x11U55e\x11U55e\x11U55e\x11U55e\x10\x90\x9c\x82\x88\x82\x9c\x82\x88\x82'), (u'mobileIPAuthenticationData', b"0\x81\x89\x91\x99\xa1\xa9\xb1\xb9\xc1\xc9\x81\x89\x91\x99\xa1\xa9\xb4\x0c\x0c\x0cLL\x8c\x8c\xcc\xcd\r\rMM\x8d\x8d\xcd\xc7\xe8\x8a\xa9\xa9\xab(\x8a\xa9\xa9\xab(\x8a\xa9\xa9\xab(\x8a\xa9\xa9\xab(\x8a\xa9\xa9\xab(\x8a\xa9\xa9\xab(\x88NADANADA$' \xa2 \xa7 \xa2 \xfd\x11U55e\x11U55e\x11U55e\x11U55e\x11U55e\x11U55e\x10")]))
     
     #-----< mnoSdValue >-----#
-    mnoSdValue = CHOICE(name='mnoSdValue', mode=MODE_VALUE, typeref=ASN1RefType(('PEDefinitions', 'ProfileElement')))
-    mnoSdValue._val = ('securityDomain', dict([('sd-Header', dict([('mandated', 0), ('identification', 7)])), ('instance', dict([('applicationLoadPackageAID', b'\xa0\x00\x00\x01QSP'), ('classAID', b'\xa0\x00\x00\x01QSPA'), ('instanceAID', b'\xa0\x00\x00\x01Q\x00\x00\x00'), ('applicationPrivileges', b'\x82\xdc\x00'), ('lifeCycleState', b'\x0f'), ('applicationSpecificParametersC9', b'\x81\x02\x80\x00\x82\x01\xf0\x87\x01\xf0'), ('applicationParameters', dict([('uiccToolkitApplicationSpecificParametersField', b'\x01\x00\x00\x01\x00\x00\x00\x02\x01\x12\x03\xb2\x01\x00\x00')]))])), ('keyList', [dict([('keyUsageQualifier', b'8'), ('keyAccess', b'\x00'), ('keyIdentifier', b'\x01'), ('keyVersionNumber', b'\x01'), ('keyCompontents', [dict([('keyType', b'\x80'), ('keyData', b'\x11"3DUfw\x88\x99\xaa\xbb\xcc\xdd\xee\xff\x10')])])]), dict([('keyUsageQualifier', b'4'), ('keyAccess', b'\x00'), ('keyIdentifier', b'\x02'), ('keyVersionNumber', b'\x01'), ('keyCompontents', [dict([('keyType', b'\x80'), ('keyData', b'\x11"3DUfw\x88\x99\xaa\xbb\xcc\xdd\xee\xff\x10')])])]), dict([('keyUsageQualifier', b'\xc8'), ('keyAccess', b'\x00'), ('keyIdentifier', b'\x03'), ('keyVersionNumber', b'\x01'), ('keyCompontents', [dict([('keyType', b'\x80'), ('keyData', b'\x11"3DUfw\x88\x99\xaa\xbb\xcc\xdd\xee\xff\x10')])])])])]))
+    mnoSdValue = CHOICE(name=u'mnoSdValue', mode=MODE_VALUE, typeref=ASN1RefType(('PEDefinitions', 'ProfileElement')))
+    mnoSdValue._val = (u'securityDomain', dict([(u'sd-Header', dict([(u'mandated', 0), (u'identification', 7)])), (u'instance', dict([(u'applicationLoadPackageAID', b'\xa0\x00\x00\x01QSP'), (u'classAID', b'\xa0\x00\x00\x01QSPA'), (u'instanceAID', b'\xa0\x00\x00\x01Q\x00\x00\x00'), (u'applicationPrivileges', b'\x82\xdc\x00'), (u'lifeCycleState', b'\x0f'), (u'applicationSpecificParametersC9', b'\x81\x02\x80\x00\x82\x01\xf0\x87\x01\xf0'), (u'applicationParameters', dict([(u'uiccToolkitApplicationSpecificParametersField', b'\x01\x00\x00\x01\x00\x00\x00\x02\x01\x12\x03\xb2\x01\x00\x00')]))])), (u'keyList', [dict([(u'keyUsageQualifier', b'8'), (u'keyAccess', b'\x00'), (u'keyIdentifier', b'\x01'), (u'keyVersionNumber', b'\x01'), (u'keyCompontents', [dict([(u'keyType', b'\x80'), (u'keyData', b'\x11"3DUfw\x88\x99\xaa\xbb\xcc\xdd\xee\xff\x10')])])]), dict([(u'keyUsageQualifier', b'4'), (u'keyAccess', b'\x00'), (u'keyIdentifier', b'\x02'), (u'keyVersionNumber', b'\x01'), (u'keyCompontents', [dict([(u'keyType', b'\x80'), (u'keyData', b'\x11"3DUfw\x88\x99\xaa\xbb\xcc\xdd\xee\xff\x10')])])]), dict([(u'keyUsageQualifier', b'\xc8'), (u'keyAccess', b'\x00'), (u'keyIdentifier', b'\x03'), (u'keyVersionNumber', b'\x01'), (u'keyCompontents', [dict([(u'keyType', b'\x80'), (u'keyData', b'\x11"3DUfw\x88\x99\xaa\xbb\xcc\xdd\xee\xff\x10')])])])])]))
     
     #-----< mnoSdCompValue >-----#
-    mnoSdCompValue = CHOICE(name='mnoSdCompValue', mode=MODE_VALUE, typeref=ASN1RefType(('PEDefinitions', 'ProfileElement')))
-    mnoSdCompValue._val = ('securityDomain', dict([('sd-Header', dict([('mandated', 0), ('identification', 7)])), ('instance', dict([('applicationLoadPackageAID', b'\xa0\x00\x00\x01QSP'), ('classAID', b'\xa0\x00\x00\x01QSPA'), ('instanceAID', b'\xa0\x00\x00\x01Q\x00\x00\x00'), ('applicationPrivileges', b'\x82\xfc\x80'), ('lifeCycleState', b'\x0f'), ('applicationSpecificParametersC9', b'\x81\x02\x80\x00\x81\x02\x03p\x82\x01\xf0\x87\x01\xf0'), ('applicationParameters', dict([('uiccToolkitApplicationSpecificParametersField', b'\x01\x00\x00\x01\x00\x00\x00\x02\x01\x12\x03\xb2\x01\x00\x00')]))])), ('keyList', [dict([('keyUsageQualifier', b'8'), ('keyAccess', b'\x00'), ('keyIdentifier', b'\x01'), ('keyVersionNumber', b'\x01'), ('keyCompontents', [dict([('keyType', b'\x80'), ('keyData', b'\x11"3DUfw\x88\x99\xaa\xbb\xcc\xdd\xee\xff\x10')])])]), dict([('keyUsageQualifier', b'4'), ('keyAccess', b'\x00'), ('keyIdentifier', b'\x02'), ('keyVersionNumber', b'\x01'), ('keyCompontents', [dict([('keyType', b'\x80'), ('keyData', b'\x11"3DUfw\x88\x99\xaa\xbb\xcc\xdd\xee\xff\x10')])])]), dict([('keyUsageQualifier', b'\xc8'), ('keyAccess', b'\x00'), ('keyIdentifier', b'\x03'), ('keyVersionNumber', b'\x01'), ('keyCompontents', [dict([('keyType', b'\x80'), ('keyData', b'\x11"3DUfw\x88\x99\xaa\xbb\xcc\xdd\xee\xff\x10')])])]), dict([('keyUsageQualifier', b'8'), ('keyAccess', b'\x00'), ('keyIdentifier', b'\x01'), ('keyVersionNumber', b'0'), ('keyCompontents', [dict([('keyType', b'\x88'), ('keyData', b'\x11\x11\x11\x11\x03\x03\x03\x03\x11\x11\x11\x11\x03\x03\x03\x03')])])]), dict([('keyUsageQualifier', b'4'), ('keyAccess', b'\x00'), ('keyIdentifier', b'\x02'), ('keyVersionNumber', b'0'), ('keyCompontents', [dict([('keyType', b'\x88'), ('keyData', b'""""\x03\x03\x03\x03""""\x03\x03\x03\x03')])])]), dict([('keyUsageQualifier', b'\xc8'), ('keyAccess', b'\x00'), ('keyIdentifier', b'\x03'), ('keyVersionNumber', b'0'), ('keyCompontents', [dict([('keyType', b'\x88'), ('keyData', b'3333\x03\x03\x03\x033333\x03\x03\x03\x03')])])]), dict([('keyUsageQualifier', b'\x81'), ('keyAccess', b'\x01'), ('keyIdentifier', b'\x01'), ('keyVersionNumber', b'p'), ('keyCompontents', [dict([('keyType', b'\x88'), ('keyData', b'\xcd\xfeV\xb7\xb7/\xaej\x04sA\xf0\x03\xd7\xa4\x8d')])])]), dict([('keyUsageQualifier', b'D'), ('keyAccess', b'\x01'), ('keyIdentifier', b'\x01'), ('keyVersionNumber', b'q'), ('keyCompontents', [dict([('keyType', b'\x88'), ('keyData', b'\x11\x12\x13\x14!"#$1234ABCD')])])])]), ('sdPersoData', [b'\x00p\x08B\x06`abcde', b'\x00p\nE\x08\x144\x12\x80\x144\x12\x80'])]))
+    mnoSdCompValue = CHOICE(name=u'mnoSdCompValue', mode=MODE_VALUE, typeref=ASN1RefType(('PEDefinitions', 'ProfileElement')))
+    mnoSdCompValue._val = (u'securityDomain', dict([(u'sd-Header', dict([(u'mandated', 0), (u'identification', 7)])), (u'instance', dict([(u'applicationLoadPackageAID', b'\xa0\x00\x00\x01QSP'), (u'classAID', b'\xa0\x00\x00\x01QSPA'), (u'instanceAID', b'\xa0\x00\x00\x01Q\x00\x00\x00'), (u'applicationPrivileges', b'\x82\xfc\x80'), (u'lifeCycleState', b'\x0f'), (u'applicationSpecificParametersC9', b'\x81\x02\x80\x00\x81\x02\x03p\x82\x01\xf0\x87\x01\xf0'), (u'applicationParameters', dict([(u'uiccToolkitApplicationSpecificParametersField', b'\x01\x00\x00\x01\x00\x00\x00\x02\x01\x12\x03\xb2\x01\x00\x00')]))])), (u'keyList', [dict([(u'keyUsageQualifier', b'8'), (u'keyAccess', b'\x00'), (u'keyIdentifier', b'\x01'), (u'keyVersionNumber', b'\x01'), (u'keyCompontents', [dict([(u'keyType', b'\x80'), (u'keyData', b'\x11"3DUfw\x88\x99\xaa\xbb\xcc\xdd\xee\xff\x10')])])]), dict([(u'keyUsageQualifier', b'4'), (u'keyAccess', b'\x00'), (u'keyIdentifier', b'\x02'), (u'keyVersionNumber', b'\x01'), (u'keyCompontents', [dict([(u'keyType', b'\x80'), (u'keyData', b'\x11"3DUfw\x88\x99\xaa\xbb\xcc\xdd\xee\xff\x10')])])]), dict([(u'keyUsageQualifier', b'\xc8'), (u'keyAccess', b'\x00'), (u'keyIdentifier', b'\x03'), (u'keyVersionNumber', b'\x01'), (u'keyCompontents', [dict([(u'keyType', b'\x80'), (u'keyData', b'\x11"3DUfw\x88\x99\xaa\xbb\xcc\xdd\xee\xff\x10')])])]), dict([(u'keyUsageQualifier', b'8'), (u'keyAccess', b'\x00'), (u'keyIdentifier', b'\x01'), (u'keyVersionNumber', b'0'), (u'keyCompontents', [dict([(u'keyType', b'\x88'), (u'keyData', b'\x11\x11\x11\x11\x03\x03\x03\x03\x11\x11\x11\x11\x03\x03\x03\x03')])])]), dict([(u'keyUsageQualifier', b'4'), (u'keyAccess', b'\x00'), (u'keyIdentifier', b'\x02'), (u'keyVersionNumber', b'0'), (u'keyCompontents', [dict([(u'keyType', b'\x88'), (u'keyData', b'""""\x03\x03\x03\x03""""\x03\x03\x03\x03')])])]), dict([(u'keyUsageQualifier', b'\xc8'), (u'keyAccess', b'\x00'), (u'keyIdentifier', b'\x03'), (u'keyVersionNumber', b'0'), (u'keyCompontents', [dict([(u'keyType', b'\x88'), (u'keyData', b'3333\x03\x03\x03\x033333\x03\x03\x03\x03')])])]), dict([(u'keyUsageQualifier', b'\x81'), (u'keyAccess', b'\x01'), (u'keyIdentifier', b'\x01'), (u'keyVersionNumber', b'p'), (u'keyCompontents', [dict([(u'keyType', b'\x88'), (u'keyData', b'\xcd\xfeV\xb7\xb7/\xaej\x04sA\xf0\x03\xd7\xa4\x8d')])])]), dict([(u'keyUsageQualifier', b'D'), (u'keyAccess', b'\x01'), (u'keyIdentifier', b'\x01'), (u'keyVersionNumber', b'q'), (u'keyCompontents', [dict([(u'keyType', b'\x88'), (u'keyData', b'\x11\x12\x13\x14!"#$1234ABCD')])])])]), (u'sdPersoData', [b'\x00p\x08B\x06`abcde', b'\x00p\nE\x08\x144\x12\x80\x144\x12\x80'])]))
     
     #-----< ssdValue >-----#
-    ssdValue = CHOICE(name='ssdValue', mode=MODE_VALUE, typeref=ASN1RefType(('PEDefinitions', 'ProfileElement')))
-    ssdValue._val = ('securityDomain', dict([('sd-Header', dict([('mandated', 0), ('identification', 8)])), ('instance', dict([('applicationLoadPackageAID', b'\xa0\x00\x00\x01QSP'), ('classAID', b'\xa0\x00\x00\x01QSPA'), ('instanceAID', b'\xa0\x00\x00\x05Y\x10\x10\x01\x02sdValue'), ('applicationPrivileges', b'\x80\x80\x00'), ('lifeCycleState', b'\x0f'), ('applicationSpecificParametersC9', b'\x81\x02\x80\x00\x82\x01\xf0'), ('applicationParameters', dict([('uiccToolkitApplicationSpecificParametersField', b'\x01\x00\x00\x01\x00\x00\x00\x02\x01\x12\x03lue\x00')]))])), ('keyList', [dict([('keyUsageQualifier', b'8'), ('keyAccess', b'\x00'), ('keyIdentifier', b'\x01'), ('keyVersionNumber', b'\x01'), ('keyCompontents', [dict([('keyType', b'\x80'), ('keyData', b'\x88\x11"3DUfw\x88\x11"3DUfw')])])]), dict([('keyUsageQualifier', b'4'), ('keyIdentifier', b'\x02'), ('keyVersionNumber', b'\x01'), ('keyCompontents', [dict([('keyType', b'\x80'), ('keyData', b'\x88\x11"3DUfw\x88\x11"3DUfw')])])]), dict([('keyUsageQualifier', b'\xc8'), ('keyIdentifier', b'\x03'), ('keyVersionNumber', b'\x01'), ('keyCompontents', [dict([('keyType', b'\x80'), ('keyData', b'\x88\x11"3DUfw\x88\x11"3DUfw')])])])])]))
+    ssdValue = CHOICE(name=u'ssdValue', mode=MODE_VALUE, typeref=ASN1RefType(('PEDefinitions', 'ProfileElement')))
+    ssdValue._val = (u'securityDomain', dict([(u'sd-Header', dict([(u'mandated', 0), (u'identification', 8)])), (u'instance', dict([(u'applicationLoadPackageAID', b'\xa0\x00\x00\x01QSP'), (u'classAID', b'\xa0\x00\x00\x01QSPA'), (u'instanceAID', b'\xa0\x00\x00\x05Y\x10\x10\x01\x02sdValue'), (u'applicationPrivileges', b'\x80\x80\x00'), (u'lifeCycleState', b'\x0f'), (u'applicationSpecificParametersC9', b'\x81\x02\x80\x00\x82\x01\xf0'), (u'applicationParameters', dict([(u'uiccToolkitApplicationSpecificParametersField', b'\x01\x00\x00\x01\x00\x00\x00\x02\x01\x12\x03lue\x00')]))])), (u'keyList', [dict([(u'keyUsageQualifier', b'8'), (u'keyAccess', b'\x00'), (u'keyIdentifier', b'\x01'), (u'keyVersionNumber', b'\x01'), (u'keyCompontents', [dict([(u'keyType', b'\x80'), (u'keyData', b'\x88\x11"3DUfw\x88\x11"3DUfw')])])]), dict([(u'keyUsageQualifier', b'4'), (u'keyIdentifier', b'\x02'), (u'keyVersionNumber', b'\x01'), (u'keyCompontents', [dict([(u'keyType', b'\x80'), (u'keyData', b'\x88\x11"3DUfw\x88\x11"3DUfw')])])]), dict([(u'keyUsageQualifier', b'\xc8'), (u'keyIdentifier', b'\x03'), (u'keyVersionNumber', b'\x01'), (u'keyCompontents', [dict([(u'keyType', b'\x80'), (u'keyData', b'\x88\x11"3DUfw\x88\x11"3DUfw')])])])])]))
     
     #-----< applet1 >-----#
-    applet1 = CHOICE(name='applet1', mode=MODE_VALUE, typeref=ASN1RefType(('PEDefinitions', 'ProfileElement')))
-    applet1._val = ('application', dict([('app-Header', dict([('mandated', 0), ('identification', 9)])), ('loadBlock', dict([('loadPackageAID', b'\xa0\x00\x00\x05Y\x10\x10\x01'), ('loadBlockObject', b'\x01\x00.\xde\xca\xff\xed\x02\x02\x04\x00\x01\x08\xa0\x00\x00\x05Y\x10\x10\x01\x1bcom/gsma/euicc/test/applet1\x02\x00!\x00.\x00!\x00\x0f\x00;\x00*\x00!\x00f\x00\n\x00\x0e\x00\x00\x00\x8a\x04\x0f\x00\x00\x00\x00\x00\x00\x04\x01\x00\x04\x00;\x04\x03\x01\x07\xa0\x00\x00\x00b\x01\x01\x00\x01\x10\xa0\x00\x00\x00\t\x00\x05\xff\xff\xff\xff\x89\x12\x00\x00\x00\x01\x01\x10\xa0\x00\x00\x00\x87\x10\x05\xff\xff\xff\xff\x89\x13 \x00\x00\x00\x01\x07\xa0\x00\x00\x00b\x00\x01\x03\x00\x0f\x01\x0b\xa0\x00\x00\x05Y\x10\x10\x01\x11"3\x00\x08\x06\x00!\x00\x00D\x80\x03\x00\xff\x00\x05\x04\x00\x00\x003\xff\xff\x000\x00@\x81\x07\x00\x82\x00\x00\x80\x02\x00\x81\x08\x01\x08\x07\x00f\x00\x01\x10\x18\x8c\x00\x00z\x042\x8f\x00\x01=\x8c\x00\x02.\x18\x1d%)\x04\x16\x04a\x08\x1b\x8b\x00\x03p\x0c\x1b\x18\x1d\x04A\x16\x04\x8b\x00\x04\x1b\x8c\x00\x05z\x00 z\x020\x1e\x04k\x07\x19g\x04\x18w\x01w\x02!\x1du\x00\x16\x00\x01\x00\x02\x00\t\x8d\x00\x06-\x1a\x04\x8e\x02\x00\x07\x17p\x02z\x02\x10\x8d\x00\x08\x05\x8e\x02\x00\t\x00z\x08\x00\n\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x05\x00*\x00\n\x06\x80\x03\x00\x01\x00\x02\x00\x06\x00\x00\x01\x03\x80\x03\x01\x03\x80\x03\x02\x06\x00\x00Z\x06\x81\x0f\x00\x01\x81\x04\x00\x06\x81\x10\x00\x01\x81\t\x00\t\x00\x0e\x00\x00\x00\n\x05\x06\x04\x0e\x0c\x04 \x07\t\x05\x0b\x00\x8a\x01\x00\x01\x00\x02\x04\x00\x00\x00\x06\x81\x07\x82\x00\x80\x02\x81\x08\x00\x81\x00\x01\x00\x16\x00\x05\x00\x00\x00\x00\x01\t\x00\x08\x00\x18\x00&\x00\x00\x00\x00\x07\x01\x000\x00#\x00\x01\x00\x00\x00\x00\x05\x01\x003\x00\'\x00\x0b\x00\x00\x00\x00\x08\x01\x00@\x00.\x00\x18\x00\x00\x00\x00\xff\x02\x00Z\x00\x16\x00\n\x00\x00\x00\x00\x00\n\x00\x16\xff\xff\x00\x16\x00\x16\x00\x18\x00\x16\x00\x1b\xff\xff\x00\x1f\xff\xff\x01\x10\x04\xb41\x05h\x10@\x05h\x10\x90\x06h\x00\xa1\x0bh\x00ch\x00 \x02A')])), ('instanceList', [dict([('applicationLoadPackageAID', b'\xa0\x00\x00\x05Y\x10\x10\x01'), ('classAID', b'\xa0\x00\x00\x05Y\x10\x10\x01\x11"3'), ('instanceAID', b'\xa0\x00\x00\x05Y\x10\x10\x01\x11"3\x01'), ('applicationPrivileges', b'\x00\x00\x00'), ('applicationSpecificParametersC9', b'\x00'), ('applicationParameters', dict([('uiccToolkitApplicationSpecificParametersField', b'\x01\x00\x00\x00\x00\x00\x03\x11"3\x00')]))])])]))
+    applet1 = CHOICE(name=u'applet1', mode=MODE_VALUE, typeref=ASN1RefType(('PEDefinitions', 'ProfileElement')))
+    applet1._val = (u'application', dict([(u'app-Header', dict([(u'mandated', 0), (u'identification', 9)])), (u'loadBlock', dict([(u'loadPackageAID', b'\xa0\x00\x00\x05Y\x10\x10\x01'), (u'loadBlockObject', b'\x01\x00.\xde\xca\xff\xed\x02\x02\x04\x00\x01\x08\xa0\x00\x00\x05Y\x10\x10\x01\x1bcom/gsma/euicc/test/applet1\x02\x00!\x00.\x00!\x00\x0f\x00;\x00*\x00!\x00f\x00\n\x00\x0e\x00\x00\x00\x8a\x04\x0f\x00\x00\x00\x00\x00\x00\x04\x01\x00\x04\x00;\x04\x03\x01\x07\xa0\x00\x00\x00b\x01\x01\x00\x01\x10\xa0\x00\x00\x00\t\x00\x05\xff\xff\xff\xff\x89\x12\x00\x00\x00\x01\x01\x10\xa0\x00\x00\x00\x87\x10\x05\xff\xff\xff\xff\x89\x13 \x00\x00\x00\x01\x07\xa0\x00\x00\x00b\x00\x01\x03\x00\x0f\x01\x0b\xa0\x00\x00\x05Y\x10\x10\x01\x11"3\x00\x08\x06\x00!\x00\x00D\x80\x03\x00\xff\x00\x05\x04\x00\x00\x003\xff\xff\x000\x00@\x81\x07\x00\x82\x00\x00\x80\x02\x00\x81\x08\x01\x08\x07\x00f\x00\x01\x10\x18\x8c\x00\x00z\x042\x8f\x00\x01=\x8c\x00\x02.\x18\x1d%)\x04\x16\x04a\x08\x1b\x8b\x00\x03p\x0c\x1b\x18\x1d\x04A\x16\x04\x8b\x00\x04\x1b\x8c\x00\x05z\x00 z\x020\x1e\x04k\x07\x19g\x04\x18w\x01w\x02!\x1du\x00\x16\x00\x01\x00\x02\x00\t\x8d\x00\x06-\x1a\x04\x8e\x02\x00\x07\x17p\x02z\x02\x10\x8d\x00\x08\x05\x8e\x02\x00\t\x00z\x08\x00\n\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x05\x00*\x00\n\x06\x80\x03\x00\x01\x00\x02\x00\x06\x00\x00\x01\x03\x80\x03\x01\x03\x80\x03\x02\x06\x00\x00Z\x06\x81\x0f\x00\x01\x81\x04\x00\x06\x81\x10\x00\x01\x81\t\x00\t\x00\x0e\x00\x00\x00\n\x05\x06\x04\x0e\x0c\x04 \x07\t\x05\x0b\x00\x8a\x01\x00\x01\x00\x02\x04\x00\x00\x00\x06\x81\x07\x82\x00\x80\x02\x81\x08\x00\x81\x00\x01\x00\x16\x00\x05\x00\x00\x00\x00\x01\t\x00\x08\x00\x18\x00&\x00\x00\x00\x00\x07\x01\x000\x00#\x00\x01\x00\x00\x00\x00\x05\x01\x003\x00\'\x00\x0b\x00\x00\x00\x00\x08\x01\x00@\x00.\x00\x18\x00\x00\x00\x00\xff\x02\x00Z\x00\x16\x00\n\x00\x00\x00\x00\x00\n\x00\x16\xff\xff\x00\x16\x00\x16\x00\x18\x00\x16\x00\x1b\xff\xff\x00\x1f\xff\xff\x01\x10\x04\xb41\x05h\x10@\x05h\x10\x90\x06h\x00\xa1\x0bh\x00ch\x00 \x02A')])), (u'instanceList', [dict([(u'applicationLoadPackageAID', b'\xa0\x00\x00\x05Y\x10\x10\x01'), (u'classAID', b'\xa0\x00\x00\x05Y\x10\x10\x01\x11"3'), (u'instanceAID', b'\xa0\x00\x00\x05Y\x10\x10\x01\x11"3\x01'), (u'applicationPrivileges', b'\x00\x00\x00'), (u'applicationSpecificParametersC9', b'\x00'), (u'applicationParameters', dict([(u'uiccToolkitApplicationSpecificParametersField', b'\x01\x00\x00\x00\x00\x00\x03\x11"3\x00')]))])])]))
     
     #-----< applet2 >-----#
-    applet2 = CHOICE(name='applet2', mode=MODE_VALUE, typeref=ASN1RefType(('PEDefinitions', 'ProfileElement')))
-    applet2._val = ('application', dict([('app-Header', dict([('identification', 10)])), ('loadBlock', dict([('loadPackageAID', b'\xa0\x00\x00\x05Y\x10\x10\x03'), ('loadBlockObject', b'\x01\x00.\xde\xca\xff\xed\x02\x02\x04\x00\x01\x08\xa0\x00\x00\x05Y\x10\x10\x03\x1bcom/gsma/euicc/test/applet3\x02\x00!\x00.\x00!\x00\x0f\x00\x15\x00\x16\x00\x0e\x00/\x00\n\x00\t\x00\x00\x00C\x01\xf4\x00\x00\x00\x00\x00\x00\x02\x01\x00\x04\x00\x15\x02\x03\x01\x07\xa0\x00\x00\x00b\x01\x01\x00\x01\x07\xa0\x00\x00\x00b\x00\x01\x03\x00\x0f\x01\x0b\xa0\x00\x00\x05Y\x10\x10\x03DUf\x00\x08\x06\x00\x0e\x00\x00\x00\x80\x03\x00\xff\x00\x07\x01\x00\x00\x00,\x07\x00/\x00\x01\x10\x18\x8c\x00\x00z\x042\x8f\x00\x01=\x8c\x00\x02.\x18\x1d%)\x04\x16\x04a\x08\x1b\x8b\x00\x03p\x0c\x1b\x18\x1d\x04A\x16\x04\x8b\x00\x04z\x00 z\x08\x00\n\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x05\x00\x16\x00\x05\x06\x80\x03\x00\x01\x00\x02\x00\x06\x00\x00\x01\x03\x80\x03\x01\x03\x80\x03\x02\t\x00\t\x00\x00\x00\x05\x05\x06\x04\x0e\x0c\x0b\x00C\x01\x00\x01\x00\x02\x00\x00\x00\x00\x03\x00\x81\x00\x01\x00\x0c\x00\x05\x00\x00\x00\x00\x01\t\x00\x08\x00\x0e\x00"\x00\x00\x00\x00\x07\x01\x00,\x00\x11\x00\x01\x00\x00\x00\x00\x00\x05\x00\x0c\xff\xff\x00\x0c\x00\x0c\x00\x0e\x01\x10\x04\xb41\x06h\x00\xa1')])), ('instanceList', [dict([('applicationLoadPackageAID', b'\xa0\x00\x00\x05Y\x10\x10\x03'), ('classAID', b'\xa0\x00\x00\x05Y\x10\x10\x03DUf'), ('instanceAID', b'\xa0\x00\x00\x05Y\x10\x10\x03DUf\x01'), ('extraditeSecurityDomainAID', b'\xa0\x00\x00\x05Y\x10\x10\x01\x02sdValue'), ('applicationPrivileges', b'\x00\x00\x00'), ('applicationSpecificParametersC9', b'\x00')])])]))
+    applet2 = CHOICE(name=u'applet2', mode=MODE_VALUE, typeref=ASN1RefType(('PEDefinitions', 'ProfileElement')))
+    applet2._val = (u'application', dict([(u'app-Header', dict([(u'identification', 10)])), (u'loadBlock', dict([(u'loadPackageAID', b'\xa0\x00\x00\x05Y\x10\x10\x03'), (u'loadBlockObject', b'\x01\x00.\xde\xca\xff\xed\x02\x02\x04\x00\x01\x08\xa0\x00\x00\x05Y\x10\x10\x03\x1bcom/gsma/euicc/test/applet3\x02\x00!\x00.\x00!\x00\x0f\x00\x15\x00\x16\x00\x0e\x00/\x00\n\x00\t\x00\x00\x00C\x01\xf4\x00\x00\x00\x00\x00\x00\x02\x01\x00\x04\x00\x15\x02\x03\x01\x07\xa0\x00\x00\x00b\x01\x01\x00\x01\x07\xa0\x00\x00\x00b\x00\x01\x03\x00\x0f\x01\x0b\xa0\x00\x00\x05Y\x10\x10\x03DUf\x00\x08\x06\x00\x0e\x00\x00\x00\x80\x03\x00\xff\x00\x07\x01\x00\x00\x00,\x07\x00/\x00\x01\x10\x18\x8c\x00\x00z\x042\x8f\x00\x01=\x8c\x00\x02.\x18\x1d%)\x04\x16\x04a\x08\x1b\x8b\x00\x03p\x0c\x1b\x18\x1d\x04A\x16\x04\x8b\x00\x04z\x00 z\x08\x00\n\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x05\x00\x16\x00\x05\x06\x80\x03\x00\x01\x00\x02\x00\x06\x00\x00\x01\x03\x80\x03\x01\x03\x80\x03\x02\t\x00\t\x00\x00\x00\x05\x05\x06\x04\x0e\x0c\x0b\x00C\x01\x00\x01\x00\x02\x00\x00\x00\x00\x03\x00\x81\x00\x01\x00\x0c\x00\x05\x00\x00\x00\x00\x01\t\x00\x08\x00\x0e\x00"\x00\x00\x00\x00\x07\x01\x00,\x00\x11\x00\x01\x00\x00\x00\x00\x00\x05\x00\x0c\xff\xff\x00\x0c\x00\x0c\x00\x0e\x01\x10\x04\xb41\x06h\x00\xa1')])), (u'instanceList', [dict([(u'applicationLoadPackageAID', b'\xa0\x00\x00\x05Y\x10\x10\x03'), (u'classAID', b'\xa0\x00\x00\x05Y\x10\x10\x03DUf'), (u'instanceAID', b'\xa0\x00\x00\x05Y\x10\x10\x03DUf\x01'), (u'extraditeSecurityDomainAID', b'\xa0\x00\x00\x05Y\x10\x10\x01\x02sdValue'), (u'applicationPrivileges', b'\x00\x00\x00'), (u'applicationSpecificParametersC9', b'\x00')])])]))
     
     #-----< rfmUicc >-----#
-    rfmUicc = CHOICE(name='rfmUicc', mode=MODE_VALUE, typeref=ASN1RefType(('PEDefinitions', 'ProfileElement')))
-    rfmUicc._val = ('rfm', dict([('rfm-header', dict([('identification', 11)])), ('instanceAID', b'\xa0\x00\x00\x05Y\x10\x10\x00\x01'), ('tarList', [b'\xb0\x00\x00']), ('minimumSecurityLevel', b'\x12'), ('uiccAccessDomain', b'\x00'), ('uiccAdminAccessDomain', b'\x00')]))
+    rfmUicc = CHOICE(name=u'rfmUicc', mode=MODE_VALUE, typeref=ASN1RefType(('PEDefinitions', 'ProfileElement')))
+    rfmUicc._val = (u'rfm', dict([(u'rfm-header', dict([(u'identification', 11)])), (u'instanceAID', b'\xa0\x00\x00\x05Y\x10\x10\x00\x01'), (u'tarList', [b'\xb0\x00\x00']), (u'minimumSecurityLevel', b'\x12'), (u'uiccAccessDomain', b'\x00'), (u'uiccAdminAccessDomain', b'\x00')]))
     
     #-----< rfmUsim >-----#
-    rfmUsim = CHOICE(name='rfmUsim', mode=MODE_VALUE, typeref=ASN1RefType(('PEDefinitions', 'ProfileElement')))
-    rfmUsim._val = ('rfm', dict([('rfm-header', dict([('identification', 12)])), ('instanceAID', b'\xa0\x00\x00\x05Y\x10\x10\x00\x02'), ('tarList', [b'\xb0\x00 ']), ('minimumSecurityLevel', b'\x12'), ('uiccAccessDomain', b'\x00'), ('uiccAdminAccessDomain', b'\x00'), ('adfRFMAccess', dict([('adfAID', b'\xa0\x00\x00\x00\x87\x10\x02\xff3\xff\x01\x89\x00\x00\x01\x00'), ('adfAccessDomain', b'\x02\x00\x01\x00'), ('adfAdminAccessDomain', b'\x02\x00\x01\x00')]))]))
+    rfmUsim = CHOICE(name=u'rfmUsim', mode=MODE_VALUE, typeref=ASN1RefType(('PEDefinitions', 'ProfileElement')))
+    rfmUsim._val = (u'rfm', dict([(u'rfm-header', dict([(u'identification', 12)])), (u'instanceAID', b'\xa0\x00\x00\x05Y\x10\x10\x00\x02'), (u'tarList', [b'\xb0\x00 ']), (u'minimumSecurityLevel', b'\x12'), (u'uiccAccessDomain', b'\x00'), (u'uiccAdminAccessDomain', b'\x00'), (u'adfRFMAccess', dict([(u'adfAID', b'\xa0\x00\x00\x00\x87\x10\x02\xff3\xff\x01\x89\x00\x00\x01\x00'), (u'adfAccessDomain', b'\x02\x00\x01\x00'), (u'adfAdminAccessDomain', b'\x02\x00\x01\x00')]))]))
     
     #-----< gsmaProp >-----#
-    gsmaProp = CHOICE(name='gsmaProp', mode=MODE_VALUE, typeref=ASN1RefType(('PEDefinitions', 'ProfileElement')))
-    gsmaProp._val = ('nonStandard', dict([('nonStandard-header', dict([('mandated', 0), ('identification', 13)])), ('issuerID', (2, 23, 143, 1, 2, 1)), ('content', b'\x02\x00\x01\x00')]))
+    gsmaProp = CHOICE(name=u'gsmaProp', mode=MODE_VALUE, typeref=ASN1RefType(('PEDefinitions', 'ProfileElement')))
+    gsmaProp._val = (u'nonStandard', dict([(u'nonStandard-header', dict([(u'mandated', 0), (u'identification', 13)])), (u'issuerID', (2, 23, 143, 1, 2, 1)), (u'content', b'\x02\x00\x01\x00')]))
     
     #-----< endVal >-----#
-    endVal = CHOICE(name='endVal', mode=MODE_VALUE, typeref=ASN1RefType(('PEDefinitions', 'ProfileElement')))
-    endVal._val = ('end', dict([('end-header', dict([('mandated', 0), ('identification', 99)]))]))
+    endVal = CHOICE(name=u'endVal', mode=MODE_VALUE, typeref=ASN1RefType(('PEDefinitions', 'ProfileElement')))
+    endVal._val = (u'end', dict([(u'end-header', dict([(u'mandated', 0), (u'identification', 99)]))]))
     
     #-----< respValue >-----#
-    respValue = SEQ(name='respValue', mode=MODE_VALUE, typeref=ASN1RefType(('PEDefinitions', 'EUICCResponse')))
-    respValue._val = dict([('peStatus', [dict([('status', 8), ('identification', 10)])])])
+    respValue = SEQ(name=u'respValue', mode=MODE_VALUE, typeref=ASN1RefType(('PEDefinitions', 'EUICCResponse')))
+    respValue._val = dict([(u'peStatus', [dict([(u'status', 8), (u'identification', 10)])])])
     
     _all_ = [
         maxUInt8,

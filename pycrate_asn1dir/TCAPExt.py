@@ -1365,9 +1365,11 @@ class _IMPL_:
         ('fixed', __CHARACTER_STRING_identification_fixed),
         ])
     _CHARACTER_STRING_identification._ext = None
-    _CHARACTER_STRING_string_value = OCT_STR(name='string-value', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
+    _CHARACTER_STRING_data_value_descriptor = OBJ_DESC(name='data-value-descriptor', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), opt=True)
+    _CHARACTER_STRING_string_value = OCT_STR(name='string-value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
     CHARACTER_STRING._cont = ASN1Dict([
         ('identification', _CHARACTER_STRING_identification),
+        ('data-value-descriptor', _CHARACTER_STRING_data_value_descriptor),
         ('string-value', _CHARACTER_STRING_string_value),
         ])
     CHARACTER_STRING._ext = None
@@ -1437,6 +1439,7 @@ class _IMPL_:
         __CHARACTER_STRING_identification_transfer_syntax,
         __CHARACTER_STRING_identification_fixed,
         _CHARACTER_STRING_identification,
+        _CHARACTER_STRING_data_value_descriptor,
         _CHARACTER_STRING_string_value,
         CHARACTER_STRING,
         _TYPE_IDENTIFIER_id,
