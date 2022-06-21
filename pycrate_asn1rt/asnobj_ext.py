@@ -101,7 +101,7 @@ Single value: Python 2-tuple
     # this enables object's table constraint lookup for OPEN types when decoding it
     _TAB_LUT = True
     
-    _ASN_RE = re.compile('(?:\'([\s01]{0,})\'B)|(?:\'([\s0-9A-F]{0,})\'H)')
+    _ASN_RE = re.compile(r'(?:\'([\s01]{0,})\'B)|(?:\'([\s0-9A-F]{0,})\'H)')
     
     def _get_val_obj(self, ref):
         const_tr = self._get_const_tr()
@@ -197,11 +197,11 @@ Single value: Python 2-tuple
                 ident = '_unk_004'
             if grp[0] is not None:
                 # BSTRING
-                bs = re.subn('\s{1,}', '', grp[0])[0]
+                bs = re.subn(r'\s{1,}', '', grp[0])[0]
                 self._val = (ident, uint_to_bytes(int(bs, 2), len(bs)))
             else:
                 # HSTRING
-                hs = re.subn('\s{1,}', '', grp[1])[0]
+                hs = re.subn(r'\s{1,}', '', grp[1])[0]
                 if len(hs)%2:
                     self._val = (ident, unhexlify(hs + '0'))
                 else:
@@ -212,7 +212,7 @@ Single value: Python 2-tuple
             # TODO: must implement the Module.value notation to compare to tuples
             # into const_tr, in addition to simple object name
             const_tr_keys = [name for name in self._get_const_tr() if isinstance(name, str_types)]
-            m = re.match('\s{0,}:|'.join(const_tr_keys) + '\s{0,}:', txt)
+            m = re.match(r'\s{0,}:|'.join(const_tr_keys) + r'\s{0,}:', txt)
             if m is not None:
                 ident = m.group().split(':')[0].strip()
                 txt = txt[m.end():].strip()

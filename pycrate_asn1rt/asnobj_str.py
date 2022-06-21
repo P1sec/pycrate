@@ -96,9 +96,9 @@ Specific constraints attributes:
     
     TYPE  = TYPE_BIT_STR
     TAG   = 3
-    
-    _ASN_RE = re.compile('(?:\'([\s01]{0,})\'B)|(?:\'([\s0-9A-F]{0,})\'H)')
-    
+
+    _ASN_RE = re.compile(r'(?:\'([\s01]{0,})\'B)|(?:\'([\s0-9A-F]{0,})\'H)')
+
     # _ASN_WASC potentially add the ascii representation of the BIT STRING in comment
     # when returned by _to_asn1() 
     _ASN_WASC = True
@@ -205,7 +205,7 @@ Specific constraints attributes:
             grp = m.groups()
             if grp[0] is not None:
                 # BSTRING
-                bs = re.subn('\s{1,}', '', grp[0])[0]
+                bs = re.subn(r'\s{1,}', '', grp[0])[0]
                 if not bs:
                     # null length bit string
                     self._val = (0, 0)
@@ -213,7 +213,7 @@ Specific constraints attributes:
                     self._val = (int(bs, 2), len(bs))
             else:
                 # HSTRING
-                hs = re.subn('\s{1,}', '', grp[1])[0]
+                hs = re.subn(r'\s{1,}', '', grp[1])[0]
                 if not hs:
                     self._val = (0, 0)
                 else:
@@ -223,7 +223,7 @@ Specific constraints attributes:
             if not hasattr(self, '_ASN_RE_CONT'):
                 kw = '|'.join(self._cont.keys())
                 self._ASN_RE_CONT = re.compile(
-                    '\{((?:\s{0,}(?:' + kw + ')\s{0,},){0,}(?:\s{0,}(?:' + kw + ')\s{0,}){0,1})\}')
+                    r'\{((?:\s{0,}(?:' + kw + r')\s{0,},){0,}(?:\s{0,}(?:' + kw + r')\s{0,}){0,1})\}')
             m = self._ASN_RE_CONT.match(txt)
             if m:
                 # named offsets
@@ -252,7 +252,7 @@ Specific constraints attributes:
                 ident = self._const_cont._typeref.called[1]
             else:
                 ident = self._const_cont.TYPE 
-            m = re.match('%s\s{0,}:' % ident, txt)
+            m = re.match(r'%s\s{0,}:' % ident, txt)
             if m:
                 txt = txt[m.end():].strip()
                 txt = self._const_cont.from_asn1(txt)
@@ -1226,7 +1226,7 @@ Specific constraints attributes:
     TYPE  = TYPE_OCT_STR
     TAG   = 4
     
-    _ASN_RE = re.compile('(?:\'([\s01]{0,})\'B)|(?:\'([\s0-9A-F]{0,})\'H)')
+    _ASN_RE = re.compile(r'(?:\'([\s01]{0,})\'B)|(?:\'([\s0-9A-F]{0,})\'H)')
     
     # _ASN_WASC potentially add the ascii representation of the BIT STRING in comment
     # when returned by _to_asn1() 
@@ -1282,7 +1282,7 @@ Specific constraints attributes:
             grp = m.groups()
             if grp[0] is not None:
                 # BSTRING
-                bs = re.subn('\s{1,}', '', grp[0])[0]
+                bs = re.subn(r'\s{1,}', '', grp[0])[0]
                 if not bs:
                     # null length octet string
                     self._val = b''
@@ -1290,7 +1290,7 @@ Specific constraints attributes:
                     self._val = uint_to_bytes(int(bs, 2), len(bs))
             else:
                 # HSTRING
-                hs = re.subn('\s{1,}', '', grp[1])[0]
+                hs = re.subn(r'\s{1,}', '', grp[1])[0]
                 if len(hs)%2:
                     self._val = unhexlify(hs + '0')
                 else:
@@ -1302,7 +1302,7 @@ Specific constraints attributes:
                 ident = self._const_cont._typeref.called[1]
             else:
                 ident = self._const_cont.TYPE 
-            m = re.match('%s\s{0,}:' % ident, txt)
+            m = re.match(r'%s\s{0,}:' % ident, txt)
             if m:
                 txt = txt[m.end():].strip()
                 txt = self._const_cont.from_asn1(txt)
@@ -3187,7 +3187,7 @@ Single value: Python 7-tuple of str or None
     ###
     
     def _from_asn1(self, txt):
-        m = self._ASN_RE.match(txt)
+        m = self._ASN_RE.match(txt.upper())
         if m is not None:
             self._val = m.groups()
             return txt[m.end():].strip()
@@ -3262,10 +3262,10 @@ Single value: Python 8-tuple of str or None
     TAG   = 24
     
     _ASN_RE = re.compile(
-    '"([0-9]{4})([0-9]{2})([0-9]{2})([0-9]{2})' \
-    '(?:([0-9]{2})([0-9]{2}){0,1}){0,1}' \
-    '(?:(?:\.|,)([0-9]{1,})){0,1}' \
-    '((?:Z)|(?:[+-](?:[0-9]{2}){0,2})){0,1}"')
+    r'"([0-9]{4})([0-9]{2})([0-9]{2})([0-9]{2})'
+    r'(?:([0-9]{2})([0-9]{2}){0,1}){0,1}'
+    r'(?:(?:\.|,)([0-9]{1,})){0,1}'
+    r'((?:Z)|(?:[+-](?:[0-9]{2}){0,2})){0,1}"')
     
     def _safechk_val(self, val):
         if not isinstance(val, tuple) or len(val) != 8 \

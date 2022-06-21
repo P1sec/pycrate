@@ -331,7 +331,7 @@ Specific attribute:
     TYPE  = TYPE_INT
     TAG   = 2
     
-    _ASN_RE = re.compile('\-{0,1}[0-9]{1,}')
+    _ASN_RE = re.compile(r'\-{0,1}[0-9]{1,}')
     
     def _safechk_val(self, val):
         if isinstance(val, str_types):
@@ -689,12 +689,12 @@ Specific attribute:
     TAG   = 9
     
     _ASN_RE = re.compile(
-    '((\-{0,1}[0-9]{1,}){1}(?:\.([0-9]{0,})){0,1}(?:[eE](\-{0,1}[0-9]{1,})){0,1})|'\
-    '(\{\s{0,}mantissa\s{1,}(\-{0,1}[0-9]{1,})\s{0,},\s{0,}base\s{1,}(2|10)\s{0,},\s{0,}exponent\s{1,}(\-{0,1}[0-9]{1,})\s{0,}\})|'\
-    '((?:PLUS\-INFINITY)|(?:MINUS\-INFINITY)|(?:NOT-A-NUMBER))')
-    _NR1_RE = re.compile('[ 0]{0,}[-+]{0,1}[0-9]{1,}')
-    _NR2_RE = re.compile('[ 0]{0,}([-+]{0,1}[0-9]{0,})[\.,]{1}([0-9]{0,})')
-    _NR3_RE = re.compile('[ 0]{0,}([-+]{0,1}[0-9]{0,})[\.,]{1}([0-9]{0,})[eE]([-+]{0,1}[0-9]{1,})')
+    r'((\-{0,1}[0-9]{1,}){1}(?:\.([0-9]{0,})){0,1}(?:[eE](\-{0,1}[0-9]{1,})){0,1})|'\
+    r'(\{\s{0,}mantissa\s{1,}(\-{0,1}[0-9]{1,})\s{0,},\s{0,}base\s{1,}(2|10)\s{0,},\s{0,}exponent\s{1,}(\-{0,1}[0-9]{1,})\s{0,}\})|'\
+    r'((?:PLUS\-INFINITY)|(?:MINUS\-INFINITY)|(?:NOT-A-NUMBER))')
+    _NR1_RE = re.compile(r'[ 0]{0,}[-+]{0,1}[0-9]{1,}')
+    _NR2_RE = re.compile(r'[ 0]{0,}([-+]{0,1}[0-9]{0,})[\.,]{1}([0-9]{0,})')
+    _NR3_RE = re.compile(r'[ 0]{0,}([-+]{0,1}[0-9]{0,})[\.,]{1}([0-9]{0,})[eE]([-+]{0,1}[0-9]{1,})')
     
     _ASN_LUT = {'MINUS-INFINITY': (-1, None, None),
                 'PLUS-INFINITY' : ( 1, None, None),
@@ -703,7 +703,7 @@ Specific attribute:
                 ( 1, None, None): 'PLUS-INFINITY',
                 ( 0, None, None): 'NOT-A-NUMBER'}
     
-    _JER_RE = re.compile('[ 0]{0,}([-+]{0,1}[0-9]{0,})(?:[\.,]{1}([0-9]{0,})){0,1}[eE]([-+]{0,1}[0-9]{1,})')
+    _JER_RE = re.compile(r'[ 0]{0,}([-+]{0,1}[0-9]{0,})(?:[\.,]{1}([0-9]{0,})){0,1}[eE]([-+]{0,1}[0-9]{1,})')
     
     def _safechk_val(self, val):
         self._safechk_val_real(val)
@@ -1591,9 +1591,9 @@ class _OID(ASN1Obj):
     
     # this class implements the methods that are common to OID and REL_OID    
     
-    _ASN_RE = re.compile('\{([a-zA-Z0-9\-\(\)\s]{1,})\}')
+    _ASN_RE = re.compile(r'\{([a-zA-Z0-9\-\(\)\s]{1,})\}')
     _ASN_RE_COMP = re.compile(
-    '([0-9]{1,})|(?:([a-zA-Z]{1}[a-zA-Z0-9\-]{0,})\s{0,}(?:\(([0-9]{1,})\)){0,1})')
+    r'([0-9]{1,})|(?:([a-zA-Z]{1}[a-zA-Z0-9\-]{0,})\s{0,}(?:\(([0-9]{1,})\)){0,1})')
     
     # _ASN_WASC potentially add the name of the OID in ascii in comment
     # when returned by _to_asn1() 

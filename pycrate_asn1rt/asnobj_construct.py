@@ -101,7 +101,7 @@ Specific attributes:
         if not hasattr(self, '_ASN_RE'):
             items = list(self._cont.keys())
             items.sort(key=len, reverse=True)
-            self._ASN_RE = re.compile('\s{0,}:|'.join(items) + '\s{0,}:')
+            self._ASN_RE = re.compile(r'\s{0,}:|'.join(items) + r'\s{0,}:')
         m = self._ASN_RE.match(txt)
         if m:
             ident = m.group().split(':')[0].strip()
