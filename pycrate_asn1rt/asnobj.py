@@ -1078,7 +1078,88 @@ class ASN1Obj(Element):
             paths.append( (curpath[:], self._val) )
         #
         return paths[:]
-    
+
+    def get_val_jer_paths(self, curpath=[], jercurpath=[], paths=[]):
+        """
+        returns the list of JER paths of each individual basic value set into self
+
+        Args:
+            None
+
+        Returns:
+            list of 3-tuple: (path_to_basic_value, jer_path_to_basic_value, basic_value)
+        """
+        if self._val is None:
+            return []
+        #
+        if self.TYPE in (TYPE_CHOICE, TYPE_ANY, TYPE_OPEN) or \
+        self.TYPE in (TYPE_BIT_STR, TYPE_OCT_STR) and \
+        isinstance(self._val, tuple) and \
+        isinstance(self._val[0], str_types):
+            # value is (component_name, component_value)
+            curpath.append( self._val[0] )
+            # open types are skipped in JER paths
+            if self.TYPE not in (TYPE_OPEN):
+                jercurpath.append( self._val[0] )
+            if self._val[0][:5] in ('_ext_', '_unk_'):
+                # take care of unknown / extended objects
+                paths.append( (curpath[:], jercurpath[:], self._val[1]) )
+            else:
+                Comp = self.get_at( [self._val[0]] )
+                _comp_val = Comp._val
+                Comp._val = self._val[1]
+                paths = Comp.get_val_jer_paths(curpath[:], jercurpath[:], paths[:])
+                Comp._val = _comp_val
+            del curpath[-1]
+            if self.TYPE not in (TYPE_OPEN):
+                del jercurpath[-1]
+        #
+        elif self.TYPE in (TYPE_SEQ, TYPE_SET, TYPE_EXT, TYPE_EMB_PDV, TYPE_CHAR_STR):
+            # value is dict {component_name: component_value)
+            val_ids = list(self._val.keys())
+            for comp_name in self._cont:
+                if comp_name in val_ids[:]:
+                    curpath.append( comp_name )
+                    jercurpath.append( comp_name )
+                    comp_val = self._val[comp_name]
+                    Comp = self._cont[comp_name]
+                    _comp_val = Comp._val
+                    Comp._val = comp_val
+                    paths = Comp.get_val_jer_paths(curpath[:], jercurpath[:], paths[:])
+                    Comp._val = _comp_val
+                    del curpath[-1]
+                    del jercurpath[-1]
+                    val_ids.remove(comp_name)
+            if val_ids:
+                # take care of remaining unknown / extension objects
+                val_ids.sort()
+                for comp_name in val_ids:
+                    curpath.append( comp_name )
+                    jercurpath.append( comp_name )
+                    assert( comp_name[:5] in ('_ext_', '_unk_') )
+                    paths.append( (curpath[:], jercurpath[:], self._val[comp_name][1]) )
+                    del curpath[-1]
+                    del jercurpath[-1]
+        #
+        elif self.TYPE in (TYPE_SEQ_OF, TYPE_SET_OF):
+            # value is a list of component_value
+            Comp = self._cont
+            _comp_val = Comp._val
+            for i, val in enumerate(self._val):
+                Comp._val = val
+                curpath.append( i )
+                jercurpath.append( i )
+                paths = Comp.get_val_jer_paths(curpath[:], jercurpath[:], paths[:])
+                del curpath[-1]
+                del jercurpath[-1]
+            Comp._val = _comp_val
+        #
+        elif self.TYPE in TYPES_BASIC:
+            # basic value reached
+            paths.append( (curpath[:], jercurpath[:], self._val) )
+        #
+        return paths[:]
+
     def get_val_at(self, path):
         """
         returns the value into self at the given relative path
