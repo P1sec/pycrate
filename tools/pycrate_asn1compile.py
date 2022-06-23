@@ -201,19 +201,21 @@ def main():
         for f in files:
             try:
                 fd = open(f)
-            except:
+            except Exception as e:
                 print('%s, args error: unable to open input file %s' % (sys.argv[0], f))
-                return 0
+                print(e)
+                return 1
             else:
                 try:
                     if python_version < 3:
                         txt.append( fd.read().decode('utf-8') )
                     else:
                         txt.append( fd.read() )
-                except:
+                except Exception as e:
                     print('%s, args error: unable to read input file %s' % (sys.argv[0], f))
+                    print(e)
                     fd.close()
-                    return 0
+                    return 1
                 else:
                     fd.close()
         compile_text(txt, **ckw)
@@ -224,6 +226,7 @@ def main():
     #
     else:
         print('%s, args error: missing ASN.1 input(s) or specification name' % sys.argv[0])
+        return 1
     #
     return 0
 
