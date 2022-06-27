@@ -5760,7 +5760,7 @@ class PFCPSessionEstablishmentRespIEs(PFCPIEs):
     OPT = {
         PFCPIEType.OffendingIE.value,
         PFCPIEType.FSEID.value,
-        PFCPIEType.CreatePDR.value,
+        PFCPIEType.CreatedPDR.value,
         PFCPIEType.LoadControlInformation.value,
         PFCPIEType.OverloadControlInformation.value,
         PFCPIEType.FQCSID.value,
