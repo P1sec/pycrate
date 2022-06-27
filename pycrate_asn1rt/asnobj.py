@@ -1081,7 +1081,8 @@ class ASN1Obj(Element):
 
     def get_val_jer_paths(self, curpath=[], jercurpath=[], paths=[]):
         """
-        returns the list of JER paths of each individual basic value set into self
+        returns both the list of internal paths and JER paths of each individual 
+        basic value set into self
 
         Args:
             None
