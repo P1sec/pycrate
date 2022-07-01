@@ -332,7 +332,7 @@ def extract_charstr(text=''):
                 # no end-of-charstr found
                 return text, None
             else:
-                return '', re.subn('\s{0,}\n\s{0,}', '', text[1:-1])[0]
+                return '', re.subn(r'\s{0,}\n\s{0,}', '', text[1:-1])[0]
         
         # 2) finding a double-quote
         if text[cur:1+cur] == '"':
@@ -349,7 +349,7 @@ def extract_charstr(text=''):
                     else:
                         # end of charstr
                         return text[1+cur:].strip(), \
-                               re.subn('\s{0,}\n\s{0,}', '', text[1:cur])[0]
+                               re.subn(r'\s{0,}\n\s{0,}', '', text[1:cur])[0]
             else:
                 # 2.2) escape cursor not set
                 if text[1+cur:2+cur] == '"':
@@ -358,7 +358,7 @@ def extract_charstr(text=''):
                 else:
                     # end of charstr
                     return text[1+cur:].strip(), \
-                           re.subn('\s{0,}\n\s{0,}', '', text[1:cur])[0]
+                           re.subn(r'\s{0,}\n\s{0,}', '', text[1:cur])[0]
 
 
 _printable_str = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'\
