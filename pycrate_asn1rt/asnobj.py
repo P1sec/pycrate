@@ -1009,7 +1009,7 @@ class ASN1Obj(Element):
     def get_val(self):
         return self._val
     
-    def get_val_paths(self, curpath=[], paths=[]):
+    def get_val_paths(self, curpath=None, paths=None):
         """
         returns the list of paths of each individual basic value set into self
         
@@ -1022,6 +1022,10 @@ class ASN1Obj(Element):
         if self._val is None:
             return []
         #
+        if curpath is None:
+            curpath = []
+        if paths is None:
+            paths = []
         if self.TYPE in (TYPE_CHOICE, TYPE_ANY, TYPE_OPEN) or \
         self.TYPE in (TYPE_BIT_STR, TYPE_OCT_STR) and \
         isinstance(self._val, tuple) and \
@@ -1079,7 +1083,7 @@ class ASN1Obj(Element):
         #
         return paths[:]
 
-    def get_val_jer_paths(self, curpath=[], jercurpath=[], paths=[]):
+    def get_val_jer_paths(self, curpath=None, jercurpath=None, paths=None):
         """
         returns both the list of internal paths and JER paths of each individual 
         basic value set into self
@@ -1093,6 +1097,12 @@ class ASN1Obj(Element):
         if self._val is None:
             return []
         #
+        if curpath is None:
+            curpath = []
+        if jercurpath is None:
+            jercurpath = []
+        if paths is None:
+            paths = []
         if self.TYPE in (TYPE_CHOICE, TYPE_ANY, TYPE_OPEN) or \
         self.TYPE in (TYPE_BIT_STR, TYPE_OCT_STR) and \
         isinstance(self._val, tuple) and \
