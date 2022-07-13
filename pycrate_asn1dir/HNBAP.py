@@ -16,34 +16,34 @@ from pycrate_asn1rt.init             import init_modules
 
 class HNBAP_CommonDataTypes:
 
-    _name_  = 'HNBAP-CommonDataTypes'
+    _name_  = u'HNBAP-CommonDataTypes'
     _oid_   = [0, 4, 0, 0, 20, 3, 6, 1, 3]
     
     _obj_ = [
-        'maxPrivateIEs',
-        'maxProtocolExtensions',
-        'maxProtocolIEs',
-        'Criticality',
-        'Presence',
-        'PrivateIE-ID',
-        'ProcedureCode',
-        'ProtocolIE-ID',
-        'TriggeringMessage',
+        u'maxPrivateIEs',
+        u'maxProtocolExtensions',
+        u'maxProtocolIEs',
+        u'Criticality',
+        u'Presence',
+        u'PrivateIE-ID',
+        u'ProcedureCode',
+        u'ProtocolIE-ID',
+        u'TriggeringMessage',
         ]
     _type_ = [
-        'Criticality',
-        'Presence',
-        'PrivateIE-ID',
-        'ProcedureCode',
-        'ProtocolIE-ID',
-        'TriggeringMessage',
+        u'Criticality',
+        u'Presence',
+        u'PrivateIE-ID',
+        u'ProcedureCode',
+        u'ProtocolIE-ID',
+        u'TriggeringMessage',
         ]
     _set_ = [
         ]
     _val_ = [
-        'maxPrivateIEs',
-        'maxProtocolExtensions',
-        'maxProtocolIEs',
+        u'maxPrivateIEs',
+        u'maxProtocolExtensions',
+        u'maxProtocolIEs',
         ]
     _class_ = [
         ]
@@ -51,49 +51,49 @@ class HNBAP_CommonDataTypes:
         ]
     
     #-----< maxPrivateIEs >-----#
-    maxPrivateIEs = INT(name='maxPrivateIEs', mode=MODE_VALUE)
+    maxPrivateIEs = INT(name=u'maxPrivateIEs', mode=MODE_VALUE)
     maxPrivateIEs._val = 65535
     
     #-----< maxProtocolExtensions >-----#
-    maxProtocolExtensions = INT(name='maxProtocolExtensions', mode=MODE_VALUE)
+    maxProtocolExtensions = INT(name=u'maxProtocolExtensions', mode=MODE_VALUE)
     maxProtocolExtensions._val = 65535
     
     #-----< maxProtocolIEs >-----#
-    maxProtocolIEs = INT(name='maxProtocolIEs', mode=MODE_VALUE)
+    maxProtocolIEs = INT(name=u'maxProtocolIEs', mode=MODE_VALUE)
     maxProtocolIEs._val = 65535
     
     #-----< Criticality >-----#
-    Criticality = ENUM(name='Criticality', mode=MODE_TYPE)
-    Criticality._cont = ASN1Dict([('reject', 0), ('ignore', 1), ('notify', 2)])
+    Criticality = ENUM(name=u'Criticality', mode=MODE_TYPE)
+    Criticality._cont = ASN1Dict([(u'reject', 0), (u'ignore', 1), (u'notify', 2)])
     Criticality._ext = None
     
     #-----< Presence >-----#
-    Presence = ENUM(name='Presence', mode=MODE_TYPE)
-    Presence._cont = ASN1Dict([('optional', 0), ('conditional', 1), ('mandatory', 2)])
+    Presence = ENUM(name=u'Presence', mode=MODE_TYPE)
+    Presence._cont = ASN1Dict([(u'optional', 0), (u'conditional', 1), (u'mandatory', 2)])
     Presence._ext = None
     
     #-----< PrivateIE-ID >-----#
-    PrivateIE_ID = CHOICE(name='PrivateIE-ID', mode=MODE_TYPE)
-    _PrivateIE_ID_local = INT(name='local', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    PrivateIE_ID = CHOICE(name=u'PrivateIE-ID', mode=MODE_TYPE)
+    _PrivateIE_ID_local = INT(name=u'local', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     _PrivateIE_ID_local._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=65535)], ev=None, er=[])
-    _PrivateIE_ID_global_ = OID(name='global', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _PrivateIE_ID_global_ = OID(name=u'global', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     PrivateIE_ID._cont = ASN1Dict([
-        ('local', _PrivateIE_ID_local),
-        ('global', _PrivateIE_ID_global_),
+        (u'local', _PrivateIE_ID_local),
+        (u'global', _PrivateIE_ID_global_),
         ])
     PrivateIE_ID._ext = None
     
     #-----< ProcedureCode >-----#
-    ProcedureCode = INT(name='ProcedureCode', mode=MODE_TYPE)
+    ProcedureCode = INT(name=u'ProcedureCode', mode=MODE_TYPE)
     ProcedureCode._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=255)], ev=None, er=[])
     
     #-----< ProtocolIE-ID >-----#
-    ProtocolIE_ID = INT(name='ProtocolIE-ID', mode=MODE_TYPE)
+    ProtocolIE_ID = INT(name=u'ProtocolIE-ID', mode=MODE_TYPE)
     ProtocolIE_ID._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=65535)], ev=None, er=[])
     
     #-----< TriggeringMessage >-----#
-    TriggeringMessage = ENUM(name='TriggeringMessage', mode=MODE_TYPE)
-    TriggeringMessage._cont = ASN1Dict([('initiating-message', 0), ('successful-outcome', 1), ('unsuccessful-outcome', 2)])
+    TriggeringMessage = ENUM(name=u'TriggeringMessage', mode=MODE_TYPE)
+    TriggeringMessage._cont = ASN1Dict([(u'initiating-message', 0), (u'successful-outcome', 1), (u'unsuccessful-outcome', 2)])
     TriggeringMessage._ext = None
     
     _all_ = [
@@ -112,134 +112,134 @@ class HNBAP_CommonDataTypes:
 
 class HNBAP_Constants:
 
-    _name_  = 'HNBAP-Constants'
+    _name_  = u'HNBAP-Constants'
     _oid_   = [0, 4, 0, 0, 20, 3, 6, 1, 4]
     
     _obj_ = [
-        'id-HNBRegister',
-        'id-HNBDe-Register',
-        'id-UERegister',
-        'id-UEDe-Register',
-        'id-ErrorIndication',
-        'id-privateMessage',
-        'id-CSGMembershipUpdate',
-        'id-TNLUpdate',
-        'id-HNBConfigTransfer',
-        'id-RelocationComplete',
-        'id-U-RNTIQuery',
-        'maxNrOfErrors',
-        'maxnoofRABs',
-        'maxnoofAdditionalNeighbours',
-        'maxnoofURAIdentities',
-        'maxnoofNeighbours',
-        'maxnoofIurhAddresses',
-        'id-Cause',
-        'id-CriticalityDiagnostics',
-        'id-HNB-Identity',
-        'id-Context-ID',
-        'id-UE-Identity',
-        'id-LAC',
-        'id-RAC',
-        'id-HNB-Location-Information',
-        'id-PLMNidentity',
-        'id-SAC',
-        'id-CellIdentity',
-        'id-Registration-Cause',
-        'id-UE-Capabilities',
-        'id-RNC-ID',
-        'id-CSG-ID',
-        'id-BackoffTimer',
-        'id-HNB-Internet-Information',
-        'id-HNB-Cell-Access-Mode',
-        'id-MuxPortNumber',
-        'id-Service-Area-For-Broadcast',
-        'id-CSGMembershipStatus',
-        'id-RABList',
-        'id-HNBConfigInfo',
-        'id-AccessResult',
-        'id-Update-cause',
-        'id-NeighbourInfoList',
-        'id-NeighbourInfoRequestList',
-        'id-Iurh-Signalling-TNL-Address',
-        'id-PSC',
-        'id-HNB-Cell-Identifier',
-        'id-Tunnel-Information',
-        'id-CELL-FACHMobilitySupport',
-        'id-S-RNTIPrefix',
-        'id-URAIdentity',
-        'id-NeighbourIdentity',
-        'id-HNBCapacity',
-        'id-NeighbourCellIdentityList',
-        'id-AdditionalNeighbourInfoList',
-        'id-U-RNTI',
-        'id-UnknownU-RNTIIndication',
-        'id-HNB-GWResponse',
-        'id-URAIdentityList',
+        u'id-HNBRegister',
+        u'id-HNBDe-Register',
+        u'id-UERegister',
+        u'id-UEDe-Register',
+        u'id-ErrorIndication',
+        u'id-privateMessage',
+        u'id-CSGMembershipUpdate',
+        u'id-TNLUpdate',
+        u'id-HNBConfigTransfer',
+        u'id-RelocationComplete',
+        u'id-U-RNTIQuery',
+        u'maxNrOfErrors',
+        u'maxnoofRABs',
+        u'maxnoofAdditionalNeighbours',
+        u'maxnoofURAIdentities',
+        u'maxnoofNeighbours',
+        u'maxnoofIurhAddresses',
+        u'id-Cause',
+        u'id-CriticalityDiagnostics',
+        u'id-HNB-Identity',
+        u'id-Context-ID',
+        u'id-UE-Identity',
+        u'id-LAC',
+        u'id-RAC',
+        u'id-HNB-Location-Information',
+        u'id-PLMNidentity',
+        u'id-SAC',
+        u'id-CellIdentity',
+        u'id-Registration-Cause',
+        u'id-UE-Capabilities',
+        u'id-RNC-ID',
+        u'id-CSG-ID',
+        u'id-BackoffTimer',
+        u'id-HNB-Internet-Information',
+        u'id-HNB-Cell-Access-Mode',
+        u'id-MuxPortNumber',
+        u'id-Service-Area-For-Broadcast',
+        u'id-CSGMembershipStatus',
+        u'id-RABList',
+        u'id-HNBConfigInfo',
+        u'id-AccessResult',
+        u'id-Update-cause',
+        u'id-NeighbourInfoList',
+        u'id-NeighbourInfoRequestList',
+        u'id-Iurh-Signalling-TNL-Address',
+        u'id-PSC',
+        u'id-HNB-Cell-Identifier',
+        u'id-Tunnel-Information',
+        u'id-CELL-FACHMobilitySupport',
+        u'id-S-RNTIPrefix',
+        u'id-URAIdentity',
+        u'id-NeighbourIdentity',
+        u'id-HNBCapacity',
+        u'id-NeighbourCellIdentityList',
+        u'id-AdditionalNeighbourInfoList',
+        u'id-U-RNTI',
+        u'id-UnknownU-RNTIIndication',
+        u'id-HNB-GWResponse',
+        u'id-URAIdentityList',
         ]
     _type_ = [
         ]
     _set_ = [
         ]
     _val_ = [
-        'id-HNBRegister',
-        'id-HNBDe-Register',
-        'id-UERegister',
-        'id-UEDe-Register',
-        'id-ErrorIndication',
-        'id-privateMessage',
-        'id-CSGMembershipUpdate',
-        'id-TNLUpdate',
-        'id-HNBConfigTransfer',
-        'id-RelocationComplete',
-        'id-U-RNTIQuery',
-        'maxNrOfErrors',
-        'maxnoofRABs',
-        'maxnoofAdditionalNeighbours',
-        'maxnoofURAIdentities',
-        'maxnoofNeighbours',
-        'maxnoofIurhAddresses',
-        'id-Cause',
-        'id-CriticalityDiagnostics',
-        'id-HNB-Identity',
-        'id-Context-ID',
-        'id-UE-Identity',
-        'id-LAC',
-        'id-RAC',
-        'id-HNB-Location-Information',
-        'id-PLMNidentity',
-        'id-SAC',
-        'id-CellIdentity',
-        'id-Registration-Cause',
-        'id-UE-Capabilities',
-        'id-RNC-ID',
-        'id-CSG-ID',
-        'id-BackoffTimer',
-        'id-HNB-Internet-Information',
-        'id-HNB-Cell-Access-Mode',
-        'id-MuxPortNumber',
-        'id-Service-Area-For-Broadcast',
-        'id-CSGMembershipStatus',
-        'id-RABList',
-        'id-HNBConfigInfo',
-        'id-AccessResult',
-        'id-Update-cause',
-        'id-NeighbourInfoList',
-        'id-NeighbourInfoRequestList',
-        'id-Iurh-Signalling-TNL-Address',
-        'id-PSC',
-        'id-HNB-Cell-Identifier',
-        'id-Tunnel-Information',
-        'id-CELL-FACHMobilitySupport',
-        'id-S-RNTIPrefix',
-        'id-URAIdentity',
-        'id-NeighbourIdentity',
-        'id-HNBCapacity',
-        'id-NeighbourCellIdentityList',
-        'id-AdditionalNeighbourInfoList',
-        'id-U-RNTI',
-        'id-UnknownU-RNTIIndication',
-        'id-HNB-GWResponse',
-        'id-URAIdentityList',
+        u'id-HNBRegister',
+        u'id-HNBDe-Register',
+        u'id-UERegister',
+        u'id-UEDe-Register',
+        u'id-ErrorIndication',
+        u'id-privateMessage',
+        u'id-CSGMembershipUpdate',
+        u'id-TNLUpdate',
+        u'id-HNBConfigTransfer',
+        u'id-RelocationComplete',
+        u'id-U-RNTIQuery',
+        u'maxNrOfErrors',
+        u'maxnoofRABs',
+        u'maxnoofAdditionalNeighbours',
+        u'maxnoofURAIdentities',
+        u'maxnoofNeighbours',
+        u'maxnoofIurhAddresses',
+        u'id-Cause',
+        u'id-CriticalityDiagnostics',
+        u'id-HNB-Identity',
+        u'id-Context-ID',
+        u'id-UE-Identity',
+        u'id-LAC',
+        u'id-RAC',
+        u'id-HNB-Location-Information',
+        u'id-PLMNidentity',
+        u'id-SAC',
+        u'id-CellIdentity',
+        u'id-Registration-Cause',
+        u'id-UE-Capabilities',
+        u'id-RNC-ID',
+        u'id-CSG-ID',
+        u'id-BackoffTimer',
+        u'id-HNB-Internet-Information',
+        u'id-HNB-Cell-Access-Mode',
+        u'id-MuxPortNumber',
+        u'id-Service-Area-For-Broadcast',
+        u'id-CSGMembershipStatus',
+        u'id-RABList',
+        u'id-HNBConfigInfo',
+        u'id-AccessResult',
+        u'id-Update-cause',
+        u'id-NeighbourInfoList',
+        u'id-NeighbourInfoRequestList',
+        u'id-Iurh-Signalling-TNL-Address',
+        u'id-PSC',
+        u'id-HNB-Cell-Identifier',
+        u'id-Tunnel-Information',
+        u'id-CELL-FACHMobilitySupport',
+        u'id-S-RNTIPrefix',
+        u'id-URAIdentity',
+        u'id-NeighbourIdentity',
+        u'id-HNBCapacity',
+        u'id-NeighbourCellIdentityList',
+        u'id-AdditionalNeighbourInfoList',
+        u'id-U-RNTI',
+        u'id-UnknownU-RNTIIndication',
+        u'id-HNB-GWResponse',
+        u'id-URAIdentityList',
         ]
     _class_ = [
         ]
@@ -247,239 +247,239 @@ class HNBAP_Constants:
         ]
     
     #-----< id-HNBRegister >-----#
-    id_HNBRegister = INT(name='id-HNBRegister', mode=MODE_VALUE, typeref=ASN1RefType(('HNBAP-CommonDataTypes', 'ProcedureCode')))
+    id_HNBRegister = INT(name=u'id-HNBRegister', mode=MODE_VALUE, typeref=ASN1RefType(('HNBAP-CommonDataTypes', 'ProcedureCode')))
     id_HNBRegister._val = 1
     
     #-----< id-HNBDe-Register >-----#
-    id_HNBDe_Register = INT(name='id-HNBDe-Register', mode=MODE_VALUE, typeref=ASN1RefType(('HNBAP-CommonDataTypes', 'ProcedureCode')))
+    id_HNBDe_Register = INT(name=u'id-HNBDe-Register', mode=MODE_VALUE, typeref=ASN1RefType(('HNBAP-CommonDataTypes', 'ProcedureCode')))
     id_HNBDe_Register._val = 2
     
     #-----< id-UERegister >-----#
-    id_UERegister = INT(name='id-UERegister', mode=MODE_VALUE, typeref=ASN1RefType(('HNBAP-CommonDataTypes', 'ProcedureCode')))
+    id_UERegister = INT(name=u'id-UERegister', mode=MODE_VALUE, typeref=ASN1RefType(('HNBAP-CommonDataTypes', 'ProcedureCode')))
     id_UERegister._val = 3
     
     #-----< id-UEDe-Register >-----#
-    id_UEDe_Register = INT(name='id-UEDe-Register', mode=MODE_VALUE, typeref=ASN1RefType(('HNBAP-CommonDataTypes', 'ProcedureCode')))
+    id_UEDe_Register = INT(name=u'id-UEDe-Register', mode=MODE_VALUE, typeref=ASN1RefType(('HNBAP-CommonDataTypes', 'ProcedureCode')))
     id_UEDe_Register._val = 4
     
     #-----< id-ErrorIndication >-----#
-    id_ErrorIndication = INT(name='id-ErrorIndication', mode=MODE_VALUE, typeref=ASN1RefType(('HNBAP-CommonDataTypes', 'ProcedureCode')))
+    id_ErrorIndication = INT(name=u'id-ErrorIndication', mode=MODE_VALUE, typeref=ASN1RefType(('HNBAP-CommonDataTypes', 'ProcedureCode')))
     id_ErrorIndication._val = 5
     
     #-----< id-privateMessage >-----#
-    id_privateMessage = INT(name='id-privateMessage', mode=MODE_VALUE, typeref=ASN1RefType(('HNBAP-CommonDataTypes', 'ProcedureCode')))
+    id_privateMessage = INT(name=u'id-privateMessage', mode=MODE_VALUE, typeref=ASN1RefType(('HNBAP-CommonDataTypes', 'ProcedureCode')))
     id_privateMessage._val = 6
     
     #-----< id-CSGMembershipUpdate >-----#
-    id_CSGMembershipUpdate = INT(name='id-CSGMembershipUpdate', mode=MODE_VALUE, typeref=ASN1RefType(('HNBAP-CommonDataTypes', 'ProcedureCode')))
+    id_CSGMembershipUpdate = INT(name=u'id-CSGMembershipUpdate', mode=MODE_VALUE, typeref=ASN1RefType(('HNBAP-CommonDataTypes', 'ProcedureCode')))
     id_CSGMembershipUpdate._val = 7
     
     #-----< id-TNLUpdate >-----#
-    id_TNLUpdate = INT(name='id-TNLUpdate', mode=MODE_VALUE, typeref=ASN1RefType(('HNBAP-CommonDataTypes', 'ProcedureCode')))
+    id_TNLUpdate = INT(name=u'id-TNLUpdate', mode=MODE_VALUE, typeref=ASN1RefType(('HNBAP-CommonDataTypes', 'ProcedureCode')))
     id_TNLUpdate._val = 9
     
     #-----< id-HNBConfigTransfer >-----#
-    id_HNBConfigTransfer = INT(name='id-HNBConfigTransfer', mode=MODE_VALUE, typeref=ASN1RefType(('HNBAP-CommonDataTypes', 'ProcedureCode')))
+    id_HNBConfigTransfer = INT(name=u'id-HNBConfigTransfer', mode=MODE_VALUE, typeref=ASN1RefType(('HNBAP-CommonDataTypes', 'ProcedureCode')))
     id_HNBConfigTransfer._val = 10
     
     #-----< id-RelocationComplete >-----#
-    id_RelocationComplete = INT(name='id-RelocationComplete', mode=MODE_VALUE, typeref=ASN1RefType(('HNBAP-CommonDataTypes', 'ProcedureCode')))
+    id_RelocationComplete = INT(name=u'id-RelocationComplete', mode=MODE_VALUE, typeref=ASN1RefType(('HNBAP-CommonDataTypes', 'ProcedureCode')))
     id_RelocationComplete._val = 11
     
     #-----< id-U-RNTIQuery >-----#
-    id_U_RNTIQuery = INT(name='id-U-RNTIQuery', mode=MODE_VALUE, typeref=ASN1RefType(('HNBAP-CommonDataTypes', 'ProcedureCode')))
+    id_U_RNTIQuery = INT(name=u'id-U-RNTIQuery', mode=MODE_VALUE, typeref=ASN1RefType(('HNBAP-CommonDataTypes', 'ProcedureCode')))
     id_U_RNTIQuery._val = 14
     
     #-----< maxNrOfErrors >-----#
-    maxNrOfErrors = INT(name='maxNrOfErrors', mode=MODE_VALUE)
+    maxNrOfErrors = INT(name=u'maxNrOfErrors', mode=MODE_VALUE)
     maxNrOfErrors._val = 256
     
     #-----< maxnoofRABs >-----#
-    maxnoofRABs = INT(name='maxnoofRABs', mode=MODE_VALUE)
+    maxnoofRABs = INT(name=u'maxnoofRABs', mode=MODE_VALUE)
     maxnoofRABs._val = 256
     
     #-----< maxnoofAdditionalNeighbours >-----#
-    maxnoofAdditionalNeighbours = INT(name='maxnoofAdditionalNeighbours', mode=MODE_VALUE)
+    maxnoofAdditionalNeighbours = INT(name=u'maxnoofAdditionalNeighbours', mode=MODE_VALUE)
     maxnoofAdditionalNeighbours._val = 128
     
     #-----< maxnoofURAIdentities >-----#
-    maxnoofURAIdentities = INT(name='maxnoofURAIdentities', mode=MODE_VALUE)
+    maxnoofURAIdentities = INT(name=u'maxnoofURAIdentities', mode=MODE_VALUE)
     maxnoofURAIdentities._val = 8
     
     #-----< maxnoofNeighbours >-----#
-    maxnoofNeighbours = INT(name='maxnoofNeighbours', mode=MODE_VALUE)
+    maxnoofNeighbours = INT(name=u'maxnoofNeighbours', mode=MODE_VALUE)
     maxnoofNeighbours._val = 32
     
     #-----< maxnoofIurhAddresses >-----#
-    maxnoofIurhAddresses = INT(name='maxnoofIurhAddresses', mode=MODE_VALUE)
+    maxnoofIurhAddresses = INT(name=u'maxnoofIurhAddresses', mode=MODE_VALUE)
     maxnoofIurhAddresses._val = 3
     
     #-----< id-Cause >-----#
-    id_Cause = INT(name='id-Cause', mode=MODE_VALUE, typeref=ASN1RefType(('HNBAP-CommonDataTypes', 'ProtocolIE-ID')))
+    id_Cause = INT(name=u'id-Cause', mode=MODE_VALUE, typeref=ASN1RefType(('HNBAP-CommonDataTypes', 'ProtocolIE-ID')))
     id_Cause._val = 1
     
     #-----< id-CriticalityDiagnostics >-----#
-    id_CriticalityDiagnostics = INT(name='id-CriticalityDiagnostics', mode=MODE_VALUE, typeref=ASN1RefType(('HNBAP-CommonDataTypes', 'ProtocolIE-ID')))
+    id_CriticalityDiagnostics = INT(name=u'id-CriticalityDiagnostics', mode=MODE_VALUE, typeref=ASN1RefType(('HNBAP-CommonDataTypes', 'ProtocolIE-ID')))
     id_CriticalityDiagnostics._val = 2
     
     #-----< id-HNB-Identity >-----#
-    id_HNB_Identity = INT(name='id-HNB-Identity', mode=MODE_VALUE, typeref=ASN1RefType(('HNBAP-CommonDataTypes', 'ProtocolIE-ID')))
+    id_HNB_Identity = INT(name=u'id-HNB-Identity', mode=MODE_VALUE, typeref=ASN1RefType(('HNBAP-CommonDataTypes', 'ProtocolIE-ID')))
     id_HNB_Identity._val = 3
     
     #-----< id-Context-ID >-----#
-    id_Context_ID = INT(name='id-Context-ID', mode=MODE_VALUE, typeref=ASN1RefType(('HNBAP-CommonDataTypes', 'ProtocolIE-ID')))
+    id_Context_ID = INT(name=u'id-Context-ID', mode=MODE_VALUE, typeref=ASN1RefType(('HNBAP-CommonDataTypes', 'ProtocolIE-ID')))
     id_Context_ID._val = 4
     
     #-----< id-UE-Identity >-----#
-    id_UE_Identity = INT(name='id-UE-Identity', mode=MODE_VALUE, typeref=ASN1RefType(('HNBAP-CommonDataTypes', 'ProtocolIE-ID')))
+    id_UE_Identity = INT(name=u'id-UE-Identity', mode=MODE_VALUE, typeref=ASN1RefType(('HNBAP-CommonDataTypes', 'ProtocolIE-ID')))
     id_UE_Identity._val = 5
     
     #-----< id-LAC >-----#
-    id_LAC = INT(name='id-LAC', mode=MODE_VALUE, typeref=ASN1RefType(('HNBAP-CommonDataTypes', 'ProtocolIE-ID')))
+    id_LAC = INT(name=u'id-LAC', mode=MODE_VALUE, typeref=ASN1RefType(('HNBAP-CommonDataTypes', 'ProtocolIE-ID')))
     id_LAC._val = 6
     
     #-----< id-RAC >-----#
-    id_RAC = INT(name='id-RAC', mode=MODE_VALUE, typeref=ASN1RefType(('HNBAP-CommonDataTypes', 'ProtocolIE-ID')))
+    id_RAC = INT(name=u'id-RAC', mode=MODE_VALUE, typeref=ASN1RefType(('HNBAP-CommonDataTypes', 'ProtocolIE-ID')))
     id_RAC._val = 7
     
     #-----< id-HNB-Location-Information >-----#
-    id_HNB_Location_Information = INT(name='id-HNB-Location-Information', mode=MODE_VALUE, typeref=ASN1RefType(('HNBAP-CommonDataTypes', 'ProtocolIE-ID')))
+    id_HNB_Location_Information = INT(name=u'id-HNB-Location-Information', mode=MODE_VALUE, typeref=ASN1RefType(('HNBAP-CommonDataTypes', 'ProtocolIE-ID')))
     id_HNB_Location_Information._val = 8
     
     #-----< id-PLMNidentity >-----#
-    id_PLMNidentity = INT(name='id-PLMNidentity', mode=MODE_VALUE, typeref=ASN1RefType(('HNBAP-CommonDataTypes', 'ProtocolIE-ID')))
+    id_PLMNidentity = INT(name=u'id-PLMNidentity', mode=MODE_VALUE, typeref=ASN1RefType(('HNBAP-CommonDataTypes', 'ProtocolIE-ID')))
     id_PLMNidentity._val = 9
     
     #-----< id-SAC >-----#
-    id_SAC = INT(name='id-SAC', mode=MODE_VALUE, typeref=ASN1RefType(('HNBAP-CommonDataTypes', 'ProtocolIE-ID')))
+    id_SAC = INT(name=u'id-SAC', mode=MODE_VALUE, typeref=ASN1RefType(('HNBAP-CommonDataTypes', 'ProtocolIE-ID')))
     id_SAC._val = 10
     
     #-----< id-CellIdentity >-----#
-    id_CellIdentity = INT(name='id-CellIdentity', mode=MODE_VALUE, typeref=ASN1RefType(('HNBAP-CommonDataTypes', 'ProtocolIE-ID')))
+    id_CellIdentity = INT(name=u'id-CellIdentity', mode=MODE_VALUE, typeref=ASN1RefType(('HNBAP-CommonDataTypes', 'ProtocolIE-ID')))
     id_CellIdentity._val = 11
     
     #-----< id-Registration-Cause >-----#
-    id_Registration_Cause = INT(name='id-Registration-Cause', mode=MODE_VALUE, typeref=ASN1RefType(('HNBAP-CommonDataTypes', 'ProtocolIE-ID')))
+    id_Registration_Cause = INT(name=u'id-Registration-Cause', mode=MODE_VALUE, typeref=ASN1RefType(('HNBAP-CommonDataTypes', 'ProtocolIE-ID')))
     id_Registration_Cause._val = 12
     
     #-----< id-UE-Capabilities >-----#
-    id_UE_Capabilities = INT(name='id-UE-Capabilities', mode=MODE_VALUE, typeref=ASN1RefType(('HNBAP-CommonDataTypes', 'ProtocolIE-ID')))
+    id_UE_Capabilities = INT(name=u'id-UE-Capabilities', mode=MODE_VALUE, typeref=ASN1RefType(('HNBAP-CommonDataTypes', 'ProtocolIE-ID')))
     id_UE_Capabilities._val = 13
     
     #-----< id-RNC-ID >-----#
-    id_RNC_ID = INT(name='id-RNC-ID', mode=MODE_VALUE, typeref=ASN1RefType(('HNBAP-CommonDataTypes', 'ProtocolIE-ID')))
+    id_RNC_ID = INT(name=u'id-RNC-ID', mode=MODE_VALUE, typeref=ASN1RefType(('HNBAP-CommonDataTypes', 'ProtocolIE-ID')))
     id_RNC_ID._val = 14
     
     #-----< id-CSG-ID >-----#
-    id_CSG_ID = INT(name='id-CSG-ID', mode=MODE_VALUE, typeref=ASN1RefType(('HNBAP-CommonDataTypes', 'ProtocolIE-ID')))
+    id_CSG_ID = INT(name=u'id-CSG-ID', mode=MODE_VALUE, typeref=ASN1RefType(('HNBAP-CommonDataTypes', 'ProtocolIE-ID')))
     id_CSG_ID._val = 15
     
     #-----< id-BackoffTimer >-----#
-    id_BackoffTimer = INT(name='id-BackoffTimer', mode=MODE_VALUE, typeref=ASN1RefType(('HNBAP-CommonDataTypes', 'ProtocolIE-ID')))
+    id_BackoffTimer = INT(name=u'id-BackoffTimer', mode=MODE_VALUE, typeref=ASN1RefType(('HNBAP-CommonDataTypes', 'ProtocolIE-ID')))
     id_BackoffTimer._val = 16
     
     #-----< id-HNB-Internet-Information >-----#
-    id_HNB_Internet_Information = INT(name='id-HNB-Internet-Information', mode=MODE_VALUE, typeref=ASN1RefType(('HNBAP-CommonDataTypes', 'ProtocolIE-ID')))
+    id_HNB_Internet_Information = INT(name=u'id-HNB-Internet-Information', mode=MODE_VALUE, typeref=ASN1RefType(('HNBAP-CommonDataTypes', 'ProtocolIE-ID')))
     id_HNB_Internet_Information._val = 17
     
     #-----< id-HNB-Cell-Access-Mode >-----#
-    id_HNB_Cell_Access_Mode = INT(name='id-HNB-Cell-Access-Mode', mode=MODE_VALUE, typeref=ASN1RefType(('HNBAP-CommonDataTypes', 'ProtocolIE-ID')))
+    id_HNB_Cell_Access_Mode = INT(name=u'id-HNB-Cell-Access-Mode', mode=MODE_VALUE, typeref=ASN1RefType(('HNBAP-CommonDataTypes', 'ProtocolIE-ID')))
     id_HNB_Cell_Access_Mode._val = 18
     
     #-----< id-MuxPortNumber >-----#
-    id_MuxPortNumber = INT(name='id-MuxPortNumber', mode=MODE_VALUE, typeref=ASN1RefType(('HNBAP-CommonDataTypes', 'ProtocolIE-ID')))
+    id_MuxPortNumber = INT(name=u'id-MuxPortNumber', mode=MODE_VALUE, typeref=ASN1RefType(('HNBAP-CommonDataTypes', 'ProtocolIE-ID')))
     id_MuxPortNumber._val = 19
     
     #-----< id-Service-Area-For-Broadcast >-----#
-    id_Service_Area_For_Broadcast = INT(name='id-Service-Area-For-Broadcast', mode=MODE_VALUE, typeref=ASN1RefType(('HNBAP-CommonDataTypes', 'ProtocolIE-ID')))
+    id_Service_Area_For_Broadcast = INT(name=u'id-Service-Area-For-Broadcast', mode=MODE_VALUE, typeref=ASN1RefType(('HNBAP-CommonDataTypes', 'ProtocolIE-ID')))
     id_Service_Area_For_Broadcast._val = 20
     
     #-----< id-CSGMembershipStatus >-----#
-    id_CSGMembershipStatus = INT(name='id-CSGMembershipStatus', mode=MODE_VALUE, typeref=ASN1RefType(('HNBAP-CommonDataTypes', 'ProtocolIE-ID')))
+    id_CSGMembershipStatus = INT(name=u'id-CSGMembershipStatus', mode=MODE_VALUE, typeref=ASN1RefType(('HNBAP-CommonDataTypes', 'ProtocolIE-ID')))
     id_CSGMembershipStatus._val = 21
     
     #-----< id-RABList >-----#
-    id_RABList = INT(name='id-RABList', mode=MODE_VALUE, typeref=ASN1RefType(('HNBAP-CommonDataTypes', 'ProtocolIE-ID')))
+    id_RABList = INT(name=u'id-RABList', mode=MODE_VALUE, typeref=ASN1RefType(('HNBAP-CommonDataTypes', 'ProtocolIE-ID')))
     id_RABList._val = 22
     
     #-----< id-HNBConfigInfo >-----#
-    id_HNBConfigInfo = INT(name='id-HNBConfigInfo', mode=MODE_VALUE, typeref=ASN1RefType(('HNBAP-CommonDataTypes', 'ProtocolIE-ID')))
+    id_HNBConfigInfo = INT(name=u'id-HNBConfigInfo', mode=MODE_VALUE, typeref=ASN1RefType(('HNBAP-CommonDataTypes', 'ProtocolIE-ID')))
     id_HNBConfigInfo._val = 23
     
     #-----< id-AccessResult >-----#
-    id_AccessResult = INT(name='id-AccessResult', mode=MODE_VALUE, typeref=ASN1RefType(('HNBAP-CommonDataTypes', 'ProtocolIE-ID')))
+    id_AccessResult = INT(name=u'id-AccessResult', mode=MODE_VALUE, typeref=ASN1RefType(('HNBAP-CommonDataTypes', 'ProtocolIE-ID')))
     id_AccessResult._val = 25
     
     #-----< id-Update-cause >-----#
-    id_Update_cause = INT(name='id-Update-cause', mode=MODE_VALUE, typeref=ASN1RefType(('HNBAP-CommonDataTypes', 'ProtocolIE-ID')))
+    id_Update_cause = INT(name=u'id-Update-cause', mode=MODE_VALUE, typeref=ASN1RefType(('HNBAP-CommonDataTypes', 'ProtocolIE-ID')))
     id_Update_cause._val = 26
     
     #-----< id-NeighbourInfoList >-----#
-    id_NeighbourInfoList = INT(name='id-NeighbourInfoList', mode=MODE_VALUE, typeref=ASN1RefType(('HNBAP-CommonDataTypes', 'ProtocolIE-ID')))
+    id_NeighbourInfoList = INT(name=u'id-NeighbourInfoList', mode=MODE_VALUE, typeref=ASN1RefType(('HNBAP-CommonDataTypes', 'ProtocolIE-ID')))
     id_NeighbourInfoList._val = 27
     
     #-----< id-NeighbourInfoRequestList >-----#
-    id_NeighbourInfoRequestList = INT(name='id-NeighbourInfoRequestList', mode=MODE_VALUE, typeref=ASN1RefType(('HNBAP-CommonDataTypes', 'ProtocolIE-ID')))
+    id_NeighbourInfoRequestList = INT(name=u'id-NeighbourInfoRequestList', mode=MODE_VALUE, typeref=ASN1RefType(('HNBAP-CommonDataTypes', 'ProtocolIE-ID')))
     id_NeighbourInfoRequestList._val = 28
     
     #-----< id-Iurh-Signalling-TNL-Address >-----#
-    id_Iurh_Signalling_TNL_Address = INT(name='id-Iurh-Signalling-TNL-Address', mode=MODE_VALUE, typeref=ASN1RefType(('HNBAP-CommonDataTypes', 'ProtocolIE-ID')))
+    id_Iurh_Signalling_TNL_Address = INT(name=u'id-Iurh-Signalling-TNL-Address', mode=MODE_VALUE, typeref=ASN1RefType(('HNBAP-CommonDataTypes', 'ProtocolIE-ID')))
     id_Iurh_Signalling_TNL_Address._val = 29
     
     #-----< id-PSC >-----#
-    id_PSC = INT(name='id-PSC', mode=MODE_VALUE, typeref=ASN1RefType(('HNBAP-CommonDataTypes', 'ProtocolIE-ID')))
+    id_PSC = INT(name=u'id-PSC', mode=MODE_VALUE, typeref=ASN1RefType(('HNBAP-CommonDataTypes', 'ProtocolIE-ID')))
     id_PSC._val = 30
     
     #-----< id-HNB-Cell-Identifier >-----#
-    id_HNB_Cell_Identifier = INT(name='id-HNB-Cell-Identifier', mode=MODE_VALUE, typeref=ASN1RefType(('HNBAP-CommonDataTypes', 'ProtocolIE-ID')))
+    id_HNB_Cell_Identifier = INT(name=u'id-HNB-Cell-Identifier', mode=MODE_VALUE, typeref=ASN1RefType(('HNBAP-CommonDataTypes', 'ProtocolIE-ID')))
     id_HNB_Cell_Identifier._val = 31
     
     #-----< id-Tunnel-Information >-----#
-    id_Tunnel_Information = INT(name='id-Tunnel-Information', mode=MODE_VALUE, typeref=ASN1RefType(('HNBAP-CommonDataTypes', 'ProtocolIE-ID')))
+    id_Tunnel_Information = INT(name=u'id-Tunnel-Information', mode=MODE_VALUE, typeref=ASN1RefType(('HNBAP-CommonDataTypes', 'ProtocolIE-ID')))
     id_Tunnel_Information._val = 41
     
     #-----< id-CELL-FACHMobilitySupport >-----#
-    id_CELL_FACHMobilitySupport = INT(name='id-CELL-FACHMobilitySupport', mode=MODE_VALUE, typeref=ASN1RefType(('HNBAP-CommonDataTypes', 'ProtocolIE-ID')))
+    id_CELL_FACHMobilitySupport = INT(name=u'id-CELL-FACHMobilitySupport', mode=MODE_VALUE, typeref=ASN1RefType(('HNBAP-CommonDataTypes', 'ProtocolIE-ID')))
     id_CELL_FACHMobilitySupport._val = 42
     
     #-----< id-S-RNTIPrefix >-----#
-    id_S_RNTIPrefix = INT(name='id-S-RNTIPrefix', mode=MODE_VALUE, typeref=ASN1RefType(('HNBAP-CommonDataTypes', 'ProtocolIE-ID')))
+    id_S_RNTIPrefix = INT(name=u'id-S-RNTIPrefix', mode=MODE_VALUE, typeref=ASN1RefType(('HNBAP-CommonDataTypes', 'ProtocolIE-ID')))
     id_S_RNTIPrefix._val = 43
     
     #-----< id-URAIdentity >-----#
-    id_URAIdentity = INT(name='id-URAIdentity', mode=MODE_VALUE, typeref=ASN1RefType(('HNBAP-CommonDataTypes', 'ProtocolIE-ID')))
+    id_URAIdentity = INT(name=u'id-URAIdentity', mode=MODE_VALUE, typeref=ASN1RefType(('HNBAP-CommonDataTypes', 'ProtocolIE-ID')))
     id_URAIdentity._val = 44
     
     #-----< id-NeighbourIdentity >-----#
-    id_NeighbourIdentity = INT(name='id-NeighbourIdentity', mode=MODE_VALUE, typeref=ASN1RefType(('HNBAP-CommonDataTypes', 'ProtocolIE-ID')))
+    id_NeighbourIdentity = INT(name=u'id-NeighbourIdentity', mode=MODE_VALUE, typeref=ASN1RefType(('HNBAP-CommonDataTypes', 'ProtocolIE-ID')))
     id_NeighbourIdentity._val = 45
     
     #-----< id-HNBCapacity >-----#
-    id_HNBCapacity = INT(name='id-HNBCapacity', mode=MODE_VALUE, typeref=ASN1RefType(('HNBAP-CommonDataTypes', 'ProtocolIE-ID')))
+    id_HNBCapacity = INT(name=u'id-HNBCapacity', mode=MODE_VALUE, typeref=ASN1RefType(('HNBAP-CommonDataTypes', 'ProtocolIE-ID')))
     id_HNBCapacity._val = 46
     
     #-----< id-NeighbourCellIdentityList >-----#
-    id_NeighbourCellIdentityList = INT(name='id-NeighbourCellIdentityList', mode=MODE_VALUE, typeref=ASN1RefType(('HNBAP-CommonDataTypes', 'ProtocolIE-ID')))
+    id_NeighbourCellIdentityList = INT(name=u'id-NeighbourCellIdentityList', mode=MODE_VALUE, typeref=ASN1RefType(('HNBAP-CommonDataTypes', 'ProtocolIE-ID')))
     id_NeighbourCellIdentityList._val = 47
     
     #-----< id-AdditionalNeighbourInfoList >-----#
-    id_AdditionalNeighbourInfoList = INT(name='id-AdditionalNeighbourInfoList', mode=MODE_VALUE, typeref=ASN1RefType(('HNBAP-CommonDataTypes', 'ProtocolIE-ID')))
+    id_AdditionalNeighbourInfoList = INT(name=u'id-AdditionalNeighbourInfoList', mode=MODE_VALUE, typeref=ASN1RefType(('HNBAP-CommonDataTypes', 'ProtocolIE-ID')))
     id_AdditionalNeighbourInfoList._val = 48
     
     #-----< id-U-RNTI >-----#
-    id_U_RNTI = INT(name='id-U-RNTI', mode=MODE_VALUE, typeref=ASN1RefType(('HNBAP-CommonDataTypes', 'ProtocolIE-ID')))
+    id_U_RNTI = INT(name=u'id-U-RNTI', mode=MODE_VALUE, typeref=ASN1RefType(('HNBAP-CommonDataTypes', 'ProtocolIE-ID')))
     id_U_RNTI._val = 49
     
     #-----< id-UnknownU-RNTIIndication >-----#
-    id_UnknownU_RNTIIndication = INT(name='id-UnknownU-RNTIIndication', mode=MODE_VALUE, typeref=ASN1RefType(('HNBAP-CommonDataTypes', 'ProtocolIE-ID')))
+    id_UnknownU_RNTIIndication = INT(name=u'id-UnknownU-RNTIIndication', mode=MODE_VALUE, typeref=ASN1RefType(('HNBAP-CommonDataTypes', 'ProtocolIE-ID')))
     id_UnknownU_RNTIIndication._val = 50
     
     #-----< id-HNB-GWResponse >-----#
-    id_HNB_GWResponse = INT(name='id-HNB-GWResponse', mode=MODE_VALUE, typeref=ASN1RefType(('HNBAP-CommonDataTypes', 'ProtocolIE-ID')))
+    id_HNB_GWResponse = INT(name=u'id-HNB-GWResponse', mode=MODE_VALUE, typeref=ASN1RefType(('HNBAP-CommonDataTypes', 'ProtocolIE-ID')))
     id_HNB_GWResponse._val = 51
     
     #-----< id-URAIdentityList >-----#
-    id_URAIdentityList = INT(name='id-URAIdentityList', mode=MODE_VALUE, typeref=ASN1RefType(('HNBAP-CommonDataTypes', 'ProtocolIE-ID')))
+    id_URAIdentityList = INT(name=u'id-URAIdentityList', mode=MODE_VALUE, typeref=ASN1RefType(('HNBAP-CommonDataTypes', 'ProtocolIE-ID')))
     id_URAIdentityList._val = 52
     
     _all_ = [
@@ -546,117 +546,117 @@ class HNBAP_Constants:
 
 class HNBAP_Containers:
 
-    _name_  = 'HNBAP-Containers'
+    _name_  = u'HNBAP-Containers'
     _oid_   = [0, 4, 0, 0, 20, 3, 6, 1, 5]
     
     _obj_ = [
-        'HNBAP-PROTOCOL-IES',
-        'HNBAP-PROTOCOL-EXTENSION',
-        'HNBAP-PRIVATE-IES',
-        'ProtocolIE-Container',
-        'ProtocolIE-Single-Container',
-        'ProtocolIE-Field',
-        'ProtocolIE-ContainerList',
-        'ProtocolExtensionContainer',
-        'ProtocolExtensionField',
-        'PrivateIE-Container',
-        'PrivateIE-Field',
+        u'HNBAP-PROTOCOL-IES',
+        u'HNBAP-PROTOCOL-EXTENSION',
+        u'HNBAP-PRIVATE-IES',
+        u'ProtocolIE-Container',
+        u'ProtocolIE-Single-Container',
+        u'ProtocolIE-Field',
+        u'ProtocolIE-ContainerList',
+        u'ProtocolExtensionContainer',
+        u'ProtocolExtensionField',
+        u'PrivateIE-Container',
+        u'PrivateIE-Field',
         ]
     _type_ = [
-        'HNBAP-PROTOCOL-IES',
-        'HNBAP-PROTOCOL-EXTENSION',
-        'HNBAP-PRIVATE-IES',
-        'ProtocolIE-Container',
-        'ProtocolIE-Single-Container',
-        'ProtocolIE-Field',
-        'ProtocolIE-ContainerList',
-        'ProtocolExtensionContainer',
-        'ProtocolExtensionField',
-        'PrivateIE-Container',
-        'PrivateIE-Field',
+        u'HNBAP-PROTOCOL-IES',
+        u'HNBAP-PROTOCOL-EXTENSION',
+        u'HNBAP-PRIVATE-IES',
+        u'ProtocolIE-Container',
+        u'ProtocolIE-Single-Container',
+        u'ProtocolIE-Field',
+        u'ProtocolIE-ContainerList',
+        u'ProtocolExtensionContainer',
+        u'ProtocolExtensionField',
+        u'PrivateIE-Container',
+        u'PrivateIE-Field',
         ]
     _set_ = [
         ]
     _val_ = [
         ]
     _class_ = [
-        'HNBAP-PROTOCOL-IES',
-        'HNBAP-PROTOCOL-EXTENSION',
-        'HNBAP-PRIVATE-IES',
+        u'HNBAP-PROTOCOL-IES',
+        u'HNBAP-PROTOCOL-EXTENSION',
+        u'HNBAP-PRIVATE-IES',
         ]
     _param_ = [
-        'ProtocolIE-Container',
-        'ProtocolIE-Single-Container',
-        'ProtocolIE-Field',
-        'ProtocolIE-ContainerList',
-        'ProtocolExtensionContainer',
-        'ProtocolExtensionField',
-        'PrivateIE-Container',
-        'PrivateIE-Field',
+        u'ProtocolIE-Container',
+        u'ProtocolIE-Single-Container',
+        u'ProtocolIE-Field',
+        u'ProtocolIE-ContainerList',
+        u'ProtocolExtensionContainer',
+        u'ProtocolExtensionField',
+        u'PrivateIE-Container',
+        u'PrivateIE-Field',
         ]
     
     #-----< HNBAP-PROTOCOL-IES >-----#
-    HNBAP_PROTOCOL_IES = CLASS(name='HNBAP-PROTOCOL-IES', mode=MODE_TYPE)
-    _HNBAP_PROTOCOL_IES_id = INT(name='id', mode=MODE_VALUE, typeref=ASN1RefType(('HNBAP-CommonDataTypes', 'ProtocolIE-ID')), uniq=True)
-    _HNBAP_PROTOCOL_IES_criticality = ENUM(name='criticality', mode=MODE_VALUE, typeref=ASN1RefType(('HNBAP-CommonDataTypes', 'Criticality')))
-    _HNBAP_PROTOCOL_IES_Value = OPEN(name='Value', mode=MODE_TYPE)
-    _HNBAP_PROTOCOL_IES_presence = ENUM(name='presence', mode=MODE_VALUE, typeref=ASN1RefType(('HNBAP-CommonDataTypes', 'Presence')))
+    HNBAP_PROTOCOL_IES = CLASS(name=u'HNBAP-PROTOCOL-IES', mode=MODE_TYPE)
+    _HNBAP_PROTOCOL_IES_id = INT(name=u'id', mode=MODE_VALUE, typeref=ASN1RefType(('HNBAP-CommonDataTypes', 'ProtocolIE-ID')), uniq=True)
+    _HNBAP_PROTOCOL_IES_criticality = ENUM(name=u'criticality', mode=MODE_VALUE, typeref=ASN1RefType(('HNBAP-CommonDataTypes', 'Criticality')))
+    _HNBAP_PROTOCOL_IES_Value = OPEN(name=u'Value', mode=MODE_TYPE)
+    _HNBAP_PROTOCOL_IES_presence = ENUM(name=u'presence', mode=MODE_VALUE, typeref=ASN1RefType(('HNBAP-CommonDataTypes', 'Presence')))
     HNBAP_PROTOCOL_IES._cont = ASN1Dict([
-        ('id', _HNBAP_PROTOCOL_IES_id),
-        ('criticality', _HNBAP_PROTOCOL_IES_criticality),
-        ('Value', _HNBAP_PROTOCOL_IES_Value),
-        ('presence', _HNBAP_PROTOCOL_IES_presence),
+        (u'id', _HNBAP_PROTOCOL_IES_id),
+        (u'criticality', _HNBAP_PROTOCOL_IES_criticality),
+        (u'Value', _HNBAP_PROTOCOL_IES_Value),
+        (u'presence', _HNBAP_PROTOCOL_IES_presence),
         ])
     
     #-----< HNBAP-PROTOCOL-EXTENSION >-----#
-    HNBAP_PROTOCOL_EXTENSION = CLASS(name='HNBAP-PROTOCOL-EXTENSION', mode=MODE_TYPE)
-    _HNBAP_PROTOCOL_EXTENSION_id = INT(name='id', mode=MODE_VALUE, typeref=ASN1RefType(('HNBAP-CommonDataTypes', 'ProtocolIE-ID')), uniq=True)
-    _HNBAP_PROTOCOL_EXTENSION_criticality = ENUM(name='criticality', mode=MODE_VALUE, typeref=ASN1RefType(('HNBAP-CommonDataTypes', 'Criticality')))
-    _HNBAP_PROTOCOL_EXTENSION_Extension = OPEN(name='Extension', mode=MODE_TYPE)
-    _HNBAP_PROTOCOL_EXTENSION_presence = ENUM(name='presence', mode=MODE_VALUE, typeref=ASN1RefType(('HNBAP-CommonDataTypes', 'Presence')))
+    HNBAP_PROTOCOL_EXTENSION = CLASS(name=u'HNBAP-PROTOCOL-EXTENSION', mode=MODE_TYPE)
+    _HNBAP_PROTOCOL_EXTENSION_id = INT(name=u'id', mode=MODE_VALUE, typeref=ASN1RefType(('HNBAP-CommonDataTypes', 'ProtocolIE-ID')), uniq=True)
+    _HNBAP_PROTOCOL_EXTENSION_criticality = ENUM(name=u'criticality', mode=MODE_VALUE, typeref=ASN1RefType(('HNBAP-CommonDataTypes', 'Criticality')))
+    _HNBAP_PROTOCOL_EXTENSION_Extension = OPEN(name=u'Extension', mode=MODE_TYPE)
+    _HNBAP_PROTOCOL_EXTENSION_presence = ENUM(name=u'presence', mode=MODE_VALUE, typeref=ASN1RefType(('HNBAP-CommonDataTypes', 'Presence')))
     HNBAP_PROTOCOL_EXTENSION._cont = ASN1Dict([
-        ('id', _HNBAP_PROTOCOL_EXTENSION_id),
-        ('criticality', _HNBAP_PROTOCOL_EXTENSION_criticality),
-        ('Extension', _HNBAP_PROTOCOL_EXTENSION_Extension),
-        ('presence', _HNBAP_PROTOCOL_EXTENSION_presence),
+        (u'id', _HNBAP_PROTOCOL_EXTENSION_id),
+        (u'criticality', _HNBAP_PROTOCOL_EXTENSION_criticality),
+        (u'Extension', _HNBAP_PROTOCOL_EXTENSION_Extension),
+        (u'presence', _HNBAP_PROTOCOL_EXTENSION_presence),
         ])
     
     #-----< HNBAP-PRIVATE-IES >-----#
-    HNBAP_PRIVATE_IES = CLASS(name='HNBAP-PRIVATE-IES', mode=MODE_TYPE)
-    _HNBAP_PRIVATE_IES_id = CHOICE(name='id', mode=MODE_VALUE, typeref=ASN1RefType(('HNBAP-CommonDataTypes', 'PrivateIE-ID')))
-    _HNBAP_PRIVATE_IES_criticality = ENUM(name='criticality', mode=MODE_VALUE, typeref=ASN1RefType(('HNBAP-CommonDataTypes', 'Criticality')))
-    _HNBAP_PRIVATE_IES_Value = OPEN(name='Value', mode=MODE_TYPE)
-    _HNBAP_PRIVATE_IES_presence = ENUM(name='presence', mode=MODE_VALUE, typeref=ASN1RefType(('HNBAP-CommonDataTypes', 'Presence')))
+    HNBAP_PRIVATE_IES = CLASS(name=u'HNBAP-PRIVATE-IES', mode=MODE_TYPE)
+    _HNBAP_PRIVATE_IES_id = CHOICE(name=u'id', mode=MODE_VALUE, typeref=ASN1RefType(('HNBAP-CommonDataTypes', 'PrivateIE-ID')))
+    _HNBAP_PRIVATE_IES_criticality = ENUM(name=u'criticality', mode=MODE_VALUE, typeref=ASN1RefType(('HNBAP-CommonDataTypes', 'Criticality')))
+    _HNBAP_PRIVATE_IES_Value = OPEN(name=u'Value', mode=MODE_TYPE)
+    _HNBAP_PRIVATE_IES_presence = ENUM(name=u'presence', mode=MODE_VALUE, typeref=ASN1RefType(('HNBAP-CommonDataTypes', 'Presence')))
     HNBAP_PRIVATE_IES._cont = ASN1Dict([
-        ('id', _HNBAP_PRIVATE_IES_id),
-        ('criticality', _HNBAP_PRIVATE_IES_criticality),
-        ('Value', _HNBAP_PRIVATE_IES_Value),
-        ('presence', _HNBAP_PRIVATE_IES_presence),
+        (u'id', _HNBAP_PRIVATE_IES_id),
+        (u'criticality', _HNBAP_PRIVATE_IES_criticality),
+        (u'Value', _HNBAP_PRIVATE_IES_Value),
+        (u'presence', _HNBAP_PRIVATE_IES_presence),
         ])
     
     #-----< ProtocolIE-Container >-----#
-    ProtocolIE_Container = SEQ_OF(name='ProtocolIE-Container', mode=MODE_TYPE, param=True)
+    ProtocolIE_Container = SEQ_OF(name=u'ProtocolIE-Container', mode=MODE_TYPE, param=True)
     
     #-----< ProtocolIE-Single-Container >-----#
-    ProtocolIE_Single_Container = SEQ(name='ProtocolIE-Single-Container', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-Containers', 'ProtocolIE-Field')), param=True)
+    ProtocolIE_Single_Container = SEQ(name=u'ProtocolIE-Single-Container', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-Containers', 'ProtocolIE-Field')), param=True)
     
     #-----< ProtocolIE-Field >-----#
-    ProtocolIE_Field = SEQ(name='ProtocolIE-Field', mode=MODE_TYPE, param=True)
+    ProtocolIE_Field = SEQ(name=u'ProtocolIE-Field', mode=MODE_TYPE, param=True)
     
     #-----< ProtocolIE-ContainerList >-----#
-    ProtocolIE_ContainerList = SEQ_OF(name='ProtocolIE-ContainerList', mode=MODE_TYPE, param=True)
+    ProtocolIE_ContainerList = SEQ_OF(name=u'ProtocolIE-ContainerList', mode=MODE_TYPE, param=True)
     
     #-----< ProtocolExtensionContainer >-----#
-    ProtocolExtensionContainer = SEQ_OF(name='ProtocolExtensionContainer', mode=MODE_TYPE, param=True)
+    ProtocolExtensionContainer = SEQ_OF(name=u'ProtocolExtensionContainer', mode=MODE_TYPE, param=True)
     
     #-----< ProtocolExtensionField >-----#
-    ProtocolExtensionField = SEQ(name='ProtocolExtensionField', mode=MODE_TYPE, param=True)
+    ProtocolExtensionField = SEQ(name=u'ProtocolExtensionField', mode=MODE_TYPE, param=True)
     
     #-----< PrivateIE-Container >-----#
-    PrivateIE_Container = SEQ_OF(name='PrivateIE-Container', mode=MODE_TYPE, param=True)
+    PrivateIE_Container = SEQ_OF(name=u'PrivateIE-Container', mode=MODE_TYPE, param=True)
     
     #-----< PrivateIE-Field >-----#
-    PrivateIE_Field = SEQ(name='PrivateIE-Field', mode=MODE_TYPE, param=True)
+    PrivateIE_Field = SEQ(name=u'PrivateIE-Field', mode=MODE_TYPE, param=True)
     
     _all_ = [
         _HNBAP_PROTOCOL_IES_id,
@@ -678,1480 +678,1480 @@ class HNBAP_Containers:
 
 class HNBAP_IEs:
 
-    _name_  = 'HNBAP-IEs'
+    _name_  = u'HNBAP-IEs'
     _oid_   = [0, 4, 0, 0, 20, 3, 6, 1, 2]
     
     _obj_ = [
-        'Access-stratum-release-indicator',
-        'AccessResult',
-        'AltitudeAndDirection',
-        'BackoffTimer',
-        'BindingID',
-        'Cause',
-        'CauseRadioNetwork',
-        'CauseTransport',
-        'CauseProtocol',
-        'CauseMisc',
-        'CellIdentity',
-        'CELL-FACHMobilitySupport',
-        'Context-ID',
-        'CriticalityDiagnostics',
-        'CriticalityDiagnostics-IE-List',
-        'CriticalityDiagnostics-IE-List-ExtIEs',
-        'CriticalityDiagnostics-ExtIEs',
-        'CSG-ID',
-        'CSG-Capability',
-        'CSGMembershipStatus',
-        'CGI',
-        'CGI-ExtIEs',
-        'CI',
-        'CN-DomainIndicator',
-        'ESN',
-        'GeographicalLocation',
-        'GeographicLocation-ExtIEs',
-        'GeographicalCoordinates',
-        'GeographicalCoordinates-ExtIEs',
-        'GTP-TEI',
-        'HNBCapacity',
-        'HNB-Cell-Access-Mode',
-        'HNB-Cell-Identifier',
-        'HNB-Cell-Identifier-ExtIEs',
-        'HNB-GWResponse',
-        'HNB-RNL-Identity',
-        'HNBConfigInfo',
-        'HNBConfigInfo-ExtIEs',
-        'ConfigurationInformation',
-        'HNBConfigurationInformationProvided',
-        'HNBConfigurationInformationProvided-ExtIEs',
-        'HNBConfigurationInformationMissing',
-        'HNBConfigurationInformationMissing-ExtIEs',
-        'HNB-Location-Information',
-        'HNB-Location-Information-ExtIEs',
-        'HNB-Identity',
-        'HNB-Identity-ExtIEs',
-        'HNB-Identity-Info',
-        'IMEI',
-        'IMSI',
-        'IMSIDS41',
-        'IMSIESN',
-        'IP-Address',
-        'IP-Address-ExtIEs',
-        'Ipv4Address',
-        'Ipv6Address',
-        'Iurh-Signalling-TNL-AddressList',
-        'LAC',
-        'LAI',
-        'MacroCoverageInformation',
-        'MacroCoverageInformation-ExtIEs',
-        'MacroCellID',
-        'MuxPortNumber',
-        'NeighbourCellIdentityList',
-        'NeighbourIdentity',
-        'NeighbourInfoList',
-        'AdditionalNeighbourInfoList',
-        'NeighbourInfoRequestList',
-        'NeighbourInfoRequestItem',
-        'NeighbourInfoRequestItem-ExtIEs',
-        'PLMNidentity',
-        'PSC',
-        'PTMSI',
-        'PTMSIRAI',
-        'RAB-ID',
-        'RABList',
-        'RABListItem',
-        'RABListItem-ExtIEs',
-        'RAC',
-        'RAI',
-        'Registration-Cause',
-        'RNC-ID',
-        'SAC',
-        'S-RNTIPrefix',
-        'TMSILAI',
-        'TMSIDS41',
-        'TransportInfo',
-        'TransportInfo-ExtIEs',
-        'TransportLayerAddress',
-        'Tunnel-Information',
-        'Tunnel-Information-ExtIEs',
-        'TypeOfError',
-        'UDP-Port-Number',
-        'UE-Capabilities',
-        'UE-Capabilities-ExtIEs',
-        'UTRANCellID',
-        'UTRANCellID-ExtIEs',
-        'UE-Identity',
-        'Update-cause',
-        'URAIdentityList',
-        'URAIdentity',
-        'U-RNTI',
-        'UnknownU-RNTIIndication',
+        u'Access-stratum-release-indicator',
+        u'AccessResult',
+        u'AltitudeAndDirection',
+        u'BackoffTimer',
+        u'BindingID',
+        u'Cause',
+        u'CauseRadioNetwork',
+        u'CauseTransport',
+        u'CauseProtocol',
+        u'CauseMisc',
+        u'CellIdentity',
+        u'CELL-FACHMobilitySupport',
+        u'Context-ID',
+        u'CriticalityDiagnostics',
+        u'CriticalityDiagnostics-IE-List',
+        u'CriticalityDiagnostics-IE-List-ExtIEs',
+        u'CriticalityDiagnostics-ExtIEs',
+        u'CSG-ID',
+        u'CSG-Capability',
+        u'CSGMembershipStatus',
+        u'CGI',
+        u'CGI-ExtIEs',
+        u'CI',
+        u'CN-DomainIndicator',
+        u'ESN',
+        u'GeographicalLocation',
+        u'GeographicLocation-ExtIEs',
+        u'GeographicalCoordinates',
+        u'GeographicalCoordinates-ExtIEs',
+        u'GTP-TEI',
+        u'HNBCapacity',
+        u'HNB-Cell-Access-Mode',
+        u'HNB-Cell-Identifier',
+        u'HNB-Cell-Identifier-ExtIEs',
+        u'HNB-GWResponse',
+        u'HNB-RNL-Identity',
+        u'HNBConfigInfo',
+        u'HNBConfigInfo-ExtIEs',
+        u'ConfigurationInformation',
+        u'HNBConfigurationInformationProvided',
+        u'HNBConfigurationInformationProvided-ExtIEs',
+        u'HNBConfigurationInformationMissing',
+        u'HNBConfigurationInformationMissing-ExtIEs',
+        u'HNB-Location-Information',
+        u'HNB-Location-Information-ExtIEs',
+        u'HNB-Identity',
+        u'HNB-Identity-ExtIEs',
+        u'HNB-Identity-Info',
+        u'IMEI',
+        u'IMSI',
+        u'IMSIDS41',
+        u'IMSIESN',
+        u'IP-Address',
+        u'IP-Address-ExtIEs',
+        u'Ipv4Address',
+        u'Ipv6Address',
+        u'Iurh-Signalling-TNL-AddressList',
+        u'LAC',
+        u'LAI',
+        u'MacroCoverageInformation',
+        u'MacroCoverageInformation-ExtIEs',
+        u'MacroCellID',
+        u'MuxPortNumber',
+        u'NeighbourCellIdentityList',
+        u'NeighbourIdentity',
+        u'NeighbourInfoList',
+        u'AdditionalNeighbourInfoList',
+        u'NeighbourInfoRequestList',
+        u'NeighbourInfoRequestItem',
+        u'NeighbourInfoRequestItem-ExtIEs',
+        u'PLMNidentity',
+        u'PSC',
+        u'PTMSI',
+        u'PTMSIRAI',
+        u'RAB-ID',
+        u'RABList',
+        u'RABListItem',
+        u'RABListItem-ExtIEs',
+        u'RAC',
+        u'RAI',
+        u'Registration-Cause',
+        u'RNC-ID',
+        u'SAC',
+        u'S-RNTIPrefix',
+        u'TMSILAI',
+        u'TMSIDS41',
+        u'TransportInfo',
+        u'TransportInfo-ExtIEs',
+        u'TransportLayerAddress',
+        u'Tunnel-Information',
+        u'Tunnel-Information-ExtIEs',
+        u'TypeOfError',
+        u'UDP-Port-Number',
+        u'UE-Capabilities',
+        u'UE-Capabilities-ExtIEs',
+        u'UTRANCellID',
+        u'UTRANCellID-ExtIEs',
+        u'UE-Identity',
+        u'Update-cause',
+        u'URAIdentityList',
+        u'URAIdentity',
+        u'U-RNTI',
+        u'UnknownU-RNTIIndication',
         ]
     _type_ = [
-        'Access-stratum-release-indicator',
-        'AccessResult',
-        'AltitudeAndDirection',
-        'BackoffTimer',
-        'BindingID',
-        'Cause',
-        'CauseRadioNetwork',
-        'CauseTransport',
-        'CauseProtocol',
-        'CauseMisc',
-        'CellIdentity',
-        'CELL-FACHMobilitySupport',
-        'Context-ID',
-        'CriticalityDiagnostics',
-        'CriticalityDiagnostics-IE-List',
-        'CSG-ID',
-        'CSG-Capability',
-        'CSGMembershipStatus',
-        'CGI',
-        'CI',
-        'CN-DomainIndicator',
-        'ESN',
-        'GeographicalLocation',
-        'GeographicalCoordinates',
-        'GTP-TEI',
-        'HNBCapacity',
-        'HNB-Cell-Access-Mode',
-        'HNB-Cell-Identifier',
-        'HNB-GWResponse',
-        'HNB-RNL-Identity',
-        'HNBConfigInfo',
-        'ConfigurationInformation',
-        'HNBConfigurationInformationProvided',
-        'HNBConfigurationInformationMissing',
-        'HNB-Location-Information',
-        'HNB-Identity',
-        'HNB-Identity-Info',
-        'IMEI',
-        'IMSI',
-        'IMSIDS41',
-        'IMSIESN',
-        'IP-Address',
-        'Ipv4Address',
-        'Ipv6Address',
-        'Iurh-Signalling-TNL-AddressList',
-        'LAC',
-        'LAI',
-        'MacroCoverageInformation',
-        'MacroCellID',
-        'MuxPortNumber',
-        'NeighbourCellIdentityList',
-        'NeighbourIdentity',
-        'NeighbourInfoList',
-        'AdditionalNeighbourInfoList',
-        'NeighbourInfoRequestList',
-        'NeighbourInfoRequestItem',
-        'PLMNidentity',
-        'PSC',
-        'PTMSI',
-        'PTMSIRAI',
-        'RAB-ID',
-        'RABList',
-        'RABListItem',
-        'RAC',
-        'RAI',
-        'Registration-Cause',
-        'RNC-ID',
-        'SAC',
-        'S-RNTIPrefix',
-        'TMSILAI',
-        'TMSIDS41',
-        'TransportInfo',
-        'TransportLayerAddress',
-        'Tunnel-Information',
-        'TypeOfError',
-        'UDP-Port-Number',
-        'UE-Capabilities',
-        'UTRANCellID',
-        'UE-Identity',
-        'Update-cause',
-        'URAIdentityList',
-        'URAIdentity',
-        'U-RNTI',
-        'UnknownU-RNTIIndication',
+        u'Access-stratum-release-indicator',
+        u'AccessResult',
+        u'AltitudeAndDirection',
+        u'BackoffTimer',
+        u'BindingID',
+        u'Cause',
+        u'CauseRadioNetwork',
+        u'CauseTransport',
+        u'CauseProtocol',
+        u'CauseMisc',
+        u'CellIdentity',
+        u'CELL-FACHMobilitySupport',
+        u'Context-ID',
+        u'CriticalityDiagnostics',
+        u'CriticalityDiagnostics-IE-List',
+        u'CSG-ID',
+        u'CSG-Capability',
+        u'CSGMembershipStatus',
+        u'CGI',
+        u'CI',
+        u'CN-DomainIndicator',
+        u'ESN',
+        u'GeographicalLocation',
+        u'GeographicalCoordinates',
+        u'GTP-TEI',
+        u'HNBCapacity',
+        u'HNB-Cell-Access-Mode',
+        u'HNB-Cell-Identifier',
+        u'HNB-GWResponse',
+        u'HNB-RNL-Identity',
+        u'HNBConfigInfo',
+        u'ConfigurationInformation',
+        u'HNBConfigurationInformationProvided',
+        u'HNBConfigurationInformationMissing',
+        u'HNB-Location-Information',
+        u'HNB-Identity',
+        u'HNB-Identity-Info',
+        u'IMEI',
+        u'IMSI',
+        u'IMSIDS41',
+        u'IMSIESN',
+        u'IP-Address',
+        u'Ipv4Address',
+        u'Ipv6Address',
+        u'Iurh-Signalling-TNL-AddressList',
+        u'LAC',
+        u'LAI',
+        u'MacroCoverageInformation',
+        u'MacroCellID',
+        u'MuxPortNumber',
+        u'NeighbourCellIdentityList',
+        u'NeighbourIdentity',
+        u'NeighbourInfoList',
+        u'AdditionalNeighbourInfoList',
+        u'NeighbourInfoRequestList',
+        u'NeighbourInfoRequestItem',
+        u'PLMNidentity',
+        u'PSC',
+        u'PTMSI',
+        u'PTMSIRAI',
+        u'RAB-ID',
+        u'RABList',
+        u'RABListItem',
+        u'RAC',
+        u'RAI',
+        u'Registration-Cause',
+        u'RNC-ID',
+        u'SAC',
+        u'S-RNTIPrefix',
+        u'TMSILAI',
+        u'TMSIDS41',
+        u'TransportInfo',
+        u'TransportLayerAddress',
+        u'Tunnel-Information',
+        u'TypeOfError',
+        u'UDP-Port-Number',
+        u'UE-Capabilities',
+        u'UTRANCellID',
+        u'UE-Identity',
+        u'Update-cause',
+        u'URAIdentityList',
+        u'URAIdentity',
+        u'U-RNTI',
+        u'UnknownU-RNTIIndication',
         ]
     _set_ = [
-        'CriticalityDiagnostics-IE-List-ExtIEs',
-        'CriticalityDiagnostics-ExtIEs',
-        'CGI-ExtIEs',
-        'GeographicLocation-ExtIEs',
-        'GeographicalCoordinates-ExtIEs',
-        'HNB-Cell-Identifier-ExtIEs',
-        'HNBConfigInfo-ExtIEs',
-        'HNBConfigurationInformationProvided-ExtIEs',
-        'HNBConfigurationInformationMissing-ExtIEs',
-        'HNB-Location-Information-ExtIEs',
-        'HNB-Identity-ExtIEs',
-        'IP-Address-ExtIEs',
-        'MacroCoverageInformation-ExtIEs',
-        'NeighbourInfoRequestItem-ExtIEs',
-        'RABListItem-ExtIEs',
-        'TransportInfo-ExtIEs',
-        'Tunnel-Information-ExtIEs',
-        'UE-Capabilities-ExtIEs',
-        'UTRANCellID-ExtIEs',
+        u'CriticalityDiagnostics-IE-List-ExtIEs',
+        u'CriticalityDiagnostics-ExtIEs',
+        u'CGI-ExtIEs',
+        u'GeographicLocation-ExtIEs',
+        u'GeographicalCoordinates-ExtIEs',
+        u'HNB-Cell-Identifier-ExtIEs',
+        u'HNBConfigInfo-ExtIEs',
+        u'HNBConfigurationInformationProvided-ExtIEs',
+        u'HNBConfigurationInformationMissing-ExtIEs',
+        u'HNB-Location-Information-ExtIEs',
+        u'HNB-Identity-ExtIEs',
+        u'IP-Address-ExtIEs',
+        u'MacroCoverageInformation-ExtIEs',
+        u'NeighbourInfoRequestItem-ExtIEs',
+        u'RABListItem-ExtIEs',
+        u'TransportInfo-ExtIEs',
+        u'Tunnel-Information-ExtIEs',
+        u'UE-Capabilities-ExtIEs',
+        u'UTRANCellID-ExtIEs',
         ]
     _val_ = [
         ]
     _class_ = [
-        'CriticalityDiagnostics-IE-List-ExtIEs',
-        'CriticalityDiagnostics-ExtIEs',
-        'CGI-ExtIEs',
-        'GeographicLocation-ExtIEs',
-        'GeographicalCoordinates-ExtIEs',
-        'HNB-Cell-Identifier-ExtIEs',
-        'HNBConfigInfo-ExtIEs',
-        'HNBConfigurationInformationProvided-ExtIEs',
-        'HNBConfigurationInformationMissing-ExtIEs',
-        'HNB-Location-Information-ExtIEs',
-        'HNB-Identity-ExtIEs',
-        'IP-Address-ExtIEs',
-        'MacroCoverageInformation-ExtIEs',
-        'NeighbourInfoRequestItem-ExtIEs',
-        'RABListItem-ExtIEs',
-        'TransportInfo-ExtIEs',
-        'Tunnel-Information-ExtIEs',
-        'UE-Capabilities-ExtIEs',
-        'UTRANCellID-ExtIEs',
+        u'CriticalityDiagnostics-IE-List-ExtIEs',
+        u'CriticalityDiagnostics-ExtIEs',
+        u'CGI-ExtIEs',
+        u'GeographicLocation-ExtIEs',
+        u'GeographicalCoordinates-ExtIEs',
+        u'HNB-Cell-Identifier-ExtIEs',
+        u'HNBConfigInfo-ExtIEs',
+        u'HNBConfigurationInformationProvided-ExtIEs',
+        u'HNBConfigurationInformationMissing-ExtIEs',
+        u'HNB-Location-Information-ExtIEs',
+        u'HNB-Identity-ExtIEs',
+        u'IP-Address-ExtIEs',
+        u'MacroCoverageInformation-ExtIEs',
+        u'NeighbourInfoRequestItem-ExtIEs',
+        u'RABListItem-ExtIEs',
+        u'TransportInfo-ExtIEs',
+        u'Tunnel-Information-ExtIEs',
+        u'UE-Capabilities-ExtIEs',
+        u'UTRANCellID-ExtIEs',
         ]
     _param_ = [
         ]
     
     #-----< Access-stratum-release-indicator >-----#
-    Access_stratum_release_indicator = ENUM(name='Access-stratum-release-indicator', mode=MODE_TYPE)
-    Access_stratum_release_indicator._cont = ASN1Dict([('r99', 0), ('rel-4', 1), ('rel-5', 2), ('rel-6', 3), ('rel-7', 4), ('rel-8-and-beyond', 5)])
+    Access_stratum_release_indicator = ENUM(name=u'Access-stratum-release-indicator', mode=MODE_TYPE)
+    Access_stratum_release_indicator._cont = ASN1Dict([(u'r99', 0), (u'rel-4', 1), (u'rel-5', 2), (u'rel-6', 3), (u'rel-7', 4), (u'rel-8-and-beyond', 5)])
     Access_stratum_release_indicator._ext = []
     
     #-----< AccessResult >-----#
-    AccessResult = ENUM(name='AccessResult', mode=MODE_TYPE)
-    AccessResult._cont = ASN1Dict([('allowed', 0), ('notAllowed', 1)])
+    AccessResult = ENUM(name=u'AccessResult', mode=MODE_TYPE)
+    AccessResult._cont = ASN1Dict([(u'allowed', 0), (u'notAllowed', 1)])
     AccessResult._ext = []
     
     #-----< AltitudeAndDirection >-----#
-    AltitudeAndDirection = SEQ(name='AltitudeAndDirection', mode=MODE_TYPE)
-    _AltitudeAndDirection_directionOfAltitude = ENUM(name='directionOfAltitude', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _AltitudeAndDirection_directionOfAltitude._cont = ASN1Dict([('height', 0), ('depth', 1)])
+    AltitudeAndDirection = SEQ(name=u'AltitudeAndDirection', mode=MODE_TYPE)
+    _AltitudeAndDirection_directionOfAltitude = ENUM(name=u'directionOfAltitude', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _AltitudeAndDirection_directionOfAltitude._cont = ASN1Dict([(u'height', 0), (u'depth', 1)])
     _AltitudeAndDirection_directionOfAltitude._ext = None
-    _AltitudeAndDirection_altitude = INT(name='altitude', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _AltitudeAndDirection_altitude = INT(name=u'altitude', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     _AltitudeAndDirection_altitude._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=32767)], ev=None, er=[])
     AltitudeAndDirection._cont = ASN1Dict([
-        ('directionOfAltitude', _AltitudeAndDirection_directionOfAltitude),
-        ('altitude', _AltitudeAndDirection_altitude),
+        (u'directionOfAltitude', _AltitudeAndDirection_directionOfAltitude),
+        (u'altitude', _AltitudeAndDirection_altitude),
         ])
     AltitudeAndDirection._ext = []
     
     #-----< BackoffTimer >-----#
-    BackoffTimer = INT(name='BackoffTimer', mode=MODE_TYPE)
+    BackoffTimer = INT(name=u'BackoffTimer', mode=MODE_TYPE)
     BackoffTimer._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=3600)], ev=None, er=[])
     
     #-----< BindingID >-----#
-    BindingID = OCT_STR(name='BindingID', mode=MODE_TYPE)
+    BindingID = OCT_STR(name=u'BindingID', mode=MODE_TYPE)
     BindingID._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=4)], ev=[], er=[])
     
     #-----< Cause >-----#
-    Cause = CHOICE(name='Cause', mode=MODE_TYPE)
-    _Cause_radioNetwork = ENUM(name='radioNetwork', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-IEs', 'CauseRadioNetwork')))
-    _Cause_transport = ENUM(name='transport', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-IEs', 'CauseTransport')))
-    _Cause_protocol = ENUM(name='protocol', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-IEs', 'CauseProtocol')))
-    _Cause_misc = ENUM(name='misc', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-IEs', 'CauseMisc')))
+    Cause = CHOICE(name=u'Cause', mode=MODE_TYPE)
+    _Cause_radioNetwork = ENUM(name=u'radioNetwork', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-IEs', 'CauseRadioNetwork')))
+    _Cause_transport = ENUM(name=u'transport', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-IEs', 'CauseTransport')))
+    _Cause_protocol = ENUM(name=u'protocol', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-IEs', 'CauseProtocol')))
+    _Cause_misc = ENUM(name=u'misc', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-IEs', 'CauseMisc')))
     Cause._cont = ASN1Dict([
-        ('radioNetwork', _Cause_radioNetwork),
-        ('transport', _Cause_transport),
-        ('protocol', _Cause_protocol),
-        ('misc', _Cause_misc),
+        (u'radioNetwork', _Cause_radioNetwork),
+        (u'transport', _Cause_transport),
+        (u'protocol', _Cause_protocol),
+        (u'misc', _Cause_misc),
         ])
     Cause._ext = []
     
     #-----< CauseRadioNetwork >-----#
-    CauseRadioNetwork = ENUM(name='CauseRadioNetwork', mode=MODE_TYPE)
-    CauseRadioNetwork._cont = ASN1Dict([('overload', 0), ('unauthorised-Location', 1), ('unauthorised-HNB', 2), ('hNB-parameter-mismatch', 3), ('invalid-UE-identity', 4), ('uE-not-allowed-on-this-HNB', 5), ('uE-unauthorised', 6), ('connection-with-UE-lost', 7), ('ue-RRC-release', 8), ('hNB-not-registered', 9), ('unspecified', 10), ('normal', 11), ('uE-relocated', 12), ('ue-registered-in-another-HNB', 13), ('no-neighbour-information-available', 14), ('iurh-connection-to-that-neighbour-not-Allowed', 15)])
-    CauseRadioNetwork._ext = ['no-neighbour-information-available', 'iurh-connection-to-that-neighbour-not-Allowed']
+    CauseRadioNetwork = ENUM(name=u'CauseRadioNetwork', mode=MODE_TYPE)
+    CauseRadioNetwork._cont = ASN1Dict([(u'overload', 0), (u'unauthorised-Location', 1), (u'unauthorised-HNB', 2), (u'hNB-parameter-mismatch', 3), (u'invalid-UE-identity', 4), (u'uE-not-allowed-on-this-HNB', 5), (u'uE-unauthorised', 6), (u'connection-with-UE-lost', 7), (u'ue-RRC-release', 8), (u'hNB-not-registered', 9), (u'unspecified', 10), (u'normal', 11), (u'uE-relocated', 12), (u'ue-registered-in-another-HNB', 13), (u'no-neighbour-information-available', 14), (u'iurh-connection-to-that-neighbour-not-Allowed', 15)])
+    CauseRadioNetwork._ext = [u'no-neighbour-information-available', u'iurh-connection-to-that-neighbour-not-Allowed']
     
     #-----< CauseTransport >-----#
-    CauseTransport = ENUM(name='CauseTransport', mode=MODE_TYPE)
-    CauseTransport._cont = ASN1Dict([('transport-resource-unavailable', 0), ('unspecified', 1)])
+    CauseTransport = ENUM(name=u'CauseTransport', mode=MODE_TYPE)
+    CauseTransport._cont = ASN1Dict([(u'transport-resource-unavailable', 0), (u'unspecified', 1)])
     CauseTransport._ext = []
     
     #-----< CauseProtocol >-----#
-    CauseProtocol = ENUM(name='CauseProtocol', mode=MODE_TYPE)
-    CauseProtocol._cont = ASN1Dict([('transfer-syntax-error', 0), ('abstract-syntax-error-reject', 1), ('abstract-syntax-error-ignore-and-notify', 2), ('message-not-compatible-with-receiver-state', 3), ('semantic-error', 4), ('unspecified', 5), ('abstract-syntax-error-falsely-constructed-message', 6)])
+    CauseProtocol = ENUM(name=u'CauseProtocol', mode=MODE_TYPE)
+    CauseProtocol._cont = ASN1Dict([(u'transfer-syntax-error', 0), (u'abstract-syntax-error-reject', 1), (u'abstract-syntax-error-ignore-and-notify', 2), (u'message-not-compatible-with-receiver-state', 3), (u'semantic-error', 4), (u'unspecified', 5), (u'abstract-syntax-error-falsely-constructed-message', 6)])
     CauseProtocol._ext = []
     
     #-----< CauseMisc >-----#
-    CauseMisc = ENUM(name='CauseMisc', mode=MODE_TYPE)
-    CauseMisc._cont = ASN1Dict([('processing-overload', 0), ('hardware-failure', 1), ('o-and-m-intervention', 2), ('unspecified', 3)])
+    CauseMisc = ENUM(name=u'CauseMisc', mode=MODE_TYPE)
+    CauseMisc._cont = ASN1Dict([(u'processing-overload', 0), (u'hardware-failure', 1), (u'o-and-m-intervention', 2), (u'unspecified', 3)])
     CauseMisc._ext = []
     
     #-----< CellIdentity >-----#
-    CellIdentity = BIT_STR(name='CellIdentity', mode=MODE_TYPE)
+    CellIdentity = BIT_STR(name=u'CellIdentity', mode=MODE_TYPE)
     CellIdentity._const_sz = ASN1Set(rv=[28], rr=[], ev=None, er=[])
     
     #-----< CELL-FACHMobilitySupport >-----#
-    CELL_FACHMobilitySupport = ENUM(name='CELL-FACHMobilitySupport', mode=MODE_TYPE)
-    CELL_FACHMobilitySupport._cont = ASN1Dict([('supported', 0)])
+    CELL_FACHMobilitySupport = ENUM(name=u'CELL-FACHMobilitySupport', mode=MODE_TYPE)
+    CELL_FACHMobilitySupport._cont = ASN1Dict([(u'supported', 0)])
     CELL_FACHMobilitySupport._ext = []
     
     #-----< Context-ID >-----#
-    Context_ID = BIT_STR(name='Context-ID', mode=MODE_TYPE)
+    Context_ID = BIT_STR(name=u'Context-ID', mode=MODE_TYPE)
     Context_ID._const_sz = ASN1Set(rv=[24], rr=[], ev=None, er=[])
     
     #-----< CriticalityDiagnostics >-----#
-    CriticalityDiagnostics = SEQ(name='CriticalityDiagnostics', mode=MODE_TYPE)
-    _CriticalityDiagnostics_procedureCode = INT(name='procedureCode', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-CommonDataTypes', 'ProcedureCode')), opt=True)
-    _CriticalityDiagnostics_triggeringMessage = ENUM(name='triggeringMessage', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-CommonDataTypes', 'TriggeringMessage')), opt=True)
-    _CriticalityDiagnostics_procedureCriticality = ENUM(name='procedureCriticality', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-CommonDataTypes', 'Criticality')), opt=True)
-    _CriticalityDiagnostics_iEsCriticalityDiagnostics = SEQ_OF(name='iEsCriticalityDiagnostics', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-IEs', 'CriticalityDiagnostics-IE-List')), opt=True)
-    _CriticalityDiagnostics_iE_Extensions = SEQ_OF(name='iE-Extensions', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-Containers', 'ProtocolExtensionContainer')), opt=True)
+    CriticalityDiagnostics = SEQ(name=u'CriticalityDiagnostics', mode=MODE_TYPE)
+    _CriticalityDiagnostics_procedureCode = INT(name=u'procedureCode', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-CommonDataTypes', 'ProcedureCode')), opt=True)
+    _CriticalityDiagnostics_triggeringMessage = ENUM(name=u'triggeringMessage', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-CommonDataTypes', 'TriggeringMessage')), opt=True)
+    _CriticalityDiagnostics_procedureCriticality = ENUM(name=u'procedureCriticality', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-CommonDataTypes', 'Criticality')), opt=True)
+    _CriticalityDiagnostics_iEsCriticalityDiagnostics = SEQ_OF(name=u'iEsCriticalityDiagnostics', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-IEs', 'CriticalityDiagnostics-IE-List')), opt=True)
+    _CriticalityDiagnostics_iE_Extensions = SEQ_OF(name=u'iE-Extensions', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-Containers', 'ProtocolExtensionContainer')), opt=True)
     __CriticalityDiagnostics_iE_Extensions__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-Containers', 'ProtocolExtensionField')))
-    ___CriticalityDiagnostics_iE_Extensions__item__id = INT(name='id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), ['id']))
+    ___CriticalityDiagnostics_iE_Extensions__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), [u'id']))
     ____CriticalityDiagnostics_iE_Extensions__item__id_tab = CLASS(name='_tab_HNBAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION')))
     ____CriticalityDiagnostics_iE_Extensions__item__id_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___CriticalityDiagnostics_iE_Extensions__item__id._const_tab = ____CriticalityDiagnostics_iE_Extensions__item__id_tab
     ___CriticalityDiagnostics_iE_Extensions__item__id._const_tab_at = None
-    ___CriticalityDiagnostics_iE_Extensions__item__id._const_tab_id = 'id'
-    ___CriticalityDiagnostics_iE_Extensions__item__criticality = ENUM(name='criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), ['criticality']))
+    ___CriticalityDiagnostics_iE_Extensions__item__id._const_tab_id = u'id'
+    ___CriticalityDiagnostics_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), [u'criticality']))
     ____CriticalityDiagnostics_iE_Extensions__item__criticality_tab = CLASS(name='_tab_HNBAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION')))
     ____CriticalityDiagnostics_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___CriticalityDiagnostics_iE_Extensions__item__criticality._const_tab = ____CriticalityDiagnostics_iE_Extensions__item__criticality_tab
-    ___CriticalityDiagnostics_iE_Extensions__item__criticality._const_tab_at = ('..', 'id')
-    ___CriticalityDiagnostics_iE_Extensions__item__criticality._const_tab_id = 'criticality'
-    ___CriticalityDiagnostics_iE_Extensions__item__extensionValue = OPEN(name='extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), ['Extension']))
+    ___CriticalityDiagnostics_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
+    ___CriticalityDiagnostics_iE_Extensions__item__criticality._const_tab_id = u'criticality'
+    ___CriticalityDiagnostics_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), [u'Extension']))
     ____CriticalityDiagnostics_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_HNBAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION')))
     ____CriticalityDiagnostics_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___CriticalityDiagnostics_iE_Extensions__item__extensionValue._const_tab = ____CriticalityDiagnostics_iE_Extensions__item__extensionValue_tab
-    ___CriticalityDiagnostics_iE_Extensions__item__extensionValue._const_tab_at = ('..', 'id')
-    ___CriticalityDiagnostics_iE_Extensions__item__extensionValue._const_tab_id = 'Extension'
+    ___CriticalityDiagnostics_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
+    ___CriticalityDiagnostics_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __CriticalityDiagnostics_iE_Extensions__item_._cont = ASN1Dict([
-        ('id', ___CriticalityDiagnostics_iE_Extensions__item__id),
-        ('criticality', ___CriticalityDiagnostics_iE_Extensions__item__criticality),
-        ('extensionValue', ___CriticalityDiagnostics_iE_Extensions__item__extensionValue),
+        (u'id', ___CriticalityDiagnostics_iE_Extensions__item__id),
+        (u'criticality', ___CriticalityDiagnostics_iE_Extensions__item__criticality),
+        (u'extensionValue', ___CriticalityDiagnostics_iE_Extensions__item__extensionValue),
         ])
     __CriticalityDiagnostics_iE_Extensions__item_._ext = None
     _CriticalityDiagnostics_iE_Extensions._cont = __CriticalityDiagnostics_iE_Extensions__item_
     _CriticalityDiagnostics_iE_Extensions._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=65535)], ev=None, er=[])
     CriticalityDiagnostics._cont = ASN1Dict([
-        ('procedureCode', _CriticalityDiagnostics_procedureCode),
-        ('triggeringMessage', _CriticalityDiagnostics_triggeringMessage),
-        ('procedureCriticality', _CriticalityDiagnostics_procedureCriticality),
-        ('iEsCriticalityDiagnostics', _CriticalityDiagnostics_iEsCriticalityDiagnostics),
-        ('iE-Extensions', _CriticalityDiagnostics_iE_Extensions),
+        (u'procedureCode', _CriticalityDiagnostics_procedureCode),
+        (u'triggeringMessage', _CriticalityDiagnostics_triggeringMessage),
+        (u'procedureCriticality', _CriticalityDiagnostics_procedureCriticality),
+        (u'iEsCriticalityDiagnostics', _CriticalityDiagnostics_iEsCriticalityDiagnostics),
+        (u'iE-Extensions', _CriticalityDiagnostics_iE_Extensions),
         ])
     CriticalityDiagnostics._ext = []
     
     #-----< CriticalityDiagnostics-IE-List >-----#
-    CriticalityDiagnostics_IE_List = SEQ_OF(name='CriticalityDiagnostics-IE-List', mode=MODE_TYPE)
+    CriticalityDiagnostics_IE_List = SEQ_OF(name=u'CriticalityDiagnostics-IE-List', mode=MODE_TYPE)
     _CriticalityDiagnostics_IE_List__item_ = SEQ(name='_item_', mode=MODE_TYPE)
-    __CriticalityDiagnostics_IE_List__item__iECriticality = ENUM(name='iECriticality', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-CommonDataTypes', 'Criticality')))
-    __CriticalityDiagnostics_IE_List__item__iE_ID = INT(name='iE-ID', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-CommonDataTypes', 'ProtocolIE-ID')))
-    __CriticalityDiagnostics_IE_List__item__typeOfError = ENUM(name='typeOfError', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-IEs', 'TypeOfError')))
-    __CriticalityDiagnostics_IE_List__item__iE_Extensions = SEQ_OF(name='iE-Extensions', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-Containers', 'ProtocolExtensionContainer')), opt=True)
+    __CriticalityDiagnostics_IE_List__item__iECriticality = ENUM(name=u'iECriticality', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-CommonDataTypes', 'Criticality')))
+    __CriticalityDiagnostics_IE_List__item__iE_ID = INT(name=u'iE-ID', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-CommonDataTypes', 'ProtocolIE-ID')))
+    __CriticalityDiagnostics_IE_List__item__typeOfError = ENUM(name=u'typeOfError', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-IEs', 'TypeOfError')))
+    __CriticalityDiagnostics_IE_List__item__iE_Extensions = SEQ_OF(name=u'iE-Extensions', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-Containers', 'ProtocolExtensionContainer')), opt=True)
     ___CriticalityDiagnostics_IE_List__item__iE_Extensions__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-Containers', 'ProtocolExtensionField')))
-    ____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__id = INT(name='id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), ['id']))
+    ____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), [u'id']))
     _____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__id_tab = CLASS(name='_tab_HNBAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION')))
     _____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__id_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__id._const_tab = _____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__id_tab
     ____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__id._const_tab_at = None
-    ____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__id._const_tab_id = 'id'
-    ____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__criticality = ENUM(name='criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), ['criticality']))
+    ____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__id._const_tab_id = u'id'
+    ____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), [u'criticality']))
     _____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__criticality_tab = CLASS(name='_tab_HNBAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION')))
     _____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__criticality._const_tab = _____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__criticality_tab
-    ____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__criticality._const_tab_at = ('..', 'id')
-    ____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__criticality._const_tab_id = 'criticality'
-    ____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__extensionValue = OPEN(name='extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), ['Extension']))
+    ____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
+    ____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__criticality._const_tab_id = u'criticality'
+    ____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), [u'Extension']))
     _____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_HNBAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION')))
     _____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__extensionValue._const_tab = _____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__extensionValue_tab
-    ____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__extensionValue._const_tab_at = ('..', 'id')
-    ____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__extensionValue._const_tab_id = 'Extension'
+    ____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
+    ____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     ___CriticalityDiagnostics_IE_List__item__iE_Extensions__item_._cont = ASN1Dict([
-        ('id', ____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__id),
-        ('criticality', ____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__criticality),
-        ('extensionValue', ____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__extensionValue),
+        (u'id', ____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__id),
+        (u'criticality', ____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__criticality),
+        (u'extensionValue', ____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__extensionValue),
         ])
     ___CriticalityDiagnostics_IE_List__item__iE_Extensions__item_._ext = None
     __CriticalityDiagnostics_IE_List__item__iE_Extensions._cont = ___CriticalityDiagnostics_IE_List__item__iE_Extensions__item_
     __CriticalityDiagnostics_IE_List__item__iE_Extensions._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=65535)], ev=None, er=[])
     _CriticalityDiagnostics_IE_List__item_._cont = ASN1Dict([
-        ('iECriticality', __CriticalityDiagnostics_IE_List__item__iECriticality),
-        ('iE-ID', __CriticalityDiagnostics_IE_List__item__iE_ID),
-        ('typeOfError', __CriticalityDiagnostics_IE_List__item__typeOfError),
-        ('iE-Extensions', __CriticalityDiagnostics_IE_List__item__iE_Extensions),
+        (u'iECriticality', __CriticalityDiagnostics_IE_List__item__iECriticality),
+        (u'iE-ID', __CriticalityDiagnostics_IE_List__item__iE_ID),
+        (u'typeOfError', __CriticalityDiagnostics_IE_List__item__typeOfError),
+        (u'iE-Extensions', __CriticalityDiagnostics_IE_List__item__iE_Extensions),
         ])
     _CriticalityDiagnostics_IE_List__item_._ext = []
     CriticalityDiagnostics_IE_List._cont = _CriticalityDiagnostics_IE_List__item_
     CriticalityDiagnostics_IE_List._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=256)], ev=None, er=[])
     
     #-----< CriticalityDiagnostics-IE-List-ExtIEs >-----#
-    CriticalityDiagnostics_IE_List_ExtIEs = CLASS(name='CriticalityDiagnostics-IE-List-ExtIEs', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION')))
+    CriticalityDiagnostics_IE_List_ExtIEs = CLASS(name=u'CriticalityDiagnostics-IE-List-ExtIEs', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION')))
     CriticalityDiagnostics_IE_List_ExtIEs._val = ASN1Set(rv=[], rr=[], ev=[], er=[])
     
     #-----< CriticalityDiagnostics-ExtIEs >-----#
-    CriticalityDiagnostics_ExtIEs = CLASS(name='CriticalityDiagnostics-ExtIEs', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION')))
+    CriticalityDiagnostics_ExtIEs = CLASS(name=u'CriticalityDiagnostics-ExtIEs', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION')))
     CriticalityDiagnostics_ExtIEs._val = ASN1Set(rv=[], rr=[], ev=[], er=[])
     
     #-----< CSG-ID >-----#
-    CSG_ID = BIT_STR(name='CSG-ID', mode=MODE_TYPE)
+    CSG_ID = BIT_STR(name=u'CSG-ID', mode=MODE_TYPE)
     CSG_ID._const_sz = ASN1Set(rv=[27], rr=[], ev=None, er=[])
     
     #-----< CSG-Capability >-----#
-    CSG_Capability = ENUM(name='CSG-Capability', mode=MODE_TYPE)
-    CSG_Capability._cont = ASN1Dict([('csg-capable', 0), ('not-csg-capable', 1)])
+    CSG_Capability = ENUM(name=u'CSG-Capability', mode=MODE_TYPE)
+    CSG_Capability._cont = ASN1Dict([(u'csg-capable', 0), (u'not-csg-capable', 1)])
     CSG_Capability._ext = []
     
     #-----< CSGMembershipStatus >-----#
-    CSGMembershipStatus = ENUM(name='CSGMembershipStatus', mode=MODE_TYPE)
-    CSGMembershipStatus._cont = ASN1Dict([('member', 0), ('non-member', 1)])
+    CSGMembershipStatus = ENUM(name=u'CSGMembershipStatus', mode=MODE_TYPE)
+    CSGMembershipStatus._cont = ASN1Dict([(u'member', 0), (u'non-member', 1)])
     CSGMembershipStatus._ext = []
     
     #-----< CGI >-----#
-    CGI = SEQ(name='CGI', mode=MODE_TYPE)
-    _CGI_pLMNidentity = OCT_STR(name='pLMNidentity', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-IEs', 'PLMNidentity')))
-    _CGI_lAC = OCT_STR(name='lAC', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-IEs', 'LAC')))
-    _CGI_cI = OCT_STR(name='cI', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-IEs', 'CI')))
-    _CGI_iE_Extensions = SEQ_OF(name='iE-Extensions', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-Containers', 'ProtocolExtensionContainer')), opt=True)
+    CGI = SEQ(name=u'CGI', mode=MODE_TYPE)
+    _CGI_pLMNidentity = OCT_STR(name=u'pLMNidentity', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-IEs', 'PLMNidentity')))
+    _CGI_lAC = OCT_STR(name=u'lAC', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-IEs', 'LAC')))
+    _CGI_cI = OCT_STR(name=u'cI', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-IEs', 'CI')))
+    _CGI_iE_Extensions = SEQ_OF(name=u'iE-Extensions', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-Containers', 'ProtocolExtensionContainer')), opt=True)
     __CGI_iE_Extensions__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-Containers', 'ProtocolExtensionField')))
-    ___CGI_iE_Extensions__item__id = INT(name='id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), ['id']))
+    ___CGI_iE_Extensions__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), [u'id']))
     ____CGI_iE_Extensions__item__id_tab = CLASS(name='_tab_HNBAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION')))
     ____CGI_iE_Extensions__item__id_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___CGI_iE_Extensions__item__id._const_tab = ____CGI_iE_Extensions__item__id_tab
     ___CGI_iE_Extensions__item__id._const_tab_at = None
-    ___CGI_iE_Extensions__item__id._const_tab_id = 'id'
-    ___CGI_iE_Extensions__item__criticality = ENUM(name='criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), ['criticality']))
+    ___CGI_iE_Extensions__item__id._const_tab_id = u'id'
+    ___CGI_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), [u'criticality']))
     ____CGI_iE_Extensions__item__criticality_tab = CLASS(name='_tab_HNBAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION')))
     ____CGI_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___CGI_iE_Extensions__item__criticality._const_tab = ____CGI_iE_Extensions__item__criticality_tab
-    ___CGI_iE_Extensions__item__criticality._const_tab_at = ('..', 'id')
-    ___CGI_iE_Extensions__item__criticality._const_tab_id = 'criticality'
-    ___CGI_iE_Extensions__item__extensionValue = OPEN(name='extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), ['Extension']))
+    ___CGI_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
+    ___CGI_iE_Extensions__item__criticality._const_tab_id = u'criticality'
+    ___CGI_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), [u'Extension']))
     ____CGI_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_HNBAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION')))
     ____CGI_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___CGI_iE_Extensions__item__extensionValue._const_tab = ____CGI_iE_Extensions__item__extensionValue_tab
-    ___CGI_iE_Extensions__item__extensionValue._const_tab_at = ('..', 'id')
-    ___CGI_iE_Extensions__item__extensionValue._const_tab_id = 'Extension'
+    ___CGI_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
+    ___CGI_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __CGI_iE_Extensions__item_._cont = ASN1Dict([
-        ('id', ___CGI_iE_Extensions__item__id),
-        ('criticality', ___CGI_iE_Extensions__item__criticality),
-        ('extensionValue', ___CGI_iE_Extensions__item__extensionValue),
+        (u'id', ___CGI_iE_Extensions__item__id),
+        (u'criticality', ___CGI_iE_Extensions__item__criticality),
+        (u'extensionValue', ___CGI_iE_Extensions__item__extensionValue),
         ])
     __CGI_iE_Extensions__item_._ext = None
     _CGI_iE_Extensions._cont = __CGI_iE_Extensions__item_
     _CGI_iE_Extensions._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=65535)], ev=None, er=[])
     CGI._cont = ASN1Dict([
-        ('pLMNidentity', _CGI_pLMNidentity),
-        ('lAC', _CGI_lAC),
-        ('cI', _CGI_cI),
-        ('iE-Extensions', _CGI_iE_Extensions),
+        (u'pLMNidentity', _CGI_pLMNidentity),
+        (u'lAC', _CGI_lAC),
+        (u'cI', _CGI_cI),
+        (u'iE-Extensions', _CGI_iE_Extensions),
         ])
     CGI._ext = None
     
     #-----< CGI-ExtIEs >-----#
-    CGI_ExtIEs = CLASS(name='CGI-ExtIEs', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION')))
+    CGI_ExtIEs = CLASS(name=u'CGI-ExtIEs', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION')))
     CGI_ExtIEs._val = ASN1Set(rv=[], rr=[], ev=[], er=[])
     
     #-----< CI >-----#
-    CI = OCT_STR(name='CI', mode=MODE_TYPE)
+    CI = OCT_STR(name=u'CI', mode=MODE_TYPE)
     CI._const_sz = ASN1Set(rv=[2], rr=[], ev=None, er=[])
     
     #-----< CN-DomainIndicator >-----#
-    CN_DomainIndicator = ENUM(name='CN-DomainIndicator', mode=MODE_TYPE)
-    CN_DomainIndicator._cont = ASN1Dict([('cs-domain', 0), ('ps-domain', 1)])
+    CN_DomainIndicator = ENUM(name=u'CN-DomainIndicator', mode=MODE_TYPE)
+    CN_DomainIndicator._cont = ASN1Dict([(u'cs-domain', 0), (u'ps-domain', 1)])
     CN_DomainIndicator._ext = None
     
     #-----< ESN >-----#
-    ESN = BIT_STR(name='ESN', mode=MODE_TYPE)
+    ESN = BIT_STR(name=u'ESN', mode=MODE_TYPE)
     ESN._const_sz = ASN1Set(rv=[32], rr=[], ev=None, er=[])
     
     #-----< GeographicalLocation >-----#
-    GeographicalLocation = SEQ(name='GeographicalLocation', mode=MODE_TYPE)
-    _GeographicalLocation_geographicalCoordinates = SEQ(name='geographicalCoordinates', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-IEs', 'GeographicalCoordinates')))
-    _GeographicalLocation_altitudeAndDirection = SEQ(name='altitudeAndDirection', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-IEs', 'AltitudeAndDirection')))
-    _GeographicalLocation_iE_Extensions = SEQ_OF(name='iE-Extensions', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-Containers', 'ProtocolExtensionContainer')), opt=True)
+    GeographicalLocation = SEQ(name=u'GeographicalLocation', mode=MODE_TYPE)
+    _GeographicalLocation_geographicalCoordinates = SEQ(name=u'geographicalCoordinates', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-IEs', 'GeographicalCoordinates')))
+    _GeographicalLocation_altitudeAndDirection = SEQ(name=u'altitudeAndDirection', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-IEs', 'AltitudeAndDirection')))
+    _GeographicalLocation_iE_Extensions = SEQ_OF(name=u'iE-Extensions', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-Containers', 'ProtocolExtensionContainer')), opt=True)
     __GeographicalLocation_iE_Extensions__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-Containers', 'ProtocolExtensionField')))
-    ___GeographicalLocation_iE_Extensions__item__id = INT(name='id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), ['id']))
+    ___GeographicalLocation_iE_Extensions__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), [u'id']))
     ____GeographicalLocation_iE_Extensions__item__id_tab = CLASS(name='_tab_HNBAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION')))
     ____GeographicalLocation_iE_Extensions__item__id_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___GeographicalLocation_iE_Extensions__item__id._const_tab = ____GeographicalLocation_iE_Extensions__item__id_tab
     ___GeographicalLocation_iE_Extensions__item__id._const_tab_at = None
-    ___GeographicalLocation_iE_Extensions__item__id._const_tab_id = 'id'
-    ___GeographicalLocation_iE_Extensions__item__criticality = ENUM(name='criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), ['criticality']))
+    ___GeographicalLocation_iE_Extensions__item__id._const_tab_id = u'id'
+    ___GeographicalLocation_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), [u'criticality']))
     ____GeographicalLocation_iE_Extensions__item__criticality_tab = CLASS(name='_tab_HNBAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION')))
     ____GeographicalLocation_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___GeographicalLocation_iE_Extensions__item__criticality._const_tab = ____GeographicalLocation_iE_Extensions__item__criticality_tab
-    ___GeographicalLocation_iE_Extensions__item__criticality._const_tab_at = ('..', 'id')
-    ___GeographicalLocation_iE_Extensions__item__criticality._const_tab_id = 'criticality'
-    ___GeographicalLocation_iE_Extensions__item__extensionValue = OPEN(name='extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), ['Extension']))
+    ___GeographicalLocation_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
+    ___GeographicalLocation_iE_Extensions__item__criticality._const_tab_id = u'criticality'
+    ___GeographicalLocation_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), [u'Extension']))
     ____GeographicalLocation_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_HNBAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION')))
     ____GeographicalLocation_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___GeographicalLocation_iE_Extensions__item__extensionValue._const_tab = ____GeographicalLocation_iE_Extensions__item__extensionValue_tab
-    ___GeographicalLocation_iE_Extensions__item__extensionValue._const_tab_at = ('..', 'id')
-    ___GeographicalLocation_iE_Extensions__item__extensionValue._const_tab_id = 'Extension'
+    ___GeographicalLocation_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
+    ___GeographicalLocation_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __GeographicalLocation_iE_Extensions__item_._cont = ASN1Dict([
-        ('id', ___GeographicalLocation_iE_Extensions__item__id),
-        ('criticality', ___GeographicalLocation_iE_Extensions__item__criticality),
-        ('extensionValue', ___GeographicalLocation_iE_Extensions__item__extensionValue),
+        (u'id', ___GeographicalLocation_iE_Extensions__item__id),
+        (u'criticality', ___GeographicalLocation_iE_Extensions__item__criticality),
+        (u'extensionValue', ___GeographicalLocation_iE_Extensions__item__extensionValue),
         ])
     __GeographicalLocation_iE_Extensions__item_._ext = None
     _GeographicalLocation_iE_Extensions._cont = __GeographicalLocation_iE_Extensions__item_
     _GeographicalLocation_iE_Extensions._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=65535)], ev=None, er=[])
     GeographicalLocation._cont = ASN1Dict([
-        ('geographicalCoordinates', _GeographicalLocation_geographicalCoordinates),
-        ('altitudeAndDirection', _GeographicalLocation_altitudeAndDirection),
-        ('iE-Extensions', _GeographicalLocation_iE_Extensions),
+        (u'geographicalCoordinates', _GeographicalLocation_geographicalCoordinates),
+        (u'altitudeAndDirection', _GeographicalLocation_altitudeAndDirection),
+        (u'iE-Extensions', _GeographicalLocation_iE_Extensions),
         ])
     GeographicalLocation._ext = []
     
     #-----< GeographicLocation-ExtIEs >-----#
-    GeographicLocation_ExtIEs = CLASS(name='GeographicLocation-ExtIEs', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION')))
+    GeographicLocation_ExtIEs = CLASS(name=u'GeographicLocation-ExtIEs', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION')))
     GeographicLocation_ExtIEs._val = ASN1Set(rv=[], rr=[], ev=[], er=[])
     
     #-----< GeographicalCoordinates >-----#
-    GeographicalCoordinates = SEQ(name='GeographicalCoordinates', mode=MODE_TYPE)
-    _GeographicalCoordinates_latitudeSign = ENUM(name='latitudeSign', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _GeographicalCoordinates_latitudeSign._cont = ASN1Dict([('north', 0), ('south', 1)])
+    GeographicalCoordinates = SEQ(name=u'GeographicalCoordinates', mode=MODE_TYPE)
+    _GeographicalCoordinates_latitudeSign = ENUM(name=u'latitudeSign', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _GeographicalCoordinates_latitudeSign._cont = ASN1Dict([(u'north', 0), (u'south', 1)])
     _GeographicalCoordinates_latitudeSign._ext = None
-    _GeographicalCoordinates_latitude = INT(name='latitude', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _GeographicalCoordinates_latitude = INT(name=u'latitude', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     _GeographicalCoordinates_latitude._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=8388607)], ev=None, er=[])
-    _GeographicalCoordinates_longitude = INT(name='longitude', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _GeographicalCoordinates_longitude = INT(name=u'longitude', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     _GeographicalCoordinates_longitude._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=-8388608, ub=8388607)], ev=None, er=[])
-    _GeographicalCoordinates_iE_Extensions = SEQ_OF(name='iE-Extensions', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-Containers', 'ProtocolExtensionContainer')), opt=True)
+    _GeographicalCoordinates_iE_Extensions = SEQ_OF(name=u'iE-Extensions', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-Containers', 'ProtocolExtensionContainer')), opt=True)
     __GeographicalCoordinates_iE_Extensions__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-Containers', 'ProtocolExtensionField')))
-    ___GeographicalCoordinates_iE_Extensions__item__id = INT(name='id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), ['id']))
+    ___GeographicalCoordinates_iE_Extensions__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), [u'id']))
     ____GeographicalCoordinates_iE_Extensions__item__id_tab = CLASS(name='_tab_HNBAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION')))
     ____GeographicalCoordinates_iE_Extensions__item__id_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___GeographicalCoordinates_iE_Extensions__item__id._const_tab = ____GeographicalCoordinates_iE_Extensions__item__id_tab
     ___GeographicalCoordinates_iE_Extensions__item__id._const_tab_at = None
-    ___GeographicalCoordinates_iE_Extensions__item__id._const_tab_id = 'id'
-    ___GeographicalCoordinates_iE_Extensions__item__criticality = ENUM(name='criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), ['criticality']))
+    ___GeographicalCoordinates_iE_Extensions__item__id._const_tab_id = u'id'
+    ___GeographicalCoordinates_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), [u'criticality']))
     ____GeographicalCoordinates_iE_Extensions__item__criticality_tab = CLASS(name='_tab_HNBAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION')))
     ____GeographicalCoordinates_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___GeographicalCoordinates_iE_Extensions__item__criticality._const_tab = ____GeographicalCoordinates_iE_Extensions__item__criticality_tab
-    ___GeographicalCoordinates_iE_Extensions__item__criticality._const_tab_at = ('..', 'id')
-    ___GeographicalCoordinates_iE_Extensions__item__criticality._const_tab_id = 'criticality'
-    ___GeographicalCoordinates_iE_Extensions__item__extensionValue = OPEN(name='extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), ['Extension']))
+    ___GeographicalCoordinates_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
+    ___GeographicalCoordinates_iE_Extensions__item__criticality._const_tab_id = u'criticality'
+    ___GeographicalCoordinates_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), [u'Extension']))
     ____GeographicalCoordinates_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_HNBAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION')))
     ____GeographicalCoordinates_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___GeographicalCoordinates_iE_Extensions__item__extensionValue._const_tab = ____GeographicalCoordinates_iE_Extensions__item__extensionValue_tab
-    ___GeographicalCoordinates_iE_Extensions__item__extensionValue._const_tab_at = ('..', 'id')
-    ___GeographicalCoordinates_iE_Extensions__item__extensionValue._const_tab_id = 'Extension'
+    ___GeographicalCoordinates_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
+    ___GeographicalCoordinates_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __GeographicalCoordinates_iE_Extensions__item_._cont = ASN1Dict([
-        ('id', ___GeographicalCoordinates_iE_Extensions__item__id),
-        ('criticality', ___GeographicalCoordinates_iE_Extensions__item__criticality),
-        ('extensionValue', ___GeographicalCoordinates_iE_Extensions__item__extensionValue),
+        (u'id', ___GeographicalCoordinates_iE_Extensions__item__id),
+        (u'criticality', ___GeographicalCoordinates_iE_Extensions__item__criticality),
+        (u'extensionValue', ___GeographicalCoordinates_iE_Extensions__item__extensionValue),
         ])
     __GeographicalCoordinates_iE_Extensions__item_._ext = None
     _GeographicalCoordinates_iE_Extensions._cont = __GeographicalCoordinates_iE_Extensions__item_
     _GeographicalCoordinates_iE_Extensions._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=65535)], ev=None, er=[])
     GeographicalCoordinates._cont = ASN1Dict([
-        ('latitudeSign', _GeographicalCoordinates_latitudeSign),
-        ('latitude', _GeographicalCoordinates_latitude),
-        ('longitude', _GeographicalCoordinates_longitude),
-        ('iE-Extensions', _GeographicalCoordinates_iE_Extensions),
+        (u'latitudeSign', _GeographicalCoordinates_latitudeSign),
+        (u'latitude', _GeographicalCoordinates_latitude),
+        (u'longitude', _GeographicalCoordinates_longitude),
+        (u'iE-Extensions', _GeographicalCoordinates_iE_Extensions),
         ])
     GeographicalCoordinates._ext = []
     
     #-----< GeographicalCoordinates-ExtIEs >-----#
-    GeographicalCoordinates_ExtIEs = CLASS(name='GeographicalCoordinates-ExtIEs', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION')))
+    GeographicalCoordinates_ExtIEs = CLASS(name=u'GeographicalCoordinates-ExtIEs', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION')))
     GeographicalCoordinates_ExtIEs._val = ASN1Set(rv=[], rr=[], ev=[], er=[])
     
     #-----< GTP-TEI >-----#
-    GTP_TEI = OCT_STR(name='GTP-TEI', mode=MODE_TYPE)
+    GTP_TEI = OCT_STR(name=u'GTP-TEI', mode=MODE_TYPE)
     GTP_TEI._const_sz = ASN1Set(rv=[4], rr=[], ev=None, er=[])
     
     #-----< HNBCapacity >-----#
-    HNBCapacity = INT(name='HNBCapacity', mode=MODE_TYPE)
+    HNBCapacity = INT(name=u'HNBCapacity', mode=MODE_TYPE)
     HNBCapacity._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=1000)], ev=None, er=[])
     
     #-----< HNB-Cell-Access-Mode >-----#
-    HNB_Cell_Access_Mode = ENUM(name='HNB-Cell-Access-Mode', mode=MODE_TYPE)
-    HNB_Cell_Access_Mode._cont = ASN1Dict([('closed', 0), ('hybrid', 1), ('open', 2)])
+    HNB_Cell_Access_Mode = ENUM(name=u'HNB-Cell-Access-Mode', mode=MODE_TYPE)
+    HNB_Cell_Access_Mode._cont = ASN1Dict([(u'closed', 0), (u'hybrid', 1), (u'open', 2)])
     HNB_Cell_Access_Mode._ext = []
     
     #-----< HNB-Cell-Identifier >-----#
-    HNB_Cell_Identifier = SEQ(name='HNB-Cell-Identifier', mode=MODE_TYPE)
-    _HNB_Cell_Identifier_pLMNidentity = OCT_STR(name='pLMNidentity', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-IEs', 'PLMNidentity')))
-    _HNB_Cell_Identifier_cellIdentity = BIT_STR(name='cellIdentity', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-IEs', 'CellIdentity')))
-    _HNB_Cell_Identifier_iE_Extensions = SEQ_OF(name='iE-Extensions', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-Containers', 'ProtocolExtensionContainer')), opt=True)
+    HNB_Cell_Identifier = SEQ(name=u'HNB-Cell-Identifier', mode=MODE_TYPE)
+    _HNB_Cell_Identifier_pLMNidentity = OCT_STR(name=u'pLMNidentity', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-IEs', 'PLMNidentity')))
+    _HNB_Cell_Identifier_cellIdentity = BIT_STR(name=u'cellIdentity', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-IEs', 'CellIdentity')))
+    _HNB_Cell_Identifier_iE_Extensions = SEQ_OF(name=u'iE-Extensions', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-Containers', 'ProtocolExtensionContainer')), opt=True)
     __HNB_Cell_Identifier_iE_Extensions__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-Containers', 'ProtocolExtensionField')))
-    ___HNB_Cell_Identifier_iE_Extensions__item__id = INT(name='id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), ['id']))
+    ___HNB_Cell_Identifier_iE_Extensions__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), [u'id']))
     ____HNB_Cell_Identifier_iE_Extensions__item__id_tab = CLASS(name='_tab_HNBAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION')))
     ____HNB_Cell_Identifier_iE_Extensions__item__id_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___HNB_Cell_Identifier_iE_Extensions__item__id._const_tab = ____HNB_Cell_Identifier_iE_Extensions__item__id_tab
     ___HNB_Cell_Identifier_iE_Extensions__item__id._const_tab_at = None
-    ___HNB_Cell_Identifier_iE_Extensions__item__id._const_tab_id = 'id'
-    ___HNB_Cell_Identifier_iE_Extensions__item__criticality = ENUM(name='criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), ['criticality']))
+    ___HNB_Cell_Identifier_iE_Extensions__item__id._const_tab_id = u'id'
+    ___HNB_Cell_Identifier_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), [u'criticality']))
     ____HNB_Cell_Identifier_iE_Extensions__item__criticality_tab = CLASS(name='_tab_HNBAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION')))
     ____HNB_Cell_Identifier_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___HNB_Cell_Identifier_iE_Extensions__item__criticality._const_tab = ____HNB_Cell_Identifier_iE_Extensions__item__criticality_tab
-    ___HNB_Cell_Identifier_iE_Extensions__item__criticality._const_tab_at = ('..', 'id')
-    ___HNB_Cell_Identifier_iE_Extensions__item__criticality._const_tab_id = 'criticality'
-    ___HNB_Cell_Identifier_iE_Extensions__item__extensionValue = OPEN(name='extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), ['Extension']))
+    ___HNB_Cell_Identifier_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
+    ___HNB_Cell_Identifier_iE_Extensions__item__criticality._const_tab_id = u'criticality'
+    ___HNB_Cell_Identifier_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), [u'Extension']))
     ____HNB_Cell_Identifier_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_HNBAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION')))
     ____HNB_Cell_Identifier_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___HNB_Cell_Identifier_iE_Extensions__item__extensionValue._const_tab = ____HNB_Cell_Identifier_iE_Extensions__item__extensionValue_tab
-    ___HNB_Cell_Identifier_iE_Extensions__item__extensionValue._const_tab_at = ('..', 'id')
-    ___HNB_Cell_Identifier_iE_Extensions__item__extensionValue._const_tab_id = 'Extension'
+    ___HNB_Cell_Identifier_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
+    ___HNB_Cell_Identifier_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __HNB_Cell_Identifier_iE_Extensions__item_._cont = ASN1Dict([
-        ('id', ___HNB_Cell_Identifier_iE_Extensions__item__id),
-        ('criticality', ___HNB_Cell_Identifier_iE_Extensions__item__criticality),
-        ('extensionValue', ___HNB_Cell_Identifier_iE_Extensions__item__extensionValue),
+        (u'id', ___HNB_Cell_Identifier_iE_Extensions__item__id),
+        (u'criticality', ___HNB_Cell_Identifier_iE_Extensions__item__criticality),
+        (u'extensionValue', ___HNB_Cell_Identifier_iE_Extensions__item__extensionValue),
         ])
     __HNB_Cell_Identifier_iE_Extensions__item_._ext = None
     _HNB_Cell_Identifier_iE_Extensions._cont = __HNB_Cell_Identifier_iE_Extensions__item_
     _HNB_Cell_Identifier_iE_Extensions._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=65535)], ev=None, er=[])
     HNB_Cell_Identifier._cont = ASN1Dict([
-        ('pLMNidentity', _HNB_Cell_Identifier_pLMNidentity),
-        ('cellIdentity', _HNB_Cell_Identifier_cellIdentity),
-        ('iE-Extensions', _HNB_Cell_Identifier_iE_Extensions),
+        (u'pLMNidentity', _HNB_Cell_Identifier_pLMNidentity),
+        (u'cellIdentity', _HNB_Cell_Identifier_cellIdentity),
+        (u'iE-Extensions', _HNB_Cell_Identifier_iE_Extensions),
         ])
     HNB_Cell_Identifier._ext = []
     
     #-----< HNB-Cell-Identifier-ExtIEs >-----#
-    HNB_Cell_Identifier_ExtIEs = CLASS(name='HNB-Cell-Identifier-ExtIEs', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION')))
+    HNB_Cell_Identifier_ExtIEs = CLASS(name=u'HNB-Cell-Identifier-ExtIEs', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION')))
     HNB_Cell_Identifier_ExtIEs._val = ASN1Set(rv=[], rr=[], ev=[], er=[])
     
     #-----< HNB-GWResponse >-----#
-    HNB_GWResponse = CHOICE(name='HNB-GWResponse', mode=MODE_TYPE)
-    _HNB_GWResponse_hNB = SEQ(name='hNB', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-IEs', 'HNBConfigInfo')))
-    _HNB_GWResponse_macroRNC = INT(name='macroRNC', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-IEs', 'RNC-ID')))
-    _HNB_GWResponse_unknownU_RNTIIndication = ENUM(name='unknownU-RNTIIndication', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-IEs', 'UnknownU-RNTIIndication')))
+    HNB_GWResponse = CHOICE(name=u'HNB-GWResponse', mode=MODE_TYPE)
+    _HNB_GWResponse_hNB = SEQ(name=u'hNB', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-IEs', 'HNBConfigInfo')))
+    _HNB_GWResponse_macroRNC = INT(name=u'macroRNC', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-IEs', 'RNC-ID')))
+    _HNB_GWResponse_unknownU_RNTIIndication = ENUM(name=u'unknownU-RNTIIndication', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-IEs', 'UnknownU-RNTIIndication')))
     HNB_GWResponse._cont = ASN1Dict([
-        ('hNB', _HNB_GWResponse_hNB),
-        ('macroRNC', _HNB_GWResponse_macroRNC),
-        ('unknownU-RNTIIndication', _HNB_GWResponse_unknownU_RNTIIndication),
+        (u'hNB', _HNB_GWResponse_hNB),
+        (u'macroRNC', _HNB_GWResponse_macroRNC),
+        (u'unknownU-RNTIIndication', _HNB_GWResponse_unknownU_RNTIIndication),
         ])
     HNB_GWResponse._ext = []
     
     #-----< HNB-RNL-Identity >-----#
-    HNB_RNL_Identity = CHOICE(name='HNB-RNL-Identity', mode=MODE_TYPE)
-    _HNB_RNL_Identity_hNB_Identity_as_Cell_Identifier = SEQ(name='hNB-Identity-as-Cell-Identifier', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-IEs', 'HNB-Cell-Identifier')))
+    HNB_RNL_Identity = CHOICE(name=u'HNB-RNL-Identity', mode=MODE_TYPE)
+    _HNB_RNL_Identity_hNB_Identity_as_Cell_Identifier = SEQ(name=u'hNB-Identity-as-Cell-Identifier', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-IEs', 'HNB-Cell-Identifier')))
     HNB_RNL_Identity._cont = ASN1Dict([
-        ('hNB-Identity-as-Cell-Identifier', _HNB_RNL_Identity_hNB_Identity_as_Cell_Identifier),
+        (u'hNB-Identity-as-Cell-Identifier', _HNB_RNL_Identity_hNB_Identity_as_Cell_Identifier),
         ])
     HNB_RNL_Identity._ext = []
     
     #-----< HNBConfigInfo >-----#
-    HNBConfigInfo = SEQ(name='HNBConfigInfo', mode=MODE_TYPE)
-    _HNBConfigInfo_hnb_RNL_Identity = CHOICE(name='hnb-RNL-Identity', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('HNBAP-IEs', 'HNB-RNL-Identity')))
-    _HNBConfigInfo_configurationInformation = CHOICE(name='configurationInformation', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('HNBAP-IEs', 'ConfigurationInformation')))
-    _HNBConfigInfo_iE_Extensions = SEQ_OF(name='iE-Extensions', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-Containers', 'ProtocolExtensionContainer')), opt=True)
+    HNBConfigInfo = SEQ(name=u'HNBConfigInfo', mode=MODE_TYPE)
+    _HNBConfigInfo_hnb_RNL_Identity = CHOICE(name=u'hnb-RNL-Identity', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('HNBAP-IEs', 'HNB-RNL-Identity')))
+    _HNBConfigInfo_configurationInformation = CHOICE(name=u'configurationInformation', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('HNBAP-IEs', 'ConfigurationInformation')))
+    _HNBConfigInfo_iE_Extensions = SEQ_OF(name=u'iE-Extensions', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-Containers', 'ProtocolExtensionContainer')), opt=True)
     __HNBConfigInfo_iE_Extensions__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-Containers', 'ProtocolExtensionField')))
-    ___HNBConfigInfo_iE_Extensions__item__id = INT(name='id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), ['id']))
+    ___HNBConfigInfo_iE_Extensions__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), [u'id']))
     ____HNBConfigInfo_iE_Extensions__item__id_tab = CLASS(name='_tab_HNBAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION')))
     ____HNBConfigInfo_iE_Extensions__item__id_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___HNBConfigInfo_iE_Extensions__item__id._const_tab = ____HNBConfigInfo_iE_Extensions__item__id_tab
     ___HNBConfigInfo_iE_Extensions__item__id._const_tab_at = None
-    ___HNBConfigInfo_iE_Extensions__item__id._const_tab_id = 'id'
-    ___HNBConfigInfo_iE_Extensions__item__criticality = ENUM(name='criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), ['criticality']))
+    ___HNBConfigInfo_iE_Extensions__item__id._const_tab_id = u'id'
+    ___HNBConfigInfo_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), [u'criticality']))
     ____HNBConfigInfo_iE_Extensions__item__criticality_tab = CLASS(name='_tab_HNBAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION')))
     ____HNBConfigInfo_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___HNBConfigInfo_iE_Extensions__item__criticality._const_tab = ____HNBConfigInfo_iE_Extensions__item__criticality_tab
-    ___HNBConfigInfo_iE_Extensions__item__criticality._const_tab_at = ('..', 'id')
-    ___HNBConfigInfo_iE_Extensions__item__criticality._const_tab_id = 'criticality'
-    ___HNBConfigInfo_iE_Extensions__item__extensionValue = OPEN(name='extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), ['Extension']))
+    ___HNBConfigInfo_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
+    ___HNBConfigInfo_iE_Extensions__item__criticality._const_tab_id = u'criticality'
+    ___HNBConfigInfo_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), [u'Extension']))
     ____HNBConfigInfo_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_HNBAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION')))
     ____HNBConfigInfo_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___HNBConfigInfo_iE_Extensions__item__extensionValue._const_tab = ____HNBConfigInfo_iE_Extensions__item__extensionValue_tab
-    ___HNBConfigInfo_iE_Extensions__item__extensionValue._const_tab_at = ('..', 'id')
-    ___HNBConfigInfo_iE_Extensions__item__extensionValue._const_tab_id = 'Extension'
+    ___HNBConfigInfo_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
+    ___HNBConfigInfo_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __HNBConfigInfo_iE_Extensions__item_._cont = ASN1Dict([
-        ('id', ___HNBConfigInfo_iE_Extensions__item__id),
-        ('criticality', ___HNBConfigInfo_iE_Extensions__item__criticality),
-        ('extensionValue', ___HNBConfigInfo_iE_Extensions__item__extensionValue),
+        (u'id', ___HNBConfigInfo_iE_Extensions__item__id),
+        (u'criticality', ___HNBConfigInfo_iE_Extensions__item__criticality),
+        (u'extensionValue', ___HNBConfigInfo_iE_Extensions__item__extensionValue),
         ])
     __HNBConfigInfo_iE_Extensions__item_._ext = None
     _HNBConfigInfo_iE_Extensions._cont = __HNBConfigInfo_iE_Extensions__item_
     _HNBConfigInfo_iE_Extensions._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=65535)], ev=None, er=[])
     HNBConfigInfo._cont = ASN1Dict([
-        ('hnb-RNL-Identity', _HNBConfigInfo_hnb_RNL_Identity),
-        ('configurationInformation', _HNBConfigInfo_configurationInformation),
-        ('iE-Extensions', _HNBConfigInfo_iE_Extensions),
+        (u'hnb-RNL-Identity', _HNBConfigInfo_hnb_RNL_Identity),
+        (u'configurationInformation', _HNBConfigInfo_configurationInformation),
+        (u'iE-Extensions', _HNBConfigInfo_iE_Extensions),
         ])
     HNBConfigInfo._ext = []
     
     #-----< HNBConfigInfo-ExtIEs >-----#
-    HNBConfigInfo_ExtIEs = CLASS(name='HNBConfigInfo-ExtIEs', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION')))
+    HNBConfigInfo_ExtIEs = CLASS(name=u'HNBConfigInfo-ExtIEs', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION')))
     HNBConfigInfo_ExtIEs._val = ASN1Set(rv=[], rr=[], ev=[], er=[])
     
     #-----< ConfigurationInformation >-----#
-    ConfigurationInformation = CHOICE(name='ConfigurationInformation', mode=MODE_TYPE)
-    _ConfigurationInformation_provided = SEQ(name='provided', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-IEs', 'HNBConfigurationInformationProvided')))
-    _ConfigurationInformation_missing = SEQ(name='missing', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-IEs', 'HNBConfigurationInformationMissing')))
+    ConfigurationInformation = CHOICE(name=u'ConfigurationInformation', mode=MODE_TYPE)
+    _ConfigurationInformation_provided = SEQ(name=u'provided', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-IEs', 'HNBConfigurationInformationProvided')))
+    _ConfigurationInformation_missing = SEQ(name=u'missing', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-IEs', 'HNBConfigurationInformationMissing')))
     ConfigurationInformation._cont = ASN1Dict([
-        ('provided', _ConfigurationInformation_provided),
-        ('missing', _ConfigurationInformation_missing),
+        (u'provided', _ConfigurationInformation_provided),
+        (u'missing', _ConfigurationInformation_missing),
         ])
     ConfigurationInformation._ext = []
     
     #-----< HNBConfigurationInformationProvided >-----#
-    HNBConfigurationInformationProvided = SEQ(name='HNBConfigurationInformationProvided', mode=MODE_TYPE)
-    _HNBConfigurationInformationProvided_psc = BIT_STR(name='psc', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-IEs', 'PSC')), opt=True)
-    _HNBConfigurationInformationProvided_cSG_ID = BIT_STR(name='cSG-ID', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-IEs', 'CSG-ID')), opt=True)
-    _HNBConfigurationInformationProvided_hNB_Cell_Access_Mode = ENUM(name='hNB-Cell-Access-Mode', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-IEs', 'HNB-Cell-Access-Mode')))
-    _HNBConfigurationInformationProvided_iurh_Signalling_TNL_AddressList = SEQ_OF(name='iurh-Signalling-TNL-AddressList', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-IEs', 'Iurh-Signalling-TNL-AddressList')))
-    _HNBConfigurationInformationProvided_iE_Extensions = SEQ_OF(name='iE-Extensions', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-Containers', 'ProtocolExtensionContainer')), opt=True)
+    HNBConfigurationInformationProvided = SEQ(name=u'HNBConfigurationInformationProvided', mode=MODE_TYPE)
+    _HNBConfigurationInformationProvided_psc = BIT_STR(name=u'psc', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-IEs', 'PSC')), opt=True)
+    _HNBConfigurationInformationProvided_cSG_ID = BIT_STR(name=u'cSG-ID', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-IEs', 'CSG-ID')), opt=True)
+    _HNBConfigurationInformationProvided_hNB_Cell_Access_Mode = ENUM(name=u'hNB-Cell-Access-Mode', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-IEs', 'HNB-Cell-Access-Mode')))
+    _HNBConfigurationInformationProvided_iurh_Signalling_TNL_AddressList = SEQ_OF(name=u'iurh-Signalling-TNL-AddressList', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-IEs', 'Iurh-Signalling-TNL-AddressList')))
+    _HNBConfigurationInformationProvided_iE_Extensions = SEQ_OF(name=u'iE-Extensions', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-Containers', 'ProtocolExtensionContainer')), opt=True)
     __HNBConfigurationInformationProvided_iE_Extensions__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-Containers', 'ProtocolExtensionField')))
-    ___HNBConfigurationInformationProvided_iE_Extensions__item__id = INT(name='id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), ['id']))
+    ___HNBConfigurationInformationProvided_iE_Extensions__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), [u'id']))
     ____HNBConfigurationInformationProvided_iE_Extensions__item__id_tab = CLASS(name='_tab_HNBAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION')))
-    _____HNBConfigurationInformationProvided_iE_Extensions__item__id_tab_val_Extension_0 = BIT_STR(name='Extension', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'S-RNTIPrefix')))
-    _____HNBConfigurationInformationProvided_iE_Extensions__item__id_tab_val_Extension_1 = SEQ_OF(name='Extension', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'URAIdentityList')))
-    ____HNBConfigurationInformationProvided_iE_Extensions__item__id_tab._val = ASN1Set(rv=[dict([('id', 43), ('criticality', 'ignore'), ('Extension', _____HNBConfigurationInformationProvided_iE_Extensions__item__id_tab_val_Extension_0), ('presence', 'optional')]), dict([('id', 52), ('criticality', 'ignore'), ('Extension', _____HNBConfigurationInformationProvided_iE_Extensions__item__id_tab_val_Extension_1), ('presence', 'optional')])], rr=[], ev=None, er=[])
+    _____HNBConfigurationInformationProvided_iE_Extensions__item__id_tab_val_Extension_0 = BIT_STR(name=u'Extension', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'S-RNTIPrefix')))
+    _____HNBConfigurationInformationProvided_iE_Extensions__item__id_tab_val_Extension_1 = SEQ_OF(name=u'Extension', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'URAIdentityList')))
+    ____HNBConfigurationInformationProvided_iE_Extensions__item__id_tab._val = ASN1Set(rv=[dict([(u'id', 43), (u'criticality', u'ignore'), (u'Extension', _____HNBConfigurationInformationProvided_iE_Extensions__item__id_tab_val_Extension_0), (u'presence', u'optional')]), dict([(u'id', 52), (u'criticality', u'ignore'), (u'Extension', _____HNBConfigurationInformationProvided_iE_Extensions__item__id_tab_val_Extension_1), (u'presence', u'optional')])], rr=[], ev=None, er=[])
     ___HNBConfigurationInformationProvided_iE_Extensions__item__id._const_tab = ____HNBConfigurationInformationProvided_iE_Extensions__item__id_tab
     ___HNBConfigurationInformationProvided_iE_Extensions__item__id._const_tab_at = None
-    ___HNBConfigurationInformationProvided_iE_Extensions__item__id._const_tab_id = 'id'
-    ___HNBConfigurationInformationProvided_iE_Extensions__item__criticality = ENUM(name='criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), ['criticality']))
+    ___HNBConfigurationInformationProvided_iE_Extensions__item__id._const_tab_id = u'id'
+    ___HNBConfigurationInformationProvided_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), [u'criticality']))
     ___HNBConfigurationInformationProvided_iE_Extensions__item__criticality._const_tab = ____HNBConfigurationInformationProvided_iE_Extensions__item__id_tab
-    ___HNBConfigurationInformationProvided_iE_Extensions__item__criticality._const_tab_at = ('..', 'id')
-    ___HNBConfigurationInformationProvided_iE_Extensions__item__criticality._const_tab_id = 'criticality'
-    ___HNBConfigurationInformationProvided_iE_Extensions__item__extensionValue = OPEN(name='extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), ['Extension']))
+    ___HNBConfigurationInformationProvided_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
+    ___HNBConfigurationInformationProvided_iE_Extensions__item__criticality._const_tab_id = u'criticality'
+    ___HNBConfigurationInformationProvided_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), [u'Extension']))
     ___HNBConfigurationInformationProvided_iE_Extensions__item__extensionValue._const_tab = ____HNBConfigurationInformationProvided_iE_Extensions__item__id_tab
-    ___HNBConfigurationInformationProvided_iE_Extensions__item__extensionValue._const_tab_at = ('..', 'id')
-    ___HNBConfigurationInformationProvided_iE_Extensions__item__extensionValue._const_tab_id = 'Extension'
+    ___HNBConfigurationInformationProvided_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
+    ___HNBConfigurationInformationProvided_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __HNBConfigurationInformationProvided_iE_Extensions__item_._cont = ASN1Dict([
-        ('id', ___HNBConfigurationInformationProvided_iE_Extensions__item__id),
-        ('criticality', ___HNBConfigurationInformationProvided_iE_Extensions__item__criticality),
-        ('extensionValue', ___HNBConfigurationInformationProvided_iE_Extensions__item__extensionValue),
+        (u'id', ___HNBConfigurationInformationProvided_iE_Extensions__item__id),
+        (u'criticality', ___HNBConfigurationInformationProvided_iE_Extensions__item__criticality),
+        (u'extensionValue', ___HNBConfigurationInformationProvided_iE_Extensions__item__extensionValue),
         ])
     __HNBConfigurationInformationProvided_iE_Extensions__item_._ext = None
     _HNBConfigurationInformationProvided_iE_Extensions._cont = __HNBConfigurationInformationProvided_iE_Extensions__item_
     _HNBConfigurationInformationProvided_iE_Extensions._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=65535)], ev=None, er=[])
     HNBConfigurationInformationProvided._cont = ASN1Dict([
-        ('psc', _HNBConfigurationInformationProvided_psc),
-        ('cSG-ID', _HNBConfigurationInformationProvided_cSG_ID),
-        ('hNB-Cell-Access-Mode', _HNBConfigurationInformationProvided_hNB_Cell_Access_Mode),
-        ('iurh-Signalling-TNL-AddressList', _HNBConfigurationInformationProvided_iurh_Signalling_TNL_AddressList),
-        ('iE-Extensions', _HNBConfigurationInformationProvided_iE_Extensions),
+        (u'psc', _HNBConfigurationInformationProvided_psc),
+        (u'cSG-ID', _HNBConfigurationInformationProvided_cSG_ID),
+        (u'hNB-Cell-Access-Mode', _HNBConfigurationInformationProvided_hNB_Cell_Access_Mode),
+        (u'iurh-Signalling-TNL-AddressList', _HNBConfigurationInformationProvided_iurh_Signalling_TNL_AddressList),
+        (u'iE-Extensions', _HNBConfigurationInformationProvided_iE_Extensions),
         ])
     HNBConfigurationInformationProvided._ext = []
     
     #-----< HNBConfigurationInformationProvided-ExtIEs >-----#
-    HNBConfigurationInformationProvided_ExtIEs = CLASS(name='HNBConfigurationInformationProvided-ExtIEs', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION')))
-    _HNBConfigurationInformationProvided_ExtIEs_val_Extension_0 = BIT_STR(name='Extension', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'S-RNTIPrefix')))
-    _HNBConfigurationInformationProvided_ExtIEs_val_Extension_1 = SEQ_OF(name='Extension', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'URAIdentityList')))
-    HNBConfigurationInformationProvided_ExtIEs._val = ASN1Set(rv=[dict([('id', 43), ('criticality', 'ignore'), ('Extension', _HNBConfigurationInformationProvided_ExtIEs_val_Extension_0), ('presence', 'optional')]), dict([('id', 52), ('criticality', 'ignore'), ('Extension', _HNBConfigurationInformationProvided_ExtIEs_val_Extension_1), ('presence', 'optional')])], rr=[], ev=[], er=[])
+    HNBConfigurationInformationProvided_ExtIEs = CLASS(name=u'HNBConfigurationInformationProvided-ExtIEs', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION')))
+    _HNBConfigurationInformationProvided_ExtIEs_val_Extension_0 = BIT_STR(name=u'Extension', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'S-RNTIPrefix')))
+    _HNBConfigurationInformationProvided_ExtIEs_val_Extension_1 = SEQ_OF(name=u'Extension', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'URAIdentityList')))
+    HNBConfigurationInformationProvided_ExtIEs._val = ASN1Set(rv=[dict([(u'id', 43), (u'criticality', u'ignore'), (u'Extension', _HNBConfigurationInformationProvided_ExtIEs_val_Extension_0), (u'presence', u'optional')]), dict([(u'id', 52), (u'criticality', u'ignore'), (u'Extension', _HNBConfigurationInformationProvided_ExtIEs_val_Extension_1), (u'presence', u'optional')])], rr=[], ev=[], er=[])
     
     #-----< HNBConfigurationInformationMissing >-----#
-    HNBConfigurationInformationMissing = SEQ(name='HNBConfigurationInformationMissing', mode=MODE_TYPE)
-    _HNBConfigurationInformationMissing_cause = CHOICE(name='cause', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('HNBAP-IEs', 'Cause')))
-    _HNBConfigurationInformationMissing_iE_Extensions = SEQ_OF(name='iE-Extensions', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-Containers', 'ProtocolExtensionContainer')), opt=True)
+    HNBConfigurationInformationMissing = SEQ(name=u'HNBConfigurationInformationMissing', mode=MODE_TYPE)
+    _HNBConfigurationInformationMissing_cause = CHOICE(name=u'cause', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('HNBAP-IEs', 'Cause')))
+    _HNBConfigurationInformationMissing_iE_Extensions = SEQ_OF(name=u'iE-Extensions', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-Containers', 'ProtocolExtensionContainer')), opt=True)
     __HNBConfigurationInformationMissing_iE_Extensions__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-Containers', 'ProtocolExtensionField')))
-    ___HNBConfigurationInformationMissing_iE_Extensions__item__id = INT(name='id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), ['id']))
+    ___HNBConfigurationInformationMissing_iE_Extensions__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), [u'id']))
     ____HNBConfigurationInformationMissing_iE_Extensions__item__id_tab = CLASS(name='_tab_HNBAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION')))
     ____HNBConfigurationInformationMissing_iE_Extensions__item__id_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___HNBConfigurationInformationMissing_iE_Extensions__item__id._const_tab = ____HNBConfigurationInformationMissing_iE_Extensions__item__id_tab
     ___HNBConfigurationInformationMissing_iE_Extensions__item__id._const_tab_at = None
-    ___HNBConfigurationInformationMissing_iE_Extensions__item__id._const_tab_id = 'id'
-    ___HNBConfigurationInformationMissing_iE_Extensions__item__criticality = ENUM(name='criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), ['criticality']))
+    ___HNBConfigurationInformationMissing_iE_Extensions__item__id._const_tab_id = u'id'
+    ___HNBConfigurationInformationMissing_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), [u'criticality']))
     ____HNBConfigurationInformationMissing_iE_Extensions__item__criticality_tab = CLASS(name='_tab_HNBAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION')))
     ____HNBConfigurationInformationMissing_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___HNBConfigurationInformationMissing_iE_Extensions__item__criticality._const_tab = ____HNBConfigurationInformationMissing_iE_Extensions__item__criticality_tab
-    ___HNBConfigurationInformationMissing_iE_Extensions__item__criticality._const_tab_at = ('..', 'id')
-    ___HNBConfigurationInformationMissing_iE_Extensions__item__criticality._const_tab_id = 'criticality'
-    ___HNBConfigurationInformationMissing_iE_Extensions__item__extensionValue = OPEN(name='extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), ['Extension']))
+    ___HNBConfigurationInformationMissing_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
+    ___HNBConfigurationInformationMissing_iE_Extensions__item__criticality._const_tab_id = u'criticality'
+    ___HNBConfigurationInformationMissing_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), [u'Extension']))
     ____HNBConfigurationInformationMissing_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_HNBAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION')))
     ____HNBConfigurationInformationMissing_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___HNBConfigurationInformationMissing_iE_Extensions__item__extensionValue._const_tab = ____HNBConfigurationInformationMissing_iE_Extensions__item__extensionValue_tab
-    ___HNBConfigurationInformationMissing_iE_Extensions__item__extensionValue._const_tab_at = ('..', 'id')
-    ___HNBConfigurationInformationMissing_iE_Extensions__item__extensionValue._const_tab_id = 'Extension'
+    ___HNBConfigurationInformationMissing_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
+    ___HNBConfigurationInformationMissing_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __HNBConfigurationInformationMissing_iE_Extensions__item_._cont = ASN1Dict([
-        ('id', ___HNBConfigurationInformationMissing_iE_Extensions__item__id),
-        ('criticality', ___HNBConfigurationInformationMissing_iE_Extensions__item__criticality),
-        ('extensionValue', ___HNBConfigurationInformationMissing_iE_Extensions__item__extensionValue),
+        (u'id', ___HNBConfigurationInformationMissing_iE_Extensions__item__id),
+        (u'criticality', ___HNBConfigurationInformationMissing_iE_Extensions__item__criticality),
+        (u'extensionValue', ___HNBConfigurationInformationMissing_iE_Extensions__item__extensionValue),
         ])
     __HNBConfigurationInformationMissing_iE_Extensions__item_._ext = None
     _HNBConfigurationInformationMissing_iE_Extensions._cont = __HNBConfigurationInformationMissing_iE_Extensions__item_
     _HNBConfigurationInformationMissing_iE_Extensions._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=65535)], ev=None, er=[])
     HNBConfigurationInformationMissing._cont = ASN1Dict([
-        ('cause', _HNBConfigurationInformationMissing_cause),
-        ('iE-Extensions', _HNBConfigurationInformationMissing_iE_Extensions),
+        (u'cause', _HNBConfigurationInformationMissing_cause),
+        (u'iE-Extensions', _HNBConfigurationInformationMissing_iE_Extensions),
         ])
     HNBConfigurationInformationMissing._ext = []
     
     #-----< HNBConfigurationInformationMissing-ExtIEs >-----#
-    HNBConfigurationInformationMissing_ExtIEs = CLASS(name='HNBConfigurationInformationMissing-ExtIEs', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION')))
+    HNBConfigurationInformationMissing_ExtIEs = CLASS(name=u'HNBConfigurationInformationMissing-ExtIEs', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION')))
     HNBConfigurationInformationMissing_ExtIEs._val = ASN1Set(rv=[], rr=[], ev=[], er=[])
     
     #-----< HNB-Location-Information >-----#
-    HNB_Location_Information = SEQ(name='HNB-Location-Information', mode=MODE_TYPE)
-    _HNB_Location_Information_macroCoverageInfo = SEQ(name='macroCoverageInfo', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-IEs', 'MacroCoverageInformation')), opt=True)
-    _HNB_Location_Information_geographicalCoordinates = SEQ(name='geographicalCoordinates', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-IEs', 'GeographicalLocation')), opt=True)
-    _HNB_Location_Information_iE_Extensions = SEQ_OF(name='iE-Extensions', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-Containers', 'ProtocolExtensionContainer')), opt=True)
+    HNB_Location_Information = SEQ(name=u'HNB-Location-Information', mode=MODE_TYPE)
+    _HNB_Location_Information_macroCoverageInfo = SEQ(name=u'macroCoverageInfo', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-IEs', 'MacroCoverageInformation')), opt=True)
+    _HNB_Location_Information_geographicalCoordinates = SEQ(name=u'geographicalCoordinates', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-IEs', 'GeographicalLocation')), opt=True)
+    _HNB_Location_Information_iE_Extensions = SEQ_OF(name=u'iE-Extensions', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-Containers', 'ProtocolExtensionContainer')), opt=True)
     __HNB_Location_Information_iE_Extensions__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-Containers', 'ProtocolExtensionField')))
-    ___HNB_Location_Information_iE_Extensions__item__id = INT(name='id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), ['id']))
+    ___HNB_Location_Information_iE_Extensions__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), [u'id']))
     ____HNB_Location_Information_iE_Extensions__item__id_tab = CLASS(name='_tab_HNBAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION')))
-    _____HNB_Location_Information_iE_Extensions__item__id_tab_val_Extension_0 = SEQ(name='Extension', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'IP-Address')))
-    ____HNB_Location_Information_iE_Extensions__item__id_tab._val = ASN1Set(rv=[dict([('id', 17), ('criticality', 'reject'), ('Extension', _____HNB_Location_Information_iE_Extensions__item__id_tab_val_Extension_0), ('presence', 'optional')])], rr=[], ev=None, er=[])
+    _____HNB_Location_Information_iE_Extensions__item__id_tab_val_Extension_0 = SEQ(name=u'Extension', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'IP-Address')))
+    ____HNB_Location_Information_iE_Extensions__item__id_tab._val = ASN1Set(rv=[dict([(u'id', 17), (u'criticality', u'reject'), (u'Extension', _____HNB_Location_Information_iE_Extensions__item__id_tab_val_Extension_0), (u'presence', u'optional')])], rr=[], ev=None, er=[])
     ___HNB_Location_Information_iE_Extensions__item__id._const_tab = ____HNB_Location_Information_iE_Extensions__item__id_tab
     ___HNB_Location_Information_iE_Extensions__item__id._const_tab_at = None
-    ___HNB_Location_Information_iE_Extensions__item__id._const_tab_id = 'id'
-    ___HNB_Location_Information_iE_Extensions__item__criticality = ENUM(name='criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), ['criticality']))
+    ___HNB_Location_Information_iE_Extensions__item__id._const_tab_id = u'id'
+    ___HNB_Location_Information_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), [u'criticality']))
     ___HNB_Location_Information_iE_Extensions__item__criticality._const_tab = ____HNB_Location_Information_iE_Extensions__item__id_tab
-    ___HNB_Location_Information_iE_Extensions__item__criticality._const_tab_at = ('..', 'id')
-    ___HNB_Location_Information_iE_Extensions__item__criticality._const_tab_id = 'criticality'
-    ___HNB_Location_Information_iE_Extensions__item__extensionValue = OPEN(name='extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), ['Extension']))
+    ___HNB_Location_Information_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
+    ___HNB_Location_Information_iE_Extensions__item__criticality._const_tab_id = u'criticality'
+    ___HNB_Location_Information_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), [u'Extension']))
     ___HNB_Location_Information_iE_Extensions__item__extensionValue._const_tab = ____HNB_Location_Information_iE_Extensions__item__id_tab
-    ___HNB_Location_Information_iE_Extensions__item__extensionValue._const_tab_at = ('..', 'id')
-    ___HNB_Location_Information_iE_Extensions__item__extensionValue._const_tab_id = 'Extension'
+    ___HNB_Location_Information_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
+    ___HNB_Location_Information_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __HNB_Location_Information_iE_Extensions__item_._cont = ASN1Dict([
-        ('id', ___HNB_Location_Information_iE_Extensions__item__id),
-        ('criticality', ___HNB_Location_Information_iE_Extensions__item__criticality),
-        ('extensionValue', ___HNB_Location_Information_iE_Extensions__item__extensionValue),
+        (u'id', ___HNB_Location_Information_iE_Extensions__item__id),
+        (u'criticality', ___HNB_Location_Information_iE_Extensions__item__criticality),
+        (u'extensionValue', ___HNB_Location_Information_iE_Extensions__item__extensionValue),
         ])
     __HNB_Location_Information_iE_Extensions__item_._ext = None
     _HNB_Location_Information_iE_Extensions._cont = __HNB_Location_Information_iE_Extensions__item_
     _HNB_Location_Information_iE_Extensions._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=65535)], ev=None, er=[])
     HNB_Location_Information._cont = ASN1Dict([
-        ('macroCoverageInfo', _HNB_Location_Information_macroCoverageInfo),
-        ('geographicalCoordinates', _HNB_Location_Information_geographicalCoordinates),
-        ('iE-Extensions', _HNB_Location_Information_iE_Extensions),
+        (u'macroCoverageInfo', _HNB_Location_Information_macroCoverageInfo),
+        (u'geographicalCoordinates', _HNB_Location_Information_geographicalCoordinates),
+        (u'iE-Extensions', _HNB_Location_Information_iE_Extensions),
         ])
     HNB_Location_Information._ext = []
     
     #-----< HNB-Location-Information-ExtIEs >-----#
-    HNB_Location_Information_ExtIEs = CLASS(name='HNB-Location-Information-ExtIEs', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION')))
-    _HNB_Location_Information_ExtIEs_val_Extension_0 = SEQ(name='Extension', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'IP-Address')))
-    HNB_Location_Information_ExtIEs._val = ASN1Set(rv=[dict([('id', 17), ('criticality', 'reject'), ('Extension', _HNB_Location_Information_ExtIEs_val_Extension_0), ('presence', 'optional')])], rr=[], ev=[], er=[])
+    HNB_Location_Information_ExtIEs = CLASS(name=u'HNB-Location-Information-ExtIEs', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION')))
+    _HNB_Location_Information_ExtIEs_val_Extension_0 = SEQ(name=u'Extension', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'IP-Address')))
+    HNB_Location_Information_ExtIEs._val = ASN1Set(rv=[dict([(u'id', 17), (u'criticality', u'reject'), (u'Extension', _HNB_Location_Information_ExtIEs_val_Extension_0), (u'presence', u'optional')])], rr=[], ev=[], er=[])
     
     #-----< HNB-Identity >-----#
-    HNB_Identity = SEQ(name='HNB-Identity', mode=MODE_TYPE)
-    _HNB_Identity_hNB_Identity_Info = OCT_STR(name='hNB-Identity-Info', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-IEs', 'HNB-Identity-Info')))
-    _HNB_Identity_iE_Extensions = SEQ_OF(name='iE-Extensions', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-Containers', 'ProtocolExtensionContainer')), opt=True)
+    HNB_Identity = SEQ(name=u'HNB-Identity', mode=MODE_TYPE)
+    _HNB_Identity_hNB_Identity_Info = OCT_STR(name=u'hNB-Identity-Info', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-IEs', 'HNB-Identity-Info')))
+    _HNB_Identity_iE_Extensions = SEQ_OF(name=u'iE-Extensions', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-Containers', 'ProtocolExtensionContainer')), opt=True)
     __HNB_Identity_iE_Extensions__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-Containers', 'ProtocolExtensionField')))
-    ___HNB_Identity_iE_Extensions__item__id = INT(name='id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), ['id']))
+    ___HNB_Identity_iE_Extensions__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), [u'id']))
     ____HNB_Identity_iE_Extensions__item__id_tab = CLASS(name='_tab_HNBAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION')))
     ____HNB_Identity_iE_Extensions__item__id_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___HNB_Identity_iE_Extensions__item__id._const_tab = ____HNB_Identity_iE_Extensions__item__id_tab
     ___HNB_Identity_iE_Extensions__item__id._const_tab_at = None
-    ___HNB_Identity_iE_Extensions__item__id._const_tab_id = 'id'
-    ___HNB_Identity_iE_Extensions__item__criticality = ENUM(name='criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), ['criticality']))
+    ___HNB_Identity_iE_Extensions__item__id._const_tab_id = u'id'
+    ___HNB_Identity_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), [u'criticality']))
     ____HNB_Identity_iE_Extensions__item__criticality_tab = CLASS(name='_tab_HNBAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION')))
     ____HNB_Identity_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___HNB_Identity_iE_Extensions__item__criticality._const_tab = ____HNB_Identity_iE_Extensions__item__criticality_tab
-    ___HNB_Identity_iE_Extensions__item__criticality._const_tab_at = ('..', 'id')
-    ___HNB_Identity_iE_Extensions__item__criticality._const_tab_id = 'criticality'
-    ___HNB_Identity_iE_Extensions__item__extensionValue = OPEN(name='extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), ['Extension']))
+    ___HNB_Identity_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
+    ___HNB_Identity_iE_Extensions__item__criticality._const_tab_id = u'criticality'
+    ___HNB_Identity_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), [u'Extension']))
     ____HNB_Identity_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_HNBAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION')))
     ____HNB_Identity_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___HNB_Identity_iE_Extensions__item__extensionValue._const_tab = ____HNB_Identity_iE_Extensions__item__extensionValue_tab
-    ___HNB_Identity_iE_Extensions__item__extensionValue._const_tab_at = ('..', 'id')
-    ___HNB_Identity_iE_Extensions__item__extensionValue._const_tab_id = 'Extension'
+    ___HNB_Identity_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
+    ___HNB_Identity_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __HNB_Identity_iE_Extensions__item_._cont = ASN1Dict([
-        ('id', ___HNB_Identity_iE_Extensions__item__id),
-        ('criticality', ___HNB_Identity_iE_Extensions__item__criticality),
-        ('extensionValue', ___HNB_Identity_iE_Extensions__item__extensionValue),
+        (u'id', ___HNB_Identity_iE_Extensions__item__id),
+        (u'criticality', ___HNB_Identity_iE_Extensions__item__criticality),
+        (u'extensionValue', ___HNB_Identity_iE_Extensions__item__extensionValue),
         ])
     __HNB_Identity_iE_Extensions__item_._ext = None
     _HNB_Identity_iE_Extensions._cont = __HNB_Identity_iE_Extensions__item_
     _HNB_Identity_iE_Extensions._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=65535)], ev=None, er=[])
     HNB_Identity._cont = ASN1Dict([
-        ('hNB-Identity-Info', _HNB_Identity_hNB_Identity_Info),
-        ('iE-Extensions', _HNB_Identity_iE_Extensions),
+        (u'hNB-Identity-Info', _HNB_Identity_hNB_Identity_Info),
+        (u'iE-Extensions', _HNB_Identity_iE_Extensions),
         ])
     HNB_Identity._ext = []
     
     #-----< HNB-Identity-ExtIEs >-----#
-    HNB_Identity_ExtIEs = CLASS(name='HNB-Identity-ExtIEs', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION')))
+    HNB_Identity_ExtIEs = CLASS(name=u'HNB-Identity-ExtIEs', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION')))
     HNB_Identity_ExtIEs._val = ASN1Set(rv=[], rr=[], ev=[], er=[])
     
     #-----< HNB-Identity-Info >-----#
-    HNB_Identity_Info = OCT_STR(name='HNB-Identity-Info', mode=MODE_TYPE)
+    HNB_Identity_Info = OCT_STR(name=u'HNB-Identity-Info', mode=MODE_TYPE)
     HNB_Identity_Info._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=255)], ev=None, er=[])
     
     #-----< IMEI >-----#
-    IMEI = BIT_STR(name='IMEI', mode=MODE_TYPE)
+    IMEI = BIT_STR(name=u'IMEI', mode=MODE_TYPE)
     IMEI._const_sz = ASN1Set(rv=[60], rr=[], ev=None, er=[])
     
     #-----< IMSI >-----#
-    IMSI = OCT_STR(name='IMSI', mode=MODE_TYPE)
+    IMSI = OCT_STR(name=u'IMSI', mode=MODE_TYPE)
     IMSI._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=3, ub=8)], ev=None, er=[])
     
     #-----< IMSIDS41 >-----#
-    IMSIDS41 = OCT_STR(name='IMSIDS41', mode=MODE_TYPE)
+    IMSIDS41 = OCT_STR(name=u'IMSIDS41', mode=MODE_TYPE)
     IMSIDS41._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=5, ub=7)], ev=None, er=[])
     
     #-----< IMSIESN >-----#
-    IMSIESN = SEQ(name='IMSIESN', mode=MODE_TYPE)
-    _IMSIESN_iMSIDS41 = OCT_STR(name='iMSIDS41', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-IEs', 'IMSIDS41')))
-    _IMSIESN_eSN = BIT_STR(name='eSN', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-IEs', 'ESN')))
+    IMSIESN = SEQ(name=u'IMSIESN', mode=MODE_TYPE)
+    _IMSIESN_iMSIDS41 = OCT_STR(name=u'iMSIDS41', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-IEs', 'IMSIDS41')))
+    _IMSIESN_eSN = BIT_STR(name=u'eSN', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-IEs', 'ESN')))
     IMSIESN._cont = ASN1Dict([
-        ('iMSIDS41', _IMSIESN_iMSIDS41),
-        ('eSN', _IMSIESN_eSN),
+        (u'iMSIDS41', _IMSIESN_iMSIDS41),
+        (u'eSN', _IMSIESN_eSN),
         ])
     IMSIESN._ext = None
     
     #-----< IP-Address >-----#
-    IP_Address = SEQ(name='IP-Address', mode=MODE_TYPE)
-    _IP_Address_ipaddress = CHOICE(name='ipaddress', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
-    __IP_Address_ipaddress_ipv4info = OCT_STR(name='ipv4info', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-IEs', 'Ipv4Address')))
-    __IP_Address_ipaddress_ipv6info = OCT_STR(name='ipv6info', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-IEs', 'Ipv6Address')))
+    IP_Address = SEQ(name=u'IP-Address', mode=MODE_TYPE)
+    _IP_Address_ipaddress = CHOICE(name=u'ipaddress', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
+    __IP_Address_ipaddress_ipv4info = OCT_STR(name=u'ipv4info', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-IEs', 'Ipv4Address')))
+    __IP_Address_ipaddress_ipv6info = OCT_STR(name=u'ipv6info', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-IEs', 'Ipv6Address')))
     _IP_Address_ipaddress._cont = ASN1Dict([
-        ('ipv4info', __IP_Address_ipaddress_ipv4info),
-        ('ipv6info', __IP_Address_ipaddress_ipv6info),
+        (u'ipv4info', __IP_Address_ipaddress_ipv4info),
+        (u'ipv6info', __IP_Address_ipaddress_ipv6info),
         ])
     _IP_Address_ipaddress._ext = []
-    _IP_Address_iE_Extensions = SEQ_OF(name='iE-Extensions', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-Containers', 'ProtocolExtensionContainer')), opt=True)
+    _IP_Address_iE_Extensions = SEQ_OF(name=u'iE-Extensions', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-Containers', 'ProtocolExtensionContainer')), opt=True)
     __IP_Address_iE_Extensions__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-Containers', 'ProtocolExtensionField')))
-    ___IP_Address_iE_Extensions__item__id = INT(name='id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), ['id']))
+    ___IP_Address_iE_Extensions__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), [u'id']))
     ____IP_Address_iE_Extensions__item__id_tab = CLASS(name='_tab_HNBAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION')))
     ____IP_Address_iE_Extensions__item__id_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___IP_Address_iE_Extensions__item__id._const_tab = ____IP_Address_iE_Extensions__item__id_tab
     ___IP_Address_iE_Extensions__item__id._const_tab_at = None
-    ___IP_Address_iE_Extensions__item__id._const_tab_id = 'id'
-    ___IP_Address_iE_Extensions__item__criticality = ENUM(name='criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), ['criticality']))
+    ___IP_Address_iE_Extensions__item__id._const_tab_id = u'id'
+    ___IP_Address_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), [u'criticality']))
     ____IP_Address_iE_Extensions__item__criticality_tab = CLASS(name='_tab_HNBAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION')))
     ____IP_Address_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___IP_Address_iE_Extensions__item__criticality._const_tab = ____IP_Address_iE_Extensions__item__criticality_tab
-    ___IP_Address_iE_Extensions__item__criticality._const_tab_at = ('..', 'id')
-    ___IP_Address_iE_Extensions__item__criticality._const_tab_id = 'criticality'
-    ___IP_Address_iE_Extensions__item__extensionValue = OPEN(name='extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), ['Extension']))
+    ___IP_Address_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
+    ___IP_Address_iE_Extensions__item__criticality._const_tab_id = u'criticality'
+    ___IP_Address_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), [u'Extension']))
     ____IP_Address_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_HNBAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION')))
     ____IP_Address_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___IP_Address_iE_Extensions__item__extensionValue._const_tab = ____IP_Address_iE_Extensions__item__extensionValue_tab
-    ___IP_Address_iE_Extensions__item__extensionValue._const_tab_at = ('..', 'id')
-    ___IP_Address_iE_Extensions__item__extensionValue._const_tab_id = 'Extension'
+    ___IP_Address_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
+    ___IP_Address_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __IP_Address_iE_Extensions__item_._cont = ASN1Dict([
-        ('id', ___IP_Address_iE_Extensions__item__id),
-        ('criticality', ___IP_Address_iE_Extensions__item__criticality),
-        ('extensionValue', ___IP_Address_iE_Extensions__item__extensionValue),
+        (u'id', ___IP_Address_iE_Extensions__item__id),
+        (u'criticality', ___IP_Address_iE_Extensions__item__criticality),
+        (u'extensionValue', ___IP_Address_iE_Extensions__item__extensionValue),
         ])
     __IP_Address_iE_Extensions__item_._ext = None
     _IP_Address_iE_Extensions._cont = __IP_Address_iE_Extensions__item_
     _IP_Address_iE_Extensions._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=65535)], ev=None, er=[])
     IP_Address._cont = ASN1Dict([
-        ('ipaddress', _IP_Address_ipaddress),
-        ('iE-Extensions', _IP_Address_iE_Extensions),
+        (u'ipaddress', _IP_Address_ipaddress),
+        (u'iE-Extensions', _IP_Address_iE_Extensions),
         ])
     IP_Address._ext = []
     
     #-----< IP-Address-ExtIEs >-----#
-    IP_Address_ExtIEs = CLASS(name='IP-Address-ExtIEs', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION')))
+    IP_Address_ExtIEs = CLASS(name=u'IP-Address-ExtIEs', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION')))
     IP_Address_ExtIEs._val = ASN1Set(rv=[], rr=[], ev=[], er=[])
     
     #-----< Ipv4Address >-----#
-    Ipv4Address = OCT_STR(name='Ipv4Address', mode=MODE_TYPE)
+    Ipv4Address = OCT_STR(name=u'Ipv4Address', mode=MODE_TYPE)
     Ipv4Address._const_sz = ASN1Set(rv=[4], rr=[], ev=None, er=[])
     
     #-----< Ipv6Address >-----#
-    Ipv6Address = OCT_STR(name='Ipv6Address', mode=MODE_TYPE)
+    Ipv6Address = OCT_STR(name=u'Ipv6Address', mode=MODE_TYPE)
     Ipv6Address._const_sz = ASN1Set(rv=[16], rr=[], ev=None, er=[])
     
     #-----< Iurh-Signalling-TNL-AddressList >-----#
-    Iurh_Signalling_TNL_AddressList = SEQ_OF(name='Iurh-Signalling-TNL-AddressList', mode=MODE_TYPE)
+    Iurh_Signalling_TNL_AddressList = SEQ_OF(name=u'Iurh-Signalling-TNL-AddressList', mode=MODE_TYPE)
     _Iurh_Signalling_TNL_AddressList__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'IP-Address')))
     Iurh_Signalling_TNL_AddressList._cont = _Iurh_Signalling_TNL_AddressList__item_
     Iurh_Signalling_TNL_AddressList._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=3)], ev=None, er=[])
     
     #-----< LAC >-----#
-    LAC = OCT_STR(name='LAC', mode=MODE_TYPE)
+    LAC = OCT_STR(name=u'LAC', mode=MODE_TYPE)
     LAC._const_sz = ASN1Set(rv=[2], rr=[], ev=None, er=[])
     
     #-----< LAI >-----#
-    LAI = SEQ(name='LAI', mode=MODE_TYPE)
-    _LAI_pLMNID = OCT_STR(name='pLMNID', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-IEs', 'PLMNidentity')))
-    _LAI_lAC = OCT_STR(name='lAC', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-IEs', 'LAC')))
+    LAI = SEQ(name=u'LAI', mode=MODE_TYPE)
+    _LAI_pLMNID = OCT_STR(name=u'pLMNID', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-IEs', 'PLMNidentity')))
+    _LAI_lAC = OCT_STR(name=u'lAC', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-IEs', 'LAC')))
     LAI._cont = ASN1Dict([
-        ('pLMNID', _LAI_pLMNID),
-        ('lAC', _LAI_lAC),
+        (u'pLMNID', _LAI_pLMNID),
+        (u'lAC', _LAI_lAC),
         ])
     LAI._ext = []
     
     #-----< MacroCoverageInformation >-----#
-    MacroCoverageInformation = SEQ(name='MacroCoverageInformation', mode=MODE_TYPE)
-    _MacroCoverageInformation_cellIdentity = CHOICE(name='cellIdentity', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('HNBAP-IEs', 'MacroCellID')))
-    _MacroCoverageInformation_iE_Extensions = SEQ_OF(name='iE-Extensions', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-Containers', 'ProtocolExtensionContainer')), opt=True)
+    MacroCoverageInformation = SEQ(name=u'MacroCoverageInformation', mode=MODE_TYPE)
+    _MacroCoverageInformation_cellIdentity = CHOICE(name=u'cellIdentity', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('HNBAP-IEs', 'MacroCellID')))
+    _MacroCoverageInformation_iE_Extensions = SEQ_OF(name=u'iE-Extensions', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-Containers', 'ProtocolExtensionContainer')), opt=True)
     __MacroCoverageInformation_iE_Extensions__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-Containers', 'ProtocolExtensionField')))
-    ___MacroCoverageInformation_iE_Extensions__item__id = INT(name='id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), ['id']))
+    ___MacroCoverageInformation_iE_Extensions__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), [u'id']))
     ____MacroCoverageInformation_iE_Extensions__item__id_tab = CLASS(name='_tab_HNBAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION')))
     ____MacroCoverageInformation_iE_Extensions__item__id_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___MacroCoverageInformation_iE_Extensions__item__id._const_tab = ____MacroCoverageInformation_iE_Extensions__item__id_tab
     ___MacroCoverageInformation_iE_Extensions__item__id._const_tab_at = None
-    ___MacroCoverageInformation_iE_Extensions__item__id._const_tab_id = 'id'
-    ___MacroCoverageInformation_iE_Extensions__item__criticality = ENUM(name='criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), ['criticality']))
+    ___MacroCoverageInformation_iE_Extensions__item__id._const_tab_id = u'id'
+    ___MacroCoverageInformation_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), [u'criticality']))
     ____MacroCoverageInformation_iE_Extensions__item__criticality_tab = CLASS(name='_tab_HNBAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION')))
     ____MacroCoverageInformation_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___MacroCoverageInformation_iE_Extensions__item__criticality._const_tab = ____MacroCoverageInformation_iE_Extensions__item__criticality_tab
-    ___MacroCoverageInformation_iE_Extensions__item__criticality._const_tab_at = ('..', 'id')
-    ___MacroCoverageInformation_iE_Extensions__item__criticality._const_tab_id = 'criticality'
-    ___MacroCoverageInformation_iE_Extensions__item__extensionValue = OPEN(name='extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), ['Extension']))
+    ___MacroCoverageInformation_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
+    ___MacroCoverageInformation_iE_Extensions__item__criticality._const_tab_id = u'criticality'
+    ___MacroCoverageInformation_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), [u'Extension']))
     ____MacroCoverageInformation_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_HNBAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION')))
     ____MacroCoverageInformation_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___MacroCoverageInformation_iE_Extensions__item__extensionValue._const_tab = ____MacroCoverageInformation_iE_Extensions__item__extensionValue_tab
-    ___MacroCoverageInformation_iE_Extensions__item__extensionValue._const_tab_at = ('..', 'id')
-    ___MacroCoverageInformation_iE_Extensions__item__extensionValue._const_tab_id = 'Extension'
+    ___MacroCoverageInformation_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
+    ___MacroCoverageInformation_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __MacroCoverageInformation_iE_Extensions__item_._cont = ASN1Dict([
-        ('id', ___MacroCoverageInformation_iE_Extensions__item__id),
-        ('criticality', ___MacroCoverageInformation_iE_Extensions__item__criticality),
-        ('extensionValue', ___MacroCoverageInformation_iE_Extensions__item__extensionValue),
+        (u'id', ___MacroCoverageInformation_iE_Extensions__item__id),
+        (u'criticality', ___MacroCoverageInformation_iE_Extensions__item__criticality),
+        (u'extensionValue', ___MacroCoverageInformation_iE_Extensions__item__extensionValue),
         ])
     __MacroCoverageInformation_iE_Extensions__item_._ext = None
     _MacroCoverageInformation_iE_Extensions._cont = __MacroCoverageInformation_iE_Extensions__item_
     _MacroCoverageInformation_iE_Extensions._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=65535)], ev=None, er=[])
     MacroCoverageInformation._cont = ASN1Dict([
-        ('cellIdentity', _MacroCoverageInformation_cellIdentity),
-        ('iE-Extensions', _MacroCoverageInformation_iE_Extensions),
+        (u'cellIdentity', _MacroCoverageInformation_cellIdentity),
+        (u'iE-Extensions', _MacroCoverageInformation_iE_Extensions),
         ])
     MacroCoverageInformation._ext = []
     
     #-----< MacroCoverageInformation-ExtIEs >-----#
-    MacroCoverageInformation_ExtIEs = CLASS(name='MacroCoverageInformation-ExtIEs', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION')))
+    MacroCoverageInformation_ExtIEs = CLASS(name=u'MacroCoverageInformation-ExtIEs', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION')))
     MacroCoverageInformation_ExtIEs._val = ASN1Set(rv=[], rr=[], ev=[], er=[])
     
     #-----< MacroCellID >-----#
-    MacroCellID = CHOICE(name='MacroCellID', mode=MODE_TYPE)
-    _MacroCellID_uTRANCellID = SEQ(name='uTRANCellID', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-IEs', 'UTRANCellID')))
-    _MacroCellID_gERANCellID = SEQ(name='gERANCellID', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-IEs', 'CGI')))
+    MacroCellID = CHOICE(name=u'MacroCellID', mode=MODE_TYPE)
+    _MacroCellID_uTRANCellID = SEQ(name=u'uTRANCellID', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-IEs', 'UTRANCellID')))
+    _MacroCellID_gERANCellID = SEQ(name=u'gERANCellID', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-IEs', 'CGI')))
     MacroCellID._cont = ASN1Dict([
-        ('uTRANCellID', _MacroCellID_uTRANCellID),
-        ('gERANCellID', _MacroCellID_gERANCellID),
+        (u'uTRANCellID', _MacroCellID_uTRANCellID),
+        (u'gERANCellID', _MacroCellID_gERANCellID),
         ])
     MacroCellID._ext = []
     
     #-----< MuxPortNumber >-----#
-    MuxPortNumber = INT(name='MuxPortNumber', mode=MODE_TYPE)
+    MuxPortNumber = INT(name=u'MuxPortNumber', mode=MODE_TYPE)
     MuxPortNumber._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1024, ub=65535)], ev=None, er=[])
     
     #-----< NeighbourCellIdentityList >-----#
-    NeighbourCellIdentityList = SEQ_OF(name='NeighbourCellIdentityList', mode=MODE_TYPE)
+    NeighbourCellIdentityList = SEQ_OF(name=u'NeighbourCellIdentityList', mode=MODE_TYPE)
     _NeighbourCellIdentityList__item_ = CHOICE(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'NeighbourIdentity')))
     NeighbourCellIdentityList._cont = _NeighbourCellIdentityList__item_
     NeighbourCellIdentityList._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=128)], ev=None, er=[])
     
     #-----< NeighbourIdentity >-----#
-    NeighbourIdentity = CHOICE(name='NeighbourIdentity', mode=MODE_TYPE)
-    _NeighbourIdentity_hNB_RNL_Identity = CHOICE(name='hNB-RNL-Identity', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('HNBAP-IEs', 'HNB-RNL-Identity')))
-    _NeighbourIdentity_cell_ID = BIT_STR(name='cell-ID', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-IEs', 'CellIdentity')))
+    NeighbourIdentity = CHOICE(name=u'NeighbourIdentity', mode=MODE_TYPE)
+    _NeighbourIdentity_hNB_RNL_Identity = CHOICE(name=u'hNB-RNL-Identity', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('HNBAP-IEs', 'HNB-RNL-Identity')))
+    _NeighbourIdentity_cell_ID = BIT_STR(name=u'cell-ID', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-IEs', 'CellIdentity')))
     NeighbourIdentity._cont = ASN1Dict([
-        ('hNB-RNL-Identity', _NeighbourIdentity_hNB_RNL_Identity),
-        ('cell-ID', _NeighbourIdentity_cell_ID),
+        (u'hNB-RNL-Identity', _NeighbourIdentity_hNB_RNL_Identity),
+        (u'cell-ID', _NeighbourIdentity_cell_ID),
         ])
     NeighbourIdentity._ext = []
     
     #-----< NeighbourInfoList >-----#
-    NeighbourInfoList = SEQ_OF(name='NeighbourInfoList', mode=MODE_TYPE)
+    NeighbourInfoList = SEQ_OF(name=u'NeighbourInfoList', mode=MODE_TYPE)
     _NeighbourInfoList__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'HNBConfigInfo')))
     NeighbourInfoList._cont = _NeighbourInfoList__item_
     NeighbourInfoList._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=32)], ev=None, er=[])
     
     #-----< AdditionalNeighbourInfoList >-----#
-    AdditionalNeighbourInfoList = SEQ_OF(name='AdditionalNeighbourInfoList', mode=MODE_TYPE)
+    AdditionalNeighbourInfoList = SEQ_OF(name=u'AdditionalNeighbourInfoList', mode=MODE_TYPE)
     _AdditionalNeighbourInfoList__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'HNBConfigInfo')))
     AdditionalNeighbourInfoList._cont = _AdditionalNeighbourInfoList__item_
     AdditionalNeighbourInfoList._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=128)], ev=None, er=[])
     
     #-----< NeighbourInfoRequestList >-----#
-    NeighbourInfoRequestList = SEQ_OF(name='NeighbourInfoRequestList', mode=MODE_TYPE)
+    NeighbourInfoRequestList = SEQ_OF(name=u'NeighbourInfoRequestList', mode=MODE_TYPE)
     _NeighbourInfoRequestList__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'NeighbourInfoRequestItem')))
     NeighbourInfoRequestList._cont = _NeighbourInfoRequestList__item_
     NeighbourInfoRequestList._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=32)], ev=None, er=[])
     
     #-----< NeighbourInfoRequestItem >-----#
-    NeighbourInfoRequestItem = SEQ(name='NeighbourInfoRequestItem', mode=MODE_TYPE)
-    _NeighbourInfoRequestItem_hnb_RNL_Identity = CHOICE(name='hnb-RNL-Identity', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('HNBAP-IEs', 'HNB-RNL-Identity')))
-    _NeighbourInfoRequestItem_iE_Extensions = SEQ_OF(name='iE-Extensions', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-Containers', 'ProtocolExtensionContainer')), opt=True)
+    NeighbourInfoRequestItem = SEQ(name=u'NeighbourInfoRequestItem', mode=MODE_TYPE)
+    _NeighbourInfoRequestItem_hnb_RNL_Identity = CHOICE(name=u'hnb-RNL-Identity', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('HNBAP-IEs', 'HNB-RNL-Identity')))
+    _NeighbourInfoRequestItem_iE_Extensions = SEQ_OF(name=u'iE-Extensions', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-Containers', 'ProtocolExtensionContainer')), opt=True)
     __NeighbourInfoRequestItem_iE_Extensions__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-Containers', 'ProtocolExtensionField')))
-    ___NeighbourInfoRequestItem_iE_Extensions__item__id = INT(name='id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), ['id']))
+    ___NeighbourInfoRequestItem_iE_Extensions__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), [u'id']))
     ____NeighbourInfoRequestItem_iE_Extensions__item__id_tab = CLASS(name='_tab_HNBAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION')))
     ____NeighbourInfoRequestItem_iE_Extensions__item__id_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___NeighbourInfoRequestItem_iE_Extensions__item__id._const_tab = ____NeighbourInfoRequestItem_iE_Extensions__item__id_tab
     ___NeighbourInfoRequestItem_iE_Extensions__item__id._const_tab_at = None
-    ___NeighbourInfoRequestItem_iE_Extensions__item__id._const_tab_id = 'id'
-    ___NeighbourInfoRequestItem_iE_Extensions__item__criticality = ENUM(name='criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), ['criticality']))
+    ___NeighbourInfoRequestItem_iE_Extensions__item__id._const_tab_id = u'id'
+    ___NeighbourInfoRequestItem_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), [u'criticality']))
     ____NeighbourInfoRequestItem_iE_Extensions__item__criticality_tab = CLASS(name='_tab_HNBAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION')))
     ____NeighbourInfoRequestItem_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___NeighbourInfoRequestItem_iE_Extensions__item__criticality._const_tab = ____NeighbourInfoRequestItem_iE_Extensions__item__criticality_tab
-    ___NeighbourInfoRequestItem_iE_Extensions__item__criticality._const_tab_at = ('..', 'id')
-    ___NeighbourInfoRequestItem_iE_Extensions__item__criticality._const_tab_id = 'criticality'
-    ___NeighbourInfoRequestItem_iE_Extensions__item__extensionValue = OPEN(name='extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), ['Extension']))
+    ___NeighbourInfoRequestItem_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
+    ___NeighbourInfoRequestItem_iE_Extensions__item__criticality._const_tab_id = u'criticality'
+    ___NeighbourInfoRequestItem_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), [u'Extension']))
     ____NeighbourInfoRequestItem_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_HNBAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION')))
     ____NeighbourInfoRequestItem_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___NeighbourInfoRequestItem_iE_Extensions__item__extensionValue._const_tab = ____NeighbourInfoRequestItem_iE_Extensions__item__extensionValue_tab
-    ___NeighbourInfoRequestItem_iE_Extensions__item__extensionValue._const_tab_at = ('..', 'id')
-    ___NeighbourInfoRequestItem_iE_Extensions__item__extensionValue._const_tab_id = 'Extension'
+    ___NeighbourInfoRequestItem_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
+    ___NeighbourInfoRequestItem_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __NeighbourInfoRequestItem_iE_Extensions__item_._cont = ASN1Dict([
-        ('id', ___NeighbourInfoRequestItem_iE_Extensions__item__id),
-        ('criticality', ___NeighbourInfoRequestItem_iE_Extensions__item__criticality),
-        ('extensionValue', ___NeighbourInfoRequestItem_iE_Extensions__item__extensionValue),
+        (u'id', ___NeighbourInfoRequestItem_iE_Extensions__item__id),
+        (u'criticality', ___NeighbourInfoRequestItem_iE_Extensions__item__criticality),
+        (u'extensionValue', ___NeighbourInfoRequestItem_iE_Extensions__item__extensionValue),
         ])
     __NeighbourInfoRequestItem_iE_Extensions__item_._ext = None
     _NeighbourInfoRequestItem_iE_Extensions._cont = __NeighbourInfoRequestItem_iE_Extensions__item_
     _NeighbourInfoRequestItem_iE_Extensions._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=65535)], ev=None, er=[])
     NeighbourInfoRequestItem._cont = ASN1Dict([
-        ('hnb-RNL-Identity', _NeighbourInfoRequestItem_hnb_RNL_Identity),
-        ('iE-Extensions', _NeighbourInfoRequestItem_iE_Extensions),
+        (u'hnb-RNL-Identity', _NeighbourInfoRequestItem_hnb_RNL_Identity),
+        (u'iE-Extensions', _NeighbourInfoRequestItem_iE_Extensions),
         ])
     NeighbourInfoRequestItem._ext = []
     
     #-----< NeighbourInfoRequestItem-ExtIEs >-----#
-    NeighbourInfoRequestItem_ExtIEs = CLASS(name='NeighbourInfoRequestItem-ExtIEs', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION')))
+    NeighbourInfoRequestItem_ExtIEs = CLASS(name=u'NeighbourInfoRequestItem-ExtIEs', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION')))
     NeighbourInfoRequestItem_ExtIEs._val = ASN1Set(rv=[], rr=[], ev=[], er=[])
     
     #-----< PLMNidentity >-----#
-    PLMNidentity = OCT_STR(name='PLMNidentity', mode=MODE_TYPE)
+    PLMNidentity = OCT_STR(name=u'PLMNidentity', mode=MODE_TYPE)
     PLMNidentity._const_sz = ASN1Set(rv=[3], rr=[], ev=None, er=[])
     
     #-----< PSC >-----#
-    PSC = BIT_STR(name='PSC', mode=MODE_TYPE)
+    PSC = BIT_STR(name=u'PSC', mode=MODE_TYPE)
     PSC._const_sz = ASN1Set(rv=[9], rr=[], ev=None, er=[])
     
     #-----< PTMSI >-----#
-    PTMSI = BIT_STR(name='PTMSI', mode=MODE_TYPE)
+    PTMSI = BIT_STR(name=u'PTMSI', mode=MODE_TYPE)
     PTMSI._const_sz = ASN1Set(rv=[32], rr=[], ev=None, er=[])
     
     #-----< PTMSIRAI >-----#
-    PTMSIRAI = SEQ(name='PTMSIRAI', mode=MODE_TYPE)
-    _PTMSIRAI_pTMSI = BIT_STR(name='pTMSI', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-IEs', 'PTMSI')))
-    _PTMSIRAI_rAI = SEQ(name='rAI', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-IEs', 'RAI')))
+    PTMSIRAI = SEQ(name=u'PTMSIRAI', mode=MODE_TYPE)
+    _PTMSIRAI_pTMSI = BIT_STR(name=u'pTMSI', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-IEs', 'PTMSI')))
+    _PTMSIRAI_rAI = SEQ(name=u'rAI', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-IEs', 'RAI')))
     PTMSIRAI._cont = ASN1Dict([
-        ('pTMSI', _PTMSIRAI_pTMSI),
-        ('rAI', _PTMSIRAI_rAI),
+        (u'pTMSI', _PTMSIRAI_pTMSI),
+        (u'rAI', _PTMSIRAI_rAI),
         ])
     PTMSIRAI._ext = []
     
     #-----< RAB-ID >-----#
-    RAB_ID = BIT_STR(name='RAB-ID', mode=MODE_TYPE)
+    RAB_ID = BIT_STR(name=u'RAB-ID', mode=MODE_TYPE)
     RAB_ID._const_sz = ASN1Set(rv=[8], rr=[], ev=None, er=[])
     
     #-----< RABList >-----#
-    RABList = SEQ_OF(name='RABList', mode=MODE_TYPE)
+    RABList = SEQ_OF(name=u'RABList', mode=MODE_TYPE)
     _RABList__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'RABListItem')))
     RABList._cont = _RABList__item_
     RABList._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=256)], ev=None, er=[])
     
     #-----< RABListItem >-----#
-    RABListItem = SEQ(name='RABListItem', mode=MODE_TYPE)
-    _RABListItem_rAB_ID = BIT_STR(name='rAB-ID', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-IEs', 'RAB-ID')))
-    _RABListItem_old_transport_Info = SEQ(name='old-transport-Info', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-IEs', 'TransportInfo')))
-    _RABListItem_new_transport_Info = SEQ(name='new-transport-Info', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-IEs', 'TransportInfo')))
-    _RABListItem_cn_domain_indicator = ENUM(name='cn-domain-indicator', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-IEs', 'CN-DomainIndicator')))
-    _RABListItem_iE_Extensions = SEQ_OF(name='iE-Extensions', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-Containers', 'ProtocolExtensionContainer')), opt=True)
+    RABListItem = SEQ(name=u'RABListItem', mode=MODE_TYPE)
+    _RABListItem_rAB_ID = BIT_STR(name=u'rAB-ID', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-IEs', 'RAB-ID')))
+    _RABListItem_old_transport_Info = SEQ(name=u'old-transport-Info', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-IEs', 'TransportInfo')))
+    _RABListItem_new_transport_Info = SEQ(name=u'new-transport-Info', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-IEs', 'TransportInfo')))
+    _RABListItem_cn_domain_indicator = ENUM(name=u'cn-domain-indicator', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-IEs', 'CN-DomainIndicator')))
+    _RABListItem_iE_Extensions = SEQ_OF(name=u'iE-Extensions', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-Containers', 'ProtocolExtensionContainer')), opt=True)
     __RABListItem_iE_Extensions__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-Containers', 'ProtocolExtensionField')))
-    ___RABListItem_iE_Extensions__item__id = INT(name='id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), ['id']))
+    ___RABListItem_iE_Extensions__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), [u'id']))
     ____RABListItem_iE_Extensions__item__id_tab = CLASS(name='_tab_HNBAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION')))
     ____RABListItem_iE_Extensions__item__id_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___RABListItem_iE_Extensions__item__id._const_tab = ____RABListItem_iE_Extensions__item__id_tab
     ___RABListItem_iE_Extensions__item__id._const_tab_at = None
-    ___RABListItem_iE_Extensions__item__id._const_tab_id = 'id'
-    ___RABListItem_iE_Extensions__item__criticality = ENUM(name='criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), ['criticality']))
+    ___RABListItem_iE_Extensions__item__id._const_tab_id = u'id'
+    ___RABListItem_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), [u'criticality']))
     ____RABListItem_iE_Extensions__item__criticality_tab = CLASS(name='_tab_HNBAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION')))
     ____RABListItem_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___RABListItem_iE_Extensions__item__criticality._const_tab = ____RABListItem_iE_Extensions__item__criticality_tab
-    ___RABListItem_iE_Extensions__item__criticality._const_tab_at = ('..', 'id')
-    ___RABListItem_iE_Extensions__item__criticality._const_tab_id = 'criticality'
-    ___RABListItem_iE_Extensions__item__extensionValue = OPEN(name='extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), ['Extension']))
+    ___RABListItem_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
+    ___RABListItem_iE_Extensions__item__criticality._const_tab_id = u'criticality'
+    ___RABListItem_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), [u'Extension']))
     ____RABListItem_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_HNBAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION')))
     ____RABListItem_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___RABListItem_iE_Extensions__item__extensionValue._const_tab = ____RABListItem_iE_Extensions__item__extensionValue_tab
-    ___RABListItem_iE_Extensions__item__extensionValue._const_tab_at = ('..', 'id')
-    ___RABListItem_iE_Extensions__item__extensionValue._const_tab_id = 'Extension'
+    ___RABListItem_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
+    ___RABListItem_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __RABListItem_iE_Extensions__item_._cont = ASN1Dict([
-        ('id', ___RABListItem_iE_Extensions__item__id),
-        ('criticality', ___RABListItem_iE_Extensions__item__criticality),
-        ('extensionValue', ___RABListItem_iE_Extensions__item__extensionValue),
+        (u'id', ___RABListItem_iE_Extensions__item__id),
+        (u'criticality', ___RABListItem_iE_Extensions__item__criticality),
+        (u'extensionValue', ___RABListItem_iE_Extensions__item__extensionValue),
         ])
     __RABListItem_iE_Extensions__item_._ext = None
     _RABListItem_iE_Extensions._cont = __RABListItem_iE_Extensions__item_
     _RABListItem_iE_Extensions._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=65535)], ev=None, er=[])
     RABListItem._cont = ASN1Dict([
-        ('rAB-ID', _RABListItem_rAB_ID),
-        ('old-transport-Info', _RABListItem_old_transport_Info),
-        ('new-transport-Info', _RABListItem_new_transport_Info),
-        ('cn-domain-indicator', _RABListItem_cn_domain_indicator),
-        ('iE-Extensions', _RABListItem_iE_Extensions),
+        (u'rAB-ID', _RABListItem_rAB_ID),
+        (u'old-transport-Info', _RABListItem_old_transport_Info),
+        (u'new-transport-Info', _RABListItem_new_transport_Info),
+        (u'cn-domain-indicator', _RABListItem_cn_domain_indicator),
+        (u'iE-Extensions', _RABListItem_iE_Extensions),
         ])
     RABListItem._ext = []
     
     #-----< RABListItem-ExtIEs >-----#
-    RABListItem_ExtIEs = CLASS(name='RABListItem-ExtIEs', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION')))
+    RABListItem_ExtIEs = CLASS(name=u'RABListItem-ExtIEs', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION')))
     RABListItem_ExtIEs._val = ASN1Set(rv=[], rr=[], ev=[], er=[])
     
     #-----< RAC >-----#
-    RAC = OCT_STR(name='RAC', mode=MODE_TYPE)
+    RAC = OCT_STR(name=u'RAC', mode=MODE_TYPE)
     RAC._const_sz = ASN1Set(rv=[1], rr=[], ev=None, er=[])
     
     #-----< RAI >-----#
-    RAI = SEQ(name='RAI', mode=MODE_TYPE)
-    _RAI_lAI = SEQ(name='lAI', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-IEs', 'LAI')))
-    _RAI_rAC = OCT_STR(name='rAC', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-IEs', 'RAC')))
+    RAI = SEQ(name=u'RAI', mode=MODE_TYPE)
+    _RAI_lAI = SEQ(name=u'lAI', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-IEs', 'LAI')))
+    _RAI_rAC = OCT_STR(name=u'rAC', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-IEs', 'RAC')))
     RAI._cont = ASN1Dict([
-        ('lAI', _RAI_lAI),
-        ('rAC', _RAI_rAC),
+        (u'lAI', _RAI_lAI),
+        (u'rAC', _RAI_rAC),
         ])
     RAI._ext = []
     
     #-----< Registration-Cause >-----#
-    Registration_Cause = ENUM(name='Registration-Cause', mode=MODE_TYPE)
-    Registration_Cause._cont = ASN1Dict([('emergency-call', 0), ('normal', 1), ('ue-relocation', 2)])
-    Registration_Cause._ext = ['ue-relocation']
+    Registration_Cause = ENUM(name=u'Registration-Cause', mode=MODE_TYPE)
+    Registration_Cause._cont = ASN1Dict([(u'emergency-call', 0), (u'normal', 1), (u'ue-relocation', 2)])
+    Registration_Cause._ext = [u'ue-relocation']
     
     #-----< RNC-ID >-----#
-    RNC_ID = INT(name='RNC-ID', mode=MODE_TYPE)
+    RNC_ID = INT(name=u'RNC-ID', mode=MODE_TYPE)
     RNC_ID._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=65535)], ev=None, er=[])
     
     #-----< SAC >-----#
-    SAC = OCT_STR(name='SAC', mode=MODE_TYPE)
+    SAC = OCT_STR(name=u'SAC', mode=MODE_TYPE)
     SAC._const_sz = ASN1Set(rv=[2], rr=[], ev=None, er=[])
     
     #-----< S-RNTIPrefix >-----#
-    S_RNTIPrefix = BIT_STR(name='S-RNTIPrefix', mode=MODE_TYPE)
+    S_RNTIPrefix = BIT_STR(name=u'S-RNTIPrefix', mode=MODE_TYPE)
     S_RNTIPrefix._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=16)], ev=[], er=[])
     
     #-----< TMSILAI >-----#
-    TMSILAI = SEQ(name='TMSILAI', mode=MODE_TYPE)
-    _TMSILAI_tMSI = BIT_STR(name='tMSI', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    TMSILAI = SEQ(name=u'TMSILAI', mode=MODE_TYPE)
+    _TMSILAI_tMSI = BIT_STR(name=u'tMSI', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     _TMSILAI_tMSI._const_sz = ASN1Set(rv=[32], rr=[], ev=None, er=[])
-    _TMSILAI_lAI = SEQ(name='lAI', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-IEs', 'LAI')))
+    _TMSILAI_lAI = SEQ(name=u'lAI', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-IEs', 'LAI')))
     TMSILAI._cont = ASN1Dict([
-        ('tMSI', _TMSILAI_tMSI),
-        ('lAI', _TMSILAI_lAI),
+        (u'tMSI', _TMSILAI_tMSI),
+        (u'lAI', _TMSILAI_lAI),
         ])
     TMSILAI._ext = None
     
     #-----< TMSIDS41 >-----#
-    TMSIDS41 = OCT_STR(name='TMSIDS41', mode=MODE_TYPE)
+    TMSIDS41 = OCT_STR(name=u'TMSIDS41', mode=MODE_TYPE)
     TMSIDS41._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=2, ub=17)], ev=None, er=[])
     
     #-----< TransportInfo >-----#
-    TransportInfo = SEQ(name='TransportInfo', mode=MODE_TYPE)
-    _TransportInfo_transportLayerAddress = BIT_STR(name='transportLayerAddress', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-IEs', 'TransportLayerAddress')))
-    _TransportInfo_transportAssociation = CHOICE(name='transportAssociation', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
-    __TransportInfo_transportAssociation_gtp_TEI = OCT_STR(name='gtp-TEI', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-IEs', 'GTP-TEI')))
-    __TransportInfo_transportAssociation_bindingID = OCT_STR(name='bindingID', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-IEs', 'BindingID')))
+    TransportInfo = SEQ(name=u'TransportInfo', mode=MODE_TYPE)
+    _TransportInfo_transportLayerAddress = BIT_STR(name=u'transportLayerAddress', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-IEs', 'TransportLayerAddress')))
+    _TransportInfo_transportAssociation = CHOICE(name=u'transportAssociation', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
+    __TransportInfo_transportAssociation_gtp_TEI = OCT_STR(name=u'gtp-TEI', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-IEs', 'GTP-TEI')))
+    __TransportInfo_transportAssociation_bindingID = OCT_STR(name=u'bindingID', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-IEs', 'BindingID')))
     _TransportInfo_transportAssociation._cont = ASN1Dict([
-        ('gtp-TEI', __TransportInfo_transportAssociation_gtp_TEI),
-        ('bindingID', __TransportInfo_transportAssociation_bindingID),
+        (u'gtp-TEI', __TransportInfo_transportAssociation_gtp_TEI),
+        (u'bindingID', __TransportInfo_transportAssociation_bindingID),
         ])
     _TransportInfo_transportAssociation._ext = []
-    _TransportInfo_iE_Extensions = SEQ_OF(name='iE-Extensions', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-Containers', 'ProtocolExtensionContainer')), opt=True)
+    _TransportInfo_iE_Extensions = SEQ_OF(name=u'iE-Extensions', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-Containers', 'ProtocolExtensionContainer')), opt=True)
     __TransportInfo_iE_Extensions__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-Containers', 'ProtocolExtensionField')))
-    ___TransportInfo_iE_Extensions__item__id = INT(name='id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), ['id']))
+    ___TransportInfo_iE_Extensions__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), [u'id']))
     ____TransportInfo_iE_Extensions__item__id_tab = CLASS(name='_tab_HNBAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION')))
     ____TransportInfo_iE_Extensions__item__id_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___TransportInfo_iE_Extensions__item__id._const_tab = ____TransportInfo_iE_Extensions__item__id_tab
     ___TransportInfo_iE_Extensions__item__id._const_tab_at = None
-    ___TransportInfo_iE_Extensions__item__id._const_tab_id = 'id'
-    ___TransportInfo_iE_Extensions__item__criticality = ENUM(name='criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), ['criticality']))
+    ___TransportInfo_iE_Extensions__item__id._const_tab_id = u'id'
+    ___TransportInfo_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), [u'criticality']))
     ____TransportInfo_iE_Extensions__item__criticality_tab = CLASS(name='_tab_HNBAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION')))
     ____TransportInfo_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___TransportInfo_iE_Extensions__item__criticality._const_tab = ____TransportInfo_iE_Extensions__item__criticality_tab
-    ___TransportInfo_iE_Extensions__item__criticality._const_tab_at = ('..', 'id')
-    ___TransportInfo_iE_Extensions__item__criticality._const_tab_id = 'criticality'
-    ___TransportInfo_iE_Extensions__item__extensionValue = OPEN(name='extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), ['Extension']))
+    ___TransportInfo_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
+    ___TransportInfo_iE_Extensions__item__criticality._const_tab_id = u'criticality'
+    ___TransportInfo_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), [u'Extension']))
     ____TransportInfo_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_HNBAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION')))
     ____TransportInfo_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___TransportInfo_iE_Extensions__item__extensionValue._const_tab = ____TransportInfo_iE_Extensions__item__extensionValue_tab
-    ___TransportInfo_iE_Extensions__item__extensionValue._const_tab_at = ('..', 'id')
-    ___TransportInfo_iE_Extensions__item__extensionValue._const_tab_id = 'Extension'
+    ___TransportInfo_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
+    ___TransportInfo_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __TransportInfo_iE_Extensions__item_._cont = ASN1Dict([
-        ('id', ___TransportInfo_iE_Extensions__item__id),
-        ('criticality', ___TransportInfo_iE_Extensions__item__criticality),
-        ('extensionValue', ___TransportInfo_iE_Extensions__item__extensionValue),
+        (u'id', ___TransportInfo_iE_Extensions__item__id),
+        (u'criticality', ___TransportInfo_iE_Extensions__item__criticality),
+        (u'extensionValue', ___TransportInfo_iE_Extensions__item__extensionValue),
         ])
     __TransportInfo_iE_Extensions__item_._ext = None
     _TransportInfo_iE_Extensions._cont = __TransportInfo_iE_Extensions__item_
     _TransportInfo_iE_Extensions._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=65535)], ev=None, er=[])
     TransportInfo._cont = ASN1Dict([
-        ('transportLayerAddress', _TransportInfo_transportLayerAddress),
-        ('transportAssociation', _TransportInfo_transportAssociation),
-        ('iE-Extensions', _TransportInfo_iE_Extensions),
+        (u'transportLayerAddress', _TransportInfo_transportLayerAddress),
+        (u'transportAssociation', _TransportInfo_transportAssociation),
+        (u'iE-Extensions', _TransportInfo_iE_Extensions),
         ])
     TransportInfo._ext = []
     
     #-----< TransportInfo-ExtIEs >-----#
-    TransportInfo_ExtIEs = CLASS(name='TransportInfo-ExtIEs', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION')))
+    TransportInfo_ExtIEs = CLASS(name=u'TransportInfo-ExtIEs', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION')))
     TransportInfo_ExtIEs._val = ASN1Set(rv=[], rr=[], ev=[], er=[])
     
     #-----< TransportLayerAddress >-----#
-    TransportLayerAddress = BIT_STR(name='TransportLayerAddress', mode=MODE_TYPE)
+    TransportLayerAddress = BIT_STR(name=u'TransportLayerAddress', mode=MODE_TYPE)
     TransportLayerAddress._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=160)], ev=[], er=[])
     
     #-----< Tunnel-Information >-----#
-    Tunnel_Information = SEQ(name='Tunnel-Information', mode=MODE_TYPE)
-    _Tunnel_Information_iP_Address = SEQ(name='iP-Address', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-IEs', 'IP-Address')))
-    _Tunnel_Information_uDP_Port_Number = OCT_STR(name='uDP-Port-Number', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-IEs', 'UDP-Port-Number')), opt=True)
-    _Tunnel_Information_iE_Extensions = SEQ_OF(name='iE-Extensions', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-Containers', 'ProtocolExtensionContainer')), opt=True)
+    Tunnel_Information = SEQ(name=u'Tunnel-Information', mode=MODE_TYPE)
+    _Tunnel_Information_iP_Address = SEQ(name=u'iP-Address', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-IEs', 'IP-Address')))
+    _Tunnel_Information_uDP_Port_Number = OCT_STR(name=u'uDP-Port-Number', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-IEs', 'UDP-Port-Number')), opt=True)
+    _Tunnel_Information_iE_Extensions = SEQ_OF(name=u'iE-Extensions', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-Containers', 'ProtocolExtensionContainer')), opt=True)
     __Tunnel_Information_iE_Extensions__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-Containers', 'ProtocolExtensionField')))
-    ___Tunnel_Information_iE_Extensions__item__id = INT(name='id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), ['id']))
+    ___Tunnel_Information_iE_Extensions__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), [u'id']))
     ____Tunnel_Information_iE_Extensions__item__id_tab = CLASS(name='_tab_HNBAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION')))
     ____Tunnel_Information_iE_Extensions__item__id_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___Tunnel_Information_iE_Extensions__item__id._const_tab = ____Tunnel_Information_iE_Extensions__item__id_tab
     ___Tunnel_Information_iE_Extensions__item__id._const_tab_at = None
-    ___Tunnel_Information_iE_Extensions__item__id._const_tab_id = 'id'
-    ___Tunnel_Information_iE_Extensions__item__criticality = ENUM(name='criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), ['criticality']))
+    ___Tunnel_Information_iE_Extensions__item__id._const_tab_id = u'id'
+    ___Tunnel_Information_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), [u'criticality']))
     ____Tunnel_Information_iE_Extensions__item__criticality_tab = CLASS(name='_tab_HNBAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION')))
     ____Tunnel_Information_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___Tunnel_Information_iE_Extensions__item__criticality._const_tab = ____Tunnel_Information_iE_Extensions__item__criticality_tab
-    ___Tunnel_Information_iE_Extensions__item__criticality._const_tab_at = ('..', 'id')
-    ___Tunnel_Information_iE_Extensions__item__criticality._const_tab_id = 'criticality'
-    ___Tunnel_Information_iE_Extensions__item__extensionValue = OPEN(name='extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), ['Extension']))
+    ___Tunnel_Information_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
+    ___Tunnel_Information_iE_Extensions__item__criticality._const_tab_id = u'criticality'
+    ___Tunnel_Information_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), [u'Extension']))
     ____Tunnel_Information_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_HNBAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION')))
     ____Tunnel_Information_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___Tunnel_Information_iE_Extensions__item__extensionValue._const_tab = ____Tunnel_Information_iE_Extensions__item__extensionValue_tab
-    ___Tunnel_Information_iE_Extensions__item__extensionValue._const_tab_at = ('..', 'id')
-    ___Tunnel_Information_iE_Extensions__item__extensionValue._const_tab_id = 'Extension'
+    ___Tunnel_Information_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
+    ___Tunnel_Information_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __Tunnel_Information_iE_Extensions__item_._cont = ASN1Dict([
-        ('id', ___Tunnel_Information_iE_Extensions__item__id),
-        ('criticality', ___Tunnel_Information_iE_Extensions__item__criticality),
-        ('extensionValue', ___Tunnel_Information_iE_Extensions__item__extensionValue),
+        (u'id', ___Tunnel_Information_iE_Extensions__item__id),
+        (u'criticality', ___Tunnel_Information_iE_Extensions__item__criticality),
+        (u'extensionValue', ___Tunnel_Information_iE_Extensions__item__extensionValue),
         ])
     __Tunnel_Information_iE_Extensions__item_._ext = None
     _Tunnel_Information_iE_Extensions._cont = __Tunnel_Information_iE_Extensions__item_
     _Tunnel_Information_iE_Extensions._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=65535)], ev=None, er=[])
     Tunnel_Information._cont = ASN1Dict([
-        ('iP-Address', _Tunnel_Information_iP_Address),
-        ('uDP-Port-Number', _Tunnel_Information_uDP_Port_Number),
-        ('iE-Extensions', _Tunnel_Information_iE_Extensions),
+        (u'iP-Address', _Tunnel_Information_iP_Address),
+        (u'uDP-Port-Number', _Tunnel_Information_uDP_Port_Number),
+        (u'iE-Extensions', _Tunnel_Information_iE_Extensions),
         ])
     Tunnel_Information._ext = []
     
     #-----< Tunnel-Information-ExtIEs >-----#
-    Tunnel_Information_ExtIEs = CLASS(name='Tunnel-Information-ExtIEs', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION')))
+    Tunnel_Information_ExtIEs = CLASS(name=u'Tunnel-Information-ExtIEs', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION')))
     Tunnel_Information_ExtIEs._val = ASN1Set(rv=[], rr=[], ev=[], er=[])
     
     #-----< TypeOfError >-----#
-    TypeOfError = ENUM(name='TypeOfError', mode=MODE_TYPE)
-    TypeOfError._cont = ASN1Dict([('not-understood', 0), ('missing', 1)])
+    TypeOfError = ENUM(name=u'TypeOfError', mode=MODE_TYPE)
+    TypeOfError._cont = ASN1Dict([(u'not-understood', 0), (u'missing', 1)])
     TypeOfError._ext = []
     
     #-----< UDP-Port-Number >-----#
-    UDP_Port_Number = OCT_STR(name='UDP-Port-Number', mode=MODE_TYPE)
+    UDP_Port_Number = OCT_STR(name=u'UDP-Port-Number', mode=MODE_TYPE)
     UDP_Port_Number._const_sz = ASN1Set(rv=[2], rr=[], ev=None, er=[])
     
     #-----< UE-Capabilities >-----#
-    UE_Capabilities = SEQ(name='UE-Capabilities', mode=MODE_TYPE)
-    _UE_Capabilities_access_stratum_release_indicator = ENUM(name='access-stratum-release-indicator', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-IEs', 'Access-stratum-release-indicator')))
-    _UE_Capabilities_csg_capability = ENUM(name='csg-capability', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-IEs', 'CSG-Capability')))
-    _UE_Capabilities_iE_Extensions = SEQ_OF(name='iE-Extensions', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-Containers', 'ProtocolExtensionContainer')), opt=True)
+    UE_Capabilities = SEQ(name=u'UE-Capabilities', mode=MODE_TYPE)
+    _UE_Capabilities_access_stratum_release_indicator = ENUM(name=u'access-stratum-release-indicator', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-IEs', 'Access-stratum-release-indicator')))
+    _UE_Capabilities_csg_capability = ENUM(name=u'csg-capability', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-IEs', 'CSG-Capability')))
+    _UE_Capabilities_iE_Extensions = SEQ_OF(name=u'iE-Extensions', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-Containers', 'ProtocolExtensionContainer')), opt=True)
     __UE_Capabilities_iE_Extensions__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-Containers', 'ProtocolExtensionField')))
-    ___UE_Capabilities_iE_Extensions__item__id = INT(name='id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), ['id']))
+    ___UE_Capabilities_iE_Extensions__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), [u'id']))
     ____UE_Capabilities_iE_Extensions__item__id_tab = CLASS(name='_tab_HNBAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION')))
     ____UE_Capabilities_iE_Extensions__item__id_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___UE_Capabilities_iE_Extensions__item__id._const_tab = ____UE_Capabilities_iE_Extensions__item__id_tab
     ___UE_Capabilities_iE_Extensions__item__id._const_tab_at = None
-    ___UE_Capabilities_iE_Extensions__item__id._const_tab_id = 'id'
-    ___UE_Capabilities_iE_Extensions__item__criticality = ENUM(name='criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), ['criticality']))
+    ___UE_Capabilities_iE_Extensions__item__id._const_tab_id = u'id'
+    ___UE_Capabilities_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), [u'criticality']))
     ____UE_Capabilities_iE_Extensions__item__criticality_tab = CLASS(name='_tab_HNBAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION')))
     ____UE_Capabilities_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___UE_Capabilities_iE_Extensions__item__criticality._const_tab = ____UE_Capabilities_iE_Extensions__item__criticality_tab
-    ___UE_Capabilities_iE_Extensions__item__criticality._const_tab_at = ('..', 'id')
-    ___UE_Capabilities_iE_Extensions__item__criticality._const_tab_id = 'criticality'
-    ___UE_Capabilities_iE_Extensions__item__extensionValue = OPEN(name='extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), ['Extension']))
+    ___UE_Capabilities_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
+    ___UE_Capabilities_iE_Extensions__item__criticality._const_tab_id = u'criticality'
+    ___UE_Capabilities_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), [u'Extension']))
     ____UE_Capabilities_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_HNBAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION')))
     ____UE_Capabilities_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___UE_Capabilities_iE_Extensions__item__extensionValue._const_tab = ____UE_Capabilities_iE_Extensions__item__extensionValue_tab
-    ___UE_Capabilities_iE_Extensions__item__extensionValue._const_tab_at = ('..', 'id')
-    ___UE_Capabilities_iE_Extensions__item__extensionValue._const_tab_id = 'Extension'
+    ___UE_Capabilities_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
+    ___UE_Capabilities_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __UE_Capabilities_iE_Extensions__item_._cont = ASN1Dict([
-        ('id', ___UE_Capabilities_iE_Extensions__item__id),
-        ('criticality', ___UE_Capabilities_iE_Extensions__item__criticality),
-        ('extensionValue', ___UE_Capabilities_iE_Extensions__item__extensionValue),
+        (u'id', ___UE_Capabilities_iE_Extensions__item__id),
+        (u'criticality', ___UE_Capabilities_iE_Extensions__item__criticality),
+        (u'extensionValue', ___UE_Capabilities_iE_Extensions__item__extensionValue),
         ])
     __UE_Capabilities_iE_Extensions__item_._ext = None
     _UE_Capabilities_iE_Extensions._cont = __UE_Capabilities_iE_Extensions__item_
     _UE_Capabilities_iE_Extensions._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=65535)], ev=None, er=[])
     UE_Capabilities._cont = ASN1Dict([
-        ('access-stratum-release-indicator', _UE_Capabilities_access_stratum_release_indicator),
-        ('csg-capability', _UE_Capabilities_csg_capability),
-        ('iE-Extensions', _UE_Capabilities_iE_Extensions),
+        (u'access-stratum-release-indicator', _UE_Capabilities_access_stratum_release_indicator),
+        (u'csg-capability', _UE_Capabilities_csg_capability),
+        (u'iE-Extensions', _UE_Capabilities_iE_Extensions),
         ])
     UE_Capabilities._ext = []
     
     #-----< UE-Capabilities-ExtIEs >-----#
-    UE_Capabilities_ExtIEs = CLASS(name='UE-Capabilities-ExtIEs', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION')))
+    UE_Capabilities_ExtIEs = CLASS(name=u'UE-Capabilities-ExtIEs', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION')))
     UE_Capabilities_ExtIEs._val = ASN1Set(rv=[], rr=[], ev=[], er=[])
     
     #-----< UTRANCellID >-----#
-    UTRANCellID = SEQ(name='UTRANCellID', mode=MODE_TYPE)
-    _UTRANCellID_lAC = OCT_STR(name='lAC', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-IEs', 'LAC')))
-    _UTRANCellID_rAC = OCT_STR(name='rAC', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-IEs', 'RAC')))
-    _UTRANCellID_pLMNidentity = OCT_STR(name='pLMNidentity', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-IEs', 'PLMNidentity')))
-    _UTRANCellID_uTRANcellID = BIT_STR(name='uTRANcellID', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-IEs', 'CellIdentity')))
-    _UTRANCellID_iE_Extensions = SEQ_OF(name='iE-Extensions', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-Containers', 'ProtocolExtensionContainer')), opt=True)
+    UTRANCellID = SEQ(name=u'UTRANCellID', mode=MODE_TYPE)
+    _UTRANCellID_lAC = OCT_STR(name=u'lAC', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-IEs', 'LAC')))
+    _UTRANCellID_rAC = OCT_STR(name=u'rAC', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-IEs', 'RAC')))
+    _UTRANCellID_pLMNidentity = OCT_STR(name=u'pLMNidentity', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-IEs', 'PLMNidentity')))
+    _UTRANCellID_uTRANcellID = BIT_STR(name=u'uTRANcellID', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-IEs', 'CellIdentity')))
+    _UTRANCellID_iE_Extensions = SEQ_OF(name=u'iE-Extensions', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-Containers', 'ProtocolExtensionContainer')), opt=True)
     __UTRANCellID_iE_Extensions__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-Containers', 'ProtocolExtensionField')))
-    ___UTRANCellID_iE_Extensions__item__id = INT(name='id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), ['id']))
+    ___UTRANCellID_iE_Extensions__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), [u'id']))
     ____UTRANCellID_iE_Extensions__item__id_tab = CLASS(name='_tab_HNBAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION')))
     ____UTRANCellID_iE_Extensions__item__id_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___UTRANCellID_iE_Extensions__item__id._const_tab = ____UTRANCellID_iE_Extensions__item__id_tab
     ___UTRANCellID_iE_Extensions__item__id._const_tab_at = None
-    ___UTRANCellID_iE_Extensions__item__id._const_tab_id = 'id'
-    ___UTRANCellID_iE_Extensions__item__criticality = ENUM(name='criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), ['criticality']))
+    ___UTRANCellID_iE_Extensions__item__id._const_tab_id = u'id'
+    ___UTRANCellID_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), [u'criticality']))
     ____UTRANCellID_iE_Extensions__item__criticality_tab = CLASS(name='_tab_HNBAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION')))
     ____UTRANCellID_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___UTRANCellID_iE_Extensions__item__criticality._const_tab = ____UTRANCellID_iE_Extensions__item__criticality_tab
-    ___UTRANCellID_iE_Extensions__item__criticality._const_tab_at = ('..', 'id')
-    ___UTRANCellID_iE_Extensions__item__criticality._const_tab_id = 'criticality'
-    ___UTRANCellID_iE_Extensions__item__extensionValue = OPEN(name='extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), ['Extension']))
+    ___UTRANCellID_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
+    ___UTRANCellID_iE_Extensions__item__criticality._const_tab_id = u'criticality'
+    ___UTRANCellID_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), [u'Extension']))
     ____UTRANCellID_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_HNBAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION')))
     ____UTRANCellID_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___UTRANCellID_iE_Extensions__item__extensionValue._const_tab = ____UTRANCellID_iE_Extensions__item__extensionValue_tab
-    ___UTRANCellID_iE_Extensions__item__extensionValue._const_tab_at = ('..', 'id')
-    ___UTRANCellID_iE_Extensions__item__extensionValue._const_tab_id = 'Extension'
+    ___UTRANCellID_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
+    ___UTRANCellID_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __UTRANCellID_iE_Extensions__item_._cont = ASN1Dict([
-        ('id', ___UTRANCellID_iE_Extensions__item__id),
-        ('criticality', ___UTRANCellID_iE_Extensions__item__criticality),
-        ('extensionValue', ___UTRANCellID_iE_Extensions__item__extensionValue),
+        (u'id', ___UTRANCellID_iE_Extensions__item__id),
+        (u'criticality', ___UTRANCellID_iE_Extensions__item__criticality),
+        (u'extensionValue', ___UTRANCellID_iE_Extensions__item__extensionValue),
         ])
     __UTRANCellID_iE_Extensions__item_._ext = None
     _UTRANCellID_iE_Extensions._cont = __UTRANCellID_iE_Extensions__item_
     _UTRANCellID_iE_Extensions._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=65535)], ev=None, er=[])
     UTRANCellID._cont = ASN1Dict([
-        ('lAC', _UTRANCellID_lAC),
-        ('rAC', _UTRANCellID_rAC),
-        ('pLMNidentity', _UTRANCellID_pLMNidentity),
-        ('uTRANcellID', _UTRANCellID_uTRANcellID),
-        ('iE-Extensions', _UTRANCellID_iE_Extensions),
+        (u'lAC', _UTRANCellID_lAC),
+        (u'rAC', _UTRANCellID_rAC),
+        (u'pLMNidentity', _UTRANCellID_pLMNidentity),
+        (u'uTRANcellID', _UTRANCellID_uTRANcellID),
+        (u'iE-Extensions', _UTRANCellID_iE_Extensions),
         ])
     UTRANCellID._ext = None
     
     #-----< UTRANCellID-ExtIEs >-----#
-    UTRANCellID_ExtIEs = CLASS(name='UTRANCellID-ExtIEs', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION')))
+    UTRANCellID_ExtIEs = CLASS(name=u'UTRANCellID-ExtIEs', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION')))
     UTRANCellID_ExtIEs._val = ASN1Set(rv=[], rr=[], ev=[], er=[])
     
     #-----< UE-Identity >-----#
-    UE_Identity = CHOICE(name='UE-Identity', mode=MODE_TYPE)
-    _UE_Identity_iMSI = OCT_STR(name='iMSI', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-IEs', 'IMSI')))
-    _UE_Identity_tMSILAI = SEQ(name='tMSILAI', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-IEs', 'TMSILAI')))
-    _UE_Identity_pTMSIRAI = SEQ(name='pTMSIRAI', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-IEs', 'PTMSIRAI')))
-    _UE_Identity_iMEI = BIT_STR(name='iMEI', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-IEs', 'IMEI')))
-    _UE_Identity_eSN = BIT_STR(name='eSN', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-IEs', 'ESN')))
-    _UE_Identity_iMSIDS41 = OCT_STR(name='iMSIDS41', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-IEs', 'IMSIDS41')))
-    _UE_Identity_iMSIESN = SEQ(name='iMSIESN', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-IEs', 'IMSIESN')))
-    _UE_Identity_tMSIDS41 = OCT_STR(name='tMSIDS41', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-IEs', 'TMSIDS41')))
+    UE_Identity = CHOICE(name=u'UE-Identity', mode=MODE_TYPE)
+    _UE_Identity_iMSI = OCT_STR(name=u'iMSI', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-IEs', 'IMSI')))
+    _UE_Identity_tMSILAI = SEQ(name=u'tMSILAI', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-IEs', 'TMSILAI')))
+    _UE_Identity_pTMSIRAI = SEQ(name=u'pTMSIRAI', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-IEs', 'PTMSIRAI')))
+    _UE_Identity_iMEI = BIT_STR(name=u'iMEI', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-IEs', 'IMEI')))
+    _UE_Identity_eSN = BIT_STR(name=u'eSN', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-IEs', 'ESN')))
+    _UE_Identity_iMSIDS41 = OCT_STR(name=u'iMSIDS41', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-IEs', 'IMSIDS41')))
+    _UE_Identity_iMSIESN = SEQ(name=u'iMSIESN', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-IEs', 'IMSIESN')))
+    _UE_Identity_tMSIDS41 = OCT_STR(name=u'tMSIDS41', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-IEs', 'TMSIDS41')))
     UE_Identity._cont = ASN1Dict([
-        ('iMSI', _UE_Identity_iMSI),
-        ('tMSILAI', _UE_Identity_tMSILAI),
-        ('pTMSIRAI', _UE_Identity_pTMSIRAI),
-        ('iMEI', _UE_Identity_iMEI),
-        ('eSN', _UE_Identity_eSN),
-        ('iMSIDS41', _UE_Identity_iMSIDS41),
-        ('iMSIESN', _UE_Identity_iMSIESN),
-        ('tMSIDS41', _UE_Identity_tMSIDS41),
+        (u'iMSI', _UE_Identity_iMSI),
+        (u'tMSILAI', _UE_Identity_tMSILAI),
+        (u'pTMSIRAI', _UE_Identity_pTMSIRAI),
+        (u'iMEI', _UE_Identity_iMEI),
+        (u'eSN', _UE_Identity_eSN),
+        (u'iMSIDS41', _UE_Identity_iMSIDS41),
+        (u'iMSIESN', _UE_Identity_iMSIESN),
+        (u'tMSIDS41', _UE_Identity_tMSIDS41),
         ])
     UE_Identity._ext = []
     
     #-----< Update-cause >-----#
-    Update_cause = ENUM(name='Update-cause', mode=MODE_TYPE)
-    Update_cause._cont = ASN1Dict([('relocation-preparation', 0)])
+    Update_cause = ENUM(name=u'Update-cause', mode=MODE_TYPE)
+    Update_cause._cont = ASN1Dict([(u'relocation-preparation', 0)])
     Update_cause._ext = []
     
     #-----< URAIdentityList >-----#
-    URAIdentityList = SEQ_OF(name='URAIdentityList', mode=MODE_TYPE)
+    URAIdentityList = SEQ_OF(name=u'URAIdentityList', mode=MODE_TYPE)
     _URAIdentityList__item_ = INT(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'URAIdentity')))
     URAIdentityList._cont = _URAIdentityList__item_
     URAIdentityList._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=8)], ev=None, er=[])
     
     #-----< URAIdentity >-----#
-    URAIdentity = INT(name='URAIdentity', mode=MODE_TYPE)
+    URAIdentity = INT(name=u'URAIdentity', mode=MODE_TYPE)
     URAIdentity._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=65535)], ev=None, er=[])
     
     #-----< U-RNTI >-----#
-    U_RNTI = BIT_STR(name='U-RNTI', mode=MODE_TYPE)
+    U_RNTI = BIT_STR(name=u'U-RNTI', mode=MODE_TYPE)
     U_RNTI._const_sz = ASN1Set(rv=[32], rr=[], ev=None, er=[])
     
     #-----< UnknownU-RNTIIndication >-----#
-    UnknownU_RNTIIndication = ENUM(name='UnknownU-RNTIIndication', mode=MODE_TYPE)
-    UnknownU_RNTIIndication._cont = ASN1Dict([('unknown', 0)])
+    UnknownU_RNTIIndication = ENUM(name=u'UnknownU-RNTIIndication', mode=MODE_TYPE)
+    UnknownU_RNTIIndication._cont = ASN1Dict([(u'unknown', 0)])
     UnknownU_RNTIIndication._ext = []
     
     _all_ = [
@@ -2506,1524 +2506,1524 @@ class HNBAP_IEs:
 
 class HNBAP_PDU_Contents:
 
-    _name_  = 'HNBAP-PDU-Contents'
+    _name_  = u'HNBAP-PDU-Contents'
     _oid_   = [0, 4, 0, 0, 20, 3, 6, 1, 1]
     
     _obj_ = [
-        'HNBRegisterRequest',
-        'HNBRegisterRequestIEs',
-        'HNBRegisterRequestExtensions',
-        'HNBRegisterAccept',
-        'HNBRegisterResponseIEs',
-        'HNBRegisterResponseExtensions',
-        'HNBRegisterReject',
-        'HNBRegisterRejectIEs',
-        'HNBRegisterRejectExtensions',
-        'HNBDe-Register',
-        'HNBDe-RegisterIEs',
-        'HNBDe-RegisterExtensions',
-        'UERegisterRequest',
-        'UERegisterRequestIEs',
-        'UERegisterRequestExtensions',
-        'UERegisterAccept',
-        'UERegisterAcceptIEs',
-        'UERegisterAcceptExtensions',
-        'UERegisterReject',
-        'UERegisterRejectIEs',
-        'UERegisterRejectExtensions',
-        'UEDe-Register',
-        'UEDe-RegisterIEs',
-        'UEDe-RegisterExtensions',
-        'CSGMembershipUpdate',
-        'CSGMembershipUpdateIEs',
-        'CSGMembershipUpdateExtensions',
-        'TNLUpdateRequest',
-        'TNLUpdateRequestIEs',
-        'TNLUpdateExtensions',
-        'TNLUpdateResponse',
-        'TNLUpdateResponseIEs',
-        'TNLUpdateResponseExtensions',
-        'TNLUpdateFailure',
-        'TNLUpdateFailureIEs',
-        'TNLUpdateFailureExtensions',
-        'HNBConfigTransferRequest',
-        'HNBConfigTransferRequestIEs',
-        'HNBConfigTransferRequestExtensions',
-        'HNBConfigTransferResponse',
-        'HNBConfigTransferResponseIEs',
-        'HNBConfigTransferResponseExtensions',
-        'RelocationComplete',
-        'RelocationCompleteIEs',
-        'RelocationCompleteExtensions',
-        'ErrorIndication',
-        'ErrorIndicationIEs',
-        'ErrorIndicationExtensions',
-        'PrivateMessage',
-        'PrivateMessage-IEs',
-        'U-RNTIQueryRequest',
-        'U-RNTIQueryRequestIEs',
-        'U-RNTIQueryRequestExtensions',
-        'U-RNTIQueryResponse',
-        'U-RNTIQueryResponseIEs',
-        'U-RNTIQueryResponseExtensions',
+        u'HNBRegisterRequest',
+        u'HNBRegisterRequestIEs',
+        u'HNBRegisterRequestExtensions',
+        u'HNBRegisterAccept',
+        u'HNBRegisterResponseIEs',
+        u'HNBRegisterResponseExtensions',
+        u'HNBRegisterReject',
+        u'HNBRegisterRejectIEs',
+        u'HNBRegisterRejectExtensions',
+        u'HNBDe-Register',
+        u'HNBDe-RegisterIEs',
+        u'HNBDe-RegisterExtensions',
+        u'UERegisterRequest',
+        u'UERegisterRequestIEs',
+        u'UERegisterRequestExtensions',
+        u'UERegisterAccept',
+        u'UERegisterAcceptIEs',
+        u'UERegisterAcceptExtensions',
+        u'UERegisterReject',
+        u'UERegisterRejectIEs',
+        u'UERegisterRejectExtensions',
+        u'UEDe-Register',
+        u'UEDe-RegisterIEs',
+        u'UEDe-RegisterExtensions',
+        u'CSGMembershipUpdate',
+        u'CSGMembershipUpdateIEs',
+        u'CSGMembershipUpdateExtensions',
+        u'TNLUpdateRequest',
+        u'TNLUpdateRequestIEs',
+        u'TNLUpdateExtensions',
+        u'TNLUpdateResponse',
+        u'TNLUpdateResponseIEs',
+        u'TNLUpdateResponseExtensions',
+        u'TNLUpdateFailure',
+        u'TNLUpdateFailureIEs',
+        u'TNLUpdateFailureExtensions',
+        u'HNBConfigTransferRequest',
+        u'HNBConfigTransferRequestIEs',
+        u'HNBConfigTransferRequestExtensions',
+        u'HNBConfigTransferResponse',
+        u'HNBConfigTransferResponseIEs',
+        u'HNBConfigTransferResponseExtensions',
+        u'RelocationComplete',
+        u'RelocationCompleteIEs',
+        u'RelocationCompleteExtensions',
+        u'ErrorIndication',
+        u'ErrorIndicationIEs',
+        u'ErrorIndicationExtensions',
+        u'PrivateMessage',
+        u'PrivateMessage-IEs',
+        u'U-RNTIQueryRequest',
+        u'U-RNTIQueryRequestIEs',
+        u'U-RNTIQueryRequestExtensions',
+        u'U-RNTIQueryResponse',
+        u'U-RNTIQueryResponseIEs',
+        u'U-RNTIQueryResponseExtensions',
         ]
     _type_ = [
-        'HNBRegisterRequest',
-        'HNBRegisterAccept',
-        'HNBRegisterReject',
-        'HNBDe-Register',
-        'UERegisterRequest',
-        'UERegisterAccept',
-        'UERegisterReject',
-        'UEDe-Register',
-        'CSGMembershipUpdate',
-        'TNLUpdateRequest',
-        'TNLUpdateResponse',
-        'TNLUpdateFailure',
-        'HNBConfigTransferRequest',
-        'HNBConfigTransferResponse',
-        'RelocationComplete',
-        'ErrorIndication',
-        'PrivateMessage',
-        'U-RNTIQueryRequest',
-        'U-RNTIQueryResponse',
+        u'HNBRegisterRequest',
+        u'HNBRegisterAccept',
+        u'HNBRegisterReject',
+        u'HNBDe-Register',
+        u'UERegisterRequest',
+        u'UERegisterAccept',
+        u'UERegisterReject',
+        u'UEDe-Register',
+        u'CSGMembershipUpdate',
+        u'TNLUpdateRequest',
+        u'TNLUpdateResponse',
+        u'TNLUpdateFailure',
+        u'HNBConfigTransferRequest',
+        u'HNBConfigTransferResponse',
+        u'RelocationComplete',
+        u'ErrorIndication',
+        u'PrivateMessage',
+        u'U-RNTIQueryRequest',
+        u'U-RNTIQueryResponse',
         ]
     _set_ = [
-        'HNBRegisterRequestIEs',
-        'HNBRegisterRequestExtensions',
-        'HNBRegisterResponseIEs',
-        'HNBRegisterResponseExtensions',
-        'HNBRegisterRejectIEs',
-        'HNBRegisterRejectExtensions',
-        'HNBDe-RegisterIEs',
-        'HNBDe-RegisterExtensions',
-        'UERegisterRequestIEs',
-        'UERegisterRequestExtensions',
-        'UERegisterAcceptIEs',
-        'UERegisterAcceptExtensions',
-        'UERegisterRejectIEs',
-        'UERegisterRejectExtensions',
-        'UEDe-RegisterIEs',
-        'UEDe-RegisterExtensions',
-        'CSGMembershipUpdateIEs',
-        'CSGMembershipUpdateExtensions',
-        'TNLUpdateRequestIEs',
-        'TNLUpdateExtensions',
-        'TNLUpdateResponseIEs',
-        'TNLUpdateResponseExtensions',
-        'TNLUpdateFailureIEs',
-        'TNLUpdateFailureExtensions',
-        'HNBConfigTransferRequestIEs',
-        'HNBConfigTransferRequestExtensions',
-        'HNBConfigTransferResponseIEs',
-        'HNBConfigTransferResponseExtensions',
-        'RelocationCompleteIEs',
-        'RelocationCompleteExtensions',
-        'ErrorIndicationIEs',
-        'ErrorIndicationExtensions',
-        'PrivateMessage-IEs',
-        'U-RNTIQueryRequestIEs',
-        'U-RNTIQueryRequestExtensions',
-        'U-RNTIQueryResponseIEs',
-        'U-RNTIQueryResponseExtensions',
+        u'HNBRegisterRequestIEs',
+        u'HNBRegisterRequestExtensions',
+        u'HNBRegisterResponseIEs',
+        u'HNBRegisterResponseExtensions',
+        u'HNBRegisterRejectIEs',
+        u'HNBRegisterRejectExtensions',
+        u'HNBDe-RegisterIEs',
+        u'HNBDe-RegisterExtensions',
+        u'UERegisterRequestIEs',
+        u'UERegisterRequestExtensions',
+        u'UERegisterAcceptIEs',
+        u'UERegisterAcceptExtensions',
+        u'UERegisterRejectIEs',
+        u'UERegisterRejectExtensions',
+        u'UEDe-RegisterIEs',
+        u'UEDe-RegisterExtensions',
+        u'CSGMembershipUpdateIEs',
+        u'CSGMembershipUpdateExtensions',
+        u'TNLUpdateRequestIEs',
+        u'TNLUpdateExtensions',
+        u'TNLUpdateResponseIEs',
+        u'TNLUpdateResponseExtensions',
+        u'TNLUpdateFailureIEs',
+        u'TNLUpdateFailureExtensions',
+        u'HNBConfigTransferRequestIEs',
+        u'HNBConfigTransferRequestExtensions',
+        u'HNBConfigTransferResponseIEs',
+        u'HNBConfigTransferResponseExtensions',
+        u'RelocationCompleteIEs',
+        u'RelocationCompleteExtensions',
+        u'ErrorIndicationIEs',
+        u'ErrorIndicationExtensions',
+        u'PrivateMessage-IEs',
+        u'U-RNTIQueryRequestIEs',
+        u'U-RNTIQueryRequestExtensions',
+        u'U-RNTIQueryResponseIEs',
+        u'U-RNTIQueryResponseExtensions',
         ]
     _val_ = [
         ]
     _class_ = [
-        'HNBRegisterRequestIEs',
-        'HNBRegisterRequestExtensions',
-        'HNBRegisterResponseIEs',
-        'HNBRegisterResponseExtensions',
-        'HNBRegisterRejectIEs',
-        'HNBRegisterRejectExtensions',
-        'HNBDe-RegisterIEs',
-        'HNBDe-RegisterExtensions',
-        'UERegisterRequestIEs',
-        'UERegisterRequestExtensions',
-        'UERegisterAcceptIEs',
-        'UERegisterAcceptExtensions',
-        'UERegisterRejectIEs',
-        'UERegisterRejectExtensions',
-        'UEDe-RegisterIEs',
-        'UEDe-RegisterExtensions',
-        'CSGMembershipUpdateIEs',
-        'CSGMembershipUpdateExtensions',
-        'TNLUpdateRequestIEs',
-        'TNLUpdateExtensions',
-        'TNLUpdateResponseIEs',
-        'TNLUpdateResponseExtensions',
-        'TNLUpdateFailureIEs',
-        'TNLUpdateFailureExtensions',
-        'HNBConfigTransferRequestIEs',
-        'HNBConfigTransferRequestExtensions',
-        'HNBConfigTransferResponseIEs',
-        'HNBConfigTransferResponseExtensions',
-        'RelocationCompleteIEs',
-        'RelocationCompleteExtensions',
-        'ErrorIndicationIEs',
-        'ErrorIndicationExtensions',
-        'PrivateMessage-IEs',
-        'U-RNTIQueryRequestIEs',
-        'U-RNTIQueryRequestExtensions',
-        'U-RNTIQueryResponseIEs',
-        'U-RNTIQueryResponseExtensions',
+        u'HNBRegisterRequestIEs',
+        u'HNBRegisterRequestExtensions',
+        u'HNBRegisterResponseIEs',
+        u'HNBRegisterResponseExtensions',
+        u'HNBRegisterRejectIEs',
+        u'HNBRegisterRejectExtensions',
+        u'HNBDe-RegisterIEs',
+        u'HNBDe-RegisterExtensions',
+        u'UERegisterRequestIEs',
+        u'UERegisterRequestExtensions',
+        u'UERegisterAcceptIEs',
+        u'UERegisterAcceptExtensions',
+        u'UERegisterRejectIEs',
+        u'UERegisterRejectExtensions',
+        u'UEDe-RegisterIEs',
+        u'UEDe-RegisterExtensions',
+        u'CSGMembershipUpdateIEs',
+        u'CSGMembershipUpdateExtensions',
+        u'TNLUpdateRequestIEs',
+        u'TNLUpdateExtensions',
+        u'TNLUpdateResponseIEs',
+        u'TNLUpdateResponseExtensions',
+        u'TNLUpdateFailureIEs',
+        u'TNLUpdateFailureExtensions',
+        u'HNBConfigTransferRequestIEs',
+        u'HNBConfigTransferRequestExtensions',
+        u'HNBConfigTransferResponseIEs',
+        u'HNBConfigTransferResponseExtensions',
+        u'RelocationCompleteIEs',
+        u'RelocationCompleteExtensions',
+        u'ErrorIndicationIEs',
+        u'ErrorIndicationExtensions',
+        u'PrivateMessage-IEs',
+        u'U-RNTIQueryRequestIEs',
+        u'U-RNTIQueryRequestExtensions',
+        u'U-RNTIQueryResponseIEs',
+        u'U-RNTIQueryResponseExtensions',
         ]
     _param_ = [
         ]
     
     #-----< HNBRegisterRequest >-----#
-    HNBRegisterRequest = SEQ(name='HNBRegisterRequest', mode=MODE_TYPE)
-    _HNBRegisterRequest_protocolIEs = SEQ_OF(name='protocolIEs', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-Containers', 'ProtocolIE-Container')))
+    HNBRegisterRequest = SEQ(name=u'HNBRegisterRequest', mode=MODE_TYPE)
+    _HNBRegisterRequest_protocolIEs = SEQ_OF(name=u'protocolIEs', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-Containers', 'ProtocolIE-Container')))
     __HNBRegisterRequest_protocolIEs__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-Containers', 'ProtocolIE-Field')))
-    ___HNBRegisterRequest_protocolIEs__item__id = INT(name='id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-IES'), ['id']))
+    ___HNBRegisterRequest_protocolIEs__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-IES'), [u'id']))
     ____HNBRegisterRequest_protocolIEs__item__id_tab = CLASS(name='_tab_HNBAP-PROTOCOL-IES', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-IES')))
-    _____HNBRegisterRequest_protocolIEs__item__id_tab_val_Value_0 = SEQ(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'HNB-Identity')))
-    _____HNBRegisterRequest_protocolIEs__item__id_tab_val_Value_1 = SEQ(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'HNB-Location-Information')))
-    _____HNBRegisterRequest_protocolIEs__item__id_tab_val_Value_2 = OCT_STR(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'PLMNidentity')))
-    _____HNBRegisterRequest_protocolIEs__item__id_tab_val_Value_3 = BIT_STR(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'CellIdentity')))
-    _____HNBRegisterRequest_protocolIEs__item__id_tab_val_Value_4 = OCT_STR(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'LAC')))
-    _____HNBRegisterRequest_protocolIEs__item__id_tab_val_Value_5 = OCT_STR(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'RAC')))
-    _____HNBRegisterRequest_protocolIEs__item__id_tab_val_Value_6 = OCT_STR(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'SAC')))
-    _____HNBRegisterRequest_protocolIEs__item__id_tab_val_Value_7 = BIT_STR(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'CSG-ID')))
-    ____HNBRegisterRequest_protocolIEs__item__id_tab._val = ASN1Set(rv=[dict([('id', 3), ('criticality', 'reject'), ('Value', _____HNBRegisterRequest_protocolIEs__item__id_tab_val_Value_0), ('presence', 'mandatory')]), dict([('id', 8), ('criticality', 'reject'), ('Value', _____HNBRegisterRequest_protocolIEs__item__id_tab_val_Value_1), ('presence', 'mandatory')]), dict([('id', 9), ('criticality', 'reject'), ('Value', _____HNBRegisterRequest_protocolIEs__item__id_tab_val_Value_2), ('presence', 'mandatory')]), dict([('id', 11), ('criticality', 'reject'), ('Value', _____HNBRegisterRequest_protocolIEs__item__id_tab_val_Value_3), ('presence', 'mandatory')]), dict([('id', 6), ('criticality', 'reject'), ('Value', _____HNBRegisterRequest_protocolIEs__item__id_tab_val_Value_4), ('presence', 'mandatory')]), dict([('id', 7), ('criticality', 'reject'), ('Value', _____HNBRegisterRequest_protocolIEs__item__id_tab_val_Value_5), ('presence', 'mandatory')]), dict([('id', 10), ('criticality', 'reject'), ('Value', _____HNBRegisterRequest_protocolIEs__item__id_tab_val_Value_6), ('presence', 'mandatory')]), dict([('id', 15), ('criticality', 'reject'), ('Value', _____HNBRegisterRequest_protocolIEs__item__id_tab_val_Value_7), ('presence', 'optional')])], rr=[], ev=None, er=[])
+    _____HNBRegisterRequest_protocolIEs__item__id_tab_val_Value_0 = SEQ(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'HNB-Identity')))
+    _____HNBRegisterRequest_protocolIEs__item__id_tab_val_Value_1 = SEQ(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'HNB-Location-Information')))
+    _____HNBRegisterRequest_protocolIEs__item__id_tab_val_Value_2 = OCT_STR(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'PLMNidentity')))
+    _____HNBRegisterRequest_protocolIEs__item__id_tab_val_Value_3 = BIT_STR(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'CellIdentity')))
+    _____HNBRegisterRequest_protocolIEs__item__id_tab_val_Value_4 = OCT_STR(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'LAC')))
+    _____HNBRegisterRequest_protocolIEs__item__id_tab_val_Value_5 = OCT_STR(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'RAC')))
+    _____HNBRegisterRequest_protocolIEs__item__id_tab_val_Value_6 = OCT_STR(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'SAC')))
+    _____HNBRegisterRequest_protocolIEs__item__id_tab_val_Value_7 = BIT_STR(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'CSG-ID')))
+    ____HNBRegisterRequest_protocolIEs__item__id_tab._val = ASN1Set(rv=[dict([(u'id', 3), (u'criticality', u'reject'), (u'Value', _____HNBRegisterRequest_protocolIEs__item__id_tab_val_Value_0), (u'presence', u'mandatory')]), dict([(u'id', 8), (u'criticality', u'reject'), (u'Value', _____HNBRegisterRequest_protocolIEs__item__id_tab_val_Value_1), (u'presence', u'mandatory')]), dict([(u'id', 9), (u'criticality', u'reject'), (u'Value', _____HNBRegisterRequest_protocolIEs__item__id_tab_val_Value_2), (u'presence', u'mandatory')]), dict([(u'id', 11), (u'criticality', u'reject'), (u'Value', _____HNBRegisterRequest_protocolIEs__item__id_tab_val_Value_3), (u'presence', u'mandatory')]), dict([(u'id', 6), (u'criticality', u'reject'), (u'Value', _____HNBRegisterRequest_protocolIEs__item__id_tab_val_Value_4), (u'presence', u'mandatory')]), dict([(u'id', 7), (u'criticality', u'reject'), (u'Value', _____HNBRegisterRequest_protocolIEs__item__id_tab_val_Value_5), (u'presence', u'mandatory')]), dict([(u'id', 10), (u'criticality', u'reject'), (u'Value', _____HNBRegisterRequest_protocolIEs__item__id_tab_val_Value_6), (u'presence', u'mandatory')]), dict([(u'id', 15), (u'criticality', u'reject'), (u'Value', _____HNBRegisterRequest_protocolIEs__item__id_tab_val_Value_7), (u'presence', u'optional')])], rr=[], ev=None, er=[])
     ___HNBRegisterRequest_protocolIEs__item__id._const_tab = ____HNBRegisterRequest_protocolIEs__item__id_tab
     ___HNBRegisterRequest_protocolIEs__item__id._const_tab_at = None
-    ___HNBRegisterRequest_protocolIEs__item__id._const_tab_id = 'id'
-    ___HNBRegisterRequest_protocolIEs__item__criticality = ENUM(name='criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-IES'), ['criticality']))
+    ___HNBRegisterRequest_protocolIEs__item__id._const_tab_id = u'id'
+    ___HNBRegisterRequest_protocolIEs__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-IES'), [u'criticality']))
     ___HNBRegisterRequest_protocolIEs__item__criticality._const_tab = ____HNBRegisterRequest_protocolIEs__item__id_tab
-    ___HNBRegisterRequest_protocolIEs__item__criticality._const_tab_at = ('..', 'id')
-    ___HNBRegisterRequest_protocolIEs__item__criticality._const_tab_id = 'criticality'
-    ___HNBRegisterRequest_protocolIEs__item__value = OPEN(name='value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-IES'), ['Value']))
+    ___HNBRegisterRequest_protocolIEs__item__criticality._const_tab_at = ('..', u'id')
+    ___HNBRegisterRequest_protocolIEs__item__criticality._const_tab_id = u'criticality'
+    ___HNBRegisterRequest_protocolIEs__item__value = OPEN(name=u'value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-IES'), [u'Value']))
     ___HNBRegisterRequest_protocolIEs__item__value._const_tab = ____HNBRegisterRequest_protocolIEs__item__id_tab
-    ___HNBRegisterRequest_protocolIEs__item__value._const_tab_at = ('..', 'id')
-    ___HNBRegisterRequest_protocolIEs__item__value._const_tab_id = 'Value'
+    ___HNBRegisterRequest_protocolIEs__item__value._const_tab_at = ('..', u'id')
+    ___HNBRegisterRequest_protocolIEs__item__value._const_tab_id = u'Value'
     __HNBRegisterRequest_protocolIEs__item_._cont = ASN1Dict([
-        ('id', ___HNBRegisterRequest_protocolIEs__item__id),
-        ('criticality', ___HNBRegisterRequest_protocolIEs__item__criticality),
-        ('value', ___HNBRegisterRequest_protocolIEs__item__value),
+        (u'id', ___HNBRegisterRequest_protocolIEs__item__id),
+        (u'criticality', ___HNBRegisterRequest_protocolIEs__item__criticality),
+        (u'value', ___HNBRegisterRequest_protocolIEs__item__value),
         ])
     __HNBRegisterRequest_protocolIEs__item_._ext = None
     _HNBRegisterRequest_protocolIEs._cont = __HNBRegisterRequest_protocolIEs__item_
     _HNBRegisterRequest_protocolIEs._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=65535)], ev=None, er=[])
-    _HNBRegisterRequest_protocolExtensions = SEQ_OF(name='protocolExtensions', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-Containers', 'ProtocolExtensionContainer')), opt=True)
+    _HNBRegisterRequest_protocolExtensions = SEQ_OF(name=u'protocolExtensions', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-Containers', 'ProtocolExtensionContainer')), opt=True)
     __HNBRegisterRequest_protocolExtensions__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-Containers', 'ProtocolExtensionField')))
-    ___HNBRegisterRequest_protocolExtensions__item__id = INT(name='id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), ['id']))
+    ___HNBRegisterRequest_protocolExtensions__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), [u'id']))
     ____HNBRegisterRequest_protocolExtensions__item__id_tab = CLASS(name='_tab_HNBAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION')))
-    _____HNBRegisterRequest_protocolExtensions__item__id_tab_val_Extension_0 = OCT_STR(name='Extension', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'SAC')))
-    _____HNBRegisterRequest_protocolExtensions__item__id_tab_val_Extension_1 = ENUM(name='Extension', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'HNB-Cell-Access-Mode')))
-    _____HNBRegisterRequest_protocolExtensions__item__id_tab_val_Extension_2 = BIT_STR(name='Extension', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'PSC')))
-    _____HNBRegisterRequest_protocolExtensions__item__id_tab_val_Extension_3 = SEQ(name='Extension', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'IP-Address')))
-    _____HNBRegisterRequest_protocolExtensions__item__id_tab_val_Extension_4 = SEQ(name='Extension', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'Tunnel-Information')))
-    _____HNBRegisterRequest_protocolExtensions__item__id_tab_val_Extension_5 = ENUM(name='Extension', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'CELL-FACHMobilitySupport')))
-    _____HNBRegisterRequest_protocolExtensions__item__id_tab_val_Extension_6 = SEQ_OF(name='Extension', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'NeighbourCellIdentityList')))
-    _____HNBRegisterRequest_protocolExtensions__item__id_tab_val_Extension_7 = SEQ_OF(name='Extension', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'URAIdentityList')))
-    _____HNBRegisterRequest_protocolExtensions__item__id_tab_val_Extension_8 = INT(name='Extension', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'HNBCapacity')))
-    ____HNBRegisterRequest_protocolExtensions__item__id_tab._val = ASN1Set(rv=[dict([('id', 20), ('criticality', 'ignore'), ('Extension', _____HNBRegisterRequest_protocolExtensions__item__id_tab_val_Extension_0), ('presence', 'optional')]), dict([('id', 18), ('criticality', 'reject'), ('Extension', _____HNBRegisterRequest_protocolExtensions__item__id_tab_val_Extension_1), ('presence', 'optional')]), dict([('id', 30), ('criticality', 'ignore'), ('Extension', _____HNBRegisterRequest_protocolExtensions__item__id_tab_val_Extension_2), ('presence', 'optional')]), dict([('id', 29), ('criticality', 'ignore'), ('Extension', _____HNBRegisterRequest_protocolExtensions__item__id_tab_val_Extension_3), ('presence', 'optional')]), dict([('id', 41), ('criticality', 'ignore'), ('Extension', _____HNBRegisterRequest_protocolExtensions__item__id_tab_val_Extension_4), ('presence', 'optional')]), dict([('id', 42), ('criticality', 'ignore'), ('Extension', _____HNBRegisterRequest_protocolExtensions__item__id_tab_val_Extension_5), ('presence', 'optional')]), dict([('id', 47), ('criticality', 'ignore'), ('Extension', _____HNBRegisterRequest_protocolExtensions__item__id_tab_val_Extension_6), ('presence', 'optional')]), dict([('id', 52), ('criticality', 'ignore'), ('Extension', _____HNBRegisterRequest_protocolExtensions__item__id_tab_val_Extension_7), ('presence', 'optional')]), dict([('id', 46), ('criticality', 'ignore'), ('Extension', _____HNBRegisterRequest_protocolExtensions__item__id_tab_val_Extension_8), ('presence', 'optional')])], rr=[], ev=None, er=[])
+    _____HNBRegisterRequest_protocolExtensions__item__id_tab_val_Extension_0 = OCT_STR(name=u'Extension', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'SAC')))
+    _____HNBRegisterRequest_protocolExtensions__item__id_tab_val_Extension_1 = ENUM(name=u'Extension', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'HNB-Cell-Access-Mode')))
+    _____HNBRegisterRequest_protocolExtensions__item__id_tab_val_Extension_2 = BIT_STR(name=u'Extension', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'PSC')))
+    _____HNBRegisterRequest_protocolExtensions__item__id_tab_val_Extension_3 = SEQ(name=u'Extension', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'IP-Address')))
+    _____HNBRegisterRequest_protocolExtensions__item__id_tab_val_Extension_4 = SEQ(name=u'Extension', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'Tunnel-Information')))
+    _____HNBRegisterRequest_protocolExtensions__item__id_tab_val_Extension_5 = ENUM(name=u'Extension', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'CELL-FACHMobilitySupport')))
+    _____HNBRegisterRequest_protocolExtensions__item__id_tab_val_Extension_6 = SEQ_OF(name=u'Extension', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'NeighbourCellIdentityList')))
+    _____HNBRegisterRequest_protocolExtensions__item__id_tab_val_Extension_7 = SEQ_OF(name=u'Extension', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'URAIdentityList')))
+    _____HNBRegisterRequest_protocolExtensions__item__id_tab_val_Extension_8 = INT(name=u'Extension', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'HNBCapacity')))
+    ____HNBRegisterRequest_protocolExtensions__item__id_tab._val = ASN1Set(rv=[dict([(u'id', 20), (u'criticality', u'ignore'), (u'Extension', _____HNBRegisterRequest_protocolExtensions__item__id_tab_val_Extension_0), (u'presence', u'optional')]), dict([(u'id', 18), (u'criticality', u'reject'), (u'Extension', _____HNBRegisterRequest_protocolExtensions__item__id_tab_val_Extension_1), (u'presence', u'optional')]), dict([(u'id', 30), (u'criticality', u'ignore'), (u'Extension', _____HNBRegisterRequest_protocolExtensions__item__id_tab_val_Extension_2), (u'presence', u'optional')]), dict([(u'id', 29), (u'criticality', u'ignore'), (u'Extension', _____HNBRegisterRequest_protocolExtensions__item__id_tab_val_Extension_3), (u'presence', u'optional')]), dict([(u'id', 41), (u'criticality', u'ignore'), (u'Extension', _____HNBRegisterRequest_protocolExtensions__item__id_tab_val_Extension_4), (u'presence', u'optional')]), dict([(u'id', 42), (u'criticality', u'ignore'), (u'Extension', _____HNBRegisterRequest_protocolExtensions__item__id_tab_val_Extension_5), (u'presence', u'optional')]), dict([(u'id', 47), (u'criticality', u'ignore'), (u'Extension', _____HNBRegisterRequest_protocolExtensions__item__id_tab_val_Extension_6), (u'presence', u'optional')]), dict([(u'id', 52), (u'criticality', u'ignore'), (u'Extension', _____HNBRegisterRequest_protocolExtensions__item__id_tab_val_Extension_7), (u'presence', u'optional')]), dict([(u'id', 46), (u'criticality', u'ignore'), (u'Extension', _____HNBRegisterRequest_protocolExtensions__item__id_tab_val_Extension_8), (u'presence', u'optional')])], rr=[], ev=None, er=[])
     ___HNBRegisterRequest_protocolExtensions__item__id._const_tab = ____HNBRegisterRequest_protocolExtensions__item__id_tab
     ___HNBRegisterRequest_protocolExtensions__item__id._const_tab_at = None
-    ___HNBRegisterRequest_protocolExtensions__item__id._const_tab_id = 'id'
-    ___HNBRegisterRequest_protocolExtensions__item__criticality = ENUM(name='criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), ['criticality']))
+    ___HNBRegisterRequest_protocolExtensions__item__id._const_tab_id = u'id'
+    ___HNBRegisterRequest_protocolExtensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), [u'criticality']))
     ___HNBRegisterRequest_protocolExtensions__item__criticality._const_tab = ____HNBRegisterRequest_protocolExtensions__item__id_tab
-    ___HNBRegisterRequest_protocolExtensions__item__criticality._const_tab_at = ('..', 'id')
-    ___HNBRegisterRequest_protocolExtensions__item__criticality._const_tab_id = 'criticality'
-    ___HNBRegisterRequest_protocolExtensions__item__extensionValue = OPEN(name='extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), ['Extension']))
+    ___HNBRegisterRequest_protocolExtensions__item__criticality._const_tab_at = ('..', u'id')
+    ___HNBRegisterRequest_protocolExtensions__item__criticality._const_tab_id = u'criticality'
+    ___HNBRegisterRequest_protocolExtensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), [u'Extension']))
     ___HNBRegisterRequest_protocolExtensions__item__extensionValue._const_tab = ____HNBRegisterRequest_protocolExtensions__item__id_tab
-    ___HNBRegisterRequest_protocolExtensions__item__extensionValue._const_tab_at = ('..', 'id')
-    ___HNBRegisterRequest_protocolExtensions__item__extensionValue._const_tab_id = 'Extension'
+    ___HNBRegisterRequest_protocolExtensions__item__extensionValue._const_tab_at = ('..', u'id')
+    ___HNBRegisterRequest_protocolExtensions__item__extensionValue._const_tab_id = u'Extension'
     __HNBRegisterRequest_protocolExtensions__item_._cont = ASN1Dict([
-        ('id', ___HNBRegisterRequest_protocolExtensions__item__id),
-        ('criticality', ___HNBRegisterRequest_protocolExtensions__item__criticality),
-        ('extensionValue', ___HNBRegisterRequest_protocolExtensions__item__extensionValue),
+        (u'id', ___HNBRegisterRequest_protocolExtensions__item__id),
+        (u'criticality', ___HNBRegisterRequest_protocolExtensions__item__criticality),
+        (u'extensionValue', ___HNBRegisterRequest_protocolExtensions__item__extensionValue),
         ])
     __HNBRegisterRequest_protocolExtensions__item_._ext = None
     _HNBRegisterRequest_protocolExtensions._cont = __HNBRegisterRequest_protocolExtensions__item_
     _HNBRegisterRequest_protocolExtensions._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=65535)], ev=None, er=[])
     HNBRegisterRequest._cont = ASN1Dict([
-        ('protocolIEs', _HNBRegisterRequest_protocolIEs),
-        ('protocolExtensions', _HNBRegisterRequest_protocolExtensions),
+        (u'protocolIEs', _HNBRegisterRequest_protocolIEs),
+        (u'protocolExtensions', _HNBRegisterRequest_protocolExtensions),
         ])
     HNBRegisterRequest._ext = []
     
     #-----< HNBRegisterRequestIEs >-----#
-    HNBRegisterRequestIEs = CLASS(name='HNBRegisterRequestIEs', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-IES')))
-    _HNBRegisterRequestIEs_val_Value_0 = SEQ(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'HNB-Identity')))
-    _HNBRegisterRequestIEs_val_Value_1 = SEQ(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'HNB-Location-Information')))
-    _HNBRegisterRequestIEs_val_Value_2 = OCT_STR(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'PLMNidentity')))
-    _HNBRegisterRequestIEs_val_Value_3 = BIT_STR(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'CellIdentity')))
-    _HNBRegisterRequestIEs_val_Value_4 = OCT_STR(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'LAC')))
-    _HNBRegisterRequestIEs_val_Value_5 = OCT_STR(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'RAC')))
-    _HNBRegisterRequestIEs_val_Value_6 = OCT_STR(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'SAC')))
-    _HNBRegisterRequestIEs_val_Value_7 = BIT_STR(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'CSG-ID')))
-    HNBRegisterRequestIEs._val = ASN1Set(rv=[dict([('id', 3), ('criticality', 'reject'), ('Value', _HNBRegisterRequestIEs_val_Value_0), ('presence', 'mandatory')]), dict([('id', 8), ('criticality', 'reject'), ('Value', _HNBRegisterRequestIEs_val_Value_1), ('presence', 'mandatory')]), dict([('id', 9), ('criticality', 'reject'), ('Value', _HNBRegisterRequestIEs_val_Value_2), ('presence', 'mandatory')]), dict([('id', 11), ('criticality', 'reject'), ('Value', _HNBRegisterRequestIEs_val_Value_3), ('presence', 'mandatory')]), dict([('id', 6), ('criticality', 'reject'), ('Value', _HNBRegisterRequestIEs_val_Value_4), ('presence', 'mandatory')]), dict([('id', 7), ('criticality', 'reject'), ('Value', _HNBRegisterRequestIEs_val_Value_5), ('presence', 'mandatory')]), dict([('id', 10), ('criticality', 'reject'), ('Value', _HNBRegisterRequestIEs_val_Value_6), ('presence', 'mandatory')]), dict([('id', 15), ('criticality', 'reject'), ('Value', _HNBRegisterRequestIEs_val_Value_7), ('presence', 'optional')])], rr=[], ev=[], er=[])
+    HNBRegisterRequestIEs = CLASS(name=u'HNBRegisterRequestIEs', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-IES')))
+    _HNBRegisterRequestIEs_val_Value_0 = SEQ(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'HNB-Identity')))
+    _HNBRegisterRequestIEs_val_Value_1 = SEQ(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'HNB-Location-Information')))
+    _HNBRegisterRequestIEs_val_Value_2 = OCT_STR(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'PLMNidentity')))
+    _HNBRegisterRequestIEs_val_Value_3 = BIT_STR(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'CellIdentity')))
+    _HNBRegisterRequestIEs_val_Value_4 = OCT_STR(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'LAC')))
+    _HNBRegisterRequestIEs_val_Value_5 = OCT_STR(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'RAC')))
+    _HNBRegisterRequestIEs_val_Value_6 = OCT_STR(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'SAC')))
+    _HNBRegisterRequestIEs_val_Value_7 = BIT_STR(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'CSG-ID')))
+    HNBRegisterRequestIEs._val = ASN1Set(rv=[dict([(u'id', 3), (u'criticality', u'reject'), (u'Value', _HNBRegisterRequestIEs_val_Value_0), (u'presence', u'mandatory')]), dict([(u'id', 8), (u'criticality', u'reject'), (u'Value', _HNBRegisterRequestIEs_val_Value_1), (u'presence', u'mandatory')]), dict([(u'id', 9), (u'criticality', u'reject'), (u'Value', _HNBRegisterRequestIEs_val_Value_2), (u'presence', u'mandatory')]), dict([(u'id', 11), (u'criticality', u'reject'), (u'Value', _HNBRegisterRequestIEs_val_Value_3), (u'presence', u'mandatory')]), dict([(u'id', 6), (u'criticality', u'reject'), (u'Value', _HNBRegisterRequestIEs_val_Value_4), (u'presence', u'mandatory')]), dict([(u'id', 7), (u'criticality', u'reject'), (u'Value', _HNBRegisterRequestIEs_val_Value_5), (u'presence', u'mandatory')]), dict([(u'id', 10), (u'criticality', u'reject'), (u'Value', _HNBRegisterRequestIEs_val_Value_6), (u'presence', u'mandatory')]), dict([(u'id', 15), (u'criticality', u'reject'), (u'Value', _HNBRegisterRequestIEs_val_Value_7), (u'presence', u'optional')])], rr=[], ev=[], er=[])
     
     #-----< HNBRegisterRequestExtensions >-----#
-    HNBRegisterRequestExtensions = CLASS(name='HNBRegisterRequestExtensions', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION')))
-    _HNBRegisterRequestExtensions_val_Extension_0 = OCT_STR(name='Extension', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'SAC')))
-    _HNBRegisterRequestExtensions_val_Extension_1 = ENUM(name='Extension', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'HNB-Cell-Access-Mode')))
-    _HNBRegisterRequestExtensions_val_Extension_2 = BIT_STR(name='Extension', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'PSC')))
-    _HNBRegisterRequestExtensions_val_Extension_3 = SEQ(name='Extension', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'IP-Address')))
-    _HNBRegisterRequestExtensions_val_Extension_4 = SEQ(name='Extension', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'Tunnel-Information')))
-    _HNBRegisterRequestExtensions_val_Extension_5 = ENUM(name='Extension', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'CELL-FACHMobilitySupport')))
-    _HNBRegisterRequestExtensions_val_Extension_6 = SEQ_OF(name='Extension', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'NeighbourCellIdentityList')))
-    _HNBRegisterRequestExtensions_val_Extension_7 = SEQ_OF(name='Extension', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'URAIdentityList')))
-    _HNBRegisterRequestExtensions_val_Extension_8 = INT(name='Extension', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'HNBCapacity')))
-    HNBRegisterRequestExtensions._val = ASN1Set(rv=[dict([('id', 20), ('criticality', 'ignore'), ('Extension', _HNBRegisterRequestExtensions_val_Extension_0), ('presence', 'optional')]), dict([('id', 18), ('criticality', 'reject'), ('Extension', _HNBRegisterRequestExtensions_val_Extension_1), ('presence', 'optional')]), dict([('id', 30), ('criticality', 'ignore'), ('Extension', _HNBRegisterRequestExtensions_val_Extension_2), ('presence', 'optional')]), dict([('id', 29), ('criticality', 'ignore'), ('Extension', _HNBRegisterRequestExtensions_val_Extension_3), ('presence', 'optional')]), dict([('id', 41), ('criticality', 'ignore'), ('Extension', _HNBRegisterRequestExtensions_val_Extension_4), ('presence', 'optional')]), dict([('id', 42), ('criticality', 'ignore'), ('Extension', _HNBRegisterRequestExtensions_val_Extension_5), ('presence', 'optional')]), dict([('id', 47), ('criticality', 'ignore'), ('Extension', _HNBRegisterRequestExtensions_val_Extension_6), ('presence', 'optional')]), dict([('id', 52), ('criticality', 'ignore'), ('Extension', _HNBRegisterRequestExtensions_val_Extension_7), ('presence', 'optional')]), dict([('id', 46), ('criticality', 'ignore'), ('Extension', _HNBRegisterRequestExtensions_val_Extension_8), ('presence', 'optional')])], rr=[], ev=[], er=[])
+    HNBRegisterRequestExtensions = CLASS(name=u'HNBRegisterRequestExtensions', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION')))
+    _HNBRegisterRequestExtensions_val_Extension_0 = OCT_STR(name=u'Extension', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'SAC')))
+    _HNBRegisterRequestExtensions_val_Extension_1 = ENUM(name=u'Extension', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'HNB-Cell-Access-Mode')))
+    _HNBRegisterRequestExtensions_val_Extension_2 = BIT_STR(name=u'Extension', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'PSC')))
+    _HNBRegisterRequestExtensions_val_Extension_3 = SEQ(name=u'Extension', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'IP-Address')))
+    _HNBRegisterRequestExtensions_val_Extension_4 = SEQ(name=u'Extension', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'Tunnel-Information')))
+    _HNBRegisterRequestExtensions_val_Extension_5 = ENUM(name=u'Extension', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'CELL-FACHMobilitySupport')))
+    _HNBRegisterRequestExtensions_val_Extension_6 = SEQ_OF(name=u'Extension', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'NeighbourCellIdentityList')))
+    _HNBRegisterRequestExtensions_val_Extension_7 = SEQ_OF(name=u'Extension', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'URAIdentityList')))
+    _HNBRegisterRequestExtensions_val_Extension_8 = INT(name=u'Extension', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'HNBCapacity')))
+    HNBRegisterRequestExtensions._val = ASN1Set(rv=[dict([(u'id', 20), (u'criticality', u'ignore'), (u'Extension', _HNBRegisterRequestExtensions_val_Extension_0), (u'presence', u'optional')]), dict([(u'id', 18), (u'criticality', u'reject'), (u'Extension', _HNBRegisterRequestExtensions_val_Extension_1), (u'presence', u'optional')]), dict([(u'id', 30), (u'criticality', u'ignore'), (u'Extension', _HNBRegisterRequestExtensions_val_Extension_2), (u'presence', u'optional')]), dict([(u'id', 29), (u'criticality', u'ignore'), (u'Extension', _HNBRegisterRequestExtensions_val_Extension_3), (u'presence', u'optional')]), dict([(u'id', 41), (u'criticality', u'ignore'), (u'Extension', _HNBRegisterRequestExtensions_val_Extension_4), (u'presence', u'optional')]), dict([(u'id', 42), (u'criticality', u'ignore'), (u'Extension', _HNBRegisterRequestExtensions_val_Extension_5), (u'presence', u'optional')]), dict([(u'id', 47), (u'criticality', u'ignore'), (u'Extension', _HNBRegisterRequestExtensions_val_Extension_6), (u'presence', u'optional')]), dict([(u'id', 52), (u'criticality', u'ignore'), (u'Extension', _HNBRegisterRequestExtensions_val_Extension_7), (u'presence', u'optional')]), dict([(u'id', 46), (u'criticality', u'ignore'), (u'Extension', _HNBRegisterRequestExtensions_val_Extension_8), (u'presence', u'optional')])], rr=[], ev=[], er=[])
     
     #-----< HNBRegisterAccept >-----#
-    HNBRegisterAccept = SEQ(name='HNBRegisterAccept', mode=MODE_TYPE)
-    _HNBRegisterAccept_protocolIEs = SEQ_OF(name='protocolIEs', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-Containers', 'ProtocolIE-Container')))
+    HNBRegisterAccept = SEQ(name=u'HNBRegisterAccept', mode=MODE_TYPE)
+    _HNBRegisterAccept_protocolIEs = SEQ_OF(name=u'protocolIEs', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-Containers', 'ProtocolIE-Container')))
     __HNBRegisterAccept_protocolIEs__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-Containers', 'ProtocolIE-Field')))
-    ___HNBRegisterAccept_protocolIEs__item__id = INT(name='id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-IES'), ['id']))
+    ___HNBRegisterAccept_protocolIEs__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-IES'), [u'id']))
     ____HNBRegisterAccept_protocolIEs__item__id_tab = CLASS(name='_tab_HNBAP-PROTOCOL-IES', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-IES')))
-    _____HNBRegisterAccept_protocolIEs__item__id_tab_val_Value_0 = INT(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'RNC-ID')))
-    ____HNBRegisterAccept_protocolIEs__item__id_tab._val = ASN1Set(rv=[dict([('id', 14), ('criticality', 'reject'), ('Value', _____HNBRegisterAccept_protocolIEs__item__id_tab_val_Value_0), ('presence', 'mandatory')])], rr=[], ev=None, er=[])
+    _____HNBRegisterAccept_protocolIEs__item__id_tab_val_Value_0 = INT(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'RNC-ID')))
+    ____HNBRegisterAccept_protocolIEs__item__id_tab._val = ASN1Set(rv=[dict([(u'id', 14), (u'criticality', u'reject'), (u'Value', _____HNBRegisterAccept_protocolIEs__item__id_tab_val_Value_0), (u'presence', u'mandatory')])], rr=[], ev=None, er=[])
     ___HNBRegisterAccept_protocolIEs__item__id._const_tab = ____HNBRegisterAccept_protocolIEs__item__id_tab
     ___HNBRegisterAccept_protocolIEs__item__id._const_tab_at = None
-    ___HNBRegisterAccept_protocolIEs__item__id._const_tab_id = 'id'
-    ___HNBRegisterAccept_protocolIEs__item__criticality = ENUM(name='criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-IES'), ['criticality']))
+    ___HNBRegisterAccept_protocolIEs__item__id._const_tab_id = u'id'
+    ___HNBRegisterAccept_protocolIEs__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-IES'), [u'criticality']))
     ___HNBRegisterAccept_protocolIEs__item__criticality._const_tab = ____HNBRegisterAccept_protocolIEs__item__id_tab
-    ___HNBRegisterAccept_protocolIEs__item__criticality._const_tab_at = ('..', 'id')
-    ___HNBRegisterAccept_protocolIEs__item__criticality._const_tab_id = 'criticality'
-    ___HNBRegisterAccept_protocolIEs__item__value = OPEN(name='value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-IES'), ['Value']))
+    ___HNBRegisterAccept_protocolIEs__item__criticality._const_tab_at = ('..', u'id')
+    ___HNBRegisterAccept_protocolIEs__item__criticality._const_tab_id = u'criticality'
+    ___HNBRegisterAccept_protocolIEs__item__value = OPEN(name=u'value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-IES'), [u'Value']))
     ___HNBRegisterAccept_protocolIEs__item__value._const_tab = ____HNBRegisterAccept_protocolIEs__item__id_tab
-    ___HNBRegisterAccept_protocolIEs__item__value._const_tab_at = ('..', 'id')
-    ___HNBRegisterAccept_protocolIEs__item__value._const_tab_id = 'Value'
+    ___HNBRegisterAccept_protocolIEs__item__value._const_tab_at = ('..', u'id')
+    ___HNBRegisterAccept_protocolIEs__item__value._const_tab_id = u'Value'
     __HNBRegisterAccept_protocolIEs__item_._cont = ASN1Dict([
-        ('id', ___HNBRegisterAccept_protocolIEs__item__id),
-        ('criticality', ___HNBRegisterAccept_protocolIEs__item__criticality),
-        ('value', ___HNBRegisterAccept_protocolIEs__item__value),
+        (u'id', ___HNBRegisterAccept_protocolIEs__item__id),
+        (u'criticality', ___HNBRegisterAccept_protocolIEs__item__criticality),
+        (u'value', ___HNBRegisterAccept_protocolIEs__item__value),
         ])
     __HNBRegisterAccept_protocolIEs__item_._ext = None
     _HNBRegisterAccept_protocolIEs._cont = __HNBRegisterAccept_protocolIEs__item_
     _HNBRegisterAccept_protocolIEs._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=65535)], ev=None, er=[])
-    _HNBRegisterAccept_protocolExtensions = SEQ_OF(name='protocolExtensions', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-Containers', 'ProtocolExtensionContainer')), opt=True)
+    _HNBRegisterAccept_protocolExtensions = SEQ_OF(name=u'protocolExtensions', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-Containers', 'ProtocolExtensionContainer')), opt=True)
     __HNBRegisterAccept_protocolExtensions__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-Containers', 'ProtocolExtensionField')))
-    ___HNBRegisterAccept_protocolExtensions__item__id = INT(name='id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), ['id']))
+    ___HNBRegisterAccept_protocolExtensions__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), [u'id']))
     ____HNBRegisterAccept_protocolExtensions__item__id_tab = CLASS(name='_tab_HNBAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION')))
-    _____HNBRegisterAccept_protocolExtensions__item__id_tab_val_Extension_0 = INT(name='Extension', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'MuxPortNumber')))
-    _____HNBRegisterAccept_protocolExtensions__item__id_tab_val_Extension_1 = SEQ(name='Extension', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'IP-Address')))
-    _____HNBRegisterAccept_protocolExtensions__item__id_tab_val_Extension_2 = BIT_STR(name='Extension', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'S-RNTIPrefix')))
-    ____HNBRegisterAccept_protocolExtensions__item__id_tab._val = ASN1Set(rv=[dict([('id', 19), ('criticality', 'ignore'), ('Extension', _____HNBRegisterAccept_protocolExtensions__item__id_tab_val_Extension_0), ('presence', 'optional')]), dict([('id', 29), ('criticality', 'ignore'), ('Extension', _____HNBRegisterAccept_protocolExtensions__item__id_tab_val_Extension_1), ('presence', 'optional')]), dict([('id', 43), ('criticality', 'ignore'), ('Extension', _____HNBRegisterAccept_protocolExtensions__item__id_tab_val_Extension_2), ('presence', 'optional')])], rr=[], ev=None, er=[])
+    _____HNBRegisterAccept_protocolExtensions__item__id_tab_val_Extension_0 = INT(name=u'Extension', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'MuxPortNumber')))
+    _____HNBRegisterAccept_protocolExtensions__item__id_tab_val_Extension_1 = SEQ(name=u'Extension', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'IP-Address')))
+    _____HNBRegisterAccept_protocolExtensions__item__id_tab_val_Extension_2 = BIT_STR(name=u'Extension', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'S-RNTIPrefix')))
+    ____HNBRegisterAccept_protocolExtensions__item__id_tab._val = ASN1Set(rv=[dict([(u'id', 19), (u'criticality', u'ignore'), (u'Extension', _____HNBRegisterAccept_protocolExtensions__item__id_tab_val_Extension_0), (u'presence', u'optional')]), dict([(u'id', 29), (u'criticality', u'ignore'), (u'Extension', _____HNBRegisterAccept_protocolExtensions__item__id_tab_val_Extension_1), (u'presence', u'optional')]), dict([(u'id', 43), (u'criticality', u'ignore'), (u'Extension', _____HNBRegisterAccept_protocolExtensions__item__id_tab_val_Extension_2), (u'presence', u'optional')])], rr=[], ev=None, er=[])
     ___HNBRegisterAccept_protocolExtensions__item__id._const_tab = ____HNBRegisterAccept_protocolExtensions__item__id_tab
     ___HNBRegisterAccept_protocolExtensions__item__id._const_tab_at = None
-    ___HNBRegisterAccept_protocolExtensions__item__id._const_tab_id = 'id'
-    ___HNBRegisterAccept_protocolExtensions__item__criticality = ENUM(name='criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), ['criticality']))
+    ___HNBRegisterAccept_protocolExtensions__item__id._const_tab_id = u'id'
+    ___HNBRegisterAccept_protocolExtensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), [u'criticality']))
     ___HNBRegisterAccept_protocolExtensions__item__criticality._const_tab = ____HNBRegisterAccept_protocolExtensions__item__id_tab
-    ___HNBRegisterAccept_protocolExtensions__item__criticality._const_tab_at = ('..', 'id')
-    ___HNBRegisterAccept_protocolExtensions__item__criticality._const_tab_id = 'criticality'
-    ___HNBRegisterAccept_protocolExtensions__item__extensionValue = OPEN(name='extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), ['Extension']))
+    ___HNBRegisterAccept_protocolExtensions__item__criticality._const_tab_at = ('..', u'id')
+    ___HNBRegisterAccept_protocolExtensions__item__criticality._const_tab_id = u'criticality'
+    ___HNBRegisterAccept_protocolExtensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), [u'Extension']))
     ___HNBRegisterAccept_protocolExtensions__item__extensionValue._const_tab = ____HNBRegisterAccept_protocolExtensions__item__id_tab
-    ___HNBRegisterAccept_protocolExtensions__item__extensionValue._const_tab_at = ('..', 'id')
-    ___HNBRegisterAccept_protocolExtensions__item__extensionValue._const_tab_id = 'Extension'
+    ___HNBRegisterAccept_protocolExtensions__item__extensionValue._const_tab_at = ('..', u'id')
+    ___HNBRegisterAccept_protocolExtensions__item__extensionValue._const_tab_id = u'Extension'
     __HNBRegisterAccept_protocolExtensions__item_._cont = ASN1Dict([
-        ('id', ___HNBRegisterAccept_protocolExtensions__item__id),
-        ('criticality', ___HNBRegisterAccept_protocolExtensions__item__criticality),
-        ('extensionValue', ___HNBRegisterAccept_protocolExtensions__item__extensionValue),
+        (u'id', ___HNBRegisterAccept_protocolExtensions__item__id),
+        (u'criticality', ___HNBRegisterAccept_protocolExtensions__item__criticality),
+        (u'extensionValue', ___HNBRegisterAccept_protocolExtensions__item__extensionValue),
         ])
     __HNBRegisterAccept_protocolExtensions__item_._ext = None
     _HNBRegisterAccept_protocolExtensions._cont = __HNBRegisterAccept_protocolExtensions__item_
     _HNBRegisterAccept_protocolExtensions._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=65535)], ev=None, er=[])
     HNBRegisterAccept._cont = ASN1Dict([
-        ('protocolIEs', _HNBRegisterAccept_protocolIEs),
-        ('protocolExtensions', _HNBRegisterAccept_protocolExtensions),
+        (u'protocolIEs', _HNBRegisterAccept_protocolIEs),
+        (u'protocolExtensions', _HNBRegisterAccept_protocolExtensions),
         ])
     HNBRegisterAccept._ext = []
     
     #-----< HNBRegisterResponseIEs >-----#
-    HNBRegisterResponseIEs = CLASS(name='HNBRegisterResponseIEs', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-IES')))
-    _HNBRegisterResponseIEs_val_Value_0 = INT(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'RNC-ID')))
-    HNBRegisterResponseIEs._val = ASN1Set(rv=[dict([('id', 14), ('criticality', 'reject'), ('Value', _HNBRegisterResponseIEs_val_Value_0), ('presence', 'mandatory')])], rr=[], ev=[], er=[])
+    HNBRegisterResponseIEs = CLASS(name=u'HNBRegisterResponseIEs', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-IES')))
+    _HNBRegisterResponseIEs_val_Value_0 = INT(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'RNC-ID')))
+    HNBRegisterResponseIEs._val = ASN1Set(rv=[dict([(u'id', 14), (u'criticality', u'reject'), (u'Value', _HNBRegisterResponseIEs_val_Value_0), (u'presence', u'mandatory')])], rr=[], ev=[], er=[])
     
     #-----< HNBRegisterResponseExtensions >-----#
-    HNBRegisterResponseExtensions = CLASS(name='HNBRegisterResponseExtensions', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION')))
-    _HNBRegisterResponseExtensions_val_Extension_0 = INT(name='Extension', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'MuxPortNumber')))
-    _HNBRegisterResponseExtensions_val_Extension_1 = SEQ(name='Extension', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'IP-Address')))
-    _HNBRegisterResponseExtensions_val_Extension_2 = BIT_STR(name='Extension', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'S-RNTIPrefix')))
-    HNBRegisterResponseExtensions._val = ASN1Set(rv=[dict([('id', 19), ('criticality', 'ignore'), ('Extension', _HNBRegisterResponseExtensions_val_Extension_0), ('presence', 'optional')]), dict([('id', 29), ('criticality', 'ignore'), ('Extension', _HNBRegisterResponseExtensions_val_Extension_1), ('presence', 'optional')]), dict([('id', 43), ('criticality', 'ignore'), ('Extension', _HNBRegisterResponseExtensions_val_Extension_2), ('presence', 'optional')])], rr=[], ev=[], er=[])
+    HNBRegisterResponseExtensions = CLASS(name=u'HNBRegisterResponseExtensions', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION')))
+    _HNBRegisterResponseExtensions_val_Extension_0 = INT(name=u'Extension', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'MuxPortNumber')))
+    _HNBRegisterResponseExtensions_val_Extension_1 = SEQ(name=u'Extension', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'IP-Address')))
+    _HNBRegisterResponseExtensions_val_Extension_2 = BIT_STR(name=u'Extension', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'S-RNTIPrefix')))
+    HNBRegisterResponseExtensions._val = ASN1Set(rv=[dict([(u'id', 19), (u'criticality', u'ignore'), (u'Extension', _HNBRegisterResponseExtensions_val_Extension_0), (u'presence', u'optional')]), dict([(u'id', 29), (u'criticality', u'ignore'), (u'Extension', _HNBRegisterResponseExtensions_val_Extension_1), (u'presence', u'optional')]), dict([(u'id', 43), (u'criticality', u'ignore'), (u'Extension', _HNBRegisterResponseExtensions_val_Extension_2), (u'presence', u'optional')])], rr=[], ev=[], er=[])
     
     #-----< HNBRegisterReject >-----#
-    HNBRegisterReject = SEQ(name='HNBRegisterReject', mode=MODE_TYPE)
-    _HNBRegisterReject_protocolIEs = SEQ_OF(name='protocolIEs', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-Containers', 'ProtocolIE-Container')))
+    HNBRegisterReject = SEQ(name=u'HNBRegisterReject', mode=MODE_TYPE)
+    _HNBRegisterReject_protocolIEs = SEQ_OF(name=u'protocolIEs', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-Containers', 'ProtocolIE-Container')))
     __HNBRegisterReject_protocolIEs__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-Containers', 'ProtocolIE-Field')))
-    ___HNBRegisterReject_protocolIEs__item__id = INT(name='id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-IES'), ['id']))
+    ___HNBRegisterReject_protocolIEs__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-IES'), [u'id']))
     ____HNBRegisterReject_protocolIEs__item__id_tab = CLASS(name='_tab_HNBAP-PROTOCOL-IES', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-IES')))
-    _____HNBRegisterReject_protocolIEs__item__id_tab_val_Value_0 = CHOICE(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'Cause')))
-    _____HNBRegisterReject_protocolIEs__item__id_tab_val_Value_1 = SEQ(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'CriticalityDiagnostics')))
-    _____HNBRegisterReject_protocolIEs__item__id_tab_val_Value_2 = INT(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'BackoffTimer')))
-    ____HNBRegisterReject_protocolIEs__item__id_tab._val = ASN1Set(rv=[dict([('id', 1), ('criticality', 'ignore'), ('Value', _____HNBRegisterReject_protocolIEs__item__id_tab_val_Value_0), ('presence', 'mandatory')]), dict([('id', 2), ('criticality', 'ignore'), ('Value', _____HNBRegisterReject_protocolIEs__item__id_tab_val_Value_1), ('presence', 'optional')]), dict([('id', 16), ('criticality', 'reject'), ('Value', _____HNBRegisterReject_protocolIEs__item__id_tab_val_Value_2), ('presence', 'conditional')])], rr=[], ev=None, er=[])
+    _____HNBRegisterReject_protocolIEs__item__id_tab_val_Value_0 = CHOICE(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'Cause')))
+    _____HNBRegisterReject_protocolIEs__item__id_tab_val_Value_1 = SEQ(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'CriticalityDiagnostics')))
+    _____HNBRegisterReject_protocolIEs__item__id_tab_val_Value_2 = INT(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'BackoffTimer')))
+    ____HNBRegisterReject_protocolIEs__item__id_tab._val = ASN1Set(rv=[dict([(u'id', 1), (u'criticality', u'ignore'), (u'Value', _____HNBRegisterReject_protocolIEs__item__id_tab_val_Value_0), (u'presence', u'mandatory')]), dict([(u'id', 2), (u'criticality', u'ignore'), (u'Value', _____HNBRegisterReject_protocolIEs__item__id_tab_val_Value_1), (u'presence', u'optional')]), dict([(u'id', 16), (u'criticality', u'reject'), (u'Value', _____HNBRegisterReject_protocolIEs__item__id_tab_val_Value_2), (u'presence', u'conditional')])], rr=[], ev=None, er=[])
     ___HNBRegisterReject_protocolIEs__item__id._const_tab = ____HNBRegisterReject_protocolIEs__item__id_tab
     ___HNBRegisterReject_protocolIEs__item__id._const_tab_at = None
-    ___HNBRegisterReject_protocolIEs__item__id._const_tab_id = 'id'
-    ___HNBRegisterReject_protocolIEs__item__criticality = ENUM(name='criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-IES'), ['criticality']))
+    ___HNBRegisterReject_protocolIEs__item__id._const_tab_id = u'id'
+    ___HNBRegisterReject_protocolIEs__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-IES'), [u'criticality']))
     ___HNBRegisterReject_protocolIEs__item__criticality._const_tab = ____HNBRegisterReject_protocolIEs__item__id_tab
-    ___HNBRegisterReject_protocolIEs__item__criticality._const_tab_at = ('..', 'id')
-    ___HNBRegisterReject_protocolIEs__item__criticality._const_tab_id = 'criticality'
-    ___HNBRegisterReject_protocolIEs__item__value = OPEN(name='value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-IES'), ['Value']))
+    ___HNBRegisterReject_protocolIEs__item__criticality._const_tab_at = ('..', u'id')
+    ___HNBRegisterReject_protocolIEs__item__criticality._const_tab_id = u'criticality'
+    ___HNBRegisterReject_protocolIEs__item__value = OPEN(name=u'value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-IES'), [u'Value']))
     ___HNBRegisterReject_protocolIEs__item__value._const_tab = ____HNBRegisterReject_protocolIEs__item__id_tab
-    ___HNBRegisterReject_protocolIEs__item__value._const_tab_at = ('..', 'id')
-    ___HNBRegisterReject_protocolIEs__item__value._const_tab_id = 'Value'
+    ___HNBRegisterReject_protocolIEs__item__value._const_tab_at = ('..', u'id')
+    ___HNBRegisterReject_protocolIEs__item__value._const_tab_id = u'Value'
     __HNBRegisterReject_protocolIEs__item_._cont = ASN1Dict([
-        ('id', ___HNBRegisterReject_protocolIEs__item__id),
-        ('criticality', ___HNBRegisterReject_protocolIEs__item__criticality),
-        ('value', ___HNBRegisterReject_protocolIEs__item__value),
+        (u'id', ___HNBRegisterReject_protocolIEs__item__id),
+        (u'criticality', ___HNBRegisterReject_protocolIEs__item__criticality),
+        (u'value', ___HNBRegisterReject_protocolIEs__item__value),
         ])
     __HNBRegisterReject_protocolIEs__item_._ext = None
     _HNBRegisterReject_protocolIEs._cont = __HNBRegisterReject_protocolIEs__item_
     _HNBRegisterReject_protocolIEs._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=65535)], ev=None, er=[])
-    _HNBRegisterReject_protocolExtensions = SEQ_OF(name='protocolExtensions', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-Containers', 'ProtocolExtensionContainer')), opt=True)
+    _HNBRegisterReject_protocolExtensions = SEQ_OF(name=u'protocolExtensions', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-Containers', 'ProtocolExtensionContainer')), opt=True)
     __HNBRegisterReject_protocolExtensions__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-Containers', 'ProtocolExtensionField')))
-    ___HNBRegisterReject_protocolExtensions__item__id = INT(name='id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), ['id']))
+    ___HNBRegisterReject_protocolExtensions__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), [u'id']))
     ____HNBRegisterReject_protocolExtensions__item__id_tab = CLASS(name='_tab_HNBAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION')))
     ____HNBRegisterReject_protocolExtensions__item__id_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___HNBRegisterReject_protocolExtensions__item__id._const_tab = ____HNBRegisterReject_protocolExtensions__item__id_tab
     ___HNBRegisterReject_protocolExtensions__item__id._const_tab_at = None
-    ___HNBRegisterReject_protocolExtensions__item__id._const_tab_id = 'id'
-    ___HNBRegisterReject_protocolExtensions__item__criticality = ENUM(name='criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), ['criticality']))
+    ___HNBRegisterReject_protocolExtensions__item__id._const_tab_id = u'id'
+    ___HNBRegisterReject_protocolExtensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), [u'criticality']))
     ____HNBRegisterReject_protocolExtensions__item__criticality_tab = CLASS(name='_tab_HNBAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION')))
     ____HNBRegisterReject_protocolExtensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___HNBRegisterReject_protocolExtensions__item__criticality._const_tab = ____HNBRegisterReject_protocolExtensions__item__criticality_tab
-    ___HNBRegisterReject_protocolExtensions__item__criticality._const_tab_at = ('..', 'id')
-    ___HNBRegisterReject_protocolExtensions__item__criticality._const_tab_id = 'criticality'
-    ___HNBRegisterReject_protocolExtensions__item__extensionValue = OPEN(name='extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), ['Extension']))
+    ___HNBRegisterReject_protocolExtensions__item__criticality._const_tab_at = ('..', u'id')
+    ___HNBRegisterReject_protocolExtensions__item__criticality._const_tab_id = u'criticality'
+    ___HNBRegisterReject_protocolExtensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), [u'Extension']))
     ____HNBRegisterReject_protocolExtensions__item__extensionValue_tab = CLASS(name='_tab_HNBAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION')))
     ____HNBRegisterReject_protocolExtensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___HNBRegisterReject_protocolExtensions__item__extensionValue._const_tab = ____HNBRegisterReject_protocolExtensions__item__extensionValue_tab
-    ___HNBRegisterReject_protocolExtensions__item__extensionValue._const_tab_at = ('..', 'id')
-    ___HNBRegisterReject_protocolExtensions__item__extensionValue._const_tab_id = 'Extension'
+    ___HNBRegisterReject_protocolExtensions__item__extensionValue._const_tab_at = ('..', u'id')
+    ___HNBRegisterReject_protocolExtensions__item__extensionValue._const_tab_id = u'Extension'
     __HNBRegisterReject_protocolExtensions__item_._cont = ASN1Dict([
-        ('id', ___HNBRegisterReject_protocolExtensions__item__id),
-        ('criticality', ___HNBRegisterReject_protocolExtensions__item__criticality),
-        ('extensionValue', ___HNBRegisterReject_protocolExtensions__item__extensionValue),
+        (u'id', ___HNBRegisterReject_protocolExtensions__item__id),
+        (u'criticality', ___HNBRegisterReject_protocolExtensions__item__criticality),
+        (u'extensionValue', ___HNBRegisterReject_protocolExtensions__item__extensionValue),
         ])
     __HNBRegisterReject_protocolExtensions__item_._ext = None
     _HNBRegisterReject_protocolExtensions._cont = __HNBRegisterReject_protocolExtensions__item_
     _HNBRegisterReject_protocolExtensions._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=65535)], ev=None, er=[])
     HNBRegisterReject._cont = ASN1Dict([
-        ('protocolIEs', _HNBRegisterReject_protocolIEs),
-        ('protocolExtensions', _HNBRegisterReject_protocolExtensions),
+        (u'protocolIEs', _HNBRegisterReject_protocolIEs),
+        (u'protocolExtensions', _HNBRegisterReject_protocolExtensions),
         ])
     HNBRegisterReject._ext = []
     
     #-----< HNBRegisterRejectIEs >-----#
-    HNBRegisterRejectIEs = CLASS(name='HNBRegisterRejectIEs', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-IES')))
-    _HNBRegisterRejectIEs_val_Value_0 = CHOICE(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'Cause')))
-    _HNBRegisterRejectIEs_val_Value_1 = SEQ(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'CriticalityDiagnostics')))
-    _HNBRegisterRejectIEs_val_Value_2 = INT(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'BackoffTimer')))
-    HNBRegisterRejectIEs._val = ASN1Set(rv=[dict([('id', 1), ('criticality', 'ignore'), ('Value', _HNBRegisterRejectIEs_val_Value_0), ('presence', 'mandatory')]), dict([('id', 2), ('criticality', 'ignore'), ('Value', _HNBRegisterRejectIEs_val_Value_1), ('presence', 'optional')]), dict([('id', 16), ('criticality', 'reject'), ('Value', _HNBRegisterRejectIEs_val_Value_2), ('presence', 'conditional')])], rr=[], ev=[], er=[])
+    HNBRegisterRejectIEs = CLASS(name=u'HNBRegisterRejectIEs', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-IES')))
+    _HNBRegisterRejectIEs_val_Value_0 = CHOICE(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'Cause')))
+    _HNBRegisterRejectIEs_val_Value_1 = SEQ(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'CriticalityDiagnostics')))
+    _HNBRegisterRejectIEs_val_Value_2 = INT(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'BackoffTimer')))
+    HNBRegisterRejectIEs._val = ASN1Set(rv=[dict([(u'id', 1), (u'criticality', u'ignore'), (u'Value', _HNBRegisterRejectIEs_val_Value_0), (u'presence', u'mandatory')]), dict([(u'id', 2), (u'criticality', u'ignore'), (u'Value', _HNBRegisterRejectIEs_val_Value_1), (u'presence', u'optional')]), dict([(u'id', 16), (u'criticality', u'reject'), (u'Value', _HNBRegisterRejectIEs_val_Value_2), (u'presence', u'conditional')])], rr=[], ev=[], er=[])
     
     #-----< HNBRegisterRejectExtensions >-----#
-    HNBRegisterRejectExtensions = CLASS(name='HNBRegisterRejectExtensions', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION')))
+    HNBRegisterRejectExtensions = CLASS(name=u'HNBRegisterRejectExtensions', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION')))
     HNBRegisterRejectExtensions._val = ASN1Set(rv=[], rr=[], ev=[], er=[])
     
     #-----< HNBDe-Register >-----#
-    HNBDe_Register = SEQ(name='HNBDe-Register', mode=MODE_TYPE)
-    _HNBDe_Register_protocolIEs = SEQ_OF(name='protocolIEs', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-Containers', 'ProtocolIE-Container')))
+    HNBDe_Register = SEQ(name=u'HNBDe-Register', mode=MODE_TYPE)
+    _HNBDe_Register_protocolIEs = SEQ_OF(name=u'protocolIEs', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-Containers', 'ProtocolIE-Container')))
     __HNBDe_Register_protocolIEs__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-Containers', 'ProtocolIE-Field')))
-    ___HNBDe_Register_protocolIEs__item__id = INT(name='id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-IES'), ['id']))
+    ___HNBDe_Register_protocolIEs__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-IES'), [u'id']))
     ____HNBDe_Register_protocolIEs__item__id_tab = CLASS(name='_tab_HNBAP-PROTOCOL-IES', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-IES')))
-    _____HNBDe_Register_protocolIEs__item__id_tab_val_Value_0 = CHOICE(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'Cause')))
-    _____HNBDe_Register_protocolIEs__item__id_tab_val_Value_1 = INT(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'BackoffTimer')))
-    ____HNBDe_Register_protocolIEs__item__id_tab._val = ASN1Set(rv=[dict([('id', 1), ('criticality', 'ignore'), ('Value', _____HNBDe_Register_protocolIEs__item__id_tab_val_Value_0), ('presence', 'mandatory')]), dict([('id', 16), ('criticality', 'reject'), ('Value', _____HNBDe_Register_protocolIEs__item__id_tab_val_Value_1), ('presence', 'conditional')])], rr=[], ev=None, er=[])
+    _____HNBDe_Register_protocolIEs__item__id_tab_val_Value_0 = CHOICE(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'Cause')))
+    _____HNBDe_Register_protocolIEs__item__id_tab_val_Value_1 = INT(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'BackoffTimer')))
+    ____HNBDe_Register_protocolIEs__item__id_tab._val = ASN1Set(rv=[dict([(u'id', 1), (u'criticality', u'ignore'), (u'Value', _____HNBDe_Register_protocolIEs__item__id_tab_val_Value_0), (u'presence', u'mandatory')]), dict([(u'id', 16), (u'criticality', u'reject'), (u'Value', _____HNBDe_Register_protocolIEs__item__id_tab_val_Value_1), (u'presence', u'conditional')])], rr=[], ev=None, er=[])
     ___HNBDe_Register_protocolIEs__item__id._const_tab = ____HNBDe_Register_protocolIEs__item__id_tab
     ___HNBDe_Register_protocolIEs__item__id._const_tab_at = None
-    ___HNBDe_Register_protocolIEs__item__id._const_tab_id = 'id'
-    ___HNBDe_Register_protocolIEs__item__criticality = ENUM(name='criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-IES'), ['criticality']))
+    ___HNBDe_Register_protocolIEs__item__id._const_tab_id = u'id'
+    ___HNBDe_Register_protocolIEs__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-IES'), [u'criticality']))
     ___HNBDe_Register_protocolIEs__item__criticality._const_tab = ____HNBDe_Register_protocolIEs__item__id_tab
-    ___HNBDe_Register_protocolIEs__item__criticality._const_tab_at = ('..', 'id')
-    ___HNBDe_Register_protocolIEs__item__criticality._const_tab_id = 'criticality'
-    ___HNBDe_Register_protocolIEs__item__value = OPEN(name='value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-IES'), ['Value']))
+    ___HNBDe_Register_protocolIEs__item__criticality._const_tab_at = ('..', u'id')
+    ___HNBDe_Register_protocolIEs__item__criticality._const_tab_id = u'criticality'
+    ___HNBDe_Register_protocolIEs__item__value = OPEN(name=u'value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-IES'), [u'Value']))
     ___HNBDe_Register_protocolIEs__item__value._const_tab = ____HNBDe_Register_protocolIEs__item__id_tab
-    ___HNBDe_Register_protocolIEs__item__value._const_tab_at = ('..', 'id')
-    ___HNBDe_Register_protocolIEs__item__value._const_tab_id = 'Value'
+    ___HNBDe_Register_protocolIEs__item__value._const_tab_at = ('..', u'id')
+    ___HNBDe_Register_protocolIEs__item__value._const_tab_id = u'Value'
     __HNBDe_Register_protocolIEs__item_._cont = ASN1Dict([
-        ('id', ___HNBDe_Register_protocolIEs__item__id),
-        ('criticality', ___HNBDe_Register_protocolIEs__item__criticality),
-        ('value', ___HNBDe_Register_protocolIEs__item__value),
+        (u'id', ___HNBDe_Register_protocolIEs__item__id),
+        (u'criticality', ___HNBDe_Register_protocolIEs__item__criticality),
+        (u'value', ___HNBDe_Register_protocolIEs__item__value),
         ])
     __HNBDe_Register_protocolIEs__item_._ext = None
     _HNBDe_Register_protocolIEs._cont = __HNBDe_Register_protocolIEs__item_
     _HNBDe_Register_protocolIEs._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=65535)], ev=None, er=[])
-    _HNBDe_Register_protocolExtensions = SEQ_OF(name='protocolExtensions', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-Containers', 'ProtocolExtensionContainer')), opt=True)
+    _HNBDe_Register_protocolExtensions = SEQ_OF(name=u'protocolExtensions', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-Containers', 'ProtocolExtensionContainer')), opt=True)
     __HNBDe_Register_protocolExtensions__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-Containers', 'ProtocolExtensionField')))
-    ___HNBDe_Register_protocolExtensions__item__id = INT(name='id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), ['id']))
+    ___HNBDe_Register_protocolExtensions__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), [u'id']))
     ____HNBDe_Register_protocolExtensions__item__id_tab = CLASS(name='_tab_HNBAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION')))
     ____HNBDe_Register_protocolExtensions__item__id_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___HNBDe_Register_protocolExtensions__item__id._const_tab = ____HNBDe_Register_protocolExtensions__item__id_tab
     ___HNBDe_Register_protocolExtensions__item__id._const_tab_at = None
-    ___HNBDe_Register_protocolExtensions__item__id._const_tab_id = 'id'
-    ___HNBDe_Register_protocolExtensions__item__criticality = ENUM(name='criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), ['criticality']))
+    ___HNBDe_Register_protocolExtensions__item__id._const_tab_id = u'id'
+    ___HNBDe_Register_protocolExtensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), [u'criticality']))
     ____HNBDe_Register_protocolExtensions__item__criticality_tab = CLASS(name='_tab_HNBAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION')))
     ____HNBDe_Register_protocolExtensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___HNBDe_Register_protocolExtensions__item__criticality._const_tab = ____HNBDe_Register_protocolExtensions__item__criticality_tab
-    ___HNBDe_Register_protocolExtensions__item__criticality._const_tab_at = ('..', 'id')
-    ___HNBDe_Register_protocolExtensions__item__criticality._const_tab_id = 'criticality'
-    ___HNBDe_Register_protocolExtensions__item__extensionValue = OPEN(name='extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), ['Extension']))
+    ___HNBDe_Register_protocolExtensions__item__criticality._const_tab_at = ('..', u'id')
+    ___HNBDe_Register_protocolExtensions__item__criticality._const_tab_id = u'criticality'
+    ___HNBDe_Register_protocolExtensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), [u'Extension']))
     ____HNBDe_Register_protocolExtensions__item__extensionValue_tab = CLASS(name='_tab_HNBAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION')))
     ____HNBDe_Register_protocolExtensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___HNBDe_Register_protocolExtensions__item__extensionValue._const_tab = ____HNBDe_Register_protocolExtensions__item__extensionValue_tab
-    ___HNBDe_Register_protocolExtensions__item__extensionValue._const_tab_at = ('..', 'id')
-    ___HNBDe_Register_protocolExtensions__item__extensionValue._const_tab_id = 'Extension'
+    ___HNBDe_Register_protocolExtensions__item__extensionValue._const_tab_at = ('..', u'id')
+    ___HNBDe_Register_protocolExtensions__item__extensionValue._const_tab_id = u'Extension'
     __HNBDe_Register_protocolExtensions__item_._cont = ASN1Dict([
-        ('id', ___HNBDe_Register_protocolExtensions__item__id),
-        ('criticality', ___HNBDe_Register_protocolExtensions__item__criticality),
-        ('extensionValue', ___HNBDe_Register_protocolExtensions__item__extensionValue),
+        (u'id', ___HNBDe_Register_protocolExtensions__item__id),
+        (u'criticality', ___HNBDe_Register_protocolExtensions__item__criticality),
+        (u'extensionValue', ___HNBDe_Register_protocolExtensions__item__extensionValue),
         ])
     __HNBDe_Register_protocolExtensions__item_._ext = None
     _HNBDe_Register_protocolExtensions._cont = __HNBDe_Register_protocolExtensions__item_
     _HNBDe_Register_protocolExtensions._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=65535)], ev=None, er=[])
     HNBDe_Register._cont = ASN1Dict([
-        ('protocolIEs', _HNBDe_Register_protocolIEs),
-        ('protocolExtensions', _HNBDe_Register_protocolExtensions),
+        (u'protocolIEs', _HNBDe_Register_protocolIEs),
+        (u'protocolExtensions', _HNBDe_Register_protocolExtensions),
         ])
     HNBDe_Register._ext = []
     
     #-----< HNBDe-RegisterIEs >-----#
-    HNBDe_RegisterIEs = CLASS(name='HNBDe-RegisterIEs', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-IES')))
-    _HNBDe_RegisterIEs_val_Value_0 = CHOICE(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'Cause')))
-    _HNBDe_RegisterIEs_val_Value_1 = INT(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'BackoffTimer')))
-    HNBDe_RegisterIEs._val = ASN1Set(rv=[dict([('id', 1), ('criticality', 'ignore'), ('Value', _HNBDe_RegisterIEs_val_Value_0), ('presence', 'mandatory')]), dict([('id', 16), ('criticality', 'reject'), ('Value', _HNBDe_RegisterIEs_val_Value_1), ('presence', 'conditional')])], rr=[], ev=[], er=[])
+    HNBDe_RegisterIEs = CLASS(name=u'HNBDe-RegisterIEs', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-IES')))
+    _HNBDe_RegisterIEs_val_Value_0 = CHOICE(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'Cause')))
+    _HNBDe_RegisterIEs_val_Value_1 = INT(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'BackoffTimer')))
+    HNBDe_RegisterIEs._val = ASN1Set(rv=[dict([(u'id', 1), (u'criticality', u'ignore'), (u'Value', _HNBDe_RegisterIEs_val_Value_0), (u'presence', u'mandatory')]), dict([(u'id', 16), (u'criticality', u'reject'), (u'Value', _HNBDe_RegisterIEs_val_Value_1), (u'presence', u'conditional')])], rr=[], ev=[], er=[])
     
     #-----< HNBDe-RegisterExtensions >-----#
-    HNBDe_RegisterExtensions = CLASS(name='HNBDe-RegisterExtensions', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION')))
+    HNBDe_RegisterExtensions = CLASS(name=u'HNBDe-RegisterExtensions', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION')))
     HNBDe_RegisterExtensions._val = ASN1Set(rv=[], rr=[], ev=[], er=[])
     
     #-----< UERegisterRequest >-----#
-    UERegisterRequest = SEQ(name='UERegisterRequest', mode=MODE_TYPE)
-    _UERegisterRequest_protocolIEs = SEQ_OF(name='protocolIEs', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-Containers', 'ProtocolIE-Container')))
+    UERegisterRequest = SEQ(name=u'UERegisterRequest', mode=MODE_TYPE)
+    _UERegisterRequest_protocolIEs = SEQ_OF(name=u'protocolIEs', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-Containers', 'ProtocolIE-Container')))
     __UERegisterRequest_protocolIEs__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-Containers', 'ProtocolIE-Field')))
-    ___UERegisterRequest_protocolIEs__item__id = INT(name='id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-IES'), ['id']))
+    ___UERegisterRequest_protocolIEs__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-IES'), [u'id']))
     ____UERegisterRequest_protocolIEs__item__id_tab = CLASS(name='_tab_HNBAP-PROTOCOL-IES', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-IES')))
-    _____UERegisterRequest_protocolIEs__item__id_tab_val_Value_0 = CHOICE(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'UE-Identity')))
-    _____UERegisterRequest_protocolIEs__item__id_tab_val_Value_1 = ENUM(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'Registration-Cause')))
-    _____UERegisterRequest_protocolIEs__item__id_tab_val_Value_2 = SEQ(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'UE-Capabilities')))
-    ____UERegisterRequest_protocolIEs__item__id_tab._val = ASN1Set(rv=[dict([('id', 5), ('criticality', 'reject'), ('Value', _____UERegisterRequest_protocolIEs__item__id_tab_val_Value_0), ('presence', 'mandatory')]), dict([('id', 12), ('criticality', 'ignore'), ('Value', _____UERegisterRequest_protocolIEs__item__id_tab_val_Value_1), ('presence', 'mandatory')]), dict([('id', 13), ('criticality', 'reject'), ('Value', _____UERegisterRequest_protocolIEs__item__id_tab_val_Value_2), ('presence', 'mandatory')])], rr=[], ev=None, er=[])
+    _____UERegisterRequest_protocolIEs__item__id_tab_val_Value_0 = CHOICE(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'UE-Identity')))
+    _____UERegisterRequest_protocolIEs__item__id_tab_val_Value_1 = ENUM(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'Registration-Cause')))
+    _____UERegisterRequest_protocolIEs__item__id_tab_val_Value_2 = SEQ(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'UE-Capabilities')))
+    ____UERegisterRequest_protocolIEs__item__id_tab._val = ASN1Set(rv=[dict([(u'id', 5), (u'criticality', u'reject'), (u'Value', _____UERegisterRequest_protocolIEs__item__id_tab_val_Value_0), (u'presence', u'mandatory')]), dict([(u'id', 12), (u'criticality', u'ignore'), (u'Value', _____UERegisterRequest_protocolIEs__item__id_tab_val_Value_1), (u'presence', u'mandatory')]), dict([(u'id', 13), (u'criticality', u'reject'), (u'Value', _____UERegisterRequest_protocolIEs__item__id_tab_val_Value_2), (u'presence', u'mandatory')])], rr=[], ev=None, er=[])
     ___UERegisterRequest_protocolIEs__item__id._const_tab = ____UERegisterRequest_protocolIEs__item__id_tab
     ___UERegisterRequest_protocolIEs__item__id._const_tab_at = None
-    ___UERegisterRequest_protocolIEs__item__id._const_tab_id = 'id'
-    ___UERegisterRequest_protocolIEs__item__criticality = ENUM(name='criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-IES'), ['criticality']))
+    ___UERegisterRequest_protocolIEs__item__id._const_tab_id = u'id'
+    ___UERegisterRequest_protocolIEs__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-IES'), [u'criticality']))
     ___UERegisterRequest_protocolIEs__item__criticality._const_tab = ____UERegisterRequest_protocolIEs__item__id_tab
-    ___UERegisterRequest_protocolIEs__item__criticality._const_tab_at = ('..', 'id')
-    ___UERegisterRequest_protocolIEs__item__criticality._const_tab_id = 'criticality'
-    ___UERegisterRequest_protocolIEs__item__value = OPEN(name='value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-IES'), ['Value']))
+    ___UERegisterRequest_protocolIEs__item__criticality._const_tab_at = ('..', u'id')
+    ___UERegisterRequest_protocolIEs__item__criticality._const_tab_id = u'criticality'
+    ___UERegisterRequest_protocolIEs__item__value = OPEN(name=u'value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-IES'), [u'Value']))
     ___UERegisterRequest_protocolIEs__item__value._const_tab = ____UERegisterRequest_protocolIEs__item__id_tab
-    ___UERegisterRequest_protocolIEs__item__value._const_tab_at = ('..', 'id')
-    ___UERegisterRequest_protocolIEs__item__value._const_tab_id = 'Value'
+    ___UERegisterRequest_protocolIEs__item__value._const_tab_at = ('..', u'id')
+    ___UERegisterRequest_protocolIEs__item__value._const_tab_id = u'Value'
     __UERegisterRequest_protocolIEs__item_._cont = ASN1Dict([
-        ('id', ___UERegisterRequest_protocolIEs__item__id),
-        ('criticality', ___UERegisterRequest_protocolIEs__item__criticality),
-        ('value', ___UERegisterRequest_protocolIEs__item__value),
+        (u'id', ___UERegisterRequest_protocolIEs__item__id),
+        (u'criticality', ___UERegisterRequest_protocolIEs__item__criticality),
+        (u'value', ___UERegisterRequest_protocolIEs__item__value),
         ])
     __UERegisterRequest_protocolIEs__item_._ext = None
     _UERegisterRequest_protocolIEs._cont = __UERegisterRequest_protocolIEs__item_
     _UERegisterRequest_protocolIEs._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=65535)], ev=None, er=[])
-    _UERegisterRequest_protocolExtensions = SEQ_OF(name='protocolExtensions', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-Containers', 'ProtocolExtensionContainer')), opt=True)
+    _UERegisterRequest_protocolExtensions = SEQ_OF(name=u'protocolExtensions', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-Containers', 'ProtocolExtensionContainer')), opt=True)
     __UERegisterRequest_protocolExtensions__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-Containers', 'ProtocolExtensionField')))
-    ___UERegisterRequest_protocolExtensions__item__id = INT(name='id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), ['id']))
+    ___UERegisterRequest_protocolExtensions__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), [u'id']))
     ____UERegisterRequest_protocolExtensions__item__id_tab = CLASS(name='_tab_HNBAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION')))
     ____UERegisterRequest_protocolExtensions__item__id_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___UERegisterRequest_protocolExtensions__item__id._const_tab = ____UERegisterRequest_protocolExtensions__item__id_tab
     ___UERegisterRequest_protocolExtensions__item__id._const_tab_at = None
-    ___UERegisterRequest_protocolExtensions__item__id._const_tab_id = 'id'
-    ___UERegisterRequest_protocolExtensions__item__criticality = ENUM(name='criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), ['criticality']))
+    ___UERegisterRequest_protocolExtensions__item__id._const_tab_id = u'id'
+    ___UERegisterRequest_protocolExtensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), [u'criticality']))
     ____UERegisterRequest_protocolExtensions__item__criticality_tab = CLASS(name='_tab_HNBAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION')))
     ____UERegisterRequest_protocolExtensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___UERegisterRequest_protocolExtensions__item__criticality._const_tab = ____UERegisterRequest_protocolExtensions__item__criticality_tab
-    ___UERegisterRequest_protocolExtensions__item__criticality._const_tab_at = ('..', 'id')
-    ___UERegisterRequest_protocolExtensions__item__criticality._const_tab_id = 'criticality'
-    ___UERegisterRequest_protocolExtensions__item__extensionValue = OPEN(name='extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), ['Extension']))
+    ___UERegisterRequest_protocolExtensions__item__criticality._const_tab_at = ('..', u'id')
+    ___UERegisterRequest_protocolExtensions__item__criticality._const_tab_id = u'criticality'
+    ___UERegisterRequest_protocolExtensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), [u'Extension']))
     ____UERegisterRequest_protocolExtensions__item__extensionValue_tab = CLASS(name='_tab_HNBAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION')))
     ____UERegisterRequest_protocolExtensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___UERegisterRequest_protocolExtensions__item__extensionValue._const_tab = ____UERegisterRequest_protocolExtensions__item__extensionValue_tab
-    ___UERegisterRequest_protocolExtensions__item__extensionValue._const_tab_at = ('..', 'id')
-    ___UERegisterRequest_protocolExtensions__item__extensionValue._const_tab_id = 'Extension'
+    ___UERegisterRequest_protocolExtensions__item__extensionValue._const_tab_at = ('..', u'id')
+    ___UERegisterRequest_protocolExtensions__item__extensionValue._const_tab_id = u'Extension'
     __UERegisterRequest_protocolExtensions__item_._cont = ASN1Dict([
-        ('id', ___UERegisterRequest_protocolExtensions__item__id),
-        ('criticality', ___UERegisterRequest_protocolExtensions__item__criticality),
-        ('extensionValue', ___UERegisterRequest_protocolExtensions__item__extensionValue),
+        (u'id', ___UERegisterRequest_protocolExtensions__item__id),
+        (u'criticality', ___UERegisterRequest_protocolExtensions__item__criticality),
+        (u'extensionValue', ___UERegisterRequest_protocolExtensions__item__extensionValue),
         ])
     __UERegisterRequest_protocolExtensions__item_._ext = None
     _UERegisterRequest_protocolExtensions._cont = __UERegisterRequest_protocolExtensions__item_
     _UERegisterRequest_protocolExtensions._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=65535)], ev=None, er=[])
     UERegisterRequest._cont = ASN1Dict([
-        ('protocolIEs', _UERegisterRequest_protocolIEs),
-        ('protocolExtensions', _UERegisterRequest_protocolExtensions),
+        (u'protocolIEs', _UERegisterRequest_protocolIEs),
+        (u'protocolExtensions', _UERegisterRequest_protocolExtensions),
         ])
     UERegisterRequest._ext = []
     
     #-----< UERegisterRequestIEs >-----#
-    UERegisterRequestIEs = CLASS(name='UERegisterRequestIEs', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-IES')))
-    _UERegisterRequestIEs_val_Value_0 = CHOICE(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'UE-Identity')))
-    _UERegisterRequestIEs_val_Value_1 = ENUM(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'Registration-Cause')))
-    _UERegisterRequestIEs_val_Value_2 = SEQ(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'UE-Capabilities')))
-    UERegisterRequestIEs._val = ASN1Set(rv=[dict([('id', 5), ('criticality', 'reject'), ('Value', _UERegisterRequestIEs_val_Value_0), ('presence', 'mandatory')]), dict([('id', 12), ('criticality', 'ignore'), ('Value', _UERegisterRequestIEs_val_Value_1), ('presence', 'mandatory')]), dict([('id', 13), ('criticality', 'reject'), ('Value', _UERegisterRequestIEs_val_Value_2), ('presence', 'mandatory')])], rr=[], ev=[], er=[])
+    UERegisterRequestIEs = CLASS(name=u'UERegisterRequestIEs', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-IES')))
+    _UERegisterRequestIEs_val_Value_0 = CHOICE(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'UE-Identity')))
+    _UERegisterRequestIEs_val_Value_1 = ENUM(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'Registration-Cause')))
+    _UERegisterRequestIEs_val_Value_2 = SEQ(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'UE-Capabilities')))
+    UERegisterRequestIEs._val = ASN1Set(rv=[dict([(u'id', 5), (u'criticality', u'reject'), (u'Value', _UERegisterRequestIEs_val_Value_0), (u'presence', u'mandatory')]), dict([(u'id', 12), (u'criticality', u'ignore'), (u'Value', _UERegisterRequestIEs_val_Value_1), (u'presence', u'mandatory')]), dict([(u'id', 13), (u'criticality', u'reject'), (u'Value', _UERegisterRequestIEs_val_Value_2), (u'presence', u'mandatory')])], rr=[], ev=[], er=[])
     
     #-----< UERegisterRequestExtensions >-----#
-    UERegisterRequestExtensions = CLASS(name='UERegisterRequestExtensions', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION')))
+    UERegisterRequestExtensions = CLASS(name=u'UERegisterRequestExtensions', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION')))
     UERegisterRequestExtensions._val = ASN1Set(rv=[], rr=[], ev=[], er=[])
     
     #-----< UERegisterAccept >-----#
-    UERegisterAccept = SEQ(name='UERegisterAccept', mode=MODE_TYPE)
-    _UERegisterAccept_protocolIEs = SEQ_OF(name='protocolIEs', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-Containers', 'ProtocolIE-Container')))
+    UERegisterAccept = SEQ(name=u'UERegisterAccept', mode=MODE_TYPE)
+    _UERegisterAccept_protocolIEs = SEQ_OF(name=u'protocolIEs', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-Containers', 'ProtocolIE-Container')))
     __UERegisterAccept_protocolIEs__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-Containers', 'ProtocolIE-Field')))
-    ___UERegisterAccept_protocolIEs__item__id = INT(name='id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-IES'), ['id']))
+    ___UERegisterAccept_protocolIEs__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-IES'), [u'id']))
     ____UERegisterAccept_protocolIEs__item__id_tab = CLASS(name='_tab_HNBAP-PROTOCOL-IES', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-IES')))
-    _____UERegisterAccept_protocolIEs__item__id_tab_val_Value_0 = CHOICE(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'UE-Identity')))
-    _____UERegisterAccept_protocolIEs__item__id_tab_val_Value_1 = BIT_STR(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'Context-ID')))
-    ____UERegisterAccept_protocolIEs__item__id_tab._val = ASN1Set(rv=[dict([('id', 5), ('criticality', 'reject'), ('Value', _____UERegisterAccept_protocolIEs__item__id_tab_val_Value_0), ('presence', 'mandatory')]), dict([('id', 4), ('criticality', 'reject'), ('Value', _____UERegisterAccept_protocolIEs__item__id_tab_val_Value_1), ('presence', 'mandatory')])], rr=[], ev=None, er=[])
+    _____UERegisterAccept_protocolIEs__item__id_tab_val_Value_0 = CHOICE(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'UE-Identity')))
+    _____UERegisterAccept_protocolIEs__item__id_tab_val_Value_1 = BIT_STR(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'Context-ID')))
+    ____UERegisterAccept_protocolIEs__item__id_tab._val = ASN1Set(rv=[dict([(u'id', 5), (u'criticality', u'reject'), (u'Value', _____UERegisterAccept_protocolIEs__item__id_tab_val_Value_0), (u'presence', u'mandatory')]), dict([(u'id', 4), (u'criticality', u'reject'), (u'Value', _____UERegisterAccept_protocolIEs__item__id_tab_val_Value_1), (u'presence', u'mandatory')])], rr=[], ev=None, er=[])
     ___UERegisterAccept_protocolIEs__item__id._const_tab = ____UERegisterAccept_protocolIEs__item__id_tab
     ___UERegisterAccept_protocolIEs__item__id._const_tab_at = None
-    ___UERegisterAccept_protocolIEs__item__id._const_tab_id = 'id'
-    ___UERegisterAccept_protocolIEs__item__criticality = ENUM(name='criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-IES'), ['criticality']))
+    ___UERegisterAccept_protocolIEs__item__id._const_tab_id = u'id'
+    ___UERegisterAccept_protocolIEs__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-IES'), [u'criticality']))
     ___UERegisterAccept_protocolIEs__item__criticality._const_tab = ____UERegisterAccept_protocolIEs__item__id_tab
-    ___UERegisterAccept_protocolIEs__item__criticality._const_tab_at = ('..', 'id')
-    ___UERegisterAccept_protocolIEs__item__criticality._const_tab_id = 'criticality'
-    ___UERegisterAccept_protocolIEs__item__value = OPEN(name='value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-IES'), ['Value']))
+    ___UERegisterAccept_protocolIEs__item__criticality._const_tab_at = ('..', u'id')
+    ___UERegisterAccept_protocolIEs__item__criticality._const_tab_id = u'criticality'
+    ___UERegisterAccept_protocolIEs__item__value = OPEN(name=u'value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-IES'), [u'Value']))
     ___UERegisterAccept_protocolIEs__item__value._const_tab = ____UERegisterAccept_protocolIEs__item__id_tab
-    ___UERegisterAccept_protocolIEs__item__value._const_tab_at = ('..', 'id')
-    ___UERegisterAccept_protocolIEs__item__value._const_tab_id = 'Value'
+    ___UERegisterAccept_protocolIEs__item__value._const_tab_at = ('..', u'id')
+    ___UERegisterAccept_protocolIEs__item__value._const_tab_id = u'Value'
     __UERegisterAccept_protocolIEs__item_._cont = ASN1Dict([
-        ('id', ___UERegisterAccept_protocolIEs__item__id),
-        ('criticality', ___UERegisterAccept_protocolIEs__item__criticality),
-        ('value', ___UERegisterAccept_protocolIEs__item__value),
+        (u'id', ___UERegisterAccept_protocolIEs__item__id),
+        (u'criticality', ___UERegisterAccept_protocolIEs__item__criticality),
+        (u'value', ___UERegisterAccept_protocolIEs__item__value),
         ])
     __UERegisterAccept_protocolIEs__item_._ext = None
     _UERegisterAccept_protocolIEs._cont = __UERegisterAccept_protocolIEs__item_
     _UERegisterAccept_protocolIEs._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=65535)], ev=None, er=[])
-    _UERegisterAccept_protocolExtensions = SEQ_OF(name='protocolExtensions', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-Containers', 'ProtocolExtensionContainer')), opt=True)
+    _UERegisterAccept_protocolExtensions = SEQ_OF(name=u'protocolExtensions', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-Containers', 'ProtocolExtensionContainer')), opt=True)
     __UERegisterAccept_protocolExtensions__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-Containers', 'ProtocolExtensionField')))
-    ___UERegisterAccept_protocolExtensions__item__id = INT(name='id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), ['id']))
+    ___UERegisterAccept_protocolExtensions__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), [u'id']))
     ____UERegisterAccept_protocolExtensions__item__id_tab = CLASS(name='_tab_HNBAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION')))
-    _____UERegisterAccept_protocolExtensions__item__id_tab_val_Extension_0 = ENUM(name='Extension', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'CSGMembershipStatus')))
-    ____UERegisterAccept_protocolExtensions__item__id_tab._val = ASN1Set(rv=[dict([('id', 21), ('criticality', 'reject'), ('Extension', _____UERegisterAccept_protocolExtensions__item__id_tab_val_Extension_0), ('presence', 'optional')])], rr=[], ev=None, er=[])
+    _____UERegisterAccept_protocolExtensions__item__id_tab_val_Extension_0 = ENUM(name=u'Extension', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'CSGMembershipStatus')))
+    ____UERegisterAccept_protocolExtensions__item__id_tab._val = ASN1Set(rv=[dict([(u'id', 21), (u'criticality', u'reject'), (u'Extension', _____UERegisterAccept_protocolExtensions__item__id_tab_val_Extension_0), (u'presence', u'optional')])], rr=[], ev=None, er=[])
     ___UERegisterAccept_protocolExtensions__item__id._const_tab = ____UERegisterAccept_protocolExtensions__item__id_tab
     ___UERegisterAccept_protocolExtensions__item__id._const_tab_at = None
-    ___UERegisterAccept_protocolExtensions__item__id._const_tab_id = 'id'
-    ___UERegisterAccept_protocolExtensions__item__criticality = ENUM(name='criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), ['criticality']))
+    ___UERegisterAccept_protocolExtensions__item__id._const_tab_id = u'id'
+    ___UERegisterAccept_protocolExtensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), [u'criticality']))
     ___UERegisterAccept_protocolExtensions__item__criticality._const_tab = ____UERegisterAccept_protocolExtensions__item__id_tab
-    ___UERegisterAccept_protocolExtensions__item__criticality._const_tab_at = ('..', 'id')
-    ___UERegisterAccept_protocolExtensions__item__criticality._const_tab_id = 'criticality'
-    ___UERegisterAccept_protocolExtensions__item__extensionValue = OPEN(name='extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), ['Extension']))
+    ___UERegisterAccept_protocolExtensions__item__criticality._const_tab_at = ('..', u'id')
+    ___UERegisterAccept_protocolExtensions__item__criticality._const_tab_id = u'criticality'
+    ___UERegisterAccept_protocolExtensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), [u'Extension']))
     ___UERegisterAccept_protocolExtensions__item__extensionValue._const_tab = ____UERegisterAccept_protocolExtensions__item__id_tab
-    ___UERegisterAccept_protocolExtensions__item__extensionValue._const_tab_at = ('..', 'id')
-    ___UERegisterAccept_protocolExtensions__item__extensionValue._const_tab_id = 'Extension'
+    ___UERegisterAccept_protocolExtensions__item__extensionValue._const_tab_at = ('..', u'id')
+    ___UERegisterAccept_protocolExtensions__item__extensionValue._const_tab_id = u'Extension'
     __UERegisterAccept_protocolExtensions__item_._cont = ASN1Dict([
-        ('id', ___UERegisterAccept_protocolExtensions__item__id),
-        ('criticality', ___UERegisterAccept_protocolExtensions__item__criticality),
-        ('extensionValue', ___UERegisterAccept_protocolExtensions__item__extensionValue),
+        (u'id', ___UERegisterAccept_protocolExtensions__item__id),
+        (u'criticality', ___UERegisterAccept_protocolExtensions__item__criticality),
+        (u'extensionValue', ___UERegisterAccept_protocolExtensions__item__extensionValue),
         ])
     __UERegisterAccept_protocolExtensions__item_._ext = None
     _UERegisterAccept_protocolExtensions._cont = __UERegisterAccept_protocolExtensions__item_
     _UERegisterAccept_protocolExtensions._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=65535)], ev=None, er=[])
     UERegisterAccept._cont = ASN1Dict([
-        ('protocolIEs', _UERegisterAccept_protocolIEs),
-        ('protocolExtensions', _UERegisterAccept_protocolExtensions),
+        (u'protocolIEs', _UERegisterAccept_protocolIEs),
+        (u'protocolExtensions', _UERegisterAccept_protocolExtensions),
         ])
     UERegisterAccept._ext = []
     
     #-----< UERegisterAcceptIEs >-----#
-    UERegisterAcceptIEs = CLASS(name='UERegisterAcceptIEs', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-IES')))
-    _UERegisterAcceptIEs_val_Value_0 = CHOICE(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'UE-Identity')))
-    _UERegisterAcceptIEs_val_Value_1 = BIT_STR(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'Context-ID')))
-    UERegisterAcceptIEs._val = ASN1Set(rv=[dict([('id', 5), ('criticality', 'reject'), ('Value', _UERegisterAcceptIEs_val_Value_0), ('presence', 'mandatory')]), dict([('id', 4), ('criticality', 'reject'), ('Value', _UERegisterAcceptIEs_val_Value_1), ('presence', 'mandatory')])], rr=[], ev=[], er=[])
+    UERegisterAcceptIEs = CLASS(name=u'UERegisterAcceptIEs', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-IES')))
+    _UERegisterAcceptIEs_val_Value_0 = CHOICE(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'UE-Identity')))
+    _UERegisterAcceptIEs_val_Value_1 = BIT_STR(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'Context-ID')))
+    UERegisterAcceptIEs._val = ASN1Set(rv=[dict([(u'id', 5), (u'criticality', u'reject'), (u'Value', _UERegisterAcceptIEs_val_Value_0), (u'presence', u'mandatory')]), dict([(u'id', 4), (u'criticality', u'reject'), (u'Value', _UERegisterAcceptIEs_val_Value_1), (u'presence', u'mandatory')])], rr=[], ev=[], er=[])
     
     #-----< UERegisterAcceptExtensions >-----#
-    UERegisterAcceptExtensions = CLASS(name='UERegisterAcceptExtensions', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION')))
-    _UERegisterAcceptExtensions_val_Extension_0 = ENUM(name='Extension', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'CSGMembershipStatus')))
-    UERegisterAcceptExtensions._val = ASN1Set(rv=[dict([('id', 21), ('criticality', 'reject'), ('Extension', _UERegisterAcceptExtensions_val_Extension_0), ('presence', 'optional')])], rr=[], ev=[], er=[])
+    UERegisterAcceptExtensions = CLASS(name=u'UERegisterAcceptExtensions', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION')))
+    _UERegisterAcceptExtensions_val_Extension_0 = ENUM(name=u'Extension', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'CSGMembershipStatus')))
+    UERegisterAcceptExtensions._val = ASN1Set(rv=[dict([(u'id', 21), (u'criticality', u'reject'), (u'Extension', _UERegisterAcceptExtensions_val_Extension_0), (u'presence', u'optional')])], rr=[], ev=[], er=[])
     
     #-----< UERegisterReject >-----#
-    UERegisterReject = SEQ(name='UERegisterReject', mode=MODE_TYPE)
-    _UERegisterReject_protocolIEs = SEQ_OF(name='protocolIEs', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-Containers', 'ProtocolIE-Container')))
+    UERegisterReject = SEQ(name=u'UERegisterReject', mode=MODE_TYPE)
+    _UERegisterReject_protocolIEs = SEQ_OF(name=u'protocolIEs', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-Containers', 'ProtocolIE-Container')))
     __UERegisterReject_protocolIEs__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-Containers', 'ProtocolIE-Field')))
-    ___UERegisterReject_protocolIEs__item__id = INT(name='id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-IES'), ['id']))
+    ___UERegisterReject_protocolIEs__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-IES'), [u'id']))
     ____UERegisterReject_protocolIEs__item__id_tab = CLASS(name='_tab_HNBAP-PROTOCOL-IES', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-IES')))
-    _____UERegisterReject_protocolIEs__item__id_tab_val_Value_0 = CHOICE(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'UE-Identity')))
-    _____UERegisterReject_protocolIEs__item__id_tab_val_Value_1 = CHOICE(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'Cause')))
-    _____UERegisterReject_protocolIEs__item__id_tab_val_Value_2 = SEQ(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'CriticalityDiagnostics')))
-    ____UERegisterReject_protocolIEs__item__id_tab._val = ASN1Set(rv=[dict([('id', 5), ('criticality', 'reject'), ('Value', _____UERegisterReject_protocolIEs__item__id_tab_val_Value_0), ('presence', 'mandatory')]), dict([('id', 1), ('criticality', 'ignore'), ('Value', _____UERegisterReject_protocolIEs__item__id_tab_val_Value_1), ('presence', 'mandatory')]), dict([('id', 2), ('criticality', 'ignore'), ('Value', _____UERegisterReject_protocolIEs__item__id_tab_val_Value_2), ('presence', 'optional')])], rr=[], ev=None, er=[])
+    _____UERegisterReject_protocolIEs__item__id_tab_val_Value_0 = CHOICE(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'UE-Identity')))
+    _____UERegisterReject_protocolIEs__item__id_tab_val_Value_1 = CHOICE(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'Cause')))
+    _____UERegisterReject_protocolIEs__item__id_tab_val_Value_2 = SEQ(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'CriticalityDiagnostics')))
+    ____UERegisterReject_protocolIEs__item__id_tab._val = ASN1Set(rv=[dict([(u'id', 5), (u'criticality', u'reject'), (u'Value', _____UERegisterReject_protocolIEs__item__id_tab_val_Value_0), (u'presence', u'mandatory')]), dict([(u'id', 1), (u'criticality', u'ignore'), (u'Value', _____UERegisterReject_protocolIEs__item__id_tab_val_Value_1), (u'presence', u'mandatory')]), dict([(u'id', 2), (u'criticality', u'ignore'), (u'Value', _____UERegisterReject_protocolIEs__item__id_tab_val_Value_2), (u'presence', u'optional')])], rr=[], ev=None, er=[])
     ___UERegisterReject_protocolIEs__item__id._const_tab = ____UERegisterReject_protocolIEs__item__id_tab
     ___UERegisterReject_protocolIEs__item__id._const_tab_at = None
-    ___UERegisterReject_protocolIEs__item__id._const_tab_id = 'id'
-    ___UERegisterReject_protocolIEs__item__criticality = ENUM(name='criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-IES'), ['criticality']))
+    ___UERegisterReject_protocolIEs__item__id._const_tab_id = u'id'
+    ___UERegisterReject_protocolIEs__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-IES'), [u'criticality']))
     ___UERegisterReject_protocolIEs__item__criticality._const_tab = ____UERegisterReject_protocolIEs__item__id_tab
-    ___UERegisterReject_protocolIEs__item__criticality._const_tab_at = ('..', 'id')
-    ___UERegisterReject_protocolIEs__item__criticality._const_tab_id = 'criticality'
-    ___UERegisterReject_protocolIEs__item__value = OPEN(name='value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-IES'), ['Value']))
+    ___UERegisterReject_protocolIEs__item__criticality._const_tab_at = ('..', u'id')
+    ___UERegisterReject_protocolIEs__item__criticality._const_tab_id = u'criticality'
+    ___UERegisterReject_protocolIEs__item__value = OPEN(name=u'value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-IES'), [u'Value']))
     ___UERegisterReject_protocolIEs__item__value._const_tab = ____UERegisterReject_protocolIEs__item__id_tab
-    ___UERegisterReject_protocolIEs__item__value._const_tab_at = ('..', 'id')
-    ___UERegisterReject_protocolIEs__item__value._const_tab_id = 'Value'
+    ___UERegisterReject_protocolIEs__item__value._const_tab_at = ('..', u'id')
+    ___UERegisterReject_protocolIEs__item__value._const_tab_id = u'Value'
     __UERegisterReject_protocolIEs__item_._cont = ASN1Dict([
-        ('id', ___UERegisterReject_protocolIEs__item__id),
-        ('criticality', ___UERegisterReject_protocolIEs__item__criticality),
-        ('value', ___UERegisterReject_protocolIEs__item__value),
+        (u'id', ___UERegisterReject_protocolIEs__item__id),
+        (u'criticality', ___UERegisterReject_protocolIEs__item__criticality),
+        (u'value', ___UERegisterReject_protocolIEs__item__value),
         ])
     __UERegisterReject_protocolIEs__item_._ext = None
     _UERegisterReject_protocolIEs._cont = __UERegisterReject_protocolIEs__item_
     _UERegisterReject_protocolIEs._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=65535)], ev=None, er=[])
-    _UERegisterReject_protocolExtensions = SEQ_OF(name='protocolExtensions', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-Containers', 'ProtocolExtensionContainer')), opt=True)
+    _UERegisterReject_protocolExtensions = SEQ_OF(name=u'protocolExtensions', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-Containers', 'ProtocolExtensionContainer')), opt=True)
     __UERegisterReject_protocolExtensions__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-Containers', 'ProtocolExtensionField')))
-    ___UERegisterReject_protocolExtensions__item__id = INT(name='id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), ['id']))
+    ___UERegisterReject_protocolExtensions__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), [u'id']))
     ____UERegisterReject_protocolExtensions__item__id_tab = CLASS(name='_tab_HNBAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION')))
     ____UERegisterReject_protocolExtensions__item__id_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___UERegisterReject_protocolExtensions__item__id._const_tab = ____UERegisterReject_protocolExtensions__item__id_tab
     ___UERegisterReject_protocolExtensions__item__id._const_tab_at = None
-    ___UERegisterReject_protocolExtensions__item__id._const_tab_id = 'id'
-    ___UERegisterReject_protocolExtensions__item__criticality = ENUM(name='criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), ['criticality']))
+    ___UERegisterReject_protocolExtensions__item__id._const_tab_id = u'id'
+    ___UERegisterReject_protocolExtensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), [u'criticality']))
     ____UERegisterReject_protocolExtensions__item__criticality_tab = CLASS(name='_tab_HNBAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION')))
     ____UERegisterReject_protocolExtensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___UERegisterReject_protocolExtensions__item__criticality._const_tab = ____UERegisterReject_protocolExtensions__item__criticality_tab
-    ___UERegisterReject_protocolExtensions__item__criticality._const_tab_at = ('..', 'id')
-    ___UERegisterReject_protocolExtensions__item__criticality._const_tab_id = 'criticality'
-    ___UERegisterReject_protocolExtensions__item__extensionValue = OPEN(name='extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), ['Extension']))
+    ___UERegisterReject_protocolExtensions__item__criticality._const_tab_at = ('..', u'id')
+    ___UERegisterReject_protocolExtensions__item__criticality._const_tab_id = u'criticality'
+    ___UERegisterReject_protocolExtensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), [u'Extension']))
     ____UERegisterReject_protocolExtensions__item__extensionValue_tab = CLASS(name='_tab_HNBAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION')))
     ____UERegisterReject_protocolExtensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___UERegisterReject_protocolExtensions__item__extensionValue._const_tab = ____UERegisterReject_protocolExtensions__item__extensionValue_tab
-    ___UERegisterReject_protocolExtensions__item__extensionValue._const_tab_at = ('..', 'id')
-    ___UERegisterReject_protocolExtensions__item__extensionValue._const_tab_id = 'Extension'
+    ___UERegisterReject_protocolExtensions__item__extensionValue._const_tab_at = ('..', u'id')
+    ___UERegisterReject_protocolExtensions__item__extensionValue._const_tab_id = u'Extension'
     __UERegisterReject_protocolExtensions__item_._cont = ASN1Dict([
-        ('id', ___UERegisterReject_protocolExtensions__item__id),
-        ('criticality', ___UERegisterReject_protocolExtensions__item__criticality),
-        ('extensionValue', ___UERegisterReject_protocolExtensions__item__extensionValue),
+        (u'id', ___UERegisterReject_protocolExtensions__item__id),
+        (u'criticality', ___UERegisterReject_protocolExtensions__item__criticality),
+        (u'extensionValue', ___UERegisterReject_protocolExtensions__item__extensionValue),
         ])
     __UERegisterReject_protocolExtensions__item_._ext = None
     _UERegisterReject_protocolExtensions._cont = __UERegisterReject_protocolExtensions__item_
     _UERegisterReject_protocolExtensions._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=65535)], ev=None, er=[])
     UERegisterReject._cont = ASN1Dict([
-        ('protocolIEs', _UERegisterReject_protocolIEs),
-        ('protocolExtensions', _UERegisterReject_protocolExtensions),
+        (u'protocolIEs', _UERegisterReject_protocolIEs),
+        (u'protocolExtensions', _UERegisterReject_protocolExtensions),
         ])
     UERegisterReject._ext = []
     
     #-----< UERegisterRejectIEs >-----#
-    UERegisterRejectIEs = CLASS(name='UERegisterRejectIEs', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-IES')))
-    _UERegisterRejectIEs_val_Value_0 = CHOICE(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'UE-Identity')))
-    _UERegisterRejectIEs_val_Value_1 = CHOICE(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'Cause')))
-    _UERegisterRejectIEs_val_Value_2 = SEQ(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'CriticalityDiagnostics')))
-    UERegisterRejectIEs._val = ASN1Set(rv=[dict([('id', 5), ('criticality', 'reject'), ('Value', _UERegisterRejectIEs_val_Value_0), ('presence', 'mandatory')]), dict([('id', 1), ('criticality', 'ignore'), ('Value', _UERegisterRejectIEs_val_Value_1), ('presence', 'mandatory')]), dict([('id', 2), ('criticality', 'ignore'), ('Value', _UERegisterRejectIEs_val_Value_2), ('presence', 'optional')])], rr=[], ev=[], er=[])
+    UERegisterRejectIEs = CLASS(name=u'UERegisterRejectIEs', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-IES')))
+    _UERegisterRejectIEs_val_Value_0 = CHOICE(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'UE-Identity')))
+    _UERegisterRejectIEs_val_Value_1 = CHOICE(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'Cause')))
+    _UERegisterRejectIEs_val_Value_2 = SEQ(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'CriticalityDiagnostics')))
+    UERegisterRejectIEs._val = ASN1Set(rv=[dict([(u'id', 5), (u'criticality', u'reject'), (u'Value', _UERegisterRejectIEs_val_Value_0), (u'presence', u'mandatory')]), dict([(u'id', 1), (u'criticality', u'ignore'), (u'Value', _UERegisterRejectIEs_val_Value_1), (u'presence', u'mandatory')]), dict([(u'id', 2), (u'criticality', u'ignore'), (u'Value', _UERegisterRejectIEs_val_Value_2), (u'presence', u'optional')])], rr=[], ev=[], er=[])
     
     #-----< UERegisterRejectExtensions >-----#
-    UERegisterRejectExtensions = CLASS(name='UERegisterRejectExtensions', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION')))
+    UERegisterRejectExtensions = CLASS(name=u'UERegisterRejectExtensions', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION')))
     UERegisterRejectExtensions._val = ASN1Set(rv=[], rr=[], ev=[], er=[])
     
     #-----< UEDe-Register >-----#
-    UEDe_Register = SEQ(name='UEDe-Register', mode=MODE_TYPE)
-    _UEDe_Register_protocolIEs = SEQ_OF(name='protocolIEs', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-Containers', 'ProtocolIE-Container')))
+    UEDe_Register = SEQ(name=u'UEDe-Register', mode=MODE_TYPE)
+    _UEDe_Register_protocolIEs = SEQ_OF(name=u'protocolIEs', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-Containers', 'ProtocolIE-Container')))
     __UEDe_Register_protocolIEs__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-Containers', 'ProtocolIE-Field')))
-    ___UEDe_Register_protocolIEs__item__id = INT(name='id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-IES'), ['id']))
+    ___UEDe_Register_protocolIEs__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-IES'), [u'id']))
     ____UEDe_Register_protocolIEs__item__id_tab = CLASS(name='_tab_HNBAP-PROTOCOL-IES', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-IES')))
-    _____UEDe_Register_protocolIEs__item__id_tab_val_Value_0 = BIT_STR(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'Context-ID')))
-    _____UEDe_Register_protocolIEs__item__id_tab_val_Value_1 = CHOICE(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'Cause')))
-    ____UEDe_Register_protocolIEs__item__id_tab._val = ASN1Set(rv=[dict([('id', 4), ('criticality', 'reject'), ('Value', _____UEDe_Register_protocolIEs__item__id_tab_val_Value_0), ('presence', 'mandatory')]), dict([('id', 1), ('criticality', 'ignore'), ('Value', _____UEDe_Register_protocolIEs__item__id_tab_val_Value_1), ('presence', 'mandatory')])], rr=[], ev=None, er=[])
+    _____UEDe_Register_protocolIEs__item__id_tab_val_Value_0 = BIT_STR(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'Context-ID')))
+    _____UEDe_Register_protocolIEs__item__id_tab_val_Value_1 = CHOICE(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'Cause')))
+    ____UEDe_Register_protocolIEs__item__id_tab._val = ASN1Set(rv=[dict([(u'id', 4), (u'criticality', u'reject'), (u'Value', _____UEDe_Register_protocolIEs__item__id_tab_val_Value_0), (u'presence', u'mandatory')]), dict([(u'id', 1), (u'criticality', u'ignore'), (u'Value', _____UEDe_Register_protocolIEs__item__id_tab_val_Value_1), (u'presence', u'mandatory')])], rr=[], ev=None, er=[])
     ___UEDe_Register_protocolIEs__item__id._const_tab = ____UEDe_Register_protocolIEs__item__id_tab
     ___UEDe_Register_protocolIEs__item__id._const_tab_at = None
-    ___UEDe_Register_protocolIEs__item__id._const_tab_id = 'id'
-    ___UEDe_Register_protocolIEs__item__criticality = ENUM(name='criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-IES'), ['criticality']))
+    ___UEDe_Register_protocolIEs__item__id._const_tab_id = u'id'
+    ___UEDe_Register_protocolIEs__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-IES'), [u'criticality']))
     ___UEDe_Register_protocolIEs__item__criticality._const_tab = ____UEDe_Register_protocolIEs__item__id_tab
-    ___UEDe_Register_protocolIEs__item__criticality._const_tab_at = ('..', 'id')
-    ___UEDe_Register_protocolIEs__item__criticality._const_tab_id = 'criticality'
-    ___UEDe_Register_protocolIEs__item__value = OPEN(name='value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-IES'), ['Value']))
+    ___UEDe_Register_protocolIEs__item__criticality._const_tab_at = ('..', u'id')
+    ___UEDe_Register_protocolIEs__item__criticality._const_tab_id = u'criticality'
+    ___UEDe_Register_protocolIEs__item__value = OPEN(name=u'value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-IES'), [u'Value']))
     ___UEDe_Register_protocolIEs__item__value._const_tab = ____UEDe_Register_protocolIEs__item__id_tab
-    ___UEDe_Register_protocolIEs__item__value._const_tab_at = ('..', 'id')
-    ___UEDe_Register_protocolIEs__item__value._const_tab_id = 'Value'
+    ___UEDe_Register_protocolIEs__item__value._const_tab_at = ('..', u'id')
+    ___UEDe_Register_protocolIEs__item__value._const_tab_id = u'Value'
     __UEDe_Register_protocolIEs__item_._cont = ASN1Dict([
-        ('id', ___UEDe_Register_protocolIEs__item__id),
-        ('criticality', ___UEDe_Register_protocolIEs__item__criticality),
-        ('value', ___UEDe_Register_protocolIEs__item__value),
+        (u'id', ___UEDe_Register_protocolIEs__item__id),
+        (u'criticality', ___UEDe_Register_protocolIEs__item__criticality),
+        (u'value', ___UEDe_Register_protocolIEs__item__value),
         ])
     __UEDe_Register_protocolIEs__item_._ext = None
     _UEDe_Register_protocolIEs._cont = __UEDe_Register_protocolIEs__item_
     _UEDe_Register_protocolIEs._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=65535)], ev=None, er=[])
-    _UEDe_Register_protocolExtensions = SEQ_OF(name='protocolExtensions', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-Containers', 'ProtocolExtensionContainer')), opt=True)
+    _UEDe_Register_protocolExtensions = SEQ_OF(name=u'protocolExtensions', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-Containers', 'ProtocolExtensionContainer')), opt=True)
     __UEDe_Register_protocolExtensions__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-Containers', 'ProtocolExtensionField')))
-    ___UEDe_Register_protocolExtensions__item__id = INT(name='id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), ['id']))
+    ___UEDe_Register_protocolExtensions__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), [u'id']))
     ____UEDe_Register_protocolExtensions__item__id_tab = CLASS(name='_tab_HNBAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION')))
     ____UEDe_Register_protocolExtensions__item__id_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___UEDe_Register_protocolExtensions__item__id._const_tab = ____UEDe_Register_protocolExtensions__item__id_tab
     ___UEDe_Register_protocolExtensions__item__id._const_tab_at = None
-    ___UEDe_Register_protocolExtensions__item__id._const_tab_id = 'id'
-    ___UEDe_Register_protocolExtensions__item__criticality = ENUM(name='criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), ['criticality']))
+    ___UEDe_Register_protocolExtensions__item__id._const_tab_id = u'id'
+    ___UEDe_Register_protocolExtensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), [u'criticality']))
     ____UEDe_Register_protocolExtensions__item__criticality_tab = CLASS(name='_tab_HNBAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION')))
     ____UEDe_Register_protocolExtensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___UEDe_Register_protocolExtensions__item__criticality._const_tab = ____UEDe_Register_protocolExtensions__item__criticality_tab
-    ___UEDe_Register_protocolExtensions__item__criticality._const_tab_at = ('..', 'id')
-    ___UEDe_Register_protocolExtensions__item__criticality._const_tab_id = 'criticality'
-    ___UEDe_Register_protocolExtensions__item__extensionValue = OPEN(name='extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), ['Extension']))
+    ___UEDe_Register_protocolExtensions__item__criticality._const_tab_at = ('..', u'id')
+    ___UEDe_Register_protocolExtensions__item__criticality._const_tab_id = u'criticality'
+    ___UEDe_Register_protocolExtensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), [u'Extension']))
     ____UEDe_Register_protocolExtensions__item__extensionValue_tab = CLASS(name='_tab_HNBAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION')))
     ____UEDe_Register_protocolExtensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___UEDe_Register_protocolExtensions__item__extensionValue._const_tab = ____UEDe_Register_protocolExtensions__item__extensionValue_tab
-    ___UEDe_Register_protocolExtensions__item__extensionValue._const_tab_at = ('..', 'id')
-    ___UEDe_Register_protocolExtensions__item__extensionValue._const_tab_id = 'Extension'
+    ___UEDe_Register_protocolExtensions__item__extensionValue._const_tab_at = ('..', u'id')
+    ___UEDe_Register_protocolExtensions__item__extensionValue._const_tab_id = u'Extension'
     __UEDe_Register_protocolExtensions__item_._cont = ASN1Dict([
-        ('id', ___UEDe_Register_protocolExtensions__item__id),
-        ('criticality', ___UEDe_Register_protocolExtensions__item__criticality),
-        ('extensionValue', ___UEDe_Register_protocolExtensions__item__extensionValue),
+        (u'id', ___UEDe_Register_protocolExtensions__item__id),
+        (u'criticality', ___UEDe_Register_protocolExtensions__item__criticality),
+        (u'extensionValue', ___UEDe_Register_protocolExtensions__item__extensionValue),
         ])
     __UEDe_Register_protocolExtensions__item_._ext = None
     _UEDe_Register_protocolExtensions._cont = __UEDe_Register_protocolExtensions__item_
     _UEDe_Register_protocolExtensions._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=65535)], ev=None, er=[])
     UEDe_Register._cont = ASN1Dict([
-        ('protocolIEs', _UEDe_Register_protocolIEs),
-        ('protocolExtensions', _UEDe_Register_protocolExtensions),
+        (u'protocolIEs', _UEDe_Register_protocolIEs),
+        (u'protocolExtensions', _UEDe_Register_protocolExtensions),
         ])
     UEDe_Register._ext = []
     
     #-----< UEDe-RegisterIEs >-----#
-    UEDe_RegisterIEs = CLASS(name='UEDe-RegisterIEs', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-IES')))
-    _UEDe_RegisterIEs_val_Value_0 = BIT_STR(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'Context-ID')))
-    _UEDe_RegisterIEs_val_Value_1 = CHOICE(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'Cause')))
-    UEDe_RegisterIEs._val = ASN1Set(rv=[dict([('id', 4), ('criticality', 'reject'), ('Value', _UEDe_RegisterIEs_val_Value_0), ('presence', 'mandatory')]), dict([('id', 1), ('criticality', 'ignore'), ('Value', _UEDe_RegisterIEs_val_Value_1), ('presence', 'mandatory')])], rr=[], ev=[], er=[])
+    UEDe_RegisterIEs = CLASS(name=u'UEDe-RegisterIEs', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-IES')))
+    _UEDe_RegisterIEs_val_Value_0 = BIT_STR(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'Context-ID')))
+    _UEDe_RegisterIEs_val_Value_1 = CHOICE(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'Cause')))
+    UEDe_RegisterIEs._val = ASN1Set(rv=[dict([(u'id', 4), (u'criticality', u'reject'), (u'Value', _UEDe_RegisterIEs_val_Value_0), (u'presence', u'mandatory')]), dict([(u'id', 1), (u'criticality', u'ignore'), (u'Value', _UEDe_RegisterIEs_val_Value_1), (u'presence', u'mandatory')])], rr=[], ev=[], er=[])
     
     #-----< UEDe-RegisterExtensions >-----#
-    UEDe_RegisterExtensions = CLASS(name='UEDe-RegisterExtensions', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION')))
+    UEDe_RegisterExtensions = CLASS(name=u'UEDe-RegisterExtensions', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION')))
     UEDe_RegisterExtensions._val = ASN1Set(rv=[], rr=[], ev=[], er=[])
     
     #-----< CSGMembershipUpdate >-----#
-    CSGMembershipUpdate = SEQ(name='CSGMembershipUpdate', mode=MODE_TYPE)
-    _CSGMembershipUpdate_protocolIEs = SEQ_OF(name='protocolIEs', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-Containers', 'ProtocolIE-Container')))
+    CSGMembershipUpdate = SEQ(name=u'CSGMembershipUpdate', mode=MODE_TYPE)
+    _CSGMembershipUpdate_protocolIEs = SEQ_OF(name=u'protocolIEs', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-Containers', 'ProtocolIE-Container')))
     __CSGMembershipUpdate_protocolIEs__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-Containers', 'ProtocolIE-Field')))
-    ___CSGMembershipUpdate_protocolIEs__item__id = INT(name='id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-IES'), ['id']))
+    ___CSGMembershipUpdate_protocolIEs__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-IES'), [u'id']))
     ____CSGMembershipUpdate_protocolIEs__item__id_tab = CLASS(name='_tab_HNBAP-PROTOCOL-IES', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-IES')))
-    _____CSGMembershipUpdate_protocolIEs__item__id_tab_val_Value_0 = BIT_STR(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'Context-ID')))
-    _____CSGMembershipUpdate_protocolIEs__item__id_tab_val_Value_1 = ENUM(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'CSGMembershipStatus')))
-    ____CSGMembershipUpdate_protocolIEs__item__id_tab._val = ASN1Set(rv=[dict([('id', 4), ('criticality', 'reject'), ('Value', _____CSGMembershipUpdate_protocolIEs__item__id_tab_val_Value_0), ('presence', 'mandatory')]), dict([('id', 21), ('criticality', 'reject'), ('Value', _____CSGMembershipUpdate_protocolIEs__item__id_tab_val_Value_1), ('presence', 'mandatory')])], rr=[], ev=None, er=[])
+    _____CSGMembershipUpdate_protocolIEs__item__id_tab_val_Value_0 = BIT_STR(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'Context-ID')))
+    _____CSGMembershipUpdate_protocolIEs__item__id_tab_val_Value_1 = ENUM(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'CSGMembershipStatus')))
+    ____CSGMembershipUpdate_protocolIEs__item__id_tab._val = ASN1Set(rv=[dict([(u'id', 4), (u'criticality', u'reject'), (u'Value', _____CSGMembershipUpdate_protocolIEs__item__id_tab_val_Value_0), (u'presence', u'mandatory')]), dict([(u'id', 21), (u'criticality', u'reject'), (u'Value', _____CSGMembershipUpdate_protocolIEs__item__id_tab_val_Value_1), (u'presence', u'mandatory')])], rr=[], ev=None, er=[])
     ___CSGMembershipUpdate_protocolIEs__item__id._const_tab = ____CSGMembershipUpdate_protocolIEs__item__id_tab
     ___CSGMembershipUpdate_protocolIEs__item__id._const_tab_at = None
-    ___CSGMembershipUpdate_protocolIEs__item__id._const_tab_id = 'id'
-    ___CSGMembershipUpdate_protocolIEs__item__criticality = ENUM(name='criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-IES'), ['criticality']))
+    ___CSGMembershipUpdate_protocolIEs__item__id._const_tab_id = u'id'
+    ___CSGMembershipUpdate_protocolIEs__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-IES'), [u'criticality']))
     ___CSGMembershipUpdate_protocolIEs__item__criticality._const_tab = ____CSGMembershipUpdate_protocolIEs__item__id_tab
-    ___CSGMembershipUpdate_protocolIEs__item__criticality._const_tab_at = ('..', 'id')
-    ___CSGMembershipUpdate_protocolIEs__item__criticality._const_tab_id = 'criticality'
-    ___CSGMembershipUpdate_protocolIEs__item__value = OPEN(name='value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-IES'), ['Value']))
+    ___CSGMembershipUpdate_protocolIEs__item__criticality._const_tab_at = ('..', u'id')
+    ___CSGMembershipUpdate_protocolIEs__item__criticality._const_tab_id = u'criticality'
+    ___CSGMembershipUpdate_protocolIEs__item__value = OPEN(name=u'value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-IES'), [u'Value']))
     ___CSGMembershipUpdate_protocolIEs__item__value._const_tab = ____CSGMembershipUpdate_protocolIEs__item__id_tab
-    ___CSGMembershipUpdate_protocolIEs__item__value._const_tab_at = ('..', 'id')
-    ___CSGMembershipUpdate_protocolIEs__item__value._const_tab_id = 'Value'
+    ___CSGMembershipUpdate_protocolIEs__item__value._const_tab_at = ('..', u'id')
+    ___CSGMembershipUpdate_protocolIEs__item__value._const_tab_id = u'Value'
     __CSGMembershipUpdate_protocolIEs__item_._cont = ASN1Dict([
-        ('id', ___CSGMembershipUpdate_protocolIEs__item__id),
-        ('criticality', ___CSGMembershipUpdate_protocolIEs__item__criticality),
-        ('value', ___CSGMembershipUpdate_protocolIEs__item__value),
+        (u'id', ___CSGMembershipUpdate_protocolIEs__item__id),
+        (u'criticality', ___CSGMembershipUpdate_protocolIEs__item__criticality),
+        (u'value', ___CSGMembershipUpdate_protocolIEs__item__value),
         ])
     __CSGMembershipUpdate_protocolIEs__item_._ext = None
     _CSGMembershipUpdate_protocolIEs._cont = __CSGMembershipUpdate_protocolIEs__item_
     _CSGMembershipUpdate_protocolIEs._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=65535)], ev=None, er=[])
-    _CSGMembershipUpdate_protocolExtensions = SEQ_OF(name='protocolExtensions', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-Containers', 'ProtocolExtensionContainer')), opt=True)
+    _CSGMembershipUpdate_protocolExtensions = SEQ_OF(name=u'protocolExtensions', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-Containers', 'ProtocolExtensionContainer')), opt=True)
     __CSGMembershipUpdate_protocolExtensions__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-Containers', 'ProtocolExtensionField')))
-    ___CSGMembershipUpdate_protocolExtensions__item__id = INT(name='id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), ['id']))
+    ___CSGMembershipUpdate_protocolExtensions__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), [u'id']))
     ____CSGMembershipUpdate_protocolExtensions__item__id_tab = CLASS(name='_tab_HNBAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION')))
     ____CSGMembershipUpdate_protocolExtensions__item__id_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___CSGMembershipUpdate_protocolExtensions__item__id._const_tab = ____CSGMembershipUpdate_protocolExtensions__item__id_tab
     ___CSGMembershipUpdate_protocolExtensions__item__id._const_tab_at = None
-    ___CSGMembershipUpdate_protocolExtensions__item__id._const_tab_id = 'id'
-    ___CSGMembershipUpdate_protocolExtensions__item__criticality = ENUM(name='criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), ['criticality']))
+    ___CSGMembershipUpdate_protocolExtensions__item__id._const_tab_id = u'id'
+    ___CSGMembershipUpdate_protocolExtensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), [u'criticality']))
     ____CSGMembershipUpdate_protocolExtensions__item__criticality_tab = CLASS(name='_tab_HNBAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION')))
     ____CSGMembershipUpdate_protocolExtensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___CSGMembershipUpdate_protocolExtensions__item__criticality._const_tab = ____CSGMembershipUpdate_protocolExtensions__item__criticality_tab
-    ___CSGMembershipUpdate_protocolExtensions__item__criticality._const_tab_at = ('..', 'id')
-    ___CSGMembershipUpdate_protocolExtensions__item__criticality._const_tab_id = 'criticality'
-    ___CSGMembershipUpdate_protocolExtensions__item__extensionValue = OPEN(name='extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), ['Extension']))
+    ___CSGMembershipUpdate_protocolExtensions__item__criticality._const_tab_at = ('..', u'id')
+    ___CSGMembershipUpdate_protocolExtensions__item__criticality._const_tab_id = u'criticality'
+    ___CSGMembershipUpdate_protocolExtensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), [u'Extension']))
     ____CSGMembershipUpdate_protocolExtensions__item__extensionValue_tab = CLASS(name='_tab_HNBAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION')))
     ____CSGMembershipUpdate_protocolExtensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___CSGMembershipUpdate_protocolExtensions__item__extensionValue._const_tab = ____CSGMembershipUpdate_protocolExtensions__item__extensionValue_tab
-    ___CSGMembershipUpdate_protocolExtensions__item__extensionValue._const_tab_at = ('..', 'id')
-    ___CSGMembershipUpdate_protocolExtensions__item__extensionValue._const_tab_id = 'Extension'
+    ___CSGMembershipUpdate_protocolExtensions__item__extensionValue._const_tab_at = ('..', u'id')
+    ___CSGMembershipUpdate_protocolExtensions__item__extensionValue._const_tab_id = u'Extension'
     __CSGMembershipUpdate_protocolExtensions__item_._cont = ASN1Dict([
-        ('id', ___CSGMembershipUpdate_protocolExtensions__item__id),
-        ('criticality', ___CSGMembershipUpdate_protocolExtensions__item__criticality),
-        ('extensionValue', ___CSGMembershipUpdate_protocolExtensions__item__extensionValue),
+        (u'id', ___CSGMembershipUpdate_protocolExtensions__item__id),
+        (u'criticality', ___CSGMembershipUpdate_protocolExtensions__item__criticality),
+        (u'extensionValue', ___CSGMembershipUpdate_protocolExtensions__item__extensionValue),
         ])
     __CSGMembershipUpdate_protocolExtensions__item_._ext = None
     _CSGMembershipUpdate_protocolExtensions._cont = __CSGMembershipUpdate_protocolExtensions__item_
     _CSGMembershipUpdate_protocolExtensions._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=65535)], ev=None, er=[])
     CSGMembershipUpdate._cont = ASN1Dict([
-        ('protocolIEs', _CSGMembershipUpdate_protocolIEs),
-        ('protocolExtensions', _CSGMembershipUpdate_protocolExtensions),
+        (u'protocolIEs', _CSGMembershipUpdate_protocolIEs),
+        (u'protocolExtensions', _CSGMembershipUpdate_protocolExtensions),
         ])
     CSGMembershipUpdate._ext = []
     
     #-----< CSGMembershipUpdateIEs >-----#
-    CSGMembershipUpdateIEs = CLASS(name='CSGMembershipUpdateIEs', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-IES')))
-    _CSGMembershipUpdateIEs_val_Value_0 = BIT_STR(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'Context-ID')))
-    _CSGMembershipUpdateIEs_val_Value_1 = ENUM(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'CSGMembershipStatus')))
-    CSGMembershipUpdateIEs._val = ASN1Set(rv=[dict([('id', 4), ('criticality', 'reject'), ('Value', _CSGMembershipUpdateIEs_val_Value_0), ('presence', 'mandatory')]), dict([('id', 21), ('criticality', 'reject'), ('Value', _CSGMembershipUpdateIEs_val_Value_1), ('presence', 'mandatory')])], rr=[], ev=[], er=[])
+    CSGMembershipUpdateIEs = CLASS(name=u'CSGMembershipUpdateIEs', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-IES')))
+    _CSGMembershipUpdateIEs_val_Value_0 = BIT_STR(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'Context-ID')))
+    _CSGMembershipUpdateIEs_val_Value_1 = ENUM(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'CSGMembershipStatus')))
+    CSGMembershipUpdateIEs._val = ASN1Set(rv=[dict([(u'id', 4), (u'criticality', u'reject'), (u'Value', _CSGMembershipUpdateIEs_val_Value_0), (u'presence', u'mandatory')]), dict([(u'id', 21), (u'criticality', u'reject'), (u'Value', _CSGMembershipUpdateIEs_val_Value_1), (u'presence', u'mandatory')])], rr=[], ev=[], er=[])
     
     #-----< CSGMembershipUpdateExtensions >-----#
-    CSGMembershipUpdateExtensions = CLASS(name='CSGMembershipUpdateExtensions', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION')))
+    CSGMembershipUpdateExtensions = CLASS(name=u'CSGMembershipUpdateExtensions', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION')))
     CSGMembershipUpdateExtensions._val = ASN1Set(rv=[], rr=[], ev=[], er=[])
     
     #-----< TNLUpdateRequest >-----#
-    TNLUpdateRequest = SEQ(name='TNLUpdateRequest', mode=MODE_TYPE)
-    _TNLUpdateRequest_protocolIEs = SEQ_OF(name='protocolIEs', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-Containers', 'ProtocolIE-Container')))
+    TNLUpdateRequest = SEQ(name=u'TNLUpdateRequest', mode=MODE_TYPE)
+    _TNLUpdateRequest_protocolIEs = SEQ_OF(name=u'protocolIEs', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-Containers', 'ProtocolIE-Container')))
     __TNLUpdateRequest_protocolIEs__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-Containers', 'ProtocolIE-Field')))
-    ___TNLUpdateRequest_protocolIEs__item__id = INT(name='id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-IES'), ['id']))
+    ___TNLUpdateRequest_protocolIEs__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-IES'), [u'id']))
     ____TNLUpdateRequest_protocolIEs__item__id_tab = CLASS(name='_tab_HNBAP-PROTOCOL-IES', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-IES')))
-    _____TNLUpdateRequest_protocolIEs__item__id_tab_val_Value_0 = BIT_STR(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'Context-ID')))
-    _____TNLUpdateRequest_protocolIEs__item__id_tab_val_Value_1 = SEQ_OF(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'RABList')))
-    _____TNLUpdateRequest_protocolIEs__item__id_tab_val_Value_2 = ENUM(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'Update-cause')))
-    ____TNLUpdateRequest_protocolIEs__item__id_tab._val = ASN1Set(rv=[dict([('id', 4), ('criticality', 'reject'), ('Value', _____TNLUpdateRequest_protocolIEs__item__id_tab_val_Value_0), ('presence', 'mandatory')]), dict([('id', 22), ('criticality', 'reject'), ('Value', _____TNLUpdateRequest_protocolIEs__item__id_tab_val_Value_1), ('presence', 'mandatory')]), dict([('id', 26), ('criticality', 'reject'), ('Value', _____TNLUpdateRequest_protocolIEs__item__id_tab_val_Value_2), ('presence', 'mandatory')])], rr=[], ev=None, er=[])
+    _____TNLUpdateRequest_protocolIEs__item__id_tab_val_Value_0 = BIT_STR(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'Context-ID')))
+    _____TNLUpdateRequest_protocolIEs__item__id_tab_val_Value_1 = SEQ_OF(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'RABList')))
+    _____TNLUpdateRequest_protocolIEs__item__id_tab_val_Value_2 = ENUM(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'Update-cause')))
+    ____TNLUpdateRequest_protocolIEs__item__id_tab._val = ASN1Set(rv=[dict([(u'id', 4), (u'criticality', u'reject'), (u'Value', _____TNLUpdateRequest_protocolIEs__item__id_tab_val_Value_0), (u'presence', u'mandatory')]), dict([(u'id', 22), (u'criticality', u'reject'), (u'Value', _____TNLUpdateRequest_protocolIEs__item__id_tab_val_Value_1), (u'presence', u'mandatory')]), dict([(u'id', 26), (u'criticality', u'reject'), (u'Value', _____TNLUpdateRequest_protocolIEs__item__id_tab_val_Value_2), (u'presence', u'mandatory')])], rr=[], ev=None, er=[])
     ___TNLUpdateRequest_protocolIEs__item__id._const_tab = ____TNLUpdateRequest_protocolIEs__item__id_tab
     ___TNLUpdateRequest_protocolIEs__item__id._const_tab_at = None
-    ___TNLUpdateRequest_protocolIEs__item__id._const_tab_id = 'id'
-    ___TNLUpdateRequest_protocolIEs__item__criticality = ENUM(name='criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-IES'), ['criticality']))
+    ___TNLUpdateRequest_protocolIEs__item__id._const_tab_id = u'id'
+    ___TNLUpdateRequest_protocolIEs__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-IES'), [u'criticality']))
     ___TNLUpdateRequest_protocolIEs__item__criticality._const_tab = ____TNLUpdateRequest_protocolIEs__item__id_tab
-    ___TNLUpdateRequest_protocolIEs__item__criticality._const_tab_at = ('..', 'id')
-    ___TNLUpdateRequest_protocolIEs__item__criticality._const_tab_id = 'criticality'
-    ___TNLUpdateRequest_protocolIEs__item__value = OPEN(name='value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-IES'), ['Value']))
+    ___TNLUpdateRequest_protocolIEs__item__criticality._const_tab_at = ('..', u'id')
+    ___TNLUpdateRequest_protocolIEs__item__criticality._const_tab_id = u'criticality'
+    ___TNLUpdateRequest_protocolIEs__item__value = OPEN(name=u'value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-IES'), [u'Value']))
     ___TNLUpdateRequest_protocolIEs__item__value._const_tab = ____TNLUpdateRequest_protocolIEs__item__id_tab
-    ___TNLUpdateRequest_protocolIEs__item__value._const_tab_at = ('..', 'id')
-    ___TNLUpdateRequest_protocolIEs__item__value._const_tab_id = 'Value'
+    ___TNLUpdateRequest_protocolIEs__item__value._const_tab_at = ('..', u'id')
+    ___TNLUpdateRequest_protocolIEs__item__value._const_tab_id = u'Value'
     __TNLUpdateRequest_protocolIEs__item_._cont = ASN1Dict([
-        ('id', ___TNLUpdateRequest_protocolIEs__item__id),
-        ('criticality', ___TNLUpdateRequest_protocolIEs__item__criticality),
-        ('value', ___TNLUpdateRequest_protocolIEs__item__value),
+        (u'id', ___TNLUpdateRequest_protocolIEs__item__id),
+        (u'criticality', ___TNLUpdateRequest_protocolIEs__item__criticality),
+        (u'value', ___TNLUpdateRequest_protocolIEs__item__value),
         ])
     __TNLUpdateRequest_protocolIEs__item_._ext = None
     _TNLUpdateRequest_protocolIEs._cont = __TNLUpdateRequest_protocolIEs__item_
     _TNLUpdateRequest_protocolIEs._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=65535)], ev=None, er=[])
-    _TNLUpdateRequest_protocolExtensions = SEQ_OF(name='protocolExtensions', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-Containers', 'ProtocolExtensionContainer')), opt=True)
+    _TNLUpdateRequest_protocolExtensions = SEQ_OF(name=u'protocolExtensions', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-Containers', 'ProtocolExtensionContainer')), opt=True)
     __TNLUpdateRequest_protocolExtensions__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-Containers', 'ProtocolExtensionField')))
-    ___TNLUpdateRequest_protocolExtensions__item__id = INT(name='id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), ['id']))
+    ___TNLUpdateRequest_protocolExtensions__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), [u'id']))
     ____TNLUpdateRequest_protocolExtensions__item__id_tab = CLASS(name='_tab_HNBAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION')))
     ____TNLUpdateRequest_protocolExtensions__item__id_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___TNLUpdateRequest_protocolExtensions__item__id._const_tab = ____TNLUpdateRequest_protocolExtensions__item__id_tab
     ___TNLUpdateRequest_protocolExtensions__item__id._const_tab_at = None
-    ___TNLUpdateRequest_protocolExtensions__item__id._const_tab_id = 'id'
-    ___TNLUpdateRequest_protocolExtensions__item__criticality = ENUM(name='criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), ['criticality']))
+    ___TNLUpdateRequest_protocolExtensions__item__id._const_tab_id = u'id'
+    ___TNLUpdateRequest_protocolExtensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), [u'criticality']))
     ____TNLUpdateRequest_protocolExtensions__item__criticality_tab = CLASS(name='_tab_HNBAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION')))
     ____TNLUpdateRequest_protocolExtensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___TNLUpdateRequest_protocolExtensions__item__criticality._const_tab = ____TNLUpdateRequest_protocolExtensions__item__criticality_tab
-    ___TNLUpdateRequest_protocolExtensions__item__criticality._const_tab_at = ('..', 'id')
-    ___TNLUpdateRequest_protocolExtensions__item__criticality._const_tab_id = 'criticality'
-    ___TNLUpdateRequest_protocolExtensions__item__extensionValue = OPEN(name='extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), ['Extension']))
+    ___TNLUpdateRequest_protocolExtensions__item__criticality._const_tab_at = ('..', u'id')
+    ___TNLUpdateRequest_protocolExtensions__item__criticality._const_tab_id = u'criticality'
+    ___TNLUpdateRequest_protocolExtensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), [u'Extension']))
     ____TNLUpdateRequest_protocolExtensions__item__extensionValue_tab = CLASS(name='_tab_HNBAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION')))
     ____TNLUpdateRequest_protocolExtensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___TNLUpdateRequest_protocolExtensions__item__extensionValue._const_tab = ____TNLUpdateRequest_protocolExtensions__item__extensionValue_tab
-    ___TNLUpdateRequest_protocolExtensions__item__extensionValue._const_tab_at = ('..', 'id')
-    ___TNLUpdateRequest_protocolExtensions__item__extensionValue._const_tab_id = 'Extension'
+    ___TNLUpdateRequest_protocolExtensions__item__extensionValue._const_tab_at = ('..', u'id')
+    ___TNLUpdateRequest_protocolExtensions__item__extensionValue._const_tab_id = u'Extension'
     __TNLUpdateRequest_protocolExtensions__item_._cont = ASN1Dict([
-        ('id', ___TNLUpdateRequest_protocolExtensions__item__id),
-        ('criticality', ___TNLUpdateRequest_protocolExtensions__item__criticality),
-        ('extensionValue', ___TNLUpdateRequest_protocolExtensions__item__extensionValue),
+        (u'id', ___TNLUpdateRequest_protocolExtensions__item__id),
+        (u'criticality', ___TNLUpdateRequest_protocolExtensions__item__criticality),
+        (u'extensionValue', ___TNLUpdateRequest_protocolExtensions__item__extensionValue),
         ])
     __TNLUpdateRequest_protocolExtensions__item_._ext = None
     _TNLUpdateRequest_protocolExtensions._cont = __TNLUpdateRequest_protocolExtensions__item_
     _TNLUpdateRequest_protocolExtensions._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=65535)], ev=None, er=[])
     TNLUpdateRequest._cont = ASN1Dict([
-        ('protocolIEs', _TNLUpdateRequest_protocolIEs),
-        ('protocolExtensions', _TNLUpdateRequest_protocolExtensions),
+        (u'protocolIEs', _TNLUpdateRequest_protocolIEs),
+        (u'protocolExtensions', _TNLUpdateRequest_protocolExtensions),
         ])
     TNLUpdateRequest._ext = []
     
     #-----< TNLUpdateRequestIEs >-----#
-    TNLUpdateRequestIEs = CLASS(name='TNLUpdateRequestIEs', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-IES')))
-    _TNLUpdateRequestIEs_val_Value_0 = BIT_STR(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'Context-ID')))
-    _TNLUpdateRequestIEs_val_Value_1 = SEQ_OF(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'RABList')))
-    _TNLUpdateRequestIEs_val_Value_2 = ENUM(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'Update-cause')))
-    TNLUpdateRequestIEs._val = ASN1Set(rv=[dict([('id', 4), ('criticality', 'reject'), ('Value', _TNLUpdateRequestIEs_val_Value_0), ('presence', 'mandatory')]), dict([('id', 22), ('criticality', 'reject'), ('Value', _TNLUpdateRequestIEs_val_Value_1), ('presence', 'mandatory')]), dict([('id', 26), ('criticality', 'reject'), ('Value', _TNLUpdateRequestIEs_val_Value_2), ('presence', 'mandatory')])], rr=[], ev=[], er=[])
+    TNLUpdateRequestIEs = CLASS(name=u'TNLUpdateRequestIEs', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-IES')))
+    _TNLUpdateRequestIEs_val_Value_0 = BIT_STR(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'Context-ID')))
+    _TNLUpdateRequestIEs_val_Value_1 = SEQ_OF(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'RABList')))
+    _TNLUpdateRequestIEs_val_Value_2 = ENUM(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'Update-cause')))
+    TNLUpdateRequestIEs._val = ASN1Set(rv=[dict([(u'id', 4), (u'criticality', u'reject'), (u'Value', _TNLUpdateRequestIEs_val_Value_0), (u'presence', u'mandatory')]), dict([(u'id', 22), (u'criticality', u'reject'), (u'Value', _TNLUpdateRequestIEs_val_Value_1), (u'presence', u'mandatory')]), dict([(u'id', 26), (u'criticality', u'reject'), (u'Value', _TNLUpdateRequestIEs_val_Value_2), (u'presence', u'mandatory')])], rr=[], ev=[], er=[])
     
     #-----< TNLUpdateExtensions >-----#
-    TNLUpdateExtensions = CLASS(name='TNLUpdateExtensions', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION')))
+    TNLUpdateExtensions = CLASS(name=u'TNLUpdateExtensions', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION')))
     TNLUpdateExtensions._val = ASN1Set(rv=[], rr=[], ev=[], er=[])
     
     #-----< TNLUpdateResponse >-----#
-    TNLUpdateResponse = SEQ(name='TNLUpdateResponse', mode=MODE_TYPE)
-    _TNLUpdateResponse_protocolIEs = SEQ_OF(name='protocolIEs', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-Containers', 'ProtocolIE-Container')))
+    TNLUpdateResponse = SEQ(name=u'TNLUpdateResponse', mode=MODE_TYPE)
+    _TNLUpdateResponse_protocolIEs = SEQ_OF(name=u'protocolIEs', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-Containers', 'ProtocolIE-Container')))
     __TNLUpdateResponse_protocolIEs__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-Containers', 'ProtocolIE-Field')))
-    ___TNLUpdateResponse_protocolIEs__item__id = INT(name='id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-IES'), ['id']))
+    ___TNLUpdateResponse_protocolIEs__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-IES'), [u'id']))
     ____TNLUpdateResponse_protocolIEs__item__id_tab = CLASS(name='_tab_HNBAP-PROTOCOL-IES', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-IES')))
-    _____TNLUpdateResponse_protocolIEs__item__id_tab_val_Value_0 = BIT_STR(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'Context-ID')))
-    ____TNLUpdateResponse_protocolIEs__item__id_tab._val = ASN1Set(rv=[dict([('id', 4), ('criticality', 'reject'), ('Value', _____TNLUpdateResponse_protocolIEs__item__id_tab_val_Value_0), ('presence', 'mandatory')])], rr=[], ev=None, er=[])
+    _____TNLUpdateResponse_protocolIEs__item__id_tab_val_Value_0 = BIT_STR(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'Context-ID')))
+    ____TNLUpdateResponse_protocolIEs__item__id_tab._val = ASN1Set(rv=[dict([(u'id', 4), (u'criticality', u'reject'), (u'Value', _____TNLUpdateResponse_protocolIEs__item__id_tab_val_Value_0), (u'presence', u'mandatory')])], rr=[], ev=None, er=[])
     ___TNLUpdateResponse_protocolIEs__item__id._const_tab = ____TNLUpdateResponse_protocolIEs__item__id_tab
     ___TNLUpdateResponse_protocolIEs__item__id._const_tab_at = None
-    ___TNLUpdateResponse_protocolIEs__item__id._const_tab_id = 'id'
-    ___TNLUpdateResponse_protocolIEs__item__criticality = ENUM(name='criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-IES'), ['criticality']))
+    ___TNLUpdateResponse_protocolIEs__item__id._const_tab_id = u'id'
+    ___TNLUpdateResponse_protocolIEs__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-IES'), [u'criticality']))
     ___TNLUpdateResponse_protocolIEs__item__criticality._const_tab = ____TNLUpdateResponse_protocolIEs__item__id_tab
-    ___TNLUpdateResponse_protocolIEs__item__criticality._const_tab_at = ('..', 'id')
-    ___TNLUpdateResponse_protocolIEs__item__criticality._const_tab_id = 'criticality'
-    ___TNLUpdateResponse_protocolIEs__item__value = OPEN(name='value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-IES'), ['Value']))
+    ___TNLUpdateResponse_protocolIEs__item__criticality._const_tab_at = ('..', u'id')
+    ___TNLUpdateResponse_protocolIEs__item__criticality._const_tab_id = u'criticality'
+    ___TNLUpdateResponse_protocolIEs__item__value = OPEN(name=u'value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-IES'), [u'Value']))
     ___TNLUpdateResponse_protocolIEs__item__value._const_tab = ____TNLUpdateResponse_protocolIEs__item__id_tab
-    ___TNLUpdateResponse_protocolIEs__item__value._const_tab_at = ('..', 'id')
-    ___TNLUpdateResponse_protocolIEs__item__value._const_tab_id = 'Value'
+    ___TNLUpdateResponse_protocolIEs__item__value._const_tab_at = ('..', u'id')
+    ___TNLUpdateResponse_protocolIEs__item__value._const_tab_id = u'Value'
     __TNLUpdateResponse_protocolIEs__item_._cont = ASN1Dict([
-        ('id', ___TNLUpdateResponse_protocolIEs__item__id),
-        ('criticality', ___TNLUpdateResponse_protocolIEs__item__criticality),
-        ('value', ___TNLUpdateResponse_protocolIEs__item__value),
+        (u'id', ___TNLUpdateResponse_protocolIEs__item__id),
+        (u'criticality', ___TNLUpdateResponse_protocolIEs__item__criticality),
+        (u'value', ___TNLUpdateResponse_protocolIEs__item__value),
         ])
     __TNLUpdateResponse_protocolIEs__item_._ext = None
     _TNLUpdateResponse_protocolIEs._cont = __TNLUpdateResponse_protocolIEs__item_
     _TNLUpdateResponse_protocolIEs._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=65535)], ev=None, er=[])
-    _TNLUpdateResponse_protocolExtensions = SEQ_OF(name='protocolExtensions', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-Containers', 'ProtocolExtensionContainer')), opt=True)
+    _TNLUpdateResponse_protocolExtensions = SEQ_OF(name=u'protocolExtensions', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-Containers', 'ProtocolExtensionContainer')), opt=True)
     __TNLUpdateResponse_protocolExtensions__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-Containers', 'ProtocolExtensionField')))
-    ___TNLUpdateResponse_protocolExtensions__item__id = INT(name='id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), ['id']))
+    ___TNLUpdateResponse_protocolExtensions__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), [u'id']))
     ____TNLUpdateResponse_protocolExtensions__item__id_tab = CLASS(name='_tab_HNBAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION')))
     ____TNLUpdateResponse_protocolExtensions__item__id_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___TNLUpdateResponse_protocolExtensions__item__id._const_tab = ____TNLUpdateResponse_protocolExtensions__item__id_tab
     ___TNLUpdateResponse_protocolExtensions__item__id._const_tab_at = None
-    ___TNLUpdateResponse_protocolExtensions__item__id._const_tab_id = 'id'
-    ___TNLUpdateResponse_protocolExtensions__item__criticality = ENUM(name='criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), ['criticality']))
+    ___TNLUpdateResponse_protocolExtensions__item__id._const_tab_id = u'id'
+    ___TNLUpdateResponse_protocolExtensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), [u'criticality']))
     ____TNLUpdateResponse_protocolExtensions__item__criticality_tab = CLASS(name='_tab_HNBAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION')))
     ____TNLUpdateResponse_protocolExtensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___TNLUpdateResponse_protocolExtensions__item__criticality._const_tab = ____TNLUpdateResponse_protocolExtensions__item__criticality_tab
-    ___TNLUpdateResponse_protocolExtensions__item__criticality._const_tab_at = ('..', 'id')
-    ___TNLUpdateResponse_protocolExtensions__item__criticality._const_tab_id = 'criticality'
-    ___TNLUpdateResponse_protocolExtensions__item__extensionValue = OPEN(name='extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), ['Extension']))
+    ___TNLUpdateResponse_protocolExtensions__item__criticality._const_tab_at = ('..', u'id')
+    ___TNLUpdateResponse_protocolExtensions__item__criticality._const_tab_id = u'criticality'
+    ___TNLUpdateResponse_protocolExtensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), [u'Extension']))
     ____TNLUpdateResponse_protocolExtensions__item__extensionValue_tab = CLASS(name='_tab_HNBAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION')))
     ____TNLUpdateResponse_protocolExtensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___TNLUpdateResponse_protocolExtensions__item__extensionValue._const_tab = ____TNLUpdateResponse_protocolExtensions__item__extensionValue_tab
-    ___TNLUpdateResponse_protocolExtensions__item__extensionValue._const_tab_at = ('..', 'id')
-    ___TNLUpdateResponse_protocolExtensions__item__extensionValue._const_tab_id = 'Extension'
+    ___TNLUpdateResponse_protocolExtensions__item__extensionValue._const_tab_at = ('..', u'id')
+    ___TNLUpdateResponse_protocolExtensions__item__extensionValue._const_tab_id = u'Extension'
     __TNLUpdateResponse_protocolExtensions__item_._cont = ASN1Dict([
-        ('id', ___TNLUpdateResponse_protocolExtensions__item__id),
-        ('criticality', ___TNLUpdateResponse_protocolExtensions__item__criticality),
-        ('extensionValue', ___TNLUpdateResponse_protocolExtensions__item__extensionValue),
+        (u'id', ___TNLUpdateResponse_protocolExtensions__item__id),
+        (u'criticality', ___TNLUpdateResponse_protocolExtensions__item__criticality),
+        (u'extensionValue', ___TNLUpdateResponse_protocolExtensions__item__extensionValue),
         ])
     __TNLUpdateResponse_protocolExtensions__item_._ext = None
     _TNLUpdateResponse_protocolExtensions._cont = __TNLUpdateResponse_protocolExtensions__item_
     _TNLUpdateResponse_protocolExtensions._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=65535)], ev=None, er=[])
     TNLUpdateResponse._cont = ASN1Dict([
-        ('protocolIEs', _TNLUpdateResponse_protocolIEs),
-        ('protocolExtensions', _TNLUpdateResponse_protocolExtensions),
+        (u'protocolIEs', _TNLUpdateResponse_protocolIEs),
+        (u'protocolExtensions', _TNLUpdateResponse_protocolExtensions),
         ])
     TNLUpdateResponse._ext = []
     
     #-----< TNLUpdateResponseIEs >-----#
-    TNLUpdateResponseIEs = CLASS(name='TNLUpdateResponseIEs', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-IES')))
-    _TNLUpdateResponseIEs_val_Value_0 = BIT_STR(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'Context-ID')))
-    TNLUpdateResponseIEs._val = ASN1Set(rv=[dict([('id', 4), ('criticality', 'reject'), ('Value', _TNLUpdateResponseIEs_val_Value_0), ('presence', 'mandatory')])], rr=[], ev=[], er=[])
+    TNLUpdateResponseIEs = CLASS(name=u'TNLUpdateResponseIEs', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-IES')))
+    _TNLUpdateResponseIEs_val_Value_0 = BIT_STR(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'Context-ID')))
+    TNLUpdateResponseIEs._val = ASN1Set(rv=[dict([(u'id', 4), (u'criticality', u'reject'), (u'Value', _TNLUpdateResponseIEs_val_Value_0), (u'presence', u'mandatory')])], rr=[], ev=[], er=[])
     
     #-----< TNLUpdateResponseExtensions >-----#
-    TNLUpdateResponseExtensions = CLASS(name='TNLUpdateResponseExtensions', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION')))
+    TNLUpdateResponseExtensions = CLASS(name=u'TNLUpdateResponseExtensions', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION')))
     TNLUpdateResponseExtensions._val = ASN1Set(rv=[], rr=[], ev=[], er=[])
     
     #-----< TNLUpdateFailure >-----#
-    TNLUpdateFailure = SEQ(name='TNLUpdateFailure', mode=MODE_TYPE)
-    _TNLUpdateFailure_protocolIEs = SEQ_OF(name='protocolIEs', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-Containers', 'ProtocolIE-Container')))
+    TNLUpdateFailure = SEQ(name=u'TNLUpdateFailure', mode=MODE_TYPE)
+    _TNLUpdateFailure_protocolIEs = SEQ_OF(name=u'protocolIEs', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-Containers', 'ProtocolIE-Container')))
     __TNLUpdateFailure_protocolIEs__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-Containers', 'ProtocolIE-Field')))
-    ___TNLUpdateFailure_protocolIEs__item__id = INT(name='id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-IES'), ['id']))
+    ___TNLUpdateFailure_protocolIEs__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-IES'), [u'id']))
     ____TNLUpdateFailure_protocolIEs__item__id_tab = CLASS(name='_tab_HNBAP-PROTOCOL-IES', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-IES')))
-    _____TNLUpdateFailure_protocolIEs__item__id_tab_val_Value_0 = BIT_STR(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'Context-ID')))
-    _____TNLUpdateFailure_protocolIEs__item__id_tab_val_Value_1 = CHOICE(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'Cause')))
-    _____TNLUpdateFailure_protocolIEs__item__id_tab_val_Value_2 = SEQ(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'CriticalityDiagnostics')))
-    ____TNLUpdateFailure_protocolIEs__item__id_tab._val = ASN1Set(rv=[dict([('id', 4), ('criticality', 'reject'), ('Value', _____TNLUpdateFailure_protocolIEs__item__id_tab_val_Value_0), ('presence', 'mandatory')]), dict([('id', 1), ('criticality', 'ignore'), ('Value', _____TNLUpdateFailure_protocolIEs__item__id_tab_val_Value_1), ('presence', 'mandatory')]), dict([('id', 2), ('criticality', 'ignore'), ('Value', _____TNLUpdateFailure_protocolIEs__item__id_tab_val_Value_2), ('presence', 'optional')])], rr=[], ev=None, er=[])
+    _____TNLUpdateFailure_protocolIEs__item__id_tab_val_Value_0 = BIT_STR(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'Context-ID')))
+    _____TNLUpdateFailure_protocolIEs__item__id_tab_val_Value_1 = CHOICE(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'Cause')))
+    _____TNLUpdateFailure_protocolIEs__item__id_tab_val_Value_2 = SEQ(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'CriticalityDiagnostics')))
+    ____TNLUpdateFailure_protocolIEs__item__id_tab._val = ASN1Set(rv=[dict([(u'id', 4), (u'criticality', u'reject'), (u'Value', _____TNLUpdateFailure_protocolIEs__item__id_tab_val_Value_0), (u'presence', u'mandatory')]), dict([(u'id', 1), (u'criticality', u'ignore'), (u'Value', _____TNLUpdateFailure_protocolIEs__item__id_tab_val_Value_1), (u'presence', u'mandatory')]), dict([(u'id', 2), (u'criticality', u'ignore'), (u'Value', _____TNLUpdateFailure_protocolIEs__item__id_tab_val_Value_2), (u'presence', u'optional')])], rr=[], ev=None, er=[])
     ___TNLUpdateFailure_protocolIEs__item__id._const_tab = ____TNLUpdateFailure_protocolIEs__item__id_tab
     ___TNLUpdateFailure_protocolIEs__item__id._const_tab_at = None
-    ___TNLUpdateFailure_protocolIEs__item__id._const_tab_id = 'id'
-    ___TNLUpdateFailure_protocolIEs__item__criticality = ENUM(name='criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-IES'), ['criticality']))
+    ___TNLUpdateFailure_protocolIEs__item__id._const_tab_id = u'id'
+    ___TNLUpdateFailure_protocolIEs__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-IES'), [u'criticality']))
     ___TNLUpdateFailure_protocolIEs__item__criticality._const_tab = ____TNLUpdateFailure_protocolIEs__item__id_tab
-    ___TNLUpdateFailure_protocolIEs__item__criticality._const_tab_at = ('..', 'id')
-    ___TNLUpdateFailure_protocolIEs__item__criticality._const_tab_id = 'criticality'
-    ___TNLUpdateFailure_protocolIEs__item__value = OPEN(name='value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-IES'), ['Value']))
+    ___TNLUpdateFailure_protocolIEs__item__criticality._const_tab_at = ('..', u'id')
+    ___TNLUpdateFailure_protocolIEs__item__criticality._const_tab_id = u'criticality'
+    ___TNLUpdateFailure_protocolIEs__item__value = OPEN(name=u'value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-IES'), [u'Value']))
     ___TNLUpdateFailure_protocolIEs__item__value._const_tab = ____TNLUpdateFailure_protocolIEs__item__id_tab
-    ___TNLUpdateFailure_protocolIEs__item__value._const_tab_at = ('..', 'id')
-    ___TNLUpdateFailure_protocolIEs__item__value._const_tab_id = 'Value'
+    ___TNLUpdateFailure_protocolIEs__item__value._const_tab_at = ('..', u'id')
+    ___TNLUpdateFailure_protocolIEs__item__value._const_tab_id = u'Value'
     __TNLUpdateFailure_protocolIEs__item_._cont = ASN1Dict([
-        ('id', ___TNLUpdateFailure_protocolIEs__item__id),
-        ('criticality', ___TNLUpdateFailure_protocolIEs__item__criticality),
-        ('value', ___TNLUpdateFailure_protocolIEs__item__value),
+        (u'id', ___TNLUpdateFailure_protocolIEs__item__id),
+        (u'criticality', ___TNLUpdateFailure_protocolIEs__item__criticality),
+        (u'value', ___TNLUpdateFailure_protocolIEs__item__value),
         ])
     __TNLUpdateFailure_protocolIEs__item_._ext = None
     _TNLUpdateFailure_protocolIEs._cont = __TNLUpdateFailure_protocolIEs__item_
     _TNLUpdateFailure_protocolIEs._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=65535)], ev=None, er=[])
-    _TNLUpdateFailure_protocolExtensions = SEQ_OF(name='protocolExtensions', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-Containers', 'ProtocolExtensionContainer')), opt=True)
+    _TNLUpdateFailure_protocolExtensions = SEQ_OF(name=u'protocolExtensions', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-Containers', 'ProtocolExtensionContainer')), opt=True)
     __TNLUpdateFailure_protocolExtensions__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-Containers', 'ProtocolExtensionField')))
-    ___TNLUpdateFailure_protocolExtensions__item__id = INT(name='id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), ['id']))
+    ___TNLUpdateFailure_protocolExtensions__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), [u'id']))
     ____TNLUpdateFailure_protocolExtensions__item__id_tab = CLASS(name='_tab_HNBAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION')))
     ____TNLUpdateFailure_protocolExtensions__item__id_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___TNLUpdateFailure_protocolExtensions__item__id._const_tab = ____TNLUpdateFailure_protocolExtensions__item__id_tab
     ___TNLUpdateFailure_protocolExtensions__item__id._const_tab_at = None
-    ___TNLUpdateFailure_protocolExtensions__item__id._const_tab_id = 'id'
-    ___TNLUpdateFailure_protocolExtensions__item__criticality = ENUM(name='criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), ['criticality']))
+    ___TNLUpdateFailure_protocolExtensions__item__id._const_tab_id = u'id'
+    ___TNLUpdateFailure_protocolExtensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), [u'criticality']))
     ____TNLUpdateFailure_protocolExtensions__item__criticality_tab = CLASS(name='_tab_HNBAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION')))
     ____TNLUpdateFailure_protocolExtensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___TNLUpdateFailure_protocolExtensions__item__criticality._const_tab = ____TNLUpdateFailure_protocolExtensions__item__criticality_tab
-    ___TNLUpdateFailure_protocolExtensions__item__criticality._const_tab_at = ('..', 'id')
-    ___TNLUpdateFailure_protocolExtensions__item__criticality._const_tab_id = 'criticality'
-    ___TNLUpdateFailure_protocolExtensions__item__extensionValue = OPEN(name='extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), ['Extension']))
+    ___TNLUpdateFailure_protocolExtensions__item__criticality._const_tab_at = ('..', u'id')
+    ___TNLUpdateFailure_protocolExtensions__item__criticality._const_tab_id = u'criticality'
+    ___TNLUpdateFailure_protocolExtensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), [u'Extension']))
     ____TNLUpdateFailure_protocolExtensions__item__extensionValue_tab = CLASS(name='_tab_HNBAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION')))
     ____TNLUpdateFailure_protocolExtensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___TNLUpdateFailure_protocolExtensions__item__extensionValue._const_tab = ____TNLUpdateFailure_protocolExtensions__item__extensionValue_tab
-    ___TNLUpdateFailure_protocolExtensions__item__extensionValue._const_tab_at = ('..', 'id')
-    ___TNLUpdateFailure_protocolExtensions__item__extensionValue._const_tab_id = 'Extension'
+    ___TNLUpdateFailure_protocolExtensions__item__extensionValue._const_tab_at = ('..', u'id')
+    ___TNLUpdateFailure_protocolExtensions__item__extensionValue._const_tab_id = u'Extension'
     __TNLUpdateFailure_protocolExtensions__item_._cont = ASN1Dict([
-        ('id', ___TNLUpdateFailure_protocolExtensions__item__id),
-        ('criticality', ___TNLUpdateFailure_protocolExtensions__item__criticality),
-        ('extensionValue', ___TNLUpdateFailure_protocolExtensions__item__extensionValue),
+        (u'id', ___TNLUpdateFailure_protocolExtensions__item__id),
+        (u'criticality', ___TNLUpdateFailure_protocolExtensions__item__criticality),
+        (u'extensionValue', ___TNLUpdateFailure_protocolExtensions__item__extensionValue),
         ])
     __TNLUpdateFailure_protocolExtensions__item_._ext = None
     _TNLUpdateFailure_protocolExtensions._cont = __TNLUpdateFailure_protocolExtensions__item_
     _TNLUpdateFailure_protocolExtensions._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=65535)], ev=None, er=[])
     TNLUpdateFailure._cont = ASN1Dict([
-        ('protocolIEs', _TNLUpdateFailure_protocolIEs),
-        ('protocolExtensions', _TNLUpdateFailure_protocolExtensions),
+        (u'protocolIEs', _TNLUpdateFailure_protocolIEs),
+        (u'protocolExtensions', _TNLUpdateFailure_protocolExtensions),
         ])
     TNLUpdateFailure._ext = []
     
     #-----< TNLUpdateFailureIEs >-----#
-    TNLUpdateFailureIEs = CLASS(name='TNLUpdateFailureIEs', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-IES')))
-    _TNLUpdateFailureIEs_val_Value_0 = BIT_STR(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'Context-ID')))
-    _TNLUpdateFailureIEs_val_Value_1 = CHOICE(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'Cause')))
-    _TNLUpdateFailureIEs_val_Value_2 = SEQ(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'CriticalityDiagnostics')))
-    TNLUpdateFailureIEs._val = ASN1Set(rv=[dict([('id', 4), ('criticality', 'reject'), ('Value', _TNLUpdateFailureIEs_val_Value_0), ('presence', 'mandatory')]), dict([('id', 1), ('criticality', 'ignore'), ('Value', _TNLUpdateFailureIEs_val_Value_1), ('presence', 'mandatory')]), dict([('id', 2), ('criticality', 'ignore'), ('Value', _TNLUpdateFailureIEs_val_Value_2), ('presence', 'optional')])], rr=[], ev=[], er=[])
+    TNLUpdateFailureIEs = CLASS(name=u'TNLUpdateFailureIEs', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-IES')))
+    _TNLUpdateFailureIEs_val_Value_0 = BIT_STR(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'Context-ID')))
+    _TNLUpdateFailureIEs_val_Value_1 = CHOICE(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'Cause')))
+    _TNLUpdateFailureIEs_val_Value_2 = SEQ(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'CriticalityDiagnostics')))
+    TNLUpdateFailureIEs._val = ASN1Set(rv=[dict([(u'id', 4), (u'criticality', u'reject'), (u'Value', _TNLUpdateFailureIEs_val_Value_0), (u'presence', u'mandatory')]), dict([(u'id', 1), (u'criticality', u'ignore'), (u'Value', _TNLUpdateFailureIEs_val_Value_1), (u'presence', u'mandatory')]), dict([(u'id', 2), (u'criticality', u'ignore'), (u'Value', _TNLUpdateFailureIEs_val_Value_2), (u'presence', u'optional')])], rr=[], ev=[], er=[])
     
     #-----< TNLUpdateFailureExtensions >-----#
-    TNLUpdateFailureExtensions = CLASS(name='TNLUpdateFailureExtensions', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION')))
+    TNLUpdateFailureExtensions = CLASS(name=u'TNLUpdateFailureExtensions', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION')))
     TNLUpdateFailureExtensions._val = ASN1Set(rv=[], rr=[], ev=[], er=[])
     
     #-----< HNBConfigTransferRequest >-----#
-    HNBConfigTransferRequest = SEQ(name='HNBConfigTransferRequest', mode=MODE_TYPE)
-    _HNBConfigTransferRequest_protocolIEs = SEQ_OF(name='protocolIEs', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-Containers', 'ProtocolIE-Container')))
+    HNBConfigTransferRequest = SEQ(name=u'HNBConfigTransferRequest', mode=MODE_TYPE)
+    _HNBConfigTransferRequest_protocolIEs = SEQ_OF(name=u'protocolIEs', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-Containers', 'ProtocolIE-Container')))
     __HNBConfigTransferRequest_protocolIEs__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-Containers', 'ProtocolIE-Field')))
-    ___HNBConfigTransferRequest_protocolIEs__item__id = INT(name='id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-IES'), ['id']))
+    ___HNBConfigTransferRequest_protocolIEs__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-IES'), [u'id']))
     ____HNBConfigTransferRequest_protocolIEs__item__id_tab = CLASS(name='_tab_HNBAP-PROTOCOL-IES', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-IES')))
-    _____HNBConfigTransferRequest_protocolIEs__item__id_tab_val_Value_0 = SEQ_OF(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'NeighbourInfoRequestList')))
-    ____HNBConfigTransferRequest_protocolIEs__item__id_tab._val = ASN1Set(rv=[dict([('id', 28), ('criticality', 'reject'), ('Value', _____HNBConfigTransferRequest_protocolIEs__item__id_tab_val_Value_0), ('presence', 'mandatory')])], rr=[], ev=None, er=[])
+    _____HNBConfigTransferRequest_protocolIEs__item__id_tab_val_Value_0 = SEQ_OF(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'NeighbourInfoRequestList')))
+    ____HNBConfigTransferRequest_protocolIEs__item__id_tab._val = ASN1Set(rv=[dict([(u'id', 28), (u'criticality', u'reject'), (u'Value', _____HNBConfigTransferRequest_protocolIEs__item__id_tab_val_Value_0), (u'presence', u'mandatory')])], rr=[], ev=None, er=[])
     ___HNBConfigTransferRequest_protocolIEs__item__id._const_tab = ____HNBConfigTransferRequest_protocolIEs__item__id_tab
     ___HNBConfigTransferRequest_protocolIEs__item__id._const_tab_at = None
-    ___HNBConfigTransferRequest_protocolIEs__item__id._const_tab_id = 'id'
-    ___HNBConfigTransferRequest_protocolIEs__item__criticality = ENUM(name='criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-IES'), ['criticality']))
+    ___HNBConfigTransferRequest_protocolIEs__item__id._const_tab_id = u'id'
+    ___HNBConfigTransferRequest_protocolIEs__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-IES'), [u'criticality']))
     ___HNBConfigTransferRequest_protocolIEs__item__criticality._const_tab = ____HNBConfigTransferRequest_protocolIEs__item__id_tab
-    ___HNBConfigTransferRequest_protocolIEs__item__criticality._const_tab_at = ('..', 'id')
-    ___HNBConfigTransferRequest_protocolIEs__item__criticality._const_tab_id = 'criticality'
-    ___HNBConfigTransferRequest_protocolIEs__item__value = OPEN(name='value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-IES'), ['Value']))
+    ___HNBConfigTransferRequest_protocolIEs__item__criticality._const_tab_at = ('..', u'id')
+    ___HNBConfigTransferRequest_protocolIEs__item__criticality._const_tab_id = u'criticality'
+    ___HNBConfigTransferRequest_protocolIEs__item__value = OPEN(name=u'value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-IES'), [u'Value']))
     ___HNBConfigTransferRequest_protocolIEs__item__value._const_tab = ____HNBConfigTransferRequest_protocolIEs__item__id_tab
-    ___HNBConfigTransferRequest_protocolIEs__item__value._const_tab_at = ('..', 'id')
-    ___HNBConfigTransferRequest_protocolIEs__item__value._const_tab_id = 'Value'
+    ___HNBConfigTransferRequest_protocolIEs__item__value._const_tab_at = ('..', u'id')
+    ___HNBConfigTransferRequest_protocolIEs__item__value._const_tab_id = u'Value'
     __HNBConfigTransferRequest_protocolIEs__item_._cont = ASN1Dict([
-        ('id', ___HNBConfigTransferRequest_protocolIEs__item__id),
-        ('criticality', ___HNBConfigTransferRequest_protocolIEs__item__criticality),
-        ('value', ___HNBConfigTransferRequest_protocolIEs__item__value),
+        (u'id', ___HNBConfigTransferRequest_protocolIEs__item__id),
+        (u'criticality', ___HNBConfigTransferRequest_protocolIEs__item__criticality),
+        (u'value', ___HNBConfigTransferRequest_protocolIEs__item__value),
         ])
     __HNBConfigTransferRequest_protocolIEs__item_._ext = None
     _HNBConfigTransferRequest_protocolIEs._cont = __HNBConfigTransferRequest_protocolIEs__item_
     _HNBConfigTransferRequest_protocolIEs._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=65535)], ev=None, er=[])
-    _HNBConfigTransferRequest_protocolExtensions = SEQ_OF(name='protocolExtensions', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-Containers', 'ProtocolExtensionContainer')), opt=True)
+    _HNBConfigTransferRequest_protocolExtensions = SEQ_OF(name=u'protocolExtensions', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-Containers', 'ProtocolExtensionContainer')), opt=True)
     __HNBConfigTransferRequest_protocolExtensions__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-Containers', 'ProtocolExtensionField')))
-    ___HNBConfigTransferRequest_protocolExtensions__item__id = INT(name='id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), ['id']))
+    ___HNBConfigTransferRequest_protocolExtensions__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), [u'id']))
     ____HNBConfigTransferRequest_protocolExtensions__item__id_tab = CLASS(name='_tab_HNBAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION')))
     ____HNBConfigTransferRequest_protocolExtensions__item__id_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___HNBConfigTransferRequest_protocolExtensions__item__id._const_tab = ____HNBConfigTransferRequest_protocolExtensions__item__id_tab
     ___HNBConfigTransferRequest_protocolExtensions__item__id._const_tab_at = None
-    ___HNBConfigTransferRequest_protocolExtensions__item__id._const_tab_id = 'id'
-    ___HNBConfigTransferRequest_protocolExtensions__item__criticality = ENUM(name='criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), ['criticality']))
+    ___HNBConfigTransferRequest_protocolExtensions__item__id._const_tab_id = u'id'
+    ___HNBConfigTransferRequest_protocolExtensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), [u'criticality']))
     ____HNBConfigTransferRequest_protocolExtensions__item__criticality_tab = CLASS(name='_tab_HNBAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION')))
     ____HNBConfigTransferRequest_protocolExtensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___HNBConfigTransferRequest_protocolExtensions__item__criticality._const_tab = ____HNBConfigTransferRequest_protocolExtensions__item__criticality_tab
-    ___HNBConfigTransferRequest_protocolExtensions__item__criticality._const_tab_at = ('..', 'id')
-    ___HNBConfigTransferRequest_protocolExtensions__item__criticality._const_tab_id = 'criticality'
-    ___HNBConfigTransferRequest_protocolExtensions__item__extensionValue = OPEN(name='extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), ['Extension']))
+    ___HNBConfigTransferRequest_protocolExtensions__item__criticality._const_tab_at = ('..', u'id')
+    ___HNBConfigTransferRequest_protocolExtensions__item__criticality._const_tab_id = u'criticality'
+    ___HNBConfigTransferRequest_protocolExtensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), [u'Extension']))
     ____HNBConfigTransferRequest_protocolExtensions__item__extensionValue_tab = CLASS(name='_tab_HNBAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION')))
     ____HNBConfigTransferRequest_protocolExtensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___HNBConfigTransferRequest_protocolExtensions__item__extensionValue._const_tab = ____HNBConfigTransferRequest_protocolExtensions__item__extensionValue_tab
-    ___HNBConfigTransferRequest_protocolExtensions__item__extensionValue._const_tab_at = ('..', 'id')
-    ___HNBConfigTransferRequest_protocolExtensions__item__extensionValue._const_tab_id = 'Extension'
+    ___HNBConfigTransferRequest_protocolExtensions__item__extensionValue._const_tab_at = ('..', u'id')
+    ___HNBConfigTransferRequest_protocolExtensions__item__extensionValue._const_tab_id = u'Extension'
     __HNBConfigTransferRequest_protocolExtensions__item_._cont = ASN1Dict([
-        ('id', ___HNBConfigTransferRequest_protocolExtensions__item__id),
-        ('criticality', ___HNBConfigTransferRequest_protocolExtensions__item__criticality),
-        ('extensionValue', ___HNBConfigTransferRequest_protocolExtensions__item__extensionValue),
+        (u'id', ___HNBConfigTransferRequest_protocolExtensions__item__id),
+        (u'criticality', ___HNBConfigTransferRequest_protocolExtensions__item__criticality),
+        (u'extensionValue', ___HNBConfigTransferRequest_protocolExtensions__item__extensionValue),
         ])
     __HNBConfigTransferRequest_protocolExtensions__item_._ext = None
     _HNBConfigTransferRequest_protocolExtensions._cont = __HNBConfigTransferRequest_protocolExtensions__item_
     _HNBConfigTransferRequest_protocolExtensions._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=65535)], ev=None, er=[])
     HNBConfigTransferRequest._cont = ASN1Dict([
-        ('protocolIEs', _HNBConfigTransferRequest_protocolIEs),
-        ('protocolExtensions', _HNBConfigTransferRequest_protocolExtensions),
+        (u'protocolIEs', _HNBConfigTransferRequest_protocolIEs),
+        (u'protocolExtensions', _HNBConfigTransferRequest_protocolExtensions),
         ])
     HNBConfigTransferRequest._ext = []
     
     #-----< HNBConfigTransferRequestIEs >-----#
-    HNBConfigTransferRequestIEs = CLASS(name='HNBConfigTransferRequestIEs', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-IES')))
-    _HNBConfigTransferRequestIEs_val_Value_0 = SEQ_OF(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'NeighbourInfoRequestList')))
-    HNBConfigTransferRequestIEs._val = ASN1Set(rv=[dict([('id', 28), ('criticality', 'reject'), ('Value', _HNBConfigTransferRequestIEs_val_Value_0), ('presence', 'mandatory')])], rr=[], ev=[], er=[])
+    HNBConfigTransferRequestIEs = CLASS(name=u'HNBConfigTransferRequestIEs', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-IES')))
+    _HNBConfigTransferRequestIEs_val_Value_0 = SEQ_OF(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'NeighbourInfoRequestList')))
+    HNBConfigTransferRequestIEs._val = ASN1Set(rv=[dict([(u'id', 28), (u'criticality', u'reject'), (u'Value', _HNBConfigTransferRequestIEs_val_Value_0), (u'presence', u'mandatory')])], rr=[], ev=[], er=[])
     
     #-----< HNBConfigTransferRequestExtensions >-----#
-    HNBConfigTransferRequestExtensions = CLASS(name='HNBConfigTransferRequestExtensions', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION')))
+    HNBConfigTransferRequestExtensions = CLASS(name=u'HNBConfigTransferRequestExtensions', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION')))
     HNBConfigTransferRequestExtensions._val = ASN1Set(rv=[], rr=[], ev=[], er=[])
     
     #-----< HNBConfigTransferResponse >-----#
-    HNBConfigTransferResponse = SEQ(name='HNBConfigTransferResponse', mode=MODE_TYPE)
-    _HNBConfigTransferResponse_protocolIEs = SEQ_OF(name='protocolIEs', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-Containers', 'ProtocolIE-Container')))
+    HNBConfigTransferResponse = SEQ(name=u'HNBConfigTransferResponse', mode=MODE_TYPE)
+    _HNBConfigTransferResponse_protocolIEs = SEQ_OF(name=u'protocolIEs', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-Containers', 'ProtocolIE-Container')))
     __HNBConfigTransferResponse_protocolIEs__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-Containers', 'ProtocolIE-Field')))
-    ___HNBConfigTransferResponse_protocolIEs__item__id = INT(name='id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-IES'), ['id']))
+    ___HNBConfigTransferResponse_protocolIEs__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-IES'), [u'id']))
     ____HNBConfigTransferResponse_protocolIEs__item__id_tab = CLASS(name='_tab_HNBAP-PROTOCOL-IES', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-IES')))
-    _____HNBConfigTransferResponse_protocolIEs__item__id_tab_val_Value_0 = SEQ_OF(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'NeighbourInfoList')))
-    ____HNBConfigTransferResponse_protocolIEs__item__id_tab._val = ASN1Set(rv=[dict([('id', 27), ('criticality', 'reject'), ('Value', _____HNBConfigTransferResponse_protocolIEs__item__id_tab_val_Value_0), ('presence', 'mandatory')])], rr=[], ev=None, er=[])
+    _____HNBConfigTransferResponse_protocolIEs__item__id_tab_val_Value_0 = SEQ_OF(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'NeighbourInfoList')))
+    ____HNBConfigTransferResponse_protocolIEs__item__id_tab._val = ASN1Set(rv=[dict([(u'id', 27), (u'criticality', u'reject'), (u'Value', _____HNBConfigTransferResponse_protocolIEs__item__id_tab_val_Value_0), (u'presence', u'mandatory')])], rr=[], ev=None, er=[])
     ___HNBConfigTransferResponse_protocolIEs__item__id._const_tab = ____HNBConfigTransferResponse_protocolIEs__item__id_tab
     ___HNBConfigTransferResponse_protocolIEs__item__id._const_tab_at = None
-    ___HNBConfigTransferResponse_protocolIEs__item__id._const_tab_id = 'id'
-    ___HNBConfigTransferResponse_protocolIEs__item__criticality = ENUM(name='criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-IES'), ['criticality']))
+    ___HNBConfigTransferResponse_protocolIEs__item__id._const_tab_id = u'id'
+    ___HNBConfigTransferResponse_protocolIEs__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-IES'), [u'criticality']))
     ___HNBConfigTransferResponse_protocolIEs__item__criticality._const_tab = ____HNBConfigTransferResponse_protocolIEs__item__id_tab
-    ___HNBConfigTransferResponse_protocolIEs__item__criticality._const_tab_at = ('..', 'id')
-    ___HNBConfigTransferResponse_protocolIEs__item__criticality._const_tab_id = 'criticality'
-    ___HNBConfigTransferResponse_protocolIEs__item__value = OPEN(name='value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-IES'), ['Value']))
+    ___HNBConfigTransferResponse_protocolIEs__item__criticality._const_tab_at = ('..', u'id')
+    ___HNBConfigTransferResponse_protocolIEs__item__criticality._const_tab_id = u'criticality'
+    ___HNBConfigTransferResponse_protocolIEs__item__value = OPEN(name=u'value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-IES'), [u'Value']))
     ___HNBConfigTransferResponse_protocolIEs__item__value._const_tab = ____HNBConfigTransferResponse_protocolIEs__item__id_tab
-    ___HNBConfigTransferResponse_protocolIEs__item__value._const_tab_at = ('..', 'id')
-    ___HNBConfigTransferResponse_protocolIEs__item__value._const_tab_id = 'Value'
+    ___HNBConfigTransferResponse_protocolIEs__item__value._const_tab_at = ('..', u'id')
+    ___HNBConfigTransferResponse_protocolIEs__item__value._const_tab_id = u'Value'
     __HNBConfigTransferResponse_protocolIEs__item_._cont = ASN1Dict([
-        ('id', ___HNBConfigTransferResponse_protocolIEs__item__id),
-        ('criticality', ___HNBConfigTransferResponse_protocolIEs__item__criticality),
-        ('value', ___HNBConfigTransferResponse_protocolIEs__item__value),
+        (u'id', ___HNBConfigTransferResponse_protocolIEs__item__id),
+        (u'criticality', ___HNBConfigTransferResponse_protocolIEs__item__criticality),
+        (u'value', ___HNBConfigTransferResponse_protocolIEs__item__value),
         ])
     __HNBConfigTransferResponse_protocolIEs__item_._ext = None
     _HNBConfigTransferResponse_protocolIEs._cont = __HNBConfigTransferResponse_protocolIEs__item_
     _HNBConfigTransferResponse_protocolIEs._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=65535)], ev=None, er=[])
-    _HNBConfigTransferResponse_protocolExtensions = SEQ_OF(name='protocolExtensions', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-Containers', 'ProtocolExtensionContainer')), opt=True)
+    _HNBConfigTransferResponse_protocolExtensions = SEQ_OF(name=u'protocolExtensions', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-Containers', 'ProtocolExtensionContainer')), opt=True)
     __HNBConfigTransferResponse_protocolExtensions__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-Containers', 'ProtocolExtensionField')))
-    ___HNBConfigTransferResponse_protocolExtensions__item__id = INT(name='id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), ['id']))
+    ___HNBConfigTransferResponse_protocolExtensions__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), [u'id']))
     ____HNBConfigTransferResponse_protocolExtensions__item__id_tab = CLASS(name='_tab_HNBAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION')))
-    _____HNBConfigTransferResponse_protocolExtensions__item__id_tab_val_Extension_0 = SEQ_OF(name='Extension', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'AdditionalNeighbourInfoList')))
-    ____HNBConfigTransferResponse_protocolExtensions__item__id_tab._val = ASN1Set(rv=[dict([('id', 48), ('criticality', 'ignore'), ('Extension', _____HNBConfigTransferResponse_protocolExtensions__item__id_tab_val_Extension_0), ('presence', 'optional')])], rr=[], ev=None, er=[])
+    _____HNBConfigTransferResponse_protocolExtensions__item__id_tab_val_Extension_0 = SEQ_OF(name=u'Extension', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'AdditionalNeighbourInfoList')))
+    ____HNBConfigTransferResponse_protocolExtensions__item__id_tab._val = ASN1Set(rv=[dict([(u'id', 48), (u'criticality', u'ignore'), (u'Extension', _____HNBConfigTransferResponse_protocolExtensions__item__id_tab_val_Extension_0), (u'presence', u'optional')])], rr=[], ev=None, er=[])
     ___HNBConfigTransferResponse_protocolExtensions__item__id._const_tab = ____HNBConfigTransferResponse_protocolExtensions__item__id_tab
     ___HNBConfigTransferResponse_protocolExtensions__item__id._const_tab_at = None
-    ___HNBConfigTransferResponse_protocolExtensions__item__id._const_tab_id = 'id'
-    ___HNBConfigTransferResponse_protocolExtensions__item__criticality = ENUM(name='criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), ['criticality']))
+    ___HNBConfigTransferResponse_protocolExtensions__item__id._const_tab_id = u'id'
+    ___HNBConfigTransferResponse_protocolExtensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), [u'criticality']))
     ___HNBConfigTransferResponse_protocolExtensions__item__criticality._const_tab = ____HNBConfigTransferResponse_protocolExtensions__item__id_tab
-    ___HNBConfigTransferResponse_protocolExtensions__item__criticality._const_tab_at = ('..', 'id')
-    ___HNBConfigTransferResponse_protocolExtensions__item__criticality._const_tab_id = 'criticality'
-    ___HNBConfigTransferResponse_protocolExtensions__item__extensionValue = OPEN(name='extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), ['Extension']))
+    ___HNBConfigTransferResponse_protocolExtensions__item__criticality._const_tab_at = ('..', u'id')
+    ___HNBConfigTransferResponse_protocolExtensions__item__criticality._const_tab_id = u'criticality'
+    ___HNBConfigTransferResponse_protocolExtensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), [u'Extension']))
     ___HNBConfigTransferResponse_protocolExtensions__item__extensionValue._const_tab = ____HNBConfigTransferResponse_protocolExtensions__item__id_tab
-    ___HNBConfigTransferResponse_protocolExtensions__item__extensionValue._const_tab_at = ('..', 'id')
-    ___HNBConfigTransferResponse_protocolExtensions__item__extensionValue._const_tab_id = 'Extension'
+    ___HNBConfigTransferResponse_protocolExtensions__item__extensionValue._const_tab_at = ('..', u'id')
+    ___HNBConfigTransferResponse_protocolExtensions__item__extensionValue._const_tab_id = u'Extension'
     __HNBConfigTransferResponse_protocolExtensions__item_._cont = ASN1Dict([
-        ('id', ___HNBConfigTransferResponse_protocolExtensions__item__id),
-        ('criticality', ___HNBConfigTransferResponse_protocolExtensions__item__criticality),
-        ('extensionValue', ___HNBConfigTransferResponse_protocolExtensions__item__extensionValue),
+        (u'id', ___HNBConfigTransferResponse_protocolExtensions__item__id),
+        (u'criticality', ___HNBConfigTransferResponse_protocolExtensions__item__criticality),
+        (u'extensionValue', ___HNBConfigTransferResponse_protocolExtensions__item__extensionValue),
         ])
     __HNBConfigTransferResponse_protocolExtensions__item_._ext = None
     _HNBConfigTransferResponse_protocolExtensions._cont = __HNBConfigTransferResponse_protocolExtensions__item_
     _HNBConfigTransferResponse_protocolExtensions._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=65535)], ev=None, er=[])
     HNBConfigTransferResponse._cont = ASN1Dict([
-        ('protocolIEs', _HNBConfigTransferResponse_protocolIEs),
-        ('protocolExtensions', _HNBConfigTransferResponse_protocolExtensions),
+        (u'protocolIEs', _HNBConfigTransferResponse_protocolIEs),
+        (u'protocolExtensions', _HNBConfigTransferResponse_protocolExtensions),
         ])
     HNBConfigTransferResponse._ext = []
     
     #-----< HNBConfigTransferResponseIEs >-----#
-    HNBConfigTransferResponseIEs = CLASS(name='HNBConfigTransferResponseIEs', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-IES')))
-    _HNBConfigTransferResponseIEs_val_Value_0 = SEQ_OF(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'NeighbourInfoList')))
-    HNBConfigTransferResponseIEs._val = ASN1Set(rv=[dict([('id', 27), ('criticality', 'reject'), ('Value', _HNBConfigTransferResponseIEs_val_Value_0), ('presence', 'mandatory')])], rr=[], ev=[], er=[])
+    HNBConfigTransferResponseIEs = CLASS(name=u'HNBConfigTransferResponseIEs', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-IES')))
+    _HNBConfigTransferResponseIEs_val_Value_0 = SEQ_OF(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'NeighbourInfoList')))
+    HNBConfigTransferResponseIEs._val = ASN1Set(rv=[dict([(u'id', 27), (u'criticality', u'reject'), (u'Value', _HNBConfigTransferResponseIEs_val_Value_0), (u'presence', u'mandatory')])], rr=[], ev=[], er=[])
     
     #-----< HNBConfigTransferResponseExtensions >-----#
-    HNBConfigTransferResponseExtensions = CLASS(name='HNBConfigTransferResponseExtensions', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION')))
-    _HNBConfigTransferResponseExtensions_val_Extension_0 = SEQ_OF(name='Extension', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'AdditionalNeighbourInfoList')))
-    HNBConfigTransferResponseExtensions._val = ASN1Set(rv=[dict([('id', 48), ('criticality', 'ignore'), ('Extension', _HNBConfigTransferResponseExtensions_val_Extension_0), ('presence', 'optional')])], rr=[], ev=[], er=[])
+    HNBConfigTransferResponseExtensions = CLASS(name=u'HNBConfigTransferResponseExtensions', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION')))
+    _HNBConfigTransferResponseExtensions_val_Extension_0 = SEQ_OF(name=u'Extension', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'AdditionalNeighbourInfoList')))
+    HNBConfigTransferResponseExtensions._val = ASN1Set(rv=[dict([(u'id', 48), (u'criticality', u'ignore'), (u'Extension', _HNBConfigTransferResponseExtensions_val_Extension_0), (u'presence', u'optional')])], rr=[], ev=[], er=[])
     
     #-----< RelocationComplete >-----#
-    RelocationComplete = SEQ(name='RelocationComplete', mode=MODE_TYPE)
-    _RelocationComplete_protocolIEs = SEQ_OF(name='protocolIEs', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-Containers', 'ProtocolIE-Container')))
+    RelocationComplete = SEQ(name=u'RelocationComplete', mode=MODE_TYPE)
+    _RelocationComplete_protocolIEs = SEQ_OF(name=u'protocolIEs', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-Containers', 'ProtocolIE-Container')))
     __RelocationComplete_protocolIEs__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-Containers', 'ProtocolIE-Field')))
-    ___RelocationComplete_protocolIEs__item__id = INT(name='id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-IES'), ['id']))
+    ___RelocationComplete_protocolIEs__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-IES'), [u'id']))
     ____RelocationComplete_protocolIEs__item__id_tab = CLASS(name='_tab_HNBAP-PROTOCOL-IES', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-IES')))
-    _____RelocationComplete_protocolIEs__item__id_tab_val_Value_0 = BIT_STR(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'Context-ID')))
-    ____RelocationComplete_protocolIEs__item__id_tab._val = ASN1Set(rv=[dict([('id', 4), ('criticality', 'ignore'), ('Value', _____RelocationComplete_protocolIEs__item__id_tab_val_Value_0), ('presence', 'mandatory')])], rr=[], ev=None, er=[])
+    _____RelocationComplete_protocolIEs__item__id_tab_val_Value_0 = BIT_STR(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'Context-ID')))
+    ____RelocationComplete_protocolIEs__item__id_tab._val = ASN1Set(rv=[dict([(u'id', 4), (u'criticality', u'ignore'), (u'Value', _____RelocationComplete_protocolIEs__item__id_tab_val_Value_0), (u'presence', u'mandatory')])], rr=[], ev=None, er=[])
     ___RelocationComplete_protocolIEs__item__id._const_tab = ____RelocationComplete_protocolIEs__item__id_tab
     ___RelocationComplete_protocolIEs__item__id._const_tab_at = None
-    ___RelocationComplete_protocolIEs__item__id._const_tab_id = 'id'
-    ___RelocationComplete_protocolIEs__item__criticality = ENUM(name='criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-IES'), ['criticality']))
+    ___RelocationComplete_protocolIEs__item__id._const_tab_id = u'id'
+    ___RelocationComplete_protocolIEs__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-IES'), [u'criticality']))
     ___RelocationComplete_protocolIEs__item__criticality._const_tab = ____RelocationComplete_protocolIEs__item__id_tab
-    ___RelocationComplete_protocolIEs__item__criticality._const_tab_at = ('..', 'id')
-    ___RelocationComplete_protocolIEs__item__criticality._const_tab_id = 'criticality'
-    ___RelocationComplete_protocolIEs__item__value = OPEN(name='value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-IES'), ['Value']))
+    ___RelocationComplete_protocolIEs__item__criticality._const_tab_at = ('..', u'id')
+    ___RelocationComplete_protocolIEs__item__criticality._const_tab_id = u'criticality'
+    ___RelocationComplete_protocolIEs__item__value = OPEN(name=u'value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-IES'), [u'Value']))
     ___RelocationComplete_protocolIEs__item__value._const_tab = ____RelocationComplete_protocolIEs__item__id_tab
-    ___RelocationComplete_protocolIEs__item__value._const_tab_at = ('..', 'id')
-    ___RelocationComplete_protocolIEs__item__value._const_tab_id = 'Value'
+    ___RelocationComplete_protocolIEs__item__value._const_tab_at = ('..', u'id')
+    ___RelocationComplete_protocolIEs__item__value._const_tab_id = u'Value'
     __RelocationComplete_protocolIEs__item_._cont = ASN1Dict([
-        ('id', ___RelocationComplete_protocolIEs__item__id),
-        ('criticality', ___RelocationComplete_protocolIEs__item__criticality),
-        ('value', ___RelocationComplete_protocolIEs__item__value),
+        (u'id', ___RelocationComplete_protocolIEs__item__id),
+        (u'criticality', ___RelocationComplete_protocolIEs__item__criticality),
+        (u'value', ___RelocationComplete_protocolIEs__item__value),
         ])
     __RelocationComplete_protocolIEs__item_._ext = None
     _RelocationComplete_protocolIEs._cont = __RelocationComplete_protocolIEs__item_
     _RelocationComplete_protocolIEs._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=65535)], ev=None, er=[])
-    _RelocationComplete_protocolExtensions = SEQ_OF(name='protocolExtensions', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-Containers', 'ProtocolExtensionContainer')), opt=True)
+    _RelocationComplete_protocolExtensions = SEQ_OF(name=u'protocolExtensions', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-Containers', 'ProtocolExtensionContainer')), opt=True)
     __RelocationComplete_protocolExtensions__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-Containers', 'ProtocolExtensionField')))
-    ___RelocationComplete_protocolExtensions__item__id = INT(name='id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), ['id']))
+    ___RelocationComplete_protocolExtensions__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), [u'id']))
     ____RelocationComplete_protocolExtensions__item__id_tab = CLASS(name='_tab_HNBAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION')))
     ____RelocationComplete_protocolExtensions__item__id_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___RelocationComplete_protocolExtensions__item__id._const_tab = ____RelocationComplete_protocolExtensions__item__id_tab
     ___RelocationComplete_protocolExtensions__item__id._const_tab_at = None
-    ___RelocationComplete_protocolExtensions__item__id._const_tab_id = 'id'
-    ___RelocationComplete_protocolExtensions__item__criticality = ENUM(name='criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), ['criticality']))
+    ___RelocationComplete_protocolExtensions__item__id._const_tab_id = u'id'
+    ___RelocationComplete_protocolExtensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), [u'criticality']))
     ____RelocationComplete_protocolExtensions__item__criticality_tab = CLASS(name='_tab_HNBAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION')))
     ____RelocationComplete_protocolExtensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___RelocationComplete_protocolExtensions__item__criticality._const_tab = ____RelocationComplete_protocolExtensions__item__criticality_tab
-    ___RelocationComplete_protocolExtensions__item__criticality._const_tab_at = ('..', 'id')
-    ___RelocationComplete_protocolExtensions__item__criticality._const_tab_id = 'criticality'
-    ___RelocationComplete_protocolExtensions__item__extensionValue = OPEN(name='extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), ['Extension']))
+    ___RelocationComplete_protocolExtensions__item__criticality._const_tab_at = ('..', u'id')
+    ___RelocationComplete_protocolExtensions__item__criticality._const_tab_id = u'criticality'
+    ___RelocationComplete_protocolExtensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), [u'Extension']))
     ____RelocationComplete_protocolExtensions__item__extensionValue_tab = CLASS(name='_tab_HNBAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION')))
     ____RelocationComplete_protocolExtensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___RelocationComplete_protocolExtensions__item__extensionValue._const_tab = ____RelocationComplete_protocolExtensions__item__extensionValue_tab
-    ___RelocationComplete_protocolExtensions__item__extensionValue._const_tab_at = ('..', 'id')
-    ___RelocationComplete_protocolExtensions__item__extensionValue._const_tab_id = 'Extension'
+    ___RelocationComplete_protocolExtensions__item__extensionValue._const_tab_at = ('..', u'id')
+    ___RelocationComplete_protocolExtensions__item__extensionValue._const_tab_id = u'Extension'
     __RelocationComplete_protocolExtensions__item_._cont = ASN1Dict([
-        ('id', ___RelocationComplete_protocolExtensions__item__id),
-        ('criticality', ___RelocationComplete_protocolExtensions__item__criticality),
-        ('extensionValue', ___RelocationComplete_protocolExtensions__item__extensionValue),
+        (u'id', ___RelocationComplete_protocolExtensions__item__id),
+        (u'criticality', ___RelocationComplete_protocolExtensions__item__criticality),
+        (u'extensionValue', ___RelocationComplete_protocolExtensions__item__extensionValue),
         ])
     __RelocationComplete_protocolExtensions__item_._ext = None
     _RelocationComplete_protocolExtensions._cont = __RelocationComplete_protocolExtensions__item_
     _RelocationComplete_protocolExtensions._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=65535)], ev=None, er=[])
     RelocationComplete._cont = ASN1Dict([
-        ('protocolIEs', _RelocationComplete_protocolIEs),
-        ('protocolExtensions', _RelocationComplete_protocolExtensions),
+        (u'protocolIEs', _RelocationComplete_protocolIEs),
+        (u'protocolExtensions', _RelocationComplete_protocolExtensions),
         ])
     RelocationComplete._ext = []
     
     #-----< RelocationCompleteIEs >-----#
-    RelocationCompleteIEs = CLASS(name='RelocationCompleteIEs', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-IES')))
-    _RelocationCompleteIEs_val_Value_0 = BIT_STR(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'Context-ID')))
-    RelocationCompleteIEs._val = ASN1Set(rv=[dict([('id', 4), ('criticality', 'ignore'), ('Value', _RelocationCompleteIEs_val_Value_0), ('presence', 'mandatory')])], rr=[], ev=[], er=[])
+    RelocationCompleteIEs = CLASS(name=u'RelocationCompleteIEs', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-IES')))
+    _RelocationCompleteIEs_val_Value_0 = BIT_STR(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'Context-ID')))
+    RelocationCompleteIEs._val = ASN1Set(rv=[dict([(u'id', 4), (u'criticality', u'ignore'), (u'Value', _RelocationCompleteIEs_val_Value_0), (u'presence', u'mandatory')])], rr=[], ev=[], er=[])
     
     #-----< RelocationCompleteExtensions >-----#
-    RelocationCompleteExtensions = CLASS(name='RelocationCompleteExtensions', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION')))
+    RelocationCompleteExtensions = CLASS(name=u'RelocationCompleteExtensions', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION')))
     RelocationCompleteExtensions._val = ASN1Set(rv=[], rr=[], ev=[], er=[])
     
     #-----< ErrorIndication >-----#
-    ErrorIndication = SEQ(name='ErrorIndication', mode=MODE_TYPE)
-    _ErrorIndication_protocolIEs = SEQ_OF(name='protocolIEs', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-Containers', 'ProtocolIE-Container')))
+    ErrorIndication = SEQ(name=u'ErrorIndication', mode=MODE_TYPE)
+    _ErrorIndication_protocolIEs = SEQ_OF(name=u'protocolIEs', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-Containers', 'ProtocolIE-Container')))
     __ErrorIndication_protocolIEs__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-Containers', 'ProtocolIE-Field')))
-    ___ErrorIndication_protocolIEs__item__id = INT(name='id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-IES'), ['id']))
+    ___ErrorIndication_protocolIEs__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-IES'), [u'id']))
     ____ErrorIndication_protocolIEs__item__id_tab = CLASS(name='_tab_HNBAP-PROTOCOL-IES', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-IES')))
-    _____ErrorIndication_protocolIEs__item__id_tab_val_Value_0 = CHOICE(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'Cause')))
-    _____ErrorIndication_protocolIEs__item__id_tab_val_Value_1 = SEQ(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'CriticalityDiagnostics')))
-    ____ErrorIndication_protocolIEs__item__id_tab._val = ASN1Set(rv=[dict([('id', 1), ('criticality', 'ignore'), ('Value', _____ErrorIndication_protocolIEs__item__id_tab_val_Value_0), ('presence', 'mandatory')]), dict([('id', 2), ('criticality', 'ignore'), ('Value', _____ErrorIndication_protocolIEs__item__id_tab_val_Value_1), ('presence', 'optional')])], rr=[], ev=None, er=[])
+    _____ErrorIndication_protocolIEs__item__id_tab_val_Value_0 = CHOICE(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'Cause')))
+    _____ErrorIndication_protocolIEs__item__id_tab_val_Value_1 = SEQ(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'CriticalityDiagnostics')))
+    ____ErrorIndication_protocolIEs__item__id_tab._val = ASN1Set(rv=[dict([(u'id', 1), (u'criticality', u'ignore'), (u'Value', _____ErrorIndication_protocolIEs__item__id_tab_val_Value_0), (u'presence', u'mandatory')]), dict([(u'id', 2), (u'criticality', u'ignore'), (u'Value', _____ErrorIndication_protocolIEs__item__id_tab_val_Value_1), (u'presence', u'optional')])], rr=[], ev=None, er=[])
     ___ErrorIndication_protocolIEs__item__id._const_tab = ____ErrorIndication_protocolIEs__item__id_tab
     ___ErrorIndication_protocolIEs__item__id._const_tab_at = None
-    ___ErrorIndication_protocolIEs__item__id._const_tab_id = 'id'
-    ___ErrorIndication_protocolIEs__item__criticality = ENUM(name='criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-IES'), ['criticality']))
+    ___ErrorIndication_protocolIEs__item__id._const_tab_id = u'id'
+    ___ErrorIndication_protocolIEs__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-IES'), [u'criticality']))
     ___ErrorIndication_protocolIEs__item__criticality._const_tab = ____ErrorIndication_protocolIEs__item__id_tab
-    ___ErrorIndication_protocolIEs__item__criticality._const_tab_at = ('..', 'id')
-    ___ErrorIndication_protocolIEs__item__criticality._const_tab_id = 'criticality'
-    ___ErrorIndication_protocolIEs__item__value = OPEN(name='value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-IES'), ['Value']))
+    ___ErrorIndication_protocolIEs__item__criticality._const_tab_at = ('..', u'id')
+    ___ErrorIndication_protocolIEs__item__criticality._const_tab_id = u'criticality'
+    ___ErrorIndication_protocolIEs__item__value = OPEN(name=u'value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-IES'), [u'Value']))
     ___ErrorIndication_protocolIEs__item__value._const_tab = ____ErrorIndication_protocolIEs__item__id_tab
-    ___ErrorIndication_protocolIEs__item__value._const_tab_at = ('..', 'id')
-    ___ErrorIndication_protocolIEs__item__value._const_tab_id = 'Value'
+    ___ErrorIndication_protocolIEs__item__value._const_tab_at = ('..', u'id')
+    ___ErrorIndication_protocolIEs__item__value._const_tab_id = u'Value'
     __ErrorIndication_protocolIEs__item_._cont = ASN1Dict([
-        ('id', ___ErrorIndication_protocolIEs__item__id),
-        ('criticality', ___ErrorIndication_protocolIEs__item__criticality),
-        ('value', ___ErrorIndication_protocolIEs__item__value),
+        (u'id', ___ErrorIndication_protocolIEs__item__id),
+        (u'criticality', ___ErrorIndication_protocolIEs__item__criticality),
+        (u'value', ___ErrorIndication_protocolIEs__item__value),
         ])
     __ErrorIndication_protocolIEs__item_._ext = None
     _ErrorIndication_protocolIEs._cont = __ErrorIndication_protocolIEs__item_
     _ErrorIndication_protocolIEs._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=65535)], ev=None, er=[])
-    _ErrorIndication_protocolExtensions = SEQ_OF(name='protocolExtensions', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-Containers', 'ProtocolExtensionContainer')), opt=True)
+    _ErrorIndication_protocolExtensions = SEQ_OF(name=u'protocolExtensions', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-Containers', 'ProtocolExtensionContainer')), opt=True)
     __ErrorIndication_protocolExtensions__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-Containers', 'ProtocolExtensionField')))
-    ___ErrorIndication_protocolExtensions__item__id = INT(name='id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), ['id']))
+    ___ErrorIndication_protocolExtensions__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), [u'id']))
     ____ErrorIndication_protocolExtensions__item__id_tab = CLASS(name='_tab_HNBAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION')))
     ____ErrorIndication_protocolExtensions__item__id_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___ErrorIndication_protocolExtensions__item__id._const_tab = ____ErrorIndication_protocolExtensions__item__id_tab
     ___ErrorIndication_protocolExtensions__item__id._const_tab_at = None
-    ___ErrorIndication_protocolExtensions__item__id._const_tab_id = 'id'
-    ___ErrorIndication_protocolExtensions__item__criticality = ENUM(name='criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), ['criticality']))
+    ___ErrorIndication_protocolExtensions__item__id._const_tab_id = u'id'
+    ___ErrorIndication_protocolExtensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), [u'criticality']))
     ____ErrorIndication_protocolExtensions__item__criticality_tab = CLASS(name='_tab_HNBAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION')))
     ____ErrorIndication_protocolExtensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___ErrorIndication_protocolExtensions__item__criticality._const_tab = ____ErrorIndication_protocolExtensions__item__criticality_tab
-    ___ErrorIndication_protocolExtensions__item__criticality._const_tab_at = ('..', 'id')
-    ___ErrorIndication_protocolExtensions__item__criticality._const_tab_id = 'criticality'
-    ___ErrorIndication_protocolExtensions__item__extensionValue = OPEN(name='extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), ['Extension']))
+    ___ErrorIndication_protocolExtensions__item__criticality._const_tab_at = ('..', u'id')
+    ___ErrorIndication_protocolExtensions__item__criticality._const_tab_id = u'criticality'
+    ___ErrorIndication_protocolExtensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), [u'Extension']))
     ____ErrorIndication_protocolExtensions__item__extensionValue_tab = CLASS(name='_tab_HNBAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION')))
     ____ErrorIndication_protocolExtensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___ErrorIndication_protocolExtensions__item__extensionValue._const_tab = ____ErrorIndication_protocolExtensions__item__extensionValue_tab
-    ___ErrorIndication_protocolExtensions__item__extensionValue._const_tab_at = ('..', 'id')
-    ___ErrorIndication_protocolExtensions__item__extensionValue._const_tab_id = 'Extension'
+    ___ErrorIndication_protocolExtensions__item__extensionValue._const_tab_at = ('..', u'id')
+    ___ErrorIndication_protocolExtensions__item__extensionValue._const_tab_id = u'Extension'
     __ErrorIndication_protocolExtensions__item_._cont = ASN1Dict([
-        ('id', ___ErrorIndication_protocolExtensions__item__id),
-        ('criticality', ___ErrorIndication_protocolExtensions__item__criticality),
-        ('extensionValue', ___ErrorIndication_protocolExtensions__item__extensionValue),
+        (u'id', ___ErrorIndication_protocolExtensions__item__id),
+        (u'criticality', ___ErrorIndication_protocolExtensions__item__criticality),
+        (u'extensionValue', ___ErrorIndication_protocolExtensions__item__extensionValue),
         ])
     __ErrorIndication_protocolExtensions__item_._ext = None
     _ErrorIndication_protocolExtensions._cont = __ErrorIndication_protocolExtensions__item_
     _ErrorIndication_protocolExtensions._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=65535)], ev=None, er=[])
     ErrorIndication._cont = ASN1Dict([
-        ('protocolIEs', _ErrorIndication_protocolIEs),
-        ('protocolExtensions', _ErrorIndication_protocolExtensions),
+        (u'protocolIEs', _ErrorIndication_protocolIEs),
+        (u'protocolExtensions', _ErrorIndication_protocolExtensions),
         ])
     ErrorIndication._ext = []
     
     #-----< ErrorIndicationIEs >-----#
-    ErrorIndicationIEs = CLASS(name='ErrorIndicationIEs', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-IES')))
-    _ErrorIndicationIEs_val_Value_0 = CHOICE(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'Cause')))
-    _ErrorIndicationIEs_val_Value_1 = SEQ(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'CriticalityDiagnostics')))
-    ErrorIndicationIEs._val = ASN1Set(rv=[dict([('id', 1), ('criticality', 'ignore'), ('Value', _ErrorIndicationIEs_val_Value_0), ('presence', 'mandatory')]), dict([('id', 2), ('criticality', 'ignore'), ('Value', _ErrorIndicationIEs_val_Value_1), ('presence', 'optional')])], rr=[], ev=[], er=[])
+    ErrorIndicationIEs = CLASS(name=u'ErrorIndicationIEs', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-IES')))
+    _ErrorIndicationIEs_val_Value_0 = CHOICE(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'Cause')))
+    _ErrorIndicationIEs_val_Value_1 = SEQ(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'CriticalityDiagnostics')))
+    ErrorIndicationIEs._val = ASN1Set(rv=[dict([(u'id', 1), (u'criticality', u'ignore'), (u'Value', _ErrorIndicationIEs_val_Value_0), (u'presence', u'mandatory')]), dict([(u'id', 2), (u'criticality', u'ignore'), (u'Value', _ErrorIndicationIEs_val_Value_1), (u'presence', u'optional')])], rr=[], ev=[], er=[])
     
     #-----< ErrorIndicationExtensions >-----#
-    ErrorIndicationExtensions = CLASS(name='ErrorIndicationExtensions', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION')))
+    ErrorIndicationExtensions = CLASS(name=u'ErrorIndicationExtensions', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION')))
     ErrorIndicationExtensions._val = ASN1Set(rv=[], rr=[], ev=[], er=[])
     
     #-----< PrivateMessage >-----#
-    PrivateMessage = SEQ(name='PrivateMessage', mode=MODE_TYPE)
-    _PrivateMessage_privateIEs = SEQ_OF(name='privateIEs', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-Containers', 'PrivateIE-Container')))
+    PrivateMessage = SEQ(name=u'PrivateMessage', mode=MODE_TYPE)
+    _PrivateMessage_privateIEs = SEQ_OF(name=u'privateIEs', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-Containers', 'PrivateIE-Container')))
     __PrivateMessage_privateIEs__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-Containers', 'PrivateIE-Field')))
-    ___PrivateMessage_privateIEs__item__id = CHOICE(name='id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PRIVATE-IES'), ['id']))
+    ___PrivateMessage_privateIEs__item__id = CHOICE(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PRIVATE-IES'), [u'id']))
     ____PrivateMessage_privateIEs__item__id_tab = CLASS(name='_tab_HNBAP-PRIVATE-IES', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PRIVATE-IES')))
     ____PrivateMessage_privateIEs__item__id_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___PrivateMessage_privateIEs__item__id._const_tab = ____PrivateMessage_privateIEs__item__id_tab
     ___PrivateMessage_privateIEs__item__id._const_tab_at = None
-    ___PrivateMessage_privateIEs__item__id._const_tab_id = 'id'
-    ___PrivateMessage_privateIEs__item__criticality = ENUM(name='criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PRIVATE-IES'), ['criticality']))
+    ___PrivateMessage_privateIEs__item__id._const_tab_id = u'id'
+    ___PrivateMessage_privateIEs__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PRIVATE-IES'), [u'criticality']))
     ____PrivateMessage_privateIEs__item__criticality_tab = CLASS(name='_tab_HNBAP-PRIVATE-IES', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PRIVATE-IES')))
     ____PrivateMessage_privateIEs__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___PrivateMessage_privateIEs__item__criticality._const_tab = ____PrivateMessage_privateIEs__item__criticality_tab
-    ___PrivateMessage_privateIEs__item__criticality._const_tab_at = ('..', 'id')
-    ___PrivateMessage_privateIEs__item__criticality._const_tab_id = 'criticality'
-    ___PrivateMessage_privateIEs__item__value = OPEN(name='value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PRIVATE-IES'), ['Value']))
+    ___PrivateMessage_privateIEs__item__criticality._const_tab_at = ('..', u'id')
+    ___PrivateMessage_privateIEs__item__criticality._const_tab_id = u'criticality'
+    ___PrivateMessage_privateIEs__item__value = OPEN(name=u'value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PRIVATE-IES'), [u'Value']))
     ____PrivateMessage_privateIEs__item__value_tab = CLASS(name='_tab_HNBAP-PRIVATE-IES', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PRIVATE-IES')))
     ____PrivateMessage_privateIEs__item__value_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___PrivateMessage_privateIEs__item__value._const_tab = ____PrivateMessage_privateIEs__item__value_tab
-    ___PrivateMessage_privateIEs__item__value._const_tab_at = ('..', 'id')
-    ___PrivateMessage_privateIEs__item__value._const_tab_id = 'Value'
+    ___PrivateMessage_privateIEs__item__value._const_tab_at = ('..', u'id')
+    ___PrivateMessage_privateIEs__item__value._const_tab_id = u'Value'
     __PrivateMessage_privateIEs__item_._cont = ASN1Dict([
-        ('id', ___PrivateMessage_privateIEs__item__id),
-        ('criticality', ___PrivateMessage_privateIEs__item__criticality),
-        ('value', ___PrivateMessage_privateIEs__item__value),
+        (u'id', ___PrivateMessage_privateIEs__item__id),
+        (u'criticality', ___PrivateMessage_privateIEs__item__criticality),
+        (u'value', ___PrivateMessage_privateIEs__item__value),
         ])
     __PrivateMessage_privateIEs__item_._ext = None
     _PrivateMessage_privateIEs._cont = __PrivateMessage_privateIEs__item_
     _PrivateMessage_privateIEs._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=65535)], ev=None, er=[])
     PrivateMessage._cont = ASN1Dict([
-        ('privateIEs', _PrivateMessage_privateIEs),
+        (u'privateIEs', _PrivateMessage_privateIEs),
         ])
     PrivateMessage._ext = []
     
     #-----< PrivateMessage-IEs >-----#
-    PrivateMessage_IEs = CLASS(name='PrivateMessage-IEs', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PRIVATE-IES')))
+    PrivateMessage_IEs = CLASS(name=u'PrivateMessage-IEs', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PRIVATE-IES')))
     PrivateMessage_IEs._val = ASN1Set(rv=[], rr=[], ev=[], er=[])
     
     #-----< U-RNTIQueryRequest >-----#
-    U_RNTIQueryRequest = SEQ(name='U-RNTIQueryRequest', mode=MODE_TYPE)
-    _U_RNTIQueryRequest_protocolIEs = SEQ_OF(name='protocolIEs', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-Containers', 'ProtocolIE-Container')))
+    U_RNTIQueryRequest = SEQ(name=u'U-RNTIQueryRequest', mode=MODE_TYPE)
+    _U_RNTIQueryRequest_protocolIEs = SEQ_OF(name=u'protocolIEs', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-Containers', 'ProtocolIE-Container')))
     __U_RNTIQueryRequest_protocolIEs__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-Containers', 'ProtocolIE-Field')))
-    ___U_RNTIQueryRequest_protocolIEs__item__id = INT(name='id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-IES'), ['id']))
+    ___U_RNTIQueryRequest_protocolIEs__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-IES'), [u'id']))
     ____U_RNTIQueryRequest_protocolIEs__item__id_tab = CLASS(name='_tab_HNBAP-PROTOCOL-IES', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-IES')))
-    _____U_RNTIQueryRequest_protocolIEs__item__id_tab_val_Value_0 = BIT_STR(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'U-RNTI')))
-    ____U_RNTIQueryRequest_protocolIEs__item__id_tab._val = ASN1Set(rv=[dict([('id', 49), ('criticality', 'reject'), ('Value', _____U_RNTIQueryRequest_protocolIEs__item__id_tab_val_Value_0), ('presence', 'mandatory')])], rr=[], ev=None, er=[])
+    _____U_RNTIQueryRequest_protocolIEs__item__id_tab_val_Value_0 = BIT_STR(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'U-RNTI')))
+    ____U_RNTIQueryRequest_protocolIEs__item__id_tab._val = ASN1Set(rv=[dict([(u'id', 49), (u'criticality', u'reject'), (u'Value', _____U_RNTIQueryRequest_protocolIEs__item__id_tab_val_Value_0), (u'presence', u'mandatory')])], rr=[], ev=None, er=[])
     ___U_RNTIQueryRequest_protocolIEs__item__id._const_tab = ____U_RNTIQueryRequest_protocolIEs__item__id_tab
     ___U_RNTIQueryRequest_protocolIEs__item__id._const_tab_at = None
-    ___U_RNTIQueryRequest_protocolIEs__item__id._const_tab_id = 'id'
-    ___U_RNTIQueryRequest_protocolIEs__item__criticality = ENUM(name='criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-IES'), ['criticality']))
+    ___U_RNTIQueryRequest_protocolIEs__item__id._const_tab_id = u'id'
+    ___U_RNTIQueryRequest_protocolIEs__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-IES'), [u'criticality']))
     ___U_RNTIQueryRequest_protocolIEs__item__criticality._const_tab = ____U_RNTIQueryRequest_protocolIEs__item__id_tab
-    ___U_RNTIQueryRequest_protocolIEs__item__criticality._const_tab_at = ('..', 'id')
-    ___U_RNTIQueryRequest_protocolIEs__item__criticality._const_tab_id = 'criticality'
-    ___U_RNTIQueryRequest_protocolIEs__item__value = OPEN(name='value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-IES'), ['Value']))
+    ___U_RNTIQueryRequest_protocolIEs__item__criticality._const_tab_at = ('..', u'id')
+    ___U_RNTIQueryRequest_protocolIEs__item__criticality._const_tab_id = u'criticality'
+    ___U_RNTIQueryRequest_protocolIEs__item__value = OPEN(name=u'value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-IES'), [u'Value']))
     ___U_RNTIQueryRequest_protocolIEs__item__value._const_tab = ____U_RNTIQueryRequest_protocolIEs__item__id_tab
-    ___U_RNTIQueryRequest_protocolIEs__item__value._const_tab_at = ('..', 'id')
-    ___U_RNTIQueryRequest_protocolIEs__item__value._const_tab_id = 'Value'
+    ___U_RNTIQueryRequest_protocolIEs__item__value._const_tab_at = ('..', u'id')
+    ___U_RNTIQueryRequest_protocolIEs__item__value._const_tab_id = u'Value'
     __U_RNTIQueryRequest_protocolIEs__item_._cont = ASN1Dict([
-        ('id', ___U_RNTIQueryRequest_protocolIEs__item__id),
-        ('criticality', ___U_RNTIQueryRequest_protocolIEs__item__criticality),
-        ('value', ___U_RNTIQueryRequest_protocolIEs__item__value),
+        (u'id', ___U_RNTIQueryRequest_protocolIEs__item__id),
+        (u'criticality', ___U_RNTIQueryRequest_protocolIEs__item__criticality),
+        (u'value', ___U_RNTIQueryRequest_protocolIEs__item__value),
         ])
     __U_RNTIQueryRequest_protocolIEs__item_._ext = None
     _U_RNTIQueryRequest_protocolIEs._cont = __U_RNTIQueryRequest_protocolIEs__item_
     _U_RNTIQueryRequest_protocolIEs._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=65535)], ev=None, er=[])
-    _U_RNTIQueryRequest_protocolExtensions = SEQ_OF(name='protocolExtensions', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-Containers', 'ProtocolExtensionContainer')), opt=True)
+    _U_RNTIQueryRequest_protocolExtensions = SEQ_OF(name=u'protocolExtensions', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-Containers', 'ProtocolExtensionContainer')), opt=True)
     __U_RNTIQueryRequest_protocolExtensions__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-Containers', 'ProtocolExtensionField')))
-    ___U_RNTIQueryRequest_protocolExtensions__item__id = INT(name='id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), ['id']))
+    ___U_RNTIQueryRequest_protocolExtensions__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), [u'id']))
     ____U_RNTIQueryRequest_protocolExtensions__item__id_tab = CLASS(name='_tab_HNBAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION')))
     ____U_RNTIQueryRequest_protocolExtensions__item__id_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___U_RNTIQueryRequest_protocolExtensions__item__id._const_tab = ____U_RNTIQueryRequest_protocolExtensions__item__id_tab
     ___U_RNTIQueryRequest_protocolExtensions__item__id._const_tab_at = None
-    ___U_RNTIQueryRequest_protocolExtensions__item__id._const_tab_id = 'id'
-    ___U_RNTIQueryRequest_protocolExtensions__item__criticality = ENUM(name='criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), ['criticality']))
+    ___U_RNTIQueryRequest_protocolExtensions__item__id._const_tab_id = u'id'
+    ___U_RNTIQueryRequest_protocolExtensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), [u'criticality']))
     ____U_RNTIQueryRequest_protocolExtensions__item__criticality_tab = CLASS(name='_tab_HNBAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION')))
     ____U_RNTIQueryRequest_protocolExtensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___U_RNTIQueryRequest_protocolExtensions__item__criticality._const_tab = ____U_RNTIQueryRequest_protocolExtensions__item__criticality_tab
-    ___U_RNTIQueryRequest_protocolExtensions__item__criticality._const_tab_at = ('..', 'id')
-    ___U_RNTIQueryRequest_protocolExtensions__item__criticality._const_tab_id = 'criticality'
-    ___U_RNTIQueryRequest_protocolExtensions__item__extensionValue = OPEN(name='extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), ['Extension']))
+    ___U_RNTIQueryRequest_protocolExtensions__item__criticality._const_tab_at = ('..', u'id')
+    ___U_RNTIQueryRequest_protocolExtensions__item__criticality._const_tab_id = u'criticality'
+    ___U_RNTIQueryRequest_protocolExtensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), [u'Extension']))
     ____U_RNTIQueryRequest_protocolExtensions__item__extensionValue_tab = CLASS(name='_tab_HNBAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION')))
     ____U_RNTIQueryRequest_protocolExtensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___U_RNTIQueryRequest_protocolExtensions__item__extensionValue._const_tab = ____U_RNTIQueryRequest_protocolExtensions__item__extensionValue_tab
-    ___U_RNTIQueryRequest_protocolExtensions__item__extensionValue._const_tab_at = ('..', 'id')
-    ___U_RNTIQueryRequest_protocolExtensions__item__extensionValue._const_tab_id = 'Extension'
+    ___U_RNTIQueryRequest_protocolExtensions__item__extensionValue._const_tab_at = ('..', u'id')
+    ___U_RNTIQueryRequest_protocolExtensions__item__extensionValue._const_tab_id = u'Extension'
     __U_RNTIQueryRequest_protocolExtensions__item_._cont = ASN1Dict([
-        ('id', ___U_RNTIQueryRequest_protocolExtensions__item__id),
-        ('criticality', ___U_RNTIQueryRequest_protocolExtensions__item__criticality),
-        ('extensionValue', ___U_RNTIQueryRequest_protocolExtensions__item__extensionValue),
+        (u'id', ___U_RNTIQueryRequest_protocolExtensions__item__id),
+        (u'criticality', ___U_RNTIQueryRequest_protocolExtensions__item__criticality),
+        (u'extensionValue', ___U_RNTIQueryRequest_protocolExtensions__item__extensionValue),
         ])
     __U_RNTIQueryRequest_protocolExtensions__item_._ext = None
     _U_RNTIQueryRequest_protocolExtensions._cont = __U_RNTIQueryRequest_protocolExtensions__item_
     _U_RNTIQueryRequest_protocolExtensions._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=65535)], ev=None, er=[])
     U_RNTIQueryRequest._cont = ASN1Dict([
-        ('protocolIEs', _U_RNTIQueryRequest_protocolIEs),
-        ('protocolExtensions', _U_RNTIQueryRequest_protocolExtensions),
+        (u'protocolIEs', _U_RNTIQueryRequest_protocolIEs),
+        (u'protocolExtensions', _U_RNTIQueryRequest_protocolExtensions),
         ])
     U_RNTIQueryRequest._ext = []
     
     #-----< U-RNTIQueryRequestIEs >-----#
-    U_RNTIQueryRequestIEs = CLASS(name='U-RNTIQueryRequestIEs', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-IES')))
-    _U_RNTIQueryRequestIEs_val_Value_0 = BIT_STR(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'U-RNTI')))
-    U_RNTIQueryRequestIEs._val = ASN1Set(rv=[dict([('id', 49), ('criticality', 'reject'), ('Value', _U_RNTIQueryRequestIEs_val_Value_0), ('presence', 'mandatory')])], rr=[], ev=[], er=[])
+    U_RNTIQueryRequestIEs = CLASS(name=u'U-RNTIQueryRequestIEs', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-IES')))
+    _U_RNTIQueryRequestIEs_val_Value_0 = BIT_STR(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'U-RNTI')))
+    U_RNTIQueryRequestIEs._val = ASN1Set(rv=[dict([(u'id', 49), (u'criticality', u'reject'), (u'Value', _U_RNTIQueryRequestIEs_val_Value_0), (u'presence', u'mandatory')])], rr=[], ev=[], er=[])
     
     #-----< U-RNTIQueryRequestExtensions >-----#
-    U_RNTIQueryRequestExtensions = CLASS(name='U-RNTIQueryRequestExtensions', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION')))
+    U_RNTIQueryRequestExtensions = CLASS(name=u'U-RNTIQueryRequestExtensions', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION')))
     U_RNTIQueryRequestExtensions._val = ASN1Set(rv=[], rr=[], ev=[], er=[])
     
     #-----< U-RNTIQueryResponse >-----#
-    U_RNTIQueryResponse = SEQ(name='U-RNTIQueryResponse', mode=MODE_TYPE)
-    _U_RNTIQueryResponse_protocolIEs = SEQ_OF(name='protocolIEs', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-Containers', 'ProtocolIE-Container')))
+    U_RNTIQueryResponse = SEQ(name=u'U-RNTIQueryResponse', mode=MODE_TYPE)
+    _U_RNTIQueryResponse_protocolIEs = SEQ_OF(name=u'protocolIEs', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-Containers', 'ProtocolIE-Container')))
     __U_RNTIQueryResponse_protocolIEs__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-Containers', 'ProtocolIE-Field')))
-    ___U_RNTIQueryResponse_protocolIEs__item__id = INT(name='id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-IES'), ['id']))
+    ___U_RNTIQueryResponse_protocolIEs__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-IES'), [u'id']))
     ____U_RNTIQueryResponse_protocolIEs__item__id_tab = CLASS(name='_tab_HNBAP-PROTOCOL-IES', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-IES')))
-    _____U_RNTIQueryResponse_protocolIEs__item__id_tab_val_Value_0 = CHOICE(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'HNB-GWResponse')))
-    ____U_RNTIQueryResponse_protocolIEs__item__id_tab._val = ASN1Set(rv=[dict([('id', 51), ('criticality', 'reject'), ('Value', _____U_RNTIQueryResponse_protocolIEs__item__id_tab_val_Value_0), ('presence', 'mandatory')])], rr=[], ev=None, er=[])
+    _____U_RNTIQueryResponse_protocolIEs__item__id_tab_val_Value_0 = CHOICE(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'HNB-GWResponse')))
+    ____U_RNTIQueryResponse_protocolIEs__item__id_tab._val = ASN1Set(rv=[dict([(u'id', 51), (u'criticality', u'reject'), (u'Value', _____U_RNTIQueryResponse_protocolIEs__item__id_tab_val_Value_0), (u'presence', u'mandatory')])], rr=[], ev=None, er=[])
     ___U_RNTIQueryResponse_protocolIEs__item__id._const_tab = ____U_RNTIQueryResponse_protocolIEs__item__id_tab
     ___U_RNTIQueryResponse_protocolIEs__item__id._const_tab_at = None
-    ___U_RNTIQueryResponse_protocolIEs__item__id._const_tab_id = 'id'
-    ___U_RNTIQueryResponse_protocolIEs__item__criticality = ENUM(name='criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-IES'), ['criticality']))
+    ___U_RNTIQueryResponse_protocolIEs__item__id._const_tab_id = u'id'
+    ___U_RNTIQueryResponse_protocolIEs__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-IES'), [u'criticality']))
     ___U_RNTIQueryResponse_protocolIEs__item__criticality._const_tab = ____U_RNTIQueryResponse_protocolIEs__item__id_tab
-    ___U_RNTIQueryResponse_protocolIEs__item__criticality._const_tab_at = ('..', 'id')
-    ___U_RNTIQueryResponse_protocolIEs__item__criticality._const_tab_id = 'criticality'
-    ___U_RNTIQueryResponse_protocolIEs__item__value = OPEN(name='value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-IES'), ['Value']))
+    ___U_RNTIQueryResponse_protocolIEs__item__criticality._const_tab_at = ('..', u'id')
+    ___U_RNTIQueryResponse_protocolIEs__item__criticality._const_tab_id = u'criticality'
+    ___U_RNTIQueryResponse_protocolIEs__item__value = OPEN(name=u'value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-IES'), [u'Value']))
     ___U_RNTIQueryResponse_protocolIEs__item__value._const_tab = ____U_RNTIQueryResponse_protocolIEs__item__id_tab
-    ___U_RNTIQueryResponse_protocolIEs__item__value._const_tab_at = ('..', 'id')
-    ___U_RNTIQueryResponse_protocolIEs__item__value._const_tab_id = 'Value'
+    ___U_RNTIQueryResponse_protocolIEs__item__value._const_tab_at = ('..', u'id')
+    ___U_RNTIQueryResponse_protocolIEs__item__value._const_tab_id = u'Value'
     __U_RNTIQueryResponse_protocolIEs__item_._cont = ASN1Dict([
-        ('id', ___U_RNTIQueryResponse_protocolIEs__item__id),
-        ('criticality', ___U_RNTIQueryResponse_protocolIEs__item__criticality),
-        ('value', ___U_RNTIQueryResponse_protocolIEs__item__value),
+        (u'id', ___U_RNTIQueryResponse_protocolIEs__item__id),
+        (u'criticality', ___U_RNTIQueryResponse_protocolIEs__item__criticality),
+        (u'value', ___U_RNTIQueryResponse_protocolIEs__item__value),
         ])
     __U_RNTIQueryResponse_protocolIEs__item_._ext = None
     _U_RNTIQueryResponse_protocolIEs._cont = __U_RNTIQueryResponse_protocolIEs__item_
     _U_RNTIQueryResponse_protocolIEs._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=65535)], ev=None, er=[])
-    _U_RNTIQueryResponse_protocolExtensions = SEQ_OF(name='protocolExtensions', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-Containers', 'ProtocolExtensionContainer')), opt=True)
+    _U_RNTIQueryResponse_protocolExtensions = SEQ_OF(name=u'protocolExtensions', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-Containers', 'ProtocolExtensionContainer')), opt=True)
     __U_RNTIQueryResponse_protocolExtensions__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-Containers', 'ProtocolExtensionField')))
-    ___U_RNTIQueryResponse_protocolExtensions__item__id = INT(name='id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), ['id']))
+    ___U_RNTIQueryResponse_protocolExtensions__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), [u'id']))
     ____U_RNTIQueryResponse_protocolExtensions__item__id_tab = CLASS(name='_tab_HNBAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION')))
     ____U_RNTIQueryResponse_protocolExtensions__item__id_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___U_RNTIQueryResponse_protocolExtensions__item__id._const_tab = ____U_RNTIQueryResponse_protocolExtensions__item__id_tab
     ___U_RNTIQueryResponse_protocolExtensions__item__id._const_tab_at = None
-    ___U_RNTIQueryResponse_protocolExtensions__item__id._const_tab_id = 'id'
-    ___U_RNTIQueryResponse_protocolExtensions__item__criticality = ENUM(name='criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), ['criticality']))
+    ___U_RNTIQueryResponse_protocolExtensions__item__id._const_tab_id = u'id'
+    ___U_RNTIQueryResponse_protocolExtensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), [u'criticality']))
     ____U_RNTIQueryResponse_protocolExtensions__item__criticality_tab = CLASS(name='_tab_HNBAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION')))
     ____U_RNTIQueryResponse_protocolExtensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___U_RNTIQueryResponse_protocolExtensions__item__criticality._const_tab = ____U_RNTIQueryResponse_protocolExtensions__item__criticality_tab
-    ___U_RNTIQueryResponse_protocolExtensions__item__criticality._const_tab_at = ('..', 'id')
-    ___U_RNTIQueryResponse_protocolExtensions__item__criticality._const_tab_id = 'criticality'
-    ___U_RNTIQueryResponse_protocolExtensions__item__extensionValue = OPEN(name='extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), ['Extension']))
+    ___U_RNTIQueryResponse_protocolExtensions__item__criticality._const_tab_at = ('..', u'id')
+    ___U_RNTIQueryResponse_protocolExtensions__item__criticality._const_tab_id = u'criticality'
+    ___U_RNTIQueryResponse_protocolExtensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION'), [u'Extension']))
     ____U_RNTIQueryResponse_protocolExtensions__item__extensionValue_tab = CLASS(name='_tab_HNBAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION')))
     ____U_RNTIQueryResponse_protocolExtensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___U_RNTIQueryResponse_protocolExtensions__item__extensionValue._const_tab = ____U_RNTIQueryResponse_protocolExtensions__item__extensionValue_tab
-    ___U_RNTIQueryResponse_protocolExtensions__item__extensionValue._const_tab_at = ('..', 'id')
-    ___U_RNTIQueryResponse_protocolExtensions__item__extensionValue._const_tab_id = 'Extension'
+    ___U_RNTIQueryResponse_protocolExtensions__item__extensionValue._const_tab_at = ('..', u'id')
+    ___U_RNTIQueryResponse_protocolExtensions__item__extensionValue._const_tab_id = u'Extension'
     __U_RNTIQueryResponse_protocolExtensions__item_._cont = ASN1Dict([
-        ('id', ___U_RNTIQueryResponse_protocolExtensions__item__id),
-        ('criticality', ___U_RNTIQueryResponse_protocolExtensions__item__criticality),
-        ('extensionValue', ___U_RNTIQueryResponse_protocolExtensions__item__extensionValue),
+        (u'id', ___U_RNTIQueryResponse_protocolExtensions__item__id),
+        (u'criticality', ___U_RNTIQueryResponse_protocolExtensions__item__criticality),
+        (u'extensionValue', ___U_RNTIQueryResponse_protocolExtensions__item__extensionValue),
         ])
     __U_RNTIQueryResponse_protocolExtensions__item_._ext = None
     _U_RNTIQueryResponse_protocolExtensions._cont = __U_RNTIQueryResponse_protocolExtensions__item_
     _U_RNTIQueryResponse_protocolExtensions._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=65535)], ev=None, er=[])
     U_RNTIQueryResponse._cont = ASN1Dict([
-        ('protocolIEs', _U_RNTIQueryResponse_protocolIEs),
-        ('protocolExtensions', _U_RNTIQueryResponse_protocolExtensions),
+        (u'protocolIEs', _U_RNTIQueryResponse_protocolIEs),
+        (u'protocolExtensions', _U_RNTIQueryResponse_protocolExtensions),
         ])
     U_RNTIQueryResponse._ext = []
     
     #-----< U-RNTIQueryResponseIEs >-----#
-    U_RNTIQueryResponseIEs = CLASS(name='U-RNTIQueryResponseIEs', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-IES')))
-    _U_RNTIQueryResponseIEs_val_Value_0 = CHOICE(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'HNB-GWResponse')))
-    U_RNTIQueryResponseIEs._val = ASN1Set(rv=[dict([('id', 51), ('criticality', 'reject'), ('Value', _U_RNTIQueryResponseIEs_val_Value_0), ('presence', 'mandatory')])], rr=[], ev=[], er=[])
+    U_RNTIQueryResponseIEs = CLASS(name=u'U-RNTIQueryResponseIEs', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-IES')))
+    _U_RNTIQueryResponseIEs_val_Value_0 = CHOICE(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-IEs', 'HNB-GWResponse')))
+    U_RNTIQueryResponseIEs._val = ASN1Set(rv=[dict([(u'id', 51), (u'criticality', u'reject'), (u'Value', _U_RNTIQueryResponseIEs_val_Value_0), (u'presence', u'mandatory')])], rr=[], ev=[], er=[])
     
     #-----< U-RNTIQueryResponseExtensions >-----#
-    U_RNTIQueryResponseExtensions = CLASS(name='U-RNTIQueryResponseExtensions', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION')))
+    U_RNTIQueryResponseExtensions = CLASS(name=u'U-RNTIQueryResponseExtensions', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-Containers', 'HNBAP-PROTOCOL-EXTENSION')))
     U_RNTIQueryResponseExtensions._val = ASN1Set(rv=[], rr=[], ev=[], er=[])
     
     _all_ = [
@@ -4447,340 +4447,340 @@ class HNBAP_PDU_Contents:
 
 class HNBAP_PDU_Descriptions:
 
-    _name_  = 'HNBAP-PDU-Descriptions'
+    _name_  = u'HNBAP-PDU-Descriptions'
     _oid_   = [0, 4, 0, 0, 20, 3, 6, 1, 0]
     
     _obj_ = [
-        'HNBAP-ELEMENTARY-PROCEDURE',
-        'HNBAP-PDU',
-        'InitiatingMessage',
-        'SuccessfulOutcome',
-        'UnsuccessfulOutcome',
-        'HNBAP-ELEMENTARY-PROCEDURES',
-        'HNBAP-ELEMENTARY-PROCEDURES-CLASS-1',
-        'HNBAP-ELEMENTARY-PROCEDURES-CLASS-2',
-        'hNBRegister',
-        'uERegister',
-        'uEDe-Register',
-        'hNBDe-Register',
-        'errorIndication',
-        'csg-membership-update',
-        'tnlUpdate',
-        'hNBConfigTransfer',
-        'relocationComplete',
-        'u-RNTIQuery',
-        'privateMessage',
+        u'HNBAP-ELEMENTARY-PROCEDURE',
+        u'HNBAP-PDU',
+        u'InitiatingMessage',
+        u'SuccessfulOutcome',
+        u'UnsuccessfulOutcome',
+        u'HNBAP-ELEMENTARY-PROCEDURES',
+        u'HNBAP-ELEMENTARY-PROCEDURES-CLASS-1',
+        u'HNBAP-ELEMENTARY-PROCEDURES-CLASS-2',
+        u'hNBRegister',
+        u'uERegister',
+        u'uEDe-Register',
+        u'hNBDe-Register',
+        u'errorIndication',
+        u'csg-membership-update',
+        u'tnlUpdate',
+        u'hNBConfigTransfer',
+        u'relocationComplete',
+        u'u-RNTIQuery',
+        u'privateMessage',
         ]
     _type_ = [
-        'HNBAP-ELEMENTARY-PROCEDURE',
-        'HNBAP-PDU',
-        'InitiatingMessage',
-        'SuccessfulOutcome',
-        'UnsuccessfulOutcome',
+        u'HNBAP-ELEMENTARY-PROCEDURE',
+        u'HNBAP-PDU',
+        u'InitiatingMessage',
+        u'SuccessfulOutcome',
+        u'UnsuccessfulOutcome',
         ]
     _set_ = [
-        'HNBAP-ELEMENTARY-PROCEDURES',
-        'HNBAP-ELEMENTARY-PROCEDURES-CLASS-1',
-        'HNBAP-ELEMENTARY-PROCEDURES-CLASS-2',
+        u'HNBAP-ELEMENTARY-PROCEDURES',
+        u'HNBAP-ELEMENTARY-PROCEDURES-CLASS-1',
+        u'HNBAP-ELEMENTARY-PROCEDURES-CLASS-2',
         ]
     _val_ = [
-        'hNBRegister',
-        'uERegister',
-        'uEDe-Register',
-        'hNBDe-Register',
-        'errorIndication',
-        'csg-membership-update',
-        'tnlUpdate',
-        'hNBConfigTransfer',
-        'relocationComplete',
-        'u-RNTIQuery',
-        'privateMessage',
+        u'hNBRegister',
+        u'uERegister',
+        u'uEDe-Register',
+        u'hNBDe-Register',
+        u'errorIndication',
+        u'csg-membership-update',
+        u'tnlUpdate',
+        u'hNBConfigTransfer',
+        u'relocationComplete',
+        u'u-RNTIQuery',
+        u'privateMessage',
         ]
     _class_ = [
-        'HNBAP-ELEMENTARY-PROCEDURE',
-        'HNBAP-ELEMENTARY-PROCEDURES',
-        'HNBAP-ELEMENTARY-PROCEDURES-CLASS-1',
-        'HNBAP-ELEMENTARY-PROCEDURES-CLASS-2',
-        'hNBRegister',
-        'uERegister',
-        'uEDe-Register',
-        'hNBDe-Register',
-        'errorIndication',
-        'csg-membership-update',
-        'tnlUpdate',
-        'hNBConfigTransfer',
-        'relocationComplete',
-        'u-RNTIQuery',
-        'privateMessage',
+        u'HNBAP-ELEMENTARY-PROCEDURE',
+        u'HNBAP-ELEMENTARY-PROCEDURES',
+        u'HNBAP-ELEMENTARY-PROCEDURES-CLASS-1',
+        u'HNBAP-ELEMENTARY-PROCEDURES-CLASS-2',
+        u'hNBRegister',
+        u'uERegister',
+        u'uEDe-Register',
+        u'hNBDe-Register',
+        u'errorIndication',
+        u'csg-membership-update',
+        u'tnlUpdate',
+        u'hNBConfigTransfer',
+        u'relocationComplete',
+        u'u-RNTIQuery',
+        u'privateMessage',
         ]
     _param_ = [
         ]
     
     #-----< HNBAP-ELEMENTARY-PROCEDURE >-----#
-    HNBAP_ELEMENTARY_PROCEDURE = CLASS(name='HNBAP-ELEMENTARY-PROCEDURE', mode=MODE_TYPE)
-    _HNBAP_ELEMENTARY_PROCEDURE_InitiatingMessage = OPEN(name='InitiatingMessage', mode=MODE_TYPE)
-    _HNBAP_ELEMENTARY_PROCEDURE_SuccessfulOutcome = OPEN(name='SuccessfulOutcome', mode=MODE_TYPE, opt=True)
-    _HNBAP_ELEMENTARY_PROCEDURE_UnsuccessfulOutcome = OPEN(name='UnsuccessfulOutcome', mode=MODE_TYPE, opt=True)
-    _HNBAP_ELEMENTARY_PROCEDURE_procedureCode = INT(name='procedureCode', mode=MODE_VALUE, typeref=ASN1RefType(('HNBAP-CommonDataTypes', 'ProcedureCode')), uniq=True)
-    _HNBAP_ELEMENTARY_PROCEDURE_criticality = ENUM(name='criticality', mode=MODE_VALUE, typeref=ASN1RefType(('HNBAP-CommonDataTypes', 'Criticality')), default='ignore')
+    HNBAP_ELEMENTARY_PROCEDURE = CLASS(name=u'HNBAP-ELEMENTARY-PROCEDURE', mode=MODE_TYPE)
+    _HNBAP_ELEMENTARY_PROCEDURE_InitiatingMessage = OPEN(name=u'InitiatingMessage', mode=MODE_TYPE)
+    _HNBAP_ELEMENTARY_PROCEDURE_SuccessfulOutcome = OPEN(name=u'SuccessfulOutcome', mode=MODE_TYPE, opt=True)
+    _HNBAP_ELEMENTARY_PROCEDURE_UnsuccessfulOutcome = OPEN(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, opt=True)
+    _HNBAP_ELEMENTARY_PROCEDURE_procedureCode = INT(name=u'procedureCode', mode=MODE_VALUE, typeref=ASN1RefType(('HNBAP-CommonDataTypes', 'ProcedureCode')), uniq=True)
+    _HNBAP_ELEMENTARY_PROCEDURE_criticality = ENUM(name=u'criticality', mode=MODE_VALUE, typeref=ASN1RefType(('HNBAP-CommonDataTypes', 'Criticality')), default=u'ignore')
     HNBAP_ELEMENTARY_PROCEDURE._cont = ASN1Dict([
-        ('InitiatingMessage', _HNBAP_ELEMENTARY_PROCEDURE_InitiatingMessage),
-        ('SuccessfulOutcome', _HNBAP_ELEMENTARY_PROCEDURE_SuccessfulOutcome),
-        ('UnsuccessfulOutcome', _HNBAP_ELEMENTARY_PROCEDURE_UnsuccessfulOutcome),
-        ('procedureCode', _HNBAP_ELEMENTARY_PROCEDURE_procedureCode),
-        ('criticality', _HNBAP_ELEMENTARY_PROCEDURE_criticality),
+        (u'InitiatingMessage', _HNBAP_ELEMENTARY_PROCEDURE_InitiatingMessage),
+        (u'SuccessfulOutcome', _HNBAP_ELEMENTARY_PROCEDURE_SuccessfulOutcome),
+        (u'UnsuccessfulOutcome', _HNBAP_ELEMENTARY_PROCEDURE_UnsuccessfulOutcome),
+        (u'procedureCode', _HNBAP_ELEMENTARY_PROCEDURE_procedureCode),
+        (u'criticality', _HNBAP_ELEMENTARY_PROCEDURE_criticality),
         ])
     
     #-----< HNBAP-PDU >-----#
-    HNBAP_PDU = CHOICE(name='HNBAP-PDU', mode=MODE_TYPE)
-    _HNBAP_PDU_initiatingMessage = SEQ(name='initiatingMessage', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-PDU-Descriptions', 'InitiatingMessage')))
-    _HNBAP_PDU_successfulOutcome = SEQ(name='successfulOutcome', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-PDU-Descriptions', 'SuccessfulOutcome')))
-    _HNBAP_PDU_unsuccessfulOutcome = SEQ(name='unsuccessfulOutcome', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-PDU-Descriptions', 'UnsuccessfulOutcome')))
+    HNBAP_PDU = CHOICE(name=u'HNBAP-PDU', mode=MODE_TYPE)
+    _HNBAP_PDU_initiatingMessage = SEQ(name=u'initiatingMessage', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-PDU-Descriptions', 'InitiatingMessage')))
+    _HNBAP_PDU_successfulOutcome = SEQ(name=u'successfulOutcome', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-PDU-Descriptions', 'SuccessfulOutcome')))
+    _HNBAP_PDU_unsuccessfulOutcome = SEQ(name=u'unsuccessfulOutcome', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('HNBAP-PDU-Descriptions', 'UnsuccessfulOutcome')))
     HNBAP_PDU._cont = ASN1Dict([
-        ('initiatingMessage', _HNBAP_PDU_initiatingMessage),
-        ('successfulOutcome', _HNBAP_PDU_successfulOutcome),
-        ('unsuccessfulOutcome', _HNBAP_PDU_unsuccessfulOutcome),
+        (u'initiatingMessage', _HNBAP_PDU_initiatingMessage),
+        (u'successfulOutcome', _HNBAP_PDU_successfulOutcome),
+        (u'unsuccessfulOutcome', _HNBAP_PDU_unsuccessfulOutcome),
         ])
     HNBAP_PDU._ext = []
     
     #-----< InitiatingMessage >-----#
-    InitiatingMessage = SEQ(name='InitiatingMessage', mode=MODE_TYPE)
-    _InitiatingMessage_procedureCode = INT(name='procedureCode', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-PDU-Descriptions', 'HNBAP-ELEMENTARY-PROCEDURE'), ['procedureCode']))
+    InitiatingMessage = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE)
+    _InitiatingMessage_procedureCode = INT(name=u'procedureCode', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-PDU-Descriptions', 'HNBAP-ELEMENTARY-PROCEDURE'), [u'procedureCode']))
     __InitiatingMessage_procedureCode_tab = CLASS(name='_tab_HNBAP-ELEMENTARY-PROCEDURE', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-PDU-Descriptions', 'HNBAP-ELEMENTARY-PROCEDURE')))
-    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_0 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'HNBRegisterRequest')))
-    ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_0 = SEQ(name='SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'HNBRegisterAccept')))
-    ___InitiatingMessage_procedureCode_tab_val_UnsuccessfulOutcome_0 = SEQ(name='UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'HNBRegisterReject')))
-    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_1 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'UERegisterRequest')))
-    ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_1 = SEQ(name='SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'UERegisterAccept')))
-    ___InitiatingMessage_procedureCode_tab_val_UnsuccessfulOutcome_1 = SEQ(name='UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'UERegisterReject')))
-    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_2 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'UEDe-Register')))
-    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_3 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'HNBDe-Register')))
-    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_4 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'ErrorIndication')))
-    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_5 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'PrivateMessage')))
-    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_6 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'TNLUpdateRequest')))
-    ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_6 = SEQ(name='SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'TNLUpdateResponse')))
-    ___InitiatingMessage_procedureCode_tab_val_UnsuccessfulOutcome_6 = SEQ(name='UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'TNLUpdateFailure')))
-    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_7 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'HNBConfigTransferRequest')))
-    ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_7 = SEQ(name='SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'HNBConfigTransferResponse')))
-    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_8 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'U-RNTIQueryRequest')))
-    ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_8 = SEQ(name='SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'U-RNTIQueryResponse')))
-    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_9 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'CSGMembershipUpdate')))
-    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_10 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'RelocationComplete')))
-    __InitiatingMessage_procedureCode_tab._val = ASN1Set(rv=[dict([('InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_0), ('SuccessfulOutcome', ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_0), ('UnsuccessfulOutcome', ___InitiatingMessage_procedureCode_tab_val_UnsuccessfulOutcome_0), ('procedureCode', 1), ('criticality', 'reject')]), dict([('InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_1), ('SuccessfulOutcome', ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_1), ('UnsuccessfulOutcome', ___InitiatingMessage_procedureCode_tab_val_UnsuccessfulOutcome_1), ('procedureCode', 3), ('criticality', 'reject')]), dict([('InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_2), ('procedureCode', 4), ('criticality', 'ignore')]), dict([('InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_3), ('procedureCode', 2), ('criticality', 'ignore')]), dict([('InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_4), ('procedureCode', 5), ('criticality', 'ignore')]), dict([('InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_5), ('procedureCode', 6), ('criticality', 'ignore')])], rr=[], ev=[dict([('InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_6), ('SuccessfulOutcome', ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_6), ('UnsuccessfulOutcome', ___InitiatingMessage_procedureCode_tab_val_UnsuccessfulOutcome_6), ('procedureCode', 9), ('criticality', 'reject')]), dict([('InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_7), ('SuccessfulOutcome', ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_7), ('procedureCode', 10), ('criticality', 'reject')]), dict([('InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_8), ('SuccessfulOutcome', ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_8), ('procedureCode', 14), ('criticality', 'reject')]), dict([('InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_9), ('procedureCode', 7), ('criticality', 'ignore')]), dict([('InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_10), ('procedureCode', 11), ('criticality', 'ignore')])], er=[])
+    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_0 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'HNBRegisterRequest')))
+    ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_0 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'HNBRegisterAccept')))
+    ___InitiatingMessage_procedureCode_tab_val_UnsuccessfulOutcome_0 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'HNBRegisterReject')))
+    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_1 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'UERegisterRequest')))
+    ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_1 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'UERegisterAccept')))
+    ___InitiatingMessage_procedureCode_tab_val_UnsuccessfulOutcome_1 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'UERegisterReject')))
+    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_2 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'UEDe-Register')))
+    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_3 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'HNBDe-Register')))
+    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_4 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'ErrorIndication')))
+    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_5 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'PrivateMessage')))
+    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_6 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'TNLUpdateRequest')))
+    ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_6 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'TNLUpdateResponse')))
+    ___InitiatingMessage_procedureCode_tab_val_UnsuccessfulOutcome_6 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'TNLUpdateFailure')))
+    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_7 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'HNBConfigTransferRequest')))
+    ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_7 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'HNBConfigTransferResponse')))
+    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_8 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'U-RNTIQueryRequest')))
+    ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_8 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'U-RNTIQueryResponse')))
+    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_9 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'CSGMembershipUpdate')))
+    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_10 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'RelocationComplete')))
+    __InitiatingMessage_procedureCode_tab._val = ASN1Set(rv=[dict([(u'InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_0), (u'SuccessfulOutcome', ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_0), (u'UnsuccessfulOutcome', ___InitiatingMessage_procedureCode_tab_val_UnsuccessfulOutcome_0), (u'procedureCode', 1), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_1), (u'SuccessfulOutcome', ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_1), (u'UnsuccessfulOutcome', ___InitiatingMessage_procedureCode_tab_val_UnsuccessfulOutcome_1), (u'procedureCode', 3), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_2), (u'procedureCode', 4), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_3), (u'procedureCode', 2), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_4), (u'procedureCode', 5), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_5), (u'procedureCode', 6), (u'criticality', u'ignore')])], rr=[], ev=[dict([(u'InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_6), (u'SuccessfulOutcome', ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_6), (u'UnsuccessfulOutcome', ___InitiatingMessage_procedureCode_tab_val_UnsuccessfulOutcome_6), (u'procedureCode', 9), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_7), (u'SuccessfulOutcome', ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_7), (u'procedureCode', 10), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_8), (u'SuccessfulOutcome', ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_8), (u'procedureCode', 14), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_9), (u'procedureCode', 7), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_10), (u'procedureCode', 11), (u'criticality', u'ignore')])], er=[])
     _InitiatingMessage_procedureCode._const_tab = __InitiatingMessage_procedureCode_tab
     _InitiatingMessage_procedureCode._const_tab_at = None
-    _InitiatingMessage_procedureCode._const_tab_id = 'procedureCode'
-    _InitiatingMessage_criticality = ENUM(name='criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-PDU-Descriptions', 'HNBAP-ELEMENTARY-PROCEDURE'), ['criticality']))
+    _InitiatingMessage_procedureCode._const_tab_id = u'procedureCode'
+    _InitiatingMessage_criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-PDU-Descriptions', 'HNBAP-ELEMENTARY-PROCEDURE'), [u'criticality']))
     _InitiatingMessage_criticality._const_tab = __InitiatingMessage_procedureCode_tab
-    _InitiatingMessage_criticality._const_tab_at = ('..', 'procedureCode')
-    _InitiatingMessage_criticality._const_tab_id = 'criticality'
-    _InitiatingMessage_value = OPEN(name='value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('HNBAP-PDU-Descriptions', 'HNBAP-ELEMENTARY-PROCEDURE'), ['InitiatingMessage']))
+    _InitiatingMessage_criticality._const_tab_at = ('..', u'procedureCode')
+    _InitiatingMessage_criticality._const_tab_id = u'criticality'
+    _InitiatingMessage_value = OPEN(name=u'value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('HNBAP-PDU-Descriptions', 'HNBAP-ELEMENTARY-PROCEDURE'), [u'InitiatingMessage']))
     _InitiatingMessage_value._const_tab = __InitiatingMessage_procedureCode_tab
-    _InitiatingMessage_value._const_tab_at = ('..', 'procedureCode')
-    _InitiatingMessage_value._const_tab_id = 'InitiatingMessage'
+    _InitiatingMessage_value._const_tab_at = ('..', u'procedureCode')
+    _InitiatingMessage_value._const_tab_id = u'InitiatingMessage'
     InitiatingMessage._cont = ASN1Dict([
-        ('procedureCode', _InitiatingMessage_procedureCode),
-        ('criticality', _InitiatingMessage_criticality),
-        ('value', _InitiatingMessage_value),
+        (u'procedureCode', _InitiatingMessage_procedureCode),
+        (u'criticality', _InitiatingMessage_criticality),
+        (u'value', _InitiatingMessage_value),
         ])
     InitiatingMessage._ext = None
     
     #-----< SuccessfulOutcome >-----#
-    SuccessfulOutcome = SEQ(name='SuccessfulOutcome', mode=MODE_TYPE)
-    _SuccessfulOutcome_procedureCode = INT(name='procedureCode', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-PDU-Descriptions', 'HNBAP-ELEMENTARY-PROCEDURE'), ['procedureCode']))
+    SuccessfulOutcome = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE)
+    _SuccessfulOutcome_procedureCode = INT(name=u'procedureCode', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-PDU-Descriptions', 'HNBAP-ELEMENTARY-PROCEDURE'), [u'procedureCode']))
     __SuccessfulOutcome_procedureCode_tab = CLASS(name='_tab_HNBAP-ELEMENTARY-PROCEDURE', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-PDU-Descriptions', 'HNBAP-ELEMENTARY-PROCEDURE')))
-    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_0 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'HNBRegisterRequest')))
-    ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_0 = SEQ(name='SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'HNBRegisterAccept')))
-    ___SuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_0 = SEQ(name='UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'HNBRegisterReject')))
-    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_1 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'UERegisterRequest')))
-    ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_1 = SEQ(name='SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'UERegisterAccept')))
-    ___SuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_1 = SEQ(name='UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'UERegisterReject')))
-    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_2 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'UEDe-Register')))
-    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_3 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'HNBDe-Register')))
-    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_4 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'ErrorIndication')))
-    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_5 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'PrivateMessage')))
-    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_6 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'TNLUpdateRequest')))
-    ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_6 = SEQ(name='SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'TNLUpdateResponse')))
-    ___SuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_6 = SEQ(name='UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'TNLUpdateFailure')))
-    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_7 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'HNBConfigTransferRequest')))
-    ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_7 = SEQ(name='SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'HNBConfigTransferResponse')))
-    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_8 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'U-RNTIQueryRequest')))
-    ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_8 = SEQ(name='SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'U-RNTIQueryResponse')))
-    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_9 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'CSGMembershipUpdate')))
-    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_10 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'RelocationComplete')))
-    __SuccessfulOutcome_procedureCode_tab._val = ASN1Set(rv=[dict([('InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_0), ('SuccessfulOutcome', ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_0), ('UnsuccessfulOutcome', ___SuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_0), ('procedureCode', 1), ('criticality', 'reject')]), dict([('InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_1), ('SuccessfulOutcome', ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_1), ('UnsuccessfulOutcome', ___SuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_1), ('procedureCode', 3), ('criticality', 'reject')]), dict([('InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_2), ('procedureCode', 4), ('criticality', 'ignore')]), dict([('InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_3), ('procedureCode', 2), ('criticality', 'ignore')]), dict([('InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_4), ('procedureCode', 5), ('criticality', 'ignore')]), dict([('InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_5), ('procedureCode', 6), ('criticality', 'ignore')])], rr=[], ev=[dict([('InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_6), ('SuccessfulOutcome', ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_6), ('UnsuccessfulOutcome', ___SuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_6), ('procedureCode', 9), ('criticality', 'reject')]), dict([('InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_7), ('SuccessfulOutcome', ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_7), ('procedureCode', 10), ('criticality', 'reject')]), dict([('InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_8), ('SuccessfulOutcome', ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_8), ('procedureCode', 14), ('criticality', 'reject')]), dict([('InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_9), ('procedureCode', 7), ('criticality', 'ignore')]), dict([('InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_10), ('procedureCode', 11), ('criticality', 'ignore')])], er=[])
+    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_0 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'HNBRegisterRequest')))
+    ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_0 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'HNBRegisterAccept')))
+    ___SuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_0 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'HNBRegisterReject')))
+    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_1 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'UERegisterRequest')))
+    ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_1 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'UERegisterAccept')))
+    ___SuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_1 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'UERegisterReject')))
+    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_2 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'UEDe-Register')))
+    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_3 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'HNBDe-Register')))
+    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_4 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'ErrorIndication')))
+    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_5 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'PrivateMessage')))
+    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_6 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'TNLUpdateRequest')))
+    ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_6 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'TNLUpdateResponse')))
+    ___SuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_6 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'TNLUpdateFailure')))
+    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_7 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'HNBConfigTransferRequest')))
+    ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_7 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'HNBConfigTransferResponse')))
+    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_8 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'U-RNTIQueryRequest')))
+    ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_8 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'U-RNTIQueryResponse')))
+    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_9 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'CSGMembershipUpdate')))
+    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_10 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'RelocationComplete')))
+    __SuccessfulOutcome_procedureCode_tab._val = ASN1Set(rv=[dict([(u'InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_0), (u'SuccessfulOutcome', ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_0), (u'UnsuccessfulOutcome', ___SuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_0), (u'procedureCode', 1), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_1), (u'SuccessfulOutcome', ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_1), (u'UnsuccessfulOutcome', ___SuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_1), (u'procedureCode', 3), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_2), (u'procedureCode', 4), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_3), (u'procedureCode', 2), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_4), (u'procedureCode', 5), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_5), (u'procedureCode', 6), (u'criticality', u'ignore')])], rr=[], ev=[dict([(u'InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_6), (u'SuccessfulOutcome', ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_6), (u'UnsuccessfulOutcome', ___SuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_6), (u'procedureCode', 9), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_7), (u'SuccessfulOutcome', ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_7), (u'procedureCode', 10), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_8), (u'SuccessfulOutcome', ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_8), (u'procedureCode', 14), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_9), (u'procedureCode', 7), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_10), (u'procedureCode', 11), (u'criticality', u'ignore')])], er=[])
     _SuccessfulOutcome_procedureCode._const_tab = __SuccessfulOutcome_procedureCode_tab
     _SuccessfulOutcome_procedureCode._const_tab_at = None
-    _SuccessfulOutcome_procedureCode._const_tab_id = 'procedureCode'
-    _SuccessfulOutcome_criticality = ENUM(name='criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-PDU-Descriptions', 'HNBAP-ELEMENTARY-PROCEDURE'), ['criticality']))
+    _SuccessfulOutcome_procedureCode._const_tab_id = u'procedureCode'
+    _SuccessfulOutcome_criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-PDU-Descriptions', 'HNBAP-ELEMENTARY-PROCEDURE'), [u'criticality']))
     _SuccessfulOutcome_criticality._const_tab = __SuccessfulOutcome_procedureCode_tab
-    _SuccessfulOutcome_criticality._const_tab_at = ('..', 'procedureCode')
-    _SuccessfulOutcome_criticality._const_tab_id = 'criticality'
-    _SuccessfulOutcome_value = OPEN(name='value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('HNBAP-PDU-Descriptions', 'HNBAP-ELEMENTARY-PROCEDURE'), ['SuccessfulOutcome']))
+    _SuccessfulOutcome_criticality._const_tab_at = ('..', u'procedureCode')
+    _SuccessfulOutcome_criticality._const_tab_id = u'criticality'
+    _SuccessfulOutcome_value = OPEN(name=u'value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('HNBAP-PDU-Descriptions', 'HNBAP-ELEMENTARY-PROCEDURE'), [u'SuccessfulOutcome']))
     _SuccessfulOutcome_value._const_tab = __SuccessfulOutcome_procedureCode_tab
-    _SuccessfulOutcome_value._const_tab_at = ('..', 'procedureCode')
-    _SuccessfulOutcome_value._const_tab_id = 'SuccessfulOutcome'
+    _SuccessfulOutcome_value._const_tab_at = ('..', u'procedureCode')
+    _SuccessfulOutcome_value._const_tab_id = u'SuccessfulOutcome'
     SuccessfulOutcome._cont = ASN1Dict([
-        ('procedureCode', _SuccessfulOutcome_procedureCode),
-        ('criticality', _SuccessfulOutcome_criticality),
-        ('value', _SuccessfulOutcome_value),
+        (u'procedureCode', _SuccessfulOutcome_procedureCode),
+        (u'criticality', _SuccessfulOutcome_criticality),
+        (u'value', _SuccessfulOutcome_value),
         ])
     SuccessfulOutcome._ext = None
     
     #-----< UnsuccessfulOutcome >-----#
-    UnsuccessfulOutcome = SEQ(name='UnsuccessfulOutcome', mode=MODE_TYPE)
-    _UnsuccessfulOutcome_procedureCode = INT(name='procedureCode', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-PDU-Descriptions', 'HNBAP-ELEMENTARY-PROCEDURE'), ['procedureCode']))
+    UnsuccessfulOutcome = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE)
+    _UnsuccessfulOutcome_procedureCode = INT(name=u'procedureCode', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-PDU-Descriptions', 'HNBAP-ELEMENTARY-PROCEDURE'), [u'procedureCode']))
     __UnsuccessfulOutcome_procedureCode_tab = CLASS(name='_tab_HNBAP-ELEMENTARY-PROCEDURE', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-PDU-Descriptions', 'HNBAP-ELEMENTARY-PROCEDURE')))
-    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_0 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'HNBRegisterRequest')))
-    ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_0 = SEQ(name='SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'HNBRegisterAccept')))
-    ___UnsuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_0 = SEQ(name='UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'HNBRegisterReject')))
-    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_1 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'UERegisterRequest')))
-    ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_1 = SEQ(name='SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'UERegisterAccept')))
-    ___UnsuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_1 = SEQ(name='UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'UERegisterReject')))
-    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_2 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'UEDe-Register')))
-    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_3 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'HNBDe-Register')))
-    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_4 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'ErrorIndication')))
-    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_5 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'PrivateMessage')))
-    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_6 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'TNLUpdateRequest')))
-    ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_6 = SEQ(name='SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'TNLUpdateResponse')))
-    ___UnsuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_6 = SEQ(name='UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'TNLUpdateFailure')))
-    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_7 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'HNBConfigTransferRequest')))
-    ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_7 = SEQ(name='SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'HNBConfigTransferResponse')))
-    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_8 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'U-RNTIQueryRequest')))
-    ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_8 = SEQ(name='SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'U-RNTIQueryResponse')))
-    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_9 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'CSGMembershipUpdate')))
-    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_10 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'RelocationComplete')))
-    __UnsuccessfulOutcome_procedureCode_tab._val = ASN1Set(rv=[dict([('InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_0), ('SuccessfulOutcome', ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_0), ('UnsuccessfulOutcome', ___UnsuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_0), ('procedureCode', 1), ('criticality', 'reject')]), dict([('InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_1), ('SuccessfulOutcome', ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_1), ('UnsuccessfulOutcome', ___UnsuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_1), ('procedureCode', 3), ('criticality', 'reject')]), dict([('InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_2), ('procedureCode', 4), ('criticality', 'ignore')]), dict([('InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_3), ('procedureCode', 2), ('criticality', 'ignore')]), dict([('InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_4), ('procedureCode', 5), ('criticality', 'ignore')]), dict([('InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_5), ('procedureCode', 6), ('criticality', 'ignore')])], rr=[], ev=[dict([('InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_6), ('SuccessfulOutcome', ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_6), ('UnsuccessfulOutcome', ___UnsuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_6), ('procedureCode', 9), ('criticality', 'reject')]), dict([('InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_7), ('SuccessfulOutcome', ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_7), ('procedureCode', 10), ('criticality', 'reject')]), dict([('InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_8), ('SuccessfulOutcome', ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_8), ('procedureCode', 14), ('criticality', 'reject')]), dict([('InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_9), ('procedureCode', 7), ('criticality', 'ignore')]), dict([('InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_10), ('procedureCode', 11), ('criticality', 'ignore')])], er=[])
+    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_0 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'HNBRegisterRequest')))
+    ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_0 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'HNBRegisterAccept')))
+    ___UnsuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_0 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'HNBRegisterReject')))
+    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_1 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'UERegisterRequest')))
+    ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_1 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'UERegisterAccept')))
+    ___UnsuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_1 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'UERegisterReject')))
+    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_2 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'UEDe-Register')))
+    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_3 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'HNBDe-Register')))
+    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_4 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'ErrorIndication')))
+    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_5 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'PrivateMessage')))
+    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_6 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'TNLUpdateRequest')))
+    ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_6 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'TNLUpdateResponse')))
+    ___UnsuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_6 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'TNLUpdateFailure')))
+    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_7 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'HNBConfigTransferRequest')))
+    ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_7 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'HNBConfigTransferResponse')))
+    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_8 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'U-RNTIQueryRequest')))
+    ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_8 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'U-RNTIQueryResponse')))
+    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_9 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'CSGMembershipUpdate')))
+    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_10 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'RelocationComplete')))
+    __UnsuccessfulOutcome_procedureCode_tab._val = ASN1Set(rv=[dict([(u'InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_0), (u'SuccessfulOutcome', ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_0), (u'UnsuccessfulOutcome', ___UnsuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_0), (u'procedureCode', 1), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_1), (u'SuccessfulOutcome', ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_1), (u'UnsuccessfulOutcome', ___UnsuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_1), (u'procedureCode', 3), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_2), (u'procedureCode', 4), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_3), (u'procedureCode', 2), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_4), (u'procedureCode', 5), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_5), (u'procedureCode', 6), (u'criticality', u'ignore')])], rr=[], ev=[dict([(u'InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_6), (u'SuccessfulOutcome', ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_6), (u'UnsuccessfulOutcome', ___UnsuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_6), (u'procedureCode', 9), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_7), (u'SuccessfulOutcome', ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_7), (u'procedureCode', 10), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_8), (u'SuccessfulOutcome', ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_8), (u'procedureCode', 14), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_9), (u'procedureCode', 7), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_10), (u'procedureCode', 11), (u'criticality', u'ignore')])], er=[])
     _UnsuccessfulOutcome_procedureCode._const_tab = __UnsuccessfulOutcome_procedureCode_tab
     _UnsuccessfulOutcome_procedureCode._const_tab_at = None
-    _UnsuccessfulOutcome_procedureCode._const_tab_id = 'procedureCode'
-    _UnsuccessfulOutcome_criticality = ENUM(name='criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-PDU-Descriptions', 'HNBAP-ELEMENTARY-PROCEDURE'), ['criticality']))
+    _UnsuccessfulOutcome_procedureCode._const_tab_id = u'procedureCode'
+    _UnsuccessfulOutcome_criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('HNBAP-PDU-Descriptions', 'HNBAP-ELEMENTARY-PROCEDURE'), [u'criticality']))
     _UnsuccessfulOutcome_criticality._const_tab = __UnsuccessfulOutcome_procedureCode_tab
-    _UnsuccessfulOutcome_criticality._const_tab_at = ('..', 'procedureCode')
-    _UnsuccessfulOutcome_criticality._const_tab_id = 'criticality'
-    _UnsuccessfulOutcome_value = OPEN(name='value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('HNBAP-PDU-Descriptions', 'HNBAP-ELEMENTARY-PROCEDURE'), ['UnsuccessfulOutcome']))
+    _UnsuccessfulOutcome_criticality._const_tab_at = ('..', u'procedureCode')
+    _UnsuccessfulOutcome_criticality._const_tab_id = u'criticality'
+    _UnsuccessfulOutcome_value = OPEN(name=u'value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('HNBAP-PDU-Descriptions', 'HNBAP-ELEMENTARY-PROCEDURE'), [u'UnsuccessfulOutcome']))
     _UnsuccessfulOutcome_value._const_tab = __UnsuccessfulOutcome_procedureCode_tab
-    _UnsuccessfulOutcome_value._const_tab_at = ('..', 'procedureCode')
-    _UnsuccessfulOutcome_value._const_tab_id = 'UnsuccessfulOutcome'
+    _UnsuccessfulOutcome_value._const_tab_at = ('..', u'procedureCode')
+    _UnsuccessfulOutcome_value._const_tab_id = u'UnsuccessfulOutcome'
     UnsuccessfulOutcome._cont = ASN1Dict([
-        ('procedureCode', _UnsuccessfulOutcome_procedureCode),
-        ('criticality', _UnsuccessfulOutcome_criticality),
-        ('value', _UnsuccessfulOutcome_value),
+        (u'procedureCode', _UnsuccessfulOutcome_procedureCode),
+        (u'criticality', _UnsuccessfulOutcome_criticality),
+        (u'value', _UnsuccessfulOutcome_value),
         ])
     UnsuccessfulOutcome._ext = None
     
     #-----< HNBAP-ELEMENTARY-PROCEDURES >-----#
-    HNBAP_ELEMENTARY_PROCEDURES = CLASS(name='HNBAP-ELEMENTARY-PROCEDURES', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-PDU-Descriptions', 'HNBAP-ELEMENTARY-PROCEDURE')))
-    _HNBAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_0 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'HNBRegisterRequest')))
-    _HNBAP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_0 = SEQ(name='SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'HNBRegisterAccept')))
-    _HNBAP_ELEMENTARY_PROCEDURES_val_UnsuccessfulOutcome_0 = SEQ(name='UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'HNBRegisterReject')))
-    _HNBAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_1 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'UERegisterRequest')))
-    _HNBAP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_1 = SEQ(name='SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'UERegisterAccept')))
-    _HNBAP_ELEMENTARY_PROCEDURES_val_UnsuccessfulOutcome_1 = SEQ(name='UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'UERegisterReject')))
-    _HNBAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_2 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'UEDe-Register')))
-    _HNBAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_3 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'HNBDe-Register')))
-    _HNBAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_4 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'ErrorIndication')))
-    _HNBAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_5 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'PrivateMessage')))
-    _HNBAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_6 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'TNLUpdateRequest')))
-    _HNBAP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_6 = SEQ(name='SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'TNLUpdateResponse')))
-    _HNBAP_ELEMENTARY_PROCEDURES_val_UnsuccessfulOutcome_6 = SEQ(name='UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'TNLUpdateFailure')))
-    _HNBAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_7 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'HNBConfigTransferRequest')))
-    _HNBAP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_7 = SEQ(name='SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'HNBConfigTransferResponse')))
-    _HNBAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_8 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'U-RNTIQueryRequest')))
-    _HNBAP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_8 = SEQ(name='SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'U-RNTIQueryResponse')))
-    _HNBAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_9 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'CSGMembershipUpdate')))
-    _HNBAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_10 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'RelocationComplete')))
-    HNBAP_ELEMENTARY_PROCEDURES._val = ASN1Set(rv=[dict([('InitiatingMessage', _HNBAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_0), ('SuccessfulOutcome', _HNBAP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_0), ('UnsuccessfulOutcome', _HNBAP_ELEMENTARY_PROCEDURES_val_UnsuccessfulOutcome_0), ('procedureCode', 1), ('criticality', 'reject')]), dict([('InitiatingMessage', _HNBAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_1), ('SuccessfulOutcome', _HNBAP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_1), ('UnsuccessfulOutcome', _HNBAP_ELEMENTARY_PROCEDURES_val_UnsuccessfulOutcome_1), ('procedureCode', 3), ('criticality', 'reject')]), dict([('InitiatingMessage', _HNBAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_2), ('procedureCode', 4), ('criticality', 'ignore')]), dict([('InitiatingMessage', _HNBAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_3), ('procedureCode', 2), ('criticality', 'ignore')]), dict([('InitiatingMessage', _HNBAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_4), ('procedureCode', 5), ('criticality', 'ignore')]), dict([('InitiatingMessage', _HNBAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_5), ('procedureCode', 6), ('criticality', 'ignore')])], rr=[], ev=[dict([('InitiatingMessage', _HNBAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_6), ('SuccessfulOutcome', _HNBAP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_6), ('UnsuccessfulOutcome', _HNBAP_ELEMENTARY_PROCEDURES_val_UnsuccessfulOutcome_6), ('procedureCode', 9), ('criticality', 'reject')]), dict([('InitiatingMessage', _HNBAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_7), ('SuccessfulOutcome', _HNBAP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_7), ('procedureCode', 10), ('criticality', 'reject')]), dict([('InitiatingMessage', _HNBAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_8), ('SuccessfulOutcome', _HNBAP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_8), ('procedureCode', 14), ('criticality', 'reject')]), dict([('InitiatingMessage', _HNBAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_9), ('procedureCode', 7), ('criticality', 'ignore')]), dict([('InitiatingMessage', _HNBAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_10), ('procedureCode', 11), ('criticality', 'ignore')])], er=[])
+    HNBAP_ELEMENTARY_PROCEDURES = CLASS(name=u'HNBAP-ELEMENTARY-PROCEDURES', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-PDU-Descriptions', 'HNBAP-ELEMENTARY-PROCEDURE')))
+    _HNBAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_0 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'HNBRegisterRequest')))
+    _HNBAP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_0 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'HNBRegisterAccept')))
+    _HNBAP_ELEMENTARY_PROCEDURES_val_UnsuccessfulOutcome_0 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'HNBRegisterReject')))
+    _HNBAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_1 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'UERegisterRequest')))
+    _HNBAP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_1 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'UERegisterAccept')))
+    _HNBAP_ELEMENTARY_PROCEDURES_val_UnsuccessfulOutcome_1 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'UERegisterReject')))
+    _HNBAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_2 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'UEDe-Register')))
+    _HNBAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_3 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'HNBDe-Register')))
+    _HNBAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_4 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'ErrorIndication')))
+    _HNBAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_5 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'PrivateMessage')))
+    _HNBAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_6 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'TNLUpdateRequest')))
+    _HNBAP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_6 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'TNLUpdateResponse')))
+    _HNBAP_ELEMENTARY_PROCEDURES_val_UnsuccessfulOutcome_6 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'TNLUpdateFailure')))
+    _HNBAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_7 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'HNBConfigTransferRequest')))
+    _HNBAP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_7 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'HNBConfigTransferResponse')))
+    _HNBAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_8 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'U-RNTIQueryRequest')))
+    _HNBAP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_8 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'U-RNTIQueryResponse')))
+    _HNBAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_9 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'CSGMembershipUpdate')))
+    _HNBAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_10 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'RelocationComplete')))
+    HNBAP_ELEMENTARY_PROCEDURES._val = ASN1Set(rv=[dict([(u'InitiatingMessage', _HNBAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_0), (u'SuccessfulOutcome', _HNBAP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_0), (u'UnsuccessfulOutcome', _HNBAP_ELEMENTARY_PROCEDURES_val_UnsuccessfulOutcome_0), (u'procedureCode', 1), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _HNBAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_1), (u'SuccessfulOutcome', _HNBAP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_1), (u'UnsuccessfulOutcome', _HNBAP_ELEMENTARY_PROCEDURES_val_UnsuccessfulOutcome_1), (u'procedureCode', 3), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _HNBAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_2), (u'procedureCode', 4), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', _HNBAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_3), (u'procedureCode', 2), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', _HNBAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_4), (u'procedureCode', 5), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', _HNBAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_5), (u'procedureCode', 6), (u'criticality', u'ignore')])], rr=[], ev=[dict([(u'InitiatingMessage', _HNBAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_6), (u'SuccessfulOutcome', _HNBAP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_6), (u'UnsuccessfulOutcome', _HNBAP_ELEMENTARY_PROCEDURES_val_UnsuccessfulOutcome_6), (u'procedureCode', 9), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _HNBAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_7), (u'SuccessfulOutcome', _HNBAP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_7), (u'procedureCode', 10), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _HNBAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_8), (u'SuccessfulOutcome', _HNBAP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_8), (u'procedureCode', 14), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _HNBAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_9), (u'procedureCode', 7), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', _HNBAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_10), (u'procedureCode', 11), (u'criticality', u'ignore')])], er=[])
     
     #-----< HNBAP-ELEMENTARY-PROCEDURES-CLASS-1 >-----#
-    HNBAP_ELEMENTARY_PROCEDURES_CLASS_1 = CLASS(name='HNBAP-ELEMENTARY-PROCEDURES-CLASS-1', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-PDU-Descriptions', 'HNBAP-ELEMENTARY-PROCEDURE')))
-    _HNBAP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_0 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'HNBRegisterRequest')))
-    _HNBAP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_0 = SEQ(name='SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'HNBRegisterAccept')))
-    _HNBAP_ELEMENTARY_PROCEDURES_CLASS_1_val_UnsuccessfulOutcome_0 = SEQ(name='UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'HNBRegisterReject')))
-    _HNBAP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_1 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'UERegisterRequest')))
-    _HNBAP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_1 = SEQ(name='SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'UERegisterAccept')))
-    _HNBAP_ELEMENTARY_PROCEDURES_CLASS_1_val_UnsuccessfulOutcome_1 = SEQ(name='UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'UERegisterReject')))
-    _HNBAP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_2 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'TNLUpdateRequest')))
-    _HNBAP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_2 = SEQ(name='SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'TNLUpdateResponse')))
-    _HNBAP_ELEMENTARY_PROCEDURES_CLASS_1_val_UnsuccessfulOutcome_2 = SEQ(name='UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'TNLUpdateFailure')))
-    _HNBAP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_3 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'HNBConfigTransferRequest')))
-    _HNBAP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_3 = SEQ(name='SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'HNBConfigTransferResponse')))
-    _HNBAP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_4 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'U-RNTIQueryRequest')))
-    _HNBAP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_4 = SEQ(name='SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'U-RNTIQueryResponse')))
-    HNBAP_ELEMENTARY_PROCEDURES_CLASS_1._val = ASN1Set(rv=[dict([('InitiatingMessage', _HNBAP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_0), ('SuccessfulOutcome', _HNBAP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_0), ('UnsuccessfulOutcome', _HNBAP_ELEMENTARY_PROCEDURES_CLASS_1_val_UnsuccessfulOutcome_0), ('procedureCode', 1), ('criticality', 'reject')]), dict([('InitiatingMessage', _HNBAP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_1), ('SuccessfulOutcome', _HNBAP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_1), ('UnsuccessfulOutcome', _HNBAP_ELEMENTARY_PROCEDURES_CLASS_1_val_UnsuccessfulOutcome_1), ('procedureCode', 3), ('criticality', 'reject')])], rr=[], ev=[dict([('InitiatingMessage', _HNBAP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_2), ('SuccessfulOutcome', _HNBAP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_2), ('UnsuccessfulOutcome', _HNBAP_ELEMENTARY_PROCEDURES_CLASS_1_val_UnsuccessfulOutcome_2), ('procedureCode', 9), ('criticality', 'reject')]), dict([('InitiatingMessage', _HNBAP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_3), ('SuccessfulOutcome', _HNBAP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_3), ('procedureCode', 10), ('criticality', 'reject')]), dict([('InitiatingMessage', _HNBAP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_4), ('SuccessfulOutcome', _HNBAP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_4), ('procedureCode', 14), ('criticality', 'reject')])], er=[])
+    HNBAP_ELEMENTARY_PROCEDURES_CLASS_1 = CLASS(name=u'HNBAP-ELEMENTARY-PROCEDURES-CLASS-1', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-PDU-Descriptions', 'HNBAP-ELEMENTARY-PROCEDURE')))
+    _HNBAP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_0 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'HNBRegisterRequest')))
+    _HNBAP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_0 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'HNBRegisterAccept')))
+    _HNBAP_ELEMENTARY_PROCEDURES_CLASS_1_val_UnsuccessfulOutcome_0 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'HNBRegisterReject')))
+    _HNBAP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_1 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'UERegisterRequest')))
+    _HNBAP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_1 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'UERegisterAccept')))
+    _HNBAP_ELEMENTARY_PROCEDURES_CLASS_1_val_UnsuccessfulOutcome_1 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'UERegisterReject')))
+    _HNBAP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_2 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'TNLUpdateRequest')))
+    _HNBAP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_2 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'TNLUpdateResponse')))
+    _HNBAP_ELEMENTARY_PROCEDURES_CLASS_1_val_UnsuccessfulOutcome_2 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'TNLUpdateFailure')))
+    _HNBAP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_3 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'HNBConfigTransferRequest')))
+    _HNBAP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_3 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'HNBConfigTransferResponse')))
+    _HNBAP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_4 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'U-RNTIQueryRequest')))
+    _HNBAP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_4 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'U-RNTIQueryResponse')))
+    HNBAP_ELEMENTARY_PROCEDURES_CLASS_1._val = ASN1Set(rv=[dict([(u'InitiatingMessage', _HNBAP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_0), (u'SuccessfulOutcome', _HNBAP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_0), (u'UnsuccessfulOutcome', _HNBAP_ELEMENTARY_PROCEDURES_CLASS_1_val_UnsuccessfulOutcome_0), (u'procedureCode', 1), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _HNBAP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_1), (u'SuccessfulOutcome', _HNBAP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_1), (u'UnsuccessfulOutcome', _HNBAP_ELEMENTARY_PROCEDURES_CLASS_1_val_UnsuccessfulOutcome_1), (u'procedureCode', 3), (u'criticality', u'reject')])], rr=[], ev=[dict([(u'InitiatingMessage', _HNBAP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_2), (u'SuccessfulOutcome', _HNBAP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_2), (u'UnsuccessfulOutcome', _HNBAP_ELEMENTARY_PROCEDURES_CLASS_1_val_UnsuccessfulOutcome_2), (u'procedureCode', 9), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _HNBAP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_3), (u'SuccessfulOutcome', _HNBAP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_3), (u'procedureCode', 10), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _HNBAP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_4), (u'SuccessfulOutcome', _HNBAP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_4), (u'procedureCode', 14), (u'criticality', u'reject')])], er=[])
     
     #-----< HNBAP-ELEMENTARY-PROCEDURES-CLASS-2 >-----#
-    HNBAP_ELEMENTARY_PROCEDURES_CLASS_2 = CLASS(name='HNBAP-ELEMENTARY-PROCEDURES-CLASS-2', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-PDU-Descriptions', 'HNBAP-ELEMENTARY-PROCEDURE')))
-    _HNBAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_0 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'UEDe-Register')))
-    _HNBAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_1 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'HNBDe-Register')))
-    _HNBAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_2 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'ErrorIndication')))
-    _HNBAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_3 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'PrivateMessage')))
-    _HNBAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_4 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'CSGMembershipUpdate')))
-    _HNBAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_5 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'RelocationComplete')))
-    HNBAP_ELEMENTARY_PROCEDURES_CLASS_2._val = ASN1Set(rv=[dict([('InitiatingMessage', _HNBAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_0), ('procedureCode', 4), ('criticality', 'ignore')]), dict([('InitiatingMessage', _HNBAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_1), ('procedureCode', 2), ('criticality', 'ignore')]), dict([('InitiatingMessage', _HNBAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_2), ('procedureCode', 5), ('criticality', 'ignore')]), dict([('InitiatingMessage', _HNBAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_3), ('procedureCode', 6), ('criticality', 'ignore')])], rr=[], ev=[dict([('InitiatingMessage', _HNBAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_4), ('procedureCode', 7), ('criticality', 'ignore')]), dict([('InitiatingMessage', _HNBAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_5), ('procedureCode', 11), ('criticality', 'ignore')])], er=[])
+    HNBAP_ELEMENTARY_PROCEDURES_CLASS_2 = CLASS(name=u'HNBAP-ELEMENTARY-PROCEDURES-CLASS-2', mode=MODE_SET, typeref=ASN1RefType(('HNBAP-PDU-Descriptions', 'HNBAP-ELEMENTARY-PROCEDURE')))
+    _HNBAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_0 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'UEDe-Register')))
+    _HNBAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_1 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'HNBDe-Register')))
+    _HNBAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_2 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'ErrorIndication')))
+    _HNBAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_3 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'PrivateMessage')))
+    _HNBAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_4 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'CSGMembershipUpdate')))
+    _HNBAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_5 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'RelocationComplete')))
+    HNBAP_ELEMENTARY_PROCEDURES_CLASS_2._val = ASN1Set(rv=[dict([(u'InitiatingMessage', _HNBAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_0), (u'procedureCode', 4), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', _HNBAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_1), (u'procedureCode', 2), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', _HNBAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_2), (u'procedureCode', 5), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', _HNBAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_3), (u'procedureCode', 6), (u'criticality', u'ignore')])], rr=[], ev=[dict([(u'InitiatingMessage', _HNBAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_4), (u'procedureCode', 7), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', _HNBAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_5), (u'procedureCode', 11), (u'criticality', u'ignore')])], er=[])
     
     #-----< hNBRegister >-----#
-    hNBRegister = CLASS(name='hNBRegister', mode=MODE_VALUE, typeref=ASN1RefType(('HNBAP-PDU-Descriptions', 'HNBAP-ELEMENTARY-PROCEDURE')))
-    _hNBRegister_val_InitiatingMessage = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'HNBRegisterRequest')))
-    _hNBRegister_val_SuccessfulOutcome = SEQ(name='SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'HNBRegisterAccept')))
-    _hNBRegister_val_UnsuccessfulOutcome = SEQ(name='UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'HNBRegisterReject')))
-    hNBRegister._val = dict([('InitiatingMessage', _hNBRegister_val_InitiatingMessage), ('SuccessfulOutcome', _hNBRegister_val_SuccessfulOutcome), ('UnsuccessfulOutcome', _hNBRegister_val_UnsuccessfulOutcome), ('procedureCode', 1), ('criticality', 'reject')])
+    hNBRegister = CLASS(name=u'hNBRegister', mode=MODE_VALUE, typeref=ASN1RefType(('HNBAP-PDU-Descriptions', 'HNBAP-ELEMENTARY-PROCEDURE')))
+    _hNBRegister_val_InitiatingMessage = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'HNBRegisterRequest')))
+    _hNBRegister_val_SuccessfulOutcome = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'HNBRegisterAccept')))
+    _hNBRegister_val_UnsuccessfulOutcome = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'HNBRegisterReject')))
+    hNBRegister._val = dict([(u'InitiatingMessage', _hNBRegister_val_InitiatingMessage), (u'SuccessfulOutcome', _hNBRegister_val_SuccessfulOutcome), (u'UnsuccessfulOutcome', _hNBRegister_val_UnsuccessfulOutcome), (u'procedureCode', 1), (u'criticality', u'reject')])
     
     #-----< uERegister >-----#
-    uERegister = CLASS(name='uERegister', mode=MODE_VALUE, typeref=ASN1RefType(('HNBAP-PDU-Descriptions', 'HNBAP-ELEMENTARY-PROCEDURE')))
-    _uERegister_val_InitiatingMessage = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'UERegisterRequest')))
-    _uERegister_val_SuccessfulOutcome = SEQ(name='SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'UERegisterAccept')))
-    _uERegister_val_UnsuccessfulOutcome = SEQ(name='UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'UERegisterReject')))
-    uERegister._val = dict([('InitiatingMessage', _uERegister_val_InitiatingMessage), ('SuccessfulOutcome', _uERegister_val_SuccessfulOutcome), ('UnsuccessfulOutcome', _uERegister_val_UnsuccessfulOutcome), ('procedureCode', 3), ('criticality', 'reject')])
+    uERegister = CLASS(name=u'uERegister', mode=MODE_VALUE, typeref=ASN1RefType(('HNBAP-PDU-Descriptions', 'HNBAP-ELEMENTARY-PROCEDURE')))
+    _uERegister_val_InitiatingMessage = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'UERegisterRequest')))
+    _uERegister_val_SuccessfulOutcome = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'UERegisterAccept')))
+    _uERegister_val_UnsuccessfulOutcome = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'UERegisterReject')))
+    uERegister._val = dict([(u'InitiatingMessage', _uERegister_val_InitiatingMessage), (u'SuccessfulOutcome', _uERegister_val_SuccessfulOutcome), (u'UnsuccessfulOutcome', _uERegister_val_UnsuccessfulOutcome), (u'procedureCode', 3), (u'criticality', u'reject')])
     
     #-----< uEDe-Register >-----#
-    uEDe_Register = CLASS(name='uEDe-Register', mode=MODE_VALUE, typeref=ASN1RefType(('HNBAP-PDU-Descriptions', 'HNBAP-ELEMENTARY-PROCEDURE')))
-    _uEDe_Register_val_InitiatingMessage = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'UEDe-Register')))
-    uEDe_Register._val = dict([('InitiatingMessage', _uEDe_Register_val_InitiatingMessage), ('procedureCode', 4), ('criticality', 'ignore')])
+    uEDe_Register = CLASS(name=u'uEDe-Register', mode=MODE_VALUE, typeref=ASN1RefType(('HNBAP-PDU-Descriptions', 'HNBAP-ELEMENTARY-PROCEDURE')))
+    _uEDe_Register_val_InitiatingMessage = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'UEDe-Register')))
+    uEDe_Register._val = dict([(u'InitiatingMessage', _uEDe_Register_val_InitiatingMessage), (u'procedureCode', 4), (u'criticality', u'ignore')])
     
     #-----< hNBDe-Register >-----#
-    hNBDe_Register = CLASS(name='hNBDe-Register', mode=MODE_VALUE, typeref=ASN1RefType(('HNBAP-PDU-Descriptions', 'HNBAP-ELEMENTARY-PROCEDURE')))
-    _hNBDe_Register_val_InitiatingMessage = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'HNBDe-Register')))
-    hNBDe_Register._val = dict([('InitiatingMessage', _hNBDe_Register_val_InitiatingMessage), ('procedureCode', 2), ('criticality', 'ignore')])
+    hNBDe_Register = CLASS(name=u'hNBDe-Register', mode=MODE_VALUE, typeref=ASN1RefType(('HNBAP-PDU-Descriptions', 'HNBAP-ELEMENTARY-PROCEDURE')))
+    _hNBDe_Register_val_InitiatingMessage = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'HNBDe-Register')))
+    hNBDe_Register._val = dict([(u'InitiatingMessage', _hNBDe_Register_val_InitiatingMessage), (u'procedureCode', 2), (u'criticality', u'ignore')])
     
     #-----< errorIndication >-----#
-    errorIndication = CLASS(name='errorIndication', mode=MODE_VALUE, typeref=ASN1RefType(('HNBAP-PDU-Descriptions', 'HNBAP-ELEMENTARY-PROCEDURE')))
-    _errorIndication_val_InitiatingMessage = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'ErrorIndication')))
-    errorIndication._val = dict([('InitiatingMessage', _errorIndication_val_InitiatingMessage), ('procedureCode', 5), ('criticality', 'ignore')])
+    errorIndication = CLASS(name=u'errorIndication', mode=MODE_VALUE, typeref=ASN1RefType(('HNBAP-PDU-Descriptions', 'HNBAP-ELEMENTARY-PROCEDURE')))
+    _errorIndication_val_InitiatingMessage = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'ErrorIndication')))
+    errorIndication._val = dict([(u'InitiatingMessage', _errorIndication_val_InitiatingMessage), (u'procedureCode', 5), (u'criticality', u'ignore')])
     
     #-----< csg-membership-update >-----#
-    csg_membership_update = CLASS(name='csg-membership-update', mode=MODE_VALUE, typeref=ASN1RefType(('HNBAP-PDU-Descriptions', 'HNBAP-ELEMENTARY-PROCEDURE')))
-    _csg_membership_update_val_InitiatingMessage = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'CSGMembershipUpdate')))
-    csg_membership_update._val = dict([('InitiatingMessage', _csg_membership_update_val_InitiatingMessage), ('procedureCode', 7), ('criticality', 'ignore')])
+    csg_membership_update = CLASS(name=u'csg-membership-update', mode=MODE_VALUE, typeref=ASN1RefType(('HNBAP-PDU-Descriptions', 'HNBAP-ELEMENTARY-PROCEDURE')))
+    _csg_membership_update_val_InitiatingMessage = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'CSGMembershipUpdate')))
+    csg_membership_update._val = dict([(u'InitiatingMessage', _csg_membership_update_val_InitiatingMessage), (u'procedureCode', 7), (u'criticality', u'ignore')])
     
     #-----< tnlUpdate >-----#
-    tnlUpdate = CLASS(name='tnlUpdate', mode=MODE_VALUE, typeref=ASN1RefType(('HNBAP-PDU-Descriptions', 'HNBAP-ELEMENTARY-PROCEDURE')))
-    _tnlUpdate_val_InitiatingMessage = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'TNLUpdateRequest')))
-    _tnlUpdate_val_SuccessfulOutcome = SEQ(name='SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'TNLUpdateResponse')))
-    _tnlUpdate_val_UnsuccessfulOutcome = SEQ(name='UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'TNLUpdateFailure')))
-    tnlUpdate._val = dict([('InitiatingMessage', _tnlUpdate_val_InitiatingMessage), ('SuccessfulOutcome', _tnlUpdate_val_SuccessfulOutcome), ('UnsuccessfulOutcome', _tnlUpdate_val_UnsuccessfulOutcome), ('procedureCode', 9), ('criticality', 'reject')])
+    tnlUpdate = CLASS(name=u'tnlUpdate', mode=MODE_VALUE, typeref=ASN1RefType(('HNBAP-PDU-Descriptions', 'HNBAP-ELEMENTARY-PROCEDURE')))
+    _tnlUpdate_val_InitiatingMessage = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'TNLUpdateRequest')))
+    _tnlUpdate_val_SuccessfulOutcome = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'TNLUpdateResponse')))
+    _tnlUpdate_val_UnsuccessfulOutcome = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'TNLUpdateFailure')))
+    tnlUpdate._val = dict([(u'InitiatingMessage', _tnlUpdate_val_InitiatingMessage), (u'SuccessfulOutcome', _tnlUpdate_val_SuccessfulOutcome), (u'UnsuccessfulOutcome', _tnlUpdate_val_UnsuccessfulOutcome), (u'procedureCode', 9), (u'criticality', u'reject')])
     
     #-----< hNBConfigTransfer >-----#
-    hNBConfigTransfer = CLASS(name='hNBConfigTransfer', mode=MODE_VALUE, typeref=ASN1RefType(('HNBAP-PDU-Descriptions', 'HNBAP-ELEMENTARY-PROCEDURE')))
-    _hNBConfigTransfer_val_InitiatingMessage = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'HNBConfigTransferRequest')))
-    _hNBConfigTransfer_val_SuccessfulOutcome = SEQ(name='SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'HNBConfigTransferResponse')))
-    hNBConfigTransfer._val = dict([('InitiatingMessage', _hNBConfigTransfer_val_InitiatingMessage), ('SuccessfulOutcome', _hNBConfigTransfer_val_SuccessfulOutcome), ('procedureCode', 10), ('criticality', 'reject')])
+    hNBConfigTransfer = CLASS(name=u'hNBConfigTransfer', mode=MODE_VALUE, typeref=ASN1RefType(('HNBAP-PDU-Descriptions', 'HNBAP-ELEMENTARY-PROCEDURE')))
+    _hNBConfigTransfer_val_InitiatingMessage = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'HNBConfigTransferRequest')))
+    _hNBConfigTransfer_val_SuccessfulOutcome = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'HNBConfigTransferResponse')))
+    hNBConfigTransfer._val = dict([(u'InitiatingMessage', _hNBConfigTransfer_val_InitiatingMessage), (u'SuccessfulOutcome', _hNBConfigTransfer_val_SuccessfulOutcome), (u'procedureCode', 10), (u'criticality', u'reject')])
     
     #-----< relocationComplete >-----#
-    relocationComplete = CLASS(name='relocationComplete', mode=MODE_VALUE, typeref=ASN1RefType(('HNBAP-PDU-Descriptions', 'HNBAP-ELEMENTARY-PROCEDURE')))
-    _relocationComplete_val_InitiatingMessage = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'RelocationComplete')))
-    relocationComplete._val = dict([('InitiatingMessage', _relocationComplete_val_InitiatingMessage), ('procedureCode', 11), ('criticality', 'ignore')])
+    relocationComplete = CLASS(name=u'relocationComplete', mode=MODE_VALUE, typeref=ASN1RefType(('HNBAP-PDU-Descriptions', 'HNBAP-ELEMENTARY-PROCEDURE')))
+    _relocationComplete_val_InitiatingMessage = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'RelocationComplete')))
+    relocationComplete._val = dict([(u'InitiatingMessage', _relocationComplete_val_InitiatingMessage), (u'procedureCode', 11), (u'criticality', u'ignore')])
     
     #-----< u-RNTIQuery >-----#
-    u_RNTIQuery = CLASS(name='u-RNTIQuery', mode=MODE_VALUE, typeref=ASN1RefType(('HNBAP-PDU-Descriptions', 'HNBAP-ELEMENTARY-PROCEDURE')))
-    _u_RNTIQuery_val_InitiatingMessage = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'U-RNTIQueryRequest')))
-    _u_RNTIQuery_val_SuccessfulOutcome = SEQ(name='SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'U-RNTIQueryResponse')))
-    u_RNTIQuery._val = dict([('InitiatingMessage', _u_RNTIQuery_val_InitiatingMessage), ('SuccessfulOutcome', _u_RNTIQuery_val_SuccessfulOutcome), ('procedureCode', 14), ('criticality', 'reject')])
+    u_RNTIQuery = CLASS(name=u'u-RNTIQuery', mode=MODE_VALUE, typeref=ASN1RefType(('HNBAP-PDU-Descriptions', 'HNBAP-ELEMENTARY-PROCEDURE')))
+    _u_RNTIQuery_val_InitiatingMessage = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'U-RNTIQueryRequest')))
+    _u_RNTIQuery_val_SuccessfulOutcome = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'U-RNTIQueryResponse')))
+    u_RNTIQuery._val = dict([(u'InitiatingMessage', _u_RNTIQuery_val_InitiatingMessage), (u'SuccessfulOutcome', _u_RNTIQuery_val_SuccessfulOutcome), (u'procedureCode', 14), (u'criticality', u'reject')])
     
     #-----< privateMessage >-----#
-    privateMessage = CLASS(name='privateMessage', mode=MODE_VALUE, typeref=ASN1RefType(('HNBAP-PDU-Descriptions', 'HNBAP-ELEMENTARY-PROCEDURE')))
-    _privateMessage_val_InitiatingMessage = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'PrivateMessage')))
-    privateMessage._val = dict([('InitiatingMessage', _privateMessage_val_InitiatingMessage), ('procedureCode', 6), ('criticality', 'ignore')])
+    privateMessage = CLASS(name=u'privateMessage', mode=MODE_VALUE, typeref=ASN1RefType(('HNBAP-PDU-Descriptions', 'HNBAP-ELEMENTARY-PROCEDURE')))
+    _privateMessage_val_InitiatingMessage = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('HNBAP-PDU-Contents', 'PrivateMessage')))
+    privateMessage._val = dict([(u'InitiatingMessage', _privateMessage_val_InitiatingMessage), (u'procedureCode', 6), (u'criticality', u'ignore')])
     
     _all_ = [
         _HNBAP_ELEMENTARY_PROCEDURE_InitiatingMessage,

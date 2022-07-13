@@ -16,52 +16,52 @@ from pycrate_asn1rt.init             import init_modules
 
 class NIST_HASH:
 
-    _name_  = 'NIST-HASH'
+    _name_  = u'NIST-HASH'
     _oid_   = [2, 16, 840, 1, 101, 3, 4, 2]
     
     _obj_ = [
-        'nistAlgorithms',
-        'hashAlgs',
-        'id-sha256',
-        'id-sha384',
-        'id-sha512',
-        'id-sha224',
-        'id-sha512-224',
-        'id-sha512-256',
-        'id-sha3-224',
-        'id-sha3-256',
-        'id-sha3-384',
-        'id-sha3-512',
-        'id-shake128',
-        'id-shake256',
-        'id-hmacWithSHA3-224',
-        'id-hmacWithSHA3-256',
-        'id-hmacWithSHA3-384',
-        'id-hmacWithSHA3-512',
+        u'nistAlgorithms',
+        u'hashAlgs',
+        u'id-sha256',
+        u'id-sha384',
+        u'id-sha512',
+        u'id-sha224',
+        u'id-sha512-224',
+        u'id-sha512-256',
+        u'id-sha3-224',
+        u'id-sha3-256',
+        u'id-sha3-384',
+        u'id-sha3-512',
+        u'id-shake128',
+        u'id-shake256',
+        u'id-hmacWithSHA3-224',
+        u'id-hmacWithSHA3-256',
+        u'id-hmacWithSHA3-384',
+        u'id-hmacWithSHA3-512',
         ]
     _type_ = [
         ]
     _set_ = [
         ]
     _val_ = [
-        'nistAlgorithms',
-        'hashAlgs',
-        'id-sha256',
-        'id-sha384',
-        'id-sha512',
-        'id-sha224',
-        'id-sha512-224',
-        'id-sha512-256',
-        'id-sha3-224',
-        'id-sha3-256',
-        'id-sha3-384',
-        'id-sha3-512',
-        'id-shake128',
-        'id-shake256',
-        'id-hmacWithSHA3-224',
-        'id-hmacWithSHA3-256',
-        'id-hmacWithSHA3-384',
-        'id-hmacWithSHA3-512',
+        u'nistAlgorithms',
+        u'hashAlgs',
+        u'id-sha256',
+        u'id-sha384',
+        u'id-sha512',
+        u'id-sha224',
+        u'id-sha512-224',
+        u'id-sha512-256',
+        u'id-sha3-224',
+        u'id-sha3-256',
+        u'id-sha3-384',
+        u'id-sha3-512',
+        u'id-shake128',
+        u'id-shake256',
+        u'id-hmacWithSHA3-224',
+        u'id-hmacWithSHA3-256',
+        u'id-hmacWithSHA3-384',
+        u'id-hmacWithSHA3-512',
         ]
     _class_ = [
         ]
@@ -69,75 +69,75 @@ class NIST_HASH:
         ]
     
     #-----< nistAlgorithms >-----#
-    nistAlgorithms = OID(name='nistAlgorithms', mode=MODE_VALUE)
+    nistAlgorithms = OID(name=u'nistAlgorithms', mode=MODE_VALUE)
     nistAlgorithms._val = (2, 16, 840, 1, 101, 3, 4)
     
     #-----< hashAlgs >-----#
-    hashAlgs = OID(name='hashAlgs', mode=MODE_VALUE)
+    hashAlgs = OID(name=u'hashAlgs', mode=MODE_VALUE)
     hashAlgs._val = (2, 16, 840, 1, 101, 3, 4, 2)
     
     #-----< id-sha256 >-----#
-    id_sha256 = OID(name='id-sha256', mode=MODE_VALUE)
+    id_sha256 = OID(name=u'id-sha256', mode=MODE_VALUE)
     id_sha256._val = (2, 16, 840, 1, 101, 3, 4, 2, 1)
     
     #-----< id-sha384 >-----#
-    id_sha384 = OID(name='id-sha384', mode=MODE_VALUE)
+    id_sha384 = OID(name=u'id-sha384', mode=MODE_VALUE)
     id_sha384._val = (2, 16, 840, 1, 101, 3, 4, 2, 2)
     
     #-----< id-sha512 >-----#
-    id_sha512 = OID(name='id-sha512', mode=MODE_VALUE)
+    id_sha512 = OID(name=u'id-sha512', mode=MODE_VALUE)
     id_sha512._val = (2, 16, 840, 1, 101, 3, 4, 2, 3)
     
     #-----< id-sha224 >-----#
-    id_sha224 = OID(name='id-sha224', mode=MODE_VALUE)
+    id_sha224 = OID(name=u'id-sha224', mode=MODE_VALUE)
     id_sha224._val = (2, 16, 840, 1, 101, 3, 4, 2, 4)
     
     #-----< id-sha512-224 >-----#
-    id_sha512_224 = OID(name='id-sha512-224', mode=MODE_VALUE)
+    id_sha512_224 = OID(name=u'id-sha512-224', mode=MODE_VALUE)
     id_sha512_224._val = (2, 16, 840, 1, 101, 3, 4, 2, 5)
     
     #-----< id-sha512-256 >-----#
-    id_sha512_256 = OID(name='id-sha512-256', mode=MODE_VALUE)
+    id_sha512_256 = OID(name=u'id-sha512-256', mode=MODE_VALUE)
     id_sha512_256._val = (2, 16, 840, 1, 101, 3, 4, 2, 6)
     
     #-----< id-sha3-224 >-----#
-    id_sha3_224 = OID(name='id-sha3-224', mode=MODE_VALUE)
+    id_sha3_224 = OID(name=u'id-sha3-224', mode=MODE_VALUE)
     id_sha3_224._val = (2, 16, 840, 1, 101, 3, 4, 2, 7)
     
     #-----< id-sha3-256 >-----#
-    id_sha3_256 = OID(name='id-sha3-256', mode=MODE_VALUE)
+    id_sha3_256 = OID(name=u'id-sha3-256', mode=MODE_VALUE)
     id_sha3_256._val = (2, 16, 840, 1, 101, 3, 4, 2, 8)
     
     #-----< id-sha3-384 >-----#
-    id_sha3_384 = OID(name='id-sha3-384', mode=MODE_VALUE)
+    id_sha3_384 = OID(name=u'id-sha3-384', mode=MODE_VALUE)
     id_sha3_384._val = (2, 16, 840, 1, 101, 3, 4, 2, 9)
     
     #-----< id-sha3-512 >-----#
-    id_sha3_512 = OID(name='id-sha3-512', mode=MODE_VALUE)
+    id_sha3_512 = OID(name=u'id-sha3-512', mode=MODE_VALUE)
     id_sha3_512._val = (2, 16, 840, 1, 101, 3, 4, 2, 10)
     
     #-----< id-shake128 >-----#
-    id_shake128 = OID(name='id-shake128', mode=MODE_VALUE)
+    id_shake128 = OID(name=u'id-shake128', mode=MODE_VALUE)
     id_shake128._val = (2, 16, 840, 1, 101, 3, 4, 2, 11)
     
     #-----< id-shake256 >-----#
-    id_shake256 = OID(name='id-shake256', mode=MODE_VALUE)
+    id_shake256 = OID(name=u'id-shake256', mode=MODE_VALUE)
     id_shake256._val = (2, 16, 840, 1, 101, 3, 4, 2, 12)
     
     #-----< id-hmacWithSHA3-224 >-----#
-    id_hmacWithSHA3_224 = OID(name='id-hmacWithSHA3-224', mode=MODE_VALUE)
+    id_hmacWithSHA3_224 = OID(name=u'id-hmacWithSHA3-224', mode=MODE_VALUE)
     id_hmacWithSHA3_224._val = (2, 16, 840, 1, 101, 3, 4, 2, 13)
     
     #-----< id-hmacWithSHA3-256 >-----#
-    id_hmacWithSHA3_256 = OID(name='id-hmacWithSHA3-256', mode=MODE_VALUE)
+    id_hmacWithSHA3_256 = OID(name=u'id-hmacWithSHA3-256', mode=MODE_VALUE)
     id_hmacWithSHA3_256._val = (2, 16, 840, 1, 101, 3, 4, 2, 14)
     
     #-----< id-hmacWithSHA3-384 >-----#
-    id_hmacWithSHA3_384 = OID(name='id-hmacWithSHA3-384', mode=MODE_VALUE)
+    id_hmacWithSHA3_384 = OID(name=u'id-hmacWithSHA3-384', mode=MODE_VALUE)
     id_hmacWithSHA3_384._val = (2, 16, 840, 1, 101, 3, 4, 2, 15)
     
     #-----< id-hmacWithSHA3-512 >-----#
-    id_hmacWithSHA3_512 = OID(name='id-hmacWithSHA3-512', mode=MODE_VALUE)
+    id_hmacWithSHA3_512 = OID(name=u'id-hmacWithSHA3-512', mode=MODE_VALUE)
     id_hmacWithSHA3_512._val = (2, 16, 840, 1, 101, 3, 4, 2, 16)
     
     _all_ = [
@@ -163,504 +163,504 @@ class NIST_HASH:
 
 class PKCS_1:
 
-    _name_  = 'PKCS-1'
+    _name_  = u'PKCS-1'
     _oid_   = [1, 2, 840, 113549, 1, 1, 0, 1]
     
     _obj_ = [
-        'pkcs-1',
-        'rsaEncryption',
-        'id-RSAES-OAEP',
-        'id-pSpecified',
-        'id-RSASSA-PSS',
-        'md2WithRSAEncryption',
-        'md5WithRSAEncryption',
-        'sha1WithRSAEncryption',
-        'sha256WithRSAEncryption',
-        'sha384WithRSAEncryption',
-        'sha512WithRSAEncryption',
-        'id-sha1',
-        'id-md2',
-        'id-md5',
-        'id-mgf1',
-        'ALGORITHM-IDENTIFIER',
-        'AlgorithmIdentifier',
-        'OAEP-PSSDigestAlgorithms',
-        'PKCS1-v1-5DigestAlgorithms',
-        'sha1',
-        'HashAlgorithm',
-        'SHA1Parameters',
-        'PKCS1MGFAlgorithms',
-        'mgf1SHA1',
-        'MaskGenAlgorithm',
-        'PKCS1PSourceAlgorithms',
-        'EncodingParameters',
-        'pSpecifiedEmpty',
-        'PSourceAlgorithm',
-        'emptyString',
-        'PKCS1Algorithms',
-        'RSAPublicKey',
-        'RSAPrivateKey',
-        'Version',
-        'OtherPrimeInfos',
-        'OtherPrimeInfo',
-        'RSAES-OAEP-params',
-        'rSAES-OAEP-Default-Identifier',
-        'RSAES-AlgorithmIdentifier',
-        'RSASSA-PSS-params',
-        'TrailerField',
-        'rSASSA-PSS-Default-Identifier',
-        'RSASSA-AlgorithmIdentifier',
-        'DigestInfo',
-        'DigestAlgorithm',
+        u'pkcs-1',
+        u'rsaEncryption',
+        u'id-RSAES-OAEP',
+        u'id-pSpecified',
+        u'id-RSASSA-PSS',
+        u'md2WithRSAEncryption',
+        u'md5WithRSAEncryption',
+        u'sha1WithRSAEncryption',
+        u'sha256WithRSAEncryption',
+        u'sha384WithRSAEncryption',
+        u'sha512WithRSAEncryption',
+        u'id-sha1',
+        u'id-md2',
+        u'id-md5',
+        u'id-mgf1',
+        u'ALGORITHM-IDENTIFIER',
+        u'AlgorithmIdentifier',
+        u'OAEP-PSSDigestAlgorithms',
+        u'PKCS1-v1-5DigestAlgorithms',
+        u'sha1',
+        u'HashAlgorithm',
+        u'SHA1Parameters',
+        u'PKCS1MGFAlgorithms',
+        u'mgf1SHA1',
+        u'MaskGenAlgorithm',
+        u'PKCS1PSourceAlgorithms',
+        u'EncodingParameters',
+        u'pSpecifiedEmpty',
+        u'PSourceAlgorithm',
+        u'emptyString',
+        u'PKCS1Algorithms',
+        u'RSAPublicKey',
+        u'RSAPrivateKey',
+        u'Version',
+        u'OtherPrimeInfos',
+        u'OtherPrimeInfo',
+        u'RSAES-OAEP-params',
+        u'rSAES-OAEP-Default-Identifier',
+        u'RSAES-AlgorithmIdentifier',
+        u'RSASSA-PSS-params',
+        u'TrailerField',
+        u'rSASSA-PSS-Default-Identifier',
+        u'RSASSA-AlgorithmIdentifier',
+        u'DigestInfo',
+        u'DigestAlgorithm',
         ]
     _type_ = [
-        'ALGORITHM-IDENTIFIER',
-        'AlgorithmIdentifier',
-        'HashAlgorithm',
-        'SHA1Parameters',
-        'MaskGenAlgorithm',
-        'EncodingParameters',
-        'PSourceAlgorithm',
-        'RSAPublicKey',
-        'RSAPrivateKey',
-        'Version',
-        'OtherPrimeInfos',
-        'OtherPrimeInfo',
-        'RSAES-OAEP-params',
-        'RSAES-AlgorithmIdentifier',
-        'RSASSA-PSS-params',
-        'TrailerField',
-        'RSASSA-AlgorithmIdentifier',
-        'DigestInfo',
-        'DigestAlgorithm',
+        u'ALGORITHM-IDENTIFIER',
+        u'AlgorithmIdentifier',
+        u'HashAlgorithm',
+        u'SHA1Parameters',
+        u'MaskGenAlgorithm',
+        u'EncodingParameters',
+        u'PSourceAlgorithm',
+        u'RSAPublicKey',
+        u'RSAPrivateKey',
+        u'Version',
+        u'OtherPrimeInfos',
+        u'OtherPrimeInfo',
+        u'RSAES-OAEP-params',
+        u'RSAES-AlgorithmIdentifier',
+        u'RSASSA-PSS-params',
+        u'TrailerField',
+        u'RSASSA-AlgorithmIdentifier',
+        u'DigestInfo',
+        u'DigestAlgorithm',
         ]
     _set_ = [
-        'OAEP-PSSDigestAlgorithms',
-        'PKCS1-v1-5DigestAlgorithms',
-        'PKCS1MGFAlgorithms',
-        'PKCS1PSourceAlgorithms',
-        'PKCS1Algorithms',
+        u'OAEP-PSSDigestAlgorithms',
+        u'PKCS1-v1-5DigestAlgorithms',
+        u'PKCS1MGFAlgorithms',
+        u'PKCS1PSourceAlgorithms',
+        u'PKCS1Algorithms',
         ]
     _val_ = [
-        'pkcs-1',
-        'rsaEncryption',
-        'id-RSAES-OAEP',
-        'id-pSpecified',
-        'id-RSASSA-PSS',
-        'md2WithRSAEncryption',
-        'md5WithRSAEncryption',
-        'sha1WithRSAEncryption',
-        'sha256WithRSAEncryption',
-        'sha384WithRSAEncryption',
-        'sha512WithRSAEncryption',
-        'id-sha1',
-        'id-md2',
-        'id-md5',
-        'id-mgf1',
-        'sha1',
-        'mgf1SHA1',
-        'pSpecifiedEmpty',
-        'emptyString',
-        'rSAES-OAEP-Default-Identifier',
-        'rSASSA-PSS-Default-Identifier',
+        u'pkcs-1',
+        u'rsaEncryption',
+        u'id-RSAES-OAEP',
+        u'id-pSpecified',
+        u'id-RSASSA-PSS',
+        u'md2WithRSAEncryption',
+        u'md5WithRSAEncryption',
+        u'sha1WithRSAEncryption',
+        u'sha256WithRSAEncryption',
+        u'sha384WithRSAEncryption',
+        u'sha512WithRSAEncryption',
+        u'id-sha1',
+        u'id-md2',
+        u'id-md5',
+        u'id-mgf1',
+        u'sha1',
+        u'mgf1SHA1',
+        u'pSpecifiedEmpty',
+        u'emptyString',
+        u'rSAES-OAEP-Default-Identifier',
+        u'rSASSA-PSS-Default-Identifier',
         ]
     _class_ = [
-        'ALGORITHM-IDENTIFIER',
-        'OAEP-PSSDigestAlgorithms',
-        'PKCS1-v1-5DigestAlgorithms',
-        'PKCS1MGFAlgorithms',
-        'PKCS1PSourceAlgorithms',
-        'PKCS1Algorithms',
+        u'ALGORITHM-IDENTIFIER',
+        u'OAEP-PSSDigestAlgorithms',
+        u'PKCS1-v1-5DigestAlgorithms',
+        u'PKCS1MGFAlgorithms',
+        u'PKCS1PSourceAlgorithms',
+        u'PKCS1Algorithms',
         ]
     _param_ = [
-        'AlgorithmIdentifier',
+        u'AlgorithmIdentifier',
         ]
     
     #-----< pkcs-1 >-----#
-    pkcs_1 = OID(name='pkcs-1', mode=MODE_VALUE)
+    pkcs_1 = OID(name=u'pkcs-1', mode=MODE_VALUE)
     pkcs_1._val = (1, 2, 840, 113549, 1, 1)
     
     #-----< rsaEncryption >-----#
-    rsaEncryption = OID(name='rsaEncryption', mode=MODE_VALUE)
+    rsaEncryption = OID(name=u'rsaEncryption', mode=MODE_VALUE)
     rsaEncryption._val = (1, 2, 840, 113549, 1, 1, 1)
     
     #-----< id-RSAES-OAEP >-----#
-    id_RSAES_OAEP = OID(name='id-RSAES-OAEP', mode=MODE_VALUE)
+    id_RSAES_OAEP = OID(name=u'id-RSAES-OAEP', mode=MODE_VALUE)
     id_RSAES_OAEP._val = (1, 2, 840, 113549, 1, 1, 7)
     
     #-----< id-pSpecified >-----#
-    id_pSpecified = OID(name='id-pSpecified', mode=MODE_VALUE)
+    id_pSpecified = OID(name=u'id-pSpecified', mode=MODE_VALUE)
     id_pSpecified._val = (1, 2, 840, 113549, 1, 1, 9)
     
     #-----< id-RSASSA-PSS >-----#
-    id_RSASSA_PSS = OID(name='id-RSASSA-PSS', mode=MODE_VALUE)
+    id_RSASSA_PSS = OID(name=u'id-RSASSA-PSS', mode=MODE_VALUE)
     id_RSASSA_PSS._val = (1, 2, 840, 113549, 1, 1, 10)
     
     #-----< md2WithRSAEncryption >-----#
-    md2WithRSAEncryption = OID(name='md2WithRSAEncryption', mode=MODE_VALUE)
+    md2WithRSAEncryption = OID(name=u'md2WithRSAEncryption', mode=MODE_VALUE)
     md2WithRSAEncryption._val = (1, 2, 840, 113549, 1, 1, 2)
     
     #-----< md5WithRSAEncryption >-----#
-    md5WithRSAEncryption = OID(name='md5WithRSAEncryption', mode=MODE_VALUE)
+    md5WithRSAEncryption = OID(name=u'md5WithRSAEncryption', mode=MODE_VALUE)
     md5WithRSAEncryption._val = (1, 2, 840, 113549, 1, 1, 4)
     
     #-----< sha1WithRSAEncryption >-----#
-    sha1WithRSAEncryption = OID(name='sha1WithRSAEncryption', mode=MODE_VALUE)
+    sha1WithRSAEncryption = OID(name=u'sha1WithRSAEncryption', mode=MODE_VALUE)
     sha1WithRSAEncryption._val = (1, 2, 840, 113549, 1, 1, 5)
     
     #-----< sha256WithRSAEncryption >-----#
-    sha256WithRSAEncryption = OID(name='sha256WithRSAEncryption', mode=MODE_VALUE)
+    sha256WithRSAEncryption = OID(name=u'sha256WithRSAEncryption', mode=MODE_VALUE)
     sha256WithRSAEncryption._val = (1, 2, 840, 113549, 1, 1, 11)
     
     #-----< sha384WithRSAEncryption >-----#
-    sha384WithRSAEncryption = OID(name='sha384WithRSAEncryption', mode=MODE_VALUE)
+    sha384WithRSAEncryption = OID(name=u'sha384WithRSAEncryption', mode=MODE_VALUE)
     sha384WithRSAEncryption._val = (1, 2, 840, 113549, 1, 1, 12)
     
     #-----< sha512WithRSAEncryption >-----#
-    sha512WithRSAEncryption = OID(name='sha512WithRSAEncryption', mode=MODE_VALUE)
+    sha512WithRSAEncryption = OID(name=u'sha512WithRSAEncryption', mode=MODE_VALUE)
     sha512WithRSAEncryption._val = (1, 2, 840, 113549, 1, 1, 13)
     
     #-----< id-sha1 >-----#
-    id_sha1 = OID(name='id-sha1', mode=MODE_VALUE)
+    id_sha1 = OID(name=u'id-sha1', mode=MODE_VALUE)
     id_sha1._val = (1, 3, 14, 3, 2, 26)
     
     #-----< id-md2 >-----#
-    id_md2 = OID(name='id-md2', mode=MODE_VALUE)
+    id_md2 = OID(name=u'id-md2', mode=MODE_VALUE)
     id_md2._val = (1, 2, 840, 113549, 2, 2)
     
     #-----< id-md5 >-----#
-    id_md5 = OID(name='id-md5', mode=MODE_VALUE)
+    id_md5 = OID(name=u'id-md5', mode=MODE_VALUE)
     id_md5._val = (1, 2, 840, 113549, 2, 5)
     
     #-----< id-mgf1 >-----#
-    id_mgf1 = OID(name='id-mgf1', mode=MODE_VALUE)
+    id_mgf1 = OID(name=u'id-mgf1', mode=MODE_VALUE)
     id_mgf1._val = (1, 2, 840, 113549, 1, 1, 8)
     
     #-----< ALGORITHM-IDENTIFIER >-----#
-    ALGORITHM_IDENTIFIER = CLASS(name='ALGORITHM-IDENTIFIER', mode=MODE_TYPE)
-    _ALGORITHM_IDENTIFIER_id = OID(name='id', mode=MODE_VALUE, uniq=True)
-    _ALGORITHM_IDENTIFIER_Type = OPEN(name='Type', mode=MODE_TYPE, opt=True)
+    ALGORITHM_IDENTIFIER = CLASS(name=u'ALGORITHM-IDENTIFIER', mode=MODE_TYPE)
+    _ALGORITHM_IDENTIFIER_id = OID(name=u'id', mode=MODE_VALUE, uniq=True)
+    _ALGORITHM_IDENTIFIER_Type = OPEN(name=u'Type', mode=MODE_TYPE, opt=True)
     ALGORITHM_IDENTIFIER._cont = ASN1Dict([
-        ('id', _ALGORITHM_IDENTIFIER_id),
-        ('Type', _ALGORITHM_IDENTIFIER_Type),
+        (u'id', _ALGORITHM_IDENTIFIER_id),
+        (u'Type', _ALGORITHM_IDENTIFIER_Type),
         ])
     
     #-----< AlgorithmIdentifier >-----#
-    AlgorithmIdentifier = SEQ(name='AlgorithmIdentifier', mode=MODE_TYPE, param=True)
+    AlgorithmIdentifier = SEQ(name=u'AlgorithmIdentifier', mode=MODE_TYPE, param=True)
     
     #-----< OAEP-PSSDigestAlgorithms >-----#
-    OAEP_PSSDigestAlgorithms = CLASS(name='OAEP-PSSDigestAlgorithms', mode=MODE_SET, typeref=ASN1RefType(('PKCS-1', 'ALGORITHM-IDENTIFIER')))
-    _OAEP_PSSDigestAlgorithms_val_Type_0 = NULL(name='Type', mode=MODE_TYPE)
-    _OAEP_PSSDigestAlgorithms_val_Type_1 = NULL(name='Type', mode=MODE_TYPE)
-    _OAEP_PSSDigestAlgorithms_val_Type_2 = NULL(name='Type', mode=MODE_TYPE)
-    _OAEP_PSSDigestAlgorithms_val_Type_3 = NULL(name='Type', mode=MODE_TYPE)
-    OAEP_PSSDigestAlgorithms._val = ASN1Set(rv=[dict([('id', (1, 3, 14, 3, 2, 26)), ('Type', _OAEP_PSSDigestAlgorithms_val_Type_0)]), dict([('id', (2, 16, 840, 1, 101, 3, 4, 2, 1)), ('Type', _OAEP_PSSDigestAlgorithms_val_Type_1)]), dict([('id', (2, 16, 840, 1, 101, 3, 4, 2, 2)), ('Type', _OAEP_PSSDigestAlgorithms_val_Type_2)]), dict([('id', (2, 16, 840, 1, 101, 3, 4, 2, 3)), ('Type', _OAEP_PSSDigestAlgorithms_val_Type_3)])], rr=[], ev=[], er=[])
+    OAEP_PSSDigestAlgorithms = CLASS(name=u'OAEP-PSSDigestAlgorithms', mode=MODE_SET, typeref=ASN1RefType(('PKCS-1', 'ALGORITHM-IDENTIFIER')))
+    _OAEP_PSSDigestAlgorithms_val_Type_0 = NULL(name=u'Type', mode=MODE_TYPE)
+    _OAEP_PSSDigestAlgorithms_val_Type_1 = NULL(name=u'Type', mode=MODE_TYPE)
+    _OAEP_PSSDigestAlgorithms_val_Type_2 = NULL(name=u'Type', mode=MODE_TYPE)
+    _OAEP_PSSDigestAlgorithms_val_Type_3 = NULL(name=u'Type', mode=MODE_TYPE)
+    OAEP_PSSDigestAlgorithms._val = ASN1Set(rv=[dict([(u'id', (1, 3, 14, 3, 2, 26)), (u'Type', _OAEP_PSSDigestAlgorithms_val_Type_0)]), dict([(u'id', (2, 16, 840, 1, 101, 3, 4, 2, 1)), (u'Type', _OAEP_PSSDigestAlgorithms_val_Type_1)]), dict([(u'id', (2, 16, 840, 1, 101, 3, 4, 2, 2)), (u'Type', _OAEP_PSSDigestAlgorithms_val_Type_2)]), dict([(u'id', (2, 16, 840, 1, 101, 3, 4, 2, 3)), (u'Type', _OAEP_PSSDigestAlgorithms_val_Type_3)])], rr=[], ev=[], er=[])
     
     #-----< PKCS1-v1-5DigestAlgorithms >-----#
-    PKCS1_v1_5DigestAlgorithms = CLASS(name='PKCS1-v1-5DigestAlgorithms', mode=MODE_SET, typeref=ASN1RefType(('PKCS-1', 'ALGORITHM-IDENTIFIER')))
-    _PKCS1_v1_5DigestAlgorithms_val_Type_0 = NULL(name='Type', mode=MODE_TYPE)
-    _PKCS1_v1_5DigestAlgorithms_val_Type_1 = NULL(name='Type', mode=MODE_TYPE)
-    _PKCS1_v1_5DigestAlgorithms_val_Type_2 = NULL(name='Type', mode=MODE_TYPE)
-    _PKCS1_v1_5DigestAlgorithms_val_Type_3 = NULL(name='Type', mode=MODE_TYPE)
-    _PKCS1_v1_5DigestAlgorithms_val_Type_4 = NULL(name='Type', mode=MODE_TYPE)
-    _PKCS1_v1_5DigestAlgorithms_val_Type_5 = NULL(name='Type', mode=MODE_TYPE)
-    PKCS1_v1_5DigestAlgorithms._val = ASN1Set(rv=[dict([('id', (1, 2, 840, 113549, 2, 2)), ('Type', _PKCS1_v1_5DigestAlgorithms_val_Type_0)]), dict([('id', (1, 2, 840, 113549, 2, 5)), ('Type', _PKCS1_v1_5DigestAlgorithms_val_Type_1)]), dict([('id', (1, 3, 14, 3, 2, 26)), ('Type', _PKCS1_v1_5DigestAlgorithms_val_Type_2)]), dict([('id', (2, 16, 840, 1, 101, 3, 4, 2, 1)), ('Type', _PKCS1_v1_5DigestAlgorithms_val_Type_3)]), dict([('id', (2, 16, 840, 1, 101, 3, 4, 2, 2)), ('Type', _PKCS1_v1_5DigestAlgorithms_val_Type_4)]), dict([('id', (2, 16, 840, 1, 101, 3, 4, 2, 3)), ('Type', _PKCS1_v1_5DigestAlgorithms_val_Type_5)])], rr=[], ev=None, er=[])
+    PKCS1_v1_5DigestAlgorithms = CLASS(name=u'PKCS1-v1-5DigestAlgorithms', mode=MODE_SET, typeref=ASN1RefType(('PKCS-1', 'ALGORITHM-IDENTIFIER')))
+    _PKCS1_v1_5DigestAlgorithms_val_Type_0 = NULL(name=u'Type', mode=MODE_TYPE)
+    _PKCS1_v1_5DigestAlgorithms_val_Type_1 = NULL(name=u'Type', mode=MODE_TYPE)
+    _PKCS1_v1_5DigestAlgorithms_val_Type_2 = NULL(name=u'Type', mode=MODE_TYPE)
+    _PKCS1_v1_5DigestAlgorithms_val_Type_3 = NULL(name=u'Type', mode=MODE_TYPE)
+    _PKCS1_v1_5DigestAlgorithms_val_Type_4 = NULL(name=u'Type', mode=MODE_TYPE)
+    _PKCS1_v1_5DigestAlgorithms_val_Type_5 = NULL(name=u'Type', mode=MODE_TYPE)
+    PKCS1_v1_5DigestAlgorithms._val = ASN1Set(rv=[dict([(u'id', (1, 2, 840, 113549, 2, 2)), (u'Type', _PKCS1_v1_5DigestAlgorithms_val_Type_0)]), dict([(u'id', (1, 2, 840, 113549, 2, 5)), (u'Type', _PKCS1_v1_5DigestAlgorithms_val_Type_1)]), dict([(u'id', (1, 3, 14, 3, 2, 26)), (u'Type', _PKCS1_v1_5DigestAlgorithms_val_Type_2)]), dict([(u'id', (2, 16, 840, 1, 101, 3, 4, 2, 1)), (u'Type', _PKCS1_v1_5DigestAlgorithms_val_Type_3)]), dict([(u'id', (2, 16, 840, 1, 101, 3, 4, 2, 2)), (u'Type', _PKCS1_v1_5DigestAlgorithms_val_Type_4)]), dict([(u'id', (2, 16, 840, 1, 101, 3, 4, 2, 3)), (u'Type', _PKCS1_v1_5DigestAlgorithms_val_Type_5)])], rr=[], ev=None, er=[])
     
     #-----< sha1 >-----#
-    sha1 = SEQ(name='sha1', mode=MODE_VALUE, typeref=ASN1RefType(('PKCS-1', 'HashAlgorithm')))
-    _parameters_val = NULL(name='parameters', mode=MODE_TYPE, typeref=ASN1RefType(('PKCS-1', 'SHA1Parameters')))
-    sha1._val = dict([('algorithm', (1, 3, 14, 3, 2, 26)), ('parameters', (_parameters_val, 0))])
+    sha1 = SEQ(name=u'sha1', mode=MODE_VALUE, typeref=ASN1RefType(('PKCS-1', 'HashAlgorithm')))
+    _parameters_val = NULL(name=u'parameters', mode=MODE_TYPE, typeref=ASN1RefType(('PKCS-1', 'SHA1Parameters')))
+    sha1._val = dict([(u'algorithm', (1, 3, 14, 3, 2, 26)), (u'parameters', (_parameters_val, 0))])
     
     #-----< HashAlgorithm >-----#
-    HashAlgorithm = SEQ(name='HashAlgorithm', mode=MODE_TYPE, typeref=ASN1RefType(('PKCS-1', 'AlgorithmIdentifier')))
-    _HashAlgorithm_algorithm = OID(name='algorithm', mode=MODE_TYPE, typeref=ASN1RefClassField(('PKCS-1', 'ALGORITHM-IDENTIFIER'), ['id']))
+    HashAlgorithm = SEQ(name=u'HashAlgorithm', mode=MODE_TYPE, typeref=ASN1RefType(('PKCS-1', 'AlgorithmIdentifier')))
+    _HashAlgorithm_algorithm = OID(name=u'algorithm', mode=MODE_TYPE, typeref=ASN1RefClassField(('PKCS-1', 'ALGORITHM-IDENTIFIER'), [u'id']))
     __HashAlgorithm_algorithm_tab = CLASS(name='_tab_ALGORITHM-IDENTIFIER', mode=MODE_SET, typeref=ASN1RefType(('PKCS-1', 'ALGORITHM-IDENTIFIER')))
-    ___HashAlgorithm_algorithm_tab_val_Type_0 = NULL(name='Type', mode=MODE_TYPE)
-    ___HashAlgorithm_algorithm_tab_val_Type_1 = NULL(name='Type', mode=MODE_TYPE)
-    ___HashAlgorithm_algorithm_tab_val_Type_2 = NULL(name='Type', mode=MODE_TYPE)
-    ___HashAlgorithm_algorithm_tab_val_Type_3 = NULL(name='Type', mode=MODE_TYPE)
-    __HashAlgorithm_algorithm_tab._val = ASN1Set(rv=[dict([('id', (1, 3, 14, 3, 2, 26)), ('Type', ___HashAlgorithm_algorithm_tab_val_Type_0)]), dict([('id', (2, 16, 840, 1, 101, 3, 4, 2, 1)), ('Type', ___HashAlgorithm_algorithm_tab_val_Type_1)]), dict([('id', (2, 16, 840, 1, 101, 3, 4, 2, 2)), ('Type', ___HashAlgorithm_algorithm_tab_val_Type_2)]), dict([('id', (2, 16, 840, 1, 101, 3, 4, 2, 3)), ('Type', ___HashAlgorithm_algorithm_tab_val_Type_3)])], rr=[], ev=None, er=[])
+    ___HashAlgorithm_algorithm_tab_val_Type_0 = NULL(name=u'Type', mode=MODE_TYPE)
+    ___HashAlgorithm_algorithm_tab_val_Type_1 = NULL(name=u'Type', mode=MODE_TYPE)
+    ___HashAlgorithm_algorithm_tab_val_Type_2 = NULL(name=u'Type', mode=MODE_TYPE)
+    ___HashAlgorithm_algorithm_tab_val_Type_3 = NULL(name=u'Type', mode=MODE_TYPE)
+    __HashAlgorithm_algorithm_tab._val = ASN1Set(rv=[dict([(u'id', (1, 3, 14, 3, 2, 26)), (u'Type', ___HashAlgorithm_algorithm_tab_val_Type_0)]), dict([(u'id', (2, 16, 840, 1, 101, 3, 4, 2, 1)), (u'Type', ___HashAlgorithm_algorithm_tab_val_Type_1)]), dict([(u'id', (2, 16, 840, 1, 101, 3, 4, 2, 2)), (u'Type', ___HashAlgorithm_algorithm_tab_val_Type_2)]), dict([(u'id', (2, 16, 840, 1, 101, 3, 4, 2, 3)), (u'Type', ___HashAlgorithm_algorithm_tab_val_Type_3)])], rr=[], ev=None, er=[])
     _HashAlgorithm_algorithm._const_tab = __HashAlgorithm_algorithm_tab
     _HashAlgorithm_algorithm._const_tab_at = None
-    _HashAlgorithm_algorithm._const_tab_id = 'id'
-    _HashAlgorithm_parameters = OPEN(name='parameters', mode=MODE_TYPE, typeref=ASN1RefClassField(('PKCS-1', 'ALGORITHM-IDENTIFIER'), ['Type']), opt=True)
+    _HashAlgorithm_algorithm._const_tab_id = u'id'
+    _HashAlgorithm_parameters = OPEN(name=u'parameters', mode=MODE_TYPE, typeref=ASN1RefClassField(('PKCS-1', 'ALGORITHM-IDENTIFIER'), [u'Type']), opt=True)
     _HashAlgorithm_parameters._const_tab = __HashAlgorithm_algorithm_tab
-    _HashAlgorithm_parameters._const_tab_at = ('..', 'algorithm')
-    _HashAlgorithm_parameters._const_tab_id = 'Type'
+    _HashAlgorithm_parameters._const_tab_at = ('..', u'algorithm')
+    _HashAlgorithm_parameters._const_tab_id = u'Type'
     HashAlgorithm._cont = ASN1Dict([
-        ('algorithm', _HashAlgorithm_algorithm),
-        ('parameters', _HashAlgorithm_parameters),
+        (u'algorithm', _HashAlgorithm_algorithm),
+        (u'parameters', _HashAlgorithm_parameters),
         ])
     HashAlgorithm._ext = None
     
     #-----< SHA1Parameters >-----#
-    SHA1Parameters = NULL(name='SHA1Parameters', mode=MODE_TYPE)
+    SHA1Parameters = NULL(name=u'SHA1Parameters', mode=MODE_TYPE)
     
     #-----< PKCS1MGFAlgorithms >-----#
-    PKCS1MGFAlgorithms = CLASS(name='PKCS1MGFAlgorithms', mode=MODE_SET, typeref=ASN1RefType(('PKCS-1', 'ALGORITHM-IDENTIFIER')))
-    _PKCS1MGFAlgorithms_val_Type_0 = SEQ(name='Type', mode=MODE_TYPE, typeref=ASN1RefType(('PKCS-1', 'HashAlgorithm')))
-    PKCS1MGFAlgorithms._val = ASN1Set(rv=[dict([('id', (1, 2, 840, 113549, 1, 1, 8)), ('Type', _PKCS1MGFAlgorithms_val_Type_0)])], rr=[], ev=[], er=[])
+    PKCS1MGFAlgorithms = CLASS(name=u'PKCS1MGFAlgorithms', mode=MODE_SET, typeref=ASN1RefType(('PKCS-1', 'ALGORITHM-IDENTIFIER')))
+    _PKCS1MGFAlgorithms_val_Type_0 = SEQ(name=u'Type', mode=MODE_TYPE, typeref=ASN1RefType(('PKCS-1', 'HashAlgorithm')))
+    PKCS1MGFAlgorithms._val = ASN1Set(rv=[dict([(u'id', (1, 2, 840, 113549, 1, 1, 8)), (u'Type', _PKCS1MGFAlgorithms_val_Type_0)])], rr=[], ev=[], er=[])
     
     #-----< mgf1SHA1 >-----#
-    mgf1SHA1 = SEQ(name='mgf1SHA1', mode=MODE_VALUE, typeref=ASN1RefType(('PKCS-1', 'MaskGenAlgorithm')))
-    _parameters_val_0 = SEQ(name='parameters', mode=MODE_TYPE, typeref=ASN1RefType(('PKCS-1', 'HashAlgorithm')))
-    mgf1SHA1._val = dict([('algorithm', (1, 2, 840, 113549, 1, 1, 8)), ('parameters', (_parameters_val_0, dict([('algorithm', (1, 3, 14, 3, 2, 26)), ('parameters', (_parameters_val, 0))])))])
+    mgf1SHA1 = SEQ(name=u'mgf1SHA1', mode=MODE_VALUE, typeref=ASN1RefType(('PKCS-1', 'MaskGenAlgorithm')))
+    _parameters_val_0 = SEQ(name=u'parameters', mode=MODE_TYPE, typeref=ASN1RefType(('PKCS-1', 'HashAlgorithm')))
+    mgf1SHA1._val = dict([(u'algorithm', (1, 2, 840, 113549, 1, 1, 8)), (u'parameters', (_parameters_val_0, dict([(u'algorithm', (1, 3, 14, 3, 2, 26)), (u'parameters', (_parameters_val, 0))])))])
     
     #-----< MaskGenAlgorithm >-----#
-    MaskGenAlgorithm = SEQ(name='MaskGenAlgorithm', mode=MODE_TYPE, typeref=ASN1RefType(('PKCS-1', 'AlgorithmIdentifier')))
-    _MaskGenAlgorithm_algorithm = OID(name='algorithm', mode=MODE_TYPE, typeref=ASN1RefClassField(('PKCS-1', 'ALGORITHM-IDENTIFIER'), ['id']))
+    MaskGenAlgorithm = SEQ(name=u'MaskGenAlgorithm', mode=MODE_TYPE, typeref=ASN1RefType(('PKCS-1', 'AlgorithmIdentifier')))
+    _MaskGenAlgorithm_algorithm = OID(name=u'algorithm', mode=MODE_TYPE, typeref=ASN1RefClassField(('PKCS-1', 'ALGORITHM-IDENTIFIER'), [u'id']))
     __MaskGenAlgorithm_algorithm_tab = CLASS(name='_tab_ALGORITHM-IDENTIFIER', mode=MODE_SET, typeref=ASN1RefType(('PKCS-1', 'ALGORITHM-IDENTIFIER')))
-    ___MaskGenAlgorithm_algorithm_tab_val_Type_0 = SEQ(name='Type', mode=MODE_TYPE, typeref=ASN1RefType(('PKCS-1', 'HashAlgorithm')))
-    __MaskGenAlgorithm_algorithm_tab._val = ASN1Set(rv=[dict([('id', (1, 2, 840, 113549, 1, 1, 8)), ('Type', ___MaskGenAlgorithm_algorithm_tab_val_Type_0)])], rr=[], ev=None, er=[])
+    ___MaskGenAlgorithm_algorithm_tab_val_Type_0 = SEQ(name=u'Type', mode=MODE_TYPE, typeref=ASN1RefType(('PKCS-1', 'HashAlgorithm')))
+    __MaskGenAlgorithm_algorithm_tab._val = ASN1Set(rv=[dict([(u'id', (1, 2, 840, 113549, 1, 1, 8)), (u'Type', ___MaskGenAlgorithm_algorithm_tab_val_Type_0)])], rr=[], ev=None, er=[])
     _MaskGenAlgorithm_algorithm._const_tab = __MaskGenAlgorithm_algorithm_tab
     _MaskGenAlgorithm_algorithm._const_tab_at = None
-    _MaskGenAlgorithm_algorithm._const_tab_id = 'id'
-    _MaskGenAlgorithm_parameters = OPEN(name='parameters', mode=MODE_TYPE, typeref=ASN1RefClassField(('PKCS-1', 'ALGORITHM-IDENTIFIER'), ['Type']), opt=True)
+    _MaskGenAlgorithm_algorithm._const_tab_id = u'id'
+    _MaskGenAlgorithm_parameters = OPEN(name=u'parameters', mode=MODE_TYPE, typeref=ASN1RefClassField(('PKCS-1', 'ALGORITHM-IDENTIFIER'), [u'Type']), opt=True)
     _MaskGenAlgorithm_parameters._const_tab = __MaskGenAlgorithm_algorithm_tab
-    _MaskGenAlgorithm_parameters._const_tab_at = ('..', 'algorithm')
-    _MaskGenAlgorithm_parameters._const_tab_id = 'Type'
+    _MaskGenAlgorithm_parameters._const_tab_at = ('..', u'algorithm')
+    _MaskGenAlgorithm_parameters._const_tab_id = u'Type'
     MaskGenAlgorithm._cont = ASN1Dict([
-        ('algorithm', _MaskGenAlgorithm_algorithm),
-        ('parameters', _MaskGenAlgorithm_parameters),
+        (u'algorithm', _MaskGenAlgorithm_algorithm),
+        (u'parameters', _MaskGenAlgorithm_parameters),
         ])
     MaskGenAlgorithm._ext = None
     
     #-----< PKCS1PSourceAlgorithms >-----#
-    PKCS1PSourceAlgorithms = CLASS(name='PKCS1PSourceAlgorithms', mode=MODE_SET, typeref=ASN1RefType(('PKCS-1', 'ALGORITHM-IDENTIFIER')))
-    _PKCS1PSourceAlgorithms_val_Type_0 = OCT_STR(name='Type', mode=MODE_TYPE, typeref=ASN1RefType(('PKCS-1', 'EncodingParameters')))
-    PKCS1PSourceAlgorithms._val = ASN1Set(rv=[dict([('id', (1, 2, 840, 113549, 1, 1, 9)), ('Type', _PKCS1PSourceAlgorithms_val_Type_0)])], rr=[], ev=[], er=[])
+    PKCS1PSourceAlgorithms = CLASS(name=u'PKCS1PSourceAlgorithms', mode=MODE_SET, typeref=ASN1RefType(('PKCS-1', 'ALGORITHM-IDENTIFIER')))
+    _PKCS1PSourceAlgorithms_val_Type_0 = OCT_STR(name=u'Type', mode=MODE_TYPE, typeref=ASN1RefType(('PKCS-1', 'EncodingParameters')))
+    PKCS1PSourceAlgorithms._val = ASN1Set(rv=[dict([(u'id', (1, 2, 840, 113549, 1, 1, 9)), (u'Type', _PKCS1PSourceAlgorithms_val_Type_0)])], rr=[], ev=[], er=[])
     
     #-----< EncodingParameters >-----#
-    EncodingParameters = OCT_STR(name='EncodingParameters', mode=MODE_TYPE)
+    EncodingParameters = OCT_STR(name=u'EncodingParameters', mode=MODE_TYPE)
     EncodingParameters._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=None)], ev=None, er=[])
     
     #-----< pSpecifiedEmpty >-----#
-    pSpecifiedEmpty = SEQ(name='pSpecifiedEmpty', mode=MODE_VALUE, typeref=ASN1RefType(('PKCS-1', 'PSourceAlgorithm')))
-    _parameters_val_1 = OCT_STR(name='parameters', mode=MODE_TYPE, typeref=ASN1RefType(('PKCS-1', 'EncodingParameters')))
-    pSpecifiedEmpty._val = dict([('algorithm', (1, 2, 840, 113549, 1, 1, 9)), ('parameters', (_parameters_val_1, b''))])
+    pSpecifiedEmpty = SEQ(name=u'pSpecifiedEmpty', mode=MODE_VALUE, typeref=ASN1RefType(('PKCS-1', 'PSourceAlgorithm')))
+    _parameters_val_1 = OCT_STR(name=u'parameters', mode=MODE_TYPE, typeref=ASN1RefType(('PKCS-1', 'EncodingParameters')))
+    pSpecifiedEmpty._val = dict([(u'algorithm', (1, 2, 840, 113549, 1, 1, 9)), (u'parameters', (_parameters_val_1, b''))])
     
     #-----< PSourceAlgorithm >-----#
-    PSourceAlgorithm = SEQ(name='PSourceAlgorithm', mode=MODE_TYPE, typeref=ASN1RefType(('PKCS-1', 'AlgorithmIdentifier')))
-    _PSourceAlgorithm_algorithm = OID(name='algorithm', mode=MODE_TYPE, typeref=ASN1RefClassField(('PKCS-1', 'ALGORITHM-IDENTIFIER'), ['id']))
+    PSourceAlgorithm = SEQ(name=u'PSourceAlgorithm', mode=MODE_TYPE, typeref=ASN1RefType(('PKCS-1', 'AlgorithmIdentifier')))
+    _PSourceAlgorithm_algorithm = OID(name=u'algorithm', mode=MODE_TYPE, typeref=ASN1RefClassField(('PKCS-1', 'ALGORITHM-IDENTIFIER'), [u'id']))
     __PSourceAlgorithm_algorithm_tab = CLASS(name='_tab_ALGORITHM-IDENTIFIER', mode=MODE_SET, typeref=ASN1RefType(('PKCS-1', 'ALGORITHM-IDENTIFIER')))
-    ___PSourceAlgorithm_algorithm_tab_val_Type_0 = OCT_STR(name='Type', mode=MODE_TYPE, typeref=ASN1RefType(('PKCS-1', 'EncodingParameters')))
-    __PSourceAlgorithm_algorithm_tab._val = ASN1Set(rv=[dict([('id', (1, 2, 840, 113549, 1, 1, 9)), ('Type', ___PSourceAlgorithm_algorithm_tab_val_Type_0)])], rr=[], ev=None, er=[])
+    ___PSourceAlgorithm_algorithm_tab_val_Type_0 = OCT_STR(name=u'Type', mode=MODE_TYPE, typeref=ASN1RefType(('PKCS-1', 'EncodingParameters')))
+    __PSourceAlgorithm_algorithm_tab._val = ASN1Set(rv=[dict([(u'id', (1, 2, 840, 113549, 1, 1, 9)), (u'Type', ___PSourceAlgorithm_algorithm_tab_val_Type_0)])], rr=[], ev=None, er=[])
     _PSourceAlgorithm_algorithm._const_tab = __PSourceAlgorithm_algorithm_tab
     _PSourceAlgorithm_algorithm._const_tab_at = None
-    _PSourceAlgorithm_algorithm._const_tab_id = 'id'
-    _PSourceAlgorithm_parameters = OPEN(name='parameters', mode=MODE_TYPE, typeref=ASN1RefClassField(('PKCS-1', 'ALGORITHM-IDENTIFIER'), ['Type']), opt=True)
+    _PSourceAlgorithm_algorithm._const_tab_id = u'id'
+    _PSourceAlgorithm_parameters = OPEN(name=u'parameters', mode=MODE_TYPE, typeref=ASN1RefClassField(('PKCS-1', 'ALGORITHM-IDENTIFIER'), [u'Type']), opt=True)
     _PSourceAlgorithm_parameters._const_tab = __PSourceAlgorithm_algorithm_tab
-    _PSourceAlgorithm_parameters._const_tab_at = ('..', 'algorithm')
-    _PSourceAlgorithm_parameters._const_tab_id = 'Type'
+    _PSourceAlgorithm_parameters._const_tab_at = ('..', u'algorithm')
+    _PSourceAlgorithm_parameters._const_tab_id = u'Type'
     PSourceAlgorithm._cont = ASN1Dict([
-        ('algorithm', _PSourceAlgorithm_algorithm),
-        ('parameters', _PSourceAlgorithm_parameters),
+        (u'algorithm', _PSourceAlgorithm_algorithm),
+        (u'parameters', _PSourceAlgorithm_parameters),
         ])
     PSourceAlgorithm._ext = None
     
     #-----< emptyString >-----#
-    emptyString = OCT_STR(name='emptyString', mode=MODE_VALUE, typeref=ASN1RefType(('PKCS-1', 'EncodingParameters')))
+    emptyString = OCT_STR(name=u'emptyString', mode=MODE_VALUE, typeref=ASN1RefType(('PKCS-1', 'EncodingParameters')))
     emptyString._val = b''
     
     #-----< PKCS1Algorithms >-----#
-    PKCS1Algorithms = CLASS(name='PKCS1Algorithms', mode=MODE_SET, typeref=ASN1RefType(('PKCS-1', 'ALGORITHM-IDENTIFIER')))
-    _PKCS1Algorithms_val_Type_0 = NULL(name='Type', mode=MODE_TYPE)
-    _PKCS1Algorithms_val_Type_1 = NULL(name='Type', mode=MODE_TYPE)
-    _PKCS1Algorithms_val_Type_2 = NULL(name='Type', mode=MODE_TYPE)
-    _PKCS1Algorithms_val_Type_3 = NULL(name='Type', mode=MODE_TYPE)
-    _PKCS1Algorithms_val_Type_4 = NULL(name='Type', mode=MODE_TYPE)
-    _PKCS1Algorithms_val_Type_5 = NULL(name='Type', mode=MODE_TYPE)
-    _PKCS1Algorithms_val_Type_6 = NULL(name='Type', mode=MODE_TYPE)
-    _PKCS1Algorithms_val_Type_7 = SEQ(name='Type', mode=MODE_TYPE, typeref=ASN1RefType(('PKCS-1', 'RSAES-OAEP-params')))
-    _PKCS1Algorithms_val_Type_8 = OCT_STR(name='Type', mode=MODE_TYPE, typeref=ASN1RefType(('PKCS-1', 'EncodingParameters')))
-    _PKCS1Algorithms_val_Type_9 = SEQ(name='Type', mode=MODE_TYPE, typeref=ASN1RefType(('PKCS-1', 'RSASSA-PSS-params')))
-    PKCS1Algorithms._val = ASN1Set(rv=[dict([('id', (1, 2, 840, 113549, 1, 1, 1)), ('Type', _PKCS1Algorithms_val_Type_0)]), dict([('id', (1, 2, 840, 113549, 1, 1, 2)), ('Type', _PKCS1Algorithms_val_Type_1)]), dict([('id', (1, 2, 840, 113549, 1, 1, 4)), ('Type', _PKCS1Algorithms_val_Type_2)]), dict([('id', (1, 2, 840, 113549, 1, 1, 5)), ('Type', _PKCS1Algorithms_val_Type_3)]), dict([('id', (1, 2, 840, 113549, 1, 1, 11)), ('Type', _PKCS1Algorithms_val_Type_4)]), dict([('id', (1, 2, 840, 113549, 1, 1, 12)), ('Type', _PKCS1Algorithms_val_Type_5)]), dict([('id', (1, 2, 840, 113549, 1, 1, 13)), ('Type', _PKCS1Algorithms_val_Type_6)]), dict([('id', (1, 2, 840, 113549, 1, 1, 7)), ('Type', _PKCS1Algorithms_val_Type_7)]), dict([('id', (1, 2, 840, 113549, 1, 1, 9)), ('Type', _PKCS1Algorithms_val_Type_8)]), dict([('id', (1, 2, 840, 113549, 1, 1, 10)), ('Type', _PKCS1Algorithms_val_Type_9)])], rr=[], ev=[], er=[])
+    PKCS1Algorithms = CLASS(name=u'PKCS1Algorithms', mode=MODE_SET, typeref=ASN1RefType(('PKCS-1', 'ALGORITHM-IDENTIFIER')))
+    _PKCS1Algorithms_val_Type_0 = NULL(name=u'Type', mode=MODE_TYPE)
+    _PKCS1Algorithms_val_Type_1 = NULL(name=u'Type', mode=MODE_TYPE)
+    _PKCS1Algorithms_val_Type_2 = NULL(name=u'Type', mode=MODE_TYPE)
+    _PKCS1Algorithms_val_Type_3 = NULL(name=u'Type', mode=MODE_TYPE)
+    _PKCS1Algorithms_val_Type_4 = NULL(name=u'Type', mode=MODE_TYPE)
+    _PKCS1Algorithms_val_Type_5 = NULL(name=u'Type', mode=MODE_TYPE)
+    _PKCS1Algorithms_val_Type_6 = NULL(name=u'Type', mode=MODE_TYPE)
+    _PKCS1Algorithms_val_Type_7 = SEQ(name=u'Type', mode=MODE_TYPE, typeref=ASN1RefType(('PKCS-1', 'RSAES-OAEP-params')))
+    _PKCS1Algorithms_val_Type_8 = OCT_STR(name=u'Type', mode=MODE_TYPE, typeref=ASN1RefType(('PKCS-1', 'EncodingParameters')))
+    _PKCS1Algorithms_val_Type_9 = SEQ(name=u'Type', mode=MODE_TYPE, typeref=ASN1RefType(('PKCS-1', 'RSASSA-PSS-params')))
+    PKCS1Algorithms._val = ASN1Set(rv=[dict([(u'id', (1, 2, 840, 113549, 1, 1, 1)), (u'Type', _PKCS1Algorithms_val_Type_0)]), dict([(u'id', (1, 2, 840, 113549, 1, 1, 2)), (u'Type', _PKCS1Algorithms_val_Type_1)]), dict([(u'id', (1, 2, 840, 113549, 1, 1, 4)), (u'Type', _PKCS1Algorithms_val_Type_2)]), dict([(u'id', (1, 2, 840, 113549, 1, 1, 5)), (u'Type', _PKCS1Algorithms_val_Type_3)]), dict([(u'id', (1, 2, 840, 113549, 1, 1, 11)), (u'Type', _PKCS1Algorithms_val_Type_4)]), dict([(u'id', (1, 2, 840, 113549, 1, 1, 12)), (u'Type', _PKCS1Algorithms_val_Type_5)]), dict([(u'id', (1, 2, 840, 113549, 1, 1, 13)), (u'Type', _PKCS1Algorithms_val_Type_6)]), dict([(u'id', (1, 2, 840, 113549, 1, 1, 7)), (u'Type', _PKCS1Algorithms_val_Type_7)]), dict([(u'id', (1, 2, 840, 113549, 1, 1, 9)), (u'Type', _PKCS1Algorithms_val_Type_8)]), dict([(u'id', (1, 2, 840, 113549, 1, 1, 10)), (u'Type', _PKCS1Algorithms_val_Type_9)])], rr=[], ev=[], er=[])
     
     #-----< RSAPublicKey >-----#
-    RSAPublicKey = SEQ(name='RSAPublicKey', mode=MODE_TYPE)
-    _RSAPublicKey_modulus = INT(name='modulus', mode=MODE_TYPE)
-    _RSAPublicKey_publicExponent = INT(name='publicExponent', mode=MODE_TYPE)
+    RSAPublicKey = SEQ(name=u'RSAPublicKey', mode=MODE_TYPE)
+    _RSAPublicKey_modulus = INT(name=u'modulus', mode=MODE_TYPE)
+    _RSAPublicKey_publicExponent = INT(name=u'publicExponent', mode=MODE_TYPE)
     RSAPublicKey._cont = ASN1Dict([
-        ('modulus', _RSAPublicKey_modulus),
-        ('publicExponent', _RSAPublicKey_publicExponent),
+        (u'modulus', _RSAPublicKey_modulus),
+        (u'publicExponent', _RSAPublicKey_publicExponent),
         ])
     RSAPublicKey._ext = None
     
     #-----< RSAPrivateKey >-----#
-    RSAPrivateKey = SEQ(name='RSAPrivateKey', mode=MODE_TYPE)
-    _RSAPrivateKey_version = INT(name='version', mode=MODE_TYPE, typeref=ASN1RefType(('PKCS-1', 'Version')))
-    _RSAPrivateKey_modulus = INT(name='modulus', mode=MODE_TYPE)
-    _RSAPrivateKey_publicExponent = INT(name='publicExponent', mode=MODE_TYPE)
-    _RSAPrivateKey_privateExponent = INT(name='privateExponent', mode=MODE_TYPE)
-    _RSAPrivateKey_prime1 = INT(name='prime1', mode=MODE_TYPE)
-    _RSAPrivateKey_prime2 = INT(name='prime2', mode=MODE_TYPE)
-    _RSAPrivateKey_exponent1 = INT(name='exponent1', mode=MODE_TYPE)
-    _RSAPrivateKey_exponent2 = INT(name='exponent2', mode=MODE_TYPE)
-    _RSAPrivateKey_coefficient = INT(name='coefficient', mode=MODE_TYPE)
-    _RSAPrivateKey_otherPrimeInfos = SEQ_OF(name='otherPrimeInfos', mode=MODE_TYPE, typeref=ASN1RefType(('PKCS-1', 'OtherPrimeInfos')), opt=True)
+    RSAPrivateKey = SEQ(name=u'RSAPrivateKey', mode=MODE_TYPE)
+    _RSAPrivateKey_version = INT(name=u'version', mode=MODE_TYPE, typeref=ASN1RefType(('PKCS-1', 'Version')))
+    _RSAPrivateKey_modulus = INT(name=u'modulus', mode=MODE_TYPE)
+    _RSAPrivateKey_publicExponent = INT(name=u'publicExponent', mode=MODE_TYPE)
+    _RSAPrivateKey_privateExponent = INT(name=u'privateExponent', mode=MODE_TYPE)
+    _RSAPrivateKey_prime1 = INT(name=u'prime1', mode=MODE_TYPE)
+    _RSAPrivateKey_prime2 = INT(name=u'prime2', mode=MODE_TYPE)
+    _RSAPrivateKey_exponent1 = INT(name=u'exponent1', mode=MODE_TYPE)
+    _RSAPrivateKey_exponent2 = INT(name=u'exponent2', mode=MODE_TYPE)
+    _RSAPrivateKey_coefficient = INT(name=u'coefficient', mode=MODE_TYPE)
+    _RSAPrivateKey_otherPrimeInfos = SEQ_OF(name=u'otherPrimeInfos', mode=MODE_TYPE, typeref=ASN1RefType(('PKCS-1', 'OtherPrimeInfos')), opt=True)
     RSAPrivateKey._cont = ASN1Dict([
-        ('version', _RSAPrivateKey_version),
-        ('modulus', _RSAPrivateKey_modulus),
-        ('publicExponent', _RSAPrivateKey_publicExponent),
-        ('privateExponent', _RSAPrivateKey_privateExponent),
-        ('prime1', _RSAPrivateKey_prime1),
-        ('prime2', _RSAPrivateKey_prime2),
-        ('exponent1', _RSAPrivateKey_exponent1),
-        ('exponent2', _RSAPrivateKey_exponent2),
-        ('coefficient', _RSAPrivateKey_coefficient),
-        ('otherPrimeInfos', _RSAPrivateKey_otherPrimeInfos),
+        (u'version', _RSAPrivateKey_version),
+        (u'modulus', _RSAPrivateKey_modulus),
+        (u'publicExponent', _RSAPrivateKey_publicExponent),
+        (u'privateExponent', _RSAPrivateKey_privateExponent),
+        (u'prime1', _RSAPrivateKey_prime1),
+        (u'prime2', _RSAPrivateKey_prime2),
+        (u'exponent1', _RSAPrivateKey_exponent1),
+        (u'exponent2', _RSAPrivateKey_exponent2),
+        (u'coefficient', _RSAPrivateKey_coefficient),
+        (u'otherPrimeInfos', _RSAPrivateKey_otherPrimeInfos),
         ])
     RSAPrivateKey._ext = None
     
     #-----< Version >-----#
-    Version = INT(name='Version', mode=MODE_TYPE)
-    Version._cont = ASN1Dict([('two-prime', 0), ('multi', 1)])
+    Version = INT(name=u'Version', mode=MODE_TYPE)
+    Version._cont = ASN1Dict([(u'two-prime', 0), (u'multi', 1)])
     
     #-----< OtherPrimeInfos >-----#
-    OtherPrimeInfos = SEQ_OF(name='OtherPrimeInfos', mode=MODE_TYPE)
+    OtherPrimeInfos = SEQ_OF(name=u'OtherPrimeInfos', mode=MODE_TYPE)
     _OtherPrimeInfos__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('PKCS-1', 'OtherPrimeInfo')))
     OtherPrimeInfos._cont = _OtherPrimeInfos__item_
     OtherPrimeInfos._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=None)], ev=None, er=[])
     
     #-----< OtherPrimeInfo >-----#
-    OtherPrimeInfo = SEQ(name='OtherPrimeInfo', mode=MODE_TYPE)
-    _OtherPrimeInfo_prime = INT(name='prime', mode=MODE_TYPE)
-    _OtherPrimeInfo_exponent = INT(name='exponent', mode=MODE_TYPE)
-    _OtherPrimeInfo_coefficient = INT(name='coefficient', mode=MODE_TYPE)
+    OtherPrimeInfo = SEQ(name=u'OtherPrimeInfo', mode=MODE_TYPE)
+    _OtherPrimeInfo_prime = INT(name=u'prime', mode=MODE_TYPE)
+    _OtherPrimeInfo_exponent = INT(name=u'exponent', mode=MODE_TYPE)
+    _OtherPrimeInfo_coefficient = INT(name=u'coefficient', mode=MODE_TYPE)
     OtherPrimeInfo._cont = ASN1Dict([
-        ('prime', _OtherPrimeInfo_prime),
-        ('exponent', _OtherPrimeInfo_exponent),
-        ('coefficient', _OtherPrimeInfo_coefficient),
+        (u'prime', _OtherPrimeInfo_prime),
+        (u'exponent', _OtherPrimeInfo_exponent),
+        (u'coefficient', _OtherPrimeInfo_coefficient),
         ])
     OtherPrimeInfo._ext = None
     
     #-----< RSAES-OAEP-params >-----#
-    RSAES_OAEP_params = SEQ(name='RSAES-OAEP-params', mode=MODE_TYPE)
-    _RSAES_OAEP_params_hashAlgorithm = SEQ(name='hashAlgorithm', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('PKCS-1', 'HashAlgorithm')), default=dict([('algorithm', (1, 3, 14, 3, 2, 26)), ('parameters', (_parameters_val, 0))]))
-    _RSAES_OAEP_params_maskGenAlgorithm = SEQ(name='maskGenAlgorithm', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('PKCS-1', 'MaskGenAlgorithm')), default=dict([('algorithm', (1, 2, 840, 113549, 1, 1, 8)), ('parameters', (_parameters_val_0, dict([('algorithm', (1, 3, 14, 3, 2, 26)), ('parameters', (_parameters_val, 0))])))]))
-    _RSAES_OAEP_params_pSourceAlgorithm = SEQ(name='pSourceAlgorithm', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('PKCS-1', 'PSourceAlgorithm')), default=dict([('algorithm', (1, 2, 840, 113549, 1, 1, 9)), ('parameters', (_parameters_val_1, b''))]))
+    RSAES_OAEP_params = SEQ(name=u'RSAES-OAEP-params', mode=MODE_TYPE)
+    _RSAES_OAEP_params_hashAlgorithm = SEQ(name=u'hashAlgorithm', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('PKCS-1', 'HashAlgorithm')), default=dict([(u'algorithm', (1, 3, 14, 3, 2, 26)), (u'parameters', (_parameters_val, 0))]))
+    _RSAES_OAEP_params_maskGenAlgorithm = SEQ(name=u'maskGenAlgorithm', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('PKCS-1', 'MaskGenAlgorithm')), default=dict([(u'algorithm', (1, 2, 840, 113549, 1, 1, 8)), (u'parameters', (_parameters_val_0, dict([(u'algorithm', (1, 3, 14, 3, 2, 26)), (u'parameters', (_parameters_val, 0))])))]))
+    _RSAES_OAEP_params_pSourceAlgorithm = SEQ(name=u'pSourceAlgorithm', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('PKCS-1', 'PSourceAlgorithm')), default=dict([(u'algorithm', (1, 2, 840, 113549, 1, 1, 9)), (u'parameters', (_parameters_val_1, b''))]))
     RSAES_OAEP_params._cont = ASN1Dict([
-        ('hashAlgorithm', _RSAES_OAEP_params_hashAlgorithm),
-        ('maskGenAlgorithm', _RSAES_OAEP_params_maskGenAlgorithm),
-        ('pSourceAlgorithm', _RSAES_OAEP_params_pSourceAlgorithm),
+        (u'hashAlgorithm', _RSAES_OAEP_params_hashAlgorithm),
+        (u'maskGenAlgorithm', _RSAES_OAEP_params_maskGenAlgorithm),
+        (u'pSourceAlgorithm', _RSAES_OAEP_params_pSourceAlgorithm),
         ])
     RSAES_OAEP_params._ext = None
     
     #-----< rSAES-OAEP-Default-Identifier >-----#
-    rSAES_OAEP_Default_Identifier = SEQ(name='rSAES-OAEP-Default-Identifier', mode=MODE_VALUE, typeref=ASN1RefType(('PKCS-1', 'RSAES-AlgorithmIdentifier')))
-    _parameters_val_2 = SEQ(name='parameters', mode=MODE_TYPE, typeref=ASN1RefType(('PKCS-1', 'RSAES-OAEP-params')))
-    rSAES_OAEP_Default_Identifier._val = dict([('algorithm', (1, 2, 840, 113549, 1, 1, 7)), ('parameters', (_parameters_val_2, dict([('hashAlgorithm', dict([('algorithm', (1, 3, 14, 3, 2, 26)), ('parameters', (_parameters_val, 0))])), ('maskGenAlgorithm', dict([('algorithm', (1, 2, 840, 113549, 1, 1, 8)), ('parameters', (_parameters_val_0, dict([('algorithm', (1, 3, 14, 3, 2, 26)), ('parameters', (_parameters_val, 0))])))])), ('pSourceAlgorithm', dict([('algorithm', (1, 2, 840, 113549, 1, 1, 9)), ('parameters', (_parameters_val_1, b''))]))])))])
+    rSAES_OAEP_Default_Identifier = SEQ(name=u'rSAES-OAEP-Default-Identifier', mode=MODE_VALUE, typeref=ASN1RefType(('PKCS-1', 'RSAES-AlgorithmIdentifier')))
+    _parameters_val_2 = SEQ(name=u'parameters', mode=MODE_TYPE, typeref=ASN1RefType(('PKCS-1', 'RSAES-OAEP-params')))
+    rSAES_OAEP_Default_Identifier._val = dict([(u'algorithm', (1, 2, 840, 113549, 1, 1, 7)), (u'parameters', (_parameters_val_2, dict([(u'hashAlgorithm', dict([(u'algorithm', (1, 3, 14, 3, 2, 26)), (u'parameters', (_parameters_val, 0))])), (u'maskGenAlgorithm', dict([(u'algorithm', (1, 2, 840, 113549, 1, 1, 8)), (u'parameters', (_parameters_val_0, dict([(u'algorithm', (1, 3, 14, 3, 2, 26)), (u'parameters', (_parameters_val, 0))])))])), (u'pSourceAlgorithm', dict([(u'algorithm', (1, 2, 840, 113549, 1, 1, 9)), (u'parameters', (_parameters_val_1, b''))]))])))])
     
     #-----< RSAES-AlgorithmIdentifier >-----#
-    RSAES_AlgorithmIdentifier = SEQ(name='RSAES-AlgorithmIdentifier', mode=MODE_TYPE, typeref=ASN1RefType(('PKCS-1', 'AlgorithmIdentifier')))
-    _RSAES_AlgorithmIdentifier_algorithm = OID(name='algorithm', mode=MODE_TYPE, typeref=ASN1RefClassField(('PKCS-1', 'ALGORITHM-IDENTIFIER'), ['id']))
+    RSAES_AlgorithmIdentifier = SEQ(name=u'RSAES-AlgorithmIdentifier', mode=MODE_TYPE, typeref=ASN1RefType(('PKCS-1', 'AlgorithmIdentifier')))
+    _RSAES_AlgorithmIdentifier_algorithm = OID(name=u'algorithm', mode=MODE_TYPE, typeref=ASN1RefClassField(('PKCS-1', 'ALGORITHM-IDENTIFIER'), [u'id']))
     __RSAES_AlgorithmIdentifier_algorithm_tab = CLASS(name='_tab_ALGORITHM-IDENTIFIER', mode=MODE_SET, typeref=ASN1RefType(('PKCS-1', 'ALGORITHM-IDENTIFIER')))
-    ___RSAES_AlgorithmIdentifier_algorithm_tab_val_Type_0 = NULL(name='Type', mode=MODE_TYPE)
-    ___RSAES_AlgorithmIdentifier_algorithm_tab_val_Type_1 = NULL(name='Type', mode=MODE_TYPE)
-    ___RSAES_AlgorithmIdentifier_algorithm_tab_val_Type_2 = NULL(name='Type', mode=MODE_TYPE)
-    ___RSAES_AlgorithmIdentifier_algorithm_tab_val_Type_3 = NULL(name='Type', mode=MODE_TYPE)
-    ___RSAES_AlgorithmIdentifier_algorithm_tab_val_Type_4 = NULL(name='Type', mode=MODE_TYPE)
-    ___RSAES_AlgorithmIdentifier_algorithm_tab_val_Type_5 = NULL(name='Type', mode=MODE_TYPE)
-    ___RSAES_AlgorithmIdentifier_algorithm_tab_val_Type_6 = NULL(name='Type', mode=MODE_TYPE)
-    ___RSAES_AlgorithmIdentifier_algorithm_tab_val_Type_7 = SEQ(name='Type', mode=MODE_TYPE, typeref=ASN1RefType(('PKCS-1', 'RSAES-OAEP-params')))
-    ___RSAES_AlgorithmIdentifier_algorithm_tab_val_Type_8 = OCT_STR(name='Type', mode=MODE_TYPE, typeref=ASN1RefType(('PKCS-1', 'EncodingParameters')))
-    ___RSAES_AlgorithmIdentifier_algorithm_tab_val_Type_9 = SEQ(name='Type', mode=MODE_TYPE, typeref=ASN1RefType(('PKCS-1', 'RSASSA-PSS-params')))
-    __RSAES_AlgorithmIdentifier_algorithm_tab._val = ASN1Set(rv=[dict([('id', (1, 2, 840, 113549, 1, 1, 1)), ('Type', ___RSAES_AlgorithmIdentifier_algorithm_tab_val_Type_0)]), dict([('id', (1, 2, 840, 113549, 1, 1, 2)), ('Type', ___RSAES_AlgorithmIdentifier_algorithm_tab_val_Type_1)]), dict([('id', (1, 2, 840, 113549, 1, 1, 4)), ('Type', ___RSAES_AlgorithmIdentifier_algorithm_tab_val_Type_2)]), dict([('id', (1, 2, 840, 113549, 1, 1, 5)), ('Type', ___RSAES_AlgorithmIdentifier_algorithm_tab_val_Type_3)]), dict([('id', (1, 2, 840, 113549, 1, 1, 11)), ('Type', ___RSAES_AlgorithmIdentifier_algorithm_tab_val_Type_4)]), dict([('id', (1, 2, 840, 113549, 1, 1, 12)), ('Type', ___RSAES_AlgorithmIdentifier_algorithm_tab_val_Type_5)]), dict([('id', (1, 2, 840, 113549, 1, 1, 13)), ('Type', ___RSAES_AlgorithmIdentifier_algorithm_tab_val_Type_6)]), dict([('id', (1, 2, 840, 113549, 1, 1, 7)), ('Type', ___RSAES_AlgorithmIdentifier_algorithm_tab_val_Type_7)]), dict([('id', (1, 2, 840, 113549, 1, 1, 9)), ('Type', ___RSAES_AlgorithmIdentifier_algorithm_tab_val_Type_8)]), dict([('id', (1, 2, 840, 113549, 1, 1, 10)), ('Type', ___RSAES_AlgorithmIdentifier_algorithm_tab_val_Type_9)])], rr=[], ev=None, er=[])
+    ___RSAES_AlgorithmIdentifier_algorithm_tab_val_Type_0 = NULL(name=u'Type', mode=MODE_TYPE)
+    ___RSAES_AlgorithmIdentifier_algorithm_tab_val_Type_1 = NULL(name=u'Type', mode=MODE_TYPE)
+    ___RSAES_AlgorithmIdentifier_algorithm_tab_val_Type_2 = NULL(name=u'Type', mode=MODE_TYPE)
+    ___RSAES_AlgorithmIdentifier_algorithm_tab_val_Type_3 = NULL(name=u'Type', mode=MODE_TYPE)
+    ___RSAES_AlgorithmIdentifier_algorithm_tab_val_Type_4 = NULL(name=u'Type', mode=MODE_TYPE)
+    ___RSAES_AlgorithmIdentifier_algorithm_tab_val_Type_5 = NULL(name=u'Type', mode=MODE_TYPE)
+    ___RSAES_AlgorithmIdentifier_algorithm_tab_val_Type_6 = NULL(name=u'Type', mode=MODE_TYPE)
+    ___RSAES_AlgorithmIdentifier_algorithm_tab_val_Type_7 = SEQ(name=u'Type', mode=MODE_TYPE, typeref=ASN1RefType(('PKCS-1', 'RSAES-OAEP-params')))
+    ___RSAES_AlgorithmIdentifier_algorithm_tab_val_Type_8 = OCT_STR(name=u'Type', mode=MODE_TYPE, typeref=ASN1RefType(('PKCS-1', 'EncodingParameters')))
+    ___RSAES_AlgorithmIdentifier_algorithm_tab_val_Type_9 = SEQ(name=u'Type', mode=MODE_TYPE, typeref=ASN1RefType(('PKCS-1', 'RSASSA-PSS-params')))
+    __RSAES_AlgorithmIdentifier_algorithm_tab._val = ASN1Set(rv=[dict([(u'id', (1, 2, 840, 113549, 1, 1, 1)), (u'Type', ___RSAES_AlgorithmIdentifier_algorithm_tab_val_Type_0)]), dict([(u'id', (1, 2, 840, 113549, 1, 1, 2)), (u'Type', ___RSAES_AlgorithmIdentifier_algorithm_tab_val_Type_1)]), dict([(u'id', (1, 2, 840, 113549, 1, 1, 4)), (u'Type', ___RSAES_AlgorithmIdentifier_algorithm_tab_val_Type_2)]), dict([(u'id', (1, 2, 840, 113549, 1, 1, 5)), (u'Type', ___RSAES_AlgorithmIdentifier_algorithm_tab_val_Type_3)]), dict([(u'id', (1, 2, 840, 113549, 1, 1, 11)), (u'Type', ___RSAES_AlgorithmIdentifier_algorithm_tab_val_Type_4)]), dict([(u'id', (1, 2, 840, 113549, 1, 1, 12)), (u'Type', ___RSAES_AlgorithmIdentifier_algorithm_tab_val_Type_5)]), dict([(u'id', (1, 2, 840, 113549, 1, 1, 13)), (u'Type', ___RSAES_AlgorithmIdentifier_algorithm_tab_val_Type_6)]), dict([(u'id', (1, 2, 840, 113549, 1, 1, 7)), (u'Type', ___RSAES_AlgorithmIdentifier_algorithm_tab_val_Type_7)]), dict([(u'id', (1, 2, 840, 113549, 1, 1, 9)), (u'Type', ___RSAES_AlgorithmIdentifier_algorithm_tab_val_Type_8)]), dict([(u'id', (1, 2, 840, 113549, 1, 1, 10)), (u'Type', ___RSAES_AlgorithmIdentifier_algorithm_tab_val_Type_9)])], rr=[], ev=None, er=[])
     _RSAES_AlgorithmIdentifier_algorithm._const_tab = __RSAES_AlgorithmIdentifier_algorithm_tab
     _RSAES_AlgorithmIdentifier_algorithm._const_tab_at = None
-    _RSAES_AlgorithmIdentifier_algorithm._const_tab_id = 'id'
-    _RSAES_AlgorithmIdentifier_parameters = OPEN(name='parameters', mode=MODE_TYPE, typeref=ASN1RefClassField(('PKCS-1', 'ALGORITHM-IDENTIFIER'), ['Type']), opt=True)
+    _RSAES_AlgorithmIdentifier_algorithm._const_tab_id = u'id'
+    _RSAES_AlgorithmIdentifier_parameters = OPEN(name=u'parameters', mode=MODE_TYPE, typeref=ASN1RefClassField(('PKCS-1', 'ALGORITHM-IDENTIFIER'), [u'Type']), opt=True)
     _RSAES_AlgorithmIdentifier_parameters._const_tab = __RSAES_AlgorithmIdentifier_algorithm_tab
-    _RSAES_AlgorithmIdentifier_parameters._const_tab_at = ('..', 'algorithm')
-    _RSAES_AlgorithmIdentifier_parameters._const_tab_id = 'Type'
+    _RSAES_AlgorithmIdentifier_parameters._const_tab_at = ('..', u'algorithm')
+    _RSAES_AlgorithmIdentifier_parameters._const_tab_id = u'Type'
     RSAES_AlgorithmIdentifier._cont = ASN1Dict([
-        ('algorithm', _RSAES_AlgorithmIdentifier_algorithm),
-        ('parameters', _RSAES_AlgorithmIdentifier_parameters),
+        (u'algorithm', _RSAES_AlgorithmIdentifier_algorithm),
+        (u'parameters', _RSAES_AlgorithmIdentifier_parameters),
         ])
     RSAES_AlgorithmIdentifier._ext = None
     
     #-----< RSASSA-PSS-params >-----#
-    RSASSA_PSS_params = SEQ(name='RSASSA-PSS-params', mode=MODE_TYPE)
-    _RSASSA_PSS_params_hashAlgorithm = SEQ(name='hashAlgorithm', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('PKCS-1', 'HashAlgorithm')), default=dict([('algorithm', (1, 3, 14, 3, 2, 26)), ('parameters', (_parameters_val, 0))]))
-    _RSASSA_PSS_params_maskGenAlgorithm = SEQ(name='maskGenAlgorithm', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('PKCS-1', 'MaskGenAlgorithm')), default=dict([('algorithm', (1, 2, 840, 113549, 1, 1, 8)), ('parameters', (_parameters_val_0, dict([('algorithm', (1, 3, 14, 3, 2, 26)), ('parameters', (_parameters_val, 0))])))]))
-    _RSASSA_PSS_params_saltLength = INT(name='saltLength', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), default=20)
-    _RSASSA_PSS_params_trailerField = INT(name='trailerField', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('PKCS-1', 'TrailerField')), default=1)
+    RSASSA_PSS_params = SEQ(name=u'RSASSA-PSS-params', mode=MODE_TYPE)
+    _RSASSA_PSS_params_hashAlgorithm = SEQ(name=u'hashAlgorithm', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('PKCS-1', 'HashAlgorithm')), default=dict([(u'algorithm', (1, 3, 14, 3, 2, 26)), (u'parameters', (_parameters_val, 0))]))
+    _RSASSA_PSS_params_maskGenAlgorithm = SEQ(name=u'maskGenAlgorithm', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('PKCS-1', 'MaskGenAlgorithm')), default=dict([(u'algorithm', (1, 2, 840, 113549, 1, 1, 8)), (u'parameters', (_parameters_val_0, dict([(u'algorithm', (1, 3, 14, 3, 2, 26)), (u'parameters', (_parameters_val, 0))])))]))
+    _RSASSA_PSS_params_saltLength = INT(name=u'saltLength', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), default=20)
+    _RSASSA_PSS_params_trailerField = INT(name=u'trailerField', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('PKCS-1', 'TrailerField')), default=1)
     RSASSA_PSS_params._cont = ASN1Dict([
-        ('hashAlgorithm', _RSASSA_PSS_params_hashAlgorithm),
-        ('maskGenAlgorithm', _RSASSA_PSS_params_maskGenAlgorithm),
-        ('saltLength', _RSASSA_PSS_params_saltLength),
-        ('trailerField', _RSASSA_PSS_params_trailerField),
+        (u'hashAlgorithm', _RSASSA_PSS_params_hashAlgorithm),
+        (u'maskGenAlgorithm', _RSASSA_PSS_params_maskGenAlgorithm),
+        (u'saltLength', _RSASSA_PSS_params_saltLength),
+        (u'trailerField', _RSASSA_PSS_params_trailerField),
         ])
     RSASSA_PSS_params._ext = None
     
     #-----< TrailerField >-----#
-    TrailerField = INT(name='TrailerField', mode=MODE_TYPE)
-    TrailerField._cont = ASN1Dict([('trailerFieldBC', 1)])
+    TrailerField = INT(name=u'TrailerField', mode=MODE_TYPE)
+    TrailerField._cont = ASN1Dict([(u'trailerFieldBC', 1)])
     
     #-----< rSASSA-PSS-Default-Identifier >-----#
-    rSASSA_PSS_Default_Identifier = SEQ(name='rSASSA-PSS-Default-Identifier', mode=MODE_VALUE, typeref=ASN1RefType(('PKCS-1', 'RSASSA-AlgorithmIdentifier')))
-    _parameters_val_3 = SEQ(name='parameters', mode=MODE_TYPE, typeref=ASN1RefType(('PKCS-1', 'RSASSA-PSS-params')))
-    rSASSA_PSS_Default_Identifier._val = dict([('algorithm', (1, 2, 840, 113549, 1, 1, 10)), ('parameters', (_parameters_val_3, dict([('hashAlgorithm', dict([('algorithm', (1, 3, 14, 3, 2, 26)), ('parameters', (_parameters_val, 0))])), ('maskGenAlgorithm', dict([('algorithm', (1, 2, 840, 113549, 1, 1, 8)), ('parameters', (_parameters_val_0, dict([('algorithm', (1, 3, 14, 3, 2, 26)), ('parameters', (_parameters_val, 0))])))])), ('saltLength', 20), ('trailerField', 1)])))])
+    rSASSA_PSS_Default_Identifier = SEQ(name=u'rSASSA-PSS-Default-Identifier', mode=MODE_VALUE, typeref=ASN1RefType(('PKCS-1', 'RSASSA-AlgorithmIdentifier')))
+    _parameters_val_3 = SEQ(name=u'parameters', mode=MODE_TYPE, typeref=ASN1RefType(('PKCS-1', 'RSASSA-PSS-params')))
+    rSASSA_PSS_Default_Identifier._val = dict([(u'algorithm', (1, 2, 840, 113549, 1, 1, 10)), (u'parameters', (_parameters_val_3, dict([(u'hashAlgorithm', dict([(u'algorithm', (1, 3, 14, 3, 2, 26)), (u'parameters', (_parameters_val, 0))])), (u'maskGenAlgorithm', dict([(u'algorithm', (1, 2, 840, 113549, 1, 1, 8)), (u'parameters', (_parameters_val_0, dict([(u'algorithm', (1, 3, 14, 3, 2, 26)), (u'parameters', (_parameters_val, 0))])))])), (u'saltLength', 20), (u'trailerField', 1)])))])
     
     #-----< RSASSA-AlgorithmIdentifier >-----#
-    RSASSA_AlgorithmIdentifier = SEQ(name='RSASSA-AlgorithmIdentifier', mode=MODE_TYPE, typeref=ASN1RefType(('PKCS-1', 'AlgorithmIdentifier')))
-    _RSASSA_AlgorithmIdentifier_algorithm = OID(name='algorithm', mode=MODE_TYPE, typeref=ASN1RefClassField(('PKCS-1', 'ALGORITHM-IDENTIFIER'), ['id']))
+    RSASSA_AlgorithmIdentifier = SEQ(name=u'RSASSA-AlgorithmIdentifier', mode=MODE_TYPE, typeref=ASN1RefType(('PKCS-1', 'AlgorithmIdentifier')))
+    _RSASSA_AlgorithmIdentifier_algorithm = OID(name=u'algorithm', mode=MODE_TYPE, typeref=ASN1RefClassField(('PKCS-1', 'ALGORITHM-IDENTIFIER'), [u'id']))
     __RSASSA_AlgorithmIdentifier_algorithm_tab = CLASS(name='_tab_ALGORITHM-IDENTIFIER', mode=MODE_SET, typeref=ASN1RefType(('PKCS-1', 'ALGORITHM-IDENTIFIER')))
-    ___RSASSA_AlgorithmIdentifier_algorithm_tab_val_Type_0 = NULL(name='Type', mode=MODE_TYPE)
-    ___RSASSA_AlgorithmIdentifier_algorithm_tab_val_Type_1 = NULL(name='Type', mode=MODE_TYPE)
-    ___RSASSA_AlgorithmIdentifier_algorithm_tab_val_Type_2 = NULL(name='Type', mode=MODE_TYPE)
-    ___RSASSA_AlgorithmIdentifier_algorithm_tab_val_Type_3 = NULL(name='Type', mode=MODE_TYPE)
-    ___RSASSA_AlgorithmIdentifier_algorithm_tab_val_Type_4 = NULL(name='Type', mode=MODE_TYPE)
-    ___RSASSA_AlgorithmIdentifier_algorithm_tab_val_Type_5 = NULL(name='Type', mode=MODE_TYPE)
-    ___RSASSA_AlgorithmIdentifier_algorithm_tab_val_Type_6 = NULL(name='Type', mode=MODE_TYPE)
-    ___RSASSA_AlgorithmIdentifier_algorithm_tab_val_Type_7 = SEQ(name='Type', mode=MODE_TYPE, typeref=ASN1RefType(('PKCS-1', 'RSAES-OAEP-params')))
-    ___RSASSA_AlgorithmIdentifier_algorithm_tab_val_Type_8 = OCT_STR(name='Type', mode=MODE_TYPE, typeref=ASN1RefType(('PKCS-1', 'EncodingParameters')))
-    ___RSASSA_AlgorithmIdentifier_algorithm_tab_val_Type_9 = SEQ(name='Type', mode=MODE_TYPE, typeref=ASN1RefType(('PKCS-1', 'RSASSA-PSS-params')))
-    __RSASSA_AlgorithmIdentifier_algorithm_tab._val = ASN1Set(rv=[dict([('id', (1, 2, 840, 113549, 1, 1, 1)), ('Type', ___RSASSA_AlgorithmIdentifier_algorithm_tab_val_Type_0)]), dict([('id', (1, 2, 840, 113549, 1, 1, 2)), ('Type', ___RSASSA_AlgorithmIdentifier_algorithm_tab_val_Type_1)]), dict([('id', (1, 2, 840, 113549, 1, 1, 4)), ('Type', ___RSASSA_AlgorithmIdentifier_algorithm_tab_val_Type_2)]), dict([('id', (1, 2, 840, 113549, 1, 1, 5)), ('Type', ___RSASSA_AlgorithmIdentifier_algorithm_tab_val_Type_3)]), dict([('id', (1, 2, 840, 113549, 1, 1, 11)), ('Type', ___RSASSA_AlgorithmIdentifier_algorithm_tab_val_Type_4)]), dict([('id', (1, 2, 840, 113549, 1, 1, 12)), ('Type', ___RSASSA_AlgorithmIdentifier_algorithm_tab_val_Type_5)]), dict([('id', (1, 2, 840, 113549, 1, 1, 13)), ('Type', ___RSASSA_AlgorithmIdentifier_algorithm_tab_val_Type_6)]), dict([('id', (1, 2, 840, 113549, 1, 1, 7)), ('Type', ___RSASSA_AlgorithmIdentifier_algorithm_tab_val_Type_7)]), dict([('id', (1, 2, 840, 113549, 1, 1, 9)), ('Type', ___RSASSA_AlgorithmIdentifier_algorithm_tab_val_Type_8)]), dict([('id', (1, 2, 840, 113549, 1, 1, 10)), ('Type', ___RSASSA_AlgorithmIdentifier_algorithm_tab_val_Type_9)])], rr=[], ev=None, er=[])
+    ___RSASSA_AlgorithmIdentifier_algorithm_tab_val_Type_0 = NULL(name=u'Type', mode=MODE_TYPE)
+    ___RSASSA_AlgorithmIdentifier_algorithm_tab_val_Type_1 = NULL(name=u'Type', mode=MODE_TYPE)
+    ___RSASSA_AlgorithmIdentifier_algorithm_tab_val_Type_2 = NULL(name=u'Type', mode=MODE_TYPE)
+    ___RSASSA_AlgorithmIdentifier_algorithm_tab_val_Type_3 = NULL(name=u'Type', mode=MODE_TYPE)
+    ___RSASSA_AlgorithmIdentifier_algorithm_tab_val_Type_4 = NULL(name=u'Type', mode=MODE_TYPE)
+    ___RSASSA_AlgorithmIdentifier_algorithm_tab_val_Type_5 = NULL(name=u'Type', mode=MODE_TYPE)
+    ___RSASSA_AlgorithmIdentifier_algorithm_tab_val_Type_6 = NULL(name=u'Type', mode=MODE_TYPE)
+    ___RSASSA_AlgorithmIdentifier_algorithm_tab_val_Type_7 = SEQ(name=u'Type', mode=MODE_TYPE, typeref=ASN1RefType(('PKCS-1', 'RSAES-OAEP-params')))
+    ___RSASSA_AlgorithmIdentifier_algorithm_tab_val_Type_8 = OCT_STR(name=u'Type', mode=MODE_TYPE, typeref=ASN1RefType(('PKCS-1', 'EncodingParameters')))
+    ___RSASSA_AlgorithmIdentifier_algorithm_tab_val_Type_9 = SEQ(name=u'Type', mode=MODE_TYPE, typeref=ASN1RefType(('PKCS-1', 'RSASSA-PSS-params')))
+    __RSASSA_AlgorithmIdentifier_algorithm_tab._val = ASN1Set(rv=[dict([(u'id', (1, 2, 840, 113549, 1, 1, 1)), (u'Type', ___RSASSA_AlgorithmIdentifier_algorithm_tab_val_Type_0)]), dict([(u'id', (1, 2, 840, 113549, 1, 1, 2)), (u'Type', ___RSASSA_AlgorithmIdentifier_algorithm_tab_val_Type_1)]), dict([(u'id', (1, 2, 840, 113549, 1, 1, 4)), (u'Type', ___RSASSA_AlgorithmIdentifier_algorithm_tab_val_Type_2)]), dict([(u'id', (1, 2, 840, 113549, 1, 1, 5)), (u'Type', ___RSASSA_AlgorithmIdentifier_algorithm_tab_val_Type_3)]), dict([(u'id', (1, 2, 840, 113549, 1, 1, 11)), (u'Type', ___RSASSA_AlgorithmIdentifier_algorithm_tab_val_Type_4)]), dict([(u'id', (1, 2, 840, 113549, 1, 1, 12)), (u'Type', ___RSASSA_AlgorithmIdentifier_algorithm_tab_val_Type_5)]), dict([(u'id', (1, 2, 840, 113549, 1, 1, 13)), (u'Type', ___RSASSA_AlgorithmIdentifier_algorithm_tab_val_Type_6)]), dict([(u'id', (1, 2, 840, 113549, 1, 1, 7)), (u'Type', ___RSASSA_AlgorithmIdentifier_algorithm_tab_val_Type_7)]), dict([(u'id', (1, 2, 840, 113549, 1, 1, 9)), (u'Type', ___RSASSA_AlgorithmIdentifier_algorithm_tab_val_Type_8)]), dict([(u'id', (1, 2, 840, 113549, 1, 1, 10)), (u'Type', ___RSASSA_AlgorithmIdentifier_algorithm_tab_val_Type_9)])], rr=[], ev=None, er=[])
     _RSASSA_AlgorithmIdentifier_algorithm._const_tab = __RSASSA_AlgorithmIdentifier_algorithm_tab
     _RSASSA_AlgorithmIdentifier_algorithm._const_tab_at = None
-    _RSASSA_AlgorithmIdentifier_algorithm._const_tab_id = 'id'
-    _RSASSA_AlgorithmIdentifier_parameters = OPEN(name='parameters', mode=MODE_TYPE, typeref=ASN1RefClassField(('PKCS-1', 'ALGORITHM-IDENTIFIER'), ['Type']), opt=True)
+    _RSASSA_AlgorithmIdentifier_algorithm._const_tab_id = u'id'
+    _RSASSA_AlgorithmIdentifier_parameters = OPEN(name=u'parameters', mode=MODE_TYPE, typeref=ASN1RefClassField(('PKCS-1', 'ALGORITHM-IDENTIFIER'), [u'Type']), opt=True)
     _RSASSA_AlgorithmIdentifier_parameters._const_tab = __RSASSA_AlgorithmIdentifier_algorithm_tab
-    _RSASSA_AlgorithmIdentifier_parameters._const_tab_at = ('..', 'algorithm')
-    _RSASSA_AlgorithmIdentifier_parameters._const_tab_id = 'Type'
+    _RSASSA_AlgorithmIdentifier_parameters._const_tab_at = ('..', u'algorithm')
+    _RSASSA_AlgorithmIdentifier_parameters._const_tab_id = u'Type'
     RSASSA_AlgorithmIdentifier._cont = ASN1Dict([
-        ('algorithm', _RSASSA_AlgorithmIdentifier_algorithm),
-        ('parameters', _RSASSA_AlgorithmIdentifier_parameters),
+        (u'algorithm', _RSASSA_AlgorithmIdentifier_algorithm),
+        (u'parameters', _RSASSA_AlgorithmIdentifier_parameters),
         ])
     RSASSA_AlgorithmIdentifier._ext = None
     
     #-----< DigestInfo >-----#
-    DigestInfo = SEQ(name='DigestInfo', mode=MODE_TYPE)
-    _DigestInfo_digestAlgorithm = SEQ(name='digestAlgorithm', mode=MODE_TYPE, typeref=ASN1RefType(('PKCS-1', 'DigestAlgorithm')))
-    _DigestInfo_digest = OCT_STR(name='digest', mode=MODE_TYPE)
+    DigestInfo = SEQ(name=u'DigestInfo', mode=MODE_TYPE)
+    _DigestInfo_digestAlgorithm = SEQ(name=u'digestAlgorithm', mode=MODE_TYPE, typeref=ASN1RefType(('PKCS-1', 'DigestAlgorithm')))
+    _DigestInfo_digest = OCT_STR(name=u'digest', mode=MODE_TYPE)
     DigestInfo._cont = ASN1Dict([
-        ('digestAlgorithm', _DigestInfo_digestAlgorithm),
-        ('digest', _DigestInfo_digest),
+        (u'digestAlgorithm', _DigestInfo_digestAlgorithm),
+        (u'digest', _DigestInfo_digest),
         ])
     DigestInfo._ext = None
     
     #-----< DigestAlgorithm >-----#
-    DigestAlgorithm = SEQ(name='DigestAlgorithm', mode=MODE_TYPE, typeref=ASN1RefType(('PKCS-1', 'AlgorithmIdentifier')))
-    _DigestAlgorithm_algorithm = OID(name='algorithm', mode=MODE_TYPE, typeref=ASN1RefClassField(('PKCS-1', 'ALGORITHM-IDENTIFIER'), ['id']))
+    DigestAlgorithm = SEQ(name=u'DigestAlgorithm', mode=MODE_TYPE, typeref=ASN1RefType(('PKCS-1', 'AlgorithmIdentifier')))
+    _DigestAlgorithm_algorithm = OID(name=u'algorithm', mode=MODE_TYPE, typeref=ASN1RefClassField(('PKCS-1', 'ALGORITHM-IDENTIFIER'), [u'id']))
     __DigestAlgorithm_algorithm_tab = CLASS(name='_tab_ALGORITHM-IDENTIFIER', mode=MODE_SET, typeref=ASN1RefType(('PKCS-1', 'ALGORITHM-IDENTIFIER')))
-    ___DigestAlgorithm_algorithm_tab_val_Type_0 = NULL(name='Type', mode=MODE_TYPE)
-    ___DigestAlgorithm_algorithm_tab_val_Type_1 = NULL(name='Type', mode=MODE_TYPE)
-    ___DigestAlgorithm_algorithm_tab_val_Type_2 = NULL(name='Type', mode=MODE_TYPE)
-    ___DigestAlgorithm_algorithm_tab_val_Type_3 = NULL(name='Type', mode=MODE_TYPE)
-    ___DigestAlgorithm_algorithm_tab_val_Type_4 = NULL(name='Type', mode=MODE_TYPE)
-    ___DigestAlgorithm_algorithm_tab_val_Type_5 = NULL(name='Type', mode=MODE_TYPE)
-    __DigestAlgorithm_algorithm_tab._val = ASN1Set(rv=[dict([('id', (1, 2, 840, 113549, 2, 2)), ('Type', ___DigestAlgorithm_algorithm_tab_val_Type_0)]), dict([('id', (1, 2, 840, 113549, 2, 5)), ('Type', ___DigestAlgorithm_algorithm_tab_val_Type_1)]), dict([('id', (1, 3, 14, 3, 2, 26)), ('Type', ___DigestAlgorithm_algorithm_tab_val_Type_2)]), dict([('id', (2, 16, 840, 1, 101, 3, 4, 2, 1)), ('Type', ___DigestAlgorithm_algorithm_tab_val_Type_3)]), dict([('id', (2, 16, 840, 1, 101, 3, 4, 2, 2)), ('Type', ___DigestAlgorithm_algorithm_tab_val_Type_4)]), dict([('id', (2, 16, 840, 1, 101, 3, 4, 2, 3)), ('Type', ___DigestAlgorithm_algorithm_tab_val_Type_5)])], rr=[], ev=None, er=[])
+    ___DigestAlgorithm_algorithm_tab_val_Type_0 = NULL(name=u'Type', mode=MODE_TYPE)
+    ___DigestAlgorithm_algorithm_tab_val_Type_1 = NULL(name=u'Type', mode=MODE_TYPE)
+    ___DigestAlgorithm_algorithm_tab_val_Type_2 = NULL(name=u'Type', mode=MODE_TYPE)
+    ___DigestAlgorithm_algorithm_tab_val_Type_3 = NULL(name=u'Type', mode=MODE_TYPE)
+    ___DigestAlgorithm_algorithm_tab_val_Type_4 = NULL(name=u'Type', mode=MODE_TYPE)
+    ___DigestAlgorithm_algorithm_tab_val_Type_5 = NULL(name=u'Type', mode=MODE_TYPE)
+    __DigestAlgorithm_algorithm_tab._val = ASN1Set(rv=[dict([(u'id', (1, 2, 840, 113549, 2, 2)), (u'Type', ___DigestAlgorithm_algorithm_tab_val_Type_0)]), dict([(u'id', (1, 2, 840, 113549, 2, 5)), (u'Type', ___DigestAlgorithm_algorithm_tab_val_Type_1)]), dict([(u'id', (1, 3, 14, 3, 2, 26)), (u'Type', ___DigestAlgorithm_algorithm_tab_val_Type_2)]), dict([(u'id', (2, 16, 840, 1, 101, 3, 4, 2, 1)), (u'Type', ___DigestAlgorithm_algorithm_tab_val_Type_3)]), dict([(u'id', (2, 16, 840, 1, 101, 3, 4, 2, 2)), (u'Type', ___DigestAlgorithm_algorithm_tab_val_Type_4)]), dict([(u'id', (2, 16, 840, 1, 101, 3, 4, 2, 3)), (u'Type', ___DigestAlgorithm_algorithm_tab_val_Type_5)])], rr=[], ev=None, er=[])
     _DigestAlgorithm_algorithm._const_tab = __DigestAlgorithm_algorithm_tab
     _DigestAlgorithm_algorithm._const_tab_at = None
-    _DigestAlgorithm_algorithm._const_tab_id = 'id'
-    _DigestAlgorithm_parameters = OPEN(name='parameters', mode=MODE_TYPE, typeref=ASN1RefClassField(('PKCS-1', 'ALGORITHM-IDENTIFIER'), ['Type']), opt=True)
+    _DigestAlgorithm_algorithm._const_tab_id = u'id'
+    _DigestAlgorithm_parameters = OPEN(name=u'parameters', mode=MODE_TYPE, typeref=ASN1RefClassField(('PKCS-1', 'ALGORITHM-IDENTIFIER'), [u'Type']), opt=True)
     _DigestAlgorithm_parameters._const_tab = __DigestAlgorithm_algorithm_tab
-    _DigestAlgorithm_parameters._const_tab_at = ('..', 'algorithm')
-    _DigestAlgorithm_parameters._const_tab_id = 'Type'
+    _DigestAlgorithm_parameters._const_tab_at = ('..', u'algorithm')
+    _DigestAlgorithm_parameters._const_tab_id = u'Type'
     DigestAlgorithm._cont = ASN1Dict([
-        ('algorithm', _DigestAlgorithm_algorithm),
-        ('parameters', _DigestAlgorithm_parameters),
+        (u'algorithm', _DigestAlgorithm_algorithm),
+        (u'parameters', _DigestAlgorithm_parameters),
         ])
     DigestAlgorithm._ext = None
     

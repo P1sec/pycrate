@@ -16,178 +16,178 @@ from pycrate_asn1rt.init             import init_modules
 
 class Remote_Operations_Information_Objects:
 
-    _name_  = 'Remote-Operations-Information-Objects'
+    _name_  = u'Remote-Operations-Information-Objects'
     _oid_   = [2, 4, 5, 0]
     
     _obj_ = [
-        'OPERATION',
-        'ERROR',
-        'OPERATION-PACKAGE',
-        'CONNECTION-PACKAGE',
-        'CONTRACT',
-        'ROS-OBJECT-CLASS',
-        'Code',
-        'Priority',
-        'refuse',
-        'emptyBind',
-        'emptyUnbind',
+        u'OPERATION',
+        u'ERROR',
+        u'OPERATION-PACKAGE',
+        u'CONNECTION-PACKAGE',
+        u'CONTRACT',
+        u'ROS-OBJECT-CLASS',
+        u'Code',
+        u'Priority',
+        u'refuse',
+        u'emptyBind',
+        u'emptyUnbind',
         ]
     _type_ = [
-        'OPERATION',
-        'ERROR',
-        'OPERATION-PACKAGE',
-        'CONNECTION-PACKAGE',
-        'CONTRACT',
-        'ROS-OBJECT-CLASS',
-        'Code',
-        'Priority',
+        u'OPERATION',
+        u'ERROR',
+        u'OPERATION-PACKAGE',
+        u'CONNECTION-PACKAGE',
+        u'CONTRACT',
+        u'ROS-OBJECT-CLASS',
+        u'Code',
+        u'Priority',
         ]
     _set_ = [
         ]
     _val_ = [
-        'refuse',
-        'emptyBind',
-        'emptyUnbind',
+        u'refuse',
+        u'emptyBind',
+        u'emptyUnbind',
         ]
     _class_ = [
-        'OPERATION',
-        'ERROR',
-        'OPERATION-PACKAGE',
-        'CONNECTION-PACKAGE',
-        'CONTRACT',
-        'ROS-OBJECT-CLASS',
-        'refuse',
-        'emptyBind',
-        'emptyUnbind',
+        u'OPERATION',
+        u'ERROR',
+        u'OPERATION-PACKAGE',
+        u'CONNECTION-PACKAGE',
+        u'CONTRACT',
+        u'ROS-OBJECT-CLASS',
+        u'refuse',
+        u'emptyBind',
+        u'emptyUnbind',
         ]
     _param_ = [
         ]
     
     #-----< OPERATION >-----#
-    OPERATION = CLASS(name='OPERATION', mode=MODE_TYPE)
-    _OPERATION_ArgumentType = OPEN(name='ArgumentType', mode=MODE_TYPE, opt=True)
-    _OPERATION_argumentTypeOptional = BOOL(name='argumentTypeOptional', mode=MODE_VALUE, opt=True)
-    _OPERATION_returnResult = BOOL(name='returnResult', mode=MODE_VALUE, default=True)
-    _OPERATION_ResultType = OPEN(name='ResultType', mode=MODE_TYPE, opt=True)
-    _OPERATION_resultTypeOptional = BOOL(name='resultTypeOptional', mode=MODE_VALUE, opt=True)
-    _OPERATION_Errors = CLASS(name='Errors', mode=MODE_SET, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'ERROR')), opt=True)
-    _OPERATION_Linked = CLASS(name='Linked', mode=MODE_SET, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')), opt=True)
-    _OPERATION_synchronous = BOOL(name='synchronous', mode=MODE_VALUE, default=False)
-    _OPERATION_alwaysReturns = BOOL(name='alwaysReturns', mode=MODE_VALUE, default=True)
-    _OPERATION_InvokePriority = INT(name='InvokePriority', mode=MODE_SET, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'Priority')), opt=True)
-    _OPERATION_ResultPriority = INT(name='ResultPriority', mode=MODE_SET, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'Priority')), opt=True)
-    _OPERATION_operationCode = CHOICE(name='operationCode', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'Code')), opt=True, uniq=True)
+    OPERATION = CLASS(name=u'OPERATION', mode=MODE_TYPE)
+    _OPERATION_ArgumentType = OPEN(name=u'ArgumentType', mode=MODE_TYPE, opt=True)
+    _OPERATION_argumentTypeOptional = BOOL(name=u'argumentTypeOptional', mode=MODE_VALUE, opt=True)
+    _OPERATION_returnResult = BOOL(name=u'returnResult', mode=MODE_VALUE, default=True)
+    _OPERATION_ResultType = OPEN(name=u'ResultType', mode=MODE_TYPE, opt=True)
+    _OPERATION_resultTypeOptional = BOOL(name=u'resultTypeOptional', mode=MODE_VALUE, opt=True)
+    _OPERATION_Errors = CLASS(name=u'Errors', mode=MODE_SET, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'ERROR')), opt=True)
+    _OPERATION_Linked = CLASS(name=u'Linked', mode=MODE_SET, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')), opt=True)
+    _OPERATION_synchronous = BOOL(name=u'synchronous', mode=MODE_VALUE, default=False)
+    _OPERATION_alwaysReturns = BOOL(name=u'alwaysReturns', mode=MODE_VALUE, default=True)
+    _OPERATION_InvokePriority = INT(name=u'InvokePriority', mode=MODE_SET, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'Priority')), opt=True)
+    _OPERATION_ResultPriority = INT(name=u'ResultPriority', mode=MODE_SET, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'Priority')), opt=True)
+    _OPERATION_operationCode = CHOICE(name=u'operationCode', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'Code')), opt=True, uniq=True)
     OPERATION._cont = ASN1Dict([
-        ('ArgumentType', _OPERATION_ArgumentType),
-        ('argumentTypeOptional', _OPERATION_argumentTypeOptional),
-        ('returnResult', _OPERATION_returnResult),
-        ('ResultType', _OPERATION_ResultType),
-        ('resultTypeOptional', _OPERATION_resultTypeOptional),
-        ('Errors', _OPERATION_Errors),
-        ('Linked', _OPERATION_Linked),
-        ('synchronous', _OPERATION_synchronous),
-        ('alwaysReturns', _OPERATION_alwaysReturns),
-        ('InvokePriority', _OPERATION_InvokePriority),
-        ('ResultPriority', _OPERATION_ResultPriority),
-        ('operationCode', _OPERATION_operationCode),
+        (u'ArgumentType', _OPERATION_ArgumentType),
+        (u'argumentTypeOptional', _OPERATION_argumentTypeOptional),
+        (u'returnResult', _OPERATION_returnResult),
+        (u'ResultType', _OPERATION_ResultType),
+        (u'resultTypeOptional', _OPERATION_resultTypeOptional),
+        (u'Errors', _OPERATION_Errors),
+        (u'Linked', _OPERATION_Linked),
+        (u'synchronous', _OPERATION_synchronous),
+        (u'alwaysReturns', _OPERATION_alwaysReturns),
+        (u'InvokePriority', _OPERATION_InvokePriority),
+        (u'ResultPriority', _OPERATION_ResultPriority),
+        (u'operationCode', _OPERATION_operationCode),
         ])
     
     #-----< ERROR >-----#
-    ERROR = CLASS(name='ERROR', mode=MODE_TYPE)
-    _ERROR_ParameterType = OPEN(name='ParameterType', mode=MODE_TYPE, opt=True)
-    _ERROR_parameterTypeOptional = BOOL(name='parameterTypeOptional', mode=MODE_VALUE, opt=True)
-    _ERROR_ErrorPriority = INT(name='ErrorPriority', mode=MODE_SET, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'Priority')), opt=True)
-    _ERROR_errorCode = CHOICE(name='errorCode', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'Code')), opt=True, uniq=True)
+    ERROR = CLASS(name=u'ERROR', mode=MODE_TYPE)
+    _ERROR_ParameterType = OPEN(name=u'ParameterType', mode=MODE_TYPE, opt=True)
+    _ERROR_parameterTypeOptional = BOOL(name=u'parameterTypeOptional', mode=MODE_VALUE, opt=True)
+    _ERROR_ErrorPriority = INT(name=u'ErrorPriority', mode=MODE_SET, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'Priority')), opt=True)
+    _ERROR_errorCode = CHOICE(name=u'errorCode', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'Code')), opt=True, uniq=True)
     ERROR._cont = ASN1Dict([
-        ('ParameterType', _ERROR_ParameterType),
-        ('parameterTypeOptional', _ERROR_parameterTypeOptional),
-        ('ErrorPriority', _ERROR_ErrorPriority),
-        ('errorCode', _ERROR_errorCode),
+        (u'ParameterType', _ERROR_ParameterType),
+        (u'parameterTypeOptional', _ERROR_parameterTypeOptional),
+        (u'ErrorPriority', _ERROR_ErrorPriority),
+        (u'errorCode', _ERROR_errorCode),
         ])
     
     #-----< OPERATION-PACKAGE >-----#
-    OPERATION_PACKAGE = CLASS(name='OPERATION-PACKAGE', mode=MODE_TYPE)
-    _OPERATION_PACKAGE_Both = CLASS(name='Both', mode=MODE_SET, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')), opt=True)
-    _OPERATION_PACKAGE_Consumer = CLASS(name='Consumer', mode=MODE_SET, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')), opt=True)
-    _OPERATION_PACKAGE_Supplier = CLASS(name='Supplier', mode=MODE_SET, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')), opt=True)
-    _OPERATION_PACKAGE_id = OID(name='id', mode=MODE_VALUE, opt=True, uniq=True)
+    OPERATION_PACKAGE = CLASS(name=u'OPERATION-PACKAGE', mode=MODE_TYPE)
+    _OPERATION_PACKAGE_Both = CLASS(name=u'Both', mode=MODE_SET, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')), opt=True)
+    _OPERATION_PACKAGE_Consumer = CLASS(name=u'Consumer', mode=MODE_SET, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')), opt=True)
+    _OPERATION_PACKAGE_Supplier = CLASS(name=u'Supplier', mode=MODE_SET, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')), opt=True)
+    _OPERATION_PACKAGE_id = OID(name=u'id', mode=MODE_VALUE, opt=True, uniq=True)
     OPERATION_PACKAGE._cont = ASN1Dict([
-        ('Both', _OPERATION_PACKAGE_Both),
-        ('Consumer', _OPERATION_PACKAGE_Consumer),
-        ('Supplier', _OPERATION_PACKAGE_Supplier),
-        ('id', _OPERATION_PACKAGE_id),
+        (u'Both', _OPERATION_PACKAGE_Both),
+        (u'Consumer', _OPERATION_PACKAGE_Consumer),
+        (u'Supplier', _OPERATION_PACKAGE_Supplier),
+        (u'id', _OPERATION_PACKAGE_id),
         ])
     
     #-----< CONNECTION-PACKAGE >-----#
-    CONNECTION_PACKAGE = CLASS(name='CONNECTION-PACKAGE', mode=MODE_TYPE)
-    _CONNECTION_PACKAGE_bind = CLASS(name='bind', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')), default=dict([('Errors', ASN1Set(rv=[dict([('errorCode', ('local', -1))])], rr=[], ev=None, er=[])), ('synchronous', True)]))
-    _CONNECTION_PACKAGE_unbind = CLASS(name='unbind', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')), default=dict([('synchronous', True)]))
-    _CONNECTION_PACKAGE_responderCanUnbind = BOOL(name='responderCanUnbind', mode=MODE_VALUE, default=False)
-    _CONNECTION_PACKAGE_unbindCanFail = BOOL(name='unbindCanFail', mode=MODE_VALUE, default=False)
-    _CONNECTION_PACKAGE_id = OID(name='id', mode=MODE_VALUE, opt=True, uniq=True)
+    CONNECTION_PACKAGE = CLASS(name=u'CONNECTION-PACKAGE', mode=MODE_TYPE)
+    _CONNECTION_PACKAGE_bind = CLASS(name=u'bind', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')), default=dict([(u'Errors', ASN1Set(rv=[dict([(u'errorCode', (u'local', -1))])], rr=[], ev=None, er=[])), (u'synchronous', True)]))
+    _CONNECTION_PACKAGE_unbind = CLASS(name=u'unbind', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')), default=dict([(u'synchronous', True)]))
+    _CONNECTION_PACKAGE_responderCanUnbind = BOOL(name=u'responderCanUnbind', mode=MODE_VALUE, default=False)
+    _CONNECTION_PACKAGE_unbindCanFail = BOOL(name=u'unbindCanFail', mode=MODE_VALUE, default=False)
+    _CONNECTION_PACKAGE_id = OID(name=u'id', mode=MODE_VALUE, opt=True, uniq=True)
     CONNECTION_PACKAGE._cont = ASN1Dict([
-        ('bind', _CONNECTION_PACKAGE_bind),
-        ('unbind', _CONNECTION_PACKAGE_unbind),
-        ('responderCanUnbind', _CONNECTION_PACKAGE_responderCanUnbind),
-        ('unbindCanFail', _CONNECTION_PACKAGE_unbindCanFail),
-        ('id', _CONNECTION_PACKAGE_id),
+        (u'bind', _CONNECTION_PACKAGE_bind),
+        (u'unbind', _CONNECTION_PACKAGE_unbind),
+        (u'responderCanUnbind', _CONNECTION_PACKAGE_responderCanUnbind),
+        (u'unbindCanFail', _CONNECTION_PACKAGE_unbindCanFail),
+        (u'id', _CONNECTION_PACKAGE_id),
         ])
     
     #-----< CONTRACT >-----#
-    CONTRACT = CLASS(name='CONTRACT', mode=MODE_TYPE)
-    _CONTRACT_connection = CLASS(name='connection', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'CONNECTION-PACKAGE')), opt=True)
-    _CONTRACT_OperationsOf = CLASS(name='OperationsOf', mode=MODE_SET, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION-PACKAGE')), opt=True)
-    _CONTRACT_InitiatorConsumerOf = CLASS(name='InitiatorConsumerOf', mode=MODE_SET, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION-PACKAGE')), opt=True)
-    _CONTRACT_InitiatorSupplierOf = CLASS(name='InitiatorSupplierOf', mode=MODE_SET, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION-PACKAGE')), opt=True)
-    _CONTRACT_id = OID(name='id', mode=MODE_VALUE, opt=True, uniq=True)
+    CONTRACT = CLASS(name=u'CONTRACT', mode=MODE_TYPE)
+    _CONTRACT_connection = CLASS(name=u'connection', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'CONNECTION-PACKAGE')), opt=True)
+    _CONTRACT_OperationsOf = CLASS(name=u'OperationsOf', mode=MODE_SET, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION-PACKAGE')), opt=True)
+    _CONTRACT_InitiatorConsumerOf = CLASS(name=u'InitiatorConsumerOf', mode=MODE_SET, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION-PACKAGE')), opt=True)
+    _CONTRACT_InitiatorSupplierOf = CLASS(name=u'InitiatorSupplierOf', mode=MODE_SET, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION-PACKAGE')), opt=True)
+    _CONTRACT_id = OID(name=u'id', mode=MODE_VALUE, opt=True, uniq=True)
     CONTRACT._cont = ASN1Dict([
-        ('connection', _CONTRACT_connection),
-        ('OperationsOf', _CONTRACT_OperationsOf),
-        ('InitiatorConsumerOf', _CONTRACT_InitiatorConsumerOf),
-        ('InitiatorSupplierOf', _CONTRACT_InitiatorSupplierOf),
-        ('id', _CONTRACT_id),
+        (u'connection', _CONTRACT_connection),
+        (u'OperationsOf', _CONTRACT_OperationsOf),
+        (u'InitiatorConsumerOf', _CONTRACT_InitiatorConsumerOf),
+        (u'InitiatorSupplierOf', _CONTRACT_InitiatorSupplierOf),
+        (u'id', _CONTRACT_id),
         ])
     
     #-----< ROS-OBJECT-CLASS >-----#
-    ROS_OBJECT_CLASS = CLASS(name='ROS-OBJECT-CLASS', mode=MODE_TYPE)
-    _ROS_OBJECT_CLASS_Is = CLASS(name='Is', mode=MODE_SET, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'ROS-OBJECT-CLASS')), opt=True)
-    _ROS_OBJECT_CLASS_Initiates = CLASS(name='Initiates', mode=MODE_SET, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'CONTRACT')), opt=True)
-    _ROS_OBJECT_CLASS_Responds = CLASS(name='Responds', mode=MODE_SET, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'CONTRACT')), opt=True)
-    _ROS_OBJECT_CLASS_InitiatesAndResponds = CLASS(name='InitiatesAndResponds', mode=MODE_SET, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'CONTRACT')), opt=True)
-    _ROS_OBJECT_CLASS_id = OID(name='id', mode=MODE_VALUE, uniq=True)
+    ROS_OBJECT_CLASS = CLASS(name=u'ROS-OBJECT-CLASS', mode=MODE_TYPE)
+    _ROS_OBJECT_CLASS_Is = CLASS(name=u'Is', mode=MODE_SET, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'ROS-OBJECT-CLASS')), opt=True)
+    _ROS_OBJECT_CLASS_Initiates = CLASS(name=u'Initiates', mode=MODE_SET, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'CONTRACT')), opt=True)
+    _ROS_OBJECT_CLASS_Responds = CLASS(name=u'Responds', mode=MODE_SET, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'CONTRACT')), opt=True)
+    _ROS_OBJECT_CLASS_InitiatesAndResponds = CLASS(name=u'InitiatesAndResponds', mode=MODE_SET, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'CONTRACT')), opt=True)
+    _ROS_OBJECT_CLASS_id = OID(name=u'id', mode=MODE_VALUE, uniq=True)
     ROS_OBJECT_CLASS._cont = ASN1Dict([
-        ('Is', _ROS_OBJECT_CLASS_Is),
-        ('Initiates', _ROS_OBJECT_CLASS_Initiates),
-        ('Responds', _ROS_OBJECT_CLASS_Responds),
-        ('InitiatesAndResponds', _ROS_OBJECT_CLASS_InitiatesAndResponds),
-        ('id', _ROS_OBJECT_CLASS_id),
+        (u'Is', _ROS_OBJECT_CLASS_Is),
+        (u'Initiates', _ROS_OBJECT_CLASS_Initiates),
+        (u'Responds', _ROS_OBJECT_CLASS_Responds),
+        (u'InitiatesAndResponds', _ROS_OBJECT_CLASS_InitiatesAndResponds),
+        (u'id', _ROS_OBJECT_CLASS_id),
         ])
     
     #-----< Code >-----#
-    Code = CHOICE(name='Code', mode=MODE_TYPE)
-    _Code_local = INT(name='local', mode=MODE_TYPE)
-    _Code_global_ = OID(name='global', mode=MODE_TYPE)
+    Code = CHOICE(name=u'Code', mode=MODE_TYPE)
+    _Code_local = INT(name=u'local', mode=MODE_TYPE)
+    _Code_global_ = OID(name=u'global', mode=MODE_TYPE)
     Code._cont = ASN1Dict([
-        ('local', _Code_local),
-        ('global', _Code_global_),
+        (u'local', _Code_local),
+        (u'global', _Code_global_),
         ])
     Code._ext = None
     
     #-----< Priority >-----#
-    Priority = INT(name='Priority', mode=MODE_TYPE)
+    Priority = INT(name=u'Priority', mode=MODE_TYPE)
     Priority._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=None)], ev=None, er=[])
     
     #-----< refuse >-----#
-    refuse = CLASS(name='refuse', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'ERROR')))
-    refuse._val = dict([('errorCode', ('local', -1))])
+    refuse = CLASS(name=u'refuse', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'ERROR')))
+    refuse._val = dict([(u'errorCode', (u'local', -1))])
     
     #-----< emptyBind >-----#
-    emptyBind = CLASS(name='emptyBind', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
-    emptyBind._val = dict([('Errors', ASN1Set(rv=[dict([('errorCode', ('local', -1))])], rr=[], ev=None, er=[])), ('synchronous', True)])
+    emptyBind = CLASS(name=u'emptyBind', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
+    emptyBind._val = dict([(u'Errors', ASN1Set(rv=[dict([(u'errorCode', (u'local', -1))])], rr=[], ev=None, er=[])), (u'synchronous', True)])
     
     #-----< emptyUnbind >-----#
-    emptyUnbind = CLASS(name='emptyUnbind', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
-    emptyUnbind._val = dict([('synchronous', True)])
+    emptyUnbind = CLASS(name=u'emptyUnbind', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
+    emptyUnbind._val = dict([(u'synchronous', True)])
     
     _all_ = [
         _OPERATION_ArgumentType,
@@ -242,38 +242,38 @@ class Remote_Operations_Information_Objects:
 
 class MobileDomainDefinitions:
 
-    _name_  = 'MobileDomainDefinitions'
+    _name_  = u'MobileDomainDefinitions'
     _oid_   = [0, 4, 0, 0, 0, 1]
     
     _obj_ = [
-        'mobileDomainId',
-        'gsm-NetworkId',
-        'gsm-AccessId',
-        'gsm-OperationAndMaintenanceId',
-        'gsm-MessagingId',
-        'CommonComponentId',
-        'ac-Id',
-        'as-Id',
-        'ase-Id',
-        'moduleId',
-        'er-Id',
+        u'mobileDomainId',
+        u'gsm-NetworkId',
+        u'gsm-AccessId',
+        u'gsm-OperationAndMaintenanceId',
+        u'gsm-MessagingId',
+        u'CommonComponentId',
+        u'ac-Id',
+        u'as-Id',
+        u'ase-Id',
+        u'moduleId',
+        u'er-Id',
         ]
     _type_ = [
-        'CommonComponentId',
+        u'CommonComponentId',
         ]
     _set_ = [
         ]
     _val_ = [
-        'mobileDomainId',
-        'gsm-NetworkId',
-        'gsm-AccessId',
-        'gsm-OperationAndMaintenanceId',
-        'gsm-MessagingId',
-        'ac-Id',
-        'as-Id',
-        'ase-Id',
-        'moduleId',
-        'er-Id',
+        u'mobileDomainId',
+        u'gsm-NetworkId',
+        u'gsm-AccessId',
+        u'gsm-OperationAndMaintenanceId',
+        u'gsm-MessagingId',
+        u'ac-Id',
+        u'as-Id',
+        u'ase-Id',
+        u'moduleId',
+        u'er-Id',
         ]
     _class_ = [
         ]
@@ -281,47 +281,47 @@ class MobileDomainDefinitions:
         ]
     
     #-----< mobileDomainId >-----#
-    mobileDomainId = OID(name='mobileDomainId', mode=MODE_VALUE)
+    mobileDomainId = OID(name=u'mobileDomainId', mode=MODE_VALUE)
     mobileDomainId._val = (0, 4, 0, 0)
     
     #-----< gsm-NetworkId >-----#
-    gsm_NetworkId = OID(name='gsm-NetworkId', mode=MODE_VALUE)
+    gsm_NetworkId = OID(name=u'gsm-NetworkId', mode=MODE_VALUE)
     gsm_NetworkId._val = (0, 4, 0, 0, 1)
     
     #-----< gsm-AccessId >-----#
-    gsm_AccessId = OID(name='gsm-AccessId', mode=MODE_VALUE)
+    gsm_AccessId = OID(name=u'gsm-AccessId', mode=MODE_VALUE)
     gsm_AccessId._val = (0, 4, 0, 0, 2)
     
     #-----< gsm-OperationAndMaintenanceId >-----#
-    gsm_OperationAndMaintenanceId = OID(name='gsm-OperationAndMaintenanceId', mode=MODE_VALUE)
+    gsm_OperationAndMaintenanceId = OID(name=u'gsm-OperationAndMaintenanceId', mode=MODE_VALUE)
     gsm_OperationAndMaintenanceId._val = (0, 4, 0, 0, 3)
     
     #-----< gsm-MessagingId >-----#
-    gsm_MessagingId = OID(name='gsm-MessagingId', mode=MODE_VALUE)
+    gsm_MessagingId = OID(name=u'gsm-MessagingId', mode=MODE_VALUE)
     gsm_MessagingId._val = (0, 4, 0, 0, 4)
     
     #-----< CommonComponentId >-----#
-    CommonComponentId = INT(name='CommonComponentId', mode=MODE_TYPE)
+    CommonComponentId = INT(name=u'CommonComponentId', mode=MODE_TYPE)
     CommonComponentId._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=9)], ev=None, er=[])
     
     #-----< ac-Id >-----#
-    ac_Id = INT(name='ac-Id', mode=MODE_VALUE, typeref=ASN1RefType(('MobileDomainDefinitions', 'CommonComponentId')))
+    ac_Id = INT(name=u'ac-Id', mode=MODE_VALUE, typeref=ASN1RefType(('MobileDomainDefinitions', 'CommonComponentId')))
     ac_Id._val = 0
     
     #-----< as-Id >-----#
-    as_Id = INT(name='as-Id', mode=MODE_VALUE, typeref=ASN1RefType(('MobileDomainDefinitions', 'CommonComponentId')))
+    as_Id = INT(name=u'as-Id', mode=MODE_VALUE, typeref=ASN1RefType(('MobileDomainDefinitions', 'CommonComponentId')))
     as_Id._val = 1
     
     #-----< ase-Id >-----#
-    ase_Id = INT(name='ase-Id', mode=MODE_VALUE, typeref=ASN1RefType(('MobileDomainDefinitions', 'CommonComponentId')))
+    ase_Id = INT(name=u'ase-Id', mode=MODE_VALUE, typeref=ASN1RefType(('MobileDomainDefinitions', 'CommonComponentId')))
     ase_Id._val = 2
     
     #-----< moduleId >-----#
-    moduleId = INT(name='moduleId', mode=MODE_VALUE, typeref=ASN1RefType(('MobileDomainDefinitions', 'CommonComponentId')))
+    moduleId = INT(name=u'moduleId', mode=MODE_VALUE, typeref=ASN1RefType(('MobileDomainDefinitions', 'CommonComponentId')))
     moduleId._val = 3
     
     #-----< er-Id >-----#
-    er_Id = INT(name='er-Id', mode=MODE_VALUE, typeref=ASN1RefType(('MobileDomainDefinitions', 'CommonComponentId')))
+    er_Id = INT(name=u'er-Id', mode=MODE_VALUE, typeref=ASN1RefType(('MobileDomainDefinitions', 'CommonComponentId')))
     er_Id._val = 4
     
     _all_ = [
@@ -340,80 +340,80 @@ class MobileDomainDefinitions:
 
 class MAPv2_CommonDataTypes:
 
-    _name_  = 'MAPv2-CommonDataTypes'
+    _name_  = u'MAPv2-CommonDataTypes'
     _oid_   = [0, 4, 0, 0, 1, 3, 18, 2]
     
     _obj_ = [
-        'TBCD-STRING',
-        'AddressString',
-        'maxAddressLength',
-        'ISDN-AddressString',
-        'maxISDN-AddressLength',
-        'ISDN-SubaddressString',
-        'maxISDN-SubaddressLength',
-        'ExternalSignalInfo',
-        'SignalInfo',
-        'maxSignalInfoLength',
-        'ProtocolId',
-        'IMSI',
-        'TMSI',
-        'SubscriberId',
-        'IMEI',
-        'LocationInfo',
-        'HLR-Id',
-        'HLR-List',
-        'maxNumOfHLR-Id',
-        'LMSI',
-        'GlobalCellId',
-        'NetworkResource',
-        'Category',
-        'BearerServiceList',
-        'maxNumOfBearerServices',
-        'TeleserviceList',
-        'maxNumOfTeleservices',
-        'BasicServiceCode',
-        'BasicServiceList',
-        'maxNumOfBasicServices',
-        'BasicServiceGroupList',
-        'maxNumOfBasicServiceGroups',
+        u'TBCD-STRING',
+        u'AddressString',
+        u'maxAddressLength',
+        u'ISDN-AddressString',
+        u'maxISDN-AddressLength',
+        u'ISDN-SubaddressString',
+        u'maxISDN-SubaddressLength',
+        u'ExternalSignalInfo',
+        u'SignalInfo',
+        u'maxSignalInfoLength',
+        u'ProtocolId',
+        u'IMSI',
+        u'TMSI',
+        u'SubscriberId',
+        u'IMEI',
+        u'LocationInfo',
+        u'HLR-Id',
+        u'HLR-List',
+        u'maxNumOfHLR-Id',
+        u'LMSI',
+        u'GlobalCellId',
+        u'NetworkResource',
+        u'Category',
+        u'BearerServiceList',
+        u'maxNumOfBearerServices',
+        u'TeleserviceList',
+        u'maxNumOfTeleservices',
+        u'BasicServiceCode',
+        u'BasicServiceList',
+        u'maxNumOfBasicServices',
+        u'BasicServiceGroupList',
+        u'maxNumOfBasicServiceGroups',
         ]
     _type_ = [
-        'TBCD-STRING',
-        'AddressString',
-        'ISDN-AddressString',
-        'ISDN-SubaddressString',
-        'ExternalSignalInfo',
-        'SignalInfo',
-        'ProtocolId',
-        'IMSI',
-        'TMSI',
-        'SubscriberId',
-        'IMEI',
-        'LocationInfo',
-        'HLR-Id',
-        'HLR-List',
-        'LMSI',
-        'GlobalCellId',
-        'NetworkResource',
-        'Category',
-        'BearerServiceList',
-        'TeleserviceList',
-        'BasicServiceCode',
-        'BasicServiceList',
-        'BasicServiceGroupList',
+        u'TBCD-STRING',
+        u'AddressString',
+        u'ISDN-AddressString',
+        u'ISDN-SubaddressString',
+        u'ExternalSignalInfo',
+        u'SignalInfo',
+        u'ProtocolId',
+        u'IMSI',
+        u'TMSI',
+        u'SubscriberId',
+        u'IMEI',
+        u'LocationInfo',
+        u'HLR-Id',
+        u'HLR-List',
+        u'LMSI',
+        u'GlobalCellId',
+        u'NetworkResource',
+        u'Category',
+        u'BearerServiceList',
+        u'TeleserviceList',
+        u'BasicServiceCode',
+        u'BasicServiceList',
+        u'BasicServiceGroupList',
         ]
     _set_ = [
         ]
     _val_ = [
-        'maxAddressLength',
-        'maxISDN-AddressLength',
-        'maxISDN-SubaddressLength',
-        'maxSignalInfoLength',
-        'maxNumOfHLR-Id',
-        'maxNumOfBearerServices',
-        'maxNumOfTeleservices',
-        'maxNumOfBasicServices',
-        'maxNumOfBasicServiceGroups',
+        u'maxAddressLength',
+        u'maxISDN-AddressLength',
+        u'maxISDN-SubaddressLength',
+        u'maxSignalInfoLength',
+        u'maxNumOfHLR-Id',
+        u'maxNumOfBearerServices',
+        u'maxNumOfTeleservices',
+        u'maxNumOfBasicServices',
+        u'maxNumOfBasicServiceGroups',
         ]
     _class_ = [
         ]
@@ -421,165 +421,165 @@ class MAPv2_CommonDataTypes:
         ]
     
     #-----< TBCD-STRING >-----#
-    TBCD_STRING = OCT_STR(name='TBCD-STRING', mode=MODE_TYPE)
+    TBCD_STRING = OCT_STR(name=u'TBCD-STRING', mode=MODE_TYPE)
     
     #-----< AddressString >-----#
-    AddressString = OCT_STR(name='AddressString', mode=MODE_TYPE)
+    AddressString = OCT_STR(name=u'AddressString', mode=MODE_TYPE)
     AddressString._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=20)], ev=None, er=[])
     
     #-----< maxAddressLength >-----#
-    maxAddressLength = INT(name='maxAddressLength', mode=MODE_VALUE)
+    maxAddressLength = INT(name=u'maxAddressLength', mode=MODE_VALUE)
     maxAddressLength._val = 20
     
     #-----< ISDN-AddressString >-----#
-    ISDN_AddressString = OCT_STR(name='ISDN-AddressString', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'AddressString')))
+    ISDN_AddressString = OCT_STR(name=u'ISDN-AddressString', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'AddressString')))
     ISDN_AddressString._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=9)], ev=None, er=[])
     
     #-----< maxISDN-AddressLength >-----#
-    maxISDN_AddressLength = INT(name='maxISDN-AddressLength', mode=MODE_VALUE)
+    maxISDN_AddressLength = INT(name=u'maxISDN-AddressLength', mode=MODE_VALUE)
     maxISDN_AddressLength._val = 9
     
     #-----< ISDN-SubaddressString >-----#
-    ISDN_SubaddressString = OCT_STR(name='ISDN-SubaddressString', mode=MODE_TYPE)
+    ISDN_SubaddressString = OCT_STR(name=u'ISDN-SubaddressString', mode=MODE_TYPE)
     ISDN_SubaddressString._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=21)], ev=None, er=[])
     
     #-----< maxISDN-SubaddressLength >-----#
-    maxISDN_SubaddressLength = INT(name='maxISDN-SubaddressLength', mode=MODE_VALUE)
+    maxISDN_SubaddressLength = INT(name=u'maxISDN-SubaddressLength', mode=MODE_VALUE)
     maxISDN_SubaddressLength._val = 21
     
     #-----< ExternalSignalInfo >-----#
-    ExternalSignalInfo = SEQ(name='ExternalSignalInfo', mode=MODE_TYPE)
-    _ExternalSignalInfo_protocolId = ENUM(name='protocolId', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'ProtocolId')))
-    _ExternalSignalInfo_signalInfo = OCT_STR(name='signalInfo', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'SignalInfo')))
+    ExternalSignalInfo = SEQ(name=u'ExternalSignalInfo', mode=MODE_TYPE)
+    _ExternalSignalInfo_protocolId = ENUM(name=u'protocolId', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'ProtocolId')))
+    _ExternalSignalInfo_signalInfo = OCT_STR(name=u'signalInfo', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'SignalInfo')))
     ExternalSignalInfo._cont = ASN1Dict([
-        ('protocolId', _ExternalSignalInfo_protocolId),
-        ('signalInfo', _ExternalSignalInfo_signalInfo),
+        (u'protocolId', _ExternalSignalInfo_protocolId),
+        (u'signalInfo', _ExternalSignalInfo_signalInfo),
         ])
     ExternalSignalInfo._ext = []
     
     #-----< SignalInfo >-----#
-    SignalInfo = OCT_STR(name='SignalInfo', mode=MODE_TYPE)
+    SignalInfo = OCT_STR(name=u'SignalInfo', mode=MODE_TYPE)
     SignalInfo._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=200)], ev=None, er=[])
     
     #-----< maxSignalInfoLength >-----#
-    maxSignalInfoLength = INT(name='maxSignalInfoLength', mode=MODE_VALUE)
+    maxSignalInfoLength = INT(name=u'maxSignalInfoLength', mode=MODE_VALUE)
     maxSignalInfoLength._val = 200
     
     #-----< ProtocolId >-----#
-    ProtocolId = ENUM(name='ProtocolId', mode=MODE_TYPE)
-    ProtocolId._cont = ASN1Dict([('gsm-0408', 1), ('gsm-0806', 2), ('gsm-BSSMAP', 3), ('ets-300102-1', 4)])
+    ProtocolId = ENUM(name=u'ProtocolId', mode=MODE_TYPE)
+    ProtocolId._cont = ASN1Dict([(u'gsm-0408', 1), (u'gsm-0806', 2), (u'gsm-BSSMAP', 3), (u'ets-300102-1', 4)])
     ProtocolId._ext = None
     
     #-----< IMSI >-----#
-    IMSI = OCT_STR(name='IMSI', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'TBCD-STRING')))
+    IMSI = OCT_STR(name=u'IMSI', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'TBCD-STRING')))
     IMSI._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=3, ub=8)], ev=None, er=[])
     
     #-----< TMSI >-----#
-    TMSI = OCT_STR(name='TMSI', mode=MODE_TYPE)
+    TMSI = OCT_STR(name=u'TMSI', mode=MODE_TYPE)
     TMSI._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=4)], ev=None, er=[])
     
     #-----< SubscriberId >-----#
-    SubscriberId = CHOICE(name='SubscriberId', mode=MODE_TYPE)
-    _SubscriberId_imsi = OCT_STR(name='imsi', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'IMSI')))
-    _SubscriberId_tmsi = OCT_STR(name='tmsi', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'TMSI')))
+    SubscriberId = CHOICE(name=u'SubscriberId', mode=MODE_TYPE)
+    _SubscriberId_imsi = OCT_STR(name=u'imsi', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'IMSI')))
+    _SubscriberId_tmsi = OCT_STR(name=u'tmsi', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'TMSI')))
     SubscriberId._cont = ASN1Dict([
-        ('imsi', _SubscriberId_imsi),
-        ('tmsi', _SubscriberId_tmsi),
+        (u'imsi', _SubscriberId_imsi),
+        (u'tmsi', _SubscriberId_tmsi),
         ])
     SubscriberId._ext = None
     
     #-----< IMEI >-----#
-    IMEI = OCT_STR(name='IMEI', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'TBCD-STRING')))
+    IMEI = OCT_STR(name=u'IMEI', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'TBCD-STRING')))
     IMEI._const_sz = ASN1Set(rv=[8], rr=[], ev=None, er=[])
     
     #-----< LocationInfo >-----#
-    LocationInfo = CHOICE(name='LocationInfo', mode=MODE_TYPE)
-    _LocationInfo_roamingNumber = OCT_STR(name='roamingNumber', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'ISDN-AddressString')))
-    _LocationInfo_msc_Number = OCT_STR(name='msc-Number', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'ISDN-AddressString')))
+    LocationInfo = CHOICE(name=u'LocationInfo', mode=MODE_TYPE)
+    _LocationInfo_roamingNumber = OCT_STR(name=u'roamingNumber', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'ISDN-AddressString')))
+    _LocationInfo_msc_Number = OCT_STR(name=u'msc-Number', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'ISDN-AddressString')))
     LocationInfo._cont = ASN1Dict([
-        ('roamingNumber', _LocationInfo_roamingNumber),
-        ('msc-Number', _LocationInfo_msc_Number),
+        (u'roamingNumber', _LocationInfo_roamingNumber),
+        (u'msc-Number', _LocationInfo_msc_Number),
         ])
     LocationInfo._ext = None
     
     #-----< HLR-Id >-----#
-    HLR_Id = OCT_STR(name='HLR-Id', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'IMSI')))
+    HLR_Id = OCT_STR(name=u'HLR-Id', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'IMSI')))
     
     #-----< HLR-List >-----#
-    HLR_List = SEQ_OF(name='HLR-List', mode=MODE_TYPE)
+    HLR_List = SEQ_OF(name=u'HLR-List', mode=MODE_TYPE)
     _HLR_List__item_ = OCT_STR(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'HLR-Id')))
     HLR_List._cont = _HLR_List__item_
     HLR_List._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=50)], ev=None, er=[])
     
     #-----< maxNumOfHLR-Id >-----#
-    maxNumOfHLR_Id = INT(name='maxNumOfHLR-Id', mode=MODE_VALUE)
+    maxNumOfHLR_Id = INT(name=u'maxNumOfHLR-Id', mode=MODE_VALUE)
     maxNumOfHLR_Id._val = 50
     
     #-----< LMSI >-----#
-    LMSI = OCT_STR(name='LMSI', mode=MODE_TYPE)
+    LMSI = OCT_STR(name=u'LMSI', mode=MODE_TYPE)
     LMSI._const_sz = ASN1Set(rv=[4], rr=[], ev=None, er=[])
     
     #-----< GlobalCellId >-----#
-    GlobalCellId = OCT_STR(name='GlobalCellId', mode=MODE_TYPE)
+    GlobalCellId = OCT_STR(name=u'GlobalCellId', mode=MODE_TYPE)
     GlobalCellId._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=5, ub=7)], ev=None, er=[])
     
     #-----< NetworkResource >-----#
-    NetworkResource = ENUM(name='NetworkResource', mode=MODE_TYPE)
-    NetworkResource._cont = ASN1Dict([('plmn', 0), ('hlr', 1), ('vlr', 2), ('pvlr', 3), ('controllingMSC', 4), ('vmsc', 5), ('eir', 6), ('rss', 7)])
+    NetworkResource = ENUM(name=u'NetworkResource', mode=MODE_TYPE)
+    NetworkResource._cont = ASN1Dict([(u'plmn', 0), (u'hlr', 1), (u'vlr', 2), (u'pvlr', 3), (u'controllingMSC', 4), (u'vmsc', 5), (u'eir', 6), (u'rss', 7)])
     NetworkResource._ext = None
     
     #-----< Category >-----#
-    Category = OCT_STR(name='Category', mode=MODE_TYPE)
+    Category = OCT_STR(name=u'Category', mode=MODE_TYPE)
     Category._const_sz = ASN1Set(rv=[1], rr=[], ev=None, er=[])
     
     #-----< BearerServiceList >-----#
-    BearerServiceList = SEQ_OF(name='BearerServiceList', mode=MODE_TYPE)
+    BearerServiceList = SEQ_OF(name=u'BearerServiceList', mode=MODE_TYPE)
     _BearerServiceList__item_ = OCT_STR(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-BS-Code', 'BearerServiceCode')))
     BearerServiceList._cont = _BearerServiceList__item_
     BearerServiceList._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=50)], ev=None, er=[])
     
     #-----< maxNumOfBearerServices >-----#
-    maxNumOfBearerServices = INT(name='maxNumOfBearerServices', mode=MODE_VALUE)
+    maxNumOfBearerServices = INT(name=u'maxNumOfBearerServices', mode=MODE_VALUE)
     maxNumOfBearerServices._val = 50
     
     #-----< TeleserviceList >-----#
-    TeleserviceList = SEQ_OF(name='TeleserviceList', mode=MODE_TYPE)
+    TeleserviceList = SEQ_OF(name=u'TeleserviceList', mode=MODE_TYPE)
     _TeleserviceList__item_ = OCT_STR(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-TS-Code', 'TeleserviceCode')))
     TeleserviceList._cont = _TeleserviceList__item_
     TeleserviceList._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=20)], ev=None, er=[])
     
     #-----< maxNumOfTeleservices >-----#
-    maxNumOfTeleservices = INT(name='maxNumOfTeleservices', mode=MODE_VALUE)
+    maxNumOfTeleservices = INT(name=u'maxNumOfTeleservices', mode=MODE_VALUE)
     maxNumOfTeleservices._val = 20
     
     #-----< BasicServiceCode >-----#
-    BasicServiceCode = CHOICE(name='BasicServiceCode', mode=MODE_TYPE)
-    _BasicServiceCode_bearerService = OCT_STR(name='bearerService', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-BS-Code', 'BearerServiceCode')))
-    _BasicServiceCode_teleservice = OCT_STR(name='teleservice', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-TS-Code', 'TeleserviceCode')))
+    BasicServiceCode = CHOICE(name=u'BasicServiceCode', mode=MODE_TYPE)
+    _BasicServiceCode_bearerService = OCT_STR(name=u'bearerService', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-BS-Code', 'BearerServiceCode')))
+    _BasicServiceCode_teleservice = OCT_STR(name=u'teleservice', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-TS-Code', 'TeleserviceCode')))
     BasicServiceCode._cont = ASN1Dict([
-        ('bearerService', _BasicServiceCode_bearerService),
-        ('teleservice', _BasicServiceCode_teleservice),
+        (u'bearerService', _BasicServiceCode_bearerService),
+        (u'teleservice', _BasicServiceCode_teleservice),
         ])
     BasicServiceCode._ext = None
     
     #-----< BasicServiceList >-----#
-    BasicServiceList = SEQ_OF(name='BasicServiceList', mode=MODE_TYPE)
+    BasicServiceList = SEQ_OF(name=u'BasicServiceList', mode=MODE_TYPE)
     _BasicServiceList__item_ = CHOICE(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'BasicServiceCode')))
     BasicServiceList._cont = _BasicServiceList__item_
     BasicServiceList._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=70)], ev=None, er=[])
     
     #-----< maxNumOfBasicServices >-----#
-    maxNumOfBasicServices = INT(name='maxNumOfBasicServices', mode=MODE_VALUE)
+    maxNumOfBasicServices = INT(name=u'maxNumOfBasicServices', mode=MODE_VALUE)
     maxNumOfBasicServices._val = 70
     
     #-----< BasicServiceGroupList >-----#
-    BasicServiceGroupList = SEQ_OF(name='BasicServiceGroupList', mode=MODE_TYPE)
+    BasicServiceGroupList = SEQ_OF(name=u'BasicServiceGroupList', mode=MODE_TYPE)
     _BasicServiceGroupList__item_ = CHOICE(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'BasicServiceCode')))
     BasicServiceGroupList._cont = _BasicServiceGroupList__item_
     BasicServiceGroupList._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=13)], ev=None, er=[])
     
     #-----< maxNumOfBasicServiceGroups >-----#
-    maxNumOfBasicServiceGroups = INT(name='maxNumOfBasicServiceGroups', mode=MODE_VALUE)
+    maxNumOfBasicServiceGroups = INT(name=u'maxNumOfBasicServiceGroups', mode=MODE_VALUE)
     maxNumOfBasicServiceGroups._val = 13
     
     _all_ = [
@@ -632,110 +632,110 @@ class MAPv2_CommonDataTypes:
 
 class MAPv2_MS_DataTypes:
 
-    _name_  = 'MAPv2-MS-DataTypes'
+    _name_  = u'MAPv2-MS-DataTypes'
     _oid_   = [0, 4, 0, 0, 1, 3, 11, 2]
     
     _obj_ = [
-        'UpdateLocationArg',
-        'UpdateLocationRes',
-        'ExtensibleUpdateLocationRes',
-        'CancelLocationArg',
-        'PurgeMS-Arg',
-        'IMSI-WithLMSI',
-        'SendIdentificationRes',
-        'AuthenticationSetList',
-        'AuthenticationSet',
-        'RAND',
-        'SRES',
-        'Kc',
-        'PrepareHO-Arg',
-        'PerformHO-Arg',
-        'ChannelType',
-        'ClassmarkInfo',
-        'HandoverPriority',
-        'PrepareHO-Res',
-        'PerformHO-Res',
-        'PrepareSubsequentHO-Arg',
-        'PerformSubsequentHO-Arg',
-        'SendAuthenticationInfoArg',
-        'SendAuthenticationInfoRes',
-        'Ki',
-        'EquipmentStatus',
-        'SendParametersArg',
-        'RequestParameterList',
-        'RequestParameter',
-        'SentParameterList',
-        'SentParameter',
-        'maxNumOfSentParameter',
-        'InsertSubscriberDataArg',
-        'SubscriberData',
-        'SubscriberStatus',
-        'ODB-Data',
-        'ODB-GeneralData',
-        'ODB-HPLMN-Data',
-        'ZoneCodeList',
-        'ZoneCode',
-        'maxNumOfZoneCodes',
-        'InsertSubscriberDataRes',
-        'RegionalSubscriptionResponse',
-        'DeleteSubscriberDataArg',
-        'DeleteSubscriberDataRes',
-        'ResetArg',
-        'RestoreDataArg',
-        'RestoreDataRes',
+        u'UpdateLocationArg',
+        u'UpdateLocationRes',
+        u'ExtensibleUpdateLocationRes',
+        u'CancelLocationArg',
+        u'PurgeMS-Arg',
+        u'IMSI-WithLMSI',
+        u'SendIdentificationRes',
+        u'AuthenticationSetList',
+        u'AuthenticationSet',
+        u'RAND',
+        u'SRES',
+        u'Kc',
+        u'PrepareHO-Arg',
+        u'PerformHO-Arg',
+        u'ChannelType',
+        u'ClassmarkInfo',
+        u'HandoverPriority',
+        u'PrepareHO-Res',
+        u'PerformHO-Res',
+        u'PrepareSubsequentHO-Arg',
+        u'PerformSubsequentHO-Arg',
+        u'SendAuthenticationInfoArg',
+        u'SendAuthenticationInfoRes',
+        u'Ki',
+        u'EquipmentStatus',
+        u'SendParametersArg',
+        u'RequestParameterList',
+        u'RequestParameter',
+        u'SentParameterList',
+        u'SentParameter',
+        u'maxNumOfSentParameter',
+        u'InsertSubscriberDataArg',
+        u'SubscriberData',
+        u'SubscriberStatus',
+        u'ODB-Data',
+        u'ODB-GeneralData',
+        u'ODB-HPLMN-Data',
+        u'ZoneCodeList',
+        u'ZoneCode',
+        u'maxNumOfZoneCodes',
+        u'InsertSubscriberDataRes',
+        u'RegionalSubscriptionResponse',
+        u'DeleteSubscriberDataArg',
+        u'DeleteSubscriberDataRes',
+        u'ResetArg',
+        u'RestoreDataArg',
+        u'RestoreDataRes',
         ]
     _type_ = [
-        'UpdateLocationArg',
-        'UpdateLocationRes',
-        'ExtensibleUpdateLocationRes',
-        'CancelLocationArg',
-        'PurgeMS-Arg',
-        'IMSI-WithLMSI',
-        'SendIdentificationRes',
-        'AuthenticationSetList',
-        'AuthenticationSet',
-        'RAND',
-        'SRES',
-        'Kc',
-        'PrepareHO-Arg',
-        'PerformHO-Arg',
-        'ChannelType',
-        'ClassmarkInfo',
-        'HandoverPriority',
-        'PrepareHO-Res',
-        'PerformHO-Res',
-        'PrepareSubsequentHO-Arg',
-        'PerformSubsequentHO-Arg',
-        'SendAuthenticationInfoArg',
-        'SendAuthenticationInfoRes',
-        'Ki',
-        'EquipmentStatus',
-        'SendParametersArg',
-        'RequestParameterList',
-        'RequestParameter',
-        'SentParameterList',
-        'SentParameter',
-        'InsertSubscriberDataArg',
-        'SubscriberData',
-        'SubscriberStatus',
-        'ODB-Data',
-        'ODB-GeneralData',
-        'ODB-HPLMN-Data',
-        'ZoneCodeList',
-        'ZoneCode',
-        'InsertSubscriberDataRes',
-        'RegionalSubscriptionResponse',
-        'DeleteSubscriberDataArg',
-        'DeleteSubscriberDataRes',
-        'ResetArg',
-        'RestoreDataArg',
-        'RestoreDataRes',
+        u'UpdateLocationArg',
+        u'UpdateLocationRes',
+        u'ExtensibleUpdateLocationRes',
+        u'CancelLocationArg',
+        u'PurgeMS-Arg',
+        u'IMSI-WithLMSI',
+        u'SendIdentificationRes',
+        u'AuthenticationSetList',
+        u'AuthenticationSet',
+        u'RAND',
+        u'SRES',
+        u'Kc',
+        u'PrepareHO-Arg',
+        u'PerformHO-Arg',
+        u'ChannelType',
+        u'ClassmarkInfo',
+        u'HandoverPriority',
+        u'PrepareHO-Res',
+        u'PerformHO-Res',
+        u'PrepareSubsequentHO-Arg',
+        u'PerformSubsequentHO-Arg',
+        u'SendAuthenticationInfoArg',
+        u'SendAuthenticationInfoRes',
+        u'Ki',
+        u'EquipmentStatus',
+        u'SendParametersArg',
+        u'RequestParameterList',
+        u'RequestParameter',
+        u'SentParameterList',
+        u'SentParameter',
+        u'InsertSubscriberDataArg',
+        u'SubscriberData',
+        u'SubscriberStatus',
+        u'ODB-Data',
+        u'ODB-GeneralData',
+        u'ODB-HPLMN-Data',
+        u'ZoneCodeList',
+        u'ZoneCode',
+        u'InsertSubscriberDataRes',
+        u'RegionalSubscriptionResponse',
+        u'DeleteSubscriberDataArg',
+        u'DeleteSubscriberDataRes',
+        u'ResetArg',
+        u'RestoreDataArg',
+        u'RestoreDataRes',
         ]
     _set_ = [
         ]
     _val_ = [
-        'maxNumOfSentParameter',
-        'maxNumOfZoneCodes',
+        u'maxNumOfSentParameter',
+        u'maxNumOfZoneCodes',
         ]
     _class_ = [
         ]
@@ -743,418 +743,418 @@ class MAPv2_MS_DataTypes:
         ]
     
     #-----< UpdateLocationArg >-----#
-    UpdateLocationArg = SEQ(name='UpdateLocationArg', mode=MODE_TYPE)
-    _UpdateLocationArg_imsi = OCT_STR(name='imsi', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'IMSI')))
-    _UpdateLocationArg_locationInfo = CHOICE(name='locationInfo', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'LocationInfo')))
-    _UpdateLocationArg_vlr_Number = OCT_STR(name='vlr-Number', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'ISDN-AddressString')))
-    _UpdateLocationArg_lmsi = OCT_STR(name='lmsi', mode=MODE_TYPE, tag=(10, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'LMSI')), opt=True)
+    UpdateLocationArg = SEQ(name=u'UpdateLocationArg', mode=MODE_TYPE)
+    _UpdateLocationArg_imsi = OCT_STR(name=u'imsi', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'IMSI')))
+    _UpdateLocationArg_locationInfo = CHOICE(name=u'locationInfo', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'LocationInfo')))
+    _UpdateLocationArg_vlr_Number = OCT_STR(name=u'vlr-Number', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'ISDN-AddressString')))
+    _UpdateLocationArg_lmsi = OCT_STR(name=u'lmsi', mode=MODE_TYPE, tag=(10, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'LMSI')), opt=True)
     UpdateLocationArg._cont = ASN1Dict([
-        ('imsi', _UpdateLocationArg_imsi),
-        ('locationInfo', _UpdateLocationArg_locationInfo),
-        ('vlr-Number', _UpdateLocationArg_vlr_Number),
-        ('lmsi', _UpdateLocationArg_lmsi),
+        (u'imsi', _UpdateLocationArg_imsi),
+        (u'locationInfo', _UpdateLocationArg_locationInfo),
+        (u'vlr-Number', _UpdateLocationArg_vlr_Number),
+        (u'lmsi', _UpdateLocationArg_lmsi),
         ])
     UpdateLocationArg._ext = []
     
     #-----< UpdateLocationRes >-----#
-    UpdateLocationRes = CHOICE(name='UpdateLocationRes', mode=MODE_TYPE)
-    _UpdateLocationRes_hlr_Number = OCT_STR(name='hlr-Number', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'ISDN-AddressString')))
-    _UpdateLocationRes_extensibleUpdateLocationRes = SEQ(name='extensibleUpdateLocationRes', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-MS-DataTypes', 'ExtensibleUpdateLocationRes')))
+    UpdateLocationRes = CHOICE(name=u'UpdateLocationRes', mode=MODE_TYPE)
+    _UpdateLocationRes_hlr_Number = OCT_STR(name=u'hlr-Number', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'ISDN-AddressString')))
+    _UpdateLocationRes_extensibleUpdateLocationRes = SEQ(name=u'extensibleUpdateLocationRes', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-MS-DataTypes', 'ExtensibleUpdateLocationRes')))
     UpdateLocationRes._cont = ASN1Dict([
-        ('hlr-Number', _UpdateLocationRes_hlr_Number),
-        ('extensibleUpdateLocationRes', _UpdateLocationRes_extensibleUpdateLocationRes),
+        (u'hlr-Number', _UpdateLocationRes_hlr_Number),
+        (u'extensibleUpdateLocationRes', _UpdateLocationRes_extensibleUpdateLocationRes),
         ])
     UpdateLocationRes._ext = None
     
     #-----< ExtensibleUpdateLocationRes >-----#
-    ExtensibleUpdateLocationRes = SEQ(name='ExtensibleUpdateLocationRes', mode=MODE_TYPE)
-    _ExtensibleUpdateLocationRes_hlr_Number = OCT_STR(name='hlr-Number', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'ISDN-AddressString')))
+    ExtensibleUpdateLocationRes = SEQ(name=u'ExtensibleUpdateLocationRes', mode=MODE_TYPE)
+    _ExtensibleUpdateLocationRes_hlr_Number = OCT_STR(name=u'hlr-Number', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'ISDN-AddressString')))
     ExtensibleUpdateLocationRes._cont = ASN1Dict([
-        ('hlr-Number', _ExtensibleUpdateLocationRes_hlr_Number),
+        (u'hlr-Number', _ExtensibleUpdateLocationRes_hlr_Number),
         ])
     ExtensibleUpdateLocationRes._ext = []
     
     #-----< CancelLocationArg >-----#
-    CancelLocationArg = CHOICE(name='CancelLocationArg', mode=MODE_TYPE)
-    _CancelLocationArg_imsi = OCT_STR(name='imsi', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'IMSI')))
-    _CancelLocationArg_imsi_WithLMSI = SEQ(name='imsi-WithLMSI', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-MS-DataTypes', 'IMSI-WithLMSI')))
+    CancelLocationArg = CHOICE(name=u'CancelLocationArg', mode=MODE_TYPE)
+    _CancelLocationArg_imsi = OCT_STR(name=u'imsi', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'IMSI')))
+    _CancelLocationArg_imsi_WithLMSI = SEQ(name=u'imsi-WithLMSI', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-MS-DataTypes', 'IMSI-WithLMSI')))
     CancelLocationArg._cont = ASN1Dict([
-        ('imsi', _CancelLocationArg_imsi),
-        ('imsi-WithLMSI', _CancelLocationArg_imsi_WithLMSI),
+        (u'imsi', _CancelLocationArg_imsi),
+        (u'imsi-WithLMSI', _CancelLocationArg_imsi_WithLMSI),
         ])
     CancelLocationArg._ext = None
     
     #-----< PurgeMS-Arg >-----#
-    PurgeMS_Arg = SEQ(name='PurgeMS-Arg', mode=MODE_TYPE)
-    _PurgeMS_Arg_imsi = OCT_STR(name='imsi', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'IMSI')))
-    _PurgeMS_Arg_vlr_Number = OCT_STR(name='vlr-Number', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'ISDN-AddressString')))
+    PurgeMS_Arg = SEQ(name=u'PurgeMS-Arg', mode=MODE_TYPE)
+    _PurgeMS_Arg_imsi = OCT_STR(name=u'imsi', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'IMSI')))
+    _PurgeMS_Arg_vlr_Number = OCT_STR(name=u'vlr-Number', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'ISDN-AddressString')))
     PurgeMS_Arg._cont = ASN1Dict([
-        ('imsi', _PurgeMS_Arg_imsi),
-        ('vlr-Number', _PurgeMS_Arg_vlr_Number),
+        (u'imsi', _PurgeMS_Arg_imsi),
+        (u'vlr-Number', _PurgeMS_Arg_vlr_Number),
         ])
     PurgeMS_Arg._ext = []
     
     #-----< IMSI-WithLMSI >-----#
-    IMSI_WithLMSI = SEQ(name='IMSI-WithLMSI', mode=MODE_TYPE)
-    _IMSI_WithLMSI_imsi = OCT_STR(name='imsi', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'IMSI')))
-    _IMSI_WithLMSI_lmsi = OCT_STR(name='lmsi', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'LMSI')))
+    IMSI_WithLMSI = SEQ(name=u'IMSI-WithLMSI', mode=MODE_TYPE)
+    _IMSI_WithLMSI_imsi = OCT_STR(name=u'imsi', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'IMSI')))
+    _IMSI_WithLMSI_lmsi = OCT_STR(name=u'lmsi', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'LMSI')))
     IMSI_WithLMSI._cont = ASN1Dict([
-        ('imsi', _IMSI_WithLMSI_imsi),
-        ('lmsi', _IMSI_WithLMSI_lmsi),
+        (u'imsi', _IMSI_WithLMSI_imsi),
+        (u'lmsi', _IMSI_WithLMSI_lmsi),
         ])
     IMSI_WithLMSI._ext = []
     
     #-----< SendIdentificationRes >-----#
-    SendIdentificationRes = SEQ(name='SendIdentificationRes', mode=MODE_TYPE)
-    _SendIdentificationRes_imsi = OCT_STR(name='imsi', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'IMSI')))
-    _SendIdentificationRes_authenticationSetList = SEQ_OF(name='authenticationSetList', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-MS-DataTypes', 'AuthenticationSetList')), opt=True)
+    SendIdentificationRes = SEQ(name=u'SendIdentificationRes', mode=MODE_TYPE)
+    _SendIdentificationRes_imsi = OCT_STR(name=u'imsi', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'IMSI')))
+    _SendIdentificationRes_authenticationSetList = SEQ_OF(name=u'authenticationSetList', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-MS-DataTypes', 'AuthenticationSetList')), opt=True)
     SendIdentificationRes._cont = ASN1Dict([
-        ('imsi', _SendIdentificationRes_imsi),
-        ('authenticationSetList', _SendIdentificationRes_authenticationSetList),
+        (u'imsi', _SendIdentificationRes_imsi),
+        (u'authenticationSetList', _SendIdentificationRes_authenticationSetList),
         ])
     SendIdentificationRes._ext = []
     
     #-----< AuthenticationSetList >-----#
-    AuthenticationSetList = SEQ_OF(name='AuthenticationSetList', mode=MODE_TYPE)
+    AuthenticationSetList = SEQ_OF(name=u'AuthenticationSetList', mode=MODE_TYPE)
     _AuthenticationSetList__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-MS-DataTypes', 'AuthenticationSet')))
     AuthenticationSetList._cont = _AuthenticationSetList__item_
     AuthenticationSetList._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=5)], ev=None, er=[])
     
     #-----< AuthenticationSet >-----#
-    AuthenticationSet = SEQ(name='AuthenticationSet', mode=MODE_TYPE)
-    _AuthenticationSet_rand = OCT_STR(name='rand', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-MS-DataTypes', 'RAND')))
-    _AuthenticationSet_sres = OCT_STR(name='sres', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-MS-DataTypes', 'SRES')))
-    _AuthenticationSet_kc = OCT_STR(name='kc', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-MS-DataTypes', 'Kc')))
+    AuthenticationSet = SEQ(name=u'AuthenticationSet', mode=MODE_TYPE)
+    _AuthenticationSet_rand = OCT_STR(name=u'rand', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-MS-DataTypes', 'RAND')))
+    _AuthenticationSet_sres = OCT_STR(name=u'sres', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-MS-DataTypes', 'SRES')))
+    _AuthenticationSet_kc = OCT_STR(name=u'kc', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-MS-DataTypes', 'Kc')))
     AuthenticationSet._cont = ASN1Dict([
-        ('rand', _AuthenticationSet_rand),
-        ('sres', _AuthenticationSet_sres),
-        ('kc', _AuthenticationSet_kc),
+        (u'rand', _AuthenticationSet_rand),
+        (u'sres', _AuthenticationSet_sres),
+        (u'kc', _AuthenticationSet_kc),
         ])
     AuthenticationSet._ext = []
     
     #-----< RAND >-----#
-    RAND = OCT_STR(name='RAND', mode=MODE_TYPE)
+    RAND = OCT_STR(name=u'RAND', mode=MODE_TYPE)
     RAND._const_sz = ASN1Set(rv=[16], rr=[], ev=None, er=[])
     
     #-----< SRES >-----#
-    SRES = OCT_STR(name='SRES', mode=MODE_TYPE)
+    SRES = OCT_STR(name=u'SRES', mode=MODE_TYPE)
     SRES._const_sz = ASN1Set(rv=[4], rr=[], ev=None, er=[])
     
     #-----< Kc >-----#
-    Kc = OCT_STR(name='Kc', mode=MODE_TYPE)
+    Kc = OCT_STR(name=u'Kc', mode=MODE_TYPE)
     Kc._const_sz = ASN1Set(rv=[8], rr=[], ev=None, er=[])
     
     #-----< PrepareHO-Arg >-----#
-    PrepareHO_Arg = SEQ(name='PrepareHO-Arg', mode=MODE_TYPE)
-    _PrepareHO_Arg_targetCellId = OCT_STR(name='targetCellId', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'GlobalCellId')), opt=True)
-    _PrepareHO_Arg_ho_NumberNotRequired = NULL(name='ho-NumberNotRequired', mode=MODE_TYPE, opt=True)
-    _PrepareHO_Arg_bss_APDU = SEQ(name='bss-APDU', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'ExternalSignalInfo')), opt=True)
+    PrepareHO_Arg = SEQ(name=u'PrepareHO-Arg', mode=MODE_TYPE)
+    _PrepareHO_Arg_targetCellId = OCT_STR(name=u'targetCellId', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'GlobalCellId')), opt=True)
+    _PrepareHO_Arg_ho_NumberNotRequired = NULL(name=u'ho-NumberNotRequired', mode=MODE_TYPE, opt=True)
+    _PrepareHO_Arg_bss_APDU = SEQ(name=u'bss-APDU', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'ExternalSignalInfo')), opt=True)
     PrepareHO_Arg._cont = ASN1Dict([
-        ('targetCellId', _PrepareHO_Arg_targetCellId),
-        ('ho-NumberNotRequired', _PrepareHO_Arg_ho_NumberNotRequired),
-        ('bss-APDU', _PrepareHO_Arg_bss_APDU),
+        (u'targetCellId', _PrepareHO_Arg_targetCellId),
+        (u'ho-NumberNotRequired', _PrepareHO_Arg_ho_NumberNotRequired),
+        (u'bss-APDU', _PrepareHO_Arg_bss_APDU),
         ])
     PrepareHO_Arg._ext = []
     
     #-----< PerformHO-Arg >-----#
-    PerformHO_Arg = SEQ(name='PerformHO-Arg', mode=MODE_TYPE)
-    _PerformHO_Arg_targetCellId = OCT_STR(name='targetCellId', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'GlobalCellId')))
-    _PerformHO_Arg_servingCellId = OCT_STR(name='servingCellId', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'GlobalCellId')))
-    _PerformHO_Arg_channelType = OCT_STR(name='channelType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-MS-DataTypes', 'ChannelType')))
-    _PerformHO_Arg_classmarkInfo = OCT_STR(name='classmarkInfo', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-MS-DataTypes', 'ClassmarkInfo')))
-    _PerformHO_Arg_handoverPriority = OCT_STR(name='handoverPriority', mode=MODE_TYPE, tag=(11, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-MS-DataTypes', 'HandoverPriority')), opt=True)
-    _PerformHO_Arg_kc = OCT_STR(name='kc', mode=MODE_TYPE, tag=(12, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-MS-DataTypes', 'Kc')), opt=True)
+    PerformHO_Arg = SEQ(name=u'PerformHO-Arg', mode=MODE_TYPE)
+    _PerformHO_Arg_targetCellId = OCT_STR(name=u'targetCellId', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'GlobalCellId')))
+    _PerformHO_Arg_servingCellId = OCT_STR(name=u'servingCellId', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'GlobalCellId')))
+    _PerformHO_Arg_channelType = OCT_STR(name=u'channelType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-MS-DataTypes', 'ChannelType')))
+    _PerformHO_Arg_classmarkInfo = OCT_STR(name=u'classmarkInfo', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-MS-DataTypes', 'ClassmarkInfo')))
+    _PerformHO_Arg_handoverPriority = OCT_STR(name=u'handoverPriority', mode=MODE_TYPE, tag=(11, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-MS-DataTypes', 'HandoverPriority')), opt=True)
+    _PerformHO_Arg_kc = OCT_STR(name=u'kc', mode=MODE_TYPE, tag=(12, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-MS-DataTypes', 'Kc')), opt=True)
     PerformHO_Arg._cont = ASN1Dict([
-        ('targetCellId', _PerformHO_Arg_targetCellId),
-        ('servingCellId', _PerformHO_Arg_servingCellId),
-        ('channelType', _PerformHO_Arg_channelType),
-        ('classmarkInfo', _PerformHO_Arg_classmarkInfo),
-        ('handoverPriority', _PerformHO_Arg_handoverPriority),
-        ('kc', _PerformHO_Arg_kc),
+        (u'targetCellId', _PerformHO_Arg_targetCellId),
+        (u'servingCellId', _PerformHO_Arg_servingCellId),
+        (u'channelType', _PerformHO_Arg_channelType),
+        (u'classmarkInfo', _PerformHO_Arg_classmarkInfo),
+        (u'handoverPriority', _PerformHO_Arg_handoverPriority),
+        (u'kc', _PerformHO_Arg_kc),
         ])
     PerformHO_Arg._ext = None
     
     #-----< ChannelType >-----#
-    ChannelType = OCT_STR(name='ChannelType', mode=MODE_TYPE)
+    ChannelType = OCT_STR(name=u'ChannelType', mode=MODE_TYPE)
     ChannelType._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=10)], ev=None, er=[])
     
     #-----< ClassmarkInfo >-----#
-    ClassmarkInfo = OCT_STR(name='ClassmarkInfo', mode=MODE_TYPE)
+    ClassmarkInfo = OCT_STR(name=u'ClassmarkInfo', mode=MODE_TYPE)
     ClassmarkInfo._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=2)], ev=None, er=[])
     
     #-----< HandoverPriority >-----#
-    HandoverPriority = OCT_STR(name='HandoverPriority', mode=MODE_TYPE)
+    HandoverPriority = OCT_STR(name=u'HandoverPriority', mode=MODE_TYPE)
     HandoverPriority._const_sz = ASN1Set(rv=[1], rr=[], ev=None, er=[])
     
     #-----< PrepareHO-Res >-----#
-    PrepareHO_Res = SEQ(name='PrepareHO-Res', mode=MODE_TYPE)
-    _PrepareHO_Res_handoverNumber = OCT_STR(name='handoverNumber', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'ISDN-AddressString')), opt=True)
-    _PrepareHO_Res_bss_APDU = SEQ(name='bss-APDU', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'ExternalSignalInfo')), opt=True)
+    PrepareHO_Res = SEQ(name=u'PrepareHO-Res', mode=MODE_TYPE)
+    _PrepareHO_Res_handoverNumber = OCT_STR(name=u'handoverNumber', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'ISDN-AddressString')), opt=True)
+    _PrepareHO_Res_bss_APDU = SEQ(name=u'bss-APDU', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'ExternalSignalInfo')), opt=True)
     PrepareHO_Res._cont = ASN1Dict([
-        ('handoverNumber', _PrepareHO_Res_handoverNumber),
-        ('bss-APDU', _PrepareHO_Res_bss_APDU),
+        (u'handoverNumber', _PrepareHO_Res_handoverNumber),
+        (u'bss-APDU', _PrepareHO_Res_bss_APDU),
         ])
     PrepareHO_Res._ext = []
     
     #-----< PerformHO-Res >-----#
-    PerformHO_Res = SEQ(name='PerformHO-Res', mode=MODE_TYPE)
-    _PerformHO_Res_handoverNumber = OCT_STR(name='handoverNumber', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'ISDN-AddressString')))
-    _PerformHO_Res_accessSignalInfo = SEQ(name='accessSignalInfo', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'ExternalSignalInfo')))
+    PerformHO_Res = SEQ(name=u'PerformHO-Res', mode=MODE_TYPE)
+    _PerformHO_Res_handoverNumber = OCT_STR(name=u'handoverNumber', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'ISDN-AddressString')))
+    _PerformHO_Res_accessSignalInfo = SEQ(name=u'accessSignalInfo', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'ExternalSignalInfo')))
     PerformHO_Res._cont = ASN1Dict([
-        ('handoverNumber', _PerformHO_Res_handoverNumber),
-        ('accessSignalInfo', _PerformHO_Res_accessSignalInfo),
+        (u'handoverNumber', _PerformHO_Res_handoverNumber),
+        (u'accessSignalInfo', _PerformHO_Res_accessSignalInfo),
         ])
     PerformHO_Res._ext = None
     
     #-----< PrepareSubsequentHO-Arg >-----#
-    PrepareSubsequentHO_Arg = SEQ(name='PrepareSubsequentHO-Arg', mode=MODE_TYPE)
-    _PrepareSubsequentHO_Arg_targetCellId = OCT_STR(name='targetCellId', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'GlobalCellId')))
-    _PrepareSubsequentHO_Arg_targetMSC_Number = OCT_STR(name='targetMSC-Number', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'ISDN-AddressString')))
-    _PrepareSubsequentHO_Arg_bss_APDU = SEQ(name='bss-APDU', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'ExternalSignalInfo')))
+    PrepareSubsequentHO_Arg = SEQ(name=u'PrepareSubsequentHO-Arg', mode=MODE_TYPE)
+    _PrepareSubsequentHO_Arg_targetCellId = OCT_STR(name=u'targetCellId', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'GlobalCellId')))
+    _PrepareSubsequentHO_Arg_targetMSC_Number = OCT_STR(name=u'targetMSC-Number', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'ISDN-AddressString')))
+    _PrepareSubsequentHO_Arg_bss_APDU = SEQ(name=u'bss-APDU', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'ExternalSignalInfo')))
     PrepareSubsequentHO_Arg._cont = ASN1Dict([
-        ('targetCellId', _PrepareSubsequentHO_Arg_targetCellId),
-        ('targetMSC-Number', _PrepareSubsequentHO_Arg_targetMSC_Number),
-        ('bss-APDU', _PrepareSubsequentHO_Arg_bss_APDU),
+        (u'targetCellId', _PrepareSubsequentHO_Arg_targetCellId),
+        (u'targetMSC-Number', _PrepareSubsequentHO_Arg_targetMSC_Number),
+        (u'bss-APDU', _PrepareSubsequentHO_Arg_bss_APDU),
         ])
     PrepareSubsequentHO_Arg._ext = []
     
     #-----< PerformSubsequentHO-Arg >-----#
-    PerformSubsequentHO_Arg = SEQ(name='PerformSubsequentHO-Arg', mode=MODE_TYPE)
-    _PerformSubsequentHO_Arg_targetCellId = OCT_STR(name='targetCellId', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'GlobalCellId')))
-    _PerformSubsequentHO_Arg_servingCellId = OCT_STR(name='servingCellId', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'GlobalCellId')))
-    _PerformSubsequentHO_Arg_targetMSC_Number = OCT_STR(name='targetMSC-Number', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'ISDN-AddressString')))
-    _PerformSubsequentHO_Arg_classmarkInfo = OCT_STR(name='classmarkInfo', mode=MODE_TYPE, tag=(10, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-MS-DataTypes', 'ClassmarkInfo')), opt=True)
+    PerformSubsequentHO_Arg = SEQ(name=u'PerformSubsequentHO-Arg', mode=MODE_TYPE)
+    _PerformSubsequentHO_Arg_targetCellId = OCT_STR(name=u'targetCellId', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'GlobalCellId')))
+    _PerformSubsequentHO_Arg_servingCellId = OCT_STR(name=u'servingCellId', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'GlobalCellId')))
+    _PerformSubsequentHO_Arg_targetMSC_Number = OCT_STR(name=u'targetMSC-Number', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'ISDN-AddressString')))
+    _PerformSubsequentHO_Arg_classmarkInfo = OCT_STR(name=u'classmarkInfo', mode=MODE_TYPE, tag=(10, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-MS-DataTypes', 'ClassmarkInfo')), opt=True)
     PerformSubsequentHO_Arg._cont = ASN1Dict([
-        ('targetCellId', _PerformSubsequentHO_Arg_targetCellId),
-        ('servingCellId', _PerformSubsequentHO_Arg_servingCellId),
-        ('targetMSC-Number', _PerformSubsequentHO_Arg_targetMSC_Number),
-        ('classmarkInfo', _PerformSubsequentHO_Arg_classmarkInfo),
+        (u'targetCellId', _PerformSubsequentHO_Arg_targetCellId),
+        (u'servingCellId', _PerformSubsequentHO_Arg_servingCellId),
+        (u'targetMSC-Number', _PerformSubsequentHO_Arg_targetMSC_Number),
+        (u'classmarkInfo', _PerformSubsequentHO_Arg_classmarkInfo),
         ])
     PerformSubsequentHO_Arg._ext = None
     
     #-----< SendAuthenticationInfoArg >-----#
-    SendAuthenticationInfoArg = OCT_STR(name='SendAuthenticationInfoArg', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'IMSI')))
+    SendAuthenticationInfoArg = OCT_STR(name=u'SendAuthenticationInfoArg', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'IMSI')))
     
     #-----< SendAuthenticationInfoRes >-----#
-    SendAuthenticationInfoRes = SEQ_OF(name='SendAuthenticationInfoRes', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-MS-DataTypes', 'AuthenticationSetList')))
+    SendAuthenticationInfoRes = SEQ_OF(name=u'SendAuthenticationInfoRes', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-MS-DataTypes', 'AuthenticationSetList')))
     
     #-----< Ki >-----#
-    Ki = OCT_STR(name='Ki', mode=MODE_TYPE)
+    Ki = OCT_STR(name=u'Ki', mode=MODE_TYPE)
     Ki._const_sz = ASN1Set(rv=[16], rr=[], ev=None, er=[])
     
     #-----< EquipmentStatus >-----#
-    EquipmentStatus = ENUM(name='EquipmentStatus', mode=MODE_TYPE)
-    EquipmentStatus._cont = ASN1Dict([('whiteListed', 0), ('blackListed', 1), ('greyListed', 2)])
+    EquipmentStatus = ENUM(name=u'EquipmentStatus', mode=MODE_TYPE)
+    EquipmentStatus._cont = ASN1Dict([(u'whiteListed', 0), (u'blackListed', 1), (u'greyListed', 2)])
     EquipmentStatus._ext = None
     
     #-----< SendParametersArg >-----#
-    SendParametersArg = SEQ(name='SendParametersArg', mode=MODE_TYPE)
-    _SendParametersArg_subscriberId = CHOICE(name='subscriberId', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'SubscriberId')))
-    _SendParametersArg_requestParameterList = SEQ_OF(name='requestParameterList', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-MS-DataTypes', 'RequestParameterList')))
+    SendParametersArg = SEQ(name=u'SendParametersArg', mode=MODE_TYPE)
+    _SendParametersArg_subscriberId = CHOICE(name=u'subscriberId', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'SubscriberId')))
+    _SendParametersArg_requestParameterList = SEQ_OF(name=u'requestParameterList', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-MS-DataTypes', 'RequestParameterList')))
     SendParametersArg._cont = ASN1Dict([
-        ('subscriberId', _SendParametersArg_subscriberId),
-        ('requestParameterList', _SendParametersArg_requestParameterList),
+        (u'subscriberId', _SendParametersArg_subscriberId),
+        (u'requestParameterList', _SendParametersArg_requestParameterList),
         ])
     SendParametersArg._ext = None
     
     #-----< RequestParameterList >-----#
-    RequestParameterList = SEQ_OF(name='RequestParameterList', mode=MODE_TYPE)
+    RequestParameterList = SEQ_OF(name=u'RequestParameterList', mode=MODE_TYPE)
     _RequestParameterList__item_ = ENUM(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-MS-DataTypes', 'RequestParameter')))
     RequestParameterList._cont = _RequestParameterList__item_
     RequestParameterList._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=2)], ev=None, er=[])
     
     #-----< RequestParameter >-----#
-    RequestParameter = ENUM(name='RequestParameter', mode=MODE_TYPE)
-    RequestParameter._cont = ASN1Dict([('requestIMSI', 0), ('requestAuthenticationSet', 1), ('requestSubscriberData', 2), ('requestKi', 4)])
+    RequestParameter = ENUM(name=u'RequestParameter', mode=MODE_TYPE)
+    RequestParameter._cont = ASN1Dict([(u'requestIMSI', 0), (u'requestAuthenticationSet', 1), (u'requestSubscriberData', 2), (u'requestKi', 4)])
     RequestParameter._ext = None
     
     #-----< SentParameterList >-----#
-    SentParameterList = SEQ_OF(name='SentParameterList', mode=MODE_TYPE)
+    SentParameterList = SEQ_OF(name=u'SentParameterList', mode=MODE_TYPE)
     _SentParameterList__item_ = CHOICE(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-MS-DataTypes', 'SentParameter')))
     SentParameterList._cont = _SentParameterList__item_
     SentParameterList._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=6)], ev=None, er=[])
     
     #-----< SentParameter >-----#
-    SentParameter = CHOICE(name='SentParameter', mode=MODE_TYPE)
-    _SentParameter_imsi = OCT_STR(name='imsi', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'IMSI')))
-    _SentParameter_authenticationSet = SEQ(name='authenticationSet', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-MS-DataTypes', 'AuthenticationSet')))
-    _SentParameter_subscriberData = SEQ(name='subscriberData', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-MS-DataTypes', 'SubscriberData')))
-    _SentParameter_ki = OCT_STR(name='ki', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-MS-DataTypes', 'Ki')))
+    SentParameter = CHOICE(name=u'SentParameter', mode=MODE_TYPE)
+    _SentParameter_imsi = OCT_STR(name=u'imsi', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'IMSI')))
+    _SentParameter_authenticationSet = SEQ(name=u'authenticationSet', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-MS-DataTypes', 'AuthenticationSet')))
+    _SentParameter_subscriberData = SEQ(name=u'subscriberData', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-MS-DataTypes', 'SubscriberData')))
+    _SentParameter_ki = OCT_STR(name=u'ki', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-MS-DataTypes', 'Ki')))
     SentParameter._cont = ASN1Dict([
-        ('imsi', _SentParameter_imsi),
-        ('authenticationSet', _SentParameter_authenticationSet),
-        ('subscriberData', _SentParameter_subscriberData),
-        ('ki', _SentParameter_ki),
+        (u'imsi', _SentParameter_imsi),
+        (u'authenticationSet', _SentParameter_authenticationSet),
+        (u'subscriberData', _SentParameter_subscriberData),
+        (u'ki', _SentParameter_ki),
         ])
     SentParameter._ext = None
     
     #-----< maxNumOfSentParameter >-----#
-    maxNumOfSentParameter = INT(name='maxNumOfSentParameter', mode=MODE_VALUE)
+    maxNumOfSentParameter = INT(name=u'maxNumOfSentParameter', mode=MODE_VALUE)
     maxNumOfSentParameter._val = 6
     
     #-----< InsertSubscriberDataArg >-----#
-    InsertSubscriberDataArg = SEQ(name='InsertSubscriberDataArg', mode=MODE_TYPE)
-    _InsertSubscriberDataArg_imsi = OCT_STR(name='imsi', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'IMSI')), opt=True)
-    _InsertSubscriberDataArg_msisdn = OCT_STR(name='msisdn', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'ISDN-AddressString')), opt=True)
-    _InsertSubscriberDataArg_category = OCT_STR(name='category', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'Category')), opt=True)
-    _InsertSubscriberDataArg_subscriberStatus = ENUM(name='subscriberStatus', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-MS-DataTypes', 'SubscriberStatus')), opt=True)
-    _InsertSubscriberDataArg_bearerServiceList = SEQ_OF(name='bearerServiceList', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'BearerServiceList')), opt=True)
-    _InsertSubscriberDataArg_teleserviceList = SEQ_OF(name='teleserviceList', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'TeleserviceList')), opt=True)
-    _InsertSubscriberDataArg_provisionedSS = SEQ_OF(name='provisionedSS', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-SS-DataTypes', 'SS-InfoList')), opt=True)
-    _InsertSubscriberDataArg_odb_Data = SEQ(name='odb-Data', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-MS-DataTypes', 'ODB-Data')), opt=True)
-    _InsertSubscriberDataArg_roamingRestrictionDueToUnsupportedFeature = NULL(name='roamingRestrictionDueToUnsupportedFeature', mode=MODE_TYPE, tag=(9, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _InsertSubscriberDataArg_regionalSubscriptionData = SEQ_OF(name='regionalSubscriptionData', mode=MODE_TYPE, tag=(10, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-MS-DataTypes', 'ZoneCodeList')), opt=True)
+    InsertSubscriberDataArg = SEQ(name=u'InsertSubscriberDataArg', mode=MODE_TYPE)
+    _InsertSubscriberDataArg_imsi = OCT_STR(name=u'imsi', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'IMSI')), opt=True)
+    _InsertSubscriberDataArg_msisdn = OCT_STR(name=u'msisdn', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'ISDN-AddressString')), opt=True)
+    _InsertSubscriberDataArg_category = OCT_STR(name=u'category', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'Category')), opt=True)
+    _InsertSubscriberDataArg_subscriberStatus = ENUM(name=u'subscriberStatus', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-MS-DataTypes', 'SubscriberStatus')), opt=True)
+    _InsertSubscriberDataArg_bearerServiceList = SEQ_OF(name=u'bearerServiceList', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'BearerServiceList')), opt=True)
+    _InsertSubscriberDataArg_teleserviceList = SEQ_OF(name=u'teleserviceList', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'TeleserviceList')), opt=True)
+    _InsertSubscriberDataArg_provisionedSS = SEQ_OF(name=u'provisionedSS', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-SS-DataTypes', 'SS-InfoList')), opt=True)
+    _InsertSubscriberDataArg_odb_Data = SEQ(name=u'odb-Data', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-MS-DataTypes', 'ODB-Data')), opt=True)
+    _InsertSubscriberDataArg_roamingRestrictionDueToUnsupportedFeature = NULL(name=u'roamingRestrictionDueToUnsupportedFeature', mode=MODE_TYPE, tag=(9, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _InsertSubscriberDataArg_regionalSubscriptionData = SEQ_OF(name=u'regionalSubscriptionData', mode=MODE_TYPE, tag=(10, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-MS-DataTypes', 'ZoneCodeList')), opt=True)
     InsertSubscriberDataArg._cont = ASN1Dict([
-        ('imsi', _InsertSubscriberDataArg_imsi),
-        ('msisdn', _InsertSubscriberDataArg_msisdn),
-        ('category', _InsertSubscriberDataArg_category),
-        ('subscriberStatus', _InsertSubscriberDataArg_subscriberStatus),
-        ('bearerServiceList', _InsertSubscriberDataArg_bearerServiceList),
-        ('teleserviceList', _InsertSubscriberDataArg_teleserviceList),
-        ('provisionedSS', _InsertSubscriberDataArg_provisionedSS),
-        ('odb-Data', _InsertSubscriberDataArg_odb_Data),
-        ('roamingRestrictionDueToUnsupportedFeature', _InsertSubscriberDataArg_roamingRestrictionDueToUnsupportedFeature),
-        ('regionalSubscriptionData', _InsertSubscriberDataArg_regionalSubscriptionData),
+        (u'imsi', _InsertSubscriberDataArg_imsi),
+        (u'msisdn', _InsertSubscriberDataArg_msisdn),
+        (u'category', _InsertSubscriberDataArg_category),
+        (u'subscriberStatus', _InsertSubscriberDataArg_subscriberStatus),
+        (u'bearerServiceList', _InsertSubscriberDataArg_bearerServiceList),
+        (u'teleserviceList', _InsertSubscriberDataArg_teleserviceList),
+        (u'provisionedSS', _InsertSubscriberDataArg_provisionedSS),
+        (u'odb-Data', _InsertSubscriberDataArg_odb_Data),
+        (u'roamingRestrictionDueToUnsupportedFeature', _InsertSubscriberDataArg_roamingRestrictionDueToUnsupportedFeature),
+        (u'regionalSubscriptionData', _InsertSubscriberDataArg_regionalSubscriptionData),
         ])
     InsertSubscriberDataArg._ext = []
     
     #-----< SubscriberData >-----#
-    SubscriberData = SEQ(name='SubscriberData', mode=MODE_TYPE)
-    _SubscriberData_msisdn = OCT_STR(name='msisdn', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'ISDN-AddressString')), opt=True)
-    _SubscriberData_category = OCT_STR(name='category', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'Category')), opt=True)
-    _SubscriberData_subscriberStatus = ENUM(name='subscriberStatus', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-MS-DataTypes', 'SubscriberStatus')), opt=True)
-    _SubscriberData_bearerServiceList = SEQ_OF(name='bearerServiceList', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'BearerServiceList')), opt=True)
-    _SubscriberData_teleserviceList = SEQ_OF(name='teleserviceList', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'TeleserviceList')), opt=True)
-    _SubscriberData_provisionedSS = SEQ_OF(name='provisionedSS', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-SS-DataTypes', 'SS-InfoList')), opt=True)
-    _SubscriberData_odb_Data = SEQ(name='odb-Data', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-MS-DataTypes', 'ODB-Data')), opt=True)
-    _SubscriberData_roamingRestrictionDueToUnsupportedFeature = NULL(name='roamingRestrictionDueToUnsupportedFeature', mode=MODE_TYPE, tag=(9, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _SubscriberData_regionalSubscriptionData = SEQ_OF(name='regionalSubscriptionData', mode=MODE_TYPE, tag=(10, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-MS-DataTypes', 'ZoneCodeList')), opt=True)
+    SubscriberData = SEQ(name=u'SubscriberData', mode=MODE_TYPE)
+    _SubscriberData_msisdn = OCT_STR(name=u'msisdn', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'ISDN-AddressString')), opt=True)
+    _SubscriberData_category = OCT_STR(name=u'category', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'Category')), opt=True)
+    _SubscriberData_subscriberStatus = ENUM(name=u'subscriberStatus', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-MS-DataTypes', 'SubscriberStatus')), opt=True)
+    _SubscriberData_bearerServiceList = SEQ_OF(name=u'bearerServiceList', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'BearerServiceList')), opt=True)
+    _SubscriberData_teleserviceList = SEQ_OF(name=u'teleserviceList', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'TeleserviceList')), opt=True)
+    _SubscriberData_provisionedSS = SEQ_OF(name=u'provisionedSS', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-SS-DataTypes', 'SS-InfoList')), opt=True)
+    _SubscriberData_odb_Data = SEQ(name=u'odb-Data', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-MS-DataTypes', 'ODB-Data')), opt=True)
+    _SubscriberData_roamingRestrictionDueToUnsupportedFeature = NULL(name=u'roamingRestrictionDueToUnsupportedFeature', mode=MODE_TYPE, tag=(9, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _SubscriberData_regionalSubscriptionData = SEQ_OF(name=u'regionalSubscriptionData', mode=MODE_TYPE, tag=(10, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-MS-DataTypes', 'ZoneCodeList')), opt=True)
     SubscriberData._cont = ASN1Dict([
-        ('msisdn', _SubscriberData_msisdn),
-        ('category', _SubscriberData_category),
-        ('subscriberStatus', _SubscriberData_subscriberStatus),
-        ('bearerServiceList', _SubscriberData_bearerServiceList),
-        ('teleserviceList', _SubscriberData_teleserviceList),
-        ('provisionedSS', _SubscriberData_provisionedSS),
-        ('odb-Data', _SubscriberData_odb_Data),
-        ('roamingRestrictionDueToUnsupportedFeature', _SubscriberData_roamingRestrictionDueToUnsupportedFeature),
-        ('regionalSubscriptionData', _SubscriberData_regionalSubscriptionData),
+        (u'msisdn', _SubscriberData_msisdn),
+        (u'category', _SubscriberData_category),
+        (u'subscriberStatus', _SubscriberData_subscriberStatus),
+        (u'bearerServiceList', _SubscriberData_bearerServiceList),
+        (u'teleserviceList', _SubscriberData_teleserviceList),
+        (u'provisionedSS', _SubscriberData_provisionedSS),
+        (u'odb-Data', _SubscriberData_odb_Data),
+        (u'roamingRestrictionDueToUnsupportedFeature', _SubscriberData_roamingRestrictionDueToUnsupportedFeature),
+        (u'regionalSubscriptionData', _SubscriberData_regionalSubscriptionData),
         ])
     SubscriberData._ext = None
     
     #-----< SubscriberStatus >-----#
-    SubscriberStatus = ENUM(name='SubscriberStatus', mode=MODE_TYPE)
-    SubscriberStatus._cont = ASN1Dict([('serviceGranted', 0), ('operatorDeterminedBarring', 1)])
+    SubscriberStatus = ENUM(name=u'SubscriberStatus', mode=MODE_TYPE)
+    SubscriberStatus._cont = ASN1Dict([(u'serviceGranted', 0), (u'operatorDeterminedBarring', 1)])
     SubscriberStatus._ext = None
     
     #-----< ODB-Data >-----#
-    ODB_Data = SEQ(name='ODB-Data', mode=MODE_TYPE)
-    _ODB_Data_odb_GeneralData = BIT_STR(name='odb-GeneralData', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-MS-DataTypes', 'ODB-GeneralData')))
-    _ODB_Data_odb_HPLMN_Data = BIT_STR(name='odb-HPLMN-Data', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-MS-DataTypes', 'ODB-HPLMN-Data')), opt=True)
+    ODB_Data = SEQ(name=u'ODB-Data', mode=MODE_TYPE)
+    _ODB_Data_odb_GeneralData = BIT_STR(name=u'odb-GeneralData', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-MS-DataTypes', 'ODB-GeneralData')))
+    _ODB_Data_odb_HPLMN_Data = BIT_STR(name=u'odb-HPLMN-Data', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-MS-DataTypes', 'ODB-HPLMN-Data')), opt=True)
     ODB_Data._cont = ASN1Dict([
-        ('odb-GeneralData', _ODB_Data_odb_GeneralData),
-        ('odb-HPLMN-Data', _ODB_Data_odb_HPLMN_Data),
+        (u'odb-GeneralData', _ODB_Data_odb_GeneralData),
+        (u'odb-HPLMN-Data', _ODB_Data_odb_HPLMN_Data),
         ])
     ODB_Data._ext = []
     
     #-----< ODB-GeneralData >-----#
-    ODB_GeneralData = BIT_STR(name='ODB-GeneralData', mode=MODE_TYPE)
-    ODB_GeneralData._cont = ASN1Dict([('allOG-CallsBarred', 0), ('internationalOGCallsBarred', 1), ('internationalOGCallsNotToHPLMN-CountryBarred', 2), ('premiumRateInformationOGCallsBarred', 3), ('premiumRateEntertainementOGCallsBarred', 4), ('ss-AccessBarred', 5)])
+    ODB_GeneralData = BIT_STR(name=u'ODB-GeneralData', mode=MODE_TYPE)
+    ODB_GeneralData._cont = ASN1Dict([(u'allOG-CallsBarred', 0), (u'internationalOGCallsBarred', 1), (u'internationalOGCallsNotToHPLMN-CountryBarred', 2), (u'premiumRateInformationOGCallsBarred', 3), (u'premiumRateEntertainementOGCallsBarred', 4), (u'ss-AccessBarred', 5)])
     ODB_GeneralData._const_sz = ASN1Set(rv=[6], rr=[], ev=None, er=[])
     
     #-----< ODB-HPLMN-Data >-----#
-    ODB_HPLMN_Data = BIT_STR(name='ODB-HPLMN-Data', mode=MODE_TYPE)
-    ODB_HPLMN_Data._cont = ASN1Dict([('plmn-SpecificBarringType1', 0), ('plmn-SpecificBarringType2', 1), ('plmn-SpecificBarringType3', 2), ('plmn-SpecificBarringType4', 3)])
+    ODB_HPLMN_Data = BIT_STR(name=u'ODB-HPLMN-Data', mode=MODE_TYPE)
+    ODB_HPLMN_Data._cont = ASN1Dict([(u'plmn-SpecificBarringType1', 0), (u'plmn-SpecificBarringType2', 1), (u'plmn-SpecificBarringType3', 2), (u'plmn-SpecificBarringType4', 3)])
     ODB_HPLMN_Data._const_sz = ASN1Set(rv=[4], rr=[], ev=None, er=[])
     
     #-----< ZoneCodeList >-----#
-    ZoneCodeList = SEQ_OF(name='ZoneCodeList', mode=MODE_TYPE)
+    ZoneCodeList = SEQ_OF(name=u'ZoneCodeList', mode=MODE_TYPE)
     _ZoneCodeList__item_ = OCT_STR(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-MS-DataTypes', 'ZoneCode')))
     ZoneCodeList._cont = _ZoneCodeList__item_
     ZoneCodeList._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=10)], ev=None, er=[])
     
     #-----< ZoneCode >-----#
-    ZoneCode = OCT_STR(name='ZoneCode', mode=MODE_TYPE)
+    ZoneCode = OCT_STR(name=u'ZoneCode', mode=MODE_TYPE)
     ZoneCode._const_sz = ASN1Set(rv=[2], rr=[], ev=None, er=[])
     
     #-----< maxNumOfZoneCodes >-----#
-    maxNumOfZoneCodes = INT(name='maxNumOfZoneCodes', mode=MODE_VALUE)
+    maxNumOfZoneCodes = INT(name=u'maxNumOfZoneCodes', mode=MODE_VALUE)
     maxNumOfZoneCodes._val = 10
     
     #-----< InsertSubscriberDataRes >-----#
-    InsertSubscriberDataRes = SEQ(name='InsertSubscriberDataRes', mode=MODE_TYPE)
-    _InsertSubscriberDataRes_teleserviceList = SEQ_OF(name='teleserviceList', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'TeleserviceList')), opt=True)
-    _InsertSubscriberDataRes_bearerServiceList = SEQ_OF(name='bearerServiceList', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'BearerServiceList')), opt=True)
-    _InsertSubscriberDataRes_ss_List = SEQ_OF(name='ss-List', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-SS-DataTypes', 'SS-List')), opt=True)
-    _InsertSubscriberDataRes_odb_GeneralData = BIT_STR(name='odb-GeneralData', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-MS-DataTypes', 'ODB-GeneralData')), opt=True)
-    _InsertSubscriberDataRes_regionalSubscriptionResponse = ENUM(name='regionalSubscriptionResponse', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-MS-DataTypes', 'RegionalSubscriptionResponse')), opt=True)
+    InsertSubscriberDataRes = SEQ(name=u'InsertSubscriberDataRes', mode=MODE_TYPE)
+    _InsertSubscriberDataRes_teleserviceList = SEQ_OF(name=u'teleserviceList', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'TeleserviceList')), opt=True)
+    _InsertSubscriberDataRes_bearerServiceList = SEQ_OF(name=u'bearerServiceList', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'BearerServiceList')), opt=True)
+    _InsertSubscriberDataRes_ss_List = SEQ_OF(name=u'ss-List', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-SS-DataTypes', 'SS-List')), opt=True)
+    _InsertSubscriberDataRes_odb_GeneralData = BIT_STR(name=u'odb-GeneralData', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-MS-DataTypes', 'ODB-GeneralData')), opt=True)
+    _InsertSubscriberDataRes_regionalSubscriptionResponse = ENUM(name=u'regionalSubscriptionResponse', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-MS-DataTypes', 'RegionalSubscriptionResponse')), opt=True)
     InsertSubscriberDataRes._cont = ASN1Dict([
-        ('teleserviceList', _InsertSubscriberDataRes_teleserviceList),
-        ('bearerServiceList', _InsertSubscriberDataRes_bearerServiceList),
-        ('ss-List', _InsertSubscriberDataRes_ss_List),
-        ('odb-GeneralData', _InsertSubscriberDataRes_odb_GeneralData),
-        ('regionalSubscriptionResponse', _InsertSubscriberDataRes_regionalSubscriptionResponse),
+        (u'teleserviceList', _InsertSubscriberDataRes_teleserviceList),
+        (u'bearerServiceList', _InsertSubscriberDataRes_bearerServiceList),
+        (u'ss-List', _InsertSubscriberDataRes_ss_List),
+        (u'odb-GeneralData', _InsertSubscriberDataRes_odb_GeneralData),
+        (u'regionalSubscriptionResponse', _InsertSubscriberDataRes_regionalSubscriptionResponse),
         ])
     InsertSubscriberDataRes._ext = []
     
     #-----< RegionalSubscriptionResponse >-----#
-    RegionalSubscriptionResponse = ENUM(name='RegionalSubscriptionResponse', mode=MODE_TYPE)
-    RegionalSubscriptionResponse._cont = ASN1Dict([('msc-AreaRestricted', 0), ('tooManyZoneCodes', 1), ('zoneCodesConflict', 2), ('regionalSubscNotSupported', 3)])
+    RegionalSubscriptionResponse = ENUM(name=u'RegionalSubscriptionResponse', mode=MODE_TYPE)
+    RegionalSubscriptionResponse._cont = ASN1Dict([(u'msc-AreaRestricted', 0), (u'tooManyZoneCodes', 1), (u'zoneCodesConflict', 2), (u'regionalSubscNotSupported', 3)])
     RegionalSubscriptionResponse._ext = None
     
     #-----< DeleteSubscriberDataArg >-----#
-    DeleteSubscriberDataArg = SEQ(name='DeleteSubscriberDataArg', mode=MODE_TYPE)
-    _DeleteSubscriberDataArg_imsi = OCT_STR(name='imsi', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'IMSI')))
-    _DeleteSubscriberDataArg_basicServiceList = SEQ_OF(name='basicServiceList', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'BasicServiceList')), opt=True)
-    _DeleteSubscriberDataArg_ss_List = SEQ_OF(name='ss-List', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-SS-DataTypes', 'SS-List')), opt=True)
-    _DeleteSubscriberDataArg_roamingRestrictionDueToUnsupportedFeature = NULL(name='roamingRestrictionDueToUnsupportedFeature', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _DeleteSubscriberDataArg_regionalSubscriptionIdentifier = OCT_STR(name='regionalSubscriptionIdentifier', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-MS-DataTypes', 'ZoneCode')), opt=True)
+    DeleteSubscriberDataArg = SEQ(name=u'DeleteSubscriberDataArg', mode=MODE_TYPE)
+    _DeleteSubscriberDataArg_imsi = OCT_STR(name=u'imsi', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'IMSI')))
+    _DeleteSubscriberDataArg_basicServiceList = SEQ_OF(name=u'basicServiceList', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'BasicServiceList')), opt=True)
+    _DeleteSubscriberDataArg_ss_List = SEQ_OF(name=u'ss-List', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-SS-DataTypes', 'SS-List')), opt=True)
+    _DeleteSubscriberDataArg_roamingRestrictionDueToUnsupportedFeature = NULL(name=u'roamingRestrictionDueToUnsupportedFeature', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _DeleteSubscriberDataArg_regionalSubscriptionIdentifier = OCT_STR(name=u'regionalSubscriptionIdentifier', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-MS-DataTypes', 'ZoneCode')), opt=True)
     DeleteSubscriberDataArg._cont = ASN1Dict([
-        ('imsi', _DeleteSubscriberDataArg_imsi),
-        ('basicServiceList', _DeleteSubscriberDataArg_basicServiceList),
-        ('ss-List', _DeleteSubscriberDataArg_ss_List),
-        ('roamingRestrictionDueToUnsupportedFeature', _DeleteSubscriberDataArg_roamingRestrictionDueToUnsupportedFeature),
-        ('regionalSubscriptionIdentifier', _DeleteSubscriberDataArg_regionalSubscriptionIdentifier),
+        (u'imsi', _DeleteSubscriberDataArg_imsi),
+        (u'basicServiceList', _DeleteSubscriberDataArg_basicServiceList),
+        (u'ss-List', _DeleteSubscriberDataArg_ss_List),
+        (u'roamingRestrictionDueToUnsupportedFeature', _DeleteSubscriberDataArg_roamingRestrictionDueToUnsupportedFeature),
+        (u'regionalSubscriptionIdentifier', _DeleteSubscriberDataArg_regionalSubscriptionIdentifier),
         ])
     DeleteSubscriberDataArg._ext = []
     
     #-----< DeleteSubscriberDataRes >-----#
-    DeleteSubscriberDataRes = SEQ(name='DeleteSubscriberDataRes', mode=MODE_TYPE)
-    _DeleteSubscriberDataRes_regionalSubscriptionResponse = ENUM(name='regionalSubscriptionResponse', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-MS-DataTypes', 'RegionalSubscriptionResponse')), opt=True)
+    DeleteSubscriberDataRes = SEQ(name=u'DeleteSubscriberDataRes', mode=MODE_TYPE)
+    _DeleteSubscriberDataRes_regionalSubscriptionResponse = ENUM(name=u'regionalSubscriptionResponse', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-MS-DataTypes', 'RegionalSubscriptionResponse')), opt=True)
     DeleteSubscriberDataRes._cont = ASN1Dict([
-        ('regionalSubscriptionResponse', _DeleteSubscriberDataRes_regionalSubscriptionResponse),
+        (u'regionalSubscriptionResponse', _DeleteSubscriberDataRes_regionalSubscriptionResponse),
         ])
     DeleteSubscriberDataRes._ext = []
     
     #-----< ResetArg >-----#
-    ResetArg = SEQ(name='ResetArg', mode=MODE_TYPE)
-    _ResetArg_networkResource = ENUM(name='networkResource', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'NetworkResource')), opt=True)
-    _ResetArg_hlr_Number = OCT_STR(name='hlr-Number', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'ISDN-AddressString')))
-    _ResetArg_hlr_List = SEQ_OF(name='hlr-List', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'HLR-List')), opt=True)
+    ResetArg = SEQ(name=u'ResetArg', mode=MODE_TYPE)
+    _ResetArg_networkResource = ENUM(name=u'networkResource', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'NetworkResource')), opt=True)
+    _ResetArg_hlr_Number = OCT_STR(name=u'hlr-Number', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'ISDN-AddressString')))
+    _ResetArg_hlr_List = SEQ_OF(name=u'hlr-List', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'HLR-List')), opt=True)
     ResetArg._cont = ASN1Dict([
-        ('networkResource', _ResetArg_networkResource),
-        ('hlr-Number', _ResetArg_hlr_Number),
-        ('hlr-List', _ResetArg_hlr_List),
+        (u'networkResource', _ResetArg_networkResource),
+        (u'hlr-Number', _ResetArg_hlr_Number),
+        (u'hlr-List', _ResetArg_hlr_List),
         ])
     ResetArg._ext = []
     
     #-----< RestoreDataArg >-----#
-    RestoreDataArg = SEQ(name='RestoreDataArg', mode=MODE_TYPE)
-    _RestoreDataArg_imsi = OCT_STR(name='imsi', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'IMSI')))
-    _RestoreDataArg_lmsi = OCT_STR(name='lmsi', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'LMSI')), opt=True)
+    RestoreDataArg = SEQ(name=u'RestoreDataArg', mode=MODE_TYPE)
+    _RestoreDataArg_imsi = OCT_STR(name=u'imsi', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'IMSI')))
+    _RestoreDataArg_lmsi = OCT_STR(name=u'lmsi', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'LMSI')), opt=True)
     RestoreDataArg._cont = ASN1Dict([
-        ('imsi', _RestoreDataArg_imsi),
-        ('lmsi', _RestoreDataArg_lmsi),
+        (u'imsi', _RestoreDataArg_imsi),
+        (u'lmsi', _RestoreDataArg_lmsi),
         ])
     RestoreDataArg._ext = []
     
     #-----< RestoreDataRes >-----#
-    RestoreDataRes = SEQ(name='RestoreDataRes', mode=MODE_TYPE)
-    _RestoreDataRes_hlr_Number = OCT_STR(name='hlr-Number', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'ISDN-AddressString')))
-    _RestoreDataRes_msNotReachable = NULL(name='msNotReachable', mode=MODE_TYPE, opt=True)
+    RestoreDataRes = SEQ(name=u'RestoreDataRes', mode=MODE_TYPE)
+    _RestoreDataRes_hlr_Number = OCT_STR(name=u'hlr-Number', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'ISDN-AddressString')))
+    _RestoreDataRes_msNotReachable = NULL(name=u'msNotReachable', mode=MODE_TYPE, opt=True)
     RestoreDataRes._cont = ASN1Dict([
-        ('hlr-Number', _RestoreDataRes_hlr_Number),
-        ('msNotReachable', _RestoreDataRes_msNotReachable),
+        (u'hlr-Number', _RestoreDataRes_hlr_Number),
+        (u'msNotReachable', _RestoreDataRes_msNotReachable),
         ])
     RestoreDataRes._ext = []
     
@@ -1297,42 +1297,42 @@ class MAPv2_MS_DataTypes:
 
 class MAPv2_DialogueInformation:
 
-    _name_  = 'MAPv2-DialogueInformation'
+    _name_  = u'MAPv2-DialogueInformation'
     _oid_   = [0, 4, 0, 0, 1, 3, 3, 2]
     
     _obj_ = [
-        'map-DialogueAS',
-        'MAP-DialoguePDU',
-        'MAP-OpenInfo',
-        'MAP-AcceptInfo',
-        'MAP-CloseInfo',
-        'MAP-RefuseInfo',
-        'Reason',
-        'MAP-UserAbortInfo',
-        'MAP-UserAbortChoice',
-        'ResourceUnavailableReason',
-        'ProcedureCancellationReason',
-        'MAP-ProviderAbortInfo',
-        'MAP-ProviderAbortReason',
+        u'map-DialogueAS',
+        u'MAP-DialoguePDU',
+        u'MAP-OpenInfo',
+        u'MAP-AcceptInfo',
+        u'MAP-CloseInfo',
+        u'MAP-RefuseInfo',
+        u'Reason',
+        u'MAP-UserAbortInfo',
+        u'MAP-UserAbortChoice',
+        u'ResourceUnavailableReason',
+        u'ProcedureCancellationReason',
+        u'MAP-ProviderAbortInfo',
+        u'MAP-ProviderAbortReason',
         ]
     _type_ = [
-        'MAP-DialoguePDU',
-        'MAP-OpenInfo',
-        'MAP-AcceptInfo',
-        'MAP-CloseInfo',
-        'MAP-RefuseInfo',
-        'Reason',
-        'MAP-UserAbortInfo',
-        'MAP-UserAbortChoice',
-        'ResourceUnavailableReason',
-        'ProcedureCancellationReason',
-        'MAP-ProviderAbortInfo',
-        'MAP-ProviderAbortReason',
+        u'MAP-DialoguePDU',
+        u'MAP-OpenInfo',
+        u'MAP-AcceptInfo',
+        u'MAP-CloseInfo',
+        u'MAP-RefuseInfo',
+        u'Reason',
+        u'MAP-UserAbortInfo',
+        u'MAP-UserAbortChoice',
+        u'ResourceUnavailableReason',
+        u'ProcedureCancellationReason',
+        u'MAP-ProviderAbortInfo',
+        u'MAP-ProviderAbortReason',
         ]
     _set_ = [
         ]
     _val_ = [
-        'map-DialogueAS',
+        u'map-DialogueAS',
         ]
     _class_ = [
         ]
@@ -1340,105 +1340,105 @@ class MAPv2_DialogueInformation:
         ]
     
     #-----< map-DialogueAS >-----#
-    map_DialogueAS = OID(name='map-DialogueAS', mode=MODE_VALUE)
+    map_DialogueAS = OID(name=u'map-DialogueAS', mode=MODE_VALUE)
     map_DialogueAS._val = (0, 4, 0, 0, 1, 1, 1, 1)
     
     #-----< MAP-DialoguePDU >-----#
-    MAP_DialoguePDU = CHOICE(name='MAP-DialoguePDU', mode=MODE_TYPE)
-    _MAP_DialoguePDU_map_open = SEQ(name='map-open', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-DialogueInformation', 'MAP-OpenInfo')))
-    _MAP_DialoguePDU_map_accept = SEQ(name='map-accept', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-DialogueInformation', 'MAP-AcceptInfo')))
-    _MAP_DialoguePDU_map_close = SEQ(name='map-close', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-DialogueInformation', 'MAP-CloseInfo')))
-    _MAP_DialoguePDU_map_refuse = SEQ(name='map-refuse', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-DialogueInformation', 'MAP-RefuseInfo')))
-    _MAP_DialoguePDU_map_userAbort = SEQ(name='map-userAbort', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-DialogueInformation', 'MAP-UserAbortInfo')))
-    _MAP_DialoguePDU_map_providerAbort = SEQ(name='map-providerAbort', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-DialogueInformation', 'MAP-ProviderAbortInfo')))
+    MAP_DialoguePDU = CHOICE(name=u'MAP-DialoguePDU', mode=MODE_TYPE)
+    _MAP_DialoguePDU_map_open = SEQ(name=u'map-open', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-DialogueInformation', 'MAP-OpenInfo')))
+    _MAP_DialoguePDU_map_accept = SEQ(name=u'map-accept', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-DialogueInformation', 'MAP-AcceptInfo')))
+    _MAP_DialoguePDU_map_close = SEQ(name=u'map-close', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-DialogueInformation', 'MAP-CloseInfo')))
+    _MAP_DialoguePDU_map_refuse = SEQ(name=u'map-refuse', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-DialogueInformation', 'MAP-RefuseInfo')))
+    _MAP_DialoguePDU_map_userAbort = SEQ(name=u'map-userAbort', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-DialogueInformation', 'MAP-UserAbortInfo')))
+    _MAP_DialoguePDU_map_providerAbort = SEQ(name=u'map-providerAbort', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-DialogueInformation', 'MAP-ProviderAbortInfo')))
     MAP_DialoguePDU._cont = ASN1Dict([
-        ('map-open', _MAP_DialoguePDU_map_open),
-        ('map-accept', _MAP_DialoguePDU_map_accept),
-        ('map-close', _MAP_DialoguePDU_map_close),
-        ('map-refuse', _MAP_DialoguePDU_map_refuse),
-        ('map-userAbort', _MAP_DialoguePDU_map_userAbort),
-        ('map-providerAbort', _MAP_DialoguePDU_map_providerAbort),
+        (u'map-open', _MAP_DialoguePDU_map_open),
+        (u'map-accept', _MAP_DialoguePDU_map_accept),
+        (u'map-close', _MAP_DialoguePDU_map_close),
+        (u'map-refuse', _MAP_DialoguePDU_map_refuse),
+        (u'map-userAbort', _MAP_DialoguePDU_map_userAbort),
+        (u'map-providerAbort', _MAP_DialoguePDU_map_providerAbort),
         ])
     MAP_DialoguePDU._ext = None
     
     #-----< MAP-OpenInfo >-----#
-    MAP_OpenInfo = SEQ(name='MAP-OpenInfo', mode=MODE_TYPE)
-    _MAP_OpenInfo_destinationReference = OCT_STR(name='destinationReference', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'AddressString')), opt=True)
-    _MAP_OpenInfo_originationReference = OCT_STR(name='originationReference', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'AddressString')), opt=True)
+    MAP_OpenInfo = SEQ(name=u'MAP-OpenInfo', mode=MODE_TYPE)
+    _MAP_OpenInfo_destinationReference = OCT_STR(name=u'destinationReference', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'AddressString')), opt=True)
+    _MAP_OpenInfo_originationReference = OCT_STR(name=u'originationReference', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'AddressString')), opt=True)
     MAP_OpenInfo._cont = ASN1Dict([
-        ('destinationReference', _MAP_OpenInfo_destinationReference),
-        ('originationReference', _MAP_OpenInfo_originationReference),
+        (u'destinationReference', _MAP_OpenInfo_destinationReference),
+        (u'originationReference', _MAP_OpenInfo_originationReference),
         ])
     MAP_OpenInfo._ext = []
     
     #-----< MAP-AcceptInfo >-----#
-    MAP_AcceptInfo = SEQ(name='MAP-AcceptInfo', mode=MODE_TYPE)
+    MAP_AcceptInfo = SEQ(name=u'MAP-AcceptInfo', mode=MODE_TYPE)
     MAP_AcceptInfo._cont = ASN1Dict([
         ])
     MAP_AcceptInfo._ext = []
     
     #-----< MAP-CloseInfo >-----#
-    MAP_CloseInfo = SEQ(name='MAP-CloseInfo', mode=MODE_TYPE)
+    MAP_CloseInfo = SEQ(name=u'MAP-CloseInfo', mode=MODE_TYPE)
     MAP_CloseInfo._cont = ASN1Dict([
         ])
     MAP_CloseInfo._ext = []
     
     #-----< MAP-RefuseInfo >-----#
-    MAP_RefuseInfo = SEQ(name='MAP-RefuseInfo', mode=MODE_TYPE)
-    _MAP_RefuseInfo_reason = ENUM(name='reason', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-DialogueInformation', 'Reason')))
+    MAP_RefuseInfo = SEQ(name=u'MAP-RefuseInfo', mode=MODE_TYPE)
+    _MAP_RefuseInfo_reason = ENUM(name=u'reason', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-DialogueInformation', 'Reason')))
     MAP_RefuseInfo._cont = ASN1Dict([
-        ('reason', _MAP_RefuseInfo_reason),
+        (u'reason', _MAP_RefuseInfo_reason),
         ])
     MAP_RefuseInfo._ext = []
     
     #-----< Reason >-----#
-    Reason = ENUM(name='Reason', mode=MODE_TYPE)
-    Reason._cont = ASN1Dict([('noReasonGiven', 0), ('invalidDestinationReference', 1), ('invalidOriginatingReference', 2)])
+    Reason = ENUM(name=u'Reason', mode=MODE_TYPE)
+    Reason._cont = ASN1Dict([(u'noReasonGiven', 0), (u'invalidDestinationReference', 1), (u'invalidOriginatingReference', 2)])
     Reason._ext = None
     
     #-----< MAP-UserAbortInfo >-----#
-    MAP_UserAbortInfo = SEQ(name='MAP-UserAbortInfo', mode=MODE_TYPE)
-    _MAP_UserAbortInfo_map_UserAbortChoice = CHOICE(name='map-UserAbortChoice', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-DialogueInformation', 'MAP-UserAbortChoice')))
+    MAP_UserAbortInfo = SEQ(name=u'MAP-UserAbortInfo', mode=MODE_TYPE)
+    _MAP_UserAbortInfo_map_UserAbortChoice = CHOICE(name=u'map-UserAbortChoice', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-DialogueInformation', 'MAP-UserAbortChoice')))
     MAP_UserAbortInfo._cont = ASN1Dict([
-        ('map-UserAbortChoice', _MAP_UserAbortInfo_map_UserAbortChoice),
+        (u'map-UserAbortChoice', _MAP_UserAbortInfo_map_UserAbortChoice),
         ])
     MAP_UserAbortInfo._ext = []
     
     #-----< MAP-UserAbortChoice >-----#
-    MAP_UserAbortChoice = CHOICE(name='MAP-UserAbortChoice', mode=MODE_TYPE)
-    _MAP_UserAbortChoice_userSpecificReason = NULL(name='userSpecificReason', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _MAP_UserAbortChoice_userResourceLimitation = NULL(name='userResourceLimitation', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _MAP_UserAbortChoice_resourceUnavailable = ENUM(name='resourceUnavailable', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-DialogueInformation', 'ResourceUnavailableReason')))
-    _MAP_UserAbortChoice_applicationProcedureCancellation = ENUM(name='applicationProcedureCancellation', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-DialogueInformation', 'ProcedureCancellationReason')))
+    MAP_UserAbortChoice = CHOICE(name=u'MAP-UserAbortChoice', mode=MODE_TYPE)
+    _MAP_UserAbortChoice_userSpecificReason = NULL(name=u'userSpecificReason', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _MAP_UserAbortChoice_userResourceLimitation = NULL(name=u'userResourceLimitation', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _MAP_UserAbortChoice_resourceUnavailable = ENUM(name=u'resourceUnavailable', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-DialogueInformation', 'ResourceUnavailableReason')))
+    _MAP_UserAbortChoice_applicationProcedureCancellation = ENUM(name=u'applicationProcedureCancellation', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-DialogueInformation', 'ProcedureCancellationReason')))
     MAP_UserAbortChoice._cont = ASN1Dict([
-        ('userSpecificReason', _MAP_UserAbortChoice_userSpecificReason),
-        ('userResourceLimitation', _MAP_UserAbortChoice_userResourceLimitation),
-        ('resourceUnavailable', _MAP_UserAbortChoice_resourceUnavailable),
-        ('applicationProcedureCancellation', _MAP_UserAbortChoice_applicationProcedureCancellation),
+        (u'userSpecificReason', _MAP_UserAbortChoice_userSpecificReason),
+        (u'userResourceLimitation', _MAP_UserAbortChoice_userResourceLimitation),
+        (u'resourceUnavailable', _MAP_UserAbortChoice_resourceUnavailable),
+        (u'applicationProcedureCancellation', _MAP_UserAbortChoice_applicationProcedureCancellation),
         ])
     MAP_UserAbortChoice._ext = None
     
     #-----< ResourceUnavailableReason >-----#
-    ResourceUnavailableReason = ENUM(name='ResourceUnavailableReason', mode=MODE_TYPE)
-    ResourceUnavailableReason._cont = ASN1Dict([('shortTermResourceLimitation', 0), ('longTermResourceLimitation', 1)])
+    ResourceUnavailableReason = ENUM(name=u'ResourceUnavailableReason', mode=MODE_TYPE)
+    ResourceUnavailableReason._cont = ASN1Dict([(u'shortTermResourceLimitation', 0), (u'longTermResourceLimitation', 1)])
     ResourceUnavailableReason._ext = None
     
     #-----< ProcedureCancellationReason >-----#
-    ProcedureCancellationReason = ENUM(name='ProcedureCancellationReason', mode=MODE_TYPE)
-    ProcedureCancellationReason._cont = ASN1Dict([('handoverCancellation', 0), ('radioChannelRelease', 1), ('networkPathRelease', 2), ('callRelease', 3), ('associatedProcedureFailure', 4), ('tandemDialogueRelease', 5), ('remoteOperationsFailure', 6)])
+    ProcedureCancellationReason = ENUM(name=u'ProcedureCancellationReason', mode=MODE_TYPE)
+    ProcedureCancellationReason._cont = ASN1Dict([(u'handoverCancellation', 0), (u'radioChannelRelease', 1), (u'networkPathRelease', 2), (u'callRelease', 3), (u'associatedProcedureFailure', 4), (u'tandemDialogueRelease', 5), (u'remoteOperationsFailure', 6)])
     ProcedureCancellationReason._ext = None
     
     #-----< MAP-ProviderAbortInfo >-----#
-    MAP_ProviderAbortInfo = SEQ(name='MAP-ProviderAbortInfo', mode=MODE_TYPE)
-    _MAP_ProviderAbortInfo_map_ProviderAbortReason = ENUM(name='map-ProviderAbortReason', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-DialogueInformation', 'MAP-ProviderAbortReason')))
+    MAP_ProviderAbortInfo = SEQ(name=u'MAP-ProviderAbortInfo', mode=MODE_TYPE)
+    _MAP_ProviderAbortInfo_map_ProviderAbortReason = ENUM(name=u'map-ProviderAbortReason', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-DialogueInformation', 'MAP-ProviderAbortReason')))
     MAP_ProviderAbortInfo._cont = ASN1Dict([
-        ('map-ProviderAbortReason', _MAP_ProviderAbortInfo_map_ProviderAbortReason),
+        (u'map-ProviderAbortReason', _MAP_ProviderAbortInfo_map_ProviderAbortReason),
         ])
     MAP_ProviderAbortInfo._ext = []
     
     #-----< MAP-ProviderAbortReason >-----#
-    MAP_ProviderAbortReason = ENUM(name='MAP-ProviderAbortReason', mode=MODE_TYPE)
-    MAP_ProviderAbortReason._cont = ASN1Dict([('abnormalDialogue', 0), ('invalidPDU', 1)])
+    MAP_ProviderAbortReason = ENUM(name=u'MAP-ProviderAbortReason', mode=MODE_TYPE)
+    MAP_ProviderAbortReason._cont = ASN1Dict([(u'abnormalDialogue', 0), (u'invalidPDU', 1)])
     MAP_ProviderAbortReason._ext = None
     
     _all_ = [
@@ -1474,124 +1474,124 @@ class MAPv2_DialogueInformation:
 
 class MAPv2_SS_Code:
 
-    _name_  = 'MAPv2-SS-Code'
+    _name_  = u'MAPv2-SS-Code'
     _oid_   = [0, 4, 0, 0, 1, 3, 15, 2]
     
     _obj_ = [
-        'SS-Code',
-        'allSS',
-        'allLineIdentificationSS',
-        'clip',
-        'clir',
-        'colp',
-        'colr',
-        'mci',
-        'allForwardingSS',
-        'cfu',
-        'allCondForwardingSS',
-        'cfb',
-        'cfnry',
-        'cfnrc',
-        'allCallOfferingSS',
-        'ct',
-        'mah',
-        'allCallCompletionSS',
-        'cw',
-        'hold',
-        'ccbs',
-        'allMultiPartySS',
-        'multiPTY',
-        'allCommunityOfInterest-SS',
-        'cug',
-        'allChargingSS',
-        'aoci',
-        'aocc',
-        'allAdditionalInfoTransferSS',
-        'uus',
-        'allBarringSS',
-        'barringOfOutgoingCalls',
-        'baoc',
-        'boic',
-        'boicExHC',
-        'barringOfIncomingCalls',
-        'baic',
-        'bicRoam',
-        'allPLMN-specificSS',
-        'plmn-specificSS-1',
-        'plmn-specificSS-2',
-        'plmn-specificSS-3',
-        'plmn-specificSS-4',
-        'plmn-specificSS-5',
-        'plmn-specificSS-6',
-        'plmn-specificSS-7',
-        'plmn-specificSS-8',
-        'plmn-specificSS-9',
-        'plmn-specificSS-A',
-        'plmn-specificSS-B',
-        'plmn-specificSS-C',
-        'plmn-specificSS-D',
-        'plmn-specificSS-E',
-        'plmn-specificSS-F',
+        u'SS-Code',
+        u'allSS',
+        u'allLineIdentificationSS',
+        u'clip',
+        u'clir',
+        u'colp',
+        u'colr',
+        u'mci',
+        u'allForwardingSS',
+        u'cfu',
+        u'allCondForwardingSS',
+        u'cfb',
+        u'cfnry',
+        u'cfnrc',
+        u'allCallOfferingSS',
+        u'ct',
+        u'mah',
+        u'allCallCompletionSS',
+        u'cw',
+        u'hold',
+        u'ccbs',
+        u'allMultiPartySS',
+        u'multiPTY',
+        u'allCommunityOfInterest-SS',
+        u'cug',
+        u'allChargingSS',
+        u'aoci',
+        u'aocc',
+        u'allAdditionalInfoTransferSS',
+        u'uus',
+        u'allBarringSS',
+        u'barringOfOutgoingCalls',
+        u'baoc',
+        u'boic',
+        u'boicExHC',
+        u'barringOfIncomingCalls',
+        u'baic',
+        u'bicRoam',
+        u'allPLMN-specificSS',
+        u'plmn-specificSS-1',
+        u'plmn-specificSS-2',
+        u'plmn-specificSS-3',
+        u'plmn-specificSS-4',
+        u'plmn-specificSS-5',
+        u'plmn-specificSS-6',
+        u'plmn-specificSS-7',
+        u'plmn-specificSS-8',
+        u'plmn-specificSS-9',
+        u'plmn-specificSS-A',
+        u'plmn-specificSS-B',
+        u'plmn-specificSS-C',
+        u'plmn-specificSS-D',
+        u'plmn-specificSS-E',
+        u'plmn-specificSS-F',
         ]
     _type_ = [
-        'SS-Code',
+        u'SS-Code',
         ]
     _set_ = [
         ]
     _val_ = [
-        'allSS',
-        'allLineIdentificationSS',
-        'clip',
-        'clir',
-        'colp',
-        'colr',
-        'mci',
-        'allForwardingSS',
-        'cfu',
-        'allCondForwardingSS',
-        'cfb',
-        'cfnry',
-        'cfnrc',
-        'allCallOfferingSS',
-        'ct',
-        'mah',
-        'allCallCompletionSS',
-        'cw',
-        'hold',
-        'ccbs',
-        'allMultiPartySS',
-        'multiPTY',
-        'allCommunityOfInterest-SS',
-        'cug',
-        'allChargingSS',
-        'aoci',
-        'aocc',
-        'allAdditionalInfoTransferSS',
-        'uus',
-        'allBarringSS',
-        'barringOfOutgoingCalls',
-        'baoc',
-        'boic',
-        'boicExHC',
-        'barringOfIncomingCalls',
-        'baic',
-        'bicRoam',
-        'allPLMN-specificSS',
-        'plmn-specificSS-1',
-        'plmn-specificSS-2',
-        'plmn-specificSS-3',
-        'plmn-specificSS-4',
-        'plmn-specificSS-5',
-        'plmn-specificSS-6',
-        'plmn-specificSS-7',
-        'plmn-specificSS-8',
-        'plmn-specificSS-9',
-        'plmn-specificSS-A',
-        'plmn-specificSS-B',
-        'plmn-specificSS-C',
-        'plmn-specificSS-D',
-        'plmn-specificSS-E',
-        'plmn-specificSS-F',
+        u'allSS',
+        u'allLineIdentificationSS',
+        u'clip',
+        u'clir',
+        u'colp',
+        u'colr',
+        u'mci',
+        u'allForwardingSS',
+        u'cfu',
+        u'allCondForwardingSS',
+        u'cfb',
+        u'cfnry',
+        u'cfnrc',
+        u'allCallOfferingSS',
+        u'ct',
+        u'mah',
+        u'allCallCompletionSS',
+        u'cw',
+        u'hold',
+        u'ccbs',
+        u'allMultiPartySS',
+        u'multiPTY',
+        u'allCommunityOfInterest-SS',
+        u'cug',
+        u'allChargingSS',
+        u'aoci',
+        u'aocc',
+        u'allAdditionalInfoTransferSS',
+        u'uus',
+        u'allBarringSS',
+        u'barringOfOutgoingCalls',
+        u'baoc',
+        u'boic',
+        u'boicExHC',
+        u'barringOfIncomingCalls',
+        u'baic',
+        u'bicRoam',
+        u'allPLMN-specificSS',
+        u'plmn-specificSS-1',
+        u'plmn-specificSS-2',
+        u'plmn-specificSS-3',
+        u'plmn-specificSS-4',
+        u'plmn-specificSS-5',
+        u'plmn-specificSS-6',
+        u'plmn-specificSS-7',
+        u'plmn-specificSS-8',
+        u'plmn-specificSS-9',
+        u'plmn-specificSS-A',
+        u'plmn-specificSS-B',
+        u'plmn-specificSS-C',
+        u'plmn-specificSS-D',
+        u'plmn-specificSS-E',
+        u'plmn-specificSS-F',
         ]
     _class_ = [
         ]
@@ -1599,219 +1599,219 @@ class MAPv2_SS_Code:
         ]
     
     #-----< SS-Code >-----#
-    SS_Code = OCT_STR(name='SS-Code', mode=MODE_TYPE)
+    SS_Code = OCT_STR(name=u'SS-Code', mode=MODE_TYPE)
     SS_Code._const_sz = ASN1Set(rv=[1], rr=[], ev=None, er=[])
     
     #-----< allSS >-----#
-    allSS = OCT_STR(name='allSS', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-SS-Code', 'SS-Code')))
+    allSS = OCT_STR(name=u'allSS', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-SS-Code', 'SS-Code')))
     allSS._val = b'\x00'
     
     #-----< allLineIdentificationSS >-----#
-    allLineIdentificationSS = OCT_STR(name='allLineIdentificationSS', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-SS-Code', 'SS-Code')))
+    allLineIdentificationSS = OCT_STR(name=u'allLineIdentificationSS', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-SS-Code', 'SS-Code')))
     allLineIdentificationSS._val = b'\x10'
     
     #-----< clip >-----#
-    clip = OCT_STR(name='clip', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-SS-Code', 'SS-Code')))
+    clip = OCT_STR(name=u'clip', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-SS-Code', 'SS-Code')))
     clip._val = b'\x11'
     
     #-----< clir >-----#
-    clir = OCT_STR(name='clir', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-SS-Code', 'SS-Code')))
+    clir = OCT_STR(name=u'clir', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-SS-Code', 'SS-Code')))
     clir._val = b'\x12'
     
     #-----< colp >-----#
-    colp = OCT_STR(name='colp', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-SS-Code', 'SS-Code')))
+    colp = OCT_STR(name=u'colp', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-SS-Code', 'SS-Code')))
     colp._val = b'\x13'
     
     #-----< colr >-----#
-    colr = OCT_STR(name='colr', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-SS-Code', 'SS-Code')))
+    colr = OCT_STR(name=u'colr', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-SS-Code', 'SS-Code')))
     colr._val = b'\x14'
     
     #-----< mci >-----#
-    mci = OCT_STR(name='mci', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-SS-Code', 'SS-Code')))
+    mci = OCT_STR(name=u'mci', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-SS-Code', 'SS-Code')))
     mci._val = b'\x15'
     
     #-----< allForwardingSS >-----#
-    allForwardingSS = OCT_STR(name='allForwardingSS', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-SS-Code', 'SS-Code')))
+    allForwardingSS = OCT_STR(name=u'allForwardingSS', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-SS-Code', 'SS-Code')))
     allForwardingSS._val = b' '
     
     #-----< cfu >-----#
-    cfu = OCT_STR(name='cfu', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-SS-Code', 'SS-Code')))
+    cfu = OCT_STR(name=u'cfu', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-SS-Code', 'SS-Code')))
     cfu._val = b'!'
     
     #-----< allCondForwardingSS >-----#
-    allCondForwardingSS = OCT_STR(name='allCondForwardingSS', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-SS-Code', 'SS-Code')))
+    allCondForwardingSS = OCT_STR(name=u'allCondForwardingSS', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-SS-Code', 'SS-Code')))
     allCondForwardingSS._val = b'('
     
     #-----< cfb >-----#
-    cfb = OCT_STR(name='cfb', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-SS-Code', 'SS-Code')))
+    cfb = OCT_STR(name=u'cfb', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-SS-Code', 'SS-Code')))
     cfb._val = b')'
     
     #-----< cfnry >-----#
-    cfnry = OCT_STR(name='cfnry', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-SS-Code', 'SS-Code')))
+    cfnry = OCT_STR(name=u'cfnry', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-SS-Code', 'SS-Code')))
     cfnry._val = b'*'
     
     #-----< cfnrc >-----#
-    cfnrc = OCT_STR(name='cfnrc', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-SS-Code', 'SS-Code')))
+    cfnrc = OCT_STR(name=u'cfnrc', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-SS-Code', 'SS-Code')))
     cfnrc._val = b'+'
     
     #-----< allCallOfferingSS >-----#
-    allCallOfferingSS = OCT_STR(name='allCallOfferingSS', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-SS-Code', 'SS-Code')))
+    allCallOfferingSS = OCT_STR(name=u'allCallOfferingSS', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-SS-Code', 'SS-Code')))
     allCallOfferingSS._val = b'0'
     
     #-----< ct >-----#
-    ct = OCT_STR(name='ct', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-SS-Code', 'SS-Code')))
+    ct = OCT_STR(name=u'ct', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-SS-Code', 'SS-Code')))
     ct._val = b'1'
     
     #-----< mah >-----#
-    mah = OCT_STR(name='mah', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-SS-Code', 'SS-Code')))
+    mah = OCT_STR(name=u'mah', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-SS-Code', 'SS-Code')))
     mah._val = b'2'
     
     #-----< allCallCompletionSS >-----#
-    allCallCompletionSS = OCT_STR(name='allCallCompletionSS', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-SS-Code', 'SS-Code')))
+    allCallCompletionSS = OCT_STR(name=u'allCallCompletionSS', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-SS-Code', 'SS-Code')))
     allCallCompletionSS._val = b'@'
     
     #-----< cw >-----#
-    cw = OCT_STR(name='cw', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-SS-Code', 'SS-Code')))
+    cw = OCT_STR(name=u'cw', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-SS-Code', 'SS-Code')))
     cw._val = b'A'
     
     #-----< hold >-----#
-    hold = OCT_STR(name='hold', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-SS-Code', 'SS-Code')))
+    hold = OCT_STR(name=u'hold', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-SS-Code', 'SS-Code')))
     hold._val = b'B'
     
     #-----< ccbs >-----#
-    ccbs = OCT_STR(name='ccbs', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-SS-Code', 'SS-Code')))
+    ccbs = OCT_STR(name=u'ccbs', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-SS-Code', 'SS-Code')))
     ccbs._val = b'C'
     
     #-----< allMultiPartySS >-----#
-    allMultiPartySS = OCT_STR(name='allMultiPartySS', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-SS-Code', 'SS-Code')))
+    allMultiPartySS = OCT_STR(name=u'allMultiPartySS', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-SS-Code', 'SS-Code')))
     allMultiPartySS._val = b'P'
     
     #-----< multiPTY >-----#
-    multiPTY = OCT_STR(name='multiPTY', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-SS-Code', 'SS-Code')))
+    multiPTY = OCT_STR(name=u'multiPTY', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-SS-Code', 'SS-Code')))
     multiPTY._val = b'Q'
     
     #-----< allCommunityOfInterest-SS >-----#
-    allCommunityOfInterest_SS = OCT_STR(name='allCommunityOfInterest-SS', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-SS-Code', 'SS-Code')))
+    allCommunityOfInterest_SS = OCT_STR(name=u'allCommunityOfInterest-SS', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-SS-Code', 'SS-Code')))
     allCommunityOfInterest_SS._val = b'`'
     
     #-----< cug >-----#
-    cug = OCT_STR(name='cug', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-SS-Code', 'SS-Code')))
+    cug = OCT_STR(name=u'cug', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-SS-Code', 'SS-Code')))
     cug._val = b'a'
     
     #-----< allChargingSS >-----#
-    allChargingSS = OCT_STR(name='allChargingSS', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-SS-Code', 'SS-Code')))
+    allChargingSS = OCT_STR(name=u'allChargingSS', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-SS-Code', 'SS-Code')))
     allChargingSS._val = b'p'
     
     #-----< aoci >-----#
-    aoci = OCT_STR(name='aoci', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-SS-Code', 'SS-Code')))
+    aoci = OCT_STR(name=u'aoci', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-SS-Code', 'SS-Code')))
     aoci._val = b'q'
     
     #-----< aocc >-----#
-    aocc = OCT_STR(name='aocc', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-SS-Code', 'SS-Code')))
+    aocc = OCT_STR(name=u'aocc', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-SS-Code', 'SS-Code')))
     aocc._val = b'r'
     
     #-----< allAdditionalInfoTransferSS >-----#
-    allAdditionalInfoTransferSS = OCT_STR(name='allAdditionalInfoTransferSS', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-SS-Code', 'SS-Code')))
+    allAdditionalInfoTransferSS = OCT_STR(name=u'allAdditionalInfoTransferSS', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-SS-Code', 'SS-Code')))
     allAdditionalInfoTransferSS._val = b'\x80'
     
     #-----< uus >-----#
-    uus = OCT_STR(name='uus', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-SS-Code', 'SS-Code')))
+    uus = OCT_STR(name=u'uus', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-SS-Code', 'SS-Code')))
     uus._val = b'\x81'
     
     #-----< allBarringSS >-----#
-    allBarringSS = OCT_STR(name='allBarringSS', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-SS-Code', 'SS-Code')))
+    allBarringSS = OCT_STR(name=u'allBarringSS', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-SS-Code', 'SS-Code')))
     allBarringSS._val = b'\x90'
     
     #-----< barringOfOutgoingCalls >-----#
-    barringOfOutgoingCalls = OCT_STR(name='barringOfOutgoingCalls', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-SS-Code', 'SS-Code')))
+    barringOfOutgoingCalls = OCT_STR(name=u'barringOfOutgoingCalls', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-SS-Code', 'SS-Code')))
     barringOfOutgoingCalls._val = b'\x91'
     
     #-----< baoc >-----#
-    baoc = OCT_STR(name='baoc', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-SS-Code', 'SS-Code')))
+    baoc = OCT_STR(name=u'baoc', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-SS-Code', 'SS-Code')))
     baoc._val = b'\x92'
     
     #-----< boic >-----#
-    boic = OCT_STR(name='boic', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-SS-Code', 'SS-Code')))
+    boic = OCT_STR(name=u'boic', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-SS-Code', 'SS-Code')))
     boic._val = b'\x93'
     
     #-----< boicExHC >-----#
-    boicExHC = OCT_STR(name='boicExHC', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-SS-Code', 'SS-Code')))
+    boicExHC = OCT_STR(name=u'boicExHC', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-SS-Code', 'SS-Code')))
     boicExHC._val = b'\x94'
     
     #-----< barringOfIncomingCalls >-----#
-    barringOfIncomingCalls = OCT_STR(name='barringOfIncomingCalls', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-SS-Code', 'SS-Code')))
+    barringOfIncomingCalls = OCT_STR(name=u'barringOfIncomingCalls', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-SS-Code', 'SS-Code')))
     barringOfIncomingCalls._val = b'\x99'
     
     #-----< baic >-----#
-    baic = OCT_STR(name='baic', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-SS-Code', 'SS-Code')))
+    baic = OCT_STR(name=u'baic', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-SS-Code', 'SS-Code')))
     baic._val = b'\x9a'
     
     #-----< bicRoam >-----#
-    bicRoam = OCT_STR(name='bicRoam', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-SS-Code', 'SS-Code')))
+    bicRoam = OCT_STR(name=u'bicRoam', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-SS-Code', 'SS-Code')))
     bicRoam._val = b'\x9b'
     
     #-----< allPLMN-specificSS >-----#
-    allPLMN_specificSS = OCT_STR(name='allPLMN-specificSS', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-SS-Code', 'SS-Code')))
+    allPLMN_specificSS = OCT_STR(name=u'allPLMN-specificSS', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-SS-Code', 'SS-Code')))
     allPLMN_specificSS._val = b'\xf0'
     
     #-----< plmn-specificSS-1 >-----#
-    plmn_specificSS_1 = OCT_STR(name='plmn-specificSS-1', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-SS-Code', 'SS-Code')))
+    plmn_specificSS_1 = OCT_STR(name=u'plmn-specificSS-1', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-SS-Code', 'SS-Code')))
     plmn_specificSS_1._val = b'\xf1'
     
     #-----< plmn-specificSS-2 >-----#
-    plmn_specificSS_2 = OCT_STR(name='plmn-specificSS-2', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-SS-Code', 'SS-Code')))
+    plmn_specificSS_2 = OCT_STR(name=u'plmn-specificSS-2', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-SS-Code', 'SS-Code')))
     plmn_specificSS_2._val = b'\xf2'
     
     #-----< plmn-specificSS-3 >-----#
-    plmn_specificSS_3 = OCT_STR(name='plmn-specificSS-3', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-SS-Code', 'SS-Code')))
+    plmn_specificSS_3 = OCT_STR(name=u'plmn-specificSS-3', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-SS-Code', 'SS-Code')))
     plmn_specificSS_3._val = b'\xf3'
     
     #-----< plmn-specificSS-4 >-----#
-    plmn_specificSS_4 = OCT_STR(name='plmn-specificSS-4', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-SS-Code', 'SS-Code')))
+    plmn_specificSS_4 = OCT_STR(name=u'plmn-specificSS-4', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-SS-Code', 'SS-Code')))
     plmn_specificSS_4._val = b'\xf4'
     
     #-----< plmn-specificSS-5 >-----#
-    plmn_specificSS_5 = OCT_STR(name='plmn-specificSS-5', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-SS-Code', 'SS-Code')))
+    plmn_specificSS_5 = OCT_STR(name=u'plmn-specificSS-5', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-SS-Code', 'SS-Code')))
     plmn_specificSS_5._val = b'\xf5'
     
     #-----< plmn-specificSS-6 >-----#
-    plmn_specificSS_6 = OCT_STR(name='plmn-specificSS-6', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-SS-Code', 'SS-Code')))
+    plmn_specificSS_6 = OCT_STR(name=u'plmn-specificSS-6', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-SS-Code', 'SS-Code')))
     plmn_specificSS_6._val = b'\xf6'
     
     #-----< plmn-specificSS-7 >-----#
-    plmn_specificSS_7 = OCT_STR(name='plmn-specificSS-7', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-SS-Code', 'SS-Code')))
+    plmn_specificSS_7 = OCT_STR(name=u'plmn-specificSS-7', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-SS-Code', 'SS-Code')))
     plmn_specificSS_7._val = b'\xf7'
     
     #-----< plmn-specificSS-8 >-----#
-    plmn_specificSS_8 = OCT_STR(name='plmn-specificSS-8', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-SS-Code', 'SS-Code')))
+    plmn_specificSS_8 = OCT_STR(name=u'plmn-specificSS-8', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-SS-Code', 'SS-Code')))
     plmn_specificSS_8._val = b'\xf8'
     
     #-----< plmn-specificSS-9 >-----#
-    plmn_specificSS_9 = OCT_STR(name='plmn-specificSS-9', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-SS-Code', 'SS-Code')))
+    plmn_specificSS_9 = OCT_STR(name=u'plmn-specificSS-9', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-SS-Code', 'SS-Code')))
     plmn_specificSS_9._val = b'\xf9'
     
     #-----< plmn-specificSS-A >-----#
-    plmn_specificSS_A = OCT_STR(name='plmn-specificSS-A', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-SS-Code', 'SS-Code')))
+    plmn_specificSS_A = OCT_STR(name=u'plmn-specificSS-A', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-SS-Code', 'SS-Code')))
     plmn_specificSS_A._val = b'\xfa'
     
     #-----< plmn-specificSS-B >-----#
-    plmn_specificSS_B = OCT_STR(name='plmn-specificSS-B', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-SS-Code', 'SS-Code')))
+    plmn_specificSS_B = OCT_STR(name=u'plmn-specificSS-B', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-SS-Code', 'SS-Code')))
     plmn_specificSS_B._val = b'\xfb'
     
     #-----< plmn-specificSS-C >-----#
-    plmn_specificSS_C = OCT_STR(name='plmn-specificSS-C', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-SS-Code', 'SS-Code')))
+    plmn_specificSS_C = OCT_STR(name=u'plmn-specificSS-C', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-SS-Code', 'SS-Code')))
     plmn_specificSS_C._val = b'\xfc'
     
     #-----< plmn-specificSS-D >-----#
-    plmn_specificSS_D = OCT_STR(name='plmn-specificSS-D', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-SS-Code', 'SS-Code')))
+    plmn_specificSS_D = OCT_STR(name=u'plmn-specificSS-D', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-SS-Code', 'SS-Code')))
     plmn_specificSS_D._val = b'\xfd'
     
     #-----< plmn-specificSS-E >-----#
-    plmn_specificSS_E = OCT_STR(name='plmn-specificSS-E', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-SS-Code', 'SS-Code')))
+    plmn_specificSS_E = OCT_STR(name=u'plmn-specificSS-E', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-SS-Code', 'SS-Code')))
     plmn_specificSS_E._val = b'\xfe'
     
     #-----< plmn-specificSS-F >-----#
-    plmn_specificSS_F = OCT_STR(name='plmn-specificSS-F', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-SS-Code', 'SS-Code')))
+    plmn_specificSS_F = OCT_STR(name=u'plmn-specificSS-F', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-SS-Code', 'SS-Code')))
     plmn_specificSS_F._val = b'\xff'
     
     _all_ = [
@@ -1873,24 +1873,24 @@ class MAPv2_SS_Code:
 
 class MAPv2_CH_DataTypes:
 
-    _name_  = 'MAPv2-CH-DataTypes'
+    _name_  = u'MAPv2-CH-DataTypes'
     _oid_   = [0, 4, 0, 0, 1, 3, 13, 2]
     
     _obj_ = [
-        'CUG-CheckInfo',
-        'NumberOfForwarding',
-        'SendRoutingInfoArg',
-        'SendRoutingInfoRes',
-        'RoutingInfo',
-        'ProvideRoamingNumberArg',
+        u'CUG-CheckInfo',
+        u'NumberOfForwarding',
+        u'SendRoutingInfoArg',
+        u'SendRoutingInfoRes',
+        u'RoutingInfo',
+        u'ProvideRoamingNumberArg',
         ]
     _type_ = [
-        'CUG-CheckInfo',
-        'NumberOfForwarding',
-        'SendRoutingInfoArg',
-        'SendRoutingInfoRes',
-        'RoutingInfo',
-        'ProvideRoamingNumberArg',
+        u'CUG-CheckInfo',
+        u'NumberOfForwarding',
+        u'SendRoutingInfoArg',
+        u'SendRoutingInfoRes',
+        u'RoutingInfo',
+        u'ProvideRoamingNumberArg',
         ]
     _set_ = [
         ]
@@ -1902,72 +1902,72 @@ class MAPv2_CH_DataTypes:
         ]
     
     #-----< CUG-CheckInfo >-----#
-    CUG_CheckInfo = SEQ(name='CUG-CheckInfo', mode=MODE_TYPE)
-    _CUG_CheckInfo_cug_Interlock = OCT_STR(name='cug-Interlock', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SS-DataTypes', 'CUG-Interlock')))
-    _CUG_CheckInfo_cug_OutgoingAccess = NULL(name='cug-OutgoingAccess', mode=MODE_TYPE, opt=True)
+    CUG_CheckInfo = SEQ(name=u'CUG-CheckInfo', mode=MODE_TYPE)
+    _CUG_CheckInfo_cug_Interlock = OCT_STR(name=u'cug-Interlock', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SS-DataTypes', 'CUG-Interlock')))
+    _CUG_CheckInfo_cug_OutgoingAccess = NULL(name=u'cug-OutgoingAccess', mode=MODE_TYPE, opt=True)
     CUG_CheckInfo._cont = ASN1Dict([
-        ('cug-Interlock', _CUG_CheckInfo_cug_Interlock),
-        ('cug-OutgoingAccess', _CUG_CheckInfo_cug_OutgoingAccess),
+        (u'cug-Interlock', _CUG_CheckInfo_cug_Interlock),
+        (u'cug-OutgoingAccess', _CUG_CheckInfo_cug_OutgoingAccess),
         ])
     CUG_CheckInfo._ext = []
     
     #-----< NumberOfForwarding >-----#
-    NumberOfForwarding = INT(name='NumberOfForwarding', mode=MODE_TYPE)
+    NumberOfForwarding = INT(name=u'NumberOfForwarding', mode=MODE_TYPE)
     NumberOfForwarding._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=5)], ev=None, er=[])
     
     #-----< SendRoutingInfoArg >-----#
-    SendRoutingInfoArg = SEQ(name='SendRoutingInfoArg', mode=MODE_TYPE)
-    _SendRoutingInfoArg_msisdn = OCT_STR(name='msisdn', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'ISDN-AddressString')))
-    _SendRoutingInfoArg_cug_CheckInfo = SEQ(name='cug-CheckInfo', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-CH-DataTypes', 'CUG-CheckInfo')), opt=True)
-    _SendRoutingInfoArg_numberOfForwarding = INT(name='numberOfForwarding', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-CH-DataTypes', 'NumberOfForwarding')), opt=True)
-    _SendRoutingInfoArg_networkSignalInfo = SEQ(name='networkSignalInfo', mode=MODE_TYPE, tag=(10, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'ExternalSignalInfo')), opt=True)
+    SendRoutingInfoArg = SEQ(name=u'SendRoutingInfoArg', mode=MODE_TYPE)
+    _SendRoutingInfoArg_msisdn = OCT_STR(name=u'msisdn', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'ISDN-AddressString')))
+    _SendRoutingInfoArg_cug_CheckInfo = SEQ(name=u'cug-CheckInfo', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-CH-DataTypes', 'CUG-CheckInfo')), opt=True)
+    _SendRoutingInfoArg_numberOfForwarding = INT(name=u'numberOfForwarding', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-CH-DataTypes', 'NumberOfForwarding')), opt=True)
+    _SendRoutingInfoArg_networkSignalInfo = SEQ(name=u'networkSignalInfo', mode=MODE_TYPE, tag=(10, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'ExternalSignalInfo')), opt=True)
     SendRoutingInfoArg._cont = ASN1Dict([
-        ('msisdn', _SendRoutingInfoArg_msisdn),
-        ('cug-CheckInfo', _SendRoutingInfoArg_cug_CheckInfo),
-        ('numberOfForwarding', _SendRoutingInfoArg_numberOfForwarding),
-        ('networkSignalInfo', _SendRoutingInfoArg_networkSignalInfo),
+        (u'msisdn', _SendRoutingInfoArg_msisdn),
+        (u'cug-CheckInfo', _SendRoutingInfoArg_cug_CheckInfo),
+        (u'numberOfForwarding', _SendRoutingInfoArg_numberOfForwarding),
+        (u'networkSignalInfo', _SendRoutingInfoArg_networkSignalInfo),
         ])
     SendRoutingInfoArg._ext = []
     
     #-----< SendRoutingInfoRes >-----#
-    SendRoutingInfoRes = SEQ(name='SendRoutingInfoRes', mode=MODE_TYPE)
-    _SendRoutingInfoRes_imsi = OCT_STR(name='imsi', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'IMSI')))
-    _SendRoutingInfoRes_routingInfo = CHOICE(name='routingInfo', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CH-DataTypes', 'RoutingInfo')))
-    _SendRoutingInfoRes_cug_CheckInfo = SEQ(name='cug-CheckInfo', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CH-DataTypes', 'CUG-CheckInfo')), opt=True)
+    SendRoutingInfoRes = SEQ(name=u'SendRoutingInfoRes', mode=MODE_TYPE)
+    _SendRoutingInfoRes_imsi = OCT_STR(name=u'imsi', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'IMSI')))
+    _SendRoutingInfoRes_routingInfo = CHOICE(name=u'routingInfo', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CH-DataTypes', 'RoutingInfo')))
+    _SendRoutingInfoRes_cug_CheckInfo = SEQ(name=u'cug-CheckInfo', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CH-DataTypes', 'CUG-CheckInfo')), opt=True)
     SendRoutingInfoRes._cont = ASN1Dict([
-        ('imsi', _SendRoutingInfoRes_imsi),
-        ('routingInfo', _SendRoutingInfoRes_routingInfo),
-        ('cug-CheckInfo', _SendRoutingInfoRes_cug_CheckInfo),
+        (u'imsi', _SendRoutingInfoRes_imsi),
+        (u'routingInfo', _SendRoutingInfoRes_routingInfo),
+        (u'cug-CheckInfo', _SendRoutingInfoRes_cug_CheckInfo),
         ])
     SendRoutingInfoRes._ext = []
     
     #-----< RoutingInfo >-----#
-    RoutingInfo = CHOICE(name='RoutingInfo', mode=MODE_TYPE)
-    _RoutingInfo_roamingNumber = OCT_STR(name='roamingNumber', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'ISDN-AddressString')))
-    _RoutingInfo_forwardingData = SEQ(name='forwardingData', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SS-DataTypes', 'ForwardingData')))
+    RoutingInfo = CHOICE(name=u'RoutingInfo', mode=MODE_TYPE)
+    _RoutingInfo_roamingNumber = OCT_STR(name=u'roamingNumber', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'ISDN-AddressString')))
+    _RoutingInfo_forwardingData = SEQ(name=u'forwardingData', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SS-DataTypes', 'ForwardingData')))
     RoutingInfo._cont = ASN1Dict([
-        ('roamingNumber', _RoutingInfo_roamingNumber),
-        ('forwardingData', _RoutingInfo_forwardingData),
+        (u'roamingNumber', _RoutingInfo_roamingNumber),
+        (u'forwardingData', _RoutingInfo_forwardingData),
         ])
     RoutingInfo._ext = None
     
     #-----< ProvideRoamingNumberArg >-----#
-    ProvideRoamingNumberArg = SEQ(name='ProvideRoamingNumberArg', mode=MODE_TYPE)
-    _ProvideRoamingNumberArg_imsi = OCT_STR(name='imsi', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'IMSI')))
-    _ProvideRoamingNumberArg_msc_Number = OCT_STR(name='msc-Number', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'ISDN-AddressString')), opt=True)
-    _ProvideRoamingNumberArg_msisdn = OCT_STR(name='msisdn', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'ISDN-AddressString')), opt=True)
-    _ProvideRoamingNumberArg_previousRoamingNumber = OCT_STR(name='previousRoamingNumber', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'ISDN-AddressString')), opt=True)
-    _ProvideRoamingNumberArg_lmsi = OCT_STR(name='lmsi', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'LMSI')), opt=True)
-    _ProvideRoamingNumberArg_gsm_BearerCapability = SEQ(name='gsm-BearerCapability', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'ExternalSignalInfo')), opt=True)
-    _ProvideRoamingNumberArg_networkSignalInfo = SEQ(name='networkSignalInfo', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'ExternalSignalInfo')), opt=True)
+    ProvideRoamingNumberArg = SEQ(name=u'ProvideRoamingNumberArg', mode=MODE_TYPE)
+    _ProvideRoamingNumberArg_imsi = OCT_STR(name=u'imsi', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'IMSI')))
+    _ProvideRoamingNumberArg_msc_Number = OCT_STR(name=u'msc-Number', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'ISDN-AddressString')), opt=True)
+    _ProvideRoamingNumberArg_msisdn = OCT_STR(name=u'msisdn', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'ISDN-AddressString')), opt=True)
+    _ProvideRoamingNumberArg_previousRoamingNumber = OCT_STR(name=u'previousRoamingNumber', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'ISDN-AddressString')), opt=True)
+    _ProvideRoamingNumberArg_lmsi = OCT_STR(name=u'lmsi', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'LMSI')), opt=True)
+    _ProvideRoamingNumberArg_gsm_BearerCapability = SEQ(name=u'gsm-BearerCapability', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'ExternalSignalInfo')), opt=True)
+    _ProvideRoamingNumberArg_networkSignalInfo = SEQ(name=u'networkSignalInfo', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'ExternalSignalInfo')), opt=True)
     ProvideRoamingNumberArg._cont = ASN1Dict([
-        ('imsi', _ProvideRoamingNumberArg_imsi),
-        ('msc-Number', _ProvideRoamingNumberArg_msc_Number),
-        ('msisdn', _ProvideRoamingNumberArg_msisdn),
-        ('previousRoamingNumber', _ProvideRoamingNumberArg_previousRoamingNumber),
-        ('lmsi', _ProvideRoamingNumberArg_lmsi),
-        ('gsm-BearerCapability', _ProvideRoamingNumberArg_gsm_BearerCapability),
-        ('networkSignalInfo', _ProvideRoamingNumberArg_networkSignalInfo),
+        (u'imsi', _ProvideRoamingNumberArg_imsi),
+        (u'msc-Number', _ProvideRoamingNumberArg_msc_Number),
+        (u'msisdn', _ProvideRoamingNumberArg_msisdn),
+        (u'previousRoamingNumber', _ProvideRoamingNumberArg_previousRoamingNumber),
+        (u'lmsi', _ProvideRoamingNumberArg_lmsi),
+        (u'gsm-BearerCapability', _ProvideRoamingNumberArg_gsm_BearerCapability),
+        (u'networkSignalInfo', _ProvideRoamingNumberArg_networkSignalInfo),
         ])
     ProvideRoamingNumberArg._ext = []
     
@@ -2000,28 +2000,28 @@ class MAPv2_CH_DataTypes:
 
 class MAPv2_ER_DataTypes:
 
-    _name_  = 'MAPv2-ER-DataTypes'
+    _name_  = u'MAPv2-ER-DataTypes'
     _oid_   = [0, 4, 0, 0, 1, 3, 17, 2]
     
     _obj_ = [
-        'RoamingNotAllowedCause',
-        'CallBarringCause',
-        'CUG-RejectCause',
-        'SS-IncompatibilityCause',
-        'PW-RegistrationFailureCause',
-        'SM-DeliveryFailureCause',
-        'SM-EnumeratedDeliveryFailureCause',
-        'SM-DeliveryFailureCauseWithDiagnostic',
+        u'RoamingNotAllowedCause',
+        u'CallBarringCause',
+        u'CUG-RejectCause',
+        u'SS-IncompatibilityCause',
+        u'PW-RegistrationFailureCause',
+        u'SM-DeliveryFailureCause',
+        u'SM-EnumeratedDeliveryFailureCause',
+        u'SM-DeliveryFailureCauseWithDiagnostic',
         ]
     _type_ = [
-        'RoamingNotAllowedCause',
-        'CallBarringCause',
-        'CUG-RejectCause',
-        'SS-IncompatibilityCause',
-        'PW-RegistrationFailureCause',
-        'SM-DeliveryFailureCause',
-        'SM-EnumeratedDeliveryFailureCause',
-        'SM-DeliveryFailureCauseWithDiagnostic',
+        u'RoamingNotAllowedCause',
+        u'CallBarringCause',
+        u'CUG-RejectCause',
+        u'SS-IncompatibilityCause',
+        u'PW-RegistrationFailureCause',
+        u'SM-DeliveryFailureCause',
+        u'SM-EnumeratedDeliveryFailureCause',
+        u'SM-DeliveryFailureCauseWithDiagnostic',
         ]
     _set_ = [
         ]
@@ -2033,59 +2033,59 @@ class MAPv2_ER_DataTypes:
         ]
     
     #-----< RoamingNotAllowedCause >-----#
-    RoamingNotAllowedCause = ENUM(name='RoamingNotAllowedCause', mode=MODE_TYPE)
-    RoamingNotAllowedCause._cont = ASN1Dict([('plmnRoamingNotAllowed', 0), ('operatorDeterminedBarring', 3)])
+    RoamingNotAllowedCause = ENUM(name=u'RoamingNotAllowedCause', mode=MODE_TYPE)
+    RoamingNotAllowedCause._cont = ASN1Dict([(u'plmnRoamingNotAllowed', 0), (u'operatorDeterminedBarring', 3)])
     RoamingNotAllowedCause._ext = None
     
     #-----< CallBarringCause >-----#
-    CallBarringCause = ENUM(name='CallBarringCause', mode=MODE_TYPE)
-    CallBarringCause._cont = ASN1Dict([('barringServiceActive', 0), ('operatorBarring', 1)])
+    CallBarringCause = ENUM(name=u'CallBarringCause', mode=MODE_TYPE)
+    CallBarringCause._cont = ASN1Dict([(u'barringServiceActive', 0), (u'operatorBarring', 1)])
     CallBarringCause._ext = None
     
     #-----< CUG-RejectCause >-----#
-    CUG_RejectCause = ENUM(name='CUG-RejectCause', mode=MODE_TYPE)
-    CUG_RejectCause._cont = ASN1Dict([('incomingCallsBarredWithinCUG', 0), ('subscriberNotMemberOfCUG', 1), ('requestedBasicServiceViolatesCUG-Constraints', 5), ('calledPartySS-InteractionViolation', 7)])
+    CUG_RejectCause = ENUM(name=u'CUG-RejectCause', mode=MODE_TYPE)
+    CUG_RejectCause._cont = ASN1Dict([(u'incomingCallsBarredWithinCUG', 0), (u'subscriberNotMemberOfCUG', 1), (u'requestedBasicServiceViolatesCUG-Constraints', 5), (u'calledPartySS-InteractionViolation', 7)])
     CUG_RejectCause._ext = None
     
     #-----< SS-IncompatibilityCause >-----#
-    SS_IncompatibilityCause = SEQ(name='SS-IncompatibilityCause', mode=MODE_TYPE)
-    _SS_IncompatibilityCause_ss_Code = OCT_STR(name='ss-Code', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-SS-Code', 'SS-Code')), opt=True)
-    _SS_IncompatibilityCause_basicService = CHOICE(name='basicService', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'BasicServiceCode')), opt=True)
-    _SS_IncompatibilityCause_ss_Status = OCT_STR(name='ss-Status', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-SS-DataTypes', 'SS-Status')), opt=True)
+    SS_IncompatibilityCause = SEQ(name=u'SS-IncompatibilityCause', mode=MODE_TYPE)
+    _SS_IncompatibilityCause_ss_Code = OCT_STR(name=u'ss-Code', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-SS-Code', 'SS-Code')), opt=True)
+    _SS_IncompatibilityCause_basicService = CHOICE(name=u'basicService', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'BasicServiceCode')), opt=True)
+    _SS_IncompatibilityCause_ss_Status = OCT_STR(name=u'ss-Status', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-SS-DataTypes', 'SS-Status')), opt=True)
     SS_IncompatibilityCause._cont = ASN1Dict([
-        ('ss-Code', _SS_IncompatibilityCause_ss_Code),
-        ('basicService', _SS_IncompatibilityCause_basicService),
-        ('ss-Status', _SS_IncompatibilityCause_ss_Status),
+        (u'ss-Code', _SS_IncompatibilityCause_ss_Code),
+        (u'basicService', _SS_IncompatibilityCause_basicService),
+        (u'ss-Status', _SS_IncompatibilityCause_ss_Status),
         ])
     SS_IncompatibilityCause._ext = []
     
     #-----< PW-RegistrationFailureCause >-----#
-    PW_RegistrationFailureCause = ENUM(name='PW-RegistrationFailureCause', mode=MODE_TYPE)
-    PW_RegistrationFailureCause._cont = ASN1Dict([('undetermined', 0), ('invalidFormat', 1), ('newPasswordsMismatch', 2)])
+    PW_RegistrationFailureCause = ENUM(name=u'PW-RegistrationFailureCause', mode=MODE_TYPE)
+    PW_RegistrationFailureCause._cont = ASN1Dict([(u'undetermined', 0), (u'invalidFormat', 1), (u'newPasswordsMismatch', 2)])
     PW_RegistrationFailureCause._ext = None
     
     #-----< SM-DeliveryFailureCause >-----#
-    SM_DeliveryFailureCause = CHOICE(name='SM-DeliveryFailureCause', mode=MODE_TYPE)
-    _SM_DeliveryFailureCause_sm_DeliveryFailureCauseWithDiagnostic = SEQ(name='sm-DeliveryFailureCauseWithDiagnostic', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-ER-DataTypes', 'SM-DeliveryFailureCauseWithDiagnostic')))
-    _SM_DeliveryFailureCause_sm_EnumeratedDeliveryFailureCause = ENUM(name='sm-EnumeratedDeliveryFailureCause', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-ER-DataTypes', 'SM-EnumeratedDeliveryFailureCause')))
+    SM_DeliveryFailureCause = CHOICE(name=u'SM-DeliveryFailureCause', mode=MODE_TYPE)
+    _SM_DeliveryFailureCause_sm_DeliveryFailureCauseWithDiagnostic = SEQ(name=u'sm-DeliveryFailureCauseWithDiagnostic', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-ER-DataTypes', 'SM-DeliveryFailureCauseWithDiagnostic')))
+    _SM_DeliveryFailureCause_sm_EnumeratedDeliveryFailureCause = ENUM(name=u'sm-EnumeratedDeliveryFailureCause', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-ER-DataTypes', 'SM-EnumeratedDeliveryFailureCause')))
     SM_DeliveryFailureCause._cont = ASN1Dict([
-        ('sm-DeliveryFailureCauseWithDiagnostic', _SM_DeliveryFailureCause_sm_DeliveryFailureCauseWithDiagnostic),
-        ('sm-EnumeratedDeliveryFailureCause', _SM_DeliveryFailureCause_sm_EnumeratedDeliveryFailureCause),
+        (u'sm-DeliveryFailureCauseWithDiagnostic', _SM_DeliveryFailureCause_sm_DeliveryFailureCauseWithDiagnostic),
+        (u'sm-EnumeratedDeliveryFailureCause', _SM_DeliveryFailureCause_sm_EnumeratedDeliveryFailureCause),
         ])
     SM_DeliveryFailureCause._ext = None
     
     #-----< SM-EnumeratedDeliveryFailureCause >-----#
-    SM_EnumeratedDeliveryFailureCause = ENUM(name='SM-EnumeratedDeliveryFailureCause', mode=MODE_TYPE)
-    SM_EnumeratedDeliveryFailureCause._cont = ASN1Dict([('memoryCapacityExceeded', 0), ('equipmentProtocolError', 1), ('equipmentNotSM-Equipped', 2), ('unknownServiceCentre', 3), ('sc-Congestion', 4), ('invalidSME-Address', 5), ('subscriberNotSC-Subscriber', 6)])
+    SM_EnumeratedDeliveryFailureCause = ENUM(name=u'SM-EnumeratedDeliveryFailureCause', mode=MODE_TYPE)
+    SM_EnumeratedDeliveryFailureCause._cont = ASN1Dict([(u'memoryCapacityExceeded', 0), (u'equipmentProtocolError', 1), (u'equipmentNotSM-Equipped', 2), (u'unknownServiceCentre', 3), (u'sc-Congestion', 4), (u'invalidSME-Address', 5), (u'subscriberNotSC-Subscriber', 6)])
     SM_EnumeratedDeliveryFailureCause._ext = None
     
     #-----< SM-DeliveryFailureCauseWithDiagnostic >-----#
-    SM_DeliveryFailureCauseWithDiagnostic = SEQ(name='SM-DeliveryFailureCauseWithDiagnostic', mode=MODE_TYPE)
-    _SM_DeliveryFailureCauseWithDiagnostic_sm_EnumeratedDeliveryFailureCause = ENUM(name='sm-EnumeratedDeliveryFailureCause', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-ER-DataTypes', 'SM-EnumeratedDeliveryFailureCause')))
-    _SM_DeliveryFailureCauseWithDiagnostic_diagnosticInfo = OCT_STR(name='diagnosticInfo', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'SignalInfo')), opt=True)
+    SM_DeliveryFailureCauseWithDiagnostic = SEQ(name=u'SM-DeliveryFailureCauseWithDiagnostic', mode=MODE_TYPE)
+    _SM_DeliveryFailureCauseWithDiagnostic_sm_EnumeratedDeliveryFailureCause = ENUM(name=u'sm-EnumeratedDeliveryFailureCause', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-ER-DataTypes', 'SM-EnumeratedDeliveryFailureCause')))
+    _SM_DeliveryFailureCauseWithDiagnostic_diagnosticInfo = OCT_STR(name=u'diagnosticInfo', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'SignalInfo')), opt=True)
     SM_DeliveryFailureCauseWithDiagnostic._cont = ASN1Dict([
-        ('sm-EnumeratedDeliveryFailureCause', _SM_DeliveryFailureCauseWithDiagnostic_sm_EnumeratedDeliveryFailureCause),
-        ('diagnosticInfo', _SM_DeliveryFailureCauseWithDiagnostic_diagnosticInfo),
+        (u'sm-EnumeratedDeliveryFailureCause', _SM_DeliveryFailureCauseWithDiagnostic_sm_EnumeratedDeliveryFailureCause),
+        (u'diagnosticInfo', _SM_DeliveryFailureCauseWithDiagnostic_diagnosticInfo),
         ])
     SM_DeliveryFailureCauseWithDiagnostic._ext = []
     
@@ -2109,302 +2109,302 @@ class MAPv2_ER_DataTypes:
 
 class MAPv2_Errors:
 
-    _name_  = 'MAPv2-Errors'
+    _name_  = u'MAPv2-Errors'
     _oid_   = []
     
     _obj_ = [
-        'systemFailure',
-        'dataMissing',
-        'unexpectedDataValue',
-        'facilityNotSupported',
-        'unknownSubscriber',
-        'numberChanged',
-        'unknownBaseStation',
-        'unknownMSC',
-        'unidentifiedSubscriber',
-        'unknownEquipment',
-        'roamingNotAllowed',
-        'illegalSubscriber',
-        'illegalEquipment',
-        'bearerServiceNotProvisioned',
-        'teleserviceNotProvisioned',
-        'invalidTargetBaseStation',
-        'noRadioResourceAvailable',
-        'noHandoverNumberAvailable',
-        'subsequentHandoverFailure',
-        'tracingBufferFull',
-        'noRoamingNumberAvailable',
-        'Mwd-Set',
-        'absentSubscriber',
-        'callBarred',
-        'forwardingViolation',
-        'cug-Reject',
-        'illegalSS-Operation',
-        'ss-ErrorStatus',
-        'ss-NotAvailable',
-        'ss-SubscriptionViolation',
-        'ss-Incompatibility',
-        'unknownAlphabet',
-        'ussd-Busy',
-        'pw-RegistrationFailure',
-        'negativePW-Check',
-        'numberOfPW-AttemptsViolation',
-        'subscriberBusyForMT-SMS',
-        'sm-DeliveryFailure',
-        'messageWaitingListFull',
+        u'systemFailure',
+        u'dataMissing',
+        u'unexpectedDataValue',
+        u'facilityNotSupported',
+        u'unknownSubscriber',
+        u'numberChanged',
+        u'unknownBaseStation',
+        u'unknownMSC',
+        u'unidentifiedSubscriber',
+        u'unknownEquipment',
+        u'roamingNotAllowed',
+        u'illegalSubscriber',
+        u'illegalEquipment',
+        u'bearerServiceNotProvisioned',
+        u'teleserviceNotProvisioned',
+        u'invalidTargetBaseStation',
+        u'noRadioResourceAvailable',
+        u'noHandoverNumberAvailable',
+        u'subsequentHandoverFailure',
+        u'tracingBufferFull',
+        u'noRoamingNumberAvailable',
+        u'Mwd-Set',
+        u'absentSubscriber',
+        u'callBarred',
+        u'forwardingViolation',
+        u'cug-Reject',
+        u'illegalSS-Operation',
+        u'ss-ErrorStatus',
+        u'ss-NotAvailable',
+        u'ss-SubscriptionViolation',
+        u'ss-Incompatibility',
+        u'unknownAlphabet',
+        u'ussd-Busy',
+        u'pw-RegistrationFailure',
+        u'negativePW-Check',
+        u'numberOfPW-AttemptsViolation',
+        u'subscriberBusyForMT-SMS',
+        u'sm-DeliveryFailure',
+        u'messageWaitingListFull',
         ]
     _type_ = [
-        'Mwd-Set',
+        u'Mwd-Set',
         ]
     _set_ = [
         ]
     _val_ = [
-        'systemFailure',
-        'dataMissing',
-        'unexpectedDataValue',
-        'facilityNotSupported',
-        'unknownSubscriber',
-        'numberChanged',
-        'unknownBaseStation',
-        'unknownMSC',
-        'unidentifiedSubscriber',
-        'unknownEquipment',
-        'roamingNotAllowed',
-        'illegalSubscriber',
-        'illegalEquipment',
-        'bearerServiceNotProvisioned',
-        'teleserviceNotProvisioned',
-        'invalidTargetBaseStation',
-        'noRadioResourceAvailable',
-        'noHandoverNumberAvailable',
-        'subsequentHandoverFailure',
-        'tracingBufferFull',
-        'noRoamingNumberAvailable',
-        'absentSubscriber',
-        'callBarred',
-        'forwardingViolation',
-        'cug-Reject',
-        'illegalSS-Operation',
-        'ss-ErrorStatus',
-        'ss-NotAvailable',
-        'ss-SubscriptionViolation',
-        'ss-Incompatibility',
-        'unknownAlphabet',
-        'ussd-Busy',
-        'pw-RegistrationFailure',
-        'negativePW-Check',
-        'numberOfPW-AttemptsViolation',
-        'subscriberBusyForMT-SMS',
-        'sm-DeliveryFailure',
-        'messageWaitingListFull',
+        u'systemFailure',
+        u'dataMissing',
+        u'unexpectedDataValue',
+        u'facilityNotSupported',
+        u'unknownSubscriber',
+        u'numberChanged',
+        u'unknownBaseStation',
+        u'unknownMSC',
+        u'unidentifiedSubscriber',
+        u'unknownEquipment',
+        u'roamingNotAllowed',
+        u'illegalSubscriber',
+        u'illegalEquipment',
+        u'bearerServiceNotProvisioned',
+        u'teleserviceNotProvisioned',
+        u'invalidTargetBaseStation',
+        u'noRadioResourceAvailable',
+        u'noHandoverNumberAvailable',
+        u'subsequentHandoverFailure',
+        u'tracingBufferFull',
+        u'noRoamingNumberAvailable',
+        u'absentSubscriber',
+        u'callBarred',
+        u'forwardingViolation',
+        u'cug-Reject',
+        u'illegalSS-Operation',
+        u'ss-ErrorStatus',
+        u'ss-NotAvailable',
+        u'ss-SubscriptionViolation',
+        u'ss-Incompatibility',
+        u'unknownAlphabet',
+        u'ussd-Busy',
+        u'pw-RegistrationFailure',
+        u'negativePW-Check',
+        u'numberOfPW-AttemptsViolation',
+        u'subscriberBusyForMT-SMS',
+        u'sm-DeliveryFailure',
+        u'messageWaitingListFull',
         ]
     _class_ = [
-        'systemFailure',
-        'dataMissing',
-        'unexpectedDataValue',
-        'facilityNotSupported',
-        'unknownSubscriber',
-        'numberChanged',
-        'unknownBaseStation',
-        'unknownMSC',
-        'unidentifiedSubscriber',
-        'unknownEquipment',
-        'roamingNotAllowed',
-        'illegalSubscriber',
-        'illegalEquipment',
-        'bearerServiceNotProvisioned',
-        'teleserviceNotProvisioned',
-        'invalidTargetBaseStation',
-        'noRadioResourceAvailable',
-        'noHandoverNumberAvailable',
-        'subsequentHandoverFailure',
-        'tracingBufferFull',
-        'noRoamingNumberAvailable',
-        'absentSubscriber',
-        'callBarred',
-        'forwardingViolation',
-        'cug-Reject',
-        'illegalSS-Operation',
-        'ss-ErrorStatus',
-        'ss-NotAvailable',
-        'ss-SubscriptionViolation',
-        'ss-Incompatibility',
-        'unknownAlphabet',
-        'ussd-Busy',
-        'pw-RegistrationFailure',
-        'negativePW-Check',
-        'numberOfPW-AttemptsViolation',
-        'subscriberBusyForMT-SMS',
-        'sm-DeliveryFailure',
-        'messageWaitingListFull',
+        u'systemFailure',
+        u'dataMissing',
+        u'unexpectedDataValue',
+        u'facilityNotSupported',
+        u'unknownSubscriber',
+        u'numberChanged',
+        u'unknownBaseStation',
+        u'unknownMSC',
+        u'unidentifiedSubscriber',
+        u'unknownEquipment',
+        u'roamingNotAllowed',
+        u'illegalSubscriber',
+        u'illegalEquipment',
+        u'bearerServiceNotProvisioned',
+        u'teleserviceNotProvisioned',
+        u'invalidTargetBaseStation',
+        u'noRadioResourceAvailable',
+        u'noHandoverNumberAvailable',
+        u'subsequentHandoverFailure',
+        u'tracingBufferFull',
+        u'noRoamingNumberAvailable',
+        u'absentSubscriber',
+        u'callBarred',
+        u'forwardingViolation',
+        u'cug-Reject',
+        u'illegalSS-Operation',
+        u'ss-ErrorStatus',
+        u'ss-NotAvailable',
+        u'ss-SubscriptionViolation',
+        u'ss-Incompatibility',
+        u'unknownAlphabet',
+        u'ussd-Busy',
+        u'pw-RegistrationFailure',
+        u'negativePW-Check',
+        u'numberOfPW-AttemptsViolation',
+        u'subscriberBusyForMT-SMS',
+        u'sm-DeliveryFailure',
+        u'messageWaitingListFull',
         ]
     _param_ = [
         ]
     
     #-----< systemFailure >-----#
-    systemFailure = CLASS(name='systemFailure', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'ERROR')))
-    _systemFailure_val_ParameterType = ENUM(name='ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'NetworkResource')))
-    systemFailure._val = dict([('ParameterType', _systemFailure_val_ParameterType), ('errorCode', ('local', 34))])
+    systemFailure = CLASS(name=u'systemFailure', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'ERROR')))
+    _systemFailure_val_ParameterType = ENUM(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'NetworkResource')))
+    systemFailure._val = dict([(u'ParameterType', _systemFailure_val_ParameterType), (u'errorCode', (u'local', 34))])
     
     #-----< dataMissing >-----#
-    dataMissing = CLASS(name='dataMissing', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'ERROR')))
-    dataMissing._val = dict([('errorCode', ('local', 35))])
+    dataMissing = CLASS(name=u'dataMissing', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'ERROR')))
+    dataMissing._val = dict([(u'errorCode', (u'local', 35))])
     
     #-----< unexpectedDataValue >-----#
-    unexpectedDataValue = CLASS(name='unexpectedDataValue', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'ERROR')))
-    unexpectedDataValue._val = dict([('errorCode', ('local', 36))])
+    unexpectedDataValue = CLASS(name=u'unexpectedDataValue', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'ERROR')))
+    unexpectedDataValue._val = dict([(u'errorCode', (u'local', 36))])
     
     #-----< facilityNotSupported >-----#
-    facilityNotSupported = CLASS(name='facilityNotSupported', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'ERROR')))
-    facilityNotSupported._val = dict([('errorCode', ('local', 21))])
+    facilityNotSupported = CLASS(name=u'facilityNotSupported', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'ERROR')))
+    facilityNotSupported._val = dict([(u'errorCode', (u'local', 21))])
     
     #-----< unknownSubscriber >-----#
-    unknownSubscriber = CLASS(name='unknownSubscriber', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'ERROR')))
-    unknownSubscriber._val = dict([('errorCode', ('local', 1))])
+    unknownSubscriber = CLASS(name=u'unknownSubscriber', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'ERROR')))
+    unknownSubscriber._val = dict([(u'errorCode', (u'local', 1))])
     
     #-----< numberChanged >-----#
-    numberChanged = CLASS(name='numberChanged', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'ERROR')))
-    numberChanged._val = dict([('errorCode', ('local', 44))])
+    numberChanged = CLASS(name=u'numberChanged', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'ERROR')))
+    numberChanged._val = dict([(u'errorCode', (u'local', 44))])
     
     #-----< unknownBaseStation >-----#
-    unknownBaseStation = CLASS(name='unknownBaseStation', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'ERROR')))
-    unknownBaseStation._val = dict([('errorCode', ('local', 2))])
+    unknownBaseStation = CLASS(name=u'unknownBaseStation', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'ERROR')))
+    unknownBaseStation._val = dict([(u'errorCode', (u'local', 2))])
     
     #-----< unknownMSC >-----#
-    unknownMSC = CLASS(name='unknownMSC', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'ERROR')))
-    unknownMSC._val = dict([('errorCode', ('local', 3))])
+    unknownMSC = CLASS(name=u'unknownMSC', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'ERROR')))
+    unknownMSC._val = dict([(u'errorCode', (u'local', 3))])
     
     #-----< unidentifiedSubscriber >-----#
-    unidentifiedSubscriber = CLASS(name='unidentifiedSubscriber', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'ERROR')))
-    unidentifiedSubscriber._val = dict([('errorCode', ('local', 5))])
+    unidentifiedSubscriber = CLASS(name=u'unidentifiedSubscriber', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'ERROR')))
+    unidentifiedSubscriber._val = dict([(u'errorCode', (u'local', 5))])
     
     #-----< unknownEquipment >-----#
-    unknownEquipment = CLASS(name='unknownEquipment', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'ERROR')))
-    unknownEquipment._val = dict([('errorCode', ('local', 7))])
+    unknownEquipment = CLASS(name=u'unknownEquipment', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'ERROR')))
+    unknownEquipment._val = dict([(u'errorCode', (u'local', 7))])
     
     #-----< roamingNotAllowed >-----#
-    roamingNotAllowed = CLASS(name='roamingNotAllowed', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'ERROR')))
-    _roamingNotAllowed_val_ParameterType = ENUM(name='ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-ER-DataTypes', 'RoamingNotAllowedCause')))
-    roamingNotAllowed._val = dict([('ParameterType', _roamingNotAllowed_val_ParameterType), ('errorCode', ('local', 8))])
+    roamingNotAllowed = CLASS(name=u'roamingNotAllowed', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'ERROR')))
+    _roamingNotAllowed_val_ParameterType = ENUM(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-ER-DataTypes', 'RoamingNotAllowedCause')))
+    roamingNotAllowed._val = dict([(u'ParameterType', _roamingNotAllowed_val_ParameterType), (u'errorCode', (u'local', 8))])
     
     #-----< illegalSubscriber >-----#
-    illegalSubscriber = CLASS(name='illegalSubscriber', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'ERROR')))
-    illegalSubscriber._val = dict([('errorCode', ('local', 9))])
+    illegalSubscriber = CLASS(name=u'illegalSubscriber', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'ERROR')))
+    illegalSubscriber._val = dict([(u'errorCode', (u'local', 9))])
     
     #-----< illegalEquipment >-----#
-    illegalEquipment = CLASS(name='illegalEquipment', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'ERROR')))
-    illegalEquipment._val = dict([('errorCode', ('local', 12))])
+    illegalEquipment = CLASS(name=u'illegalEquipment', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'ERROR')))
+    illegalEquipment._val = dict([(u'errorCode', (u'local', 12))])
     
     #-----< bearerServiceNotProvisioned >-----#
-    bearerServiceNotProvisioned = CLASS(name='bearerServiceNotProvisioned', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'ERROR')))
-    bearerServiceNotProvisioned._val = dict([('errorCode', ('local', 10))])
+    bearerServiceNotProvisioned = CLASS(name=u'bearerServiceNotProvisioned', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'ERROR')))
+    bearerServiceNotProvisioned._val = dict([(u'errorCode', (u'local', 10))])
     
     #-----< teleserviceNotProvisioned >-----#
-    teleserviceNotProvisioned = CLASS(name='teleserviceNotProvisioned', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'ERROR')))
-    teleserviceNotProvisioned._val = dict([('errorCode', ('local', 11))])
+    teleserviceNotProvisioned = CLASS(name=u'teleserviceNotProvisioned', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'ERROR')))
+    teleserviceNotProvisioned._val = dict([(u'errorCode', (u'local', 11))])
     
     #-----< invalidTargetBaseStation >-----#
-    invalidTargetBaseStation = CLASS(name='invalidTargetBaseStation', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'ERROR')))
-    invalidTargetBaseStation._val = dict([('errorCode', ('local', 23))])
+    invalidTargetBaseStation = CLASS(name=u'invalidTargetBaseStation', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'ERROR')))
+    invalidTargetBaseStation._val = dict([(u'errorCode', (u'local', 23))])
     
     #-----< noRadioResourceAvailable >-----#
-    noRadioResourceAvailable = CLASS(name='noRadioResourceAvailable', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'ERROR')))
-    noRadioResourceAvailable._val = dict([('errorCode', ('local', 24))])
+    noRadioResourceAvailable = CLASS(name=u'noRadioResourceAvailable', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'ERROR')))
+    noRadioResourceAvailable._val = dict([(u'errorCode', (u'local', 24))])
     
     #-----< noHandoverNumberAvailable >-----#
-    noHandoverNumberAvailable = CLASS(name='noHandoverNumberAvailable', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'ERROR')))
-    noHandoverNumberAvailable._val = dict([('errorCode', ('local', 25))])
+    noHandoverNumberAvailable = CLASS(name=u'noHandoverNumberAvailable', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'ERROR')))
+    noHandoverNumberAvailable._val = dict([(u'errorCode', (u'local', 25))])
     
     #-----< subsequentHandoverFailure >-----#
-    subsequentHandoverFailure = CLASS(name='subsequentHandoverFailure', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'ERROR')))
-    subsequentHandoverFailure._val = dict([('errorCode', ('local', 26))])
+    subsequentHandoverFailure = CLASS(name=u'subsequentHandoverFailure', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'ERROR')))
+    subsequentHandoverFailure._val = dict([(u'errorCode', (u'local', 26))])
     
     #-----< tracingBufferFull >-----#
-    tracingBufferFull = CLASS(name='tracingBufferFull', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'ERROR')))
-    tracingBufferFull._val = dict([('errorCode', ('local', 40))])
+    tracingBufferFull = CLASS(name=u'tracingBufferFull', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'ERROR')))
+    tracingBufferFull._val = dict([(u'errorCode', (u'local', 40))])
     
     #-----< noRoamingNumberAvailable >-----#
-    noRoamingNumberAvailable = CLASS(name='noRoamingNumberAvailable', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'ERROR')))
-    noRoamingNumberAvailable._val = dict([('errorCode', ('local', 39))])
+    noRoamingNumberAvailable = CLASS(name=u'noRoamingNumberAvailable', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'ERROR')))
+    noRoamingNumberAvailable._val = dict([(u'errorCode', (u'local', 39))])
     
     #-----< Mwd-Set >-----#
-    Mwd_Set = BOOL(name='Mwd-Set', mode=MODE_TYPE)
+    Mwd_Set = BOOL(name=u'Mwd-Set', mode=MODE_TYPE)
     
     #-----< absentSubscriber >-----#
-    absentSubscriber = CLASS(name='absentSubscriber', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'ERROR')))
-    _absentSubscriber_val_ParameterType = BOOL(name='ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-Errors', 'Mwd-Set')))
-    absentSubscriber._val = dict([('ParameterType', _absentSubscriber_val_ParameterType), ('errorCode', ('local', 27))])
+    absentSubscriber = CLASS(name=u'absentSubscriber', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'ERROR')))
+    _absentSubscriber_val_ParameterType = BOOL(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-Errors', 'Mwd-Set')))
+    absentSubscriber._val = dict([(u'ParameterType', _absentSubscriber_val_ParameterType), (u'errorCode', (u'local', 27))])
     
     #-----< callBarred >-----#
-    callBarred = CLASS(name='callBarred', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'ERROR')))
-    _callBarred_val_ParameterType = ENUM(name='ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-ER-DataTypes', 'CallBarringCause')))
-    callBarred._val = dict([('ParameterType', _callBarred_val_ParameterType), ('errorCode', ('local', 13))])
+    callBarred = CLASS(name=u'callBarred', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'ERROR')))
+    _callBarred_val_ParameterType = ENUM(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-ER-DataTypes', 'CallBarringCause')))
+    callBarred._val = dict([(u'ParameterType', _callBarred_val_ParameterType), (u'errorCode', (u'local', 13))])
     
     #-----< forwardingViolation >-----#
-    forwardingViolation = CLASS(name='forwardingViolation', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'ERROR')))
-    forwardingViolation._val = dict([('errorCode', ('local', 14))])
+    forwardingViolation = CLASS(name=u'forwardingViolation', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'ERROR')))
+    forwardingViolation._val = dict([(u'errorCode', (u'local', 14))])
     
     #-----< cug-Reject >-----#
-    cug_Reject = CLASS(name='cug-Reject', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'ERROR')))
-    _cug_Reject_val_ParameterType = ENUM(name='ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-ER-DataTypes', 'CUG-RejectCause')))
-    cug_Reject._val = dict([('ParameterType', _cug_Reject_val_ParameterType), ('errorCode', ('local', 15))])
+    cug_Reject = CLASS(name=u'cug-Reject', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'ERROR')))
+    _cug_Reject_val_ParameterType = ENUM(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-ER-DataTypes', 'CUG-RejectCause')))
+    cug_Reject._val = dict([(u'ParameterType', _cug_Reject_val_ParameterType), (u'errorCode', (u'local', 15))])
     
     #-----< illegalSS-Operation >-----#
-    illegalSS_Operation = CLASS(name='illegalSS-Operation', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'ERROR')))
-    illegalSS_Operation._val = dict([('errorCode', ('local', 16))])
+    illegalSS_Operation = CLASS(name=u'illegalSS-Operation', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'ERROR')))
+    illegalSS_Operation._val = dict([(u'errorCode', (u'local', 16))])
     
     #-----< ss-ErrorStatus >-----#
-    ss_ErrorStatus = CLASS(name='ss-ErrorStatus', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'ERROR')))
-    _ss_ErrorStatus_val_ParameterType = OCT_STR(name='ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SS-DataTypes', 'SS-Status')))
-    ss_ErrorStatus._val = dict([('ParameterType', _ss_ErrorStatus_val_ParameterType), ('errorCode', ('local', 17))])
+    ss_ErrorStatus = CLASS(name=u'ss-ErrorStatus', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'ERROR')))
+    _ss_ErrorStatus_val_ParameterType = OCT_STR(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SS-DataTypes', 'SS-Status')))
+    ss_ErrorStatus._val = dict([(u'ParameterType', _ss_ErrorStatus_val_ParameterType), (u'errorCode', (u'local', 17))])
     
     #-----< ss-NotAvailable >-----#
-    ss_NotAvailable = CLASS(name='ss-NotAvailable', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'ERROR')))
-    ss_NotAvailable._val = dict([('errorCode', ('local', 18))])
+    ss_NotAvailable = CLASS(name=u'ss-NotAvailable', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'ERROR')))
+    ss_NotAvailable._val = dict([(u'errorCode', (u'local', 18))])
     
     #-----< ss-SubscriptionViolation >-----#
-    ss_SubscriptionViolation = CLASS(name='ss-SubscriptionViolation', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'ERROR')))
-    _ss_SubscriptionViolation_val_ParameterType = CHOICE(name='ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SS-DataTypes', 'SS-SubscriptionOption')))
-    ss_SubscriptionViolation._val = dict([('ParameterType', _ss_SubscriptionViolation_val_ParameterType), ('errorCode', ('local', 19))])
+    ss_SubscriptionViolation = CLASS(name=u'ss-SubscriptionViolation', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'ERROR')))
+    _ss_SubscriptionViolation_val_ParameterType = CHOICE(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SS-DataTypes', 'SS-SubscriptionOption')))
+    ss_SubscriptionViolation._val = dict([(u'ParameterType', _ss_SubscriptionViolation_val_ParameterType), (u'errorCode', (u'local', 19))])
     
     #-----< ss-Incompatibility >-----#
-    ss_Incompatibility = CLASS(name='ss-Incompatibility', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'ERROR')))
-    _ss_Incompatibility_val_ParameterType = SEQ(name='ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-ER-DataTypes', 'SS-IncompatibilityCause')))
-    ss_Incompatibility._val = dict([('ParameterType', _ss_Incompatibility_val_ParameterType), ('errorCode', ('local', 20))])
+    ss_Incompatibility = CLASS(name=u'ss-Incompatibility', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'ERROR')))
+    _ss_Incompatibility_val_ParameterType = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-ER-DataTypes', 'SS-IncompatibilityCause')))
+    ss_Incompatibility._val = dict([(u'ParameterType', _ss_Incompatibility_val_ParameterType), (u'errorCode', (u'local', 20))])
     
     #-----< unknownAlphabet >-----#
-    unknownAlphabet = CLASS(name='unknownAlphabet', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'ERROR')))
-    unknownAlphabet._val = dict([('errorCode', ('local', 71))])
+    unknownAlphabet = CLASS(name=u'unknownAlphabet', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'ERROR')))
+    unknownAlphabet._val = dict([(u'errorCode', (u'local', 71))])
     
     #-----< ussd-Busy >-----#
-    ussd_Busy = CLASS(name='ussd-Busy', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'ERROR')))
-    ussd_Busy._val = dict([('errorCode', ('local', 72))])
+    ussd_Busy = CLASS(name=u'ussd-Busy', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'ERROR')))
+    ussd_Busy._val = dict([(u'errorCode', (u'local', 72))])
     
     #-----< pw-RegistrationFailure >-----#
-    pw_RegistrationFailure = CLASS(name='pw-RegistrationFailure', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'ERROR')))
-    _pw_RegistrationFailure_val_ParameterType = ENUM(name='ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-ER-DataTypes', 'PW-RegistrationFailureCause')))
-    pw_RegistrationFailure._val = dict([('ParameterType', _pw_RegistrationFailure_val_ParameterType), ('errorCode', ('local', 37))])
+    pw_RegistrationFailure = CLASS(name=u'pw-RegistrationFailure', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'ERROR')))
+    _pw_RegistrationFailure_val_ParameterType = ENUM(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-ER-DataTypes', 'PW-RegistrationFailureCause')))
+    pw_RegistrationFailure._val = dict([(u'ParameterType', _pw_RegistrationFailure_val_ParameterType), (u'errorCode', (u'local', 37))])
     
     #-----< negativePW-Check >-----#
-    negativePW_Check = CLASS(name='negativePW-Check', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'ERROR')))
-    negativePW_Check._val = dict([('errorCode', ('local', 38))])
+    negativePW_Check = CLASS(name=u'negativePW-Check', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'ERROR')))
+    negativePW_Check._val = dict([(u'errorCode', (u'local', 38))])
     
     #-----< numberOfPW-AttemptsViolation >-----#
-    numberOfPW_AttemptsViolation = CLASS(name='numberOfPW-AttemptsViolation', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'ERROR')))
-    numberOfPW_AttemptsViolation._val = dict([('errorCode', ('local', 43))])
+    numberOfPW_AttemptsViolation = CLASS(name=u'numberOfPW-AttemptsViolation', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'ERROR')))
+    numberOfPW_AttemptsViolation._val = dict([(u'errorCode', (u'local', 43))])
     
     #-----< subscriberBusyForMT-SMS >-----#
-    subscriberBusyForMT_SMS = CLASS(name='subscriberBusyForMT-SMS', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'ERROR')))
-    subscriberBusyForMT_SMS._val = dict([('errorCode', ('local', 31))])
+    subscriberBusyForMT_SMS = CLASS(name=u'subscriberBusyForMT-SMS', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'ERROR')))
+    subscriberBusyForMT_SMS._val = dict([(u'errorCode', (u'local', 31))])
     
     #-----< sm-DeliveryFailure >-----#
-    sm_DeliveryFailure = CLASS(name='sm-DeliveryFailure', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'ERROR')))
-    _sm_DeliveryFailure_val_ParameterType = CHOICE(name='ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-ER-DataTypes', 'SM-DeliveryFailureCause')))
-    sm_DeliveryFailure._val = dict([('ParameterType', _sm_DeliveryFailure_val_ParameterType), ('errorCode', ('local', 32))])
+    sm_DeliveryFailure = CLASS(name=u'sm-DeliveryFailure', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'ERROR')))
+    _sm_DeliveryFailure_val_ParameterType = CHOICE(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-ER-DataTypes', 'SM-DeliveryFailureCause')))
+    sm_DeliveryFailure._val = dict([(u'ParameterType', _sm_DeliveryFailure_val_ParameterType), (u'errorCode', (u'local', 32))])
     
     #-----< messageWaitingListFull >-----#
-    messageWaitingListFull = CLASS(name='messageWaitingListFull', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'ERROR')))
-    messageWaitingListFull._val = dict([('errorCode', ('local', 33))])
+    messageWaitingListFull = CLASS(name=u'messageWaitingListFull', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'ERROR')))
+    messageWaitingListFull._val = dict([(u'errorCode', (u'local', 33))])
     
     _all_ = [
         systemFailure,
@@ -2460,28 +2460,28 @@ class MAPv2_Errors:
 
 class MAPv2_OM_DataTypes:
 
-    _name_  = 'MAPv2-OM-DataTypes'
+    _name_  = u'MAPv2-OM-DataTypes'
     _oid_   = [0, 4, 0, 0, 1, 3, 12, 2]
     
     _obj_ = [
-        'ActivateTraceModeArg',
-        'TraceReference',
-        'TraceType',
-        'DeactivateTraceModeArg',
-        'TraceSubscriberActivityArg',
-        'CallReference',
-        'NoteInternalHO-Arg',
-        'HandoverType',
+        u'ActivateTraceModeArg',
+        u'TraceReference',
+        u'TraceType',
+        u'DeactivateTraceModeArg',
+        u'TraceSubscriberActivityArg',
+        u'CallReference',
+        u'NoteInternalHO-Arg',
+        u'HandoverType',
         ]
     _type_ = [
-        'ActivateTraceModeArg',
-        'TraceReference',
-        'TraceType',
-        'DeactivateTraceModeArg',
-        'TraceSubscriberActivityArg',
-        'CallReference',
-        'NoteInternalHO-Arg',
-        'HandoverType',
+        u'ActivateTraceModeArg',
+        u'TraceReference',
+        u'TraceType',
+        u'DeactivateTraceModeArg',
+        u'TraceSubscriberActivityArg',
+        u'CallReference',
+        u'NoteInternalHO-Arg',
+        u'HandoverType',
         ]
     _set_ = [
         ]
@@ -2493,72 +2493,72 @@ class MAPv2_OM_DataTypes:
         ]
     
     #-----< ActivateTraceModeArg >-----#
-    ActivateTraceModeArg = SEQ(name='ActivateTraceModeArg', mode=MODE_TYPE)
-    _ActivateTraceModeArg_imsi = OCT_STR(name='imsi', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'IMSI')), opt=True)
-    _ActivateTraceModeArg_traceReference = OCT_STR(name='traceReference', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-OM-DataTypes', 'TraceReference')))
-    _ActivateTraceModeArg_traceType = INT(name='traceType', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-OM-DataTypes', 'TraceType')))
-    _ActivateTraceModeArg_omc_Id = OCT_STR(name='omc-Id', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'AddressString')), opt=True)
+    ActivateTraceModeArg = SEQ(name=u'ActivateTraceModeArg', mode=MODE_TYPE)
+    _ActivateTraceModeArg_imsi = OCT_STR(name=u'imsi', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'IMSI')), opt=True)
+    _ActivateTraceModeArg_traceReference = OCT_STR(name=u'traceReference', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-OM-DataTypes', 'TraceReference')))
+    _ActivateTraceModeArg_traceType = INT(name=u'traceType', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-OM-DataTypes', 'TraceType')))
+    _ActivateTraceModeArg_omc_Id = OCT_STR(name=u'omc-Id', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'AddressString')), opt=True)
     ActivateTraceModeArg._cont = ASN1Dict([
-        ('imsi', _ActivateTraceModeArg_imsi),
-        ('traceReference', _ActivateTraceModeArg_traceReference),
-        ('traceType', _ActivateTraceModeArg_traceType),
-        ('omc-Id', _ActivateTraceModeArg_omc_Id),
+        (u'imsi', _ActivateTraceModeArg_imsi),
+        (u'traceReference', _ActivateTraceModeArg_traceReference),
+        (u'traceType', _ActivateTraceModeArg_traceType),
+        (u'omc-Id', _ActivateTraceModeArg_omc_Id),
         ])
     ActivateTraceModeArg._ext = []
     
     #-----< TraceReference >-----#
-    TraceReference = OCT_STR(name='TraceReference', mode=MODE_TYPE)
+    TraceReference = OCT_STR(name=u'TraceReference', mode=MODE_TYPE)
     TraceReference._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=2)], ev=None, er=[])
     
     #-----< TraceType >-----#
-    TraceType = INT(name='TraceType', mode=MODE_TYPE)
+    TraceType = INT(name=u'TraceType', mode=MODE_TYPE)
     TraceType._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=255)], ev=None, er=[])
     
     #-----< DeactivateTraceModeArg >-----#
-    DeactivateTraceModeArg = SEQ(name='DeactivateTraceModeArg', mode=MODE_TYPE)
-    _DeactivateTraceModeArg_imsi = OCT_STR(name='imsi', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'IMSI')), opt=True)
-    _DeactivateTraceModeArg_traceReference = OCT_STR(name='traceReference', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-OM-DataTypes', 'TraceReference')))
+    DeactivateTraceModeArg = SEQ(name=u'DeactivateTraceModeArg', mode=MODE_TYPE)
+    _DeactivateTraceModeArg_imsi = OCT_STR(name=u'imsi', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'IMSI')), opt=True)
+    _DeactivateTraceModeArg_traceReference = OCT_STR(name=u'traceReference', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-OM-DataTypes', 'TraceReference')))
     DeactivateTraceModeArg._cont = ASN1Dict([
-        ('imsi', _DeactivateTraceModeArg_imsi),
-        ('traceReference', _DeactivateTraceModeArg_traceReference),
+        (u'imsi', _DeactivateTraceModeArg_imsi),
+        (u'traceReference', _DeactivateTraceModeArg_traceReference),
         ])
     DeactivateTraceModeArg._ext = []
     
     #-----< TraceSubscriberActivityArg >-----#
-    TraceSubscriberActivityArg = SEQ(name='TraceSubscriberActivityArg', mode=MODE_TYPE)
-    _TraceSubscriberActivityArg_imsi = OCT_STR(name='imsi', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'IMSI')), opt=True)
-    _TraceSubscriberActivityArg_traceReference = OCT_STR(name='traceReference', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-OM-DataTypes', 'TraceReference')))
-    _TraceSubscriberActivityArg_traceType = INT(name='traceType', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-OM-DataTypes', 'TraceType')))
-    _TraceSubscriberActivityArg_omc_Id = OCT_STR(name='omc-Id', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'AddressString')), opt=True)
-    _TraceSubscriberActivityArg_callReference = OCT_STR(name='callReference', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-OM-DataTypes', 'CallReference')), opt=True)
+    TraceSubscriberActivityArg = SEQ(name=u'TraceSubscriberActivityArg', mode=MODE_TYPE)
+    _TraceSubscriberActivityArg_imsi = OCT_STR(name=u'imsi', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'IMSI')), opt=True)
+    _TraceSubscriberActivityArg_traceReference = OCT_STR(name=u'traceReference', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-OM-DataTypes', 'TraceReference')))
+    _TraceSubscriberActivityArg_traceType = INT(name=u'traceType', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-OM-DataTypes', 'TraceType')))
+    _TraceSubscriberActivityArg_omc_Id = OCT_STR(name=u'omc-Id', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'AddressString')), opt=True)
+    _TraceSubscriberActivityArg_callReference = OCT_STR(name=u'callReference', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-OM-DataTypes', 'CallReference')), opt=True)
     TraceSubscriberActivityArg._cont = ASN1Dict([
-        ('imsi', _TraceSubscriberActivityArg_imsi),
-        ('traceReference', _TraceSubscriberActivityArg_traceReference),
-        ('traceType', _TraceSubscriberActivityArg_traceType),
-        ('omc-Id', _TraceSubscriberActivityArg_omc_Id),
-        ('callReference', _TraceSubscriberActivityArg_callReference),
+        (u'imsi', _TraceSubscriberActivityArg_imsi),
+        (u'traceReference', _TraceSubscriberActivityArg_traceReference),
+        (u'traceType', _TraceSubscriberActivityArg_traceType),
+        (u'omc-Id', _TraceSubscriberActivityArg_omc_Id),
+        (u'callReference', _TraceSubscriberActivityArg_callReference),
         ])
     TraceSubscriberActivityArg._ext = None
     
     #-----< CallReference >-----#
-    CallReference = OCT_STR(name='CallReference', mode=MODE_TYPE)
+    CallReference = OCT_STR(name=u'CallReference', mode=MODE_TYPE)
     CallReference._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=3)], ev=None, er=[])
     
     #-----< NoteInternalHO-Arg >-----#
-    NoteInternalHO_Arg = SEQ(name='NoteInternalHO-Arg', mode=MODE_TYPE)
-    _NoteInternalHO_Arg_handoverType = ENUM(name='handoverType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-OM-DataTypes', 'HandoverType')))
-    _NoteInternalHO_Arg_targetCellId = OCT_STR(name='targetCellId', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'GlobalCellId')), opt=True)
-    _NoteInternalHO_Arg_channelId = SEQ(name='channelId', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'ExternalSignalInfo')), opt=True)
+    NoteInternalHO_Arg = SEQ(name=u'NoteInternalHO-Arg', mode=MODE_TYPE)
+    _NoteInternalHO_Arg_handoverType = ENUM(name=u'handoverType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-OM-DataTypes', 'HandoverType')))
+    _NoteInternalHO_Arg_targetCellId = OCT_STR(name=u'targetCellId', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'GlobalCellId')), opt=True)
+    _NoteInternalHO_Arg_channelId = SEQ(name=u'channelId', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'ExternalSignalInfo')), opt=True)
     NoteInternalHO_Arg._cont = ASN1Dict([
-        ('handoverType', _NoteInternalHO_Arg_handoverType),
-        ('targetCellId', _NoteInternalHO_Arg_targetCellId),
-        ('channelId', _NoteInternalHO_Arg_channelId),
+        (u'handoverType', _NoteInternalHO_Arg_handoverType),
+        (u'targetCellId', _NoteInternalHO_Arg_targetCellId),
+        (u'channelId', _NoteInternalHO_Arg_channelId),
         ])
     NoteInternalHO_Arg._ext = None
     
     #-----< HandoverType >-----#
-    HandoverType = ENUM(name='HandoverType', mode=MODE_TYPE)
-    HandoverType._cont = ASN1Dict([('interBSS', 0), ('intraBSS', 1)])
+    HandoverType = ENUM(name=u'HandoverType', mode=MODE_TYPE)
+    HandoverType._cont = ASN1Dict([(u'interBSS', 0), (u'intraBSS', 1)])
     HandoverType._ext = None
     
     _all_ = [
@@ -2588,76 +2588,76 @@ class MAPv2_OM_DataTypes:
 
 class MAPv2_TS_Code:
 
-    _name_  = 'MAPv2-TS-Code'
+    _name_  = u'MAPv2-TS-Code'
     _oid_   = [0, 4, 0, 0, 1, 3, 19, 2]
     
     _obj_ = [
-        'TeleserviceCode',
-        'allTeleservices',
-        'allSpeechTransmissionServices',
-        'telephony',
-        'emergencyCalls',
-        'allShortMessageServices',
-        'shortMessageMT-PP',
-        'shortMessageMO-PP',
-        'allFacsimileTransmissionServices',
-        'facsimileGroup3AndAlterSpeech',
-        'automaticFacsimileGroup3',
-        'facsimileGroup4',
-        'allDataTeleservices',
-        'allTeleservices-ExeptSMS',
-        'allPLMN-specificTS',
-        'plmn-specificTS-1',
-        'plmn-specificTS-2',
-        'plmn-specificTS-3',
-        'plmn-specificTS-4',
-        'plmn-specificTS-5',
-        'plmn-specificTS-6',
-        'plmn-specificTS-7',
-        'plmn-specificTS-8',
-        'plmn-specificTS-9',
-        'plmn-specificTS-A',
-        'plmn-specificTS-B',
-        'plmn-specificTS-C',
-        'plmn-specificTS-D',
-        'plmn-specificTS-E',
-        'plmn-specificTS-F',
+        u'TeleserviceCode',
+        u'allTeleservices',
+        u'allSpeechTransmissionServices',
+        u'telephony',
+        u'emergencyCalls',
+        u'allShortMessageServices',
+        u'shortMessageMT-PP',
+        u'shortMessageMO-PP',
+        u'allFacsimileTransmissionServices',
+        u'facsimileGroup3AndAlterSpeech',
+        u'automaticFacsimileGroup3',
+        u'facsimileGroup4',
+        u'allDataTeleservices',
+        u'allTeleservices-ExeptSMS',
+        u'allPLMN-specificTS',
+        u'plmn-specificTS-1',
+        u'plmn-specificTS-2',
+        u'plmn-specificTS-3',
+        u'plmn-specificTS-4',
+        u'plmn-specificTS-5',
+        u'plmn-specificTS-6',
+        u'plmn-specificTS-7',
+        u'plmn-specificTS-8',
+        u'plmn-specificTS-9',
+        u'plmn-specificTS-A',
+        u'plmn-specificTS-B',
+        u'plmn-specificTS-C',
+        u'plmn-specificTS-D',
+        u'plmn-specificTS-E',
+        u'plmn-specificTS-F',
         ]
     _type_ = [
-        'TeleserviceCode',
+        u'TeleserviceCode',
         ]
     _set_ = [
         ]
     _val_ = [
-        'allTeleservices',
-        'allSpeechTransmissionServices',
-        'telephony',
-        'emergencyCalls',
-        'allShortMessageServices',
-        'shortMessageMT-PP',
-        'shortMessageMO-PP',
-        'allFacsimileTransmissionServices',
-        'facsimileGroup3AndAlterSpeech',
-        'automaticFacsimileGroup3',
-        'facsimileGroup4',
-        'allDataTeleservices',
-        'allTeleservices-ExeptSMS',
-        'allPLMN-specificTS',
-        'plmn-specificTS-1',
-        'plmn-specificTS-2',
-        'plmn-specificTS-3',
-        'plmn-specificTS-4',
-        'plmn-specificTS-5',
-        'plmn-specificTS-6',
-        'plmn-specificTS-7',
-        'plmn-specificTS-8',
-        'plmn-specificTS-9',
-        'plmn-specificTS-A',
-        'plmn-specificTS-B',
-        'plmn-specificTS-C',
-        'plmn-specificTS-D',
-        'plmn-specificTS-E',
-        'plmn-specificTS-F',
+        u'allTeleservices',
+        u'allSpeechTransmissionServices',
+        u'telephony',
+        u'emergencyCalls',
+        u'allShortMessageServices',
+        u'shortMessageMT-PP',
+        u'shortMessageMO-PP',
+        u'allFacsimileTransmissionServices',
+        u'facsimileGroup3AndAlterSpeech',
+        u'automaticFacsimileGroup3',
+        u'facsimileGroup4',
+        u'allDataTeleservices',
+        u'allTeleservices-ExeptSMS',
+        u'allPLMN-specificTS',
+        u'plmn-specificTS-1',
+        u'plmn-specificTS-2',
+        u'plmn-specificTS-3',
+        u'plmn-specificTS-4',
+        u'plmn-specificTS-5',
+        u'plmn-specificTS-6',
+        u'plmn-specificTS-7',
+        u'plmn-specificTS-8',
+        u'plmn-specificTS-9',
+        u'plmn-specificTS-A',
+        u'plmn-specificTS-B',
+        u'plmn-specificTS-C',
+        u'plmn-specificTS-D',
+        u'plmn-specificTS-E',
+        u'plmn-specificTS-F',
         ]
     _class_ = [
         ]
@@ -2665,123 +2665,123 @@ class MAPv2_TS_Code:
         ]
     
     #-----< TeleserviceCode >-----#
-    TeleserviceCode = OCT_STR(name='TeleserviceCode', mode=MODE_TYPE)
+    TeleserviceCode = OCT_STR(name=u'TeleserviceCode', mode=MODE_TYPE)
     TeleserviceCode._const_sz = ASN1Set(rv=[1], rr=[], ev=None, er=[])
     
     #-----< allTeleservices >-----#
-    allTeleservices = OCT_STR(name='allTeleservices', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-TS-Code', 'TeleserviceCode')))
+    allTeleservices = OCT_STR(name=u'allTeleservices', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-TS-Code', 'TeleserviceCode')))
     allTeleservices._val = b'\x00'
     
     #-----< allSpeechTransmissionServices >-----#
-    allSpeechTransmissionServices = OCT_STR(name='allSpeechTransmissionServices', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-TS-Code', 'TeleserviceCode')))
+    allSpeechTransmissionServices = OCT_STR(name=u'allSpeechTransmissionServices', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-TS-Code', 'TeleserviceCode')))
     allSpeechTransmissionServices._val = b'\x10'
     
     #-----< telephony >-----#
-    telephony = OCT_STR(name='telephony', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-TS-Code', 'TeleserviceCode')))
+    telephony = OCT_STR(name=u'telephony', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-TS-Code', 'TeleserviceCode')))
     telephony._val = b'\x11'
     
     #-----< emergencyCalls >-----#
-    emergencyCalls = OCT_STR(name='emergencyCalls', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-TS-Code', 'TeleserviceCode')))
+    emergencyCalls = OCT_STR(name=u'emergencyCalls', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-TS-Code', 'TeleserviceCode')))
     emergencyCalls._val = b'\x12'
     
     #-----< allShortMessageServices >-----#
-    allShortMessageServices = OCT_STR(name='allShortMessageServices', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-TS-Code', 'TeleserviceCode')))
+    allShortMessageServices = OCT_STR(name=u'allShortMessageServices', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-TS-Code', 'TeleserviceCode')))
     allShortMessageServices._val = b' '
     
     #-----< shortMessageMT-PP >-----#
-    shortMessageMT_PP = OCT_STR(name='shortMessageMT-PP', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-TS-Code', 'TeleserviceCode')))
+    shortMessageMT_PP = OCT_STR(name=u'shortMessageMT-PP', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-TS-Code', 'TeleserviceCode')))
     shortMessageMT_PP._val = b'!'
     
     #-----< shortMessageMO-PP >-----#
-    shortMessageMO_PP = OCT_STR(name='shortMessageMO-PP', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-TS-Code', 'TeleserviceCode')))
+    shortMessageMO_PP = OCT_STR(name=u'shortMessageMO-PP', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-TS-Code', 'TeleserviceCode')))
     shortMessageMO_PP._val = b'"'
     
     #-----< allFacsimileTransmissionServices >-----#
-    allFacsimileTransmissionServices = OCT_STR(name='allFacsimileTransmissionServices', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-TS-Code', 'TeleserviceCode')))
+    allFacsimileTransmissionServices = OCT_STR(name=u'allFacsimileTransmissionServices', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-TS-Code', 'TeleserviceCode')))
     allFacsimileTransmissionServices._val = b'`'
     
     #-----< facsimileGroup3AndAlterSpeech >-----#
-    facsimileGroup3AndAlterSpeech = OCT_STR(name='facsimileGroup3AndAlterSpeech', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-TS-Code', 'TeleserviceCode')))
+    facsimileGroup3AndAlterSpeech = OCT_STR(name=u'facsimileGroup3AndAlterSpeech', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-TS-Code', 'TeleserviceCode')))
     facsimileGroup3AndAlterSpeech._val = b'a'
     
     #-----< automaticFacsimileGroup3 >-----#
-    automaticFacsimileGroup3 = OCT_STR(name='automaticFacsimileGroup3', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-TS-Code', 'TeleserviceCode')))
+    automaticFacsimileGroup3 = OCT_STR(name=u'automaticFacsimileGroup3', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-TS-Code', 'TeleserviceCode')))
     automaticFacsimileGroup3._val = b'b'
     
     #-----< facsimileGroup4 >-----#
-    facsimileGroup4 = OCT_STR(name='facsimileGroup4', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-TS-Code', 'TeleserviceCode')))
+    facsimileGroup4 = OCT_STR(name=u'facsimileGroup4', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-TS-Code', 'TeleserviceCode')))
     facsimileGroup4._val = b'c'
     
     #-----< allDataTeleservices >-----#
-    allDataTeleservices = OCT_STR(name='allDataTeleservices', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-TS-Code', 'TeleserviceCode')))
+    allDataTeleservices = OCT_STR(name=u'allDataTeleservices', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-TS-Code', 'TeleserviceCode')))
     allDataTeleservices._val = b'p'
     
     #-----< allTeleservices-ExeptSMS >-----#
-    allTeleservices_ExeptSMS = OCT_STR(name='allTeleservices-ExeptSMS', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-TS-Code', 'TeleserviceCode')))
+    allTeleservices_ExeptSMS = OCT_STR(name=u'allTeleservices-ExeptSMS', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-TS-Code', 'TeleserviceCode')))
     allTeleservices_ExeptSMS._val = b'\x80'
     
     #-----< allPLMN-specificTS >-----#
-    allPLMN_specificTS = OCT_STR(name='allPLMN-specificTS', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-TS-Code', 'TeleserviceCode')))
+    allPLMN_specificTS = OCT_STR(name=u'allPLMN-specificTS', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-TS-Code', 'TeleserviceCode')))
     allPLMN_specificTS._val = b'\xd0'
     
     #-----< plmn-specificTS-1 >-----#
-    plmn_specificTS_1 = OCT_STR(name='plmn-specificTS-1', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-TS-Code', 'TeleserviceCode')))
+    plmn_specificTS_1 = OCT_STR(name=u'plmn-specificTS-1', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-TS-Code', 'TeleserviceCode')))
     plmn_specificTS_1._val = b'\xd1'
     
     #-----< plmn-specificTS-2 >-----#
-    plmn_specificTS_2 = OCT_STR(name='plmn-specificTS-2', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-TS-Code', 'TeleserviceCode')))
+    plmn_specificTS_2 = OCT_STR(name=u'plmn-specificTS-2', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-TS-Code', 'TeleserviceCode')))
     plmn_specificTS_2._val = b'\xd2'
     
     #-----< plmn-specificTS-3 >-----#
-    plmn_specificTS_3 = OCT_STR(name='plmn-specificTS-3', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-TS-Code', 'TeleserviceCode')))
+    plmn_specificTS_3 = OCT_STR(name=u'plmn-specificTS-3', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-TS-Code', 'TeleserviceCode')))
     plmn_specificTS_3._val = b'\xd3'
     
     #-----< plmn-specificTS-4 >-----#
-    plmn_specificTS_4 = OCT_STR(name='plmn-specificTS-4', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-TS-Code', 'TeleserviceCode')))
+    plmn_specificTS_4 = OCT_STR(name=u'plmn-specificTS-4', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-TS-Code', 'TeleserviceCode')))
     plmn_specificTS_4._val = b'\xd4'
     
     #-----< plmn-specificTS-5 >-----#
-    plmn_specificTS_5 = OCT_STR(name='plmn-specificTS-5', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-TS-Code', 'TeleserviceCode')))
+    plmn_specificTS_5 = OCT_STR(name=u'plmn-specificTS-5', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-TS-Code', 'TeleserviceCode')))
     plmn_specificTS_5._val = b'\xd5'
     
     #-----< plmn-specificTS-6 >-----#
-    plmn_specificTS_6 = OCT_STR(name='plmn-specificTS-6', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-TS-Code', 'TeleserviceCode')))
+    plmn_specificTS_6 = OCT_STR(name=u'plmn-specificTS-6', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-TS-Code', 'TeleserviceCode')))
     plmn_specificTS_6._val = b'\xd6'
     
     #-----< plmn-specificTS-7 >-----#
-    plmn_specificTS_7 = OCT_STR(name='plmn-specificTS-7', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-TS-Code', 'TeleserviceCode')))
+    plmn_specificTS_7 = OCT_STR(name=u'plmn-specificTS-7', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-TS-Code', 'TeleserviceCode')))
     plmn_specificTS_7._val = b'\xd7'
     
     #-----< plmn-specificTS-8 >-----#
-    plmn_specificTS_8 = OCT_STR(name='plmn-specificTS-8', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-TS-Code', 'TeleserviceCode')))
+    plmn_specificTS_8 = OCT_STR(name=u'plmn-specificTS-8', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-TS-Code', 'TeleserviceCode')))
     plmn_specificTS_8._val = b'\xd8'
     
     #-----< plmn-specificTS-9 >-----#
-    plmn_specificTS_9 = OCT_STR(name='plmn-specificTS-9', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-TS-Code', 'TeleserviceCode')))
+    plmn_specificTS_9 = OCT_STR(name=u'plmn-specificTS-9', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-TS-Code', 'TeleserviceCode')))
     plmn_specificTS_9._val = b'\xd9'
     
     #-----< plmn-specificTS-A >-----#
-    plmn_specificTS_A = OCT_STR(name='plmn-specificTS-A', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-TS-Code', 'TeleserviceCode')))
+    plmn_specificTS_A = OCT_STR(name=u'plmn-specificTS-A', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-TS-Code', 'TeleserviceCode')))
     plmn_specificTS_A._val = b'\xda'
     
     #-----< plmn-specificTS-B >-----#
-    plmn_specificTS_B = OCT_STR(name='plmn-specificTS-B', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-TS-Code', 'TeleserviceCode')))
+    plmn_specificTS_B = OCT_STR(name=u'plmn-specificTS-B', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-TS-Code', 'TeleserviceCode')))
     plmn_specificTS_B._val = b'\xdb'
     
     #-----< plmn-specificTS-C >-----#
-    plmn_specificTS_C = OCT_STR(name='plmn-specificTS-C', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-TS-Code', 'TeleserviceCode')))
+    plmn_specificTS_C = OCT_STR(name=u'plmn-specificTS-C', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-TS-Code', 'TeleserviceCode')))
     plmn_specificTS_C._val = b'\xdc'
     
     #-----< plmn-specificTS-D >-----#
-    plmn_specificTS_D = OCT_STR(name='plmn-specificTS-D', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-TS-Code', 'TeleserviceCode')))
+    plmn_specificTS_D = OCT_STR(name=u'plmn-specificTS-D', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-TS-Code', 'TeleserviceCode')))
     plmn_specificTS_D._val = b'\xdd'
     
     #-----< plmn-specificTS-E >-----#
-    plmn_specificTS_E = OCT_STR(name='plmn-specificTS-E', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-TS-Code', 'TeleserviceCode')))
+    plmn_specificTS_E = OCT_STR(name=u'plmn-specificTS-E', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-TS-Code', 'TeleserviceCode')))
     plmn_specificTS_E._val = b'\xde'
     
     #-----< plmn-specificTS-F >-----#
-    plmn_specificTS_F = OCT_STR(name='plmn-specificTS-F', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-TS-Code', 'TeleserviceCode')))
+    plmn_specificTS_F = OCT_STR(name=u'plmn-specificTS-F', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-TS-Code', 'TeleserviceCode')))
     plmn_specificTS_F._val = b'\xdf'
     
     _all_ = [
@@ -2819,98 +2819,98 @@ class MAPv2_TS_Code:
 
 class MAPv2_SS_DataTypes:
 
-    _name_  = 'MAPv2-SS-DataTypes'
+    _name_  = u'MAPv2-SS-DataTypes'
     _oid_   = [0, 4, 0, 0, 1, 3, 14, 2]
     
     _obj_ = [
-        'RegisterSS-Arg',
-        'NoReplyConditionTime',
-        'SS-Info',
-        'ForwardingInfo',
-        'ForwardingFeatureList',
-        'ForwardingFeature',
-        'SS-Status',
-        'ForwardingOptions',
-        'CallBarringInfo',
-        'CallBarringFeatureList',
-        'CallBarringFeature',
-        'CUG-Info',
-        'CUG-SubscriptionList',
-        'CUG-Subscription',
-        'CUG-Index',
-        'CUG-Interlock',
-        'IntraCUG-Options',
-        'maxNumOfCUG',
-        'CUG-FeatureList',
-        'CUG-Feature',
-        'InterCUG-Restrictions',
-        'SS-Data',
-        'SS-SubscriptionOption',
-        'CliRestrictionOption',
-        'OverrideCategory',
-        'SS-ForBS-Code',
-        'Cli-RestrictionInfo',
-        'InterrogateSS-Res',
-        'SS-UserData',
-        'USSD-Arg',
-        'USSD-Res',
-        'USSD-DataCodingScheme',
-        'USSD-String',
-        'maxUSSD-StringLength',
-        'Password',
-        'GuidanceInfo',
-        'BeginSubscriberActivityArg',
-        'SS-List',
-        'maxNumOfSS',
-        'SS-InfoList',
-        'ForwardingData',
+        u'RegisterSS-Arg',
+        u'NoReplyConditionTime',
+        u'SS-Info',
+        u'ForwardingInfo',
+        u'ForwardingFeatureList',
+        u'ForwardingFeature',
+        u'SS-Status',
+        u'ForwardingOptions',
+        u'CallBarringInfo',
+        u'CallBarringFeatureList',
+        u'CallBarringFeature',
+        u'CUG-Info',
+        u'CUG-SubscriptionList',
+        u'CUG-Subscription',
+        u'CUG-Index',
+        u'CUG-Interlock',
+        u'IntraCUG-Options',
+        u'maxNumOfCUG',
+        u'CUG-FeatureList',
+        u'CUG-Feature',
+        u'InterCUG-Restrictions',
+        u'SS-Data',
+        u'SS-SubscriptionOption',
+        u'CliRestrictionOption',
+        u'OverrideCategory',
+        u'SS-ForBS-Code',
+        u'Cli-RestrictionInfo',
+        u'InterrogateSS-Res',
+        u'SS-UserData',
+        u'USSD-Arg',
+        u'USSD-Res',
+        u'USSD-DataCodingScheme',
+        u'USSD-String',
+        u'maxUSSD-StringLength',
+        u'Password',
+        u'GuidanceInfo',
+        u'BeginSubscriberActivityArg',
+        u'SS-List',
+        u'maxNumOfSS',
+        u'SS-InfoList',
+        u'ForwardingData',
         ]
     _type_ = [
-        'RegisterSS-Arg',
-        'NoReplyConditionTime',
-        'SS-Info',
-        'ForwardingInfo',
-        'ForwardingFeatureList',
-        'ForwardingFeature',
-        'SS-Status',
-        'ForwardingOptions',
-        'CallBarringInfo',
-        'CallBarringFeatureList',
-        'CallBarringFeature',
-        'CUG-Info',
-        'CUG-SubscriptionList',
-        'CUG-Subscription',
-        'CUG-Index',
-        'CUG-Interlock',
-        'IntraCUG-Options',
-        'CUG-FeatureList',
-        'CUG-Feature',
-        'InterCUG-Restrictions',
-        'SS-Data',
-        'SS-SubscriptionOption',
-        'CliRestrictionOption',
-        'OverrideCategory',
-        'SS-ForBS-Code',
-        'Cli-RestrictionInfo',
-        'InterrogateSS-Res',
-        'SS-UserData',
-        'USSD-Arg',
-        'USSD-Res',
-        'USSD-DataCodingScheme',
-        'USSD-String',
-        'Password',
-        'GuidanceInfo',
-        'BeginSubscriberActivityArg',
-        'SS-List',
-        'SS-InfoList',
-        'ForwardingData',
+        u'RegisterSS-Arg',
+        u'NoReplyConditionTime',
+        u'SS-Info',
+        u'ForwardingInfo',
+        u'ForwardingFeatureList',
+        u'ForwardingFeature',
+        u'SS-Status',
+        u'ForwardingOptions',
+        u'CallBarringInfo',
+        u'CallBarringFeatureList',
+        u'CallBarringFeature',
+        u'CUG-Info',
+        u'CUG-SubscriptionList',
+        u'CUG-Subscription',
+        u'CUG-Index',
+        u'CUG-Interlock',
+        u'IntraCUG-Options',
+        u'CUG-FeatureList',
+        u'CUG-Feature',
+        u'InterCUG-Restrictions',
+        u'SS-Data',
+        u'SS-SubscriptionOption',
+        u'CliRestrictionOption',
+        u'OverrideCategory',
+        u'SS-ForBS-Code',
+        u'Cli-RestrictionInfo',
+        u'InterrogateSS-Res',
+        u'SS-UserData',
+        u'USSD-Arg',
+        u'USSD-Res',
+        u'USSD-DataCodingScheme',
+        u'USSD-String',
+        u'Password',
+        u'GuidanceInfo',
+        u'BeginSubscriberActivityArg',
+        u'SS-List',
+        u'SS-InfoList',
+        u'ForwardingData',
         ]
     _set_ = [
         ]
     _val_ = [
-        'maxNumOfCUG',
-        'maxUSSD-StringLength',
-        'maxNumOfSS',
+        u'maxNumOfCUG',
+        u'maxUSSD-StringLength',
+        u'maxNumOfSS',
         ]
     _class_ = [
         ]
@@ -2918,327 +2918,327 @@ class MAPv2_SS_DataTypes:
         ]
     
     #-----< RegisterSS-Arg >-----#
-    RegisterSS_Arg = SEQ(name='RegisterSS-Arg', mode=MODE_TYPE)
-    _RegisterSS_Arg_ss_Code = OCT_STR(name='ss-Code', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SS-Code', 'SS-Code')))
-    _RegisterSS_Arg_basicService = CHOICE(name='basicService', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'BasicServiceCode')), opt=True)
-    _RegisterSS_Arg_forwardedToNumber = OCT_STR(name='forwardedToNumber', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'AddressString')), opt=True)
-    _RegisterSS_Arg_forwardedToSubaddress = OCT_STR(name='forwardedToSubaddress', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'ISDN-SubaddressString')), opt=True)
-    _RegisterSS_Arg_noReplyConditionTime = INT(name='noReplyConditionTime', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-SS-DataTypes', 'NoReplyConditionTime')), opt=True)
+    RegisterSS_Arg = SEQ(name=u'RegisterSS-Arg', mode=MODE_TYPE)
+    _RegisterSS_Arg_ss_Code = OCT_STR(name=u'ss-Code', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SS-Code', 'SS-Code')))
+    _RegisterSS_Arg_basicService = CHOICE(name=u'basicService', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'BasicServiceCode')), opt=True)
+    _RegisterSS_Arg_forwardedToNumber = OCT_STR(name=u'forwardedToNumber', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'AddressString')), opt=True)
+    _RegisterSS_Arg_forwardedToSubaddress = OCT_STR(name=u'forwardedToSubaddress', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'ISDN-SubaddressString')), opt=True)
+    _RegisterSS_Arg_noReplyConditionTime = INT(name=u'noReplyConditionTime', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-SS-DataTypes', 'NoReplyConditionTime')), opt=True)
     RegisterSS_Arg._cont = ASN1Dict([
-        ('ss-Code', _RegisterSS_Arg_ss_Code),
-        ('basicService', _RegisterSS_Arg_basicService),
-        ('forwardedToNumber', _RegisterSS_Arg_forwardedToNumber),
-        ('forwardedToSubaddress', _RegisterSS_Arg_forwardedToSubaddress),
-        ('noReplyConditionTime', _RegisterSS_Arg_noReplyConditionTime),
+        (u'ss-Code', _RegisterSS_Arg_ss_Code),
+        (u'basicService', _RegisterSS_Arg_basicService),
+        (u'forwardedToNumber', _RegisterSS_Arg_forwardedToNumber),
+        (u'forwardedToSubaddress', _RegisterSS_Arg_forwardedToSubaddress),
+        (u'noReplyConditionTime', _RegisterSS_Arg_noReplyConditionTime),
         ])
     RegisterSS_Arg._ext = []
     
     #-----< NoReplyConditionTime >-----#
-    NoReplyConditionTime = INT(name='NoReplyConditionTime', mode=MODE_TYPE)
+    NoReplyConditionTime = INT(name=u'NoReplyConditionTime', mode=MODE_TYPE)
     NoReplyConditionTime._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=5, ub=30)], ev=None, er=[])
     
     #-----< SS-Info >-----#
-    SS_Info = CHOICE(name='SS-Info', mode=MODE_TYPE)
-    _SS_Info_forwardingInfo = SEQ(name='forwardingInfo', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-SS-DataTypes', 'ForwardingInfo')))
-    _SS_Info_callBarringInfo = SEQ(name='callBarringInfo', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-SS-DataTypes', 'CallBarringInfo')))
-    _SS_Info_cug_Info = SEQ(name='cug-Info', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-SS-DataTypes', 'CUG-Info')))
-    _SS_Info_ss_Data = SEQ(name='ss-Data', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-SS-DataTypes', 'SS-Data')))
+    SS_Info = CHOICE(name=u'SS-Info', mode=MODE_TYPE)
+    _SS_Info_forwardingInfo = SEQ(name=u'forwardingInfo', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-SS-DataTypes', 'ForwardingInfo')))
+    _SS_Info_callBarringInfo = SEQ(name=u'callBarringInfo', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-SS-DataTypes', 'CallBarringInfo')))
+    _SS_Info_cug_Info = SEQ(name=u'cug-Info', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-SS-DataTypes', 'CUG-Info')))
+    _SS_Info_ss_Data = SEQ(name=u'ss-Data', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-SS-DataTypes', 'SS-Data')))
     SS_Info._cont = ASN1Dict([
-        ('forwardingInfo', _SS_Info_forwardingInfo),
-        ('callBarringInfo', _SS_Info_callBarringInfo),
-        ('cug-Info', _SS_Info_cug_Info),
-        ('ss-Data', _SS_Info_ss_Data),
+        (u'forwardingInfo', _SS_Info_forwardingInfo),
+        (u'callBarringInfo', _SS_Info_callBarringInfo),
+        (u'cug-Info', _SS_Info_cug_Info),
+        (u'ss-Data', _SS_Info_ss_Data),
         ])
     SS_Info._ext = None
     
     #-----< ForwardingInfo >-----#
-    ForwardingInfo = SEQ(name='ForwardingInfo', mode=MODE_TYPE)
-    _ForwardingInfo_ss_Code = OCT_STR(name='ss-Code', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SS-Code', 'SS-Code')), opt=True)
-    _ForwardingInfo_forwardingFeatureList = SEQ_OF(name='forwardingFeatureList', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SS-DataTypes', 'ForwardingFeatureList')))
+    ForwardingInfo = SEQ(name=u'ForwardingInfo', mode=MODE_TYPE)
+    _ForwardingInfo_ss_Code = OCT_STR(name=u'ss-Code', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SS-Code', 'SS-Code')), opt=True)
+    _ForwardingInfo_forwardingFeatureList = SEQ_OF(name=u'forwardingFeatureList', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SS-DataTypes', 'ForwardingFeatureList')))
     ForwardingInfo._cont = ASN1Dict([
-        ('ss-Code', _ForwardingInfo_ss_Code),
-        ('forwardingFeatureList', _ForwardingInfo_forwardingFeatureList),
+        (u'ss-Code', _ForwardingInfo_ss_Code),
+        (u'forwardingFeatureList', _ForwardingInfo_forwardingFeatureList),
         ])
     ForwardingInfo._ext = []
     
     #-----< ForwardingFeatureList >-----#
-    ForwardingFeatureList = SEQ_OF(name='ForwardingFeatureList', mode=MODE_TYPE)
+    ForwardingFeatureList = SEQ_OF(name=u'ForwardingFeatureList', mode=MODE_TYPE)
     _ForwardingFeatureList__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SS-DataTypes', 'ForwardingFeature')))
     ForwardingFeatureList._cont = _ForwardingFeatureList__item_
     ForwardingFeatureList._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=13)], ev=None, er=[])
     
     #-----< ForwardingFeature >-----#
-    ForwardingFeature = SEQ(name='ForwardingFeature', mode=MODE_TYPE)
-    _ForwardingFeature_basicService = CHOICE(name='basicService', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'BasicServiceCode')), opt=True)
-    _ForwardingFeature_ss_Status = OCT_STR(name='ss-Status', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-SS-DataTypes', 'SS-Status')), opt=True)
-    _ForwardingFeature_forwardedToNumber = OCT_STR(name='forwardedToNumber', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'ISDN-AddressString')), opt=True)
-    _ForwardingFeature_forwardedToSubaddress = OCT_STR(name='forwardedToSubaddress', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'ISDN-SubaddressString')), opt=True)
-    _ForwardingFeature_forwardingOptions = OCT_STR(name='forwardingOptions', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-SS-DataTypes', 'ForwardingOptions')), opt=True)
-    _ForwardingFeature_noReplyConditionTime = INT(name='noReplyConditionTime', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-SS-DataTypes', 'NoReplyConditionTime')), opt=True)
+    ForwardingFeature = SEQ(name=u'ForwardingFeature', mode=MODE_TYPE)
+    _ForwardingFeature_basicService = CHOICE(name=u'basicService', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'BasicServiceCode')), opt=True)
+    _ForwardingFeature_ss_Status = OCT_STR(name=u'ss-Status', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-SS-DataTypes', 'SS-Status')), opt=True)
+    _ForwardingFeature_forwardedToNumber = OCT_STR(name=u'forwardedToNumber', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'ISDN-AddressString')), opt=True)
+    _ForwardingFeature_forwardedToSubaddress = OCT_STR(name=u'forwardedToSubaddress', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'ISDN-SubaddressString')), opt=True)
+    _ForwardingFeature_forwardingOptions = OCT_STR(name=u'forwardingOptions', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-SS-DataTypes', 'ForwardingOptions')), opt=True)
+    _ForwardingFeature_noReplyConditionTime = INT(name=u'noReplyConditionTime', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-SS-DataTypes', 'NoReplyConditionTime')), opt=True)
     ForwardingFeature._cont = ASN1Dict([
-        ('basicService', _ForwardingFeature_basicService),
-        ('ss-Status', _ForwardingFeature_ss_Status),
-        ('forwardedToNumber', _ForwardingFeature_forwardedToNumber),
-        ('forwardedToSubaddress', _ForwardingFeature_forwardedToSubaddress),
-        ('forwardingOptions', _ForwardingFeature_forwardingOptions),
-        ('noReplyConditionTime', _ForwardingFeature_noReplyConditionTime),
+        (u'basicService', _ForwardingFeature_basicService),
+        (u'ss-Status', _ForwardingFeature_ss_Status),
+        (u'forwardedToNumber', _ForwardingFeature_forwardedToNumber),
+        (u'forwardedToSubaddress', _ForwardingFeature_forwardedToSubaddress),
+        (u'forwardingOptions', _ForwardingFeature_forwardingOptions),
+        (u'noReplyConditionTime', _ForwardingFeature_noReplyConditionTime),
         ])
     ForwardingFeature._ext = []
     
     #-----< SS-Status >-----#
-    SS_Status = OCT_STR(name='SS-Status', mode=MODE_TYPE)
+    SS_Status = OCT_STR(name=u'SS-Status', mode=MODE_TYPE)
     SS_Status._const_sz = ASN1Set(rv=[1], rr=[], ev=None, er=[])
     
     #-----< ForwardingOptions >-----#
-    ForwardingOptions = OCT_STR(name='ForwardingOptions', mode=MODE_TYPE)
+    ForwardingOptions = OCT_STR(name=u'ForwardingOptions', mode=MODE_TYPE)
     ForwardingOptions._const_sz = ASN1Set(rv=[1], rr=[], ev=None, er=[])
     
     #-----< CallBarringInfo >-----#
-    CallBarringInfo = SEQ(name='CallBarringInfo', mode=MODE_TYPE)
-    _CallBarringInfo_ss_Code = OCT_STR(name='ss-Code', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SS-Code', 'SS-Code')), opt=True)
-    _CallBarringInfo_callBarringFeatureList = SEQ_OF(name='callBarringFeatureList', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SS-DataTypes', 'CallBarringFeatureList')))
+    CallBarringInfo = SEQ(name=u'CallBarringInfo', mode=MODE_TYPE)
+    _CallBarringInfo_ss_Code = OCT_STR(name=u'ss-Code', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SS-Code', 'SS-Code')), opt=True)
+    _CallBarringInfo_callBarringFeatureList = SEQ_OF(name=u'callBarringFeatureList', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SS-DataTypes', 'CallBarringFeatureList')))
     CallBarringInfo._cont = ASN1Dict([
-        ('ss-Code', _CallBarringInfo_ss_Code),
-        ('callBarringFeatureList', _CallBarringInfo_callBarringFeatureList),
+        (u'ss-Code', _CallBarringInfo_ss_Code),
+        (u'callBarringFeatureList', _CallBarringInfo_callBarringFeatureList),
         ])
     CallBarringInfo._ext = []
     
     #-----< CallBarringFeatureList >-----#
-    CallBarringFeatureList = SEQ_OF(name='CallBarringFeatureList', mode=MODE_TYPE)
+    CallBarringFeatureList = SEQ_OF(name=u'CallBarringFeatureList', mode=MODE_TYPE)
     _CallBarringFeatureList__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SS-DataTypes', 'CallBarringFeature')))
     CallBarringFeatureList._cont = _CallBarringFeatureList__item_
     CallBarringFeatureList._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=13)], ev=None, er=[])
     
     #-----< CallBarringFeature >-----#
-    CallBarringFeature = SEQ(name='CallBarringFeature', mode=MODE_TYPE)
-    _CallBarringFeature_basicService = CHOICE(name='basicService', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'BasicServiceCode')), opt=True)
-    _CallBarringFeature_ss_Status = OCT_STR(name='ss-Status', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-SS-DataTypes', 'SS-Status')), opt=True)
+    CallBarringFeature = SEQ(name=u'CallBarringFeature', mode=MODE_TYPE)
+    _CallBarringFeature_basicService = CHOICE(name=u'basicService', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'BasicServiceCode')), opt=True)
+    _CallBarringFeature_ss_Status = OCT_STR(name=u'ss-Status', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-SS-DataTypes', 'SS-Status')), opt=True)
     CallBarringFeature._cont = ASN1Dict([
-        ('basicService', _CallBarringFeature_basicService),
-        ('ss-Status', _CallBarringFeature_ss_Status),
+        (u'basicService', _CallBarringFeature_basicService),
+        (u'ss-Status', _CallBarringFeature_ss_Status),
         ])
     CallBarringFeature._ext = []
     
     #-----< CUG-Info >-----#
-    CUG_Info = SEQ(name='CUG-Info', mode=MODE_TYPE)
-    _CUG_Info_cug_SubscriptionList = SEQ_OF(name='cug-SubscriptionList', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SS-DataTypes', 'CUG-SubscriptionList')))
-    _CUG_Info_cug_FeatureList = SEQ_OF(name='cug-FeatureList', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SS-DataTypes', 'CUG-FeatureList')), opt=True)
+    CUG_Info = SEQ(name=u'CUG-Info', mode=MODE_TYPE)
+    _CUG_Info_cug_SubscriptionList = SEQ_OF(name=u'cug-SubscriptionList', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SS-DataTypes', 'CUG-SubscriptionList')))
+    _CUG_Info_cug_FeatureList = SEQ_OF(name=u'cug-FeatureList', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SS-DataTypes', 'CUG-FeatureList')), opt=True)
     CUG_Info._cont = ASN1Dict([
-        ('cug-SubscriptionList', _CUG_Info_cug_SubscriptionList),
-        ('cug-FeatureList', _CUG_Info_cug_FeatureList),
+        (u'cug-SubscriptionList', _CUG_Info_cug_SubscriptionList),
+        (u'cug-FeatureList', _CUG_Info_cug_FeatureList),
         ])
     CUG_Info._ext = []
     
     #-----< CUG-SubscriptionList >-----#
-    CUG_SubscriptionList = SEQ_OF(name='CUG-SubscriptionList', mode=MODE_TYPE)
+    CUG_SubscriptionList = SEQ_OF(name=u'CUG-SubscriptionList', mode=MODE_TYPE)
     _CUG_SubscriptionList__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SS-DataTypes', 'CUG-Subscription')))
     CUG_SubscriptionList._cont = _CUG_SubscriptionList__item_
     CUG_SubscriptionList._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=10)], ev=None, er=[])
     
     #-----< CUG-Subscription >-----#
-    CUG_Subscription = SEQ(name='CUG-Subscription', mode=MODE_TYPE)
-    _CUG_Subscription_cug_Index = INT(name='cug-Index', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SS-DataTypes', 'CUG-Index')))
-    _CUG_Subscription_cug_Interlock = OCT_STR(name='cug-Interlock', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SS-DataTypes', 'CUG-Interlock')))
-    _CUG_Subscription_intraCUG_Options = ENUM(name='intraCUG-Options', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SS-DataTypes', 'IntraCUG-Options')))
-    _CUG_Subscription_basicServiceGroupList = SEQ_OF(name='basicServiceGroupList', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'BasicServiceGroupList')), opt=True)
+    CUG_Subscription = SEQ(name=u'CUG-Subscription', mode=MODE_TYPE)
+    _CUG_Subscription_cug_Index = INT(name=u'cug-Index', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SS-DataTypes', 'CUG-Index')))
+    _CUG_Subscription_cug_Interlock = OCT_STR(name=u'cug-Interlock', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SS-DataTypes', 'CUG-Interlock')))
+    _CUG_Subscription_intraCUG_Options = ENUM(name=u'intraCUG-Options', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SS-DataTypes', 'IntraCUG-Options')))
+    _CUG_Subscription_basicServiceGroupList = SEQ_OF(name=u'basicServiceGroupList', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'BasicServiceGroupList')), opt=True)
     CUG_Subscription._cont = ASN1Dict([
-        ('cug-Index', _CUG_Subscription_cug_Index),
-        ('cug-Interlock', _CUG_Subscription_cug_Interlock),
-        ('intraCUG-Options', _CUG_Subscription_intraCUG_Options),
-        ('basicServiceGroupList', _CUG_Subscription_basicServiceGroupList),
+        (u'cug-Index', _CUG_Subscription_cug_Index),
+        (u'cug-Interlock', _CUG_Subscription_cug_Interlock),
+        (u'intraCUG-Options', _CUG_Subscription_intraCUG_Options),
+        (u'basicServiceGroupList', _CUG_Subscription_basicServiceGroupList),
         ])
     CUG_Subscription._ext = []
     
     #-----< CUG-Index >-----#
-    CUG_Index = INT(name='CUG-Index', mode=MODE_TYPE)
+    CUG_Index = INT(name=u'CUG-Index', mode=MODE_TYPE)
     CUG_Index._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=32767)], ev=None, er=[])
     
     #-----< CUG-Interlock >-----#
-    CUG_Interlock = OCT_STR(name='CUG-Interlock', mode=MODE_TYPE)
+    CUG_Interlock = OCT_STR(name=u'CUG-Interlock', mode=MODE_TYPE)
     CUG_Interlock._const_sz = ASN1Set(rv=[4], rr=[], ev=None, er=[])
     
     #-----< IntraCUG-Options >-----#
-    IntraCUG_Options = ENUM(name='IntraCUG-Options', mode=MODE_TYPE)
-    IntraCUG_Options._cont = ASN1Dict([('noCUG-Restrictions', 0), ('cugIC-CallBarred', 1), ('cugOG-CallBarred', 2)])
+    IntraCUG_Options = ENUM(name=u'IntraCUG-Options', mode=MODE_TYPE)
+    IntraCUG_Options._cont = ASN1Dict([(u'noCUG-Restrictions', 0), (u'cugIC-CallBarred', 1), (u'cugOG-CallBarred', 2)])
     IntraCUG_Options._ext = None
     
     #-----< maxNumOfCUG >-----#
-    maxNumOfCUG = INT(name='maxNumOfCUG', mode=MODE_VALUE)
+    maxNumOfCUG = INT(name=u'maxNumOfCUG', mode=MODE_VALUE)
     maxNumOfCUG._val = 10
     
     #-----< CUG-FeatureList >-----#
-    CUG_FeatureList = SEQ_OF(name='CUG-FeatureList', mode=MODE_TYPE)
+    CUG_FeatureList = SEQ_OF(name=u'CUG-FeatureList', mode=MODE_TYPE)
     _CUG_FeatureList__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SS-DataTypes', 'CUG-Feature')))
     CUG_FeatureList._cont = _CUG_FeatureList__item_
     CUG_FeatureList._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=13)], ev=None, er=[])
     
     #-----< CUG-Feature >-----#
-    CUG_Feature = SEQ(name='CUG-Feature', mode=MODE_TYPE)
-    _CUG_Feature_basicService = CHOICE(name='basicService', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'BasicServiceCode')), opt=True)
-    _CUG_Feature_preferentialCUG_Indicator = INT(name='preferentialCUG-Indicator', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SS-DataTypes', 'CUG-Index')), opt=True)
-    _CUG_Feature_interCUG_Restrictions = OCT_STR(name='interCUG-Restrictions', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SS-DataTypes', 'InterCUG-Restrictions')))
+    CUG_Feature = SEQ(name=u'CUG-Feature', mode=MODE_TYPE)
+    _CUG_Feature_basicService = CHOICE(name=u'basicService', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'BasicServiceCode')), opt=True)
+    _CUG_Feature_preferentialCUG_Indicator = INT(name=u'preferentialCUG-Indicator', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SS-DataTypes', 'CUG-Index')), opt=True)
+    _CUG_Feature_interCUG_Restrictions = OCT_STR(name=u'interCUG-Restrictions', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SS-DataTypes', 'InterCUG-Restrictions')))
     CUG_Feature._cont = ASN1Dict([
-        ('basicService', _CUG_Feature_basicService),
-        ('preferentialCUG-Indicator', _CUG_Feature_preferentialCUG_Indicator),
-        ('interCUG-Restrictions', _CUG_Feature_interCUG_Restrictions),
+        (u'basicService', _CUG_Feature_basicService),
+        (u'preferentialCUG-Indicator', _CUG_Feature_preferentialCUG_Indicator),
+        (u'interCUG-Restrictions', _CUG_Feature_interCUG_Restrictions),
         ])
     CUG_Feature._ext = []
     
     #-----< InterCUG-Restrictions >-----#
-    InterCUG_Restrictions = OCT_STR(name='InterCUG-Restrictions', mode=MODE_TYPE)
+    InterCUG_Restrictions = OCT_STR(name=u'InterCUG-Restrictions', mode=MODE_TYPE)
     InterCUG_Restrictions._const_sz = ASN1Set(rv=[1], rr=[], ev=None, er=[])
     
     #-----< SS-Data >-----#
-    SS_Data = SEQ(name='SS-Data', mode=MODE_TYPE)
-    _SS_Data_ss_Code = OCT_STR(name='ss-Code', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SS-Code', 'SS-Code')), opt=True)
-    _SS_Data_ss_Status = OCT_STR(name='ss-Status', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-SS-DataTypes', 'SS-Status')), opt=True)
-    _SS_Data_ss_SubscriptionOption = CHOICE(name='ss-SubscriptionOption', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SS-DataTypes', 'SS-SubscriptionOption')), opt=True)
-    _SS_Data_basicServiceGroupList = SEQ_OF(name='basicServiceGroupList', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'BasicServiceGroupList')), opt=True)
+    SS_Data = SEQ(name=u'SS-Data', mode=MODE_TYPE)
+    _SS_Data_ss_Code = OCT_STR(name=u'ss-Code', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SS-Code', 'SS-Code')), opt=True)
+    _SS_Data_ss_Status = OCT_STR(name=u'ss-Status', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-SS-DataTypes', 'SS-Status')), opt=True)
+    _SS_Data_ss_SubscriptionOption = CHOICE(name=u'ss-SubscriptionOption', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SS-DataTypes', 'SS-SubscriptionOption')), opt=True)
+    _SS_Data_basicServiceGroupList = SEQ_OF(name=u'basicServiceGroupList', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'BasicServiceGroupList')), opt=True)
     SS_Data._cont = ASN1Dict([
-        ('ss-Code', _SS_Data_ss_Code),
-        ('ss-Status', _SS_Data_ss_Status),
-        ('ss-SubscriptionOption', _SS_Data_ss_SubscriptionOption),
-        ('basicServiceGroupList', _SS_Data_basicServiceGroupList),
+        (u'ss-Code', _SS_Data_ss_Code),
+        (u'ss-Status', _SS_Data_ss_Status),
+        (u'ss-SubscriptionOption', _SS_Data_ss_SubscriptionOption),
+        (u'basicServiceGroupList', _SS_Data_basicServiceGroupList),
         ])
     SS_Data._ext = []
     
     #-----< SS-SubscriptionOption >-----#
-    SS_SubscriptionOption = CHOICE(name='SS-SubscriptionOption', mode=MODE_TYPE)
-    _SS_SubscriptionOption_cliRestrictionOption = ENUM(name='cliRestrictionOption', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-SS-DataTypes', 'CliRestrictionOption')))
-    _SS_SubscriptionOption_overrideCategory = ENUM(name='overrideCategory', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-SS-DataTypes', 'OverrideCategory')))
+    SS_SubscriptionOption = CHOICE(name=u'SS-SubscriptionOption', mode=MODE_TYPE)
+    _SS_SubscriptionOption_cliRestrictionOption = ENUM(name=u'cliRestrictionOption', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-SS-DataTypes', 'CliRestrictionOption')))
+    _SS_SubscriptionOption_overrideCategory = ENUM(name=u'overrideCategory', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-SS-DataTypes', 'OverrideCategory')))
     SS_SubscriptionOption._cont = ASN1Dict([
-        ('cliRestrictionOption', _SS_SubscriptionOption_cliRestrictionOption),
-        ('overrideCategory', _SS_SubscriptionOption_overrideCategory),
+        (u'cliRestrictionOption', _SS_SubscriptionOption_cliRestrictionOption),
+        (u'overrideCategory', _SS_SubscriptionOption_overrideCategory),
         ])
     SS_SubscriptionOption._ext = None
     
     #-----< CliRestrictionOption >-----#
-    CliRestrictionOption = ENUM(name='CliRestrictionOption', mode=MODE_TYPE)
-    CliRestrictionOption._cont = ASN1Dict([('permanent', 0), ('temporaryDefaultRestricted', 1), ('temporaryDefaultAllowed', 2)])
+    CliRestrictionOption = ENUM(name=u'CliRestrictionOption', mode=MODE_TYPE)
+    CliRestrictionOption._cont = ASN1Dict([(u'permanent', 0), (u'temporaryDefaultRestricted', 1), (u'temporaryDefaultAllowed', 2)])
     CliRestrictionOption._ext = None
     
     #-----< OverrideCategory >-----#
-    OverrideCategory = ENUM(name='OverrideCategory', mode=MODE_TYPE)
-    OverrideCategory._cont = ASN1Dict([('overrideEnabled', 0), ('overrideDisabled', 1)])
+    OverrideCategory = ENUM(name=u'OverrideCategory', mode=MODE_TYPE)
+    OverrideCategory._cont = ASN1Dict([(u'overrideEnabled', 0), (u'overrideDisabled', 1)])
     OverrideCategory._ext = None
     
     #-----< SS-ForBS-Code >-----#
-    SS_ForBS_Code = SEQ(name='SS-ForBS-Code', mode=MODE_TYPE)
-    _SS_ForBS_Code_ss_Code = OCT_STR(name='ss-Code', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SS-Code', 'SS-Code')))
-    _SS_ForBS_Code_basicService = CHOICE(name='basicService', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'BasicServiceCode')), opt=True)
+    SS_ForBS_Code = SEQ(name=u'SS-ForBS-Code', mode=MODE_TYPE)
+    _SS_ForBS_Code_ss_Code = OCT_STR(name=u'ss-Code', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SS-Code', 'SS-Code')))
+    _SS_ForBS_Code_basicService = CHOICE(name=u'basicService', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'BasicServiceCode')), opt=True)
     SS_ForBS_Code._cont = ASN1Dict([
-        ('ss-Code', _SS_ForBS_Code_ss_Code),
-        ('basicService', _SS_ForBS_Code_basicService),
+        (u'ss-Code', _SS_ForBS_Code_ss_Code),
+        (u'basicService', _SS_ForBS_Code_basicService),
         ])
     SS_ForBS_Code._ext = []
     
     #-----< Cli-RestrictionInfo >-----#
-    Cli_RestrictionInfo = SEQ(name='Cli-RestrictionInfo', mode=MODE_TYPE)
-    _Cli_RestrictionInfo_ss_Status = OCT_STR(name='ss-Status', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SS-DataTypes', 'SS-Status')))
-    _Cli_RestrictionInfo_cliRestrictionOption = ENUM(name='cliRestrictionOption', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SS-DataTypes', 'CliRestrictionOption')), opt=True)
+    Cli_RestrictionInfo = SEQ(name=u'Cli-RestrictionInfo', mode=MODE_TYPE)
+    _Cli_RestrictionInfo_ss_Status = OCT_STR(name=u'ss-Status', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SS-DataTypes', 'SS-Status')))
+    _Cli_RestrictionInfo_cliRestrictionOption = ENUM(name=u'cliRestrictionOption', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SS-DataTypes', 'CliRestrictionOption')), opt=True)
     Cli_RestrictionInfo._cont = ASN1Dict([
-        ('ss-Status', _Cli_RestrictionInfo_ss_Status),
-        ('cliRestrictionOption', _Cli_RestrictionInfo_cliRestrictionOption),
+        (u'ss-Status', _Cli_RestrictionInfo_ss_Status),
+        (u'cliRestrictionOption', _Cli_RestrictionInfo_cliRestrictionOption),
         ])
     Cli_RestrictionInfo._ext = []
     
     #-----< InterrogateSS-Res >-----#
-    InterrogateSS_Res = CHOICE(name='InterrogateSS-Res', mode=MODE_TYPE)
-    _InterrogateSS_Res_ss_Status = OCT_STR(name='ss-Status', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-SS-DataTypes', 'SS-Status')))
-    _InterrogateSS_Res_forwardedToNumber = OCT_STR(name='forwardedToNumber', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'ISDN-AddressString')))
-    _InterrogateSS_Res_basicServiceGroupList = SEQ_OF(name='basicServiceGroupList', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'BasicServiceGroupList')))
-    _InterrogateSS_Res_forwardingFeatureList = SEQ_OF(name='forwardingFeatureList', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-SS-DataTypes', 'ForwardingFeatureList')))
-    _InterrogateSS_Res_cli_RestrictionInfo = SEQ(name='cli-RestrictionInfo', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-SS-DataTypes', 'Cli-RestrictionInfo')))
+    InterrogateSS_Res = CHOICE(name=u'InterrogateSS-Res', mode=MODE_TYPE)
+    _InterrogateSS_Res_ss_Status = OCT_STR(name=u'ss-Status', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-SS-DataTypes', 'SS-Status')))
+    _InterrogateSS_Res_forwardedToNumber = OCT_STR(name=u'forwardedToNumber', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'ISDN-AddressString')))
+    _InterrogateSS_Res_basicServiceGroupList = SEQ_OF(name=u'basicServiceGroupList', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'BasicServiceGroupList')))
+    _InterrogateSS_Res_forwardingFeatureList = SEQ_OF(name=u'forwardingFeatureList', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-SS-DataTypes', 'ForwardingFeatureList')))
+    _InterrogateSS_Res_cli_RestrictionInfo = SEQ(name=u'cli-RestrictionInfo', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-SS-DataTypes', 'Cli-RestrictionInfo')))
     InterrogateSS_Res._cont = ASN1Dict([
-        ('ss-Status', _InterrogateSS_Res_ss_Status),
-        ('forwardedToNumber', _InterrogateSS_Res_forwardedToNumber),
-        ('basicServiceGroupList', _InterrogateSS_Res_basicServiceGroupList),
-        ('forwardingFeatureList', _InterrogateSS_Res_forwardingFeatureList),
-        ('cli-RestrictionInfo', _InterrogateSS_Res_cli_RestrictionInfo),
+        (u'ss-Status', _InterrogateSS_Res_ss_Status),
+        (u'forwardedToNumber', _InterrogateSS_Res_forwardedToNumber),
+        (u'basicServiceGroupList', _InterrogateSS_Res_basicServiceGroupList),
+        (u'forwardingFeatureList', _InterrogateSS_Res_forwardingFeatureList),
+        (u'cli-RestrictionInfo', _InterrogateSS_Res_cli_RestrictionInfo),
         ])
     InterrogateSS_Res._ext = None
     
     #-----< SS-UserData >-----#
-    SS_UserData = STR_IA5(name='SS-UserData', mode=MODE_TYPE)
+    SS_UserData = STR_IA5(name=u'SS-UserData', mode=MODE_TYPE)
     SS_UserData._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=200)], ev=None, er=[])
     
     #-----< USSD-Arg >-----#
-    USSD_Arg = SEQ(name='USSD-Arg', mode=MODE_TYPE)
-    _USSD_Arg_ussd_DataCodingScheme = OCT_STR(name='ussd-DataCodingScheme', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SS-DataTypes', 'USSD-DataCodingScheme')))
-    _USSD_Arg_ussd_String = OCT_STR(name='ussd-String', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SS-DataTypes', 'USSD-String')))
+    USSD_Arg = SEQ(name=u'USSD-Arg', mode=MODE_TYPE)
+    _USSD_Arg_ussd_DataCodingScheme = OCT_STR(name=u'ussd-DataCodingScheme', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SS-DataTypes', 'USSD-DataCodingScheme')))
+    _USSD_Arg_ussd_String = OCT_STR(name=u'ussd-String', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SS-DataTypes', 'USSD-String')))
     USSD_Arg._cont = ASN1Dict([
-        ('ussd-DataCodingScheme', _USSD_Arg_ussd_DataCodingScheme),
-        ('ussd-String', _USSD_Arg_ussd_String),
+        (u'ussd-DataCodingScheme', _USSD_Arg_ussd_DataCodingScheme),
+        (u'ussd-String', _USSD_Arg_ussd_String),
         ])
     USSD_Arg._ext = []
     
     #-----< USSD-Res >-----#
-    USSD_Res = SEQ(name='USSD-Res', mode=MODE_TYPE)
-    _USSD_Res_ussd_DataCodingScheme = OCT_STR(name='ussd-DataCodingScheme', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SS-DataTypes', 'USSD-DataCodingScheme')))
-    _USSD_Res_ussd_String = OCT_STR(name='ussd-String', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SS-DataTypes', 'USSD-String')))
+    USSD_Res = SEQ(name=u'USSD-Res', mode=MODE_TYPE)
+    _USSD_Res_ussd_DataCodingScheme = OCT_STR(name=u'ussd-DataCodingScheme', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SS-DataTypes', 'USSD-DataCodingScheme')))
+    _USSD_Res_ussd_String = OCT_STR(name=u'ussd-String', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SS-DataTypes', 'USSD-String')))
     USSD_Res._cont = ASN1Dict([
-        ('ussd-DataCodingScheme', _USSD_Res_ussd_DataCodingScheme),
-        ('ussd-String', _USSD_Res_ussd_String),
+        (u'ussd-DataCodingScheme', _USSD_Res_ussd_DataCodingScheme),
+        (u'ussd-String', _USSD_Res_ussd_String),
         ])
     USSD_Res._ext = []
     
     #-----< USSD-DataCodingScheme >-----#
-    USSD_DataCodingScheme = OCT_STR(name='USSD-DataCodingScheme', mode=MODE_TYPE)
+    USSD_DataCodingScheme = OCT_STR(name=u'USSD-DataCodingScheme', mode=MODE_TYPE)
     USSD_DataCodingScheme._const_sz = ASN1Set(rv=[1], rr=[], ev=None, er=[])
     
     #-----< USSD-String >-----#
-    USSD_String = OCT_STR(name='USSD-String', mode=MODE_TYPE)
+    USSD_String = OCT_STR(name=u'USSD-String', mode=MODE_TYPE)
     USSD_String._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=160)], ev=None, er=[])
     
     #-----< maxUSSD-StringLength >-----#
-    maxUSSD_StringLength = INT(name='maxUSSD-StringLength', mode=MODE_VALUE)
+    maxUSSD_StringLength = INT(name=u'maxUSSD-StringLength', mode=MODE_VALUE)
     maxUSSD_StringLength._val = 160
     
     #-----< Password >-----#
-    Password = STR_NUM(name='Password', mode=MODE_TYPE)
+    Password = STR_NUM(name=u'Password', mode=MODE_TYPE)
     Password._const_sz = ASN1Set(rv=[4], rr=[], ev=None, er=[])
-    Password._const_alpha = ASN1Set(rv=['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'], rr=[], ev=None, er=[])
+    Password._const_alpha = ASN1Set(rv=[u'0', u'1', u'2', u'3', u'4', u'5', u'6', u'7', u'8', u'9'], rr=[], ev=None, er=[])
     
     #-----< GuidanceInfo >-----#
-    GuidanceInfo = ENUM(name='GuidanceInfo', mode=MODE_TYPE)
-    GuidanceInfo._cont = ASN1Dict([('enterPW', 0), ('enterNewPW', 1), ('enterNewPW-Again', 2), ('badPW-TryAgain', 3), ('badPW-FormatTryAgain', 4)])
+    GuidanceInfo = ENUM(name=u'GuidanceInfo', mode=MODE_TYPE)
+    GuidanceInfo._cont = ASN1Dict([(u'enterPW', 0), (u'enterNewPW', 1), (u'enterNewPW-Again', 2), (u'badPW-TryAgain', 3), (u'badPW-FormatTryAgain', 4)])
     GuidanceInfo._ext = None
     
     #-----< BeginSubscriberActivityArg >-----#
-    BeginSubscriberActivityArg = SEQ(name='BeginSubscriberActivityArg', mode=MODE_TYPE)
-    _BeginSubscriberActivityArg_imsi = OCT_STR(name='imsi', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'IMSI')))
-    _BeginSubscriberActivityArg_originatingEntityNumber = OCT_STR(name='originatingEntityNumber', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'ISDN-AddressString')))
+    BeginSubscriberActivityArg = SEQ(name=u'BeginSubscriberActivityArg', mode=MODE_TYPE)
+    _BeginSubscriberActivityArg_imsi = OCT_STR(name=u'imsi', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'IMSI')))
+    _BeginSubscriberActivityArg_originatingEntityNumber = OCT_STR(name=u'originatingEntityNumber', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'ISDN-AddressString')))
     BeginSubscriberActivityArg._cont = ASN1Dict([
-        ('imsi', _BeginSubscriberActivityArg_imsi),
-        ('originatingEntityNumber', _BeginSubscriberActivityArg_originatingEntityNumber),
+        (u'imsi', _BeginSubscriberActivityArg_imsi),
+        (u'originatingEntityNumber', _BeginSubscriberActivityArg_originatingEntityNumber),
         ])
     BeginSubscriberActivityArg._ext = None
     
     #-----< SS-List >-----#
-    SS_List = SEQ_OF(name='SS-List', mode=MODE_TYPE)
+    SS_List = SEQ_OF(name=u'SS-List', mode=MODE_TYPE)
     _SS_List__item_ = OCT_STR(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SS-Code', 'SS-Code')))
     SS_List._cont = _SS_List__item_
     SS_List._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=30)], ev=None, er=[])
     
     #-----< maxNumOfSS >-----#
-    maxNumOfSS = INT(name='maxNumOfSS', mode=MODE_VALUE)
+    maxNumOfSS = INT(name=u'maxNumOfSS', mode=MODE_VALUE)
     maxNumOfSS._val = 30
     
     #-----< SS-InfoList >-----#
-    SS_InfoList = SEQ_OF(name='SS-InfoList', mode=MODE_TYPE)
+    SS_InfoList = SEQ_OF(name=u'SS-InfoList', mode=MODE_TYPE)
     _SS_InfoList__item_ = CHOICE(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SS-DataTypes', 'SS-Info')))
     SS_InfoList._cont = _SS_InfoList__item_
     SS_InfoList._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=30)], ev=None, er=[])
     
     #-----< ForwardingData >-----#
-    ForwardingData = SEQ(name='ForwardingData', mode=MODE_TYPE)
-    _ForwardingData_forwardedToNumber = OCT_STR(name='forwardedToNumber', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'ISDN-AddressString')), opt=True)
-    _ForwardingData_forwardedToSubaddress = OCT_STR(name='forwardedToSubaddress', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'ISDN-SubaddressString')), opt=True)
-    _ForwardingData_forwardingOptions = OCT_STR(name='forwardingOptions', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-SS-DataTypes', 'ForwardingOptions')), opt=True)
+    ForwardingData = SEQ(name=u'ForwardingData', mode=MODE_TYPE)
+    _ForwardingData_forwardedToNumber = OCT_STR(name=u'forwardedToNumber', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'ISDN-AddressString')), opt=True)
+    _ForwardingData_forwardedToSubaddress = OCT_STR(name=u'forwardedToSubaddress', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'ISDN-SubaddressString')), opt=True)
+    _ForwardingData_forwardingOptions = OCT_STR(name=u'forwardingOptions', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-SS-DataTypes', 'ForwardingOptions')), opt=True)
     ForwardingData._cont = ASN1Dict([
-        ('forwardedToNumber', _ForwardingData_forwardedToNumber),
-        ('forwardedToSubaddress', _ForwardingData_forwardedToSubaddress),
-        ('forwardingOptions', _ForwardingData_forwardingOptions),
+        (u'forwardedToNumber', _ForwardingData_forwardedToNumber),
+        (u'forwardedToSubaddress', _ForwardingData_forwardedToSubaddress),
+        (u'forwardingOptions', _ForwardingData_forwardingOptions),
         ])
     ForwardingData._ext = []
     
@@ -3348,38 +3348,38 @@ class MAPv2_SS_DataTypes:
 
 class MAPv2_SM_DataTypes:
 
-    _name_  = 'MAPv2-SM-DataTypes'
+    _name_  = u'MAPv2-SM-DataTypes'
     _oid_   = [0, 4, 0, 0, 1, 3, 16, 2]
     
     _obj_ = [
-        'RoutingInfoForSM-Arg',
-        'RoutingInfoForSM-Res',
-        'LocationInfoWithLMSI',
-        'ForwardSM-Arg',
-        'SM-RP-DA',
-        'SM-RP-OA',
-        'ReportSM-DeliveryStatusArg',
-        'SM-DeliveryOutcome',
-        'AlertServiceCentreArg',
-        'InformServiceCentreArg',
-        'MW-Status',
-        'ReadyForSM-Arg',
-        'AlertReason',
+        u'RoutingInfoForSM-Arg',
+        u'RoutingInfoForSM-Res',
+        u'LocationInfoWithLMSI',
+        u'ForwardSM-Arg',
+        u'SM-RP-DA',
+        u'SM-RP-OA',
+        u'ReportSM-DeliveryStatusArg',
+        u'SM-DeliveryOutcome',
+        u'AlertServiceCentreArg',
+        u'InformServiceCentreArg',
+        u'MW-Status',
+        u'ReadyForSM-Arg',
+        u'AlertReason',
         ]
     _type_ = [
-        'RoutingInfoForSM-Arg',
-        'RoutingInfoForSM-Res',
-        'LocationInfoWithLMSI',
-        'ForwardSM-Arg',
-        'SM-RP-DA',
-        'SM-RP-OA',
-        'ReportSM-DeliveryStatusArg',
-        'SM-DeliveryOutcome',
-        'AlertServiceCentreArg',
-        'InformServiceCentreArg',
-        'MW-Status',
-        'ReadyForSM-Arg',
-        'AlertReason',
+        u'RoutingInfoForSM-Arg',
+        u'RoutingInfoForSM-Res',
+        u'LocationInfoWithLMSI',
+        u'ForwardSM-Arg',
+        u'SM-RP-DA',
+        u'SM-RP-OA',
+        u'ReportSM-DeliveryStatusArg',
+        u'SM-DeliveryOutcome',
+        u'AlertServiceCentreArg',
+        u'InformServiceCentreArg',
+        u'MW-Status',
+        u'ReadyForSM-Arg',
+        u'AlertReason',
         ]
     _set_ = [
         ]
@@ -3391,138 +3391,138 @@ class MAPv2_SM_DataTypes:
         ]
     
     #-----< RoutingInfoForSM-Arg >-----#
-    RoutingInfoForSM_Arg = SEQ(name='RoutingInfoForSM-Arg', mode=MODE_TYPE)
-    _RoutingInfoForSM_Arg_msisdn = OCT_STR(name='msisdn', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'ISDN-AddressString')))
-    _RoutingInfoForSM_Arg_sm_RP_PRI = BOOL(name='sm-RP-PRI', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _RoutingInfoForSM_Arg_serviceCentreAddress = OCT_STR(name='serviceCentreAddress', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'AddressString')))
-    _RoutingInfoForSM_Arg_teleservice = OCT_STR(name='teleservice', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-TS-Code', 'TeleserviceCode')), opt=True)
+    RoutingInfoForSM_Arg = SEQ(name=u'RoutingInfoForSM-Arg', mode=MODE_TYPE)
+    _RoutingInfoForSM_Arg_msisdn = OCT_STR(name=u'msisdn', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'ISDN-AddressString')))
+    _RoutingInfoForSM_Arg_sm_RP_PRI = BOOL(name=u'sm-RP-PRI', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _RoutingInfoForSM_Arg_serviceCentreAddress = OCT_STR(name=u'serviceCentreAddress', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'AddressString')))
+    _RoutingInfoForSM_Arg_teleservice = OCT_STR(name=u'teleservice', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-TS-Code', 'TeleserviceCode')), opt=True)
     RoutingInfoForSM_Arg._cont = ASN1Dict([
-        ('msisdn', _RoutingInfoForSM_Arg_msisdn),
-        ('sm-RP-PRI', _RoutingInfoForSM_Arg_sm_RP_PRI),
-        ('serviceCentreAddress', _RoutingInfoForSM_Arg_serviceCentreAddress),
-        ('teleservice', _RoutingInfoForSM_Arg_teleservice),
+        (u'msisdn', _RoutingInfoForSM_Arg_msisdn),
+        (u'sm-RP-PRI', _RoutingInfoForSM_Arg_sm_RP_PRI),
+        (u'serviceCentreAddress', _RoutingInfoForSM_Arg_serviceCentreAddress),
+        (u'teleservice', _RoutingInfoForSM_Arg_teleservice),
         ])
     RoutingInfoForSM_Arg._ext = []
     
     #-----< RoutingInfoForSM-Res >-----#
-    RoutingInfoForSM_Res = SEQ(name='RoutingInfoForSM-Res', mode=MODE_TYPE)
-    _RoutingInfoForSM_Res_imsi = OCT_STR(name='imsi', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'IMSI')))
-    _RoutingInfoForSM_Res_locationInfoWithLMSI = SEQ(name='locationInfoWithLMSI', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-SM-DataTypes', 'LocationInfoWithLMSI')))
-    _RoutingInfoForSM_Res_mwd_Set = BOOL(name='mwd-Set', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    RoutingInfoForSM_Res = SEQ(name=u'RoutingInfoForSM-Res', mode=MODE_TYPE)
+    _RoutingInfoForSM_Res_imsi = OCT_STR(name=u'imsi', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'IMSI')))
+    _RoutingInfoForSM_Res_locationInfoWithLMSI = SEQ(name=u'locationInfoWithLMSI', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-SM-DataTypes', 'LocationInfoWithLMSI')))
+    _RoutingInfoForSM_Res_mwd_Set = BOOL(name=u'mwd-Set', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     RoutingInfoForSM_Res._cont = ASN1Dict([
-        ('imsi', _RoutingInfoForSM_Res_imsi),
-        ('locationInfoWithLMSI', _RoutingInfoForSM_Res_locationInfoWithLMSI),
-        ('mwd-Set', _RoutingInfoForSM_Res_mwd_Set),
+        (u'imsi', _RoutingInfoForSM_Res_imsi),
+        (u'locationInfoWithLMSI', _RoutingInfoForSM_Res_locationInfoWithLMSI),
+        (u'mwd-Set', _RoutingInfoForSM_Res_mwd_Set),
         ])
     RoutingInfoForSM_Res._ext = []
     
     #-----< LocationInfoWithLMSI >-----#
-    LocationInfoWithLMSI = SEQ(name='LocationInfoWithLMSI', mode=MODE_TYPE)
-    _LocationInfoWithLMSI_locationInfo = CHOICE(name='locationInfo', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'LocationInfo')))
-    _LocationInfoWithLMSI_lmsi = OCT_STR(name='lmsi', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'LMSI')), opt=True)
+    LocationInfoWithLMSI = SEQ(name=u'LocationInfoWithLMSI', mode=MODE_TYPE)
+    _LocationInfoWithLMSI_locationInfo = CHOICE(name=u'locationInfo', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'LocationInfo')))
+    _LocationInfoWithLMSI_lmsi = OCT_STR(name=u'lmsi', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'LMSI')), opt=True)
     LocationInfoWithLMSI._cont = ASN1Dict([
-        ('locationInfo', _LocationInfoWithLMSI_locationInfo),
-        ('lmsi', _LocationInfoWithLMSI_lmsi),
+        (u'locationInfo', _LocationInfoWithLMSI_locationInfo),
+        (u'lmsi', _LocationInfoWithLMSI_lmsi),
         ])
     LocationInfoWithLMSI._ext = []
     
     #-----< ForwardSM-Arg >-----#
-    ForwardSM_Arg = SEQ(name='ForwardSM-Arg', mode=MODE_TYPE)
-    _ForwardSM_Arg_sm_RP_DA = CHOICE(name='sm-RP-DA', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SM-DataTypes', 'SM-RP-DA')))
-    _ForwardSM_Arg_sm_RP_OA = CHOICE(name='sm-RP-OA', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SM-DataTypes', 'SM-RP-OA')))
-    _ForwardSM_Arg_sm_RP_UI = OCT_STR(name='sm-RP-UI', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'SignalInfo')))
-    _ForwardSM_Arg_moreMessagesToSend = NULL(name='moreMessagesToSend', mode=MODE_TYPE, opt=True)
+    ForwardSM_Arg = SEQ(name=u'ForwardSM-Arg', mode=MODE_TYPE)
+    _ForwardSM_Arg_sm_RP_DA = CHOICE(name=u'sm-RP-DA', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SM-DataTypes', 'SM-RP-DA')))
+    _ForwardSM_Arg_sm_RP_OA = CHOICE(name=u'sm-RP-OA', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SM-DataTypes', 'SM-RP-OA')))
+    _ForwardSM_Arg_sm_RP_UI = OCT_STR(name=u'sm-RP-UI', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'SignalInfo')))
+    _ForwardSM_Arg_moreMessagesToSend = NULL(name=u'moreMessagesToSend', mode=MODE_TYPE, opt=True)
     ForwardSM_Arg._cont = ASN1Dict([
-        ('sm-RP-DA', _ForwardSM_Arg_sm_RP_DA),
-        ('sm-RP-OA', _ForwardSM_Arg_sm_RP_OA),
-        ('sm-RP-UI', _ForwardSM_Arg_sm_RP_UI),
-        ('moreMessagesToSend', _ForwardSM_Arg_moreMessagesToSend),
+        (u'sm-RP-DA', _ForwardSM_Arg_sm_RP_DA),
+        (u'sm-RP-OA', _ForwardSM_Arg_sm_RP_OA),
+        (u'sm-RP-UI', _ForwardSM_Arg_sm_RP_UI),
+        (u'moreMessagesToSend', _ForwardSM_Arg_moreMessagesToSend),
         ])
     ForwardSM_Arg._ext = []
     
     #-----< SM-RP-DA >-----#
-    SM_RP_DA = CHOICE(name='SM-RP-DA', mode=MODE_TYPE)
-    _SM_RP_DA_imsi = OCT_STR(name='imsi', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'IMSI')))
-    _SM_RP_DA_lmsi = OCT_STR(name='lmsi', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'LMSI')))
-    _SM_RP_DA_roamingNumber = OCT_STR(name='roamingNumber', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'ISDN-AddressString')))
-    _SM_RP_DA_serviceCentreAddressDA = OCT_STR(name='serviceCentreAddressDA', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'AddressString')))
-    _SM_RP_DA_noSM_RP_DA = NULL(name='noSM-RP-DA', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    SM_RP_DA = CHOICE(name=u'SM-RP-DA', mode=MODE_TYPE)
+    _SM_RP_DA_imsi = OCT_STR(name=u'imsi', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'IMSI')))
+    _SM_RP_DA_lmsi = OCT_STR(name=u'lmsi', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'LMSI')))
+    _SM_RP_DA_roamingNumber = OCT_STR(name=u'roamingNumber', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'ISDN-AddressString')))
+    _SM_RP_DA_serviceCentreAddressDA = OCT_STR(name=u'serviceCentreAddressDA', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'AddressString')))
+    _SM_RP_DA_noSM_RP_DA = NULL(name=u'noSM-RP-DA', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     SM_RP_DA._cont = ASN1Dict([
-        ('imsi', _SM_RP_DA_imsi),
-        ('lmsi', _SM_RP_DA_lmsi),
-        ('roamingNumber', _SM_RP_DA_roamingNumber),
-        ('serviceCentreAddressDA', _SM_RP_DA_serviceCentreAddressDA),
-        ('noSM-RP-DA', _SM_RP_DA_noSM_RP_DA),
+        (u'imsi', _SM_RP_DA_imsi),
+        (u'lmsi', _SM_RP_DA_lmsi),
+        (u'roamingNumber', _SM_RP_DA_roamingNumber),
+        (u'serviceCentreAddressDA', _SM_RP_DA_serviceCentreAddressDA),
+        (u'noSM-RP-DA', _SM_RP_DA_noSM_RP_DA),
         ])
     SM_RP_DA._ext = None
     
     #-----< SM-RP-OA >-----#
-    SM_RP_OA = CHOICE(name='SM-RP-OA', mode=MODE_TYPE)
-    _SM_RP_OA_msisdn = OCT_STR(name='msisdn', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'ISDN-AddressString')))
-    _SM_RP_OA_serviceCentreAddressOA = OCT_STR(name='serviceCentreAddressOA', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'AddressString')))
-    _SM_RP_OA_noSM_RP_OA = NULL(name='noSM-RP-OA', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    SM_RP_OA = CHOICE(name=u'SM-RP-OA', mode=MODE_TYPE)
+    _SM_RP_OA_msisdn = OCT_STR(name=u'msisdn', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'ISDN-AddressString')))
+    _SM_RP_OA_serviceCentreAddressOA = OCT_STR(name=u'serviceCentreAddressOA', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'AddressString')))
+    _SM_RP_OA_noSM_RP_OA = NULL(name=u'noSM-RP-OA', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     SM_RP_OA._cont = ASN1Dict([
-        ('msisdn', _SM_RP_OA_msisdn),
-        ('serviceCentreAddressOA', _SM_RP_OA_serviceCentreAddressOA),
-        ('noSM-RP-OA', _SM_RP_OA_noSM_RP_OA),
+        (u'msisdn', _SM_RP_OA_msisdn),
+        (u'serviceCentreAddressOA', _SM_RP_OA_serviceCentreAddressOA),
+        (u'noSM-RP-OA', _SM_RP_OA_noSM_RP_OA),
         ])
     SM_RP_OA._ext = None
     
     #-----< ReportSM-DeliveryStatusArg >-----#
-    ReportSM_DeliveryStatusArg = SEQ(name='ReportSM-DeliveryStatusArg', mode=MODE_TYPE)
-    _ReportSM_DeliveryStatusArg_msisdn = OCT_STR(name='msisdn', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'ISDN-AddressString')))
-    _ReportSM_DeliveryStatusArg_serviceCentreAddress = OCT_STR(name='serviceCentreAddress', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'AddressString')))
-    _ReportSM_DeliveryStatusArg_sm_DeliveryOutcome = ENUM(name='sm-DeliveryOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SM-DataTypes', 'SM-DeliveryOutcome')), opt=True)
+    ReportSM_DeliveryStatusArg = SEQ(name=u'ReportSM-DeliveryStatusArg', mode=MODE_TYPE)
+    _ReportSM_DeliveryStatusArg_msisdn = OCT_STR(name=u'msisdn', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'ISDN-AddressString')))
+    _ReportSM_DeliveryStatusArg_serviceCentreAddress = OCT_STR(name=u'serviceCentreAddress', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'AddressString')))
+    _ReportSM_DeliveryStatusArg_sm_DeliveryOutcome = ENUM(name=u'sm-DeliveryOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SM-DataTypes', 'SM-DeliveryOutcome')), opt=True)
     ReportSM_DeliveryStatusArg._cont = ASN1Dict([
-        ('msisdn', _ReportSM_DeliveryStatusArg_msisdn),
-        ('serviceCentreAddress', _ReportSM_DeliveryStatusArg_serviceCentreAddress),
-        ('sm-DeliveryOutcome', _ReportSM_DeliveryStatusArg_sm_DeliveryOutcome),
+        (u'msisdn', _ReportSM_DeliveryStatusArg_msisdn),
+        (u'serviceCentreAddress', _ReportSM_DeliveryStatusArg_serviceCentreAddress),
+        (u'sm-DeliveryOutcome', _ReportSM_DeliveryStatusArg_sm_DeliveryOutcome),
         ])
     ReportSM_DeliveryStatusArg._ext = []
     
     #-----< SM-DeliveryOutcome >-----#
-    SM_DeliveryOutcome = ENUM(name='SM-DeliveryOutcome', mode=MODE_TYPE)
-    SM_DeliveryOutcome._cont = ASN1Dict([('memoryCapacityExceeded', 0), ('absentSubscriber', 1), ('successfulTransfer', 2)])
+    SM_DeliveryOutcome = ENUM(name=u'SM-DeliveryOutcome', mode=MODE_TYPE)
+    SM_DeliveryOutcome._cont = ASN1Dict([(u'memoryCapacityExceeded', 0), (u'absentSubscriber', 1), (u'successfulTransfer', 2)])
     SM_DeliveryOutcome._ext = None
     
     #-----< AlertServiceCentreArg >-----#
-    AlertServiceCentreArg = SEQ(name='AlertServiceCentreArg', mode=MODE_TYPE)
-    _AlertServiceCentreArg_msisdn = OCT_STR(name='msisdn', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'ISDN-AddressString')))
-    _AlertServiceCentreArg_serviceCentreAddress = OCT_STR(name='serviceCentreAddress', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'AddressString')))
+    AlertServiceCentreArg = SEQ(name=u'AlertServiceCentreArg', mode=MODE_TYPE)
+    _AlertServiceCentreArg_msisdn = OCT_STR(name=u'msisdn', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'ISDN-AddressString')))
+    _AlertServiceCentreArg_serviceCentreAddress = OCT_STR(name=u'serviceCentreAddress', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'AddressString')))
     AlertServiceCentreArg._cont = ASN1Dict([
-        ('msisdn', _AlertServiceCentreArg_msisdn),
-        ('serviceCentreAddress', _AlertServiceCentreArg_serviceCentreAddress),
+        (u'msisdn', _AlertServiceCentreArg_msisdn),
+        (u'serviceCentreAddress', _AlertServiceCentreArg_serviceCentreAddress),
         ])
     AlertServiceCentreArg._ext = []
     
     #-----< InformServiceCentreArg >-----#
-    InformServiceCentreArg = SEQ(name='InformServiceCentreArg', mode=MODE_TYPE)
-    _InformServiceCentreArg_storedMSISDN = OCT_STR(name='storedMSISDN', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'ISDN-AddressString')), opt=True)
-    _InformServiceCentreArg_mw_Status = BIT_STR(name='mw-Status', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SM-DataTypes', 'MW-Status')), opt=True)
+    InformServiceCentreArg = SEQ(name=u'InformServiceCentreArg', mode=MODE_TYPE)
+    _InformServiceCentreArg_storedMSISDN = OCT_STR(name=u'storedMSISDN', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'ISDN-AddressString')), opt=True)
+    _InformServiceCentreArg_mw_Status = BIT_STR(name=u'mw-Status', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SM-DataTypes', 'MW-Status')), opt=True)
     InformServiceCentreArg._cont = ASN1Dict([
-        ('storedMSISDN', _InformServiceCentreArg_storedMSISDN),
-        ('mw-Status', _InformServiceCentreArg_mw_Status),
+        (u'storedMSISDN', _InformServiceCentreArg_storedMSISDN),
+        (u'mw-Status', _InformServiceCentreArg_mw_Status),
         ])
     InformServiceCentreArg._ext = []
     
     #-----< MW-Status >-----#
-    MW_Status = BIT_STR(name='MW-Status', mode=MODE_TYPE)
-    MW_Status._cont = ASN1Dict([('sc-AddressNotIncluded', 0), ('mnrf-Set', 1), ('mcef-Set', 2)])
+    MW_Status = BIT_STR(name=u'MW-Status', mode=MODE_TYPE)
+    MW_Status._cont = ASN1Dict([(u'sc-AddressNotIncluded', 0), (u'mnrf-Set', 1), (u'mcef-Set', 2)])
     MW_Status._const_sz = ASN1Set(rv=[6], rr=[], ev=None, er=[])
     
     #-----< ReadyForSM-Arg >-----#
-    ReadyForSM_Arg = SEQ(name='ReadyForSM-Arg', mode=MODE_TYPE)
-    _ReadyForSM_Arg_imsi = OCT_STR(name='imsi', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'IMSI')))
-    _ReadyForSM_Arg_alertReason = ENUM(name='alertReason', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SM-DataTypes', 'AlertReason')))
+    ReadyForSM_Arg = SEQ(name=u'ReadyForSM-Arg', mode=MODE_TYPE)
+    _ReadyForSM_Arg_imsi = OCT_STR(name=u'imsi', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'IMSI')))
+    _ReadyForSM_Arg_alertReason = ENUM(name=u'alertReason', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SM-DataTypes', 'AlertReason')))
     ReadyForSM_Arg._cont = ASN1Dict([
-        ('imsi', _ReadyForSM_Arg_imsi),
-        ('alertReason', _ReadyForSM_Arg_alertReason),
+        (u'imsi', _ReadyForSM_Arg_imsi),
+        (u'alertReason', _ReadyForSM_Arg_alertReason),
         ])
     ReadyForSM_Arg._ext = []
     
     #-----< AlertReason >-----#
-    AlertReason = ENUM(name='AlertReason', mode=MODE_TYPE)
-    AlertReason._cont = ASN1Dict([('ms-Present', 0), ('memoryAvailable', 1)])
+    AlertReason = ENUM(name=u'AlertReason', mode=MODE_TYPE)
+    AlertReason._cont = ASN1Dict([(u'ms-Present', 0), (u'memoryAvailable', 1)])
     AlertReason._ext = None
     
     _all_ = [
@@ -3573,92 +3573,92 @@ class MAPv2_SM_DataTypes:
 
 class MAPv2_ShortMessageServiceOperations:
 
-    _name_  = 'MAPv2-ShortMessageServiceOperations'
+    _name_  = u'MAPv2-ShortMessageServiceOperations'
     _oid_   = []
     
     _obj_ = [
-        'sendRoutingInfoForSM',
-        'forwardSM',
-        'reportSM-DeliveryStatus',
-        'noteSubscriberPresent',
-        'alertServiceCentreWithoutResult',
-        'alertServiceCentre',
-        'informServiceCentre',
-        'readyForSM',
+        u'sendRoutingInfoForSM',
+        u'forwardSM',
+        u'reportSM-DeliveryStatus',
+        u'noteSubscriberPresent',
+        u'alertServiceCentreWithoutResult',
+        u'alertServiceCentre',
+        u'informServiceCentre',
+        u'readyForSM',
         ]
     _type_ = [
         ]
     _set_ = [
         ]
     _val_ = [
-        'sendRoutingInfoForSM',
-        'forwardSM',
-        'reportSM-DeliveryStatus',
-        'noteSubscriberPresent',
-        'alertServiceCentreWithoutResult',
-        'alertServiceCentre',
-        'informServiceCentre',
-        'readyForSM',
+        u'sendRoutingInfoForSM',
+        u'forwardSM',
+        u'reportSM-DeliveryStatus',
+        u'noteSubscriberPresent',
+        u'alertServiceCentreWithoutResult',
+        u'alertServiceCentre',
+        u'informServiceCentre',
+        u'readyForSM',
         ]
     _class_ = [
-        'sendRoutingInfoForSM',
-        'forwardSM',
-        'reportSM-DeliveryStatus',
-        'noteSubscriberPresent',
-        'alertServiceCentreWithoutResult',
-        'alertServiceCentre',
-        'informServiceCentre',
-        'readyForSM',
+        u'sendRoutingInfoForSM',
+        u'forwardSM',
+        u'reportSM-DeliveryStatus',
+        u'noteSubscriberPresent',
+        u'alertServiceCentreWithoutResult',
+        u'alertServiceCentre',
+        u'informServiceCentre',
+        u'readyForSM',
         ]
     _param_ = [
         ]
     
     #-----< sendRoutingInfoForSM >-----#
-    sendRoutingInfoForSM = CLASS(name='sendRoutingInfoForSM', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
-    _sendRoutingInfoForSM_val_ArgumentType = SEQ(name='ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SM-DataTypes', 'RoutingInfoForSM-Arg')))
-    _sendRoutingInfoForSM_val_ResultType = SEQ(name='ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SM-DataTypes', 'RoutingInfoForSM-Res')))
-    __OPERATION_Errors_val_ParameterType_0 = ENUM(name='ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'NetworkResource')))
-    __OPERATION_Errors_val_ParameterType_6 = BOOL(name='ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-Errors', 'Mwd-Set')))
-    __OPERATION_Errors_val_ParameterType_7 = ENUM(name='ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-ER-DataTypes', 'CallBarringCause')))
-    sendRoutingInfoForSM._val = dict([('ArgumentType', _sendRoutingInfoForSM_val_ArgumentType), ('ResultType', _sendRoutingInfoForSM_val_ResultType), ('Errors', ASN1Set(rv=[dict([('ParameterType', __OPERATION_Errors_val_ParameterType_0), ('errorCode', ('local', 34))]), dict([('errorCode', ('local', 35))]), dict([('errorCode', ('local', 36))]), dict([('errorCode', ('local', 21))]), dict([('errorCode', ('local', 1))]), dict([('errorCode', ('local', 11))]), dict([('ParameterType', __OPERATION_Errors_val_ParameterType_6), ('errorCode', ('local', 27))]), dict([('ParameterType', __OPERATION_Errors_val_ParameterType_7), ('errorCode', ('local', 13))])], rr=[], ev=None, er=[])), ('operationCode', ('local', 45))])
+    sendRoutingInfoForSM = CLASS(name=u'sendRoutingInfoForSM', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
+    _sendRoutingInfoForSM_val_ArgumentType = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SM-DataTypes', 'RoutingInfoForSM-Arg')))
+    _sendRoutingInfoForSM_val_ResultType = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SM-DataTypes', 'RoutingInfoForSM-Res')))
+    __OPERATION_Errors_val_ParameterType_0 = ENUM(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'NetworkResource')))
+    __OPERATION_Errors_val_ParameterType_6 = BOOL(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-Errors', 'Mwd-Set')))
+    __OPERATION_Errors_val_ParameterType_7 = ENUM(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-ER-DataTypes', 'CallBarringCause')))
+    sendRoutingInfoForSM._val = dict([(u'ArgumentType', _sendRoutingInfoForSM_val_ArgumentType), (u'ResultType', _sendRoutingInfoForSM_val_ResultType), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'errorCode', (u'local', 35))]), dict([(u'errorCode', (u'local', 36))]), dict([(u'errorCode', (u'local', 21))]), dict([(u'errorCode', (u'local', 1))]), dict([(u'errorCode', (u'local', 11))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_6), (u'errorCode', (u'local', 27))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_7), (u'errorCode', (u'local', 13))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 45))])
     
     #-----< forwardSM >-----#
-    forwardSM = CLASS(name='forwardSM', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
-    _forwardSM_val_ArgumentType = SEQ(name='ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SM-DataTypes', 'ForwardSM-Arg')))
-    __OPERATION_Errors_val_ParameterType_7_0 = BOOL(name='ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-Errors', 'Mwd-Set')))
-    __OPERATION_Errors_val_ParameterType_9 = CHOICE(name='ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-ER-DataTypes', 'SM-DeliveryFailureCause')))
-    forwardSM._val = dict([('ArgumentType', _forwardSM_val_ArgumentType), ('Errors', ASN1Set(rv=[dict([('ParameterType', __OPERATION_Errors_val_ParameterType_0), ('errorCode', ('local', 34))]), dict([('errorCode', ('local', 35))]), dict([('errorCode', ('local', 36))]), dict([('errorCode', ('local', 21))]), dict([('errorCode', ('local', 5))]), dict([('errorCode', ('local', 9))]), dict([('errorCode', ('local', 12))]), dict([('ParameterType', __OPERATION_Errors_val_ParameterType_7_0), ('errorCode', ('local', 27))]), dict([('errorCode', ('local', 31))]), dict([('ParameterType', __OPERATION_Errors_val_ParameterType_9), ('errorCode', ('local', 32))])], rr=[], ev=None, er=[])), ('operationCode', ('local', 46))])
+    forwardSM = CLASS(name=u'forwardSM', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
+    _forwardSM_val_ArgumentType = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SM-DataTypes', 'ForwardSM-Arg')))
+    __OPERATION_Errors_val_ParameterType_7_0 = BOOL(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-Errors', 'Mwd-Set')))
+    __OPERATION_Errors_val_ParameterType_9 = CHOICE(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-ER-DataTypes', 'SM-DeliveryFailureCause')))
+    forwardSM._val = dict([(u'ArgumentType', _forwardSM_val_ArgumentType), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'errorCode', (u'local', 35))]), dict([(u'errorCode', (u'local', 36))]), dict([(u'errorCode', (u'local', 21))]), dict([(u'errorCode', (u'local', 5))]), dict([(u'errorCode', (u'local', 9))]), dict([(u'errorCode', (u'local', 12))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_7_0), (u'errorCode', (u'local', 27))]), dict([(u'errorCode', (u'local', 31))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_9), (u'errorCode', (u'local', 32))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 46))])
     
     #-----< reportSM-DeliveryStatus >-----#
-    reportSM_DeliveryStatus = CLASS(name='reportSM-DeliveryStatus', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
-    _reportSM_DeliveryStatus_val_ArgumentType = SEQ(name='ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SM-DataTypes', 'ReportSM-DeliveryStatusArg')))
-    _reportSM_DeliveryStatus_val_ResultType = OCT_STR(name='ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'ISDN-AddressString')))
-    reportSM_DeliveryStatus._val = dict([('ArgumentType', _reportSM_DeliveryStatus_val_ArgumentType), ('ResultType', _reportSM_DeliveryStatus_val_ResultType), ('Errors', ASN1Set(rv=[dict([('errorCode', ('local', 35))]), dict([('errorCode', ('local', 36))]), dict([('errorCode', ('local', 1))]), dict([('errorCode', ('local', 33))])], rr=[], ev=None, er=[])), ('operationCode', ('local', 47))])
+    reportSM_DeliveryStatus = CLASS(name=u'reportSM-DeliveryStatus', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
+    _reportSM_DeliveryStatus_val_ArgumentType = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SM-DataTypes', 'ReportSM-DeliveryStatusArg')))
+    _reportSM_DeliveryStatus_val_ResultType = OCT_STR(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'ISDN-AddressString')))
+    reportSM_DeliveryStatus._val = dict([(u'ArgumentType', _reportSM_DeliveryStatus_val_ArgumentType), (u'ResultType', _reportSM_DeliveryStatus_val_ResultType), (u'Errors', ASN1Set(rv=[dict([(u'errorCode', (u'local', 35))]), dict([(u'errorCode', (u'local', 36))]), dict([(u'errorCode', (u'local', 1))]), dict([(u'errorCode', (u'local', 33))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 47))])
     
     #-----< noteSubscriberPresent >-----#
-    noteSubscriberPresent = CLASS(name='noteSubscriberPresent', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
-    _noteSubscriberPresent_val_ArgumentType = OCT_STR(name='ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'IMSI')))
-    noteSubscriberPresent._val = dict([('ArgumentType', _noteSubscriberPresent_val_ArgumentType), ('operationCode', ('local', 48))])
+    noteSubscriberPresent = CLASS(name=u'noteSubscriberPresent', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
+    _noteSubscriberPresent_val_ArgumentType = OCT_STR(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'IMSI')))
+    noteSubscriberPresent._val = dict([(u'ArgumentType', _noteSubscriberPresent_val_ArgumentType), (u'operationCode', (u'local', 48))])
     
     #-----< alertServiceCentreWithoutResult >-----#
-    alertServiceCentreWithoutResult = CLASS(name='alertServiceCentreWithoutResult', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
-    _alertServiceCentreWithoutResult_val_ArgumentType = SEQ(name='ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SM-DataTypes', 'AlertServiceCentreArg')))
-    alertServiceCentreWithoutResult._val = dict([('ArgumentType', _alertServiceCentreWithoutResult_val_ArgumentType), ('operationCode', ('local', 49))])
+    alertServiceCentreWithoutResult = CLASS(name=u'alertServiceCentreWithoutResult', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
+    _alertServiceCentreWithoutResult_val_ArgumentType = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SM-DataTypes', 'AlertServiceCentreArg')))
+    alertServiceCentreWithoutResult._val = dict([(u'ArgumentType', _alertServiceCentreWithoutResult_val_ArgumentType), (u'operationCode', (u'local', 49))])
     
     #-----< alertServiceCentre >-----#
-    alertServiceCentre = CLASS(name='alertServiceCentre', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
-    _alertServiceCentre_val_ArgumentType = SEQ(name='ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SM-DataTypes', 'AlertServiceCentreArg')))
-    alertServiceCentre._val = dict([('ArgumentType', _alertServiceCentre_val_ArgumentType), ('Errors', ASN1Set(rv=[dict([('ParameterType', __OPERATION_Errors_val_ParameterType_0), ('errorCode', ('local', 34))]), dict([('errorCode', ('local', 35))]), dict([('errorCode', ('local', 36))])], rr=[], ev=None, er=[])), ('operationCode', ('local', 64))])
+    alertServiceCentre = CLASS(name=u'alertServiceCentre', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
+    _alertServiceCentre_val_ArgumentType = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SM-DataTypes', 'AlertServiceCentreArg')))
+    alertServiceCentre._val = dict([(u'ArgumentType', _alertServiceCentre_val_ArgumentType), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'errorCode', (u'local', 35))]), dict([(u'errorCode', (u'local', 36))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 64))])
     
     #-----< informServiceCentre >-----#
-    informServiceCentre = CLASS(name='informServiceCentre', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
-    _informServiceCentre_val_ArgumentType = SEQ(name='ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SM-DataTypes', 'InformServiceCentreArg')))
-    informServiceCentre._val = dict([('ArgumentType', _informServiceCentre_val_ArgumentType), ('operationCode', ('local', 63))])
+    informServiceCentre = CLASS(name=u'informServiceCentre', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
+    _informServiceCentre_val_ArgumentType = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SM-DataTypes', 'InformServiceCentreArg')))
+    informServiceCentre._val = dict([(u'ArgumentType', _informServiceCentre_val_ArgumentType), (u'operationCode', (u'local', 63))])
     
     #-----< readyForSM >-----#
-    readyForSM = CLASS(name='readyForSM', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
-    _readyForSM_val_ArgumentType = SEQ(name='ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SM-DataTypes', 'ReadyForSM-Arg')))
-    readyForSM._val = dict([('ArgumentType', _readyForSM_val_ArgumentType), ('Errors', ASN1Set(rv=[dict([('errorCode', ('local', 35))]), dict([('errorCode', ('local', 36))]), dict([('errorCode', ('local', 21))]), dict([('errorCode', ('local', 1))])], rr=[], ev=None, er=[])), ('operationCode', ('local', 66))])
+    readyForSM = CLASS(name=u'readyForSM', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
+    _readyForSM_val_ArgumentType = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SM-DataTypes', 'ReadyForSM-Arg')))
+    readyForSM._val = dict([(u'ArgumentType', _readyForSM_val_ArgumentType), (u'Errors', ASN1Set(rv=[dict([(u'errorCode', (u'local', 35))]), dict([(u'errorCode', (u'local', 36))]), dict([(u'errorCode', (u'local', 21))]), dict([(u'errorCode', (u'local', 1))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 66))])
     
     _all_ = [
         sendRoutingInfoForSM,
@@ -3688,114 +3688,114 @@ class MAPv2_ShortMessageServiceOperations:
 
 class MAPv2_BS_Code:
 
-    _name_  = 'MAPv2-BS-Code'
+    _name_  = u'MAPv2-BS-Code'
     _oid_   = [0, 4, 0, 0, 1, 3, 20, 2]
     
     _obj_ = [
-        'BearerServiceCode',
-        'allBearerServices',
-        'allDataCDA-Services',
-        'dataCDA-300bps',
-        'dataCDA-1200bps',
-        'dataCDA-1200-75bps',
-        'dataCDA-2400bps',
-        'dataCDA-4800bps',
-        'dataCDA-9600bps',
-        'allDataCDS-Services',
-        'dataCDS-1200bps',
-        'dataCDS-2400bps',
-        'dataCDS-4800bps',
-        'dataCDS-9600bps',
-        'allPadAccessCA-Services',
-        'padAccessCA-300bps',
-        'padAccessCA-1200bps',
-        'padAccessCA-1200-75bps',
-        'padAccessCA-2400bps',
-        'padAccessCA-4800bps',
-        'padAccessCA-9600bps',
-        'allDataPDS-Services',
-        'dataPDS-2400bps',
-        'dataPDS-4800bps',
-        'dataPDS-9600bps',
-        'allAlternateSpeech-DataCDA',
-        'allAlternateSpeech-DataCDS',
-        'allSpeechFollowedByDataCDA',
-        'allSpeechFollowedByDataCDS',
-        'allDataCircuitAsynchronous',
-        'allAsynchronousServices',
-        'allDataCircuitSynchronous',
-        'allSynchronousServices',
-        'allPLMN-specificBS',
-        'plmn-specificBS-1',
-        'plmn-specificBS-2',
-        'plmn-specificBS-3',
-        'plmn-specificBS-4',
-        'plmn-specificBS-5',
-        'plmn-specificBS-6',
-        'plmn-specificBS-7',
-        'plmn-specificBS-8',
-        'plmn-specificBS-9',
-        'plmn-specificBS-A',
-        'plmn-specificBS-B',
-        'plmn-specificBS-C',
-        'plmn-specificBS-D',
-        'plmn-specificBS-E',
-        'plmn-specificBS-F',
+        u'BearerServiceCode',
+        u'allBearerServices',
+        u'allDataCDA-Services',
+        u'dataCDA-300bps',
+        u'dataCDA-1200bps',
+        u'dataCDA-1200-75bps',
+        u'dataCDA-2400bps',
+        u'dataCDA-4800bps',
+        u'dataCDA-9600bps',
+        u'allDataCDS-Services',
+        u'dataCDS-1200bps',
+        u'dataCDS-2400bps',
+        u'dataCDS-4800bps',
+        u'dataCDS-9600bps',
+        u'allPadAccessCA-Services',
+        u'padAccessCA-300bps',
+        u'padAccessCA-1200bps',
+        u'padAccessCA-1200-75bps',
+        u'padAccessCA-2400bps',
+        u'padAccessCA-4800bps',
+        u'padAccessCA-9600bps',
+        u'allDataPDS-Services',
+        u'dataPDS-2400bps',
+        u'dataPDS-4800bps',
+        u'dataPDS-9600bps',
+        u'allAlternateSpeech-DataCDA',
+        u'allAlternateSpeech-DataCDS',
+        u'allSpeechFollowedByDataCDA',
+        u'allSpeechFollowedByDataCDS',
+        u'allDataCircuitAsynchronous',
+        u'allAsynchronousServices',
+        u'allDataCircuitSynchronous',
+        u'allSynchronousServices',
+        u'allPLMN-specificBS',
+        u'plmn-specificBS-1',
+        u'plmn-specificBS-2',
+        u'plmn-specificBS-3',
+        u'plmn-specificBS-4',
+        u'plmn-specificBS-5',
+        u'plmn-specificBS-6',
+        u'plmn-specificBS-7',
+        u'plmn-specificBS-8',
+        u'plmn-specificBS-9',
+        u'plmn-specificBS-A',
+        u'plmn-specificBS-B',
+        u'plmn-specificBS-C',
+        u'plmn-specificBS-D',
+        u'plmn-specificBS-E',
+        u'plmn-specificBS-F',
         ]
     _type_ = [
-        'BearerServiceCode',
+        u'BearerServiceCode',
         ]
     _set_ = [
         ]
     _val_ = [
-        'allBearerServices',
-        'allDataCDA-Services',
-        'dataCDA-300bps',
-        'dataCDA-1200bps',
-        'dataCDA-1200-75bps',
-        'dataCDA-2400bps',
-        'dataCDA-4800bps',
-        'dataCDA-9600bps',
-        'allDataCDS-Services',
-        'dataCDS-1200bps',
-        'dataCDS-2400bps',
-        'dataCDS-4800bps',
-        'dataCDS-9600bps',
-        'allPadAccessCA-Services',
-        'padAccessCA-300bps',
-        'padAccessCA-1200bps',
-        'padAccessCA-1200-75bps',
-        'padAccessCA-2400bps',
-        'padAccessCA-4800bps',
-        'padAccessCA-9600bps',
-        'allDataPDS-Services',
-        'dataPDS-2400bps',
-        'dataPDS-4800bps',
-        'dataPDS-9600bps',
-        'allAlternateSpeech-DataCDA',
-        'allAlternateSpeech-DataCDS',
-        'allSpeechFollowedByDataCDA',
-        'allSpeechFollowedByDataCDS',
-        'allDataCircuitAsynchronous',
-        'allAsynchronousServices',
-        'allDataCircuitSynchronous',
-        'allSynchronousServices',
-        'allPLMN-specificBS',
-        'plmn-specificBS-1',
-        'plmn-specificBS-2',
-        'plmn-specificBS-3',
-        'plmn-specificBS-4',
-        'plmn-specificBS-5',
-        'plmn-specificBS-6',
-        'plmn-specificBS-7',
-        'plmn-specificBS-8',
-        'plmn-specificBS-9',
-        'plmn-specificBS-A',
-        'plmn-specificBS-B',
-        'plmn-specificBS-C',
-        'plmn-specificBS-D',
-        'plmn-specificBS-E',
-        'plmn-specificBS-F',
+        u'allBearerServices',
+        u'allDataCDA-Services',
+        u'dataCDA-300bps',
+        u'dataCDA-1200bps',
+        u'dataCDA-1200-75bps',
+        u'dataCDA-2400bps',
+        u'dataCDA-4800bps',
+        u'dataCDA-9600bps',
+        u'allDataCDS-Services',
+        u'dataCDS-1200bps',
+        u'dataCDS-2400bps',
+        u'dataCDS-4800bps',
+        u'dataCDS-9600bps',
+        u'allPadAccessCA-Services',
+        u'padAccessCA-300bps',
+        u'padAccessCA-1200bps',
+        u'padAccessCA-1200-75bps',
+        u'padAccessCA-2400bps',
+        u'padAccessCA-4800bps',
+        u'padAccessCA-9600bps',
+        u'allDataPDS-Services',
+        u'dataPDS-2400bps',
+        u'dataPDS-4800bps',
+        u'dataPDS-9600bps',
+        u'allAlternateSpeech-DataCDA',
+        u'allAlternateSpeech-DataCDS',
+        u'allSpeechFollowedByDataCDA',
+        u'allSpeechFollowedByDataCDS',
+        u'allDataCircuitAsynchronous',
+        u'allAsynchronousServices',
+        u'allDataCircuitSynchronous',
+        u'allSynchronousServices',
+        u'allPLMN-specificBS',
+        u'plmn-specificBS-1',
+        u'plmn-specificBS-2',
+        u'plmn-specificBS-3',
+        u'plmn-specificBS-4',
+        u'plmn-specificBS-5',
+        u'plmn-specificBS-6',
+        u'plmn-specificBS-7',
+        u'plmn-specificBS-8',
+        u'plmn-specificBS-9',
+        u'plmn-specificBS-A',
+        u'plmn-specificBS-B',
+        u'plmn-specificBS-C',
+        u'plmn-specificBS-D',
+        u'plmn-specificBS-E',
+        u'plmn-specificBS-F',
         ]
     _class_ = [
         ]
@@ -3803,199 +3803,199 @@ class MAPv2_BS_Code:
         ]
     
     #-----< BearerServiceCode >-----#
-    BearerServiceCode = OCT_STR(name='BearerServiceCode', mode=MODE_TYPE)
+    BearerServiceCode = OCT_STR(name=u'BearerServiceCode', mode=MODE_TYPE)
     BearerServiceCode._const_sz = ASN1Set(rv=[1], rr=[], ev=None, er=[])
     
     #-----< allBearerServices >-----#
-    allBearerServices = OCT_STR(name='allBearerServices', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-BS-Code', 'BearerServiceCode')))
+    allBearerServices = OCT_STR(name=u'allBearerServices', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-BS-Code', 'BearerServiceCode')))
     allBearerServices._val = b'\x00'
     
     #-----< allDataCDA-Services >-----#
-    allDataCDA_Services = OCT_STR(name='allDataCDA-Services', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-BS-Code', 'BearerServiceCode')))
+    allDataCDA_Services = OCT_STR(name=u'allDataCDA-Services', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-BS-Code', 'BearerServiceCode')))
     allDataCDA_Services._val = b'\x10'
     
     #-----< dataCDA-300bps >-----#
-    dataCDA_300bps = OCT_STR(name='dataCDA-300bps', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-BS-Code', 'BearerServiceCode')))
+    dataCDA_300bps = OCT_STR(name=u'dataCDA-300bps', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-BS-Code', 'BearerServiceCode')))
     dataCDA_300bps._val = b'\x11'
     
     #-----< dataCDA-1200bps >-----#
-    dataCDA_1200bps = OCT_STR(name='dataCDA-1200bps', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-BS-Code', 'BearerServiceCode')))
+    dataCDA_1200bps = OCT_STR(name=u'dataCDA-1200bps', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-BS-Code', 'BearerServiceCode')))
     dataCDA_1200bps._val = b'\x12'
     
     #-----< dataCDA-1200-75bps >-----#
-    dataCDA_1200_75bps = OCT_STR(name='dataCDA-1200-75bps', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-BS-Code', 'BearerServiceCode')))
+    dataCDA_1200_75bps = OCT_STR(name=u'dataCDA-1200-75bps', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-BS-Code', 'BearerServiceCode')))
     dataCDA_1200_75bps._val = b'\x13'
     
     #-----< dataCDA-2400bps >-----#
-    dataCDA_2400bps = OCT_STR(name='dataCDA-2400bps', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-BS-Code', 'BearerServiceCode')))
+    dataCDA_2400bps = OCT_STR(name=u'dataCDA-2400bps', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-BS-Code', 'BearerServiceCode')))
     dataCDA_2400bps._val = b'\x14'
     
     #-----< dataCDA-4800bps >-----#
-    dataCDA_4800bps = OCT_STR(name='dataCDA-4800bps', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-BS-Code', 'BearerServiceCode')))
+    dataCDA_4800bps = OCT_STR(name=u'dataCDA-4800bps', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-BS-Code', 'BearerServiceCode')))
     dataCDA_4800bps._val = b'\x15'
     
     #-----< dataCDA-9600bps >-----#
-    dataCDA_9600bps = OCT_STR(name='dataCDA-9600bps', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-BS-Code', 'BearerServiceCode')))
+    dataCDA_9600bps = OCT_STR(name=u'dataCDA-9600bps', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-BS-Code', 'BearerServiceCode')))
     dataCDA_9600bps._val = b'\x16'
     
     #-----< allDataCDS-Services >-----#
-    allDataCDS_Services = OCT_STR(name='allDataCDS-Services', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-BS-Code', 'BearerServiceCode')))
+    allDataCDS_Services = OCT_STR(name=u'allDataCDS-Services', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-BS-Code', 'BearerServiceCode')))
     allDataCDS_Services._val = b'\x18'
     
     #-----< dataCDS-1200bps >-----#
-    dataCDS_1200bps = OCT_STR(name='dataCDS-1200bps', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-BS-Code', 'BearerServiceCode')))
+    dataCDS_1200bps = OCT_STR(name=u'dataCDS-1200bps', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-BS-Code', 'BearerServiceCode')))
     dataCDS_1200bps._val = b'\x1a'
     
     #-----< dataCDS-2400bps >-----#
-    dataCDS_2400bps = OCT_STR(name='dataCDS-2400bps', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-BS-Code', 'BearerServiceCode')))
+    dataCDS_2400bps = OCT_STR(name=u'dataCDS-2400bps', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-BS-Code', 'BearerServiceCode')))
     dataCDS_2400bps._val = b'\x1c'
     
     #-----< dataCDS-4800bps >-----#
-    dataCDS_4800bps = OCT_STR(name='dataCDS-4800bps', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-BS-Code', 'BearerServiceCode')))
+    dataCDS_4800bps = OCT_STR(name=u'dataCDS-4800bps', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-BS-Code', 'BearerServiceCode')))
     dataCDS_4800bps._val = b'\x1d'
     
     #-----< dataCDS-9600bps >-----#
-    dataCDS_9600bps = OCT_STR(name='dataCDS-9600bps', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-BS-Code', 'BearerServiceCode')))
+    dataCDS_9600bps = OCT_STR(name=u'dataCDS-9600bps', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-BS-Code', 'BearerServiceCode')))
     dataCDS_9600bps._val = b'\x1e'
     
     #-----< allPadAccessCA-Services >-----#
-    allPadAccessCA_Services = OCT_STR(name='allPadAccessCA-Services', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-BS-Code', 'BearerServiceCode')))
+    allPadAccessCA_Services = OCT_STR(name=u'allPadAccessCA-Services', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-BS-Code', 'BearerServiceCode')))
     allPadAccessCA_Services._val = b' '
     
     #-----< padAccessCA-300bps >-----#
-    padAccessCA_300bps = OCT_STR(name='padAccessCA-300bps', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-BS-Code', 'BearerServiceCode')))
+    padAccessCA_300bps = OCT_STR(name=u'padAccessCA-300bps', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-BS-Code', 'BearerServiceCode')))
     padAccessCA_300bps._val = b'!'
     
     #-----< padAccessCA-1200bps >-----#
-    padAccessCA_1200bps = OCT_STR(name='padAccessCA-1200bps', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-BS-Code', 'BearerServiceCode')))
+    padAccessCA_1200bps = OCT_STR(name=u'padAccessCA-1200bps', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-BS-Code', 'BearerServiceCode')))
     padAccessCA_1200bps._val = b'"'
     
     #-----< padAccessCA-1200-75bps >-----#
-    padAccessCA_1200_75bps = OCT_STR(name='padAccessCA-1200-75bps', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-BS-Code', 'BearerServiceCode')))
+    padAccessCA_1200_75bps = OCT_STR(name=u'padAccessCA-1200-75bps', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-BS-Code', 'BearerServiceCode')))
     padAccessCA_1200_75bps._val = b'#'
     
     #-----< padAccessCA-2400bps >-----#
-    padAccessCA_2400bps = OCT_STR(name='padAccessCA-2400bps', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-BS-Code', 'BearerServiceCode')))
+    padAccessCA_2400bps = OCT_STR(name=u'padAccessCA-2400bps', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-BS-Code', 'BearerServiceCode')))
     padAccessCA_2400bps._val = b'$'
     
     #-----< padAccessCA-4800bps >-----#
-    padAccessCA_4800bps = OCT_STR(name='padAccessCA-4800bps', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-BS-Code', 'BearerServiceCode')))
+    padAccessCA_4800bps = OCT_STR(name=u'padAccessCA-4800bps', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-BS-Code', 'BearerServiceCode')))
     padAccessCA_4800bps._val = b'%'
     
     #-----< padAccessCA-9600bps >-----#
-    padAccessCA_9600bps = OCT_STR(name='padAccessCA-9600bps', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-BS-Code', 'BearerServiceCode')))
+    padAccessCA_9600bps = OCT_STR(name=u'padAccessCA-9600bps', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-BS-Code', 'BearerServiceCode')))
     padAccessCA_9600bps._val = b'&'
     
     #-----< allDataPDS-Services >-----#
-    allDataPDS_Services = OCT_STR(name='allDataPDS-Services', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-BS-Code', 'BearerServiceCode')))
+    allDataPDS_Services = OCT_STR(name=u'allDataPDS-Services', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-BS-Code', 'BearerServiceCode')))
     allDataPDS_Services._val = b'('
     
     #-----< dataPDS-2400bps >-----#
-    dataPDS_2400bps = OCT_STR(name='dataPDS-2400bps', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-BS-Code', 'BearerServiceCode')))
+    dataPDS_2400bps = OCT_STR(name=u'dataPDS-2400bps', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-BS-Code', 'BearerServiceCode')))
     dataPDS_2400bps._val = b','
     
     #-----< dataPDS-4800bps >-----#
-    dataPDS_4800bps = OCT_STR(name='dataPDS-4800bps', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-BS-Code', 'BearerServiceCode')))
+    dataPDS_4800bps = OCT_STR(name=u'dataPDS-4800bps', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-BS-Code', 'BearerServiceCode')))
     dataPDS_4800bps._val = b'-'
     
     #-----< dataPDS-9600bps >-----#
-    dataPDS_9600bps = OCT_STR(name='dataPDS-9600bps', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-BS-Code', 'BearerServiceCode')))
+    dataPDS_9600bps = OCT_STR(name=u'dataPDS-9600bps', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-BS-Code', 'BearerServiceCode')))
     dataPDS_9600bps._val = b'.'
     
     #-----< allAlternateSpeech-DataCDA >-----#
-    allAlternateSpeech_DataCDA = OCT_STR(name='allAlternateSpeech-DataCDA', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-BS-Code', 'BearerServiceCode')))
+    allAlternateSpeech_DataCDA = OCT_STR(name=u'allAlternateSpeech-DataCDA', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-BS-Code', 'BearerServiceCode')))
     allAlternateSpeech_DataCDA._val = b'0'
     
     #-----< allAlternateSpeech-DataCDS >-----#
-    allAlternateSpeech_DataCDS = OCT_STR(name='allAlternateSpeech-DataCDS', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-BS-Code', 'BearerServiceCode')))
+    allAlternateSpeech_DataCDS = OCT_STR(name=u'allAlternateSpeech-DataCDS', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-BS-Code', 'BearerServiceCode')))
     allAlternateSpeech_DataCDS._val = b'8'
     
     #-----< allSpeechFollowedByDataCDA >-----#
-    allSpeechFollowedByDataCDA = OCT_STR(name='allSpeechFollowedByDataCDA', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-BS-Code', 'BearerServiceCode')))
+    allSpeechFollowedByDataCDA = OCT_STR(name=u'allSpeechFollowedByDataCDA', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-BS-Code', 'BearerServiceCode')))
     allSpeechFollowedByDataCDA._val = b'@'
     
     #-----< allSpeechFollowedByDataCDS >-----#
-    allSpeechFollowedByDataCDS = OCT_STR(name='allSpeechFollowedByDataCDS', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-BS-Code', 'BearerServiceCode')))
+    allSpeechFollowedByDataCDS = OCT_STR(name=u'allSpeechFollowedByDataCDS', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-BS-Code', 'BearerServiceCode')))
     allSpeechFollowedByDataCDS._val = b'H'
     
     #-----< allDataCircuitAsynchronous >-----#
-    allDataCircuitAsynchronous = OCT_STR(name='allDataCircuitAsynchronous', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-BS-Code', 'BearerServiceCode')))
+    allDataCircuitAsynchronous = OCT_STR(name=u'allDataCircuitAsynchronous', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-BS-Code', 'BearerServiceCode')))
     allDataCircuitAsynchronous._val = b'P'
     
     #-----< allAsynchronousServices >-----#
-    allAsynchronousServices = OCT_STR(name='allAsynchronousServices', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-BS-Code', 'BearerServiceCode')))
+    allAsynchronousServices = OCT_STR(name=u'allAsynchronousServices', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-BS-Code', 'BearerServiceCode')))
     allAsynchronousServices._val = b'`'
     
     #-----< allDataCircuitSynchronous >-----#
-    allDataCircuitSynchronous = OCT_STR(name='allDataCircuitSynchronous', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-BS-Code', 'BearerServiceCode')))
+    allDataCircuitSynchronous = OCT_STR(name=u'allDataCircuitSynchronous', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-BS-Code', 'BearerServiceCode')))
     allDataCircuitSynchronous._val = b'X'
     
     #-----< allSynchronousServices >-----#
-    allSynchronousServices = OCT_STR(name='allSynchronousServices', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-BS-Code', 'BearerServiceCode')))
+    allSynchronousServices = OCT_STR(name=u'allSynchronousServices', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-BS-Code', 'BearerServiceCode')))
     allSynchronousServices._val = b'h'
     
     #-----< allPLMN-specificBS >-----#
-    allPLMN_specificBS = OCT_STR(name='allPLMN-specificBS', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-BS-Code', 'BearerServiceCode')))
+    allPLMN_specificBS = OCT_STR(name=u'allPLMN-specificBS', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-BS-Code', 'BearerServiceCode')))
     allPLMN_specificBS._val = b'\xd0'
     
     #-----< plmn-specificBS-1 >-----#
-    plmn_specificBS_1 = OCT_STR(name='plmn-specificBS-1', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-BS-Code', 'BearerServiceCode')))
+    plmn_specificBS_1 = OCT_STR(name=u'plmn-specificBS-1', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-BS-Code', 'BearerServiceCode')))
     plmn_specificBS_1._val = b'\xd1'
     
     #-----< plmn-specificBS-2 >-----#
-    plmn_specificBS_2 = OCT_STR(name='plmn-specificBS-2', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-BS-Code', 'BearerServiceCode')))
+    plmn_specificBS_2 = OCT_STR(name=u'plmn-specificBS-2', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-BS-Code', 'BearerServiceCode')))
     plmn_specificBS_2._val = b'\xd2'
     
     #-----< plmn-specificBS-3 >-----#
-    plmn_specificBS_3 = OCT_STR(name='plmn-specificBS-3', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-BS-Code', 'BearerServiceCode')))
+    plmn_specificBS_3 = OCT_STR(name=u'plmn-specificBS-3', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-BS-Code', 'BearerServiceCode')))
     plmn_specificBS_3._val = b'\xd3'
     
     #-----< plmn-specificBS-4 >-----#
-    plmn_specificBS_4 = OCT_STR(name='plmn-specificBS-4', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-BS-Code', 'BearerServiceCode')))
+    plmn_specificBS_4 = OCT_STR(name=u'plmn-specificBS-4', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-BS-Code', 'BearerServiceCode')))
     plmn_specificBS_4._val = b'\xd4'
     
     #-----< plmn-specificBS-5 >-----#
-    plmn_specificBS_5 = OCT_STR(name='plmn-specificBS-5', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-BS-Code', 'BearerServiceCode')))
+    plmn_specificBS_5 = OCT_STR(name=u'plmn-specificBS-5', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-BS-Code', 'BearerServiceCode')))
     plmn_specificBS_5._val = b'\xd5'
     
     #-----< plmn-specificBS-6 >-----#
-    plmn_specificBS_6 = OCT_STR(name='plmn-specificBS-6', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-BS-Code', 'BearerServiceCode')))
+    plmn_specificBS_6 = OCT_STR(name=u'plmn-specificBS-6', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-BS-Code', 'BearerServiceCode')))
     plmn_specificBS_6._val = b'\xd6'
     
     #-----< plmn-specificBS-7 >-----#
-    plmn_specificBS_7 = OCT_STR(name='plmn-specificBS-7', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-BS-Code', 'BearerServiceCode')))
+    plmn_specificBS_7 = OCT_STR(name=u'plmn-specificBS-7', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-BS-Code', 'BearerServiceCode')))
     plmn_specificBS_7._val = b'\xd7'
     
     #-----< plmn-specificBS-8 >-----#
-    plmn_specificBS_8 = OCT_STR(name='plmn-specificBS-8', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-BS-Code', 'BearerServiceCode')))
+    plmn_specificBS_8 = OCT_STR(name=u'plmn-specificBS-8', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-BS-Code', 'BearerServiceCode')))
     plmn_specificBS_8._val = b'\xd8'
     
     #-----< plmn-specificBS-9 >-----#
-    plmn_specificBS_9 = OCT_STR(name='plmn-specificBS-9', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-BS-Code', 'BearerServiceCode')))
+    plmn_specificBS_9 = OCT_STR(name=u'plmn-specificBS-9', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-BS-Code', 'BearerServiceCode')))
     plmn_specificBS_9._val = b'\xd9'
     
     #-----< plmn-specificBS-A >-----#
-    plmn_specificBS_A = OCT_STR(name='plmn-specificBS-A', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-BS-Code', 'BearerServiceCode')))
+    plmn_specificBS_A = OCT_STR(name=u'plmn-specificBS-A', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-BS-Code', 'BearerServiceCode')))
     plmn_specificBS_A._val = b'\xda'
     
     #-----< plmn-specificBS-B >-----#
-    plmn_specificBS_B = OCT_STR(name='plmn-specificBS-B', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-BS-Code', 'BearerServiceCode')))
+    plmn_specificBS_B = OCT_STR(name=u'plmn-specificBS-B', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-BS-Code', 'BearerServiceCode')))
     plmn_specificBS_B._val = b'\xdb'
     
     #-----< plmn-specificBS-C >-----#
-    plmn_specificBS_C = OCT_STR(name='plmn-specificBS-C', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-BS-Code', 'BearerServiceCode')))
+    plmn_specificBS_C = OCT_STR(name=u'plmn-specificBS-C', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-BS-Code', 'BearerServiceCode')))
     plmn_specificBS_C._val = b'\xdc'
     
     #-----< plmn-specificBS-D >-----#
-    plmn_specificBS_D = OCT_STR(name='plmn-specificBS-D', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-BS-Code', 'BearerServiceCode')))
+    plmn_specificBS_D = OCT_STR(name=u'plmn-specificBS-D', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-BS-Code', 'BearerServiceCode')))
     plmn_specificBS_D._val = b'\xdd'
     
     #-----< plmn-specificBS-E >-----#
-    plmn_specificBS_E = OCT_STR(name='plmn-specificBS-E', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-BS-Code', 'BearerServiceCode')))
+    plmn_specificBS_E = OCT_STR(name=u'plmn-specificBS-E', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-BS-Code', 'BearerServiceCode')))
     plmn_specificBS_E._val = b'\xde'
     
     #-----< plmn-specificBS-F >-----#
-    plmn_specificBS_F = OCT_STR(name='plmn-specificBS-F', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-BS-Code', 'BearerServiceCode')))
+    plmn_specificBS_F = OCT_STR(name=u'plmn-specificBS-F', mode=MODE_VALUE, typeref=ASN1RefType(('MAPv2-BS-Code', 'BearerServiceCode')))
     plmn_specificBS_F._val = b'\xdf'
     
     _all_ = [
@@ -4052,88 +4052,88 @@ class MAPv2_BS_Code:
 
 class MAPv2_ApplicationContexts:
 
-    _name_  = 'MAPv2-ApplicationContexts'
+    _name_  = u'MAPv2-ApplicationContexts'
     _oid_   = [0, 4, 0, 0, 1, 3, 2, 2]
     
     _obj_ = [
-        'map-ac',
-        'networkLocUpContext-v2',
-        'networkLocUpContext-v1',
-        'locationCancellation-v2',
-        'locationCancellation-v1',
-        'roamingNumberEnquiryContext-v2',
-        'roamingNumberEnquiryContext-v1',
-        'locationInfoRetrievalContext-v2',
-        'locationInfoRetrievalContext-v1',
-        'resetContext-v2',
-        'resetContext-v1',
-        'handoverControlContext-v2',
-        'handoverControlContext-v1',
-        'equipmentMngtContext-v2',
-        'equipmentMngtContext-v1',
-        'infoRetrievalContext-v2',
-        'infoRetrievalContext-v1',
-        'interVlrInfoRetrievalContext-v2',
-        'subscriberDataMngtContext-v2',
-        'subscriberDataMngtContext-v1',
-        'tracingContext-v2',
-        'tracingContext-v1',
-        'networkFunctionalSsContext-v2',
-        'networkFunctionalSsContext-v1',
-        'networkUnstructuredSsContext-v2',
-        'shortMsgGatewayContext-v2',
-        'shortMsgGatewayContext-v1',
-        'shortMsgMO-RelayContext-v2',
-        'shortMsgRelayContext-v1',
-        'shortMsgAlertContext-v2',
-        'shortMsgAlertContext-v1',
-        'mwdMngtContext-v2',
-        'mwdMngtContext-v1',
-        'shortMsgMT-RelayContext-v2',
-        'imsiRetrievalContext-v2',
-        'msPurgingContext-v2',
+        u'map-ac',
+        u'networkLocUpContext-v2',
+        u'networkLocUpContext-v1',
+        u'locationCancellation-v2',
+        u'locationCancellation-v1',
+        u'roamingNumberEnquiryContext-v2',
+        u'roamingNumberEnquiryContext-v1',
+        u'locationInfoRetrievalContext-v2',
+        u'locationInfoRetrievalContext-v1',
+        u'resetContext-v2',
+        u'resetContext-v1',
+        u'handoverControlContext-v2',
+        u'handoverControlContext-v1',
+        u'equipmentMngtContext-v2',
+        u'equipmentMngtContext-v1',
+        u'infoRetrievalContext-v2',
+        u'infoRetrievalContext-v1',
+        u'interVlrInfoRetrievalContext-v2',
+        u'subscriberDataMngtContext-v2',
+        u'subscriberDataMngtContext-v1',
+        u'tracingContext-v2',
+        u'tracingContext-v1',
+        u'networkFunctionalSsContext-v2',
+        u'networkFunctionalSsContext-v1',
+        u'networkUnstructuredSsContext-v2',
+        u'shortMsgGatewayContext-v2',
+        u'shortMsgGatewayContext-v1',
+        u'shortMsgMO-RelayContext-v2',
+        u'shortMsgRelayContext-v1',
+        u'shortMsgAlertContext-v2',
+        u'shortMsgAlertContext-v1',
+        u'mwdMngtContext-v2',
+        u'mwdMngtContext-v1',
+        u'shortMsgMT-RelayContext-v2',
+        u'imsiRetrievalContext-v2',
+        u'msPurgingContext-v2',
         ]
     _type_ = [
         ]
     _set_ = [
         ]
     _val_ = [
-        'map-ac',
-        'networkLocUpContext-v2',
-        'networkLocUpContext-v1',
-        'locationCancellation-v2',
-        'locationCancellation-v1',
-        'roamingNumberEnquiryContext-v2',
-        'roamingNumberEnquiryContext-v1',
-        'locationInfoRetrievalContext-v2',
-        'locationInfoRetrievalContext-v1',
-        'resetContext-v2',
-        'resetContext-v1',
-        'handoverControlContext-v2',
-        'handoverControlContext-v1',
-        'equipmentMngtContext-v2',
-        'equipmentMngtContext-v1',
-        'infoRetrievalContext-v2',
-        'infoRetrievalContext-v1',
-        'interVlrInfoRetrievalContext-v2',
-        'subscriberDataMngtContext-v2',
-        'subscriberDataMngtContext-v1',
-        'tracingContext-v2',
-        'tracingContext-v1',
-        'networkFunctionalSsContext-v2',
-        'networkFunctionalSsContext-v1',
-        'networkUnstructuredSsContext-v2',
-        'shortMsgGatewayContext-v2',
-        'shortMsgGatewayContext-v1',
-        'shortMsgMO-RelayContext-v2',
-        'shortMsgRelayContext-v1',
-        'shortMsgAlertContext-v2',
-        'shortMsgAlertContext-v1',
-        'mwdMngtContext-v2',
-        'mwdMngtContext-v1',
-        'shortMsgMT-RelayContext-v2',
-        'imsiRetrievalContext-v2',
-        'msPurgingContext-v2',
+        u'map-ac',
+        u'networkLocUpContext-v2',
+        u'networkLocUpContext-v1',
+        u'locationCancellation-v2',
+        u'locationCancellation-v1',
+        u'roamingNumberEnquiryContext-v2',
+        u'roamingNumberEnquiryContext-v1',
+        u'locationInfoRetrievalContext-v2',
+        u'locationInfoRetrievalContext-v1',
+        u'resetContext-v2',
+        u'resetContext-v1',
+        u'handoverControlContext-v2',
+        u'handoverControlContext-v1',
+        u'equipmentMngtContext-v2',
+        u'equipmentMngtContext-v1',
+        u'infoRetrievalContext-v2',
+        u'infoRetrievalContext-v1',
+        u'interVlrInfoRetrievalContext-v2',
+        u'subscriberDataMngtContext-v2',
+        u'subscriberDataMngtContext-v1',
+        u'tracingContext-v2',
+        u'tracingContext-v1',
+        u'networkFunctionalSsContext-v2',
+        u'networkFunctionalSsContext-v1',
+        u'networkUnstructuredSsContext-v2',
+        u'shortMsgGatewayContext-v2',
+        u'shortMsgGatewayContext-v1',
+        u'shortMsgMO-RelayContext-v2',
+        u'shortMsgRelayContext-v1',
+        u'shortMsgAlertContext-v2',
+        u'shortMsgAlertContext-v1',
+        u'mwdMngtContext-v2',
+        u'mwdMngtContext-v1',
+        u'shortMsgMT-RelayContext-v2',
+        u'imsiRetrievalContext-v2',
+        u'msPurgingContext-v2',
         ]
     _class_ = [
         ]
@@ -4141,147 +4141,147 @@ class MAPv2_ApplicationContexts:
         ]
     
     #-----< map-ac >-----#
-    map_ac = OID(name='map-ac', mode=MODE_VALUE)
+    map_ac = OID(name=u'map-ac', mode=MODE_VALUE)
     map_ac._val = (0, 4, 0, 0, 1, 0)
     
     #-----< networkLocUpContext-v2 >-----#
-    networkLocUpContext_v2 = OID(name='networkLocUpContext-v2', mode=MODE_VALUE)
+    networkLocUpContext_v2 = OID(name=u'networkLocUpContext-v2', mode=MODE_VALUE)
     networkLocUpContext_v2._val = (0, 4, 0, 0, 1, 0, 1, 2)
     
     #-----< networkLocUpContext-v1 >-----#
-    networkLocUpContext_v1 = OID(name='networkLocUpContext-v1', mode=MODE_VALUE)
+    networkLocUpContext_v1 = OID(name=u'networkLocUpContext-v1', mode=MODE_VALUE)
     networkLocUpContext_v1._val = (0, 4, 0, 0, 1, 0, 1, 1)
     
     #-----< locationCancellation-v2 >-----#
-    locationCancellation_v2 = OID(name='locationCancellation-v2', mode=MODE_VALUE)
+    locationCancellation_v2 = OID(name=u'locationCancellation-v2', mode=MODE_VALUE)
     locationCancellation_v2._val = (0, 4, 0, 0, 1, 0, 2, 2)
     
     #-----< locationCancellation-v1 >-----#
-    locationCancellation_v1 = OID(name='locationCancellation-v1', mode=MODE_VALUE)
+    locationCancellation_v1 = OID(name=u'locationCancellation-v1', mode=MODE_VALUE)
     locationCancellation_v1._val = (0, 4, 0, 0, 1, 0, 2, 1)
     
     #-----< roamingNumberEnquiryContext-v2 >-----#
-    roamingNumberEnquiryContext_v2 = OID(name='roamingNumberEnquiryContext-v2', mode=MODE_VALUE)
+    roamingNumberEnquiryContext_v2 = OID(name=u'roamingNumberEnquiryContext-v2', mode=MODE_VALUE)
     roamingNumberEnquiryContext_v2._val = (0, 4, 0, 0, 1, 0, 3, 2)
     
     #-----< roamingNumberEnquiryContext-v1 >-----#
-    roamingNumberEnquiryContext_v1 = OID(name='roamingNumberEnquiryContext-v1', mode=MODE_VALUE)
+    roamingNumberEnquiryContext_v1 = OID(name=u'roamingNumberEnquiryContext-v1', mode=MODE_VALUE)
     roamingNumberEnquiryContext_v1._val = (0, 4, 0, 0, 1, 0, 3, 1)
     
     #-----< locationInfoRetrievalContext-v2 >-----#
-    locationInfoRetrievalContext_v2 = OID(name='locationInfoRetrievalContext-v2', mode=MODE_VALUE)
+    locationInfoRetrievalContext_v2 = OID(name=u'locationInfoRetrievalContext-v2', mode=MODE_VALUE)
     locationInfoRetrievalContext_v2._val = (0, 4, 0, 0, 1, 0, 5, 2)
     
     #-----< locationInfoRetrievalContext-v1 >-----#
-    locationInfoRetrievalContext_v1 = OID(name='locationInfoRetrievalContext-v1', mode=MODE_VALUE)
+    locationInfoRetrievalContext_v1 = OID(name=u'locationInfoRetrievalContext-v1', mode=MODE_VALUE)
     locationInfoRetrievalContext_v1._val = (0, 4, 0, 0, 1, 0, 5, 1)
     
     #-----< resetContext-v2 >-----#
-    resetContext_v2 = OID(name='resetContext-v2', mode=MODE_VALUE)
+    resetContext_v2 = OID(name=u'resetContext-v2', mode=MODE_VALUE)
     resetContext_v2._val = (0, 4, 0, 0, 1, 0, 10, 2)
     
     #-----< resetContext-v1 >-----#
-    resetContext_v1 = OID(name='resetContext-v1', mode=MODE_VALUE)
+    resetContext_v1 = OID(name=u'resetContext-v1', mode=MODE_VALUE)
     resetContext_v1._val = (0, 4, 0, 0, 1, 0, 10, 1)
     
     #-----< handoverControlContext-v2 >-----#
-    handoverControlContext_v2 = OID(name='handoverControlContext-v2', mode=MODE_VALUE)
+    handoverControlContext_v2 = OID(name=u'handoverControlContext-v2', mode=MODE_VALUE)
     handoverControlContext_v2._val = (0, 4, 0, 0, 1, 0, 11, 2)
     
     #-----< handoverControlContext-v1 >-----#
-    handoverControlContext_v1 = OID(name='handoverControlContext-v1', mode=MODE_VALUE)
+    handoverControlContext_v1 = OID(name=u'handoverControlContext-v1', mode=MODE_VALUE)
     handoverControlContext_v1._val = (0, 4, 0, 0, 1, 0, 11, 1)
     
     #-----< equipmentMngtContext-v2 >-----#
-    equipmentMngtContext_v2 = OID(name='equipmentMngtContext-v2', mode=MODE_VALUE)
+    equipmentMngtContext_v2 = OID(name=u'equipmentMngtContext-v2', mode=MODE_VALUE)
     equipmentMngtContext_v2._val = (0, 4, 0, 0, 1, 0, 13, 2)
     
     #-----< equipmentMngtContext-v1 >-----#
-    equipmentMngtContext_v1 = OID(name='equipmentMngtContext-v1', mode=MODE_VALUE)
+    equipmentMngtContext_v1 = OID(name=u'equipmentMngtContext-v1', mode=MODE_VALUE)
     equipmentMngtContext_v1._val = (0, 4, 0, 0, 1, 0, 13, 1)
     
     #-----< infoRetrievalContext-v2 >-----#
-    infoRetrievalContext_v2 = OID(name='infoRetrievalContext-v2', mode=MODE_VALUE)
+    infoRetrievalContext_v2 = OID(name=u'infoRetrievalContext-v2', mode=MODE_VALUE)
     infoRetrievalContext_v2._val = (0, 4, 0, 0, 1, 0, 14, 2)
     
     #-----< infoRetrievalContext-v1 >-----#
-    infoRetrievalContext_v1 = OID(name='infoRetrievalContext-v1', mode=MODE_VALUE)
+    infoRetrievalContext_v1 = OID(name=u'infoRetrievalContext-v1', mode=MODE_VALUE)
     infoRetrievalContext_v1._val = (0, 4, 0, 0, 1, 0, 14, 1)
     
     #-----< interVlrInfoRetrievalContext-v2 >-----#
-    interVlrInfoRetrievalContext_v2 = OID(name='interVlrInfoRetrievalContext-v2', mode=MODE_VALUE)
+    interVlrInfoRetrievalContext_v2 = OID(name=u'interVlrInfoRetrievalContext-v2', mode=MODE_VALUE)
     interVlrInfoRetrievalContext_v2._val = (0, 4, 0, 0, 1, 0, 15, 2)
     
     #-----< subscriberDataMngtContext-v2 >-----#
-    subscriberDataMngtContext_v2 = OID(name='subscriberDataMngtContext-v2', mode=MODE_VALUE)
+    subscriberDataMngtContext_v2 = OID(name=u'subscriberDataMngtContext-v2', mode=MODE_VALUE)
     subscriberDataMngtContext_v2._val = (0, 4, 0, 0, 1, 0, 16, 2)
     
     #-----< subscriberDataMngtContext-v1 >-----#
-    subscriberDataMngtContext_v1 = OID(name='subscriberDataMngtContext-v1', mode=MODE_VALUE)
+    subscriberDataMngtContext_v1 = OID(name=u'subscriberDataMngtContext-v1', mode=MODE_VALUE)
     subscriberDataMngtContext_v1._val = (0, 4, 0, 0, 1, 0, 16, 1)
     
     #-----< tracingContext-v2 >-----#
-    tracingContext_v2 = OID(name='tracingContext-v2', mode=MODE_VALUE)
+    tracingContext_v2 = OID(name=u'tracingContext-v2', mode=MODE_VALUE)
     tracingContext_v2._val = (0, 4, 0, 0, 1, 0, 17, 2)
     
     #-----< tracingContext-v1 >-----#
-    tracingContext_v1 = OID(name='tracingContext-v1', mode=MODE_VALUE)
+    tracingContext_v1 = OID(name=u'tracingContext-v1', mode=MODE_VALUE)
     tracingContext_v1._val = (0, 4, 0, 0, 1, 0, 17, 1)
     
     #-----< networkFunctionalSsContext-v2 >-----#
-    networkFunctionalSsContext_v2 = OID(name='networkFunctionalSsContext-v2', mode=MODE_VALUE)
+    networkFunctionalSsContext_v2 = OID(name=u'networkFunctionalSsContext-v2', mode=MODE_VALUE)
     networkFunctionalSsContext_v2._val = (0, 4, 0, 0, 1, 0, 18, 2)
     
     #-----< networkFunctionalSsContext-v1 >-----#
-    networkFunctionalSsContext_v1 = OID(name='networkFunctionalSsContext-v1', mode=MODE_VALUE)
+    networkFunctionalSsContext_v1 = OID(name=u'networkFunctionalSsContext-v1', mode=MODE_VALUE)
     networkFunctionalSsContext_v1._val = (0, 4, 0, 0, 1, 0, 18, 1)
     
     #-----< networkUnstructuredSsContext-v2 >-----#
-    networkUnstructuredSsContext_v2 = OID(name='networkUnstructuredSsContext-v2', mode=MODE_VALUE)
+    networkUnstructuredSsContext_v2 = OID(name=u'networkUnstructuredSsContext-v2', mode=MODE_VALUE)
     networkUnstructuredSsContext_v2._val = (0, 4, 0, 0, 1, 0, 19, 2)
     
     #-----< shortMsgGatewayContext-v2 >-----#
-    shortMsgGatewayContext_v2 = OID(name='shortMsgGatewayContext-v2', mode=MODE_VALUE)
+    shortMsgGatewayContext_v2 = OID(name=u'shortMsgGatewayContext-v2', mode=MODE_VALUE)
     shortMsgGatewayContext_v2._val = (0, 4, 0, 0, 1, 0, 20, 2)
     
     #-----< shortMsgGatewayContext-v1 >-----#
-    shortMsgGatewayContext_v1 = OID(name='shortMsgGatewayContext-v1', mode=MODE_VALUE)
+    shortMsgGatewayContext_v1 = OID(name=u'shortMsgGatewayContext-v1', mode=MODE_VALUE)
     shortMsgGatewayContext_v1._val = (0, 4, 0, 0, 1, 0, 20, 1)
     
     #-----< shortMsgMO-RelayContext-v2 >-----#
-    shortMsgMO_RelayContext_v2 = OID(name='shortMsgMO-RelayContext-v2', mode=MODE_VALUE)
+    shortMsgMO_RelayContext_v2 = OID(name=u'shortMsgMO-RelayContext-v2', mode=MODE_VALUE)
     shortMsgMO_RelayContext_v2._val = (0, 4, 0, 0, 1, 0, 21, 2)
     
     #-----< shortMsgRelayContext-v1 >-----#
-    shortMsgRelayContext_v1 = OID(name='shortMsgRelayContext-v1', mode=MODE_VALUE)
+    shortMsgRelayContext_v1 = OID(name=u'shortMsgRelayContext-v1', mode=MODE_VALUE)
     shortMsgRelayContext_v1._val = (0, 4, 0, 0, 1, 0, 21, 1)
     
     #-----< shortMsgAlertContext-v2 >-----#
-    shortMsgAlertContext_v2 = OID(name='shortMsgAlertContext-v2', mode=MODE_VALUE)
+    shortMsgAlertContext_v2 = OID(name=u'shortMsgAlertContext-v2', mode=MODE_VALUE)
     shortMsgAlertContext_v2._val = (0, 4, 0, 0, 1, 0, 23, 2)
     
     #-----< shortMsgAlertContext-v1 >-----#
-    shortMsgAlertContext_v1 = OID(name='shortMsgAlertContext-v1', mode=MODE_VALUE)
+    shortMsgAlertContext_v1 = OID(name=u'shortMsgAlertContext-v1', mode=MODE_VALUE)
     shortMsgAlertContext_v1._val = (0, 4, 0, 0, 1, 0, 23, 1)
     
     #-----< mwdMngtContext-v2 >-----#
-    mwdMngtContext_v2 = OID(name='mwdMngtContext-v2', mode=MODE_VALUE)
+    mwdMngtContext_v2 = OID(name=u'mwdMngtContext-v2', mode=MODE_VALUE)
     mwdMngtContext_v2._val = (0, 4, 0, 0, 1, 0, 24, 2)
     
     #-----< mwdMngtContext-v1 >-----#
-    mwdMngtContext_v1 = OID(name='mwdMngtContext-v1', mode=MODE_VALUE)
+    mwdMngtContext_v1 = OID(name=u'mwdMngtContext-v1', mode=MODE_VALUE)
     mwdMngtContext_v1._val = (0, 4, 0, 0, 1, 0, 24, 1)
     
     #-----< shortMsgMT-RelayContext-v2 >-----#
-    shortMsgMT_RelayContext_v2 = OID(name='shortMsgMT-RelayContext-v2', mode=MODE_VALUE)
+    shortMsgMT_RelayContext_v2 = OID(name=u'shortMsgMT-RelayContext-v2', mode=MODE_VALUE)
     shortMsgMT_RelayContext_v2._val = (0, 4, 0, 0, 1, 0, 25, 2)
     
     #-----< imsiRetrievalContext-v2 >-----#
-    imsiRetrievalContext_v2 = OID(name='imsiRetrievalContext-v2', mode=MODE_VALUE)
+    imsiRetrievalContext_v2 = OID(name=u'imsiRetrievalContext-v2', mode=MODE_VALUE)
     imsiRetrievalContext_v2._val = (0, 4, 0, 0, 1, 0, 26, 2)
     
     #-----< msPurgingContext-v2 >-----#
-    msPurgingContext_v2 = OID(name='msPurgingContext-v2', mode=MODE_VALUE)
+    msPurgingContext_v2 = OID(name=u'msPurgingContext-v2', mode=MODE_VALUE)
     msPurgingContext_v2._val = (0, 4, 0, 0, 1, 0, 27, 2)
     
     _all_ = [
@@ -4325,63 +4325,63 @@ class MAPv2_ApplicationContexts:
 
 class MAPv2_OperationAndMaintenanceOperations:
 
-    _name_  = 'MAPv2-OperationAndMaintenanceOperations'
+    _name_  = u'MAPv2-OperationAndMaintenanceOperations'
     _oid_   = []
     
     _obj_ = [
-        'activateTraceMode',
-        'deactivateTraceMode',
-        'traceSubscriberActivity',
-        'noteInternalHandover',
-        'sendIMSI',
+        u'activateTraceMode',
+        u'deactivateTraceMode',
+        u'traceSubscriberActivity',
+        u'noteInternalHandover',
+        u'sendIMSI',
         ]
     _type_ = [
         ]
     _set_ = [
         ]
     _val_ = [
-        'activateTraceMode',
-        'deactivateTraceMode',
-        'traceSubscriberActivity',
-        'noteInternalHandover',
-        'sendIMSI',
+        u'activateTraceMode',
+        u'deactivateTraceMode',
+        u'traceSubscriberActivity',
+        u'noteInternalHandover',
+        u'sendIMSI',
         ]
     _class_ = [
-        'activateTraceMode',
-        'deactivateTraceMode',
-        'traceSubscriberActivity',
-        'noteInternalHandover',
-        'sendIMSI',
+        u'activateTraceMode',
+        u'deactivateTraceMode',
+        u'traceSubscriberActivity',
+        u'noteInternalHandover',
+        u'sendIMSI',
         ]
     _param_ = [
         ]
     
     #-----< activateTraceMode >-----#
-    activateTraceMode = CLASS(name='activateTraceMode', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
-    _activateTraceMode_val_ArgumentType = SEQ(name='ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-OM-DataTypes', 'ActivateTraceModeArg')))
-    __OPERATION_Errors_val_ParameterType_0 = ENUM(name='ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'NetworkResource')))
-    activateTraceMode._val = dict([('ArgumentType', _activateTraceMode_val_ArgumentType), ('Errors', ASN1Set(rv=[dict([('ParameterType', __OPERATION_Errors_val_ParameterType_0), ('errorCode', ('local', 34))]), dict([('errorCode', ('local', 35))]), dict([('errorCode', ('local', 36))]), dict([('errorCode', ('local', 21))]), dict([('errorCode', ('local', 5))]), dict([('errorCode', ('local', 40))])], rr=[], ev=None, er=[])), ('operationCode', ('local', 50))])
+    activateTraceMode = CLASS(name=u'activateTraceMode', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
+    _activateTraceMode_val_ArgumentType = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-OM-DataTypes', 'ActivateTraceModeArg')))
+    __OPERATION_Errors_val_ParameterType_0 = ENUM(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'NetworkResource')))
+    activateTraceMode._val = dict([(u'ArgumentType', _activateTraceMode_val_ArgumentType), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'errorCode', (u'local', 35))]), dict([(u'errorCode', (u'local', 36))]), dict([(u'errorCode', (u'local', 21))]), dict([(u'errorCode', (u'local', 5))]), dict([(u'errorCode', (u'local', 40))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 50))])
     
     #-----< deactivateTraceMode >-----#
-    deactivateTraceMode = CLASS(name='deactivateTraceMode', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
-    _deactivateTraceMode_val_ArgumentType = SEQ(name='ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-OM-DataTypes', 'DeactivateTraceModeArg')))
-    deactivateTraceMode._val = dict([('ArgumentType', _deactivateTraceMode_val_ArgumentType), ('Errors', ASN1Set(rv=[dict([('ParameterType', __OPERATION_Errors_val_ParameterType_0), ('errorCode', ('local', 34))]), dict([('errorCode', ('local', 35))]), dict([('errorCode', ('local', 36))]), dict([('errorCode', ('local', 21))]), dict([('errorCode', ('local', 5))])], rr=[], ev=None, er=[])), ('operationCode', ('local', 51))])
+    deactivateTraceMode = CLASS(name=u'deactivateTraceMode', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
+    _deactivateTraceMode_val_ArgumentType = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-OM-DataTypes', 'DeactivateTraceModeArg')))
+    deactivateTraceMode._val = dict([(u'ArgumentType', _deactivateTraceMode_val_ArgumentType), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'errorCode', (u'local', 35))]), dict([(u'errorCode', (u'local', 36))]), dict([(u'errorCode', (u'local', 21))]), dict([(u'errorCode', (u'local', 5))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 51))])
     
     #-----< traceSubscriberActivity >-----#
-    traceSubscriberActivity = CLASS(name='traceSubscriberActivity', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
-    _traceSubscriberActivity_val_ArgumentType = SEQ(name='ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-OM-DataTypes', 'TraceSubscriberActivityArg')))
-    traceSubscriberActivity._val = dict([('ArgumentType', _traceSubscriberActivity_val_ArgumentType), ('operationCode', ('local', 52))])
+    traceSubscriberActivity = CLASS(name=u'traceSubscriberActivity', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
+    _traceSubscriberActivity_val_ArgumentType = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-OM-DataTypes', 'TraceSubscriberActivityArg')))
+    traceSubscriberActivity._val = dict([(u'ArgumentType', _traceSubscriberActivity_val_ArgumentType), (u'operationCode', (u'local', 52))])
     
     #-----< noteInternalHandover >-----#
-    noteInternalHandover = CLASS(name='noteInternalHandover', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
-    _noteInternalHandover_val_ArgumentType = SEQ(name='ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-OM-DataTypes', 'NoteInternalHO-Arg')))
-    noteInternalHandover._val = dict([('ArgumentType', _noteInternalHandover_val_ArgumentType), ('operationCode', ('local', 35))])
+    noteInternalHandover = CLASS(name=u'noteInternalHandover', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
+    _noteInternalHandover_val_ArgumentType = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-OM-DataTypes', 'NoteInternalHO-Arg')))
+    noteInternalHandover._val = dict([(u'ArgumentType', _noteInternalHandover_val_ArgumentType), (u'operationCode', (u'local', 35))])
     
     #-----< sendIMSI >-----#
-    sendIMSI = CLASS(name='sendIMSI', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
-    _sendIMSI_val_ArgumentType = OCT_STR(name='ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'ISDN-AddressString')))
-    _sendIMSI_val_ResultType = OCT_STR(name='ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'IMSI')))
-    sendIMSI._val = dict([('ArgumentType', _sendIMSI_val_ArgumentType), ('ResultType', _sendIMSI_val_ResultType), ('Errors', ASN1Set(rv=[dict([('errorCode', ('local', 35))]), dict([('errorCode', ('local', 36))]), dict([('errorCode', ('local', 1))])], rr=[], ev=None, er=[])), ('operationCode', ('local', 58))])
+    sendIMSI = CLASS(name=u'sendIMSI', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
+    _sendIMSI_val_ArgumentType = OCT_STR(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'ISDN-AddressString')))
+    _sendIMSI_val_ResultType = OCT_STR(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'IMSI')))
+    sendIMSI._val = dict([(u'ArgumentType', _sendIMSI_val_ArgumentType), (u'ResultType', _sendIMSI_val_ResultType), (u'Errors', ASN1Set(rv=[dict([(u'errorCode', (u'local', 35))]), dict([(u'errorCode', (u'local', 36))]), dict([(u'errorCode', (u'local', 1))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 58))])
     
     _all_ = [
         activateTraceMode,
@@ -4400,186 +4400,186 @@ class MAPv2_OperationAndMaintenanceOperations:
 
 class MAPv2_MobileServiceOperations:
 
-    _name_  = 'MAPv2-MobileServiceOperations'
+    _name_  = u'MAPv2-MobileServiceOperations'
     _oid_   = []
     
     _obj_ = [
-        'updateLocation',
-        'cancelLocation',
-        'purgeMS',
-        'sendIdentification',
-        'prepareHandover',
-        'performHandover',
-        'sendEndSignal',
-        'processAccessSignalling',
-        'forwardAccessSignalling',
-        'prepareSubsequentHandover',
-        'performSubsequentHandover',
-        'sendAuthenticationInfo',
-        'checkIMEI',
-        'sendParameters',
-        'insertSubscriberData',
-        'deleteSubscriberData',
-        'reset',
-        'forwardCheckSS-Indication',
-        'restoreData',
+        u'updateLocation',
+        u'cancelLocation',
+        u'purgeMS',
+        u'sendIdentification',
+        u'prepareHandover',
+        u'performHandover',
+        u'sendEndSignal',
+        u'processAccessSignalling',
+        u'forwardAccessSignalling',
+        u'prepareSubsequentHandover',
+        u'performSubsequentHandover',
+        u'sendAuthenticationInfo',
+        u'checkIMEI',
+        u'sendParameters',
+        u'insertSubscriberData',
+        u'deleteSubscriberData',
+        u'reset',
+        u'forwardCheckSS-Indication',
+        u'restoreData',
         ]
     _type_ = [
         ]
     _set_ = [
         ]
     _val_ = [
-        'updateLocation',
-        'cancelLocation',
-        'purgeMS',
-        'sendIdentification',
-        'prepareHandover',
-        'performHandover',
-        'sendEndSignal',
-        'processAccessSignalling',
-        'forwardAccessSignalling',
-        'prepareSubsequentHandover',
-        'performSubsequentHandover',
-        'sendAuthenticationInfo',
-        'checkIMEI',
-        'sendParameters',
-        'insertSubscriberData',
-        'deleteSubscriberData',
-        'reset',
-        'forwardCheckSS-Indication',
-        'restoreData',
+        u'updateLocation',
+        u'cancelLocation',
+        u'purgeMS',
+        u'sendIdentification',
+        u'prepareHandover',
+        u'performHandover',
+        u'sendEndSignal',
+        u'processAccessSignalling',
+        u'forwardAccessSignalling',
+        u'prepareSubsequentHandover',
+        u'performSubsequentHandover',
+        u'sendAuthenticationInfo',
+        u'checkIMEI',
+        u'sendParameters',
+        u'insertSubscriberData',
+        u'deleteSubscriberData',
+        u'reset',
+        u'forwardCheckSS-Indication',
+        u'restoreData',
         ]
     _class_ = [
-        'updateLocation',
-        'cancelLocation',
-        'purgeMS',
-        'sendIdentification',
-        'prepareHandover',
-        'performHandover',
-        'sendEndSignal',
-        'processAccessSignalling',
-        'forwardAccessSignalling',
-        'prepareSubsequentHandover',
-        'performSubsequentHandover',
-        'sendAuthenticationInfo',
-        'checkIMEI',
-        'sendParameters',
-        'insertSubscriberData',
-        'deleteSubscriberData',
-        'reset',
-        'forwardCheckSS-Indication',
-        'restoreData',
+        u'updateLocation',
+        u'cancelLocation',
+        u'purgeMS',
+        u'sendIdentification',
+        u'prepareHandover',
+        u'performHandover',
+        u'sendEndSignal',
+        u'processAccessSignalling',
+        u'forwardAccessSignalling',
+        u'prepareSubsequentHandover',
+        u'performSubsequentHandover',
+        u'sendAuthenticationInfo',
+        u'checkIMEI',
+        u'sendParameters',
+        u'insertSubscriberData',
+        u'deleteSubscriberData',
+        u'reset',
+        u'forwardCheckSS-Indication',
+        u'restoreData',
         ]
     _param_ = [
         ]
     
     #-----< updateLocation >-----#
-    updateLocation = CLASS(name='updateLocation', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
-    _updateLocation_val_ArgumentType = SEQ(name='ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-MS-DataTypes', 'UpdateLocationArg')))
-    _updateLocation_val_ResultType = CHOICE(name='ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-MS-DataTypes', 'UpdateLocationRes')))
-    __OPERATION_Errors_val_ParameterType_0 = ENUM(name='ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'NetworkResource')))
-    __OPERATION_Errors_val_ParameterType_4 = ENUM(name='ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-ER-DataTypes', 'RoamingNotAllowedCause')))
-    updateLocation._val = dict([('ArgumentType', _updateLocation_val_ArgumentType), ('ResultType', _updateLocation_val_ResultType), ('Errors', ASN1Set(rv=[dict([('ParameterType', __OPERATION_Errors_val_ParameterType_0), ('errorCode', ('local', 34))]), dict([('errorCode', ('local', 35))]), dict([('errorCode', ('local', 36))]), dict([('errorCode', ('local', 1))]), dict([('ParameterType', __OPERATION_Errors_val_ParameterType_4), ('errorCode', ('local', 8))])], rr=[], ev=None, er=[])), ('operationCode', ('local', 2))])
+    updateLocation = CLASS(name=u'updateLocation', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
+    _updateLocation_val_ArgumentType = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-MS-DataTypes', 'UpdateLocationArg')))
+    _updateLocation_val_ResultType = CHOICE(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-MS-DataTypes', 'UpdateLocationRes')))
+    __OPERATION_Errors_val_ParameterType_0 = ENUM(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'NetworkResource')))
+    __OPERATION_Errors_val_ParameterType_4 = ENUM(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-ER-DataTypes', 'RoamingNotAllowedCause')))
+    updateLocation._val = dict([(u'ArgumentType', _updateLocation_val_ArgumentType), (u'ResultType', _updateLocation_val_ResultType), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'errorCode', (u'local', 35))]), dict([(u'errorCode', (u'local', 36))]), dict([(u'errorCode', (u'local', 1))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_4), (u'errorCode', (u'local', 8))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 2))])
     
     #-----< cancelLocation >-----#
-    cancelLocation = CLASS(name='cancelLocation', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
-    _cancelLocation_val_ArgumentType = CHOICE(name='ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-MS-DataTypes', 'CancelLocationArg')))
-    cancelLocation._val = dict([('ArgumentType', _cancelLocation_val_ArgumentType), ('Errors', ASN1Set(rv=[dict([('errorCode', ('local', 35))]), dict([('errorCode', ('local', 36))]), dict([('errorCode', ('local', 5))])], rr=[], ev=None, er=[])), ('operationCode', ('local', 3))])
+    cancelLocation = CLASS(name=u'cancelLocation', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
+    _cancelLocation_val_ArgumentType = CHOICE(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-MS-DataTypes', 'CancelLocationArg')))
+    cancelLocation._val = dict([(u'ArgumentType', _cancelLocation_val_ArgumentType), (u'Errors', ASN1Set(rv=[dict([(u'errorCode', (u'local', 35))]), dict([(u'errorCode', (u'local', 36))]), dict([(u'errorCode', (u'local', 5))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 3))])
     
     #-----< purgeMS >-----#
-    purgeMS = CLASS(name='purgeMS', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
-    _purgeMS_val_ArgumentType = SEQ(name='ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-MS-DataTypes', 'PurgeMS-Arg')))
-    purgeMS._val = dict([('ArgumentType', _purgeMS_val_ArgumentType), ('operationCode', ('local', 67))])
+    purgeMS = CLASS(name=u'purgeMS', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
+    _purgeMS_val_ArgumentType = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-MS-DataTypes', 'PurgeMS-Arg')))
+    purgeMS._val = dict([(u'ArgumentType', _purgeMS_val_ArgumentType), (u'operationCode', (u'local', 67))])
     
     #-----< sendIdentification >-----#
-    sendIdentification = CLASS(name='sendIdentification', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
-    _sendIdentification_val_ArgumentType = OCT_STR(name='ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'TMSI')))
-    _sendIdentification_val_ResultType = SEQ(name='ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-MS-DataTypes', 'SendIdentificationRes')))
-    sendIdentification._val = dict([('ArgumentType', _sendIdentification_val_ArgumentType), ('ResultType', _sendIdentification_val_ResultType), ('Errors', ASN1Set(rv=[dict([('errorCode', ('local', 35))]), dict([('errorCode', ('local', 5))])], rr=[], ev=None, er=[])), ('operationCode', ('local', 55))])
+    sendIdentification = CLASS(name=u'sendIdentification', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
+    _sendIdentification_val_ArgumentType = OCT_STR(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'TMSI')))
+    _sendIdentification_val_ResultType = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-MS-DataTypes', 'SendIdentificationRes')))
+    sendIdentification._val = dict([(u'ArgumentType', _sendIdentification_val_ArgumentType), (u'ResultType', _sendIdentification_val_ResultType), (u'Errors', ASN1Set(rv=[dict([(u'errorCode', (u'local', 35))]), dict([(u'errorCode', (u'local', 5))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 55))])
     
     #-----< prepareHandover >-----#
-    prepareHandover = CLASS(name='prepareHandover', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
-    _prepareHandover_val_ArgumentType = SEQ(name='ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-MS-DataTypes', 'PrepareHO-Arg')))
-    _prepareHandover_val_ResultType = SEQ(name='ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-MS-DataTypes', 'PrepareHO-Res')))
-    prepareHandover._val = dict([('ArgumentType', _prepareHandover_val_ArgumentType), ('ResultType', _prepareHandover_val_ResultType), ('Errors', ASN1Set(rv=[dict([('ParameterType', __OPERATION_Errors_val_ParameterType_0), ('errorCode', ('local', 34))]), dict([('errorCode', ('local', 35))]), dict([('errorCode', ('local', 36))]), dict([('errorCode', ('local', 25))])], rr=[], ev=None, er=[])), ('operationCode', ('local', 68))])
+    prepareHandover = CLASS(name=u'prepareHandover', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
+    _prepareHandover_val_ArgumentType = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-MS-DataTypes', 'PrepareHO-Arg')))
+    _prepareHandover_val_ResultType = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-MS-DataTypes', 'PrepareHO-Res')))
+    prepareHandover._val = dict([(u'ArgumentType', _prepareHandover_val_ArgumentType), (u'ResultType', _prepareHandover_val_ResultType), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'errorCode', (u'local', 35))]), dict([(u'errorCode', (u'local', 36))]), dict([(u'errorCode', (u'local', 25))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 68))])
     
     #-----< performHandover >-----#
-    performHandover = CLASS(name='performHandover', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
-    _performHandover_val_ArgumentType = SEQ(name='ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-MS-DataTypes', 'PerformHO-Arg')))
-    _performHandover_val_ResultType = SEQ(name='ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-MS-DataTypes', 'PerformHO-Res')))
-    performHandover._val = dict([('ArgumentType', _performHandover_val_ArgumentType), ('ResultType', _performHandover_val_ResultType), ('Errors', ASN1Set(rv=[dict([('ParameterType', __OPERATION_Errors_val_ParameterType_0), ('errorCode', ('local', 34))]), dict([('errorCode', ('local', 36))]), dict([('errorCode', ('local', 2))]), dict([('errorCode', ('local', 23))]), dict([('errorCode', ('local', 24))]), dict([('errorCode', ('local', 25))])], rr=[], ev=None, er=[])), ('operationCode', ('local', 28))])
+    performHandover = CLASS(name=u'performHandover', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
+    _performHandover_val_ArgumentType = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-MS-DataTypes', 'PerformHO-Arg')))
+    _performHandover_val_ResultType = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-MS-DataTypes', 'PerformHO-Res')))
+    performHandover._val = dict([(u'ArgumentType', _performHandover_val_ArgumentType), (u'ResultType', _performHandover_val_ResultType), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'errorCode', (u'local', 36))]), dict([(u'errorCode', (u'local', 2))]), dict([(u'errorCode', (u'local', 23))]), dict([(u'errorCode', (u'local', 24))]), dict([(u'errorCode', (u'local', 25))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 28))])
     
     #-----< sendEndSignal >-----#
-    sendEndSignal = CLASS(name='sendEndSignal', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
-    _sendEndSignal_val_ArgumentType = SEQ(name='ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'ExternalSignalInfo')))
-    sendEndSignal._val = dict([('ArgumentType', _sendEndSignal_val_ArgumentType), ('operationCode', ('local', 29))])
+    sendEndSignal = CLASS(name=u'sendEndSignal', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
+    _sendEndSignal_val_ArgumentType = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'ExternalSignalInfo')))
+    sendEndSignal._val = dict([(u'ArgumentType', _sendEndSignal_val_ArgumentType), (u'operationCode', (u'local', 29))])
     
     #-----< processAccessSignalling >-----#
-    processAccessSignalling = CLASS(name='processAccessSignalling', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
-    _processAccessSignalling_val_ArgumentType = SEQ(name='ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'ExternalSignalInfo')))
-    processAccessSignalling._val = dict([('ArgumentType', _processAccessSignalling_val_ArgumentType), ('operationCode', ('local', 33))])
+    processAccessSignalling = CLASS(name=u'processAccessSignalling', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
+    _processAccessSignalling_val_ArgumentType = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'ExternalSignalInfo')))
+    processAccessSignalling._val = dict([(u'ArgumentType', _processAccessSignalling_val_ArgumentType), (u'operationCode', (u'local', 33))])
     
     #-----< forwardAccessSignalling >-----#
-    forwardAccessSignalling = CLASS(name='forwardAccessSignalling', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
-    _forwardAccessSignalling_val_ArgumentType = SEQ(name='ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'ExternalSignalInfo')))
-    forwardAccessSignalling._val = dict([('ArgumentType', _forwardAccessSignalling_val_ArgumentType), ('operationCode', ('local', 34))])
+    forwardAccessSignalling = CLASS(name=u'forwardAccessSignalling', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
+    _forwardAccessSignalling_val_ArgumentType = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'ExternalSignalInfo')))
+    forwardAccessSignalling._val = dict([(u'ArgumentType', _forwardAccessSignalling_val_ArgumentType), (u'operationCode', (u'local', 34))])
     
     #-----< prepareSubsequentHandover >-----#
-    prepareSubsequentHandover = CLASS(name='prepareSubsequentHandover', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
-    _prepareSubsequentHandover_val_ArgumentType = SEQ(name='ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-MS-DataTypes', 'PrepareSubsequentHO-Arg')))
-    _prepareSubsequentHandover_val_ResultType = SEQ(name='ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'ExternalSignalInfo')))
-    prepareSubsequentHandover._val = dict([('ArgumentType', _prepareSubsequentHandover_val_ArgumentType), ('ResultType', _prepareSubsequentHandover_val_ResultType), ('Errors', ASN1Set(rv=[dict([('errorCode', ('local', 36))]), dict([('errorCode', ('local', 35))]), dict([('errorCode', ('local', 3))]), dict([('errorCode', ('local', 26))])], rr=[], ev=None, er=[])), ('operationCode', ('local', 69))])
+    prepareSubsequentHandover = CLASS(name=u'prepareSubsequentHandover', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
+    _prepareSubsequentHandover_val_ArgumentType = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-MS-DataTypes', 'PrepareSubsequentHO-Arg')))
+    _prepareSubsequentHandover_val_ResultType = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'ExternalSignalInfo')))
+    prepareSubsequentHandover._val = dict([(u'ArgumentType', _prepareSubsequentHandover_val_ArgumentType), (u'ResultType', _prepareSubsequentHandover_val_ResultType), (u'Errors', ASN1Set(rv=[dict([(u'errorCode', (u'local', 36))]), dict([(u'errorCode', (u'local', 35))]), dict([(u'errorCode', (u'local', 3))]), dict([(u'errorCode', (u'local', 26))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 69))])
     
     #-----< performSubsequentHandover >-----#
-    performSubsequentHandover = CLASS(name='performSubsequentHandover', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
-    _performSubsequentHandover_val_ArgumentType = SEQ(name='ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-MS-DataTypes', 'PerformSubsequentHO-Arg')))
-    _performSubsequentHandover_val_ResultType = SEQ(name='ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'ExternalSignalInfo')))
-    performSubsequentHandover._val = dict([('ArgumentType', _performSubsequentHandover_val_ArgumentType), ('ResultType', _performSubsequentHandover_val_ResultType), ('Errors', ASN1Set(rv=[dict([('errorCode', ('local', 36))]), dict([('errorCode', ('local', 2))]), dict([('errorCode', ('local', 3))]), dict([('errorCode', ('local', 23))]), dict([('errorCode', ('local', 26))])], rr=[], ev=None, er=[])), ('operationCode', ('local', 30))])
+    performSubsequentHandover = CLASS(name=u'performSubsequentHandover', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
+    _performSubsequentHandover_val_ArgumentType = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-MS-DataTypes', 'PerformSubsequentHO-Arg')))
+    _performSubsequentHandover_val_ResultType = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'ExternalSignalInfo')))
+    performSubsequentHandover._val = dict([(u'ArgumentType', _performSubsequentHandover_val_ArgumentType), (u'ResultType', _performSubsequentHandover_val_ResultType), (u'Errors', ASN1Set(rv=[dict([(u'errorCode', (u'local', 36))]), dict([(u'errorCode', (u'local', 2))]), dict([(u'errorCode', (u'local', 3))]), dict([(u'errorCode', (u'local', 23))]), dict([(u'errorCode', (u'local', 26))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 30))])
     
     #-----< sendAuthenticationInfo >-----#
-    sendAuthenticationInfo = CLASS(name='sendAuthenticationInfo', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
-    _sendAuthenticationInfo_val_ArgumentType = OCT_STR(name='ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-MS-DataTypes', 'SendAuthenticationInfoArg')))
-    _sendAuthenticationInfo_val_ResultType = SEQ_OF(name='ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-MS-DataTypes', 'SendAuthenticationInfoRes')))
-    sendAuthenticationInfo._val = dict([('ArgumentType', _sendAuthenticationInfo_val_ArgumentType), ('ResultType', _sendAuthenticationInfo_val_ResultType), ('Errors', ASN1Set(rv=[dict([('ParameterType', __OPERATION_Errors_val_ParameterType_0), ('errorCode', ('local', 34))]), dict([('errorCode', ('local', 35))]), dict([('errorCode', ('local', 36))]), dict([('errorCode', ('local', 1))])], rr=[], ev=None, er=[])), ('operationCode', ('local', 56))])
+    sendAuthenticationInfo = CLASS(name=u'sendAuthenticationInfo', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
+    _sendAuthenticationInfo_val_ArgumentType = OCT_STR(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-MS-DataTypes', 'SendAuthenticationInfoArg')))
+    _sendAuthenticationInfo_val_ResultType = SEQ_OF(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-MS-DataTypes', 'SendAuthenticationInfoRes')))
+    sendAuthenticationInfo._val = dict([(u'ArgumentType', _sendAuthenticationInfo_val_ArgumentType), (u'ResultType', _sendAuthenticationInfo_val_ResultType), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'errorCode', (u'local', 35))]), dict([(u'errorCode', (u'local', 36))]), dict([(u'errorCode', (u'local', 1))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 56))])
     
     #-----< checkIMEI >-----#
-    checkIMEI = CLASS(name='checkIMEI', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
-    _checkIMEI_val_ArgumentType = OCT_STR(name='ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'IMEI')))
-    _checkIMEI_val_ResultType = ENUM(name='ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-MS-DataTypes', 'EquipmentStatus')))
-    checkIMEI._val = dict([('ArgumentType', _checkIMEI_val_ArgumentType), ('ResultType', _checkIMEI_val_ResultType), ('Errors', ASN1Set(rv=[dict([('ParameterType', __OPERATION_Errors_val_ParameterType_0), ('errorCode', ('local', 34))]), dict([('errorCode', ('local', 35))]), dict([('errorCode', ('local', 36))]), dict([('errorCode', ('local', 7))])], rr=[], ev=None, er=[])), ('operationCode', ('local', 43))])
+    checkIMEI = CLASS(name=u'checkIMEI', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
+    _checkIMEI_val_ArgumentType = OCT_STR(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'IMEI')))
+    _checkIMEI_val_ResultType = ENUM(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-MS-DataTypes', 'EquipmentStatus')))
+    checkIMEI._val = dict([(u'ArgumentType', _checkIMEI_val_ArgumentType), (u'ResultType', _checkIMEI_val_ResultType), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'errorCode', (u'local', 35))]), dict([(u'errorCode', (u'local', 36))]), dict([(u'errorCode', (u'local', 7))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 43))])
     
     #-----< sendParameters >-----#
-    sendParameters = CLASS(name='sendParameters', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
-    _sendParameters_val_ArgumentType = SEQ(name='ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-MS-DataTypes', 'SendParametersArg')))
-    _sendParameters_val_ResultType = SEQ_OF(name='ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-MS-DataTypes', 'SentParameterList')))
-    sendParameters._val = dict([('ArgumentType', _sendParameters_val_ArgumentType), ('ResultType', _sendParameters_val_ResultType), ('Errors', ASN1Set(rv=[dict([('errorCode', ('local', 36))]), dict([('errorCode', ('local', 1))]), dict([('errorCode', ('local', 5))])], rr=[], ev=None, er=[])), ('operationCode', ('local', 9))])
+    sendParameters = CLASS(name=u'sendParameters', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
+    _sendParameters_val_ArgumentType = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-MS-DataTypes', 'SendParametersArg')))
+    _sendParameters_val_ResultType = SEQ_OF(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-MS-DataTypes', 'SentParameterList')))
+    sendParameters._val = dict([(u'ArgumentType', _sendParameters_val_ArgumentType), (u'ResultType', _sendParameters_val_ResultType), (u'Errors', ASN1Set(rv=[dict([(u'errorCode', (u'local', 36))]), dict([(u'errorCode', (u'local', 1))]), dict([(u'errorCode', (u'local', 5))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 9))])
     
     #-----< insertSubscriberData >-----#
-    insertSubscriberData = CLASS(name='insertSubscriberData', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
-    _insertSubscriberData_val_ArgumentType = SEQ(name='ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-MS-DataTypes', 'InsertSubscriberDataArg')))
-    _insertSubscriberData_val_ResultType = SEQ(name='ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-MS-DataTypes', 'InsertSubscriberDataRes')))
-    insertSubscriberData._val = dict([('ArgumentType', _insertSubscriberData_val_ArgumentType), ('ResultType', _insertSubscriberData_val_ResultType), ('Errors', ASN1Set(rv=[dict([('errorCode', ('local', 35))]), dict([('errorCode', ('local', 36))]), dict([('errorCode', ('local', 5))])], rr=[], ev=None, er=[])), ('operationCode', ('local', 7))])
+    insertSubscriberData = CLASS(name=u'insertSubscriberData', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
+    _insertSubscriberData_val_ArgumentType = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-MS-DataTypes', 'InsertSubscriberDataArg')))
+    _insertSubscriberData_val_ResultType = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-MS-DataTypes', 'InsertSubscriberDataRes')))
+    insertSubscriberData._val = dict([(u'ArgumentType', _insertSubscriberData_val_ArgumentType), (u'ResultType', _insertSubscriberData_val_ResultType), (u'Errors', ASN1Set(rv=[dict([(u'errorCode', (u'local', 35))]), dict([(u'errorCode', (u'local', 36))]), dict([(u'errorCode', (u'local', 5))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 7))])
     
     #-----< deleteSubscriberData >-----#
-    deleteSubscriberData = CLASS(name='deleteSubscriberData', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
-    _deleteSubscriberData_val_ArgumentType = SEQ(name='ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-MS-DataTypes', 'DeleteSubscriberDataArg')))
-    _deleteSubscriberData_val_ResultType = SEQ(name='ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-MS-DataTypes', 'DeleteSubscriberDataRes')))
-    deleteSubscriberData._val = dict([('ArgumentType', _deleteSubscriberData_val_ArgumentType), ('ResultType', _deleteSubscriberData_val_ResultType), ('Errors', ASN1Set(rv=[dict([('errorCode', ('local', 35))]), dict([('errorCode', ('local', 36))]), dict([('errorCode', ('local', 5))])], rr=[], ev=None, er=[])), ('operationCode', ('local', 8))])
+    deleteSubscriberData = CLASS(name=u'deleteSubscriberData', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
+    _deleteSubscriberData_val_ArgumentType = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-MS-DataTypes', 'DeleteSubscriberDataArg')))
+    _deleteSubscriberData_val_ResultType = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-MS-DataTypes', 'DeleteSubscriberDataRes')))
+    deleteSubscriberData._val = dict([(u'ArgumentType', _deleteSubscriberData_val_ArgumentType), (u'ResultType', _deleteSubscriberData_val_ResultType), (u'Errors', ASN1Set(rv=[dict([(u'errorCode', (u'local', 35))]), dict([(u'errorCode', (u'local', 36))]), dict([(u'errorCode', (u'local', 5))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 8))])
     
     #-----< reset >-----#
-    reset = CLASS(name='reset', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
-    _reset_val_ArgumentType = SEQ(name='ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-MS-DataTypes', 'ResetArg')))
-    reset._val = dict([('ArgumentType', _reset_val_ArgumentType), ('operationCode', ('local', 37))])
+    reset = CLASS(name=u'reset', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
+    _reset_val_ArgumentType = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-MS-DataTypes', 'ResetArg')))
+    reset._val = dict([(u'ArgumentType', _reset_val_ArgumentType), (u'operationCode', (u'local', 37))])
     
     #-----< forwardCheckSS-Indication >-----#
-    forwardCheckSS_Indication = CLASS(name='forwardCheckSS-Indication', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
-    forwardCheckSS_Indication._val = dict([('operationCode', ('local', 38))])
+    forwardCheckSS_Indication = CLASS(name=u'forwardCheckSS-Indication', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
+    forwardCheckSS_Indication._val = dict([(u'operationCode', (u'local', 38))])
     
     #-----< restoreData >-----#
-    restoreData = CLASS(name='restoreData', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
-    _restoreData_val_ArgumentType = SEQ(name='ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-MS-DataTypes', 'RestoreDataArg')))
-    _restoreData_val_ResultType = SEQ(name='ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-MS-DataTypes', 'RestoreDataRes')))
-    restoreData._val = dict([('ArgumentType', _restoreData_val_ArgumentType), ('ResultType', _restoreData_val_ResultType), ('Errors', ASN1Set(rv=[dict([('ParameterType', __OPERATION_Errors_val_ParameterType_0), ('errorCode', ('local', 34))]), dict([('errorCode', ('local', 35))]), dict([('errorCode', ('local', 36))]), dict([('errorCode', ('local', 1))])], rr=[], ev=None, er=[])), ('operationCode', ('local', 57))])
+    restoreData = CLASS(name=u'restoreData', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
+    _restoreData_val_ArgumentType = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-MS-DataTypes', 'RestoreDataArg')))
+    _restoreData_val_ResultType = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-MS-DataTypes', 'RestoreDataRes')))
+    restoreData._val = dict([(u'ArgumentType', _restoreData_val_ArgumentType), (u'ResultType', _restoreData_val_ResultType), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'errorCode', (u'local', 35))]), dict([(u'errorCode', (u'local', 36))]), dict([(u'errorCode', (u'local', 1))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 57))])
     
     _all_ = [
         updateLocation,
@@ -4637,142 +4637,142 @@ class MAPv2_MobileServiceOperations:
 
 class MAPv2_SupplementaryServiceOperations:
 
-    _name_  = 'MAPv2-SupplementaryServiceOperations'
+    _name_  = u'MAPv2-SupplementaryServiceOperations'
     _oid_   = []
     
     _obj_ = [
-        'registerSS',
-        'eraseSS',
-        'activateSS',
-        'deactivateSS',
-        'interrogateSS',
-        'processUnstructuredSS-Data',
-        'processUnstructuredSS-Request',
-        'unstructuredSS-Request',
-        'unstructuredSS-Notify',
-        'registerPassword',
-        'getPassword',
-        'beginSubscriberActivity',
+        u'registerSS',
+        u'eraseSS',
+        u'activateSS',
+        u'deactivateSS',
+        u'interrogateSS',
+        u'processUnstructuredSS-Data',
+        u'processUnstructuredSS-Request',
+        u'unstructuredSS-Request',
+        u'unstructuredSS-Notify',
+        u'registerPassword',
+        u'getPassword',
+        u'beginSubscriberActivity',
         ]
     _type_ = [
         ]
     _set_ = [
         ]
     _val_ = [
-        'registerSS',
-        'eraseSS',
-        'activateSS',
-        'deactivateSS',
-        'interrogateSS',
-        'processUnstructuredSS-Data',
-        'processUnstructuredSS-Request',
-        'unstructuredSS-Request',
-        'unstructuredSS-Notify',
-        'registerPassword',
-        'getPassword',
-        'beginSubscriberActivity',
+        u'registerSS',
+        u'eraseSS',
+        u'activateSS',
+        u'deactivateSS',
+        u'interrogateSS',
+        u'processUnstructuredSS-Data',
+        u'processUnstructuredSS-Request',
+        u'unstructuredSS-Request',
+        u'unstructuredSS-Notify',
+        u'registerPassword',
+        u'getPassword',
+        u'beginSubscriberActivity',
         ]
     _class_ = [
-        'registerSS',
-        'eraseSS',
-        'activateSS',
-        'deactivateSS',
-        'interrogateSS',
-        'processUnstructuredSS-Data',
-        'processUnstructuredSS-Request',
-        'unstructuredSS-Request',
-        'unstructuredSS-Notify',
-        'registerPassword',
-        'getPassword',
-        'beginSubscriberActivity',
+        u'registerSS',
+        u'eraseSS',
+        u'activateSS',
+        u'deactivateSS',
+        u'interrogateSS',
+        u'processUnstructuredSS-Data',
+        u'processUnstructuredSS-Request',
+        u'unstructuredSS-Request',
+        u'unstructuredSS-Notify',
+        u'registerPassword',
+        u'getPassword',
+        u'beginSubscriberActivity',
         ]
     _param_ = [
         ]
     
     #-----< registerSS >-----#
-    registerSS = CLASS(name='registerSS', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
-    _registerSS_val_ArgumentType = SEQ(name='ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SS-DataTypes', 'RegisterSS-Arg')))
-    _registerSS_val_ResultType = CHOICE(name='ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SS-DataTypes', 'SS-Info')))
-    __OPERATION_Errors_val_ParameterType_0 = ENUM(name='ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'NetworkResource')))
-    __OPERATION_Errors_val_ParameterType_6 = ENUM(name='ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-ER-DataTypes', 'CallBarringCause')))
-    __OPERATION_Errors_val_ParameterType_8 = OCT_STR(name='ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SS-DataTypes', 'SS-Status')))
-    __OPERATION_Errors_val_ParameterType_9 = CHOICE(name='ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SS-DataTypes', 'SS-SubscriptionOption')))
-    __OPERATION_Errors_val_ParameterType_10 = SEQ(name='ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-ER-DataTypes', 'SS-IncompatibilityCause')))
-    registerSS._val = dict([('ArgumentType', _registerSS_val_ArgumentType), ('ResultType', _registerSS_val_ResultType), ('Errors', ASN1Set(rv=[dict([('ParameterType', __OPERATION_Errors_val_ParameterType_0), ('errorCode', ('local', 34))]), dict([('errorCode', ('local', 35))]), dict([('errorCode', ('local', 36))]), dict([('errorCode', ('local', 1))]), dict([('errorCode', ('local', 10))]), dict([('errorCode', ('local', 11))]), dict([('ParameterType', __OPERATION_Errors_val_ParameterType_6), ('errorCode', ('local', 13))]), dict([('errorCode', ('local', 16))]), dict([('ParameterType', __OPERATION_Errors_val_ParameterType_8), ('errorCode', ('local', 17))]), dict([('ParameterType', __OPERATION_Errors_val_ParameterType_9), ('errorCode', ('local', 19))]), dict([('ParameterType', __OPERATION_Errors_val_ParameterType_10), ('errorCode', ('local', 20))])], rr=[], ev=None, er=[])), ('operationCode', ('local', 10))])
+    registerSS = CLASS(name=u'registerSS', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
+    _registerSS_val_ArgumentType = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SS-DataTypes', 'RegisterSS-Arg')))
+    _registerSS_val_ResultType = CHOICE(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SS-DataTypes', 'SS-Info')))
+    __OPERATION_Errors_val_ParameterType_0 = ENUM(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'NetworkResource')))
+    __OPERATION_Errors_val_ParameterType_6 = ENUM(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-ER-DataTypes', 'CallBarringCause')))
+    __OPERATION_Errors_val_ParameterType_8 = OCT_STR(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SS-DataTypes', 'SS-Status')))
+    __OPERATION_Errors_val_ParameterType_9 = CHOICE(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SS-DataTypes', 'SS-SubscriptionOption')))
+    __OPERATION_Errors_val_ParameterType_10 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-ER-DataTypes', 'SS-IncompatibilityCause')))
+    registerSS._val = dict([(u'ArgumentType', _registerSS_val_ArgumentType), (u'ResultType', _registerSS_val_ResultType), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'errorCode', (u'local', 35))]), dict([(u'errorCode', (u'local', 36))]), dict([(u'errorCode', (u'local', 1))]), dict([(u'errorCode', (u'local', 10))]), dict([(u'errorCode', (u'local', 11))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_6), (u'errorCode', (u'local', 13))]), dict([(u'errorCode', (u'local', 16))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_8), (u'errorCode', (u'local', 17))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_9), (u'errorCode', (u'local', 19))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_10), (u'errorCode', (u'local', 20))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 10))])
     
     #-----< eraseSS >-----#
-    eraseSS = CLASS(name='eraseSS', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
-    _eraseSS_val_ArgumentType = SEQ(name='ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SS-DataTypes', 'SS-ForBS-Code')))
-    _eraseSS_val_ResultType = CHOICE(name='ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SS-DataTypes', 'SS-Info')))
-    eraseSS._val = dict([('ArgumentType', _eraseSS_val_ArgumentType), ('ResultType', _eraseSS_val_ResultType), ('Errors', ASN1Set(rv=[dict([('ParameterType', __OPERATION_Errors_val_ParameterType_0), ('errorCode', ('local', 34))]), dict([('errorCode', ('local', 35))]), dict([('errorCode', ('local', 36))]), dict([('errorCode', ('local', 1))]), dict([('errorCode', ('local', 10))]), dict([('errorCode', ('local', 11))]), dict([('ParameterType', __OPERATION_Errors_val_ParameterType_6), ('errorCode', ('local', 13))]), dict([('errorCode', ('local', 16))]), dict([('ParameterType', __OPERATION_Errors_val_ParameterType_8), ('errorCode', ('local', 17))]), dict([('ParameterType', __OPERATION_Errors_val_ParameterType_9), ('errorCode', ('local', 19))])], rr=[], ev=None, er=[])), ('operationCode', ('local', 11))])
+    eraseSS = CLASS(name=u'eraseSS', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
+    _eraseSS_val_ArgumentType = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SS-DataTypes', 'SS-ForBS-Code')))
+    _eraseSS_val_ResultType = CHOICE(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SS-DataTypes', 'SS-Info')))
+    eraseSS._val = dict([(u'ArgumentType', _eraseSS_val_ArgumentType), (u'ResultType', _eraseSS_val_ResultType), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'errorCode', (u'local', 35))]), dict([(u'errorCode', (u'local', 36))]), dict([(u'errorCode', (u'local', 1))]), dict([(u'errorCode', (u'local', 10))]), dict([(u'errorCode', (u'local', 11))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_6), (u'errorCode', (u'local', 13))]), dict([(u'errorCode', (u'local', 16))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_8), (u'errorCode', (u'local', 17))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_9), (u'errorCode', (u'local', 19))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 11))])
     
     #-----< activateSS >-----#
-    activateSS = CLASS(name='activateSS', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
-    _activateSS_val_ArgumentType = SEQ(name='ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SS-DataTypes', 'SS-ForBS-Code')))
-    _activateSS_val_ResultType = CHOICE(name='ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SS-DataTypes', 'SS-Info')))
-    activateSS._val = dict([('ArgumentType', _activateSS_val_ArgumentType), ('ResultType', _activateSS_val_ResultType), ('Errors', ASN1Set(rv=[dict([('ParameterType', __OPERATION_Errors_val_ParameterType_0), ('errorCode', ('local', 34))]), dict([('errorCode', ('local', 35))]), dict([('errorCode', ('local', 36))]), dict([('errorCode', ('local', 1))]), dict([('errorCode', ('local', 10))]), dict([('errorCode', ('local', 11))]), dict([('ParameterType', __OPERATION_Errors_val_ParameterType_6), ('errorCode', ('local', 13))]), dict([('errorCode', ('local', 16))]), dict([('ParameterType', __OPERATION_Errors_val_ParameterType_8), ('errorCode', ('local', 17))]), dict([('ParameterType', __OPERATION_Errors_val_ParameterType_9), ('errorCode', ('local', 19))]), dict([('ParameterType', __OPERATION_Errors_val_ParameterType_10), ('errorCode', ('local', 20))]), dict([('errorCode', ('local', 38))]), dict([('errorCode', ('local', 43))])], rr=[], ev=None, er=[])), ('operationCode', ('local', 12))])
+    activateSS = CLASS(name=u'activateSS', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
+    _activateSS_val_ArgumentType = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SS-DataTypes', 'SS-ForBS-Code')))
+    _activateSS_val_ResultType = CHOICE(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SS-DataTypes', 'SS-Info')))
+    activateSS._val = dict([(u'ArgumentType', _activateSS_val_ArgumentType), (u'ResultType', _activateSS_val_ResultType), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'errorCode', (u'local', 35))]), dict([(u'errorCode', (u'local', 36))]), dict([(u'errorCode', (u'local', 1))]), dict([(u'errorCode', (u'local', 10))]), dict([(u'errorCode', (u'local', 11))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_6), (u'errorCode', (u'local', 13))]), dict([(u'errorCode', (u'local', 16))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_8), (u'errorCode', (u'local', 17))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_9), (u'errorCode', (u'local', 19))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_10), (u'errorCode', (u'local', 20))]), dict([(u'errorCode', (u'local', 38))]), dict([(u'errorCode', (u'local', 43))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 12))])
     
     #-----< deactivateSS >-----#
-    deactivateSS = CLASS(name='deactivateSS', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
-    _deactivateSS_val_ArgumentType = SEQ(name='ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SS-DataTypes', 'SS-ForBS-Code')))
-    _deactivateSS_val_ResultType = CHOICE(name='ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SS-DataTypes', 'SS-Info')))
-    deactivateSS._val = dict([('ArgumentType', _deactivateSS_val_ArgumentType), ('ResultType', _deactivateSS_val_ResultType), ('Errors', ASN1Set(rv=[dict([('ParameterType', __OPERATION_Errors_val_ParameterType_0), ('errorCode', ('local', 34))]), dict([('errorCode', ('local', 35))]), dict([('errorCode', ('local', 36))]), dict([('errorCode', ('local', 1))]), dict([('errorCode', ('local', 10))]), dict([('errorCode', ('local', 11))]), dict([('ParameterType', __OPERATION_Errors_val_ParameterType_6), ('errorCode', ('local', 13))]), dict([('errorCode', ('local', 16))]), dict([('ParameterType', __OPERATION_Errors_val_ParameterType_8), ('errorCode', ('local', 17))]), dict([('ParameterType', __OPERATION_Errors_val_ParameterType_9), ('errorCode', ('local', 19))]), dict([('errorCode', ('local', 38))]), dict([('errorCode', ('local', 43))])], rr=[], ev=None, er=[])), ('operationCode', ('local', 13))])
+    deactivateSS = CLASS(name=u'deactivateSS', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
+    _deactivateSS_val_ArgumentType = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SS-DataTypes', 'SS-ForBS-Code')))
+    _deactivateSS_val_ResultType = CHOICE(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SS-DataTypes', 'SS-Info')))
+    deactivateSS._val = dict([(u'ArgumentType', _deactivateSS_val_ArgumentType), (u'ResultType', _deactivateSS_val_ResultType), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'errorCode', (u'local', 35))]), dict([(u'errorCode', (u'local', 36))]), dict([(u'errorCode', (u'local', 1))]), dict([(u'errorCode', (u'local', 10))]), dict([(u'errorCode', (u'local', 11))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_6), (u'errorCode', (u'local', 13))]), dict([(u'errorCode', (u'local', 16))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_8), (u'errorCode', (u'local', 17))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_9), (u'errorCode', (u'local', 19))]), dict([(u'errorCode', (u'local', 38))]), dict([(u'errorCode', (u'local', 43))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 13))])
     
     #-----< interrogateSS >-----#
-    interrogateSS = CLASS(name='interrogateSS', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
-    _interrogateSS_val_ArgumentType = SEQ(name='ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SS-DataTypes', 'SS-ForBS-Code')))
-    _interrogateSS_val_ResultType = CHOICE(name='ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SS-DataTypes', 'InterrogateSS-Res')))
-    interrogateSS._val = dict([('ArgumentType', _interrogateSS_val_ArgumentType), ('ResultType', _interrogateSS_val_ResultType), ('Errors', ASN1Set(rv=[dict([('ParameterType', __OPERATION_Errors_val_ParameterType_0), ('errorCode', ('local', 34))]), dict([('errorCode', ('local', 35))]), dict([('errorCode', ('local', 36))]), dict([('errorCode', ('local', 1))]), dict([('errorCode', ('local', 10))]), dict([('errorCode', ('local', 11))]), dict([('ParameterType', __OPERATION_Errors_val_ParameterType_6), ('errorCode', ('local', 13))]), dict([('errorCode', ('local', 16))]), dict([('errorCode', ('local', 18))])], rr=[], ev=None, er=[])), ('operationCode', ('local', 14))])
+    interrogateSS = CLASS(name=u'interrogateSS', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
+    _interrogateSS_val_ArgumentType = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SS-DataTypes', 'SS-ForBS-Code')))
+    _interrogateSS_val_ResultType = CHOICE(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SS-DataTypes', 'InterrogateSS-Res')))
+    interrogateSS._val = dict([(u'ArgumentType', _interrogateSS_val_ArgumentType), (u'ResultType', _interrogateSS_val_ResultType), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'errorCode', (u'local', 35))]), dict([(u'errorCode', (u'local', 36))]), dict([(u'errorCode', (u'local', 1))]), dict([(u'errorCode', (u'local', 10))]), dict([(u'errorCode', (u'local', 11))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_6), (u'errorCode', (u'local', 13))]), dict([(u'errorCode', (u'local', 16))]), dict([(u'errorCode', (u'local', 18))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 14))])
     
     #-----< processUnstructuredSS-Data >-----#
-    processUnstructuredSS_Data = CLASS(name='processUnstructuredSS-Data', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
-    _processUnstructuredSS_Data_val_ArgumentType = STR_IA5(name='ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SS-DataTypes', 'SS-UserData')))
-    _processUnstructuredSS_Data_val_ResultType = STR_IA5(name='ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SS-DataTypes', 'SS-UserData')))
-    processUnstructuredSS_Data._val = dict([('ArgumentType', _processUnstructuredSS_Data_val_ArgumentType), ('ResultType', _processUnstructuredSS_Data_val_ResultType), ('Errors', ASN1Set(rv=[dict([('ParameterType', __OPERATION_Errors_val_ParameterType_0), ('errorCode', ('local', 34))]), dict([('errorCode', ('local', 36))])], rr=[], ev=None, er=[])), ('operationCode', ('local', 19))])
+    processUnstructuredSS_Data = CLASS(name=u'processUnstructuredSS-Data', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
+    _processUnstructuredSS_Data_val_ArgumentType = STR_IA5(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SS-DataTypes', 'SS-UserData')))
+    _processUnstructuredSS_Data_val_ResultType = STR_IA5(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SS-DataTypes', 'SS-UserData')))
+    processUnstructuredSS_Data._val = dict([(u'ArgumentType', _processUnstructuredSS_Data_val_ArgumentType), (u'ResultType', _processUnstructuredSS_Data_val_ResultType), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'errorCode', (u'local', 36))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 19))])
     
     #-----< processUnstructuredSS-Request >-----#
-    processUnstructuredSS_Request = CLASS(name='processUnstructuredSS-Request', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
-    _processUnstructuredSS_Request_val_ArgumentType = SEQ(name='ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SS-DataTypes', 'USSD-Arg')))
-    _processUnstructuredSS_Request_val_ResultType = SEQ(name='ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SS-DataTypes', 'USSD-Res')))
-    __OPERATION_Errors_val_ParameterType_4 = ENUM(name='ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-ER-DataTypes', 'CallBarringCause')))
-    processUnstructuredSS_Request._val = dict([('ArgumentType', _processUnstructuredSS_Request_val_ArgumentType), ('ResultType', _processUnstructuredSS_Request_val_ResultType), ('Errors', ASN1Set(rv=[dict([('ParameterType', __OPERATION_Errors_val_ParameterType_0), ('errorCode', ('local', 34))]), dict([('errorCode', ('local', 35))]), dict([('errorCode', ('local', 36))]), dict([('errorCode', ('local', 71))]), dict([('ParameterType', __OPERATION_Errors_val_ParameterType_4), ('errorCode', ('local', 13))])], rr=[], ev=None, er=[])), ('operationCode', ('local', 59))])
+    processUnstructuredSS_Request = CLASS(name=u'processUnstructuredSS-Request', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
+    _processUnstructuredSS_Request_val_ArgumentType = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SS-DataTypes', 'USSD-Arg')))
+    _processUnstructuredSS_Request_val_ResultType = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SS-DataTypes', 'USSD-Res')))
+    __OPERATION_Errors_val_ParameterType_4 = ENUM(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-ER-DataTypes', 'CallBarringCause')))
+    processUnstructuredSS_Request._val = dict([(u'ArgumentType', _processUnstructuredSS_Request_val_ArgumentType), (u'ResultType', _processUnstructuredSS_Request_val_ResultType), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'errorCode', (u'local', 35))]), dict([(u'errorCode', (u'local', 36))]), dict([(u'errorCode', (u'local', 71))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_4), (u'errorCode', (u'local', 13))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 59))])
     
     #-----< unstructuredSS-Request >-----#
-    unstructuredSS_Request = CLASS(name='unstructuredSS-Request', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
-    _unstructuredSS_Request_val_ArgumentType = SEQ(name='ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SS-DataTypes', 'USSD-Arg')))
-    _unstructuredSS_Request_val_ResultType = SEQ(name='ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SS-DataTypes', 'USSD-Res')))
-    __OPERATION_Errors_val_ParameterType_3 = BOOL(name='ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-Errors', 'Mwd-Set')))
-    unstructuredSS_Request._val = dict([('ArgumentType', _unstructuredSS_Request_val_ArgumentType), ('ResultType', _unstructuredSS_Request_val_ResultType), ('Errors', ASN1Set(rv=[dict([('ParameterType', __OPERATION_Errors_val_ParameterType_0), ('errorCode', ('local', 34))]), dict([('errorCode', ('local', 35))]), dict([('errorCode', ('local', 36))]), dict([('ParameterType', __OPERATION_Errors_val_ParameterType_3), ('errorCode', ('local', 27))]), dict([('errorCode', ('local', 9))]), dict([('errorCode', ('local', 12))]), dict([('errorCode', ('local', 71))]), dict([('errorCode', ('local', 72))])], rr=[], ev=None, er=[])), ('operationCode', ('local', 60))])
+    unstructuredSS_Request = CLASS(name=u'unstructuredSS-Request', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
+    _unstructuredSS_Request_val_ArgumentType = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SS-DataTypes', 'USSD-Arg')))
+    _unstructuredSS_Request_val_ResultType = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SS-DataTypes', 'USSD-Res')))
+    __OPERATION_Errors_val_ParameterType_3 = BOOL(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-Errors', 'Mwd-Set')))
+    unstructuredSS_Request._val = dict([(u'ArgumentType', _unstructuredSS_Request_val_ArgumentType), (u'ResultType', _unstructuredSS_Request_val_ResultType), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'errorCode', (u'local', 35))]), dict([(u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_3), (u'errorCode', (u'local', 27))]), dict([(u'errorCode', (u'local', 9))]), dict([(u'errorCode', (u'local', 12))]), dict([(u'errorCode', (u'local', 71))]), dict([(u'errorCode', (u'local', 72))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 60))])
     
     #-----< unstructuredSS-Notify >-----#
-    unstructuredSS_Notify = CLASS(name='unstructuredSS-Notify', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
-    _unstructuredSS_Notify_val_ArgumentType = SEQ(name='ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SS-DataTypes', 'USSD-Arg')))
-    unstructuredSS_Notify._val = dict([('ArgumentType', _unstructuredSS_Notify_val_ArgumentType), ('Errors', ASN1Set(rv=[dict([('ParameterType', __OPERATION_Errors_val_ParameterType_0), ('errorCode', ('local', 34))]), dict([('errorCode', ('local', 35))]), dict([('errorCode', ('local', 36))]), dict([('ParameterType', __OPERATION_Errors_val_ParameterType_3), ('errorCode', ('local', 27))]), dict([('errorCode', ('local', 9))]), dict([('errorCode', ('local', 12))]), dict([('errorCode', ('local', 71))]), dict([('errorCode', ('local', 72))])], rr=[], ev=None, er=[])), ('operationCode', ('local', 61))])
+    unstructuredSS_Notify = CLASS(name=u'unstructuredSS-Notify', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
+    _unstructuredSS_Notify_val_ArgumentType = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SS-DataTypes', 'USSD-Arg')))
+    unstructuredSS_Notify._val = dict([(u'ArgumentType', _unstructuredSS_Notify_val_ArgumentType), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'errorCode', (u'local', 35))]), dict([(u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_3), (u'errorCode', (u'local', 27))]), dict([(u'errorCode', (u'local', 9))]), dict([(u'errorCode', (u'local', 12))]), dict([(u'errorCode', (u'local', 71))]), dict([(u'errorCode', (u'local', 72))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 61))])
     
     #-----< registerPassword >-----#
-    registerPassword = CLASS(name='registerPassword', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
-    _registerPassword_val_ArgumentType = OCT_STR(name='ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SS-Code', 'SS-Code')))
-    _registerPassword_val_ResultType = STR_NUM(name='ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SS-DataTypes', 'Password')))
-    _registerPassword_val_ResultType._const_alpha = ASN1Set(rv=['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'], rr=[], ev=None, er=[])
-    __OPERATION_Errors_val_ParameterType_3_0 = ENUM(name='ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-ER-DataTypes', 'CallBarringCause')))
-    __OPERATION_Errors_val_ParameterType_4_0 = CHOICE(name='ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SS-DataTypes', 'SS-SubscriptionOption')))
-    __OPERATION_Errors_val_ParameterType_5 = ENUM(name='ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-ER-DataTypes', 'PW-RegistrationFailureCause')))
-    __OPERATION_Linked_val_ArgumentType_0 = ENUM(name='ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SS-DataTypes', 'GuidanceInfo')))
-    __OPERATION_Linked_val_ResultType_0 = STR_NUM(name='ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SS-DataTypes', 'Password')))
-    __OPERATION_Linked_val_ResultType_0._const_alpha = ASN1Set(rv=['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'], rr=[], ev=None, er=[])
-    registerPassword._val = dict([('ArgumentType', _registerPassword_val_ArgumentType), ('ResultType', _registerPassword_val_ResultType), ('Errors', ASN1Set(rv=[dict([('ParameterType', __OPERATION_Errors_val_ParameterType_0), ('errorCode', ('local', 34))]), dict([('errorCode', ('local', 35))]), dict([('errorCode', ('local', 36))]), dict([('ParameterType', __OPERATION_Errors_val_ParameterType_3_0), ('errorCode', ('local', 13))]), dict([('ParameterType', __OPERATION_Errors_val_ParameterType_4_0), ('errorCode', ('local', 19))]), dict([('ParameterType', __OPERATION_Errors_val_ParameterType_5), ('errorCode', ('local', 37))]), dict([('errorCode', ('local', 38))]), dict([('errorCode', ('local', 43))])], rr=[], ev=None, er=[])), ('Linked', ASN1Set(rv=[dict([('ArgumentType', __OPERATION_Linked_val_ArgumentType_0), ('ResultType', __OPERATION_Linked_val_ResultType_0), ('operationCode', ('local', 18))])], rr=[], ev=None, er=[])), ('operationCode', ('local', 17))])
+    registerPassword = CLASS(name=u'registerPassword', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
+    _registerPassword_val_ArgumentType = OCT_STR(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SS-Code', 'SS-Code')))
+    _registerPassword_val_ResultType = STR_NUM(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SS-DataTypes', 'Password')))
+    _registerPassword_val_ResultType._const_alpha = ASN1Set(rv=[u'0', u'1', u'2', u'3', u'4', u'5', u'6', u'7', u'8', u'9'], rr=[], ev=None, er=[])
+    __OPERATION_Errors_val_ParameterType_3_0 = ENUM(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-ER-DataTypes', 'CallBarringCause')))
+    __OPERATION_Errors_val_ParameterType_4_0 = CHOICE(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SS-DataTypes', 'SS-SubscriptionOption')))
+    __OPERATION_Errors_val_ParameterType_5 = ENUM(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-ER-DataTypes', 'PW-RegistrationFailureCause')))
+    __OPERATION_Linked_val_ArgumentType_0 = ENUM(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SS-DataTypes', 'GuidanceInfo')))
+    __OPERATION_Linked_val_ResultType_0 = STR_NUM(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SS-DataTypes', 'Password')))
+    __OPERATION_Linked_val_ResultType_0._const_alpha = ASN1Set(rv=[u'0', u'1', u'2', u'3', u'4', u'5', u'6', u'7', u'8', u'9'], rr=[], ev=None, er=[])
+    registerPassword._val = dict([(u'ArgumentType', _registerPassword_val_ArgumentType), (u'ResultType', _registerPassword_val_ResultType), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'errorCode', (u'local', 35))]), dict([(u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_3_0), (u'errorCode', (u'local', 13))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_4_0), (u'errorCode', (u'local', 19))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_5), (u'errorCode', (u'local', 37))]), dict([(u'errorCode', (u'local', 38))]), dict([(u'errorCode', (u'local', 43))])], rr=[], ev=None, er=[])), (u'Linked', ASN1Set(rv=[dict([(u'ArgumentType', __OPERATION_Linked_val_ArgumentType_0), (u'ResultType', __OPERATION_Linked_val_ResultType_0), (u'operationCode', (u'local', 18))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 17))])
     
     #-----< getPassword >-----#
-    getPassword = CLASS(name='getPassword', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
-    _getPassword_val_ArgumentType = ENUM(name='ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SS-DataTypes', 'GuidanceInfo')))
-    _getPassword_val_ResultType = STR_NUM(name='ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SS-DataTypes', 'Password')))
-    _getPassword_val_ResultType._const_alpha = ASN1Set(rv=['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'], rr=[], ev=None, er=[])
-    getPassword._val = dict([('ArgumentType', _getPassword_val_ArgumentType), ('ResultType', _getPassword_val_ResultType), ('operationCode', ('local', 18))])
+    getPassword = CLASS(name=u'getPassword', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
+    _getPassword_val_ArgumentType = ENUM(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SS-DataTypes', 'GuidanceInfo')))
+    _getPassword_val_ResultType = STR_NUM(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SS-DataTypes', 'Password')))
+    _getPassword_val_ResultType._const_alpha = ASN1Set(rv=[u'0', u'1', u'2', u'3', u'4', u'5', u'6', u'7', u'8', u'9'], rr=[], ev=None, er=[])
+    getPassword._val = dict([(u'ArgumentType', _getPassword_val_ArgumentType), (u'ResultType', _getPassword_val_ResultType), (u'operationCode', (u'local', 18))])
     
     #-----< beginSubscriberActivity >-----#
-    beginSubscriberActivity = CLASS(name='beginSubscriberActivity', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
-    _beginSubscriberActivity_val_ArgumentType = SEQ(name='ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SS-DataTypes', 'BeginSubscriberActivityArg')))
-    beginSubscriberActivity._val = dict([('ArgumentType', _beginSubscriberActivity_val_ArgumentType), ('operationCode', ('local', 54))])
+    beginSubscriberActivity = CLASS(name=u'beginSubscriberActivity', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
+    _beginSubscriberActivity_val_ArgumentType = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SS-DataTypes', 'BeginSubscriberActivityArg')))
+    beginSubscriberActivity._val = dict([(u'ArgumentType', _beginSubscriberActivity_val_ArgumentType), (u'operationCode', (u'local', 54))])
     
     _all_ = [
         registerSS,
@@ -4825,44 +4825,44 @@ class MAPv2_SupplementaryServiceOperations:
 
 class MAPv2_CallHandlingOperations:
 
-    _name_  = 'MAPv2-CallHandlingOperations'
+    _name_  = u'MAPv2-CallHandlingOperations'
     _oid_   = []
     
     _obj_ = [
-        'sendRoutingInfo',
-        'provideRoamingNumber',
+        u'sendRoutingInfo',
+        u'provideRoamingNumber',
         ]
     _type_ = [
         ]
     _set_ = [
         ]
     _val_ = [
-        'sendRoutingInfo',
-        'provideRoamingNumber',
+        u'sendRoutingInfo',
+        u'provideRoamingNumber',
         ]
     _class_ = [
-        'sendRoutingInfo',
-        'provideRoamingNumber',
+        u'sendRoutingInfo',
+        u'provideRoamingNumber',
         ]
     _param_ = [
         ]
     
     #-----< sendRoutingInfo >-----#
-    sendRoutingInfo = CLASS(name='sendRoutingInfo', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
-    _sendRoutingInfo_val_ArgumentType = SEQ(name='ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CH-DataTypes', 'SendRoutingInfoArg')))
-    _sendRoutingInfo_val_ResultType = SEQ(name='ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CH-DataTypes', 'SendRoutingInfoRes')))
-    __OPERATION_Errors_val_ParameterType_0 = ENUM(name='ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'NetworkResource')))
-    __OPERATION_Errors_val_ParameterType_8 = BOOL(name='ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-Errors', 'Mwd-Set')))
-    __OPERATION_Errors_val_ParameterType_9 = ENUM(name='ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-ER-DataTypes', 'CallBarringCause')))
-    __OPERATION_Errors_val_ParameterType_10 = ENUM(name='ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-ER-DataTypes', 'CUG-RejectCause')))
-    sendRoutingInfo._val = dict([('ArgumentType', _sendRoutingInfo_val_ArgumentType), ('ResultType', _sendRoutingInfo_val_ResultType), ('Errors', ASN1Set(rv=[dict([('ParameterType', __OPERATION_Errors_val_ParameterType_0), ('errorCode', ('local', 34))]), dict([('errorCode', ('local', 35))]), dict([('errorCode', ('local', 36))]), dict([('errorCode', ('local', 21))]), dict([('errorCode', ('local', 1))]), dict([('errorCode', ('local', 44))]), dict([('errorCode', ('local', 10))]), dict([('errorCode', ('local', 11))]), dict([('ParameterType', __OPERATION_Errors_val_ParameterType_8), ('errorCode', ('local', 27))]), dict([('ParameterType', __OPERATION_Errors_val_ParameterType_9), ('errorCode', ('local', 13))]), dict([('ParameterType', __OPERATION_Errors_val_ParameterType_10), ('errorCode', ('local', 15))]), dict([('errorCode', ('local', 14))])], rr=[], ev=None, er=[])), ('operationCode', ('local', 22))])
+    sendRoutingInfo = CLASS(name=u'sendRoutingInfo', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
+    _sendRoutingInfo_val_ArgumentType = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CH-DataTypes', 'SendRoutingInfoArg')))
+    _sendRoutingInfo_val_ResultType = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CH-DataTypes', 'SendRoutingInfoRes')))
+    __OPERATION_Errors_val_ParameterType_0 = ENUM(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'NetworkResource')))
+    __OPERATION_Errors_val_ParameterType_8 = BOOL(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-Errors', 'Mwd-Set')))
+    __OPERATION_Errors_val_ParameterType_9 = ENUM(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-ER-DataTypes', 'CallBarringCause')))
+    __OPERATION_Errors_val_ParameterType_10 = ENUM(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-ER-DataTypes', 'CUG-RejectCause')))
+    sendRoutingInfo._val = dict([(u'ArgumentType', _sendRoutingInfo_val_ArgumentType), (u'ResultType', _sendRoutingInfo_val_ResultType), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'errorCode', (u'local', 35))]), dict([(u'errorCode', (u'local', 36))]), dict([(u'errorCode', (u'local', 21))]), dict([(u'errorCode', (u'local', 1))]), dict([(u'errorCode', (u'local', 44))]), dict([(u'errorCode', (u'local', 10))]), dict([(u'errorCode', (u'local', 11))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_8), (u'errorCode', (u'local', 27))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_9), (u'errorCode', (u'local', 13))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_10), (u'errorCode', (u'local', 15))]), dict([(u'errorCode', (u'local', 14))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 22))])
     
     #-----< provideRoamingNumber >-----#
-    provideRoamingNumber = CLASS(name='provideRoamingNumber', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
-    _provideRoamingNumber_val_ArgumentType = SEQ(name='ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CH-DataTypes', 'ProvideRoamingNumberArg')))
-    _provideRoamingNumber_val_ResultType = OCT_STR(name='ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'ISDN-AddressString')))
-    __OPERATION_Errors_val_ParameterType_4 = BOOL(name='ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-Errors', 'Mwd-Set')))
-    provideRoamingNumber._val = dict([('ArgumentType', _provideRoamingNumber_val_ArgumentType), ('ResultType', _provideRoamingNumber_val_ResultType), ('Errors', ASN1Set(rv=[dict([('ParameterType', __OPERATION_Errors_val_ParameterType_0), ('errorCode', ('local', 34))]), dict([('errorCode', ('local', 35))]), dict([('errorCode', ('local', 36))]), dict([('errorCode', ('local', 21))]), dict([('ParameterType', __OPERATION_Errors_val_ParameterType_4), ('errorCode', ('local', 27))]), dict([('errorCode', ('local', 39))])], rr=[], ev=None, er=[])), ('operationCode', ('local', 4))])
+    provideRoamingNumber = CLASS(name=u'provideRoamingNumber', mode=MODE_VALUE, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
+    _provideRoamingNumber_val_ArgumentType = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CH-DataTypes', 'ProvideRoamingNumberArg')))
+    _provideRoamingNumber_val_ResultType = OCT_STR(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'ISDN-AddressString')))
+    __OPERATION_Errors_val_ParameterType_4 = BOOL(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-Errors', 'Mwd-Set')))
+    provideRoamingNumber._val = dict([(u'ArgumentType', _provideRoamingNumber_val_ArgumentType), (u'ResultType', _provideRoamingNumber_val_ResultType), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'errorCode', (u'local', 35))]), dict([(u'errorCode', (u'local', 36))]), dict([(u'errorCode', (u'local', 21))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_4), (u'errorCode', (u'local', 27))]), dict([(u'errorCode', (u'local', 39))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 4))])
     
     _all_ = [
         sendRoutingInfo,
@@ -4880,124 +4880,124 @@ class MAPv2_CallHandlingOperations:
 
 class MAPv2_Protocol:
 
-    _name_  = 'MAPv2-Protocol'
+    _name_  = u'MAPv2-Protocol'
     _oid_   = []
     
     _obj_ = [
-        'Supported-MAPv2-Operations',
+        u'Supported-MAPv2-Operations',
         ]
     _type_ = [
         ]
     _set_ = [
-        'Supported-MAPv2-Operations',
+        u'Supported-MAPv2-Operations',
         ]
     _val_ = [
         ]
     _class_ = [
-        'Supported-MAPv2-Operations',
+        u'Supported-MAPv2-Operations',
         ]
     _param_ = [
         ]
     
     #-----< Supported-MAPv2-Operations >-----#
-    Supported_MAPv2_Operations = CLASS(name='Supported-MAPv2-Operations', mode=MODE_SET, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
-    _Supported_MAPv2_Operations_val_ArgumentType_0 = SEQ(name='ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CH-DataTypes', 'SendRoutingInfoArg')))
-    _Supported_MAPv2_Operations_val_ResultType_0 = SEQ(name='ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CH-DataTypes', 'SendRoutingInfoRes')))
-    __OPERATION_Errors_val_ParameterType_0 = ENUM(name='ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'NetworkResource')))
-    __OPERATION_Errors_val_ParameterType_8 = BOOL(name='ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-Errors', 'Mwd-Set')))
-    __OPERATION_Errors_val_ParameterType_9 = ENUM(name='ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-ER-DataTypes', 'CallBarringCause')))
-    __OPERATION_Errors_val_ParameterType_10 = ENUM(name='ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-ER-DataTypes', 'CUG-RejectCause')))
-    _Supported_MAPv2_Operations_val_ArgumentType_1 = SEQ(name='ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CH-DataTypes', 'ProvideRoamingNumberArg')))
-    _Supported_MAPv2_Operations_val_ResultType_1 = OCT_STR(name='ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'ISDN-AddressString')))
-    __OPERATION_Errors_val_ParameterType_4 = BOOL(name='ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-Errors', 'Mwd-Set')))
-    _Supported_MAPv2_Operations_val_ArgumentType_2 = SEQ(name='ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-MS-DataTypes', 'UpdateLocationArg')))
-    _Supported_MAPv2_Operations_val_ResultType_2 = CHOICE(name='ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-MS-DataTypes', 'UpdateLocationRes')))
-    __OPERATION_Errors_val_ParameterType_4_0 = ENUM(name='ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-ER-DataTypes', 'RoamingNotAllowedCause')))
-    _Supported_MAPv2_Operations_val_ArgumentType_3 = CHOICE(name='ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-MS-DataTypes', 'CancelLocationArg')))
-    _Supported_MAPv2_Operations_val_ArgumentType_4 = SEQ(name='ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-MS-DataTypes', 'PurgeMS-Arg')))
-    _Supported_MAPv2_Operations_val_ArgumentType_5 = OCT_STR(name='ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'TMSI')))
-    _Supported_MAPv2_Operations_val_ResultType_5 = SEQ(name='ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-MS-DataTypes', 'SendIdentificationRes')))
-    _Supported_MAPv2_Operations_val_ArgumentType_6 = SEQ(name='ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-MS-DataTypes', 'PrepareHO-Arg')))
-    _Supported_MAPv2_Operations_val_ResultType_6 = SEQ(name='ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-MS-DataTypes', 'PrepareHO-Res')))
-    _Supported_MAPv2_Operations_val_ArgumentType_7 = SEQ(name='ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-MS-DataTypes', 'PerformHO-Arg')))
-    _Supported_MAPv2_Operations_val_ResultType_7 = SEQ(name='ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-MS-DataTypes', 'PerformHO-Res')))
-    _Supported_MAPv2_Operations_val_ArgumentType_8 = SEQ(name='ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'ExternalSignalInfo')))
-    _Supported_MAPv2_Operations_val_ArgumentType_9 = SEQ(name='ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'ExternalSignalInfo')))
-    _Supported_MAPv2_Operations_val_ArgumentType_10 = SEQ(name='ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'ExternalSignalInfo')))
-    _Supported_MAPv2_Operations_val_ArgumentType_11 = SEQ(name='ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-MS-DataTypes', 'PrepareSubsequentHO-Arg')))
-    _Supported_MAPv2_Operations_val_ResultType_11 = SEQ(name='ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'ExternalSignalInfo')))
-    _Supported_MAPv2_Operations_val_ArgumentType_12 = SEQ(name='ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-MS-DataTypes', 'PerformSubsequentHO-Arg')))
-    _Supported_MAPv2_Operations_val_ResultType_12 = SEQ(name='ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'ExternalSignalInfo')))
-    _Supported_MAPv2_Operations_val_ArgumentType_13 = OCT_STR(name='ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-MS-DataTypes', 'SendAuthenticationInfoArg')))
-    _Supported_MAPv2_Operations_val_ResultType_13 = SEQ_OF(name='ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-MS-DataTypes', 'SendAuthenticationInfoRes')))
-    _Supported_MAPv2_Operations_val_ArgumentType_14 = OCT_STR(name='ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'IMEI')))
-    _Supported_MAPv2_Operations_val_ResultType_14 = ENUM(name='ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-MS-DataTypes', 'EquipmentStatus')))
-    _Supported_MAPv2_Operations_val_ArgumentType_15 = SEQ(name='ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-MS-DataTypes', 'SendParametersArg')))
-    _Supported_MAPv2_Operations_val_ResultType_15 = SEQ_OF(name='ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-MS-DataTypes', 'SentParameterList')))
-    _Supported_MAPv2_Operations_val_ArgumentType_16 = SEQ(name='ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-MS-DataTypes', 'InsertSubscriberDataArg')))
-    _Supported_MAPv2_Operations_val_ResultType_16 = SEQ(name='ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-MS-DataTypes', 'InsertSubscriberDataRes')))
-    _Supported_MAPv2_Operations_val_ArgumentType_17 = SEQ(name='ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-MS-DataTypes', 'DeleteSubscriberDataArg')))
-    _Supported_MAPv2_Operations_val_ResultType_17 = SEQ(name='ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-MS-DataTypes', 'DeleteSubscriberDataRes')))
-    _Supported_MAPv2_Operations_val_ArgumentType_18 = SEQ(name='ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-MS-DataTypes', 'ResetArg')))
-    _Supported_MAPv2_Operations_val_ArgumentType_20 = SEQ(name='ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-MS-DataTypes', 'RestoreDataArg')))
-    _Supported_MAPv2_Operations_val_ResultType_20 = SEQ(name='ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-MS-DataTypes', 'RestoreDataRes')))
-    _Supported_MAPv2_Operations_val_ArgumentType_21 = SEQ(name='ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-OM-DataTypes', 'ActivateTraceModeArg')))
-    _Supported_MAPv2_Operations_val_ArgumentType_22 = SEQ(name='ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-OM-DataTypes', 'DeactivateTraceModeArg')))
-    _Supported_MAPv2_Operations_val_ArgumentType_23 = SEQ(name='ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-OM-DataTypes', 'TraceSubscriberActivityArg')))
-    _Supported_MAPv2_Operations_val_ArgumentType_24 = SEQ(name='ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-OM-DataTypes', 'NoteInternalHO-Arg')))
-    _Supported_MAPv2_Operations_val_ArgumentType_25 = OCT_STR(name='ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'ISDN-AddressString')))
-    _Supported_MAPv2_Operations_val_ResultType_25 = OCT_STR(name='ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'IMSI')))
-    _Supported_MAPv2_Operations_val_ArgumentType_26 = SEQ(name='ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SM-DataTypes', 'RoutingInfoForSM-Arg')))
-    _Supported_MAPv2_Operations_val_ResultType_26 = SEQ(name='ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SM-DataTypes', 'RoutingInfoForSM-Res')))
-    __OPERATION_Errors_val_ParameterType_6 = BOOL(name='ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-Errors', 'Mwd-Set')))
-    __OPERATION_Errors_val_ParameterType_7 = ENUM(name='ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-ER-DataTypes', 'CallBarringCause')))
-    _Supported_MAPv2_Operations_val_ArgumentType_27 = SEQ(name='ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SM-DataTypes', 'ForwardSM-Arg')))
-    __OPERATION_Errors_val_ParameterType_7_0 = BOOL(name='ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-Errors', 'Mwd-Set')))
-    __OPERATION_Errors_val_ParameterType_9_0 = CHOICE(name='ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-ER-DataTypes', 'SM-DeliveryFailureCause')))
-    _Supported_MAPv2_Operations_val_ArgumentType_28 = SEQ(name='ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SM-DataTypes', 'ReportSM-DeliveryStatusArg')))
-    _Supported_MAPv2_Operations_val_ResultType_28 = OCT_STR(name='ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'ISDN-AddressString')))
-    _Supported_MAPv2_Operations_val_ArgumentType_29 = OCT_STR(name='ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'IMSI')))
-    _Supported_MAPv2_Operations_val_ArgumentType_30 = SEQ(name='ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SM-DataTypes', 'AlertServiceCentreArg')))
-    _Supported_MAPv2_Operations_val_ArgumentType_31 = SEQ(name='ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SM-DataTypes', 'AlertServiceCentreArg')))
-    _Supported_MAPv2_Operations_val_ArgumentType_32 = SEQ(name='ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SM-DataTypes', 'InformServiceCentreArg')))
-    _Supported_MAPv2_Operations_val_ArgumentType_33 = SEQ(name='ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SM-DataTypes', 'ReadyForSM-Arg')))
-    _Supported_MAPv2_Operations_val_ArgumentType_34 = SEQ(name='ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SS-DataTypes', 'RegisterSS-Arg')))
-    _Supported_MAPv2_Operations_val_ResultType_34 = CHOICE(name='ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SS-DataTypes', 'SS-Info')))
-    __OPERATION_Errors_val_ParameterType_6_0 = ENUM(name='ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-ER-DataTypes', 'CallBarringCause')))
-    __OPERATION_Errors_val_ParameterType_8_0 = OCT_STR(name='ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SS-DataTypes', 'SS-Status')))
-    __OPERATION_Errors_val_ParameterType_9_1 = CHOICE(name='ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SS-DataTypes', 'SS-SubscriptionOption')))
-    __OPERATION_Errors_val_ParameterType_10_0 = SEQ(name='ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-ER-DataTypes', 'SS-IncompatibilityCause')))
-    _Supported_MAPv2_Operations_val_ArgumentType_35 = SEQ(name='ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SS-DataTypes', 'SS-ForBS-Code')))
-    _Supported_MAPv2_Operations_val_ResultType_35 = CHOICE(name='ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SS-DataTypes', 'SS-Info')))
-    _Supported_MAPv2_Operations_val_ArgumentType_36 = SEQ(name='ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SS-DataTypes', 'SS-ForBS-Code')))
-    _Supported_MAPv2_Operations_val_ResultType_36 = CHOICE(name='ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SS-DataTypes', 'SS-Info')))
-    _Supported_MAPv2_Operations_val_ArgumentType_37 = SEQ(name='ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SS-DataTypes', 'SS-ForBS-Code')))
-    _Supported_MAPv2_Operations_val_ResultType_37 = CHOICE(name='ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SS-DataTypes', 'SS-Info')))
-    _Supported_MAPv2_Operations_val_ArgumentType_38 = SEQ(name='ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SS-DataTypes', 'SS-ForBS-Code')))
-    _Supported_MAPv2_Operations_val_ResultType_38 = CHOICE(name='ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SS-DataTypes', 'InterrogateSS-Res')))
-    _Supported_MAPv2_Operations_val_ArgumentType_39 = STR_IA5(name='ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SS-DataTypes', 'SS-UserData')))
-    _Supported_MAPv2_Operations_val_ResultType_39 = STR_IA5(name='ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SS-DataTypes', 'SS-UserData')))
-    _Supported_MAPv2_Operations_val_ArgumentType_40 = SEQ(name='ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SS-DataTypes', 'USSD-Arg')))
-    _Supported_MAPv2_Operations_val_ResultType_40 = SEQ(name='ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SS-DataTypes', 'USSD-Res')))
-    __OPERATION_Errors_val_ParameterType_4_1 = ENUM(name='ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-ER-DataTypes', 'CallBarringCause')))
-    _Supported_MAPv2_Operations_val_ArgumentType_41 = SEQ(name='ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SS-DataTypes', 'USSD-Arg')))
-    _Supported_MAPv2_Operations_val_ResultType_41 = SEQ(name='ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SS-DataTypes', 'USSD-Res')))
-    __OPERATION_Errors_val_ParameterType_3 = BOOL(name='ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-Errors', 'Mwd-Set')))
-    _Supported_MAPv2_Operations_val_ArgumentType_42 = SEQ(name='ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SS-DataTypes', 'USSD-Arg')))
-    _Supported_MAPv2_Operations_val_ArgumentType_43 = OCT_STR(name='ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SS-Code', 'SS-Code')))
-    _Supported_MAPv2_Operations_val_ResultType_43 = STR_NUM(name='ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SS-DataTypes', 'Password')))
-    _Supported_MAPv2_Operations_val_ResultType_43._const_alpha = ASN1Set(rv=['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'], rr=[], ev=None, er=[])
-    __OPERATION_Errors_val_ParameterType_3_0 = ENUM(name='ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-ER-DataTypes', 'CallBarringCause')))
-    __OPERATION_Errors_val_ParameterType_4_2 = CHOICE(name='ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SS-DataTypes', 'SS-SubscriptionOption')))
-    __OPERATION_Errors_val_ParameterType_5 = ENUM(name='ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-ER-DataTypes', 'PW-RegistrationFailureCause')))
-    __OPERATION_Linked_val_ArgumentType_0 = ENUM(name='ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SS-DataTypes', 'GuidanceInfo')))
-    __OPERATION_Linked_val_ResultType_0 = STR_NUM(name='ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SS-DataTypes', 'Password')))
-    __OPERATION_Linked_val_ResultType_0._const_alpha = ASN1Set(rv=['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'], rr=[], ev=None, er=[])
-    _Supported_MAPv2_Operations_val_ArgumentType_44 = ENUM(name='ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SS-DataTypes', 'GuidanceInfo')))
-    _Supported_MAPv2_Operations_val_ResultType_44 = STR_NUM(name='ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SS-DataTypes', 'Password')))
-    _Supported_MAPv2_Operations_val_ResultType_44._const_alpha = ASN1Set(rv=['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'], rr=[], ev=None, er=[])
-    _Supported_MAPv2_Operations_val_ArgumentType_45 = SEQ(name='ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SS-DataTypes', 'BeginSubscriberActivityArg')))
-    Supported_MAPv2_Operations._val = ASN1Set(rv=[dict([('ArgumentType', _Supported_MAPv2_Operations_val_ArgumentType_0), ('ResultType', _Supported_MAPv2_Operations_val_ResultType_0), ('Errors', ASN1Set(rv=[dict([('ParameterType', __OPERATION_Errors_val_ParameterType_0), ('errorCode', ('local', 34))]), dict([('errorCode', ('local', 35))]), dict([('errorCode', ('local', 36))]), dict([('errorCode', ('local', 21))]), dict([('errorCode', ('local', 1))]), dict([('errorCode', ('local', 44))]), dict([('errorCode', ('local', 10))]), dict([('errorCode', ('local', 11))]), dict([('ParameterType', __OPERATION_Errors_val_ParameterType_8), ('errorCode', ('local', 27))]), dict([('ParameterType', __OPERATION_Errors_val_ParameterType_9), ('errorCode', ('local', 13))]), dict([('ParameterType', __OPERATION_Errors_val_ParameterType_10), ('errorCode', ('local', 15))]), dict([('errorCode', ('local', 14))])], rr=[], ev=None, er=[])), ('operationCode', ('local', 22))]), dict([('ArgumentType', _Supported_MAPv2_Operations_val_ArgumentType_1), ('ResultType', _Supported_MAPv2_Operations_val_ResultType_1), ('Errors', ASN1Set(rv=[dict([('ParameterType', __OPERATION_Errors_val_ParameterType_0), ('errorCode', ('local', 34))]), dict([('errorCode', ('local', 35))]), dict([('errorCode', ('local', 36))]), dict([('errorCode', ('local', 21))]), dict([('ParameterType', __OPERATION_Errors_val_ParameterType_4), ('errorCode', ('local', 27))]), dict([('errorCode', ('local', 39))])], rr=[], ev=None, er=[])), ('operationCode', ('local', 4))]), dict([('ArgumentType', _Supported_MAPv2_Operations_val_ArgumentType_2), ('ResultType', _Supported_MAPv2_Operations_val_ResultType_2), ('Errors', ASN1Set(rv=[dict([('ParameterType', __OPERATION_Errors_val_ParameterType_0), ('errorCode', ('local', 34))]), dict([('errorCode', ('local', 35))]), dict([('errorCode', ('local', 36))]), dict([('errorCode', ('local', 1))]), dict([('ParameterType', __OPERATION_Errors_val_ParameterType_4_0), ('errorCode', ('local', 8))])], rr=[], ev=None, er=[])), ('operationCode', ('local', 2))]), dict([('ArgumentType', _Supported_MAPv2_Operations_val_ArgumentType_3), ('Errors', ASN1Set(rv=[dict([('errorCode', ('local', 35))]), dict([('errorCode', ('local', 36))]), dict([('errorCode', ('local', 5))])], rr=[], ev=None, er=[])), ('operationCode', ('local', 3))]), dict([('ArgumentType', _Supported_MAPv2_Operations_val_ArgumentType_4), ('operationCode', ('local', 67))]), dict([('ArgumentType', _Supported_MAPv2_Operations_val_ArgumentType_5), ('ResultType', _Supported_MAPv2_Operations_val_ResultType_5), ('Errors', ASN1Set(rv=[dict([('errorCode', ('local', 35))]), dict([('errorCode', ('local', 5))])], rr=[], ev=None, er=[])), ('operationCode', ('local', 55))]), dict([('ArgumentType', _Supported_MAPv2_Operations_val_ArgumentType_6), ('ResultType', _Supported_MAPv2_Operations_val_ResultType_6), ('Errors', ASN1Set(rv=[dict([('ParameterType', __OPERATION_Errors_val_ParameterType_0), ('errorCode', ('local', 34))]), dict([('errorCode', ('local', 35))]), dict([('errorCode', ('local', 36))]), dict([('errorCode', ('local', 25))])], rr=[], ev=None, er=[])), ('operationCode', ('local', 68))]), dict([('ArgumentType', _Supported_MAPv2_Operations_val_ArgumentType_7), ('ResultType', _Supported_MAPv2_Operations_val_ResultType_7), ('Errors', ASN1Set(rv=[dict([('ParameterType', __OPERATION_Errors_val_ParameterType_0), ('errorCode', ('local', 34))]), dict([('errorCode', ('local', 36))]), dict([('errorCode', ('local', 2))]), dict([('errorCode', ('local', 23))]), dict([('errorCode', ('local', 24))]), dict([('errorCode', ('local', 25))])], rr=[], ev=None, er=[])), ('operationCode', ('local', 28))]), dict([('ArgumentType', _Supported_MAPv2_Operations_val_ArgumentType_8), ('operationCode', ('local', 29))]), dict([('ArgumentType', _Supported_MAPv2_Operations_val_ArgumentType_9), ('operationCode', ('local', 33))]), dict([('ArgumentType', _Supported_MAPv2_Operations_val_ArgumentType_10), ('operationCode', ('local', 34))]), dict([('ArgumentType', _Supported_MAPv2_Operations_val_ArgumentType_11), ('ResultType', _Supported_MAPv2_Operations_val_ResultType_11), ('Errors', ASN1Set(rv=[dict([('errorCode', ('local', 36))]), dict([('errorCode', ('local', 35))]), dict([('errorCode', ('local', 3))]), dict([('errorCode', ('local', 26))])], rr=[], ev=None, er=[])), ('operationCode', ('local', 69))]), dict([('ArgumentType', _Supported_MAPv2_Operations_val_ArgumentType_12), ('ResultType', _Supported_MAPv2_Operations_val_ResultType_12), ('Errors', ASN1Set(rv=[dict([('errorCode', ('local', 36))]), dict([('errorCode', ('local', 2))]), dict([('errorCode', ('local', 3))]), dict([('errorCode', ('local', 23))]), dict([('errorCode', ('local', 26))])], rr=[], ev=None, er=[])), ('operationCode', ('local', 30))]), dict([('ArgumentType', _Supported_MAPv2_Operations_val_ArgumentType_13), ('ResultType', _Supported_MAPv2_Operations_val_ResultType_13), ('Errors', ASN1Set(rv=[dict([('ParameterType', __OPERATION_Errors_val_ParameterType_0), ('errorCode', ('local', 34))]), dict([('errorCode', ('local', 35))]), dict([('errorCode', ('local', 36))]), dict([('errorCode', ('local', 1))])], rr=[], ev=None, er=[])), ('operationCode', ('local', 56))]), dict([('ArgumentType', _Supported_MAPv2_Operations_val_ArgumentType_14), ('ResultType', _Supported_MAPv2_Operations_val_ResultType_14), ('Errors', ASN1Set(rv=[dict([('ParameterType', __OPERATION_Errors_val_ParameterType_0), ('errorCode', ('local', 34))]), dict([('errorCode', ('local', 35))]), dict([('errorCode', ('local', 36))]), dict([('errorCode', ('local', 7))])], rr=[], ev=None, er=[])), ('operationCode', ('local', 43))]), dict([('ArgumentType', _Supported_MAPv2_Operations_val_ArgumentType_15), ('ResultType', _Supported_MAPv2_Operations_val_ResultType_15), ('Errors', ASN1Set(rv=[dict([('errorCode', ('local', 36))]), dict([('errorCode', ('local', 1))]), dict([('errorCode', ('local', 5))])], rr=[], ev=None, er=[])), ('operationCode', ('local', 9))]), dict([('ArgumentType', _Supported_MAPv2_Operations_val_ArgumentType_16), ('ResultType', _Supported_MAPv2_Operations_val_ResultType_16), ('Errors', ASN1Set(rv=[dict([('errorCode', ('local', 35))]), dict([('errorCode', ('local', 36))]), dict([('errorCode', ('local', 5))])], rr=[], ev=None, er=[])), ('operationCode', ('local', 7))]), dict([('ArgumentType', _Supported_MAPv2_Operations_val_ArgumentType_17), ('ResultType', _Supported_MAPv2_Operations_val_ResultType_17), ('Errors', ASN1Set(rv=[dict([('errorCode', ('local', 35))]), dict([('errorCode', ('local', 36))]), dict([('errorCode', ('local', 5))])], rr=[], ev=None, er=[])), ('operationCode', ('local', 8))]), dict([('ArgumentType', _Supported_MAPv2_Operations_val_ArgumentType_18), ('operationCode', ('local', 37))]), dict([('operationCode', ('local', 38))]), dict([('ArgumentType', _Supported_MAPv2_Operations_val_ArgumentType_20), ('ResultType', _Supported_MAPv2_Operations_val_ResultType_20), ('Errors', ASN1Set(rv=[dict([('ParameterType', __OPERATION_Errors_val_ParameterType_0), ('errorCode', ('local', 34))]), dict([('errorCode', ('local', 35))]), dict([('errorCode', ('local', 36))]), dict([('errorCode', ('local', 1))])], rr=[], ev=None, er=[])), ('operationCode', ('local', 57))]), dict([('ArgumentType', _Supported_MAPv2_Operations_val_ArgumentType_21), ('Errors', ASN1Set(rv=[dict([('ParameterType', __OPERATION_Errors_val_ParameterType_0), ('errorCode', ('local', 34))]), dict([('errorCode', ('local', 35))]), dict([('errorCode', ('local', 36))]), dict([('errorCode', ('local', 21))]), dict([('errorCode', ('local', 5))]), dict([('errorCode', ('local', 40))])], rr=[], ev=None, er=[])), ('operationCode', ('local', 50))]), dict([('ArgumentType', _Supported_MAPv2_Operations_val_ArgumentType_22), ('Errors', ASN1Set(rv=[dict([('ParameterType', __OPERATION_Errors_val_ParameterType_0), ('errorCode', ('local', 34))]), dict([('errorCode', ('local', 35))]), dict([('errorCode', ('local', 36))]), dict([('errorCode', ('local', 21))]), dict([('errorCode', ('local', 5))])], rr=[], ev=None, er=[])), ('operationCode', ('local', 51))]), dict([('ArgumentType', _Supported_MAPv2_Operations_val_ArgumentType_23), ('operationCode', ('local', 52))]), dict([('ArgumentType', _Supported_MAPv2_Operations_val_ArgumentType_24), ('operationCode', ('local', 35))]), dict([('ArgumentType', _Supported_MAPv2_Operations_val_ArgumentType_25), ('ResultType', _Supported_MAPv2_Operations_val_ResultType_25), ('Errors', ASN1Set(rv=[dict([('errorCode', ('local', 35))]), dict([('errorCode', ('local', 36))]), dict([('errorCode', ('local', 1))])], rr=[], ev=None, er=[])), ('operationCode', ('local', 58))]), dict([('ArgumentType', _Supported_MAPv2_Operations_val_ArgumentType_26), ('ResultType', _Supported_MAPv2_Operations_val_ResultType_26), ('Errors', ASN1Set(rv=[dict([('ParameterType', __OPERATION_Errors_val_ParameterType_0), ('errorCode', ('local', 34))]), dict([('errorCode', ('local', 35))]), dict([('errorCode', ('local', 36))]), dict([('errorCode', ('local', 21))]), dict([('errorCode', ('local', 1))]), dict([('errorCode', ('local', 11))]), dict([('ParameterType', __OPERATION_Errors_val_ParameterType_6), ('errorCode', ('local', 27))]), dict([('ParameterType', __OPERATION_Errors_val_ParameterType_7), ('errorCode', ('local', 13))])], rr=[], ev=None, er=[])), ('operationCode', ('local', 45))]), dict([('ArgumentType', _Supported_MAPv2_Operations_val_ArgumentType_27), ('Errors', ASN1Set(rv=[dict([('ParameterType', __OPERATION_Errors_val_ParameterType_0), ('errorCode', ('local', 34))]), dict([('errorCode', ('local', 35))]), dict([('errorCode', ('local', 36))]), dict([('errorCode', ('local', 21))]), dict([('errorCode', ('local', 5))]), dict([('errorCode', ('local', 9))]), dict([('errorCode', ('local', 12))]), dict([('ParameterType', __OPERATION_Errors_val_ParameterType_7_0), ('errorCode', ('local', 27))]), dict([('errorCode', ('local', 31))]), dict([('ParameterType', __OPERATION_Errors_val_ParameterType_9_0), ('errorCode', ('local', 32))])], rr=[], ev=None, er=[])), ('operationCode', ('local', 46))]), dict([('ArgumentType', _Supported_MAPv2_Operations_val_ArgumentType_28), ('ResultType', _Supported_MAPv2_Operations_val_ResultType_28), ('Errors', ASN1Set(rv=[dict([('errorCode', ('local', 35))]), dict([('errorCode', ('local', 36))]), dict([('errorCode', ('local', 1))]), dict([('errorCode', ('local', 33))])], rr=[], ev=None, er=[])), ('operationCode', ('local', 47))]), dict([('ArgumentType', _Supported_MAPv2_Operations_val_ArgumentType_29), ('operationCode', ('local', 48))]), dict([('ArgumentType', _Supported_MAPv2_Operations_val_ArgumentType_30), ('operationCode', ('local', 49))]), dict([('ArgumentType', _Supported_MAPv2_Operations_val_ArgumentType_31), ('Errors', ASN1Set(rv=[dict([('ParameterType', __OPERATION_Errors_val_ParameterType_0), ('errorCode', ('local', 34))]), dict([('errorCode', ('local', 35))]), dict([('errorCode', ('local', 36))])], rr=[], ev=None, er=[])), ('operationCode', ('local', 64))]), dict([('ArgumentType', _Supported_MAPv2_Operations_val_ArgumentType_32), ('operationCode', ('local', 63))]), dict([('ArgumentType', _Supported_MAPv2_Operations_val_ArgumentType_33), ('Errors', ASN1Set(rv=[dict([('errorCode', ('local', 35))]), dict([('errorCode', ('local', 36))]), dict([('errorCode', ('local', 21))]), dict([('errorCode', ('local', 1))])], rr=[], ev=None, er=[])), ('operationCode', ('local', 66))]), dict([('ArgumentType', _Supported_MAPv2_Operations_val_ArgumentType_34), ('ResultType', _Supported_MAPv2_Operations_val_ResultType_34), ('Errors', ASN1Set(rv=[dict([('ParameterType', __OPERATION_Errors_val_ParameterType_0), ('errorCode', ('local', 34))]), dict([('errorCode', ('local', 35))]), dict([('errorCode', ('local', 36))]), dict([('errorCode', ('local', 1))]), dict([('errorCode', ('local', 10))]), dict([('errorCode', ('local', 11))]), dict([('ParameterType', __OPERATION_Errors_val_ParameterType_6_0), ('errorCode', ('local', 13))]), dict([('errorCode', ('local', 16))]), dict([('ParameterType', __OPERATION_Errors_val_ParameterType_8_0), ('errorCode', ('local', 17))]), dict([('ParameterType', __OPERATION_Errors_val_ParameterType_9_1), ('errorCode', ('local', 19))]), dict([('ParameterType', __OPERATION_Errors_val_ParameterType_10_0), ('errorCode', ('local', 20))])], rr=[], ev=None, er=[])), ('operationCode', ('local', 10))]), dict([('ArgumentType', _Supported_MAPv2_Operations_val_ArgumentType_35), ('ResultType', _Supported_MAPv2_Operations_val_ResultType_35), ('Errors', ASN1Set(rv=[dict([('ParameterType', __OPERATION_Errors_val_ParameterType_0), ('errorCode', ('local', 34))]), dict([('errorCode', ('local', 35))]), dict([('errorCode', ('local', 36))]), dict([('errorCode', ('local', 1))]), dict([('errorCode', ('local', 10))]), dict([('errorCode', ('local', 11))]), dict([('ParameterType', __OPERATION_Errors_val_ParameterType_6_0), ('errorCode', ('local', 13))]), dict([('errorCode', ('local', 16))]), dict([('ParameterType', __OPERATION_Errors_val_ParameterType_8_0), ('errorCode', ('local', 17))]), dict([('ParameterType', __OPERATION_Errors_val_ParameterType_9_1), ('errorCode', ('local', 19))])], rr=[], ev=None, er=[])), ('operationCode', ('local', 11))]), dict([('ArgumentType', _Supported_MAPv2_Operations_val_ArgumentType_36), ('ResultType', _Supported_MAPv2_Operations_val_ResultType_36), ('Errors', ASN1Set(rv=[dict([('ParameterType', __OPERATION_Errors_val_ParameterType_0), ('errorCode', ('local', 34))]), dict([('errorCode', ('local', 35))]), dict([('errorCode', ('local', 36))]), dict([('errorCode', ('local', 1))]), dict([('errorCode', ('local', 10))]), dict([('errorCode', ('local', 11))]), dict([('ParameterType', __OPERATION_Errors_val_ParameterType_6_0), ('errorCode', ('local', 13))]), dict([('errorCode', ('local', 16))]), dict([('ParameterType', __OPERATION_Errors_val_ParameterType_8_0), ('errorCode', ('local', 17))]), dict([('ParameterType', __OPERATION_Errors_val_ParameterType_9_1), ('errorCode', ('local', 19))]), dict([('ParameterType', __OPERATION_Errors_val_ParameterType_10_0), ('errorCode', ('local', 20))]), dict([('errorCode', ('local', 38))]), dict([('errorCode', ('local', 43))])], rr=[], ev=None, er=[])), ('operationCode', ('local', 12))]), dict([('ArgumentType', _Supported_MAPv2_Operations_val_ArgumentType_37), ('ResultType', _Supported_MAPv2_Operations_val_ResultType_37), ('Errors', ASN1Set(rv=[dict([('ParameterType', __OPERATION_Errors_val_ParameterType_0), ('errorCode', ('local', 34))]), dict([('errorCode', ('local', 35))]), dict([('errorCode', ('local', 36))]), dict([('errorCode', ('local', 1))]), dict([('errorCode', ('local', 10))]), dict([('errorCode', ('local', 11))]), dict([('ParameterType', __OPERATION_Errors_val_ParameterType_6_0), ('errorCode', ('local', 13))]), dict([('errorCode', ('local', 16))]), dict([('ParameterType', __OPERATION_Errors_val_ParameterType_8_0), ('errorCode', ('local', 17))]), dict([('ParameterType', __OPERATION_Errors_val_ParameterType_9_1), ('errorCode', ('local', 19))]), dict([('errorCode', ('local', 38))]), dict([('errorCode', ('local', 43))])], rr=[], ev=None, er=[])), ('operationCode', ('local', 13))]), dict([('ArgumentType', _Supported_MAPv2_Operations_val_ArgumentType_38), ('ResultType', _Supported_MAPv2_Operations_val_ResultType_38), ('Errors', ASN1Set(rv=[dict([('ParameterType', __OPERATION_Errors_val_ParameterType_0), ('errorCode', ('local', 34))]), dict([('errorCode', ('local', 35))]), dict([('errorCode', ('local', 36))]), dict([('errorCode', ('local', 1))]), dict([('errorCode', ('local', 10))]), dict([('errorCode', ('local', 11))]), dict([('ParameterType', __OPERATION_Errors_val_ParameterType_6_0), ('errorCode', ('local', 13))]), dict([('errorCode', ('local', 16))]), dict([('errorCode', ('local', 18))])], rr=[], ev=None, er=[])), ('operationCode', ('local', 14))]), dict([('ArgumentType', _Supported_MAPv2_Operations_val_ArgumentType_39), ('ResultType', _Supported_MAPv2_Operations_val_ResultType_39), ('Errors', ASN1Set(rv=[dict([('ParameterType', __OPERATION_Errors_val_ParameterType_0), ('errorCode', ('local', 34))]), dict([('errorCode', ('local', 36))])], rr=[], ev=None, er=[])), ('operationCode', ('local', 19))]), dict([('ArgumentType', _Supported_MAPv2_Operations_val_ArgumentType_40), ('ResultType', _Supported_MAPv2_Operations_val_ResultType_40), ('Errors', ASN1Set(rv=[dict([('ParameterType', __OPERATION_Errors_val_ParameterType_0), ('errorCode', ('local', 34))]), dict([('errorCode', ('local', 35))]), dict([('errorCode', ('local', 36))]), dict([('errorCode', ('local', 71))]), dict([('ParameterType', __OPERATION_Errors_val_ParameterType_4_1), ('errorCode', ('local', 13))])], rr=[], ev=None, er=[])), ('operationCode', ('local', 59))]), dict([('ArgumentType', _Supported_MAPv2_Operations_val_ArgumentType_41), ('ResultType', _Supported_MAPv2_Operations_val_ResultType_41), ('Errors', ASN1Set(rv=[dict([('ParameterType', __OPERATION_Errors_val_ParameterType_0), ('errorCode', ('local', 34))]), dict([('errorCode', ('local', 35))]), dict([('errorCode', ('local', 36))]), dict([('ParameterType', __OPERATION_Errors_val_ParameterType_3), ('errorCode', ('local', 27))]), dict([('errorCode', ('local', 9))]), dict([('errorCode', ('local', 12))]), dict([('errorCode', ('local', 71))]), dict([('errorCode', ('local', 72))])], rr=[], ev=None, er=[])), ('operationCode', ('local', 60))]), dict([('ArgumentType', _Supported_MAPv2_Operations_val_ArgumentType_42), ('Errors', ASN1Set(rv=[dict([('ParameterType', __OPERATION_Errors_val_ParameterType_0), ('errorCode', ('local', 34))]), dict([('errorCode', ('local', 35))]), dict([('errorCode', ('local', 36))]), dict([('ParameterType', __OPERATION_Errors_val_ParameterType_3), ('errorCode', ('local', 27))]), dict([('errorCode', ('local', 9))]), dict([('errorCode', ('local', 12))]), dict([('errorCode', ('local', 71))]), dict([('errorCode', ('local', 72))])], rr=[], ev=None, er=[])), ('operationCode', ('local', 61))]), dict([('ArgumentType', _Supported_MAPv2_Operations_val_ArgumentType_43), ('ResultType', _Supported_MAPv2_Operations_val_ResultType_43), ('Errors', ASN1Set(rv=[dict([('ParameterType', __OPERATION_Errors_val_ParameterType_0), ('errorCode', ('local', 34))]), dict([('errorCode', ('local', 35))]), dict([('errorCode', ('local', 36))]), dict([('ParameterType', __OPERATION_Errors_val_ParameterType_3_0), ('errorCode', ('local', 13))]), dict([('ParameterType', __OPERATION_Errors_val_ParameterType_4_2), ('errorCode', ('local', 19))]), dict([('ParameterType', __OPERATION_Errors_val_ParameterType_5), ('errorCode', ('local', 37))]), dict([('errorCode', ('local', 38))]), dict([('errorCode', ('local', 43))])], rr=[], ev=None, er=[])), ('Linked', ASN1Set(rv=[dict([('ArgumentType', __OPERATION_Linked_val_ArgumentType_0), ('ResultType', __OPERATION_Linked_val_ResultType_0), ('operationCode', ('local', 18))])], rr=[], ev=None, er=[])), ('operationCode', ('local', 17))]), dict([('ArgumentType', _Supported_MAPv2_Operations_val_ArgumentType_44), ('ResultType', _Supported_MAPv2_Operations_val_ResultType_44), ('operationCode', ('local', 18))]), dict([('ArgumentType', _Supported_MAPv2_Operations_val_ArgumentType_45), ('operationCode', ('local', 54))])], rr=[], ev=None, er=[])
+    Supported_MAPv2_Operations = CLASS(name=u'Supported-MAPv2-Operations', mode=MODE_SET, typeref=ASN1RefType(('Remote-Operations-Information-Objects', 'OPERATION')))
+    _Supported_MAPv2_Operations_val_ArgumentType_0 = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CH-DataTypes', 'SendRoutingInfoArg')))
+    _Supported_MAPv2_Operations_val_ResultType_0 = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CH-DataTypes', 'SendRoutingInfoRes')))
+    __OPERATION_Errors_val_ParameterType_0 = ENUM(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'NetworkResource')))
+    __OPERATION_Errors_val_ParameterType_8 = BOOL(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-Errors', 'Mwd-Set')))
+    __OPERATION_Errors_val_ParameterType_9 = ENUM(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-ER-DataTypes', 'CallBarringCause')))
+    __OPERATION_Errors_val_ParameterType_10 = ENUM(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-ER-DataTypes', 'CUG-RejectCause')))
+    _Supported_MAPv2_Operations_val_ArgumentType_1 = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CH-DataTypes', 'ProvideRoamingNumberArg')))
+    _Supported_MAPv2_Operations_val_ResultType_1 = OCT_STR(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'ISDN-AddressString')))
+    __OPERATION_Errors_val_ParameterType_4 = BOOL(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-Errors', 'Mwd-Set')))
+    _Supported_MAPv2_Operations_val_ArgumentType_2 = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-MS-DataTypes', 'UpdateLocationArg')))
+    _Supported_MAPv2_Operations_val_ResultType_2 = CHOICE(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-MS-DataTypes', 'UpdateLocationRes')))
+    __OPERATION_Errors_val_ParameterType_4_0 = ENUM(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-ER-DataTypes', 'RoamingNotAllowedCause')))
+    _Supported_MAPv2_Operations_val_ArgumentType_3 = CHOICE(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-MS-DataTypes', 'CancelLocationArg')))
+    _Supported_MAPv2_Operations_val_ArgumentType_4 = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-MS-DataTypes', 'PurgeMS-Arg')))
+    _Supported_MAPv2_Operations_val_ArgumentType_5 = OCT_STR(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'TMSI')))
+    _Supported_MAPv2_Operations_val_ResultType_5 = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-MS-DataTypes', 'SendIdentificationRes')))
+    _Supported_MAPv2_Operations_val_ArgumentType_6 = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-MS-DataTypes', 'PrepareHO-Arg')))
+    _Supported_MAPv2_Operations_val_ResultType_6 = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-MS-DataTypes', 'PrepareHO-Res')))
+    _Supported_MAPv2_Operations_val_ArgumentType_7 = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-MS-DataTypes', 'PerformHO-Arg')))
+    _Supported_MAPv2_Operations_val_ResultType_7 = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-MS-DataTypes', 'PerformHO-Res')))
+    _Supported_MAPv2_Operations_val_ArgumentType_8 = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'ExternalSignalInfo')))
+    _Supported_MAPv2_Operations_val_ArgumentType_9 = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'ExternalSignalInfo')))
+    _Supported_MAPv2_Operations_val_ArgumentType_10 = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'ExternalSignalInfo')))
+    _Supported_MAPv2_Operations_val_ArgumentType_11 = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-MS-DataTypes', 'PrepareSubsequentHO-Arg')))
+    _Supported_MAPv2_Operations_val_ResultType_11 = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'ExternalSignalInfo')))
+    _Supported_MAPv2_Operations_val_ArgumentType_12 = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-MS-DataTypes', 'PerformSubsequentHO-Arg')))
+    _Supported_MAPv2_Operations_val_ResultType_12 = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'ExternalSignalInfo')))
+    _Supported_MAPv2_Operations_val_ArgumentType_13 = OCT_STR(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-MS-DataTypes', 'SendAuthenticationInfoArg')))
+    _Supported_MAPv2_Operations_val_ResultType_13 = SEQ_OF(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-MS-DataTypes', 'SendAuthenticationInfoRes')))
+    _Supported_MAPv2_Operations_val_ArgumentType_14 = OCT_STR(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'IMEI')))
+    _Supported_MAPv2_Operations_val_ResultType_14 = ENUM(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-MS-DataTypes', 'EquipmentStatus')))
+    _Supported_MAPv2_Operations_val_ArgumentType_15 = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-MS-DataTypes', 'SendParametersArg')))
+    _Supported_MAPv2_Operations_val_ResultType_15 = SEQ_OF(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-MS-DataTypes', 'SentParameterList')))
+    _Supported_MAPv2_Operations_val_ArgumentType_16 = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-MS-DataTypes', 'InsertSubscriberDataArg')))
+    _Supported_MAPv2_Operations_val_ResultType_16 = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-MS-DataTypes', 'InsertSubscriberDataRes')))
+    _Supported_MAPv2_Operations_val_ArgumentType_17 = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-MS-DataTypes', 'DeleteSubscriberDataArg')))
+    _Supported_MAPv2_Operations_val_ResultType_17 = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-MS-DataTypes', 'DeleteSubscriberDataRes')))
+    _Supported_MAPv2_Operations_val_ArgumentType_18 = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-MS-DataTypes', 'ResetArg')))
+    _Supported_MAPv2_Operations_val_ArgumentType_20 = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-MS-DataTypes', 'RestoreDataArg')))
+    _Supported_MAPv2_Operations_val_ResultType_20 = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-MS-DataTypes', 'RestoreDataRes')))
+    _Supported_MAPv2_Operations_val_ArgumentType_21 = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-OM-DataTypes', 'ActivateTraceModeArg')))
+    _Supported_MAPv2_Operations_val_ArgumentType_22 = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-OM-DataTypes', 'DeactivateTraceModeArg')))
+    _Supported_MAPv2_Operations_val_ArgumentType_23 = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-OM-DataTypes', 'TraceSubscriberActivityArg')))
+    _Supported_MAPv2_Operations_val_ArgumentType_24 = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-OM-DataTypes', 'NoteInternalHO-Arg')))
+    _Supported_MAPv2_Operations_val_ArgumentType_25 = OCT_STR(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'ISDN-AddressString')))
+    _Supported_MAPv2_Operations_val_ResultType_25 = OCT_STR(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'IMSI')))
+    _Supported_MAPv2_Operations_val_ArgumentType_26 = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SM-DataTypes', 'RoutingInfoForSM-Arg')))
+    _Supported_MAPv2_Operations_val_ResultType_26 = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SM-DataTypes', 'RoutingInfoForSM-Res')))
+    __OPERATION_Errors_val_ParameterType_6 = BOOL(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-Errors', 'Mwd-Set')))
+    __OPERATION_Errors_val_ParameterType_7 = ENUM(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-ER-DataTypes', 'CallBarringCause')))
+    _Supported_MAPv2_Operations_val_ArgumentType_27 = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SM-DataTypes', 'ForwardSM-Arg')))
+    __OPERATION_Errors_val_ParameterType_7_0 = BOOL(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-Errors', 'Mwd-Set')))
+    __OPERATION_Errors_val_ParameterType_9_0 = CHOICE(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-ER-DataTypes', 'SM-DeliveryFailureCause')))
+    _Supported_MAPv2_Operations_val_ArgumentType_28 = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SM-DataTypes', 'ReportSM-DeliveryStatusArg')))
+    _Supported_MAPv2_Operations_val_ResultType_28 = OCT_STR(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'ISDN-AddressString')))
+    _Supported_MAPv2_Operations_val_ArgumentType_29 = OCT_STR(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-CommonDataTypes', 'IMSI')))
+    _Supported_MAPv2_Operations_val_ArgumentType_30 = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SM-DataTypes', 'AlertServiceCentreArg')))
+    _Supported_MAPv2_Operations_val_ArgumentType_31 = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SM-DataTypes', 'AlertServiceCentreArg')))
+    _Supported_MAPv2_Operations_val_ArgumentType_32 = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SM-DataTypes', 'InformServiceCentreArg')))
+    _Supported_MAPv2_Operations_val_ArgumentType_33 = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SM-DataTypes', 'ReadyForSM-Arg')))
+    _Supported_MAPv2_Operations_val_ArgumentType_34 = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SS-DataTypes', 'RegisterSS-Arg')))
+    _Supported_MAPv2_Operations_val_ResultType_34 = CHOICE(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SS-DataTypes', 'SS-Info')))
+    __OPERATION_Errors_val_ParameterType_6_0 = ENUM(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-ER-DataTypes', 'CallBarringCause')))
+    __OPERATION_Errors_val_ParameterType_8_0 = OCT_STR(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SS-DataTypes', 'SS-Status')))
+    __OPERATION_Errors_val_ParameterType_9_1 = CHOICE(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SS-DataTypes', 'SS-SubscriptionOption')))
+    __OPERATION_Errors_val_ParameterType_10_0 = SEQ(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-ER-DataTypes', 'SS-IncompatibilityCause')))
+    _Supported_MAPv2_Operations_val_ArgumentType_35 = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SS-DataTypes', 'SS-ForBS-Code')))
+    _Supported_MAPv2_Operations_val_ResultType_35 = CHOICE(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SS-DataTypes', 'SS-Info')))
+    _Supported_MAPv2_Operations_val_ArgumentType_36 = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SS-DataTypes', 'SS-ForBS-Code')))
+    _Supported_MAPv2_Operations_val_ResultType_36 = CHOICE(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SS-DataTypes', 'SS-Info')))
+    _Supported_MAPv2_Operations_val_ArgumentType_37 = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SS-DataTypes', 'SS-ForBS-Code')))
+    _Supported_MAPv2_Operations_val_ResultType_37 = CHOICE(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SS-DataTypes', 'SS-Info')))
+    _Supported_MAPv2_Operations_val_ArgumentType_38 = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SS-DataTypes', 'SS-ForBS-Code')))
+    _Supported_MAPv2_Operations_val_ResultType_38 = CHOICE(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SS-DataTypes', 'InterrogateSS-Res')))
+    _Supported_MAPv2_Operations_val_ArgumentType_39 = STR_IA5(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SS-DataTypes', 'SS-UserData')))
+    _Supported_MAPv2_Operations_val_ResultType_39 = STR_IA5(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SS-DataTypes', 'SS-UserData')))
+    _Supported_MAPv2_Operations_val_ArgumentType_40 = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SS-DataTypes', 'USSD-Arg')))
+    _Supported_MAPv2_Operations_val_ResultType_40 = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SS-DataTypes', 'USSD-Res')))
+    __OPERATION_Errors_val_ParameterType_4_1 = ENUM(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-ER-DataTypes', 'CallBarringCause')))
+    _Supported_MAPv2_Operations_val_ArgumentType_41 = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SS-DataTypes', 'USSD-Arg')))
+    _Supported_MAPv2_Operations_val_ResultType_41 = SEQ(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SS-DataTypes', 'USSD-Res')))
+    __OPERATION_Errors_val_ParameterType_3 = BOOL(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-Errors', 'Mwd-Set')))
+    _Supported_MAPv2_Operations_val_ArgumentType_42 = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SS-DataTypes', 'USSD-Arg')))
+    _Supported_MAPv2_Operations_val_ArgumentType_43 = OCT_STR(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SS-Code', 'SS-Code')))
+    _Supported_MAPv2_Operations_val_ResultType_43 = STR_NUM(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SS-DataTypes', 'Password')))
+    _Supported_MAPv2_Operations_val_ResultType_43._const_alpha = ASN1Set(rv=[u'0', u'1', u'2', u'3', u'4', u'5', u'6', u'7', u'8', u'9'], rr=[], ev=None, er=[])
+    __OPERATION_Errors_val_ParameterType_3_0 = ENUM(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-ER-DataTypes', 'CallBarringCause')))
+    __OPERATION_Errors_val_ParameterType_4_2 = CHOICE(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SS-DataTypes', 'SS-SubscriptionOption')))
+    __OPERATION_Errors_val_ParameterType_5 = ENUM(name=u'ParameterType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-ER-DataTypes', 'PW-RegistrationFailureCause')))
+    __OPERATION_Linked_val_ArgumentType_0 = ENUM(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SS-DataTypes', 'GuidanceInfo')))
+    __OPERATION_Linked_val_ResultType_0 = STR_NUM(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SS-DataTypes', 'Password')))
+    __OPERATION_Linked_val_ResultType_0._const_alpha = ASN1Set(rv=[u'0', u'1', u'2', u'3', u'4', u'5', u'6', u'7', u'8', u'9'], rr=[], ev=None, er=[])
+    _Supported_MAPv2_Operations_val_ArgumentType_44 = ENUM(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SS-DataTypes', 'GuidanceInfo')))
+    _Supported_MAPv2_Operations_val_ResultType_44 = STR_NUM(name=u'ResultType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SS-DataTypes', 'Password')))
+    _Supported_MAPv2_Operations_val_ResultType_44._const_alpha = ASN1Set(rv=[u'0', u'1', u'2', u'3', u'4', u'5', u'6', u'7', u'8', u'9'], rr=[], ev=None, er=[])
+    _Supported_MAPv2_Operations_val_ArgumentType_45 = SEQ(name=u'ArgumentType', mode=MODE_TYPE, typeref=ASN1RefType(('MAPv2-SS-DataTypes', 'BeginSubscriberActivityArg')))
+    Supported_MAPv2_Operations._val = ASN1Set(rv=[dict([(u'ArgumentType', _Supported_MAPv2_Operations_val_ArgumentType_0), (u'ResultType', _Supported_MAPv2_Operations_val_ResultType_0), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'errorCode', (u'local', 35))]), dict([(u'errorCode', (u'local', 36))]), dict([(u'errorCode', (u'local', 21))]), dict([(u'errorCode', (u'local', 1))]), dict([(u'errorCode', (u'local', 44))]), dict([(u'errorCode', (u'local', 10))]), dict([(u'errorCode', (u'local', 11))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_8), (u'errorCode', (u'local', 27))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_9), (u'errorCode', (u'local', 13))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_10), (u'errorCode', (u'local', 15))]), dict([(u'errorCode', (u'local', 14))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 22))]), dict([(u'ArgumentType', _Supported_MAPv2_Operations_val_ArgumentType_1), (u'ResultType', _Supported_MAPv2_Operations_val_ResultType_1), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'errorCode', (u'local', 35))]), dict([(u'errorCode', (u'local', 36))]), dict([(u'errorCode', (u'local', 21))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_4), (u'errorCode', (u'local', 27))]), dict([(u'errorCode', (u'local', 39))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 4))]), dict([(u'ArgumentType', _Supported_MAPv2_Operations_val_ArgumentType_2), (u'ResultType', _Supported_MAPv2_Operations_val_ResultType_2), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'errorCode', (u'local', 35))]), dict([(u'errorCode', (u'local', 36))]), dict([(u'errorCode', (u'local', 1))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_4_0), (u'errorCode', (u'local', 8))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 2))]), dict([(u'ArgumentType', _Supported_MAPv2_Operations_val_ArgumentType_3), (u'Errors', ASN1Set(rv=[dict([(u'errorCode', (u'local', 35))]), dict([(u'errorCode', (u'local', 36))]), dict([(u'errorCode', (u'local', 5))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 3))]), dict([(u'ArgumentType', _Supported_MAPv2_Operations_val_ArgumentType_4), (u'operationCode', (u'local', 67))]), dict([(u'ArgumentType', _Supported_MAPv2_Operations_val_ArgumentType_5), (u'ResultType', _Supported_MAPv2_Operations_val_ResultType_5), (u'Errors', ASN1Set(rv=[dict([(u'errorCode', (u'local', 35))]), dict([(u'errorCode', (u'local', 5))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 55))]), dict([(u'ArgumentType', _Supported_MAPv2_Operations_val_ArgumentType_6), (u'ResultType', _Supported_MAPv2_Operations_val_ResultType_6), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'errorCode', (u'local', 35))]), dict([(u'errorCode', (u'local', 36))]), dict([(u'errorCode', (u'local', 25))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 68))]), dict([(u'ArgumentType', _Supported_MAPv2_Operations_val_ArgumentType_7), (u'ResultType', _Supported_MAPv2_Operations_val_ResultType_7), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'errorCode', (u'local', 36))]), dict([(u'errorCode', (u'local', 2))]), dict([(u'errorCode', (u'local', 23))]), dict([(u'errorCode', (u'local', 24))]), dict([(u'errorCode', (u'local', 25))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 28))]), dict([(u'ArgumentType', _Supported_MAPv2_Operations_val_ArgumentType_8), (u'operationCode', (u'local', 29))]), dict([(u'ArgumentType', _Supported_MAPv2_Operations_val_ArgumentType_9), (u'operationCode', (u'local', 33))]), dict([(u'ArgumentType', _Supported_MAPv2_Operations_val_ArgumentType_10), (u'operationCode', (u'local', 34))]), dict([(u'ArgumentType', _Supported_MAPv2_Operations_val_ArgumentType_11), (u'ResultType', _Supported_MAPv2_Operations_val_ResultType_11), (u'Errors', ASN1Set(rv=[dict([(u'errorCode', (u'local', 36))]), dict([(u'errorCode', (u'local', 35))]), dict([(u'errorCode', (u'local', 3))]), dict([(u'errorCode', (u'local', 26))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 69))]), dict([(u'ArgumentType', _Supported_MAPv2_Operations_val_ArgumentType_12), (u'ResultType', _Supported_MAPv2_Operations_val_ResultType_12), (u'Errors', ASN1Set(rv=[dict([(u'errorCode', (u'local', 36))]), dict([(u'errorCode', (u'local', 2))]), dict([(u'errorCode', (u'local', 3))]), dict([(u'errorCode', (u'local', 23))]), dict([(u'errorCode', (u'local', 26))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 30))]), dict([(u'ArgumentType', _Supported_MAPv2_Operations_val_ArgumentType_13), (u'ResultType', _Supported_MAPv2_Operations_val_ResultType_13), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'errorCode', (u'local', 35))]), dict([(u'errorCode', (u'local', 36))]), dict([(u'errorCode', (u'local', 1))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 56))]), dict([(u'ArgumentType', _Supported_MAPv2_Operations_val_ArgumentType_14), (u'ResultType', _Supported_MAPv2_Operations_val_ResultType_14), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'errorCode', (u'local', 35))]), dict([(u'errorCode', (u'local', 36))]), dict([(u'errorCode', (u'local', 7))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 43))]), dict([(u'ArgumentType', _Supported_MAPv2_Operations_val_ArgumentType_15), (u'ResultType', _Supported_MAPv2_Operations_val_ResultType_15), (u'Errors', ASN1Set(rv=[dict([(u'errorCode', (u'local', 36))]), dict([(u'errorCode', (u'local', 1))]), dict([(u'errorCode', (u'local', 5))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 9))]), dict([(u'ArgumentType', _Supported_MAPv2_Operations_val_ArgumentType_16), (u'ResultType', _Supported_MAPv2_Operations_val_ResultType_16), (u'Errors', ASN1Set(rv=[dict([(u'errorCode', (u'local', 35))]), dict([(u'errorCode', (u'local', 36))]), dict([(u'errorCode', (u'local', 5))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 7))]), dict([(u'ArgumentType', _Supported_MAPv2_Operations_val_ArgumentType_17), (u'ResultType', _Supported_MAPv2_Operations_val_ResultType_17), (u'Errors', ASN1Set(rv=[dict([(u'errorCode', (u'local', 35))]), dict([(u'errorCode', (u'local', 36))]), dict([(u'errorCode', (u'local', 5))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 8))]), dict([(u'ArgumentType', _Supported_MAPv2_Operations_val_ArgumentType_18), (u'operationCode', (u'local', 37))]), dict([(u'operationCode', (u'local', 38))]), dict([(u'ArgumentType', _Supported_MAPv2_Operations_val_ArgumentType_20), (u'ResultType', _Supported_MAPv2_Operations_val_ResultType_20), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'errorCode', (u'local', 35))]), dict([(u'errorCode', (u'local', 36))]), dict([(u'errorCode', (u'local', 1))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 57))]), dict([(u'ArgumentType', _Supported_MAPv2_Operations_val_ArgumentType_21), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'errorCode', (u'local', 35))]), dict([(u'errorCode', (u'local', 36))]), dict([(u'errorCode', (u'local', 21))]), dict([(u'errorCode', (u'local', 5))]), dict([(u'errorCode', (u'local', 40))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 50))]), dict([(u'ArgumentType', _Supported_MAPv2_Operations_val_ArgumentType_22), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'errorCode', (u'local', 35))]), dict([(u'errorCode', (u'local', 36))]), dict([(u'errorCode', (u'local', 21))]), dict([(u'errorCode', (u'local', 5))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 51))]), dict([(u'ArgumentType', _Supported_MAPv2_Operations_val_ArgumentType_23), (u'operationCode', (u'local', 52))]), dict([(u'ArgumentType', _Supported_MAPv2_Operations_val_ArgumentType_24), (u'operationCode', (u'local', 35))]), dict([(u'ArgumentType', _Supported_MAPv2_Operations_val_ArgumentType_25), (u'ResultType', _Supported_MAPv2_Operations_val_ResultType_25), (u'Errors', ASN1Set(rv=[dict([(u'errorCode', (u'local', 35))]), dict([(u'errorCode', (u'local', 36))]), dict([(u'errorCode', (u'local', 1))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 58))]), dict([(u'ArgumentType', _Supported_MAPv2_Operations_val_ArgumentType_26), (u'ResultType', _Supported_MAPv2_Operations_val_ResultType_26), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'errorCode', (u'local', 35))]), dict([(u'errorCode', (u'local', 36))]), dict([(u'errorCode', (u'local', 21))]), dict([(u'errorCode', (u'local', 1))]), dict([(u'errorCode', (u'local', 11))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_6), (u'errorCode', (u'local', 27))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_7), (u'errorCode', (u'local', 13))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 45))]), dict([(u'ArgumentType', _Supported_MAPv2_Operations_val_ArgumentType_27), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'errorCode', (u'local', 35))]), dict([(u'errorCode', (u'local', 36))]), dict([(u'errorCode', (u'local', 21))]), dict([(u'errorCode', (u'local', 5))]), dict([(u'errorCode', (u'local', 9))]), dict([(u'errorCode', (u'local', 12))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_7_0), (u'errorCode', (u'local', 27))]), dict([(u'errorCode', (u'local', 31))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_9_0), (u'errorCode', (u'local', 32))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 46))]), dict([(u'ArgumentType', _Supported_MAPv2_Operations_val_ArgumentType_28), (u'ResultType', _Supported_MAPv2_Operations_val_ResultType_28), (u'Errors', ASN1Set(rv=[dict([(u'errorCode', (u'local', 35))]), dict([(u'errorCode', (u'local', 36))]), dict([(u'errorCode', (u'local', 1))]), dict([(u'errorCode', (u'local', 33))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 47))]), dict([(u'ArgumentType', _Supported_MAPv2_Operations_val_ArgumentType_29), (u'operationCode', (u'local', 48))]), dict([(u'ArgumentType', _Supported_MAPv2_Operations_val_ArgumentType_30), (u'operationCode', (u'local', 49))]), dict([(u'ArgumentType', _Supported_MAPv2_Operations_val_ArgumentType_31), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'errorCode', (u'local', 35))]), dict([(u'errorCode', (u'local', 36))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 64))]), dict([(u'ArgumentType', _Supported_MAPv2_Operations_val_ArgumentType_32), (u'operationCode', (u'local', 63))]), dict([(u'ArgumentType', _Supported_MAPv2_Operations_val_ArgumentType_33), (u'Errors', ASN1Set(rv=[dict([(u'errorCode', (u'local', 35))]), dict([(u'errorCode', (u'local', 36))]), dict([(u'errorCode', (u'local', 21))]), dict([(u'errorCode', (u'local', 1))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 66))]), dict([(u'ArgumentType', _Supported_MAPv2_Operations_val_ArgumentType_34), (u'ResultType', _Supported_MAPv2_Operations_val_ResultType_34), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'errorCode', (u'local', 35))]), dict([(u'errorCode', (u'local', 36))]), dict([(u'errorCode', (u'local', 1))]), dict([(u'errorCode', (u'local', 10))]), dict([(u'errorCode', (u'local', 11))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_6_0), (u'errorCode', (u'local', 13))]), dict([(u'errorCode', (u'local', 16))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_8_0), (u'errorCode', (u'local', 17))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_9_1), (u'errorCode', (u'local', 19))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_10_0), (u'errorCode', (u'local', 20))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 10))]), dict([(u'ArgumentType', _Supported_MAPv2_Operations_val_ArgumentType_35), (u'ResultType', _Supported_MAPv2_Operations_val_ResultType_35), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'errorCode', (u'local', 35))]), dict([(u'errorCode', (u'local', 36))]), dict([(u'errorCode', (u'local', 1))]), dict([(u'errorCode', (u'local', 10))]), dict([(u'errorCode', (u'local', 11))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_6_0), (u'errorCode', (u'local', 13))]), dict([(u'errorCode', (u'local', 16))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_8_0), (u'errorCode', (u'local', 17))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_9_1), (u'errorCode', (u'local', 19))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 11))]), dict([(u'ArgumentType', _Supported_MAPv2_Operations_val_ArgumentType_36), (u'ResultType', _Supported_MAPv2_Operations_val_ResultType_36), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'errorCode', (u'local', 35))]), dict([(u'errorCode', (u'local', 36))]), dict([(u'errorCode', (u'local', 1))]), dict([(u'errorCode', (u'local', 10))]), dict([(u'errorCode', (u'local', 11))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_6_0), (u'errorCode', (u'local', 13))]), dict([(u'errorCode', (u'local', 16))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_8_0), (u'errorCode', (u'local', 17))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_9_1), (u'errorCode', (u'local', 19))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_10_0), (u'errorCode', (u'local', 20))]), dict([(u'errorCode', (u'local', 38))]), dict([(u'errorCode', (u'local', 43))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 12))]), dict([(u'ArgumentType', _Supported_MAPv2_Operations_val_ArgumentType_37), (u'ResultType', _Supported_MAPv2_Operations_val_ResultType_37), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'errorCode', (u'local', 35))]), dict([(u'errorCode', (u'local', 36))]), dict([(u'errorCode', (u'local', 1))]), dict([(u'errorCode', (u'local', 10))]), dict([(u'errorCode', (u'local', 11))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_6_0), (u'errorCode', (u'local', 13))]), dict([(u'errorCode', (u'local', 16))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_8_0), (u'errorCode', (u'local', 17))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_9_1), (u'errorCode', (u'local', 19))]), dict([(u'errorCode', (u'local', 38))]), dict([(u'errorCode', (u'local', 43))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 13))]), dict([(u'ArgumentType', _Supported_MAPv2_Operations_val_ArgumentType_38), (u'ResultType', _Supported_MAPv2_Operations_val_ResultType_38), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'errorCode', (u'local', 35))]), dict([(u'errorCode', (u'local', 36))]), dict([(u'errorCode', (u'local', 1))]), dict([(u'errorCode', (u'local', 10))]), dict([(u'errorCode', (u'local', 11))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_6_0), (u'errorCode', (u'local', 13))]), dict([(u'errorCode', (u'local', 16))]), dict([(u'errorCode', (u'local', 18))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 14))]), dict([(u'ArgumentType', _Supported_MAPv2_Operations_val_ArgumentType_39), (u'ResultType', _Supported_MAPv2_Operations_val_ResultType_39), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'errorCode', (u'local', 36))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 19))]), dict([(u'ArgumentType', _Supported_MAPv2_Operations_val_ArgumentType_40), (u'ResultType', _Supported_MAPv2_Operations_val_ResultType_40), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'errorCode', (u'local', 35))]), dict([(u'errorCode', (u'local', 36))]), dict([(u'errorCode', (u'local', 71))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_4_1), (u'errorCode', (u'local', 13))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 59))]), dict([(u'ArgumentType', _Supported_MAPv2_Operations_val_ArgumentType_41), (u'ResultType', _Supported_MAPv2_Operations_val_ResultType_41), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'errorCode', (u'local', 35))]), dict([(u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_3), (u'errorCode', (u'local', 27))]), dict([(u'errorCode', (u'local', 9))]), dict([(u'errorCode', (u'local', 12))]), dict([(u'errorCode', (u'local', 71))]), dict([(u'errorCode', (u'local', 72))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 60))]), dict([(u'ArgumentType', _Supported_MAPv2_Operations_val_ArgumentType_42), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'errorCode', (u'local', 35))]), dict([(u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_3), (u'errorCode', (u'local', 27))]), dict([(u'errorCode', (u'local', 9))]), dict([(u'errorCode', (u'local', 12))]), dict([(u'errorCode', (u'local', 71))]), dict([(u'errorCode', (u'local', 72))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 61))]), dict([(u'ArgumentType', _Supported_MAPv2_Operations_val_ArgumentType_43), (u'ResultType', _Supported_MAPv2_Operations_val_ResultType_43), (u'Errors', ASN1Set(rv=[dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_0), (u'errorCode', (u'local', 34))]), dict([(u'errorCode', (u'local', 35))]), dict([(u'errorCode', (u'local', 36))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_3_0), (u'errorCode', (u'local', 13))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_4_2), (u'errorCode', (u'local', 19))]), dict([(u'ParameterType', __OPERATION_Errors_val_ParameterType_5), (u'errorCode', (u'local', 37))]), dict([(u'errorCode', (u'local', 38))]), dict([(u'errorCode', (u'local', 43))])], rr=[], ev=None, er=[])), (u'Linked', ASN1Set(rv=[dict([(u'ArgumentType', __OPERATION_Linked_val_ArgumentType_0), (u'ResultType', __OPERATION_Linked_val_ResultType_0), (u'operationCode', (u'local', 18))])], rr=[], ev=None, er=[])), (u'operationCode', (u'local', 17))]), dict([(u'ArgumentType', _Supported_MAPv2_Operations_val_ArgumentType_44), (u'ResultType', _Supported_MAPv2_Operations_val_ResultType_44), (u'operationCode', (u'local', 18))]), dict([(u'ArgumentType', _Supported_MAPv2_Operations_val_ArgumentType_45), (u'operationCode', (u'local', 54))])], rr=[], ev=None, er=[])
     
     _all_ = [
         Supported_MAPv2_Operations,

@@ -16,215 +16,215 @@ from pycrate_asn1rt.init             import init_modules
 
 class TCAP_Remote_Operations_Information_Objects:
 
-    _name_  = 'TCAP-Remote-Operations-Information-Objects'
+    _name_  = u'TCAP-Remote-Operations-Information-Objects'
     _oid_   = [1, 2, 840, 10013, 0, 1, 4]
     
     _obj_ = [
-        'OPERATION',
-        'ERROR',
-        'OPERATION-PACKAGE',
-        'CONNECTION-PACKAGE',
-        'CONTRACT',
-        'ROS-OBJECT-CLASS',
-        'OperationCode',
-        'ErrorCode',
-        'Priority',
-        'refuse',
-        'emptyBind',
-        'emptyUnbind',
-        'InvokeId',
-        'Errors',
+        u'OPERATION',
+        u'ERROR',
+        u'OPERATION-PACKAGE',
+        u'CONNECTION-PACKAGE',
+        u'CONTRACT',
+        u'ROS-OBJECT-CLASS',
+        u'OperationCode',
+        u'ErrorCode',
+        u'Priority',
+        u'refuse',
+        u'emptyBind',
+        u'emptyUnbind',
+        u'InvokeId',
+        u'Errors',
         ]
     _type_ = [
-        'OPERATION',
-        'ERROR',
-        'OPERATION-PACKAGE',
-        'CONNECTION-PACKAGE',
-        'CONTRACT',
-        'ROS-OBJECT-CLASS',
-        'OperationCode',
-        'ErrorCode',
-        'Priority',
-        'InvokeId',
+        u'OPERATION',
+        u'ERROR',
+        u'OPERATION-PACKAGE',
+        u'CONNECTION-PACKAGE',
+        u'CONTRACT',
+        u'ROS-OBJECT-CLASS',
+        u'OperationCode',
+        u'ErrorCode',
+        u'Priority',
+        u'InvokeId',
         ]
     _set_ = [
-        'Errors',
+        u'Errors',
         ]
     _val_ = [
-        'refuse',
-        'emptyBind',
-        'emptyUnbind',
+        u'refuse',
+        u'emptyBind',
+        u'emptyUnbind',
         ]
     _class_ = [
-        'OPERATION',
-        'ERROR',
-        'OPERATION-PACKAGE',
-        'CONNECTION-PACKAGE',
-        'CONTRACT',
-        'ROS-OBJECT-CLASS',
-        'refuse',
-        'emptyBind',
-        'emptyUnbind',
-        'Errors',
+        u'OPERATION',
+        u'ERROR',
+        u'OPERATION-PACKAGE',
+        u'CONNECTION-PACKAGE',
+        u'CONTRACT',
+        u'ROS-OBJECT-CLASS',
+        u'refuse',
+        u'emptyBind',
+        u'emptyUnbind',
+        u'Errors',
         ]
     _param_ = [
-        'Errors',
+        u'Errors',
         ]
     
     #-----< OPERATION >-----#
-    OPERATION = CLASS(name='OPERATION', mode=MODE_TYPE)
-    _OPERATION_ArgumentType = OPEN(name='ArgumentType', mode=MODE_TYPE, opt=True)
-    _OPERATION_argumentTypeOptional = BOOL(name='argumentTypeOptional', mode=MODE_VALUE, opt=True)
-    _OPERATION_returnResult = BOOL(name='returnResult', mode=MODE_VALUE, default=True)
-    _OPERATION_ResultType = OPEN(name='ResultType', mode=MODE_TYPE, opt=True)
-    _OPERATION_resultTypeOptional = BOOL(name='resultTypeOptional', mode=MODE_VALUE, opt=True)
-    _OPERATION_Errors = CLASS(name='Errors', mode=MODE_SET, typeref=ASN1RefType(('TCAP-Remote-Operations-Information-Objects', 'ERROR')), opt=True)
-    _OPERATION_Linked = CLASS(name='Linked', mode=MODE_SET, typeref=ASN1RefType(('TCAP-Remote-Operations-Information-Objects', 'OPERATION')), opt=True)
-    _OPERATION_synchronous = BOOL(name='synchronous', mode=MODE_VALUE, default=False)
-    _OPERATION_alwaysReturns = BOOL(name='alwaysReturns', mode=MODE_VALUE, default=True)
-    _OPERATION_InvokePriority = INT(name='InvokePriority', mode=MODE_SET, typeref=ASN1RefType(('TCAP-Remote-Operations-Information-Objects', 'Priority')), opt=True)
-    _OPERATION_ResultPriority = INT(name='ResultPriority', mode=MODE_SET, typeref=ASN1RefType(('TCAP-Remote-Operations-Information-Objects', 'Priority')), opt=True)
-    _OPERATION_invokeLast = BOOL(name='invokeLast', mode=MODE_VALUE, default=False)
-    _OPERATION_operationCode = CHOICE(name='operationCode', mode=MODE_VALUE, typeref=ASN1RefType(('TCAP-Remote-Operations-Information-Objects', 'OperationCode')), opt=True, uniq=True)
+    OPERATION = CLASS(name=u'OPERATION', mode=MODE_TYPE)
+    _OPERATION_ArgumentType = OPEN(name=u'ArgumentType', mode=MODE_TYPE, opt=True)
+    _OPERATION_argumentTypeOptional = BOOL(name=u'argumentTypeOptional', mode=MODE_VALUE, opt=True)
+    _OPERATION_returnResult = BOOL(name=u'returnResult', mode=MODE_VALUE, default=True)
+    _OPERATION_ResultType = OPEN(name=u'ResultType', mode=MODE_TYPE, opt=True)
+    _OPERATION_resultTypeOptional = BOOL(name=u'resultTypeOptional', mode=MODE_VALUE, opt=True)
+    _OPERATION_Errors = CLASS(name=u'Errors', mode=MODE_SET, typeref=ASN1RefType(('TCAP-Remote-Operations-Information-Objects', 'ERROR')), opt=True)
+    _OPERATION_Linked = CLASS(name=u'Linked', mode=MODE_SET, typeref=ASN1RefType(('TCAP-Remote-Operations-Information-Objects', 'OPERATION')), opt=True)
+    _OPERATION_synchronous = BOOL(name=u'synchronous', mode=MODE_VALUE, default=False)
+    _OPERATION_alwaysReturns = BOOL(name=u'alwaysReturns', mode=MODE_VALUE, default=True)
+    _OPERATION_InvokePriority = INT(name=u'InvokePriority', mode=MODE_SET, typeref=ASN1RefType(('TCAP-Remote-Operations-Information-Objects', 'Priority')), opt=True)
+    _OPERATION_ResultPriority = INT(name=u'ResultPriority', mode=MODE_SET, typeref=ASN1RefType(('TCAP-Remote-Operations-Information-Objects', 'Priority')), opt=True)
+    _OPERATION_invokeLast = BOOL(name=u'invokeLast', mode=MODE_VALUE, default=False)
+    _OPERATION_operationCode = CHOICE(name=u'operationCode', mode=MODE_VALUE, typeref=ASN1RefType(('TCAP-Remote-Operations-Information-Objects', 'OperationCode')), opt=True, uniq=True)
     OPERATION._cont = ASN1Dict([
-        ('ArgumentType', _OPERATION_ArgumentType),
-        ('argumentTypeOptional', _OPERATION_argumentTypeOptional),
-        ('returnResult', _OPERATION_returnResult),
-        ('ResultType', _OPERATION_ResultType),
-        ('resultTypeOptional', _OPERATION_resultTypeOptional),
-        ('Errors', _OPERATION_Errors),
-        ('Linked', _OPERATION_Linked),
-        ('synchronous', _OPERATION_synchronous),
-        ('alwaysReturns', _OPERATION_alwaysReturns),
-        ('InvokePriority', _OPERATION_InvokePriority),
-        ('ResultPriority', _OPERATION_ResultPriority),
-        ('invokeLast', _OPERATION_invokeLast),
-        ('operationCode', _OPERATION_operationCode),
+        (u'ArgumentType', _OPERATION_ArgumentType),
+        (u'argumentTypeOptional', _OPERATION_argumentTypeOptional),
+        (u'returnResult', _OPERATION_returnResult),
+        (u'ResultType', _OPERATION_ResultType),
+        (u'resultTypeOptional', _OPERATION_resultTypeOptional),
+        (u'Errors', _OPERATION_Errors),
+        (u'Linked', _OPERATION_Linked),
+        (u'synchronous', _OPERATION_synchronous),
+        (u'alwaysReturns', _OPERATION_alwaysReturns),
+        (u'InvokePriority', _OPERATION_InvokePriority),
+        (u'ResultPriority', _OPERATION_ResultPriority),
+        (u'invokeLast', _OPERATION_invokeLast),
+        (u'operationCode', _OPERATION_operationCode),
         ])
     
     #-----< ERROR >-----#
-    ERROR = CLASS(name='ERROR', mode=MODE_TYPE)
-    _ERROR_ParameterType = OPEN(name='ParameterType', mode=MODE_TYPE, opt=True)
-    _ERROR_parameterTypeOptional = BOOL(name='parameterTypeOptional', mode=MODE_VALUE, opt=True)
-    _ERROR_ErrorPriority = INT(name='ErrorPriority', mode=MODE_SET, typeref=ASN1RefType(('TCAP-Remote-Operations-Information-Objects', 'Priority')), opt=True)
-    _ERROR_errorCode = CHOICE(name='errorCode', mode=MODE_VALUE, typeref=ASN1RefType(('TCAP-Remote-Operations-Information-Objects', 'ErrorCode')), opt=True, uniq=True)
+    ERROR = CLASS(name=u'ERROR', mode=MODE_TYPE)
+    _ERROR_ParameterType = OPEN(name=u'ParameterType', mode=MODE_TYPE, opt=True)
+    _ERROR_parameterTypeOptional = BOOL(name=u'parameterTypeOptional', mode=MODE_VALUE, opt=True)
+    _ERROR_ErrorPriority = INT(name=u'ErrorPriority', mode=MODE_SET, typeref=ASN1RefType(('TCAP-Remote-Operations-Information-Objects', 'Priority')), opt=True)
+    _ERROR_errorCode = CHOICE(name=u'errorCode', mode=MODE_VALUE, typeref=ASN1RefType(('TCAP-Remote-Operations-Information-Objects', 'ErrorCode')), opt=True, uniq=True)
     ERROR._cont = ASN1Dict([
-        ('ParameterType', _ERROR_ParameterType),
-        ('parameterTypeOptional', _ERROR_parameterTypeOptional),
-        ('ErrorPriority', _ERROR_ErrorPriority),
-        ('errorCode', _ERROR_errorCode),
+        (u'ParameterType', _ERROR_ParameterType),
+        (u'parameterTypeOptional', _ERROR_parameterTypeOptional),
+        (u'ErrorPriority', _ERROR_ErrorPriority),
+        (u'errorCode', _ERROR_errorCode),
         ])
     
     #-----< OPERATION-PACKAGE >-----#
-    OPERATION_PACKAGE = CLASS(name='OPERATION-PACKAGE', mode=MODE_TYPE)
-    _OPERATION_PACKAGE_Both = CLASS(name='Both', mode=MODE_SET, typeref=ASN1RefType(('TCAP-Remote-Operations-Information-Objects', 'OPERATION')), opt=True)
-    _OPERATION_PACKAGE_Consumer = CLASS(name='Consumer', mode=MODE_SET, typeref=ASN1RefType(('TCAP-Remote-Operations-Information-Objects', 'OPERATION')), opt=True)
-    _OPERATION_PACKAGE_Supplier = CLASS(name='Supplier', mode=MODE_SET, typeref=ASN1RefType(('TCAP-Remote-Operations-Information-Objects', 'OPERATION')), opt=True)
-    _OPERATION_PACKAGE_id = OID(name='id', mode=MODE_VALUE, opt=True, uniq=True)
+    OPERATION_PACKAGE = CLASS(name=u'OPERATION-PACKAGE', mode=MODE_TYPE)
+    _OPERATION_PACKAGE_Both = CLASS(name=u'Both', mode=MODE_SET, typeref=ASN1RefType(('TCAP-Remote-Operations-Information-Objects', 'OPERATION')), opt=True)
+    _OPERATION_PACKAGE_Consumer = CLASS(name=u'Consumer', mode=MODE_SET, typeref=ASN1RefType(('TCAP-Remote-Operations-Information-Objects', 'OPERATION')), opt=True)
+    _OPERATION_PACKAGE_Supplier = CLASS(name=u'Supplier', mode=MODE_SET, typeref=ASN1RefType(('TCAP-Remote-Operations-Information-Objects', 'OPERATION')), opt=True)
+    _OPERATION_PACKAGE_id = OID(name=u'id', mode=MODE_VALUE, opt=True, uniq=True)
     OPERATION_PACKAGE._cont = ASN1Dict([
-        ('Both', _OPERATION_PACKAGE_Both),
-        ('Consumer', _OPERATION_PACKAGE_Consumer),
-        ('Supplier', _OPERATION_PACKAGE_Supplier),
-        ('id', _OPERATION_PACKAGE_id),
+        (u'Both', _OPERATION_PACKAGE_Both),
+        (u'Consumer', _OPERATION_PACKAGE_Consumer),
+        (u'Supplier', _OPERATION_PACKAGE_Supplier),
+        (u'id', _OPERATION_PACKAGE_id),
         ])
     
     #-----< CONNECTION-PACKAGE >-----#
-    CONNECTION_PACKAGE = CLASS(name='CONNECTION-PACKAGE', mode=MODE_TYPE)
-    _CONNECTION_PACKAGE_bind = CLASS(name='bind', mode=MODE_VALUE, typeref=ASN1RefType(('TCAP-Remote-Operations-Information-Objects', 'OPERATION')), default=dict([('Errors', ASN1Set(rv=[dict([('errorCode', ('local', -1))])], rr=[], ev=None, er=[])), ('synchronous', True)]))
-    _CONNECTION_PACKAGE_unbind = CLASS(name='unbind', mode=MODE_VALUE, typeref=ASN1RefType(('TCAP-Remote-Operations-Information-Objects', 'OPERATION')), default=dict([('synchronous', True)]))
-    _CONNECTION_PACKAGE_responderCanUnbind = BOOL(name='responderCanUnbind', mode=MODE_VALUE, default=False)
-    _CONNECTION_PACKAGE_unbindCanFail = BOOL(name='unbindCanFail', mode=MODE_VALUE, default=False)
-    _CONNECTION_PACKAGE_id = OID(name='id', mode=MODE_VALUE, opt=True, uniq=True)
+    CONNECTION_PACKAGE = CLASS(name=u'CONNECTION-PACKAGE', mode=MODE_TYPE)
+    _CONNECTION_PACKAGE_bind = CLASS(name=u'bind', mode=MODE_VALUE, typeref=ASN1RefType(('TCAP-Remote-Operations-Information-Objects', 'OPERATION')), default=dict([(u'Errors', ASN1Set(rv=[dict([(u'errorCode', (u'local', -1))])], rr=[], ev=None, er=[])), (u'synchronous', True)]))
+    _CONNECTION_PACKAGE_unbind = CLASS(name=u'unbind', mode=MODE_VALUE, typeref=ASN1RefType(('TCAP-Remote-Operations-Information-Objects', 'OPERATION')), default=dict([(u'synchronous', True)]))
+    _CONNECTION_PACKAGE_responderCanUnbind = BOOL(name=u'responderCanUnbind', mode=MODE_VALUE, default=False)
+    _CONNECTION_PACKAGE_unbindCanFail = BOOL(name=u'unbindCanFail', mode=MODE_VALUE, default=False)
+    _CONNECTION_PACKAGE_id = OID(name=u'id', mode=MODE_VALUE, opt=True, uniq=True)
     CONNECTION_PACKAGE._cont = ASN1Dict([
-        ('bind', _CONNECTION_PACKAGE_bind),
-        ('unbind', _CONNECTION_PACKAGE_unbind),
-        ('responderCanUnbind', _CONNECTION_PACKAGE_responderCanUnbind),
-        ('unbindCanFail', _CONNECTION_PACKAGE_unbindCanFail),
-        ('id', _CONNECTION_PACKAGE_id),
+        (u'bind', _CONNECTION_PACKAGE_bind),
+        (u'unbind', _CONNECTION_PACKAGE_unbind),
+        (u'responderCanUnbind', _CONNECTION_PACKAGE_responderCanUnbind),
+        (u'unbindCanFail', _CONNECTION_PACKAGE_unbindCanFail),
+        (u'id', _CONNECTION_PACKAGE_id),
         ])
     
     #-----< CONTRACT >-----#
-    CONTRACT = CLASS(name='CONTRACT', mode=MODE_TYPE)
-    _CONTRACT_connection = CLASS(name='connection', mode=MODE_VALUE, typeref=ASN1RefType(('TCAP-Remote-Operations-Information-Objects', 'CONNECTION-PACKAGE')), opt=True)
-    _CONTRACT_OperationsOf = CLASS(name='OperationsOf', mode=MODE_SET, typeref=ASN1RefType(('TCAP-Remote-Operations-Information-Objects', 'OPERATION-PACKAGE')), opt=True)
-    _CONTRACT_InitiatorConsumerOf = CLASS(name='InitiatorConsumerOf', mode=MODE_SET, typeref=ASN1RefType(('TCAP-Remote-Operations-Information-Objects', 'OPERATION-PACKAGE')), opt=True)
-    _CONTRACT_InitiatorSupplierOf = CLASS(name='InitiatorSupplierOf', mode=MODE_SET, typeref=ASN1RefType(('TCAP-Remote-Operations-Information-Objects', 'OPERATION-PACKAGE')), opt=True)
-    _CONTRACT_id = OID(name='id', mode=MODE_VALUE, opt=True, uniq=True)
+    CONTRACT = CLASS(name=u'CONTRACT', mode=MODE_TYPE)
+    _CONTRACT_connection = CLASS(name=u'connection', mode=MODE_VALUE, typeref=ASN1RefType(('TCAP-Remote-Operations-Information-Objects', 'CONNECTION-PACKAGE')), opt=True)
+    _CONTRACT_OperationsOf = CLASS(name=u'OperationsOf', mode=MODE_SET, typeref=ASN1RefType(('TCAP-Remote-Operations-Information-Objects', 'OPERATION-PACKAGE')), opt=True)
+    _CONTRACT_InitiatorConsumerOf = CLASS(name=u'InitiatorConsumerOf', mode=MODE_SET, typeref=ASN1RefType(('TCAP-Remote-Operations-Information-Objects', 'OPERATION-PACKAGE')), opt=True)
+    _CONTRACT_InitiatorSupplierOf = CLASS(name=u'InitiatorSupplierOf', mode=MODE_SET, typeref=ASN1RefType(('TCAP-Remote-Operations-Information-Objects', 'OPERATION-PACKAGE')), opt=True)
+    _CONTRACT_id = OID(name=u'id', mode=MODE_VALUE, opt=True, uniq=True)
     CONTRACT._cont = ASN1Dict([
-        ('connection', _CONTRACT_connection),
-        ('OperationsOf', _CONTRACT_OperationsOf),
-        ('InitiatorConsumerOf', _CONTRACT_InitiatorConsumerOf),
-        ('InitiatorSupplierOf', _CONTRACT_InitiatorSupplierOf),
-        ('id', _CONTRACT_id),
+        (u'connection', _CONTRACT_connection),
+        (u'OperationsOf', _CONTRACT_OperationsOf),
+        (u'InitiatorConsumerOf', _CONTRACT_InitiatorConsumerOf),
+        (u'InitiatorSupplierOf', _CONTRACT_InitiatorSupplierOf),
+        (u'id', _CONTRACT_id),
         ])
     
     #-----< ROS-OBJECT-CLASS >-----#
-    ROS_OBJECT_CLASS = CLASS(name='ROS-OBJECT-CLASS', mode=MODE_TYPE)
-    _ROS_OBJECT_CLASS_Is = CLASS(name='Is', mode=MODE_SET, typeref=ASN1RefType(('TCAP-Remote-Operations-Information-Objects', 'ROS-OBJECT-CLASS')), opt=True)
-    _ROS_OBJECT_CLASS_Initiates = CLASS(name='Initiates', mode=MODE_SET, typeref=ASN1RefType(('TCAP-Remote-Operations-Information-Objects', 'CONTRACT')), opt=True)
-    _ROS_OBJECT_CLASS_Responds = CLASS(name='Responds', mode=MODE_SET, typeref=ASN1RefType(('TCAP-Remote-Operations-Information-Objects', 'CONTRACT')), opt=True)
-    _ROS_OBJECT_CLASS_InitiatesAndResponds = CLASS(name='InitiatesAndResponds', mode=MODE_SET, typeref=ASN1RefType(('TCAP-Remote-Operations-Information-Objects', 'CONTRACT')), opt=True)
-    _ROS_OBJECT_CLASS_id = OID(name='id', mode=MODE_VALUE, uniq=True)
+    ROS_OBJECT_CLASS = CLASS(name=u'ROS-OBJECT-CLASS', mode=MODE_TYPE)
+    _ROS_OBJECT_CLASS_Is = CLASS(name=u'Is', mode=MODE_SET, typeref=ASN1RefType(('TCAP-Remote-Operations-Information-Objects', 'ROS-OBJECT-CLASS')), opt=True)
+    _ROS_OBJECT_CLASS_Initiates = CLASS(name=u'Initiates', mode=MODE_SET, typeref=ASN1RefType(('TCAP-Remote-Operations-Information-Objects', 'CONTRACT')), opt=True)
+    _ROS_OBJECT_CLASS_Responds = CLASS(name=u'Responds', mode=MODE_SET, typeref=ASN1RefType(('TCAP-Remote-Operations-Information-Objects', 'CONTRACT')), opt=True)
+    _ROS_OBJECT_CLASS_InitiatesAndResponds = CLASS(name=u'InitiatesAndResponds', mode=MODE_SET, typeref=ASN1RefType(('TCAP-Remote-Operations-Information-Objects', 'CONTRACT')), opt=True)
+    _ROS_OBJECT_CLASS_id = OID(name=u'id', mode=MODE_VALUE, uniq=True)
     ROS_OBJECT_CLASS._cont = ASN1Dict([
-        ('Is', _ROS_OBJECT_CLASS_Is),
-        ('Initiates', _ROS_OBJECT_CLASS_Initiates),
-        ('Responds', _ROS_OBJECT_CLASS_Responds),
-        ('InitiatesAndResponds', _ROS_OBJECT_CLASS_InitiatesAndResponds),
-        ('id', _ROS_OBJECT_CLASS_id),
+        (u'Is', _ROS_OBJECT_CLASS_Is),
+        (u'Initiates', _ROS_OBJECT_CLASS_Initiates),
+        (u'Responds', _ROS_OBJECT_CLASS_Responds),
+        (u'InitiatesAndResponds', _ROS_OBJECT_CLASS_InitiatesAndResponds),
+        (u'id', _ROS_OBJECT_CLASS_id),
         ])
     
     #-----< OperationCode >-----#
-    OperationCode = CHOICE(name='OperationCode', mode=MODE_TYPE)
-    _OperationCode_national = INT(name='national', mode=MODE_TYPE, tag=(16, TAG_PRIVATE, TAG_IMPLICIT))
+    OperationCode = CHOICE(name=u'OperationCode', mode=MODE_TYPE)
+    _OperationCode_national = INT(name=u'national', mode=MODE_TYPE, tag=(16, TAG_PRIVATE, TAG_IMPLICIT))
     _OperationCode_national._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=-32768, ub=32767)], ev=None, er=[])
-    _OperationCode_private = INT(name='private', mode=MODE_TYPE, tag=(17, TAG_PRIVATE, TAG_IMPLICIT))
+    _OperationCode_private = INT(name=u'private', mode=MODE_TYPE, tag=(17, TAG_PRIVATE, TAG_IMPLICIT))
     OperationCode._cont = ASN1Dict([
-        ('national', _OperationCode_national),
-        ('private', _OperationCode_private),
+        (u'national', _OperationCode_national),
+        (u'private', _OperationCode_private),
         ])
     OperationCode._ext = None
     
     #-----< ErrorCode >-----#
-    ErrorCode = CHOICE(name='ErrorCode', mode=MODE_TYPE)
-    _ErrorCode_national = INT(name='national', mode=MODE_TYPE, tag=(19, TAG_PRIVATE, TAG_EXPLICIT))
+    ErrorCode = CHOICE(name=u'ErrorCode', mode=MODE_TYPE)
+    _ErrorCode_national = INT(name=u'national', mode=MODE_TYPE, tag=(19, TAG_PRIVATE, TAG_EXPLICIT))
     _ErrorCode_national._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=-128, ub=127)], ev=None, er=[])
-    _ErrorCode_private = INT(name='private', mode=MODE_TYPE, tag=(20, TAG_PRIVATE, TAG_EXPLICIT))
-    _ErrorCode_local = INT(name='local', mode=MODE_TYPE)
+    _ErrorCode_private = INT(name=u'private', mode=MODE_TYPE, tag=(20, TAG_PRIVATE, TAG_EXPLICIT))
+    _ErrorCode_local = INT(name=u'local', mode=MODE_TYPE)
     ErrorCode._cont = ASN1Dict([
-        ('national', _ErrorCode_national),
-        ('private', _ErrorCode_private),
-        ('local', _ErrorCode_local),
+        (u'national', _ErrorCode_national),
+        (u'private', _ErrorCode_private),
+        (u'local', _ErrorCode_local),
         ])
     ErrorCode._ext = None
     
     #-----< Priority >-----#
-    Priority = INT(name='Priority', mode=MODE_TYPE)
+    Priority = INT(name=u'Priority', mode=MODE_TYPE)
     Priority._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=None)], ev=None, er=[])
     
     #-----< refuse >-----#
-    refuse = CLASS(name='refuse', mode=MODE_VALUE, typeref=ASN1RefType(('TCAP-Remote-Operations-Information-Objects', 'ERROR')))
-    refuse._val = dict([('errorCode', ('local', -1))])
+    refuse = CLASS(name=u'refuse', mode=MODE_VALUE, typeref=ASN1RefType(('TCAP-Remote-Operations-Information-Objects', 'ERROR')))
+    refuse._val = dict([(u'errorCode', (u'local', -1))])
     
     #-----< emptyBind >-----#
-    emptyBind = CLASS(name='emptyBind', mode=MODE_VALUE, typeref=ASN1RefType(('TCAP-Remote-Operations-Information-Objects', 'OPERATION')))
-    emptyBind._val = dict([('Errors', ASN1Set(rv=[dict([('errorCode', ('local', -1))])], rr=[], ev=None, er=[])), ('synchronous', True)])
+    emptyBind = CLASS(name=u'emptyBind', mode=MODE_VALUE, typeref=ASN1RefType(('TCAP-Remote-Operations-Information-Objects', 'OPERATION')))
+    emptyBind._val = dict([(u'Errors', ASN1Set(rv=[dict([(u'errorCode', (u'local', -1))])], rr=[], ev=None, er=[])), (u'synchronous', True)])
     
     #-----< emptyUnbind >-----#
-    emptyUnbind = CLASS(name='emptyUnbind', mode=MODE_VALUE, typeref=ASN1RefType(('TCAP-Remote-Operations-Information-Objects', 'OPERATION')))
-    emptyUnbind._val = dict([('synchronous', True)])
+    emptyUnbind = CLASS(name=u'emptyUnbind', mode=MODE_VALUE, typeref=ASN1RefType(('TCAP-Remote-Operations-Information-Objects', 'OPERATION')))
+    emptyUnbind._val = dict([(u'synchronous', True)])
     
     #-----< InvokeId >-----#
-    InvokeId = CHOICE(name='InvokeId', mode=MODE_TYPE)
-    _InvokeId_present = INT(name='present', mode=MODE_TYPE)
-    _InvokeId_absent = NULL(name='absent', mode=MODE_TYPE)
+    InvokeId = CHOICE(name=u'InvokeId', mode=MODE_TYPE)
+    _InvokeId_present = INT(name=u'present', mode=MODE_TYPE)
+    _InvokeId_absent = NULL(name=u'absent', mode=MODE_TYPE)
     InvokeId._cont = ASN1Dict([
-        ('present', _InvokeId_present),
-        ('absent', _InvokeId_absent),
+        (u'present', _InvokeId_present),
+        (u'absent', _InvokeId_absent),
         ])
     InvokeId._ext = None
     
     #-----< Errors >-----#
-    Errors = CLASS(name='Errors', mode=MODE_SET, typeref=ASN1RefType(('TCAP-Remote-Operations-Information-Objects', 'ERROR')), param=True)
+    Errors = CLASS(name=u'Errors', mode=MODE_SET, typeref=ASN1RefType(('TCAP-Remote-Operations-Information-Objects', 'ERROR')), param=True)
     
     _all_ = [
         _OPERATION_ArgumentType,
@@ -287,350 +287,350 @@ class TCAP_Remote_Operations_Information_Objects:
 
 class TCAPPackage:
 
-    _name_  = 'TCAPPackage'
+    _name_  = u'TCAPPackage'
     _oid_   = [1, 2, 840, 10013, 0, 0, 4]
     
     _obj_ = [
-        'PackageType',
-        'UniTransactionPDU',
-        'TransactionPDU',
-        'TransactionID',
-        'Abort',
-        'P-Abort-cause',
-        'DialoguePortion',
-        'ProtocolVersion',
-        'IntegerApplicationContext',
-        'ObjectIDApplicationContext',
-        'UserInformation',
-        'Confidentiality',
-        'UserAbortInformation',
-        'ComponentSequence',
-        'ComponentPDU',
-        'Invoke',
-        'ReturnResult',
-        'ReturnError',
-        'Reject',
-        'RejectProblem',
-        'TCInvokeIdSet',
+        u'PackageType',
+        u'UniTransactionPDU',
+        u'TransactionPDU',
+        u'TransactionID',
+        u'Abort',
+        u'P-Abort-cause',
+        u'DialoguePortion',
+        u'ProtocolVersion',
+        u'IntegerApplicationContext',
+        u'ObjectIDApplicationContext',
+        u'UserInformation',
+        u'Confidentiality',
+        u'UserAbortInformation',
+        u'ComponentSequence',
+        u'ComponentPDU',
+        u'Invoke',
+        u'ReturnResult',
+        u'ReturnError',
+        u'Reject',
+        u'RejectProblem',
+        u'TCInvokeIdSet',
         ]
     _type_ = [
-        'PackageType',
-        'UniTransactionPDU',
-        'TransactionPDU',
-        'TransactionID',
-        'Abort',
-        'P-Abort-cause',
-        'DialoguePortion',
-        'ProtocolVersion',
-        'IntegerApplicationContext',
-        'ObjectIDApplicationContext',
-        'UserInformation',
-        'Confidentiality',
-        'UserAbortInformation',
-        'ComponentSequence',
-        'ComponentPDU',
-        'Invoke',
-        'ReturnResult',
-        'ReturnError',
-        'Reject',
-        'RejectProblem',
+        u'PackageType',
+        u'UniTransactionPDU',
+        u'TransactionPDU',
+        u'TransactionID',
+        u'Abort',
+        u'P-Abort-cause',
+        u'DialoguePortion',
+        u'ProtocolVersion',
+        u'IntegerApplicationContext',
+        u'ObjectIDApplicationContext',
+        u'UserInformation',
+        u'Confidentiality',
+        u'UserAbortInformation',
+        u'ComponentSequence',
+        u'ComponentPDU',
+        u'Invoke',
+        u'ReturnResult',
+        u'ReturnError',
+        u'Reject',
+        u'RejectProblem',
         ]
     _set_ = [
-        'TCInvokeIdSet',
+        u'TCInvokeIdSet',
         ]
     _val_ = [
         ]
     _class_ = [
         ]
     _param_ = [
-        'ComponentPDU',
-        'Invoke',
-        'ReturnResult',
-        'ReturnError',
+        u'ComponentPDU',
+        u'Invoke',
+        u'ReturnResult',
+        u'ReturnError',
         ]
     
     #-----< PackageType >-----#
-    PackageType = CHOICE(name='PackageType', mode=MODE_TYPE)
-    _PackageType_unidirectional = SEQ(name='unidirectional', mode=MODE_TYPE, tag=(1, TAG_PRIVATE, TAG_IMPLICIT), typeref=ASN1RefType(('TCAPPackage', 'UniTransactionPDU')))
-    _PackageType_queryWithPerm = SEQ(name='queryWithPerm', mode=MODE_TYPE, tag=(2, TAG_PRIVATE, TAG_IMPLICIT), typeref=ASN1RefType(('TCAPPackage', 'TransactionPDU')))
-    _PackageType_queryWithoutPerm = SEQ(name='queryWithoutPerm', mode=MODE_TYPE, tag=(3, TAG_PRIVATE, TAG_IMPLICIT), typeref=ASN1RefType(('TCAPPackage', 'TransactionPDU')))
-    _PackageType_response = SEQ(name='response', mode=MODE_TYPE, tag=(4, TAG_PRIVATE, TAG_IMPLICIT), typeref=ASN1RefType(('TCAPPackage', 'TransactionPDU')))
-    _PackageType_conversationWithPerm = SEQ(name='conversationWithPerm', mode=MODE_TYPE, tag=(5, TAG_PRIVATE, TAG_IMPLICIT), typeref=ASN1RefType(('TCAPPackage', 'TransactionPDU')))
-    _PackageType_conversationWithoutPerm = SEQ(name='conversationWithoutPerm', mode=MODE_TYPE, tag=(6, TAG_PRIVATE, TAG_IMPLICIT), typeref=ASN1RefType(('TCAPPackage', 'TransactionPDU')))
-    _PackageType_abort = SEQ(name='abort', mode=MODE_TYPE, tag=(22, TAG_PRIVATE, TAG_IMPLICIT), typeref=ASN1RefType(('TCAPPackage', 'Abort')))
+    PackageType = CHOICE(name=u'PackageType', mode=MODE_TYPE)
+    _PackageType_unidirectional = SEQ(name=u'unidirectional', mode=MODE_TYPE, tag=(1, TAG_PRIVATE, TAG_IMPLICIT), typeref=ASN1RefType(('TCAPPackage', 'UniTransactionPDU')))
+    _PackageType_queryWithPerm = SEQ(name=u'queryWithPerm', mode=MODE_TYPE, tag=(2, TAG_PRIVATE, TAG_IMPLICIT), typeref=ASN1RefType(('TCAPPackage', 'TransactionPDU')))
+    _PackageType_queryWithoutPerm = SEQ(name=u'queryWithoutPerm', mode=MODE_TYPE, tag=(3, TAG_PRIVATE, TAG_IMPLICIT), typeref=ASN1RefType(('TCAPPackage', 'TransactionPDU')))
+    _PackageType_response = SEQ(name=u'response', mode=MODE_TYPE, tag=(4, TAG_PRIVATE, TAG_IMPLICIT), typeref=ASN1RefType(('TCAPPackage', 'TransactionPDU')))
+    _PackageType_conversationWithPerm = SEQ(name=u'conversationWithPerm', mode=MODE_TYPE, tag=(5, TAG_PRIVATE, TAG_IMPLICIT), typeref=ASN1RefType(('TCAPPackage', 'TransactionPDU')))
+    _PackageType_conversationWithoutPerm = SEQ(name=u'conversationWithoutPerm', mode=MODE_TYPE, tag=(6, TAG_PRIVATE, TAG_IMPLICIT), typeref=ASN1RefType(('TCAPPackage', 'TransactionPDU')))
+    _PackageType_abort = SEQ(name=u'abort', mode=MODE_TYPE, tag=(22, TAG_PRIVATE, TAG_IMPLICIT), typeref=ASN1RefType(('TCAPPackage', 'Abort')))
     PackageType._cont = ASN1Dict([
-        ('unidirectional', _PackageType_unidirectional),
-        ('queryWithPerm', _PackageType_queryWithPerm),
-        ('queryWithoutPerm', _PackageType_queryWithoutPerm),
-        ('response', _PackageType_response),
-        ('conversationWithPerm', _PackageType_conversationWithPerm),
-        ('conversationWithoutPerm', _PackageType_conversationWithoutPerm),
-        ('abort', _PackageType_abort),
+        (u'unidirectional', _PackageType_unidirectional),
+        (u'queryWithPerm', _PackageType_queryWithPerm),
+        (u'queryWithoutPerm', _PackageType_queryWithoutPerm),
+        (u'response', _PackageType_response),
+        (u'conversationWithPerm', _PackageType_conversationWithPerm),
+        (u'conversationWithoutPerm', _PackageType_conversationWithoutPerm),
+        (u'abort', _PackageType_abort),
         ])
     PackageType._ext = None
     
     #-----< UniTransactionPDU >-----#
-    UniTransactionPDU = SEQ(name='UniTransactionPDU', mode=MODE_TYPE)
-    _UniTransactionPDU_identifier = OCT_STR(name='identifier', mode=MODE_TYPE, typeref=ASN1RefType(('TCAPPackage', 'TransactionID')))
-    _UniTransactionPDU_dialoguePortion = SEQ(name='dialoguePortion', mode=MODE_TYPE, typeref=ASN1RefType(('TCAPPackage', 'DialoguePortion')), opt=True)
-    _UniTransactionPDU_componentPortion = SEQ_OF(name='componentPortion', mode=MODE_TYPE, typeref=ASN1RefType(('TCAPPackage', 'ComponentSequence')))
+    UniTransactionPDU = SEQ(name=u'UniTransactionPDU', mode=MODE_TYPE)
+    _UniTransactionPDU_identifier = OCT_STR(name=u'identifier', mode=MODE_TYPE, typeref=ASN1RefType(('TCAPPackage', 'TransactionID')))
+    _UniTransactionPDU_dialoguePortion = SEQ(name=u'dialoguePortion', mode=MODE_TYPE, typeref=ASN1RefType(('TCAPPackage', 'DialoguePortion')), opt=True)
+    _UniTransactionPDU_componentPortion = SEQ_OF(name=u'componentPortion', mode=MODE_TYPE, typeref=ASN1RefType(('TCAPPackage', 'ComponentSequence')))
     UniTransactionPDU._cont = ASN1Dict([
-        ('identifier', _UniTransactionPDU_identifier),
-        ('dialoguePortion', _UniTransactionPDU_dialoguePortion),
-        ('componentPortion', _UniTransactionPDU_componentPortion),
+        (u'identifier', _UniTransactionPDU_identifier),
+        (u'dialoguePortion', _UniTransactionPDU_dialoguePortion),
+        (u'componentPortion', _UniTransactionPDU_componentPortion),
         ])
     UniTransactionPDU._ext = None
     
     #-----< TransactionPDU >-----#
-    TransactionPDU = SEQ(name='TransactionPDU', mode=MODE_TYPE)
-    _TransactionPDU_identifier = OCT_STR(name='identifier', mode=MODE_TYPE, typeref=ASN1RefType(('TCAPPackage', 'TransactionID')))
-    _TransactionPDU_dialoguePortion = SEQ(name='dialoguePortion', mode=MODE_TYPE, typeref=ASN1RefType(('TCAPPackage', 'DialoguePortion')), opt=True)
-    _TransactionPDU_componentPortion = SEQ_OF(name='componentPortion', mode=MODE_TYPE, typeref=ASN1RefType(('TCAPPackage', 'ComponentSequence')), opt=True)
+    TransactionPDU = SEQ(name=u'TransactionPDU', mode=MODE_TYPE)
+    _TransactionPDU_identifier = OCT_STR(name=u'identifier', mode=MODE_TYPE, typeref=ASN1RefType(('TCAPPackage', 'TransactionID')))
+    _TransactionPDU_dialoguePortion = SEQ(name=u'dialoguePortion', mode=MODE_TYPE, typeref=ASN1RefType(('TCAPPackage', 'DialoguePortion')), opt=True)
+    _TransactionPDU_componentPortion = SEQ_OF(name=u'componentPortion', mode=MODE_TYPE, typeref=ASN1RefType(('TCAPPackage', 'ComponentSequence')), opt=True)
     TransactionPDU._cont = ASN1Dict([
-        ('identifier', _TransactionPDU_identifier),
-        ('dialoguePortion', _TransactionPDU_dialoguePortion),
-        ('componentPortion', _TransactionPDU_componentPortion),
+        (u'identifier', _TransactionPDU_identifier),
+        (u'dialoguePortion', _TransactionPDU_dialoguePortion),
+        (u'componentPortion', _TransactionPDU_componentPortion),
         ])
     TransactionPDU._ext = None
     
     #-----< TransactionID >-----#
-    TransactionID = OCT_STR(name='TransactionID', mode=MODE_TYPE, tag=(7, TAG_PRIVATE, TAG_IMPLICIT))
+    TransactionID = OCT_STR(name=u'TransactionID', mode=MODE_TYPE, tag=(7, TAG_PRIVATE, TAG_IMPLICIT))
     
     #-----< Abort >-----#
-    Abort = SEQ(name='Abort', mode=MODE_TYPE)
-    _Abort_identifier = OCT_STR(name='identifier', mode=MODE_TYPE, typeref=ASN1RefType(('TCAPPackage', 'TransactionID')))
-    _Abort_dialoguePortion = SEQ(name='dialoguePortion', mode=MODE_TYPE, typeref=ASN1RefType(('TCAPPackage', 'DialoguePortion')), opt=True)
-    _Abort_causeInformation = CHOICE(name='causeInformation', mode=MODE_TYPE, opt=True)
-    __Abort_causeInformation_abortCause = INT(name='abortCause', mode=MODE_TYPE, typeref=ASN1RefType(('TCAPPackage', 'P-Abort-cause')))
-    __Abort_causeInformation_userInformation = EXT(name='userInformation', mode=MODE_TYPE, typeref=ASN1RefType(('TCAPPackage', 'UserAbortInformation')))
+    Abort = SEQ(name=u'Abort', mode=MODE_TYPE)
+    _Abort_identifier = OCT_STR(name=u'identifier', mode=MODE_TYPE, typeref=ASN1RefType(('TCAPPackage', 'TransactionID')))
+    _Abort_dialoguePortion = SEQ(name=u'dialoguePortion', mode=MODE_TYPE, typeref=ASN1RefType(('TCAPPackage', 'DialoguePortion')), opt=True)
+    _Abort_causeInformation = CHOICE(name=u'causeInformation', mode=MODE_TYPE, opt=True)
+    __Abort_causeInformation_abortCause = INT(name=u'abortCause', mode=MODE_TYPE, typeref=ASN1RefType(('TCAPPackage', 'P-Abort-cause')))
+    __Abort_causeInformation_userInformation = EXT(name=u'userInformation', mode=MODE_TYPE, typeref=ASN1RefType(('TCAPPackage', 'UserAbortInformation')))
     _Abort_causeInformation._cont = ASN1Dict([
-        ('abortCause', __Abort_causeInformation_abortCause),
-        ('userInformation', __Abort_causeInformation_userInformation),
+        (u'abortCause', __Abort_causeInformation_abortCause),
+        (u'userInformation', __Abort_causeInformation_userInformation),
         ])
     _Abort_causeInformation._ext = None
     Abort._cont = ASN1Dict([
-        ('identifier', _Abort_identifier),
-        ('dialoguePortion', _Abort_dialoguePortion),
-        ('causeInformation', _Abort_causeInformation),
+        (u'identifier', _Abort_identifier),
+        (u'dialoguePortion', _Abort_dialoguePortion),
+        (u'causeInformation', _Abort_causeInformation),
         ])
     Abort._ext = None
     
     #-----< P-Abort-cause >-----#
-    P_Abort_cause = INT(name='P-Abort-cause', mode=MODE_TYPE, tag=(23, TAG_PRIVATE, TAG_IMPLICIT))
-    P_Abort_cause._cont = ASN1Dict([('unrecognizedPackageType', 1), ('incorrectTransactionPortion', 2), ('badlyStructuredTransactionPortion', 3), ('unassignedRespondingTransactionID', 4), ('permissionToReleaseProblem', 5), ('resourceUnavailable', 6), ('unrecognizedDialoguePortionID', 7), ('badlyStructuredDialoguePortion', 8), ('missingDialoguePortion', 9), ('inconsistentDialoguePortion', 10)])
+    P_Abort_cause = INT(name=u'P-Abort-cause', mode=MODE_TYPE, tag=(23, TAG_PRIVATE, TAG_IMPLICIT))
+    P_Abort_cause._cont = ASN1Dict([(u'unrecognizedPackageType', 1), (u'incorrectTransactionPortion', 2), (u'badlyStructuredTransactionPortion', 3), (u'unassignedRespondingTransactionID', 4), (u'permissionToReleaseProblem', 5), (u'resourceUnavailable', 6), (u'unrecognizedDialoguePortionID', 7), (u'badlyStructuredDialoguePortion', 8), (u'missingDialoguePortion', 9), (u'inconsistentDialoguePortion', 10)])
     
     #-----< DialoguePortion >-----#
-    DialoguePortion = SEQ(name='DialoguePortion', mode=MODE_TYPE, tag=(25, TAG_PRIVATE, TAG_IMPLICIT))
-    _DialoguePortion_version = OCT_STR(name='version', mode=MODE_TYPE, typeref=ASN1RefType(('TCAPPackage', 'ProtocolVersion')), opt=True)
-    _DialoguePortion_applicationContext = CHOICE(name='applicationContext', mode=MODE_TYPE, opt=True)
-    __DialoguePortion_applicationContext_integerApplicationId = INT(name='integerApplicationId', mode=MODE_TYPE, typeref=ASN1RefType(('TCAPPackage', 'IntegerApplicationContext')))
-    __DialoguePortion_applicationContext_objectApplicationId = OID(name='objectApplicationId', mode=MODE_TYPE, typeref=ASN1RefType(('TCAPPackage', 'ObjectIDApplicationContext')))
+    DialoguePortion = SEQ(name=u'DialoguePortion', mode=MODE_TYPE, tag=(25, TAG_PRIVATE, TAG_IMPLICIT))
+    _DialoguePortion_version = OCT_STR(name=u'version', mode=MODE_TYPE, typeref=ASN1RefType(('TCAPPackage', 'ProtocolVersion')), opt=True)
+    _DialoguePortion_applicationContext = CHOICE(name=u'applicationContext', mode=MODE_TYPE, opt=True)
+    __DialoguePortion_applicationContext_integerApplicationId = INT(name=u'integerApplicationId', mode=MODE_TYPE, typeref=ASN1RefType(('TCAPPackage', 'IntegerApplicationContext')))
+    __DialoguePortion_applicationContext_objectApplicationId = OID(name=u'objectApplicationId', mode=MODE_TYPE, typeref=ASN1RefType(('TCAPPackage', 'ObjectIDApplicationContext')))
     _DialoguePortion_applicationContext._cont = ASN1Dict([
-        ('integerApplicationId', __DialoguePortion_applicationContext_integerApplicationId),
-        ('objectApplicationId', __DialoguePortion_applicationContext_objectApplicationId),
+        (u'integerApplicationId', __DialoguePortion_applicationContext_integerApplicationId),
+        (u'objectApplicationId', __DialoguePortion_applicationContext_objectApplicationId),
         ])
     _DialoguePortion_applicationContext._ext = None
-    _DialoguePortion_userInformation = SEQ_OF(name='userInformation', mode=MODE_TYPE, typeref=ASN1RefType(('TCAPPackage', 'UserInformation')), opt=True)
-    _DialoguePortion_securityContext = CHOICE(name='securityContext', mode=MODE_TYPE, opt=True)
-    __DialoguePortion_securityContext_integerSecurityId = INT(name='integerSecurityId', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    __DialoguePortion_securityContext_objectSecurityId = OID(name='objectSecurityId', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _DialoguePortion_userInformation = SEQ_OF(name=u'userInformation', mode=MODE_TYPE, typeref=ASN1RefType(('TCAPPackage', 'UserInformation')), opt=True)
+    _DialoguePortion_securityContext = CHOICE(name=u'securityContext', mode=MODE_TYPE, opt=True)
+    __DialoguePortion_securityContext_integerSecurityId = INT(name=u'integerSecurityId', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __DialoguePortion_securityContext_objectSecurityId = OID(name=u'objectSecurityId', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     _DialoguePortion_securityContext._cont = ASN1Dict([
-        ('integerSecurityId', __DialoguePortion_securityContext_integerSecurityId),
-        ('objectSecurityId', __DialoguePortion_securityContext_objectSecurityId),
+        (u'integerSecurityId', __DialoguePortion_securityContext_integerSecurityId),
+        (u'objectSecurityId', __DialoguePortion_securityContext_objectSecurityId),
         ])
     _DialoguePortion_securityContext._ext = None
-    _DialoguePortion_confidentiality = SEQ(name='confidentiality', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('TCAPPackage', 'Confidentiality')), opt=True)
+    _DialoguePortion_confidentiality = SEQ(name=u'confidentiality', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('TCAPPackage', 'Confidentiality')), opt=True)
     DialoguePortion._cont = ASN1Dict([
-        ('version', _DialoguePortion_version),
-        ('applicationContext', _DialoguePortion_applicationContext),
-        ('userInformation', _DialoguePortion_userInformation),
-        ('securityContext', _DialoguePortion_securityContext),
-        ('confidentiality', _DialoguePortion_confidentiality),
+        (u'version', _DialoguePortion_version),
+        (u'applicationContext', _DialoguePortion_applicationContext),
+        (u'userInformation', _DialoguePortion_userInformation),
+        (u'securityContext', _DialoguePortion_securityContext),
+        (u'confidentiality', _DialoguePortion_confidentiality),
         ])
     DialoguePortion._ext = None
     
     #-----< ProtocolVersion >-----#
-    ProtocolVersion = OCT_STR(name='ProtocolVersion', mode=MODE_TYPE, tag=(26, TAG_PRIVATE, TAG_IMPLICIT))
+    ProtocolVersion = OCT_STR(name=u'ProtocolVersion', mode=MODE_TYPE, tag=(26, TAG_PRIVATE, TAG_IMPLICIT))
     ProtocolVersion._const_sz = ASN1Set(rv=[1], rr=[], ev=None, er=[])
     
     #-----< IntegerApplicationContext >-----#
-    IntegerApplicationContext = INT(name='IntegerApplicationContext', mode=MODE_TYPE, tag=(27, TAG_PRIVATE, TAG_IMPLICIT))
+    IntegerApplicationContext = INT(name=u'IntegerApplicationContext', mode=MODE_TYPE, tag=(27, TAG_PRIVATE, TAG_IMPLICIT))
     
     #-----< ObjectIDApplicationContext >-----#
-    ObjectIDApplicationContext = OID(name='ObjectIDApplicationContext', mode=MODE_TYPE, tag=(28, TAG_PRIVATE, TAG_IMPLICIT))
+    ObjectIDApplicationContext = OID(name=u'ObjectIDApplicationContext', mode=MODE_TYPE, tag=(28, TAG_PRIVATE, TAG_IMPLICIT))
     
     #-----< UserInformation >-----#
-    UserInformation = SEQ_OF(name='UserInformation', mode=MODE_TYPE, tag=(29, TAG_PRIVATE, TAG_IMPLICIT))
+    UserInformation = SEQ_OF(name=u'UserInformation', mode=MODE_TYPE, tag=(29, TAG_PRIVATE, TAG_IMPLICIT))
     _UserInformation__item_ = EXT(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('_IMPL_', 'EXTERNAL')))
     UserInformation._cont = _UserInformation__item_
     
     #-----< Confidentiality >-----#
-    Confidentiality = SEQ(name='Confidentiality', mode=MODE_TYPE)
-    _Confidentiality_confidentialityId = CHOICE(name='confidentialityId', mode=MODE_TYPE, opt=True)
-    __Confidentiality_confidentialityId_integerConfidentialityId = INT(name='integerConfidentialityId', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    __Confidentiality_confidentialityId_objectConfidentialityId = OID(name='objectConfidentialityId', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    Confidentiality = SEQ(name=u'Confidentiality', mode=MODE_TYPE)
+    _Confidentiality_confidentialityId = CHOICE(name=u'confidentialityId', mode=MODE_TYPE, opt=True)
+    __Confidentiality_confidentialityId_integerConfidentialityId = INT(name=u'integerConfidentialityId', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __Confidentiality_confidentialityId_objectConfidentialityId = OID(name=u'objectConfidentialityId', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     _Confidentiality_confidentialityId._cont = ASN1Dict([
-        ('integerConfidentialityId', __Confidentiality_confidentialityId_integerConfidentialityId),
-        ('objectConfidentialityId', __Confidentiality_confidentialityId_objectConfidentialityId),
+        (u'integerConfidentialityId', __Confidentiality_confidentialityId_integerConfidentialityId),
+        (u'objectConfidentialityId', __Confidentiality_confidentialityId_objectConfidentialityId),
         ])
     _Confidentiality_confidentialityId._ext = None
     Confidentiality._cont = ASN1Dict([
-        ('confidentialityId', _Confidentiality_confidentialityId),
+        (u'confidentialityId', _Confidentiality_confidentialityId),
         ])
     Confidentiality._ext = []
     
     #-----< UserAbortInformation >-----#
-    UserAbortInformation = EXT(name='UserAbortInformation', mode=MODE_TYPE, tag=(24, TAG_PRIVATE, TAG_EXPLICIT), typeref=ASN1RefType(('_IMPL_', 'EXTERNAL')))
+    UserAbortInformation = EXT(name=u'UserAbortInformation', mode=MODE_TYPE, tag=(24, TAG_PRIVATE, TAG_EXPLICIT), typeref=ASN1RefType(('_IMPL_', 'EXTERNAL')))
     
     #-----< ComponentSequence >-----#
-    ComponentSequence = SEQ_OF(name='ComponentSequence', mode=MODE_TYPE, tag=(8, TAG_PRIVATE, TAG_IMPLICIT))
+    ComponentSequence = SEQ_OF(name=u'ComponentSequence', mode=MODE_TYPE, tag=(8, TAG_PRIVATE, TAG_IMPLICIT))
     _ComponentSequence__item_ = CHOICE(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('TCAPPackage', 'ComponentPDU')))
-    __ComponentSequence__item__invokeLast = SEQ(name='invokeLast', mode=MODE_TYPE, tag=(9, TAG_PRIVATE, TAG_IMPLICIT), typeref=ASN1RefType(('TCAPPackage', 'Invoke')))
-    ___ComponentSequence__item__invokeLast_componentIDs = OCT_STR(name='componentIDs', mode=MODE_TYPE, tag=(15, TAG_PRIVATE, TAG_IMPLICIT), opt=True)
+    __ComponentSequence__item__invokeLast = SEQ(name=u'invokeLast', mode=MODE_TYPE, tag=(9, TAG_PRIVATE, TAG_IMPLICIT), typeref=ASN1RefType(('TCAPPackage', 'Invoke')))
+    ___ComponentSequence__item__invokeLast_componentIDs = OCT_STR(name=u'componentIDs', mode=MODE_TYPE, tag=(15, TAG_PRIVATE, TAG_IMPLICIT), opt=True)
     ___ComponentSequence__item__invokeLast_componentIDs._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=2)], ev=None, er=[])
-    ___ComponentSequence__item__invokeLast_opcode = CHOICE(name='opcode', mode=MODE_TYPE, typeref=ASN1RefClassField(('TCAP-Remote-Operations-Information-Objects', 'OPERATION'), ['operationCode']))
+    ___ComponentSequence__item__invokeLast_opcode = CHOICE(name=u'opcode', mode=MODE_TYPE, typeref=ASN1RefClassField(('TCAP-Remote-Operations-Information-Objects', 'OPERATION'), [u'operationCode']))
     ____ComponentSequence__item__invokeLast_opcode_tab = CLASS(name='_tab_OPERATION', mode=MODE_SET, typeref=ASN1RefType(('TCAP-Remote-Operations-Information-Objects', 'OPERATION')))
     ____ComponentSequence__item__invokeLast_opcode_tab._val = ASN1Set(rv=[], rr=[], ev=[], er=[])
     ___ComponentSequence__item__invokeLast_opcode._const_tab = ____ComponentSequence__item__invokeLast_opcode_tab
     ___ComponentSequence__item__invokeLast_opcode._const_tab_at = None
-    ___ComponentSequence__item__invokeLast_opcode._const_tab_id = 'operationCode'
-    ___ComponentSequence__item__invokeLast_parameter = OPEN(name='parameter', mode=MODE_TYPE, typeref=ASN1RefClassField(('TCAP-Remote-Operations-Information-Objects', 'OPERATION'), ['ResultType']), opt=True)
+    ___ComponentSequence__item__invokeLast_opcode._const_tab_id = u'operationCode'
+    ___ComponentSequence__item__invokeLast_parameter = OPEN(name=u'parameter', mode=MODE_TYPE, typeref=ASN1RefClassField(('TCAP-Remote-Operations-Information-Objects', 'OPERATION'), [u'ResultType']), opt=True)
     ____ComponentSequence__item__invokeLast_parameter_tab = CLASS(name='_tab_OPERATION', mode=MODE_SET, typeref=ASN1RefType(('TCAP-Remote-Operations-Information-Objects', 'OPERATION')))
     ____ComponentSequence__item__invokeLast_parameter_tab._val = ASN1Set(rv=[], rr=[], ev=[], er=[])
     ___ComponentSequence__item__invokeLast_parameter._const_tab = ____ComponentSequence__item__invokeLast_parameter_tab
-    ___ComponentSequence__item__invokeLast_parameter._const_tab_at = ('..', 'opcode')
-    ___ComponentSequence__item__invokeLast_parameter._const_tab_id = 'ResultType'
+    ___ComponentSequence__item__invokeLast_parameter._const_tab_at = ('..', u'opcode')
+    ___ComponentSequence__item__invokeLast_parameter._const_tab_id = u'ResultType'
     __ComponentSequence__item__invokeLast._cont = ASN1Dict([
-        ('componentIDs', ___ComponentSequence__item__invokeLast_componentIDs),
-        ('opcode', ___ComponentSequence__item__invokeLast_opcode),
-        ('parameter', ___ComponentSequence__item__invokeLast_parameter),
+        (u'componentIDs', ___ComponentSequence__item__invokeLast_componentIDs),
+        (u'opcode', ___ComponentSequence__item__invokeLast_opcode),
+        (u'parameter', ___ComponentSequence__item__invokeLast_parameter),
         ])
     __ComponentSequence__item__invokeLast._ext = None
-    __ComponentSequence__item__returnResultLast = SEQ(name='returnResultLast', mode=MODE_TYPE, tag=(10, TAG_PRIVATE, TAG_IMPLICIT), typeref=ASN1RefType(('TCAPPackage', 'ReturnResult')))
-    ___ComponentSequence__item__returnResultLast_componentID = OCT_STR(name='componentID', mode=MODE_TYPE, tag=(15, TAG_PRIVATE, TAG_IMPLICIT))
+    __ComponentSequence__item__returnResultLast = SEQ(name=u'returnResultLast', mode=MODE_TYPE, tag=(10, TAG_PRIVATE, TAG_IMPLICIT), typeref=ASN1RefType(('TCAPPackage', 'ReturnResult')))
+    ___ComponentSequence__item__returnResultLast_componentID = OCT_STR(name=u'componentID', mode=MODE_TYPE, tag=(15, TAG_PRIVATE, TAG_IMPLICIT))
     ___ComponentSequence__item__returnResultLast_componentID._const_sz = ASN1Set(rv=[1], rr=[], ev=None, er=[])
-    ___ComponentSequence__item__returnResultLast_parameter = OPEN(name='parameter', mode=MODE_TYPE, typeref=ASN1RefClassField(('TCAP-Remote-Operations-Information-Objects', 'OPERATION'), ['ResultType']), opt=True)
+    ___ComponentSequence__item__returnResultLast_parameter = OPEN(name=u'parameter', mode=MODE_TYPE, typeref=ASN1RefClassField(('TCAP-Remote-Operations-Information-Objects', 'OPERATION'), [u'ResultType']), opt=True)
     __ComponentSequence__item__returnResultLast._cont = ASN1Dict([
-        ('componentID', ___ComponentSequence__item__returnResultLast_componentID),
-        ('parameter', ___ComponentSequence__item__returnResultLast_parameter),
+        (u'componentID', ___ComponentSequence__item__returnResultLast_componentID),
+        (u'parameter', ___ComponentSequence__item__returnResultLast_parameter),
         ])
     __ComponentSequence__item__returnResultLast._ext = None
-    __ComponentSequence__item__returnError = SEQ(name='returnError', mode=MODE_TYPE, tag=(11, TAG_PRIVATE, TAG_IMPLICIT), typeref=ASN1RefType(('TCAPPackage', 'ReturnError')))
-    ___ComponentSequence__item__returnError_componentID = OCT_STR(name='componentID', mode=MODE_TYPE, tag=(15, TAG_PRIVATE, TAG_IMPLICIT))
+    __ComponentSequence__item__returnError = SEQ(name=u'returnError', mode=MODE_TYPE, tag=(11, TAG_PRIVATE, TAG_IMPLICIT), typeref=ASN1RefType(('TCAPPackage', 'ReturnError')))
+    ___ComponentSequence__item__returnError_componentID = OCT_STR(name=u'componentID', mode=MODE_TYPE, tag=(15, TAG_PRIVATE, TAG_IMPLICIT))
     ___ComponentSequence__item__returnError_componentID._const_sz = ASN1Set(rv=[1], rr=[], ev=None, er=[])
-    ___ComponentSequence__item__returnError_errorCode = CHOICE(name='errorCode', mode=MODE_TYPE, typeref=ASN1RefClassField(('TCAP-Remote-Operations-Information-Objects', 'ERROR'), ['errorCode']))
+    ___ComponentSequence__item__returnError_errorCode = CHOICE(name=u'errorCode', mode=MODE_TYPE, typeref=ASN1RefClassField(('TCAP-Remote-Operations-Information-Objects', 'ERROR'), [u'errorCode']))
     ____ComponentSequence__item__returnError_errorCode_tab = CLASS(name='_tab_ERROR', mode=MODE_SET, typeref=ASN1RefType(('TCAP-Remote-Operations-Information-Objects', 'ERROR')))
     ____ComponentSequence__item__returnError_errorCode_tab._val = ASN1Set(rv=[], rr=[], ev=[], er=[])
     ___ComponentSequence__item__returnError_errorCode._const_tab = ____ComponentSequence__item__returnError_errorCode_tab
     ___ComponentSequence__item__returnError_errorCode._const_tab_at = None
-    ___ComponentSequence__item__returnError_errorCode._const_tab_id = 'errorCode'
-    ___ComponentSequence__item__returnError_parameter = OPEN(name='parameter', mode=MODE_TYPE, typeref=ASN1RefClassField(('TCAP-Remote-Operations-Information-Objects', 'ERROR'), ['ParameterType']), opt=True)
+    ___ComponentSequence__item__returnError_errorCode._const_tab_id = u'errorCode'
+    ___ComponentSequence__item__returnError_parameter = OPEN(name=u'parameter', mode=MODE_TYPE, typeref=ASN1RefClassField(('TCAP-Remote-Operations-Information-Objects', 'ERROR'), [u'ParameterType']), opt=True)
     ____ComponentSequence__item__returnError_parameter_tab = CLASS(name='_tab_ERROR', mode=MODE_SET, typeref=ASN1RefType(('TCAP-Remote-Operations-Information-Objects', 'ERROR')))
     ____ComponentSequence__item__returnError_parameter_tab._val = ASN1Set(rv=[], rr=[], ev=[], er=[])
     ___ComponentSequence__item__returnError_parameter._const_tab = ____ComponentSequence__item__returnError_parameter_tab
-    ___ComponentSequence__item__returnError_parameter._const_tab_at = ('..', 'errorCode')
-    ___ComponentSequence__item__returnError_parameter._const_tab_id = 'ParameterType'
+    ___ComponentSequence__item__returnError_parameter._const_tab_at = ('..', u'errorCode')
+    ___ComponentSequence__item__returnError_parameter._const_tab_id = u'ParameterType'
     __ComponentSequence__item__returnError._cont = ASN1Dict([
-        ('componentID', ___ComponentSequence__item__returnError_componentID),
-        ('errorCode', ___ComponentSequence__item__returnError_errorCode),
-        ('parameter', ___ComponentSequence__item__returnError_parameter),
+        (u'componentID', ___ComponentSequence__item__returnError_componentID),
+        (u'errorCode', ___ComponentSequence__item__returnError_errorCode),
+        (u'parameter', ___ComponentSequence__item__returnError_parameter),
         ])
     __ComponentSequence__item__returnError._ext = None
-    __ComponentSequence__item__reject = SEQ(name='reject', mode=MODE_TYPE, tag=(12, TAG_PRIVATE, TAG_IMPLICIT), typeref=ASN1RefType(('TCAPPackage', 'Reject')))
-    __ComponentSequence__item__invokeNotLast = SEQ(name='invokeNotLast', mode=MODE_TYPE, tag=(13, TAG_PRIVATE, TAG_IMPLICIT), typeref=ASN1RefType(('TCAPPackage', 'Invoke')))
-    ___ComponentSequence__item__invokeNotLast_componentIDs = OCT_STR(name='componentIDs', mode=MODE_TYPE, tag=(15, TAG_PRIVATE, TAG_IMPLICIT), opt=True)
+    __ComponentSequence__item__reject = SEQ(name=u'reject', mode=MODE_TYPE, tag=(12, TAG_PRIVATE, TAG_IMPLICIT), typeref=ASN1RefType(('TCAPPackage', 'Reject')))
+    __ComponentSequence__item__invokeNotLast = SEQ(name=u'invokeNotLast', mode=MODE_TYPE, tag=(13, TAG_PRIVATE, TAG_IMPLICIT), typeref=ASN1RefType(('TCAPPackage', 'Invoke')))
+    ___ComponentSequence__item__invokeNotLast_componentIDs = OCT_STR(name=u'componentIDs', mode=MODE_TYPE, tag=(15, TAG_PRIVATE, TAG_IMPLICIT), opt=True)
     ___ComponentSequence__item__invokeNotLast_componentIDs._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=2)], ev=None, er=[])
-    ___ComponentSequence__item__invokeNotLast_opcode = CHOICE(name='opcode', mode=MODE_TYPE, typeref=ASN1RefClassField(('TCAP-Remote-Operations-Information-Objects', 'OPERATION'), ['operationCode']))
+    ___ComponentSequence__item__invokeNotLast_opcode = CHOICE(name=u'opcode', mode=MODE_TYPE, typeref=ASN1RefClassField(('TCAP-Remote-Operations-Information-Objects', 'OPERATION'), [u'operationCode']))
     ____ComponentSequence__item__invokeNotLast_opcode_tab = CLASS(name='_tab_OPERATION', mode=MODE_SET, typeref=ASN1RefType(('TCAP-Remote-Operations-Information-Objects', 'OPERATION')))
     ____ComponentSequence__item__invokeNotLast_opcode_tab._val = ASN1Set(rv=[], rr=[], ev=[], er=[])
     ___ComponentSequence__item__invokeNotLast_opcode._const_tab = ____ComponentSequence__item__invokeNotLast_opcode_tab
     ___ComponentSequence__item__invokeNotLast_opcode._const_tab_at = None
-    ___ComponentSequence__item__invokeNotLast_opcode._const_tab_id = 'operationCode'
-    ___ComponentSequence__item__invokeNotLast_parameter = OPEN(name='parameter', mode=MODE_TYPE, typeref=ASN1RefClassField(('TCAP-Remote-Operations-Information-Objects', 'OPERATION'), ['ResultType']), opt=True)
+    ___ComponentSequence__item__invokeNotLast_opcode._const_tab_id = u'operationCode'
+    ___ComponentSequence__item__invokeNotLast_parameter = OPEN(name=u'parameter', mode=MODE_TYPE, typeref=ASN1RefClassField(('TCAP-Remote-Operations-Information-Objects', 'OPERATION'), [u'ResultType']), opt=True)
     ____ComponentSequence__item__invokeNotLast_parameter_tab = CLASS(name='_tab_OPERATION', mode=MODE_SET, typeref=ASN1RefType(('TCAP-Remote-Operations-Information-Objects', 'OPERATION')))
     ____ComponentSequence__item__invokeNotLast_parameter_tab._val = ASN1Set(rv=[], rr=[], ev=[], er=[])
     ___ComponentSequence__item__invokeNotLast_parameter._const_tab = ____ComponentSequence__item__invokeNotLast_parameter_tab
-    ___ComponentSequence__item__invokeNotLast_parameter._const_tab_at = ('..', 'opcode')
-    ___ComponentSequence__item__invokeNotLast_parameter._const_tab_id = 'ResultType'
+    ___ComponentSequence__item__invokeNotLast_parameter._const_tab_at = ('..', u'opcode')
+    ___ComponentSequence__item__invokeNotLast_parameter._const_tab_id = u'ResultType'
     __ComponentSequence__item__invokeNotLast._cont = ASN1Dict([
-        ('componentIDs', ___ComponentSequence__item__invokeNotLast_componentIDs),
-        ('opcode', ___ComponentSequence__item__invokeNotLast_opcode),
-        ('parameter', ___ComponentSequence__item__invokeNotLast_parameter),
+        (u'componentIDs', ___ComponentSequence__item__invokeNotLast_componentIDs),
+        (u'opcode', ___ComponentSequence__item__invokeNotLast_opcode),
+        (u'parameter', ___ComponentSequence__item__invokeNotLast_parameter),
         ])
     __ComponentSequence__item__invokeNotLast._ext = None
-    __ComponentSequence__item__returnResultNotLast = SEQ(name='returnResultNotLast', mode=MODE_TYPE, tag=(14, TAG_PRIVATE, TAG_IMPLICIT), typeref=ASN1RefType(('TCAPPackage', 'ReturnResult')))
-    ___ComponentSequence__item__returnResultNotLast_componentID = OCT_STR(name='componentID', mode=MODE_TYPE, tag=(15, TAG_PRIVATE, TAG_IMPLICIT))
+    __ComponentSequence__item__returnResultNotLast = SEQ(name=u'returnResultNotLast', mode=MODE_TYPE, tag=(14, TAG_PRIVATE, TAG_IMPLICIT), typeref=ASN1RefType(('TCAPPackage', 'ReturnResult')))
+    ___ComponentSequence__item__returnResultNotLast_componentID = OCT_STR(name=u'componentID', mode=MODE_TYPE, tag=(15, TAG_PRIVATE, TAG_IMPLICIT))
     ___ComponentSequence__item__returnResultNotLast_componentID._const_sz = ASN1Set(rv=[1], rr=[], ev=None, er=[])
-    ___ComponentSequence__item__returnResultNotLast_parameter = OPEN(name='parameter', mode=MODE_TYPE, typeref=ASN1RefClassField(('TCAP-Remote-Operations-Information-Objects', 'OPERATION'), ['ResultType']), opt=True)
+    ___ComponentSequence__item__returnResultNotLast_parameter = OPEN(name=u'parameter', mode=MODE_TYPE, typeref=ASN1RefClassField(('TCAP-Remote-Operations-Information-Objects', 'OPERATION'), [u'ResultType']), opt=True)
     __ComponentSequence__item__returnResultNotLast._cont = ASN1Dict([
-        ('componentID', ___ComponentSequence__item__returnResultNotLast_componentID),
-        ('parameter', ___ComponentSequence__item__returnResultNotLast_parameter),
+        (u'componentID', ___ComponentSequence__item__returnResultNotLast_componentID),
+        (u'parameter', ___ComponentSequence__item__returnResultNotLast_parameter),
         ])
     __ComponentSequence__item__returnResultNotLast._ext = None
     _ComponentSequence__item_._cont = ASN1Dict([
-        ('invokeLast', __ComponentSequence__item__invokeLast),
-        ('returnResultLast', __ComponentSequence__item__returnResultLast),
-        ('returnError', __ComponentSequence__item__returnError),
-        ('reject', __ComponentSequence__item__reject),
-        ('invokeNotLast', __ComponentSequence__item__invokeNotLast),
-        ('returnResultNotLast', __ComponentSequence__item__returnResultNotLast),
+        (u'invokeLast', __ComponentSequence__item__invokeLast),
+        (u'returnResultLast', __ComponentSequence__item__returnResultLast),
+        (u'returnError', __ComponentSequence__item__returnError),
+        (u'reject', __ComponentSequence__item__reject),
+        (u'invokeNotLast', __ComponentSequence__item__invokeNotLast),
+        (u'returnResultNotLast', __ComponentSequence__item__returnResultNotLast),
         ])
     _ComponentSequence__item_._ext = None
     ComponentSequence._cont = _ComponentSequence__item_
     
     #-----< ComponentPDU >-----#
-    ComponentPDU = CHOICE(name='ComponentPDU', mode=MODE_TYPE, param=True)
+    ComponentPDU = CHOICE(name=u'ComponentPDU', mode=MODE_TYPE, param=True)
     
     #-----< Invoke >-----#
-    Invoke = SEQ(name='Invoke', mode=MODE_TYPE, param=True)
+    Invoke = SEQ(name=u'Invoke', mode=MODE_TYPE, param=True)
     
     #-----< ReturnResult >-----#
-    ReturnResult = SEQ(name='ReturnResult', mode=MODE_TYPE)
-    _ReturnResult_componentID = OCT_STR(name='componentID', mode=MODE_TYPE, tag=(15, TAG_PRIVATE, TAG_IMPLICIT))
+    ReturnResult = SEQ(name=u'ReturnResult', mode=MODE_TYPE)
+    _ReturnResult_componentID = OCT_STR(name=u'componentID', mode=MODE_TYPE, tag=(15, TAG_PRIVATE, TAG_IMPLICIT))
     _ReturnResult_componentID._const_sz = ASN1Set(rv=[1], rr=[], ev=None, er=[])
-    _ReturnResult_parameter = OPEN(name='parameter', mode=MODE_TYPE, typeref=ASN1RefClassField(('TCAP-Remote-Operations-Information-Objects', 'OPERATION'), ['ResultType']), opt=True)
+    _ReturnResult_parameter = OPEN(name=u'parameter', mode=MODE_TYPE, typeref=ASN1RefClassField(('TCAP-Remote-Operations-Information-Objects', 'OPERATION'), [u'ResultType']), opt=True)
     ReturnResult._cont = ASN1Dict([
-        ('componentID', _ReturnResult_componentID),
-        ('parameter', _ReturnResult_parameter),
+        (u'componentID', _ReturnResult_componentID),
+        (u'parameter', _ReturnResult_parameter),
         ])
     ReturnResult._ext = None
     
     #-----< ReturnError >-----#
-    ReturnError = SEQ(name='ReturnError', mode=MODE_TYPE, param=True)
+    ReturnError = SEQ(name=u'ReturnError', mode=MODE_TYPE, param=True)
     
     #-----< Reject >-----#
-    Reject = SEQ(name='Reject', mode=MODE_TYPE)
-    _Reject_componentID = OCT_STR(name='componentID', mode=MODE_TYPE, tag=(15, TAG_PRIVATE, TAG_IMPLICIT))
+    Reject = SEQ(name=u'Reject', mode=MODE_TYPE)
+    _Reject_componentID = OCT_STR(name=u'componentID', mode=MODE_TYPE, tag=(15, TAG_PRIVATE, TAG_IMPLICIT))
     _Reject_componentID._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=1)], ev=None, er=[])
-    _Reject_rejectProblem = INT(name='rejectProblem', mode=MODE_TYPE, tag=(21, TAG_PRIVATE, TAG_IMPLICIT), typeref=ASN1RefType(('TCAPPackage', 'RejectProblem')))
-    _Reject_parameter = CHOICE(name='parameter', mode=MODE_TYPE)
-    __Reject_parameter_paramSequence = SEQ(name='paramSequence', mode=MODE_TYPE, tag=(16, TAG_PRIVATE, TAG_IMPLICIT))
+    _Reject_rejectProblem = INT(name=u'rejectProblem', mode=MODE_TYPE, tag=(21, TAG_PRIVATE, TAG_IMPLICIT), typeref=ASN1RefType(('TCAPPackage', 'RejectProblem')))
+    _Reject_parameter = CHOICE(name=u'parameter', mode=MODE_TYPE)
+    __Reject_parameter_paramSequence = SEQ(name=u'paramSequence', mode=MODE_TYPE, tag=(16, TAG_PRIVATE, TAG_IMPLICIT))
     __Reject_parameter_paramSequence._cont = ASN1Dict([
         ])
     __Reject_parameter_paramSequence._ext = None
-    __Reject_parameter_paramSet = SET(name='paramSet', mode=MODE_TYPE, tag=(18, TAG_PRIVATE, TAG_IMPLICIT))
+    __Reject_parameter_paramSet = SET(name=u'paramSet', mode=MODE_TYPE, tag=(18, TAG_PRIVATE, TAG_IMPLICIT))
     __Reject_parameter_paramSet._cont = ASN1Dict([
         ])
     __Reject_parameter_paramSet._ext = None
     _Reject_parameter._cont = ASN1Dict([
-        ('paramSequence', __Reject_parameter_paramSequence),
-        ('paramSet', __Reject_parameter_paramSet),
+        (u'paramSequence', __Reject_parameter_paramSequence),
+        (u'paramSet', __Reject_parameter_paramSet),
         ])
     _Reject_parameter._ext = None
     Reject._cont = ASN1Dict([
-        ('componentID', _Reject_componentID),
-        ('rejectProblem', _Reject_rejectProblem),
-        ('parameter', _Reject_parameter),
+        (u'componentID', _Reject_componentID),
+        (u'rejectProblem', _Reject_rejectProblem),
+        (u'parameter', _Reject_parameter),
         ])
     Reject._ext = None
     
     #-----< RejectProblem >-----#
-    RejectProblem = INT(name='RejectProblem', mode=MODE_TYPE)
-    RejectProblem._cont = ASN1Dict([('generalunrecognisedComponentType', 257), ('generalincorrectComponentPortion', 258), ('generalbadlyStructuredCompPortion', 259), ('generalincorrectComponentCoding', 260), ('invokeduplicateInvocation', 513), ('invokeunrecognisedOperation', 514), ('invokeincorrectParameter', 515), ('invokeunrecognisedCorrelationID', 516), ('returnResultunrecognisedCorrelationID', 769), ('returnResultunexpectedReturnResult', 770), ('returnResultincorrectParameter', 771), ('returnErrorunrecognisedCorrelationID', 1025), ('returnErrorunexpectedReturnError', 1026), ('returnErrorunrecognisedError', 1027), ('returnErrorunexpectedError', 1028), ('returnErrorincorrectParameter', 1029), ('transactionunrecognizedPackageType', 1281), ('transactionincorrectTransPortion', 1282), ('transactionbadlyStructuredTransPortion', 1283), ('transactionunassignedRespondingTransID', 1284), ('transactionpermissionToReleaseProblem', 1285), ('transactionresourceUnavailable', 1286)])
+    RejectProblem = INT(name=u'RejectProblem', mode=MODE_TYPE)
+    RejectProblem._cont = ASN1Dict([(u'generalunrecognisedComponentType', 257), (u'generalincorrectComponentPortion', 258), (u'generalbadlyStructuredCompPortion', 259), (u'generalincorrectComponentCoding', 260), (u'invokeduplicateInvocation', 513), (u'invokeunrecognisedOperation', 514), (u'invokeincorrectParameter', 515), (u'invokeunrecognisedCorrelationID', 516), (u'returnResultunrecognisedCorrelationID', 769), (u'returnResultunexpectedReturnResult', 770), (u'returnResultincorrectParameter', 771), (u'returnErrorunrecognisedCorrelationID', 1025), (u'returnErrorunexpectedReturnError', 1026), (u'returnErrorunrecognisedError', 1027), (u'returnErrorunexpectedError', 1028), (u'returnErrorincorrectParameter', 1029), (u'transactionunrecognizedPackageType', 1281), (u'transactionincorrectTransPortion', 1282), (u'transactionbadlyStructuredTransPortion', 1283), (u'transactionunassignedRespondingTransID', 1284), (u'transactionpermissionToReleaseProblem', 1285), (u'transactionresourceUnavailable', 1286)])
     
     #-----< TCInvokeIdSet >-----#
-    TCInvokeIdSet = CHOICE(name='TCInvokeIdSet', mode=MODE_SET, typeref=ASN1RefType(('TCAP-Remote-Operations-Information-Objects', 'InvokeId')))
-    TCInvokeIdSet._val = ASN1Set(rv=[('present', -128), ('present', -127), ('present', -126), ('present', -125), ('present', -124), ('present', -123), ('present', -122), ('present', -121), ('present', -120), ('present', -119), ('present', -118), ('present', -117), ('present', -116), ('present', -115), ('present', -114), ('present', -113), ('present', -112), ('present', -111), ('present', -110), ('present', -109), ('present', -108), ('present', -107), ('present', -106), ('present', -105), ('present', -104), ('present', -103), ('present', -102), ('present', -101), ('present', -100), ('present', -99), ('present', -98), ('present', -97), ('present', -96), ('present', -95), ('present', -94), ('present', -93), ('present', -92), ('present', -91), ('present', -90), ('present', -89), ('present', -88), ('present', -87), ('present', -86), ('present', -85), ('present', -84), ('present', -83), ('present', -82), ('present', -81), ('present', -80), ('present', -79), ('present', -78), ('present', -77), ('present', -76), ('present', -75), ('present', -74), ('present', -73), ('present', -72), ('present', -71), ('present', -70), ('present', -69), ('present', -68), ('present', -67), ('present', -66), ('present', -65), ('present', -64), ('present', -63), ('present', -62), ('present', -61), ('present', -60), ('present', -59), ('present', -58), ('present', -57), ('present', -56), ('present', -55), ('present', -54), ('present', -53), ('present', -52), ('present', -51), ('present', -50), ('present', -49), ('present', -48), ('present', -47), ('present', -46), ('present', -45), ('present', -44), ('present', -43), ('present', -42), ('present', -41), ('present', -40), ('present', -39), ('present', -38), ('present', -37), ('present', -36), ('present', -35), ('present', -34), ('present', -33), ('present', -32), ('present', -31), ('present', -30), ('present', -29), ('present', -28), ('present', -27), ('present', -26), ('present', -25), ('present', -24), ('present', -23), ('present', -22), ('present', -21), ('present', -20), ('present', -19), ('present', -18), ('present', -17), ('present', -16), ('present', -15), ('present', -14), ('present', -13), ('present', -12), ('present', -11), ('present', -10), ('present', -9), ('present', -8), ('present', -7), ('present', -6), ('present', -5), ('present', -4), ('present', -3), ('present', -2), ('present', -1), ('present', 0), ('present', 1), ('present', 2), ('present', 3), ('present', 4), ('present', 5), ('present', 6), ('present', 7), ('present', 8), ('present', 9), ('present', 10), ('present', 11), ('present', 12), ('present', 13), ('present', 14), ('present', 15), ('present', 16), ('present', 17), ('present', 18), ('present', 19), ('present', 20), ('present', 21), ('present', 22), ('present', 23), ('present', 24), ('present', 25), ('present', 26), ('present', 27), ('present', 28), ('present', 29), ('present', 30), ('present', 31), ('present', 32), ('present', 33), ('present', 34), ('present', 35), ('present', 36), ('present', 37), ('present', 38), ('present', 39), ('present', 40), ('present', 41), ('present', 42), ('present', 43), ('present', 44), ('present', 45), ('present', 46), ('present', 47), ('present', 48), ('present', 49), ('present', 50), ('present', 51), ('present', 52), ('present', 53), ('present', 54), ('present', 55), ('present', 56), ('present', 57), ('present', 58), ('present', 59), ('present', 60), ('present', 61), ('present', 62), ('present', 63), ('present', 64), ('present', 65), ('present', 66), ('present', 67), ('present', 68), ('present', 69), ('present', 70), ('present', 71), ('present', 72), ('present', 73), ('present', 74), ('present', 75), ('present', 76), ('present', 77), ('present', 78), ('present', 79), ('present', 80), ('present', 81), ('present', 82), ('present', 83), ('present', 84), ('present', 85), ('present', 86), ('present', 87), ('present', 88), ('present', 89), ('present', 90), ('present', 91), ('present', 92), ('present', 93), ('present', 94), ('present', 95), ('present', 96), ('present', 97), ('present', 98), ('present', 99), ('present', 100), ('present', 101), ('present', 102), ('present', 103), ('present', 104), ('present', 105), ('present', 106), ('present', 107), ('present', 108), ('present', 109), ('present', 110), ('present', 111), ('present', 112), ('present', 113), ('present', 114), ('present', 115), ('present', 116), ('present', 117), ('present', 118), ('present', 119), ('present', 120), ('present', 121), ('present', 122), ('present', 123), ('present', 124), ('present', 125), ('present', 126), ('present', 127)], rr=[], ev=None, er=[])
+    TCInvokeIdSet = CHOICE(name=u'TCInvokeIdSet', mode=MODE_SET, typeref=ASN1RefType(('TCAP-Remote-Operations-Information-Objects', 'InvokeId')))
+    TCInvokeIdSet._val = ASN1Set(rv=[(u'present', -128), (u'present', -127), (u'present', -126), (u'present', -125), (u'present', -124), (u'present', -123), (u'present', -122), (u'present', -121), (u'present', -120), (u'present', -119), (u'present', -118), (u'present', -117), (u'present', -116), (u'present', -115), (u'present', -114), (u'present', -113), (u'present', -112), (u'present', -111), (u'present', -110), (u'present', -109), (u'present', -108), (u'present', -107), (u'present', -106), (u'present', -105), (u'present', -104), (u'present', -103), (u'present', -102), (u'present', -101), (u'present', -100), (u'present', -99), (u'present', -98), (u'present', -97), (u'present', -96), (u'present', -95), (u'present', -94), (u'present', -93), (u'present', -92), (u'present', -91), (u'present', -90), (u'present', -89), (u'present', -88), (u'present', -87), (u'present', -86), (u'present', -85), (u'present', -84), (u'present', -83), (u'present', -82), (u'present', -81), (u'present', -80), (u'present', -79), (u'present', -78), (u'present', -77), (u'present', -76), (u'present', -75), (u'present', -74), (u'present', -73), (u'present', -72), (u'present', -71), (u'present', -70), (u'present', -69), (u'present', -68), (u'present', -67), (u'present', -66), (u'present', -65), (u'present', -64), (u'present', -63), (u'present', -62), (u'present', -61), (u'present', -60), (u'present', -59), (u'present', -58), (u'present', -57), (u'present', -56), (u'present', -55), (u'present', -54), (u'present', -53), (u'present', -52), (u'present', -51), (u'present', -50), (u'present', -49), (u'present', -48), (u'present', -47), (u'present', -46), (u'present', -45), (u'present', -44), (u'present', -43), (u'present', -42), (u'present', -41), (u'present', -40), (u'present', -39), (u'present', -38), (u'present', -37), (u'present', -36), (u'present', -35), (u'present', -34), (u'present', -33), (u'present', -32), (u'present', -31), (u'present', -30), (u'present', -29), (u'present', -28), (u'present', -27), (u'present', -26), (u'present', -25), (u'present', -24), (u'present', -23), (u'present', -22), (u'present', -21), (u'present', -20), (u'present', -19), (u'present', -18), (u'present', -17), (u'present', -16), (u'present', -15), (u'present', -14), (u'present', -13), (u'present', -12), (u'present', -11), (u'present', -10), (u'present', -9), (u'present', -8), (u'present', -7), (u'present', -6), (u'present', -5), (u'present', -4), (u'present', -3), (u'present', -2), (u'present', -1), (u'present', 0), (u'present', 1), (u'present', 2), (u'present', 3), (u'present', 4), (u'present', 5), (u'present', 6), (u'present', 7), (u'present', 8), (u'present', 9), (u'present', 10), (u'present', 11), (u'present', 12), (u'present', 13), (u'present', 14), (u'present', 15), (u'present', 16), (u'present', 17), (u'present', 18), (u'present', 19), (u'present', 20), (u'present', 21), (u'present', 22), (u'present', 23), (u'present', 24), (u'present', 25), (u'present', 26), (u'present', 27), (u'present', 28), (u'present', 29), (u'present', 30), (u'present', 31), (u'present', 32), (u'present', 33), (u'present', 34), (u'present', 35), (u'present', 36), (u'present', 37), (u'present', 38), (u'present', 39), (u'present', 40), (u'present', 41), (u'present', 42), (u'present', 43), (u'present', 44), (u'present', 45), (u'present', 46), (u'present', 47), (u'present', 48), (u'present', 49), (u'present', 50), (u'present', 51), (u'present', 52), (u'present', 53), (u'present', 54), (u'present', 55), (u'present', 56), (u'present', 57), (u'present', 58), (u'present', 59), (u'present', 60), (u'present', 61), (u'present', 62), (u'present', 63), (u'present', 64), (u'present', 65), (u'present', 66), (u'present', 67), (u'present', 68), (u'present', 69), (u'present', 70), (u'present', 71), (u'present', 72), (u'present', 73), (u'present', 74), (u'present', 75), (u'present', 76), (u'present', 77), (u'present', 78), (u'present', 79), (u'present', 80), (u'present', 81), (u'present', 82), (u'present', 83), (u'present', 84), (u'present', 85), (u'present', 86), (u'present', 87), (u'present', 88), (u'present', 89), (u'present', 90), (u'present', 91), (u'present', 92), (u'present', 93), (u'present', 94), (u'present', 95), (u'present', 96), (u'present', 97), (u'present', 98), (u'present', 99), (u'present', 100), (u'present', 101), (u'present', 102), (u'present', 103), (u'present', 104), (u'present', 105), (u'present', 106), (u'present', 107), (u'present', 108), (u'present', 109), (u'present', 110), (u'present', 111), (u'present', 112), (u'present', 113), (u'present', 114), (u'present', 115), (u'present', 116), (u'present', 117), (u'present', 118), (u'present', 119), (u'present', 120), (u'present', 121), (u'present', 122), (u'present', 123), (u'present', 124), (u'present', 125), (u'present', 126), (u'present', 127)], rr=[], ev=None, er=[])
     
     _all_ = [
         _PackageType_unidirectional,

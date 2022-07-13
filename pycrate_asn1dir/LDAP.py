@@ -16,112 +16,112 @@ from pycrate_asn1rt.init             import init_modules
 
 class Lightweight_Directory_Access_Protocol_V3:
 
-    _name_  = 'Lightweight-Directory-Access-Protocol-V3'
+    _name_  = u'Lightweight-Directory-Access-Protocol-V3'
     _oid_   = [1, 3, 6, 1, 1, 18]
     
     _obj_ = [
-        'LDAPMessage',
-        'MessageID',
-        'maxInt',
-        'LDAPString',
-        'LDAPOID',
-        'LDAPDN',
-        'RelativeLDAPDN',
-        'AttributeDescription',
-        'AttributeValue',
-        'AttributeValueAssertion',
-        'AssertionValue',
-        'PartialAttribute',
-        'Attribute',
-        'MatchingRuleId',
-        'LDAPResult',
-        'Referral',
-        'URI',
-        'Controls',
-        'Control',
-        'BindRequest',
-        'AuthenticationChoice',
-        'SaslCredentials',
-        'BindResponse',
-        'UnbindRequest',
-        'SearchRequest',
-        'AttributeSelection',
-        'Filter',
-        'SubstringFilter',
-        'MatchingRuleAssertion',
-        'SearchResultEntry',
-        'PartialAttributeList',
-        'SearchResultReference',
-        'SearchResultDone',
-        'ModifyRequest',
-        'ModifyResponse',
-        'AddRequest',
-        'AttributeList',
-        'AddResponse',
-        'DelRequest',
-        'DelResponse',
-        'ModifyDNRequest',
-        'ModifyDNResponse',
-        'CompareRequest',
-        'CompareResponse',
-        'AbandonRequest',
-        'ExtendedRequest',
-        'ExtendedResponse',
-        'IntermediateResponse',
+        u'LDAPMessage',
+        u'MessageID',
+        u'maxInt',
+        u'LDAPString',
+        u'LDAPOID',
+        u'LDAPDN',
+        u'RelativeLDAPDN',
+        u'AttributeDescription',
+        u'AttributeValue',
+        u'AttributeValueAssertion',
+        u'AssertionValue',
+        u'PartialAttribute',
+        u'Attribute',
+        u'MatchingRuleId',
+        u'LDAPResult',
+        u'Referral',
+        u'URI',
+        u'Controls',
+        u'Control',
+        u'BindRequest',
+        u'AuthenticationChoice',
+        u'SaslCredentials',
+        u'BindResponse',
+        u'UnbindRequest',
+        u'SearchRequest',
+        u'AttributeSelection',
+        u'Filter',
+        u'SubstringFilter',
+        u'MatchingRuleAssertion',
+        u'SearchResultEntry',
+        u'PartialAttributeList',
+        u'SearchResultReference',
+        u'SearchResultDone',
+        u'ModifyRequest',
+        u'ModifyResponse',
+        u'AddRequest',
+        u'AttributeList',
+        u'AddResponse',
+        u'DelRequest',
+        u'DelResponse',
+        u'ModifyDNRequest',
+        u'ModifyDNResponse',
+        u'CompareRequest',
+        u'CompareResponse',
+        u'AbandonRequest',
+        u'ExtendedRequest',
+        u'ExtendedResponse',
+        u'IntermediateResponse',
         ]
     _type_ = [
-        'LDAPMessage',
-        'MessageID',
-        'LDAPString',
-        'LDAPOID',
-        'LDAPDN',
-        'RelativeLDAPDN',
-        'AttributeDescription',
-        'AttributeValue',
-        'AttributeValueAssertion',
-        'AssertionValue',
-        'PartialAttribute',
-        'Attribute',
-        'MatchingRuleId',
-        'LDAPResult',
-        'Referral',
-        'URI',
-        'Controls',
-        'Control',
-        'BindRequest',
-        'AuthenticationChoice',
-        'SaslCredentials',
-        'BindResponse',
-        'UnbindRequest',
-        'SearchRequest',
-        'AttributeSelection',
-        'Filter',
-        'SubstringFilter',
-        'MatchingRuleAssertion',
-        'SearchResultEntry',
-        'PartialAttributeList',
-        'SearchResultReference',
-        'SearchResultDone',
-        'ModifyRequest',
-        'ModifyResponse',
-        'AddRequest',
-        'AttributeList',
-        'AddResponse',
-        'DelRequest',
-        'DelResponse',
-        'ModifyDNRequest',
-        'ModifyDNResponse',
-        'CompareRequest',
-        'CompareResponse',
-        'AbandonRequest',
-        'ExtendedRequest',
-        'ExtendedResponse',
-        'IntermediateResponse',
+        u'LDAPMessage',
+        u'MessageID',
+        u'LDAPString',
+        u'LDAPOID',
+        u'LDAPDN',
+        u'RelativeLDAPDN',
+        u'AttributeDescription',
+        u'AttributeValue',
+        u'AttributeValueAssertion',
+        u'AssertionValue',
+        u'PartialAttribute',
+        u'Attribute',
+        u'MatchingRuleId',
+        u'LDAPResult',
+        u'Referral',
+        u'URI',
+        u'Controls',
+        u'Control',
+        u'BindRequest',
+        u'AuthenticationChoice',
+        u'SaslCredentials',
+        u'BindResponse',
+        u'UnbindRequest',
+        u'SearchRequest',
+        u'AttributeSelection',
+        u'Filter',
+        u'SubstringFilter',
+        u'MatchingRuleAssertion',
+        u'SearchResultEntry',
+        u'PartialAttributeList',
+        u'SearchResultReference',
+        u'SearchResultDone',
+        u'ModifyRequest',
+        u'ModifyResponse',
+        u'AddRequest',
+        u'AttributeList',
+        u'AddResponse',
+        u'DelRequest',
+        u'DelResponse',
+        u'ModifyDNRequest',
+        u'ModifyDNResponse',
+        u'CompareRequest',
+        u'CompareResponse',
+        u'AbandonRequest',
+        u'ExtendedRequest',
+        u'ExtendedResponse',
+        u'IntermediateResponse',
         ]
     _set_ = [
         ]
     _val_ = [
-        'maxInt',
+        u'maxInt',
         ]
     _class_ = [
         ]
@@ -129,458 +129,458 @@ class Lightweight_Directory_Access_Protocol_V3:
         ]
     
     #-----< LDAPMessage >-----#
-    LDAPMessage = SEQ(name='LDAPMessage', mode=MODE_TYPE)
-    _LDAPMessage_messageID = INT(name='messageID', mode=MODE_TYPE, typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'MessageID')))
-    _LDAPMessage_protocolOp = CHOICE(name='protocolOp', mode=MODE_TYPE)
-    __LDAPMessage_protocolOp_bindRequest = SEQ(name='bindRequest', mode=MODE_TYPE, typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'BindRequest')))
-    __LDAPMessage_protocolOp_bindResponse = SEQ(name='bindResponse', mode=MODE_TYPE, typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'BindResponse')))
-    __LDAPMessage_protocolOp_unbindRequest = NULL(name='unbindRequest', mode=MODE_TYPE, typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'UnbindRequest')))
-    __LDAPMessage_protocolOp_searchRequest = SEQ(name='searchRequest', mode=MODE_TYPE, typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'SearchRequest')))
-    __LDAPMessage_protocolOp_searchResEntry = SEQ(name='searchResEntry', mode=MODE_TYPE, typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'SearchResultEntry')))
-    __LDAPMessage_protocolOp_searchResDone = SEQ(name='searchResDone', mode=MODE_TYPE, typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'SearchResultDone')))
-    __LDAPMessage_protocolOp_searchResRef = SEQ_OF(name='searchResRef', mode=MODE_TYPE, typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'SearchResultReference')))
-    __LDAPMessage_protocolOp_modifyRequest = SEQ(name='modifyRequest', mode=MODE_TYPE, typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'ModifyRequest')))
-    __LDAPMessage_protocolOp_modifyResponse = SEQ(name='modifyResponse', mode=MODE_TYPE, typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'ModifyResponse')))
-    __LDAPMessage_protocolOp_addRequest = SEQ(name='addRequest', mode=MODE_TYPE, typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'AddRequest')))
-    __LDAPMessage_protocolOp_addResponse = SEQ(name='addResponse', mode=MODE_TYPE, typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'AddResponse')))
-    __LDAPMessage_protocolOp_delRequest = OCT_STR(name='delRequest', mode=MODE_TYPE, typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'DelRequest')))
-    __LDAPMessage_protocolOp_delResponse = SEQ(name='delResponse', mode=MODE_TYPE, typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'DelResponse')))
-    __LDAPMessage_protocolOp_modDNRequest = SEQ(name='modDNRequest', mode=MODE_TYPE, typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'ModifyDNRequest')))
-    __LDAPMessage_protocolOp_modDNResponse = SEQ(name='modDNResponse', mode=MODE_TYPE, typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'ModifyDNResponse')))
-    __LDAPMessage_protocolOp_compareRequest = SEQ(name='compareRequest', mode=MODE_TYPE, typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'CompareRequest')))
-    __LDAPMessage_protocolOp_compareResponse = SEQ(name='compareResponse', mode=MODE_TYPE, typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'CompareResponse')))
-    __LDAPMessage_protocolOp_abandonRequest = INT(name='abandonRequest', mode=MODE_TYPE, typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'AbandonRequest')))
-    __LDAPMessage_protocolOp_extendedReq = SEQ(name='extendedReq', mode=MODE_TYPE, typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'ExtendedRequest')))
-    __LDAPMessage_protocolOp_extendedResp = SEQ(name='extendedResp', mode=MODE_TYPE, typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'ExtendedResponse')))
-    __LDAPMessage_protocolOp_intermediateResponse = SEQ(name='intermediateResponse', mode=MODE_TYPE, typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'IntermediateResponse')))
+    LDAPMessage = SEQ(name=u'LDAPMessage', mode=MODE_TYPE)
+    _LDAPMessage_messageID = INT(name=u'messageID', mode=MODE_TYPE, typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'MessageID')))
+    _LDAPMessage_protocolOp = CHOICE(name=u'protocolOp', mode=MODE_TYPE)
+    __LDAPMessage_protocolOp_bindRequest = SEQ(name=u'bindRequest', mode=MODE_TYPE, typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'BindRequest')))
+    __LDAPMessage_protocolOp_bindResponse = SEQ(name=u'bindResponse', mode=MODE_TYPE, typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'BindResponse')))
+    __LDAPMessage_protocolOp_unbindRequest = NULL(name=u'unbindRequest', mode=MODE_TYPE, typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'UnbindRequest')))
+    __LDAPMessage_protocolOp_searchRequest = SEQ(name=u'searchRequest', mode=MODE_TYPE, typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'SearchRequest')))
+    __LDAPMessage_protocolOp_searchResEntry = SEQ(name=u'searchResEntry', mode=MODE_TYPE, typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'SearchResultEntry')))
+    __LDAPMessage_protocolOp_searchResDone = SEQ(name=u'searchResDone', mode=MODE_TYPE, typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'SearchResultDone')))
+    __LDAPMessage_protocolOp_searchResRef = SEQ_OF(name=u'searchResRef', mode=MODE_TYPE, typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'SearchResultReference')))
+    __LDAPMessage_protocolOp_modifyRequest = SEQ(name=u'modifyRequest', mode=MODE_TYPE, typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'ModifyRequest')))
+    __LDAPMessage_protocolOp_modifyResponse = SEQ(name=u'modifyResponse', mode=MODE_TYPE, typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'ModifyResponse')))
+    __LDAPMessage_protocolOp_addRequest = SEQ(name=u'addRequest', mode=MODE_TYPE, typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'AddRequest')))
+    __LDAPMessage_protocolOp_addResponse = SEQ(name=u'addResponse', mode=MODE_TYPE, typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'AddResponse')))
+    __LDAPMessage_protocolOp_delRequest = OCT_STR(name=u'delRequest', mode=MODE_TYPE, typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'DelRequest')))
+    __LDAPMessage_protocolOp_delResponse = SEQ(name=u'delResponse', mode=MODE_TYPE, typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'DelResponse')))
+    __LDAPMessage_protocolOp_modDNRequest = SEQ(name=u'modDNRequest', mode=MODE_TYPE, typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'ModifyDNRequest')))
+    __LDAPMessage_protocolOp_modDNResponse = SEQ(name=u'modDNResponse', mode=MODE_TYPE, typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'ModifyDNResponse')))
+    __LDAPMessage_protocolOp_compareRequest = SEQ(name=u'compareRequest', mode=MODE_TYPE, typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'CompareRequest')))
+    __LDAPMessage_protocolOp_compareResponse = SEQ(name=u'compareResponse', mode=MODE_TYPE, typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'CompareResponse')))
+    __LDAPMessage_protocolOp_abandonRequest = INT(name=u'abandonRequest', mode=MODE_TYPE, typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'AbandonRequest')))
+    __LDAPMessage_protocolOp_extendedReq = SEQ(name=u'extendedReq', mode=MODE_TYPE, typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'ExtendedRequest')))
+    __LDAPMessage_protocolOp_extendedResp = SEQ(name=u'extendedResp', mode=MODE_TYPE, typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'ExtendedResponse')))
+    __LDAPMessage_protocolOp_intermediateResponse = SEQ(name=u'intermediateResponse', mode=MODE_TYPE, typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'IntermediateResponse')))
     _LDAPMessage_protocolOp._cont = ASN1Dict([
-        ('bindRequest', __LDAPMessage_protocolOp_bindRequest),
-        ('bindResponse', __LDAPMessage_protocolOp_bindResponse),
-        ('unbindRequest', __LDAPMessage_protocolOp_unbindRequest),
-        ('searchRequest', __LDAPMessage_protocolOp_searchRequest),
-        ('searchResEntry', __LDAPMessage_protocolOp_searchResEntry),
-        ('searchResDone', __LDAPMessage_protocolOp_searchResDone),
-        ('searchResRef', __LDAPMessage_protocolOp_searchResRef),
-        ('modifyRequest', __LDAPMessage_protocolOp_modifyRequest),
-        ('modifyResponse', __LDAPMessage_protocolOp_modifyResponse),
-        ('addRequest', __LDAPMessage_protocolOp_addRequest),
-        ('addResponse', __LDAPMessage_protocolOp_addResponse),
-        ('delRequest', __LDAPMessage_protocolOp_delRequest),
-        ('delResponse', __LDAPMessage_protocolOp_delResponse),
-        ('modDNRequest', __LDAPMessage_protocolOp_modDNRequest),
-        ('modDNResponse', __LDAPMessage_protocolOp_modDNResponse),
-        ('compareRequest', __LDAPMessage_protocolOp_compareRequest),
-        ('compareResponse', __LDAPMessage_protocolOp_compareResponse),
-        ('abandonRequest', __LDAPMessage_protocolOp_abandonRequest),
-        ('extendedReq', __LDAPMessage_protocolOp_extendedReq),
-        ('extendedResp', __LDAPMessage_protocolOp_extendedResp),
-        ('intermediateResponse', __LDAPMessage_protocolOp_intermediateResponse),
+        (u'bindRequest', __LDAPMessage_protocolOp_bindRequest),
+        (u'bindResponse', __LDAPMessage_protocolOp_bindResponse),
+        (u'unbindRequest', __LDAPMessage_protocolOp_unbindRequest),
+        (u'searchRequest', __LDAPMessage_protocolOp_searchRequest),
+        (u'searchResEntry', __LDAPMessage_protocolOp_searchResEntry),
+        (u'searchResDone', __LDAPMessage_protocolOp_searchResDone),
+        (u'searchResRef', __LDAPMessage_protocolOp_searchResRef),
+        (u'modifyRequest', __LDAPMessage_protocolOp_modifyRequest),
+        (u'modifyResponse', __LDAPMessage_protocolOp_modifyResponse),
+        (u'addRequest', __LDAPMessage_protocolOp_addRequest),
+        (u'addResponse', __LDAPMessage_protocolOp_addResponse),
+        (u'delRequest', __LDAPMessage_protocolOp_delRequest),
+        (u'delResponse', __LDAPMessage_protocolOp_delResponse),
+        (u'modDNRequest', __LDAPMessage_protocolOp_modDNRequest),
+        (u'modDNResponse', __LDAPMessage_protocolOp_modDNResponse),
+        (u'compareRequest', __LDAPMessage_protocolOp_compareRequest),
+        (u'compareResponse', __LDAPMessage_protocolOp_compareResponse),
+        (u'abandonRequest', __LDAPMessage_protocolOp_abandonRequest),
+        (u'extendedReq', __LDAPMessage_protocolOp_extendedReq),
+        (u'extendedResp', __LDAPMessage_protocolOp_extendedResp),
+        (u'intermediateResponse', __LDAPMessage_protocolOp_intermediateResponse),
         ])
-    _LDAPMessage_protocolOp._ext = ['intermediateResponse']
-    _LDAPMessage_controls = SEQ_OF(name='controls', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'Controls')), opt=True)
+    _LDAPMessage_protocolOp._ext = [u'intermediateResponse']
+    _LDAPMessage_controls = SEQ_OF(name=u'controls', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'Controls')), opt=True)
     LDAPMessage._cont = ASN1Dict([
-        ('messageID', _LDAPMessage_messageID),
-        ('protocolOp', _LDAPMessage_protocolOp),
-        ('controls', _LDAPMessage_controls),
+        (u'messageID', _LDAPMessage_messageID),
+        (u'protocolOp', _LDAPMessage_protocolOp),
+        (u'controls', _LDAPMessage_controls),
         ])
     LDAPMessage._ext = []
     
     #-----< MessageID >-----#
-    MessageID = INT(name='MessageID', mode=MODE_TYPE)
+    MessageID = INT(name=u'MessageID', mode=MODE_TYPE)
     MessageID._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=2147483647)], ev=None, er=[])
     
     #-----< maxInt >-----#
-    maxInt = INT(name='maxInt', mode=MODE_VALUE)
+    maxInt = INT(name=u'maxInt', mode=MODE_VALUE)
     maxInt._val = 2147483647
     
     #-----< LDAPString >-----#
-    LDAPString = OCT_STR(name='LDAPString', mode=MODE_TYPE)
+    LDAPString = OCT_STR(name=u'LDAPString', mode=MODE_TYPE)
     
     #-----< LDAPOID >-----#
-    LDAPOID = OCT_STR(name='LDAPOID', mode=MODE_TYPE)
+    LDAPOID = OCT_STR(name=u'LDAPOID', mode=MODE_TYPE)
     
     #-----< LDAPDN >-----#
-    LDAPDN = OCT_STR(name='LDAPDN', mode=MODE_TYPE, typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'LDAPString')))
+    LDAPDN = OCT_STR(name=u'LDAPDN', mode=MODE_TYPE, typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'LDAPString')))
     
     #-----< RelativeLDAPDN >-----#
-    RelativeLDAPDN = OCT_STR(name='RelativeLDAPDN', mode=MODE_TYPE, typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'LDAPString')))
+    RelativeLDAPDN = OCT_STR(name=u'RelativeLDAPDN', mode=MODE_TYPE, typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'LDAPString')))
     
     #-----< AttributeDescription >-----#
-    AttributeDescription = OCT_STR(name='AttributeDescription', mode=MODE_TYPE, typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'LDAPString')))
+    AttributeDescription = OCT_STR(name=u'AttributeDescription', mode=MODE_TYPE, typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'LDAPString')))
     
     #-----< AttributeValue >-----#
-    AttributeValue = OCT_STR(name='AttributeValue', mode=MODE_TYPE)
+    AttributeValue = OCT_STR(name=u'AttributeValue', mode=MODE_TYPE)
     
     #-----< AttributeValueAssertion >-----#
-    AttributeValueAssertion = SEQ(name='AttributeValueAssertion', mode=MODE_TYPE)
-    _AttributeValueAssertion_attributeDesc = OCT_STR(name='attributeDesc', mode=MODE_TYPE, typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'AttributeDescription')))
-    _AttributeValueAssertion_assertionValue = OCT_STR(name='assertionValue', mode=MODE_TYPE, typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'AssertionValue')))
+    AttributeValueAssertion = SEQ(name=u'AttributeValueAssertion', mode=MODE_TYPE)
+    _AttributeValueAssertion_attributeDesc = OCT_STR(name=u'attributeDesc', mode=MODE_TYPE, typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'AttributeDescription')))
+    _AttributeValueAssertion_assertionValue = OCT_STR(name=u'assertionValue', mode=MODE_TYPE, typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'AssertionValue')))
     AttributeValueAssertion._cont = ASN1Dict([
-        ('attributeDesc', _AttributeValueAssertion_attributeDesc),
-        ('assertionValue', _AttributeValueAssertion_assertionValue),
+        (u'attributeDesc', _AttributeValueAssertion_attributeDesc),
+        (u'assertionValue', _AttributeValueAssertion_assertionValue),
         ])
     AttributeValueAssertion._ext = []
     
     #-----< AssertionValue >-----#
-    AssertionValue = OCT_STR(name='AssertionValue', mode=MODE_TYPE)
+    AssertionValue = OCT_STR(name=u'AssertionValue', mode=MODE_TYPE)
     
     #-----< PartialAttribute >-----#
-    PartialAttribute = SEQ(name='PartialAttribute', mode=MODE_TYPE)
-    _PartialAttribute_type = OCT_STR(name='type', mode=MODE_TYPE, typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'AttributeDescription')))
-    _PartialAttribute_vals = SET_OF(name='vals', mode=MODE_TYPE)
-    __PartialAttribute_vals_value = OCT_STR(name='value', mode=MODE_TYPE, typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'AttributeValue')))
+    PartialAttribute = SEQ(name=u'PartialAttribute', mode=MODE_TYPE)
+    _PartialAttribute_type = OCT_STR(name=u'type', mode=MODE_TYPE, typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'AttributeDescription')))
+    _PartialAttribute_vals = SET_OF(name=u'vals', mode=MODE_TYPE)
+    __PartialAttribute_vals_value = OCT_STR(name=u'value', mode=MODE_TYPE, typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'AttributeValue')))
     _PartialAttribute_vals._cont = __PartialAttribute_vals_value
     PartialAttribute._cont = ASN1Dict([
-        ('type', _PartialAttribute_type),
-        ('vals', _PartialAttribute_vals),
+        (u'type', _PartialAttribute_type),
+        (u'vals', _PartialAttribute_vals),
         ])
     PartialAttribute._ext = []
     
     #-----< Attribute >-----#
-    Attribute = SEQ(name='Attribute', mode=MODE_TYPE, typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'PartialAttribute')))
+    Attribute = SEQ(name=u'Attribute', mode=MODE_TYPE, typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'PartialAttribute')))
     
     #-----< MatchingRuleId >-----#
-    MatchingRuleId = OCT_STR(name='MatchingRuleId', mode=MODE_TYPE, typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'LDAPString')))
+    MatchingRuleId = OCT_STR(name=u'MatchingRuleId', mode=MODE_TYPE, typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'LDAPString')))
     
     #-----< LDAPResult >-----#
-    LDAPResult = SEQ(name='LDAPResult', mode=MODE_TYPE)
-    _LDAPResult_resultCode = ENUM(name='resultCode', mode=MODE_TYPE)
-    _LDAPResult_resultCode._cont = ASN1Dict([('success', 0), ('operationsError', 1), ('protocolError', 2), ('timeLimitExceeded', 3), ('sizeLimitExceeded', 4), ('compareFalse', 5), ('compareTrue', 6), ('authMethodNotSupported', 7), ('strongerAuthRequired', 8), ('referral', 10), ('adminLimitExceeded', 11), ('unavailableCriticalExtension', 12), ('confidentialityRequired', 13), ('saslBindInProgress', 14), ('noSuchAttribute', 16), ('undefinedAttributeType', 17), ('inappropriateMatching', 18), ('constraintViolation', 19), ('attributeOrValueExists', 20), ('invalidAttributeSyntax', 21), ('noSuchObject', 32), ('aliasProblem', 33), ('invalidDNSyntax', 34), ('aliasDereferencingProblem', 36), ('inappropriateAuthentication', 48), ('invalidCredentials', 49), ('insufficientAccessRights', 50), ('busy', 51), ('unavailable', 52), ('unwillingToPerform', 53), ('loopDetect', 54), ('namingViolation', 64), ('objectClassViolation', 65), ('notAllowedOnNonLeaf', 66), ('notAllowedOnRDN', 67), ('entryAlreadyExists', 68), ('objectClassModsProhibited', 69), ('affectsMultipleDSAs', 71), ('other', 80)])
+    LDAPResult = SEQ(name=u'LDAPResult', mode=MODE_TYPE)
+    _LDAPResult_resultCode = ENUM(name=u'resultCode', mode=MODE_TYPE)
+    _LDAPResult_resultCode._cont = ASN1Dict([(u'success', 0), (u'operationsError', 1), (u'protocolError', 2), (u'timeLimitExceeded', 3), (u'sizeLimitExceeded', 4), (u'compareFalse', 5), (u'compareTrue', 6), (u'authMethodNotSupported', 7), (u'strongerAuthRequired', 8), (u'referral', 10), (u'adminLimitExceeded', 11), (u'unavailableCriticalExtension', 12), (u'confidentialityRequired', 13), (u'saslBindInProgress', 14), (u'noSuchAttribute', 16), (u'undefinedAttributeType', 17), (u'inappropriateMatching', 18), (u'constraintViolation', 19), (u'attributeOrValueExists', 20), (u'invalidAttributeSyntax', 21), (u'noSuchObject', 32), (u'aliasProblem', 33), (u'invalidDNSyntax', 34), (u'aliasDereferencingProblem', 36), (u'inappropriateAuthentication', 48), (u'invalidCredentials', 49), (u'insufficientAccessRights', 50), (u'busy', 51), (u'unavailable', 52), (u'unwillingToPerform', 53), (u'loopDetect', 54), (u'namingViolation', 64), (u'objectClassViolation', 65), (u'notAllowedOnNonLeaf', 66), (u'notAllowedOnRDN', 67), (u'entryAlreadyExists', 68), (u'objectClassModsProhibited', 69), (u'affectsMultipleDSAs', 71), (u'other', 80)])
     _LDAPResult_resultCode._ext = []
-    _LDAPResult_matchedDN = OCT_STR(name='matchedDN', mode=MODE_TYPE, typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'LDAPDN')))
-    _LDAPResult_diagnosticMessage = OCT_STR(name='diagnosticMessage', mode=MODE_TYPE, typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'LDAPString')))
-    _LDAPResult_referral = SEQ_OF(name='referral', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'Referral')), opt=True)
+    _LDAPResult_matchedDN = OCT_STR(name=u'matchedDN', mode=MODE_TYPE, typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'LDAPDN')))
+    _LDAPResult_diagnosticMessage = OCT_STR(name=u'diagnosticMessage', mode=MODE_TYPE, typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'LDAPString')))
+    _LDAPResult_referral = SEQ_OF(name=u'referral', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'Referral')), opt=True)
     LDAPResult._cont = ASN1Dict([
-        ('resultCode', _LDAPResult_resultCode),
-        ('matchedDN', _LDAPResult_matchedDN),
-        ('diagnosticMessage', _LDAPResult_diagnosticMessage),
-        ('referral', _LDAPResult_referral),
+        (u'resultCode', _LDAPResult_resultCode),
+        (u'matchedDN', _LDAPResult_matchedDN),
+        (u'diagnosticMessage', _LDAPResult_diagnosticMessage),
+        (u'referral', _LDAPResult_referral),
         ])
     LDAPResult._ext = []
     
     #-----< Referral >-----#
-    Referral = SEQ_OF(name='Referral', mode=MODE_TYPE)
-    _Referral_uri = OCT_STR(name='uri', mode=MODE_TYPE, typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'URI')))
+    Referral = SEQ_OF(name=u'Referral', mode=MODE_TYPE)
+    _Referral_uri = OCT_STR(name=u'uri', mode=MODE_TYPE, typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'URI')))
     Referral._cont = _Referral_uri
     Referral._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=None)], ev=None, er=[])
     
     #-----< URI >-----#
-    URI = OCT_STR(name='URI', mode=MODE_TYPE, typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'LDAPString')))
+    URI = OCT_STR(name=u'URI', mode=MODE_TYPE, typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'LDAPString')))
     
     #-----< Controls >-----#
-    Controls = SEQ_OF(name='Controls', mode=MODE_TYPE)
-    _Controls_control = SEQ(name='control', mode=MODE_TYPE, typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'Control')))
+    Controls = SEQ_OF(name=u'Controls', mode=MODE_TYPE)
+    _Controls_control = SEQ(name=u'control', mode=MODE_TYPE, typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'Control')))
     Controls._cont = _Controls_control
     
     #-----< Control >-----#
-    Control = SEQ(name='Control', mode=MODE_TYPE)
-    _Control_controlType = OCT_STR(name='controlType', mode=MODE_TYPE, typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'LDAPOID')))
-    _Control_criticality = BOOL(name='criticality', mode=MODE_TYPE, default=False)
-    _Control_controlValue = OCT_STR(name='controlValue', mode=MODE_TYPE, opt=True)
+    Control = SEQ(name=u'Control', mode=MODE_TYPE)
+    _Control_controlType = OCT_STR(name=u'controlType', mode=MODE_TYPE, typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'LDAPOID')))
+    _Control_criticality = BOOL(name=u'criticality', mode=MODE_TYPE, default=False)
+    _Control_controlValue = OCT_STR(name=u'controlValue', mode=MODE_TYPE, opt=True)
     Control._cont = ASN1Dict([
-        ('controlType', _Control_controlType),
-        ('criticality', _Control_criticality),
-        ('controlValue', _Control_controlValue),
+        (u'controlType', _Control_controlType),
+        (u'criticality', _Control_criticality),
+        (u'controlValue', _Control_controlValue),
         ])
     Control._ext = []
     
     #-----< BindRequest >-----#
-    BindRequest = SEQ(name='BindRequest', mode=MODE_TYPE, tag=(0, TAG_APPLICATION, TAG_IMPLICIT))
-    _BindRequest_version = INT(name='version', mode=MODE_TYPE)
+    BindRequest = SEQ(name=u'BindRequest', mode=MODE_TYPE, tag=(0, TAG_APPLICATION, TAG_IMPLICIT))
+    _BindRequest_version = INT(name=u'version', mode=MODE_TYPE)
     _BindRequest_version._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=127)], ev=None, er=[])
-    _BindRequest_name = OCT_STR(name='name', mode=MODE_TYPE, typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'LDAPDN')))
-    _BindRequest_authentication = CHOICE(name='authentication', mode=MODE_TYPE, typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'AuthenticationChoice')))
+    _BindRequest_name = OCT_STR(name=u'name', mode=MODE_TYPE, typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'LDAPDN')))
+    _BindRequest_authentication = CHOICE(name=u'authentication', mode=MODE_TYPE, typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'AuthenticationChoice')))
     BindRequest._cont = ASN1Dict([
-        ('version', _BindRequest_version),
-        ('name', _BindRequest_name),
-        ('authentication', _BindRequest_authentication),
+        (u'version', _BindRequest_version),
+        (u'name', _BindRequest_name),
+        (u'authentication', _BindRequest_authentication),
         ])
     BindRequest._ext = []
     
     #-----< AuthenticationChoice >-----#
-    AuthenticationChoice = CHOICE(name='AuthenticationChoice', mode=MODE_TYPE)
-    _AuthenticationChoice_simple = OCT_STR(name='simple', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _AuthenticationChoice_sasl = SEQ(name='sasl', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'SaslCredentials')))
+    AuthenticationChoice = CHOICE(name=u'AuthenticationChoice', mode=MODE_TYPE)
+    _AuthenticationChoice_simple = OCT_STR(name=u'simple', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _AuthenticationChoice_sasl = SEQ(name=u'sasl', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'SaslCredentials')))
     AuthenticationChoice._cont = ASN1Dict([
-        ('simple', _AuthenticationChoice_simple),
-        ('sasl', _AuthenticationChoice_sasl),
+        (u'simple', _AuthenticationChoice_simple),
+        (u'sasl', _AuthenticationChoice_sasl),
         ])
     AuthenticationChoice._ext = []
     
     #-----< SaslCredentials >-----#
-    SaslCredentials = SEQ(name='SaslCredentials', mode=MODE_TYPE)
-    _SaslCredentials_mechanism = OCT_STR(name='mechanism', mode=MODE_TYPE, typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'LDAPString')))
-    _SaslCredentials_credentials = OCT_STR(name='credentials', mode=MODE_TYPE, opt=True)
+    SaslCredentials = SEQ(name=u'SaslCredentials', mode=MODE_TYPE)
+    _SaslCredentials_mechanism = OCT_STR(name=u'mechanism', mode=MODE_TYPE, typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'LDAPString')))
+    _SaslCredentials_credentials = OCT_STR(name=u'credentials', mode=MODE_TYPE, opt=True)
     SaslCredentials._cont = ASN1Dict([
-        ('mechanism', _SaslCredentials_mechanism),
-        ('credentials', _SaslCredentials_credentials),
+        (u'mechanism', _SaslCredentials_mechanism),
+        (u'credentials', _SaslCredentials_credentials),
         ])
     SaslCredentials._ext = []
     
     #-----< BindResponse >-----#
-    BindResponse = SEQ(name='BindResponse', mode=MODE_TYPE, tag=(1, TAG_APPLICATION, TAG_IMPLICIT))
-    _BindResponse_resultCode = ENUM(name='resultCode', mode=MODE_TYPE)
-    _BindResponse_resultCode._cont = ASN1Dict([('success', 0), ('operationsError', 1), ('protocolError', 2), ('timeLimitExceeded', 3), ('sizeLimitExceeded', 4), ('compareFalse', 5), ('compareTrue', 6), ('authMethodNotSupported', 7), ('strongerAuthRequired', 8), ('referral', 10), ('adminLimitExceeded', 11), ('unavailableCriticalExtension', 12), ('confidentialityRequired', 13), ('saslBindInProgress', 14), ('noSuchAttribute', 16), ('undefinedAttributeType', 17), ('inappropriateMatching', 18), ('constraintViolation', 19), ('attributeOrValueExists', 20), ('invalidAttributeSyntax', 21), ('noSuchObject', 32), ('aliasProblem', 33), ('invalidDNSyntax', 34), ('aliasDereferencingProblem', 36), ('inappropriateAuthentication', 48), ('invalidCredentials', 49), ('insufficientAccessRights', 50), ('busy', 51), ('unavailable', 52), ('unwillingToPerform', 53), ('loopDetect', 54), ('namingViolation', 64), ('objectClassViolation', 65), ('notAllowedOnNonLeaf', 66), ('notAllowedOnRDN', 67), ('entryAlreadyExists', 68), ('objectClassModsProhibited', 69), ('affectsMultipleDSAs', 71), ('other', 80)])
+    BindResponse = SEQ(name=u'BindResponse', mode=MODE_TYPE, tag=(1, TAG_APPLICATION, TAG_IMPLICIT))
+    _BindResponse_resultCode = ENUM(name=u'resultCode', mode=MODE_TYPE)
+    _BindResponse_resultCode._cont = ASN1Dict([(u'success', 0), (u'operationsError', 1), (u'protocolError', 2), (u'timeLimitExceeded', 3), (u'sizeLimitExceeded', 4), (u'compareFalse', 5), (u'compareTrue', 6), (u'authMethodNotSupported', 7), (u'strongerAuthRequired', 8), (u'referral', 10), (u'adminLimitExceeded', 11), (u'unavailableCriticalExtension', 12), (u'confidentialityRequired', 13), (u'saslBindInProgress', 14), (u'noSuchAttribute', 16), (u'undefinedAttributeType', 17), (u'inappropriateMatching', 18), (u'constraintViolation', 19), (u'attributeOrValueExists', 20), (u'invalidAttributeSyntax', 21), (u'noSuchObject', 32), (u'aliasProblem', 33), (u'invalidDNSyntax', 34), (u'aliasDereferencingProblem', 36), (u'inappropriateAuthentication', 48), (u'invalidCredentials', 49), (u'insufficientAccessRights', 50), (u'busy', 51), (u'unavailable', 52), (u'unwillingToPerform', 53), (u'loopDetect', 54), (u'namingViolation', 64), (u'objectClassViolation', 65), (u'notAllowedOnNonLeaf', 66), (u'notAllowedOnRDN', 67), (u'entryAlreadyExists', 68), (u'objectClassModsProhibited', 69), (u'affectsMultipleDSAs', 71), (u'other', 80)])
     _BindResponse_resultCode._ext = []
-    _BindResponse_matchedDN = OCT_STR(name='matchedDN', mode=MODE_TYPE, typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'LDAPDN')))
-    _BindResponse_diagnosticMessage = OCT_STR(name='diagnosticMessage', mode=MODE_TYPE, typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'LDAPString')))
-    _BindResponse_referral = SEQ_OF(name='referral', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'Referral')), opt=True)
-    _BindResponse_serverSaslCreds = OCT_STR(name='serverSaslCreds', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _BindResponse_matchedDN = OCT_STR(name=u'matchedDN', mode=MODE_TYPE, typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'LDAPDN')))
+    _BindResponse_diagnosticMessage = OCT_STR(name=u'diagnosticMessage', mode=MODE_TYPE, typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'LDAPString')))
+    _BindResponse_referral = SEQ_OF(name=u'referral', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'Referral')), opt=True)
+    _BindResponse_serverSaslCreds = OCT_STR(name=u'serverSaslCreds', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     BindResponse._cont = ASN1Dict([
-        ('resultCode', _BindResponse_resultCode),
-        ('matchedDN', _BindResponse_matchedDN),
-        ('diagnosticMessage', _BindResponse_diagnosticMessage),
-        ('referral', _BindResponse_referral),
-        ('serverSaslCreds', _BindResponse_serverSaslCreds),
+        (u'resultCode', _BindResponse_resultCode),
+        (u'matchedDN', _BindResponse_matchedDN),
+        (u'diagnosticMessage', _BindResponse_diagnosticMessage),
+        (u'referral', _BindResponse_referral),
+        (u'serverSaslCreds', _BindResponse_serverSaslCreds),
         ])
     BindResponse._ext = []
     
     #-----< UnbindRequest >-----#
-    UnbindRequest = NULL(name='UnbindRequest', mode=MODE_TYPE, tag=(2, TAG_APPLICATION, TAG_IMPLICIT))
+    UnbindRequest = NULL(name=u'UnbindRequest', mode=MODE_TYPE, tag=(2, TAG_APPLICATION, TAG_IMPLICIT))
     
     #-----< SearchRequest >-----#
-    SearchRequest = SEQ(name='SearchRequest', mode=MODE_TYPE, tag=(3, TAG_APPLICATION, TAG_IMPLICIT))
-    _SearchRequest_baseObject = OCT_STR(name='baseObject', mode=MODE_TYPE, typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'LDAPDN')))
-    _SearchRequest_scope = ENUM(name='scope', mode=MODE_TYPE)
-    _SearchRequest_scope._cont = ASN1Dict([('baseObject', 0), ('singleLevel', 1), ('wholeSubtree', 2)])
+    SearchRequest = SEQ(name=u'SearchRequest', mode=MODE_TYPE, tag=(3, TAG_APPLICATION, TAG_IMPLICIT))
+    _SearchRequest_baseObject = OCT_STR(name=u'baseObject', mode=MODE_TYPE, typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'LDAPDN')))
+    _SearchRequest_scope = ENUM(name=u'scope', mode=MODE_TYPE)
+    _SearchRequest_scope._cont = ASN1Dict([(u'baseObject', 0), (u'singleLevel', 1), (u'wholeSubtree', 2)])
     _SearchRequest_scope._ext = []
-    _SearchRequest_derefAliases = ENUM(name='derefAliases', mode=MODE_TYPE)
-    _SearchRequest_derefAliases._cont = ASN1Dict([('neverDerefAliases', 0), ('derefInSearching', 1), ('derefFindingBaseObj', 2), ('derefAlways', 3)])
+    _SearchRequest_derefAliases = ENUM(name=u'derefAliases', mode=MODE_TYPE)
+    _SearchRequest_derefAliases._cont = ASN1Dict([(u'neverDerefAliases', 0), (u'derefInSearching', 1), (u'derefFindingBaseObj', 2), (u'derefAlways', 3)])
     _SearchRequest_derefAliases._ext = []
-    _SearchRequest_sizeLimit = INT(name='sizeLimit', mode=MODE_TYPE)
+    _SearchRequest_sizeLimit = INT(name=u'sizeLimit', mode=MODE_TYPE)
     _SearchRequest_sizeLimit._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=2147483647)], ev=None, er=[])
-    _SearchRequest_timeLimit = INT(name='timeLimit', mode=MODE_TYPE)
+    _SearchRequest_timeLimit = INT(name=u'timeLimit', mode=MODE_TYPE)
     _SearchRequest_timeLimit._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=2147483647)], ev=None, er=[])
-    _SearchRequest_typesOnly = BOOL(name='typesOnly', mode=MODE_TYPE)
-    _SearchRequest_filter = CHOICE(name='filter', mode=MODE_TYPE, typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'Filter')))
-    _SearchRequest_attributes = SEQ_OF(name='attributes', mode=MODE_TYPE, typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'AttributeSelection')))
+    _SearchRequest_typesOnly = BOOL(name=u'typesOnly', mode=MODE_TYPE)
+    _SearchRequest_filter = CHOICE(name=u'filter', mode=MODE_TYPE, typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'Filter')))
+    _SearchRequest_attributes = SEQ_OF(name=u'attributes', mode=MODE_TYPE, typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'AttributeSelection')))
     SearchRequest._cont = ASN1Dict([
-        ('baseObject', _SearchRequest_baseObject),
-        ('scope', _SearchRequest_scope),
-        ('derefAliases', _SearchRequest_derefAliases),
-        ('sizeLimit', _SearchRequest_sizeLimit),
-        ('timeLimit', _SearchRequest_timeLimit),
-        ('typesOnly', _SearchRequest_typesOnly),
-        ('filter', _SearchRequest_filter),
-        ('attributes', _SearchRequest_attributes),
+        (u'baseObject', _SearchRequest_baseObject),
+        (u'scope', _SearchRequest_scope),
+        (u'derefAliases', _SearchRequest_derefAliases),
+        (u'sizeLimit', _SearchRequest_sizeLimit),
+        (u'timeLimit', _SearchRequest_timeLimit),
+        (u'typesOnly', _SearchRequest_typesOnly),
+        (u'filter', _SearchRequest_filter),
+        (u'attributes', _SearchRequest_attributes),
         ])
     SearchRequest._ext = []
     
     #-----< AttributeSelection >-----#
-    AttributeSelection = SEQ_OF(name='AttributeSelection', mode=MODE_TYPE)
-    _AttributeSelection_selector = OCT_STR(name='selector', mode=MODE_TYPE, typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'LDAPString')))
+    AttributeSelection = SEQ_OF(name=u'AttributeSelection', mode=MODE_TYPE)
+    _AttributeSelection_selector = OCT_STR(name=u'selector', mode=MODE_TYPE, typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'LDAPString')))
     AttributeSelection._cont = _AttributeSelection_selector
     
     #-----< Filter >-----#
-    Filter = CHOICE(name='Filter', mode=MODE_TYPE)
-    _Filter_and_ = SET_OF(name='and', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    __Filter_and__filter = CHOICE(name='filter', mode=MODE_TYPE, typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'Filter')))
+    Filter = CHOICE(name=u'Filter', mode=MODE_TYPE)
+    _Filter_and_ = SET_OF(name=u'and', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __Filter_and__filter = CHOICE(name=u'filter', mode=MODE_TYPE, typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'Filter')))
     _Filter_and_._cont = __Filter_and__filter
     _Filter_and_._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=None)], ev=None, er=[])
-    _Filter_or_ = SET_OF(name='or', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    __Filter_or__filter = CHOICE(name='filter', mode=MODE_TYPE, typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'Filter')))
+    _Filter_or_ = SET_OF(name=u'or', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __Filter_or__filter = CHOICE(name=u'filter', mode=MODE_TYPE, typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'Filter')))
     _Filter_or_._cont = __Filter_or__filter
     _Filter_or_._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=None)], ev=None, er=[])
-    _Filter_not_ = CHOICE(name='not', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'Filter')))
-    _Filter_equalityMatch = SEQ(name='equalityMatch', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'AttributeValueAssertion')))
-    _Filter_substrings = SEQ(name='substrings', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'SubstringFilter')))
-    _Filter_greaterOrEqual = SEQ(name='greaterOrEqual', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'AttributeValueAssertion')))
-    _Filter_lessOrEqual = SEQ(name='lessOrEqual', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'AttributeValueAssertion')))
-    _Filter_present = OCT_STR(name='present', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'AttributeDescription')))
-    _Filter_approxMatch = SEQ(name='approxMatch', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'AttributeValueAssertion')))
-    _Filter_extensibleMatch = SEQ(name='extensibleMatch', mode=MODE_TYPE, tag=(9, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'MatchingRuleAssertion')))
+    _Filter_not_ = CHOICE(name=u'not', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'Filter')))
+    _Filter_equalityMatch = SEQ(name=u'equalityMatch', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'AttributeValueAssertion')))
+    _Filter_substrings = SEQ(name=u'substrings', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'SubstringFilter')))
+    _Filter_greaterOrEqual = SEQ(name=u'greaterOrEqual', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'AttributeValueAssertion')))
+    _Filter_lessOrEqual = SEQ(name=u'lessOrEqual', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'AttributeValueAssertion')))
+    _Filter_present = OCT_STR(name=u'present', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'AttributeDescription')))
+    _Filter_approxMatch = SEQ(name=u'approxMatch', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'AttributeValueAssertion')))
+    _Filter_extensibleMatch = SEQ(name=u'extensibleMatch', mode=MODE_TYPE, tag=(9, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'MatchingRuleAssertion')))
     Filter._cont = ASN1Dict([
-        ('and', _Filter_and_),
-        ('or', _Filter_or_),
-        ('not', _Filter_not_),
-        ('equalityMatch', _Filter_equalityMatch),
-        ('substrings', _Filter_substrings),
-        ('greaterOrEqual', _Filter_greaterOrEqual),
-        ('lessOrEqual', _Filter_lessOrEqual),
-        ('present', _Filter_present),
-        ('approxMatch', _Filter_approxMatch),
-        ('extensibleMatch', _Filter_extensibleMatch),
+        (u'and', _Filter_and_),
+        (u'or', _Filter_or_),
+        (u'not', _Filter_not_),
+        (u'equalityMatch', _Filter_equalityMatch),
+        (u'substrings', _Filter_substrings),
+        (u'greaterOrEqual', _Filter_greaterOrEqual),
+        (u'lessOrEqual', _Filter_lessOrEqual),
+        (u'present', _Filter_present),
+        (u'approxMatch', _Filter_approxMatch),
+        (u'extensibleMatch', _Filter_extensibleMatch),
         ])
     Filter._ext = []
     
     #-----< SubstringFilter >-----#
-    SubstringFilter = SEQ(name='SubstringFilter', mode=MODE_TYPE)
-    _SubstringFilter_type = OCT_STR(name='type', mode=MODE_TYPE, typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'AttributeDescription')))
-    _SubstringFilter_substrings = SEQ_OF(name='substrings', mode=MODE_TYPE)
-    __SubstringFilter_substrings_substring = CHOICE(name='substring', mode=MODE_TYPE)
-    ___SubstringFilter_substrings_substring_initial = OCT_STR(name='initial', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'AssertionValue')))
-    ___SubstringFilter_substrings_substring_any = OCT_STR(name='any', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'AssertionValue')))
-    ___SubstringFilter_substrings_substring_final = OCT_STR(name='final', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'AssertionValue')))
+    SubstringFilter = SEQ(name=u'SubstringFilter', mode=MODE_TYPE)
+    _SubstringFilter_type = OCT_STR(name=u'type', mode=MODE_TYPE, typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'AttributeDescription')))
+    _SubstringFilter_substrings = SEQ_OF(name=u'substrings', mode=MODE_TYPE)
+    __SubstringFilter_substrings_substring = CHOICE(name=u'substring', mode=MODE_TYPE)
+    ___SubstringFilter_substrings_substring_initial = OCT_STR(name=u'initial', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'AssertionValue')))
+    ___SubstringFilter_substrings_substring_any = OCT_STR(name=u'any', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'AssertionValue')))
+    ___SubstringFilter_substrings_substring_final = OCT_STR(name=u'final', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'AssertionValue')))
     __SubstringFilter_substrings_substring._cont = ASN1Dict([
-        ('initial', ___SubstringFilter_substrings_substring_initial),
-        ('any', ___SubstringFilter_substrings_substring_any),
-        ('final', ___SubstringFilter_substrings_substring_final),
+        (u'initial', ___SubstringFilter_substrings_substring_initial),
+        (u'any', ___SubstringFilter_substrings_substring_any),
+        (u'final', ___SubstringFilter_substrings_substring_final),
         ])
     __SubstringFilter_substrings_substring._ext = []
     _SubstringFilter_substrings._cont = __SubstringFilter_substrings_substring
     _SubstringFilter_substrings._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=None)], ev=None, er=[])
     SubstringFilter._cont = ASN1Dict([
-        ('type', _SubstringFilter_type),
-        ('substrings', _SubstringFilter_substrings),
+        (u'type', _SubstringFilter_type),
+        (u'substrings', _SubstringFilter_substrings),
         ])
     SubstringFilter._ext = []
     
     #-----< MatchingRuleAssertion >-----#
-    MatchingRuleAssertion = SEQ(name='MatchingRuleAssertion', mode=MODE_TYPE)
-    _MatchingRuleAssertion_matchingRule = OCT_STR(name='matchingRule', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'MatchingRuleId')), opt=True)
-    _MatchingRuleAssertion_type = OCT_STR(name='type', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'AttributeDescription')), opt=True)
-    _MatchingRuleAssertion_matchValue = OCT_STR(name='matchValue', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'AssertionValue')))
-    _MatchingRuleAssertion_dnAttributes = BOOL(name='dnAttributes', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), default=False)
+    MatchingRuleAssertion = SEQ(name=u'MatchingRuleAssertion', mode=MODE_TYPE)
+    _MatchingRuleAssertion_matchingRule = OCT_STR(name=u'matchingRule', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'MatchingRuleId')), opt=True)
+    _MatchingRuleAssertion_type = OCT_STR(name=u'type', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'AttributeDescription')), opt=True)
+    _MatchingRuleAssertion_matchValue = OCT_STR(name=u'matchValue', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'AssertionValue')))
+    _MatchingRuleAssertion_dnAttributes = BOOL(name=u'dnAttributes', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), default=False)
     MatchingRuleAssertion._cont = ASN1Dict([
-        ('matchingRule', _MatchingRuleAssertion_matchingRule),
-        ('type', _MatchingRuleAssertion_type),
-        ('matchValue', _MatchingRuleAssertion_matchValue),
-        ('dnAttributes', _MatchingRuleAssertion_dnAttributes),
+        (u'matchingRule', _MatchingRuleAssertion_matchingRule),
+        (u'type', _MatchingRuleAssertion_type),
+        (u'matchValue', _MatchingRuleAssertion_matchValue),
+        (u'dnAttributes', _MatchingRuleAssertion_dnAttributes),
         ])
     MatchingRuleAssertion._ext = []
     
     #-----< SearchResultEntry >-----#
-    SearchResultEntry = SEQ(name='SearchResultEntry', mode=MODE_TYPE, tag=(4, TAG_APPLICATION, TAG_IMPLICIT))
-    _SearchResultEntry_objectName = OCT_STR(name='objectName', mode=MODE_TYPE, typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'LDAPDN')))
-    _SearchResultEntry_attributes = SEQ_OF(name='attributes', mode=MODE_TYPE, typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'PartialAttributeList')))
+    SearchResultEntry = SEQ(name=u'SearchResultEntry', mode=MODE_TYPE, tag=(4, TAG_APPLICATION, TAG_IMPLICIT))
+    _SearchResultEntry_objectName = OCT_STR(name=u'objectName', mode=MODE_TYPE, typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'LDAPDN')))
+    _SearchResultEntry_attributes = SEQ_OF(name=u'attributes', mode=MODE_TYPE, typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'PartialAttributeList')))
     SearchResultEntry._cont = ASN1Dict([
-        ('objectName', _SearchResultEntry_objectName),
-        ('attributes', _SearchResultEntry_attributes),
+        (u'objectName', _SearchResultEntry_objectName),
+        (u'attributes', _SearchResultEntry_attributes),
         ])
     SearchResultEntry._ext = []
     
     #-----< PartialAttributeList >-----#
-    PartialAttributeList = SEQ_OF(name='PartialAttributeList', mode=MODE_TYPE)
-    _PartialAttributeList_partialAttribute = SEQ(name='partialAttribute', mode=MODE_TYPE, typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'PartialAttribute')))
+    PartialAttributeList = SEQ_OF(name=u'PartialAttributeList', mode=MODE_TYPE)
+    _PartialAttributeList_partialAttribute = SEQ(name=u'partialAttribute', mode=MODE_TYPE, typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'PartialAttribute')))
     PartialAttributeList._cont = _PartialAttributeList_partialAttribute
     
     #-----< SearchResultReference >-----#
-    SearchResultReference = SEQ_OF(name='SearchResultReference', mode=MODE_TYPE, tag=(19, TAG_APPLICATION, TAG_IMPLICIT))
-    _SearchResultReference_uri = OCT_STR(name='uri', mode=MODE_TYPE, typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'URI')))
+    SearchResultReference = SEQ_OF(name=u'SearchResultReference', mode=MODE_TYPE, tag=(19, TAG_APPLICATION, TAG_IMPLICIT))
+    _SearchResultReference_uri = OCT_STR(name=u'uri', mode=MODE_TYPE, typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'URI')))
     SearchResultReference._cont = _SearchResultReference_uri
     SearchResultReference._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=None)], ev=None, er=[])
     
     #-----< SearchResultDone >-----#
-    SearchResultDone = SEQ(name='SearchResultDone', mode=MODE_TYPE, tag=(5, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'LDAPResult')))
+    SearchResultDone = SEQ(name=u'SearchResultDone', mode=MODE_TYPE, tag=(5, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'LDAPResult')))
     
     #-----< ModifyRequest >-----#
-    ModifyRequest = SEQ(name='ModifyRequest', mode=MODE_TYPE, tag=(6, TAG_APPLICATION, TAG_IMPLICIT))
-    _ModifyRequest_object = OCT_STR(name='object', mode=MODE_TYPE, typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'LDAPDN')))
-    _ModifyRequest_changes = SEQ_OF(name='changes', mode=MODE_TYPE)
-    __ModifyRequest_changes_change = SEQ(name='change', mode=MODE_TYPE)
-    ___ModifyRequest_changes_change_operation = ENUM(name='operation', mode=MODE_TYPE)
-    ___ModifyRequest_changes_change_operation._cont = ASN1Dict([('add', 0), ('delete', 1), ('replace', 2)])
+    ModifyRequest = SEQ(name=u'ModifyRequest', mode=MODE_TYPE, tag=(6, TAG_APPLICATION, TAG_IMPLICIT))
+    _ModifyRequest_object = OCT_STR(name=u'object', mode=MODE_TYPE, typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'LDAPDN')))
+    _ModifyRequest_changes = SEQ_OF(name=u'changes', mode=MODE_TYPE)
+    __ModifyRequest_changes_change = SEQ(name=u'change', mode=MODE_TYPE)
+    ___ModifyRequest_changes_change_operation = ENUM(name=u'operation', mode=MODE_TYPE)
+    ___ModifyRequest_changes_change_operation._cont = ASN1Dict([(u'add', 0), (u'delete', 1), (u'replace', 2)])
     ___ModifyRequest_changes_change_operation._ext = []
-    ___ModifyRequest_changes_change_modification = SEQ(name='modification', mode=MODE_TYPE, typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'PartialAttribute')))
+    ___ModifyRequest_changes_change_modification = SEQ(name=u'modification', mode=MODE_TYPE, typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'PartialAttribute')))
     __ModifyRequest_changes_change._cont = ASN1Dict([
-        ('operation', ___ModifyRequest_changes_change_operation),
-        ('modification', ___ModifyRequest_changes_change_modification),
+        (u'operation', ___ModifyRequest_changes_change_operation),
+        (u'modification', ___ModifyRequest_changes_change_modification),
         ])
     __ModifyRequest_changes_change._ext = []
     _ModifyRequest_changes._cont = __ModifyRequest_changes_change
     ModifyRequest._cont = ASN1Dict([
-        ('object', _ModifyRequest_object),
-        ('changes', _ModifyRequest_changes),
+        (u'object', _ModifyRequest_object),
+        (u'changes', _ModifyRequest_changes),
         ])
     ModifyRequest._ext = []
     
     #-----< ModifyResponse >-----#
-    ModifyResponse = SEQ(name='ModifyResponse', mode=MODE_TYPE, tag=(7, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'LDAPResult')))
+    ModifyResponse = SEQ(name=u'ModifyResponse', mode=MODE_TYPE, tag=(7, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'LDAPResult')))
     
     #-----< AddRequest >-----#
-    AddRequest = SEQ(name='AddRequest', mode=MODE_TYPE, tag=(8, TAG_APPLICATION, TAG_IMPLICIT))
-    _AddRequest_entry = OCT_STR(name='entry', mode=MODE_TYPE, typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'LDAPDN')))
-    _AddRequest_attributes = SEQ_OF(name='attributes', mode=MODE_TYPE, typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'AttributeList')))
+    AddRequest = SEQ(name=u'AddRequest', mode=MODE_TYPE, tag=(8, TAG_APPLICATION, TAG_IMPLICIT))
+    _AddRequest_entry = OCT_STR(name=u'entry', mode=MODE_TYPE, typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'LDAPDN')))
+    _AddRequest_attributes = SEQ_OF(name=u'attributes', mode=MODE_TYPE, typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'AttributeList')))
     AddRequest._cont = ASN1Dict([
-        ('entry', _AddRequest_entry),
-        ('attributes', _AddRequest_attributes),
+        (u'entry', _AddRequest_entry),
+        (u'attributes', _AddRequest_attributes),
         ])
     AddRequest._ext = []
     
     #-----< AttributeList >-----#
-    AttributeList = SEQ_OF(name='AttributeList', mode=MODE_TYPE)
-    _AttributeList_attribute = SEQ(name='attribute', mode=MODE_TYPE, typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'Attribute')))
+    AttributeList = SEQ_OF(name=u'AttributeList', mode=MODE_TYPE)
+    _AttributeList_attribute = SEQ(name=u'attribute', mode=MODE_TYPE, typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'Attribute')))
     AttributeList._cont = _AttributeList_attribute
     
     #-----< AddResponse >-----#
-    AddResponse = SEQ(name='AddResponse', mode=MODE_TYPE, tag=(9, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'LDAPResult')))
+    AddResponse = SEQ(name=u'AddResponse', mode=MODE_TYPE, tag=(9, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'LDAPResult')))
     
     #-----< DelRequest >-----#
-    DelRequest = OCT_STR(name='DelRequest', mode=MODE_TYPE, tag=(10, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'LDAPDN')))
+    DelRequest = OCT_STR(name=u'DelRequest', mode=MODE_TYPE, tag=(10, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'LDAPDN')))
     
     #-----< DelResponse >-----#
-    DelResponse = SEQ(name='DelResponse', mode=MODE_TYPE, tag=(11, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'LDAPResult')))
+    DelResponse = SEQ(name=u'DelResponse', mode=MODE_TYPE, tag=(11, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'LDAPResult')))
     
     #-----< ModifyDNRequest >-----#
-    ModifyDNRequest = SEQ(name='ModifyDNRequest', mode=MODE_TYPE, tag=(12, TAG_APPLICATION, TAG_IMPLICIT))
-    _ModifyDNRequest_entry = OCT_STR(name='entry', mode=MODE_TYPE, typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'LDAPDN')))
-    _ModifyDNRequest_newrdn = OCT_STR(name='newrdn', mode=MODE_TYPE, typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'RelativeLDAPDN')))
-    _ModifyDNRequest_deleteoldrdn = BOOL(name='deleteoldrdn', mode=MODE_TYPE)
-    _ModifyDNRequest_newSuperior = OCT_STR(name='newSuperior', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'LDAPDN')), opt=True)
+    ModifyDNRequest = SEQ(name=u'ModifyDNRequest', mode=MODE_TYPE, tag=(12, TAG_APPLICATION, TAG_IMPLICIT))
+    _ModifyDNRequest_entry = OCT_STR(name=u'entry', mode=MODE_TYPE, typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'LDAPDN')))
+    _ModifyDNRequest_newrdn = OCT_STR(name=u'newrdn', mode=MODE_TYPE, typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'RelativeLDAPDN')))
+    _ModifyDNRequest_deleteoldrdn = BOOL(name=u'deleteoldrdn', mode=MODE_TYPE)
+    _ModifyDNRequest_newSuperior = OCT_STR(name=u'newSuperior', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'LDAPDN')), opt=True)
     ModifyDNRequest._cont = ASN1Dict([
-        ('entry', _ModifyDNRequest_entry),
-        ('newrdn', _ModifyDNRequest_newrdn),
-        ('deleteoldrdn', _ModifyDNRequest_deleteoldrdn),
-        ('newSuperior', _ModifyDNRequest_newSuperior),
+        (u'entry', _ModifyDNRequest_entry),
+        (u'newrdn', _ModifyDNRequest_newrdn),
+        (u'deleteoldrdn', _ModifyDNRequest_deleteoldrdn),
+        (u'newSuperior', _ModifyDNRequest_newSuperior),
         ])
     ModifyDNRequest._ext = []
     
     #-----< ModifyDNResponse >-----#
-    ModifyDNResponse = SEQ(name='ModifyDNResponse', mode=MODE_TYPE, tag=(13, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'LDAPResult')))
+    ModifyDNResponse = SEQ(name=u'ModifyDNResponse', mode=MODE_TYPE, tag=(13, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'LDAPResult')))
     
     #-----< CompareRequest >-----#
-    CompareRequest = SEQ(name='CompareRequest', mode=MODE_TYPE, tag=(14, TAG_APPLICATION, TAG_IMPLICIT))
-    _CompareRequest_entry = OCT_STR(name='entry', mode=MODE_TYPE, typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'LDAPDN')))
-    _CompareRequest_ava = SEQ(name='ava', mode=MODE_TYPE, typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'AttributeValueAssertion')))
+    CompareRequest = SEQ(name=u'CompareRequest', mode=MODE_TYPE, tag=(14, TAG_APPLICATION, TAG_IMPLICIT))
+    _CompareRequest_entry = OCT_STR(name=u'entry', mode=MODE_TYPE, typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'LDAPDN')))
+    _CompareRequest_ava = SEQ(name=u'ava', mode=MODE_TYPE, typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'AttributeValueAssertion')))
     CompareRequest._cont = ASN1Dict([
-        ('entry', _CompareRequest_entry),
-        ('ava', _CompareRequest_ava),
+        (u'entry', _CompareRequest_entry),
+        (u'ava', _CompareRequest_ava),
         ])
     CompareRequest._ext = []
     
     #-----< CompareResponse >-----#
-    CompareResponse = SEQ(name='CompareResponse', mode=MODE_TYPE, tag=(15, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'LDAPResult')))
+    CompareResponse = SEQ(name=u'CompareResponse', mode=MODE_TYPE, tag=(15, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'LDAPResult')))
     
     #-----< AbandonRequest >-----#
-    AbandonRequest = INT(name='AbandonRequest', mode=MODE_TYPE, tag=(16, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'MessageID')))
+    AbandonRequest = INT(name=u'AbandonRequest', mode=MODE_TYPE, tag=(16, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'MessageID')))
     
     #-----< ExtendedRequest >-----#
-    ExtendedRequest = SEQ(name='ExtendedRequest', mode=MODE_TYPE, tag=(23, TAG_APPLICATION, TAG_IMPLICIT))
-    _ExtendedRequest_requestName = OCT_STR(name='requestName', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'LDAPOID')))
-    _ExtendedRequest_requestValue = OCT_STR(name='requestValue', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    ExtendedRequest = SEQ(name=u'ExtendedRequest', mode=MODE_TYPE, tag=(23, TAG_APPLICATION, TAG_IMPLICIT))
+    _ExtendedRequest_requestName = OCT_STR(name=u'requestName', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'LDAPOID')))
+    _ExtendedRequest_requestValue = OCT_STR(name=u'requestValue', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     ExtendedRequest._cont = ASN1Dict([
-        ('requestName', _ExtendedRequest_requestName),
-        ('requestValue', _ExtendedRequest_requestValue),
+        (u'requestName', _ExtendedRequest_requestName),
+        (u'requestValue', _ExtendedRequest_requestValue),
         ])
     ExtendedRequest._ext = []
     
     #-----< ExtendedResponse >-----#
-    ExtendedResponse = SEQ(name='ExtendedResponse', mode=MODE_TYPE, tag=(24, TAG_APPLICATION, TAG_IMPLICIT))
-    _ExtendedResponse_resultCode = ENUM(name='resultCode', mode=MODE_TYPE)
-    _ExtendedResponse_resultCode._cont = ASN1Dict([('success', 0), ('operationsError', 1), ('protocolError', 2), ('timeLimitExceeded', 3), ('sizeLimitExceeded', 4), ('compareFalse', 5), ('compareTrue', 6), ('authMethodNotSupported', 7), ('strongerAuthRequired', 8), ('referral', 10), ('adminLimitExceeded', 11), ('unavailableCriticalExtension', 12), ('confidentialityRequired', 13), ('saslBindInProgress', 14), ('noSuchAttribute', 16), ('undefinedAttributeType', 17), ('inappropriateMatching', 18), ('constraintViolation', 19), ('attributeOrValueExists', 20), ('invalidAttributeSyntax', 21), ('noSuchObject', 32), ('aliasProblem', 33), ('invalidDNSyntax', 34), ('aliasDereferencingProblem', 36), ('inappropriateAuthentication', 48), ('invalidCredentials', 49), ('insufficientAccessRights', 50), ('busy', 51), ('unavailable', 52), ('unwillingToPerform', 53), ('loopDetect', 54), ('namingViolation', 64), ('objectClassViolation', 65), ('notAllowedOnNonLeaf', 66), ('notAllowedOnRDN', 67), ('entryAlreadyExists', 68), ('objectClassModsProhibited', 69), ('affectsMultipleDSAs', 71), ('other', 80)])
+    ExtendedResponse = SEQ(name=u'ExtendedResponse', mode=MODE_TYPE, tag=(24, TAG_APPLICATION, TAG_IMPLICIT))
+    _ExtendedResponse_resultCode = ENUM(name=u'resultCode', mode=MODE_TYPE)
+    _ExtendedResponse_resultCode._cont = ASN1Dict([(u'success', 0), (u'operationsError', 1), (u'protocolError', 2), (u'timeLimitExceeded', 3), (u'sizeLimitExceeded', 4), (u'compareFalse', 5), (u'compareTrue', 6), (u'authMethodNotSupported', 7), (u'strongerAuthRequired', 8), (u'referral', 10), (u'adminLimitExceeded', 11), (u'unavailableCriticalExtension', 12), (u'confidentialityRequired', 13), (u'saslBindInProgress', 14), (u'noSuchAttribute', 16), (u'undefinedAttributeType', 17), (u'inappropriateMatching', 18), (u'constraintViolation', 19), (u'attributeOrValueExists', 20), (u'invalidAttributeSyntax', 21), (u'noSuchObject', 32), (u'aliasProblem', 33), (u'invalidDNSyntax', 34), (u'aliasDereferencingProblem', 36), (u'inappropriateAuthentication', 48), (u'invalidCredentials', 49), (u'insufficientAccessRights', 50), (u'busy', 51), (u'unavailable', 52), (u'unwillingToPerform', 53), (u'loopDetect', 54), (u'namingViolation', 64), (u'objectClassViolation', 65), (u'notAllowedOnNonLeaf', 66), (u'notAllowedOnRDN', 67), (u'entryAlreadyExists', 68), (u'objectClassModsProhibited', 69), (u'affectsMultipleDSAs', 71), (u'other', 80)])
     _ExtendedResponse_resultCode._ext = []
-    _ExtendedResponse_matchedDN = OCT_STR(name='matchedDN', mode=MODE_TYPE, typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'LDAPDN')))
-    _ExtendedResponse_diagnosticMessage = OCT_STR(name='diagnosticMessage', mode=MODE_TYPE, typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'LDAPString')))
-    _ExtendedResponse_referral = SEQ_OF(name='referral', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'Referral')), opt=True)
-    _ExtendedResponse_responseName = OCT_STR(name='responseName', mode=MODE_TYPE, tag=(10, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'LDAPOID')), opt=True)
-    _ExtendedResponse_responseValue = OCT_STR(name='responseValue', mode=MODE_TYPE, tag=(11, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _ExtendedResponse_matchedDN = OCT_STR(name=u'matchedDN', mode=MODE_TYPE, typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'LDAPDN')))
+    _ExtendedResponse_diagnosticMessage = OCT_STR(name=u'diagnosticMessage', mode=MODE_TYPE, typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'LDAPString')))
+    _ExtendedResponse_referral = SEQ_OF(name=u'referral', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'Referral')), opt=True)
+    _ExtendedResponse_responseName = OCT_STR(name=u'responseName', mode=MODE_TYPE, tag=(10, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'LDAPOID')), opt=True)
+    _ExtendedResponse_responseValue = OCT_STR(name=u'responseValue', mode=MODE_TYPE, tag=(11, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     ExtendedResponse._cont = ASN1Dict([
-        ('resultCode', _ExtendedResponse_resultCode),
-        ('matchedDN', _ExtendedResponse_matchedDN),
-        ('diagnosticMessage', _ExtendedResponse_diagnosticMessage),
-        ('referral', _ExtendedResponse_referral),
-        ('responseName', _ExtendedResponse_responseName),
-        ('responseValue', _ExtendedResponse_responseValue),
+        (u'resultCode', _ExtendedResponse_resultCode),
+        (u'matchedDN', _ExtendedResponse_matchedDN),
+        (u'diagnosticMessage', _ExtendedResponse_diagnosticMessage),
+        (u'referral', _ExtendedResponse_referral),
+        (u'responseName', _ExtendedResponse_responseName),
+        (u'responseValue', _ExtendedResponse_responseValue),
         ])
     ExtendedResponse._ext = []
     
     #-----< IntermediateResponse >-----#
-    IntermediateResponse = SEQ(name='IntermediateResponse', mode=MODE_TYPE, tag=(25, TAG_APPLICATION, TAG_IMPLICIT))
-    _IntermediateResponse_responseName = OCT_STR(name='responseName', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'LDAPOID')), opt=True)
-    _IntermediateResponse_responseValue = OCT_STR(name='responseValue', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    IntermediateResponse = SEQ(name=u'IntermediateResponse', mode=MODE_TYPE, tag=(25, TAG_APPLICATION, TAG_IMPLICIT))
+    _IntermediateResponse_responseName = OCT_STR(name=u'responseName', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('Lightweight-Directory-Access-Protocol-V3', 'LDAPOID')), opt=True)
+    _IntermediateResponse_responseValue = OCT_STR(name=u'responseValue', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     IntermediateResponse._cont = ASN1Dict([
-        ('responseName', _IntermediateResponse_responseName),
-        ('responseValue', _IntermediateResponse_responseValue),
+        (u'responseName', _IntermediateResponse_responseName),
+        (u'responseValue', _IntermediateResponse_responseValue),
         ])
     IntermediateResponse._ext = []
     

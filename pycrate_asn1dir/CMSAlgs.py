@@ -16,354 +16,354 @@ from pycrate_asn1rt.init             import init_modules
 
 class PKIX1Explicit88:
 
-    _name_  = 'PKIX1Explicit88'
+    _name_  = u'PKIX1Explicit88'
     _oid_   = [1, 3, 6, 1, 5, 5, 7, 0, 18]
     
     _obj_ = [
-        'id-pkix',
-        'id-pe',
-        'id-qt',
-        'id-kp',
-        'id-ad',
-        'id-qt-cps',
-        'id-qt-unotice',
-        'id-ad-ocsp',
-        'id-ad-caIssuers',
-        'id-ad-timeStamping',
-        'id-ad-caRepository',
-        'Attribute',
-        'AttributeType',
-        'AttributeValue',
-        'AttributeTypeAndValue',
-        'id-at',
-        'id-at-name',
-        'id-at-surname',
-        'id-at-givenName',
-        'id-at-initials',
-        'id-at-generationQualifier',
-        'X520name',
-        'id-at-commonName',
-        'X520CommonName',
-        'id-at-localityName',
-        'X520LocalityName',
-        'id-at-stateOrProvinceName',
-        'X520StateOrProvinceName',
-        'id-at-organizationName',
-        'X520OrganizationName',
-        'id-at-organizationalUnitName',
-        'X520OrganizationalUnitName',
-        'id-at-title',
-        'X520Title',
-        'id-at-dnQualifier',
-        'X520dnQualifier',
-        'id-at-countryName',
-        'X520countryName',
-        'id-at-serialNumber',
-        'X520SerialNumber',
-        'id-at-pseudonym',
-        'X520Pseudonym',
-        'id-domainComponent',
-        'DomainComponent',
-        'pkcs-9',
-        'id-emailAddress',
-        'EmailAddress',
-        'Name',
-        'RDNSequence',
-        'DistinguishedName',
-        'RelativeDistinguishedName',
-        'DirectoryString',
-        'Certificate',
-        'TBSCertificate',
-        'Version',
-        'CertificateSerialNumber',
-        'Validity',
-        'Time',
-        'UniqueIdentifier',
-        'SubjectPublicKeyInfo',
-        'Extensions',
-        'Extension',
-        'CertificateList',
-        'TBSCertList',
-        'AlgorithmIdentifier',
-        'ORAddress',
-        'BuiltInStandardAttributes',
-        'CountryName',
-        'AdministrationDomainName',
-        'NetworkAddress',
-        'X121Address',
-        'TerminalIdentifier',
-        'PrivateDomainName',
-        'OrganizationName',
-        'NumericUserIdentifier',
-        'PersonalName',
-        'OrganizationalUnitNames',
-        'OrganizationalUnitName',
-        'BuiltInDomainDefinedAttributes',
-        'BuiltInDomainDefinedAttribute',
-        'ExtensionAttributes',
-        'ExtensionAttribute',
-        'common-name',
-        'CommonName',
-        'teletex-common-name',
-        'TeletexCommonName',
-        'teletex-organization-name',
-        'TeletexOrganizationName',
-        'teletex-personal-name',
-        'TeletexPersonalName',
-        'teletex-organizational-unit-names',
-        'TeletexOrganizationalUnitNames',
-        'TeletexOrganizationalUnitName',
-        'pds-name',
-        'PDSName',
-        'physical-delivery-country-name',
-        'PhysicalDeliveryCountryName',
-        'postal-code',
-        'PostalCode',
-        'physical-delivery-office-name',
-        'PhysicalDeliveryOfficeName',
-        'physical-delivery-office-number',
-        'PhysicalDeliveryOfficeNumber',
-        'extension-OR-address-components',
-        'ExtensionORAddressComponents',
-        'physical-delivery-personal-name',
-        'PhysicalDeliveryPersonalName',
-        'physical-delivery-organization-name',
-        'PhysicalDeliveryOrganizationName',
-        'extension-physical-delivery-address-components',
-        'ExtensionPhysicalDeliveryAddressComponents',
-        'unformatted-postal-address',
-        'UnformattedPostalAddress',
-        'street-address',
-        'StreetAddress',
-        'post-office-box-address',
-        'PostOfficeBoxAddress',
-        'poste-restante-address',
-        'PosteRestanteAddress',
-        'unique-postal-name',
-        'UniquePostalName',
-        'local-postal-attributes',
-        'LocalPostalAttributes',
-        'PDSParameter',
-        'extended-network-address',
-        'ExtendedNetworkAddress',
-        'PresentationAddress',
-        'terminal-type',
-        'TerminalType',
-        'teletex-domain-defined-attributes',
-        'TeletexDomainDefinedAttributes',
-        'TeletexDomainDefinedAttribute',
-        'ub-name',
-        'ub-common-name',
-        'ub-locality-name',
-        'ub-state-name',
-        'ub-organization-name',
-        'ub-organizational-unit-name',
-        'ub-title',
-        'ub-serial-number',
-        'ub-match',
-        'ub-emailaddress-length',
-        'ub-common-name-length',
-        'ub-country-name-alpha-length',
-        'ub-country-name-numeric-length',
-        'ub-domain-defined-attributes',
-        'ub-domain-defined-attribute-type-length',
-        'ub-domain-defined-attribute-value-length',
-        'ub-domain-name-length',
-        'ub-extension-attributes',
-        'ub-e163-4-number-length',
-        'ub-e163-4-sub-address-length',
-        'ub-generation-qualifier-length',
-        'ub-given-name-length',
-        'ub-initials-length',
-        'ub-integer-options',
-        'ub-numeric-user-id-length',
-        'ub-organization-name-length',
-        'ub-organizational-unit-name-length',
-        'ub-organizational-units',
-        'ub-pds-name-length',
-        'ub-pds-parameter-length',
-        'ub-pds-physical-address-lines',
-        'ub-postal-code-length',
-        'ub-pseudonym',
-        'ub-surname-length',
-        'ub-terminal-id-length',
-        'ub-unformatted-address-length',
-        'ub-x121-address-length',
+        u'id-pkix',
+        u'id-pe',
+        u'id-qt',
+        u'id-kp',
+        u'id-ad',
+        u'id-qt-cps',
+        u'id-qt-unotice',
+        u'id-ad-ocsp',
+        u'id-ad-caIssuers',
+        u'id-ad-timeStamping',
+        u'id-ad-caRepository',
+        u'Attribute',
+        u'AttributeType',
+        u'AttributeValue',
+        u'AttributeTypeAndValue',
+        u'id-at',
+        u'id-at-name',
+        u'id-at-surname',
+        u'id-at-givenName',
+        u'id-at-initials',
+        u'id-at-generationQualifier',
+        u'X520name',
+        u'id-at-commonName',
+        u'X520CommonName',
+        u'id-at-localityName',
+        u'X520LocalityName',
+        u'id-at-stateOrProvinceName',
+        u'X520StateOrProvinceName',
+        u'id-at-organizationName',
+        u'X520OrganizationName',
+        u'id-at-organizationalUnitName',
+        u'X520OrganizationalUnitName',
+        u'id-at-title',
+        u'X520Title',
+        u'id-at-dnQualifier',
+        u'X520dnQualifier',
+        u'id-at-countryName',
+        u'X520countryName',
+        u'id-at-serialNumber',
+        u'X520SerialNumber',
+        u'id-at-pseudonym',
+        u'X520Pseudonym',
+        u'id-domainComponent',
+        u'DomainComponent',
+        u'pkcs-9',
+        u'id-emailAddress',
+        u'EmailAddress',
+        u'Name',
+        u'RDNSequence',
+        u'DistinguishedName',
+        u'RelativeDistinguishedName',
+        u'DirectoryString',
+        u'Certificate',
+        u'TBSCertificate',
+        u'Version',
+        u'CertificateSerialNumber',
+        u'Validity',
+        u'Time',
+        u'UniqueIdentifier',
+        u'SubjectPublicKeyInfo',
+        u'Extensions',
+        u'Extension',
+        u'CertificateList',
+        u'TBSCertList',
+        u'AlgorithmIdentifier',
+        u'ORAddress',
+        u'BuiltInStandardAttributes',
+        u'CountryName',
+        u'AdministrationDomainName',
+        u'NetworkAddress',
+        u'X121Address',
+        u'TerminalIdentifier',
+        u'PrivateDomainName',
+        u'OrganizationName',
+        u'NumericUserIdentifier',
+        u'PersonalName',
+        u'OrganizationalUnitNames',
+        u'OrganizationalUnitName',
+        u'BuiltInDomainDefinedAttributes',
+        u'BuiltInDomainDefinedAttribute',
+        u'ExtensionAttributes',
+        u'ExtensionAttribute',
+        u'common-name',
+        u'CommonName',
+        u'teletex-common-name',
+        u'TeletexCommonName',
+        u'teletex-organization-name',
+        u'TeletexOrganizationName',
+        u'teletex-personal-name',
+        u'TeletexPersonalName',
+        u'teletex-organizational-unit-names',
+        u'TeletexOrganizationalUnitNames',
+        u'TeletexOrganizationalUnitName',
+        u'pds-name',
+        u'PDSName',
+        u'physical-delivery-country-name',
+        u'PhysicalDeliveryCountryName',
+        u'postal-code',
+        u'PostalCode',
+        u'physical-delivery-office-name',
+        u'PhysicalDeliveryOfficeName',
+        u'physical-delivery-office-number',
+        u'PhysicalDeliveryOfficeNumber',
+        u'extension-OR-address-components',
+        u'ExtensionORAddressComponents',
+        u'physical-delivery-personal-name',
+        u'PhysicalDeliveryPersonalName',
+        u'physical-delivery-organization-name',
+        u'PhysicalDeliveryOrganizationName',
+        u'extension-physical-delivery-address-components',
+        u'ExtensionPhysicalDeliveryAddressComponents',
+        u'unformatted-postal-address',
+        u'UnformattedPostalAddress',
+        u'street-address',
+        u'StreetAddress',
+        u'post-office-box-address',
+        u'PostOfficeBoxAddress',
+        u'poste-restante-address',
+        u'PosteRestanteAddress',
+        u'unique-postal-name',
+        u'UniquePostalName',
+        u'local-postal-attributes',
+        u'LocalPostalAttributes',
+        u'PDSParameter',
+        u'extended-network-address',
+        u'ExtendedNetworkAddress',
+        u'PresentationAddress',
+        u'terminal-type',
+        u'TerminalType',
+        u'teletex-domain-defined-attributes',
+        u'TeletexDomainDefinedAttributes',
+        u'TeletexDomainDefinedAttribute',
+        u'ub-name',
+        u'ub-common-name',
+        u'ub-locality-name',
+        u'ub-state-name',
+        u'ub-organization-name',
+        u'ub-organizational-unit-name',
+        u'ub-title',
+        u'ub-serial-number',
+        u'ub-match',
+        u'ub-emailaddress-length',
+        u'ub-common-name-length',
+        u'ub-country-name-alpha-length',
+        u'ub-country-name-numeric-length',
+        u'ub-domain-defined-attributes',
+        u'ub-domain-defined-attribute-type-length',
+        u'ub-domain-defined-attribute-value-length',
+        u'ub-domain-name-length',
+        u'ub-extension-attributes',
+        u'ub-e163-4-number-length',
+        u'ub-e163-4-sub-address-length',
+        u'ub-generation-qualifier-length',
+        u'ub-given-name-length',
+        u'ub-initials-length',
+        u'ub-integer-options',
+        u'ub-numeric-user-id-length',
+        u'ub-organization-name-length',
+        u'ub-organizational-unit-name-length',
+        u'ub-organizational-units',
+        u'ub-pds-name-length',
+        u'ub-pds-parameter-length',
+        u'ub-pds-physical-address-lines',
+        u'ub-postal-code-length',
+        u'ub-pseudonym',
+        u'ub-surname-length',
+        u'ub-terminal-id-length',
+        u'ub-unformatted-address-length',
+        u'ub-x121-address-length',
         ]
     _type_ = [
-        'Attribute',
-        'AttributeType',
-        'AttributeValue',
-        'AttributeTypeAndValue',
-        'X520name',
-        'X520CommonName',
-        'X520LocalityName',
-        'X520StateOrProvinceName',
-        'X520OrganizationName',
-        'X520OrganizationalUnitName',
-        'X520Title',
-        'X520dnQualifier',
-        'X520countryName',
-        'X520SerialNumber',
-        'X520Pseudonym',
-        'DomainComponent',
-        'EmailAddress',
-        'Name',
-        'RDNSequence',
-        'DistinguishedName',
-        'RelativeDistinguishedName',
-        'DirectoryString',
-        'Certificate',
-        'TBSCertificate',
-        'Version',
-        'CertificateSerialNumber',
-        'Validity',
-        'Time',
-        'UniqueIdentifier',
-        'SubjectPublicKeyInfo',
-        'Extensions',
-        'Extension',
-        'CertificateList',
-        'TBSCertList',
-        'AlgorithmIdentifier',
-        'ORAddress',
-        'BuiltInStandardAttributes',
-        'CountryName',
-        'AdministrationDomainName',
-        'NetworkAddress',
-        'X121Address',
-        'TerminalIdentifier',
-        'PrivateDomainName',
-        'OrganizationName',
-        'NumericUserIdentifier',
-        'PersonalName',
-        'OrganizationalUnitNames',
-        'OrganizationalUnitName',
-        'BuiltInDomainDefinedAttributes',
-        'BuiltInDomainDefinedAttribute',
-        'ExtensionAttributes',
-        'ExtensionAttribute',
-        'CommonName',
-        'TeletexCommonName',
-        'TeletexOrganizationName',
-        'TeletexPersonalName',
-        'TeletexOrganizationalUnitNames',
-        'TeletexOrganizationalUnitName',
-        'PDSName',
-        'PhysicalDeliveryCountryName',
-        'PostalCode',
-        'PhysicalDeliveryOfficeName',
-        'PhysicalDeliveryOfficeNumber',
-        'ExtensionORAddressComponents',
-        'PhysicalDeliveryPersonalName',
-        'PhysicalDeliveryOrganizationName',
-        'ExtensionPhysicalDeliveryAddressComponents',
-        'UnformattedPostalAddress',
-        'StreetAddress',
-        'PostOfficeBoxAddress',
-        'PosteRestanteAddress',
-        'UniquePostalName',
-        'LocalPostalAttributes',
-        'PDSParameter',
-        'ExtendedNetworkAddress',
-        'PresentationAddress',
-        'TerminalType',
-        'TeletexDomainDefinedAttributes',
-        'TeletexDomainDefinedAttribute',
+        u'Attribute',
+        u'AttributeType',
+        u'AttributeValue',
+        u'AttributeTypeAndValue',
+        u'X520name',
+        u'X520CommonName',
+        u'X520LocalityName',
+        u'X520StateOrProvinceName',
+        u'X520OrganizationName',
+        u'X520OrganizationalUnitName',
+        u'X520Title',
+        u'X520dnQualifier',
+        u'X520countryName',
+        u'X520SerialNumber',
+        u'X520Pseudonym',
+        u'DomainComponent',
+        u'EmailAddress',
+        u'Name',
+        u'RDNSequence',
+        u'DistinguishedName',
+        u'RelativeDistinguishedName',
+        u'DirectoryString',
+        u'Certificate',
+        u'TBSCertificate',
+        u'Version',
+        u'CertificateSerialNumber',
+        u'Validity',
+        u'Time',
+        u'UniqueIdentifier',
+        u'SubjectPublicKeyInfo',
+        u'Extensions',
+        u'Extension',
+        u'CertificateList',
+        u'TBSCertList',
+        u'AlgorithmIdentifier',
+        u'ORAddress',
+        u'BuiltInStandardAttributes',
+        u'CountryName',
+        u'AdministrationDomainName',
+        u'NetworkAddress',
+        u'X121Address',
+        u'TerminalIdentifier',
+        u'PrivateDomainName',
+        u'OrganizationName',
+        u'NumericUserIdentifier',
+        u'PersonalName',
+        u'OrganizationalUnitNames',
+        u'OrganizationalUnitName',
+        u'BuiltInDomainDefinedAttributes',
+        u'BuiltInDomainDefinedAttribute',
+        u'ExtensionAttributes',
+        u'ExtensionAttribute',
+        u'CommonName',
+        u'TeletexCommonName',
+        u'TeletexOrganizationName',
+        u'TeletexPersonalName',
+        u'TeletexOrganizationalUnitNames',
+        u'TeletexOrganizationalUnitName',
+        u'PDSName',
+        u'PhysicalDeliveryCountryName',
+        u'PostalCode',
+        u'PhysicalDeliveryOfficeName',
+        u'PhysicalDeliveryOfficeNumber',
+        u'ExtensionORAddressComponents',
+        u'PhysicalDeliveryPersonalName',
+        u'PhysicalDeliveryOrganizationName',
+        u'ExtensionPhysicalDeliveryAddressComponents',
+        u'UnformattedPostalAddress',
+        u'StreetAddress',
+        u'PostOfficeBoxAddress',
+        u'PosteRestanteAddress',
+        u'UniquePostalName',
+        u'LocalPostalAttributes',
+        u'PDSParameter',
+        u'ExtendedNetworkAddress',
+        u'PresentationAddress',
+        u'TerminalType',
+        u'TeletexDomainDefinedAttributes',
+        u'TeletexDomainDefinedAttribute',
         ]
     _set_ = [
         ]
     _val_ = [
-        'id-pkix',
-        'id-pe',
-        'id-qt',
-        'id-kp',
-        'id-ad',
-        'id-qt-cps',
-        'id-qt-unotice',
-        'id-ad-ocsp',
-        'id-ad-caIssuers',
-        'id-ad-timeStamping',
-        'id-ad-caRepository',
-        'id-at',
-        'id-at-name',
-        'id-at-surname',
-        'id-at-givenName',
-        'id-at-initials',
-        'id-at-generationQualifier',
-        'id-at-commonName',
-        'id-at-localityName',
-        'id-at-stateOrProvinceName',
-        'id-at-organizationName',
-        'id-at-organizationalUnitName',
-        'id-at-title',
-        'id-at-dnQualifier',
-        'id-at-countryName',
-        'id-at-serialNumber',
-        'id-at-pseudonym',
-        'id-domainComponent',
-        'pkcs-9',
-        'id-emailAddress',
-        'common-name',
-        'teletex-common-name',
-        'teletex-organization-name',
-        'teletex-personal-name',
-        'teletex-organizational-unit-names',
-        'pds-name',
-        'physical-delivery-country-name',
-        'postal-code',
-        'physical-delivery-office-name',
-        'physical-delivery-office-number',
-        'extension-OR-address-components',
-        'physical-delivery-personal-name',
-        'physical-delivery-organization-name',
-        'extension-physical-delivery-address-components',
-        'unformatted-postal-address',
-        'street-address',
-        'post-office-box-address',
-        'poste-restante-address',
-        'unique-postal-name',
-        'local-postal-attributes',
-        'extended-network-address',
-        'terminal-type',
-        'teletex-domain-defined-attributes',
-        'ub-name',
-        'ub-common-name',
-        'ub-locality-name',
-        'ub-state-name',
-        'ub-organization-name',
-        'ub-organizational-unit-name',
-        'ub-title',
-        'ub-serial-number',
-        'ub-match',
-        'ub-emailaddress-length',
-        'ub-common-name-length',
-        'ub-country-name-alpha-length',
-        'ub-country-name-numeric-length',
-        'ub-domain-defined-attributes',
-        'ub-domain-defined-attribute-type-length',
-        'ub-domain-defined-attribute-value-length',
-        'ub-domain-name-length',
-        'ub-extension-attributes',
-        'ub-e163-4-number-length',
-        'ub-e163-4-sub-address-length',
-        'ub-generation-qualifier-length',
-        'ub-given-name-length',
-        'ub-initials-length',
-        'ub-integer-options',
-        'ub-numeric-user-id-length',
-        'ub-organization-name-length',
-        'ub-organizational-unit-name-length',
-        'ub-organizational-units',
-        'ub-pds-name-length',
-        'ub-pds-parameter-length',
-        'ub-pds-physical-address-lines',
-        'ub-postal-code-length',
-        'ub-pseudonym',
-        'ub-surname-length',
-        'ub-terminal-id-length',
-        'ub-unformatted-address-length',
-        'ub-x121-address-length',
+        u'id-pkix',
+        u'id-pe',
+        u'id-qt',
+        u'id-kp',
+        u'id-ad',
+        u'id-qt-cps',
+        u'id-qt-unotice',
+        u'id-ad-ocsp',
+        u'id-ad-caIssuers',
+        u'id-ad-timeStamping',
+        u'id-ad-caRepository',
+        u'id-at',
+        u'id-at-name',
+        u'id-at-surname',
+        u'id-at-givenName',
+        u'id-at-initials',
+        u'id-at-generationQualifier',
+        u'id-at-commonName',
+        u'id-at-localityName',
+        u'id-at-stateOrProvinceName',
+        u'id-at-organizationName',
+        u'id-at-organizationalUnitName',
+        u'id-at-title',
+        u'id-at-dnQualifier',
+        u'id-at-countryName',
+        u'id-at-serialNumber',
+        u'id-at-pseudonym',
+        u'id-domainComponent',
+        u'pkcs-9',
+        u'id-emailAddress',
+        u'common-name',
+        u'teletex-common-name',
+        u'teletex-organization-name',
+        u'teletex-personal-name',
+        u'teletex-organizational-unit-names',
+        u'pds-name',
+        u'physical-delivery-country-name',
+        u'postal-code',
+        u'physical-delivery-office-name',
+        u'physical-delivery-office-number',
+        u'extension-OR-address-components',
+        u'physical-delivery-personal-name',
+        u'physical-delivery-organization-name',
+        u'extension-physical-delivery-address-components',
+        u'unformatted-postal-address',
+        u'street-address',
+        u'post-office-box-address',
+        u'poste-restante-address',
+        u'unique-postal-name',
+        u'local-postal-attributes',
+        u'extended-network-address',
+        u'terminal-type',
+        u'teletex-domain-defined-attributes',
+        u'ub-name',
+        u'ub-common-name',
+        u'ub-locality-name',
+        u'ub-state-name',
+        u'ub-organization-name',
+        u'ub-organizational-unit-name',
+        u'ub-title',
+        u'ub-serial-number',
+        u'ub-match',
+        u'ub-emailaddress-length',
+        u'ub-common-name-length',
+        u'ub-country-name-alpha-length',
+        u'ub-country-name-numeric-length',
+        u'ub-domain-defined-attributes',
+        u'ub-domain-defined-attribute-type-length',
+        u'ub-domain-defined-attribute-value-length',
+        u'ub-domain-name-length',
+        u'ub-extension-attributes',
+        u'ub-e163-4-number-length',
+        u'ub-e163-4-sub-address-length',
+        u'ub-generation-qualifier-length',
+        u'ub-given-name-length',
+        u'ub-initials-length',
+        u'ub-integer-options',
+        u'ub-numeric-user-id-length',
+        u'ub-organization-name-length',
+        u'ub-organizational-unit-name-length',
+        u'ub-organizational-units',
+        u'ub-pds-name-length',
+        u'ub-pds-parameter-length',
+        u'ub-pds-physical-address-lines',
+        u'ub-postal-code-length',
+        u'ub-pseudonym',
+        u'ub-surname-length',
+        u'ub-terminal-id-length',
+        u'ub-unformatted-address-length',
+        u'ub-x121-address-length',
         ]
     _class_ = [
         ]
@@ -371,1110 +371,1110 @@ class PKIX1Explicit88:
         ]
     
     #-----< id-pkix >-----#
-    id_pkix = OID(name='id-pkix', mode=MODE_VALUE)
+    id_pkix = OID(name=u'id-pkix', mode=MODE_VALUE)
     id_pkix._val = (1, 3, 6, 1, 5, 5, 7)
     
     #-----< id-pe >-----#
-    id_pe = OID(name='id-pe', mode=MODE_VALUE)
+    id_pe = OID(name=u'id-pe', mode=MODE_VALUE)
     id_pe._val = (1, 3, 6, 1, 5, 5, 7, 1)
     
     #-----< id-qt >-----#
-    id_qt = OID(name='id-qt', mode=MODE_VALUE)
+    id_qt = OID(name=u'id-qt', mode=MODE_VALUE)
     id_qt._val = (1, 3, 6, 1, 5, 5, 7, 2)
     
     #-----< id-kp >-----#
-    id_kp = OID(name='id-kp', mode=MODE_VALUE)
+    id_kp = OID(name=u'id-kp', mode=MODE_VALUE)
     id_kp._val = (1, 3, 6, 1, 5, 5, 7, 3)
     
     #-----< id-ad >-----#
-    id_ad = OID(name='id-ad', mode=MODE_VALUE)
+    id_ad = OID(name=u'id-ad', mode=MODE_VALUE)
     id_ad._val = (1, 3, 6, 1, 5, 5, 7, 48)
     
     #-----< id-qt-cps >-----#
-    id_qt_cps = OID(name='id-qt-cps', mode=MODE_VALUE)
+    id_qt_cps = OID(name=u'id-qt-cps', mode=MODE_VALUE)
     id_qt_cps._val = (1, 3, 6, 1, 5, 5, 7, 2, 1)
     
     #-----< id-qt-unotice >-----#
-    id_qt_unotice = OID(name='id-qt-unotice', mode=MODE_VALUE)
+    id_qt_unotice = OID(name=u'id-qt-unotice', mode=MODE_VALUE)
     id_qt_unotice._val = (1, 3, 6, 1, 5, 5, 7, 2, 2)
     
     #-----< id-ad-ocsp >-----#
-    id_ad_ocsp = OID(name='id-ad-ocsp', mode=MODE_VALUE)
+    id_ad_ocsp = OID(name=u'id-ad-ocsp', mode=MODE_VALUE)
     id_ad_ocsp._val = (1, 3, 6, 1, 5, 5, 7, 48, 1)
     
     #-----< id-ad-caIssuers >-----#
-    id_ad_caIssuers = OID(name='id-ad-caIssuers', mode=MODE_VALUE)
+    id_ad_caIssuers = OID(name=u'id-ad-caIssuers', mode=MODE_VALUE)
     id_ad_caIssuers._val = (1, 3, 6, 1, 5, 5, 7, 48, 2)
     
     #-----< id-ad-timeStamping >-----#
-    id_ad_timeStamping = OID(name='id-ad-timeStamping', mode=MODE_VALUE)
+    id_ad_timeStamping = OID(name=u'id-ad-timeStamping', mode=MODE_VALUE)
     id_ad_timeStamping._val = (1, 3, 6, 1, 5, 5, 7, 48, 3)
     
     #-----< id-ad-caRepository >-----#
-    id_ad_caRepository = OID(name='id-ad-caRepository', mode=MODE_VALUE)
+    id_ad_caRepository = OID(name=u'id-ad-caRepository', mode=MODE_VALUE)
     id_ad_caRepository._val = (1, 3, 6, 1, 5, 5, 7, 48, 5)
     
     #-----< Attribute >-----#
-    Attribute = SEQ(name='Attribute', mode=MODE_TYPE)
-    _Attribute_type = OID(name='type', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX1Explicit88', 'AttributeType')))
-    _Attribute_values = SET_OF(name='values', mode=MODE_TYPE)
+    Attribute = SEQ(name=u'Attribute', mode=MODE_TYPE)
+    _Attribute_type = OID(name=u'type', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX1Explicit88', 'AttributeType')))
+    _Attribute_values = SET_OF(name=u'values', mode=MODE_TYPE)
     __Attribute_values__item_ = ANY(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX1Explicit88', 'AttributeValue')))
     _Attribute_values._cont = __Attribute_values__item_
     Attribute._cont = ASN1Dict([
-        ('type', _Attribute_type),
-        ('values', _Attribute_values),
+        (u'type', _Attribute_type),
+        (u'values', _Attribute_values),
         ])
     Attribute._ext = None
     
     #-----< AttributeType >-----#
-    AttributeType = OID(name='AttributeType', mode=MODE_TYPE)
+    AttributeType = OID(name=u'AttributeType', mode=MODE_TYPE)
     
     #-----< AttributeValue >-----#
-    AttributeValue = ANY(name='AttributeValue', mode=MODE_TYPE)
+    AttributeValue = ANY(name=u'AttributeValue', mode=MODE_TYPE)
     
     #-----< AttributeTypeAndValue >-----#
-    AttributeTypeAndValue = SEQ(name='AttributeTypeAndValue', mode=MODE_TYPE)
-    _AttributeTypeAndValue_type = OID(name='type', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX1Explicit88', 'AttributeType')))
-    _AttributeTypeAndValue_value = ANY(name='value', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX1Explicit88', 'AttributeValue')))
+    AttributeTypeAndValue = SEQ(name=u'AttributeTypeAndValue', mode=MODE_TYPE)
+    _AttributeTypeAndValue_type = OID(name=u'type', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX1Explicit88', 'AttributeType')))
+    _AttributeTypeAndValue_value = ANY(name=u'value', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX1Explicit88', 'AttributeValue')))
     AttributeTypeAndValue._cont = ASN1Dict([
-        ('type', _AttributeTypeAndValue_type),
-        ('value', _AttributeTypeAndValue_value),
+        (u'type', _AttributeTypeAndValue_type),
+        (u'value', _AttributeTypeAndValue_value),
         ])
     AttributeTypeAndValue._ext = None
     
     #-----< id-at >-----#
-    id_at = OID(name='id-at', mode=MODE_VALUE)
+    id_at = OID(name=u'id-at', mode=MODE_VALUE)
     id_at._val = (2, 5, 4)
     
     #-----< id-at-name >-----#
-    id_at_name = OID(name='id-at-name', mode=MODE_VALUE, typeref=ASN1RefType(('PKIX1Explicit88', 'AttributeType')))
+    id_at_name = OID(name=u'id-at-name', mode=MODE_VALUE, typeref=ASN1RefType(('PKIX1Explicit88', 'AttributeType')))
     id_at_name._val = (2, 5, 4, 41)
     
     #-----< id-at-surname >-----#
-    id_at_surname = OID(name='id-at-surname', mode=MODE_VALUE, typeref=ASN1RefType(('PKIX1Explicit88', 'AttributeType')))
+    id_at_surname = OID(name=u'id-at-surname', mode=MODE_VALUE, typeref=ASN1RefType(('PKIX1Explicit88', 'AttributeType')))
     id_at_surname._val = (2, 5, 4, 4)
     
     #-----< id-at-givenName >-----#
-    id_at_givenName = OID(name='id-at-givenName', mode=MODE_VALUE, typeref=ASN1RefType(('PKIX1Explicit88', 'AttributeType')))
+    id_at_givenName = OID(name=u'id-at-givenName', mode=MODE_VALUE, typeref=ASN1RefType(('PKIX1Explicit88', 'AttributeType')))
     id_at_givenName._val = (2, 5, 4, 42)
     
     #-----< id-at-initials >-----#
-    id_at_initials = OID(name='id-at-initials', mode=MODE_VALUE, typeref=ASN1RefType(('PKIX1Explicit88', 'AttributeType')))
+    id_at_initials = OID(name=u'id-at-initials', mode=MODE_VALUE, typeref=ASN1RefType(('PKIX1Explicit88', 'AttributeType')))
     id_at_initials._val = (2, 5, 4, 43)
     
     #-----< id-at-generationQualifier >-----#
-    id_at_generationQualifier = OID(name='id-at-generationQualifier', mode=MODE_VALUE, typeref=ASN1RefType(('PKIX1Explicit88', 'AttributeType')))
+    id_at_generationQualifier = OID(name=u'id-at-generationQualifier', mode=MODE_VALUE, typeref=ASN1RefType(('PKIX1Explicit88', 'AttributeType')))
     id_at_generationQualifier._val = (2, 5, 4, 44)
     
     #-----< X520name >-----#
-    X520name = CHOICE(name='X520name', mode=MODE_TYPE)
-    _X520name_teletexString = STR_TELE(name='teletexString', mode=MODE_TYPE)
+    X520name = CHOICE(name=u'X520name', mode=MODE_TYPE)
+    _X520name_teletexString = STR_TELE(name=u'teletexString', mode=MODE_TYPE)
     _X520name_teletexString._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=32768)], ev=None, er=[])
-    _X520name_printableString = STR_PRINT(name='printableString', mode=MODE_TYPE)
+    _X520name_printableString = STR_PRINT(name=u'printableString', mode=MODE_TYPE)
     _X520name_printableString._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=32768)], ev=None, er=[])
-    _X520name_universalString = STR_UNIV(name='universalString', mode=MODE_TYPE)
+    _X520name_universalString = STR_UNIV(name=u'universalString', mode=MODE_TYPE)
     _X520name_universalString._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=32768)], ev=None, er=[])
-    _X520name_utf8String = STR_UTF8(name='utf8String', mode=MODE_TYPE)
+    _X520name_utf8String = STR_UTF8(name=u'utf8String', mode=MODE_TYPE)
     _X520name_utf8String._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=32768)], ev=None, er=[])
-    _X520name_bmpString = STR_BMP(name='bmpString', mode=MODE_TYPE)
+    _X520name_bmpString = STR_BMP(name=u'bmpString', mode=MODE_TYPE)
     _X520name_bmpString._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=32768)], ev=None, er=[])
     X520name._cont = ASN1Dict([
-        ('teletexString', _X520name_teletexString),
-        ('printableString', _X520name_printableString),
-        ('universalString', _X520name_universalString),
-        ('utf8String', _X520name_utf8String),
-        ('bmpString', _X520name_bmpString),
+        (u'teletexString', _X520name_teletexString),
+        (u'printableString', _X520name_printableString),
+        (u'universalString', _X520name_universalString),
+        (u'utf8String', _X520name_utf8String),
+        (u'bmpString', _X520name_bmpString),
         ])
     X520name._ext = None
     
     #-----< id-at-commonName >-----#
-    id_at_commonName = OID(name='id-at-commonName', mode=MODE_VALUE, typeref=ASN1RefType(('PKIX1Explicit88', 'AttributeType')))
+    id_at_commonName = OID(name=u'id-at-commonName', mode=MODE_VALUE, typeref=ASN1RefType(('PKIX1Explicit88', 'AttributeType')))
     id_at_commonName._val = (2, 5, 4, 3)
     
     #-----< X520CommonName >-----#
-    X520CommonName = CHOICE(name='X520CommonName', mode=MODE_TYPE)
-    _X520CommonName_teletexString = STR_TELE(name='teletexString', mode=MODE_TYPE)
+    X520CommonName = CHOICE(name=u'X520CommonName', mode=MODE_TYPE)
+    _X520CommonName_teletexString = STR_TELE(name=u'teletexString', mode=MODE_TYPE)
     _X520CommonName_teletexString._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=64)], ev=None, er=[])
-    _X520CommonName_printableString = STR_PRINT(name='printableString', mode=MODE_TYPE)
+    _X520CommonName_printableString = STR_PRINT(name=u'printableString', mode=MODE_TYPE)
     _X520CommonName_printableString._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=64)], ev=None, er=[])
-    _X520CommonName_universalString = STR_UNIV(name='universalString', mode=MODE_TYPE)
+    _X520CommonName_universalString = STR_UNIV(name=u'universalString', mode=MODE_TYPE)
     _X520CommonName_universalString._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=64)], ev=None, er=[])
-    _X520CommonName_utf8String = STR_UTF8(name='utf8String', mode=MODE_TYPE)
+    _X520CommonName_utf8String = STR_UTF8(name=u'utf8String', mode=MODE_TYPE)
     _X520CommonName_utf8String._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=64)], ev=None, er=[])
-    _X520CommonName_bmpString = STR_BMP(name='bmpString', mode=MODE_TYPE)
+    _X520CommonName_bmpString = STR_BMP(name=u'bmpString', mode=MODE_TYPE)
     _X520CommonName_bmpString._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=64)], ev=None, er=[])
     X520CommonName._cont = ASN1Dict([
-        ('teletexString', _X520CommonName_teletexString),
-        ('printableString', _X520CommonName_printableString),
-        ('universalString', _X520CommonName_universalString),
-        ('utf8String', _X520CommonName_utf8String),
-        ('bmpString', _X520CommonName_bmpString),
+        (u'teletexString', _X520CommonName_teletexString),
+        (u'printableString', _X520CommonName_printableString),
+        (u'universalString', _X520CommonName_universalString),
+        (u'utf8String', _X520CommonName_utf8String),
+        (u'bmpString', _X520CommonName_bmpString),
         ])
     X520CommonName._ext = None
     
     #-----< id-at-localityName >-----#
-    id_at_localityName = OID(name='id-at-localityName', mode=MODE_VALUE, typeref=ASN1RefType(('PKIX1Explicit88', 'AttributeType')))
+    id_at_localityName = OID(name=u'id-at-localityName', mode=MODE_VALUE, typeref=ASN1RefType(('PKIX1Explicit88', 'AttributeType')))
     id_at_localityName._val = (2, 5, 4, 7)
     
     #-----< X520LocalityName >-----#
-    X520LocalityName = CHOICE(name='X520LocalityName', mode=MODE_TYPE)
-    _X520LocalityName_teletexString = STR_TELE(name='teletexString', mode=MODE_TYPE)
+    X520LocalityName = CHOICE(name=u'X520LocalityName', mode=MODE_TYPE)
+    _X520LocalityName_teletexString = STR_TELE(name=u'teletexString', mode=MODE_TYPE)
     _X520LocalityName_teletexString._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=128)], ev=None, er=[])
-    _X520LocalityName_printableString = STR_PRINT(name='printableString', mode=MODE_TYPE)
+    _X520LocalityName_printableString = STR_PRINT(name=u'printableString', mode=MODE_TYPE)
     _X520LocalityName_printableString._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=128)], ev=None, er=[])
-    _X520LocalityName_universalString = STR_UNIV(name='universalString', mode=MODE_TYPE)
+    _X520LocalityName_universalString = STR_UNIV(name=u'universalString', mode=MODE_TYPE)
     _X520LocalityName_universalString._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=128)], ev=None, er=[])
-    _X520LocalityName_utf8String = STR_UTF8(name='utf8String', mode=MODE_TYPE)
+    _X520LocalityName_utf8String = STR_UTF8(name=u'utf8String', mode=MODE_TYPE)
     _X520LocalityName_utf8String._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=128)], ev=None, er=[])
-    _X520LocalityName_bmpString = STR_BMP(name='bmpString', mode=MODE_TYPE)
+    _X520LocalityName_bmpString = STR_BMP(name=u'bmpString', mode=MODE_TYPE)
     _X520LocalityName_bmpString._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=128)], ev=None, er=[])
     X520LocalityName._cont = ASN1Dict([
-        ('teletexString', _X520LocalityName_teletexString),
-        ('printableString', _X520LocalityName_printableString),
-        ('universalString', _X520LocalityName_universalString),
-        ('utf8String', _X520LocalityName_utf8String),
-        ('bmpString', _X520LocalityName_bmpString),
+        (u'teletexString', _X520LocalityName_teletexString),
+        (u'printableString', _X520LocalityName_printableString),
+        (u'universalString', _X520LocalityName_universalString),
+        (u'utf8String', _X520LocalityName_utf8String),
+        (u'bmpString', _X520LocalityName_bmpString),
         ])
     X520LocalityName._ext = None
     
     #-----< id-at-stateOrProvinceName >-----#
-    id_at_stateOrProvinceName = OID(name='id-at-stateOrProvinceName', mode=MODE_VALUE, typeref=ASN1RefType(('PKIX1Explicit88', 'AttributeType')))
+    id_at_stateOrProvinceName = OID(name=u'id-at-stateOrProvinceName', mode=MODE_VALUE, typeref=ASN1RefType(('PKIX1Explicit88', 'AttributeType')))
     id_at_stateOrProvinceName._val = (2, 5, 4, 8)
     
     #-----< X520StateOrProvinceName >-----#
-    X520StateOrProvinceName = CHOICE(name='X520StateOrProvinceName', mode=MODE_TYPE)
-    _X520StateOrProvinceName_teletexString = STR_TELE(name='teletexString', mode=MODE_TYPE)
+    X520StateOrProvinceName = CHOICE(name=u'X520StateOrProvinceName', mode=MODE_TYPE)
+    _X520StateOrProvinceName_teletexString = STR_TELE(name=u'teletexString', mode=MODE_TYPE)
     _X520StateOrProvinceName_teletexString._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=128)], ev=None, er=[])
-    _X520StateOrProvinceName_printableString = STR_PRINT(name='printableString', mode=MODE_TYPE)
+    _X520StateOrProvinceName_printableString = STR_PRINT(name=u'printableString', mode=MODE_TYPE)
     _X520StateOrProvinceName_printableString._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=128)], ev=None, er=[])
-    _X520StateOrProvinceName_universalString = STR_UNIV(name='universalString', mode=MODE_TYPE)
+    _X520StateOrProvinceName_universalString = STR_UNIV(name=u'universalString', mode=MODE_TYPE)
     _X520StateOrProvinceName_universalString._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=128)], ev=None, er=[])
-    _X520StateOrProvinceName_utf8String = STR_UTF8(name='utf8String', mode=MODE_TYPE)
+    _X520StateOrProvinceName_utf8String = STR_UTF8(name=u'utf8String', mode=MODE_TYPE)
     _X520StateOrProvinceName_utf8String._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=128)], ev=None, er=[])
-    _X520StateOrProvinceName_bmpString = STR_BMP(name='bmpString', mode=MODE_TYPE)
+    _X520StateOrProvinceName_bmpString = STR_BMP(name=u'bmpString', mode=MODE_TYPE)
     _X520StateOrProvinceName_bmpString._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=128)], ev=None, er=[])
     X520StateOrProvinceName._cont = ASN1Dict([
-        ('teletexString', _X520StateOrProvinceName_teletexString),
-        ('printableString', _X520StateOrProvinceName_printableString),
-        ('universalString', _X520StateOrProvinceName_universalString),
-        ('utf8String', _X520StateOrProvinceName_utf8String),
-        ('bmpString', _X520StateOrProvinceName_bmpString),
+        (u'teletexString', _X520StateOrProvinceName_teletexString),
+        (u'printableString', _X520StateOrProvinceName_printableString),
+        (u'universalString', _X520StateOrProvinceName_universalString),
+        (u'utf8String', _X520StateOrProvinceName_utf8String),
+        (u'bmpString', _X520StateOrProvinceName_bmpString),
         ])
     X520StateOrProvinceName._ext = None
     
     #-----< id-at-organizationName >-----#
-    id_at_organizationName = OID(name='id-at-organizationName', mode=MODE_VALUE, typeref=ASN1RefType(('PKIX1Explicit88', 'AttributeType')))
+    id_at_organizationName = OID(name=u'id-at-organizationName', mode=MODE_VALUE, typeref=ASN1RefType(('PKIX1Explicit88', 'AttributeType')))
     id_at_organizationName._val = (2, 5, 4, 10)
     
     #-----< X520OrganizationName >-----#
-    X520OrganizationName = CHOICE(name='X520OrganizationName', mode=MODE_TYPE)
-    _X520OrganizationName_teletexString = STR_TELE(name='teletexString', mode=MODE_TYPE)
+    X520OrganizationName = CHOICE(name=u'X520OrganizationName', mode=MODE_TYPE)
+    _X520OrganizationName_teletexString = STR_TELE(name=u'teletexString', mode=MODE_TYPE)
     _X520OrganizationName_teletexString._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=64)], ev=None, er=[])
-    _X520OrganizationName_printableString = STR_PRINT(name='printableString', mode=MODE_TYPE)
+    _X520OrganizationName_printableString = STR_PRINT(name=u'printableString', mode=MODE_TYPE)
     _X520OrganizationName_printableString._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=64)], ev=None, er=[])
-    _X520OrganizationName_universalString = STR_UNIV(name='universalString', mode=MODE_TYPE)
+    _X520OrganizationName_universalString = STR_UNIV(name=u'universalString', mode=MODE_TYPE)
     _X520OrganizationName_universalString._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=64)], ev=None, er=[])
-    _X520OrganizationName_utf8String = STR_UTF8(name='utf8String', mode=MODE_TYPE)
+    _X520OrganizationName_utf8String = STR_UTF8(name=u'utf8String', mode=MODE_TYPE)
     _X520OrganizationName_utf8String._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=64)], ev=None, er=[])
-    _X520OrganizationName_bmpString = STR_BMP(name='bmpString', mode=MODE_TYPE)
+    _X520OrganizationName_bmpString = STR_BMP(name=u'bmpString', mode=MODE_TYPE)
     _X520OrganizationName_bmpString._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=64)], ev=None, er=[])
     X520OrganizationName._cont = ASN1Dict([
-        ('teletexString', _X520OrganizationName_teletexString),
-        ('printableString', _X520OrganizationName_printableString),
-        ('universalString', _X520OrganizationName_universalString),
-        ('utf8String', _X520OrganizationName_utf8String),
-        ('bmpString', _X520OrganizationName_bmpString),
+        (u'teletexString', _X520OrganizationName_teletexString),
+        (u'printableString', _X520OrganizationName_printableString),
+        (u'universalString', _X520OrganizationName_universalString),
+        (u'utf8String', _X520OrganizationName_utf8String),
+        (u'bmpString', _X520OrganizationName_bmpString),
         ])
     X520OrganizationName._ext = None
     
     #-----< id-at-organizationalUnitName >-----#
-    id_at_organizationalUnitName = OID(name='id-at-organizationalUnitName', mode=MODE_VALUE, typeref=ASN1RefType(('PKIX1Explicit88', 'AttributeType')))
+    id_at_organizationalUnitName = OID(name=u'id-at-organizationalUnitName', mode=MODE_VALUE, typeref=ASN1RefType(('PKIX1Explicit88', 'AttributeType')))
     id_at_organizationalUnitName._val = (2, 5, 4, 11)
     
     #-----< X520OrganizationalUnitName >-----#
-    X520OrganizationalUnitName = CHOICE(name='X520OrganizationalUnitName', mode=MODE_TYPE)
-    _X520OrganizationalUnitName_teletexString = STR_TELE(name='teletexString', mode=MODE_TYPE)
+    X520OrganizationalUnitName = CHOICE(name=u'X520OrganizationalUnitName', mode=MODE_TYPE)
+    _X520OrganizationalUnitName_teletexString = STR_TELE(name=u'teletexString', mode=MODE_TYPE)
     _X520OrganizationalUnitName_teletexString._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=64)], ev=None, er=[])
-    _X520OrganizationalUnitName_printableString = STR_PRINT(name='printableString', mode=MODE_TYPE)
+    _X520OrganizationalUnitName_printableString = STR_PRINT(name=u'printableString', mode=MODE_TYPE)
     _X520OrganizationalUnitName_printableString._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=64)], ev=None, er=[])
-    _X520OrganizationalUnitName_universalString = STR_UNIV(name='universalString', mode=MODE_TYPE)
+    _X520OrganizationalUnitName_universalString = STR_UNIV(name=u'universalString', mode=MODE_TYPE)
     _X520OrganizationalUnitName_universalString._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=64)], ev=None, er=[])
-    _X520OrganizationalUnitName_utf8String = STR_UTF8(name='utf8String', mode=MODE_TYPE)
+    _X520OrganizationalUnitName_utf8String = STR_UTF8(name=u'utf8String', mode=MODE_TYPE)
     _X520OrganizationalUnitName_utf8String._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=64)], ev=None, er=[])
-    _X520OrganizationalUnitName_bmpString = STR_BMP(name='bmpString', mode=MODE_TYPE)
+    _X520OrganizationalUnitName_bmpString = STR_BMP(name=u'bmpString', mode=MODE_TYPE)
     _X520OrganizationalUnitName_bmpString._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=64)], ev=None, er=[])
     X520OrganizationalUnitName._cont = ASN1Dict([
-        ('teletexString', _X520OrganizationalUnitName_teletexString),
-        ('printableString', _X520OrganizationalUnitName_printableString),
-        ('universalString', _X520OrganizationalUnitName_universalString),
-        ('utf8String', _X520OrganizationalUnitName_utf8String),
-        ('bmpString', _X520OrganizationalUnitName_bmpString),
+        (u'teletexString', _X520OrganizationalUnitName_teletexString),
+        (u'printableString', _X520OrganizationalUnitName_printableString),
+        (u'universalString', _X520OrganizationalUnitName_universalString),
+        (u'utf8String', _X520OrganizationalUnitName_utf8String),
+        (u'bmpString', _X520OrganizationalUnitName_bmpString),
         ])
     X520OrganizationalUnitName._ext = None
     
     #-----< id-at-title >-----#
-    id_at_title = OID(name='id-at-title', mode=MODE_VALUE, typeref=ASN1RefType(('PKIX1Explicit88', 'AttributeType')))
+    id_at_title = OID(name=u'id-at-title', mode=MODE_VALUE, typeref=ASN1RefType(('PKIX1Explicit88', 'AttributeType')))
     id_at_title._val = (2, 5, 4, 12)
     
     #-----< X520Title >-----#
-    X520Title = CHOICE(name='X520Title', mode=MODE_TYPE)
-    _X520Title_teletexString = STR_TELE(name='teletexString', mode=MODE_TYPE)
+    X520Title = CHOICE(name=u'X520Title', mode=MODE_TYPE)
+    _X520Title_teletexString = STR_TELE(name=u'teletexString', mode=MODE_TYPE)
     _X520Title_teletexString._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=64)], ev=None, er=[])
-    _X520Title_printableString = STR_PRINT(name='printableString', mode=MODE_TYPE)
+    _X520Title_printableString = STR_PRINT(name=u'printableString', mode=MODE_TYPE)
     _X520Title_printableString._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=64)], ev=None, er=[])
-    _X520Title_universalString = STR_UNIV(name='universalString', mode=MODE_TYPE)
+    _X520Title_universalString = STR_UNIV(name=u'universalString', mode=MODE_TYPE)
     _X520Title_universalString._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=64)], ev=None, er=[])
-    _X520Title_utf8String = STR_UTF8(name='utf8String', mode=MODE_TYPE)
+    _X520Title_utf8String = STR_UTF8(name=u'utf8String', mode=MODE_TYPE)
     _X520Title_utf8String._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=64)], ev=None, er=[])
-    _X520Title_bmpString = STR_BMP(name='bmpString', mode=MODE_TYPE)
+    _X520Title_bmpString = STR_BMP(name=u'bmpString', mode=MODE_TYPE)
     _X520Title_bmpString._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=64)], ev=None, er=[])
     X520Title._cont = ASN1Dict([
-        ('teletexString', _X520Title_teletexString),
-        ('printableString', _X520Title_printableString),
-        ('universalString', _X520Title_universalString),
-        ('utf8String', _X520Title_utf8String),
-        ('bmpString', _X520Title_bmpString),
+        (u'teletexString', _X520Title_teletexString),
+        (u'printableString', _X520Title_printableString),
+        (u'universalString', _X520Title_universalString),
+        (u'utf8String', _X520Title_utf8String),
+        (u'bmpString', _X520Title_bmpString),
         ])
     X520Title._ext = None
     
     #-----< id-at-dnQualifier >-----#
-    id_at_dnQualifier = OID(name='id-at-dnQualifier', mode=MODE_VALUE, typeref=ASN1RefType(('PKIX1Explicit88', 'AttributeType')))
+    id_at_dnQualifier = OID(name=u'id-at-dnQualifier', mode=MODE_VALUE, typeref=ASN1RefType(('PKIX1Explicit88', 'AttributeType')))
     id_at_dnQualifier._val = (2, 5, 4, 46)
     
     #-----< X520dnQualifier >-----#
-    X520dnQualifier = STR_PRINT(name='X520dnQualifier', mode=MODE_TYPE)
+    X520dnQualifier = STR_PRINT(name=u'X520dnQualifier', mode=MODE_TYPE)
     
     #-----< id-at-countryName >-----#
-    id_at_countryName = OID(name='id-at-countryName', mode=MODE_VALUE, typeref=ASN1RefType(('PKIX1Explicit88', 'AttributeType')))
+    id_at_countryName = OID(name=u'id-at-countryName', mode=MODE_VALUE, typeref=ASN1RefType(('PKIX1Explicit88', 'AttributeType')))
     id_at_countryName._val = (2, 5, 4, 6)
     
     #-----< X520countryName >-----#
-    X520countryName = STR_PRINT(name='X520countryName', mode=MODE_TYPE)
+    X520countryName = STR_PRINT(name=u'X520countryName', mode=MODE_TYPE)
     X520countryName._const_sz = ASN1Set(rv=[2], rr=[], ev=None, er=[])
     
     #-----< id-at-serialNumber >-----#
-    id_at_serialNumber = OID(name='id-at-serialNumber', mode=MODE_VALUE, typeref=ASN1RefType(('PKIX1Explicit88', 'AttributeType')))
+    id_at_serialNumber = OID(name=u'id-at-serialNumber', mode=MODE_VALUE, typeref=ASN1RefType(('PKIX1Explicit88', 'AttributeType')))
     id_at_serialNumber._val = (2, 5, 4, 5)
     
     #-----< X520SerialNumber >-----#
-    X520SerialNumber = STR_PRINT(name='X520SerialNumber', mode=MODE_TYPE)
+    X520SerialNumber = STR_PRINT(name=u'X520SerialNumber', mode=MODE_TYPE)
     X520SerialNumber._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=64)], ev=None, er=[])
     
     #-----< id-at-pseudonym >-----#
-    id_at_pseudonym = OID(name='id-at-pseudonym', mode=MODE_VALUE, typeref=ASN1RefType(('PKIX1Explicit88', 'AttributeType')))
+    id_at_pseudonym = OID(name=u'id-at-pseudonym', mode=MODE_VALUE, typeref=ASN1RefType(('PKIX1Explicit88', 'AttributeType')))
     id_at_pseudonym._val = (2, 5, 4, 65)
     
     #-----< X520Pseudonym >-----#
-    X520Pseudonym = CHOICE(name='X520Pseudonym', mode=MODE_TYPE)
-    _X520Pseudonym_teletexString = STR_TELE(name='teletexString', mode=MODE_TYPE)
+    X520Pseudonym = CHOICE(name=u'X520Pseudonym', mode=MODE_TYPE)
+    _X520Pseudonym_teletexString = STR_TELE(name=u'teletexString', mode=MODE_TYPE)
     _X520Pseudonym_teletexString._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=128)], ev=None, er=[])
-    _X520Pseudonym_printableString = STR_PRINT(name='printableString', mode=MODE_TYPE)
+    _X520Pseudonym_printableString = STR_PRINT(name=u'printableString', mode=MODE_TYPE)
     _X520Pseudonym_printableString._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=128)], ev=None, er=[])
-    _X520Pseudonym_universalString = STR_UNIV(name='universalString', mode=MODE_TYPE)
+    _X520Pseudonym_universalString = STR_UNIV(name=u'universalString', mode=MODE_TYPE)
     _X520Pseudonym_universalString._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=128)], ev=None, er=[])
-    _X520Pseudonym_utf8String = STR_UTF8(name='utf8String', mode=MODE_TYPE)
+    _X520Pseudonym_utf8String = STR_UTF8(name=u'utf8String', mode=MODE_TYPE)
     _X520Pseudonym_utf8String._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=128)], ev=None, er=[])
-    _X520Pseudonym_bmpString = STR_BMP(name='bmpString', mode=MODE_TYPE)
+    _X520Pseudonym_bmpString = STR_BMP(name=u'bmpString', mode=MODE_TYPE)
     _X520Pseudonym_bmpString._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=128)], ev=None, er=[])
     X520Pseudonym._cont = ASN1Dict([
-        ('teletexString', _X520Pseudonym_teletexString),
-        ('printableString', _X520Pseudonym_printableString),
-        ('universalString', _X520Pseudonym_universalString),
-        ('utf8String', _X520Pseudonym_utf8String),
-        ('bmpString', _X520Pseudonym_bmpString),
+        (u'teletexString', _X520Pseudonym_teletexString),
+        (u'printableString', _X520Pseudonym_printableString),
+        (u'universalString', _X520Pseudonym_universalString),
+        (u'utf8String', _X520Pseudonym_utf8String),
+        (u'bmpString', _X520Pseudonym_bmpString),
         ])
     X520Pseudonym._ext = None
     
     #-----< id-domainComponent >-----#
-    id_domainComponent = OID(name='id-domainComponent', mode=MODE_VALUE, typeref=ASN1RefType(('PKIX1Explicit88', 'AttributeType')))
+    id_domainComponent = OID(name=u'id-domainComponent', mode=MODE_VALUE, typeref=ASN1RefType(('PKIX1Explicit88', 'AttributeType')))
     id_domainComponent._val = (0, 9, 2342, 19200300, 100, 1, 25)
     
     #-----< DomainComponent >-----#
-    DomainComponent = STR_IA5(name='DomainComponent', mode=MODE_TYPE)
+    DomainComponent = STR_IA5(name=u'DomainComponent', mode=MODE_TYPE)
     
     #-----< pkcs-9 >-----#
-    pkcs_9 = OID(name='pkcs-9', mode=MODE_VALUE)
+    pkcs_9 = OID(name=u'pkcs-9', mode=MODE_VALUE)
     pkcs_9._val = (1, 2, 840, 113549, 1, 9)
     
     #-----< id-emailAddress >-----#
-    id_emailAddress = OID(name='id-emailAddress', mode=MODE_VALUE, typeref=ASN1RefType(('PKIX1Explicit88', 'AttributeType')))
+    id_emailAddress = OID(name=u'id-emailAddress', mode=MODE_VALUE, typeref=ASN1RefType(('PKIX1Explicit88', 'AttributeType')))
     id_emailAddress._val = (1, 2, 840, 113549, 1, 9, 1)
     
     #-----< EmailAddress >-----#
-    EmailAddress = STR_IA5(name='EmailAddress', mode=MODE_TYPE)
+    EmailAddress = STR_IA5(name=u'EmailAddress', mode=MODE_TYPE)
     EmailAddress._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=255)], ev=None, er=[])
     
     #-----< Name >-----#
-    Name = CHOICE(name='Name', mode=MODE_TYPE)
-    _Name_rdnSequence = SEQ_OF(name='rdnSequence', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX1Explicit88', 'RDNSequence')))
+    Name = CHOICE(name=u'Name', mode=MODE_TYPE)
+    _Name_rdnSequence = SEQ_OF(name=u'rdnSequence', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX1Explicit88', 'RDNSequence')))
     Name._cont = ASN1Dict([
-        ('rdnSequence', _Name_rdnSequence),
+        (u'rdnSequence', _Name_rdnSequence),
         ])
     Name._ext = None
     
     #-----< RDNSequence >-----#
-    RDNSequence = SEQ_OF(name='RDNSequence', mode=MODE_TYPE)
+    RDNSequence = SEQ_OF(name=u'RDNSequence', mode=MODE_TYPE)
     _RDNSequence__item_ = SET_OF(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX1Explicit88', 'RelativeDistinguishedName')))
     RDNSequence._cont = _RDNSequence__item_
     
     #-----< DistinguishedName >-----#
-    DistinguishedName = SEQ_OF(name='DistinguishedName', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX1Explicit88', 'RDNSequence')))
+    DistinguishedName = SEQ_OF(name=u'DistinguishedName', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX1Explicit88', 'RDNSequence')))
     
     #-----< RelativeDistinguishedName >-----#
-    RelativeDistinguishedName = SET_OF(name='RelativeDistinguishedName', mode=MODE_TYPE)
+    RelativeDistinguishedName = SET_OF(name=u'RelativeDistinguishedName', mode=MODE_TYPE)
     _RelativeDistinguishedName__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX1Explicit88', 'AttributeTypeAndValue')))
     RelativeDistinguishedName._cont = _RelativeDistinguishedName__item_
     RelativeDistinguishedName._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=None)], ev=None, er=[])
     
     #-----< DirectoryString >-----#
-    DirectoryString = CHOICE(name='DirectoryString', mode=MODE_TYPE)
-    _DirectoryString_teletexString = STR_TELE(name='teletexString', mode=MODE_TYPE)
+    DirectoryString = CHOICE(name=u'DirectoryString', mode=MODE_TYPE)
+    _DirectoryString_teletexString = STR_TELE(name=u'teletexString', mode=MODE_TYPE)
     _DirectoryString_teletexString._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=None)], ev=None, er=[])
-    _DirectoryString_printableString = STR_PRINT(name='printableString', mode=MODE_TYPE)
+    _DirectoryString_printableString = STR_PRINT(name=u'printableString', mode=MODE_TYPE)
     _DirectoryString_printableString._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=None)], ev=None, er=[])
-    _DirectoryString_universalString = STR_UNIV(name='universalString', mode=MODE_TYPE)
+    _DirectoryString_universalString = STR_UNIV(name=u'universalString', mode=MODE_TYPE)
     _DirectoryString_universalString._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=None)], ev=None, er=[])
-    _DirectoryString_utf8String = STR_UTF8(name='utf8String', mode=MODE_TYPE)
+    _DirectoryString_utf8String = STR_UTF8(name=u'utf8String', mode=MODE_TYPE)
     _DirectoryString_utf8String._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=None)], ev=None, er=[])
-    _DirectoryString_bmpString = STR_BMP(name='bmpString', mode=MODE_TYPE)
+    _DirectoryString_bmpString = STR_BMP(name=u'bmpString', mode=MODE_TYPE)
     _DirectoryString_bmpString._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=None)], ev=None, er=[])
     DirectoryString._cont = ASN1Dict([
-        ('teletexString', _DirectoryString_teletexString),
-        ('printableString', _DirectoryString_printableString),
-        ('universalString', _DirectoryString_universalString),
-        ('utf8String', _DirectoryString_utf8String),
-        ('bmpString', _DirectoryString_bmpString),
+        (u'teletexString', _DirectoryString_teletexString),
+        (u'printableString', _DirectoryString_printableString),
+        (u'universalString', _DirectoryString_universalString),
+        (u'utf8String', _DirectoryString_utf8String),
+        (u'bmpString', _DirectoryString_bmpString),
         ])
     DirectoryString._ext = None
     
     #-----< Certificate >-----#
-    Certificate = SEQ(name='Certificate', mode=MODE_TYPE)
-    _Certificate_tbsCertificate = SEQ(name='tbsCertificate', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX1Explicit88', 'TBSCertificate')))
-    _Certificate_signatureAlgorithm = SEQ(name='signatureAlgorithm', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX1Explicit88', 'AlgorithmIdentifier')))
-    _Certificate_signature = BIT_STR(name='signature', mode=MODE_TYPE)
+    Certificate = SEQ(name=u'Certificate', mode=MODE_TYPE)
+    _Certificate_tbsCertificate = SEQ(name=u'tbsCertificate', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX1Explicit88', 'TBSCertificate')))
+    _Certificate_signatureAlgorithm = SEQ(name=u'signatureAlgorithm', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX1Explicit88', 'AlgorithmIdentifier')))
+    _Certificate_signature = BIT_STR(name=u'signature', mode=MODE_TYPE)
     Certificate._cont = ASN1Dict([
-        ('tbsCertificate', _Certificate_tbsCertificate),
-        ('signatureAlgorithm', _Certificate_signatureAlgorithm),
-        ('signature', _Certificate_signature),
+        (u'tbsCertificate', _Certificate_tbsCertificate),
+        (u'signatureAlgorithm', _Certificate_signatureAlgorithm),
+        (u'signature', _Certificate_signature),
         ])
     Certificate._ext = None
     
     #-----< TBSCertificate >-----#
-    TBSCertificate = SEQ(name='TBSCertificate', mode=MODE_TYPE)
-    _TBSCertificate_version = INT(name='version', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('PKIX1Explicit88', 'Version')), default=0)
-    _TBSCertificate_serialNumber = INT(name='serialNumber', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX1Explicit88', 'CertificateSerialNumber')))
-    _TBSCertificate_signature = SEQ(name='signature', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX1Explicit88', 'AlgorithmIdentifier')))
-    _TBSCertificate_issuer = CHOICE(name='issuer', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX1Explicit88', 'Name')))
-    _TBSCertificate_validity = SEQ(name='validity', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX1Explicit88', 'Validity')))
-    _TBSCertificate_subject = CHOICE(name='subject', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX1Explicit88', 'Name')))
-    _TBSCertificate_subjectPublicKeyInfo = SEQ(name='subjectPublicKeyInfo', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX1Explicit88', 'SubjectPublicKeyInfo')))
-    _TBSCertificate_issuerUniqueID = BIT_STR(name='issuerUniqueID', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PKIX1Explicit88', 'UniqueIdentifier')), opt=True)
-    _TBSCertificate_subjectUniqueID = BIT_STR(name='subjectUniqueID', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PKIX1Explicit88', 'UniqueIdentifier')), opt=True)
-    _TBSCertificate_extensions = SEQ_OF(name='extensions', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('PKIX1Explicit88', 'Extensions')), opt=True)
+    TBSCertificate = SEQ(name=u'TBSCertificate', mode=MODE_TYPE)
+    _TBSCertificate_version = INT(name=u'version', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('PKIX1Explicit88', 'Version')), default=0)
+    _TBSCertificate_serialNumber = INT(name=u'serialNumber', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX1Explicit88', 'CertificateSerialNumber')))
+    _TBSCertificate_signature = SEQ(name=u'signature', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX1Explicit88', 'AlgorithmIdentifier')))
+    _TBSCertificate_issuer = CHOICE(name=u'issuer', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX1Explicit88', 'Name')))
+    _TBSCertificate_validity = SEQ(name=u'validity', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX1Explicit88', 'Validity')))
+    _TBSCertificate_subject = CHOICE(name=u'subject', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX1Explicit88', 'Name')))
+    _TBSCertificate_subjectPublicKeyInfo = SEQ(name=u'subjectPublicKeyInfo', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX1Explicit88', 'SubjectPublicKeyInfo')))
+    _TBSCertificate_issuerUniqueID = BIT_STR(name=u'issuerUniqueID', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PKIX1Explicit88', 'UniqueIdentifier')), opt=True)
+    _TBSCertificate_subjectUniqueID = BIT_STR(name=u'subjectUniqueID', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PKIX1Explicit88', 'UniqueIdentifier')), opt=True)
+    _TBSCertificate_extensions = SEQ_OF(name=u'extensions', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('PKIX1Explicit88', 'Extensions')), opt=True)
     TBSCertificate._cont = ASN1Dict([
-        ('version', _TBSCertificate_version),
-        ('serialNumber', _TBSCertificate_serialNumber),
-        ('signature', _TBSCertificate_signature),
-        ('issuer', _TBSCertificate_issuer),
-        ('validity', _TBSCertificate_validity),
-        ('subject', _TBSCertificate_subject),
-        ('subjectPublicKeyInfo', _TBSCertificate_subjectPublicKeyInfo),
-        ('issuerUniqueID', _TBSCertificate_issuerUniqueID),
-        ('subjectUniqueID', _TBSCertificate_subjectUniqueID),
-        ('extensions', _TBSCertificate_extensions),
+        (u'version', _TBSCertificate_version),
+        (u'serialNumber', _TBSCertificate_serialNumber),
+        (u'signature', _TBSCertificate_signature),
+        (u'issuer', _TBSCertificate_issuer),
+        (u'validity', _TBSCertificate_validity),
+        (u'subject', _TBSCertificate_subject),
+        (u'subjectPublicKeyInfo', _TBSCertificate_subjectPublicKeyInfo),
+        (u'issuerUniqueID', _TBSCertificate_issuerUniqueID),
+        (u'subjectUniqueID', _TBSCertificate_subjectUniqueID),
+        (u'extensions', _TBSCertificate_extensions),
         ])
     TBSCertificate._ext = None
     
     #-----< Version >-----#
-    Version = INT(name='Version', mode=MODE_TYPE)
-    Version._cont = ASN1Dict([('v1', 0), ('v2', 1), ('v3', 2)])
+    Version = INT(name=u'Version', mode=MODE_TYPE)
+    Version._cont = ASN1Dict([(u'v1', 0), (u'v2', 1), (u'v3', 2)])
     
     #-----< CertificateSerialNumber >-----#
-    CertificateSerialNumber = INT(name='CertificateSerialNumber', mode=MODE_TYPE)
+    CertificateSerialNumber = INT(name=u'CertificateSerialNumber', mode=MODE_TYPE)
     
     #-----< Validity >-----#
-    Validity = SEQ(name='Validity', mode=MODE_TYPE)
-    _Validity_notBefore = CHOICE(name='notBefore', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX1Explicit88', 'Time')))
-    _Validity_notAfter = CHOICE(name='notAfter', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX1Explicit88', 'Time')))
+    Validity = SEQ(name=u'Validity', mode=MODE_TYPE)
+    _Validity_notBefore = CHOICE(name=u'notBefore', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX1Explicit88', 'Time')))
+    _Validity_notAfter = CHOICE(name=u'notAfter', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX1Explicit88', 'Time')))
     Validity._cont = ASN1Dict([
-        ('notBefore', _Validity_notBefore),
-        ('notAfter', _Validity_notAfter),
+        (u'notBefore', _Validity_notBefore),
+        (u'notAfter', _Validity_notAfter),
         ])
     Validity._ext = None
     
     #-----< Time >-----#
-    Time = CHOICE(name='Time', mode=MODE_TYPE)
-    _Time_utcTime = TIME_UTC(name='utcTime', mode=MODE_TYPE)
-    _Time_generalTime = TIME_GEN(name='generalTime', mode=MODE_TYPE)
+    Time = CHOICE(name=u'Time', mode=MODE_TYPE)
+    _Time_utcTime = TIME_UTC(name=u'utcTime', mode=MODE_TYPE)
+    _Time_generalTime = TIME_GEN(name=u'generalTime', mode=MODE_TYPE)
     Time._cont = ASN1Dict([
-        ('utcTime', _Time_utcTime),
-        ('generalTime', _Time_generalTime),
+        (u'utcTime', _Time_utcTime),
+        (u'generalTime', _Time_generalTime),
         ])
     Time._ext = None
     
     #-----< UniqueIdentifier >-----#
-    UniqueIdentifier = BIT_STR(name='UniqueIdentifier', mode=MODE_TYPE)
+    UniqueIdentifier = BIT_STR(name=u'UniqueIdentifier', mode=MODE_TYPE)
     
     #-----< SubjectPublicKeyInfo >-----#
-    SubjectPublicKeyInfo = SEQ(name='SubjectPublicKeyInfo', mode=MODE_TYPE)
-    _SubjectPublicKeyInfo_algorithm = SEQ(name='algorithm', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX1Explicit88', 'AlgorithmIdentifier')))
-    _SubjectPublicKeyInfo_subjectPublicKey = BIT_STR(name='subjectPublicKey', mode=MODE_TYPE)
+    SubjectPublicKeyInfo = SEQ(name=u'SubjectPublicKeyInfo', mode=MODE_TYPE)
+    _SubjectPublicKeyInfo_algorithm = SEQ(name=u'algorithm', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX1Explicit88', 'AlgorithmIdentifier')))
+    _SubjectPublicKeyInfo_subjectPublicKey = BIT_STR(name=u'subjectPublicKey', mode=MODE_TYPE)
     SubjectPublicKeyInfo._cont = ASN1Dict([
-        ('algorithm', _SubjectPublicKeyInfo_algorithm),
-        ('subjectPublicKey', _SubjectPublicKeyInfo_subjectPublicKey),
+        (u'algorithm', _SubjectPublicKeyInfo_algorithm),
+        (u'subjectPublicKey', _SubjectPublicKeyInfo_subjectPublicKey),
         ])
     SubjectPublicKeyInfo._ext = None
     
     #-----< Extensions >-----#
-    Extensions = SEQ_OF(name='Extensions', mode=MODE_TYPE)
+    Extensions = SEQ_OF(name=u'Extensions', mode=MODE_TYPE)
     _Extensions__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX1Explicit88', 'Extension')))
     Extensions._cont = _Extensions__item_
     Extensions._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=None)], ev=None, er=[])
     
     #-----< Extension >-----#
-    Extension = SEQ(name='Extension', mode=MODE_TYPE)
-    _Extension_extnID = OID(name='extnID', mode=MODE_TYPE)
-    _Extension_critical = BOOL(name='critical', mode=MODE_TYPE, default=False)
-    _Extension_extnValue = OCT_STR(name='extnValue', mode=MODE_TYPE)
+    Extension = SEQ(name=u'Extension', mode=MODE_TYPE)
+    _Extension_extnID = OID(name=u'extnID', mode=MODE_TYPE)
+    _Extension_critical = BOOL(name=u'critical', mode=MODE_TYPE, default=False)
+    _Extension_extnValue = OCT_STR(name=u'extnValue', mode=MODE_TYPE)
     Extension._cont = ASN1Dict([
-        ('extnID', _Extension_extnID),
-        ('critical', _Extension_critical),
-        ('extnValue', _Extension_extnValue),
+        (u'extnID', _Extension_extnID),
+        (u'critical', _Extension_critical),
+        (u'extnValue', _Extension_extnValue),
         ])
     Extension._ext = None
     
     #-----< CertificateList >-----#
-    CertificateList = SEQ(name='CertificateList', mode=MODE_TYPE)
-    _CertificateList_tbsCertList = SEQ(name='tbsCertList', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX1Explicit88', 'TBSCertList')))
-    _CertificateList_signatureAlgorithm = SEQ(name='signatureAlgorithm', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX1Explicit88', 'AlgorithmIdentifier')))
-    _CertificateList_signature = BIT_STR(name='signature', mode=MODE_TYPE)
+    CertificateList = SEQ(name=u'CertificateList', mode=MODE_TYPE)
+    _CertificateList_tbsCertList = SEQ(name=u'tbsCertList', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX1Explicit88', 'TBSCertList')))
+    _CertificateList_signatureAlgorithm = SEQ(name=u'signatureAlgorithm', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX1Explicit88', 'AlgorithmIdentifier')))
+    _CertificateList_signature = BIT_STR(name=u'signature', mode=MODE_TYPE)
     CertificateList._cont = ASN1Dict([
-        ('tbsCertList', _CertificateList_tbsCertList),
-        ('signatureAlgorithm', _CertificateList_signatureAlgorithm),
-        ('signature', _CertificateList_signature),
+        (u'tbsCertList', _CertificateList_tbsCertList),
+        (u'signatureAlgorithm', _CertificateList_signatureAlgorithm),
+        (u'signature', _CertificateList_signature),
         ])
     CertificateList._ext = None
     
     #-----< TBSCertList >-----#
-    TBSCertList = SEQ(name='TBSCertList', mode=MODE_TYPE)
-    _TBSCertList_version = INT(name='version', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX1Explicit88', 'Version')), opt=True)
-    _TBSCertList_signature = SEQ(name='signature', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX1Explicit88', 'AlgorithmIdentifier')))
-    _TBSCertList_issuer = CHOICE(name='issuer', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX1Explicit88', 'Name')))
-    _TBSCertList_thisUpdate = CHOICE(name='thisUpdate', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX1Explicit88', 'Time')))
-    _TBSCertList_nextUpdate = CHOICE(name='nextUpdate', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX1Explicit88', 'Time')), opt=True)
-    _TBSCertList_revokedCertificates = SEQ_OF(name='revokedCertificates', mode=MODE_TYPE, opt=True)
+    TBSCertList = SEQ(name=u'TBSCertList', mode=MODE_TYPE)
+    _TBSCertList_version = INT(name=u'version', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX1Explicit88', 'Version')), opt=True)
+    _TBSCertList_signature = SEQ(name=u'signature', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX1Explicit88', 'AlgorithmIdentifier')))
+    _TBSCertList_issuer = CHOICE(name=u'issuer', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX1Explicit88', 'Name')))
+    _TBSCertList_thisUpdate = CHOICE(name=u'thisUpdate', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX1Explicit88', 'Time')))
+    _TBSCertList_nextUpdate = CHOICE(name=u'nextUpdate', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX1Explicit88', 'Time')), opt=True)
+    _TBSCertList_revokedCertificates = SEQ_OF(name=u'revokedCertificates', mode=MODE_TYPE, opt=True)
     __TBSCertList_revokedCertificates__item_ = SEQ(name='_item_', mode=MODE_TYPE)
-    ___TBSCertList_revokedCertificates__item__userCertificate = INT(name='userCertificate', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX1Explicit88', 'CertificateSerialNumber')))
-    ___TBSCertList_revokedCertificates__item__revocationDate = CHOICE(name='revocationDate', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX1Explicit88', 'Time')))
-    ___TBSCertList_revokedCertificates__item__crlEntryExtensions = SEQ_OF(name='crlEntryExtensions', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX1Explicit88', 'Extensions')), opt=True)
+    ___TBSCertList_revokedCertificates__item__userCertificate = INT(name=u'userCertificate', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX1Explicit88', 'CertificateSerialNumber')))
+    ___TBSCertList_revokedCertificates__item__revocationDate = CHOICE(name=u'revocationDate', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX1Explicit88', 'Time')))
+    ___TBSCertList_revokedCertificates__item__crlEntryExtensions = SEQ_OF(name=u'crlEntryExtensions', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX1Explicit88', 'Extensions')), opt=True)
     __TBSCertList_revokedCertificates__item_._cont = ASN1Dict([
-        ('userCertificate', ___TBSCertList_revokedCertificates__item__userCertificate),
-        ('revocationDate', ___TBSCertList_revokedCertificates__item__revocationDate),
-        ('crlEntryExtensions', ___TBSCertList_revokedCertificates__item__crlEntryExtensions),
+        (u'userCertificate', ___TBSCertList_revokedCertificates__item__userCertificate),
+        (u'revocationDate', ___TBSCertList_revokedCertificates__item__revocationDate),
+        (u'crlEntryExtensions', ___TBSCertList_revokedCertificates__item__crlEntryExtensions),
         ])
     __TBSCertList_revokedCertificates__item_._ext = None
     _TBSCertList_revokedCertificates._cont = __TBSCertList_revokedCertificates__item_
-    _TBSCertList_crlExtensions = SEQ_OF(name='crlExtensions', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('PKIX1Explicit88', 'Extensions')), opt=True)
+    _TBSCertList_crlExtensions = SEQ_OF(name=u'crlExtensions', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('PKIX1Explicit88', 'Extensions')), opt=True)
     TBSCertList._cont = ASN1Dict([
-        ('version', _TBSCertList_version),
-        ('signature', _TBSCertList_signature),
-        ('issuer', _TBSCertList_issuer),
-        ('thisUpdate', _TBSCertList_thisUpdate),
-        ('nextUpdate', _TBSCertList_nextUpdate),
-        ('revokedCertificates', _TBSCertList_revokedCertificates),
-        ('crlExtensions', _TBSCertList_crlExtensions),
+        (u'version', _TBSCertList_version),
+        (u'signature', _TBSCertList_signature),
+        (u'issuer', _TBSCertList_issuer),
+        (u'thisUpdate', _TBSCertList_thisUpdate),
+        (u'nextUpdate', _TBSCertList_nextUpdate),
+        (u'revokedCertificates', _TBSCertList_revokedCertificates),
+        (u'crlExtensions', _TBSCertList_crlExtensions),
         ])
     TBSCertList._ext = None
     
     #-----< AlgorithmIdentifier >-----#
-    AlgorithmIdentifier = SEQ(name='AlgorithmIdentifier', mode=MODE_TYPE)
-    _AlgorithmIdentifier_algorithm = OID(name='algorithm', mode=MODE_TYPE)
-    _AlgorithmIdentifier_parameters = ANY(name='parameters', mode=MODE_TYPE, opt=True, defby='algorithm')
+    AlgorithmIdentifier = SEQ(name=u'AlgorithmIdentifier', mode=MODE_TYPE)
+    _AlgorithmIdentifier_algorithm = OID(name=u'algorithm', mode=MODE_TYPE)
+    _AlgorithmIdentifier_parameters = ANY(name=u'parameters', mode=MODE_TYPE, opt=True, defby=u'algorithm')
     AlgorithmIdentifier._cont = ASN1Dict([
-        ('algorithm', _AlgorithmIdentifier_algorithm),
-        ('parameters', _AlgorithmIdentifier_parameters),
+        (u'algorithm', _AlgorithmIdentifier_algorithm),
+        (u'parameters', _AlgorithmIdentifier_parameters),
         ])
     AlgorithmIdentifier._ext = None
     
     #-----< ORAddress >-----#
-    ORAddress = SEQ(name='ORAddress', mode=MODE_TYPE)
-    _ORAddress_built_in_standard_attributes = SEQ(name='built-in-standard-attributes', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX1Explicit88', 'BuiltInStandardAttributes')))
-    _ORAddress_built_in_domain_defined_attributes = SEQ_OF(name='built-in-domain-defined-attributes', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX1Explicit88', 'BuiltInDomainDefinedAttributes')), opt=True)
-    _ORAddress_extension_attributes = SET_OF(name='extension-attributes', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX1Explicit88', 'ExtensionAttributes')), opt=True)
+    ORAddress = SEQ(name=u'ORAddress', mode=MODE_TYPE)
+    _ORAddress_built_in_standard_attributes = SEQ(name=u'built-in-standard-attributes', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX1Explicit88', 'BuiltInStandardAttributes')))
+    _ORAddress_built_in_domain_defined_attributes = SEQ_OF(name=u'built-in-domain-defined-attributes', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX1Explicit88', 'BuiltInDomainDefinedAttributes')), opt=True)
+    _ORAddress_extension_attributes = SET_OF(name=u'extension-attributes', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX1Explicit88', 'ExtensionAttributes')), opt=True)
     ORAddress._cont = ASN1Dict([
-        ('built-in-standard-attributes', _ORAddress_built_in_standard_attributes),
-        ('built-in-domain-defined-attributes', _ORAddress_built_in_domain_defined_attributes),
-        ('extension-attributes', _ORAddress_extension_attributes),
+        (u'built-in-standard-attributes', _ORAddress_built_in_standard_attributes),
+        (u'built-in-domain-defined-attributes', _ORAddress_built_in_domain_defined_attributes),
+        (u'extension-attributes', _ORAddress_extension_attributes),
         ])
     ORAddress._ext = None
     
     #-----< BuiltInStandardAttributes >-----#
-    BuiltInStandardAttributes = SEQ(name='BuiltInStandardAttributes', mode=MODE_TYPE)
-    _BuiltInStandardAttributes_country_name = CHOICE(name='country-name', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX1Explicit88', 'CountryName')), opt=True)
-    _BuiltInStandardAttributes_administration_domain_name = CHOICE(name='administration-domain-name', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX1Explicit88', 'AdministrationDomainName')), opt=True)
-    _BuiltInStandardAttributes_network_address = STR_NUM(name='network-address', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PKIX1Explicit88', 'NetworkAddress')), opt=True)
-    _BuiltInStandardAttributes_terminal_identifier = STR_PRINT(name='terminal-identifier', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PKIX1Explicit88', 'TerminalIdentifier')), opt=True)
-    _BuiltInStandardAttributes_private_domain_name = CHOICE(name='private-domain-name', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('PKIX1Explicit88', 'PrivateDomainName')), opt=True)
-    _BuiltInStandardAttributes_organization_name = STR_PRINT(name='organization-name', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PKIX1Explicit88', 'OrganizationName')), opt=True)
-    _BuiltInStandardAttributes_numeric_user_identifier = STR_NUM(name='numeric-user-identifier', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PKIX1Explicit88', 'NumericUserIdentifier')), opt=True)
-    _BuiltInStandardAttributes_personal_name = SET(name='personal-name', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PKIX1Explicit88', 'PersonalName')), opt=True)
-    _BuiltInStandardAttributes_organizational_unit_names = SEQ_OF(name='organizational-unit-names', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PKIX1Explicit88', 'OrganizationalUnitNames')), opt=True)
+    BuiltInStandardAttributes = SEQ(name=u'BuiltInStandardAttributes', mode=MODE_TYPE)
+    _BuiltInStandardAttributes_country_name = CHOICE(name=u'country-name', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX1Explicit88', 'CountryName')), opt=True)
+    _BuiltInStandardAttributes_administration_domain_name = CHOICE(name=u'administration-domain-name', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX1Explicit88', 'AdministrationDomainName')), opt=True)
+    _BuiltInStandardAttributes_network_address = STR_NUM(name=u'network-address', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PKIX1Explicit88', 'NetworkAddress')), opt=True)
+    _BuiltInStandardAttributes_terminal_identifier = STR_PRINT(name=u'terminal-identifier', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PKIX1Explicit88', 'TerminalIdentifier')), opt=True)
+    _BuiltInStandardAttributes_private_domain_name = CHOICE(name=u'private-domain-name', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('PKIX1Explicit88', 'PrivateDomainName')), opt=True)
+    _BuiltInStandardAttributes_organization_name = STR_PRINT(name=u'organization-name', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PKIX1Explicit88', 'OrganizationName')), opt=True)
+    _BuiltInStandardAttributes_numeric_user_identifier = STR_NUM(name=u'numeric-user-identifier', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PKIX1Explicit88', 'NumericUserIdentifier')), opt=True)
+    _BuiltInStandardAttributes_personal_name = SET(name=u'personal-name', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PKIX1Explicit88', 'PersonalName')), opt=True)
+    _BuiltInStandardAttributes_organizational_unit_names = SEQ_OF(name=u'organizational-unit-names', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PKIX1Explicit88', 'OrganizationalUnitNames')), opt=True)
     BuiltInStandardAttributes._cont = ASN1Dict([
-        ('country-name', _BuiltInStandardAttributes_country_name),
-        ('administration-domain-name', _BuiltInStandardAttributes_administration_domain_name),
-        ('network-address', _BuiltInStandardAttributes_network_address),
-        ('terminal-identifier', _BuiltInStandardAttributes_terminal_identifier),
-        ('private-domain-name', _BuiltInStandardAttributes_private_domain_name),
-        ('organization-name', _BuiltInStandardAttributes_organization_name),
-        ('numeric-user-identifier', _BuiltInStandardAttributes_numeric_user_identifier),
-        ('personal-name', _BuiltInStandardAttributes_personal_name),
-        ('organizational-unit-names', _BuiltInStandardAttributes_organizational_unit_names),
+        (u'country-name', _BuiltInStandardAttributes_country_name),
+        (u'administration-domain-name', _BuiltInStandardAttributes_administration_domain_name),
+        (u'network-address', _BuiltInStandardAttributes_network_address),
+        (u'terminal-identifier', _BuiltInStandardAttributes_terminal_identifier),
+        (u'private-domain-name', _BuiltInStandardAttributes_private_domain_name),
+        (u'organization-name', _BuiltInStandardAttributes_organization_name),
+        (u'numeric-user-identifier', _BuiltInStandardAttributes_numeric_user_identifier),
+        (u'personal-name', _BuiltInStandardAttributes_personal_name),
+        (u'organizational-unit-names', _BuiltInStandardAttributes_organizational_unit_names),
         ])
     BuiltInStandardAttributes._ext = None
     
     #-----< CountryName >-----#
-    CountryName = CHOICE(name='CountryName', mode=MODE_TYPE, tag=(1, TAG_APPLICATION, TAG_EXPLICIT))
-    _CountryName_x121_dcc_code = STR_NUM(name='x121-dcc-code', mode=MODE_TYPE)
+    CountryName = CHOICE(name=u'CountryName', mode=MODE_TYPE, tag=(1, TAG_APPLICATION, TAG_EXPLICIT))
+    _CountryName_x121_dcc_code = STR_NUM(name=u'x121-dcc-code', mode=MODE_TYPE)
     _CountryName_x121_dcc_code._const_sz = ASN1Set(rv=[3], rr=[], ev=None, er=[])
-    _CountryName_iso_3166_alpha2_code = STR_PRINT(name='iso-3166-alpha2-code', mode=MODE_TYPE)
+    _CountryName_iso_3166_alpha2_code = STR_PRINT(name=u'iso-3166-alpha2-code', mode=MODE_TYPE)
     _CountryName_iso_3166_alpha2_code._const_sz = ASN1Set(rv=[2], rr=[], ev=None, er=[])
     CountryName._cont = ASN1Dict([
-        ('x121-dcc-code', _CountryName_x121_dcc_code),
-        ('iso-3166-alpha2-code', _CountryName_iso_3166_alpha2_code),
+        (u'x121-dcc-code', _CountryName_x121_dcc_code),
+        (u'iso-3166-alpha2-code', _CountryName_iso_3166_alpha2_code),
         ])
     CountryName._ext = None
     
     #-----< AdministrationDomainName >-----#
-    AdministrationDomainName = CHOICE(name='AdministrationDomainName', mode=MODE_TYPE, tag=(2, TAG_APPLICATION, TAG_EXPLICIT))
-    _AdministrationDomainName_numeric = STR_NUM(name='numeric', mode=MODE_TYPE)
+    AdministrationDomainName = CHOICE(name=u'AdministrationDomainName', mode=MODE_TYPE, tag=(2, TAG_APPLICATION, TAG_EXPLICIT))
+    _AdministrationDomainName_numeric = STR_NUM(name=u'numeric', mode=MODE_TYPE)
     _AdministrationDomainName_numeric._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=16)], ev=None, er=[])
-    _AdministrationDomainName_printable = STR_PRINT(name='printable', mode=MODE_TYPE)
+    _AdministrationDomainName_printable = STR_PRINT(name=u'printable', mode=MODE_TYPE)
     _AdministrationDomainName_printable._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=16)], ev=None, er=[])
     AdministrationDomainName._cont = ASN1Dict([
-        ('numeric', _AdministrationDomainName_numeric),
-        ('printable', _AdministrationDomainName_printable),
+        (u'numeric', _AdministrationDomainName_numeric),
+        (u'printable', _AdministrationDomainName_printable),
         ])
     AdministrationDomainName._ext = None
     
     #-----< NetworkAddress >-----#
-    NetworkAddress = STR_NUM(name='NetworkAddress', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX1Explicit88', 'X121Address')))
+    NetworkAddress = STR_NUM(name=u'NetworkAddress', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX1Explicit88', 'X121Address')))
     
     #-----< X121Address >-----#
-    X121Address = STR_NUM(name='X121Address', mode=MODE_TYPE)
+    X121Address = STR_NUM(name=u'X121Address', mode=MODE_TYPE)
     X121Address._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=16)], ev=None, er=[])
     
     #-----< TerminalIdentifier >-----#
-    TerminalIdentifier = STR_PRINT(name='TerminalIdentifier', mode=MODE_TYPE)
+    TerminalIdentifier = STR_PRINT(name=u'TerminalIdentifier', mode=MODE_TYPE)
     TerminalIdentifier._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=24)], ev=None, er=[])
     
     #-----< PrivateDomainName >-----#
-    PrivateDomainName = CHOICE(name='PrivateDomainName', mode=MODE_TYPE)
-    _PrivateDomainName_numeric = STR_NUM(name='numeric', mode=MODE_TYPE)
+    PrivateDomainName = CHOICE(name=u'PrivateDomainName', mode=MODE_TYPE)
+    _PrivateDomainName_numeric = STR_NUM(name=u'numeric', mode=MODE_TYPE)
     _PrivateDomainName_numeric._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=16)], ev=None, er=[])
-    _PrivateDomainName_printable = STR_PRINT(name='printable', mode=MODE_TYPE)
+    _PrivateDomainName_printable = STR_PRINT(name=u'printable', mode=MODE_TYPE)
     _PrivateDomainName_printable._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=16)], ev=None, er=[])
     PrivateDomainName._cont = ASN1Dict([
-        ('numeric', _PrivateDomainName_numeric),
-        ('printable', _PrivateDomainName_printable),
+        (u'numeric', _PrivateDomainName_numeric),
+        (u'printable', _PrivateDomainName_printable),
         ])
     PrivateDomainName._ext = None
     
     #-----< OrganizationName >-----#
-    OrganizationName = STR_PRINT(name='OrganizationName', mode=MODE_TYPE)
+    OrganizationName = STR_PRINT(name=u'OrganizationName', mode=MODE_TYPE)
     OrganizationName._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=64)], ev=None, er=[])
     
     #-----< NumericUserIdentifier >-----#
-    NumericUserIdentifier = STR_NUM(name='NumericUserIdentifier', mode=MODE_TYPE)
+    NumericUserIdentifier = STR_NUM(name=u'NumericUserIdentifier', mode=MODE_TYPE)
     NumericUserIdentifier._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=32)], ev=None, er=[])
     
     #-----< PersonalName >-----#
-    PersonalName = SET(name='PersonalName', mode=MODE_TYPE)
-    _PersonalName_surname = STR_PRINT(name='surname', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    PersonalName = SET(name=u'PersonalName', mode=MODE_TYPE)
+    _PersonalName_surname = STR_PRINT(name=u'surname', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     _PersonalName_surname._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=40)], ev=None, er=[])
-    _PersonalName_given_name = STR_PRINT(name='given-name', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _PersonalName_given_name = STR_PRINT(name=u'given-name', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     _PersonalName_given_name._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=16)], ev=None, er=[])
-    _PersonalName_initials = STR_PRINT(name='initials', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _PersonalName_initials = STR_PRINT(name=u'initials', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     _PersonalName_initials._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=5)], ev=None, er=[])
-    _PersonalName_generation_qualifier = STR_PRINT(name='generation-qualifier', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _PersonalName_generation_qualifier = STR_PRINT(name=u'generation-qualifier', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     _PersonalName_generation_qualifier._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=3)], ev=None, er=[])
     PersonalName._cont = ASN1Dict([
-        ('surname', _PersonalName_surname),
-        ('given-name', _PersonalName_given_name),
-        ('initials', _PersonalName_initials),
-        ('generation-qualifier', _PersonalName_generation_qualifier),
+        (u'surname', _PersonalName_surname),
+        (u'given-name', _PersonalName_given_name),
+        (u'initials', _PersonalName_initials),
+        (u'generation-qualifier', _PersonalName_generation_qualifier),
         ])
     PersonalName._ext = None
     
     #-----< OrganizationalUnitNames >-----#
-    OrganizationalUnitNames = SEQ_OF(name='OrganizationalUnitNames', mode=MODE_TYPE)
+    OrganizationalUnitNames = SEQ_OF(name=u'OrganizationalUnitNames', mode=MODE_TYPE)
     _OrganizationalUnitNames__item_ = STR_PRINT(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX1Explicit88', 'OrganizationalUnitName')))
     OrganizationalUnitNames._cont = _OrganizationalUnitNames__item_
     OrganizationalUnitNames._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=4)], ev=None, er=[])
     
     #-----< OrganizationalUnitName >-----#
-    OrganizationalUnitName = STR_PRINT(name='OrganizationalUnitName', mode=MODE_TYPE)
+    OrganizationalUnitName = STR_PRINT(name=u'OrganizationalUnitName', mode=MODE_TYPE)
     OrganizationalUnitName._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=32)], ev=None, er=[])
     
     #-----< BuiltInDomainDefinedAttributes >-----#
-    BuiltInDomainDefinedAttributes = SEQ_OF(name='BuiltInDomainDefinedAttributes', mode=MODE_TYPE)
+    BuiltInDomainDefinedAttributes = SEQ_OF(name=u'BuiltInDomainDefinedAttributes', mode=MODE_TYPE)
     _BuiltInDomainDefinedAttributes__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX1Explicit88', 'BuiltInDomainDefinedAttribute')))
     BuiltInDomainDefinedAttributes._cont = _BuiltInDomainDefinedAttributes__item_
     BuiltInDomainDefinedAttributes._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=4)], ev=None, er=[])
     
     #-----< BuiltInDomainDefinedAttribute >-----#
-    BuiltInDomainDefinedAttribute = SEQ(name='BuiltInDomainDefinedAttribute', mode=MODE_TYPE)
-    _BuiltInDomainDefinedAttribute_type = STR_PRINT(name='type', mode=MODE_TYPE)
+    BuiltInDomainDefinedAttribute = SEQ(name=u'BuiltInDomainDefinedAttribute', mode=MODE_TYPE)
+    _BuiltInDomainDefinedAttribute_type = STR_PRINT(name=u'type', mode=MODE_TYPE)
     _BuiltInDomainDefinedAttribute_type._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=8)], ev=None, er=[])
-    _BuiltInDomainDefinedAttribute_value = STR_PRINT(name='value', mode=MODE_TYPE)
+    _BuiltInDomainDefinedAttribute_value = STR_PRINT(name=u'value', mode=MODE_TYPE)
     _BuiltInDomainDefinedAttribute_value._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=128)], ev=None, er=[])
     BuiltInDomainDefinedAttribute._cont = ASN1Dict([
-        ('type', _BuiltInDomainDefinedAttribute_type),
-        ('value', _BuiltInDomainDefinedAttribute_value),
+        (u'type', _BuiltInDomainDefinedAttribute_type),
+        (u'value', _BuiltInDomainDefinedAttribute_value),
         ])
     BuiltInDomainDefinedAttribute._ext = None
     
     #-----< ExtensionAttributes >-----#
-    ExtensionAttributes = SET_OF(name='ExtensionAttributes', mode=MODE_TYPE)
+    ExtensionAttributes = SET_OF(name=u'ExtensionAttributes', mode=MODE_TYPE)
     _ExtensionAttributes__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX1Explicit88', 'ExtensionAttribute')))
     ExtensionAttributes._cont = _ExtensionAttributes__item_
     ExtensionAttributes._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=256)], ev=None, er=[])
     
     #-----< ExtensionAttribute >-----#
-    ExtensionAttribute = SEQ(name='ExtensionAttribute', mode=MODE_TYPE)
-    _ExtensionAttribute_extension_attribute_type = INT(name='extension-attribute-type', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    ExtensionAttribute = SEQ(name=u'ExtensionAttribute', mode=MODE_TYPE)
+    _ExtensionAttribute_extension_attribute_type = INT(name=u'extension-attribute-type', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     _ExtensionAttribute_extension_attribute_type._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=256)], ev=None, er=[])
-    _ExtensionAttribute_extension_attribute_value = ANY(name='extension-attribute-value', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), defby='extension-attribute-type')
+    _ExtensionAttribute_extension_attribute_value = ANY(name=u'extension-attribute-value', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), defby=u'extension-attribute-type')
     ExtensionAttribute._cont = ASN1Dict([
-        ('extension-attribute-type', _ExtensionAttribute_extension_attribute_type),
-        ('extension-attribute-value', _ExtensionAttribute_extension_attribute_value),
+        (u'extension-attribute-type', _ExtensionAttribute_extension_attribute_type),
+        (u'extension-attribute-value', _ExtensionAttribute_extension_attribute_value),
         ])
     ExtensionAttribute._ext = None
     
     #-----< common-name >-----#
-    common_name = INT(name='common-name', mode=MODE_VALUE)
+    common_name = INT(name=u'common-name', mode=MODE_VALUE)
     common_name._val = 1
     
     #-----< CommonName >-----#
-    CommonName = STR_PRINT(name='CommonName', mode=MODE_TYPE)
+    CommonName = STR_PRINT(name=u'CommonName', mode=MODE_TYPE)
     CommonName._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=64)], ev=None, er=[])
     
     #-----< teletex-common-name >-----#
-    teletex_common_name = INT(name='teletex-common-name', mode=MODE_VALUE)
+    teletex_common_name = INT(name=u'teletex-common-name', mode=MODE_VALUE)
     teletex_common_name._val = 2
     
     #-----< TeletexCommonName >-----#
-    TeletexCommonName = STR_TELE(name='TeletexCommonName', mode=MODE_TYPE)
+    TeletexCommonName = STR_TELE(name=u'TeletexCommonName', mode=MODE_TYPE)
     TeletexCommonName._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=64)], ev=None, er=[])
     
     #-----< teletex-organization-name >-----#
-    teletex_organization_name = INT(name='teletex-organization-name', mode=MODE_VALUE)
+    teletex_organization_name = INT(name=u'teletex-organization-name', mode=MODE_VALUE)
     teletex_organization_name._val = 3
     
     #-----< TeletexOrganizationName >-----#
-    TeletexOrganizationName = STR_TELE(name='TeletexOrganizationName', mode=MODE_TYPE)
+    TeletexOrganizationName = STR_TELE(name=u'TeletexOrganizationName', mode=MODE_TYPE)
     TeletexOrganizationName._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=64)], ev=None, er=[])
     
     #-----< teletex-personal-name >-----#
-    teletex_personal_name = INT(name='teletex-personal-name', mode=MODE_VALUE)
+    teletex_personal_name = INT(name=u'teletex-personal-name', mode=MODE_VALUE)
     teletex_personal_name._val = 4
     
     #-----< TeletexPersonalName >-----#
-    TeletexPersonalName = SET(name='TeletexPersonalName', mode=MODE_TYPE)
-    _TeletexPersonalName_surname = STR_TELE(name='surname', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    TeletexPersonalName = SET(name=u'TeletexPersonalName', mode=MODE_TYPE)
+    _TeletexPersonalName_surname = STR_TELE(name=u'surname', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     _TeletexPersonalName_surname._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=40)], ev=None, er=[])
-    _TeletexPersonalName_given_name = STR_TELE(name='given-name', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _TeletexPersonalName_given_name = STR_TELE(name=u'given-name', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     _TeletexPersonalName_given_name._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=16)], ev=None, er=[])
-    _TeletexPersonalName_initials = STR_TELE(name='initials', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _TeletexPersonalName_initials = STR_TELE(name=u'initials', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     _TeletexPersonalName_initials._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=5)], ev=None, er=[])
-    _TeletexPersonalName_generation_qualifier = STR_TELE(name='generation-qualifier', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _TeletexPersonalName_generation_qualifier = STR_TELE(name=u'generation-qualifier', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     _TeletexPersonalName_generation_qualifier._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=3)], ev=None, er=[])
     TeletexPersonalName._cont = ASN1Dict([
-        ('surname', _TeletexPersonalName_surname),
-        ('given-name', _TeletexPersonalName_given_name),
-        ('initials', _TeletexPersonalName_initials),
-        ('generation-qualifier', _TeletexPersonalName_generation_qualifier),
+        (u'surname', _TeletexPersonalName_surname),
+        (u'given-name', _TeletexPersonalName_given_name),
+        (u'initials', _TeletexPersonalName_initials),
+        (u'generation-qualifier', _TeletexPersonalName_generation_qualifier),
         ])
     TeletexPersonalName._ext = None
     
     #-----< teletex-organizational-unit-names >-----#
-    teletex_organizational_unit_names = INT(name='teletex-organizational-unit-names', mode=MODE_VALUE)
+    teletex_organizational_unit_names = INT(name=u'teletex-organizational-unit-names', mode=MODE_VALUE)
     teletex_organizational_unit_names._val = 5
     
     #-----< TeletexOrganizationalUnitNames >-----#
-    TeletexOrganizationalUnitNames = SEQ_OF(name='TeletexOrganizationalUnitNames', mode=MODE_TYPE)
+    TeletexOrganizationalUnitNames = SEQ_OF(name=u'TeletexOrganizationalUnitNames', mode=MODE_TYPE)
     _TeletexOrganizationalUnitNames__item_ = STR_TELE(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX1Explicit88', 'TeletexOrganizationalUnitName')))
     TeletexOrganizationalUnitNames._cont = _TeletexOrganizationalUnitNames__item_
     TeletexOrganizationalUnitNames._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=4)], ev=None, er=[])
     
     #-----< TeletexOrganizationalUnitName >-----#
-    TeletexOrganizationalUnitName = STR_TELE(name='TeletexOrganizationalUnitName', mode=MODE_TYPE)
+    TeletexOrganizationalUnitName = STR_TELE(name=u'TeletexOrganizationalUnitName', mode=MODE_TYPE)
     TeletexOrganizationalUnitName._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=32)], ev=None, er=[])
     
     #-----< pds-name >-----#
-    pds_name = INT(name='pds-name', mode=MODE_VALUE)
+    pds_name = INT(name=u'pds-name', mode=MODE_VALUE)
     pds_name._val = 7
     
     #-----< PDSName >-----#
-    PDSName = STR_PRINT(name='PDSName', mode=MODE_TYPE)
+    PDSName = STR_PRINT(name=u'PDSName', mode=MODE_TYPE)
     PDSName._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=16)], ev=None, er=[])
     
     #-----< physical-delivery-country-name >-----#
-    physical_delivery_country_name = INT(name='physical-delivery-country-name', mode=MODE_VALUE)
+    physical_delivery_country_name = INT(name=u'physical-delivery-country-name', mode=MODE_VALUE)
     physical_delivery_country_name._val = 8
     
     #-----< PhysicalDeliveryCountryName >-----#
-    PhysicalDeliveryCountryName = CHOICE(name='PhysicalDeliveryCountryName', mode=MODE_TYPE)
-    _PhysicalDeliveryCountryName_x121_dcc_code = STR_NUM(name='x121-dcc-code', mode=MODE_TYPE)
+    PhysicalDeliveryCountryName = CHOICE(name=u'PhysicalDeliveryCountryName', mode=MODE_TYPE)
+    _PhysicalDeliveryCountryName_x121_dcc_code = STR_NUM(name=u'x121-dcc-code', mode=MODE_TYPE)
     _PhysicalDeliveryCountryName_x121_dcc_code._const_sz = ASN1Set(rv=[3], rr=[], ev=None, er=[])
-    _PhysicalDeliveryCountryName_iso_3166_alpha2_code = STR_PRINT(name='iso-3166-alpha2-code', mode=MODE_TYPE)
+    _PhysicalDeliveryCountryName_iso_3166_alpha2_code = STR_PRINT(name=u'iso-3166-alpha2-code', mode=MODE_TYPE)
     _PhysicalDeliveryCountryName_iso_3166_alpha2_code._const_sz = ASN1Set(rv=[2], rr=[], ev=None, er=[])
     PhysicalDeliveryCountryName._cont = ASN1Dict([
-        ('x121-dcc-code', _PhysicalDeliveryCountryName_x121_dcc_code),
-        ('iso-3166-alpha2-code', _PhysicalDeliveryCountryName_iso_3166_alpha2_code),
+        (u'x121-dcc-code', _PhysicalDeliveryCountryName_x121_dcc_code),
+        (u'iso-3166-alpha2-code', _PhysicalDeliveryCountryName_iso_3166_alpha2_code),
         ])
     PhysicalDeliveryCountryName._ext = None
     
     #-----< postal-code >-----#
-    postal_code = INT(name='postal-code', mode=MODE_VALUE)
+    postal_code = INT(name=u'postal-code', mode=MODE_VALUE)
     postal_code._val = 9
     
     #-----< PostalCode >-----#
-    PostalCode = CHOICE(name='PostalCode', mode=MODE_TYPE)
-    _PostalCode_numeric_code = STR_NUM(name='numeric-code', mode=MODE_TYPE)
+    PostalCode = CHOICE(name=u'PostalCode', mode=MODE_TYPE)
+    _PostalCode_numeric_code = STR_NUM(name=u'numeric-code', mode=MODE_TYPE)
     _PostalCode_numeric_code._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=16)], ev=None, er=[])
-    _PostalCode_printable_code = STR_PRINT(name='printable-code', mode=MODE_TYPE)
+    _PostalCode_printable_code = STR_PRINT(name=u'printable-code', mode=MODE_TYPE)
     _PostalCode_printable_code._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=16)], ev=None, er=[])
     PostalCode._cont = ASN1Dict([
-        ('numeric-code', _PostalCode_numeric_code),
-        ('printable-code', _PostalCode_printable_code),
+        (u'numeric-code', _PostalCode_numeric_code),
+        (u'printable-code', _PostalCode_printable_code),
         ])
     PostalCode._ext = None
     
     #-----< physical-delivery-office-name >-----#
-    physical_delivery_office_name = INT(name='physical-delivery-office-name', mode=MODE_VALUE)
+    physical_delivery_office_name = INT(name=u'physical-delivery-office-name', mode=MODE_VALUE)
     physical_delivery_office_name._val = 10
     
     #-----< PhysicalDeliveryOfficeName >-----#
-    PhysicalDeliveryOfficeName = SET(name='PhysicalDeliveryOfficeName', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX1Explicit88', 'PDSParameter')))
+    PhysicalDeliveryOfficeName = SET(name=u'PhysicalDeliveryOfficeName', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX1Explicit88', 'PDSParameter')))
     
     #-----< physical-delivery-office-number >-----#
-    physical_delivery_office_number = INT(name='physical-delivery-office-number', mode=MODE_VALUE)
+    physical_delivery_office_number = INT(name=u'physical-delivery-office-number', mode=MODE_VALUE)
     physical_delivery_office_number._val = 11
     
     #-----< PhysicalDeliveryOfficeNumber >-----#
-    PhysicalDeliveryOfficeNumber = SET(name='PhysicalDeliveryOfficeNumber', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX1Explicit88', 'PDSParameter')))
+    PhysicalDeliveryOfficeNumber = SET(name=u'PhysicalDeliveryOfficeNumber', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX1Explicit88', 'PDSParameter')))
     
     #-----< extension-OR-address-components >-----#
-    extension_OR_address_components = INT(name='extension-OR-address-components', mode=MODE_VALUE)
+    extension_OR_address_components = INT(name=u'extension-OR-address-components', mode=MODE_VALUE)
     extension_OR_address_components._val = 12
     
     #-----< ExtensionORAddressComponents >-----#
-    ExtensionORAddressComponents = SET(name='ExtensionORAddressComponents', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX1Explicit88', 'PDSParameter')))
+    ExtensionORAddressComponents = SET(name=u'ExtensionORAddressComponents', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX1Explicit88', 'PDSParameter')))
     
     #-----< physical-delivery-personal-name >-----#
-    physical_delivery_personal_name = INT(name='physical-delivery-personal-name', mode=MODE_VALUE)
+    physical_delivery_personal_name = INT(name=u'physical-delivery-personal-name', mode=MODE_VALUE)
     physical_delivery_personal_name._val = 13
     
     #-----< PhysicalDeliveryPersonalName >-----#
-    PhysicalDeliveryPersonalName = SET(name='PhysicalDeliveryPersonalName', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX1Explicit88', 'PDSParameter')))
+    PhysicalDeliveryPersonalName = SET(name=u'PhysicalDeliveryPersonalName', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX1Explicit88', 'PDSParameter')))
     
     #-----< physical-delivery-organization-name >-----#
-    physical_delivery_organization_name = INT(name='physical-delivery-organization-name', mode=MODE_VALUE)
+    physical_delivery_organization_name = INT(name=u'physical-delivery-organization-name', mode=MODE_VALUE)
     physical_delivery_organization_name._val = 14
     
     #-----< PhysicalDeliveryOrganizationName >-----#
-    PhysicalDeliveryOrganizationName = SET(name='PhysicalDeliveryOrganizationName', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX1Explicit88', 'PDSParameter')))
+    PhysicalDeliveryOrganizationName = SET(name=u'PhysicalDeliveryOrganizationName', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX1Explicit88', 'PDSParameter')))
     
     #-----< extension-physical-delivery-address-components >-----#
-    extension_physical_delivery_address_components = INT(name='extension-physical-delivery-address-components', mode=MODE_VALUE)
+    extension_physical_delivery_address_components = INT(name=u'extension-physical-delivery-address-components', mode=MODE_VALUE)
     extension_physical_delivery_address_components._val = 15
     
     #-----< ExtensionPhysicalDeliveryAddressComponents >-----#
-    ExtensionPhysicalDeliveryAddressComponents = SET(name='ExtensionPhysicalDeliveryAddressComponents', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX1Explicit88', 'PDSParameter')))
+    ExtensionPhysicalDeliveryAddressComponents = SET(name=u'ExtensionPhysicalDeliveryAddressComponents', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX1Explicit88', 'PDSParameter')))
     
     #-----< unformatted-postal-address >-----#
-    unformatted_postal_address = INT(name='unformatted-postal-address', mode=MODE_VALUE)
+    unformatted_postal_address = INT(name=u'unformatted-postal-address', mode=MODE_VALUE)
     unformatted_postal_address._val = 16
     
     #-----< UnformattedPostalAddress >-----#
-    UnformattedPostalAddress = SET(name='UnformattedPostalAddress', mode=MODE_TYPE)
-    _UnformattedPostalAddress_printable_address = SEQ_OF(name='printable-address', mode=MODE_TYPE, opt=True)
+    UnformattedPostalAddress = SET(name=u'UnformattedPostalAddress', mode=MODE_TYPE)
+    _UnformattedPostalAddress_printable_address = SEQ_OF(name=u'printable-address', mode=MODE_TYPE, opt=True)
     __UnformattedPostalAddress_printable_address__item_ = STR_PRINT(name='_item_', mode=MODE_TYPE)
     __UnformattedPostalAddress_printable_address__item_._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=30)], ev=None, er=[])
     _UnformattedPostalAddress_printable_address._cont = __UnformattedPostalAddress_printable_address__item_
     _UnformattedPostalAddress_printable_address._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=6)], ev=None, er=[])
-    _UnformattedPostalAddress_teletex_string = STR_TELE(name='teletex-string', mode=MODE_TYPE, opt=True)
+    _UnformattedPostalAddress_teletex_string = STR_TELE(name=u'teletex-string', mode=MODE_TYPE, opt=True)
     _UnformattedPostalAddress_teletex_string._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=180)], ev=None, er=[])
     UnformattedPostalAddress._cont = ASN1Dict([
-        ('printable-address', _UnformattedPostalAddress_printable_address),
-        ('teletex-string', _UnformattedPostalAddress_teletex_string),
+        (u'printable-address', _UnformattedPostalAddress_printable_address),
+        (u'teletex-string', _UnformattedPostalAddress_teletex_string),
         ])
     UnformattedPostalAddress._ext = None
     
     #-----< street-address >-----#
-    street_address = INT(name='street-address', mode=MODE_VALUE)
+    street_address = INT(name=u'street-address', mode=MODE_VALUE)
     street_address._val = 17
     
     #-----< StreetAddress >-----#
-    StreetAddress = SET(name='StreetAddress', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX1Explicit88', 'PDSParameter')))
+    StreetAddress = SET(name=u'StreetAddress', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX1Explicit88', 'PDSParameter')))
     
     #-----< post-office-box-address >-----#
-    post_office_box_address = INT(name='post-office-box-address', mode=MODE_VALUE)
+    post_office_box_address = INT(name=u'post-office-box-address', mode=MODE_VALUE)
     post_office_box_address._val = 18
     
     #-----< PostOfficeBoxAddress >-----#
-    PostOfficeBoxAddress = SET(name='PostOfficeBoxAddress', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX1Explicit88', 'PDSParameter')))
+    PostOfficeBoxAddress = SET(name=u'PostOfficeBoxAddress', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX1Explicit88', 'PDSParameter')))
     
     #-----< poste-restante-address >-----#
-    poste_restante_address = INT(name='poste-restante-address', mode=MODE_VALUE)
+    poste_restante_address = INT(name=u'poste-restante-address', mode=MODE_VALUE)
     poste_restante_address._val = 19
     
     #-----< PosteRestanteAddress >-----#
-    PosteRestanteAddress = SET(name='PosteRestanteAddress', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX1Explicit88', 'PDSParameter')))
+    PosteRestanteAddress = SET(name=u'PosteRestanteAddress', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX1Explicit88', 'PDSParameter')))
     
     #-----< unique-postal-name >-----#
-    unique_postal_name = INT(name='unique-postal-name', mode=MODE_VALUE)
+    unique_postal_name = INT(name=u'unique-postal-name', mode=MODE_VALUE)
     unique_postal_name._val = 20
     
     #-----< UniquePostalName >-----#
-    UniquePostalName = SET(name='UniquePostalName', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX1Explicit88', 'PDSParameter')))
+    UniquePostalName = SET(name=u'UniquePostalName', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX1Explicit88', 'PDSParameter')))
     
     #-----< local-postal-attributes >-----#
-    local_postal_attributes = INT(name='local-postal-attributes', mode=MODE_VALUE)
+    local_postal_attributes = INT(name=u'local-postal-attributes', mode=MODE_VALUE)
     local_postal_attributes._val = 21
     
     #-----< LocalPostalAttributes >-----#
-    LocalPostalAttributes = SET(name='LocalPostalAttributes', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX1Explicit88', 'PDSParameter')))
+    LocalPostalAttributes = SET(name=u'LocalPostalAttributes', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX1Explicit88', 'PDSParameter')))
     
     #-----< PDSParameter >-----#
-    PDSParameter = SET(name='PDSParameter', mode=MODE_TYPE)
-    _PDSParameter_printable_string = STR_PRINT(name='printable-string', mode=MODE_TYPE, opt=True)
+    PDSParameter = SET(name=u'PDSParameter', mode=MODE_TYPE)
+    _PDSParameter_printable_string = STR_PRINT(name=u'printable-string', mode=MODE_TYPE, opt=True)
     _PDSParameter_printable_string._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=30)], ev=None, er=[])
-    _PDSParameter_teletex_string = STR_TELE(name='teletex-string', mode=MODE_TYPE, opt=True)
+    _PDSParameter_teletex_string = STR_TELE(name=u'teletex-string', mode=MODE_TYPE, opt=True)
     _PDSParameter_teletex_string._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=30)], ev=None, er=[])
     PDSParameter._cont = ASN1Dict([
-        ('printable-string', _PDSParameter_printable_string),
-        ('teletex-string', _PDSParameter_teletex_string),
+        (u'printable-string', _PDSParameter_printable_string),
+        (u'teletex-string', _PDSParameter_teletex_string),
         ])
     PDSParameter._ext = None
     
     #-----< extended-network-address >-----#
-    extended_network_address = INT(name='extended-network-address', mode=MODE_VALUE)
+    extended_network_address = INT(name=u'extended-network-address', mode=MODE_VALUE)
     extended_network_address._val = 22
     
     #-----< ExtendedNetworkAddress >-----#
-    ExtendedNetworkAddress = CHOICE(name='ExtendedNetworkAddress', mode=MODE_TYPE)
-    _ExtendedNetworkAddress_e163_4_address = SEQ(name='e163-4-address', mode=MODE_TYPE)
-    __ExtendedNetworkAddress_e163_4_address_number = STR_NUM(name='number', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    ExtendedNetworkAddress = CHOICE(name=u'ExtendedNetworkAddress', mode=MODE_TYPE)
+    _ExtendedNetworkAddress_e163_4_address = SEQ(name=u'e163-4-address', mode=MODE_TYPE)
+    __ExtendedNetworkAddress_e163_4_address_number = STR_NUM(name=u'number', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     __ExtendedNetworkAddress_e163_4_address_number._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=15)], ev=None, er=[])
-    __ExtendedNetworkAddress_e163_4_address_sub_address = STR_NUM(name='sub-address', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    __ExtendedNetworkAddress_e163_4_address_sub_address = STR_NUM(name=u'sub-address', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     __ExtendedNetworkAddress_e163_4_address_sub_address._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=40)], ev=None, er=[])
     _ExtendedNetworkAddress_e163_4_address._cont = ASN1Dict([
-        ('number', __ExtendedNetworkAddress_e163_4_address_number),
-        ('sub-address', __ExtendedNetworkAddress_e163_4_address_sub_address),
+        (u'number', __ExtendedNetworkAddress_e163_4_address_number),
+        (u'sub-address', __ExtendedNetworkAddress_e163_4_address_sub_address),
         ])
     _ExtendedNetworkAddress_e163_4_address._ext = None
-    _ExtendedNetworkAddress_psap_address = SEQ(name='psap-address', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PKIX1Explicit88', 'PresentationAddress')))
+    _ExtendedNetworkAddress_psap_address = SEQ(name=u'psap-address', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('PKIX1Explicit88', 'PresentationAddress')))
     ExtendedNetworkAddress._cont = ASN1Dict([
-        ('e163-4-address', _ExtendedNetworkAddress_e163_4_address),
-        ('psap-address', _ExtendedNetworkAddress_psap_address),
+        (u'e163-4-address', _ExtendedNetworkAddress_e163_4_address),
+        (u'psap-address', _ExtendedNetworkAddress_psap_address),
         ])
     ExtendedNetworkAddress._ext = None
     
     #-----< PresentationAddress >-----#
-    PresentationAddress = SEQ(name='PresentationAddress', mode=MODE_TYPE)
-    _PresentationAddress_pSelector = OCT_STR(name='pSelector', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), opt=True)
-    _PresentationAddress_sSelector = OCT_STR(name='sSelector', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), opt=True)
-    _PresentationAddress_tSelector = OCT_STR(name='tSelector', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), opt=True)
-    _PresentationAddress_nAddresses = SET_OF(name='nAddresses', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
+    PresentationAddress = SEQ(name=u'PresentationAddress', mode=MODE_TYPE)
+    _PresentationAddress_pSelector = OCT_STR(name=u'pSelector', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), opt=True)
+    _PresentationAddress_sSelector = OCT_STR(name=u'sSelector', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), opt=True)
+    _PresentationAddress_tSelector = OCT_STR(name=u'tSelector', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), opt=True)
+    _PresentationAddress_nAddresses = SET_OF(name=u'nAddresses', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
     __PresentationAddress_nAddresses__item_ = OCT_STR(name='_item_', mode=MODE_TYPE)
     _PresentationAddress_nAddresses._cont = __PresentationAddress_nAddresses__item_
     _PresentationAddress_nAddresses._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=None)], ev=None, er=[])
     PresentationAddress._cont = ASN1Dict([
-        ('pSelector', _PresentationAddress_pSelector),
-        ('sSelector', _PresentationAddress_sSelector),
-        ('tSelector', _PresentationAddress_tSelector),
-        ('nAddresses', _PresentationAddress_nAddresses),
+        (u'pSelector', _PresentationAddress_pSelector),
+        (u'sSelector', _PresentationAddress_sSelector),
+        (u'tSelector', _PresentationAddress_tSelector),
+        (u'nAddresses', _PresentationAddress_nAddresses),
         ])
     PresentationAddress._ext = None
     
     #-----< terminal-type >-----#
-    terminal_type = INT(name='terminal-type', mode=MODE_VALUE)
+    terminal_type = INT(name=u'terminal-type', mode=MODE_VALUE)
     terminal_type._val = 23
     
     #-----< TerminalType >-----#
-    TerminalType = INT(name='TerminalType', mode=MODE_TYPE)
-    TerminalType._cont = ASN1Dict([('telex', 3), ('teletex', 4), ('g3-facsimile', 5), ('g4-facsimile', 6), ('ia5-terminal', 7), ('videotex', 8)])
+    TerminalType = INT(name=u'TerminalType', mode=MODE_TYPE)
+    TerminalType._cont = ASN1Dict([(u'telex', 3), (u'teletex', 4), (u'g3-facsimile', 5), (u'g4-facsimile', 6), (u'ia5-terminal', 7), (u'videotex', 8)])
     TerminalType._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=256)], ev=None, er=[])
     
     #-----< teletex-domain-defined-attributes >-----#
-    teletex_domain_defined_attributes = INT(name='teletex-domain-defined-attributes', mode=MODE_VALUE)
+    teletex_domain_defined_attributes = INT(name=u'teletex-domain-defined-attributes', mode=MODE_VALUE)
     teletex_domain_defined_attributes._val = 6
     
     #-----< TeletexDomainDefinedAttributes >-----#
-    TeletexDomainDefinedAttributes = SEQ_OF(name='TeletexDomainDefinedAttributes', mode=MODE_TYPE)
+    TeletexDomainDefinedAttributes = SEQ_OF(name=u'TeletexDomainDefinedAttributes', mode=MODE_TYPE)
     _TeletexDomainDefinedAttributes__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX1Explicit88', 'TeletexDomainDefinedAttribute')))
     TeletexDomainDefinedAttributes._cont = _TeletexDomainDefinedAttributes__item_
     TeletexDomainDefinedAttributes._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=4)], ev=None, er=[])
     
     #-----< TeletexDomainDefinedAttribute >-----#
-    TeletexDomainDefinedAttribute = SEQ(name='TeletexDomainDefinedAttribute', mode=MODE_TYPE)
-    _TeletexDomainDefinedAttribute_type = STR_TELE(name='type', mode=MODE_TYPE)
+    TeletexDomainDefinedAttribute = SEQ(name=u'TeletexDomainDefinedAttribute', mode=MODE_TYPE)
+    _TeletexDomainDefinedAttribute_type = STR_TELE(name=u'type', mode=MODE_TYPE)
     _TeletexDomainDefinedAttribute_type._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=8)], ev=None, er=[])
-    _TeletexDomainDefinedAttribute_value = STR_TELE(name='value', mode=MODE_TYPE)
+    _TeletexDomainDefinedAttribute_value = STR_TELE(name=u'value', mode=MODE_TYPE)
     _TeletexDomainDefinedAttribute_value._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=128)], ev=None, er=[])
     TeletexDomainDefinedAttribute._cont = ASN1Dict([
-        ('type', _TeletexDomainDefinedAttribute_type),
-        ('value', _TeletexDomainDefinedAttribute_value),
+        (u'type', _TeletexDomainDefinedAttribute_type),
+        (u'value', _TeletexDomainDefinedAttribute_value),
         ])
     TeletexDomainDefinedAttribute._ext = None
     
     #-----< ub-name >-----#
-    ub_name = INT(name='ub-name', mode=MODE_VALUE)
+    ub_name = INT(name=u'ub-name', mode=MODE_VALUE)
     ub_name._val = 32768
     
     #-----< ub-common-name >-----#
-    ub_common_name = INT(name='ub-common-name', mode=MODE_VALUE)
+    ub_common_name = INT(name=u'ub-common-name', mode=MODE_VALUE)
     ub_common_name._val = 64
     
     #-----< ub-locality-name >-----#
-    ub_locality_name = INT(name='ub-locality-name', mode=MODE_VALUE)
+    ub_locality_name = INT(name=u'ub-locality-name', mode=MODE_VALUE)
     ub_locality_name._val = 128
     
     #-----< ub-state-name >-----#
-    ub_state_name = INT(name='ub-state-name', mode=MODE_VALUE)
+    ub_state_name = INT(name=u'ub-state-name', mode=MODE_VALUE)
     ub_state_name._val = 128
     
     #-----< ub-organization-name >-----#
-    ub_organization_name = INT(name='ub-organization-name', mode=MODE_VALUE)
+    ub_organization_name = INT(name=u'ub-organization-name', mode=MODE_VALUE)
     ub_organization_name._val = 64
     
     #-----< ub-organizational-unit-name >-----#
-    ub_organizational_unit_name = INT(name='ub-organizational-unit-name', mode=MODE_VALUE)
+    ub_organizational_unit_name = INT(name=u'ub-organizational-unit-name', mode=MODE_VALUE)
     ub_organizational_unit_name._val = 64
     
     #-----< ub-title >-----#
-    ub_title = INT(name='ub-title', mode=MODE_VALUE)
+    ub_title = INT(name=u'ub-title', mode=MODE_VALUE)
     ub_title._val = 64
     
     #-----< ub-serial-number >-----#
-    ub_serial_number = INT(name='ub-serial-number', mode=MODE_VALUE)
+    ub_serial_number = INT(name=u'ub-serial-number', mode=MODE_VALUE)
     ub_serial_number._val = 64
     
     #-----< ub-match >-----#
-    ub_match = INT(name='ub-match', mode=MODE_VALUE)
+    ub_match = INT(name=u'ub-match', mode=MODE_VALUE)
     ub_match._val = 128
     
     #-----< ub-emailaddress-length >-----#
-    ub_emailaddress_length = INT(name='ub-emailaddress-length', mode=MODE_VALUE)
+    ub_emailaddress_length = INT(name=u'ub-emailaddress-length', mode=MODE_VALUE)
     ub_emailaddress_length._val = 255
     
     #-----< ub-common-name-length >-----#
-    ub_common_name_length = INT(name='ub-common-name-length', mode=MODE_VALUE)
+    ub_common_name_length = INT(name=u'ub-common-name-length', mode=MODE_VALUE)
     ub_common_name_length._val = 64
     
     #-----< ub-country-name-alpha-length >-----#
-    ub_country_name_alpha_length = INT(name='ub-country-name-alpha-length', mode=MODE_VALUE)
+    ub_country_name_alpha_length = INT(name=u'ub-country-name-alpha-length', mode=MODE_VALUE)
     ub_country_name_alpha_length._val = 2
     
     #-----< ub-country-name-numeric-length >-----#
-    ub_country_name_numeric_length = INT(name='ub-country-name-numeric-length', mode=MODE_VALUE)
+    ub_country_name_numeric_length = INT(name=u'ub-country-name-numeric-length', mode=MODE_VALUE)
     ub_country_name_numeric_length._val = 3
     
     #-----< ub-domain-defined-attributes >-----#
-    ub_domain_defined_attributes = INT(name='ub-domain-defined-attributes', mode=MODE_VALUE)
+    ub_domain_defined_attributes = INT(name=u'ub-domain-defined-attributes', mode=MODE_VALUE)
     ub_domain_defined_attributes._val = 4
     
     #-----< ub-domain-defined-attribute-type-length >-----#
-    ub_domain_defined_attribute_type_length = INT(name='ub-domain-defined-attribute-type-length', mode=MODE_VALUE)
+    ub_domain_defined_attribute_type_length = INT(name=u'ub-domain-defined-attribute-type-length', mode=MODE_VALUE)
     ub_domain_defined_attribute_type_length._val = 8
     
     #-----< ub-domain-defined-attribute-value-length >-----#
-    ub_domain_defined_attribute_value_length = INT(name='ub-domain-defined-attribute-value-length', mode=MODE_VALUE)
+    ub_domain_defined_attribute_value_length = INT(name=u'ub-domain-defined-attribute-value-length', mode=MODE_VALUE)
     ub_domain_defined_attribute_value_length._val = 128
     
     #-----< ub-domain-name-length >-----#
-    ub_domain_name_length = INT(name='ub-domain-name-length', mode=MODE_VALUE)
+    ub_domain_name_length = INT(name=u'ub-domain-name-length', mode=MODE_VALUE)
     ub_domain_name_length._val = 16
     
     #-----< ub-extension-attributes >-----#
-    ub_extension_attributes = INT(name='ub-extension-attributes', mode=MODE_VALUE)
+    ub_extension_attributes = INT(name=u'ub-extension-attributes', mode=MODE_VALUE)
     ub_extension_attributes._val = 256
     
     #-----< ub-e163-4-number-length >-----#
-    ub_e163_4_number_length = INT(name='ub-e163-4-number-length', mode=MODE_VALUE)
+    ub_e163_4_number_length = INT(name=u'ub-e163-4-number-length', mode=MODE_VALUE)
     ub_e163_4_number_length._val = 15
     
     #-----< ub-e163-4-sub-address-length >-----#
-    ub_e163_4_sub_address_length = INT(name='ub-e163-4-sub-address-length', mode=MODE_VALUE)
+    ub_e163_4_sub_address_length = INT(name=u'ub-e163-4-sub-address-length', mode=MODE_VALUE)
     ub_e163_4_sub_address_length._val = 40
     
     #-----< ub-generation-qualifier-length >-----#
-    ub_generation_qualifier_length = INT(name='ub-generation-qualifier-length', mode=MODE_VALUE)
+    ub_generation_qualifier_length = INT(name=u'ub-generation-qualifier-length', mode=MODE_VALUE)
     ub_generation_qualifier_length._val = 3
     
     #-----< ub-given-name-length >-----#
-    ub_given_name_length = INT(name='ub-given-name-length', mode=MODE_VALUE)
+    ub_given_name_length = INT(name=u'ub-given-name-length', mode=MODE_VALUE)
     ub_given_name_length._val = 16
     
     #-----< ub-initials-length >-----#
-    ub_initials_length = INT(name='ub-initials-length', mode=MODE_VALUE)
+    ub_initials_length = INT(name=u'ub-initials-length', mode=MODE_VALUE)
     ub_initials_length._val = 5
     
     #-----< ub-integer-options >-----#
-    ub_integer_options = INT(name='ub-integer-options', mode=MODE_VALUE)
+    ub_integer_options = INT(name=u'ub-integer-options', mode=MODE_VALUE)
     ub_integer_options._val = 256
     
     #-----< ub-numeric-user-id-length >-----#
-    ub_numeric_user_id_length = INT(name='ub-numeric-user-id-length', mode=MODE_VALUE)
+    ub_numeric_user_id_length = INT(name=u'ub-numeric-user-id-length', mode=MODE_VALUE)
     ub_numeric_user_id_length._val = 32
     
     #-----< ub-organization-name-length >-----#
-    ub_organization_name_length = INT(name='ub-organization-name-length', mode=MODE_VALUE)
+    ub_organization_name_length = INT(name=u'ub-organization-name-length', mode=MODE_VALUE)
     ub_organization_name_length._val = 64
     
     #-----< ub-organizational-unit-name-length >-----#
-    ub_organizational_unit_name_length = INT(name='ub-organizational-unit-name-length', mode=MODE_VALUE)
+    ub_organizational_unit_name_length = INT(name=u'ub-organizational-unit-name-length', mode=MODE_VALUE)
     ub_organizational_unit_name_length._val = 32
     
     #-----< ub-organizational-units >-----#
-    ub_organizational_units = INT(name='ub-organizational-units', mode=MODE_VALUE)
+    ub_organizational_units = INT(name=u'ub-organizational-units', mode=MODE_VALUE)
     ub_organizational_units._val = 4
     
     #-----< ub-pds-name-length >-----#
-    ub_pds_name_length = INT(name='ub-pds-name-length', mode=MODE_VALUE)
+    ub_pds_name_length = INT(name=u'ub-pds-name-length', mode=MODE_VALUE)
     ub_pds_name_length._val = 16
     
     #-----< ub-pds-parameter-length >-----#
-    ub_pds_parameter_length = INT(name='ub-pds-parameter-length', mode=MODE_VALUE)
+    ub_pds_parameter_length = INT(name=u'ub-pds-parameter-length', mode=MODE_VALUE)
     ub_pds_parameter_length._val = 30
     
     #-----< ub-pds-physical-address-lines >-----#
-    ub_pds_physical_address_lines = INT(name='ub-pds-physical-address-lines', mode=MODE_VALUE)
+    ub_pds_physical_address_lines = INT(name=u'ub-pds-physical-address-lines', mode=MODE_VALUE)
     ub_pds_physical_address_lines._val = 6
     
     #-----< ub-postal-code-length >-----#
-    ub_postal_code_length = INT(name='ub-postal-code-length', mode=MODE_VALUE)
+    ub_postal_code_length = INT(name=u'ub-postal-code-length', mode=MODE_VALUE)
     ub_postal_code_length._val = 16
     
     #-----< ub-pseudonym >-----#
-    ub_pseudonym = INT(name='ub-pseudonym', mode=MODE_VALUE)
+    ub_pseudonym = INT(name=u'ub-pseudonym', mode=MODE_VALUE)
     ub_pseudonym._val = 128
     
     #-----< ub-surname-length >-----#
-    ub_surname_length = INT(name='ub-surname-length', mode=MODE_VALUE)
+    ub_surname_length = INT(name=u'ub-surname-length', mode=MODE_VALUE)
     ub_surname_length._val = 40
     
     #-----< ub-terminal-id-length >-----#
-    ub_terminal_id_length = INT(name='ub-terminal-id-length', mode=MODE_VALUE)
+    ub_terminal_id_length = INT(name=u'ub-terminal-id-length', mode=MODE_VALUE)
     ub_terminal_id_length._val = 24
     
     #-----< ub-unformatted-address-length >-----#
-    ub_unformatted_address_length = INT(name='ub-unformatted-address-length', mode=MODE_VALUE)
+    ub_unformatted_address_length = INT(name=u'ub-unformatted-address-length', mode=MODE_VALUE)
     ub_unformatted_address_length._val = 180
     
     #-----< ub-x121-address-length >-----#
-    ub_x121_address_length = INT(name='ub-x121-address-length', mode=MODE_VALUE)
+    ub_x121_address_length = INT(name=u'ub-x121-address-length', mode=MODE_VALUE)
     ub_x121_address_length._val = 16
     
     _all_ = [
@@ -1798,76 +1798,76 @@ class PKIX1Explicit88:
 
 class CryptographicMessageSyntaxAlgorithms:
 
-    _name_  = 'CryptographicMessageSyntaxAlgorithms'
+    _name_  = u'CryptographicMessageSyntaxAlgorithms'
     _oid_   = [1, 2, 840, 113549, 1, 9, 16, 0, 16]
     
     _obj_ = [
-        'sha-1',
-        'md5',
-        'id-dsa',
-        'id-dsa-with-sha1',
-        'rsaEncryption',
-        'md5WithRSAEncryption',
-        'sha1WithRSAEncryption',
-        'dh-public-number',
-        'id-alg-ESDH',
-        'id-alg-SSDH',
-        'id-alg-CMS3DESwrap',
-        'id-alg-CMSRC2wrap',
-        'des-ede3-cbc',
-        'rc2-cbc',
-        'hMAC-SHA1',
-        'id-PBKDF2',
-        'Dss-Pub-Key',
-        'RSAPublicKey',
-        'DHPublicKey',
-        'Dss-Sig-Value',
-        'Dss-Parms',
-        'DHDomainParameters',
-        'ValidationParms',
-        'KeyWrapAlgorithm',
-        'RC2wrapParameter',
-        'RC2ParameterVersion',
-        'CBCParameter',
-        'IV',
-        'RC2CBCParameter',
-        'PBKDF2-params',
+        u'sha-1',
+        u'md5',
+        u'id-dsa',
+        u'id-dsa-with-sha1',
+        u'rsaEncryption',
+        u'md5WithRSAEncryption',
+        u'sha1WithRSAEncryption',
+        u'dh-public-number',
+        u'id-alg-ESDH',
+        u'id-alg-SSDH',
+        u'id-alg-CMS3DESwrap',
+        u'id-alg-CMSRC2wrap',
+        u'des-ede3-cbc',
+        u'rc2-cbc',
+        u'hMAC-SHA1',
+        u'id-PBKDF2',
+        u'Dss-Pub-Key',
+        u'RSAPublicKey',
+        u'DHPublicKey',
+        u'Dss-Sig-Value',
+        u'Dss-Parms',
+        u'DHDomainParameters',
+        u'ValidationParms',
+        u'KeyWrapAlgorithm',
+        u'RC2wrapParameter',
+        u'RC2ParameterVersion',
+        u'CBCParameter',
+        u'IV',
+        u'RC2CBCParameter',
+        u'PBKDF2-params',
         ]
     _type_ = [
-        'Dss-Pub-Key',
-        'RSAPublicKey',
-        'DHPublicKey',
-        'Dss-Sig-Value',
-        'Dss-Parms',
-        'DHDomainParameters',
-        'ValidationParms',
-        'KeyWrapAlgorithm',
-        'RC2wrapParameter',
-        'RC2ParameterVersion',
-        'CBCParameter',
-        'IV',
-        'RC2CBCParameter',
-        'PBKDF2-params',
+        u'Dss-Pub-Key',
+        u'RSAPublicKey',
+        u'DHPublicKey',
+        u'Dss-Sig-Value',
+        u'Dss-Parms',
+        u'DHDomainParameters',
+        u'ValidationParms',
+        u'KeyWrapAlgorithm',
+        u'RC2wrapParameter',
+        u'RC2ParameterVersion',
+        u'CBCParameter',
+        u'IV',
+        u'RC2CBCParameter',
+        u'PBKDF2-params',
         ]
     _set_ = [
         ]
     _val_ = [
-        'sha-1',
-        'md5',
-        'id-dsa',
-        'id-dsa-with-sha1',
-        'rsaEncryption',
-        'md5WithRSAEncryption',
-        'sha1WithRSAEncryption',
-        'dh-public-number',
-        'id-alg-ESDH',
-        'id-alg-SSDH',
-        'id-alg-CMS3DESwrap',
-        'id-alg-CMSRC2wrap',
-        'des-ede3-cbc',
-        'rc2-cbc',
-        'hMAC-SHA1',
-        'id-PBKDF2',
+        u'sha-1',
+        u'md5',
+        u'id-dsa',
+        u'id-dsa-with-sha1',
+        u'rsaEncryption',
+        u'md5WithRSAEncryption',
+        u'sha1WithRSAEncryption',
+        u'dh-public-number',
+        u'id-alg-ESDH',
+        u'id-alg-SSDH',
+        u'id-alg-CMS3DESwrap',
+        u'id-alg-CMSRC2wrap',
+        u'des-ede3-cbc',
+        u'rc2-cbc',
+        u'hMAC-SHA1',
+        u'id-PBKDF2',
         ]
     _class_ = [
         ]
@@ -1875,179 +1875,179 @@ class CryptographicMessageSyntaxAlgorithms:
         ]
     
     #-----< sha-1 >-----#
-    sha_1 = OID(name='sha-1', mode=MODE_VALUE)
+    sha_1 = OID(name=u'sha-1', mode=MODE_VALUE)
     sha_1._val = (1, 3, 14, 3, 2, 26)
     
     #-----< md5 >-----#
-    md5 = OID(name='md5', mode=MODE_VALUE)
+    md5 = OID(name=u'md5', mode=MODE_VALUE)
     md5._val = (1, 2, 840, 113549, 2, 5)
     
     #-----< id-dsa >-----#
-    id_dsa = OID(name='id-dsa', mode=MODE_VALUE)
+    id_dsa = OID(name=u'id-dsa', mode=MODE_VALUE)
     id_dsa._val = (1, 2, 840, 10040, 4, 1)
     
     #-----< id-dsa-with-sha1 >-----#
-    id_dsa_with_sha1 = OID(name='id-dsa-with-sha1', mode=MODE_VALUE)
+    id_dsa_with_sha1 = OID(name=u'id-dsa-with-sha1', mode=MODE_VALUE)
     id_dsa_with_sha1._val = (1, 2, 840, 10040, 4, 3)
     
     #-----< rsaEncryption >-----#
-    rsaEncryption = OID(name='rsaEncryption', mode=MODE_VALUE)
+    rsaEncryption = OID(name=u'rsaEncryption', mode=MODE_VALUE)
     rsaEncryption._val = (1, 2, 840, 113549, 1, 1, 1)
     
     #-----< md5WithRSAEncryption >-----#
-    md5WithRSAEncryption = OID(name='md5WithRSAEncryption', mode=MODE_VALUE)
+    md5WithRSAEncryption = OID(name=u'md5WithRSAEncryption', mode=MODE_VALUE)
     md5WithRSAEncryption._val = (1, 2, 840, 113549, 1, 1, 4)
     
     #-----< sha1WithRSAEncryption >-----#
-    sha1WithRSAEncryption = OID(name='sha1WithRSAEncryption', mode=MODE_VALUE)
+    sha1WithRSAEncryption = OID(name=u'sha1WithRSAEncryption', mode=MODE_VALUE)
     sha1WithRSAEncryption._val = (1, 2, 840, 113549, 1, 1, 5)
     
     #-----< dh-public-number >-----#
-    dh_public_number = OID(name='dh-public-number', mode=MODE_VALUE)
+    dh_public_number = OID(name=u'dh-public-number', mode=MODE_VALUE)
     dh_public_number._val = (1, 2, 840, 10046, 2, 1)
     
     #-----< id-alg-ESDH >-----#
-    id_alg_ESDH = OID(name='id-alg-ESDH', mode=MODE_VALUE)
+    id_alg_ESDH = OID(name=u'id-alg-ESDH', mode=MODE_VALUE)
     id_alg_ESDH._val = (1, 2, 840, 113549, 1, 9, 16, 3, 5)
     
     #-----< id-alg-SSDH >-----#
-    id_alg_SSDH = OID(name='id-alg-SSDH', mode=MODE_VALUE)
+    id_alg_SSDH = OID(name=u'id-alg-SSDH', mode=MODE_VALUE)
     id_alg_SSDH._val = (1, 2, 840, 113549, 1, 9, 16, 3, 10)
     
     #-----< id-alg-CMS3DESwrap >-----#
-    id_alg_CMS3DESwrap = OID(name='id-alg-CMS3DESwrap', mode=MODE_VALUE)
+    id_alg_CMS3DESwrap = OID(name=u'id-alg-CMS3DESwrap', mode=MODE_VALUE)
     id_alg_CMS3DESwrap._val = (1, 2, 840, 113549, 1, 9, 16, 3, 6)
     
     #-----< id-alg-CMSRC2wrap >-----#
-    id_alg_CMSRC2wrap = OID(name='id-alg-CMSRC2wrap', mode=MODE_VALUE)
+    id_alg_CMSRC2wrap = OID(name=u'id-alg-CMSRC2wrap', mode=MODE_VALUE)
     id_alg_CMSRC2wrap._val = (1, 2, 840, 113549, 1, 9, 16, 3, 7)
     
     #-----< des-ede3-cbc >-----#
-    des_ede3_cbc = OID(name='des-ede3-cbc', mode=MODE_VALUE)
+    des_ede3_cbc = OID(name=u'des-ede3-cbc', mode=MODE_VALUE)
     des_ede3_cbc._val = (1, 2, 840, 113549, 3, 7)
     
     #-----< rc2-cbc >-----#
-    rc2_cbc = OID(name='rc2-cbc', mode=MODE_VALUE)
+    rc2_cbc = OID(name=u'rc2-cbc', mode=MODE_VALUE)
     rc2_cbc._val = (1, 2, 840, 113549, 3, 2)
     
     #-----< hMAC-SHA1 >-----#
-    hMAC_SHA1 = OID(name='hMAC-SHA1', mode=MODE_VALUE)
+    hMAC_SHA1 = OID(name=u'hMAC-SHA1', mode=MODE_VALUE)
     hMAC_SHA1._val = (1, 3, 6, 1, 5, 5, 8, 1, 2)
     
     #-----< id-PBKDF2 >-----#
-    id_PBKDF2 = OID(name='id-PBKDF2', mode=MODE_VALUE)
+    id_PBKDF2 = OID(name=u'id-PBKDF2', mode=MODE_VALUE)
     id_PBKDF2._val = (1, 2, 840, 113549, 1, 5, 12)
     
     #-----< Dss-Pub-Key >-----#
-    Dss_Pub_Key = INT(name='Dss-Pub-Key', mode=MODE_TYPE)
+    Dss_Pub_Key = INT(name=u'Dss-Pub-Key', mode=MODE_TYPE)
     
     #-----< RSAPublicKey >-----#
-    RSAPublicKey = SEQ(name='RSAPublicKey', mode=MODE_TYPE)
-    _RSAPublicKey_modulus = INT(name='modulus', mode=MODE_TYPE)
-    _RSAPublicKey_publicExponent = INT(name='publicExponent', mode=MODE_TYPE)
+    RSAPublicKey = SEQ(name=u'RSAPublicKey', mode=MODE_TYPE)
+    _RSAPublicKey_modulus = INT(name=u'modulus', mode=MODE_TYPE)
+    _RSAPublicKey_publicExponent = INT(name=u'publicExponent', mode=MODE_TYPE)
     RSAPublicKey._cont = ASN1Dict([
-        ('modulus', _RSAPublicKey_modulus),
-        ('publicExponent', _RSAPublicKey_publicExponent),
+        (u'modulus', _RSAPublicKey_modulus),
+        (u'publicExponent', _RSAPublicKey_publicExponent),
         ])
     RSAPublicKey._ext = None
     
     #-----< DHPublicKey >-----#
-    DHPublicKey = INT(name='DHPublicKey', mode=MODE_TYPE)
+    DHPublicKey = INT(name=u'DHPublicKey', mode=MODE_TYPE)
     
     #-----< Dss-Sig-Value >-----#
-    Dss_Sig_Value = SEQ(name='Dss-Sig-Value', mode=MODE_TYPE)
-    _Dss_Sig_Value_r = INT(name='r', mode=MODE_TYPE)
-    _Dss_Sig_Value_s = INT(name='s', mode=MODE_TYPE)
+    Dss_Sig_Value = SEQ(name=u'Dss-Sig-Value', mode=MODE_TYPE)
+    _Dss_Sig_Value_r = INT(name=u'r', mode=MODE_TYPE)
+    _Dss_Sig_Value_s = INT(name=u's', mode=MODE_TYPE)
     Dss_Sig_Value._cont = ASN1Dict([
-        ('r', _Dss_Sig_Value_r),
-        ('s', _Dss_Sig_Value_s),
+        (u'r', _Dss_Sig_Value_r),
+        (u's', _Dss_Sig_Value_s),
         ])
     Dss_Sig_Value._ext = None
     
     #-----< Dss-Parms >-----#
-    Dss_Parms = SEQ(name='Dss-Parms', mode=MODE_TYPE)
-    _Dss_Parms_p = INT(name='p', mode=MODE_TYPE)
-    _Dss_Parms_q = INT(name='q', mode=MODE_TYPE)
-    _Dss_Parms_g = INT(name='g', mode=MODE_TYPE)
+    Dss_Parms = SEQ(name=u'Dss-Parms', mode=MODE_TYPE)
+    _Dss_Parms_p = INT(name=u'p', mode=MODE_TYPE)
+    _Dss_Parms_q = INT(name=u'q', mode=MODE_TYPE)
+    _Dss_Parms_g = INT(name=u'g', mode=MODE_TYPE)
     Dss_Parms._cont = ASN1Dict([
-        ('p', _Dss_Parms_p),
-        ('q', _Dss_Parms_q),
-        ('g', _Dss_Parms_g),
+        (u'p', _Dss_Parms_p),
+        (u'q', _Dss_Parms_q),
+        (u'g', _Dss_Parms_g),
         ])
     Dss_Parms._ext = None
     
     #-----< DHDomainParameters >-----#
-    DHDomainParameters = SEQ(name='DHDomainParameters', mode=MODE_TYPE)
-    _DHDomainParameters_p = INT(name='p', mode=MODE_TYPE)
-    _DHDomainParameters_g = INT(name='g', mode=MODE_TYPE)
-    _DHDomainParameters_q = INT(name='q', mode=MODE_TYPE)
-    _DHDomainParameters_j = INT(name='j', mode=MODE_TYPE, opt=True)
-    _DHDomainParameters_validationParms = SEQ(name='validationParms', mode=MODE_TYPE, typeref=ASN1RefType(('CryptographicMessageSyntaxAlgorithms', 'ValidationParms')), opt=True)
+    DHDomainParameters = SEQ(name=u'DHDomainParameters', mode=MODE_TYPE)
+    _DHDomainParameters_p = INT(name=u'p', mode=MODE_TYPE)
+    _DHDomainParameters_g = INT(name=u'g', mode=MODE_TYPE)
+    _DHDomainParameters_q = INT(name=u'q', mode=MODE_TYPE)
+    _DHDomainParameters_j = INT(name=u'j', mode=MODE_TYPE, opt=True)
+    _DHDomainParameters_validationParms = SEQ(name=u'validationParms', mode=MODE_TYPE, typeref=ASN1RefType(('CryptographicMessageSyntaxAlgorithms', 'ValidationParms')), opt=True)
     DHDomainParameters._cont = ASN1Dict([
-        ('p', _DHDomainParameters_p),
-        ('g', _DHDomainParameters_g),
-        ('q', _DHDomainParameters_q),
-        ('j', _DHDomainParameters_j),
-        ('validationParms', _DHDomainParameters_validationParms),
+        (u'p', _DHDomainParameters_p),
+        (u'g', _DHDomainParameters_g),
+        (u'q', _DHDomainParameters_q),
+        (u'j', _DHDomainParameters_j),
+        (u'validationParms', _DHDomainParameters_validationParms),
         ])
     DHDomainParameters._ext = None
     
     #-----< ValidationParms >-----#
-    ValidationParms = SEQ(name='ValidationParms', mode=MODE_TYPE)
-    _ValidationParms_seed = BIT_STR(name='seed', mode=MODE_TYPE)
-    _ValidationParms_pgenCounter = INT(name='pgenCounter', mode=MODE_TYPE)
+    ValidationParms = SEQ(name=u'ValidationParms', mode=MODE_TYPE)
+    _ValidationParms_seed = BIT_STR(name=u'seed', mode=MODE_TYPE)
+    _ValidationParms_pgenCounter = INT(name=u'pgenCounter', mode=MODE_TYPE)
     ValidationParms._cont = ASN1Dict([
-        ('seed', _ValidationParms_seed),
-        ('pgenCounter', _ValidationParms_pgenCounter),
+        (u'seed', _ValidationParms_seed),
+        (u'pgenCounter', _ValidationParms_pgenCounter),
         ])
     ValidationParms._ext = None
     
     #-----< KeyWrapAlgorithm >-----#
-    KeyWrapAlgorithm = SEQ(name='KeyWrapAlgorithm', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX1Explicit88', 'AlgorithmIdentifier')))
+    KeyWrapAlgorithm = SEQ(name=u'KeyWrapAlgorithm', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX1Explicit88', 'AlgorithmIdentifier')))
     
     #-----< RC2wrapParameter >-----#
-    RC2wrapParameter = INT(name='RC2wrapParameter', mode=MODE_TYPE, typeref=ASN1RefType(('CryptographicMessageSyntaxAlgorithms', 'RC2ParameterVersion')))
+    RC2wrapParameter = INT(name=u'RC2wrapParameter', mode=MODE_TYPE, typeref=ASN1RefType(('CryptographicMessageSyntaxAlgorithms', 'RC2ParameterVersion')))
     
     #-----< RC2ParameterVersion >-----#
-    RC2ParameterVersion = INT(name='RC2ParameterVersion', mode=MODE_TYPE)
+    RC2ParameterVersion = INT(name=u'RC2ParameterVersion', mode=MODE_TYPE)
     
     #-----< CBCParameter >-----#
-    CBCParameter = OCT_STR(name='CBCParameter', mode=MODE_TYPE, typeref=ASN1RefType(('CryptographicMessageSyntaxAlgorithms', 'IV')))
+    CBCParameter = OCT_STR(name=u'CBCParameter', mode=MODE_TYPE, typeref=ASN1RefType(('CryptographicMessageSyntaxAlgorithms', 'IV')))
     
     #-----< IV >-----#
-    IV = OCT_STR(name='IV', mode=MODE_TYPE)
+    IV = OCT_STR(name=u'IV', mode=MODE_TYPE)
     
     #-----< RC2CBCParameter >-----#
-    RC2CBCParameter = SEQ(name='RC2CBCParameter', mode=MODE_TYPE)
-    _RC2CBCParameter_rc2ParameterVersion = INT(name='rc2ParameterVersion', mode=MODE_TYPE)
-    _RC2CBCParameter_iv = OCT_STR(name='iv', mode=MODE_TYPE)
+    RC2CBCParameter = SEQ(name=u'RC2CBCParameter', mode=MODE_TYPE)
+    _RC2CBCParameter_rc2ParameterVersion = INT(name=u'rc2ParameterVersion', mode=MODE_TYPE)
+    _RC2CBCParameter_iv = OCT_STR(name=u'iv', mode=MODE_TYPE)
     RC2CBCParameter._cont = ASN1Dict([
-        ('rc2ParameterVersion', _RC2CBCParameter_rc2ParameterVersion),
-        ('iv', _RC2CBCParameter_iv),
+        (u'rc2ParameterVersion', _RC2CBCParameter_rc2ParameterVersion),
+        (u'iv', _RC2CBCParameter_iv),
         ])
     RC2CBCParameter._ext = None
     
     #-----< PBKDF2-params >-----#
-    PBKDF2_params = SEQ(name='PBKDF2-params', mode=MODE_TYPE)
-    _PBKDF2_params_salt = CHOICE(name='salt', mode=MODE_TYPE)
-    __PBKDF2_params_salt_specified = OCT_STR(name='specified', mode=MODE_TYPE)
-    __PBKDF2_params_salt_otherSource = SEQ(name='otherSource', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX1Explicit88', 'AlgorithmIdentifier')))
+    PBKDF2_params = SEQ(name=u'PBKDF2-params', mode=MODE_TYPE)
+    _PBKDF2_params_salt = CHOICE(name=u'salt', mode=MODE_TYPE)
+    __PBKDF2_params_salt_specified = OCT_STR(name=u'specified', mode=MODE_TYPE)
+    __PBKDF2_params_salt_otherSource = SEQ(name=u'otherSource', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX1Explicit88', 'AlgorithmIdentifier')))
     _PBKDF2_params_salt._cont = ASN1Dict([
-        ('specified', __PBKDF2_params_salt_specified),
-        ('otherSource', __PBKDF2_params_salt_otherSource),
+        (u'specified', __PBKDF2_params_salt_specified),
+        (u'otherSource', __PBKDF2_params_salt_otherSource),
         ])
     _PBKDF2_params_salt._ext = None
-    _PBKDF2_params_iterationCount = INT(name='iterationCount', mode=MODE_TYPE)
+    _PBKDF2_params_iterationCount = INT(name=u'iterationCount', mode=MODE_TYPE)
     _PBKDF2_params_iterationCount._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=None)], ev=None, er=[])
-    _PBKDF2_params_keyLength = INT(name='keyLength', mode=MODE_TYPE, opt=True)
+    _PBKDF2_params_keyLength = INT(name=u'keyLength', mode=MODE_TYPE, opt=True)
     _PBKDF2_params_keyLength._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=None)], ev=None, er=[])
-    _parameters_val = NULL(name='parameters', mode=MODE_TYPE)
-    _PBKDF2_params_prf = SEQ(name='prf', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX1Explicit88', 'AlgorithmIdentifier')), default=dict([('algorithm', (1, 3, 6, 1, 5, 5, 8, 1, 2)), ('parameters', (_parameters_val, 0))]))
+    _parameters_val = NULL(name=u'parameters', mode=MODE_TYPE)
+    _PBKDF2_params_prf = SEQ(name=u'prf', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX1Explicit88', 'AlgorithmIdentifier')), default=dict([(u'algorithm', (1, 3, 6, 1, 5, 5, 8, 1, 2)), (u'parameters', (_parameters_val, 0))]))
     PBKDF2_params._cont = ASN1Dict([
-        ('salt', _PBKDF2_params_salt),
-        ('iterationCount', _PBKDF2_params_iterationCount),
-        ('keyLength', _PBKDF2_params_keyLength),
-        ('prf', _PBKDF2_params_prf),
+        (u'salt', _PBKDF2_params_salt),
+        (u'iterationCount', _PBKDF2_params_iterationCount),
+        (u'keyLength', _PBKDF2_params_keyLength),
+        (u'prf', _PBKDF2_params_prf),
         ])
     PBKDF2_params._ext = None
     

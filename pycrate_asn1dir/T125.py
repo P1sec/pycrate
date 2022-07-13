@@ -16,142 +16,142 @@ from pycrate_asn1rt.init             import init_modules
 
 class MCS_PROTOCOL:
 
-    _name_  = 'MCS-PROTOCOL'
+    _name_  = u'MCS-PROTOCOL'
     _oid_   = []
     
     _obj_ = [
-        'ChannelId',
-        'StaticChannelId',
-        'DynamicChannelId',
-        'UserId',
-        'PrivateChannelId',
-        'AssignedChannelId',
-        'TokenId',
-        'TokenStatus',
-        'DataPriority',
-        'Segmentation',
-        'DomainParameters',
-        'Connect-Initial',
-        'Connect-Response',
-        'Connect-Additional',
-        'Connect-Result',
-        'PlumbDomainIndication',
-        'ErectDomainRequest',
-        'ChannelAttributes',
-        'MergeChannelsRequest',
-        'MergeChannelsConfirm',
-        'PurgeChannelsIndication',
-        'TokenAttributes',
-        'MergeTokensRequest',
-        'MergeTokensConfirm',
-        'PurgeTokensIndication',
-        'DisconnectProviderUltimatum',
-        'RejectMCSPDUUltimatum',
-        'AttachUserRequest',
-        'AttachUserConfirm',
-        'DetachUserRequest',
-        'DetachUserIndication',
-        'ChannelJoinRequest',
-        'ChannelJoinConfirm',
-        'ChannelLeaveRequest',
-        'ChannelConveneRequest',
-        'ChannelConveneConfirm',
-        'ChannelDisbandRequest',
-        'ChannelDisbandIndication',
-        'ChannelAdmitRequest',
-        'ChannelAdmitIndication',
-        'ChannelExpelRequest',
-        'ChannelExpelIndication',
-        'SendDataRequest',
-        'SendDataIndication',
-        'UniformSendDataRequest',
-        'UniformSendDataIndication',
-        'TokenGrabRequest',
-        'TokenGrabConfirm',
-        'TokenInhibitRequest',
-        'TokenInhibitConfirm',
-        'TokenGiveRequest',
-        'TokenGiveIndication',
-        'TokenGiveResponse',
-        'TokenGiveConfirm',
-        'TokenPleaseRequest',
-        'TokenPleaseIndication',
-        'TokenReleaseRequest',
-        'TokenReleaseConfirm',
-        'TokenTestRequest',
-        'TokenTestConfirm',
-        'Reason',
-        'Result',
-        'Diagnostic',
-        'ConnectMCSPDU',
-        'DomainMCSPDU',
+        u'ChannelId',
+        u'StaticChannelId',
+        u'DynamicChannelId',
+        u'UserId',
+        u'PrivateChannelId',
+        u'AssignedChannelId',
+        u'TokenId',
+        u'TokenStatus',
+        u'DataPriority',
+        u'Segmentation',
+        u'DomainParameters',
+        u'Connect-Initial',
+        u'Connect-Response',
+        u'Connect-Additional',
+        u'Connect-Result',
+        u'PlumbDomainIndication',
+        u'ErectDomainRequest',
+        u'ChannelAttributes',
+        u'MergeChannelsRequest',
+        u'MergeChannelsConfirm',
+        u'PurgeChannelsIndication',
+        u'TokenAttributes',
+        u'MergeTokensRequest',
+        u'MergeTokensConfirm',
+        u'PurgeTokensIndication',
+        u'DisconnectProviderUltimatum',
+        u'RejectMCSPDUUltimatum',
+        u'AttachUserRequest',
+        u'AttachUserConfirm',
+        u'DetachUserRequest',
+        u'DetachUserIndication',
+        u'ChannelJoinRequest',
+        u'ChannelJoinConfirm',
+        u'ChannelLeaveRequest',
+        u'ChannelConveneRequest',
+        u'ChannelConveneConfirm',
+        u'ChannelDisbandRequest',
+        u'ChannelDisbandIndication',
+        u'ChannelAdmitRequest',
+        u'ChannelAdmitIndication',
+        u'ChannelExpelRequest',
+        u'ChannelExpelIndication',
+        u'SendDataRequest',
+        u'SendDataIndication',
+        u'UniformSendDataRequest',
+        u'UniformSendDataIndication',
+        u'TokenGrabRequest',
+        u'TokenGrabConfirm',
+        u'TokenInhibitRequest',
+        u'TokenInhibitConfirm',
+        u'TokenGiveRequest',
+        u'TokenGiveIndication',
+        u'TokenGiveResponse',
+        u'TokenGiveConfirm',
+        u'TokenPleaseRequest',
+        u'TokenPleaseIndication',
+        u'TokenReleaseRequest',
+        u'TokenReleaseConfirm',
+        u'TokenTestRequest',
+        u'TokenTestConfirm',
+        u'Reason',
+        u'Result',
+        u'Diagnostic',
+        u'ConnectMCSPDU',
+        u'DomainMCSPDU',
         ]
     _type_ = [
-        'ChannelId',
-        'StaticChannelId',
-        'DynamicChannelId',
-        'UserId',
-        'PrivateChannelId',
-        'AssignedChannelId',
-        'TokenId',
-        'TokenStatus',
-        'DataPriority',
-        'Segmentation',
-        'DomainParameters',
-        'Connect-Initial',
-        'Connect-Response',
-        'Connect-Additional',
-        'Connect-Result',
-        'PlumbDomainIndication',
-        'ErectDomainRequest',
-        'ChannelAttributes',
-        'MergeChannelsRequest',
-        'MergeChannelsConfirm',
-        'PurgeChannelsIndication',
-        'TokenAttributes',
-        'MergeTokensRequest',
-        'MergeTokensConfirm',
-        'PurgeTokensIndication',
-        'DisconnectProviderUltimatum',
-        'RejectMCSPDUUltimatum',
-        'AttachUserRequest',
-        'AttachUserConfirm',
-        'DetachUserRequest',
-        'DetachUserIndication',
-        'ChannelJoinRequest',
-        'ChannelJoinConfirm',
-        'ChannelLeaveRequest',
-        'ChannelConveneRequest',
-        'ChannelConveneConfirm',
-        'ChannelDisbandRequest',
-        'ChannelDisbandIndication',
-        'ChannelAdmitRequest',
-        'ChannelAdmitIndication',
-        'ChannelExpelRequest',
-        'ChannelExpelIndication',
-        'SendDataRequest',
-        'SendDataIndication',
-        'UniformSendDataRequest',
-        'UniformSendDataIndication',
-        'TokenGrabRequest',
-        'TokenGrabConfirm',
-        'TokenInhibitRequest',
-        'TokenInhibitConfirm',
-        'TokenGiveRequest',
-        'TokenGiveIndication',
-        'TokenGiveResponse',
-        'TokenGiveConfirm',
-        'TokenPleaseRequest',
-        'TokenPleaseIndication',
-        'TokenReleaseRequest',
-        'TokenReleaseConfirm',
-        'TokenTestRequest',
-        'TokenTestConfirm',
-        'Reason',
-        'Result',
-        'Diagnostic',
-        'ConnectMCSPDU',
-        'DomainMCSPDU',
+        u'ChannelId',
+        u'StaticChannelId',
+        u'DynamicChannelId',
+        u'UserId',
+        u'PrivateChannelId',
+        u'AssignedChannelId',
+        u'TokenId',
+        u'TokenStatus',
+        u'DataPriority',
+        u'Segmentation',
+        u'DomainParameters',
+        u'Connect-Initial',
+        u'Connect-Response',
+        u'Connect-Additional',
+        u'Connect-Result',
+        u'PlumbDomainIndication',
+        u'ErectDomainRequest',
+        u'ChannelAttributes',
+        u'MergeChannelsRequest',
+        u'MergeChannelsConfirm',
+        u'PurgeChannelsIndication',
+        u'TokenAttributes',
+        u'MergeTokensRequest',
+        u'MergeTokensConfirm',
+        u'PurgeTokensIndication',
+        u'DisconnectProviderUltimatum',
+        u'RejectMCSPDUUltimatum',
+        u'AttachUserRequest',
+        u'AttachUserConfirm',
+        u'DetachUserRequest',
+        u'DetachUserIndication',
+        u'ChannelJoinRequest',
+        u'ChannelJoinConfirm',
+        u'ChannelLeaveRequest',
+        u'ChannelConveneRequest',
+        u'ChannelConveneConfirm',
+        u'ChannelDisbandRequest',
+        u'ChannelDisbandIndication',
+        u'ChannelAdmitRequest',
+        u'ChannelAdmitIndication',
+        u'ChannelExpelRequest',
+        u'ChannelExpelIndication',
+        u'SendDataRequest',
+        u'SendDataIndication',
+        u'UniformSendDataRequest',
+        u'UniformSendDataIndication',
+        u'TokenGrabRequest',
+        u'TokenGrabConfirm',
+        u'TokenInhibitRequest',
+        u'TokenInhibitConfirm',
+        u'TokenGiveRequest',
+        u'TokenGiveIndication',
+        u'TokenGiveResponse',
+        u'TokenGiveConfirm',
+        u'TokenPleaseRequest',
+        u'TokenPleaseIndication',
+        u'TokenReleaseRequest',
+        u'TokenReleaseConfirm',
+        u'TokenTestRequest',
+        u'TokenTestConfirm',
+        u'Reason',
+        u'Result',
+        u'Diagnostic',
+        u'ConnectMCSPDU',
+        u'DomainMCSPDU',
         ]
     _set_ = [
         ]
@@ -163,859 +163,859 @@ class MCS_PROTOCOL:
         ]
     
     #-----< ChannelId >-----#
-    ChannelId = INT(name='ChannelId', mode=MODE_TYPE)
+    ChannelId = INT(name=u'ChannelId', mode=MODE_TYPE)
     ChannelId._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=65535)], ev=None, er=[])
     
     #-----< StaticChannelId >-----#
-    StaticChannelId = INT(name='StaticChannelId', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'ChannelId')))
+    StaticChannelId = INT(name=u'StaticChannelId', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'ChannelId')))
     StaticChannelId._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=1000)], ev=None, er=[])
     
     #-----< DynamicChannelId >-----#
-    DynamicChannelId = INT(name='DynamicChannelId', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'ChannelId')))
+    DynamicChannelId = INT(name=u'DynamicChannelId', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'ChannelId')))
     DynamicChannelId._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1001, ub=65535)], ev=None, er=[])
     
     #-----< UserId >-----#
-    UserId = INT(name='UserId', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'DynamicChannelId')))
+    UserId = INT(name=u'UserId', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'DynamicChannelId')))
     
     #-----< PrivateChannelId >-----#
-    PrivateChannelId = INT(name='PrivateChannelId', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'DynamicChannelId')))
+    PrivateChannelId = INT(name=u'PrivateChannelId', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'DynamicChannelId')))
     
     #-----< AssignedChannelId >-----#
-    AssignedChannelId = INT(name='AssignedChannelId', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'DynamicChannelId')))
+    AssignedChannelId = INT(name=u'AssignedChannelId', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'DynamicChannelId')))
     
     #-----< TokenId >-----#
-    TokenId = INT(name='TokenId', mode=MODE_TYPE)
+    TokenId = INT(name=u'TokenId', mode=MODE_TYPE)
     TokenId._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=65535)], ev=None, er=[])
     
     #-----< TokenStatus >-----#
-    TokenStatus = ENUM(name='TokenStatus', mode=MODE_TYPE)
-    TokenStatus._cont = ASN1Dict([('notInUse', 0), ('selfGrabbed', 1), ('otherGrabbed', 2), ('selfInhibited', 3), ('otherInhibited', 4), ('selfRecipient', 5), ('selfGiving', 6), ('otherGiving', 7)])
+    TokenStatus = ENUM(name=u'TokenStatus', mode=MODE_TYPE)
+    TokenStatus._cont = ASN1Dict([(u'notInUse', 0), (u'selfGrabbed', 1), (u'otherGrabbed', 2), (u'selfInhibited', 3), (u'otherInhibited', 4), (u'selfRecipient', 5), (u'selfGiving', 6), (u'otherGiving', 7)])
     TokenStatus._ext = None
     
     #-----< DataPriority >-----#
-    DataPriority = ENUM(name='DataPriority', mode=MODE_TYPE)
-    DataPriority._cont = ASN1Dict([('top', 0), ('high', 1), ('medium', 2), ('low', 3)])
+    DataPriority = ENUM(name=u'DataPriority', mode=MODE_TYPE)
+    DataPriority._cont = ASN1Dict([(u'top', 0), (u'high', 1), (u'medium', 2), (u'low', 3)])
     DataPriority._ext = None
     
     #-----< Segmentation >-----#
-    Segmentation = BIT_STR(name='Segmentation', mode=MODE_TYPE)
-    Segmentation._cont = ASN1Dict([('begin', 0), ('end', 1)])
+    Segmentation = BIT_STR(name=u'Segmentation', mode=MODE_TYPE)
+    Segmentation._cont = ASN1Dict([(u'begin', 0), (u'end', 1)])
     Segmentation._const_sz = ASN1Set(rv=[2], rr=[], ev=None, er=[])
     
     #-----< DomainParameters >-----#
-    DomainParameters = SEQ(name='DomainParameters', mode=MODE_TYPE)
-    _DomainParameters_maxChannelIds = INT(name='maxChannelIds', mode=MODE_TYPE)
+    DomainParameters = SEQ(name=u'DomainParameters', mode=MODE_TYPE)
+    _DomainParameters_maxChannelIds = INT(name=u'maxChannelIds', mode=MODE_TYPE)
     _DomainParameters_maxChannelIds._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=None)], ev=None, er=[])
-    _DomainParameters_maxUserIds = INT(name='maxUserIds', mode=MODE_TYPE)
+    _DomainParameters_maxUserIds = INT(name=u'maxUserIds', mode=MODE_TYPE)
     _DomainParameters_maxUserIds._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=None)], ev=None, er=[])
-    _DomainParameters_maxTokenIds = INT(name='maxTokenIds', mode=MODE_TYPE)
+    _DomainParameters_maxTokenIds = INT(name=u'maxTokenIds', mode=MODE_TYPE)
     _DomainParameters_maxTokenIds._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=None)], ev=None, er=[])
-    _DomainParameters_numPriorities = INT(name='numPriorities', mode=MODE_TYPE)
+    _DomainParameters_numPriorities = INT(name=u'numPriorities', mode=MODE_TYPE)
     _DomainParameters_numPriorities._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=None)], ev=None, er=[])
-    _DomainParameters_minThroughput = INT(name='minThroughput', mode=MODE_TYPE)
+    _DomainParameters_minThroughput = INT(name=u'minThroughput', mode=MODE_TYPE)
     _DomainParameters_minThroughput._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=None)], ev=None, er=[])
-    _DomainParameters_maxHeight = INT(name='maxHeight', mode=MODE_TYPE)
+    _DomainParameters_maxHeight = INT(name=u'maxHeight', mode=MODE_TYPE)
     _DomainParameters_maxHeight._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=None)], ev=None, er=[])
-    _DomainParameters_maxMCSPDUsize = INT(name='maxMCSPDUsize', mode=MODE_TYPE)
+    _DomainParameters_maxMCSPDUsize = INT(name=u'maxMCSPDUsize', mode=MODE_TYPE)
     _DomainParameters_maxMCSPDUsize._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=None)], ev=None, er=[])
-    _DomainParameters_protocolVersion = INT(name='protocolVersion', mode=MODE_TYPE)
+    _DomainParameters_protocolVersion = INT(name=u'protocolVersion', mode=MODE_TYPE)
     _DomainParameters_protocolVersion._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=None)], ev=None, er=[])
     DomainParameters._cont = ASN1Dict([
-        ('maxChannelIds', _DomainParameters_maxChannelIds),
-        ('maxUserIds', _DomainParameters_maxUserIds),
-        ('maxTokenIds', _DomainParameters_maxTokenIds),
-        ('numPriorities', _DomainParameters_numPriorities),
-        ('minThroughput', _DomainParameters_minThroughput),
-        ('maxHeight', _DomainParameters_maxHeight),
-        ('maxMCSPDUsize', _DomainParameters_maxMCSPDUsize),
-        ('protocolVersion', _DomainParameters_protocolVersion),
+        (u'maxChannelIds', _DomainParameters_maxChannelIds),
+        (u'maxUserIds', _DomainParameters_maxUserIds),
+        (u'maxTokenIds', _DomainParameters_maxTokenIds),
+        (u'numPriorities', _DomainParameters_numPriorities),
+        (u'minThroughput', _DomainParameters_minThroughput),
+        (u'maxHeight', _DomainParameters_maxHeight),
+        (u'maxMCSPDUsize', _DomainParameters_maxMCSPDUsize),
+        (u'protocolVersion', _DomainParameters_protocolVersion),
         ])
     DomainParameters._ext = None
     
     #-----< Connect-Initial >-----#
-    Connect_Initial = SEQ(name='Connect-Initial', mode=MODE_TYPE, tag=(101, TAG_APPLICATION, TAG_IMPLICIT))
-    _Connect_Initial_callingDomainSelector = OCT_STR(name='callingDomainSelector', mode=MODE_TYPE)
-    _Connect_Initial_calledDomainSelector = OCT_STR(name='calledDomainSelector', mode=MODE_TYPE)
-    _Connect_Initial_upwardFlag = BOOL(name='upwardFlag', mode=MODE_TYPE)
-    _Connect_Initial_targetParameters = SEQ(name='targetParameters', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'DomainParameters')))
-    _Connect_Initial_minimumParameters = SEQ(name='minimumParameters', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'DomainParameters')))
-    _Connect_Initial_maximumParameters = SEQ(name='maximumParameters', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'DomainParameters')))
-    _Connect_Initial_userData = OCT_STR(name='userData', mode=MODE_TYPE)
+    Connect_Initial = SEQ(name=u'Connect-Initial', mode=MODE_TYPE, tag=(101, TAG_APPLICATION, TAG_IMPLICIT))
+    _Connect_Initial_callingDomainSelector = OCT_STR(name=u'callingDomainSelector', mode=MODE_TYPE)
+    _Connect_Initial_calledDomainSelector = OCT_STR(name=u'calledDomainSelector', mode=MODE_TYPE)
+    _Connect_Initial_upwardFlag = BOOL(name=u'upwardFlag', mode=MODE_TYPE)
+    _Connect_Initial_targetParameters = SEQ(name=u'targetParameters', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'DomainParameters')))
+    _Connect_Initial_minimumParameters = SEQ(name=u'minimumParameters', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'DomainParameters')))
+    _Connect_Initial_maximumParameters = SEQ(name=u'maximumParameters', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'DomainParameters')))
+    _Connect_Initial_userData = OCT_STR(name=u'userData', mode=MODE_TYPE)
     Connect_Initial._cont = ASN1Dict([
-        ('callingDomainSelector', _Connect_Initial_callingDomainSelector),
-        ('calledDomainSelector', _Connect_Initial_calledDomainSelector),
-        ('upwardFlag', _Connect_Initial_upwardFlag),
-        ('targetParameters', _Connect_Initial_targetParameters),
-        ('minimumParameters', _Connect_Initial_minimumParameters),
-        ('maximumParameters', _Connect_Initial_maximumParameters),
-        ('userData', _Connect_Initial_userData),
+        (u'callingDomainSelector', _Connect_Initial_callingDomainSelector),
+        (u'calledDomainSelector', _Connect_Initial_calledDomainSelector),
+        (u'upwardFlag', _Connect_Initial_upwardFlag),
+        (u'targetParameters', _Connect_Initial_targetParameters),
+        (u'minimumParameters', _Connect_Initial_minimumParameters),
+        (u'maximumParameters', _Connect_Initial_maximumParameters),
+        (u'userData', _Connect_Initial_userData),
         ])
     Connect_Initial._ext = None
     
     #-----< Connect-Response >-----#
-    Connect_Response = SEQ(name='Connect-Response', mode=MODE_TYPE, tag=(102, TAG_APPLICATION, TAG_IMPLICIT))
-    _Connect_Response_result = ENUM(name='result', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'Result')))
-    _Connect_Response_calledConnectId = INT(name='calledConnectId', mode=MODE_TYPE)
+    Connect_Response = SEQ(name=u'Connect-Response', mode=MODE_TYPE, tag=(102, TAG_APPLICATION, TAG_IMPLICIT))
+    _Connect_Response_result = ENUM(name=u'result', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'Result')))
+    _Connect_Response_calledConnectId = INT(name=u'calledConnectId', mode=MODE_TYPE)
     _Connect_Response_calledConnectId._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=None)], ev=None, er=[])
-    _Connect_Response_domainParameters = SEQ(name='domainParameters', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'DomainParameters')))
-    _Connect_Response_userData = OCT_STR(name='userData', mode=MODE_TYPE)
+    _Connect_Response_domainParameters = SEQ(name=u'domainParameters', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'DomainParameters')))
+    _Connect_Response_userData = OCT_STR(name=u'userData', mode=MODE_TYPE)
     Connect_Response._cont = ASN1Dict([
-        ('result', _Connect_Response_result),
-        ('calledConnectId', _Connect_Response_calledConnectId),
-        ('domainParameters', _Connect_Response_domainParameters),
-        ('userData', _Connect_Response_userData),
+        (u'result', _Connect_Response_result),
+        (u'calledConnectId', _Connect_Response_calledConnectId),
+        (u'domainParameters', _Connect_Response_domainParameters),
+        (u'userData', _Connect_Response_userData),
         ])
     Connect_Response._ext = None
     
     #-----< Connect-Additional >-----#
-    Connect_Additional = SEQ(name='Connect-Additional', mode=MODE_TYPE, tag=(103, TAG_APPLICATION, TAG_IMPLICIT))
-    _Connect_Additional_calledConnectId = INT(name='calledConnectId', mode=MODE_TYPE)
+    Connect_Additional = SEQ(name=u'Connect-Additional', mode=MODE_TYPE, tag=(103, TAG_APPLICATION, TAG_IMPLICIT))
+    _Connect_Additional_calledConnectId = INT(name=u'calledConnectId', mode=MODE_TYPE)
     _Connect_Additional_calledConnectId._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=None)], ev=None, er=[])
-    _Connect_Additional_dataPriority = ENUM(name='dataPriority', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'DataPriority')))
+    _Connect_Additional_dataPriority = ENUM(name=u'dataPriority', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'DataPriority')))
     Connect_Additional._cont = ASN1Dict([
-        ('calledConnectId', _Connect_Additional_calledConnectId),
-        ('dataPriority', _Connect_Additional_dataPriority),
+        (u'calledConnectId', _Connect_Additional_calledConnectId),
+        (u'dataPriority', _Connect_Additional_dataPriority),
         ])
     Connect_Additional._ext = None
     
     #-----< Connect-Result >-----#
-    Connect_Result = SEQ(name='Connect-Result', mode=MODE_TYPE, tag=(104, TAG_APPLICATION, TAG_IMPLICIT))
-    _Connect_Result_result = ENUM(name='result', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'Result')))
+    Connect_Result = SEQ(name=u'Connect-Result', mode=MODE_TYPE, tag=(104, TAG_APPLICATION, TAG_IMPLICIT))
+    _Connect_Result_result = ENUM(name=u'result', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'Result')))
     Connect_Result._cont = ASN1Dict([
-        ('result', _Connect_Result_result),
+        (u'result', _Connect_Result_result),
         ])
     Connect_Result._ext = None
     
     #-----< PlumbDomainIndication >-----#
-    PlumbDomainIndication = SEQ(name='PlumbDomainIndication', mode=MODE_TYPE, tag=(0, TAG_APPLICATION, TAG_IMPLICIT))
-    _PlumbDomainIndication_heightLimit = INT(name='heightLimit', mode=MODE_TYPE)
+    PlumbDomainIndication = SEQ(name=u'PlumbDomainIndication', mode=MODE_TYPE, tag=(0, TAG_APPLICATION, TAG_IMPLICIT))
+    _PlumbDomainIndication_heightLimit = INT(name=u'heightLimit', mode=MODE_TYPE)
     _PlumbDomainIndication_heightLimit._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=None)], ev=None, er=[])
     PlumbDomainIndication._cont = ASN1Dict([
-        ('heightLimit', _PlumbDomainIndication_heightLimit),
+        (u'heightLimit', _PlumbDomainIndication_heightLimit),
         ])
     PlumbDomainIndication._ext = None
     
     #-----< ErectDomainRequest >-----#
-    ErectDomainRequest = SEQ(name='ErectDomainRequest', mode=MODE_TYPE, tag=(1, TAG_APPLICATION, TAG_IMPLICIT))
-    _ErectDomainRequest_subHeight = INT(name='subHeight', mode=MODE_TYPE)
+    ErectDomainRequest = SEQ(name=u'ErectDomainRequest', mode=MODE_TYPE, tag=(1, TAG_APPLICATION, TAG_IMPLICIT))
+    _ErectDomainRequest_subHeight = INT(name=u'subHeight', mode=MODE_TYPE)
     _ErectDomainRequest_subHeight._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=None)], ev=None, er=[])
-    _ErectDomainRequest_subInterval = INT(name='subInterval', mode=MODE_TYPE)
+    _ErectDomainRequest_subInterval = INT(name=u'subInterval', mode=MODE_TYPE)
     _ErectDomainRequest_subInterval._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=None)], ev=None, er=[])
     ErectDomainRequest._cont = ASN1Dict([
-        ('subHeight', _ErectDomainRequest_subHeight),
-        ('subInterval', _ErectDomainRequest_subInterval),
+        (u'subHeight', _ErectDomainRequest_subHeight),
+        (u'subInterval', _ErectDomainRequest_subInterval),
         ])
     ErectDomainRequest._ext = None
     
     #-----< ChannelAttributes >-----#
-    ChannelAttributes = CHOICE(name='ChannelAttributes', mode=MODE_TYPE)
-    _ChannelAttributes_static = SEQ(name='static', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    __ChannelAttributes_static_channelId = INT(name='channelId', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'StaticChannelId')))
+    ChannelAttributes = CHOICE(name=u'ChannelAttributes', mode=MODE_TYPE)
+    _ChannelAttributes_static = SEQ(name=u'static', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __ChannelAttributes_static_channelId = INT(name=u'channelId', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'StaticChannelId')))
     _ChannelAttributes_static._cont = ASN1Dict([
-        ('channelId', __ChannelAttributes_static_channelId),
+        (u'channelId', __ChannelAttributes_static_channelId),
         ])
     _ChannelAttributes_static._ext = None
-    _ChannelAttributes_userId = SEQ(name='userId', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    __ChannelAttributes_userId_joined = BOOL(name='joined', mode=MODE_TYPE)
-    __ChannelAttributes_userId_userId = INT(name='userId', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'UserId')))
+    _ChannelAttributes_userId = SEQ(name=u'userId', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __ChannelAttributes_userId_joined = BOOL(name=u'joined', mode=MODE_TYPE)
+    __ChannelAttributes_userId_userId = INT(name=u'userId', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'UserId')))
     _ChannelAttributes_userId._cont = ASN1Dict([
-        ('joined', __ChannelAttributes_userId_joined),
-        ('userId', __ChannelAttributes_userId_userId),
+        (u'joined', __ChannelAttributes_userId_joined),
+        (u'userId', __ChannelAttributes_userId_userId),
         ])
     _ChannelAttributes_userId._ext = None
-    _ChannelAttributes_private = SEQ(name='private', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    __ChannelAttributes_private_joined = BOOL(name='joined', mode=MODE_TYPE)
-    __ChannelAttributes_private_channelId = INT(name='channelId', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'PrivateChannelId')))
-    __ChannelAttributes_private_manager = INT(name='manager', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'UserId')))
-    __ChannelAttributes_private_admitted = SET_OF(name='admitted', mode=MODE_TYPE)
+    _ChannelAttributes_private = SEQ(name=u'private', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __ChannelAttributes_private_joined = BOOL(name=u'joined', mode=MODE_TYPE)
+    __ChannelAttributes_private_channelId = INT(name=u'channelId', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'PrivateChannelId')))
+    __ChannelAttributes_private_manager = INT(name=u'manager', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'UserId')))
+    __ChannelAttributes_private_admitted = SET_OF(name=u'admitted', mode=MODE_TYPE)
     ___ChannelAttributes_private_admitted__item_ = INT(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'UserId')))
     __ChannelAttributes_private_admitted._cont = ___ChannelAttributes_private_admitted__item_
     _ChannelAttributes_private._cont = ASN1Dict([
-        ('joined', __ChannelAttributes_private_joined),
-        ('channelId', __ChannelAttributes_private_channelId),
-        ('manager', __ChannelAttributes_private_manager),
-        ('admitted', __ChannelAttributes_private_admitted),
+        (u'joined', __ChannelAttributes_private_joined),
+        (u'channelId', __ChannelAttributes_private_channelId),
+        (u'manager', __ChannelAttributes_private_manager),
+        (u'admitted', __ChannelAttributes_private_admitted),
         ])
     _ChannelAttributes_private._ext = None
-    _ChannelAttributes_assigned = SEQ(name='assigned', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    __ChannelAttributes_assigned_channelId = INT(name='channelId', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'AssignedChannelId')))
+    _ChannelAttributes_assigned = SEQ(name=u'assigned', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __ChannelAttributes_assigned_channelId = INT(name=u'channelId', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'AssignedChannelId')))
     _ChannelAttributes_assigned._cont = ASN1Dict([
-        ('channelId', __ChannelAttributes_assigned_channelId),
+        (u'channelId', __ChannelAttributes_assigned_channelId),
         ])
     _ChannelAttributes_assigned._ext = None
     ChannelAttributes._cont = ASN1Dict([
-        ('static', _ChannelAttributes_static),
-        ('userId', _ChannelAttributes_userId),
-        ('private', _ChannelAttributes_private),
-        ('assigned', _ChannelAttributes_assigned),
+        (u'static', _ChannelAttributes_static),
+        (u'userId', _ChannelAttributes_userId),
+        (u'private', _ChannelAttributes_private),
+        (u'assigned', _ChannelAttributes_assigned),
         ])
     ChannelAttributes._ext = None
     
     #-----< MergeChannelsRequest >-----#
-    MergeChannelsRequest = SEQ(name='MergeChannelsRequest', mode=MODE_TYPE, tag=(2, TAG_APPLICATION, TAG_IMPLICIT))
-    _MergeChannelsRequest_mergeChannels = SET_OF(name='mergeChannels', mode=MODE_TYPE)
+    MergeChannelsRequest = SEQ(name=u'MergeChannelsRequest', mode=MODE_TYPE, tag=(2, TAG_APPLICATION, TAG_IMPLICIT))
+    _MergeChannelsRequest_mergeChannels = SET_OF(name=u'mergeChannels', mode=MODE_TYPE)
     __MergeChannelsRequest_mergeChannels__item_ = CHOICE(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'ChannelAttributes')))
     _MergeChannelsRequest_mergeChannels._cont = __MergeChannelsRequest_mergeChannels__item_
-    _MergeChannelsRequest_purgeChannelIds = SET_OF(name='purgeChannelIds', mode=MODE_TYPE)
+    _MergeChannelsRequest_purgeChannelIds = SET_OF(name=u'purgeChannelIds', mode=MODE_TYPE)
     __MergeChannelsRequest_purgeChannelIds__item_ = INT(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'ChannelId')))
     _MergeChannelsRequest_purgeChannelIds._cont = __MergeChannelsRequest_purgeChannelIds__item_
     MergeChannelsRequest._cont = ASN1Dict([
-        ('mergeChannels', _MergeChannelsRequest_mergeChannels),
-        ('purgeChannelIds', _MergeChannelsRequest_purgeChannelIds),
+        (u'mergeChannels', _MergeChannelsRequest_mergeChannels),
+        (u'purgeChannelIds', _MergeChannelsRequest_purgeChannelIds),
         ])
     MergeChannelsRequest._ext = None
     
     #-----< MergeChannelsConfirm >-----#
-    MergeChannelsConfirm = SEQ(name='MergeChannelsConfirm', mode=MODE_TYPE, tag=(3, TAG_APPLICATION, TAG_IMPLICIT))
-    _MergeChannelsConfirm_mergeChannels = SET_OF(name='mergeChannels', mode=MODE_TYPE)
+    MergeChannelsConfirm = SEQ(name=u'MergeChannelsConfirm', mode=MODE_TYPE, tag=(3, TAG_APPLICATION, TAG_IMPLICIT))
+    _MergeChannelsConfirm_mergeChannels = SET_OF(name=u'mergeChannels', mode=MODE_TYPE)
     __MergeChannelsConfirm_mergeChannels__item_ = CHOICE(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'ChannelAttributes')))
     _MergeChannelsConfirm_mergeChannels._cont = __MergeChannelsConfirm_mergeChannels__item_
-    _MergeChannelsConfirm_purgeChannelIds = SET_OF(name='purgeChannelIds', mode=MODE_TYPE)
+    _MergeChannelsConfirm_purgeChannelIds = SET_OF(name=u'purgeChannelIds', mode=MODE_TYPE)
     __MergeChannelsConfirm_purgeChannelIds__item_ = INT(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'ChannelId')))
     _MergeChannelsConfirm_purgeChannelIds._cont = __MergeChannelsConfirm_purgeChannelIds__item_
     MergeChannelsConfirm._cont = ASN1Dict([
-        ('mergeChannels', _MergeChannelsConfirm_mergeChannels),
-        ('purgeChannelIds', _MergeChannelsConfirm_purgeChannelIds),
+        (u'mergeChannels', _MergeChannelsConfirm_mergeChannels),
+        (u'purgeChannelIds', _MergeChannelsConfirm_purgeChannelIds),
         ])
     MergeChannelsConfirm._ext = None
     
     #-----< PurgeChannelsIndication >-----#
-    PurgeChannelsIndication = SEQ(name='PurgeChannelsIndication', mode=MODE_TYPE, tag=(4, TAG_APPLICATION, TAG_IMPLICIT))
-    _PurgeChannelsIndication_detachUserIds = SET_OF(name='detachUserIds', mode=MODE_TYPE)
+    PurgeChannelsIndication = SEQ(name=u'PurgeChannelsIndication', mode=MODE_TYPE, tag=(4, TAG_APPLICATION, TAG_IMPLICIT))
+    _PurgeChannelsIndication_detachUserIds = SET_OF(name=u'detachUserIds', mode=MODE_TYPE)
     __PurgeChannelsIndication_detachUserIds__item_ = INT(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'UserId')))
     _PurgeChannelsIndication_detachUserIds._cont = __PurgeChannelsIndication_detachUserIds__item_
-    _PurgeChannelsIndication_purgeChannelIds = SET_OF(name='purgeChannelIds', mode=MODE_TYPE)
+    _PurgeChannelsIndication_purgeChannelIds = SET_OF(name=u'purgeChannelIds', mode=MODE_TYPE)
     __PurgeChannelsIndication_purgeChannelIds__item_ = INT(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'ChannelId')))
     _PurgeChannelsIndication_purgeChannelIds._cont = __PurgeChannelsIndication_purgeChannelIds__item_
     PurgeChannelsIndication._cont = ASN1Dict([
-        ('detachUserIds', _PurgeChannelsIndication_detachUserIds),
-        ('purgeChannelIds', _PurgeChannelsIndication_purgeChannelIds),
+        (u'detachUserIds', _PurgeChannelsIndication_detachUserIds),
+        (u'purgeChannelIds', _PurgeChannelsIndication_purgeChannelIds),
         ])
     PurgeChannelsIndication._ext = None
     
     #-----< TokenAttributes >-----#
-    TokenAttributes = CHOICE(name='TokenAttributes', mode=MODE_TYPE)
-    _TokenAttributes_grabbed = SEQ(name='grabbed', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    __TokenAttributes_grabbed_tokenId = INT(name='tokenId', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'TokenId')))
-    __TokenAttributes_grabbed_grabber = INT(name='grabber', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'UserId')))
+    TokenAttributes = CHOICE(name=u'TokenAttributes', mode=MODE_TYPE)
+    _TokenAttributes_grabbed = SEQ(name=u'grabbed', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __TokenAttributes_grabbed_tokenId = INT(name=u'tokenId', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'TokenId')))
+    __TokenAttributes_grabbed_grabber = INT(name=u'grabber', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'UserId')))
     _TokenAttributes_grabbed._cont = ASN1Dict([
-        ('tokenId', __TokenAttributes_grabbed_tokenId),
-        ('grabber', __TokenAttributes_grabbed_grabber),
+        (u'tokenId', __TokenAttributes_grabbed_tokenId),
+        (u'grabber', __TokenAttributes_grabbed_grabber),
         ])
     _TokenAttributes_grabbed._ext = None
-    _TokenAttributes_inhibited = SEQ(name='inhibited', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    __TokenAttributes_inhibited_tokenId = INT(name='tokenId', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'TokenId')))
-    __TokenAttributes_inhibited_inhibitors = SET_OF(name='inhibitors', mode=MODE_TYPE)
+    _TokenAttributes_inhibited = SEQ(name=u'inhibited', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __TokenAttributes_inhibited_tokenId = INT(name=u'tokenId', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'TokenId')))
+    __TokenAttributes_inhibited_inhibitors = SET_OF(name=u'inhibitors', mode=MODE_TYPE)
     ___TokenAttributes_inhibited_inhibitors__item_ = INT(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'UserId')))
     __TokenAttributes_inhibited_inhibitors._cont = ___TokenAttributes_inhibited_inhibitors__item_
     _TokenAttributes_inhibited._cont = ASN1Dict([
-        ('tokenId', __TokenAttributes_inhibited_tokenId),
-        ('inhibitors', __TokenAttributes_inhibited_inhibitors),
+        (u'tokenId', __TokenAttributes_inhibited_tokenId),
+        (u'inhibitors', __TokenAttributes_inhibited_inhibitors),
         ])
     _TokenAttributes_inhibited._ext = None
-    _TokenAttributes_giving = SEQ(name='giving', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    __TokenAttributes_giving_tokenId = INT(name='tokenId', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'TokenId')))
-    __TokenAttributes_giving_grabber = INT(name='grabber', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'UserId')))
-    __TokenAttributes_giving_recipient = INT(name='recipient', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'UserId')))
+    _TokenAttributes_giving = SEQ(name=u'giving', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __TokenAttributes_giving_tokenId = INT(name=u'tokenId', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'TokenId')))
+    __TokenAttributes_giving_grabber = INT(name=u'grabber', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'UserId')))
+    __TokenAttributes_giving_recipient = INT(name=u'recipient', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'UserId')))
     _TokenAttributes_giving._cont = ASN1Dict([
-        ('tokenId', __TokenAttributes_giving_tokenId),
-        ('grabber', __TokenAttributes_giving_grabber),
-        ('recipient', __TokenAttributes_giving_recipient),
+        (u'tokenId', __TokenAttributes_giving_tokenId),
+        (u'grabber', __TokenAttributes_giving_grabber),
+        (u'recipient', __TokenAttributes_giving_recipient),
         ])
     _TokenAttributes_giving._ext = None
-    _TokenAttributes_ungivable = SEQ(name='ungivable', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    __TokenAttributes_ungivable_tokenId = INT(name='tokenId', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'TokenId')))
-    __TokenAttributes_ungivable_grabber = INT(name='grabber', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'UserId')))
+    _TokenAttributes_ungivable = SEQ(name=u'ungivable', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __TokenAttributes_ungivable_tokenId = INT(name=u'tokenId', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'TokenId')))
+    __TokenAttributes_ungivable_grabber = INT(name=u'grabber', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'UserId')))
     _TokenAttributes_ungivable._cont = ASN1Dict([
-        ('tokenId', __TokenAttributes_ungivable_tokenId),
-        ('grabber', __TokenAttributes_ungivable_grabber),
+        (u'tokenId', __TokenAttributes_ungivable_tokenId),
+        (u'grabber', __TokenAttributes_ungivable_grabber),
         ])
     _TokenAttributes_ungivable._ext = None
-    _TokenAttributes_given = SEQ(name='given', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    __TokenAttributes_given_tokenId = INT(name='tokenId', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'TokenId')))
-    __TokenAttributes_given_recipient = INT(name='recipient', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'UserId')))
+    _TokenAttributes_given = SEQ(name=u'given', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __TokenAttributes_given_tokenId = INT(name=u'tokenId', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'TokenId')))
+    __TokenAttributes_given_recipient = INT(name=u'recipient', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'UserId')))
     _TokenAttributes_given._cont = ASN1Dict([
-        ('tokenId', __TokenAttributes_given_tokenId),
-        ('recipient', __TokenAttributes_given_recipient),
+        (u'tokenId', __TokenAttributes_given_tokenId),
+        (u'recipient', __TokenAttributes_given_recipient),
         ])
     _TokenAttributes_given._ext = None
     TokenAttributes._cont = ASN1Dict([
-        ('grabbed', _TokenAttributes_grabbed),
-        ('inhibited', _TokenAttributes_inhibited),
-        ('giving', _TokenAttributes_giving),
-        ('ungivable', _TokenAttributes_ungivable),
-        ('given', _TokenAttributes_given),
+        (u'grabbed', _TokenAttributes_grabbed),
+        (u'inhibited', _TokenAttributes_inhibited),
+        (u'giving', _TokenAttributes_giving),
+        (u'ungivable', _TokenAttributes_ungivable),
+        (u'given', _TokenAttributes_given),
         ])
     TokenAttributes._ext = None
     
     #-----< MergeTokensRequest >-----#
-    MergeTokensRequest = SEQ(name='MergeTokensRequest', mode=MODE_TYPE, tag=(5, TAG_APPLICATION, TAG_IMPLICIT))
-    _MergeTokensRequest_mergeTokens = SET_OF(name='mergeTokens', mode=MODE_TYPE)
+    MergeTokensRequest = SEQ(name=u'MergeTokensRequest', mode=MODE_TYPE, tag=(5, TAG_APPLICATION, TAG_IMPLICIT))
+    _MergeTokensRequest_mergeTokens = SET_OF(name=u'mergeTokens', mode=MODE_TYPE)
     __MergeTokensRequest_mergeTokens__item_ = CHOICE(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'TokenAttributes')))
     _MergeTokensRequest_mergeTokens._cont = __MergeTokensRequest_mergeTokens__item_
-    _MergeTokensRequest_purgeTokenIds = SET_OF(name='purgeTokenIds', mode=MODE_TYPE)
+    _MergeTokensRequest_purgeTokenIds = SET_OF(name=u'purgeTokenIds', mode=MODE_TYPE)
     __MergeTokensRequest_purgeTokenIds__item_ = INT(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'TokenId')))
     _MergeTokensRequest_purgeTokenIds._cont = __MergeTokensRequest_purgeTokenIds__item_
     MergeTokensRequest._cont = ASN1Dict([
-        ('mergeTokens', _MergeTokensRequest_mergeTokens),
-        ('purgeTokenIds', _MergeTokensRequest_purgeTokenIds),
+        (u'mergeTokens', _MergeTokensRequest_mergeTokens),
+        (u'purgeTokenIds', _MergeTokensRequest_purgeTokenIds),
         ])
     MergeTokensRequest._ext = None
     
     #-----< MergeTokensConfirm >-----#
-    MergeTokensConfirm = SEQ(name='MergeTokensConfirm', mode=MODE_TYPE, tag=(6, TAG_APPLICATION, TAG_IMPLICIT))
-    _MergeTokensConfirm_mergeTokens = SET_OF(name='mergeTokens', mode=MODE_TYPE)
+    MergeTokensConfirm = SEQ(name=u'MergeTokensConfirm', mode=MODE_TYPE, tag=(6, TAG_APPLICATION, TAG_IMPLICIT))
+    _MergeTokensConfirm_mergeTokens = SET_OF(name=u'mergeTokens', mode=MODE_TYPE)
     __MergeTokensConfirm_mergeTokens__item_ = CHOICE(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'TokenAttributes')))
     _MergeTokensConfirm_mergeTokens._cont = __MergeTokensConfirm_mergeTokens__item_
-    _MergeTokensConfirm_purgeTokenIds = SET_OF(name='purgeTokenIds', mode=MODE_TYPE)
+    _MergeTokensConfirm_purgeTokenIds = SET_OF(name=u'purgeTokenIds', mode=MODE_TYPE)
     __MergeTokensConfirm_purgeTokenIds__item_ = INT(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'TokenId')))
     _MergeTokensConfirm_purgeTokenIds._cont = __MergeTokensConfirm_purgeTokenIds__item_
     MergeTokensConfirm._cont = ASN1Dict([
-        ('mergeTokens', _MergeTokensConfirm_mergeTokens),
-        ('purgeTokenIds', _MergeTokensConfirm_purgeTokenIds),
+        (u'mergeTokens', _MergeTokensConfirm_mergeTokens),
+        (u'purgeTokenIds', _MergeTokensConfirm_purgeTokenIds),
         ])
     MergeTokensConfirm._ext = None
     
     #-----< PurgeTokensIndication >-----#
-    PurgeTokensIndication = SEQ(name='PurgeTokensIndication', mode=MODE_TYPE, tag=(7, TAG_APPLICATION, TAG_IMPLICIT))
-    _PurgeTokensIndication_purgeTokenIds = SET_OF(name='purgeTokenIds', mode=MODE_TYPE)
+    PurgeTokensIndication = SEQ(name=u'PurgeTokensIndication', mode=MODE_TYPE, tag=(7, TAG_APPLICATION, TAG_IMPLICIT))
+    _PurgeTokensIndication_purgeTokenIds = SET_OF(name=u'purgeTokenIds', mode=MODE_TYPE)
     __PurgeTokensIndication_purgeTokenIds__item_ = INT(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'TokenId')))
     _PurgeTokensIndication_purgeTokenIds._cont = __PurgeTokensIndication_purgeTokenIds__item_
     PurgeTokensIndication._cont = ASN1Dict([
-        ('purgeTokenIds', _PurgeTokensIndication_purgeTokenIds),
+        (u'purgeTokenIds', _PurgeTokensIndication_purgeTokenIds),
         ])
     PurgeTokensIndication._ext = None
     
     #-----< DisconnectProviderUltimatum >-----#
-    DisconnectProviderUltimatum = SEQ(name='DisconnectProviderUltimatum', mode=MODE_TYPE, tag=(8, TAG_APPLICATION, TAG_IMPLICIT))
-    _DisconnectProviderUltimatum_reason = ENUM(name='reason', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'Reason')))
+    DisconnectProviderUltimatum = SEQ(name=u'DisconnectProviderUltimatum', mode=MODE_TYPE, tag=(8, TAG_APPLICATION, TAG_IMPLICIT))
+    _DisconnectProviderUltimatum_reason = ENUM(name=u'reason', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'Reason')))
     DisconnectProviderUltimatum._cont = ASN1Dict([
-        ('reason', _DisconnectProviderUltimatum_reason),
+        (u'reason', _DisconnectProviderUltimatum_reason),
         ])
     DisconnectProviderUltimatum._ext = None
     
     #-----< RejectMCSPDUUltimatum >-----#
-    RejectMCSPDUUltimatum = SEQ(name='RejectMCSPDUUltimatum', mode=MODE_TYPE, tag=(9, TAG_APPLICATION, TAG_IMPLICIT))
-    _RejectMCSPDUUltimatum_diagnostic = ENUM(name='diagnostic', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'Diagnostic')))
-    _RejectMCSPDUUltimatum_initialOctets = OCT_STR(name='initialOctets', mode=MODE_TYPE)
+    RejectMCSPDUUltimatum = SEQ(name=u'RejectMCSPDUUltimatum', mode=MODE_TYPE, tag=(9, TAG_APPLICATION, TAG_IMPLICIT))
+    _RejectMCSPDUUltimatum_diagnostic = ENUM(name=u'diagnostic', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'Diagnostic')))
+    _RejectMCSPDUUltimatum_initialOctets = OCT_STR(name=u'initialOctets', mode=MODE_TYPE)
     RejectMCSPDUUltimatum._cont = ASN1Dict([
-        ('diagnostic', _RejectMCSPDUUltimatum_diagnostic),
-        ('initialOctets', _RejectMCSPDUUltimatum_initialOctets),
+        (u'diagnostic', _RejectMCSPDUUltimatum_diagnostic),
+        (u'initialOctets', _RejectMCSPDUUltimatum_initialOctets),
         ])
     RejectMCSPDUUltimatum._ext = None
     
     #-----< AttachUserRequest >-----#
-    AttachUserRequest = SEQ(name='AttachUserRequest', mode=MODE_TYPE, tag=(10, TAG_APPLICATION, TAG_IMPLICIT))
+    AttachUserRequest = SEQ(name=u'AttachUserRequest', mode=MODE_TYPE, tag=(10, TAG_APPLICATION, TAG_IMPLICIT))
     AttachUserRequest._cont = ASN1Dict([
         ])
     AttachUserRequest._ext = None
     
     #-----< AttachUserConfirm >-----#
-    AttachUserConfirm = SEQ(name='AttachUserConfirm', mode=MODE_TYPE, tag=(11, TAG_APPLICATION, TAG_IMPLICIT))
-    _AttachUserConfirm_result = ENUM(name='result', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'Result')))
-    _AttachUserConfirm_initiator = INT(name='initiator', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'UserId')), opt=True)
+    AttachUserConfirm = SEQ(name=u'AttachUserConfirm', mode=MODE_TYPE, tag=(11, TAG_APPLICATION, TAG_IMPLICIT))
+    _AttachUserConfirm_result = ENUM(name=u'result', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'Result')))
+    _AttachUserConfirm_initiator = INT(name=u'initiator', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'UserId')), opt=True)
     AttachUserConfirm._cont = ASN1Dict([
-        ('result', _AttachUserConfirm_result),
-        ('initiator', _AttachUserConfirm_initiator),
+        (u'result', _AttachUserConfirm_result),
+        (u'initiator', _AttachUserConfirm_initiator),
         ])
     AttachUserConfirm._ext = None
     
     #-----< DetachUserRequest >-----#
-    DetachUserRequest = SEQ(name='DetachUserRequest', mode=MODE_TYPE, tag=(12, TAG_APPLICATION, TAG_IMPLICIT))
-    _DetachUserRequest_reason = ENUM(name='reason', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'Reason')))
-    _DetachUserRequest_userIds = SET_OF(name='userIds', mode=MODE_TYPE)
+    DetachUserRequest = SEQ(name=u'DetachUserRequest', mode=MODE_TYPE, tag=(12, TAG_APPLICATION, TAG_IMPLICIT))
+    _DetachUserRequest_reason = ENUM(name=u'reason', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'Reason')))
+    _DetachUserRequest_userIds = SET_OF(name=u'userIds', mode=MODE_TYPE)
     __DetachUserRequest_userIds__item_ = INT(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'UserId')))
     _DetachUserRequest_userIds._cont = __DetachUserRequest_userIds__item_
     DetachUserRequest._cont = ASN1Dict([
-        ('reason', _DetachUserRequest_reason),
-        ('userIds', _DetachUserRequest_userIds),
+        (u'reason', _DetachUserRequest_reason),
+        (u'userIds', _DetachUserRequest_userIds),
         ])
     DetachUserRequest._ext = None
     
     #-----< DetachUserIndication >-----#
-    DetachUserIndication = SEQ(name='DetachUserIndication', mode=MODE_TYPE, tag=(13, TAG_APPLICATION, TAG_IMPLICIT))
-    _DetachUserIndication_reason = ENUM(name='reason', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'Reason')))
-    _DetachUserIndication_userIds = SET_OF(name='userIds', mode=MODE_TYPE)
+    DetachUserIndication = SEQ(name=u'DetachUserIndication', mode=MODE_TYPE, tag=(13, TAG_APPLICATION, TAG_IMPLICIT))
+    _DetachUserIndication_reason = ENUM(name=u'reason', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'Reason')))
+    _DetachUserIndication_userIds = SET_OF(name=u'userIds', mode=MODE_TYPE)
     __DetachUserIndication_userIds__item_ = INT(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'UserId')))
     _DetachUserIndication_userIds._cont = __DetachUserIndication_userIds__item_
     DetachUserIndication._cont = ASN1Dict([
-        ('reason', _DetachUserIndication_reason),
-        ('userIds', _DetachUserIndication_userIds),
+        (u'reason', _DetachUserIndication_reason),
+        (u'userIds', _DetachUserIndication_userIds),
         ])
     DetachUserIndication._ext = None
     
     #-----< ChannelJoinRequest >-----#
-    ChannelJoinRequest = SEQ(name='ChannelJoinRequest', mode=MODE_TYPE, tag=(14, TAG_APPLICATION, TAG_IMPLICIT))
-    _ChannelJoinRequest_initiator = INT(name='initiator', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'UserId')))
-    _ChannelJoinRequest_channelId = INT(name='channelId', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'ChannelId')))
+    ChannelJoinRequest = SEQ(name=u'ChannelJoinRequest', mode=MODE_TYPE, tag=(14, TAG_APPLICATION, TAG_IMPLICIT))
+    _ChannelJoinRequest_initiator = INT(name=u'initiator', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'UserId')))
+    _ChannelJoinRequest_channelId = INT(name=u'channelId', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'ChannelId')))
     ChannelJoinRequest._cont = ASN1Dict([
-        ('initiator', _ChannelJoinRequest_initiator),
-        ('channelId', _ChannelJoinRequest_channelId),
+        (u'initiator', _ChannelJoinRequest_initiator),
+        (u'channelId', _ChannelJoinRequest_channelId),
         ])
     ChannelJoinRequest._ext = None
     
     #-----< ChannelJoinConfirm >-----#
-    ChannelJoinConfirm = SEQ(name='ChannelJoinConfirm', mode=MODE_TYPE, tag=(15, TAG_APPLICATION, TAG_IMPLICIT))
-    _ChannelJoinConfirm_result = ENUM(name='result', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'Result')))
-    _ChannelJoinConfirm_initiator = INT(name='initiator', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'UserId')))
-    _ChannelJoinConfirm_requested = INT(name='requested', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'ChannelId')))
-    _ChannelJoinConfirm_channelId = INT(name='channelId', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'ChannelId')), opt=True)
+    ChannelJoinConfirm = SEQ(name=u'ChannelJoinConfirm', mode=MODE_TYPE, tag=(15, TAG_APPLICATION, TAG_IMPLICIT))
+    _ChannelJoinConfirm_result = ENUM(name=u'result', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'Result')))
+    _ChannelJoinConfirm_initiator = INT(name=u'initiator', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'UserId')))
+    _ChannelJoinConfirm_requested = INT(name=u'requested', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'ChannelId')))
+    _ChannelJoinConfirm_channelId = INT(name=u'channelId', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'ChannelId')), opt=True)
     ChannelJoinConfirm._cont = ASN1Dict([
-        ('result', _ChannelJoinConfirm_result),
-        ('initiator', _ChannelJoinConfirm_initiator),
-        ('requested', _ChannelJoinConfirm_requested),
-        ('channelId', _ChannelJoinConfirm_channelId),
+        (u'result', _ChannelJoinConfirm_result),
+        (u'initiator', _ChannelJoinConfirm_initiator),
+        (u'requested', _ChannelJoinConfirm_requested),
+        (u'channelId', _ChannelJoinConfirm_channelId),
         ])
     ChannelJoinConfirm._ext = None
     
     #-----< ChannelLeaveRequest >-----#
-    ChannelLeaveRequest = SEQ(name='ChannelLeaveRequest', mode=MODE_TYPE, tag=(16, TAG_APPLICATION, TAG_IMPLICIT))
-    _ChannelLeaveRequest_channelIds = SET_OF(name='channelIds', mode=MODE_TYPE)
+    ChannelLeaveRequest = SEQ(name=u'ChannelLeaveRequest', mode=MODE_TYPE, tag=(16, TAG_APPLICATION, TAG_IMPLICIT))
+    _ChannelLeaveRequest_channelIds = SET_OF(name=u'channelIds', mode=MODE_TYPE)
     __ChannelLeaveRequest_channelIds__item_ = INT(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'ChannelId')))
     _ChannelLeaveRequest_channelIds._cont = __ChannelLeaveRequest_channelIds__item_
     ChannelLeaveRequest._cont = ASN1Dict([
-        ('channelIds', _ChannelLeaveRequest_channelIds),
+        (u'channelIds', _ChannelLeaveRequest_channelIds),
         ])
     ChannelLeaveRequest._ext = None
     
     #-----< ChannelConveneRequest >-----#
-    ChannelConveneRequest = SEQ(name='ChannelConveneRequest', mode=MODE_TYPE, tag=(17, TAG_APPLICATION, TAG_IMPLICIT))
-    _ChannelConveneRequest_initiator = INT(name='initiator', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'UserId')))
+    ChannelConveneRequest = SEQ(name=u'ChannelConveneRequest', mode=MODE_TYPE, tag=(17, TAG_APPLICATION, TAG_IMPLICIT))
+    _ChannelConveneRequest_initiator = INT(name=u'initiator', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'UserId')))
     ChannelConveneRequest._cont = ASN1Dict([
-        ('initiator', _ChannelConveneRequest_initiator),
+        (u'initiator', _ChannelConveneRequest_initiator),
         ])
     ChannelConveneRequest._ext = None
     
     #-----< ChannelConveneConfirm >-----#
-    ChannelConveneConfirm = SEQ(name='ChannelConveneConfirm', mode=MODE_TYPE, tag=(18, TAG_APPLICATION, TAG_IMPLICIT))
-    _ChannelConveneConfirm_result = ENUM(name='result', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'Result')))
-    _ChannelConveneConfirm_initiator = INT(name='initiator', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'UserId')))
-    _ChannelConveneConfirm_channelId = INT(name='channelId', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'PrivateChannelId')), opt=True)
+    ChannelConveneConfirm = SEQ(name=u'ChannelConveneConfirm', mode=MODE_TYPE, tag=(18, TAG_APPLICATION, TAG_IMPLICIT))
+    _ChannelConveneConfirm_result = ENUM(name=u'result', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'Result')))
+    _ChannelConveneConfirm_initiator = INT(name=u'initiator', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'UserId')))
+    _ChannelConveneConfirm_channelId = INT(name=u'channelId', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'PrivateChannelId')), opt=True)
     ChannelConveneConfirm._cont = ASN1Dict([
-        ('result', _ChannelConveneConfirm_result),
-        ('initiator', _ChannelConveneConfirm_initiator),
-        ('channelId', _ChannelConveneConfirm_channelId),
+        (u'result', _ChannelConveneConfirm_result),
+        (u'initiator', _ChannelConveneConfirm_initiator),
+        (u'channelId', _ChannelConveneConfirm_channelId),
         ])
     ChannelConveneConfirm._ext = None
     
     #-----< ChannelDisbandRequest >-----#
-    ChannelDisbandRequest = SEQ(name='ChannelDisbandRequest', mode=MODE_TYPE, tag=(19, TAG_APPLICATION, TAG_IMPLICIT))
-    _ChannelDisbandRequest_initiator = INT(name='initiator', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'UserId')))
-    _ChannelDisbandRequest_channelId = INT(name='channelId', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'PrivateChannelId')))
+    ChannelDisbandRequest = SEQ(name=u'ChannelDisbandRequest', mode=MODE_TYPE, tag=(19, TAG_APPLICATION, TAG_IMPLICIT))
+    _ChannelDisbandRequest_initiator = INT(name=u'initiator', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'UserId')))
+    _ChannelDisbandRequest_channelId = INT(name=u'channelId', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'PrivateChannelId')))
     ChannelDisbandRequest._cont = ASN1Dict([
-        ('initiator', _ChannelDisbandRequest_initiator),
-        ('channelId', _ChannelDisbandRequest_channelId),
+        (u'initiator', _ChannelDisbandRequest_initiator),
+        (u'channelId', _ChannelDisbandRequest_channelId),
         ])
     ChannelDisbandRequest._ext = None
     
     #-----< ChannelDisbandIndication >-----#
-    ChannelDisbandIndication = SEQ(name='ChannelDisbandIndication', mode=MODE_TYPE, tag=(20, TAG_APPLICATION, TAG_IMPLICIT))
-    _ChannelDisbandIndication_channelId = INT(name='channelId', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'PrivateChannelId')))
+    ChannelDisbandIndication = SEQ(name=u'ChannelDisbandIndication', mode=MODE_TYPE, tag=(20, TAG_APPLICATION, TAG_IMPLICIT))
+    _ChannelDisbandIndication_channelId = INT(name=u'channelId', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'PrivateChannelId')))
     ChannelDisbandIndication._cont = ASN1Dict([
-        ('channelId', _ChannelDisbandIndication_channelId),
+        (u'channelId', _ChannelDisbandIndication_channelId),
         ])
     ChannelDisbandIndication._ext = None
     
     #-----< ChannelAdmitRequest >-----#
-    ChannelAdmitRequest = SEQ(name='ChannelAdmitRequest', mode=MODE_TYPE, tag=(21, TAG_APPLICATION, TAG_IMPLICIT))
-    _ChannelAdmitRequest_initiator = INT(name='initiator', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'UserId')))
-    _ChannelAdmitRequest_channelId = INT(name='channelId', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'PrivateChannelId')))
-    _ChannelAdmitRequest_userIds = SET_OF(name='userIds', mode=MODE_TYPE)
+    ChannelAdmitRequest = SEQ(name=u'ChannelAdmitRequest', mode=MODE_TYPE, tag=(21, TAG_APPLICATION, TAG_IMPLICIT))
+    _ChannelAdmitRequest_initiator = INT(name=u'initiator', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'UserId')))
+    _ChannelAdmitRequest_channelId = INT(name=u'channelId', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'PrivateChannelId')))
+    _ChannelAdmitRequest_userIds = SET_OF(name=u'userIds', mode=MODE_TYPE)
     __ChannelAdmitRequest_userIds__item_ = INT(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'UserId')))
     _ChannelAdmitRequest_userIds._cont = __ChannelAdmitRequest_userIds__item_
     ChannelAdmitRequest._cont = ASN1Dict([
-        ('initiator', _ChannelAdmitRequest_initiator),
-        ('channelId', _ChannelAdmitRequest_channelId),
-        ('userIds', _ChannelAdmitRequest_userIds),
+        (u'initiator', _ChannelAdmitRequest_initiator),
+        (u'channelId', _ChannelAdmitRequest_channelId),
+        (u'userIds', _ChannelAdmitRequest_userIds),
         ])
     ChannelAdmitRequest._ext = None
     
     #-----< ChannelAdmitIndication >-----#
-    ChannelAdmitIndication = SEQ(name='ChannelAdmitIndication', mode=MODE_TYPE, tag=(22, TAG_APPLICATION, TAG_IMPLICIT))
-    _ChannelAdmitIndication_initiator = INT(name='initiator', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'UserId')))
-    _ChannelAdmitIndication_channelId = INT(name='channelId', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'PrivateChannelId')))
-    _ChannelAdmitIndication_userIds = SET_OF(name='userIds', mode=MODE_TYPE)
+    ChannelAdmitIndication = SEQ(name=u'ChannelAdmitIndication', mode=MODE_TYPE, tag=(22, TAG_APPLICATION, TAG_IMPLICIT))
+    _ChannelAdmitIndication_initiator = INT(name=u'initiator', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'UserId')))
+    _ChannelAdmitIndication_channelId = INT(name=u'channelId', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'PrivateChannelId')))
+    _ChannelAdmitIndication_userIds = SET_OF(name=u'userIds', mode=MODE_TYPE)
     __ChannelAdmitIndication_userIds__item_ = INT(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'UserId')))
     _ChannelAdmitIndication_userIds._cont = __ChannelAdmitIndication_userIds__item_
     ChannelAdmitIndication._cont = ASN1Dict([
-        ('initiator', _ChannelAdmitIndication_initiator),
-        ('channelId', _ChannelAdmitIndication_channelId),
-        ('userIds', _ChannelAdmitIndication_userIds),
+        (u'initiator', _ChannelAdmitIndication_initiator),
+        (u'channelId', _ChannelAdmitIndication_channelId),
+        (u'userIds', _ChannelAdmitIndication_userIds),
         ])
     ChannelAdmitIndication._ext = None
     
     #-----< ChannelExpelRequest >-----#
-    ChannelExpelRequest = SEQ(name='ChannelExpelRequest', mode=MODE_TYPE, tag=(23, TAG_APPLICATION, TAG_IMPLICIT))
-    _ChannelExpelRequest_initiator = INT(name='initiator', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'UserId')))
-    _ChannelExpelRequest_channelId = INT(name='channelId', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'PrivateChannelId')))
-    _ChannelExpelRequest_userIds = SET_OF(name='userIds', mode=MODE_TYPE)
+    ChannelExpelRequest = SEQ(name=u'ChannelExpelRequest', mode=MODE_TYPE, tag=(23, TAG_APPLICATION, TAG_IMPLICIT))
+    _ChannelExpelRequest_initiator = INT(name=u'initiator', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'UserId')))
+    _ChannelExpelRequest_channelId = INT(name=u'channelId', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'PrivateChannelId')))
+    _ChannelExpelRequest_userIds = SET_OF(name=u'userIds', mode=MODE_TYPE)
     __ChannelExpelRequest_userIds__item_ = INT(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'UserId')))
     _ChannelExpelRequest_userIds._cont = __ChannelExpelRequest_userIds__item_
     ChannelExpelRequest._cont = ASN1Dict([
-        ('initiator', _ChannelExpelRequest_initiator),
-        ('channelId', _ChannelExpelRequest_channelId),
-        ('userIds', _ChannelExpelRequest_userIds),
+        (u'initiator', _ChannelExpelRequest_initiator),
+        (u'channelId', _ChannelExpelRequest_channelId),
+        (u'userIds', _ChannelExpelRequest_userIds),
         ])
     ChannelExpelRequest._ext = None
     
     #-----< ChannelExpelIndication >-----#
-    ChannelExpelIndication = SEQ(name='ChannelExpelIndication', mode=MODE_TYPE, tag=(24, TAG_APPLICATION, TAG_IMPLICIT))
-    _ChannelExpelIndication_channelId = INT(name='channelId', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'PrivateChannelId')))
-    _ChannelExpelIndication_userIds = SET_OF(name='userIds', mode=MODE_TYPE)
+    ChannelExpelIndication = SEQ(name=u'ChannelExpelIndication', mode=MODE_TYPE, tag=(24, TAG_APPLICATION, TAG_IMPLICIT))
+    _ChannelExpelIndication_channelId = INT(name=u'channelId', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'PrivateChannelId')))
+    _ChannelExpelIndication_userIds = SET_OF(name=u'userIds', mode=MODE_TYPE)
     __ChannelExpelIndication_userIds__item_ = INT(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'UserId')))
     _ChannelExpelIndication_userIds._cont = __ChannelExpelIndication_userIds__item_
     ChannelExpelIndication._cont = ASN1Dict([
-        ('channelId', _ChannelExpelIndication_channelId),
-        ('userIds', _ChannelExpelIndication_userIds),
+        (u'channelId', _ChannelExpelIndication_channelId),
+        (u'userIds', _ChannelExpelIndication_userIds),
         ])
     ChannelExpelIndication._ext = None
     
     #-----< SendDataRequest >-----#
-    SendDataRequest = SEQ(name='SendDataRequest', mode=MODE_TYPE, tag=(25, TAG_APPLICATION, TAG_IMPLICIT))
-    _SendDataRequest_initiator = INT(name='initiator', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'UserId')))
-    _SendDataRequest_channelId = INT(name='channelId', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'ChannelId')))
-    _SendDataRequest_dataPriority = ENUM(name='dataPriority', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'DataPriority')))
-    _SendDataRequest_segmentation = BIT_STR(name='segmentation', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'Segmentation')))
-    _SendDataRequest_userData = OCT_STR(name='userData', mode=MODE_TYPE)
+    SendDataRequest = SEQ(name=u'SendDataRequest', mode=MODE_TYPE, tag=(25, TAG_APPLICATION, TAG_IMPLICIT))
+    _SendDataRequest_initiator = INT(name=u'initiator', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'UserId')))
+    _SendDataRequest_channelId = INT(name=u'channelId', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'ChannelId')))
+    _SendDataRequest_dataPriority = ENUM(name=u'dataPriority', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'DataPriority')))
+    _SendDataRequest_segmentation = BIT_STR(name=u'segmentation', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'Segmentation')))
+    _SendDataRequest_userData = OCT_STR(name=u'userData', mode=MODE_TYPE)
     SendDataRequest._cont = ASN1Dict([
-        ('initiator', _SendDataRequest_initiator),
-        ('channelId', _SendDataRequest_channelId),
-        ('dataPriority', _SendDataRequest_dataPriority),
-        ('segmentation', _SendDataRequest_segmentation),
-        ('userData', _SendDataRequest_userData),
+        (u'initiator', _SendDataRequest_initiator),
+        (u'channelId', _SendDataRequest_channelId),
+        (u'dataPriority', _SendDataRequest_dataPriority),
+        (u'segmentation', _SendDataRequest_segmentation),
+        (u'userData', _SendDataRequest_userData),
         ])
     SendDataRequest._ext = None
     
     #-----< SendDataIndication >-----#
-    SendDataIndication = SEQ(name='SendDataIndication', mode=MODE_TYPE, tag=(26, TAG_APPLICATION, TAG_IMPLICIT))
-    _SendDataIndication_initiator = INT(name='initiator', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'UserId')))
-    _SendDataIndication_channelId = INT(name='channelId', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'ChannelId')))
-    _SendDataIndication_dataPriority = ENUM(name='dataPriority', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'DataPriority')))
-    _SendDataIndication_segmentation = BIT_STR(name='segmentation', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'Segmentation')))
-    _SendDataIndication_userData = OCT_STR(name='userData', mode=MODE_TYPE)
+    SendDataIndication = SEQ(name=u'SendDataIndication', mode=MODE_TYPE, tag=(26, TAG_APPLICATION, TAG_IMPLICIT))
+    _SendDataIndication_initiator = INT(name=u'initiator', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'UserId')))
+    _SendDataIndication_channelId = INT(name=u'channelId', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'ChannelId')))
+    _SendDataIndication_dataPriority = ENUM(name=u'dataPriority', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'DataPriority')))
+    _SendDataIndication_segmentation = BIT_STR(name=u'segmentation', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'Segmentation')))
+    _SendDataIndication_userData = OCT_STR(name=u'userData', mode=MODE_TYPE)
     SendDataIndication._cont = ASN1Dict([
-        ('initiator', _SendDataIndication_initiator),
-        ('channelId', _SendDataIndication_channelId),
-        ('dataPriority', _SendDataIndication_dataPriority),
-        ('segmentation', _SendDataIndication_segmentation),
-        ('userData', _SendDataIndication_userData),
+        (u'initiator', _SendDataIndication_initiator),
+        (u'channelId', _SendDataIndication_channelId),
+        (u'dataPriority', _SendDataIndication_dataPriority),
+        (u'segmentation', _SendDataIndication_segmentation),
+        (u'userData', _SendDataIndication_userData),
         ])
     SendDataIndication._ext = None
     
     #-----< UniformSendDataRequest >-----#
-    UniformSendDataRequest = SEQ(name='UniformSendDataRequest', mode=MODE_TYPE, tag=(27, TAG_APPLICATION, TAG_IMPLICIT))
-    _UniformSendDataRequest_initiator = INT(name='initiator', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'UserId')))
-    _UniformSendDataRequest_channelId = INT(name='channelId', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'ChannelId')))
-    _UniformSendDataRequest_dataPriority = ENUM(name='dataPriority', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'DataPriority')))
-    _UniformSendDataRequest_segmentation = BIT_STR(name='segmentation', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'Segmentation')))
-    _UniformSendDataRequest_userData = OCT_STR(name='userData', mode=MODE_TYPE)
+    UniformSendDataRequest = SEQ(name=u'UniformSendDataRequest', mode=MODE_TYPE, tag=(27, TAG_APPLICATION, TAG_IMPLICIT))
+    _UniformSendDataRequest_initiator = INT(name=u'initiator', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'UserId')))
+    _UniformSendDataRequest_channelId = INT(name=u'channelId', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'ChannelId')))
+    _UniformSendDataRequest_dataPriority = ENUM(name=u'dataPriority', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'DataPriority')))
+    _UniformSendDataRequest_segmentation = BIT_STR(name=u'segmentation', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'Segmentation')))
+    _UniformSendDataRequest_userData = OCT_STR(name=u'userData', mode=MODE_TYPE)
     UniformSendDataRequest._cont = ASN1Dict([
-        ('initiator', _UniformSendDataRequest_initiator),
-        ('channelId', _UniformSendDataRequest_channelId),
-        ('dataPriority', _UniformSendDataRequest_dataPriority),
-        ('segmentation', _UniformSendDataRequest_segmentation),
-        ('userData', _UniformSendDataRequest_userData),
+        (u'initiator', _UniformSendDataRequest_initiator),
+        (u'channelId', _UniformSendDataRequest_channelId),
+        (u'dataPriority', _UniformSendDataRequest_dataPriority),
+        (u'segmentation', _UniformSendDataRequest_segmentation),
+        (u'userData', _UniformSendDataRequest_userData),
         ])
     UniformSendDataRequest._ext = None
     
     #-----< UniformSendDataIndication >-----#
-    UniformSendDataIndication = SEQ(name='UniformSendDataIndication', mode=MODE_TYPE, tag=(28, TAG_APPLICATION, TAG_IMPLICIT))
-    _UniformSendDataIndication_initiator = INT(name='initiator', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'UserId')))
-    _UniformSendDataIndication_channelId = INT(name='channelId', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'ChannelId')))
-    _UniformSendDataIndication_dataPriority = ENUM(name='dataPriority', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'DataPriority')))
-    _UniformSendDataIndication_segmentation = BIT_STR(name='segmentation', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'Segmentation')))
-    _UniformSendDataIndication_userData = OCT_STR(name='userData', mode=MODE_TYPE)
+    UniformSendDataIndication = SEQ(name=u'UniformSendDataIndication', mode=MODE_TYPE, tag=(28, TAG_APPLICATION, TAG_IMPLICIT))
+    _UniformSendDataIndication_initiator = INT(name=u'initiator', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'UserId')))
+    _UniformSendDataIndication_channelId = INT(name=u'channelId', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'ChannelId')))
+    _UniformSendDataIndication_dataPriority = ENUM(name=u'dataPriority', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'DataPriority')))
+    _UniformSendDataIndication_segmentation = BIT_STR(name=u'segmentation', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'Segmentation')))
+    _UniformSendDataIndication_userData = OCT_STR(name=u'userData', mode=MODE_TYPE)
     UniformSendDataIndication._cont = ASN1Dict([
-        ('initiator', _UniformSendDataIndication_initiator),
-        ('channelId', _UniformSendDataIndication_channelId),
-        ('dataPriority', _UniformSendDataIndication_dataPriority),
-        ('segmentation', _UniformSendDataIndication_segmentation),
-        ('userData', _UniformSendDataIndication_userData),
+        (u'initiator', _UniformSendDataIndication_initiator),
+        (u'channelId', _UniformSendDataIndication_channelId),
+        (u'dataPriority', _UniformSendDataIndication_dataPriority),
+        (u'segmentation', _UniformSendDataIndication_segmentation),
+        (u'userData', _UniformSendDataIndication_userData),
         ])
     UniformSendDataIndication._ext = None
     
     #-----< TokenGrabRequest >-----#
-    TokenGrabRequest = SEQ(name='TokenGrabRequest', mode=MODE_TYPE, tag=(29, TAG_APPLICATION, TAG_IMPLICIT))
-    _TokenGrabRequest_initiator = INT(name='initiator', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'UserId')))
-    _TokenGrabRequest_tokenId = INT(name='tokenId', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'TokenId')))
+    TokenGrabRequest = SEQ(name=u'TokenGrabRequest', mode=MODE_TYPE, tag=(29, TAG_APPLICATION, TAG_IMPLICIT))
+    _TokenGrabRequest_initiator = INT(name=u'initiator', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'UserId')))
+    _TokenGrabRequest_tokenId = INT(name=u'tokenId', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'TokenId')))
     TokenGrabRequest._cont = ASN1Dict([
-        ('initiator', _TokenGrabRequest_initiator),
-        ('tokenId', _TokenGrabRequest_tokenId),
+        (u'initiator', _TokenGrabRequest_initiator),
+        (u'tokenId', _TokenGrabRequest_tokenId),
         ])
     TokenGrabRequest._ext = None
     
     #-----< TokenGrabConfirm >-----#
-    TokenGrabConfirm = SEQ(name='TokenGrabConfirm', mode=MODE_TYPE, tag=(30, TAG_APPLICATION, TAG_IMPLICIT))
-    _TokenGrabConfirm_result = ENUM(name='result', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'Result')))
-    _TokenGrabConfirm_initiator = INT(name='initiator', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'UserId')))
-    _TokenGrabConfirm_tokenId = INT(name='tokenId', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'TokenId')))
-    _TokenGrabConfirm_tokenStatus = ENUM(name='tokenStatus', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'TokenStatus')))
+    TokenGrabConfirm = SEQ(name=u'TokenGrabConfirm', mode=MODE_TYPE, tag=(30, TAG_APPLICATION, TAG_IMPLICIT))
+    _TokenGrabConfirm_result = ENUM(name=u'result', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'Result')))
+    _TokenGrabConfirm_initiator = INT(name=u'initiator', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'UserId')))
+    _TokenGrabConfirm_tokenId = INT(name=u'tokenId', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'TokenId')))
+    _TokenGrabConfirm_tokenStatus = ENUM(name=u'tokenStatus', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'TokenStatus')))
     TokenGrabConfirm._cont = ASN1Dict([
-        ('result', _TokenGrabConfirm_result),
-        ('initiator', _TokenGrabConfirm_initiator),
-        ('tokenId', _TokenGrabConfirm_tokenId),
-        ('tokenStatus', _TokenGrabConfirm_tokenStatus),
+        (u'result', _TokenGrabConfirm_result),
+        (u'initiator', _TokenGrabConfirm_initiator),
+        (u'tokenId', _TokenGrabConfirm_tokenId),
+        (u'tokenStatus', _TokenGrabConfirm_tokenStatus),
         ])
     TokenGrabConfirm._ext = None
     
     #-----< TokenInhibitRequest >-----#
-    TokenInhibitRequest = SEQ(name='TokenInhibitRequest', mode=MODE_TYPE, tag=(31, TAG_APPLICATION, TAG_IMPLICIT))
-    _TokenInhibitRequest_initiator = INT(name='initiator', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'UserId')))
-    _TokenInhibitRequest_tokenId = INT(name='tokenId', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'TokenId')))
+    TokenInhibitRequest = SEQ(name=u'TokenInhibitRequest', mode=MODE_TYPE, tag=(31, TAG_APPLICATION, TAG_IMPLICIT))
+    _TokenInhibitRequest_initiator = INT(name=u'initiator', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'UserId')))
+    _TokenInhibitRequest_tokenId = INT(name=u'tokenId', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'TokenId')))
     TokenInhibitRequest._cont = ASN1Dict([
-        ('initiator', _TokenInhibitRequest_initiator),
-        ('tokenId', _TokenInhibitRequest_tokenId),
+        (u'initiator', _TokenInhibitRequest_initiator),
+        (u'tokenId', _TokenInhibitRequest_tokenId),
         ])
     TokenInhibitRequest._ext = None
     
     #-----< TokenInhibitConfirm >-----#
-    TokenInhibitConfirm = SEQ(name='TokenInhibitConfirm', mode=MODE_TYPE, tag=(32, TAG_APPLICATION, TAG_IMPLICIT))
-    _TokenInhibitConfirm_result = ENUM(name='result', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'Result')))
-    _TokenInhibitConfirm_initiator = INT(name='initiator', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'UserId')))
-    _TokenInhibitConfirm_tokenId = INT(name='tokenId', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'TokenId')))
-    _TokenInhibitConfirm_tokenStatus = ENUM(name='tokenStatus', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'TokenStatus')))
+    TokenInhibitConfirm = SEQ(name=u'TokenInhibitConfirm', mode=MODE_TYPE, tag=(32, TAG_APPLICATION, TAG_IMPLICIT))
+    _TokenInhibitConfirm_result = ENUM(name=u'result', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'Result')))
+    _TokenInhibitConfirm_initiator = INT(name=u'initiator', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'UserId')))
+    _TokenInhibitConfirm_tokenId = INT(name=u'tokenId', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'TokenId')))
+    _TokenInhibitConfirm_tokenStatus = ENUM(name=u'tokenStatus', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'TokenStatus')))
     TokenInhibitConfirm._cont = ASN1Dict([
-        ('result', _TokenInhibitConfirm_result),
-        ('initiator', _TokenInhibitConfirm_initiator),
-        ('tokenId', _TokenInhibitConfirm_tokenId),
-        ('tokenStatus', _TokenInhibitConfirm_tokenStatus),
+        (u'result', _TokenInhibitConfirm_result),
+        (u'initiator', _TokenInhibitConfirm_initiator),
+        (u'tokenId', _TokenInhibitConfirm_tokenId),
+        (u'tokenStatus', _TokenInhibitConfirm_tokenStatus),
         ])
     TokenInhibitConfirm._ext = None
     
     #-----< TokenGiveRequest >-----#
-    TokenGiveRequest = SEQ(name='TokenGiveRequest', mode=MODE_TYPE, tag=(33, TAG_APPLICATION, TAG_IMPLICIT))
-    _TokenGiveRequest_initiator = INT(name='initiator', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'UserId')))
-    _TokenGiveRequest_tokenId = INT(name='tokenId', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'TokenId')))
-    _TokenGiveRequest_recipient = INT(name='recipient', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'UserId')))
+    TokenGiveRequest = SEQ(name=u'TokenGiveRequest', mode=MODE_TYPE, tag=(33, TAG_APPLICATION, TAG_IMPLICIT))
+    _TokenGiveRequest_initiator = INT(name=u'initiator', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'UserId')))
+    _TokenGiveRequest_tokenId = INT(name=u'tokenId', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'TokenId')))
+    _TokenGiveRequest_recipient = INT(name=u'recipient', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'UserId')))
     TokenGiveRequest._cont = ASN1Dict([
-        ('initiator', _TokenGiveRequest_initiator),
-        ('tokenId', _TokenGiveRequest_tokenId),
-        ('recipient', _TokenGiveRequest_recipient),
+        (u'initiator', _TokenGiveRequest_initiator),
+        (u'tokenId', _TokenGiveRequest_tokenId),
+        (u'recipient', _TokenGiveRequest_recipient),
         ])
     TokenGiveRequest._ext = None
     
     #-----< TokenGiveIndication >-----#
-    TokenGiveIndication = SEQ(name='TokenGiveIndication', mode=MODE_TYPE, tag=(34, TAG_APPLICATION, TAG_IMPLICIT))
-    _TokenGiveIndication_initiator = INT(name='initiator', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'UserId')))
-    _TokenGiveIndication_tokenId = INT(name='tokenId', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'TokenId')))
-    _TokenGiveIndication_recipient = INT(name='recipient', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'UserId')))
+    TokenGiveIndication = SEQ(name=u'TokenGiveIndication', mode=MODE_TYPE, tag=(34, TAG_APPLICATION, TAG_IMPLICIT))
+    _TokenGiveIndication_initiator = INT(name=u'initiator', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'UserId')))
+    _TokenGiveIndication_tokenId = INT(name=u'tokenId', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'TokenId')))
+    _TokenGiveIndication_recipient = INT(name=u'recipient', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'UserId')))
     TokenGiveIndication._cont = ASN1Dict([
-        ('initiator', _TokenGiveIndication_initiator),
-        ('tokenId', _TokenGiveIndication_tokenId),
-        ('recipient', _TokenGiveIndication_recipient),
+        (u'initiator', _TokenGiveIndication_initiator),
+        (u'tokenId', _TokenGiveIndication_tokenId),
+        (u'recipient', _TokenGiveIndication_recipient),
         ])
     TokenGiveIndication._ext = None
     
     #-----< TokenGiveResponse >-----#
-    TokenGiveResponse = SEQ(name='TokenGiveResponse', mode=MODE_TYPE, tag=(35, TAG_APPLICATION, TAG_IMPLICIT))
-    _TokenGiveResponse_result = ENUM(name='result', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'Result')))
-    _TokenGiveResponse_recipient = INT(name='recipient', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'UserId')))
-    _TokenGiveResponse_tokenId = INT(name='tokenId', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'TokenId')))
+    TokenGiveResponse = SEQ(name=u'TokenGiveResponse', mode=MODE_TYPE, tag=(35, TAG_APPLICATION, TAG_IMPLICIT))
+    _TokenGiveResponse_result = ENUM(name=u'result', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'Result')))
+    _TokenGiveResponse_recipient = INT(name=u'recipient', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'UserId')))
+    _TokenGiveResponse_tokenId = INT(name=u'tokenId', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'TokenId')))
     TokenGiveResponse._cont = ASN1Dict([
-        ('result', _TokenGiveResponse_result),
-        ('recipient', _TokenGiveResponse_recipient),
-        ('tokenId', _TokenGiveResponse_tokenId),
+        (u'result', _TokenGiveResponse_result),
+        (u'recipient', _TokenGiveResponse_recipient),
+        (u'tokenId', _TokenGiveResponse_tokenId),
         ])
     TokenGiveResponse._ext = None
     
     #-----< TokenGiveConfirm >-----#
-    TokenGiveConfirm = SEQ(name='TokenGiveConfirm', mode=MODE_TYPE, tag=(36, TAG_APPLICATION, TAG_IMPLICIT))
-    _TokenGiveConfirm_result = ENUM(name='result', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'Result')))
-    _TokenGiveConfirm_initiator = INT(name='initiator', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'UserId')))
-    _TokenGiveConfirm_tokenId = INT(name='tokenId', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'TokenId')))
-    _TokenGiveConfirm_tokenStatus = ENUM(name='tokenStatus', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'TokenStatus')))
+    TokenGiveConfirm = SEQ(name=u'TokenGiveConfirm', mode=MODE_TYPE, tag=(36, TAG_APPLICATION, TAG_IMPLICIT))
+    _TokenGiveConfirm_result = ENUM(name=u'result', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'Result')))
+    _TokenGiveConfirm_initiator = INT(name=u'initiator', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'UserId')))
+    _TokenGiveConfirm_tokenId = INT(name=u'tokenId', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'TokenId')))
+    _TokenGiveConfirm_tokenStatus = ENUM(name=u'tokenStatus', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'TokenStatus')))
     TokenGiveConfirm._cont = ASN1Dict([
-        ('result', _TokenGiveConfirm_result),
-        ('initiator', _TokenGiveConfirm_initiator),
-        ('tokenId', _TokenGiveConfirm_tokenId),
-        ('tokenStatus', _TokenGiveConfirm_tokenStatus),
+        (u'result', _TokenGiveConfirm_result),
+        (u'initiator', _TokenGiveConfirm_initiator),
+        (u'tokenId', _TokenGiveConfirm_tokenId),
+        (u'tokenStatus', _TokenGiveConfirm_tokenStatus),
         ])
     TokenGiveConfirm._ext = None
     
     #-----< TokenPleaseRequest >-----#
-    TokenPleaseRequest = SEQ(name='TokenPleaseRequest', mode=MODE_TYPE, tag=(37, TAG_APPLICATION, TAG_IMPLICIT))
-    _TokenPleaseRequest_initiator = INT(name='initiator', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'UserId')))
-    _TokenPleaseRequest_tokenId = INT(name='tokenId', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'TokenId')))
+    TokenPleaseRequest = SEQ(name=u'TokenPleaseRequest', mode=MODE_TYPE, tag=(37, TAG_APPLICATION, TAG_IMPLICIT))
+    _TokenPleaseRequest_initiator = INT(name=u'initiator', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'UserId')))
+    _TokenPleaseRequest_tokenId = INT(name=u'tokenId', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'TokenId')))
     TokenPleaseRequest._cont = ASN1Dict([
-        ('initiator', _TokenPleaseRequest_initiator),
-        ('tokenId', _TokenPleaseRequest_tokenId),
+        (u'initiator', _TokenPleaseRequest_initiator),
+        (u'tokenId', _TokenPleaseRequest_tokenId),
         ])
     TokenPleaseRequest._ext = None
     
     #-----< TokenPleaseIndication >-----#
-    TokenPleaseIndication = SEQ(name='TokenPleaseIndication', mode=MODE_TYPE, tag=(38, TAG_APPLICATION, TAG_IMPLICIT))
-    _TokenPleaseIndication_initiator = INT(name='initiator', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'UserId')))
-    _TokenPleaseIndication_tokenId = INT(name='tokenId', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'TokenId')))
+    TokenPleaseIndication = SEQ(name=u'TokenPleaseIndication', mode=MODE_TYPE, tag=(38, TAG_APPLICATION, TAG_IMPLICIT))
+    _TokenPleaseIndication_initiator = INT(name=u'initiator', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'UserId')))
+    _TokenPleaseIndication_tokenId = INT(name=u'tokenId', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'TokenId')))
     TokenPleaseIndication._cont = ASN1Dict([
-        ('initiator', _TokenPleaseIndication_initiator),
-        ('tokenId', _TokenPleaseIndication_tokenId),
+        (u'initiator', _TokenPleaseIndication_initiator),
+        (u'tokenId', _TokenPleaseIndication_tokenId),
         ])
     TokenPleaseIndication._ext = None
     
     #-----< TokenReleaseRequest >-----#
-    TokenReleaseRequest = SEQ(name='TokenReleaseRequest', mode=MODE_TYPE, tag=(39, TAG_APPLICATION, TAG_IMPLICIT))
-    _TokenReleaseRequest_initiator = INT(name='initiator', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'UserId')))
-    _TokenReleaseRequest_tokenId = INT(name='tokenId', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'TokenId')))
+    TokenReleaseRequest = SEQ(name=u'TokenReleaseRequest', mode=MODE_TYPE, tag=(39, TAG_APPLICATION, TAG_IMPLICIT))
+    _TokenReleaseRequest_initiator = INT(name=u'initiator', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'UserId')))
+    _TokenReleaseRequest_tokenId = INT(name=u'tokenId', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'TokenId')))
     TokenReleaseRequest._cont = ASN1Dict([
-        ('initiator', _TokenReleaseRequest_initiator),
-        ('tokenId', _TokenReleaseRequest_tokenId),
+        (u'initiator', _TokenReleaseRequest_initiator),
+        (u'tokenId', _TokenReleaseRequest_tokenId),
         ])
     TokenReleaseRequest._ext = None
     
     #-----< TokenReleaseConfirm >-----#
-    TokenReleaseConfirm = SEQ(name='TokenReleaseConfirm', mode=MODE_TYPE, tag=(40, TAG_APPLICATION, TAG_IMPLICIT))
-    _TokenReleaseConfirm_result = ENUM(name='result', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'Result')))
-    _TokenReleaseConfirm_initiator = INT(name='initiator', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'UserId')))
-    _TokenReleaseConfirm_tokenId = INT(name='tokenId', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'TokenId')))
-    _TokenReleaseConfirm_tokenStatus = ENUM(name='tokenStatus', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'TokenStatus')))
+    TokenReleaseConfirm = SEQ(name=u'TokenReleaseConfirm', mode=MODE_TYPE, tag=(40, TAG_APPLICATION, TAG_IMPLICIT))
+    _TokenReleaseConfirm_result = ENUM(name=u'result', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'Result')))
+    _TokenReleaseConfirm_initiator = INT(name=u'initiator', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'UserId')))
+    _TokenReleaseConfirm_tokenId = INT(name=u'tokenId', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'TokenId')))
+    _TokenReleaseConfirm_tokenStatus = ENUM(name=u'tokenStatus', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'TokenStatus')))
     TokenReleaseConfirm._cont = ASN1Dict([
-        ('result', _TokenReleaseConfirm_result),
-        ('initiator', _TokenReleaseConfirm_initiator),
-        ('tokenId', _TokenReleaseConfirm_tokenId),
-        ('tokenStatus', _TokenReleaseConfirm_tokenStatus),
+        (u'result', _TokenReleaseConfirm_result),
+        (u'initiator', _TokenReleaseConfirm_initiator),
+        (u'tokenId', _TokenReleaseConfirm_tokenId),
+        (u'tokenStatus', _TokenReleaseConfirm_tokenStatus),
         ])
     TokenReleaseConfirm._ext = None
     
     #-----< TokenTestRequest >-----#
-    TokenTestRequest = SEQ(name='TokenTestRequest', mode=MODE_TYPE, tag=(41, TAG_APPLICATION, TAG_IMPLICIT))
-    _TokenTestRequest_initiator = INT(name='initiator', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'UserId')))
-    _TokenTestRequest_tokenId = INT(name='tokenId', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'TokenId')))
+    TokenTestRequest = SEQ(name=u'TokenTestRequest', mode=MODE_TYPE, tag=(41, TAG_APPLICATION, TAG_IMPLICIT))
+    _TokenTestRequest_initiator = INT(name=u'initiator', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'UserId')))
+    _TokenTestRequest_tokenId = INT(name=u'tokenId', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'TokenId')))
     TokenTestRequest._cont = ASN1Dict([
-        ('initiator', _TokenTestRequest_initiator),
-        ('tokenId', _TokenTestRequest_tokenId),
+        (u'initiator', _TokenTestRequest_initiator),
+        (u'tokenId', _TokenTestRequest_tokenId),
         ])
     TokenTestRequest._ext = None
     
     #-----< TokenTestConfirm >-----#
-    TokenTestConfirm = SEQ(name='TokenTestConfirm', mode=MODE_TYPE, tag=(42, TAG_APPLICATION, TAG_IMPLICIT))
-    _TokenTestConfirm_initiator = INT(name='initiator', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'UserId')))
-    _TokenTestConfirm_tokenId = INT(name='tokenId', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'TokenId')))
-    _TokenTestConfirm_tokenStatus = ENUM(name='tokenStatus', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'TokenStatus')))
+    TokenTestConfirm = SEQ(name=u'TokenTestConfirm', mode=MODE_TYPE, tag=(42, TAG_APPLICATION, TAG_IMPLICIT))
+    _TokenTestConfirm_initiator = INT(name=u'initiator', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'UserId')))
+    _TokenTestConfirm_tokenId = INT(name=u'tokenId', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'TokenId')))
+    _TokenTestConfirm_tokenStatus = ENUM(name=u'tokenStatus', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'TokenStatus')))
     TokenTestConfirm._cont = ASN1Dict([
-        ('initiator', _TokenTestConfirm_initiator),
-        ('tokenId', _TokenTestConfirm_tokenId),
-        ('tokenStatus', _TokenTestConfirm_tokenStatus),
+        (u'initiator', _TokenTestConfirm_initiator),
+        (u'tokenId', _TokenTestConfirm_tokenId),
+        (u'tokenStatus', _TokenTestConfirm_tokenStatus),
         ])
     TokenTestConfirm._ext = None
     
     #-----< Reason >-----#
-    Reason = ENUM(name='Reason', mode=MODE_TYPE)
-    Reason._cont = ASN1Dict([('rn-domain-disconnected', 0), ('rn-provider-initiated', 1), ('rn-token-purged', 2), ('rn-user-requested', 3), ('rn-channel-purged', 4)])
+    Reason = ENUM(name=u'Reason', mode=MODE_TYPE)
+    Reason._cont = ASN1Dict([(u'rn-domain-disconnected', 0), (u'rn-provider-initiated', 1), (u'rn-token-purged', 2), (u'rn-user-requested', 3), (u'rn-channel-purged', 4)])
     Reason._ext = None
     
     #-----< Result >-----#
-    Result = ENUM(name='Result', mode=MODE_TYPE)
-    Result._cont = ASN1Dict([('rt-successful', 0), ('rt-domain-merging', 1), ('rt-domain-not-hierarchical', 2), ('rt-no-such-channel', 3), ('rt-no-such-domain', 4), ('rt-no-such-user', 5), ('rt-not-admitted', 6), ('rt-other-user-id', 7), ('rt-parameters-unacceptable', 8), ('rt-token-not-available', 9), ('rt-token-not-possessed', 10), ('rt-too-many-channels', 11), ('rt-too-many-tokens', 12), ('rt-too-many-users', 13), ('rt-unspecified-failure', 14), ('rt-user-rejected', 15)])
+    Result = ENUM(name=u'Result', mode=MODE_TYPE)
+    Result._cont = ASN1Dict([(u'rt-successful', 0), (u'rt-domain-merging', 1), (u'rt-domain-not-hierarchical', 2), (u'rt-no-such-channel', 3), (u'rt-no-such-domain', 4), (u'rt-no-such-user', 5), (u'rt-not-admitted', 6), (u'rt-other-user-id', 7), (u'rt-parameters-unacceptable', 8), (u'rt-token-not-available', 9), (u'rt-token-not-possessed', 10), (u'rt-too-many-channels', 11), (u'rt-too-many-tokens', 12), (u'rt-too-many-users', 13), (u'rt-unspecified-failure', 14), (u'rt-user-rejected', 15)])
     Result._ext = None
     
     #-----< Diagnostic >-----#
-    Diagnostic = ENUM(name='Diagnostic', mode=MODE_TYPE)
-    Diagnostic._cont = ASN1Dict([('dc-inconsistent-merge', 0), ('dc-forbidden-PDU-downward', 1), ('dc-forbidden-PDU-upward', 2), ('dc-invalid-BER-encoding', 3), ('dc-invalid-PER-encoding', 4), ('dc-misrouted-user', 5), ('dc-unrequested-confirm', 6), ('dc-wrong-transport-priority', 7), ('dc-channel-id-conflict', 8), ('dc-token-id-conflict', 9), ('dc-not-user-id-channel', 10), ('dc-too-many-channels', 11), ('dc-too-many-tokens', 12), ('dc-too-many-users', 13)])
+    Diagnostic = ENUM(name=u'Diagnostic', mode=MODE_TYPE)
+    Diagnostic._cont = ASN1Dict([(u'dc-inconsistent-merge', 0), (u'dc-forbidden-PDU-downward', 1), (u'dc-forbidden-PDU-upward', 2), (u'dc-invalid-BER-encoding', 3), (u'dc-invalid-PER-encoding', 4), (u'dc-misrouted-user', 5), (u'dc-unrequested-confirm', 6), (u'dc-wrong-transport-priority', 7), (u'dc-channel-id-conflict', 8), (u'dc-token-id-conflict', 9), (u'dc-not-user-id-channel', 10), (u'dc-too-many-channels', 11), (u'dc-too-many-tokens', 12), (u'dc-too-many-users', 13)])
     Diagnostic._ext = None
     
     #-----< ConnectMCSPDU >-----#
-    ConnectMCSPDU = CHOICE(name='ConnectMCSPDU', mode=MODE_TYPE)
-    _ConnectMCSPDU_connect_initial = SEQ(name='connect-initial', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'Connect-Initial')))
-    _ConnectMCSPDU_connect_response = SEQ(name='connect-response', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'Connect-Response')))
-    _ConnectMCSPDU_connect_additional = SEQ(name='connect-additional', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'Connect-Additional')))
-    _ConnectMCSPDU_connect_result = SEQ(name='connect-result', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'Connect-Result')))
+    ConnectMCSPDU = CHOICE(name=u'ConnectMCSPDU', mode=MODE_TYPE)
+    _ConnectMCSPDU_connect_initial = SEQ(name=u'connect-initial', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'Connect-Initial')))
+    _ConnectMCSPDU_connect_response = SEQ(name=u'connect-response', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'Connect-Response')))
+    _ConnectMCSPDU_connect_additional = SEQ(name=u'connect-additional', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'Connect-Additional')))
+    _ConnectMCSPDU_connect_result = SEQ(name=u'connect-result', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'Connect-Result')))
     ConnectMCSPDU._cont = ASN1Dict([
-        ('connect-initial', _ConnectMCSPDU_connect_initial),
-        ('connect-response', _ConnectMCSPDU_connect_response),
-        ('connect-additional', _ConnectMCSPDU_connect_additional),
-        ('connect-result', _ConnectMCSPDU_connect_result),
+        (u'connect-initial', _ConnectMCSPDU_connect_initial),
+        (u'connect-response', _ConnectMCSPDU_connect_response),
+        (u'connect-additional', _ConnectMCSPDU_connect_additional),
+        (u'connect-result', _ConnectMCSPDU_connect_result),
         ])
     ConnectMCSPDU._ext = None
     
     #-----< DomainMCSPDU >-----#
-    DomainMCSPDU = CHOICE(name='DomainMCSPDU', mode=MODE_TYPE)
-    _DomainMCSPDU_plumbDomainIndication = SEQ(name='plumbDomainIndication', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'PlumbDomainIndication')))
-    _DomainMCSPDU_erectDomainRequest = SEQ(name='erectDomainRequest', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'ErectDomainRequest')))
-    _DomainMCSPDU_mergeChannelsRequest = SEQ(name='mergeChannelsRequest', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'MergeChannelsRequest')))
-    _DomainMCSPDU_mergeChannelsConfirm = SEQ(name='mergeChannelsConfirm', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'MergeChannelsConfirm')))
-    _DomainMCSPDU_purgeChannelsIndication = SEQ(name='purgeChannelsIndication', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'PurgeChannelsIndication')))
-    _DomainMCSPDU_mergeTokensRequest = SEQ(name='mergeTokensRequest', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'MergeTokensRequest')))
-    _DomainMCSPDU_mergeTokensConfirm = SEQ(name='mergeTokensConfirm', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'MergeTokensConfirm')))
-    _DomainMCSPDU_purgeTokensIndication = SEQ(name='purgeTokensIndication', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'PurgeTokensIndication')))
-    _DomainMCSPDU_disconnectProviderUltimatum = SEQ(name='disconnectProviderUltimatum', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'DisconnectProviderUltimatum')))
-    _DomainMCSPDU_rejectMCSPDUUltimatum = SEQ(name='rejectMCSPDUUltimatum', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'RejectMCSPDUUltimatum')))
-    _DomainMCSPDU_attachUserRequest = SEQ(name='attachUserRequest', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'AttachUserRequest')))
-    _DomainMCSPDU_attachUserConfirm = SEQ(name='attachUserConfirm', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'AttachUserConfirm')))
-    _DomainMCSPDU_detachUserRequest = SEQ(name='detachUserRequest', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'DetachUserRequest')))
-    _DomainMCSPDU_detachUserIndication = SEQ(name='detachUserIndication', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'DetachUserIndication')))
-    _DomainMCSPDU_channelJoinRequest = SEQ(name='channelJoinRequest', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'ChannelJoinRequest')))
-    _DomainMCSPDU_channelJoinConfirm = SEQ(name='channelJoinConfirm', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'ChannelJoinConfirm')))
-    _DomainMCSPDU_channelLeaveRequest = SEQ(name='channelLeaveRequest', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'ChannelLeaveRequest')))
-    _DomainMCSPDU_channelConveneRequest = SEQ(name='channelConveneRequest', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'ChannelConveneRequest')))
-    _DomainMCSPDU_channelConveneConfirm = SEQ(name='channelConveneConfirm', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'ChannelConveneConfirm')))
-    _DomainMCSPDU_channelDisbandRequest = SEQ(name='channelDisbandRequest', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'ChannelDisbandRequest')))
-    _DomainMCSPDU_channelDisbandIndication = SEQ(name='channelDisbandIndication', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'ChannelDisbandIndication')))
-    _DomainMCSPDU_channelAdmitRequest = SEQ(name='channelAdmitRequest', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'ChannelAdmitRequest')))
-    _DomainMCSPDU_channelAdmitIndication = SEQ(name='channelAdmitIndication', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'ChannelAdmitIndication')))
-    _DomainMCSPDU_channelExpelRequest = SEQ(name='channelExpelRequest', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'ChannelExpelRequest')))
-    _DomainMCSPDU_channelExpelIndication = SEQ(name='channelExpelIndication', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'ChannelExpelIndication')))
-    _DomainMCSPDU_sendDataRequest = SEQ(name='sendDataRequest', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'SendDataRequest')))
-    _DomainMCSPDU_sendDataIndication = SEQ(name='sendDataIndication', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'SendDataIndication')))
-    _DomainMCSPDU_uniformSendDataRequest = SEQ(name='uniformSendDataRequest', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'UniformSendDataRequest')))
-    _DomainMCSPDU_uniformSendDataIndication = SEQ(name='uniformSendDataIndication', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'UniformSendDataIndication')))
-    _DomainMCSPDU_tokenGrabRequest = SEQ(name='tokenGrabRequest', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'TokenGrabRequest')))
-    _DomainMCSPDU_tokenGrabConfirm = SEQ(name='tokenGrabConfirm', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'TokenGrabConfirm')))
-    _DomainMCSPDU_tokenInhibitRequest = SEQ(name='tokenInhibitRequest', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'TokenInhibitRequest')))
-    _DomainMCSPDU_tokenInhibitConfirm = SEQ(name='tokenInhibitConfirm', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'TokenInhibitConfirm')))
-    _DomainMCSPDU_tokenGiveRequest = SEQ(name='tokenGiveRequest', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'TokenGiveRequest')))
-    _DomainMCSPDU_tokenGiveIndication = SEQ(name='tokenGiveIndication', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'TokenGiveIndication')))
-    _DomainMCSPDU_tokenGiveResponse = SEQ(name='tokenGiveResponse', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'TokenGiveResponse')))
-    _DomainMCSPDU_tokenGiveConfirm = SEQ(name='tokenGiveConfirm', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'TokenGiveConfirm')))
-    _DomainMCSPDU_tokenPleaseRequest = SEQ(name='tokenPleaseRequest', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'TokenPleaseRequest')))
-    _DomainMCSPDU_tokenPleaseIndication = SEQ(name='tokenPleaseIndication', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'TokenPleaseIndication')))
-    _DomainMCSPDU_tokenReleaseRequest = SEQ(name='tokenReleaseRequest', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'TokenReleaseRequest')))
-    _DomainMCSPDU_tokenReleaseConfirm = SEQ(name='tokenReleaseConfirm', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'TokenReleaseConfirm')))
-    _DomainMCSPDU_tokenTestRequest = SEQ(name='tokenTestRequest', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'TokenTestRequest')))
-    _DomainMCSPDU_tokenTestConfirm = SEQ(name='tokenTestConfirm', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'TokenTestConfirm')))
+    DomainMCSPDU = CHOICE(name=u'DomainMCSPDU', mode=MODE_TYPE)
+    _DomainMCSPDU_plumbDomainIndication = SEQ(name=u'plumbDomainIndication', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'PlumbDomainIndication')))
+    _DomainMCSPDU_erectDomainRequest = SEQ(name=u'erectDomainRequest', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'ErectDomainRequest')))
+    _DomainMCSPDU_mergeChannelsRequest = SEQ(name=u'mergeChannelsRequest', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'MergeChannelsRequest')))
+    _DomainMCSPDU_mergeChannelsConfirm = SEQ(name=u'mergeChannelsConfirm', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'MergeChannelsConfirm')))
+    _DomainMCSPDU_purgeChannelsIndication = SEQ(name=u'purgeChannelsIndication', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'PurgeChannelsIndication')))
+    _DomainMCSPDU_mergeTokensRequest = SEQ(name=u'mergeTokensRequest', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'MergeTokensRequest')))
+    _DomainMCSPDU_mergeTokensConfirm = SEQ(name=u'mergeTokensConfirm', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'MergeTokensConfirm')))
+    _DomainMCSPDU_purgeTokensIndication = SEQ(name=u'purgeTokensIndication', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'PurgeTokensIndication')))
+    _DomainMCSPDU_disconnectProviderUltimatum = SEQ(name=u'disconnectProviderUltimatum', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'DisconnectProviderUltimatum')))
+    _DomainMCSPDU_rejectMCSPDUUltimatum = SEQ(name=u'rejectMCSPDUUltimatum', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'RejectMCSPDUUltimatum')))
+    _DomainMCSPDU_attachUserRequest = SEQ(name=u'attachUserRequest', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'AttachUserRequest')))
+    _DomainMCSPDU_attachUserConfirm = SEQ(name=u'attachUserConfirm', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'AttachUserConfirm')))
+    _DomainMCSPDU_detachUserRequest = SEQ(name=u'detachUserRequest', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'DetachUserRequest')))
+    _DomainMCSPDU_detachUserIndication = SEQ(name=u'detachUserIndication', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'DetachUserIndication')))
+    _DomainMCSPDU_channelJoinRequest = SEQ(name=u'channelJoinRequest', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'ChannelJoinRequest')))
+    _DomainMCSPDU_channelJoinConfirm = SEQ(name=u'channelJoinConfirm', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'ChannelJoinConfirm')))
+    _DomainMCSPDU_channelLeaveRequest = SEQ(name=u'channelLeaveRequest', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'ChannelLeaveRequest')))
+    _DomainMCSPDU_channelConveneRequest = SEQ(name=u'channelConveneRequest', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'ChannelConveneRequest')))
+    _DomainMCSPDU_channelConveneConfirm = SEQ(name=u'channelConveneConfirm', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'ChannelConveneConfirm')))
+    _DomainMCSPDU_channelDisbandRequest = SEQ(name=u'channelDisbandRequest', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'ChannelDisbandRequest')))
+    _DomainMCSPDU_channelDisbandIndication = SEQ(name=u'channelDisbandIndication', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'ChannelDisbandIndication')))
+    _DomainMCSPDU_channelAdmitRequest = SEQ(name=u'channelAdmitRequest', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'ChannelAdmitRequest')))
+    _DomainMCSPDU_channelAdmitIndication = SEQ(name=u'channelAdmitIndication', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'ChannelAdmitIndication')))
+    _DomainMCSPDU_channelExpelRequest = SEQ(name=u'channelExpelRequest', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'ChannelExpelRequest')))
+    _DomainMCSPDU_channelExpelIndication = SEQ(name=u'channelExpelIndication', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'ChannelExpelIndication')))
+    _DomainMCSPDU_sendDataRequest = SEQ(name=u'sendDataRequest', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'SendDataRequest')))
+    _DomainMCSPDU_sendDataIndication = SEQ(name=u'sendDataIndication', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'SendDataIndication')))
+    _DomainMCSPDU_uniformSendDataRequest = SEQ(name=u'uniformSendDataRequest', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'UniformSendDataRequest')))
+    _DomainMCSPDU_uniformSendDataIndication = SEQ(name=u'uniformSendDataIndication', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'UniformSendDataIndication')))
+    _DomainMCSPDU_tokenGrabRequest = SEQ(name=u'tokenGrabRequest', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'TokenGrabRequest')))
+    _DomainMCSPDU_tokenGrabConfirm = SEQ(name=u'tokenGrabConfirm', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'TokenGrabConfirm')))
+    _DomainMCSPDU_tokenInhibitRequest = SEQ(name=u'tokenInhibitRequest', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'TokenInhibitRequest')))
+    _DomainMCSPDU_tokenInhibitConfirm = SEQ(name=u'tokenInhibitConfirm', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'TokenInhibitConfirm')))
+    _DomainMCSPDU_tokenGiveRequest = SEQ(name=u'tokenGiveRequest', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'TokenGiveRequest')))
+    _DomainMCSPDU_tokenGiveIndication = SEQ(name=u'tokenGiveIndication', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'TokenGiveIndication')))
+    _DomainMCSPDU_tokenGiveResponse = SEQ(name=u'tokenGiveResponse', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'TokenGiveResponse')))
+    _DomainMCSPDU_tokenGiveConfirm = SEQ(name=u'tokenGiveConfirm', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'TokenGiveConfirm')))
+    _DomainMCSPDU_tokenPleaseRequest = SEQ(name=u'tokenPleaseRequest', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'TokenPleaseRequest')))
+    _DomainMCSPDU_tokenPleaseIndication = SEQ(name=u'tokenPleaseIndication', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'TokenPleaseIndication')))
+    _DomainMCSPDU_tokenReleaseRequest = SEQ(name=u'tokenReleaseRequest', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'TokenReleaseRequest')))
+    _DomainMCSPDU_tokenReleaseConfirm = SEQ(name=u'tokenReleaseConfirm', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'TokenReleaseConfirm')))
+    _DomainMCSPDU_tokenTestRequest = SEQ(name=u'tokenTestRequest', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'TokenTestRequest')))
+    _DomainMCSPDU_tokenTestConfirm = SEQ(name=u'tokenTestConfirm', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL', 'TokenTestConfirm')))
     DomainMCSPDU._cont = ASN1Dict([
-        ('plumbDomainIndication', _DomainMCSPDU_plumbDomainIndication),
-        ('erectDomainRequest', _DomainMCSPDU_erectDomainRequest),
-        ('mergeChannelsRequest', _DomainMCSPDU_mergeChannelsRequest),
-        ('mergeChannelsConfirm', _DomainMCSPDU_mergeChannelsConfirm),
-        ('purgeChannelsIndication', _DomainMCSPDU_purgeChannelsIndication),
-        ('mergeTokensRequest', _DomainMCSPDU_mergeTokensRequest),
-        ('mergeTokensConfirm', _DomainMCSPDU_mergeTokensConfirm),
-        ('purgeTokensIndication', _DomainMCSPDU_purgeTokensIndication),
-        ('disconnectProviderUltimatum', _DomainMCSPDU_disconnectProviderUltimatum),
-        ('rejectMCSPDUUltimatum', _DomainMCSPDU_rejectMCSPDUUltimatum),
-        ('attachUserRequest', _DomainMCSPDU_attachUserRequest),
-        ('attachUserConfirm', _DomainMCSPDU_attachUserConfirm),
-        ('detachUserRequest', _DomainMCSPDU_detachUserRequest),
-        ('detachUserIndication', _DomainMCSPDU_detachUserIndication),
-        ('channelJoinRequest', _DomainMCSPDU_channelJoinRequest),
-        ('channelJoinConfirm', _DomainMCSPDU_channelJoinConfirm),
-        ('channelLeaveRequest', _DomainMCSPDU_channelLeaveRequest),
-        ('channelConveneRequest', _DomainMCSPDU_channelConveneRequest),
-        ('channelConveneConfirm', _DomainMCSPDU_channelConveneConfirm),
-        ('channelDisbandRequest', _DomainMCSPDU_channelDisbandRequest),
-        ('channelDisbandIndication', _DomainMCSPDU_channelDisbandIndication),
-        ('channelAdmitRequest', _DomainMCSPDU_channelAdmitRequest),
-        ('channelAdmitIndication', _DomainMCSPDU_channelAdmitIndication),
-        ('channelExpelRequest', _DomainMCSPDU_channelExpelRequest),
-        ('channelExpelIndication', _DomainMCSPDU_channelExpelIndication),
-        ('sendDataRequest', _DomainMCSPDU_sendDataRequest),
-        ('sendDataIndication', _DomainMCSPDU_sendDataIndication),
-        ('uniformSendDataRequest', _DomainMCSPDU_uniformSendDataRequest),
-        ('uniformSendDataIndication', _DomainMCSPDU_uniformSendDataIndication),
-        ('tokenGrabRequest', _DomainMCSPDU_tokenGrabRequest),
-        ('tokenGrabConfirm', _DomainMCSPDU_tokenGrabConfirm),
-        ('tokenInhibitRequest', _DomainMCSPDU_tokenInhibitRequest),
-        ('tokenInhibitConfirm', _DomainMCSPDU_tokenInhibitConfirm),
-        ('tokenGiveRequest', _DomainMCSPDU_tokenGiveRequest),
-        ('tokenGiveIndication', _DomainMCSPDU_tokenGiveIndication),
-        ('tokenGiveResponse', _DomainMCSPDU_tokenGiveResponse),
-        ('tokenGiveConfirm', _DomainMCSPDU_tokenGiveConfirm),
-        ('tokenPleaseRequest', _DomainMCSPDU_tokenPleaseRequest),
-        ('tokenPleaseIndication', _DomainMCSPDU_tokenPleaseIndication),
-        ('tokenReleaseRequest', _DomainMCSPDU_tokenReleaseRequest),
-        ('tokenReleaseConfirm', _DomainMCSPDU_tokenReleaseConfirm),
-        ('tokenTestRequest', _DomainMCSPDU_tokenTestRequest),
-        ('tokenTestConfirm', _DomainMCSPDU_tokenTestConfirm),
+        (u'plumbDomainIndication', _DomainMCSPDU_plumbDomainIndication),
+        (u'erectDomainRequest', _DomainMCSPDU_erectDomainRequest),
+        (u'mergeChannelsRequest', _DomainMCSPDU_mergeChannelsRequest),
+        (u'mergeChannelsConfirm', _DomainMCSPDU_mergeChannelsConfirm),
+        (u'purgeChannelsIndication', _DomainMCSPDU_purgeChannelsIndication),
+        (u'mergeTokensRequest', _DomainMCSPDU_mergeTokensRequest),
+        (u'mergeTokensConfirm', _DomainMCSPDU_mergeTokensConfirm),
+        (u'purgeTokensIndication', _DomainMCSPDU_purgeTokensIndication),
+        (u'disconnectProviderUltimatum', _DomainMCSPDU_disconnectProviderUltimatum),
+        (u'rejectMCSPDUUltimatum', _DomainMCSPDU_rejectMCSPDUUltimatum),
+        (u'attachUserRequest', _DomainMCSPDU_attachUserRequest),
+        (u'attachUserConfirm', _DomainMCSPDU_attachUserConfirm),
+        (u'detachUserRequest', _DomainMCSPDU_detachUserRequest),
+        (u'detachUserIndication', _DomainMCSPDU_detachUserIndication),
+        (u'channelJoinRequest', _DomainMCSPDU_channelJoinRequest),
+        (u'channelJoinConfirm', _DomainMCSPDU_channelJoinConfirm),
+        (u'channelLeaveRequest', _DomainMCSPDU_channelLeaveRequest),
+        (u'channelConveneRequest', _DomainMCSPDU_channelConveneRequest),
+        (u'channelConveneConfirm', _DomainMCSPDU_channelConveneConfirm),
+        (u'channelDisbandRequest', _DomainMCSPDU_channelDisbandRequest),
+        (u'channelDisbandIndication', _DomainMCSPDU_channelDisbandIndication),
+        (u'channelAdmitRequest', _DomainMCSPDU_channelAdmitRequest),
+        (u'channelAdmitIndication', _DomainMCSPDU_channelAdmitIndication),
+        (u'channelExpelRequest', _DomainMCSPDU_channelExpelRequest),
+        (u'channelExpelIndication', _DomainMCSPDU_channelExpelIndication),
+        (u'sendDataRequest', _DomainMCSPDU_sendDataRequest),
+        (u'sendDataIndication', _DomainMCSPDU_sendDataIndication),
+        (u'uniformSendDataRequest', _DomainMCSPDU_uniformSendDataRequest),
+        (u'uniformSendDataIndication', _DomainMCSPDU_uniformSendDataIndication),
+        (u'tokenGrabRequest', _DomainMCSPDU_tokenGrabRequest),
+        (u'tokenGrabConfirm', _DomainMCSPDU_tokenGrabConfirm),
+        (u'tokenInhibitRequest', _DomainMCSPDU_tokenInhibitRequest),
+        (u'tokenInhibitConfirm', _DomainMCSPDU_tokenInhibitConfirm),
+        (u'tokenGiveRequest', _DomainMCSPDU_tokenGiveRequest),
+        (u'tokenGiveIndication', _DomainMCSPDU_tokenGiveIndication),
+        (u'tokenGiveResponse', _DomainMCSPDU_tokenGiveResponse),
+        (u'tokenGiveConfirm', _DomainMCSPDU_tokenGiveConfirm),
+        (u'tokenPleaseRequest', _DomainMCSPDU_tokenPleaseRequest),
+        (u'tokenPleaseIndication', _DomainMCSPDU_tokenPleaseIndication),
+        (u'tokenReleaseRequest', _DomainMCSPDU_tokenReleaseRequest),
+        (u'tokenReleaseConfirm', _DomainMCSPDU_tokenReleaseConfirm),
+        (u'tokenTestRequest', _DomainMCSPDU_tokenTestRequest),
+        (u'tokenTestConfirm', _DomainMCSPDU_tokenTestConfirm),
         ])
     DomainMCSPDU._ext = None
     
@@ -1314,164 +1314,164 @@ class MCS_PROTOCOL:
 
 class MCS_PROTOCOL_3:
 
-    _name_  = 'MCS-PROTOCOL-3'
+    _name_  = u'MCS-PROTOCOL-3'
     _oid_   = []
     
     _obj_ = [
-        'H221NonStandardIdentifier',
-        'Key',
-        'NonStandardParameter',
-        'ChannelId',
-        'StaticChannelId',
-        'DynamicChannelId',
-        'UserId',
-        'PrivateChannelId',
-        'AssignedChannelId',
-        'TokenId',
-        'TokenStatus',
-        'DataPriority',
-        'Segmentation',
-        'ExtendedParameters',
-        'ExtendedParameterPropose',
-        'ExtendedParameterAccept',
-        'PlumbDomainIndication',
-        'ErectDomainRequest',
-        'ChannelAttributes',
-        'MergeChannelsRequest',
-        'MergeChannelsConfirm',
-        'PurgeChannelsIndication',
-        'TokenAttributes',
-        'MergeTokensRequest',
-        'MergeTokensConfirm',
-        'PurgeTokensIndication',
-        'DisconnectProviderUltimatum',
-        'RejectMCSPDUUltimatum',
-        'AttachUserRequest',
-        'AttachUserConfirm',
-        'DetachUserRequest',
-        'DetachUserIndication',
-        'ChannelJoinRequest',
-        'ChannelJoinConfirm',
-        'ChannelLeaveRequest',
-        'ChannelConveneRequest',
-        'ChannelConveneConfirm',
-        'ChannelDisbandRequest',
-        'ChannelDisbandIndication',
-        'ChannelAdmitRequest',
-        'ChannelAdmitIndication',
-        'ChannelExpelRequest',
-        'ChannelExpelIndication',
-        'SendDataRequest',
-        'SendDataIndication',
-        'UniformSendDataRequest',
-        'UniformSendDataIndication',
-        'TokenGrabRequest',
-        'TokenGrabConfirm',
-        'TokenInhibitRequest',
-        'TokenInhibitConfirm',
-        'TokenGiveRequest',
-        'TokenGiveIndication',
-        'TokenGiveResponse',
-        'TokenGiveConfirm',
-        'TokenPleaseRequest',
-        'TokenPleaseIndication',
-        'TokenReleaseRequest',
-        'TokenReleaseConfirm',
-        'TokenTestRequest',
-        'TokenTestConfirm',
-        'CapabilityID',
-        'CapabilityClass',
-        'ParticipationIndicator',
-        'RequestCapability',
-        'SeqOfRequestCapabilities',
-        'IndicationCapability',
-        'SeqOfIndicationCapabilities',
-        'CapabilitiesNotificationRequest',
-        'CapabilitiesNotificationIndication',
-        'Reason',
-        'Result',
-        'Diagnostic',
-        'NonStandardPDU',
-        'ExtendedParameterMCSPDU',
-        'DomainMCSPDU',
+        u'H221NonStandardIdentifier',
+        u'Key',
+        u'NonStandardParameter',
+        u'ChannelId',
+        u'StaticChannelId',
+        u'DynamicChannelId',
+        u'UserId',
+        u'PrivateChannelId',
+        u'AssignedChannelId',
+        u'TokenId',
+        u'TokenStatus',
+        u'DataPriority',
+        u'Segmentation',
+        u'ExtendedParameters',
+        u'ExtendedParameterPropose',
+        u'ExtendedParameterAccept',
+        u'PlumbDomainIndication',
+        u'ErectDomainRequest',
+        u'ChannelAttributes',
+        u'MergeChannelsRequest',
+        u'MergeChannelsConfirm',
+        u'PurgeChannelsIndication',
+        u'TokenAttributes',
+        u'MergeTokensRequest',
+        u'MergeTokensConfirm',
+        u'PurgeTokensIndication',
+        u'DisconnectProviderUltimatum',
+        u'RejectMCSPDUUltimatum',
+        u'AttachUserRequest',
+        u'AttachUserConfirm',
+        u'DetachUserRequest',
+        u'DetachUserIndication',
+        u'ChannelJoinRequest',
+        u'ChannelJoinConfirm',
+        u'ChannelLeaveRequest',
+        u'ChannelConveneRequest',
+        u'ChannelConveneConfirm',
+        u'ChannelDisbandRequest',
+        u'ChannelDisbandIndication',
+        u'ChannelAdmitRequest',
+        u'ChannelAdmitIndication',
+        u'ChannelExpelRequest',
+        u'ChannelExpelIndication',
+        u'SendDataRequest',
+        u'SendDataIndication',
+        u'UniformSendDataRequest',
+        u'UniformSendDataIndication',
+        u'TokenGrabRequest',
+        u'TokenGrabConfirm',
+        u'TokenInhibitRequest',
+        u'TokenInhibitConfirm',
+        u'TokenGiveRequest',
+        u'TokenGiveIndication',
+        u'TokenGiveResponse',
+        u'TokenGiveConfirm',
+        u'TokenPleaseRequest',
+        u'TokenPleaseIndication',
+        u'TokenReleaseRequest',
+        u'TokenReleaseConfirm',
+        u'TokenTestRequest',
+        u'TokenTestConfirm',
+        u'CapabilityID',
+        u'CapabilityClass',
+        u'ParticipationIndicator',
+        u'RequestCapability',
+        u'SeqOfRequestCapabilities',
+        u'IndicationCapability',
+        u'SeqOfIndicationCapabilities',
+        u'CapabilitiesNotificationRequest',
+        u'CapabilitiesNotificationIndication',
+        u'Reason',
+        u'Result',
+        u'Diagnostic',
+        u'NonStandardPDU',
+        u'ExtendedParameterMCSPDU',
+        u'DomainMCSPDU',
         ]
     _type_ = [
-        'H221NonStandardIdentifier',
-        'Key',
-        'NonStandardParameter',
-        'ChannelId',
-        'StaticChannelId',
-        'DynamicChannelId',
-        'UserId',
-        'PrivateChannelId',
-        'AssignedChannelId',
-        'TokenId',
-        'TokenStatus',
-        'DataPriority',
-        'Segmentation',
-        'ExtendedParameters',
-        'ExtendedParameterPropose',
-        'ExtendedParameterAccept',
-        'PlumbDomainIndication',
-        'ErectDomainRequest',
-        'ChannelAttributes',
-        'MergeChannelsRequest',
-        'MergeChannelsConfirm',
-        'PurgeChannelsIndication',
-        'TokenAttributes',
-        'MergeTokensRequest',
-        'MergeTokensConfirm',
-        'PurgeTokensIndication',
-        'DisconnectProviderUltimatum',
-        'RejectMCSPDUUltimatum',
-        'AttachUserRequest',
-        'AttachUserConfirm',
-        'DetachUserRequest',
-        'DetachUserIndication',
-        'ChannelJoinRequest',
-        'ChannelJoinConfirm',
-        'ChannelLeaveRequest',
-        'ChannelConveneRequest',
-        'ChannelConveneConfirm',
-        'ChannelDisbandRequest',
-        'ChannelDisbandIndication',
-        'ChannelAdmitRequest',
-        'ChannelAdmitIndication',
-        'ChannelExpelRequest',
-        'ChannelExpelIndication',
-        'SendDataRequest',
-        'SendDataIndication',
-        'UniformSendDataRequest',
-        'UniformSendDataIndication',
-        'TokenGrabRequest',
-        'TokenGrabConfirm',
-        'TokenInhibitRequest',
-        'TokenInhibitConfirm',
-        'TokenGiveRequest',
-        'TokenGiveIndication',
-        'TokenGiveResponse',
-        'TokenGiveConfirm',
-        'TokenPleaseRequest',
-        'TokenPleaseIndication',
-        'TokenReleaseRequest',
-        'TokenReleaseConfirm',
-        'TokenTestRequest',
-        'TokenTestConfirm',
-        'CapabilityID',
-        'CapabilityClass',
-        'ParticipationIndicator',
-        'RequestCapability',
-        'SeqOfRequestCapabilities',
-        'IndicationCapability',
-        'SeqOfIndicationCapabilities',
-        'CapabilitiesNotificationRequest',
-        'CapabilitiesNotificationIndication',
-        'Reason',
-        'Result',
-        'Diagnostic',
-        'NonStandardPDU',
-        'ExtendedParameterMCSPDU',
-        'DomainMCSPDU',
+        u'H221NonStandardIdentifier',
+        u'Key',
+        u'NonStandardParameter',
+        u'ChannelId',
+        u'StaticChannelId',
+        u'DynamicChannelId',
+        u'UserId',
+        u'PrivateChannelId',
+        u'AssignedChannelId',
+        u'TokenId',
+        u'TokenStatus',
+        u'DataPriority',
+        u'Segmentation',
+        u'ExtendedParameters',
+        u'ExtendedParameterPropose',
+        u'ExtendedParameterAccept',
+        u'PlumbDomainIndication',
+        u'ErectDomainRequest',
+        u'ChannelAttributes',
+        u'MergeChannelsRequest',
+        u'MergeChannelsConfirm',
+        u'PurgeChannelsIndication',
+        u'TokenAttributes',
+        u'MergeTokensRequest',
+        u'MergeTokensConfirm',
+        u'PurgeTokensIndication',
+        u'DisconnectProviderUltimatum',
+        u'RejectMCSPDUUltimatum',
+        u'AttachUserRequest',
+        u'AttachUserConfirm',
+        u'DetachUserRequest',
+        u'DetachUserIndication',
+        u'ChannelJoinRequest',
+        u'ChannelJoinConfirm',
+        u'ChannelLeaveRequest',
+        u'ChannelConveneRequest',
+        u'ChannelConveneConfirm',
+        u'ChannelDisbandRequest',
+        u'ChannelDisbandIndication',
+        u'ChannelAdmitRequest',
+        u'ChannelAdmitIndication',
+        u'ChannelExpelRequest',
+        u'ChannelExpelIndication',
+        u'SendDataRequest',
+        u'SendDataIndication',
+        u'UniformSendDataRequest',
+        u'UniformSendDataIndication',
+        u'TokenGrabRequest',
+        u'TokenGrabConfirm',
+        u'TokenInhibitRequest',
+        u'TokenInhibitConfirm',
+        u'TokenGiveRequest',
+        u'TokenGiveIndication',
+        u'TokenGiveResponse',
+        u'TokenGiveConfirm',
+        u'TokenPleaseRequest',
+        u'TokenPleaseIndication',
+        u'TokenReleaseRequest',
+        u'TokenReleaseConfirm',
+        u'TokenTestRequest',
+        u'TokenTestConfirm',
+        u'CapabilityID',
+        u'CapabilityClass',
+        u'ParticipationIndicator',
+        u'RequestCapability',
+        u'SeqOfRequestCapabilities',
+        u'IndicationCapability',
+        u'SeqOfIndicationCapabilities',
+        u'CapabilitiesNotificationRequest',
+        u'CapabilitiesNotificationIndication',
+        u'Reason',
+        u'Result',
+        u'Diagnostic',
+        u'NonStandardPDU',
+        u'ExtendedParameterMCSPDU',
+        u'DomainMCSPDU',
         ]
     _set_ = [
         ]
@@ -1483,1297 +1483,1297 @@ class MCS_PROTOCOL_3:
         ]
     
     #-----< H221NonStandardIdentifier >-----#
-    H221NonStandardIdentifier = OCT_STR(name='H221NonStandardIdentifier', mode=MODE_TYPE)
+    H221NonStandardIdentifier = OCT_STR(name=u'H221NonStandardIdentifier', mode=MODE_TYPE)
     H221NonStandardIdentifier._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=4, ub=255)], ev=None, er=[])
     
     #-----< Key >-----#
-    Key = CHOICE(name='Key', mode=MODE_TYPE)
-    _Key_object = OID(name='object', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _Key_h221NonStandard = OCT_STR(name='h221NonStandard', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'H221NonStandardIdentifier')))
+    Key = CHOICE(name=u'Key', mode=MODE_TYPE)
+    _Key_object = OID(name=u'object', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _Key_h221NonStandard = OCT_STR(name=u'h221NonStandard', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'H221NonStandardIdentifier')))
     Key._cont = ASN1Dict([
-        ('object', _Key_object),
-        ('h221NonStandard', _Key_h221NonStandard),
+        (u'object', _Key_object),
+        (u'h221NonStandard', _Key_h221NonStandard),
         ])
     Key._ext = None
     
     #-----< NonStandardParameter >-----#
-    NonStandardParameter = SEQ(name='NonStandardParameter', mode=MODE_TYPE)
-    _NonStandardParameter_key = CHOICE(name='key', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'Key')))
-    _NonStandardParameter_data = OCT_STR(name='data', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    NonStandardParameter = SEQ(name=u'NonStandardParameter', mode=MODE_TYPE)
+    _NonStandardParameter_key = CHOICE(name=u'key', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'Key')))
+    _NonStandardParameter_data = OCT_STR(name=u'data', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     NonStandardParameter._cont = ASN1Dict([
-        ('key', _NonStandardParameter_key),
-        ('data', _NonStandardParameter_data),
+        (u'key', _NonStandardParameter_key),
+        (u'data', _NonStandardParameter_data),
         ])
     NonStandardParameter._ext = None
     
     #-----< ChannelId >-----#
-    ChannelId = INT(name='ChannelId', mode=MODE_TYPE)
+    ChannelId = INT(name=u'ChannelId', mode=MODE_TYPE)
     ChannelId._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=65535)], ev=None, er=[])
     
     #-----< StaticChannelId >-----#
-    StaticChannelId = INT(name='StaticChannelId', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL-3', 'ChannelId')))
+    StaticChannelId = INT(name=u'StaticChannelId', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL-3', 'ChannelId')))
     StaticChannelId._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=1000)], ev=None, er=[])
     
     #-----< DynamicChannelId >-----#
-    DynamicChannelId = INT(name='DynamicChannelId', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL-3', 'ChannelId')))
+    DynamicChannelId = INT(name=u'DynamicChannelId', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL-3', 'ChannelId')))
     DynamicChannelId._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1001, ub=65535)], ev=None, er=[])
     
     #-----< UserId >-----#
-    UserId = INT(name='UserId', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL-3', 'DynamicChannelId')))
+    UserId = INT(name=u'UserId', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL-3', 'DynamicChannelId')))
     
     #-----< PrivateChannelId >-----#
-    PrivateChannelId = INT(name='PrivateChannelId', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL-3', 'DynamicChannelId')))
+    PrivateChannelId = INT(name=u'PrivateChannelId', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL-3', 'DynamicChannelId')))
     
     #-----< AssignedChannelId >-----#
-    AssignedChannelId = INT(name='AssignedChannelId', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL-3', 'DynamicChannelId')))
+    AssignedChannelId = INT(name=u'AssignedChannelId', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL-3', 'DynamicChannelId')))
     
     #-----< TokenId >-----#
-    TokenId = INT(name='TokenId', mode=MODE_TYPE)
+    TokenId = INT(name=u'TokenId', mode=MODE_TYPE)
     TokenId._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=65535)], ev=None, er=[])
     
     #-----< TokenStatus >-----#
-    TokenStatus = CHOICE(name='TokenStatus', mode=MODE_TYPE)
-    _TokenStatus_notInUse = NULL(name='notInUse', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _TokenStatus_selfGrabbed = NULL(name='selfGrabbed', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _TokenStatus_otherGrabbed = NULL(name='otherGrabbed', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _TokenStatus_selfInhibited = NULL(name='selfInhibited', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _TokenStatus_otherInhibited = NULL(name='otherInhibited', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _TokenStatus_selfRecipient = NULL(name='selfRecipient', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _TokenStatus_selfGiving = NULL(name='selfGiving', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _TokenStatus_otherGiving = NULL(name='otherGiving', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    TokenStatus = CHOICE(name=u'TokenStatus', mode=MODE_TYPE)
+    _TokenStatus_notInUse = NULL(name=u'notInUse', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _TokenStatus_selfGrabbed = NULL(name=u'selfGrabbed', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _TokenStatus_otherGrabbed = NULL(name=u'otherGrabbed', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _TokenStatus_selfInhibited = NULL(name=u'selfInhibited', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _TokenStatus_otherInhibited = NULL(name=u'otherInhibited', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _TokenStatus_selfRecipient = NULL(name=u'selfRecipient', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _TokenStatus_selfGiving = NULL(name=u'selfGiving', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _TokenStatus_otherGiving = NULL(name=u'otherGiving', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     TokenStatus._cont = ASN1Dict([
-        ('notInUse', _TokenStatus_notInUse),
-        ('selfGrabbed', _TokenStatus_selfGrabbed),
-        ('otherGrabbed', _TokenStatus_otherGrabbed),
-        ('selfInhibited', _TokenStatus_selfInhibited),
-        ('otherInhibited', _TokenStatus_otherInhibited),
-        ('selfRecipient', _TokenStatus_selfRecipient),
-        ('selfGiving', _TokenStatus_selfGiving),
-        ('otherGiving', _TokenStatus_otherGiving),
+        (u'notInUse', _TokenStatus_notInUse),
+        (u'selfGrabbed', _TokenStatus_selfGrabbed),
+        (u'otherGrabbed', _TokenStatus_otherGrabbed),
+        (u'selfInhibited', _TokenStatus_selfInhibited),
+        (u'otherInhibited', _TokenStatus_otherInhibited),
+        (u'selfRecipient', _TokenStatus_selfRecipient),
+        (u'selfGiving', _TokenStatus_selfGiving),
+        (u'otherGiving', _TokenStatus_otherGiving),
         ])
     TokenStatus._ext = []
     
     #-----< DataPriority >-----#
-    DataPriority = CHOICE(name='DataPriority', mode=MODE_TYPE)
-    _DataPriority_top = NULL(name='top', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _DataPriority_high = NULL(name='high', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _DataPriority_medium = NULL(name='medium', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _DataPriority_low = NULL(name='low', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    DataPriority = CHOICE(name=u'DataPriority', mode=MODE_TYPE)
+    _DataPriority_top = NULL(name=u'top', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _DataPriority_high = NULL(name=u'high', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _DataPriority_medium = NULL(name=u'medium', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _DataPriority_low = NULL(name=u'low', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     DataPriority._cont = ASN1Dict([
-        ('top', _DataPriority_top),
-        ('high', _DataPriority_high),
-        ('medium', _DataPriority_medium),
-        ('low', _DataPriority_low),
+        (u'top', _DataPriority_top),
+        (u'high', _DataPriority_high),
+        (u'medium', _DataPriority_medium),
+        (u'low', _DataPriority_low),
         ])
     DataPriority._ext = []
     
     #-----< Segmentation >-----#
-    Segmentation = BIT_STR(name='Segmentation', mode=MODE_TYPE)
-    Segmentation._cont = ASN1Dict([('begin', 0), ('end', 1)])
+    Segmentation = BIT_STR(name=u'Segmentation', mode=MODE_TYPE)
+    Segmentation._cont = ASN1Dict([(u'begin', 0), (u'end', 1)])
     Segmentation._const_sz = ASN1Set(rv=[2], rr=[], ev=None, er=[])
     
     #-----< ExtendedParameters >-----#
-    ExtendedParameters = SEQ(name='ExtendedParameters', mode=MODE_TYPE)
-    _ExtendedParameters_unreliableDataSupported = BOOL(name='unreliableDataSupported', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _ExtendedParameters_domainReferenceID = INT(name='domainReferenceID', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    ExtendedParameters = SEQ(name=u'ExtendedParameters', mode=MODE_TYPE)
+    _ExtendedParameters_unreliableDataSupported = BOOL(name=u'unreliableDataSupported', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _ExtendedParameters_domainReferenceID = INT(name=u'domainReferenceID', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     _ExtendedParameters_domainReferenceID._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=65535)], ev=None, er=[])
-    _ExtendedParameters_nonStandard = SEQ_OF(name='nonStandard', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _ExtendedParameters_nonStandard = SEQ_OF(name=u'nonStandard', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     __ExtendedParameters_nonStandard__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL-3', 'NonStandardParameter')))
     _ExtendedParameters_nonStandard._cont = __ExtendedParameters_nonStandard__item_
     ExtendedParameters._cont = ASN1Dict([
-        ('unreliableDataSupported', _ExtendedParameters_unreliableDataSupported),
-        ('domainReferenceID', _ExtendedParameters_domainReferenceID),
-        ('nonStandard', _ExtendedParameters_nonStandard),
+        (u'unreliableDataSupported', _ExtendedParameters_unreliableDataSupported),
+        (u'domainReferenceID', _ExtendedParameters_domainReferenceID),
+        (u'nonStandard', _ExtendedParameters_nonStandard),
         ])
     ExtendedParameters._ext = []
     
     #-----< ExtendedParameterPropose >-----#
-    ExtendedParameterPropose = SEQ(name='ExtendedParameterPropose', mode=MODE_TYPE)
-    _ExtendedParameterPropose_targetExtendedParameters = SEQ(name='targetExtendedParameters', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'ExtendedParameters')))
-    _ExtendedParameterPropose_minimumExtendedParameters = SEQ(name='minimumExtendedParameters', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'ExtendedParameters')))
-    _ExtendedParameterPropose_maximumExtendedParameters = SEQ(name='maximumExtendedParameters', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'ExtendedParameters')))
-    _ExtendedParameterPropose_nonStandard = SEQ_OF(name='nonStandard', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    ExtendedParameterPropose = SEQ(name=u'ExtendedParameterPropose', mode=MODE_TYPE)
+    _ExtendedParameterPropose_targetExtendedParameters = SEQ(name=u'targetExtendedParameters', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'ExtendedParameters')))
+    _ExtendedParameterPropose_minimumExtendedParameters = SEQ(name=u'minimumExtendedParameters', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'ExtendedParameters')))
+    _ExtendedParameterPropose_maximumExtendedParameters = SEQ(name=u'maximumExtendedParameters', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'ExtendedParameters')))
+    _ExtendedParameterPropose_nonStandard = SEQ_OF(name=u'nonStandard', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     __ExtendedParameterPropose_nonStandard__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL-3', 'NonStandardParameter')))
     _ExtendedParameterPropose_nonStandard._cont = __ExtendedParameterPropose_nonStandard__item_
     ExtendedParameterPropose._cont = ASN1Dict([
-        ('targetExtendedParameters', _ExtendedParameterPropose_targetExtendedParameters),
-        ('minimumExtendedParameters', _ExtendedParameterPropose_minimumExtendedParameters),
-        ('maximumExtendedParameters', _ExtendedParameterPropose_maximumExtendedParameters),
-        ('nonStandard', _ExtendedParameterPropose_nonStandard),
+        (u'targetExtendedParameters', _ExtendedParameterPropose_targetExtendedParameters),
+        (u'minimumExtendedParameters', _ExtendedParameterPropose_minimumExtendedParameters),
+        (u'maximumExtendedParameters', _ExtendedParameterPropose_maximumExtendedParameters),
+        (u'nonStandard', _ExtendedParameterPropose_nonStandard),
         ])
     ExtendedParameterPropose._ext = []
     
     #-----< ExtendedParameterAccept >-----#
-    ExtendedParameterAccept = SEQ(name='ExtendedParameterAccept', mode=MODE_TYPE)
-    _ExtendedParameterAccept_extendedParameters = SEQ(name='extendedParameters', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'ExtendedParameters')))
-    _ExtendedParameterAccept_nonStandard = SEQ_OF(name='nonStandard', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    ExtendedParameterAccept = SEQ(name=u'ExtendedParameterAccept', mode=MODE_TYPE)
+    _ExtendedParameterAccept_extendedParameters = SEQ(name=u'extendedParameters', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'ExtendedParameters')))
+    _ExtendedParameterAccept_nonStandard = SEQ_OF(name=u'nonStandard', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     __ExtendedParameterAccept_nonStandard__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL-3', 'NonStandardParameter')))
     _ExtendedParameterAccept_nonStandard._cont = __ExtendedParameterAccept_nonStandard__item_
     ExtendedParameterAccept._cont = ASN1Dict([
-        ('extendedParameters', _ExtendedParameterAccept_extendedParameters),
-        ('nonStandard', _ExtendedParameterAccept_nonStandard),
+        (u'extendedParameters', _ExtendedParameterAccept_extendedParameters),
+        (u'nonStandard', _ExtendedParameterAccept_nonStandard),
         ])
     ExtendedParameterAccept._ext = []
     
     #-----< PlumbDomainIndication >-----#
-    PlumbDomainIndication = SEQ(name='PlumbDomainIndication', mode=MODE_TYPE)
-    _PlumbDomainIndication_heightLimit = INT(name='heightLimit', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    PlumbDomainIndication = SEQ(name=u'PlumbDomainIndication', mode=MODE_TYPE)
+    _PlumbDomainIndication_heightLimit = INT(name=u'heightLimit', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     _PlumbDomainIndication_heightLimit._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=None)], ev=None, er=[])
-    _PlumbDomainIndication_nonStandard = SEQ_OF(name='nonStandard', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _PlumbDomainIndication_nonStandard = SEQ_OF(name=u'nonStandard', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     __PlumbDomainIndication_nonStandard__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL-3', 'NonStandardParameter')))
     _PlumbDomainIndication_nonStandard._cont = __PlumbDomainIndication_nonStandard__item_
     PlumbDomainIndication._cont = ASN1Dict([
-        ('heightLimit', _PlumbDomainIndication_heightLimit),
-        ('nonStandard', _PlumbDomainIndication_nonStandard),
+        (u'heightLimit', _PlumbDomainIndication_heightLimit),
+        (u'nonStandard', _PlumbDomainIndication_nonStandard),
         ])
     PlumbDomainIndication._ext = []
     
     #-----< ErectDomainRequest >-----#
-    ErectDomainRequest = SEQ(name='ErectDomainRequest', mode=MODE_TYPE)
-    _ErectDomainRequest_subHeight = INT(name='subHeight', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    ErectDomainRequest = SEQ(name=u'ErectDomainRequest', mode=MODE_TYPE)
+    _ErectDomainRequest_subHeight = INT(name=u'subHeight', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     _ErectDomainRequest_subHeight._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=None)], ev=None, er=[])
-    _ErectDomainRequest_subInterval = INT(name='subInterval', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _ErectDomainRequest_subInterval = INT(name=u'subInterval', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     _ErectDomainRequest_subInterval._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=None)], ev=None, er=[])
-    _ErectDomainRequest_nonStandard = SEQ_OF(name='nonStandard', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _ErectDomainRequest_nonStandard = SEQ_OF(name=u'nonStandard', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     __ErectDomainRequest_nonStandard__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL-3', 'NonStandardParameter')))
     _ErectDomainRequest_nonStandard._cont = __ErectDomainRequest_nonStandard__item_
     ErectDomainRequest._cont = ASN1Dict([
-        ('subHeight', _ErectDomainRequest_subHeight),
-        ('subInterval', _ErectDomainRequest_subInterval),
-        ('nonStandard', _ErectDomainRequest_nonStandard),
+        (u'subHeight', _ErectDomainRequest_subHeight),
+        (u'subInterval', _ErectDomainRequest_subInterval),
+        (u'nonStandard', _ErectDomainRequest_nonStandard),
         ])
     ErectDomainRequest._ext = []
     
     #-----< ChannelAttributes >-----#
-    ChannelAttributes = CHOICE(name='ChannelAttributes', mode=MODE_TYPE)
-    _ChannelAttributes_static = SEQ(name='static', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    __ChannelAttributes_static_channelId = INT(name='channelId', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'StaticChannelId')))
-    __ChannelAttributes_static_nonStandard = SEQ_OF(name='nonStandard', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    ChannelAttributes = CHOICE(name=u'ChannelAttributes', mode=MODE_TYPE)
+    _ChannelAttributes_static = SEQ(name=u'static', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __ChannelAttributes_static_channelId = INT(name=u'channelId', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'StaticChannelId')))
+    __ChannelAttributes_static_nonStandard = SEQ_OF(name=u'nonStandard', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     ___ChannelAttributes_static_nonStandard__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL-3', 'NonStandardParameter')))
     __ChannelAttributes_static_nonStandard._cont = ___ChannelAttributes_static_nonStandard__item_
     _ChannelAttributes_static._cont = ASN1Dict([
-        ('channelId', __ChannelAttributes_static_channelId),
-        ('nonStandard', __ChannelAttributes_static_nonStandard),
+        (u'channelId', __ChannelAttributes_static_channelId),
+        (u'nonStandard', __ChannelAttributes_static_nonStandard),
         ])
     _ChannelAttributes_static._ext = []
-    _ChannelAttributes_userId = SEQ(name='userId', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    __ChannelAttributes_userId_joined = BOOL(name='joined', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    __ChannelAttributes_userId_userId = INT(name='userId', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'UserId')))
-    __ChannelAttributes_userId_nonStandard = SEQ_OF(name='nonStandard', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _ChannelAttributes_userId = SEQ(name=u'userId', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __ChannelAttributes_userId_joined = BOOL(name=u'joined', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __ChannelAttributes_userId_userId = INT(name=u'userId', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'UserId')))
+    __ChannelAttributes_userId_nonStandard = SEQ_OF(name=u'nonStandard', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     ___ChannelAttributes_userId_nonStandard__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL-3', 'NonStandardParameter')))
     __ChannelAttributes_userId_nonStandard._cont = ___ChannelAttributes_userId_nonStandard__item_
     _ChannelAttributes_userId._cont = ASN1Dict([
-        ('joined', __ChannelAttributes_userId_joined),
-        ('userId', __ChannelAttributes_userId_userId),
-        ('nonStandard', __ChannelAttributes_userId_nonStandard),
+        (u'joined', __ChannelAttributes_userId_joined),
+        (u'userId', __ChannelAttributes_userId_userId),
+        (u'nonStandard', __ChannelAttributes_userId_nonStandard),
         ])
     _ChannelAttributes_userId._ext = []
-    _ChannelAttributes_private = SEQ(name='private', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    __ChannelAttributes_private_joined = BOOL(name='joined', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    __ChannelAttributes_private_channelId = INT(name='channelId', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'PrivateChannelId')))
-    __ChannelAttributes_private_manager = INT(name='manager', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'UserId')))
-    __ChannelAttributes_private_admitted = SET_OF(name='admitted', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _ChannelAttributes_private = SEQ(name=u'private', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __ChannelAttributes_private_joined = BOOL(name=u'joined', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __ChannelAttributes_private_channelId = INT(name=u'channelId', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'PrivateChannelId')))
+    __ChannelAttributes_private_manager = INT(name=u'manager', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'UserId')))
+    __ChannelAttributes_private_admitted = SET_OF(name=u'admitted', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     ___ChannelAttributes_private_admitted__item_ = INT(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL-3', 'UserId')))
     __ChannelAttributes_private_admitted._cont = ___ChannelAttributes_private_admitted__item_
-    __ChannelAttributes_private_nonStandard = SEQ_OF(name='nonStandard', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    __ChannelAttributes_private_nonStandard = SEQ_OF(name=u'nonStandard', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     ___ChannelAttributes_private_nonStandard__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL-3', 'NonStandardParameter')))
     __ChannelAttributes_private_nonStandard._cont = ___ChannelAttributes_private_nonStandard__item_
     _ChannelAttributes_private._cont = ASN1Dict([
-        ('joined', __ChannelAttributes_private_joined),
-        ('channelId', __ChannelAttributes_private_channelId),
-        ('manager', __ChannelAttributes_private_manager),
-        ('admitted', __ChannelAttributes_private_admitted),
-        ('nonStandard', __ChannelAttributes_private_nonStandard),
+        (u'joined', __ChannelAttributes_private_joined),
+        (u'channelId', __ChannelAttributes_private_channelId),
+        (u'manager', __ChannelAttributes_private_manager),
+        (u'admitted', __ChannelAttributes_private_admitted),
+        (u'nonStandard', __ChannelAttributes_private_nonStandard),
         ])
     _ChannelAttributes_private._ext = []
-    _ChannelAttributes_assigned = SEQ(name='assigned', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    __ChannelAttributes_assigned_channelId = INT(name='channelId', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'AssignedChannelId')))
-    __ChannelAttributes_assigned_nonStandard = SEQ_OF(name='nonStandard', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _ChannelAttributes_assigned = SEQ(name=u'assigned', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __ChannelAttributes_assigned_channelId = INT(name=u'channelId', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'AssignedChannelId')))
+    __ChannelAttributes_assigned_nonStandard = SEQ_OF(name=u'nonStandard', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     ___ChannelAttributes_assigned_nonStandard__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL-3', 'NonStandardParameter')))
     __ChannelAttributes_assigned_nonStandard._cont = ___ChannelAttributes_assigned_nonStandard__item_
     _ChannelAttributes_assigned._cont = ASN1Dict([
-        ('channelId', __ChannelAttributes_assigned_channelId),
-        ('nonStandard', __ChannelAttributes_assigned_nonStandard),
+        (u'channelId', __ChannelAttributes_assigned_channelId),
+        (u'nonStandard', __ChannelAttributes_assigned_nonStandard),
         ])
     _ChannelAttributes_assigned._ext = []
     ChannelAttributes._cont = ASN1Dict([
-        ('static', _ChannelAttributes_static),
-        ('userId', _ChannelAttributes_userId),
-        ('private', _ChannelAttributes_private),
-        ('assigned', _ChannelAttributes_assigned),
+        (u'static', _ChannelAttributes_static),
+        (u'userId', _ChannelAttributes_userId),
+        (u'private', _ChannelAttributes_private),
+        (u'assigned', _ChannelAttributes_assigned),
         ])
     ChannelAttributes._ext = []
     
     #-----< MergeChannelsRequest >-----#
-    MergeChannelsRequest = SEQ(name='MergeChannelsRequest', mode=MODE_TYPE)
-    _MergeChannelsRequest_mergeChannels = SET_OF(name='mergeChannels', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    MergeChannelsRequest = SEQ(name=u'MergeChannelsRequest', mode=MODE_TYPE)
+    _MergeChannelsRequest_mergeChannels = SET_OF(name=u'mergeChannels', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     __MergeChannelsRequest_mergeChannels__item_ = CHOICE(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL-3', 'ChannelAttributes')))
     _MergeChannelsRequest_mergeChannels._cont = __MergeChannelsRequest_mergeChannels__item_
-    _MergeChannelsRequest_purgeChannelIds = SET_OF(name='purgeChannelIds', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _MergeChannelsRequest_purgeChannelIds = SET_OF(name=u'purgeChannelIds', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     __MergeChannelsRequest_purgeChannelIds__item_ = INT(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL-3', 'ChannelId')))
     _MergeChannelsRequest_purgeChannelIds._cont = __MergeChannelsRequest_purgeChannelIds__item_
-    _MergeChannelsRequest_nonStandard = SEQ_OF(name='nonStandard', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _MergeChannelsRequest_nonStandard = SEQ_OF(name=u'nonStandard', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     __MergeChannelsRequest_nonStandard__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL-3', 'NonStandardParameter')))
     _MergeChannelsRequest_nonStandard._cont = __MergeChannelsRequest_nonStandard__item_
     MergeChannelsRequest._cont = ASN1Dict([
-        ('mergeChannels', _MergeChannelsRequest_mergeChannels),
-        ('purgeChannelIds', _MergeChannelsRequest_purgeChannelIds),
-        ('nonStandard', _MergeChannelsRequest_nonStandard),
+        (u'mergeChannels', _MergeChannelsRequest_mergeChannels),
+        (u'purgeChannelIds', _MergeChannelsRequest_purgeChannelIds),
+        (u'nonStandard', _MergeChannelsRequest_nonStandard),
         ])
     MergeChannelsRequest._ext = []
     
     #-----< MergeChannelsConfirm >-----#
-    MergeChannelsConfirm = SEQ(name='MergeChannelsConfirm', mode=MODE_TYPE)
-    _MergeChannelsConfirm_mergeChannels = SET_OF(name='mergeChannels', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    MergeChannelsConfirm = SEQ(name=u'MergeChannelsConfirm', mode=MODE_TYPE)
+    _MergeChannelsConfirm_mergeChannels = SET_OF(name=u'mergeChannels', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     __MergeChannelsConfirm_mergeChannels__item_ = CHOICE(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL-3', 'ChannelAttributes')))
     _MergeChannelsConfirm_mergeChannels._cont = __MergeChannelsConfirm_mergeChannels__item_
-    _MergeChannelsConfirm_purgeChannelIds = SET_OF(name='purgeChannelIds', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _MergeChannelsConfirm_purgeChannelIds = SET_OF(name=u'purgeChannelIds', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     __MergeChannelsConfirm_purgeChannelIds__item_ = INT(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL-3', 'ChannelId')))
     _MergeChannelsConfirm_purgeChannelIds._cont = __MergeChannelsConfirm_purgeChannelIds__item_
-    _MergeChannelsConfirm_nonStandard = SEQ_OF(name='nonStandard', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _MergeChannelsConfirm_nonStandard = SEQ_OF(name=u'nonStandard', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     __MergeChannelsConfirm_nonStandard__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL-3', 'NonStandardParameter')))
     _MergeChannelsConfirm_nonStandard._cont = __MergeChannelsConfirm_nonStandard__item_
     MergeChannelsConfirm._cont = ASN1Dict([
-        ('mergeChannels', _MergeChannelsConfirm_mergeChannels),
-        ('purgeChannelIds', _MergeChannelsConfirm_purgeChannelIds),
-        ('nonStandard', _MergeChannelsConfirm_nonStandard),
+        (u'mergeChannels', _MergeChannelsConfirm_mergeChannels),
+        (u'purgeChannelIds', _MergeChannelsConfirm_purgeChannelIds),
+        (u'nonStandard', _MergeChannelsConfirm_nonStandard),
         ])
     MergeChannelsConfirm._ext = []
     
     #-----< PurgeChannelsIndication >-----#
-    PurgeChannelsIndication = SEQ(name='PurgeChannelsIndication', mode=MODE_TYPE)
-    _PurgeChannelsIndication_detachChannelIds = SET_OF(name='detachChannelIds', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    PurgeChannelsIndication = SEQ(name=u'PurgeChannelsIndication', mode=MODE_TYPE)
+    _PurgeChannelsIndication_detachChannelIds = SET_OF(name=u'detachChannelIds', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     __PurgeChannelsIndication_detachChannelIds__item_ = INT(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL-3', 'ChannelId')))
     _PurgeChannelsIndication_detachChannelIds._cont = __PurgeChannelsIndication_detachChannelIds__item_
-    _PurgeChannelsIndication_purgeChannelIds = SET_OF(name='purgeChannelIds', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _PurgeChannelsIndication_purgeChannelIds = SET_OF(name=u'purgeChannelIds', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     __PurgeChannelsIndication_purgeChannelIds__item_ = INT(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL-3', 'ChannelId')))
     _PurgeChannelsIndication_purgeChannelIds._cont = __PurgeChannelsIndication_purgeChannelIds__item_
-    _PurgeChannelsIndication_nonStandard = SEQ_OF(name='nonStandard', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _PurgeChannelsIndication_nonStandard = SEQ_OF(name=u'nonStandard', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     __PurgeChannelsIndication_nonStandard__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL-3', 'NonStandardParameter')))
     _PurgeChannelsIndication_nonStandard._cont = __PurgeChannelsIndication_nonStandard__item_
     PurgeChannelsIndication._cont = ASN1Dict([
-        ('detachChannelIds', _PurgeChannelsIndication_detachChannelIds),
-        ('purgeChannelIds', _PurgeChannelsIndication_purgeChannelIds),
-        ('nonStandard', _PurgeChannelsIndication_nonStandard),
+        (u'detachChannelIds', _PurgeChannelsIndication_detachChannelIds),
+        (u'purgeChannelIds', _PurgeChannelsIndication_purgeChannelIds),
+        (u'nonStandard', _PurgeChannelsIndication_nonStandard),
         ])
     PurgeChannelsIndication._ext = []
     
     #-----< TokenAttributes >-----#
-    TokenAttributes = CHOICE(name='TokenAttributes', mode=MODE_TYPE)
-    _TokenAttributes_grabbed = SEQ(name='grabbed', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    __TokenAttributes_grabbed_tokenId = INT(name='tokenId', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'TokenId')))
-    __TokenAttributes_grabbed_grabber = INT(name='grabber', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'UserId')))
-    __TokenAttributes_grabbed_nonStandard = SEQ_OF(name='nonStandard', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    TokenAttributes = CHOICE(name=u'TokenAttributes', mode=MODE_TYPE)
+    _TokenAttributes_grabbed = SEQ(name=u'grabbed', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __TokenAttributes_grabbed_tokenId = INT(name=u'tokenId', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'TokenId')))
+    __TokenAttributes_grabbed_grabber = INT(name=u'grabber', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'UserId')))
+    __TokenAttributes_grabbed_nonStandard = SEQ_OF(name=u'nonStandard', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     ___TokenAttributes_grabbed_nonStandard__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL-3', 'NonStandardParameter')))
     __TokenAttributes_grabbed_nonStandard._cont = ___TokenAttributes_grabbed_nonStandard__item_
     _TokenAttributes_grabbed._cont = ASN1Dict([
-        ('tokenId', __TokenAttributes_grabbed_tokenId),
-        ('grabber', __TokenAttributes_grabbed_grabber),
-        ('nonStandard', __TokenAttributes_grabbed_nonStandard),
+        (u'tokenId', __TokenAttributes_grabbed_tokenId),
+        (u'grabber', __TokenAttributes_grabbed_grabber),
+        (u'nonStandard', __TokenAttributes_grabbed_nonStandard),
         ])
     _TokenAttributes_grabbed._ext = []
-    _TokenAttributes_inhibited = SEQ(name='inhibited', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    __TokenAttributes_inhibited_tokenId = INT(name='tokenId', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'TokenId')))
-    __TokenAttributes_inhibited_inhibitors = SET_OF(name='inhibitors', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _TokenAttributes_inhibited = SEQ(name=u'inhibited', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __TokenAttributes_inhibited_tokenId = INT(name=u'tokenId', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'TokenId')))
+    __TokenAttributes_inhibited_inhibitors = SET_OF(name=u'inhibitors', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     ___TokenAttributes_inhibited_inhibitors__item_ = INT(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL-3', 'UserId')))
     __TokenAttributes_inhibited_inhibitors._cont = ___TokenAttributes_inhibited_inhibitors__item_
-    __TokenAttributes_inhibited_nonStandard = SEQ_OF(name='nonStandard', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    __TokenAttributes_inhibited_nonStandard = SEQ_OF(name=u'nonStandard', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     ___TokenAttributes_inhibited_nonStandard__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL-3', 'NonStandardParameter')))
     __TokenAttributes_inhibited_nonStandard._cont = ___TokenAttributes_inhibited_nonStandard__item_
     _TokenAttributes_inhibited._cont = ASN1Dict([
-        ('tokenId', __TokenAttributes_inhibited_tokenId),
-        ('inhibitors', __TokenAttributes_inhibited_inhibitors),
-        ('nonStandard', __TokenAttributes_inhibited_nonStandard),
+        (u'tokenId', __TokenAttributes_inhibited_tokenId),
+        (u'inhibitors', __TokenAttributes_inhibited_inhibitors),
+        (u'nonStandard', __TokenAttributes_inhibited_nonStandard),
         ])
     _TokenAttributes_inhibited._ext = []
-    _TokenAttributes_giving = SEQ(name='giving', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    __TokenAttributes_giving_tokenId = INT(name='tokenId', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'TokenId')))
-    __TokenAttributes_giving_grabber = INT(name='grabber', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'UserId')))
-    __TokenAttributes_giving_recipient = INT(name='recipient', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'UserId')))
-    __TokenAttributes_giving_nonStandard = SEQ_OF(name='nonStandard', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _TokenAttributes_giving = SEQ(name=u'giving', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __TokenAttributes_giving_tokenId = INT(name=u'tokenId', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'TokenId')))
+    __TokenAttributes_giving_grabber = INT(name=u'grabber', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'UserId')))
+    __TokenAttributes_giving_recipient = INT(name=u'recipient', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'UserId')))
+    __TokenAttributes_giving_nonStandard = SEQ_OF(name=u'nonStandard', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     ___TokenAttributes_giving_nonStandard__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL-3', 'NonStandardParameter')))
     __TokenAttributes_giving_nonStandard._cont = ___TokenAttributes_giving_nonStandard__item_
     _TokenAttributes_giving._cont = ASN1Dict([
-        ('tokenId', __TokenAttributes_giving_tokenId),
-        ('grabber', __TokenAttributes_giving_grabber),
-        ('recipient', __TokenAttributes_giving_recipient),
-        ('nonStandard', __TokenAttributes_giving_nonStandard),
+        (u'tokenId', __TokenAttributes_giving_tokenId),
+        (u'grabber', __TokenAttributes_giving_grabber),
+        (u'recipient', __TokenAttributes_giving_recipient),
+        (u'nonStandard', __TokenAttributes_giving_nonStandard),
         ])
     _TokenAttributes_giving._ext = []
-    _TokenAttributes_ungivable = SEQ(name='ungivable', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    __TokenAttributes_ungivable_tokenId = INT(name='tokenId', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'TokenId')))
-    __TokenAttributes_ungivable_grabber = INT(name='grabber', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'UserId')))
-    __TokenAttributes_ungivable_nonStandard = SEQ_OF(name='nonStandard', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _TokenAttributes_ungivable = SEQ(name=u'ungivable', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __TokenAttributes_ungivable_tokenId = INT(name=u'tokenId', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'TokenId')))
+    __TokenAttributes_ungivable_grabber = INT(name=u'grabber', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'UserId')))
+    __TokenAttributes_ungivable_nonStandard = SEQ_OF(name=u'nonStandard', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     ___TokenAttributes_ungivable_nonStandard__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL-3', 'NonStandardParameter')))
     __TokenAttributes_ungivable_nonStandard._cont = ___TokenAttributes_ungivable_nonStandard__item_
     _TokenAttributes_ungivable._cont = ASN1Dict([
-        ('tokenId', __TokenAttributes_ungivable_tokenId),
-        ('grabber', __TokenAttributes_ungivable_grabber),
-        ('nonStandard', __TokenAttributes_ungivable_nonStandard),
+        (u'tokenId', __TokenAttributes_ungivable_tokenId),
+        (u'grabber', __TokenAttributes_ungivable_grabber),
+        (u'nonStandard', __TokenAttributes_ungivable_nonStandard),
         ])
     _TokenAttributes_ungivable._ext = []
-    _TokenAttributes_given = SEQ(name='given', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    __TokenAttributes_given_tokenId = INT(name='tokenId', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'TokenId')))
-    __TokenAttributes_given_recipient = INT(name='recipient', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'UserId')))
-    __TokenAttributes_given_nonStandard = SEQ_OF(name='nonStandard', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _TokenAttributes_given = SEQ(name=u'given', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __TokenAttributes_given_tokenId = INT(name=u'tokenId', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'TokenId')))
+    __TokenAttributes_given_recipient = INT(name=u'recipient', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'UserId')))
+    __TokenAttributes_given_nonStandard = SEQ_OF(name=u'nonStandard', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     ___TokenAttributes_given_nonStandard__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL-3', 'NonStandardParameter')))
     __TokenAttributes_given_nonStandard._cont = ___TokenAttributes_given_nonStandard__item_
     _TokenAttributes_given._cont = ASN1Dict([
-        ('tokenId', __TokenAttributes_given_tokenId),
-        ('recipient', __TokenAttributes_given_recipient),
-        ('nonStandard', __TokenAttributes_given_nonStandard),
+        (u'tokenId', __TokenAttributes_given_tokenId),
+        (u'recipient', __TokenAttributes_given_recipient),
+        (u'nonStandard', __TokenAttributes_given_nonStandard),
         ])
     _TokenAttributes_given._ext = []
     TokenAttributes._cont = ASN1Dict([
-        ('grabbed', _TokenAttributes_grabbed),
-        ('inhibited', _TokenAttributes_inhibited),
-        ('giving', _TokenAttributes_giving),
-        ('ungivable', _TokenAttributes_ungivable),
-        ('given', _TokenAttributes_given),
+        (u'grabbed', _TokenAttributes_grabbed),
+        (u'inhibited', _TokenAttributes_inhibited),
+        (u'giving', _TokenAttributes_giving),
+        (u'ungivable', _TokenAttributes_ungivable),
+        (u'given', _TokenAttributes_given),
         ])
     TokenAttributes._ext = []
     
     #-----< MergeTokensRequest >-----#
-    MergeTokensRequest = SEQ(name='MergeTokensRequest', mode=MODE_TYPE)
-    _MergeTokensRequest_mergeTokens = SET_OF(name='mergeTokens', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    MergeTokensRequest = SEQ(name=u'MergeTokensRequest', mode=MODE_TYPE)
+    _MergeTokensRequest_mergeTokens = SET_OF(name=u'mergeTokens', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     __MergeTokensRequest_mergeTokens__item_ = CHOICE(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL-3', 'TokenAttributes')))
     _MergeTokensRequest_mergeTokens._cont = __MergeTokensRequest_mergeTokens__item_
-    _MergeTokensRequest_purgeTokenIds = SET_OF(name='purgeTokenIds', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _MergeTokensRequest_purgeTokenIds = SET_OF(name=u'purgeTokenIds', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     __MergeTokensRequest_purgeTokenIds__item_ = INT(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL-3', 'TokenId')))
     _MergeTokensRequest_purgeTokenIds._cont = __MergeTokensRequest_purgeTokenIds__item_
-    _MergeTokensRequest_nonStandard = SEQ_OF(name='nonStandard', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _MergeTokensRequest_nonStandard = SEQ_OF(name=u'nonStandard', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     __MergeTokensRequest_nonStandard__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL-3', 'NonStandardParameter')))
     _MergeTokensRequest_nonStandard._cont = __MergeTokensRequest_nonStandard__item_
     MergeTokensRequest._cont = ASN1Dict([
-        ('mergeTokens', _MergeTokensRequest_mergeTokens),
-        ('purgeTokenIds', _MergeTokensRequest_purgeTokenIds),
-        ('nonStandard', _MergeTokensRequest_nonStandard),
+        (u'mergeTokens', _MergeTokensRequest_mergeTokens),
+        (u'purgeTokenIds', _MergeTokensRequest_purgeTokenIds),
+        (u'nonStandard', _MergeTokensRequest_nonStandard),
         ])
     MergeTokensRequest._ext = []
     
     #-----< MergeTokensConfirm >-----#
-    MergeTokensConfirm = SEQ(name='MergeTokensConfirm', mode=MODE_TYPE)
-    _MergeTokensConfirm_mergeTokens = SET_OF(name='mergeTokens', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    MergeTokensConfirm = SEQ(name=u'MergeTokensConfirm', mode=MODE_TYPE)
+    _MergeTokensConfirm_mergeTokens = SET_OF(name=u'mergeTokens', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     __MergeTokensConfirm_mergeTokens__item_ = CHOICE(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL-3', 'TokenAttributes')))
     _MergeTokensConfirm_mergeTokens._cont = __MergeTokensConfirm_mergeTokens__item_
-    _MergeTokensConfirm_purgeTokenIds = SET_OF(name='purgeTokenIds', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _MergeTokensConfirm_purgeTokenIds = SET_OF(name=u'purgeTokenIds', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     __MergeTokensConfirm_purgeTokenIds__item_ = INT(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL-3', 'TokenId')))
     _MergeTokensConfirm_purgeTokenIds._cont = __MergeTokensConfirm_purgeTokenIds__item_
-    _MergeTokensConfirm_nonStandard = SEQ_OF(name='nonStandard', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _MergeTokensConfirm_nonStandard = SEQ_OF(name=u'nonStandard', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     __MergeTokensConfirm_nonStandard__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL-3', 'NonStandardParameter')))
     _MergeTokensConfirm_nonStandard._cont = __MergeTokensConfirm_nonStandard__item_
     MergeTokensConfirm._cont = ASN1Dict([
-        ('mergeTokens', _MergeTokensConfirm_mergeTokens),
-        ('purgeTokenIds', _MergeTokensConfirm_purgeTokenIds),
-        ('nonStandard', _MergeTokensConfirm_nonStandard),
+        (u'mergeTokens', _MergeTokensConfirm_mergeTokens),
+        (u'purgeTokenIds', _MergeTokensConfirm_purgeTokenIds),
+        (u'nonStandard', _MergeTokensConfirm_nonStandard),
         ])
     MergeTokensConfirm._ext = []
     
     #-----< PurgeTokensIndication >-----#
-    PurgeTokensIndication = SEQ(name='PurgeTokensIndication', mode=MODE_TYPE)
-    _PurgeTokensIndication_purgeTokenIds = SET_OF(name='purgeTokenIds', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    PurgeTokensIndication = SEQ(name=u'PurgeTokensIndication', mode=MODE_TYPE)
+    _PurgeTokensIndication_purgeTokenIds = SET_OF(name=u'purgeTokenIds', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     __PurgeTokensIndication_purgeTokenIds__item_ = INT(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL-3', 'TokenId')))
     _PurgeTokensIndication_purgeTokenIds._cont = __PurgeTokensIndication_purgeTokenIds__item_
-    _PurgeTokensIndication_nonStandard = SEQ_OF(name='nonStandard', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _PurgeTokensIndication_nonStandard = SEQ_OF(name=u'nonStandard', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     __PurgeTokensIndication_nonStandard__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL-3', 'NonStandardParameter')))
     _PurgeTokensIndication_nonStandard._cont = __PurgeTokensIndication_nonStandard__item_
     PurgeTokensIndication._cont = ASN1Dict([
-        ('purgeTokenIds', _PurgeTokensIndication_purgeTokenIds),
-        ('nonStandard', _PurgeTokensIndication_nonStandard),
+        (u'purgeTokenIds', _PurgeTokensIndication_purgeTokenIds),
+        (u'nonStandard', _PurgeTokensIndication_nonStandard),
         ])
     PurgeTokensIndication._ext = []
     
     #-----< DisconnectProviderUltimatum >-----#
-    DisconnectProviderUltimatum = SEQ(name='DisconnectProviderUltimatum', mode=MODE_TYPE)
-    _DisconnectProviderUltimatum_reason = CHOICE(name='reason', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'Reason')))
-    _DisconnectProviderUltimatum_nonStandard = SEQ_OF(name='nonStandard', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    DisconnectProviderUltimatum = SEQ(name=u'DisconnectProviderUltimatum', mode=MODE_TYPE)
+    _DisconnectProviderUltimatum_reason = CHOICE(name=u'reason', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'Reason')))
+    _DisconnectProviderUltimatum_nonStandard = SEQ_OF(name=u'nonStandard', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     __DisconnectProviderUltimatum_nonStandard__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL-3', 'NonStandardParameter')))
     _DisconnectProviderUltimatum_nonStandard._cont = __DisconnectProviderUltimatum_nonStandard__item_
     DisconnectProviderUltimatum._cont = ASN1Dict([
-        ('reason', _DisconnectProviderUltimatum_reason),
-        ('nonStandard', _DisconnectProviderUltimatum_nonStandard),
+        (u'reason', _DisconnectProviderUltimatum_reason),
+        (u'nonStandard', _DisconnectProviderUltimatum_nonStandard),
         ])
     DisconnectProviderUltimatum._ext = []
     
     #-----< RejectMCSPDUUltimatum >-----#
-    RejectMCSPDUUltimatum = SEQ(name='RejectMCSPDUUltimatum', mode=MODE_TYPE)
-    _RejectMCSPDUUltimatum_diagnostic = CHOICE(name='diagnostic', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'Diagnostic')))
-    _RejectMCSPDUUltimatum_initialOctets = OCT_STR(name='initialOctets', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _RejectMCSPDUUltimatum_nonStandard = SEQ_OF(name='nonStandard', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    RejectMCSPDUUltimatum = SEQ(name=u'RejectMCSPDUUltimatum', mode=MODE_TYPE)
+    _RejectMCSPDUUltimatum_diagnostic = CHOICE(name=u'diagnostic', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'Diagnostic')))
+    _RejectMCSPDUUltimatum_initialOctets = OCT_STR(name=u'initialOctets', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _RejectMCSPDUUltimatum_nonStandard = SEQ_OF(name=u'nonStandard', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     __RejectMCSPDUUltimatum_nonStandard__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL-3', 'NonStandardParameter')))
     _RejectMCSPDUUltimatum_nonStandard._cont = __RejectMCSPDUUltimatum_nonStandard__item_
     RejectMCSPDUUltimatum._cont = ASN1Dict([
-        ('diagnostic', _RejectMCSPDUUltimatum_diagnostic),
-        ('initialOctets', _RejectMCSPDUUltimatum_initialOctets),
-        ('nonStandard', _RejectMCSPDUUltimatum_nonStandard),
+        (u'diagnostic', _RejectMCSPDUUltimatum_diagnostic),
+        (u'initialOctets', _RejectMCSPDUUltimatum_initialOctets),
+        (u'nonStandard', _RejectMCSPDUUltimatum_nonStandard),
         ])
     RejectMCSPDUUltimatum._ext = []
     
     #-----< AttachUserRequest >-----#
-    AttachUserRequest = SEQ(name='AttachUserRequest', mode=MODE_TYPE)
-    _AttachUserRequest_nonStandard = SEQ_OF(name='nonStandard', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    AttachUserRequest = SEQ(name=u'AttachUserRequest', mode=MODE_TYPE)
+    _AttachUserRequest_nonStandard = SEQ_OF(name=u'nonStandard', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     __AttachUserRequest_nonStandard__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL-3', 'NonStandardParameter')))
     _AttachUserRequest_nonStandard._cont = __AttachUserRequest_nonStandard__item_
     AttachUserRequest._cont = ASN1Dict([
-        ('nonStandard', _AttachUserRequest_nonStandard),
+        (u'nonStandard', _AttachUserRequest_nonStandard),
         ])
     AttachUserRequest._ext = []
     
     #-----< AttachUserConfirm >-----#
-    AttachUserConfirm = SEQ(name='AttachUserConfirm', mode=MODE_TYPE)
-    _AttachUserConfirm_result = CHOICE(name='result', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'Result')))
-    _AttachUserConfirm_initiator = INT(name='initiator', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'UserId')), opt=True)
-    _AttachUserConfirm_nonStandard = SEQ_OF(name='nonStandard', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    AttachUserConfirm = SEQ(name=u'AttachUserConfirm', mode=MODE_TYPE)
+    _AttachUserConfirm_result = CHOICE(name=u'result', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'Result')))
+    _AttachUserConfirm_initiator = INT(name=u'initiator', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'UserId')), opt=True)
+    _AttachUserConfirm_nonStandard = SEQ_OF(name=u'nonStandard', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     __AttachUserConfirm_nonStandard__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL-3', 'NonStandardParameter')))
     _AttachUserConfirm_nonStandard._cont = __AttachUserConfirm_nonStandard__item_
     AttachUserConfirm._cont = ASN1Dict([
-        ('result', _AttachUserConfirm_result),
-        ('initiator', _AttachUserConfirm_initiator),
-        ('nonStandard', _AttachUserConfirm_nonStandard),
+        (u'result', _AttachUserConfirm_result),
+        (u'initiator', _AttachUserConfirm_initiator),
+        (u'nonStandard', _AttachUserConfirm_nonStandard),
         ])
     AttachUserConfirm._ext = []
     
     #-----< DetachUserRequest >-----#
-    DetachUserRequest = SEQ(name='DetachUserRequest', mode=MODE_TYPE)
-    _DetachUserRequest_reason = CHOICE(name='reason', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'Reason')))
-    _DetachUserRequest_userIds = SET_OF(name='userIds', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    DetachUserRequest = SEQ(name=u'DetachUserRequest', mode=MODE_TYPE)
+    _DetachUserRequest_reason = CHOICE(name=u'reason', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'Reason')))
+    _DetachUserRequest_userIds = SET_OF(name=u'userIds', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     __DetachUserRequest_userIds__item_ = INT(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL-3', 'UserId')))
     _DetachUserRequest_userIds._cont = __DetachUserRequest_userIds__item_
-    _DetachUserRequest_nonStandard = SEQ_OF(name='nonStandard', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _DetachUserRequest_nonStandard = SEQ_OF(name=u'nonStandard', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     __DetachUserRequest_nonStandard__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL-3', 'NonStandardParameter')))
     _DetachUserRequest_nonStandard._cont = __DetachUserRequest_nonStandard__item_
     DetachUserRequest._cont = ASN1Dict([
-        ('reason', _DetachUserRequest_reason),
-        ('userIds', _DetachUserRequest_userIds),
-        ('nonStandard', _DetachUserRequest_nonStandard),
+        (u'reason', _DetachUserRequest_reason),
+        (u'userIds', _DetachUserRequest_userIds),
+        (u'nonStandard', _DetachUserRequest_nonStandard),
         ])
     DetachUserRequest._ext = []
     
     #-----< DetachUserIndication >-----#
-    DetachUserIndication = SEQ(name='DetachUserIndication', mode=MODE_TYPE)
-    _DetachUserIndication_reason = CHOICE(name='reason', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'Reason')))
-    _DetachUserIndication_userIds = SET_OF(name='userIds', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    DetachUserIndication = SEQ(name=u'DetachUserIndication', mode=MODE_TYPE)
+    _DetachUserIndication_reason = CHOICE(name=u'reason', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'Reason')))
+    _DetachUserIndication_userIds = SET_OF(name=u'userIds', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     __DetachUserIndication_userIds__item_ = INT(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL-3', 'UserId')))
     _DetachUserIndication_userIds._cont = __DetachUserIndication_userIds__item_
-    _DetachUserIndication_nonStandard = SEQ_OF(name='nonStandard', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _DetachUserIndication_nonStandard = SEQ_OF(name=u'nonStandard', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     __DetachUserIndication_nonStandard__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL-3', 'NonStandardParameter')))
     _DetachUserIndication_nonStandard._cont = __DetachUserIndication_nonStandard__item_
     DetachUserIndication._cont = ASN1Dict([
-        ('reason', _DetachUserIndication_reason),
-        ('userIds', _DetachUserIndication_userIds),
-        ('nonStandard', _DetachUserIndication_nonStandard),
+        (u'reason', _DetachUserIndication_reason),
+        (u'userIds', _DetachUserIndication_userIds),
+        (u'nonStandard', _DetachUserIndication_nonStandard),
         ])
     DetachUserIndication._ext = []
     
     #-----< ChannelJoinRequest >-----#
-    ChannelJoinRequest = SEQ(name='ChannelJoinRequest', mode=MODE_TYPE)
-    _ChannelJoinRequest_initiator = INT(name='initiator', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'UserId')))
-    _ChannelJoinRequest_channelId = INT(name='channelId', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'ChannelId')))
-    _ChannelJoinRequest_nonStandard = SEQ_OF(name='nonStandard', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    ChannelJoinRequest = SEQ(name=u'ChannelJoinRequest', mode=MODE_TYPE)
+    _ChannelJoinRequest_initiator = INT(name=u'initiator', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'UserId')))
+    _ChannelJoinRequest_channelId = INT(name=u'channelId', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'ChannelId')))
+    _ChannelJoinRequest_nonStandard = SEQ_OF(name=u'nonStandard', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     __ChannelJoinRequest_nonStandard__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL-3', 'NonStandardParameter')))
     _ChannelJoinRequest_nonStandard._cont = __ChannelJoinRequest_nonStandard__item_
     ChannelJoinRequest._cont = ASN1Dict([
-        ('initiator', _ChannelJoinRequest_initiator),
-        ('channelId', _ChannelJoinRequest_channelId),
-        ('nonStandard', _ChannelJoinRequest_nonStandard),
+        (u'initiator', _ChannelJoinRequest_initiator),
+        (u'channelId', _ChannelJoinRequest_channelId),
+        (u'nonStandard', _ChannelJoinRequest_nonStandard),
         ])
     ChannelJoinRequest._ext = []
     
     #-----< ChannelJoinConfirm >-----#
-    ChannelJoinConfirm = SEQ(name='ChannelJoinConfirm', mode=MODE_TYPE)
-    _ChannelJoinConfirm_result = CHOICE(name='result', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'Result')))
-    _ChannelJoinConfirm_initiator = INT(name='initiator', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'UserId')))
-    _ChannelJoinConfirm_requested = INT(name='requested', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'ChannelId')))
-    _ChannelJoinConfirm_channelId = INT(name='channelId', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'ChannelId')), opt=True)
-    _ChannelJoinConfirm_nonStandard = SEQ_OF(name='nonStandard', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    ChannelJoinConfirm = SEQ(name=u'ChannelJoinConfirm', mode=MODE_TYPE)
+    _ChannelJoinConfirm_result = CHOICE(name=u'result', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'Result')))
+    _ChannelJoinConfirm_initiator = INT(name=u'initiator', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'UserId')))
+    _ChannelJoinConfirm_requested = INT(name=u'requested', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'ChannelId')))
+    _ChannelJoinConfirm_channelId = INT(name=u'channelId', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'ChannelId')), opt=True)
+    _ChannelJoinConfirm_nonStandard = SEQ_OF(name=u'nonStandard', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     __ChannelJoinConfirm_nonStandard__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL-3', 'NonStandardParameter')))
     _ChannelJoinConfirm_nonStandard._cont = __ChannelJoinConfirm_nonStandard__item_
     ChannelJoinConfirm._cont = ASN1Dict([
-        ('result', _ChannelJoinConfirm_result),
-        ('initiator', _ChannelJoinConfirm_initiator),
-        ('requested', _ChannelJoinConfirm_requested),
-        ('channelId', _ChannelJoinConfirm_channelId),
-        ('nonStandard', _ChannelJoinConfirm_nonStandard),
+        (u'result', _ChannelJoinConfirm_result),
+        (u'initiator', _ChannelJoinConfirm_initiator),
+        (u'requested', _ChannelJoinConfirm_requested),
+        (u'channelId', _ChannelJoinConfirm_channelId),
+        (u'nonStandard', _ChannelJoinConfirm_nonStandard),
         ])
     ChannelJoinConfirm._ext = []
     
     #-----< ChannelLeaveRequest >-----#
-    ChannelLeaveRequest = SEQ(name='ChannelLeaveRequest', mode=MODE_TYPE)
-    _ChannelLeaveRequest_channelIds = SET_OF(name='channelIds', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    ChannelLeaveRequest = SEQ(name=u'ChannelLeaveRequest', mode=MODE_TYPE)
+    _ChannelLeaveRequest_channelIds = SET_OF(name=u'channelIds', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     __ChannelLeaveRequest_channelIds__item_ = INT(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL-3', 'ChannelId')))
     _ChannelLeaveRequest_channelIds._cont = __ChannelLeaveRequest_channelIds__item_
-    _ChannelLeaveRequest_nonStandard = SEQ_OF(name='nonStandard', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _ChannelLeaveRequest_nonStandard = SEQ_OF(name=u'nonStandard', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     __ChannelLeaveRequest_nonStandard__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL-3', 'NonStandardParameter')))
     _ChannelLeaveRequest_nonStandard._cont = __ChannelLeaveRequest_nonStandard__item_
     ChannelLeaveRequest._cont = ASN1Dict([
-        ('channelIds', _ChannelLeaveRequest_channelIds),
-        ('nonStandard', _ChannelLeaveRequest_nonStandard),
+        (u'channelIds', _ChannelLeaveRequest_channelIds),
+        (u'nonStandard', _ChannelLeaveRequest_nonStandard),
         ])
     ChannelLeaveRequest._ext = []
     
     #-----< ChannelConveneRequest >-----#
-    ChannelConveneRequest = SEQ(name='ChannelConveneRequest', mode=MODE_TYPE)
-    _ChannelConveneRequest_initiator = INT(name='initiator', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'UserId')))
-    _ChannelConveneRequest_nonStandard = SEQ_OF(name='nonStandard', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    ChannelConveneRequest = SEQ(name=u'ChannelConveneRequest', mode=MODE_TYPE)
+    _ChannelConveneRequest_initiator = INT(name=u'initiator', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'UserId')))
+    _ChannelConveneRequest_nonStandard = SEQ_OF(name=u'nonStandard', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     __ChannelConveneRequest_nonStandard__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL-3', 'NonStandardParameter')))
     _ChannelConveneRequest_nonStandard._cont = __ChannelConveneRequest_nonStandard__item_
     ChannelConveneRequest._cont = ASN1Dict([
-        ('initiator', _ChannelConveneRequest_initiator),
-        ('nonStandard', _ChannelConveneRequest_nonStandard),
+        (u'initiator', _ChannelConveneRequest_initiator),
+        (u'nonStandard', _ChannelConveneRequest_nonStandard),
         ])
     ChannelConveneRequest._ext = []
     
     #-----< ChannelConveneConfirm >-----#
-    ChannelConveneConfirm = SEQ(name='ChannelConveneConfirm', mode=MODE_TYPE)
-    _ChannelConveneConfirm_result = CHOICE(name='result', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'Result')))
-    _ChannelConveneConfirm_initiator = INT(name='initiator', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'UserId')))
-    _ChannelConveneConfirm_channelId = INT(name='channelId', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'PrivateChannelId')), opt=True)
-    _ChannelConveneConfirm_nonStandard = SEQ_OF(name='nonStandard', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    ChannelConveneConfirm = SEQ(name=u'ChannelConveneConfirm', mode=MODE_TYPE)
+    _ChannelConveneConfirm_result = CHOICE(name=u'result', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'Result')))
+    _ChannelConveneConfirm_initiator = INT(name=u'initiator', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'UserId')))
+    _ChannelConveneConfirm_channelId = INT(name=u'channelId', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'PrivateChannelId')), opt=True)
+    _ChannelConveneConfirm_nonStandard = SEQ_OF(name=u'nonStandard', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     __ChannelConveneConfirm_nonStandard__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL-3', 'NonStandardParameter')))
     _ChannelConveneConfirm_nonStandard._cont = __ChannelConveneConfirm_nonStandard__item_
     ChannelConveneConfirm._cont = ASN1Dict([
-        ('result', _ChannelConveneConfirm_result),
-        ('initiator', _ChannelConveneConfirm_initiator),
-        ('channelId', _ChannelConveneConfirm_channelId),
-        ('nonStandard', _ChannelConveneConfirm_nonStandard),
+        (u'result', _ChannelConveneConfirm_result),
+        (u'initiator', _ChannelConveneConfirm_initiator),
+        (u'channelId', _ChannelConveneConfirm_channelId),
+        (u'nonStandard', _ChannelConveneConfirm_nonStandard),
         ])
     ChannelConveneConfirm._ext = []
     
     #-----< ChannelDisbandRequest >-----#
-    ChannelDisbandRequest = SEQ(name='ChannelDisbandRequest', mode=MODE_TYPE)
-    _ChannelDisbandRequest_initiator = INT(name='initiator', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'UserId')))
-    _ChannelDisbandRequest_channelId = INT(name='channelId', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'PrivateChannelId')))
-    _ChannelDisbandRequest_nonStandard = SEQ_OF(name='nonStandard', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    ChannelDisbandRequest = SEQ(name=u'ChannelDisbandRequest', mode=MODE_TYPE)
+    _ChannelDisbandRequest_initiator = INT(name=u'initiator', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'UserId')))
+    _ChannelDisbandRequest_channelId = INT(name=u'channelId', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'PrivateChannelId')))
+    _ChannelDisbandRequest_nonStandard = SEQ_OF(name=u'nonStandard', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     __ChannelDisbandRequest_nonStandard__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL-3', 'NonStandardParameter')))
     _ChannelDisbandRequest_nonStandard._cont = __ChannelDisbandRequest_nonStandard__item_
     ChannelDisbandRequest._cont = ASN1Dict([
-        ('initiator', _ChannelDisbandRequest_initiator),
-        ('channelId', _ChannelDisbandRequest_channelId),
-        ('nonStandard', _ChannelDisbandRequest_nonStandard),
+        (u'initiator', _ChannelDisbandRequest_initiator),
+        (u'channelId', _ChannelDisbandRequest_channelId),
+        (u'nonStandard', _ChannelDisbandRequest_nonStandard),
         ])
     ChannelDisbandRequest._ext = []
     
     #-----< ChannelDisbandIndication >-----#
-    ChannelDisbandIndication = SEQ(name='ChannelDisbandIndication', mode=MODE_TYPE)
-    _ChannelDisbandIndication_channelId = INT(name='channelId', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'PrivateChannelId')))
-    _ChannelDisbandIndication_nonStandard = SEQ_OF(name='nonStandard', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    ChannelDisbandIndication = SEQ(name=u'ChannelDisbandIndication', mode=MODE_TYPE)
+    _ChannelDisbandIndication_channelId = INT(name=u'channelId', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'PrivateChannelId')))
+    _ChannelDisbandIndication_nonStandard = SEQ_OF(name=u'nonStandard', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     __ChannelDisbandIndication_nonStandard__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL-3', 'NonStandardParameter')))
     _ChannelDisbandIndication_nonStandard._cont = __ChannelDisbandIndication_nonStandard__item_
     ChannelDisbandIndication._cont = ASN1Dict([
-        ('channelId', _ChannelDisbandIndication_channelId),
-        ('nonStandard', _ChannelDisbandIndication_nonStandard),
+        (u'channelId', _ChannelDisbandIndication_channelId),
+        (u'nonStandard', _ChannelDisbandIndication_nonStandard),
         ])
     ChannelDisbandIndication._ext = []
     
     #-----< ChannelAdmitRequest >-----#
-    ChannelAdmitRequest = SEQ(name='ChannelAdmitRequest', mode=MODE_TYPE)
-    _ChannelAdmitRequest_initiator = INT(name='initiator', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'UserId')))
-    _ChannelAdmitRequest_channelId = INT(name='channelId', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'PrivateChannelId')))
-    _ChannelAdmitRequest_userIds = SET_OF(name='userIds', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    ChannelAdmitRequest = SEQ(name=u'ChannelAdmitRequest', mode=MODE_TYPE)
+    _ChannelAdmitRequest_initiator = INT(name=u'initiator', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'UserId')))
+    _ChannelAdmitRequest_channelId = INT(name=u'channelId', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'PrivateChannelId')))
+    _ChannelAdmitRequest_userIds = SET_OF(name=u'userIds', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     __ChannelAdmitRequest_userIds__item_ = INT(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL-3', 'UserId')))
     _ChannelAdmitRequest_userIds._cont = __ChannelAdmitRequest_userIds__item_
-    _ChannelAdmitRequest_nonStandard = SEQ_OF(name='nonStandard', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _ChannelAdmitRequest_nonStandard = SEQ_OF(name=u'nonStandard', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     __ChannelAdmitRequest_nonStandard__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL-3', 'NonStandardParameter')))
     _ChannelAdmitRequest_nonStandard._cont = __ChannelAdmitRequest_nonStandard__item_
     ChannelAdmitRequest._cont = ASN1Dict([
-        ('initiator', _ChannelAdmitRequest_initiator),
-        ('channelId', _ChannelAdmitRequest_channelId),
-        ('userIds', _ChannelAdmitRequest_userIds),
-        ('nonStandard', _ChannelAdmitRequest_nonStandard),
+        (u'initiator', _ChannelAdmitRequest_initiator),
+        (u'channelId', _ChannelAdmitRequest_channelId),
+        (u'userIds', _ChannelAdmitRequest_userIds),
+        (u'nonStandard', _ChannelAdmitRequest_nonStandard),
         ])
     ChannelAdmitRequest._ext = []
     
     #-----< ChannelAdmitIndication >-----#
-    ChannelAdmitIndication = SEQ(name='ChannelAdmitIndication', mode=MODE_TYPE)
-    _ChannelAdmitIndication_initiator = INT(name='initiator', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'UserId')))
-    _ChannelAdmitIndication_channelId = INT(name='channelId', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'PrivateChannelId')))
-    _ChannelAdmitIndication_userIds = SET_OF(name='userIds', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    ChannelAdmitIndication = SEQ(name=u'ChannelAdmitIndication', mode=MODE_TYPE)
+    _ChannelAdmitIndication_initiator = INT(name=u'initiator', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'UserId')))
+    _ChannelAdmitIndication_channelId = INT(name=u'channelId', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'PrivateChannelId')))
+    _ChannelAdmitIndication_userIds = SET_OF(name=u'userIds', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     __ChannelAdmitIndication_userIds__item_ = INT(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL-3', 'UserId')))
     _ChannelAdmitIndication_userIds._cont = __ChannelAdmitIndication_userIds__item_
-    _ChannelAdmitIndication_nonStandard = SEQ_OF(name='nonStandard', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _ChannelAdmitIndication_nonStandard = SEQ_OF(name=u'nonStandard', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     __ChannelAdmitIndication_nonStandard__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL-3', 'NonStandardParameter')))
     _ChannelAdmitIndication_nonStandard._cont = __ChannelAdmitIndication_nonStandard__item_
     ChannelAdmitIndication._cont = ASN1Dict([
-        ('initiator', _ChannelAdmitIndication_initiator),
-        ('channelId', _ChannelAdmitIndication_channelId),
-        ('userIds', _ChannelAdmitIndication_userIds),
-        ('nonStandard', _ChannelAdmitIndication_nonStandard),
+        (u'initiator', _ChannelAdmitIndication_initiator),
+        (u'channelId', _ChannelAdmitIndication_channelId),
+        (u'userIds', _ChannelAdmitIndication_userIds),
+        (u'nonStandard', _ChannelAdmitIndication_nonStandard),
         ])
     ChannelAdmitIndication._ext = []
     
     #-----< ChannelExpelRequest >-----#
-    ChannelExpelRequest = SEQ(name='ChannelExpelRequest', mode=MODE_TYPE)
-    _ChannelExpelRequest_initiator = INT(name='initiator', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'UserId')))
-    _ChannelExpelRequest_channelId = INT(name='channelId', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'PrivateChannelId')))
-    _ChannelExpelRequest_userIds = SET_OF(name='userIds', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    ChannelExpelRequest = SEQ(name=u'ChannelExpelRequest', mode=MODE_TYPE)
+    _ChannelExpelRequest_initiator = INT(name=u'initiator', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'UserId')))
+    _ChannelExpelRequest_channelId = INT(name=u'channelId', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'PrivateChannelId')))
+    _ChannelExpelRequest_userIds = SET_OF(name=u'userIds', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     __ChannelExpelRequest_userIds__item_ = INT(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL-3', 'UserId')))
     _ChannelExpelRequest_userIds._cont = __ChannelExpelRequest_userIds__item_
-    _ChannelExpelRequest_nonStandard = SEQ_OF(name='nonStandard', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _ChannelExpelRequest_nonStandard = SEQ_OF(name=u'nonStandard', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     __ChannelExpelRequest_nonStandard__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL-3', 'NonStandardParameter')))
     _ChannelExpelRequest_nonStandard._cont = __ChannelExpelRequest_nonStandard__item_
     ChannelExpelRequest._cont = ASN1Dict([
-        ('initiator', _ChannelExpelRequest_initiator),
-        ('channelId', _ChannelExpelRequest_channelId),
-        ('userIds', _ChannelExpelRequest_userIds),
-        ('nonStandard', _ChannelExpelRequest_nonStandard),
+        (u'initiator', _ChannelExpelRequest_initiator),
+        (u'channelId', _ChannelExpelRequest_channelId),
+        (u'userIds', _ChannelExpelRequest_userIds),
+        (u'nonStandard', _ChannelExpelRequest_nonStandard),
         ])
     ChannelExpelRequest._ext = []
     
     #-----< ChannelExpelIndication >-----#
-    ChannelExpelIndication = SEQ(name='ChannelExpelIndication', mode=MODE_TYPE)
-    _ChannelExpelIndication_channelId = INT(name='channelId', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'PrivateChannelId')))
-    _ChannelExpelIndication_userIds = SET_OF(name='userIds', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    ChannelExpelIndication = SEQ(name=u'ChannelExpelIndication', mode=MODE_TYPE)
+    _ChannelExpelIndication_channelId = INT(name=u'channelId', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'PrivateChannelId')))
+    _ChannelExpelIndication_userIds = SET_OF(name=u'userIds', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     __ChannelExpelIndication_userIds__item_ = INT(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL-3', 'UserId')))
     _ChannelExpelIndication_userIds._cont = __ChannelExpelIndication_userIds__item_
-    _ChannelExpelIndication_nonStandard = SEQ_OF(name='nonStandard', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _ChannelExpelIndication_nonStandard = SEQ_OF(name=u'nonStandard', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     __ChannelExpelIndication_nonStandard__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL-3', 'NonStandardParameter')))
     _ChannelExpelIndication_nonStandard._cont = __ChannelExpelIndication_nonStandard__item_
     ChannelExpelIndication._cont = ASN1Dict([
-        ('channelId', _ChannelExpelIndication_channelId),
-        ('userIds', _ChannelExpelIndication_userIds),
-        ('nonStandard', _ChannelExpelIndication_nonStandard),
+        (u'channelId', _ChannelExpelIndication_channelId),
+        (u'userIds', _ChannelExpelIndication_userIds),
+        (u'nonStandard', _ChannelExpelIndication_nonStandard),
         ])
     ChannelExpelIndication._ext = []
     
     #-----< SendDataRequest >-----#
-    SendDataRequest = SEQ(name='SendDataRequest', mode=MODE_TYPE)
-    _SendDataRequest_initiator = INT(name='initiator', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'UserId')))
-    _SendDataRequest_channelId = INT(name='channelId', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'ChannelId')))
-    _SendDataRequest_reliability = BOOL(name='reliability', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _SendDataRequest_domainReferenceID = INT(name='domainReferenceID', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    SendDataRequest = SEQ(name=u'SendDataRequest', mode=MODE_TYPE)
+    _SendDataRequest_initiator = INT(name=u'initiator', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'UserId')))
+    _SendDataRequest_channelId = INT(name=u'channelId', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'ChannelId')))
+    _SendDataRequest_reliability = BOOL(name=u'reliability', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _SendDataRequest_domainReferenceID = INT(name=u'domainReferenceID', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     _SendDataRequest_domainReferenceID._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=65535)], ev=None, er=[])
-    _SendDataRequest_dataPriority = CHOICE(name='dataPriority', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'DataPriority')))
-    _SendDataRequest_segmentation = BIT_STR(name='segmentation', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'Segmentation')))
-    _SendDataRequest_userData = OCT_STR(name='userData', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _SendDataRequest_totalDataSize = INT(name='totalDataSize', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _SendDataRequest_nonStandard = SEQ_OF(name='nonStandard', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _SendDataRequest_dataPriority = CHOICE(name=u'dataPriority', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'DataPriority')))
+    _SendDataRequest_segmentation = BIT_STR(name=u'segmentation', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'Segmentation')))
+    _SendDataRequest_userData = OCT_STR(name=u'userData', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _SendDataRequest_totalDataSize = INT(name=u'totalDataSize', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _SendDataRequest_nonStandard = SEQ_OF(name=u'nonStandard', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     __SendDataRequest_nonStandard__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL-3', 'NonStandardParameter')))
     _SendDataRequest_nonStandard._cont = __SendDataRequest_nonStandard__item_
     SendDataRequest._cont = ASN1Dict([
-        ('initiator', _SendDataRequest_initiator),
-        ('channelId', _SendDataRequest_channelId),
-        ('reliability', _SendDataRequest_reliability),
-        ('domainReferenceID', _SendDataRequest_domainReferenceID),
-        ('dataPriority', _SendDataRequest_dataPriority),
-        ('segmentation', _SendDataRequest_segmentation),
-        ('userData', _SendDataRequest_userData),
-        ('totalDataSize', _SendDataRequest_totalDataSize),
-        ('nonStandard', _SendDataRequest_nonStandard),
+        (u'initiator', _SendDataRequest_initiator),
+        (u'channelId', _SendDataRequest_channelId),
+        (u'reliability', _SendDataRequest_reliability),
+        (u'domainReferenceID', _SendDataRequest_domainReferenceID),
+        (u'dataPriority', _SendDataRequest_dataPriority),
+        (u'segmentation', _SendDataRequest_segmentation),
+        (u'userData', _SendDataRequest_userData),
+        (u'totalDataSize', _SendDataRequest_totalDataSize),
+        (u'nonStandard', _SendDataRequest_nonStandard),
         ])
     SendDataRequest._ext = []
     
     #-----< SendDataIndication >-----#
-    SendDataIndication = SEQ(name='SendDataIndication', mode=MODE_TYPE)
-    _SendDataIndication_initiator = INT(name='initiator', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'UserId')))
-    _SendDataIndication_channelId = INT(name='channelId', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'ChannelId')))
-    _SendDataIndication_reliability = BOOL(name='reliability', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _SendDataIndication_domainReferenceID = INT(name='domainReferenceID', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    SendDataIndication = SEQ(name=u'SendDataIndication', mode=MODE_TYPE)
+    _SendDataIndication_initiator = INT(name=u'initiator', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'UserId')))
+    _SendDataIndication_channelId = INT(name=u'channelId', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'ChannelId')))
+    _SendDataIndication_reliability = BOOL(name=u'reliability', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _SendDataIndication_domainReferenceID = INT(name=u'domainReferenceID', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     _SendDataIndication_domainReferenceID._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=65535)], ev=None, er=[])
-    _SendDataIndication_dataPriority = CHOICE(name='dataPriority', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'DataPriority')))
-    _SendDataIndication_segmentation = BIT_STR(name='segmentation', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'Segmentation')))
-    _SendDataIndication_userData = OCT_STR(name='userData', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _SendDataIndication_totalDataSize = INT(name='totalDataSize', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _SendDataIndication_nonStandard = SEQ_OF(name='nonStandard', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _SendDataIndication_dataPriority = CHOICE(name=u'dataPriority', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'DataPriority')))
+    _SendDataIndication_segmentation = BIT_STR(name=u'segmentation', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'Segmentation')))
+    _SendDataIndication_userData = OCT_STR(name=u'userData', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _SendDataIndication_totalDataSize = INT(name=u'totalDataSize', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _SendDataIndication_nonStandard = SEQ_OF(name=u'nonStandard', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     __SendDataIndication_nonStandard__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL-3', 'NonStandardParameter')))
     _SendDataIndication_nonStandard._cont = __SendDataIndication_nonStandard__item_
     SendDataIndication._cont = ASN1Dict([
-        ('initiator', _SendDataIndication_initiator),
-        ('channelId', _SendDataIndication_channelId),
-        ('reliability', _SendDataIndication_reliability),
-        ('domainReferenceID', _SendDataIndication_domainReferenceID),
-        ('dataPriority', _SendDataIndication_dataPriority),
-        ('segmentation', _SendDataIndication_segmentation),
-        ('userData', _SendDataIndication_userData),
-        ('totalDataSize', _SendDataIndication_totalDataSize),
-        ('nonStandard', _SendDataIndication_nonStandard),
+        (u'initiator', _SendDataIndication_initiator),
+        (u'channelId', _SendDataIndication_channelId),
+        (u'reliability', _SendDataIndication_reliability),
+        (u'domainReferenceID', _SendDataIndication_domainReferenceID),
+        (u'dataPriority', _SendDataIndication_dataPriority),
+        (u'segmentation', _SendDataIndication_segmentation),
+        (u'userData', _SendDataIndication_userData),
+        (u'totalDataSize', _SendDataIndication_totalDataSize),
+        (u'nonStandard', _SendDataIndication_nonStandard),
         ])
     SendDataIndication._ext = []
     
     #-----< UniformSendDataRequest >-----#
-    UniformSendDataRequest = SEQ(name='UniformSendDataRequest', mode=MODE_TYPE)
-    _UniformSendDataRequest_initiator = INT(name='initiator', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'UserId')))
-    _UniformSendDataRequest_channelId = INT(name='channelId', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'ChannelId')))
-    _UniformSendDataRequest_reliability = BOOL(name='reliability', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _UniformSendDataRequest_domainReferenceID = INT(name='domainReferenceID', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    UniformSendDataRequest = SEQ(name=u'UniformSendDataRequest', mode=MODE_TYPE)
+    _UniformSendDataRequest_initiator = INT(name=u'initiator', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'UserId')))
+    _UniformSendDataRequest_channelId = INT(name=u'channelId', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'ChannelId')))
+    _UniformSendDataRequest_reliability = BOOL(name=u'reliability', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _UniformSendDataRequest_domainReferenceID = INT(name=u'domainReferenceID', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     _UniformSendDataRequest_domainReferenceID._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=65535)], ev=None, er=[])
-    _UniformSendDataRequest_dataPriority = CHOICE(name='dataPriority', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'DataPriority')))
-    _UniformSendDataRequest_segmentation = BIT_STR(name='segmentation', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'Segmentation')))
-    _UniformSendDataRequest_userData = OCT_STR(name='userData', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _UniformSendDataRequest_totalDataSize = INT(name='totalDataSize', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _UniformSendDataRequest_nonStandard = SEQ_OF(name='nonStandard', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _UniformSendDataRequest_dataPriority = CHOICE(name=u'dataPriority', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'DataPriority')))
+    _UniformSendDataRequest_segmentation = BIT_STR(name=u'segmentation', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'Segmentation')))
+    _UniformSendDataRequest_userData = OCT_STR(name=u'userData', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _UniformSendDataRequest_totalDataSize = INT(name=u'totalDataSize', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _UniformSendDataRequest_nonStandard = SEQ_OF(name=u'nonStandard', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     __UniformSendDataRequest_nonStandard__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL-3', 'NonStandardParameter')))
     _UniformSendDataRequest_nonStandard._cont = __UniformSendDataRequest_nonStandard__item_
     UniformSendDataRequest._cont = ASN1Dict([
-        ('initiator', _UniformSendDataRequest_initiator),
-        ('channelId', _UniformSendDataRequest_channelId),
-        ('reliability', _UniformSendDataRequest_reliability),
-        ('domainReferenceID', _UniformSendDataRequest_domainReferenceID),
-        ('dataPriority', _UniformSendDataRequest_dataPriority),
-        ('segmentation', _UniformSendDataRequest_segmentation),
-        ('userData', _UniformSendDataRequest_userData),
-        ('totalDataSize', _UniformSendDataRequest_totalDataSize),
-        ('nonStandard', _UniformSendDataRequest_nonStandard),
+        (u'initiator', _UniformSendDataRequest_initiator),
+        (u'channelId', _UniformSendDataRequest_channelId),
+        (u'reliability', _UniformSendDataRequest_reliability),
+        (u'domainReferenceID', _UniformSendDataRequest_domainReferenceID),
+        (u'dataPriority', _UniformSendDataRequest_dataPriority),
+        (u'segmentation', _UniformSendDataRequest_segmentation),
+        (u'userData', _UniformSendDataRequest_userData),
+        (u'totalDataSize', _UniformSendDataRequest_totalDataSize),
+        (u'nonStandard', _UniformSendDataRequest_nonStandard),
         ])
     UniformSendDataRequest._ext = []
     
     #-----< UniformSendDataIndication >-----#
-    UniformSendDataIndication = SEQ(name='UniformSendDataIndication', mode=MODE_TYPE)
-    _UniformSendDataIndication_initiator = INT(name='initiator', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'UserId')))
-    _UniformSendDataIndication_channelId = INT(name='channelId', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'ChannelId')))
-    _UniformSendDataIndication_reliability = BOOL(name='reliability', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _UniformSendDataIndication_domainReferenceID = INT(name='domainReferenceID', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    UniformSendDataIndication = SEQ(name=u'UniformSendDataIndication', mode=MODE_TYPE)
+    _UniformSendDataIndication_initiator = INT(name=u'initiator', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'UserId')))
+    _UniformSendDataIndication_channelId = INT(name=u'channelId', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'ChannelId')))
+    _UniformSendDataIndication_reliability = BOOL(name=u'reliability', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _UniformSendDataIndication_domainReferenceID = INT(name=u'domainReferenceID', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     _UniformSendDataIndication_domainReferenceID._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=65535)], ev=None, er=[])
-    _UniformSendDataIndication_dataPriority = CHOICE(name='dataPriority', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'DataPriority')))
-    _UniformSendDataIndication_segmentation = BIT_STR(name='segmentation', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'Segmentation')))
-    _UniformSendDataIndication_userData = OCT_STR(name='userData', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _UniformSendDataIndication_totalDataSize = INT(name='totalDataSize', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _UniformSendDataIndication_nonStandard = SEQ_OF(name='nonStandard', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _UniformSendDataIndication_dataPriority = CHOICE(name=u'dataPriority', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'DataPriority')))
+    _UniformSendDataIndication_segmentation = BIT_STR(name=u'segmentation', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'Segmentation')))
+    _UniformSendDataIndication_userData = OCT_STR(name=u'userData', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _UniformSendDataIndication_totalDataSize = INT(name=u'totalDataSize', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _UniformSendDataIndication_nonStandard = SEQ_OF(name=u'nonStandard', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     __UniformSendDataIndication_nonStandard__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL-3', 'NonStandardParameter')))
     _UniformSendDataIndication_nonStandard._cont = __UniformSendDataIndication_nonStandard__item_
     UniformSendDataIndication._cont = ASN1Dict([
-        ('initiator', _UniformSendDataIndication_initiator),
-        ('channelId', _UniformSendDataIndication_channelId),
-        ('reliability', _UniformSendDataIndication_reliability),
-        ('domainReferenceID', _UniformSendDataIndication_domainReferenceID),
-        ('dataPriority', _UniformSendDataIndication_dataPriority),
-        ('segmentation', _UniformSendDataIndication_segmentation),
-        ('userData', _UniformSendDataIndication_userData),
-        ('totalDataSize', _UniformSendDataIndication_totalDataSize),
-        ('nonStandard', _UniformSendDataIndication_nonStandard),
+        (u'initiator', _UniformSendDataIndication_initiator),
+        (u'channelId', _UniformSendDataIndication_channelId),
+        (u'reliability', _UniformSendDataIndication_reliability),
+        (u'domainReferenceID', _UniformSendDataIndication_domainReferenceID),
+        (u'dataPriority', _UniformSendDataIndication_dataPriority),
+        (u'segmentation', _UniformSendDataIndication_segmentation),
+        (u'userData', _UniformSendDataIndication_userData),
+        (u'totalDataSize', _UniformSendDataIndication_totalDataSize),
+        (u'nonStandard', _UniformSendDataIndication_nonStandard),
         ])
     UniformSendDataIndication._ext = []
     
     #-----< TokenGrabRequest >-----#
-    TokenGrabRequest = SEQ(name='TokenGrabRequest', mode=MODE_TYPE)
-    _TokenGrabRequest_initiator = INT(name='initiator', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'UserId')))
-    _TokenGrabRequest_tokenId = INT(name='tokenId', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'TokenId')))
-    _TokenGrabRequest_nonStandard = SEQ_OF(name='nonStandard', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    TokenGrabRequest = SEQ(name=u'TokenGrabRequest', mode=MODE_TYPE)
+    _TokenGrabRequest_initiator = INT(name=u'initiator', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'UserId')))
+    _TokenGrabRequest_tokenId = INT(name=u'tokenId', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'TokenId')))
+    _TokenGrabRequest_nonStandard = SEQ_OF(name=u'nonStandard', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     __TokenGrabRequest_nonStandard__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL-3', 'NonStandardParameter')))
     _TokenGrabRequest_nonStandard._cont = __TokenGrabRequest_nonStandard__item_
     TokenGrabRequest._cont = ASN1Dict([
-        ('initiator', _TokenGrabRequest_initiator),
-        ('tokenId', _TokenGrabRequest_tokenId),
-        ('nonStandard', _TokenGrabRequest_nonStandard),
+        (u'initiator', _TokenGrabRequest_initiator),
+        (u'tokenId', _TokenGrabRequest_tokenId),
+        (u'nonStandard', _TokenGrabRequest_nonStandard),
         ])
     TokenGrabRequest._ext = []
     
     #-----< TokenGrabConfirm >-----#
-    TokenGrabConfirm = SEQ(name='TokenGrabConfirm', mode=MODE_TYPE)
-    _TokenGrabConfirm_result = CHOICE(name='result', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'Result')))
-    _TokenGrabConfirm_initiator = INT(name='initiator', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'UserId')))
-    _TokenGrabConfirm_tokenId = INT(name='tokenId', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'TokenId')))
-    _TokenGrabConfirm_tokenStatus = CHOICE(name='tokenStatus', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'TokenStatus')))
-    _TokenGrabConfirm_nonStandard = SEQ_OF(name='nonStandard', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    TokenGrabConfirm = SEQ(name=u'TokenGrabConfirm', mode=MODE_TYPE)
+    _TokenGrabConfirm_result = CHOICE(name=u'result', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'Result')))
+    _TokenGrabConfirm_initiator = INT(name=u'initiator', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'UserId')))
+    _TokenGrabConfirm_tokenId = INT(name=u'tokenId', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'TokenId')))
+    _TokenGrabConfirm_tokenStatus = CHOICE(name=u'tokenStatus', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'TokenStatus')))
+    _TokenGrabConfirm_nonStandard = SEQ_OF(name=u'nonStandard', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     __TokenGrabConfirm_nonStandard__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL-3', 'NonStandardParameter')))
     _TokenGrabConfirm_nonStandard._cont = __TokenGrabConfirm_nonStandard__item_
     TokenGrabConfirm._cont = ASN1Dict([
-        ('result', _TokenGrabConfirm_result),
-        ('initiator', _TokenGrabConfirm_initiator),
-        ('tokenId', _TokenGrabConfirm_tokenId),
-        ('tokenStatus', _TokenGrabConfirm_tokenStatus),
-        ('nonStandard', _TokenGrabConfirm_nonStandard),
+        (u'result', _TokenGrabConfirm_result),
+        (u'initiator', _TokenGrabConfirm_initiator),
+        (u'tokenId', _TokenGrabConfirm_tokenId),
+        (u'tokenStatus', _TokenGrabConfirm_tokenStatus),
+        (u'nonStandard', _TokenGrabConfirm_nonStandard),
         ])
     TokenGrabConfirm._ext = []
     
     #-----< TokenInhibitRequest >-----#
-    TokenInhibitRequest = SEQ(name='TokenInhibitRequest', mode=MODE_TYPE)
-    _TokenInhibitRequest_initiator = INT(name='initiator', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'UserId')))
-    _TokenInhibitRequest_tokenId = INT(name='tokenId', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'TokenId')))
-    _TokenInhibitRequest_nonStandard = SEQ_OF(name='nonStandard', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    TokenInhibitRequest = SEQ(name=u'TokenInhibitRequest', mode=MODE_TYPE)
+    _TokenInhibitRequest_initiator = INT(name=u'initiator', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'UserId')))
+    _TokenInhibitRequest_tokenId = INT(name=u'tokenId', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'TokenId')))
+    _TokenInhibitRequest_nonStandard = SEQ_OF(name=u'nonStandard', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     __TokenInhibitRequest_nonStandard__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL-3', 'NonStandardParameter')))
     _TokenInhibitRequest_nonStandard._cont = __TokenInhibitRequest_nonStandard__item_
     TokenInhibitRequest._cont = ASN1Dict([
-        ('initiator', _TokenInhibitRequest_initiator),
-        ('tokenId', _TokenInhibitRequest_tokenId),
-        ('nonStandard', _TokenInhibitRequest_nonStandard),
+        (u'initiator', _TokenInhibitRequest_initiator),
+        (u'tokenId', _TokenInhibitRequest_tokenId),
+        (u'nonStandard', _TokenInhibitRequest_nonStandard),
         ])
     TokenInhibitRequest._ext = []
     
     #-----< TokenInhibitConfirm >-----#
-    TokenInhibitConfirm = SEQ(name='TokenInhibitConfirm', mode=MODE_TYPE)
-    _TokenInhibitConfirm_result = CHOICE(name='result', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'Result')))
-    _TokenInhibitConfirm_initiator = INT(name='initiator', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'UserId')))
-    _TokenInhibitConfirm_tokenId = INT(name='tokenId', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'TokenId')))
-    _TokenInhibitConfirm_tokenStatus = CHOICE(name='tokenStatus', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'TokenStatus')))
-    _TokenInhibitConfirm_nonStandard = SEQ_OF(name='nonStandard', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    TokenInhibitConfirm = SEQ(name=u'TokenInhibitConfirm', mode=MODE_TYPE)
+    _TokenInhibitConfirm_result = CHOICE(name=u'result', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'Result')))
+    _TokenInhibitConfirm_initiator = INT(name=u'initiator', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'UserId')))
+    _TokenInhibitConfirm_tokenId = INT(name=u'tokenId', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'TokenId')))
+    _TokenInhibitConfirm_tokenStatus = CHOICE(name=u'tokenStatus', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'TokenStatus')))
+    _TokenInhibitConfirm_nonStandard = SEQ_OF(name=u'nonStandard', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     __TokenInhibitConfirm_nonStandard__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL-3', 'NonStandardParameter')))
     _TokenInhibitConfirm_nonStandard._cont = __TokenInhibitConfirm_nonStandard__item_
     TokenInhibitConfirm._cont = ASN1Dict([
-        ('result', _TokenInhibitConfirm_result),
-        ('initiator', _TokenInhibitConfirm_initiator),
-        ('tokenId', _TokenInhibitConfirm_tokenId),
-        ('tokenStatus', _TokenInhibitConfirm_tokenStatus),
-        ('nonStandard', _TokenInhibitConfirm_nonStandard),
+        (u'result', _TokenInhibitConfirm_result),
+        (u'initiator', _TokenInhibitConfirm_initiator),
+        (u'tokenId', _TokenInhibitConfirm_tokenId),
+        (u'tokenStatus', _TokenInhibitConfirm_tokenStatus),
+        (u'nonStandard', _TokenInhibitConfirm_nonStandard),
         ])
     TokenInhibitConfirm._ext = []
     
     #-----< TokenGiveRequest >-----#
-    TokenGiveRequest = SEQ(name='TokenGiveRequest', mode=MODE_TYPE)
-    _TokenGiveRequest_initiator = INT(name='initiator', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'UserId')))
-    _TokenGiveRequest_tokenId = INT(name='tokenId', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'TokenId')))
-    _TokenGiveRequest_recipient = INT(name='recipient', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'UserId')))
-    _TokenGiveRequest_nonStandard = SEQ_OF(name='nonStandard', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    TokenGiveRequest = SEQ(name=u'TokenGiveRequest', mode=MODE_TYPE)
+    _TokenGiveRequest_initiator = INT(name=u'initiator', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'UserId')))
+    _TokenGiveRequest_tokenId = INT(name=u'tokenId', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'TokenId')))
+    _TokenGiveRequest_recipient = INT(name=u'recipient', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'UserId')))
+    _TokenGiveRequest_nonStandard = SEQ_OF(name=u'nonStandard', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     __TokenGiveRequest_nonStandard__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL-3', 'NonStandardParameter')))
     _TokenGiveRequest_nonStandard._cont = __TokenGiveRequest_nonStandard__item_
     TokenGiveRequest._cont = ASN1Dict([
-        ('initiator', _TokenGiveRequest_initiator),
-        ('tokenId', _TokenGiveRequest_tokenId),
-        ('recipient', _TokenGiveRequest_recipient),
-        ('nonStandard', _TokenGiveRequest_nonStandard),
+        (u'initiator', _TokenGiveRequest_initiator),
+        (u'tokenId', _TokenGiveRequest_tokenId),
+        (u'recipient', _TokenGiveRequest_recipient),
+        (u'nonStandard', _TokenGiveRequest_nonStandard),
         ])
     TokenGiveRequest._ext = []
     
     #-----< TokenGiveIndication >-----#
-    TokenGiveIndication = SEQ(name='TokenGiveIndication', mode=MODE_TYPE)
-    _TokenGiveIndication_initiator = INT(name='initiator', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'UserId')))
-    _TokenGiveIndication_tokenId = INT(name='tokenId', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'TokenId')))
-    _TokenGiveIndication_recipient = INT(name='recipient', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'UserId')))
-    _TokenGiveIndication_nonStandard = SEQ_OF(name='nonStandard', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    TokenGiveIndication = SEQ(name=u'TokenGiveIndication', mode=MODE_TYPE)
+    _TokenGiveIndication_initiator = INT(name=u'initiator', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'UserId')))
+    _TokenGiveIndication_tokenId = INT(name=u'tokenId', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'TokenId')))
+    _TokenGiveIndication_recipient = INT(name=u'recipient', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'UserId')))
+    _TokenGiveIndication_nonStandard = SEQ_OF(name=u'nonStandard', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     __TokenGiveIndication_nonStandard__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL-3', 'NonStandardParameter')))
     _TokenGiveIndication_nonStandard._cont = __TokenGiveIndication_nonStandard__item_
     TokenGiveIndication._cont = ASN1Dict([
-        ('initiator', _TokenGiveIndication_initiator),
-        ('tokenId', _TokenGiveIndication_tokenId),
-        ('recipient', _TokenGiveIndication_recipient),
-        ('nonStandard', _TokenGiveIndication_nonStandard),
+        (u'initiator', _TokenGiveIndication_initiator),
+        (u'tokenId', _TokenGiveIndication_tokenId),
+        (u'recipient', _TokenGiveIndication_recipient),
+        (u'nonStandard', _TokenGiveIndication_nonStandard),
         ])
     TokenGiveIndication._ext = []
     
     #-----< TokenGiveResponse >-----#
-    TokenGiveResponse = SEQ(name='TokenGiveResponse', mode=MODE_TYPE)
-    _TokenGiveResponse_result = CHOICE(name='result', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'Result')))
-    _TokenGiveResponse_recipient = INT(name='recipient', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'UserId')))
-    _TokenGiveResponse_tokenId = INT(name='tokenId', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'TokenId')))
-    _TokenGiveResponse_nonStandard = SEQ_OF(name='nonStandard', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    TokenGiveResponse = SEQ(name=u'TokenGiveResponse', mode=MODE_TYPE)
+    _TokenGiveResponse_result = CHOICE(name=u'result', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'Result')))
+    _TokenGiveResponse_recipient = INT(name=u'recipient', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'UserId')))
+    _TokenGiveResponse_tokenId = INT(name=u'tokenId', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'TokenId')))
+    _TokenGiveResponse_nonStandard = SEQ_OF(name=u'nonStandard', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     __TokenGiveResponse_nonStandard__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL-3', 'NonStandardParameter')))
     _TokenGiveResponse_nonStandard._cont = __TokenGiveResponse_nonStandard__item_
     TokenGiveResponse._cont = ASN1Dict([
-        ('result', _TokenGiveResponse_result),
-        ('recipient', _TokenGiveResponse_recipient),
-        ('tokenId', _TokenGiveResponse_tokenId),
-        ('nonStandard', _TokenGiveResponse_nonStandard),
+        (u'result', _TokenGiveResponse_result),
+        (u'recipient', _TokenGiveResponse_recipient),
+        (u'tokenId', _TokenGiveResponse_tokenId),
+        (u'nonStandard', _TokenGiveResponse_nonStandard),
         ])
     TokenGiveResponse._ext = []
     
     #-----< TokenGiveConfirm >-----#
-    TokenGiveConfirm = SEQ(name='TokenGiveConfirm', mode=MODE_TYPE)
-    _TokenGiveConfirm_result = CHOICE(name='result', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'Result')))
-    _TokenGiveConfirm_initiator = INT(name='initiator', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'UserId')))
-    _TokenGiveConfirm_tokenId = INT(name='tokenId', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'TokenId')))
-    _TokenGiveConfirm_tokenStatus = CHOICE(name='tokenStatus', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'TokenStatus')))
-    _TokenGiveConfirm_nonStandard = SEQ_OF(name='nonStandard', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    TokenGiveConfirm = SEQ(name=u'TokenGiveConfirm', mode=MODE_TYPE)
+    _TokenGiveConfirm_result = CHOICE(name=u'result', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'Result')))
+    _TokenGiveConfirm_initiator = INT(name=u'initiator', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'UserId')))
+    _TokenGiveConfirm_tokenId = INT(name=u'tokenId', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'TokenId')))
+    _TokenGiveConfirm_tokenStatus = CHOICE(name=u'tokenStatus', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'TokenStatus')))
+    _TokenGiveConfirm_nonStandard = SEQ_OF(name=u'nonStandard', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     __TokenGiveConfirm_nonStandard__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL-3', 'NonStandardParameter')))
     _TokenGiveConfirm_nonStandard._cont = __TokenGiveConfirm_nonStandard__item_
     TokenGiveConfirm._cont = ASN1Dict([
-        ('result', _TokenGiveConfirm_result),
-        ('initiator', _TokenGiveConfirm_initiator),
-        ('tokenId', _TokenGiveConfirm_tokenId),
-        ('tokenStatus', _TokenGiveConfirm_tokenStatus),
-        ('nonStandard', _TokenGiveConfirm_nonStandard),
+        (u'result', _TokenGiveConfirm_result),
+        (u'initiator', _TokenGiveConfirm_initiator),
+        (u'tokenId', _TokenGiveConfirm_tokenId),
+        (u'tokenStatus', _TokenGiveConfirm_tokenStatus),
+        (u'nonStandard', _TokenGiveConfirm_nonStandard),
         ])
     TokenGiveConfirm._ext = []
     
     #-----< TokenPleaseRequest >-----#
-    TokenPleaseRequest = SEQ(name='TokenPleaseRequest', mode=MODE_TYPE)
-    _TokenPleaseRequest_initiator = INT(name='initiator', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'UserId')))
-    _TokenPleaseRequest_tokenId = INT(name='tokenId', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'TokenId')))
-    _TokenPleaseRequest_nonStandard = SEQ_OF(name='nonStandard', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    TokenPleaseRequest = SEQ(name=u'TokenPleaseRequest', mode=MODE_TYPE)
+    _TokenPleaseRequest_initiator = INT(name=u'initiator', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'UserId')))
+    _TokenPleaseRequest_tokenId = INT(name=u'tokenId', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'TokenId')))
+    _TokenPleaseRequest_nonStandard = SEQ_OF(name=u'nonStandard', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     __TokenPleaseRequest_nonStandard__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL-3', 'NonStandardParameter')))
     _TokenPleaseRequest_nonStandard._cont = __TokenPleaseRequest_nonStandard__item_
     TokenPleaseRequest._cont = ASN1Dict([
-        ('initiator', _TokenPleaseRequest_initiator),
-        ('tokenId', _TokenPleaseRequest_tokenId),
-        ('nonStandard', _TokenPleaseRequest_nonStandard),
+        (u'initiator', _TokenPleaseRequest_initiator),
+        (u'tokenId', _TokenPleaseRequest_tokenId),
+        (u'nonStandard', _TokenPleaseRequest_nonStandard),
         ])
     TokenPleaseRequest._ext = []
     
     #-----< TokenPleaseIndication >-----#
-    TokenPleaseIndication = SEQ(name='TokenPleaseIndication', mode=MODE_TYPE)
-    _TokenPleaseIndication_initiator = INT(name='initiator', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'UserId')))
-    _TokenPleaseIndication_tokenId = INT(name='tokenId', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'TokenId')))
-    _TokenPleaseIndication_nonStandard = SEQ_OF(name='nonStandard', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    TokenPleaseIndication = SEQ(name=u'TokenPleaseIndication', mode=MODE_TYPE)
+    _TokenPleaseIndication_initiator = INT(name=u'initiator', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'UserId')))
+    _TokenPleaseIndication_tokenId = INT(name=u'tokenId', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'TokenId')))
+    _TokenPleaseIndication_nonStandard = SEQ_OF(name=u'nonStandard', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     __TokenPleaseIndication_nonStandard__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL-3', 'NonStandardParameter')))
     _TokenPleaseIndication_nonStandard._cont = __TokenPleaseIndication_nonStandard__item_
     TokenPleaseIndication._cont = ASN1Dict([
-        ('initiator', _TokenPleaseIndication_initiator),
-        ('tokenId', _TokenPleaseIndication_tokenId),
-        ('nonStandard', _TokenPleaseIndication_nonStandard),
+        (u'initiator', _TokenPleaseIndication_initiator),
+        (u'tokenId', _TokenPleaseIndication_tokenId),
+        (u'nonStandard', _TokenPleaseIndication_nonStandard),
         ])
     TokenPleaseIndication._ext = []
     
     #-----< TokenReleaseRequest >-----#
-    TokenReleaseRequest = SEQ(name='TokenReleaseRequest', mode=MODE_TYPE)
-    _TokenReleaseRequest_initiator = INT(name='initiator', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'UserId')))
-    _TokenReleaseRequest_tokenId = INT(name='tokenId', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'TokenId')))
-    _TokenReleaseRequest_nonStandard = SEQ_OF(name='nonStandard', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    TokenReleaseRequest = SEQ(name=u'TokenReleaseRequest', mode=MODE_TYPE)
+    _TokenReleaseRequest_initiator = INT(name=u'initiator', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'UserId')))
+    _TokenReleaseRequest_tokenId = INT(name=u'tokenId', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'TokenId')))
+    _TokenReleaseRequest_nonStandard = SEQ_OF(name=u'nonStandard', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     __TokenReleaseRequest_nonStandard__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL-3', 'NonStandardParameter')))
     _TokenReleaseRequest_nonStandard._cont = __TokenReleaseRequest_nonStandard__item_
     TokenReleaseRequest._cont = ASN1Dict([
-        ('initiator', _TokenReleaseRequest_initiator),
-        ('tokenId', _TokenReleaseRequest_tokenId),
-        ('nonStandard', _TokenReleaseRequest_nonStandard),
+        (u'initiator', _TokenReleaseRequest_initiator),
+        (u'tokenId', _TokenReleaseRequest_tokenId),
+        (u'nonStandard', _TokenReleaseRequest_nonStandard),
         ])
     TokenReleaseRequest._ext = []
     
     #-----< TokenReleaseConfirm >-----#
-    TokenReleaseConfirm = SEQ(name='TokenReleaseConfirm', mode=MODE_TYPE)
-    _TokenReleaseConfirm_result = CHOICE(name='result', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'Result')))
-    _TokenReleaseConfirm_initiator = INT(name='initiator', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'UserId')))
-    _TokenReleaseConfirm_tokenId = INT(name='tokenId', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'TokenId')))
-    _TokenReleaseConfirm_tokenStatus = CHOICE(name='tokenStatus', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'TokenStatus')))
-    _TokenReleaseConfirm_nonStandard = SEQ_OF(name='nonStandard', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    TokenReleaseConfirm = SEQ(name=u'TokenReleaseConfirm', mode=MODE_TYPE)
+    _TokenReleaseConfirm_result = CHOICE(name=u'result', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'Result')))
+    _TokenReleaseConfirm_initiator = INT(name=u'initiator', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'UserId')))
+    _TokenReleaseConfirm_tokenId = INT(name=u'tokenId', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'TokenId')))
+    _TokenReleaseConfirm_tokenStatus = CHOICE(name=u'tokenStatus', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'TokenStatus')))
+    _TokenReleaseConfirm_nonStandard = SEQ_OF(name=u'nonStandard', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     __TokenReleaseConfirm_nonStandard__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL-3', 'NonStandardParameter')))
     _TokenReleaseConfirm_nonStandard._cont = __TokenReleaseConfirm_nonStandard__item_
     TokenReleaseConfirm._cont = ASN1Dict([
-        ('result', _TokenReleaseConfirm_result),
-        ('initiator', _TokenReleaseConfirm_initiator),
-        ('tokenId', _TokenReleaseConfirm_tokenId),
-        ('tokenStatus', _TokenReleaseConfirm_tokenStatus),
-        ('nonStandard', _TokenReleaseConfirm_nonStandard),
+        (u'result', _TokenReleaseConfirm_result),
+        (u'initiator', _TokenReleaseConfirm_initiator),
+        (u'tokenId', _TokenReleaseConfirm_tokenId),
+        (u'tokenStatus', _TokenReleaseConfirm_tokenStatus),
+        (u'nonStandard', _TokenReleaseConfirm_nonStandard),
         ])
     TokenReleaseConfirm._ext = []
     
     #-----< TokenTestRequest >-----#
-    TokenTestRequest = SEQ(name='TokenTestRequest', mode=MODE_TYPE)
-    _TokenTestRequest_initiator = INT(name='initiator', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'UserId')))
-    _TokenTestRequest_tokenId = INT(name='tokenId', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'TokenId')))
-    _TokenTestRequest_nonStandard = SEQ_OF(name='nonStandard', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    TokenTestRequest = SEQ(name=u'TokenTestRequest', mode=MODE_TYPE)
+    _TokenTestRequest_initiator = INT(name=u'initiator', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'UserId')))
+    _TokenTestRequest_tokenId = INT(name=u'tokenId', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'TokenId')))
+    _TokenTestRequest_nonStandard = SEQ_OF(name=u'nonStandard', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     __TokenTestRequest_nonStandard__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL-3', 'NonStandardParameter')))
     _TokenTestRequest_nonStandard._cont = __TokenTestRequest_nonStandard__item_
     TokenTestRequest._cont = ASN1Dict([
-        ('initiator', _TokenTestRequest_initiator),
-        ('tokenId', _TokenTestRequest_tokenId),
-        ('nonStandard', _TokenTestRequest_nonStandard),
+        (u'initiator', _TokenTestRequest_initiator),
+        (u'tokenId', _TokenTestRequest_tokenId),
+        (u'nonStandard', _TokenTestRequest_nonStandard),
         ])
     TokenTestRequest._ext = []
     
     #-----< TokenTestConfirm >-----#
-    TokenTestConfirm = SEQ(name='TokenTestConfirm', mode=MODE_TYPE)
-    _TokenTestConfirm_initiator = INT(name='initiator', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'UserId')))
-    _TokenTestConfirm_tokenId = INT(name='tokenId', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'TokenId')))
-    _TokenTestConfirm_tokenStatus = CHOICE(name='tokenStatus', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'TokenStatus')))
-    _TokenTestConfirm_nonStandard = SEQ_OF(name='nonStandard', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    TokenTestConfirm = SEQ(name=u'TokenTestConfirm', mode=MODE_TYPE)
+    _TokenTestConfirm_initiator = INT(name=u'initiator', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'UserId')))
+    _TokenTestConfirm_tokenId = INT(name=u'tokenId', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'TokenId')))
+    _TokenTestConfirm_tokenStatus = CHOICE(name=u'tokenStatus', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'TokenStatus')))
+    _TokenTestConfirm_nonStandard = SEQ_OF(name=u'nonStandard', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     __TokenTestConfirm_nonStandard__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL-3', 'NonStandardParameter')))
     _TokenTestConfirm_nonStandard._cont = __TokenTestConfirm_nonStandard__item_
     TokenTestConfirm._cont = ASN1Dict([
-        ('initiator', _TokenTestConfirm_initiator),
-        ('tokenId', _TokenTestConfirm_tokenId),
-        ('tokenStatus', _TokenTestConfirm_tokenStatus),
-        ('nonStandard', _TokenTestConfirm_nonStandard),
+        (u'initiator', _TokenTestConfirm_initiator),
+        (u'tokenId', _TokenTestConfirm_tokenId),
+        (u'tokenStatus', _TokenTestConfirm_tokenStatus),
+        (u'nonStandard', _TokenTestConfirm_nonStandard),
         ])
     TokenTestConfirm._ext = []
     
     #-----< CapabilityID >-----#
-    CapabilityID = CHOICE(name='CapabilityID', mode=MODE_TYPE)
-    _CapabilityID_standardID = INT(name='standardID', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    CapabilityID = CHOICE(name=u'CapabilityID', mode=MODE_TYPE)
+    _CapabilityID_standardID = INT(name=u'standardID', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     _CapabilityID_standardID._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=65535)], ev=None, er=[])
-    _CapabilityID_nonstandardID = CHOICE(name='nonstandardID', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'Key')))
+    _CapabilityID_nonstandardID = CHOICE(name=u'nonstandardID', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'Key')))
     CapabilityID._cont = ASN1Dict([
-        ('standardID', _CapabilityID_standardID),
-        ('nonstandardID', _CapabilityID_nonstandardID),
+        (u'standardID', _CapabilityID_standardID),
+        (u'nonstandardID', _CapabilityID_nonstandardID),
         ])
     CapabilityID._ext = None
     
     #-----< CapabilityClass >-----#
-    CapabilityClass = CHOICE(name='CapabilityClass', mode=MODE_TYPE)
-    _CapabilityClass_null = NULL(name='null', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _CapabilityClass_unsignedMin = INT(name='unsignedMin', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    CapabilityClass = CHOICE(name=u'CapabilityClass', mode=MODE_TYPE)
+    _CapabilityClass_null = NULL(name=u'null', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _CapabilityClass_unsignedMin = INT(name=u'unsignedMin', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     _CapabilityClass_unsignedMin._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=None)], ev=None, er=[])
-    _CapabilityClass_unsignedMax = INT(name='unsignedMax', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _CapabilityClass_unsignedMax = INT(name=u'unsignedMax', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     _CapabilityClass_unsignedMax._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=None)], ev=None, er=[])
     CapabilityClass._cont = ASN1Dict([
-        ('null', _CapabilityClass_null),
-        ('unsignedMin', _CapabilityClass_unsignedMin),
-        ('unsignedMax', _CapabilityClass_unsignedMax),
+        (u'null', _CapabilityClass_null),
+        (u'unsignedMin', _CapabilityClass_unsignedMin),
+        (u'unsignedMax', _CapabilityClass_unsignedMax),
         ])
     CapabilityClass._ext = None
     
     #-----< ParticipationIndicator >-----#
-    ParticipationIndicator = CHOICE(name='ParticipationIndicator', mode=MODE_TYPE)
-    _ParticipationIndicator_global_ = NULL(name='global', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _ParticipationIndicator_partial = INT(name='partial', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    ParticipationIndicator = CHOICE(name=u'ParticipationIndicator', mode=MODE_TYPE)
+    _ParticipationIndicator_global_ = NULL(name=u'global', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _ParticipationIndicator_partial = INT(name=u'partial', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     _ParticipationIndicator_partial._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=2)], ev=None, er=[])
     ParticipationIndicator._cont = ASN1Dict([
-        ('global', _ParticipationIndicator_global_),
-        ('partial', _ParticipationIndicator_partial),
+        (u'global', _ParticipationIndicator_global_),
+        (u'partial', _ParticipationIndicator_partial),
         ])
     ParticipationIndicator._ext = None
     
     #-----< RequestCapability >-----#
-    RequestCapability = SEQ(name='RequestCapability', mode=MODE_TYPE)
-    _RequestCapability_capabilityID = CHOICE(name='capabilityID', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'CapabilityID')))
-    _RequestCapability_capabilityClass = CHOICE(name='capabilityClass', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'CapabilityClass')))
-    _RequestCapability_participationIndicator = CHOICE(name='participationIndicator', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'ParticipationIndicator')))
-    _RequestCapability_nonStandard = SEQ_OF(name='nonStandard', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    RequestCapability = SEQ(name=u'RequestCapability', mode=MODE_TYPE)
+    _RequestCapability_capabilityID = CHOICE(name=u'capabilityID', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'CapabilityID')))
+    _RequestCapability_capabilityClass = CHOICE(name=u'capabilityClass', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'CapabilityClass')))
+    _RequestCapability_participationIndicator = CHOICE(name=u'participationIndicator', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'ParticipationIndicator')))
+    _RequestCapability_nonStandard = SEQ_OF(name=u'nonStandard', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     __RequestCapability_nonStandard__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL-3', 'NonStandardParameter')))
     _RequestCapability_nonStandard._cont = __RequestCapability_nonStandard__item_
     RequestCapability._cont = ASN1Dict([
-        ('capabilityID', _RequestCapability_capabilityID),
-        ('capabilityClass', _RequestCapability_capabilityClass),
-        ('participationIndicator', _RequestCapability_participationIndicator),
-        ('nonStandard', _RequestCapability_nonStandard),
+        (u'capabilityID', _RequestCapability_capabilityID),
+        (u'capabilityClass', _RequestCapability_capabilityClass),
+        (u'participationIndicator', _RequestCapability_participationIndicator),
+        (u'nonStandard', _RequestCapability_nonStandard),
         ])
     RequestCapability._ext = []
     
     #-----< SeqOfRequestCapabilities >-----#
-    SeqOfRequestCapabilities = SEQ_OF(name='SeqOfRequestCapabilities', mode=MODE_TYPE)
+    SeqOfRequestCapabilities = SEQ_OF(name=u'SeqOfRequestCapabilities', mode=MODE_TYPE)
     _SeqOfRequestCapabilities__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL-3', 'RequestCapability')))
     SeqOfRequestCapabilities._cont = _SeqOfRequestCapabilities__item_
     
     #-----< IndicationCapability >-----#
-    IndicationCapability = SEQ(name='IndicationCapability', mode=MODE_TYPE)
-    _IndicationCapability_capabilityID = CHOICE(name='capabilityID', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'CapabilityID')))
-    _IndicationCapability_capabilityClass = CHOICE(name='capabilityClass', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'CapabilityClass')))
-    _IndicationCapability_summitProviderSupported = BOOL(name='summitProviderSupported', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _IndicationCapability_intermediateNodeSupported = BOOL(name='intermediateNodeSupported', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _IndicationCapability_nonStandard = SEQ_OF(name='nonStandard', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    IndicationCapability = SEQ(name=u'IndicationCapability', mode=MODE_TYPE)
+    _IndicationCapability_capabilityID = CHOICE(name=u'capabilityID', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'CapabilityID')))
+    _IndicationCapability_capabilityClass = CHOICE(name=u'capabilityClass', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'CapabilityClass')))
+    _IndicationCapability_summitProviderSupported = BOOL(name=u'summitProviderSupported', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _IndicationCapability_intermediateNodeSupported = BOOL(name=u'intermediateNodeSupported', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _IndicationCapability_nonStandard = SEQ_OF(name=u'nonStandard', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     __IndicationCapability_nonStandard__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL-3', 'NonStandardParameter')))
     _IndicationCapability_nonStandard._cont = __IndicationCapability_nonStandard__item_
     IndicationCapability._cont = ASN1Dict([
-        ('capabilityID', _IndicationCapability_capabilityID),
-        ('capabilityClass', _IndicationCapability_capabilityClass),
-        ('summitProviderSupported', _IndicationCapability_summitProviderSupported),
-        ('intermediateNodeSupported', _IndicationCapability_intermediateNodeSupported),
-        ('nonStandard', _IndicationCapability_nonStandard),
+        (u'capabilityID', _IndicationCapability_capabilityID),
+        (u'capabilityClass', _IndicationCapability_capabilityClass),
+        (u'summitProviderSupported', _IndicationCapability_summitProviderSupported),
+        (u'intermediateNodeSupported', _IndicationCapability_intermediateNodeSupported),
+        (u'nonStandard', _IndicationCapability_nonStandard),
         ])
     IndicationCapability._ext = []
     
     #-----< SeqOfIndicationCapabilities >-----#
-    SeqOfIndicationCapabilities = SEQ_OF(name='SeqOfIndicationCapabilities', mode=MODE_TYPE)
+    SeqOfIndicationCapabilities = SEQ_OF(name=u'SeqOfIndicationCapabilities', mode=MODE_TYPE)
     _SeqOfIndicationCapabilities__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL-3', 'IndicationCapability')))
     SeqOfIndicationCapabilities._cont = _SeqOfIndicationCapabilities__item_
     
     #-----< CapabilitiesNotificationRequest >-----#
-    CapabilitiesNotificationRequest = SEQ(name='CapabilitiesNotificationRequest', mode=MODE_TYPE)
-    _CapabilitiesNotificationRequest_v2NodePresent = BOOL(name='v2NodePresent', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _CapabilitiesNotificationRequest_addList = SEQ_OF(name='addList', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'SeqOfRequestCapabilities')), opt=True)
-    _CapabilitiesNotificationRequest_removeList = SEQ_OF(name='removeList', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'SeqOfRequestCapabilities')), opt=True)
-    _CapabilitiesNotificationRequest_nonStandard = SEQ_OF(name='nonStandard', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    CapabilitiesNotificationRequest = SEQ(name=u'CapabilitiesNotificationRequest', mode=MODE_TYPE)
+    _CapabilitiesNotificationRequest_v2NodePresent = BOOL(name=u'v2NodePresent', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _CapabilitiesNotificationRequest_addList = SEQ_OF(name=u'addList', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'SeqOfRequestCapabilities')), opt=True)
+    _CapabilitiesNotificationRequest_removeList = SEQ_OF(name=u'removeList', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'SeqOfRequestCapabilities')), opt=True)
+    _CapabilitiesNotificationRequest_nonStandard = SEQ_OF(name=u'nonStandard', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     __CapabilitiesNotificationRequest_nonStandard__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL-3', 'NonStandardParameter')))
     _CapabilitiesNotificationRequest_nonStandard._cont = __CapabilitiesNotificationRequest_nonStandard__item_
     CapabilitiesNotificationRequest._cont = ASN1Dict([
-        ('v2NodePresent', _CapabilitiesNotificationRequest_v2NodePresent),
-        ('addList', _CapabilitiesNotificationRequest_addList),
-        ('removeList', _CapabilitiesNotificationRequest_removeList),
-        ('nonStandard', _CapabilitiesNotificationRequest_nonStandard),
+        (u'v2NodePresent', _CapabilitiesNotificationRequest_v2NodePresent),
+        (u'addList', _CapabilitiesNotificationRequest_addList),
+        (u'removeList', _CapabilitiesNotificationRequest_removeList),
+        (u'nonStandard', _CapabilitiesNotificationRequest_nonStandard),
         ])
     CapabilitiesNotificationRequest._ext = []
     
     #-----< CapabilitiesNotificationIndication >-----#
-    CapabilitiesNotificationIndication = SEQ(name='CapabilitiesNotificationIndication', mode=MODE_TYPE)
-    _CapabilitiesNotificationIndication_v2NodePresent = BOOL(name='v2NodePresent', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _CapabilitiesNotificationIndication_addList = SEQ_OF(name='addList', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'SeqOfIndicationCapabilities')), opt=True)
-    _CapabilitiesNotificationIndication_removeList = SEQ_OF(name='removeList', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'SeqOfIndicationCapabilities')), opt=True)
-    _CapabilitiesNotificationIndication_nonStandard = SEQ_OF(name='nonStandard', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    CapabilitiesNotificationIndication = SEQ(name=u'CapabilitiesNotificationIndication', mode=MODE_TYPE)
+    _CapabilitiesNotificationIndication_v2NodePresent = BOOL(name=u'v2NodePresent', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _CapabilitiesNotificationIndication_addList = SEQ_OF(name=u'addList', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'SeqOfIndicationCapabilities')), opt=True)
+    _CapabilitiesNotificationIndication_removeList = SEQ_OF(name=u'removeList', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'SeqOfIndicationCapabilities')), opt=True)
+    _CapabilitiesNotificationIndication_nonStandard = SEQ_OF(name=u'nonStandard', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     __CapabilitiesNotificationIndication_nonStandard__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('MCS-PROTOCOL-3', 'NonStandardParameter')))
     _CapabilitiesNotificationIndication_nonStandard._cont = __CapabilitiesNotificationIndication_nonStandard__item_
     CapabilitiesNotificationIndication._cont = ASN1Dict([
-        ('v2NodePresent', _CapabilitiesNotificationIndication_v2NodePresent),
-        ('addList', _CapabilitiesNotificationIndication_addList),
-        ('removeList', _CapabilitiesNotificationIndication_removeList),
-        ('nonStandard', _CapabilitiesNotificationIndication_nonStandard),
+        (u'v2NodePresent', _CapabilitiesNotificationIndication_v2NodePresent),
+        (u'addList', _CapabilitiesNotificationIndication_addList),
+        (u'removeList', _CapabilitiesNotificationIndication_removeList),
+        (u'nonStandard', _CapabilitiesNotificationIndication_nonStandard),
         ])
     CapabilitiesNotificationIndication._ext = []
     
     #-----< Reason >-----#
-    Reason = CHOICE(name='Reason', mode=MODE_TYPE)
-    _Reason_rn_domain_disconnected = NULL(name='rn-domain-disconnected', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _Reason_rn_provider_initiated = NULL(name='rn-provider-initiated', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _Reason_rn_token_purged = NULL(name='rn-token-purged', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _Reason_rn_user_requested = NULL(name='rn-user-requested', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _Reason_rn_channel_purged = NULL(name='rn-channel-purged', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    Reason = CHOICE(name=u'Reason', mode=MODE_TYPE)
+    _Reason_rn_domain_disconnected = NULL(name=u'rn-domain-disconnected', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _Reason_rn_provider_initiated = NULL(name=u'rn-provider-initiated', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _Reason_rn_token_purged = NULL(name=u'rn-token-purged', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _Reason_rn_user_requested = NULL(name=u'rn-user-requested', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _Reason_rn_channel_purged = NULL(name=u'rn-channel-purged', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     Reason._cont = ASN1Dict([
-        ('rn-domain-disconnected', _Reason_rn_domain_disconnected),
-        ('rn-provider-initiated', _Reason_rn_provider_initiated),
-        ('rn-token-purged', _Reason_rn_token_purged),
-        ('rn-user-requested', _Reason_rn_user_requested),
-        ('rn-channel-purged', _Reason_rn_channel_purged),
+        (u'rn-domain-disconnected', _Reason_rn_domain_disconnected),
+        (u'rn-provider-initiated', _Reason_rn_provider_initiated),
+        (u'rn-token-purged', _Reason_rn_token_purged),
+        (u'rn-user-requested', _Reason_rn_user_requested),
+        (u'rn-channel-purged', _Reason_rn_channel_purged),
         ])
     Reason._ext = []
     
     #-----< Result >-----#
-    Result = CHOICE(name='Result', mode=MODE_TYPE)
-    _Result_rt_successful = NULL(name='rt-successful', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _Result_rt_domain_merging = NULL(name='rt-domain-merging', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _Result_rt_domain_not_hierarchical = NULL(name='rt-domain-not-hierarchical', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _Result_rt_no_such_channel = NULL(name='rt-no-such-channel', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _Result_rt_no_such_domain = NULL(name='rt-no-such-domain', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _Result_rt_no_such_user = NULL(name='rt-no-such-user', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _Result_rt_not_admitted = NULL(name='rt-not-admitted', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _Result_rt_other_user_id = NULL(name='rt-other-user-id', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _Result_rt_parameters_unacceptable = NULL(name='rt-parameters-unacceptable', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _Result_rt_token_not_available = NULL(name='rt-token-not-available', mode=MODE_TYPE, tag=(9, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _Result_rt_token_not_possessed = NULL(name='rt-token-not-possessed', mode=MODE_TYPE, tag=(10, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _Result_rt_too_many_channels = NULL(name='rt-too-many-channels', mode=MODE_TYPE, tag=(11, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _Result_rt_too_many_tokens = NULL(name='rt-too-many-tokens', mode=MODE_TYPE, tag=(12, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _Result_rt_too_many_users = NULL(name='rt-too-many-users', mode=MODE_TYPE, tag=(13, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _Result_rt_unspecified_failure = NULL(name='rt-unspecified-failure', mode=MODE_TYPE, tag=(14, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _Result_rt_user_rejected = NULL(name='rt-user-rejected', mode=MODE_TYPE, tag=(15, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    Result = CHOICE(name=u'Result', mode=MODE_TYPE)
+    _Result_rt_successful = NULL(name=u'rt-successful', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _Result_rt_domain_merging = NULL(name=u'rt-domain-merging', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _Result_rt_domain_not_hierarchical = NULL(name=u'rt-domain-not-hierarchical', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _Result_rt_no_such_channel = NULL(name=u'rt-no-such-channel', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _Result_rt_no_such_domain = NULL(name=u'rt-no-such-domain', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _Result_rt_no_such_user = NULL(name=u'rt-no-such-user', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _Result_rt_not_admitted = NULL(name=u'rt-not-admitted', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _Result_rt_other_user_id = NULL(name=u'rt-other-user-id', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _Result_rt_parameters_unacceptable = NULL(name=u'rt-parameters-unacceptable', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _Result_rt_token_not_available = NULL(name=u'rt-token-not-available', mode=MODE_TYPE, tag=(9, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _Result_rt_token_not_possessed = NULL(name=u'rt-token-not-possessed', mode=MODE_TYPE, tag=(10, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _Result_rt_too_many_channels = NULL(name=u'rt-too-many-channels', mode=MODE_TYPE, tag=(11, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _Result_rt_too_many_tokens = NULL(name=u'rt-too-many-tokens', mode=MODE_TYPE, tag=(12, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _Result_rt_too_many_users = NULL(name=u'rt-too-many-users', mode=MODE_TYPE, tag=(13, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _Result_rt_unspecified_failure = NULL(name=u'rt-unspecified-failure', mode=MODE_TYPE, tag=(14, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _Result_rt_user_rejected = NULL(name=u'rt-user-rejected', mode=MODE_TYPE, tag=(15, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     Result._cont = ASN1Dict([
-        ('rt-successful', _Result_rt_successful),
-        ('rt-domain-merging', _Result_rt_domain_merging),
-        ('rt-domain-not-hierarchical', _Result_rt_domain_not_hierarchical),
-        ('rt-no-such-channel', _Result_rt_no_such_channel),
-        ('rt-no-such-domain', _Result_rt_no_such_domain),
-        ('rt-no-such-user', _Result_rt_no_such_user),
-        ('rt-not-admitted', _Result_rt_not_admitted),
-        ('rt-other-user-id', _Result_rt_other_user_id),
-        ('rt-parameters-unacceptable', _Result_rt_parameters_unacceptable),
-        ('rt-token-not-available', _Result_rt_token_not_available),
-        ('rt-token-not-possessed', _Result_rt_token_not_possessed),
-        ('rt-too-many-channels', _Result_rt_too_many_channels),
-        ('rt-too-many-tokens', _Result_rt_too_many_tokens),
-        ('rt-too-many-users', _Result_rt_too_many_users),
-        ('rt-unspecified-failure', _Result_rt_unspecified_failure),
-        ('rt-user-rejected', _Result_rt_user_rejected),
+        (u'rt-successful', _Result_rt_successful),
+        (u'rt-domain-merging', _Result_rt_domain_merging),
+        (u'rt-domain-not-hierarchical', _Result_rt_domain_not_hierarchical),
+        (u'rt-no-such-channel', _Result_rt_no_such_channel),
+        (u'rt-no-such-domain', _Result_rt_no_such_domain),
+        (u'rt-no-such-user', _Result_rt_no_such_user),
+        (u'rt-not-admitted', _Result_rt_not_admitted),
+        (u'rt-other-user-id', _Result_rt_other_user_id),
+        (u'rt-parameters-unacceptable', _Result_rt_parameters_unacceptable),
+        (u'rt-token-not-available', _Result_rt_token_not_available),
+        (u'rt-token-not-possessed', _Result_rt_token_not_possessed),
+        (u'rt-too-many-channels', _Result_rt_too_many_channels),
+        (u'rt-too-many-tokens', _Result_rt_too_many_tokens),
+        (u'rt-too-many-users', _Result_rt_too_many_users),
+        (u'rt-unspecified-failure', _Result_rt_unspecified_failure),
+        (u'rt-user-rejected', _Result_rt_user_rejected),
         ])
     Result._ext = []
     
     #-----< Diagnostic >-----#
-    Diagnostic = CHOICE(name='Diagnostic', mode=MODE_TYPE)
-    _Diagnostic_dc_inconsistent_merge = NULL(name='dc-inconsistent-merge', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _Diagnostic_dc_forbidden_PDU_downward = NULL(name='dc-forbidden-PDU-downward', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _Diagnostic_dc_forbidden_PDU_upward = NULL(name='dc-forbidden-PDU-upward', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _Diagnostic_dc_invalid_BER_encoding = NULL(name='dc-invalid-BER-encoding', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _Diagnostic_dc_invalid_PER_encoding = NULL(name='dc-invalid-PER-encoding', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _Diagnostic_dc_misrouted_user = NULL(name='dc-misrouted-user', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _Diagnostic_dc_unrequested_confirm = NULL(name='dc-unrequested-confirm', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _Diagnostic_dc_wrong_transport_priority = NULL(name='dc-wrong-transport-priority', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _Diagnostic_dc_channel_id_conflict = NULL(name='dc-channel-id-conflict', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _Diagnostic_dc_token_id_conflict = NULL(name='dc-token-id-conflict', mode=MODE_TYPE, tag=(9, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _Diagnostic_dc_not_user_id_channel = NULL(name='dc-not-user-id-channel', mode=MODE_TYPE, tag=(10, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _Diagnostic_dc_too_many_channels = NULL(name='dc-too-many-channels', mode=MODE_TYPE, tag=(11, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _Diagnostic_dc_too_many_tokens = NULL(name='dc-too-many-tokens', mode=MODE_TYPE, tag=(12, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _Diagnostic_dc_too_many_users = NULL(name='dc-too-many-users', mode=MODE_TYPE, tag=(13, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    Diagnostic = CHOICE(name=u'Diagnostic', mode=MODE_TYPE)
+    _Diagnostic_dc_inconsistent_merge = NULL(name=u'dc-inconsistent-merge', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _Diagnostic_dc_forbidden_PDU_downward = NULL(name=u'dc-forbidden-PDU-downward', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _Diagnostic_dc_forbidden_PDU_upward = NULL(name=u'dc-forbidden-PDU-upward', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _Diagnostic_dc_invalid_BER_encoding = NULL(name=u'dc-invalid-BER-encoding', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _Diagnostic_dc_invalid_PER_encoding = NULL(name=u'dc-invalid-PER-encoding', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _Diagnostic_dc_misrouted_user = NULL(name=u'dc-misrouted-user', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _Diagnostic_dc_unrequested_confirm = NULL(name=u'dc-unrequested-confirm', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _Diagnostic_dc_wrong_transport_priority = NULL(name=u'dc-wrong-transport-priority', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _Diagnostic_dc_channel_id_conflict = NULL(name=u'dc-channel-id-conflict', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _Diagnostic_dc_token_id_conflict = NULL(name=u'dc-token-id-conflict', mode=MODE_TYPE, tag=(9, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _Diagnostic_dc_not_user_id_channel = NULL(name=u'dc-not-user-id-channel', mode=MODE_TYPE, tag=(10, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _Diagnostic_dc_too_many_channels = NULL(name=u'dc-too-many-channels', mode=MODE_TYPE, tag=(11, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _Diagnostic_dc_too_many_tokens = NULL(name=u'dc-too-many-tokens', mode=MODE_TYPE, tag=(12, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _Diagnostic_dc_too_many_users = NULL(name=u'dc-too-many-users', mode=MODE_TYPE, tag=(13, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     Diagnostic._cont = ASN1Dict([
-        ('dc-inconsistent-merge', _Diagnostic_dc_inconsistent_merge),
-        ('dc-forbidden-PDU-downward', _Diagnostic_dc_forbidden_PDU_downward),
-        ('dc-forbidden-PDU-upward', _Diagnostic_dc_forbidden_PDU_upward),
-        ('dc-invalid-BER-encoding', _Diagnostic_dc_invalid_BER_encoding),
-        ('dc-invalid-PER-encoding', _Diagnostic_dc_invalid_PER_encoding),
-        ('dc-misrouted-user', _Diagnostic_dc_misrouted_user),
-        ('dc-unrequested-confirm', _Diagnostic_dc_unrequested_confirm),
-        ('dc-wrong-transport-priority', _Diagnostic_dc_wrong_transport_priority),
-        ('dc-channel-id-conflict', _Diagnostic_dc_channel_id_conflict),
-        ('dc-token-id-conflict', _Diagnostic_dc_token_id_conflict),
-        ('dc-not-user-id-channel', _Diagnostic_dc_not_user_id_channel),
-        ('dc-too-many-channels', _Diagnostic_dc_too_many_channels),
-        ('dc-too-many-tokens', _Diagnostic_dc_too_many_tokens),
-        ('dc-too-many-users', _Diagnostic_dc_too_many_users),
+        (u'dc-inconsistent-merge', _Diagnostic_dc_inconsistent_merge),
+        (u'dc-forbidden-PDU-downward', _Diagnostic_dc_forbidden_PDU_downward),
+        (u'dc-forbidden-PDU-upward', _Diagnostic_dc_forbidden_PDU_upward),
+        (u'dc-invalid-BER-encoding', _Diagnostic_dc_invalid_BER_encoding),
+        (u'dc-invalid-PER-encoding', _Diagnostic_dc_invalid_PER_encoding),
+        (u'dc-misrouted-user', _Diagnostic_dc_misrouted_user),
+        (u'dc-unrequested-confirm', _Diagnostic_dc_unrequested_confirm),
+        (u'dc-wrong-transport-priority', _Diagnostic_dc_wrong_transport_priority),
+        (u'dc-channel-id-conflict', _Diagnostic_dc_channel_id_conflict),
+        (u'dc-token-id-conflict', _Diagnostic_dc_token_id_conflict),
+        (u'dc-not-user-id-channel', _Diagnostic_dc_not_user_id_channel),
+        (u'dc-too-many-channels', _Diagnostic_dc_too_many_channels),
+        (u'dc-too-many-tokens', _Diagnostic_dc_too_many_tokens),
+        (u'dc-too-many-users', _Diagnostic_dc_too_many_users),
         ])
     Diagnostic._ext = []
     
     #-----< NonStandardPDU >-----#
-    NonStandardPDU = SEQ(name='NonStandardPDU', mode=MODE_TYPE)
-    _NonStandardPDU_data = SEQ(name='data', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'NonStandardParameter')))
+    NonStandardPDU = SEQ(name=u'NonStandardPDU', mode=MODE_TYPE)
+    _NonStandardPDU_data = SEQ(name=u'data', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'NonStandardParameter')))
     NonStandardPDU._cont = ASN1Dict([
-        ('data', _NonStandardPDU_data),
+        (u'data', _NonStandardPDU_data),
         ])
     NonStandardPDU._ext = []
     
     #-----< ExtendedParameterMCSPDU >-----#
-    ExtendedParameterMCSPDU = CHOICE(name='ExtendedParameterMCSPDU', mode=MODE_TYPE)
-    _ExtendedParameterMCSPDU_extendedParameterPropose = SEQ(name='extendedParameterPropose', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'ExtendedParameterPropose')))
-    _ExtendedParameterMCSPDU_extendedParameterAccept = SEQ(name='extendedParameterAccept', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'ExtendedParameterAccept')))
-    _ExtendedParameterMCSPDU_nonStandard = SEQ(name='nonStandard', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'NonStandardPDU')))
+    ExtendedParameterMCSPDU = CHOICE(name=u'ExtendedParameterMCSPDU', mode=MODE_TYPE)
+    _ExtendedParameterMCSPDU_extendedParameterPropose = SEQ(name=u'extendedParameterPropose', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'ExtendedParameterPropose')))
+    _ExtendedParameterMCSPDU_extendedParameterAccept = SEQ(name=u'extendedParameterAccept', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'ExtendedParameterAccept')))
+    _ExtendedParameterMCSPDU_nonStandard = SEQ(name=u'nonStandard', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'NonStandardPDU')))
     ExtendedParameterMCSPDU._cont = ASN1Dict([
-        ('extendedParameterPropose', _ExtendedParameterMCSPDU_extendedParameterPropose),
-        ('extendedParameterAccept', _ExtendedParameterMCSPDU_extendedParameterAccept),
-        ('nonStandard', _ExtendedParameterMCSPDU_nonStandard),
+        (u'extendedParameterPropose', _ExtendedParameterMCSPDU_extendedParameterPropose),
+        (u'extendedParameterAccept', _ExtendedParameterMCSPDU_extendedParameterAccept),
+        (u'nonStandard', _ExtendedParameterMCSPDU_nonStandard),
         ])
     ExtendedParameterMCSPDU._ext = []
     
     #-----< DomainMCSPDU >-----#
-    DomainMCSPDU = CHOICE(name='DomainMCSPDU', mode=MODE_TYPE)
-    _DomainMCSPDU_plumbDomainIndication = SEQ(name='plumbDomainIndication', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'PlumbDomainIndication')))
-    _DomainMCSPDU_erectDomainRequest = SEQ(name='erectDomainRequest', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'ErectDomainRequest')))
-    _DomainMCSPDU_mergeChannelsRequest = SEQ(name='mergeChannelsRequest', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'MergeChannelsRequest')))
-    _DomainMCSPDU_mergeChannelsConfirm = SEQ(name='mergeChannelsConfirm', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'MergeChannelsConfirm')))
-    _DomainMCSPDU_purgeChannelsIndication = SEQ(name='purgeChannelsIndication', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'PurgeChannelsIndication')))
-    _DomainMCSPDU_mergeTokensRequest = SEQ(name='mergeTokensRequest', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'MergeTokensRequest')))
-    _DomainMCSPDU_mergeTokensConfirm = SEQ(name='mergeTokensConfirm', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'MergeTokensConfirm')))
-    _DomainMCSPDU_purgeTokensIndication = SEQ(name='purgeTokensIndication', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'PurgeTokensIndication')))
-    _DomainMCSPDU_disconnectProviderUltimatum = SEQ(name='disconnectProviderUltimatum', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'DisconnectProviderUltimatum')))
-    _DomainMCSPDU_rejectMCSPDUUltimatum = SEQ(name='rejectMCSPDUUltimatum', mode=MODE_TYPE, tag=(9, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'RejectMCSPDUUltimatum')))
-    _DomainMCSPDU_attachUserRequest = SEQ(name='attachUserRequest', mode=MODE_TYPE, tag=(10, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'AttachUserRequest')))
-    _DomainMCSPDU_attachUserConfirm = SEQ(name='attachUserConfirm', mode=MODE_TYPE, tag=(11, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'AttachUserConfirm')))
-    _DomainMCSPDU_detachUserRequest = SEQ(name='detachUserRequest', mode=MODE_TYPE, tag=(12, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'DetachUserRequest')))
-    _DomainMCSPDU_detachUserIndication = SEQ(name='detachUserIndication', mode=MODE_TYPE, tag=(13, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'DetachUserIndication')))
-    _DomainMCSPDU_channelJoinRequest = SEQ(name='channelJoinRequest', mode=MODE_TYPE, tag=(14, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'ChannelJoinRequest')))
-    _DomainMCSPDU_channelJoinConfirm = SEQ(name='channelJoinConfirm', mode=MODE_TYPE, tag=(15, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'ChannelJoinConfirm')))
-    _DomainMCSPDU_channelLeaveRequest = SEQ(name='channelLeaveRequest', mode=MODE_TYPE, tag=(16, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'ChannelLeaveRequest')))
-    _DomainMCSPDU_channelConveneRequest = SEQ(name='channelConveneRequest', mode=MODE_TYPE, tag=(17, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'ChannelConveneRequest')))
-    _DomainMCSPDU_channelConveneConfirm = SEQ(name='channelConveneConfirm', mode=MODE_TYPE, tag=(18, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'ChannelConveneConfirm')))
-    _DomainMCSPDU_channelDisbandRequest = SEQ(name='channelDisbandRequest', mode=MODE_TYPE, tag=(19, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'ChannelDisbandRequest')))
-    _DomainMCSPDU_channelDisbandIndication = SEQ(name='channelDisbandIndication', mode=MODE_TYPE, tag=(20, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'ChannelDisbandIndication')))
-    _DomainMCSPDU_channelAdmitRequest = SEQ(name='channelAdmitRequest', mode=MODE_TYPE, tag=(21, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'ChannelAdmitRequest')))
-    _DomainMCSPDU_channelAdmitIndication = SEQ(name='channelAdmitIndication', mode=MODE_TYPE, tag=(22, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'ChannelAdmitIndication')))
-    _DomainMCSPDU_channelExpelRequest = SEQ(name='channelExpelRequest', mode=MODE_TYPE, tag=(23, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'ChannelExpelRequest')))
-    _DomainMCSPDU_channelExpelIndication = SEQ(name='channelExpelIndication', mode=MODE_TYPE, tag=(24, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'ChannelExpelIndication')))
-    _DomainMCSPDU_sendDataRequest = SEQ(name='sendDataRequest', mode=MODE_TYPE, tag=(25, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'SendDataRequest')))
-    _DomainMCSPDU_sendDataIndication = SEQ(name='sendDataIndication', mode=MODE_TYPE, tag=(26, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'SendDataIndication')))
-    _DomainMCSPDU_uniformSendDataRequest = SEQ(name='uniformSendDataRequest', mode=MODE_TYPE, tag=(27, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'UniformSendDataRequest')))
-    _DomainMCSPDU_uniformSendDataIndication = SEQ(name='uniformSendDataIndication', mode=MODE_TYPE, tag=(28, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'UniformSendDataIndication')))
-    _DomainMCSPDU_tokenGrabRequest = SEQ(name='tokenGrabRequest', mode=MODE_TYPE, tag=(29, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'TokenGrabRequest')))
-    _DomainMCSPDU_tokenGrabConfirm = SEQ(name='tokenGrabConfirm', mode=MODE_TYPE, tag=(30, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'TokenGrabConfirm')))
-    _DomainMCSPDU_tokenInhibitRequest = SEQ(name='tokenInhibitRequest', mode=MODE_TYPE, tag=(31, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'TokenInhibitRequest')))
-    _DomainMCSPDU_tokenInhibitConfirm = SEQ(name='tokenInhibitConfirm', mode=MODE_TYPE, tag=(32, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'TokenInhibitConfirm')))
-    _DomainMCSPDU_tokenGiveRequest = SEQ(name='tokenGiveRequest', mode=MODE_TYPE, tag=(33, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'TokenGiveRequest')))
-    _DomainMCSPDU_tokenGiveIndication = SEQ(name='tokenGiveIndication', mode=MODE_TYPE, tag=(34, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'TokenGiveIndication')))
-    _DomainMCSPDU_tokenGiveResponse = SEQ(name='tokenGiveResponse', mode=MODE_TYPE, tag=(35, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'TokenGiveResponse')))
-    _DomainMCSPDU_tokenGiveConfirm = SEQ(name='tokenGiveConfirm', mode=MODE_TYPE, tag=(36, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'TokenGiveConfirm')))
-    _DomainMCSPDU_tokenPleaseRequest = SEQ(name='tokenPleaseRequest', mode=MODE_TYPE, tag=(37, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'TokenPleaseRequest')))
-    _DomainMCSPDU_tokenPleaseIndication = SEQ(name='tokenPleaseIndication', mode=MODE_TYPE, tag=(38, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'TokenPleaseIndication')))
-    _DomainMCSPDU_tokenReleaseRequest = SEQ(name='tokenReleaseRequest', mode=MODE_TYPE, tag=(39, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'TokenReleaseRequest')))
-    _DomainMCSPDU_tokenReleaseConfirm = SEQ(name='tokenReleaseConfirm', mode=MODE_TYPE, tag=(40, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'TokenReleaseConfirm')))
-    _DomainMCSPDU_tokenTestRequest = SEQ(name='tokenTestRequest', mode=MODE_TYPE, tag=(41, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'TokenTestRequest')))
-    _DomainMCSPDU_tokenTestConfirm = SEQ(name='tokenTestConfirm', mode=MODE_TYPE, tag=(42, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'TokenTestConfirm')))
-    _DomainMCSPDU_nonStandard = SEQ(name='nonStandard', mode=MODE_TYPE, tag=(43, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'NonStandardPDU')))
+    DomainMCSPDU = CHOICE(name=u'DomainMCSPDU', mode=MODE_TYPE)
+    _DomainMCSPDU_plumbDomainIndication = SEQ(name=u'plumbDomainIndication', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'PlumbDomainIndication')))
+    _DomainMCSPDU_erectDomainRequest = SEQ(name=u'erectDomainRequest', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'ErectDomainRequest')))
+    _DomainMCSPDU_mergeChannelsRequest = SEQ(name=u'mergeChannelsRequest', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'MergeChannelsRequest')))
+    _DomainMCSPDU_mergeChannelsConfirm = SEQ(name=u'mergeChannelsConfirm', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'MergeChannelsConfirm')))
+    _DomainMCSPDU_purgeChannelsIndication = SEQ(name=u'purgeChannelsIndication', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'PurgeChannelsIndication')))
+    _DomainMCSPDU_mergeTokensRequest = SEQ(name=u'mergeTokensRequest', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'MergeTokensRequest')))
+    _DomainMCSPDU_mergeTokensConfirm = SEQ(name=u'mergeTokensConfirm', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'MergeTokensConfirm')))
+    _DomainMCSPDU_purgeTokensIndication = SEQ(name=u'purgeTokensIndication', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'PurgeTokensIndication')))
+    _DomainMCSPDU_disconnectProviderUltimatum = SEQ(name=u'disconnectProviderUltimatum', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'DisconnectProviderUltimatum')))
+    _DomainMCSPDU_rejectMCSPDUUltimatum = SEQ(name=u'rejectMCSPDUUltimatum', mode=MODE_TYPE, tag=(9, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'RejectMCSPDUUltimatum')))
+    _DomainMCSPDU_attachUserRequest = SEQ(name=u'attachUserRequest', mode=MODE_TYPE, tag=(10, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'AttachUserRequest')))
+    _DomainMCSPDU_attachUserConfirm = SEQ(name=u'attachUserConfirm', mode=MODE_TYPE, tag=(11, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'AttachUserConfirm')))
+    _DomainMCSPDU_detachUserRequest = SEQ(name=u'detachUserRequest', mode=MODE_TYPE, tag=(12, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'DetachUserRequest')))
+    _DomainMCSPDU_detachUserIndication = SEQ(name=u'detachUserIndication', mode=MODE_TYPE, tag=(13, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'DetachUserIndication')))
+    _DomainMCSPDU_channelJoinRequest = SEQ(name=u'channelJoinRequest', mode=MODE_TYPE, tag=(14, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'ChannelJoinRequest')))
+    _DomainMCSPDU_channelJoinConfirm = SEQ(name=u'channelJoinConfirm', mode=MODE_TYPE, tag=(15, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'ChannelJoinConfirm')))
+    _DomainMCSPDU_channelLeaveRequest = SEQ(name=u'channelLeaveRequest', mode=MODE_TYPE, tag=(16, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'ChannelLeaveRequest')))
+    _DomainMCSPDU_channelConveneRequest = SEQ(name=u'channelConveneRequest', mode=MODE_TYPE, tag=(17, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'ChannelConveneRequest')))
+    _DomainMCSPDU_channelConveneConfirm = SEQ(name=u'channelConveneConfirm', mode=MODE_TYPE, tag=(18, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'ChannelConveneConfirm')))
+    _DomainMCSPDU_channelDisbandRequest = SEQ(name=u'channelDisbandRequest', mode=MODE_TYPE, tag=(19, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'ChannelDisbandRequest')))
+    _DomainMCSPDU_channelDisbandIndication = SEQ(name=u'channelDisbandIndication', mode=MODE_TYPE, tag=(20, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'ChannelDisbandIndication')))
+    _DomainMCSPDU_channelAdmitRequest = SEQ(name=u'channelAdmitRequest', mode=MODE_TYPE, tag=(21, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'ChannelAdmitRequest')))
+    _DomainMCSPDU_channelAdmitIndication = SEQ(name=u'channelAdmitIndication', mode=MODE_TYPE, tag=(22, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'ChannelAdmitIndication')))
+    _DomainMCSPDU_channelExpelRequest = SEQ(name=u'channelExpelRequest', mode=MODE_TYPE, tag=(23, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'ChannelExpelRequest')))
+    _DomainMCSPDU_channelExpelIndication = SEQ(name=u'channelExpelIndication', mode=MODE_TYPE, tag=(24, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'ChannelExpelIndication')))
+    _DomainMCSPDU_sendDataRequest = SEQ(name=u'sendDataRequest', mode=MODE_TYPE, tag=(25, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'SendDataRequest')))
+    _DomainMCSPDU_sendDataIndication = SEQ(name=u'sendDataIndication', mode=MODE_TYPE, tag=(26, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'SendDataIndication')))
+    _DomainMCSPDU_uniformSendDataRequest = SEQ(name=u'uniformSendDataRequest', mode=MODE_TYPE, tag=(27, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'UniformSendDataRequest')))
+    _DomainMCSPDU_uniformSendDataIndication = SEQ(name=u'uniformSendDataIndication', mode=MODE_TYPE, tag=(28, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'UniformSendDataIndication')))
+    _DomainMCSPDU_tokenGrabRequest = SEQ(name=u'tokenGrabRequest', mode=MODE_TYPE, tag=(29, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'TokenGrabRequest')))
+    _DomainMCSPDU_tokenGrabConfirm = SEQ(name=u'tokenGrabConfirm', mode=MODE_TYPE, tag=(30, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'TokenGrabConfirm')))
+    _DomainMCSPDU_tokenInhibitRequest = SEQ(name=u'tokenInhibitRequest', mode=MODE_TYPE, tag=(31, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'TokenInhibitRequest')))
+    _DomainMCSPDU_tokenInhibitConfirm = SEQ(name=u'tokenInhibitConfirm', mode=MODE_TYPE, tag=(32, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'TokenInhibitConfirm')))
+    _DomainMCSPDU_tokenGiveRequest = SEQ(name=u'tokenGiveRequest', mode=MODE_TYPE, tag=(33, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'TokenGiveRequest')))
+    _DomainMCSPDU_tokenGiveIndication = SEQ(name=u'tokenGiveIndication', mode=MODE_TYPE, tag=(34, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'TokenGiveIndication')))
+    _DomainMCSPDU_tokenGiveResponse = SEQ(name=u'tokenGiveResponse', mode=MODE_TYPE, tag=(35, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'TokenGiveResponse')))
+    _DomainMCSPDU_tokenGiveConfirm = SEQ(name=u'tokenGiveConfirm', mode=MODE_TYPE, tag=(36, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'TokenGiveConfirm')))
+    _DomainMCSPDU_tokenPleaseRequest = SEQ(name=u'tokenPleaseRequest', mode=MODE_TYPE, tag=(37, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'TokenPleaseRequest')))
+    _DomainMCSPDU_tokenPleaseIndication = SEQ(name=u'tokenPleaseIndication', mode=MODE_TYPE, tag=(38, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'TokenPleaseIndication')))
+    _DomainMCSPDU_tokenReleaseRequest = SEQ(name=u'tokenReleaseRequest', mode=MODE_TYPE, tag=(39, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'TokenReleaseRequest')))
+    _DomainMCSPDU_tokenReleaseConfirm = SEQ(name=u'tokenReleaseConfirm', mode=MODE_TYPE, tag=(40, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'TokenReleaseConfirm')))
+    _DomainMCSPDU_tokenTestRequest = SEQ(name=u'tokenTestRequest', mode=MODE_TYPE, tag=(41, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'TokenTestRequest')))
+    _DomainMCSPDU_tokenTestConfirm = SEQ(name=u'tokenTestConfirm', mode=MODE_TYPE, tag=(42, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'TokenTestConfirm')))
+    _DomainMCSPDU_nonStandard = SEQ(name=u'nonStandard', mode=MODE_TYPE, tag=(43, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MCS-PROTOCOL-3', 'NonStandardPDU')))
     DomainMCSPDU._cont = ASN1Dict([
-        ('plumbDomainIndication', _DomainMCSPDU_plumbDomainIndication),
-        ('erectDomainRequest', _DomainMCSPDU_erectDomainRequest),
-        ('mergeChannelsRequest', _DomainMCSPDU_mergeChannelsRequest),
-        ('mergeChannelsConfirm', _DomainMCSPDU_mergeChannelsConfirm),
-        ('purgeChannelsIndication', _DomainMCSPDU_purgeChannelsIndication),
-        ('mergeTokensRequest', _DomainMCSPDU_mergeTokensRequest),
-        ('mergeTokensConfirm', _DomainMCSPDU_mergeTokensConfirm),
-        ('purgeTokensIndication', _DomainMCSPDU_purgeTokensIndication),
-        ('disconnectProviderUltimatum', _DomainMCSPDU_disconnectProviderUltimatum),
-        ('rejectMCSPDUUltimatum', _DomainMCSPDU_rejectMCSPDUUltimatum),
-        ('attachUserRequest', _DomainMCSPDU_attachUserRequest),
-        ('attachUserConfirm', _DomainMCSPDU_attachUserConfirm),
-        ('detachUserRequest', _DomainMCSPDU_detachUserRequest),
-        ('detachUserIndication', _DomainMCSPDU_detachUserIndication),
-        ('channelJoinRequest', _DomainMCSPDU_channelJoinRequest),
-        ('channelJoinConfirm', _DomainMCSPDU_channelJoinConfirm),
-        ('channelLeaveRequest', _DomainMCSPDU_channelLeaveRequest),
-        ('channelConveneRequest', _DomainMCSPDU_channelConveneRequest),
-        ('channelConveneConfirm', _DomainMCSPDU_channelConveneConfirm),
-        ('channelDisbandRequest', _DomainMCSPDU_channelDisbandRequest),
-        ('channelDisbandIndication', _DomainMCSPDU_channelDisbandIndication),
-        ('channelAdmitRequest', _DomainMCSPDU_channelAdmitRequest),
-        ('channelAdmitIndication', _DomainMCSPDU_channelAdmitIndication),
-        ('channelExpelRequest', _DomainMCSPDU_channelExpelRequest),
-        ('channelExpelIndication', _DomainMCSPDU_channelExpelIndication),
-        ('sendDataRequest', _DomainMCSPDU_sendDataRequest),
-        ('sendDataIndication', _DomainMCSPDU_sendDataIndication),
-        ('uniformSendDataRequest', _DomainMCSPDU_uniformSendDataRequest),
-        ('uniformSendDataIndication', _DomainMCSPDU_uniformSendDataIndication),
-        ('tokenGrabRequest', _DomainMCSPDU_tokenGrabRequest),
-        ('tokenGrabConfirm', _DomainMCSPDU_tokenGrabConfirm),
-        ('tokenInhibitRequest', _DomainMCSPDU_tokenInhibitRequest),
-        ('tokenInhibitConfirm', _DomainMCSPDU_tokenInhibitConfirm),
-        ('tokenGiveRequest', _DomainMCSPDU_tokenGiveRequest),
-        ('tokenGiveIndication', _DomainMCSPDU_tokenGiveIndication),
-        ('tokenGiveResponse', _DomainMCSPDU_tokenGiveResponse),
-        ('tokenGiveConfirm', _DomainMCSPDU_tokenGiveConfirm),
-        ('tokenPleaseRequest', _DomainMCSPDU_tokenPleaseRequest),
-        ('tokenPleaseIndication', _DomainMCSPDU_tokenPleaseIndication),
-        ('tokenReleaseRequest', _DomainMCSPDU_tokenReleaseRequest),
-        ('tokenReleaseConfirm', _DomainMCSPDU_tokenReleaseConfirm),
-        ('tokenTestRequest', _DomainMCSPDU_tokenTestRequest),
-        ('tokenTestConfirm', _DomainMCSPDU_tokenTestConfirm),
-        ('nonStandard', _DomainMCSPDU_nonStandard),
+        (u'plumbDomainIndication', _DomainMCSPDU_plumbDomainIndication),
+        (u'erectDomainRequest', _DomainMCSPDU_erectDomainRequest),
+        (u'mergeChannelsRequest', _DomainMCSPDU_mergeChannelsRequest),
+        (u'mergeChannelsConfirm', _DomainMCSPDU_mergeChannelsConfirm),
+        (u'purgeChannelsIndication', _DomainMCSPDU_purgeChannelsIndication),
+        (u'mergeTokensRequest', _DomainMCSPDU_mergeTokensRequest),
+        (u'mergeTokensConfirm', _DomainMCSPDU_mergeTokensConfirm),
+        (u'purgeTokensIndication', _DomainMCSPDU_purgeTokensIndication),
+        (u'disconnectProviderUltimatum', _DomainMCSPDU_disconnectProviderUltimatum),
+        (u'rejectMCSPDUUltimatum', _DomainMCSPDU_rejectMCSPDUUltimatum),
+        (u'attachUserRequest', _DomainMCSPDU_attachUserRequest),
+        (u'attachUserConfirm', _DomainMCSPDU_attachUserConfirm),
+        (u'detachUserRequest', _DomainMCSPDU_detachUserRequest),
+        (u'detachUserIndication', _DomainMCSPDU_detachUserIndication),
+        (u'channelJoinRequest', _DomainMCSPDU_channelJoinRequest),
+        (u'channelJoinConfirm', _DomainMCSPDU_channelJoinConfirm),
+        (u'channelLeaveRequest', _DomainMCSPDU_channelLeaveRequest),
+        (u'channelConveneRequest', _DomainMCSPDU_channelConveneRequest),
+        (u'channelConveneConfirm', _DomainMCSPDU_channelConveneConfirm),
+        (u'channelDisbandRequest', _DomainMCSPDU_channelDisbandRequest),
+        (u'channelDisbandIndication', _DomainMCSPDU_channelDisbandIndication),
+        (u'channelAdmitRequest', _DomainMCSPDU_channelAdmitRequest),
+        (u'channelAdmitIndication', _DomainMCSPDU_channelAdmitIndication),
+        (u'channelExpelRequest', _DomainMCSPDU_channelExpelRequest),
+        (u'channelExpelIndication', _DomainMCSPDU_channelExpelIndication),
+        (u'sendDataRequest', _DomainMCSPDU_sendDataRequest),
+        (u'sendDataIndication', _DomainMCSPDU_sendDataIndication),
+        (u'uniformSendDataRequest', _DomainMCSPDU_uniformSendDataRequest),
+        (u'uniformSendDataIndication', _DomainMCSPDU_uniformSendDataIndication),
+        (u'tokenGrabRequest', _DomainMCSPDU_tokenGrabRequest),
+        (u'tokenGrabConfirm', _DomainMCSPDU_tokenGrabConfirm),
+        (u'tokenInhibitRequest', _DomainMCSPDU_tokenInhibitRequest),
+        (u'tokenInhibitConfirm', _DomainMCSPDU_tokenInhibitConfirm),
+        (u'tokenGiveRequest', _DomainMCSPDU_tokenGiveRequest),
+        (u'tokenGiveIndication', _DomainMCSPDU_tokenGiveIndication),
+        (u'tokenGiveResponse', _DomainMCSPDU_tokenGiveResponse),
+        (u'tokenGiveConfirm', _DomainMCSPDU_tokenGiveConfirm),
+        (u'tokenPleaseRequest', _DomainMCSPDU_tokenPleaseRequest),
+        (u'tokenPleaseIndication', _DomainMCSPDU_tokenPleaseIndication),
+        (u'tokenReleaseRequest', _DomainMCSPDU_tokenReleaseRequest),
+        (u'tokenReleaseConfirm', _DomainMCSPDU_tokenReleaseConfirm),
+        (u'tokenTestRequest', _DomainMCSPDU_tokenTestRequest),
+        (u'tokenTestConfirm', _DomainMCSPDU_tokenTestConfirm),
+        (u'nonStandard', _DomainMCSPDU_nonStandard),
         ])
     DomainMCSPDU._ext = []
     
@@ -3271,92 +3271,92 @@ class MCS_PROTOCOL_3:
 
 class MAP_PROTOCOL:
 
-    _name_  = 'MAP-PROTOCOL'
+    _name_  = u'MAP-PROTOCOL'
     _oid_   = []
     
     _obj_ = [
-        'H221NonStandardIdentifier',
-        'Key',
-        'NonStandardParameter',
-        'NonStandardPDU',
-        'VersionNumber',
-        'Priority',
-        'PriorityRange',
-        'MAPConnectRequestPDU',
-        'MAPConnectConfirmPDU',
-        'Reason',
-        'MAPDisconnectRequestPDU',
-        'MAPDisconnectConfirmPDU',
-        'TransportProtocolID',
-        'TransportProtocolType',
-        'NetworkAddress',
-        'PayloadSize',
-        'TransportProtocolRequestEntry',
-        'MAPArbitrateProtocolsRequestPDU',
-        'TransportProtocolConfirmEntry',
-        'MAPArbitrateProtocolsConfirmPDU',
-        'SenderID',
-        'ChannelID',
-        'ReliabilityLevel',
-        'DataType',
-        'DataFlowIdentifier',
-        'SequenceNumber',
-        'DataDescriptor',
-        'DataFrameEntry',
-        'MAPDataPDU',
-        'Metachannel',
-        'MAPAddGroupRequestPDU',
-        'MAPRemoveGroupRequestPDU',
-        'MAPDisableUnicastRequestPDU',
-        'MAPEnableUnicastRequestPDU',
-        'MAPEnableUnicastConfirmPDU',
-        'MAPDisableMulticastRequestPDU',
-        'MAPDisableMulticastConfirmPDU',
-        'MAPEnableMulticastRequestPDU',
-        'MAPSequenceNumberPDU',
-        'MAPPDU',
+        u'H221NonStandardIdentifier',
+        u'Key',
+        u'NonStandardParameter',
+        u'NonStandardPDU',
+        u'VersionNumber',
+        u'Priority',
+        u'PriorityRange',
+        u'MAPConnectRequestPDU',
+        u'MAPConnectConfirmPDU',
+        u'Reason',
+        u'MAPDisconnectRequestPDU',
+        u'MAPDisconnectConfirmPDU',
+        u'TransportProtocolID',
+        u'TransportProtocolType',
+        u'NetworkAddress',
+        u'PayloadSize',
+        u'TransportProtocolRequestEntry',
+        u'MAPArbitrateProtocolsRequestPDU',
+        u'TransportProtocolConfirmEntry',
+        u'MAPArbitrateProtocolsConfirmPDU',
+        u'SenderID',
+        u'ChannelID',
+        u'ReliabilityLevel',
+        u'DataType',
+        u'DataFlowIdentifier',
+        u'SequenceNumber',
+        u'DataDescriptor',
+        u'DataFrameEntry',
+        u'MAPDataPDU',
+        u'Metachannel',
+        u'MAPAddGroupRequestPDU',
+        u'MAPRemoveGroupRequestPDU',
+        u'MAPDisableUnicastRequestPDU',
+        u'MAPEnableUnicastRequestPDU',
+        u'MAPEnableUnicastConfirmPDU',
+        u'MAPDisableMulticastRequestPDU',
+        u'MAPDisableMulticastConfirmPDU',
+        u'MAPEnableMulticastRequestPDU',
+        u'MAPSequenceNumberPDU',
+        u'MAPPDU',
         ]
     _type_ = [
-        'H221NonStandardIdentifier',
-        'Key',
-        'NonStandardParameter',
-        'NonStandardPDU',
-        'VersionNumber',
-        'Priority',
-        'PriorityRange',
-        'MAPConnectRequestPDU',
-        'MAPConnectConfirmPDU',
-        'Reason',
-        'MAPDisconnectRequestPDU',
-        'MAPDisconnectConfirmPDU',
-        'TransportProtocolID',
-        'TransportProtocolType',
-        'NetworkAddress',
-        'PayloadSize',
-        'TransportProtocolRequestEntry',
-        'MAPArbitrateProtocolsRequestPDU',
-        'TransportProtocolConfirmEntry',
-        'MAPArbitrateProtocolsConfirmPDU',
-        'SenderID',
-        'ChannelID',
-        'ReliabilityLevel',
-        'DataType',
-        'DataFlowIdentifier',
-        'SequenceNumber',
-        'DataDescriptor',
-        'DataFrameEntry',
-        'MAPDataPDU',
-        'Metachannel',
-        'MAPAddGroupRequestPDU',
-        'MAPRemoveGroupRequestPDU',
-        'MAPDisableUnicastRequestPDU',
-        'MAPEnableUnicastRequestPDU',
-        'MAPEnableUnicastConfirmPDU',
-        'MAPDisableMulticastRequestPDU',
-        'MAPDisableMulticastConfirmPDU',
-        'MAPEnableMulticastRequestPDU',
-        'MAPSequenceNumberPDU',
-        'MAPPDU',
+        u'H221NonStandardIdentifier',
+        u'Key',
+        u'NonStandardParameter',
+        u'NonStandardPDU',
+        u'VersionNumber',
+        u'Priority',
+        u'PriorityRange',
+        u'MAPConnectRequestPDU',
+        u'MAPConnectConfirmPDU',
+        u'Reason',
+        u'MAPDisconnectRequestPDU',
+        u'MAPDisconnectConfirmPDU',
+        u'TransportProtocolID',
+        u'TransportProtocolType',
+        u'NetworkAddress',
+        u'PayloadSize',
+        u'TransportProtocolRequestEntry',
+        u'MAPArbitrateProtocolsRequestPDU',
+        u'TransportProtocolConfirmEntry',
+        u'MAPArbitrateProtocolsConfirmPDU',
+        u'SenderID',
+        u'ChannelID',
+        u'ReliabilityLevel',
+        u'DataType',
+        u'DataFlowIdentifier',
+        u'SequenceNumber',
+        u'DataDescriptor',
+        u'DataFrameEntry',
+        u'MAPDataPDU',
+        u'Metachannel',
+        u'MAPAddGroupRequestPDU',
+        u'MAPRemoveGroupRequestPDU',
+        u'MAPDisableUnicastRequestPDU',
+        u'MAPEnableUnicastRequestPDU',
+        u'MAPEnableUnicastConfirmPDU',
+        u'MAPDisableMulticastRequestPDU',
+        u'MAPDisableMulticastConfirmPDU',
+        u'MAPEnableMulticastRequestPDU',
+        u'MAPSequenceNumberPDU',
+        u'MAPPDU',
         ]
     _set_ = [
         ]
@@ -3368,581 +3368,581 @@ class MAP_PROTOCOL:
         ]
     
     #-----< H221NonStandardIdentifier >-----#
-    H221NonStandardIdentifier = OCT_STR(name='H221NonStandardIdentifier', mode=MODE_TYPE)
+    H221NonStandardIdentifier = OCT_STR(name=u'H221NonStandardIdentifier', mode=MODE_TYPE)
     H221NonStandardIdentifier._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=4, ub=255)], ev=None, er=[])
     
     #-----< Key >-----#
-    Key = CHOICE(name='Key', mode=MODE_TYPE)
-    _Key_object = OID(name='object', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _Key_h221NonStandard = OCT_STR(name='h221NonStandard', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAP-PROTOCOL', 'H221NonStandardIdentifier')))
+    Key = CHOICE(name=u'Key', mode=MODE_TYPE)
+    _Key_object = OID(name=u'object', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _Key_h221NonStandard = OCT_STR(name=u'h221NonStandard', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAP-PROTOCOL', 'H221NonStandardIdentifier')))
     Key._cont = ASN1Dict([
-        ('object', _Key_object),
-        ('h221NonStandard', _Key_h221NonStandard),
+        (u'object', _Key_object),
+        (u'h221NonStandard', _Key_h221NonStandard),
         ])
     Key._ext = None
     
     #-----< NonStandardParameter >-----#
-    NonStandardParameter = SEQ(name='NonStandardParameter', mode=MODE_TYPE)
-    _NonStandardParameter_key = CHOICE(name='key', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('MAP-PROTOCOL', 'Key')))
-    _NonStandardParameter_data = OCT_STR(name='data', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    NonStandardParameter = SEQ(name=u'NonStandardParameter', mode=MODE_TYPE)
+    _NonStandardParameter_key = CHOICE(name=u'key', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('MAP-PROTOCOL', 'Key')))
+    _NonStandardParameter_data = OCT_STR(name=u'data', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     NonStandardParameter._cont = ASN1Dict([
-        ('key', _NonStandardParameter_key),
-        ('data', _NonStandardParameter_data),
+        (u'key', _NonStandardParameter_key),
+        (u'data', _NonStandardParameter_data),
         ])
     NonStandardParameter._ext = None
     
     #-----< NonStandardPDU >-----#
-    NonStandardPDU = SEQ(name='NonStandardPDU', mode=MODE_TYPE)
-    _NonStandardPDU_data = SEQ(name='data', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAP-PROTOCOL', 'NonStandardParameter')))
+    NonStandardPDU = SEQ(name=u'NonStandardPDU', mode=MODE_TYPE)
+    _NonStandardPDU_data = SEQ(name=u'data', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAP-PROTOCOL', 'NonStandardParameter')))
     NonStandardPDU._cont = ASN1Dict([
-        ('data', _NonStandardPDU_data),
+        (u'data', _NonStandardPDU_data),
         ])
     NonStandardPDU._ext = []
     
     #-----< VersionNumber >-----#
-    VersionNumber = SEQ(name='VersionNumber', mode=MODE_TYPE)
-    _VersionNumber_majorVersionNumber = INT(name='majorVersionNumber', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    VersionNumber = SEQ(name=u'VersionNumber', mode=MODE_TYPE)
+    _VersionNumber_majorVersionNumber = INT(name=u'majorVersionNumber', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     _VersionNumber_majorVersionNumber._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=65535)], ev=None, er=[])
-    _VersionNumber_minorVersionNumber = INT(name='minorVersionNumber', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _VersionNumber_minorVersionNumber = INT(name=u'minorVersionNumber', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     _VersionNumber_minorVersionNumber._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=65535)], ev=None, er=[])
-    _VersionNumber_nonStandardParameters = SEQ_OF(name='nonStandardParameters', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _VersionNumber_nonStandardParameters = SEQ_OF(name=u'nonStandardParameters', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     __VersionNumber_nonStandardParameters__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-PROTOCOL', 'NonStandardParameter')))
     _VersionNumber_nonStandardParameters._cont = __VersionNumber_nonStandardParameters__item_
     VersionNumber._cont = ASN1Dict([
-        ('majorVersionNumber', _VersionNumber_majorVersionNumber),
-        ('minorVersionNumber', _VersionNumber_minorVersionNumber),
-        ('nonStandardParameters', _VersionNumber_nonStandardParameters),
+        (u'majorVersionNumber', _VersionNumber_majorVersionNumber),
+        (u'minorVersionNumber', _VersionNumber_minorVersionNumber),
+        (u'nonStandardParameters', _VersionNumber_nonStandardParameters),
         ])
     VersionNumber._ext = []
     
     #-----< Priority >-----#
-    Priority = INT(name='Priority', mode=MODE_TYPE)
+    Priority = INT(name=u'Priority', mode=MODE_TYPE)
     Priority._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=15)], ev=None, er=[])
     
     #-----< PriorityRange >-----#
-    PriorityRange = SEQ(name='PriorityRange', mode=MODE_TYPE)
-    _PriorityRange_highPriority = INT(name='highPriority', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAP-PROTOCOL', 'Priority')))
-    _PriorityRange_lowPriority = INT(name='lowPriority', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAP-PROTOCOL', 'Priority')))
-    _PriorityRange_nonStandardParameters = SEQ_OF(name='nonStandardParameters', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    PriorityRange = SEQ(name=u'PriorityRange', mode=MODE_TYPE)
+    _PriorityRange_highPriority = INT(name=u'highPriority', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAP-PROTOCOL', 'Priority')))
+    _PriorityRange_lowPriority = INT(name=u'lowPriority', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAP-PROTOCOL', 'Priority')))
+    _PriorityRange_nonStandardParameters = SEQ_OF(name=u'nonStandardParameters', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     __PriorityRange_nonStandardParameters__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-PROTOCOL', 'NonStandardParameter')))
     _PriorityRange_nonStandardParameters._cont = __PriorityRange_nonStandardParameters__item_
     PriorityRange._cont = ASN1Dict([
-        ('highPriority', _PriorityRange_highPriority),
-        ('lowPriority', _PriorityRange_lowPriority),
-        ('nonStandardParameters', _PriorityRange_nonStandardParameters),
+        (u'highPriority', _PriorityRange_highPriority),
+        (u'lowPriority', _PriorityRange_lowPriority),
+        (u'nonStandardParameters', _PriorityRange_nonStandardParameters),
         ])
     PriorityRange._ext = []
     
     #-----< MAPConnectRequestPDU >-----#
-    MAPConnectRequestPDU = SEQ(name='MAPConnectRequestPDU', mode=MODE_TYPE)
-    _MAPConnectRequestPDU_versionNumber = SEQ(name='versionNumber', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAP-PROTOCOL', 'VersionNumber')))
-    _MAPConnectRequestPDU_connectionMAPSAP = INT(name='connectionMAPSAP', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    MAPConnectRequestPDU = SEQ(name=u'MAPConnectRequestPDU', mode=MODE_TYPE)
+    _MAPConnectRequestPDU_versionNumber = SEQ(name=u'versionNumber', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAP-PROTOCOL', 'VersionNumber')))
+    _MAPConnectRequestPDU_connectionMAPSAP = INT(name=u'connectionMAPSAP', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     _MAPConnectRequestPDU_connectionMAPSAP._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=65535)], ev=None, er=[])
-    _MAPConnectRequestPDU_domainReferenceID = INT(name='domainReferenceID', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _MAPConnectRequestPDU_domainReferenceID = INT(name=u'domainReferenceID', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     _MAPConnectRequestPDU_domainReferenceID._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=65535)], ev=None, er=[])
-    _MAPConnectRequestPDU_priorityRange = SEQ(name='priorityRange', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAP-PROTOCOL', 'PriorityRange')))
-    _MAPConnectRequestPDU_nonStandardParameters = SEQ_OF(name='nonStandardParameters', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _MAPConnectRequestPDU_priorityRange = SEQ(name=u'priorityRange', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAP-PROTOCOL', 'PriorityRange')))
+    _MAPConnectRequestPDU_nonStandardParameters = SEQ_OF(name=u'nonStandardParameters', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     __MAPConnectRequestPDU_nonStandardParameters__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-PROTOCOL', 'NonStandardParameter')))
     _MAPConnectRequestPDU_nonStandardParameters._cont = __MAPConnectRequestPDU_nonStandardParameters__item_
     MAPConnectRequestPDU._cont = ASN1Dict([
-        ('versionNumber', _MAPConnectRequestPDU_versionNumber),
-        ('connectionMAPSAP', _MAPConnectRequestPDU_connectionMAPSAP),
-        ('domainReferenceID', _MAPConnectRequestPDU_domainReferenceID),
-        ('priorityRange', _MAPConnectRequestPDU_priorityRange),
-        ('nonStandardParameters', _MAPConnectRequestPDU_nonStandardParameters),
+        (u'versionNumber', _MAPConnectRequestPDU_versionNumber),
+        (u'connectionMAPSAP', _MAPConnectRequestPDU_connectionMAPSAP),
+        (u'domainReferenceID', _MAPConnectRequestPDU_domainReferenceID),
+        (u'priorityRange', _MAPConnectRequestPDU_priorityRange),
+        (u'nonStandardParameters', _MAPConnectRequestPDU_nonStandardParameters),
         ])
     MAPConnectRequestPDU._ext = []
     
     #-----< MAPConnectConfirmPDU >-----#
-    MAPConnectConfirmPDU = SEQ(name='MAPConnectConfirmPDU', mode=MODE_TYPE)
-    _MAPConnectConfirmPDU_versionNumber = SEQ(name='versionNumber', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAP-PROTOCOL', 'VersionNumber')))
-    _MAPConnectConfirmPDU_connectionMAPSAP = INT(name='connectionMAPSAP', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    MAPConnectConfirmPDU = SEQ(name=u'MAPConnectConfirmPDU', mode=MODE_TYPE)
+    _MAPConnectConfirmPDU_versionNumber = SEQ(name=u'versionNumber', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAP-PROTOCOL', 'VersionNumber')))
+    _MAPConnectConfirmPDU_connectionMAPSAP = INT(name=u'connectionMAPSAP', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     _MAPConnectConfirmPDU_connectionMAPSAP._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=65535)], ev=None, er=[])
-    _MAPConnectConfirmPDU_nonStandardParameters = SEQ_OF(name='nonStandardParameters', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _MAPConnectConfirmPDU_nonStandardParameters = SEQ_OF(name=u'nonStandardParameters', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     __MAPConnectConfirmPDU_nonStandardParameters__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-PROTOCOL', 'NonStandardParameter')))
     _MAPConnectConfirmPDU_nonStandardParameters._cont = __MAPConnectConfirmPDU_nonStandardParameters__item_
     MAPConnectConfirmPDU._cont = ASN1Dict([
-        ('versionNumber', _MAPConnectConfirmPDU_versionNumber),
-        ('connectionMAPSAP', _MAPConnectConfirmPDU_connectionMAPSAP),
-        ('nonStandardParameters', _MAPConnectConfirmPDU_nonStandardParameters),
+        (u'versionNumber', _MAPConnectConfirmPDU_versionNumber),
+        (u'connectionMAPSAP', _MAPConnectConfirmPDU_connectionMAPSAP),
+        (u'nonStandardParameters', _MAPConnectConfirmPDU_nonStandardParameters),
         ])
     MAPConnectConfirmPDU._ext = []
     
     #-----< Reason >-----#
-    Reason = CHOICE(name='Reason', mode=MODE_TYPE)
-    _Reason_providerInitiated = NULL(name='providerInitiated', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _Reason_userRejected = NULL(name='userRejected', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _Reason_userInitiated = NULL(name='userInitiated', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _Reason_invalidMAPSAP = NULL(name='invalidMAPSAP', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _Reason_invalidDomainReferenceID = NULL(name='invalidDomainReferenceID', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _Reason_unicastTransition = NULL(name='unicastTransition', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _Reason_unspecifiedFailure = NULL(name='unspecifiedFailure', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _Reason_nonStandardReason = SEQ(name='nonStandardReason', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAP-PROTOCOL', 'NonStandardParameter')))
+    Reason = CHOICE(name=u'Reason', mode=MODE_TYPE)
+    _Reason_providerInitiated = NULL(name=u'providerInitiated', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _Reason_userRejected = NULL(name=u'userRejected', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _Reason_userInitiated = NULL(name=u'userInitiated', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _Reason_invalidMAPSAP = NULL(name=u'invalidMAPSAP', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _Reason_invalidDomainReferenceID = NULL(name=u'invalidDomainReferenceID', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _Reason_unicastTransition = NULL(name=u'unicastTransition', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _Reason_unspecifiedFailure = NULL(name=u'unspecifiedFailure', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _Reason_nonStandardReason = SEQ(name=u'nonStandardReason', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAP-PROTOCOL', 'NonStandardParameter')))
     Reason._cont = ASN1Dict([
-        ('providerInitiated', _Reason_providerInitiated),
-        ('userRejected', _Reason_userRejected),
-        ('userInitiated', _Reason_userInitiated),
-        ('invalidMAPSAP', _Reason_invalidMAPSAP),
-        ('invalidDomainReferenceID', _Reason_invalidDomainReferenceID),
-        ('unicastTransition', _Reason_unicastTransition),
-        ('unspecifiedFailure', _Reason_unspecifiedFailure),
-        ('nonStandardReason', _Reason_nonStandardReason),
+        (u'providerInitiated', _Reason_providerInitiated),
+        (u'userRejected', _Reason_userRejected),
+        (u'userInitiated', _Reason_userInitiated),
+        (u'invalidMAPSAP', _Reason_invalidMAPSAP),
+        (u'invalidDomainReferenceID', _Reason_invalidDomainReferenceID),
+        (u'unicastTransition', _Reason_unicastTransition),
+        (u'unspecifiedFailure', _Reason_unspecifiedFailure),
+        (u'nonStandardReason', _Reason_nonStandardReason),
         ])
     Reason._ext = []
     
     #-----< MAPDisconnectRequestPDU >-----#
-    MAPDisconnectRequestPDU = SEQ(name='MAPDisconnectRequestPDU', mode=MODE_TYPE)
-    _MAPDisconnectRequestPDU_reason = CHOICE(name='reason', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('MAP-PROTOCOL', 'Reason')))
-    _MAPDisconnectRequestPDU_confirmRequired = BOOL(name='confirmRequired', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _MAPDisconnectRequestPDU_nonStandardParameters = SEQ_OF(name='nonStandardParameters', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    MAPDisconnectRequestPDU = SEQ(name=u'MAPDisconnectRequestPDU', mode=MODE_TYPE)
+    _MAPDisconnectRequestPDU_reason = CHOICE(name=u'reason', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('MAP-PROTOCOL', 'Reason')))
+    _MAPDisconnectRequestPDU_confirmRequired = BOOL(name=u'confirmRequired', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _MAPDisconnectRequestPDU_nonStandardParameters = SEQ_OF(name=u'nonStandardParameters', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     __MAPDisconnectRequestPDU_nonStandardParameters__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-PROTOCOL', 'NonStandardParameter')))
     _MAPDisconnectRequestPDU_nonStandardParameters._cont = __MAPDisconnectRequestPDU_nonStandardParameters__item_
     MAPDisconnectRequestPDU._cont = ASN1Dict([
-        ('reason', _MAPDisconnectRequestPDU_reason),
-        ('confirmRequired', _MAPDisconnectRequestPDU_confirmRequired),
-        ('nonStandardParameters', _MAPDisconnectRequestPDU_nonStandardParameters),
+        (u'reason', _MAPDisconnectRequestPDU_reason),
+        (u'confirmRequired', _MAPDisconnectRequestPDU_confirmRequired),
+        (u'nonStandardParameters', _MAPDisconnectRequestPDU_nonStandardParameters),
         ])
     MAPDisconnectRequestPDU._ext = []
     
     #-----< MAPDisconnectConfirmPDU >-----#
-    MAPDisconnectConfirmPDU = SEQ(name='MAPDisconnectConfirmPDU', mode=MODE_TYPE)
-    _MAPDisconnectConfirmPDU_nonStandardParameters = SEQ_OF(name='nonStandardParameters', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    MAPDisconnectConfirmPDU = SEQ(name=u'MAPDisconnectConfirmPDU', mode=MODE_TYPE)
+    _MAPDisconnectConfirmPDU_nonStandardParameters = SEQ_OF(name=u'nonStandardParameters', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     __MAPDisconnectConfirmPDU_nonStandardParameters__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-PROTOCOL', 'NonStandardParameter')))
     _MAPDisconnectConfirmPDU_nonStandardParameters._cont = __MAPDisconnectConfirmPDU_nonStandardParameters__item_
     MAPDisconnectConfirmPDU._cont = ASN1Dict([
-        ('nonStandardParameters', _MAPDisconnectConfirmPDU_nonStandardParameters),
+        (u'nonStandardParameters', _MAPDisconnectConfirmPDU_nonStandardParameters),
         ])
     MAPDisconnectConfirmPDU._ext = []
     
     #-----< TransportProtocolID >-----#
-    TransportProtocolID = CHOICE(name='TransportProtocolID', mode=MODE_TYPE)
-    _TransportProtocolID_objectProtocolID = OID(name='objectProtocolID', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _TransportProtocolID_h221NonStandardProtocolID = OCT_STR(name='h221NonStandardProtocolID', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAP-PROTOCOL', 'H221NonStandardIdentifier')))
-    _TransportProtocolID_snapProtocolID = OCT_STR(name='snapProtocolID', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    TransportProtocolID = CHOICE(name=u'TransportProtocolID', mode=MODE_TYPE)
+    _TransportProtocolID_objectProtocolID = OID(name=u'objectProtocolID', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _TransportProtocolID_h221NonStandardProtocolID = OCT_STR(name=u'h221NonStandardProtocolID', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAP-PROTOCOL', 'H221NonStandardIdentifier')))
+    _TransportProtocolID_snapProtocolID = OCT_STR(name=u'snapProtocolID', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     _TransportProtocolID_snapProtocolID._const_sz = ASN1Set(rv=[5], rr=[], ev=None, er=[])
-    _TransportProtocolID_nonStandardProtocolID = SEQ(name='nonStandardProtocolID', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAP-PROTOCOL', 'NonStandardParameter')))
+    _TransportProtocolID_nonStandardProtocolID = SEQ(name=u'nonStandardProtocolID', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAP-PROTOCOL', 'NonStandardParameter')))
     TransportProtocolID._cont = ASN1Dict([
-        ('objectProtocolID', _TransportProtocolID_objectProtocolID),
-        ('h221NonStandardProtocolID', _TransportProtocolID_h221NonStandardProtocolID),
-        ('snapProtocolID', _TransportProtocolID_snapProtocolID),
-        ('nonStandardProtocolID', _TransportProtocolID_nonStandardProtocolID),
+        (u'objectProtocolID', _TransportProtocolID_objectProtocolID),
+        (u'h221NonStandardProtocolID', _TransportProtocolID_h221NonStandardProtocolID),
+        (u'snapProtocolID', _TransportProtocolID_snapProtocolID),
+        (u'nonStandardProtocolID', _TransportProtocolID_nonStandardProtocolID),
         ])
     TransportProtocolID._ext = []
     
     #-----< TransportProtocolType >-----#
-    TransportProtocolType = CHOICE(name='TransportProtocolType', mode=MODE_TYPE)
-    _TransportProtocolType_reliableUnicast = NULL(name='reliableUnicast', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _TransportProtocolType_unreliableUnicast = NULL(name='unreliableUnicast', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _TransportProtocolType_reliableMulticast = NULL(name='reliableMulticast', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _TransportProtocolType_unreliableMulticast = NULL(name='unreliableMulticast', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _TransportProtocolType_nonStandardProtocolType = SEQ(name='nonStandardProtocolType', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAP-PROTOCOL', 'NonStandardParameter')))
+    TransportProtocolType = CHOICE(name=u'TransportProtocolType', mode=MODE_TYPE)
+    _TransportProtocolType_reliableUnicast = NULL(name=u'reliableUnicast', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _TransportProtocolType_unreliableUnicast = NULL(name=u'unreliableUnicast', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _TransportProtocolType_reliableMulticast = NULL(name=u'reliableMulticast', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _TransportProtocolType_unreliableMulticast = NULL(name=u'unreliableMulticast', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _TransportProtocolType_nonStandardProtocolType = SEQ(name=u'nonStandardProtocolType', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAP-PROTOCOL', 'NonStandardParameter')))
     TransportProtocolType._cont = ASN1Dict([
-        ('reliableUnicast', _TransportProtocolType_reliableUnicast),
-        ('unreliableUnicast', _TransportProtocolType_unreliableUnicast),
-        ('reliableMulticast', _TransportProtocolType_reliableMulticast),
-        ('unreliableMulticast', _TransportProtocolType_unreliableMulticast),
-        ('nonStandardProtocolType', _TransportProtocolType_nonStandardProtocolType),
+        (u'reliableUnicast', _TransportProtocolType_reliableUnicast),
+        (u'unreliableUnicast', _TransportProtocolType_unreliableUnicast),
+        (u'reliableMulticast', _TransportProtocolType_reliableMulticast),
+        (u'unreliableMulticast', _TransportProtocolType_unreliableMulticast),
+        (u'nonStandardProtocolType', _TransportProtocolType_nonStandardProtocolType),
         ])
     TransportProtocolType._ext = []
     
     #-----< NetworkAddress >-----#
-    NetworkAddress = SEQ(name='NetworkAddress', mode=MODE_TYPE)
-    _NetworkAddress_nsapAddress = OCT_STR(name='nsapAddress', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    NetworkAddress = SEQ(name=u'NetworkAddress', mode=MODE_TYPE)
+    _NetworkAddress_nsapAddress = OCT_STR(name=u'nsapAddress', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     _NetworkAddress_nsapAddress._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=20)], ev=None, er=[])
-    _NetworkAddress_nonStandardParameters = SEQ_OF(name='nonStandardParameters', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _NetworkAddress_nonStandardParameters = SEQ_OF(name=u'nonStandardParameters', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     __NetworkAddress_nonStandardParameters__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-PROTOCOL', 'NonStandardParameter')))
     _NetworkAddress_nonStandardParameters._cont = __NetworkAddress_nonStandardParameters__item_
     NetworkAddress._cont = ASN1Dict([
-        ('nsapAddress', _NetworkAddress_nsapAddress),
-        ('nonStandardParameters', _NetworkAddress_nonStandardParameters),
+        (u'nsapAddress', _NetworkAddress_nsapAddress),
+        (u'nonStandardParameters', _NetworkAddress_nonStandardParameters),
         ])
     NetworkAddress._ext = []
     
     #-----< PayloadSize >-----#
-    PayloadSize = INT(name='PayloadSize', mode=MODE_TYPE)
+    PayloadSize = INT(name=u'PayloadSize', mode=MODE_TYPE)
     PayloadSize._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=128, ub=65535)], ev=None, er=[])
     
     #-----< TransportProtocolRequestEntry >-----#
-    TransportProtocolRequestEntry = SEQ(name='TransportProtocolRequestEntry', mode=MODE_TYPE)
-    _TransportProtocolRequestEntry_transportProtocolID = CHOICE(name='transportProtocolID', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('MAP-PROTOCOL', 'TransportProtocolID')))
-    _TransportProtocolRequestEntry_transportProtocolType = CHOICE(name='transportProtocolType', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('MAP-PROTOCOL', 'TransportProtocolType')))
-    _TransportProtocolRequestEntry_networkAddress = SEQ(name='networkAddress', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAP-PROTOCOL', 'NetworkAddress')))
-    _TransportProtocolRequestEntry_maximumPayloadFixedFlag = BOOL(name='maximumPayloadFixedFlag', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _TransportProtocolRequestEntry_maximumPayloadSize = INT(name='maximumPayloadSize', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAP-PROTOCOL', 'PayloadSize')))
-    _TransportProtocolRequestEntry_preferenceWeighting = INT(name='preferenceWeighting', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    TransportProtocolRequestEntry = SEQ(name=u'TransportProtocolRequestEntry', mode=MODE_TYPE)
+    _TransportProtocolRequestEntry_transportProtocolID = CHOICE(name=u'transportProtocolID', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('MAP-PROTOCOL', 'TransportProtocolID')))
+    _TransportProtocolRequestEntry_transportProtocolType = CHOICE(name=u'transportProtocolType', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('MAP-PROTOCOL', 'TransportProtocolType')))
+    _TransportProtocolRequestEntry_networkAddress = SEQ(name=u'networkAddress', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAP-PROTOCOL', 'NetworkAddress')))
+    _TransportProtocolRequestEntry_maximumPayloadFixedFlag = BOOL(name=u'maximumPayloadFixedFlag', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _TransportProtocolRequestEntry_maximumPayloadSize = INT(name=u'maximumPayloadSize', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAP-PROTOCOL', 'PayloadSize')))
+    _TransportProtocolRequestEntry_preferenceWeighting = INT(name=u'preferenceWeighting', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     _TransportProtocolRequestEntry_preferenceWeighting._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=65535)], ev=None, er=[])
-    _TransportProtocolRequestEntry_nodeCount = INT(name='nodeCount', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _TransportProtocolRequestEntry_nodeCount = INT(name=u'nodeCount', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     _TransportProtocolRequestEntry_nodeCount._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=65535)], ev=None, er=[])
-    _TransportProtocolRequestEntry_numberOfConnections = INT(name='numberOfConnections', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _TransportProtocolRequestEntry_numberOfConnections = INT(name=u'numberOfConnections', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     _TransportProtocolRequestEntry_numberOfConnections._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=65535)], ev=None, er=[])
-    _TransportProtocolRequestEntry_configurationData = OCT_STR(name='configurationData', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _TransportProtocolRequestEntry_nonStandardParameters = SEQ_OF(name='nonStandardParameters', mode=MODE_TYPE, tag=(9, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _TransportProtocolRequestEntry_configurationData = OCT_STR(name=u'configurationData', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _TransportProtocolRequestEntry_nonStandardParameters = SEQ_OF(name=u'nonStandardParameters', mode=MODE_TYPE, tag=(9, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     __TransportProtocolRequestEntry_nonStandardParameters__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-PROTOCOL', 'NonStandardParameter')))
     _TransportProtocolRequestEntry_nonStandardParameters._cont = __TransportProtocolRequestEntry_nonStandardParameters__item_
     TransportProtocolRequestEntry._cont = ASN1Dict([
-        ('transportProtocolID', _TransportProtocolRequestEntry_transportProtocolID),
-        ('transportProtocolType', _TransportProtocolRequestEntry_transportProtocolType),
-        ('networkAddress', _TransportProtocolRequestEntry_networkAddress),
-        ('maximumPayloadFixedFlag', _TransportProtocolRequestEntry_maximumPayloadFixedFlag),
-        ('maximumPayloadSize', _TransportProtocolRequestEntry_maximumPayloadSize),
-        ('preferenceWeighting', _TransportProtocolRequestEntry_preferenceWeighting),
-        ('nodeCount', _TransportProtocolRequestEntry_nodeCount),
-        ('numberOfConnections', _TransportProtocolRequestEntry_numberOfConnections),
-        ('configurationData', _TransportProtocolRequestEntry_configurationData),
-        ('nonStandardParameters', _TransportProtocolRequestEntry_nonStandardParameters),
+        (u'transportProtocolID', _TransportProtocolRequestEntry_transportProtocolID),
+        (u'transportProtocolType', _TransportProtocolRequestEntry_transportProtocolType),
+        (u'networkAddress', _TransportProtocolRequestEntry_networkAddress),
+        (u'maximumPayloadFixedFlag', _TransportProtocolRequestEntry_maximumPayloadFixedFlag),
+        (u'maximumPayloadSize', _TransportProtocolRequestEntry_maximumPayloadSize),
+        (u'preferenceWeighting', _TransportProtocolRequestEntry_preferenceWeighting),
+        (u'nodeCount', _TransportProtocolRequestEntry_nodeCount),
+        (u'numberOfConnections', _TransportProtocolRequestEntry_numberOfConnections),
+        (u'configurationData', _TransportProtocolRequestEntry_configurationData),
+        (u'nonStandardParameters', _TransportProtocolRequestEntry_nonStandardParameters),
         ])
     TransportProtocolRequestEntry._ext = []
     
     #-----< MAPArbitrateProtocolsRequestPDU >-----#
-    MAPArbitrateProtocolsRequestPDU = SEQ(name='MAPArbitrateProtocolsRequestPDU', mode=MODE_TYPE)
-    _MAPArbitrateProtocolsRequestPDU_domainReferenceID = INT(name='domainReferenceID', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    MAPArbitrateProtocolsRequestPDU = SEQ(name=u'MAPArbitrateProtocolsRequestPDU', mode=MODE_TYPE)
+    _MAPArbitrateProtocolsRequestPDU_domainReferenceID = INT(name=u'domainReferenceID', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     _MAPArbitrateProtocolsRequestPDU_domainReferenceID._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=65535)], ev=None, er=[])
-    _MAPArbitrateProtocolsRequestPDU_moreToComeFlag = BOOL(name='moreToComeFlag', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _MAPArbitrateProtocolsRequestPDU_transportProtocolMenu = SEQ_OF(name='transportProtocolMenu', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _MAPArbitrateProtocolsRequestPDU_moreToComeFlag = BOOL(name=u'moreToComeFlag', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _MAPArbitrateProtocolsRequestPDU_transportProtocolMenu = SEQ_OF(name=u'transportProtocolMenu', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     __MAPArbitrateProtocolsRequestPDU_transportProtocolMenu__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-PROTOCOL', 'TransportProtocolRequestEntry')))
     _MAPArbitrateProtocolsRequestPDU_transportProtocolMenu._cont = __MAPArbitrateProtocolsRequestPDU_transportProtocolMenu__item_
-    _MAPArbitrateProtocolsRequestPDU_nonStandardParameters = SEQ_OF(name='nonStandardParameters', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _MAPArbitrateProtocolsRequestPDU_nonStandardParameters = SEQ_OF(name=u'nonStandardParameters', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     __MAPArbitrateProtocolsRequestPDU_nonStandardParameters__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-PROTOCOL', 'NonStandardParameter')))
     _MAPArbitrateProtocolsRequestPDU_nonStandardParameters._cont = __MAPArbitrateProtocolsRequestPDU_nonStandardParameters__item_
     MAPArbitrateProtocolsRequestPDU._cont = ASN1Dict([
-        ('domainReferenceID', _MAPArbitrateProtocolsRequestPDU_domainReferenceID),
-        ('moreToComeFlag', _MAPArbitrateProtocolsRequestPDU_moreToComeFlag),
-        ('transportProtocolMenu', _MAPArbitrateProtocolsRequestPDU_transportProtocolMenu),
-        ('nonStandardParameters', _MAPArbitrateProtocolsRequestPDU_nonStandardParameters),
+        (u'domainReferenceID', _MAPArbitrateProtocolsRequestPDU_domainReferenceID),
+        (u'moreToComeFlag', _MAPArbitrateProtocolsRequestPDU_moreToComeFlag),
+        (u'transportProtocolMenu', _MAPArbitrateProtocolsRequestPDU_transportProtocolMenu),
+        (u'nonStandardParameters', _MAPArbitrateProtocolsRequestPDU_nonStandardParameters),
         ])
     MAPArbitrateProtocolsRequestPDU._ext = []
     
     #-----< TransportProtocolConfirmEntry >-----#
-    TransportProtocolConfirmEntry = SEQ(name='TransportProtocolConfirmEntry', mode=MODE_TYPE)
-    _TransportProtocolConfirmEntry_transportProtocolID = CHOICE(name='transportProtocolID', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('MAP-PROTOCOL', 'TransportProtocolID')))
-    _TransportProtocolConfirmEntry_transportProtocolType = CHOICE(name='transportProtocolType', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('MAP-PROTOCOL', 'TransportProtocolType')))
-    _TransportProtocolConfirmEntry_networkAddress = SEQ(name='networkAddress', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAP-PROTOCOL', 'NetworkAddress')))
-    _TransportProtocolConfirmEntry_maximumPayloadSize = INT(name='maximumPayloadSize', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAP-PROTOCOL', 'PayloadSize')))
-    _TransportProtocolConfirmEntry_preferenceWeighting = INT(name='preferenceWeighting', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    TransportProtocolConfirmEntry = SEQ(name=u'TransportProtocolConfirmEntry', mode=MODE_TYPE)
+    _TransportProtocolConfirmEntry_transportProtocolID = CHOICE(name=u'transportProtocolID', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('MAP-PROTOCOL', 'TransportProtocolID')))
+    _TransportProtocolConfirmEntry_transportProtocolType = CHOICE(name=u'transportProtocolType', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('MAP-PROTOCOL', 'TransportProtocolType')))
+    _TransportProtocolConfirmEntry_networkAddress = SEQ(name=u'networkAddress', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAP-PROTOCOL', 'NetworkAddress')))
+    _TransportProtocolConfirmEntry_maximumPayloadSize = INT(name=u'maximumPayloadSize', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAP-PROTOCOL', 'PayloadSize')))
+    _TransportProtocolConfirmEntry_preferenceWeighting = INT(name=u'preferenceWeighting', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     _TransportProtocolConfirmEntry_preferenceWeighting._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=65535)], ev=None, er=[])
-    _TransportProtocolConfirmEntry_nodeCount = INT(name='nodeCount', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _TransportProtocolConfirmEntry_nodeCount = INT(name=u'nodeCount', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     _TransportProtocolConfirmEntry_nodeCount._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=65535)], ev=None, er=[])
-    _TransportProtocolConfirmEntry_numberOfConnections = INT(name='numberOfConnections', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _TransportProtocolConfirmEntry_numberOfConnections = INT(name=u'numberOfConnections', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     _TransportProtocolConfirmEntry_numberOfConnections._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=65535)], ev=None, er=[])
-    _TransportProtocolConfirmEntry_configurationData = OCT_STR(name='configurationData', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _TransportProtocolConfirmEntry_nonStandardParameters = SEQ_OF(name='nonStandardParameters', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _TransportProtocolConfirmEntry_configurationData = OCT_STR(name=u'configurationData', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _TransportProtocolConfirmEntry_nonStandardParameters = SEQ_OF(name=u'nonStandardParameters', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     __TransportProtocolConfirmEntry_nonStandardParameters__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-PROTOCOL', 'NonStandardParameter')))
     _TransportProtocolConfirmEntry_nonStandardParameters._cont = __TransportProtocolConfirmEntry_nonStandardParameters__item_
     TransportProtocolConfirmEntry._cont = ASN1Dict([
-        ('transportProtocolID', _TransportProtocolConfirmEntry_transportProtocolID),
-        ('transportProtocolType', _TransportProtocolConfirmEntry_transportProtocolType),
-        ('networkAddress', _TransportProtocolConfirmEntry_networkAddress),
-        ('maximumPayloadSize', _TransportProtocolConfirmEntry_maximumPayloadSize),
-        ('preferenceWeighting', _TransportProtocolConfirmEntry_preferenceWeighting),
-        ('nodeCount', _TransportProtocolConfirmEntry_nodeCount),
-        ('numberOfConnections', _TransportProtocolConfirmEntry_numberOfConnections),
-        ('configurationData', _TransportProtocolConfirmEntry_configurationData),
-        ('nonStandardParameters', _TransportProtocolConfirmEntry_nonStandardParameters),
+        (u'transportProtocolID', _TransportProtocolConfirmEntry_transportProtocolID),
+        (u'transportProtocolType', _TransportProtocolConfirmEntry_transportProtocolType),
+        (u'networkAddress', _TransportProtocolConfirmEntry_networkAddress),
+        (u'maximumPayloadSize', _TransportProtocolConfirmEntry_maximumPayloadSize),
+        (u'preferenceWeighting', _TransportProtocolConfirmEntry_preferenceWeighting),
+        (u'nodeCount', _TransportProtocolConfirmEntry_nodeCount),
+        (u'numberOfConnections', _TransportProtocolConfirmEntry_numberOfConnections),
+        (u'configurationData', _TransportProtocolConfirmEntry_configurationData),
+        (u'nonStandardParameters', _TransportProtocolConfirmEntry_nonStandardParameters),
         ])
     TransportProtocolConfirmEntry._ext = []
     
     #-----< MAPArbitrateProtocolsConfirmPDU >-----#
-    MAPArbitrateProtocolsConfirmPDU = SEQ(name='MAPArbitrateProtocolsConfirmPDU', mode=MODE_TYPE)
-    _MAPArbitrateProtocolsConfirmPDU_domainReferenceID = INT(name='domainReferenceID', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    MAPArbitrateProtocolsConfirmPDU = SEQ(name=u'MAPArbitrateProtocolsConfirmPDU', mode=MODE_TYPE)
+    _MAPArbitrateProtocolsConfirmPDU_domainReferenceID = INT(name=u'domainReferenceID', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     _MAPArbitrateProtocolsConfirmPDU_domainReferenceID._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=65535)], ev=None, er=[])
-    _MAPArbitrateProtocolsConfirmPDU_moreToComeFlag = BOOL(name='moreToComeFlag', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _MAPArbitrateProtocolsConfirmPDU_transportProtocolMenu = SEQ_OF(name='transportProtocolMenu', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _MAPArbitrateProtocolsConfirmPDU_moreToComeFlag = BOOL(name=u'moreToComeFlag', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _MAPArbitrateProtocolsConfirmPDU_transportProtocolMenu = SEQ_OF(name=u'transportProtocolMenu', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     __MAPArbitrateProtocolsConfirmPDU_transportProtocolMenu__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-PROTOCOL', 'TransportProtocolConfirmEntry')))
     _MAPArbitrateProtocolsConfirmPDU_transportProtocolMenu._cont = __MAPArbitrateProtocolsConfirmPDU_transportProtocolMenu__item_
-    _MAPArbitrateProtocolsConfirmPDU_nonStandardParameters = SEQ_OF(name='nonStandardParameters', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _MAPArbitrateProtocolsConfirmPDU_nonStandardParameters = SEQ_OF(name=u'nonStandardParameters', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     __MAPArbitrateProtocolsConfirmPDU_nonStandardParameters__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-PROTOCOL', 'NonStandardParameter')))
     _MAPArbitrateProtocolsConfirmPDU_nonStandardParameters._cont = __MAPArbitrateProtocolsConfirmPDU_nonStandardParameters__item_
     MAPArbitrateProtocolsConfirmPDU._cont = ASN1Dict([
-        ('domainReferenceID', _MAPArbitrateProtocolsConfirmPDU_domainReferenceID),
-        ('moreToComeFlag', _MAPArbitrateProtocolsConfirmPDU_moreToComeFlag),
-        ('transportProtocolMenu', _MAPArbitrateProtocolsConfirmPDU_transportProtocolMenu),
-        ('nonStandardParameters', _MAPArbitrateProtocolsConfirmPDU_nonStandardParameters),
+        (u'domainReferenceID', _MAPArbitrateProtocolsConfirmPDU_domainReferenceID),
+        (u'moreToComeFlag', _MAPArbitrateProtocolsConfirmPDU_moreToComeFlag),
+        (u'transportProtocolMenu', _MAPArbitrateProtocolsConfirmPDU_transportProtocolMenu),
+        (u'nonStandardParameters', _MAPArbitrateProtocolsConfirmPDU_nonStandardParameters),
         ])
     MAPArbitrateProtocolsConfirmPDU._ext = []
     
     #-----< SenderID >-----#
-    SenderID = INT(name='SenderID', mode=MODE_TYPE)
+    SenderID = INT(name=u'SenderID', mode=MODE_TYPE)
     SenderID._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1001, ub=65535)], ev=None, er=[])
     
     #-----< ChannelID >-----#
-    ChannelID = INT(name='ChannelID', mode=MODE_TYPE)
+    ChannelID = INT(name=u'ChannelID', mode=MODE_TYPE)
     ChannelID._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=65535)], ev=None, er=[])
     
     #-----< ReliabilityLevel >-----#
-    ReliabilityLevel = CHOICE(name='ReliabilityLevel', mode=MODE_TYPE)
-    _ReliabilityLevel_reliable = NULL(name='reliable', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _ReliabilityLevel_unreliable = NULL(name='unreliable', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _ReliabilityLevel_nonStandardReliabilityLevel = SEQ(name='nonStandardReliabilityLevel', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAP-PROTOCOL', 'NonStandardParameter')))
+    ReliabilityLevel = CHOICE(name=u'ReliabilityLevel', mode=MODE_TYPE)
+    _ReliabilityLevel_reliable = NULL(name=u'reliable', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _ReliabilityLevel_unreliable = NULL(name=u'unreliable', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _ReliabilityLevel_nonStandardReliabilityLevel = SEQ(name=u'nonStandardReliabilityLevel', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAP-PROTOCOL', 'NonStandardParameter')))
     ReliabilityLevel._cont = ASN1Dict([
-        ('reliable', _ReliabilityLevel_reliable),
-        ('unreliable', _ReliabilityLevel_unreliable),
-        ('nonStandardReliabilityLevel', _ReliabilityLevel_nonStandardReliabilityLevel),
+        (u'reliable', _ReliabilityLevel_reliable),
+        (u'unreliable', _ReliabilityLevel_unreliable),
+        (u'nonStandardReliabilityLevel', _ReliabilityLevel_nonStandardReliabilityLevel),
         ])
     ReliabilityLevel._ext = []
     
     #-----< DataType >-----#
-    DataType = CHOICE(name='DataType', mode=MODE_TYPE)
-    _DataType_nonuniform = NULL(name='nonuniform', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _DataType_uniform = NULL(name='uniform', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _DataType_proxy = NULL(name='proxy', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _DataType_nonStandardDataType = SEQ(name='nonStandardDataType', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAP-PROTOCOL', 'NonStandardParameter')))
+    DataType = CHOICE(name=u'DataType', mode=MODE_TYPE)
+    _DataType_nonuniform = NULL(name=u'nonuniform', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _DataType_uniform = NULL(name=u'uniform', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _DataType_proxy = NULL(name=u'proxy', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _DataType_nonStandardDataType = SEQ(name=u'nonStandardDataType', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAP-PROTOCOL', 'NonStandardParameter')))
     DataType._cont = ASN1Dict([
-        ('nonuniform', _DataType_nonuniform),
-        ('uniform', _DataType_uniform),
-        ('proxy', _DataType_proxy),
-        ('nonStandardDataType', _DataType_nonStandardDataType),
+        (u'nonuniform', _DataType_nonuniform),
+        (u'uniform', _DataType_uniform),
+        (u'proxy', _DataType_proxy),
+        (u'nonStandardDataType', _DataType_nonStandardDataType),
         ])
     DataType._ext = []
     
     #-----< DataFlowIdentifier >-----#
-    DataFlowIdentifier = SEQ(name='DataFlowIdentifier', mode=MODE_TYPE)
-    _DataFlowIdentifier_senderID = INT(name='senderID', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAP-PROTOCOL', 'SenderID')), opt=True)
-    _DataFlowIdentifier_metachannelID = SEQ(name='metachannelID', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    __DataFlowIdentifier_metachannelID_channelID = INT(name='channelID', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAP-PROTOCOL', 'ChannelID')))
-    __DataFlowIdentifier_metachannelID_reliabilityLevel = CHOICE(name='reliabilityLevel', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('MAP-PROTOCOL', 'ReliabilityLevel')))
-    __DataFlowIdentifier_metachannelID_priority = INT(name='priority', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAP-PROTOCOL', 'Priority')))
+    DataFlowIdentifier = SEQ(name=u'DataFlowIdentifier', mode=MODE_TYPE)
+    _DataFlowIdentifier_senderID = INT(name=u'senderID', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAP-PROTOCOL', 'SenderID')), opt=True)
+    _DataFlowIdentifier_metachannelID = SEQ(name=u'metachannelID', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    __DataFlowIdentifier_metachannelID_channelID = INT(name=u'channelID', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAP-PROTOCOL', 'ChannelID')))
+    __DataFlowIdentifier_metachannelID_reliabilityLevel = CHOICE(name=u'reliabilityLevel', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('MAP-PROTOCOL', 'ReliabilityLevel')))
+    __DataFlowIdentifier_metachannelID_priority = INT(name=u'priority', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAP-PROTOCOL', 'Priority')))
     _DataFlowIdentifier_metachannelID._cont = ASN1Dict([
-        ('channelID', __DataFlowIdentifier_metachannelID_channelID),
-        ('reliabilityLevel', __DataFlowIdentifier_metachannelID_reliabilityLevel),
-        ('priority', __DataFlowIdentifier_metachannelID_priority),
+        (u'channelID', __DataFlowIdentifier_metachannelID_channelID),
+        (u'reliabilityLevel', __DataFlowIdentifier_metachannelID_reliabilityLevel),
+        (u'priority', __DataFlowIdentifier_metachannelID_priority),
         ])
     _DataFlowIdentifier_metachannelID._ext = []
-    _DataFlowIdentifier_dataType = CHOICE(name='dataType', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('MAP-PROTOCOL', 'DataType')), opt=True)
-    _DataFlowIdentifier_nonStandardParameters = SEQ_OF(name='nonStandardParameters', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _DataFlowIdentifier_dataType = CHOICE(name=u'dataType', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('MAP-PROTOCOL', 'DataType')), opt=True)
+    _DataFlowIdentifier_nonStandardParameters = SEQ_OF(name=u'nonStandardParameters', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     __DataFlowIdentifier_nonStandardParameters__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-PROTOCOL', 'NonStandardParameter')))
     _DataFlowIdentifier_nonStandardParameters._cont = __DataFlowIdentifier_nonStandardParameters__item_
     DataFlowIdentifier._cont = ASN1Dict([
-        ('senderID', _DataFlowIdentifier_senderID),
-        ('metachannelID', _DataFlowIdentifier_metachannelID),
-        ('dataType', _DataFlowIdentifier_dataType),
-        ('nonStandardParameters', _DataFlowIdentifier_nonStandardParameters),
+        (u'senderID', _DataFlowIdentifier_senderID),
+        (u'metachannelID', _DataFlowIdentifier_metachannelID),
+        (u'dataType', _DataFlowIdentifier_dataType),
+        (u'nonStandardParameters', _DataFlowIdentifier_nonStandardParameters),
         ])
     DataFlowIdentifier._ext = []
     
     #-----< SequenceNumber >-----#
-    SequenceNumber = INT(name='SequenceNumber', mode=MODE_TYPE)
+    SequenceNumber = INT(name=u'SequenceNumber', mode=MODE_TYPE)
     SequenceNumber._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=65535)], ev=None, er=[])
     
     #-----< DataDescriptor >-----#
-    DataDescriptor = SEQ(name='DataDescriptor', mode=MODE_TYPE)
-    _DataDescriptor_unicastForwardFlag = BOOL(name='unicastForwardFlag', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _DataDescriptor_startingSequenceNumber = INT(name='startingSequenceNumber', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAP-PROTOCOL', 'SequenceNumber')))
-    _DataDescriptor_dataFlowIdentifier = SEQ(name='dataFlowIdentifier', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAP-PROTOCOL', 'DataFlowIdentifier')), opt=True)
-    _DataDescriptor_domainReferenceID = INT(name='domainReferenceID', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    DataDescriptor = SEQ(name=u'DataDescriptor', mode=MODE_TYPE)
+    _DataDescriptor_unicastForwardFlag = BOOL(name=u'unicastForwardFlag', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _DataDescriptor_startingSequenceNumber = INT(name=u'startingSequenceNumber', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAP-PROTOCOL', 'SequenceNumber')))
+    _DataDescriptor_dataFlowIdentifier = SEQ(name=u'dataFlowIdentifier', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAP-PROTOCOL', 'DataFlowIdentifier')), opt=True)
+    _DataDescriptor_domainReferenceID = INT(name=u'domainReferenceID', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     _DataDescriptor_domainReferenceID._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=65535)], ev=None, er=[])
-    _DataDescriptor_nonStandardParameters = SEQ_OF(name='nonStandardParameters', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _DataDescriptor_nonStandardParameters = SEQ_OF(name=u'nonStandardParameters', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     __DataDescriptor_nonStandardParameters__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-PROTOCOL', 'NonStandardParameter')))
     _DataDescriptor_nonStandardParameters._cont = __DataDescriptor_nonStandardParameters__item_
     DataDescriptor._cont = ASN1Dict([
-        ('unicastForwardFlag', _DataDescriptor_unicastForwardFlag),
-        ('startingSequenceNumber', _DataDescriptor_startingSequenceNumber),
-        ('dataFlowIdentifier', _DataDescriptor_dataFlowIdentifier),
-        ('domainReferenceID', _DataDescriptor_domainReferenceID),
-        ('nonStandardParameters', _DataDescriptor_nonStandardParameters),
+        (u'unicastForwardFlag', _DataDescriptor_unicastForwardFlag),
+        (u'startingSequenceNumber', _DataDescriptor_startingSequenceNumber),
+        (u'dataFlowIdentifier', _DataDescriptor_dataFlowIdentifier),
+        (u'domainReferenceID', _DataDescriptor_domainReferenceID),
+        (u'nonStandardParameters', _DataDescriptor_nonStandardParameters),
         ])
     DataDescriptor._ext = []
     
     #-----< DataFrameEntry >-----#
-    DataFrameEntry = SEQ(name='DataFrameEntry', mode=MODE_TYPE)
-    _DataFrameEntry_firstSegmentFlag = BOOL(name='firstSegmentFlag', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _DataFrameEntry_lastSegmentFlag = BOOL(name='lastSegmentFlag', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _DataFrameEntry_userData = OCT_STR(name='userData', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _DataFrameEntry_nonStandardParameters = SEQ_OF(name='nonStandardParameters', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    DataFrameEntry = SEQ(name=u'DataFrameEntry', mode=MODE_TYPE)
+    _DataFrameEntry_firstSegmentFlag = BOOL(name=u'firstSegmentFlag', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _DataFrameEntry_lastSegmentFlag = BOOL(name=u'lastSegmentFlag', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _DataFrameEntry_userData = OCT_STR(name=u'userData', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _DataFrameEntry_nonStandardParameters = SEQ_OF(name=u'nonStandardParameters', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     __DataFrameEntry_nonStandardParameters__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-PROTOCOL', 'NonStandardParameter')))
     _DataFrameEntry_nonStandardParameters._cont = __DataFrameEntry_nonStandardParameters__item_
     DataFrameEntry._cont = ASN1Dict([
-        ('firstSegmentFlag', _DataFrameEntry_firstSegmentFlag),
-        ('lastSegmentFlag', _DataFrameEntry_lastSegmentFlag),
-        ('userData', _DataFrameEntry_userData),
-        ('nonStandardParameters', _DataFrameEntry_nonStandardParameters),
+        (u'firstSegmentFlag', _DataFrameEntry_firstSegmentFlag),
+        (u'lastSegmentFlag', _DataFrameEntry_lastSegmentFlag),
+        (u'userData', _DataFrameEntry_userData),
+        (u'nonStandardParameters', _DataFrameEntry_nonStandardParameters),
         ])
     DataFrameEntry._ext = []
     
     #-----< MAPDataPDU >-----#
-    MAPDataPDU = SEQ(name='MAPDataPDU', mode=MODE_TYPE)
-    _MAPDataPDU_dataDescriptor = SEQ(name='dataDescriptor', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAP-PROTOCOL', 'DataDescriptor')), opt=True)
-    _MAPDataPDU_dataFrameArray = SEQ_OF(name='dataFrameArray', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    MAPDataPDU = SEQ(name=u'MAPDataPDU', mode=MODE_TYPE)
+    _MAPDataPDU_dataDescriptor = SEQ(name=u'dataDescriptor', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAP-PROTOCOL', 'DataDescriptor')), opt=True)
+    _MAPDataPDU_dataFrameArray = SEQ_OF(name=u'dataFrameArray', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     __MAPDataPDU_dataFrameArray__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-PROTOCOL', 'DataFrameEntry')))
     _MAPDataPDU_dataFrameArray._cont = __MAPDataPDU_dataFrameArray__item_
-    _MAPDataPDU_nonStandardParameters = SEQ_OF(name='nonStandardParameters', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _MAPDataPDU_nonStandardParameters = SEQ_OF(name=u'nonStandardParameters', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     __MAPDataPDU_nonStandardParameters__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-PROTOCOL', 'NonStandardParameter')))
     _MAPDataPDU_nonStandardParameters._cont = __MAPDataPDU_nonStandardParameters__item_
     MAPDataPDU._cont = ASN1Dict([
-        ('dataDescriptor', _MAPDataPDU_dataDescriptor),
-        ('dataFrameArray', _MAPDataPDU_dataFrameArray),
-        ('nonStandardParameters', _MAPDataPDU_nonStandardParameters),
+        (u'dataDescriptor', _MAPDataPDU_dataDescriptor),
+        (u'dataFrameArray', _MAPDataPDU_dataFrameArray),
+        (u'nonStandardParameters', _MAPDataPDU_nonStandardParameters),
         ])
     MAPDataPDU._ext = []
     
     #-----< Metachannel >-----#
-    Metachannel = SEQ(name='Metachannel', mode=MODE_TYPE)
-    _Metachannel_channelID = INT(name='channelID', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAP-PROTOCOL', 'ChannelID')))
-    _Metachannel_reliabilityLevel = CHOICE(name='reliabilityLevel', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('MAP-PROTOCOL', 'ReliabilityLevel')))
-    _Metachannel_priorityRange = SEQ(name='priorityRange', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAP-PROTOCOL', 'PriorityRange')))
-    _Metachannel_nonStandardParameters = SEQ_OF(name='nonStandardParameters', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    Metachannel = SEQ(name=u'Metachannel', mode=MODE_TYPE)
+    _Metachannel_channelID = INT(name=u'channelID', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAP-PROTOCOL', 'ChannelID')))
+    _Metachannel_reliabilityLevel = CHOICE(name=u'reliabilityLevel', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('MAP-PROTOCOL', 'ReliabilityLevel')))
+    _Metachannel_priorityRange = SEQ(name=u'priorityRange', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAP-PROTOCOL', 'PriorityRange')))
+    _Metachannel_nonStandardParameters = SEQ_OF(name=u'nonStandardParameters', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     __Metachannel_nonStandardParameters__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-PROTOCOL', 'NonStandardParameter')))
     _Metachannel_nonStandardParameters._cont = __Metachannel_nonStandardParameters__item_
     Metachannel._cont = ASN1Dict([
-        ('channelID', _Metachannel_channelID),
-        ('reliabilityLevel', _Metachannel_reliabilityLevel),
-        ('priorityRange', _Metachannel_priorityRange),
-        ('nonStandardParameters', _Metachannel_nonStandardParameters),
+        (u'channelID', _Metachannel_channelID),
+        (u'reliabilityLevel', _Metachannel_reliabilityLevel),
+        (u'priorityRange', _Metachannel_priorityRange),
+        (u'nonStandardParameters', _Metachannel_nonStandardParameters),
         ])
     Metachannel._ext = []
     
     #-----< MAPAddGroupRequestPDU >-----#
-    MAPAddGroupRequestPDU = SEQ(name='MAPAddGroupRequestPDU', mode=MODE_TYPE)
-    _MAPAddGroupRequestPDU_metachannel = SEQ(name='metachannel', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAP-PROTOCOL', 'Metachannel')))
-    _MAPAddGroupRequestPDU_transportProtocolID = CHOICE(name='transportProtocolID', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('MAP-PROTOCOL', 'TransportProtocolID')))
-    _MAPAddGroupRequestPDU_multicastGroupAddress = SEQ(name='multicastGroupAddress', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAP-PROTOCOL', 'NetworkAddress')))
-    _MAPAddGroupRequestPDU_nonStandardParameters = SEQ_OF(name='nonStandardParameters', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    MAPAddGroupRequestPDU = SEQ(name=u'MAPAddGroupRequestPDU', mode=MODE_TYPE)
+    _MAPAddGroupRequestPDU_metachannel = SEQ(name=u'metachannel', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAP-PROTOCOL', 'Metachannel')))
+    _MAPAddGroupRequestPDU_transportProtocolID = CHOICE(name=u'transportProtocolID', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('MAP-PROTOCOL', 'TransportProtocolID')))
+    _MAPAddGroupRequestPDU_multicastGroupAddress = SEQ(name=u'multicastGroupAddress', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAP-PROTOCOL', 'NetworkAddress')))
+    _MAPAddGroupRequestPDU_nonStandardParameters = SEQ_OF(name=u'nonStandardParameters', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     __MAPAddGroupRequestPDU_nonStandardParameters__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-PROTOCOL', 'NonStandardParameter')))
     _MAPAddGroupRequestPDU_nonStandardParameters._cont = __MAPAddGroupRequestPDU_nonStandardParameters__item_
     MAPAddGroupRequestPDU._cont = ASN1Dict([
-        ('metachannel', _MAPAddGroupRequestPDU_metachannel),
-        ('transportProtocolID', _MAPAddGroupRequestPDU_transportProtocolID),
-        ('multicastGroupAddress', _MAPAddGroupRequestPDU_multicastGroupAddress),
-        ('nonStandardParameters', _MAPAddGroupRequestPDU_nonStandardParameters),
+        (u'metachannel', _MAPAddGroupRequestPDU_metachannel),
+        (u'transportProtocolID', _MAPAddGroupRequestPDU_transportProtocolID),
+        (u'multicastGroupAddress', _MAPAddGroupRequestPDU_multicastGroupAddress),
+        (u'nonStandardParameters', _MAPAddGroupRequestPDU_nonStandardParameters),
         ])
     MAPAddGroupRequestPDU._ext = []
     
     #-----< MAPRemoveGroupRequestPDU >-----#
-    MAPRemoveGroupRequestPDU = SEQ(name='MAPRemoveGroupRequestPDU', mode=MODE_TYPE)
-    _MAPRemoveGroupRequestPDU_metachannel = SEQ(name='metachannel', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAP-PROTOCOL', 'Metachannel')))
-    _MAPRemoveGroupRequestPDU_nonStandardParameters = SEQ_OF(name='nonStandardParameters', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    MAPRemoveGroupRequestPDU = SEQ(name=u'MAPRemoveGroupRequestPDU', mode=MODE_TYPE)
+    _MAPRemoveGroupRequestPDU_metachannel = SEQ(name=u'metachannel', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAP-PROTOCOL', 'Metachannel')))
+    _MAPRemoveGroupRequestPDU_nonStandardParameters = SEQ_OF(name=u'nonStandardParameters', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     __MAPRemoveGroupRequestPDU_nonStandardParameters__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-PROTOCOL', 'NonStandardParameter')))
     _MAPRemoveGroupRequestPDU_nonStandardParameters._cont = __MAPRemoveGroupRequestPDU_nonStandardParameters__item_
     MAPRemoveGroupRequestPDU._cont = ASN1Dict([
-        ('metachannel', _MAPRemoveGroupRequestPDU_metachannel),
-        ('nonStandardParameters', _MAPRemoveGroupRequestPDU_nonStandardParameters),
+        (u'metachannel', _MAPRemoveGroupRequestPDU_metachannel),
+        (u'nonStandardParameters', _MAPRemoveGroupRequestPDU_nonStandardParameters),
         ])
     MAPRemoveGroupRequestPDU._ext = []
     
     #-----< MAPDisableUnicastRequestPDU >-----#
-    MAPDisableUnicastRequestPDU = SEQ(name='MAPDisableUnicastRequestPDU', mode=MODE_TYPE)
-    _MAPDisableUnicastRequestPDU_dataFlowIdentifier = SEQ(name='dataFlowIdentifier', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAP-PROTOCOL', 'DataFlowIdentifier')))
-    _MAPDisableUnicastRequestPDU_nonStandardParameters = SEQ_OF(name='nonStandardParameters', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    MAPDisableUnicastRequestPDU = SEQ(name=u'MAPDisableUnicastRequestPDU', mode=MODE_TYPE)
+    _MAPDisableUnicastRequestPDU_dataFlowIdentifier = SEQ(name=u'dataFlowIdentifier', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAP-PROTOCOL', 'DataFlowIdentifier')))
+    _MAPDisableUnicastRequestPDU_nonStandardParameters = SEQ_OF(name=u'nonStandardParameters', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     __MAPDisableUnicastRequestPDU_nonStandardParameters__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-PROTOCOL', 'NonStandardParameter')))
     _MAPDisableUnicastRequestPDU_nonStandardParameters._cont = __MAPDisableUnicastRequestPDU_nonStandardParameters__item_
     MAPDisableUnicastRequestPDU._cont = ASN1Dict([
-        ('dataFlowIdentifier', _MAPDisableUnicastRequestPDU_dataFlowIdentifier),
-        ('nonStandardParameters', _MAPDisableUnicastRequestPDU_nonStandardParameters),
+        (u'dataFlowIdentifier', _MAPDisableUnicastRequestPDU_dataFlowIdentifier),
+        (u'nonStandardParameters', _MAPDisableUnicastRequestPDU_nonStandardParameters),
         ])
     MAPDisableUnicastRequestPDU._ext = []
     
     #-----< MAPEnableUnicastRequestPDU >-----#
-    MAPEnableUnicastRequestPDU = SEQ(name='MAPEnableUnicastRequestPDU', mode=MODE_TYPE)
-    _MAPEnableUnicastRequestPDU_dataFlowIdentifier = SEQ(name='dataFlowIdentifier', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAP-PROTOCOL', 'DataFlowIdentifier')))
-    _MAPEnableUnicastRequestPDU_nonStandardParameters = SEQ_OF(name='nonStandardParameters', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    MAPEnableUnicastRequestPDU = SEQ(name=u'MAPEnableUnicastRequestPDU', mode=MODE_TYPE)
+    _MAPEnableUnicastRequestPDU_dataFlowIdentifier = SEQ(name=u'dataFlowIdentifier', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAP-PROTOCOL', 'DataFlowIdentifier')))
+    _MAPEnableUnicastRequestPDU_nonStandardParameters = SEQ_OF(name=u'nonStandardParameters', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     __MAPEnableUnicastRequestPDU_nonStandardParameters__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-PROTOCOL', 'NonStandardParameter')))
     _MAPEnableUnicastRequestPDU_nonStandardParameters._cont = __MAPEnableUnicastRequestPDU_nonStandardParameters__item_
     MAPEnableUnicastRequestPDU._cont = ASN1Dict([
-        ('dataFlowIdentifier', _MAPEnableUnicastRequestPDU_dataFlowIdentifier),
-        ('nonStandardParameters', _MAPEnableUnicastRequestPDU_nonStandardParameters),
+        (u'dataFlowIdentifier', _MAPEnableUnicastRequestPDU_dataFlowIdentifier),
+        (u'nonStandardParameters', _MAPEnableUnicastRequestPDU_nonStandardParameters),
         ])
     MAPEnableUnicastRequestPDU._ext = []
     
     #-----< MAPEnableUnicastConfirmPDU >-----#
-    MAPEnableUnicastConfirmPDU = SEQ(name='MAPEnableUnicastConfirmPDU', mode=MODE_TYPE)
-    _MAPEnableUnicastConfirmPDU_dataFlowIdentifier = SEQ(name='dataFlowIdentifier', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAP-PROTOCOL', 'DataFlowIdentifier')))
-    _MAPEnableUnicastConfirmPDU_sequenceNumber = INT(name='sequenceNumber', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAP-PROTOCOL', 'SequenceNumber')))
-    _MAPEnableUnicastConfirmPDU_nonStandardParameters = SEQ_OF(name='nonStandardParameters', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    MAPEnableUnicastConfirmPDU = SEQ(name=u'MAPEnableUnicastConfirmPDU', mode=MODE_TYPE)
+    _MAPEnableUnicastConfirmPDU_dataFlowIdentifier = SEQ(name=u'dataFlowIdentifier', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAP-PROTOCOL', 'DataFlowIdentifier')))
+    _MAPEnableUnicastConfirmPDU_sequenceNumber = INT(name=u'sequenceNumber', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAP-PROTOCOL', 'SequenceNumber')))
+    _MAPEnableUnicastConfirmPDU_nonStandardParameters = SEQ_OF(name=u'nonStandardParameters', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     __MAPEnableUnicastConfirmPDU_nonStandardParameters__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-PROTOCOL', 'NonStandardParameter')))
     _MAPEnableUnicastConfirmPDU_nonStandardParameters._cont = __MAPEnableUnicastConfirmPDU_nonStandardParameters__item_
     MAPEnableUnicastConfirmPDU._cont = ASN1Dict([
-        ('dataFlowIdentifier', _MAPEnableUnicastConfirmPDU_dataFlowIdentifier),
-        ('sequenceNumber', _MAPEnableUnicastConfirmPDU_sequenceNumber),
-        ('nonStandardParameters', _MAPEnableUnicastConfirmPDU_nonStandardParameters),
+        (u'dataFlowIdentifier', _MAPEnableUnicastConfirmPDU_dataFlowIdentifier),
+        (u'sequenceNumber', _MAPEnableUnicastConfirmPDU_sequenceNumber),
+        (u'nonStandardParameters', _MAPEnableUnicastConfirmPDU_nonStandardParameters),
         ])
     MAPEnableUnicastConfirmPDU._ext = []
     
     #-----< MAPDisableMulticastRequestPDU >-----#
-    MAPDisableMulticastRequestPDU = SEQ(name='MAPDisableMulticastRequestPDU', mode=MODE_TYPE)
-    _MAPDisableMulticastRequestPDU_metachannel = SEQ(name='metachannel', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAP-PROTOCOL', 'Metachannel')))
-    _MAPDisableMulticastRequestPDU_nonStandardParameters = SEQ_OF(name='nonStandardParameters', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    MAPDisableMulticastRequestPDU = SEQ(name=u'MAPDisableMulticastRequestPDU', mode=MODE_TYPE)
+    _MAPDisableMulticastRequestPDU_metachannel = SEQ(name=u'metachannel', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAP-PROTOCOL', 'Metachannel')))
+    _MAPDisableMulticastRequestPDU_nonStandardParameters = SEQ_OF(name=u'nonStandardParameters', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     __MAPDisableMulticastRequestPDU_nonStandardParameters__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-PROTOCOL', 'NonStandardParameter')))
     _MAPDisableMulticastRequestPDU_nonStandardParameters._cont = __MAPDisableMulticastRequestPDU_nonStandardParameters__item_
     MAPDisableMulticastRequestPDU._cont = ASN1Dict([
-        ('metachannel', _MAPDisableMulticastRequestPDU_metachannel),
-        ('nonStandardParameters', _MAPDisableMulticastRequestPDU_nonStandardParameters),
+        (u'metachannel', _MAPDisableMulticastRequestPDU_metachannel),
+        (u'nonStandardParameters', _MAPDisableMulticastRequestPDU_nonStandardParameters),
         ])
     MAPDisableMulticastRequestPDU._ext = []
     
     #-----< MAPDisableMulticastConfirmPDU >-----#
-    MAPDisableMulticastConfirmPDU = SEQ(name='MAPDisableMulticastConfirmPDU', mode=MODE_TYPE)
-    _MAPDisableMulticastConfirmPDU_metachannel = SEQ(name='metachannel', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAP-PROTOCOL', 'Metachannel')))
-    _MAPDisableMulticastConfirmPDU_nonStandardParameters = SEQ_OF(name='nonStandardParameters', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    MAPDisableMulticastConfirmPDU = SEQ(name=u'MAPDisableMulticastConfirmPDU', mode=MODE_TYPE)
+    _MAPDisableMulticastConfirmPDU_metachannel = SEQ(name=u'metachannel', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAP-PROTOCOL', 'Metachannel')))
+    _MAPDisableMulticastConfirmPDU_nonStandardParameters = SEQ_OF(name=u'nonStandardParameters', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     __MAPDisableMulticastConfirmPDU_nonStandardParameters__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-PROTOCOL', 'NonStandardParameter')))
     _MAPDisableMulticastConfirmPDU_nonStandardParameters._cont = __MAPDisableMulticastConfirmPDU_nonStandardParameters__item_
     MAPDisableMulticastConfirmPDU._cont = ASN1Dict([
-        ('metachannel', _MAPDisableMulticastConfirmPDU_metachannel),
-        ('nonStandardParameters', _MAPDisableMulticastConfirmPDU_nonStandardParameters),
+        (u'metachannel', _MAPDisableMulticastConfirmPDU_metachannel),
+        (u'nonStandardParameters', _MAPDisableMulticastConfirmPDU_nonStandardParameters),
         ])
     MAPDisableMulticastConfirmPDU._ext = []
     
     #-----< MAPEnableMulticastRequestPDU >-----#
-    MAPEnableMulticastRequestPDU = SEQ(name='MAPEnableMulticastRequestPDU', mode=MODE_TYPE)
-    _MAPEnableMulticastRequestPDU_metachannel = SEQ(name='metachannel', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAP-PROTOCOL', 'Metachannel')))
-    _MAPEnableMulticastRequestPDU_nonStandardParameters = SEQ_OF(name='nonStandardParameters', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    MAPEnableMulticastRequestPDU = SEQ(name=u'MAPEnableMulticastRequestPDU', mode=MODE_TYPE)
+    _MAPEnableMulticastRequestPDU_metachannel = SEQ(name=u'metachannel', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAP-PROTOCOL', 'Metachannel')))
+    _MAPEnableMulticastRequestPDU_nonStandardParameters = SEQ_OF(name=u'nonStandardParameters', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     __MAPEnableMulticastRequestPDU_nonStandardParameters__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-PROTOCOL', 'NonStandardParameter')))
     _MAPEnableMulticastRequestPDU_nonStandardParameters._cont = __MAPEnableMulticastRequestPDU_nonStandardParameters__item_
     MAPEnableMulticastRequestPDU._cont = ASN1Dict([
-        ('metachannel', _MAPEnableMulticastRequestPDU_metachannel),
-        ('nonStandardParameters', _MAPEnableMulticastRequestPDU_nonStandardParameters),
+        (u'metachannel', _MAPEnableMulticastRequestPDU_metachannel),
+        (u'nonStandardParameters', _MAPEnableMulticastRequestPDU_nonStandardParameters),
         ])
     MAPEnableMulticastRequestPDU._ext = []
     
     #-----< MAPSequenceNumberPDU >-----#
-    MAPSequenceNumberPDU = SEQ(name='MAPSequenceNumberPDU', mode=MODE_TYPE)
-    _MAPSequenceNumberPDU_dataFlowIdentifier = SEQ(name='dataFlowIdentifier', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAP-PROTOCOL', 'DataFlowIdentifier')))
-    _MAPSequenceNumberPDU_sequenceNumber = INT(name='sequenceNumber', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAP-PROTOCOL', 'SequenceNumber')))
-    _MAPSequenceNumberPDU_nonStandardParameters = SEQ_OF(name='nonStandardParameters', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    MAPSequenceNumberPDU = SEQ(name=u'MAPSequenceNumberPDU', mode=MODE_TYPE)
+    _MAPSequenceNumberPDU_dataFlowIdentifier = SEQ(name=u'dataFlowIdentifier', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAP-PROTOCOL', 'DataFlowIdentifier')))
+    _MAPSequenceNumberPDU_sequenceNumber = INT(name=u'sequenceNumber', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAP-PROTOCOL', 'SequenceNumber')))
+    _MAPSequenceNumberPDU_nonStandardParameters = SEQ_OF(name=u'nonStandardParameters', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     __MAPSequenceNumberPDU_nonStandardParameters__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('MAP-PROTOCOL', 'NonStandardParameter')))
     _MAPSequenceNumberPDU_nonStandardParameters._cont = __MAPSequenceNumberPDU_nonStandardParameters__item_
     MAPSequenceNumberPDU._cont = ASN1Dict([
-        ('dataFlowIdentifier', _MAPSequenceNumberPDU_dataFlowIdentifier),
-        ('sequenceNumber', _MAPSequenceNumberPDU_sequenceNumber),
-        ('nonStandardParameters', _MAPSequenceNumberPDU_nonStandardParameters),
+        (u'dataFlowIdentifier', _MAPSequenceNumberPDU_dataFlowIdentifier),
+        (u'sequenceNumber', _MAPSequenceNumberPDU_sequenceNumber),
+        (u'nonStandardParameters', _MAPSequenceNumberPDU_nonStandardParameters),
         ])
     MAPSequenceNumberPDU._ext = []
     
     #-----< MAPPDU >-----#
-    MAPPDU = CHOICE(name='MAPPDU', mode=MODE_TYPE)
-    _MAPPDU_mapConnectRequest = SEQ(name='mapConnectRequest', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAP-PROTOCOL', 'MAPConnectRequestPDU')))
-    _MAPPDU_mapConnectConfirm = SEQ(name='mapConnectConfirm', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAP-PROTOCOL', 'MAPConnectConfirmPDU')))
-    _MAPPDU_mapDisconnectRequest = SEQ(name='mapDisconnectRequest', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAP-PROTOCOL', 'MAPDisconnectRequestPDU')))
-    _MAPPDU_mapDisconnectConfirm = SEQ(name='mapDisconnectConfirm', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAP-PROTOCOL', 'MAPDisconnectConfirmPDU')))
-    _MAPPDU_mapArbitrateProtocolsRequest = SEQ(name='mapArbitrateProtocolsRequest', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAP-PROTOCOL', 'MAPArbitrateProtocolsRequestPDU')))
-    _MAPPDU_mapArbitrateProtocolsConfirm = SEQ(name='mapArbitrateProtocolsConfirm', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAP-PROTOCOL', 'MAPArbitrateProtocolsConfirmPDU')))
-    _MAPPDU_mapData = SEQ(name='mapData', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAP-PROTOCOL', 'MAPDataPDU')))
-    _MAPPDU_mapAddGroupRequest = SEQ(name='mapAddGroupRequest', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAP-PROTOCOL', 'MAPAddGroupRequestPDU')))
-    _MAPPDU_mapRemoveGroupRequest = SEQ(name='mapRemoveGroupRequest', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAP-PROTOCOL', 'MAPRemoveGroupRequestPDU')))
-    _MAPPDU_mapDisableUnicastRequest = SEQ(name='mapDisableUnicastRequest', mode=MODE_TYPE, tag=(9, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAP-PROTOCOL', 'MAPDisableUnicastRequestPDU')))
-    _MAPPDU_mapEnableUnicastRequest = SEQ(name='mapEnableUnicastRequest', mode=MODE_TYPE, tag=(10, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAP-PROTOCOL', 'MAPEnableUnicastRequestPDU')))
-    _MAPPDU_mapEnableUnicastConfirm = SEQ(name='mapEnableUnicastConfirm', mode=MODE_TYPE, tag=(11, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAP-PROTOCOL', 'MAPEnableUnicastConfirmPDU')))
-    _MAPPDU_mapDisableMulticastRequest = SEQ(name='mapDisableMulticastRequest', mode=MODE_TYPE, tag=(12, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAP-PROTOCOL', 'MAPDisableMulticastRequestPDU')))
-    _MAPPDU_mapDisableMulticastConfirm = SEQ(name='mapDisableMulticastConfirm', mode=MODE_TYPE, tag=(13, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAP-PROTOCOL', 'MAPDisableMulticastConfirmPDU')))
-    _MAPPDU_mapEnableMulticastRequest = SEQ(name='mapEnableMulticastRequest', mode=MODE_TYPE, tag=(14, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAP-PROTOCOL', 'MAPEnableMulticastRequestPDU')))
-    _MAPPDU_mapSequenceNumber = SEQ(name='mapSequenceNumber', mode=MODE_TYPE, tag=(15, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAP-PROTOCOL', 'MAPSequenceNumberPDU')))
-    _MAPPDU_nonStandardPDU = SEQ(name='nonStandardPDU', mode=MODE_TYPE, tag=(16, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAP-PROTOCOL', 'NonStandardPDU')))
+    MAPPDU = CHOICE(name=u'MAPPDU', mode=MODE_TYPE)
+    _MAPPDU_mapConnectRequest = SEQ(name=u'mapConnectRequest', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAP-PROTOCOL', 'MAPConnectRequestPDU')))
+    _MAPPDU_mapConnectConfirm = SEQ(name=u'mapConnectConfirm', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAP-PROTOCOL', 'MAPConnectConfirmPDU')))
+    _MAPPDU_mapDisconnectRequest = SEQ(name=u'mapDisconnectRequest', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAP-PROTOCOL', 'MAPDisconnectRequestPDU')))
+    _MAPPDU_mapDisconnectConfirm = SEQ(name=u'mapDisconnectConfirm', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAP-PROTOCOL', 'MAPDisconnectConfirmPDU')))
+    _MAPPDU_mapArbitrateProtocolsRequest = SEQ(name=u'mapArbitrateProtocolsRequest', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAP-PROTOCOL', 'MAPArbitrateProtocolsRequestPDU')))
+    _MAPPDU_mapArbitrateProtocolsConfirm = SEQ(name=u'mapArbitrateProtocolsConfirm', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAP-PROTOCOL', 'MAPArbitrateProtocolsConfirmPDU')))
+    _MAPPDU_mapData = SEQ(name=u'mapData', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAP-PROTOCOL', 'MAPDataPDU')))
+    _MAPPDU_mapAddGroupRequest = SEQ(name=u'mapAddGroupRequest', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAP-PROTOCOL', 'MAPAddGroupRequestPDU')))
+    _MAPPDU_mapRemoveGroupRequest = SEQ(name=u'mapRemoveGroupRequest', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAP-PROTOCOL', 'MAPRemoveGroupRequestPDU')))
+    _MAPPDU_mapDisableUnicastRequest = SEQ(name=u'mapDisableUnicastRequest', mode=MODE_TYPE, tag=(9, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAP-PROTOCOL', 'MAPDisableUnicastRequestPDU')))
+    _MAPPDU_mapEnableUnicastRequest = SEQ(name=u'mapEnableUnicastRequest', mode=MODE_TYPE, tag=(10, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAP-PROTOCOL', 'MAPEnableUnicastRequestPDU')))
+    _MAPPDU_mapEnableUnicastConfirm = SEQ(name=u'mapEnableUnicastConfirm', mode=MODE_TYPE, tag=(11, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAP-PROTOCOL', 'MAPEnableUnicastConfirmPDU')))
+    _MAPPDU_mapDisableMulticastRequest = SEQ(name=u'mapDisableMulticastRequest', mode=MODE_TYPE, tag=(12, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAP-PROTOCOL', 'MAPDisableMulticastRequestPDU')))
+    _MAPPDU_mapDisableMulticastConfirm = SEQ(name=u'mapDisableMulticastConfirm', mode=MODE_TYPE, tag=(13, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAP-PROTOCOL', 'MAPDisableMulticastConfirmPDU')))
+    _MAPPDU_mapEnableMulticastRequest = SEQ(name=u'mapEnableMulticastRequest', mode=MODE_TYPE, tag=(14, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAP-PROTOCOL', 'MAPEnableMulticastRequestPDU')))
+    _MAPPDU_mapSequenceNumber = SEQ(name=u'mapSequenceNumber', mode=MODE_TYPE, tag=(15, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAP-PROTOCOL', 'MAPSequenceNumberPDU')))
+    _MAPPDU_nonStandardPDU = SEQ(name=u'nonStandardPDU', mode=MODE_TYPE, tag=(16, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MAP-PROTOCOL', 'NonStandardPDU')))
     MAPPDU._cont = ASN1Dict([
-        ('mapConnectRequest', _MAPPDU_mapConnectRequest),
-        ('mapConnectConfirm', _MAPPDU_mapConnectConfirm),
-        ('mapDisconnectRequest', _MAPPDU_mapDisconnectRequest),
-        ('mapDisconnectConfirm', _MAPPDU_mapDisconnectConfirm),
-        ('mapArbitrateProtocolsRequest', _MAPPDU_mapArbitrateProtocolsRequest),
-        ('mapArbitrateProtocolsConfirm', _MAPPDU_mapArbitrateProtocolsConfirm),
-        ('mapData', _MAPPDU_mapData),
-        ('mapAddGroupRequest', _MAPPDU_mapAddGroupRequest),
-        ('mapRemoveGroupRequest', _MAPPDU_mapRemoveGroupRequest),
-        ('mapDisableUnicastRequest', _MAPPDU_mapDisableUnicastRequest),
-        ('mapEnableUnicastRequest', _MAPPDU_mapEnableUnicastRequest),
-        ('mapEnableUnicastConfirm', _MAPPDU_mapEnableUnicastConfirm),
-        ('mapDisableMulticastRequest', _MAPPDU_mapDisableMulticastRequest),
-        ('mapDisableMulticastConfirm', _MAPPDU_mapDisableMulticastConfirm),
-        ('mapEnableMulticastRequest', _MAPPDU_mapEnableMulticastRequest),
-        ('mapSequenceNumber', _MAPPDU_mapSequenceNumber),
-        ('nonStandardPDU', _MAPPDU_nonStandardPDU),
+        (u'mapConnectRequest', _MAPPDU_mapConnectRequest),
+        (u'mapConnectConfirm', _MAPPDU_mapConnectConfirm),
+        (u'mapDisconnectRequest', _MAPPDU_mapDisconnectRequest),
+        (u'mapDisconnectConfirm', _MAPPDU_mapDisconnectConfirm),
+        (u'mapArbitrateProtocolsRequest', _MAPPDU_mapArbitrateProtocolsRequest),
+        (u'mapArbitrateProtocolsConfirm', _MAPPDU_mapArbitrateProtocolsConfirm),
+        (u'mapData', _MAPPDU_mapData),
+        (u'mapAddGroupRequest', _MAPPDU_mapAddGroupRequest),
+        (u'mapRemoveGroupRequest', _MAPPDU_mapRemoveGroupRequest),
+        (u'mapDisableUnicastRequest', _MAPPDU_mapDisableUnicastRequest),
+        (u'mapEnableUnicastRequest', _MAPPDU_mapEnableUnicastRequest),
+        (u'mapEnableUnicastConfirm', _MAPPDU_mapEnableUnicastConfirm),
+        (u'mapDisableMulticastRequest', _MAPPDU_mapDisableMulticastRequest),
+        (u'mapDisableMulticastConfirm', _MAPPDU_mapDisableMulticastConfirm),
+        (u'mapEnableMulticastRequest', _MAPPDU_mapEnableMulticastRequest),
+        (u'mapSequenceNumber', _MAPPDU_mapSequenceNumber),
+        (u'nonStandardPDU', _MAPPDU_nonStandardPDU),
         ])
     MAPPDU._ext = []
     

@@ -16,62 +16,62 @@ from pycrate_asn1rt.init             import init_modules
 
 class AddGrpC:
 
-    _name_  = 'AddGrpC'
+    _name_  = u'AddGrpC'
     _oid_   = [1, 0, 19091, 2, 0, 2]
     
     _obj_ = [
-        'ConnectionManeuverAssist-addGrpC',
-        'ConnectionTrajectory-addGrpC',
-        'IntersectionState-addGrpC',
-        'LaneAttributes-addGrpC',
-        'MapData-addGrpC',
-        'MovementEvent-addGrpC',
-        'NodeAttributeSet-addGrpC',
-        'Position3D-addGrpC',
-        'RestrictionUserType-addGrpC',
-        'RequestorDescription-addGrpC',
-        'SignalStatusPackage-addGrpC',
-        'ItsStationPosition',
-        'ItsStationPositionList',
-        'Node',
-        'NodeLink',
-        'PrioritizationResponse',
-        'PrioritizationResponseList',
-        'SignalHeadLocation',
-        'SignalHeadLocationList',
-        'BatteryStatus',
-        'EmissionType',
-        'ExceptionalCondition',
-        'PtvRequestType',
-        'RejectedReason',
-        'TimeReference',
+        u'ConnectionManeuverAssist-addGrpC',
+        u'ConnectionTrajectory-addGrpC',
+        u'IntersectionState-addGrpC',
+        u'LaneAttributes-addGrpC',
+        u'MapData-addGrpC',
+        u'MovementEvent-addGrpC',
+        u'NodeAttributeSet-addGrpC',
+        u'Position3D-addGrpC',
+        u'RestrictionUserType-addGrpC',
+        u'RequestorDescription-addGrpC',
+        u'SignalStatusPackage-addGrpC',
+        u'ItsStationPosition',
+        u'ItsStationPositionList',
+        u'Node',
+        u'NodeLink',
+        u'PrioritizationResponse',
+        u'PrioritizationResponseList',
+        u'SignalHeadLocation',
+        u'SignalHeadLocationList',
+        u'BatteryStatus',
+        u'EmissionType',
+        u'ExceptionalCondition',
+        u'PtvRequestType',
+        u'RejectedReason',
+        u'TimeReference',
         ]
     _type_ = [
-        'ConnectionManeuverAssist-addGrpC',
-        'ConnectionTrajectory-addGrpC',
-        'IntersectionState-addGrpC',
-        'LaneAttributes-addGrpC',
-        'MapData-addGrpC',
-        'MovementEvent-addGrpC',
-        'NodeAttributeSet-addGrpC',
-        'Position3D-addGrpC',
-        'RestrictionUserType-addGrpC',
-        'RequestorDescription-addGrpC',
-        'SignalStatusPackage-addGrpC',
-        'ItsStationPosition',
-        'ItsStationPositionList',
-        'Node',
-        'NodeLink',
-        'PrioritizationResponse',
-        'PrioritizationResponseList',
-        'SignalHeadLocation',
-        'SignalHeadLocationList',
-        'BatteryStatus',
-        'EmissionType',
-        'ExceptionalCondition',
-        'PtvRequestType',
-        'RejectedReason',
-        'TimeReference',
+        u'ConnectionManeuverAssist-addGrpC',
+        u'ConnectionTrajectory-addGrpC',
+        u'IntersectionState-addGrpC',
+        u'LaneAttributes-addGrpC',
+        u'MapData-addGrpC',
+        u'MovementEvent-addGrpC',
+        u'NodeAttributeSet-addGrpC',
+        u'Position3D-addGrpC',
+        u'RestrictionUserType-addGrpC',
+        u'RequestorDescription-addGrpC',
+        u'SignalStatusPackage-addGrpC',
+        u'ItsStationPosition',
+        u'ItsStationPositionList',
+        u'Node',
+        u'NodeLink',
+        u'PrioritizationResponse',
+        u'PrioritizationResponseList',
+        u'SignalHeadLocation',
+        u'SignalHeadLocationList',
+        u'BatteryStatus',
+        u'EmissionType',
+        u'ExceptionalCondition',
+        u'PtvRequestType',
+        u'RejectedReason',
+        u'TimeReference',
         ]
     _set_ = [
         ]
@@ -83,211 +83,211 @@ class AddGrpC:
         ]
     
     #-----< ConnectionManeuverAssist-addGrpC >-----#
-    ConnectionManeuverAssist_addGrpC = SEQ(name='ConnectionManeuverAssist-addGrpC', mode=MODE_TYPE)
-    _ConnectionManeuverAssist_addGrpC_itsStationPosition = SEQ_OF(name='itsStationPosition', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('AddGrpC', 'ItsStationPositionList')), opt=True)
+    ConnectionManeuverAssist_addGrpC = SEQ(name=u'ConnectionManeuverAssist-addGrpC', mode=MODE_TYPE)
+    _ConnectionManeuverAssist_addGrpC_itsStationPosition = SEQ_OF(name=u'itsStationPosition', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('AddGrpC', 'ItsStationPositionList')), opt=True)
     ConnectionManeuverAssist_addGrpC._cont = ASN1Dict([
-        ('itsStationPosition', _ConnectionManeuverAssist_addGrpC_itsStationPosition),
+        (u'itsStationPosition', _ConnectionManeuverAssist_addGrpC_itsStationPosition),
         ])
     ConnectionManeuverAssist_addGrpC._ext = []
     
     #-----< ConnectionTrajectory-addGrpC >-----#
-    ConnectionTrajectory_addGrpC = SEQ(name='ConnectionTrajectory-addGrpC', mode=MODE_TYPE)
-    _ConnectionTrajectory_addGrpC_nodes = SEQ_OF(name='nodes', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'NodeSetXY')))
-    _ConnectionTrajectory_addGrpC_connectionID = INT(name='connectionID', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'LaneConnectionID')))
+    ConnectionTrajectory_addGrpC = SEQ(name=u'ConnectionTrajectory-addGrpC', mode=MODE_TYPE)
+    _ConnectionTrajectory_addGrpC_nodes = SEQ_OF(name=u'nodes', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'NodeSetXY')))
+    _ConnectionTrajectory_addGrpC_connectionID = INT(name=u'connectionID', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'LaneConnectionID')))
     ConnectionTrajectory_addGrpC._cont = ASN1Dict([
-        ('nodes', _ConnectionTrajectory_addGrpC_nodes),
-        ('connectionID', _ConnectionTrajectory_addGrpC_connectionID),
+        (u'nodes', _ConnectionTrajectory_addGrpC_nodes),
+        (u'connectionID', _ConnectionTrajectory_addGrpC_connectionID),
         ])
     ConnectionTrajectory_addGrpC._ext = []
     
     #-----< IntersectionState-addGrpC >-----#
-    IntersectionState_addGrpC = SEQ(name='IntersectionState-addGrpC', mode=MODE_TYPE)
-    _IntersectionState_addGrpC_activePrioritizations = SEQ_OF(name='activePrioritizations', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('AddGrpC', 'PrioritizationResponseList')), opt=True)
+    IntersectionState_addGrpC = SEQ(name=u'IntersectionState-addGrpC', mode=MODE_TYPE)
+    _IntersectionState_addGrpC_activePrioritizations = SEQ_OF(name=u'activePrioritizations', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('AddGrpC', 'PrioritizationResponseList')), opt=True)
     IntersectionState_addGrpC._cont = ASN1Dict([
-        ('activePrioritizations', _IntersectionState_addGrpC_activePrioritizations),
+        (u'activePrioritizations', _IntersectionState_addGrpC_activePrioritizations),
         ])
     IntersectionState_addGrpC._ext = []
     
     #-----< LaneAttributes-addGrpC >-----#
-    LaneAttributes_addGrpC = SEQ(name='LaneAttributes-addGrpC', mode=MODE_TYPE)
-    _LaneAttributes_addGrpC_maxVehicleHeight = INT(name='maxVehicleHeight', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'VehicleHeight')), opt=True)
-    _LaneAttributes_addGrpC_maxVehicleWeight = INT(name='maxVehicleWeight', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'VehicleMass')), opt=True)
+    LaneAttributes_addGrpC = SEQ(name=u'LaneAttributes-addGrpC', mode=MODE_TYPE)
+    _LaneAttributes_addGrpC_maxVehicleHeight = INT(name=u'maxVehicleHeight', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'VehicleHeight')), opt=True)
+    _LaneAttributes_addGrpC_maxVehicleWeight = INT(name=u'maxVehicleWeight', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'VehicleMass')), opt=True)
     LaneAttributes_addGrpC._cont = ASN1Dict([
-        ('maxVehicleHeight', _LaneAttributes_addGrpC_maxVehicleHeight),
-        ('maxVehicleWeight', _LaneAttributes_addGrpC_maxVehicleWeight),
+        (u'maxVehicleHeight', _LaneAttributes_addGrpC_maxVehicleHeight),
+        (u'maxVehicleWeight', _LaneAttributes_addGrpC_maxVehicleWeight),
         ])
     LaneAttributes_addGrpC._ext = []
     
     #-----< MapData-addGrpC >-----#
-    MapData_addGrpC = SEQ(name='MapData-addGrpC', mode=MODE_TYPE)
-    _MapData_addGrpC_signalHeadLocations = SEQ_OF(name='signalHeadLocations', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('AddGrpC', 'SignalHeadLocationList')), opt=True)
+    MapData_addGrpC = SEQ(name=u'MapData-addGrpC', mode=MODE_TYPE)
+    _MapData_addGrpC_signalHeadLocations = SEQ_OF(name=u'signalHeadLocations', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('AddGrpC', 'SignalHeadLocationList')), opt=True)
     MapData_addGrpC._cont = ASN1Dict([
-        ('signalHeadLocations', _MapData_addGrpC_signalHeadLocations),
+        (u'signalHeadLocations', _MapData_addGrpC_signalHeadLocations),
         ])
     MapData_addGrpC._ext = []
     
     #-----< MovementEvent-addGrpC >-----#
-    MovementEvent_addGrpC = SEQ(name='MovementEvent-addGrpC', mode=MODE_TYPE)
-    _MovementEvent_addGrpC_stateChangeReason = ENUM(name='stateChangeReason', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('AddGrpC', 'ExceptionalCondition')), opt=True)
+    MovementEvent_addGrpC = SEQ(name=u'MovementEvent-addGrpC', mode=MODE_TYPE)
+    _MovementEvent_addGrpC_stateChangeReason = ENUM(name=u'stateChangeReason', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('AddGrpC', 'ExceptionalCondition')), opt=True)
     MovementEvent_addGrpC._cont = ASN1Dict([
-        ('stateChangeReason', _MovementEvent_addGrpC_stateChangeReason),
+        (u'stateChangeReason', _MovementEvent_addGrpC_stateChangeReason),
         ])
     MovementEvent_addGrpC._ext = []
     
     #-----< NodeAttributeSet-addGrpC >-----#
-    NodeAttributeSet_addGrpC = SEQ(name='NodeAttributeSet-addGrpC', mode=MODE_TYPE)
-    _NodeAttributeSet_addGrpC_ptvRequest = ENUM(name='ptvRequest', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('AddGrpC', 'PtvRequestType')), opt=True)
-    _NodeAttributeSet_addGrpC_nodeLink = SEQ_OF(name='nodeLink', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('AddGrpC', 'NodeLink')), opt=True)
-    _NodeAttributeSet_addGrpC_node = SEQ(name='node', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('AddGrpC', 'Node')), opt=True)
+    NodeAttributeSet_addGrpC = SEQ(name=u'NodeAttributeSet-addGrpC', mode=MODE_TYPE)
+    _NodeAttributeSet_addGrpC_ptvRequest = ENUM(name=u'ptvRequest', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('AddGrpC', 'PtvRequestType')), opt=True)
+    _NodeAttributeSet_addGrpC_nodeLink = SEQ_OF(name=u'nodeLink', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('AddGrpC', 'NodeLink')), opt=True)
+    _NodeAttributeSet_addGrpC_node = SEQ(name=u'node', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('AddGrpC', 'Node')), opt=True)
     NodeAttributeSet_addGrpC._cont = ASN1Dict([
-        ('ptvRequest', _NodeAttributeSet_addGrpC_ptvRequest),
-        ('nodeLink', _NodeAttributeSet_addGrpC_nodeLink),
-        ('node', _NodeAttributeSet_addGrpC_node),
+        (u'ptvRequest', _NodeAttributeSet_addGrpC_ptvRequest),
+        (u'nodeLink', _NodeAttributeSet_addGrpC_nodeLink),
+        (u'node', _NodeAttributeSet_addGrpC_node),
         ])
     NodeAttributeSet_addGrpC._ext = []
     
     #-----< Position3D-addGrpC >-----#
-    Position3D_addGrpC = SEQ(name='Position3D-addGrpC', mode=MODE_TYPE)
-    _Position3D_addGrpC_altitude = SEQ(name='altitude', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'Altitude')))
+    Position3D_addGrpC = SEQ(name=u'Position3D-addGrpC', mode=MODE_TYPE)
+    _Position3D_addGrpC_altitude = SEQ(name=u'altitude', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'Altitude')))
     Position3D_addGrpC._cont = ASN1Dict([
-        ('altitude', _Position3D_addGrpC_altitude),
+        (u'altitude', _Position3D_addGrpC_altitude),
         ])
     Position3D_addGrpC._ext = []
     
     #-----< RestrictionUserType-addGrpC >-----#
-    RestrictionUserType_addGrpC = SEQ(name='RestrictionUserType-addGrpC', mode=MODE_TYPE)
-    _RestrictionUserType_addGrpC_emission = ENUM(name='emission', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('AddGrpC', 'EmissionType')), opt=True)
-    _RestrictionUserType_addGrpC_fuel = INT(name='fuel', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'FuelType')), opt=True)
+    RestrictionUserType_addGrpC = SEQ(name=u'RestrictionUserType-addGrpC', mode=MODE_TYPE)
+    _RestrictionUserType_addGrpC_emission = ENUM(name=u'emission', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('AddGrpC', 'EmissionType')), opt=True)
+    _RestrictionUserType_addGrpC_fuel = INT(name=u'fuel', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'FuelType')), opt=True)
     RestrictionUserType_addGrpC._cont = ASN1Dict([
-        ('emission', _RestrictionUserType_addGrpC_emission),
-        ('fuel', _RestrictionUserType_addGrpC_fuel),
+        (u'emission', _RestrictionUserType_addGrpC_emission),
+        (u'fuel', _RestrictionUserType_addGrpC_fuel),
         ])
     RestrictionUserType_addGrpC._ext = []
     
     #-----< RequestorDescription-addGrpC >-----#
-    RequestorDescription_addGrpC = SEQ(name='RequestorDescription-addGrpC', mode=MODE_TYPE)
-    _RequestorDescription_addGrpC_fuel = INT(name='fuel', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'FuelType')), opt=True)
-    _RequestorDescription_addGrpC_batteryStatus = ENUM(name='batteryStatus', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('AddGrpC', 'BatteryStatus')), opt=True)
+    RequestorDescription_addGrpC = SEQ(name=u'RequestorDescription-addGrpC', mode=MODE_TYPE)
+    _RequestorDescription_addGrpC_fuel = INT(name=u'fuel', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'FuelType')), opt=True)
+    _RequestorDescription_addGrpC_batteryStatus = ENUM(name=u'batteryStatus', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('AddGrpC', 'BatteryStatus')), opt=True)
     RequestorDescription_addGrpC._cont = ASN1Dict([
-        ('fuel', _RequestorDescription_addGrpC_fuel),
-        ('batteryStatus', _RequestorDescription_addGrpC_batteryStatus),
+        (u'fuel', _RequestorDescription_addGrpC_fuel),
+        (u'batteryStatus', _RequestorDescription_addGrpC_batteryStatus),
         ])
     RequestorDescription_addGrpC._ext = []
     
     #-----< SignalStatusPackage-addGrpC >-----#
-    SignalStatusPackage_addGrpC = SEQ(name='SignalStatusPackage-addGrpC', mode=MODE_TYPE)
-    _SignalStatusPackage_addGrpC_synchToSchedule = INT(name='synchToSchedule', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'DeltaTime')), opt=True)
-    _SignalStatusPackage_addGrpC_rejectedReason = ENUM(name='rejectedReason', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('AddGrpC', 'RejectedReason')), opt=True)
+    SignalStatusPackage_addGrpC = SEQ(name=u'SignalStatusPackage-addGrpC', mode=MODE_TYPE)
+    _SignalStatusPackage_addGrpC_synchToSchedule = INT(name=u'synchToSchedule', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'DeltaTime')), opt=True)
+    _SignalStatusPackage_addGrpC_rejectedReason = ENUM(name=u'rejectedReason', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('AddGrpC', 'RejectedReason')), opt=True)
     SignalStatusPackage_addGrpC._cont = ASN1Dict([
-        ('synchToSchedule', _SignalStatusPackage_addGrpC_synchToSchedule),
-        ('rejectedReason', _SignalStatusPackage_addGrpC_rejectedReason),
+        (u'synchToSchedule', _SignalStatusPackage_addGrpC_synchToSchedule),
+        (u'rejectedReason', _SignalStatusPackage_addGrpC_rejectedReason),
         ])
     SignalStatusPackage_addGrpC._ext = []
     
     #-----< ItsStationPosition >-----#
-    ItsStationPosition = SEQ(name='ItsStationPosition', mode=MODE_TYPE)
-    _ItsStationPosition_stationID = INT(name='stationID', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'StationID')))
-    _ItsStationPosition_laneID = INT(name='laneID', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'LaneID')), opt=True)
-    _ItsStationPosition_nodeXY = CHOICE(name='nodeXY', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('DSRC', 'NodeOffsetPointXY')), opt=True)
-    _ItsStationPosition_timeReference = INT(name='timeReference', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('AddGrpC', 'TimeReference')), opt=True)
+    ItsStationPosition = SEQ(name=u'ItsStationPosition', mode=MODE_TYPE)
+    _ItsStationPosition_stationID = INT(name=u'stationID', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'StationID')))
+    _ItsStationPosition_laneID = INT(name=u'laneID', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'LaneID')), opt=True)
+    _ItsStationPosition_nodeXY = CHOICE(name=u'nodeXY', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('DSRC', 'NodeOffsetPointXY')), opt=True)
+    _ItsStationPosition_timeReference = INT(name=u'timeReference', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('AddGrpC', 'TimeReference')), opt=True)
     ItsStationPosition._cont = ASN1Dict([
-        ('stationID', _ItsStationPosition_stationID),
-        ('laneID', _ItsStationPosition_laneID),
-        ('nodeXY', _ItsStationPosition_nodeXY),
-        ('timeReference', _ItsStationPosition_timeReference),
+        (u'stationID', _ItsStationPosition_stationID),
+        (u'laneID', _ItsStationPosition_laneID),
+        (u'nodeXY', _ItsStationPosition_nodeXY),
+        (u'timeReference', _ItsStationPosition_timeReference),
         ])
     ItsStationPosition._ext = []
     
     #-----< ItsStationPositionList >-----#
-    ItsStationPositionList = SEQ_OF(name='ItsStationPositionList', mode=MODE_TYPE)
+    ItsStationPositionList = SEQ_OF(name=u'ItsStationPositionList', mode=MODE_TYPE)
     _ItsStationPositionList__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('AddGrpC', 'ItsStationPosition')))
     ItsStationPositionList._cont = _ItsStationPositionList__item_
     ItsStationPositionList._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=5)], ev=None, er=[])
     
     #-----< Node >-----#
-    Node = SEQ(name='Node', mode=MODE_TYPE)
-    _Node_id = INT(name='id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _Node_lane = INT(name='lane', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'LaneID')), opt=True)
-    _Node_connectionID = INT(name='connectionID', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'LaneConnectionID')), opt=True)
-    _Node_intersectionID = INT(name='intersectionID', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'IntersectionID')), opt=True)
+    Node = SEQ(name=u'Node', mode=MODE_TYPE)
+    _Node_id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _Node_lane = INT(name=u'lane', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'LaneID')), opt=True)
+    _Node_connectionID = INT(name=u'connectionID', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'LaneConnectionID')), opt=True)
+    _Node_intersectionID = INT(name=u'intersectionID', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'IntersectionID')), opt=True)
     Node._cont = ASN1Dict([
-        ('id', _Node_id),
-        ('lane', _Node_lane),
-        ('connectionID', _Node_connectionID),
-        ('intersectionID', _Node_intersectionID),
+        (u'id', _Node_id),
+        (u'lane', _Node_lane),
+        (u'connectionID', _Node_connectionID),
+        (u'intersectionID', _Node_intersectionID),
         ])
     Node._ext = []
     
     #-----< NodeLink >-----#
-    NodeLink = SEQ_OF(name='NodeLink', mode=MODE_TYPE)
+    NodeLink = SEQ_OF(name=u'NodeLink', mode=MODE_TYPE)
     _NodeLink__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('AddGrpC', 'Node')))
     NodeLink._cont = _NodeLink__item_
     NodeLink._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=5)], ev=None, er=[])
     
     #-----< PrioritizationResponse >-----#
-    PrioritizationResponse = SEQ(name='PrioritizationResponse', mode=MODE_TYPE)
-    _PrioritizationResponse_stationID = INT(name='stationID', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'StationID')))
-    _PrioritizationResponse_priorState = ENUM(name='priorState', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'PrioritizationResponseStatus')))
-    _PrioritizationResponse_signalGroup = INT(name='signalGroup', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'SignalGroupID')))
+    PrioritizationResponse = SEQ(name=u'PrioritizationResponse', mode=MODE_TYPE)
+    _PrioritizationResponse_stationID = INT(name=u'stationID', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'StationID')))
+    _PrioritizationResponse_priorState = ENUM(name=u'priorState', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'PrioritizationResponseStatus')))
+    _PrioritizationResponse_signalGroup = INT(name=u'signalGroup', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'SignalGroupID')))
     PrioritizationResponse._cont = ASN1Dict([
-        ('stationID', _PrioritizationResponse_stationID),
-        ('priorState', _PrioritizationResponse_priorState),
-        ('signalGroup', _PrioritizationResponse_signalGroup),
+        (u'stationID', _PrioritizationResponse_stationID),
+        (u'priorState', _PrioritizationResponse_priorState),
+        (u'signalGroup', _PrioritizationResponse_signalGroup),
         ])
     PrioritizationResponse._ext = []
     
     #-----< PrioritizationResponseList >-----#
-    PrioritizationResponseList = SEQ_OF(name='PrioritizationResponseList', mode=MODE_TYPE)
+    PrioritizationResponseList = SEQ_OF(name=u'PrioritizationResponseList', mode=MODE_TYPE)
     _PrioritizationResponseList__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('AddGrpC', 'PrioritizationResponse')))
     PrioritizationResponseList._cont = _PrioritizationResponseList__item_
     PrioritizationResponseList._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=10)], ev=None, er=[])
     
     #-----< SignalHeadLocation >-----#
-    SignalHeadLocation = SEQ(name='SignalHeadLocation', mode=MODE_TYPE)
-    _SignalHeadLocation_nodeXY = CHOICE(name='nodeXY', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('DSRC', 'NodeOffsetPointXY')))
-    _SignalHeadLocation_nodeZ = INT(name='nodeZ', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'DeltaAltitude')))
-    _SignalHeadLocation_signalGroupID = INT(name='signalGroupID', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'SignalGroupID')))
+    SignalHeadLocation = SEQ(name=u'SignalHeadLocation', mode=MODE_TYPE)
+    _SignalHeadLocation_nodeXY = CHOICE(name=u'nodeXY', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('DSRC', 'NodeOffsetPointXY')))
+    _SignalHeadLocation_nodeZ = INT(name=u'nodeZ', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'DeltaAltitude')))
+    _SignalHeadLocation_signalGroupID = INT(name=u'signalGroupID', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'SignalGroupID')))
     SignalHeadLocation._cont = ASN1Dict([
-        ('nodeXY', _SignalHeadLocation_nodeXY),
-        ('nodeZ', _SignalHeadLocation_nodeZ),
-        ('signalGroupID', _SignalHeadLocation_signalGroupID),
+        (u'nodeXY', _SignalHeadLocation_nodeXY),
+        (u'nodeZ', _SignalHeadLocation_nodeZ),
+        (u'signalGroupID', _SignalHeadLocation_signalGroupID),
         ])
     SignalHeadLocation._ext = []
     
     #-----< SignalHeadLocationList >-----#
-    SignalHeadLocationList = SEQ_OF(name='SignalHeadLocationList', mode=MODE_TYPE)
+    SignalHeadLocationList = SEQ_OF(name=u'SignalHeadLocationList', mode=MODE_TYPE)
     _SignalHeadLocationList__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('AddGrpC', 'SignalHeadLocation')))
     SignalHeadLocationList._cont = _SignalHeadLocationList__item_
     SignalHeadLocationList._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=64)], ev=None, er=[])
     
     #-----< BatteryStatus >-----#
-    BatteryStatus = ENUM(name='BatteryStatus', mode=MODE_TYPE)
-    BatteryStatus._cont = ASN1Dict([('unknown', 0), ('critical', 1), ('low', 2), ('good', 3)])
+    BatteryStatus = ENUM(name=u'BatteryStatus', mode=MODE_TYPE)
+    BatteryStatus._cont = ASN1Dict([(u'unknown', 0), (u'critical', 1), (u'low', 2), (u'good', 3)])
     BatteryStatus._ext = []
     
     #-----< EmissionType >-----#
-    EmissionType = ENUM(name='EmissionType', mode=MODE_TYPE)
-    EmissionType._cont = ASN1Dict([('euro1', 0), ('euro2', 1), ('euro3', 2), ('euro4', 3), ('euro5', 4), ('euro6', 5)])
+    EmissionType = ENUM(name=u'EmissionType', mode=MODE_TYPE)
+    EmissionType._cont = ASN1Dict([(u'euro1', 0), (u'euro2', 1), (u'euro3', 2), (u'euro4', 3), (u'euro5', 4), (u'euro6', 5)])
     EmissionType._ext = []
     
     #-----< ExceptionalCondition >-----#
-    ExceptionalCondition = ENUM(name='ExceptionalCondition', mode=MODE_TYPE)
-    ExceptionalCondition._cont = ASN1Dict([('unknown', 0), ('publicTransportPriority', 1), ('emergencyVehiclePriority', 2), ('trainPriority', 3), ('bridgeOpen', 4), ('vehicleHeight', 5), ('weather', 6), ('trafficJam', 7), ('tunnelClosure', 8), ('meteringActive', 9), ('truckPriority', 10), ('bicyclePlatoonPriority', 11), ('vehiclePlatoonPriority', 12)])
+    ExceptionalCondition = ENUM(name=u'ExceptionalCondition', mode=MODE_TYPE)
+    ExceptionalCondition._cont = ASN1Dict([(u'unknown', 0), (u'publicTransportPriority', 1), (u'emergencyVehiclePriority', 2), (u'trainPriority', 3), (u'bridgeOpen', 4), (u'vehicleHeight', 5), (u'weather', 6), (u'trafficJam', 7), (u'tunnelClosure', 8), (u'meteringActive', 9), (u'truckPriority', 10), (u'bicyclePlatoonPriority', 11), (u'vehiclePlatoonPriority', 12)])
     ExceptionalCondition._ext = []
     
     #-----< PtvRequestType >-----#
-    PtvRequestType = ENUM(name='PtvRequestType', mode=MODE_TYPE)
-    PtvRequestType._cont = ASN1Dict([('preRequest', 0), ('mainRequest', 1), ('doorCloseRequest', 2), ('cancelRequest', 3), ('emergencyRequest', 4)])
+    PtvRequestType = ENUM(name=u'PtvRequestType', mode=MODE_TYPE)
+    PtvRequestType._cont = ASN1Dict([(u'preRequest', 0), (u'mainRequest', 1), (u'doorCloseRequest', 2), (u'cancelRequest', 3), (u'emergencyRequest', 4)])
     PtvRequestType._ext = []
     
     #-----< RejectedReason >-----#
-    RejectedReason = ENUM(name='RejectedReason', mode=MODE_TYPE)
-    RejectedReason._cont = ASN1Dict([('unknown', 0), ('exceptionalCondition', 1), ('maxWaitingTimeExceeded', 2), ('ptPriorityDisabled', 3), ('higherPTPriorityGranted', 4), ('vehicleTrackingUnknown', 5)])
+    RejectedReason = ENUM(name=u'RejectedReason', mode=MODE_TYPE)
+    RejectedReason._cont = ASN1Dict([(u'unknown', 0), (u'exceptionalCondition', 1), (u'maxWaitingTimeExceeded', 2), (u'ptPriorityDisabled', 3), (u'higherPTPriorityGranted', 4), (u'vehicleTrackingUnknown', 5)])
     RejectedReason._ext = []
     
     #-----< TimeReference >-----#
-    TimeReference = INT(name='TimeReference', mode=MODE_TYPE)
-    TimeReference._cont = ASN1Dict([('oneMilliSec', 1)])
+    TimeReference = INT(name=u'TimeReference', mode=MODE_TYPE)
+    TimeReference._cont = ASN1Dict([(u'oneMilliSec', 1)])
     TimeReference._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=60000)], ev=None, er=[])
     
     _all_ = [
@@ -356,48 +356,48 @@ class AddGrpC:
 
 class CAM_PDU_Descriptions:
 
-    _name_  = 'CAM-PDU-Descriptions'
+    _name_  = u'CAM-PDU-Descriptions'
     _oid_   = [0, 4, 0, 5, 1, 302637, 2, 2]
     
     _obj_ = [
-        'CAM',
-        'CoopAwareness',
-        'CamParameters',
-        'HighFrequencyContainer',
-        'LowFrequencyContainer',
-        'SpecialVehicleContainer',
-        'BasicContainer',
-        'BasicVehicleContainerHighFrequency',
-        'BasicVehicleContainerLowFrequency',
-        'PublicTransportContainer',
-        'SpecialTransportContainer',
-        'DangerousGoodsContainer',
-        'RoadWorksContainerBasic',
-        'RescueContainer',
-        'EmergencyContainer',
-        'SafetyCarContainer',
-        'RSUContainerHighFrequency',
-        'GenerationDeltaTime',
+        u'CAM',
+        u'CoopAwareness',
+        u'CamParameters',
+        u'HighFrequencyContainer',
+        u'LowFrequencyContainer',
+        u'SpecialVehicleContainer',
+        u'BasicContainer',
+        u'BasicVehicleContainerHighFrequency',
+        u'BasicVehicleContainerLowFrequency',
+        u'PublicTransportContainer',
+        u'SpecialTransportContainer',
+        u'DangerousGoodsContainer',
+        u'RoadWorksContainerBasic',
+        u'RescueContainer',
+        u'EmergencyContainer',
+        u'SafetyCarContainer',
+        u'RSUContainerHighFrequency',
+        u'GenerationDeltaTime',
         ]
     _type_ = [
-        'CAM',
-        'CoopAwareness',
-        'CamParameters',
-        'HighFrequencyContainer',
-        'LowFrequencyContainer',
-        'SpecialVehicleContainer',
-        'BasicContainer',
-        'BasicVehicleContainerHighFrequency',
-        'BasicVehicleContainerLowFrequency',
-        'PublicTransportContainer',
-        'SpecialTransportContainer',
-        'DangerousGoodsContainer',
-        'RoadWorksContainerBasic',
-        'RescueContainer',
-        'EmergencyContainer',
-        'SafetyCarContainer',
-        'RSUContainerHighFrequency',
-        'GenerationDeltaTime',
+        u'CAM',
+        u'CoopAwareness',
+        u'CamParameters',
+        u'HighFrequencyContainer',
+        u'LowFrequencyContainer',
+        u'SpecialVehicleContainer',
+        u'BasicContainer',
+        u'BasicVehicleContainerHighFrequency',
+        u'BasicVehicleContainerLowFrequency',
+        u'PublicTransportContainer',
+        u'SpecialTransportContainer',
+        u'DangerousGoodsContainer',
+        u'RoadWorksContainerBasic',
+        u'RescueContainer',
+        u'EmergencyContainer',
+        u'SafetyCarContainer',
+        u'RSUContainerHighFrequency',
+        u'GenerationDeltaTime',
         ]
     _set_ = [
         ]
@@ -409,222 +409,222 @@ class CAM_PDU_Descriptions:
         ]
     
     #-----< CAM >-----#
-    CAM = SEQ(name='CAM', mode=MODE_TYPE)
-    _CAM_header = SEQ(name='header', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'ItsPduHeader')))
-    _CAM_cam = SEQ(name='cam', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('CAM-PDU-Descriptions', 'CoopAwareness')))
+    CAM = SEQ(name=u'CAM', mode=MODE_TYPE)
+    _CAM_header = SEQ(name=u'header', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'ItsPduHeader')))
+    _CAM_cam = SEQ(name=u'cam', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('CAM-PDU-Descriptions', 'CoopAwareness')))
     CAM._cont = ASN1Dict([
-        ('header', _CAM_header),
-        ('cam', _CAM_cam),
+        (u'header', _CAM_header),
+        (u'cam', _CAM_cam),
         ])
     CAM._ext = None
     
     #-----< CoopAwareness >-----#
-    CoopAwareness = SEQ(name='CoopAwareness', mode=MODE_TYPE)
-    _CoopAwareness_generationDeltaTime = INT(name='generationDeltaTime', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('CAM-PDU-Descriptions', 'GenerationDeltaTime')))
-    _CoopAwareness_camParameters = SEQ(name='camParameters', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('CAM-PDU-Descriptions', 'CamParameters')))
+    CoopAwareness = SEQ(name=u'CoopAwareness', mode=MODE_TYPE)
+    _CoopAwareness_generationDeltaTime = INT(name=u'generationDeltaTime', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('CAM-PDU-Descriptions', 'GenerationDeltaTime')))
+    _CoopAwareness_camParameters = SEQ(name=u'camParameters', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('CAM-PDU-Descriptions', 'CamParameters')))
     CoopAwareness._cont = ASN1Dict([
-        ('generationDeltaTime', _CoopAwareness_generationDeltaTime),
-        ('camParameters', _CoopAwareness_camParameters),
+        (u'generationDeltaTime', _CoopAwareness_generationDeltaTime),
+        (u'camParameters', _CoopAwareness_camParameters),
         ])
     CoopAwareness._ext = None
     
     #-----< CamParameters >-----#
-    CamParameters = SEQ(name='CamParameters', mode=MODE_TYPE)
-    _CamParameters_basicContainer = SEQ(name='basicContainer', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('CAM-PDU-Descriptions', 'BasicContainer')))
-    _CamParameters_highFrequencyContainer = CHOICE(name='highFrequencyContainer', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('CAM-PDU-Descriptions', 'HighFrequencyContainer')))
-    _CamParameters_lowFrequencyContainer = CHOICE(name='lowFrequencyContainer', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('CAM-PDU-Descriptions', 'LowFrequencyContainer')), opt=True)
-    _CamParameters_specialVehicleContainer = CHOICE(name='specialVehicleContainer', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('CAM-PDU-Descriptions', 'SpecialVehicleContainer')), opt=True)
+    CamParameters = SEQ(name=u'CamParameters', mode=MODE_TYPE)
+    _CamParameters_basicContainer = SEQ(name=u'basicContainer', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('CAM-PDU-Descriptions', 'BasicContainer')))
+    _CamParameters_highFrequencyContainer = CHOICE(name=u'highFrequencyContainer', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('CAM-PDU-Descriptions', 'HighFrequencyContainer')))
+    _CamParameters_lowFrequencyContainer = CHOICE(name=u'lowFrequencyContainer', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('CAM-PDU-Descriptions', 'LowFrequencyContainer')), opt=True)
+    _CamParameters_specialVehicleContainer = CHOICE(name=u'specialVehicleContainer', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('CAM-PDU-Descriptions', 'SpecialVehicleContainer')), opt=True)
     CamParameters._cont = ASN1Dict([
-        ('basicContainer', _CamParameters_basicContainer),
-        ('highFrequencyContainer', _CamParameters_highFrequencyContainer),
-        ('lowFrequencyContainer', _CamParameters_lowFrequencyContainer),
-        ('specialVehicleContainer', _CamParameters_specialVehicleContainer),
+        (u'basicContainer', _CamParameters_basicContainer),
+        (u'highFrequencyContainer', _CamParameters_highFrequencyContainer),
+        (u'lowFrequencyContainer', _CamParameters_lowFrequencyContainer),
+        (u'specialVehicleContainer', _CamParameters_specialVehicleContainer),
         ])
     CamParameters._ext = []
     
     #-----< HighFrequencyContainer >-----#
-    HighFrequencyContainer = CHOICE(name='HighFrequencyContainer', mode=MODE_TYPE)
-    _HighFrequencyContainer_basicVehicleContainerHighFrequency = SEQ(name='basicVehicleContainerHighFrequency', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('CAM-PDU-Descriptions', 'BasicVehicleContainerHighFrequency')))
-    _HighFrequencyContainer_rsuContainerHighFrequency = SEQ(name='rsuContainerHighFrequency', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('CAM-PDU-Descriptions', 'RSUContainerHighFrequency')))
+    HighFrequencyContainer = CHOICE(name=u'HighFrequencyContainer', mode=MODE_TYPE)
+    _HighFrequencyContainer_basicVehicleContainerHighFrequency = SEQ(name=u'basicVehicleContainerHighFrequency', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('CAM-PDU-Descriptions', 'BasicVehicleContainerHighFrequency')))
+    _HighFrequencyContainer_rsuContainerHighFrequency = SEQ(name=u'rsuContainerHighFrequency', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('CAM-PDU-Descriptions', 'RSUContainerHighFrequency')))
     HighFrequencyContainer._cont = ASN1Dict([
-        ('basicVehicleContainerHighFrequency', _HighFrequencyContainer_basicVehicleContainerHighFrequency),
-        ('rsuContainerHighFrequency', _HighFrequencyContainer_rsuContainerHighFrequency),
+        (u'basicVehicleContainerHighFrequency', _HighFrequencyContainer_basicVehicleContainerHighFrequency),
+        (u'rsuContainerHighFrequency', _HighFrequencyContainer_rsuContainerHighFrequency),
         ])
     HighFrequencyContainer._ext = []
     
     #-----< LowFrequencyContainer >-----#
-    LowFrequencyContainer = CHOICE(name='LowFrequencyContainer', mode=MODE_TYPE)
-    _LowFrequencyContainer_basicVehicleContainerLowFrequency = SEQ(name='basicVehicleContainerLowFrequency', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('CAM-PDU-Descriptions', 'BasicVehicleContainerLowFrequency')))
+    LowFrequencyContainer = CHOICE(name=u'LowFrequencyContainer', mode=MODE_TYPE)
+    _LowFrequencyContainer_basicVehicleContainerLowFrequency = SEQ(name=u'basicVehicleContainerLowFrequency', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('CAM-PDU-Descriptions', 'BasicVehicleContainerLowFrequency')))
     LowFrequencyContainer._cont = ASN1Dict([
-        ('basicVehicleContainerLowFrequency', _LowFrequencyContainer_basicVehicleContainerLowFrequency),
+        (u'basicVehicleContainerLowFrequency', _LowFrequencyContainer_basicVehicleContainerLowFrequency),
         ])
     LowFrequencyContainer._ext = []
     
     #-----< SpecialVehicleContainer >-----#
-    SpecialVehicleContainer = CHOICE(name='SpecialVehicleContainer', mode=MODE_TYPE)
-    _SpecialVehicleContainer_publicTransportContainer = SEQ(name='publicTransportContainer', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('CAM-PDU-Descriptions', 'PublicTransportContainer')))
-    _SpecialVehicleContainer_specialTransportContainer = SEQ(name='specialTransportContainer', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('CAM-PDU-Descriptions', 'SpecialTransportContainer')))
-    _SpecialVehicleContainer_dangerousGoodsContainer = SEQ(name='dangerousGoodsContainer', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('CAM-PDU-Descriptions', 'DangerousGoodsContainer')))
-    _SpecialVehicleContainer_roadWorksContainerBasic = SEQ(name='roadWorksContainerBasic', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('CAM-PDU-Descriptions', 'RoadWorksContainerBasic')))
-    _SpecialVehicleContainer_rescueContainer = SEQ(name='rescueContainer', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('CAM-PDU-Descriptions', 'RescueContainer')))
-    _SpecialVehicleContainer_emergencyContainer = SEQ(name='emergencyContainer', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('CAM-PDU-Descriptions', 'EmergencyContainer')))
-    _SpecialVehicleContainer_safetyCarContainer = SEQ(name='safetyCarContainer', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('CAM-PDU-Descriptions', 'SafetyCarContainer')))
+    SpecialVehicleContainer = CHOICE(name=u'SpecialVehicleContainer', mode=MODE_TYPE)
+    _SpecialVehicleContainer_publicTransportContainer = SEQ(name=u'publicTransportContainer', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('CAM-PDU-Descriptions', 'PublicTransportContainer')))
+    _SpecialVehicleContainer_specialTransportContainer = SEQ(name=u'specialTransportContainer', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('CAM-PDU-Descriptions', 'SpecialTransportContainer')))
+    _SpecialVehicleContainer_dangerousGoodsContainer = SEQ(name=u'dangerousGoodsContainer', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('CAM-PDU-Descriptions', 'DangerousGoodsContainer')))
+    _SpecialVehicleContainer_roadWorksContainerBasic = SEQ(name=u'roadWorksContainerBasic', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('CAM-PDU-Descriptions', 'RoadWorksContainerBasic')))
+    _SpecialVehicleContainer_rescueContainer = SEQ(name=u'rescueContainer', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('CAM-PDU-Descriptions', 'RescueContainer')))
+    _SpecialVehicleContainer_emergencyContainer = SEQ(name=u'emergencyContainer', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('CAM-PDU-Descriptions', 'EmergencyContainer')))
+    _SpecialVehicleContainer_safetyCarContainer = SEQ(name=u'safetyCarContainer', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('CAM-PDU-Descriptions', 'SafetyCarContainer')))
     SpecialVehicleContainer._cont = ASN1Dict([
-        ('publicTransportContainer', _SpecialVehicleContainer_publicTransportContainer),
-        ('specialTransportContainer', _SpecialVehicleContainer_specialTransportContainer),
-        ('dangerousGoodsContainer', _SpecialVehicleContainer_dangerousGoodsContainer),
-        ('roadWorksContainerBasic', _SpecialVehicleContainer_roadWorksContainerBasic),
-        ('rescueContainer', _SpecialVehicleContainer_rescueContainer),
-        ('emergencyContainer', _SpecialVehicleContainer_emergencyContainer),
-        ('safetyCarContainer', _SpecialVehicleContainer_safetyCarContainer),
+        (u'publicTransportContainer', _SpecialVehicleContainer_publicTransportContainer),
+        (u'specialTransportContainer', _SpecialVehicleContainer_specialTransportContainer),
+        (u'dangerousGoodsContainer', _SpecialVehicleContainer_dangerousGoodsContainer),
+        (u'roadWorksContainerBasic', _SpecialVehicleContainer_roadWorksContainerBasic),
+        (u'rescueContainer', _SpecialVehicleContainer_rescueContainer),
+        (u'emergencyContainer', _SpecialVehicleContainer_emergencyContainer),
+        (u'safetyCarContainer', _SpecialVehicleContainer_safetyCarContainer),
         ])
     SpecialVehicleContainer._ext = []
     
     #-----< BasicContainer >-----#
-    BasicContainer = SEQ(name='BasicContainer', mode=MODE_TYPE)
-    _BasicContainer_stationType = INT(name='stationType', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'StationType')))
-    _BasicContainer_referencePosition = SEQ(name='referencePosition', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'ReferencePosition')))
+    BasicContainer = SEQ(name=u'BasicContainer', mode=MODE_TYPE)
+    _BasicContainer_stationType = INT(name=u'stationType', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'StationType')))
+    _BasicContainer_referencePosition = SEQ(name=u'referencePosition', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'ReferencePosition')))
     BasicContainer._cont = ASN1Dict([
-        ('stationType', _BasicContainer_stationType),
-        ('referencePosition', _BasicContainer_referencePosition),
+        (u'stationType', _BasicContainer_stationType),
+        (u'referencePosition', _BasicContainer_referencePosition),
         ])
     BasicContainer._ext = []
     
     #-----< BasicVehicleContainerHighFrequency >-----#
-    BasicVehicleContainerHighFrequency = SEQ(name='BasicVehicleContainerHighFrequency', mode=MODE_TYPE)
-    _BasicVehicleContainerHighFrequency_heading = SEQ(name='heading', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'Heading')))
-    _BasicVehicleContainerHighFrequency_speed = SEQ(name='speed', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'Speed')))
-    _BasicVehicleContainerHighFrequency_driveDirection = ENUM(name='driveDirection', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'DriveDirection')))
-    _BasicVehicleContainerHighFrequency_vehicleLength = SEQ(name='vehicleLength', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'VehicleLength')))
-    _BasicVehicleContainerHighFrequency_vehicleWidth = INT(name='vehicleWidth', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'VehicleWidth')))
-    _BasicVehicleContainerHighFrequency_longitudinalAcceleration = SEQ(name='longitudinalAcceleration', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'LongitudinalAcceleration')))
-    _BasicVehicleContainerHighFrequency_curvature = SEQ(name='curvature', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'Curvature')))
-    _BasicVehicleContainerHighFrequency_curvatureCalculationMode = ENUM(name='curvatureCalculationMode', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'CurvatureCalculationMode')))
-    _BasicVehicleContainerHighFrequency_yawRate = SEQ(name='yawRate', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'YawRate')))
-    _BasicVehicleContainerHighFrequency_accelerationControl = BIT_STR(name='accelerationControl', mode=MODE_TYPE, tag=(9, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'AccelerationControl')), opt=True)
-    _BasicVehicleContainerHighFrequency_lanePosition = INT(name='lanePosition', mode=MODE_TYPE, tag=(10, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'LanePosition')), opt=True)
-    _BasicVehicleContainerHighFrequency_steeringWheelAngle = SEQ(name='steeringWheelAngle', mode=MODE_TYPE, tag=(11, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'SteeringWheelAngle')), opt=True)
-    _BasicVehicleContainerHighFrequency_lateralAcceleration = SEQ(name='lateralAcceleration', mode=MODE_TYPE, tag=(12, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'LateralAcceleration')), opt=True)
-    _BasicVehicleContainerHighFrequency_verticalAcceleration = SEQ(name='verticalAcceleration', mode=MODE_TYPE, tag=(13, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'VerticalAcceleration')), opt=True)
-    _BasicVehicleContainerHighFrequency_performanceClass = INT(name='performanceClass', mode=MODE_TYPE, tag=(14, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'PerformanceClass')), opt=True)
-    _BasicVehicleContainerHighFrequency_cenDsrcTollingZone = SEQ(name='cenDsrcTollingZone', mode=MODE_TYPE, tag=(15, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'CenDsrcTollingZone')), opt=True)
+    BasicVehicleContainerHighFrequency = SEQ(name=u'BasicVehicleContainerHighFrequency', mode=MODE_TYPE)
+    _BasicVehicleContainerHighFrequency_heading = SEQ(name=u'heading', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'Heading')))
+    _BasicVehicleContainerHighFrequency_speed = SEQ(name=u'speed', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'Speed')))
+    _BasicVehicleContainerHighFrequency_driveDirection = ENUM(name=u'driveDirection', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'DriveDirection')))
+    _BasicVehicleContainerHighFrequency_vehicleLength = SEQ(name=u'vehicleLength', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'VehicleLength')))
+    _BasicVehicleContainerHighFrequency_vehicleWidth = INT(name=u'vehicleWidth', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'VehicleWidth')))
+    _BasicVehicleContainerHighFrequency_longitudinalAcceleration = SEQ(name=u'longitudinalAcceleration', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'LongitudinalAcceleration')))
+    _BasicVehicleContainerHighFrequency_curvature = SEQ(name=u'curvature', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'Curvature')))
+    _BasicVehicleContainerHighFrequency_curvatureCalculationMode = ENUM(name=u'curvatureCalculationMode', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'CurvatureCalculationMode')))
+    _BasicVehicleContainerHighFrequency_yawRate = SEQ(name=u'yawRate', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'YawRate')))
+    _BasicVehicleContainerHighFrequency_accelerationControl = BIT_STR(name=u'accelerationControl', mode=MODE_TYPE, tag=(9, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'AccelerationControl')), opt=True)
+    _BasicVehicleContainerHighFrequency_lanePosition = INT(name=u'lanePosition', mode=MODE_TYPE, tag=(10, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'LanePosition')), opt=True)
+    _BasicVehicleContainerHighFrequency_steeringWheelAngle = SEQ(name=u'steeringWheelAngle', mode=MODE_TYPE, tag=(11, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'SteeringWheelAngle')), opt=True)
+    _BasicVehicleContainerHighFrequency_lateralAcceleration = SEQ(name=u'lateralAcceleration', mode=MODE_TYPE, tag=(12, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'LateralAcceleration')), opt=True)
+    _BasicVehicleContainerHighFrequency_verticalAcceleration = SEQ(name=u'verticalAcceleration', mode=MODE_TYPE, tag=(13, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'VerticalAcceleration')), opt=True)
+    _BasicVehicleContainerHighFrequency_performanceClass = INT(name=u'performanceClass', mode=MODE_TYPE, tag=(14, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'PerformanceClass')), opt=True)
+    _BasicVehicleContainerHighFrequency_cenDsrcTollingZone = SEQ(name=u'cenDsrcTollingZone', mode=MODE_TYPE, tag=(15, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'CenDsrcTollingZone')), opt=True)
     BasicVehicleContainerHighFrequency._cont = ASN1Dict([
-        ('heading', _BasicVehicleContainerHighFrequency_heading),
-        ('speed', _BasicVehicleContainerHighFrequency_speed),
-        ('driveDirection', _BasicVehicleContainerHighFrequency_driveDirection),
-        ('vehicleLength', _BasicVehicleContainerHighFrequency_vehicleLength),
-        ('vehicleWidth', _BasicVehicleContainerHighFrequency_vehicleWidth),
-        ('longitudinalAcceleration', _BasicVehicleContainerHighFrequency_longitudinalAcceleration),
-        ('curvature', _BasicVehicleContainerHighFrequency_curvature),
-        ('curvatureCalculationMode', _BasicVehicleContainerHighFrequency_curvatureCalculationMode),
-        ('yawRate', _BasicVehicleContainerHighFrequency_yawRate),
-        ('accelerationControl', _BasicVehicleContainerHighFrequency_accelerationControl),
-        ('lanePosition', _BasicVehicleContainerHighFrequency_lanePosition),
-        ('steeringWheelAngle', _BasicVehicleContainerHighFrequency_steeringWheelAngle),
-        ('lateralAcceleration', _BasicVehicleContainerHighFrequency_lateralAcceleration),
-        ('verticalAcceleration', _BasicVehicleContainerHighFrequency_verticalAcceleration),
-        ('performanceClass', _BasicVehicleContainerHighFrequency_performanceClass),
-        ('cenDsrcTollingZone', _BasicVehicleContainerHighFrequency_cenDsrcTollingZone),
+        (u'heading', _BasicVehicleContainerHighFrequency_heading),
+        (u'speed', _BasicVehicleContainerHighFrequency_speed),
+        (u'driveDirection', _BasicVehicleContainerHighFrequency_driveDirection),
+        (u'vehicleLength', _BasicVehicleContainerHighFrequency_vehicleLength),
+        (u'vehicleWidth', _BasicVehicleContainerHighFrequency_vehicleWidth),
+        (u'longitudinalAcceleration', _BasicVehicleContainerHighFrequency_longitudinalAcceleration),
+        (u'curvature', _BasicVehicleContainerHighFrequency_curvature),
+        (u'curvatureCalculationMode', _BasicVehicleContainerHighFrequency_curvatureCalculationMode),
+        (u'yawRate', _BasicVehicleContainerHighFrequency_yawRate),
+        (u'accelerationControl', _BasicVehicleContainerHighFrequency_accelerationControl),
+        (u'lanePosition', _BasicVehicleContainerHighFrequency_lanePosition),
+        (u'steeringWheelAngle', _BasicVehicleContainerHighFrequency_steeringWheelAngle),
+        (u'lateralAcceleration', _BasicVehicleContainerHighFrequency_lateralAcceleration),
+        (u'verticalAcceleration', _BasicVehicleContainerHighFrequency_verticalAcceleration),
+        (u'performanceClass', _BasicVehicleContainerHighFrequency_performanceClass),
+        (u'cenDsrcTollingZone', _BasicVehicleContainerHighFrequency_cenDsrcTollingZone),
         ])
     BasicVehicleContainerHighFrequency._ext = None
     
     #-----< BasicVehicleContainerLowFrequency >-----#
-    BasicVehicleContainerLowFrequency = SEQ(name='BasicVehicleContainerLowFrequency', mode=MODE_TYPE)
-    _BasicVehicleContainerLowFrequency_vehicleRole = ENUM(name='vehicleRole', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'VehicleRole')))
-    _BasicVehicleContainerLowFrequency_exteriorLights = BIT_STR(name='exteriorLights', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'ExteriorLights')))
-    _BasicVehicleContainerLowFrequency_pathHistory = SEQ_OF(name='pathHistory', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'PathHistory')))
+    BasicVehicleContainerLowFrequency = SEQ(name=u'BasicVehicleContainerLowFrequency', mode=MODE_TYPE)
+    _BasicVehicleContainerLowFrequency_vehicleRole = ENUM(name=u'vehicleRole', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'VehicleRole')))
+    _BasicVehicleContainerLowFrequency_exteriorLights = BIT_STR(name=u'exteriorLights', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'ExteriorLights')))
+    _BasicVehicleContainerLowFrequency_pathHistory = SEQ_OF(name=u'pathHistory', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'PathHistory')))
     BasicVehicleContainerLowFrequency._cont = ASN1Dict([
-        ('vehicleRole', _BasicVehicleContainerLowFrequency_vehicleRole),
-        ('exteriorLights', _BasicVehicleContainerLowFrequency_exteriorLights),
-        ('pathHistory', _BasicVehicleContainerLowFrequency_pathHistory),
+        (u'vehicleRole', _BasicVehicleContainerLowFrequency_vehicleRole),
+        (u'exteriorLights', _BasicVehicleContainerLowFrequency_exteriorLights),
+        (u'pathHistory', _BasicVehicleContainerLowFrequency_pathHistory),
         ])
     BasicVehicleContainerLowFrequency._ext = None
     
     #-----< PublicTransportContainer >-----#
-    PublicTransportContainer = SEQ(name='PublicTransportContainer', mode=MODE_TYPE)
-    _PublicTransportContainer_embarkationStatus = BOOL(name='embarkationStatus', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'EmbarkationStatus')))
-    _PublicTransportContainer_ptActivation = SEQ(name='ptActivation', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'PtActivation')), opt=True)
+    PublicTransportContainer = SEQ(name=u'PublicTransportContainer', mode=MODE_TYPE)
+    _PublicTransportContainer_embarkationStatus = BOOL(name=u'embarkationStatus', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'EmbarkationStatus')))
+    _PublicTransportContainer_ptActivation = SEQ(name=u'ptActivation', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'PtActivation')), opt=True)
     PublicTransportContainer._cont = ASN1Dict([
-        ('embarkationStatus', _PublicTransportContainer_embarkationStatus),
-        ('ptActivation', _PublicTransportContainer_ptActivation),
+        (u'embarkationStatus', _PublicTransportContainer_embarkationStatus),
+        (u'ptActivation', _PublicTransportContainer_ptActivation),
         ])
     PublicTransportContainer._ext = None
     
     #-----< SpecialTransportContainer >-----#
-    SpecialTransportContainer = SEQ(name='SpecialTransportContainer', mode=MODE_TYPE)
-    _SpecialTransportContainer_specialTransportType = BIT_STR(name='specialTransportType', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'SpecialTransportType')))
-    _SpecialTransportContainer_lightBarSirenInUse = BIT_STR(name='lightBarSirenInUse', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'LightBarSirenInUse')))
+    SpecialTransportContainer = SEQ(name=u'SpecialTransportContainer', mode=MODE_TYPE)
+    _SpecialTransportContainer_specialTransportType = BIT_STR(name=u'specialTransportType', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'SpecialTransportType')))
+    _SpecialTransportContainer_lightBarSirenInUse = BIT_STR(name=u'lightBarSirenInUse', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'LightBarSirenInUse')))
     SpecialTransportContainer._cont = ASN1Dict([
-        ('specialTransportType', _SpecialTransportContainer_specialTransportType),
-        ('lightBarSirenInUse', _SpecialTransportContainer_lightBarSirenInUse),
+        (u'specialTransportType', _SpecialTransportContainer_specialTransportType),
+        (u'lightBarSirenInUse', _SpecialTransportContainer_lightBarSirenInUse),
         ])
     SpecialTransportContainer._ext = None
     
     #-----< DangerousGoodsContainer >-----#
-    DangerousGoodsContainer = SEQ(name='DangerousGoodsContainer', mode=MODE_TYPE)
-    _DangerousGoodsContainer_dangerousGoodsBasic = ENUM(name='dangerousGoodsBasic', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'DangerousGoodsBasic')))
+    DangerousGoodsContainer = SEQ(name=u'DangerousGoodsContainer', mode=MODE_TYPE)
+    _DangerousGoodsContainer_dangerousGoodsBasic = ENUM(name=u'dangerousGoodsBasic', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'DangerousGoodsBasic')))
     DangerousGoodsContainer._cont = ASN1Dict([
-        ('dangerousGoodsBasic', _DangerousGoodsContainer_dangerousGoodsBasic),
+        (u'dangerousGoodsBasic', _DangerousGoodsContainer_dangerousGoodsBasic),
         ])
     DangerousGoodsContainer._ext = None
     
     #-----< RoadWorksContainerBasic >-----#
-    RoadWorksContainerBasic = SEQ(name='RoadWorksContainerBasic', mode=MODE_TYPE)
-    _RoadWorksContainerBasic_roadworksSubCauseCode = INT(name='roadworksSubCauseCode', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'RoadworksSubCauseCode')), opt=True)
-    _RoadWorksContainerBasic_lightBarSirenInUse = BIT_STR(name='lightBarSirenInUse', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'LightBarSirenInUse')))
-    _RoadWorksContainerBasic_closedLanes = SEQ(name='closedLanes', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'ClosedLanes')), opt=True)
+    RoadWorksContainerBasic = SEQ(name=u'RoadWorksContainerBasic', mode=MODE_TYPE)
+    _RoadWorksContainerBasic_roadworksSubCauseCode = INT(name=u'roadworksSubCauseCode', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'RoadworksSubCauseCode')), opt=True)
+    _RoadWorksContainerBasic_lightBarSirenInUse = BIT_STR(name=u'lightBarSirenInUse', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'LightBarSirenInUse')))
+    _RoadWorksContainerBasic_closedLanes = SEQ(name=u'closedLanes', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'ClosedLanes')), opt=True)
     RoadWorksContainerBasic._cont = ASN1Dict([
-        ('roadworksSubCauseCode', _RoadWorksContainerBasic_roadworksSubCauseCode),
-        ('lightBarSirenInUse', _RoadWorksContainerBasic_lightBarSirenInUse),
-        ('closedLanes', _RoadWorksContainerBasic_closedLanes),
+        (u'roadworksSubCauseCode', _RoadWorksContainerBasic_roadworksSubCauseCode),
+        (u'lightBarSirenInUse', _RoadWorksContainerBasic_lightBarSirenInUse),
+        (u'closedLanes', _RoadWorksContainerBasic_closedLanes),
         ])
     RoadWorksContainerBasic._ext = None
     
     #-----< RescueContainer >-----#
-    RescueContainer = SEQ(name='RescueContainer', mode=MODE_TYPE)
-    _RescueContainer_lightBarSirenInUse = BIT_STR(name='lightBarSirenInUse', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'LightBarSirenInUse')))
+    RescueContainer = SEQ(name=u'RescueContainer', mode=MODE_TYPE)
+    _RescueContainer_lightBarSirenInUse = BIT_STR(name=u'lightBarSirenInUse', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'LightBarSirenInUse')))
     RescueContainer._cont = ASN1Dict([
-        ('lightBarSirenInUse', _RescueContainer_lightBarSirenInUse),
+        (u'lightBarSirenInUse', _RescueContainer_lightBarSirenInUse),
         ])
     RescueContainer._ext = None
     
     #-----< EmergencyContainer >-----#
-    EmergencyContainer = SEQ(name='EmergencyContainer', mode=MODE_TYPE)
-    _EmergencyContainer_lightBarSirenInUse = BIT_STR(name='lightBarSirenInUse', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'LightBarSirenInUse')))
-    _EmergencyContainer_incidentIndication = SEQ(name='incidentIndication', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'CauseCode')), opt=True)
-    _EmergencyContainer_emergencyPriority = BIT_STR(name='emergencyPriority', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'EmergencyPriority')), opt=True)
+    EmergencyContainer = SEQ(name=u'EmergencyContainer', mode=MODE_TYPE)
+    _EmergencyContainer_lightBarSirenInUse = BIT_STR(name=u'lightBarSirenInUse', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'LightBarSirenInUse')))
+    _EmergencyContainer_incidentIndication = SEQ(name=u'incidentIndication', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'CauseCode')), opt=True)
+    _EmergencyContainer_emergencyPriority = BIT_STR(name=u'emergencyPriority', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'EmergencyPriority')), opt=True)
     EmergencyContainer._cont = ASN1Dict([
-        ('lightBarSirenInUse', _EmergencyContainer_lightBarSirenInUse),
-        ('incidentIndication', _EmergencyContainer_incidentIndication),
-        ('emergencyPriority', _EmergencyContainer_emergencyPriority),
+        (u'lightBarSirenInUse', _EmergencyContainer_lightBarSirenInUse),
+        (u'incidentIndication', _EmergencyContainer_incidentIndication),
+        (u'emergencyPriority', _EmergencyContainer_emergencyPriority),
         ])
     EmergencyContainer._ext = None
     
     #-----< SafetyCarContainer >-----#
-    SafetyCarContainer = SEQ(name='SafetyCarContainer', mode=MODE_TYPE)
-    _SafetyCarContainer_lightBarSirenInUse = BIT_STR(name='lightBarSirenInUse', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'LightBarSirenInUse')))
-    _SafetyCarContainer_incidentIndication = SEQ(name='incidentIndication', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'CauseCode')), opt=True)
-    _SafetyCarContainer_trafficRule = ENUM(name='trafficRule', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'TrafficRule')), opt=True)
-    _SafetyCarContainer_speedLimit = INT(name='speedLimit', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'SpeedLimit')), opt=True)
+    SafetyCarContainer = SEQ(name=u'SafetyCarContainer', mode=MODE_TYPE)
+    _SafetyCarContainer_lightBarSirenInUse = BIT_STR(name=u'lightBarSirenInUse', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'LightBarSirenInUse')))
+    _SafetyCarContainer_incidentIndication = SEQ(name=u'incidentIndication', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'CauseCode')), opt=True)
+    _SafetyCarContainer_trafficRule = ENUM(name=u'trafficRule', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'TrafficRule')), opt=True)
+    _SafetyCarContainer_speedLimit = INT(name=u'speedLimit', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'SpeedLimit')), opt=True)
     SafetyCarContainer._cont = ASN1Dict([
-        ('lightBarSirenInUse', _SafetyCarContainer_lightBarSirenInUse),
-        ('incidentIndication', _SafetyCarContainer_incidentIndication),
-        ('trafficRule', _SafetyCarContainer_trafficRule),
-        ('speedLimit', _SafetyCarContainer_speedLimit),
+        (u'lightBarSirenInUse', _SafetyCarContainer_lightBarSirenInUse),
+        (u'incidentIndication', _SafetyCarContainer_incidentIndication),
+        (u'trafficRule', _SafetyCarContainer_trafficRule),
+        (u'speedLimit', _SafetyCarContainer_speedLimit),
         ])
     SafetyCarContainer._ext = None
     
     #-----< RSUContainerHighFrequency >-----#
-    RSUContainerHighFrequency = SEQ(name='RSUContainerHighFrequency', mode=MODE_TYPE)
-    _RSUContainerHighFrequency_protectedCommunicationZonesRSU = SEQ_OF(name='protectedCommunicationZonesRSU', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'ProtectedCommunicationZonesRSU')), opt=True)
+    RSUContainerHighFrequency = SEQ(name=u'RSUContainerHighFrequency', mode=MODE_TYPE)
+    _RSUContainerHighFrequency_protectedCommunicationZonesRSU = SEQ_OF(name=u'protectedCommunicationZonesRSU', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'ProtectedCommunicationZonesRSU')), opt=True)
     RSUContainerHighFrequency._cont = ASN1Dict([
-        ('protectedCommunicationZonesRSU', _RSUContainerHighFrequency_protectedCommunicationZonesRSU),
+        (u'protectedCommunicationZonesRSU', _RSUContainerHighFrequency_protectedCommunicationZonesRSU),
         ])
     RSUContainerHighFrequency._ext = []
     
     #-----< GenerationDeltaTime >-----#
-    GenerationDeltaTime = INT(name='GenerationDeltaTime', mode=MODE_TYPE)
-    GenerationDeltaTime._cont = ASN1Dict([('oneMilliSec', 1)])
+    GenerationDeltaTime = INT(name=u'GenerationDeltaTime', mode=MODE_TYPE)
+    GenerationDeltaTime._cont = ASN1Dict([(u'oneMilliSec', 1)])
     GenerationDeltaTime._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=65535)], ev=None, er=[])
     
     _all_ = [
@@ -706,2435 +706,2435 @@ class CAM_PDU_Descriptions:
 
 class DSRC:
 
-    _name_  = 'DSRC'
+    _name_  = u'DSRC'
     _oid_   = [1, 0, 19091, 2, 2, 2]
     
     _obj_ = [
-        'REG-EXT-ID-AND-TYPE',
-        'RegionalExtension',
-        'MapData',
-        'RTCMcorrections',
-        'SPAT',
-        'SignalRequestMessage',
-        'SignalStatusMessage',
-        'AdvisorySpeed',
-        'AdvisorySpeedList',
-        'AntennaOffsetSet',
-        'ComputedLane',
-        'ConnectsToList',
-        'ConnectingLane',
-        'Connection',
-        'ConnectionManeuverAssist',
-        'DataParameters',
-        'DDateTime',
-        'EnabledLaneList',
-        'FullPositionVector',
-        'GenericLane',
-        'IntersectionAccessPoint',
-        'IntersectionGeometry',
-        'IntersectionGeometryList',
-        'IntersectionReferenceID',
-        'IntersectionState',
-        'IntersectionStateList',
-        'LaneAttributes',
-        'LaneDataAttribute',
-        'LaneDataAttributeList',
-        'LaneList',
-        'LaneSharing',
-        'LaneTypeAttributes',
-        'ManeuverAssistList',
-        'MovementEvent',
-        'MovementEventList',
-        'MovementList',
-        'MovementState',
-        'NodeAttributeSetXY',
-        'NodeAttributeXY',
-        'NodeAttributeXYList',
-        'Node-LLmD-64b',
-        'Node-XY-20b',
-        'Node-XY-22b',
-        'Node-XY-24b',
-        'Node-XY-26b',
-        'Node-XY-28b',
-        'Node-XY-32b',
-        'NodeListXY',
-        'NodeOffsetPointXY',
-        'NodeXY',
-        'NodeSetXY',
-        'OverlayLaneList',
-        'PositionalAccuracy',
-        'PositionConfidenceSet',
-        'Position3D',
-        'PreemptPriorityList',
-        'RegulatorySpeedLimit',
-        'RequestorDescription',
-        'RequestorPositionVector',
-        'RequestorType',
-        'RestrictionClassAssignment',
-        'RestrictionClassList',
-        'RestrictionUserType',
-        'RestrictionUserTypeList',
-        'RoadLaneSetList',
-        'RoadSegmentReferenceID',
-        'RoadSegment',
-        'RoadSegmentList',
-        'RTCMheader',
-        'RTCMmessageList',
-        'SegmentAttributeXYList',
-        'SignalControlZone',
-        'SignalRequesterInfo',
-        'SignalRequest',
-        'SignalRequestList',
-        'SignalRequestPackage',
-        'SignalStatus',
-        'SignalStatusList',
-        'SignalStatusPackageList',
-        'SignalStatusPackage',
-        'SpeedandHeadingandThrottleConfidence',
-        'SpeedLimitList',
-        'SpeedLimitType',
-        'TimeChangeDetails',
-        'TimeMark',
-        'TransmissionAndSpeed',
-        'VehicleID',
-        'AdvisorySpeedType',
-        'AllowedManeuvers',
-        'Angle',
-        'ApproachID',
-        'BasicVehicleRole',
-        'DDay',
-        'DeltaAngle',
-        'DeltaTime',
-        'DescriptiveName',
-        'DHour',
-        'DMinute',
-        'DMonth',
-        'DOffset',
-        'DrivenLineOffsetLg',
-        'DrivenLineOffsetSm',
-        'DSecond',
-        'DSRCmsgID',
-        'mapData',
-        'rtcmCorrections',
-        'signalPhaseAndTimingMessage',
-        'signalRequestMessage',
-        'signalStatusMessage',
-        'DYear',
-        'Elevation',
-        'ElevationConfidence',
-        'FuelType',
-        'unknownFuel',
-        'gasoline',
-        'ethanol',
-        'diesel',
-        'electric',
-        'hybrid',
-        'hydrogen',
-        'natGasLiquid',
-        'natGasComp',
-        'propane',
-        'GNSSstatus',
-        'HeadingConfidence',
-        'Heading',
-        'IntersectionID',
-        'IntersectionStatusObject',
-        'LaneAttributes-Barrier',
-        'LaneAttributes-Bike',
-        'LaneAttributes-Crosswalk',
-        'LaneAttributes-Parking',
-        'LaneAttributes-Sidewalk',
-        'LaneAttributes-Striping',
-        'LaneAttributes-TrackedVehicle',
-        'LaneAttributes-Vehicle',
-        'LaneConnectionID',
-        'LaneDirection',
-        'LaneID',
-        'LayerID',
-        'LayerType',
-        'LaneWidth',
-        'MergeDivergeNodeAngle',
-        'MinuteOfTheYear',
-        'MovementPhaseState',
-        'MsgCount',
-        'Offset-B09',
-        'Offset-B10',
-        'Offset-B11',
-        'Offset-B12',
-        'Offset-B13',
-        'Offset-B14',
-        'Offset-B16',
-        'PedestrianBicycleDetect',
-        'PositionConfidence',
-        'PrioritizationResponseStatus',
-        'PriorityRequestType',
-        'RegionId',
-        'noRegion',
-        'addGrpA',
-        'addGrpB',
-        'addGrpC',
-        'RequestID',
-        'RequestImportanceLevel',
-        'RequestSubRole',
-        'RestrictionAppliesTo',
-        'RestrictionClassID',
-        'RoadRegulatorID',
-        'RoadSegmentID',
-        'RoadwayCrownAngle',
-        'RTCMmessage',
-        'RTCM-Revision',
-        'Scale-B12',
-        'SignalGroupID',
-        'SegmentAttributeXY',
-        'SemiMajorAxisAccuracy',
-        'SemiMajorAxisOrientation',
-        'SemiMinorAxisAccuracy',
-        'SpeedAdvice',
-        'SpeedConfidence',
-        'TemporaryID',
-        'ThrottleConfidence',
-        'TimeConfidence',
-        'TimeIntervalConfidence',
-        'TransitVehicleOccupancy',
-        'TransitVehicleStatus',
-        'TransmissionState',
-        'VehicleHeight',
-        'VehicleType',
-        'Velocity',
-        'WaitOnStopline',
-        'ZoneLength',
+        u'REG-EXT-ID-AND-TYPE',
+        u'RegionalExtension',
+        u'MapData',
+        u'RTCMcorrections',
+        u'SPAT',
+        u'SignalRequestMessage',
+        u'SignalStatusMessage',
+        u'AdvisorySpeed',
+        u'AdvisorySpeedList',
+        u'AntennaOffsetSet',
+        u'ComputedLane',
+        u'ConnectsToList',
+        u'ConnectingLane',
+        u'Connection',
+        u'ConnectionManeuverAssist',
+        u'DataParameters',
+        u'DDateTime',
+        u'EnabledLaneList',
+        u'FullPositionVector',
+        u'GenericLane',
+        u'IntersectionAccessPoint',
+        u'IntersectionGeometry',
+        u'IntersectionGeometryList',
+        u'IntersectionReferenceID',
+        u'IntersectionState',
+        u'IntersectionStateList',
+        u'LaneAttributes',
+        u'LaneDataAttribute',
+        u'LaneDataAttributeList',
+        u'LaneList',
+        u'LaneSharing',
+        u'LaneTypeAttributes',
+        u'ManeuverAssistList',
+        u'MovementEvent',
+        u'MovementEventList',
+        u'MovementList',
+        u'MovementState',
+        u'NodeAttributeSetXY',
+        u'NodeAttributeXY',
+        u'NodeAttributeXYList',
+        u'Node-LLmD-64b',
+        u'Node-XY-20b',
+        u'Node-XY-22b',
+        u'Node-XY-24b',
+        u'Node-XY-26b',
+        u'Node-XY-28b',
+        u'Node-XY-32b',
+        u'NodeListXY',
+        u'NodeOffsetPointXY',
+        u'NodeXY',
+        u'NodeSetXY',
+        u'OverlayLaneList',
+        u'PositionalAccuracy',
+        u'PositionConfidenceSet',
+        u'Position3D',
+        u'PreemptPriorityList',
+        u'RegulatorySpeedLimit',
+        u'RequestorDescription',
+        u'RequestorPositionVector',
+        u'RequestorType',
+        u'RestrictionClassAssignment',
+        u'RestrictionClassList',
+        u'RestrictionUserType',
+        u'RestrictionUserTypeList',
+        u'RoadLaneSetList',
+        u'RoadSegmentReferenceID',
+        u'RoadSegment',
+        u'RoadSegmentList',
+        u'RTCMheader',
+        u'RTCMmessageList',
+        u'SegmentAttributeXYList',
+        u'SignalControlZone',
+        u'SignalRequesterInfo',
+        u'SignalRequest',
+        u'SignalRequestList',
+        u'SignalRequestPackage',
+        u'SignalStatus',
+        u'SignalStatusList',
+        u'SignalStatusPackageList',
+        u'SignalStatusPackage',
+        u'SpeedandHeadingandThrottleConfidence',
+        u'SpeedLimitList',
+        u'SpeedLimitType',
+        u'TimeChangeDetails',
+        u'TimeMark',
+        u'TransmissionAndSpeed',
+        u'VehicleID',
+        u'AdvisorySpeedType',
+        u'AllowedManeuvers',
+        u'Angle',
+        u'ApproachID',
+        u'BasicVehicleRole',
+        u'DDay',
+        u'DeltaAngle',
+        u'DeltaTime',
+        u'DescriptiveName',
+        u'DHour',
+        u'DMinute',
+        u'DMonth',
+        u'DOffset',
+        u'DrivenLineOffsetLg',
+        u'DrivenLineOffsetSm',
+        u'DSecond',
+        u'DSRCmsgID',
+        u'mapData',
+        u'rtcmCorrections',
+        u'signalPhaseAndTimingMessage',
+        u'signalRequestMessage',
+        u'signalStatusMessage',
+        u'DYear',
+        u'Elevation',
+        u'ElevationConfidence',
+        u'FuelType',
+        u'unknownFuel',
+        u'gasoline',
+        u'ethanol',
+        u'diesel',
+        u'electric',
+        u'hybrid',
+        u'hydrogen',
+        u'natGasLiquid',
+        u'natGasComp',
+        u'propane',
+        u'GNSSstatus',
+        u'HeadingConfidence',
+        u'Heading',
+        u'IntersectionID',
+        u'IntersectionStatusObject',
+        u'LaneAttributes-Barrier',
+        u'LaneAttributes-Bike',
+        u'LaneAttributes-Crosswalk',
+        u'LaneAttributes-Parking',
+        u'LaneAttributes-Sidewalk',
+        u'LaneAttributes-Striping',
+        u'LaneAttributes-TrackedVehicle',
+        u'LaneAttributes-Vehicle',
+        u'LaneConnectionID',
+        u'LaneDirection',
+        u'LaneID',
+        u'LayerID',
+        u'LayerType',
+        u'LaneWidth',
+        u'MergeDivergeNodeAngle',
+        u'MinuteOfTheYear',
+        u'MovementPhaseState',
+        u'MsgCount',
+        u'Offset-B09',
+        u'Offset-B10',
+        u'Offset-B11',
+        u'Offset-B12',
+        u'Offset-B13',
+        u'Offset-B14',
+        u'Offset-B16',
+        u'PedestrianBicycleDetect',
+        u'PositionConfidence',
+        u'PrioritizationResponseStatus',
+        u'PriorityRequestType',
+        u'RegionId',
+        u'noRegion',
+        u'addGrpA',
+        u'addGrpB',
+        u'addGrpC',
+        u'RequestID',
+        u'RequestImportanceLevel',
+        u'RequestSubRole',
+        u'RestrictionAppliesTo',
+        u'RestrictionClassID',
+        u'RoadRegulatorID',
+        u'RoadSegmentID',
+        u'RoadwayCrownAngle',
+        u'RTCMmessage',
+        u'RTCM-Revision',
+        u'Scale-B12',
+        u'SignalGroupID',
+        u'SegmentAttributeXY',
+        u'SemiMajorAxisAccuracy',
+        u'SemiMajorAxisOrientation',
+        u'SemiMinorAxisAccuracy',
+        u'SpeedAdvice',
+        u'SpeedConfidence',
+        u'TemporaryID',
+        u'ThrottleConfidence',
+        u'TimeConfidence',
+        u'TimeIntervalConfidence',
+        u'TransitVehicleOccupancy',
+        u'TransitVehicleStatus',
+        u'TransmissionState',
+        u'VehicleHeight',
+        u'VehicleType',
+        u'Velocity',
+        u'WaitOnStopline',
+        u'ZoneLength',
         ]
     _type_ = [
-        'REG-EXT-ID-AND-TYPE',
-        'RegionalExtension',
-        'MapData',
-        'RTCMcorrections',
-        'SPAT',
-        'SignalRequestMessage',
-        'SignalStatusMessage',
-        'AdvisorySpeed',
-        'AdvisorySpeedList',
-        'AntennaOffsetSet',
-        'ComputedLane',
-        'ConnectsToList',
-        'ConnectingLane',
-        'Connection',
-        'ConnectionManeuverAssist',
-        'DataParameters',
-        'DDateTime',
-        'EnabledLaneList',
-        'FullPositionVector',
-        'GenericLane',
-        'IntersectionAccessPoint',
-        'IntersectionGeometry',
-        'IntersectionGeometryList',
-        'IntersectionReferenceID',
-        'IntersectionState',
-        'IntersectionStateList',
-        'LaneAttributes',
-        'LaneDataAttribute',
-        'LaneDataAttributeList',
-        'LaneList',
-        'LaneSharing',
-        'LaneTypeAttributes',
-        'ManeuverAssistList',
-        'MovementEvent',
-        'MovementEventList',
-        'MovementList',
-        'MovementState',
-        'NodeAttributeSetXY',
-        'NodeAttributeXY',
-        'NodeAttributeXYList',
-        'Node-LLmD-64b',
-        'Node-XY-20b',
-        'Node-XY-22b',
-        'Node-XY-24b',
-        'Node-XY-26b',
-        'Node-XY-28b',
-        'Node-XY-32b',
-        'NodeListXY',
-        'NodeOffsetPointXY',
-        'NodeXY',
-        'NodeSetXY',
-        'OverlayLaneList',
-        'PositionalAccuracy',
-        'PositionConfidenceSet',
-        'Position3D',
-        'PreemptPriorityList',
-        'RegulatorySpeedLimit',
-        'RequestorDescription',
-        'RequestorPositionVector',
-        'RequestorType',
-        'RestrictionClassAssignment',
-        'RestrictionClassList',
-        'RestrictionUserType',
-        'RestrictionUserTypeList',
-        'RoadLaneSetList',
-        'RoadSegmentReferenceID',
-        'RoadSegment',
-        'RoadSegmentList',
-        'RTCMheader',
-        'RTCMmessageList',
-        'SegmentAttributeXYList',
-        'SignalControlZone',
-        'SignalRequesterInfo',
-        'SignalRequest',
-        'SignalRequestList',
-        'SignalRequestPackage',
-        'SignalStatus',
-        'SignalStatusList',
-        'SignalStatusPackageList',
-        'SignalStatusPackage',
-        'SpeedandHeadingandThrottleConfidence',
-        'SpeedLimitList',
-        'SpeedLimitType',
-        'TimeChangeDetails',
-        'TimeMark',
-        'TransmissionAndSpeed',
-        'VehicleID',
-        'AdvisorySpeedType',
-        'AllowedManeuvers',
-        'Angle',
-        'ApproachID',
-        'BasicVehicleRole',
-        'DDay',
-        'DeltaAngle',
-        'DeltaTime',
-        'DescriptiveName',
-        'DHour',
-        'DMinute',
-        'DMonth',
-        'DOffset',
-        'DrivenLineOffsetLg',
-        'DrivenLineOffsetSm',
-        'DSecond',
-        'DSRCmsgID',
-        'DYear',
-        'Elevation',
-        'ElevationConfidence',
-        'FuelType',
-        'GNSSstatus',
-        'HeadingConfidence',
-        'Heading',
-        'IntersectionID',
-        'IntersectionStatusObject',
-        'LaneAttributes-Barrier',
-        'LaneAttributes-Bike',
-        'LaneAttributes-Crosswalk',
-        'LaneAttributes-Parking',
-        'LaneAttributes-Sidewalk',
-        'LaneAttributes-Striping',
-        'LaneAttributes-TrackedVehicle',
-        'LaneAttributes-Vehicle',
-        'LaneConnectionID',
-        'LaneDirection',
-        'LaneID',
-        'LayerID',
-        'LayerType',
-        'LaneWidth',
-        'MergeDivergeNodeAngle',
-        'MinuteOfTheYear',
-        'MovementPhaseState',
-        'MsgCount',
-        'Offset-B09',
-        'Offset-B10',
-        'Offset-B11',
-        'Offset-B12',
-        'Offset-B13',
-        'Offset-B14',
-        'Offset-B16',
-        'PedestrianBicycleDetect',
-        'PositionConfidence',
-        'PrioritizationResponseStatus',
-        'PriorityRequestType',
-        'RegionId',
-        'RequestID',
-        'RequestImportanceLevel',
-        'RequestSubRole',
-        'RestrictionAppliesTo',
-        'RestrictionClassID',
-        'RoadRegulatorID',
-        'RoadSegmentID',
-        'RoadwayCrownAngle',
-        'RTCMmessage',
-        'RTCM-Revision',
-        'Scale-B12',
-        'SignalGroupID',
-        'SegmentAttributeXY',
-        'SemiMajorAxisAccuracy',
-        'SemiMajorAxisOrientation',
-        'SemiMinorAxisAccuracy',
-        'SpeedAdvice',
-        'SpeedConfidence',
-        'TemporaryID',
-        'ThrottleConfidence',
-        'TimeConfidence',
-        'TimeIntervalConfidence',
-        'TransitVehicleOccupancy',
-        'TransitVehicleStatus',
-        'TransmissionState',
-        'VehicleHeight',
-        'VehicleType',
-        'Velocity',
-        'WaitOnStopline',
-        'ZoneLength',
+        u'REG-EXT-ID-AND-TYPE',
+        u'RegionalExtension',
+        u'MapData',
+        u'RTCMcorrections',
+        u'SPAT',
+        u'SignalRequestMessage',
+        u'SignalStatusMessage',
+        u'AdvisorySpeed',
+        u'AdvisorySpeedList',
+        u'AntennaOffsetSet',
+        u'ComputedLane',
+        u'ConnectsToList',
+        u'ConnectingLane',
+        u'Connection',
+        u'ConnectionManeuverAssist',
+        u'DataParameters',
+        u'DDateTime',
+        u'EnabledLaneList',
+        u'FullPositionVector',
+        u'GenericLane',
+        u'IntersectionAccessPoint',
+        u'IntersectionGeometry',
+        u'IntersectionGeometryList',
+        u'IntersectionReferenceID',
+        u'IntersectionState',
+        u'IntersectionStateList',
+        u'LaneAttributes',
+        u'LaneDataAttribute',
+        u'LaneDataAttributeList',
+        u'LaneList',
+        u'LaneSharing',
+        u'LaneTypeAttributes',
+        u'ManeuverAssistList',
+        u'MovementEvent',
+        u'MovementEventList',
+        u'MovementList',
+        u'MovementState',
+        u'NodeAttributeSetXY',
+        u'NodeAttributeXY',
+        u'NodeAttributeXYList',
+        u'Node-LLmD-64b',
+        u'Node-XY-20b',
+        u'Node-XY-22b',
+        u'Node-XY-24b',
+        u'Node-XY-26b',
+        u'Node-XY-28b',
+        u'Node-XY-32b',
+        u'NodeListXY',
+        u'NodeOffsetPointXY',
+        u'NodeXY',
+        u'NodeSetXY',
+        u'OverlayLaneList',
+        u'PositionalAccuracy',
+        u'PositionConfidenceSet',
+        u'Position3D',
+        u'PreemptPriorityList',
+        u'RegulatorySpeedLimit',
+        u'RequestorDescription',
+        u'RequestorPositionVector',
+        u'RequestorType',
+        u'RestrictionClassAssignment',
+        u'RestrictionClassList',
+        u'RestrictionUserType',
+        u'RestrictionUserTypeList',
+        u'RoadLaneSetList',
+        u'RoadSegmentReferenceID',
+        u'RoadSegment',
+        u'RoadSegmentList',
+        u'RTCMheader',
+        u'RTCMmessageList',
+        u'SegmentAttributeXYList',
+        u'SignalControlZone',
+        u'SignalRequesterInfo',
+        u'SignalRequest',
+        u'SignalRequestList',
+        u'SignalRequestPackage',
+        u'SignalStatus',
+        u'SignalStatusList',
+        u'SignalStatusPackageList',
+        u'SignalStatusPackage',
+        u'SpeedandHeadingandThrottleConfidence',
+        u'SpeedLimitList',
+        u'SpeedLimitType',
+        u'TimeChangeDetails',
+        u'TimeMark',
+        u'TransmissionAndSpeed',
+        u'VehicleID',
+        u'AdvisorySpeedType',
+        u'AllowedManeuvers',
+        u'Angle',
+        u'ApproachID',
+        u'BasicVehicleRole',
+        u'DDay',
+        u'DeltaAngle',
+        u'DeltaTime',
+        u'DescriptiveName',
+        u'DHour',
+        u'DMinute',
+        u'DMonth',
+        u'DOffset',
+        u'DrivenLineOffsetLg',
+        u'DrivenLineOffsetSm',
+        u'DSecond',
+        u'DSRCmsgID',
+        u'DYear',
+        u'Elevation',
+        u'ElevationConfidence',
+        u'FuelType',
+        u'GNSSstatus',
+        u'HeadingConfidence',
+        u'Heading',
+        u'IntersectionID',
+        u'IntersectionStatusObject',
+        u'LaneAttributes-Barrier',
+        u'LaneAttributes-Bike',
+        u'LaneAttributes-Crosswalk',
+        u'LaneAttributes-Parking',
+        u'LaneAttributes-Sidewalk',
+        u'LaneAttributes-Striping',
+        u'LaneAttributes-TrackedVehicle',
+        u'LaneAttributes-Vehicle',
+        u'LaneConnectionID',
+        u'LaneDirection',
+        u'LaneID',
+        u'LayerID',
+        u'LayerType',
+        u'LaneWidth',
+        u'MergeDivergeNodeAngle',
+        u'MinuteOfTheYear',
+        u'MovementPhaseState',
+        u'MsgCount',
+        u'Offset-B09',
+        u'Offset-B10',
+        u'Offset-B11',
+        u'Offset-B12',
+        u'Offset-B13',
+        u'Offset-B14',
+        u'Offset-B16',
+        u'PedestrianBicycleDetect',
+        u'PositionConfidence',
+        u'PrioritizationResponseStatus',
+        u'PriorityRequestType',
+        u'RegionId',
+        u'RequestID',
+        u'RequestImportanceLevel',
+        u'RequestSubRole',
+        u'RestrictionAppliesTo',
+        u'RestrictionClassID',
+        u'RoadRegulatorID',
+        u'RoadSegmentID',
+        u'RoadwayCrownAngle',
+        u'RTCMmessage',
+        u'RTCM-Revision',
+        u'Scale-B12',
+        u'SignalGroupID',
+        u'SegmentAttributeXY',
+        u'SemiMajorAxisAccuracy',
+        u'SemiMajorAxisOrientation',
+        u'SemiMinorAxisAccuracy',
+        u'SpeedAdvice',
+        u'SpeedConfidence',
+        u'TemporaryID',
+        u'ThrottleConfidence',
+        u'TimeConfidence',
+        u'TimeIntervalConfidence',
+        u'TransitVehicleOccupancy',
+        u'TransitVehicleStatus',
+        u'TransmissionState',
+        u'VehicleHeight',
+        u'VehicleType',
+        u'Velocity',
+        u'WaitOnStopline',
+        u'ZoneLength',
         ]
     _set_ = [
         ]
     _val_ = [
-        'mapData',
-        'rtcmCorrections',
-        'signalPhaseAndTimingMessage',
-        'signalRequestMessage',
-        'signalStatusMessage',
-        'unknownFuel',
-        'gasoline',
-        'ethanol',
-        'diesel',
-        'electric',
-        'hybrid',
-        'hydrogen',
-        'natGasLiquid',
-        'natGasComp',
-        'propane',
-        'noRegion',
-        'addGrpA',
-        'addGrpB',
-        'addGrpC',
+        u'mapData',
+        u'rtcmCorrections',
+        u'signalPhaseAndTimingMessage',
+        u'signalRequestMessage',
+        u'signalStatusMessage',
+        u'unknownFuel',
+        u'gasoline',
+        u'ethanol',
+        u'diesel',
+        u'electric',
+        u'hybrid',
+        u'hydrogen',
+        u'natGasLiquid',
+        u'natGasComp',
+        u'propane',
+        u'noRegion',
+        u'addGrpA',
+        u'addGrpB',
+        u'addGrpC',
         ]
     _class_ = [
-        'REG-EXT-ID-AND-TYPE',
+        u'REG-EXT-ID-AND-TYPE',
         ]
     _param_ = [
-        'RegionalExtension',
+        u'RegionalExtension',
         ]
     
     #-----< REG-EXT-ID-AND-TYPE >-----#
-    REG_EXT_ID_AND_TYPE = CLASS(name='REG-EXT-ID-AND-TYPE', mode=MODE_TYPE)
-    _REG_EXT_ID_AND_TYPE_id = INT(name='id', mode=MODE_VALUE, typeref=ASN1RefType(('DSRC', 'RegionId')), uniq=True)
-    _REG_EXT_ID_AND_TYPE_Type = OPEN(name='Type', mode=MODE_TYPE)
+    REG_EXT_ID_AND_TYPE = CLASS(name=u'REG-EXT-ID-AND-TYPE', mode=MODE_TYPE)
+    _REG_EXT_ID_AND_TYPE_id = INT(name=u'id', mode=MODE_VALUE, typeref=ASN1RefType(('DSRC', 'RegionId')), uniq=True)
+    _REG_EXT_ID_AND_TYPE_Type = OPEN(name=u'Type', mode=MODE_TYPE)
     REG_EXT_ID_AND_TYPE._cont = ASN1Dict([
-        ('id', _REG_EXT_ID_AND_TYPE_id),
-        ('Type', _REG_EXT_ID_AND_TYPE_Type),
+        (u'id', _REG_EXT_ID_AND_TYPE_id),
+        (u'Type', _REG_EXT_ID_AND_TYPE_Type),
         ])
     
     #-----< RegionalExtension >-----#
-    RegionalExtension = SEQ(name='RegionalExtension', mode=MODE_TYPE, param=True)
+    RegionalExtension = SEQ(name=u'RegionalExtension', mode=MODE_TYPE, param=True)
     
     #-----< MapData >-----#
-    MapData = SEQ(name='MapData', mode=MODE_TYPE)
-    _MapData_timeStamp = INT(name='timeStamp', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'MinuteOfTheYear')), opt=True)
-    _MapData_msgIssueRevision = INT(name='msgIssueRevision', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'MsgCount')))
-    _MapData_layerType = ENUM(name='layerType', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'LayerType')), opt=True)
-    _MapData_layerID = INT(name='layerID', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'LayerID')), opt=True)
-    _MapData_intersections = SEQ_OF(name='intersections', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'IntersectionGeometryList')), opt=True)
-    _MapData_roadSegments = SEQ_OF(name='roadSegments', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'RoadSegmentList')), opt=True)
-    _MapData_dataParameters = SEQ(name='dataParameters', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'DataParameters')), opt=True)
-    _MapData_restrictionList = SEQ_OF(name='restrictionList', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'RestrictionClassList')), opt=True)
-    _MapData_regional = SEQ_OF(name='regional', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    MapData = SEQ(name=u'MapData', mode=MODE_TYPE)
+    _MapData_timeStamp = INT(name=u'timeStamp', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'MinuteOfTheYear')), opt=True)
+    _MapData_msgIssueRevision = INT(name=u'msgIssueRevision', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'MsgCount')))
+    _MapData_layerType = ENUM(name=u'layerType', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'LayerType')), opt=True)
+    _MapData_layerID = INT(name=u'layerID', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'LayerID')), opt=True)
+    _MapData_intersections = SEQ_OF(name=u'intersections', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'IntersectionGeometryList')), opt=True)
+    _MapData_roadSegments = SEQ_OF(name=u'roadSegments', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'RoadSegmentList')), opt=True)
+    _MapData_dataParameters = SEQ(name=u'dataParameters', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'DataParameters')), opt=True)
+    _MapData_restrictionList = SEQ_OF(name=u'restrictionList', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'RestrictionClassList')), opt=True)
+    _MapData_regional = SEQ_OF(name=u'regional', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     __MapData_regional__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('DSRC', 'RegionalExtension')))
-    ___MapData_regional__item__regionId = INT(name='regionId', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('DSRC', 'REG-EXT-ID-AND-TYPE'), ['id']))
+    ___MapData_regional__item__regionId = INT(name=u'regionId', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('DSRC', 'REG-EXT-ID-AND-TYPE'), [u'id']))
     ____MapData_regional__item__regionId_tab = CLASS(name='_tab_REG-EXT-ID-AND-TYPE', mode=MODE_SET, typeref=ASN1RefType(('DSRC', 'REG-EXT-ID-AND-TYPE')))
-    _____MapData_regional__item__regionId_tab_val_Type_0 = SEQ(name='Type', mode=MODE_TYPE, typeref=ASN1RefType(('AddGrpC', 'MapData-addGrpC')))
-    ____MapData_regional__item__regionId_tab._val = ASN1Set(rv=[dict([('Type', _____MapData_regional__item__regionId_tab_val_Type_0), ('id', 3)])], rr=[], ev=None, er=[])
+    _____MapData_regional__item__regionId_tab_val_Type_0 = SEQ(name=u'Type', mode=MODE_TYPE, typeref=ASN1RefType(('AddGrpC', 'MapData-addGrpC')))
+    ____MapData_regional__item__regionId_tab._val = ASN1Set(rv=[dict([(u'Type', _____MapData_regional__item__regionId_tab_val_Type_0), (u'id', 3)])], rr=[], ev=None, er=[])
     ___MapData_regional__item__regionId._const_tab = ____MapData_regional__item__regionId_tab
     ___MapData_regional__item__regionId._const_tab_at = None
-    ___MapData_regional__item__regionId._const_tab_id = 'id'
-    ___MapData_regional__item__regExtValue = OPEN(name='regExtValue', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('DSRC', 'REG-EXT-ID-AND-TYPE'), ['Type']))
+    ___MapData_regional__item__regionId._const_tab_id = u'id'
+    ___MapData_regional__item__regExtValue = OPEN(name=u'regExtValue', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('DSRC', 'REG-EXT-ID-AND-TYPE'), [u'Type']))
     ___MapData_regional__item__regExtValue._const_tab = ____MapData_regional__item__regionId_tab
-    ___MapData_regional__item__regExtValue._const_tab_at = ('..', 'regionId')
-    ___MapData_regional__item__regExtValue._const_tab_id = 'Type'
+    ___MapData_regional__item__regExtValue._const_tab_at = ('..', u'regionId')
+    ___MapData_regional__item__regExtValue._const_tab_id = u'Type'
     __MapData_regional__item_._cont = ASN1Dict([
-        ('regionId', ___MapData_regional__item__regionId),
-        ('regExtValue', ___MapData_regional__item__regExtValue),
+        (u'regionId', ___MapData_regional__item__regionId),
+        (u'regExtValue', ___MapData_regional__item__regExtValue),
         ])
     __MapData_regional__item_._ext = None
     _MapData_regional._cont = __MapData_regional__item_
     _MapData_regional._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=4)], ev=None, er=[])
     MapData._cont = ASN1Dict([
-        ('timeStamp', _MapData_timeStamp),
-        ('msgIssueRevision', _MapData_msgIssueRevision),
-        ('layerType', _MapData_layerType),
-        ('layerID', _MapData_layerID),
-        ('intersections', _MapData_intersections),
-        ('roadSegments', _MapData_roadSegments),
-        ('dataParameters', _MapData_dataParameters),
-        ('restrictionList', _MapData_restrictionList),
-        ('regional', _MapData_regional),
+        (u'timeStamp', _MapData_timeStamp),
+        (u'msgIssueRevision', _MapData_msgIssueRevision),
+        (u'layerType', _MapData_layerType),
+        (u'layerID', _MapData_layerID),
+        (u'intersections', _MapData_intersections),
+        (u'roadSegments', _MapData_roadSegments),
+        (u'dataParameters', _MapData_dataParameters),
+        (u'restrictionList', _MapData_restrictionList),
+        (u'regional', _MapData_regional),
         ])
     MapData._ext = []
     
     #-----< RTCMcorrections >-----#
-    RTCMcorrections = SEQ(name='RTCMcorrections', mode=MODE_TYPE)
-    _RTCMcorrections_msgCnt = INT(name='msgCnt', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'MsgCount')))
-    _RTCMcorrections_rev = ENUM(name='rev', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'RTCM-Revision')))
-    _RTCMcorrections_timeStamp = INT(name='timeStamp', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'MinuteOfTheYear')), opt=True)
-    _RTCMcorrections_anchorPoint = SEQ(name='anchorPoint', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'FullPositionVector')), opt=True)
-    _RTCMcorrections_rtcmHeader = SEQ(name='rtcmHeader', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'RTCMheader')), opt=True)
-    _RTCMcorrections_msgs = SEQ_OF(name='msgs', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'RTCMmessageList')))
-    _RTCMcorrections_regional = SEQ_OF(name='regional', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    RTCMcorrections = SEQ(name=u'RTCMcorrections', mode=MODE_TYPE)
+    _RTCMcorrections_msgCnt = INT(name=u'msgCnt', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'MsgCount')))
+    _RTCMcorrections_rev = ENUM(name=u'rev', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'RTCM-Revision')))
+    _RTCMcorrections_timeStamp = INT(name=u'timeStamp', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'MinuteOfTheYear')), opt=True)
+    _RTCMcorrections_anchorPoint = SEQ(name=u'anchorPoint', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'FullPositionVector')), opt=True)
+    _RTCMcorrections_rtcmHeader = SEQ(name=u'rtcmHeader', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'RTCMheader')), opt=True)
+    _RTCMcorrections_msgs = SEQ_OF(name=u'msgs', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'RTCMmessageList')))
+    _RTCMcorrections_regional = SEQ_OF(name=u'regional', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     __RTCMcorrections_regional__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('DSRC', 'RegionalExtension')))
-    ___RTCMcorrections_regional__item__regionId = INT(name='regionId', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('DSRC', 'REG-EXT-ID-AND-TYPE'), ['id']))
+    ___RTCMcorrections_regional__item__regionId = INT(name=u'regionId', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('DSRC', 'REG-EXT-ID-AND-TYPE'), [u'id']))
     ____RTCMcorrections_regional__item__regionId_tab = CLASS(name='_tab_REG-EXT-ID-AND-TYPE', mode=MODE_SET, typeref=ASN1RefType(('DSRC', 'REG-EXT-ID-AND-TYPE')))
     ____RTCMcorrections_regional__item__regionId_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___RTCMcorrections_regional__item__regionId._const_tab = ____RTCMcorrections_regional__item__regionId_tab
     ___RTCMcorrections_regional__item__regionId._const_tab_at = None
-    ___RTCMcorrections_regional__item__regionId._const_tab_id = 'id'
-    ___RTCMcorrections_regional__item__regExtValue = OPEN(name='regExtValue', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('DSRC', 'REG-EXT-ID-AND-TYPE'), ['Type']))
+    ___RTCMcorrections_regional__item__regionId._const_tab_id = u'id'
+    ___RTCMcorrections_regional__item__regExtValue = OPEN(name=u'regExtValue', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('DSRC', 'REG-EXT-ID-AND-TYPE'), [u'Type']))
     ____RTCMcorrections_regional__item__regExtValue_tab = CLASS(name='_tab_REG-EXT-ID-AND-TYPE', mode=MODE_SET, typeref=ASN1RefType(('DSRC', 'REG-EXT-ID-AND-TYPE')))
     ____RTCMcorrections_regional__item__regExtValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___RTCMcorrections_regional__item__regExtValue._const_tab = ____RTCMcorrections_regional__item__regExtValue_tab
-    ___RTCMcorrections_regional__item__regExtValue._const_tab_at = ('..', 'regionId')
-    ___RTCMcorrections_regional__item__regExtValue._const_tab_id = 'Type'
+    ___RTCMcorrections_regional__item__regExtValue._const_tab_at = ('..', u'regionId')
+    ___RTCMcorrections_regional__item__regExtValue._const_tab_id = u'Type'
     __RTCMcorrections_regional__item_._cont = ASN1Dict([
-        ('regionId', ___RTCMcorrections_regional__item__regionId),
-        ('regExtValue', ___RTCMcorrections_regional__item__regExtValue),
+        (u'regionId', ___RTCMcorrections_regional__item__regionId),
+        (u'regExtValue', ___RTCMcorrections_regional__item__regExtValue),
         ])
     __RTCMcorrections_regional__item_._ext = None
     _RTCMcorrections_regional._cont = __RTCMcorrections_regional__item_
     _RTCMcorrections_regional._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=4)], ev=None, er=[])
     RTCMcorrections._cont = ASN1Dict([
-        ('msgCnt', _RTCMcorrections_msgCnt),
-        ('rev', _RTCMcorrections_rev),
-        ('timeStamp', _RTCMcorrections_timeStamp),
-        ('anchorPoint', _RTCMcorrections_anchorPoint),
-        ('rtcmHeader', _RTCMcorrections_rtcmHeader),
-        ('msgs', _RTCMcorrections_msgs),
-        ('regional', _RTCMcorrections_regional),
+        (u'msgCnt', _RTCMcorrections_msgCnt),
+        (u'rev', _RTCMcorrections_rev),
+        (u'timeStamp', _RTCMcorrections_timeStamp),
+        (u'anchorPoint', _RTCMcorrections_anchorPoint),
+        (u'rtcmHeader', _RTCMcorrections_rtcmHeader),
+        (u'msgs', _RTCMcorrections_msgs),
+        (u'regional', _RTCMcorrections_regional),
         ])
     RTCMcorrections._ext = []
     
     #-----< SPAT >-----#
-    SPAT = SEQ(name='SPAT', mode=MODE_TYPE)
-    _SPAT_timeStamp = INT(name='timeStamp', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'MinuteOfTheYear')), opt=True)
-    _SPAT_name = STR_IA5(name='name', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'DescriptiveName')), opt=True)
-    _SPAT_intersections = SEQ_OF(name='intersections', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'IntersectionStateList')))
-    _SPAT_regional = SEQ_OF(name='regional', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    SPAT = SEQ(name=u'SPAT', mode=MODE_TYPE)
+    _SPAT_timeStamp = INT(name=u'timeStamp', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'MinuteOfTheYear')), opt=True)
+    _SPAT_name = STR_IA5(name=u'name', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'DescriptiveName')), opt=True)
+    _SPAT_intersections = SEQ_OF(name=u'intersections', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'IntersectionStateList')))
+    _SPAT_regional = SEQ_OF(name=u'regional', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     __SPAT_regional__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('DSRC', 'RegionalExtension')))
-    ___SPAT_regional__item__regionId = INT(name='regionId', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('DSRC', 'REG-EXT-ID-AND-TYPE'), ['id']))
+    ___SPAT_regional__item__regionId = INT(name=u'regionId', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('DSRC', 'REG-EXT-ID-AND-TYPE'), [u'id']))
     ____SPAT_regional__item__regionId_tab = CLASS(name='_tab_REG-EXT-ID-AND-TYPE', mode=MODE_SET, typeref=ASN1RefType(('DSRC', 'REG-EXT-ID-AND-TYPE')))
     ____SPAT_regional__item__regionId_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___SPAT_regional__item__regionId._const_tab = ____SPAT_regional__item__regionId_tab
     ___SPAT_regional__item__regionId._const_tab_at = None
-    ___SPAT_regional__item__regionId._const_tab_id = 'id'
-    ___SPAT_regional__item__regExtValue = OPEN(name='regExtValue', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('DSRC', 'REG-EXT-ID-AND-TYPE'), ['Type']))
+    ___SPAT_regional__item__regionId._const_tab_id = u'id'
+    ___SPAT_regional__item__regExtValue = OPEN(name=u'regExtValue', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('DSRC', 'REG-EXT-ID-AND-TYPE'), [u'Type']))
     ____SPAT_regional__item__regExtValue_tab = CLASS(name='_tab_REG-EXT-ID-AND-TYPE', mode=MODE_SET, typeref=ASN1RefType(('DSRC', 'REG-EXT-ID-AND-TYPE')))
     ____SPAT_regional__item__regExtValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___SPAT_regional__item__regExtValue._const_tab = ____SPAT_regional__item__regExtValue_tab
-    ___SPAT_regional__item__regExtValue._const_tab_at = ('..', 'regionId')
-    ___SPAT_regional__item__regExtValue._const_tab_id = 'Type'
+    ___SPAT_regional__item__regExtValue._const_tab_at = ('..', u'regionId')
+    ___SPAT_regional__item__regExtValue._const_tab_id = u'Type'
     __SPAT_regional__item_._cont = ASN1Dict([
-        ('regionId', ___SPAT_regional__item__regionId),
-        ('regExtValue', ___SPAT_regional__item__regExtValue),
+        (u'regionId', ___SPAT_regional__item__regionId),
+        (u'regExtValue', ___SPAT_regional__item__regExtValue),
         ])
     __SPAT_regional__item_._ext = None
     _SPAT_regional._cont = __SPAT_regional__item_
     _SPAT_regional._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=4)], ev=None, er=[])
     SPAT._cont = ASN1Dict([
-        ('timeStamp', _SPAT_timeStamp),
-        ('name', _SPAT_name),
-        ('intersections', _SPAT_intersections),
-        ('regional', _SPAT_regional),
+        (u'timeStamp', _SPAT_timeStamp),
+        (u'name', _SPAT_name),
+        (u'intersections', _SPAT_intersections),
+        (u'regional', _SPAT_regional),
         ])
     SPAT._ext = []
     
     #-----< SignalRequestMessage >-----#
-    SignalRequestMessage = SEQ(name='SignalRequestMessage', mode=MODE_TYPE)
-    _SignalRequestMessage_timeStamp = INT(name='timeStamp', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'MinuteOfTheYear')), opt=True)
-    _SignalRequestMessage_second = INT(name='second', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'DSecond')))
-    _SignalRequestMessage_sequenceNumber = INT(name='sequenceNumber', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'MsgCount')), opt=True)
-    _SignalRequestMessage_requests = SEQ_OF(name='requests', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'SignalRequestList')), opt=True)
-    _SignalRequestMessage_requestor = SEQ(name='requestor', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'RequestorDescription')))
-    _SignalRequestMessage_regional = SEQ_OF(name='regional', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    SignalRequestMessage = SEQ(name=u'SignalRequestMessage', mode=MODE_TYPE)
+    _SignalRequestMessage_timeStamp = INT(name=u'timeStamp', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'MinuteOfTheYear')), opt=True)
+    _SignalRequestMessage_second = INT(name=u'second', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'DSecond')))
+    _SignalRequestMessage_sequenceNumber = INT(name=u'sequenceNumber', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'MsgCount')), opt=True)
+    _SignalRequestMessage_requests = SEQ_OF(name=u'requests', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'SignalRequestList')), opt=True)
+    _SignalRequestMessage_requestor = SEQ(name=u'requestor', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'RequestorDescription')))
+    _SignalRequestMessage_regional = SEQ_OF(name=u'regional', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     __SignalRequestMessage_regional__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('DSRC', 'RegionalExtension')))
-    ___SignalRequestMessage_regional__item__regionId = INT(name='regionId', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('DSRC', 'REG-EXT-ID-AND-TYPE'), ['id']))
+    ___SignalRequestMessage_regional__item__regionId = INT(name=u'regionId', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('DSRC', 'REG-EXT-ID-AND-TYPE'), [u'id']))
     ____SignalRequestMessage_regional__item__regionId_tab = CLASS(name='_tab_REG-EXT-ID-AND-TYPE', mode=MODE_SET, typeref=ASN1RefType(('DSRC', 'REG-EXT-ID-AND-TYPE')))
     ____SignalRequestMessage_regional__item__regionId_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___SignalRequestMessage_regional__item__regionId._const_tab = ____SignalRequestMessage_regional__item__regionId_tab
     ___SignalRequestMessage_regional__item__regionId._const_tab_at = None
-    ___SignalRequestMessage_regional__item__regionId._const_tab_id = 'id'
-    ___SignalRequestMessage_regional__item__regExtValue = OPEN(name='regExtValue', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('DSRC', 'REG-EXT-ID-AND-TYPE'), ['Type']))
+    ___SignalRequestMessage_regional__item__regionId._const_tab_id = u'id'
+    ___SignalRequestMessage_regional__item__regExtValue = OPEN(name=u'regExtValue', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('DSRC', 'REG-EXT-ID-AND-TYPE'), [u'Type']))
     ____SignalRequestMessage_regional__item__regExtValue_tab = CLASS(name='_tab_REG-EXT-ID-AND-TYPE', mode=MODE_SET, typeref=ASN1RefType(('DSRC', 'REG-EXT-ID-AND-TYPE')))
     ____SignalRequestMessage_regional__item__regExtValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___SignalRequestMessage_regional__item__regExtValue._const_tab = ____SignalRequestMessage_regional__item__regExtValue_tab
-    ___SignalRequestMessage_regional__item__regExtValue._const_tab_at = ('..', 'regionId')
-    ___SignalRequestMessage_regional__item__regExtValue._const_tab_id = 'Type'
+    ___SignalRequestMessage_regional__item__regExtValue._const_tab_at = ('..', u'regionId')
+    ___SignalRequestMessage_regional__item__regExtValue._const_tab_id = u'Type'
     __SignalRequestMessage_regional__item_._cont = ASN1Dict([
-        ('regionId', ___SignalRequestMessage_regional__item__regionId),
-        ('regExtValue', ___SignalRequestMessage_regional__item__regExtValue),
+        (u'regionId', ___SignalRequestMessage_regional__item__regionId),
+        (u'regExtValue', ___SignalRequestMessage_regional__item__regExtValue),
         ])
     __SignalRequestMessage_regional__item_._ext = None
     _SignalRequestMessage_regional._cont = __SignalRequestMessage_regional__item_
     _SignalRequestMessage_regional._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=4)], ev=None, er=[])
     SignalRequestMessage._cont = ASN1Dict([
-        ('timeStamp', _SignalRequestMessage_timeStamp),
-        ('second', _SignalRequestMessage_second),
-        ('sequenceNumber', _SignalRequestMessage_sequenceNumber),
-        ('requests', _SignalRequestMessage_requests),
-        ('requestor', _SignalRequestMessage_requestor),
-        ('regional', _SignalRequestMessage_regional),
+        (u'timeStamp', _SignalRequestMessage_timeStamp),
+        (u'second', _SignalRequestMessage_second),
+        (u'sequenceNumber', _SignalRequestMessage_sequenceNumber),
+        (u'requests', _SignalRequestMessage_requests),
+        (u'requestor', _SignalRequestMessage_requestor),
+        (u'regional', _SignalRequestMessage_regional),
         ])
     SignalRequestMessage._ext = []
     
     #-----< SignalStatusMessage >-----#
-    SignalStatusMessage = SEQ(name='SignalStatusMessage', mode=MODE_TYPE)
-    _SignalStatusMessage_timeStamp = INT(name='timeStamp', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'MinuteOfTheYear')), opt=True)
-    _SignalStatusMessage_second = INT(name='second', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'DSecond')))
-    _SignalStatusMessage_sequenceNumber = INT(name='sequenceNumber', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'MsgCount')), opt=True)
-    _SignalStatusMessage_status = SEQ_OF(name='status', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'SignalStatusList')))
-    _SignalStatusMessage_regional = SEQ_OF(name='regional', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    SignalStatusMessage = SEQ(name=u'SignalStatusMessage', mode=MODE_TYPE)
+    _SignalStatusMessage_timeStamp = INT(name=u'timeStamp', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'MinuteOfTheYear')), opt=True)
+    _SignalStatusMessage_second = INT(name=u'second', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'DSecond')))
+    _SignalStatusMessage_sequenceNumber = INT(name=u'sequenceNumber', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'MsgCount')), opt=True)
+    _SignalStatusMessage_status = SEQ_OF(name=u'status', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'SignalStatusList')))
+    _SignalStatusMessage_regional = SEQ_OF(name=u'regional', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     __SignalStatusMessage_regional__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('DSRC', 'RegionalExtension')))
-    ___SignalStatusMessage_regional__item__regionId = INT(name='regionId', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('DSRC', 'REG-EXT-ID-AND-TYPE'), ['id']))
+    ___SignalStatusMessage_regional__item__regionId = INT(name=u'regionId', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('DSRC', 'REG-EXT-ID-AND-TYPE'), [u'id']))
     ____SignalStatusMessage_regional__item__regionId_tab = CLASS(name='_tab_REG-EXT-ID-AND-TYPE', mode=MODE_SET, typeref=ASN1RefType(('DSRC', 'REG-EXT-ID-AND-TYPE')))
     ____SignalStatusMessage_regional__item__regionId_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___SignalStatusMessage_regional__item__regionId._const_tab = ____SignalStatusMessage_regional__item__regionId_tab
     ___SignalStatusMessage_regional__item__regionId._const_tab_at = None
-    ___SignalStatusMessage_regional__item__regionId._const_tab_id = 'id'
-    ___SignalStatusMessage_regional__item__regExtValue = OPEN(name='regExtValue', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('DSRC', 'REG-EXT-ID-AND-TYPE'), ['Type']))
+    ___SignalStatusMessage_regional__item__regionId._const_tab_id = u'id'
+    ___SignalStatusMessage_regional__item__regExtValue = OPEN(name=u'regExtValue', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('DSRC', 'REG-EXT-ID-AND-TYPE'), [u'Type']))
     ____SignalStatusMessage_regional__item__regExtValue_tab = CLASS(name='_tab_REG-EXT-ID-AND-TYPE', mode=MODE_SET, typeref=ASN1RefType(('DSRC', 'REG-EXT-ID-AND-TYPE')))
     ____SignalStatusMessage_regional__item__regExtValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___SignalStatusMessage_regional__item__regExtValue._const_tab = ____SignalStatusMessage_regional__item__regExtValue_tab
-    ___SignalStatusMessage_regional__item__regExtValue._const_tab_at = ('..', 'regionId')
-    ___SignalStatusMessage_regional__item__regExtValue._const_tab_id = 'Type'
+    ___SignalStatusMessage_regional__item__regExtValue._const_tab_at = ('..', u'regionId')
+    ___SignalStatusMessage_regional__item__regExtValue._const_tab_id = u'Type'
     __SignalStatusMessage_regional__item_._cont = ASN1Dict([
-        ('regionId', ___SignalStatusMessage_regional__item__regionId),
-        ('regExtValue', ___SignalStatusMessage_regional__item__regExtValue),
+        (u'regionId', ___SignalStatusMessage_regional__item__regionId),
+        (u'regExtValue', ___SignalStatusMessage_regional__item__regExtValue),
         ])
     __SignalStatusMessage_regional__item_._ext = None
     _SignalStatusMessage_regional._cont = __SignalStatusMessage_regional__item_
     _SignalStatusMessage_regional._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=4)], ev=None, er=[])
     SignalStatusMessage._cont = ASN1Dict([
-        ('timeStamp', _SignalStatusMessage_timeStamp),
-        ('second', _SignalStatusMessage_second),
-        ('sequenceNumber', _SignalStatusMessage_sequenceNumber),
-        ('status', _SignalStatusMessage_status),
-        ('regional', _SignalStatusMessage_regional),
+        (u'timeStamp', _SignalStatusMessage_timeStamp),
+        (u'second', _SignalStatusMessage_second),
+        (u'sequenceNumber', _SignalStatusMessage_sequenceNumber),
+        (u'status', _SignalStatusMessage_status),
+        (u'regional', _SignalStatusMessage_regional),
         ])
     SignalStatusMessage._ext = []
     
     #-----< AdvisorySpeed >-----#
-    AdvisorySpeed = SEQ(name='AdvisorySpeed', mode=MODE_TYPE)
-    _AdvisorySpeed_type = ENUM(name='type', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'AdvisorySpeedType')))
-    _AdvisorySpeed_speed = INT(name='speed', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'SpeedAdvice')), opt=True)
-    _AdvisorySpeed_confidence = ENUM(name='confidence', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'SpeedConfidence')), opt=True)
-    _AdvisorySpeed_distance = INT(name='distance', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'ZoneLength')), opt=True)
-    _AdvisorySpeed_class_ = INT(name='class', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'RestrictionClassID')), opt=True)
-    _AdvisorySpeed_regional = SEQ_OF(name='regional', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    AdvisorySpeed = SEQ(name=u'AdvisorySpeed', mode=MODE_TYPE)
+    _AdvisorySpeed_type = ENUM(name=u'type', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'AdvisorySpeedType')))
+    _AdvisorySpeed_speed = INT(name=u'speed', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'SpeedAdvice')), opt=True)
+    _AdvisorySpeed_confidence = ENUM(name=u'confidence', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'SpeedConfidence')), opt=True)
+    _AdvisorySpeed_distance = INT(name=u'distance', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'ZoneLength')), opt=True)
+    _AdvisorySpeed_class_ = INT(name=u'class', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'RestrictionClassID')), opt=True)
+    _AdvisorySpeed_regional = SEQ_OF(name=u'regional', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     __AdvisorySpeed_regional__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('DSRC', 'RegionalExtension')))
-    ___AdvisorySpeed_regional__item__regionId = INT(name='regionId', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('DSRC', 'REG-EXT-ID-AND-TYPE'), ['id']))
+    ___AdvisorySpeed_regional__item__regionId = INT(name=u'regionId', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('DSRC', 'REG-EXT-ID-AND-TYPE'), [u'id']))
     ____AdvisorySpeed_regional__item__regionId_tab = CLASS(name='_tab_REG-EXT-ID-AND-TYPE', mode=MODE_SET, typeref=ASN1RefType(('DSRC', 'REG-EXT-ID-AND-TYPE')))
     ____AdvisorySpeed_regional__item__regionId_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___AdvisorySpeed_regional__item__regionId._const_tab = ____AdvisorySpeed_regional__item__regionId_tab
     ___AdvisorySpeed_regional__item__regionId._const_tab_at = None
-    ___AdvisorySpeed_regional__item__regionId._const_tab_id = 'id'
-    ___AdvisorySpeed_regional__item__regExtValue = OPEN(name='regExtValue', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('DSRC', 'REG-EXT-ID-AND-TYPE'), ['Type']))
+    ___AdvisorySpeed_regional__item__regionId._const_tab_id = u'id'
+    ___AdvisorySpeed_regional__item__regExtValue = OPEN(name=u'regExtValue', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('DSRC', 'REG-EXT-ID-AND-TYPE'), [u'Type']))
     ____AdvisorySpeed_regional__item__regExtValue_tab = CLASS(name='_tab_REG-EXT-ID-AND-TYPE', mode=MODE_SET, typeref=ASN1RefType(('DSRC', 'REG-EXT-ID-AND-TYPE')))
     ____AdvisorySpeed_regional__item__regExtValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___AdvisorySpeed_regional__item__regExtValue._const_tab = ____AdvisorySpeed_regional__item__regExtValue_tab
-    ___AdvisorySpeed_regional__item__regExtValue._const_tab_at = ('..', 'regionId')
-    ___AdvisorySpeed_regional__item__regExtValue._const_tab_id = 'Type'
+    ___AdvisorySpeed_regional__item__regExtValue._const_tab_at = ('..', u'regionId')
+    ___AdvisorySpeed_regional__item__regExtValue._const_tab_id = u'Type'
     __AdvisorySpeed_regional__item_._cont = ASN1Dict([
-        ('regionId', ___AdvisorySpeed_regional__item__regionId),
-        ('regExtValue', ___AdvisorySpeed_regional__item__regExtValue),
+        (u'regionId', ___AdvisorySpeed_regional__item__regionId),
+        (u'regExtValue', ___AdvisorySpeed_regional__item__regExtValue),
         ])
     __AdvisorySpeed_regional__item_._ext = None
     _AdvisorySpeed_regional._cont = __AdvisorySpeed_regional__item_
     _AdvisorySpeed_regional._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=4)], ev=None, er=[])
     AdvisorySpeed._cont = ASN1Dict([
-        ('type', _AdvisorySpeed_type),
-        ('speed', _AdvisorySpeed_speed),
-        ('confidence', _AdvisorySpeed_confidence),
-        ('distance', _AdvisorySpeed_distance),
-        ('class', _AdvisorySpeed_class_),
-        ('regional', _AdvisorySpeed_regional),
+        (u'type', _AdvisorySpeed_type),
+        (u'speed', _AdvisorySpeed_speed),
+        (u'confidence', _AdvisorySpeed_confidence),
+        (u'distance', _AdvisorySpeed_distance),
+        (u'class', _AdvisorySpeed_class_),
+        (u'regional', _AdvisorySpeed_regional),
         ])
     AdvisorySpeed._ext = []
     
     #-----< AdvisorySpeedList >-----#
-    AdvisorySpeedList = SEQ_OF(name='AdvisorySpeedList', mode=MODE_TYPE)
+    AdvisorySpeedList = SEQ_OF(name=u'AdvisorySpeedList', mode=MODE_TYPE)
     _AdvisorySpeedList__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('DSRC', 'AdvisorySpeed')))
     AdvisorySpeedList._cont = _AdvisorySpeedList__item_
     AdvisorySpeedList._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=16)], ev=None, er=[])
     
     #-----< AntennaOffsetSet >-----#
-    AntennaOffsetSet = SEQ(name='AntennaOffsetSet', mode=MODE_TYPE)
-    _AntennaOffsetSet_antOffsetX = INT(name='antOffsetX', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'Offset-B12')))
-    _AntennaOffsetSet_antOffsetY = INT(name='antOffsetY', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'Offset-B09')))
-    _AntennaOffsetSet_antOffsetZ = INT(name='antOffsetZ', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'Offset-B10')))
+    AntennaOffsetSet = SEQ(name=u'AntennaOffsetSet', mode=MODE_TYPE)
+    _AntennaOffsetSet_antOffsetX = INT(name=u'antOffsetX', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'Offset-B12')))
+    _AntennaOffsetSet_antOffsetY = INT(name=u'antOffsetY', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'Offset-B09')))
+    _AntennaOffsetSet_antOffsetZ = INT(name=u'antOffsetZ', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'Offset-B10')))
     AntennaOffsetSet._cont = ASN1Dict([
-        ('antOffsetX', _AntennaOffsetSet_antOffsetX),
-        ('antOffsetY', _AntennaOffsetSet_antOffsetY),
-        ('antOffsetZ', _AntennaOffsetSet_antOffsetZ),
+        (u'antOffsetX', _AntennaOffsetSet_antOffsetX),
+        (u'antOffsetY', _AntennaOffsetSet_antOffsetY),
+        (u'antOffsetZ', _AntennaOffsetSet_antOffsetZ),
         ])
     AntennaOffsetSet._ext = None
     
     #-----< ComputedLane >-----#
-    ComputedLane = SEQ(name='ComputedLane', mode=MODE_TYPE)
-    _ComputedLane_referenceLaneId = INT(name='referenceLaneId', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'LaneID')))
-    _ComputedLane_offsetXaxis = CHOICE(name='offsetXaxis', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
-    __ComputedLane_offsetXaxis_small = INT(name='small', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'DrivenLineOffsetSm')))
-    __ComputedLane_offsetXaxis_large = INT(name='large', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'DrivenLineOffsetLg')))
+    ComputedLane = SEQ(name=u'ComputedLane', mode=MODE_TYPE)
+    _ComputedLane_referenceLaneId = INT(name=u'referenceLaneId', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'LaneID')))
+    _ComputedLane_offsetXaxis = CHOICE(name=u'offsetXaxis', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
+    __ComputedLane_offsetXaxis_small = INT(name=u'small', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'DrivenLineOffsetSm')))
+    __ComputedLane_offsetXaxis_large = INT(name=u'large', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'DrivenLineOffsetLg')))
     _ComputedLane_offsetXaxis._cont = ASN1Dict([
-        ('small', __ComputedLane_offsetXaxis_small),
-        ('large', __ComputedLane_offsetXaxis_large),
+        (u'small', __ComputedLane_offsetXaxis_small),
+        (u'large', __ComputedLane_offsetXaxis_large),
         ])
     _ComputedLane_offsetXaxis._ext = None
-    _ComputedLane_offsetYaxis = CHOICE(name='offsetYaxis', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
-    __ComputedLane_offsetYaxis_small = INT(name='small', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'DrivenLineOffsetSm')))
-    __ComputedLane_offsetYaxis_large = INT(name='large', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'DrivenLineOffsetLg')))
+    _ComputedLane_offsetYaxis = CHOICE(name=u'offsetYaxis', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
+    __ComputedLane_offsetYaxis_small = INT(name=u'small', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'DrivenLineOffsetSm')))
+    __ComputedLane_offsetYaxis_large = INT(name=u'large', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'DrivenLineOffsetLg')))
     _ComputedLane_offsetYaxis._cont = ASN1Dict([
-        ('small', __ComputedLane_offsetYaxis_small),
-        ('large', __ComputedLane_offsetYaxis_large),
+        (u'small', __ComputedLane_offsetYaxis_small),
+        (u'large', __ComputedLane_offsetYaxis_large),
         ])
     _ComputedLane_offsetYaxis._ext = None
-    _ComputedLane_rotateXY = INT(name='rotateXY', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'Angle')), opt=True)
-    _ComputedLane_scaleXaxis = INT(name='scaleXaxis', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'Scale-B12')), opt=True)
-    _ComputedLane_scaleYaxis = INT(name='scaleYaxis', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'Scale-B12')), opt=True)
-    _ComputedLane_regional = SEQ_OF(name='regional', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _ComputedLane_rotateXY = INT(name=u'rotateXY', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'Angle')), opt=True)
+    _ComputedLane_scaleXaxis = INT(name=u'scaleXaxis', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'Scale-B12')), opt=True)
+    _ComputedLane_scaleYaxis = INT(name=u'scaleYaxis', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'Scale-B12')), opt=True)
+    _ComputedLane_regional = SEQ_OF(name=u'regional', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     __ComputedLane_regional__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('DSRC', 'RegionalExtension')))
-    ___ComputedLane_regional__item__regionId = INT(name='regionId', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('DSRC', 'REG-EXT-ID-AND-TYPE'), ['id']))
+    ___ComputedLane_regional__item__regionId = INT(name=u'regionId', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('DSRC', 'REG-EXT-ID-AND-TYPE'), [u'id']))
     ____ComputedLane_regional__item__regionId_tab = CLASS(name='_tab_REG-EXT-ID-AND-TYPE', mode=MODE_SET, typeref=ASN1RefType(('DSRC', 'REG-EXT-ID-AND-TYPE')))
     ____ComputedLane_regional__item__regionId_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___ComputedLane_regional__item__regionId._const_tab = ____ComputedLane_regional__item__regionId_tab
     ___ComputedLane_regional__item__regionId._const_tab_at = None
-    ___ComputedLane_regional__item__regionId._const_tab_id = 'id'
-    ___ComputedLane_regional__item__regExtValue = OPEN(name='regExtValue', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('DSRC', 'REG-EXT-ID-AND-TYPE'), ['Type']))
+    ___ComputedLane_regional__item__regionId._const_tab_id = u'id'
+    ___ComputedLane_regional__item__regExtValue = OPEN(name=u'regExtValue', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('DSRC', 'REG-EXT-ID-AND-TYPE'), [u'Type']))
     ____ComputedLane_regional__item__regExtValue_tab = CLASS(name='_tab_REG-EXT-ID-AND-TYPE', mode=MODE_SET, typeref=ASN1RefType(('DSRC', 'REG-EXT-ID-AND-TYPE')))
     ____ComputedLane_regional__item__regExtValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___ComputedLane_regional__item__regExtValue._const_tab = ____ComputedLane_regional__item__regExtValue_tab
-    ___ComputedLane_regional__item__regExtValue._const_tab_at = ('..', 'regionId')
-    ___ComputedLane_regional__item__regExtValue._const_tab_id = 'Type'
+    ___ComputedLane_regional__item__regExtValue._const_tab_at = ('..', u'regionId')
+    ___ComputedLane_regional__item__regExtValue._const_tab_id = u'Type'
     __ComputedLane_regional__item_._cont = ASN1Dict([
-        ('regionId', ___ComputedLane_regional__item__regionId),
-        ('regExtValue', ___ComputedLane_regional__item__regExtValue),
+        (u'regionId', ___ComputedLane_regional__item__regionId),
+        (u'regExtValue', ___ComputedLane_regional__item__regExtValue),
         ])
     __ComputedLane_regional__item_._ext = None
     _ComputedLane_regional._cont = __ComputedLane_regional__item_
     _ComputedLane_regional._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=4)], ev=None, er=[])
     ComputedLane._cont = ASN1Dict([
-        ('referenceLaneId', _ComputedLane_referenceLaneId),
-        ('offsetXaxis', _ComputedLane_offsetXaxis),
-        ('offsetYaxis', _ComputedLane_offsetYaxis),
-        ('rotateXY', _ComputedLane_rotateXY),
-        ('scaleXaxis', _ComputedLane_scaleXaxis),
-        ('scaleYaxis', _ComputedLane_scaleYaxis),
-        ('regional', _ComputedLane_regional),
+        (u'referenceLaneId', _ComputedLane_referenceLaneId),
+        (u'offsetXaxis', _ComputedLane_offsetXaxis),
+        (u'offsetYaxis', _ComputedLane_offsetYaxis),
+        (u'rotateXY', _ComputedLane_rotateXY),
+        (u'scaleXaxis', _ComputedLane_scaleXaxis),
+        (u'scaleYaxis', _ComputedLane_scaleYaxis),
+        (u'regional', _ComputedLane_regional),
         ])
     ComputedLane._ext = []
     
     #-----< ConnectsToList >-----#
-    ConnectsToList = SEQ_OF(name='ConnectsToList', mode=MODE_TYPE)
+    ConnectsToList = SEQ_OF(name=u'ConnectsToList', mode=MODE_TYPE)
     _ConnectsToList__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('DSRC', 'Connection')))
     ConnectsToList._cont = _ConnectsToList__item_
     ConnectsToList._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=16)], ev=None, er=[])
     
     #-----< ConnectingLane >-----#
-    ConnectingLane = SEQ(name='ConnectingLane', mode=MODE_TYPE)
-    _ConnectingLane_lane = INT(name='lane', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'LaneID')))
-    _ConnectingLane_maneuver = BIT_STR(name='maneuver', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'AllowedManeuvers')), opt=True)
+    ConnectingLane = SEQ(name=u'ConnectingLane', mode=MODE_TYPE)
+    _ConnectingLane_lane = INT(name=u'lane', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'LaneID')))
+    _ConnectingLane_maneuver = BIT_STR(name=u'maneuver', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'AllowedManeuvers')), opt=True)
     ConnectingLane._cont = ASN1Dict([
-        ('lane', _ConnectingLane_lane),
-        ('maneuver', _ConnectingLane_maneuver),
+        (u'lane', _ConnectingLane_lane),
+        (u'maneuver', _ConnectingLane_maneuver),
         ])
     ConnectingLane._ext = None
     
     #-----< Connection >-----#
-    Connection = SEQ(name='Connection', mode=MODE_TYPE)
-    _Connection_connectingLane = SEQ(name='connectingLane', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'ConnectingLane')))
-    _Connection_remoteIntersection = SEQ(name='remoteIntersection', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'IntersectionReferenceID')), opt=True)
-    _Connection_signalGroup = INT(name='signalGroup', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'SignalGroupID')), opt=True)
-    _Connection_userClass = INT(name='userClass', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'RestrictionClassID')), opt=True)
-    _Connection_connectionID = INT(name='connectionID', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'LaneConnectionID')), opt=True)
+    Connection = SEQ(name=u'Connection', mode=MODE_TYPE)
+    _Connection_connectingLane = SEQ(name=u'connectingLane', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'ConnectingLane')))
+    _Connection_remoteIntersection = SEQ(name=u'remoteIntersection', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'IntersectionReferenceID')), opt=True)
+    _Connection_signalGroup = INT(name=u'signalGroup', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'SignalGroupID')), opt=True)
+    _Connection_userClass = INT(name=u'userClass', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'RestrictionClassID')), opt=True)
+    _Connection_connectionID = INT(name=u'connectionID', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'LaneConnectionID')), opt=True)
     Connection._cont = ASN1Dict([
-        ('connectingLane', _Connection_connectingLane),
-        ('remoteIntersection', _Connection_remoteIntersection),
-        ('signalGroup', _Connection_signalGroup),
-        ('userClass', _Connection_userClass),
-        ('connectionID', _Connection_connectionID),
+        (u'connectingLane', _Connection_connectingLane),
+        (u'remoteIntersection', _Connection_remoteIntersection),
+        (u'signalGroup', _Connection_signalGroup),
+        (u'userClass', _Connection_userClass),
+        (u'connectionID', _Connection_connectionID),
         ])
     Connection._ext = None
     
     #-----< ConnectionManeuverAssist >-----#
-    ConnectionManeuverAssist = SEQ(name='ConnectionManeuverAssist', mode=MODE_TYPE)
-    _ConnectionManeuverAssist_connectionID = INT(name='connectionID', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'LaneConnectionID')))
-    _ConnectionManeuverAssist_queueLength = INT(name='queueLength', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'ZoneLength')), opt=True)
-    _ConnectionManeuverAssist_availableStorageLength = INT(name='availableStorageLength', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'ZoneLength')), opt=True)
-    _ConnectionManeuverAssist_waitOnStop = BOOL(name='waitOnStop', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'WaitOnStopline')), opt=True)
-    _ConnectionManeuverAssist_pedBicycleDetect = BOOL(name='pedBicycleDetect', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'PedestrianBicycleDetect')), opt=True)
-    _ConnectionManeuverAssist_regional = SEQ_OF(name='regional', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    ConnectionManeuverAssist = SEQ(name=u'ConnectionManeuverAssist', mode=MODE_TYPE)
+    _ConnectionManeuverAssist_connectionID = INT(name=u'connectionID', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'LaneConnectionID')))
+    _ConnectionManeuverAssist_queueLength = INT(name=u'queueLength', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'ZoneLength')), opt=True)
+    _ConnectionManeuverAssist_availableStorageLength = INT(name=u'availableStorageLength', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'ZoneLength')), opt=True)
+    _ConnectionManeuverAssist_waitOnStop = BOOL(name=u'waitOnStop', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'WaitOnStopline')), opt=True)
+    _ConnectionManeuverAssist_pedBicycleDetect = BOOL(name=u'pedBicycleDetect', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'PedestrianBicycleDetect')), opt=True)
+    _ConnectionManeuverAssist_regional = SEQ_OF(name=u'regional', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     __ConnectionManeuverAssist_regional__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('DSRC', 'RegionalExtension')))
-    ___ConnectionManeuverAssist_regional__item__regionId = INT(name='regionId', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('DSRC', 'REG-EXT-ID-AND-TYPE'), ['id']))
+    ___ConnectionManeuverAssist_regional__item__regionId = INT(name=u'regionId', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('DSRC', 'REG-EXT-ID-AND-TYPE'), [u'id']))
     ____ConnectionManeuverAssist_regional__item__regionId_tab = CLASS(name='_tab_REG-EXT-ID-AND-TYPE', mode=MODE_SET, typeref=ASN1RefType(('DSRC', 'REG-EXT-ID-AND-TYPE')))
-    _____ConnectionManeuverAssist_regional__item__regionId_tab_val_Type_0 = SEQ(name='Type', mode=MODE_TYPE, typeref=ASN1RefType(('AddGrpC', 'ConnectionManeuverAssist-addGrpC')))
-    ____ConnectionManeuverAssist_regional__item__regionId_tab._val = ASN1Set(rv=[dict([('Type', _____ConnectionManeuverAssist_regional__item__regionId_tab_val_Type_0), ('id', 3)])], rr=[], ev=None, er=[])
+    _____ConnectionManeuverAssist_regional__item__regionId_tab_val_Type_0 = SEQ(name=u'Type', mode=MODE_TYPE, typeref=ASN1RefType(('AddGrpC', 'ConnectionManeuverAssist-addGrpC')))
+    ____ConnectionManeuverAssist_regional__item__regionId_tab._val = ASN1Set(rv=[dict([(u'Type', _____ConnectionManeuverAssist_regional__item__regionId_tab_val_Type_0), (u'id', 3)])], rr=[], ev=None, er=[])
     ___ConnectionManeuverAssist_regional__item__regionId._const_tab = ____ConnectionManeuverAssist_regional__item__regionId_tab
     ___ConnectionManeuverAssist_regional__item__regionId._const_tab_at = None
-    ___ConnectionManeuverAssist_regional__item__regionId._const_tab_id = 'id'
-    ___ConnectionManeuverAssist_regional__item__regExtValue = OPEN(name='regExtValue', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('DSRC', 'REG-EXT-ID-AND-TYPE'), ['Type']))
+    ___ConnectionManeuverAssist_regional__item__regionId._const_tab_id = u'id'
+    ___ConnectionManeuverAssist_regional__item__regExtValue = OPEN(name=u'regExtValue', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('DSRC', 'REG-EXT-ID-AND-TYPE'), [u'Type']))
     ___ConnectionManeuverAssist_regional__item__regExtValue._const_tab = ____ConnectionManeuverAssist_regional__item__regionId_tab
-    ___ConnectionManeuverAssist_regional__item__regExtValue._const_tab_at = ('..', 'regionId')
-    ___ConnectionManeuverAssist_regional__item__regExtValue._const_tab_id = 'Type'
+    ___ConnectionManeuverAssist_regional__item__regExtValue._const_tab_at = ('..', u'regionId')
+    ___ConnectionManeuverAssist_regional__item__regExtValue._const_tab_id = u'Type'
     __ConnectionManeuverAssist_regional__item_._cont = ASN1Dict([
-        ('regionId', ___ConnectionManeuverAssist_regional__item__regionId),
-        ('regExtValue', ___ConnectionManeuverAssist_regional__item__regExtValue),
+        (u'regionId', ___ConnectionManeuverAssist_regional__item__regionId),
+        (u'regExtValue', ___ConnectionManeuverAssist_regional__item__regExtValue),
         ])
     __ConnectionManeuverAssist_regional__item_._ext = None
     _ConnectionManeuverAssist_regional._cont = __ConnectionManeuverAssist_regional__item_
     _ConnectionManeuverAssist_regional._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=4)], ev=None, er=[])
     ConnectionManeuverAssist._cont = ASN1Dict([
-        ('connectionID', _ConnectionManeuverAssist_connectionID),
-        ('queueLength', _ConnectionManeuverAssist_queueLength),
-        ('availableStorageLength', _ConnectionManeuverAssist_availableStorageLength),
-        ('waitOnStop', _ConnectionManeuverAssist_waitOnStop),
-        ('pedBicycleDetect', _ConnectionManeuverAssist_pedBicycleDetect),
-        ('regional', _ConnectionManeuverAssist_regional),
+        (u'connectionID', _ConnectionManeuverAssist_connectionID),
+        (u'queueLength', _ConnectionManeuverAssist_queueLength),
+        (u'availableStorageLength', _ConnectionManeuverAssist_availableStorageLength),
+        (u'waitOnStop', _ConnectionManeuverAssist_waitOnStop),
+        (u'pedBicycleDetect', _ConnectionManeuverAssist_pedBicycleDetect),
+        (u'regional', _ConnectionManeuverAssist_regional),
         ])
     ConnectionManeuverAssist._ext = []
     
     #-----< DataParameters >-----#
-    DataParameters = SEQ(name='DataParameters', mode=MODE_TYPE)
-    _DataParameters_processMethod = STR_IA5(name='processMethod', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    DataParameters = SEQ(name=u'DataParameters', mode=MODE_TYPE)
+    _DataParameters_processMethod = STR_IA5(name=u'processMethod', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     _DataParameters_processMethod._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=255)], ev=None, er=[])
-    _DataParameters_processAgency = STR_IA5(name='processAgency', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _DataParameters_processAgency = STR_IA5(name=u'processAgency', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     _DataParameters_processAgency._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=255)], ev=None, er=[])
-    _DataParameters_lastCheckedDate = STR_IA5(name='lastCheckedDate', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _DataParameters_lastCheckedDate = STR_IA5(name=u'lastCheckedDate', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     _DataParameters_lastCheckedDate._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=255)], ev=None, er=[])
-    _DataParameters_geoidUsed = STR_IA5(name='geoidUsed', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _DataParameters_geoidUsed = STR_IA5(name=u'geoidUsed', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     _DataParameters_geoidUsed._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=255)], ev=None, er=[])
     DataParameters._cont = ASN1Dict([
-        ('processMethod', _DataParameters_processMethod),
-        ('processAgency', _DataParameters_processAgency),
-        ('lastCheckedDate', _DataParameters_lastCheckedDate),
-        ('geoidUsed', _DataParameters_geoidUsed),
+        (u'processMethod', _DataParameters_processMethod),
+        (u'processAgency', _DataParameters_processAgency),
+        (u'lastCheckedDate', _DataParameters_lastCheckedDate),
+        (u'geoidUsed', _DataParameters_geoidUsed),
         ])
     DataParameters._ext = []
     
     #-----< DDateTime >-----#
-    DDateTime = SEQ(name='DDateTime', mode=MODE_TYPE)
-    _DDateTime_year = INT(name='year', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'DYear')), opt=True)
-    _DDateTime_month = INT(name='month', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'DMonth')), opt=True)
-    _DDateTime_day = INT(name='day', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'DDay')), opt=True)
-    _DDateTime_hour = INT(name='hour', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'DHour')), opt=True)
-    _DDateTime_minute = INT(name='minute', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'DMinute')), opt=True)
-    _DDateTime_second = INT(name='second', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'DSecond')), opt=True)
-    _DDateTime_offset = INT(name='offset', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'DOffset')), opt=True)
+    DDateTime = SEQ(name=u'DDateTime', mode=MODE_TYPE)
+    _DDateTime_year = INT(name=u'year', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'DYear')), opt=True)
+    _DDateTime_month = INT(name=u'month', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'DMonth')), opt=True)
+    _DDateTime_day = INT(name=u'day', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'DDay')), opt=True)
+    _DDateTime_hour = INT(name=u'hour', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'DHour')), opt=True)
+    _DDateTime_minute = INT(name=u'minute', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'DMinute')), opt=True)
+    _DDateTime_second = INT(name=u'second', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'DSecond')), opt=True)
+    _DDateTime_offset = INT(name=u'offset', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'DOffset')), opt=True)
     DDateTime._cont = ASN1Dict([
-        ('year', _DDateTime_year),
-        ('month', _DDateTime_month),
-        ('day', _DDateTime_day),
-        ('hour', _DDateTime_hour),
-        ('minute', _DDateTime_minute),
-        ('second', _DDateTime_second),
-        ('offset', _DDateTime_offset),
+        (u'year', _DDateTime_year),
+        (u'month', _DDateTime_month),
+        (u'day', _DDateTime_day),
+        (u'hour', _DDateTime_hour),
+        (u'minute', _DDateTime_minute),
+        (u'second', _DDateTime_second),
+        (u'offset', _DDateTime_offset),
         ])
     DDateTime._ext = None
     
     #-----< EnabledLaneList >-----#
-    EnabledLaneList = SEQ_OF(name='EnabledLaneList', mode=MODE_TYPE)
+    EnabledLaneList = SEQ_OF(name=u'EnabledLaneList', mode=MODE_TYPE)
     _EnabledLaneList__item_ = INT(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('DSRC', 'LaneID')))
     EnabledLaneList._cont = _EnabledLaneList__item_
     EnabledLaneList._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=16)], ev=None, er=[])
     
     #-----< FullPositionVector >-----#
-    FullPositionVector = SEQ(name='FullPositionVector', mode=MODE_TYPE)
-    _FullPositionVector_utcTime = SEQ(name='utcTime', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'DDateTime')), opt=True)
-    _FullPositionVector_long = INT(name='long', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'Longitude')))
-    _FullPositionVector_lat = INT(name='lat', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'Latitude')))
-    _FullPositionVector_elevation = INT(name='elevation', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'Elevation')), opt=True)
-    _FullPositionVector_heading = INT(name='heading', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'Heading')), opt=True)
-    _FullPositionVector_speed = SEQ(name='speed', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'TransmissionAndSpeed')), opt=True)
-    _FullPositionVector_posAccuracy = SEQ(name='posAccuracy', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'PositionalAccuracy')), opt=True)
-    _FullPositionVector_timeConfidence = ENUM(name='timeConfidence', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'TimeConfidence')), opt=True)
-    _FullPositionVector_posConfidence = SEQ(name='posConfidence', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'PositionConfidenceSet')), opt=True)
-    _FullPositionVector_speedConfidence = SEQ(name='speedConfidence', mode=MODE_TYPE, tag=(9, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'SpeedandHeadingandThrottleConfidence')), opt=True)
+    FullPositionVector = SEQ(name=u'FullPositionVector', mode=MODE_TYPE)
+    _FullPositionVector_utcTime = SEQ(name=u'utcTime', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'DDateTime')), opt=True)
+    _FullPositionVector_long = INT(name=u'long', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'Longitude')))
+    _FullPositionVector_lat = INT(name=u'lat', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'Latitude')))
+    _FullPositionVector_elevation = INT(name=u'elevation', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'Elevation')), opt=True)
+    _FullPositionVector_heading = INT(name=u'heading', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'Heading')), opt=True)
+    _FullPositionVector_speed = SEQ(name=u'speed', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'TransmissionAndSpeed')), opt=True)
+    _FullPositionVector_posAccuracy = SEQ(name=u'posAccuracy', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'PositionalAccuracy')), opt=True)
+    _FullPositionVector_timeConfidence = ENUM(name=u'timeConfidence', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'TimeConfidence')), opt=True)
+    _FullPositionVector_posConfidence = SEQ(name=u'posConfidence', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'PositionConfidenceSet')), opt=True)
+    _FullPositionVector_speedConfidence = SEQ(name=u'speedConfidence', mode=MODE_TYPE, tag=(9, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'SpeedandHeadingandThrottleConfidence')), opt=True)
     FullPositionVector._cont = ASN1Dict([
-        ('utcTime', _FullPositionVector_utcTime),
-        ('long', _FullPositionVector_long),
-        ('lat', _FullPositionVector_lat),
-        ('elevation', _FullPositionVector_elevation),
-        ('heading', _FullPositionVector_heading),
-        ('speed', _FullPositionVector_speed),
-        ('posAccuracy', _FullPositionVector_posAccuracy),
-        ('timeConfidence', _FullPositionVector_timeConfidence),
-        ('posConfidence', _FullPositionVector_posConfidence),
-        ('speedConfidence', _FullPositionVector_speedConfidence),
+        (u'utcTime', _FullPositionVector_utcTime),
+        (u'long', _FullPositionVector_long),
+        (u'lat', _FullPositionVector_lat),
+        (u'elevation', _FullPositionVector_elevation),
+        (u'heading', _FullPositionVector_heading),
+        (u'speed', _FullPositionVector_speed),
+        (u'posAccuracy', _FullPositionVector_posAccuracy),
+        (u'timeConfidence', _FullPositionVector_timeConfidence),
+        (u'posConfidence', _FullPositionVector_posConfidence),
+        (u'speedConfidence', _FullPositionVector_speedConfidence),
         ])
     FullPositionVector._ext = []
     
     #-----< GenericLane >-----#
-    GenericLane = SEQ(name='GenericLane', mode=MODE_TYPE)
-    _GenericLane_laneID = INT(name='laneID', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'LaneID')))
-    _GenericLane_name = STR_IA5(name='name', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'DescriptiveName')), opt=True)
-    _GenericLane_ingressApproach = INT(name='ingressApproach', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'ApproachID')), opt=True)
-    _GenericLane_egressApproach = INT(name='egressApproach', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'ApproachID')), opt=True)
-    _GenericLane_laneAttributes = SEQ(name='laneAttributes', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'LaneAttributes')))
-    _GenericLane_maneuvers = BIT_STR(name='maneuvers', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'AllowedManeuvers')), opt=True)
-    _GenericLane_nodeList = CHOICE(name='nodeList', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('DSRC', 'NodeListXY')))
-    _GenericLane_connectsTo = SEQ_OF(name='connectsTo', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'ConnectsToList')), opt=True)
-    _GenericLane_overlays = SEQ_OF(name='overlays', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'OverlayLaneList')), opt=True)
-    _GenericLane_regional = SEQ_OF(name='regional', mode=MODE_TYPE, tag=(9, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    GenericLane = SEQ(name=u'GenericLane', mode=MODE_TYPE)
+    _GenericLane_laneID = INT(name=u'laneID', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'LaneID')))
+    _GenericLane_name = STR_IA5(name=u'name', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'DescriptiveName')), opt=True)
+    _GenericLane_ingressApproach = INT(name=u'ingressApproach', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'ApproachID')), opt=True)
+    _GenericLane_egressApproach = INT(name=u'egressApproach', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'ApproachID')), opt=True)
+    _GenericLane_laneAttributes = SEQ(name=u'laneAttributes', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'LaneAttributes')))
+    _GenericLane_maneuvers = BIT_STR(name=u'maneuvers', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'AllowedManeuvers')), opt=True)
+    _GenericLane_nodeList = CHOICE(name=u'nodeList', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('DSRC', 'NodeListXY')))
+    _GenericLane_connectsTo = SEQ_OF(name=u'connectsTo', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'ConnectsToList')), opt=True)
+    _GenericLane_overlays = SEQ_OF(name=u'overlays', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'OverlayLaneList')), opt=True)
+    _GenericLane_regional = SEQ_OF(name=u'regional', mode=MODE_TYPE, tag=(9, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     __GenericLane_regional__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('DSRC', 'RegionalExtension')))
-    ___GenericLane_regional__item__regionId = INT(name='regionId', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('DSRC', 'REG-EXT-ID-AND-TYPE'), ['id']))
+    ___GenericLane_regional__item__regionId = INT(name=u'regionId', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('DSRC', 'REG-EXT-ID-AND-TYPE'), [u'id']))
     ____GenericLane_regional__item__regionId_tab = CLASS(name='_tab_REG-EXT-ID-AND-TYPE', mode=MODE_SET, typeref=ASN1RefType(('DSRC', 'REG-EXT-ID-AND-TYPE')))
-    _____GenericLane_regional__item__regionId_tab_val_Type_0 = SEQ(name='Type', mode=MODE_TYPE, typeref=ASN1RefType(('AddGrpC', 'ConnectionTrajectory-addGrpC')))
-    ____GenericLane_regional__item__regionId_tab._val = ASN1Set(rv=[dict([('Type', _____GenericLane_regional__item__regionId_tab_val_Type_0), ('id', 3)])], rr=[], ev=None, er=[])
+    _____GenericLane_regional__item__regionId_tab_val_Type_0 = SEQ(name=u'Type', mode=MODE_TYPE, typeref=ASN1RefType(('AddGrpC', 'ConnectionTrajectory-addGrpC')))
+    ____GenericLane_regional__item__regionId_tab._val = ASN1Set(rv=[dict([(u'Type', _____GenericLane_regional__item__regionId_tab_val_Type_0), (u'id', 3)])], rr=[], ev=None, er=[])
     ___GenericLane_regional__item__regionId._const_tab = ____GenericLane_regional__item__regionId_tab
     ___GenericLane_regional__item__regionId._const_tab_at = None
-    ___GenericLane_regional__item__regionId._const_tab_id = 'id'
-    ___GenericLane_regional__item__regExtValue = OPEN(name='regExtValue', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('DSRC', 'REG-EXT-ID-AND-TYPE'), ['Type']))
+    ___GenericLane_regional__item__regionId._const_tab_id = u'id'
+    ___GenericLane_regional__item__regExtValue = OPEN(name=u'regExtValue', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('DSRC', 'REG-EXT-ID-AND-TYPE'), [u'Type']))
     ___GenericLane_regional__item__regExtValue._const_tab = ____GenericLane_regional__item__regionId_tab
-    ___GenericLane_regional__item__regExtValue._const_tab_at = ('..', 'regionId')
-    ___GenericLane_regional__item__regExtValue._const_tab_id = 'Type'
+    ___GenericLane_regional__item__regExtValue._const_tab_at = ('..', u'regionId')
+    ___GenericLane_regional__item__regExtValue._const_tab_id = u'Type'
     __GenericLane_regional__item_._cont = ASN1Dict([
-        ('regionId', ___GenericLane_regional__item__regionId),
-        ('regExtValue', ___GenericLane_regional__item__regExtValue),
+        (u'regionId', ___GenericLane_regional__item__regionId),
+        (u'regExtValue', ___GenericLane_regional__item__regExtValue),
         ])
     __GenericLane_regional__item_._ext = None
     _GenericLane_regional._cont = __GenericLane_regional__item_
     _GenericLane_regional._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=4)], ev=None, er=[])
     GenericLane._cont = ASN1Dict([
-        ('laneID', _GenericLane_laneID),
-        ('name', _GenericLane_name),
-        ('ingressApproach', _GenericLane_ingressApproach),
-        ('egressApproach', _GenericLane_egressApproach),
-        ('laneAttributes', _GenericLane_laneAttributes),
-        ('maneuvers', _GenericLane_maneuvers),
-        ('nodeList', _GenericLane_nodeList),
-        ('connectsTo', _GenericLane_connectsTo),
-        ('overlays', _GenericLane_overlays),
-        ('regional', _GenericLane_regional),
+        (u'laneID', _GenericLane_laneID),
+        (u'name', _GenericLane_name),
+        (u'ingressApproach', _GenericLane_ingressApproach),
+        (u'egressApproach', _GenericLane_egressApproach),
+        (u'laneAttributes', _GenericLane_laneAttributes),
+        (u'maneuvers', _GenericLane_maneuvers),
+        (u'nodeList', _GenericLane_nodeList),
+        (u'connectsTo', _GenericLane_connectsTo),
+        (u'overlays', _GenericLane_overlays),
+        (u'regional', _GenericLane_regional),
         ])
     GenericLane._ext = []
     
     #-----< IntersectionAccessPoint >-----#
-    IntersectionAccessPoint = CHOICE(name='IntersectionAccessPoint', mode=MODE_TYPE)
-    _IntersectionAccessPoint_lane = INT(name='lane', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'LaneID')))
-    _IntersectionAccessPoint_approach = INT(name='approach', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'ApproachID')))
-    _IntersectionAccessPoint_connection = INT(name='connection', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'LaneConnectionID')))
+    IntersectionAccessPoint = CHOICE(name=u'IntersectionAccessPoint', mode=MODE_TYPE)
+    _IntersectionAccessPoint_lane = INT(name=u'lane', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'LaneID')))
+    _IntersectionAccessPoint_approach = INT(name=u'approach', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'ApproachID')))
+    _IntersectionAccessPoint_connection = INT(name=u'connection', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'LaneConnectionID')))
     IntersectionAccessPoint._cont = ASN1Dict([
-        ('lane', _IntersectionAccessPoint_lane),
-        ('approach', _IntersectionAccessPoint_approach),
-        ('connection', _IntersectionAccessPoint_connection),
+        (u'lane', _IntersectionAccessPoint_lane),
+        (u'approach', _IntersectionAccessPoint_approach),
+        (u'connection', _IntersectionAccessPoint_connection),
         ])
     IntersectionAccessPoint._ext = []
     
     #-----< IntersectionGeometry >-----#
-    IntersectionGeometry = SEQ(name='IntersectionGeometry', mode=MODE_TYPE)
-    _IntersectionGeometry_name = STR_IA5(name='name', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'DescriptiveName')), opt=True)
-    _IntersectionGeometry_id = SEQ(name='id', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'IntersectionReferenceID')))
-    _IntersectionGeometry_revision = INT(name='revision', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'MsgCount')))
-    _IntersectionGeometry_refPoint = SEQ(name='refPoint', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'Position3D')))
-    _IntersectionGeometry_laneWidth = INT(name='laneWidth', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'LaneWidth')), opt=True)
-    _IntersectionGeometry_speedLimits = SEQ_OF(name='speedLimits', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'SpeedLimitList')), opt=True)
-    _IntersectionGeometry_laneSet = SEQ_OF(name='laneSet', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'LaneList')))
-    _IntersectionGeometry_preemptPriorityData = SEQ_OF(name='preemptPriorityData', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'PreemptPriorityList')), opt=True)
-    _IntersectionGeometry_regional = SEQ_OF(name='regional', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    IntersectionGeometry = SEQ(name=u'IntersectionGeometry', mode=MODE_TYPE)
+    _IntersectionGeometry_name = STR_IA5(name=u'name', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'DescriptiveName')), opt=True)
+    _IntersectionGeometry_id = SEQ(name=u'id', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'IntersectionReferenceID')))
+    _IntersectionGeometry_revision = INT(name=u'revision', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'MsgCount')))
+    _IntersectionGeometry_refPoint = SEQ(name=u'refPoint', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'Position3D')))
+    _IntersectionGeometry_laneWidth = INT(name=u'laneWidth', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'LaneWidth')), opt=True)
+    _IntersectionGeometry_speedLimits = SEQ_OF(name=u'speedLimits', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'SpeedLimitList')), opt=True)
+    _IntersectionGeometry_laneSet = SEQ_OF(name=u'laneSet', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'LaneList')))
+    _IntersectionGeometry_preemptPriorityData = SEQ_OF(name=u'preemptPriorityData', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'PreemptPriorityList')), opt=True)
+    _IntersectionGeometry_regional = SEQ_OF(name=u'regional', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     __IntersectionGeometry_regional__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('DSRC', 'RegionalExtension')))
-    ___IntersectionGeometry_regional__item__regionId = INT(name='regionId', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('DSRC', 'REG-EXT-ID-AND-TYPE'), ['id']))
+    ___IntersectionGeometry_regional__item__regionId = INT(name=u'regionId', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('DSRC', 'REG-EXT-ID-AND-TYPE'), [u'id']))
     ____IntersectionGeometry_regional__item__regionId_tab = CLASS(name='_tab_REG-EXT-ID-AND-TYPE', mode=MODE_SET, typeref=ASN1RefType(('DSRC', 'REG-EXT-ID-AND-TYPE')))
     ____IntersectionGeometry_regional__item__regionId_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___IntersectionGeometry_regional__item__regionId._const_tab = ____IntersectionGeometry_regional__item__regionId_tab
     ___IntersectionGeometry_regional__item__regionId._const_tab_at = None
-    ___IntersectionGeometry_regional__item__regionId._const_tab_id = 'id'
-    ___IntersectionGeometry_regional__item__regExtValue = OPEN(name='regExtValue', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('DSRC', 'REG-EXT-ID-AND-TYPE'), ['Type']))
+    ___IntersectionGeometry_regional__item__regionId._const_tab_id = u'id'
+    ___IntersectionGeometry_regional__item__regExtValue = OPEN(name=u'regExtValue', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('DSRC', 'REG-EXT-ID-AND-TYPE'), [u'Type']))
     ____IntersectionGeometry_regional__item__regExtValue_tab = CLASS(name='_tab_REG-EXT-ID-AND-TYPE', mode=MODE_SET, typeref=ASN1RefType(('DSRC', 'REG-EXT-ID-AND-TYPE')))
     ____IntersectionGeometry_regional__item__regExtValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___IntersectionGeometry_regional__item__regExtValue._const_tab = ____IntersectionGeometry_regional__item__regExtValue_tab
-    ___IntersectionGeometry_regional__item__regExtValue._const_tab_at = ('..', 'regionId')
-    ___IntersectionGeometry_regional__item__regExtValue._const_tab_id = 'Type'
+    ___IntersectionGeometry_regional__item__regExtValue._const_tab_at = ('..', u'regionId')
+    ___IntersectionGeometry_regional__item__regExtValue._const_tab_id = u'Type'
     __IntersectionGeometry_regional__item_._cont = ASN1Dict([
-        ('regionId', ___IntersectionGeometry_regional__item__regionId),
-        ('regExtValue', ___IntersectionGeometry_regional__item__regExtValue),
+        (u'regionId', ___IntersectionGeometry_regional__item__regionId),
+        (u'regExtValue', ___IntersectionGeometry_regional__item__regExtValue),
         ])
     __IntersectionGeometry_regional__item_._ext = None
     _IntersectionGeometry_regional._cont = __IntersectionGeometry_regional__item_
     _IntersectionGeometry_regional._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=4)], ev=None, er=[])
     IntersectionGeometry._cont = ASN1Dict([
-        ('name', _IntersectionGeometry_name),
-        ('id', _IntersectionGeometry_id),
-        ('revision', _IntersectionGeometry_revision),
-        ('refPoint', _IntersectionGeometry_refPoint),
-        ('laneWidth', _IntersectionGeometry_laneWidth),
-        ('speedLimits', _IntersectionGeometry_speedLimits),
-        ('laneSet', _IntersectionGeometry_laneSet),
-        ('preemptPriorityData', _IntersectionGeometry_preemptPriorityData),
-        ('regional', _IntersectionGeometry_regional),
+        (u'name', _IntersectionGeometry_name),
+        (u'id', _IntersectionGeometry_id),
+        (u'revision', _IntersectionGeometry_revision),
+        (u'refPoint', _IntersectionGeometry_refPoint),
+        (u'laneWidth', _IntersectionGeometry_laneWidth),
+        (u'speedLimits', _IntersectionGeometry_speedLimits),
+        (u'laneSet', _IntersectionGeometry_laneSet),
+        (u'preemptPriorityData', _IntersectionGeometry_preemptPriorityData),
+        (u'regional', _IntersectionGeometry_regional),
         ])
     IntersectionGeometry._ext = []
     
     #-----< IntersectionGeometryList >-----#
-    IntersectionGeometryList = SEQ_OF(name='IntersectionGeometryList', mode=MODE_TYPE)
+    IntersectionGeometryList = SEQ_OF(name=u'IntersectionGeometryList', mode=MODE_TYPE)
     _IntersectionGeometryList__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('DSRC', 'IntersectionGeometry')))
     IntersectionGeometryList._cont = _IntersectionGeometryList__item_
     IntersectionGeometryList._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=32)], ev=None, er=[])
     
     #-----< IntersectionReferenceID >-----#
-    IntersectionReferenceID = SEQ(name='IntersectionReferenceID', mode=MODE_TYPE)
-    _IntersectionReferenceID_region = INT(name='region', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'RoadRegulatorID')), opt=True)
-    _IntersectionReferenceID_id = INT(name='id', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'IntersectionID')))
+    IntersectionReferenceID = SEQ(name=u'IntersectionReferenceID', mode=MODE_TYPE)
+    _IntersectionReferenceID_region = INT(name=u'region', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'RoadRegulatorID')), opt=True)
+    _IntersectionReferenceID_id = INT(name=u'id', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'IntersectionID')))
     IntersectionReferenceID._cont = ASN1Dict([
-        ('region', _IntersectionReferenceID_region),
-        ('id', _IntersectionReferenceID_id),
+        (u'region', _IntersectionReferenceID_region),
+        (u'id', _IntersectionReferenceID_id),
         ])
     IntersectionReferenceID._ext = None
     
     #-----< IntersectionState >-----#
-    IntersectionState = SEQ(name='IntersectionState', mode=MODE_TYPE)
-    _IntersectionState_name = STR_IA5(name='name', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'DescriptiveName')), opt=True)
-    _IntersectionState_id = SEQ(name='id', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'IntersectionReferenceID')))
-    _IntersectionState_revision = INT(name='revision', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'MsgCount')))
-    _IntersectionState_status = BIT_STR(name='status', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'IntersectionStatusObject')))
-    _IntersectionState_moy = INT(name='moy', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'MinuteOfTheYear')), opt=True)
-    _IntersectionState_timeStamp = INT(name='timeStamp', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'DSecond')), opt=True)
-    _IntersectionState_enabledLanes = SEQ_OF(name='enabledLanes', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'EnabledLaneList')), opt=True)
-    _IntersectionState_states = SEQ_OF(name='states', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'MovementList')))
-    _IntersectionState_maneuverAssistList = SEQ_OF(name='maneuverAssistList', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'ManeuverAssistList')), opt=True)
-    _IntersectionState_regional = SEQ_OF(name='regional', mode=MODE_TYPE, tag=(9, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    IntersectionState = SEQ(name=u'IntersectionState', mode=MODE_TYPE)
+    _IntersectionState_name = STR_IA5(name=u'name', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'DescriptiveName')), opt=True)
+    _IntersectionState_id = SEQ(name=u'id', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'IntersectionReferenceID')))
+    _IntersectionState_revision = INT(name=u'revision', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'MsgCount')))
+    _IntersectionState_status = BIT_STR(name=u'status', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'IntersectionStatusObject')))
+    _IntersectionState_moy = INT(name=u'moy', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'MinuteOfTheYear')), opt=True)
+    _IntersectionState_timeStamp = INT(name=u'timeStamp', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'DSecond')), opt=True)
+    _IntersectionState_enabledLanes = SEQ_OF(name=u'enabledLanes', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'EnabledLaneList')), opt=True)
+    _IntersectionState_states = SEQ_OF(name=u'states', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'MovementList')))
+    _IntersectionState_maneuverAssistList = SEQ_OF(name=u'maneuverAssistList', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'ManeuverAssistList')), opt=True)
+    _IntersectionState_regional = SEQ_OF(name=u'regional', mode=MODE_TYPE, tag=(9, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     __IntersectionState_regional__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('DSRC', 'RegionalExtension')))
-    ___IntersectionState_regional__item__regionId = INT(name='regionId', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('DSRC', 'REG-EXT-ID-AND-TYPE'), ['id']))
+    ___IntersectionState_regional__item__regionId = INT(name=u'regionId', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('DSRC', 'REG-EXT-ID-AND-TYPE'), [u'id']))
     ____IntersectionState_regional__item__regionId_tab = CLASS(name='_tab_REG-EXT-ID-AND-TYPE', mode=MODE_SET, typeref=ASN1RefType(('DSRC', 'REG-EXT-ID-AND-TYPE')))
-    _____IntersectionState_regional__item__regionId_tab_val_Type_0 = SEQ(name='Type', mode=MODE_TYPE, typeref=ASN1RefType(('AddGrpC', 'IntersectionState-addGrpC')))
-    ____IntersectionState_regional__item__regionId_tab._val = ASN1Set(rv=[dict([('Type', _____IntersectionState_regional__item__regionId_tab_val_Type_0), ('id', 3)])], rr=[], ev=None, er=[])
+    _____IntersectionState_regional__item__regionId_tab_val_Type_0 = SEQ(name=u'Type', mode=MODE_TYPE, typeref=ASN1RefType(('AddGrpC', 'IntersectionState-addGrpC')))
+    ____IntersectionState_regional__item__regionId_tab._val = ASN1Set(rv=[dict([(u'Type', _____IntersectionState_regional__item__regionId_tab_val_Type_0), (u'id', 3)])], rr=[], ev=None, er=[])
     ___IntersectionState_regional__item__regionId._const_tab = ____IntersectionState_regional__item__regionId_tab
     ___IntersectionState_regional__item__regionId._const_tab_at = None
-    ___IntersectionState_regional__item__regionId._const_tab_id = 'id'
-    ___IntersectionState_regional__item__regExtValue = OPEN(name='regExtValue', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('DSRC', 'REG-EXT-ID-AND-TYPE'), ['Type']))
+    ___IntersectionState_regional__item__regionId._const_tab_id = u'id'
+    ___IntersectionState_regional__item__regExtValue = OPEN(name=u'regExtValue', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('DSRC', 'REG-EXT-ID-AND-TYPE'), [u'Type']))
     ___IntersectionState_regional__item__regExtValue._const_tab = ____IntersectionState_regional__item__regionId_tab
-    ___IntersectionState_regional__item__regExtValue._const_tab_at = ('..', 'regionId')
-    ___IntersectionState_regional__item__regExtValue._const_tab_id = 'Type'
+    ___IntersectionState_regional__item__regExtValue._const_tab_at = ('..', u'regionId')
+    ___IntersectionState_regional__item__regExtValue._const_tab_id = u'Type'
     __IntersectionState_regional__item_._cont = ASN1Dict([
-        ('regionId', ___IntersectionState_regional__item__regionId),
-        ('regExtValue', ___IntersectionState_regional__item__regExtValue),
+        (u'regionId', ___IntersectionState_regional__item__regionId),
+        (u'regExtValue', ___IntersectionState_regional__item__regExtValue),
         ])
     __IntersectionState_regional__item_._ext = None
     _IntersectionState_regional._cont = __IntersectionState_regional__item_
     _IntersectionState_regional._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=4)], ev=None, er=[])
     IntersectionState._cont = ASN1Dict([
-        ('name', _IntersectionState_name),
-        ('id', _IntersectionState_id),
-        ('revision', _IntersectionState_revision),
-        ('status', _IntersectionState_status),
-        ('moy', _IntersectionState_moy),
-        ('timeStamp', _IntersectionState_timeStamp),
-        ('enabledLanes', _IntersectionState_enabledLanes),
-        ('states', _IntersectionState_states),
-        ('maneuverAssistList', _IntersectionState_maneuverAssistList),
-        ('regional', _IntersectionState_regional),
+        (u'name', _IntersectionState_name),
+        (u'id', _IntersectionState_id),
+        (u'revision', _IntersectionState_revision),
+        (u'status', _IntersectionState_status),
+        (u'moy', _IntersectionState_moy),
+        (u'timeStamp', _IntersectionState_timeStamp),
+        (u'enabledLanes', _IntersectionState_enabledLanes),
+        (u'states', _IntersectionState_states),
+        (u'maneuverAssistList', _IntersectionState_maneuverAssistList),
+        (u'regional', _IntersectionState_regional),
         ])
     IntersectionState._ext = []
     
     #-----< IntersectionStateList >-----#
-    IntersectionStateList = SEQ_OF(name='IntersectionStateList', mode=MODE_TYPE)
+    IntersectionStateList = SEQ_OF(name=u'IntersectionStateList', mode=MODE_TYPE)
     _IntersectionStateList__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('DSRC', 'IntersectionState')))
     IntersectionStateList._cont = _IntersectionStateList__item_
     IntersectionStateList._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=32)], ev=None, er=[])
     
     #-----< LaneAttributes >-----#
-    LaneAttributes = SEQ(name='LaneAttributes', mode=MODE_TYPE)
-    _LaneAttributes_directionalUse = BIT_STR(name='directionalUse', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'LaneDirection')))
-    _LaneAttributes_sharedWith = BIT_STR(name='sharedWith', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'LaneSharing')))
-    _LaneAttributes_laneType = CHOICE(name='laneType', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('DSRC', 'LaneTypeAttributes')))
-    _LaneAttributes_regional = SEQ(name='regional', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'RegionalExtension')), opt=True)
-    __LaneAttributes_regional_regionId = INT(name='regionId', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('DSRC', 'REG-EXT-ID-AND-TYPE'), ['id']))
+    LaneAttributes = SEQ(name=u'LaneAttributes', mode=MODE_TYPE)
+    _LaneAttributes_directionalUse = BIT_STR(name=u'directionalUse', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'LaneDirection')))
+    _LaneAttributes_sharedWith = BIT_STR(name=u'sharedWith', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'LaneSharing')))
+    _LaneAttributes_laneType = CHOICE(name=u'laneType', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('DSRC', 'LaneTypeAttributes')))
+    _LaneAttributes_regional = SEQ(name=u'regional', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'RegionalExtension')), opt=True)
+    __LaneAttributes_regional_regionId = INT(name=u'regionId', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('DSRC', 'REG-EXT-ID-AND-TYPE'), [u'id']))
     ___LaneAttributes_regional_regionId_tab = CLASS(name='_tab_REG-EXT-ID-AND-TYPE', mode=MODE_SET, typeref=ASN1RefType(('DSRC', 'REG-EXT-ID-AND-TYPE')))
-    ____LaneAttributes_regional_regionId_tab_val_Type_0 = SEQ(name='Type', mode=MODE_TYPE, typeref=ASN1RefType(('AddGrpC', 'LaneAttributes-addGrpC')))
-    ___LaneAttributes_regional_regionId_tab._val = ASN1Set(rv=[dict([('Type', ____LaneAttributes_regional_regionId_tab_val_Type_0), ('id', 3)])], rr=[], ev=None, er=[])
+    ____LaneAttributes_regional_regionId_tab_val_Type_0 = SEQ(name=u'Type', mode=MODE_TYPE, typeref=ASN1RefType(('AddGrpC', 'LaneAttributes-addGrpC')))
+    ___LaneAttributes_regional_regionId_tab._val = ASN1Set(rv=[dict([(u'Type', ____LaneAttributes_regional_regionId_tab_val_Type_0), (u'id', 3)])], rr=[], ev=None, er=[])
     __LaneAttributes_regional_regionId._const_tab = ___LaneAttributes_regional_regionId_tab
     __LaneAttributes_regional_regionId._const_tab_at = None
-    __LaneAttributes_regional_regionId._const_tab_id = 'id'
-    __LaneAttributes_regional_regExtValue = OPEN(name='regExtValue', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('DSRC', 'REG-EXT-ID-AND-TYPE'), ['Type']))
+    __LaneAttributes_regional_regionId._const_tab_id = u'id'
+    __LaneAttributes_regional_regExtValue = OPEN(name=u'regExtValue', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('DSRC', 'REG-EXT-ID-AND-TYPE'), [u'Type']))
     __LaneAttributes_regional_regExtValue._const_tab = ___LaneAttributes_regional_regionId_tab
-    __LaneAttributes_regional_regExtValue._const_tab_at = ('..', 'regionId')
-    __LaneAttributes_regional_regExtValue._const_tab_id = 'Type'
+    __LaneAttributes_regional_regExtValue._const_tab_at = ('..', u'regionId')
+    __LaneAttributes_regional_regExtValue._const_tab_id = u'Type'
     _LaneAttributes_regional._cont = ASN1Dict([
-        ('regionId', __LaneAttributes_regional_regionId),
-        ('regExtValue', __LaneAttributes_regional_regExtValue),
+        (u'regionId', __LaneAttributes_regional_regionId),
+        (u'regExtValue', __LaneAttributes_regional_regExtValue),
         ])
     _LaneAttributes_regional._ext = None
     LaneAttributes._cont = ASN1Dict([
-        ('directionalUse', _LaneAttributes_directionalUse),
-        ('sharedWith', _LaneAttributes_sharedWith),
-        ('laneType', _LaneAttributes_laneType),
-        ('regional', _LaneAttributes_regional),
+        (u'directionalUse', _LaneAttributes_directionalUse),
+        (u'sharedWith', _LaneAttributes_sharedWith),
+        (u'laneType', _LaneAttributes_laneType),
+        (u'regional', _LaneAttributes_regional),
         ])
     LaneAttributes._ext = None
     
     #-----< LaneDataAttribute >-----#
-    LaneDataAttribute = CHOICE(name='LaneDataAttribute', mode=MODE_TYPE)
-    _LaneDataAttribute_pathEndPointAngle = INT(name='pathEndPointAngle', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'DeltaAngle')))
-    _LaneDataAttribute_laneCrownPointCenter = INT(name='laneCrownPointCenter', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'RoadwayCrownAngle')))
-    _LaneDataAttribute_laneCrownPointLeft = INT(name='laneCrownPointLeft', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'RoadwayCrownAngle')))
-    _LaneDataAttribute_laneCrownPointRight = INT(name='laneCrownPointRight', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'RoadwayCrownAngle')))
-    _LaneDataAttribute_laneAngle = INT(name='laneAngle', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'MergeDivergeNodeAngle')))
-    _LaneDataAttribute_speedLimits = SEQ_OF(name='speedLimits', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'SpeedLimitList')))
-    _LaneDataAttribute_regional = SEQ_OF(name='regional', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    LaneDataAttribute = CHOICE(name=u'LaneDataAttribute', mode=MODE_TYPE)
+    _LaneDataAttribute_pathEndPointAngle = INT(name=u'pathEndPointAngle', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'DeltaAngle')))
+    _LaneDataAttribute_laneCrownPointCenter = INT(name=u'laneCrownPointCenter', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'RoadwayCrownAngle')))
+    _LaneDataAttribute_laneCrownPointLeft = INT(name=u'laneCrownPointLeft', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'RoadwayCrownAngle')))
+    _LaneDataAttribute_laneCrownPointRight = INT(name=u'laneCrownPointRight', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'RoadwayCrownAngle')))
+    _LaneDataAttribute_laneAngle = INT(name=u'laneAngle', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'MergeDivergeNodeAngle')))
+    _LaneDataAttribute_speedLimits = SEQ_OF(name=u'speedLimits', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'SpeedLimitList')))
+    _LaneDataAttribute_regional = SEQ_OF(name=u'regional', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     __LaneDataAttribute_regional__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('DSRC', 'RegionalExtension')))
-    ___LaneDataAttribute_regional__item__regionId = INT(name='regionId', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('DSRC', 'REG-EXT-ID-AND-TYPE'), ['id']))
+    ___LaneDataAttribute_regional__item__regionId = INT(name=u'regionId', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('DSRC', 'REG-EXT-ID-AND-TYPE'), [u'id']))
     ____LaneDataAttribute_regional__item__regionId_tab = CLASS(name='_tab_REG-EXT-ID-AND-TYPE', mode=MODE_SET, typeref=ASN1RefType(('DSRC', 'REG-EXT-ID-AND-TYPE')))
     ____LaneDataAttribute_regional__item__regionId_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___LaneDataAttribute_regional__item__regionId._const_tab = ____LaneDataAttribute_regional__item__regionId_tab
     ___LaneDataAttribute_regional__item__regionId._const_tab_at = None
-    ___LaneDataAttribute_regional__item__regionId._const_tab_id = 'id'
-    ___LaneDataAttribute_regional__item__regExtValue = OPEN(name='regExtValue', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('DSRC', 'REG-EXT-ID-AND-TYPE'), ['Type']))
+    ___LaneDataAttribute_regional__item__regionId._const_tab_id = u'id'
+    ___LaneDataAttribute_regional__item__regExtValue = OPEN(name=u'regExtValue', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('DSRC', 'REG-EXT-ID-AND-TYPE'), [u'Type']))
     ____LaneDataAttribute_regional__item__regExtValue_tab = CLASS(name='_tab_REG-EXT-ID-AND-TYPE', mode=MODE_SET, typeref=ASN1RefType(('DSRC', 'REG-EXT-ID-AND-TYPE')))
     ____LaneDataAttribute_regional__item__regExtValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___LaneDataAttribute_regional__item__regExtValue._const_tab = ____LaneDataAttribute_regional__item__regExtValue_tab
-    ___LaneDataAttribute_regional__item__regExtValue._const_tab_at = ('..', 'regionId')
-    ___LaneDataAttribute_regional__item__regExtValue._const_tab_id = 'Type'
+    ___LaneDataAttribute_regional__item__regExtValue._const_tab_at = ('..', u'regionId')
+    ___LaneDataAttribute_regional__item__regExtValue._const_tab_id = u'Type'
     __LaneDataAttribute_regional__item_._cont = ASN1Dict([
-        ('regionId', ___LaneDataAttribute_regional__item__regionId),
-        ('regExtValue', ___LaneDataAttribute_regional__item__regExtValue),
+        (u'regionId', ___LaneDataAttribute_regional__item__regionId),
+        (u'regExtValue', ___LaneDataAttribute_regional__item__regExtValue),
         ])
     __LaneDataAttribute_regional__item_._ext = None
     _LaneDataAttribute_regional._cont = __LaneDataAttribute_regional__item_
     _LaneDataAttribute_regional._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=4)], ev=None, er=[])
     LaneDataAttribute._cont = ASN1Dict([
-        ('pathEndPointAngle', _LaneDataAttribute_pathEndPointAngle),
-        ('laneCrownPointCenter', _LaneDataAttribute_laneCrownPointCenter),
-        ('laneCrownPointLeft', _LaneDataAttribute_laneCrownPointLeft),
-        ('laneCrownPointRight', _LaneDataAttribute_laneCrownPointRight),
-        ('laneAngle', _LaneDataAttribute_laneAngle),
-        ('speedLimits', _LaneDataAttribute_speedLimits),
-        ('regional', _LaneDataAttribute_regional),
+        (u'pathEndPointAngle', _LaneDataAttribute_pathEndPointAngle),
+        (u'laneCrownPointCenter', _LaneDataAttribute_laneCrownPointCenter),
+        (u'laneCrownPointLeft', _LaneDataAttribute_laneCrownPointLeft),
+        (u'laneCrownPointRight', _LaneDataAttribute_laneCrownPointRight),
+        (u'laneAngle', _LaneDataAttribute_laneAngle),
+        (u'speedLimits', _LaneDataAttribute_speedLimits),
+        (u'regional', _LaneDataAttribute_regional),
         ])
     LaneDataAttribute._ext = []
     
     #-----< LaneDataAttributeList >-----#
-    LaneDataAttributeList = SEQ_OF(name='LaneDataAttributeList', mode=MODE_TYPE)
+    LaneDataAttributeList = SEQ_OF(name=u'LaneDataAttributeList', mode=MODE_TYPE)
     _LaneDataAttributeList__item_ = CHOICE(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('DSRC', 'LaneDataAttribute')))
     LaneDataAttributeList._cont = _LaneDataAttributeList__item_
     LaneDataAttributeList._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=8)], ev=None, er=[])
     
     #-----< LaneList >-----#
-    LaneList = SEQ_OF(name='LaneList', mode=MODE_TYPE)
+    LaneList = SEQ_OF(name=u'LaneList', mode=MODE_TYPE)
     _LaneList__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('DSRC', 'GenericLane')))
     LaneList._cont = _LaneList__item_
     LaneList._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=255)], ev=None, er=[])
     
     #-----< LaneSharing >-----#
-    LaneSharing = BIT_STR(name='LaneSharing', mode=MODE_TYPE)
-    LaneSharing._cont = ASN1Dict([('overlappingLaneDescriptionProvided', 0), ('multipleLanesTreatedAsOneLane', 1), ('otherNonMotorizedTrafficTypes', 2), ('individualMotorizedVehicleTraffic', 3), ('busVehicleTraffic', 4), ('taxiVehicleTraffic', 5), ('pedestriansTraffic', 6), ('cyclistVehicleTraffic', 7), ('trackedVehicleTraffic', 8), ('pedestrianTraffic', 9)])
+    LaneSharing = BIT_STR(name=u'LaneSharing', mode=MODE_TYPE)
+    LaneSharing._cont = ASN1Dict([(u'overlappingLaneDescriptionProvided', 0), (u'multipleLanesTreatedAsOneLane', 1), (u'otherNonMotorizedTrafficTypes', 2), (u'individualMotorizedVehicleTraffic', 3), (u'busVehicleTraffic', 4), (u'taxiVehicleTraffic', 5), (u'pedestriansTraffic', 6), (u'cyclistVehicleTraffic', 7), (u'trackedVehicleTraffic', 8), (u'pedestrianTraffic', 9)])
     LaneSharing._const_sz = ASN1Set(rv=[10], rr=[], ev=None, er=[])
     
     #-----< LaneTypeAttributes >-----#
-    LaneTypeAttributes = CHOICE(name='LaneTypeAttributes', mode=MODE_TYPE)
-    _LaneTypeAttributes_vehicle = BIT_STR(name='vehicle', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'LaneAttributes-Vehicle')))
-    _LaneTypeAttributes_crosswalk = BIT_STR(name='crosswalk', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'LaneAttributes-Crosswalk')))
-    _LaneTypeAttributes_bikeLane = BIT_STR(name='bikeLane', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'LaneAttributes-Bike')))
-    _LaneTypeAttributes_sidewalk = BIT_STR(name='sidewalk', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'LaneAttributes-Sidewalk')))
-    _LaneTypeAttributes_median = BIT_STR(name='median', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'LaneAttributes-Barrier')))
-    _LaneTypeAttributes_striping = BIT_STR(name='striping', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'LaneAttributes-Striping')))
-    _LaneTypeAttributes_trackedVehicle = BIT_STR(name='trackedVehicle', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'LaneAttributes-TrackedVehicle')))
-    _LaneTypeAttributes_parking = BIT_STR(name='parking', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'LaneAttributes-Parking')))
+    LaneTypeAttributes = CHOICE(name=u'LaneTypeAttributes', mode=MODE_TYPE)
+    _LaneTypeAttributes_vehicle = BIT_STR(name=u'vehicle', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'LaneAttributes-Vehicle')))
+    _LaneTypeAttributes_crosswalk = BIT_STR(name=u'crosswalk', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'LaneAttributes-Crosswalk')))
+    _LaneTypeAttributes_bikeLane = BIT_STR(name=u'bikeLane', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'LaneAttributes-Bike')))
+    _LaneTypeAttributes_sidewalk = BIT_STR(name=u'sidewalk', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'LaneAttributes-Sidewalk')))
+    _LaneTypeAttributes_median = BIT_STR(name=u'median', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'LaneAttributes-Barrier')))
+    _LaneTypeAttributes_striping = BIT_STR(name=u'striping', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'LaneAttributes-Striping')))
+    _LaneTypeAttributes_trackedVehicle = BIT_STR(name=u'trackedVehicle', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'LaneAttributes-TrackedVehicle')))
+    _LaneTypeAttributes_parking = BIT_STR(name=u'parking', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'LaneAttributes-Parking')))
     LaneTypeAttributes._cont = ASN1Dict([
-        ('vehicle', _LaneTypeAttributes_vehicle),
-        ('crosswalk', _LaneTypeAttributes_crosswalk),
-        ('bikeLane', _LaneTypeAttributes_bikeLane),
-        ('sidewalk', _LaneTypeAttributes_sidewalk),
-        ('median', _LaneTypeAttributes_median),
-        ('striping', _LaneTypeAttributes_striping),
-        ('trackedVehicle', _LaneTypeAttributes_trackedVehicle),
-        ('parking', _LaneTypeAttributes_parking),
+        (u'vehicle', _LaneTypeAttributes_vehicle),
+        (u'crosswalk', _LaneTypeAttributes_crosswalk),
+        (u'bikeLane', _LaneTypeAttributes_bikeLane),
+        (u'sidewalk', _LaneTypeAttributes_sidewalk),
+        (u'median', _LaneTypeAttributes_median),
+        (u'striping', _LaneTypeAttributes_striping),
+        (u'trackedVehicle', _LaneTypeAttributes_trackedVehicle),
+        (u'parking', _LaneTypeAttributes_parking),
         ])
     LaneTypeAttributes._ext = []
     
     #-----< ManeuverAssistList >-----#
-    ManeuverAssistList = SEQ_OF(name='ManeuverAssistList', mode=MODE_TYPE)
+    ManeuverAssistList = SEQ_OF(name=u'ManeuverAssistList', mode=MODE_TYPE)
     _ManeuverAssistList__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('DSRC', 'ConnectionManeuverAssist')))
     ManeuverAssistList._cont = _ManeuverAssistList__item_
     ManeuverAssistList._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=16)], ev=None, er=[])
     
     #-----< MovementEvent >-----#
-    MovementEvent = SEQ(name='MovementEvent', mode=MODE_TYPE)
-    _MovementEvent_eventState = ENUM(name='eventState', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'MovementPhaseState')))
-    _MovementEvent_timing = SEQ(name='timing', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'TimeChangeDetails')), opt=True)
-    _MovementEvent_speeds = SEQ_OF(name='speeds', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'AdvisorySpeedList')), opt=True)
-    _MovementEvent_regional = SEQ_OF(name='regional', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    MovementEvent = SEQ(name=u'MovementEvent', mode=MODE_TYPE)
+    _MovementEvent_eventState = ENUM(name=u'eventState', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'MovementPhaseState')))
+    _MovementEvent_timing = SEQ(name=u'timing', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'TimeChangeDetails')), opt=True)
+    _MovementEvent_speeds = SEQ_OF(name=u'speeds', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'AdvisorySpeedList')), opt=True)
+    _MovementEvent_regional = SEQ_OF(name=u'regional', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     __MovementEvent_regional__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('DSRC', 'RegionalExtension')))
-    ___MovementEvent_regional__item__regionId = INT(name='regionId', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('DSRC', 'REG-EXT-ID-AND-TYPE'), ['id']))
+    ___MovementEvent_regional__item__regionId = INT(name=u'regionId', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('DSRC', 'REG-EXT-ID-AND-TYPE'), [u'id']))
     ____MovementEvent_regional__item__regionId_tab = CLASS(name='_tab_REG-EXT-ID-AND-TYPE', mode=MODE_SET, typeref=ASN1RefType(('DSRC', 'REG-EXT-ID-AND-TYPE')))
-    _____MovementEvent_regional__item__regionId_tab_val_Type_0 = SEQ(name='Type', mode=MODE_TYPE, typeref=ASN1RefType(('AddGrpC', 'MovementEvent-addGrpC')))
-    ____MovementEvent_regional__item__regionId_tab._val = ASN1Set(rv=[dict([('Type', _____MovementEvent_regional__item__regionId_tab_val_Type_0), ('id', 3)])], rr=[], ev=None, er=[])
+    _____MovementEvent_regional__item__regionId_tab_val_Type_0 = SEQ(name=u'Type', mode=MODE_TYPE, typeref=ASN1RefType(('AddGrpC', 'MovementEvent-addGrpC')))
+    ____MovementEvent_regional__item__regionId_tab._val = ASN1Set(rv=[dict([(u'Type', _____MovementEvent_regional__item__regionId_tab_val_Type_0), (u'id', 3)])], rr=[], ev=None, er=[])
     ___MovementEvent_regional__item__regionId._const_tab = ____MovementEvent_regional__item__regionId_tab
     ___MovementEvent_regional__item__regionId._const_tab_at = None
-    ___MovementEvent_regional__item__regionId._const_tab_id = 'id'
-    ___MovementEvent_regional__item__regExtValue = OPEN(name='regExtValue', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('DSRC', 'REG-EXT-ID-AND-TYPE'), ['Type']))
+    ___MovementEvent_regional__item__regionId._const_tab_id = u'id'
+    ___MovementEvent_regional__item__regExtValue = OPEN(name=u'regExtValue', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('DSRC', 'REG-EXT-ID-AND-TYPE'), [u'Type']))
     ___MovementEvent_regional__item__regExtValue._const_tab = ____MovementEvent_regional__item__regionId_tab
-    ___MovementEvent_regional__item__regExtValue._const_tab_at = ('..', 'regionId')
-    ___MovementEvent_regional__item__regExtValue._const_tab_id = 'Type'
+    ___MovementEvent_regional__item__regExtValue._const_tab_at = ('..', u'regionId')
+    ___MovementEvent_regional__item__regExtValue._const_tab_id = u'Type'
     __MovementEvent_regional__item_._cont = ASN1Dict([
-        ('regionId', ___MovementEvent_regional__item__regionId),
-        ('regExtValue', ___MovementEvent_regional__item__regExtValue),
+        (u'regionId', ___MovementEvent_regional__item__regionId),
+        (u'regExtValue', ___MovementEvent_regional__item__regExtValue),
         ])
     __MovementEvent_regional__item_._ext = None
     _MovementEvent_regional._cont = __MovementEvent_regional__item_
     _MovementEvent_regional._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=4)], ev=None, er=[])
     MovementEvent._cont = ASN1Dict([
-        ('eventState', _MovementEvent_eventState),
-        ('timing', _MovementEvent_timing),
-        ('speeds', _MovementEvent_speeds),
-        ('regional', _MovementEvent_regional),
+        (u'eventState', _MovementEvent_eventState),
+        (u'timing', _MovementEvent_timing),
+        (u'speeds', _MovementEvent_speeds),
+        (u'regional', _MovementEvent_regional),
         ])
     MovementEvent._ext = []
     
     #-----< MovementEventList >-----#
-    MovementEventList = SEQ_OF(name='MovementEventList', mode=MODE_TYPE)
+    MovementEventList = SEQ_OF(name=u'MovementEventList', mode=MODE_TYPE)
     _MovementEventList__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('DSRC', 'MovementEvent')))
     MovementEventList._cont = _MovementEventList__item_
     MovementEventList._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=16)], ev=None, er=[])
     
     #-----< MovementList >-----#
-    MovementList = SEQ_OF(name='MovementList', mode=MODE_TYPE)
+    MovementList = SEQ_OF(name=u'MovementList', mode=MODE_TYPE)
     _MovementList__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('DSRC', 'MovementState')))
     MovementList._cont = _MovementList__item_
     MovementList._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=255)], ev=None, er=[])
     
     #-----< MovementState >-----#
-    MovementState = SEQ(name='MovementState', mode=MODE_TYPE)
-    _MovementState_movementName = STR_IA5(name='movementName', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'DescriptiveName')), opt=True)
-    _MovementState_signalGroup = INT(name='signalGroup', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'SignalGroupID')))
-    _MovementState_state_time_speed = SEQ_OF(name='state-time-speed', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'MovementEventList')))
-    _MovementState_maneuverAssistList = SEQ_OF(name='maneuverAssistList', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'ManeuverAssistList')), opt=True)
-    _MovementState_regional = SEQ_OF(name='regional', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    MovementState = SEQ(name=u'MovementState', mode=MODE_TYPE)
+    _MovementState_movementName = STR_IA5(name=u'movementName', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'DescriptiveName')), opt=True)
+    _MovementState_signalGroup = INT(name=u'signalGroup', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'SignalGroupID')))
+    _MovementState_state_time_speed = SEQ_OF(name=u'state-time-speed', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'MovementEventList')))
+    _MovementState_maneuverAssistList = SEQ_OF(name=u'maneuverAssistList', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'ManeuverAssistList')), opt=True)
+    _MovementState_regional = SEQ_OF(name=u'regional', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     __MovementState_regional__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('DSRC', 'RegionalExtension')))
-    ___MovementState_regional__item__regionId = INT(name='regionId', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('DSRC', 'REG-EXT-ID-AND-TYPE'), ['id']))
+    ___MovementState_regional__item__regionId = INT(name=u'regionId', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('DSRC', 'REG-EXT-ID-AND-TYPE'), [u'id']))
     ____MovementState_regional__item__regionId_tab = CLASS(name='_tab_REG-EXT-ID-AND-TYPE', mode=MODE_SET, typeref=ASN1RefType(('DSRC', 'REG-EXT-ID-AND-TYPE')))
     ____MovementState_regional__item__regionId_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___MovementState_regional__item__regionId._const_tab = ____MovementState_regional__item__regionId_tab
     ___MovementState_regional__item__regionId._const_tab_at = None
-    ___MovementState_regional__item__regionId._const_tab_id = 'id'
-    ___MovementState_regional__item__regExtValue = OPEN(name='regExtValue', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('DSRC', 'REG-EXT-ID-AND-TYPE'), ['Type']))
+    ___MovementState_regional__item__regionId._const_tab_id = u'id'
+    ___MovementState_regional__item__regExtValue = OPEN(name=u'regExtValue', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('DSRC', 'REG-EXT-ID-AND-TYPE'), [u'Type']))
     ____MovementState_regional__item__regExtValue_tab = CLASS(name='_tab_REG-EXT-ID-AND-TYPE', mode=MODE_SET, typeref=ASN1RefType(('DSRC', 'REG-EXT-ID-AND-TYPE')))
     ____MovementState_regional__item__regExtValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___MovementState_regional__item__regExtValue._const_tab = ____MovementState_regional__item__regExtValue_tab
-    ___MovementState_regional__item__regExtValue._const_tab_at = ('..', 'regionId')
-    ___MovementState_regional__item__regExtValue._const_tab_id = 'Type'
+    ___MovementState_regional__item__regExtValue._const_tab_at = ('..', u'regionId')
+    ___MovementState_regional__item__regExtValue._const_tab_id = u'Type'
     __MovementState_regional__item_._cont = ASN1Dict([
-        ('regionId', ___MovementState_regional__item__regionId),
-        ('regExtValue', ___MovementState_regional__item__regExtValue),
+        (u'regionId', ___MovementState_regional__item__regionId),
+        (u'regExtValue', ___MovementState_regional__item__regExtValue),
         ])
     __MovementState_regional__item_._ext = None
     _MovementState_regional._cont = __MovementState_regional__item_
     _MovementState_regional._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=4)], ev=None, er=[])
     MovementState._cont = ASN1Dict([
-        ('movementName', _MovementState_movementName),
-        ('signalGroup', _MovementState_signalGroup),
-        ('state-time-speed', _MovementState_state_time_speed),
-        ('maneuverAssistList', _MovementState_maneuverAssistList),
-        ('regional', _MovementState_regional),
+        (u'movementName', _MovementState_movementName),
+        (u'signalGroup', _MovementState_signalGroup),
+        (u'state-time-speed', _MovementState_state_time_speed),
+        (u'maneuverAssistList', _MovementState_maneuverAssistList),
+        (u'regional', _MovementState_regional),
         ])
     MovementState._ext = []
     
     #-----< NodeAttributeSetXY >-----#
-    NodeAttributeSetXY = SEQ(name='NodeAttributeSetXY', mode=MODE_TYPE)
-    _NodeAttributeSetXY_localNode = SEQ_OF(name='localNode', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'NodeAttributeXYList')), opt=True)
-    _NodeAttributeSetXY_disabled = SEQ_OF(name='disabled', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'SegmentAttributeXYList')), opt=True)
-    _NodeAttributeSetXY_enabled = SEQ_OF(name='enabled', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'SegmentAttributeXYList')), opt=True)
-    _NodeAttributeSetXY_data = SEQ_OF(name='data', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'LaneDataAttributeList')), opt=True)
-    _NodeAttributeSetXY_dWidth = INT(name='dWidth', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'Offset-B10')), opt=True)
-    _NodeAttributeSetXY_dElevation = INT(name='dElevation', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'Offset-B10')), opt=True)
-    _NodeAttributeSetXY_regional = SEQ_OF(name='regional', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    NodeAttributeSetXY = SEQ(name=u'NodeAttributeSetXY', mode=MODE_TYPE)
+    _NodeAttributeSetXY_localNode = SEQ_OF(name=u'localNode', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'NodeAttributeXYList')), opt=True)
+    _NodeAttributeSetXY_disabled = SEQ_OF(name=u'disabled', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'SegmentAttributeXYList')), opt=True)
+    _NodeAttributeSetXY_enabled = SEQ_OF(name=u'enabled', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'SegmentAttributeXYList')), opt=True)
+    _NodeAttributeSetXY_data = SEQ_OF(name=u'data', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'LaneDataAttributeList')), opt=True)
+    _NodeAttributeSetXY_dWidth = INT(name=u'dWidth', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'Offset-B10')), opt=True)
+    _NodeAttributeSetXY_dElevation = INT(name=u'dElevation', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'Offset-B10')), opt=True)
+    _NodeAttributeSetXY_regional = SEQ_OF(name=u'regional', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     __NodeAttributeSetXY_regional__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('DSRC', 'RegionalExtension')))
-    ___NodeAttributeSetXY_regional__item__regionId = INT(name='regionId', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('DSRC', 'REG-EXT-ID-AND-TYPE'), ['id']))
+    ___NodeAttributeSetXY_regional__item__regionId = INT(name=u'regionId', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('DSRC', 'REG-EXT-ID-AND-TYPE'), [u'id']))
     ____NodeAttributeSetXY_regional__item__regionId_tab = CLASS(name='_tab_REG-EXT-ID-AND-TYPE', mode=MODE_SET, typeref=ASN1RefType(('DSRC', 'REG-EXT-ID-AND-TYPE')))
-    _____NodeAttributeSetXY_regional__item__regionId_tab_val_Type_0 = SEQ(name='Type', mode=MODE_TYPE, typeref=ASN1RefType(('AddGrpC', 'NodeAttributeSet-addGrpC')))
-    ____NodeAttributeSetXY_regional__item__regionId_tab._val = ASN1Set(rv=[dict([('Type', _____NodeAttributeSetXY_regional__item__regionId_tab_val_Type_0), ('id', 3)])], rr=[], ev=None, er=[])
+    _____NodeAttributeSetXY_regional__item__regionId_tab_val_Type_0 = SEQ(name=u'Type', mode=MODE_TYPE, typeref=ASN1RefType(('AddGrpC', 'NodeAttributeSet-addGrpC')))
+    ____NodeAttributeSetXY_regional__item__regionId_tab._val = ASN1Set(rv=[dict([(u'Type', _____NodeAttributeSetXY_regional__item__regionId_tab_val_Type_0), (u'id', 3)])], rr=[], ev=None, er=[])
     ___NodeAttributeSetXY_regional__item__regionId._const_tab = ____NodeAttributeSetXY_regional__item__regionId_tab
     ___NodeAttributeSetXY_regional__item__regionId._const_tab_at = None
-    ___NodeAttributeSetXY_regional__item__regionId._const_tab_id = 'id'
-    ___NodeAttributeSetXY_regional__item__regExtValue = OPEN(name='regExtValue', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('DSRC', 'REG-EXT-ID-AND-TYPE'), ['Type']))
+    ___NodeAttributeSetXY_regional__item__regionId._const_tab_id = u'id'
+    ___NodeAttributeSetXY_regional__item__regExtValue = OPEN(name=u'regExtValue', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('DSRC', 'REG-EXT-ID-AND-TYPE'), [u'Type']))
     ___NodeAttributeSetXY_regional__item__regExtValue._const_tab = ____NodeAttributeSetXY_regional__item__regionId_tab
-    ___NodeAttributeSetXY_regional__item__regExtValue._const_tab_at = ('..', 'regionId')
-    ___NodeAttributeSetXY_regional__item__regExtValue._const_tab_id = 'Type'
+    ___NodeAttributeSetXY_regional__item__regExtValue._const_tab_at = ('..', u'regionId')
+    ___NodeAttributeSetXY_regional__item__regExtValue._const_tab_id = u'Type'
     __NodeAttributeSetXY_regional__item_._cont = ASN1Dict([
-        ('regionId', ___NodeAttributeSetXY_regional__item__regionId),
-        ('regExtValue', ___NodeAttributeSetXY_regional__item__regExtValue),
+        (u'regionId', ___NodeAttributeSetXY_regional__item__regionId),
+        (u'regExtValue', ___NodeAttributeSetXY_regional__item__regExtValue),
         ])
     __NodeAttributeSetXY_regional__item_._ext = None
     _NodeAttributeSetXY_regional._cont = __NodeAttributeSetXY_regional__item_
     _NodeAttributeSetXY_regional._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=4)], ev=None, er=[])
     NodeAttributeSetXY._cont = ASN1Dict([
-        ('localNode', _NodeAttributeSetXY_localNode),
-        ('disabled', _NodeAttributeSetXY_disabled),
-        ('enabled', _NodeAttributeSetXY_enabled),
-        ('data', _NodeAttributeSetXY_data),
-        ('dWidth', _NodeAttributeSetXY_dWidth),
-        ('dElevation', _NodeAttributeSetXY_dElevation),
-        ('regional', _NodeAttributeSetXY_regional),
+        (u'localNode', _NodeAttributeSetXY_localNode),
+        (u'disabled', _NodeAttributeSetXY_disabled),
+        (u'enabled', _NodeAttributeSetXY_enabled),
+        (u'data', _NodeAttributeSetXY_data),
+        (u'dWidth', _NodeAttributeSetXY_dWidth),
+        (u'dElevation', _NodeAttributeSetXY_dElevation),
+        (u'regional', _NodeAttributeSetXY_regional),
         ])
     NodeAttributeSetXY._ext = []
     
     #-----< NodeAttributeXY >-----#
-    NodeAttributeXY = ENUM(name='NodeAttributeXY', mode=MODE_TYPE)
-    NodeAttributeXY._cont = ASN1Dict([('reserved', 0), ('stopLine', 1), ('roundedCapStyleA', 2), ('roundedCapStyleB', 3), ('mergePoint', 4), ('divergePoint', 5), ('downstreamStopLine', 6), ('downstreamStartNode', 7), ('closedToTraffic', 8), ('safeIsland', 9), ('curbPresentAtStepOff', 10), ('hydrantPresent', 11)])
+    NodeAttributeXY = ENUM(name=u'NodeAttributeXY', mode=MODE_TYPE)
+    NodeAttributeXY._cont = ASN1Dict([(u'reserved', 0), (u'stopLine', 1), (u'roundedCapStyleA', 2), (u'roundedCapStyleB', 3), (u'mergePoint', 4), (u'divergePoint', 5), (u'downstreamStopLine', 6), (u'downstreamStartNode', 7), (u'closedToTraffic', 8), (u'safeIsland', 9), (u'curbPresentAtStepOff', 10), (u'hydrantPresent', 11)])
     NodeAttributeXY._ext = []
     
     #-----< NodeAttributeXYList >-----#
-    NodeAttributeXYList = SEQ_OF(name='NodeAttributeXYList', mode=MODE_TYPE)
+    NodeAttributeXYList = SEQ_OF(name=u'NodeAttributeXYList', mode=MODE_TYPE)
     _NodeAttributeXYList__item_ = ENUM(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('DSRC', 'NodeAttributeXY')))
     NodeAttributeXYList._cont = _NodeAttributeXYList__item_
     NodeAttributeXYList._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=8)], ev=None, er=[])
     
     #-----< Node-LLmD-64b >-----#
-    Node_LLmD_64b = SEQ(name='Node-LLmD-64b', mode=MODE_TYPE)
-    _Node_LLmD_64b_lon = INT(name='lon', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'Longitude')))
-    _Node_LLmD_64b_lat = INT(name='lat', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'Latitude')))
+    Node_LLmD_64b = SEQ(name=u'Node-LLmD-64b', mode=MODE_TYPE)
+    _Node_LLmD_64b_lon = INT(name=u'lon', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'Longitude')))
+    _Node_LLmD_64b_lat = INT(name=u'lat', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'Latitude')))
     Node_LLmD_64b._cont = ASN1Dict([
-        ('lon', _Node_LLmD_64b_lon),
-        ('lat', _Node_LLmD_64b_lat),
+        (u'lon', _Node_LLmD_64b_lon),
+        (u'lat', _Node_LLmD_64b_lat),
         ])
     Node_LLmD_64b._ext = None
     
     #-----< Node-XY-20b >-----#
-    Node_XY_20b = SEQ(name='Node-XY-20b', mode=MODE_TYPE)
-    _Node_XY_20b_x = INT(name='x', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'Offset-B10')))
-    _Node_XY_20b_y = INT(name='y', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'Offset-B10')))
+    Node_XY_20b = SEQ(name=u'Node-XY-20b', mode=MODE_TYPE)
+    _Node_XY_20b_x = INT(name=u'x', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'Offset-B10')))
+    _Node_XY_20b_y = INT(name=u'y', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'Offset-B10')))
     Node_XY_20b._cont = ASN1Dict([
-        ('x', _Node_XY_20b_x),
-        ('y', _Node_XY_20b_y),
+        (u'x', _Node_XY_20b_x),
+        (u'y', _Node_XY_20b_y),
         ])
     Node_XY_20b._ext = None
     
     #-----< Node-XY-22b >-----#
-    Node_XY_22b = SEQ(name='Node-XY-22b', mode=MODE_TYPE)
-    _Node_XY_22b_x = INT(name='x', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'Offset-B11')))
-    _Node_XY_22b_y = INT(name='y', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'Offset-B11')))
+    Node_XY_22b = SEQ(name=u'Node-XY-22b', mode=MODE_TYPE)
+    _Node_XY_22b_x = INT(name=u'x', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'Offset-B11')))
+    _Node_XY_22b_y = INT(name=u'y', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'Offset-B11')))
     Node_XY_22b._cont = ASN1Dict([
-        ('x', _Node_XY_22b_x),
-        ('y', _Node_XY_22b_y),
+        (u'x', _Node_XY_22b_x),
+        (u'y', _Node_XY_22b_y),
         ])
     Node_XY_22b._ext = None
     
     #-----< Node-XY-24b >-----#
-    Node_XY_24b = SEQ(name='Node-XY-24b', mode=MODE_TYPE)
-    _Node_XY_24b_x = INT(name='x', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'Offset-B12')))
-    _Node_XY_24b_y = INT(name='y', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'Offset-B12')))
+    Node_XY_24b = SEQ(name=u'Node-XY-24b', mode=MODE_TYPE)
+    _Node_XY_24b_x = INT(name=u'x', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'Offset-B12')))
+    _Node_XY_24b_y = INT(name=u'y', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'Offset-B12')))
     Node_XY_24b._cont = ASN1Dict([
-        ('x', _Node_XY_24b_x),
-        ('y', _Node_XY_24b_y),
+        (u'x', _Node_XY_24b_x),
+        (u'y', _Node_XY_24b_y),
         ])
     Node_XY_24b._ext = None
     
     #-----< Node-XY-26b >-----#
-    Node_XY_26b = SEQ(name='Node-XY-26b', mode=MODE_TYPE)
-    _Node_XY_26b_x = INT(name='x', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'Offset-B13')))
-    _Node_XY_26b_y = INT(name='y', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'Offset-B13')))
+    Node_XY_26b = SEQ(name=u'Node-XY-26b', mode=MODE_TYPE)
+    _Node_XY_26b_x = INT(name=u'x', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'Offset-B13')))
+    _Node_XY_26b_y = INT(name=u'y', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'Offset-B13')))
     Node_XY_26b._cont = ASN1Dict([
-        ('x', _Node_XY_26b_x),
-        ('y', _Node_XY_26b_y),
+        (u'x', _Node_XY_26b_x),
+        (u'y', _Node_XY_26b_y),
         ])
     Node_XY_26b._ext = None
     
     #-----< Node-XY-28b >-----#
-    Node_XY_28b = SEQ(name='Node-XY-28b', mode=MODE_TYPE)
-    _Node_XY_28b_x = INT(name='x', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'Offset-B14')))
-    _Node_XY_28b_y = INT(name='y', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'Offset-B14')))
+    Node_XY_28b = SEQ(name=u'Node-XY-28b', mode=MODE_TYPE)
+    _Node_XY_28b_x = INT(name=u'x', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'Offset-B14')))
+    _Node_XY_28b_y = INT(name=u'y', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'Offset-B14')))
     Node_XY_28b._cont = ASN1Dict([
-        ('x', _Node_XY_28b_x),
-        ('y', _Node_XY_28b_y),
+        (u'x', _Node_XY_28b_x),
+        (u'y', _Node_XY_28b_y),
         ])
     Node_XY_28b._ext = None
     
     #-----< Node-XY-32b >-----#
-    Node_XY_32b = SEQ(name='Node-XY-32b', mode=MODE_TYPE)
-    _Node_XY_32b_x = INT(name='x', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'Offset-B16')))
-    _Node_XY_32b_y = INT(name='y', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'Offset-B16')))
+    Node_XY_32b = SEQ(name=u'Node-XY-32b', mode=MODE_TYPE)
+    _Node_XY_32b_x = INT(name=u'x', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'Offset-B16')))
+    _Node_XY_32b_y = INT(name=u'y', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'Offset-B16')))
     Node_XY_32b._cont = ASN1Dict([
-        ('x', _Node_XY_32b_x),
-        ('y', _Node_XY_32b_y),
+        (u'x', _Node_XY_32b_x),
+        (u'y', _Node_XY_32b_y),
         ])
     Node_XY_32b._ext = None
     
     #-----< NodeListXY >-----#
-    NodeListXY = CHOICE(name='NodeListXY', mode=MODE_TYPE)
-    _NodeListXY_nodes = SEQ_OF(name='nodes', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'NodeSetXY')))
-    _NodeListXY_computed = SEQ(name='computed', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'ComputedLane')))
+    NodeListXY = CHOICE(name=u'NodeListXY', mode=MODE_TYPE)
+    _NodeListXY_nodes = SEQ_OF(name=u'nodes', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'NodeSetXY')))
+    _NodeListXY_computed = SEQ(name=u'computed', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'ComputedLane')))
     NodeListXY._cont = ASN1Dict([
-        ('nodes', _NodeListXY_nodes),
-        ('computed', _NodeListXY_computed),
+        (u'nodes', _NodeListXY_nodes),
+        (u'computed', _NodeListXY_computed),
         ])
     NodeListXY._ext = []
     
     #-----< NodeOffsetPointXY >-----#
-    NodeOffsetPointXY = CHOICE(name='NodeOffsetPointXY', mode=MODE_TYPE)
-    _NodeOffsetPointXY_node_XY1 = SEQ(name='node-XY1', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'Node-XY-20b')))
-    _NodeOffsetPointXY_node_XY2 = SEQ(name='node-XY2', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'Node-XY-22b')))
-    _NodeOffsetPointXY_node_XY3 = SEQ(name='node-XY3', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'Node-XY-24b')))
-    _NodeOffsetPointXY_node_XY4 = SEQ(name='node-XY4', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'Node-XY-26b')))
-    _NodeOffsetPointXY_node_XY5 = SEQ(name='node-XY5', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'Node-XY-28b')))
-    _NodeOffsetPointXY_node_XY6 = SEQ(name='node-XY6', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'Node-XY-32b')))
-    _NodeOffsetPointXY_node_LatLon = SEQ(name='node-LatLon', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'Node-LLmD-64b')))
-    _NodeOffsetPointXY_regional = SEQ(name='regional', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'RegionalExtension')))
-    __NodeOffsetPointXY_regional_regionId = INT(name='regionId', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('DSRC', 'REG-EXT-ID-AND-TYPE'), ['id']))
+    NodeOffsetPointXY = CHOICE(name=u'NodeOffsetPointXY', mode=MODE_TYPE)
+    _NodeOffsetPointXY_node_XY1 = SEQ(name=u'node-XY1', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'Node-XY-20b')))
+    _NodeOffsetPointXY_node_XY2 = SEQ(name=u'node-XY2', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'Node-XY-22b')))
+    _NodeOffsetPointXY_node_XY3 = SEQ(name=u'node-XY3', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'Node-XY-24b')))
+    _NodeOffsetPointXY_node_XY4 = SEQ(name=u'node-XY4', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'Node-XY-26b')))
+    _NodeOffsetPointXY_node_XY5 = SEQ(name=u'node-XY5', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'Node-XY-28b')))
+    _NodeOffsetPointXY_node_XY6 = SEQ(name=u'node-XY6', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'Node-XY-32b')))
+    _NodeOffsetPointXY_node_LatLon = SEQ(name=u'node-LatLon', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'Node-LLmD-64b')))
+    _NodeOffsetPointXY_regional = SEQ(name=u'regional', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'RegionalExtension')))
+    __NodeOffsetPointXY_regional_regionId = INT(name=u'regionId', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('DSRC', 'REG-EXT-ID-AND-TYPE'), [u'id']))
     ___NodeOffsetPointXY_regional_regionId_tab = CLASS(name='_tab_REG-EXT-ID-AND-TYPE', mode=MODE_SET, typeref=ASN1RefType(('DSRC', 'REG-EXT-ID-AND-TYPE')))
     ___NodeOffsetPointXY_regional_regionId_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     __NodeOffsetPointXY_regional_regionId._const_tab = ___NodeOffsetPointXY_regional_regionId_tab
     __NodeOffsetPointXY_regional_regionId._const_tab_at = None
-    __NodeOffsetPointXY_regional_regionId._const_tab_id = 'id'
-    __NodeOffsetPointXY_regional_regExtValue = OPEN(name='regExtValue', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('DSRC', 'REG-EXT-ID-AND-TYPE'), ['Type']))
+    __NodeOffsetPointXY_regional_regionId._const_tab_id = u'id'
+    __NodeOffsetPointXY_regional_regExtValue = OPEN(name=u'regExtValue', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('DSRC', 'REG-EXT-ID-AND-TYPE'), [u'Type']))
     ___NodeOffsetPointXY_regional_regExtValue_tab = CLASS(name='_tab_REG-EXT-ID-AND-TYPE', mode=MODE_SET, typeref=ASN1RefType(('DSRC', 'REG-EXT-ID-AND-TYPE')))
     ___NodeOffsetPointXY_regional_regExtValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     __NodeOffsetPointXY_regional_regExtValue._const_tab = ___NodeOffsetPointXY_regional_regExtValue_tab
-    __NodeOffsetPointXY_regional_regExtValue._const_tab_at = ('..', 'regionId')
-    __NodeOffsetPointXY_regional_regExtValue._const_tab_id = 'Type'
+    __NodeOffsetPointXY_regional_regExtValue._const_tab_at = ('..', u'regionId')
+    __NodeOffsetPointXY_regional_regExtValue._const_tab_id = u'Type'
     _NodeOffsetPointXY_regional._cont = ASN1Dict([
-        ('regionId', __NodeOffsetPointXY_regional_regionId),
-        ('regExtValue', __NodeOffsetPointXY_regional_regExtValue),
+        (u'regionId', __NodeOffsetPointXY_regional_regionId),
+        (u'regExtValue', __NodeOffsetPointXY_regional_regExtValue),
         ])
     _NodeOffsetPointXY_regional._ext = None
     NodeOffsetPointXY._cont = ASN1Dict([
-        ('node-XY1', _NodeOffsetPointXY_node_XY1),
-        ('node-XY2', _NodeOffsetPointXY_node_XY2),
-        ('node-XY3', _NodeOffsetPointXY_node_XY3),
-        ('node-XY4', _NodeOffsetPointXY_node_XY4),
-        ('node-XY5', _NodeOffsetPointXY_node_XY5),
-        ('node-XY6', _NodeOffsetPointXY_node_XY6),
-        ('node-LatLon', _NodeOffsetPointXY_node_LatLon),
-        ('regional', _NodeOffsetPointXY_regional),
+        (u'node-XY1', _NodeOffsetPointXY_node_XY1),
+        (u'node-XY2', _NodeOffsetPointXY_node_XY2),
+        (u'node-XY3', _NodeOffsetPointXY_node_XY3),
+        (u'node-XY4', _NodeOffsetPointXY_node_XY4),
+        (u'node-XY5', _NodeOffsetPointXY_node_XY5),
+        (u'node-XY6', _NodeOffsetPointXY_node_XY6),
+        (u'node-LatLon', _NodeOffsetPointXY_node_LatLon),
+        (u'regional', _NodeOffsetPointXY_regional),
         ])
     NodeOffsetPointXY._ext = None
     
     #-----< NodeXY >-----#
-    NodeXY = SEQ(name='NodeXY', mode=MODE_TYPE)
-    _NodeXY_delta = CHOICE(name='delta', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('DSRC', 'NodeOffsetPointXY')))
-    _NodeXY_attributes = SEQ(name='attributes', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'NodeAttributeSetXY')), opt=True)
+    NodeXY = SEQ(name=u'NodeXY', mode=MODE_TYPE)
+    _NodeXY_delta = CHOICE(name=u'delta', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('DSRC', 'NodeOffsetPointXY')))
+    _NodeXY_attributes = SEQ(name=u'attributes', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'NodeAttributeSetXY')), opt=True)
     NodeXY._cont = ASN1Dict([
-        ('delta', _NodeXY_delta),
-        ('attributes', _NodeXY_attributes),
+        (u'delta', _NodeXY_delta),
+        (u'attributes', _NodeXY_attributes),
         ])
     NodeXY._ext = []
     
     #-----< NodeSetXY >-----#
-    NodeSetXY = SEQ_OF(name='NodeSetXY', mode=MODE_TYPE)
+    NodeSetXY = SEQ_OF(name=u'NodeSetXY', mode=MODE_TYPE)
     _NodeSetXY__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('DSRC', 'NodeXY')))
     NodeSetXY._cont = _NodeSetXY__item_
     NodeSetXY._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=2, ub=63)], ev=None, er=[])
     
     #-----< OverlayLaneList >-----#
-    OverlayLaneList = SEQ_OF(name='OverlayLaneList', mode=MODE_TYPE)
+    OverlayLaneList = SEQ_OF(name=u'OverlayLaneList', mode=MODE_TYPE)
     _OverlayLaneList__item_ = INT(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('DSRC', 'LaneID')))
     OverlayLaneList._cont = _OverlayLaneList__item_
     OverlayLaneList._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=5)], ev=None, er=[])
     
     #-----< PositionalAccuracy >-----#
-    PositionalAccuracy = SEQ(name='PositionalAccuracy', mode=MODE_TYPE)
-    _PositionalAccuracy_semiMajor = INT(name='semiMajor', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'SemiMajorAxisAccuracy')))
-    _PositionalAccuracy_semiMinor = INT(name='semiMinor', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'SemiMinorAxisAccuracy')))
-    _PositionalAccuracy_orientation = INT(name='orientation', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'SemiMajorAxisOrientation')))
+    PositionalAccuracy = SEQ(name=u'PositionalAccuracy', mode=MODE_TYPE)
+    _PositionalAccuracy_semiMajor = INT(name=u'semiMajor', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'SemiMajorAxisAccuracy')))
+    _PositionalAccuracy_semiMinor = INT(name=u'semiMinor', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'SemiMinorAxisAccuracy')))
+    _PositionalAccuracy_orientation = INT(name=u'orientation', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'SemiMajorAxisOrientation')))
     PositionalAccuracy._cont = ASN1Dict([
-        ('semiMajor', _PositionalAccuracy_semiMajor),
-        ('semiMinor', _PositionalAccuracy_semiMinor),
-        ('orientation', _PositionalAccuracy_orientation),
+        (u'semiMajor', _PositionalAccuracy_semiMajor),
+        (u'semiMinor', _PositionalAccuracy_semiMinor),
+        (u'orientation', _PositionalAccuracy_orientation),
         ])
     PositionalAccuracy._ext = None
     
     #-----< PositionConfidenceSet >-----#
-    PositionConfidenceSet = SEQ(name='PositionConfidenceSet', mode=MODE_TYPE)
-    _PositionConfidenceSet_pos = ENUM(name='pos', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'PositionConfidence')))
-    _PositionConfidenceSet_elevation = ENUM(name='elevation', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'ElevationConfidence')))
+    PositionConfidenceSet = SEQ(name=u'PositionConfidenceSet', mode=MODE_TYPE)
+    _PositionConfidenceSet_pos = ENUM(name=u'pos', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'PositionConfidence')))
+    _PositionConfidenceSet_elevation = ENUM(name=u'elevation', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'ElevationConfidence')))
     PositionConfidenceSet._cont = ASN1Dict([
-        ('pos', _PositionConfidenceSet_pos),
-        ('elevation', _PositionConfidenceSet_elevation),
+        (u'pos', _PositionConfidenceSet_pos),
+        (u'elevation', _PositionConfidenceSet_elevation),
         ])
     PositionConfidenceSet._ext = None
     
     #-----< Position3D >-----#
-    Position3D = SEQ(name='Position3D', mode=MODE_TYPE)
-    _Position3D_lat = INT(name='lat', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'Latitude')))
-    _Position3D_long = INT(name='long', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'Longitude')))
-    _Position3D_elevation = INT(name='elevation', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'Elevation')), opt=True)
-    _Position3D_regional = SEQ_OF(name='regional', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    Position3D = SEQ(name=u'Position3D', mode=MODE_TYPE)
+    _Position3D_lat = INT(name=u'lat', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'Latitude')))
+    _Position3D_long = INT(name=u'long', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'Longitude')))
+    _Position3D_elevation = INT(name=u'elevation', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'Elevation')), opt=True)
+    _Position3D_regional = SEQ_OF(name=u'regional', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     __Position3D_regional__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('DSRC', 'RegionalExtension')))
-    ___Position3D_regional__item__regionId = INT(name='regionId', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('DSRC', 'REG-EXT-ID-AND-TYPE'), ['id']))
+    ___Position3D_regional__item__regionId = INT(name=u'regionId', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('DSRC', 'REG-EXT-ID-AND-TYPE'), [u'id']))
     ____Position3D_regional__item__regionId_tab = CLASS(name='_tab_REG-EXT-ID-AND-TYPE', mode=MODE_SET, typeref=ASN1RefType(('DSRC', 'REG-EXT-ID-AND-TYPE')))
-    _____Position3D_regional__item__regionId_tab_val_Type_0 = SEQ(name='Type', mode=MODE_TYPE, typeref=ASN1RefType(('AddGrpC', 'Position3D-addGrpC')))
-    ____Position3D_regional__item__regionId_tab._val = ASN1Set(rv=[dict([('Type', _____Position3D_regional__item__regionId_tab_val_Type_0), ('id', 3)])], rr=[], ev=None, er=[])
+    _____Position3D_regional__item__regionId_tab_val_Type_0 = SEQ(name=u'Type', mode=MODE_TYPE, typeref=ASN1RefType(('AddGrpC', 'Position3D-addGrpC')))
+    ____Position3D_regional__item__regionId_tab._val = ASN1Set(rv=[dict([(u'Type', _____Position3D_regional__item__regionId_tab_val_Type_0), (u'id', 3)])], rr=[], ev=None, er=[])
     ___Position3D_regional__item__regionId._const_tab = ____Position3D_regional__item__regionId_tab
     ___Position3D_regional__item__regionId._const_tab_at = None
-    ___Position3D_regional__item__regionId._const_tab_id = 'id'
-    ___Position3D_regional__item__regExtValue = OPEN(name='regExtValue', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('DSRC', 'REG-EXT-ID-AND-TYPE'), ['Type']))
+    ___Position3D_regional__item__regionId._const_tab_id = u'id'
+    ___Position3D_regional__item__regExtValue = OPEN(name=u'regExtValue', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('DSRC', 'REG-EXT-ID-AND-TYPE'), [u'Type']))
     ___Position3D_regional__item__regExtValue._const_tab = ____Position3D_regional__item__regionId_tab
-    ___Position3D_regional__item__regExtValue._const_tab_at = ('..', 'regionId')
-    ___Position3D_regional__item__regExtValue._const_tab_id = 'Type'
+    ___Position3D_regional__item__regExtValue._const_tab_at = ('..', u'regionId')
+    ___Position3D_regional__item__regExtValue._const_tab_id = u'Type'
     __Position3D_regional__item_._cont = ASN1Dict([
-        ('regionId', ___Position3D_regional__item__regionId),
-        ('regExtValue', ___Position3D_regional__item__regExtValue),
+        (u'regionId', ___Position3D_regional__item__regionId),
+        (u'regExtValue', ___Position3D_regional__item__regExtValue),
         ])
     __Position3D_regional__item_._ext = None
     _Position3D_regional._cont = __Position3D_regional__item_
     _Position3D_regional._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=4)], ev=None, er=[])
     Position3D._cont = ASN1Dict([
-        ('lat', _Position3D_lat),
-        ('long', _Position3D_long),
-        ('elevation', _Position3D_elevation),
-        ('regional', _Position3D_regional),
+        (u'lat', _Position3D_lat),
+        (u'long', _Position3D_long),
+        (u'elevation', _Position3D_elevation),
+        (u'regional', _Position3D_regional),
         ])
     Position3D._ext = []
     
     #-----< PreemptPriorityList >-----#
-    PreemptPriorityList = SEQ_OF(name='PreemptPriorityList', mode=MODE_TYPE)
+    PreemptPriorityList = SEQ_OF(name=u'PreemptPriorityList', mode=MODE_TYPE)
     _PreemptPriorityList__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('DSRC', 'SignalControlZone')))
     PreemptPriorityList._cont = _PreemptPriorityList__item_
     PreemptPriorityList._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=32)], ev=None, er=[])
     
     #-----< RegulatorySpeedLimit >-----#
-    RegulatorySpeedLimit = SEQ(name='RegulatorySpeedLimit', mode=MODE_TYPE)
-    _RegulatorySpeedLimit_type = ENUM(name='type', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'SpeedLimitType')))
-    _RegulatorySpeedLimit_speed = INT(name='speed', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'Velocity')))
+    RegulatorySpeedLimit = SEQ(name=u'RegulatorySpeedLimit', mode=MODE_TYPE)
+    _RegulatorySpeedLimit_type = ENUM(name=u'type', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'SpeedLimitType')))
+    _RegulatorySpeedLimit_speed = INT(name=u'speed', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'Velocity')))
     RegulatorySpeedLimit._cont = ASN1Dict([
-        ('type', _RegulatorySpeedLimit_type),
-        ('speed', _RegulatorySpeedLimit_speed),
+        (u'type', _RegulatorySpeedLimit_type),
+        (u'speed', _RegulatorySpeedLimit_speed),
         ])
     RegulatorySpeedLimit._ext = None
     
     #-----< RequestorDescription >-----#
-    RequestorDescription = SEQ(name='RequestorDescription', mode=MODE_TYPE)
-    _RequestorDescription_id = CHOICE(name='id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('DSRC', 'VehicleID')))
-    _RequestorDescription_type = SEQ(name='type', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'RequestorType')), opt=True)
-    _RequestorDescription_position = SEQ(name='position', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'RequestorPositionVector')), opt=True)
-    _RequestorDescription_name = STR_IA5(name='name', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'DescriptiveName')), opt=True)
-    _RequestorDescription_routeName = STR_IA5(name='routeName', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'DescriptiveName')), opt=True)
-    _RequestorDescription_transitStatus = BIT_STR(name='transitStatus', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'TransitVehicleStatus')), opt=True)
-    _RequestorDescription_transitOccupancy = ENUM(name='transitOccupancy', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'TransitVehicleOccupancy')), opt=True)
-    _RequestorDescription_transitSchedule = INT(name='transitSchedule', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'DeltaTime')), opt=True)
-    _RequestorDescription_regional = SEQ_OF(name='regional', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    RequestorDescription = SEQ(name=u'RequestorDescription', mode=MODE_TYPE)
+    _RequestorDescription_id = CHOICE(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('DSRC', 'VehicleID')))
+    _RequestorDescription_type = SEQ(name=u'type', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'RequestorType')), opt=True)
+    _RequestorDescription_position = SEQ(name=u'position', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'RequestorPositionVector')), opt=True)
+    _RequestorDescription_name = STR_IA5(name=u'name', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'DescriptiveName')), opt=True)
+    _RequestorDescription_routeName = STR_IA5(name=u'routeName', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'DescriptiveName')), opt=True)
+    _RequestorDescription_transitStatus = BIT_STR(name=u'transitStatus', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'TransitVehicleStatus')), opt=True)
+    _RequestorDescription_transitOccupancy = ENUM(name=u'transitOccupancy', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'TransitVehicleOccupancy')), opt=True)
+    _RequestorDescription_transitSchedule = INT(name=u'transitSchedule', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'DeltaTime')), opt=True)
+    _RequestorDescription_regional = SEQ_OF(name=u'regional', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     __RequestorDescription_regional__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('DSRC', 'RegionalExtension')))
-    ___RequestorDescription_regional__item__regionId = INT(name='regionId', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('DSRC', 'REG-EXT-ID-AND-TYPE'), ['id']))
+    ___RequestorDescription_regional__item__regionId = INT(name=u'regionId', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('DSRC', 'REG-EXT-ID-AND-TYPE'), [u'id']))
     ____RequestorDescription_regional__item__regionId_tab = CLASS(name='_tab_REG-EXT-ID-AND-TYPE', mode=MODE_SET, typeref=ASN1RefType(('DSRC', 'REG-EXT-ID-AND-TYPE')))
-    _____RequestorDescription_regional__item__regionId_tab_val_Type_0 = SEQ(name='Type', mode=MODE_TYPE, typeref=ASN1RefType(('AddGrpC', 'RequestorDescription-addGrpC')))
-    ____RequestorDescription_regional__item__regionId_tab._val = ASN1Set(rv=[dict([('Type', _____RequestorDescription_regional__item__regionId_tab_val_Type_0), ('id', 3)])], rr=[], ev=None, er=[])
+    _____RequestorDescription_regional__item__regionId_tab_val_Type_0 = SEQ(name=u'Type', mode=MODE_TYPE, typeref=ASN1RefType(('AddGrpC', 'RequestorDescription-addGrpC')))
+    ____RequestorDescription_regional__item__regionId_tab._val = ASN1Set(rv=[dict([(u'Type', _____RequestorDescription_regional__item__regionId_tab_val_Type_0), (u'id', 3)])], rr=[], ev=None, er=[])
     ___RequestorDescription_regional__item__regionId._const_tab = ____RequestorDescription_regional__item__regionId_tab
     ___RequestorDescription_regional__item__regionId._const_tab_at = None
-    ___RequestorDescription_regional__item__regionId._const_tab_id = 'id'
-    ___RequestorDescription_regional__item__regExtValue = OPEN(name='regExtValue', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('DSRC', 'REG-EXT-ID-AND-TYPE'), ['Type']))
+    ___RequestorDescription_regional__item__regionId._const_tab_id = u'id'
+    ___RequestorDescription_regional__item__regExtValue = OPEN(name=u'regExtValue', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('DSRC', 'REG-EXT-ID-AND-TYPE'), [u'Type']))
     ___RequestorDescription_regional__item__regExtValue._const_tab = ____RequestorDescription_regional__item__regionId_tab
-    ___RequestorDescription_regional__item__regExtValue._const_tab_at = ('..', 'regionId')
-    ___RequestorDescription_regional__item__regExtValue._const_tab_id = 'Type'
+    ___RequestorDescription_regional__item__regExtValue._const_tab_at = ('..', u'regionId')
+    ___RequestorDescription_regional__item__regExtValue._const_tab_id = u'Type'
     __RequestorDescription_regional__item_._cont = ASN1Dict([
-        ('regionId', ___RequestorDescription_regional__item__regionId),
-        ('regExtValue', ___RequestorDescription_regional__item__regExtValue),
+        (u'regionId', ___RequestorDescription_regional__item__regionId),
+        (u'regExtValue', ___RequestorDescription_regional__item__regExtValue),
         ])
     __RequestorDescription_regional__item_._ext = None
     _RequestorDescription_regional._cont = __RequestorDescription_regional__item_
     _RequestorDescription_regional._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=4)], ev=None, er=[])
     RequestorDescription._cont = ASN1Dict([
-        ('id', _RequestorDescription_id),
-        ('type', _RequestorDescription_type),
-        ('position', _RequestorDescription_position),
-        ('name', _RequestorDescription_name),
-        ('routeName', _RequestorDescription_routeName),
-        ('transitStatus', _RequestorDescription_transitStatus),
-        ('transitOccupancy', _RequestorDescription_transitOccupancy),
-        ('transitSchedule', _RequestorDescription_transitSchedule),
-        ('regional', _RequestorDescription_regional),
+        (u'id', _RequestorDescription_id),
+        (u'type', _RequestorDescription_type),
+        (u'position', _RequestorDescription_position),
+        (u'name', _RequestorDescription_name),
+        (u'routeName', _RequestorDescription_routeName),
+        (u'transitStatus', _RequestorDescription_transitStatus),
+        (u'transitOccupancy', _RequestorDescription_transitOccupancy),
+        (u'transitSchedule', _RequestorDescription_transitSchedule),
+        (u'regional', _RequestorDescription_regional),
         ])
     RequestorDescription._ext = []
     
     #-----< RequestorPositionVector >-----#
-    RequestorPositionVector = SEQ(name='RequestorPositionVector', mode=MODE_TYPE)
-    _RequestorPositionVector_position = SEQ(name='position', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'Position3D')))
-    _RequestorPositionVector_heading = INT(name='heading', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'Angle')), opt=True)
-    _RequestorPositionVector_speed = SEQ(name='speed', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'TransmissionAndSpeed')), opt=True)
+    RequestorPositionVector = SEQ(name=u'RequestorPositionVector', mode=MODE_TYPE)
+    _RequestorPositionVector_position = SEQ(name=u'position', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'Position3D')))
+    _RequestorPositionVector_heading = INT(name=u'heading', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'Angle')), opt=True)
+    _RequestorPositionVector_speed = SEQ(name=u'speed', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'TransmissionAndSpeed')), opt=True)
     RequestorPositionVector._cont = ASN1Dict([
-        ('position', _RequestorPositionVector_position),
-        ('heading', _RequestorPositionVector_heading),
-        ('speed', _RequestorPositionVector_speed),
+        (u'position', _RequestorPositionVector_position),
+        (u'heading', _RequestorPositionVector_heading),
+        (u'speed', _RequestorPositionVector_speed),
         ])
     RequestorPositionVector._ext = []
     
     #-----< RequestorType >-----#
-    RequestorType = SEQ(name='RequestorType', mode=MODE_TYPE)
-    _RequestorType_role = ENUM(name='role', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'BasicVehicleRole')))
-    _RequestorType_subrole = ENUM(name='subrole', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'RequestSubRole')), opt=True)
-    _RequestorType_request = ENUM(name='request', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'RequestImportanceLevel')), opt=True)
-    _RequestorType_iso3883 = INT(name='iso3883', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ElectronicRegistrationIdentificationVehicleDataModule', 'Iso3833VehicleType')), opt=True)
-    _RequestorType_hpmsType = ENUM(name='hpmsType', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'VehicleType')), opt=True)
-    _RequestorType_regional = SEQ(name='regional', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'RegionalExtension')), opt=True)
-    __RequestorType_regional_regionId = INT(name='regionId', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('DSRC', 'REG-EXT-ID-AND-TYPE'), ['id']))
+    RequestorType = SEQ(name=u'RequestorType', mode=MODE_TYPE)
+    _RequestorType_role = ENUM(name=u'role', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'BasicVehicleRole')))
+    _RequestorType_subrole = ENUM(name=u'subrole', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'RequestSubRole')), opt=True)
+    _RequestorType_request = ENUM(name=u'request', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'RequestImportanceLevel')), opt=True)
+    _RequestorType_iso3883 = INT(name=u'iso3883', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ElectronicRegistrationIdentificationVehicleDataModule', 'Iso3833VehicleType')), opt=True)
+    _RequestorType_hpmsType = ENUM(name=u'hpmsType', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'VehicleType')), opt=True)
+    _RequestorType_regional = SEQ(name=u'regional', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'RegionalExtension')), opt=True)
+    __RequestorType_regional_regionId = INT(name=u'regionId', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('DSRC', 'REG-EXT-ID-AND-TYPE'), [u'id']))
     ___RequestorType_regional_regionId_tab = CLASS(name='_tab_REG-EXT-ID-AND-TYPE', mode=MODE_SET, typeref=ASN1RefType(('DSRC', 'REG-EXT-ID-AND-TYPE')))
     ___RequestorType_regional_regionId_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     __RequestorType_regional_regionId._const_tab = ___RequestorType_regional_regionId_tab
     __RequestorType_regional_regionId._const_tab_at = None
-    __RequestorType_regional_regionId._const_tab_id = 'id'
-    __RequestorType_regional_regExtValue = OPEN(name='regExtValue', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('DSRC', 'REG-EXT-ID-AND-TYPE'), ['Type']))
+    __RequestorType_regional_regionId._const_tab_id = u'id'
+    __RequestorType_regional_regExtValue = OPEN(name=u'regExtValue', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('DSRC', 'REG-EXT-ID-AND-TYPE'), [u'Type']))
     ___RequestorType_regional_regExtValue_tab = CLASS(name='_tab_REG-EXT-ID-AND-TYPE', mode=MODE_SET, typeref=ASN1RefType(('DSRC', 'REG-EXT-ID-AND-TYPE')))
     ___RequestorType_regional_regExtValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     __RequestorType_regional_regExtValue._const_tab = ___RequestorType_regional_regExtValue_tab
-    __RequestorType_regional_regExtValue._const_tab_at = ('..', 'regionId')
-    __RequestorType_regional_regExtValue._const_tab_id = 'Type'
+    __RequestorType_regional_regExtValue._const_tab_at = ('..', u'regionId')
+    __RequestorType_regional_regExtValue._const_tab_id = u'Type'
     _RequestorType_regional._cont = ASN1Dict([
-        ('regionId', __RequestorType_regional_regionId),
-        ('regExtValue', __RequestorType_regional_regExtValue),
+        (u'regionId', __RequestorType_regional_regionId),
+        (u'regExtValue', __RequestorType_regional_regExtValue),
         ])
     _RequestorType_regional._ext = None
     RequestorType._cont = ASN1Dict([
-        ('role', _RequestorType_role),
-        ('subrole', _RequestorType_subrole),
-        ('request', _RequestorType_request),
-        ('iso3883', _RequestorType_iso3883),
-        ('hpmsType', _RequestorType_hpmsType),
-        ('regional', _RequestorType_regional),
+        (u'role', _RequestorType_role),
+        (u'subrole', _RequestorType_subrole),
+        (u'request', _RequestorType_request),
+        (u'iso3883', _RequestorType_iso3883),
+        (u'hpmsType', _RequestorType_hpmsType),
+        (u'regional', _RequestorType_regional),
         ])
     RequestorType._ext = []
     
     #-----< RestrictionClassAssignment >-----#
-    RestrictionClassAssignment = SEQ(name='RestrictionClassAssignment', mode=MODE_TYPE)
-    _RestrictionClassAssignment_id = INT(name='id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'RestrictionClassID')))
-    _RestrictionClassAssignment_users = SEQ_OF(name='users', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'RestrictionUserTypeList')))
+    RestrictionClassAssignment = SEQ(name=u'RestrictionClassAssignment', mode=MODE_TYPE)
+    _RestrictionClassAssignment_id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'RestrictionClassID')))
+    _RestrictionClassAssignment_users = SEQ_OF(name=u'users', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'RestrictionUserTypeList')))
     RestrictionClassAssignment._cont = ASN1Dict([
-        ('id', _RestrictionClassAssignment_id),
-        ('users', _RestrictionClassAssignment_users),
+        (u'id', _RestrictionClassAssignment_id),
+        (u'users', _RestrictionClassAssignment_users),
         ])
     RestrictionClassAssignment._ext = None
     
     #-----< RestrictionClassList >-----#
-    RestrictionClassList = SEQ_OF(name='RestrictionClassList', mode=MODE_TYPE)
+    RestrictionClassList = SEQ_OF(name=u'RestrictionClassList', mode=MODE_TYPE)
     _RestrictionClassList__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('DSRC', 'RestrictionClassAssignment')))
     RestrictionClassList._cont = _RestrictionClassList__item_
     RestrictionClassList._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=254)], ev=None, er=[])
     
     #-----< RestrictionUserType >-----#
-    RestrictionUserType = CHOICE(name='RestrictionUserType', mode=MODE_TYPE)
-    _RestrictionUserType_basicType = ENUM(name='basicType', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'RestrictionAppliesTo')))
-    _RestrictionUserType_regional = SEQ_OF(name='regional', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    RestrictionUserType = CHOICE(name=u'RestrictionUserType', mode=MODE_TYPE)
+    _RestrictionUserType_basicType = ENUM(name=u'basicType', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'RestrictionAppliesTo')))
+    _RestrictionUserType_regional = SEQ_OF(name=u'regional', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     __RestrictionUserType_regional__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('DSRC', 'RegionalExtension')))
-    ___RestrictionUserType_regional__item__regionId = INT(name='regionId', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('DSRC', 'REG-EXT-ID-AND-TYPE'), ['id']))
+    ___RestrictionUserType_regional__item__regionId = INT(name=u'regionId', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('DSRC', 'REG-EXT-ID-AND-TYPE'), [u'id']))
     ____RestrictionUserType_regional__item__regionId_tab = CLASS(name='_tab_REG-EXT-ID-AND-TYPE', mode=MODE_SET, typeref=ASN1RefType(('DSRC', 'REG-EXT-ID-AND-TYPE')))
-    _____RestrictionUserType_regional__item__regionId_tab_val_Type_0 = SEQ(name='Type', mode=MODE_TYPE, typeref=ASN1RefType(('AddGrpC', 'RestrictionUserType-addGrpC')))
-    ____RestrictionUserType_regional__item__regionId_tab._val = ASN1Set(rv=[dict([('Type', _____RestrictionUserType_regional__item__regionId_tab_val_Type_0), ('id', 3)])], rr=[], ev=None, er=[])
+    _____RestrictionUserType_regional__item__regionId_tab_val_Type_0 = SEQ(name=u'Type', mode=MODE_TYPE, typeref=ASN1RefType(('AddGrpC', 'RestrictionUserType-addGrpC')))
+    ____RestrictionUserType_regional__item__regionId_tab._val = ASN1Set(rv=[dict([(u'Type', _____RestrictionUserType_regional__item__regionId_tab_val_Type_0), (u'id', 3)])], rr=[], ev=None, er=[])
     ___RestrictionUserType_regional__item__regionId._const_tab = ____RestrictionUserType_regional__item__regionId_tab
     ___RestrictionUserType_regional__item__regionId._const_tab_at = None
-    ___RestrictionUserType_regional__item__regionId._const_tab_id = 'id'
-    ___RestrictionUserType_regional__item__regExtValue = OPEN(name='regExtValue', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('DSRC', 'REG-EXT-ID-AND-TYPE'), ['Type']))
+    ___RestrictionUserType_regional__item__regionId._const_tab_id = u'id'
+    ___RestrictionUserType_regional__item__regExtValue = OPEN(name=u'regExtValue', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('DSRC', 'REG-EXT-ID-AND-TYPE'), [u'Type']))
     ___RestrictionUserType_regional__item__regExtValue._const_tab = ____RestrictionUserType_regional__item__regionId_tab
-    ___RestrictionUserType_regional__item__regExtValue._const_tab_at = ('..', 'regionId')
-    ___RestrictionUserType_regional__item__regExtValue._const_tab_id = 'Type'
+    ___RestrictionUserType_regional__item__regExtValue._const_tab_at = ('..', u'regionId')
+    ___RestrictionUserType_regional__item__regExtValue._const_tab_id = u'Type'
     __RestrictionUserType_regional__item_._cont = ASN1Dict([
-        ('regionId', ___RestrictionUserType_regional__item__regionId),
-        ('regExtValue', ___RestrictionUserType_regional__item__regExtValue),
+        (u'regionId', ___RestrictionUserType_regional__item__regionId),
+        (u'regExtValue', ___RestrictionUserType_regional__item__regExtValue),
         ])
     __RestrictionUserType_regional__item_._ext = None
     _RestrictionUserType_regional._cont = __RestrictionUserType_regional__item_
     _RestrictionUserType_regional._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=4)], ev=None, er=[])
     RestrictionUserType._cont = ASN1Dict([
-        ('basicType', _RestrictionUserType_basicType),
-        ('regional', _RestrictionUserType_regional),
+        (u'basicType', _RestrictionUserType_basicType),
+        (u'regional', _RestrictionUserType_regional),
         ])
     RestrictionUserType._ext = []
     
     #-----< RestrictionUserTypeList >-----#
-    RestrictionUserTypeList = SEQ_OF(name='RestrictionUserTypeList', mode=MODE_TYPE)
+    RestrictionUserTypeList = SEQ_OF(name=u'RestrictionUserTypeList', mode=MODE_TYPE)
     _RestrictionUserTypeList__item_ = CHOICE(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('DSRC', 'RestrictionUserType')))
     RestrictionUserTypeList._cont = _RestrictionUserTypeList__item_
     RestrictionUserTypeList._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=16)], ev=None, er=[])
     
     #-----< RoadLaneSetList >-----#
-    RoadLaneSetList = SEQ_OF(name='RoadLaneSetList', mode=MODE_TYPE)
+    RoadLaneSetList = SEQ_OF(name=u'RoadLaneSetList', mode=MODE_TYPE)
     _RoadLaneSetList__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('DSRC', 'GenericLane')))
     RoadLaneSetList._cont = _RoadLaneSetList__item_
     RoadLaneSetList._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=255)], ev=None, er=[])
     
     #-----< RoadSegmentReferenceID >-----#
-    RoadSegmentReferenceID = SEQ(name='RoadSegmentReferenceID', mode=MODE_TYPE)
-    _RoadSegmentReferenceID_region = INT(name='region', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'RoadRegulatorID')), opt=True)
-    _RoadSegmentReferenceID_id = INT(name='id', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'RoadSegmentID')))
+    RoadSegmentReferenceID = SEQ(name=u'RoadSegmentReferenceID', mode=MODE_TYPE)
+    _RoadSegmentReferenceID_region = INT(name=u'region', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'RoadRegulatorID')), opt=True)
+    _RoadSegmentReferenceID_id = INT(name=u'id', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'RoadSegmentID')))
     RoadSegmentReferenceID._cont = ASN1Dict([
-        ('region', _RoadSegmentReferenceID_region),
-        ('id', _RoadSegmentReferenceID_id),
+        (u'region', _RoadSegmentReferenceID_region),
+        (u'id', _RoadSegmentReferenceID_id),
         ])
     RoadSegmentReferenceID._ext = None
     
     #-----< RoadSegment >-----#
-    RoadSegment = SEQ(name='RoadSegment', mode=MODE_TYPE)
-    _RoadSegment_name = STR_IA5(name='name', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'DescriptiveName')), opt=True)
-    _RoadSegment_id = SEQ(name='id', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'RoadSegmentReferenceID')))
-    _RoadSegment_revision = INT(name='revision', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'MsgCount')))
-    _RoadSegment_refPoint = SEQ(name='refPoint', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'Position3D')))
-    _RoadSegment_laneWidth = INT(name='laneWidth', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'LaneWidth')), opt=True)
-    _RoadSegment_speedLimits = SEQ_OF(name='speedLimits', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'SpeedLimitList')), opt=True)
-    _RoadSegment_roadLaneSet = SEQ_OF(name='roadLaneSet', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'RoadLaneSetList')))
-    _RoadSegment_regional = SEQ_OF(name='regional', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    RoadSegment = SEQ(name=u'RoadSegment', mode=MODE_TYPE)
+    _RoadSegment_name = STR_IA5(name=u'name', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'DescriptiveName')), opt=True)
+    _RoadSegment_id = SEQ(name=u'id', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'RoadSegmentReferenceID')))
+    _RoadSegment_revision = INT(name=u'revision', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'MsgCount')))
+    _RoadSegment_refPoint = SEQ(name=u'refPoint', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'Position3D')))
+    _RoadSegment_laneWidth = INT(name=u'laneWidth', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'LaneWidth')), opt=True)
+    _RoadSegment_speedLimits = SEQ_OF(name=u'speedLimits', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'SpeedLimitList')), opt=True)
+    _RoadSegment_roadLaneSet = SEQ_OF(name=u'roadLaneSet', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'RoadLaneSetList')))
+    _RoadSegment_regional = SEQ_OF(name=u'regional', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     __RoadSegment_regional__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('DSRC', 'RegionalExtension')))
-    ___RoadSegment_regional__item__regionId = INT(name='regionId', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('DSRC', 'REG-EXT-ID-AND-TYPE'), ['id']))
+    ___RoadSegment_regional__item__regionId = INT(name=u'regionId', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('DSRC', 'REG-EXT-ID-AND-TYPE'), [u'id']))
     ____RoadSegment_regional__item__regionId_tab = CLASS(name='_tab_REG-EXT-ID-AND-TYPE', mode=MODE_SET, typeref=ASN1RefType(('DSRC', 'REG-EXT-ID-AND-TYPE')))
     ____RoadSegment_regional__item__regionId_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___RoadSegment_regional__item__regionId._const_tab = ____RoadSegment_regional__item__regionId_tab
     ___RoadSegment_regional__item__regionId._const_tab_at = None
-    ___RoadSegment_regional__item__regionId._const_tab_id = 'id'
-    ___RoadSegment_regional__item__regExtValue = OPEN(name='regExtValue', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('DSRC', 'REG-EXT-ID-AND-TYPE'), ['Type']))
+    ___RoadSegment_regional__item__regionId._const_tab_id = u'id'
+    ___RoadSegment_regional__item__regExtValue = OPEN(name=u'regExtValue', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('DSRC', 'REG-EXT-ID-AND-TYPE'), [u'Type']))
     ____RoadSegment_regional__item__regExtValue_tab = CLASS(name='_tab_REG-EXT-ID-AND-TYPE', mode=MODE_SET, typeref=ASN1RefType(('DSRC', 'REG-EXT-ID-AND-TYPE')))
     ____RoadSegment_regional__item__regExtValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___RoadSegment_regional__item__regExtValue._const_tab = ____RoadSegment_regional__item__regExtValue_tab
-    ___RoadSegment_regional__item__regExtValue._const_tab_at = ('..', 'regionId')
-    ___RoadSegment_regional__item__regExtValue._const_tab_id = 'Type'
+    ___RoadSegment_regional__item__regExtValue._const_tab_at = ('..', u'regionId')
+    ___RoadSegment_regional__item__regExtValue._const_tab_id = u'Type'
     __RoadSegment_regional__item_._cont = ASN1Dict([
-        ('regionId', ___RoadSegment_regional__item__regionId),
-        ('regExtValue', ___RoadSegment_regional__item__regExtValue),
+        (u'regionId', ___RoadSegment_regional__item__regionId),
+        (u'regExtValue', ___RoadSegment_regional__item__regExtValue),
         ])
     __RoadSegment_regional__item_._ext = None
     _RoadSegment_regional._cont = __RoadSegment_regional__item_
     _RoadSegment_regional._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=4)], ev=None, er=[])
     RoadSegment._cont = ASN1Dict([
-        ('name', _RoadSegment_name),
-        ('id', _RoadSegment_id),
-        ('revision', _RoadSegment_revision),
-        ('refPoint', _RoadSegment_refPoint),
-        ('laneWidth', _RoadSegment_laneWidth),
-        ('speedLimits', _RoadSegment_speedLimits),
-        ('roadLaneSet', _RoadSegment_roadLaneSet),
-        ('regional', _RoadSegment_regional),
+        (u'name', _RoadSegment_name),
+        (u'id', _RoadSegment_id),
+        (u'revision', _RoadSegment_revision),
+        (u'refPoint', _RoadSegment_refPoint),
+        (u'laneWidth', _RoadSegment_laneWidth),
+        (u'speedLimits', _RoadSegment_speedLimits),
+        (u'roadLaneSet', _RoadSegment_roadLaneSet),
+        (u'regional', _RoadSegment_regional),
         ])
     RoadSegment._ext = []
     
     #-----< RoadSegmentList >-----#
-    RoadSegmentList = SEQ_OF(name='RoadSegmentList', mode=MODE_TYPE)
+    RoadSegmentList = SEQ_OF(name=u'RoadSegmentList', mode=MODE_TYPE)
     _RoadSegmentList__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('DSRC', 'RoadSegment')))
     RoadSegmentList._cont = _RoadSegmentList__item_
     RoadSegmentList._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=32)], ev=None, er=[])
     
     #-----< RTCMheader >-----#
-    RTCMheader = SEQ(name='RTCMheader', mode=MODE_TYPE)
-    _RTCMheader_status = BIT_STR(name='status', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'GNSSstatus')))
-    _RTCMheader_offsetSet = SEQ(name='offsetSet', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'AntennaOffsetSet')))
+    RTCMheader = SEQ(name=u'RTCMheader', mode=MODE_TYPE)
+    _RTCMheader_status = BIT_STR(name=u'status', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'GNSSstatus')))
+    _RTCMheader_offsetSet = SEQ(name=u'offsetSet', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'AntennaOffsetSet')))
     RTCMheader._cont = ASN1Dict([
-        ('status', _RTCMheader_status),
-        ('offsetSet', _RTCMheader_offsetSet),
+        (u'status', _RTCMheader_status),
+        (u'offsetSet', _RTCMheader_offsetSet),
         ])
     RTCMheader._ext = None
     
     #-----< RTCMmessageList >-----#
-    RTCMmessageList = SEQ_OF(name='RTCMmessageList', mode=MODE_TYPE)
+    RTCMmessageList = SEQ_OF(name=u'RTCMmessageList', mode=MODE_TYPE)
     _RTCMmessageList__item_ = OCT_STR(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('DSRC', 'RTCMmessage')))
     RTCMmessageList._cont = _RTCMmessageList__item_
     RTCMmessageList._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=5)], ev=None, er=[])
     
     #-----< SegmentAttributeXYList >-----#
-    SegmentAttributeXYList = SEQ_OF(name='SegmentAttributeXYList', mode=MODE_TYPE)
+    SegmentAttributeXYList = SEQ_OF(name=u'SegmentAttributeXYList', mode=MODE_TYPE)
     _SegmentAttributeXYList__item_ = ENUM(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('DSRC', 'SegmentAttributeXY')))
     SegmentAttributeXYList._cont = _SegmentAttributeXYList__item_
     SegmentAttributeXYList._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=8)], ev=None, er=[])
     
     #-----< SignalControlZone >-----#
-    SignalControlZone = SEQ(name='SignalControlZone', mode=MODE_TYPE)
-    _SignalControlZone_zone = SEQ(name='zone', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'RegionalExtension')))
-    __SignalControlZone_zone_regionId = INT(name='regionId', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('DSRC', 'REG-EXT-ID-AND-TYPE'), ['id']))
+    SignalControlZone = SEQ(name=u'SignalControlZone', mode=MODE_TYPE)
+    _SignalControlZone_zone = SEQ(name=u'zone', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'RegionalExtension')))
+    __SignalControlZone_zone_regionId = INT(name=u'regionId', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('DSRC', 'REG-EXT-ID-AND-TYPE'), [u'id']))
     ___SignalControlZone_zone_regionId_tab = CLASS(name='_tab_REG-EXT-ID-AND-TYPE', mode=MODE_SET, typeref=ASN1RefType(('DSRC', 'REG-EXT-ID-AND-TYPE')))
     ___SignalControlZone_zone_regionId_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     __SignalControlZone_zone_regionId._const_tab = ___SignalControlZone_zone_regionId_tab
     __SignalControlZone_zone_regionId._const_tab_at = None
-    __SignalControlZone_zone_regionId._const_tab_id = 'id'
-    __SignalControlZone_zone_regExtValue = OPEN(name='regExtValue', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('DSRC', 'REG-EXT-ID-AND-TYPE'), ['Type']))
+    __SignalControlZone_zone_regionId._const_tab_id = u'id'
+    __SignalControlZone_zone_regExtValue = OPEN(name=u'regExtValue', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('DSRC', 'REG-EXT-ID-AND-TYPE'), [u'Type']))
     ___SignalControlZone_zone_regExtValue_tab = CLASS(name='_tab_REG-EXT-ID-AND-TYPE', mode=MODE_SET, typeref=ASN1RefType(('DSRC', 'REG-EXT-ID-AND-TYPE')))
     ___SignalControlZone_zone_regExtValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     __SignalControlZone_zone_regExtValue._const_tab = ___SignalControlZone_zone_regExtValue_tab
-    __SignalControlZone_zone_regExtValue._const_tab_at = ('..', 'regionId')
-    __SignalControlZone_zone_regExtValue._const_tab_id = 'Type'
+    __SignalControlZone_zone_regExtValue._const_tab_at = ('..', u'regionId')
+    __SignalControlZone_zone_regExtValue._const_tab_id = u'Type'
     _SignalControlZone_zone._cont = ASN1Dict([
-        ('regionId', __SignalControlZone_zone_regionId),
-        ('regExtValue', __SignalControlZone_zone_regExtValue),
+        (u'regionId', __SignalControlZone_zone_regionId),
+        (u'regExtValue', __SignalControlZone_zone_regExtValue),
         ])
     _SignalControlZone_zone._ext = None
     SignalControlZone._cont = ASN1Dict([
-        ('zone', _SignalControlZone_zone),
+        (u'zone', _SignalControlZone_zone),
         ])
     SignalControlZone._ext = []
     
     #-----< SignalRequesterInfo >-----#
-    SignalRequesterInfo = SEQ(name='SignalRequesterInfo', mode=MODE_TYPE)
-    _SignalRequesterInfo_id = CHOICE(name='id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('DSRC', 'VehicleID')))
-    _SignalRequesterInfo_request = INT(name='request', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'RequestID')))
-    _SignalRequesterInfo_sequenceNumber = INT(name='sequenceNumber', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'MsgCount')))
-    _SignalRequesterInfo_role = ENUM(name='role', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'BasicVehicleRole')), opt=True)
-    _SignalRequesterInfo_typeData = SEQ(name='typeData', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'RequestorType')), opt=True)
+    SignalRequesterInfo = SEQ(name=u'SignalRequesterInfo', mode=MODE_TYPE)
+    _SignalRequesterInfo_id = CHOICE(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('DSRC', 'VehicleID')))
+    _SignalRequesterInfo_request = INT(name=u'request', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'RequestID')))
+    _SignalRequesterInfo_sequenceNumber = INT(name=u'sequenceNumber', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'MsgCount')))
+    _SignalRequesterInfo_role = ENUM(name=u'role', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'BasicVehicleRole')), opt=True)
+    _SignalRequesterInfo_typeData = SEQ(name=u'typeData', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'RequestorType')), opt=True)
     SignalRequesterInfo._cont = ASN1Dict([
-        ('id', _SignalRequesterInfo_id),
-        ('request', _SignalRequesterInfo_request),
-        ('sequenceNumber', _SignalRequesterInfo_sequenceNumber),
-        ('role', _SignalRequesterInfo_role),
-        ('typeData', _SignalRequesterInfo_typeData),
+        (u'id', _SignalRequesterInfo_id),
+        (u'request', _SignalRequesterInfo_request),
+        (u'sequenceNumber', _SignalRequesterInfo_sequenceNumber),
+        (u'role', _SignalRequesterInfo_role),
+        (u'typeData', _SignalRequesterInfo_typeData),
         ])
     SignalRequesterInfo._ext = []
     
     #-----< SignalRequest >-----#
-    SignalRequest = SEQ(name='SignalRequest', mode=MODE_TYPE)
-    _SignalRequest_id = SEQ(name='id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'IntersectionReferenceID')))
-    _SignalRequest_requestID = INT(name='requestID', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'RequestID')))
-    _SignalRequest_requestType = ENUM(name='requestType', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'PriorityRequestType')))
-    _SignalRequest_inBoundLane = CHOICE(name='inBoundLane', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('DSRC', 'IntersectionAccessPoint')))
-    _SignalRequest_outBoundLane = CHOICE(name='outBoundLane', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('DSRC', 'IntersectionAccessPoint')), opt=True)
-    _SignalRequest_regional = SEQ_OF(name='regional', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    SignalRequest = SEQ(name=u'SignalRequest', mode=MODE_TYPE)
+    _SignalRequest_id = SEQ(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'IntersectionReferenceID')))
+    _SignalRequest_requestID = INT(name=u'requestID', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'RequestID')))
+    _SignalRequest_requestType = ENUM(name=u'requestType', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'PriorityRequestType')))
+    _SignalRequest_inBoundLane = CHOICE(name=u'inBoundLane', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('DSRC', 'IntersectionAccessPoint')))
+    _SignalRequest_outBoundLane = CHOICE(name=u'outBoundLane', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('DSRC', 'IntersectionAccessPoint')), opt=True)
+    _SignalRequest_regional = SEQ_OF(name=u'regional', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     __SignalRequest_regional__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('DSRC', 'RegionalExtension')))
-    ___SignalRequest_regional__item__regionId = INT(name='regionId', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('DSRC', 'REG-EXT-ID-AND-TYPE'), ['id']))
+    ___SignalRequest_regional__item__regionId = INT(name=u'regionId', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('DSRC', 'REG-EXT-ID-AND-TYPE'), [u'id']))
     ____SignalRequest_regional__item__regionId_tab = CLASS(name='_tab_REG-EXT-ID-AND-TYPE', mode=MODE_SET, typeref=ASN1RefType(('DSRC', 'REG-EXT-ID-AND-TYPE')))
     ____SignalRequest_regional__item__regionId_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___SignalRequest_regional__item__regionId._const_tab = ____SignalRequest_regional__item__regionId_tab
     ___SignalRequest_regional__item__regionId._const_tab_at = None
-    ___SignalRequest_regional__item__regionId._const_tab_id = 'id'
-    ___SignalRequest_regional__item__regExtValue = OPEN(name='regExtValue', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('DSRC', 'REG-EXT-ID-AND-TYPE'), ['Type']))
+    ___SignalRequest_regional__item__regionId._const_tab_id = u'id'
+    ___SignalRequest_regional__item__regExtValue = OPEN(name=u'regExtValue', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('DSRC', 'REG-EXT-ID-AND-TYPE'), [u'Type']))
     ____SignalRequest_regional__item__regExtValue_tab = CLASS(name='_tab_REG-EXT-ID-AND-TYPE', mode=MODE_SET, typeref=ASN1RefType(('DSRC', 'REG-EXT-ID-AND-TYPE')))
     ____SignalRequest_regional__item__regExtValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___SignalRequest_regional__item__regExtValue._const_tab = ____SignalRequest_regional__item__regExtValue_tab
-    ___SignalRequest_regional__item__regExtValue._const_tab_at = ('..', 'regionId')
-    ___SignalRequest_regional__item__regExtValue._const_tab_id = 'Type'
+    ___SignalRequest_regional__item__regExtValue._const_tab_at = ('..', u'regionId')
+    ___SignalRequest_regional__item__regExtValue._const_tab_id = u'Type'
     __SignalRequest_regional__item_._cont = ASN1Dict([
-        ('regionId', ___SignalRequest_regional__item__regionId),
-        ('regExtValue', ___SignalRequest_regional__item__regExtValue),
+        (u'regionId', ___SignalRequest_regional__item__regionId),
+        (u'regExtValue', ___SignalRequest_regional__item__regExtValue),
         ])
     __SignalRequest_regional__item_._ext = None
     _SignalRequest_regional._cont = __SignalRequest_regional__item_
     _SignalRequest_regional._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=4)], ev=None, er=[])
     SignalRequest._cont = ASN1Dict([
-        ('id', _SignalRequest_id),
-        ('requestID', _SignalRequest_requestID),
-        ('requestType', _SignalRequest_requestType),
-        ('inBoundLane', _SignalRequest_inBoundLane),
-        ('outBoundLane', _SignalRequest_outBoundLane),
-        ('regional', _SignalRequest_regional),
+        (u'id', _SignalRequest_id),
+        (u'requestID', _SignalRequest_requestID),
+        (u'requestType', _SignalRequest_requestType),
+        (u'inBoundLane', _SignalRequest_inBoundLane),
+        (u'outBoundLane', _SignalRequest_outBoundLane),
+        (u'regional', _SignalRequest_regional),
         ])
     SignalRequest._ext = []
     
     #-----< SignalRequestList >-----#
-    SignalRequestList = SEQ_OF(name='SignalRequestList', mode=MODE_TYPE)
+    SignalRequestList = SEQ_OF(name=u'SignalRequestList', mode=MODE_TYPE)
     _SignalRequestList__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('DSRC', 'SignalRequestPackage')))
     SignalRequestList._cont = _SignalRequestList__item_
     SignalRequestList._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=32)], ev=None, er=[])
     
     #-----< SignalRequestPackage >-----#
-    SignalRequestPackage = SEQ(name='SignalRequestPackage', mode=MODE_TYPE)
-    _SignalRequestPackage_request = SEQ(name='request', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'SignalRequest')))
-    _SignalRequestPackage_minute = INT(name='minute', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'MinuteOfTheYear')), opt=True)
-    _SignalRequestPackage_second = INT(name='second', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'DSecond')), opt=True)
-    _SignalRequestPackage_duration = INT(name='duration', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'DSecond')), opt=True)
-    _SignalRequestPackage_regional = SEQ_OF(name='regional', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    SignalRequestPackage = SEQ(name=u'SignalRequestPackage', mode=MODE_TYPE)
+    _SignalRequestPackage_request = SEQ(name=u'request', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'SignalRequest')))
+    _SignalRequestPackage_minute = INT(name=u'minute', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'MinuteOfTheYear')), opt=True)
+    _SignalRequestPackage_second = INT(name=u'second', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'DSecond')), opt=True)
+    _SignalRequestPackage_duration = INT(name=u'duration', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'DSecond')), opt=True)
+    _SignalRequestPackage_regional = SEQ_OF(name=u'regional', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     __SignalRequestPackage_regional__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('DSRC', 'RegionalExtension')))
-    ___SignalRequestPackage_regional__item__regionId = INT(name='regionId', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('DSRC', 'REG-EXT-ID-AND-TYPE'), ['id']))
+    ___SignalRequestPackage_regional__item__regionId = INT(name=u'regionId', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('DSRC', 'REG-EXT-ID-AND-TYPE'), [u'id']))
     ____SignalRequestPackage_regional__item__regionId_tab = CLASS(name='_tab_REG-EXT-ID-AND-TYPE', mode=MODE_SET, typeref=ASN1RefType(('DSRC', 'REG-EXT-ID-AND-TYPE')))
     ____SignalRequestPackage_regional__item__regionId_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___SignalRequestPackage_regional__item__regionId._const_tab = ____SignalRequestPackage_regional__item__regionId_tab
     ___SignalRequestPackage_regional__item__regionId._const_tab_at = None
-    ___SignalRequestPackage_regional__item__regionId._const_tab_id = 'id'
-    ___SignalRequestPackage_regional__item__regExtValue = OPEN(name='regExtValue', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('DSRC', 'REG-EXT-ID-AND-TYPE'), ['Type']))
+    ___SignalRequestPackage_regional__item__regionId._const_tab_id = u'id'
+    ___SignalRequestPackage_regional__item__regExtValue = OPEN(name=u'regExtValue', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('DSRC', 'REG-EXT-ID-AND-TYPE'), [u'Type']))
     ____SignalRequestPackage_regional__item__regExtValue_tab = CLASS(name='_tab_REG-EXT-ID-AND-TYPE', mode=MODE_SET, typeref=ASN1RefType(('DSRC', 'REG-EXT-ID-AND-TYPE')))
     ____SignalRequestPackage_regional__item__regExtValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___SignalRequestPackage_regional__item__regExtValue._const_tab = ____SignalRequestPackage_regional__item__regExtValue_tab
-    ___SignalRequestPackage_regional__item__regExtValue._const_tab_at = ('..', 'regionId')
-    ___SignalRequestPackage_regional__item__regExtValue._const_tab_id = 'Type'
+    ___SignalRequestPackage_regional__item__regExtValue._const_tab_at = ('..', u'regionId')
+    ___SignalRequestPackage_regional__item__regExtValue._const_tab_id = u'Type'
     __SignalRequestPackage_regional__item_._cont = ASN1Dict([
-        ('regionId', ___SignalRequestPackage_regional__item__regionId),
-        ('regExtValue', ___SignalRequestPackage_regional__item__regExtValue),
+        (u'regionId', ___SignalRequestPackage_regional__item__regionId),
+        (u'regExtValue', ___SignalRequestPackage_regional__item__regExtValue),
         ])
     __SignalRequestPackage_regional__item_._ext = None
     _SignalRequestPackage_regional._cont = __SignalRequestPackage_regional__item_
     _SignalRequestPackage_regional._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=4)], ev=None, er=[])
     SignalRequestPackage._cont = ASN1Dict([
-        ('request', _SignalRequestPackage_request),
-        ('minute', _SignalRequestPackage_minute),
-        ('second', _SignalRequestPackage_second),
-        ('duration', _SignalRequestPackage_duration),
-        ('regional', _SignalRequestPackage_regional),
+        (u'request', _SignalRequestPackage_request),
+        (u'minute', _SignalRequestPackage_minute),
+        (u'second', _SignalRequestPackage_second),
+        (u'duration', _SignalRequestPackage_duration),
+        (u'regional', _SignalRequestPackage_regional),
         ])
     SignalRequestPackage._ext = []
     
     #-----< SignalStatus >-----#
-    SignalStatus = SEQ(name='SignalStatus', mode=MODE_TYPE)
-    _SignalStatus_sequenceNumber = INT(name='sequenceNumber', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'MsgCount')))
-    _SignalStatus_id = SEQ(name='id', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'IntersectionReferenceID')))
-    _SignalStatus_sigStatus = SEQ_OF(name='sigStatus', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'SignalStatusPackageList')))
-    _SignalStatus_regional = SEQ_OF(name='regional', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    SignalStatus = SEQ(name=u'SignalStatus', mode=MODE_TYPE)
+    _SignalStatus_sequenceNumber = INT(name=u'sequenceNumber', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'MsgCount')))
+    _SignalStatus_id = SEQ(name=u'id', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'IntersectionReferenceID')))
+    _SignalStatus_sigStatus = SEQ_OF(name=u'sigStatus', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'SignalStatusPackageList')))
+    _SignalStatus_regional = SEQ_OF(name=u'regional', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     __SignalStatus_regional__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('DSRC', 'RegionalExtension')))
-    ___SignalStatus_regional__item__regionId = INT(name='regionId', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('DSRC', 'REG-EXT-ID-AND-TYPE'), ['id']))
+    ___SignalStatus_regional__item__regionId = INT(name=u'regionId', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('DSRC', 'REG-EXT-ID-AND-TYPE'), [u'id']))
     ____SignalStatus_regional__item__regionId_tab = CLASS(name='_tab_REG-EXT-ID-AND-TYPE', mode=MODE_SET, typeref=ASN1RefType(('DSRC', 'REG-EXT-ID-AND-TYPE')))
     ____SignalStatus_regional__item__regionId_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___SignalStatus_regional__item__regionId._const_tab = ____SignalStatus_regional__item__regionId_tab
     ___SignalStatus_regional__item__regionId._const_tab_at = None
-    ___SignalStatus_regional__item__regionId._const_tab_id = 'id'
-    ___SignalStatus_regional__item__regExtValue = OPEN(name='regExtValue', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('DSRC', 'REG-EXT-ID-AND-TYPE'), ['Type']))
+    ___SignalStatus_regional__item__regionId._const_tab_id = u'id'
+    ___SignalStatus_regional__item__regExtValue = OPEN(name=u'regExtValue', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('DSRC', 'REG-EXT-ID-AND-TYPE'), [u'Type']))
     ____SignalStatus_regional__item__regExtValue_tab = CLASS(name='_tab_REG-EXT-ID-AND-TYPE', mode=MODE_SET, typeref=ASN1RefType(('DSRC', 'REG-EXT-ID-AND-TYPE')))
     ____SignalStatus_regional__item__regExtValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___SignalStatus_regional__item__regExtValue._const_tab = ____SignalStatus_regional__item__regExtValue_tab
-    ___SignalStatus_regional__item__regExtValue._const_tab_at = ('..', 'regionId')
-    ___SignalStatus_regional__item__regExtValue._const_tab_id = 'Type'
+    ___SignalStatus_regional__item__regExtValue._const_tab_at = ('..', u'regionId')
+    ___SignalStatus_regional__item__regExtValue._const_tab_id = u'Type'
     __SignalStatus_regional__item_._cont = ASN1Dict([
-        ('regionId', ___SignalStatus_regional__item__regionId),
-        ('regExtValue', ___SignalStatus_regional__item__regExtValue),
+        (u'regionId', ___SignalStatus_regional__item__regionId),
+        (u'regExtValue', ___SignalStatus_regional__item__regExtValue),
         ])
     __SignalStatus_regional__item_._ext = None
     _SignalStatus_regional._cont = __SignalStatus_regional__item_
     _SignalStatus_regional._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=4)], ev=None, er=[])
     SignalStatus._cont = ASN1Dict([
-        ('sequenceNumber', _SignalStatus_sequenceNumber),
-        ('id', _SignalStatus_id),
-        ('sigStatus', _SignalStatus_sigStatus),
-        ('regional', _SignalStatus_regional),
+        (u'sequenceNumber', _SignalStatus_sequenceNumber),
+        (u'id', _SignalStatus_id),
+        (u'sigStatus', _SignalStatus_sigStatus),
+        (u'regional', _SignalStatus_regional),
         ])
     SignalStatus._ext = []
     
     #-----< SignalStatusList >-----#
-    SignalStatusList = SEQ_OF(name='SignalStatusList', mode=MODE_TYPE)
+    SignalStatusList = SEQ_OF(name=u'SignalStatusList', mode=MODE_TYPE)
     _SignalStatusList__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('DSRC', 'SignalStatus')))
     SignalStatusList._cont = _SignalStatusList__item_
     SignalStatusList._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=32)], ev=None, er=[])
     
     #-----< SignalStatusPackageList >-----#
-    SignalStatusPackageList = SEQ_OF(name='SignalStatusPackageList', mode=MODE_TYPE)
+    SignalStatusPackageList = SEQ_OF(name=u'SignalStatusPackageList', mode=MODE_TYPE)
     _SignalStatusPackageList__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('DSRC', 'SignalStatusPackage')))
     SignalStatusPackageList._cont = _SignalStatusPackageList__item_
     SignalStatusPackageList._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=32)], ev=None, er=[])
     
     #-----< SignalStatusPackage >-----#
-    SignalStatusPackage = SEQ(name='SignalStatusPackage', mode=MODE_TYPE)
-    _SignalStatusPackage_requester = SEQ(name='requester', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'SignalRequesterInfo')), opt=True)
-    _SignalStatusPackage_inboundOn = CHOICE(name='inboundOn', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('DSRC', 'IntersectionAccessPoint')))
-    _SignalStatusPackage_outboundOn = CHOICE(name='outboundOn', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('DSRC', 'IntersectionAccessPoint')), opt=True)
-    _SignalStatusPackage_minute = INT(name='minute', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'MinuteOfTheYear')), opt=True)
-    _SignalStatusPackage_second = INT(name='second', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'DSecond')), opt=True)
-    _SignalStatusPackage_duration = INT(name='duration', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'DSecond')), opt=True)
-    _SignalStatusPackage_status = ENUM(name='status', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'PrioritizationResponseStatus')))
-    _SignalStatusPackage_regional = SEQ_OF(name='regional', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    SignalStatusPackage = SEQ(name=u'SignalStatusPackage', mode=MODE_TYPE)
+    _SignalStatusPackage_requester = SEQ(name=u'requester', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'SignalRequesterInfo')), opt=True)
+    _SignalStatusPackage_inboundOn = CHOICE(name=u'inboundOn', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('DSRC', 'IntersectionAccessPoint')))
+    _SignalStatusPackage_outboundOn = CHOICE(name=u'outboundOn', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('DSRC', 'IntersectionAccessPoint')), opt=True)
+    _SignalStatusPackage_minute = INT(name=u'minute', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'MinuteOfTheYear')), opt=True)
+    _SignalStatusPackage_second = INT(name=u'second', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'DSecond')), opt=True)
+    _SignalStatusPackage_duration = INT(name=u'duration', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'DSecond')), opt=True)
+    _SignalStatusPackage_status = ENUM(name=u'status', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'PrioritizationResponseStatus')))
+    _SignalStatusPackage_regional = SEQ_OF(name=u'regional', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     __SignalStatusPackage_regional__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('DSRC', 'RegionalExtension')))
-    ___SignalStatusPackage_regional__item__regionId = INT(name='regionId', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('DSRC', 'REG-EXT-ID-AND-TYPE'), ['id']))
+    ___SignalStatusPackage_regional__item__regionId = INT(name=u'regionId', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('DSRC', 'REG-EXT-ID-AND-TYPE'), [u'id']))
     ____SignalStatusPackage_regional__item__regionId_tab = CLASS(name='_tab_REG-EXT-ID-AND-TYPE', mode=MODE_SET, typeref=ASN1RefType(('DSRC', 'REG-EXT-ID-AND-TYPE')))
-    _____SignalStatusPackage_regional__item__regionId_tab_val_Type_0 = SEQ(name='Type', mode=MODE_TYPE, typeref=ASN1RefType(('AddGrpC', 'SignalStatusPackage-addGrpC')))
-    ____SignalStatusPackage_regional__item__regionId_tab._val = ASN1Set(rv=[dict([('Type', _____SignalStatusPackage_regional__item__regionId_tab_val_Type_0), ('id', 3)])], rr=[], ev=None, er=[])
+    _____SignalStatusPackage_regional__item__regionId_tab_val_Type_0 = SEQ(name=u'Type', mode=MODE_TYPE, typeref=ASN1RefType(('AddGrpC', 'SignalStatusPackage-addGrpC')))
+    ____SignalStatusPackage_regional__item__regionId_tab._val = ASN1Set(rv=[dict([(u'Type', _____SignalStatusPackage_regional__item__regionId_tab_val_Type_0), (u'id', 3)])], rr=[], ev=None, er=[])
     ___SignalStatusPackage_regional__item__regionId._const_tab = ____SignalStatusPackage_regional__item__regionId_tab
     ___SignalStatusPackage_regional__item__regionId._const_tab_at = None
-    ___SignalStatusPackage_regional__item__regionId._const_tab_id = 'id'
-    ___SignalStatusPackage_regional__item__regExtValue = OPEN(name='regExtValue', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('DSRC', 'REG-EXT-ID-AND-TYPE'), ['Type']))
+    ___SignalStatusPackage_regional__item__regionId._const_tab_id = u'id'
+    ___SignalStatusPackage_regional__item__regExtValue = OPEN(name=u'regExtValue', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('DSRC', 'REG-EXT-ID-AND-TYPE'), [u'Type']))
     ___SignalStatusPackage_regional__item__regExtValue._const_tab = ____SignalStatusPackage_regional__item__regionId_tab
-    ___SignalStatusPackage_regional__item__regExtValue._const_tab_at = ('..', 'regionId')
-    ___SignalStatusPackage_regional__item__regExtValue._const_tab_id = 'Type'
+    ___SignalStatusPackage_regional__item__regExtValue._const_tab_at = ('..', u'regionId')
+    ___SignalStatusPackage_regional__item__regExtValue._const_tab_id = u'Type'
     __SignalStatusPackage_regional__item_._cont = ASN1Dict([
-        ('regionId', ___SignalStatusPackage_regional__item__regionId),
-        ('regExtValue', ___SignalStatusPackage_regional__item__regExtValue),
+        (u'regionId', ___SignalStatusPackage_regional__item__regionId),
+        (u'regExtValue', ___SignalStatusPackage_regional__item__regExtValue),
         ])
     __SignalStatusPackage_regional__item_._ext = None
     _SignalStatusPackage_regional._cont = __SignalStatusPackage_regional__item_
     _SignalStatusPackage_regional._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=4)], ev=None, er=[])
     SignalStatusPackage._cont = ASN1Dict([
-        ('requester', _SignalStatusPackage_requester),
-        ('inboundOn', _SignalStatusPackage_inboundOn),
-        ('outboundOn', _SignalStatusPackage_outboundOn),
-        ('minute', _SignalStatusPackage_minute),
-        ('second', _SignalStatusPackage_second),
-        ('duration', _SignalStatusPackage_duration),
-        ('status', _SignalStatusPackage_status),
-        ('regional', _SignalStatusPackage_regional),
+        (u'requester', _SignalStatusPackage_requester),
+        (u'inboundOn', _SignalStatusPackage_inboundOn),
+        (u'outboundOn', _SignalStatusPackage_outboundOn),
+        (u'minute', _SignalStatusPackage_minute),
+        (u'second', _SignalStatusPackage_second),
+        (u'duration', _SignalStatusPackage_duration),
+        (u'status', _SignalStatusPackage_status),
+        (u'regional', _SignalStatusPackage_regional),
         ])
     SignalStatusPackage._ext = []
     
     #-----< SpeedandHeadingandThrottleConfidence >-----#
-    SpeedandHeadingandThrottleConfidence = SEQ(name='SpeedandHeadingandThrottleConfidence', mode=MODE_TYPE)
-    _SpeedandHeadingandThrottleConfidence_heading = ENUM(name='heading', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'HeadingConfidence')))
-    _SpeedandHeadingandThrottleConfidence_speed = ENUM(name='speed', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'SpeedConfidence')))
-    _SpeedandHeadingandThrottleConfidence_throttle = ENUM(name='throttle', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'ThrottleConfidence')))
+    SpeedandHeadingandThrottleConfidence = SEQ(name=u'SpeedandHeadingandThrottleConfidence', mode=MODE_TYPE)
+    _SpeedandHeadingandThrottleConfidence_heading = ENUM(name=u'heading', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'HeadingConfidence')))
+    _SpeedandHeadingandThrottleConfidence_speed = ENUM(name=u'speed', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'SpeedConfidence')))
+    _SpeedandHeadingandThrottleConfidence_throttle = ENUM(name=u'throttle', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'ThrottleConfidence')))
     SpeedandHeadingandThrottleConfidence._cont = ASN1Dict([
-        ('heading', _SpeedandHeadingandThrottleConfidence_heading),
-        ('speed', _SpeedandHeadingandThrottleConfidence_speed),
-        ('throttle', _SpeedandHeadingandThrottleConfidence_throttle),
+        (u'heading', _SpeedandHeadingandThrottleConfidence_heading),
+        (u'speed', _SpeedandHeadingandThrottleConfidence_speed),
+        (u'throttle', _SpeedandHeadingandThrottleConfidence_throttle),
         ])
     SpeedandHeadingandThrottleConfidence._ext = None
     
     #-----< SpeedLimitList >-----#
-    SpeedLimitList = SEQ_OF(name='SpeedLimitList', mode=MODE_TYPE)
+    SpeedLimitList = SEQ_OF(name=u'SpeedLimitList', mode=MODE_TYPE)
     _SpeedLimitList__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('DSRC', 'RegulatorySpeedLimit')))
     SpeedLimitList._cont = _SpeedLimitList__item_
     SpeedLimitList._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=9)], ev=None, er=[])
     
     #-----< SpeedLimitType >-----#
-    SpeedLimitType = ENUM(name='SpeedLimitType', mode=MODE_TYPE)
-    SpeedLimitType._cont = ASN1Dict([('unknown', 0), ('maxSpeedInSchoolZone', 1), ('maxSpeedInSchoolZoneWhenChildrenArePresent', 2), ('maxSpeedInConstructionZone', 3), ('vehicleMinSpeed', 4), ('vehicleMaxSpeed', 5), ('vehicleNightMaxSpeed', 6), ('truckMinSpeed', 7), ('truckMaxSpeed', 8), ('truckNightMaxSpeed', 9), ('vehiclesWithTrailersMinSpeed', 10), ('vehiclesWithTrailersMaxSpeed', 11), ('vehiclesWithTrailersNightMaxSpeed', 12)])
+    SpeedLimitType = ENUM(name=u'SpeedLimitType', mode=MODE_TYPE)
+    SpeedLimitType._cont = ASN1Dict([(u'unknown', 0), (u'maxSpeedInSchoolZone', 1), (u'maxSpeedInSchoolZoneWhenChildrenArePresent', 2), (u'maxSpeedInConstructionZone', 3), (u'vehicleMinSpeed', 4), (u'vehicleMaxSpeed', 5), (u'vehicleNightMaxSpeed', 6), (u'truckMinSpeed', 7), (u'truckMaxSpeed', 8), (u'truckNightMaxSpeed', 9), (u'vehiclesWithTrailersMinSpeed', 10), (u'vehiclesWithTrailersMaxSpeed', 11), (u'vehiclesWithTrailersNightMaxSpeed', 12)])
     SpeedLimitType._ext = []
     
     #-----< TimeChangeDetails >-----#
-    TimeChangeDetails = SEQ(name='TimeChangeDetails', mode=MODE_TYPE)
-    _TimeChangeDetails_startTime = INT(name='startTime', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'TimeMark')), opt=True)
-    _TimeChangeDetails_minEndTime = INT(name='minEndTime', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'TimeMark')))
-    _TimeChangeDetails_maxEndTime = INT(name='maxEndTime', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'TimeMark')), opt=True)
-    _TimeChangeDetails_likelyTime = INT(name='likelyTime', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'TimeMark')), opt=True)
-    _TimeChangeDetails_confidence = INT(name='confidence', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'TimeIntervalConfidence')), opt=True)
-    _TimeChangeDetails_nextTime = INT(name='nextTime', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'TimeMark')), opt=True)
+    TimeChangeDetails = SEQ(name=u'TimeChangeDetails', mode=MODE_TYPE)
+    _TimeChangeDetails_startTime = INT(name=u'startTime', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'TimeMark')), opt=True)
+    _TimeChangeDetails_minEndTime = INT(name=u'minEndTime', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'TimeMark')))
+    _TimeChangeDetails_maxEndTime = INT(name=u'maxEndTime', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'TimeMark')), opt=True)
+    _TimeChangeDetails_likelyTime = INT(name=u'likelyTime', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'TimeMark')), opt=True)
+    _TimeChangeDetails_confidence = INT(name=u'confidence', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'TimeIntervalConfidence')), opt=True)
+    _TimeChangeDetails_nextTime = INT(name=u'nextTime', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'TimeMark')), opt=True)
     TimeChangeDetails._cont = ASN1Dict([
-        ('startTime', _TimeChangeDetails_startTime),
-        ('minEndTime', _TimeChangeDetails_minEndTime),
-        ('maxEndTime', _TimeChangeDetails_maxEndTime),
-        ('likelyTime', _TimeChangeDetails_likelyTime),
-        ('confidence', _TimeChangeDetails_confidence),
-        ('nextTime', _TimeChangeDetails_nextTime),
+        (u'startTime', _TimeChangeDetails_startTime),
+        (u'minEndTime', _TimeChangeDetails_minEndTime),
+        (u'maxEndTime', _TimeChangeDetails_maxEndTime),
+        (u'likelyTime', _TimeChangeDetails_likelyTime),
+        (u'confidence', _TimeChangeDetails_confidence),
+        (u'nextTime', _TimeChangeDetails_nextTime),
         ])
     TimeChangeDetails._ext = None
     
     #-----< TimeMark >-----#
-    TimeMark = INT(name='TimeMark', mode=MODE_TYPE)
+    TimeMark = INT(name=u'TimeMark', mode=MODE_TYPE)
     TimeMark._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=36001)], ev=None, er=[])
     
     #-----< TransmissionAndSpeed >-----#
-    TransmissionAndSpeed = SEQ(name='TransmissionAndSpeed', mode=MODE_TYPE)
-    _TransmissionAndSpeed_transmisson = ENUM(name='transmisson', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'TransmissionState')))
-    _TransmissionAndSpeed_speed = INT(name='speed', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'Velocity')))
+    TransmissionAndSpeed = SEQ(name=u'TransmissionAndSpeed', mode=MODE_TYPE)
+    _TransmissionAndSpeed_transmisson = ENUM(name=u'transmisson', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'TransmissionState')))
+    _TransmissionAndSpeed_speed = INT(name=u'speed', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'Velocity')))
     TransmissionAndSpeed._cont = ASN1Dict([
-        ('transmisson', _TransmissionAndSpeed_transmisson),
-        ('speed', _TransmissionAndSpeed_speed),
+        (u'transmisson', _TransmissionAndSpeed_transmisson),
+        (u'speed', _TransmissionAndSpeed_speed),
         ])
     TransmissionAndSpeed._ext = None
     
     #-----< VehicleID >-----#
-    VehicleID = CHOICE(name='VehicleID', mode=MODE_TYPE)
-    _VehicleID_entityID = OCT_STR(name='entityID', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'TemporaryID')))
-    _VehicleID_stationID = INT(name='stationID', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'StationID')))
+    VehicleID = CHOICE(name=u'VehicleID', mode=MODE_TYPE)
+    _VehicleID_entityID = OCT_STR(name=u'entityID', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'TemporaryID')))
+    _VehicleID_stationID = INT(name=u'stationID', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'StationID')))
     VehicleID._cont = ASN1Dict([
-        ('entityID', _VehicleID_entityID),
-        ('stationID', _VehicleID_stationID),
+        (u'entityID', _VehicleID_entityID),
+        (u'stationID', _VehicleID_stationID),
         ])
     VehicleID._ext = None
     
     #-----< AdvisorySpeedType >-----#
-    AdvisorySpeedType = ENUM(name='AdvisorySpeedType', mode=MODE_TYPE)
-    AdvisorySpeedType._cont = ASN1Dict([('none', 0), ('greenwave', 1), ('ecoDrive', 2), ('transit', 3)])
+    AdvisorySpeedType = ENUM(name=u'AdvisorySpeedType', mode=MODE_TYPE)
+    AdvisorySpeedType._cont = ASN1Dict([(u'none', 0), (u'greenwave', 1), (u'ecoDrive', 2), (u'transit', 3)])
     AdvisorySpeedType._ext = []
     
     #-----< AllowedManeuvers >-----#
-    AllowedManeuvers = BIT_STR(name='AllowedManeuvers', mode=MODE_TYPE)
-    AllowedManeuvers._cont = ASN1Dict([('maneuverStraightAllowed', 0), ('maneuverLeftAllowed', 1), ('maneuverRightAllowed', 2), ('maneuverUTurnAllowed', 3), ('maneuverLeftTurnOnRedAllowed', 4), ('maneuverRightTurnOnRedAllowed', 5), ('maneuverLaneChangeAllowed', 6), ('maneuverNoStoppingAllowed', 7), ('yieldAllwaysRequired', 8), ('goWithHalt', 9), ('caution', 10), ('reserved1', 11)])
+    AllowedManeuvers = BIT_STR(name=u'AllowedManeuvers', mode=MODE_TYPE)
+    AllowedManeuvers._cont = ASN1Dict([(u'maneuverStraightAllowed', 0), (u'maneuverLeftAllowed', 1), (u'maneuverRightAllowed', 2), (u'maneuverUTurnAllowed', 3), (u'maneuverLeftTurnOnRedAllowed', 4), (u'maneuverRightTurnOnRedAllowed', 5), (u'maneuverLaneChangeAllowed', 6), (u'maneuverNoStoppingAllowed', 7), (u'yieldAllwaysRequired', 8), (u'goWithHalt', 9), (u'caution', 10), (u'reserved1', 11)])
     AllowedManeuvers._const_sz = ASN1Set(rv=[12], rr=[], ev=None, er=[])
     
     #-----< Angle >-----#
-    Angle = INT(name='Angle', mode=MODE_TYPE)
+    Angle = INT(name=u'Angle', mode=MODE_TYPE)
     Angle._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=28800)], ev=None, er=[])
     
     #-----< ApproachID >-----#
-    ApproachID = INT(name='ApproachID', mode=MODE_TYPE)
+    ApproachID = INT(name=u'ApproachID', mode=MODE_TYPE)
     ApproachID._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=15)], ev=None, er=[])
     
     #-----< BasicVehicleRole >-----#
-    BasicVehicleRole = ENUM(name='BasicVehicleRole', mode=MODE_TYPE)
-    BasicVehicleRole._cont = ASN1Dict([('basicVehicle', 0), ('publicTransport', 1), ('specialTransport', 2), ('dangerousGoods', 3), ('roadWork', 4), ('roadRescue', 5), ('emergency', 6), ('safetyCar', 7), ('none-unknown', 8), ('truck', 9), ('motorcycle', 10), ('roadSideSource', 11), ('police', 12), ('fire', 13), ('ambulance', 14), ('dot', 15), ('transit', 16), ('slowMoving', 17), ('stopNgo', 18), ('cyclist', 19), ('pedestrian', 20), ('nonMotorized', 21), ('military', 22)])
+    BasicVehicleRole = ENUM(name=u'BasicVehicleRole', mode=MODE_TYPE)
+    BasicVehicleRole._cont = ASN1Dict([(u'basicVehicle', 0), (u'publicTransport', 1), (u'specialTransport', 2), (u'dangerousGoods', 3), (u'roadWork', 4), (u'roadRescue', 5), (u'emergency', 6), (u'safetyCar', 7), (u'none-unknown', 8), (u'truck', 9), (u'motorcycle', 10), (u'roadSideSource', 11), (u'police', 12), (u'fire', 13), (u'ambulance', 14), (u'dot', 15), (u'transit', 16), (u'slowMoving', 17), (u'stopNgo', 18), (u'cyclist', 19), (u'pedestrian', 20), (u'nonMotorized', 21), (u'military', 22)])
     BasicVehicleRole._ext = []
     
     #-----< DDay >-----#
-    DDay = INT(name='DDay', mode=MODE_TYPE)
+    DDay = INT(name=u'DDay', mode=MODE_TYPE)
     DDay._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=31)], ev=None, er=[])
     
     #-----< DeltaAngle >-----#
-    DeltaAngle = INT(name='DeltaAngle', mode=MODE_TYPE)
+    DeltaAngle = INT(name=u'DeltaAngle', mode=MODE_TYPE)
     DeltaAngle._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=-150, ub=150)], ev=None, er=[])
     
     #-----< DeltaTime >-----#
-    DeltaTime = INT(name='DeltaTime', mode=MODE_TYPE)
+    DeltaTime = INT(name=u'DeltaTime', mode=MODE_TYPE)
     DeltaTime._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=-122, ub=121)], ev=None, er=[])
     
     #-----< DescriptiveName >-----#
-    DescriptiveName = STR_IA5(name='DescriptiveName', mode=MODE_TYPE)
+    DescriptiveName = STR_IA5(name=u'DescriptiveName', mode=MODE_TYPE)
     DescriptiveName._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=63)], ev=None, er=[])
     
     #-----< DHour >-----#
-    DHour = INT(name='DHour', mode=MODE_TYPE)
+    DHour = INT(name=u'DHour', mode=MODE_TYPE)
     DHour._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=31)], ev=None, er=[])
     
     #-----< DMinute >-----#
-    DMinute = INT(name='DMinute', mode=MODE_TYPE)
+    DMinute = INT(name=u'DMinute', mode=MODE_TYPE)
     DMinute._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=60)], ev=None, er=[])
     
     #-----< DMonth >-----#
-    DMonth = INT(name='DMonth', mode=MODE_TYPE)
+    DMonth = INT(name=u'DMonth', mode=MODE_TYPE)
     DMonth._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=12)], ev=None, er=[])
     
     #-----< DOffset >-----#
-    DOffset = INT(name='DOffset', mode=MODE_TYPE)
+    DOffset = INT(name=u'DOffset', mode=MODE_TYPE)
     DOffset._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=-840, ub=840)], ev=None, er=[])
     
     #-----< DrivenLineOffsetLg >-----#
-    DrivenLineOffsetLg = INT(name='DrivenLineOffsetLg', mode=MODE_TYPE)
+    DrivenLineOffsetLg = INT(name=u'DrivenLineOffsetLg', mode=MODE_TYPE)
     DrivenLineOffsetLg._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=-32767, ub=32767)], ev=None, er=[])
     
     #-----< DrivenLineOffsetSm >-----#
-    DrivenLineOffsetSm = INT(name='DrivenLineOffsetSm', mode=MODE_TYPE)
+    DrivenLineOffsetSm = INT(name=u'DrivenLineOffsetSm', mode=MODE_TYPE)
     DrivenLineOffsetSm._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=-2047, ub=2047)], ev=None, er=[])
     
     #-----< DSecond >-----#
-    DSecond = INT(name='DSecond', mode=MODE_TYPE)
+    DSecond = INT(name=u'DSecond', mode=MODE_TYPE)
     DSecond._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=65535)], ev=None, er=[])
     
     #-----< DSRCmsgID >-----#
-    DSRCmsgID = INT(name='DSRCmsgID', mode=MODE_TYPE)
+    DSRCmsgID = INT(name=u'DSRCmsgID', mode=MODE_TYPE)
     DSRCmsgID._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=32767)], ev=None, er=[])
     
     #-----< mapData >-----#
-    mapData = INT(name='mapData', mode=MODE_VALUE, typeref=ASN1RefType(('DSRC', 'DSRCmsgID')))
+    mapData = INT(name=u'mapData', mode=MODE_VALUE, typeref=ASN1RefType(('DSRC', 'DSRCmsgID')))
     mapData._val = 18
     
     #-----< rtcmCorrections >-----#
-    rtcmCorrections = INT(name='rtcmCorrections', mode=MODE_VALUE, typeref=ASN1RefType(('DSRC', 'DSRCmsgID')))
+    rtcmCorrections = INT(name=u'rtcmCorrections', mode=MODE_VALUE, typeref=ASN1RefType(('DSRC', 'DSRCmsgID')))
     rtcmCorrections._val = 28
     
     #-----< signalPhaseAndTimingMessage >-----#
-    signalPhaseAndTimingMessage = INT(name='signalPhaseAndTimingMessage', mode=MODE_VALUE, typeref=ASN1RefType(('DSRC', 'DSRCmsgID')))
+    signalPhaseAndTimingMessage = INT(name=u'signalPhaseAndTimingMessage', mode=MODE_VALUE, typeref=ASN1RefType(('DSRC', 'DSRCmsgID')))
     signalPhaseAndTimingMessage._val = 19
     
     #-----< signalRequestMessage >-----#
-    signalRequestMessage = INT(name='signalRequestMessage', mode=MODE_VALUE, typeref=ASN1RefType(('DSRC', 'DSRCmsgID')))
+    signalRequestMessage = INT(name=u'signalRequestMessage', mode=MODE_VALUE, typeref=ASN1RefType(('DSRC', 'DSRCmsgID')))
     signalRequestMessage._val = 29
     
     #-----< signalStatusMessage >-----#
-    signalStatusMessage = INT(name='signalStatusMessage', mode=MODE_VALUE, typeref=ASN1RefType(('DSRC', 'DSRCmsgID')))
+    signalStatusMessage = INT(name=u'signalStatusMessage', mode=MODE_VALUE, typeref=ASN1RefType(('DSRC', 'DSRCmsgID')))
     signalStatusMessage._val = 30
     
     #-----< DYear >-----#
-    DYear = INT(name='DYear', mode=MODE_TYPE)
+    DYear = INT(name=u'DYear', mode=MODE_TYPE)
     DYear._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=4095)], ev=None, er=[])
     
     #-----< Elevation >-----#
-    Elevation = INT(name='Elevation', mode=MODE_TYPE)
+    Elevation = INT(name=u'Elevation', mode=MODE_TYPE)
     Elevation._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=-4096, ub=61439)], ev=None, er=[])
     
     #-----< ElevationConfidence >-----#
-    ElevationConfidence = ENUM(name='ElevationConfidence', mode=MODE_TYPE)
-    ElevationConfidence._cont = ASN1Dict([('unavailable', 0), ('elev-500-00', 1), ('elev-200-00', 2), ('elev-100-00', 3), ('elev-050-00', 4), ('elev-020-00', 5), ('elev-010-00', 6), ('elev-005-00', 7), ('elev-002-00', 8), ('elev-001-00', 9), ('elev-000-50', 10), ('elev-000-20', 11), ('elev-000-10', 12), ('elev-000-05', 13), ('elev-000-02', 14), ('elev-000-01', 15)])
+    ElevationConfidence = ENUM(name=u'ElevationConfidence', mode=MODE_TYPE)
+    ElevationConfidence._cont = ASN1Dict([(u'unavailable', 0), (u'elev-500-00', 1), (u'elev-200-00', 2), (u'elev-100-00', 3), (u'elev-050-00', 4), (u'elev-020-00', 5), (u'elev-010-00', 6), (u'elev-005-00', 7), (u'elev-002-00', 8), (u'elev-001-00', 9), (u'elev-000-50', 10), (u'elev-000-20', 11), (u'elev-000-10', 12), (u'elev-000-05', 13), (u'elev-000-02', 14), (u'elev-000-01', 15)])
     ElevationConfidence._ext = None
     
     #-----< FuelType >-----#
-    FuelType = INT(name='FuelType', mode=MODE_TYPE)
+    FuelType = INT(name=u'FuelType', mode=MODE_TYPE)
     FuelType._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=15)], ev=None, er=[])
     
     #-----< unknownFuel >-----#
-    unknownFuel = INT(name='unknownFuel', mode=MODE_VALUE, typeref=ASN1RefType(('DSRC', 'FuelType')))
+    unknownFuel = INT(name=u'unknownFuel', mode=MODE_VALUE, typeref=ASN1RefType(('DSRC', 'FuelType')))
     unknownFuel._val = 0
     
     #-----< gasoline >-----#
-    gasoline = INT(name='gasoline', mode=MODE_VALUE, typeref=ASN1RefType(('DSRC', 'FuelType')))
+    gasoline = INT(name=u'gasoline', mode=MODE_VALUE, typeref=ASN1RefType(('DSRC', 'FuelType')))
     gasoline._val = 1
     
     #-----< ethanol >-----#
-    ethanol = INT(name='ethanol', mode=MODE_VALUE, typeref=ASN1RefType(('DSRC', 'FuelType')))
+    ethanol = INT(name=u'ethanol', mode=MODE_VALUE, typeref=ASN1RefType(('DSRC', 'FuelType')))
     ethanol._val = 2
     
     #-----< diesel >-----#
-    diesel = INT(name='diesel', mode=MODE_VALUE, typeref=ASN1RefType(('DSRC', 'FuelType')))
+    diesel = INT(name=u'diesel', mode=MODE_VALUE, typeref=ASN1RefType(('DSRC', 'FuelType')))
     diesel._val = 3
     
     #-----< electric >-----#
-    electric = INT(name='electric', mode=MODE_VALUE, typeref=ASN1RefType(('DSRC', 'FuelType')))
+    electric = INT(name=u'electric', mode=MODE_VALUE, typeref=ASN1RefType(('DSRC', 'FuelType')))
     electric._val = 4
     
     #-----< hybrid >-----#
-    hybrid = INT(name='hybrid', mode=MODE_VALUE, typeref=ASN1RefType(('DSRC', 'FuelType')))
+    hybrid = INT(name=u'hybrid', mode=MODE_VALUE, typeref=ASN1RefType(('DSRC', 'FuelType')))
     hybrid._val = 5
     
     #-----< hydrogen >-----#
-    hydrogen = INT(name='hydrogen', mode=MODE_VALUE, typeref=ASN1RefType(('DSRC', 'FuelType')))
+    hydrogen = INT(name=u'hydrogen', mode=MODE_VALUE, typeref=ASN1RefType(('DSRC', 'FuelType')))
     hydrogen._val = 6
     
     #-----< natGasLiquid >-----#
-    natGasLiquid = INT(name='natGasLiquid', mode=MODE_VALUE, typeref=ASN1RefType(('DSRC', 'FuelType')))
+    natGasLiquid = INT(name=u'natGasLiquid', mode=MODE_VALUE, typeref=ASN1RefType(('DSRC', 'FuelType')))
     natGasLiquid._val = 7
     
     #-----< natGasComp >-----#
-    natGasComp = INT(name='natGasComp', mode=MODE_VALUE, typeref=ASN1RefType(('DSRC', 'FuelType')))
+    natGasComp = INT(name=u'natGasComp', mode=MODE_VALUE, typeref=ASN1RefType(('DSRC', 'FuelType')))
     natGasComp._val = 8
     
     #-----< propane >-----#
-    propane = INT(name='propane', mode=MODE_VALUE, typeref=ASN1RefType(('DSRC', 'FuelType')))
+    propane = INT(name=u'propane', mode=MODE_VALUE, typeref=ASN1RefType(('DSRC', 'FuelType')))
     propane._val = 9
     
     #-----< GNSSstatus >-----#
-    GNSSstatus = BIT_STR(name='GNSSstatus', mode=MODE_TYPE)
-    GNSSstatus._cont = ASN1Dict([('unavailable', 0), ('isHealthy', 1), ('isMonitored', 2), ('baseStationType', 3), ('aPDOPofUnder5', 4), ('inViewOfUnder5', 5), ('localCorrectionsPresent', 6), ('networkCorrectionsPresent', 7)])
+    GNSSstatus = BIT_STR(name=u'GNSSstatus', mode=MODE_TYPE)
+    GNSSstatus._cont = ASN1Dict([(u'unavailable', 0), (u'isHealthy', 1), (u'isMonitored', 2), (u'baseStationType', 3), (u'aPDOPofUnder5', 4), (u'inViewOfUnder5', 5), (u'localCorrectionsPresent', 6), (u'networkCorrectionsPresent', 7)])
     GNSSstatus._const_sz = ASN1Set(rv=[8], rr=[], ev=None, er=[])
     
     #-----< HeadingConfidence >-----#
-    HeadingConfidence = ENUM(name='HeadingConfidence', mode=MODE_TYPE)
-    HeadingConfidence._cont = ASN1Dict([('unavailable', 0), ('prec10deg', 1), ('prec05deg', 2), ('prec01deg', 3), ('prec0-1deg', 4), ('prec0-05deg', 5), ('prec0-01deg', 6), ('prec0-0125deg', 7)])
+    HeadingConfidence = ENUM(name=u'HeadingConfidence', mode=MODE_TYPE)
+    HeadingConfidence._cont = ASN1Dict([(u'unavailable', 0), (u'prec10deg', 1), (u'prec05deg', 2), (u'prec01deg', 3), (u'prec0-1deg', 4), (u'prec0-05deg', 5), (u'prec0-01deg', 6), (u'prec0-0125deg', 7)])
     HeadingConfidence._ext = None
     
     #-----< Heading >-----#
-    Heading = INT(name='Heading', mode=MODE_TYPE)
+    Heading = INT(name=u'Heading', mode=MODE_TYPE)
     Heading._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=28800)], ev=None, er=[])
     
     #-----< IntersectionID >-----#
-    IntersectionID = INT(name='IntersectionID', mode=MODE_TYPE)
+    IntersectionID = INT(name=u'IntersectionID', mode=MODE_TYPE)
     IntersectionID._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=65535)], ev=None, er=[])
     
     #-----< IntersectionStatusObject >-----#
-    IntersectionStatusObject = BIT_STR(name='IntersectionStatusObject', mode=MODE_TYPE)
-    IntersectionStatusObject._cont = ASN1Dict([('manualControlIsEnabled', 0), ('stopTimeIsActivated', 1), ('failureFlash', 2), ('preemptIsActive', 3), ('signalPriorityIsActive', 4), ('fixedTimeOperation', 5), ('trafficDependentOperation', 6), ('standbyOperation', 7), ('failureMode', 8), ('off', 9), ('recentMAPmessageUpdate', 10), ('recentChangeInMAPassignedLanesIDsUsed', 11), ('noValidMAPisAvailableAtThisTime', 12), ('noValidSPATisAvailableAtThisTime', 13)])
+    IntersectionStatusObject = BIT_STR(name=u'IntersectionStatusObject', mode=MODE_TYPE)
+    IntersectionStatusObject._cont = ASN1Dict([(u'manualControlIsEnabled', 0), (u'stopTimeIsActivated', 1), (u'failureFlash', 2), (u'preemptIsActive', 3), (u'signalPriorityIsActive', 4), (u'fixedTimeOperation', 5), (u'trafficDependentOperation', 6), (u'standbyOperation', 7), (u'failureMode', 8), (u'off', 9), (u'recentMAPmessageUpdate', 10), (u'recentChangeInMAPassignedLanesIDsUsed', 11), (u'noValidMAPisAvailableAtThisTime', 12), (u'noValidSPATisAvailableAtThisTime', 13)])
     IntersectionStatusObject._const_sz = ASN1Set(rv=[16], rr=[], ev=None, er=[])
     
     #-----< LaneAttributes-Barrier >-----#
-    LaneAttributes_Barrier = BIT_STR(name='LaneAttributes-Barrier', mode=MODE_TYPE)
-    LaneAttributes_Barrier._cont = ASN1Dict([('median-RevocableLane', 0), ('median', 1), ('whiteLineHashing', 2), ('stripedLines', 3), ('doubleStripedLines', 4), ('trafficCones', 5), ('constructionBarrier', 6), ('trafficChannels', 7), ('lowCurbs', 8), ('highCurbs', 9)])
+    LaneAttributes_Barrier = BIT_STR(name=u'LaneAttributes-Barrier', mode=MODE_TYPE)
+    LaneAttributes_Barrier._cont = ASN1Dict([(u'median-RevocableLane', 0), (u'median', 1), (u'whiteLineHashing', 2), (u'stripedLines', 3), (u'doubleStripedLines', 4), (u'trafficCones', 5), (u'constructionBarrier', 6), (u'trafficChannels', 7), (u'lowCurbs', 8), (u'highCurbs', 9)])
     LaneAttributes_Barrier._const_sz = ASN1Set(rv=[16], rr=[], ev=None, er=[])
     
     #-----< LaneAttributes-Bike >-----#
-    LaneAttributes_Bike = BIT_STR(name='LaneAttributes-Bike', mode=MODE_TYPE)
-    LaneAttributes_Bike._cont = ASN1Dict([('bikeRevocableLane', 0), ('pedestrianUseAllowed', 1), ('isBikeFlyOverLane', 2), ('fixedCycleTime', 3), ('biDirectionalCycleTimes', 4), ('isolatedByBarrier', 5), ('unsignalizedSegmentsPresent', 6)])
+    LaneAttributes_Bike = BIT_STR(name=u'LaneAttributes-Bike', mode=MODE_TYPE)
+    LaneAttributes_Bike._cont = ASN1Dict([(u'bikeRevocableLane', 0), (u'pedestrianUseAllowed', 1), (u'isBikeFlyOverLane', 2), (u'fixedCycleTime', 3), (u'biDirectionalCycleTimes', 4), (u'isolatedByBarrier', 5), (u'unsignalizedSegmentsPresent', 6)])
     LaneAttributes_Bike._const_sz = ASN1Set(rv=[16], rr=[], ev=None, er=[])
     
     #-----< LaneAttributes-Crosswalk >-----#
-    LaneAttributes_Crosswalk = BIT_STR(name='LaneAttributes-Crosswalk', mode=MODE_TYPE)
-    LaneAttributes_Crosswalk._cont = ASN1Dict([('crosswalkRevocableLane', 0), ('bicyleUseAllowed', 1), ('isXwalkFlyOverLane', 2), ('fixedCycleTime', 3), ('biDirectionalCycleTimes', 4), ('hasPushToWalkButton', 5), ('audioSupport', 6), ('rfSignalRequestPresent', 7), ('unsignalizedSegmentsPresent', 8)])
+    LaneAttributes_Crosswalk = BIT_STR(name=u'LaneAttributes-Crosswalk', mode=MODE_TYPE)
+    LaneAttributes_Crosswalk._cont = ASN1Dict([(u'crosswalkRevocableLane', 0), (u'bicyleUseAllowed', 1), (u'isXwalkFlyOverLane', 2), (u'fixedCycleTime', 3), (u'biDirectionalCycleTimes', 4), (u'hasPushToWalkButton', 5), (u'audioSupport', 6), (u'rfSignalRequestPresent', 7), (u'unsignalizedSegmentsPresent', 8)])
     LaneAttributes_Crosswalk._const_sz = ASN1Set(rv=[16], rr=[], ev=None, er=[])
     
     #-----< LaneAttributes-Parking >-----#
-    LaneAttributes_Parking = BIT_STR(name='LaneAttributes-Parking', mode=MODE_TYPE)
-    LaneAttributes_Parking._cont = ASN1Dict([('parkingRevocableLane', 0), ('parallelParkingInUse', 1), ('headInParkingInUse', 2), ('doNotParkZone', 3), ('parkingForBusUse', 4), ('parkingForTaxiUse', 5), ('noPublicParkingUse', 6)])
+    LaneAttributes_Parking = BIT_STR(name=u'LaneAttributes-Parking', mode=MODE_TYPE)
+    LaneAttributes_Parking._cont = ASN1Dict([(u'parkingRevocableLane', 0), (u'parallelParkingInUse', 1), (u'headInParkingInUse', 2), (u'doNotParkZone', 3), (u'parkingForBusUse', 4), (u'parkingForTaxiUse', 5), (u'noPublicParkingUse', 6)])
     LaneAttributes_Parking._const_sz = ASN1Set(rv=[16], rr=[], ev=None, er=[])
     
     #-----< LaneAttributes-Sidewalk >-----#
-    LaneAttributes_Sidewalk = BIT_STR(name='LaneAttributes-Sidewalk', mode=MODE_TYPE)
-    LaneAttributes_Sidewalk._cont = ASN1Dict([('sidewalk-RevocableLane', 0), ('bicyleUseAllowed', 1), ('isSidewalkFlyOverLane', 2), ('walkBikes', 3)])
+    LaneAttributes_Sidewalk = BIT_STR(name=u'LaneAttributes-Sidewalk', mode=MODE_TYPE)
+    LaneAttributes_Sidewalk._cont = ASN1Dict([(u'sidewalk-RevocableLane', 0), (u'bicyleUseAllowed', 1), (u'isSidewalkFlyOverLane', 2), (u'walkBikes', 3)])
     LaneAttributes_Sidewalk._const_sz = ASN1Set(rv=[16], rr=[], ev=None, er=[])
     
     #-----< LaneAttributes-Striping >-----#
-    LaneAttributes_Striping = BIT_STR(name='LaneAttributes-Striping', mode=MODE_TYPE)
-    LaneAttributes_Striping._cont = ASN1Dict([('stripeToConnectingLanesRevocableLane', 0), ('stripeDrawOnLeft', 1), ('stripeDrawOnRight', 2), ('stripeToConnectingLanesLeft', 3), ('stripeToConnectingLanesRight', 4), ('stripeToConnectingLanesAhead', 5)])
+    LaneAttributes_Striping = BIT_STR(name=u'LaneAttributes-Striping', mode=MODE_TYPE)
+    LaneAttributes_Striping._cont = ASN1Dict([(u'stripeToConnectingLanesRevocableLane', 0), (u'stripeDrawOnLeft', 1), (u'stripeDrawOnRight', 2), (u'stripeToConnectingLanesLeft', 3), (u'stripeToConnectingLanesRight', 4), (u'stripeToConnectingLanesAhead', 5)])
     LaneAttributes_Striping._const_sz = ASN1Set(rv=[16], rr=[], ev=None, er=[])
     
     #-----< LaneAttributes-TrackedVehicle >-----#
-    LaneAttributes_TrackedVehicle = BIT_STR(name='LaneAttributes-TrackedVehicle', mode=MODE_TYPE)
-    LaneAttributes_TrackedVehicle._cont = ASN1Dict([('spec-RevocableLane', 0), ('spec-commuterRailRoadTrack', 1), ('spec-lightRailRoadTrack', 2), ('spec-heavyRailRoadTrack', 3), ('spec-otherRailType', 4)])
+    LaneAttributes_TrackedVehicle = BIT_STR(name=u'LaneAttributes-TrackedVehicle', mode=MODE_TYPE)
+    LaneAttributes_TrackedVehicle._cont = ASN1Dict([(u'spec-RevocableLane', 0), (u'spec-commuterRailRoadTrack', 1), (u'spec-lightRailRoadTrack', 2), (u'spec-heavyRailRoadTrack', 3), (u'spec-otherRailType', 4)])
     LaneAttributes_TrackedVehicle._const_sz = ASN1Set(rv=[16], rr=[], ev=None, er=[])
     
     #-----< LaneAttributes-Vehicle >-----#
-    LaneAttributes_Vehicle = BIT_STR(name='LaneAttributes-Vehicle', mode=MODE_TYPE)
-    LaneAttributes_Vehicle._cont = ASN1Dict([('isVehicleRevocableLane', 0), ('isVehicleFlyOverLane', 1), ('hovLaneUseOnly', 2), ('restrictedToBusUse', 3), ('restrictedToTaxiUse', 4), ('restrictedFromPublicUse', 5), ('hasIRbeaconCoverage', 6), ('permissionOnRequest', 7)])
+    LaneAttributes_Vehicle = BIT_STR(name=u'LaneAttributes-Vehicle', mode=MODE_TYPE)
+    LaneAttributes_Vehicle._cont = ASN1Dict([(u'isVehicleRevocableLane', 0), (u'isVehicleFlyOverLane', 1), (u'hovLaneUseOnly', 2), (u'restrictedToBusUse', 3), (u'restrictedToTaxiUse', 4), (u'restrictedFromPublicUse', 5), (u'hasIRbeaconCoverage', 6), (u'permissionOnRequest', 7)])
     LaneAttributes_Vehicle._const_sz = ASN1Set(rv=[8], rr=[], ev=[], er=[])
     
     #-----< LaneConnectionID >-----#
-    LaneConnectionID = INT(name='LaneConnectionID', mode=MODE_TYPE)
+    LaneConnectionID = INT(name=u'LaneConnectionID', mode=MODE_TYPE)
     LaneConnectionID._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=255)], ev=None, er=[])
     
     #-----< LaneDirection >-----#
-    LaneDirection = BIT_STR(name='LaneDirection', mode=MODE_TYPE)
-    LaneDirection._cont = ASN1Dict([('ingressPath', 0), ('egressPath', 1)])
+    LaneDirection = BIT_STR(name=u'LaneDirection', mode=MODE_TYPE)
+    LaneDirection._cont = ASN1Dict([(u'ingressPath', 0), (u'egressPath', 1)])
     LaneDirection._const_sz = ASN1Set(rv=[2], rr=[], ev=None, er=[])
     
     #-----< LaneID >-----#
-    LaneID = INT(name='LaneID', mode=MODE_TYPE)
+    LaneID = INT(name=u'LaneID', mode=MODE_TYPE)
     LaneID._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=255)], ev=None, er=[])
     
     #-----< LayerID >-----#
-    LayerID = INT(name='LayerID', mode=MODE_TYPE)
+    LayerID = INT(name=u'LayerID', mode=MODE_TYPE)
     LayerID._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=100)], ev=None, er=[])
     
     #-----< LayerType >-----#
-    LayerType = ENUM(name='LayerType', mode=MODE_TYPE)
-    LayerType._cont = ASN1Dict([('none', 0), ('mixedContent', 1), ('generalMapData', 2), ('intersectionData', 3), ('curveData', 4), ('roadwaySectionData', 5), ('parkingAreaData', 6), ('sharedLaneData', 7)])
+    LayerType = ENUM(name=u'LayerType', mode=MODE_TYPE)
+    LayerType._cont = ASN1Dict([(u'none', 0), (u'mixedContent', 1), (u'generalMapData', 2), (u'intersectionData', 3), (u'curveData', 4), (u'roadwaySectionData', 5), (u'parkingAreaData', 6), (u'sharedLaneData', 7)])
     LayerType._ext = []
     
     #-----< LaneWidth >-----#
-    LaneWidth = INT(name='LaneWidth', mode=MODE_TYPE)
+    LaneWidth = INT(name=u'LaneWidth', mode=MODE_TYPE)
     LaneWidth._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=32767)], ev=None, er=[])
     
     #-----< MergeDivergeNodeAngle >-----#
-    MergeDivergeNodeAngle = INT(name='MergeDivergeNodeAngle', mode=MODE_TYPE)
+    MergeDivergeNodeAngle = INT(name=u'MergeDivergeNodeAngle', mode=MODE_TYPE)
     MergeDivergeNodeAngle._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=-180, ub=180)], ev=None, er=[])
     
     #-----< MinuteOfTheYear >-----#
-    MinuteOfTheYear = INT(name='MinuteOfTheYear', mode=MODE_TYPE)
+    MinuteOfTheYear = INT(name=u'MinuteOfTheYear', mode=MODE_TYPE)
     MinuteOfTheYear._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=527040)], ev=None, er=[])
     
     #-----< MovementPhaseState >-----#
-    MovementPhaseState = ENUM(name='MovementPhaseState', mode=MODE_TYPE)
-    MovementPhaseState._cont = ASN1Dict([('unavailable', 0), ('dark', 1), ('stop-Then-Proceed', 2), ('stop-And-Remain', 3), ('pre-Movement', 4), ('permissive-Movement-Allowed', 5), ('protected-Movement-Allowed', 6), ('permissive-clearance', 7), ('protected-clearance', 8), ('caution-Conflicting-Traffic', 9)])
+    MovementPhaseState = ENUM(name=u'MovementPhaseState', mode=MODE_TYPE)
+    MovementPhaseState._cont = ASN1Dict([(u'unavailable', 0), (u'dark', 1), (u'stop-Then-Proceed', 2), (u'stop-And-Remain', 3), (u'pre-Movement', 4), (u'permissive-Movement-Allowed', 5), (u'protected-Movement-Allowed', 6), (u'permissive-clearance', 7), (u'protected-clearance', 8), (u'caution-Conflicting-Traffic', 9)])
     MovementPhaseState._ext = None
     
     #-----< MsgCount >-----#
-    MsgCount = INT(name='MsgCount', mode=MODE_TYPE)
+    MsgCount = INT(name=u'MsgCount', mode=MODE_TYPE)
     MsgCount._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=127)], ev=None, er=[])
     
     #-----< Offset-B09 >-----#
-    Offset_B09 = INT(name='Offset-B09', mode=MODE_TYPE)
+    Offset_B09 = INT(name=u'Offset-B09', mode=MODE_TYPE)
     Offset_B09._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=-256, ub=255)], ev=None, er=[])
     
     #-----< Offset-B10 >-----#
-    Offset_B10 = INT(name='Offset-B10', mode=MODE_TYPE)
+    Offset_B10 = INT(name=u'Offset-B10', mode=MODE_TYPE)
     Offset_B10._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=-512, ub=511)], ev=None, er=[])
     
     #-----< Offset-B11 >-----#
-    Offset_B11 = INT(name='Offset-B11', mode=MODE_TYPE)
+    Offset_B11 = INT(name=u'Offset-B11', mode=MODE_TYPE)
     Offset_B11._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=-1024, ub=1023)], ev=None, er=[])
     
     #-----< Offset-B12 >-----#
-    Offset_B12 = INT(name='Offset-B12', mode=MODE_TYPE)
+    Offset_B12 = INT(name=u'Offset-B12', mode=MODE_TYPE)
     Offset_B12._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=-2048, ub=2047)], ev=None, er=[])
     
     #-----< Offset-B13 >-----#
-    Offset_B13 = INT(name='Offset-B13', mode=MODE_TYPE)
+    Offset_B13 = INT(name=u'Offset-B13', mode=MODE_TYPE)
     Offset_B13._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=-4096, ub=4095)], ev=None, er=[])
     
     #-----< Offset-B14 >-----#
-    Offset_B14 = INT(name='Offset-B14', mode=MODE_TYPE)
+    Offset_B14 = INT(name=u'Offset-B14', mode=MODE_TYPE)
     Offset_B14._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=-8192, ub=8191)], ev=None, er=[])
     
     #-----< Offset-B16 >-----#
-    Offset_B16 = INT(name='Offset-B16', mode=MODE_TYPE)
+    Offset_B16 = INT(name=u'Offset-B16', mode=MODE_TYPE)
     Offset_B16._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=-32768, ub=32767)], ev=None, er=[])
     
     #-----< PedestrianBicycleDetect >-----#
-    PedestrianBicycleDetect = BOOL(name='PedestrianBicycleDetect', mode=MODE_TYPE)
+    PedestrianBicycleDetect = BOOL(name=u'PedestrianBicycleDetect', mode=MODE_TYPE)
     
     #-----< PositionConfidence >-----#
-    PositionConfidence = ENUM(name='PositionConfidence', mode=MODE_TYPE)
-    PositionConfidence._cont = ASN1Dict([('unavailable', 0), ('a500m', 1), ('a200m', 2), ('a100m', 3), ('a50m', 4), ('a20m', 5), ('a10m', 6), ('a5m', 7), ('a2m', 8), ('a1m', 9), ('a50cm', 10), ('a20cm', 11), ('a10cm', 12), ('a5cm', 13), ('a2cm', 14), ('a1cm', 15)])
+    PositionConfidence = ENUM(name=u'PositionConfidence', mode=MODE_TYPE)
+    PositionConfidence._cont = ASN1Dict([(u'unavailable', 0), (u'a500m', 1), (u'a200m', 2), (u'a100m', 3), (u'a50m', 4), (u'a20m', 5), (u'a10m', 6), (u'a5m', 7), (u'a2m', 8), (u'a1m', 9), (u'a50cm', 10), (u'a20cm', 11), (u'a10cm', 12), (u'a5cm', 13), (u'a2cm', 14), (u'a1cm', 15)])
     PositionConfidence._ext = None
     
     #-----< PrioritizationResponseStatus >-----#
-    PrioritizationResponseStatus = ENUM(name='PrioritizationResponseStatus', mode=MODE_TYPE)
-    PrioritizationResponseStatus._cont = ASN1Dict([('unknown', 0), ('requested', 1), ('processing', 2), ('watchOtherTraffic', 3), ('granted', 4), ('rejected', 5), ('maxPresence', 6), ('reserviceLocked', 7)])
+    PrioritizationResponseStatus = ENUM(name=u'PrioritizationResponseStatus', mode=MODE_TYPE)
+    PrioritizationResponseStatus._cont = ASN1Dict([(u'unknown', 0), (u'requested', 1), (u'processing', 2), (u'watchOtherTraffic', 3), (u'granted', 4), (u'rejected', 5), (u'maxPresence', 6), (u'reserviceLocked', 7)])
     PrioritizationResponseStatus._ext = []
     
     #-----< PriorityRequestType >-----#
-    PriorityRequestType = ENUM(name='PriorityRequestType', mode=MODE_TYPE)
-    PriorityRequestType._cont = ASN1Dict([('priorityRequestTypeReserved', 0), ('priorityRequest', 1), ('priorityRequestUpdate', 2), ('priorityCancellation', 3)])
+    PriorityRequestType = ENUM(name=u'PriorityRequestType', mode=MODE_TYPE)
+    PriorityRequestType._cont = ASN1Dict([(u'priorityRequestTypeReserved', 0), (u'priorityRequest', 1), (u'priorityRequestUpdate', 2), (u'priorityCancellation', 3)])
     PriorityRequestType._ext = []
     
     #-----< RegionId >-----#
-    RegionId = INT(name='RegionId', mode=MODE_TYPE)
+    RegionId = INT(name=u'RegionId', mode=MODE_TYPE)
     RegionId._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=255)], ev=None, er=[])
     
     #-----< noRegion >-----#
-    noRegion = INT(name='noRegion', mode=MODE_VALUE, typeref=ASN1RefType(('DSRC', 'RegionId')))
+    noRegion = INT(name=u'noRegion', mode=MODE_VALUE, typeref=ASN1RefType(('DSRC', 'RegionId')))
     noRegion._val = 0
     
     #-----< addGrpA >-----#
-    addGrpA = INT(name='addGrpA', mode=MODE_VALUE, typeref=ASN1RefType(('DSRC', 'RegionId')))
+    addGrpA = INT(name=u'addGrpA', mode=MODE_VALUE, typeref=ASN1RefType(('DSRC', 'RegionId')))
     addGrpA._val = 1
     
     #-----< addGrpB >-----#
-    addGrpB = INT(name='addGrpB', mode=MODE_VALUE, typeref=ASN1RefType(('DSRC', 'RegionId')))
+    addGrpB = INT(name=u'addGrpB', mode=MODE_VALUE, typeref=ASN1RefType(('DSRC', 'RegionId')))
     addGrpB._val = 2
     
     #-----< addGrpC >-----#
-    addGrpC = INT(name='addGrpC', mode=MODE_VALUE, typeref=ASN1RefType(('DSRC', 'RegionId')))
+    addGrpC = INT(name=u'addGrpC', mode=MODE_VALUE, typeref=ASN1RefType(('DSRC', 'RegionId')))
     addGrpC._val = 3
     
     #-----< RequestID >-----#
-    RequestID = INT(name='RequestID', mode=MODE_TYPE)
+    RequestID = INT(name=u'RequestID', mode=MODE_TYPE)
     RequestID._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=255)], ev=None, er=[])
     
     #-----< RequestImportanceLevel >-----#
-    RequestImportanceLevel = ENUM(name='RequestImportanceLevel', mode=MODE_TYPE)
-    RequestImportanceLevel._cont = ASN1Dict([('requestImportanceLevelUnKnown', 0), ('requestImportanceLevel1', 1), ('requestImportanceLevel2', 2), ('requestImportanceLevel3', 3), ('requestImportanceLevel4', 4), ('requestImportanceLevel5', 5), ('requestImportanceLevel6', 6), ('requestImportanceLevel7', 7), ('requestImportanceLevel8', 8), ('requestImportanceLevel9', 9), ('requestImportanceLevel10', 10), ('requestImportanceLevel11', 11), ('requestImportanceLevel12', 12), ('requestImportanceLevel13', 13), ('requestImportanceLevel14', 14), ('requestImportanceReserved', 15)])
+    RequestImportanceLevel = ENUM(name=u'RequestImportanceLevel', mode=MODE_TYPE)
+    RequestImportanceLevel._cont = ASN1Dict([(u'requestImportanceLevelUnKnown', 0), (u'requestImportanceLevel1', 1), (u'requestImportanceLevel2', 2), (u'requestImportanceLevel3', 3), (u'requestImportanceLevel4', 4), (u'requestImportanceLevel5', 5), (u'requestImportanceLevel6', 6), (u'requestImportanceLevel7', 7), (u'requestImportanceLevel8', 8), (u'requestImportanceLevel9', 9), (u'requestImportanceLevel10', 10), (u'requestImportanceLevel11', 11), (u'requestImportanceLevel12', 12), (u'requestImportanceLevel13', 13), (u'requestImportanceLevel14', 14), (u'requestImportanceReserved', 15)])
     RequestImportanceLevel._ext = None
     
     #-----< RequestSubRole >-----#
-    RequestSubRole = ENUM(name='RequestSubRole', mode=MODE_TYPE)
-    RequestSubRole._cont = ASN1Dict([('requestSubRoleUnKnown', 0), ('requestSubRole1', 1), ('requestSubRole2', 2), ('requestSubRole3', 3), ('requestSubRole4', 4), ('requestSubRole5', 5), ('requestSubRole6', 6), ('requestSubRole7', 7), ('requestSubRole8', 8), ('requestSubRole9', 9), ('requestSubRole10', 10), ('requestSubRole11', 11), ('requestSubRole12', 12), ('requestSubRole13', 13), ('requestSubRole14', 14), ('requestSubRoleReserved', 15)])
+    RequestSubRole = ENUM(name=u'RequestSubRole', mode=MODE_TYPE)
+    RequestSubRole._cont = ASN1Dict([(u'requestSubRoleUnKnown', 0), (u'requestSubRole1', 1), (u'requestSubRole2', 2), (u'requestSubRole3', 3), (u'requestSubRole4', 4), (u'requestSubRole5', 5), (u'requestSubRole6', 6), (u'requestSubRole7', 7), (u'requestSubRole8', 8), (u'requestSubRole9', 9), (u'requestSubRole10', 10), (u'requestSubRole11', 11), (u'requestSubRole12', 12), (u'requestSubRole13', 13), (u'requestSubRole14', 14), (u'requestSubRoleReserved', 15)])
     RequestSubRole._ext = None
     
     #-----< RestrictionAppliesTo >-----#
-    RestrictionAppliesTo = ENUM(name='RestrictionAppliesTo', mode=MODE_TYPE)
-    RestrictionAppliesTo._cont = ASN1Dict([('none', 0), ('equippedTransit', 1), ('equippedTaxis', 2), ('equippedOther', 3), ('emissionCompliant', 4), ('equippedBicycle', 5), ('weightCompliant', 6), ('heightCompliant', 7), ('pedestrians', 8), ('slowMovingPersons', 9), ('wheelchairUsers', 10), ('visualDisabilities', 11), ('audioDisabilities', 12), ('otherUnknownDisabilities', 13)])
+    RestrictionAppliesTo = ENUM(name=u'RestrictionAppliesTo', mode=MODE_TYPE)
+    RestrictionAppliesTo._cont = ASN1Dict([(u'none', 0), (u'equippedTransit', 1), (u'equippedTaxis', 2), (u'equippedOther', 3), (u'emissionCompliant', 4), (u'equippedBicycle', 5), (u'weightCompliant', 6), (u'heightCompliant', 7), (u'pedestrians', 8), (u'slowMovingPersons', 9), (u'wheelchairUsers', 10), (u'visualDisabilities', 11), (u'audioDisabilities', 12), (u'otherUnknownDisabilities', 13)])
     RestrictionAppliesTo._ext = []
     
     #-----< RestrictionClassID >-----#
-    RestrictionClassID = INT(name='RestrictionClassID', mode=MODE_TYPE)
+    RestrictionClassID = INT(name=u'RestrictionClassID', mode=MODE_TYPE)
     RestrictionClassID._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=255)], ev=None, er=[])
     
     #-----< RoadRegulatorID >-----#
-    RoadRegulatorID = INT(name='RoadRegulatorID', mode=MODE_TYPE)
+    RoadRegulatorID = INT(name=u'RoadRegulatorID', mode=MODE_TYPE)
     RoadRegulatorID._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=65535)], ev=None, er=[])
     
     #-----< RoadSegmentID >-----#
-    RoadSegmentID = INT(name='RoadSegmentID', mode=MODE_TYPE)
+    RoadSegmentID = INT(name=u'RoadSegmentID', mode=MODE_TYPE)
     RoadSegmentID._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=65535)], ev=None, er=[])
     
     #-----< RoadwayCrownAngle >-----#
-    RoadwayCrownAngle = INT(name='RoadwayCrownAngle', mode=MODE_TYPE)
+    RoadwayCrownAngle = INT(name=u'RoadwayCrownAngle', mode=MODE_TYPE)
     RoadwayCrownAngle._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=-128, ub=127)], ev=None, er=[])
     
     #-----< RTCMmessage >-----#
-    RTCMmessage = OCT_STR(name='RTCMmessage', mode=MODE_TYPE)
+    RTCMmessage = OCT_STR(name=u'RTCMmessage', mode=MODE_TYPE)
     RTCMmessage._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=1023)], ev=None, er=[])
     
     #-----< RTCM-Revision >-----#
-    RTCM_Revision = ENUM(name='RTCM-Revision', mode=MODE_TYPE)
-    RTCM_Revision._cont = ASN1Dict([('unknown', 0), ('rtcmRev2', 1), ('rtcmRev3', 2), ('reserved', 3)])
+    RTCM_Revision = ENUM(name=u'RTCM-Revision', mode=MODE_TYPE)
+    RTCM_Revision._cont = ASN1Dict([(u'unknown', 0), (u'rtcmRev2', 1), (u'rtcmRev3', 2), (u'reserved', 3)])
     RTCM_Revision._ext = []
     
     #-----< Scale-B12 >-----#
-    Scale_B12 = INT(name='Scale-B12', mode=MODE_TYPE)
+    Scale_B12 = INT(name=u'Scale-B12', mode=MODE_TYPE)
     Scale_B12._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=-2048, ub=2047)], ev=None, er=[])
     
     #-----< SignalGroupID >-----#
-    SignalGroupID = INT(name='SignalGroupID', mode=MODE_TYPE)
+    SignalGroupID = INT(name=u'SignalGroupID', mode=MODE_TYPE)
     SignalGroupID._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=255)], ev=None, er=[])
     
     #-----< SegmentAttributeXY >-----#
-    SegmentAttributeXY = ENUM(name='SegmentAttributeXY', mode=MODE_TYPE)
-    SegmentAttributeXY._cont = ASN1Dict([('reserved', 0), ('doNotBlock', 1), ('whiteLine', 2), ('mergingLaneLeft', 3), ('mergingLaneRight', 4), ('curbOnLeft', 5), ('curbOnRight', 6), ('loadingzoneOnLeft', 7), ('loadingzoneOnRight', 8), ('turnOutPointOnLeft', 9), ('turnOutPointOnRight', 10), ('adjacentParkingOnLeft', 11), ('adjacentParkingOnRight', 12), ('adjacentBikeLaneOnLeft', 13), ('adjacentBikeLaneOnRight', 14), ('sharedBikeLane', 15), ('bikeBoxInFront', 16), ('transitStopOnLeft', 17), ('transitStopOnRight', 18), ('transitStopInLane', 19), ('sharedWithTrackedVehicle', 20), ('safeIsland', 21), ('lowCurbsPresent', 22), ('rumbleStripPresent', 23), ('audibleSignalingPresent', 24), ('adaptiveTimingPresent', 25), ('rfSignalRequestPresent', 26), ('partialCurbIntrusion', 27), ('taperToLeft', 28), ('taperToRight', 29), ('taperToCenterLine', 30), ('parallelParking', 31), ('headInParking', 32), ('freeParking', 33), ('timeRestrictionsOnParking', 34), ('costToPark', 35), ('midBlockCurbPresent', 36), ('unEvenPavementPresent', 37)])
+    SegmentAttributeXY = ENUM(name=u'SegmentAttributeXY', mode=MODE_TYPE)
+    SegmentAttributeXY._cont = ASN1Dict([(u'reserved', 0), (u'doNotBlock', 1), (u'whiteLine', 2), (u'mergingLaneLeft', 3), (u'mergingLaneRight', 4), (u'curbOnLeft', 5), (u'curbOnRight', 6), (u'loadingzoneOnLeft', 7), (u'loadingzoneOnRight', 8), (u'turnOutPointOnLeft', 9), (u'turnOutPointOnRight', 10), (u'adjacentParkingOnLeft', 11), (u'adjacentParkingOnRight', 12), (u'adjacentBikeLaneOnLeft', 13), (u'adjacentBikeLaneOnRight', 14), (u'sharedBikeLane', 15), (u'bikeBoxInFront', 16), (u'transitStopOnLeft', 17), (u'transitStopOnRight', 18), (u'transitStopInLane', 19), (u'sharedWithTrackedVehicle', 20), (u'safeIsland', 21), (u'lowCurbsPresent', 22), (u'rumbleStripPresent', 23), (u'audibleSignalingPresent', 24), (u'adaptiveTimingPresent', 25), (u'rfSignalRequestPresent', 26), (u'partialCurbIntrusion', 27), (u'taperToLeft', 28), (u'taperToRight', 29), (u'taperToCenterLine', 30), (u'parallelParking', 31), (u'headInParking', 32), (u'freeParking', 33), (u'timeRestrictionsOnParking', 34), (u'costToPark', 35), (u'midBlockCurbPresent', 36), (u'unEvenPavementPresent', 37)])
     SegmentAttributeXY._ext = []
     
     #-----< SemiMajorAxisAccuracy >-----#
-    SemiMajorAxisAccuracy = INT(name='SemiMajorAxisAccuracy', mode=MODE_TYPE)
+    SemiMajorAxisAccuracy = INT(name=u'SemiMajorAxisAccuracy', mode=MODE_TYPE)
     SemiMajorAxisAccuracy._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=255)], ev=None, er=[])
     
     #-----< SemiMajorAxisOrientation >-----#
-    SemiMajorAxisOrientation = INT(name='SemiMajorAxisOrientation', mode=MODE_TYPE)
+    SemiMajorAxisOrientation = INT(name=u'SemiMajorAxisOrientation', mode=MODE_TYPE)
     SemiMajorAxisOrientation._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=65535)], ev=None, er=[])
     
     #-----< SemiMinorAxisAccuracy >-----#
-    SemiMinorAxisAccuracy = INT(name='SemiMinorAxisAccuracy', mode=MODE_TYPE)
+    SemiMinorAxisAccuracy = INT(name=u'SemiMinorAxisAccuracy', mode=MODE_TYPE)
     SemiMinorAxisAccuracy._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=255)], ev=None, er=[])
     
     #-----< SpeedAdvice >-----#
-    SpeedAdvice = INT(name='SpeedAdvice', mode=MODE_TYPE)
+    SpeedAdvice = INT(name=u'SpeedAdvice', mode=MODE_TYPE)
     SpeedAdvice._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=500)], ev=None, er=[])
     
     #-----< SpeedConfidence >-----#
-    SpeedConfidence = ENUM(name='SpeedConfidence', mode=MODE_TYPE)
-    SpeedConfidence._cont = ASN1Dict([('unavailable', 0), ('prec100ms', 1), ('prec10ms', 2), ('prec5ms', 3), ('prec1ms', 4), ('prec0-1ms', 5), ('prec0-05ms', 6), ('prec0-01ms', 7)])
+    SpeedConfidence = ENUM(name=u'SpeedConfidence', mode=MODE_TYPE)
+    SpeedConfidence._cont = ASN1Dict([(u'unavailable', 0), (u'prec100ms', 1), (u'prec10ms', 2), (u'prec5ms', 3), (u'prec1ms', 4), (u'prec0-1ms', 5), (u'prec0-05ms', 6), (u'prec0-01ms', 7)])
     SpeedConfidence._ext = None
     
     #-----< TemporaryID >-----#
-    TemporaryID = OCT_STR(name='TemporaryID', mode=MODE_TYPE)
+    TemporaryID = OCT_STR(name=u'TemporaryID', mode=MODE_TYPE)
     TemporaryID._const_sz = ASN1Set(rv=[4], rr=[], ev=None, er=[])
     
     #-----< ThrottleConfidence >-----#
-    ThrottleConfidence = ENUM(name='ThrottleConfidence', mode=MODE_TYPE)
-    ThrottleConfidence._cont = ASN1Dict([('unavailable', 0), ('prec10percent', 1), ('prec1percent', 2), ('prec0-5percent', 3)])
+    ThrottleConfidence = ENUM(name=u'ThrottleConfidence', mode=MODE_TYPE)
+    ThrottleConfidence._cont = ASN1Dict([(u'unavailable', 0), (u'prec10percent', 1), (u'prec1percent', 2), (u'prec0-5percent', 3)])
     ThrottleConfidence._ext = None
     
     #-----< TimeConfidence >-----#
-    TimeConfidence = ENUM(name='TimeConfidence', mode=MODE_TYPE)
-    TimeConfidence._cont = ASN1Dict([('unavailable', 0), ('time-100-000', 1), ('time-050-000', 2), ('time-020-000', 3), ('time-010-000', 4), ('time-002-000', 5), ('time-001-000', 6), ('time-000-500', 7), ('time-000-200', 8), ('time-000-100', 9), ('time-000-050', 10), ('time-000-020', 11), ('time-000-010', 12), ('time-000-005', 13), ('time-000-002', 14), ('time-000-001', 15), ('time-000-000-5', 16), ('time-000-000-2', 17), ('time-000-000-1', 18), ('time-000-000-05', 19), ('time-000-000-02', 20), ('time-000-000-01', 21), ('time-000-000-005', 22), ('time-000-000-002', 23), ('time-000-000-001', 24), ('time-000-000-000-5', 25), ('time-000-000-000-2', 26), ('time-000-000-000-1', 27), ('time-000-000-000-05', 28), ('time-000-000-000-02', 29), ('time-000-000-000-01', 30), ('time-000-000-000-005', 31), ('time-000-000-000-002', 32), ('time-000-000-000-001', 33), ('time-000-000-000-000-5', 34), ('time-000-000-000-000-2', 35), ('time-000-000-000-000-1', 36), ('time-000-000-000-000-05', 37), ('time-000-000-000-000-02', 38), ('time-000-000-000-000-01', 39)])
+    TimeConfidence = ENUM(name=u'TimeConfidence', mode=MODE_TYPE)
+    TimeConfidence._cont = ASN1Dict([(u'unavailable', 0), (u'time-100-000', 1), (u'time-050-000', 2), (u'time-020-000', 3), (u'time-010-000', 4), (u'time-002-000', 5), (u'time-001-000', 6), (u'time-000-500', 7), (u'time-000-200', 8), (u'time-000-100', 9), (u'time-000-050', 10), (u'time-000-020', 11), (u'time-000-010', 12), (u'time-000-005', 13), (u'time-000-002', 14), (u'time-000-001', 15), (u'time-000-000-5', 16), (u'time-000-000-2', 17), (u'time-000-000-1', 18), (u'time-000-000-05', 19), (u'time-000-000-02', 20), (u'time-000-000-01', 21), (u'time-000-000-005', 22), (u'time-000-000-002', 23), (u'time-000-000-001', 24), (u'time-000-000-000-5', 25), (u'time-000-000-000-2', 26), (u'time-000-000-000-1', 27), (u'time-000-000-000-05', 28), (u'time-000-000-000-02', 29), (u'time-000-000-000-01', 30), (u'time-000-000-000-005', 31), (u'time-000-000-000-002', 32), (u'time-000-000-000-001', 33), (u'time-000-000-000-000-5', 34), (u'time-000-000-000-000-2', 35), (u'time-000-000-000-000-1', 36), (u'time-000-000-000-000-05', 37), (u'time-000-000-000-000-02', 38), (u'time-000-000-000-000-01', 39)])
     TimeConfidence._ext = None
     
     #-----< TimeIntervalConfidence >-----#
-    TimeIntervalConfidence = INT(name='TimeIntervalConfidence', mode=MODE_TYPE)
+    TimeIntervalConfidence = INT(name=u'TimeIntervalConfidence', mode=MODE_TYPE)
     TimeIntervalConfidence._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=15)], ev=None, er=[])
     
     #-----< TransitVehicleOccupancy >-----#
-    TransitVehicleOccupancy = ENUM(name='TransitVehicleOccupancy', mode=MODE_TYPE)
-    TransitVehicleOccupancy._cont = ASN1Dict([('occupancyUnknown', 0), ('occupancyEmpty', 1), ('occupancyVeryLow', 2), ('occupancyLow', 3), ('occupancyMed', 4), ('occupancyHigh', 5), ('occupancyNearlyFull', 6), ('occupancyFull', 7)])
+    TransitVehicleOccupancy = ENUM(name=u'TransitVehicleOccupancy', mode=MODE_TYPE)
+    TransitVehicleOccupancy._cont = ASN1Dict([(u'occupancyUnknown', 0), (u'occupancyEmpty', 1), (u'occupancyVeryLow', 2), (u'occupancyLow', 3), (u'occupancyMed', 4), (u'occupancyHigh', 5), (u'occupancyNearlyFull', 6), (u'occupancyFull', 7)])
     TransitVehicleOccupancy._ext = None
     
     #-----< TransitVehicleStatus >-----#
-    TransitVehicleStatus = BIT_STR(name='TransitVehicleStatus', mode=MODE_TYPE)
-    TransitVehicleStatus._cont = ASN1Dict([('loading', 0), ('anADAuse', 1), ('aBikeLoad', 2), ('doorOpen', 3), ('charging', 4), ('atStopLine', 5)])
+    TransitVehicleStatus = BIT_STR(name=u'TransitVehicleStatus', mode=MODE_TYPE)
+    TransitVehicleStatus._cont = ASN1Dict([(u'loading', 0), (u'anADAuse', 1), (u'aBikeLoad', 2), (u'doorOpen', 3), (u'charging', 4), (u'atStopLine', 5)])
     TransitVehicleStatus._const_sz = ASN1Set(rv=[8], rr=[], ev=None, er=[])
     
     #-----< TransmissionState >-----#
-    TransmissionState = ENUM(name='TransmissionState', mode=MODE_TYPE)
-    TransmissionState._cont = ASN1Dict([('neutral', 0), ('park', 1), ('forwardGears', 2), ('reverseGears', 3), ('reserved1', 4), ('reserved2', 5), ('reserved3', 6), ('unavailable', 7)])
+    TransmissionState = ENUM(name=u'TransmissionState', mode=MODE_TYPE)
+    TransmissionState._cont = ASN1Dict([(u'neutral', 0), (u'park', 1), (u'forwardGears', 2), (u'reverseGears', 3), (u'reserved1', 4), (u'reserved2', 5), (u'reserved3', 6), (u'unavailable', 7)])
     TransmissionState._ext = None
     
     #-----< VehicleHeight >-----#
-    VehicleHeight = INT(name='VehicleHeight', mode=MODE_TYPE)
+    VehicleHeight = INT(name=u'VehicleHeight', mode=MODE_TYPE)
     VehicleHeight._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=127)], ev=None, er=[])
     
     #-----< VehicleType >-----#
-    VehicleType = ENUM(name='VehicleType', mode=MODE_TYPE)
-    VehicleType._cont = ASN1Dict([('none', 0), ('unknown', 1), ('special', 2), ('moto', 3), ('car', 4), ('carOther', 5), ('bus', 6), ('axleCnt2', 7), ('axleCnt3', 8), ('axleCnt4', 9), ('axleCnt4Trailer', 10), ('axleCnt5Trailer', 11), ('axleCnt6Trailer', 12), ('axleCnt5MultiTrailer', 13), ('axleCnt6MultiTrailer', 14), ('axleCnt7MultiTrailer', 15)])
+    VehicleType = ENUM(name=u'VehicleType', mode=MODE_TYPE)
+    VehicleType._cont = ASN1Dict([(u'none', 0), (u'unknown', 1), (u'special', 2), (u'moto', 3), (u'car', 4), (u'carOther', 5), (u'bus', 6), (u'axleCnt2', 7), (u'axleCnt3', 8), (u'axleCnt4', 9), (u'axleCnt4Trailer', 10), (u'axleCnt5Trailer', 11), (u'axleCnt6Trailer', 12), (u'axleCnt5MultiTrailer', 13), (u'axleCnt6MultiTrailer', 14), (u'axleCnt7MultiTrailer', 15)])
     VehicleType._ext = []
     
     #-----< Velocity >-----#
-    Velocity = INT(name='Velocity', mode=MODE_TYPE)
+    Velocity = INT(name=u'Velocity', mode=MODE_TYPE)
     Velocity._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=8191)], ev=None, er=[])
     
     #-----< WaitOnStopline >-----#
-    WaitOnStopline = BOOL(name='WaitOnStopline', mode=MODE_TYPE)
+    WaitOnStopline = BOOL(name=u'WaitOnStopline', mode=MODE_TYPE)
     
     #-----< ZoneLength >-----#
-    ZoneLength = INT(name='ZoneLength', mode=MODE_TYPE)
+    ZoneLength = INT(name=u'ZoneLength', mode=MODE_TYPE)
     ZoneLength._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=10000)], ev=None, er=[])
     
     _all_ = [
@@ -3757,24 +3757,24 @@ class DSRC:
 
 class ElectronicRegistrationIdentificationVehicleDataModule:
 
-    _name_  = 'ElectronicRegistrationIdentificationVehicleDataModule'
+    _name_  = u'ElectronicRegistrationIdentificationVehicleDataModule'
     _oid_   = [1, 0, 24534, 1, 1]
     
     _obj_ = [
-        'EuVehicleCategoryCode',
-        'EuVehicleCategoryL',
-        'EuVehicleCategoryM',
-        'EuVehicleCategoryN',
-        'EuVehicleCategoryO',
-        'Iso3833VehicleType',
+        u'EuVehicleCategoryCode',
+        u'EuVehicleCategoryL',
+        u'EuVehicleCategoryM',
+        u'EuVehicleCategoryN',
+        u'EuVehicleCategoryO',
+        u'Iso3833VehicleType',
         ]
     _type_ = [
-        'EuVehicleCategoryCode',
-        'EuVehicleCategoryL',
-        'EuVehicleCategoryM',
-        'EuVehicleCategoryN',
-        'EuVehicleCategoryO',
-        'Iso3833VehicleType',
+        u'EuVehicleCategoryCode',
+        u'EuVehicleCategoryL',
+        u'EuVehicleCategoryM',
+        u'EuVehicleCategoryN',
+        u'EuVehicleCategoryO',
+        u'Iso3833VehicleType',
         ]
     _set_ = [
         ]
@@ -3786,46 +3786,46 @@ class ElectronicRegistrationIdentificationVehicleDataModule:
         ]
     
     #-----< EuVehicleCategoryCode >-----#
-    EuVehicleCategoryCode = CHOICE(name='EuVehicleCategoryCode', mode=MODE_TYPE)
-    _EuVehicleCategoryCode_euVehicleCategoryL = ENUM(name='euVehicleCategoryL', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ElectronicRegistrationIdentificationVehicleDataModule', 'EuVehicleCategoryL')))
-    _EuVehicleCategoryCode_euVehicleCategoryM = ENUM(name='euVehicleCategoryM', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ElectronicRegistrationIdentificationVehicleDataModule', 'EuVehicleCategoryM')))
-    _EuVehicleCategoryCode_euVehicleCategoryN = ENUM(name='euVehicleCategoryN', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ElectronicRegistrationIdentificationVehicleDataModule', 'EuVehicleCategoryN')))
-    _EuVehicleCategoryCode_euVehicleCategoryO = ENUM(name='euVehicleCategoryO', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ElectronicRegistrationIdentificationVehicleDataModule', 'EuVehicleCategoryO')))
-    _EuVehicleCategoryCode_euVehilcleCategoryT = NULL(name='euVehilcleCategoryT', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _EuVehicleCategoryCode_euVehilcleCategoryG = NULL(name='euVehilcleCategoryG', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    EuVehicleCategoryCode = CHOICE(name=u'EuVehicleCategoryCode', mode=MODE_TYPE)
+    _EuVehicleCategoryCode_euVehicleCategoryL = ENUM(name=u'euVehicleCategoryL', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ElectronicRegistrationIdentificationVehicleDataModule', 'EuVehicleCategoryL')))
+    _EuVehicleCategoryCode_euVehicleCategoryM = ENUM(name=u'euVehicleCategoryM', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ElectronicRegistrationIdentificationVehicleDataModule', 'EuVehicleCategoryM')))
+    _EuVehicleCategoryCode_euVehicleCategoryN = ENUM(name=u'euVehicleCategoryN', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ElectronicRegistrationIdentificationVehicleDataModule', 'EuVehicleCategoryN')))
+    _EuVehicleCategoryCode_euVehicleCategoryO = ENUM(name=u'euVehicleCategoryO', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ElectronicRegistrationIdentificationVehicleDataModule', 'EuVehicleCategoryO')))
+    _EuVehicleCategoryCode_euVehilcleCategoryT = NULL(name=u'euVehilcleCategoryT', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _EuVehicleCategoryCode_euVehilcleCategoryG = NULL(name=u'euVehilcleCategoryG', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     EuVehicleCategoryCode._cont = ASN1Dict([
-        ('euVehicleCategoryL', _EuVehicleCategoryCode_euVehicleCategoryL),
-        ('euVehicleCategoryM', _EuVehicleCategoryCode_euVehicleCategoryM),
-        ('euVehicleCategoryN', _EuVehicleCategoryCode_euVehicleCategoryN),
-        ('euVehicleCategoryO', _EuVehicleCategoryCode_euVehicleCategoryO),
-        ('euVehilcleCategoryT', _EuVehicleCategoryCode_euVehilcleCategoryT),
-        ('euVehilcleCategoryG', _EuVehicleCategoryCode_euVehilcleCategoryG),
+        (u'euVehicleCategoryL', _EuVehicleCategoryCode_euVehicleCategoryL),
+        (u'euVehicleCategoryM', _EuVehicleCategoryCode_euVehicleCategoryM),
+        (u'euVehicleCategoryN', _EuVehicleCategoryCode_euVehicleCategoryN),
+        (u'euVehicleCategoryO', _EuVehicleCategoryCode_euVehicleCategoryO),
+        (u'euVehilcleCategoryT', _EuVehicleCategoryCode_euVehilcleCategoryT),
+        (u'euVehilcleCategoryG', _EuVehicleCategoryCode_euVehilcleCategoryG),
         ])
     EuVehicleCategoryCode._ext = None
     
     #-----< EuVehicleCategoryL >-----#
-    EuVehicleCategoryL = ENUM(name='EuVehicleCategoryL', mode=MODE_TYPE)
-    EuVehicleCategoryL._cont = ASN1Dict([('l1', 0), ('l2', 1), ('l3', 2), ('l4', 3), ('l5', 4), ('l6', 5), ('l7', 6)])
+    EuVehicleCategoryL = ENUM(name=u'EuVehicleCategoryL', mode=MODE_TYPE)
+    EuVehicleCategoryL._cont = ASN1Dict([(u'l1', 0), (u'l2', 1), (u'l3', 2), (u'l4', 3), (u'l5', 4), (u'l6', 5), (u'l7', 6)])
     EuVehicleCategoryL._ext = None
     
     #-----< EuVehicleCategoryM >-----#
-    EuVehicleCategoryM = ENUM(name='EuVehicleCategoryM', mode=MODE_TYPE)
-    EuVehicleCategoryM._cont = ASN1Dict([('m1', 0), ('m2', 1), ('m3', 2)])
+    EuVehicleCategoryM = ENUM(name=u'EuVehicleCategoryM', mode=MODE_TYPE)
+    EuVehicleCategoryM._cont = ASN1Dict([(u'm1', 0), (u'm2', 1), (u'm3', 2)])
     EuVehicleCategoryM._ext = None
     
     #-----< EuVehicleCategoryN >-----#
-    EuVehicleCategoryN = ENUM(name='EuVehicleCategoryN', mode=MODE_TYPE)
-    EuVehicleCategoryN._cont = ASN1Dict([('n1', 0), ('n2', 1), ('n3', 2)])
+    EuVehicleCategoryN = ENUM(name=u'EuVehicleCategoryN', mode=MODE_TYPE)
+    EuVehicleCategoryN._cont = ASN1Dict([(u'n1', 0), (u'n2', 1), (u'n3', 2)])
     EuVehicleCategoryN._ext = None
     
     #-----< EuVehicleCategoryO >-----#
-    EuVehicleCategoryO = ENUM(name='EuVehicleCategoryO', mode=MODE_TYPE)
-    EuVehicleCategoryO._cont = ASN1Dict([('o1', 0), ('o2', 1), ('o3', 2), ('o4', 3)])
+    EuVehicleCategoryO = ENUM(name=u'EuVehicleCategoryO', mode=MODE_TYPE)
+    EuVehicleCategoryO._cont = ASN1Dict([(u'o1', 0), (u'o2', 1), (u'o3', 2), (u'o4', 3)])
     EuVehicleCategoryO._ext = None
     
     #-----< Iso3833VehicleType >-----#
-    Iso3833VehicleType = INT(name='Iso3833VehicleType', mode=MODE_TYPE)
-    Iso3833VehicleType._cont = ASN1Dict([('passengerCar', 0), ('saloon', 1), ('convertibleSaloon', 2), ('pullmanSaloon', 3), ('stationWagon', 4), ('truckStationWagon', 5), ('coupe', 6), ('convertible', 7), ('multipurposePassengerCar', 8), ('forwardControlPassengerCar', 9), ('specialPassengerCar', 10), ('bus', 11), ('minibus', 12), ('urbanBus', 13), ('interurbanCoach', 14), ('longDistanceCoach', 15), ('articulatedBus', 16), ('trolleyBus', 17), ('specialBus', 18), ('commercialVehicle', 19), ('specialCommercialVehicle', 20), ('specialVehicle', 21), ('trailingTowingVehicle', 22), ('semiTrailerTowingVehicle', 23), ('trailer', 24), ('busTrailer', 25), ('generalPurposeTrailer', 26), ('caravan', 27), ('specialTrailer', 28), ('semiTrailer', 29), ('busSemiTrailer', 30), ('generalPurposeSemiTrailer', 31), ('specialSemiTrailer', 32), ('roadTrain', 33), ('passengerRoadTrain', 34), ('articulatedRoadTrain', 35), ('doubleRoadTrain', 36), ('compositeRoadTrain', 37), ('specialRoadTrain', 38), ('moped', 39), ('motorCycle', 40)])
+    Iso3833VehicleType = INT(name=u'Iso3833VehicleType', mode=MODE_TYPE)
+    Iso3833VehicleType._cont = ASN1Dict([(u'passengerCar', 0), (u'saloon', 1), (u'convertibleSaloon', 2), (u'pullmanSaloon', 3), (u'stationWagon', 4), (u'truckStationWagon', 5), (u'coupe', 6), (u'convertible', 7), (u'multipurposePassengerCar', 8), (u'forwardControlPassengerCar', 9), (u'specialPassengerCar', 10), (u'bus', 11), (u'minibus', 12), (u'urbanBus', 13), (u'interurbanCoach', 14), (u'longDistanceCoach', 15), (u'articulatedBus', 16), (u'trolleyBus', 17), (u'specialBus', 18), (u'commercialVehicle', 19), (u'specialCommercialVehicle', 20), (u'specialVehicle', 21), (u'trailingTowingVehicle', 22), (u'semiTrailerTowingVehicle', 23), (u'trailer', 24), (u'busTrailer', 25), (u'generalPurposeTrailer', 26), (u'caravan', 27), (u'specialTrailer', 28), (u'semiTrailer', 29), (u'busSemiTrailer', 30), (u'generalPurposeSemiTrailer', 31), (u'specialSemiTrailer', 32), (u'roadTrain', 33), (u'passengerRoadTrain', 34), (u'articulatedRoadTrain', 35), (u'doubleRoadTrain', 36), (u'compositeRoadTrain', 37), (u'specialRoadTrain', 38), (u'moped', 39), (u'motorCycle', 40)])
     Iso3833VehicleType._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=255)], ev=None, er=[])
     
     _all_ = [
@@ -3845,282 +3845,282 @@ class ElectronicRegistrationIdentificationVehicleDataModule:
 
 class ITS_Container:
 
-    _name_  = 'ITS-Container'
+    _name_  = u'ITS-Container'
     _oid_   = [0, 4, 0, 5, 1, 102894, 2, 2]
     
     _obj_ = [
-        'ItsPduHeader',
-        'StationID',
-        'ReferencePosition',
-        'DeltaReferencePosition',
-        'Longitude',
-        'Latitude',
-        'Altitude',
-        'AltitudeValue',
-        'AltitudeConfidence',
-        'DeltaLongitude',
-        'DeltaLatitude',
-        'DeltaAltitude',
-        'PosConfidenceEllipse',
-        'PathPoint',
-        'PathDeltaTime',
-        'PtActivation',
-        'PtActivationType',
-        'PtActivationData',
-        'AccelerationControl',
-        'SemiAxisLength',
-        'CauseCode',
-        'CauseCodeType',
-        'SubCauseCodeType',
-        'TrafficConditionSubCauseCode',
-        'AccidentSubCauseCode',
-        'RoadworksSubCauseCode',
-        'HumanPresenceOnTheRoadSubCauseCode',
-        'WrongWayDrivingSubCauseCode',
-        'AdverseWeatherCondition-ExtremeWeatherConditionSubCauseCode',
-        'AdverseWeatherCondition-AdhesionSubCauseCode',
-        'AdverseWeatherCondition-VisibilitySubCauseCode',
-        'AdverseWeatherCondition-PrecipitationSubCauseCode',
-        'SlowVehicleSubCauseCode',
-        'StationaryVehicleSubCauseCode',
-        'HumanProblemSubCauseCode',
-        'EmergencyVehicleApproachingSubCauseCode',
-        'HazardousLocation-DangerousCurveSubCauseCode',
-        'HazardousLocation-SurfaceConditionSubCauseCode',
-        'HazardousLocation-ObstacleOnTheRoadSubCauseCode',
-        'HazardousLocation-AnimalOnTheRoadSubCauseCode',
-        'CollisionRiskSubCauseCode',
-        'SignalViolationSubCauseCode',
-        'RescueAndRecoveryWorkInProgressSubCauseCode',
-        'DangerousEndOfQueueSubCauseCode',
-        'DangerousSituationSubCauseCode',
-        'VehicleBreakdownSubCauseCode',
-        'PostCrashSubCauseCode',
-        'Curvature',
-        'CurvatureValue',
-        'CurvatureConfidence',
-        'CurvatureCalculationMode',
-        'Heading',
-        'HeadingValue',
-        'HeadingConfidence',
-        'LanePosition',
-        'ClosedLanes',
-        'HardShoulderStatus',
-        'DrivingLaneStatus',
-        'PerformanceClass',
-        'SpeedValue',
-        'SpeedConfidence',
-        'VehicleMass',
-        'Speed',
-        'DriveDirection',
-        'EmbarkationStatus',
-        'LongitudinalAcceleration',
-        'LongitudinalAccelerationValue',
-        'AccelerationConfidence',
-        'LateralAcceleration',
-        'LateralAccelerationValue',
-        'VerticalAcceleration',
-        'VerticalAccelerationValue',
-        'StationType',
-        'ExteriorLights',
-        'DangerousGoodsBasic',
-        'DangerousGoodsExtended',
-        'SpecialTransportType',
-        'LightBarSirenInUse',
-        'HeightLonCarr',
-        'PosLonCarr',
-        'PosPillar',
-        'PosCentMass',
-        'RequestResponseIndication',
-        'SpeedLimit',
-        'StationarySince',
-        'Temperature',
-        'TrafficRule',
-        'WheelBaseVehicle',
-        'TurningRadius',
-        'PosFrontAx',
-        'PositionOfOccupants',
-        'PositioningSolutionType',
-        'VehicleIdentification',
-        'WMInumber',
-        'VDS',
-        'EnergyStorageType',
-        'VehicleLength',
-        'VehicleLengthValue',
-        'VehicleLengthConfidenceIndication',
-        'VehicleWidth',
-        'PathHistory',
-        'EmergencyPriority',
-        'InformationQuality',
-        'RoadType',
-        'SteeringWheelAngle',
-        'SteeringWheelAngleValue',
-        'SteeringWheelAngleConfidence',
-        'TimestampIts',
-        'VehicleRole',
-        'YawRate',
-        'YawRateValue',
-        'YawRateConfidence',
-        'ProtectedZoneType',
-        'RelevanceDistance',
-        'RelevanceTrafficDirection',
-        'TransmissionInterval',
-        'ValidityDuration',
-        'ActionID',
-        'ItineraryPath',
-        'ProtectedCommunicationZone',
-        'Traces',
-        'NumberOfOccupants',
-        'SequenceNumber',
-        'PositionOfPillars',
-        'RestrictedTypes',
-        'EventHistory',
-        'EventPoint',
-        'ProtectedCommunicationZonesRSU',
-        'CenDsrcTollingZone',
-        'ProtectedZoneRadius',
-        'ProtectedZoneID',
-        'CenDsrcTollingZoneID',
-        'DigitalMap',
-        'OpeningDaysHours',
-        'PhoneNumber',
+        u'ItsPduHeader',
+        u'StationID',
+        u'ReferencePosition',
+        u'DeltaReferencePosition',
+        u'Longitude',
+        u'Latitude',
+        u'Altitude',
+        u'AltitudeValue',
+        u'AltitudeConfidence',
+        u'DeltaLongitude',
+        u'DeltaLatitude',
+        u'DeltaAltitude',
+        u'PosConfidenceEllipse',
+        u'PathPoint',
+        u'PathDeltaTime',
+        u'PtActivation',
+        u'PtActivationType',
+        u'PtActivationData',
+        u'AccelerationControl',
+        u'SemiAxisLength',
+        u'CauseCode',
+        u'CauseCodeType',
+        u'SubCauseCodeType',
+        u'TrafficConditionSubCauseCode',
+        u'AccidentSubCauseCode',
+        u'RoadworksSubCauseCode',
+        u'HumanPresenceOnTheRoadSubCauseCode',
+        u'WrongWayDrivingSubCauseCode',
+        u'AdverseWeatherCondition-ExtremeWeatherConditionSubCauseCode',
+        u'AdverseWeatherCondition-AdhesionSubCauseCode',
+        u'AdverseWeatherCondition-VisibilitySubCauseCode',
+        u'AdverseWeatherCondition-PrecipitationSubCauseCode',
+        u'SlowVehicleSubCauseCode',
+        u'StationaryVehicleSubCauseCode',
+        u'HumanProblemSubCauseCode',
+        u'EmergencyVehicleApproachingSubCauseCode',
+        u'HazardousLocation-DangerousCurveSubCauseCode',
+        u'HazardousLocation-SurfaceConditionSubCauseCode',
+        u'HazardousLocation-ObstacleOnTheRoadSubCauseCode',
+        u'HazardousLocation-AnimalOnTheRoadSubCauseCode',
+        u'CollisionRiskSubCauseCode',
+        u'SignalViolationSubCauseCode',
+        u'RescueAndRecoveryWorkInProgressSubCauseCode',
+        u'DangerousEndOfQueueSubCauseCode',
+        u'DangerousSituationSubCauseCode',
+        u'VehicleBreakdownSubCauseCode',
+        u'PostCrashSubCauseCode',
+        u'Curvature',
+        u'CurvatureValue',
+        u'CurvatureConfidence',
+        u'CurvatureCalculationMode',
+        u'Heading',
+        u'HeadingValue',
+        u'HeadingConfidence',
+        u'LanePosition',
+        u'ClosedLanes',
+        u'HardShoulderStatus',
+        u'DrivingLaneStatus',
+        u'PerformanceClass',
+        u'SpeedValue',
+        u'SpeedConfidence',
+        u'VehicleMass',
+        u'Speed',
+        u'DriveDirection',
+        u'EmbarkationStatus',
+        u'LongitudinalAcceleration',
+        u'LongitudinalAccelerationValue',
+        u'AccelerationConfidence',
+        u'LateralAcceleration',
+        u'LateralAccelerationValue',
+        u'VerticalAcceleration',
+        u'VerticalAccelerationValue',
+        u'StationType',
+        u'ExteriorLights',
+        u'DangerousGoodsBasic',
+        u'DangerousGoodsExtended',
+        u'SpecialTransportType',
+        u'LightBarSirenInUse',
+        u'HeightLonCarr',
+        u'PosLonCarr',
+        u'PosPillar',
+        u'PosCentMass',
+        u'RequestResponseIndication',
+        u'SpeedLimit',
+        u'StationarySince',
+        u'Temperature',
+        u'TrafficRule',
+        u'WheelBaseVehicle',
+        u'TurningRadius',
+        u'PosFrontAx',
+        u'PositionOfOccupants',
+        u'PositioningSolutionType',
+        u'VehicleIdentification',
+        u'WMInumber',
+        u'VDS',
+        u'EnergyStorageType',
+        u'VehicleLength',
+        u'VehicleLengthValue',
+        u'VehicleLengthConfidenceIndication',
+        u'VehicleWidth',
+        u'PathHistory',
+        u'EmergencyPriority',
+        u'InformationQuality',
+        u'RoadType',
+        u'SteeringWheelAngle',
+        u'SteeringWheelAngleValue',
+        u'SteeringWheelAngleConfidence',
+        u'TimestampIts',
+        u'VehicleRole',
+        u'YawRate',
+        u'YawRateValue',
+        u'YawRateConfidence',
+        u'ProtectedZoneType',
+        u'RelevanceDistance',
+        u'RelevanceTrafficDirection',
+        u'TransmissionInterval',
+        u'ValidityDuration',
+        u'ActionID',
+        u'ItineraryPath',
+        u'ProtectedCommunicationZone',
+        u'Traces',
+        u'NumberOfOccupants',
+        u'SequenceNumber',
+        u'PositionOfPillars',
+        u'RestrictedTypes',
+        u'EventHistory',
+        u'EventPoint',
+        u'ProtectedCommunicationZonesRSU',
+        u'CenDsrcTollingZone',
+        u'ProtectedZoneRadius',
+        u'ProtectedZoneID',
+        u'CenDsrcTollingZoneID',
+        u'DigitalMap',
+        u'OpeningDaysHours',
+        u'PhoneNumber',
         ]
     _type_ = [
-        'ItsPduHeader',
-        'StationID',
-        'ReferencePosition',
-        'DeltaReferencePosition',
-        'Longitude',
-        'Latitude',
-        'Altitude',
-        'AltitudeValue',
-        'AltitudeConfidence',
-        'DeltaLongitude',
-        'DeltaLatitude',
-        'DeltaAltitude',
-        'PosConfidenceEllipse',
-        'PathPoint',
-        'PathDeltaTime',
-        'PtActivation',
-        'PtActivationType',
-        'PtActivationData',
-        'AccelerationControl',
-        'SemiAxisLength',
-        'CauseCode',
-        'CauseCodeType',
-        'SubCauseCodeType',
-        'TrafficConditionSubCauseCode',
-        'AccidentSubCauseCode',
-        'RoadworksSubCauseCode',
-        'HumanPresenceOnTheRoadSubCauseCode',
-        'WrongWayDrivingSubCauseCode',
-        'AdverseWeatherCondition-ExtremeWeatherConditionSubCauseCode',
-        'AdverseWeatherCondition-AdhesionSubCauseCode',
-        'AdverseWeatherCondition-VisibilitySubCauseCode',
-        'AdverseWeatherCondition-PrecipitationSubCauseCode',
-        'SlowVehicleSubCauseCode',
-        'StationaryVehicleSubCauseCode',
-        'HumanProblemSubCauseCode',
-        'EmergencyVehicleApproachingSubCauseCode',
-        'HazardousLocation-DangerousCurveSubCauseCode',
-        'HazardousLocation-SurfaceConditionSubCauseCode',
-        'HazardousLocation-ObstacleOnTheRoadSubCauseCode',
-        'HazardousLocation-AnimalOnTheRoadSubCauseCode',
-        'CollisionRiskSubCauseCode',
-        'SignalViolationSubCauseCode',
-        'RescueAndRecoveryWorkInProgressSubCauseCode',
-        'DangerousEndOfQueueSubCauseCode',
-        'DangerousSituationSubCauseCode',
-        'VehicleBreakdownSubCauseCode',
-        'PostCrashSubCauseCode',
-        'Curvature',
-        'CurvatureValue',
-        'CurvatureConfidence',
-        'CurvatureCalculationMode',
-        'Heading',
-        'HeadingValue',
-        'HeadingConfidence',
-        'LanePosition',
-        'ClosedLanes',
-        'HardShoulderStatus',
-        'DrivingLaneStatus',
-        'PerformanceClass',
-        'SpeedValue',
-        'SpeedConfidence',
-        'VehicleMass',
-        'Speed',
-        'DriveDirection',
-        'EmbarkationStatus',
-        'LongitudinalAcceleration',
-        'LongitudinalAccelerationValue',
-        'AccelerationConfidence',
-        'LateralAcceleration',
-        'LateralAccelerationValue',
-        'VerticalAcceleration',
-        'VerticalAccelerationValue',
-        'StationType',
-        'ExteriorLights',
-        'DangerousGoodsBasic',
-        'DangerousGoodsExtended',
-        'SpecialTransportType',
-        'LightBarSirenInUse',
-        'HeightLonCarr',
-        'PosLonCarr',
-        'PosPillar',
-        'PosCentMass',
-        'RequestResponseIndication',
-        'SpeedLimit',
-        'StationarySince',
-        'Temperature',
-        'TrafficRule',
-        'WheelBaseVehicle',
-        'TurningRadius',
-        'PosFrontAx',
-        'PositionOfOccupants',
-        'PositioningSolutionType',
-        'VehicleIdentification',
-        'WMInumber',
-        'VDS',
-        'EnergyStorageType',
-        'VehicleLength',
-        'VehicleLengthValue',
-        'VehicleLengthConfidenceIndication',
-        'VehicleWidth',
-        'PathHistory',
-        'EmergencyPriority',
-        'InformationQuality',
-        'RoadType',
-        'SteeringWheelAngle',
-        'SteeringWheelAngleValue',
-        'SteeringWheelAngleConfidence',
-        'TimestampIts',
-        'VehicleRole',
-        'YawRate',
-        'YawRateValue',
-        'YawRateConfidence',
-        'ProtectedZoneType',
-        'RelevanceDistance',
-        'RelevanceTrafficDirection',
-        'TransmissionInterval',
-        'ValidityDuration',
-        'ActionID',
-        'ItineraryPath',
-        'ProtectedCommunicationZone',
-        'Traces',
-        'NumberOfOccupants',
-        'SequenceNumber',
-        'PositionOfPillars',
-        'RestrictedTypes',
-        'EventHistory',
-        'EventPoint',
-        'ProtectedCommunicationZonesRSU',
-        'CenDsrcTollingZone',
-        'ProtectedZoneRadius',
-        'ProtectedZoneID',
-        'CenDsrcTollingZoneID',
-        'DigitalMap',
-        'OpeningDaysHours',
-        'PhoneNumber',
+        u'ItsPduHeader',
+        u'StationID',
+        u'ReferencePosition',
+        u'DeltaReferencePosition',
+        u'Longitude',
+        u'Latitude',
+        u'Altitude',
+        u'AltitudeValue',
+        u'AltitudeConfidence',
+        u'DeltaLongitude',
+        u'DeltaLatitude',
+        u'DeltaAltitude',
+        u'PosConfidenceEllipse',
+        u'PathPoint',
+        u'PathDeltaTime',
+        u'PtActivation',
+        u'PtActivationType',
+        u'PtActivationData',
+        u'AccelerationControl',
+        u'SemiAxisLength',
+        u'CauseCode',
+        u'CauseCodeType',
+        u'SubCauseCodeType',
+        u'TrafficConditionSubCauseCode',
+        u'AccidentSubCauseCode',
+        u'RoadworksSubCauseCode',
+        u'HumanPresenceOnTheRoadSubCauseCode',
+        u'WrongWayDrivingSubCauseCode',
+        u'AdverseWeatherCondition-ExtremeWeatherConditionSubCauseCode',
+        u'AdverseWeatherCondition-AdhesionSubCauseCode',
+        u'AdverseWeatherCondition-VisibilitySubCauseCode',
+        u'AdverseWeatherCondition-PrecipitationSubCauseCode',
+        u'SlowVehicleSubCauseCode',
+        u'StationaryVehicleSubCauseCode',
+        u'HumanProblemSubCauseCode',
+        u'EmergencyVehicleApproachingSubCauseCode',
+        u'HazardousLocation-DangerousCurveSubCauseCode',
+        u'HazardousLocation-SurfaceConditionSubCauseCode',
+        u'HazardousLocation-ObstacleOnTheRoadSubCauseCode',
+        u'HazardousLocation-AnimalOnTheRoadSubCauseCode',
+        u'CollisionRiskSubCauseCode',
+        u'SignalViolationSubCauseCode',
+        u'RescueAndRecoveryWorkInProgressSubCauseCode',
+        u'DangerousEndOfQueueSubCauseCode',
+        u'DangerousSituationSubCauseCode',
+        u'VehicleBreakdownSubCauseCode',
+        u'PostCrashSubCauseCode',
+        u'Curvature',
+        u'CurvatureValue',
+        u'CurvatureConfidence',
+        u'CurvatureCalculationMode',
+        u'Heading',
+        u'HeadingValue',
+        u'HeadingConfidence',
+        u'LanePosition',
+        u'ClosedLanes',
+        u'HardShoulderStatus',
+        u'DrivingLaneStatus',
+        u'PerformanceClass',
+        u'SpeedValue',
+        u'SpeedConfidence',
+        u'VehicleMass',
+        u'Speed',
+        u'DriveDirection',
+        u'EmbarkationStatus',
+        u'LongitudinalAcceleration',
+        u'LongitudinalAccelerationValue',
+        u'AccelerationConfidence',
+        u'LateralAcceleration',
+        u'LateralAccelerationValue',
+        u'VerticalAcceleration',
+        u'VerticalAccelerationValue',
+        u'StationType',
+        u'ExteriorLights',
+        u'DangerousGoodsBasic',
+        u'DangerousGoodsExtended',
+        u'SpecialTransportType',
+        u'LightBarSirenInUse',
+        u'HeightLonCarr',
+        u'PosLonCarr',
+        u'PosPillar',
+        u'PosCentMass',
+        u'RequestResponseIndication',
+        u'SpeedLimit',
+        u'StationarySince',
+        u'Temperature',
+        u'TrafficRule',
+        u'WheelBaseVehicle',
+        u'TurningRadius',
+        u'PosFrontAx',
+        u'PositionOfOccupants',
+        u'PositioningSolutionType',
+        u'VehicleIdentification',
+        u'WMInumber',
+        u'VDS',
+        u'EnergyStorageType',
+        u'VehicleLength',
+        u'VehicleLengthValue',
+        u'VehicleLengthConfidenceIndication',
+        u'VehicleWidth',
+        u'PathHistory',
+        u'EmergencyPriority',
+        u'InformationQuality',
+        u'RoadType',
+        u'SteeringWheelAngle',
+        u'SteeringWheelAngleValue',
+        u'SteeringWheelAngleConfidence',
+        u'TimestampIts',
+        u'VehicleRole',
+        u'YawRate',
+        u'YawRateValue',
+        u'YawRateConfidence',
+        u'ProtectedZoneType',
+        u'RelevanceDistance',
+        u'RelevanceTrafficDirection',
+        u'TransmissionInterval',
+        u'ValidityDuration',
+        u'ActionID',
+        u'ItineraryPath',
+        u'ProtectedCommunicationZone',
+        u'Traces',
+        u'NumberOfOccupants',
+        u'SequenceNumber',
+        u'PositionOfPillars',
+        u'RestrictedTypes',
+        u'EventHistory',
+        u'EventPoint',
+        u'ProtectedCommunicationZonesRSU',
+        u'CenDsrcTollingZone',
+        u'ProtectedZoneRadius',
+        u'ProtectedZoneID',
+        u'CenDsrcTollingZoneID',
+        u'DigitalMap',
+        u'OpeningDaysHours',
+        u'PhoneNumber',
         ]
     _set_ = [
         ]
@@ -4132,833 +4132,833 @@ class ITS_Container:
         ]
     
     #-----< ItsPduHeader >-----#
-    ItsPduHeader = SEQ(name='ItsPduHeader', mode=MODE_TYPE)
-    _ItsPduHeader_protocolVersion = INT(name='protocolVersion', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    ItsPduHeader = SEQ(name=u'ItsPduHeader', mode=MODE_TYPE)
+    _ItsPduHeader_protocolVersion = INT(name=u'protocolVersion', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     _ItsPduHeader_protocolVersion._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=255)], ev=None, er=[])
-    _ItsPduHeader_messageID = INT(name='messageID', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _ItsPduHeader_messageID._cont = ASN1Dict([('denm', 1), ('cam', 2), ('poi', 3), ('spatem', 4), ('mapem', 5), ('ivim', 6), ('ev-rsr', 7), ('tistpgtransaction', 8), ('srem', 9), ('ssem', 10), ('evcsn', 11), ('saem', 12), ('rtcmem', 13)])
+    _ItsPduHeader_messageID = INT(name=u'messageID', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _ItsPduHeader_messageID._cont = ASN1Dict([(u'denm', 1), (u'cam', 2), (u'poi', 3), (u'spatem', 4), (u'mapem', 5), (u'ivim', 6), (u'ev-rsr', 7), (u'tistpgtransaction', 8), (u'srem', 9), (u'ssem', 10), (u'evcsn', 11), (u'saem', 12), (u'rtcmem', 13)])
     _ItsPduHeader_messageID._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=255)], ev=None, er=[])
-    _ItsPduHeader_stationID = INT(name='stationID', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'StationID')))
+    _ItsPduHeader_stationID = INT(name=u'stationID', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'StationID')))
     ItsPduHeader._cont = ASN1Dict([
-        ('protocolVersion', _ItsPduHeader_protocolVersion),
-        ('messageID', _ItsPduHeader_messageID),
-        ('stationID', _ItsPduHeader_stationID),
+        (u'protocolVersion', _ItsPduHeader_protocolVersion),
+        (u'messageID', _ItsPduHeader_messageID),
+        (u'stationID', _ItsPduHeader_stationID),
         ])
     ItsPduHeader._ext = None
     
     #-----< StationID >-----#
-    StationID = INT(name='StationID', mode=MODE_TYPE)
+    StationID = INT(name=u'StationID', mode=MODE_TYPE)
     StationID._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=4294967295)], ev=None, er=[])
     
     #-----< ReferencePosition >-----#
-    ReferencePosition = SEQ(name='ReferencePosition', mode=MODE_TYPE)
-    _ReferencePosition_latitude = INT(name='latitude', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'Latitude')))
-    _ReferencePosition_longitude = INT(name='longitude', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'Longitude')))
-    _ReferencePosition_positionConfidenceEllipse = SEQ(name='positionConfidenceEllipse', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'PosConfidenceEllipse')))
-    _ReferencePosition_altitude = SEQ(name='altitude', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'Altitude')))
+    ReferencePosition = SEQ(name=u'ReferencePosition', mode=MODE_TYPE)
+    _ReferencePosition_latitude = INT(name=u'latitude', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'Latitude')))
+    _ReferencePosition_longitude = INT(name=u'longitude', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'Longitude')))
+    _ReferencePosition_positionConfidenceEllipse = SEQ(name=u'positionConfidenceEllipse', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'PosConfidenceEllipse')))
+    _ReferencePosition_altitude = SEQ(name=u'altitude', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'Altitude')))
     ReferencePosition._cont = ASN1Dict([
-        ('latitude', _ReferencePosition_latitude),
-        ('longitude', _ReferencePosition_longitude),
-        ('positionConfidenceEllipse', _ReferencePosition_positionConfidenceEllipse),
-        ('altitude', _ReferencePosition_altitude),
+        (u'latitude', _ReferencePosition_latitude),
+        (u'longitude', _ReferencePosition_longitude),
+        (u'positionConfidenceEllipse', _ReferencePosition_positionConfidenceEllipse),
+        (u'altitude', _ReferencePosition_altitude),
         ])
     ReferencePosition._ext = None
     
     #-----< DeltaReferencePosition >-----#
-    DeltaReferencePosition = SEQ(name='DeltaReferencePosition', mode=MODE_TYPE)
-    _DeltaReferencePosition_deltaLatitude = INT(name='deltaLatitude', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'DeltaLatitude')))
-    _DeltaReferencePosition_deltaLongitude = INT(name='deltaLongitude', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'DeltaLongitude')))
-    _DeltaReferencePosition_deltaAltitude = INT(name='deltaAltitude', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'DeltaAltitude')))
+    DeltaReferencePosition = SEQ(name=u'DeltaReferencePosition', mode=MODE_TYPE)
+    _DeltaReferencePosition_deltaLatitude = INT(name=u'deltaLatitude', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'DeltaLatitude')))
+    _DeltaReferencePosition_deltaLongitude = INT(name=u'deltaLongitude', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'DeltaLongitude')))
+    _DeltaReferencePosition_deltaAltitude = INT(name=u'deltaAltitude', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'DeltaAltitude')))
     DeltaReferencePosition._cont = ASN1Dict([
-        ('deltaLatitude', _DeltaReferencePosition_deltaLatitude),
-        ('deltaLongitude', _DeltaReferencePosition_deltaLongitude),
-        ('deltaAltitude', _DeltaReferencePosition_deltaAltitude),
+        (u'deltaLatitude', _DeltaReferencePosition_deltaLatitude),
+        (u'deltaLongitude', _DeltaReferencePosition_deltaLongitude),
+        (u'deltaAltitude', _DeltaReferencePosition_deltaAltitude),
         ])
     DeltaReferencePosition._ext = None
     
     #-----< Longitude >-----#
-    Longitude = INT(name='Longitude', mode=MODE_TYPE)
-    Longitude._cont = ASN1Dict([('oneMicrodegreeEast', 10), ('oneMicrodegreeWest', -10), ('unavailable', 1800000001)])
+    Longitude = INT(name=u'Longitude', mode=MODE_TYPE)
+    Longitude._cont = ASN1Dict([(u'oneMicrodegreeEast', 10), (u'oneMicrodegreeWest', -10), (u'unavailable', 1800000001)])
     Longitude._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=-1800000000, ub=1800000001)], ev=None, er=[])
     
     #-----< Latitude >-----#
-    Latitude = INT(name='Latitude', mode=MODE_TYPE)
-    Latitude._cont = ASN1Dict([('oneMicrodegreeNorth', 10), ('oneMicrodegreeSouth', -10), ('unavailable', 900000001)])
+    Latitude = INT(name=u'Latitude', mode=MODE_TYPE)
+    Latitude._cont = ASN1Dict([(u'oneMicrodegreeNorth', 10), (u'oneMicrodegreeSouth', -10), (u'unavailable', 900000001)])
     Latitude._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=-900000000, ub=900000001)], ev=None, er=[])
     
     #-----< Altitude >-----#
-    Altitude = SEQ(name='Altitude', mode=MODE_TYPE)
-    _Altitude_altitudeValue = INT(name='altitudeValue', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'AltitudeValue')))
-    _Altitude_altitudeConfidence = ENUM(name='altitudeConfidence', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'AltitudeConfidence')))
+    Altitude = SEQ(name=u'Altitude', mode=MODE_TYPE)
+    _Altitude_altitudeValue = INT(name=u'altitudeValue', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'AltitudeValue')))
+    _Altitude_altitudeConfidence = ENUM(name=u'altitudeConfidence', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'AltitudeConfidence')))
     Altitude._cont = ASN1Dict([
-        ('altitudeValue', _Altitude_altitudeValue),
-        ('altitudeConfidence', _Altitude_altitudeConfidence),
+        (u'altitudeValue', _Altitude_altitudeValue),
+        (u'altitudeConfidence', _Altitude_altitudeConfidence),
         ])
     Altitude._ext = None
     
     #-----< AltitudeValue >-----#
-    AltitudeValue = INT(name='AltitudeValue', mode=MODE_TYPE)
-    AltitudeValue._cont = ASN1Dict([('referenceEllipsoidSurface', 0), ('oneCentimeter', 1), ('unavailable', 800001)])
+    AltitudeValue = INT(name=u'AltitudeValue', mode=MODE_TYPE)
+    AltitudeValue._cont = ASN1Dict([(u'referenceEllipsoidSurface', 0), (u'oneCentimeter', 1), (u'unavailable', 800001)])
     AltitudeValue._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=-100000, ub=800001)], ev=None, er=[])
     
     #-----< AltitudeConfidence >-----#
-    AltitudeConfidence = ENUM(name='AltitudeConfidence', mode=MODE_TYPE)
-    AltitudeConfidence._cont = ASN1Dict([('alt-000-01', 0), ('alt-000-02', 1), ('alt-000-05', 2), ('alt-000-10', 3), ('alt-000-20', 4), ('alt-000-50', 5), ('alt-001-00', 6), ('alt-002-00', 7), ('alt-005-00', 8), ('alt-010-00', 9), ('alt-020-00', 10), ('alt-050-00', 11), ('alt-100-00', 12), ('alt-200-00', 13), ('outOfRange', 14), ('unavailable', 15)])
+    AltitudeConfidence = ENUM(name=u'AltitudeConfidence', mode=MODE_TYPE)
+    AltitudeConfidence._cont = ASN1Dict([(u'alt-000-01', 0), (u'alt-000-02', 1), (u'alt-000-05', 2), (u'alt-000-10', 3), (u'alt-000-20', 4), (u'alt-000-50', 5), (u'alt-001-00', 6), (u'alt-002-00', 7), (u'alt-005-00', 8), (u'alt-010-00', 9), (u'alt-020-00', 10), (u'alt-050-00', 11), (u'alt-100-00', 12), (u'alt-200-00', 13), (u'outOfRange', 14), (u'unavailable', 15)])
     AltitudeConfidence._ext = None
     
     #-----< DeltaLongitude >-----#
-    DeltaLongitude = INT(name='DeltaLongitude', mode=MODE_TYPE)
-    DeltaLongitude._cont = ASN1Dict([('oneMicrodegreeEast', 10), ('oneMicrodegreeWest', -10), ('unavailable', 131072)])
+    DeltaLongitude = INT(name=u'DeltaLongitude', mode=MODE_TYPE)
+    DeltaLongitude._cont = ASN1Dict([(u'oneMicrodegreeEast', 10), (u'oneMicrodegreeWest', -10), (u'unavailable', 131072)])
     DeltaLongitude._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=-131071, ub=131072)], ev=None, er=[])
     
     #-----< DeltaLatitude >-----#
-    DeltaLatitude = INT(name='DeltaLatitude', mode=MODE_TYPE)
-    DeltaLatitude._cont = ASN1Dict([('oneMicrodegreeNorth', 10), ('oneMicrodegreeSouth', -10), ('unavailable', 131072)])
+    DeltaLatitude = INT(name=u'DeltaLatitude', mode=MODE_TYPE)
+    DeltaLatitude._cont = ASN1Dict([(u'oneMicrodegreeNorth', 10), (u'oneMicrodegreeSouth', -10), (u'unavailable', 131072)])
     DeltaLatitude._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=-131071, ub=131072)], ev=None, er=[])
     
     #-----< DeltaAltitude >-----#
-    DeltaAltitude = INT(name='DeltaAltitude', mode=MODE_TYPE)
-    DeltaAltitude._cont = ASN1Dict([('oneCentimeterUp', 1), ('oneCentimeterDown', -1), ('unavailable', 12800)])
+    DeltaAltitude = INT(name=u'DeltaAltitude', mode=MODE_TYPE)
+    DeltaAltitude._cont = ASN1Dict([(u'oneCentimeterUp', 1), (u'oneCentimeterDown', -1), (u'unavailable', 12800)])
     DeltaAltitude._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=-12700, ub=12800)], ev=None, er=[])
     
     #-----< PosConfidenceEllipse >-----#
-    PosConfidenceEllipse = SEQ(name='PosConfidenceEllipse', mode=MODE_TYPE)
-    _PosConfidenceEllipse_semiMajorConfidence = INT(name='semiMajorConfidence', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'SemiAxisLength')))
-    _PosConfidenceEllipse_semiMinorConfidence = INT(name='semiMinorConfidence', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'SemiAxisLength')))
-    _PosConfidenceEllipse_semiMajorOrientation = INT(name='semiMajorOrientation', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'HeadingValue')))
+    PosConfidenceEllipse = SEQ(name=u'PosConfidenceEllipse', mode=MODE_TYPE)
+    _PosConfidenceEllipse_semiMajorConfidence = INT(name=u'semiMajorConfidence', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'SemiAxisLength')))
+    _PosConfidenceEllipse_semiMinorConfidence = INT(name=u'semiMinorConfidence', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'SemiAxisLength')))
+    _PosConfidenceEllipse_semiMajorOrientation = INT(name=u'semiMajorOrientation', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'HeadingValue')))
     PosConfidenceEllipse._cont = ASN1Dict([
-        ('semiMajorConfidence', _PosConfidenceEllipse_semiMajorConfidence),
-        ('semiMinorConfidence', _PosConfidenceEllipse_semiMinorConfidence),
-        ('semiMajorOrientation', _PosConfidenceEllipse_semiMajorOrientation),
+        (u'semiMajorConfidence', _PosConfidenceEllipse_semiMajorConfidence),
+        (u'semiMinorConfidence', _PosConfidenceEllipse_semiMinorConfidence),
+        (u'semiMajorOrientation', _PosConfidenceEllipse_semiMajorOrientation),
         ])
     PosConfidenceEllipse._ext = None
     
     #-----< PathPoint >-----#
-    PathPoint = SEQ(name='PathPoint', mode=MODE_TYPE)
-    _PathPoint_pathPosition = SEQ(name='pathPosition', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'DeltaReferencePosition')))
-    _PathPoint_pathDeltaTime = INT(name='pathDeltaTime', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'PathDeltaTime')), opt=True)
+    PathPoint = SEQ(name=u'PathPoint', mode=MODE_TYPE)
+    _PathPoint_pathPosition = SEQ(name=u'pathPosition', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'DeltaReferencePosition')))
+    _PathPoint_pathDeltaTime = INT(name=u'pathDeltaTime', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'PathDeltaTime')), opt=True)
     PathPoint._cont = ASN1Dict([
-        ('pathPosition', _PathPoint_pathPosition),
-        ('pathDeltaTime', _PathPoint_pathDeltaTime),
+        (u'pathPosition', _PathPoint_pathPosition),
+        (u'pathDeltaTime', _PathPoint_pathDeltaTime),
         ])
     PathPoint._ext = None
     
     #-----< PathDeltaTime >-----#
-    PathDeltaTime = INT(name='PathDeltaTime', mode=MODE_TYPE)
-    PathDeltaTime._cont = ASN1Dict([('tenMilliSecondsInPast', 1)])
+    PathDeltaTime = INT(name=u'PathDeltaTime', mode=MODE_TYPE)
+    PathDeltaTime._cont = ASN1Dict([(u'tenMilliSecondsInPast', 1)])
     PathDeltaTime._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=65535)], ev=[], er=[])
     
     #-----< PtActivation >-----#
-    PtActivation = SEQ(name='PtActivation', mode=MODE_TYPE)
-    _PtActivation_ptActivationType = INT(name='ptActivationType', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'PtActivationType')))
-    _PtActivation_ptActivationData = OCT_STR(name='ptActivationData', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'PtActivationData')))
+    PtActivation = SEQ(name=u'PtActivation', mode=MODE_TYPE)
+    _PtActivation_ptActivationType = INT(name=u'ptActivationType', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'PtActivationType')))
+    _PtActivation_ptActivationData = OCT_STR(name=u'ptActivationData', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'PtActivationData')))
     PtActivation._cont = ASN1Dict([
-        ('ptActivationType', _PtActivation_ptActivationType),
-        ('ptActivationData', _PtActivation_ptActivationData),
+        (u'ptActivationType', _PtActivation_ptActivationType),
+        (u'ptActivationData', _PtActivation_ptActivationData),
         ])
     PtActivation._ext = None
     
     #-----< PtActivationType >-----#
-    PtActivationType = INT(name='PtActivationType', mode=MODE_TYPE)
-    PtActivationType._cont = ASN1Dict([('undefinedCodingType', 0), ('r09-16CodingType', 1), ('vdv-50149CodingType', 2)])
+    PtActivationType = INT(name=u'PtActivationType', mode=MODE_TYPE)
+    PtActivationType._cont = ASN1Dict([(u'undefinedCodingType', 0), (u'r09-16CodingType', 1), (u'vdv-50149CodingType', 2)])
     PtActivationType._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=255)], ev=None, er=[])
     
     #-----< PtActivationData >-----#
-    PtActivationData = OCT_STR(name='PtActivationData', mode=MODE_TYPE)
+    PtActivationData = OCT_STR(name=u'PtActivationData', mode=MODE_TYPE)
     PtActivationData._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=20)], ev=None, er=[])
     
     #-----< AccelerationControl >-----#
-    AccelerationControl = BIT_STR(name='AccelerationControl', mode=MODE_TYPE)
-    AccelerationControl._cont = ASN1Dict([('brakePedalEngaged', 0), ('gasPedalEngaged', 1), ('emergencyBrakeEngaged', 2), ('collisionWarningEngaged', 3), ('accEngaged', 4), ('cruiseControlEngaged', 5), ('speedLimiterEngaged', 6)])
+    AccelerationControl = BIT_STR(name=u'AccelerationControl', mode=MODE_TYPE)
+    AccelerationControl._cont = ASN1Dict([(u'brakePedalEngaged', 0), (u'gasPedalEngaged', 1), (u'emergencyBrakeEngaged', 2), (u'collisionWarningEngaged', 3), (u'accEngaged', 4), (u'cruiseControlEngaged', 5), (u'speedLimiterEngaged', 6)])
     AccelerationControl._const_sz = ASN1Set(rv=[7], rr=[], ev=None, er=[])
     
     #-----< SemiAxisLength >-----#
-    SemiAxisLength = INT(name='SemiAxisLength', mode=MODE_TYPE)
-    SemiAxisLength._cont = ASN1Dict([('oneCentimeter', 1), ('outOfRange', 4094), ('unavailable', 4095)])
+    SemiAxisLength = INT(name=u'SemiAxisLength', mode=MODE_TYPE)
+    SemiAxisLength._cont = ASN1Dict([(u'oneCentimeter', 1), (u'outOfRange', 4094), (u'unavailable', 4095)])
     SemiAxisLength._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=4095)], ev=None, er=[])
     
     #-----< CauseCode >-----#
-    CauseCode = SEQ(name='CauseCode', mode=MODE_TYPE)
-    _CauseCode_causeCode = INT(name='causeCode', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'CauseCodeType')))
-    _CauseCode_subCauseCode = INT(name='subCauseCode', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'SubCauseCodeType')))
+    CauseCode = SEQ(name=u'CauseCode', mode=MODE_TYPE)
+    _CauseCode_causeCode = INT(name=u'causeCode', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'CauseCodeType')))
+    _CauseCode_subCauseCode = INT(name=u'subCauseCode', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'SubCauseCodeType')))
     CauseCode._cont = ASN1Dict([
-        ('causeCode', _CauseCode_causeCode),
-        ('subCauseCode', _CauseCode_subCauseCode),
+        (u'causeCode', _CauseCode_causeCode),
+        (u'subCauseCode', _CauseCode_subCauseCode),
         ])
     CauseCode._ext = []
     
     #-----< CauseCodeType >-----#
-    CauseCodeType = INT(name='CauseCodeType', mode=MODE_TYPE)
-    CauseCodeType._cont = ASN1Dict([('reserved', 0), ('trafficCondition', 1), ('accident', 2), ('roadworks', 3), ('impassability', 5), ('adverseWeatherCondition-Adhesion', 6), ('aquaplannning', 7), ('hazardousLocation-SurfaceCondition', 9), ('hazardousLocation-ObstacleOnTheRoad', 10), ('hazardousLocation-AnimalOnTheRoad', 11), ('humanPresenceOnTheRoad', 12), ('wrongWayDriving', 14), ('rescueAndRecoveryWorkInProgress', 15), ('adverseWeatherCondition-ExtremeWeatherCondition', 17), ('adverseWeatherCondition-Visibility', 18), ('adverseWeatherCondition-Precipitation', 19), ('slowVehicle', 26), ('dangerousEndOfQueue', 27), ('vehicleBreakdown', 91), ('postCrash', 92), ('humanProblem', 93), ('stationaryVehicle', 94), ('emergencyVehicleApproaching', 95), ('hazardousLocation-DangerousCurve', 96), ('collisionRisk', 97), ('signalViolation', 98), ('dangerousSituation', 99)])
+    CauseCodeType = INT(name=u'CauseCodeType', mode=MODE_TYPE)
+    CauseCodeType._cont = ASN1Dict([(u'reserved', 0), (u'trafficCondition', 1), (u'accident', 2), (u'roadworks', 3), (u'impassability', 5), (u'adverseWeatherCondition-Adhesion', 6), (u'aquaplannning', 7), (u'hazardousLocation-SurfaceCondition', 9), (u'hazardousLocation-ObstacleOnTheRoad', 10), (u'hazardousLocation-AnimalOnTheRoad', 11), (u'humanPresenceOnTheRoad', 12), (u'wrongWayDriving', 14), (u'rescueAndRecoveryWorkInProgress', 15), (u'adverseWeatherCondition-ExtremeWeatherCondition', 17), (u'adverseWeatherCondition-Visibility', 18), (u'adverseWeatherCondition-Precipitation', 19), (u'slowVehicle', 26), (u'dangerousEndOfQueue', 27), (u'vehicleBreakdown', 91), (u'postCrash', 92), (u'humanProblem', 93), (u'stationaryVehicle', 94), (u'emergencyVehicleApproaching', 95), (u'hazardousLocation-DangerousCurve', 96), (u'collisionRisk', 97), (u'signalViolation', 98), (u'dangerousSituation', 99)])
     CauseCodeType._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=255)], ev=None, er=[])
     
     #-----< SubCauseCodeType >-----#
-    SubCauseCodeType = INT(name='SubCauseCodeType', mode=MODE_TYPE)
+    SubCauseCodeType = INT(name=u'SubCauseCodeType', mode=MODE_TYPE)
     SubCauseCodeType._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=255)], ev=None, er=[])
     
     #-----< TrafficConditionSubCauseCode >-----#
-    TrafficConditionSubCauseCode = INT(name='TrafficConditionSubCauseCode', mode=MODE_TYPE)
-    TrafficConditionSubCauseCode._cont = ASN1Dict([('unavailable', 0), ('increasedVolumeOfTraffic', 1), ('trafficJamSlowlyIncreasing', 2), ('trafficJamIncreasing', 3), ('trafficJamStronglyIncreasing', 4), ('trafficStationary', 5), ('trafficJamSlightlyDecreasing', 6), ('trafficJamDecreasing', 7), ('trafficJamStronglyDecreasing', 8)])
+    TrafficConditionSubCauseCode = INT(name=u'TrafficConditionSubCauseCode', mode=MODE_TYPE)
+    TrafficConditionSubCauseCode._cont = ASN1Dict([(u'unavailable', 0), (u'increasedVolumeOfTraffic', 1), (u'trafficJamSlowlyIncreasing', 2), (u'trafficJamIncreasing', 3), (u'trafficJamStronglyIncreasing', 4), (u'trafficStationary', 5), (u'trafficJamSlightlyDecreasing', 6), (u'trafficJamDecreasing', 7), (u'trafficJamStronglyDecreasing', 8)])
     TrafficConditionSubCauseCode._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=255)], ev=None, er=[])
     
     #-----< AccidentSubCauseCode >-----#
-    AccidentSubCauseCode = INT(name='AccidentSubCauseCode', mode=MODE_TYPE)
-    AccidentSubCauseCode._cont = ASN1Dict([('unavailable', 0), ('multiVehicleAccident', 1), ('heavyAccident', 2), ('accidentInvolvingLorry', 3), ('accidentInvolvingBus', 4), ('accidentInvolvingHazardousMaterials', 5), ('accidentOnOppositeLane', 6), ('unsecuredAccident', 7), ('assistanceRequested', 8)])
+    AccidentSubCauseCode = INT(name=u'AccidentSubCauseCode', mode=MODE_TYPE)
+    AccidentSubCauseCode._cont = ASN1Dict([(u'unavailable', 0), (u'multiVehicleAccident', 1), (u'heavyAccident', 2), (u'accidentInvolvingLorry', 3), (u'accidentInvolvingBus', 4), (u'accidentInvolvingHazardousMaterials', 5), (u'accidentOnOppositeLane', 6), (u'unsecuredAccident', 7), (u'assistanceRequested', 8)])
     AccidentSubCauseCode._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=255)], ev=None, er=[])
     
     #-----< RoadworksSubCauseCode >-----#
-    RoadworksSubCauseCode = INT(name='RoadworksSubCauseCode', mode=MODE_TYPE)
-    RoadworksSubCauseCode._cont = ASN1Dict([('unavailable', 0), ('majorRoadworks', 1), ('roadMarkingWork', 2), ('slowMovingRoadMaintenance', 3), ('shortTermStationaryRoadworks', 4), ('streetCleaning', 5), ('winterService', 6)])
+    RoadworksSubCauseCode = INT(name=u'RoadworksSubCauseCode', mode=MODE_TYPE)
+    RoadworksSubCauseCode._cont = ASN1Dict([(u'unavailable', 0), (u'majorRoadworks', 1), (u'roadMarkingWork', 2), (u'slowMovingRoadMaintenance', 3), (u'shortTermStationaryRoadworks', 4), (u'streetCleaning', 5), (u'winterService', 6)])
     RoadworksSubCauseCode._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=255)], ev=None, er=[])
     
     #-----< HumanPresenceOnTheRoadSubCauseCode >-----#
-    HumanPresenceOnTheRoadSubCauseCode = INT(name='HumanPresenceOnTheRoadSubCauseCode', mode=MODE_TYPE)
-    HumanPresenceOnTheRoadSubCauseCode._cont = ASN1Dict([('unavailable', 0), ('childrenOnRoadway', 1), ('cyclistOnRoadway', 2), ('motorcyclistOnRoadway', 3)])
+    HumanPresenceOnTheRoadSubCauseCode = INT(name=u'HumanPresenceOnTheRoadSubCauseCode', mode=MODE_TYPE)
+    HumanPresenceOnTheRoadSubCauseCode._cont = ASN1Dict([(u'unavailable', 0), (u'childrenOnRoadway', 1), (u'cyclistOnRoadway', 2), (u'motorcyclistOnRoadway', 3)])
     HumanPresenceOnTheRoadSubCauseCode._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=255)], ev=None, er=[])
     
     #-----< WrongWayDrivingSubCauseCode >-----#
-    WrongWayDrivingSubCauseCode = INT(name='WrongWayDrivingSubCauseCode', mode=MODE_TYPE)
-    WrongWayDrivingSubCauseCode._cont = ASN1Dict([('unavailable', 0), ('wrongLane', 1), ('wrongDirection', 2)])
+    WrongWayDrivingSubCauseCode = INT(name=u'WrongWayDrivingSubCauseCode', mode=MODE_TYPE)
+    WrongWayDrivingSubCauseCode._cont = ASN1Dict([(u'unavailable', 0), (u'wrongLane', 1), (u'wrongDirection', 2)])
     WrongWayDrivingSubCauseCode._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=255)], ev=None, er=[])
     
     #-----< AdverseWeatherCondition-ExtremeWeatherConditionSubCauseCode >-----#
-    AdverseWeatherCondition_ExtremeWeatherConditionSubCauseCode = INT(name='AdverseWeatherCondition-ExtremeWeatherConditionSubCauseCode', mode=MODE_TYPE)
-    AdverseWeatherCondition_ExtremeWeatherConditionSubCauseCode._cont = ASN1Dict([('unavailable', 0), ('strongWinds', 1), ('damagingHail', 2), ('hurricane', 3), ('thunderstorm', 4), ('tornado', 5), ('blizzard', 6)])
+    AdverseWeatherCondition_ExtremeWeatherConditionSubCauseCode = INT(name=u'AdverseWeatherCondition-ExtremeWeatherConditionSubCauseCode', mode=MODE_TYPE)
+    AdverseWeatherCondition_ExtremeWeatherConditionSubCauseCode._cont = ASN1Dict([(u'unavailable', 0), (u'strongWinds', 1), (u'damagingHail', 2), (u'hurricane', 3), (u'thunderstorm', 4), (u'tornado', 5), (u'blizzard', 6)])
     AdverseWeatherCondition_ExtremeWeatherConditionSubCauseCode._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=255)], ev=None, er=[])
     
     #-----< AdverseWeatherCondition-AdhesionSubCauseCode >-----#
-    AdverseWeatherCondition_AdhesionSubCauseCode = INT(name='AdverseWeatherCondition-AdhesionSubCauseCode', mode=MODE_TYPE)
-    AdverseWeatherCondition_AdhesionSubCauseCode._cont = ASN1Dict([('unavailable', 0), ('heavyFrostOnRoad', 1), ('fuelOnRoad', 2), ('mudOnRoad', 3), ('snowOnRoad', 4), ('iceOnRoad', 5), ('blackIceOnRoad', 6), ('oilOnRoad', 7), ('looseChippings', 8), ('instantBlackIce', 9), ('roadsSalted', 10)])
+    AdverseWeatherCondition_AdhesionSubCauseCode = INT(name=u'AdverseWeatherCondition-AdhesionSubCauseCode', mode=MODE_TYPE)
+    AdverseWeatherCondition_AdhesionSubCauseCode._cont = ASN1Dict([(u'unavailable', 0), (u'heavyFrostOnRoad', 1), (u'fuelOnRoad', 2), (u'mudOnRoad', 3), (u'snowOnRoad', 4), (u'iceOnRoad', 5), (u'blackIceOnRoad', 6), (u'oilOnRoad', 7), (u'looseChippings', 8), (u'instantBlackIce', 9), (u'roadsSalted', 10)])
     AdverseWeatherCondition_AdhesionSubCauseCode._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=255)], ev=None, er=[])
     
     #-----< AdverseWeatherCondition-VisibilitySubCauseCode >-----#
-    AdverseWeatherCondition_VisibilitySubCauseCode = INT(name='AdverseWeatherCondition-VisibilitySubCauseCode', mode=MODE_TYPE)
-    AdverseWeatherCondition_VisibilitySubCauseCode._cont = ASN1Dict([('unavailable', 0), ('fog', 1), ('smoke', 2), ('heavySnowfall', 3), ('heavyRain', 4), ('heavyHail', 5), ('lowSunGlare', 6), ('sandstorms', 7), ('swarmsOfInsects', 8)])
+    AdverseWeatherCondition_VisibilitySubCauseCode = INT(name=u'AdverseWeatherCondition-VisibilitySubCauseCode', mode=MODE_TYPE)
+    AdverseWeatherCondition_VisibilitySubCauseCode._cont = ASN1Dict([(u'unavailable', 0), (u'fog', 1), (u'smoke', 2), (u'heavySnowfall', 3), (u'heavyRain', 4), (u'heavyHail', 5), (u'lowSunGlare', 6), (u'sandstorms', 7), (u'swarmsOfInsects', 8)])
     AdverseWeatherCondition_VisibilitySubCauseCode._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=255)], ev=None, er=[])
     
     #-----< AdverseWeatherCondition-PrecipitationSubCauseCode >-----#
-    AdverseWeatherCondition_PrecipitationSubCauseCode = INT(name='AdverseWeatherCondition-PrecipitationSubCauseCode', mode=MODE_TYPE)
-    AdverseWeatherCondition_PrecipitationSubCauseCode._cont = ASN1Dict([('unavailable', 0), ('heavyRain', 1), ('heavySnowfall', 2), ('softHail', 3)])
+    AdverseWeatherCondition_PrecipitationSubCauseCode = INT(name=u'AdverseWeatherCondition-PrecipitationSubCauseCode', mode=MODE_TYPE)
+    AdverseWeatherCondition_PrecipitationSubCauseCode._cont = ASN1Dict([(u'unavailable', 0), (u'heavyRain', 1), (u'heavySnowfall', 2), (u'softHail', 3)])
     AdverseWeatherCondition_PrecipitationSubCauseCode._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=255)], ev=None, er=[])
     
     #-----< SlowVehicleSubCauseCode >-----#
-    SlowVehicleSubCauseCode = INT(name='SlowVehicleSubCauseCode', mode=MODE_TYPE)
-    SlowVehicleSubCauseCode._cont = ASN1Dict([('unavailable', 0), ('maintenanceVehicle', 1), ('vehiclesSlowingToLookAtAccident', 2), ('abnormalLoad', 3), ('abnormalWideLoad', 4), ('convoy', 5), ('snowplough', 6), ('deicing', 7), ('saltingVehicles', 8)])
+    SlowVehicleSubCauseCode = INT(name=u'SlowVehicleSubCauseCode', mode=MODE_TYPE)
+    SlowVehicleSubCauseCode._cont = ASN1Dict([(u'unavailable', 0), (u'maintenanceVehicle', 1), (u'vehiclesSlowingToLookAtAccident', 2), (u'abnormalLoad', 3), (u'abnormalWideLoad', 4), (u'convoy', 5), (u'snowplough', 6), (u'deicing', 7), (u'saltingVehicles', 8)])
     SlowVehicleSubCauseCode._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=255)], ev=None, er=[])
     
     #-----< StationaryVehicleSubCauseCode >-----#
-    StationaryVehicleSubCauseCode = INT(name='StationaryVehicleSubCauseCode', mode=MODE_TYPE)
-    StationaryVehicleSubCauseCode._cont = ASN1Dict([('unavailable', 0), ('humanProblem', 1), ('vehicleBreakdown', 2), ('postCrash', 3), ('publicTransportStop', 4), ('carryingDangerousGoods', 5)])
+    StationaryVehicleSubCauseCode = INT(name=u'StationaryVehicleSubCauseCode', mode=MODE_TYPE)
+    StationaryVehicleSubCauseCode._cont = ASN1Dict([(u'unavailable', 0), (u'humanProblem', 1), (u'vehicleBreakdown', 2), (u'postCrash', 3), (u'publicTransportStop', 4), (u'carryingDangerousGoods', 5)])
     StationaryVehicleSubCauseCode._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=255)], ev=None, er=[])
     
     #-----< HumanProblemSubCauseCode >-----#
-    HumanProblemSubCauseCode = INT(name='HumanProblemSubCauseCode', mode=MODE_TYPE)
-    HumanProblemSubCauseCode._cont = ASN1Dict([('unavailable', 0), ('glycemiaProblem', 1), ('heartProblem', 2)])
+    HumanProblemSubCauseCode = INT(name=u'HumanProblemSubCauseCode', mode=MODE_TYPE)
+    HumanProblemSubCauseCode._cont = ASN1Dict([(u'unavailable', 0), (u'glycemiaProblem', 1), (u'heartProblem', 2)])
     HumanProblemSubCauseCode._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=255)], ev=None, er=[])
     
     #-----< EmergencyVehicleApproachingSubCauseCode >-----#
-    EmergencyVehicleApproachingSubCauseCode = INT(name='EmergencyVehicleApproachingSubCauseCode', mode=MODE_TYPE)
-    EmergencyVehicleApproachingSubCauseCode._cont = ASN1Dict([('unavailable', 0), ('emergencyVehicleApproaching', 1), ('prioritizedVehicleApproaching', 2)])
+    EmergencyVehicleApproachingSubCauseCode = INT(name=u'EmergencyVehicleApproachingSubCauseCode', mode=MODE_TYPE)
+    EmergencyVehicleApproachingSubCauseCode._cont = ASN1Dict([(u'unavailable', 0), (u'emergencyVehicleApproaching', 1), (u'prioritizedVehicleApproaching', 2)])
     EmergencyVehicleApproachingSubCauseCode._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=255)], ev=None, er=[])
     
     #-----< HazardousLocation-DangerousCurveSubCauseCode >-----#
-    HazardousLocation_DangerousCurveSubCauseCode = INT(name='HazardousLocation-DangerousCurveSubCauseCode', mode=MODE_TYPE)
-    HazardousLocation_DangerousCurveSubCauseCode._cont = ASN1Dict([('unavailable', 0), ('dangerousLeftTurnCurve', 1), ('dangerousRightTurnCurve', 2), ('multipleCurvesStartingWithUnknownTurningDirection', 3), ('multipleCurvesStartingWithLeftTurn', 4), ('multipleCurvesStartingWithRightTurn', 5)])
+    HazardousLocation_DangerousCurveSubCauseCode = INT(name=u'HazardousLocation-DangerousCurveSubCauseCode', mode=MODE_TYPE)
+    HazardousLocation_DangerousCurveSubCauseCode._cont = ASN1Dict([(u'unavailable', 0), (u'dangerousLeftTurnCurve', 1), (u'dangerousRightTurnCurve', 2), (u'multipleCurvesStartingWithUnknownTurningDirection', 3), (u'multipleCurvesStartingWithLeftTurn', 4), (u'multipleCurvesStartingWithRightTurn', 5)])
     HazardousLocation_DangerousCurveSubCauseCode._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=255)], ev=None, er=[])
     
     #-----< HazardousLocation-SurfaceConditionSubCauseCode >-----#
-    HazardousLocation_SurfaceConditionSubCauseCode = INT(name='HazardousLocation-SurfaceConditionSubCauseCode', mode=MODE_TYPE)
-    HazardousLocation_SurfaceConditionSubCauseCode._cont = ASN1Dict([('unavailable', 0), ('rockfalls', 1), ('earthquakeDamage', 2), ('sewerCollapse', 3), ('subsidence', 4), ('snowDrifts', 5), ('stormDamage', 6), ('burstPipe', 7), ('volcanoEruption', 8), ('fallingIce', 9)])
+    HazardousLocation_SurfaceConditionSubCauseCode = INT(name=u'HazardousLocation-SurfaceConditionSubCauseCode', mode=MODE_TYPE)
+    HazardousLocation_SurfaceConditionSubCauseCode._cont = ASN1Dict([(u'unavailable', 0), (u'rockfalls', 1), (u'earthquakeDamage', 2), (u'sewerCollapse', 3), (u'subsidence', 4), (u'snowDrifts', 5), (u'stormDamage', 6), (u'burstPipe', 7), (u'volcanoEruption', 8), (u'fallingIce', 9)])
     HazardousLocation_SurfaceConditionSubCauseCode._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=255)], ev=None, er=[])
     
     #-----< HazardousLocation-ObstacleOnTheRoadSubCauseCode >-----#
-    HazardousLocation_ObstacleOnTheRoadSubCauseCode = INT(name='HazardousLocation-ObstacleOnTheRoadSubCauseCode', mode=MODE_TYPE)
-    HazardousLocation_ObstacleOnTheRoadSubCauseCode._cont = ASN1Dict([('unavailable', 0), ('shedLoad', 1), ('partsOfVehicles', 2), ('partsOfTyres', 3), ('bigObjects', 4), ('fallenTrees', 5), ('hubCaps', 6), ('waitingVehicles', 7)])
+    HazardousLocation_ObstacleOnTheRoadSubCauseCode = INT(name=u'HazardousLocation-ObstacleOnTheRoadSubCauseCode', mode=MODE_TYPE)
+    HazardousLocation_ObstacleOnTheRoadSubCauseCode._cont = ASN1Dict([(u'unavailable', 0), (u'shedLoad', 1), (u'partsOfVehicles', 2), (u'partsOfTyres', 3), (u'bigObjects', 4), (u'fallenTrees', 5), (u'hubCaps', 6), (u'waitingVehicles', 7)])
     HazardousLocation_ObstacleOnTheRoadSubCauseCode._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=255)], ev=None, er=[])
     
     #-----< HazardousLocation-AnimalOnTheRoadSubCauseCode >-----#
-    HazardousLocation_AnimalOnTheRoadSubCauseCode = INT(name='HazardousLocation-AnimalOnTheRoadSubCauseCode', mode=MODE_TYPE)
-    HazardousLocation_AnimalOnTheRoadSubCauseCode._cont = ASN1Dict([('unavailable', 0), ('wildAnimals', 1), ('herdOfAnimals', 2), ('smallAnimals', 3), ('largeAnimals', 4)])
+    HazardousLocation_AnimalOnTheRoadSubCauseCode = INT(name=u'HazardousLocation-AnimalOnTheRoadSubCauseCode', mode=MODE_TYPE)
+    HazardousLocation_AnimalOnTheRoadSubCauseCode._cont = ASN1Dict([(u'unavailable', 0), (u'wildAnimals', 1), (u'herdOfAnimals', 2), (u'smallAnimals', 3), (u'largeAnimals', 4)])
     HazardousLocation_AnimalOnTheRoadSubCauseCode._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=255)], ev=None, er=[])
     
     #-----< CollisionRiskSubCauseCode >-----#
-    CollisionRiskSubCauseCode = INT(name='CollisionRiskSubCauseCode', mode=MODE_TYPE)
-    CollisionRiskSubCauseCode._cont = ASN1Dict([('unavailable', 0), ('longitudinalCollisionRisk', 1), ('crossingCollisionRisk', 2), ('lateralCollisionRisk', 3), ('vulnerableRoadUser', 4)])
+    CollisionRiskSubCauseCode = INT(name=u'CollisionRiskSubCauseCode', mode=MODE_TYPE)
+    CollisionRiskSubCauseCode._cont = ASN1Dict([(u'unavailable', 0), (u'longitudinalCollisionRisk', 1), (u'crossingCollisionRisk', 2), (u'lateralCollisionRisk', 3), (u'vulnerableRoadUser', 4)])
     CollisionRiskSubCauseCode._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=255)], ev=None, er=[])
     
     #-----< SignalViolationSubCauseCode >-----#
-    SignalViolationSubCauseCode = INT(name='SignalViolationSubCauseCode', mode=MODE_TYPE)
-    SignalViolationSubCauseCode._cont = ASN1Dict([('unavailable', 0), ('stopSignViolation', 1), ('trafficLightViolation', 2), ('turningRegulationViolation', 3)])
+    SignalViolationSubCauseCode = INT(name=u'SignalViolationSubCauseCode', mode=MODE_TYPE)
+    SignalViolationSubCauseCode._cont = ASN1Dict([(u'unavailable', 0), (u'stopSignViolation', 1), (u'trafficLightViolation', 2), (u'turningRegulationViolation', 3)])
     SignalViolationSubCauseCode._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=255)], ev=None, er=[])
     
     #-----< RescueAndRecoveryWorkInProgressSubCauseCode >-----#
-    RescueAndRecoveryWorkInProgressSubCauseCode = INT(name='RescueAndRecoveryWorkInProgressSubCauseCode', mode=MODE_TYPE)
-    RescueAndRecoveryWorkInProgressSubCauseCode._cont = ASN1Dict([('unavailable', 0), ('emergencyVehicles', 1), ('rescueHelicopterLanding', 2), ('policeActivityOngoing', 3), ('medicalEmergencyOngoing', 4), ('childAbductionInProgress', 5)])
+    RescueAndRecoveryWorkInProgressSubCauseCode = INT(name=u'RescueAndRecoveryWorkInProgressSubCauseCode', mode=MODE_TYPE)
+    RescueAndRecoveryWorkInProgressSubCauseCode._cont = ASN1Dict([(u'unavailable', 0), (u'emergencyVehicles', 1), (u'rescueHelicopterLanding', 2), (u'policeActivityOngoing', 3), (u'medicalEmergencyOngoing', 4), (u'childAbductionInProgress', 5)])
     RescueAndRecoveryWorkInProgressSubCauseCode._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=255)], ev=None, er=[])
     
     #-----< DangerousEndOfQueueSubCauseCode >-----#
-    DangerousEndOfQueueSubCauseCode = INT(name='DangerousEndOfQueueSubCauseCode', mode=MODE_TYPE)
-    DangerousEndOfQueueSubCauseCode._cont = ASN1Dict([('unavailable', 0), ('suddenEndOfQueue', 1), ('queueOverHill', 2), ('queueAroundBend', 3), ('queueInTunnel', 4)])
+    DangerousEndOfQueueSubCauseCode = INT(name=u'DangerousEndOfQueueSubCauseCode', mode=MODE_TYPE)
+    DangerousEndOfQueueSubCauseCode._cont = ASN1Dict([(u'unavailable', 0), (u'suddenEndOfQueue', 1), (u'queueOverHill', 2), (u'queueAroundBend', 3), (u'queueInTunnel', 4)])
     DangerousEndOfQueueSubCauseCode._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=255)], ev=None, er=[])
     
     #-----< DangerousSituationSubCauseCode >-----#
-    DangerousSituationSubCauseCode = INT(name='DangerousSituationSubCauseCode', mode=MODE_TYPE)
-    DangerousSituationSubCauseCode._cont = ASN1Dict([('unavailable', 0), ('emergencyElectronicBrakeEngaged', 1), ('preCrashSystemEngaged', 2), ('espEngaged', 3), ('absEngaged', 4), ('aebEngaged', 5), ('brakeWarningEngaged', 6), ('collisionRiskWarningEngaged', 7)])
+    DangerousSituationSubCauseCode = INT(name=u'DangerousSituationSubCauseCode', mode=MODE_TYPE)
+    DangerousSituationSubCauseCode._cont = ASN1Dict([(u'unavailable', 0), (u'emergencyElectronicBrakeEngaged', 1), (u'preCrashSystemEngaged', 2), (u'espEngaged', 3), (u'absEngaged', 4), (u'aebEngaged', 5), (u'brakeWarningEngaged', 6), (u'collisionRiskWarningEngaged', 7)])
     DangerousSituationSubCauseCode._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=255)], ev=None, er=[])
     
     #-----< VehicleBreakdownSubCauseCode >-----#
-    VehicleBreakdownSubCauseCode = INT(name='VehicleBreakdownSubCauseCode', mode=MODE_TYPE)
-    VehicleBreakdownSubCauseCode._cont = ASN1Dict([('unavailable', 0), ('lackOfFuel', 1), ('lackOfBatteryPower', 2), ('engineProblem', 3), ('transmissionProblem', 4), ('engineCoolingProblem', 5), ('brakingSystemProblem', 6), ('steeringProblem', 7), ('tyrePuncture', 8), ('tyrePressureProblem', 9)])
+    VehicleBreakdownSubCauseCode = INT(name=u'VehicleBreakdownSubCauseCode', mode=MODE_TYPE)
+    VehicleBreakdownSubCauseCode._cont = ASN1Dict([(u'unavailable', 0), (u'lackOfFuel', 1), (u'lackOfBatteryPower', 2), (u'engineProblem', 3), (u'transmissionProblem', 4), (u'engineCoolingProblem', 5), (u'brakingSystemProblem', 6), (u'steeringProblem', 7), (u'tyrePuncture', 8), (u'tyrePressureProblem', 9)])
     VehicleBreakdownSubCauseCode._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=255)], ev=None, er=[])
     
     #-----< PostCrashSubCauseCode >-----#
-    PostCrashSubCauseCode = INT(name='PostCrashSubCauseCode', mode=MODE_TYPE)
-    PostCrashSubCauseCode._cont = ASN1Dict([('unavailable', 0), ('accidentWithoutECallTriggered', 1), ('accidentWithECallManuallyTriggered', 2), ('accidentWithECallAutomaticallyTriggered', 3), ('accidentWithECallTriggeredWithoutAccessToCellularNetwork', 4)])
+    PostCrashSubCauseCode = INT(name=u'PostCrashSubCauseCode', mode=MODE_TYPE)
+    PostCrashSubCauseCode._cont = ASN1Dict([(u'unavailable', 0), (u'accidentWithoutECallTriggered', 1), (u'accidentWithECallManuallyTriggered', 2), (u'accidentWithECallAutomaticallyTriggered', 3), (u'accidentWithECallTriggeredWithoutAccessToCellularNetwork', 4)])
     PostCrashSubCauseCode._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=255)], ev=None, er=[])
     
     #-----< Curvature >-----#
-    Curvature = SEQ(name='Curvature', mode=MODE_TYPE)
-    _Curvature_curvatureValue = INT(name='curvatureValue', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'CurvatureValue')))
-    _Curvature_curvatureConfidence = ENUM(name='curvatureConfidence', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'CurvatureConfidence')))
+    Curvature = SEQ(name=u'Curvature', mode=MODE_TYPE)
+    _Curvature_curvatureValue = INT(name=u'curvatureValue', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'CurvatureValue')))
+    _Curvature_curvatureConfidence = ENUM(name=u'curvatureConfidence', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'CurvatureConfidence')))
     Curvature._cont = ASN1Dict([
-        ('curvatureValue', _Curvature_curvatureValue),
-        ('curvatureConfidence', _Curvature_curvatureConfidence),
+        (u'curvatureValue', _Curvature_curvatureValue),
+        (u'curvatureConfidence', _Curvature_curvatureConfidence),
         ])
     Curvature._ext = None
     
     #-----< CurvatureValue >-----#
-    CurvatureValue = INT(name='CurvatureValue', mode=MODE_TYPE)
-    CurvatureValue._cont = ASN1Dict([('straight', 0), ('unavailable', 1023)])
+    CurvatureValue = INT(name=u'CurvatureValue', mode=MODE_TYPE)
+    CurvatureValue._cont = ASN1Dict([(u'straight', 0), (u'unavailable', 1023)])
     CurvatureValue._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=-1023, ub=1023)], ev=None, er=[])
     
     #-----< CurvatureConfidence >-----#
-    CurvatureConfidence = ENUM(name='CurvatureConfidence', mode=MODE_TYPE)
-    CurvatureConfidence._cont = ASN1Dict([('onePerMeter-0-00002', 0), ('onePerMeter-0-0001', 1), ('onePerMeter-0-0005', 2), ('onePerMeter-0-002', 3), ('onePerMeter-0-01', 4), ('onePerMeter-0-1', 5), ('outOfRange', 6), ('unavailable', 7)])
+    CurvatureConfidence = ENUM(name=u'CurvatureConfidence', mode=MODE_TYPE)
+    CurvatureConfidence._cont = ASN1Dict([(u'onePerMeter-0-00002', 0), (u'onePerMeter-0-0001', 1), (u'onePerMeter-0-0005', 2), (u'onePerMeter-0-002', 3), (u'onePerMeter-0-01', 4), (u'onePerMeter-0-1', 5), (u'outOfRange', 6), (u'unavailable', 7)])
     CurvatureConfidence._ext = None
     
     #-----< CurvatureCalculationMode >-----#
-    CurvatureCalculationMode = ENUM(name='CurvatureCalculationMode', mode=MODE_TYPE)
-    CurvatureCalculationMode._cont = ASN1Dict([('yawRateUsed', 0), ('yawRateNotUsed', 1), ('unavailable', 2)])
+    CurvatureCalculationMode = ENUM(name=u'CurvatureCalculationMode', mode=MODE_TYPE)
+    CurvatureCalculationMode._cont = ASN1Dict([(u'yawRateUsed', 0), (u'yawRateNotUsed', 1), (u'unavailable', 2)])
     CurvatureCalculationMode._ext = []
     
     #-----< Heading >-----#
-    Heading = SEQ(name='Heading', mode=MODE_TYPE)
-    _Heading_headingValue = INT(name='headingValue', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'HeadingValue')))
-    _Heading_headingConfidence = INT(name='headingConfidence', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'HeadingConfidence')))
+    Heading = SEQ(name=u'Heading', mode=MODE_TYPE)
+    _Heading_headingValue = INT(name=u'headingValue', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'HeadingValue')))
+    _Heading_headingConfidence = INT(name=u'headingConfidence', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'HeadingConfidence')))
     Heading._cont = ASN1Dict([
-        ('headingValue', _Heading_headingValue),
-        ('headingConfidence', _Heading_headingConfidence),
+        (u'headingValue', _Heading_headingValue),
+        (u'headingConfidence', _Heading_headingConfidence),
         ])
     Heading._ext = None
     
     #-----< HeadingValue >-----#
-    HeadingValue = INT(name='HeadingValue', mode=MODE_TYPE)
-    HeadingValue._cont = ASN1Dict([('wgs84North', 0), ('wgs84East', 900), ('wgs84South', 1800), ('wgs84West', 2700), ('unavailable', 3601)])
+    HeadingValue = INT(name=u'HeadingValue', mode=MODE_TYPE)
+    HeadingValue._cont = ASN1Dict([(u'wgs84North', 0), (u'wgs84East', 900), (u'wgs84South', 1800), (u'wgs84West', 2700), (u'unavailable', 3601)])
     HeadingValue._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=3601)], ev=None, er=[])
     
     #-----< HeadingConfidence >-----#
-    HeadingConfidence = INT(name='HeadingConfidence', mode=MODE_TYPE)
-    HeadingConfidence._cont = ASN1Dict([('equalOrWithinZeroPointOneDegree', 1), ('equalOrWithinOneDegree', 10), ('outOfRange', 126), ('unavailable', 127)])
+    HeadingConfidence = INT(name=u'HeadingConfidence', mode=MODE_TYPE)
+    HeadingConfidence._cont = ASN1Dict([(u'equalOrWithinZeroPointOneDegree', 1), (u'equalOrWithinOneDegree', 10), (u'outOfRange', 126), (u'unavailable', 127)])
     HeadingConfidence._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=127)], ev=None, er=[])
     
     #-----< LanePosition >-----#
-    LanePosition = INT(name='LanePosition', mode=MODE_TYPE)
-    LanePosition._cont = ASN1Dict([('offTheRoad', -1), ('innerHardShoulder', 0), ('innermostDrivingLane', 1), ('secondLaneFromInside', 2), ('outerHardShoulder', 14)])
+    LanePosition = INT(name=u'LanePosition', mode=MODE_TYPE)
+    LanePosition._cont = ASN1Dict([(u'offTheRoad', -1), (u'innerHardShoulder', 0), (u'innermostDrivingLane', 1), (u'secondLaneFromInside', 2), (u'outerHardShoulder', 14)])
     LanePosition._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=-1, ub=14)], ev=None, er=[])
     
     #-----< ClosedLanes >-----#
-    ClosedLanes = SEQ(name='ClosedLanes', mode=MODE_TYPE)
-    _ClosedLanes_innerhardShoulderStatus = ENUM(name='innerhardShoulderStatus', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'HardShoulderStatus')), opt=True)
-    _ClosedLanes_outerhardShoulderStatus = ENUM(name='outerhardShoulderStatus', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'HardShoulderStatus')), opt=True)
-    _ClosedLanes_drivingLaneStatus = BIT_STR(name='drivingLaneStatus', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'DrivingLaneStatus')), opt=True)
+    ClosedLanes = SEQ(name=u'ClosedLanes', mode=MODE_TYPE)
+    _ClosedLanes_innerhardShoulderStatus = ENUM(name=u'innerhardShoulderStatus', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'HardShoulderStatus')), opt=True)
+    _ClosedLanes_outerhardShoulderStatus = ENUM(name=u'outerhardShoulderStatus', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'HardShoulderStatus')), opt=True)
+    _ClosedLanes_drivingLaneStatus = BIT_STR(name=u'drivingLaneStatus', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'DrivingLaneStatus')), opt=True)
     ClosedLanes._cont = ASN1Dict([
-        ('innerhardShoulderStatus', _ClosedLanes_innerhardShoulderStatus),
-        ('outerhardShoulderStatus', _ClosedLanes_outerhardShoulderStatus),
-        ('drivingLaneStatus', _ClosedLanes_drivingLaneStatus),
+        (u'innerhardShoulderStatus', _ClosedLanes_innerhardShoulderStatus),
+        (u'outerhardShoulderStatus', _ClosedLanes_outerhardShoulderStatus),
+        (u'drivingLaneStatus', _ClosedLanes_drivingLaneStatus),
         ])
     ClosedLanes._ext = []
     
     #-----< HardShoulderStatus >-----#
-    HardShoulderStatus = ENUM(name='HardShoulderStatus', mode=MODE_TYPE)
-    HardShoulderStatus._cont = ASN1Dict([('availableForStopping', 0), ('closed', 1), ('availableForDriving', 2)])
+    HardShoulderStatus = ENUM(name=u'HardShoulderStatus', mode=MODE_TYPE)
+    HardShoulderStatus._cont = ASN1Dict([(u'availableForStopping', 0), (u'closed', 1), (u'availableForDriving', 2)])
     HardShoulderStatus._ext = None
     
     #-----< DrivingLaneStatus >-----#
-    DrivingLaneStatus = BIT_STR(name='DrivingLaneStatus', mode=MODE_TYPE)
+    DrivingLaneStatus = BIT_STR(name=u'DrivingLaneStatus', mode=MODE_TYPE)
     DrivingLaneStatus._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=13)], ev=None, er=[])
     
     #-----< PerformanceClass >-----#
-    PerformanceClass = INT(name='PerformanceClass', mode=MODE_TYPE)
-    PerformanceClass._cont = ASN1Dict([('unavailable', 0), ('performanceClassA', 1), ('performanceClassB', 2)])
+    PerformanceClass = INT(name=u'PerformanceClass', mode=MODE_TYPE)
+    PerformanceClass._cont = ASN1Dict([(u'unavailable', 0), (u'performanceClassA', 1), (u'performanceClassB', 2)])
     PerformanceClass._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=7)], ev=None, er=[])
     
     #-----< SpeedValue >-----#
-    SpeedValue = INT(name='SpeedValue', mode=MODE_TYPE)
-    SpeedValue._cont = ASN1Dict([('standstill', 0), ('oneCentimeterPerSec', 1), ('unavailable', 16383)])
+    SpeedValue = INT(name=u'SpeedValue', mode=MODE_TYPE)
+    SpeedValue._cont = ASN1Dict([(u'standstill', 0), (u'oneCentimeterPerSec', 1), (u'unavailable', 16383)])
     SpeedValue._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=16383)], ev=None, er=[])
     
     #-----< SpeedConfidence >-----#
-    SpeedConfidence = INT(name='SpeedConfidence', mode=MODE_TYPE)
-    SpeedConfidence._cont = ASN1Dict([('equalOrWithinOneCentimeterPerSec', 1), ('equalOrWithinOneMeterPerSec', 100), ('outOfRange', 126), ('unavailable', 127)])
+    SpeedConfidence = INT(name=u'SpeedConfidence', mode=MODE_TYPE)
+    SpeedConfidence._cont = ASN1Dict([(u'equalOrWithinOneCentimeterPerSec', 1), (u'equalOrWithinOneMeterPerSec', 100), (u'outOfRange', 126), (u'unavailable', 127)])
     SpeedConfidence._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=127)], ev=None, er=[])
     
     #-----< VehicleMass >-----#
-    VehicleMass = INT(name='VehicleMass', mode=MODE_TYPE)
-    VehicleMass._cont = ASN1Dict([('hundredKg', 1), ('unavailable', 1024)])
+    VehicleMass = INT(name=u'VehicleMass', mode=MODE_TYPE)
+    VehicleMass._cont = ASN1Dict([(u'hundredKg', 1), (u'unavailable', 1024)])
     VehicleMass._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=1024)], ev=None, er=[])
     
     #-----< Speed >-----#
-    Speed = SEQ(name='Speed', mode=MODE_TYPE)
-    _Speed_speedValue = INT(name='speedValue', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'SpeedValue')))
-    _Speed_speedConfidence = INT(name='speedConfidence', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'SpeedConfidence')))
+    Speed = SEQ(name=u'Speed', mode=MODE_TYPE)
+    _Speed_speedValue = INT(name=u'speedValue', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'SpeedValue')))
+    _Speed_speedConfidence = INT(name=u'speedConfidence', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'SpeedConfidence')))
     Speed._cont = ASN1Dict([
-        ('speedValue', _Speed_speedValue),
-        ('speedConfidence', _Speed_speedConfidence),
+        (u'speedValue', _Speed_speedValue),
+        (u'speedConfidence', _Speed_speedConfidence),
         ])
     Speed._ext = None
     
     #-----< DriveDirection >-----#
-    DriveDirection = ENUM(name='DriveDirection', mode=MODE_TYPE)
-    DriveDirection._cont = ASN1Dict([('forward', 0), ('backward', 1), ('unavailable', 2)])
+    DriveDirection = ENUM(name=u'DriveDirection', mode=MODE_TYPE)
+    DriveDirection._cont = ASN1Dict([(u'forward', 0), (u'backward', 1), (u'unavailable', 2)])
     DriveDirection._ext = None
     
     #-----< EmbarkationStatus >-----#
-    EmbarkationStatus = BOOL(name='EmbarkationStatus', mode=MODE_TYPE)
+    EmbarkationStatus = BOOL(name=u'EmbarkationStatus', mode=MODE_TYPE)
     
     #-----< LongitudinalAcceleration >-----#
-    LongitudinalAcceleration = SEQ(name='LongitudinalAcceleration', mode=MODE_TYPE)
-    _LongitudinalAcceleration_longitudinalAccelerationValue = INT(name='longitudinalAccelerationValue', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'LongitudinalAccelerationValue')))
-    _LongitudinalAcceleration_longitudinalAccelerationConfidence = INT(name='longitudinalAccelerationConfidence', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'AccelerationConfidence')))
+    LongitudinalAcceleration = SEQ(name=u'LongitudinalAcceleration', mode=MODE_TYPE)
+    _LongitudinalAcceleration_longitudinalAccelerationValue = INT(name=u'longitudinalAccelerationValue', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'LongitudinalAccelerationValue')))
+    _LongitudinalAcceleration_longitudinalAccelerationConfidence = INT(name=u'longitudinalAccelerationConfidence', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'AccelerationConfidence')))
     LongitudinalAcceleration._cont = ASN1Dict([
-        ('longitudinalAccelerationValue', _LongitudinalAcceleration_longitudinalAccelerationValue),
-        ('longitudinalAccelerationConfidence', _LongitudinalAcceleration_longitudinalAccelerationConfidence),
+        (u'longitudinalAccelerationValue', _LongitudinalAcceleration_longitudinalAccelerationValue),
+        (u'longitudinalAccelerationConfidence', _LongitudinalAcceleration_longitudinalAccelerationConfidence),
         ])
     LongitudinalAcceleration._ext = None
     
     #-----< LongitudinalAccelerationValue >-----#
-    LongitudinalAccelerationValue = INT(name='LongitudinalAccelerationValue', mode=MODE_TYPE)
-    LongitudinalAccelerationValue._cont = ASN1Dict([('pointOneMeterPerSecSquaredForward', 1), ('pointOneMeterPerSecSquaredBackward', -1), ('unavailable', 161)])
+    LongitudinalAccelerationValue = INT(name=u'LongitudinalAccelerationValue', mode=MODE_TYPE)
+    LongitudinalAccelerationValue._cont = ASN1Dict([(u'pointOneMeterPerSecSquaredForward', 1), (u'pointOneMeterPerSecSquaredBackward', -1), (u'unavailable', 161)])
     LongitudinalAccelerationValue._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=-160, ub=161)], ev=None, er=[])
     
     #-----< AccelerationConfidence >-----#
-    AccelerationConfidence = INT(name='AccelerationConfidence', mode=MODE_TYPE)
-    AccelerationConfidence._cont = ASN1Dict([('pointOneMeterPerSecSquared', 1), ('outOfRange', 101), ('unavailable', 102)])
+    AccelerationConfidence = INT(name=u'AccelerationConfidence', mode=MODE_TYPE)
+    AccelerationConfidence._cont = ASN1Dict([(u'pointOneMeterPerSecSquared', 1), (u'outOfRange', 101), (u'unavailable', 102)])
     AccelerationConfidence._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=102)], ev=None, er=[])
     
     #-----< LateralAcceleration >-----#
-    LateralAcceleration = SEQ(name='LateralAcceleration', mode=MODE_TYPE)
-    _LateralAcceleration_lateralAccelerationValue = INT(name='lateralAccelerationValue', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'LateralAccelerationValue')))
-    _LateralAcceleration_lateralAccelerationConfidence = INT(name='lateralAccelerationConfidence', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'AccelerationConfidence')))
+    LateralAcceleration = SEQ(name=u'LateralAcceleration', mode=MODE_TYPE)
+    _LateralAcceleration_lateralAccelerationValue = INT(name=u'lateralAccelerationValue', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'LateralAccelerationValue')))
+    _LateralAcceleration_lateralAccelerationConfidence = INT(name=u'lateralAccelerationConfidence', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'AccelerationConfidence')))
     LateralAcceleration._cont = ASN1Dict([
-        ('lateralAccelerationValue', _LateralAcceleration_lateralAccelerationValue),
-        ('lateralAccelerationConfidence', _LateralAcceleration_lateralAccelerationConfidence),
+        (u'lateralAccelerationValue', _LateralAcceleration_lateralAccelerationValue),
+        (u'lateralAccelerationConfidence', _LateralAcceleration_lateralAccelerationConfidence),
         ])
     LateralAcceleration._ext = None
     
     #-----< LateralAccelerationValue >-----#
-    LateralAccelerationValue = INT(name='LateralAccelerationValue', mode=MODE_TYPE)
-    LateralAccelerationValue._cont = ASN1Dict([('pointOneMeterPerSecSquaredToRight', -1), ('pointOneMeterPerSecSquaredToLeft', 1), ('unavailable', 161)])
+    LateralAccelerationValue = INT(name=u'LateralAccelerationValue', mode=MODE_TYPE)
+    LateralAccelerationValue._cont = ASN1Dict([(u'pointOneMeterPerSecSquaredToRight', -1), (u'pointOneMeterPerSecSquaredToLeft', 1), (u'unavailable', 161)])
     LateralAccelerationValue._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=-160, ub=161)], ev=None, er=[])
     
     #-----< VerticalAcceleration >-----#
-    VerticalAcceleration = SEQ(name='VerticalAcceleration', mode=MODE_TYPE)
-    _VerticalAcceleration_verticalAccelerationValue = INT(name='verticalAccelerationValue', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'VerticalAccelerationValue')))
-    _VerticalAcceleration_verticalAccelerationConfidence = INT(name='verticalAccelerationConfidence', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'AccelerationConfidence')))
+    VerticalAcceleration = SEQ(name=u'VerticalAcceleration', mode=MODE_TYPE)
+    _VerticalAcceleration_verticalAccelerationValue = INT(name=u'verticalAccelerationValue', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'VerticalAccelerationValue')))
+    _VerticalAcceleration_verticalAccelerationConfidence = INT(name=u'verticalAccelerationConfidence', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'AccelerationConfidence')))
     VerticalAcceleration._cont = ASN1Dict([
-        ('verticalAccelerationValue', _VerticalAcceleration_verticalAccelerationValue),
-        ('verticalAccelerationConfidence', _VerticalAcceleration_verticalAccelerationConfidence),
+        (u'verticalAccelerationValue', _VerticalAcceleration_verticalAccelerationValue),
+        (u'verticalAccelerationConfidence', _VerticalAcceleration_verticalAccelerationConfidence),
         ])
     VerticalAcceleration._ext = None
     
     #-----< VerticalAccelerationValue >-----#
-    VerticalAccelerationValue = INT(name='VerticalAccelerationValue', mode=MODE_TYPE)
-    VerticalAccelerationValue._cont = ASN1Dict([('pointOneMeterPerSecSquaredUp', 1), ('pointOneMeterPerSecSquaredDown', -1), ('unavailable', 161)])
+    VerticalAccelerationValue = INT(name=u'VerticalAccelerationValue', mode=MODE_TYPE)
+    VerticalAccelerationValue._cont = ASN1Dict([(u'pointOneMeterPerSecSquaredUp', 1), (u'pointOneMeterPerSecSquaredDown', -1), (u'unavailable', 161)])
     VerticalAccelerationValue._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=-160, ub=161)], ev=None, er=[])
     
     #-----< StationType >-----#
-    StationType = INT(name='StationType', mode=MODE_TYPE)
-    StationType._cont = ASN1Dict([('unknown', 0), ('pedestrian', 1), ('cyclist', 2), ('moped', 3), ('motorcycle', 4), ('passengerCar', 5), ('bus', 6), ('lightTruck', 7), ('heavyTruck', 8), ('trailer', 9), ('specialVehicles', 10), ('tram', 11), ('roadSideUnit', 15)])
+    StationType = INT(name=u'StationType', mode=MODE_TYPE)
+    StationType._cont = ASN1Dict([(u'unknown', 0), (u'pedestrian', 1), (u'cyclist', 2), (u'moped', 3), (u'motorcycle', 4), (u'passengerCar', 5), (u'bus', 6), (u'lightTruck', 7), (u'heavyTruck', 8), (u'trailer', 9), (u'specialVehicles', 10), (u'tram', 11), (u'roadSideUnit', 15)])
     StationType._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=255)], ev=None, er=[])
     
     #-----< ExteriorLights >-----#
-    ExteriorLights = BIT_STR(name='ExteriorLights', mode=MODE_TYPE)
-    ExteriorLights._cont = ASN1Dict([('lowBeamHeadlightsOn', 0), ('highBeamHeadlightsOn', 1), ('leftTurnSignalOn', 2), ('rightTurnSignalOn', 3), ('daytimeRunningLightsOn', 4), ('reverseLightOn', 5), ('fogLightOn', 6), ('parkingLightsOn', 7)])
+    ExteriorLights = BIT_STR(name=u'ExteriorLights', mode=MODE_TYPE)
+    ExteriorLights._cont = ASN1Dict([(u'lowBeamHeadlightsOn', 0), (u'highBeamHeadlightsOn', 1), (u'leftTurnSignalOn', 2), (u'rightTurnSignalOn', 3), (u'daytimeRunningLightsOn', 4), (u'reverseLightOn', 5), (u'fogLightOn', 6), (u'parkingLightsOn', 7)])
     ExteriorLights._const_sz = ASN1Set(rv=[8], rr=[], ev=None, er=[])
     
     #-----< DangerousGoodsBasic >-----#
-    DangerousGoodsBasic = ENUM(name='DangerousGoodsBasic', mode=MODE_TYPE)
-    DangerousGoodsBasic._cont = ASN1Dict([('explosives1', 0), ('explosives2', 1), ('explosives3', 2), ('explosives4', 3), ('explosives5', 4), ('explosives6', 5), ('flammableGases', 6), ('nonFlammableGases', 7), ('toxicGases', 8), ('flammableLiquids', 9), ('flammableSolids', 10), ('substancesLiableToSpontaneousCombustion', 11), ('substancesEmittingFlammableGasesUponContactWithWater', 12), ('oxidizingSubstances', 13), ('organicPeroxides', 14), ('toxicSubstances', 15), ('infectiousSubstances', 16), ('radioactiveMaterial', 17), ('corrosiveSubstances', 18), ('miscellaneousDangerousSubstances', 19)])
+    DangerousGoodsBasic = ENUM(name=u'DangerousGoodsBasic', mode=MODE_TYPE)
+    DangerousGoodsBasic._cont = ASN1Dict([(u'explosives1', 0), (u'explosives2', 1), (u'explosives3', 2), (u'explosives4', 3), (u'explosives5', 4), (u'explosives6', 5), (u'flammableGases', 6), (u'nonFlammableGases', 7), (u'toxicGases', 8), (u'flammableLiquids', 9), (u'flammableSolids', 10), (u'substancesLiableToSpontaneousCombustion', 11), (u'substancesEmittingFlammableGasesUponContactWithWater', 12), (u'oxidizingSubstances', 13), (u'organicPeroxides', 14), (u'toxicSubstances', 15), (u'infectiousSubstances', 16), (u'radioactiveMaterial', 17), (u'corrosiveSubstances', 18), (u'miscellaneousDangerousSubstances', 19)])
     DangerousGoodsBasic._ext = None
     
     #-----< DangerousGoodsExtended >-----#
-    DangerousGoodsExtended = SEQ(name='DangerousGoodsExtended', mode=MODE_TYPE)
-    _DangerousGoodsExtended_dangerousGoodsType = ENUM(name='dangerousGoodsType', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'DangerousGoodsBasic')))
-    _DangerousGoodsExtended_unNumber = INT(name='unNumber', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    DangerousGoodsExtended = SEQ(name=u'DangerousGoodsExtended', mode=MODE_TYPE)
+    _DangerousGoodsExtended_dangerousGoodsType = ENUM(name=u'dangerousGoodsType', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'DangerousGoodsBasic')))
+    _DangerousGoodsExtended_unNumber = INT(name=u'unNumber', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     _DangerousGoodsExtended_unNumber._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=9999)], ev=None, er=[])
-    _DangerousGoodsExtended_elevatedTemperature = BOOL(name='elevatedTemperature', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _DangerousGoodsExtended_tunnelsRestricted = BOOL(name='tunnelsRestricted', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _DangerousGoodsExtended_limitedQuantity = BOOL(name='limitedQuantity', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _DangerousGoodsExtended_emergencyActionCode = STR_IA5(name='emergencyActionCode', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _DangerousGoodsExtended_elevatedTemperature = BOOL(name=u'elevatedTemperature', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _DangerousGoodsExtended_tunnelsRestricted = BOOL(name=u'tunnelsRestricted', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _DangerousGoodsExtended_limitedQuantity = BOOL(name=u'limitedQuantity', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _DangerousGoodsExtended_emergencyActionCode = STR_IA5(name=u'emergencyActionCode', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     _DangerousGoodsExtended_emergencyActionCode._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=24)], ev=None, er=[])
-    _DangerousGoodsExtended_phoneNumber = STR_NUM(name='phoneNumber', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'PhoneNumber')), opt=True)
-    _DangerousGoodsExtended_companyName = STR_UTF8(name='companyName', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _DangerousGoodsExtended_phoneNumber = STR_NUM(name=u'phoneNumber', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'PhoneNumber')), opt=True)
+    _DangerousGoodsExtended_companyName = STR_UTF8(name=u'companyName', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     _DangerousGoodsExtended_companyName._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=24)], ev=None, er=[])
     DangerousGoodsExtended._cont = ASN1Dict([
-        ('dangerousGoodsType', _DangerousGoodsExtended_dangerousGoodsType),
-        ('unNumber', _DangerousGoodsExtended_unNumber),
-        ('elevatedTemperature', _DangerousGoodsExtended_elevatedTemperature),
-        ('tunnelsRestricted', _DangerousGoodsExtended_tunnelsRestricted),
-        ('limitedQuantity', _DangerousGoodsExtended_limitedQuantity),
-        ('emergencyActionCode', _DangerousGoodsExtended_emergencyActionCode),
-        ('phoneNumber', _DangerousGoodsExtended_phoneNumber),
-        ('companyName', _DangerousGoodsExtended_companyName),
+        (u'dangerousGoodsType', _DangerousGoodsExtended_dangerousGoodsType),
+        (u'unNumber', _DangerousGoodsExtended_unNumber),
+        (u'elevatedTemperature', _DangerousGoodsExtended_elevatedTemperature),
+        (u'tunnelsRestricted', _DangerousGoodsExtended_tunnelsRestricted),
+        (u'limitedQuantity', _DangerousGoodsExtended_limitedQuantity),
+        (u'emergencyActionCode', _DangerousGoodsExtended_emergencyActionCode),
+        (u'phoneNumber', _DangerousGoodsExtended_phoneNumber),
+        (u'companyName', _DangerousGoodsExtended_companyName),
         ])
     DangerousGoodsExtended._ext = []
     
     #-----< SpecialTransportType >-----#
-    SpecialTransportType = BIT_STR(name='SpecialTransportType', mode=MODE_TYPE)
-    SpecialTransportType._cont = ASN1Dict([('heavyLoad', 0), ('excessWidth', 1), ('excessLength', 2), ('excessHeight', 3)])
+    SpecialTransportType = BIT_STR(name=u'SpecialTransportType', mode=MODE_TYPE)
+    SpecialTransportType._cont = ASN1Dict([(u'heavyLoad', 0), (u'excessWidth', 1), (u'excessLength', 2), (u'excessHeight', 3)])
     SpecialTransportType._const_sz = ASN1Set(rv=[4], rr=[], ev=None, er=[])
     
     #-----< LightBarSirenInUse >-----#
-    LightBarSirenInUse = BIT_STR(name='LightBarSirenInUse', mode=MODE_TYPE)
-    LightBarSirenInUse._cont = ASN1Dict([('lightBarActivated', 0), ('sirenActivated', 1)])
+    LightBarSirenInUse = BIT_STR(name=u'LightBarSirenInUse', mode=MODE_TYPE)
+    LightBarSirenInUse._cont = ASN1Dict([(u'lightBarActivated', 0), (u'sirenActivated', 1)])
     LightBarSirenInUse._const_sz = ASN1Set(rv=[2], rr=[], ev=None, er=[])
     
     #-----< HeightLonCarr >-----#
-    HeightLonCarr = INT(name='HeightLonCarr', mode=MODE_TYPE)
-    HeightLonCarr._cont = ASN1Dict([('oneCentimeter', 1), ('unavailable', 100)])
+    HeightLonCarr = INT(name=u'HeightLonCarr', mode=MODE_TYPE)
+    HeightLonCarr._cont = ASN1Dict([(u'oneCentimeter', 1), (u'unavailable', 100)])
     HeightLonCarr._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=100)], ev=None, er=[])
     
     #-----< PosLonCarr >-----#
-    PosLonCarr = INT(name='PosLonCarr', mode=MODE_TYPE)
-    PosLonCarr._cont = ASN1Dict([('oneCentimeter', 1), ('unavailable', 127)])
+    PosLonCarr = INT(name=u'PosLonCarr', mode=MODE_TYPE)
+    PosLonCarr._cont = ASN1Dict([(u'oneCentimeter', 1), (u'unavailable', 127)])
     PosLonCarr._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=127)], ev=None, er=[])
     
     #-----< PosPillar >-----#
-    PosPillar = INT(name='PosPillar', mode=MODE_TYPE)
-    PosPillar._cont = ASN1Dict([('tenCentimeters', 1), ('unavailable', 30)])
+    PosPillar = INT(name=u'PosPillar', mode=MODE_TYPE)
+    PosPillar._cont = ASN1Dict([(u'tenCentimeters', 1), (u'unavailable', 30)])
     PosPillar._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=30)], ev=None, er=[])
     
     #-----< PosCentMass >-----#
-    PosCentMass = INT(name='PosCentMass', mode=MODE_TYPE)
-    PosCentMass._cont = ASN1Dict([('tenCentimeters', 1), ('unavailable', 63)])
+    PosCentMass = INT(name=u'PosCentMass', mode=MODE_TYPE)
+    PosCentMass._cont = ASN1Dict([(u'tenCentimeters', 1), (u'unavailable', 63)])
     PosCentMass._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=63)], ev=None, er=[])
     
     #-----< RequestResponseIndication >-----#
-    RequestResponseIndication = ENUM(name='RequestResponseIndication', mode=MODE_TYPE)
-    RequestResponseIndication._cont = ASN1Dict([('request', 0), ('response', 1)])
+    RequestResponseIndication = ENUM(name=u'RequestResponseIndication', mode=MODE_TYPE)
+    RequestResponseIndication._cont = ASN1Dict([(u'request', 0), (u'response', 1)])
     RequestResponseIndication._ext = None
     
     #-----< SpeedLimit >-----#
-    SpeedLimit = INT(name='SpeedLimit', mode=MODE_TYPE)
-    SpeedLimit._cont = ASN1Dict([('oneKmPerHour', 1)])
+    SpeedLimit = INT(name=u'SpeedLimit', mode=MODE_TYPE)
+    SpeedLimit._cont = ASN1Dict([(u'oneKmPerHour', 1)])
     SpeedLimit._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=255)], ev=None, er=[])
     
     #-----< StationarySince >-----#
-    StationarySince = ENUM(name='StationarySince', mode=MODE_TYPE)
-    StationarySince._cont = ASN1Dict([('lessThan1Minute', 0), ('lessThan2Minutes', 1), ('lessThan15Minutes', 2), ('equalOrGreater15Minutes', 3)])
+    StationarySince = ENUM(name=u'StationarySince', mode=MODE_TYPE)
+    StationarySince._cont = ASN1Dict([(u'lessThan1Minute', 0), (u'lessThan2Minutes', 1), (u'lessThan15Minutes', 2), (u'equalOrGreater15Minutes', 3)])
     StationarySince._ext = None
     
     #-----< Temperature >-----#
-    Temperature = INT(name='Temperature', mode=MODE_TYPE)
-    Temperature._cont = ASN1Dict([('equalOrSmallerThanMinus60Deg', -60), ('oneDegreeCelsius', 1), ('equalOrGreaterThan67Deg', 67)])
+    Temperature = INT(name=u'Temperature', mode=MODE_TYPE)
+    Temperature._cont = ASN1Dict([(u'equalOrSmallerThanMinus60Deg', -60), (u'oneDegreeCelsius', 1), (u'equalOrGreaterThan67Deg', 67)])
     Temperature._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=-60, ub=67)], ev=None, er=[])
     
     #-----< TrafficRule >-----#
-    TrafficRule = ENUM(name='TrafficRule', mode=MODE_TYPE)
-    TrafficRule._cont = ASN1Dict([('noPassing', 0), ('noPassingForTrucks', 1), ('passToRight', 2), ('passToLeft', 3)])
+    TrafficRule = ENUM(name=u'TrafficRule', mode=MODE_TYPE)
+    TrafficRule._cont = ASN1Dict([(u'noPassing', 0), (u'noPassingForTrucks', 1), (u'passToRight', 2), (u'passToLeft', 3)])
     TrafficRule._ext = []
     
     #-----< WheelBaseVehicle >-----#
-    WheelBaseVehicle = INT(name='WheelBaseVehicle', mode=MODE_TYPE)
-    WheelBaseVehicle._cont = ASN1Dict([('tenCentimeters', 1), ('unavailable', 127)])
+    WheelBaseVehicle = INT(name=u'WheelBaseVehicle', mode=MODE_TYPE)
+    WheelBaseVehicle._cont = ASN1Dict([(u'tenCentimeters', 1), (u'unavailable', 127)])
     WheelBaseVehicle._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=127)], ev=None, er=[])
     
     #-----< TurningRadius >-----#
-    TurningRadius = INT(name='TurningRadius', mode=MODE_TYPE)
-    TurningRadius._cont = ASN1Dict([('point4Meters', 1), ('unavailable', 255)])
+    TurningRadius = INT(name=u'TurningRadius', mode=MODE_TYPE)
+    TurningRadius._cont = ASN1Dict([(u'point4Meters', 1), (u'unavailable', 255)])
     TurningRadius._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=255)], ev=None, er=[])
     
     #-----< PosFrontAx >-----#
-    PosFrontAx = INT(name='PosFrontAx', mode=MODE_TYPE)
-    PosFrontAx._cont = ASN1Dict([('tenCentimeters', 1), ('unavailable', 20)])
+    PosFrontAx = INT(name=u'PosFrontAx', mode=MODE_TYPE)
+    PosFrontAx._cont = ASN1Dict([(u'tenCentimeters', 1), (u'unavailable', 20)])
     PosFrontAx._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=20)], ev=None, er=[])
     
     #-----< PositionOfOccupants >-----#
-    PositionOfOccupants = BIT_STR(name='PositionOfOccupants', mode=MODE_TYPE)
-    PositionOfOccupants._cont = ASN1Dict([('row1LeftOccupied', 0), ('row1RightOccupied', 1), ('row1MidOccupied', 2), ('row1NotDetectable', 3), ('row1NotPresent', 4), ('row2LeftOccupied', 5), ('row2RightOccupied', 6), ('row2MidOccupied', 7), ('row2NotDetectable', 8), ('row2NotPresent', 9), ('row3LeftOccupied', 10), ('row3RightOccupied', 11), ('row3MidOccupied', 12), ('row3NotDetectable', 13), ('row3NotPresent', 14), ('row4LeftOccupied', 15), ('row4RightOccupied', 16), ('row4MidOccupied', 17), ('row4NotDetectable', 18), ('row4NotPresent', 19)])
+    PositionOfOccupants = BIT_STR(name=u'PositionOfOccupants', mode=MODE_TYPE)
+    PositionOfOccupants._cont = ASN1Dict([(u'row1LeftOccupied', 0), (u'row1RightOccupied', 1), (u'row1MidOccupied', 2), (u'row1NotDetectable', 3), (u'row1NotPresent', 4), (u'row2LeftOccupied', 5), (u'row2RightOccupied', 6), (u'row2MidOccupied', 7), (u'row2NotDetectable', 8), (u'row2NotPresent', 9), (u'row3LeftOccupied', 10), (u'row3RightOccupied', 11), (u'row3MidOccupied', 12), (u'row3NotDetectable', 13), (u'row3NotPresent', 14), (u'row4LeftOccupied', 15), (u'row4RightOccupied', 16), (u'row4MidOccupied', 17), (u'row4NotDetectable', 18), (u'row4NotPresent', 19)])
     PositionOfOccupants._const_sz = ASN1Set(rv=[20], rr=[], ev=None, er=[])
     
     #-----< PositioningSolutionType >-----#
-    PositioningSolutionType = ENUM(name='PositioningSolutionType', mode=MODE_TYPE)
-    PositioningSolutionType._cont = ASN1Dict([('noPositioningSolution', 0), ('sGNSS', 1), ('dGNSS', 2), ('sGNSSplusDR', 3), ('dGNSSplusDR', 4), ('dR', 5)])
+    PositioningSolutionType = ENUM(name=u'PositioningSolutionType', mode=MODE_TYPE)
+    PositioningSolutionType._cont = ASN1Dict([(u'noPositioningSolution', 0), (u'sGNSS', 1), (u'dGNSS', 2), (u'sGNSSplusDR', 3), (u'dGNSSplusDR', 4), (u'dR', 5)])
     PositioningSolutionType._ext = []
     
     #-----< VehicleIdentification >-----#
-    VehicleIdentification = SEQ(name='VehicleIdentification', mode=MODE_TYPE)
-    _VehicleIdentification_wMInumber = STR_IA5(name='wMInumber', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'WMInumber')), opt=True)
-    _VehicleIdentification_vDS = STR_IA5(name='vDS', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'VDS')), opt=True)
+    VehicleIdentification = SEQ(name=u'VehicleIdentification', mode=MODE_TYPE)
+    _VehicleIdentification_wMInumber = STR_IA5(name=u'wMInumber', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'WMInumber')), opt=True)
+    _VehicleIdentification_vDS = STR_IA5(name=u'vDS', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'VDS')), opt=True)
     VehicleIdentification._cont = ASN1Dict([
-        ('wMInumber', _VehicleIdentification_wMInumber),
-        ('vDS', _VehicleIdentification_vDS),
+        (u'wMInumber', _VehicleIdentification_wMInumber),
+        (u'vDS', _VehicleIdentification_vDS),
         ])
     VehicleIdentification._ext = []
     
     #-----< WMInumber >-----#
-    WMInumber = STR_IA5(name='WMInumber', mode=MODE_TYPE)
+    WMInumber = STR_IA5(name=u'WMInumber', mode=MODE_TYPE)
     WMInumber._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=3)], ev=None, er=[])
     
     #-----< VDS >-----#
-    VDS = STR_IA5(name='VDS', mode=MODE_TYPE)
+    VDS = STR_IA5(name=u'VDS', mode=MODE_TYPE)
     VDS._const_sz = ASN1Set(rv=[6], rr=[], ev=None, er=[])
     
     #-----< EnergyStorageType >-----#
-    EnergyStorageType = BIT_STR(name='EnergyStorageType', mode=MODE_TYPE)
-    EnergyStorageType._cont = ASN1Dict([('hydrogenStorage', 0), ('electricEnergyStorage', 1), ('liquidPropaneGas', 2), ('compressedNaturalGas', 3), ('diesel', 4), ('gasoline', 5), ('ammonia', 6)])
+    EnergyStorageType = BIT_STR(name=u'EnergyStorageType', mode=MODE_TYPE)
+    EnergyStorageType._cont = ASN1Dict([(u'hydrogenStorage', 0), (u'electricEnergyStorage', 1), (u'liquidPropaneGas', 2), (u'compressedNaturalGas', 3), (u'diesel', 4), (u'gasoline', 5), (u'ammonia', 6)])
     EnergyStorageType._const_sz = ASN1Set(rv=[7], rr=[], ev=None, er=[])
     
     #-----< VehicleLength >-----#
-    VehicleLength = SEQ(name='VehicleLength', mode=MODE_TYPE)
-    _VehicleLength_vehicleLengthValue = INT(name='vehicleLengthValue', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'VehicleLengthValue')))
-    _VehicleLength_vehicleLengthConfidenceIndication = ENUM(name='vehicleLengthConfidenceIndication', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'VehicleLengthConfidenceIndication')))
+    VehicleLength = SEQ(name=u'VehicleLength', mode=MODE_TYPE)
+    _VehicleLength_vehicleLengthValue = INT(name=u'vehicleLengthValue', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'VehicleLengthValue')))
+    _VehicleLength_vehicleLengthConfidenceIndication = ENUM(name=u'vehicleLengthConfidenceIndication', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'VehicleLengthConfidenceIndication')))
     VehicleLength._cont = ASN1Dict([
-        ('vehicleLengthValue', _VehicleLength_vehicleLengthValue),
-        ('vehicleLengthConfidenceIndication', _VehicleLength_vehicleLengthConfidenceIndication),
+        (u'vehicleLengthValue', _VehicleLength_vehicleLengthValue),
+        (u'vehicleLengthConfidenceIndication', _VehicleLength_vehicleLengthConfidenceIndication),
         ])
     VehicleLength._ext = None
     
     #-----< VehicleLengthValue >-----#
-    VehicleLengthValue = INT(name='VehicleLengthValue', mode=MODE_TYPE)
-    VehicleLengthValue._cont = ASN1Dict([('tenCentimeters', 1), ('outOfRange', 1022), ('unavailable', 1023)])
+    VehicleLengthValue = INT(name=u'VehicleLengthValue', mode=MODE_TYPE)
+    VehicleLengthValue._cont = ASN1Dict([(u'tenCentimeters', 1), (u'outOfRange', 1022), (u'unavailable', 1023)])
     VehicleLengthValue._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=1023)], ev=None, er=[])
     
     #-----< VehicleLengthConfidenceIndication >-----#
-    VehicleLengthConfidenceIndication = ENUM(name='VehicleLengthConfidenceIndication', mode=MODE_TYPE)
-    VehicleLengthConfidenceIndication._cont = ASN1Dict([('noTrailerPresent', 0), ('trailerPresentWithKnownLength', 1), ('trailerPresentWithUnknownLength', 2), ('trailerPresenceIsUnknown', 3), ('unavailable', 4)])
+    VehicleLengthConfidenceIndication = ENUM(name=u'VehicleLengthConfidenceIndication', mode=MODE_TYPE)
+    VehicleLengthConfidenceIndication._cont = ASN1Dict([(u'noTrailerPresent', 0), (u'trailerPresentWithKnownLength', 1), (u'trailerPresentWithUnknownLength', 2), (u'trailerPresenceIsUnknown', 3), (u'unavailable', 4)])
     VehicleLengthConfidenceIndication._ext = None
     
     #-----< VehicleWidth >-----#
-    VehicleWidth = INT(name='VehicleWidth', mode=MODE_TYPE)
-    VehicleWidth._cont = ASN1Dict([('tenCentimeters', 1), ('outOfRange', 61), ('unavailable', 62)])
+    VehicleWidth = INT(name=u'VehicleWidth', mode=MODE_TYPE)
+    VehicleWidth._cont = ASN1Dict([(u'tenCentimeters', 1), (u'outOfRange', 61), (u'unavailable', 62)])
     VehicleWidth._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=62)], ev=None, er=[])
     
     #-----< PathHistory >-----#
-    PathHistory = SEQ_OF(name='PathHistory', mode=MODE_TYPE)
+    PathHistory = SEQ_OF(name=u'PathHistory', mode=MODE_TYPE)
     _PathHistory__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('ITS-Container', 'PathPoint')))
     PathHistory._cont = _PathHistory__item_
     PathHistory._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=40)], ev=None, er=[])
     
     #-----< EmergencyPriority >-----#
-    EmergencyPriority = BIT_STR(name='EmergencyPriority', mode=MODE_TYPE)
-    EmergencyPriority._cont = ASN1Dict([('requestForRightOfWay', 0), ('requestForFreeCrossingAtATrafficLight', 1)])
+    EmergencyPriority = BIT_STR(name=u'EmergencyPriority', mode=MODE_TYPE)
+    EmergencyPriority._cont = ASN1Dict([(u'requestForRightOfWay', 0), (u'requestForFreeCrossingAtATrafficLight', 1)])
     EmergencyPriority._const_sz = ASN1Set(rv=[2], rr=[], ev=None, er=[])
     
     #-----< InformationQuality >-----#
-    InformationQuality = INT(name='InformationQuality', mode=MODE_TYPE)
-    InformationQuality._cont = ASN1Dict([('unavailable', 0), ('lowest', 1), ('highest', 7)])
+    InformationQuality = INT(name=u'InformationQuality', mode=MODE_TYPE)
+    InformationQuality._cont = ASN1Dict([(u'unavailable', 0), (u'lowest', 1), (u'highest', 7)])
     InformationQuality._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=7)], ev=None, er=[])
     
     #-----< RoadType >-----#
-    RoadType = ENUM(name='RoadType', mode=MODE_TYPE)
-    RoadType._cont = ASN1Dict([('urban-NoStructuralSeparationToOppositeLanes', 0), ('urban-WithStructuralSeparationToOppositeLanes', 1), ('nonUrban-NoStructuralSeparationToOppositeLanes', 2), ('nonUrban-WithStructuralSeparationToOppositeLanes', 3)])
+    RoadType = ENUM(name=u'RoadType', mode=MODE_TYPE)
+    RoadType._cont = ASN1Dict([(u'urban-NoStructuralSeparationToOppositeLanes', 0), (u'urban-WithStructuralSeparationToOppositeLanes', 1), (u'nonUrban-NoStructuralSeparationToOppositeLanes', 2), (u'nonUrban-WithStructuralSeparationToOppositeLanes', 3)])
     RoadType._ext = None
     
     #-----< SteeringWheelAngle >-----#
-    SteeringWheelAngle = SEQ(name='SteeringWheelAngle', mode=MODE_TYPE)
-    _SteeringWheelAngle_steeringWheelAngleValue = INT(name='steeringWheelAngleValue', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'SteeringWheelAngleValue')))
-    _SteeringWheelAngle_steeringWheelAngleConfidence = INT(name='steeringWheelAngleConfidence', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'SteeringWheelAngleConfidence')))
+    SteeringWheelAngle = SEQ(name=u'SteeringWheelAngle', mode=MODE_TYPE)
+    _SteeringWheelAngle_steeringWheelAngleValue = INT(name=u'steeringWheelAngleValue', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'SteeringWheelAngleValue')))
+    _SteeringWheelAngle_steeringWheelAngleConfidence = INT(name=u'steeringWheelAngleConfidence', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'SteeringWheelAngleConfidence')))
     SteeringWheelAngle._cont = ASN1Dict([
-        ('steeringWheelAngleValue', _SteeringWheelAngle_steeringWheelAngleValue),
-        ('steeringWheelAngleConfidence', _SteeringWheelAngle_steeringWheelAngleConfidence),
+        (u'steeringWheelAngleValue', _SteeringWheelAngle_steeringWheelAngleValue),
+        (u'steeringWheelAngleConfidence', _SteeringWheelAngle_steeringWheelAngleConfidence),
         ])
     SteeringWheelAngle._ext = None
     
     #-----< SteeringWheelAngleValue >-----#
-    SteeringWheelAngleValue = INT(name='SteeringWheelAngleValue', mode=MODE_TYPE)
-    SteeringWheelAngleValue._cont = ASN1Dict([('straight', 0), ('onePointFiveDegreesToRight', -1), ('onePointFiveDegreesToLeft', 1), ('unavailable', 512)])
+    SteeringWheelAngleValue = INT(name=u'SteeringWheelAngleValue', mode=MODE_TYPE)
+    SteeringWheelAngleValue._cont = ASN1Dict([(u'straight', 0), (u'onePointFiveDegreesToRight', -1), (u'onePointFiveDegreesToLeft', 1), (u'unavailable', 512)])
     SteeringWheelAngleValue._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=-511, ub=512)], ev=None, er=[])
     
     #-----< SteeringWheelAngleConfidence >-----#
-    SteeringWheelAngleConfidence = INT(name='SteeringWheelAngleConfidence', mode=MODE_TYPE)
-    SteeringWheelAngleConfidence._cont = ASN1Dict([('equalOrWithinOnePointFiveDegree', 1), ('outOfRange', 126), ('unavailable', 127)])
+    SteeringWheelAngleConfidence = INT(name=u'SteeringWheelAngleConfidence', mode=MODE_TYPE)
+    SteeringWheelAngleConfidence._cont = ASN1Dict([(u'equalOrWithinOnePointFiveDegree', 1), (u'outOfRange', 126), (u'unavailable', 127)])
     SteeringWheelAngleConfidence._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=127)], ev=None, er=[])
     
     #-----< TimestampIts >-----#
-    TimestampIts = INT(name='TimestampIts', mode=MODE_TYPE)
-    TimestampIts._cont = ASN1Dict([('utcStartOf2004', 0), ('oneMillisecAfterUTCStartOf2004', 1)])
+    TimestampIts = INT(name=u'TimestampIts', mode=MODE_TYPE)
+    TimestampIts._cont = ASN1Dict([(u'utcStartOf2004', 0), (u'oneMillisecAfterUTCStartOf2004', 1)])
     TimestampIts._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=4398046511103)], ev=None, er=[])
     
     #-----< VehicleRole >-----#
-    VehicleRole = ENUM(name='VehicleRole', mode=MODE_TYPE)
-    VehicleRole._cont = ASN1Dict([('default', 0), ('publicTransport', 1), ('specialTransport', 2), ('dangerousGoods', 3), ('roadWork', 4), ('rescue', 5), ('emergency', 6), ('safetyCar', 7), ('agriculture', 8), ('commercial', 9), ('military', 10), ('roadOperator', 11), ('taxi', 12), ('reserved1', 13), ('reserved2', 14), ('reserved3', 15)])
+    VehicleRole = ENUM(name=u'VehicleRole', mode=MODE_TYPE)
+    VehicleRole._cont = ASN1Dict([(u'default', 0), (u'publicTransport', 1), (u'specialTransport', 2), (u'dangerousGoods', 3), (u'roadWork', 4), (u'rescue', 5), (u'emergency', 6), (u'safetyCar', 7), (u'agriculture', 8), (u'commercial', 9), (u'military', 10), (u'roadOperator', 11), (u'taxi', 12), (u'reserved1', 13), (u'reserved2', 14), (u'reserved3', 15)])
     VehicleRole._ext = None
     
     #-----< YawRate >-----#
-    YawRate = SEQ(name='YawRate', mode=MODE_TYPE)
-    _YawRate_yawRateValue = INT(name='yawRateValue', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'YawRateValue')))
-    _YawRate_yawRateConfidence = ENUM(name='yawRateConfidence', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'YawRateConfidence')))
+    YawRate = SEQ(name=u'YawRate', mode=MODE_TYPE)
+    _YawRate_yawRateValue = INT(name=u'yawRateValue', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'YawRateValue')))
+    _YawRate_yawRateConfidence = ENUM(name=u'yawRateConfidence', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'YawRateConfidence')))
     YawRate._cont = ASN1Dict([
-        ('yawRateValue', _YawRate_yawRateValue),
-        ('yawRateConfidence', _YawRate_yawRateConfidence),
+        (u'yawRateValue', _YawRate_yawRateValue),
+        (u'yawRateConfidence', _YawRate_yawRateConfidence),
         ])
     YawRate._ext = None
     
     #-----< YawRateValue >-----#
-    YawRateValue = INT(name='YawRateValue', mode=MODE_TYPE)
-    YawRateValue._cont = ASN1Dict([('straight', 0), ('degSec-000-01ToRight', -1), ('degSec-000-01ToLeft', 1), ('unavailable', 32767)])
+    YawRateValue = INT(name=u'YawRateValue', mode=MODE_TYPE)
+    YawRateValue._cont = ASN1Dict([(u'straight', 0), (u'degSec-000-01ToRight', -1), (u'degSec-000-01ToLeft', 1), (u'unavailable', 32767)])
     YawRateValue._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=-32766, ub=32767)], ev=None, er=[])
     
     #-----< YawRateConfidence >-----#
-    YawRateConfidence = ENUM(name='YawRateConfidence', mode=MODE_TYPE)
-    YawRateConfidence._cont = ASN1Dict([('degSec-000-01', 0), ('degSec-000-05', 1), ('degSec-000-10', 2), ('degSec-001-00', 3), ('degSec-005-00', 4), ('degSec-010-00', 5), ('degSec-100-00', 6), ('outOfRange', 7), ('unavailable', 8)])
+    YawRateConfidence = ENUM(name=u'YawRateConfidence', mode=MODE_TYPE)
+    YawRateConfidence._cont = ASN1Dict([(u'degSec-000-01', 0), (u'degSec-000-05', 1), (u'degSec-000-10', 2), (u'degSec-001-00', 3), (u'degSec-005-00', 4), (u'degSec-010-00', 5), (u'degSec-100-00', 6), (u'outOfRange', 7), (u'unavailable', 8)])
     YawRateConfidence._ext = None
     
     #-----< ProtectedZoneType >-----#
-    ProtectedZoneType = ENUM(name='ProtectedZoneType', mode=MODE_TYPE)
-    ProtectedZoneType._cont = ASN1Dict([('permanentCenDsrcTolling', 0), ('temporaryCenDsrcTolling', 1)])
-    ProtectedZoneType._ext = ['temporaryCenDsrcTolling']
+    ProtectedZoneType = ENUM(name=u'ProtectedZoneType', mode=MODE_TYPE)
+    ProtectedZoneType._cont = ASN1Dict([(u'permanentCenDsrcTolling', 0), (u'temporaryCenDsrcTolling', 1)])
+    ProtectedZoneType._ext = [u'temporaryCenDsrcTolling']
     
     #-----< RelevanceDistance >-----#
-    RelevanceDistance = ENUM(name='RelevanceDistance', mode=MODE_TYPE)
-    RelevanceDistance._cont = ASN1Dict([('lessThan50m', 0), ('lessThan100m', 1), ('lessThan200m', 2), ('lessThan500m', 3), ('lessThan1000m', 4), ('lessThan5km', 5), ('lessThan10km', 6), ('over10km', 7)])
+    RelevanceDistance = ENUM(name=u'RelevanceDistance', mode=MODE_TYPE)
+    RelevanceDistance._cont = ASN1Dict([(u'lessThan50m', 0), (u'lessThan100m', 1), (u'lessThan200m', 2), (u'lessThan500m', 3), (u'lessThan1000m', 4), (u'lessThan5km', 5), (u'lessThan10km', 6), (u'over10km', 7)])
     RelevanceDistance._ext = None
     
     #-----< RelevanceTrafficDirection >-----#
-    RelevanceTrafficDirection = ENUM(name='RelevanceTrafficDirection', mode=MODE_TYPE)
-    RelevanceTrafficDirection._cont = ASN1Dict([('allTrafficDirections', 0), ('upstreamTraffic', 1), ('downstreamTraffic', 2), ('oppositeTraffic', 3)])
+    RelevanceTrafficDirection = ENUM(name=u'RelevanceTrafficDirection', mode=MODE_TYPE)
+    RelevanceTrafficDirection._cont = ASN1Dict([(u'allTrafficDirections', 0), (u'upstreamTraffic', 1), (u'downstreamTraffic', 2), (u'oppositeTraffic', 3)])
     RelevanceTrafficDirection._ext = None
     
     #-----< TransmissionInterval >-----#
-    TransmissionInterval = INT(name='TransmissionInterval', mode=MODE_TYPE)
-    TransmissionInterval._cont = ASN1Dict([('oneMilliSecond', 1), ('tenSeconds', 10000)])
+    TransmissionInterval = INT(name=u'TransmissionInterval', mode=MODE_TYPE)
+    TransmissionInterval._cont = ASN1Dict([(u'oneMilliSecond', 1), (u'tenSeconds', 10000)])
     TransmissionInterval._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=10000)], ev=None, er=[])
     
     #-----< ValidityDuration >-----#
-    ValidityDuration = INT(name='ValidityDuration', mode=MODE_TYPE)
-    ValidityDuration._cont = ASN1Dict([('timeOfDetection', 0), ('oneSecondAfterDetection', 1)])
+    ValidityDuration = INT(name=u'ValidityDuration', mode=MODE_TYPE)
+    ValidityDuration._cont = ASN1Dict([(u'timeOfDetection', 0), (u'oneSecondAfterDetection', 1)])
     ValidityDuration._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=86400)], ev=None, er=[])
     
     #-----< ActionID >-----#
-    ActionID = SEQ(name='ActionID', mode=MODE_TYPE)
-    _ActionID_originatingStationID = INT(name='originatingStationID', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'StationID')))
-    _ActionID_sequenceNumber = INT(name='sequenceNumber', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'SequenceNumber')))
+    ActionID = SEQ(name=u'ActionID', mode=MODE_TYPE)
+    _ActionID_originatingStationID = INT(name=u'originatingStationID', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'StationID')))
+    _ActionID_sequenceNumber = INT(name=u'sequenceNumber', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'SequenceNumber')))
     ActionID._cont = ASN1Dict([
-        ('originatingStationID', _ActionID_originatingStationID),
-        ('sequenceNumber', _ActionID_sequenceNumber),
+        (u'originatingStationID', _ActionID_originatingStationID),
+        (u'sequenceNumber', _ActionID_sequenceNumber),
         ])
     ActionID._ext = None
     
     #-----< ItineraryPath >-----#
-    ItineraryPath = SEQ_OF(name='ItineraryPath', mode=MODE_TYPE)
+    ItineraryPath = SEQ_OF(name=u'ItineraryPath', mode=MODE_TYPE)
     _ItineraryPath__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('ITS-Container', 'ReferencePosition')))
     ItineraryPath._cont = _ItineraryPath__item_
     ItineraryPath._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=40)], ev=None, er=[])
     
     #-----< ProtectedCommunicationZone >-----#
-    ProtectedCommunicationZone = SEQ(name='ProtectedCommunicationZone', mode=MODE_TYPE)
-    _ProtectedCommunicationZone_protectedZoneType = ENUM(name='protectedZoneType', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'ProtectedZoneType')))
-    _ProtectedCommunicationZone_expiryTime = INT(name='expiryTime', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'TimestampIts')), opt=True)
-    _ProtectedCommunicationZone_protectedZoneLatitude = INT(name='protectedZoneLatitude', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'Latitude')))
-    _ProtectedCommunicationZone_protectedZoneLongitude = INT(name='protectedZoneLongitude', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'Longitude')))
-    _ProtectedCommunicationZone_protectedZoneRadius = INT(name='protectedZoneRadius', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'ProtectedZoneRadius')), opt=True)
-    _ProtectedCommunicationZone_protectedZoneID = INT(name='protectedZoneID', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'ProtectedZoneID')), opt=True)
+    ProtectedCommunicationZone = SEQ(name=u'ProtectedCommunicationZone', mode=MODE_TYPE)
+    _ProtectedCommunicationZone_protectedZoneType = ENUM(name=u'protectedZoneType', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'ProtectedZoneType')))
+    _ProtectedCommunicationZone_expiryTime = INT(name=u'expiryTime', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'TimestampIts')), opt=True)
+    _ProtectedCommunicationZone_protectedZoneLatitude = INT(name=u'protectedZoneLatitude', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'Latitude')))
+    _ProtectedCommunicationZone_protectedZoneLongitude = INT(name=u'protectedZoneLongitude', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'Longitude')))
+    _ProtectedCommunicationZone_protectedZoneRadius = INT(name=u'protectedZoneRadius', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'ProtectedZoneRadius')), opt=True)
+    _ProtectedCommunicationZone_protectedZoneID = INT(name=u'protectedZoneID', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'ProtectedZoneID')), opt=True)
     ProtectedCommunicationZone._cont = ASN1Dict([
-        ('protectedZoneType', _ProtectedCommunicationZone_protectedZoneType),
-        ('expiryTime', _ProtectedCommunicationZone_expiryTime),
-        ('protectedZoneLatitude', _ProtectedCommunicationZone_protectedZoneLatitude),
-        ('protectedZoneLongitude', _ProtectedCommunicationZone_protectedZoneLongitude),
-        ('protectedZoneRadius', _ProtectedCommunicationZone_protectedZoneRadius),
-        ('protectedZoneID', _ProtectedCommunicationZone_protectedZoneID),
+        (u'protectedZoneType', _ProtectedCommunicationZone_protectedZoneType),
+        (u'expiryTime', _ProtectedCommunicationZone_expiryTime),
+        (u'protectedZoneLatitude', _ProtectedCommunicationZone_protectedZoneLatitude),
+        (u'protectedZoneLongitude', _ProtectedCommunicationZone_protectedZoneLongitude),
+        (u'protectedZoneRadius', _ProtectedCommunicationZone_protectedZoneRadius),
+        (u'protectedZoneID', _ProtectedCommunicationZone_protectedZoneID),
         ])
     ProtectedCommunicationZone._ext = []
     
     #-----< Traces >-----#
-    Traces = SEQ_OF(name='Traces', mode=MODE_TYPE)
+    Traces = SEQ_OF(name=u'Traces', mode=MODE_TYPE)
     _Traces__item_ = SEQ_OF(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('ITS-Container', 'PathHistory')))
     Traces._cont = _Traces__item_
     Traces._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=7)], ev=None, er=[])
     
     #-----< NumberOfOccupants >-----#
-    NumberOfOccupants = INT(name='NumberOfOccupants', mode=MODE_TYPE)
-    NumberOfOccupants._cont = ASN1Dict([('oneOccupant', 1), ('unavailable', 127)])
+    NumberOfOccupants = INT(name=u'NumberOfOccupants', mode=MODE_TYPE)
+    NumberOfOccupants._cont = ASN1Dict([(u'oneOccupant', 1), (u'unavailable', 127)])
     NumberOfOccupants._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=127)], ev=None, er=[])
     
     #-----< SequenceNumber >-----#
-    SequenceNumber = INT(name='SequenceNumber', mode=MODE_TYPE)
+    SequenceNumber = INT(name=u'SequenceNumber', mode=MODE_TYPE)
     SequenceNumber._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=65535)], ev=None, er=[])
     
     #-----< PositionOfPillars >-----#
-    PositionOfPillars = SEQ_OF(name='PositionOfPillars', mode=MODE_TYPE)
+    PositionOfPillars = SEQ_OF(name=u'PositionOfPillars', mode=MODE_TYPE)
     _PositionOfPillars__item_ = INT(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('ITS-Container', 'PosPillar')))
     PositionOfPillars._cont = _PositionOfPillars__item_
     PositionOfPillars._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=3)], ev=[], er=[])
     
     #-----< RestrictedTypes >-----#
-    RestrictedTypes = SEQ_OF(name='RestrictedTypes', mode=MODE_TYPE)
+    RestrictedTypes = SEQ_OF(name=u'RestrictedTypes', mode=MODE_TYPE)
     _RestrictedTypes__item_ = INT(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('ITS-Container', 'StationType')))
     RestrictedTypes._cont = _RestrictedTypes__item_
     RestrictedTypes._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=3)], ev=[], er=[])
     
     #-----< EventHistory >-----#
-    EventHistory = SEQ_OF(name='EventHistory', mode=MODE_TYPE)
+    EventHistory = SEQ_OF(name=u'EventHistory', mode=MODE_TYPE)
     _EventHistory__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('ITS-Container', 'EventPoint')))
     EventHistory._cont = _EventHistory__item_
     EventHistory._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=23)], ev=None, er=[])
     
     #-----< EventPoint >-----#
-    EventPoint = SEQ(name='EventPoint', mode=MODE_TYPE)
-    _EventPoint_eventPosition = SEQ(name='eventPosition', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'DeltaReferencePosition')))
-    _EventPoint_eventDeltaTime = INT(name='eventDeltaTime', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'PathDeltaTime')), opt=True)
-    _EventPoint_informationQuality = INT(name='informationQuality', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'InformationQuality')))
+    EventPoint = SEQ(name=u'EventPoint', mode=MODE_TYPE)
+    _EventPoint_eventPosition = SEQ(name=u'eventPosition', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'DeltaReferencePosition')))
+    _EventPoint_eventDeltaTime = INT(name=u'eventDeltaTime', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'PathDeltaTime')), opt=True)
+    _EventPoint_informationQuality = INT(name=u'informationQuality', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'InformationQuality')))
     EventPoint._cont = ASN1Dict([
-        ('eventPosition', _EventPoint_eventPosition),
-        ('eventDeltaTime', _EventPoint_eventDeltaTime),
-        ('informationQuality', _EventPoint_informationQuality),
+        (u'eventPosition', _EventPoint_eventPosition),
+        (u'eventDeltaTime', _EventPoint_eventDeltaTime),
+        (u'informationQuality', _EventPoint_informationQuality),
         ])
     EventPoint._ext = None
     
     #-----< ProtectedCommunicationZonesRSU >-----#
-    ProtectedCommunicationZonesRSU = SEQ_OF(name='ProtectedCommunicationZonesRSU', mode=MODE_TYPE)
+    ProtectedCommunicationZonesRSU = SEQ_OF(name=u'ProtectedCommunicationZonesRSU', mode=MODE_TYPE)
     _ProtectedCommunicationZonesRSU__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('ITS-Container', 'ProtectedCommunicationZone')))
     ProtectedCommunicationZonesRSU._cont = _ProtectedCommunicationZonesRSU__item_
     ProtectedCommunicationZonesRSU._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=16)], ev=None, er=[])
     
     #-----< CenDsrcTollingZone >-----#
-    CenDsrcTollingZone = SEQ(name='CenDsrcTollingZone', mode=MODE_TYPE)
-    _CenDsrcTollingZone_protectedZoneLatitude = INT(name='protectedZoneLatitude', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'Latitude')))
-    _CenDsrcTollingZone_protectedZoneLongitude = INT(name='protectedZoneLongitude', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'Longitude')))
-    _CenDsrcTollingZone_cenDsrcTollingZoneID = INT(name='cenDsrcTollingZoneID', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'CenDsrcTollingZoneID')), opt=True)
+    CenDsrcTollingZone = SEQ(name=u'CenDsrcTollingZone', mode=MODE_TYPE)
+    _CenDsrcTollingZone_protectedZoneLatitude = INT(name=u'protectedZoneLatitude', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'Latitude')))
+    _CenDsrcTollingZone_protectedZoneLongitude = INT(name=u'protectedZoneLongitude', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'Longitude')))
+    _CenDsrcTollingZone_cenDsrcTollingZoneID = INT(name=u'cenDsrcTollingZoneID', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'CenDsrcTollingZoneID')), opt=True)
     CenDsrcTollingZone._cont = ASN1Dict([
-        ('protectedZoneLatitude', _CenDsrcTollingZone_protectedZoneLatitude),
-        ('protectedZoneLongitude', _CenDsrcTollingZone_protectedZoneLongitude),
-        ('cenDsrcTollingZoneID', _CenDsrcTollingZone_cenDsrcTollingZoneID),
+        (u'protectedZoneLatitude', _CenDsrcTollingZone_protectedZoneLatitude),
+        (u'protectedZoneLongitude', _CenDsrcTollingZone_protectedZoneLongitude),
+        (u'cenDsrcTollingZoneID', _CenDsrcTollingZone_cenDsrcTollingZoneID),
         ])
     CenDsrcTollingZone._ext = []
     
     #-----< ProtectedZoneRadius >-----#
-    ProtectedZoneRadius = INT(name='ProtectedZoneRadius', mode=MODE_TYPE)
-    ProtectedZoneRadius._cont = ASN1Dict([('oneMeter', 1)])
+    ProtectedZoneRadius = INT(name=u'ProtectedZoneRadius', mode=MODE_TYPE)
+    ProtectedZoneRadius._cont = ASN1Dict([(u'oneMeter', 1)])
     ProtectedZoneRadius._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=255)], ev=[], er=[])
     
     #-----< ProtectedZoneID >-----#
-    ProtectedZoneID = INT(name='ProtectedZoneID', mode=MODE_TYPE)
+    ProtectedZoneID = INT(name=u'ProtectedZoneID', mode=MODE_TYPE)
     ProtectedZoneID._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=134217727)], ev=None, er=[])
     
     #-----< CenDsrcTollingZoneID >-----#
-    CenDsrcTollingZoneID = INT(name='CenDsrcTollingZoneID', mode=MODE_TYPE, typeref=ASN1RefType(('ITS-Container', 'ProtectedZoneID')))
+    CenDsrcTollingZoneID = INT(name=u'CenDsrcTollingZoneID', mode=MODE_TYPE, typeref=ASN1RefType(('ITS-Container', 'ProtectedZoneID')))
     
     #-----< DigitalMap >-----#
-    DigitalMap = SEQ_OF(name='DigitalMap', mode=MODE_TYPE)
+    DigitalMap = SEQ_OF(name=u'DigitalMap', mode=MODE_TYPE)
     _DigitalMap__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('ITS-Container', 'ReferencePosition')))
     DigitalMap._cont = _DigitalMap__item_
     DigitalMap._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=256)], ev=None, er=[])
     
     #-----< OpeningDaysHours >-----#
-    OpeningDaysHours = STR_UTF8(name='OpeningDaysHours', mode=MODE_TYPE)
+    OpeningDaysHours = STR_UTF8(name=u'OpeningDaysHours', mode=MODE_TYPE)
     
     #-----< PhoneNumber >-----#
-    PhoneNumber = STR_NUM(name='PhoneNumber', mode=MODE_TYPE)
+    PhoneNumber = STR_NUM(name=u'PhoneNumber', mode=MODE_TYPE)
     PhoneNumber._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=16)], ev=None, er=[])
     
     _all_ = [
@@ -5175,220 +5175,220 @@ class ITS_Container:
 
 class REGION:
 
-    _name_  = 'REGION'
+    _name_  = u'REGION'
     _oid_   = [1, 0, 19091, 2, 1, 2]
     
     _obj_ = [
-        'Reg-AdvisorySpeed',
-        'Reg-ComputedLane',
-        'Reg-ConnectionManeuverAssist',
-        'Reg-GenericLane',
-        'Reg-IntersectionGeometry',
-        'Reg-IntersectionState',
-        'Reg-LaneAttributes',
-        'Reg-LaneDataAttribute',
-        'Reg-MapData',
-        'Reg-MovementEvent',
-        'Reg-MovementState',
-        'Reg-NodeAttributeSetXY',
-        'Reg-NodeOffsetPointXY',
-        'Reg-Position3D',
-        'Reg-RequestorDescription',
-        'Reg-RequestorType',
-        'Reg-RestrictionUserType',
-        'Reg-RoadSegment',
-        'Reg-RTCMcorrections',
-        'Reg-SignalControlZone',
-        'Reg-SignalRequest',
-        'Reg-SignalRequestMessage',
-        'Reg-SignalRequestPackage',
-        'Reg-SignalStatus',
-        'Reg-SignalStatusMessage',
-        'Reg-SignalStatusPackage',
-        'Reg-SPAT',
+        u'Reg-AdvisorySpeed',
+        u'Reg-ComputedLane',
+        u'Reg-ConnectionManeuverAssist',
+        u'Reg-GenericLane',
+        u'Reg-IntersectionGeometry',
+        u'Reg-IntersectionState',
+        u'Reg-LaneAttributes',
+        u'Reg-LaneDataAttribute',
+        u'Reg-MapData',
+        u'Reg-MovementEvent',
+        u'Reg-MovementState',
+        u'Reg-NodeAttributeSetXY',
+        u'Reg-NodeOffsetPointXY',
+        u'Reg-Position3D',
+        u'Reg-RequestorDescription',
+        u'Reg-RequestorType',
+        u'Reg-RestrictionUserType',
+        u'Reg-RoadSegment',
+        u'Reg-RTCMcorrections',
+        u'Reg-SignalControlZone',
+        u'Reg-SignalRequest',
+        u'Reg-SignalRequestMessage',
+        u'Reg-SignalRequestPackage',
+        u'Reg-SignalStatus',
+        u'Reg-SignalStatusMessage',
+        u'Reg-SignalStatusPackage',
+        u'Reg-SPAT',
         ]
     _type_ = [
         ]
     _set_ = [
-        'Reg-AdvisorySpeed',
-        'Reg-ComputedLane',
-        'Reg-ConnectionManeuverAssist',
-        'Reg-GenericLane',
-        'Reg-IntersectionGeometry',
-        'Reg-IntersectionState',
-        'Reg-LaneAttributes',
-        'Reg-LaneDataAttribute',
-        'Reg-MapData',
-        'Reg-MovementEvent',
-        'Reg-MovementState',
-        'Reg-NodeAttributeSetXY',
-        'Reg-NodeOffsetPointXY',
-        'Reg-Position3D',
-        'Reg-RequestorDescription',
-        'Reg-RequestorType',
-        'Reg-RestrictionUserType',
-        'Reg-RoadSegment',
-        'Reg-RTCMcorrections',
-        'Reg-SignalControlZone',
-        'Reg-SignalRequest',
-        'Reg-SignalRequestMessage',
-        'Reg-SignalRequestPackage',
-        'Reg-SignalStatus',
-        'Reg-SignalStatusMessage',
-        'Reg-SignalStatusPackage',
-        'Reg-SPAT',
+        u'Reg-AdvisorySpeed',
+        u'Reg-ComputedLane',
+        u'Reg-ConnectionManeuverAssist',
+        u'Reg-GenericLane',
+        u'Reg-IntersectionGeometry',
+        u'Reg-IntersectionState',
+        u'Reg-LaneAttributes',
+        u'Reg-LaneDataAttribute',
+        u'Reg-MapData',
+        u'Reg-MovementEvent',
+        u'Reg-MovementState',
+        u'Reg-NodeAttributeSetXY',
+        u'Reg-NodeOffsetPointXY',
+        u'Reg-Position3D',
+        u'Reg-RequestorDescription',
+        u'Reg-RequestorType',
+        u'Reg-RestrictionUserType',
+        u'Reg-RoadSegment',
+        u'Reg-RTCMcorrections',
+        u'Reg-SignalControlZone',
+        u'Reg-SignalRequest',
+        u'Reg-SignalRequestMessage',
+        u'Reg-SignalRequestPackage',
+        u'Reg-SignalStatus',
+        u'Reg-SignalStatusMessage',
+        u'Reg-SignalStatusPackage',
+        u'Reg-SPAT',
         ]
     _val_ = [
         ]
     _class_ = [
-        'Reg-AdvisorySpeed',
-        'Reg-ComputedLane',
-        'Reg-ConnectionManeuverAssist',
-        'Reg-GenericLane',
-        'Reg-IntersectionGeometry',
-        'Reg-IntersectionState',
-        'Reg-LaneAttributes',
-        'Reg-LaneDataAttribute',
-        'Reg-MapData',
-        'Reg-MovementEvent',
-        'Reg-MovementState',
-        'Reg-NodeAttributeSetXY',
-        'Reg-NodeOffsetPointXY',
-        'Reg-Position3D',
-        'Reg-RequestorDescription',
-        'Reg-RequestorType',
-        'Reg-RestrictionUserType',
-        'Reg-RoadSegment',
-        'Reg-RTCMcorrections',
-        'Reg-SignalControlZone',
-        'Reg-SignalRequest',
-        'Reg-SignalRequestMessage',
-        'Reg-SignalRequestPackage',
-        'Reg-SignalStatus',
-        'Reg-SignalStatusMessage',
-        'Reg-SignalStatusPackage',
-        'Reg-SPAT',
+        u'Reg-AdvisorySpeed',
+        u'Reg-ComputedLane',
+        u'Reg-ConnectionManeuverAssist',
+        u'Reg-GenericLane',
+        u'Reg-IntersectionGeometry',
+        u'Reg-IntersectionState',
+        u'Reg-LaneAttributes',
+        u'Reg-LaneDataAttribute',
+        u'Reg-MapData',
+        u'Reg-MovementEvent',
+        u'Reg-MovementState',
+        u'Reg-NodeAttributeSetXY',
+        u'Reg-NodeOffsetPointXY',
+        u'Reg-Position3D',
+        u'Reg-RequestorDescription',
+        u'Reg-RequestorType',
+        u'Reg-RestrictionUserType',
+        u'Reg-RoadSegment',
+        u'Reg-RTCMcorrections',
+        u'Reg-SignalControlZone',
+        u'Reg-SignalRequest',
+        u'Reg-SignalRequestMessage',
+        u'Reg-SignalRequestPackage',
+        u'Reg-SignalStatus',
+        u'Reg-SignalStatusMessage',
+        u'Reg-SignalStatusPackage',
+        u'Reg-SPAT',
         ]
     _param_ = [
         ]
     
     #-----< Reg-AdvisorySpeed >-----#
-    Reg_AdvisorySpeed = CLASS(name='Reg-AdvisorySpeed', mode=MODE_SET, typeref=ASN1RefType(('DSRC', 'REG-EXT-ID-AND-TYPE')))
+    Reg_AdvisorySpeed = CLASS(name=u'Reg-AdvisorySpeed', mode=MODE_SET, typeref=ASN1RefType(('DSRC', 'REG-EXT-ID-AND-TYPE')))
     Reg_AdvisorySpeed._val = ASN1Set(rv=[], rr=[], ev=[], er=[])
     
     #-----< Reg-ComputedLane >-----#
-    Reg_ComputedLane = CLASS(name='Reg-ComputedLane', mode=MODE_SET, typeref=ASN1RefType(('DSRC', 'REG-EXT-ID-AND-TYPE')))
+    Reg_ComputedLane = CLASS(name=u'Reg-ComputedLane', mode=MODE_SET, typeref=ASN1RefType(('DSRC', 'REG-EXT-ID-AND-TYPE')))
     Reg_ComputedLane._val = ASN1Set(rv=[], rr=[], ev=[], er=[])
     
     #-----< Reg-ConnectionManeuverAssist >-----#
-    Reg_ConnectionManeuverAssist = CLASS(name='Reg-ConnectionManeuverAssist', mode=MODE_SET, typeref=ASN1RefType(('DSRC', 'REG-EXT-ID-AND-TYPE')))
-    _Reg_ConnectionManeuverAssist_val_Type_0 = SEQ(name='Type', mode=MODE_TYPE, typeref=ASN1RefType(('AddGrpC', 'ConnectionManeuverAssist-addGrpC')))
-    Reg_ConnectionManeuverAssist._val = ASN1Set(rv=[dict([('Type', _Reg_ConnectionManeuverAssist_val_Type_0), ('id', 3)])], rr=[], ev=[], er=[])
+    Reg_ConnectionManeuverAssist = CLASS(name=u'Reg-ConnectionManeuverAssist', mode=MODE_SET, typeref=ASN1RefType(('DSRC', 'REG-EXT-ID-AND-TYPE')))
+    _Reg_ConnectionManeuverAssist_val_Type_0 = SEQ(name=u'Type', mode=MODE_TYPE, typeref=ASN1RefType(('AddGrpC', 'ConnectionManeuverAssist-addGrpC')))
+    Reg_ConnectionManeuverAssist._val = ASN1Set(rv=[dict([(u'Type', _Reg_ConnectionManeuverAssist_val_Type_0), (u'id', 3)])], rr=[], ev=[], er=[])
     
     #-----< Reg-GenericLane >-----#
-    Reg_GenericLane = CLASS(name='Reg-GenericLane', mode=MODE_SET, typeref=ASN1RefType(('DSRC', 'REG-EXT-ID-AND-TYPE')))
-    _Reg_GenericLane_val_Type_0 = SEQ(name='Type', mode=MODE_TYPE, typeref=ASN1RefType(('AddGrpC', 'ConnectionTrajectory-addGrpC')))
-    Reg_GenericLane._val = ASN1Set(rv=[dict([('Type', _Reg_GenericLane_val_Type_0), ('id', 3)])], rr=[], ev=[], er=[])
+    Reg_GenericLane = CLASS(name=u'Reg-GenericLane', mode=MODE_SET, typeref=ASN1RefType(('DSRC', 'REG-EXT-ID-AND-TYPE')))
+    _Reg_GenericLane_val_Type_0 = SEQ(name=u'Type', mode=MODE_TYPE, typeref=ASN1RefType(('AddGrpC', 'ConnectionTrajectory-addGrpC')))
+    Reg_GenericLane._val = ASN1Set(rv=[dict([(u'Type', _Reg_GenericLane_val_Type_0), (u'id', 3)])], rr=[], ev=[], er=[])
     
     #-----< Reg-IntersectionGeometry >-----#
-    Reg_IntersectionGeometry = CLASS(name='Reg-IntersectionGeometry', mode=MODE_SET, typeref=ASN1RefType(('DSRC', 'REG-EXT-ID-AND-TYPE')))
+    Reg_IntersectionGeometry = CLASS(name=u'Reg-IntersectionGeometry', mode=MODE_SET, typeref=ASN1RefType(('DSRC', 'REG-EXT-ID-AND-TYPE')))
     Reg_IntersectionGeometry._val = ASN1Set(rv=[], rr=[], ev=[], er=[])
     
     #-----< Reg-IntersectionState >-----#
-    Reg_IntersectionState = CLASS(name='Reg-IntersectionState', mode=MODE_SET, typeref=ASN1RefType(('DSRC', 'REG-EXT-ID-AND-TYPE')))
-    _Reg_IntersectionState_val_Type_0 = SEQ(name='Type', mode=MODE_TYPE, typeref=ASN1RefType(('AddGrpC', 'IntersectionState-addGrpC')))
-    Reg_IntersectionState._val = ASN1Set(rv=[dict([('Type', _Reg_IntersectionState_val_Type_0), ('id', 3)])], rr=[], ev=[], er=[])
+    Reg_IntersectionState = CLASS(name=u'Reg-IntersectionState', mode=MODE_SET, typeref=ASN1RefType(('DSRC', 'REG-EXT-ID-AND-TYPE')))
+    _Reg_IntersectionState_val_Type_0 = SEQ(name=u'Type', mode=MODE_TYPE, typeref=ASN1RefType(('AddGrpC', 'IntersectionState-addGrpC')))
+    Reg_IntersectionState._val = ASN1Set(rv=[dict([(u'Type', _Reg_IntersectionState_val_Type_0), (u'id', 3)])], rr=[], ev=[], er=[])
     
     #-----< Reg-LaneAttributes >-----#
-    Reg_LaneAttributes = CLASS(name='Reg-LaneAttributes', mode=MODE_SET, typeref=ASN1RefType(('DSRC', 'REG-EXT-ID-AND-TYPE')))
-    _Reg_LaneAttributes_val_Type_0 = SEQ(name='Type', mode=MODE_TYPE, typeref=ASN1RefType(('AddGrpC', 'LaneAttributes-addGrpC')))
-    Reg_LaneAttributes._val = ASN1Set(rv=[dict([('Type', _Reg_LaneAttributes_val_Type_0), ('id', 3)])], rr=[], ev=[], er=[])
+    Reg_LaneAttributes = CLASS(name=u'Reg-LaneAttributes', mode=MODE_SET, typeref=ASN1RefType(('DSRC', 'REG-EXT-ID-AND-TYPE')))
+    _Reg_LaneAttributes_val_Type_0 = SEQ(name=u'Type', mode=MODE_TYPE, typeref=ASN1RefType(('AddGrpC', 'LaneAttributes-addGrpC')))
+    Reg_LaneAttributes._val = ASN1Set(rv=[dict([(u'Type', _Reg_LaneAttributes_val_Type_0), (u'id', 3)])], rr=[], ev=[], er=[])
     
     #-----< Reg-LaneDataAttribute >-----#
-    Reg_LaneDataAttribute = CLASS(name='Reg-LaneDataAttribute', mode=MODE_SET, typeref=ASN1RefType(('DSRC', 'REG-EXT-ID-AND-TYPE')))
+    Reg_LaneDataAttribute = CLASS(name=u'Reg-LaneDataAttribute', mode=MODE_SET, typeref=ASN1RefType(('DSRC', 'REG-EXT-ID-AND-TYPE')))
     Reg_LaneDataAttribute._val = ASN1Set(rv=[], rr=[], ev=[], er=[])
     
     #-----< Reg-MapData >-----#
-    Reg_MapData = CLASS(name='Reg-MapData', mode=MODE_SET, typeref=ASN1RefType(('DSRC', 'REG-EXT-ID-AND-TYPE')))
-    _Reg_MapData_val_Type_0 = SEQ(name='Type', mode=MODE_TYPE, typeref=ASN1RefType(('AddGrpC', 'MapData-addGrpC')))
-    Reg_MapData._val = ASN1Set(rv=[dict([('Type', _Reg_MapData_val_Type_0), ('id', 3)])], rr=[], ev=[], er=[])
+    Reg_MapData = CLASS(name=u'Reg-MapData', mode=MODE_SET, typeref=ASN1RefType(('DSRC', 'REG-EXT-ID-AND-TYPE')))
+    _Reg_MapData_val_Type_0 = SEQ(name=u'Type', mode=MODE_TYPE, typeref=ASN1RefType(('AddGrpC', 'MapData-addGrpC')))
+    Reg_MapData._val = ASN1Set(rv=[dict([(u'Type', _Reg_MapData_val_Type_0), (u'id', 3)])], rr=[], ev=[], er=[])
     
     #-----< Reg-MovementEvent >-----#
-    Reg_MovementEvent = CLASS(name='Reg-MovementEvent', mode=MODE_SET, typeref=ASN1RefType(('DSRC', 'REG-EXT-ID-AND-TYPE')))
-    _Reg_MovementEvent_val_Type_0 = SEQ(name='Type', mode=MODE_TYPE, typeref=ASN1RefType(('AddGrpC', 'MovementEvent-addGrpC')))
-    Reg_MovementEvent._val = ASN1Set(rv=[dict([('Type', _Reg_MovementEvent_val_Type_0), ('id', 3)])], rr=[], ev=[], er=[])
+    Reg_MovementEvent = CLASS(name=u'Reg-MovementEvent', mode=MODE_SET, typeref=ASN1RefType(('DSRC', 'REG-EXT-ID-AND-TYPE')))
+    _Reg_MovementEvent_val_Type_0 = SEQ(name=u'Type', mode=MODE_TYPE, typeref=ASN1RefType(('AddGrpC', 'MovementEvent-addGrpC')))
+    Reg_MovementEvent._val = ASN1Set(rv=[dict([(u'Type', _Reg_MovementEvent_val_Type_0), (u'id', 3)])], rr=[], ev=[], er=[])
     
     #-----< Reg-MovementState >-----#
-    Reg_MovementState = CLASS(name='Reg-MovementState', mode=MODE_SET, typeref=ASN1RefType(('DSRC', 'REG-EXT-ID-AND-TYPE')))
+    Reg_MovementState = CLASS(name=u'Reg-MovementState', mode=MODE_SET, typeref=ASN1RefType(('DSRC', 'REG-EXT-ID-AND-TYPE')))
     Reg_MovementState._val = ASN1Set(rv=[], rr=[], ev=[], er=[])
     
     #-----< Reg-NodeAttributeSetXY >-----#
-    Reg_NodeAttributeSetXY = CLASS(name='Reg-NodeAttributeSetXY', mode=MODE_SET, typeref=ASN1RefType(('DSRC', 'REG-EXT-ID-AND-TYPE')))
-    _Reg_NodeAttributeSetXY_val_Type_0 = SEQ(name='Type', mode=MODE_TYPE, typeref=ASN1RefType(('AddGrpC', 'NodeAttributeSet-addGrpC')))
-    Reg_NodeAttributeSetXY._val = ASN1Set(rv=[dict([('Type', _Reg_NodeAttributeSetXY_val_Type_0), ('id', 3)])], rr=[], ev=[], er=[])
+    Reg_NodeAttributeSetXY = CLASS(name=u'Reg-NodeAttributeSetXY', mode=MODE_SET, typeref=ASN1RefType(('DSRC', 'REG-EXT-ID-AND-TYPE')))
+    _Reg_NodeAttributeSetXY_val_Type_0 = SEQ(name=u'Type', mode=MODE_TYPE, typeref=ASN1RefType(('AddGrpC', 'NodeAttributeSet-addGrpC')))
+    Reg_NodeAttributeSetXY._val = ASN1Set(rv=[dict([(u'Type', _Reg_NodeAttributeSetXY_val_Type_0), (u'id', 3)])], rr=[], ev=[], er=[])
     
     #-----< Reg-NodeOffsetPointXY >-----#
-    Reg_NodeOffsetPointXY = CLASS(name='Reg-NodeOffsetPointXY', mode=MODE_SET, typeref=ASN1RefType(('DSRC', 'REG-EXT-ID-AND-TYPE')))
+    Reg_NodeOffsetPointXY = CLASS(name=u'Reg-NodeOffsetPointXY', mode=MODE_SET, typeref=ASN1RefType(('DSRC', 'REG-EXT-ID-AND-TYPE')))
     Reg_NodeOffsetPointXY._val = ASN1Set(rv=[], rr=[], ev=[], er=[])
     
     #-----< Reg-Position3D >-----#
-    Reg_Position3D = CLASS(name='Reg-Position3D', mode=MODE_SET, typeref=ASN1RefType(('DSRC', 'REG-EXT-ID-AND-TYPE')))
-    _Reg_Position3D_val_Type_0 = SEQ(name='Type', mode=MODE_TYPE, typeref=ASN1RefType(('AddGrpC', 'Position3D-addGrpC')))
-    Reg_Position3D._val = ASN1Set(rv=[dict([('Type', _Reg_Position3D_val_Type_0), ('id', 3)])], rr=[], ev=[], er=[])
+    Reg_Position3D = CLASS(name=u'Reg-Position3D', mode=MODE_SET, typeref=ASN1RefType(('DSRC', 'REG-EXT-ID-AND-TYPE')))
+    _Reg_Position3D_val_Type_0 = SEQ(name=u'Type', mode=MODE_TYPE, typeref=ASN1RefType(('AddGrpC', 'Position3D-addGrpC')))
+    Reg_Position3D._val = ASN1Set(rv=[dict([(u'Type', _Reg_Position3D_val_Type_0), (u'id', 3)])], rr=[], ev=[], er=[])
     
     #-----< Reg-RequestorDescription >-----#
-    Reg_RequestorDescription = CLASS(name='Reg-RequestorDescription', mode=MODE_SET, typeref=ASN1RefType(('DSRC', 'REG-EXT-ID-AND-TYPE')))
-    _Reg_RequestorDescription_val_Type_0 = SEQ(name='Type', mode=MODE_TYPE, typeref=ASN1RefType(('AddGrpC', 'RequestorDescription-addGrpC')))
-    Reg_RequestorDescription._val = ASN1Set(rv=[dict([('Type', _Reg_RequestorDescription_val_Type_0), ('id', 3)])], rr=[], ev=[], er=[])
+    Reg_RequestorDescription = CLASS(name=u'Reg-RequestorDescription', mode=MODE_SET, typeref=ASN1RefType(('DSRC', 'REG-EXT-ID-AND-TYPE')))
+    _Reg_RequestorDescription_val_Type_0 = SEQ(name=u'Type', mode=MODE_TYPE, typeref=ASN1RefType(('AddGrpC', 'RequestorDescription-addGrpC')))
+    Reg_RequestorDescription._val = ASN1Set(rv=[dict([(u'Type', _Reg_RequestorDescription_val_Type_0), (u'id', 3)])], rr=[], ev=[], er=[])
     
     #-----< Reg-RequestorType >-----#
-    Reg_RequestorType = CLASS(name='Reg-RequestorType', mode=MODE_SET, typeref=ASN1RefType(('DSRC', 'REG-EXT-ID-AND-TYPE')))
+    Reg_RequestorType = CLASS(name=u'Reg-RequestorType', mode=MODE_SET, typeref=ASN1RefType(('DSRC', 'REG-EXT-ID-AND-TYPE')))
     Reg_RequestorType._val = ASN1Set(rv=[], rr=[], ev=[], er=[])
     
     #-----< Reg-RestrictionUserType >-----#
-    Reg_RestrictionUserType = CLASS(name='Reg-RestrictionUserType', mode=MODE_SET, typeref=ASN1RefType(('DSRC', 'REG-EXT-ID-AND-TYPE')))
-    _Reg_RestrictionUserType_val_Type_0 = SEQ(name='Type', mode=MODE_TYPE, typeref=ASN1RefType(('AddGrpC', 'RestrictionUserType-addGrpC')))
-    Reg_RestrictionUserType._val = ASN1Set(rv=[dict([('Type', _Reg_RestrictionUserType_val_Type_0), ('id', 3)])], rr=[], ev=[], er=[])
+    Reg_RestrictionUserType = CLASS(name=u'Reg-RestrictionUserType', mode=MODE_SET, typeref=ASN1RefType(('DSRC', 'REG-EXT-ID-AND-TYPE')))
+    _Reg_RestrictionUserType_val_Type_0 = SEQ(name=u'Type', mode=MODE_TYPE, typeref=ASN1RefType(('AddGrpC', 'RestrictionUserType-addGrpC')))
+    Reg_RestrictionUserType._val = ASN1Set(rv=[dict([(u'Type', _Reg_RestrictionUserType_val_Type_0), (u'id', 3)])], rr=[], ev=[], er=[])
     
     #-----< Reg-RoadSegment >-----#
-    Reg_RoadSegment = CLASS(name='Reg-RoadSegment', mode=MODE_SET, typeref=ASN1RefType(('DSRC', 'REG-EXT-ID-AND-TYPE')))
+    Reg_RoadSegment = CLASS(name=u'Reg-RoadSegment', mode=MODE_SET, typeref=ASN1RefType(('DSRC', 'REG-EXT-ID-AND-TYPE')))
     Reg_RoadSegment._val = ASN1Set(rv=[], rr=[], ev=[], er=[])
     
     #-----< Reg-RTCMcorrections >-----#
-    Reg_RTCMcorrections = CLASS(name='Reg-RTCMcorrections', mode=MODE_SET, typeref=ASN1RefType(('DSRC', 'REG-EXT-ID-AND-TYPE')))
+    Reg_RTCMcorrections = CLASS(name=u'Reg-RTCMcorrections', mode=MODE_SET, typeref=ASN1RefType(('DSRC', 'REG-EXT-ID-AND-TYPE')))
     Reg_RTCMcorrections._val = ASN1Set(rv=[], rr=[], ev=[], er=[])
     
     #-----< Reg-SignalControlZone >-----#
-    Reg_SignalControlZone = CLASS(name='Reg-SignalControlZone', mode=MODE_SET, typeref=ASN1RefType(('DSRC', 'REG-EXT-ID-AND-TYPE')))
+    Reg_SignalControlZone = CLASS(name=u'Reg-SignalControlZone', mode=MODE_SET, typeref=ASN1RefType(('DSRC', 'REG-EXT-ID-AND-TYPE')))
     Reg_SignalControlZone._val = ASN1Set(rv=[], rr=[], ev=[], er=[])
     
     #-----< Reg-SignalRequest >-----#
-    Reg_SignalRequest = CLASS(name='Reg-SignalRequest', mode=MODE_SET, typeref=ASN1RefType(('DSRC', 'REG-EXT-ID-AND-TYPE')))
+    Reg_SignalRequest = CLASS(name=u'Reg-SignalRequest', mode=MODE_SET, typeref=ASN1RefType(('DSRC', 'REG-EXT-ID-AND-TYPE')))
     Reg_SignalRequest._val = ASN1Set(rv=[], rr=[], ev=[], er=[])
     
     #-----< Reg-SignalRequestMessage >-----#
-    Reg_SignalRequestMessage = CLASS(name='Reg-SignalRequestMessage', mode=MODE_SET, typeref=ASN1RefType(('DSRC', 'REG-EXT-ID-AND-TYPE')))
+    Reg_SignalRequestMessage = CLASS(name=u'Reg-SignalRequestMessage', mode=MODE_SET, typeref=ASN1RefType(('DSRC', 'REG-EXT-ID-AND-TYPE')))
     Reg_SignalRequestMessage._val = ASN1Set(rv=[], rr=[], ev=[], er=[])
     
     #-----< Reg-SignalRequestPackage >-----#
-    Reg_SignalRequestPackage = CLASS(name='Reg-SignalRequestPackage', mode=MODE_SET, typeref=ASN1RefType(('DSRC', 'REG-EXT-ID-AND-TYPE')))
+    Reg_SignalRequestPackage = CLASS(name=u'Reg-SignalRequestPackage', mode=MODE_SET, typeref=ASN1RefType(('DSRC', 'REG-EXT-ID-AND-TYPE')))
     Reg_SignalRequestPackage._val = ASN1Set(rv=[], rr=[], ev=[], er=[])
     
     #-----< Reg-SignalStatus >-----#
-    Reg_SignalStatus = CLASS(name='Reg-SignalStatus', mode=MODE_SET, typeref=ASN1RefType(('DSRC', 'REG-EXT-ID-AND-TYPE')))
+    Reg_SignalStatus = CLASS(name=u'Reg-SignalStatus', mode=MODE_SET, typeref=ASN1RefType(('DSRC', 'REG-EXT-ID-AND-TYPE')))
     Reg_SignalStatus._val = ASN1Set(rv=[], rr=[], ev=[], er=[])
     
     #-----< Reg-SignalStatusMessage >-----#
-    Reg_SignalStatusMessage = CLASS(name='Reg-SignalStatusMessage', mode=MODE_SET, typeref=ASN1RefType(('DSRC', 'REG-EXT-ID-AND-TYPE')))
+    Reg_SignalStatusMessage = CLASS(name=u'Reg-SignalStatusMessage', mode=MODE_SET, typeref=ASN1RefType(('DSRC', 'REG-EXT-ID-AND-TYPE')))
     Reg_SignalStatusMessage._val = ASN1Set(rv=[], rr=[], ev=[], er=[])
     
     #-----< Reg-SignalStatusPackage >-----#
-    Reg_SignalStatusPackage = CLASS(name='Reg-SignalStatusPackage', mode=MODE_SET, typeref=ASN1RefType(('DSRC', 'REG-EXT-ID-AND-TYPE')))
-    _Reg_SignalStatusPackage_val_Type_0 = SEQ(name='Type', mode=MODE_TYPE, typeref=ASN1RefType(('AddGrpC', 'SignalStatusPackage-addGrpC')))
-    Reg_SignalStatusPackage._val = ASN1Set(rv=[dict([('Type', _Reg_SignalStatusPackage_val_Type_0), ('id', 3)])], rr=[], ev=[], er=[])
+    Reg_SignalStatusPackage = CLASS(name=u'Reg-SignalStatusPackage', mode=MODE_SET, typeref=ASN1RefType(('DSRC', 'REG-EXT-ID-AND-TYPE')))
+    _Reg_SignalStatusPackage_val_Type_0 = SEQ(name=u'Type', mode=MODE_TYPE, typeref=ASN1RefType(('AddGrpC', 'SignalStatusPackage-addGrpC')))
+    Reg_SignalStatusPackage._val = ASN1Set(rv=[dict([(u'Type', _Reg_SignalStatusPackage_val_Type_0), (u'id', 3)])], rr=[], ev=[], er=[])
     
     #-----< Reg-SPAT >-----#
-    Reg_SPAT = CLASS(name='Reg-SPAT', mode=MODE_SET, typeref=ASN1RefType(('DSRC', 'REG-EXT-ID-AND-TYPE')))
+    Reg_SPAT = CLASS(name=u'Reg-SPAT', mode=MODE_SET, typeref=ASN1RefType(('DSRC', 'REG-EXT-ID-AND-TYPE')))
     Reg_SPAT._val = ASN1Set(rv=[], rr=[], ev=[], er=[])
     
     _all_ = [
@@ -5434,120 +5434,120 @@ class REGION:
 
 class VAM_PDU_Descriptions:
 
-    _name_  = 'VAM-PDU-Descriptions'
+    _name_  = u'VAM-PDU-Descriptions'
     _oid_   = [0, 4, 0, 5, 1, 103300, 1, 1]
     
     _obj_ = [
-        'VAM',
-        'ItsPduHeaderVam',
-        'VruAwareness',
-        'VamParameters',
-        'VruProfile',
-        'VruHighFrequencyContainer',
-        'VruLanePosition',
-        'OffRoadLanePosition',
-        'TrafficIslandPosition',
-        'NonIslandLanePosition',
-        'MapPosition',
-        'VruEnvironment',
-        'VruMovementControl',
-        'VruOrientation',
-        'VruRollAngle',
-        'VruDeviceUsage',
-        'VruLowFrequencyContainer',
-        'VruProfileAndSubprofile',
-        'VruSubProfilePedestrian',
-        'VruSubProfileBicyclist',
-        'VruSubProfileMotorcyclist',
-        'VruSubProfileAnimal',
-        'VruExteriorLights',
-        'VruSpecificExteriorLights',
-        'VruSizeClass',
-        'VruClusterInformationContainer',
-        'ClusterId',
-        'ClusterBoundingBoxShape',
-        'ClusterCardinalitySize',
-        'ClusterProfiles',
-        'VruClusterOperationContainer',
-        'VruClusterOpTimestamp',
-        'ClusterJoinInfo',
-        'ClusterLeaveInfo',
-        'ClusterBreakupInfo',
-        'ClusterLeaveReason',
-        'ClusterBreakupReason',
-        'VruMotionPredictionContainer',
-        'SequenceOfVruPathPoint',
-        'VruPathPoint',
-        'SequenceOfVruSafeDistanceIndication',
-        'VruSafeDistanceIndication',
-        'StationSafeDistanceIndication',
-        'SequenceOfTrajectoryInterceptionIndication',
-        'TrajectoryInterceptionIndication',
-        'TrajectoryInterceptionProbability',
-        'TrajectoryInterceptionConfidence',
-        'HeadingChangeIndication',
-        'LeftOrRight',
-        'ActionDeltaTime',
-        'AccelerationChangeIndication',
-        'AccelOrDecel',
-        'StabilityChangeIndication',
-        'StabilityLossProbability',
+        u'VAM',
+        u'ItsPduHeaderVam',
+        u'VruAwareness',
+        u'VamParameters',
+        u'VruProfile',
+        u'VruHighFrequencyContainer',
+        u'VruLanePosition',
+        u'OffRoadLanePosition',
+        u'TrafficIslandPosition',
+        u'NonIslandLanePosition',
+        u'MapPosition',
+        u'VruEnvironment',
+        u'VruMovementControl',
+        u'VruOrientation',
+        u'VruRollAngle',
+        u'VruDeviceUsage',
+        u'VruLowFrequencyContainer',
+        u'VruProfileAndSubprofile',
+        u'VruSubProfilePedestrian',
+        u'VruSubProfileBicyclist',
+        u'VruSubProfileMotorcyclist',
+        u'VruSubProfileAnimal',
+        u'VruExteriorLights',
+        u'VruSpecificExteriorLights',
+        u'VruSizeClass',
+        u'VruClusterInformationContainer',
+        u'ClusterId',
+        u'ClusterBoundingBoxShape',
+        u'ClusterCardinalitySize',
+        u'ClusterProfiles',
+        u'VruClusterOperationContainer',
+        u'VruClusterOpTimestamp',
+        u'ClusterJoinInfo',
+        u'ClusterLeaveInfo',
+        u'ClusterBreakupInfo',
+        u'ClusterLeaveReason',
+        u'ClusterBreakupReason',
+        u'VruMotionPredictionContainer',
+        u'SequenceOfVruPathPoint',
+        u'VruPathPoint',
+        u'SequenceOfVruSafeDistanceIndication',
+        u'VruSafeDistanceIndication',
+        u'StationSafeDistanceIndication',
+        u'SequenceOfTrajectoryInterceptionIndication',
+        u'TrajectoryInterceptionIndication',
+        u'TrajectoryInterceptionProbability',
+        u'TrajectoryInterceptionConfidence',
+        u'HeadingChangeIndication',
+        u'LeftOrRight',
+        u'ActionDeltaTime',
+        u'AccelerationChangeIndication',
+        u'AccelOrDecel',
+        u'StabilityChangeIndication',
+        u'StabilityLossProbability',
         ]
     _type_ = [
-        'VAM',
-        'ItsPduHeaderVam',
-        'VruAwareness',
-        'VamParameters',
-        'VruProfile',
-        'VruHighFrequencyContainer',
-        'VruLanePosition',
-        'OffRoadLanePosition',
-        'TrafficIslandPosition',
-        'NonIslandLanePosition',
-        'MapPosition',
-        'VruEnvironment',
-        'VruMovementControl',
-        'VruOrientation',
-        'VruRollAngle',
-        'VruDeviceUsage',
-        'VruLowFrequencyContainer',
-        'VruProfileAndSubprofile',
-        'VruSubProfilePedestrian',
-        'VruSubProfileBicyclist',
-        'VruSubProfileMotorcyclist',
-        'VruSubProfileAnimal',
-        'VruExteriorLights',
-        'VruSpecificExteriorLights',
-        'VruSizeClass',
-        'VruClusterInformationContainer',
-        'ClusterId',
-        'ClusterBoundingBoxShape',
-        'ClusterCardinalitySize',
-        'ClusterProfiles',
-        'VruClusterOperationContainer',
-        'VruClusterOpTimestamp',
-        'ClusterJoinInfo',
-        'ClusterLeaveInfo',
-        'ClusterBreakupInfo',
-        'ClusterLeaveReason',
-        'ClusterBreakupReason',
-        'VruMotionPredictionContainer',
-        'SequenceOfVruPathPoint',
-        'VruPathPoint',
-        'SequenceOfVruSafeDistanceIndication',
-        'VruSafeDistanceIndication',
-        'StationSafeDistanceIndication',
-        'SequenceOfTrajectoryInterceptionIndication',
-        'TrajectoryInterceptionIndication',
-        'TrajectoryInterceptionProbability',
-        'TrajectoryInterceptionConfidence',
-        'HeadingChangeIndication',
-        'LeftOrRight',
-        'ActionDeltaTime',
-        'AccelerationChangeIndication',
-        'AccelOrDecel',
-        'StabilityChangeIndication',
-        'StabilityLossProbability',
+        u'VAM',
+        u'ItsPduHeaderVam',
+        u'VruAwareness',
+        u'VamParameters',
+        u'VruProfile',
+        u'VruHighFrequencyContainer',
+        u'VruLanePosition',
+        u'OffRoadLanePosition',
+        u'TrafficIslandPosition',
+        u'NonIslandLanePosition',
+        u'MapPosition',
+        u'VruEnvironment',
+        u'VruMovementControl',
+        u'VruOrientation',
+        u'VruRollAngle',
+        u'VruDeviceUsage',
+        u'VruLowFrequencyContainer',
+        u'VruProfileAndSubprofile',
+        u'VruSubProfilePedestrian',
+        u'VruSubProfileBicyclist',
+        u'VruSubProfileMotorcyclist',
+        u'VruSubProfileAnimal',
+        u'VruExteriorLights',
+        u'VruSpecificExteriorLights',
+        u'VruSizeClass',
+        u'VruClusterInformationContainer',
+        u'ClusterId',
+        u'ClusterBoundingBoxShape',
+        u'ClusterCardinalitySize',
+        u'ClusterProfiles',
+        u'VruClusterOperationContainer',
+        u'VruClusterOpTimestamp',
+        u'ClusterJoinInfo',
+        u'ClusterLeaveInfo',
+        u'ClusterBreakupInfo',
+        u'ClusterLeaveReason',
+        u'ClusterBreakupReason',
+        u'VruMotionPredictionContainer',
+        u'SequenceOfVruPathPoint',
+        u'VruPathPoint',
+        u'SequenceOfVruSafeDistanceIndication',
+        u'VruSafeDistanceIndication',
+        u'StationSafeDistanceIndication',
+        u'SequenceOfTrajectoryInterceptionIndication',
+        u'TrajectoryInterceptionIndication',
+        u'TrajectoryInterceptionProbability',
+        u'TrajectoryInterceptionConfidence',
+        u'HeadingChangeIndication',
+        u'LeftOrRight',
+        u'ActionDeltaTime',
+        u'AccelerationChangeIndication',
+        u'AccelOrDecel',
+        u'StabilityChangeIndication',
+        u'StabilityLossProbability',
         ]
     _set_ = [
         ]
@@ -5559,453 +5559,453 @@ class VAM_PDU_Descriptions:
         ]
     
     #-----< VAM >-----#
-    VAM = SEQ(name='VAM', mode=MODE_TYPE)
-    _VAM_header = SEQ(name='header', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('VAM-PDU-Descriptions', 'ItsPduHeaderVam')))
-    _VAM_vam = SEQ(name='vam', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('VAM-PDU-Descriptions', 'VruAwareness')))
+    VAM = SEQ(name=u'VAM', mode=MODE_TYPE)
+    _VAM_header = SEQ(name=u'header', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('VAM-PDU-Descriptions', 'ItsPduHeaderVam')))
+    _VAM_vam = SEQ(name=u'vam', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('VAM-PDU-Descriptions', 'VruAwareness')))
     VAM._cont = ASN1Dict([
-        ('header', _VAM_header),
-        ('vam', _VAM_vam),
+        (u'header', _VAM_header),
+        (u'vam', _VAM_vam),
         ])
     VAM._ext = None
     
     #-----< ItsPduHeaderVam >-----#
-    ItsPduHeaderVam = SEQ(name='ItsPduHeaderVam', mode=MODE_TYPE, typeref=ASN1RefType(('VAM-Temp-Imports', 'ItsPduHeader')))
+    ItsPduHeaderVam = SEQ(name=u'ItsPduHeaderVam', mode=MODE_TYPE, typeref=ASN1RefType(('VAM-Temp-Imports', 'ItsPduHeader')))
     
     #-----< VruAwareness >-----#
-    VruAwareness = SEQ(name='VruAwareness', mode=MODE_TYPE)
-    _VruAwareness_generationDeltaTime = INT(name='generationDeltaTime', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('CAM-PDU-Descriptions', 'GenerationDeltaTime')))
-    _VruAwareness_vamParameters = SEQ(name='vamParameters', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('VAM-PDU-Descriptions', 'VamParameters')))
+    VruAwareness = SEQ(name=u'VruAwareness', mode=MODE_TYPE)
+    _VruAwareness_generationDeltaTime = INT(name=u'generationDeltaTime', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('CAM-PDU-Descriptions', 'GenerationDeltaTime')))
+    _VruAwareness_vamParameters = SEQ(name=u'vamParameters', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('VAM-PDU-Descriptions', 'VamParameters')))
     VruAwareness._cont = ASN1Dict([
-        ('generationDeltaTime', _VruAwareness_generationDeltaTime),
-        ('vamParameters', _VruAwareness_vamParameters),
+        (u'generationDeltaTime', _VruAwareness_generationDeltaTime),
+        (u'vamParameters', _VruAwareness_vamParameters),
         ])
     VruAwareness._ext = None
     
     #-----< VamParameters >-----#
-    VamParameters = SEQ(name='VamParameters', mode=MODE_TYPE)
-    _VamParameters_basicContainer = SEQ(name='basicContainer', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('VAM-Temp-Imports', 'BasicContainer')))
-    _VamParameters_vruHighFrequencyContainer = SEQ(name='vruHighFrequencyContainer', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('VAM-PDU-Descriptions', 'VruHighFrequencyContainer')), opt=True)
-    _VamParameters_vruLowFrequencyContainer = SEQ(name='vruLowFrequencyContainer', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('VAM-PDU-Descriptions', 'VruLowFrequencyContainer')), opt=True)
-    _VamParameters_vruClusterInformationContainer = SEQ(name='vruClusterInformationContainer', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('VAM-PDU-Descriptions', 'VruClusterInformationContainer')), opt=True)
-    _VamParameters_vruClusterOperationContainer = SEQ(name='vruClusterOperationContainer', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('VAM-PDU-Descriptions', 'VruClusterOperationContainer')), opt=True)
-    _VamParameters_vruMotionPredictionContainer = SEQ(name='vruMotionPredictionContainer', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('VAM-PDU-Descriptions', 'VruMotionPredictionContainer')), opt=True)
+    VamParameters = SEQ(name=u'VamParameters', mode=MODE_TYPE)
+    _VamParameters_basicContainer = SEQ(name=u'basicContainer', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('VAM-Temp-Imports', 'BasicContainer')))
+    _VamParameters_vruHighFrequencyContainer = SEQ(name=u'vruHighFrequencyContainer', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('VAM-PDU-Descriptions', 'VruHighFrequencyContainer')), opt=True)
+    _VamParameters_vruLowFrequencyContainer = SEQ(name=u'vruLowFrequencyContainer', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('VAM-PDU-Descriptions', 'VruLowFrequencyContainer')), opt=True)
+    _VamParameters_vruClusterInformationContainer = SEQ(name=u'vruClusterInformationContainer', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('VAM-PDU-Descriptions', 'VruClusterInformationContainer')), opt=True)
+    _VamParameters_vruClusterOperationContainer = SEQ(name=u'vruClusterOperationContainer', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('VAM-PDU-Descriptions', 'VruClusterOperationContainer')), opt=True)
+    _VamParameters_vruMotionPredictionContainer = SEQ(name=u'vruMotionPredictionContainer', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('VAM-PDU-Descriptions', 'VruMotionPredictionContainer')), opt=True)
     VamParameters._cont = ASN1Dict([
-        ('basicContainer', _VamParameters_basicContainer),
-        ('vruHighFrequencyContainer', _VamParameters_vruHighFrequencyContainer),
-        ('vruLowFrequencyContainer', _VamParameters_vruLowFrequencyContainer),
-        ('vruClusterInformationContainer', _VamParameters_vruClusterInformationContainer),
-        ('vruClusterOperationContainer', _VamParameters_vruClusterOperationContainer),
-        ('vruMotionPredictionContainer', _VamParameters_vruMotionPredictionContainer),
+        (u'basicContainer', _VamParameters_basicContainer),
+        (u'vruHighFrequencyContainer', _VamParameters_vruHighFrequencyContainer),
+        (u'vruLowFrequencyContainer', _VamParameters_vruLowFrequencyContainer),
+        (u'vruClusterInformationContainer', _VamParameters_vruClusterInformationContainer),
+        (u'vruClusterOperationContainer', _VamParameters_vruClusterOperationContainer),
+        (u'vruMotionPredictionContainer', _VamParameters_vruMotionPredictionContainer),
         ])
     VamParameters._ext = []
     
     #-----< VruProfile >-----#
-    VruProfile = ENUM(name='VruProfile', mode=MODE_TYPE)
-    VruProfile._cont = ASN1Dict([('unavailable', 0), ('pedestrian', 1), ('cyclist', 2), ('motorcyclist', 3), ('animal', 4), ('max', 15)])
+    VruProfile = ENUM(name=u'VruProfile', mode=MODE_TYPE)
+    VruProfile._cont = ASN1Dict([(u'unavailable', 0), (u'pedestrian', 1), (u'cyclist', 2), (u'motorcyclist', 3), (u'animal', 4), (u'max', 15)])
     VruProfile._ext = None
     
     #-----< VruHighFrequencyContainer >-----#
-    VruHighFrequencyContainer = SEQ(name='VruHighFrequencyContainer', mode=MODE_TYPE)
-    _VruHighFrequencyContainer_heading = SEQ(name='heading', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'Heading')))
-    _VruHighFrequencyContainer_speed = SEQ(name='speed', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'Speed')))
-    _VruHighFrequencyContainer_longitudinalAcceleration = SEQ(name='longitudinalAcceleration', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'LongitudinalAcceleration')))
-    _VruHighFrequencyContainer_curvature = SEQ(name='curvature', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'Curvature')), opt=True)
-    _VruHighFrequencyContainer_curvatureCalculationMode = ENUM(name='curvatureCalculationMode', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'CurvatureCalculationMode')), opt=True)
-    _VruHighFrequencyContainer_yawRate = SEQ(name='yawRate', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'YawRate')), opt=True)
-    _VruHighFrequencyContainer_lateralAcceleration = SEQ(name='lateralAcceleration', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'LateralAcceleration')), opt=True)
-    _VruHighFrequencyContainer_verticalAcceleration = SEQ(name='verticalAcceleration', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'VerticalAcceleration')), opt=True)
-    _VruHighFrequencyContainer_vruLanePosition = CHOICE(name='vruLanePosition', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('VAM-PDU-Descriptions', 'VruLanePosition')), opt=True)
-    _VruHighFrequencyContainer_environment = ENUM(name='environment', mode=MODE_TYPE, tag=(9, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('VAM-PDU-Descriptions', 'VruEnvironment')), opt=True)
-    _VruHighFrequencyContainer_movementControl = ENUM(name='movementControl', mode=MODE_TYPE, tag=(10, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('VAM-PDU-Descriptions', 'VruMovementControl')), opt=True)
-    _VruHighFrequencyContainer_orientation = SEQ(name='orientation', mode=MODE_TYPE, tag=(11, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('VAM-PDU-Descriptions', 'VruOrientation')), opt=True)
-    _VruHighFrequencyContainer_rollAngle = SEQ(name='rollAngle', mode=MODE_TYPE, tag=(12, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('VAM-PDU-Descriptions', 'VruRollAngle')), opt=True)
-    _VruHighFrequencyContainer_deviceUsage = ENUM(name='deviceUsage', mode=MODE_TYPE, tag=(13, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('VAM-PDU-Descriptions', 'VruDeviceUsage')), opt=True)
+    VruHighFrequencyContainer = SEQ(name=u'VruHighFrequencyContainer', mode=MODE_TYPE)
+    _VruHighFrequencyContainer_heading = SEQ(name=u'heading', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'Heading')))
+    _VruHighFrequencyContainer_speed = SEQ(name=u'speed', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'Speed')))
+    _VruHighFrequencyContainer_longitudinalAcceleration = SEQ(name=u'longitudinalAcceleration', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'LongitudinalAcceleration')))
+    _VruHighFrequencyContainer_curvature = SEQ(name=u'curvature', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'Curvature')), opt=True)
+    _VruHighFrequencyContainer_curvatureCalculationMode = ENUM(name=u'curvatureCalculationMode', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'CurvatureCalculationMode')), opt=True)
+    _VruHighFrequencyContainer_yawRate = SEQ(name=u'yawRate', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'YawRate')), opt=True)
+    _VruHighFrequencyContainer_lateralAcceleration = SEQ(name=u'lateralAcceleration', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'LateralAcceleration')), opt=True)
+    _VruHighFrequencyContainer_verticalAcceleration = SEQ(name=u'verticalAcceleration', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'VerticalAcceleration')), opt=True)
+    _VruHighFrequencyContainer_vruLanePosition = CHOICE(name=u'vruLanePosition', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('VAM-PDU-Descriptions', 'VruLanePosition')), opt=True)
+    _VruHighFrequencyContainer_environment = ENUM(name=u'environment', mode=MODE_TYPE, tag=(9, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('VAM-PDU-Descriptions', 'VruEnvironment')), opt=True)
+    _VruHighFrequencyContainer_movementControl = ENUM(name=u'movementControl', mode=MODE_TYPE, tag=(10, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('VAM-PDU-Descriptions', 'VruMovementControl')), opt=True)
+    _VruHighFrequencyContainer_orientation = SEQ(name=u'orientation', mode=MODE_TYPE, tag=(11, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('VAM-PDU-Descriptions', 'VruOrientation')), opt=True)
+    _VruHighFrequencyContainer_rollAngle = SEQ(name=u'rollAngle', mode=MODE_TYPE, tag=(12, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('VAM-PDU-Descriptions', 'VruRollAngle')), opt=True)
+    _VruHighFrequencyContainer_deviceUsage = ENUM(name=u'deviceUsage', mode=MODE_TYPE, tag=(13, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('VAM-PDU-Descriptions', 'VruDeviceUsage')), opt=True)
     VruHighFrequencyContainer._cont = ASN1Dict([
-        ('heading', _VruHighFrequencyContainer_heading),
-        ('speed', _VruHighFrequencyContainer_speed),
-        ('longitudinalAcceleration', _VruHighFrequencyContainer_longitudinalAcceleration),
-        ('curvature', _VruHighFrequencyContainer_curvature),
-        ('curvatureCalculationMode', _VruHighFrequencyContainer_curvatureCalculationMode),
-        ('yawRate', _VruHighFrequencyContainer_yawRate),
-        ('lateralAcceleration', _VruHighFrequencyContainer_lateralAcceleration),
-        ('verticalAcceleration', _VruHighFrequencyContainer_verticalAcceleration),
-        ('vruLanePosition', _VruHighFrequencyContainer_vruLanePosition),
-        ('environment', _VruHighFrequencyContainer_environment),
-        ('movementControl', _VruHighFrequencyContainer_movementControl),
-        ('orientation', _VruHighFrequencyContainer_orientation),
-        ('rollAngle', _VruHighFrequencyContainer_rollAngle),
-        ('deviceUsage', _VruHighFrequencyContainer_deviceUsage),
+        (u'heading', _VruHighFrequencyContainer_heading),
+        (u'speed', _VruHighFrequencyContainer_speed),
+        (u'longitudinalAcceleration', _VruHighFrequencyContainer_longitudinalAcceleration),
+        (u'curvature', _VruHighFrequencyContainer_curvature),
+        (u'curvatureCalculationMode', _VruHighFrequencyContainer_curvatureCalculationMode),
+        (u'yawRate', _VruHighFrequencyContainer_yawRate),
+        (u'lateralAcceleration', _VruHighFrequencyContainer_lateralAcceleration),
+        (u'verticalAcceleration', _VruHighFrequencyContainer_verticalAcceleration),
+        (u'vruLanePosition', _VruHighFrequencyContainer_vruLanePosition),
+        (u'environment', _VruHighFrequencyContainer_environment),
+        (u'movementControl', _VruHighFrequencyContainer_movementControl),
+        (u'orientation', _VruHighFrequencyContainer_orientation),
+        (u'rollAngle', _VruHighFrequencyContainer_rollAngle),
+        (u'deviceUsage', _VruHighFrequencyContainer_deviceUsage),
         ])
     VruHighFrequencyContainer._ext = []
     
     #-----< VruLanePosition >-----#
-    VruLanePosition = CHOICE(name='VruLanePosition', mode=MODE_TYPE)
-    _VruLanePosition_offRoadLanePosition = ENUM(name='offRoadLanePosition', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('VAM-PDU-Descriptions', 'OffRoadLanePosition')))
-    _VruLanePosition_vehicularLanePosition = INT(name='vehicularLanePosition', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'LanePosition')))
-    _VruLanePosition_trafficIslandPosition = SEQ(name='trafficIslandPosition', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('VAM-PDU-Descriptions', 'TrafficIslandPosition')))
-    _VruLanePosition_mapPosition = SEQ(name='mapPosition', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('VAM-PDU-Descriptions', 'MapPosition')))
+    VruLanePosition = CHOICE(name=u'VruLanePosition', mode=MODE_TYPE)
+    _VruLanePosition_offRoadLanePosition = ENUM(name=u'offRoadLanePosition', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('VAM-PDU-Descriptions', 'OffRoadLanePosition')))
+    _VruLanePosition_vehicularLanePosition = INT(name=u'vehicularLanePosition', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'LanePosition')))
+    _VruLanePosition_trafficIslandPosition = SEQ(name=u'trafficIslandPosition', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('VAM-PDU-Descriptions', 'TrafficIslandPosition')))
+    _VruLanePosition_mapPosition = SEQ(name=u'mapPosition', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('VAM-PDU-Descriptions', 'MapPosition')))
     VruLanePosition._cont = ASN1Dict([
-        ('offRoadLanePosition', _VruLanePosition_offRoadLanePosition),
-        ('vehicularLanePosition', _VruLanePosition_vehicularLanePosition),
-        ('trafficIslandPosition', _VruLanePosition_trafficIslandPosition),
-        ('mapPosition', _VruLanePosition_mapPosition),
+        (u'offRoadLanePosition', _VruLanePosition_offRoadLanePosition),
+        (u'vehicularLanePosition', _VruLanePosition_vehicularLanePosition),
+        (u'trafficIslandPosition', _VruLanePosition_trafficIslandPosition),
+        (u'mapPosition', _VruLanePosition_mapPosition),
         ])
     VruLanePosition._ext = []
     
     #-----< OffRoadLanePosition >-----#
-    OffRoadLanePosition = ENUM(name='OffRoadLanePosition', mode=MODE_TYPE)
-    OffRoadLanePosition._cont = ASN1Dict([('unavailable', 0), ('sidewalk', 1), ('parkingLane', 2), ('bikeLane', 3), ('max', 15)])
+    OffRoadLanePosition = ENUM(name=u'OffRoadLanePosition', mode=MODE_TYPE)
+    OffRoadLanePosition._cont = ASN1Dict([(u'unavailable', 0), (u'sidewalk', 1), (u'parkingLane', 2), (u'bikeLane', 3), (u'max', 15)])
     OffRoadLanePosition._ext = None
     
     #-----< TrafficIslandPosition >-----#
-    TrafficIslandPosition = SEQ(name='TrafficIslandPosition', mode=MODE_TYPE)
-    _TrafficIslandPosition_oneSide = CHOICE(name='oneSide', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('VAM-PDU-Descriptions', 'NonIslandLanePosition')))
-    _TrafficIslandPosition_otherSide = CHOICE(name='otherSide', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('VAM-PDU-Descriptions', 'NonIslandLanePosition')))
+    TrafficIslandPosition = SEQ(name=u'TrafficIslandPosition', mode=MODE_TYPE)
+    _TrafficIslandPosition_oneSide = CHOICE(name=u'oneSide', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('VAM-PDU-Descriptions', 'NonIslandLanePosition')))
+    _TrafficIslandPosition_otherSide = CHOICE(name=u'otherSide', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('VAM-PDU-Descriptions', 'NonIslandLanePosition')))
     TrafficIslandPosition._cont = ASN1Dict([
-        ('oneSide', _TrafficIslandPosition_oneSide),
-        ('otherSide', _TrafficIslandPosition_otherSide),
+        (u'oneSide', _TrafficIslandPosition_oneSide),
+        (u'otherSide', _TrafficIslandPosition_otherSide),
         ])
     TrafficIslandPosition._ext = []
     
     #-----< NonIslandLanePosition >-----#
-    NonIslandLanePosition = CHOICE(name='NonIslandLanePosition', mode=MODE_TYPE)
-    _NonIslandLanePosition_offRoadLanePosition = ENUM(name='offRoadLanePosition', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('VAM-PDU-Descriptions', 'OffRoadLanePosition')))
-    _NonIslandLanePosition_vehicularLanePosition = INT(name='vehicularLanePosition', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'LanePosition')))
-    _NonIslandLanePosition_mapPosition = SEQ(name='mapPosition', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('VAM-PDU-Descriptions', 'MapPosition')))
+    NonIslandLanePosition = CHOICE(name=u'NonIslandLanePosition', mode=MODE_TYPE)
+    _NonIslandLanePosition_offRoadLanePosition = ENUM(name=u'offRoadLanePosition', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('VAM-PDU-Descriptions', 'OffRoadLanePosition')))
+    _NonIslandLanePosition_vehicularLanePosition = INT(name=u'vehicularLanePosition', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'LanePosition')))
+    _NonIslandLanePosition_mapPosition = SEQ(name=u'mapPosition', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('VAM-PDU-Descriptions', 'MapPosition')))
     NonIslandLanePosition._cont = ASN1Dict([
-        ('offRoadLanePosition', _NonIslandLanePosition_offRoadLanePosition),
-        ('vehicularLanePosition', _NonIslandLanePosition_vehicularLanePosition),
-        ('mapPosition', _NonIslandLanePosition_mapPosition),
+        (u'offRoadLanePosition', _NonIslandLanePosition_offRoadLanePosition),
+        (u'vehicularLanePosition', _NonIslandLanePosition_vehicularLanePosition),
+        (u'mapPosition', _NonIslandLanePosition_mapPosition),
         ])
     NonIslandLanePosition._ext = []
     
     #-----< MapPosition >-----#
-    MapPosition = SEQ(name='MapPosition', mode=MODE_TYPE)
-    _MapPosition_intersectionId = SEQ(name='intersectionId', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'IntersectionReferenceID')))
-    _MapPosition_lane = INT(name='lane', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'LaneID')))
+    MapPosition = SEQ(name=u'MapPosition', mode=MODE_TYPE)
+    _MapPosition_intersectionId = SEQ(name=u'intersectionId', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'IntersectionReferenceID')))
+    _MapPosition_lane = INT(name=u'lane', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'LaneID')))
     MapPosition._cont = ASN1Dict([
-        ('intersectionId', _MapPosition_intersectionId),
-        ('lane', _MapPosition_lane),
+        (u'intersectionId', _MapPosition_intersectionId),
+        (u'lane', _MapPosition_lane),
         ])
     MapPosition._ext = None
     
     #-----< VruEnvironment >-----#
-    VruEnvironment = ENUM(name='VruEnvironment', mode=MODE_TYPE)
-    VruEnvironment._cont = ASN1Dict([('unavailable', 0), ('intersectionCrossing', 1), ('zebraCrossing', 2), ('sidewalk', 3), ('onVehicleRoad', 4), ('protectedGeographicArea', 5), ('max', 255)])
+    VruEnvironment = ENUM(name=u'VruEnvironment', mode=MODE_TYPE)
+    VruEnvironment._cont = ASN1Dict([(u'unavailable', 0), (u'intersectionCrossing', 1), (u'zebraCrossing', 2), (u'sidewalk', 3), (u'onVehicleRoad', 4), (u'protectedGeographicArea', 5), (u'max', 255)])
     VruEnvironment._ext = None
     
     #-----< VruMovementControl >-----#
-    VruMovementControl = ENUM(name='VruMovementControl', mode=MODE_TYPE)
-    VruMovementControl._cont = ASN1Dict([('unavailable', 0), ('braking', 1), ('hardBraking', 2), ('stopPedaling', 3), ('brakingAndStopPedaling', 4), ('hardBrakingAndStopPedaling', 5), ('noReaction', 6), ('max', 255)])
+    VruMovementControl = ENUM(name=u'VruMovementControl', mode=MODE_TYPE)
+    VruMovementControl._cont = ASN1Dict([(u'unavailable', 0), (u'braking', 1), (u'hardBraking', 2), (u'stopPedaling', 3), (u'brakingAndStopPedaling', 4), (u'hardBrakingAndStopPedaling', 5), (u'noReaction', 6), (u'max', 255)])
     VruMovementControl._ext = None
     
     #-----< VruOrientation >-----#
-    VruOrientation = SEQ(name='VruOrientation', mode=MODE_TYPE, typeref=ASN1RefType(('ITS-Container', 'Heading')))
+    VruOrientation = SEQ(name=u'VruOrientation', mode=MODE_TYPE, typeref=ASN1RefType(('ITS-Container', 'Heading')))
     
     #-----< VruRollAngle >-----#
-    VruRollAngle = SEQ(name='VruRollAngle', mode=MODE_TYPE, typeref=ASN1RefType(('ITS-Container', 'Heading')))
+    VruRollAngle = SEQ(name=u'VruRollAngle', mode=MODE_TYPE, typeref=ASN1RefType(('ITS-Container', 'Heading')))
     
     #-----< VruDeviceUsage >-----#
-    VruDeviceUsage = ENUM(name='VruDeviceUsage', mode=MODE_TYPE)
-    VruDeviceUsage._cont = ASN1Dict([('unavailable', 0), ('other', 1), ('idle', 2), ('listeningToAudio', 3), ('typing', 4), ('calling', 5), ('playingGames', 6), ('reading', 7), ('viewing', 8), ('max', 255)])
+    VruDeviceUsage = ENUM(name=u'VruDeviceUsage', mode=MODE_TYPE)
+    VruDeviceUsage._cont = ASN1Dict([(u'unavailable', 0), (u'other', 1), (u'idle', 2), (u'listeningToAudio', 3), (u'typing', 4), (u'calling', 5), (u'playingGames', 6), (u'reading', 7), (u'viewing', 8), (u'max', 255)])
     VruDeviceUsage._ext = None
     
     #-----< VruLowFrequencyContainer >-----#
-    VruLowFrequencyContainer = SEQ(name='VruLowFrequencyContainer', mode=MODE_TYPE)
-    _VruLowFrequencyContainer_profileAndSubprofile = CHOICE(name='profileAndSubprofile', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('VAM-PDU-Descriptions', 'VruProfileAndSubprofile')), opt=True)
-    _VruLowFrequencyContainer_exteriorLights = SEQ(name='exteriorLights', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('VAM-PDU-Descriptions', 'VruExteriorLights')), opt=True)
-    _VruLowFrequencyContainer_sizeClass = ENUM(name='sizeClass', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('VAM-PDU-Descriptions', 'VruSizeClass')), opt=True)
+    VruLowFrequencyContainer = SEQ(name=u'VruLowFrequencyContainer', mode=MODE_TYPE)
+    _VruLowFrequencyContainer_profileAndSubprofile = CHOICE(name=u'profileAndSubprofile', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('VAM-PDU-Descriptions', 'VruProfileAndSubprofile')), opt=True)
+    _VruLowFrequencyContainer_exteriorLights = SEQ(name=u'exteriorLights', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('VAM-PDU-Descriptions', 'VruExteriorLights')), opt=True)
+    _VruLowFrequencyContainer_sizeClass = ENUM(name=u'sizeClass', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('VAM-PDU-Descriptions', 'VruSizeClass')), opt=True)
     VruLowFrequencyContainer._cont = ASN1Dict([
-        ('profileAndSubprofile', _VruLowFrequencyContainer_profileAndSubprofile),
-        ('exteriorLights', _VruLowFrequencyContainer_exteriorLights),
-        ('sizeClass', _VruLowFrequencyContainer_sizeClass),
+        (u'profileAndSubprofile', _VruLowFrequencyContainer_profileAndSubprofile),
+        (u'exteriorLights', _VruLowFrequencyContainer_exteriorLights),
+        (u'sizeClass', _VruLowFrequencyContainer_sizeClass),
         ])
     VruLowFrequencyContainer._ext = []
     
     #-----< VruProfileAndSubprofile >-----#
-    VruProfileAndSubprofile = CHOICE(name='VruProfileAndSubprofile', mode=MODE_TYPE)
-    _VruProfileAndSubprofile_pedestrian = ENUM(name='pedestrian', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('VAM-PDU-Descriptions', 'VruSubProfilePedestrian')))
-    _VruProfileAndSubprofile_bicyclist = ENUM(name='bicyclist', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('VAM-PDU-Descriptions', 'VruSubProfileBicyclist')))
-    _VruProfileAndSubprofile_motorcylist = ENUM(name='motorcylist', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('VAM-PDU-Descriptions', 'VruSubProfileMotorcyclist')))
-    _VruProfileAndSubprofile_animal = ENUM(name='animal', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('VAM-PDU-Descriptions', 'VruSubProfileAnimal')))
+    VruProfileAndSubprofile = CHOICE(name=u'VruProfileAndSubprofile', mode=MODE_TYPE)
+    _VruProfileAndSubprofile_pedestrian = ENUM(name=u'pedestrian', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('VAM-PDU-Descriptions', 'VruSubProfilePedestrian')))
+    _VruProfileAndSubprofile_bicyclist = ENUM(name=u'bicyclist', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('VAM-PDU-Descriptions', 'VruSubProfileBicyclist')))
+    _VruProfileAndSubprofile_motorcylist = ENUM(name=u'motorcylist', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('VAM-PDU-Descriptions', 'VruSubProfileMotorcyclist')))
+    _VruProfileAndSubprofile_animal = ENUM(name=u'animal', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('VAM-PDU-Descriptions', 'VruSubProfileAnimal')))
     VruProfileAndSubprofile._cont = ASN1Dict([
-        ('pedestrian', _VruProfileAndSubprofile_pedestrian),
-        ('bicyclist', _VruProfileAndSubprofile_bicyclist),
-        ('motorcylist', _VruProfileAndSubprofile_motorcylist),
-        ('animal', _VruProfileAndSubprofile_animal),
+        (u'pedestrian', _VruProfileAndSubprofile_pedestrian),
+        (u'bicyclist', _VruProfileAndSubprofile_bicyclist),
+        (u'motorcylist', _VruProfileAndSubprofile_motorcylist),
+        (u'animal', _VruProfileAndSubprofile_animal),
         ])
     VruProfileAndSubprofile._ext = []
     
     #-----< VruSubProfilePedestrian >-----#
-    VruSubProfilePedestrian = ENUM(name='VruSubProfilePedestrian', mode=MODE_TYPE)
-    VruSubProfilePedestrian._cont = ASN1Dict([('unavailable', 0), ('ordinary-pedestrian', 1), ('road-worker', 2), ('first-responder', 3), ('max', 15)])
+    VruSubProfilePedestrian = ENUM(name=u'VruSubProfilePedestrian', mode=MODE_TYPE)
+    VruSubProfilePedestrian._cont = ASN1Dict([(u'unavailable', 0), (u'ordinary-pedestrian', 1), (u'road-worker', 2), (u'first-responder', 3), (u'max', 15)])
     VruSubProfilePedestrian._ext = None
     
     #-----< VruSubProfileBicyclist >-----#
-    VruSubProfileBicyclist = ENUM(name='VruSubProfileBicyclist', mode=MODE_TYPE)
-    VruSubProfileBicyclist._cont = ASN1Dict([('unavailable', 0), ('bicyclist', 1), ('wheelchair-user', 2), ('horse-and-rider', 3), ('rollerskater', 4), ('e-scooter', 5), ('personal-transporter', 6), ('pedelec', 7), ('speed-pedelec', 8), ('max', 15)])
+    VruSubProfileBicyclist = ENUM(name=u'VruSubProfileBicyclist', mode=MODE_TYPE)
+    VruSubProfileBicyclist._cont = ASN1Dict([(u'unavailable', 0), (u'bicyclist', 1), (u'wheelchair-user', 2), (u'horse-and-rider', 3), (u'rollerskater', 4), (u'e-scooter', 5), (u'personal-transporter', 6), (u'pedelec', 7), (u'speed-pedelec', 8), (u'max', 15)])
     VruSubProfileBicyclist._ext = None
     
     #-----< VruSubProfileMotorcyclist >-----#
-    VruSubProfileMotorcyclist = ENUM(name='VruSubProfileMotorcyclist', mode=MODE_TYPE)
-    VruSubProfileMotorcyclist._cont = ASN1Dict([('unavailable', 0), ('moped', 1), ('motorcycle', 2), ('motorcycle-and-sidecar-right', 3), ('motorcycle-and-sidecar-left', 4), ('max', 15)])
+    VruSubProfileMotorcyclist = ENUM(name=u'VruSubProfileMotorcyclist', mode=MODE_TYPE)
+    VruSubProfileMotorcyclist._cont = ASN1Dict([(u'unavailable', 0), (u'moped', 1), (u'motorcycle', 2), (u'motorcycle-and-sidecar-right', 3), (u'motorcycle-and-sidecar-left', 4), (u'max', 15)])
     VruSubProfileMotorcyclist._ext = None
     
     #-----< VruSubProfileAnimal >-----#
-    VruSubProfileAnimal = ENUM(name='VruSubProfileAnimal', mode=MODE_TYPE)
-    VruSubProfileAnimal._cont = ASN1Dict([('unavailable', 0), ('wild-animal', 1), ('farm-animal', 2), ('service-animal', 3), ('max', 15)])
+    VruSubProfileAnimal = ENUM(name=u'VruSubProfileAnimal', mode=MODE_TYPE)
+    VruSubProfileAnimal._cont = ASN1Dict([(u'unavailable', 0), (u'wild-animal', 1), (u'farm-animal', 2), (u'service-animal', 3), (u'max', 15)])
     VruSubProfileAnimal._ext = None
     
     #-----< VruExteriorLights >-----#
-    VruExteriorLights = SEQ(name='VruExteriorLights', mode=MODE_TYPE)
-    _VruExteriorLights_vruSpecific = BIT_STR(name='vruSpecific', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('VAM-PDU-Descriptions', 'VruSpecificExteriorLights')))
-    _VruExteriorLights_vehicular = BIT_STR(name='vehicular', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'ExteriorLights')))
+    VruExteriorLights = SEQ(name=u'VruExteriorLights', mode=MODE_TYPE)
+    _VruExteriorLights_vruSpecific = BIT_STR(name=u'vruSpecific', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('VAM-PDU-Descriptions', 'VruSpecificExteriorLights')))
+    _VruExteriorLights_vehicular = BIT_STR(name=u'vehicular', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'ExteriorLights')))
     VruExteriorLights._cont = ASN1Dict([
-        ('vruSpecific', _VruExteriorLights_vruSpecific),
-        ('vehicular', _VruExteriorLights_vehicular),
+        (u'vruSpecific', _VruExteriorLights_vruSpecific),
+        (u'vehicular', _VruExteriorLights_vehicular),
         ])
     VruExteriorLights._ext = None
     
     #-----< VruSpecificExteriorLights >-----#
-    VruSpecificExteriorLights = BIT_STR(name='VruSpecificExteriorLights', mode=MODE_TYPE)
-    VruSpecificExteriorLights._cont = ASN1Dict([('unavailable', 0), ('backFlashLight', 1), ('helmetLight', 2), ('armLight', 3), ('legLight', 4), ('wheelLight', 5)])
+    VruSpecificExteriorLights = BIT_STR(name=u'VruSpecificExteriorLights', mode=MODE_TYPE)
+    VruSpecificExteriorLights._cont = ASN1Dict([(u'unavailable', 0), (u'backFlashLight', 1), (u'helmetLight', 2), (u'armLight', 3), (u'legLight', 4), (u'wheelLight', 5)])
     VruSpecificExteriorLights._const_sz = ASN1Set(rv=[8], rr=[], ev=None, er=[])
     
     #-----< VruSizeClass >-----#
-    VruSizeClass = ENUM(name='VruSizeClass', mode=MODE_TYPE)
-    VruSizeClass._cont = ASN1Dict([('unavailable', 0), ('low', 1), ('medium', 2), ('high', 3), ('max', 15)])
+    VruSizeClass = ENUM(name=u'VruSizeClass', mode=MODE_TYPE)
+    VruSizeClass._cont = ASN1Dict([(u'unavailable', 0), (u'low', 1), (u'medium', 2), (u'high', 3), (u'max', 15)])
     VruSizeClass._ext = None
     
     #-----< VruClusterInformationContainer >-----#
-    VruClusterInformationContainer = SEQ(name='VruClusterInformationContainer', mode=MODE_TYPE)
-    _VruClusterInformationContainer_clusterId = INT(name='clusterId', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('VAM-PDU-Descriptions', 'ClusterId')))
-    _VruClusterInformationContainer_clusterBoundingBoxShape = CHOICE(name='clusterBoundingBoxShape', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('VAM-PDU-Descriptions', 'ClusterBoundingBoxShape')))
-    _VruClusterInformationContainer_clusterCardinalitySize = INT(name='clusterCardinalitySize', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('VAM-PDU-Descriptions', 'ClusterCardinalitySize')))
-    _VruClusterInformationContainer_clusterProfiles = BIT_STR(name='clusterProfiles', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('VAM-PDU-Descriptions', 'ClusterProfiles')))
+    VruClusterInformationContainer = SEQ(name=u'VruClusterInformationContainer', mode=MODE_TYPE)
+    _VruClusterInformationContainer_clusterId = INT(name=u'clusterId', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('VAM-PDU-Descriptions', 'ClusterId')))
+    _VruClusterInformationContainer_clusterBoundingBoxShape = CHOICE(name=u'clusterBoundingBoxShape', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('VAM-PDU-Descriptions', 'ClusterBoundingBoxShape')))
+    _VruClusterInformationContainer_clusterCardinalitySize = INT(name=u'clusterCardinalitySize', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('VAM-PDU-Descriptions', 'ClusterCardinalitySize')))
+    _VruClusterInformationContainer_clusterProfiles = BIT_STR(name=u'clusterProfiles', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('VAM-PDU-Descriptions', 'ClusterProfiles')))
     VruClusterInformationContainer._cont = ASN1Dict([
-        ('clusterId', _VruClusterInformationContainer_clusterId),
-        ('clusterBoundingBoxShape', _VruClusterInformationContainer_clusterBoundingBoxShape),
-        ('clusterCardinalitySize', _VruClusterInformationContainer_clusterCardinalitySize),
-        ('clusterProfiles', _VruClusterInformationContainer_clusterProfiles),
+        (u'clusterId', _VruClusterInformationContainer_clusterId),
+        (u'clusterBoundingBoxShape', _VruClusterInformationContainer_clusterBoundingBoxShape),
+        (u'clusterCardinalitySize', _VruClusterInformationContainer_clusterCardinalitySize),
+        (u'clusterProfiles', _VruClusterInformationContainer_clusterProfiles),
         ])
     VruClusterInformationContainer._ext = []
     
     #-----< ClusterId >-----#
-    ClusterId = INT(name='ClusterId', mode=MODE_TYPE)
+    ClusterId = INT(name=u'ClusterId', mode=MODE_TYPE)
     ClusterId._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=255)], ev=None, er=[])
     
     #-----< ClusterBoundingBoxShape >-----#
-    ClusterBoundingBoxShape = CHOICE(name='ClusterBoundingBoxShape', mode=MODE_TYPE)
-    _ClusterBoundingBoxShape_clusterRectangle = SEQ(name='clusterRectangle', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('VAM-Temp-Imports', 'AreaRectangle')))
-    _ClusterBoundingBoxShape_clusterCircle = SEQ(name='clusterCircle', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('VAM-Temp-Imports', 'AreaCircular')))
-    _ClusterBoundingBoxShape_clusterPolygon = SEQ(name='clusterPolygon', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('VAM-Temp-Imports', 'AreaPolygon')))
+    ClusterBoundingBoxShape = CHOICE(name=u'ClusterBoundingBoxShape', mode=MODE_TYPE)
+    _ClusterBoundingBoxShape_clusterRectangle = SEQ(name=u'clusterRectangle', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('VAM-Temp-Imports', 'AreaRectangle')))
+    _ClusterBoundingBoxShape_clusterCircle = SEQ(name=u'clusterCircle', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('VAM-Temp-Imports', 'AreaCircular')))
+    _ClusterBoundingBoxShape_clusterPolygon = SEQ(name=u'clusterPolygon', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('VAM-Temp-Imports', 'AreaPolygon')))
     ClusterBoundingBoxShape._cont = ASN1Dict([
-        ('clusterRectangle', _ClusterBoundingBoxShape_clusterRectangle),
-        ('clusterCircle', _ClusterBoundingBoxShape_clusterCircle),
-        ('clusterPolygon', _ClusterBoundingBoxShape_clusterPolygon),
+        (u'clusterRectangle', _ClusterBoundingBoxShape_clusterRectangle),
+        (u'clusterCircle', _ClusterBoundingBoxShape_clusterCircle),
+        (u'clusterPolygon', _ClusterBoundingBoxShape_clusterPolygon),
         ])
     ClusterBoundingBoxShape._ext = []
     
     #-----< ClusterCardinalitySize >-----#
-    ClusterCardinalitySize = INT(name='ClusterCardinalitySize', mode=MODE_TYPE)
-    ClusterCardinalitySize._cont = ASN1Dict([('unavailable', 0), ('onlyLeader', 1)])
+    ClusterCardinalitySize = INT(name=u'ClusterCardinalitySize', mode=MODE_TYPE)
+    ClusterCardinalitySize._cont = ASN1Dict([(u'unavailable', 0), (u'onlyLeader', 1)])
     ClusterCardinalitySize._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=255)], ev=None, er=[])
     
     #-----< ClusterProfiles >-----#
-    ClusterProfiles = BIT_STR(name='ClusterProfiles', mode=MODE_TYPE)
-    ClusterProfiles._cont = ASN1Dict([('pedestrian', 0), ('bicyclist', 1), ('motorcyclist', 2), ('animal', 3)])
+    ClusterProfiles = BIT_STR(name=u'ClusterProfiles', mode=MODE_TYPE)
+    ClusterProfiles._cont = ASN1Dict([(u'pedestrian', 0), (u'bicyclist', 1), (u'motorcyclist', 2), (u'animal', 3)])
     ClusterProfiles._const_sz = ASN1Set(rv=[4], rr=[], ev=None, er=[])
     
     #-----< VruClusterOperationContainer >-----#
-    VruClusterOperationContainer = SEQ(name='VruClusterOperationContainer', mode=MODE_TYPE)
-    _VruClusterOperationContainer_clusterJoinInfo = SEQ(name='clusterJoinInfo', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('VAM-PDU-Descriptions', 'ClusterJoinInfo')), opt=True)
-    _VruClusterOperationContainer_clusterLeaveInfo = SEQ(name='clusterLeaveInfo', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('VAM-PDU-Descriptions', 'ClusterLeaveInfo')), opt=True)
-    _VruClusterOperationContainer_clusterBreakupInfo = SEQ(name='clusterBreakupInfo', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('VAM-PDU-Descriptions', 'ClusterBreakupInfo')), opt=True)
-    _VruClusterOperationContainer_clusterIdChangeTimeInfo = INT(name='clusterIdChangeTimeInfo', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('VAM-PDU-Descriptions', 'VruClusterOpTimestamp')), opt=True)
+    VruClusterOperationContainer = SEQ(name=u'VruClusterOperationContainer', mode=MODE_TYPE)
+    _VruClusterOperationContainer_clusterJoinInfo = SEQ(name=u'clusterJoinInfo', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('VAM-PDU-Descriptions', 'ClusterJoinInfo')), opt=True)
+    _VruClusterOperationContainer_clusterLeaveInfo = SEQ(name=u'clusterLeaveInfo', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('VAM-PDU-Descriptions', 'ClusterLeaveInfo')), opt=True)
+    _VruClusterOperationContainer_clusterBreakupInfo = SEQ(name=u'clusterBreakupInfo', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('VAM-PDU-Descriptions', 'ClusterBreakupInfo')), opt=True)
+    _VruClusterOperationContainer_clusterIdChangeTimeInfo = INT(name=u'clusterIdChangeTimeInfo', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('VAM-PDU-Descriptions', 'VruClusterOpTimestamp')), opt=True)
     VruClusterOperationContainer._cont = ASN1Dict([
-        ('clusterJoinInfo', _VruClusterOperationContainer_clusterJoinInfo),
-        ('clusterLeaveInfo', _VruClusterOperationContainer_clusterLeaveInfo),
-        ('clusterBreakupInfo', _VruClusterOperationContainer_clusterBreakupInfo),
-        ('clusterIdChangeTimeInfo', _VruClusterOperationContainer_clusterIdChangeTimeInfo),
+        (u'clusterJoinInfo', _VruClusterOperationContainer_clusterJoinInfo),
+        (u'clusterLeaveInfo', _VruClusterOperationContainer_clusterLeaveInfo),
+        (u'clusterBreakupInfo', _VruClusterOperationContainer_clusterBreakupInfo),
+        (u'clusterIdChangeTimeInfo', _VruClusterOperationContainer_clusterIdChangeTimeInfo),
         ])
     VruClusterOperationContainer._ext = []
     
     #-----< VruClusterOpTimestamp >-----#
-    VruClusterOpTimestamp = INT(name='VruClusterOpTimestamp', mode=MODE_TYPE)
+    VruClusterOpTimestamp = INT(name=u'VruClusterOpTimestamp', mode=MODE_TYPE)
     VruClusterOpTimestamp._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=255)], ev=None, er=[])
     
     #-----< ClusterJoinInfo >-----#
-    ClusterJoinInfo = SEQ(name='ClusterJoinInfo', mode=MODE_TYPE)
-    _ClusterJoinInfo_clusterId = INT(name='clusterId', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('VAM-PDU-Descriptions', 'ClusterId')))
-    _ClusterJoinInfo_joinTime = INT(name='joinTime', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('VAM-PDU-Descriptions', 'VruClusterOpTimestamp')))
+    ClusterJoinInfo = SEQ(name=u'ClusterJoinInfo', mode=MODE_TYPE)
+    _ClusterJoinInfo_clusterId = INT(name=u'clusterId', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('VAM-PDU-Descriptions', 'ClusterId')))
+    _ClusterJoinInfo_joinTime = INT(name=u'joinTime', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('VAM-PDU-Descriptions', 'VruClusterOpTimestamp')))
     ClusterJoinInfo._cont = ASN1Dict([
-        ('clusterId', _ClusterJoinInfo_clusterId),
-        ('joinTime', _ClusterJoinInfo_joinTime),
+        (u'clusterId', _ClusterJoinInfo_clusterId),
+        (u'joinTime', _ClusterJoinInfo_joinTime),
         ])
     ClusterJoinInfo._ext = []
     
     #-----< ClusterLeaveInfo >-----#
-    ClusterLeaveInfo = SEQ(name='ClusterLeaveInfo', mode=MODE_TYPE)
-    _ClusterLeaveInfo_clusterId = INT(name='clusterId', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('VAM-PDU-Descriptions', 'ClusterId')))
-    _ClusterLeaveInfo_clusterLeaveReason = ENUM(name='clusterLeaveReason', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('VAM-PDU-Descriptions', 'ClusterLeaveReason')))
+    ClusterLeaveInfo = SEQ(name=u'ClusterLeaveInfo', mode=MODE_TYPE)
+    _ClusterLeaveInfo_clusterId = INT(name=u'clusterId', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('VAM-PDU-Descriptions', 'ClusterId')))
+    _ClusterLeaveInfo_clusterLeaveReason = ENUM(name=u'clusterLeaveReason', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('VAM-PDU-Descriptions', 'ClusterLeaveReason')))
     ClusterLeaveInfo._cont = ASN1Dict([
-        ('clusterId', _ClusterLeaveInfo_clusterId),
-        ('clusterLeaveReason', _ClusterLeaveInfo_clusterLeaveReason),
+        (u'clusterId', _ClusterLeaveInfo_clusterId),
+        (u'clusterLeaveReason', _ClusterLeaveInfo_clusterLeaveReason),
         ])
     ClusterLeaveInfo._ext = []
     
     #-----< ClusterBreakupInfo >-----#
-    ClusterBreakupInfo = SEQ(name='ClusterBreakupInfo', mode=MODE_TYPE)
-    _ClusterBreakupInfo_clusterBreakupReason = ENUM(name='clusterBreakupReason', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('VAM-PDU-Descriptions', 'ClusterBreakupReason')))
-    _ClusterBreakupInfo_breakupTime = INT(name='breakupTime', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('VAM-PDU-Descriptions', 'VruClusterOpTimestamp')))
+    ClusterBreakupInfo = SEQ(name=u'ClusterBreakupInfo', mode=MODE_TYPE)
+    _ClusterBreakupInfo_clusterBreakupReason = ENUM(name=u'clusterBreakupReason', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('VAM-PDU-Descriptions', 'ClusterBreakupReason')))
+    _ClusterBreakupInfo_breakupTime = INT(name=u'breakupTime', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('VAM-PDU-Descriptions', 'VruClusterOpTimestamp')))
     ClusterBreakupInfo._cont = ASN1Dict([
-        ('clusterBreakupReason', _ClusterBreakupInfo_clusterBreakupReason),
-        ('breakupTime', _ClusterBreakupInfo_breakupTime),
+        (u'clusterBreakupReason', _ClusterBreakupInfo_clusterBreakupReason),
+        (u'breakupTime', _ClusterBreakupInfo_breakupTime),
         ])
     ClusterBreakupInfo._ext = []
     
     #-----< ClusterLeaveReason >-----#
-    ClusterLeaveReason = ENUM(name='ClusterLeaveReason', mode=MODE_TYPE)
-    ClusterLeaveReason._cont = ASN1Dict([('notProvided', 0), ('clusterLeaderLost', 1), ('clusterDisbandedByLeader', 2), ('outOfClusterBoundingBox', 3), ('outOfClusterSpeedRange', 4), ('joiningAnotherCluster', 5), ('cancelledJoin', 6), ('failedJoin', 7), ('safetyCondition', 8), ('max', 15)])
+    ClusterLeaveReason = ENUM(name=u'ClusterLeaveReason', mode=MODE_TYPE)
+    ClusterLeaveReason._cont = ASN1Dict([(u'notProvided', 0), (u'clusterLeaderLost', 1), (u'clusterDisbandedByLeader', 2), (u'outOfClusterBoundingBox', 3), (u'outOfClusterSpeedRange', 4), (u'joiningAnotherCluster', 5), (u'cancelledJoin', 6), (u'failedJoin', 7), (u'safetyCondition', 8), (u'max', 15)])
     ClusterLeaveReason._ext = None
     
     #-----< ClusterBreakupReason >-----#
-    ClusterBreakupReason = ENUM(name='ClusterBreakupReason', mode=MODE_TYPE)
-    ClusterBreakupReason._cont = ASN1Dict([('notProvided', 0), ('clusteringPurposeCompleted', 1), ('leaderMovedOutOfClusterBoundingBox', 2), ('joiningAnotherCluster', 3), ('enteringLowRiskAreaBasedOnMaps', 4), ('receptionOfCpmContainingCluster', 5), ('max', 15)])
+    ClusterBreakupReason = ENUM(name=u'ClusterBreakupReason', mode=MODE_TYPE)
+    ClusterBreakupReason._cont = ASN1Dict([(u'notProvided', 0), (u'clusteringPurposeCompleted', 1), (u'leaderMovedOutOfClusterBoundingBox', 2), (u'joiningAnotherCluster', 3), (u'enteringLowRiskAreaBasedOnMaps', 4), (u'receptionOfCpmContainingCluster', 5), (u'max', 15)])
     ClusterBreakupReason._ext = None
     
     #-----< VruMotionPredictionContainer >-----#
-    VruMotionPredictionContainer = SEQ(name='VruMotionPredictionContainer', mode=MODE_TYPE)
-    _VruMotionPredictionContainer_pathHistory = SEQ_OF(name='pathHistory', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'PathHistory')), opt=True)
-    _VruMotionPredictionContainer_pathPrediction = SEQ_OF(name='pathPrediction', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('VAM-PDU-Descriptions', 'SequenceOfVruPathPoint')), opt=True)
-    _VruMotionPredictionContainer_safeDistance = SEQ_OF(name='safeDistance', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('VAM-PDU-Descriptions', 'SequenceOfVruSafeDistanceIndication')), opt=True)
-    _VruMotionPredictionContainer_trajectoryInterceptionIndication = SEQ_OF(name='trajectoryInterceptionIndication', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('VAM-PDU-Descriptions', 'SequenceOfTrajectoryInterceptionIndication')), opt=True)
-    _VruMotionPredictionContainer_accelerationChangeIndication = SEQ(name='accelerationChangeIndication', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('VAM-PDU-Descriptions', 'AccelerationChangeIndication')), opt=True)
-    _VruMotionPredictionContainer_headingChangeIndication = SEQ(name='headingChangeIndication', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('VAM-PDU-Descriptions', 'HeadingChangeIndication')), opt=True)
-    _VruMotionPredictionContainer_stabilityChangeIndication = SEQ(name='stabilityChangeIndication', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('VAM-PDU-Descriptions', 'StabilityChangeIndication')), opt=True)
+    VruMotionPredictionContainer = SEQ(name=u'VruMotionPredictionContainer', mode=MODE_TYPE)
+    _VruMotionPredictionContainer_pathHistory = SEQ_OF(name=u'pathHistory', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'PathHistory')), opt=True)
+    _VruMotionPredictionContainer_pathPrediction = SEQ_OF(name=u'pathPrediction', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('VAM-PDU-Descriptions', 'SequenceOfVruPathPoint')), opt=True)
+    _VruMotionPredictionContainer_safeDistance = SEQ_OF(name=u'safeDistance', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('VAM-PDU-Descriptions', 'SequenceOfVruSafeDistanceIndication')), opt=True)
+    _VruMotionPredictionContainer_trajectoryInterceptionIndication = SEQ_OF(name=u'trajectoryInterceptionIndication', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('VAM-PDU-Descriptions', 'SequenceOfTrajectoryInterceptionIndication')), opt=True)
+    _VruMotionPredictionContainer_accelerationChangeIndication = SEQ(name=u'accelerationChangeIndication', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('VAM-PDU-Descriptions', 'AccelerationChangeIndication')), opt=True)
+    _VruMotionPredictionContainer_headingChangeIndication = SEQ(name=u'headingChangeIndication', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('VAM-PDU-Descriptions', 'HeadingChangeIndication')), opt=True)
+    _VruMotionPredictionContainer_stabilityChangeIndication = SEQ(name=u'stabilityChangeIndication', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('VAM-PDU-Descriptions', 'StabilityChangeIndication')), opt=True)
     VruMotionPredictionContainer._cont = ASN1Dict([
-        ('pathHistory', _VruMotionPredictionContainer_pathHistory),
-        ('pathPrediction', _VruMotionPredictionContainer_pathPrediction),
-        ('safeDistance', _VruMotionPredictionContainer_safeDistance),
-        ('trajectoryInterceptionIndication', _VruMotionPredictionContainer_trajectoryInterceptionIndication),
-        ('accelerationChangeIndication', _VruMotionPredictionContainer_accelerationChangeIndication),
-        ('headingChangeIndication', _VruMotionPredictionContainer_headingChangeIndication),
-        ('stabilityChangeIndication', _VruMotionPredictionContainer_stabilityChangeIndication),
+        (u'pathHistory', _VruMotionPredictionContainer_pathHistory),
+        (u'pathPrediction', _VruMotionPredictionContainer_pathPrediction),
+        (u'safeDistance', _VruMotionPredictionContainer_safeDistance),
+        (u'trajectoryInterceptionIndication', _VruMotionPredictionContainer_trajectoryInterceptionIndication),
+        (u'accelerationChangeIndication', _VruMotionPredictionContainer_accelerationChangeIndication),
+        (u'headingChangeIndication', _VruMotionPredictionContainer_headingChangeIndication),
+        (u'stabilityChangeIndication', _VruMotionPredictionContainer_stabilityChangeIndication),
         ])
     VruMotionPredictionContainer._ext = []
     
     #-----< SequenceOfVruPathPoint >-----#
-    SequenceOfVruPathPoint = SEQ_OF(name='SequenceOfVruPathPoint', mode=MODE_TYPE)
+    SequenceOfVruPathPoint = SEQ_OF(name=u'SequenceOfVruPathPoint', mode=MODE_TYPE)
     _SequenceOfVruPathPoint__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('VAM-PDU-Descriptions', 'VruPathPoint')))
     SequenceOfVruPathPoint._cont = _SequenceOfVruPathPoint__item_
     
     #-----< VruPathPoint >-----#
-    VruPathPoint = SEQ(name='VruPathPoint', mode=MODE_TYPE)
-    _VruPathPoint_pathPosition = SEQ(name='pathPosition', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'ReferencePosition')))
-    _VruPathPoint_pathDeltaTime = INT(name='pathDeltaTime', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'PathDeltaTime')), opt=True)
+    VruPathPoint = SEQ(name=u'VruPathPoint', mode=MODE_TYPE)
+    _VruPathPoint_pathPosition = SEQ(name=u'pathPosition', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'ReferencePosition')))
+    _VruPathPoint_pathDeltaTime = INT(name=u'pathDeltaTime', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'PathDeltaTime')), opt=True)
     VruPathPoint._cont = ASN1Dict([
-        ('pathPosition', _VruPathPoint_pathPosition),
-        ('pathDeltaTime', _VruPathPoint_pathDeltaTime),
+        (u'pathPosition', _VruPathPoint_pathPosition),
+        (u'pathDeltaTime', _VruPathPoint_pathDeltaTime),
         ])
     VruPathPoint._ext = None
     
     #-----< SequenceOfVruSafeDistanceIndication >-----#
-    SequenceOfVruSafeDistanceIndication = SEQ_OF(name='SequenceOfVruSafeDistanceIndication', mode=MODE_TYPE)
+    SequenceOfVruSafeDistanceIndication = SEQ_OF(name=u'SequenceOfVruSafeDistanceIndication', mode=MODE_TYPE)
     _SequenceOfVruSafeDistanceIndication__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('VAM-PDU-Descriptions', 'VruSafeDistanceIndication')))
     SequenceOfVruSafeDistanceIndication._cont = _SequenceOfVruSafeDistanceIndication__item_
     SequenceOfVruSafeDistanceIndication._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=8)], ev=None, er=[])
     
     #-----< VruSafeDistanceIndication >-----#
-    VruSafeDistanceIndication = SEQ(name='VruSafeDistanceIndication', mode=MODE_TYPE)
-    _VruSafeDistanceIndication_subjectStation = INT(name='subjectStation', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'StationID')), opt=True)
-    _VruSafeDistanceIndication_stationSafeDistanceIndication = BOOL(name='stationSafeDistanceIndication', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('VAM-PDU-Descriptions', 'StationSafeDistanceIndication')))
-    _VruSafeDistanceIndication_timeToCollision = INT(name='timeToCollision', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('VAM-PDU-Descriptions', 'ActionDeltaTime')), opt=True)
+    VruSafeDistanceIndication = SEQ(name=u'VruSafeDistanceIndication', mode=MODE_TYPE)
+    _VruSafeDistanceIndication_subjectStation = INT(name=u'subjectStation', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'StationID')), opt=True)
+    _VruSafeDistanceIndication_stationSafeDistanceIndication = BOOL(name=u'stationSafeDistanceIndication', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('VAM-PDU-Descriptions', 'StationSafeDistanceIndication')))
+    _VruSafeDistanceIndication_timeToCollision = INT(name=u'timeToCollision', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('VAM-PDU-Descriptions', 'ActionDeltaTime')), opt=True)
     VruSafeDistanceIndication._cont = ASN1Dict([
-        ('subjectStation', _VruSafeDistanceIndication_subjectStation),
-        ('stationSafeDistanceIndication', _VruSafeDistanceIndication_stationSafeDistanceIndication),
-        ('timeToCollision', _VruSafeDistanceIndication_timeToCollision),
+        (u'subjectStation', _VruSafeDistanceIndication_subjectStation),
+        (u'stationSafeDistanceIndication', _VruSafeDistanceIndication_stationSafeDistanceIndication),
+        (u'timeToCollision', _VruSafeDistanceIndication_timeToCollision),
         ])
     VruSafeDistanceIndication._ext = []
     
     #-----< StationSafeDistanceIndication >-----#
-    StationSafeDistanceIndication = BOOL(name='StationSafeDistanceIndication', mode=MODE_TYPE)
+    StationSafeDistanceIndication = BOOL(name=u'StationSafeDistanceIndication', mode=MODE_TYPE)
     
     #-----< SequenceOfTrajectoryInterceptionIndication >-----#
-    SequenceOfTrajectoryInterceptionIndication = SEQ_OF(name='SequenceOfTrajectoryInterceptionIndication', mode=MODE_TYPE)
+    SequenceOfTrajectoryInterceptionIndication = SEQ_OF(name=u'SequenceOfTrajectoryInterceptionIndication', mode=MODE_TYPE)
     _SequenceOfTrajectoryInterceptionIndication__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('VAM-PDU-Descriptions', 'TrajectoryInterceptionIndication')))
     SequenceOfTrajectoryInterceptionIndication._cont = _SequenceOfTrajectoryInterceptionIndication__item_
     SequenceOfTrajectoryInterceptionIndication._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=8)], ev=None, er=[])
     
     #-----< TrajectoryInterceptionIndication >-----#
-    TrajectoryInterceptionIndication = SEQ(name='TrajectoryInterceptionIndication', mode=MODE_TYPE)
-    _TrajectoryInterceptionIndication_subjectStation = INT(name='subjectStation', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'StationID')), opt=True)
-    _TrajectoryInterceptionIndication_trajectoryInterceptionProbability = INT(name='trajectoryInterceptionProbability', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('VAM-PDU-Descriptions', 'TrajectoryInterceptionProbability')))
-    _TrajectoryInterceptionIndication_trajectoryInterceptionConfidence = INT(name='trajectoryInterceptionConfidence', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('VAM-PDU-Descriptions', 'TrajectoryInterceptionConfidence')), opt=True)
+    TrajectoryInterceptionIndication = SEQ(name=u'TrajectoryInterceptionIndication', mode=MODE_TYPE)
+    _TrajectoryInterceptionIndication_subjectStation = INT(name=u'subjectStation', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'StationID')), opt=True)
+    _TrajectoryInterceptionIndication_trajectoryInterceptionProbability = INT(name=u'trajectoryInterceptionProbability', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('VAM-PDU-Descriptions', 'TrajectoryInterceptionProbability')))
+    _TrajectoryInterceptionIndication_trajectoryInterceptionConfidence = INT(name=u'trajectoryInterceptionConfidence', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('VAM-PDU-Descriptions', 'TrajectoryInterceptionConfidence')), opt=True)
     TrajectoryInterceptionIndication._cont = ASN1Dict([
-        ('subjectStation', _TrajectoryInterceptionIndication_subjectStation),
-        ('trajectoryInterceptionProbability', _TrajectoryInterceptionIndication_trajectoryInterceptionProbability),
-        ('trajectoryInterceptionConfidence', _TrajectoryInterceptionIndication_trajectoryInterceptionConfidence),
+        (u'subjectStation', _TrajectoryInterceptionIndication_subjectStation),
+        (u'trajectoryInterceptionProbability', _TrajectoryInterceptionIndication_trajectoryInterceptionProbability),
+        (u'trajectoryInterceptionConfidence', _TrajectoryInterceptionIndication_trajectoryInterceptionConfidence),
         ])
     TrajectoryInterceptionIndication._ext = []
     
     #-----< TrajectoryInterceptionProbability >-----#
-    TrajectoryInterceptionProbability = INT(name='TrajectoryInterceptionProbability', mode=MODE_TYPE)
-    TrajectoryInterceptionProbability._cont = ASN1Dict([('zero', 0), ('twoPercent', 1), ('fourPercent', 2), ('oneHundredPercent', 50), ('unavailable', 63)])
+    TrajectoryInterceptionProbability = INT(name=u'TrajectoryInterceptionProbability', mode=MODE_TYPE)
+    TrajectoryInterceptionProbability._cont = ASN1Dict([(u'zero', 0), (u'twoPercent', 1), (u'fourPercent', 2), (u'oneHundredPercent', 50), (u'unavailable', 63)])
     TrajectoryInterceptionProbability._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=63)], ev=None, er=[])
     
     #-----< TrajectoryInterceptionConfidence >-----#
-    TrajectoryInterceptionConfidence = INT(name='TrajectoryInterceptionConfidence', mode=MODE_TYPE)
-    TrajectoryInterceptionConfidence._cont = ASN1Dict([('lessthan50percent', 0), ('between50and70Percent', 1), ('between70and90Percent', 2), ('above90Percent', 3)])
+    TrajectoryInterceptionConfidence = INT(name=u'TrajectoryInterceptionConfidence', mode=MODE_TYPE)
+    TrajectoryInterceptionConfidence._cont = ASN1Dict([(u'lessthan50percent', 0), (u'between50and70Percent', 1), (u'between70and90Percent', 2), (u'above90Percent', 3)])
     TrajectoryInterceptionConfidence._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=3)], ev=None, er=[])
     
     #-----< HeadingChangeIndication >-----#
-    HeadingChangeIndication = SEQ(name='HeadingChangeIndication', mode=MODE_TYPE)
-    _HeadingChangeIndication_direction = ENUM(name='direction', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('VAM-PDU-Descriptions', 'LeftOrRight')))
-    _HeadingChangeIndication_actionDeltaTime = INT(name='actionDeltaTime', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('VAM-PDU-Descriptions', 'ActionDeltaTime')))
+    HeadingChangeIndication = SEQ(name=u'HeadingChangeIndication', mode=MODE_TYPE)
+    _HeadingChangeIndication_direction = ENUM(name=u'direction', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('VAM-PDU-Descriptions', 'LeftOrRight')))
+    _HeadingChangeIndication_actionDeltaTime = INT(name=u'actionDeltaTime', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('VAM-PDU-Descriptions', 'ActionDeltaTime')))
     HeadingChangeIndication._cont = ASN1Dict([
-        ('direction', _HeadingChangeIndication_direction),
-        ('actionDeltaTime', _HeadingChangeIndication_actionDeltaTime),
+        (u'direction', _HeadingChangeIndication_direction),
+        (u'actionDeltaTime', _HeadingChangeIndication_actionDeltaTime),
         ])
     HeadingChangeIndication._ext = []
     
     #-----< LeftOrRight >-----#
-    LeftOrRight = ENUM(name='LeftOrRight', mode=MODE_TYPE)
-    LeftOrRight._cont = ASN1Dict([('left', 0), ('right', 1)])
+    LeftOrRight = ENUM(name=u'LeftOrRight', mode=MODE_TYPE)
+    LeftOrRight._cont = ASN1Dict([(u'left', 0), (u'right', 1)])
     LeftOrRight._ext = None
     
     #-----< ActionDeltaTime >-----#
-    ActionDeltaTime = INT(name='ActionDeltaTime', mode=MODE_TYPE)
-    ActionDeltaTime._cont = ASN1Dict([('zero', 0), ('hundredMs', 1), ('twoHundredMs', 2), ('unavailable', 127)])
+    ActionDeltaTime = INT(name=u'ActionDeltaTime', mode=MODE_TYPE)
+    ActionDeltaTime._cont = ASN1Dict([(u'zero', 0), (u'hundredMs', 1), (u'twoHundredMs', 2), (u'unavailable', 127)])
     ActionDeltaTime._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=127)], ev=None, er=[])
     
     #-----< AccelerationChangeIndication >-----#
-    AccelerationChangeIndication = SEQ(name='AccelerationChangeIndication', mode=MODE_TYPE)
-    _AccelerationChangeIndication_accelOrDecel = ENUM(name='accelOrDecel', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('VAM-PDU-Descriptions', 'AccelOrDecel')))
-    _AccelerationChangeIndication_actionDeltaTime = INT(name='actionDeltaTime', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('VAM-PDU-Descriptions', 'ActionDeltaTime')))
+    AccelerationChangeIndication = SEQ(name=u'AccelerationChangeIndication', mode=MODE_TYPE)
+    _AccelerationChangeIndication_accelOrDecel = ENUM(name=u'accelOrDecel', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('VAM-PDU-Descriptions', 'AccelOrDecel')))
+    _AccelerationChangeIndication_actionDeltaTime = INT(name=u'actionDeltaTime', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('VAM-PDU-Descriptions', 'ActionDeltaTime')))
     AccelerationChangeIndication._cont = ASN1Dict([
-        ('accelOrDecel', _AccelerationChangeIndication_accelOrDecel),
-        ('actionDeltaTime', _AccelerationChangeIndication_actionDeltaTime),
+        (u'accelOrDecel', _AccelerationChangeIndication_accelOrDecel),
+        (u'actionDeltaTime', _AccelerationChangeIndication_actionDeltaTime),
         ])
     AccelerationChangeIndication._ext = []
     
     #-----< AccelOrDecel >-----#
-    AccelOrDecel = ENUM(name='AccelOrDecel', mode=MODE_TYPE)
-    AccelOrDecel._cont = ASN1Dict([('accelerate', 0), ('decelerate', 1)])
+    AccelOrDecel = ENUM(name=u'AccelOrDecel', mode=MODE_TYPE)
+    AccelOrDecel._cont = ASN1Dict([(u'accelerate', 0), (u'decelerate', 1)])
     AccelOrDecel._ext = None
     
     #-----< StabilityChangeIndication >-----#
-    StabilityChangeIndication = SEQ(name='StabilityChangeIndication', mode=MODE_TYPE)
-    _StabilityChangeIndication_lossProbability = INT(name='lossProbability', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('VAM-PDU-Descriptions', 'StabilityLossProbability')))
-    _StabilityChangeIndication_actionDeltaTime = INT(name='actionDeltaTime', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('VAM-PDU-Descriptions', 'ActionDeltaTime')))
+    StabilityChangeIndication = SEQ(name=u'StabilityChangeIndication', mode=MODE_TYPE)
+    _StabilityChangeIndication_lossProbability = INT(name=u'lossProbability', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('VAM-PDU-Descriptions', 'StabilityLossProbability')))
+    _StabilityChangeIndication_actionDeltaTime = INT(name=u'actionDeltaTime', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('VAM-PDU-Descriptions', 'ActionDeltaTime')))
     StabilityChangeIndication._cont = ASN1Dict([
-        ('lossProbability', _StabilityChangeIndication_lossProbability),
-        ('actionDeltaTime', _StabilityChangeIndication_actionDeltaTime),
+        (u'lossProbability', _StabilityChangeIndication_lossProbability),
+        (u'actionDeltaTime', _StabilityChangeIndication_actionDeltaTime),
         ])
     StabilityChangeIndication._ext = []
     
     #-----< StabilityLossProbability >-----#
-    StabilityLossProbability = INT(name='StabilityLossProbability', mode=MODE_TYPE)
-    StabilityLossProbability._cont = ASN1Dict([('zero', 0), ('twoPercent', 1), ('fourPercent', 2), ('unavailable', 63)])
+    StabilityLossProbability = INT(name=u'StabilityLossProbability', mode=MODE_TYPE)
+    StabilityLossProbability._cont = ASN1Dict([(u'zero', 0), (u'twoPercent', 1), (u'fourPercent', 2), (u'unavailable', 63)])
     StabilityLossProbability._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=63)], ev=None, er=[])
     
     _all_ = [
@@ -6152,36 +6152,36 @@ class VAM_PDU_Descriptions:
 
 class VAM_Temp_Imports:
 
-    _name_  = 'VAM-Temp-Imports'
+    _name_  = u'VAM-Temp-Imports'
     _oid_   = [0, 4, 0, 5, 1, 103300, 255, 1]
     
     _obj_ = [
-        'BasicContainer',
-        'ItsPduHeader',
-        'AreaCircular',
-        'AreaPolygon',
-        'AreaRectangle',
-        'OffsetPoint',
-        'NodeOffsetPointZ',
-        'Radius',
-        'PolyPointList',
-        'SemiRangeLength',
-        'WGS84AngleValue',
-        'StationType',
+        u'BasicContainer',
+        u'ItsPduHeader',
+        u'AreaCircular',
+        u'AreaPolygon',
+        u'AreaRectangle',
+        u'OffsetPoint',
+        u'NodeOffsetPointZ',
+        u'Radius',
+        u'PolyPointList',
+        u'SemiRangeLength',
+        u'WGS84AngleValue',
+        u'StationType',
         ]
     _type_ = [
-        'BasicContainer',
-        'ItsPduHeader',
-        'AreaCircular',
-        'AreaPolygon',
-        'AreaRectangle',
-        'OffsetPoint',
-        'NodeOffsetPointZ',
-        'Radius',
-        'PolyPointList',
-        'SemiRangeLength',
-        'WGS84AngleValue',
-        'StationType',
+        u'BasicContainer',
+        u'ItsPduHeader',
+        u'AreaCircular',
+        u'AreaPolygon',
+        u'AreaRectangle',
+        u'OffsetPoint',
+        u'NodeOffsetPointZ',
+        u'Radius',
+        u'PolyPointList',
+        u'SemiRangeLength',
+        u'WGS84AngleValue',
+        u'StationType',
         ]
     _set_ = [
         ]
@@ -6193,116 +6193,116 @@ class VAM_Temp_Imports:
         ]
     
     #-----< BasicContainer >-----#
-    BasicContainer = SEQ(name='BasicContainer', mode=MODE_TYPE)
-    _BasicContainer_stationType = INT(name='stationType', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('VAM-Temp-Imports', 'StationType')))
-    _BasicContainer_referencePosition = SEQ(name='referencePosition', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'ReferencePosition')))
+    BasicContainer = SEQ(name=u'BasicContainer', mode=MODE_TYPE)
+    _BasicContainer_stationType = INT(name=u'stationType', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('VAM-Temp-Imports', 'StationType')))
+    _BasicContainer_referencePosition = SEQ(name=u'referencePosition', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'ReferencePosition')))
     BasicContainer._cont = ASN1Dict([
-        ('stationType', _BasicContainer_stationType),
-        ('referencePosition', _BasicContainer_referencePosition),
+        (u'stationType', _BasicContainer_stationType),
+        (u'referencePosition', _BasicContainer_referencePosition),
         ])
     BasicContainer._ext = []
     
     #-----< ItsPduHeader >-----#
-    ItsPduHeader = SEQ(name='ItsPduHeader', mode=MODE_TYPE)
-    _ItsPduHeader_protocolVersion = INT(name='protocolVersion', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    ItsPduHeader = SEQ(name=u'ItsPduHeader', mode=MODE_TYPE)
+    _ItsPduHeader_protocolVersion = INT(name=u'protocolVersion', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     _ItsPduHeader_protocolVersion._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=255)], ev=None, er=[])
-    _ItsPduHeader_messageID = INT(name='messageID', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _ItsPduHeader_messageID._cont = ASN1Dict([('denm', 1), ('cam', 2), ('poi', 3), ('spatem', 4), ('mapem', 5), ('ivim', 6), ('ev-rsr', 7), ('tistpgtransaction', 8), ('srem', 9), ('ssem', 10), ('evcsn', 11), ('saem', 12), ('rtcmem', 13), ('vam', 14)])
+    _ItsPduHeader_messageID = INT(name=u'messageID', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _ItsPduHeader_messageID._cont = ASN1Dict([(u'denm', 1), (u'cam', 2), (u'poi', 3), (u'spatem', 4), (u'mapem', 5), (u'ivim', 6), (u'ev-rsr', 7), (u'tistpgtransaction', 8), (u'srem', 9), (u'ssem', 10), (u'evcsn', 11), (u'saem', 12), (u'rtcmem', 13), (u'vam', 14)])
     _ItsPduHeader_messageID._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=255)], ev=None, er=[])
-    _ItsPduHeader_stationID = INT(name='stationID', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'StationID')))
+    _ItsPduHeader_stationID = INT(name=u'stationID', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('ITS-Container', 'StationID')))
     ItsPduHeader._cont = ASN1Dict([
-        ('protocolVersion', _ItsPduHeader_protocolVersion),
-        ('messageID', _ItsPduHeader_messageID),
-        ('stationID', _ItsPduHeader_stationID),
+        (u'protocolVersion', _ItsPduHeader_protocolVersion),
+        (u'messageID', _ItsPduHeader_messageID),
+        (u'stationID', _ItsPduHeader_stationID),
         ])
     ItsPduHeader._ext = None
     
     #-----< AreaCircular >-----#
-    AreaCircular = SEQ(name='AreaCircular', mode=MODE_TYPE)
-    _AreaCircular_nodeCenterPoint = SEQ(name='nodeCenterPoint', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('VAM-Temp-Imports', 'OffsetPoint')), opt=True)
-    _AreaCircular_radius = INT(name='radius', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('VAM-Temp-Imports', 'Radius')))
+    AreaCircular = SEQ(name=u'AreaCircular', mode=MODE_TYPE)
+    _AreaCircular_nodeCenterPoint = SEQ(name=u'nodeCenterPoint', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('VAM-Temp-Imports', 'OffsetPoint')), opt=True)
+    _AreaCircular_radius = INT(name=u'radius', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('VAM-Temp-Imports', 'Radius')))
     AreaCircular._cont = ASN1Dict([
-        ('nodeCenterPoint', _AreaCircular_nodeCenterPoint),
-        ('radius', _AreaCircular_radius),
+        (u'nodeCenterPoint', _AreaCircular_nodeCenterPoint),
+        (u'radius', _AreaCircular_radius),
         ])
     AreaCircular._ext = None
     
     #-----< AreaPolygon >-----#
-    AreaPolygon = SEQ(name='AreaPolygon', mode=MODE_TYPE)
-    _AreaPolygon_polyPointList = SEQ_OF(name='polyPointList', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('VAM-Temp-Imports', 'PolyPointList')))
+    AreaPolygon = SEQ(name=u'AreaPolygon', mode=MODE_TYPE)
+    _AreaPolygon_polyPointList = SEQ_OF(name=u'polyPointList', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('VAM-Temp-Imports', 'PolyPointList')))
     AreaPolygon._cont = ASN1Dict([
-        ('polyPointList', _AreaPolygon_polyPointList),
+        (u'polyPointList', _AreaPolygon_polyPointList),
         ])
     AreaPolygon._ext = None
     
     #-----< AreaRectangle >-----#
-    AreaRectangle = SEQ(name='AreaRectangle', mode=MODE_TYPE)
-    _AreaRectangle_nodeCenterPoint = SEQ(name='nodeCenterPoint', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('VAM-Temp-Imports', 'OffsetPoint')), opt=True)
-    _AreaRectangle_semiMajorRangeLength = INT(name='semiMajorRangeLength', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('VAM-Temp-Imports', 'SemiRangeLength')))
-    _AreaRectangle_semiMinorRangeLength = INT(name='semiMinorRangeLength', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('VAM-Temp-Imports', 'SemiRangeLength')))
-    _AreaRectangle_semiMajorRangeOrientation = INT(name='semiMajorRangeOrientation', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('VAM-Temp-Imports', 'WGS84AngleValue')))
-    _AreaRectangle_semiHeight = INT(name='semiHeight', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('VAM-Temp-Imports', 'SemiRangeLength')), opt=True)
+    AreaRectangle = SEQ(name=u'AreaRectangle', mode=MODE_TYPE)
+    _AreaRectangle_nodeCenterPoint = SEQ(name=u'nodeCenterPoint', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('VAM-Temp-Imports', 'OffsetPoint')), opt=True)
+    _AreaRectangle_semiMajorRangeLength = INT(name=u'semiMajorRangeLength', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('VAM-Temp-Imports', 'SemiRangeLength')))
+    _AreaRectangle_semiMinorRangeLength = INT(name=u'semiMinorRangeLength', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('VAM-Temp-Imports', 'SemiRangeLength')))
+    _AreaRectangle_semiMajorRangeOrientation = INT(name=u'semiMajorRangeOrientation', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('VAM-Temp-Imports', 'WGS84AngleValue')))
+    _AreaRectangle_semiHeight = INT(name=u'semiHeight', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('VAM-Temp-Imports', 'SemiRangeLength')), opt=True)
     AreaRectangle._cont = ASN1Dict([
-        ('nodeCenterPoint', _AreaRectangle_nodeCenterPoint),
-        ('semiMajorRangeLength', _AreaRectangle_semiMajorRangeLength),
-        ('semiMinorRangeLength', _AreaRectangle_semiMinorRangeLength),
-        ('semiMajorRangeOrientation', _AreaRectangle_semiMajorRangeOrientation),
-        ('semiHeight', _AreaRectangle_semiHeight),
+        (u'nodeCenterPoint', _AreaRectangle_nodeCenterPoint),
+        (u'semiMajorRangeLength', _AreaRectangle_semiMajorRangeLength),
+        (u'semiMinorRangeLength', _AreaRectangle_semiMinorRangeLength),
+        (u'semiMajorRangeOrientation', _AreaRectangle_semiMajorRangeOrientation),
+        (u'semiHeight', _AreaRectangle_semiHeight),
         ])
     AreaRectangle._ext = None
     
     #-----< OffsetPoint >-----#
-    OffsetPoint = SEQ(name='OffsetPoint', mode=MODE_TYPE)
-    _OffsetPoint_nodeOffsetPointXY = CHOICE(name='nodeOffsetPointXY', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('DSRC', 'NodeOffsetPointXY')))
-    _OffsetPoint_nodeOffsetPointZ = CHOICE(name='nodeOffsetPointZ', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('VAM-Temp-Imports', 'NodeOffsetPointZ')), opt=True)
+    OffsetPoint = SEQ(name=u'OffsetPoint', mode=MODE_TYPE)
+    _OffsetPoint_nodeOffsetPointXY = CHOICE(name=u'nodeOffsetPointXY', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('DSRC', 'NodeOffsetPointXY')))
+    _OffsetPoint_nodeOffsetPointZ = CHOICE(name=u'nodeOffsetPointZ', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('VAM-Temp-Imports', 'NodeOffsetPointZ')), opt=True)
     OffsetPoint._cont = ASN1Dict([
-        ('nodeOffsetPointXY', _OffsetPoint_nodeOffsetPointXY),
-        ('nodeOffsetPointZ', _OffsetPoint_nodeOffsetPointZ),
+        (u'nodeOffsetPointXY', _OffsetPoint_nodeOffsetPointXY),
+        (u'nodeOffsetPointZ', _OffsetPoint_nodeOffsetPointZ),
         ])
     OffsetPoint._ext = None
     
     #-----< NodeOffsetPointZ >-----#
-    NodeOffsetPointZ = CHOICE(name='NodeOffsetPointZ', mode=MODE_TYPE)
-    _NodeOffsetPointZ_node_Z1 = INT(name='node-Z1', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'Offset-B10')))
-    _NodeOffsetPointZ_node_Z2 = INT(name='node-Z2', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'Offset-B11')))
-    _NodeOffsetPointZ_node_Z3 = INT(name='node-Z3', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'Offset-B12')))
-    _NodeOffsetPointZ_node_Z4 = INT(name='node-Z4', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'Offset-B13')))
-    _NodeOffsetPointZ_node_Z5 = INT(name='node-Z5', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'Offset-B14')))
-    _NodeOffsetPointZ_node_Z6 = INT(name='node-Z6', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'Offset-B16')))
+    NodeOffsetPointZ = CHOICE(name=u'NodeOffsetPointZ', mode=MODE_TYPE)
+    _NodeOffsetPointZ_node_Z1 = INT(name=u'node-Z1', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'Offset-B10')))
+    _NodeOffsetPointZ_node_Z2 = INT(name=u'node-Z2', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'Offset-B11')))
+    _NodeOffsetPointZ_node_Z3 = INT(name=u'node-Z3', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'Offset-B12')))
+    _NodeOffsetPointZ_node_Z4 = INT(name=u'node-Z4', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'Offset-B13')))
+    _NodeOffsetPointZ_node_Z5 = INT(name=u'node-Z5', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'Offset-B14')))
+    _NodeOffsetPointZ_node_Z6 = INT(name=u'node-Z6', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('DSRC', 'Offset-B16')))
     NodeOffsetPointZ._cont = ASN1Dict([
-        ('node-Z1', _NodeOffsetPointZ_node_Z1),
-        ('node-Z2', _NodeOffsetPointZ_node_Z2),
-        ('node-Z3', _NodeOffsetPointZ_node_Z3),
-        ('node-Z4', _NodeOffsetPointZ_node_Z4),
-        ('node-Z5', _NodeOffsetPointZ_node_Z5),
-        ('node-Z6', _NodeOffsetPointZ_node_Z6),
+        (u'node-Z1', _NodeOffsetPointZ_node_Z1),
+        (u'node-Z2', _NodeOffsetPointZ_node_Z2),
+        (u'node-Z3', _NodeOffsetPointZ_node_Z3),
+        (u'node-Z4', _NodeOffsetPointZ_node_Z4),
+        (u'node-Z5', _NodeOffsetPointZ_node_Z5),
+        (u'node-Z6', _NodeOffsetPointZ_node_Z6),
         ])
     NodeOffsetPointZ._ext = None
     
     #-----< Radius >-----#
-    Radius = INT(name='Radius', mode=MODE_TYPE)
-    Radius._cont = ASN1Dict([('zeroPointOneMeter', 1), ('oneMeter', 10)])
+    Radius = INT(name=u'Radius', mode=MODE_TYPE)
+    Radius._cont = ASN1Dict([(u'zeroPointOneMeter', 1), (u'oneMeter', 10)])
     Radius._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=10000)], ev=None, er=[])
     
     #-----< PolyPointList >-----#
-    PolyPointList = SEQ_OF(name='PolyPointList', mode=MODE_TYPE)
+    PolyPointList = SEQ_OF(name=u'PolyPointList', mode=MODE_TYPE)
     _PolyPointList__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('VAM-Temp-Imports', 'OffsetPoint')))
     PolyPointList._cont = _PolyPointList__item_
     PolyPointList._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=3, ub=16)], ev=[], er=[])
     
     #-----< SemiRangeLength >-----#
-    SemiRangeLength = INT(name='SemiRangeLength', mode=MODE_TYPE)
-    SemiRangeLength._cont = ASN1Dict([('zeroPointOneMeter', 1), ('oneMeter', 10)])
+    SemiRangeLength = INT(name=u'SemiRangeLength', mode=MODE_TYPE)
+    SemiRangeLength._cont = ASN1Dict([(u'zeroPointOneMeter', 1), (u'oneMeter', 10)])
     SemiRangeLength._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=10000)], ev=None, er=[])
     
     #-----< WGS84AngleValue >-----#
-    WGS84AngleValue = INT(name='WGS84AngleValue', mode=MODE_TYPE)
-    WGS84AngleValue._cont = ASN1Dict([('wgs84North', 0), ('wgs84East', 900), ('wgs84South', 1800), ('wgs84West', 2700), ('unavailable', 3601)])
+    WGS84AngleValue = INT(name=u'WGS84AngleValue', mode=MODE_TYPE)
+    WGS84AngleValue._cont = ASN1Dict([(u'wgs84North', 0), (u'wgs84East', 900), (u'wgs84South', 1800), (u'wgs84West', 2700), (u'unavailable', 3601)])
     WGS84AngleValue._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=3601)], ev=None, er=[])
     
     #-----< StationType >-----#
-    StationType = INT(name='StationType', mode=MODE_TYPE)
-    StationType._cont = ASN1Dict([('unknown', 0), ('pedestrian', 1), ('cyclist', 2), ('moped', 3), ('motorcycle', 4), ('passengerCar', 5), ('bus', 6), ('lightTruck', 7), ('heavyTruck', 8), ('trailer', 9), ('specialVehicles', 10), ('tram', 11), ('lightVruVehicle', 12), ('animal', 13), ('roadSideUnit', 15)])
+    StationType = INT(name=u'StationType', mode=MODE_TYPE)
+    StationType._cont = ASN1Dict([(u'unknown', 0), (u'pedestrian', 1), (u'cyclist', 2), (u'moped', 3), (u'motorcycle', 4), (u'passengerCar', 5), (u'bus', 6), (u'lightTruck', 7), (u'heavyTruck', 8), (u'trailer', 9), (u'specialVehicles', 10), (u'tram', 11), (u'lightVruVehicle', 12), (u'animal', 13), (u'roadSideUnit', 15)])
     StationType._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=255)], ev=None, er=[])
     
     _all_ = [
@@ -6344,14 +6344,14 @@ class VAM_Temp_Imports:
 
 class VRU_Motorcyclist_Special_Container:
 
-    _name_  = 'VRU-Motorcyclist-Special-Container'
+    _name_  = u'VRU-Motorcyclist-Special-Container'
     _oid_   = [0, 4, 0, 5, 1, 103300, 2, 1]
     
     _obj_ = [
-        'MotorcylistSpecialContainer',
+        u'MotorcylistSpecialContainer',
         ]
     _type_ = [
-        'MotorcylistSpecialContainer',
+        u'MotorcylistSpecialContainer',
         ]
     _set_ = [
         ]
@@ -6363,22 +6363,22 @@ class VRU_Motorcyclist_Special_Container:
         ]
     
     #-----< MotorcylistSpecialContainer >-----#
-    MotorcylistSpecialContainer = SEQ(name='MotorcylistSpecialContainer', mode=MODE_TYPE)
-    _MotorcylistSpecialContainer_vruSubProfileMotorcyclist = ENUM(name='vruSubProfileMotorcyclist', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('VAM-PDU-Descriptions', 'VruSubProfileMotorcyclist')))
-    _MotorcylistSpecialContainer_vruSizeClass = ENUM(name='vruSizeClass', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('VAM-PDU-Descriptions', 'VruSizeClass')))
-    _MotorcylistSpecialContainer_rollAngle = SEQ(name='rollAngle', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('VAM-PDU-Descriptions', 'VruRollAngle')), opt=True)
-    _MotorcylistSpecialContainer_orientation = SEQ(name='orientation', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('VAM-PDU-Descriptions', 'VruOrientation')), opt=True)
-    _MotorcylistSpecialContainer_vruSafeDistance = SEQ_OF(name='vruSafeDistance', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('VAM-PDU-Descriptions', 'SequenceOfVruSafeDistanceIndication')), opt=True)
-    _MotorcylistSpecialContainer_pathPrediction = SEQ_OF(name='pathPrediction', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('VAM-PDU-Descriptions', 'SequenceOfVruPathPoint')), opt=True)
-    _MotorcylistSpecialContainer_stabilityChangeIndication = SEQ(name='stabilityChangeIndication', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('VAM-PDU-Descriptions', 'StabilityChangeIndication')), opt=True)
+    MotorcylistSpecialContainer = SEQ(name=u'MotorcylistSpecialContainer', mode=MODE_TYPE)
+    _MotorcylistSpecialContainer_vruSubProfileMotorcyclist = ENUM(name=u'vruSubProfileMotorcyclist', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('VAM-PDU-Descriptions', 'VruSubProfileMotorcyclist')))
+    _MotorcylistSpecialContainer_vruSizeClass = ENUM(name=u'vruSizeClass', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('VAM-PDU-Descriptions', 'VruSizeClass')))
+    _MotorcylistSpecialContainer_rollAngle = SEQ(name=u'rollAngle', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('VAM-PDU-Descriptions', 'VruRollAngle')), opt=True)
+    _MotorcylistSpecialContainer_orientation = SEQ(name=u'orientation', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('VAM-PDU-Descriptions', 'VruOrientation')), opt=True)
+    _MotorcylistSpecialContainer_vruSafeDistance = SEQ_OF(name=u'vruSafeDistance', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('VAM-PDU-Descriptions', 'SequenceOfVruSafeDistanceIndication')), opt=True)
+    _MotorcylistSpecialContainer_pathPrediction = SEQ_OF(name=u'pathPrediction', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('VAM-PDU-Descriptions', 'SequenceOfVruPathPoint')), opt=True)
+    _MotorcylistSpecialContainer_stabilityChangeIndication = SEQ(name=u'stabilityChangeIndication', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('VAM-PDU-Descriptions', 'StabilityChangeIndication')), opt=True)
     MotorcylistSpecialContainer._cont = ASN1Dict([
-        ('vruSubProfileMotorcyclist', _MotorcylistSpecialContainer_vruSubProfileMotorcyclist),
-        ('vruSizeClass', _MotorcylistSpecialContainer_vruSizeClass),
-        ('rollAngle', _MotorcylistSpecialContainer_rollAngle),
-        ('orientation', _MotorcylistSpecialContainer_orientation),
-        ('vruSafeDistance', _MotorcylistSpecialContainer_vruSafeDistance),
-        ('pathPrediction', _MotorcylistSpecialContainer_pathPrediction),
-        ('stabilityChangeIndication', _MotorcylistSpecialContainer_stabilityChangeIndication),
+        (u'vruSubProfileMotorcyclist', _MotorcylistSpecialContainer_vruSubProfileMotorcyclist),
+        (u'vruSizeClass', _MotorcylistSpecialContainer_vruSizeClass),
+        (u'rollAngle', _MotorcylistSpecialContainer_rollAngle),
+        (u'orientation', _MotorcylistSpecialContainer_orientation),
+        (u'vruSafeDistance', _MotorcylistSpecialContainer_vruSafeDistance),
+        (u'pathPrediction', _MotorcylistSpecialContainer_pathPrediction),
+        (u'stabilityChangeIndication', _MotorcylistSpecialContainer_stabilityChangeIndication),
         ])
     MotorcylistSpecialContainer._ext = []
     

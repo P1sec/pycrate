@@ -16,264 +16,264 @@ from pycrate_asn1rt.init             import init_modules
 
 class GCC_PROTOCOL:
 
-    _name_  = 'GCC-PROTOCOL'
+    _name_  = u'GCC-PROTOCOL'
     _oid_   = [0, 0, 20, 124, 0, 2, 2, 1]
     
     _obj_ = [
-        'ChannelID',
-        'StaticChannelID',
-        'DynamicChannelID',
-        'UserID',
-        'TokenID',
-        'StaticTokenID',
-        'DynamicTokenID',
-        'Time',
-        'Handle',
-        'H221NonStandardIdentifier',
-        'Key',
-        'NonStandardParameter',
-        'TextString',
-        'simpleTextFirstCharacter',
-        'simpleTextLastCharacter',
-        'SimpleTextString',
-        'SimpleNumericString',
-        'DiallingString',
-        'SubAddressString',
-        'ExtraDiallingString',
-        'UserData',
-        'Password',
-        'PasswordSelector',
-        'ChallengeResponseItem',
-        'ChallengeResponseAlgorithm',
-        'ChallengeItem',
-        'ChallengeRequest',
-        'ChallengeResponse',
-        'PasswordChallengeRequestResponse',
-        'ConferenceName',
-        'ConferenceNameSelector',
-        'ConferenceNameModifier',
-        'Privilege',
-        'TerminationMethod',
-        'ConferencePriorityScheme',
-        'ConferencePriority',
-        'NodeCategory',
-        'ConferenceMode',
-        'NetworkAddress',
-        'MediaList',
-        'ChannelAggregationMethod',
-        'Profile',
-        'ExtendedE164NetworkAddress',
-        'TransportAddress',
-        'GSTNConnection',
-        'ISDNConnection',
-        'CSDNConnection',
-        'PSDNConnection',
-        'ATMConnection',
-        'NetworkConnection',
-        'NetworkAddressV2',
-        'NodeType',
-        'NodeProperties',
-        'AsymmetryIndicator',
-        'AlternativeNodeID',
-        'ConferenceDescriptor',
-        'NodeRecord',
-        'SessionKey',
-        'ChannelType',
-        'ApplicationRecord',
-        'CapabilityID',
-        'CapabilityClass',
-        'EntityID',
-        'ApplicationInvokeSpecifier',
-        'RegistryKey',
-        'RegistryItem',
-        'RegistryEntryOwner',
-        'RegistryModificationRights',
-        'UserIDIndication',
-        'ConferenceCreateRequest',
-        'ConferenceCreateResponse',
-        'ConferenceQueryRequest',
-        'ConferenceQueryResponse',
-        'ConferenceJoinRequest',
-        'ConferenceJoinResponse',
-        'ConferenceInviteRequest',
-        'ConferenceInviteResponse',
-        'ConferenceAddRequest',
-        'ConferenceAddResponse',
-        'ConferenceLockRequest',
-        'ConferenceLockResponse',
-        'ConferenceLockIndication',
-        'ConferenceUnlockRequest',
-        'ConferenceUnlockResponse',
-        'ConferenceUnlockIndication',
-        'ConferenceTerminateRequest',
-        'ConferenceTerminateResponse',
-        'ConferenceTerminateIndication',
-        'ConferenceEjectUserRequest',
-        'ConferenceEjectUserResponse',
-        'ConferenceEjectUserIndication',
-        'ConferenceTransferRequest',
-        'ConferenceTransferResponse',
-        'ConferenceTransferIndication',
-        'RosterUpdateIndication',
-        'ApplicationInvokeIndication',
-        'RegistryRegisterChannelRequest',
-        'RegistryAssignTokenRequest',
-        'RegistrySetParameterRequest',
-        'RegistryRetrieveEntryRequest',
-        'RegistryDeleteEntryRequest',
-        'RegistryMonitorEntryRequest',
-        'RegistryMonitorEntryIndication',
-        'RegistryAllocateHandleRequest',
-        'RegistryAllocateHandleResponse',
-        'RegistryResponse',
-        'ConductorAssignIndication',
-        'ConductorReleaseIndication',
-        'ConductorPermissionAskIndication',
-        'ConductorPermissionGrantIndication',
-        'ConferenceTimeRemainingIndication',
-        'ConferenceTimeInquireIndication',
-        'ConferenceTimeExtendIndication',
-        'ConferenceAssistanceIndication',
-        'TextMessageIndication',
-        'RosterRefreshRequest',
-        'FunctionNotSupportedResponse',
-        'NonStandardPDU',
-        'ConnectData',
-        'ConnectGCCPDU',
-        'GCCPDU',
-        'RequestPDU',
-        'ResponsePDU',
-        'IndicationPDU',
+        u'ChannelID',
+        u'StaticChannelID',
+        u'DynamicChannelID',
+        u'UserID',
+        u'TokenID',
+        u'StaticTokenID',
+        u'DynamicTokenID',
+        u'Time',
+        u'Handle',
+        u'H221NonStandardIdentifier',
+        u'Key',
+        u'NonStandardParameter',
+        u'TextString',
+        u'simpleTextFirstCharacter',
+        u'simpleTextLastCharacter',
+        u'SimpleTextString',
+        u'SimpleNumericString',
+        u'DiallingString',
+        u'SubAddressString',
+        u'ExtraDiallingString',
+        u'UserData',
+        u'Password',
+        u'PasswordSelector',
+        u'ChallengeResponseItem',
+        u'ChallengeResponseAlgorithm',
+        u'ChallengeItem',
+        u'ChallengeRequest',
+        u'ChallengeResponse',
+        u'PasswordChallengeRequestResponse',
+        u'ConferenceName',
+        u'ConferenceNameSelector',
+        u'ConferenceNameModifier',
+        u'Privilege',
+        u'TerminationMethod',
+        u'ConferencePriorityScheme',
+        u'ConferencePriority',
+        u'NodeCategory',
+        u'ConferenceMode',
+        u'NetworkAddress',
+        u'MediaList',
+        u'ChannelAggregationMethod',
+        u'Profile',
+        u'ExtendedE164NetworkAddress',
+        u'TransportAddress',
+        u'GSTNConnection',
+        u'ISDNConnection',
+        u'CSDNConnection',
+        u'PSDNConnection',
+        u'ATMConnection',
+        u'NetworkConnection',
+        u'NetworkAddressV2',
+        u'NodeType',
+        u'NodeProperties',
+        u'AsymmetryIndicator',
+        u'AlternativeNodeID',
+        u'ConferenceDescriptor',
+        u'NodeRecord',
+        u'SessionKey',
+        u'ChannelType',
+        u'ApplicationRecord',
+        u'CapabilityID',
+        u'CapabilityClass',
+        u'EntityID',
+        u'ApplicationInvokeSpecifier',
+        u'RegistryKey',
+        u'RegistryItem',
+        u'RegistryEntryOwner',
+        u'RegistryModificationRights',
+        u'UserIDIndication',
+        u'ConferenceCreateRequest',
+        u'ConferenceCreateResponse',
+        u'ConferenceQueryRequest',
+        u'ConferenceQueryResponse',
+        u'ConferenceJoinRequest',
+        u'ConferenceJoinResponse',
+        u'ConferenceInviteRequest',
+        u'ConferenceInviteResponse',
+        u'ConferenceAddRequest',
+        u'ConferenceAddResponse',
+        u'ConferenceLockRequest',
+        u'ConferenceLockResponse',
+        u'ConferenceLockIndication',
+        u'ConferenceUnlockRequest',
+        u'ConferenceUnlockResponse',
+        u'ConferenceUnlockIndication',
+        u'ConferenceTerminateRequest',
+        u'ConferenceTerminateResponse',
+        u'ConferenceTerminateIndication',
+        u'ConferenceEjectUserRequest',
+        u'ConferenceEjectUserResponse',
+        u'ConferenceEjectUserIndication',
+        u'ConferenceTransferRequest',
+        u'ConferenceTransferResponse',
+        u'ConferenceTransferIndication',
+        u'RosterUpdateIndication',
+        u'ApplicationInvokeIndication',
+        u'RegistryRegisterChannelRequest',
+        u'RegistryAssignTokenRequest',
+        u'RegistrySetParameterRequest',
+        u'RegistryRetrieveEntryRequest',
+        u'RegistryDeleteEntryRequest',
+        u'RegistryMonitorEntryRequest',
+        u'RegistryMonitorEntryIndication',
+        u'RegistryAllocateHandleRequest',
+        u'RegistryAllocateHandleResponse',
+        u'RegistryResponse',
+        u'ConductorAssignIndication',
+        u'ConductorReleaseIndication',
+        u'ConductorPermissionAskIndication',
+        u'ConductorPermissionGrantIndication',
+        u'ConferenceTimeRemainingIndication',
+        u'ConferenceTimeInquireIndication',
+        u'ConferenceTimeExtendIndication',
+        u'ConferenceAssistanceIndication',
+        u'TextMessageIndication',
+        u'RosterRefreshRequest',
+        u'FunctionNotSupportedResponse',
+        u'NonStandardPDU',
+        u'ConnectData',
+        u'ConnectGCCPDU',
+        u'GCCPDU',
+        u'RequestPDU',
+        u'ResponsePDU',
+        u'IndicationPDU',
         ]
     _type_ = [
-        'ChannelID',
-        'StaticChannelID',
-        'DynamicChannelID',
-        'UserID',
-        'TokenID',
-        'StaticTokenID',
-        'DynamicTokenID',
-        'Time',
-        'Handle',
-        'H221NonStandardIdentifier',
-        'Key',
-        'NonStandardParameter',
-        'TextString',
-        'SimpleTextString',
-        'SimpleNumericString',
-        'DiallingString',
-        'SubAddressString',
-        'ExtraDiallingString',
-        'UserData',
-        'Password',
-        'PasswordSelector',
-        'ChallengeResponseItem',
-        'ChallengeResponseAlgorithm',
-        'ChallengeItem',
-        'ChallengeRequest',
-        'ChallengeResponse',
-        'PasswordChallengeRequestResponse',
-        'ConferenceName',
-        'ConferenceNameSelector',
-        'ConferenceNameModifier',
-        'Privilege',
-        'TerminationMethod',
-        'ConferencePriorityScheme',
-        'ConferencePriority',
-        'NodeCategory',
-        'ConferenceMode',
-        'NetworkAddress',
-        'MediaList',
-        'ChannelAggregationMethod',
-        'Profile',
-        'ExtendedE164NetworkAddress',
-        'TransportAddress',
-        'GSTNConnection',
-        'ISDNConnection',
-        'CSDNConnection',
-        'PSDNConnection',
-        'ATMConnection',
-        'NetworkConnection',
-        'NetworkAddressV2',
-        'NodeType',
-        'NodeProperties',
-        'AsymmetryIndicator',
-        'AlternativeNodeID',
-        'ConferenceDescriptor',
-        'NodeRecord',
-        'SessionKey',
-        'ChannelType',
-        'ApplicationRecord',
-        'CapabilityID',
-        'CapabilityClass',
-        'EntityID',
-        'ApplicationInvokeSpecifier',
-        'RegistryKey',
-        'RegistryItem',
-        'RegistryEntryOwner',
-        'RegistryModificationRights',
-        'UserIDIndication',
-        'ConferenceCreateRequest',
-        'ConferenceCreateResponse',
-        'ConferenceQueryRequest',
-        'ConferenceQueryResponse',
-        'ConferenceJoinRequest',
-        'ConferenceJoinResponse',
-        'ConferenceInviteRequest',
-        'ConferenceInviteResponse',
-        'ConferenceAddRequest',
-        'ConferenceAddResponse',
-        'ConferenceLockRequest',
-        'ConferenceLockResponse',
-        'ConferenceLockIndication',
-        'ConferenceUnlockRequest',
-        'ConferenceUnlockResponse',
-        'ConferenceUnlockIndication',
-        'ConferenceTerminateRequest',
-        'ConferenceTerminateResponse',
-        'ConferenceTerminateIndication',
-        'ConferenceEjectUserRequest',
-        'ConferenceEjectUserResponse',
-        'ConferenceEjectUserIndication',
-        'ConferenceTransferRequest',
-        'ConferenceTransferResponse',
-        'ConferenceTransferIndication',
-        'RosterUpdateIndication',
-        'ApplicationInvokeIndication',
-        'RegistryRegisterChannelRequest',
-        'RegistryAssignTokenRequest',
-        'RegistrySetParameterRequest',
-        'RegistryRetrieveEntryRequest',
-        'RegistryDeleteEntryRequest',
-        'RegistryMonitorEntryRequest',
-        'RegistryMonitorEntryIndication',
-        'RegistryAllocateHandleRequest',
-        'RegistryAllocateHandleResponse',
-        'RegistryResponse',
-        'ConductorAssignIndication',
-        'ConductorReleaseIndication',
-        'ConductorPermissionAskIndication',
-        'ConductorPermissionGrantIndication',
-        'ConferenceTimeRemainingIndication',
-        'ConferenceTimeInquireIndication',
-        'ConferenceTimeExtendIndication',
-        'ConferenceAssistanceIndication',
-        'TextMessageIndication',
-        'RosterRefreshRequest',
-        'FunctionNotSupportedResponse',
-        'NonStandardPDU',
-        'ConnectData',
-        'ConnectGCCPDU',
-        'GCCPDU',
-        'RequestPDU',
-        'ResponsePDU',
-        'IndicationPDU',
+        u'ChannelID',
+        u'StaticChannelID',
+        u'DynamicChannelID',
+        u'UserID',
+        u'TokenID',
+        u'StaticTokenID',
+        u'DynamicTokenID',
+        u'Time',
+        u'Handle',
+        u'H221NonStandardIdentifier',
+        u'Key',
+        u'NonStandardParameter',
+        u'TextString',
+        u'SimpleTextString',
+        u'SimpleNumericString',
+        u'DiallingString',
+        u'SubAddressString',
+        u'ExtraDiallingString',
+        u'UserData',
+        u'Password',
+        u'PasswordSelector',
+        u'ChallengeResponseItem',
+        u'ChallengeResponseAlgorithm',
+        u'ChallengeItem',
+        u'ChallengeRequest',
+        u'ChallengeResponse',
+        u'PasswordChallengeRequestResponse',
+        u'ConferenceName',
+        u'ConferenceNameSelector',
+        u'ConferenceNameModifier',
+        u'Privilege',
+        u'TerminationMethod',
+        u'ConferencePriorityScheme',
+        u'ConferencePriority',
+        u'NodeCategory',
+        u'ConferenceMode',
+        u'NetworkAddress',
+        u'MediaList',
+        u'ChannelAggregationMethod',
+        u'Profile',
+        u'ExtendedE164NetworkAddress',
+        u'TransportAddress',
+        u'GSTNConnection',
+        u'ISDNConnection',
+        u'CSDNConnection',
+        u'PSDNConnection',
+        u'ATMConnection',
+        u'NetworkConnection',
+        u'NetworkAddressV2',
+        u'NodeType',
+        u'NodeProperties',
+        u'AsymmetryIndicator',
+        u'AlternativeNodeID',
+        u'ConferenceDescriptor',
+        u'NodeRecord',
+        u'SessionKey',
+        u'ChannelType',
+        u'ApplicationRecord',
+        u'CapabilityID',
+        u'CapabilityClass',
+        u'EntityID',
+        u'ApplicationInvokeSpecifier',
+        u'RegistryKey',
+        u'RegistryItem',
+        u'RegistryEntryOwner',
+        u'RegistryModificationRights',
+        u'UserIDIndication',
+        u'ConferenceCreateRequest',
+        u'ConferenceCreateResponse',
+        u'ConferenceQueryRequest',
+        u'ConferenceQueryResponse',
+        u'ConferenceJoinRequest',
+        u'ConferenceJoinResponse',
+        u'ConferenceInviteRequest',
+        u'ConferenceInviteResponse',
+        u'ConferenceAddRequest',
+        u'ConferenceAddResponse',
+        u'ConferenceLockRequest',
+        u'ConferenceLockResponse',
+        u'ConferenceLockIndication',
+        u'ConferenceUnlockRequest',
+        u'ConferenceUnlockResponse',
+        u'ConferenceUnlockIndication',
+        u'ConferenceTerminateRequest',
+        u'ConferenceTerminateResponse',
+        u'ConferenceTerminateIndication',
+        u'ConferenceEjectUserRequest',
+        u'ConferenceEjectUserResponse',
+        u'ConferenceEjectUserIndication',
+        u'ConferenceTransferRequest',
+        u'ConferenceTransferResponse',
+        u'ConferenceTransferIndication',
+        u'RosterUpdateIndication',
+        u'ApplicationInvokeIndication',
+        u'RegistryRegisterChannelRequest',
+        u'RegistryAssignTokenRequest',
+        u'RegistrySetParameterRequest',
+        u'RegistryRetrieveEntryRequest',
+        u'RegistryDeleteEntryRequest',
+        u'RegistryMonitorEntryRequest',
+        u'RegistryMonitorEntryIndication',
+        u'RegistryAllocateHandleRequest',
+        u'RegistryAllocateHandleResponse',
+        u'RegistryResponse',
+        u'ConductorAssignIndication',
+        u'ConductorReleaseIndication',
+        u'ConductorPermissionAskIndication',
+        u'ConductorPermissionGrantIndication',
+        u'ConferenceTimeRemainingIndication',
+        u'ConferenceTimeInquireIndication',
+        u'ConferenceTimeExtendIndication',
+        u'ConferenceAssistanceIndication',
+        u'TextMessageIndication',
+        u'RosterRefreshRequest',
+        u'FunctionNotSupportedResponse',
+        u'NonStandardPDU',
+        u'ConnectData',
+        u'ConnectGCCPDU',
+        u'GCCPDU',
+        u'RequestPDU',
+        u'ResponsePDU',
+        u'IndicationPDU',
         ]
     _set_ = [
         ]
     _val_ = [
-        'simpleTextFirstCharacter',
-        'simpleTextLastCharacter',
+        u'simpleTextFirstCharacter',
+        u'simpleTextLastCharacter',
         ]
     _class_ = [
         ]
@@ -281,1946 +281,1946 @@ class GCC_PROTOCOL:
         ]
     
     #-----< ChannelID >-----#
-    ChannelID = INT(name='ChannelID', mode=MODE_TYPE)
+    ChannelID = INT(name=u'ChannelID', mode=MODE_TYPE)
     ChannelID._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=65535)], ev=None, er=[])
     
     #-----< StaticChannelID >-----#
-    StaticChannelID = INT(name='StaticChannelID', mode=MODE_TYPE)
+    StaticChannelID = INT(name=u'StaticChannelID', mode=MODE_TYPE)
     StaticChannelID._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=1000)], ev=None, er=[])
     
     #-----< DynamicChannelID >-----#
-    DynamicChannelID = INT(name='DynamicChannelID', mode=MODE_TYPE)
+    DynamicChannelID = INT(name=u'DynamicChannelID', mode=MODE_TYPE)
     DynamicChannelID._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1001, ub=65535)], ev=None, er=[])
     
     #-----< UserID >-----#
-    UserID = INT(name='UserID', mode=MODE_TYPE, typeref=ASN1RefType(('GCC-PROTOCOL', 'DynamicChannelID')))
+    UserID = INT(name=u'UserID', mode=MODE_TYPE, typeref=ASN1RefType(('GCC-PROTOCOL', 'DynamicChannelID')))
     
     #-----< TokenID >-----#
-    TokenID = INT(name='TokenID', mode=MODE_TYPE)
+    TokenID = INT(name=u'TokenID', mode=MODE_TYPE)
     TokenID._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=65535)], ev=None, er=[])
     
     #-----< StaticTokenID >-----#
-    StaticTokenID = INT(name='StaticTokenID', mode=MODE_TYPE)
+    StaticTokenID = INT(name=u'StaticTokenID', mode=MODE_TYPE)
     StaticTokenID._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=16383)], ev=None, er=[])
     
     #-----< DynamicTokenID >-----#
-    DynamicTokenID = INT(name='DynamicTokenID', mode=MODE_TYPE)
+    DynamicTokenID = INT(name=u'DynamicTokenID', mode=MODE_TYPE)
     DynamicTokenID._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=16384, ub=65535)], ev=None, er=[])
     
     #-----< Time >-----#
-    Time = INT(name='Time', mode=MODE_TYPE)
+    Time = INT(name=u'Time', mode=MODE_TYPE)
     Time._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=-2147483648, ub=2147483647)], ev=None, er=[])
     
     #-----< Handle >-----#
-    Handle = INT(name='Handle', mode=MODE_TYPE)
+    Handle = INT(name=u'Handle', mode=MODE_TYPE)
     Handle._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=4294967295)], ev=None, er=[])
     
     #-----< H221NonStandardIdentifier >-----#
-    H221NonStandardIdentifier = OCT_STR(name='H221NonStandardIdentifier', mode=MODE_TYPE)
+    H221NonStandardIdentifier = OCT_STR(name=u'H221NonStandardIdentifier', mode=MODE_TYPE)
     H221NonStandardIdentifier._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=4, ub=255)], ev=None, er=[])
     
     #-----< Key >-----#
-    Key = CHOICE(name='Key', mode=MODE_TYPE)
-    _Key_object = OID(name='object', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _Key_h221NonStandard = OCT_STR(name='h221NonStandard', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'H221NonStandardIdentifier')))
+    Key = CHOICE(name=u'Key', mode=MODE_TYPE)
+    _Key_object = OID(name=u'object', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _Key_h221NonStandard = OCT_STR(name=u'h221NonStandard', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'H221NonStandardIdentifier')))
     Key._cont = ASN1Dict([
-        ('object', _Key_object),
-        ('h221NonStandard', _Key_h221NonStandard),
+        (u'object', _Key_object),
+        (u'h221NonStandard', _Key_h221NonStandard),
         ])
     Key._ext = None
     
     #-----< NonStandardParameter >-----#
-    NonStandardParameter = SEQ(name='NonStandardParameter', mode=MODE_TYPE)
-    _NonStandardParameter_key = CHOICE(name='key', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'Key')))
-    _NonStandardParameter_data = OCT_STR(name='data', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    NonStandardParameter = SEQ(name=u'NonStandardParameter', mode=MODE_TYPE)
+    _NonStandardParameter_key = CHOICE(name=u'key', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'Key')))
+    _NonStandardParameter_data = OCT_STR(name=u'data', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     NonStandardParameter._cont = ASN1Dict([
-        ('key', _NonStandardParameter_key),
-        ('data', _NonStandardParameter_data),
+        (u'key', _NonStandardParameter_key),
+        (u'data', _NonStandardParameter_data),
         ])
     NonStandardParameter._ext = None
     
     #-----< TextString >-----#
-    TextString = STR_BMP(name='TextString', mode=MODE_TYPE)
+    TextString = STR_BMP(name=u'TextString', mode=MODE_TYPE)
     TextString._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=255)], ev=None, er=[])
     
     #-----< simpleTextFirstCharacter >-----#
-    simpleTextFirstCharacter = STR_UNIV(name='simpleTextFirstCharacter', mode=MODE_VALUE)
-    simpleTextFirstCharacter._val = '\x00'
+    simpleTextFirstCharacter = STR_UNIV(name=u'simpleTextFirstCharacter', mode=MODE_VALUE)
+    simpleTextFirstCharacter._val = u'\x00'
     
     #-----< simpleTextLastCharacter >-----#
-    simpleTextLastCharacter = STR_UNIV(name='simpleTextLastCharacter', mode=MODE_VALUE)
-    simpleTextLastCharacter._val = 'ÿ'
+    simpleTextLastCharacter = STR_UNIV(name=u'simpleTextLastCharacter', mode=MODE_VALUE)
+    simpleTextLastCharacter._val = u'\xff'
     
     #-----< SimpleTextString >-----#
-    SimpleTextString = STR_BMP(name='SimpleTextString', mode=MODE_TYPE)
+    SimpleTextString = STR_BMP(name=u'SimpleTextString', mode=MODE_TYPE)
     SimpleTextString._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=255)], ev=None, er=[])
     
     #-----< SimpleNumericString >-----#
-    SimpleNumericString = STR_NUM(name='SimpleNumericString', mode=MODE_TYPE)
+    SimpleNumericString = STR_NUM(name=u'SimpleNumericString', mode=MODE_TYPE)
     SimpleNumericString._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=255)], ev=None, er=[])
-    SimpleNumericString._const_alpha = ASN1Set(rv=['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'], rr=[], ev=None, er=[])
+    SimpleNumericString._const_alpha = ASN1Set(rv=[u'0', u'1', u'2', u'3', u'4', u'5', u'6', u'7', u'8', u'9'], rr=[], ev=None, er=[])
     
     #-----< DiallingString >-----#
-    DiallingString = STR_NUM(name='DiallingString', mode=MODE_TYPE)
+    DiallingString = STR_NUM(name=u'DiallingString', mode=MODE_TYPE)
     DiallingString._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=16)], ev=None, er=[])
-    DiallingString._const_alpha = ASN1Set(rv=['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'], rr=[], ev=None, er=[])
+    DiallingString._const_alpha = ASN1Set(rv=[u'0', u'1', u'2', u'3', u'4', u'5', u'6', u'7', u'8', u'9'], rr=[], ev=None, er=[])
     
     #-----< SubAddressString >-----#
-    SubAddressString = STR_NUM(name='SubAddressString', mode=MODE_TYPE)
+    SubAddressString = STR_NUM(name=u'SubAddressString', mode=MODE_TYPE)
     SubAddressString._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=40)], ev=None, er=[])
-    SubAddressString._const_alpha = ASN1Set(rv=['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'], rr=[], ev=None, er=[])
+    SubAddressString._const_alpha = ASN1Set(rv=[u'0', u'1', u'2', u'3', u'4', u'5', u'6', u'7', u'8', u'9'], rr=[], ev=None, er=[])
     
     #-----< ExtraDiallingString >-----#
-    ExtraDiallingString = STR_BMP(name='ExtraDiallingString', mode=MODE_TYPE, typeref=ASN1RefType(('GCC-PROTOCOL', 'TextString')))
+    ExtraDiallingString = STR_BMP(name=u'ExtraDiallingString', mode=MODE_TYPE, typeref=ASN1RefType(('GCC-PROTOCOL', 'TextString')))
     ExtraDiallingString._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=255)], ev=None, er=[])
-    ExtraDiallingString._const_alpha = ASN1Set(rv=['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '#', '*', ','], rr=[], ev=None, er=[])
+    ExtraDiallingString._const_alpha = ASN1Set(rv=[u'0', u'1', u'2', u'3', u'4', u'5', u'6', u'7', u'8', u'9', u'#', u'*', u','], rr=[], ev=None, er=[])
     
     #-----< UserData >-----#
-    UserData = SET_OF(name='UserData', mode=MODE_TYPE)
+    UserData = SET_OF(name=u'UserData', mode=MODE_TYPE)
     _UserData__item_ = SEQ(name='_item_', mode=MODE_TYPE)
-    __UserData__item__key = CHOICE(name='key', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'Key')))
-    __UserData__item__value = OCT_STR(name='value', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    __UserData__item__key = CHOICE(name=u'key', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'Key')))
+    __UserData__item__value = OCT_STR(name=u'value', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     _UserData__item_._cont = ASN1Dict([
-        ('key', __UserData__item__key),
-        ('value', __UserData__item__value),
+        (u'key', __UserData__item__key),
+        (u'value', __UserData__item__value),
         ])
     _UserData__item_._ext = None
     UserData._cont = _UserData__item_
     
     #-----< Password >-----#
-    Password = SEQ(name='Password', mode=MODE_TYPE)
-    _Password_numeric = STR_NUM(name='numeric', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'SimpleNumericString')))
-    _Password_numeric._const_alpha = ASN1Set(rv=['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'], rr=[], ev=None, er=[])
-    _Password_text = STR_BMP(name='text', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'SimpleTextString')), opt=True)
-    _Password_unicodeText = STR_BMP(name='unicodeText', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'TextString')), opt=True)
+    Password = SEQ(name=u'Password', mode=MODE_TYPE)
+    _Password_numeric = STR_NUM(name=u'numeric', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'SimpleNumericString')))
+    _Password_numeric._const_alpha = ASN1Set(rv=[u'0', u'1', u'2', u'3', u'4', u'5', u'6', u'7', u'8', u'9'], rr=[], ev=None, er=[])
+    _Password_text = STR_BMP(name=u'text', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'SimpleTextString')), opt=True)
+    _Password_unicodeText = STR_BMP(name=u'unicodeText', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'TextString')), opt=True)
     Password._cont = ASN1Dict([
-        ('numeric', _Password_numeric),
-        ('text', _Password_text),
-        ('unicodeText', _Password_unicodeText),
+        (u'numeric', _Password_numeric),
+        (u'text', _Password_text),
+        (u'unicodeText', _Password_unicodeText),
         ])
-    Password._ext = ['unicodeText']
+    Password._ext = [u'unicodeText']
     
     #-----< PasswordSelector >-----#
-    PasswordSelector = CHOICE(name='PasswordSelector', mode=MODE_TYPE)
-    _PasswordSelector_numeric = STR_NUM(name='numeric', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'SimpleNumericString')))
-    _PasswordSelector_numeric._const_alpha = ASN1Set(rv=['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'], rr=[], ev=None, er=[])
-    _PasswordSelector_text = STR_BMP(name='text', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'SimpleTextString')))
-    _PasswordSelector_unicodeText = STR_BMP(name='unicodeText', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'TextString')))
+    PasswordSelector = CHOICE(name=u'PasswordSelector', mode=MODE_TYPE)
+    _PasswordSelector_numeric = STR_NUM(name=u'numeric', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'SimpleNumericString')))
+    _PasswordSelector_numeric._const_alpha = ASN1Set(rv=[u'0', u'1', u'2', u'3', u'4', u'5', u'6', u'7', u'8', u'9'], rr=[], ev=None, er=[])
+    _PasswordSelector_text = STR_BMP(name=u'text', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'SimpleTextString')))
+    _PasswordSelector_unicodeText = STR_BMP(name=u'unicodeText', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'TextString')))
     PasswordSelector._cont = ASN1Dict([
-        ('numeric', _PasswordSelector_numeric),
-        ('text', _PasswordSelector_text),
-        ('unicodeText', _PasswordSelector_unicodeText),
+        (u'numeric', _PasswordSelector_numeric),
+        (u'text', _PasswordSelector_text),
+        (u'unicodeText', _PasswordSelector_unicodeText),
         ])
-    PasswordSelector._ext = ['unicodeText']
+    PasswordSelector._ext = [u'unicodeText']
     
     #-----< ChallengeResponseItem >-----#
-    ChallengeResponseItem = CHOICE(name='ChallengeResponseItem', mode=MODE_TYPE)
-    _ChallengeResponseItem_passwordString = CHOICE(name='passwordString', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'PasswordSelector')))
-    _ChallengeResponseItem_responseData = SET_OF(name='responseData', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'UserData')))
+    ChallengeResponseItem = CHOICE(name=u'ChallengeResponseItem', mode=MODE_TYPE)
+    _ChallengeResponseItem_passwordString = CHOICE(name=u'passwordString', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'PasswordSelector')))
+    _ChallengeResponseItem_responseData = SET_OF(name=u'responseData', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'UserData')))
     ChallengeResponseItem._cont = ASN1Dict([
-        ('passwordString', _ChallengeResponseItem_passwordString),
-        ('responseData', _ChallengeResponseItem_responseData),
+        (u'passwordString', _ChallengeResponseItem_passwordString),
+        (u'responseData', _ChallengeResponseItem_responseData),
         ])
     ChallengeResponseItem._ext = []
     
     #-----< ChallengeResponseAlgorithm >-----#
-    ChallengeResponseAlgorithm = CHOICE(name='ChallengeResponseAlgorithm', mode=MODE_TYPE)
-    _ChallengeResponseAlgorithm_passwordInTheClear = NULL(name='passwordInTheClear', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _ChallengeResponseAlgorithm_nonStandardAlgorithm = SEQ(name='nonStandardAlgorithm', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'NonStandardParameter')))
+    ChallengeResponseAlgorithm = CHOICE(name=u'ChallengeResponseAlgorithm', mode=MODE_TYPE)
+    _ChallengeResponseAlgorithm_passwordInTheClear = NULL(name=u'passwordInTheClear', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _ChallengeResponseAlgorithm_nonStandardAlgorithm = SEQ(name=u'nonStandardAlgorithm', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'NonStandardParameter')))
     ChallengeResponseAlgorithm._cont = ASN1Dict([
-        ('passwordInTheClear', _ChallengeResponseAlgorithm_passwordInTheClear),
-        ('nonStandardAlgorithm', _ChallengeResponseAlgorithm_nonStandardAlgorithm),
+        (u'passwordInTheClear', _ChallengeResponseAlgorithm_passwordInTheClear),
+        (u'nonStandardAlgorithm', _ChallengeResponseAlgorithm_nonStandardAlgorithm),
         ])
     ChallengeResponseAlgorithm._ext = []
     
     #-----< ChallengeItem >-----#
-    ChallengeItem = SEQ(name='ChallengeItem', mode=MODE_TYPE)
-    _ChallengeItem_responseAlgorithm = CHOICE(name='responseAlgorithm', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'ChallengeResponseAlgorithm')))
-    _ChallengeItem_challengeData = SET_OF(name='challengeData', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'UserData')))
+    ChallengeItem = SEQ(name=u'ChallengeItem', mode=MODE_TYPE)
+    _ChallengeItem_responseAlgorithm = CHOICE(name=u'responseAlgorithm', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'ChallengeResponseAlgorithm')))
+    _ChallengeItem_challengeData = SET_OF(name=u'challengeData', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'UserData')))
     ChallengeItem._cont = ASN1Dict([
-        ('responseAlgorithm', _ChallengeItem_responseAlgorithm),
-        ('challengeData', _ChallengeItem_challengeData),
+        (u'responseAlgorithm', _ChallengeItem_responseAlgorithm),
+        (u'challengeData', _ChallengeItem_challengeData),
         ])
     ChallengeItem._ext = []
     
     #-----< ChallengeRequest >-----#
-    ChallengeRequest = SEQ(name='ChallengeRequest', mode=MODE_TYPE)
-    _ChallengeRequest_challengeTag = INT(name='challengeTag', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _ChallengeRequest_challengeSet = SET_OF(name='challengeSet', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    ChallengeRequest = SEQ(name=u'ChallengeRequest', mode=MODE_TYPE)
+    _ChallengeRequest_challengeTag = INT(name=u'challengeTag', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _ChallengeRequest_challengeSet = SET_OF(name=u'challengeSet', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     __ChallengeRequest_challengeSet__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('GCC-PROTOCOL', 'ChallengeItem')))
     _ChallengeRequest_challengeSet._cont = __ChallengeRequest_challengeSet__item_
     ChallengeRequest._cont = ASN1Dict([
-        ('challengeTag', _ChallengeRequest_challengeTag),
-        ('challengeSet', _ChallengeRequest_challengeSet),
+        (u'challengeTag', _ChallengeRequest_challengeTag),
+        (u'challengeSet', _ChallengeRequest_challengeSet),
         ])
     ChallengeRequest._ext = []
     
     #-----< ChallengeResponse >-----#
-    ChallengeResponse = SEQ(name='ChallengeResponse', mode=MODE_TYPE)
-    _ChallengeResponse_challengeTag = INT(name='challengeTag', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _ChallengeResponse_responseAlgorithm = CHOICE(name='responseAlgorithm', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'ChallengeResponseAlgorithm')))
-    _ChallengeResponse_responseItem = CHOICE(name='responseItem', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'ChallengeResponseItem')))
+    ChallengeResponse = SEQ(name=u'ChallengeResponse', mode=MODE_TYPE)
+    _ChallengeResponse_challengeTag = INT(name=u'challengeTag', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _ChallengeResponse_responseAlgorithm = CHOICE(name=u'responseAlgorithm', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'ChallengeResponseAlgorithm')))
+    _ChallengeResponse_responseItem = CHOICE(name=u'responseItem', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'ChallengeResponseItem')))
     ChallengeResponse._cont = ASN1Dict([
-        ('challengeTag', _ChallengeResponse_challengeTag),
-        ('responseAlgorithm', _ChallengeResponse_responseAlgorithm),
-        ('responseItem', _ChallengeResponse_responseItem),
+        (u'challengeTag', _ChallengeResponse_challengeTag),
+        (u'responseAlgorithm', _ChallengeResponse_responseAlgorithm),
+        (u'responseItem', _ChallengeResponse_responseItem),
         ])
     ChallengeResponse._ext = []
     
     #-----< PasswordChallengeRequestResponse >-----#
-    PasswordChallengeRequestResponse = CHOICE(name='PasswordChallengeRequestResponse', mode=MODE_TYPE)
-    _PasswordChallengeRequestResponse_passwordInTheClear = CHOICE(name='passwordInTheClear', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'PasswordSelector')))
-    _PasswordChallengeRequestResponse_challengeRequestResponse = SEQ(name='challengeRequestResponse', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    __PasswordChallengeRequestResponse_challengeRequestResponse_challengeRequest = SEQ(name='challengeRequest', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'ChallengeRequest')), opt=True)
-    __PasswordChallengeRequestResponse_challengeRequestResponse_challengeResponse = SEQ(name='challengeResponse', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'ChallengeResponse')), opt=True)
+    PasswordChallengeRequestResponse = CHOICE(name=u'PasswordChallengeRequestResponse', mode=MODE_TYPE)
+    _PasswordChallengeRequestResponse_passwordInTheClear = CHOICE(name=u'passwordInTheClear', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'PasswordSelector')))
+    _PasswordChallengeRequestResponse_challengeRequestResponse = SEQ(name=u'challengeRequestResponse', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __PasswordChallengeRequestResponse_challengeRequestResponse_challengeRequest = SEQ(name=u'challengeRequest', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'ChallengeRequest')), opt=True)
+    __PasswordChallengeRequestResponse_challengeRequestResponse_challengeResponse = SEQ(name=u'challengeResponse', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'ChallengeResponse')), opt=True)
     _PasswordChallengeRequestResponse_challengeRequestResponse._cont = ASN1Dict([
-        ('challengeRequest', __PasswordChallengeRequestResponse_challengeRequestResponse_challengeRequest),
-        ('challengeResponse', __PasswordChallengeRequestResponse_challengeRequestResponse_challengeResponse),
+        (u'challengeRequest', __PasswordChallengeRequestResponse_challengeRequestResponse_challengeRequest),
+        (u'challengeResponse', __PasswordChallengeRequestResponse_challengeRequestResponse_challengeResponse),
         ])
     _PasswordChallengeRequestResponse_challengeRequestResponse._ext = []
     PasswordChallengeRequestResponse._cont = ASN1Dict([
-        ('passwordInTheClear', _PasswordChallengeRequestResponse_passwordInTheClear),
-        ('challengeRequestResponse', _PasswordChallengeRequestResponse_challengeRequestResponse),
+        (u'passwordInTheClear', _PasswordChallengeRequestResponse_passwordInTheClear),
+        (u'challengeRequestResponse', _PasswordChallengeRequestResponse_challengeRequestResponse),
         ])
     PasswordChallengeRequestResponse._ext = []
     
     #-----< ConferenceName >-----#
-    ConferenceName = SEQ(name='ConferenceName', mode=MODE_TYPE)
-    _ConferenceName_numeric = STR_NUM(name='numeric', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'SimpleNumericString')))
-    _ConferenceName_numeric._const_alpha = ASN1Set(rv=['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'], rr=[], ev=None, er=[])
-    _ConferenceName_text = STR_BMP(name='text', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'SimpleTextString')), opt=True)
-    _ConferenceName_unicodeText = STR_BMP(name='unicodeText', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'TextString')), opt=True)
+    ConferenceName = SEQ(name=u'ConferenceName', mode=MODE_TYPE)
+    _ConferenceName_numeric = STR_NUM(name=u'numeric', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'SimpleNumericString')))
+    _ConferenceName_numeric._const_alpha = ASN1Set(rv=[u'0', u'1', u'2', u'3', u'4', u'5', u'6', u'7', u'8', u'9'], rr=[], ev=None, er=[])
+    _ConferenceName_text = STR_BMP(name=u'text', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'SimpleTextString')), opt=True)
+    _ConferenceName_unicodeText = STR_BMP(name=u'unicodeText', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'TextString')), opt=True)
     ConferenceName._cont = ASN1Dict([
-        ('numeric', _ConferenceName_numeric),
-        ('text', _ConferenceName_text),
-        ('unicodeText', _ConferenceName_unicodeText),
+        (u'numeric', _ConferenceName_numeric),
+        (u'text', _ConferenceName_text),
+        (u'unicodeText', _ConferenceName_unicodeText),
         ])
-    ConferenceName._ext = ['unicodeText']
+    ConferenceName._ext = [u'unicodeText']
     
     #-----< ConferenceNameSelector >-----#
-    ConferenceNameSelector = CHOICE(name='ConferenceNameSelector', mode=MODE_TYPE)
-    _ConferenceNameSelector_numeric = STR_NUM(name='numeric', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'SimpleNumericString')))
-    _ConferenceNameSelector_numeric._const_alpha = ASN1Set(rv=['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'], rr=[], ev=None, er=[])
-    _ConferenceNameSelector_text = STR_BMP(name='text', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'SimpleTextString')))
-    _ConferenceNameSelector_unicodeText = STR_BMP(name='unicodeText', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'TextString')))
+    ConferenceNameSelector = CHOICE(name=u'ConferenceNameSelector', mode=MODE_TYPE)
+    _ConferenceNameSelector_numeric = STR_NUM(name=u'numeric', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'SimpleNumericString')))
+    _ConferenceNameSelector_numeric._const_alpha = ASN1Set(rv=[u'0', u'1', u'2', u'3', u'4', u'5', u'6', u'7', u'8', u'9'], rr=[], ev=None, er=[])
+    _ConferenceNameSelector_text = STR_BMP(name=u'text', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'SimpleTextString')))
+    _ConferenceNameSelector_unicodeText = STR_BMP(name=u'unicodeText', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'TextString')))
     ConferenceNameSelector._cont = ASN1Dict([
-        ('numeric', _ConferenceNameSelector_numeric),
-        ('text', _ConferenceNameSelector_text),
-        ('unicodeText', _ConferenceNameSelector_unicodeText),
+        (u'numeric', _ConferenceNameSelector_numeric),
+        (u'text', _ConferenceNameSelector_text),
+        (u'unicodeText', _ConferenceNameSelector_unicodeText),
         ])
-    ConferenceNameSelector._ext = ['unicodeText']
+    ConferenceNameSelector._ext = [u'unicodeText']
     
     #-----< ConferenceNameModifier >-----#
-    ConferenceNameModifier = STR_NUM(name='ConferenceNameModifier', mode=MODE_TYPE, typeref=ASN1RefType(('GCC-PROTOCOL', 'SimpleNumericString')))
-    ConferenceNameModifier._const_alpha = ASN1Set(rv=['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'], rr=[], ev=None, er=[])
+    ConferenceNameModifier = STR_NUM(name=u'ConferenceNameModifier', mode=MODE_TYPE, typeref=ASN1RefType(('GCC-PROTOCOL', 'SimpleNumericString')))
+    ConferenceNameModifier._const_alpha = ASN1Set(rv=[u'0', u'1', u'2', u'3', u'4', u'5', u'6', u'7', u'8', u'9'], rr=[], ev=None, er=[])
     
     #-----< Privilege >-----#
-    Privilege = ENUM(name='Privilege', mode=MODE_TYPE)
-    Privilege._cont = ASN1Dict([('terminate', 0), ('ejectUser', 1), ('add', 2), ('lockUnlock', 3), ('transfer', 4)])
+    Privilege = ENUM(name=u'Privilege', mode=MODE_TYPE)
+    Privilege._cont = ASN1Dict([(u'terminate', 0), (u'ejectUser', 1), (u'add', 2), (u'lockUnlock', 3), (u'transfer', 4)])
     Privilege._ext = []
     
     #-----< TerminationMethod >-----#
-    TerminationMethod = ENUM(name='TerminationMethod', mode=MODE_TYPE)
-    TerminationMethod._cont = ASN1Dict([('automatic', 0), ('manual', 1)])
+    TerminationMethod = ENUM(name=u'TerminationMethod', mode=MODE_TYPE)
+    TerminationMethod._cont = ASN1Dict([(u'automatic', 0), (u'manual', 1)])
     TerminationMethod._ext = []
     
     #-----< ConferencePriorityScheme >-----#
-    ConferencePriorityScheme = CHOICE(name='ConferencePriorityScheme', mode=MODE_TYPE)
-    _ConferencePriorityScheme_nonStandardScheme = SEQ(name='nonStandardScheme', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'NonStandardParameter')))
+    ConferencePriorityScheme = CHOICE(name=u'ConferencePriorityScheme', mode=MODE_TYPE)
+    _ConferencePriorityScheme_nonStandardScheme = SEQ(name=u'nonStandardScheme', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'NonStandardParameter')))
     ConferencePriorityScheme._cont = ASN1Dict([
-        ('nonStandardScheme', _ConferencePriorityScheme_nonStandardScheme),
+        (u'nonStandardScheme', _ConferencePriorityScheme_nonStandardScheme),
         ])
     ConferencePriorityScheme._ext = []
     
     #-----< ConferencePriority >-----#
-    ConferencePriority = SEQ(name='ConferencePriority', mode=MODE_TYPE)
-    _ConferencePriority_priority = INT(name='priority', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    ConferencePriority = SEQ(name=u'ConferencePriority', mode=MODE_TYPE)
+    _ConferencePriority_priority = INT(name=u'priority', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     _ConferencePriority_priority._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=65535)], ev=None, er=[])
-    _ConferencePriority_scheme = CHOICE(name='scheme', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'ConferencePriorityScheme')))
+    _ConferencePriority_scheme = CHOICE(name=u'scheme', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'ConferencePriorityScheme')))
     ConferencePriority._cont = ASN1Dict([
-        ('priority', _ConferencePriority_priority),
-        ('scheme', _ConferencePriority_scheme),
+        (u'priority', _ConferencePriority_priority),
+        (u'scheme', _ConferencePriority_scheme),
         ])
     ConferencePriority._ext = []
     
     #-----< NodeCategory >-----#
-    NodeCategory = CHOICE(name='NodeCategory', mode=MODE_TYPE)
-    _NodeCategory_conventional = NULL(name='conventional', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _NodeCategory_counted = NULL(name='counted', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _NodeCategory_anonymous = NULL(name='anonymous', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _NodeCategory_nonStandardCategory = SEQ(name='nonStandardCategory', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'NonStandardParameter')))
+    NodeCategory = CHOICE(name=u'NodeCategory', mode=MODE_TYPE)
+    _NodeCategory_conventional = NULL(name=u'conventional', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _NodeCategory_counted = NULL(name=u'counted', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _NodeCategory_anonymous = NULL(name=u'anonymous', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _NodeCategory_nonStandardCategory = SEQ(name=u'nonStandardCategory', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'NonStandardParameter')))
     NodeCategory._cont = ASN1Dict([
-        ('conventional', _NodeCategory_conventional),
-        ('counted', _NodeCategory_counted),
-        ('anonymous', _NodeCategory_anonymous),
-        ('nonStandardCategory', _NodeCategory_nonStandardCategory),
+        (u'conventional', _NodeCategory_conventional),
+        (u'counted', _NodeCategory_counted),
+        (u'anonymous', _NodeCategory_anonymous),
+        (u'nonStandardCategory', _NodeCategory_nonStandardCategory),
         ])
     NodeCategory._ext = []
     
     #-----< ConferenceMode >-----#
-    ConferenceMode = CHOICE(name='ConferenceMode', mode=MODE_TYPE)
-    _ConferenceMode_conventional_only = NULL(name='conventional-only', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _ConferenceMode_counted_only = NULL(name='counted-only', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _ConferenceMode_anonymous_only = NULL(name='anonymous-only', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _ConferenceMode_conventional_control = NULL(name='conventional-control', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _ConferenceMode_unrestricted_mode = NULL(name='unrestricted-mode', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _ConferenceMode_non_standard_mode = SEQ(name='non-standard-mode', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'NonStandardParameter')))
+    ConferenceMode = CHOICE(name=u'ConferenceMode', mode=MODE_TYPE)
+    _ConferenceMode_conventional_only = NULL(name=u'conventional-only', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _ConferenceMode_counted_only = NULL(name=u'counted-only', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _ConferenceMode_anonymous_only = NULL(name=u'anonymous-only', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _ConferenceMode_conventional_control = NULL(name=u'conventional-control', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _ConferenceMode_unrestricted_mode = NULL(name=u'unrestricted-mode', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _ConferenceMode_non_standard_mode = SEQ(name=u'non-standard-mode', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'NonStandardParameter')))
     ConferenceMode._cont = ASN1Dict([
-        ('conventional-only', _ConferenceMode_conventional_only),
-        ('counted-only', _ConferenceMode_counted_only),
-        ('anonymous-only', _ConferenceMode_anonymous_only),
-        ('conventional-control', _ConferenceMode_conventional_control),
-        ('unrestricted-mode', _ConferenceMode_unrestricted_mode),
-        ('non-standard-mode', _ConferenceMode_non_standard_mode),
+        (u'conventional-only', _ConferenceMode_conventional_only),
+        (u'counted-only', _ConferenceMode_counted_only),
+        (u'anonymous-only', _ConferenceMode_anonymous_only),
+        (u'conventional-control', _ConferenceMode_conventional_control),
+        (u'unrestricted-mode', _ConferenceMode_unrestricted_mode),
+        (u'non-standard-mode', _ConferenceMode_non_standard_mode),
         ])
     ConferenceMode._ext = []
     
     #-----< NetworkAddress >-----#
-    NetworkAddress = SEQ_OF(name='NetworkAddress', mode=MODE_TYPE)
+    NetworkAddress = SEQ_OF(name=u'NetworkAddress', mode=MODE_TYPE)
     _NetworkAddress__item_ = CHOICE(name='_item_', mode=MODE_TYPE)
-    __NetworkAddress__item__aggregatedChannel = SEQ(name='aggregatedChannel', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    ___NetworkAddress__item__aggregatedChannel_transferModes = SEQ(name='transferModes', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    ____NetworkAddress__item__aggregatedChannel_transferModes_speech = BOOL(name='speech', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    ____NetworkAddress__item__aggregatedChannel_transferModes_voice_band = BOOL(name='voice-band', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    ____NetworkAddress__item__aggregatedChannel_transferModes_digital_56k = BOOL(name='digital-56k', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    ____NetworkAddress__item__aggregatedChannel_transferModes_digital_64k = BOOL(name='digital-64k', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    ____NetworkAddress__item__aggregatedChannel_transferModes_digital_128k = BOOL(name='digital-128k', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    ____NetworkAddress__item__aggregatedChannel_transferModes_digital_192k = BOOL(name='digital-192k', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    ____NetworkAddress__item__aggregatedChannel_transferModes_digital_256k = BOOL(name='digital-256k', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    ____NetworkAddress__item__aggregatedChannel_transferModes_digital_320k = BOOL(name='digital-320k', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    ____NetworkAddress__item__aggregatedChannel_transferModes_digital_384k = BOOL(name='digital-384k', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    ____NetworkAddress__item__aggregatedChannel_transferModes_digital_512k = BOOL(name='digital-512k', mode=MODE_TYPE, tag=(9, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    ____NetworkAddress__item__aggregatedChannel_transferModes_digital_768k = BOOL(name='digital-768k', mode=MODE_TYPE, tag=(10, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    ____NetworkAddress__item__aggregatedChannel_transferModes_digital_1152k = BOOL(name='digital-1152k', mode=MODE_TYPE, tag=(11, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    ____NetworkAddress__item__aggregatedChannel_transferModes_digital_1472k = BOOL(name='digital-1472k', mode=MODE_TYPE, tag=(12, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    ____NetworkAddress__item__aggregatedChannel_transferModes_digital_1536k = BOOL(name='digital-1536k', mode=MODE_TYPE, tag=(13, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    ____NetworkAddress__item__aggregatedChannel_transferModes_digital_1920k = BOOL(name='digital-1920k', mode=MODE_TYPE, tag=(14, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    ____NetworkAddress__item__aggregatedChannel_transferModes_packet_mode = BOOL(name='packet-mode', mode=MODE_TYPE, tag=(15, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    ____NetworkAddress__item__aggregatedChannel_transferModes_frame_mode = BOOL(name='frame-mode', mode=MODE_TYPE, tag=(16, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    ____NetworkAddress__item__aggregatedChannel_transferModes_atm = BOOL(name='atm', mode=MODE_TYPE, tag=(17, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __NetworkAddress__item__aggregatedChannel = SEQ(name=u'aggregatedChannel', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    ___NetworkAddress__item__aggregatedChannel_transferModes = SEQ(name=u'transferModes', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    ____NetworkAddress__item__aggregatedChannel_transferModes_speech = BOOL(name=u'speech', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    ____NetworkAddress__item__aggregatedChannel_transferModes_voice_band = BOOL(name=u'voice-band', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    ____NetworkAddress__item__aggregatedChannel_transferModes_digital_56k = BOOL(name=u'digital-56k', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    ____NetworkAddress__item__aggregatedChannel_transferModes_digital_64k = BOOL(name=u'digital-64k', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    ____NetworkAddress__item__aggregatedChannel_transferModes_digital_128k = BOOL(name=u'digital-128k', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    ____NetworkAddress__item__aggregatedChannel_transferModes_digital_192k = BOOL(name=u'digital-192k', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    ____NetworkAddress__item__aggregatedChannel_transferModes_digital_256k = BOOL(name=u'digital-256k', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    ____NetworkAddress__item__aggregatedChannel_transferModes_digital_320k = BOOL(name=u'digital-320k', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    ____NetworkAddress__item__aggregatedChannel_transferModes_digital_384k = BOOL(name=u'digital-384k', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    ____NetworkAddress__item__aggregatedChannel_transferModes_digital_512k = BOOL(name=u'digital-512k', mode=MODE_TYPE, tag=(9, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    ____NetworkAddress__item__aggregatedChannel_transferModes_digital_768k = BOOL(name=u'digital-768k', mode=MODE_TYPE, tag=(10, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    ____NetworkAddress__item__aggregatedChannel_transferModes_digital_1152k = BOOL(name=u'digital-1152k', mode=MODE_TYPE, tag=(11, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    ____NetworkAddress__item__aggregatedChannel_transferModes_digital_1472k = BOOL(name=u'digital-1472k', mode=MODE_TYPE, tag=(12, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    ____NetworkAddress__item__aggregatedChannel_transferModes_digital_1536k = BOOL(name=u'digital-1536k', mode=MODE_TYPE, tag=(13, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    ____NetworkAddress__item__aggregatedChannel_transferModes_digital_1920k = BOOL(name=u'digital-1920k', mode=MODE_TYPE, tag=(14, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    ____NetworkAddress__item__aggregatedChannel_transferModes_packet_mode = BOOL(name=u'packet-mode', mode=MODE_TYPE, tag=(15, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    ____NetworkAddress__item__aggregatedChannel_transferModes_frame_mode = BOOL(name=u'frame-mode', mode=MODE_TYPE, tag=(16, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    ____NetworkAddress__item__aggregatedChannel_transferModes_atm = BOOL(name=u'atm', mode=MODE_TYPE, tag=(17, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     ___NetworkAddress__item__aggregatedChannel_transferModes._cont = ASN1Dict([
-        ('speech', ____NetworkAddress__item__aggregatedChannel_transferModes_speech),
-        ('voice-band', ____NetworkAddress__item__aggregatedChannel_transferModes_voice_band),
-        ('digital-56k', ____NetworkAddress__item__aggregatedChannel_transferModes_digital_56k),
-        ('digital-64k', ____NetworkAddress__item__aggregatedChannel_transferModes_digital_64k),
-        ('digital-128k', ____NetworkAddress__item__aggregatedChannel_transferModes_digital_128k),
-        ('digital-192k', ____NetworkAddress__item__aggregatedChannel_transferModes_digital_192k),
-        ('digital-256k', ____NetworkAddress__item__aggregatedChannel_transferModes_digital_256k),
-        ('digital-320k', ____NetworkAddress__item__aggregatedChannel_transferModes_digital_320k),
-        ('digital-384k', ____NetworkAddress__item__aggregatedChannel_transferModes_digital_384k),
-        ('digital-512k', ____NetworkAddress__item__aggregatedChannel_transferModes_digital_512k),
-        ('digital-768k', ____NetworkAddress__item__aggregatedChannel_transferModes_digital_768k),
-        ('digital-1152k', ____NetworkAddress__item__aggregatedChannel_transferModes_digital_1152k),
-        ('digital-1472k', ____NetworkAddress__item__aggregatedChannel_transferModes_digital_1472k),
-        ('digital-1536k', ____NetworkAddress__item__aggregatedChannel_transferModes_digital_1536k),
-        ('digital-1920k', ____NetworkAddress__item__aggregatedChannel_transferModes_digital_1920k),
-        ('packet-mode', ____NetworkAddress__item__aggregatedChannel_transferModes_packet_mode),
-        ('frame-mode', ____NetworkAddress__item__aggregatedChannel_transferModes_frame_mode),
-        ('atm', ____NetworkAddress__item__aggregatedChannel_transferModes_atm),
+        (u'speech', ____NetworkAddress__item__aggregatedChannel_transferModes_speech),
+        (u'voice-band', ____NetworkAddress__item__aggregatedChannel_transferModes_voice_band),
+        (u'digital-56k', ____NetworkAddress__item__aggregatedChannel_transferModes_digital_56k),
+        (u'digital-64k', ____NetworkAddress__item__aggregatedChannel_transferModes_digital_64k),
+        (u'digital-128k', ____NetworkAddress__item__aggregatedChannel_transferModes_digital_128k),
+        (u'digital-192k', ____NetworkAddress__item__aggregatedChannel_transferModes_digital_192k),
+        (u'digital-256k', ____NetworkAddress__item__aggregatedChannel_transferModes_digital_256k),
+        (u'digital-320k', ____NetworkAddress__item__aggregatedChannel_transferModes_digital_320k),
+        (u'digital-384k', ____NetworkAddress__item__aggregatedChannel_transferModes_digital_384k),
+        (u'digital-512k', ____NetworkAddress__item__aggregatedChannel_transferModes_digital_512k),
+        (u'digital-768k', ____NetworkAddress__item__aggregatedChannel_transferModes_digital_768k),
+        (u'digital-1152k', ____NetworkAddress__item__aggregatedChannel_transferModes_digital_1152k),
+        (u'digital-1472k', ____NetworkAddress__item__aggregatedChannel_transferModes_digital_1472k),
+        (u'digital-1536k', ____NetworkAddress__item__aggregatedChannel_transferModes_digital_1536k),
+        (u'digital-1920k', ____NetworkAddress__item__aggregatedChannel_transferModes_digital_1920k),
+        (u'packet-mode', ____NetworkAddress__item__aggregatedChannel_transferModes_packet_mode),
+        (u'frame-mode', ____NetworkAddress__item__aggregatedChannel_transferModes_frame_mode),
+        (u'atm', ____NetworkAddress__item__aggregatedChannel_transferModes_atm),
         ])
     ___NetworkAddress__item__aggregatedChannel_transferModes._ext = []
-    ___NetworkAddress__item__aggregatedChannel_internationalNumber = STR_NUM(name='internationalNumber', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'DiallingString')))
-    ___NetworkAddress__item__aggregatedChannel_internationalNumber._const_alpha = ASN1Set(rv=['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'], rr=[], ev=None, er=[])
-    ___NetworkAddress__item__aggregatedChannel_subAddress = STR_NUM(name='subAddress', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'SubAddressString')), opt=True)
-    ___NetworkAddress__item__aggregatedChannel_subAddress._const_alpha = ASN1Set(rv=['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'], rr=[], ev=None, er=[])
-    ___NetworkAddress__item__aggregatedChannel_extraDialling = STR_BMP(name='extraDialling', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'ExtraDiallingString')), opt=True)
-    ___NetworkAddress__item__aggregatedChannel_extraDialling._const_alpha = ASN1Set(rv=['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '#', '*', ','], rr=[], ev=None, er=[])
-    ___NetworkAddress__item__aggregatedChannel_highLayerCompatibility = SEQ(name='highLayerCompatibility', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    ____NetworkAddress__item__aggregatedChannel_highLayerCompatibility_telephony3kHz = BOOL(name='telephony3kHz', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    ____NetworkAddress__item__aggregatedChannel_highLayerCompatibility_telephony7kHz = BOOL(name='telephony7kHz', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    ____NetworkAddress__item__aggregatedChannel_highLayerCompatibility_videotelephony = BOOL(name='videotelephony', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    ____NetworkAddress__item__aggregatedChannel_highLayerCompatibility_videoconference = BOOL(name='videoconference', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    ____NetworkAddress__item__aggregatedChannel_highLayerCompatibility_audiographic = BOOL(name='audiographic', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    ____NetworkAddress__item__aggregatedChannel_highLayerCompatibility_audiovisual = BOOL(name='audiovisual', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    ____NetworkAddress__item__aggregatedChannel_highLayerCompatibility_multimedia = BOOL(name='multimedia', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    ___NetworkAddress__item__aggregatedChannel_internationalNumber = STR_NUM(name=u'internationalNumber', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'DiallingString')))
+    ___NetworkAddress__item__aggregatedChannel_internationalNumber._const_alpha = ASN1Set(rv=[u'0', u'1', u'2', u'3', u'4', u'5', u'6', u'7', u'8', u'9'], rr=[], ev=None, er=[])
+    ___NetworkAddress__item__aggregatedChannel_subAddress = STR_NUM(name=u'subAddress', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'SubAddressString')), opt=True)
+    ___NetworkAddress__item__aggregatedChannel_subAddress._const_alpha = ASN1Set(rv=[u'0', u'1', u'2', u'3', u'4', u'5', u'6', u'7', u'8', u'9'], rr=[], ev=None, er=[])
+    ___NetworkAddress__item__aggregatedChannel_extraDialling = STR_BMP(name=u'extraDialling', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'ExtraDiallingString')), opt=True)
+    ___NetworkAddress__item__aggregatedChannel_extraDialling._const_alpha = ASN1Set(rv=[u'0', u'1', u'2', u'3', u'4', u'5', u'6', u'7', u'8', u'9', u'#', u'*', u','], rr=[], ev=None, er=[])
+    ___NetworkAddress__item__aggregatedChannel_highLayerCompatibility = SEQ(name=u'highLayerCompatibility', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    ____NetworkAddress__item__aggregatedChannel_highLayerCompatibility_telephony3kHz = BOOL(name=u'telephony3kHz', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    ____NetworkAddress__item__aggregatedChannel_highLayerCompatibility_telephony7kHz = BOOL(name=u'telephony7kHz', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    ____NetworkAddress__item__aggregatedChannel_highLayerCompatibility_videotelephony = BOOL(name=u'videotelephony', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    ____NetworkAddress__item__aggregatedChannel_highLayerCompatibility_videoconference = BOOL(name=u'videoconference', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    ____NetworkAddress__item__aggregatedChannel_highLayerCompatibility_audiographic = BOOL(name=u'audiographic', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    ____NetworkAddress__item__aggregatedChannel_highLayerCompatibility_audiovisual = BOOL(name=u'audiovisual', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    ____NetworkAddress__item__aggregatedChannel_highLayerCompatibility_multimedia = BOOL(name=u'multimedia', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     ___NetworkAddress__item__aggregatedChannel_highLayerCompatibility._cont = ASN1Dict([
-        ('telephony3kHz', ____NetworkAddress__item__aggregatedChannel_highLayerCompatibility_telephony3kHz),
-        ('telephony7kHz', ____NetworkAddress__item__aggregatedChannel_highLayerCompatibility_telephony7kHz),
-        ('videotelephony', ____NetworkAddress__item__aggregatedChannel_highLayerCompatibility_videotelephony),
-        ('videoconference', ____NetworkAddress__item__aggregatedChannel_highLayerCompatibility_videoconference),
-        ('audiographic', ____NetworkAddress__item__aggregatedChannel_highLayerCompatibility_audiographic),
-        ('audiovisual', ____NetworkAddress__item__aggregatedChannel_highLayerCompatibility_audiovisual),
-        ('multimedia', ____NetworkAddress__item__aggregatedChannel_highLayerCompatibility_multimedia),
+        (u'telephony3kHz', ____NetworkAddress__item__aggregatedChannel_highLayerCompatibility_telephony3kHz),
+        (u'telephony7kHz', ____NetworkAddress__item__aggregatedChannel_highLayerCompatibility_telephony7kHz),
+        (u'videotelephony', ____NetworkAddress__item__aggregatedChannel_highLayerCompatibility_videotelephony),
+        (u'videoconference', ____NetworkAddress__item__aggregatedChannel_highLayerCompatibility_videoconference),
+        (u'audiographic', ____NetworkAddress__item__aggregatedChannel_highLayerCompatibility_audiographic),
+        (u'audiovisual', ____NetworkAddress__item__aggregatedChannel_highLayerCompatibility_audiovisual),
+        (u'multimedia', ____NetworkAddress__item__aggregatedChannel_highLayerCompatibility_multimedia),
         ])
     ___NetworkAddress__item__aggregatedChannel_highLayerCompatibility._ext = []
     __NetworkAddress__item__aggregatedChannel._cont = ASN1Dict([
-        ('transferModes', ___NetworkAddress__item__aggregatedChannel_transferModes),
-        ('internationalNumber', ___NetworkAddress__item__aggregatedChannel_internationalNumber),
-        ('subAddress', ___NetworkAddress__item__aggregatedChannel_subAddress),
-        ('extraDialling', ___NetworkAddress__item__aggregatedChannel_extraDialling),
-        ('highLayerCompatibility', ___NetworkAddress__item__aggregatedChannel_highLayerCompatibility),
+        (u'transferModes', ___NetworkAddress__item__aggregatedChannel_transferModes),
+        (u'internationalNumber', ___NetworkAddress__item__aggregatedChannel_internationalNumber),
+        (u'subAddress', ___NetworkAddress__item__aggregatedChannel_subAddress),
+        (u'extraDialling', ___NetworkAddress__item__aggregatedChannel_extraDialling),
+        (u'highLayerCompatibility', ___NetworkAddress__item__aggregatedChannel_highLayerCompatibility),
         ])
     __NetworkAddress__item__aggregatedChannel._ext = []
-    __NetworkAddress__item__transportConnection = SEQ(name='transportConnection', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    ___NetworkAddress__item__transportConnection_nsapAddress = OCT_STR(name='nsapAddress', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __NetworkAddress__item__transportConnection = SEQ(name=u'transportConnection', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    ___NetworkAddress__item__transportConnection_nsapAddress = OCT_STR(name=u'nsapAddress', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     ___NetworkAddress__item__transportConnection_nsapAddress._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=20)], ev=None, er=[])
-    ___NetworkAddress__item__transportConnection_transportSelector = OCT_STR(name='transportSelector', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    ___NetworkAddress__item__transportConnection_transportSelector = OCT_STR(name=u'transportSelector', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     __NetworkAddress__item__transportConnection._cont = ASN1Dict([
-        ('nsapAddress', ___NetworkAddress__item__transportConnection_nsapAddress),
-        ('transportSelector', ___NetworkAddress__item__transportConnection_transportSelector),
+        (u'nsapAddress', ___NetworkAddress__item__transportConnection_nsapAddress),
+        (u'transportSelector', ___NetworkAddress__item__transportConnection_transportSelector),
         ])
     __NetworkAddress__item__transportConnection._ext = None
-    __NetworkAddress__item__nonStandard = SEQ(name='nonStandard', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'NonStandardParameter')))
+    __NetworkAddress__item__nonStandard = SEQ(name=u'nonStandard', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'NonStandardParameter')))
     _NetworkAddress__item_._cont = ASN1Dict([
-        ('aggregatedChannel', __NetworkAddress__item__aggregatedChannel),
-        ('transportConnection', __NetworkAddress__item__transportConnection),
-        ('nonStandard', __NetworkAddress__item__nonStandard),
+        (u'aggregatedChannel', __NetworkAddress__item__aggregatedChannel),
+        (u'transportConnection', __NetworkAddress__item__transportConnection),
+        (u'nonStandard', __NetworkAddress__item__nonStandard),
         ])
     _NetworkAddress__item_._ext = []
     NetworkAddress._cont = _NetworkAddress__item_
     NetworkAddress._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=64)], ev=None, er=[])
     
     #-----< MediaList >-----#
-    MediaList = SEQ(name='MediaList', mode=MODE_TYPE)
-    _MediaList_audio = BOOL(name='audio', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _MediaList_video = BOOL(name='video', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _MediaList_data = BOOL(name='data', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    MediaList = SEQ(name=u'MediaList', mode=MODE_TYPE)
+    _MediaList_audio = BOOL(name=u'audio', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _MediaList_video = BOOL(name=u'video', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _MediaList_data = BOOL(name=u'data', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     MediaList._cont = ASN1Dict([
-        ('audio', _MediaList_audio),
-        ('video', _MediaList_video),
-        ('data', _MediaList_data),
+        (u'audio', _MediaList_audio),
+        (u'video', _MediaList_video),
+        (u'data', _MediaList_data),
         ])
     MediaList._ext = []
     
     #-----< ChannelAggregationMethod >-----#
-    ChannelAggregationMethod = CHOICE(name='ChannelAggregationMethod', mode=MODE_TYPE)
-    _ChannelAggregationMethod_h221 = NULL(name='h221', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _ChannelAggregationMethod_h244 = NULL(name='h244', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _ChannelAggregationMethod_iso_iec_13871 = NULL(name='iso-iec-13871', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _ChannelAggregationMethod_nonStandard = SEQ(name='nonStandard', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'NonStandardParameter')))
+    ChannelAggregationMethod = CHOICE(name=u'ChannelAggregationMethod', mode=MODE_TYPE)
+    _ChannelAggregationMethod_h221 = NULL(name=u'h221', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _ChannelAggregationMethod_h244 = NULL(name=u'h244', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _ChannelAggregationMethod_iso_iec_13871 = NULL(name=u'iso-iec-13871', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _ChannelAggregationMethod_nonStandard = SEQ(name=u'nonStandard', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'NonStandardParameter')))
     ChannelAggregationMethod._cont = ASN1Dict([
-        ('h221', _ChannelAggregationMethod_h221),
-        ('h244', _ChannelAggregationMethod_h244),
-        ('iso-iec-13871', _ChannelAggregationMethod_iso_iec_13871),
-        ('nonStandard', _ChannelAggregationMethod_nonStandard),
+        (u'h221', _ChannelAggregationMethod_h221),
+        (u'h244', _ChannelAggregationMethod_h244),
+        (u'iso-iec-13871', _ChannelAggregationMethod_iso_iec_13871),
+        (u'nonStandard', _ChannelAggregationMethod_nonStandard),
         ])
     ChannelAggregationMethod._ext = []
     
     #-----< Profile >-----#
-    Profile = CHOICE(name='Profile', mode=MODE_TYPE)
-    _Profile_simpleProfile = CHOICE(name='simpleProfile', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
-    __Profile_simpleProfile_speech = NULL(name='speech', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    __Profile_simpleProfile_telephony_3kHz = NULL(name='telephony-3kHz', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    __Profile_simpleProfile_telephony_7kHz = NULL(name='telephony-7kHz', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    __Profile_simpleProfile_voice_band = NULL(name='voice-band', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    __Profile_simpleProfile_frameRelay = NULL(name='frameRelay', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    __Profile_simpleProfile_t123_pstn_basic = NULL(name='t123-pstn-basic', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    __Profile_simpleProfile_t123_psdn_basic = NULL(name='t123-psdn-basic', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    __Profile_simpleProfile_t123_b_isdn_basic = NULL(name='t123-b-isdn-basic', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    Profile = CHOICE(name=u'Profile', mode=MODE_TYPE)
+    _Profile_simpleProfile = CHOICE(name=u'simpleProfile', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
+    __Profile_simpleProfile_speech = NULL(name=u'speech', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __Profile_simpleProfile_telephony_3kHz = NULL(name=u'telephony-3kHz', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __Profile_simpleProfile_telephony_7kHz = NULL(name=u'telephony-7kHz', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __Profile_simpleProfile_voice_band = NULL(name=u'voice-band', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __Profile_simpleProfile_frameRelay = NULL(name=u'frameRelay', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __Profile_simpleProfile_t123_pstn_basic = NULL(name=u't123-pstn-basic', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __Profile_simpleProfile_t123_psdn_basic = NULL(name=u't123-psdn-basic', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __Profile_simpleProfile_t123_b_isdn_basic = NULL(name=u't123-b-isdn-basic', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     _Profile_simpleProfile._cont = ASN1Dict([
-        ('speech', __Profile_simpleProfile_speech),
-        ('telephony-3kHz', __Profile_simpleProfile_telephony_3kHz),
-        ('telephony-7kHz', __Profile_simpleProfile_telephony_7kHz),
-        ('voice-band', __Profile_simpleProfile_voice_band),
-        ('frameRelay', __Profile_simpleProfile_frameRelay),
-        ('t123-pstn-basic', __Profile_simpleProfile_t123_pstn_basic),
-        ('t123-psdn-basic', __Profile_simpleProfile_t123_psdn_basic),
-        ('t123-b-isdn-basic', __Profile_simpleProfile_t123_b_isdn_basic),
+        (u'speech', __Profile_simpleProfile_speech),
+        (u'telephony-3kHz', __Profile_simpleProfile_telephony_3kHz),
+        (u'telephony-7kHz', __Profile_simpleProfile_telephony_7kHz),
+        (u'voice-band', __Profile_simpleProfile_voice_band),
+        (u'frameRelay', __Profile_simpleProfile_frameRelay),
+        (u't123-pstn-basic', __Profile_simpleProfile_t123_pstn_basic),
+        (u't123-psdn-basic', __Profile_simpleProfile_t123_psdn_basic),
+        (u't123-b-isdn-basic', __Profile_simpleProfile_t123_b_isdn_basic),
         ])
     _Profile_simpleProfile._ext = None
-    _Profile_multimediaProfile = SEQ(name='multimediaProfile', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    __Profile_multimediaProfile_profile = CHOICE(name='profile', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
-    ___Profile_multimediaProfile_profile_h310 = NULL(name='h310', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    ___Profile_multimediaProfile_profile_h320 = NULL(name='h320', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    ___Profile_multimediaProfile_profile_h321 = NULL(name='h321', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    ___Profile_multimediaProfile_profile_h322 = NULL(name='h322', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    ___Profile_multimediaProfile_profile_h323 = NULL(name='h323', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    ___Profile_multimediaProfile_profile_h324 = NULL(name='h324', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    ___Profile_multimediaProfile_profile_h324m = NULL(name='h324m', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    ___Profile_multimediaProfile_profile_asvd = NULL(name='asvd', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    ___Profile_multimediaProfile_profile_dsvd = NULL(name='dsvd', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _Profile_multimediaProfile = SEQ(name=u'multimediaProfile', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __Profile_multimediaProfile_profile = CHOICE(name=u'profile', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
+    ___Profile_multimediaProfile_profile_h310 = NULL(name=u'h310', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    ___Profile_multimediaProfile_profile_h320 = NULL(name=u'h320', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    ___Profile_multimediaProfile_profile_h321 = NULL(name=u'h321', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    ___Profile_multimediaProfile_profile_h322 = NULL(name=u'h322', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    ___Profile_multimediaProfile_profile_h323 = NULL(name=u'h323', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    ___Profile_multimediaProfile_profile_h324 = NULL(name=u'h324', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    ___Profile_multimediaProfile_profile_h324m = NULL(name=u'h324m', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    ___Profile_multimediaProfile_profile_asvd = NULL(name=u'asvd', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    ___Profile_multimediaProfile_profile_dsvd = NULL(name=u'dsvd', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     __Profile_multimediaProfile_profile._cont = ASN1Dict([
-        ('h310', ___Profile_multimediaProfile_profile_h310),
-        ('h320', ___Profile_multimediaProfile_profile_h320),
-        ('h321', ___Profile_multimediaProfile_profile_h321),
-        ('h322', ___Profile_multimediaProfile_profile_h322),
-        ('h323', ___Profile_multimediaProfile_profile_h323),
-        ('h324', ___Profile_multimediaProfile_profile_h324),
-        ('h324m', ___Profile_multimediaProfile_profile_h324m),
-        ('asvd', ___Profile_multimediaProfile_profile_asvd),
-        ('dsvd', ___Profile_multimediaProfile_profile_dsvd),
+        (u'h310', ___Profile_multimediaProfile_profile_h310),
+        (u'h320', ___Profile_multimediaProfile_profile_h320),
+        (u'h321', ___Profile_multimediaProfile_profile_h321),
+        (u'h322', ___Profile_multimediaProfile_profile_h322),
+        (u'h323', ___Profile_multimediaProfile_profile_h323),
+        (u'h324', ___Profile_multimediaProfile_profile_h324),
+        (u'h324m', ___Profile_multimediaProfile_profile_h324m),
+        (u'asvd', ___Profile_multimediaProfile_profile_asvd),
+        (u'dsvd', ___Profile_multimediaProfile_profile_dsvd),
         ])
     __Profile_multimediaProfile_profile._ext = None
-    __Profile_multimediaProfile_t120Data = BOOL(name='t120Data', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __Profile_multimediaProfile_t120Data = BOOL(name=u't120Data', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     _Profile_multimediaProfile._cont = ASN1Dict([
-        ('profile', __Profile_multimediaProfile_profile),
-        ('t120Data', __Profile_multimediaProfile_t120Data),
+        (u'profile', __Profile_multimediaProfile_profile),
+        (u't120Data', __Profile_multimediaProfile_t120Data),
         ])
     _Profile_multimediaProfile._ext = None
-    _Profile_dsmccDownloadProfile = NULL(name='dsmccDownloadProfile', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _Profile_nonStandard = SEQ(name='nonStandard', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'NonStandardParameter')))
+    _Profile_dsmccDownloadProfile = NULL(name=u'dsmccDownloadProfile', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _Profile_nonStandard = SEQ(name=u'nonStandard', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'NonStandardParameter')))
     Profile._cont = ASN1Dict([
-        ('simpleProfile', _Profile_simpleProfile),
-        ('multimediaProfile', _Profile_multimediaProfile),
-        ('dsmccDownloadProfile', _Profile_dsmccDownloadProfile),
-        ('nonStandard', _Profile_nonStandard),
+        (u'simpleProfile', _Profile_simpleProfile),
+        (u'multimediaProfile', _Profile_multimediaProfile),
+        (u'dsmccDownloadProfile', _Profile_dsmccDownloadProfile),
+        (u'nonStandard', _Profile_nonStandard),
         ])
     Profile._ext = []
     
     #-----< ExtendedE164NetworkAddress >-----#
-    ExtendedE164NetworkAddress = SEQ(name='ExtendedE164NetworkAddress', mode=MODE_TYPE)
-    _ExtendedE164NetworkAddress_internationalNumber = STR_NUM(name='internationalNumber', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'DiallingString')))
-    _ExtendedE164NetworkAddress_internationalNumber._const_alpha = ASN1Set(rv=['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'], rr=[], ev=None, er=[])
-    _ExtendedE164NetworkAddress_subAddress = STR_NUM(name='subAddress', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'SubAddressString')), opt=True)
-    _ExtendedE164NetworkAddress_subAddress._const_alpha = ASN1Set(rv=['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'], rr=[], ev=None, er=[])
-    _ExtendedE164NetworkAddress_extraDialling = STR_BMP(name='extraDialling', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'ExtraDiallingString')), opt=True)
-    _ExtendedE164NetworkAddress_extraDialling._const_alpha = ASN1Set(rv=['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '#', '*', ','], rr=[], ev=None, er=[])
+    ExtendedE164NetworkAddress = SEQ(name=u'ExtendedE164NetworkAddress', mode=MODE_TYPE)
+    _ExtendedE164NetworkAddress_internationalNumber = STR_NUM(name=u'internationalNumber', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'DiallingString')))
+    _ExtendedE164NetworkAddress_internationalNumber._const_alpha = ASN1Set(rv=[u'0', u'1', u'2', u'3', u'4', u'5', u'6', u'7', u'8', u'9'], rr=[], ev=None, er=[])
+    _ExtendedE164NetworkAddress_subAddress = STR_NUM(name=u'subAddress', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'SubAddressString')), opt=True)
+    _ExtendedE164NetworkAddress_subAddress._const_alpha = ASN1Set(rv=[u'0', u'1', u'2', u'3', u'4', u'5', u'6', u'7', u'8', u'9'], rr=[], ev=None, er=[])
+    _ExtendedE164NetworkAddress_extraDialling = STR_BMP(name=u'extraDialling', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'ExtraDiallingString')), opt=True)
+    _ExtendedE164NetworkAddress_extraDialling._const_alpha = ASN1Set(rv=[u'0', u'1', u'2', u'3', u'4', u'5', u'6', u'7', u'8', u'9', u'#', u'*', u','], rr=[], ev=None, er=[])
     ExtendedE164NetworkAddress._cont = ASN1Dict([
-        ('internationalNumber', _ExtendedE164NetworkAddress_internationalNumber),
-        ('subAddress', _ExtendedE164NetworkAddress_subAddress),
-        ('extraDialling', _ExtendedE164NetworkAddress_extraDialling),
+        (u'internationalNumber', _ExtendedE164NetworkAddress_internationalNumber),
+        (u'subAddress', _ExtendedE164NetworkAddress_subAddress),
+        (u'extraDialling', _ExtendedE164NetworkAddress_extraDialling),
         ])
     ExtendedE164NetworkAddress._ext = []
     
     #-----< TransportAddress >-----#
-    TransportAddress = SEQ(name='TransportAddress', mode=MODE_TYPE)
-    _TransportAddress_nsapAddress = OCT_STR(name='nsapAddress', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    TransportAddress = SEQ(name=u'TransportAddress', mode=MODE_TYPE)
+    _TransportAddress_nsapAddress = OCT_STR(name=u'nsapAddress', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     _TransportAddress_nsapAddress._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=20)], ev=None, er=[])
-    _TransportAddress_transportSelector = OCT_STR(name='transportSelector', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _TransportAddress_transportSelector = OCT_STR(name=u'transportSelector', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     TransportAddress._cont = ASN1Dict([
-        ('nsapAddress', _TransportAddress_nsapAddress),
-        ('transportSelector', _TransportAddress_transportSelector),
+        (u'nsapAddress', _TransportAddress_nsapAddress),
+        (u'transportSelector', _TransportAddress_transportSelector),
         ])
     TransportAddress._ext = None
     
     #-----< GSTNConnection >-----#
-    GSTNConnection = SEQ(name='GSTNConnection', mode=MODE_TYPE)
-    _GSTNConnection_networkAddress = SEQ(name='networkAddress', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'ExtendedE164NetworkAddress')))
+    GSTNConnection = SEQ(name=u'GSTNConnection', mode=MODE_TYPE)
+    _GSTNConnection_networkAddress = SEQ(name=u'networkAddress', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'ExtendedE164NetworkAddress')))
     GSTNConnection._cont = ASN1Dict([
-        ('networkAddress', _GSTNConnection_networkAddress),
+        (u'networkAddress', _GSTNConnection_networkAddress),
         ])
     GSTNConnection._ext = []
     
     #-----< ISDNConnection >-----#
-    ISDNConnection = SEQ(name='ISDNConnection', mode=MODE_TYPE)
-    _ISDNConnection_circuitTypes = SET_OF(name='circuitTypes', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    ISDNConnection = SEQ(name=u'ISDNConnection', mode=MODE_TYPE)
+    _ISDNConnection_circuitTypes = SET_OF(name=u'circuitTypes', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     __ISDNConnection_circuitTypes__item_ = CHOICE(name='_item_', mode=MODE_TYPE)
-    ___ISDNConnection_circuitTypes__item__digital_64k = NULL(name='digital-64k', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    ___ISDNConnection_circuitTypes__item__digital_2x64k = NULL(name='digital-2x64k', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    ___ISDNConnection_circuitTypes__item__digital_384k = NULL(name='digital-384k', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    ___ISDNConnection_circuitTypes__item__digital_1536 = NULL(name='digital-1536', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    ___ISDNConnection_circuitTypes__item__digital_1920k = NULL(name='digital-1920k', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    ___ISDNConnection_circuitTypes__item__multirate_base_64k = INT(name='multirate-base-64k', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    ___ISDNConnection_circuitTypes__item__digital_64k = NULL(name=u'digital-64k', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    ___ISDNConnection_circuitTypes__item__digital_2x64k = NULL(name=u'digital-2x64k', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    ___ISDNConnection_circuitTypes__item__digital_384k = NULL(name=u'digital-384k', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    ___ISDNConnection_circuitTypes__item__digital_1536 = NULL(name=u'digital-1536', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    ___ISDNConnection_circuitTypes__item__digital_1920k = NULL(name=u'digital-1920k', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    ___ISDNConnection_circuitTypes__item__multirate_base_64k = INT(name=u'multirate-base-64k', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     ___ISDNConnection_circuitTypes__item__multirate_base_64k._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=30)], ev=None, er=[])
     __ISDNConnection_circuitTypes__item_._cont = ASN1Dict([
-        ('digital-64k', ___ISDNConnection_circuitTypes__item__digital_64k),
-        ('digital-2x64k', ___ISDNConnection_circuitTypes__item__digital_2x64k),
-        ('digital-384k', ___ISDNConnection_circuitTypes__item__digital_384k),
-        ('digital-1536', ___ISDNConnection_circuitTypes__item__digital_1536),
-        ('digital-1920k', ___ISDNConnection_circuitTypes__item__digital_1920k),
-        ('multirate-base-64k', ___ISDNConnection_circuitTypes__item__multirate_base_64k),
+        (u'digital-64k', ___ISDNConnection_circuitTypes__item__digital_64k),
+        (u'digital-2x64k', ___ISDNConnection_circuitTypes__item__digital_2x64k),
+        (u'digital-384k', ___ISDNConnection_circuitTypes__item__digital_384k),
+        (u'digital-1536', ___ISDNConnection_circuitTypes__item__digital_1536),
+        (u'digital-1920k', ___ISDNConnection_circuitTypes__item__digital_1920k),
+        (u'multirate-base-64k', ___ISDNConnection_circuitTypes__item__multirate_base_64k),
         ])
     __ISDNConnection_circuitTypes__item_._ext = None
     _ISDNConnection_circuitTypes._cont = __ISDNConnection_circuitTypes__item_
-    _ISDNConnection_networkAddress = SEQ(name='networkAddress', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'ExtendedE164NetworkAddress')))
-    _ISDNConnection_highLayerCompatibility = SEQ(name='highLayerCompatibility', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    __ISDNConnection_highLayerCompatibility_telephony3kHz = BOOL(name='telephony3kHz', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    __ISDNConnection_highLayerCompatibility_telephony7kHz = BOOL(name='telephony7kHz', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    __ISDNConnection_highLayerCompatibility_videotelephony = BOOL(name='videotelephony', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    __ISDNConnection_highLayerCompatibility_videoconference = BOOL(name='videoconference', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    __ISDNConnection_highLayerCompatibility_audiographic = BOOL(name='audiographic', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    __ISDNConnection_highLayerCompatibility_audiovisual = BOOL(name='audiovisual', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    __ISDNConnection_highLayerCompatibility_multimedia = BOOL(name='multimedia', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _ISDNConnection_networkAddress = SEQ(name=u'networkAddress', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'ExtendedE164NetworkAddress')))
+    _ISDNConnection_highLayerCompatibility = SEQ(name=u'highLayerCompatibility', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    __ISDNConnection_highLayerCompatibility_telephony3kHz = BOOL(name=u'telephony3kHz', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __ISDNConnection_highLayerCompatibility_telephony7kHz = BOOL(name=u'telephony7kHz', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __ISDNConnection_highLayerCompatibility_videotelephony = BOOL(name=u'videotelephony', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __ISDNConnection_highLayerCompatibility_videoconference = BOOL(name=u'videoconference', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __ISDNConnection_highLayerCompatibility_audiographic = BOOL(name=u'audiographic', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __ISDNConnection_highLayerCompatibility_audiovisual = BOOL(name=u'audiovisual', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __ISDNConnection_highLayerCompatibility_multimedia = BOOL(name=u'multimedia', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     _ISDNConnection_highLayerCompatibility._cont = ASN1Dict([
-        ('telephony3kHz', __ISDNConnection_highLayerCompatibility_telephony3kHz),
-        ('telephony7kHz', __ISDNConnection_highLayerCompatibility_telephony7kHz),
-        ('videotelephony', __ISDNConnection_highLayerCompatibility_videotelephony),
-        ('videoconference', __ISDNConnection_highLayerCompatibility_videoconference),
-        ('audiographic', __ISDNConnection_highLayerCompatibility_audiographic),
-        ('audiovisual', __ISDNConnection_highLayerCompatibility_audiovisual),
-        ('multimedia', __ISDNConnection_highLayerCompatibility_multimedia),
+        (u'telephony3kHz', __ISDNConnection_highLayerCompatibility_telephony3kHz),
+        (u'telephony7kHz', __ISDNConnection_highLayerCompatibility_telephony7kHz),
+        (u'videotelephony', __ISDNConnection_highLayerCompatibility_videotelephony),
+        (u'videoconference', __ISDNConnection_highLayerCompatibility_videoconference),
+        (u'audiographic', __ISDNConnection_highLayerCompatibility_audiographic),
+        (u'audiovisual', __ISDNConnection_highLayerCompatibility_audiovisual),
+        (u'multimedia', __ISDNConnection_highLayerCompatibility_multimedia),
         ])
     _ISDNConnection_highLayerCompatibility._ext = []
     ISDNConnection._cont = ASN1Dict([
-        ('circuitTypes', _ISDNConnection_circuitTypes),
-        ('networkAddress', _ISDNConnection_networkAddress),
-        ('highLayerCompatibility', _ISDNConnection_highLayerCompatibility),
+        (u'circuitTypes', _ISDNConnection_circuitTypes),
+        (u'networkAddress', _ISDNConnection_networkAddress),
+        (u'highLayerCompatibility', _ISDNConnection_highLayerCompatibility),
         ])
     ISDNConnection._ext = []
     
     #-----< CSDNConnection >-----#
-    CSDNConnection = SEQ(name='CSDNConnection', mode=MODE_TYPE)
-    _CSDNConnection_circuitTypes = SET_OF(name='circuitTypes', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    CSDNConnection = SEQ(name=u'CSDNConnection', mode=MODE_TYPE)
+    _CSDNConnection_circuitTypes = SET_OF(name=u'circuitTypes', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     __CSDNConnection_circuitTypes__item_ = CHOICE(name='_item_', mode=MODE_TYPE)
-    ___CSDNConnection_circuitTypes__item__digital_56k = NULL(name='digital-56k', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    ___CSDNConnection_circuitTypes__item__digital_64k = NULL(name='digital-64k', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    ___CSDNConnection_circuitTypes__item__digital_56k = NULL(name=u'digital-56k', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    ___CSDNConnection_circuitTypes__item__digital_64k = NULL(name=u'digital-64k', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     __CSDNConnection_circuitTypes__item_._cont = ASN1Dict([
-        ('digital-56k', ___CSDNConnection_circuitTypes__item__digital_56k),
-        ('digital-64k', ___CSDNConnection_circuitTypes__item__digital_64k),
+        (u'digital-56k', ___CSDNConnection_circuitTypes__item__digital_56k),
+        (u'digital-64k', ___CSDNConnection_circuitTypes__item__digital_64k),
         ])
     __CSDNConnection_circuitTypes__item_._ext = None
     _CSDNConnection_circuitTypes._cont = __CSDNConnection_circuitTypes__item_
-    _CSDNConnection_networkAddress = SEQ(name='networkAddress', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'ExtendedE164NetworkAddress')))
+    _CSDNConnection_networkAddress = SEQ(name=u'networkAddress', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'ExtendedE164NetworkAddress')))
     CSDNConnection._cont = ASN1Dict([
-        ('circuitTypes', _CSDNConnection_circuitTypes),
-        ('networkAddress', _CSDNConnection_networkAddress),
+        (u'circuitTypes', _CSDNConnection_circuitTypes),
+        (u'networkAddress', _CSDNConnection_networkAddress),
         ])
     CSDNConnection._ext = []
     
     #-----< PSDNConnection >-----#
-    PSDNConnection = SEQ(name='PSDNConnection', mode=MODE_TYPE)
-    _PSDNConnection_networkAddress = CHOICE(name='networkAddress', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
-    __PSDNConnection_networkAddress_extendedE164NetworkAddress = SEQ(name='extendedE164NetworkAddress', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'ExtendedE164NetworkAddress')))
-    __PSDNConnection_networkAddress_transportAddress = SEQ(name='transportAddress', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'TransportAddress')))
-    __PSDNConnection_networkAddress_nonStandard = SEQ(name='nonStandard', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'NonStandardParameter')))
+    PSDNConnection = SEQ(name=u'PSDNConnection', mode=MODE_TYPE)
+    _PSDNConnection_networkAddress = CHOICE(name=u'networkAddress', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
+    __PSDNConnection_networkAddress_extendedE164NetworkAddress = SEQ(name=u'extendedE164NetworkAddress', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'ExtendedE164NetworkAddress')))
+    __PSDNConnection_networkAddress_transportAddress = SEQ(name=u'transportAddress', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'TransportAddress')))
+    __PSDNConnection_networkAddress_nonStandard = SEQ(name=u'nonStandard', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'NonStandardParameter')))
     _PSDNConnection_networkAddress._cont = ASN1Dict([
-        ('extendedE164NetworkAddress', __PSDNConnection_networkAddress_extendedE164NetworkAddress),
-        ('transportAddress', __PSDNConnection_networkAddress_transportAddress),
-        ('nonStandard', __PSDNConnection_networkAddress_nonStandard),
+        (u'extendedE164NetworkAddress', __PSDNConnection_networkAddress_extendedE164NetworkAddress),
+        (u'transportAddress', __PSDNConnection_networkAddress_transportAddress),
+        (u'nonStandard', __PSDNConnection_networkAddress_nonStandard),
         ])
     _PSDNConnection_networkAddress._ext = None
     PSDNConnection._cont = ASN1Dict([
-        ('networkAddress', _PSDNConnection_networkAddress),
+        (u'networkAddress', _PSDNConnection_networkAddress),
         ])
     PSDNConnection._ext = []
     
     #-----< ATMConnection >-----#
-    ATMConnection = SEQ(name='ATMConnection', mode=MODE_TYPE)
-    _ATMConnection_networkAddress = CHOICE(name='networkAddress', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
-    __ATMConnection_networkAddress_extendedE164 = SEQ(name='extendedE164', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'ExtendedE164NetworkAddress')))
-    __ATMConnection_networkAddress_nsapAddress = SEQ(name='nsapAddress', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'TransportAddress')))
-    __ATMConnection_networkAddress_nonStandard = SEQ(name='nonStandard', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'NonStandardParameter')))
+    ATMConnection = SEQ(name=u'ATMConnection', mode=MODE_TYPE)
+    _ATMConnection_networkAddress = CHOICE(name=u'networkAddress', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
+    __ATMConnection_networkAddress_extendedE164 = SEQ(name=u'extendedE164', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'ExtendedE164NetworkAddress')))
+    __ATMConnection_networkAddress_nsapAddress = SEQ(name=u'nsapAddress', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'TransportAddress')))
+    __ATMConnection_networkAddress_nonStandard = SEQ(name=u'nonStandard', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'NonStandardParameter')))
     _ATMConnection_networkAddress._cont = ASN1Dict([
-        ('extendedE164', __ATMConnection_networkAddress_extendedE164),
-        ('nsapAddress', __ATMConnection_networkAddress_nsapAddress),
-        ('nonStandard', __ATMConnection_networkAddress_nonStandard),
+        (u'extendedE164', __ATMConnection_networkAddress_extendedE164),
+        (u'nsapAddress', __ATMConnection_networkAddress_nsapAddress),
+        (u'nonStandard', __ATMConnection_networkAddress_nonStandard),
         ])
     _ATMConnection_networkAddress._ext = None
-    _ATMConnection_maxTransferRate = INT(name='maxTransferRate', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _ATMConnection_maxTransferRate = INT(name=u'maxTransferRate', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     _ATMConnection_maxTransferRate._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=None)], ev=None, er=[])
     ATMConnection._cont = ASN1Dict([
-        ('networkAddress', _ATMConnection_networkAddress),
-        ('maxTransferRate', _ATMConnection_maxTransferRate),
+        (u'networkAddress', _ATMConnection_networkAddress),
+        (u'maxTransferRate', _ATMConnection_maxTransferRate),
         ])
     ATMConnection._ext = []
     
     #-----< NetworkConnection >-----#
-    NetworkConnection = CHOICE(name='NetworkConnection', mode=MODE_TYPE)
-    _NetworkConnection_gstnConnection = SEQ(name='gstnConnection', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'GSTNConnection')))
-    _NetworkConnection_isdnConnection = SEQ(name='isdnConnection', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'ISDNConnection')))
-    _NetworkConnection_csdnConnection = SEQ(name='csdnConnection', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'CSDNConnection')))
-    _NetworkConnection_psdnConnection = SEQ(name='psdnConnection', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'PSDNConnection')))
-    _NetworkConnection_atmConnection = SEQ(name='atmConnection', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'ATMConnection')))
-    _NetworkConnection_extendedE164NetworkAddress = SEQ(name='extendedE164NetworkAddress', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'ExtendedE164NetworkAddress')))
-    _NetworkConnection_transportAddress = SEQ(name='transportAddress', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'TransportAddress')))
-    _NetworkConnection_nonStandard = SEQ(name='nonStandard', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'NonStandardParameter')))
+    NetworkConnection = CHOICE(name=u'NetworkConnection', mode=MODE_TYPE)
+    _NetworkConnection_gstnConnection = SEQ(name=u'gstnConnection', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'GSTNConnection')))
+    _NetworkConnection_isdnConnection = SEQ(name=u'isdnConnection', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'ISDNConnection')))
+    _NetworkConnection_csdnConnection = SEQ(name=u'csdnConnection', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'CSDNConnection')))
+    _NetworkConnection_psdnConnection = SEQ(name=u'psdnConnection', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'PSDNConnection')))
+    _NetworkConnection_atmConnection = SEQ(name=u'atmConnection', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'ATMConnection')))
+    _NetworkConnection_extendedE164NetworkAddress = SEQ(name=u'extendedE164NetworkAddress', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'ExtendedE164NetworkAddress')))
+    _NetworkConnection_transportAddress = SEQ(name=u'transportAddress', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'TransportAddress')))
+    _NetworkConnection_nonStandard = SEQ(name=u'nonStandard', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'NonStandardParameter')))
     NetworkConnection._cont = ASN1Dict([
-        ('gstnConnection', _NetworkConnection_gstnConnection),
-        ('isdnConnection', _NetworkConnection_isdnConnection),
-        ('csdnConnection', _NetworkConnection_csdnConnection),
-        ('psdnConnection', _NetworkConnection_psdnConnection),
-        ('atmConnection', _NetworkConnection_atmConnection),
-        ('extendedE164NetworkAddress', _NetworkConnection_extendedE164NetworkAddress),
-        ('transportAddress', _NetworkConnection_transportAddress),
-        ('nonStandard', _NetworkConnection_nonStandard),
+        (u'gstnConnection', _NetworkConnection_gstnConnection),
+        (u'isdnConnection', _NetworkConnection_isdnConnection),
+        (u'csdnConnection', _NetworkConnection_csdnConnection),
+        (u'psdnConnection', _NetworkConnection_psdnConnection),
+        (u'atmConnection', _NetworkConnection_atmConnection),
+        (u'extendedE164NetworkAddress', _NetworkConnection_extendedE164NetworkAddress),
+        (u'transportAddress', _NetworkConnection_transportAddress),
+        (u'nonStandard', _NetworkConnection_nonStandard),
         ])
     NetworkConnection._ext = []
     
     #-----< NetworkAddressV2 >-----#
-    NetworkAddressV2 = SET_OF(name='NetworkAddressV2', mode=MODE_TYPE)
+    NetworkAddressV2 = SET_OF(name=u'NetworkAddressV2', mode=MODE_TYPE)
     _NetworkAddressV2__item_ = SEQ(name='_item_', mode=MODE_TYPE)
-    __NetworkAddressV2__item__networkConnection = CHOICE(name='networkConnection', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
-    ___NetworkAddressV2__item__networkConnection_singleConnection = CHOICE(name='singleConnection', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'NetworkConnection')))
-    ___NetworkAddressV2__item__networkConnection_aggregatedConnections = SEQ(name='aggregatedConnections', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    ____NetworkAddressV2__item__networkConnection_aggregatedConnections_connectionList = SET_OF(name='connectionList', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __NetworkAddressV2__item__networkConnection = CHOICE(name=u'networkConnection', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
+    ___NetworkAddressV2__item__networkConnection_singleConnection = CHOICE(name=u'singleConnection', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'NetworkConnection')))
+    ___NetworkAddressV2__item__networkConnection_aggregatedConnections = SEQ(name=u'aggregatedConnections', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    ____NetworkAddressV2__item__networkConnection_aggregatedConnections_connectionList = SET_OF(name=u'connectionList', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     _____NetworkAddressV2__item__networkConnection_aggregatedConnections_connectionList__item_ = CHOICE(name='_item_', mode=MODE_TYPE)
-    ______NetworkAddressV2__item__networkConnection_aggregatedConnections_connectionList__item__isdnConnection = SEQ(name='isdnConnection', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'ISDNConnection')))
-    ______NetworkAddressV2__item__networkConnection_aggregatedConnections_connectionList__item__csdnConnection = SEQ(name='csdnConnection', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'CSDNConnection')))
+    ______NetworkAddressV2__item__networkConnection_aggregatedConnections_connectionList__item__isdnConnection = SEQ(name=u'isdnConnection', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'ISDNConnection')))
+    ______NetworkAddressV2__item__networkConnection_aggregatedConnections_connectionList__item__csdnConnection = SEQ(name=u'csdnConnection', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'CSDNConnection')))
     _____NetworkAddressV2__item__networkConnection_aggregatedConnections_connectionList__item_._cont = ASN1Dict([
-        ('isdnConnection', ______NetworkAddressV2__item__networkConnection_aggregatedConnections_connectionList__item__isdnConnection),
-        ('csdnConnection', ______NetworkAddressV2__item__networkConnection_aggregatedConnections_connectionList__item__csdnConnection),
+        (u'isdnConnection', ______NetworkAddressV2__item__networkConnection_aggregatedConnections_connectionList__item__isdnConnection),
+        (u'csdnConnection', ______NetworkAddressV2__item__networkConnection_aggregatedConnections_connectionList__item__csdnConnection),
         ])
     _____NetworkAddressV2__item__networkConnection_aggregatedConnections_connectionList__item_._ext = []
     ____NetworkAddressV2__item__networkConnection_aggregatedConnections_connectionList._cont = _____NetworkAddressV2__item__networkConnection_aggregatedConnections_connectionList__item_
     ____NetworkAddressV2__item__networkConnection_aggregatedConnections_connectionList._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=30)], ev=None, er=[])
-    ____NetworkAddressV2__item__networkConnection_aggregatedConnections_aggregationMethods = SET_OF(name='aggregationMethods', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    ____NetworkAddressV2__item__networkConnection_aggregatedConnections_aggregationMethods = SET_OF(name=u'aggregationMethods', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     _____NetworkAddressV2__item__networkConnection_aggregatedConnections_aggregationMethods__item_ = CHOICE(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('GCC-PROTOCOL', 'ChannelAggregationMethod')))
     ____NetworkAddressV2__item__networkConnection_aggregatedConnections_aggregationMethods._cont = _____NetworkAddressV2__item__networkConnection_aggregatedConnections_aggregationMethods__item_
     ___NetworkAddressV2__item__networkConnection_aggregatedConnections._cont = ASN1Dict([
-        ('connectionList', ____NetworkAddressV2__item__networkConnection_aggregatedConnections_connectionList),
-        ('aggregationMethods', ____NetworkAddressV2__item__networkConnection_aggregatedConnections_aggregationMethods),
+        (u'connectionList', ____NetworkAddressV2__item__networkConnection_aggregatedConnections_connectionList),
+        (u'aggregationMethods', ____NetworkAddressV2__item__networkConnection_aggregatedConnections_aggregationMethods),
         ])
     ___NetworkAddressV2__item__networkConnection_aggregatedConnections._ext = []
     __NetworkAddressV2__item__networkConnection._cont = ASN1Dict([
-        ('singleConnection', ___NetworkAddressV2__item__networkConnection_singleConnection),
-        ('aggregatedConnections', ___NetworkAddressV2__item__networkConnection_aggregatedConnections),
+        (u'singleConnection', ___NetworkAddressV2__item__networkConnection_singleConnection),
+        (u'aggregatedConnections', ___NetworkAddressV2__item__networkConnection_aggregatedConnections),
         ])
     __NetworkAddressV2__item__networkConnection._ext = None
-    __NetworkAddressV2__item__profiles = SET_OF(name='profiles', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    __NetworkAddressV2__item__profiles = SET_OF(name=u'profiles', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     ___NetworkAddressV2__item__profiles__item_ = CHOICE(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('GCC-PROTOCOL', 'Profile')))
     __NetworkAddressV2__item__profiles._cont = ___NetworkAddressV2__item__profiles__item_
-    __NetworkAddressV2__item__mediaConcerned = SEQ(name='mediaConcerned', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'MediaList')), opt=True)
+    __NetworkAddressV2__item__mediaConcerned = SEQ(name=u'mediaConcerned', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'MediaList')), opt=True)
     _NetworkAddressV2__item_._cont = ASN1Dict([
-        ('networkConnection', __NetworkAddressV2__item__networkConnection),
-        ('profiles', __NetworkAddressV2__item__profiles),
-        ('mediaConcerned', __NetworkAddressV2__item__mediaConcerned),
+        (u'networkConnection', __NetworkAddressV2__item__networkConnection),
+        (u'profiles', __NetworkAddressV2__item__profiles),
+        (u'mediaConcerned', __NetworkAddressV2__item__mediaConcerned),
         ])
     _NetworkAddressV2__item_._ext = []
     NetworkAddressV2._cont = _NetworkAddressV2__item_
     
     #-----< NodeType >-----#
-    NodeType = ENUM(name='NodeType', mode=MODE_TYPE)
-    NodeType._cont = ASN1Dict([('terminal', 0), ('multiportTerminal', 1), ('mcu', 2)])
+    NodeType = ENUM(name=u'NodeType', mode=MODE_TYPE)
+    NodeType._cont = ASN1Dict([(u'terminal', 0), (u'multiportTerminal', 1), (u'mcu', 2)])
     NodeType._ext = []
     
     #-----< NodeProperties >-----#
-    NodeProperties = SEQ(name='NodeProperties', mode=MODE_TYPE)
-    _NodeProperties_managementDevice = BOOL(name='managementDevice', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _NodeProperties_peripheralDevice = BOOL(name='peripheralDevice', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    NodeProperties = SEQ(name=u'NodeProperties', mode=MODE_TYPE)
+    _NodeProperties_managementDevice = BOOL(name=u'managementDevice', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _NodeProperties_peripheralDevice = BOOL(name=u'peripheralDevice', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     NodeProperties._cont = ASN1Dict([
-        ('managementDevice', _NodeProperties_managementDevice),
-        ('peripheralDevice', _NodeProperties_peripheralDevice),
+        (u'managementDevice', _NodeProperties_managementDevice),
+        (u'peripheralDevice', _NodeProperties_peripheralDevice),
         ])
     NodeProperties._ext = []
     
     #-----< AsymmetryIndicator >-----#
-    AsymmetryIndicator = CHOICE(name='AsymmetryIndicator', mode=MODE_TYPE)
-    _AsymmetryIndicator_callingNode = NULL(name='callingNode', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _AsymmetryIndicator_calledNode = NULL(name='calledNode', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _AsymmetryIndicator_unknown = INT(name='unknown', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    AsymmetryIndicator = CHOICE(name=u'AsymmetryIndicator', mode=MODE_TYPE)
+    _AsymmetryIndicator_callingNode = NULL(name=u'callingNode', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _AsymmetryIndicator_calledNode = NULL(name=u'calledNode', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _AsymmetryIndicator_unknown = INT(name=u'unknown', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     _AsymmetryIndicator_unknown._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=4294967295)], ev=None, er=[])
     AsymmetryIndicator._cont = ASN1Dict([
-        ('callingNode', _AsymmetryIndicator_callingNode),
-        ('calledNode', _AsymmetryIndicator_calledNode),
-        ('unknown', _AsymmetryIndicator_unknown),
+        (u'callingNode', _AsymmetryIndicator_callingNode),
+        (u'calledNode', _AsymmetryIndicator_calledNode),
+        (u'unknown', _AsymmetryIndicator_unknown),
         ])
     AsymmetryIndicator._ext = None
     
     #-----< AlternativeNodeID >-----#
-    AlternativeNodeID = CHOICE(name='AlternativeNodeID', mode=MODE_TYPE)
-    _AlternativeNodeID_h243NodeID = OCT_STR(name='h243NodeID', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    AlternativeNodeID = CHOICE(name=u'AlternativeNodeID', mode=MODE_TYPE)
+    _AlternativeNodeID_h243NodeID = OCT_STR(name=u'h243NodeID', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     _AlternativeNodeID_h243NodeID._const_sz = ASN1Set(rv=[2], rr=[], ev=None, er=[])
     AlternativeNodeID._cont = ASN1Dict([
-        ('h243NodeID', _AlternativeNodeID_h243NodeID),
+        (u'h243NodeID', _AlternativeNodeID_h243NodeID),
         ])
     AlternativeNodeID._ext = []
     
     #-----< ConferenceDescriptor >-----#
-    ConferenceDescriptor = SEQ(name='ConferenceDescriptor', mode=MODE_TYPE)
-    _ConferenceDescriptor_conferenceName = SEQ(name='conferenceName', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'ConferenceName')))
-    _ConferenceDescriptor_conferenceNameModifier = STR_NUM(name='conferenceNameModifier', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'ConferenceNameModifier')), opt=True)
-    _ConferenceDescriptor_conferenceNameModifier._const_alpha = ASN1Set(rv=['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'], rr=[], ev=None, er=[])
-    _ConferenceDescriptor_conferenceDescription = STR_BMP(name='conferenceDescription', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'TextString')), opt=True)
-    _ConferenceDescriptor_lockedConference = BOOL(name='lockedConference', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _ConferenceDescriptor_passwordInTheClearRequired = BOOL(name='passwordInTheClearRequired', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _ConferenceDescriptor_networkAddress = SEQ_OF(name='networkAddress', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'NetworkAddress')), opt=True)
-    _ConferenceDescriptor_defaultConferenceFlag = BOOL(name='defaultConferenceFlag', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _ConferenceDescriptor_conferenceMode = CHOICE(name='conferenceMode', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'ConferenceMode')))
+    ConferenceDescriptor = SEQ(name=u'ConferenceDescriptor', mode=MODE_TYPE)
+    _ConferenceDescriptor_conferenceName = SEQ(name=u'conferenceName', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'ConferenceName')))
+    _ConferenceDescriptor_conferenceNameModifier = STR_NUM(name=u'conferenceNameModifier', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'ConferenceNameModifier')), opt=True)
+    _ConferenceDescriptor_conferenceNameModifier._const_alpha = ASN1Set(rv=[u'0', u'1', u'2', u'3', u'4', u'5', u'6', u'7', u'8', u'9'], rr=[], ev=None, er=[])
+    _ConferenceDescriptor_conferenceDescription = STR_BMP(name=u'conferenceDescription', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'TextString')), opt=True)
+    _ConferenceDescriptor_lockedConference = BOOL(name=u'lockedConference', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _ConferenceDescriptor_passwordInTheClearRequired = BOOL(name=u'passwordInTheClearRequired', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _ConferenceDescriptor_networkAddress = SEQ_OF(name=u'networkAddress', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'NetworkAddress')), opt=True)
+    _ConferenceDescriptor_defaultConferenceFlag = BOOL(name=u'defaultConferenceFlag', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _ConferenceDescriptor_conferenceMode = CHOICE(name=u'conferenceMode', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'ConferenceMode')))
     ConferenceDescriptor._cont = ASN1Dict([
-        ('conferenceName', _ConferenceDescriptor_conferenceName),
-        ('conferenceNameModifier', _ConferenceDescriptor_conferenceNameModifier),
-        ('conferenceDescription', _ConferenceDescriptor_conferenceDescription),
-        ('lockedConference', _ConferenceDescriptor_lockedConference),
-        ('passwordInTheClearRequired', _ConferenceDescriptor_passwordInTheClearRequired),
-        ('networkAddress', _ConferenceDescriptor_networkAddress),
-        ('defaultConferenceFlag', _ConferenceDescriptor_defaultConferenceFlag),
-        ('conferenceMode', _ConferenceDescriptor_conferenceMode),
+        (u'conferenceName', _ConferenceDescriptor_conferenceName),
+        (u'conferenceNameModifier', _ConferenceDescriptor_conferenceNameModifier),
+        (u'conferenceDescription', _ConferenceDescriptor_conferenceDescription),
+        (u'lockedConference', _ConferenceDescriptor_lockedConference),
+        (u'passwordInTheClearRequired', _ConferenceDescriptor_passwordInTheClearRequired),
+        (u'networkAddress', _ConferenceDescriptor_networkAddress),
+        (u'defaultConferenceFlag', _ConferenceDescriptor_defaultConferenceFlag),
+        (u'conferenceMode', _ConferenceDescriptor_conferenceMode),
         ])
-    ConferenceDescriptor._ext = ['defaultConferenceFlag', 'conferenceMode']
+    ConferenceDescriptor._ext = [u'defaultConferenceFlag', u'conferenceMode']
     
     #-----< NodeRecord >-----#
-    NodeRecord = SEQ(name='NodeRecord', mode=MODE_TYPE)
-    _NodeRecord_superiorNode = INT(name='superiorNode', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'UserID')), opt=True)
-    _NodeRecord_nodeType = ENUM(name='nodeType', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'NodeType')))
-    _NodeRecord_nodeProperties = SEQ(name='nodeProperties', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'NodeProperties')))
-    _NodeRecord_nodeName = STR_BMP(name='nodeName', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'TextString')), opt=True)
-    _NodeRecord_participantsList = SEQ_OF(name='participantsList', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    NodeRecord = SEQ(name=u'NodeRecord', mode=MODE_TYPE)
+    _NodeRecord_superiorNode = INT(name=u'superiorNode', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'UserID')), opt=True)
+    _NodeRecord_nodeType = ENUM(name=u'nodeType', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'NodeType')))
+    _NodeRecord_nodeProperties = SEQ(name=u'nodeProperties', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'NodeProperties')))
+    _NodeRecord_nodeName = STR_BMP(name=u'nodeName', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'TextString')), opt=True)
+    _NodeRecord_participantsList = SEQ_OF(name=u'participantsList', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     __NodeRecord_participantsList__item_ = STR_BMP(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('GCC-PROTOCOL', 'TextString')))
     _NodeRecord_participantsList._cont = __NodeRecord_participantsList__item_
-    _NodeRecord_siteInformation = STR_BMP(name='siteInformation', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'TextString')), opt=True)
-    _NodeRecord_networkAddress = SEQ_OF(name='networkAddress', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'NetworkAddress')), opt=True)
-    _NodeRecord_alternativeNodeID = CHOICE(name='alternativeNodeID', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'AlternativeNodeID')), opt=True)
-    _NodeRecord_userData = SET_OF(name='userData', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'UserData')), opt=True)
-    _NodeRecord_nodeCategory = CHOICE(name='nodeCategory', mode=MODE_TYPE, tag=(9, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'NodeCategory')), opt=True)
-    _NodeRecord_sessionID = INT(name='sessionID', mode=MODE_TYPE, tag=(10, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'ChannelID')), opt=True)
+    _NodeRecord_siteInformation = STR_BMP(name=u'siteInformation', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'TextString')), opt=True)
+    _NodeRecord_networkAddress = SEQ_OF(name=u'networkAddress', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'NetworkAddress')), opt=True)
+    _NodeRecord_alternativeNodeID = CHOICE(name=u'alternativeNodeID', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'AlternativeNodeID')), opt=True)
+    _NodeRecord_userData = SET_OF(name=u'userData', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'UserData')), opt=True)
+    _NodeRecord_nodeCategory = CHOICE(name=u'nodeCategory', mode=MODE_TYPE, tag=(9, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'NodeCategory')), opt=True)
+    _NodeRecord_sessionID = INT(name=u'sessionID', mode=MODE_TYPE, tag=(10, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'ChannelID')), opt=True)
     NodeRecord._cont = ASN1Dict([
-        ('superiorNode', _NodeRecord_superiorNode),
-        ('nodeType', _NodeRecord_nodeType),
-        ('nodeProperties', _NodeRecord_nodeProperties),
-        ('nodeName', _NodeRecord_nodeName),
-        ('participantsList', _NodeRecord_participantsList),
-        ('siteInformation', _NodeRecord_siteInformation),
-        ('networkAddress', _NodeRecord_networkAddress),
-        ('alternativeNodeID', _NodeRecord_alternativeNodeID),
-        ('userData', _NodeRecord_userData),
-        ('nodeCategory', _NodeRecord_nodeCategory),
-        ('sessionID', _NodeRecord_sessionID),
+        (u'superiorNode', _NodeRecord_superiorNode),
+        (u'nodeType', _NodeRecord_nodeType),
+        (u'nodeProperties', _NodeRecord_nodeProperties),
+        (u'nodeName', _NodeRecord_nodeName),
+        (u'participantsList', _NodeRecord_participantsList),
+        (u'siteInformation', _NodeRecord_siteInformation),
+        (u'networkAddress', _NodeRecord_networkAddress),
+        (u'alternativeNodeID', _NodeRecord_alternativeNodeID),
+        (u'userData', _NodeRecord_userData),
+        (u'nodeCategory', _NodeRecord_nodeCategory),
+        (u'sessionID', _NodeRecord_sessionID),
         ])
-    NodeRecord._ext = ['nodeCategory', 'sessionID']
+    NodeRecord._ext = [u'nodeCategory', u'sessionID']
     
     #-----< SessionKey >-----#
-    SessionKey = SEQ(name='SessionKey', mode=MODE_TYPE)
-    _SessionKey_applicationProtocolKey = CHOICE(name='applicationProtocolKey', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'Key')))
-    _SessionKey_sessionID = INT(name='sessionID', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'ChannelID')), opt=True)
+    SessionKey = SEQ(name=u'SessionKey', mode=MODE_TYPE)
+    _SessionKey_applicationProtocolKey = CHOICE(name=u'applicationProtocolKey', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'Key')))
+    _SessionKey_sessionID = INT(name=u'sessionID', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'ChannelID')), opt=True)
     SessionKey._cont = ASN1Dict([
-        ('applicationProtocolKey', _SessionKey_applicationProtocolKey),
-        ('sessionID', _SessionKey_sessionID),
+        (u'applicationProtocolKey', _SessionKey_applicationProtocolKey),
+        (u'sessionID', _SessionKey_sessionID),
         ])
     SessionKey._ext = None
     
     #-----< ChannelType >-----#
-    ChannelType = ENUM(name='ChannelType', mode=MODE_TYPE)
-    ChannelType._cont = ASN1Dict([('static', 0), ('dynamicMulticast', 1), ('dynamicPrivate', 2), ('dynamicUserId', 3)])
+    ChannelType = ENUM(name=u'ChannelType', mode=MODE_TYPE)
+    ChannelType._cont = ASN1Dict([(u'static', 0), (u'dynamicMulticast', 1), (u'dynamicPrivate', 2), (u'dynamicUserId', 3)])
     ChannelType._ext = None
     
     #-----< ApplicationRecord >-----#
-    ApplicationRecord = SEQ(name='ApplicationRecord', mode=MODE_TYPE)
-    _ApplicationRecord_applicationActive = BOOL(name='applicationActive', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _ApplicationRecord_conductingOperationCapable = BOOL(name='conductingOperationCapable', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _ApplicationRecord_startupChannel = ENUM(name='startupChannel', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'ChannelType')), opt=True)
-    _ApplicationRecord_applicationUserID = INT(name='applicationUserID', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'UserID')), opt=True)
-    _ApplicationRecord_nonCollapsingCapabilities = SET_OF(name='nonCollapsingCapabilities', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    ApplicationRecord = SEQ(name=u'ApplicationRecord', mode=MODE_TYPE)
+    _ApplicationRecord_applicationActive = BOOL(name=u'applicationActive', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _ApplicationRecord_conductingOperationCapable = BOOL(name=u'conductingOperationCapable', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _ApplicationRecord_startupChannel = ENUM(name=u'startupChannel', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'ChannelType')), opt=True)
+    _ApplicationRecord_applicationUserID = INT(name=u'applicationUserID', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'UserID')), opt=True)
+    _ApplicationRecord_nonCollapsingCapabilities = SET_OF(name=u'nonCollapsingCapabilities', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     __ApplicationRecord_nonCollapsingCapabilities__item_ = SEQ(name='_item_', mode=MODE_TYPE)
-    ___ApplicationRecord_nonCollapsingCapabilities__item__capabilityID = CHOICE(name='capabilityID', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'CapabilityID')))
-    ___ApplicationRecord_nonCollapsingCapabilities__item__applicationData = OCT_STR(name='applicationData', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    ___ApplicationRecord_nonCollapsingCapabilities__item__capabilityID = CHOICE(name=u'capabilityID', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'CapabilityID')))
+    ___ApplicationRecord_nonCollapsingCapabilities__item__applicationData = OCT_STR(name=u'applicationData', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     __ApplicationRecord_nonCollapsingCapabilities__item_._cont = ASN1Dict([
-        ('capabilityID', ___ApplicationRecord_nonCollapsingCapabilities__item__capabilityID),
-        ('applicationData', ___ApplicationRecord_nonCollapsingCapabilities__item__applicationData),
+        (u'capabilityID', ___ApplicationRecord_nonCollapsingCapabilities__item__capabilityID),
+        (u'applicationData', ___ApplicationRecord_nonCollapsingCapabilities__item__applicationData),
         ])
     __ApplicationRecord_nonCollapsingCapabilities__item_._ext = None
     _ApplicationRecord_nonCollapsingCapabilities._cont = __ApplicationRecord_nonCollapsingCapabilities__item_
     ApplicationRecord._cont = ASN1Dict([
-        ('applicationActive', _ApplicationRecord_applicationActive),
-        ('conductingOperationCapable', _ApplicationRecord_conductingOperationCapable),
-        ('startupChannel', _ApplicationRecord_startupChannel),
-        ('applicationUserID', _ApplicationRecord_applicationUserID),
-        ('nonCollapsingCapabilities', _ApplicationRecord_nonCollapsingCapabilities),
+        (u'applicationActive', _ApplicationRecord_applicationActive),
+        (u'conductingOperationCapable', _ApplicationRecord_conductingOperationCapable),
+        (u'startupChannel', _ApplicationRecord_startupChannel),
+        (u'applicationUserID', _ApplicationRecord_applicationUserID),
+        (u'nonCollapsingCapabilities', _ApplicationRecord_nonCollapsingCapabilities),
         ])
     ApplicationRecord._ext = []
     
     #-----< CapabilityID >-----#
-    CapabilityID = CHOICE(name='CapabilityID', mode=MODE_TYPE)
-    _CapabilityID_standard = INT(name='standard', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    CapabilityID = CHOICE(name=u'CapabilityID', mode=MODE_TYPE)
+    _CapabilityID_standard = INT(name=u'standard', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     _CapabilityID_standard._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=65535)], ev=None, er=[])
-    _CapabilityID_nonStandard = CHOICE(name='nonStandard', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'Key')))
+    _CapabilityID_nonStandard = CHOICE(name=u'nonStandard', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'Key')))
     CapabilityID._cont = ASN1Dict([
-        ('standard', _CapabilityID_standard),
-        ('nonStandard', _CapabilityID_nonStandard),
+        (u'standard', _CapabilityID_standard),
+        (u'nonStandard', _CapabilityID_nonStandard),
         ])
     CapabilityID._ext = None
     
     #-----< CapabilityClass >-----#
-    CapabilityClass = CHOICE(name='CapabilityClass', mode=MODE_TYPE)
-    _CapabilityClass_logical = NULL(name='logical', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _CapabilityClass_unsignedMin = INT(name='unsignedMin', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    CapabilityClass = CHOICE(name=u'CapabilityClass', mode=MODE_TYPE)
+    _CapabilityClass_logical = NULL(name=u'logical', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _CapabilityClass_unsignedMin = INT(name=u'unsignedMin', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     _CapabilityClass_unsignedMin._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=None)], ev=None, er=[])
-    _CapabilityClass_unsignedMax = INT(name='unsignedMax', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _CapabilityClass_unsignedMax = INT(name=u'unsignedMax', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     _CapabilityClass_unsignedMax._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=None)], ev=None, er=[])
     CapabilityClass._cont = ASN1Dict([
-        ('logical', _CapabilityClass_logical),
-        ('unsignedMin', _CapabilityClass_unsignedMin),
-        ('unsignedMax', _CapabilityClass_unsignedMax),
+        (u'logical', _CapabilityClass_logical),
+        (u'unsignedMin', _CapabilityClass_unsignedMin),
+        (u'unsignedMax', _CapabilityClass_unsignedMax),
         ])
     CapabilityClass._ext = []
     
     #-----< EntityID >-----#
-    EntityID = INT(name='EntityID', mode=MODE_TYPE)
+    EntityID = INT(name=u'EntityID', mode=MODE_TYPE)
     EntityID._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=65535)], ev=None, er=[])
     
     #-----< ApplicationInvokeSpecifier >-----#
-    ApplicationInvokeSpecifier = SEQ(name='ApplicationInvokeSpecifier', mode=MODE_TYPE)
-    _ApplicationInvokeSpecifier_sessionKey = SEQ(name='sessionKey', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'SessionKey')))
-    _ApplicationInvokeSpecifier_expectedCapabilitySet = SET_OF(name='expectedCapabilitySet', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    ApplicationInvokeSpecifier = SEQ(name=u'ApplicationInvokeSpecifier', mode=MODE_TYPE)
+    _ApplicationInvokeSpecifier_sessionKey = SEQ(name=u'sessionKey', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'SessionKey')))
+    _ApplicationInvokeSpecifier_expectedCapabilitySet = SET_OF(name=u'expectedCapabilitySet', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     __ApplicationInvokeSpecifier_expectedCapabilitySet__item_ = SEQ(name='_item_', mode=MODE_TYPE)
-    ___ApplicationInvokeSpecifier_expectedCapabilitySet__item__capabilityID = CHOICE(name='capabilityID', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'CapabilityID')))
-    ___ApplicationInvokeSpecifier_expectedCapabilitySet__item__capabilityClass = CHOICE(name='capabilityClass', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'CapabilityClass')))
+    ___ApplicationInvokeSpecifier_expectedCapabilitySet__item__capabilityID = CHOICE(name=u'capabilityID', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'CapabilityID')))
+    ___ApplicationInvokeSpecifier_expectedCapabilitySet__item__capabilityClass = CHOICE(name=u'capabilityClass', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'CapabilityClass')))
     __ApplicationInvokeSpecifier_expectedCapabilitySet__item_._cont = ASN1Dict([
-        ('capabilityID', ___ApplicationInvokeSpecifier_expectedCapabilitySet__item__capabilityID),
-        ('capabilityClass', ___ApplicationInvokeSpecifier_expectedCapabilitySet__item__capabilityClass),
+        (u'capabilityID', ___ApplicationInvokeSpecifier_expectedCapabilitySet__item__capabilityID),
+        (u'capabilityClass', ___ApplicationInvokeSpecifier_expectedCapabilitySet__item__capabilityClass),
         ])
     __ApplicationInvokeSpecifier_expectedCapabilitySet__item_._ext = []
     _ApplicationInvokeSpecifier_expectedCapabilitySet._cont = __ApplicationInvokeSpecifier_expectedCapabilitySet__item_
-    _ApplicationInvokeSpecifier_startupChannel = ENUM(name='startupChannel', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'ChannelType')), opt=True)
-    _ApplicationInvokeSpecifier_mandatoryFlag = BOOL(name='mandatoryFlag', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _ApplicationInvokeSpecifier_startupChannel = ENUM(name=u'startupChannel', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'ChannelType')), opt=True)
+    _ApplicationInvokeSpecifier_mandatoryFlag = BOOL(name=u'mandatoryFlag', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     ApplicationInvokeSpecifier._cont = ASN1Dict([
-        ('sessionKey', _ApplicationInvokeSpecifier_sessionKey),
-        ('expectedCapabilitySet', _ApplicationInvokeSpecifier_expectedCapabilitySet),
-        ('startupChannel', _ApplicationInvokeSpecifier_startupChannel),
-        ('mandatoryFlag', _ApplicationInvokeSpecifier_mandatoryFlag),
+        (u'sessionKey', _ApplicationInvokeSpecifier_sessionKey),
+        (u'expectedCapabilitySet', _ApplicationInvokeSpecifier_expectedCapabilitySet),
+        (u'startupChannel', _ApplicationInvokeSpecifier_startupChannel),
+        (u'mandatoryFlag', _ApplicationInvokeSpecifier_mandatoryFlag),
         ])
     ApplicationInvokeSpecifier._ext = []
     
     #-----< RegistryKey >-----#
-    RegistryKey = SEQ(name='RegistryKey', mode=MODE_TYPE)
-    _RegistryKey_sessionKey = SEQ(name='sessionKey', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'SessionKey')))
-    _RegistryKey_resourceID = OCT_STR(name='resourceID', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    RegistryKey = SEQ(name=u'RegistryKey', mode=MODE_TYPE)
+    _RegistryKey_sessionKey = SEQ(name=u'sessionKey', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'SessionKey')))
+    _RegistryKey_resourceID = OCT_STR(name=u'resourceID', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     _RegistryKey_resourceID._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=64)], ev=None, er=[])
     RegistryKey._cont = ASN1Dict([
-        ('sessionKey', _RegistryKey_sessionKey),
-        ('resourceID', _RegistryKey_resourceID),
+        (u'sessionKey', _RegistryKey_sessionKey),
+        (u'resourceID', _RegistryKey_resourceID),
         ])
     RegistryKey._ext = None
     
     #-----< RegistryItem >-----#
-    RegistryItem = CHOICE(name='RegistryItem', mode=MODE_TYPE)
-    _RegistryItem_channelID = INT(name='channelID', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'DynamicChannelID')))
-    _RegistryItem_tokenID = INT(name='tokenID', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'DynamicTokenID')))
-    _RegistryItem_parameter = OCT_STR(name='parameter', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    RegistryItem = CHOICE(name=u'RegistryItem', mode=MODE_TYPE)
+    _RegistryItem_channelID = INT(name=u'channelID', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'DynamicChannelID')))
+    _RegistryItem_tokenID = INT(name=u'tokenID', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'DynamicTokenID')))
+    _RegistryItem_parameter = OCT_STR(name=u'parameter', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     _RegistryItem_parameter._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=64)], ev=None, er=[])
-    _RegistryItem_vacant = NULL(name='vacant', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _RegistryItem_vacant = NULL(name=u'vacant', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     RegistryItem._cont = ASN1Dict([
-        ('channelID', _RegistryItem_channelID),
-        ('tokenID', _RegistryItem_tokenID),
-        ('parameter', _RegistryItem_parameter),
-        ('vacant', _RegistryItem_vacant),
+        (u'channelID', _RegistryItem_channelID),
+        (u'tokenID', _RegistryItem_tokenID),
+        (u'parameter', _RegistryItem_parameter),
+        (u'vacant', _RegistryItem_vacant),
         ])
     RegistryItem._ext = []
     
     #-----< RegistryEntryOwner >-----#
-    RegistryEntryOwner = CHOICE(name='RegistryEntryOwner', mode=MODE_TYPE)
-    _RegistryEntryOwner_owned = SEQ(name='owned', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    __RegistryEntryOwner_owned_nodeID = INT(name='nodeID', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'UserID')))
-    __RegistryEntryOwner_owned_entityID = INT(name='entityID', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'EntityID')))
+    RegistryEntryOwner = CHOICE(name=u'RegistryEntryOwner', mode=MODE_TYPE)
+    _RegistryEntryOwner_owned = SEQ(name=u'owned', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __RegistryEntryOwner_owned_nodeID = INT(name=u'nodeID', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'UserID')))
+    __RegistryEntryOwner_owned_entityID = INT(name=u'entityID', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'EntityID')))
     _RegistryEntryOwner_owned._cont = ASN1Dict([
-        ('nodeID', __RegistryEntryOwner_owned_nodeID),
-        ('entityID', __RegistryEntryOwner_owned_entityID),
+        (u'nodeID', __RegistryEntryOwner_owned_nodeID),
+        (u'entityID', __RegistryEntryOwner_owned_entityID),
         ])
     _RegistryEntryOwner_owned._ext = None
-    _RegistryEntryOwner_notOwned = NULL(name='notOwned', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _RegistryEntryOwner_notOwned = NULL(name=u'notOwned', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     RegistryEntryOwner._cont = ASN1Dict([
-        ('owned', _RegistryEntryOwner_owned),
-        ('notOwned', _RegistryEntryOwner_notOwned),
+        (u'owned', _RegistryEntryOwner_owned),
+        (u'notOwned', _RegistryEntryOwner_notOwned),
         ])
     RegistryEntryOwner._ext = None
     
     #-----< RegistryModificationRights >-----#
-    RegistryModificationRights = ENUM(name='RegistryModificationRights', mode=MODE_TYPE)
-    RegistryModificationRights._cont = ASN1Dict([('owner', 0), ('session', 1), ('public', 2)])
+    RegistryModificationRights = ENUM(name=u'RegistryModificationRights', mode=MODE_TYPE)
+    RegistryModificationRights._cont = ASN1Dict([(u'owner', 0), (u'session', 1), (u'public', 2)])
     RegistryModificationRights._ext = None
     
     #-----< UserIDIndication >-----#
-    UserIDIndication = SEQ(name='UserIDIndication', mode=MODE_TYPE)
-    _UserIDIndication_tag = INT(name='tag', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    UserIDIndication = SEQ(name=u'UserIDIndication', mode=MODE_TYPE)
+    _UserIDIndication_tag = INT(name=u'tag', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     UserIDIndication._cont = ASN1Dict([
-        ('tag', _UserIDIndication_tag),
+        (u'tag', _UserIDIndication_tag),
         ])
     UserIDIndication._ext = []
     
     #-----< ConferenceCreateRequest >-----#
-    ConferenceCreateRequest = SEQ(name='ConferenceCreateRequest', mode=MODE_TYPE)
-    _ConferenceCreateRequest_conferenceName = SEQ(name='conferenceName', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'ConferenceName')))
-    _ConferenceCreateRequest_convenerPassword = SEQ(name='convenerPassword', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'Password')), opt=True)
-    _ConferenceCreateRequest_password = SEQ(name='password', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'Password')), opt=True)
-    _ConferenceCreateRequest_lockedConference = BOOL(name='lockedConference', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _ConferenceCreateRequest_listedConference = BOOL(name='listedConference', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _ConferenceCreateRequest_conductibleConference = BOOL(name='conductibleConference', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _ConferenceCreateRequest_terminationMethod = ENUM(name='terminationMethod', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'TerminationMethod')))
-    _ConferenceCreateRequest_conductorPrivileges = SET_OF(name='conductorPrivileges', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    ConferenceCreateRequest = SEQ(name=u'ConferenceCreateRequest', mode=MODE_TYPE)
+    _ConferenceCreateRequest_conferenceName = SEQ(name=u'conferenceName', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'ConferenceName')))
+    _ConferenceCreateRequest_convenerPassword = SEQ(name=u'convenerPassword', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'Password')), opt=True)
+    _ConferenceCreateRequest_password = SEQ(name=u'password', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'Password')), opt=True)
+    _ConferenceCreateRequest_lockedConference = BOOL(name=u'lockedConference', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _ConferenceCreateRequest_listedConference = BOOL(name=u'listedConference', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _ConferenceCreateRequest_conductibleConference = BOOL(name=u'conductibleConference', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _ConferenceCreateRequest_terminationMethod = ENUM(name=u'terminationMethod', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'TerminationMethod')))
+    _ConferenceCreateRequest_conductorPrivileges = SET_OF(name=u'conductorPrivileges', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     __ConferenceCreateRequest_conductorPrivileges__item_ = ENUM(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('GCC-PROTOCOL', 'Privilege')))
     _ConferenceCreateRequest_conductorPrivileges._cont = __ConferenceCreateRequest_conductorPrivileges__item_
-    _ConferenceCreateRequest_conductedPrivileges = SET_OF(name='conductedPrivileges', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _ConferenceCreateRequest_conductedPrivileges = SET_OF(name=u'conductedPrivileges', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     __ConferenceCreateRequest_conductedPrivileges__item_ = ENUM(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('GCC-PROTOCOL', 'Privilege')))
     _ConferenceCreateRequest_conductedPrivileges._cont = __ConferenceCreateRequest_conductedPrivileges__item_
-    _ConferenceCreateRequest_nonConductedPrivileges = SET_OF(name='nonConductedPrivileges', mode=MODE_TYPE, tag=(9, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _ConferenceCreateRequest_nonConductedPrivileges = SET_OF(name=u'nonConductedPrivileges', mode=MODE_TYPE, tag=(9, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     __ConferenceCreateRequest_nonConductedPrivileges__item_ = ENUM(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('GCC-PROTOCOL', 'Privilege')))
     _ConferenceCreateRequest_nonConductedPrivileges._cont = __ConferenceCreateRequest_nonConductedPrivileges__item_
-    _ConferenceCreateRequest_conferenceDescription = STR_BMP(name='conferenceDescription', mode=MODE_TYPE, tag=(10, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'TextString')), opt=True)
-    _ConferenceCreateRequest_callerIdentifier = STR_BMP(name='callerIdentifier', mode=MODE_TYPE, tag=(11, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'TextString')), opt=True)
-    _ConferenceCreateRequest_userData = SET_OF(name='userData', mode=MODE_TYPE, tag=(12, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'UserData')), opt=True)
-    _ConferenceCreateRequest_conferencePriority = SEQ(name='conferencePriority', mode=MODE_TYPE, tag=(13, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'ConferencePriority')), opt=True)
-    _ConferenceCreateRequest_conferenceMode = CHOICE(name='conferenceMode', mode=MODE_TYPE, tag=(14, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'ConferenceMode')), opt=True)
+    _ConferenceCreateRequest_conferenceDescription = STR_BMP(name=u'conferenceDescription', mode=MODE_TYPE, tag=(10, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'TextString')), opt=True)
+    _ConferenceCreateRequest_callerIdentifier = STR_BMP(name=u'callerIdentifier', mode=MODE_TYPE, tag=(11, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'TextString')), opt=True)
+    _ConferenceCreateRequest_userData = SET_OF(name=u'userData', mode=MODE_TYPE, tag=(12, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'UserData')), opt=True)
+    _ConferenceCreateRequest_conferencePriority = SEQ(name=u'conferencePriority', mode=MODE_TYPE, tag=(13, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'ConferencePriority')), opt=True)
+    _ConferenceCreateRequest_conferenceMode = CHOICE(name=u'conferenceMode', mode=MODE_TYPE, tag=(14, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'ConferenceMode')), opt=True)
     ConferenceCreateRequest._cont = ASN1Dict([
-        ('conferenceName', _ConferenceCreateRequest_conferenceName),
-        ('convenerPassword', _ConferenceCreateRequest_convenerPassword),
-        ('password', _ConferenceCreateRequest_password),
-        ('lockedConference', _ConferenceCreateRequest_lockedConference),
-        ('listedConference', _ConferenceCreateRequest_listedConference),
-        ('conductibleConference', _ConferenceCreateRequest_conductibleConference),
-        ('terminationMethod', _ConferenceCreateRequest_terminationMethod),
-        ('conductorPrivileges', _ConferenceCreateRequest_conductorPrivileges),
-        ('conductedPrivileges', _ConferenceCreateRequest_conductedPrivileges),
-        ('nonConductedPrivileges', _ConferenceCreateRequest_nonConductedPrivileges),
-        ('conferenceDescription', _ConferenceCreateRequest_conferenceDescription),
-        ('callerIdentifier', _ConferenceCreateRequest_callerIdentifier),
-        ('userData', _ConferenceCreateRequest_userData),
-        ('conferencePriority', _ConferenceCreateRequest_conferencePriority),
-        ('conferenceMode', _ConferenceCreateRequest_conferenceMode),
+        (u'conferenceName', _ConferenceCreateRequest_conferenceName),
+        (u'convenerPassword', _ConferenceCreateRequest_convenerPassword),
+        (u'password', _ConferenceCreateRequest_password),
+        (u'lockedConference', _ConferenceCreateRequest_lockedConference),
+        (u'listedConference', _ConferenceCreateRequest_listedConference),
+        (u'conductibleConference', _ConferenceCreateRequest_conductibleConference),
+        (u'terminationMethod', _ConferenceCreateRequest_terminationMethod),
+        (u'conductorPrivileges', _ConferenceCreateRequest_conductorPrivileges),
+        (u'conductedPrivileges', _ConferenceCreateRequest_conductedPrivileges),
+        (u'nonConductedPrivileges', _ConferenceCreateRequest_nonConductedPrivileges),
+        (u'conferenceDescription', _ConferenceCreateRequest_conferenceDescription),
+        (u'callerIdentifier', _ConferenceCreateRequest_callerIdentifier),
+        (u'userData', _ConferenceCreateRequest_userData),
+        (u'conferencePriority', _ConferenceCreateRequest_conferencePriority),
+        (u'conferenceMode', _ConferenceCreateRequest_conferenceMode),
         ])
-    ConferenceCreateRequest._ext = ['conferencePriority', 'conferenceMode']
+    ConferenceCreateRequest._ext = [u'conferencePriority', u'conferenceMode']
     
     #-----< ConferenceCreateResponse >-----#
-    ConferenceCreateResponse = SEQ(name='ConferenceCreateResponse', mode=MODE_TYPE)
-    _ConferenceCreateResponse_nodeID = INT(name='nodeID', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'UserID')))
-    _ConferenceCreateResponse_tag = INT(name='tag', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _ConferenceCreateResponse_result = ENUM(name='result', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _ConferenceCreateResponse_result._cont = ASN1Dict([('success', 0), ('userRejected', 1), ('resourcesNotAvailable', 2), ('rejectedForSymmetryBreaking', 3), ('lockedConferenceNotSupported', 4)])
+    ConferenceCreateResponse = SEQ(name=u'ConferenceCreateResponse', mode=MODE_TYPE)
+    _ConferenceCreateResponse_nodeID = INT(name=u'nodeID', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'UserID')))
+    _ConferenceCreateResponse_tag = INT(name=u'tag', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _ConferenceCreateResponse_result = ENUM(name=u'result', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _ConferenceCreateResponse_result._cont = ASN1Dict([(u'success', 0), (u'userRejected', 1), (u'resourcesNotAvailable', 2), (u'rejectedForSymmetryBreaking', 3), (u'lockedConferenceNotSupported', 4)])
     _ConferenceCreateResponse_result._ext = []
-    _ConferenceCreateResponse_userData = SET_OF(name='userData', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'UserData')), opt=True)
+    _ConferenceCreateResponse_userData = SET_OF(name=u'userData', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'UserData')), opt=True)
     ConferenceCreateResponse._cont = ASN1Dict([
-        ('nodeID', _ConferenceCreateResponse_nodeID),
-        ('tag', _ConferenceCreateResponse_tag),
-        ('result', _ConferenceCreateResponse_result),
-        ('userData', _ConferenceCreateResponse_userData),
+        (u'nodeID', _ConferenceCreateResponse_nodeID),
+        (u'tag', _ConferenceCreateResponse_tag),
+        (u'result', _ConferenceCreateResponse_result),
+        (u'userData', _ConferenceCreateResponse_userData),
         ])
     ConferenceCreateResponse._ext = []
     
     #-----< ConferenceQueryRequest >-----#
-    ConferenceQueryRequest = SEQ(name='ConferenceQueryRequest', mode=MODE_TYPE)
-    _ConferenceQueryRequest_nodeType = ENUM(name='nodeType', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'NodeType')))
-    _ConferenceQueryRequest_asymmetryIndicator = CHOICE(name='asymmetryIndicator', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'AsymmetryIndicator')), opt=True)
-    _ConferenceQueryRequest_userData = SET_OF(name='userData', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'UserData')), opt=True)
+    ConferenceQueryRequest = SEQ(name=u'ConferenceQueryRequest', mode=MODE_TYPE)
+    _ConferenceQueryRequest_nodeType = ENUM(name=u'nodeType', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'NodeType')))
+    _ConferenceQueryRequest_asymmetryIndicator = CHOICE(name=u'asymmetryIndicator', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'AsymmetryIndicator')), opt=True)
+    _ConferenceQueryRequest_userData = SET_OF(name=u'userData', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'UserData')), opt=True)
     ConferenceQueryRequest._cont = ASN1Dict([
-        ('nodeType', _ConferenceQueryRequest_nodeType),
-        ('asymmetryIndicator', _ConferenceQueryRequest_asymmetryIndicator),
-        ('userData', _ConferenceQueryRequest_userData),
+        (u'nodeType', _ConferenceQueryRequest_nodeType),
+        (u'asymmetryIndicator', _ConferenceQueryRequest_asymmetryIndicator),
+        (u'userData', _ConferenceQueryRequest_userData),
         ])
     ConferenceQueryRequest._ext = []
     
     #-----< ConferenceQueryResponse >-----#
-    ConferenceQueryResponse = SEQ(name='ConferenceQueryResponse', mode=MODE_TYPE)
-    _ConferenceQueryResponse_nodeType = ENUM(name='nodeType', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'NodeType')))
-    _ConferenceQueryResponse_asymmetryIndicator = CHOICE(name='asymmetryIndicator', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'AsymmetryIndicator')), opt=True)
-    _ConferenceQueryResponse_conferenceList = SET_OF(name='conferenceList', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    ConferenceQueryResponse = SEQ(name=u'ConferenceQueryResponse', mode=MODE_TYPE)
+    _ConferenceQueryResponse_nodeType = ENUM(name=u'nodeType', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'NodeType')))
+    _ConferenceQueryResponse_asymmetryIndicator = CHOICE(name=u'asymmetryIndicator', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'AsymmetryIndicator')), opt=True)
+    _ConferenceQueryResponse_conferenceList = SET_OF(name=u'conferenceList', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     __ConferenceQueryResponse_conferenceList__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('GCC-PROTOCOL', 'ConferenceDescriptor')))
     _ConferenceQueryResponse_conferenceList._cont = __ConferenceQueryResponse_conferenceList__item_
-    _ConferenceQueryResponse_result = ENUM(name='result', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _ConferenceQueryResponse_result._cont = ASN1Dict([('success', 0), ('userRejected', 1)])
+    _ConferenceQueryResponse_result = ENUM(name=u'result', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _ConferenceQueryResponse_result._cont = ASN1Dict([(u'success', 0), (u'userRejected', 1)])
     _ConferenceQueryResponse_result._ext = []
-    _ConferenceQueryResponse_userData = SET_OF(name='userData', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'UserData')), opt=True)
-    _ConferenceQueryResponse_waitForInvitationFlag = BOOL(name='waitForInvitationFlag', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _ConferenceQueryResponse_noUnlistedConferenceFlag = BOOL(name='noUnlistedConferenceFlag', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _ConferenceQueryResponse_userData = SET_OF(name=u'userData', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'UserData')), opt=True)
+    _ConferenceQueryResponse_waitForInvitationFlag = BOOL(name=u'waitForInvitationFlag', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _ConferenceQueryResponse_noUnlistedConferenceFlag = BOOL(name=u'noUnlistedConferenceFlag', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     ConferenceQueryResponse._cont = ASN1Dict([
-        ('nodeType', _ConferenceQueryResponse_nodeType),
-        ('asymmetryIndicator', _ConferenceQueryResponse_asymmetryIndicator),
-        ('conferenceList', _ConferenceQueryResponse_conferenceList),
-        ('result', _ConferenceQueryResponse_result),
-        ('userData', _ConferenceQueryResponse_userData),
-        ('waitForInvitationFlag', _ConferenceQueryResponse_waitForInvitationFlag),
-        ('noUnlistedConferenceFlag', _ConferenceQueryResponse_noUnlistedConferenceFlag),
+        (u'nodeType', _ConferenceQueryResponse_nodeType),
+        (u'asymmetryIndicator', _ConferenceQueryResponse_asymmetryIndicator),
+        (u'conferenceList', _ConferenceQueryResponse_conferenceList),
+        (u'result', _ConferenceQueryResponse_result),
+        (u'userData', _ConferenceQueryResponse_userData),
+        (u'waitForInvitationFlag', _ConferenceQueryResponse_waitForInvitationFlag),
+        (u'noUnlistedConferenceFlag', _ConferenceQueryResponse_noUnlistedConferenceFlag),
         ])
-    ConferenceQueryResponse._ext = ['waitForInvitationFlag', 'noUnlistedConferenceFlag']
+    ConferenceQueryResponse._ext = [u'waitForInvitationFlag', u'noUnlistedConferenceFlag']
     
     #-----< ConferenceJoinRequest >-----#
-    ConferenceJoinRequest = SEQ(name='ConferenceJoinRequest', mode=MODE_TYPE)
-    _ConferenceJoinRequest_conferenceName = CHOICE(name='conferenceName', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'ConferenceNameSelector')), opt=True)
-    _ConferenceJoinRequest_conferenceNameModifier = STR_NUM(name='conferenceNameModifier', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'ConferenceNameModifier')), opt=True)
-    _ConferenceJoinRequest_conferenceNameModifier._const_alpha = ASN1Set(rv=['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'], rr=[], ev=None, er=[])
-    _ConferenceJoinRequest_tag = INT(name='tag', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _ConferenceJoinRequest_password = CHOICE(name='password', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'PasswordChallengeRequestResponse')), opt=True)
-    _ConferenceJoinRequest_convenerPassword = CHOICE(name='convenerPassword', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'PasswordSelector')), opt=True)
-    _ConferenceJoinRequest_callerIdentifier = STR_BMP(name='callerIdentifier', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'TextString')), opt=True)
-    _ConferenceJoinRequest_userData = SET_OF(name='userData', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'UserData')), opt=True)
-    _ConferenceJoinRequest_nodeCategory = CHOICE(name='nodeCategory', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'NodeCategory')), opt=True)
+    ConferenceJoinRequest = SEQ(name=u'ConferenceJoinRequest', mode=MODE_TYPE)
+    _ConferenceJoinRequest_conferenceName = CHOICE(name=u'conferenceName', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'ConferenceNameSelector')), opt=True)
+    _ConferenceJoinRequest_conferenceNameModifier = STR_NUM(name=u'conferenceNameModifier', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'ConferenceNameModifier')), opt=True)
+    _ConferenceJoinRequest_conferenceNameModifier._const_alpha = ASN1Set(rv=[u'0', u'1', u'2', u'3', u'4', u'5', u'6', u'7', u'8', u'9'], rr=[], ev=None, er=[])
+    _ConferenceJoinRequest_tag = INT(name=u'tag', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _ConferenceJoinRequest_password = CHOICE(name=u'password', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'PasswordChallengeRequestResponse')), opt=True)
+    _ConferenceJoinRequest_convenerPassword = CHOICE(name=u'convenerPassword', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'PasswordSelector')), opt=True)
+    _ConferenceJoinRequest_callerIdentifier = STR_BMP(name=u'callerIdentifier', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'TextString')), opt=True)
+    _ConferenceJoinRequest_userData = SET_OF(name=u'userData', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'UserData')), opt=True)
+    _ConferenceJoinRequest_nodeCategory = CHOICE(name=u'nodeCategory', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'NodeCategory')), opt=True)
     ConferenceJoinRequest._cont = ASN1Dict([
-        ('conferenceName', _ConferenceJoinRequest_conferenceName),
-        ('conferenceNameModifier', _ConferenceJoinRequest_conferenceNameModifier),
-        ('tag', _ConferenceJoinRequest_tag),
-        ('password', _ConferenceJoinRequest_password),
-        ('convenerPassword', _ConferenceJoinRequest_convenerPassword),
-        ('callerIdentifier', _ConferenceJoinRequest_callerIdentifier),
-        ('userData', _ConferenceJoinRequest_userData),
-        ('nodeCategory', _ConferenceJoinRequest_nodeCategory),
+        (u'conferenceName', _ConferenceJoinRequest_conferenceName),
+        (u'conferenceNameModifier', _ConferenceJoinRequest_conferenceNameModifier),
+        (u'tag', _ConferenceJoinRequest_tag),
+        (u'password', _ConferenceJoinRequest_password),
+        (u'convenerPassword', _ConferenceJoinRequest_convenerPassword),
+        (u'callerIdentifier', _ConferenceJoinRequest_callerIdentifier),
+        (u'userData', _ConferenceJoinRequest_userData),
+        (u'nodeCategory', _ConferenceJoinRequest_nodeCategory),
         ])
-    ConferenceJoinRequest._ext = ['nodeCategory']
+    ConferenceJoinRequest._ext = [u'nodeCategory']
     
     #-----< ConferenceJoinResponse >-----#
-    ConferenceJoinResponse = SEQ(name='ConferenceJoinResponse', mode=MODE_TYPE)
-    _ConferenceJoinResponse_nodeID = INT(name='nodeID', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'UserID')), opt=True)
-    _ConferenceJoinResponse_topNodeID = INT(name='topNodeID', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'UserID')))
-    _ConferenceJoinResponse_tag = INT(name='tag', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _ConferenceJoinResponse_conferenceNameAlias = CHOICE(name='conferenceNameAlias', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'ConferenceNameSelector')), opt=True)
-    _ConferenceJoinResponse_passwordInTheClearRequired = BOOL(name='passwordInTheClearRequired', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _ConferenceJoinResponse_lockedConference = BOOL(name='lockedConference', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _ConferenceJoinResponse_listedConference = BOOL(name='listedConference', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _ConferenceJoinResponse_conductibleConference = BOOL(name='conductibleConference', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _ConferenceJoinResponse_terminationMethod = ENUM(name='terminationMethod', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'TerminationMethod')))
-    _ConferenceJoinResponse_conductorPrivileges = SET_OF(name='conductorPrivileges', mode=MODE_TYPE, tag=(9, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    ConferenceJoinResponse = SEQ(name=u'ConferenceJoinResponse', mode=MODE_TYPE)
+    _ConferenceJoinResponse_nodeID = INT(name=u'nodeID', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'UserID')), opt=True)
+    _ConferenceJoinResponse_topNodeID = INT(name=u'topNodeID', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'UserID')))
+    _ConferenceJoinResponse_tag = INT(name=u'tag', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _ConferenceJoinResponse_conferenceNameAlias = CHOICE(name=u'conferenceNameAlias', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'ConferenceNameSelector')), opt=True)
+    _ConferenceJoinResponse_passwordInTheClearRequired = BOOL(name=u'passwordInTheClearRequired', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _ConferenceJoinResponse_lockedConference = BOOL(name=u'lockedConference', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _ConferenceJoinResponse_listedConference = BOOL(name=u'listedConference', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _ConferenceJoinResponse_conductibleConference = BOOL(name=u'conductibleConference', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _ConferenceJoinResponse_terminationMethod = ENUM(name=u'terminationMethod', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'TerminationMethod')))
+    _ConferenceJoinResponse_conductorPrivileges = SET_OF(name=u'conductorPrivileges', mode=MODE_TYPE, tag=(9, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     __ConferenceJoinResponse_conductorPrivileges__item_ = ENUM(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('GCC-PROTOCOL', 'Privilege')))
     _ConferenceJoinResponse_conductorPrivileges._cont = __ConferenceJoinResponse_conductorPrivileges__item_
-    _ConferenceJoinResponse_conductedPrivileges = SET_OF(name='conductedPrivileges', mode=MODE_TYPE, tag=(10, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _ConferenceJoinResponse_conductedPrivileges = SET_OF(name=u'conductedPrivileges', mode=MODE_TYPE, tag=(10, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     __ConferenceJoinResponse_conductedPrivileges__item_ = ENUM(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('GCC-PROTOCOL', 'Privilege')))
     _ConferenceJoinResponse_conductedPrivileges._cont = __ConferenceJoinResponse_conductedPrivileges__item_
-    _ConferenceJoinResponse_nonConductedPrivileges = SET_OF(name='nonConductedPrivileges', mode=MODE_TYPE, tag=(11, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _ConferenceJoinResponse_nonConductedPrivileges = SET_OF(name=u'nonConductedPrivileges', mode=MODE_TYPE, tag=(11, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     __ConferenceJoinResponse_nonConductedPrivileges__item_ = ENUM(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('GCC-PROTOCOL', 'Privilege')))
     _ConferenceJoinResponse_nonConductedPrivileges._cont = __ConferenceJoinResponse_nonConductedPrivileges__item_
-    _ConferenceJoinResponse_conferenceDescription = STR_BMP(name='conferenceDescription', mode=MODE_TYPE, tag=(12, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'TextString')), opt=True)
-    _ConferenceJoinResponse_password = CHOICE(name='password', mode=MODE_TYPE, tag=(13, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'PasswordChallengeRequestResponse')), opt=True)
-    _ConferenceJoinResponse_result = ENUM(name='result', mode=MODE_TYPE, tag=(14, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _ConferenceJoinResponse_result._cont = ASN1Dict([('success', 0), ('userRejected', 1), ('invalidConference', 2), ('invalidPassword', 3), ('invalidConvenerPassword', 4), ('challengeResponseRequired', 5), ('invalidChallengeResponse', 6)])
+    _ConferenceJoinResponse_conferenceDescription = STR_BMP(name=u'conferenceDescription', mode=MODE_TYPE, tag=(12, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'TextString')), opt=True)
+    _ConferenceJoinResponse_password = CHOICE(name=u'password', mode=MODE_TYPE, tag=(13, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'PasswordChallengeRequestResponse')), opt=True)
+    _ConferenceJoinResponse_result = ENUM(name=u'result', mode=MODE_TYPE, tag=(14, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _ConferenceJoinResponse_result._cont = ASN1Dict([(u'success', 0), (u'userRejected', 1), (u'invalidConference', 2), (u'invalidPassword', 3), (u'invalidConvenerPassword', 4), (u'challengeResponseRequired', 5), (u'invalidChallengeResponse', 6)])
     _ConferenceJoinResponse_result._ext = []
-    _ConferenceJoinResponse_userData = SET_OF(name='userData', mode=MODE_TYPE, tag=(15, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'UserData')), opt=True)
-    _ConferenceJoinResponse_nodeCategory = CHOICE(name='nodeCategory', mode=MODE_TYPE, tag=(16, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'NodeCategory')), opt=True)
-    _ConferenceJoinResponse_conferenceMode = CHOICE(name='conferenceMode', mode=MODE_TYPE, tag=(17, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'ConferenceMode')), opt=True)
+    _ConferenceJoinResponse_userData = SET_OF(name=u'userData', mode=MODE_TYPE, tag=(15, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'UserData')), opt=True)
+    _ConferenceJoinResponse_nodeCategory = CHOICE(name=u'nodeCategory', mode=MODE_TYPE, tag=(16, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'NodeCategory')), opt=True)
+    _ConferenceJoinResponse_conferenceMode = CHOICE(name=u'conferenceMode', mode=MODE_TYPE, tag=(17, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'ConferenceMode')), opt=True)
     ConferenceJoinResponse._cont = ASN1Dict([
-        ('nodeID', _ConferenceJoinResponse_nodeID),
-        ('topNodeID', _ConferenceJoinResponse_topNodeID),
-        ('tag', _ConferenceJoinResponse_tag),
-        ('conferenceNameAlias', _ConferenceJoinResponse_conferenceNameAlias),
-        ('passwordInTheClearRequired', _ConferenceJoinResponse_passwordInTheClearRequired),
-        ('lockedConference', _ConferenceJoinResponse_lockedConference),
-        ('listedConference', _ConferenceJoinResponse_listedConference),
-        ('conductibleConference', _ConferenceJoinResponse_conductibleConference),
-        ('terminationMethod', _ConferenceJoinResponse_terminationMethod),
-        ('conductorPrivileges', _ConferenceJoinResponse_conductorPrivileges),
-        ('conductedPrivileges', _ConferenceJoinResponse_conductedPrivileges),
-        ('nonConductedPrivileges', _ConferenceJoinResponse_nonConductedPrivileges),
-        ('conferenceDescription', _ConferenceJoinResponse_conferenceDescription),
-        ('password', _ConferenceJoinResponse_password),
-        ('result', _ConferenceJoinResponse_result),
-        ('userData', _ConferenceJoinResponse_userData),
-        ('nodeCategory', _ConferenceJoinResponse_nodeCategory),
-        ('conferenceMode', _ConferenceJoinResponse_conferenceMode),
+        (u'nodeID', _ConferenceJoinResponse_nodeID),
+        (u'topNodeID', _ConferenceJoinResponse_topNodeID),
+        (u'tag', _ConferenceJoinResponse_tag),
+        (u'conferenceNameAlias', _ConferenceJoinResponse_conferenceNameAlias),
+        (u'passwordInTheClearRequired', _ConferenceJoinResponse_passwordInTheClearRequired),
+        (u'lockedConference', _ConferenceJoinResponse_lockedConference),
+        (u'listedConference', _ConferenceJoinResponse_listedConference),
+        (u'conductibleConference', _ConferenceJoinResponse_conductibleConference),
+        (u'terminationMethod', _ConferenceJoinResponse_terminationMethod),
+        (u'conductorPrivileges', _ConferenceJoinResponse_conductorPrivileges),
+        (u'conductedPrivileges', _ConferenceJoinResponse_conductedPrivileges),
+        (u'nonConductedPrivileges', _ConferenceJoinResponse_nonConductedPrivileges),
+        (u'conferenceDescription', _ConferenceJoinResponse_conferenceDescription),
+        (u'password', _ConferenceJoinResponse_password),
+        (u'result', _ConferenceJoinResponse_result),
+        (u'userData', _ConferenceJoinResponse_userData),
+        (u'nodeCategory', _ConferenceJoinResponse_nodeCategory),
+        (u'conferenceMode', _ConferenceJoinResponse_conferenceMode),
         ])
-    ConferenceJoinResponse._ext = ['nodeCategory', 'conferenceMode']
+    ConferenceJoinResponse._ext = [u'nodeCategory', u'conferenceMode']
     
     #-----< ConferenceInviteRequest >-----#
-    ConferenceInviteRequest = SEQ(name='ConferenceInviteRequest', mode=MODE_TYPE)
-    _ConferenceInviteRequest_conferenceName = SEQ(name='conferenceName', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'ConferenceName')))
-    _ConferenceInviteRequest_nodeID = INT(name='nodeID', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'UserID')))
-    _ConferenceInviteRequest_topNodeID = INT(name='topNodeID', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'UserID')))
-    _ConferenceInviteRequest_tag = INT(name='tag', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _ConferenceInviteRequest_passwordInTheClearRequired = BOOL(name='passwordInTheClearRequired', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _ConferenceInviteRequest_lockedConference = BOOL(name='lockedConference', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _ConferenceInviteRequest_listedConference = BOOL(name='listedConference', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _ConferenceInviteRequest_conductibleConference = BOOL(name='conductibleConference', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _ConferenceInviteRequest_terminationMethod = ENUM(name='terminationMethod', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'TerminationMethod')))
-    _ConferenceInviteRequest_conductorPrivileges = SET_OF(name='conductorPrivileges', mode=MODE_TYPE, tag=(9, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    ConferenceInviteRequest = SEQ(name=u'ConferenceInviteRequest', mode=MODE_TYPE)
+    _ConferenceInviteRequest_conferenceName = SEQ(name=u'conferenceName', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'ConferenceName')))
+    _ConferenceInviteRequest_nodeID = INT(name=u'nodeID', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'UserID')))
+    _ConferenceInviteRequest_topNodeID = INT(name=u'topNodeID', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'UserID')))
+    _ConferenceInviteRequest_tag = INT(name=u'tag', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _ConferenceInviteRequest_passwordInTheClearRequired = BOOL(name=u'passwordInTheClearRequired', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _ConferenceInviteRequest_lockedConference = BOOL(name=u'lockedConference', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _ConferenceInviteRequest_listedConference = BOOL(name=u'listedConference', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _ConferenceInviteRequest_conductibleConference = BOOL(name=u'conductibleConference', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _ConferenceInviteRequest_terminationMethod = ENUM(name=u'terminationMethod', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'TerminationMethod')))
+    _ConferenceInviteRequest_conductorPrivileges = SET_OF(name=u'conductorPrivileges', mode=MODE_TYPE, tag=(9, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     __ConferenceInviteRequest_conductorPrivileges__item_ = ENUM(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('GCC-PROTOCOL', 'Privilege')))
     _ConferenceInviteRequest_conductorPrivileges._cont = __ConferenceInviteRequest_conductorPrivileges__item_
-    _ConferenceInviteRequest_conductedPrivileges = SET_OF(name='conductedPrivileges', mode=MODE_TYPE, tag=(10, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _ConferenceInviteRequest_conductedPrivileges = SET_OF(name=u'conductedPrivileges', mode=MODE_TYPE, tag=(10, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     __ConferenceInviteRequest_conductedPrivileges__item_ = ENUM(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('GCC-PROTOCOL', 'Privilege')))
     _ConferenceInviteRequest_conductedPrivileges._cont = __ConferenceInviteRequest_conductedPrivileges__item_
-    _ConferenceInviteRequest_nonConductedPrivileges = SET_OF(name='nonConductedPrivileges', mode=MODE_TYPE, tag=(11, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _ConferenceInviteRequest_nonConductedPrivileges = SET_OF(name=u'nonConductedPrivileges', mode=MODE_TYPE, tag=(11, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     __ConferenceInviteRequest_nonConductedPrivileges__item_ = ENUM(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('GCC-PROTOCOL', 'Privilege')))
     _ConferenceInviteRequest_nonConductedPrivileges._cont = __ConferenceInviteRequest_nonConductedPrivileges__item_
-    _ConferenceInviteRequest_conferenceDescription = STR_BMP(name='conferenceDescription', mode=MODE_TYPE, tag=(12, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'TextString')), opt=True)
-    _ConferenceInviteRequest_callerIdentifier = STR_BMP(name='callerIdentifier', mode=MODE_TYPE, tag=(13, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'TextString')), opt=True)
-    _ConferenceInviteRequest_userData = SET_OF(name='userData', mode=MODE_TYPE, tag=(14, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'UserData')), opt=True)
-    _ConferenceInviteRequest_conferencePriority = SEQ(name='conferencePriority', mode=MODE_TYPE, tag=(15, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'ConferencePriority')), opt=True)
-    _ConferenceInviteRequest_nodeCategory = CHOICE(name='nodeCategory', mode=MODE_TYPE, tag=(16, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'NodeCategory')), opt=True)
-    _ConferenceInviteRequest_conferenceMode = CHOICE(name='conferenceMode', mode=MODE_TYPE, tag=(17, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'ConferenceMode')), opt=True)
+    _ConferenceInviteRequest_conferenceDescription = STR_BMP(name=u'conferenceDescription', mode=MODE_TYPE, tag=(12, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'TextString')), opt=True)
+    _ConferenceInviteRequest_callerIdentifier = STR_BMP(name=u'callerIdentifier', mode=MODE_TYPE, tag=(13, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'TextString')), opt=True)
+    _ConferenceInviteRequest_userData = SET_OF(name=u'userData', mode=MODE_TYPE, tag=(14, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'UserData')), opt=True)
+    _ConferenceInviteRequest_conferencePriority = SEQ(name=u'conferencePriority', mode=MODE_TYPE, tag=(15, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'ConferencePriority')), opt=True)
+    _ConferenceInviteRequest_nodeCategory = CHOICE(name=u'nodeCategory', mode=MODE_TYPE, tag=(16, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'NodeCategory')), opt=True)
+    _ConferenceInviteRequest_conferenceMode = CHOICE(name=u'conferenceMode', mode=MODE_TYPE, tag=(17, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'ConferenceMode')), opt=True)
     ConferenceInviteRequest._cont = ASN1Dict([
-        ('conferenceName', _ConferenceInviteRequest_conferenceName),
-        ('nodeID', _ConferenceInviteRequest_nodeID),
-        ('topNodeID', _ConferenceInviteRequest_topNodeID),
-        ('tag', _ConferenceInviteRequest_tag),
-        ('passwordInTheClearRequired', _ConferenceInviteRequest_passwordInTheClearRequired),
-        ('lockedConference', _ConferenceInviteRequest_lockedConference),
-        ('listedConference', _ConferenceInviteRequest_listedConference),
-        ('conductibleConference', _ConferenceInviteRequest_conductibleConference),
-        ('terminationMethod', _ConferenceInviteRequest_terminationMethod),
-        ('conductorPrivileges', _ConferenceInviteRequest_conductorPrivileges),
-        ('conductedPrivileges', _ConferenceInviteRequest_conductedPrivileges),
-        ('nonConductedPrivileges', _ConferenceInviteRequest_nonConductedPrivileges),
-        ('conferenceDescription', _ConferenceInviteRequest_conferenceDescription),
-        ('callerIdentifier', _ConferenceInviteRequest_callerIdentifier),
-        ('userData', _ConferenceInviteRequest_userData),
-        ('conferencePriority', _ConferenceInviteRequest_conferencePriority),
-        ('nodeCategory', _ConferenceInviteRequest_nodeCategory),
-        ('conferenceMode', _ConferenceInviteRequest_conferenceMode),
+        (u'conferenceName', _ConferenceInviteRequest_conferenceName),
+        (u'nodeID', _ConferenceInviteRequest_nodeID),
+        (u'topNodeID', _ConferenceInviteRequest_topNodeID),
+        (u'tag', _ConferenceInviteRequest_tag),
+        (u'passwordInTheClearRequired', _ConferenceInviteRequest_passwordInTheClearRequired),
+        (u'lockedConference', _ConferenceInviteRequest_lockedConference),
+        (u'listedConference', _ConferenceInviteRequest_listedConference),
+        (u'conductibleConference', _ConferenceInviteRequest_conductibleConference),
+        (u'terminationMethod', _ConferenceInviteRequest_terminationMethod),
+        (u'conductorPrivileges', _ConferenceInviteRequest_conductorPrivileges),
+        (u'conductedPrivileges', _ConferenceInviteRequest_conductedPrivileges),
+        (u'nonConductedPrivileges', _ConferenceInviteRequest_nonConductedPrivileges),
+        (u'conferenceDescription', _ConferenceInviteRequest_conferenceDescription),
+        (u'callerIdentifier', _ConferenceInviteRequest_callerIdentifier),
+        (u'userData', _ConferenceInviteRequest_userData),
+        (u'conferencePriority', _ConferenceInviteRequest_conferencePriority),
+        (u'nodeCategory', _ConferenceInviteRequest_nodeCategory),
+        (u'conferenceMode', _ConferenceInviteRequest_conferenceMode),
         ])
-    ConferenceInviteRequest._ext = ['conferencePriority', 'nodeCategory', 'conferenceMode']
+    ConferenceInviteRequest._ext = [u'conferencePriority', u'nodeCategory', u'conferenceMode']
     
     #-----< ConferenceInviteResponse >-----#
-    ConferenceInviteResponse = SEQ(name='ConferenceInviteResponse', mode=MODE_TYPE)
-    _ConferenceInviteResponse_result = ENUM(name='result', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _ConferenceInviteResponse_result._cont = ASN1Dict([('success', 0), ('userRejected', 1)])
+    ConferenceInviteResponse = SEQ(name=u'ConferenceInviteResponse', mode=MODE_TYPE)
+    _ConferenceInviteResponse_result = ENUM(name=u'result', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _ConferenceInviteResponse_result._cont = ASN1Dict([(u'success', 0), (u'userRejected', 1)])
     _ConferenceInviteResponse_result._ext = []
-    _ConferenceInviteResponse_userData = SET_OF(name='userData', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'UserData')), opt=True)
+    _ConferenceInviteResponse_userData = SET_OF(name=u'userData', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'UserData')), opt=True)
     ConferenceInviteResponse._cont = ASN1Dict([
-        ('result', _ConferenceInviteResponse_result),
-        ('userData', _ConferenceInviteResponse_userData),
+        (u'result', _ConferenceInviteResponse_result),
+        (u'userData', _ConferenceInviteResponse_userData),
         ])
     ConferenceInviteResponse._ext = []
     
     #-----< ConferenceAddRequest >-----#
-    ConferenceAddRequest = SEQ(name='ConferenceAddRequest', mode=MODE_TYPE)
-    _ConferenceAddRequest_networkAddress = SEQ_OF(name='networkAddress', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'NetworkAddress')))
-    _ConferenceAddRequest_requestingNode = INT(name='requestingNode', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'UserID')))
-    _ConferenceAddRequest_tag = INT(name='tag', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _ConferenceAddRequest_addingMCU = INT(name='addingMCU', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'UserID')), opt=True)
-    _ConferenceAddRequest_userData = SET_OF(name='userData', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'UserData')), opt=True)
-    _ConferenceAddRequest_nodeCategory = CHOICE(name='nodeCategory', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'NodeCategory')), opt=True)
-    _ConferenceAddRequest_networkAddressV2 = SET_OF(name='networkAddressV2', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'NetworkAddressV2')))
+    ConferenceAddRequest = SEQ(name=u'ConferenceAddRequest', mode=MODE_TYPE)
+    _ConferenceAddRequest_networkAddress = SEQ_OF(name=u'networkAddress', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'NetworkAddress')))
+    _ConferenceAddRequest_requestingNode = INT(name=u'requestingNode', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'UserID')))
+    _ConferenceAddRequest_tag = INT(name=u'tag', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _ConferenceAddRequest_addingMCU = INT(name=u'addingMCU', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'UserID')), opt=True)
+    _ConferenceAddRequest_userData = SET_OF(name=u'userData', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'UserData')), opt=True)
+    _ConferenceAddRequest_nodeCategory = CHOICE(name=u'nodeCategory', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'NodeCategory')), opt=True)
+    _ConferenceAddRequest_networkAddressV2 = SET_OF(name=u'networkAddressV2', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'NetworkAddressV2')))
     ConferenceAddRequest._cont = ASN1Dict([
-        ('networkAddress', _ConferenceAddRequest_networkAddress),
-        ('requestingNode', _ConferenceAddRequest_requestingNode),
-        ('tag', _ConferenceAddRequest_tag),
-        ('addingMCU', _ConferenceAddRequest_addingMCU),
-        ('userData', _ConferenceAddRequest_userData),
-        ('nodeCategory', _ConferenceAddRequest_nodeCategory),
-        ('networkAddressV2', _ConferenceAddRequest_networkAddressV2),
+        (u'networkAddress', _ConferenceAddRequest_networkAddress),
+        (u'requestingNode', _ConferenceAddRequest_requestingNode),
+        (u'tag', _ConferenceAddRequest_tag),
+        (u'addingMCU', _ConferenceAddRequest_addingMCU),
+        (u'userData', _ConferenceAddRequest_userData),
+        (u'nodeCategory', _ConferenceAddRequest_nodeCategory),
+        (u'networkAddressV2', _ConferenceAddRequest_networkAddressV2),
         ])
-    ConferenceAddRequest._ext = ['nodeCategory', 'networkAddressV2']
+    ConferenceAddRequest._ext = [u'nodeCategory', u'networkAddressV2']
     
     #-----< ConferenceAddResponse >-----#
-    ConferenceAddResponse = SEQ(name='ConferenceAddResponse', mode=MODE_TYPE)
-    _ConferenceAddResponse_tag = INT(name='tag', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _ConferenceAddResponse_result = ENUM(name='result', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _ConferenceAddResponse_result._cont = ASN1Dict([('success', 0), ('invalidRequester', 1), ('invalidNetworkType', 2), ('invalidNetworkAddress', 3), ('addedNodeBusy', 4), ('networkBusy', 5), ('noPortsAvailable', 6), ('connectionUnsuccessful', 7)])
+    ConferenceAddResponse = SEQ(name=u'ConferenceAddResponse', mode=MODE_TYPE)
+    _ConferenceAddResponse_tag = INT(name=u'tag', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _ConferenceAddResponse_result = ENUM(name=u'result', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _ConferenceAddResponse_result._cont = ASN1Dict([(u'success', 0), (u'invalidRequester', 1), (u'invalidNetworkType', 2), (u'invalidNetworkAddress', 3), (u'addedNodeBusy', 4), (u'networkBusy', 5), (u'noPortsAvailable', 6), (u'connectionUnsuccessful', 7)])
     _ConferenceAddResponse_result._ext = []
-    _ConferenceAddResponse_userData = SET_OF(name='userData', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'UserData')), opt=True)
+    _ConferenceAddResponse_userData = SET_OF(name=u'userData', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'UserData')), opt=True)
     ConferenceAddResponse._cont = ASN1Dict([
-        ('tag', _ConferenceAddResponse_tag),
-        ('result', _ConferenceAddResponse_result),
-        ('userData', _ConferenceAddResponse_userData),
+        (u'tag', _ConferenceAddResponse_tag),
+        (u'result', _ConferenceAddResponse_result),
+        (u'userData', _ConferenceAddResponse_userData),
         ])
     ConferenceAddResponse._ext = []
     
     #-----< ConferenceLockRequest >-----#
-    ConferenceLockRequest = SEQ(name='ConferenceLockRequest', mode=MODE_TYPE)
+    ConferenceLockRequest = SEQ(name=u'ConferenceLockRequest', mode=MODE_TYPE)
     ConferenceLockRequest._cont = ASN1Dict([
         ])
     ConferenceLockRequest._ext = []
     
     #-----< ConferenceLockResponse >-----#
-    ConferenceLockResponse = SEQ(name='ConferenceLockResponse', mode=MODE_TYPE)
-    _ConferenceLockResponse_result = ENUM(name='result', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _ConferenceLockResponse_result._cont = ASN1Dict([('success', 0), ('invalidRequester', 1), ('alreadyLocked', 2)])
+    ConferenceLockResponse = SEQ(name=u'ConferenceLockResponse', mode=MODE_TYPE)
+    _ConferenceLockResponse_result = ENUM(name=u'result', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _ConferenceLockResponse_result._cont = ASN1Dict([(u'success', 0), (u'invalidRequester', 1), (u'alreadyLocked', 2)])
     _ConferenceLockResponse_result._ext = []
     ConferenceLockResponse._cont = ASN1Dict([
-        ('result', _ConferenceLockResponse_result),
+        (u'result', _ConferenceLockResponse_result),
         ])
     ConferenceLockResponse._ext = []
     
     #-----< ConferenceLockIndication >-----#
-    ConferenceLockIndication = SEQ(name='ConferenceLockIndication', mode=MODE_TYPE)
+    ConferenceLockIndication = SEQ(name=u'ConferenceLockIndication', mode=MODE_TYPE)
     ConferenceLockIndication._cont = ASN1Dict([
         ])
     ConferenceLockIndication._ext = []
     
     #-----< ConferenceUnlockRequest >-----#
-    ConferenceUnlockRequest = SEQ(name='ConferenceUnlockRequest', mode=MODE_TYPE)
+    ConferenceUnlockRequest = SEQ(name=u'ConferenceUnlockRequest', mode=MODE_TYPE)
     ConferenceUnlockRequest._cont = ASN1Dict([
         ])
     ConferenceUnlockRequest._ext = []
     
     #-----< ConferenceUnlockResponse >-----#
-    ConferenceUnlockResponse = SEQ(name='ConferenceUnlockResponse', mode=MODE_TYPE)
-    _ConferenceUnlockResponse_result = ENUM(name='result', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _ConferenceUnlockResponse_result._cont = ASN1Dict([('success', 0), ('invalidRequester', 1), ('alreadyUnlocked', 2)])
+    ConferenceUnlockResponse = SEQ(name=u'ConferenceUnlockResponse', mode=MODE_TYPE)
+    _ConferenceUnlockResponse_result = ENUM(name=u'result', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _ConferenceUnlockResponse_result._cont = ASN1Dict([(u'success', 0), (u'invalidRequester', 1), (u'alreadyUnlocked', 2)])
     _ConferenceUnlockResponse_result._ext = []
     ConferenceUnlockResponse._cont = ASN1Dict([
-        ('result', _ConferenceUnlockResponse_result),
+        (u'result', _ConferenceUnlockResponse_result),
         ])
     ConferenceUnlockResponse._ext = []
     
     #-----< ConferenceUnlockIndication >-----#
-    ConferenceUnlockIndication = SEQ(name='ConferenceUnlockIndication', mode=MODE_TYPE)
+    ConferenceUnlockIndication = SEQ(name=u'ConferenceUnlockIndication', mode=MODE_TYPE)
     ConferenceUnlockIndication._cont = ASN1Dict([
         ])
     ConferenceUnlockIndication._ext = []
     
     #-----< ConferenceTerminateRequest >-----#
-    ConferenceTerminateRequest = SEQ(name='ConferenceTerminateRequest', mode=MODE_TYPE)
-    _ConferenceTerminateRequest_reason = ENUM(name='reason', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _ConferenceTerminateRequest_reason._cont = ASN1Dict([('userInitiated', 0), ('timedConferenceTermination', 1)])
+    ConferenceTerminateRequest = SEQ(name=u'ConferenceTerminateRequest', mode=MODE_TYPE)
+    _ConferenceTerminateRequest_reason = ENUM(name=u'reason', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _ConferenceTerminateRequest_reason._cont = ASN1Dict([(u'userInitiated', 0), (u'timedConferenceTermination', 1)])
     _ConferenceTerminateRequest_reason._ext = []
     ConferenceTerminateRequest._cont = ASN1Dict([
-        ('reason', _ConferenceTerminateRequest_reason),
+        (u'reason', _ConferenceTerminateRequest_reason),
         ])
     ConferenceTerminateRequest._ext = []
     
     #-----< ConferenceTerminateResponse >-----#
-    ConferenceTerminateResponse = SEQ(name='ConferenceTerminateResponse', mode=MODE_TYPE)
-    _ConferenceTerminateResponse_result = ENUM(name='result', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _ConferenceTerminateResponse_result._cont = ASN1Dict([('success', 0), ('invalidRequester', 1)])
+    ConferenceTerminateResponse = SEQ(name=u'ConferenceTerminateResponse', mode=MODE_TYPE)
+    _ConferenceTerminateResponse_result = ENUM(name=u'result', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _ConferenceTerminateResponse_result._cont = ASN1Dict([(u'success', 0), (u'invalidRequester', 1)])
     _ConferenceTerminateResponse_result._ext = []
     ConferenceTerminateResponse._cont = ASN1Dict([
-        ('result', _ConferenceTerminateResponse_result),
+        (u'result', _ConferenceTerminateResponse_result),
         ])
     ConferenceTerminateResponse._ext = []
     
     #-----< ConferenceTerminateIndication >-----#
-    ConferenceTerminateIndication = SEQ(name='ConferenceTerminateIndication', mode=MODE_TYPE)
-    _ConferenceTerminateIndication_reason = ENUM(name='reason', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _ConferenceTerminateIndication_reason._cont = ASN1Dict([('userInitiated', 0), ('timedConferenceTermination', 1)])
+    ConferenceTerminateIndication = SEQ(name=u'ConferenceTerminateIndication', mode=MODE_TYPE)
+    _ConferenceTerminateIndication_reason = ENUM(name=u'reason', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _ConferenceTerminateIndication_reason._cont = ASN1Dict([(u'userInitiated', 0), (u'timedConferenceTermination', 1)])
     _ConferenceTerminateIndication_reason._ext = []
     ConferenceTerminateIndication._cont = ASN1Dict([
-        ('reason', _ConferenceTerminateIndication_reason),
+        (u'reason', _ConferenceTerminateIndication_reason),
         ])
     ConferenceTerminateIndication._ext = []
     
     #-----< ConferenceEjectUserRequest >-----#
-    ConferenceEjectUserRequest = SEQ(name='ConferenceEjectUserRequest', mode=MODE_TYPE)
-    _ConferenceEjectUserRequest_nodeToEject = INT(name='nodeToEject', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'UserID')))
-    _ConferenceEjectUserRequest_reason = ENUM(name='reason', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _ConferenceEjectUserRequest_reason._cont = ASN1Dict([('userInitiated', 0)])
+    ConferenceEjectUserRequest = SEQ(name=u'ConferenceEjectUserRequest', mode=MODE_TYPE)
+    _ConferenceEjectUserRequest_nodeToEject = INT(name=u'nodeToEject', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'UserID')))
+    _ConferenceEjectUserRequest_reason = ENUM(name=u'reason', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _ConferenceEjectUserRequest_reason._cont = ASN1Dict([(u'userInitiated', 0)])
     _ConferenceEjectUserRequest_reason._ext = []
     ConferenceEjectUserRequest._cont = ASN1Dict([
-        ('nodeToEject', _ConferenceEjectUserRequest_nodeToEject),
-        ('reason', _ConferenceEjectUserRequest_reason),
+        (u'nodeToEject', _ConferenceEjectUserRequest_nodeToEject),
+        (u'reason', _ConferenceEjectUserRequest_reason),
         ])
     ConferenceEjectUserRequest._ext = []
     
     #-----< ConferenceEjectUserResponse >-----#
-    ConferenceEjectUserResponse = SEQ(name='ConferenceEjectUserResponse', mode=MODE_TYPE)
-    _ConferenceEjectUserResponse_nodeToEject = INT(name='nodeToEject', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'UserID')))
-    _ConferenceEjectUserResponse_result = ENUM(name='result', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _ConferenceEjectUserResponse_result._cont = ASN1Dict([('success', 0), ('invalidRequester', 1), ('invalidNode', 2)])
+    ConferenceEjectUserResponse = SEQ(name=u'ConferenceEjectUserResponse', mode=MODE_TYPE)
+    _ConferenceEjectUserResponse_nodeToEject = INT(name=u'nodeToEject', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'UserID')))
+    _ConferenceEjectUserResponse_result = ENUM(name=u'result', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _ConferenceEjectUserResponse_result._cont = ASN1Dict([(u'success', 0), (u'invalidRequester', 1), (u'invalidNode', 2)])
     _ConferenceEjectUserResponse_result._ext = []
     ConferenceEjectUserResponse._cont = ASN1Dict([
-        ('nodeToEject', _ConferenceEjectUserResponse_nodeToEject),
-        ('result', _ConferenceEjectUserResponse_result),
+        (u'nodeToEject', _ConferenceEjectUserResponse_nodeToEject),
+        (u'result', _ConferenceEjectUserResponse_result),
         ])
     ConferenceEjectUserResponse._ext = []
     
     #-----< ConferenceEjectUserIndication >-----#
-    ConferenceEjectUserIndication = SEQ(name='ConferenceEjectUserIndication', mode=MODE_TYPE)
-    _ConferenceEjectUserIndication_nodeToEject = INT(name='nodeToEject', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'UserID')))
-    _ConferenceEjectUserIndication_reason = ENUM(name='reason', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _ConferenceEjectUserIndication_reason._cont = ASN1Dict([('userInitiated', 0), ('higherNodeDisconnected', 1), ('higherNodeEjected', 2)])
+    ConferenceEjectUserIndication = SEQ(name=u'ConferenceEjectUserIndication', mode=MODE_TYPE)
+    _ConferenceEjectUserIndication_nodeToEject = INT(name=u'nodeToEject', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'UserID')))
+    _ConferenceEjectUserIndication_reason = ENUM(name=u'reason', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _ConferenceEjectUserIndication_reason._cont = ASN1Dict([(u'userInitiated', 0), (u'higherNodeDisconnected', 1), (u'higherNodeEjected', 2)])
     _ConferenceEjectUserIndication_reason._ext = []
     ConferenceEjectUserIndication._cont = ASN1Dict([
-        ('nodeToEject', _ConferenceEjectUserIndication_nodeToEject),
-        ('reason', _ConferenceEjectUserIndication_reason),
+        (u'nodeToEject', _ConferenceEjectUserIndication_nodeToEject),
+        (u'reason', _ConferenceEjectUserIndication_reason),
         ])
     ConferenceEjectUserIndication._ext = []
     
     #-----< ConferenceTransferRequest >-----#
-    ConferenceTransferRequest = SEQ(name='ConferenceTransferRequest', mode=MODE_TYPE)
-    _ConferenceTransferRequest_conferenceName = CHOICE(name='conferenceName', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'ConferenceNameSelector')))
-    _ConferenceTransferRequest_conferenceNameModifier = STR_NUM(name='conferenceNameModifier', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'ConferenceNameModifier')), opt=True)
-    _ConferenceTransferRequest_conferenceNameModifier._const_alpha = ASN1Set(rv=['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'], rr=[], ev=None, er=[])
-    _ConferenceTransferRequest_networkAddress = SEQ_OF(name='networkAddress', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'NetworkAddress')), opt=True)
-    _ConferenceTransferRequest_transferringNodes = SET_OF(name='transferringNodes', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    ConferenceTransferRequest = SEQ(name=u'ConferenceTransferRequest', mode=MODE_TYPE)
+    _ConferenceTransferRequest_conferenceName = CHOICE(name=u'conferenceName', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'ConferenceNameSelector')))
+    _ConferenceTransferRequest_conferenceNameModifier = STR_NUM(name=u'conferenceNameModifier', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'ConferenceNameModifier')), opt=True)
+    _ConferenceTransferRequest_conferenceNameModifier._const_alpha = ASN1Set(rv=[u'0', u'1', u'2', u'3', u'4', u'5', u'6', u'7', u'8', u'9'], rr=[], ev=None, er=[])
+    _ConferenceTransferRequest_networkAddress = SEQ_OF(name=u'networkAddress', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'NetworkAddress')), opt=True)
+    _ConferenceTransferRequest_transferringNodes = SET_OF(name=u'transferringNodes', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     __ConferenceTransferRequest_transferringNodes__item_ = INT(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('GCC-PROTOCOL', 'UserID')))
     _ConferenceTransferRequest_transferringNodes._cont = __ConferenceTransferRequest_transferringNodes__item_
     _ConferenceTransferRequest_transferringNodes._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=65536)], ev=None, er=[])
-    _ConferenceTransferRequest_password = CHOICE(name='password', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'PasswordSelector')), opt=True)
-    _ConferenceTransferRequest_networkAddressV2 = SET_OF(name='networkAddressV2', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'NetworkAddressV2')), opt=True)
+    _ConferenceTransferRequest_password = CHOICE(name=u'password', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'PasswordSelector')), opt=True)
+    _ConferenceTransferRequest_networkAddressV2 = SET_OF(name=u'networkAddressV2', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'NetworkAddressV2')), opt=True)
     ConferenceTransferRequest._cont = ASN1Dict([
-        ('conferenceName', _ConferenceTransferRequest_conferenceName),
-        ('conferenceNameModifier', _ConferenceTransferRequest_conferenceNameModifier),
-        ('networkAddress', _ConferenceTransferRequest_networkAddress),
-        ('transferringNodes', _ConferenceTransferRequest_transferringNodes),
-        ('password', _ConferenceTransferRequest_password),
-        ('networkAddressV2', _ConferenceTransferRequest_networkAddressV2),
+        (u'conferenceName', _ConferenceTransferRequest_conferenceName),
+        (u'conferenceNameModifier', _ConferenceTransferRequest_conferenceNameModifier),
+        (u'networkAddress', _ConferenceTransferRequest_networkAddress),
+        (u'transferringNodes', _ConferenceTransferRequest_transferringNodes),
+        (u'password', _ConferenceTransferRequest_password),
+        (u'networkAddressV2', _ConferenceTransferRequest_networkAddressV2),
         ])
-    ConferenceTransferRequest._ext = ['networkAddressV2']
+    ConferenceTransferRequest._ext = [u'networkAddressV2']
     
     #-----< ConferenceTransferResponse >-----#
-    ConferenceTransferResponse = SEQ(name='ConferenceTransferResponse', mode=MODE_TYPE)
-    _ConferenceTransferResponse_conferenceName = CHOICE(name='conferenceName', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'ConferenceNameSelector')))
-    _ConferenceTransferResponse_conferenceNameModifier = STR_NUM(name='conferenceNameModifier', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'ConferenceNameModifier')), opt=True)
-    _ConferenceTransferResponse_conferenceNameModifier._const_alpha = ASN1Set(rv=['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'], rr=[], ev=None, er=[])
-    _ConferenceTransferResponse_transferringNodes = SET_OF(name='transferringNodes', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    ConferenceTransferResponse = SEQ(name=u'ConferenceTransferResponse', mode=MODE_TYPE)
+    _ConferenceTransferResponse_conferenceName = CHOICE(name=u'conferenceName', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'ConferenceNameSelector')))
+    _ConferenceTransferResponse_conferenceNameModifier = STR_NUM(name=u'conferenceNameModifier', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'ConferenceNameModifier')), opt=True)
+    _ConferenceTransferResponse_conferenceNameModifier._const_alpha = ASN1Set(rv=[u'0', u'1', u'2', u'3', u'4', u'5', u'6', u'7', u'8', u'9'], rr=[], ev=None, er=[])
+    _ConferenceTransferResponse_transferringNodes = SET_OF(name=u'transferringNodes', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     __ConferenceTransferResponse_transferringNodes__item_ = INT(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('GCC-PROTOCOL', 'UserID')))
     _ConferenceTransferResponse_transferringNodes._cont = __ConferenceTransferResponse_transferringNodes__item_
     _ConferenceTransferResponse_transferringNodes._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=65536)], ev=None, er=[])
-    _ConferenceTransferResponse_result = ENUM(name='result', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _ConferenceTransferResponse_result._cont = ASN1Dict([('success', 0), ('invalidRequester', 1)])
+    _ConferenceTransferResponse_result = ENUM(name=u'result', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _ConferenceTransferResponse_result._cont = ASN1Dict([(u'success', 0), (u'invalidRequester', 1)])
     _ConferenceTransferResponse_result._ext = []
     ConferenceTransferResponse._cont = ASN1Dict([
-        ('conferenceName', _ConferenceTransferResponse_conferenceName),
-        ('conferenceNameModifier', _ConferenceTransferResponse_conferenceNameModifier),
-        ('transferringNodes', _ConferenceTransferResponse_transferringNodes),
-        ('result', _ConferenceTransferResponse_result),
+        (u'conferenceName', _ConferenceTransferResponse_conferenceName),
+        (u'conferenceNameModifier', _ConferenceTransferResponse_conferenceNameModifier),
+        (u'transferringNodes', _ConferenceTransferResponse_transferringNodes),
+        (u'result', _ConferenceTransferResponse_result),
         ])
     ConferenceTransferResponse._ext = []
     
     #-----< ConferenceTransferIndication >-----#
-    ConferenceTransferIndication = SEQ(name='ConferenceTransferIndication', mode=MODE_TYPE)
-    _ConferenceTransferIndication_conferenceName = CHOICE(name='conferenceName', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'ConferenceNameSelector')))
-    _ConferenceTransferIndication_conferenceNameModifier = STR_NUM(name='conferenceNameModifier', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'ConferenceNameModifier')), opt=True)
-    _ConferenceTransferIndication_conferenceNameModifier._const_alpha = ASN1Set(rv=['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'], rr=[], ev=None, er=[])
-    _ConferenceTransferIndication_networkAddress = SEQ_OF(name='networkAddress', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'NetworkAddress')), opt=True)
-    _ConferenceTransferIndication_transferringNodes = SET_OF(name='transferringNodes', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    ConferenceTransferIndication = SEQ(name=u'ConferenceTransferIndication', mode=MODE_TYPE)
+    _ConferenceTransferIndication_conferenceName = CHOICE(name=u'conferenceName', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'ConferenceNameSelector')))
+    _ConferenceTransferIndication_conferenceNameModifier = STR_NUM(name=u'conferenceNameModifier', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'ConferenceNameModifier')), opt=True)
+    _ConferenceTransferIndication_conferenceNameModifier._const_alpha = ASN1Set(rv=[u'0', u'1', u'2', u'3', u'4', u'5', u'6', u'7', u'8', u'9'], rr=[], ev=None, er=[])
+    _ConferenceTransferIndication_networkAddress = SEQ_OF(name=u'networkAddress', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'NetworkAddress')), opt=True)
+    _ConferenceTransferIndication_transferringNodes = SET_OF(name=u'transferringNodes', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     __ConferenceTransferIndication_transferringNodes__item_ = INT(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('GCC-PROTOCOL', 'UserID')))
     _ConferenceTransferIndication_transferringNodes._cont = __ConferenceTransferIndication_transferringNodes__item_
     _ConferenceTransferIndication_transferringNodes._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=65536)], ev=None, er=[])
-    _ConferenceTransferIndication_password = CHOICE(name='password', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'PasswordSelector')), opt=True)
-    _ConferenceTransferIndication_networkAddressV2 = SET_OF(name='networkAddressV2', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'NetworkAddressV2')), opt=True)
+    _ConferenceTransferIndication_password = CHOICE(name=u'password', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'PasswordSelector')), opt=True)
+    _ConferenceTransferIndication_networkAddressV2 = SET_OF(name=u'networkAddressV2', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'NetworkAddressV2')), opt=True)
     ConferenceTransferIndication._cont = ASN1Dict([
-        ('conferenceName', _ConferenceTransferIndication_conferenceName),
-        ('conferenceNameModifier', _ConferenceTransferIndication_conferenceNameModifier),
-        ('networkAddress', _ConferenceTransferIndication_networkAddress),
-        ('transferringNodes', _ConferenceTransferIndication_transferringNodes),
-        ('password', _ConferenceTransferIndication_password),
-        ('networkAddressV2', _ConferenceTransferIndication_networkAddressV2),
+        (u'conferenceName', _ConferenceTransferIndication_conferenceName),
+        (u'conferenceNameModifier', _ConferenceTransferIndication_conferenceNameModifier),
+        (u'networkAddress', _ConferenceTransferIndication_networkAddress),
+        (u'transferringNodes', _ConferenceTransferIndication_transferringNodes),
+        (u'password', _ConferenceTransferIndication_password),
+        (u'networkAddressV2', _ConferenceTransferIndication_networkAddressV2),
         ])
-    ConferenceTransferIndication._ext = ['networkAddressV2']
+    ConferenceTransferIndication._ext = [u'networkAddressV2']
     
     #-----< RosterUpdateIndication >-----#
-    RosterUpdateIndication = SEQ(name='RosterUpdateIndication', mode=MODE_TYPE)
-    _RosterUpdateIndication_fullRefresh = BOOL(name='fullRefresh', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _RosterUpdateIndication_nodeInformation = SEQ(name='nodeInformation', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    __RosterUpdateIndication_nodeInformation_nodeRecordList = CHOICE(name='nodeRecordList', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
-    ___RosterUpdateIndication_nodeInformation_nodeRecordList_noChange = NULL(name='noChange', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    ___RosterUpdateIndication_nodeInformation_nodeRecordList_refresh = SET_OF(name='refresh', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    RosterUpdateIndication = SEQ(name=u'RosterUpdateIndication', mode=MODE_TYPE)
+    _RosterUpdateIndication_fullRefresh = BOOL(name=u'fullRefresh', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _RosterUpdateIndication_nodeInformation = SEQ(name=u'nodeInformation', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __RosterUpdateIndication_nodeInformation_nodeRecordList = CHOICE(name=u'nodeRecordList', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
+    ___RosterUpdateIndication_nodeInformation_nodeRecordList_noChange = NULL(name=u'noChange', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    ___RosterUpdateIndication_nodeInformation_nodeRecordList_refresh = SET_OF(name=u'refresh', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     ____RosterUpdateIndication_nodeInformation_nodeRecordList_refresh__item_ = SEQ(name='_item_', mode=MODE_TYPE)
-    _____RosterUpdateIndication_nodeInformation_nodeRecordList_refresh__item__nodeID = INT(name='nodeID', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'UserID')))
-    _____RosterUpdateIndication_nodeInformation_nodeRecordList_refresh__item__nodeRecord = SEQ(name='nodeRecord', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'NodeRecord')))
+    _____RosterUpdateIndication_nodeInformation_nodeRecordList_refresh__item__nodeID = INT(name=u'nodeID', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'UserID')))
+    _____RosterUpdateIndication_nodeInformation_nodeRecordList_refresh__item__nodeRecord = SEQ(name=u'nodeRecord', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'NodeRecord')))
     ____RosterUpdateIndication_nodeInformation_nodeRecordList_refresh__item_._cont = ASN1Dict([
-        ('nodeID', _____RosterUpdateIndication_nodeInformation_nodeRecordList_refresh__item__nodeID),
-        ('nodeRecord', _____RosterUpdateIndication_nodeInformation_nodeRecordList_refresh__item__nodeRecord),
+        (u'nodeID', _____RosterUpdateIndication_nodeInformation_nodeRecordList_refresh__item__nodeID),
+        (u'nodeRecord', _____RosterUpdateIndication_nodeInformation_nodeRecordList_refresh__item__nodeRecord),
         ])
     ____RosterUpdateIndication_nodeInformation_nodeRecordList_refresh__item_._ext = None
     ___RosterUpdateIndication_nodeInformation_nodeRecordList_refresh._cont = ____RosterUpdateIndication_nodeInformation_nodeRecordList_refresh__item_
     ___RosterUpdateIndication_nodeInformation_nodeRecordList_refresh._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=65536)], ev=None, er=[])
-    ___RosterUpdateIndication_nodeInformation_nodeRecordList_update = SET_OF(name='update', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    ___RosterUpdateIndication_nodeInformation_nodeRecordList_update = SET_OF(name=u'update', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     ____RosterUpdateIndication_nodeInformation_nodeRecordList_update__item_ = SEQ(name='_item_', mode=MODE_TYPE)
-    _____RosterUpdateIndication_nodeInformation_nodeRecordList_update__item__nodeID = INT(name='nodeID', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'UserID')))
-    _____RosterUpdateIndication_nodeInformation_nodeRecordList_update__item__nodeUpdate = CHOICE(name='nodeUpdate', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
-    ______RosterUpdateIndication_nodeInformation_nodeRecordList_update__item__nodeUpdate_addRecord = SEQ(name='addRecord', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'NodeRecord')))
-    ______RosterUpdateIndication_nodeInformation_nodeRecordList_update__item__nodeUpdate_replaceRecord = SEQ(name='replaceRecord', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'NodeRecord')))
-    ______RosterUpdateIndication_nodeInformation_nodeRecordList_update__item__nodeUpdate_removeRecord = NULL(name='removeRecord', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _____RosterUpdateIndication_nodeInformation_nodeRecordList_update__item__nodeID = INT(name=u'nodeID', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'UserID')))
+    _____RosterUpdateIndication_nodeInformation_nodeRecordList_update__item__nodeUpdate = CHOICE(name=u'nodeUpdate', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
+    ______RosterUpdateIndication_nodeInformation_nodeRecordList_update__item__nodeUpdate_addRecord = SEQ(name=u'addRecord', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'NodeRecord')))
+    ______RosterUpdateIndication_nodeInformation_nodeRecordList_update__item__nodeUpdate_replaceRecord = SEQ(name=u'replaceRecord', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'NodeRecord')))
+    ______RosterUpdateIndication_nodeInformation_nodeRecordList_update__item__nodeUpdate_removeRecord = NULL(name=u'removeRecord', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     _____RosterUpdateIndication_nodeInformation_nodeRecordList_update__item__nodeUpdate._cont = ASN1Dict([
-        ('addRecord', ______RosterUpdateIndication_nodeInformation_nodeRecordList_update__item__nodeUpdate_addRecord),
-        ('replaceRecord', ______RosterUpdateIndication_nodeInformation_nodeRecordList_update__item__nodeUpdate_replaceRecord),
-        ('removeRecord', ______RosterUpdateIndication_nodeInformation_nodeRecordList_update__item__nodeUpdate_removeRecord),
+        (u'addRecord', ______RosterUpdateIndication_nodeInformation_nodeRecordList_update__item__nodeUpdate_addRecord),
+        (u'replaceRecord', ______RosterUpdateIndication_nodeInformation_nodeRecordList_update__item__nodeUpdate_replaceRecord),
+        (u'removeRecord', ______RosterUpdateIndication_nodeInformation_nodeRecordList_update__item__nodeUpdate_removeRecord),
         ])
     _____RosterUpdateIndication_nodeInformation_nodeRecordList_update__item__nodeUpdate._ext = []
     ____RosterUpdateIndication_nodeInformation_nodeRecordList_update__item_._cont = ASN1Dict([
-        ('nodeID', _____RosterUpdateIndication_nodeInformation_nodeRecordList_update__item__nodeID),
-        ('nodeUpdate', _____RosterUpdateIndication_nodeInformation_nodeRecordList_update__item__nodeUpdate),
+        (u'nodeID', _____RosterUpdateIndication_nodeInformation_nodeRecordList_update__item__nodeID),
+        (u'nodeUpdate', _____RosterUpdateIndication_nodeInformation_nodeRecordList_update__item__nodeUpdate),
         ])
     ____RosterUpdateIndication_nodeInformation_nodeRecordList_update__item_._ext = None
     ___RosterUpdateIndication_nodeInformation_nodeRecordList_update._cont = ____RosterUpdateIndication_nodeInformation_nodeRecordList_update__item_
     ___RosterUpdateIndication_nodeInformation_nodeRecordList_update._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=65536)], ev=None, er=[])
     __RosterUpdateIndication_nodeInformation_nodeRecordList._cont = ASN1Dict([
-        ('noChange', ___RosterUpdateIndication_nodeInformation_nodeRecordList_noChange),
-        ('refresh', ___RosterUpdateIndication_nodeInformation_nodeRecordList_refresh),
-        ('update', ___RosterUpdateIndication_nodeInformation_nodeRecordList_update),
+        (u'noChange', ___RosterUpdateIndication_nodeInformation_nodeRecordList_noChange),
+        (u'refresh', ___RosterUpdateIndication_nodeInformation_nodeRecordList_refresh),
+        (u'update', ___RosterUpdateIndication_nodeInformation_nodeRecordList_update),
         ])
     __RosterUpdateIndication_nodeInformation_nodeRecordList._ext = []
-    __RosterUpdateIndication_nodeInformation_rosterInstanceNumber = INT(name='rosterInstanceNumber', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __RosterUpdateIndication_nodeInformation_rosterInstanceNumber = INT(name=u'rosterInstanceNumber', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     __RosterUpdateIndication_nodeInformation_rosterInstanceNumber._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=65535)], ev=None, er=[])
-    __RosterUpdateIndication_nodeInformation_nodesAdded = BOOL(name='nodesAdded', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    __RosterUpdateIndication_nodeInformation_nodesRemoved = BOOL(name='nodesRemoved', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __RosterUpdateIndication_nodeInformation_nodesAdded = BOOL(name=u'nodesAdded', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __RosterUpdateIndication_nodeInformation_nodesRemoved = BOOL(name=u'nodesRemoved', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     _RosterUpdateIndication_nodeInformation._cont = ASN1Dict([
-        ('nodeRecordList', __RosterUpdateIndication_nodeInformation_nodeRecordList),
-        ('rosterInstanceNumber', __RosterUpdateIndication_nodeInformation_rosterInstanceNumber),
-        ('nodesAdded', __RosterUpdateIndication_nodeInformation_nodesAdded),
-        ('nodesRemoved', __RosterUpdateIndication_nodeInformation_nodesRemoved),
+        (u'nodeRecordList', __RosterUpdateIndication_nodeInformation_nodeRecordList),
+        (u'rosterInstanceNumber', __RosterUpdateIndication_nodeInformation_rosterInstanceNumber),
+        (u'nodesAdded', __RosterUpdateIndication_nodeInformation_nodesAdded),
+        (u'nodesRemoved', __RosterUpdateIndication_nodeInformation_nodesRemoved),
         ])
     _RosterUpdateIndication_nodeInformation._ext = []
-    _RosterUpdateIndication_applicationInformation = SET_OF(name='applicationInformation', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _RosterUpdateIndication_applicationInformation = SET_OF(name=u'applicationInformation', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     __RosterUpdateIndication_applicationInformation__item_ = SEQ(name='_item_', mode=MODE_TYPE)
-    ___RosterUpdateIndication_applicationInformation__item__sessionKey = SEQ(name='sessionKey', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'SessionKey')))
-    ___RosterUpdateIndication_applicationInformation__item__applicationRecordList = CHOICE(name='applicationRecordList', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
-    ____RosterUpdateIndication_applicationInformation__item__applicationRecordList_noChange = NULL(name='noChange', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    ____RosterUpdateIndication_applicationInformation__item__applicationRecordList_refresh = SET_OF(name='refresh', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    ___RosterUpdateIndication_applicationInformation__item__sessionKey = SEQ(name=u'sessionKey', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'SessionKey')))
+    ___RosterUpdateIndication_applicationInformation__item__applicationRecordList = CHOICE(name=u'applicationRecordList', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
+    ____RosterUpdateIndication_applicationInformation__item__applicationRecordList_noChange = NULL(name=u'noChange', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    ____RosterUpdateIndication_applicationInformation__item__applicationRecordList_refresh = SET_OF(name=u'refresh', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     _____RosterUpdateIndication_applicationInformation__item__applicationRecordList_refresh__item_ = SEQ(name='_item_', mode=MODE_TYPE)
-    ______RosterUpdateIndication_applicationInformation__item__applicationRecordList_refresh__item__nodeID = INT(name='nodeID', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'UserID')))
-    ______RosterUpdateIndication_applicationInformation__item__applicationRecordList_refresh__item__entityID = INT(name='entityID', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'EntityID')))
-    ______RosterUpdateIndication_applicationInformation__item__applicationRecordList_refresh__item__applicationRecord = SEQ(name='applicationRecord', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'ApplicationRecord')))
+    ______RosterUpdateIndication_applicationInformation__item__applicationRecordList_refresh__item__nodeID = INT(name=u'nodeID', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'UserID')))
+    ______RosterUpdateIndication_applicationInformation__item__applicationRecordList_refresh__item__entityID = INT(name=u'entityID', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'EntityID')))
+    ______RosterUpdateIndication_applicationInformation__item__applicationRecordList_refresh__item__applicationRecord = SEQ(name=u'applicationRecord', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'ApplicationRecord')))
     _____RosterUpdateIndication_applicationInformation__item__applicationRecordList_refresh__item_._cont = ASN1Dict([
-        ('nodeID', ______RosterUpdateIndication_applicationInformation__item__applicationRecordList_refresh__item__nodeID),
-        ('entityID', ______RosterUpdateIndication_applicationInformation__item__applicationRecordList_refresh__item__entityID),
-        ('applicationRecord', ______RosterUpdateIndication_applicationInformation__item__applicationRecordList_refresh__item__applicationRecord),
+        (u'nodeID', ______RosterUpdateIndication_applicationInformation__item__applicationRecordList_refresh__item__nodeID),
+        (u'entityID', ______RosterUpdateIndication_applicationInformation__item__applicationRecordList_refresh__item__entityID),
+        (u'applicationRecord', ______RosterUpdateIndication_applicationInformation__item__applicationRecordList_refresh__item__applicationRecord),
         ])
     _____RosterUpdateIndication_applicationInformation__item__applicationRecordList_refresh__item_._ext = None
     ____RosterUpdateIndication_applicationInformation__item__applicationRecordList_refresh._cont = _____RosterUpdateIndication_applicationInformation__item__applicationRecordList_refresh__item_
     ____RosterUpdateIndication_applicationInformation__item__applicationRecordList_refresh._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=65535)], ev=None, er=[])
-    ____RosterUpdateIndication_applicationInformation__item__applicationRecordList_update = SET_OF(name='update', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    ____RosterUpdateIndication_applicationInformation__item__applicationRecordList_update = SET_OF(name=u'update', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     _____RosterUpdateIndication_applicationInformation__item__applicationRecordList_update__item_ = SEQ(name='_item_', mode=MODE_TYPE)
-    ______RosterUpdateIndication_applicationInformation__item__applicationRecordList_update__item__nodeID = INT(name='nodeID', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'UserID')))
-    ______RosterUpdateIndication_applicationInformation__item__applicationRecordList_update__item__entityID = INT(name='entityID', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'EntityID')))
-    ______RosterUpdateIndication_applicationInformation__item__applicationRecordList_update__item__applicationUpdate = CHOICE(name='applicationUpdate', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
-    _______RosterUpdateIndication_applicationInformation__item__applicationRecordList_update__item__applicationUpdate_addRecord = SEQ(name='addRecord', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'ApplicationRecord')))
-    _______RosterUpdateIndication_applicationInformation__item__applicationRecordList_update__item__applicationUpdate_replaceRecord = SEQ(name='replaceRecord', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'ApplicationRecord')))
-    _______RosterUpdateIndication_applicationInformation__item__applicationRecordList_update__item__applicationUpdate_removeRecord = NULL(name='removeRecord', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    ______RosterUpdateIndication_applicationInformation__item__applicationRecordList_update__item__nodeID = INT(name=u'nodeID', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'UserID')))
+    ______RosterUpdateIndication_applicationInformation__item__applicationRecordList_update__item__entityID = INT(name=u'entityID', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'EntityID')))
+    ______RosterUpdateIndication_applicationInformation__item__applicationRecordList_update__item__applicationUpdate = CHOICE(name=u'applicationUpdate', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
+    _______RosterUpdateIndication_applicationInformation__item__applicationRecordList_update__item__applicationUpdate_addRecord = SEQ(name=u'addRecord', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'ApplicationRecord')))
+    _______RosterUpdateIndication_applicationInformation__item__applicationRecordList_update__item__applicationUpdate_replaceRecord = SEQ(name=u'replaceRecord', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'ApplicationRecord')))
+    _______RosterUpdateIndication_applicationInformation__item__applicationRecordList_update__item__applicationUpdate_removeRecord = NULL(name=u'removeRecord', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     ______RosterUpdateIndication_applicationInformation__item__applicationRecordList_update__item__applicationUpdate._cont = ASN1Dict([
-        ('addRecord', _______RosterUpdateIndication_applicationInformation__item__applicationRecordList_update__item__applicationUpdate_addRecord),
-        ('replaceRecord', _______RosterUpdateIndication_applicationInformation__item__applicationRecordList_update__item__applicationUpdate_replaceRecord),
-        ('removeRecord', _______RosterUpdateIndication_applicationInformation__item__applicationRecordList_update__item__applicationUpdate_removeRecord),
+        (u'addRecord', _______RosterUpdateIndication_applicationInformation__item__applicationRecordList_update__item__applicationUpdate_addRecord),
+        (u'replaceRecord', _______RosterUpdateIndication_applicationInformation__item__applicationRecordList_update__item__applicationUpdate_replaceRecord),
+        (u'removeRecord', _______RosterUpdateIndication_applicationInformation__item__applicationRecordList_update__item__applicationUpdate_removeRecord),
         ])
     ______RosterUpdateIndication_applicationInformation__item__applicationRecordList_update__item__applicationUpdate._ext = []
     _____RosterUpdateIndication_applicationInformation__item__applicationRecordList_update__item_._cont = ASN1Dict([
-        ('nodeID', ______RosterUpdateIndication_applicationInformation__item__applicationRecordList_update__item__nodeID),
-        ('entityID', ______RosterUpdateIndication_applicationInformation__item__applicationRecordList_update__item__entityID),
-        ('applicationUpdate', ______RosterUpdateIndication_applicationInformation__item__applicationRecordList_update__item__applicationUpdate),
+        (u'nodeID', ______RosterUpdateIndication_applicationInformation__item__applicationRecordList_update__item__nodeID),
+        (u'entityID', ______RosterUpdateIndication_applicationInformation__item__applicationRecordList_update__item__entityID),
+        (u'applicationUpdate', ______RosterUpdateIndication_applicationInformation__item__applicationRecordList_update__item__applicationUpdate),
         ])
     _____RosterUpdateIndication_applicationInformation__item__applicationRecordList_update__item_._ext = None
     ____RosterUpdateIndication_applicationInformation__item__applicationRecordList_update._cont = _____RosterUpdateIndication_applicationInformation__item__applicationRecordList_update__item_
     ____RosterUpdateIndication_applicationInformation__item__applicationRecordList_update._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=65536)], ev=None, er=[])
     ___RosterUpdateIndication_applicationInformation__item__applicationRecordList._cont = ASN1Dict([
-        ('noChange', ____RosterUpdateIndication_applicationInformation__item__applicationRecordList_noChange),
-        ('refresh', ____RosterUpdateIndication_applicationInformation__item__applicationRecordList_refresh),
-        ('update', ____RosterUpdateIndication_applicationInformation__item__applicationRecordList_update),
+        (u'noChange', ____RosterUpdateIndication_applicationInformation__item__applicationRecordList_noChange),
+        (u'refresh', ____RosterUpdateIndication_applicationInformation__item__applicationRecordList_refresh),
+        (u'update', ____RosterUpdateIndication_applicationInformation__item__applicationRecordList_update),
         ])
     ___RosterUpdateIndication_applicationInformation__item__applicationRecordList._ext = []
-    ___RosterUpdateIndication_applicationInformation__item__applicationCapabilitiesList = CHOICE(name='applicationCapabilitiesList', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
-    ____RosterUpdateIndication_applicationInformation__item__applicationCapabilitiesList_noChange = NULL(name='noChange', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    ____RosterUpdateIndication_applicationInformation__item__applicationCapabilitiesList_refresh = SET_OF(name='refresh', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    ___RosterUpdateIndication_applicationInformation__item__applicationCapabilitiesList = CHOICE(name=u'applicationCapabilitiesList', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
+    ____RosterUpdateIndication_applicationInformation__item__applicationCapabilitiesList_noChange = NULL(name=u'noChange', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    ____RosterUpdateIndication_applicationInformation__item__applicationCapabilitiesList_refresh = SET_OF(name=u'refresh', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     _____RosterUpdateIndication_applicationInformation__item__applicationCapabilitiesList_refresh__item_ = SEQ(name='_item_', mode=MODE_TYPE)
-    ______RosterUpdateIndication_applicationInformation__item__applicationCapabilitiesList_refresh__item__capabilityID = CHOICE(name='capabilityID', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'CapabilityID')))
-    ______RosterUpdateIndication_applicationInformation__item__applicationCapabilitiesList_refresh__item__capabilityClass = CHOICE(name='capabilityClass', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'CapabilityClass')))
-    ______RosterUpdateIndication_applicationInformation__item__applicationCapabilitiesList_refresh__item__numberOfEntities = INT(name='numberOfEntities', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    ______RosterUpdateIndication_applicationInformation__item__applicationCapabilitiesList_refresh__item__capabilityID = CHOICE(name=u'capabilityID', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'CapabilityID')))
+    ______RosterUpdateIndication_applicationInformation__item__applicationCapabilitiesList_refresh__item__capabilityClass = CHOICE(name=u'capabilityClass', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'CapabilityClass')))
+    ______RosterUpdateIndication_applicationInformation__item__applicationCapabilitiesList_refresh__item__numberOfEntities = INT(name=u'numberOfEntities', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     ______RosterUpdateIndication_applicationInformation__item__applicationCapabilitiesList_refresh__item__numberOfEntities._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=65536)], ev=None, er=[])
     _____RosterUpdateIndication_applicationInformation__item__applicationCapabilitiesList_refresh__item_._cont = ASN1Dict([
-        ('capabilityID', ______RosterUpdateIndication_applicationInformation__item__applicationCapabilitiesList_refresh__item__capabilityID),
-        ('capabilityClass', ______RosterUpdateIndication_applicationInformation__item__applicationCapabilitiesList_refresh__item__capabilityClass),
-        ('numberOfEntities', ______RosterUpdateIndication_applicationInformation__item__applicationCapabilitiesList_refresh__item__numberOfEntities),
+        (u'capabilityID', ______RosterUpdateIndication_applicationInformation__item__applicationCapabilitiesList_refresh__item__capabilityID),
+        (u'capabilityClass', ______RosterUpdateIndication_applicationInformation__item__applicationCapabilitiesList_refresh__item__capabilityClass),
+        (u'numberOfEntities', ______RosterUpdateIndication_applicationInformation__item__applicationCapabilitiesList_refresh__item__numberOfEntities),
         ])
     _____RosterUpdateIndication_applicationInformation__item__applicationCapabilitiesList_refresh__item_._ext = []
     ____RosterUpdateIndication_applicationInformation__item__applicationCapabilitiesList_refresh._cont = _____RosterUpdateIndication_applicationInformation__item__applicationCapabilitiesList_refresh__item_
     ___RosterUpdateIndication_applicationInformation__item__applicationCapabilitiesList._cont = ASN1Dict([
-        ('noChange', ____RosterUpdateIndication_applicationInformation__item__applicationCapabilitiesList_noChange),
-        ('refresh', ____RosterUpdateIndication_applicationInformation__item__applicationCapabilitiesList_refresh),
+        (u'noChange', ____RosterUpdateIndication_applicationInformation__item__applicationCapabilitiesList_noChange),
+        (u'refresh', ____RosterUpdateIndication_applicationInformation__item__applicationCapabilitiesList_refresh),
         ])
     ___RosterUpdateIndication_applicationInformation__item__applicationCapabilitiesList._ext = []
-    ___RosterUpdateIndication_applicationInformation__item__rosterInstanceNumber = INT(name='rosterInstanceNumber', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    ___RosterUpdateIndication_applicationInformation__item__rosterInstanceNumber = INT(name=u'rosterInstanceNumber', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     ___RosterUpdateIndication_applicationInformation__item__rosterInstanceNumber._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=65535)], ev=None, er=[])
-    ___RosterUpdateIndication_applicationInformation__item__peerEntitiesAdded = BOOL(name='peerEntitiesAdded', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    ___RosterUpdateIndication_applicationInformation__item__peerEntitiesRemoved = BOOL(name='peerEntitiesRemoved', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    ___RosterUpdateIndication_applicationInformation__item__peerEntitiesAdded = BOOL(name=u'peerEntitiesAdded', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    ___RosterUpdateIndication_applicationInformation__item__peerEntitiesRemoved = BOOL(name=u'peerEntitiesRemoved', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     __RosterUpdateIndication_applicationInformation__item_._cont = ASN1Dict([
-        ('sessionKey', ___RosterUpdateIndication_applicationInformation__item__sessionKey),
-        ('applicationRecordList', ___RosterUpdateIndication_applicationInformation__item__applicationRecordList),
-        ('applicationCapabilitiesList', ___RosterUpdateIndication_applicationInformation__item__applicationCapabilitiesList),
-        ('rosterInstanceNumber', ___RosterUpdateIndication_applicationInformation__item__rosterInstanceNumber),
-        ('peerEntitiesAdded', ___RosterUpdateIndication_applicationInformation__item__peerEntitiesAdded),
-        ('peerEntitiesRemoved', ___RosterUpdateIndication_applicationInformation__item__peerEntitiesRemoved),
+        (u'sessionKey', ___RosterUpdateIndication_applicationInformation__item__sessionKey),
+        (u'applicationRecordList', ___RosterUpdateIndication_applicationInformation__item__applicationRecordList),
+        (u'applicationCapabilitiesList', ___RosterUpdateIndication_applicationInformation__item__applicationCapabilitiesList),
+        (u'rosterInstanceNumber', ___RosterUpdateIndication_applicationInformation__item__rosterInstanceNumber),
+        (u'peerEntitiesAdded', ___RosterUpdateIndication_applicationInformation__item__peerEntitiesAdded),
+        (u'peerEntitiesRemoved', ___RosterUpdateIndication_applicationInformation__item__peerEntitiesRemoved),
         ])
     __RosterUpdateIndication_applicationInformation__item_._ext = []
     _RosterUpdateIndication_applicationInformation._cont = __RosterUpdateIndication_applicationInformation__item_
     _RosterUpdateIndication_applicationInformation._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=65535)], ev=None, er=[])
     RosterUpdateIndication._cont = ASN1Dict([
-        ('fullRefresh', _RosterUpdateIndication_fullRefresh),
-        ('nodeInformation', _RosterUpdateIndication_nodeInformation),
-        ('applicationInformation', _RosterUpdateIndication_applicationInformation),
+        (u'fullRefresh', _RosterUpdateIndication_fullRefresh),
+        (u'nodeInformation', _RosterUpdateIndication_nodeInformation),
+        (u'applicationInformation', _RosterUpdateIndication_applicationInformation),
         ])
     RosterUpdateIndication._ext = []
     
     #-----< ApplicationInvokeIndication >-----#
-    ApplicationInvokeIndication = SEQ(name='ApplicationInvokeIndication', mode=MODE_TYPE)
-    _ApplicationInvokeIndication_applicationProtocolEntiyList = SET_OF(name='applicationProtocolEntiyList', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    ApplicationInvokeIndication = SEQ(name=u'ApplicationInvokeIndication', mode=MODE_TYPE)
+    _ApplicationInvokeIndication_applicationProtocolEntiyList = SET_OF(name=u'applicationProtocolEntiyList', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     __ApplicationInvokeIndication_applicationProtocolEntiyList__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('GCC-PROTOCOL', 'ApplicationInvokeSpecifier')))
     _ApplicationInvokeIndication_applicationProtocolEntiyList._cont = __ApplicationInvokeIndication_applicationProtocolEntiyList__item_
     _ApplicationInvokeIndication_applicationProtocolEntiyList._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=65536)], ev=None, er=[])
-    _ApplicationInvokeIndication_destinationNodes = SET_OF(name='destinationNodes', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _ApplicationInvokeIndication_destinationNodes = SET_OF(name=u'destinationNodes', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     __ApplicationInvokeIndication_destinationNodes__item_ = INT(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('GCC-PROTOCOL', 'UserID')))
     _ApplicationInvokeIndication_destinationNodes._cont = __ApplicationInvokeIndication_destinationNodes__item_
     _ApplicationInvokeIndication_destinationNodes._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=65536)], ev=None, er=[])
     ApplicationInvokeIndication._cont = ASN1Dict([
-        ('applicationProtocolEntiyList', _ApplicationInvokeIndication_applicationProtocolEntiyList),
-        ('destinationNodes', _ApplicationInvokeIndication_destinationNodes),
+        (u'applicationProtocolEntiyList', _ApplicationInvokeIndication_applicationProtocolEntiyList),
+        (u'destinationNodes', _ApplicationInvokeIndication_destinationNodes),
         ])
     ApplicationInvokeIndication._ext = []
     
     #-----< RegistryRegisterChannelRequest >-----#
-    RegistryRegisterChannelRequest = SEQ(name='RegistryRegisterChannelRequest', mode=MODE_TYPE)
-    _RegistryRegisterChannelRequest_entityID = INT(name='entityID', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'EntityID')))
-    _RegistryRegisterChannelRequest_key = SEQ(name='key', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'RegistryKey')))
-    _RegistryRegisterChannelRequest_channelID = INT(name='channelID', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'DynamicChannelID')))
+    RegistryRegisterChannelRequest = SEQ(name=u'RegistryRegisterChannelRequest', mode=MODE_TYPE)
+    _RegistryRegisterChannelRequest_entityID = INT(name=u'entityID', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'EntityID')))
+    _RegistryRegisterChannelRequest_key = SEQ(name=u'key', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'RegistryKey')))
+    _RegistryRegisterChannelRequest_channelID = INT(name=u'channelID', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'DynamicChannelID')))
     RegistryRegisterChannelRequest._cont = ASN1Dict([
-        ('entityID', _RegistryRegisterChannelRequest_entityID),
-        ('key', _RegistryRegisterChannelRequest_key),
-        ('channelID', _RegistryRegisterChannelRequest_channelID),
+        (u'entityID', _RegistryRegisterChannelRequest_entityID),
+        (u'key', _RegistryRegisterChannelRequest_key),
+        (u'channelID', _RegistryRegisterChannelRequest_channelID),
         ])
     RegistryRegisterChannelRequest._ext = []
     
     #-----< RegistryAssignTokenRequest >-----#
-    RegistryAssignTokenRequest = SEQ(name='RegistryAssignTokenRequest', mode=MODE_TYPE)
-    _RegistryAssignTokenRequest_entityID = INT(name='entityID', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'EntityID')))
-    _RegistryAssignTokenRequest_key = SEQ(name='key', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'RegistryKey')))
+    RegistryAssignTokenRequest = SEQ(name=u'RegistryAssignTokenRequest', mode=MODE_TYPE)
+    _RegistryAssignTokenRequest_entityID = INT(name=u'entityID', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'EntityID')))
+    _RegistryAssignTokenRequest_key = SEQ(name=u'key', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'RegistryKey')))
     RegistryAssignTokenRequest._cont = ASN1Dict([
-        ('entityID', _RegistryAssignTokenRequest_entityID),
-        ('key', _RegistryAssignTokenRequest_key),
+        (u'entityID', _RegistryAssignTokenRequest_entityID),
+        (u'key', _RegistryAssignTokenRequest_key),
         ])
     RegistryAssignTokenRequest._ext = []
     
     #-----< RegistrySetParameterRequest >-----#
-    RegistrySetParameterRequest = SEQ(name='RegistrySetParameterRequest', mode=MODE_TYPE)
-    _RegistrySetParameterRequest_entityID = INT(name='entityID', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'EntityID')))
-    _RegistrySetParameterRequest_key = SEQ(name='key', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'RegistryKey')))
-    _RegistrySetParameterRequest_parameter = OCT_STR(name='parameter', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    RegistrySetParameterRequest = SEQ(name=u'RegistrySetParameterRequest', mode=MODE_TYPE)
+    _RegistrySetParameterRequest_entityID = INT(name=u'entityID', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'EntityID')))
+    _RegistrySetParameterRequest_key = SEQ(name=u'key', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'RegistryKey')))
+    _RegistrySetParameterRequest_parameter = OCT_STR(name=u'parameter', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     _RegistrySetParameterRequest_parameter._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=64)], ev=None, er=[])
-    _RegistrySetParameterRequest_modificationRights = ENUM(name='modificationRights', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'RegistryModificationRights')), opt=True)
+    _RegistrySetParameterRequest_modificationRights = ENUM(name=u'modificationRights', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'RegistryModificationRights')), opt=True)
     RegistrySetParameterRequest._cont = ASN1Dict([
-        ('entityID', _RegistrySetParameterRequest_entityID),
-        ('key', _RegistrySetParameterRequest_key),
-        ('parameter', _RegistrySetParameterRequest_parameter),
-        ('modificationRights', _RegistrySetParameterRequest_modificationRights),
+        (u'entityID', _RegistrySetParameterRequest_entityID),
+        (u'key', _RegistrySetParameterRequest_key),
+        (u'parameter', _RegistrySetParameterRequest_parameter),
+        (u'modificationRights', _RegistrySetParameterRequest_modificationRights),
         ])
     RegistrySetParameterRequest._ext = []
     
     #-----< RegistryRetrieveEntryRequest >-----#
-    RegistryRetrieveEntryRequest = SEQ(name='RegistryRetrieveEntryRequest', mode=MODE_TYPE)
-    _RegistryRetrieveEntryRequest_entityID = INT(name='entityID', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'EntityID')))
-    _RegistryRetrieveEntryRequest_key = SEQ(name='key', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'RegistryKey')))
+    RegistryRetrieveEntryRequest = SEQ(name=u'RegistryRetrieveEntryRequest', mode=MODE_TYPE)
+    _RegistryRetrieveEntryRequest_entityID = INT(name=u'entityID', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'EntityID')))
+    _RegistryRetrieveEntryRequest_key = SEQ(name=u'key', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'RegistryKey')))
     RegistryRetrieveEntryRequest._cont = ASN1Dict([
-        ('entityID', _RegistryRetrieveEntryRequest_entityID),
-        ('key', _RegistryRetrieveEntryRequest_key),
+        (u'entityID', _RegistryRetrieveEntryRequest_entityID),
+        (u'key', _RegistryRetrieveEntryRequest_key),
         ])
     RegistryRetrieveEntryRequest._ext = []
     
     #-----< RegistryDeleteEntryRequest >-----#
-    RegistryDeleteEntryRequest = SEQ(name='RegistryDeleteEntryRequest', mode=MODE_TYPE)
-    _RegistryDeleteEntryRequest_entityID = INT(name='entityID', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'EntityID')))
-    _RegistryDeleteEntryRequest_key = SEQ(name='key', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'RegistryKey')))
+    RegistryDeleteEntryRequest = SEQ(name=u'RegistryDeleteEntryRequest', mode=MODE_TYPE)
+    _RegistryDeleteEntryRequest_entityID = INT(name=u'entityID', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'EntityID')))
+    _RegistryDeleteEntryRequest_key = SEQ(name=u'key', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'RegistryKey')))
     RegistryDeleteEntryRequest._cont = ASN1Dict([
-        ('entityID', _RegistryDeleteEntryRequest_entityID),
-        ('key', _RegistryDeleteEntryRequest_key),
+        (u'entityID', _RegistryDeleteEntryRequest_entityID),
+        (u'key', _RegistryDeleteEntryRequest_key),
         ])
     RegistryDeleteEntryRequest._ext = []
     
     #-----< RegistryMonitorEntryRequest >-----#
-    RegistryMonitorEntryRequest = SEQ(name='RegistryMonitorEntryRequest', mode=MODE_TYPE)
-    _RegistryMonitorEntryRequest_entityID = INT(name='entityID', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'EntityID')))
-    _RegistryMonitorEntryRequest_key = SEQ(name='key', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'RegistryKey')))
+    RegistryMonitorEntryRequest = SEQ(name=u'RegistryMonitorEntryRequest', mode=MODE_TYPE)
+    _RegistryMonitorEntryRequest_entityID = INT(name=u'entityID', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'EntityID')))
+    _RegistryMonitorEntryRequest_key = SEQ(name=u'key', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'RegistryKey')))
     RegistryMonitorEntryRequest._cont = ASN1Dict([
-        ('entityID', _RegistryMonitorEntryRequest_entityID),
-        ('key', _RegistryMonitorEntryRequest_key),
+        (u'entityID', _RegistryMonitorEntryRequest_entityID),
+        (u'key', _RegistryMonitorEntryRequest_key),
         ])
     RegistryMonitorEntryRequest._ext = []
     
     #-----< RegistryMonitorEntryIndication >-----#
-    RegistryMonitorEntryIndication = SEQ(name='RegistryMonitorEntryIndication', mode=MODE_TYPE)
-    _RegistryMonitorEntryIndication_key = SEQ(name='key', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'RegistryKey')))
-    _RegistryMonitorEntryIndication_item = CHOICE(name='item', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'RegistryItem')))
-    _RegistryMonitorEntryIndication_owner = CHOICE(name='owner', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'RegistryEntryOwner')))
-    _RegistryMonitorEntryIndication_modificationRights = ENUM(name='modificationRights', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'RegistryModificationRights')), opt=True)
+    RegistryMonitorEntryIndication = SEQ(name=u'RegistryMonitorEntryIndication', mode=MODE_TYPE)
+    _RegistryMonitorEntryIndication_key = SEQ(name=u'key', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'RegistryKey')))
+    _RegistryMonitorEntryIndication_item = CHOICE(name=u'item', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'RegistryItem')))
+    _RegistryMonitorEntryIndication_owner = CHOICE(name=u'owner', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'RegistryEntryOwner')))
+    _RegistryMonitorEntryIndication_modificationRights = ENUM(name=u'modificationRights', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'RegistryModificationRights')), opt=True)
     RegistryMonitorEntryIndication._cont = ASN1Dict([
-        ('key', _RegistryMonitorEntryIndication_key),
-        ('item', _RegistryMonitorEntryIndication_item),
-        ('owner', _RegistryMonitorEntryIndication_owner),
-        ('modificationRights', _RegistryMonitorEntryIndication_modificationRights),
+        (u'key', _RegistryMonitorEntryIndication_key),
+        (u'item', _RegistryMonitorEntryIndication_item),
+        (u'owner', _RegistryMonitorEntryIndication_owner),
+        (u'modificationRights', _RegistryMonitorEntryIndication_modificationRights),
         ])
     RegistryMonitorEntryIndication._ext = []
     
     #-----< RegistryAllocateHandleRequest >-----#
-    RegistryAllocateHandleRequest = SEQ(name='RegistryAllocateHandleRequest', mode=MODE_TYPE)
-    _RegistryAllocateHandleRequest_entityID = INT(name='entityID', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'EntityID')))
-    _RegistryAllocateHandleRequest_numberOfHandles = INT(name='numberOfHandles', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    RegistryAllocateHandleRequest = SEQ(name=u'RegistryAllocateHandleRequest', mode=MODE_TYPE)
+    _RegistryAllocateHandleRequest_entityID = INT(name=u'entityID', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'EntityID')))
+    _RegistryAllocateHandleRequest_numberOfHandles = INT(name=u'numberOfHandles', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     _RegistryAllocateHandleRequest_numberOfHandles._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=1024)], ev=None, er=[])
     RegistryAllocateHandleRequest._cont = ASN1Dict([
-        ('entityID', _RegistryAllocateHandleRequest_entityID),
-        ('numberOfHandles', _RegistryAllocateHandleRequest_numberOfHandles),
+        (u'entityID', _RegistryAllocateHandleRequest_entityID),
+        (u'numberOfHandles', _RegistryAllocateHandleRequest_numberOfHandles),
         ])
     RegistryAllocateHandleRequest._ext = []
     
     #-----< RegistryAllocateHandleResponse >-----#
-    RegistryAllocateHandleResponse = SEQ(name='RegistryAllocateHandleResponse', mode=MODE_TYPE)
-    _RegistryAllocateHandleResponse_entityID = INT(name='entityID', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'EntityID')))
-    _RegistryAllocateHandleResponse_numberOfHandles = INT(name='numberOfHandles', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    RegistryAllocateHandleResponse = SEQ(name=u'RegistryAllocateHandleResponse', mode=MODE_TYPE)
+    _RegistryAllocateHandleResponse_entityID = INT(name=u'entityID', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'EntityID')))
+    _RegistryAllocateHandleResponse_numberOfHandles = INT(name=u'numberOfHandles', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     _RegistryAllocateHandleResponse_numberOfHandles._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=1024)], ev=None, er=[])
-    _RegistryAllocateHandleResponse_firstHandle = INT(name='firstHandle', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'Handle')))
-    _RegistryAllocateHandleResponse_result = ENUM(name='result', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _RegistryAllocateHandleResponse_result._cont = ASN1Dict([('successful', 0), ('noHandlesAvailable', 1)])
+    _RegistryAllocateHandleResponse_firstHandle = INT(name=u'firstHandle', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'Handle')))
+    _RegistryAllocateHandleResponse_result = ENUM(name=u'result', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _RegistryAllocateHandleResponse_result._cont = ASN1Dict([(u'successful', 0), (u'noHandlesAvailable', 1)])
     _RegistryAllocateHandleResponse_result._ext = []
     RegistryAllocateHandleResponse._cont = ASN1Dict([
-        ('entityID', _RegistryAllocateHandleResponse_entityID),
-        ('numberOfHandles', _RegistryAllocateHandleResponse_numberOfHandles),
-        ('firstHandle', _RegistryAllocateHandleResponse_firstHandle),
-        ('result', _RegistryAllocateHandleResponse_result),
+        (u'entityID', _RegistryAllocateHandleResponse_entityID),
+        (u'numberOfHandles', _RegistryAllocateHandleResponse_numberOfHandles),
+        (u'firstHandle', _RegistryAllocateHandleResponse_firstHandle),
+        (u'result', _RegistryAllocateHandleResponse_result),
         ])
     RegistryAllocateHandleResponse._ext = []
     
     #-----< RegistryResponse >-----#
-    RegistryResponse = SEQ(name='RegistryResponse', mode=MODE_TYPE)
-    _RegistryResponse_entityID = INT(name='entityID', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'EntityID')))
-    _RegistryResponse_primitiveType = ENUM(name='primitiveType', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _RegistryResponse_primitiveType._cont = ASN1Dict([('registerChannel', 0), ('assignToken', 1), ('setParameter', 2), ('retrieveEntry', 3), ('deleteEntry', 4), ('monitorEntry', 5)])
+    RegistryResponse = SEQ(name=u'RegistryResponse', mode=MODE_TYPE)
+    _RegistryResponse_entityID = INT(name=u'entityID', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'EntityID')))
+    _RegistryResponse_primitiveType = ENUM(name=u'primitiveType', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _RegistryResponse_primitiveType._cont = ASN1Dict([(u'registerChannel', 0), (u'assignToken', 1), (u'setParameter', 2), (u'retrieveEntry', 3), (u'deleteEntry', 4), (u'monitorEntry', 5)])
     _RegistryResponse_primitiveType._ext = []
-    _RegistryResponse_key = SEQ(name='key', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'RegistryKey')))
-    _RegistryResponse_item = CHOICE(name='item', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'RegistryItem')))
-    _RegistryResponse_owner = CHOICE(name='owner', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'RegistryEntryOwner')))
-    _RegistryResponse_modificationRights = ENUM(name='modificationRights', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'RegistryModificationRights')), opt=True)
-    _RegistryResponse_result = ENUM(name='result', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _RegistryResponse_result._cont = ASN1Dict([('successful', 0), ('belongsToOther', 1), ('tooManyEntries', 2), ('inconsistentType', 3), ('entryNotFound', 4), ('entryAlreadyExists', 5), ('invalidRequester', 6)])
+    _RegistryResponse_key = SEQ(name=u'key', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'RegistryKey')))
+    _RegistryResponse_item = CHOICE(name=u'item', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'RegistryItem')))
+    _RegistryResponse_owner = CHOICE(name=u'owner', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'RegistryEntryOwner')))
+    _RegistryResponse_modificationRights = ENUM(name=u'modificationRights', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'RegistryModificationRights')), opt=True)
+    _RegistryResponse_result = ENUM(name=u'result', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _RegistryResponse_result._cont = ASN1Dict([(u'successful', 0), (u'belongsToOther', 1), (u'tooManyEntries', 2), (u'inconsistentType', 3), (u'entryNotFound', 4), (u'entryAlreadyExists', 5), (u'invalidRequester', 6)])
     _RegistryResponse_result._ext = []
     RegistryResponse._cont = ASN1Dict([
-        ('entityID', _RegistryResponse_entityID),
-        ('primitiveType', _RegistryResponse_primitiveType),
-        ('key', _RegistryResponse_key),
-        ('item', _RegistryResponse_item),
-        ('owner', _RegistryResponse_owner),
-        ('modificationRights', _RegistryResponse_modificationRights),
-        ('result', _RegistryResponse_result),
+        (u'entityID', _RegistryResponse_entityID),
+        (u'primitiveType', _RegistryResponse_primitiveType),
+        (u'key', _RegistryResponse_key),
+        (u'item', _RegistryResponse_item),
+        (u'owner', _RegistryResponse_owner),
+        (u'modificationRights', _RegistryResponse_modificationRights),
+        (u'result', _RegistryResponse_result),
         ])
     RegistryResponse._ext = []
     
     #-----< ConductorAssignIndication >-----#
-    ConductorAssignIndication = SEQ(name='ConductorAssignIndication', mode=MODE_TYPE)
-    _ConductorAssignIndication_conductingNode = INT(name='conductingNode', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'UserID')))
+    ConductorAssignIndication = SEQ(name=u'ConductorAssignIndication', mode=MODE_TYPE)
+    _ConductorAssignIndication_conductingNode = INT(name=u'conductingNode', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'UserID')))
     ConductorAssignIndication._cont = ASN1Dict([
-        ('conductingNode', _ConductorAssignIndication_conductingNode),
+        (u'conductingNode', _ConductorAssignIndication_conductingNode),
         ])
     ConductorAssignIndication._ext = []
     
     #-----< ConductorReleaseIndication >-----#
-    ConductorReleaseIndication = SEQ(name='ConductorReleaseIndication', mode=MODE_TYPE)
+    ConductorReleaseIndication = SEQ(name=u'ConductorReleaseIndication', mode=MODE_TYPE)
     ConductorReleaseIndication._cont = ASN1Dict([
         ])
     ConductorReleaseIndication._ext = []
     
     #-----< ConductorPermissionAskIndication >-----#
-    ConductorPermissionAskIndication = SEQ(name='ConductorPermissionAskIndication', mode=MODE_TYPE)
-    _ConductorPermissionAskIndication_grantFlag = BOOL(name='grantFlag', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    ConductorPermissionAskIndication = SEQ(name=u'ConductorPermissionAskIndication', mode=MODE_TYPE)
+    _ConductorPermissionAskIndication_grantFlag = BOOL(name=u'grantFlag', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     ConductorPermissionAskIndication._cont = ASN1Dict([
-        ('grantFlag', _ConductorPermissionAskIndication_grantFlag),
+        (u'grantFlag', _ConductorPermissionAskIndication_grantFlag),
         ])
     ConductorPermissionAskIndication._ext = []
     
     #-----< ConductorPermissionGrantIndication >-----#
-    ConductorPermissionGrantIndication = SEQ(name='ConductorPermissionGrantIndication', mode=MODE_TYPE)
-    _ConductorPermissionGrantIndication_permissionList = SEQ_OF(name='permissionList', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    ConductorPermissionGrantIndication = SEQ(name=u'ConductorPermissionGrantIndication', mode=MODE_TYPE)
+    _ConductorPermissionGrantIndication_permissionList = SEQ_OF(name=u'permissionList', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     __ConductorPermissionGrantIndication_permissionList__item_ = INT(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('GCC-PROTOCOL', 'UserID')))
     _ConductorPermissionGrantIndication_permissionList._cont = __ConductorPermissionGrantIndication_permissionList__item_
     _ConductorPermissionGrantIndication_permissionList._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=65535)], ev=None, er=[])
-    _ConductorPermissionGrantIndication_waitingList = SEQ_OF(name='waitingList', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _ConductorPermissionGrantIndication_waitingList = SEQ_OF(name=u'waitingList', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     __ConductorPermissionGrantIndication_waitingList__item_ = INT(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('GCC-PROTOCOL', 'UserID')))
     _ConductorPermissionGrantIndication_waitingList._cont = __ConductorPermissionGrantIndication_waitingList__item_
     _ConductorPermissionGrantIndication_waitingList._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=65536)], ev=None, er=[])
     ConductorPermissionGrantIndication._cont = ASN1Dict([
-        ('permissionList', _ConductorPermissionGrantIndication_permissionList),
-        ('waitingList', _ConductorPermissionGrantIndication_waitingList),
+        (u'permissionList', _ConductorPermissionGrantIndication_permissionList),
+        (u'waitingList', _ConductorPermissionGrantIndication_waitingList),
         ])
     ConductorPermissionGrantIndication._ext = []
     
     #-----< ConferenceTimeRemainingIndication >-----#
-    ConferenceTimeRemainingIndication = SEQ(name='ConferenceTimeRemainingIndication', mode=MODE_TYPE)
-    _ConferenceTimeRemainingIndication_timeRemaining = INT(name='timeRemaining', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'Time')))
-    _ConferenceTimeRemainingIndication_nodeID = INT(name='nodeID', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'UserID')), opt=True)
+    ConferenceTimeRemainingIndication = SEQ(name=u'ConferenceTimeRemainingIndication', mode=MODE_TYPE)
+    _ConferenceTimeRemainingIndication_timeRemaining = INT(name=u'timeRemaining', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'Time')))
+    _ConferenceTimeRemainingIndication_nodeID = INT(name=u'nodeID', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'UserID')), opt=True)
     ConferenceTimeRemainingIndication._cont = ASN1Dict([
-        ('timeRemaining', _ConferenceTimeRemainingIndication_timeRemaining),
-        ('nodeID', _ConferenceTimeRemainingIndication_nodeID),
+        (u'timeRemaining', _ConferenceTimeRemainingIndication_timeRemaining),
+        (u'nodeID', _ConferenceTimeRemainingIndication_nodeID),
         ])
     ConferenceTimeRemainingIndication._ext = []
     
     #-----< ConferenceTimeInquireIndication >-----#
-    ConferenceTimeInquireIndication = SEQ(name='ConferenceTimeInquireIndication', mode=MODE_TYPE)
-    _ConferenceTimeInquireIndication_nodeSpecificTimeFlag = BOOL(name='nodeSpecificTimeFlag', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    ConferenceTimeInquireIndication = SEQ(name=u'ConferenceTimeInquireIndication', mode=MODE_TYPE)
+    _ConferenceTimeInquireIndication_nodeSpecificTimeFlag = BOOL(name=u'nodeSpecificTimeFlag', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     ConferenceTimeInquireIndication._cont = ASN1Dict([
-        ('nodeSpecificTimeFlag', _ConferenceTimeInquireIndication_nodeSpecificTimeFlag),
+        (u'nodeSpecificTimeFlag', _ConferenceTimeInquireIndication_nodeSpecificTimeFlag),
         ])
     ConferenceTimeInquireIndication._ext = []
     
     #-----< ConferenceTimeExtendIndication >-----#
-    ConferenceTimeExtendIndication = SEQ(name='ConferenceTimeExtendIndication', mode=MODE_TYPE)
-    _ConferenceTimeExtendIndication_timeToExtend = INT(name='timeToExtend', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'Time')))
-    _ConferenceTimeExtendIndication_nodeSpecificTimeFlag = BOOL(name='nodeSpecificTimeFlag', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    ConferenceTimeExtendIndication = SEQ(name=u'ConferenceTimeExtendIndication', mode=MODE_TYPE)
+    _ConferenceTimeExtendIndication_timeToExtend = INT(name=u'timeToExtend', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'Time')))
+    _ConferenceTimeExtendIndication_nodeSpecificTimeFlag = BOOL(name=u'nodeSpecificTimeFlag', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     ConferenceTimeExtendIndication._cont = ASN1Dict([
-        ('timeToExtend', _ConferenceTimeExtendIndication_timeToExtend),
-        ('nodeSpecificTimeFlag', _ConferenceTimeExtendIndication_nodeSpecificTimeFlag),
+        (u'timeToExtend', _ConferenceTimeExtendIndication_timeToExtend),
+        (u'nodeSpecificTimeFlag', _ConferenceTimeExtendIndication_nodeSpecificTimeFlag),
         ])
     ConferenceTimeExtendIndication._ext = []
     
     #-----< ConferenceAssistanceIndication >-----#
-    ConferenceAssistanceIndication = SEQ(name='ConferenceAssistanceIndication', mode=MODE_TYPE)
-    _ConferenceAssistanceIndication_userData = SET_OF(name='userData', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'UserData')), opt=True)
+    ConferenceAssistanceIndication = SEQ(name=u'ConferenceAssistanceIndication', mode=MODE_TYPE)
+    _ConferenceAssistanceIndication_userData = SET_OF(name=u'userData', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'UserData')), opt=True)
     ConferenceAssistanceIndication._cont = ASN1Dict([
-        ('userData', _ConferenceAssistanceIndication_userData),
+        (u'userData', _ConferenceAssistanceIndication_userData),
         ])
     ConferenceAssistanceIndication._ext = []
     
     #-----< TextMessageIndication >-----#
-    TextMessageIndication = SEQ(name='TextMessageIndication', mode=MODE_TYPE)
-    _TextMessageIndication_message = STR_BMP(name='message', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'TextString')))
+    TextMessageIndication = SEQ(name=u'TextMessageIndication', mode=MODE_TYPE)
+    _TextMessageIndication_message = STR_BMP(name=u'message', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'TextString')))
     TextMessageIndication._cont = ASN1Dict([
-        ('message', _TextMessageIndication_message),
+        (u'message', _TextMessageIndication_message),
         ])
     TextMessageIndication._ext = []
     
     #-----< RosterRefreshRequest >-----#
-    RosterRefreshRequest = SEQ(name='RosterRefreshRequest', mode=MODE_TYPE)
-    _RosterRefreshRequest_nodeID = INT(name='nodeID', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'UserID')))
-    _RosterRefreshRequest_nodeCategory = CHOICE(name='nodeCategory', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'NodeCategory')))
-    _RosterRefreshRequest_fullRefresh = BOOL(name='fullRefresh', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _RosterRefreshRequest_sendConferenceRoster = BOOL(name='sendConferenceRoster', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _RosterRefreshRequest_applicationList = SEQ(name='applicationList', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    __RosterRefreshRequest_applicationList_applicationKeyList = SET_OF(name='applicationKeyList', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    RosterRefreshRequest = SEQ(name=u'RosterRefreshRequest', mode=MODE_TYPE)
+    _RosterRefreshRequest_nodeID = INT(name=u'nodeID', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'UserID')))
+    _RosterRefreshRequest_nodeCategory = CHOICE(name=u'nodeCategory', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'NodeCategory')))
+    _RosterRefreshRequest_fullRefresh = BOOL(name=u'fullRefresh', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _RosterRefreshRequest_sendConferenceRoster = BOOL(name=u'sendConferenceRoster', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _RosterRefreshRequest_applicationList = SEQ(name=u'applicationList', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    __RosterRefreshRequest_applicationList_applicationKeyList = SET_OF(name=u'applicationKeyList', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     ___RosterRefreshRequest_applicationList_applicationKeyList__item_ = SEQ(name='_item_', mode=MODE_TYPE)
-    ____RosterRefreshRequest_applicationList_applicationKeyList__item__applicationProtocolKey = CHOICE(name='applicationProtocolKey', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'Key')))
-    ____RosterRefreshRequest_applicationList_applicationKeyList__item__nonStandardParameter = SEQ(name='nonStandardParameter', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'NonStandardParameter')), opt=True)
+    ____RosterRefreshRequest_applicationList_applicationKeyList__item__applicationProtocolKey = CHOICE(name=u'applicationProtocolKey', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'Key')))
+    ____RosterRefreshRequest_applicationList_applicationKeyList__item__nonStandardParameter = SEQ(name=u'nonStandardParameter', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'NonStandardParameter')), opt=True)
     ___RosterRefreshRequest_applicationList_applicationKeyList__item_._cont = ASN1Dict([
-        ('applicationProtocolKey', ____RosterRefreshRequest_applicationList_applicationKeyList__item__applicationProtocolKey),
-        ('nonStandardParameter', ____RosterRefreshRequest_applicationList_applicationKeyList__item__nonStandardParameter),
+        (u'applicationProtocolKey', ____RosterRefreshRequest_applicationList_applicationKeyList__item__applicationProtocolKey),
+        (u'nonStandardParameter', ____RosterRefreshRequest_applicationList_applicationKeyList__item__nonStandardParameter),
         ])
     ___RosterRefreshRequest_applicationList_applicationKeyList__item_._ext = []
     __RosterRefreshRequest_applicationList_applicationKeyList._cont = ___RosterRefreshRequest_applicationList_applicationKeyList__item_
-    __RosterRefreshRequest_applicationList_nonStandardParameter = SEQ(name='nonStandardParameter', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'NonStandardParameter')), opt=True)
+    __RosterRefreshRequest_applicationList_nonStandardParameter = SEQ(name=u'nonStandardParameter', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'NonStandardParameter')), opt=True)
     _RosterRefreshRequest_applicationList._cont = ASN1Dict([
-        ('applicationKeyList', __RosterRefreshRequest_applicationList_applicationKeyList),
-        ('nonStandardParameter', __RosterRefreshRequest_applicationList_nonStandardParameter),
+        (u'applicationKeyList', __RosterRefreshRequest_applicationList_applicationKeyList),
+        (u'nonStandardParameter', __RosterRefreshRequest_applicationList_nonStandardParameter),
         ])
     _RosterRefreshRequest_applicationList._ext = []
-    _RosterRefreshRequest_sessionList = SEQ(name='sessionList', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    __RosterRefreshRequest_sessionList_sessionKeyList = SET_OF(name='sessionKeyList', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _RosterRefreshRequest_sessionList = SEQ(name=u'sessionList', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    __RosterRefreshRequest_sessionList_sessionKeyList = SET_OF(name=u'sessionKeyList', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     ___RosterRefreshRequest_sessionList_sessionKeyList__item_ = SEQ(name='_item_', mode=MODE_TYPE)
-    ____RosterRefreshRequest_sessionList_sessionKeyList__item__sessionKey = SEQ(name='sessionKey', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'SessionKey')))
-    ____RosterRefreshRequest_sessionList_sessionKeyList__item__nonStandardParameter = SEQ(name='nonStandardParameter', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'NonStandardParameter')), opt=True)
+    ____RosterRefreshRequest_sessionList_sessionKeyList__item__sessionKey = SEQ(name=u'sessionKey', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'SessionKey')))
+    ____RosterRefreshRequest_sessionList_sessionKeyList__item__nonStandardParameter = SEQ(name=u'nonStandardParameter', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'NonStandardParameter')), opt=True)
     ___RosterRefreshRequest_sessionList_sessionKeyList__item_._cont = ASN1Dict([
-        ('sessionKey', ____RosterRefreshRequest_sessionList_sessionKeyList__item__sessionKey),
-        ('nonStandardParameter', ____RosterRefreshRequest_sessionList_sessionKeyList__item__nonStandardParameter),
+        (u'sessionKey', ____RosterRefreshRequest_sessionList_sessionKeyList__item__sessionKey),
+        (u'nonStandardParameter', ____RosterRefreshRequest_sessionList_sessionKeyList__item__nonStandardParameter),
         ])
     ___RosterRefreshRequest_sessionList_sessionKeyList__item_._ext = []
     __RosterRefreshRequest_sessionList_sessionKeyList._cont = ___RosterRefreshRequest_sessionList_sessionKeyList__item_
-    __RosterRefreshRequest_sessionList_nonStandardParameter = SEQ(name='nonStandardParameter', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'NonStandardParameter')), opt=True)
+    __RosterRefreshRequest_sessionList_nonStandardParameter = SEQ(name=u'nonStandardParameter', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'NonStandardParameter')), opt=True)
     _RosterRefreshRequest_sessionList._cont = ASN1Dict([
-        ('sessionKeyList', __RosterRefreshRequest_sessionList_sessionKeyList),
-        ('nonStandardParameter', __RosterRefreshRequest_sessionList_nonStandardParameter),
+        (u'sessionKeyList', __RosterRefreshRequest_sessionList_sessionKeyList),
+        (u'nonStandardParameter', __RosterRefreshRequest_sessionList_nonStandardParameter),
         ])
     _RosterRefreshRequest_sessionList._ext = []
-    _RosterRefreshRequest_nonStandardParameter = SEQ(name='nonStandardParameter', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'NonStandardParameter')), opt=True)
+    _RosterRefreshRequest_nonStandardParameter = SEQ(name=u'nonStandardParameter', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'NonStandardParameter')), opt=True)
     RosterRefreshRequest._cont = ASN1Dict([
-        ('nodeID', _RosterRefreshRequest_nodeID),
-        ('nodeCategory', _RosterRefreshRequest_nodeCategory),
-        ('fullRefresh', _RosterRefreshRequest_fullRefresh),
-        ('sendConferenceRoster', _RosterRefreshRequest_sendConferenceRoster),
-        ('applicationList', _RosterRefreshRequest_applicationList),
-        ('sessionList', _RosterRefreshRequest_sessionList),
-        ('nonStandardParameter', _RosterRefreshRequest_nonStandardParameter),
+        (u'nodeID', _RosterRefreshRequest_nodeID),
+        (u'nodeCategory', _RosterRefreshRequest_nodeCategory),
+        (u'fullRefresh', _RosterRefreshRequest_fullRefresh),
+        (u'sendConferenceRoster', _RosterRefreshRequest_sendConferenceRoster),
+        (u'applicationList', _RosterRefreshRequest_applicationList),
+        (u'sessionList', _RosterRefreshRequest_sessionList),
+        (u'nonStandardParameter', _RosterRefreshRequest_nonStandardParameter),
         ])
     RosterRefreshRequest._ext = []
     
     #-----< FunctionNotSupportedResponse >-----#
-    FunctionNotSupportedResponse = SEQ(name='FunctionNotSupportedResponse', mode=MODE_TYPE)
-    _FunctionNotSupportedResponse_request = CHOICE(name='request', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'RequestPDU')))
+    FunctionNotSupportedResponse = SEQ(name=u'FunctionNotSupportedResponse', mode=MODE_TYPE)
+    _FunctionNotSupportedResponse_request = CHOICE(name=u'request', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'RequestPDU')))
     FunctionNotSupportedResponse._cont = ASN1Dict([
-        ('request', _FunctionNotSupportedResponse_request),
+        (u'request', _FunctionNotSupportedResponse_request),
         ])
     FunctionNotSupportedResponse._ext = None
     
     #-----< NonStandardPDU >-----#
-    NonStandardPDU = SEQ(name='NonStandardPDU', mode=MODE_TYPE)
-    _NonStandardPDU_data = SEQ(name='data', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'NonStandardParameter')))
+    NonStandardPDU = SEQ(name=u'NonStandardPDU', mode=MODE_TYPE)
+    _NonStandardPDU_data = SEQ(name=u'data', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'NonStandardParameter')))
     NonStandardPDU._cont = ASN1Dict([
-        ('data', _NonStandardPDU_data),
+        (u'data', _NonStandardPDU_data),
         ])
     NonStandardPDU._ext = []
     
     #-----< ConnectData >-----#
-    ConnectData = SEQ(name='ConnectData', mode=MODE_TYPE)
-    _ConnectData_t124Identifier = CHOICE(name='t124Identifier', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'Key')))
-    _ConnectData_connectPDU = OCT_STR(name='connectPDU', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    ConnectData = SEQ(name=u'ConnectData', mode=MODE_TYPE)
+    _ConnectData_t124Identifier = CHOICE(name=u't124Identifier', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'Key')))
+    _ConnectData_connectPDU = OCT_STR(name=u'connectPDU', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     ConnectData._cont = ASN1Dict([
-        ('t124Identifier', _ConnectData_t124Identifier),
-        ('connectPDU', _ConnectData_connectPDU),
+        (u't124Identifier', _ConnectData_t124Identifier),
+        (u'connectPDU', _ConnectData_connectPDU),
         ])
     ConnectData._ext = None
     
     #-----< ConnectGCCPDU >-----#
-    ConnectGCCPDU = CHOICE(name='ConnectGCCPDU', mode=MODE_TYPE)
-    _ConnectGCCPDU_conferenceCreateRequest = SEQ(name='conferenceCreateRequest', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'ConferenceCreateRequest')))
-    _ConnectGCCPDU_conferenceCreateResponse = SEQ(name='conferenceCreateResponse', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'ConferenceCreateResponse')))
-    _ConnectGCCPDU_conferenceQueryRequest = SEQ(name='conferenceQueryRequest', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'ConferenceQueryRequest')))
-    _ConnectGCCPDU_conferenceQueryResponse = SEQ(name='conferenceQueryResponse', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'ConferenceQueryResponse')))
-    _ConnectGCCPDU_conferenceJoinRequest = SEQ(name='conferenceJoinRequest', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'ConferenceJoinRequest')))
-    _ConnectGCCPDU_conferenceJoinResponse = SEQ(name='conferenceJoinResponse', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'ConferenceJoinResponse')))
-    _ConnectGCCPDU_conferenceInviteRequest = SEQ(name='conferenceInviteRequest', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'ConferenceInviteRequest')))
-    _ConnectGCCPDU_conferenceInviteResponse = SEQ(name='conferenceInviteResponse', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'ConferenceInviteResponse')))
+    ConnectGCCPDU = CHOICE(name=u'ConnectGCCPDU', mode=MODE_TYPE)
+    _ConnectGCCPDU_conferenceCreateRequest = SEQ(name=u'conferenceCreateRequest', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'ConferenceCreateRequest')))
+    _ConnectGCCPDU_conferenceCreateResponse = SEQ(name=u'conferenceCreateResponse', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'ConferenceCreateResponse')))
+    _ConnectGCCPDU_conferenceQueryRequest = SEQ(name=u'conferenceQueryRequest', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'ConferenceQueryRequest')))
+    _ConnectGCCPDU_conferenceQueryResponse = SEQ(name=u'conferenceQueryResponse', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'ConferenceQueryResponse')))
+    _ConnectGCCPDU_conferenceJoinRequest = SEQ(name=u'conferenceJoinRequest', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'ConferenceJoinRequest')))
+    _ConnectGCCPDU_conferenceJoinResponse = SEQ(name=u'conferenceJoinResponse', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'ConferenceJoinResponse')))
+    _ConnectGCCPDU_conferenceInviteRequest = SEQ(name=u'conferenceInviteRequest', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'ConferenceInviteRequest')))
+    _ConnectGCCPDU_conferenceInviteResponse = SEQ(name=u'conferenceInviteResponse', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'ConferenceInviteResponse')))
     ConnectGCCPDU._cont = ASN1Dict([
-        ('conferenceCreateRequest', _ConnectGCCPDU_conferenceCreateRequest),
-        ('conferenceCreateResponse', _ConnectGCCPDU_conferenceCreateResponse),
-        ('conferenceQueryRequest', _ConnectGCCPDU_conferenceQueryRequest),
-        ('conferenceQueryResponse', _ConnectGCCPDU_conferenceQueryResponse),
-        ('conferenceJoinRequest', _ConnectGCCPDU_conferenceJoinRequest),
-        ('conferenceJoinResponse', _ConnectGCCPDU_conferenceJoinResponse),
-        ('conferenceInviteRequest', _ConnectGCCPDU_conferenceInviteRequest),
-        ('conferenceInviteResponse', _ConnectGCCPDU_conferenceInviteResponse),
+        (u'conferenceCreateRequest', _ConnectGCCPDU_conferenceCreateRequest),
+        (u'conferenceCreateResponse', _ConnectGCCPDU_conferenceCreateResponse),
+        (u'conferenceQueryRequest', _ConnectGCCPDU_conferenceQueryRequest),
+        (u'conferenceQueryResponse', _ConnectGCCPDU_conferenceQueryResponse),
+        (u'conferenceJoinRequest', _ConnectGCCPDU_conferenceJoinRequest),
+        (u'conferenceJoinResponse', _ConnectGCCPDU_conferenceJoinResponse),
+        (u'conferenceInviteRequest', _ConnectGCCPDU_conferenceInviteRequest),
+        (u'conferenceInviteResponse', _ConnectGCCPDU_conferenceInviteResponse),
         ])
     ConnectGCCPDU._ext = []
     
     #-----< GCCPDU >-----#
-    GCCPDU = CHOICE(name='GCCPDU', mode=MODE_TYPE)
-    _GCCPDU_request = CHOICE(name='request', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'RequestPDU')))
-    _GCCPDU_response = CHOICE(name='response', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'ResponsePDU')))
-    _GCCPDU_indication = CHOICE(name='indication', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'IndicationPDU')))
+    GCCPDU = CHOICE(name=u'GCCPDU', mode=MODE_TYPE)
+    _GCCPDU_request = CHOICE(name=u'request', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'RequestPDU')))
+    _GCCPDU_response = CHOICE(name=u'response', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'ResponsePDU')))
+    _GCCPDU_indication = CHOICE(name=u'indication', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'IndicationPDU')))
     GCCPDU._cont = ASN1Dict([
-        ('request', _GCCPDU_request),
-        ('response', _GCCPDU_response),
-        ('indication', _GCCPDU_indication),
+        (u'request', _GCCPDU_request),
+        (u'response', _GCCPDU_response),
+        (u'indication', _GCCPDU_indication),
         ])
     GCCPDU._ext = None
     
     #-----< RequestPDU >-----#
-    RequestPDU = CHOICE(name='RequestPDU', mode=MODE_TYPE)
-    _RequestPDU_conferenceJoinRequest = SEQ(name='conferenceJoinRequest', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'ConferenceJoinRequest')))
-    _RequestPDU_conferenceAddRequest = SEQ(name='conferenceAddRequest', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'ConferenceAddRequest')))
-    _RequestPDU_conferenceLockRequest = SEQ(name='conferenceLockRequest', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'ConferenceLockRequest')))
-    _RequestPDU_conferenceUnlockRequest = SEQ(name='conferenceUnlockRequest', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'ConferenceUnlockRequest')))
-    _RequestPDU_conferenceTerminateRequest = SEQ(name='conferenceTerminateRequest', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'ConferenceTerminateRequest')))
-    _RequestPDU_conferenceEjectUserRequest = SEQ(name='conferenceEjectUserRequest', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'ConferenceEjectUserRequest')))
-    _RequestPDU_conferenceTransferRequest = SEQ(name='conferenceTransferRequest', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'ConferenceTransferRequest')))
-    _RequestPDU_registryRegisterChannelRequest = SEQ(name='registryRegisterChannelRequest', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'RegistryRegisterChannelRequest')))
-    _RequestPDU_registryAssignTokenRequest = SEQ(name='registryAssignTokenRequest', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'RegistryAssignTokenRequest')))
-    _RequestPDU_registrySetParameterRequest = SEQ(name='registrySetParameterRequest', mode=MODE_TYPE, tag=(9, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'RegistrySetParameterRequest')))
-    _RequestPDU_registryRetrieveEntryRequest = SEQ(name='registryRetrieveEntryRequest', mode=MODE_TYPE, tag=(10, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'RegistryRetrieveEntryRequest')))
-    _RequestPDU_registryDeleteEntryRequest = SEQ(name='registryDeleteEntryRequest', mode=MODE_TYPE, tag=(11, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'RegistryDeleteEntryRequest')))
-    _RequestPDU_registryMonitorEntryRequest = SEQ(name='registryMonitorEntryRequest', mode=MODE_TYPE, tag=(12, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'RegistryMonitorEntryRequest')))
-    _RequestPDU_registryAllocateHandleRequest = SEQ(name='registryAllocateHandleRequest', mode=MODE_TYPE, tag=(13, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'RegistryAllocateHandleRequest')))
-    _RequestPDU_nonStandardRequest = SEQ(name='nonStandardRequest', mode=MODE_TYPE, tag=(14, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'NonStandardPDU')))
+    RequestPDU = CHOICE(name=u'RequestPDU', mode=MODE_TYPE)
+    _RequestPDU_conferenceJoinRequest = SEQ(name=u'conferenceJoinRequest', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'ConferenceJoinRequest')))
+    _RequestPDU_conferenceAddRequest = SEQ(name=u'conferenceAddRequest', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'ConferenceAddRequest')))
+    _RequestPDU_conferenceLockRequest = SEQ(name=u'conferenceLockRequest', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'ConferenceLockRequest')))
+    _RequestPDU_conferenceUnlockRequest = SEQ(name=u'conferenceUnlockRequest', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'ConferenceUnlockRequest')))
+    _RequestPDU_conferenceTerminateRequest = SEQ(name=u'conferenceTerminateRequest', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'ConferenceTerminateRequest')))
+    _RequestPDU_conferenceEjectUserRequest = SEQ(name=u'conferenceEjectUserRequest', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'ConferenceEjectUserRequest')))
+    _RequestPDU_conferenceTransferRequest = SEQ(name=u'conferenceTransferRequest', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'ConferenceTransferRequest')))
+    _RequestPDU_registryRegisterChannelRequest = SEQ(name=u'registryRegisterChannelRequest', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'RegistryRegisterChannelRequest')))
+    _RequestPDU_registryAssignTokenRequest = SEQ(name=u'registryAssignTokenRequest', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'RegistryAssignTokenRequest')))
+    _RequestPDU_registrySetParameterRequest = SEQ(name=u'registrySetParameterRequest', mode=MODE_TYPE, tag=(9, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'RegistrySetParameterRequest')))
+    _RequestPDU_registryRetrieveEntryRequest = SEQ(name=u'registryRetrieveEntryRequest', mode=MODE_TYPE, tag=(10, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'RegistryRetrieveEntryRequest')))
+    _RequestPDU_registryDeleteEntryRequest = SEQ(name=u'registryDeleteEntryRequest', mode=MODE_TYPE, tag=(11, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'RegistryDeleteEntryRequest')))
+    _RequestPDU_registryMonitorEntryRequest = SEQ(name=u'registryMonitorEntryRequest', mode=MODE_TYPE, tag=(12, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'RegistryMonitorEntryRequest')))
+    _RequestPDU_registryAllocateHandleRequest = SEQ(name=u'registryAllocateHandleRequest', mode=MODE_TYPE, tag=(13, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'RegistryAllocateHandleRequest')))
+    _RequestPDU_nonStandardRequest = SEQ(name=u'nonStandardRequest', mode=MODE_TYPE, tag=(14, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'NonStandardPDU')))
     RequestPDU._cont = ASN1Dict([
-        ('conferenceJoinRequest', _RequestPDU_conferenceJoinRequest),
-        ('conferenceAddRequest', _RequestPDU_conferenceAddRequest),
-        ('conferenceLockRequest', _RequestPDU_conferenceLockRequest),
-        ('conferenceUnlockRequest', _RequestPDU_conferenceUnlockRequest),
-        ('conferenceTerminateRequest', _RequestPDU_conferenceTerminateRequest),
-        ('conferenceEjectUserRequest', _RequestPDU_conferenceEjectUserRequest),
-        ('conferenceTransferRequest', _RequestPDU_conferenceTransferRequest),
-        ('registryRegisterChannelRequest', _RequestPDU_registryRegisterChannelRequest),
-        ('registryAssignTokenRequest', _RequestPDU_registryAssignTokenRequest),
-        ('registrySetParameterRequest', _RequestPDU_registrySetParameterRequest),
-        ('registryRetrieveEntryRequest', _RequestPDU_registryRetrieveEntryRequest),
-        ('registryDeleteEntryRequest', _RequestPDU_registryDeleteEntryRequest),
-        ('registryMonitorEntryRequest', _RequestPDU_registryMonitorEntryRequest),
-        ('registryAllocateHandleRequest', _RequestPDU_registryAllocateHandleRequest),
-        ('nonStandardRequest', _RequestPDU_nonStandardRequest),
+        (u'conferenceJoinRequest', _RequestPDU_conferenceJoinRequest),
+        (u'conferenceAddRequest', _RequestPDU_conferenceAddRequest),
+        (u'conferenceLockRequest', _RequestPDU_conferenceLockRequest),
+        (u'conferenceUnlockRequest', _RequestPDU_conferenceUnlockRequest),
+        (u'conferenceTerminateRequest', _RequestPDU_conferenceTerminateRequest),
+        (u'conferenceEjectUserRequest', _RequestPDU_conferenceEjectUserRequest),
+        (u'conferenceTransferRequest', _RequestPDU_conferenceTransferRequest),
+        (u'registryRegisterChannelRequest', _RequestPDU_registryRegisterChannelRequest),
+        (u'registryAssignTokenRequest', _RequestPDU_registryAssignTokenRequest),
+        (u'registrySetParameterRequest', _RequestPDU_registrySetParameterRequest),
+        (u'registryRetrieveEntryRequest', _RequestPDU_registryRetrieveEntryRequest),
+        (u'registryDeleteEntryRequest', _RequestPDU_registryDeleteEntryRequest),
+        (u'registryMonitorEntryRequest', _RequestPDU_registryMonitorEntryRequest),
+        (u'registryAllocateHandleRequest', _RequestPDU_registryAllocateHandleRequest),
+        (u'nonStandardRequest', _RequestPDU_nonStandardRequest),
         ])
     RequestPDU._ext = []
     
     #-----< ResponsePDU >-----#
-    ResponsePDU = CHOICE(name='ResponsePDU', mode=MODE_TYPE)
-    _ResponsePDU_conferenceJoinResponse = SEQ(name='conferenceJoinResponse', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'ConferenceJoinResponse')))
-    _ResponsePDU_conferenceAddResponse = SEQ(name='conferenceAddResponse', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'ConferenceAddResponse')))
-    _ResponsePDU_conferenceLockResponse = SEQ(name='conferenceLockResponse', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'ConferenceLockResponse')))
-    _ResponsePDU_conferenceUnlockResponse = SEQ(name='conferenceUnlockResponse', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'ConferenceUnlockResponse')))
-    _ResponsePDU_conferenceTerminateResponse = SEQ(name='conferenceTerminateResponse', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'ConferenceTerminateResponse')))
-    _ResponsePDU_conferenceEjectUserResponse = SEQ(name='conferenceEjectUserResponse', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'ConferenceEjectUserResponse')))
-    _ResponsePDU_conferenceTransferResponse = SEQ(name='conferenceTransferResponse', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'ConferenceTransferResponse')))
-    _ResponsePDU_registryResponse = SEQ(name='registryResponse', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'RegistryResponse')))
-    _ResponsePDU_registryAllocateHandleResponse = SEQ(name='registryAllocateHandleResponse', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'RegistryAllocateHandleResponse')))
-    _ResponsePDU_functionNotSupportedResponse = SEQ(name='functionNotSupportedResponse', mode=MODE_TYPE, tag=(9, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'FunctionNotSupportedResponse')))
-    _ResponsePDU_nonStandardResponse = SEQ(name='nonStandardResponse', mode=MODE_TYPE, tag=(10, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'NonStandardPDU')))
+    ResponsePDU = CHOICE(name=u'ResponsePDU', mode=MODE_TYPE)
+    _ResponsePDU_conferenceJoinResponse = SEQ(name=u'conferenceJoinResponse', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'ConferenceJoinResponse')))
+    _ResponsePDU_conferenceAddResponse = SEQ(name=u'conferenceAddResponse', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'ConferenceAddResponse')))
+    _ResponsePDU_conferenceLockResponse = SEQ(name=u'conferenceLockResponse', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'ConferenceLockResponse')))
+    _ResponsePDU_conferenceUnlockResponse = SEQ(name=u'conferenceUnlockResponse', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'ConferenceUnlockResponse')))
+    _ResponsePDU_conferenceTerminateResponse = SEQ(name=u'conferenceTerminateResponse', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'ConferenceTerminateResponse')))
+    _ResponsePDU_conferenceEjectUserResponse = SEQ(name=u'conferenceEjectUserResponse', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'ConferenceEjectUserResponse')))
+    _ResponsePDU_conferenceTransferResponse = SEQ(name=u'conferenceTransferResponse', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'ConferenceTransferResponse')))
+    _ResponsePDU_registryResponse = SEQ(name=u'registryResponse', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'RegistryResponse')))
+    _ResponsePDU_registryAllocateHandleResponse = SEQ(name=u'registryAllocateHandleResponse', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'RegistryAllocateHandleResponse')))
+    _ResponsePDU_functionNotSupportedResponse = SEQ(name=u'functionNotSupportedResponse', mode=MODE_TYPE, tag=(9, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'FunctionNotSupportedResponse')))
+    _ResponsePDU_nonStandardResponse = SEQ(name=u'nonStandardResponse', mode=MODE_TYPE, tag=(10, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'NonStandardPDU')))
     ResponsePDU._cont = ASN1Dict([
-        ('conferenceJoinResponse', _ResponsePDU_conferenceJoinResponse),
-        ('conferenceAddResponse', _ResponsePDU_conferenceAddResponse),
-        ('conferenceLockResponse', _ResponsePDU_conferenceLockResponse),
-        ('conferenceUnlockResponse', _ResponsePDU_conferenceUnlockResponse),
-        ('conferenceTerminateResponse', _ResponsePDU_conferenceTerminateResponse),
-        ('conferenceEjectUserResponse', _ResponsePDU_conferenceEjectUserResponse),
-        ('conferenceTransferResponse', _ResponsePDU_conferenceTransferResponse),
-        ('registryResponse', _ResponsePDU_registryResponse),
-        ('registryAllocateHandleResponse', _ResponsePDU_registryAllocateHandleResponse),
-        ('functionNotSupportedResponse', _ResponsePDU_functionNotSupportedResponse),
-        ('nonStandardResponse', _ResponsePDU_nonStandardResponse),
+        (u'conferenceJoinResponse', _ResponsePDU_conferenceJoinResponse),
+        (u'conferenceAddResponse', _ResponsePDU_conferenceAddResponse),
+        (u'conferenceLockResponse', _ResponsePDU_conferenceLockResponse),
+        (u'conferenceUnlockResponse', _ResponsePDU_conferenceUnlockResponse),
+        (u'conferenceTerminateResponse', _ResponsePDU_conferenceTerminateResponse),
+        (u'conferenceEjectUserResponse', _ResponsePDU_conferenceEjectUserResponse),
+        (u'conferenceTransferResponse', _ResponsePDU_conferenceTransferResponse),
+        (u'registryResponse', _ResponsePDU_registryResponse),
+        (u'registryAllocateHandleResponse', _ResponsePDU_registryAllocateHandleResponse),
+        (u'functionNotSupportedResponse', _ResponsePDU_functionNotSupportedResponse),
+        (u'nonStandardResponse', _ResponsePDU_nonStandardResponse),
         ])
     ResponsePDU._ext = []
     
     #-----< IndicationPDU >-----#
-    IndicationPDU = CHOICE(name='IndicationPDU', mode=MODE_TYPE)
-    _IndicationPDU_userIDIndication = SEQ(name='userIDIndication', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'UserIDIndication')))
-    _IndicationPDU_conferenceLockIndication = SEQ(name='conferenceLockIndication', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'ConferenceLockIndication')))
-    _IndicationPDU_conferenceUnlockIndication = SEQ(name='conferenceUnlockIndication', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'ConferenceUnlockIndication')))
-    _IndicationPDU_conferenceTerminateIndication = SEQ(name='conferenceTerminateIndication', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'ConferenceTerminateIndication')))
-    _IndicationPDU_conferenceEjectUserIndication = SEQ(name='conferenceEjectUserIndication', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'ConferenceEjectUserIndication')))
-    _IndicationPDU_conferenceTransferIndication = SEQ(name='conferenceTransferIndication', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'ConferenceTransferIndication')))
-    _IndicationPDU_rosterUpdateIndication = SEQ(name='rosterUpdateIndication', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'RosterUpdateIndication')))
-    _IndicationPDU_applicationInvokeIndication = SEQ(name='applicationInvokeIndication', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'ApplicationInvokeIndication')))
-    _IndicationPDU_registryMonitorEntryIndication = SEQ(name='registryMonitorEntryIndication', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'RegistryMonitorEntryIndication')))
-    _IndicationPDU_conductorAssignIndication = SEQ(name='conductorAssignIndication', mode=MODE_TYPE, tag=(9, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'ConductorAssignIndication')))
-    _IndicationPDU_conductorReleaseIndication = SEQ(name='conductorReleaseIndication', mode=MODE_TYPE, tag=(10, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'ConductorReleaseIndication')))
-    _IndicationPDU_conductorPermissionAskIndication = SEQ(name='conductorPermissionAskIndication', mode=MODE_TYPE, tag=(11, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'ConductorPermissionAskIndication')))
-    _IndicationPDU_conductorPermissionGrantIndication = SEQ(name='conductorPermissionGrantIndication', mode=MODE_TYPE, tag=(12, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'ConductorPermissionGrantIndication')))
-    _IndicationPDU_conferenceTimeRemainingIndication = SEQ(name='conferenceTimeRemainingIndication', mode=MODE_TYPE, tag=(13, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'ConferenceTimeRemainingIndication')))
-    _IndicationPDU_conferenceTimeInquireIndication = SEQ(name='conferenceTimeInquireIndication', mode=MODE_TYPE, tag=(14, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'ConferenceTimeInquireIndication')))
-    _IndicationPDU_conferenceTimeExtendIndication = SEQ(name='conferenceTimeExtendIndication', mode=MODE_TYPE, tag=(15, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'ConferenceTimeExtendIndication')))
-    _IndicationPDU_conferenceAssistanceIndication = SEQ(name='conferenceAssistanceIndication', mode=MODE_TYPE, tag=(16, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'ConferenceAssistanceIndication')))
-    _IndicationPDU_textMessageIndication = SEQ(name='textMessageIndication', mode=MODE_TYPE, tag=(17, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'TextMessageIndication')))
-    _IndicationPDU_nonStandardIndication = SEQ(name='nonStandardIndication', mode=MODE_TYPE, tag=(18, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'NonStandardPDU')))
+    IndicationPDU = CHOICE(name=u'IndicationPDU', mode=MODE_TYPE)
+    _IndicationPDU_userIDIndication = SEQ(name=u'userIDIndication', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'UserIDIndication')))
+    _IndicationPDU_conferenceLockIndication = SEQ(name=u'conferenceLockIndication', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'ConferenceLockIndication')))
+    _IndicationPDU_conferenceUnlockIndication = SEQ(name=u'conferenceUnlockIndication', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'ConferenceUnlockIndication')))
+    _IndicationPDU_conferenceTerminateIndication = SEQ(name=u'conferenceTerminateIndication', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'ConferenceTerminateIndication')))
+    _IndicationPDU_conferenceEjectUserIndication = SEQ(name=u'conferenceEjectUserIndication', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'ConferenceEjectUserIndication')))
+    _IndicationPDU_conferenceTransferIndication = SEQ(name=u'conferenceTransferIndication', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'ConferenceTransferIndication')))
+    _IndicationPDU_rosterUpdateIndication = SEQ(name=u'rosterUpdateIndication', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'RosterUpdateIndication')))
+    _IndicationPDU_applicationInvokeIndication = SEQ(name=u'applicationInvokeIndication', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'ApplicationInvokeIndication')))
+    _IndicationPDU_registryMonitorEntryIndication = SEQ(name=u'registryMonitorEntryIndication', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'RegistryMonitorEntryIndication')))
+    _IndicationPDU_conductorAssignIndication = SEQ(name=u'conductorAssignIndication', mode=MODE_TYPE, tag=(9, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'ConductorAssignIndication')))
+    _IndicationPDU_conductorReleaseIndication = SEQ(name=u'conductorReleaseIndication', mode=MODE_TYPE, tag=(10, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'ConductorReleaseIndication')))
+    _IndicationPDU_conductorPermissionAskIndication = SEQ(name=u'conductorPermissionAskIndication', mode=MODE_TYPE, tag=(11, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'ConductorPermissionAskIndication')))
+    _IndicationPDU_conductorPermissionGrantIndication = SEQ(name=u'conductorPermissionGrantIndication', mode=MODE_TYPE, tag=(12, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'ConductorPermissionGrantIndication')))
+    _IndicationPDU_conferenceTimeRemainingIndication = SEQ(name=u'conferenceTimeRemainingIndication', mode=MODE_TYPE, tag=(13, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'ConferenceTimeRemainingIndication')))
+    _IndicationPDU_conferenceTimeInquireIndication = SEQ(name=u'conferenceTimeInquireIndication', mode=MODE_TYPE, tag=(14, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'ConferenceTimeInquireIndication')))
+    _IndicationPDU_conferenceTimeExtendIndication = SEQ(name=u'conferenceTimeExtendIndication', mode=MODE_TYPE, tag=(15, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'ConferenceTimeExtendIndication')))
+    _IndicationPDU_conferenceAssistanceIndication = SEQ(name=u'conferenceAssistanceIndication', mode=MODE_TYPE, tag=(16, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'ConferenceAssistanceIndication')))
+    _IndicationPDU_textMessageIndication = SEQ(name=u'textMessageIndication', mode=MODE_TYPE, tag=(17, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'TextMessageIndication')))
+    _IndicationPDU_nonStandardIndication = SEQ(name=u'nonStandardIndication', mode=MODE_TYPE, tag=(18, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('GCC-PROTOCOL', 'NonStandardPDU')))
     IndicationPDU._cont = ASN1Dict([
-        ('userIDIndication', _IndicationPDU_userIDIndication),
-        ('conferenceLockIndication', _IndicationPDU_conferenceLockIndication),
-        ('conferenceUnlockIndication', _IndicationPDU_conferenceUnlockIndication),
-        ('conferenceTerminateIndication', _IndicationPDU_conferenceTerminateIndication),
-        ('conferenceEjectUserIndication', _IndicationPDU_conferenceEjectUserIndication),
-        ('conferenceTransferIndication', _IndicationPDU_conferenceTransferIndication),
-        ('rosterUpdateIndication', _IndicationPDU_rosterUpdateIndication),
-        ('applicationInvokeIndication', _IndicationPDU_applicationInvokeIndication),
-        ('registryMonitorEntryIndication', _IndicationPDU_registryMonitorEntryIndication),
-        ('conductorAssignIndication', _IndicationPDU_conductorAssignIndication),
-        ('conductorReleaseIndication', _IndicationPDU_conductorReleaseIndication),
-        ('conductorPermissionAskIndication', _IndicationPDU_conductorPermissionAskIndication),
-        ('conductorPermissionGrantIndication', _IndicationPDU_conductorPermissionGrantIndication),
-        ('conferenceTimeRemainingIndication', _IndicationPDU_conferenceTimeRemainingIndication),
-        ('conferenceTimeInquireIndication', _IndicationPDU_conferenceTimeInquireIndication),
-        ('conferenceTimeExtendIndication', _IndicationPDU_conferenceTimeExtendIndication),
-        ('conferenceAssistanceIndication', _IndicationPDU_conferenceAssistanceIndication),
-        ('textMessageIndication', _IndicationPDU_textMessageIndication),
-        ('nonStandardIndication', _IndicationPDU_nonStandardIndication),
+        (u'userIDIndication', _IndicationPDU_userIDIndication),
+        (u'conferenceLockIndication', _IndicationPDU_conferenceLockIndication),
+        (u'conferenceUnlockIndication', _IndicationPDU_conferenceUnlockIndication),
+        (u'conferenceTerminateIndication', _IndicationPDU_conferenceTerminateIndication),
+        (u'conferenceEjectUserIndication', _IndicationPDU_conferenceEjectUserIndication),
+        (u'conferenceTransferIndication', _IndicationPDU_conferenceTransferIndication),
+        (u'rosterUpdateIndication', _IndicationPDU_rosterUpdateIndication),
+        (u'applicationInvokeIndication', _IndicationPDU_applicationInvokeIndication),
+        (u'registryMonitorEntryIndication', _IndicationPDU_registryMonitorEntryIndication),
+        (u'conductorAssignIndication', _IndicationPDU_conductorAssignIndication),
+        (u'conductorReleaseIndication', _IndicationPDU_conductorReleaseIndication),
+        (u'conductorPermissionAskIndication', _IndicationPDU_conductorPermissionAskIndication),
+        (u'conductorPermissionGrantIndication', _IndicationPDU_conductorPermissionGrantIndication),
+        (u'conferenceTimeRemainingIndication', _IndicationPDU_conferenceTimeRemainingIndication),
+        (u'conferenceTimeInquireIndication', _IndicationPDU_conferenceTimeInquireIndication),
+        (u'conferenceTimeExtendIndication', _IndicationPDU_conferenceTimeExtendIndication),
+        (u'conferenceAssistanceIndication', _IndicationPDU_conferenceAssistanceIndication),
+        (u'textMessageIndication', _IndicationPDU_textMessageIndication),
+        (u'nonStandardIndication', _IndicationPDU_nonStandardIndication),
         ])
     IndicationPDU._ext = []
     

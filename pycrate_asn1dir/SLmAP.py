@@ -16,36 +16,36 @@ from pycrate_asn1rt.init             import init_modules
 
 class SLMAP_CommonDataTypes:
 
-    _name_  = 'SLMAP-CommonDataTypes'
+    _name_  = u'SLMAP-CommonDataTypes'
     _oid_   = [0, 4, 0, 0, 21, 3, 50, 1, 3]
     
     _obj_ = [
-        'maxPrivateIEs',
-        'maxProtocolExtensions',
-        'maxProtocolIEs',
-        'Criticality',
-        'SLMAPTransactionID',
-        'Presence',
-        'PrivateIE-ID',
-        'ProcedureCode',
-        'ProtocolIE-ID',
-        'TriggeringMessage',
+        u'maxPrivateIEs',
+        u'maxProtocolExtensions',
+        u'maxProtocolIEs',
+        u'Criticality',
+        u'SLMAPTransactionID',
+        u'Presence',
+        u'PrivateIE-ID',
+        u'ProcedureCode',
+        u'ProtocolIE-ID',
+        u'TriggeringMessage',
         ]
     _type_ = [
-        'Criticality',
-        'SLMAPTransactionID',
-        'Presence',
-        'PrivateIE-ID',
-        'ProcedureCode',
-        'ProtocolIE-ID',
-        'TriggeringMessage',
+        u'Criticality',
+        u'SLMAPTransactionID',
+        u'Presence',
+        u'PrivateIE-ID',
+        u'ProcedureCode',
+        u'ProtocolIE-ID',
+        u'TriggeringMessage',
         ]
     _set_ = [
         ]
     _val_ = [
-        'maxPrivateIEs',
-        'maxProtocolExtensions',
-        'maxProtocolIEs',
+        u'maxPrivateIEs',
+        u'maxProtocolExtensions',
+        u'maxProtocolIEs',
         ]
     _class_ = [
         ]
@@ -53,53 +53,53 @@ class SLMAP_CommonDataTypes:
         ]
     
     #-----< maxPrivateIEs >-----#
-    maxPrivateIEs = INT(name='maxPrivateIEs', mode=MODE_VALUE)
+    maxPrivateIEs = INT(name=u'maxPrivateIEs', mode=MODE_VALUE)
     maxPrivateIEs._val = 65535
     
     #-----< maxProtocolExtensions >-----#
-    maxProtocolExtensions = INT(name='maxProtocolExtensions', mode=MODE_VALUE)
+    maxProtocolExtensions = INT(name=u'maxProtocolExtensions', mode=MODE_VALUE)
     maxProtocolExtensions._val = 65535
     
     #-----< maxProtocolIEs >-----#
-    maxProtocolIEs = INT(name='maxProtocolIEs', mode=MODE_VALUE)
+    maxProtocolIEs = INT(name=u'maxProtocolIEs', mode=MODE_VALUE)
     maxProtocolIEs._val = 65535
     
     #-----< Criticality >-----#
-    Criticality = ENUM(name='Criticality', mode=MODE_TYPE)
-    Criticality._cont = ASN1Dict([('reject', 0), ('ignore', 1), ('notify', 2)])
+    Criticality = ENUM(name=u'Criticality', mode=MODE_TYPE)
+    Criticality._cont = ASN1Dict([(u'reject', 0), (u'ignore', 1), (u'notify', 2)])
     Criticality._ext = None
     
     #-----< SLMAPTransactionID >-----#
-    SLMAPTransactionID = INT(name='SLMAPTransactionID', mode=MODE_TYPE)
+    SLMAPTransactionID = INT(name=u'SLMAPTransactionID', mode=MODE_TYPE)
     SLMAPTransactionID._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=32767)], ev=[], er=[])
     
     #-----< Presence >-----#
-    Presence = ENUM(name='Presence', mode=MODE_TYPE)
-    Presence._cont = ASN1Dict([('optional', 0), ('conditional', 1), ('mandatory', 2)])
+    Presence = ENUM(name=u'Presence', mode=MODE_TYPE)
+    Presence._cont = ASN1Dict([(u'optional', 0), (u'conditional', 1), (u'mandatory', 2)])
     Presence._ext = None
     
     #-----< PrivateIE-ID >-----#
-    PrivateIE_ID = CHOICE(name='PrivateIE-ID', mode=MODE_TYPE)
-    _PrivateIE_ID_local = INT(name='local', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    PrivateIE_ID = CHOICE(name=u'PrivateIE-ID', mode=MODE_TYPE)
+    _PrivateIE_ID_local = INT(name=u'local', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     _PrivateIE_ID_local._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=65535)], ev=None, er=[])
-    _PrivateIE_ID_global_ = OID(name='global', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _PrivateIE_ID_global_ = OID(name=u'global', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     PrivateIE_ID._cont = ASN1Dict([
-        ('local', _PrivateIE_ID_local),
-        ('global', _PrivateIE_ID_global_),
+        (u'local', _PrivateIE_ID_local),
+        (u'global', _PrivateIE_ID_global_),
         ])
     PrivateIE_ID._ext = None
     
     #-----< ProcedureCode >-----#
-    ProcedureCode = INT(name='ProcedureCode', mode=MODE_TYPE)
+    ProcedureCode = INT(name=u'ProcedureCode', mode=MODE_TYPE)
     ProcedureCode._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=63)], ev=None, er=[])
     
     #-----< ProtocolIE-ID >-----#
-    ProtocolIE_ID = INT(name='ProtocolIE-ID', mode=MODE_TYPE)
+    ProtocolIE_ID = INT(name=u'ProtocolIE-ID', mode=MODE_TYPE)
     ProtocolIE_ID._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=65535)], ev=None, er=[])
     
     #-----< TriggeringMessage >-----#
-    TriggeringMessage = ENUM(name='TriggeringMessage', mode=MODE_TYPE)
-    TriggeringMessage._cont = ASN1Dict([('initiating-message', 0), ('successful-outcome', 1), ('unsuccessful-outcome', 2)])
+    TriggeringMessage = ENUM(name=u'TriggeringMessage', mode=MODE_TYPE)
+    TriggeringMessage._cont = ASN1Dict([(u'initiating-message', 0), (u'successful-outcome', 1), (u'unsuccessful-outcome', 2)])
     TriggeringMessage._ext = None
     
     _all_ = [
@@ -119,62 +119,62 @@ class SLMAP_CommonDataTypes:
 
 class SLMAP_Constants:
 
-    _name_  = 'SLMAP-Constants'
+    _name_  = u'SLMAP-Constants'
     _oid_   = [0, 4, 0, 0, 21, 3, 50, 1, 4]
     
     _obj_ = [
-        'id-errorIndication',
-        'id-privateMessage',
-        'id-measurement',
-        'id-slmSetup',
-        'id-reset',
-        'id-measurementUpdate',
-        'id-measurementAbort',
-        'maxNrOfErrors',
-        'maxServCell',
-        'maxEARFCN',
-        'maxNoULRTOA',
-        'maxNoLMURfBands',
-        'maxBWComb',
-        'maxBWCombSet',
-        'maxSimultaneousBands',
-        'id-ESMLC-MeasurementID',
-        'id-UL-RTOAMeasurementConfiguration',
-        'id-CriticalityDiagnostics',
-        'id-UL-RTOAMeasurements',
-        'id-Cause',
-        'id-LMU-ID',
-        'id-LMUInformation',
-        'id-ESMLC-ID',
+        u'id-errorIndication',
+        u'id-privateMessage',
+        u'id-measurement',
+        u'id-slmSetup',
+        u'id-reset',
+        u'id-measurementUpdate',
+        u'id-measurementAbort',
+        u'maxNrOfErrors',
+        u'maxServCell',
+        u'maxEARFCN',
+        u'maxNoULRTOA',
+        u'maxNoLMURfBands',
+        u'maxBWComb',
+        u'maxBWCombSet',
+        u'maxSimultaneousBands',
+        u'id-ESMLC-MeasurementID',
+        u'id-UL-RTOAMeasurementConfiguration',
+        u'id-CriticalityDiagnostics',
+        u'id-UL-RTOAMeasurements',
+        u'id-Cause',
+        u'id-LMU-ID',
+        u'id-LMUInformation',
+        u'id-ESMLC-ID',
         ]
     _type_ = [
         ]
     _set_ = [
         ]
     _val_ = [
-        'id-errorIndication',
-        'id-privateMessage',
-        'id-measurement',
-        'id-slmSetup',
-        'id-reset',
-        'id-measurementUpdate',
-        'id-measurementAbort',
-        'maxNrOfErrors',
-        'maxServCell',
-        'maxEARFCN',
-        'maxNoULRTOA',
-        'maxNoLMURfBands',
-        'maxBWComb',
-        'maxBWCombSet',
-        'maxSimultaneousBands',
-        'id-ESMLC-MeasurementID',
-        'id-UL-RTOAMeasurementConfiguration',
-        'id-CriticalityDiagnostics',
-        'id-UL-RTOAMeasurements',
-        'id-Cause',
-        'id-LMU-ID',
-        'id-LMUInformation',
-        'id-ESMLC-ID',
+        u'id-errorIndication',
+        u'id-privateMessage',
+        u'id-measurement',
+        u'id-slmSetup',
+        u'id-reset',
+        u'id-measurementUpdate',
+        u'id-measurementAbort',
+        u'maxNrOfErrors',
+        u'maxServCell',
+        u'maxEARFCN',
+        u'maxNoULRTOA',
+        u'maxNoLMURfBands',
+        u'maxBWComb',
+        u'maxBWCombSet',
+        u'maxSimultaneousBands',
+        u'id-ESMLC-MeasurementID',
+        u'id-UL-RTOAMeasurementConfiguration',
+        u'id-CriticalityDiagnostics',
+        u'id-UL-RTOAMeasurements',
+        u'id-Cause',
+        u'id-LMU-ID',
+        u'id-LMUInformation',
+        u'id-ESMLC-ID',
         ]
     _class_ = [
         ]
@@ -182,95 +182,95 @@ class SLMAP_Constants:
         ]
     
     #-----< id-errorIndication >-----#
-    id_errorIndication = INT(name='id-errorIndication', mode=MODE_VALUE, typeref=ASN1RefType(('SLMAP-CommonDataTypes', 'ProcedureCode')))
+    id_errorIndication = INT(name=u'id-errorIndication', mode=MODE_VALUE, typeref=ASN1RefType(('SLMAP-CommonDataTypes', 'ProcedureCode')))
     id_errorIndication._val = 0
     
     #-----< id-privateMessage >-----#
-    id_privateMessage = INT(name='id-privateMessage', mode=MODE_VALUE, typeref=ASN1RefType(('SLMAP-CommonDataTypes', 'ProcedureCode')))
+    id_privateMessage = INT(name=u'id-privateMessage', mode=MODE_VALUE, typeref=ASN1RefType(('SLMAP-CommonDataTypes', 'ProcedureCode')))
     id_privateMessage._val = 1
     
     #-----< id-measurement >-----#
-    id_measurement = INT(name='id-measurement', mode=MODE_VALUE, typeref=ASN1RefType(('SLMAP-CommonDataTypes', 'ProcedureCode')))
+    id_measurement = INT(name=u'id-measurement', mode=MODE_VALUE, typeref=ASN1RefType(('SLMAP-CommonDataTypes', 'ProcedureCode')))
     id_measurement._val = 2
     
     #-----< id-slmSetup >-----#
-    id_slmSetup = INT(name='id-slmSetup', mode=MODE_VALUE, typeref=ASN1RefType(('SLMAP-CommonDataTypes', 'ProcedureCode')))
+    id_slmSetup = INT(name=u'id-slmSetup', mode=MODE_VALUE, typeref=ASN1RefType(('SLMAP-CommonDataTypes', 'ProcedureCode')))
     id_slmSetup._val = 3
     
     #-----< id-reset >-----#
-    id_reset = INT(name='id-reset', mode=MODE_VALUE, typeref=ASN1RefType(('SLMAP-CommonDataTypes', 'ProcedureCode')))
+    id_reset = INT(name=u'id-reset', mode=MODE_VALUE, typeref=ASN1RefType(('SLMAP-CommonDataTypes', 'ProcedureCode')))
     id_reset._val = 4
     
     #-----< id-measurementUpdate >-----#
-    id_measurementUpdate = INT(name='id-measurementUpdate', mode=MODE_VALUE, typeref=ASN1RefType(('SLMAP-CommonDataTypes', 'ProcedureCode')))
+    id_measurementUpdate = INT(name=u'id-measurementUpdate', mode=MODE_VALUE, typeref=ASN1RefType(('SLMAP-CommonDataTypes', 'ProcedureCode')))
     id_measurementUpdate._val = 5
     
     #-----< id-measurementAbort >-----#
-    id_measurementAbort = INT(name='id-measurementAbort', mode=MODE_VALUE, typeref=ASN1RefType(('SLMAP-CommonDataTypes', 'ProcedureCode')))
+    id_measurementAbort = INT(name=u'id-measurementAbort', mode=MODE_VALUE, typeref=ASN1RefType(('SLMAP-CommonDataTypes', 'ProcedureCode')))
     id_measurementAbort._val = 6
     
     #-----< maxNrOfErrors >-----#
-    maxNrOfErrors = INT(name='maxNrOfErrors', mode=MODE_VALUE)
+    maxNrOfErrors = INT(name=u'maxNrOfErrors', mode=MODE_VALUE)
     maxNrOfErrors._val = 256
     
     #-----< maxServCell >-----#
-    maxServCell = INT(name='maxServCell', mode=MODE_VALUE)
+    maxServCell = INT(name=u'maxServCell', mode=MODE_VALUE)
     maxServCell._val = 5
     
     #-----< maxEARFCN >-----#
-    maxEARFCN = INT(name='maxEARFCN', mode=MODE_VALUE)
+    maxEARFCN = INT(name=u'maxEARFCN', mode=MODE_VALUE)
     maxEARFCN._val = 262143
     
     #-----< maxNoULRTOA >-----#
-    maxNoULRTOA = INT(name='maxNoULRTOA', mode=MODE_VALUE)
+    maxNoULRTOA = INT(name=u'maxNoULRTOA', mode=MODE_VALUE)
     maxNoULRTOA._val = 5
     
     #-----< maxNoLMURfBands >-----#
-    maxNoLMURfBands = INT(name='maxNoLMURfBands', mode=MODE_VALUE)
+    maxNoLMURfBands = INT(name=u'maxNoLMURfBands', mode=MODE_VALUE)
     maxNoLMURfBands._val = 256
     
     #-----< maxBWComb >-----#
-    maxBWComb = INT(name='maxBWComb', mode=MODE_VALUE)
+    maxBWComb = INT(name=u'maxBWComb', mode=MODE_VALUE)
     maxBWComb._val = 128
     
     #-----< maxBWCombSet >-----#
-    maxBWCombSet = INT(name='maxBWCombSet', mode=MODE_VALUE)
+    maxBWCombSet = INT(name=u'maxBWCombSet', mode=MODE_VALUE)
     maxBWCombSet._val = 32
     
     #-----< maxSimultaneousBands >-----#
-    maxSimultaneousBands = INT(name='maxSimultaneousBands', mode=MODE_VALUE)
+    maxSimultaneousBands = INT(name=u'maxSimultaneousBands', mode=MODE_VALUE)
     maxSimultaneousBands._val = 4
     
     #-----< id-ESMLC-MeasurementID >-----#
-    id_ESMLC_MeasurementID = INT(name='id-ESMLC-MeasurementID', mode=MODE_VALUE, typeref=ASN1RefType(('SLMAP-CommonDataTypes', 'ProtocolIE-ID')))
+    id_ESMLC_MeasurementID = INT(name=u'id-ESMLC-MeasurementID', mode=MODE_VALUE, typeref=ASN1RefType(('SLMAP-CommonDataTypes', 'ProtocolIE-ID')))
     id_ESMLC_MeasurementID._val = 0
     
     #-----< id-UL-RTOAMeasurementConfiguration >-----#
-    id_UL_RTOAMeasurementConfiguration = INT(name='id-UL-RTOAMeasurementConfiguration', mode=MODE_VALUE, typeref=ASN1RefType(('SLMAP-CommonDataTypes', 'ProtocolIE-ID')))
+    id_UL_RTOAMeasurementConfiguration = INT(name=u'id-UL-RTOAMeasurementConfiguration', mode=MODE_VALUE, typeref=ASN1RefType(('SLMAP-CommonDataTypes', 'ProtocolIE-ID')))
     id_UL_RTOAMeasurementConfiguration._val = 1
     
     #-----< id-CriticalityDiagnostics >-----#
-    id_CriticalityDiagnostics = INT(name='id-CriticalityDiagnostics', mode=MODE_VALUE, typeref=ASN1RefType(('SLMAP-CommonDataTypes', 'ProtocolIE-ID')))
+    id_CriticalityDiagnostics = INT(name=u'id-CriticalityDiagnostics', mode=MODE_VALUE, typeref=ASN1RefType(('SLMAP-CommonDataTypes', 'ProtocolIE-ID')))
     id_CriticalityDiagnostics._val = 2
     
     #-----< id-UL-RTOAMeasurements >-----#
-    id_UL_RTOAMeasurements = INT(name='id-UL-RTOAMeasurements', mode=MODE_VALUE, typeref=ASN1RefType(('SLMAP-CommonDataTypes', 'ProtocolIE-ID')))
+    id_UL_RTOAMeasurements = INT(name=u'id-UL-RTOAMeasurements', mode=MODE_VALUE, typeref=ASN1RefType(('SLMAP-CommonDataTypes', 'ProtocolIE-ID')))
     id_UL_RTOAMeasurements._val = 3
     
     #-----< id-Cause >-----#
-    id_Cause = INT(name='id-Cause', mode=MODE_VALUE, typeref=ASN1RefType(('SLMAP-CommonDataTypes', 'ProtocolIE-ID')))
+    id_Cause = INT(name=u'id-Cause', mode=MODE_VALUE, typeref=ASN1RefType(('SLMAP-CommonDataTypes', 'ProtocolIE-ID')))
     id_Cause._val = 4
     
     #-----< id-LMU-ID >-----#
-    id_LMU_ID = INT(name='id-LMU-ID', mode=MODE_VALUE, typeref=ASN1RefType(('SLMAP-CommonDataTypes', 'ProtocolIE-ID')))
+    id_LMU_ID = INT(name=u'id-LMU-ID', mode=MODE_VALUE, typeref=ASN1RefType(('SLMAP-CommonDataTypes', 'ProtocolIE-ID')))
     id_LMU_ID._val = 5
     
     #-----< id-LMUInformation >-----#
-    id_LMUInformation = INT(name='id-LMUInformation', mode=MODE_VALUE, typeref=ASN1RefType(('SLMAP-CommonDataTypes', 'ProtocolIE-ID')))
+    id_LMUInformation = INT(name=u'id-LMUInformation', mode=MODE_VALUE, typeref=ASN1RefType(('SLMAP-CommonDataTypes', 'ProtocolIE-ID')))
     id_LMUInformation._val = 6
     
     #-----< id-ESMLC-ID >-----#
-    id_ESMLC_ID = INT(name='id-ESMLC-ID', mode=MODE_VALUE, typeref=ASN1RefType(('SLMAP-CommonDataTypes', 'ProtocolIE-ID')))
+    id_ESMLC_ID = INT(name=u'id-ESMLC-ID', mode=MODE_VALUE, typeref=ASN1RefType(('SLMAP-CommonDataTypes', 'ProtocolIE-ID')))
     id_ESMLC_ID._val = 7
     
     _all_ = [
@@ -301,155 +301,155 @@ class SLMAP_Constants:
 
 class SLMAP_Containers:
 
-    _name_  = 'SLMAP-Containers'
+    _name_  = u'SLMAP-Containers'
     _oid_   = [0, 4, 0, 0, 21, 3, 50, 1, 5]
     
     _obj_ = [
-        'SLMAP-PROTOCOL-IES',
-        'SLMAP-PROTOCOL-IES-PAIR',
-        'SLMAP-PROTOCOL-EXTENSION',
-        'SLMAP-PRIVATE-IES',
-        'ProtocolIE-Container',
-        'ProtocolIE-Single-Container',
-        'ProtocolIE-Field',
-        'ProtocolIE-ContainerPair',
-        'ProtocolIE-FieldPair',
-        'ProtocolIE-ContainerList',
-        'ProtocolIE-ContainerPairList',
-        'ProtocolExtensionContainer',
-        'ProtocolExtensionField',
-        'PrivateIE-Container',
-        'PrivateIE-Field',
+        u'SLMAP-PROTOCOL-IES',
+        u'SLMAP-PROTOCOL-IES-PAIR',
+        u'SLMAP-PROTOCOL-EXTENSION',
+        u'SLMAP-PRIVATE-IES',
+        u'ProtocolIE-Container',
+        u'ProtocolIE-Single-Container',
+        u'ProtocolIE-Field',
+        u'ProtocolIE-ContainerPair',
+        u'ProtocolIE-FieldPair',
+        u'ProtocolIE-ContainerList',
+        u'ProtocolIE-ContainerPairList',
+        u'ProtocolExtensionContainer',
+        u'ProtocolExtensionField',
+        u'PrivateIE-Container',
+        u'PrivateIE-Field',
         ]
     _type_ = [
-        'SLMAP-PROTOCOL-IES',
-        'SLMAP-PROTOCOL-IES-PAIR',
-        'SLMAP-PROTOCOL-EXTENSION',
-        'SLMAP-PRIVATE-IES',
-        'ProtocolIE-Container',
-        'ProtocolIE-Single-Container',
-        'ProtocolIE-Field',
-        'ProtocolIE-ContainerPair',
-        'ProtocolIE-FieldPair',
-        'ProtocolIE-ContainerList',
-        'ProtocolIE-ContainerPairList',
-        'ProtocolExtensionContainer',
-        'ProtocolExtensionField',
-        'PrivateIE-Container',
-        'PrivateIE-Field',
+        u'SLMAP-PROTOCOL-IES',
+        u'SLMAP-PROTOCOL-IES-PAIR',
+        u'SLMAP-PROTOCOL-EXTENSION',
+        u'SLMAP-PRIVATE-IES',
+        u'ProtocolIE-Container',
+        u'ProtocolIE-Single-Container',
+        u'ProtocolIE-Field',
+        u'ProtocolIE-ContainerPair',
+        u'ProtocolIE-FieldPair',
+        u'ProtocolIE-ContainerList',
+        u'ProtocolIE-ContainerPairList',
+        u'ProtocolExtensionContainer',
+        u'ProtocolExtensionField',
+        u'PrivateIE-Container',
+        u'PrivateIE-Field',
         ]
     _set_ = [
         ]
     _val_ = [
         ]
     _class_ = [
-        'SLMAP-PROTOCOL-IES',
-        'SLMAP-PROTOCOL-IES-PAIR',
-        'SLMAP-PROTOCOL-EXTENSION',
-        'SLMAP-PRIVATE-IES',
+        u'SLMAP-PROTOCOL-IES',
+        u'SLMAP-PROTOCOL-IES-PAIR',
+        u'SLMAP-PROTOCOL-EXTENSION',
+        u'SLMAP-PRIVATE-IES',
         ]
     _param_ = [
-        'ProtocolIE-Container',
-        'ProtocolIE-Single-Container',
-        'ProtocolIE-Field',
-        'ProtocolIE-ContainerPair',
-        'ProtocolIE-FieldPair',
-        'ProtocolIE-ContainerList',
-        'ProtocolIE-ContainerPairList',
-        'ProtocolExtensionContainer',
-        'ProtocolExtensionField',
-        'PrivateIE-Container',
-        'PrivateIE-Field',
+        u'ProtocolIE-Container',
+        u'ProtocolIE-Single-Container',
+        u'ProtocolIE-Field',
+        u'ProtocolIE-ContainerPair',
+        u'ProtocolIE-FieldPair',
+        u'ProtocolIE-ContainerList',
+        u'ProtocolIE-ContainerPairList',
+        u'ProtocolExtensionContainer',
+        u'ProtocolExtensionField',
+        u'PrivateIE-Container',
+        u'PrivateIE-Field',
         ]
     
     #-----< SLMAP-PROTOCOL-IES >-----#
-    SLMAP_PROTOCOL_IES = CLASS(name='SLMAP-PROTOCOL-IES', mode=MODE_TYPE)
-    _SLMAP_PROTOCOL_IES_id = INT(name='id', mode=MODE_VALUE, typeref=ASN1RefType(('SLMAP-CommonDataTypes', 'ProtocolIE-ID')), uniq=True)
-    _SLMAP_PROTOCOL_IES_criticality = ENUM(name='criticality', mode=MODE_VALUE, typeref=ASN1RefType(('SLMAP-CommonDataTypes', 'Criticality')))
-    _SLMAP_PROTOCOL_IES_Value = OPEN(name='Value', mode=MODE_TYPE)
-    _SLMAP_PROTOCOL_IES_presence = ENUM(name='presence', mode=MODE_VALUE, typeref=ASN1RefType(('SLMAP-CommonDataTypes', 'Presence')))
+    SLMAP_PROTOCOL_IES = CLASS(name=u'SLMAP-PROTOCOL-IES', mode=MODE_TYPE)
+    _SLMAP_PROTOCOL_IES_id = INT(name=u'id', mode=MODE_VALUE, typeref=ASN1RefType(('SLMAP-CommonDataTypes', 'ProtocolIE-ID')), uniq=True)
+    _SLMAP_PROTOCOL_IES_criticality = ENUM(name=u'criticality', mode=MODE_VALUE, typeref=ASN1RefType(('SLMAP-CommonDataTypes', 'Criticality')))
+    _SLMAP_PROTOCOL_IES_Value = OPEN(name=u'Value', mode=MODE_TYPE)
+    _SLMAP_PROTOCOL_IES_presence = ENUM(name=u'presence', mode=MODE_VALUE, typeref=ASN1RefType(('SLMAP-CommonDataTypes', 'Presence')))
     SLMAP_PROTOCOL_IES._cont = ASN1Dict([
-        ('id', _SLMAP_PROTOCOL_IES_id),
-        ('criticality', _SLMAP_PROTOCOL_IES_criticality),
-        ('Value', _SLMAP_PROTOCOL_IES_Value),
-        ('presence', _SLMAP_PROTOCOL_IES_presence),
+        (u'id', _SLMAP_PROTOCOL_IES_id),
+        (u'criticality', _SLMAP_PROTOCOL_IES_criticality),
+        (u'Value', _SLMAP_PROTOCOL_IES_Value),
+        (u'presence', _SLMAP_PROTOCOL_IES_presence),
         ])
     
     #-----< SLMAP-PROTOCOL-IES-PAIR >-----#
-    SLMAP_PROTOCOL_IES_PAIR = CLASS(name='SLMAP-PROTOCOL-IES-PAIR', mode=MODE_TYPE)
-    _SLMAP_PROTOCOL_IES_PAIR_id = INT(name='id', mode=MODE_VALUE, typeref=ASN1RefType(('SLMAP-CommonDataTypes', 'ProtocolIE-ID')), uniq=True)
-    _SLMAP_PROTOCOL_IES_PAIR_firstCriticality = ENUM(name='firstCriticality', mode=MODE_VALUE, typeref=ASN1RefType(('SLMAP-CommonDataTypes', 'Criticality')))
-    _SLMAP_PROTOCOL_IES_PAIR_FirstValue = OPEN(name='FirstValue', mode=MODE_TYPE)
-    _SLMAP_PROTOCOL_IES_PAIR_secondCriticality = ENUM(name='secondCriticality', mode=MODE_VALUE, typeref=ASN1RefType(('SLMAP-CommonDataTypes', 'Criticality')))
-    _SLMAP_PROTOCOL_IES_PAIR_SecondValue = OPEN(name='SecondValue', mode=MODE_TYPE)
-    _SLMAP_PROTOCOL_IES_PAIR_presence = ENUM(name='presence', mode=MODE_VALUE, typeref=ASN1RefType(('SLMAP-CommonDataTypes', 'Presence')))
+    SLMAP_PROTOCOL_IES_PAIR = CLASS(name=u'SLMAP-PROTOCOL-IES-PAIR', mode=MODE_TYPE)
+    _SLMAP_PROTOCOL_IES_PAIR_id = INT(name=u'id', mode=MODE_VALUE, typeref=ASN1RefType(('SLMAP-CommonDataTypes', 'ProtocolIE-ID')), uniq=True)
+    _SLMAP_PROTOCOL_IES_PAIR_firstCriticality = ENUM(name=u'firstCriticality', mode=MODE_VALUE, typeref=ASN1RefType(('SLMAP-CommonDataTypes', 'Criticality')))
+    _SLMAP_PROTOCOL_IES_PAIR_FirstValue = OPEN(name=u'FirstValue', mode=MODE_TYPE)
+    _SLMAP_PROTOCOL_IES_PAIR_secondCriticality = ENUM(name=u'secondCriticality', mode=MODE_VALUE, typeref=ASN1RefType(('SLMAP-CommonDataTypes', 'Criticality')))
+    _SLMAP_PROTOCOL_IES_PAIR_SecondValue = OPEN(name=u'SecondValue', mode=MODE_TYPE)
+    _SLMAP_PROTOCOL_IES_PAIR_presence = ENUM(name=u'presence', mode=MODE_VALUE, typeref=ASN1RefType(('SLMAP-CommonDataTypes', 'Presence')))
     SLMAP_PROTOCOL_IES_PAIR._cont = ASN1Dict([
-        ('id', _SLMAP_PROTOCOL_IES_PAIR_id),
-        ('firstCriticality', _SLMAP_PROTOCOL_IES_PAIR_firstCriticality),
-        ('FirstValue', _SLMAP_PROTOCOL_IES_PAIR_FirstValue),
-        ('secondCriticality', _SLMAP_PROTOCOL_IES_PAIR_secondCriticality),
-        ('SecondValue', _SLMAP_PROTOCOL_IES_PAIR_SecondValue),
-        ('presence', _SLMAP_PROTOCOL_IES_PAIR_presence),
+        (u'id', _SLMAP_PROTOCOL_IES_PAIR_id),
+        (u'firstCriticality', _SLMAP_PROTOCOL_IES_PAIR_firstCriticality),
+        (u'FirstValue', _SLMAP_PROTOCOL_IES_PAIR_FirstValue),
+        (u'secondCriticality', _SLMAP_PROTOCOL_IES_PAIR_secondCriticality),
+        (u'SecondValue', _SLMAP_PROTOCOL_IES_PAIR_SecondValue),
+        (u'presence', _SLMAP_PROTOCOL_IES_PAIR_presence),
         ])
     
     #-----< SLMAP-PROTOCOL-EXTENSION >-----#
-    SLMAP_PROTOCOL_EXTENSION = CLASS(name='SLMAP-PROTOCOL-EXTENSION', mode=MODE_TYPE)
-    _SLMAP_PROTOCOL_EXTENSION_id = INT(name='id', mode=MODE_VALUE, typeref=ASN1RefType(('SLMAP-CommonDataTypes', 'ProtocolIE-ID')), uniq=True)
-    _SLMAP_PROTOCOL_EXTENSION_criticality = ENUM(name='criticality', mode=MODE_VALUE, typeref=ASN1RefType(('SLMAP-CommonDataTypes', 'Criticality')))
-    _SLMAP_PROTOCOL_EXTENSION_Extension = OPEN(name='Extension', mode=MODE_TYPE)
-    _SLMAP_PROTOCOL_EXTENSION_presence = ENUM(name='presence', mode=MODE_VALUE, typeref=ASN1RefType(('SLMAP-CommonDataTypes', 'Presence')))
+    SLMAP_PROTOCOL_EXTENSION = CLASS(name=u'SLMAP-PROTOCOL-EXTENSION', mode=MODE_TYPE)
+    _SLMAP_PROTOCOL_EXTENSION_id = INT(name=u'id', mode=MODE_VALUE, typeref=ASN1RefType(('SLMAP-CommonDataTypes', 'ProtocolIE-ID')), uniq=True)
+    _SLMAP_PROTOCOL_EXTENSION_criticality = ENUM(name=u'criticality', mode=MODE_VALUE, typeref=ASN1RefType(('SLMAP-CommonDataTypes', 'Criticality')))
+    _SLMAP_PROTOCOL_EXTENSION_Extension = OPEN(name=u'Extension', mode=MODE_TYPE)
+    _SLMAP_PROTOCOL_EXTENSION_presence = ENUM(name=u'presence', mode=MODE_VALUE, typeref=ASN1RefType(('SLMAP-CommonDataTypes', 'Presence')))
     SLMAP_PROTOCOL_EXTENSION._cont = ASN1Dict([
-        ('id', _SLMAP_PROTOCOL_EXTENSION_id),
-        ('criticality', _SLMAP_PROTOCOL_EXTENSION_criticality),
-        ('Extension', _SLMAP_PROTOCOL_EXTENSION_Extension),
-        ('presence', _SLMAP_PROTOCOL_EXTENSION_presence),
+        (u'id', _SLMAP_PROTOCOL_EXTENSION_id),
+        (u'criticality', _SLMAP_PROTOCOL_EXTENSION_criticality),
+        (u'Extension', _SLMAP_PROTOCOL_EXTENSION_Extension),
+        (u'presence', _SLMAP_PROTOCOL_EXTENSION_presence),
         ])
     
     #-----< SLMAP-PRIVATE-IES >-----#
-    SLMAP_PRIVATE_IES = CLASS(name='SLMAP-PRIVATE-IES', mode=MODE_TYPE)
-    _SLMAP_PRIVATE_IES_id = CHOICE(name='id', mode=MODE_VALUE, typeref=ASN1RefType(('SLMAP-CommonDataTypes', 'PrivateIE-ID')))
-    _SLMAP_PRIVATE_IES_criticality = ENUM(name='criticality', mode=MODE_VALUE, typeref=ASN1RefType(('SLMAP-CommonDataTypes', 'Criticality')))
-    _SLMAP_PRIVATE_IES_Value = OPEN(name='Value', mode=MODE_TYPE)
-    _SLMAP_PRIVATE_IES_presence = ENUM(name='presence', mode=MODE_VALUE, typeref=ASN1RefType(('SLMAP-CommonDataTypes', 'Presence')))
+    SLMAP_PRIVATE_IES = CLASS(name=u'SLMAP-PRIVATE-IES', mode=MODE_TYPE)
+    _SLMAP_PRIVATE_IES_id = CHOICE(name=u'id', mode=MODE_VALUE, typeref=ASN1RefType(('SLMAP-CommonDataTypes', 'PrivateIE-ID')))
+    _SLMAP_PRIVATE_IES_criticality = ENUM(name=u'criticality', mode=MODE_VALUE, typeref=ASN1RefType(('SLMAP-CommonDataTypes', 'Criticality')))
+    _SLMAP_PRIVATE_IES_Value = OPEN(name=u'Value', mode=MODE_TYPE)
+    _SLMAP_PRIVATE_IES_presence = ENUM(name=u'presence', mode=MODE_VALUE, typeref=ASN1RefType(('SLMAP-CommonDataTypes', 'Presence')))
     SLMAP_PRIVATE_IES._cont = ASN1Dict([
-        ('id', _SLMAP_PRIVATE_IES_id),
-        ('criticality', _SLMAP_PRIVATE_IES_criticality),
-        ('Value', _SLMAP_PRIVATE_IES_Value),
-        ('presence', _SLMAP_PRIVATE_IES_presence),
+        (u'id', _SLMAP_PRIVATE_IES_id),
+        (u'criticality', _SLMAP_PRIVATE_IES_criticality),
+        (u'Value', _SLMAP_PRIVATE_IES_Value),
+        (u'presence', _SLMAP_PRIVATE_IES_presence),
         ])
     
     #-----< ProtocolIE-Container >-----#
-    ProtocolIE_Container = SEQ_OF(name='ProtocolIE-Container', mode=MODE_TYPE, param=True)
+    ProtocolIE_Container = SEQ_OF(name=u'ProtocolIE-Container', mode=MODE_TYPE, param=True)
     
     #-----< ProtocolIE-Single-Container >-----#
-    ProtocolIE_Single_Container = SEQ(name='ProtocolIE-Single-Container', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-Containers', 'ProtocolIE-Field')), param=True)
+    ProtocolIE_Single_Container = SEQ(name=u'ProtocolIE-Single-Container', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-Containers', 'ProtocolIE-Field')), param=True)
     
     #-----< ProtocolIE-Field >-----#
-    ProtocolIE_Field = SEQ(name='ProtocolIE-Field', mode=MODE_TYPE, param=True)
+    ProtocolIE_Field = SEQ(name=u'ProtocolIE-Field', mode=MODE_TYPE, param=True)
     
     #-----< ProtocolIE-ContainerPair >-----#
-    ProtocolIE_ContainerPair = SEQ_OF(name='ProtocolIE-ContainerPair', mode=MODE_TYPE, param=True)
+    ProtocolIE_ContainerPair = SEQ_OF(name=u'ProtocolIE-ContainerPair', mode=MODE_TYPE, param=True)
     
     #-----< ProtocolIE-FieldPair >-----#
-    ProtocolIE_FieldPair = SEQ(name='ProtocolIE-FieldPair', mode=MODE_TYPE, param=True)
+    ProtocolIE_FieldPair = SEQ(name=u'ProtocolIE-FieldPair', mode=MODE_TYPE, param=True)
     
     #-----< ProtocolIE-ContainerList >-----#
-    ProtocolIE_ContainerList = SEQ_OF(name='ProtocolIE-ContainerList', mode=MODE_TYPE, param=True)
+    ProtocolIE_ContainerList = SEQ_OF(name=u'ProtocolIE-ContainerList', mode=MODE_TYPE, param=True)
     
     #-----< ProtocolIE-ContainerPairList >-----#
-    ProtocolIE_ContainerPairList = SEQ_OF(name='ProtocolIE-ContainerPairList', mode=MODE_TYPE, param=True)
+    ProtocolIE_ContainerPairList = SEQ_OF(name=u'ProtocolIE-ContainerPairList', mode=MODE_TYPE, param=True)
     
     #-----< ProtocolExtensionContainer >-----#
-    ProtocolExtensionContainer = SEQ_OF(name='ProtocolExtensionContainer', mode=MODE_TYPE, param=True)
+    ProtocolExtensionContainer = SEQ_OF(name=u'ProtocolExtensionContainer', mode=MODE_TYPE, param=True)
     
     #-----< ProtocolExtensionField >-----#
-    ProtocolExtensionField = SEQ(name='ProtocolExtensionField', mode=MODE_TYPE, param=True)
+    ProtocolExtensionField = SEQ(name=u'ProtocolExtensionField', mode=MODE_TYPE, param=True)
     
     #-----< PrivateIE-Container >-----#
-    PrivateIE_Container = SEQ_OF(name='PrivateIE-Container', mode=MODE_TYPE, param=True)
+    PrivateIE_Container = SEQ_OF(name=u'PrivateIE-Container', mode=MODE_TYPE, param=True)
     
     #-----< PrivateIE-Field >-----#
-    PrivateIE_Field = SEQ(name='PrivateIE-Field', mode=MODE_TYPE, param=True)
+    PrivateIE_Field = SEQ(name=u'PrivateIE-Field', mode=MODE_TYPE, param=True)
     
     _all_ = [
         _SLMAP_PROTOCOL_IES_id,
@@ -478,444 +478,444 @@ class SLMAP_Containers:
 
 class SLMAP_IEs:
 
-    _name_  = 'SLMAP-IEs'
+    _name_  = u'SLMAP-IEs'
     _oid_   = [0, 4, 0, 0, 21, 3, 50, 1, 2]
     
     _obj_ = [
-        'Cause',
-        'RadioNetworkLayerCause',
-        'ProtocolCause',
-        'MiscCause',
-        'CriticalityDiagnostics',
-        'CriticalityDiagnostics-ExtIEs',
-        'CriticalityDiagnostics-IE-List',
-        'CriticalityDiagnostics-IE-List-ExtIEs',
-        'TypeOfError',
-        'UL-RTOAMeasurementConfiguration',
-        'SearchWindowParameters',
-        'SRSConfiguration',
-        'SRSConfigurationForOneCell',
-        'PCI',
-        'EARFCN',
-        'ChannelBandwidth',
-        'CPLength',
-        'BandwidthConfig',
-        'SRSBandwidth',
-        'AntennaPort',
-        'HoppingBandwidth',
-        'CyclicShift',
-        'UL-RTOAMeasurements',
-        'UL-RTOAMeasurement',
-        'LMU-ID',
-        'ESMLC-ID',
-        'ESMLC-MeasurementID',
-        'LMUInformation',
-        'ListOfRfBands',
-        'FreqBandIndicator',
-        'BWCombinationParameters',
-        'SupportedBandwidthCombinationSet',
-        'BandCombination',
-        'LMUPosition',
+        u'Cause',
+        u'RadioNetworkLayerCause',
+        u'ProtocolCause',
+        u'MiscCause',
+        u'CriticalityDiagnostics',
+        u'CriticalityDiagnostics-ExtIEs',
+        u'CriticalityDiagnostics-IE-List',
+        u'CriticalityDiagnostics-IE-List-ExtIEs',
+        u'TypeOfError',
+        u'UL-RTOAMeasurementConfiguration',
+        u'SearchWindowParameters',
+        u'SRSConfiguration',
+        u'SRSConfigurationForOneCell',
+        u'PCI',
+        u'EARFCN',
+        u'ChannelBandwidth',
+        u'CPLength',
+        u'BandwidthConfig',
+        u'SRSBandwidth',
+        u'AntennaPort',
+        u'HoppingBandwidth',
+        u'CyclicShift',
+        u'UL-RTOAMeasurements',
+        u'UL-RTOAMeasurement',
+        u'LMU-ID',
+        u'ESMLC-ID',
+        u'ESMLC-MeasurementID',
+        u'LMUInformation',
+        u'ListOfRfBands',
+        u'FreqBandIndicator',
+        u'BWCombinationParameters',
+        u'SupportedBandwidthCombinationSet',
+        u'BandCombination',
+        u'LMUPosition',
         ]
     _type_ = [
-        'Cause',
-        'RadioNetworkLayerCause',
-        'ProtocolCause',
-        'MiscCause',
-        'CriticalityDiagnostics',
-        'CriticalityDiagnostics-IE-List',
-        'TypeOfError',
-        'UL-RTOAMeasurementConfiguration',
-        'SearchWindowParameters',
-        'SRSConfiguration',
-        'SRSConfigurationForOneCell',
-        'PCI',
-        'EARFCN',
-        'ChannelBandwidth',
-        'CPLength',
-        'BandwidthConfig',
-        'SRSBandwidth',
-        'AntennaPort',
-        'HoppingBandwidth',
-        'CyclicShift',
-        'UL-RTOAMeasurements',
-        'UL-RTOAMeasurement',
-        'LMU-ID',
-        'ESMLC-ID',
-        'ESMLC-MeasurementID',
-        'LMUInformation',
-        'ListOfRfBands',
-        'FreqBandIndicator',
-        'BWCombinationParameters',
-        'SupportedBandwidthCombinationSet',
-        'BandCombination',
-        'LMUPosition',
+        u'Cause',
+        u'RadioNetworkLayerCause',
+        u'ProtocolCause',
+        u'MiscCause',
+        u'CriticalityDiagnostics',
+        u'CriticalityDiagnostics-IE-List',
+        u'TypeOfError',
+        u'UL-RTOAMeasurementConfiguration',
+        u'SearchWindowParameters',
+        u'SRSConfiguration',
+        u'SRSConfigurationForOneCell',
+        u'PCI',
+        u'EARFCN',
+        u'ChannelBandwidth',
+        u'CPLength',
+        u'BandwidthConfig',
+        u'SRSBandwidth',
+        u'AntennaPort',
+        u'HoppingBandwidth',
+        u'CyclicShift',
+        u'UL-RTOAMeasurements',
+        u'UL-RTOAMeasurement',
+        u'LMU-ID',
+        u'ESMLC-ID',
+        u'ESMLC-MeasurementID',
+        u'LMUInformation',
+        u'ListOfRfBands',
+        u'FreqBandIndicator',
+        u'BWCombinationParameters',
+        u'SupportedBandwidthCombinationSet',
+        u'BandCombination',
+        u'LMUPosition',
         ]
     _set_ = [
-        'CriticalityDiagnostics-ExtIEs',
-        'CriticalityDiagnostics-IE-List-ExtIEs',
+        u'CriticalityDiagnostics-ExtIEs',
+        u'CriticalityDiagnostics-IE-List-ExtIEs',
         ]
     _val_ = [
         ]
     _class_ = [
-        'CriticalityDiagnostics-ExtIEs',
-        'CriticalityDiagnostics-IE-List-ExtIEs',
+        u'CriticalityDiagnostics-ExtIEs',
+        u'CriticalityDiagnostics-IE-List-ExtIEs',
         ]
     _param_ = [
         ]
     
     #-----< Cause >-----#
-    Cause = CHOICE(name='Cause', mode=MODE_TYPE)
-    _Cause_radioNetworkLayer = ENUM(name='radioNetworkLayer', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('SLMAP-IEs', 'RadioNetworkLayerCause')))
-    _Cause_protocol = ENUM(name='protocol', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('SLMAP-IEs', 'ProtocolCause')))
-    _Cause_misc = ENUM(name='misc', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('SLMAP-IEs', 'MiscCause')))
+    Cause = CHOICE(name=u'Cause', mode=MODE_TYPE)
+    _Cause_radioNetworkLayer = ENUM(name=u'radioNetworkLayer', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('SLMAP-IEs', 'RadioNetworkLayerCause')))
+    _Cause_protocol = ENUM(name=u'protocol', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('SLMAP-IEs', 'ProtocolCause')))
+    _Cause_misc = ENUM(name=u'misc', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('SLMAP-IEs', 'MiscCause')))
     Cause._cont = ASN1Dict([
-        ('radioNetworkLayer', _Cause_radioNetworkLayer),
-        ('protocol', _Cause_protocol),
-        ('misc', _Cause_misc),
+        (u'radioNetworkLayer', _Cause_radioNetworkLayer),
+        (u'protocol', _Cause_protocol),
+        (u'misc', _Cause_misc),
         ])
     Cause._ext = []
     
     #-----< RadioNetworkLayerCause >-----#
-    RadioNetworkLayerCause = ENUM(name='RadioNetworkLayerCause', mode=MODE_TYPE)
-    RadioNetworkLayerCause._cont = ASN1Dict([('unknown-or-already-allocated-slmap-id', 0), ('rf-frequency-band-not-supported', 1), ('rf-bandwidth-not-supported', 2), ('invalid-srs-coniguration', 3), ('unspecified', 4)])
+    RadioNetworkLayerCause = ENUM(name=u'RadioNetworkLayerCause', mode=MODE_TYPE)
+    RadioNetworkLayerCause._cont = ASN1Dict([(u'unknown-or-already-allocated-slmap-id', 0), (u'rf-frequency-band-not-supported', 1), (u'rf-bandwidth-not-supported', 2), (u'invalid-srs-coniguration', 3), (u'unspecified', 4)])
     RadioNetworkLayerCause._ext = []
     
     #-----< ProtocolCause >-----#
-    ProtocolCause = ENUM(name='ProtocolCause', mode=MODE_TYPE)
-    ProtocolCause._cont = ASN1Dict([('transfer-syntax-error', 0), ('abstract-syntax-error-reject', 1), ('abstract-syntax-error-ignore-and-notify', 2), ('message-not-compatible-with-receiver-state', 3), ('semantic-error', 4), ('abstract-syntax-error-falsely-constructed-message', 5), ('unspecified', 6)])
+    ProtocolCause = ENUM(name=u'ProtocolCause', mode=MODE_TYPE)
+    ProtocolCause._cont = ASN1Dict([(u'transfer-syntax-error', 0), (u'abstract-syntax-error-reject', 1), (u'abstract-syntax-error-ignore-and-notify', 2), (u'message-not-compatible-with-receiver-state', 3), (u'semantic-error', 4), (u'abstract-syntax-error-falsely-constructed-message', 5), (u'unspecified', 6)])
     ProtocolCause._ext = []
     
     #-----< MiscCause >-----#
-    MiscCause = ENUM(name='MiscCause', mode=MODE_TYPE)
-    MiscCause._cont = ASN1Dict([('control-processing-overload', 0), ('processing-resources-not-available', 1), ('hardware-failure', 2), ('o-and-m-intervention', 3), ('unspecified', 4)])
+    MiscCause = ENUM(name=u'MiscCause', mode=MODE_TYPE)
+    MiscCause._cont = ASN1Dict([(u'control-processing-overload', 0), (u'processing-resources-not-available', 1), (u'hardware-failure', 2), (u'o-and-m-intervention', 3), (u'unspecified', 4)])
     MiscCause._ext = []
     
     #-----< CriticalityDiagnostics >-----#
-    CriticalityDiagnostics = SEQ(name='CriticalityDiagnostics', mode=MODE_TYPE)
-    _CriticalityDiagnostics_procedureCode = INT(name='procedureCode', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('SLMAP-CommonDataTypes', 'ProcedureCode')), opt=True)
-    _CriticalityDiagnostics_triggeringMessage = ENUM(name='triggeringMessage', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('SLMAP-CommonDataTypes', 'TriggeringMessage')), opt=True)
-    _CriticalityDiagnostics_procedureCriticality = ENUM(name='procedureCriticality', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('SLMAP-CommonDataTypes', 'Criticality')), opt=True)
-    _CriticalityDiagnostics_slmapTransactionID = INT(name='slmapTransactionID', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('SLMAP-CommonDataTypes', 'SLMAPTransactionID')), opt=True)
-    _CriticalityDiagnostics_iEsCriticalityDiagnostics = SEQ_OF(name='iEsCriticalityDiagnostics', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('SLMAP-IEs', 'CriticalityDiagnostics-IE-List')), opt=True)
-    _CriticalityDiagnostics_iE_Extensions = SEQ_OF(name='iE-Extensions', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('SLMAP-Containers', 'ProtocolExtensionContainer')), opt=True)
+    CriticalityDiagnostics = SEQ(name=u'CriticalityDiagnostics', mode=MODE_TYPE)
+    _CriticalityDiagnostics_procedureCode = INT(name=u'procedureCode', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('SLMAP-CommonDataTypes', 'ProcedureCode')), opt=True)
+    _CriticalityDiagnostics_triggeringMessage = ENUM(name=u'triggeringMessage', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('SLMAP-CommonDataTypes', 'TriggeringMessage')), opt=True)
+    _CriticalityDiagnostics_procedureCriticality = ENUM(name=u'procedureCriticality', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('SLMAP-CommonDataTypes', 'Criticality')), opt=True)
+    _CriticalityDiagnostics_slmapTransactionID = INT(name=u'slmapTransactionID', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('SLMAP-CommonDataTypes', 'SLMAPTransactionID')), opt=True)
+    _CriticalityDiagnostics_iEsCriticalityDiagnostics = SEQ_OF(name=u'iEsCriticalityDiagnostics', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('SLMAP-IEs', 'CriticalityDiagnostics-IE-List')), opt=True)
+    _CriticalityDiagnostics_iE_Extensions = SEQ_OF(name=u'iE-Extensions', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('SLMAP-Containers', 'ProtocolExtensionContainer')), opt=True)
     __CriticalityDiagnostics_iE_Extensions__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-Containers', 'ProtocolExtensionField')))
-    ___CriticalityDiagnostics_iE_Extensions__item__id = INT(name='id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('SLMAP-Containers', 'SLMAP-PROTOCOL-EXTENSION'), ['id']))
+    ___CriticalityDiagnostics_iE_Extensions__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('SLMAP-Containers', 'SLMAP-PROTOCOL-EXTENSION'), [u'id']))
     ____CriticalityDiagnostics_iE_Extensions__item__id_tab = CLASS(name='_tab_SLMAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('SLMAP-Containers', 'SLMAP-PROTOCOL-EXTENSION')))
     ____CriticalityDiagnostics_iE_Extensions__item__id_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___CriticalityDiagnostics_iE_Extensions__item__id._const_tab = ____CriticalityDiagnostics_iE_Extensions__item__id_tab
     ___CriticalityDiagnostics_iE_Extensions__item__id._const_tab_at = None
-    ___CriticalityDiagnostics_iE_Extensions__item__id._const_tab_id = 'id'
-    ___CriticalityDiagnostics_iE_Extensions__item__criticality = ENUM(name='criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('SLMAP-Containers', 'SLMAP-PROTOCOL-EXTENSION'), ['criticality']))
+    ___CriticalityDiagnostics_iE_Extensions__item__id._const_tab_id = u'id'
+    ___CriticalityDiagnostics_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('SLMAP-Containers', 'SLMAP-PROTOCOL-EXTENSION'), [u'criticality']))
     ____CriticalityDiagnostics_iE_Extensions__item__criticality_tab = CLASS(name='_tab_SLMAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('SLMAP-Containers', 'SLMAP-PROTOCOL-EXTENSION')))
     ____CriticalityDiagnostics_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___CriticalityDiagnostics_iE_Extensions__item__criticality._const_tab = ____CriticalityDiagnostics_iE_Extensions__item__criticality_tab
-    ___CriticalityDiagnostics_iE_Extensions__item__criticality._const_tab_at = ('..', 'id')
-    ___CriticalityDiagnostics_iE_Extensions__item__criticality._const_tab_id = 'criticality'
-    ___CriticalityDiagnostics_iE_Extensions__item__extensionValue = OPEN(name='extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('SLMAP-Containers', 'SLMAP-PROTOCOL-EXTENSION'), ['Extension']))
+    ___CriticalityDiagnostics_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
+    ___CriticalityDiagnostics_iE_Extensions__item__criticality._const_tab_id = u'criticality'
+    ___CriticalityDiagnostics_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('SLMAP-Containers', 'SLMAP-PROTOCOL-EXTENSION'), [u'Extension']))
     ____CriticalityDiagnostics_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_SLMAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('SLMAP-Containers', 'SLMAP-PROTOCOL-EXTENSION')))
     ____CriticalityDiagnostics_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___CriticalityDiagnostics_iE_Extensions__item__extensionValue._const_tab = ____CriticalityDiagnostics_iE_Extensions__item__extensionValue_tab
-    ___CriticalityDiagnostics_iE_Extensions__item__extensionValue._const_tab_at = ('..', 'id')
-    ___CriticalityDiagnostics_iE_Extensions__item__extensionValue._const_tab_id = 'Extension'
+    ___CriticalityDiagnostics_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
+    ___CriticalityDiagnostics_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __CriticalityDiagnostics_iE_Extensions__item_._cont = ASN1Dict([
-        ('id', ___CriticalityDiagnostics_iE_Extensions__item__id),
-        ('criticality', ___CriticalityDiagnostics_iE_Extensions__item__criticality),
-        ('extensionValue', ___CriticalityDiagnostics_iE_Extensions__item__extensionValue),
+        (u'id', ___CriticalityDiagnostics_iE_Extensions__item__id),
+        (u'criticality', ___CriticalityDiagnostics_iE_Extensions__item__criticality),
+        (u'extensionValue', ___CriticalityDiagnostics_iE_Extensions__item__extensionValue),
         ])
     __CriticalityDiagnostics_iE_Extensions__item_._ext = None
     _CriticalityDiagnostics_iE_Extensions._cont = __CriticalityDiagnostics_iE_Extensions__item_
     _CriticalityDiagnostics_iE_Extensions._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=65535)], ev=None, er=[])
     CriticalityDiagnostics._cont = ASN1Dict([
-        ('procedureCode', _CriticalityDiagnostics_procedureCode),
-        ('triggeringMessage', _CriticalityDiagnostics_triggeringMessage),
-        ('procedureCriticality', _CriticalityDiagnostics_procedureCriticality),
-        ('slmapTransactionID', _CriticalityDiagnostics_slmapTransactionID),
-        ('iEsCriticalityDiagnostics', _CriticalityDiagnostics_iEsCriticalityDiagnostics),
-        ('iE-Extensions', _CriticalityDiagnostics_iE_Extensions),
+        (u'procedureCode', _CriticalityDiagnostics_procedureCode),
+        (u'triggeringMessage', _CriticalityDiagnostics_triggeringMessage),
+        (u'procedureCriticality', _CriticalityDiagnostics_procedureCriticality),
+        (u'slmapTransactionID', _CriticalityDiagnostics_slmapTransactionID),
+        (u'iEsCriticalityDiagnostics', _CriticalityDiagnostics_iEsCriticalityDiagnostics),
+        (u'iE-Extensions', _CriticalityDiagnostics_iE_Extensions),
         ])
     CriticalityDiagnostics._ext = []
     
     #-----< CriticalityDiagnostics-ExtIEs >-----#
-    CriticalityDiagnostics_ExtIEs = CLASS(name='CriticalityDiagnostics-ExtIEs', mode=MODE_SET, typeref=ASN1RefType(('SLMAP-Containers', 'SLMAP-PROTOCOL-EXTENSION')))
+    CriticalityDiagnostics_ExtIEs = CLASS(name=u'CriticalityDiagnostics-ExtIEs', mode=MODE_SET, typeref=ASN1RefType(('SLMAP-Containers', 'SLMAP-PROTOCOL-EXTENSION')))
     CriticalityDiagnostics_ExtIEs._val = ASN1Set(rv=[], rr=[], ev=[], er=[])
     
     #-----< CriticalityDiagnostics-IE-List >-----#
-    CriticalityDiagnostics_IE_List = SEQ_OF(name='CriticalityDiagnostics-IE-List', mode=MODE_TYPE)
+    CriticalityDiagnostics_IE_List = SEQ_OF(name=u'CriticalityDiagnostics-IE-List', mode=MODE_TYPE)
     _CriticalityDiagnostics_IE_List__item_ = SEQ(name='_item_', mode=MODE_TYPE)
-    __CriticalityDiagnostics_IE_List__item__iECriticality = ENUM(name='iECriticality', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('SLMAP-CommonDataTypes', 'Criticality')))
-    __CriticalityDiagnostics_IE_List__item__iE_ID = INT(name='iE-ID', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('SLMAP-CommonDataTypes', 'ProtocolIE-ID')))
-    __CriticalityDiagnostics_IE_List__item__typeOfError = ENUM(name='typeOfError', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('SLMAP-IEs', 'TypeOfError')))
-    __CriticalityDiagnostics_IE_List__item__iE_Extensions = SEQ_OF(name='iE-Extensions', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('SLMAP-Containers', 'ProtocolExtensionContainer')), opt=True)
+    __CriticalityDiagnostics_IE_List__item__iECriticality = ENUM(name=u'iECriticality', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('SLMAP-CommonDataTypes', 'Criticality')))
+    __CriticalityDiagnostics_IE_List__item__iE_ID = INT(name=u'iE-ID', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('SLMAP-CommonDataTypes', 'ProtocolIE-ID')))
+    __CriticalityDiagnostics_IE_List__item__typeOfError = ENUM(name=u'typeOfError', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('SLMAP-IEs', 'TypeOfError')))
+    __CriticalityDiagnostics_IE_List__item__iE_Extensions = SEQ_OF(name=u'iE-Extensions', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('SLMAP-Containers', 'ProtocolExtensionContainer')), opt=True)
     ___CriticalityDiagnostics_IE_List__item__iE_Extensions__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-Containers', 'ProtocolExtensionField')))
-    ____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__id = INT(name='id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('SLMAP-Containers', 'SLMAP-PROTOCOL-EXTENSION'), ['id']))
+    ____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('SLMAP-Containers', 'SLMAP-PROTOCOL-EXTENSION'), [u'id']))
     _____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__id_tab = CLASS(name='_tab_SLMAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('SLMAP-Containers', 'SLMAP-PROTOCOL-EXTENSION')))
     _____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__id_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__id._const_tab = _____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__id_tab
     ____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__id._const_tab_at = None
-    ____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__id._const_tab_id = 'id'
-    ____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__criticality = ENUM(name='criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('SLMAP-Containers', 'SLMAP-PROTOCOL-EXTENSION'), ['criticality']))
+    ____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__id._const_tab_id = u'id'
+    ____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('SLMAP-Containers', 'SLMAP-PROTOCOL-EXTENSION'), [u'criticality']))
     _____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__criticality_tab = CLASS(name='_tab_SLMAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('SLMAP-Containers', 'SLMAP-PROTOCOL-EXTENSION')))
     _____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__criticality._const_tab = _____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__criticality_tab
-    ____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__criticality._const_tab_at = ('..', 'id')
-    ____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__criticality._const_tab_id = 'criticality'
-    ____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__extensionValue = OPEN(name='extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('SLMAP-Containers', 'SLMAP-PROTOCOL-EXTENSION'), ['Extension']))
+    ____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
+    ____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__criticality._const_tab_id = u'criticality'
+    ____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('SLMAP-Containers', 'SLMAP-PROTOCOL-EXTENSION'), [u'Extension']))
     _____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_SLMAP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('SLMAP-Containers', 'SLMAP-PROTOCOL-EXTENSION')))
     _____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__extensionValue._const_tab = _____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__extensionValue_tab
-    ____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__extensionValue._const_tab_at = ('..', 'id')
-    ____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__extensionValue._const_tab_id = 'Extension'
+    ____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
+    ____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     ___CriticalityDiagnostics_IE_List__item__iE_Extensions__item_._cont = ASN1Dict([
-        ('id', ____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__id),
-        ('criticality', ____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__criticality),
-        ('extensionValue', ____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__extensionValue),
+        (u'id', ____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__id),
+        (u'criticality', ____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__criticality),
+        (u'extensionValue', ____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__extensionValue),
         ])
     ___CriticalityDiagnostics_IE_List__item__iE_Extensions__item_._ext = None
     __CriticalityDiagnostics_IE_List__item__iE_Extensions._cont = ___CriticalityDiagnostics_IE_List__item__iE_Extensions__item_
     __CriticalityDiagnostics_IE_List__item__iE_Extensions._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=65535)], ev=None, er=[])
     _CriticalityDiagnostics_IE_List__item_._cont = ASN1Dict([
-        ('iECriticality', __CriticalityDiagnostics_IE_List__item__iECriticality),
-        ('iE-ID', __CriticalityDiagnostics_IE_List__item__iE_ID),
-        ('typeOfError', __CriticalityDiagnostics_IE_List__item__typeOfError),
-        ('iE-Extensions', __CriticalityDiagnostics_IE_List__item__iE_Extensions),
+        (u'iECriticality', __CriticalityDiagnostics_IE_List__item__iECriticality),
+        (u'iE-ID', __CriticalityDiagnostics_IE_List__item__iE_ID),
+        (u'typeOfError', __CriticalityDiagnostics_IE_List__item__typeOfError),
+        (u'iE-Extensions', __CriticalityDiagnostics_IE_List__item__iE_Extensions),
         ])
     _CriticalityDiagnostics_IE_List__item_._ext = []
     CriticalityDiagnostics_IE_List._cont = _CriticalityDiagnostics_IE_List__item_
     CriticalityDiagnostics_IE_List._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=256)], ev=None, er=[])
     
     #-----< CriticalityDiagnostics-IE-List-ExtIEs >-----#
-    CriticalityDiagnostics_IE_List_ExtIEs = CLASS(name='CriticalityDiagnostics-IE-List-ExtIEs', mode=MODE_SET, typeref=ASN1RefType(('SLMAP-Containers', 'SLMAP-PROTOCOL-EXTENSION')))
+    CriticalityDiagnostics_IE_List_ExtIEs = CLASS(name=u'CriticalityDiagnostics-IE-List-ExtIEs', mode=MODE_SET, typeref=ASN1RefType(('SLMAP-Containers', 'SLMAP-PROTOCOL-EXTENSION')))
     CriticalityDiagnostics_IE_List_ExtIEs._val = ASN1Set(rv=[], rr=[], ev=[], er=[])
     
     #-----< TypeOfError >-----#
-    TypeOfError = ENUM(name='TypeOfError', mode=MODE_TYPE)
-    TypeOfError._cont = ASN1Dict([('not-understood', 0), ('missing', 1)])
+    TypeOfError = ENUM(name=u'TypeOfError', mode=MODE_TYPE)
+    TypeOfError._cont = ASN1Dict([(u'not-understood', 0), (u'missing', 1)])
     TypeOfError._ext = []
     
     #-----< UL-RTOAMeasurementConfiguration >-----#
-    UL_RTOAMeasurementConfiguration = SEQ(name='UL-RTOAMeasurementConfiguration', mode=MODE_TYPE)
-    _UL_RTOAMeasurementConfiguration_ulRtoaReferenceTime = BIT_STR(name='ulRtoaReferenceTime', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    UL_RTOAMeasurementConfiguration = SEQ(name=u'UL-RTOAMeasurementConfiguration', mode=MODE_TYPE)
+    _UL_RTOAMeasurementConfiguration_ulRtoaReferenceTime = BIT_STR(name=u'ulRtoaReferenceTime', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     _UL_RTOAMeasurementConfiguration_ulRtoaReferenceTime._const_sz = ASN1Set(rv=[64], rr=[], ev=None, er=[])
-    _UL_RTOAMeasurementConfiguration_searchWindowParameters = SEQ(name='searchWindowParameters', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('SLMAP-IEs', 'SearchWindowParameters')), opt=True)
-    _UL_RTOAMeasurementConfiguration_numberOfTransmissions = INT(name='numberOfTransmissions', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _UL_RTOAMeasurementConfiguration_searchWindowParameters = SEQ(name=u'searchWindowParameters', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('SLMAP-IEs', 'SearchWindowParameters')), opt=True)
+    _UL_RTOAMeasurementConfiguration_numberOfTransmissions = INT(name=u'numberOfTransmissions', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     _UL_RTOAMeasurementConfiguration_numberOfTransmissions._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=500)], ev=[0], er=[])
-    _UL_RTOAMeasurementConfiguration_srsConfiguration = SEQ_OF(name='srsConfiguration', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('SLMAP-IEs', 'SRSConfiguration')))
+    _UL_RTOAMeasurementConfiguration_srsConfiguration = SEQ_OF(name=u'srsConfiguration', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('SLMAP-IEs', 'SRSConfiguration')))
     UL_RTOAMeasurementConfiguration._cont = ASN1Dict([
-        ('ulRtoaReferenceTime', _UL_RTOAMeasurementConfiguration_ulRtoaReferenceTime),
-        ('searchWindowParameters', _UL_RTOAMeasurementConfiguration_searchWindowParameters),
-        ('numberOfTransmissions', _UL_RTOAMeasurementConfiguration_numberOfTransmissions),
-        ('srsConfiguration', _UL_RTOAMeasurementConfiguration_srsConfiguration),
+        (u'ulRtoaReferenceTime', _UL_RTOAMeasurementConfiguration_ulRtoaReferenceTime),
+        (u'searchWindowParameters', _UL_RTOAMeasurementConfiguration_searchWindowParameters),
+        (u'numberOfTransmissions', _UL_RTOAMeasurementConfiguration_numberOfTransmissions),
+        (u'srsConfiguration', _UL_RTOAMeasurementConfiguration_srsConfiguration),
         ])
     UL_RTOAMeasurementConfiguration._ext = []
     
     #-----< SearchWindowParameters >-----#
-    SearchWindowParameters = SEQ(name='SearchWindowParameters', mode=MODE_TYPE)
-    _SearchWindowParameters_expectedPropagationDelay = INT(name='expectedPropagationDelay', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    SearchWindowParameters = SEQ(name=u'SearchWindowParameters', mode=MODE_TYPE)
+    _SearchWindowParameters_expectedPropagationDelay = INT(name=u'expectedPropagationDelay', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     _SearchWindowParameters_expectedPropagationDelay._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=1200)], ev=[], er=[])
-    _SearchWindowParameters_delayUncertainty = INT(name='delayUncertainty', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _SearchWindowParameters_delayUncertainty = INT(name=u'delayUncertainty', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     _SearchWindowParameters_delayUncertainty._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=100)], ev=[], er=[])
     SearchWindowParameters._cont = ASN1Dict([
-        ('expectedPropagationDelay', _SearchWindowParameters_expectedPropagationDelay),
-        ('delayUncertainty', _SearchWindowParameters_delayUncertainty),
+        (u'expectedPropagationDelay', _SearchWindowParameters_expectedPropagationDelay),
+        (u'delayUncertainty', _SearchWindowParameters_delayUncertainty),
         ])
     SearchWindowParameters._ext = []
     
     #-----< SRSConfiguration >-----#
-    SRSConfiguration = SEQ_OF(name='SRSConfiguration', mode=MODE_TYPE)
+    SRSConfiguration = SEQ_OF(name=u'SRSConfiguration', mode=MODE_TYPE)
     _SRSConfiguration__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-IEs', 'SRSConfigurationForOneCell')))
     SRSConfiguration._cont = _SRSConfiguration__item_
     SRSConfiguration._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=5)], ev=None, er=[])
     
     #-----< SRSConfigurationForOneCell >-----#
-    SRSConfigurationForOneCell = SEQ(name='SRSConfigurationForOneCell', mode=MODE_TYPE)
-    _SRSConfigurationForOneCell_pci = INT(name='pci', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('SLMAP-IEs', 'PCI')))
-    _SRSConfigurationForOneCell_ulEarfcn = INT(name='ulEarfcn', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('SLMAP-IEs', 'EARFCN')))
-    _SRSConfigurationForOneCell_ulBandwidth = ENUM(name='ulBandwidth', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('SLMAP-IEs', 'ChannelBandwidth')))
-    _SRSConfigurationForOneCell_ulCyclicPrefixLength = ENUM(name='ulCyclicPrefixLength', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('SLMAP-IEs', 'CPLength')))
-    _SRSConfigurationForOneCell_srsBandwidthConfig = ENUM(name='srsBandwidthConfig', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('SLMAP-IEs', 'BandwidthConfig')))
-    _SRSConfigurationForOneCell_srsBandwidth = ENUM(name='srsBandwidth', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('SLMAP-IEs', 'SRSBandwidth')))
-    _SRSConfigurationForOneCell_srsAntennaPort = ENUM(name='srsAntennaPort', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('SLMAP-IEs', 'AntennaPort')))
-    _SRSConfigurationForOneCell_srsHoppingBandwidth = ENUM(name='srsHoppingBandwidth', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('SLMAP-IEs', 'HoppingBandwidth')))
-    _SRSConfigurationForOneCell_srsCyclicShift = ENUM(name='srsCyclicShift', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('SLMAP-IEs', 'CyclicShift')))
-    _SRSConfigurationForOneCell_srsConfigIndex = INT(name='srsConfigIndex', mode=MODE_TYPE, tag=(9, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    SRSConfigurationForOneCell = SEQ(name=u'SRSConfigurationForOneCell', mode=MODE_TYPE)
+    _SRSConfigurationForOneCell_pci = INT(name=u'pci', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('SLMAP-IEs', 'PCI')))
+    _SRSConfigurationForOneCell_ulEarfcn = INT(name=u'ulEarfcn', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('SLMAP-IEs', 'EARFCN')))
+    _SRSConfigurationForOneCell_ulBandwidth = ENUM(name=u'ulBandwidth', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('SLMAP-IEs', 'ChannelBandwidth')))
+    _SRSConfigurationForOneCell_ulCyclicPrefixLength = ENUM(name=u'ulCyclicPrefixLength', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('SLMAP-IEs', 'CPLength')))
+    _SRSConfigurationForOneCell_srsBandwidthConfig = ENUM(name=u'srsBandwidthConfig', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('SLMAP-IEs', 'BandwidthConfig')))
+    _SRSConfigurationForOneCell_srsBandwidth = ENUM(name=u'srsBandwidth', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('SLMAP-IEs', 'SRSBandwidth')))
+    _SRSConfigurationForOneCell_srsAntennaPort = ENUM(name=u'srsAntennaPort', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('SLMAP-IEs', 'AntennaPort')))
+    _SRSConfigurationForOneCell_srsHoppingBandwidth = ENUM(name=u'srsHoppingBandwidth', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('SLMAP-IEs', 'HoppingBandwidth')))
+    _SRSConfigurationForOneCell_srsCyclicShift = ENUM(name=u'srsCyclicShift', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('SLMAP-IEs', 'CyclicShift')))
+    _SRSConfigurationForOneCell_srsConfigIndex = INT(name=u'srsConfigIndex', mode=MODE_TYPE, tag=(9, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     _SRSConfigurationForOneCell_srsConfigIndex._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=1023)], ev=None, er=[])
-    _SRSConfigurationForOneCell_srsMaxUpPts = ENUM(name='srsMaxUpPts', mode=MODE_TYPE, tag=(10, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _SRSConfigurationForOneCell_srsMaxUpPts._cont = ASN1Dict([('true', 0)])
+    _SRSConfigurationForOneCell_srsMaxUpPts = ENUM(name=u'srsMaxUpPts', mode=MODE_TYPE, tag=(10, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _SRSConfigurationForOneCell_srsMaxUpPts._cont = ASN1Dict([(u'true', 0)])
     _SRSConfigurationForOneCell_srsMaxUpPts._ext = None
-    _SRSConfigurationForOneCell_transmissionComb = INT(name='transmissionComb', mode=MODE_TYPE, tag=(11, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _SRSConfigurationForOneCell_transmissionComb = INT(name=u'transmissionComb', mode=MODE_TYPE, tag=(11, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     _SRSConfigurationForOneCell_transmissionComb._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=1)], ev=None, er=[])
-    _SRSConfigurationForOneCell_freqDomainPosition = INT(name='freqDomainPosition', mode=MODE_TYPE, tag=(12, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _SRSConfigurationForOneCell_freqDomainPosition = INT(name=u'freqDomainPosition', mode=MODE_TYPE, tag=(12, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     _SRSConfigurationForOneCell_freqDomainPosition._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=23)], ev=None, er=[])
-    _SRSConfigurationForOneCell_groupHoppingEnabled = BOOL(name='groupHoppingEnabled', mode=MODE_TYPE, tag=(13, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _SRSConfigurationForOneCell_deltaSS = INT(name='deltaSS', mode=MODE_TYPE, tag=(14, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _SRSConfigurationForOneCell_groupHoppingEnabled = BOOL(name=u'groupHoppingEnabled', mode=MODE_TYPE, tag=(13, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _SRSConfigurationForOneCell_deltaSS = INT(name=u'deltaSS', mode=MODE_TYPE, tag=(14, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     _SRSConfigurationForOneCell_deltaSS._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=29)], ev=None, er=[])
     SRSConfigurationForOneCell._cont = ASN1Dict([
-        ('pci', _SRSConfigurationForOneCell_pci),
-        ('ulEarfcn', _SRSConfigurationForOneCell_ulEarfcn),
-        ('ulBandwidth', _SRSConfigurationForOneCell_ulBandwidth),
-        ('ulCyclicPrefixLength', _SRSConfigurationForOneCell_ulCyclicPrefixLength),
-        ('srsBandwidthConfig', _SRSConfigurationForOneCell_srsBandwidthConfig),
-        ('srsBandwidth', _SRSConfigurationForOneCell_srsBandwidth),
-        ('srsAntennaPort', _SRSConfigurationForOneCell_srsAntennaPort),
-        ('srsHoppingBandwidth', _SRSConfigurationForOneCell_srsHoppingBandwidth),
-        ('srsCyclicShift', _SRSConfigurationForOneCell_srsCyclicShift),
-        ('srsConfigIndex', _SRSConfigurationForOneCell_srsConfigIndex),
-        ('srsMaxUpPts', _SRSConfigurationForOneCell_srsMaxUpPts),
-        ('transmissionComb', _SRSConfigurationForOneCell_transmissionComb),
-        ('freqDomainPosition', _SRSConfigurationForOneCell_freqDomainPosition),
-        ('groupHoppingEnabled', _SRSConfigurationForOneCell_groupHoppingEnabled),
-        ('deltaSS', _SRSConfigurationForOneCell_deltaSS),
+        (u'pci', _SRSConfigurationForOneCell_pci),
+        (u'ulEarfcn', _SRSConfigurationForOneCell_ulEarfcn),
+        (u'ulBandwidth', _SRSConfigurationForOneCell_ulBandwidth),
+        (u'ulCyclicPrefixLength', _SRSConfigurationForOneCell_ulCyclicPrefixLength),
+        (u'srsBandwidthConfig', _SRSConfigurationForOneCell_srsBandwidthConfig),
+        (u'srsBandwidth', _SRSConfigurationForOneCell_srsBandwidth),
+        (u'srsAntennaPort', _SRSConfigurationForOneCell_srsAntennaPort),
+        (u'srsHoppingBandwidth', _SRSConfigurationForOneCell_srsHoppingBandwidth),
+        (u'srsCyclicShift', _SRSConfigurationForOneCell_srsCyclicShift),
+        (u'srsConfigIndex', _SRSConfigurationForOneCell_srsConfigIndex),
+        (u'srsMaxUpPts', _SRSConfigurationForOneCell_srsMaxUpPts),
+        (u'transmissionComb', _SRSConfigurationForOneCell_transmissionComb),
+        (u'freqDomainPosition', _SRSConfigurationForOneCell_freqDomainPosition),
+        (u'groupHoppingEnabled', _SRSConfigurationForOneCell_groupHoppingEnabled),
+        (u'deltaSS', _SRSConfigurationForOneCell_deltaSS),
         ])
     SRSConfigurationForOneCell._ext = []
     
     #-----< PCI >-----#
-    PCI = INT(name='PCI', mode=MODE_TYPE)
+    PCI = INT(name=u'PCI', mode=MODE_TYPE)
     PCI._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=503)], ev=[], er=[])
     
     #-----< EARFCN >-----#
-    EARFCN = INT(name='EARFCN', mode=MODE_TYPE)
+    EARFCN = INT(name=u'EARFCN', mode=MODE_TYPE)
     EARFCN._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=262143)], ev=[], er=[])
     
     #-----< ChannelBandwidth >-----#
-    ChannelBandwidth = ENUM(name='ChannelBandwidth', mode=MODE_TYPE)
-    ChannelBandwidth._cont = ASN1Dict([('n6', 0), ('n15', 1), ('n25', 2), ('n50', 3), ('n75', 4), ('n100', 5)])
+    ChannelBandwidth = ENUM(name=u'ChannelBandwidth', mode=MODE_TYPE)
+    ChannelBandwidth._cont = ASN1Dict([(u'n6', 0), (u'n15', 1), (u'n25', 2), (u'n50', 3), (u'n75', 4), (u'n100', 5)])
     ChannelBandwidth._ext = []
     
     #-----< CPLength >-----#
-    CPLength = ENUM(name='CPLength', mode=MODE_TYPE)
-    CPLength._cont = ASN1Dict([('normal', 0), ('extended', 1)])
+    CPLength = ENUM(name=u'CPLength', mode=MODE_TYPE)
+    CPLength._cont = ASN1Dict([(u'normal', 0), (u'extended', 1)])
     CPLength._ext = []
     
     #-----< BandwidthConfig >-----#
-    BandwidthConfig = ENUM(name='BandwidthConfig', mode=MODE_TYPE)
-    BandwidthConfig._cont = ASN1Dict([('bw0', 0), ('bw1', 1), ('bw2', 2), ('bw3', 3), ('bw4', 4), ('bw5', 5), ('bw6', 6), ('bw7', 7)])
+    BandwidthConfig = ENUM(name=u'BandwidthConfig', mode=MODE_TYPE)
+    BandwidthConfig._cont = ASN1Dict([(u'bw0', 0), (u'bw1', 1), (u'bw2', 2), (u'bw3', 3), (u'bw4', 4), (u'bw5', 5), (u'bw6', 6), (u'bw7', 7)])
     BandwidthConfig._ext = []
     
     #-----< SRSBandwidth >-----#
-    SRSBandwidth = ENUM(name='SRSBandwidth', mode=MODE_TYPE)
-    SRSBandwidth._cont = ASN1Dict([('bw0', 0), ('bw1', 1), ('bw2', 2), ('bw3', 3)])
+    SRSBandwidth = ENUM(name=u'SRSBandwidth', mode=MODE_TYPE)
+    SRSBandwidth._cont = ASN1Dict([(u'bw0', 0), (u'bw1', 1), (u'bw2', 2), (u'bw3', 3)])
     SRSBandwidth._ext = []
     
     #-----< AntennaPort >-----#
-    AntennaPort = ENUM(name='AntennaPort', mode=MODE_TYPE)
-    AntennaPort._cont = ASN1Dict([('an1', 0), ('an2', 1), ('an4', 2)])
+    AntennaPort = ENUM(name=u'AntennaPort', mode=MODE_TYPE)
+    AntennaPort._cont = ASN1Dict([(u'an1', 0), (u'an2', 1), (u'an4', 2)])
     AntennaPort._ext = []
     
     #-----< HoppingBandwidth >-----#
-    HoppingBandwidth = ENUM(name='HoppingBandwidth', mode=MODE_TYPE)
-    HoppingBandwidth._cont = ASN1Dict([('hbw0', 0), ('hbw1', 1), ('hbw2', 2), ('hbw3', 3)])
+    HoppingBandwidth = ENUM(name=u'HoppingBandwidth', mode=MODE_TYPE)
+    HoppingBandwidth._cont = ASN1Dict([(u'hbw0', 0), (u'hbw1', 1), (u'hbw2', 2), (u'hbw3', 3)])
     HoppingBandwidth._ext = []
     
     #-----< CyclicShift >-----#
-    CyclicShift = ENUM(name='CyclicShift', mode=MODE_TYPE)
-    CyclicShift._cont = ASN1Dict([('cs0', 0), ('cs1', 1), ('cs2', 2), ('cs3', 3), ('cs4', 4), ('cs5', 5), ('cs6', 6), ('cs7', 7)])
+    CyclicShift = ENUM(name=u'CyclicShift', mode=MODE_TYPE)
+    CyclicShift._cont = ASN1Dict([(u'cs0', 0), (u'cs1', 1), (u'cs2', 2), (u'cs3', 3), (u'cs4', 4), (u'cs5', 5), (u'cs6', 6), (u'cs7', 7)])
     CyclicShift._ext = []
     
     #-----< UL-RTOAMeasurements >-----#
-    UL_RTOAMeasurements = SEQ_OF(name='UL-RTOAMeasurements', mode=MODE_TYPE)
+    UL_RTOAMeasurements = SEQ_OF(name=u'UL-RTOAMeasurements', mode=MODE_TYPE)
     _UL_RTOAMeasurements__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-IEs', 'UL-RTOAMeasurement')))
     UL_RTOAMeasurements._cont = _UL_RTOAMeasurements__item_
     UL_RTOAMeasurements._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=5)], ev=None, er=[])
     
     #-----< UL-RTOAMeasurement >-----#
-    UL_RTOAMeasurement = SEQ(name='UL-RTOAMeasurement', mode=MODE_TYPE)
-    _UL_RTOAMeasurement_ulEarfcn = INT(name='ulEarfcn', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('SLMAP-IEs', 'EARFCN')))
-    _UL_RTOAMeasurement_ulRtoa = INT(name='ulRtoa', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    UL_RTOAMeasurement = SEQ(name=u'UL-RTOAMeasurement', mode=MODE_TYPE)
+    _UL_RTOAMeasurement_ulEarfcn = INT(name=u'ulEarfcn', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('SLMAP-IEs', 'EARFCN')))
+    _UL_RTOAMeasurement_ulRtoa = INT(name=u'ulRtoa', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     _UL_RTOAMeasurement_ulRtoa._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=4800)], ev=[], er=[])
     UL_RTOAMeasurement._cont = ASN1Dict([
-        ('ulEarfcn', _UL_RTOAMeasurement_ulEarfcn),
-        ('ulRtoa', _UL_RTOAMeasurement_ulRtoa),
+        (u'ulEarfcn', _UL_RTOAMeasurement_ulEarfcn),
+        (u'ulRtoa', _UL_RTOAMeasurement_ulRtoa),
         ])
     UL_RTOAMeasurement._ext = []
     
     #-----< LMU-ID >-----#
-    LMU_ID = INT(name='LMU-ID', mode=MODE_TYPE)
+    LMU_ID = INT(name=u'LMU-ID', mode=MODE_TYPE)
     LMU_ID._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=1048575)], ev=None, er=[])
     
     #-----< ESMLC-ID >-----#
-    ESMLC_ID = INT(name='ESMLC-ID', mode=MODE_TYPE)
+    ESMLC_ID = INT(name=u'ESMLC-ID', mode=MODE_TYPE)
     ESMLC_ID._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=255)], ev=None, er=[])
     
     #-----< ESMLC-MeasurementID >-----#
-    ESMLC_MeasurementID = INT(name='ESMLC-MeasurementID', mode=MODE_TYPE)
+    ESMLC_MeasurementID = INT(name=u'ESMLC-MeasurementID', mode=MODE_TYPE)
     ESMLC_MeasurementID._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=65535)], ev=[], er=[])
     
     #-----< LMUInformation >-----#
-    LMUInformation = SEQ(name='LMUInformation', mode=MODE_TYPE)
-    _LMUInformation_lmuPosition = SEQ(name='lmuPosition', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('SLMAP-IEs', 'LMUPosition')), opt=True)
-    _LMUInformation_listOfRfBands = SEQ_OF(name='listOfRfBands', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('SLMAP-IEs', 'ListOfRfBands')))
-    _LMUInformation_bWCombinationParameters = SEQ_OF(name='bWCombinationParameters', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('SLMAP-IEs', 'BWCombinationParameters')), opt=True)
+    LMUInformation = SEQ(name=u'LMUInformation', mode=MODE_TYPE)
+    _LMUInformation_lmuPosition = SEQ(name=u'lmuPosition', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('SLMAP-IEs', 'LMUPosition')), opt=True)
+    _LMUInformation_listOfRfBands = SEQ_OF(name=u'listOfRfBands', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('SLMAP-IEs', 'ListOfRfBands')))
+    _LMUInformation_bWCombinationParameters = SEQ_OF(name=u'bWCombinationParameters', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('SLMAP-IEs', 'BWCombinationParameters')), opt=True)
     LMUInformation._cont = ASN1Dict([
-        ('lmuPosition', _LMUInformation_lmuPosition),
-        ('listOfRfBands', _LMUInformation_listOfRfBands),
-        ('bWCombinationParameters', _LMUInformation_bWCombinationParameters),
+        (u'lmuPosition', _LMUInformation_lmuPosition),
+        (u'listOfRfBands', _LMUInformation_listOfRfBands),
+        (u'bWCombinationParameters', _LMUInformation_bWCombinationParameters),
         ])
     LMUInformation._ext = []
     
     #-----< ListOfRfBands >-----#
-    ListOfRfBands = SEQ_OF(name='ListOfRfBands', mode=MODE_TYPE)
+    ListOfRfBands = SEQ_OF(name=u'ListOfRfBands', mode=MODE_TYPE)
     _ListOfRfBands__item_ = INT(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-IEs', 'FreqBandIndicator')))
     ListOfRfBands._cont = _ListOfRfBands__item_
     ListOfRfBands._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=256)], ev=None, er=[])
     
     #-----< FreqBandIndicator >-----#
-    FreqBandIndicator = INT(name='FreqBandIndicator', mode=MODE_TYPE)
+    FreqBandIndicator = INT(name=u'FreqBandIndicator', mode=MODE_TYPE)
     FreqBandIndicator._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=256)], ev=None, er=[])
     
     #-----< BWCombinationParameters >-----#
-    BWCombinationParameters = SEQ_OF(name='BWCombinationParameters', mode=MODE_TYPE)
+    BWCombinationParameters = SEQ_OF(name=u'BWCombinationParameters', mode=MODE_TYPE)
     _BWCombinationParameters__item_ = SEQ_OF(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-IEs', 'SupportedBandwidthCombinationSet')))
     BWCombinationParameters._cont = _BWCombinationParameters__item_
     BWCombinationParameters._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=128)], ev=None, er=[])
     
     #-----< SupportedBandwidthCombinationSet >-----#
-    SupportedBandwidthCombinationSet = SEQ_OF(name='SupportedBandwidthCombinationSet', mode=MODE_TYPE)
+    SupportedBandwidthCombinationSet = SEQ_OF(name=u'SupportedBandwidthCombinationSet', mode=MODE_TYPE)
     _SupportedBandwidthCombinationSet__item_ = SEQ_OF(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-IEs', 'BandCombination')))
     SupportedBandwidthCombinationSet._cont = _SupportedBandwidthCombinationSet__item_
     SupportedBandwidthCombinationSet._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=32)], ev=None, er=[])
     
     #-----< BandCombination >-----#
-    BandCombination = SEQ_OF(name='BandCombination', mode=MODE_TYPE)
+    BandCombination = SEQ_OF(name=u'BandCombination', mode=MODE_TYPE)
     _BandCombination__item_ = INT(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-IEs', 'FreqBandIndicator')))
     BandCombination._cont = _BandCombination__item_
     BandCombination._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=4)], ev=None, er=[])
     
     #-----< LMUPosition >-----#
-    LMUPosition = SEQ(name='LMUPosition', mode=MODE_TYPE)
-    _LMUPosition_latitudeSign = ENUM(name='latitudeSign', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _LMUPosition_latitudeSign._cont = ASN1Dict([('north', 0), ('south', 1)])
+    LMUPosition = SEQ(name=u'LMUPosition', mode=MODE_TYPE)
+    _LMUPosition_latitudeSign = ENUM(name=u'latitudeSign', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _LMUPosition_latitudeSign._cont = ASN1Dict([(u'north', 0), (u'south', 1)])
     _LMUPosition_latitudeSign._ext = None
-    _LMUPosition_latitude = INT(name='latitude', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _LMUPosition_latitude = INT(name=u'latitude', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     _LMUPosition_latitude._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=8388607)], ev=None, er=[])
-    _LMUPosition_longitude = INT(name='longitude', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _LMUPosition_longitude = INT(name=u'longitude', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     _LMUPosition_longitude._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=-8388608, ub=8388607)], ev=None, er=[])
-    _LMUPosition_directionOfAltitude = ENUM(name='directionOfAltitude', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _LMUPosition_directionOfAltitude._cont = ASN1Dict([('height', 0), ('depth', 1)])
+    _LMUPosition_directionOfAltitude = ENUM(name=u'directionOfAltitude', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _LMUPosition_directionOfAltitude._cont = ASN1Dict([(u'height', 0), (u'depth', 1)])
     _LMUPosition_directionOfAltitude._ext = None
-    _LMUPosition_altitude = INT(name='altitude', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _LMUPosition_altitude = INT(name=u'altitude', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     _LMUPosition_altitude._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=32767)], ev=None, er=[])
-    _LMUPosition_uncertaintySemi_major = INT(name='uncertaintySemi-major', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _LMUPosition_uncertaintySemi_major = INT(name=u'uncertaintySemi-major', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     _LMUPosition_uncertaintySemi_major._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=127)], ev=None, er=[])
-    _LMUPosition_uncertaintySemi_minor = INT(name='uncertaintySemi-minor', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _LMUPosition_uncertaintySemi_minor = INT(name=u'uncertaintySemi-minor', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     _LMUPosition_uncertaintySemi_minor._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=127)], ev=None, er=[])
-    _LMUPosition_orientationOfMajorAxis = INT(name='orientationOfMajorAxis', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _LMUPosition_orientationOfMajorAxis = INT(name=u'orientationOfMajorAxis', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     _LMUPosition_orientationOfMajorAxis._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=179)], ev=None, er=[])
-    _LMUPosition_uncertaintyAltitude = INT(name='uncertaintyAltitude', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _LMUPosition_uncertaintyAltitude = INT(name=u'uncertaintyAltitude', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     _LMUPosition_uncertaintyAltitude._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=127)], ev=None, er=[])
-    _LMUPosition_confidence = INT(name='confidence', mode=MODE_TYPE, tag=(9, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _LMUPosition_confidence = INT(name=u'confidence', mode=MODE_TYPE, tag=(9, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     _LMUPosition_confidence._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=100)], ev=None, er=[])
     LMUPosition._cont = ASN1Dict([
-        ('latitudeSign', _LMUPosition_latitudeSign),
-        ('latitude', _LMUPosition_latitude),
-        ('longitude', _LMUPosition_longitude),
-        ('directionOfAltitude', _LMUPosition_directionOfAltitude),
-        ('altitude', _LMUPosition_altitude),
-        ('uncertaintySemi-major', _LMUPosition_uncertaintySemi_major),
-        ('uncertaintySemi-minor', _LMUPosition_uncertaintySemi_minor),
-        ('orientationOfMajorAxis', _LMUPosition_orientationOfMajorAxis),
-        ('uncertaintyAltitude', _LMUPosition_uncertaintyAltitude),
-        ('confidence', _LMUPosition_confidence),
+        (u'latitudeSign', _LMUPosition_latitudeSign),
+        (u'latitude', _LMUPosition_latitude),
+        (u'longitude', _LMUPosition_longitude),
+        (u'directionOfAltitude', _LMUPosition_directionOfAltitude),
+        (u'altitude', _LMUPosition_altitude),
+        (u'uncertaintySemi-major', _LMUPosition_uncertaintySemi_major),
+        (u'uncertaintySemi-minor', _LMUPosition_uncertaintySemi_minor),
+        (u'orientationOfMajorAxis', _LMUPosition_orientationOfMajorAxis),
+        (u'uncertaintyAltitude', _LMUPosition_uncertaintyAltitude),
+        (u'confidence', _LMUPosition_confidence),
         ])
     LMUPosition._ext = []
     
@@ -1028,546 +1028,546 @@ class SLMAP_IEs:
 
 class SLMAP_PDU_Contents:
 
-    _name_  = 'SLMAP-PDU-Contents'
+    _name_  = u'SLMAP-PDU-Contents'
     _oid_   = [0, 4, 0, 0, 21, 3, 50, 1, 1]
     
     _obj_ = [
-        'MeasurementRequest',
-        'MeasurementRequest-IEs',
-        'MeasurementResponse',
-        'MeasurementResponse-IEs',
-        'MeasurementFailure',
-        'MeasurementFailure-IEs',
-        'SLMSetupRequest',
-        'SLMSetupRequest-IEs',
-        'SLMSetupResponse',
-        'SLMSetupResponse-IEs',
-        'SLMSetupFailure',
-        'SLMSetupFailure-IEs',
-        'ResetRequest',
-        'ResetRequest-IEs',
-        'ResetAcknowledge',
-        'ResetAcknowledge-IEs',
-        'MeasurementAbort',
-        'MeasurementAbort-IEs',
-        'MeasurementUpdate',
-        'MeasurementUpdate-IEs',
-        'ErrorIndication',
-        'ErrorIndication-IEs',
-        'PrivateMessage',
-        'PrivateMessage-IEs',
+        u'MeasurementRequest',
+        u'MeasurementRequest-IEs',
+        u'MeasurementResponse',
+        u'MeasurementResponse-IEs',
+        u'MeasurementFailure',
+        u'MeasurementFailure-IEs',
+        u'SLMSetupRequest',
+        u'SLMSetupRequest-IEs',
+        u'SLMSetupResponse',
+        u'SLMSetupResponse-IEs',
+        u'SLMSetupFailure',
+        u'SLMSetupFailure-IEs',
+        u'ResetRequest',
+        u'ResetRequest-IEs',
+        u'ResetAcknowledge',
+        u'ResetAcknowledge-IEs',
+        u'MeasurementAbort',
+        u'MeasurementAbort-IEs',
+        u'MeasurementUpdate',
+        u'MeasurementUpdate-IEs',
+        u'ErrorIndication',
+        u'ErrorIndication-IEs',
+        u'PrivateMessage',
+        u'PrivateMessage-IEs',
         ]
     _type_ = [
-        'MeasurementRequest',
-        'MeasurementResponse',
-        'MeasurementFailure',
-        'SLMSetupRequest',
-        'SLMSetupResponse',
-        'SLMSetupFailure',
-        'ResetRequest',
-        'ResetAcknowledge',
-        'MeasurementAbort',
-        'MeasurementUpdate',
-        'ErrorIndication',
-        'PrivateMessage',
+        u'MeasurementRequest',
+        u'MeasurementResponse',
+        u'MeasurementFailure',
+        u'SLMSetupRequest',
+        u'SLMSetupResponse',
+        u'SLMSetupFailure',
+        u'ResetRequest',
+        u'ResetAcknowledge',
+        u'MeasurementAbort',
+        u'MeasurementUpdate',
+        u'ErrorIndication',
+        u'PrivateMessage',
         ]
     _set_ = [
-        'MeasurementRequest-IEs',
-        'MeasurementResponse-IEs',
-        'MeasurementFailure-IEs',
-        'SLMSetupRequest-IEs',
-        'SLMSetupResponse-IEs',
-        'SLMSetupFailure-IEs',
-        'ResetRequest-IEs',
-        'ResetAcknowledge-IEs',
-        'MeasurementAbort-IEs',
-        'MeasurementUpdate-IEs',
-        'ErrorIndication-IEs',
-        'PrivateMessage-IEs',
+        u'MeasurementRequest-IEs',
+        u'MeasurementResponse-IEs',
+        u'MeasurementFailure-IEs',
+        u'SLMSetupRequest-IEs',
+        u'SLMSetupResponse-IEs',
+        u'SLMSetupFailure-IEs',
+        u'ResetRequest-IEs',
+        u'ResetAcknowledge-IEs',
+        u'MeasurementAbort-IEs',
+        u'MeasurementUpdate-IEs',
+        u'ErrorIndication-IEs',
+        u'PrivateMessage-IEs',
         ]
     _val_ = [
         ]
     _class_ = [
-        'MeasurementRequest-IEs',
-        'MeasurementResponse-IEs',
-        'MeasurementFailure-IEs',
-        'SLMSetupRequest-IEs',
-        'SLMSetupResponse-IEs',
-        'SLMSetupFailure-IEs',
-        'ResetRequest-IEs',
-        'ResetAcknowledge-IEs',
-        'MeasurementAbort-IEs',
-        'MeasurementUpdate-IEs',
-        'ErrorIndication-IEs',
-        'PrivateMessage-IEs',
+        u'MeasurementRequest-IEs',
+        u'MeasurementResponse-IEs',
+        u'MeasurementFailure-IEs',
+        u'SLMSetupRequest-IEs',
+        u'SLMSetupResponse-IEs',
+        u'SLMSetupFailure-IEs',
+        u'ResetRequest-IEs',
+        u'ResetAcknowledge-IEs',
+        u'MeasurementAbort-IEs',
+        u'MeasurementUpdate-IEs',
+        u'ErrorIndication-IEs',
+        u'PrivateMessage-IEs',
         ]
     _param_ = [
         ]
     
     #-----< MeasurementRequest >-----#
-    MeasurementRequest = SEQ(name='MeasurementRequest', mode=MODE_TYPE)
-    _MeasurementRequest_protocolIEs = SEQ_OF(name='protocolIEs', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('SLMAP-Containers', 'ProtocolIE-Container')))
+    MeasurementRequest = SEQ(name=u'MeasurementRequest', mode=MODE_TYPE)
+    _MeasurementRequest_protocolIEs = SEQ_OF(name=u'protocolIEs', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('SLMAP-Containers', 'ProtocolIE-Container')))
     __MeasurementRequest_protocolIEs__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-Containers', 'ProtocolIE-Field')))
-    ___MeasurementRequest_protocolIEs__item__id = INT(name='id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('SLMAP-Containers', 'SLMAP-PROTOCOL-IES'), ['id']))
+    ___MeasurementRequest_protocolIEs__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('SLMAP-Containers', 'SLMAP-PROTOCOL-IES'), [u'id']))
     ____MeasurementRequest_protocolIEs__item__id_tab = CLASS(name='_tab_SLMAP-PROTOCOL-IES', mode=MODE_SET, typeref=ASN1RefType(('SLMAP-Containers', 'SLMAP-PROTOCOL-IES')))
-    _____MeasurementRequest_protocolIEs__item__id_tab_val_Value_0 = INT(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-IEs', 'ESMLC-MeasurementID')))
-    _____MeasurementRequest_protocolIEs__item__id_tab_val_Value_1 = SEQ(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-IEs', 'UL-RTOAMeasurementConfiguration')))
-    ____MeasurementRequest_protocolIEs__item__id_tab._val = ASN1Set(rv=[dict([('id', 0), ('criticality', 'reject'), ('Value', _____MeasurementRequest_protocolIEs__item__id_tab_val_Value_0), ('presence', 'mandatory')]), dict([('id', 1), ('criticality', 'reject'), ('Value', _____MeasurementRequest_protocolIEs__item__id_tab_val_Value_1), ('presence', 'mandatory')])], rr=[], ev=None, er=[])
+    _____MeasurementRequest_protocolIEs__item__id_tab_val_Value_0 = INT(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-IEs', 'ESMLC-MeasurementID')))
+    _____MeasurementRequest_protocolIEs__item__id_tab_val_Value_1 = SEQ(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-IEs', 'UL-RTOAMeasurementConfiguration')))
+    ____MeasurementRequest_protocolIEs__item__id_tab._val = ASN1Set(rv=[dict([(u'id', 0), (u'criticality', u'reject'), (u'Value', _____MeasurementRequest_protocolIEs__item__id_tab_val_Value_0), (u'presence', u'mandatory')]), dict([(u'id', 1), (u'criticality', u'reject'), (u'Value', _____MeasurementRequest_protocolIEs__item__id_tab_val_Value_1), (u'presence', u'mandatory')])], rr=[], ev=None, er=[])
     ___MeasurementRequest_protocolIEs__item__id._const_tab = ____MeasurementRequest_protocolIEs__item__id_tab
     ___MeasurementRequest_protocolIEs__item__id._const_tab_at = None
-    ___MeasurementRequest_protocolIEs__item__id._const_tab_id = 'id'
-    ___MeasurementRequest_protocolIEs__item__criticality = ENUM(name='criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('SLMAP-Containers', 'SLMAP-PROTOCOL-IES'), ['criticality']))
+    ___MeasurementRequest_protocolIEs__item__id._const_tab_id = u'id'
+    ___MeasurementRequest_protocolIEs__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('SLMAP-Containers', 'SLMAP-PROTOCOL-IES'), [u'criticality']))
     ___MeasurementRequest_protocolIEs__item__criticality._const_tab = ____MeasurementRequest_protocolIEs__item__id_tab
-    ___MeasurementRequest_protocolIEs__item__criticality._const_tab_at = ('..', 'id')
-    ___MeasurementRequest_protocolIEs__item__criticality._const_tab_id = 'criticality'
-    ___MeasurementRequest_protocolIEs__item__value = OPEN(name='value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('SLMAP-Containers', 'SLMAP-PROTOCOL-IES'), ['Value']))
+    ___MeasurementRequest_protocolIEs__item__criticality._const_tab_at = ('..', u'id')
+    ___MeasurementRequest_protocolIEs__item__criticality._const_tab_id = u'criticality'
+    ___MeasurementRequest_protocolIEs__item__value = OPEN(name=u'value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('SLMAP-Containers', 'SLMAP-PROTOCOL-IES'), [u'Value']))
     ___MeasurementRequest_protocolIEs__item__value._const_tab = ____MeasurementRequest_protocolIEs__item__id_tab
-    ___MeasurementRequest_protocolIEs__item__value._const_tab_at = ('..', 'id')
-    ___MeasurementRequest_protocolIEs__item__value._const_tab_id = 'Value'
+    ___MeasurementRequest_protocolIEs__item__value._const_tab_at = ('..', u'id')
+    ___MeasurementRequest_protocolIEs__item__value._const_tab_id = u'Value'
     __MeasurementRequest_protocolIEs__item_._cont = ASN1Dict([
-        ('id', ___MeasurementRequest_protocolIEs__item__id),
-        ('criticality', ___MeasurementRequest_protocolIEs__item__criticality),
-        ('value', ___MeasurementRequest_protocolIEs__item__value),
+        (u'id', ___MeasurementRequest_protocolIEs__item__id),
+        (u'criticality', ___MeasurementRequest_protocolIEs__item__criticality),
+        (u'value', ___MeasurementRequest_protocolIEs__item__value),
         ])
     __MeasurementRequest_protocolIEs__item_._ext = None
     _MeasurementRequest_protocolIEs._cont = __MeasurementRequest_protocolIEs__item_
     _MeasurementRequest_protocolIEs._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=65535)], ev=None, er=[])
     MeasurementRequest._cont = ASN1Dict([
-        ('protocolIEs', _MeasurementRequest_protocolIEs),
+        (u'protocolIEs', _MeasurementRequest_protocolIEs),
         ])
     MeasurementRequest._ext = []
     
     #-----< MeasurementRequest-IEs >-----#
-    MeasurementRequest_IEs = CLASS(name='MeasurementRequest-IEs', mode=MODE_SET, typeref=ASN1RefType(('SLMAP-Containers', 'SLMAP-PROTOCOL-IES')))
-    _MeasurementRequest_IEs_val_Value_0 = INT(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-IEs', 'ESMLC-MeasurementID')))
-    _MeasurementRequest_IEs_val_Value_1 = SEQ(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-IEs', 'UL-RTOAMeasurementConfiguration')))
-    MeasurementRequest_IEs._val = ASN1Set(rv=[dict([('id', 0), ('criticality', 'reject'), ('Value', _MeasurementRequest_IEs_val_Value_0), ('presence', 'mandatory')]), dict([('id', 1), ('criticality', 'reject'), ('Value', _MeasurementRequest_IEs_val_Value_1), ('presence', 'mandatory')])], rr=[], ev=[], er=[])
+    MeasurementRequest_IEs = CLASS(name=u'MeasurementRequest-IEs', mode=MODE_SET, typeref=ASN1RefType(('SLMAP-Containers', 'SLMAP-PROTOCOL-IES')))
+    _MeasurementRequest_IEs_val_Value_0 = INT(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-IEs', 'ESMLC-MeasurementID')))
+    _MeasurementRequest_IEs_val_Value_1 = SEQ(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-IEs', 'UL-RTOAMeasurementConfiguration')))
+    MeasurementRequest_IEs._val = ASN1Set(rv=[dict([(u'id', 0), (u'criticality', u'reject'), (u'Value', _MeasurementRequest_IEs_val_Value_0), (u'presence', u'mandatory')]), dict([(u'id', 1), (u'criticality', u'reject'), (u'Value', _MeasurementRequest_IEs_val_Value_1), (u'presence', u'mandatory')])], rr=[], ev=[], er=[])
     
     #-----< MeasurementResponse >-----#
-    MeasurementResponse = SEQ(name='MeasurementResponse', mode=MODE_TYPE)
-    _MeasurementResponse_protocolIEs = SEQ_OF(name='protocolIEs', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('SLMAP-Containers', 'ProtocolIE-Container')))
+    MeasurementResponse = SEQ(name=u'MeasurementResponse', mode=MODE_TYPE)
+    _MeasurementResponse_protocolIEs = SEQ_OF(name=u'protocolIEs', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('SLMAP-Containers', 'ProtocolIE-Container')))
     __MeasurementResponse_protocolIEs__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-Containers', 'ProtocolIE-Field')))
-    ___MeasurementResponse_protocolIEs__item__id = INT(name='id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('SLMAP-Containers', 'SLMAP-PROTOCOL-IES'), ['id']))
+    ___MeasurementResponse_protocolIEs__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('SLMAP-Containers', 'SLMAP-PROTOCOL-IES'), [u'id']))
     ____MeasurementResponse_protocolIEs__item__id_tab = CLASS(name='_tab_SLMAP-PROTOCOL-IES', mode=MODE_SET, typeref=ASN1RefType(('SLMAP-Containers', 'SLMAP-PROTOCOL-IES')))
-    _____MeasurementResponse_protocolIEs__item__id_tab_val_Value_0 = INT(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-IEs', 'ESMLC-MeasurementID')))
-    _____MeasurementResponse_protocolIEs__item__id_tab_val_Value_1 = SEQ_OF(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-IEs', 'UL-RTOAMeasurements')))
-    _____MeasurementResponse_protocolIEs__item__id_tab_val_Value_2 = SEQ(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-IEs', 'CriticalityDiagnostics')))
-    ____MeasurementResponse_protocolIEs__item__id_tab._val = ASN1Set(rv=[dict([('id', 0), ('criticality', 'reject'), ('Value', _____MeasurementResponse_protocolIEs__item__id_tab_val_Value_0), ('presence', 'mandatory')]), dict([('id', 3), ('criticality', 'reject'), ('Value', _____MeasurementResponse_protocolIEs__item__id_tab_val_Value_1), ('presence', 'mandatory')]), dict([('id', 2), ('criticality', 'ignore'), ('Value', _____MeasurementResponse_protocolIEs__item__id_tab_val_Value_2), ('presence', 'optional')])], rr=[], ev=None, er=[])
+    _____MeasurementResponse_protocolIEs__item__id_tab_val_Value_0 = INT(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-IEs', 'ESMLC-MeasurementID')))
+    _____MeasurementResponse_protocolIEs__item__id_tab_val_Value_1 = SEQ_OF(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-IEs', 'UL-RTOAMeasurements')))
+    _____MeasurementResponse_protocolIEs__item__id_tab_val_Value_2 = SEQ(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-IEs', 'CriticalityDiagnostics')))
+    ____MeasurementResponse_protocolIEs__item__id_tab._val = ASN1Set(rv=[dict([(u'id', 0), (u'criticality', u'reject'), (u'Value', _____MeasurementResponse_protocolIEs__item__id_tab_val_Value_0), (u'presence', u'mandatory')]), dict([(u'id', 3), (u'criticality', u'reject'), (u'Value', _____MeasurementResponse_protocolIEs__item__id_tab_val_Value_1), (u'presence', u'mandatory')]), dict([(u'id', 2), (u'criticality', u'ignore'), (u'Value', _____MeasurementResponse_protocolIEs__item__id_tab_val_Value_2), (u'presence', u'optional')])], rr=[], ev=None, er=[])
     ___MeasurementResponse_protocolIEs__item__id._const_tab = ____MeasurementResponse_protocolIEs__item__id_tab
     ___MeasurementResponse_protocolIEs__item__id._const_tab_at = None
-    ___MeasurementResponse_protocolIEs__item__id._const_tab_id = 'id'
-    ___MeasurementResponse_protocolIEs__item__criticality = ENUM(name='criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('SLMAP-Containers', 'SLMAP-PROTOCOL-IES'), ['criticality']))
+    ___MeasurementResponse_protocolIEs__item__id._const_tab_id = u'id'
+    ___MeasurementResponse_protocolIEs__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('SLMAP-Containers', 'SLMAP-PROTOCOL-IES'), [u'criticality']))
     ___MeasurementResponse_protocolIEs__item__criticality._const_tab = ____MeasurementResponse_protocolIEs__item__id_tab
-    ___MeasurementResponse_protocolIEs__item__criticality._const_tab_at = ('..', 'id')
-    ___MeasurementResponse_protocolIEs__item__criticality._const_tab_id = 'criticality'
-    ___MeasurementResponse_protocolIEs__item__value = OPEN(name='value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('SLMAP-Containers', 'SLMAP-PROTOCOL-IES'), ['Value']))
+    ___MeasurementResponse_protocolIEs__item__criticality._const_tab_at = ('..', u'id')
+    ___MeasurementResponse_protocolIEs__item__criticality._const_tab_id = u'criticality'
+    ___MeasurementResponse_protocolIEs__item__value = OPEN(name=u'value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('SLMAP-Containers', 'SLMAP-PROTOCOL-IES'), [u'Value']))
     ___MeasurementResponse_protocolIEs__item__value._const_tab = ____MeasurementResponse_protocolIEs__item__id_tab
-    ___MeasurementResponse_protocolIEs__item__value._const_tab_at = ('..', 'id')
-    ___MeasurementResponse_protocolIEs__item__value._const_tab_id = 'Value'
+    ___MeasurementResponse_protocolIEs__item__value._const_tab_at = ('..', u'id')
+    ___MeasurementResponse_protocolIEs__item__value._const_tab_id = u'Value'
     __MeasurementResponse_protocolIEs__item_._cont = ASN1Dict([
-        ('id', ___MeasurementResponse_protocolIEs__item__id),
-        ('criticality', ___MeasurementResponse_protocolIEs__item__criticality),
-        ('value', ___MeasurementResponse_protocolIEs__item__value),
+        (u'id', ___MeasurementResponse_protocolIEs__item__id),
+        (u'criticality', ___MeasurementResponse_protocolIEs__item__criticality),
+        (u'value', ___MeasurementResponse_protocolIEs__item__value),
         ])
     __MeasurementResponse_protocolIEs__item_._ext = None
     _MeasurementResponse_protocolIEs._cont = __MeasurementResponse_protocolIEs__item_
     _MeasurementResponse_protocolIEs._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=65535)], ev=None, er=[])
     MeasurementResponse._cont = ASN1Dict([
-        ('protocolIEs', _MeasurementResponse_protocolIEs),
+        (u'protocolIEs', _MeasurementResponse_protocolIEs),
         ])
     MeasurementResponse._ext = []
     
     #-----< MeasurementResponse-IEs >-----#
-    MeasurementResponse_IEs = CLASS(name='MeasurementResponse-IEs', mode=MODE_SET, typeref=ASN1RefType(('SLMAP-Containers', 'SLMAP-PROTOCOL-IES')))
-    _MeasurementResponse_IEs_val_Value_0 = INT(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-IEs', 'ESMLC-MeasurementID')))
-    _MeasurementResponse_IEs_val_Value_1 = SEQ_OF(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-IEs', 'UL-RTOAMeasurements')))
-    _MeasurementResponse_IEs_val_Value_2 = SEQ(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-IEs', 'CriticalityDiagnostics')))
-    MeasurementResponse_IEs._val = ASN1Set(rv=[dict([('id', 0), ('criticality', 'reject'), ('Value', _MeasurementResponse_IEs_val_Value_0), ('presence', 'mandatory')]), dict([('id', 3), ('criticality', 'reject'), ('Value', _MeasurementResponse_IEs_val_Value_1), ('presence', 'mandatory')]), dict([('id', 2), ('criticality', 'ignore'), ('Value', _MeasurementResponse_IEs_val_Value_2), ('presence', 'optional')])], rr=[], ev=[], er=[])
+    MeasurementResponse_IEs = CLASS(name=u'MeasurementResponse-IEs', mode=MODE_SET, typeref=ASN1RefType(('SLMAP-Containers', 'SLMAP-PROTOCOL-IES')))
+    _MeasurementResponse_IEs_val_Value_0 = INT(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-IEs', 'ESMLC-MeasurementID')))
+    _MeasurementResponse_IEs_val_Value_1 = SEQ_OF(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-IEs', 'UL-RTOAMeasurements')))
+    _MeasurementResponse_IEs_val_Value_2 = SEQ(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-IEs', 'CriticalityDiagnostics')))
+    MeasurementResponse_IEs._val = ASN1Set(rv=[dict([(u'id', 0), (u'criticality', u'reject'), (u'Value', _MeasurementResponse_IEs_val_Value_0), (u'presence', u'mandatory')]), dict([(u'id', 3), (u'criticality', u'reject'), (u'Value', _MeasurementResponse_IEs_val_Value_1), (u'presence', u'mandatory')]), dict([(u'id', 2), (u'criticality', u'ignore'), (u'Value', _MeasurementResponse_IEs_val_Value_2), (u'presence', u'optional')])], rr=[], ev=[], er=[])
     
     #-----< MeasurementFailure >-----#
-    MeasurementFailure = SEQ(name='MeasurementFailure', mode=MODE_TYPE)
-    _MeasurementFailure_protocolIEs = SEQ_OF(name='protocolIEs', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('SLMAP-Containers', 'ProtocolIE-Container')))
+    MeasurementFailure = SEQ(name=u'MeasurementFailure', mode=MODE_TYPE)
+    _MeasurementFailure_protocolIEs = SEQ_OF(name=u'protocolIEs', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('SLMAP-Containers', 'ProtocolIE-Container')))
     __MeasurementFailure_protocolIEs__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-Containers', 'ProtocolIE-Field')))
-    ___MeasurementFailure_protocolIEs__item__id = INT(name='id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('SLMAP-Containers', 'SLMAP-PROTOCOL-IES'), ['id']))
+    ___MeasurementFailure_protocolIEs__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('SLMAP-Containers', 'SLMAP-PROTOCOL-IES'), [u'id']))
     ____MeasurementFailure_protocolIEs__item__id_tab = CLASS(name='_tab_SLMAP-PROTOCOL-IES', mode=MODE_SET, typeref=ASN1RefType(('SLMAP-Containers', 'SLMAP-PROTOCOL-IES')))
-    _____MeasurementFailure_protocolIEs__item__id_tab_val_Value_0 = INT(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-IEs', 'ESMLC-MeasurementID')))
-    _____MeasurementFailure_protocolIEs__item__id_tab_val_Value_1 = CHOICE(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-IEs', 'Cause')))
-    _____MeasurementFailure_protocolIEs__item__id_tab_val_Value_2 = SEQ(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-IEs', 'CriticalityDiagnostics')))
-    ____MeasurementFailure_protocolIEs__item__id_tab._val = ASN1Set(rv=[dict([('id', 0), ('criticality', 'reject'), ('Value', _____MeasurementFailure_protocolIEs__item__id_tab_val_Value_0), ('presence', 'mandatory')]), dict([('id', 4), ('criticality', 'ignore'), ('Value', _____MeasurementFailure_protocolIEs__item__id_tab_val_Value_1), ('presence', 'mandatory')]), dict([('id', 2), ('criticality', 'ignore'), ('Value', _____MeasurementFailure_protocolIEs__item__id_tab_val_Value_2), ('presence', 'optional')])], rr=[], ev=None, er=[])
+    _____MeasurementFailure_protocolIEs__item__id_tab_val_Value_0 = INT(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-IEs', 'ESMLC-MeasurementID')))
+    _____MeasurementFailure_protocolIEs__item__id_tab_val_Value_1 = CHOICE(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-IEs', 'Cause')))
+    _____MeasurementFailure_protocolIEs__item__id_tab_val_Value_2 = SEQ(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-IEs', 'CriticalityDiagnostics')))
+    ____MeasurementFailure_protocolIEs__item__id_tab._val = ASN1Set(rv=[dict([(u'id', 0), (u'criticality', u'reject'), (u'Value', _____MeasurementFailure_protocolIEs__item__id_tab_val_Value_0), (u'presence', u'mandatory')]), dict([(u'id', 4), (u'criticality', u'ignore'), (u'Value', _____MeasurementFailure_protocolIEs__item__id_tab_val_Value_1), (u'presence', u'mandatory')]), dict([(u'id', 2), (u'criticality', u'ignore'), (u'Value', _____MeasurementFailure_protocolIEs__item__id_tab_val_Value_2), (u'presence', u'optional')])], rr=[], ev=None, er=[])
     ___MeasurementFailure_protocolIEs__item__id._const_tab = ____MeasurementFailure_protocolIEs__item__id_tab
     ___MeasurementFailure_protocolIEs__item__id._const_tab_at = None
-    ___MeasurementFailure_protocolIEs__item__id._const_tab_id = 'id'
-    ___MeasurementFailure_protocolIEs__item__criticality = ENUM(name='criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('SLMAP-Containers', 'SLMAP-PROTOCOL-IES'), ['criticality']))
+    ___MeasurementFailure_protocolIEs__item__id._const_tab_id = u'id'
+    ___MeasurementFailure_protocolIEs__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('SLMAP-Containers', 'SLMAP-PROTOCOL-IES'), [u'criticality']))
     ___MeasurementFailure_protocolIEs__item__criticality._const_tab = ____MeasurementFailure_protocolIEs__item__id_tab
-    ___MeasurementFailure_protocolIEs__item__criticality._const_tab_at = ('..', 'id')
-    ___MeasurementFailure_protocolIEs__item__criticality._const_tab_id = 'criticality'
-    ___MeasurementFailure_protocolIEs__item__value = OPEN(name='value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('SLMAP-Containers', 'SLMAP-PROTOCOL-IES'), ['Value']))
+    ___MeasurementFailure_protocolIEs__item__criticality._const_tab_at = ('..', u'id')
+    ___MeasurementFailure_protocolIEs__item__criticality._const_tab_id = u'criticality'
+    ___MeasurementFailure_protocolIEs__item__value = OPEN(name=u'value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('SLMAP-Containers', 'SLMAP-PROTOCOL-IES'), [u'Value']))
     ___MeasurementFailure_protocolIEs__item__value._const_tab = ____MeasurementFailure_protocolIEs__item__id_tab
-    ___MeasurementFailure_protocolIEs__item__value._const_tab_at = ('..', 'id')
-    ___MeasurementFailure_protocolIEs__item__value._const_tab_id = 'Value'
+    ___MeasurementFailure_protocolIEs__item__value._const_tab_at = ('..', u'id')
+    ___MeasurementFailure_protocolIEs__item__value._const_tab_id = u'Value'
     __MeasurementFailure_protocolIEs__item_._cont = ASN1Dict([
-        ('id', ___MeasurementFailure_protocolIEs__item__id),
-        ('criticality', ___MeasurementFailure_protocolIEs__item__criticality),
-        ('value', ___MeasurementFailure_protocolIEs__item__value),
+        (u'id', ___MeasurementFailure_protocolIEs__item__id),
+        (u'criticality', ___MeasurementFailure_protocolIEs__item__criticality),
+        (u'value', ___MeasurementFailure_protocolIEs__item__value),
         ])
     __MeasurementFailure_protocolIEs__item_._ext = None
     _MeasurementFailure_protocolIEs._cont = __MeasurementFailure_protocolIEs__item_
     _MeasurementFailure_protocolIEs._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=65535)], ev=None, er=[])
     MeasurementFailure._cont = ASN1Dict([
-        ('protocolIEs', _MeasurementFailure_protocolIEs),
+        (u'protocolIEs', _MeasurementFailure_protocolIEs),
         ])
     MeasurementFailure._ext = []
     
     #-----< MeasurementFailure-IEs >-----#
-    MeasurementFailure_IEs = CLASS(name='MeasurementFailure-IEs', mode=MODE_SET, typeref=ASN1RefType(('SLMAP-Containers', 'SLMAP-PROTOCOL-IES')))
-    _MeasurementFailure_IEs_val_Value_0 = INT(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-IEs', 'ESMLC-MeasurementID')))
-    _MeasurementFailure_IEs_val_Value_1 = CHOICE(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-IEs', 'Cause')))
-    _MeasurementFailure_IEs_val_Value_2 = SEQ(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-IEs', 'CriticalityDiagnostics')))
-    MeasurementFailure_IEs._val = ASN1Set(rv=[dict([('id', 0), ('criticality', 'reject'), ('Value', _MeasurementFailure_IEs_val_Value_0), ('presence', 'mandatory')]), dict([('id', 4), ('criticality', 'ignore'), ('Value', _MeasurementFailure_IEs_val_Value_1), ('presence', 'mandatory')]), dict([('id', 2), ('criticality', 'ignore'), ('Value', _MeasurementFailure_IEs_val_Value_2), ('presence', 'optional')])], rr=[], ev=[], er=[])
+    MeasurementFailure_IEs = CLASS(name=u'MeasurementFailure-IEs', mode=MODE_SET, typeref=ASN1RefType(('SLMAP-Containers', 'SLMAP-PROTOCOL-IES')))
+    _MeasurementFailure_IEs_val_Value_0 = INT(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-IEs', 'ESMLC-MeasurementID')))
+    _MeasurementFailure_IEs_val_Value_1 = CHOICE(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-IEs', 'Cause')))
+    _MeasurementFailure_IEs_val_Value_2 = SEQ(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-IEs', 'CriticalityDiagnostics')))
+    MeasurementFailure_IEs._val = ASN1Set(rv=[dict([(u'id', 0), (u'criticality', u'reject'), (u'Value', _MeasurementFailure_IEs_val_Value_0), (u'presence', u'mandatory')]), dict([(u'id', 4), (u'criticality', u'ignore'), (u'Value', _MeasurementFailure_IEs_val_Value_1), (u'presence', u'mandatory')]), dict([(u'id', 2), (u'criticality', u'ignore'), (u'Value', _MeasurementFailure_IEs_val_Value_2), (u'presence', u'optional')])], rr=[], ev=[], er=[])
     
     #-----< SLMSetupRequest >-----#
-    SLMSetupRequest = SEQ(name='SLMSetupRequest', mode=MODE_TYPE)
-    _SLMSetupRequest_protocolIEs = SEQ_OF(name='protocolIEs', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('SLMAP-Containers', 'ProtocolIE-Container')))
+    SLMSetupRequest = SEQ(name=u'SLMSetupRequest', mode=MODE_TYPE)
+    _SLMSetupRequest_protocolIEs = SEQ_OF(name=u'protocolIEs', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('SLMAP-Containers', 'ProtocolIE-Container')))
     __SLMSetupRequest_protocolIEs__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-Containers', 'ProtocolIE-Field')))
-    ___SLMSetupRequest_protocolIEs__item__id = INT(name='id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('SLMAP-Containers', 'SLMAP-PROTOCOL-IES'), ['id']))
+    ___SLMSetupRequest_protocolIEs__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('SLMAP-Containers', 'SLMAP-PROTOCOL-IES'), [u'id']))
     ____SLMSetupRequest_protocolIEs__item__id_tab = CLASS(name='_tab_SLMAP-PROTOCOL-IES', mode=MODE_SET, typeref=ASN1RefType(('SLMAP-Containers', 'SLMAP-PROTOCOL-IES')))
-    _____SLMSetupRequest_protocolIEs__item__id_tab_val_Value_0 = INT(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-IEs', 'LMU-ID')))
-    _____SLMSetupRequest_protocolIEs__item__id_tab_val_Value_1 = SEQ(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-IEs', 'LMUInformation')))
-    ____SLMSetupRequest_protocolIEs__item__id_tab._val = ASN1Set(rv=[dict([('id', 5), ('criticality', 'ignore'), ('Value', _____SLMSetupRequest_protocolIEs__item__id_tab_val_Value_0), ('presence', 'mandatory')]), dict([('id', 6), ('criticality', 'ignore'), ('Value', _____SLMSetupRequest_protocolIEs__item__id_tab_val_Value_1), ('presence', 'optional')])], rr=[], ev=None, er=[])
+    _____SLMSetupRequest_protocolIEs__item__id_tab_val_Value_0 = INT(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-IEs', 'LMU-ID')))
+    _____SLMSetupRequest_protocolIEs__item__id_tab_val_Value_1 = SEQ(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-IEs', 'LMUInformation')))
+    ____SLMSetupRequest_protocolIEs__item__id_tab._val = ASN1Set(rv=[dict([(u'id', 5), (u'criticality', u'ignore'), (u'Value', _____SLMSetupRequest_protocolIEs__item__id_tab_val_Value_0), (u'presence', u'mandatory')]), dict([(u'id', 6), (u'criticality', u'ignore'), (u'Value', _____SLMSetupRequest_protocolIEs__item__id_tab_val_Value_1), (u'presence', u'optional')])], rr=[], ev=None, er=[])
     ___SLMSetupRequest_protocolIEs__item__id._const_tab = ____SLMSetupRequest_protocolIEs__item__id_tab
     ___SLMSetupRequest_protocolIEs__item__id._const_tab_at = None
-    ___SLMSetupRequest_protocolIEs__item__id._const_tab_id = 'id'
-    ___SLMSetupRequest_protocolIEs__item__criticality = ENUM(name='criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('SLMAP-Containers', 'SLMAP-PROTOCOL-IES'), ['criticality']))
+    ___SLMSetupRequest_protocolIEs__item__id._const_tab_id = u'id'
+    ___SLMSetupRequest_protocolIEs__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('SLMAP-Containers', 'SLMAP-PROTOCOL-IES'), [u'criticality']))
     ___SLMSetupRequest_protocolIEs__item__criticality._const_tab = ____SLMSetupRequest_protocolIEs__item__id_tab
-    ___SLMSetupRequest_protocolIEs__item__criticality._const_tab_at = ('..', 'id')
-    ___SLMSetupRequest_protocolIEs__item__criticality._const_tab_id = 'criticality'
-    ___SLMSetupRequest_protocolIEs__item__value = OPEN(name='value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('SLMAP-Containers', 'SLMAP-PROTOCOL-IES'), ['Value']))
+    ___SLMSetupRequest_protocolIEs__item__criticality._const_tab_at = ('..', u'id')
+    ___SLMSetupRequest_protocolIEs__item__criticality._const_tab_id = u'criticality'
+    ___SLMSetupRequest_protocolIEs__item__value = OPEN(name=u'value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('SLMAP-Containers', 'SLMAP-PROTOCOL-IES'), [u'Value']))
     ___SLMSetupRequest_protocolIEs__item__value._const_tab = ____SLMSetupRequest_protocolIEs__item__id_tab
-    ___SLMSetupRequest_protocolIEs__item__value._const_tab_at = ('..', 'id')
-    ___SLMSetupRequest_protocolIEs__item__value._const_tab_id = 'Value'
+    ___SLMSetupRequest_protocolIEs__item__value._const_tab_at = ('..', u'id')
+    ___SLMSetupRequest_protocolIEs__item__value._const_tab_id = u'Value'
     __SLMSetupRequest_protocolIEs__item_._cont = ASN1Dict([
-        ('id', ___SLMSetupRequest_protocolIEs__item__id),
-        ('criticality', ___SLMSetupRequest_protocolIEs__item__criticality),
-        ('value', ___SLMSetupRequest_protocolIEs__item__value),
+        (u'id', ___SLMSetupRequest_protocolIEs__item__id),
+        (u'criticality', ___SLMSetupRequest_protocolIEs__item__criticality),
+        (u'value', ___SLMSetupRequest_protocolIEs__item__value),
         ])
     __SLMSetupRequest_protocolIEs__item_._ext = None
     _SLMSetupRequest_protocolIEs._cont = __SLMSetupRequest_protocolIEs__item_
     _SLMSetupRequest_protocolIEs._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=65535)], ev=None, er=[])
     SLMSetupRequest._cont = ASN1Dict([
-        ('protocolIEs', _SLMSetupRequest_protocolIEs),
+        (u'protocolIEs', _SLMSetupRequest_protocolIEs),
         ])
     SLMSetupRequest._ext = []
     
     #-----< SLMSetupRequest-IEs >-----#
-    SLMSetupRequest_IEs = CLASS(name='SLMSetupRequest-IEs', mode=MODE_SET, typeref=ASN1RefType(('SLMAP-Containers', 'SLMAP-PROTOCOL-IES')))
-    _SLMSetupRequest_IEs_val_Value_0 = INT(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-IEs', 'LMU-ID')))
-    _SLMSetupRequest_IEs_val_Value_1 = SEQ(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-IEs', 'LMUInformation')))
-    SLMSetupRequest_IEs._val = ASN1Set(rv=[dict([('id', 5), ('criticality', 'ignore'), ('Value', _SLMSetupRequest_IEs_val_Value_0), ('presence', 'mandatory')]), dict([('id', 6), ('criticality', 'ignore'), ('Value', _SLMSetupRequest_IEs_val_Value_1), ('presence', 'optional')])], rr=[], ev=[], er=[])
+    SLMSetupRequest_IEs = CLASS(name=u'SLMSetupRequest-IEs', mode=MODE_SET, typeref=ASN1RefType(('SLMAP-Containers', 'SLMAP-PROTOCOL-IES')))
+    _SLMSetupRequest_IEs_val_Value_0 = INT(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-IEs', 'LMU-ID')))
+    _SLMSetupRequest_IEs_val_Value_1 = SEQ(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-IEs', 'LMUInformation')))
+    SLMSetupRequest_IEs._val = ASN1Set(rv=[dict([(u'id', 5), (u'criticality', u'ignore'), (u'Value', _SLMSetupRequest_IEs_val_Value_0), (u'presence', u'mandatory')]), dict([(u'id', 6), (u'criticality', u'ignore'), (u'Value', _SLMSetupRequest_IEs_val_Value_1), (u'presence', u'optional')])], rr=[], ev=[], er=[])
     
     #-----< SLMSetupResponse >-----#
-    SLMSetupResponse = SEQ(name='SLMSetupResponse', mode=MODE_TYPE)
-    _SLMSetupResponse_protocolIEs = SEQ_OF(name='protocolIEs', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('SLMAP-Containers', 'ProtocolIE-Container')))
+    SLMSetupResponse = SEQ(name=u'SLMSetupResponse', mode=MODE_TYPE)
+    _SLMSetupResponse_protocolIEs = SEQ_OF(name=u'protocolIEs', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('SLMAP-Containers', 'ProtocolIE-Container')))
     __SLMSetupResponse_protocolIEs__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-Containers', 'ProtocolIE-Field')))
-    ___SLMSetupResponse_protocolIEs__item__id = INT(name='id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('SLMAP-Containers', 'SLMAP-PROTOCOL-IES'), ['id']))
+    ___SLMSetupResponse_protocolIEs__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('SLMAP-Containers', 'SLMAP-PROTOCOL-IES'), [u'id']))
     ____SLMSetupResponse_protocolIEs__item__id_tab = CLASS(name='_tab_SLMAP-PROTOCOL-IES', mode=MODE_SET, typeref=ASN1RefType(('SLMAP-Containers', 'SLMAP-PROTOCOL-IES')))
-    _____SLMSetupResponse_protocolIEs__item__id_tab_val_Value_0 = INT(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-IEs', 'ESMLC-ID')))
-    _____SLMSetupResponse_protocolIEs__item__id_tab_val_Value_1 = SEQ(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-IEs', 'CriticalityDiagnostics')))
-    ____SLMSetupResponse_protocolIEs__item__id_tab._val = ASN1Set(rv=[dict([('id', 7), ('criticality', 'reject'), ('Value', _____SLMSetupResponse_protocolIEs__item__id_tab_val_Value_0), ('presence', 'mandatory')]), dict([('id', 2), ('criticality', 'ignore'), ('Value', _____SLMSetupResponse_protocolIEs__item__id_tab_val_Value_1), ('presence', 'optional')])], rr=[], ev=None, er=[])
+    _____SLMSetupResponse_protocolIEs__item__id_tab_val_Value_0 = INT(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-IEs', 'ESMLC-ID')))
+    _____SLMSetupResponse_protocolIEs__item__id_tab_val_Value_1 = SEQ(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-IEs', 'CriticalityDiagnostics')))
+    ____SLMSetupResponse_protocolIEs__item__id_tab._val = ASN1Set(rv=[dict([(u'id', 7), (u'criticality', u'reject'), (u'Value', _____SLMSetupResponse_protocolIEs__item__id_tab_val_Value_0), (u'presence', u'mandatory')]), dict([(u'id', 2), (u'criticality', u'ignore'), (u'Value', _____SLMSetupResponse_protocolIEs__item__id_tab_val_Value_1), (u'presence', u'optional')])], rr=[], ev=None, er=[])
     ___SLMSetupResponse_protocolIEs__item__id._const_tab = ____SLMSetupResponse_protocolIEs__item__id_tab
     ___SLMSetupResponse_protocolIEs__item__id._const_tab_at = None
-    ___SLMSetupResponse_protocolIEs__item__id._const_tab_id = 'id'
-    ___SLMSetupResponse_protocolIEs__item__criticality = ENUM(name='criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('SLMAP-Containers', 'SLMAP-PROTOCOL-IES'), ['criticality']))
+    ___SLMSetupResponse_protocolIEs__item__id._const_tab_id = u'id'
+    ___SLMSetupResponse_protocolIEs__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('SLMAP-Containers', 'SLMAP-PROTOCOL-IES'), [u'criticality']))
     ___SLMSetupResponse_protocolIEs__item__criticality._const_tab = ____SLMSetupResponse_protocolIEs__item__id_tab
-    ___SLMSetupResponse_protocolIEs__item__criticality._const_tab_at = ('..', 'id')
-    ___SLMSetupResponse_protocolIEs__item__criticality._const_tab_id = 'criticality'
-    ___SLMSetupResponse_protocolIEs__item__value = OPEN(name='value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('SLMAP-Containers', 'SLMAP-PROTOCOL-IES'), ['Value']))
+    ___SLMSetupResponse_protocolIEs__item__criticality._const_tab_at = ('..', u'id')
+    ___SLMSetupResponse_protocolIEs__item__criticality._const_tab_id = u'criticality'
+    ___SLMSetupResponse_protocolIEs__item__value = OPEN(name=u'value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('SLMAP-Containers', 'SLMAP-PROTOCOL-IES'), [u'Value']))
     ___SLMSetupResponse_protocolIEs__item__value._const_tab = ____SLMSetupResponse_protocolIEs__item__id_tab
-    ___SLMSetupResponse_protocolIEs__item__value._const_tab_at = ('..', 'id')
-    ___SLMSetupResponse_protocolIEs__item__value._const_tab_id = 'Value'
+    ___SLMSetupResponse_protocolIEs__item__value._const_tab_at = ('..', u'id')
+    ___SLMSetupResponse_protocolIEs__item__value._const_tab_id = u'Value'
     __SLMSetupResponse_protocolIEs__item_._cont = ASN1Dict([
-        ('id', ___SLMSetupResponse_protocolIEs__item__id),
-        ('criticality', ___SLMSetupResponse_protocolIEs__item__criticality),
-        ('value', ___SLMSetupResponse_protocolIEs__item__value),
+        (u'id', ___SLMSetupResponse_protocolIEs__item__id),
+        (u'criticality', ___SLMSetupResponse_protocolIEs__item__criticality),
+        (u'value', ___SLMSetupResponse_protocolIEs__item__value),
         ])
     __SLMSetupResponse_protocolIEs__item_._ext = None
     _SLMSetupResponse_protocolIEs._cont = __SLMSetupResponse_protocolIEs__item_
     _SLMSetupResponse_protocolIEs._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=65535)], ev=None, er=[])
     SLMSetupResponse._cont = ASN1Dict([
-        ('protocolIEs', _SLMSetupResponse_protocolIEs),
+        (u'protocolIEs', _SLMSetupResponse_protocolIEs),
         ])
     SLMSetupResponse._ext = []
     
     #-----< SLMSetupResponse-IEs >-----#
-    SLMSetupResponse_IEs = CLASS(name='SLMSetupResponse-IEs', mode=MODE_SET, typeref=ASN1RefType(('SLMAP-Containers', 'SLMAP-PROTOCOL-IES')))
-    _SLMSetupResponse_IEs_val_Value_0 = INT(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-IEs', 'ESMLC-ID')))
-    _SLMSetupResponse_IEs_val_Value_1 = SEQ(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-IEs', 'CriticalityDiagnostics')))
-    SLMSetupResponse_IEs._val = ASN1Set(rv=[dict([('id', 7), ('criticality', 'reject'), ('Value', _SLMSetupResponse_IEs_val_Value_0), ('presence', 'mandatory')]), dict([('id', 2), ('criticality', 'ignore'), ('Value', _SLMSetupResponse_IEs_val_Value_1), ('presence', 'optional')])], rr=[], ev=[], er=[])
+    SLMSetupResponse_IEs = CLASS(name=u'SLMSetupResponse-IEs', mode=MODE_SET, typeref=ASN1RefType(('SLMAP-Containers', 'SLMAP-PROTOCOL-IES')))
+    _SLMSetupResponse_IEs_val_Value_0 = INT(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-IEs', 'ESMLC-ID')))
+    _SLMSetupResponse_IEs_val_Value_1 = SEQ(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-IEs', 'CriticalityDiagnostics')))
+    SLMSetupResponse_IEs._val = ASN1Set(rv=[dict([(u'id', 7), (u'criticality', u'reject'), (u'Value', _SLMSetupResponse_IEs_val_Value_0), (u'presence', u'mandatory')]), dict([(u'id', 2), (u'criticality', u'ignore'), (u'Value', _SLMSetupResponse_IEs_val_Value_1), (u'presence', u'optional')])], rr=[], ev=[], er=[])
     
     #-----< SLMSetupFailure >-----#
-    SLMSetupFailure = SEQ(name='SLMSetupFailure', mode=MODE_TYPE)
-    _SLMSetupFailure_protocolIEs = SEQ_OF(name='protocolIEs', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('SLMAP-Containers', 'ProtocolIE-Container')))
+    SLMSetupFailure = SEQ(name=u'SLMSetupFailure', mode=MODE_TYPE)
+    _SLMSetupFailure_protocolIEs = SEQ_OF(name=u'protocolIEs', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('SLMAP-Containers', 'ProtocolIE-Container')))
     __SLMSetupFailure_protocolIEs__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-Containers', 'ProtocolIE-Field')))
-    ___SLMSetupFailure_protocolIEs__item__id = INT(name='id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('SLMAP-Containers', 'SLMAP-PROTOCOL-IES'), ['id']))
+    ___SLMSetupFailure_protocolIEs__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('SLMAP-Containers', 'SLMAP-PROTOCOL-IES'), [u'id']))
     ____SLMSetupFailure_protocolIEs__item__id_tab = CLASS(name='_tab_SLMAP-PROTOCOL-IES', mode=MODE_SET, typeref=ASN1RefType(('SLMAP-Containers', 'SLMAP-PROTOCOL-IES')))
-    _____SLMSetupFailure_protocolIEs__item__id_tab_val_Value_0 = CHOICE(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-IEs', 'Cause')))
-    _____SLMSetupFailure_protocolIEs__item__id_tab_val_Value_1 = SEQ(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-IEs', 'CriticalityDiagnostics')))
-    ____SLMSetupFailure_protocolIEs__item__id_tab._val = ASN1Set(rv=[dict([('id', 4), ('criticality', 'ignore'), ('Value', _____SLMSetupFailure_protocolIEs__item__id_tab_val_Value_0), ('presence', 'mandatory')]), dict([('id', 2), ('criticality', 'ignore'), ('Value', _____SLMSetupFailure_protocolIEs__item__id_tab_val_Value_1), ('presence', 'optional')])], rr=[], ev=None, er=[])
+    _____SLMSetupFailure_protocolIEs__item__id_tab_val_Value_0 = CHOICE(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-IEs', 'Cause')))
+    _____SLMSetupFailure_protocolIEs__item__id_tab_val_Value_1 = SEQ(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-IEs', 'CriticalityDiagnostics')))
+    ____SLMSetupFailure_protocolIEs__item__id_tab._val = ASN1Set(rv=[dict([(u'id', 4), (u'criticality', u'ignore'), (u'Value', _____SLMSetupFailure_protocolIEs__item__id_tab_val_Value_0), (u'presence', u'mandatory')]), dict([(u'id', 2), (u'criticality', u'ignore'), (u'Value', _____SLMSetupFailure_protocolIEs__item__id_tab_val_Value_1), (u'presence', u'optional')])], rr=[], ev=None, er=[])
     ___SLMSetupFailure_protocolIEs__item__id._const_tab = ____SLMSetupFailure_protocolIEs__item__id_tab
     ___SLMSetupFailure_protocolIEs__item__id._const_tab_at = None
-    ___SLMSetupFailure_protocolIEs__item__id._const_tab_id = 'id'
-    ___SLMSetupFailure_protocolIEs__item__criticality = ENUM(name='criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('SLMAP-Containers', 'SLMAP-PROTOCOL-IES'), ['criticality']))
+    ___SLMSetupFailure_protocolIEs__item__id._const_tab_id = u'id'
+    ___SLMSetupFailure_protocolIEs__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('SLMAP-Containers', 'SLMAP-PROTOCOL-IES'), [u'criticality']))
     ___SLMSetupFailure_protocolIEs__item__criticality._const_tab = ____SLMSetupFailure_protocolIEs__item__id_tab
-    ___SLMSetupFailure_protocolIEs__item__criticality._const_tab_at = ('..', 'id')
-    ___SLMSetupFailure_protocolIEs__item__criticality._const_tab_id = 'criticality'
-    ___SLMSetupFailure_protocolIEs__item__value = OPEN(name='value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('SLMAP-Containers', 'SLMAP-PROTOCOL-IES'), ['Value']))
+    ___SLMSetupFailure_protocolIEs__item__criticality._const_tab_at = ('..', u'id')
+    ___SLMSetupFailure_protocolIEs__item__criticality._const_tab_id = u'criticality'
+    ___SLMSetupFailure_protocolIEs__item__value = OPEN(name=u'value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('SLMAP-Containers', 'SLMAP-PROTOCOL-IES'), [u'Value']))
     ___SLMSetupFailure_protocolIEs__item__value._const_tab = ____SLMSetupFailure_protocolIEs__item__id_tab
-    ___SLMSetupFailure_protocolIEs__item__value._const_tab_at = ('..', 'id')
-    ___SLMSetupFailure_protocolIEs__item__value._const_tab_id = 'Value'
+    ___SLMSetupFailure_protocolIEs__item__value._const_tab_at = ('..', u'id')
+    ___SLMSetupFailure_protocolIEs__item__value._const_tab_id = u'Value'
     __SLMSetupFailure_protocolIEs__item_._cont = ASN1Dict([
-        ('id', ___SLMSetupFailure_protocolIEs__item__id),
-        ('criticality', ___SLMSetupFailure_protocolIEs__item__criticality),
-        ('value', ___SLMSetupFailure_protocolIEs__item__value),
+        (u'id', ___SLMSetupFailure_protocolIEs__item__id),
+        (u'criticality', ___SLMSetupFailure_protocolIEs__item__criticality),
+        (u'value', ___SLMSetupFailure_protocolIEs__item__value),
         ])
     __SLMSetupFailure_protocolIEs__item_._ext = None
     _SLMSetupFailure_protocolIEs._cont = __SLMSetupFailure_protocolIEs__item_
     _SLMSetupFailure_protocolIEs._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=65535)], ev=None, er=[])
     SLMSetupFailure._cont = ASN1Dict([
-        ('protocolIEs', _SLMSetupFailure_protocolIEs),
+        (u'protocolIEs', _SLMSetupFailure_protocolIEs),
         ])
     SLMSetupFailure._ext = []
     
     #-----< SLMSetupFailure-IEs >-----#
-    SLMSetupFailure_IEs = CLASS(name='SLMSetupFailure-IEs', mode=MODE_SET, typeref=ASN1RefType(('SLMAP-Containers', 'SLMAP-PROTOCOL-IES')))
-    _SLMSetupFailure_IEs_val_Value_0 = CHOICE(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-IEs', 'Cause')))
-    _SLMSetupFailure_IEs_val_Value_1 = SEQ(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-IEs', 'CriticalityDiagnostics')))
-    SLMSetupFailure_IEs._val = ASN1Set(rv=[dict([('id', 4), ('criticality', 'ignore'), ('Value', _SLMSetupFailure_IEs_val_Value_0), ('presence', 'mandatory')]), dict([('id', 2), ('criticality', 'ignore'), ('Value', _SLMSetupFailure_IEs_val_Value_1), ('presence', 'optional')])], rr=[], ev=[], er=[])
+    SLMSetupFailure_IEs = CLASS(name=u'SLMSetupFailure-IEs', mode=MODE_SET, typeref=ASN1RefType(('SLMAP-Containers', 'SLMAP-PROTOCOL-IES')))
+    _SLMSetupFailure_IEs_val_Value_0 = CHOICE(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-IEs', 'Cause')))
+    _SLMSetupFailure_IEs_val_Value_1 = SEQ(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-IEs', 'CriticalityDiagnostics')))
+    SLMSetupFailure_IEs._val = ASN1Set(rv=[dict([(u'id', 4), (u'criticality', u'ignore'), (u'Value', _SLMSetupFailure_IEs_val_Value_0), (u'presence', u'mandatory')]), dict([(u'id', 2), (u'criticality', u'ignore'), (u'Value', _SLMSetupFailure_IEs_val_Value_1), (u'presence', u'optional')])], rr=[], ev=[], er=[])
     
     #-----< ResetRequest >-----#
-    ResetRequest = SEQ(name='ResetRequest', mode=MODE_TYPE)
-    _ResetRequest_protocolIEs = SEQ_OF(name='protocolIEs', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('SLMAP-Containers', 'ProtocolIE-Container')))
+    ResetRequest = SEQ(name=u'ResetRequest', mode=MODE_TYPE)
+    _ResetRequest_protocolIEs = SEQ_OF(name=u'protocolIEs', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('SLMAP-Containers', 'ProtocolIE-Container')))
     __ResetRequest_protocolIEs__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-Containers', 'ProtocolIE-Field')))
-    ___ResetRequest_protocolIEs__item__id = INT(name='id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('SLMAP-Containers', 'SLMAP-PROTOCOL-IES'), ['id']))
+    ___ResetRequest_protocolIEs__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('SLMAP-Containers', 'SLMAP-PROTOCOL-IES'), [u'id']))
     ____ResetRequest_protocolIEs__item__id_tab = CLASS(name='_tab_SLMAP-PROTOCOL-IES', mode=MODE_SET, typeref=ASN1RefType(('SLMAP-Containers', 'SLMAP-PROTOCOL-IES')))
-    _____ResetRequest_protocolIEs__item__id_tab_val_Value_0 = CHOICE(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-IEs', 'Cause')))
-    ____ResetRequest_protocolIEs__item__id_tab._val = ASN1Set(rv=[dict([('id', 4), ('criticality', 'ignore'), ('Value', _____ResetRequest_protocolIEs__item__id_tab_val_Value_0), ('presence', 'mandatory')])], rr=[], ev=None, er=[])
+    _____ResetRequest_protocolIEs__item__id_tab_val_Value_0 = CHOICE(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-IEs', 'Cause')))
+    ____ResetRequest_protocolIEs__item__id_tab._val = ASN1Set(rv=[dict([(u'id', 4), (u'criticality', u'ignore'), (u'Value', _____ResetRequest_protocolIEs__item__id_tab_val_Value_0), (u'presence', u'mandatory')])], rr=[], ev=None, er=[])
     ___ResetRequest_protocolIEs__item__id._const_tab = ____ResetRequest_protocolIEs__item__id_tab
     ___ResetRequest_protocolIEs__item__id._const_tab_at = None
-    ___ResetRequest_protocolIEs__item__id._const_tab_id = 'id'
-    ___ResetRequest_protocolIEs__item__criticality = ENUM(name='criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('SLMAP-Containers', 'SLMAP-PROTOCOL-IES'), ['criticality']))
+    ___ResetRequest_protocolIEs__item__id._const_tab_id = u'id'
+    ___ResetRequest_protocolIEs__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('SLMAP-Containers', 'SLMAP-PROTOCOL-IES'), [u'criticality']))
     ___ResetRequest_protocolIEs__item__criticality._const_tab = ____ResetRequest_protocolIEs__item__id_tab
-    ___ResetRequest_protocolIEs__item__criticality._const_tab_at = ('..', 'id')
-    ___ResetRequest_protocolIEs__item__criticality._const_tab_id = 'criticality'
-    ___ResetRequest_protocolIEs__item__value = OPEN(name='value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('SLMAP-Containers', 'SLMAP-PROTOCOL-IES'), ['Value']))
+    ___ResetRequest_protocolIEs__item__criticality._const_tab_at = ('..', u'id')
+    ___ResetRequest_protocolIEs__item__criticality._const_tab_id = u'criticality'
+    ___ResetRequest_protocolIEs__item__value = OPEN(name=u'value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('SLMAP-Containers', 'SLMAP-PROTOCOL-IES'), [u'Value']))
     ___ResetRequest_protocolIEs__item__value._const_tab = ____ResetRequest_protocolIEs__item__id_tab
-    ___ResetRequest_protocolIEs__item__value._const_tab_at = ('..', 'id')
-    ___ResetRequest_protocolIEs__item__value._const_tab_id = 'Value'
+    ___ResetRequest_protocolIEs__item__value._const_tab_at = ('..', u'id')
+    ___ResetRequest_protocolIEs__item__value._const_tab_id = u'Value'
     __ResetRequest_protocolIEs__item_._cont = ASN1Dict([
-        ('id', ___ResetRequest_protocolIEs__item__id),
-        ('criticality', ___ResetRequest_protocolIEs__item__criticality),
-        ('value', ___ResetRequest_protocolIEs__item__value),
+        (u'id', ___ResetRequest_protocolIEs__item__id),
+        (u'criticality', ___ResetRequest_protocolIEs__item__criticality),
+        (u'value', ___ResetRequest_protocolIEs__item__value),
         ])
     __ResetRequest_protocolIEs__item_._ext = None
     _ResetRequest_protocolIEs._cont = __ResetRequest_protocolIEs__item_
     _ResetRequest_protocolIEs._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=65535)], ev=None, er=[])
     ResetRequest._cont = ASN1Dict([
-        ('protocolIEs', _ResetRequest_protocolIEs),
+        (u'protocolIEs', _ResetRequest_protocolIEs),
         ])
     ResetRequest._ext = []
     
     #-----< ResetRequest-IEs >-----#
-    ResetRequest_IEs = CLASS(name='ResetRequest-IEs', mode=MODE_SET, typeref=ASN1RefType(('SLMAP-Containers', 'SLMAP-PROTOCOL-IES')))
-    _ResetRequest_IEs_val_Value_0 = CHOICE(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-IEs', 'Cause')))
-    ResetRequest_IEs._val = ASN1Set(rv=[dict([('id', 4), ('criticality', 'ignore'), ('Value', _ResetRequest_IEs_val_Value_0), ('presence', 'mandatory')])], rr=[], ev=[], er=[])
+    ResetRequest_IEs = CLASS(name=u'ResetRequest-IEs', mode=MODE_SET, typeref=ASN1RefType(('SLMAP-Containers', 'SLMAP-PROTOCOL-IES')))
+    _ResetRequest_IEs_val_Value_0 = CHOICE(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-IEs', 'Cause')))
+    ResetRequest_IEs._val = ASN1Set(rv=[dict([(u'id', 4), (u'criticality', u'ignore'), (u'Value', _ResetRequest_IEs_val_Value_0), (u'presence', u'mandatory')])], rr=[], ev=[], er=[])
     
     #-----< ResetAcknowledge >-----#
-    ResetAcknowledge = SEQ(name='ResetAcknowledge', mode=MODE_TYPE)
-    _ResetAcknowledge_protocolIEs = SEQ_OF(name='protocolIEs', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('SLMAP-Containers', 'ProtocolIE-Container')))
+    ResetAcknowledge = SEQ(name=u'ResetAcknowledge', mode=MODE_TYPE)
+    _ResetAcknowledge_protocolIEs = SEQ_OF(name=u'protocolIEs', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('SLMAP-Containers', 'ProtocolIE-Container')))
     __ResetAcknowledge_protocolIEs__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-Containers', 'ProtocolIE-Field')))
-    ___ResetAcknowledge_protocolIEs__item__id = INT(name='id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('SLMAP-Containers', 'SLMAP-PROTOCOL-IES'), ['id']))
+    ___ResetAcknowledge_protocolIEs__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('SLMAP-Containers', 'SLMAP-PROTOCOL-IES'), [u'id']))
     ____ResetAcknowledge_protocolIEs__item__id_tab = CLASS(name='_tab_SLMAP-PROTOCOL-IES', mode=MODE_SET, typeref=ASN1RefType(('SLMAP-Containers', 'SLMAP-PROTOCOL-IES')))
-    _____ResetAcknowledge_protocolIEs__item__id_tab_val_Value_0 = SEQ(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-IEs', 'CriticalityDiagnostics')))
-    ____ResetAcknowledge_protocolIEs__item__id_tab._val = ASN1Set(rv=[dict([('id', 2), ('criticality', 'ignore'), ('Value', _____ResetAcknowledge_protocolIEs__item__id_tab_val_Value_0), ('presence', 'optional')])], rr=[], ev=None, er=[])
+    _____ResetAcknowledge_protocolIEs__item__id_tab_val_Value_0 = SEQ(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-IEs', 'CriticalityDiagnostics')))
+    ____ResetAcknowledge_protocolIEs__item__id_tab._val = ASN1Set(rv=[dict([(u'id', 2), (u'criticality', u'ignore'), (u'Value', _____ResetAcknowledge_protocolIEs__item__id_tab_val_Value_0), (u'presence', u'optional')])], rr=[], ev=None, er=[])
     ___ResetAcknowledge_protocolIEs__item__id._const_tab = ____ResetAcknowledge_protocolIEs__item__id_tab
     ___ResetAcknowledge_protocolIEs__item__id._const_tab_at = None
-    ___ResetAcknowledge_protocolIEs__item__id._const_tab_id = 'id'
-    ___ResetAcknowledge_protocolIEs__item__criticality = ENUM(name='criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('SLMAP-Containers', 'SLMAP-PROTOCOL-IES'), ['criticality']))
+    ___ResetAcknowledge_protocolIEs__item__id._const_tab_id = u'id'
+    ___ResetAcknowledge_protocolIEs__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('SLMAP-Containers', 'SLMAP-PROTOCOL-IES'), [u'criticality']))
     ___ResetAcknowledge_protocolIEs__item__criticality._const_tab = ____ResetAcknowledge_protocolIEs__item__id_tab
-    ___ResetAcknowledge_protocolIEs__item__criticality._const_tab_at = ('..', 'id')
-    ___ResetAcknowledge_protocolIEs__item__criticality._const_tab_id = 'criticality'
-    ___ResetAcknowledge_protocolIEs__item__value = OPEN(name='value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('SLMAP-Containers', 'SLMAP-PROTOCOL-IES'), ['Value']))
+    ___ResetAcknowledge_protocolIEs__item__criticality._const_tab_at = ('..', u'id')
+    ___ResetAcknowledge_protocolIEs__item__criticality._const_tab_id = u'criticality'
+    ___ResetAcknowledge_protocolIEs__item__value = OPEN(name=u'value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('SLMAP-Containers', 'SLMAP-PROTOCOL-IES'), [u'Value']))
     ___ResetAcknowledge_protocolIEs__item__value._const_tab = ____ResetAcknowledge_protocolIEs__item__id_tab
-    ___ResetAcknowledge_protocolIEs__item__value._const_tab_at = ('..', 'id')
-    ___ResetAcknowledge_protocolIEs__item__value._const_tab_id = 'Value'
+    ___ResetAcknowledge_protocolIEs__item__value._const_tab_at = ('..', u'id')
+    ___ResetAcknowledge_protocolIEs__item__value._const_tab_id = u'Value'
     __ResetAcknowledge_protocolIEs__item_._cont = ASN1Dict([
-        ('id', ___ResetAcknowledge_protocolIEs__item__id),
-        ('criticality', ___ResetAcknowledge_protocolIEs__item__criticality),
-        ('value', ___ResetAcknowledge_protocolIEs__item__value),
+        (u'id', ___ResetAcknowledge_protocolIEs__item__id),
+        (u'criticality', ___ResetAcknowledge_protocolIEs__item__criticality),
+        (u'value', ___ResetAcknowledge_protocolIEs__item__value),
         ])
     __ResetAcknowledge_protocolIEs__item_._ext = None
     _ResetAcknowledge_protocolIEs._cont = __ResetAcknowledge_protocolIEs__item_
     _ResetAcknowledge_protocolIEs._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=65535)], ev=None, er=[])
     ResetAcknowledge._cont = ASN1Dict([
-        ('protocolIEs', _ResetAcknowledge_protocolIEs),
+        (u'protocolIEs', _ResetAcknowledge_protocolIEs),
         ])
     ResetAcknowledge._ext = []
     
     #-----< ResetAcknowledge-IEs >-----#
-    ResetAcknowledge_IEs = CLASS(name='ResetAcknowledge-IEs', mode=MODE_SET, typeref=ASN1RefType(('SLMAP-Containers', 'SLMAP-PROTOCOL-IES')))
-    _ResetAcknowledge_IEs_val_Value_0 = SEQ(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-IEs', 'CriticalityDiagnostics')))
-    ResetAcknowledge_IEs._val = ASN1Set(rv=[dict([('id', 2), ('criticality', 'ignore'), ('Value', _ResetAcknowledge_IEs_val_Value_0), ('presence', 'optional')])], rr=[], ev=[], er=[])
+    ResetAcknowledge_IEs = CLASS(name=u'ResetAcknowledge-IEs', mode=MODE_SET, typeref=ASN1RefType(('SLMAP-Containers', 'SLMAP-PROTOCOL-IES')))
+    _ResetAcknowledge_IEs_val_Value_0 = SEQ(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-IEs', 'CriticalityDiagnostics')))
+    ResetAcknowledge_IEs._val = ASN1Set(rv=[dict([(u'id', 2), (u'criticality', u'ignore'), (u'Value', _ResetAcknowledge_IEs_val_Value_0), (u'presence', u'optional')])], rr=[], ev=[], er=[])
     
     #-----< MeasurementAbort >-----#
-    MeasurementAbort = SEQ(name='MeasurementAbort', mode=MODE_TYPE)
-    _MeasurementAbort_protocolIEs = SEQ_OF(name='protocolIEs', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('SLMAP-Containers', 'ProtocolIE-Container')))
+    MeasurementAbort = SEQ(name=u'MeasurementAbort', mode=MODE_TYPE)
+    _MeasurementAbort_protocolIEs = SEQ_OF(name=u'protocolIEs', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('SLMAP-Containers', 'ProtocolIE-Container')))
     __MeasurementAbort_protocolIEs__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-Containers', 'ProtocolIE-Field')))
-    ___MeasurementAbort_protocolIEs__item__id = INT(name='id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('SLMAP-Containers', 'SLMAP-PROTOCOL-IES'), ['id']))
+    ___MeasurementAbort_protocolIEs__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('SLMAP-Containers', 'SLMAP-PROTOCOL-IES'), [u'id']))
     ____MeasurementAbort_protocolIEs__item__id_tab = CLASS(name='_tab_SLMAP-PROTOCOL-IES', mode=MODE_SET, typeref=ASN1RefType(('SLMAP-Containers', 'SLMAP-PROTOCOL-IES')))
-    _____MeasurementAbort_protocolIEs__item__id_tab_val_Value_0 = INT(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-IEs', 'ESMLC-MeasurementID')))
-    ____MeasurementAbort_protocolIEs__item__id_tab._val = ASN1Set(rv=[dict([('id', 0), ('criticality', 'reject'), ('Value', _____MeasurementAbort_protocolIEs__item__id_tab_val_Value_0), ('presence', 'mandatory')])], rr=[], ev=None, er=[])
+    _____MeasurementAbort_protocolIEs__item__id_tab_val_Value_0 = INT(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-IEs', 'ESMLC-MeasurementID')))
+    ____MeasurementAbort_protocolIEs__item__id_tab._val = ASN1Set(rv=[dict([(u'id', 0), (u'criticality', u'reject'), (u'Value', _____MeasurementAbort_protocolIEs__item__id_tab_val_Value_0), (u'presence', u'mandatory')])], rr=[], ev=None, er=[])
     ___MeasurementAbort_protocolIEs__item__id._const_tab = ____MeasurementAbort_protocolIEs__item__id_tab
     ___MeasurementAbort_protocolIEs__item__id._const_tab_at = None
-    ___MeasurementAbort_protocolIEs__item__id._const_tab_id = 'id'
-    ___MeasurementAbort_protocolIEs__item__criticality = ENUM(name='criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('SLMAP-Containers', 'SLMAP-PROTOCOL-IES'), ['criticality']))
+    ___MeasurementAbort_protocolIEs__item__id._const_tab_id = u'id'
+    ___MeasurementAbort_protocolIEs__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('SLMAP-Containers', 'SLMAP-PROTOCOL-IES'), [u'criticality']))
     ___MeasurementAbort_protocolIEs__item__criticality._const_tab = ____MeasurementAbort_protocolIEs__item__id_tab
-    ___MeasurementAbort_protocolIEs__item__criticality._const_tab_at = ('..', 'id')
-    ___MeasurementAbort_protocolIEs__item__criticality._const_tab_id = 'criticality'
-    ___MeasurementAbort_protocolIEs__item__value = OPEN(name='value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('SLMAP-Containers', 'SLMAP-PROTOCOL-IES'), ['Value']))
+    ___MeasurementAbort_protocolIEs__item__criticality._const_tab_at = ('..', u'id')
+    ___MeasurementAbort_protocolIEs__item__criticality._const_tab_id = u'criticality'
+    ___MeasurementAbort_protocolIEs__item__value = OPEN(name=u'value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('SLMAP-Containers', 'SLMAP-PROTOCOL-IES'), [u'Value']))
     ___MeasurementAbort_protocolIEs__item__value._const_tab = ____MeasurementAbort_protocolIEs__item__id_tab
-    ___MeasurementAbort_protocolIEs__item__value._const_tab_at = ('..', 'id')
-    ___MeasurementAbort_protocolIEs__item__value._const_tab_id = 'Value'
+    ___MeasurementAbort_protocolIEs__item__value._const_tab_at = ('..', u'id')
+    ___MeasurementAbort_protocolIEs__item__value._const_tab_id = u'Value'
     __MeasurementAbort_protocolIEs__item_._cont = ASN1Dict([
-        ('id', ___MeasurementAbort_protocolIEs__item__id),
-        ('criticality', ___MeasurementAbort_protocolIEs__item__criticality),
-        ('value', ___MeasurementAbort_protocolIEs__item__value),
+        (u'id', ___MeasurementAbort_protocolIEs__item__id),
+        (u'criticality', ___MeasurementAbort_protocolIEs__item__criticality),
+        (u'value', ___MeasurementAbort_protocolIEs__item__value),
         ])
     __MeasurementAbort_protocolIEs__item_._ext = None
     _MeasurementAbort_protocolIEs._cont = __MeasurementAbort_protocolIEs__item_
     _MeasurementAbort_protocolIEs._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=65535)], ev=None, er=[])
     MeasurementAbort._cont = ASN1Dict([
-        ('protocolIEs', _MeasurementAbort_protocolIEs),
+        (u'protocolIEs', _MeasurementAbort_protocolIEs),
         ])
     MeasurementAbort._ext = []
     
     #-----< MeasurementAbort-IEs >-----#
-    MeasurementAbort_IEs = CLASS(name='MeasurementAbort-IEs', mode=MODE_SET, typeref=ASN1RefType(('SLMAP-Containers', 'SLMAP-PROTOCOL-IES')))
-    _MeasurementAbort_IEs_val_Value_0 = INT(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-IEs', 'ESMLC-MeasurementID')))
-    MeasurementAbort_IEs._val = ASN1Set(rv=[dict([('id', 0), ('criticality', 'reject'), ('Value', _MeasurementAbort_IEs_val_Value_0), ('presence', 'mandatory')])], rr=[], ev=[], er=[])
+    MeasurementAbort_IEs = CLASS(name=u'MeasurementAbort-IEs', mode=MODE_SET, typeref=ASN1RefType(('SLMAP-Containers', 'SLMAP-PROTOCOL-IES')))
+    _MeasurementAbort_IEs_val_Value_0 = INT(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-IEs', 'ESMLC-MeasurementID')))
+    MeasurementAbort_IEs._val = ASN1Set(rv=[dict([(u'id', 0), (u'criticality', u'reject'), (u'Value', _MeasurementAbort_IEs_val_Value_0), (u'presence', u'mandatory')])], rr=[], ev=[], er=[])
     
     #-----< MeasurementUpdate >-----#
-    MeasurementUpdate = SEQ(name='MeasurementUpdate', mode=MODE_TYPE)
-    _MeasurementUpdate_protocolIEs = SEQ_OF(name='protocolIEs', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('SLMAP-Containers', 'ProtocolIE-Container')))
+    MeasurementUpdate = SEQ(name=u'MeasurementUpdate', mode=MODE_TYPE)
+    _MeasurementUpdate_protocolIEs = SEQ_OF(name=u'protocolIEs', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('SLMAP-Containers', 'ProtocolIE-Container')))
     __MeasurementUpdate_protocolIEs__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-Containers', 'ProtocolIE-Field')))
-    ___MeasurementUpdate_protocolIEs__item__id = INT(name='id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('SLMAP-Containers', 'SLMAP-PROTOCOL-IES'), ['id']))
+    ___MeasurementUpdate_protocolIEs__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('SLMAP-Containers', 'SLMAP-PROTOCOL-IES'), [u'id']))
     ____MeasurementUpdate_protocolIEs__item__id_tab = CLASS(name='_tab_SLMAP-PROTOCOL-IES', mode=MODE_SET, typeref=ASN1RefType(('SLMAP-Containers', 'SLMAP-PROTOCOL-IES')))
-    _____MeasurementUpdate_protocolIEs__item__id_tab_val_Value_0 = INT(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-IEs', 'ESMLC-MeasurementID')))
-    _____MeasurementUpdate_protocolIEs__item__id_tab_val_Value_1 = SEQ(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-IEs', 'UL-RTOAMeasurementConfiguration')))
-    ____MeasurementUpdate_protocolIEs__item__id_tab._val = ASN1Set(rv=[dict([('id', 0), ('criticality', 'reject'), ('Value', _____MeasurementUpdate_protocolIEs__item__id_tab_val_Value_0), ('presence', 'mandatory')]), dict([('id', 1), ('criticality', 'reject'), ('Value', _____MeasurementUpdate_protocolIEs__item__id_tab_val_Value_1), ('presence', 'mandatory')])], rr=[], ev=None, er=[])
+    _____MeasurementUpdate_protocolIEs__item__id_tab_val_Value_0 = INT(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-IEs', 'ESMLC-MeasurementID')))
+    _____MeasurementUpdate_protocolIEs__item__id_tab_val_Value_1 = SEQ(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-IEs', 'UL-RTOAMeasurementConfiguration')))
+    ____MeasurementUpdate_protocolIEs__item__id_tab._val = ASN1Set(rv=[dict([(u'id', 0), (u'criticality', u'reject'), (u'Value', _____MeasurementUpdate_protocolIEs__item__id_tab_val_Value_0), (u'presence', u'mandatory')]), dict([(u'id', 1), (u'criticality', u'reject'), (u'Value', _____MeasurementUpdate_protocolIEs__item__id_tab_val_Value_1), (u'presence', u'mandatory')])], rr=[], ev=None, er=[])
     ___MeasurementUpdate_protocolIEs__item__id._const_tab = ____MeasurementUpdate_protocolIEs__item__id_tab
     ___MeasurementUpdate_protocolIEs__item__id._const_tab_at = None
-    ___MeasurementUpdate_protocolIEs__item__id._const_tab_id = 'id'
-    ___MeasurementUpdate_protocolIEs__item__criticality = ENUM(name='criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('SLMAP-Containers', 'SLMAP-PROTOCOL-IES'), ['criticality']))
+    ___MeasurementUpdate_protocolIEs__item__id._const_tab_id = u'id'
+    ___MeasurementUpdate_protocolIEs__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('SLMAP-Containers', 'SLMAP-PROTOCOL-IES'), [u'criticality']))
     ___MeasurementUpdate_protocolIEs__item__criticality._const_tab = ____MeasurementUpdate_protocolIEs__item__id_tab
-    ___MeasurementUpdate_protocolIEs__item__criticality._const_tab_at = ('..', 'id')
-    ___MeasurementUpdate_protocolIEs__item__criticality._const_tab_id = 'criticality'
-    ___MeasurementUpdate_protocolIEs__item__value = OPEN(name='value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('SLMAP-Containers', 'SLMAP-PROTOCOL-IES'), ['Value']))
+    ___MeasurementUpdate_protocolIEs__item__criticality._const_tab_at = ('..', u'id')
+    ___MeasurementUpdate_protocolIEs__item__criticality._const_tab_id = u'criticality'
+    ___MeasurementUpdate_protocolIEs__item__value = OPEN(name=u'value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('SLMAP-Containers', 'SLMAP-PROTOCOL-IES'), [u'Value']))
     ___MeasurementUpdate_protocolIEs__item__value._const_tab = ____MeasurementUpdate_protocolIEs__item__id_tab
-    ___MeasurementUpdate_protocolIEs__item__value._const_tab_at = ('..', 'id')
-    ___MeasurementUpdate_protocolIEs__item__value._const_tab_id = 'Value'
+    ___MeasurementUpdate_protocolIEs__item__value._const_tab_at = ('..', u'id')
+    ___MeasurementUpdate_protocolIEs__item__value._const_tab_id = u'Value'
     __MeasurementUpdate_protocolIEs__item_._cont = ASN1Dict([
-        ('id', ___MeasurementUpdate_protocolIEs__item__id),
-        ('criticality', ___MeasurementUpdate_protocolIEs__item__criticality),
-        ('value', ___MeasurementUpdate_protocolIEs__item__value),
+        (u'id', ___MeasurementUpdate_protocolIEs__item__id),
+        (u'criticality', ___MeasurementUpdate_protocolIEs__item__criticality),
+        (u'value', ___MeasurementUpdate_protocolIEs__item__value),
         ])
     __MeasurementUpdate_protocolIEs__item_._ext = None
     _MeasurementUpdate_protocolIEs._cont = __MeasurementUpdate_protocolIEs__item_
     _MeasurementUpdate_protocolIEs._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=65535)], ev=None, er=[])
     MeasurementUpdate._cont = ASN1Dict([
-        ('protocolIEs', _MeasurementUpdate_protocolIEs),
+        (u'protocolIEs', _MeasurementUpdate_protocolIEs),
         ])
     MeasurementUpdate._ext = []
     
     #-----< MeasurementUpdate-IEs >-----#
-    MeasurementUpdate_IEs = CLASS(name='MeasurementUpdate-IEs', mode=MODE_SET, typeref=ASN1RefType(('SLMAP-Containers', 'SLMAP-PROTOCOL-IES')))
-    _MeasurementUpdate_IEs_val_Value_0 = INT(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-IEs', 'ESMLC-MeasurementID')))
-    _MeasurementUpdate_IEs_val_Value_1 = SEQ(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-IEs', 'UL-RTOAMeasurementConfiguration')))
-    MeasurementUpdate_IEs._val = ASN1Set(rv=[dict([('id', 0), ('criticality', 'reject'), ('Value', _MeasurementUpdate_IEs_val_Value_0), ('presence', 'mandatory')]), dict([('id', 1), ('criticality', 'reject'), ('Value', _MeasurementUpdate_IEs_val_Value_1), ('presence', 'mandatory')])], rr=[], ev=[], er=[])
+    MeasurementUpdate_IEs = CLASS(name=u'MeasurementUpdate-IEs', mode=MODE_SET, typeref=ASN1RefType(('SLMAP-Containers', 'SLMAP-PROTOCOL-IES')))
+    _MeasurementUpdate_IEs_val_Value_0 = INT(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-IEs', 'ESMLC-MeasurementID')))
+    _MeasurementUpdate_IEs_val_Value_1 = SEQ(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-IEs', 'UL-RTOAMeasurementConfiguration')))
+    MeasurementUpdate_IEs._val = ASN1Set(rv=[dict([(u'id', 0), (u'criticality', u'reject'), (u'Value', _MeasurementUpdate_IEs_val_Value_0), (u'presence', u'mandatory')]), dict([(u'id', 1), (u'criticality', u'reject'), (u'Value', _MeasurementUpdate_IEs_val_Value_1), (u'presence', u'mandatory')])], rr=[], ev=[], er=[])
     
     #-----< ErrorIndication >-----#
-    ErrorIndication = SEQ(name='ErrorIndication', mode=MODE_TYPE)
-    _ErrorIndication_protocolIEs = SEQ_OF(name='protocolIEs', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('SLMAP-Containers', 'ProtocolIE-Container')))
+    ErrorIndication = SEQ(name=u'ErrorIndication', mode=MODE_TYPE)
+    _ErrorIndication_protocolIEs = SEQ_OF(name=u'protocolIEs', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('SLMAP-Containers', 'ProtocolIE-Container')))
     __ErrorIndication_protocolIEs__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-Containers', 'ProtocolIE-Field')))
-    ___ErrorIndication_protocolIEs__item__id = INT(name='id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('SLMAP-Containers', 'SLMAP-PROTOCOL-IES'), ['id']))
+    ___ErrorIndication_protocolIEs__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('SLMAP-Containers', 'SLMAP-PROTOCOL-IES'), [u'id']))
     ____ErrorIndication_protocolIEs__item__id_tab = CLASS(name='_tab_SLMAP-PROTOCOL-IES', mode=MODE_SET, typeref=ASN1RefType(('SLMAP-Containers', 'SLMAP-PROTOCOL-IES')))
-    _____ErrorIndication_protocolIEs__item__id_tab_val_Value_0 = CHOICE(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-IEs', 'Cause')))
-    _____ErrorIndication_protocolIEs__item__id_tab_val_Value_1 = SEQ(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-IEs', 'CriticalityDiagnostics')))
-    ____ErrorIndication_protocolIEs__item__id_tab._val = ASN1Set(rv=[dict([('id', 4), ('criticality', 'ignore'), ('Value', _____ErrorIndication_protocolIEs__item__id_tab_val_Value_0), ('presence', 'optional')]), dict([('id', 2), ('criticality', 'ignore'), ('Value', _____ErrorIndication_protocolIEs__item__id_tab_val_Value_1), ('presence', 'optional')])], rr=[], ev=None, er=[])
+    _____ErrorIndication_protocolIEs__item__id_tab_val_Value_0 = CHOICE(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-IEs', 'Cause')))
+    _____ErrorIndication_protocolIEs__item__id_tab_val_Value_1 = SEQ(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-IEs', 'CriticalityDiagnostics')))
+    ____ErrorIndication_protocolIEs__item__id_tab._val = ASN1Set(rv=[dict([(u'id', 4), (u'criticality', u'ignore'), (u'Value', _____ErrorIndication_protocolIEs__item__id_tab_val_Value_0), (u'presence', u'optional')]), dict([(u'id', 2), (u'criticality', u'ignore'), (u'Value', _____ErrorIndication_protocolIEs__item__id_tab_val_Value_1), (u'presence', u'optional')])], rr=[], ev=None, er=[])
     ___ErrorIndication_protocolIEs__item__id._const_tab = ____ErrorIndication_protocolIEs__item__id_tab
     ___ErrorIndication_protocolIEs__item__id._const_tab_at = None
-    ___ErrorIndication_protocolIEs__item__id._const_tab_id = 'id'
-    ___ErrorIndication_protocolIEs__item__criticality = ENUM(name='criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('SLMAP-Containers', 'SLMAP-PROTOCOL-IES'), ['criticality']))
+    ___ErrorIndication_protocolIEs__item__id._const_tab_id = u'id'
+    ___ErrorIndication_protocolIEs__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('SLMAP-Containers', 'SLMAP-PROTOCOL-IES'), [u'criticality']))
     ___ErrorIndication_protocolIEs__item__criticality._const_tab = ____ErrorIndication_protocolIEs__item__id_tab
-    ___ErrorIndication_protocolIEs__item__criticality._const_tab_at = ('..', 'id')
-    ___ErrorIndication_protocolIEs__item__criticality._const_tab_id = 'criticality'
-    ___ErrorIndication_protocolIEs__item__value = OPEN(name='value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('SLMAP-Containers', 'SLMAP-PROTOCOL-IES'), ['Value']))
+    ___ErrorIndication_protocolIEs__item__criticality._const_tab_at = ('..', u'id')
+    ___ErrorIndication_protocolIEs__item__criticality._const_tab_id = u'criticality'
+    ___ErrorIndication_protocolIEs__item__value = OPEN(name=u'value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('SLMAP-Containers', 'SLMAP-PROTOCOL-IES'), [u'Value']))
     ___ErrorIndication_protocolIEs__item__value._const_tab = ____ErrorIndication_protocolIEs__item__id_tab
-    ___ErrorIndication_protocolIEs__item__value._const_tab_at = ('..', 'id')
-    ___ErrorIndication_protocolIEs__item__value._const_tab_id = 'Value'
+    ___ErrorIndication_protocolIEs__item__value._const_tab_at = ('..', u'id')
+    ___ErrorIndication_protocolIEs__item__value._const_tab_id = u'Value'
     __ErrorIndication_protocolIEs__item_._cont = ASN1Dict([
-        ('id', ___ErrorIndication_protocolIEs__item__id),
-        ('criticality', ___ErrorIndication_protocolIEs__item__criticality),
-        ('value', ___ErrorIndication_protocolIEs__item__value),
+        (u'id', ___ErrorIndication_protocolIEs__item__id),
+        (u'criticality', ___ErrorIndication_protocolIEs__item__criticality),
+        (u'value', ___ErrorIndication_protocolIEs__item__value),
         ])
     __ErrorIndication_protocolIEs__item_._ext = None
     _ErrorIndication_protocolIEs._cont = __ErrorIndication_protocolIEs__item_
     _ErrorIndication_protocolIEs._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=65535)], ev=None, er=[])
     ErrorIndication._cont = ASN1Dict([
-        ('protocolIEs', _ErrorIndication_protocolIEs),
+        (u'protocolIEs', _ErrorIndication_protocolIEs),
         ])
     ErrorIndication._ext = []
     
     #-----< ErrorIndication-IEs >-----#
-    ErrorIndication_IEs = CLASS(name='ErrorIndication-IEs', mode=MODE_SET, typeref=ASN1RefType(('SLMAP-Containers', 'SLMAP-PROTOCOL-IES')))
-    _ErrorIndication_IEs_val_Value_0 = CHOICE(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-IEs', 'Cause')))
-    _ErrorIndication_IEs_val_Value_1 = SEQ(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-IEs', 'CriticalityDiagnostics')))
-    ErrorIndication_IEs._val = ASN1Set(rv=[dict([('id', 4), ('criticality', 'ignore'), ('Value', _ErrorIndication_IEs_val_Value_0), ('presence', 'optional')]), dict([('id', 2), ('criticality', 'ignore'), ('Value', _ErrorIndication_IEs_val_Value_1), ('presence', 'optional')])], rr=[], ev=[], er=[])
+    ErrorIndication_IEs = CLASS(name=u'ErrorIndication-IEs', mode=MODE_SET, typeref=ASN1RefType(('SLMAP-Containers', 'SLMAP-PROTOCOL-IES')))
+    _ErrorIndication_IEs_val_Value_0 = CHOICE(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-IEs', 'Cause')))
+    _ErrorIndication_IEs_val_Value_1 = SEQ(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-IEs', 'CriticalityDiagnostics')))
+    ErrorIndication_IEs._val = ASN1Set(rv=[dict([(u'id', 4), (u'criticality', u'ignore'), (u'Value', _ErrorIndication_IEs_val_Value_0), (u'presence', u'optional')]), dict([(u'id', 2), (u'criticality', u'ignore'), (u'Value', _ErrorIndication_IEs_val_Value_1), (u'presence', u'optional')])], rr=[], ev=[], er=[])
     
     #-----< PrivateMessage >-----#
-    PrivateMessage = SEQ(name='PrivateMessage', mode=MODE_TYPE)
-    _PrivateMessage_privateIEs = SEQ_OF(name='privateIEs', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('SLMAP-Containers', 'PrivateIE-Container')))
+    PrivateMessage = SEQ(name=u'PrivateMessage', mode=MODE_TYPE)
+    _PrivateMessage_privateIEs = SEQ_OF(name=u'privateIEs', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('SLMAP-Containers', 'PrivateIE-Container')))
     __PrivateMessage_privateIEs__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-Containers', 'PrivateIE-Field')))
-    ___PrivateMessage_privateIEs__item__id = CHOICE(name='id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('SLMAP-Containers', 'SLMAP-PRIVATE-IES'), ['id']))
+    ___PrivateMessage_privateIEs__item__id = CHOICE(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('SLMAP-Containers', 'SLMAP-PRIVATE-IES'), [u'id']))
     ____PrivateMessage_privateIEs__item__id_tab = CLASS(name='_tab_SLMAP-PRIVATE-IES', mode=MODE_SET, typeref=ASN1RefType(('SLMAP-Containers', 'SLMAP-PRIVATE-IES')))
     ____PrivateMessage_privateIEs__item__id_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___PrivateMessage_privateIEs__item__id._const_tab = ____PrivateMessage_privateIEs__item__id_tab
     ___PrivateMessage_privateIEs__item__id._const_tab_at = None
-    ___PrivateMessage_privateIEs__item__id._const_tab_id = 'id'
-    ___PrivateMessage_privateIEs__item__criticality = ENUM(name='criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('SLMAP-Containers', 'SLMAP-PRIVATE-IES'), ['criticality']))
+    ___PrivateMessage_privateIEs__item__id._const_tab_id = u'id'
+    ___PrivateMessage_privateIEs__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('SLMAP-Containers', 'SLMAP-PRIVATE-IES'), [u'criticality']))
     ____PrivateMessage_privateIEs__item__criticality_tab = CLASS(name='_tab_SLMAP-PRIVATE-IES', mode=MODE_SET, typeref=ASN1RefType(('SLMAP-Containers', 'SLMAP-PRIVATE-IES')))
     ____PrivateMessage_privateIEs__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___PrivateMessage_privateIEs__item__criticality._const_tab = ____PrivateMessage_privateIEs__item__criticality_tab
-    ___PrivateMessage_privateIEs__item__criticality._const_tab_at = ('..', 'id')
-    ___PrivateMessage_privateIEs__item__criticality._const_tab_id = 'criticality'
-    ___PrivateMessage_privateIEs__item__value = OPEN(name='value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('SLMAP-Containers', 'SLMAP-PRIVATE-IES'), ['Value']))
+    ___PrivateMessage_privateIEs__item__criticality._const_tab_at = ('..', u'id')
+    ___PrivateMessage_privateIEs__item__criticality._const_tab_id = u'criticality'
+    ___PrivateMessage_privateIEs__item__value = OPEN(name=u'value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('SLMAP-Containers', 'SLMAP-PRIVATE-IES'), [u'Value']))
     ____PrivateMessage_privateIEs__item__value_tab = CLASS(name='_tab_SLMAP-PRIVATE-IES', mode=MODE_SET, typeref=ASN1RefType(('SLMAP-Containers', 'SLMAP-PRIVATE-IES')))
     ____PrivateMessage_privateIEs__item__value_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___PrivateMessage_privateIEs__item__value._const_tab = ____PrivateMessage_privateIEs__item__value_tab
-    ___PrivateMessage_privateIEs__item__value._const_tab_at = ('..', 'id')
-    ___PrivateMessage_privateIEs__item__value._const_tab_id = 'Value'
+    ___PrivateMessage_privateIEs__item__value._const_tab_at = ('..', u'id')
+    ___PrivateMessage_privateIEs__item__value._const_tab_id = u'Value'
     __PrivateMessage_privateIEs__item_._cont = ASN1Dict([
-        ('id', ___PrivateMessage_privateIEs__item__id),
-        ('criticality', ___PrivateMessage_privateIEs__item__criticality),
-        ('value', ___PrivateMessage_privateIEs__item__value),
+        (u'id', ___PrivateMessage_privateIEs__item__id),
+        (u'criticality', ___PrivateMessage_privateIEs__item__criticality),
+        (u'value', ___PrivateMessage_privateIEs__item__value),
         ])
     __PrivateMessage_privateIEs__item_._ext = None
     _PrivateMessage_privateIEs._cont = __PrivateMessage_privateIEs__item_
     _PrivateMessage_privateIEs._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=65535)], ev=None, er=[])
     PrivateMessage._cont = ASN1Dict([
-        ('privateIEs', _PrivateMessage_privateIEs),
+        (u'privateIEs', _PrivateMessage_privateIEs),
         ])
     PrivateMessage._ext = []
     
     #-----< PrivateMessage-IEs >-----#
-    PrivateMessage_IEs = CLASS(name='PrivateMessage-IEs', mode=MODE_SET, typeref=ASN1RefType(('SLMAP-Containers', 'SLMAP-PRIVATE-IES')))
+    PrivateMessage_IEs = CLASS(name=u'PrivateMessage-IEs', mode=MODE_SET, typeref=ASN1RefType(('SLMAP-Containers', 'SLMAP-PRIVATE-IES')))
     PrivateMessage_IEs._val = ASN1Set(rv=[], rr=[], ev=[], er=[])
     
     _all_ = [
@@ -1715,276 +1715,276 @@ class SLMAP_PDU_Contents:
 
 class SLMAP_PDU_Descriptions:
 
-    _name_  = 'SLMAP-PDU-Descriptions'
+    _name_  = u'SLMAP-PDU-Descriptions'
     _oid_   = [0, 4, 0, 0, 21, 3, 50, 1, 0]
     
     _obj_ = [
-        'SLMAP-ELEMENTARY-PROCEDURE',
-        'SLMAP-PDU',
-        'InitiatingMessage',
-        'SuccessfulOutcome',
-        'UnsuccessfulOutcome',
-        'SLMAP-ELEMENTARY-PROCEDURES',
-        'SLMAP-ELEMENTARY-PROCEDURES-CLASS-1',
-        'SLMAP-ELEMENTARY-PROCEDURES-CLASS-2',
-        'measurement',
-        'slmSetup',
-        'reset',
-        'measurementUpdate',
-        'measurementAbort',
-        'errorIndication',
-        'privateMessage',
+        u'SLMAP-ELEMENTARY-PROCEDURE',
+        u'SLMAP-PDU',
+        u'InitiatingMessage',
+        u'SuccessfulOutcome',
+        u'UnsuccessfulOutcome',
+        u'SLMAP-ELEMENTARY-PROCEDURES',
+        u'SLMAP-ELEMENTARY-PROCEDURES-CLASS-1',
+        u'SLMAP-ELEMENTARY-PROCEDURES-CLASS-2',
+        u'measurement',
+        u'slmSetup',
+        u'reset',
+        u'measurementUpdate',
+        u'measurementAbort',
+        u'errorIndication',
+        u'privateMessage',
         ]
     _type_ = [
-        'SLMAP-ELEMENTARY-PROCEDURE',
-        'SLMAP-PDU',
-        'InitiatingMessage',
-        'SuccessfulOutcome',
-        'UnsuccessfulOutcome',
+        u'SLMAP-ELEMENTARY-PROCEDURE',
+        u'SLMAP-PDU',
+        u'InitiatingMessage',
+        u'SuccessfulOutcome',
+        u'UnsuccessfulOutcome',
         ]
     _set_ = [
-        'SLMAP-ELEMENTARY-PROCEDURES',
-        'SLMAP-ELEMENTARY-PROCEDURES-CLASS-1',
-        'SLMAP-ELEMENTARY-PROCEDURES-CLASS-2',
+        u'SLMAP-ELEMENTARY-PROCEDURES',
+        u'SLMAP-ELEMENTARY-PROCEDURES-CLASS-1',
+        u'SLMAP-ELEMENTARY-PROCEDURES-CLASS-2',
         ]
     _val_ = [
-        'measurement',
-        'slmSetup',
-        'reset',
-        'measurementUpdate',
-        'measurementAbort',
-        'errorIndication',
-        'privateMessage',
+        u'measurement',
+        u'slmSetup',
+        u'reset',
+        u'measurementUpdate',
+        u'measurementAbort',
+        u'errorIndication',
+        u'privateMessage',
         ]
     _class_ = [
-        'SLMAP-ELEMENTARY-PROCEDURE',
-        'SLMAP-ELEMENTARY-PROCEDURES',
-        'SLMAP-ELEMENTARY-PROCEDURES-CLASS-1',
-        'SLMAP-ELEMENTARY-PROCEDURES-CLASS-2',
-        'measurement',
-        'slmSetup',
-        'reset',
-        'measurementUpdate',
-        'measurementAbort',
-        'errorIndication',
-        'privateMessage',
+        u'SLMAP-ELEMENTARY-PROCEDURE',
+        u'SLMAP-ELEMENTARY-PROCEDURES',
+        u'SLMAP-ELEMENTARY-PROCEDURES-CLASS-1',
+        u'SLMAP-ELEMENTARY-PROCEDURES-CLASS-2',
+        u'measurement',
+        u'slmSetup',
+        u'reset',
+        u'measurementUpdate',
+        u'measurementAbort',
+        u'errorIndication',
+        u'privateMessage',
         ]
     _param_ = [
         ]
     
     #-----< SLMAP-ELEMENTARY-PROCEDURE >-----#
-    SLMAP_ELEMENTARY_PROCEDURE = CLASS(name='SLMAP-ELEMENTARY-PROCEDURE', mode=MODE_TYPE)
-    _SLMAP_ELEMENTARY_PROCEDURE_InitiatingMessage = OPEN(name='InitiatingMessage', mode=MODE_TYPE)
-    _SLMAP_ELEMENTARY_PROCEDURE_SuccessfulOutcome = OPEN(name='SuccessfulOutcome', mode=MODE_TYPE, opt=True)
-    _SLMAP_ELEMENTARY_PROCEDURE_UnsuccessfulOutcome = OPEN(name='UnsuccessfulOutcome', mode=MODE_TYPE, opt=True)
-    _SLMAP_ELEMENTARY_PROCEDURE_procedureCode = INT(name='procedureCode', mode=MODE_VALUE, typeref=ASN1RefType(('SLMAP-CommonDataTypes', 'ProcedureCode')), uniq=True)
-    _SLMAP_ELEMENTARY_PROCEDURE_criticality = ENUM(name='criticality', mode=MODE_VALUE, typeref=ASN1RefType(('SLMAP-CommonDataTypes', 'Criticality')), default='ignore')
+    SLMAP_ELEMENTARY_PROCEDURE = CLASS(name=u'SLMAP-ELEMENTARY-PROCEDURE', mode=MODE_TYPE)
+    _SLMAP_ELEMENTARY_PROCEDURE_InitiatingMessage = OPEN(name=u'InitiatingMessage', mode=MODE_TYPE)
+    _SLMAP_ELEMENTARY_PROCEDURE_SuccessfulOutcome = OPEN(name=u'SuccessfulOutcome', mode=MODE_TYPE, opt=True)
+    _SLMAP_ELEMENTARY_PROCEDURE_UnsuccessfulOutcome = OPEN(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, opt=True)
+    _SLMAP_ELEMENTARY_PROCEDURE_procedureCode = INT(name=u'procedureCode', mode=MODE_VALUE, typeref=ASN1RefType(('SLMAP-CommonDataTypes', 'ProcedureCode')), uniq=True)
+    _SLMAP_ELEMENTARY_PROCEDURE_criticality = ENUM(name=u'criticality', mode=MODE_VALUE, typeref=ASN1RefType(('SLMAP-CommonDataTypes', 'Criticality')), default=u'ignore')
     SLMAP_ELEMENTARY_PROCEDURE._cont = ASN1Dict([
-        ('InitiatingMessage', _SLMAP_ELEMENTARY_PROCEDURE_InitiatingMessage),
-        ('SuccessfulOutcome', _SLMAP_ELEMENTARY_PROCEDURE_SuccessfulOutcome),
-        ('UnsuccessfulOutcome', _SLMAP_ELEMENTARY_PROCEDURE_UnsuccessfulOutcome),
-        ('procedureCode', _SLMAP_ELEMENTARY_PROCEDURE_procedureCode),
-        ('criticality', _SLMAP_ELEMENTARY_PROCEDURE_criticality),
+        (u'InitiatingMessage', _SLMAP_ELEMENTARY_PROCEDURE_InitiatingMessage),
+        (u'SuccessfulOutcome', _SLMAP_ELEMENTARY_PROCEDURE_SuccessfulOutcome),
+        (u'UnsuccessfulOutcome', _SLMAP_ELEMENTARY_PROCEDURE_UnsuccessfulOutcome),
+        (u'procedureCode', _SLMAP_ELEMENTARY_PROCEDURE_procedureCode),
+        (u'criticality', _SLMAP_ELEMENTARY_PROCEDURE_criticality),
         ])
     
     #-----< SLMAP-PDU >-----#
-    SLMAP_PDU = CHOICE(name='SLMAP-PDU', mode=MODE_TYPE)
-    _SLMAP_PDU_initiatingMessage = SEQ(name='initiatingMessage', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('SLMAP-PDU-Descriptions', 'InitiatingMessage')))
-    _SLMAP_PDU_successfulOutcome = SEQ(name='successfulOutcome', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('SLMAP-PDU-Descriptions', 'SuccessfulOutcome')))
-    _SLMAP_PDU_unsuccessfulOutcome = SEQ(name='unsuccessfulOutcome', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('SLMAP-PDU-Descriptions', 'UnsuccessfulOutcome')))
+    SLMAP_PDU = CHOICE(name=u'SLMAP-PDU', mode=MODE_TYPE)
+    _SLMAP_PDU_initiatingMessage = SEQ(name=u'initiatingMessage', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('SLMAP-PDU-Descriptions', 'InitiatingMessage')))
+    _SLMAP_PDU_successfulOutcome = SEQ(name=u'successfulOutcome', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('SLMAP-PDU-Descriptions', 'SuccessfulOutcome')))
+    _SLMAP_PDU_unsuccessfulOutcome = SEQ(name=u'unsuccessfulOutcome', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('SLMAP-PDU-Descriptions', 'UnsuccessfulOutcome')))
     SLMAP_PDU._cont = ASN1Dict([
-        ('initiatingMessage', _SLMAP_PDU_initiatingMessage),
-        ('successfulOutcome', _SLMAP_PDU_successfulOutcome),
-        ('unsuccessfulOutcome', _SLMAP_PDU_unsuccessfulOutcome),
+        (u'initiatingMessage', _SLMAP_PDU_initiatingMessage),
+        (u'successfulOutcome', _SLMAP_PDU_successfulOutcome),
+        (u'unsuccessfulOutcome', _SLMAP_PDU_unsuccessfulOutcome),
         ])
     SLMAP_PDU._ext = []
     
     #-----< InitiatingMessage >-----#
-    InitiatingMessage = SEQ(name='InitiatingMessage', mode=MODE_TYPE)
-    _InitiatingMessage_procedureCode = INT(name='procedureCode', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('SLMAP-PDU-Descriptions', 'SLMAP-ELEMENTARY-PROCEDURE'), ['procedureCode']))
+    InitiatingMessage = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE)
+    _InitiatingMessage_procedureCode = INT(name=u'procedureCode', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('SLMAP-PDU-Descriptions', 'SLMAP-ELEMENTARY-PROCEDURE'), [u'procedureCode']))
     __InitiatingMessage_procedureCode_tab = CLASS(name='_tab_SLMAP-ELEMENTARY-PROCEDURE', mode=MODE_SET, typeref=ASN1RefType(('SLMAP-PDU-Descriptions', 'SLMAP-ELEMENTARY-PROCEDURE')))
-    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_0 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-PDU-Contents', 'MeasurementRequest')))
-    ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_0 = SEQ(name='SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-PDU-Contents', 'MeasurementResponse')))
-    ___InitiatingMessage_procedureCode_tab_val_UnsuccessfulOutcome_0 = SEQ(name='UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-PDU-Contents', 'MeasurementFailure')))
-    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_1 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-PDU-Contents', 'SLMSetupRequest')))
-    ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_1 = SEQ(name='SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-PDU-Contents', 'SLMSetupResponse')))
-    ___InitiatingMessage_procedureCode_tab_val_UnsuccessfulOutcome_1 = SEQ(name='UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-PDU-Contents', 'SLMSetupFailure')))
-    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_2 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-PDU-Contents', 'ResetRequest')))
-    ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_2 = SEQ(name='SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-PDU-Contents', 'ResetAcknowledge')))
-    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_3 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-PDU-Contents', 'MeasurementUpdate')))
-    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_4 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-PDU-Contents', 'MeasurementAbort')))
-    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_5 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-PDU-Contents', 'ErrorIndication')))
-    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_6 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-PDU-Contents', 'PrivateMessage')))
-    __InitiatingMessage_procedureCode_tab._val = ASN1Set(rv=[dict([('InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_0), ('SuccessfulOutcome', ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_0), ('UnsuccessfulOutcome', ___InitiatingMessage_procedureCode_tab_val_UnsuccessfulOutcome_0), ('procedureCode', 2), ('criticality', 'reject')]), dict([('InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_1), ('SuccessfulOutcome', ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_1), ('UnsuccessfulOutcome', ___InitiatingMessage_procedureCode_tab_val_UnsuccessfulOutcome_1), ('procedureCode', 3), ('criticality', 'reject')]), dict([('InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_2), ('SuccessfulOutcome', ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_2), ('procedureCode', 4), ('criticality', 'reject')]), dict([('InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_3), ('procedureCode', 5), ('criticality', 'ignore')]), dict([('InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_4), ('procedureCode', 6), ('criticality', 'ignore')]), dict([('InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_5), ('procedureCode', 0), ('criticality', 'ignore')]), dict([('InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_6), ('procedureCode', 1), ('criticality', 'ignore')])], rr=[], ev=None, er=[])
+    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_0 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-PDU-Contents', 'MeasurementRequest')))
+    ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_0 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-PDU-Contents', 'MeasurementResponse')))
+    ___InitiatingMessage_procedureCode_tab_val_UnsuccessfulOutcome_0 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-PDU-Contents', 'MeasurementFailure')))
+    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_1 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-PDU-Contents', 'SLMSetupRequest')))
+    ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_1 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-PDU-Contents', 'SLMSetupResponse')))
+    ___InitiatingMessage_procedureCode_tab_val_UnsuccessfulOutcome_1 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-PDU-Contents', 'SLMSetupFailure')))
+    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_2 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-PDU-Contents', 'ResetRequest')))
+    ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_2 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-PDU-Contents', 'ResetAcknowledge')))
+    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_3 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-PDU-Contents', 'MeasurementUpdate')))
+    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_4 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-PDU-Contents', 'MeasurementAbort')))
+    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_5 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-PDU-Contents', 'ErrorIndication')))
+    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_6 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-PDU-Contents', 'PrivateMessage')))
+    __InitiatingMessage_procedureCode_tab._val = ASN1Set(rv=[dict([(u'InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_0), (u'SuccessfulOutcome', ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_0), (u'UnsuccessfulOutcome', ___InitiatingMessage_procedureCode_tab_val_UnsuccessfulOutcome_0), (u'procedureCode', 2), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_1), (u'SuccessfulOutcome', ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_1), (u'UnsuccessfulOutcome', ___InitiatingMessage_procedureCode_tab_val_UnsuccessfulOutcome_1), (u'procedureCode', 3), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_2), (u'SuccessfulOutcome', ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_2), (u'procedureCode', 4), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_3), (u'procedureCode', 5), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_4), (u'procedureCode', 6), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_5), (u'procedureCode', 0), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_6), (u'procedureCode', 1), (u'criticality', u'ignore')])], rr=[], ev=None, er=[])
     _InitiatingMessage_procedureCode._const_tab = __InitiatingMessage_procedureCode_tab
     _InitiatingMessage_procedureCode._const_tab_at = None
-    _InitiatingMessage_procedureCode._const_tab_id = 'procedureCode'
-    _InitiatingMessage_criticality = ENUM(name='criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('SLMAP-PDU-Descriptions', 'SLMAP-ELEMENTARY-PROCEDURE'), ['criticality']))
+    _InitiatingMessage_procedureCode._const_tab_id = u'procedureCode'
+    _InitiatingMessage_criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('SLMAP-PDU-Descriptions', 'SLMAP-ELEMENTARY-PROCEDURE'), [u'criticality']))
     _InitiatingMessage_criticality._const_tab = __InitiatingMessage_procedureCode_tab
-    _InitiatingMessage_criticality._const_tab_at = ('..', 'procedureCode')
-    _InitiatingMessage_criticality._const_tab_id = 'criticality'
-    _InitiatingMessage_slmapTransactionID = INT(name='slmapTransactionID', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('SLMAP-CommonDataTypes', 'SLMAPTransactionID')))
-    _InitiatingMessage_value = OPEN(name='value', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('SLMAP-PDU-Descriptions', 'SLMAP-ELEMENTARY-PROCEDURE'), ['InitiatingMessage']))
+    _InitiatingMessage_criticality._const_tab_at = ('..', u'procedureCode')
+    _InitiatingMessage_criticality._const_tab_id = u'criticality'
+    _InitiatingMessage_slmapTransactionID = INT(name=u'slmapTransactionID', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('SLMAP-CommonDataTypes', 'SLMAPTransactionID')))
+    _InitiatingMessage_value = OPEN(name=u'value', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('SLMAP-PDU-Descriptions', 'SLMAP-ELEMENTARY-PROCEDURE'), [u'InitiatingMessage']))
     _InitiatingMessage_value._const_tab = __InitiatingMessage_procedureCode_tab
-    _InitiatingMessage_value._const_tab_at = ('..', 'procedureCode')
-    _InitiatingMessage_value._const_tab_id = 'InitiatingMessage'
+    _InitiatingMessage_value._const_tab_at = ('..', u'procedureCode')
+    _InitiatingMessage_value._const_tab_id = u'InitiatingMessage'
     InitiatingMessage._cont = ASN1Dict([
-        ('procedureCode', _InitiatingMessage_procedureCode),
-        ('criticality', _InitiatingMessage_criticality),
-        ('slmapTransactionID', _InitiatingMessage_slmapTransactionID),
-        ('value', _InitiatingMessage_value),
+        (u'procedureCode', _InitiatingMessage_procedureCode),
+        (u'criticality', _InitiatingMessage_criticality),
+        (u'slmapTransactionID', _InitiatingMessage_slmapTransactionID),
+        (u'value', _InitiatingMessage_value),
         ])
     InitiatingMessage._ext = None
     
     #-----< SuccessfulOutcome >-----#
-    SuccessfulOutcome = SEQ(name='SuccessfulOutcome', mode=MODE_TYPE)
-    _SuccessfulOutcome_procedureCode = INT(name='procedureCode', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('SLMAP-PDU-Descriptions', 'SLMAP-ELEMENTARY-PROCEDURE'), ['procedureCode']))
+    SuccessfulOutcome = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE)
+    _SuccessfulOutcome_procedureCode = INT(name=u'procedureCode', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('SLMAP-PDU-Descriptions', 'SLMAP-ELEMENTARY-PROCEDURE'), [u'procedureCode']))
     __SuccessfulOutcome_procedureCode_tab = CLASS(name='_tab_SLMAP-ELEMENTARY-PROCEDURE', mode=MODE_SET, typeref=ASN1RefType(('SLMAP-PDU-Descriptions', 'SLMAP-ELEMENTARY-PROCEDURE')))
-    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_0 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-PDU-Contents', 'MeasurementRequest')))
-    ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_0 = SEQ(name='SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-PDU-Contents', 'MeasurementResponse')))
-    ___SuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_0 = SEQ(name='UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-PDU-Contents', 'MeasurementFailure')))
-    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_1 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-PDU-Contents', 'SLMSetupRequest')))
-    ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_1 = SEQ(name='SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-PDU-Contents', 'SLMSetupResponse')))
-    ___SuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_1 = SEQ(name='UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-PDU-Contents', 'SLMSetupFailure')))
-    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_2 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-PDU-Contents', 'ResetRequest')))
-    ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_2 = SEQ(name='SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-PDU-Contents', 'ResetAcknowledge')))
-    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_3 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-PDU-Contents', 'MeasurementUpdate')))
-    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_4 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-PDU-Contents', 'MeasurementAbort')))
-    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_5 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-PDU-Contents', 'ErrorIndication')))
-    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_6 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-PDU-Contents', 'PrivateMessage')))
-    __SuccessfulOutcome_procedureCode_tab._val = ASN1Set(rv=[dict([('InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_0), ('SuccessfulOutcome', ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_0), ('UnsuccessfulOutcome', ___SuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_0), ('procedureCode', 2), ('criticality', 'reject')]), dict([('InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_1), ('SuccessfulOutcome', ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_1), ('UnsuccessfulOutcome', ___SuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_1), ('procedureCode', 3), ('criticality', 'reject')]), dict([('InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_2), ('SuccessfulOutcome', ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_2), ('procedureCode', 4), ('criticality', 'reject')]), dict([('InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_3), ('procedureCode', 5), ('criticality', 'ignore')]), dict([('InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_4), ('procedureCode', 6), ('criticality', 'ignore')]), dict([('InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_5), ('procedureCode', 0), ('criticality', 'ignore')]), dict([('InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_6), ('procedureCode', 1), ('criticality', 'ignore')])], rr=[], ev=None, er=[])
+    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_0 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-PDU-Contents', 'MeasurementRequest')))
+    ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_0 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-PDU-Contents', 'MeasurementResponse')))
+    ___SuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_0 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-PDU-Contents', 'MeasurementFailure')))
+    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_1 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-PDU-Contents', 'SLMSetupRequest')))
+    ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_1 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-PDU-Contents', 'SLMSetupResponse')))
+    ___SuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_1 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-PDU-Contents', 'SLMSetupFailure')))
+    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_2 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-PDU-Contents', 'ResetRequest')))
+    ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_2 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-PDU-Contents', 'ResetAcknowledge')))
+    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_3 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-PDU-Contents', 'MeasurementUpdate')))
+    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_4 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-PDU-Contents', 'MeasurementAbort')))
+    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_5 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-PDU-Contents', 'ErrorIndication')))
+    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_6 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-PDU-Contents', 'PrivateMessage')))
+    __SuccessfulOutcome_procedureCode_tab._val = ASN1Set(rv=[dict([(u'InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_0), (u'SuccessfulOutcome', ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_0), (u'UnsuccessfulOutcome', ___SuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_0), (u'procedureCode', 2), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_1), (u'SuccessfulOutcome', ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_1), (u'UnsuccessfulOutcome', ___SuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_1), (u'procedureCode', 3), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_2), (u'SuccessfulOutcome', ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_2), (u'procedureCode', 4), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_3), (u'procedureCode', 5), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_4), (u'procedureCode', 6), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_5), (u'procedureCode', 0), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_6), (u'procedureCode', 1), (u'criticality', u'ignore')])], rr=[], ev=None, er=[])
     _SuccessfulOutcome_procedureCode._const_tab = __SuccessfulOutcome_procedureCode_tab
     _SuccessfulOutcome_procedureCode._const_tab_at = None
-    _SuccessfulOutcome_procedureCode._const_tab_id = 'procedureCode'
-    _SuccessfulOutcome_criticality = ENUM(name='criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('SLMAP-PDU-Descriptions', 'SLMAP-ELEMENTARY-PROCEDURE'), ['criticality']))
+    _SuccessfulOutcome_procedureCode._const_tab_id = u'procedureCode'
+    _SuccessfulOutcome_criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('SLMAP-PDU-Descriptions', 'SLMAP-ELEMENTARY-PROCEDURE'), [u'criticality']))
     _SuccessfulOutcome_criticality._const_tab = __SuccessfulOutcome_procedureCode_tab
-    _SuccessfulOutcome_criticality._const_tab_at = ('..', 'procedureCode')
-    _SuccessfulOutcome_criticality._const_tab_id = 'criticality'
-    _SuccessfulOutcome_slmapTransactionID = INT(name='slmapTransactionID', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('SLMAP-CommonDataTypes', 'SLMAPTransactionID')))
-    _SuccessfulOutcome_value = OPEN(name='value', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('SLMAP-PDU-Descriptions', 'SLMAP-ELEMENTARY-PROCEDURE'), ['SuccessfulOutcome']))
+    _SuccessfulOutcome_criticality._const_tab_at = ('..', u'procedureCode')
+    _SuccessfulOutcome_criticality._const_tab_id = u'criticality'
+    _SuccessfulOutcome_slmapTransactionID = INT(name=u'slmapTransactionID', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('SLMAP-CommonDataTypes', 'SLMAPTransactionID')))
+    _SuccessfulOutcome_value = OPEN(name=u'value', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('SLMAP-PDU-Descriptions', 'SLMAP-ELEMENTARY-PROCEDURE'), [u'SuccessfulOutcome']))
     _SuccessfulOutcome_value._const_tab = __SuccessfulOutcome_procedureCode_tab
-    _SuccessfulOutcome_value._const_tab_at = ('..', 'procedureCode')
-    _SuccessfulOutcome_value._const_tab_id = 'SuccessfulOutcome'
+    _SuccessfulOutcome_value._const_tab_at = ('..', u'procedureCode')
+    _SuccessfulOutcome_value._const_tab_id = u'SuccessfulOutcome'
     SuccessfulOutcome._cont = ASN1Dict([
-        ('procedureCode', _SuccessfulOutcome_procedureCode),
-        ('criticality', _SuccessfulOutcome_criticality),
-        ('slmapTransactionID', _SuccessfulOutcome_slmapTransactionID),
-        ('value', _SuccessfulOutcome_value),
+        (u'procedureCode', _SuccessfulOutcome_procedureCode),
+        (u'criticality', _SuccessfulOutcome_criticality),
+        (u'slmapTransactionID', _SuccessfulOutcome_slmapTransactionID),
+        (u'value', _SuccessfulOutcome_value),
         ])
     SuccessfulOutcome._ext = None
     
     #-----< UnsuccessfulOutcome >-----#
-    UnsuccessfulOutcome = SEQ(name='UnsuccessfulOutcome', mode=MODE_TYPE)
-    _UnsuccessfulOutcome_procedureCode = INT(name='procedureCode', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('SLMAP-PDU-Descriptions', 'SLMAP-ELEMENTARY-PROCEDURE'), ['procedureCode']))
+    UnsuccessfulOutcome = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE)
+    _UnsuccessfulOutcome_procedureCode = INT(name=u'procedureCode', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('SLMAP-PDU-Descriptions', 'SLMAP-ELEMENTARY-PROCEDURE'), [u'procedureCode']))
     __UnsuccessfulOutcome_procedureCode_tab = CLASS(name='_tab_SLMAP-ELEMENTARY-PROCEDURE', mode=MODE_SET, typeref=ASN1RefType(('SLMAP-PDU-Descriptions', 'SLMAP-ELEMENTARY-PROCEDURE')))
-    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_0 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-PDU-Contents', 'MeasurementRequest')))
-    ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_0 = SEQ(name='SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-PDU-Contents', 'MeasurementResponse')))
-    ___UnsuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_0 = SEQ(name='UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-PDU-Contents', 'MeasurementFailure')))
-    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_1 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-PDU-Contents', 'SLMSetupRequest')))
-    ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_1 = SEQ(name='SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-PDU-Contents', 'SLMSetupResponse')))
-    ___UnsuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_1 = SEQ(name='UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-PDU-Contents', 'SLMSetupFailure')))
-    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_2 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-PDU-Contents', 'ResetRequest')))
-    ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_2 = SEQ(name='SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-PDU-Contents', 'ResetAcknowledge')))
-    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_3 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-PDU-Contents', 'MeasurementUpdate')))
-    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_4 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-PDU-Contents', 'MeasurementAbort')))
-    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_5 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-PDU-Contents', 'ErrorIndication')))
-    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_6 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-PDU-Contents', 'PrivateMessage')))
-    __UnsuccessfulOutcome_procedureCode_tab._val = ASN1Set(rv=[dict([('InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_0), ('SuccessfulOutcome', ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_0), ('UnsuccessfulOutcome', ___UnsuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_0), ('procedureCode', 2), ('criticality', 'reject')]), dict([('InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_1), ('SuccessfulOutcome', ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_1), ('UnsuccessfulOutcome', ___UnsuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_1), ('procedureCode', 3), ('criticality', 'reject')]), dict([('InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_2), ('SuccessfulOutcome', ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_2), ('procedureCode', 4), ('criticality', 'reject')]), dict([('InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_3), ('procedureCode', 5), ('criticality', 'ignore')]), dict([('InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_4), ('procedureCode', 6), ('criticality', 'ignore')]), dict([('InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_5), ('procedureCode', 0), ('criticality', 'ignore')]), dict([('InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_6), ('procedureCode', 1), ('criticality', 'ignore')])], rr=[], ev=None, er=[])
+    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_0 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-PDU-Contents', 'MeasurementRequest')))
+    ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_0 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-PDU-Contents', 'MeasurementResponse')))
+    ___UnsuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_0 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-PDU-Contents', 'MeasurementFailure')))
+    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_1 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-PDU-Contents', 'SLMSetupRequest')))
+    ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_1 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-PDU-Contents', 'SLMSetupResponse')))
+    ___UnsuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_1 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-PDU-Contents', 'SLMSetupFailure')))
+    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_2 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-PDU-Contents', 'ResetRequest')))
+    ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_2 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-PDU-Contents', 'ResetAcknowledge')))
+    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_3 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-PDU-Contents', 'MeasurementUpdate')))
+    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_4 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-PDU-Contents', 'MeasurementAbort')))
+    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_5 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-PDU-Contents', 'ErrorIndication')))
+    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_6 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-PDU-Contents', 'PrivateMessage')))
+    __UnsuccessfulOutcome_procedureCode_tab._val = ASN1Set(rv=[dict([(u'InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_0), (u'SuccessfulOutcome', ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_0), (u'UnsuccessfulOutcome', ___UnsuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_0), (u'procedureCode', 2), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_1), (u'SuccessfulOutcome', ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_1), (u'UnsuccessfulOutcome', ___UnsuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_1), (u'procedureCode', 3), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_2), (u'SuccessfulOutcome', ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_2), (u'procedureCode', 4), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_3), (u'procedureCode', 5), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_4), (u'procedureCode', 6), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_5), (u'procedureCode', 0), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_6), (u'procedureCode', 1), (u'criticality', u'ignore')])], rr=[], ev=None, er=[])
     _UnsuccessfulOutcome_procedureCode._const_tab = __UnsuccessfulOutcome_procedureCode_tab
     _UnsuccessfulOutcome_procedureCode._const_tab_at = None
-    _UnsuccessfulOutcome_procedureCode._const_tab_id = 'procedureCode'
-    _UnsuccessfulOutcome_criticality = ENUM(name='criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('SLMAP-PDU-Descriptions', 'SLMAP-ELEMENTARY-PROCEDURE'), ['criticality']))
+    _UnsuccessfulOutcome_procedureCode._const_tab_id = u'procedureCode'
+    _UnsuccessfulOutcome_criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('SLMAP-PDU-Descriptions', 'SLMAP-ELEMENTARY-PROCEDURE'), [u'criticality']))
     _UnsuccessfulOutcome_criticality._const_tab = __UnsuccessfulOutcome_procedureCode_tab
-    _UnsuccessfulOutcome_criticality._const_tab_at = ('..', 'procedureCode')
-    _UnsuccessfulOutcome_criticality._const_tab_id = 'criticality'
-    _UnsuccessfulOutcome_slmapTransactionID = INT(name='slmapTransactionID', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('SLMAP-CommonDataTypes', 'SLMAPTransactionID')))
-    _UnsuccessfulOutcome_value = OPEN(name='value', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('SLMAP-PDU-Descriptions', 'SLMAP-ELEMENTARY-PROCEDURE'), ['UnsuccessfulOutcome']))
+    _UnsuccessfulOutcome_criticality._const_tab_at = ('..', u'procedureCode')
+    _UnsuccessfulOutcome_criticality._const_tab_id = u'criticality'
+    _UnsuccessfulOutcome_slmapTransactionID = INT(name=u'slmapTransactionID', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('SLMAP-CommonDataTypes', 'SLMAPTransactionID')))
+    _UnsuccessfulOutcome_value = OPEN(name=u'value', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('SLMAP-PDU-Descriptions', 'SLMAP-ELEMENTARY-PROCEDURE'), [u'UnsuccessfulOutcome']))
     _UnsuccessfulOutcome_value._const_tab = __UnsuccessfulOutcome_procedureCode_tab
-    _UnsuccessfulOutcome_value._const_tab_at = ('..', 'procedureCode')
-    _UnsuccessfulOutcome_value._const_tab_id = 'UnsuccessfulOutcome'
+    _UnsuccessfulOutcome_value._const_tab_at = ('..', u'procedureCode')
+    _UnsuccessfulOutcome_value._const_tab_id = u'UnsuccessfulOutcome'
     UnsuccessfulOutcome._cont = ASN1Dict([
-        ('procedureCode', _UnsuccessfulOutcome_procedureCode),
-        ('criticality', _UnsuccessfulOutcome_criticality),
-        ('slmapTransactionID', _UnsuccessfulOutcome_slmapTransactionID),
-        ('value', _UnsuccessfulOutcome_value),
+        (u'procedureCode', _UnsuccessfulOutcome_procedureCode),
+        (u'criticality', _UnsuccessfulOutcome_criticality),
+        (u'slmapTransactionID', _UnsuccessfulOutcome_slmapTransactionID),
+        (u'value', _UnsuccessfulOutcome_value),
         ])
     UnsuccessfulOutcome._ext = None
     
     #-----< SLMAP-ELEMENTARY-PROCEDURES >-----#
-    SLMAP_ELEMENTARY_PROCEDURES = CLASS(name='SLMAP-ELEMENTARY-PROCEDURES', mode=MODE_SET, typeref=ASN1RefType(('SLMAP-PDU-Descriptions', 'SLMAP-ELEMENTARY-PROCEDURE')))
-    _SLMAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_0 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-PDU-Contents', 'MeasurementRequest')))
-    _SLMAP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_0 = SEQ(name='SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-PDU-Contents', 'MeasurementResponse')))
-    _SLMAP_ELEMENTARY_PROCEDURES_val_UnsuccessfulOutcome_0 = SEQ(name='UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-PDU-Contents', 'MeasurementFailure')))
-    _SLMAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_1 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-PDU-Contents', 'SLMSetupRequest')))
-    _SLMAP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_1 = SEQ(name='SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-PDU-Contents', 'SLMSetupResponse')))
-    _SLMAP_ELEMENTARY_PROCEDURES_val_UnsuccessfulOutcome_1 = SEQ(name='UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-PDU-Contents', 'SLMSetupFailure')))
-    _SLMAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_2 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-PDU-Contents', 'ResetRequest')))
-    _SLMAP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_2 = SEQ(name='SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-PDU-Contents', 'ResetAcknowledge')))
-    _SLMAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_3 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-PDU-Contents', 'MeasurementUpdate')))
-    _SLMAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_4 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-PDU-Contents', 'MeasurementAbort')))
-    _SLMAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_5 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-PDU-Contents', 'ErrorIndication')))
-    _SLMAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_6 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-PDU-Contents', 'PrivateMessage')))
-    SLMAP_ELEMENTARY_PROCEDURES._val = ASN1Set(rv=[dict([('InitiatingMessage', _SLMAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_0), ('SuccessfulOutcome', _SLMAP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_0), ('UnsuccessfulOutcome', _SLMAP_ELEMENTARY_PROCEDURES_val_UnsuccessfulOutcome_0), ('procedureCode', 2), ('criticality', 'reject')]), dict([('InitiatingMessage', _SLMAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_1), ('SuccessfulOutcome', _SLMAP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_1), ('UnsuccessfulOutcome', _SLMAP_ELEMENTARY_PROCEDURES_val_UnsuccessfulOutcome_1), ('procedureCode', 3), ('criticality', 'reject')]), dict([('InitiatingMessage', _SLMAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_2), ('SuccessfulOutcome', _SLMAP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_2), ('procedureCode', 4), ('criticality', 'reject')]), dict([('InitiatingMessage', _SLMAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_3), ('procedureCode', 5), ('criticality', 'ignore')]), dict([('InitiatingMessage', _SLMAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_4), ('procedureCode', 6), ('criticality', 'ignore')]), dict([('InitiatingMessage', _SLMAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_5), ('procedureCode', 0), ('criticality', 'ignore')]), dict([('InitiatingMessage', _SLMAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_6), ('procedureCode', 1), ('criticality', 'ignore')])], rr=[], ev=[], er=[])
+    SLMAP_ELEMENTARY_PROCEDURES = CLASS(name=u'SLMAP-ELEMENTARY-PROCEDURES', mode=MODE_SET, typeref=ASN1RefType(('SLMAP-PDU-Descriptions', 'SLMAP-ELEMENTARY-PROCEDURE')))
+    _SLMAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_0 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-PDU-Contents', 'MeasurementRequest')))
+    _SLMAP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_0 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-PDU-Contents', 'MeasurementResponse')))
+    _SLMAP_ELEMENTARY_PROCEDURES_val_UnsuccessfulOutcome_0 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-PDU-Contents', 'MeasurementFailure')))
+    _SLMAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_1 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-PDU-Contents', 'SLMSetupRequest')))
+    _SLMAP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_1 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-PDU-Contents', 'SLMSetupResponse')))
+    _SLMAP_ELEMENTARY_PROCEDURES_val_UnsuccessfulOutcome_1 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-PDU-Contents', 'SLMSetupFailure')))
+    _SLMAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_2 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-PDU-Contents', 'ResetRequest')))
+    _SLMAP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_2 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-PDU-Contents', 'ResetAcknowledge')))
+    _SLMAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_3 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-PDU-Contents', 'MeasurementUpdate')))
+    _SLMAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_4 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-PDU-Contents', 'MeasurementAbort')))
+    _SLMAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_5 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-PDU-Contents', 'ErrorIndication')))
+    _SLMAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_6 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-PDU-Contents', 'PrivateMessage')))
+    SLMAP_ELEMENTARY_PROCEDURES._val = ASN1Set(rv=[dict([(u'InitiatingMessage', _SLMAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_0), (u'SuccessfulOutcome', _SLMAP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_0), (u'UnsuccessfulOutcome', _SLMAP_ELEMENTARY_PROCEDURES_val_UnsuccessfulOutcome_0), (u'procedureCode', 2), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _SLMAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_1), (u'SuccessfulOutcome', _SLMAP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_1), (u'UnsuccessfulOutcome', _SLMAP_ELEMENTARY_PROCEDURES_val_UnsuccessfulOutcome_1), (u'procedureCode', 3), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _SLMAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_2), (u'SuccessfulOutcome', _SLMAP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_2), (u'procedureCode', 4), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _SLMAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_3), (u'procedureCode', 5), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', _SLMAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_4), (u'procedureCode', 6), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', _SLMAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_5), (u'procedureCode', 0), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', _SLMAP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_6), (u'procedureCode', 1), (u'criticality', u'ignore')])], rr=[], ev=[], er=[])
     
     #-----< SLMAP-ELEMENTARY-PROCEDURES-CLASS-1 >-----#
-    SLMAP_ELEMENTARY_PROCEDURES_CLASS_1 = CLASS(name='SLMAP-ELEMENTARY-PROCEDURES-CLASS-1', mode=MODE_SET, typeref=ASN1RefType(('SLMAP-PDU-Descriptions', 'SLMAP-ELEMENTARY-PROCEDURE')))
-    _SLMAP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_0 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-PDU-Contents', 'MeasurementRequest')))
-    _SLMAP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_0 = SEQ(name='SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-PDU-Contents', 'MeasurementResponse')))
-    _SLMAP_ELEMENTARY_PROCEDURES_CLASS_1_val_UnsuccessfulOutcome_0 = SEQ(name='UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-PDU-Contents', 'MeasurementFailure')))
-    _SLMAP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_1 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-PDU-Contents', 'SLMSetupRequest')))
-    _SLMAP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_1 = SEQ(name='SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-PDU-Contents', 'SLMSetupResponse')))
-    _SLMAP_ELEMENTARY_PROCEDURES_CLASS_1_val_UnsuccessfulOutcome_1 = SEQ(name='UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-PDU-Contents', 'SLMSetupFailure')))
-    _SLMAP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_2 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-PDU-Contents', 'ResetRequest')))
-    _SLMAP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_2 = SEQ(name='SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-PDU-Contents', 'ResetAcknowledge')))
-    SLMAP_ELEMENTARY_PROCEDURES_CLASS_1._val = ASN1Set(rv=[dict([('InitiatingMessage', _SLMAP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_0), ('SuccessfulOutcome', _SLMAP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_0), ('UnsuccessfulOutcome', _SLMAP_ELEMENTARY_PROCEDURES_CLASS_1_val_UnsuccessfulOutcome_0), ('procedureCode', 2), ('criticality', 'reject')]), dict([('InitiatingMessage', _SLMAP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_1), ('SuccessfulOutcome', _SLMAP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_1), ('UnsuccessfulOutcome', _SLMAP_ELEMENTARY_PROCEDURES_CLASS_1_val_UnsuccessfulOutcome_1), ('procedureCode', 3), ('criticality', 'reject')]), dict([('InitiatingMessage', _SLMAP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_2), ('SuccessfulOutcome', _SLMAP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_2), ('procedureCode', 4), ('criticality', 'reject')])], rr=[], ev=[], er=[])
+    SLMAP_ELEMENTARY_PROCEDURES_CLASS_1 = CLASS(name=u'SLMAP-ELEMENTARY-PROCEDURES-CLASS-1', mode=MODE_SET, typeref=ASN1RefType(('SLMAP-PDU-Descriptions', 'SLMAP-ELEMENTARY-PROCEDURE')))
+    _SLMAP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_0 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-PDU-Contents', 'MeasurementRequest')))
+    _SLMAP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_0 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-PDU-Contents', 'MeasurementResponse')))
+    _SLMAP_ELEMENTARY_PROCEDURES_CLASS_1_val_UnsuccessfulOutcome_0 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-PDU-Contents', 'MeasurementFailure')))
+    _SLMAP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_1 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-PDU-Contents', 'SLMSetupRequest')))
+    _SLMAP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_1 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-PDU-Contents', 'SLMSetupResponse')))
+    _SLMAP_ELEMENTARY_PROCEDURES_CLASS_1_val_UnsuccessfulOutcome_1 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-PDU-Contents', 'SLMSetupFailure')))
+    _SLMAP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_2 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-PDU-Contents', 'ResetRequest')))
+    _SLMAP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_2 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-PDU-Contents', 'ResetAcknowledge')))
+    SLMAP_ELEMENTARY_PROCEDURES_CLASS_1._val = ASN1Set(rv=[dict([(u'InitiatingMessage', _SLMAP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_0), (u'SuccessfulOutcome', _SLMAP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_0), (u'UnsuccessfulOutcome', _SLMAP_ELEMENTARY_PROCEDURES_CLASS_1_val_UnsuccessfulOutcome_0), (u'procedureCode', 2), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _SLMAP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_1), (u'SuccessfulOutcome', _SLMAP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_1), (u'UnsuccessfulOutcome', _SLMAP_ELEMENTARY_PROCEDURES_CLASS_1_val_UnsuccessfulOutcome_1), (u'procedureCode', 3), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _SLMAP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_2), (u'SuccessfulOutcome', _SLMAP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_2), (u'procedureCode', 4), (u'criticality', u'reject')])], rr=[], ev=[], er=[])
     
     #-----< SLMAP-ELEMENTARY-PROCEDURES-CLASS-2 >-----#
-    SLMAP_ELEMENTARY_PROCEDURES_CLASS_2 = CLASS(name='SLMAP-ELEMENTARY-PROCEDURES-CLASS-2', mode=MODE_SET, typeref=ASN1RefType(('SLMAP-PDU-Descriptions', 'SLMAP-ELEMENTARY-PROCEDURE')))
-    _SLMAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_0 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-PDU-Contents', 'MeasurementUpdate')))
-    _SLMAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_1 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-PDU-Contents', 'MeasurementAbort')))
-    _SLMAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_2 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-PDU-Contents', 'ErrorIndication')))
-    _SLMAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_3 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-PDU-Contents', 'PrivateMessage')))
-    SLMAP_ELEMENTARY_PROCEDURES_CLASS_2._val = ASN1Set(rv=[dict([('InitiatingMessage', _SLMAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_0), ('procedureCode', 5), ('criticality', 'ignore')]), dict([('InitiatingMessage', _SLMAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_1), ('procedureCode', 6), ('criticality', 'ignore')]), dict([('InitiatingMessage', _SLMAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_2), ('procedureCode', 0), ('criticality', 'ignore')]), dict([('InitiatingMessage', _SLMAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_3), ('procedureCode', 1), ('criticality', 'ignore')])], rr=[], ev=[], er=[])
+    SLMAP_ELEMENTARY_PROCEDURES_CLASS_2 = CLASS(name=u'SLMAP-ELEMENTARY-PROCEDURES-CLASS-2', mode=MODE_SET, typeref=ASN1RefType(('SLMAP-PDU-Descriptions', 'SLMAP-ELEMENTARY-PROCEDURE')))
+    _SLMAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_0 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-PDU-Contents', 'MeasurementUpdate')))
+    _SLMAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_1 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-PDU-Contents', 'MeasurementAbort')))
+    _SLMAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_2 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-PDU-Contents', 'ErrorIndication')))
+    _SLMAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_3 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-PDU-Contents', 'PrivateMessage')))
+    SLMAP_ELEMENTARY_PROCEDURES_CLASS_2._val = ASN1Set(rv=[dict([(u'InitiatingMessage', _SLMAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_0), (u'procedureCode', 5), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', _SLMAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_1), (u'procedureCode', 6), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', _SLMAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_2), (u'procedureCode', 0), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', _SLMAP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_3), (u'procedureCode', 1), (u'criticality', u'ignore')])], rr=[], ev=[], er=[])
     
     #-----< measurement >-----#
-    measurement = CLASS(name='measurement', mode=MODE_VALUE, typeref=ASN1RefType(('SLMAP-PDU-Descriptions', 'SLMAP-ELEMENTARY-PROCEDURE')))
-    _measurement_val_InitiatingMessage = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-PDU-Contents', 'MeasurementRequest')))
-    _measurement_val_SuccessfulOutcome = SEQ(name='SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-PDU-Contents', 'MeasurementResponse')))
-    _measurement_val_UnsuccessfulOutcome = SEQ(name='UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-PDU-Contents', 'MeasurementFailure')))
-    measurement._val = dict([('InitiatingMessage', _measurement_val_InitiatingMessage), ('SuccessfulOutcome', _measurement_val_SuccessfulOutcome), ('UnsuccessfulOutcome', _measurement_val_UnsuccessfulOutcome), ('procedureCode', 2), ('criticality', 'reject')])
+    measurement = CLASS(name=u'measurement', mode=MODE_VALUE, typeref=ASN1RefType(('SLMAP-PDU-Descriptions', 'SLMAP-ELEMENTARY-PROCEDURE')))
+    _measurement_val_InitiatingMessage = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-PDU-Contents', 'MeasurementRequest')))
+    _measurement_val_SuccessfulOutcome = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-PDU-Contents', 'MeasurementResponse')))
+    _measurement_val_UnsuccessfulOutcome = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-PDU-Contents', 'MeasurementFailure')))
+    measurement._val = dict([(u'InitiatingMessage', _measurement_val_InitiatingMessage), (u'SuccessfulOutcome', _measurement_val_SuccessfulOutcome), (u'UnsuccessfulOutcome', _measurement_val_UnsuccessfulOutcome), (u'procedureCode', 2), (u'criticality', u'reject')])
     
     #-----< slmSetup >-----#
-    slmSetup = CLASS(name='slmSetup', mode=MODE_VALUE, typeref=ASN1RefType(('SLMAP-PDU-Descriptions', 'SLMAP-ELEMENTARY-PROCEDURE')))
-    _slmSetup_val_InitiatingMessage = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-PDU-Contents', 'SLMSetupRequest')))
-    _slmSetup_val_SuccessfulOutcome = SEQ(name='SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-PDU-Contents', 'SLMSetupResponse')))
-    _slmSetup_val_UnsuccessfulOutcome = SEQ(name='UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-PDU-Contents', 'SLMSetupFailure')))
-    slmSetup._val = dict([('InitiatingMessage', _slmSetup_val_InitiatingMessage), ('SuccessfulOutcome', _slmSetup_val_SuccessfulOutcome), ('UnsuccessfulOutcome', _slmSetup_val_UnsuccessfulOutcome), ('procedureCode', 3), ('criticality', 'reject')])
+    slmSetup = CLASS(name=u'slmSetup', mode=MODE_VALUE, typeref=ASN1RefType(('SLMAP-PDU-Descriptions', 'SLMAP-ELEMENTARY-PROCEDURE')))
+    _slmSetup_val_InitiatingMessage = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-PDU-Contents', 'SLMSetupRequest')))
+    _slmSetup_val_SuccessfulOutcome = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-PDU-Contents', 'SLMSetupResponse')))
+    _slmSetup_val_UnsuccessfulOutcome = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-PDU-Contents', 'SLMSetupFailure')))
+    slmSetup._val = dict([(u'InitiatingMessage', _slmSetup_val_InitiatingMessage), (u'SuccessfulOutcome', _slmSetup_val_SuccessfulOutcome), (u'UnsuccessfulOutcome', _slmSetup_val_UnsuccessfulOutcome), (u'procedureCode', 3), (u'criticality', u'reject')])
     
     #-----< reset >-----#
-    reset = CLASS(name='reset', mode=MODE_VALUE, typeref=ASN1RefType(('SLMAP-PDU-Descriptions', 'SLMAP-ELEMENTARY-PROCEDURE')))
-    _reset_val_InitiatingMessage = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-PDU-Contents', 'ResetRequest')))
-    _reset_val_SuccessfulOutcome = SEQ(name='SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-PDU-Contents', 'ResetAcknowledge')))
-    reset._val = dict([('InitiatingMessage', _reset_val_InitiatingMessage), ('SuccessfulOutcome', _reset_val_SuccessfulOutcome), ('procedureCode', 4), ('criticality', 'reject')])
+    reset = CLASS(name=u'reset', mode=MODE_VALUE, typeref=ASN1RefType(('SLMAP-PDU-Descriptions', 'SLMAP-ELEMENTARY-PROCEDURE')))
+    _reset_val_InitiatingMessage = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-PDU-Contents', 'ResetRequest')))
+    _reset_val_SuccessfulOutcome = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-PDU-Contents', 'ResetAcknowledge')))
+    reset._val = dict([(u'InitiatingMessage', _reset_val_InitiatingMessage), (u'SuccessfulOutcome', _reset_val_SuccessfulOutcome), (u'procedureCode', 4), (u'criticality', u'reject')])
     
     #-----< measurementUpdate >-----#
-    measurementUpdate = CLASS(name='measurementUpdate', mode=MODE_VALUE, typeref=ASN1RefType(('SLMAP-PDU-Descriptions', 'SLMAP-ELEMENTARY-PROCEDURE')))
-    _measurementUpdate_val_InitiatingMessage = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-PDU-Contents', 'MeasurementUpdate')))
-    measurementUpdate._val = dict([('InitiatingMessage', _measurementUpdate_val_InitiatingMessage), ('procedureCode', 5), ('criticality', 'ignore')])
+    measurementUpdate = CLASS(name=u'measurementUpdate', mode=MODE_VALUE, typeref=ASN1RefType(('SLMAP-PDU-Descriptions', 'SLMAP-ELEMENTARY-PROCEDURE')))
+    _measurementUpdate_val_InitiatingMessage = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-PDU-Contents', 'MeasurementUpdate')))
+    measurementUpdate._val = dict([(u'InitiatingMessage', _measurementUpdate_val_InitiatingMessage), (u'procedureCode', 5), (u'criticality', u'ignore')])
     
     #-----< measurementAbort >-----#
-    measurementAbort = CLASS(name='measurementAbort', mode=MODE_VALUE, typeref=ASN1RefType(('SLMAP-PDU-Descriptions', 'SLMAP-ELEMENTARY-PROCEDURE')))
-    _measurementAbort_val_InitiatingMessage = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-PDU-Contents', 'MeasurementAbort')))
-    measurementAbort._val = dict([('InitiatingMessage', _measurementAbort_val_InitiatingMessage), ('procedureCode', 6), ('criticality', 'ignore')])
+    measurementAbort = CLASS(name=u'measurementAbort', mode=MODE_VALUE, typeref=ASN1RefType(('SLMAP-PDU-Descriptions', 'SLMAP-ELEMENTARY-PROCEDURE')))
+    _measurementAbort_val_InitiatingMessage = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-PDU-Contents', 'MeasurementAbort')))
+    measurementAbort._val = dict([(u'InitiatingMessage', _measurementAbort_val_InitiatingMessage), (u'procedureCode', 6), (u'criticality', u'ignore')])
     
     #-----< errorIndication >-----#
-    errorIndication = CLASS(name='errorIndication', mode=MODE_VALUE, typeref=ASN1RefType(('SLMAP-PDU-Descriptions', 'SLMAP-ELEMENTARY-PROCEDURE')))
-    _errorIndication_val_InitiatingMessage = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-PDU-Contents', 'ErrorIndication')))
-    errorIndication._val = dict([('InitiatingMessage', _errorIndication_val_InitiatingMessage), ('procedureCode', 0), ('criticality', 'ignore')])
+    errorIndication = CLASS(name=u'errorIndication', mode=MODE_VALUE, typeref=ASN1RefType(('SLMAP-PDU-Descriptions', 'SLMAP-ELEMENTARY-PROCEDURE')))
+    _errorIndication_val_InitiatingMessage = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-PDU-Contents', 'ErrorIndication')))
+    errorIndication._val = dict([(u'InitiatingMessage', _errorIndication_val_InitiatingMessage), (u'procedureCode', 0), (u'criticality', u'ignore')])
     
     #-----< privateMessage >-----#
-    privateMessage = CLASS(name='privateMessage', mode=MODE_VALUE, typeref=ASN1RefType(('SLMAP-PDU-Descriptions', 'SLMAP-ELEMENTARY-PROCEDURE')))
-    _privateMessage_val_InitiatingMessage = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-PDU-Contents', 'PrivateMessage')))
-    privateMessage._val = dict([('InitiatingMessage', _privateMessage_val_InitiatingMessage), ('procedureCode', 1), ('criticality', 'ignore')])
+    privateMessage = CLASS(name=u'privateMessage', mode=MODE_VALUE, typeref=ASN1RefType(('SLMAP-PDU-Descriptions', 'SLMAP-ELEMENTARY-PROCEDURE')))
+    _privateMessage_val_InitiatingMessage = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('SLMAP-PDU-Contents', 'PrivateMessage')))
+    privateMessage._val = dict([(u'InitiatingMessage', _privateMessage_val_InitiatingMessage), (u'procedureCode', 1), (u'criticality', u'ignore')])
     
     _all_ = [
         _SLMAP_ELEMENTARY_PROCEDURE_InitiatingMessage,
