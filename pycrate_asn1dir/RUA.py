@@ -16,34 +16,34 @@ from pycrate_asn1rt.init             import init_modules
 
 class RUA_CommonDataTypes:
 
-    _name_  = u'RUA-CommonDataTypes'
+    _name_  = 'RUA-CommonDataTypes'
     _oid_   = [0, 4, 0, 0, 20, 3, 5, 1, 3]
     
     _obj_ = [
-        u'maxPrivateIEs',
-        u'maxProtocolExtensions',
-        u'maxProtocolIEs',
-        u'Criticality',
-        u'Presence',
-        u'ProcedureCode',
-        u'PrivateIE-ID',
-        u'ProtocolIE-ID',
-        u'TriggeringMessage',
+        'maxPrivateIEs',
+        'maxProtocolExtensions',
+        'maxProtocolIEs',
+        'Criticality',
+        'Presence',
+        'ProcedureCode',
+        'PrivateIE-ID',
+        'ProtocolIE-ID',
+        'TriggeringMessage',
         ]
     _type_ = [
-        u'Criticality',
-        u'Presence',
-        u'ProcedureCode',
-        u'PrivateIE-ID',
-        u'ProtocolIE-ID',
-        u'TriggeringMessage',
+        'Criticality',
+        'Presence',
+        'ProcedureCode',
+        'PrivateIE-ID',
+        'ProtocolIE-ID',
+        'TriggeringMessage',
         ]
     _set_ = [
         ]
     _val_ = [
-        u'maxPrivateIEs',
-        u'maxProtocolExtensions',
-        u'maxProtocolIEs',
+        'maxPrivateIEs',
+        'maxProtocolExtensions',
+        'maxProtocolIEs',
         ]
     _class_ = [
         ]
@@ -51,49 +51,49 @@ class RUA_CommonDataTypes:
         ]
     
     #-----< maxPrivateIEs >-----#
-    maxPrivateIEs = INT(name=u'maxPrivateIEs', mode=MODE_VALUE)
+    maxPrivateIEs = INT(name='maxPrivateIEs', mode=MODE_VALUE)
     maxPrivateIEs._val = 65535
     
     #-----< maxProtocolExtensions >-----#
-    maxProtocolExtensions = INT(name=u'maxProtocolExtensions', mode=MODE_VALUE)
+    maxProtocolExtensions = INT(name='maxProtocolExtensions', mode=MODE_VALUE)
     maxProtocolExtensions._val = 65535
     
     #-----< maxProtocolIEs >-----#
-    maxProtocolIEs = INT(name=u'maxProtocolIEs', mode=MODE_VALUE)
+    maxProtocolIEs = INT(name='maxProtocolIEs', mode=MODE_VALUE)
     maxProtocolIEs._val = 65535
     
     #-----< Criticality >-----#
-    Criticality = ENUM(name=u'Criticality', mode=MODE_TYPE)
-    Criticality._cont = ASN1Dict([(u'reject', 0), (u'ignore', 1), (u'notify', 2)])
+    Criticality = ENUM(name='Criticality', mode=MODE_TYPE)
+    Criticality._cont = ASN1Dict([('reject', 0), ('ignore', 1), ('notify', 2)])
     Criticality._ext = None
     
     #-----< Presence >-----#
-    Presence = ENUM(name=u'Presence', mode=MODE_TYPE)
-    Presence._cont = ASN1Dict([(u'optional', 0), (u'conditional', 1), (u'mandatory', 2)])
+    Presence = ENUM(name='Presence', mode=MODE_TYPE)
+    Presence._cont = ASN1Dict([('optional', 0), ('conditional', 1), ('mandatory', 2)])
     Presence._ext = None
     
     #-----< ProcedureCode >-----#
-    ProcedureCode = INT(name=u'ProcedureCode', mode=MODE_TYPE)
+    ProcedureCode = INT(name='ProcedureCode', mode=MODE_TYPE)
     ProcedureCode._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=255)], ev=None, er=[])
     
     #-----< PrivateIE-ID >-----#
-    PrivateIE_ID = CHOICE(name=u'PrivateIE-ID', mode=MODE_TYPE)
-    _PrivateIE_ID_local = INT(name=u'local', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    PrivateIE_ID = CHOICE(name='PrivateIE-ID', mode=MODE_TYPE)
+    _PrivateIE_ID_local = INT(name='local', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     _PrivateIE_ID_local._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=65535)], ev=None, er=[])
-    _PrivateIE_ID_global_ = OID(name=u'global', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _PrivateIE_ID_global_ = OID(name='global', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     PrivateIE_ID._cont = ASN1Dict([
-        (u'local', _PrivateIE_ID_local),
-        (u'global', _PrivateIE_ID_global_),
+        ('local', _PrivateIE_ID_local),
+        ('global', _PrivateIE_ID_global_),
         ])
     PrivateIE_ID._ext = None
     
     #-----< ProtocolIE-ID >-----#
-    ProtocolIE_ID = INT(name=u'ProtocolIE-ID', mode=MODE_TYPE)
+    ProtocolIE_ID = INT(name='ProtocolIE-ID', mode=MODE_TYPE)
     ProtocolIE_ID._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=65535)], ev=None, er=[])
     
     #-----< TriggeringMessage >-----#
-    TriggeringMessage = ENUM(name=u'TriggeringMessage', mode=MODE_TYPE)
-    TriggeringMessage._cont = ASN1Dict([(u'initiating-message', 0), (u'successful-outcome', 1), (u'unsuccessful-outcome', 2)])
+    TriggeringMessage = ENUM(name='TriggeringMessage', mode=MODE_TYPE)
+    TriggeringMessage._cont = ASN1Dict([('initiating-message', 0), ('successful-outcome', 1), ('unsuccessful-outcome', 2)])
     TriggeringMessage._ext = None
     
     _all_ = [
@@ -112,46 +112,46 @@ class RUA_CommonDataTypes:
 
 class RUA_Constants:
 
-    _name_  = u'RUA-Constants'
+    _name_  = 'RUA-Constants'
     _oid_   = [0, 4, 0, 0, 20, 3, 5, 1, 4]
     
     _obj_ = [
-        u'id-Connect',
-        u'id-DirectTransfer',
-        u'id-Disconnect',
-        u'id-ConnectionlessTransfer',
-        u'id-ErrorIndication',
-        u'id-privateMessage',
-        u'maxNrOfErrors',
-        u'id-Cause',
-        u'id-CriticalityDiagnostics',
-        u'id-Context-ID',
-        u'id-RANAP-Message',
-        u'id-IntraDomainNasNodeSelector',
-        u'id-Establishment-Cause',
-        u'id-CN-DomainIndicator',
-        u'id-CSGMembershipStatus',
+        'id-Connect',
+        'id-DirectTransfer',
+        'id-Disconnect',
+        'id-ConnectionlessTransfer',
+        'id-ErrorIndication',
+        'id-privateMessage',
+        'maxNrOfErrors',
+        'id-Cause',
+        'id-CriticalityDiagnostics',
+        'id-Context-ID',
+        'id-RANAP-Message',
+        'id-IntraDomainNasNodeSelector',
+        'id-Establishment-Cause',
+        'id-CN-DomainIndicator',
+        'id-CSGMembershipStatus',
         ]
     _type_ = [
         ]
     _set_ = [
         ]
     _val_ = [
-        u'id-Connect',
-        u'id-DirectTransfer',
-        u'id-Disconnect',
-        u'id-ConnectionlessTransfer',
-        u'id-ErrorIndication',
-        u'id-privateMessage',
-        u'maxNrOfErrors',
-        u'id-Cause',
-        u'id-CriticalityDiagnostics',
-        u'id-Context-ID',
-        u'id-RANAP-Message',
-        u'id-IntraDomainNasNodeSelector',
-        u'id-Establishment-Cause',
-        u'id-CN-DomainIndicator',
-        u'id-CSGMembershipStatus',
+        'id-Connect',
+        'id-DirectTransfer',
+        'id-Disconnect',
+        'id-ConnectionlessTransfer',
+        'id-ErrorIndication',
+        'id-privateMessage',
+        'maxNrOfErrors',
+        'id-Cause',
+        'id-CriticalityDiagnostics',
+        'id-Context-ID',
+        'id-RANAP-Message',
+        'id-IntraDomainNasNodeSelector',
+        'id-Establishment-Cause',
+        'id-CN-DomainIndicator',
+        'id-CSGMembershipStatus',
         ]
     _class_ = [
         ]
@@ -159,63 +159,63 @@ class RUA_Constants:
         ]
     
     #-----< id-Connect >-----#
-    id_Connect = INT(name=u'id-Connect', mode=MODE_VALUE, typeref=ASN1RefType(('RUA-CommonDataTypes', 'ProcedureCode')))
+    id_Connect = INT(name='id-Connect', mode=MODE_VALUE, typeref=ASN1RefType(('RUA-CommonDataTypes', 'ProcedureCode')))
     id_Connect._val = 1
     
     #-----< id-DirectTransfer >-----#
-    id_DirectTransfer = INT(name=u'id-DirectTransfer', mode=MODE_VALUE, typeref=ASN1RefType(('RUA-CommonDataTypes', 'ProcedureCode')))
+    id_DirectTransfer = INT(name='id-DirectTransfer', mode=MODE_VALUE, typeref=ASN1RefType(('RUA-CommonDataTypes', 'ProcedureCode')))
     id_DirectTransfer._val = 2
     
     #-----< id-Disconnect >-----#
-    id_Disconnect = INT(name=u'id-Disconnect', mode=MODE_VALUE, typeref=ASN1RefType(('RUA-CommonDataTypes', 'ProcedureCode')))
+    id_Disconnect = INT(name='id-Disconnect', mode=MODE_VALUE, typeref=ASN1RefType(('RUA-CommonDataTypes', 'ProcedureCode')))
     id_Disconnect._val = 3
     
     #-----< id-ConnectionlessTransfer >-----#
-    id_ConnectionlessTransfer = INT(name=u'id-ConnectionlessTransfer', mode=MODE_VALUE, typeref=ASN1RefType(('RUA-CommonDataTypes', 'ProcedureCode')))
+    id_ConnectionlessTransfer = INT(name='id-ConnectionlessTransfer', mode=MODE_VALUE, typeref=ASN1RefType(('RUA-CommonDataTypes', 'ProcedureCode')))
     id_ConnectionlessTransfer._val = 4
     
     #-----< id-ErrorIndication >-----#
-    id_ErrorIndication = INT(name=u'id-ErrorIndication', mode=MODE_VALUE, typeref=ASN1RefType(('RUA-CommonDataTypes', 'ProcedureCode')))
+    id_ErrorIndication = INT(name='id-ErrorIndication', mode=MODE_VALUE, typeref=ASN1RefType(('RUA-CommonDataTypes', 'ProcedureCode')))
     id_ErrorIndication._val = 5
     
     #-----< id-privateMessage >-----#
-    id_privateMessage = INT(name=u'id-privateMessage', mode=MODE_VALUE, typeref=ASN1RefType(('RUA-CommonDataTypes', 'ProcedureCode')))
+    id_privateMessage = INT(name='id-privateMessage', mode=MODE_VALUE, typeref=ASN1RefType(('RUA-CommonDataTypes', 'ProcedureCode')))
     id_privateMessage._val = 6
     
     #-----< maxNrOfErrors >-----#
-    maxNrOfErrors = INT(name=u'maxNrOfErrors', mode=MODE_VALUE)
+    maxNrOfErrors = INT(name='maxNrOfErrors', mode=MODE_VALUE)
     maxNrOfErrors._val = 256
     
     #-----< id-Cause >-----#
-    id_Cause = INT(name=u'id-Cause', mode=MODE_VALUE, typeref=ASN1RefType(('RUA-CommonDataTypes', 'ProtocolIE-ID')))
+    id_Cause = INT(name='id-Cause', mode=MODE_VALUE, typeref=ASN1RefType(('RUA-CommonDataTypes', 'ProtocolIE-ID')))
     id_Cause._val = 1
     
     #-----< id-CriticalityDiagnostics >-----#
-    id_CriticalityDiagnostics = INT(name=u'id-CriticalityDiagnostics', mode=MODE_VALUE, typeref=ASN1RefType(('RUA-CommonDataTypes', 'ProtocolIE-ID')))
+    id_CriticalityDiagnostics = INT(name='id-CriticalityDiagnostics', mode=MODE_VALUE, typeref=ASN1RefType(('RUA-CommonDataTypes', 'ProtocolIE-ID')))
     id_CriticalityDiagnostics._val = 2
     
     #-----< id-Context-ID >-----#
-    id_Context_ID = INT(name=u'id-Context-ID', mode=MODE_VALUE, typeref=ASN1RefType(('RUA-CommonDataTypes', 'ProtocolIE-ID')))
+    id_Context_ID = INT(name='id-Context-ID', mode=MODE_VALUE, typeref=ASN1RefType(('RUA-CommonDataTypes', 'ProtocolIE-ID')))
     id_Context_ID._val = 3
     
     #-----< id-RANAP-Message >-----#
-    id_RANAP_Message = INT(name=u'id-RANAP-Message', mode=MODE_VALUE, typeref=ASN1RefType(('RUA-CommonDataTypes', 'ProtocolIE-ID')))
+    id_RANAP_Message = INT(name='id-RANAP-Message', mode=MODE_VALUE, typeref=ASN1RefType(('RUA-CommonDataTypes', 'ProtocolIE-ID')))
     id_RANAP_Message._val = 4
     
     #-----< id-IntraDomainNasNodeSelector >-----#
-    id_IntraDomainNasNodeSelector = INT(name=u'id-IntraDomainNasNodeSelector', mode=MODE_VALUE, typeref=ASN1RefType(('RUA-CommonDataTypes', 'ProtocolIE-ID')))
+    id_IntraDomainNasNodeSelector = INT(name='id-IntraDomainNasNodeSelector', mode=MODE_VALUE, typeref=ASN1RefType(('RUA-CommonDataTypes', 'ProtocolIE-ID')))
     id_IntraDomainNasNodeSelector._val = 5
     
     #-----< id-Establishment-Cause >-----#
-    id_Establishment_Cause = INT(name=u'id-Establishment-Cause', mode=MODE_VALUE, typeref=ASN1RefType(('RUA-CommonDataTypes', 'ProtocolIE-ID')))
+    id_Establishment_Cause = INT(name='id-Establishment-Cause', mode=MODE_VALUE, typeref=ASN1RefType(('RUA-CommonDataTypes', 'ProtocolIE-ID')))
     id_Establishment_Cause._val = 6
     
     #-----< id-CN-DomainIndicator >-----#
-    id_CN_DomainIndicator = INT(name=u'id-CN-DomainIndicator', mode=MODE_VALUE, typeref=ASN1RefType(('RUA-CommonDataTypes', 'ProtocolIE-ID')))
+    id_CN_DomainIndicator = INT(name='id-CN-DomainIndicator', mode=MODE_VALUE, typeref=ASN1RefType(('RUA-CommonDataTypes', 'ProtocolIE-ID')))
     id_CN_DomainIndicator._val = 7
     
     #-----< id-CSGMembershipStatus >-----#
-    id_CSGMembershipStatus = INT(name=u'id-CSGMembershipStatus', mode=MODE_VALUE, typeref=ASN1RefType(('RUA-CommonDataTypes', 'ProtocolIE-ID')))
+    id_CSGMembershipStatus = INT(name='id-CSGMembershipStatus', mode=MODE_VALUE, typeref=ASN1RefType(('RUA-CommonDataTypes', 'ProtocolIE-ID')))
     id_CSGMembershipStatus._val = 9
     
     _all_ = [
@@ -238,117 +238,117 @@ class RUA_Constants:
 
 class RUA_Containers:
 
-    _name_  = u'RUA-Containers'
+    _name_  = 'RUA-Containers'
     _oid_   = [0, 4, 0, 0, 20, 3, 5, 1, 5]
     
     _obj_ = [
-        u'RUA-PRIVATE-IES',
-        u'RUA-PROTOCOL-IES',
-        u'RUA-PROTOCOL-EXTENSION',
-        u'ProtocolIE-Container',
-        u'ProtocolIE-Single-Container',
-        u'ProtocolIE-Field',
-        u'ProtocolIE-ContainerList',
-        u'ProtocolExtensionContainer',
-        u'ProtocolExtensionField',
-        u'PrivateIE-Container',
-        u'PrivateIE-Field',
+        'RUA-PRIVATE-IES',
+        'RUA-PROTOCOL-IES',
+        'RUA-PROTOCOL-EXTENSION',
+        'ProtocolIE-Container',
+        'ProtocolIE-Single-Container',
+        'ProtocolIE-Field',
+        'ProtocolIE-ContainerList',
+        'ProtocolExtensionContainer',
+        'ProtocolExtensionField',
+        'PrivateIE-Container',
+        'PrivateIE-Field',
         ]
     _type_ = [
-        u'RUA-PRIVATE-IES',
-        u'RUA-PROTOCOL-IES',
-        u'RUA-PROTOCOL-EXTENSION',
-        u'ProtocolIE-Container',
-        u'ProtocolIE-Single-Container',
-        u'ProtocolIE-Field',
-        u'ProtocolIE-ContainerList',
-        u'ProtocolExtensionContainer',
-        u'ProtocolExtensionField',
-        u'PrivateIE-Container',
-        u'PrivateIE-Field',
+        'RUA-PRIVATE-IES',
+        'RUA-PROTOCOL-IES',
+        'RUA-PROTOCOL-EXTENSION',
+        'ProtocolIE-Container',
+        'ProtocolIE-Single-Container',
+        'ProtocolIE-Field',
+        'ProtocolIE-ContainerList',
+        'ProtocolExtensionContainer',
+        'ProtocolExtensionField',
+        'PrivateIE-Container',
+        'PrivateIE-Field',
         ]
     _set_ = [
         ]
     _val_ = [
         ]
     _class_ = [
-        u'RUA-PRIVATE-IES',
-        u'RUA-PROTOCOL-IES',
-        u'RUA-PROTOCOL-EXTENSION',
+        'RUA-PRIVATE-IES',
+        'RUA-PROTOCOL-IES',
+        'RUA-PROTOCOL-EXTENSION',
         ]
     _param_ = [
-        u'ProtocolIE-Container',
-        u'ProtocolIE-Single-Container',
-        u'ProtocolIE-Field',
-        u'ProtocolIE-ContainerList',
-        u'ProtocolExtensionContainer',
-        u'ProtocolExtensionField',
-        u'PrivateIE-Container',
-        u'PrivateIE-Field',
+        'ProtocolIE-Container',
+        'ProtocolIE-Single-Container',
+        'ProtocolIE-Field',
+        'ProtocolIE-ContainerList',
+        'ProtocolExtensionContainer',
+        'ProtocolExtensionField',
+        'PrivateIE-Container',
+        'PrivateIE-Field',
         ]
     
     #-----< RUA-PRIVATE-IES >-----#
-    RUA_PRIVATE_IES = CLASS(name=u'RUA-PRIVATE-IES', mode=MODE_TYPE)
-    _RUA_PRIVATE_IES_id = CHOICE(name=u'id', mode=MODE_VALUE, typeref=ASN1RefType(('RUA-CommonDataTypes', 'PrivateIE-ID')))
-    _RUA_PRIVATE_IES_criticality = ENUM(name=u'criticality', mode=MODE_VALUE, typeref=ASN1RefType(('RUA-CommonDataTypes', 'Criticality')))
-    _RUA_PRIVATE_IES_Value = OPEN(name=u'Value', mode=MODE_TYPE)
-    _RUA_PRIVATE_IES_presence = ENUM(name=u'presence', mode=MODE_VALUE, typeref=ASN1RefType(('RUA-CommonDataTypes', 'Presence')))
+    RUA_PRIVATE_IES = CLASS(name='RUA-PRIVATE-IES', mode=MODE_TYPE)
+    _RUA_PRIVATE_IES_id = CHOICE(name='id', mode=MODE_VALUE, typeref=ASN1RefType(('RUA-CommonDataTypes', 'PrivateIE-ID')))
+    _RUA_PRIVATE_IES_criticality = ENUM(name='criticality', mode=MODE_VALUE, typeref=ASN1RefType(('RUA-CommonDataTypes', 'Criticality')))
+    _RUA_PRIVATE_IES_Value = OPEN(name='Value', mode=MODE_TYPE)
+    _RUA_PRIVATE_IES_presence = ENUM(name='presence', mode=MODE_VALUE, typeref=ASN1RefType(('RUA-CommonDataTypes', 'Presence')))
     RUA_PRIVATE_IES._cont = ASN1Dict([
-        (u'id', _RUA_PRIVATE_IES_id),
-        (u'criticality', _RUA_PRIVATE_IES_criticality),
-        (u'Value', _RUA_PRIVATE_IES_Value),
-        (u'presence', _RUA_PRIVATE_IES_presence),
+        ('id', _RUA_PRIVATE_IES_id),
+        ('criticality', _RUA_PRIVATE_IES_criticality),
+        ('Value', _RUA_PRIVATE_IES_Value),
+        ('presence', _RUA_PRIVATE_IES_presence),
         ])
     
     #-----< RUA-PROTOCOL-IES >-----#
-    RUA_PROTOCOL_IES = CLASS(name=u'RUA-PROTOCOL-IES', mode=MODE_TYPE)
-    _RUA_PROTOCOL_IES_id = INT(name=u'id', mode=MODE_VALUE, typeref=ASN1RefType(('RUA-CommonDataTypes', 'ProtocolIE-ID')), uniq=True)
-    _RUA_PROTOCOL_IES_criticality = ENUM(name=u'criticality', mode=MODE_VALUE, typeref=ASN1RefType(('RUA-CommonDataTypes', 'Criticality')))
-    _RUA_PROTOCOL_IES_Value = OPEN(name=u'Value', mode=MODE_TYPE)
-    _RUA_PROTOCOL_IES_presence = ENUM(name=u'presence', mode=MODE_VALUE, typeref=ASN1RefType(('RUA-CommonDataTypes', 'Presence')))
+    RUA_PROTOCOL_IES = CLASS(name='RUA-PROTOCOL-IES', mode=MODE_TYPE)
+    _RUA_PROTOCOL_IES_id = INT(name='id', mode=MODE_VALUE, typeref=ASN1RefType(('RUA-CommonDataTypes', 'ProtocolIE-ID')), uniq=True)
+    _RUA_PROTOCOL_IES_criticality = ENUM(name='criticality', mode=MODE_VALUE, typeref=ASN1RefType(('RUA-CommonDataTypes', 'Criticality')))
+    _RUA_PROTOCOL_IES_Value = OPEN(name='Value', mode=MODE_TYPE)
+    _RUA_PROTOCOL_IES_presence = ENUM(name='presence', mode=MODE_VALUE, typeref=ASN1RefType(('RUA-CommonDataTypes', 'Presence')))
     RUA_PROTOCOL_IES._cont = ASN1Dict([
-        (u'id', _RUA_PROTOCOL_IES_id),
-        (u'criticality', _RUA_PROTOCOL_IES_criticality),
-        (u'Value', _RUA_PROTOCOL_IES_Value),
-        (u'presence', _RUA_PROTOCOL_IES_presence),
+        ('id', _RUA_PROTOCOL_IES_id),
+        ('criticality', _RUA_PROTOCOL_IES_criticality),
+        ('Value', _RUA_PROTOCOL_IES_Value),
+        ('presence', _RUA_PROTOCOL_IES_presence),
         ])
     
     #-----< RUA-PROTOCOL-EXTENSION >-----#
-    RUA_PROTOCOL_EXTENSION = CLASS(name=u'RUA-PROTOCOL-EXTENSION', mode=MODE_TYPE)
-    _RUA_PROTOCOL_EXTENSION_id = INT(name=u'id', mode=MODE_VALUE, typeref=ASN1RefType(('RUA-CommonDataTypes', 'ProtocolIE-ID')), uniq=True)
-    _RUA_PROTOCOL_EXTENSION_criticality = ENUM(name=u'criticality', mode=MODE_VALUE, typeref=ASN1RefType(('RUA-CommonDataTypes', 'Criticality')))
-    _RUA_PROTOCOL_EXTENSION_Extension = OPEN(name=u'Extension', mode=MODE_TYPE)
-    _RUA_PROTOCOL_EXTENSION_presence = ENUM(name=u'presence', mode=MODE_VALUE, typeref=ASN1RefType(('RUA-CommonDataTypes', 'Presence')))
+    RUA_PROTOCOL_EXTENSION = CLASS(name='RUA-PROTOCOL-EXTENSION', mode=MODE_TYPE)
+    _RUA_PROTOCOL_EXTENSION_id = INT(name='id', mode=MODE_VALUE, typeref=ASN1RefType(('RUA-CommonDataTypes', 'ProtocolIE-ID')), uniq=True)
+    _RUA_PROTOCOL_EXTENSION_criticality = ENUM(name='criticality', mode=MODE_VALUE, typeref=ASN1RefType(('RUA-CommonDataTypes', 'Criticality')))
+    _RUA_PROTOCOL_EXTENSION_Extension = OPEN(name='Extension', mode=MODE_TYPE)
+    _RUA_PROTOCOL_EXTENSION_presence = ENUM(name='presence', mode=MODE_VALUE, typeref=ASN1RefType(('RUA-CommonDataTypes', 'Presence')))
     RUA_PROTOCOL_EXTENSION._cont = ASN1Dict([
-        (u'id', _RUA_PROTOCOL_EXTENSION_id),
-        (u'criticality', _RUA_PROTOCOL_EXTENSION_criticality),
-        (u'Extension', _RUA_PROTOCOL_EXTENSION_Extension),
-        (u'presence', _RUA_PROTOCOL_EXTENSION_presence),
+        ('id', _RUA_PROTOCOL_EXTENSION_id),
+        ('criticality', _RUA_PROTOCOL_EXTENSION_criticality),
+        ('Extension', _RUA_PROTOCOL_EXTENSION_Extension),
+        ('presence', _RUA_PROTOCOL_EXTENSION_presence),
         ])
     
     #-----< ProtocolIE-Container >-----#
-    ProtocolIE_Container = SEQ_OF(name=u'ProtocolIE-Container', mode=MODE_TYPE, param=True)
+    ProtocolIE_Container = SEQ_OF(name='ProtocolIE-Container', mode=MODE_TYPE, param=True)
     
     #-----< ProtocolIE-Single-Container >-----#
-    ProtocolIE_Single_Container = SEQ(name=u'ProtocolIE-Single-Container', mode=MODE_TYPE, typeref=ASN1RefType(('RUA-Containers', 'ProtocolIE-Field')), param=True)
+    ProtocolIE_Single_Container = SEQ(name='ProtocolIE-Single-Container', mode=MODE_TYPE, typeref=ASN1RefType(('RUA-Containers', 'ProtocolIE-Field')), param=True)
     
     #-----< ProtocolIE-Field >-----#
-    ProtocolIE_Field = SEQ(name=u'ProtocolIE-Field', mode=MODE_TYPE, param=True)
+    ProtocolIE_Field = SEQ(name='ProtocolIE-Field', mode=MODE_TYPE, param=True)
     
     #-----< ProtocolIE-ContainerList >-----#
-    ProtocolIE_ContainerList = SEQ_OF(name=u'ProtocolIE-ContainerList', mode=MODE_TYPE, param=True)
+    ProtocolIE_ContainerList = SEQ_OF(name='ProtocolIE-ContainerList', mode=MODE_TYPE, param=True)
     
     #-----< ProtocolExtensionContainer >-----#
-    ProtocolExtensionContainer = SEQ_OF(name=u'ProtocolExtensionContainer', mode=MODE_TYPE, param=True)
+    ProtocolExtensionContainer = SEQ_OF(name='ProtocolExtensionContainer', mode=MODE_TYPE, param=True)
     
     #-----< ProtocolExtensionField >-----#
-    ProtocolExtensionField = SEQ(name=u'ProtocolExtensionField', mode=MODE_TYPE, param=True)
+    ProtocolExtensionField = SEQ(name='ProtocolExtensionField', mode=MODE_TYPE, param=True)
     
     #-----< PrivateIE-Container >-----#
-    PrivateIE_Container = SEQ_OF(name=u'PrivateIE-Container', mode=MODE_TYPE, param=True)
+    PrivateIE_Container = SEQ_OF(name='PrivateIE-Container', mode=MODE_TYPE, param=True)
     
     #-----< PrivateIE-Field >-----#
-    PrivateIE_Field = SEQ(name=u'PrivateIE-Field', mode=MODE_TYPE, param=True)
+    PrivateIE_Field = SEQ(name='PrivateIE-Field', mode=MODE_TYPE, param=True)
     
     _all_ = [
         _RUA_PRIVATE_IES_id,
@@ -370,326 +370,326 @@ class RUA_Containers:
 
 class RUA_IEs:
 
-    _name_  = u'RUA-IEs'
+    _name_  = 'RUA-IEs'
     _oid_   = [0, 4, 0, 0, 20, 3, 5, 1, 2]
     
     _obj_ = [
-        u'CN-DomainIndicator',
-        u'CSGMembershipStatus',
-        u'Establishment-Cause',
-        u'Context-ID',
-        u'IntraDomainNasNodeSelector',
-        u'Gsm-map-IDNNS',
-        u'Ansi-41-IDNNS',
-        u'RANAP-Message',
-        u'RoutingParameter',
-        u'Cause',
-        u'CauseRadioNetwork',
-        u'CauseTransport',
-        u'CauseProtocol',
-        u'CauseMisc',
-        u'CriticalityDiagnostics',
-        u'CriticalityDiagnostics-IE-List',
-        u'CriticalityDiagnostics-IE-List-ExtIEs',
-        u'CriticalityDiagnostics-ExtIEs',
-        u'TypeOfError',
+        'CN-DomainIndicator',
+        'CSGMembershipStatus',
+        'Establishment-Cause',
+        'Context-ID',
+        'IntraDomainNasNodeSelector',
+        'Gsm-map-IDNNS',
+        'Ansi-41-IDNNS',
+        'RANAP-Message',
+        'RoutingParameter',
+        'Cause',
+        'CauseRadioNetwork',
+        'CauseTransport',
+        'CauseProtocol',
+        'CauseMisc',
+        'CriticalityDiagnostics',
+        'CriticalityDiagnostics-IE-List',
+        'CriticalityDiagnostics-IE-List-ExtIEs',
+        'CriticalityDiagnostics-ExtIEs',
+        'TypeOfError',
         ]
     _type_ = [
-        u'CN-DomainIndicator',
-        u'CSGMembershipStatus',
-        u'Establishment-Cause',
-        u'Context-ID',
-        u'IntraDomainNasNodeSelector',
-        u'Gsm-map-IDNNS',
-        u'Ansi-41-IDNNS',
-        u'RANAP-Message',
-        u'RoutingParameter',
-        u'Cause',
-        u'CauseRadioNetwork',
-        u'CauseTransport',
-        u'CauseProtocol',
-        u'CauseMisc',
-        u'CriticalityDiagnostics',
-        u'CriticalityDiagnostics-IE-List',
-        u'TypeOfError',
+        'CN-DomainIndicator',
+        'CSGMembershipStatus',
+        'Establishment-Cause',
+        'Context-ID',
+        'IntraDomainNasNodeSelector',
+        'Gsm-map-IDNNS',
+        'Ansi-41-IDNNS',
+        'RANAP-Message',
+        'RoutingParameter',
+        'Cause',
+        'CauseRadioNetwork',
+        'CauseTransport',
+        'CauseProtocol',
+        'CauseMisc',
+        'CriticalityDiagnostics',
+        'CriticalityDiagnostics-IE-List',
+        'TypeOfError',
         ]
     _set_ = [
-        u'CriticalityDiagnostics-IE-List-ExtIEs',
-        u'CriticalityDiagnostics-ExtIEs',
+        'CriticalityDiagnostics-IE-List-ExtIEs',
+        'CriticalityDiagnostics-ExtIEs',
         ]
     _val_ = [
         ]
     _class_ = [
-        u'CriticalityDiagnostics-IE-List-ExtIEs',
-        u'CriticalityDiagnostics-ExtIEs',
+        'CriticalityDiagnostics-IE-List-ExtIEs',
+        'CriticalityDiagnostics-ExtIEs',
         ]
     _param_ = [
         ]
     
     #-----< CN-DomainIndicator >-----#
-    CN_DomainIndicator = ENUM(name=u'CN-DomainIndicator', mode=MODE_TYPE)
-    CN_DomainIndicator._cont = ASN1Dict([(u'cs-domain', 0), (u'ps-domain', 1)])
+    CN_DomainIndicator = ENUM(name='CN-DomainIndicator', mode=MODE_TYPE)
+    CN_DomainIndicator._cont = ASN1Dict([('cs-domain', 0), ('ps-domain', 1)])
     CN_DomainIndicator._ext = None
     
     #-----< CSGMembershipStatus >-----#
-    CSGMembershipStatus = ENUM(name=u'CSGMembershipStatus', mode=MODE_TYPE)
-    CSGMembershipStatus._cont = ASN1Dict([(u'member', 0), (u'non-member', 1)])
+    CSGMembershipStatus = ENUM(name='CSGMembershipStatus', mode=MODE_TYPE)
+    CSGMembershipStatus._cont = ASN1Dict([('member', 0), ('non-member', 1)])
     CSGMembershipStatus._ext = []
     
     #-----< Establishment-Cause >-----#
-    Establishment_Cause = ENUM(name=u'Establishment-Cause', mode=MODE_TYPE)
-    Establishment_Cause._cont = ASN1Dict([(u'emergency-call', 0), (u'normal-call', 1)])
+    Establishment_Cause = ENUM(name='Establishment-Cause', mode=MODE_TYPE)
+    Establishment_Cause._cont = ASN1Dict([('emergency-call', 0), ('normal-call', 1)])
     Establishment_Cause._ext = []
     
     #-----< Context-ID >-----#
-    Context_ID = BIT_STR(name=u'Context-ID', mode=MODE_TYPE)
+    Context_ID = BIT_STR(name='Context-ID', mode=MODE_TYPE)
     Context_ID._const_sz = ASN1Set(rv=[24], rr=[], ev=None, er=[])
     
     #-----< IntraDomainNasNodeSelector >-----#
-    IntraDomainNasNodeSelector = SEQ(name=u'IntraDomainNasNodeSelector', mode=MODE_TYPE)
-    _IntraDomainNasNodeSelector_version = CHOICE(name=u'version', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
-    __IntraDomainNasNodeSelector_version_release99 = SEQ(name=u'release99', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    ___IntraDomainNasNodeSelector_version_release99_cn_Type = CHOICE(name=u'cn-Type', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
-    ____IntraDomainNasNodeSelector_version_release99_cn_Type_gsm_Map_IDNNS = SEQ(name=u'gsm-Map-IDNNS', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('RUA-IEs', 'Gsm-map-IDNNS')))
-    ____IntraDomainNasNodeSelector_version_release99_cn_Type_ansi_41_IDNNS = BIT_STR(name=u'ansi-41-IDNNS', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('RUA-IEs', 'Ansi-41-IDNNS')))
+    IntraDomainNasNodeSelector = SEQ(name='IntraDomainNasNodeSelector', mode=MODE_TYPE)
+    _IntraDomainNasNodeSelector_version = CHOICE(name='version', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
+    __IntraDomainNasNodeSelector_version_release99 = SEQ(name='release99', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    ___IntraDomainNasNodeSelector_version_release99_cn_Type = CHOICE(name='cn-Type', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
+    ____IntraDomainNasNodeSelector_version_release99_cn_Type_gsm_Map_IDNNS = SEQ(name='gsm-Map-IDNNS', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('RUA-IEs', 'Gsm-map-IDNNS')))
+    ____IntraDomainNasNodeSelector_version_release99_cn_Type_ansi_41_IDNNS = BIT_STR(name='ansi-41-IDNNS', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('RUA-IEs', 'Ansi-41-IDNNS')))
     ___IntraDomainNasNodeSelector_version_release99_cn_Type._cont = ASN1Dict([
-        (u'gsm-Map-IDNNS', ____IntraDomainNasNodeSelector_version_release99_cn_Type_gsm_Map_IDNNS),
-        (u'ansi-41-IDNNS', ____IntraDomainNasNodeSelector_version_release99_cn_Type_ansi_41_IDNNS),
+        ('gsm-Map-IDNNS', ____IntraDomainNasNodeSelector_version_release99_cn_Type_gsm_Map_IDNNS),
+        ('ansi-41-IDNNS', ____IntraDomainNasNodeSelector_version_release99_cn_Type_ansi_41_IDNNS),
         ])
     ___IntraDomainNasNodeSelector_version_release99_cn_Type._ext = None
     __IntraDomainNasNodeSelector_version_release99._cont = ASN1Dict([
-        (u'cn-Type', ___IntraDomainNasNodeSelector_version_release99_cn_Type),
+        ('cn-Type', ___IntraDomainNasNodeSelector_version_release99_cn_Type),
         ])
     __IntraDomainNasNodeSelector_version_release99._ext = None
-    __IntraDomainNasNodeSelector_version_later = SEQ(name=u'later', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    ___IntraDomainNasNodeSelector_version_later_futurecoding = BIT_STR(name=u'futurecoding', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __IntraDomainNasNodeSelector_version_later = SEQ(name='later', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    ___IntraDomainNasNodeSelector_version_later_futurecoding = BIT_STR(name='futurecoding', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     ___IntraDomainNasNodeSelector_version_later_futurecoding._const_sz = ASN1Set(rv=[15], rr=[], ev=None, er=[])
     __IntraDomainNasNodeSelector_version_later._cont = ASN1Dict([
-        (u'futurecoding', ___IntraDomainNasNodeSelector_version_later_futurecoding),
+        ('futurecoding', ___IntraDomainNasNodeSelector_version_later_futurecoding),
         ])
     __IntraDomainNasNodeSelector_version_later._ext = None
     _IntraDomainNasNodeSelector_version._cont = ASN1Dict([
-        (u'release99', __IntraDomainNasNodeSelector_version_release99),
-        (u'later', __IntraDomainNasNodeSelector_version_later),
+        ('release99', __IntraDomainNasNodeSelector_version_release99),
+        ('later', __IntraDomainNasNodeSelector_version_later),
         ])
     _IntraDomainNasNodeSelector_version._ext = None
     IntraDomainNasNodeSelector._cont = ASN1Dict([
-        (u'version', _IntraDomainNasNodeSelector_version),
+        ('version', _IntraDomainNasNodeSelector_version),
         ])
     IntraDomainNasNodeSelector._ext = None
     
     #-----< Gsm-map-IDNNS >-----#
-    Gsm_map_IDNNS = SEQ(name=u'Gsm-map-IDNNS', mode=MODE_TYPE)
-    _Gsm_map_IDNNS_routingbasis = CHOICE(name=u'routingbasis', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
-    __Gsm_map_IDNNS_routingbasis_localPTMSI = SEQ(name=u'localPTMSI', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    ___Gsm_map_IDNNS_routingbasis_localPTMSI_routingparameter = BIT_STR(name=u'routingparameter', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('RUA-IEs', 'RoutingParameter')))
+    Gsm_map_IDNNS = SEQ(name='Gsm-map-IDNNS', mode=MODE_TYPE)
+    _Gsm_map_IDNNS_routingbasis = CHOICE(name='routingbasis', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
+    __Gsm_map_IDNNS_routingbasis_localPTMSI = SEQ(name='localPTMSI', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    ___Gsm_map_IDNNS_routingbasis_localPTMSI_routingparameter = BIT_STR(name='routingparameter', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('RUA-IEs', 'RoutingParameter')))
     __Gsm_map_IDNNS_routingbasis_localPTMSI._cont = ASN1Dict([
-        (u'routingparameter', ___Gsm_map_IDNNS_routingbasis_localPTMSI_routingparameter),
+        ('routingparameter', ___Gsm_map_IDNNS_routingbasis_localPTMSI_routingparameter),
         ])
     __Gsm_map_IDNNS_routingbasis_localPTMSI._ext = None
-    __Gsm_map_IDNNS_routingbasis_tMSIofsamePLMN = SEQ(name=u'tMSIofsamePLMN', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    ___Gsm_map_IDNNS_routingbasis_tMSIofsamePLMN_routingparameter = BIT_STR(name=u'routingparameter', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('RUA-IEs', 'RoutingParameter')))
+    __Gsm_map_IDNNS_routingbasis_tMSIofsamePLMN = SEQ(name='tMSIofsamePLMN', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    ___Gsm_map_IDNNS_routingbasis_tMSIofsamePLMN_routingparameter = BIT_STR(name='routingparameter', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('RUA-IEs', 'RoutingParameter')))
     __Gsm_map_IDNNS_routingbasis_tMSIofsamePLMN._cont = ASN1Dict([
-        (u'routingparameter', ___Gsm_map_IDNNS_routingbasis_tMSIofsamePLMN_routingparameter),
+        ('routingparameter', ___Gsm_map_IDNNS_routingbasis_tMSIofsamePLMN_routingparameter),
         ])
     __Gsm_map_IDNNS_routingbasis_tMSIofsamePLMN._ext = None
-    __Gsm_map_IDNNS_routingbasis_tMSIofdifferentPLMN = SEQ(name=u'tMSIofdifferentPLMN', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    ___Gsm_map_IDNNS_routingbasis_tMSIofdifferentPLMN_routingparameter = BIT_STR(name=u'routingparameter', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('RUA-IEs', 'RoutingParameter')))
+    __Gsm_map_IDNNS_routingbasis_tMSIofdifferentPLMN = SEQ(name='tMSIofdifferentPLMN', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    ___Gsm_map_IDNNS_routingbasis_tMSIofdifferentPLMN_routingparameter = BIT_STR(name='routingparameter', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('RUA-IEs', 'RoutingParameter')))
     __Gsm_map_IDNNS_routingbasis_tMSIofdifferentPLMN._cont = ASN1Dict([
-        (u'routingparameter', ___Gsm_map_IDNNS_routingbasis_tMSIofdifferentPLMN_routingparameter),
+        ('routingparameter', ___Gsm_map_IDNNS_routingbasis_tMSIofdifferentPLMN_routingparameter),
         ])
     __Gsm_map_IDNNS_routingbasis_tMSIofdifferentPLMN._ext = None
-    __Gsm_map_IDNNS_routingbasis_iMSIresponsetopaging = SEQ(name=u'iMSIresponsetopaging', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    ___Gsm_map_IDNNS_routingbasis_iMSIresponsetopaging_routingparameter = BIT_STR(name=u'routingparameter', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('RUA-IEs', 'RoutingParameter')))
+    __Gsm_map_IDNNS_routingbasis_iMSIresponsetopaging = SEQ(name='iMSIresponsetopaging', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    ___Gsm_map_IDNNS_routingbasis_iMSIresponsetopaging_routingparameter = BIT_STR(name='routingparameter', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('RUA-IEs', 'RoutingParameter')))
     __Gsm_map_IDNNS_routingbasis_iMSIresponsetopaging._cont = ASN1Dict([
-        (u'routingparameter', ___Gsm_map_IDNNS_routingbasis_iMSIresponsetopaging_routingparameter),
+        ('routingparameter', ___Gsm_map_IDNNS_routingbasis_iMSIresponsetopaging_routingparameter),
         ])
     __Gsm_map_IDNNS_routingbasis_iMSIresponsetopaging._ext = None
-    __Gsm_map_IDNNS_routingbasis_iMSIcauseUEinitiatedEvent = SEQ(name=u'iMSIcauseUEinitiatedEvent', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    ___Gsm_map_IDNNS_routingbasis_iMSIcauseUEinitiatedEvent_routingparameter = BIT_STR(name=u'routingparameter', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('RUA-IEs', 'RoutingParameter')))
+    __Gsm_map_IDNNS_routingbasis_iMSIcauseUEinitiatedEvent = SEQ(name='iMSIcauseUEinitiatedEvent', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    ___Gsm_map_IDNNS_routingbasis_iMSIcauseUEinitiatedEvent_routingparameter = BIT_STR(name='routingparameter', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('RUA-IEs', 'RoutingParameter')))
     __Gsm_map_IDNNS_routingbasis_iMSIcauseUEinitiatedEvent._cont = ASN1Dict([
-        (u'routingparameter', ___Gsm_map_IDNNS_routingbasis_iMSIcauseUEinitiatedEvent_routingparameter),
+        ('routingparameter', ___Gsm_map_IDNNS_routingbasis_iMSIcauseUEinitiatedEvent_routingparameter),
         ])
     __Gsm_map_IDNNS_routingbasis_iMSIcauseUEinitiatedEvent._ext = None
-    __Gsm_map_IDNNS_routingbasis_iMEI = SEQ(name=u'iMEI', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    ___Gsm_map_IDNNS_routingbasis_iMEI_routingparameter = BIT_STR(name=u'routingparameter', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('RUA-IEs', 'RoutingParameter')))
+    __Gsm_map_IDNNS_routingbasis_iMEI = SEQ(name='iMEI', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    ___Gsm_map_IDNNS_routingbasis_iMEI_routingparameter = BIT_STR(name='routingparameter', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('RUA-IEs', 'RoutingParameter')))
     __Gsm_map_IDNNS_routingbasis_iMEI._cont = ASN1Dict([
-        (u'routingparameter', ___Gsm_map_IDNNS_routingbasis_iMEI_routingparameter),
+        ('routingparameter', ___Gsm_map_IDNNS_routingbasis_iMEI_routingparameter),
         ])
     __Gsm_map_IDNNS_routingbasis_iMEI._ext = None
-    __Gsm_map_IDNNS_routingbasis_spare2 = SEQ(name=u'spare2', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    ___Gsm_map_IDNNS_routingbasis_spare2_routingparameter = BIT_STR(name=u'routingparameter', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('RUA-IEs', 'RoutingParameter')))
+    __Gsm_map_IDNNS_routingbasis_spare2 = SEQ(name='spare2', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    ___Gsm_map_IDNNS_routingbasis_spare2_routingparameter = BIT_STR(name='routingparameter', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('RUA-IEs', 'RoutingParameter')))
     __Gsm_map_IDNNS_routingbasis_spare2._cont = ASN1Dict([
-        (u'routingparameter', ___Gsm_map_IDNNS_routingbasis_spare2_routingparameter),
+        ('routingparameter', ___Gsm_map_IDNNS_routingbasis_spare2_routingparameter),
         ])
     __Gsm_map_IDNNS_routingbasis_spare2._ext = None
-    __Gsm_map_IDNNS_routingbasis_spare1 = SEQ(name=u'spare1', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    ___Gsm_map_IDNNS_routingbasis_spare1_routingparameter = BIT_STR(name=u'routingparameter', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('RUA-IEs', 'RoutingParameter')))
+    __Gsm_map_IDNNS_routingbasis_spare1 = SEQ(name='spare1', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    ___Gsm_map_IDNNS_routingbasis_spare1_routingparameter = BIT_STR(name='routingparameter', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('RUA-IEs', 'RoutingParameter')))
     __Gsm_map_IDNNS_routingbasis_spare1._cont = ASN1Dict([
-        (u'routingparameter', ___Gsm_map_IDNNS_routingbasis_spare1_routingparameter),
+        ('routingparameter', ___Gsm_map_IDNNS_routingbasis_spare1_routingparameter),
         ])
     __Gsm_map_IDNNS_routingbasis_spare1._ext = None
     _Gsm_map_IDNNS_routingbasis._cont = ASN1Dict([
-        (u'localPTMSI', __Gsm_map_IDNNS_routingbasis_localPTMSI),
-        (u'tMSIofsamePLMN', __Gsm_map_IDNNS_routingbasis_tMSIofsamePLMN),
-        (u'tMSIofdifferentPLMN', __Gsm_map_IDNNS_routingbasis_tMSIofdifferentPLMN),
-        (u'iMSIresponsetopaging', __Gsm_map_IDNNS_routingbasis_iMSIresponsetopaging),
-        (u'iMSIcauseUEinitiatedEvent', __Gsm_map_IDNNS_routingbasis_iMSIcauseUEinitiatedEvent),
-        (u'iMEI', __Gsm_map_IDNNS_routingbasis_iMEI),
-        (u'spare2', __Gsm_map_IDNNS_routingbasis_spare2),
-        (u'spare1', __Gsm_map_IDNNS_routingbasis_spare1),
+        ('localPTMSI', __Gsm_map_IDNNS_routingbasis_localPTMSI),
+        ('tMSIofsamePLMN', __Gsm_map_IDNNS_routingbasis_tMSIofsamePLMN),
+        ('tMSIofdifferentPLMN', __Gsm_map_IDNNS_routingbasis_tMSIofdifferentPLMN),
+        ('iMSIresponsetopaging', __Gsm_map_IDNNS_routingbasis_iMSIresponsetopaging),
+        ('iMSIcauseUEinitiatedEvent', __Gsm_map_IDNNS_routingbasis_iMSIcauseUEinitiatedEvent),
+        ('iMEI', __Gsm_map_IDNNS_routingbasis_iMEI),
+        ('spare2', __Gsm_map_IDNNS_routingbasis_spare2),
+        ('spare1', __Gsm_map_IDNNS_routingbasis_spare1),
         ])
     _Gsm_map_IDNNS_routingbasis._ext = None
-    _Gsm_map_IDNNS_dummy = BOOL(name=u'dummy', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _Gsm_map_IDNNS_dummy = BOOL(name='dummy', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     Gsm_map_IDNNS._cont = ASN1Dict([
-        (u'routingbasis', _Gsm_map_IDNNS_routingbasis),
-        (u'dummy', _Gsm_map_IDNNS_dummy),
+        ('routingbasis', _Gsm_map_IDNNS_routingbasis),
+        ('dummy', _Gsm_map_IDNNS_dummy),
         ])
     Gsm_map_IDNNS._ext = None
     
     #-----< Ansi-41-IDNNS >-----#
-    Ansi_41_IDNNS = BIT_STR(name=u'Ansi-41-IDNNS', mode=MODE_TYPE)
+    Ansi_41_IDNNS = BIT_STR(name='Ansi-41-IDNNS', mode=MODE_TYPE)
     Ansi_41_IDNNS._const_sz = ASN1Set(rv=[14], rr=[], ev=None, er=[])
     
     #-----< RANAP-Message >-----#
-    RANAP_Message = OCT_STR(name=u'RANAP-Message', mode=MODE_TYPE)
+    RANAP_Message = OCT_STR(name='RANAP-Message', mode=MODE_TYPE)
     
     #-----< RoutingParameter >-----#
-    RoutingParameter = BIT_STR(name=u'RoutingParameter', mode=MODE_TYPE)
+    RoutingParameter = BIT_STR(name='RoutingParameter', mode=MODE_TYPE)
     RoutingParameter._const_sz = ASN1Set(rv=[10], rr=[], ev=None, er=[])
     
     #-----< Cause >-----#
-    Cause = CHOICE(name=u'Cause', mode=MODE_TYPE)
-    _Cause_radioNetwork = ENUM(name=u'radioNetwork', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('RUA-IEs', 'CauseRadioNetwork')))
-    _Cause_transport = ENUM(name=u'transport', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('RUA-IEs', 'CauseTransport')))
-    _Cause_protocol = ENUM(name=u'protocol', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('RUA-IEs', 'CauseProtocol')))
-    _Cause_misc = ENUM(name=u'misc', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('RUA-IEs', 'CauseMisc')))
+    Cause = CHOICE(name='Cause', mode=MODE_TYPE)
+    _Cause_radioNetwork = ENUM(name='radioNetwork', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('RUA-IEs', 'CauseRadioNetwork')))
+    _Cause_transport = ENUM(name='transport', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('RUA-IEs', 'CauseTransport')))
+    _Cause_protocol = ENUM(name='protocol', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('RUA-IEs', 'CauseProtocol')))
+    _Cause_misc = ENUM(name='misc', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('RUA-IEs', 'CauseMisc')))
     Cause._cont = ASN1Dict([
-        (u'radioNetwork', _Cause_radioNetwork),
-        (u'transport', _Cause_transport),
-        (u'protocol', _Cause_protocol),
-        (u'misc', _Cause_misc),
+        ('radioNetwork', _Cause_radioNetwork),
+        ('transport', _Cause_transport),
+        ('protocol', _Cause_protocol),
+        ('misc', _Cause_misc),
         ])
     Cause._ext = []
     
     #-----< CauseRadioNetwork >-----#
-    CauseRadioNetwork = ENUM(name=u'CauseRadioNetwork', mode=MODE_TYPE)
-    CauseRadioNetwork._cont = ASN1Dict([(u'normal', 0), (u'connect-failed', 1), (u'network-release', 2), (u'unspecified', 3)])
+    CauseRadioNetwork = ENUM(name='CauseRadioNetwork', mode=MODE_TYPE)
+    CauseRadioNetwork._cont = ASN1Dict([('normal', 0), ('connect-failed', 1), ('network-release', 2), ('unspecified', 3)])
     CauseRadioNetwork._ext = []
     
     #-----< CauseTransport >-----#
-    CauseTransport = ENUM(name=u'CauseTransport', mode=MODE_TYPE)
-    CauseTransport._cont = ASN1Dict([(u'transport-resource-unavailable', 0), (u'unspecified', 1)])
+    CauseTransport = ENUM(name='CauseTransport', mode=MODE_TYPE)
+    CauseTransport._cont = ASN1Dict([('transport-resource-unavailable', 0), ('unspecified', 1)])
     CauseTransport._ext = []
     
     #-----< CauseProtocol >-----#
-    CauseProtocol = ENUM(name=u'CauseProtocol', mode=MODE_TYPE)
-    CauseProtocol._cont = ASN1Dict([(u'transfer-syntax-error', 0), (u'abstract-syntax-error-reject', 1), (u'abstract-syntax-error-ignore-and-notify', 2), (u'message-not-compatible-with-receiver-state', 3), (u'semantic-error', 4), (u'unspecified', 5), (u'abstract-syntax-error-falsely-constructed-message', 6)])
+    CauseProtocol = ENUM(name='CauseProtocol', mode=MODE_TYPE)
+    CauseProtocol._cont = ASN1Dict([('transfer-syntax-error', 0), ('abstract-syntax-error-reject', 1), ('abstract-syntax-error-ignore-and-notify', 2), ('message-not-compatible-with-receiver-state', 3), ('semantic-error', 4), ('unspecified', 5), ('abstract-syntax-error-falsely-constructed-message', 6)])
     CauseProtocol._ext = []
     
     #-----< CauseMisc >-----#
-    CauseMisc = ENUM(name=u'CauseMisc', mode=MODE_TYPE)
-    CauseMisc._cont = ASN1Dict([(u'processing-overload', 0), (u'hardware-failure', 1), (u'o-and-m-intervention', 2), (u'unspecified', 3)])
+    CauseMisc = ENUM(name='CauseMisc', mode=MODE_TYPE)
+    CauseMisc._cont = ASN1Dict([('processing-overload', 0), ('hardware-failure', 1), ('o-and-m-intervention', 2), ('unspecified', 3)])
     CauseMisc._ext = []
     
     #-----< CriticalityDiagnostics >-----#
-    CriticalityDiagnostics = SEQ(name=u'CriticalityDiagnostics', mode=MODE_TYPE)
-    _CriticalityDiagnostics_procedureCode = INT(name=u'procedureCode', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('RUA-CommonDataTypes', 'ProcedureCode')), opt=True)
-    _CriticalityDiagnostics_triggeringMessage = ENUM(name=u'triggeringMessage', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('RUA-CommonDataTypes', 'TriggeringMessage')), opt=True)
-    _CriticalityDiagnostics_procedureCriticality = ENUM(name=u'procedureCriticality', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('RUA-CommonDataTypes', 'Criticality')), opt=True)
-    _CriticalityDiagnostics_iEsCriticalityDiagnostics = SEQ_OF(name=u'iEsCriticalityDiagnostics', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('RUA-IEs', 'CriticalityDiagnostics-IE-List')), opt=True)
-    _CriticalityDiagnostics_iE_Extensions = SEQ_OF(name=u'iE-Extensions', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('RUA-Containers', 'ProtocolExtensionContainer')), opt=True)
+    CriticalityDiagnostics = SEQ(name='CriticalityDiagnostics', mode=MODE_TYPE)
+    _CriticalityDiagnostics_procedureCode = INT(name='procedureCode', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('RUA-CommonDataTypes', 'ProcedureCode')), opt=True)
+    _CriticalityDiagnostics_triggeringMessage = ENUM(name='triggeringMessage', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('RUA-CommonDataTypes', 'TriggeringMessage')), opt=True)
+    _CriticalityDiagnostics_procedureCriticality = ENUM(name='procedureCriticality', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('RUA-CommonDataTypes', 'Criticality')), opt=True)
+    _CriticalityDiagnostics_iEsCriticalityDiagnostics = SEQ_OF(name='iEsCriticalityDiagnostics', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('RUA-IEs', 'CriticalityDiagnostics-IE-List')), opt=True)
+    _CriticalityDiagnostics_iE_Extensions = SEQ_OF(name='iE-Extensions', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('RUA-Containers', 'ProtocolExtensionContainer')), opt=True)
     __CriticalityDiagnostics_iE_Extensions__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('RUA-Containers', 'ProtocolExtensionField')))
-    ___CriticalityDiagnostics_iE_Extensions__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('RUA-Containers', 'RUA-PROTOCOL-EXTENSION'), [u'id']))
+    ___CriticalityDiagnostics_iE_Extensions__item__id = INT(name='id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('RUA-Containers', 'RUA-PROTOCOL-EXTENSION'), ['id']))
     ____CriticalityDiagnostics_iE_Extensions__item__id_tab = CLASS(name='_tab_RUA-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('RUA-Containers', 'RUA-PROTOCOL-EXTENSION')))
     ____CriticalityDiagnostics_iE_Extensions__item__id_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___CriticalityDiagnostics_iE_Extensions__item__id._const_tab = ____CriticalityDiagnostics_iE_Extensions__item__id_tab
     ___CriticalityDiagnostics_iE_Extensions__item__id._const_tab_at = None
-    ___CriticalityDiagnostics_iE_Extensions__item__id._const_tab_id = u'id'
-    ___CriticalityDiagnostics_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('RUA-Containers', 'RUA-PROTOCOL-EXTENSION'), [u'criticality']))
+    ___CriticalityDiagnostics_iE_Extensions__item__id._const_tab_id = 'id'
+    ___CriticalityDiagnostics_iE_Extensions__item__criticality = ENUM(name='criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('RUA-Containers', 'RUA-PROTOCOL-EXTENSION'), ['criticality']))
     ____CriticalityDiagnostics_iE_Extensions__item__criticality_tab = CLASS(name='_tab_RUA-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('RUA-Containers', 'RUA-PROTOCOL-EXTENSION')))
     ____CriticalityDiagnostics_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___CriticalityDiagnostics_iE_Extensions__item__criticality._const_tab = ____CriticalityDiagnostics_iE_Extensions__item__criticality_tab
-    ___CriticalityDiagnostics_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
-    ___CriticalityDiagnostics_iE_Extensions__item__criticality._const_tab_id = u'criticality'
-    ___CriticalityDiagnostics_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('RUA-Containers', 'RUA-PROTOCOL-EXTENSION'), [u'Extension']))
+    ___CriticalityDiagnostics_iE_Extensions__item__criticality._const_tab_at = ('..', 'id')
+    ___CriticalityDiagnostics_iE_Extensions__item__criticality._const_tab_id = 'criticality'
+    ___CriticalityDiagnostics_iE_Extensions__item__extensionValue = OPEN(name='extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('RUA-Containers', 'RUA-PROTOCOL-EXTENSION'), ['Extension']))
     ____CriticalityDiagnostics_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_RUA-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('RUA-Containers', 'RUA-PROTOCOL-EXTENSION')))
     ____CriticalityDiagnostics_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___CriticalityDiagnostics_iE_Extensions__item__extensionValue._const_tab = ____CriticalityDiagnostics_iE_Extensions__item__extensionValue_tab
-    ___CriticalityDiagnostics_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
-    ___CriticalityDiagnostics_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
+    ___CriticalityDiagnostics_iE_Extensions__item__extensionValue._const_tab_at = ('..', 'id')
+    ___CriticalityDiagnostics_iE_Extensions__item__extensionValue._const_tab_id = 'Extension'
     __CriticalityDiagnostics_iE_Extensions__item_._cont = ASN1Dict([
-        (u'id', ___CriticalityDiagnostics_iE_Extensions__item__id),
-        (u'criticality', ___CriticalityDiagnostics_iE_Extensions__item__criticality),
-        (u'extensionValue', ___CriticalityDiagnostics_iE_Extensions__item__extensionValue),
+        ('id', ___CriticalityDiagnostics_iE_Extensions__item__id),
+        ('criticality', ___CriticalityDiagnostics_iE_Extensions__item__criticality),
+        ('extensionValue', ___CriticalityDiagnostics_iE_Extensions__item__extensionValue),
         ])
     __CriticalityDiagnostics_iE_Extensions__item_._ext = None
     _CriticalityDiagnostics_iE_Extensions._cont = __CriticalityDiagnostics_iE_Extensions__item_
     _CriticalityDiagnostics_iE_Extensions._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=65535)], ev=None, er=[])
     CriticalityDiagnostics._cont = ASN1Dict([
-        (u'procedureCode', _CriticalityDiagnostics_procedureCode),
-        (u'triggeringMessage', _CriticalityDiagnostics_triggeringMessage),
-        (u'procedureCriticality', _CriticalityDiagnostics_procedureCriticality),
-        (u'iEsCriticalityDiagnostics', _CriticalityDiagnostics_iEsCriticalityDiagnostics),
-        (u'iE-Extensions', _CriticalityDiagnostics_iE_Extensions),
+        ('procedureCode', _CriticalityDiagnostics_procedureCode),
+        ('triggeringMessage', _CriticalityDiagnostics_triggeringMessage),
+        ('procedureCriticality', _CriticalityDiagnostics_procedureCriticality),
+        ('iEsCriticalityDiagnostics', _CriticalityDiagnostics_iEsCriticalityDiagnostics),
+        ('iE-Extensions', _CriticalityDiagnostics_iE_Extensions),
         ])
     CriticalityDiagnostics._ext = []
     
     #-----< CriticalityDiagnostics-IE-List >-----#
-    CriticalityDiagnostics_IE_List = SEQ_OF(name=u'CriticalityDiagnostics-IE-List', mode=MODE_TYPE)
+    CriticalityDiagnostics_IE_List = SEQ_OF(name='CriticalityDiagnostics-IE-List', mode=MODE_TYPE)
     _CriticalityDiagnostics_IE_List__item_ = SEQ(name='_item_', mode=MODE_TYPE)
-    __CriticalityDiagnostics_IE_List__item__iECriticality = ENUM(name=u'iECriticality', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('RUA-CommonDataTypes', 'Criticality')))
-    __CriticalityDiagnostics_IE_List__item__iE_ID = INT(name=u'iE-ID', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('RUA-CommonDataTypes', 'ProtocolIE-ID')))
-    __CriticalityDiagnostics_IE_List__item__typeOfError = ENUM(name=u'typeOfError', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('RUA-IEs', 'TypeOfError')))
-    __CriticalityDiagnostics_IE_List__item__iE_Extensions = SEQ_OF(name=u'iE-Extensions', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('RUA-Containers', 'ProtocolExtensionContainer')), opt=True)
+    __CriticalityDiagnostics_IE_List__item__iECriticality = ENUM(name='iECriticality', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('RUA-CommonDataTypes', 'Criticality')))
+    __CriticalityDiagnostics_IE_List__item__iE_ID = INT(name='iE-ID', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('RUA-CommonDataTypes', 'ProtocolIE-ID')))
+    __CriticalityDiagnostics_IE_List__item__typeOfError = ENUM(name='typeOfError', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('RUA-IEs', 'TypeOfError')))
+    __CriticalityDiagnostics_IE_List__item__iE_Extensions = SEQ_OF(name='iE-Extensions', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('RUA-Containers', 'ProtocolExtensionContainer')), opt=True)
     ___CriticalityDiagnostics_IE_List__item__iE_Extensions__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('RUA-Containers', 'ProtocolExtensionField')))
-    ____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('RUA-Containers', 'RUA-PROTOCOL-EXTENSION'), [u'id']))
+    ____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__id = INT(name='id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('RUA-Containers', 'RUA-PROTOCOL-EXTENSION'), ['id']))
     _____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__id_tab = CLASS(name='_tab_RUA-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('RUA-Containers', 'RUA-PROTOCOL-EXTENSION')))
     _____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__id_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__id._const_tab = _____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__id_tab
     ____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__id._const_tab_at = None
-    ____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__id._const_tab_id = u'id'
-    ____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('RUA-Containers', 'RUA-PROTOCOL-EXTENSION'), [u'criticality']))
+    ____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__id._const_tab_id = 'id'
+    ____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__criticality = ENUM(name='criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('RUA-Containers', 'RUA-PROTOCOL-EXTENSION'), ['criticality']))
     _____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__criticality_tab = CLASS(name='_tab_RUA-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('RUA-Containers', 'RUA-PROTOCOL-EXTENSION')))
     _____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__criticality._const_tab = _____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__criticality_tab
-    ____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
-    ____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__criticality._const_tab_id = u'criticality'
-    ____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('RUA-Containers', 'RUA-PROTOCOL-EXTENSION'), [u'Extension']))
+    ____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__criticality._const_tab_at = ('..', 'id')
+    ____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__criticality._const_tab_id = 'criticality'
+    ____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__extensionValue = OPEN(name='extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('RUA-Containers', 'RUA-PROTOCOL-EXTENSION'), ['Extension']))
     _____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_RUA-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('RUA-Containers', 'RUA-PROTOCOL-EXTENSION')))
     _____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__extensionValue._const_tab = _____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__extensionValue_tab
-    ____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
-    ____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
+    ____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__extensionValue._const_tab_at = ('..', 'id')
+    ____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__extensionValue._const_tab_id = 'Extension'
     ___CriticalityDiagnostics_IE_List__item__iE_Extensions__item_._cont = ASN1Dict([
-        (u'id', ____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__id),
-        (u'criticality', ____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__criticality),
-        (u'extensionValue', ____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__extensionValue),
+        ('id', ____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__id),
+        ('criticality', ____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__criticality),
+        ('extensionValue', ____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__extensionValue),
         ])
     ___CriticalityDiagnostics_IE_List__item__iE_Extensions__item_._ext = None
     __CriticalityDiagnostics_IE_List__item__iE_Extensions._cont = ___CriticalityDiagnostics_IE_List__item__iE_Extensions__item_
     __CriticalityDiagnostics_IE_List__item__iE_Extensions._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=65535)], ev=None, er=[])
     _CriticalityDiagnostics_IE_List__item_._cont = ASN1Dict([
-        (u'iECriticality', __CriticalityDiagnostics_IE_List__item__iECriticality),
-        (u'iE-ID', __CriticalityDiagnostics_IE_List__item__iE_ID),
-        (u'typeOfError', __CriticalityDiagnostics_IE_List__item__typeOfError),
-        (u'iE-Extensions', __CriticalityDiagnostics_IE_List__item__iE_Extensions),
+        ('iECriticality', __CriticalityDiagnostics_IE_List__item__iECriticality),
+        ('iE-ID', __CriticalityDiagnostics_IE_List__item__iE_ID),
+        ('typeOfError', __CriticalityDiagnostics_IE_List__item__typeOfError),
+        ('iE-Extensions', __CriticalityDiagnostics_IE_List__item__iE_Extensions),
         ])
     _CriticalityDiagnostics_IE_List__item_._ext = []
     CriticalityDiagnostics_IE_List._cont = _CriticalityDiagnostics_IE_List__item_
     CriticalityDiagnostics_IE_List._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=256)], ev=None, er=[])
     
     #-----< CriticalityDiagnostics-IE-List-ExtIEs >-----#
-    CriticalityDiagnostics_IE_List_ExtIEs = CLASS(name=u'CriticalityDiagnostics-IE-List-ExtIEs', mode=MODE_SET, typeref=ASN1RefType(('RUA-Containers', 'RUA-PROTOCOL-EXTENSION')))
+    CriticalityDiagnostics_IE_List_ExtIEs = CLASS(name='CriticalityDiagnostics-IE-List-ExtIEs', mode=MODE_SET, typeref=ASN1RefType(('RUA-Containers', 'RUA-PROTOCOL-EXTENSION')))
     CriticalityDiagnostics_IE_List_ExtIEs._val = ASN1Set(rv=[], rr=[], ev=[], er=[])
     
     #-----< CriticalityDiagnostics-ExtIEs >-----#
-    CriticalityDiagnostics_ExtIEs = CLASS(name=u'CriticalityDiagnostics-ExtIEs', mode=MODE_SET, typeref=ASN1RefType(('RUA-Containers', 'RUA-PROTOCOL-EXTENSION')))
+    CriticalityDiagnostics_ExtIEs = CLASS(name='CriticalityDiagnostics-ExtIEs', mode=MODE_SET, typeref=ASN1RefType(('RUA-Containers', 'RUA-PROTOCOL-EXTENSION')))
     CriticalityDiagnostics_ExtIEs._val = ASN1Set(rv=[], rr=[], ev=[], er=[])
     
     #-----< TypeOfError >-----#
-    TypeOfError = ENUM(name=u'TypeOfError', mode=MODE_TYPE)
-    TypeOfError._cont = ASN1Dict([(u'not-understood', 0), (u'missing', 1)])
+    TypeOfError = ENUM(name='TypeOfError', mode=MODE_TYPE)
+    TypeOfError._cont = ASN1Dict([('not-understood', 0), ('missing', 1)])
     TypeOfError._ext = []
     
     _all_ = [
@@ -769,472 +769,472 @@ class RUA_IEs:
 
 class RUA_PDU_Contents:
 
-    _name_  = u'RUA-PDU-Contents'
+    _name_  = 'RUA-PDU-Contents'
     _oid_   = [0, 4, 0, 0, 20, 3, 5, 1, 1]
     
     _obj_ = [
-        u'Connect',
-        u'ConnectIEs',
-        u'ConnectExtensions',
-        u'DirectTransfer',
-        u'DirectTransferIEs',
-        u'DirectTransferExtensions',
-        u'Disconnect',
-        u'DisconnectIEs',
-        u'DisconnectExtensions',
-        u'ConnectionlessTransfer',
-        u'ConnectionlessTransferIEs',
-        u'ConnectionlessTransferExtensions',
-        u'ErrorIndication',
-        u'ErrorIndicationIEs',
-        u'ErrorIndicationExtensions',
-        u'PrivateMessage',
-        u'PrivateMessage-IEs',
+        'Connect',
+        'ConnectIEs',
+        'ConnectExtensions',
+        'DirectTransfer',
+        'DirectTransferIEs',
+        'DirectTransferExtensions',
+        'Disconnect',
+        'DisconnectIEs',
+        'DisconnectExtensions',
+        'ConnectionlessTransfer',
+        'ConnectionlessTransferIEs',
+        'ConnectionlessTransferExtensions',
+        'ErrorIndication',
+        'ErrorIndicationIEs',
+        'ErrorIndicationExtensions',
+        'PrivateMessage',
+        'PrivateMessage-IEs',
         ]
     _type_ = [
-        u'Connect',
-        u'DirectTransfer',
-        u'Disconnect',
-        u'ConnectionlessTransfer',
-        u'ErrorIndication',
-        u'PrivateMessage',
+        'Connect',
+        'DirectTransfer',
+        'Disconnect',
+        'ConnectionlessTransfer',
+        'ErrorIndication',
+        'PrivateMessage',
         ]
     _set_ = [
-        u'ConnectIEs',
-        u'ConnectExtensions',
-        u'DirectTransferIEs',
-        u'DirectTransferExtensions',
-        u'DisconnectIEs',
-        u'DisconnectExtensions',
-        u'ConnectionlessTransferIEs',
-        u'ConnectionlessTransferExtensions',
-        u'ErrorIndicationIEs',
-        u'ErrorIndicationExtensions',
-        u'PrivateMessage-IEs',
+        'ConnectIEs',
+        'ConnectExtensions',
+        'DirectTransferIEs',
+        'DirectTransferExtensions',
+        'DisconnectIEs',
+        'DisconnectExtensions',
+        'ConnectionlessTransferIEs',
+        'ConnectionlessTransferExtensions',
+        'ErrorIndicationIEs',
+        'ErrorIndicationExtensions',
+        'PrivateMessage-IEs',
         ]
     _val_ = [
         ]
     _class_ = [
-        u'ConnectIEs',
-        u'ConnectExtensions',
-        u'DirectTransferIEs',
-        u'DirectTransferExtensions',
-        u'DisconnectIEs',
-        u'DisconnectExtensions',
-        u'ConnectionlessTransferIEs',
-        u'ConnectionlessTransferExtensions',
-        u'ErrorIndicationIEs',
-        u'ErrorIndicationExtensions',
-        u'PrivateMessage-IEs',
+        'ConnectIEs',
+        'ConnectExtensions',
+        'DirectTransferIEs',
+        'DirectTransferExtensions',
+        'DisconnectIEs',
+        'DisconnectExtensions',
+        'ConnectionlessTransferIEs',
+        'ConnectionlessTransferExtensions',
+        'ErrorIndicationIEs',
+        'ErrorIndicationExtensions',
+        'PrivateMessage-IEs',
         ]
     _param_ = [
         ]
     
     #-----< Connect >-----#
-    Connect = SEQ(name=u'Connect', mode=MODE_TYPE)
-    _Connect_protocolIEs = SEQ_OF(name=u'protocolIEs', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('RUA-Containers', 'ProtocolIE-Container')))
+    Connect = SEQ(name='Connect', mode=MODE_TYPE)
+    _Connect_protocolIEs = SEQ_OF(name='protocolIEs', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('RUA-Containers', 'ProtocolIE-Container')))
     __Connect_protocolIEs__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('RUA-Containers', 'ProtocolIE-Field')))
-    ___Connect_protocolIEs__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('RUA-Containers', 'RUA-PROTOCOL-IES'), [u'id']))
+    ___Connect_protocolIEs__item__id = INT(name='id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('RUA-Containers', 'RUA-PROTOCOL-IES'), ['id']))
     ____Connect_protocolIEs__item__id_tab = CLASS(name='_tab_RUA-PROTOCOL-IES', mode=MODE_SET, typeref=ASN1RefType(('RUA-Containers', 'RUA-PROTOCOL-IES')))
-    _____Connect_protocolIEs__item__id_tab_val_Value_0 = ENUM(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('RUA-IEs', 'CN-DomainIndicator')))
-    _____Connect_protocolIEs__item__id_tab_val_Value_1 = BIT_STR(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('RUA-IEs', 'Context-ID')))
-    _____Connect_protocolIEs__item__id_tab_val_Value_2 = SEQ(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('RUA-IEs', 'IntraDomainNasNodeSelector')))
-    _____Connect_protocolIEs__item__id_tab_val_Value_3 = ENUM(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('RUA-IEs', 'Establishment-Cause')))
-    _____Connect_protocolIEs__item__id_tab_val_Value_4 = OCT_STR(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('RUA-IEs', 'RANAP-Message')))
-    ____Connect_protocolIEs__item__id_tab._val = ASN1Set(rv=[dict([(u'id', 7), (u'criticality', u'reject'), (u'Value', _____Connect_protocolIEs__item__id_tab_val_Value_0), (u'presence', u'mandatory')]), dict([(u'id', 3), (u'criticality', u'reject'), (u'Value', _____Connect_protocolIEs__item__id_tab_val_Value_1), (u'presence', u'mandatory')]), dict([(u'id', 5), (u'criticality', u'ignore'), (u'Value', _____Connect_protocolIEs__item__id_tab_val_Value_2), (u'presence', u'optional')]), dict([(u'id', 6), (u'criticality', u'reject'), (u'Value', _____Connect_protocolIEs__item__id_tab_val_Value_3), (u'presence', u'mandatory')]), dict([(u'id', 4), (u'criticality', u'reject'), (u'Value', _____Connect_protocolIEs__item__id_tab_val_Value_4), (u'presence', u'mandatory')])], rr=[], ev=None, er=[])
+    _____Connect_protocolIEs__item__id_tab_val_Value_0 = ENUM(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('RUA-IEs', 'CN-DomainIndicator')))
+    _____Connect_protocolIEs__item__id_tab_val_Value_1 = BIT_STR(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('RUA-IEs', 'Context-ID')))
+    _____Connect_protocolIEs__item__id_tab_val_Value_2 = SEQ(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('RUA-IEs', 'IntraDomainNasNodeSelector')))
+    _____Connect_protocolIEs__item__id_tab_val_Value_3 = ENUM(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('RUA-IEs', 'Establishment-Cause')))
+    _____Connect_protocolIEs__item__id_tab_val_Value_4 = OCT_STR(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('RUA-IEs', 'RANAP-Message')))
+    ____Connect_protocolIEs__item__id_tab._val = ASN1Set(rv=[dict([('id', 7), ('criticality', 'reject'), ('Value', _____Connect_protocolIEs__item__id_tab_val_Value_0), ('presence', 'mandatory')]), dict([('id', 3), ('criticality', 'reject'), ('Value', _____Connect_protocolIEs__item__id_tab_val_Value_1), ('presence', 'mandatory')]), dict([('id', 5), ('criticality', 'ignore'), ('Value', _____Connect_protocolIEs__item__id_tab_val_Value_2), ('presence', 'optional')]), dict([('id', 6), ('criticality', 'reject'), ('Value', _____Connect_protocolIEs__item__id_tab_val_Value_3), ('presence', 'mandatory')]), dict([('id', 4), ('criticality', 'reject'), ('Value', _____Connect_protocolIEs__item__id_tab_val_Value_4), ('presence', 'mandatory')])], rr=[], ev=None, er=[])
     ___Connect_protocolIEs__item__id._const_tab = ____Connect_protocolIEs__item__id_tab
     ___Connect_protocolIEs__item__id._const_tab_at = None
-    ___Connect_protocolIEs__item__id._const_tab_id = u'id'
-    ___Connect_protocolIEs__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('RUA-Containers', 'RUA-PROTOCOL-IES'), [u'criticality']))
+    ___Connect_protocolIEs__item__id._const_tab_id = 'id'
+    ___Connect_protocolIEs__item__criticality = ENUM(name='criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('RUA-Containers', 'RUA-PROTOCOL-IES'), ['criticality']))
     ___Connect_protocolIEs__item__criticality._const_tab = ____Connect_protocolIEs__item__id_tab
-    ___Connect_protocolIEs__item__criticality._const_tab_at = ('..', u'id')
-    ___Connect_protocolIEs__item__criticality._const_tab_id = u'criticality'
-    ___Connect_protocolIEs__item__value = OPEN(name=u'value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('RUA-Containers', 'RUA-PROTOCOL-IES'), [u'Value']))
+    ___Connect_protocolIEs__item__criticality._const_tab_at = ('..', 'id')
+    ___Connect_protocolIEs__item__criticality._const_tab_id = 'criticality'
+    ___Connect_protocolIEs__item__value = OPEN(name='value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('RUA-Containers', 'RUA-PROTOCOL-IES'), ['Value']))
     ___Connect_protocolIEs__item__value._const_tab = ____Connect_protocolIEs__item__id_tab
-    ___Connect_protocolIEs__item__value._const_tab_at = ('..', u'id')
-    ___Connect_protocolIEs__item__value._const_tab_id = u'Value'
+    ___Connect_protocolIEs__item__value._const_tab_at = ('..', 'id')
+    ___Connect_protocolIEs__item__value._const_tab_id = 'Value'
     __Connect_protocolIEs__item_._cont = ASN1Dict([
-        (u'id', ___Connect_protocolIEs__item__id),
-        (u'criticality', ___Connect_protocolIEs__item__criticality),
-        (u'value', ___Connect_protocolIEs__item__value),
+        ('id', ___Connect_protocolIEs__item__id),
+        ('criticality', ___Connect_protocolIEs__item__criticality),
+        ('value', ___Connect_protocolIEs__item__value),
         ])
     __Connect_protocolIEs__item_._ext = None
     _Connect_protocolIEs._cont = __Connect_protocolIEs__item_
     _Connect_protocolIEs._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=65535)], ev=None, er=[])
-    _Connect_protocolExtensions = SEQ_OF(name=u'protocolExtensions', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('RUA-Containers', 'ProtocolExtensionContainer')), opt=True)
+    _Connect_protocolExtensions = SEQ_OF(name='protocolExtensions', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('RUA-Containers', 'ProtocolExtensionContainer')), opt=True)
     __Connect_protocolExtensions__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('RUA-Containers', 'ProtocolExtensionField')))
-    ___Connect_protocolExtensions__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('RUA-Containers', 'RUA-PROTOCOL-EXTENSION'), [u'id']))
+    ___Connect_protocolExtensions__item__id = INT(name='id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('RUA-Containers', 'RUA-PROTOCOL-EXTENSION'), ['id']))
     ____Connect_protocolExtensions__item__id_tab = CLASS(name='_tab_RUA-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('RUA-Containers', 'RUA-PROTOCOL-EXTENSION')))
-    _____Connect_protocolExtensions__item__id_tab_val_Extension_0 = ENUM(name=u'Extension', mode=MODE_TYPE, typeref=ASN1RefType(('RUA-IEs', 'CSGMembershipStatus')))
-    ____Connect_protocolExtensions__item__id_tab._val = ASN1Set(rv=[dict([(u'id', 9), (u'criticality', u'ignore'), (u'Extension', _____Connect_protocolExtensions__item__id_tab_val_Extension_0), (u'presence', u'optional')])], rr=[], ev=None, er=[])
+    _____Connect_protocolExtensions__item__id_tab_val_Extension_0 = ENUM(name='Extension', mode=MODE_TYPE, typeref=ASN1RefType(('RUA-IEs', 'CSGMembershipStatus')))
+    ____Connect_protocolExtensions__item__id_tab._val = ASN1Set(rv=[dict([('id', 9), ('criticality', 'ignore'), ('Extension', _____Connect_protocolExtensions__item__id_tab_val_Extension_0), ('presence', 'optional')])], rr=[], ev=None, er=[])
     ___Connect_protocolExtensions__item__id._const_tab = ____Connect_protocolExtensions__item__id_tab
     ___Connect_protocolExtensions__item__id._const_tab_at = None
-    ___Connect_protocolExtensions__item__id._const_tab_id = u'id'
-    ___Connect_protocolExtensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('RUA-Containers', 'RUA-PROTOCOL-EXTENSION'), [u'criticality']))
+    ___Connect_protocolExtensions__item__id._const_tab_id = 'id'
+    ___Connect_protocolExtensions__item__criticality = ENUM(name='criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('RUA-Containers', 'RUA-PROTOCOL-EXTENSION'), ['criticality']))
     ___Connect_protocolExtensions__item__criticality._const_tab = ____Connect_protocolExtensions__item__id_tab
-    ___Connect_protocolExtensions__item__criticality._const_tab_at = ('..', u'id')
-    ___Connect_protocolExtensions__item__criticality._const_tab_id = u'criticality'
-    ___Connect_protocolExtensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('RUA-Containers', 'RUA-PROTOCOL-EXTENSION'), [u'Extension']))
+    ___Connect_protocolExtensions__item__criticality._const_tab_at = ('..', 'id')
+    ___Connect_protocolExtensions__item__criticality._const_tab_id = 'criticality'
+    ___Connect_protocolExtensions__item__extensionValue = OPEN(name='extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('RUA-Containers', 'RUA-PROTOCOL-EXTENSION'), ['Extension']))
     ___Connect_protocolExtensions__item__extensionValue._const_tab = ____Connect_protocolExtensions__item__id_tab
-    ___Connect_protocolExtensions__item__extensionValue._const_tab_at = ('..', u'id')
-    ___Connect_protocolExtensions__item__extensionValue._const_tab_id = u'Extension'
+    ___Connect_protocolExtensions__item__extensionValue._const_tab_at = ('..', 'id')
+    ___Connect_protocolExtensions__item__extensionValue._const_tab_id = 'Extension'
     __Connect_protocolExtensions__item_._cont = ASN1Dict([
-        (u'id', ___Connect_protocolExtensions__item__id),
-        (u'criticality', ___Connect_protocolExtensions__item__criticality),
-        (u'extensionValue', ___Connect_protocolExtensions__item__extensionValue),
+        ('id', ___Connect_protocolExtensions__item__id),
+        ('criticality', ___Connect_protocolExtensions__item__criticality),
+        ('extensionValue', ___Connect_protocolExtensions__item__extensionValue),
         ])
     __Connect_protocolExtensions__item_._ext = None
     _Connect_protocolExtensions._cont = __Connect_protocolExtensions__item_
     _Connect_protocolExtensions._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=65535)], ev=None, er=[])
     Connect._cont = ASN1Dict([
-        (u'protocolIEs', _Connect_protocolIEs),
-        (u'protocolExtensions', _Connect_protocolExtensions),
+        ('protocolIEs', _Connect_protocolIEs),
+        ('protocolExtensions', _Connect_protocolExtensions),
         ])
     Connect._ext = []
     
     #-----< ConnectIEs >-----#
-    ConnectIEs = CLASS(name=u'ConnectIEs', mode=MODE_SET, typeref=ASN1RefType(('RUA-Containers', 'RUA-PROTOCOL-IES')))
-    _ConnectIEs_val_Value_0 = ENUM(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('RUA-IEs', 'CN-DomainIndicator')))
-    _ConnectIEs_val_Value_1 = BIT_STR(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('RUA-IEs', 'Context-ID')))
-    _ConnectIEs_val_Value_2 = SEQ(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('RUA-IEs', 'IntraDomainNasNodeSelector')))
-    _ConnectIEs_val_Value_3 = ENUM(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('RUA-IEs', 'Establishment-Cause')))
-    _ConnectIEs_val_Value_4 = OCT_STR(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('RUA-IEs', 'RANAP-Message')))
-    ConnectIEs._val = ASN1Set(rv=[dict([(u'id', 7), (u'criticality', u'reject'), (u'Value', _ConnectIEs_val_Value_0), (u'presence', u'mandatory')]), dict([(u'id', 3), (u'criticality', u'reject'), (u'Value', _ConnectIEs_val_Value_1), (u'presence', u'mandatory')]), dict([(u'id', 5), (u'criticality', u'ignore'), (u'Value', _ConnectIEs_val_Value_2), (u'presence', u'optional')]), dict([(u'id', 6), (u'criticality', u'reject'), (u'Value', _ConnectIEs_val_Value_3), (u'presence', u'mandatory')]), dict([(u'id', 4), (u'criticality', u'reject'), (u'Value', _ConnectIEs_val_Value_4), (u'presence', u'mandatory')])], rr=[], ev=[], er=[])
+    ConnectIEs = CLASS(name='ConnectIEs', mode=MODE_SET, typeref=ASN1RefType(('RUA-Containers', 'RUA-PROTOCOL-IES')))
+    _ConnectIEs_val_Value_0 = ENUM(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('RUA-IEs', 'CN-DomainIndicator')))
+    _ConnectIEs_val_Value_1 = BIT_STR(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('RUA-IEs', 'Context-ID')))
+    _ConnectIEs_val_Value_2 = SEQ(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('RUA-IEs', 'IntraDomainNasNodeSelector')))
+    _ConnectIEs_val_Value_3 = ENUM(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('RUA-IEs', 'Establishment-Cause')))
+    _ConnectIEs_val_Value_4 = OCT_STR(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('RUA-IEs', 'RANAP-Message')))
+    ConnectIEs._val = ASN1Set(rv=[dict([('id', 7), ('criticality', 'reject'), ('Value', _ConnectIEs_val_Value_0), ('presence', 'mandatory')]), dict([('id', 3), ('criticality', 'reject'), ('Value', _ConnectIEs_val_Value_1), ('presence', 'mandatory')]), dict([('id', 5), ('criticality', 'ignore'), ('Value', _ConnectIEs_val_Value_2), ('presence', 'optional')]), dict([('id', 6), ('criticality', 'reject'), ('Value', _ConnectIEs_val_Value_3), ('presence', 'mandatory')]), dict([('id', 4), ('criticality', 'reject'), ('Value', _ConnectIEs_val_Value_4), ('presence', 'mandatory')])], rr=[], ev=[], er=[])
     
     #-----< ConnectExtensions >-----#
-    ConnectExtensions = CLASS(name=u'ConnectExtensions', mode=MODE_SET, typeref=ASN1RefType(('RUA-Containers', 'RUA-PROTOCOL-EXTENSION')))
-    _ConnectExtensions_val_Extension_0 = ENUM(name=u'Extension', mode=MODE_TYPE, typeref=ASN1RefType(('RUA-IEs', 'CSGMembershipStatus')))
-    ConnectExtensions._val = ASN1Set(rv=[dict([(u'id', 9), (u'criticality', u'ignore'), (u'Extension', _ConnectExtensions_val_Extension_0), (u'presence', u'optional')])], rr=[], ev=[], er=[])
+    ConnectExtensions = CLASS(name='ConnectExtensions', mode=MODE_SET, typeref=ASN1RefType(('RUA-Containers', 'RUA-PROTOCOL-EXTENSION')))
+    _ConnectExtensions_val_Extension_0 = ENUM(name='Extension', mode=MODE_TYPE, typeref=ASN1RefType(('RUA-IEs', 'CSGMembershipStatus')))
+    ConnectExtensions._val = ASN1Set(rv=[dict([('id', 9), ('criticality', 'ignore'), ('Extension', _ConnectExtensions_val_Extension_0), ('presence', 'optional')])], rr=[], ev=[], er=[])
     
     #-----< DirectTransfer >-----#
-    DirectTransfer = SEQ(name=u'DirectTransfer', mode=MODE_TYPE)
-    _DirectTransfer_protocolIEs = SEQ_OF(name=u'protocolIEs', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('RUA-Containers', 'ProtocolIE-Container')))
+    DirectTransfer = SEQ(name='DirectTransfer', mode=MODE_TYPE)
+    _DirectTransfer_protocolIEs = SEQ_OF(name='protocolIEs', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('RUA-Containers', 'ProtocolIE-Container')))
     __DirectTransfer_protocolIEs__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('RUA-Containers', 'ProtocolIE-Field')))
-    ___DirectTransfer_protocolIEs__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('RUA-Containers', 'RUA-PROTOCOL-IES'), [u'id']))
+    ___DirectTransfer_protocolIEs__item__id = INT(name='id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('RUA-Containers', 'RUA-PROTOCOL-IES'), ['id']))
     ____DirectTransfer_protocolIEs__item__id_tab = CLASS(name='_tab_RUA-PROTOCOL-IES', mode=MODE_SET, typeref=ASN1RefType(('RUA-Containers', 'RUA-PROTOCOL-IES')))
-    _____DirectTransfer_protocolIEs__item__id_tab_val_Value_0 = ENUM(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('RUA-IEs', 'CN-DomainIndicator')))
-    _____DirectTransfer_protocolIEs__item__id_tab_val_Value_1 = BIT_STR(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('RUA-IEs', 'Context-ID')))
-    _____DirectTransfer_protocolIEs__item__id_tab_val_Value_2 = OCT_STR(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('RUA-IEs', 'RANAP-Message')))
-    ____DirectTransfer_protocolIEs__item__id_tab._val = ASN1Set(rv=[dict([(u'id', 7), (u'criticality', u'reject'), (u'Value', _____DirectTransfer_protocolIEs__item__id_tab_val_Value_0), (u'presence', u'mandatory')]), dict([(u'id', 3), (u'criticality', u'reject'), (u'Value', _____DirectTransfer_protocolIEs__item__id_tab_val_Value_1), (u'presence', u'mandatory')]), dict([(u'id', 4), (u'criticality', u'reject'), (u'Value', _____DirectTransfer_protocolIEs__item__id_tab_val_Value_2), (u'presence', u'mandatory')])], rr=[], ev=None, er=[])
+    _____DirectTransfer_protocolIEs__item__id_tab_val_Value_0 = ENUM(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('RUA-IEs', 'CN-DomainIndicator')))
+    _____DirectTransfer_protocolIEs__item__id_tab_val_Value_1 = BIT_STR(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('RUA-IEs', 'Context-ID')))
+    _____DirectTransfer_protocolIEs__item__id_tab_val_Value_2 = OCT_STR(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('RUA-IEs', 'RANAP-Message')))
+    ____DirectTransfer_protocolIEs__item__id_tab._val = ASN1Set(rv=[dict([('id', 7), ('criticality', 'reject'), ('Value', _____DirectTransfer_protocolIEs__item__id_tab_val_Value_0), ('presence', 'mandatory')]), dict([('id', 3), ('criticality', 'reject'), ('Value', _____DirectTransfer_protocolIEs__item__id_tab_val_Value_1), ('presence', 'mandatory')]), dict([('id', 4), ('criticality', 'reject'), ('Value', _____DirectTransfer_protocolIEs__item__id_tab_val_Value_2), ('presence', 'mandatory')])], rr=[], ev=None, er=[])
     ___DirectTransfer_protocolIEs__item__id._const_tab = ____DirectTransfer_protocolIEs__item__id_tab
     ___DirectTransfer_protocolIEs__item__id._const_tab_at = None
-    ___DirectTransfer_protocolIEs__item__id._const_tab_id = u'id'
-    ___DirectTransfer_protocolIEs__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('RUA-Containers', 'RUA-PROTOCOL-IES'), [u'criticality']))
+    ___DirectTransfer_protocolIEs__item__id._const_tab_id = 'id'
+    ___DirectTransfer_protocolIEs__item__criticality = ENUM(name='criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('RUA-Containers', 'RUA-PROTOCOL-IES'), ['criticality']))
     ___DirectTransfer_protocolIEs__item__criticality._const_tab = ____DirectTransfer_protocolIEs__item__id_tab
-    ___DirectTransfer_protocolIEs__item__criticality._const_tab_at = ('..', u'id')
-    ___DirectTransfer_protocolIEs__item__criticality._const_tab_id = u'criticality'
-    ___DirectTransfer_protocolIEs__item__value = OPEN(name=u'value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('RUA-Containers', 'RUA-PROTOCOL-IES'), [u'Value']))
+    ___DirectTransfer_protocolIEs__item__criticality._const_tab_at = ('..', 'id')
+    ___DirectTransfer_protocolIEs__item__criticality._const_tab_id = 'criticality'
+    ___DirectTransfer_protocolIEs__item__value = OPEN(name='value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('RUA-Containers', 'RUA-PROTOCOL-IES'), ['Value']))
     ___DirectTransfer_protocolIEs__item__value._const_tab = ____DirectTransfer_protocolIEs__item__id_tab
-    ___DirectTransfer_protocolIEs__item__value._const_tab_at = ('..', u'id')
-    ___DirectTransfer_protocolIEs__item__value._const_tab_id = u'Value'
+    ___DirectTransfer_protocolIEs__item__value._const_tab_at = ('..', 'id')
+    ___DirectTransfer_protocolIEs__item__value._const_tab_id = 'Value'
     __DirectTransfer_protocolIEs__item_._cont = ASN1Dict([
-        (u'id', ___DirectTransfer_protocolIEs__item__id),
-        (u'criticality', ___DirectTransfer_protocolIEs__item__criticality),
-        (u'value', ___DirectTransfer_protocolIEs__item__value),
+        ('id', ___DirectTransfer_protocolIEs__item__id),
+        ('criticality', ___DirectTransfer_protocolIEs__item__criticality),
+        ('value', ___DirectTransfer_protocolIEs__item__value),
         ])
     __DirectTransfer_protocolIEs__item_._ext = None
     _DirectTransfer_protocolIEs._cont = __DirectTransfer_protocolIEs__item_
     _DirectTransfer_protocolIEs._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=65535)], ev=None, er=[])
-    _DirectTransfer_protocolExtensions = SEQ_OF(name=u'protocolExtensions', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('RUA-Containers', 'ProtocolExtensionContainer')), opt=True)
+    _DirectTransfer_protocolExtensions = SEQ_OF(name='protocolExtensions', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('RUA-Containers', 'ProtocolExtensionContainer')), opt=True)
     __DirectTransfer_protocolExtensions__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('RUA-Containers', 'ProtocolExtensionField')))
-    ___DirectTransfer_protocolExtensions__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('RUA-Containers', 'RUA-PROTOCOL-EXTENSION'), [u'id']))
+    ___DirectTransfer_protocolExtensions__item__id = INT(name='id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('RUA-Containers', 'RUA-PROTOCOL-EXTENSION'), ['id']))
     ____DirectTransfer_protocolExtensions__item__id_tab = CLASS(name='_tab_RUA-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('RUA-Containers', 'RUA-PROTOCOL-EXTENSION')))
     ____DirectTransfer_protocolExtensions__item__id_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___DirectTransfer_protocolExtensions__item__id._const_tab = ____DirectTransfer_protocolExtensions__item__id_tab
     ___DirectTransfer_protocolExtensions__item__id._const_tab_at = None
-    ___DirectTransfer_protocolExtensions__item__id._const_tab_id = u'id'
-    ___DirectTransfer_protocolExtensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('RUA-Containers', 'RUA-PROTOCOL-EXTENSION'), [u'criticality']))
+    ___DirectTransfer_protocolExtensions__item__id._const_tab_id = 'id'
+    ___DirectTransfer_protocolExtensions__item__criticality = ENUM(name='criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('RUA-Containers', 'RUA-PROTOCOL-EXTENSION'), ['criticality']))
     ____DirectTransfer_protocolExtensions__item__criticality_tab = CLASS(name='_tab_RUA-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('RUA-Containers', 'RUA-PROTOCOL-EXTENSION')))
     ____DirectTransfer_protocolExtensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___DirectTransfer_protocolExtensions__item__criticality._const_tab = ____DirectTransfer_protocolExtensions__item__criticality_tab
-    ___DirectTransfer_protocolExtensions__item__criticality._const_tab_at = ('..', u'id')
-    ___DirectTransfer_protocolExtensions__item__criticality._const_tab_id = u'criticality'
-    ___DirectTransfer_protocolExtensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('RUA-Containers', 'RUA-PROTOCOL-EXTENSION'), [u'Extension']))
+    ___DirectTransfer_protocolExtensions__item__criticality._const_tab_at = ('..', 'id')
+    ___DirectTransfer_protocolExtensions__item__criticality._const_tab_id = 'criticality'
+    ___DirectTransfer_protocolExtensions__item__extensionValue = OPEN(name='extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('RUA-Containers', 'RUA-PROTOCOL-EXTENSION'), ['Extension']))
     ____DirectTransfer_protocolExtensions__item__extensionValue_tab = CLASS(name='_tab_RUA-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('RUA-Containers', 'RUA-PROTOCOL-EXTENSION')))
     ____DirectTransfer_protocolExtensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___DirectTransfer_protocolExtensions__item__extensionValue._const_tab = ____DirectTransfer_protocolExtensions__item__extensionValue_tab
-    ___DirectTransfer_protocolExtensions__item__extensionValue._const_tab_at = ('..', u'id')
-    ___DirectTransfer_protocolExtensions__item__extensionValue._const_tab_id = u'Extension'
+    ___DirectTransfer_protocolExtensions__item__extensionValue._const_tab_at = ('..', 'id')
+    ___DirectTransfer_protocolExtensions__item__extensionValue._const_tab_id = 'Extension'
     __DirectTransfer_protocolExtensions__item_._cont = ASN1Dict([
-        (u'id', ___DirectTransfer_protocolExtensions__item__id),
-        (u'criticality', ___DirectTransfer_protocolExtensions__item__criticality),
-        (u'extensionValue', ___DirectTransfer_protocolExtensions__item__extensionValue),
+        ('id', ___DirectTransfer_protocolExtensions__item__id),
+        ('criticality', ___DirectTransfer_protocolExtensions__item__criticality),
+        ('extensionValue', ___DirectTransfer_protocolExtensions__item__extensionValue),
         ])
     __DirectTransfer_protocolExtensions__item_._ext = None
     _DirectTransfer_protocolExtensions._cont = __DirectTransfer_protocolExtensions__item_
     _DirectTransfer_protocolExtensions._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=65535)], ev=None, er=[])
     DirectTransfer._cont = ASN1Dict([
-        (u'protocolIEs', _DirectTransfer_protocolIEs),
-        (u'protocolExtensions', _DirectTransfer_protocolExtensions),
+        ('protocolIEs', _DirectTransfer_protocolIEs),
+        ('protocolExtensions', _DirectTransfer_protocolExtensions),
         ])
     DirectTransfer._ext = []
     
     #-----< DirectTransferIEs >-----#
-    DirectTransferIEs = CLASS(name=u'DirectTransferIEs', mode=MODE_SET, typeref=ASN1RefType(('RUA-Containers', 'RUA-PROTOCOL-IES')))
-    _DirectTransferIEs_val_Value_0 = ENUM(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('RUA-IEs', 'CN-DomainIndicator')))
-    _DirectTransferIEs_val_Value_1 = BIT_STR(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('RUA-IEs', 'Context-ID')))
-    _DirectTransferIEs_val_Value_2 = OCT_STR(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('RUA-IEs', 'RANAP-Message')))
-    DirectTransferIEs._val = ASN1Set(rv=[dict([(u'id', 7), (u'criticality', u'reject'), (u'Value', _DirectTransferIEs_val_Value_0), (u'presence', u'mandatory')]), dict([(u'id', 3), (u'criticality', u'reject'), (u'Value', _DirectTransferIEs_val_Value_1), (u'presence', u'mandatory')]), dict([(u'id', 4), (u'criticality', u'reject'), (u'Value', _DirectTransferIEs_val_Value_2), (u'presence', u'mandatory')])], rr=[], ev=[], er=[])
+    DirectTransferIEs = CLASS(name='DirectTransferIEs', mode=MODE_SET, typeref=ASN1RefType(('RUA-Containers', 'RUA-PROTOCOL-IES')))
+    _DirectTransferIEs_val_Value_0 = ENUM(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('RUA-IEs', 'CN-DomainIndicator')))
+    _DirectTransferIEs_val_Value_1 = BIT_STR(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('RUA-IEs', 'Context-ID')))
+    _DirectTransferIEs_val_Value_2 = OCT_STR(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('RUA-IEs', 'RANAP-Message')))
+    DirectTransferIEs._val = ASN1Set(rv=[dict([('id', 7), ('criticality', 'reject'), ('Value', _DirectTransferIEs_val_Value_0), ('presence', 'mandatory')]), dict([('id', 3), ('criticality', 'reject'), ('Value', _DirectTransferIEs_val_Value_1), ('presence', 'mandatory')]), dict([('id', 4), ('criticality', 'reject'), ('Value', _DirectTransferIEs_val_Value_2), ('presence', 'mandatory')])], rr=[], ev=[], er=[])
     
     #-----< DirectTransferExtensions >-----#
-    DirectTransferExtensions = CLASS(name=u'DirectTransferExtensions', mode=MODE_SET, typeref=ASN1RefType(('RUA-Containers', 'RUA-PROTOCOL-EXTENSION')))
+    DirectTransferExtensions = CLASS(name='DirectTransferExtensions', mode=MODE_SET, typeref=ASN1RefType(('RUA-Containers', 'RUA-PROTOCOL-EXTENSION')))
     DirectTransferExtensions._val = ASN1Set(rv=[], rr=[], ev=[], er=[])
     
     #-----< Disconnect >-----#
-    Disconnect = SEQ(name=u'Disconnect', mode=MODE_TYPE)
-    _Disconnect_protocolIEs = SEQ_OF(name=u'protocolIEs', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('RUA-Containers', 'ProtocolIE-Container')))
+    Disconnect = SEQ(name='Disconnect', mode=MODE_TYPE)
+    _Disconnect_protocolIEs = SEQ_OF(name='protocolIEs', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('RUA-Containers', 'ProtocolIE-Container')))
     __Disconnect_protocolIEs__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('RUA-Containers', 'ProtocolIE-Field')))
-    ___Disconnect_protocolIEs__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('RUA-Containers', 'RUA-PROTOCOL-IES'), [u'id']))
+    ___Disconnect_protocolIEs__item__id = INT(name='id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('RUA-Containers', 'RUA-PROTOCOL-IES'), ['id']))
     ____Disconnect_protocolIEs__item__id_tab = CLASS(name='_tab_RUA-PROTOCOL-IES', mode=MODE_SET, typeref=ASN1RefType(('RUA-Containers', 'RUA-PROTOCOL-IES')))
-    _____Disconnect_protocolIEs__item__id_tab_val_Value_0 = ENUM(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('RUA-IEs', 'CN-DomainIndicator')))
-    _____Disconnect_protocolIEs__item__id_tab_val_Value_1 = BIT_STR(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('RUA-IEs', 'Context-ID')))
-    _____Disconnect_protocolIEs__item__id_tab_val_Value_2 = CHOICE(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('RUA-IEs', 'Cause')))
-    _____Disconnect_protocolIEs__item__id_tab_val_Value_3 = OCT_STR(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('RUA-IEs', 'RANAP-Message')))
-    ____Disconnect_protocolIEs__item__id_tab._val = ASN1Set(rv=[dict([(u'id', 7), (u'criticality', u'reject'), (u'Value', _____Disconnect_protocolIEs__item__id_tab_val_Value_0), (u'presence', u'mandatory')]), dict([(u'id', 3), (u'criticality', u'reject'), (u'Value', _____Disconnect_protocolIEs__item__id_tab_val_Value_1), (u'presence', u'mandatory')]), dict([(u'id', 1), (u'criticality', u'reject'), (u'Value', _____Disconnect_protocolIEs__item__id_tab_val_Value_2), (u'presence', u'mandatory')]), dict([(u'id', 4), (u'criticality', u'reject'), (u'Value', _____Disconnect_protocolIEs__item__id_tab_val_Value_3), (u'presence', u'conditional')])], rr=[], ev=None, er=[])
+    _____Disconnect_protocolIEs__item__id_tab_val_Value_0 = ENUM(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('RUA-IEs', 'CN-DomainIndicator')))
+    _____Disconnect_protocolIEs__item__id_tab_val_Value_1 = BIT_STR(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('RUA-IEs', 'Context-ID')))
+    _____Disconnect_protocolIEs__item__id_tab_val_Value_2 = CHOICE(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('RUA-IEs', 'Cause')))
+    _____Disconnect_protocolIEs__item__id_tab_val_Value_3 = OCT_STR(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('RUA-IEs', 'RANAP-Message')))
+    ____Disconnect_protocolIEs__item__id_tab._val = ASN1Set(rv=[dict([('id', 7), ('criticality', 'reject'), ('Value', _____Disconnect_protocolIEs__item__id_tab_val_Value_0), ('presence', 'mandatory')]), dict([('id', 3), ('criticality', 'reject'), ('Value', _____Disconnect_protocolIEs__item__id_tab_val_Value_1), ('presence', 'mandatory')]), dict([('id', 1), ('criticality', 'reject'), ('Value', _____Disconnect_protocolIEs__item__id_tab_val_Value_2), ('presence', 'mandatory')]), dict([('id', 4), ('criticality', 'reject'), ('Value', _____Disconnect_protocolIEs__item__id_tab_val_Value_3), ('presence', 'conditional')])], rr=[], ev=None, er=[])
     ___Disconnect_protocolIEs__item__id._const_tab = ____Disconnect_protocolIEs__item__id_tab
     ___Disconnect_protocolIEs__item__id._const_tab_at = None
-    ___Disconnect_protocolIEs__item__id._const_tab_id = u'id'
-    ___Disconnect_protocolIEs__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('RUA-Containers', 'RUA-PROTOCOL-IES'), [u'criticality']))
+    ___Disconnect_protocolIEs__item__id._const_tab_id = 'id'
+    ___Disconnect_protocolIEs__item__criticality = ENUM(name='criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('RUA-Containers', 'RUA-PROTOCOL-IES'), ['criticality']))
     ___Disconnect_protocolIEs__item__criticality._const_tab = ____Disconnect_protocolIEs__item__id_tab
-    ___Disconnect_protocolIEs__item__criticality._const_tab_at = ('..', u'id')
-    ___Disconnect_protocolIEs__item__criticality._const_tab_id = u'criticality'
-    ___Disconnect_protocolIEs__item__value = OPEN(name=u'value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('RUA-Containers', 'RUA-PROTOCOL-IES'), [u'Value']))
+    ___Disconnect_protocolIEs__item__criticality._const_tab_at = ('..', 'id')
+    ___Disconnect_protocolIEs__item__criticality._const_tab_id = 'criticality'
+    ___Disconnect_protocolIEs__item__value = OPEN(name='value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('RUA-Containers', 'RUA-PROTOCOL-IES'), ['Value']))
     ___Disconnect_protocolIEs__item__value._const_tab = ____Disconnect_protocolIEs__item__id_tab
-    ___Disconnect_protocolIEs__item__value._const_tab_at = ('..', u'id')
-    ___Disconnect_protocolIEs__item__value._const_tab_id = u'Value'
+    ___Disconnect_protocolIEs__item__value._const_tab_at = ('..', 'id')
+    ___Disconnect_protocolIEs__item__value._const_tab_id = 'Value'
     __Disconnect_protocolIEs__item_._cont = ASN1Dict([
-        (u'id', ___Disconnect_protocolIEs__item__id),
-        (u'criticality', ___Disconnect_protocolIEs__item__criticality),
-        (u'value', ___Disconnect_protocolIEs__item__value),
+        ('id', ___Disconnect_protocolIEs__item__id),
+        ('criticality', ___Disconnect_protocolIEs__item__criticality),
+        ('value', ___Disconnect_protocolIEs__item__value),
         ])
     __Disconnect_protocolIEs__item_._ext = None
     _Disconnect_protocolIEs._cont = __Disconnect_protocolIEs__item_
     _Disconnect_protocolIEs._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=65535)], ev=None, er=[])
-    _Disconnect_protocolExtensions = SEQ_OF(name=u'protocolExtensions', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('RUA-Containers', 'ProtocolExtensionContainer')), opt=True)
+    _Disconnect_protocolExtensions = SEQ_OF(name='protocolExtensions', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('RUA-Containers', 'ProtocolExtensionContainer')), opt=True)
     __Disconnect_protocolExtensions__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('RUA-Containers', 'ProtocolExtensionField')))
-    ___Disconnect_protocolExtensions__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('RUA-Containers', 'RUA-PROTOCOL-EXTENSION'), [u'id']))
+    ___Disconnect_protocolExtensions__item__id = INT(name='id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('RUA-Containers', 'RUA-PROTOCOL-EXTENSION'), ['id']))
     ____Disconnect_protocolExtensions__item__id_tab = CLASS(name='_tab_RUA-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('RUA-Containers', 'RUA-PROTOCOL-EXTENSION')))
     ____Disconnect_protocolExtensions__item__id_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___Disconnect_protocolExtensions__item__id._const_tab = ____Disconnect_protocolExtensions__item__id_tab
     ___Disconnect_protocolExtensions__item__id._const_tab_at = None
-    ___Disconnect_protocolExtensions__item__id._const_tab_id = u'id'
-    ___Disconnect_protocolExtensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('RUA-Containers', 'RUA-PROTOCOL-EXTENSION'), [u'criticality']))
+    ___Disconnect_protocolExtensions__item__id._const_tab_id = 'id'
+    ___Disconnect_protocolExtensions__item__criticality = ENUM(name='criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('RUA-Containers', 'RUA-PROTOCOL-EXTENSION'), ['criticality']))
     ____Disconnect_protocolExtensions__item__criticality_tab = CLASS(name='_tab_RUA-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('RUA-Containers', 'RUA-PROTOCOL-EXTENSION')))
     ____Disconnect_protocolExtensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___Disconnect_protocolExtensions__item__criticality._const_tab = ____Disconnect_protocolExtensions__item__criticality_tab
-    ___Disconnect_protocolExtensions__item__criticality._const_tab_at = ('..', u'id')
-    ___Disconnect_protocolExtensions__item__criticality._const_tab_id = u'criticality'
-    ___Disconnect_protocolExtensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('RUA-Containers', 'RUA-PROTOCOL-EXTENSION'), [u'Extension']))
+    ___Disconnect_protocolExtensions__item__criticality._const_tab_at = ('..', 'id')
+    ___Disconnect_protocolExtensions__item__criticality._const_tab_id = 'criticality'
+    ___Disconnect_protocolExtensions__item__extensionValue = OPEN(name='extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('RUA-Containers', 'RUA-PROTOCOL-EXTENSION'), ['Extension']))
     ____Disconnect_protocolExtensions__item__extensionValue_tab = CLASS(name='_tab_RUA-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('RUA-Containers', 'RUA-PROTOCOL-EXTENSION')))
     ____Disconnect_protocolExtensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___Disconnect_protocolExtensions__item__extensionValue._const_tab = ____Disconnect_protocolExtensions__item__extensionValue_tab
-    ___Disconnect_protocolExtensions__item__extensionValue._const_tab_at = ('..', u'id')
-    ___Disconnect_protocolExtensions__item__extensionValue._const_tab_id = u'Extension'
+    ___Disconnect_protocolExtensions__item__extensionValue._const_tab_at = ('..', 'id')
+    ___Disconnect_protocolExtensions__item__extensionValue._const_tab_id = 'Extension'
     __Disconnect_protocolExtensions__item_._cont = ASN1Dict([
-        (u'id', ___Disconnect_protocolExtensions__item__id),
-        (u'criticality', ___Disconnect_protocolExtensions__item__criticality),
-        (u'extensionValue', ___Disconnect_protocolExtensions__item__extensionValue),
+        ('id', ___Disconnect_protocolExtensions__item__id),
+        ('criticality', ___Disconnect_protocolExtensions__item__criticality),
+        ('extensionValue', ___Disconnect_protocolExtensions__item__extensionValue),
         ])
     __Disconnect_protocolExtensions__item_._ext = None
     _Disconnect_protocolExtensions._cont = __Disconnect_protocolExtensions__item_
     _Disconnect_protocolExtensions._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=65535)], ev=None, er=[])
     Disconnect._cont = ASN1Dict([
-        (u'protocolIEs', _Disconnect_protocolIEs),
-        (u'protocolExtensions', _Disconnect_protocolExtensions),
+        ('protocolIEs', _Disconnect_protocolIEs),
+        ('protocolExtensions', _Disconnect_protocolExtensions),
         ])
     Disconnect._ext = []
     
     #-----< DisconnectIEs >-----#
-    DisconnectIEs = CLASS(name=u'DisconnectIEs', mode=MODE_SET, typeref=ASN1RefType(('RUA-Containers', 'RUA-PROTOCOL-IES')))
-    _DisconnectIEs_val_Value_0 = ENUM(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('RUA-IEs', 'CN-DomainIndicator')))
-    _DisconnectIEs_val_Value_1 = BIT_STR(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('RUA-IEs', 'Context-ID')))
-    _DisconnectIEs_val_Value_2 = CHOICE(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('RUA-IEs', 'Cause')))
-    _DisconnectIEs_val_Value_3 = OCT_STR(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('RUA-IEs', 'RANAP-Message')))
-    DisconnectIEs._val = ASN1Set(rv=[dict([(u'id', 7), (u'criticality', u'reject'), (u'Value', _DisconnectIEs_val_Value_0), (u'presence', u'mandatory')]), dict([(u'id', 3), (u'criticality', u'reject'), (u'Value', _DisconnectIEs_val_Value_1), (u'presence', u'mandatory')]), dict([(u'id', 1), (u'criticality', u'reject'), (u'Value', _DisconnectIEs_val_Value_2), (u'presence', u'mandatory')]), dict([(u'id', 4), (u'criticality', u'reject'), (u'Value', _DisconnectIEs_val_Value_3), (u'presence', u'conditional')])], rr=[], ev=[], er=[])
+    DisconnectIEs = CLASS(name='DisconnectIEs', mode=MODE_SET, typeref=ASN1RefType(('RUA-Containers', 'RUA-PROTOCOL-IES')))
+    _DisconnectIEs_val_Value_0 = ENUM(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('RUA-IEs', 'CN-DomainIndicator')))
+    _DisconnectIEs_val_Value_1 = BIT_STR(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('RUA-IEs', 'Context-ID')))
+    _DisconnectIEs_val_Value_2 = CHOICE(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('RUA-IEs', 'Cause')))
+    _DisconnectIEs_val_Value_3 = OCT_STR(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('RUA-IEs', 'RANAP-Message')))
+    DisconnectIEs._val = ASN1Set(rv=[dict([('id', 7), ('criticality', 'reject'), ('Value', _DisconnectIEs_val_Value_0), ('presence', 'mandatory')]), dict([('id', 3), ('criticality', 'reject'), ('Value', _DisconnectIEs_val_Value_1), ('presence', 'mandatory')]), dict([('id', 1), ('criticality', 'reject'), ('Value', _DisconnectIEs_val_Value_2), ('presence', 'mandatory')]), dict([('id', 4), ('criticality', 'reject'), ('Value', _DisconnectIEs_val_Value_3), ('presence', 'conditional')])], rr=[], ev=[], er=[])
     
     #-----< DisconnectExtensions >-----#
-    DisconnectExtensions = CLASS(name=u'DisconnectExtensions', mode=MODE_SET, typeref=ASN1RefType(('RUA-Containers', 'RUA-PROTOCOL-EXTENSION')))
+    DisconnectExtensions = CLASS(name='DisconnectExtensions', mode=MODE_SET, typeref=ASN1RefType(('RUA-Containers', 'RUA-PROTOCOL-EXTENSION')))
     DisconnectExtensions._val = ASN1Set(rv=[], rr=[], ev=[], er=[])
     
     #-----< ConnectionlessTransfer >-----#
-    ConnectionlessTransfer = SEQ(name=u'ConnectionlessTransfer', mode=MODE_TYPE)
-    _ConnectionlessTransfer_protocolIEs = SEQ_OF(name=u'protocolIEs', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('RUA-Containers', 'ProtocolIE-Container')))
+    ConnectionlessTransfer = SEQ(name='ConnectionlessTransfer', mode=MODE_TYPE)
+    _ConnectionlessTransfer_protocolIEs = SEQ_OF(name='protocolIEs', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('RUA-Containers', 'ProtocolIE-Container')))
     __ConnectionlessTransfer_protocolIEs__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('RUA-Containers', 'ProtocolIE-Field')))
-    ___ConnectionlessTransfer_protocolIEs__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('RUA-Containers', 'RUA-PROTOCOL-IES'), [u'id']))
+    ___ConnectionlessTransfer_protocolIEs__item__id = INT(name='id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('RUA-Containers', 'RUA-PROTOCOL-IES'), ['id']))
     ____ConnectionlessTransfer_protocolIEs__item__id_tab = CLASS(name='_tab_RUA-PROTOCOL-IES', mode=MODE_SET, typeref=ASN1RefType(('RUA-Containers', 'RUA-PROTOCOL-IES')))
-    _____ConnectionlessTransfer_protocolIEs__item__id_tab_val_Value_0 = OCT_STR(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('RUA-IEs', 'RANAP-Message')))
-    ____ConnectionlessTransfer_protocolIEs__item__id_tab._val = ASN1Set(rv=[dict([(u'id', 4), (u'criticality', u'reject'), (u'Value', _____ConnectionlessTransfer_protocolIEs__item__id_tab_val_Value_0), (u'presence', u'mandatory')])], rr=[], ev=None, er=[])
+    _____ConnectionlessTransfer_protocolIEs__item__id_tab_val_Value_0 = OCT_STR(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('RUA-IEs', 'RANAP-Message')))
+    ____ConnectionlessTransfer_protocolIEs__item__id_tab._val = ASN1Set(rv=[dict([('id', 4), ('criticality', 'reject'), ('Value', _____ConnectionlessTransfer_protocolIEs__item__id_tab_val_Value_0), ('presence', 'mandatory')])], rr=[], ev=None, er=[])
     ___ConnectionlessTransfer_protocolIEs__item__id._const_tab = ____ConnectionlessTransfer_protocolIEs__item__id_tab
     ___ConnectionlessTransfer_protocolIEs__item__id._const_tab_at = None
-    ___ConnectionlessTransfer_protocolIEs__item__id._const_tab_id = u'id'
-    ___ConnectionlessTransfer_protocolIEs__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('RUA-Containers', 'RUA-PROTOCOL-IES'), [u'criticality']))
+    ___ConnectionlessTransfer_protocolIEs__item__id._const_tab_id = 'id'
+    ___ConnectionlessTransfer_protocolIEs__item__criticality = ENUM(name='criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('RUA-Containers', 'RUA-PROTOCOL-IES'), ['criticality']))
     ___ConnectionlessTransfer_protocolIEs__item__criticality._const_tab = ____ConnectionlessTransfer_protocolIEs__item__id_tab
-    ___ConnectionlessTransfer_protocolIEs__item__criticality._const_tab_at = ('..', u'id')
-    ___ConnectionlessTransfer_protocolIEs__item__criticality._const_tab_id = u'criticality'
-    ___ConnectionlessTransfer_protocolIEs__item__value = OPEN(name=u'value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('RUA-Containers', 'RUA-PROTOCOL-IES'), [u'Value']))
+    ___ConnectionlessTransfer_protocolIEs__item__criticality._const_tab_at = ('..', 'id')
+    ___ConnectionlessTransfer_protocolIEs__item__criticality._const_tab_id = 'criticality'
+    ___ConnectionlessTransfer_protocolIEs__item__value = OPEN(name='value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('RUA-Containers', 'RUA-PROTOCOL-IES'), ['Value']))
     ___ConnectionlessTransfer_protocolIEs__item__value._const_tab = ____ConnectionlessTransfer_protocolIEs__item__id_tab
-    ___ConnectionlessTransfer_protocolIEs__item__value._const_tab_at = ('..', u'id')
-    ___ConnectionlessTransfer_protocolIEs__item__value._const_tab_id = u'Value'
+    ___ConnectionlessTransfer_protocolIEs__item__value._const_tab_at = ('..', 'id')
+    ___ConnectionlessTransfer_protocolIEs__item__value._const_tab_id = 'Value'
     __ConnectionlessTransfer_protocolIEs__item_._cont = ASN1Dict([
-        (u'id', ___ConnectionlessTransfer_protocolIEs__item__id),
-        (u'criticality', ___ConnectionlessTransfer_protocolIEs__item__criticality),
-        (u'value', ___ConnectionlessTransfer_protocolIEs__item__value),
+        ('id', ___ConnectionlessTransfer_protocolIEs__item__id),
+        ('criticality', ___ConnectionlessTransfer_protocolIEs__item__criticality),
+        ('value', ___ConnectionlessTransfer_protocolIEs__item__value),
         ])
     __ConnectionlessTransfer_protocolIEs__item_._ext = None
     _ConnectionlessTransfer_protocolIEs._cont = __ConnectionlessTransfer_protocolIEs__item_
     _ConnectionlessTransfer_protocolIEs._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=65535)], ev=None, er=[])
-    _ConnectionlessTransfer_protocolExtensions = SEQ_OF(name=u'protocolExtensions', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('RUA-Containers', 'ProtocolExtensionContainer')), opt=True)
+    _ConnectionlessTransfer_protocolExtensions = SEQ_OF(name='protocolExtensions', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('RUA-Containers', 'ProtocolExtensionContainer')), opt=True)
     __ConnectionlessTransfer_protocolExtensions__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('RUA-Containers', 'ProtocolExtensionField')))
-    ___ConnectionlessTransfer_protocolExtensions__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('RUA-Containers', 'RUA-PROTOCOL-EXTENSION'), [u'id']))
+    ___ConnectionlessTransfer_protocolExtensions__item__id = INT(name='id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('RUA-Containers', 'RUA-PROTOCOL-EXTENSION'), ['id']))
     ____ConnectionlessTransfer_protocolExtensions__item__id_tab = CLASS(name='_tab_RUA-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('RUA-Containers', 'RUA-PROTOCOL-EXTENSION')))
     ____ConnectionlessTransfer_protocolExtensions__item__id_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___ConnectionlessTransfer_protocolExtensions__item__id._const_tab = ____ConnectionlessTransfer_protocolExtensions__item__id_tab
     ___ConnectionlessTransfer_protocolExtensions__item__id._const_tab_at = None
-    ___ConnectionlessTransfer_protocolExtensions__item__id._const_tab_id = u'id'
-    ___ConnectionlessTransfer_protocolExtensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('RUA-Containers', 'RUA-PROTOCOL-EXTENSION'), [u'criticality']))
+    ___ConnectionlessTransfer_protocolExtensions__item__id._const_tab_id = 'id'
+    ___ConnectionlessTransfer_protocolExtensions__item__criticality = ENUM(name='criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('RUA-Containers', 'RUA-PROTOCOL-EXTENSION'), ['criticality']))
     ____ConnectionlessTransfer_protocolExtensions__item__criticality_tab = CLASS(name='_tab_RUA-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('RUA-Containers', 'RUA-PROTOCOL-EXTENSION')))
     ____ConnectionlessTransfer_protocolExtensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___ConnectionlessTransfer_protocolExtensions__item__criticality._const_tab = ____ConnectionlessTransfer_protocolExtensions__item__criticality_tab
-    ___ConnectionlessTransfer_protocolExtensions__item__criticality._const_tab_at = ('..', u'id')
-    ___ConnectionlessTransfer_protocolExtensions__item__criticality._const_tab_id = u'criticality'
-    ___ConnectionlessTransfer_protocolExtensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('RUA-Containers', 'RUA-PROTOCOL-EXTENSION'), [u'Extension']))
+    ___ConnectionlessTransfer_protocolExtensions__item__criticality._const_tab_at = ('..', 'id')
+    ___ConnectionlessTransfer_protocolExtensions__item__criticality._const_tab_id = 'criticality'
+    ___ConnectionlessTransfer_protocolExtensions__item__extensionValue = OPEN(name='extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('RUA-Containers', 'RUA-PROTOCOL-EXTENSION'), ['Extension']))
     ____ConnectionlessTransfer_protocolExtensions__item__extensionValue_tab = CLASS(name='_tab_RUA-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('RUA-Containers', 'RUA-PROTOCOL-EXTENSION')))
     ____ConnectionlessTransfer_protocolExtensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___ConnectionlessTransfer_protocolExtensions__item__extensionValue._const_tab = ____ConnectionlessTransfer_protocolExtensions__item__extensionValue_tab
-    ___ConnectionlessTransfer_protocolExtensions__item__extensionValue._const_tab_at = ('..', u'id')
-    ___ConnectionlessTransfer_protocolExtensions__item__extensionValue._const_tab_id = u'Extension'
+    ___ConnectionlessTransfer_protocolExtensions__item__extensionValue._const_tab_at = ('..', 'id')
+    ___ConnectionlessTransfer_protocolExtensions__item__extensionValue._const_tab_id = 'Extension'
     __ConnectionlessTransfer_protocolExtensions__item_._cont = ASN1Dict([
-        (u'id', ___ConnectionlessTransfer_protocolExtensions__item__id),
-        (u'criticality', ___ConnectionlessTransfer_protocolExtensions__item__criticality),
-        (u'extensionValue', ___ConnectionlessTransfer_protocolExtensions__item__extensionValue),
+        ('id', ___ConnectionlessTransfer_protocolExtensions__item__id),
+        ('criticality', ___ConnectionlessTransfer_protocolExtensions__item__criticality),
+        ('extensionValue', ___ConnectionlessTransfer_protocolExtensions__item__extensionValue),
         ])
     __ConnectionlessTransfer_protocolExtensions__item_._ext = None
     _ConnectionlessTransfer_protocolExtensions._cont = __ConnectionlessTransfer_protocolExtensions__item_
     _ConnectionlessTransfer_protocolExtensions._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=65535)], ev=None, er=[])
     ConnectionlessTransfer._cont = ASN1Dict([
-        (u'protocolIEs', _ConnectionlessTransfer_protocolIEs),
-        (u'protocolExtensions', _ConnectionlessTransfer_protocolExtensions),
+        ('protocolIEs', _ConnectionlessTransfer_protocolIEs),
+        ('protocolExtensions', _ConnectionlessTransfer_protocolExtensions),
         ])
     ConnectionlessTransfer._ext = []
     
     #-----< ConnectionlessTransferIEs >-----#
-    ConnectionlessTransferIEs = CLASS(name=u'ConnectionlessTransferIEs', mode=MODE_SET, typeref=ASN1RefType(('RUA-Containers', 'RUA-PROTOCOL-IES')))
-    _ConnectionlessTransferIEs_val_Value_0 = OCT_STR(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('RUA-IEs', 'RANAP-Message')))
-    ConnectionlessTransferIEs._val = ASN1Set(rv=[dict([(u'id', 4), (u'criticality', u'reject'), (u'Value', _ConnectionlessTransferIEs_val_Value_0), (u'presence', u'mandatory')])], rr=[], ev=[], er=[])
+    ConnectionlessTransferIEs = CLASS(name='ConnectionlessTransferIEs', mode=MODE_SET, typeref=ASN1RefType(('RUA-Containers', 'RUA-PROTOCOL-IES')))
+    _ConnectionlessTransferIEs_val_Value_0 = OCT_STR(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('RUA-IEs', 'RANAP-Message')))
+    ConnectionlessTransferIEs._val = ASN1Set(rv=[dict([('id', 4), ('criticality', 'reject'), ('Value', _ConnectionlessTransferIEs_val_Value_0), ('presence', 'mandatory')])], rr=[], ev=[], er=[])
     
     #-----< ConnectionlessTransferExtensions >-----#
-    ConnectionlessTransferExtensions = CLASS(name=u'ConnectionlessTransferExtensions', mode=MODE_SET, typeref=ASN1RefType(('RUA-Containers', 'RUA-PROTOCOL-EXTENSION')))
+    ConnectionlessTransferExtensions = CLASS(name='ConnectionlessTransferExtensions', mode=MODE_SET, typeref=ASN1RefType(('RUA-Containers', 'RUA-PROTOCOL-EXTENSION')))
     ConnectionlessTransferExtensions._val = ASN1Set(rv=[], rr=[], ev=[], er=[])
     
     #-----< ErrorIndication >-----#
-    ErrorIndication = SEQ(name=u'ErrorIndication', mode=MODE_TYPE)
-    _ErrorIndication_protocolIEs = SEQ_OF(name=u'protocolIEs', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('RUA-Containers', 'ProtocolIE-Container')))
+    ErrorIndication = SEQ(name='ErrorIndication', mode=MODE_TYPE)
+    _ErrorIndication_protocolIEs = SEQ_OF(name='protocolIEs', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('RUA-Containers', 'ProtocolIE-Container')))
     __ErrorIndication_protocolIEs__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('RUA-Containers', 'ProtocolIE-Field')))
-    ___ErrorIndication_protocolIEs__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('RUA-Containers', 'RUA-PROTOCOL-IES'), [u'id']))
+    ___ErrorIndication_protocolIEs__item__id = INT(name='id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('RUA-Containers', 'RUA-PROTOCOL-IES'), ['id']))
     ____ErrorIndication_protocolIEs__item__id_tab = CLASS(name='_tab_RUA-PROTOCOL-IES', mode=MODE_SET, typeref=ASN1RefType(('RUA-Containers', 'RUA-PROTOCOL-IES')))
-    _____ErrorIndication_protocolIEs__item__id_tab_val_Value_0 = CHOICE(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('RUA-IEs', 'Cause')))
-    _____ErrorIndication_protocolIEs__item__id_tab_val_Value_1 = SEQ(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('RUA-IEs', 'CriticalityDiagnostics')))
-    ____ErrorIndication_protocolIEs__item__id_tab._val = ASN1Set(rv=[dict([(u'id', 1), (u'criticality', u'ignore'), (u'Value', _____ErrorIndication_protocolIEs__item__id_tab_val_Value_0), (u'presence', u'mandatory')]), dict([(u'id', 2), (u'criticality', u'ignore'), (u'Value', _____ErrorIndication_protocolIEs__item__id_tab_val_Value_1), (u'presence', u'optional')])], rr=[], ev=None, er=[])
+    _____ErrorIndication_protocolIEs__item__id_tab_val_Value_0 = CHOICE(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('RUA-IEs', 'Cause')))
+    _____ErrorIndication_protocolIEs__item__id_tab_val_Value_1 = SEQ(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('RUA-IEs', 'CriticalityDiagnostics')))
+    ____ErrorIndication_protocolIEs__item__id_tab._val = ASN1Set(rv=[dict([('id', 1), ('criticality', 'ignore'), ('Value', _____ErrorIndication_protocolIEs__item__id_tab_val_Value_0), ('presence', 'mandatory')]), dict([('id', 2), ('criticality', 'ignore'), ('Value', _____ErrorIndication_protocolIEs__item__id_tab_val_Value_1), ('presence', 'optional')])], rr=[], ev=None, er=[])
     ___ErrorIndication_protocolIEs__item__id._const_tab = ____ErrorIndication_protocolIEs__item__id_tab
     ___ErrorIndication_protocolIEs__item__id._const_tab_at = None
-    ___ErrorIndication_protocolIEs__item__id._const_tab_id = u'id'
-    ___ErrorIndication_protocolIEs__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('RUA-Containers', 'RUA-PROTOCOL-IES'), [u'criticality']))
+    ___ErrorIndication_protocolIEs__item__id._const_tab_id = 'id'
+    ___ErrorIndication_protocolIEs__item__criticality = ENUM(name='criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('RUA-Containers', 'RUA-PROTOCOL-IES'), ['criticality']))
     ___ErrorIndication_protocolIEs__item__criticality._const_tab = ____ErrorIndication_protocolIEs__item__id_tab
-    ___ErrorIndication_protocolIEs__item__criticality._const_tab_at = ('..', u'id')
-    ___ErrorIndication_protocolIEs__item__criticality._const_tab_id = u'criticality'
-    ___ErrorIndication_protocolIEs__item__value = OPEN(name=u'value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('RUA-Containers', 'RUA-PROTOCOL-IES'), [u'Value']))
+    ___ErrorIndication_protocolIEs__item__criticality._const_tab_at = ('..', 'id')
+    ___ErrorIndication_protocolIEs__item__criticality._const_tab_id = 'criticality'
+    ___ErrorIndication_protocolIEs__item__value = OPEN(name='value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('RUA-Containers', 'RUA-PROTOCOL-IES'), ['Value']))
     ___ErrorIndication_protocolIEs__item__value._const_tab = ____ErrorIndication_protocolIEs__item__id_tab
-    ___ErrorIndication_protocolIEs__item__value._const_tab_at = ('..', u'id')
-    ___ErrorIndication_protocolIEs__item__value._const_tab_id = u'Value'
+    ___ErrorIndication_protocolIEs__item__value._const_tab_at = ('..', 'id')
+    ___ErrorIndication_protocolIEs__item__value._const_tab_id = 'Value'
     __ErrorIndication_protocolIEs__item_._cont = ASN1Dict([
-        (u'id', ___ErrorIndication_protocolIEs__item__id),
-        (u'criticality', ___ErrorIndication_protocolIEs__item__criticality),
-        (u'value', ___ErrorIndication_protocolIEs__item__value),
+        ('id', ___ErrorIndication_protocolIEs__item__id),
+        ('criticality', ___ErrorIndication_protocolIEs__item__criticality),
+        ('value', ___ErrorIndication_protocolIEs__item__value),
         ])
     __ErrorIndication_protocolIEs__item_._ext = None
     _ErrorIndication_protocolIEs._cont = __ErrorIndication_protocolIEs__item_
     _ErrorIndication_protocolIEs._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=65535)], ev=None, er=[])
-    _ErrorIndication_protocolExtensions = SEQ_OF(name=u'protocolExtensions', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('RUA-Containers', 'ProtocolExtensionContainer')), opt=True)
+    _ErrorIndication_protocolExtensions = SEQ_OF(name='protocolExtensions', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('RUA-Containers', 'ProtocolExtensionContainer')), opt=True)
     __ErrorIndication_protocolExtensions__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('RUA-Containers', 'ProtocolExtensionField')))
-    ___ErrorIndication_protocolExtensions__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('RUA-Containers', 'RUA-PROTOCOL-EXTENSION'), [u'id']))
+    ___ErrorIndication_protocolExtensions__item__id = INT(name='id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('RUA-Containers', 'RUA-PROTOCOL-EXTENSION'), ['id']))
     ____ErrorIndication_protocolExtensions__item__id_tab = CLASS(name='_tab_RUA-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('RUA-Containers', 'RUA-PROTOCOL-EXTENSION')))
     ____ErrorIndication_protocolExtensions__item__id_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___ErrorIndication_protocolExtensions__item__id._const_tab = ____ErrorIndication_protocolExtensions__item__id_tab
     ___ErrorIndication_protocolExtensions__item__id._const_tab_at = None
-    ___ErrorIndication_protocolExtensions__item__id._const_tab_id = u'id'
-    ___ErrorIndication_protocolExtensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('RUA-Containers', 'RUA-PROTOCOL-EXTENSION'), [u'criticality']))
+    ___ErrorIndication_protocolExtensions__item__id._const_tab_id = 'id'
+    ___ErrorIndication_protocolExtensions__item__criticality = ENUM(name='criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('RUA-Containers', 'RUA-PROTOCOL-EXTENSION'), ['criticality']))
     ____ErrorIndication_protocolExtensions__item__criticality_tab = CLASS(name='_tab_RUA-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('RUA-Containers', 'RUA-PROTOCOL-EXTENSION')))
     ____ErrorIndication_protocolExtensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___ErrorIndication_protocolExtensions__item__criticality._const_tab = ____ErrorIndication_protocolExtensions__item__criticality_tab
-    ___ErrorIndication_protocolExtensions__item__criticality._const_tab_at = ('..', u'id')
-    ___ErrorIndication_protocolExtensions__item__criticality._const_tab_id = u'criticality'
-    ___ErrorIndication_protocolExtensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('RUA-Containers', 'RUA-PROTOCOL-EXTENSION'), [u'Extension']))
+    ___ErrorIndication_protocolExtensions__item__criticality._const_tab_at = ('..', 'id')
+    ___ErrorIndication_protocolExtensions__item__criticality._const_tab_id = 'criticality'
+    ___ErrorIndication_protocolExtensions__item__extensionValue = OPEN(name='extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('RUA-Containers', 'RUA-PROTOCOL-EXTENSION'), ['Extension']))
     ____ErrorIndication_protocolExtensions__item__extensionValue_tab = CLASS(name='_tab_RUA-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('RUA-Containers', 'RUA-PROTOCOL-EXTENSION')))
     ____ErrorIndication_protocolExtensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___ErrorIndication_protocolExtensions__item__extensionValue._const_tab = ____ErrorIndication_protocolExtensions__item__extensionValue_tab
-    ___ErrorIndication_protocolExtensions__item__extensionValue._const_tab_at = ('..', u'id')
-    ___ErrorIndication_protocolExtensions__item__extensionValue._const_tab_id = u'Extension'
+    ___ErrorIndication_protocolExtensions__item__extensionValue._const_tab_at = ('..', 'id')
+    ___ErrorIndication_protocolExtensions__item__extensionValue._const_tab_id = 'Extension'
     __ErrorIndication_protocolExtensions__item_._cont = ASN1Dict([
-        (u'id', ___ErrorIndication_protocolExtensions__item__id),
-        (u'criticality', ___ErrorIndication_protocolExtensions__item__criticality),
-        (u'extensionValue', ___ErrorIndication_protocolExtensions__item__extensionValue),
+        ('id', ___ErrorIndication_protocolExtensions__item__id),
+        ('criticality', ___ErrorIndication_protocolExtensions__item__criticality),
+        ('extensionValue', ___ErrorIndication_protocolExtensions__item__extensionValue),
         ])
     __ErrorIndication_protocolExtensions__item_._ext = None
     _ErrorIndication_protocolExtensions._cont = __ErrorIndication_protocolExtensions__item_
     _ErrorIndication_protocolExtensions._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=65535)], ev=None, er=[])
     ErrorIndication._cont = ASN1Dict([
-        (u'protocolIEs', _ErrorIndication_protocolIEs),
-        (u'protocolExtensions', _ErrorIndication_protocolExtensions),
+        ('protocolIEs', _ErrorIndication_protocolIEs),
+        ('protocolExtensions', _ErrorIndication_protocolExtensions),
         ])
     ErrorIndication._ext = []
     
     #-----< ErrorIndicationIEs >-----#
-    ErrorIndicationIEs = CLASS(name=u'ErrorIndicationIEs', mode=MODE_SET, typeref=ASN1RefType(('RUA-Containers', 'RUA-PROTOCOL-IES')))
-    _ErrorIndicationIEs_val_Value_0 = CHOICE(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('RUA-IEs', 'Cause')))
-    _ErrorIndicationIEs_val_Value_1 = SEQ(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('RUA-IEs', 'CriticalityDiagnostics')))
-    ErrorIndicationIEs._val = ASN1Set(rv=[dict([(u'id', 1), (u'criticality', u'ignore'), (u'Value', _ErrorIndicationIEs_val_Value_0), (u'presence', u'mandatory')]), dict([(u'id', 2), (u'criticality', u'ignore'), (u'Value', _ErrorIndicationIEs_val_Value_1), (u'presence', u'optional')])], rr=[], ev=[], er=[])
+    ErrorIndicationIEs = CLASS(name='ErrorIndicationIEs', mode=MODE_SET, typeref=ASN1RefType(('RUA-Containers', 'RUA-PROTOCOL-IES')))
+    _ErrorIndicationIEs_val_Value_0 = CHOICE(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('RUA-IEs', 'Cause')))
+    _ErrorIndicationIEs_val_Value_1 = SEQ(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('RUA-IEs', 'CriticalityDiagnostics')))
+    ErrorIndicationIEs._val = ASN1Set(rv=[dict([('id', 1), ('criticality', 'ignore'), ('Value', _ErrorIndicationIEs_val_Value_0), ('presence', 'mandatory')]), dict([('id', 2), ('criticality', 'ignore'), ('Value', _ErrorIndicationIEs_val_Value_1), ('presence', 'optional')])], rr=[], ev=[], er=[])
     
     #-----< ErrorIndicationExtensions >-----#
-    ErrorIndicationExtensions = CLASS(name=u'ErrorIndicationExtensions', mode=MODE_SET, typeref=ASN1RefType(('RUA-Containers', 'RUA-PROTOCOL-EXTENSION')))
+    ErrorIndicationExtensions = CLASS(name='ErrorIndicationExtensions', mode=MODE_SET, typeref=ASN1RefType(('RUA-Containers', 'RUA-PROTOCOL-EXTENSION')))
     ErrorIndicationExtensions._val = ASN1Set(rv=[], rr=[], ev=[], er=[])
     
     #-----< PrivateMessage >-----#
-    PrivateMessage = SEQ(name=u'PrivateMessage', mode=MODE_TYPE)
-    _PrivateMessage_privateIEs = SEQ_OF(name=u'privateIEs', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('RUA-Containers', 'PrivateIE-Container')))
+    PrivateMessage = SEQ(name='PrivateMessage', mode=MODE_TYPE)
+    _PrivateMessage_privateIEs = SEQ_OF(name='privateIEs', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('RUA-Containers', 'PrivateIE-Container')))
     __PrivateMessage_privateIEs__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('RUA-Containers', 'PrivateIE-Field')))
-    ___PrivateMessage_privateIEs__item__id = CHOICE(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('RUA-Containers', 'RUA-PRIVATE-IES'), [u'id']))
+    ___PrivateMessage_privateIEs__item__id = CHOICE(name='id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('RUA-Containers', 'RUA-PRIVATE-IES'), ['id']))
     ____PrivateMessage_privateIEs__item__id_tab = CLASS(name='_tab_RUA-PRIVATE-IES', mode=MODE_SET, typeref=ASN1RefType(('RUA-Containers', 'RUA-PRIVATE-IES')))
     ____PrivateMessage_privateIEs__item__id_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___PrivateMessage_privateIEs__item__id._const_tab = ____PrivateMessage_privateIEs__item__id_tab
     ___PrivateMessage_privateIEs__item__id._const_tab_at = None
-    ___PrivateMessage_privateIEs__item__id._const_tab_id = u'id'
-    ___PrivateMessage_privateIEs__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('RUA-Containers', 'RUA-PRIVATE-IES'), [u'criticality']))
+    ___PrivateMessage_privateIEs__item__id._const_tab_id = 'id'
+    ___PrivateMessage_privateIEs__item__criticality = ENUM(name='criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('RUA-Containers', 'RUA-PRIVATE-IES'), ['criticality']))
     ____PrivateMessage_privateIEs__item__criticality_tab = CLASS(name='_tab_RUA-PRIVATE-IES', mode=MODE_SET, typeref=ASN1RefType(('RUA-Containers', 'RUA-PRIVATE-IES')))
     ____PrivateMessage_privateIEs__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___PrivateMessage_privateIEs__item__criticality._const_tab = ____PrivateMessage_privateIEs__item__criticality_tab
-    ___PrivateMessage_privateIEs__item__criticality._const_tab_at = ('..', u'id')
-    ___PrivateMessage_privateIEs__item__criticality._const_tab_id = u'criticality'
-    ___PrivateMessage_privateIEs__item__value = OPEN(name=u'value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('RUA-Containers', 'RUA-PRIVATE-IES'), [u'Value']))
+    ___PrivateMessage_privateIEs__item__criticality._const_tab_at = ('..', 'id')
+    ___PrivateMessage_privateIEs__item__criticality._const_tab_id = 'criticality'
+    ___PrivateMessage_privateIEs__item__value = OPEN(name='value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('RUA-Containers', 'RUA-PRIVATE-IES'), ['Value']))
     ____PrivateMessage_privateIEs__item__value_tab = CLASS(name='_tab_RUA-PRIVATE-IES', mode=MODE_SET, typeref=ASN1RefType(('RUA-Containers', 'RUA-PRIVATE-IES')))
     ____PrivateMessage_privateIEs__item__value_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___PrivateMessage_privateIEs__item__value._const_tab = ____PrivateMessage_privateIEs__item__value_tab
-    ___PrivateMessage_privateIEs__item__value._const_tab_at = ('..', u'id')
-    ___PrivateMessage_privateIEs__item__value._const_tab_id = u'Value'
+    ___PrivateMessage_privateIEs__item__value._const_tab_at = ('..', 'id')
+    ___PrivateMessage_privateIEs__item__value._const_tab_id = 'Value'
     __PrivateMessage_privateIEs__item_._cont = ASN1Dict([
-        (u'id', ___PrivateMessage_privateIEs__item__id),
-        (u'criticality', ___PrivateMessage_privateIEs__item__criticality),
-        (u'value', ___PrivateMessage_privateIEs__item__value),
+        ('id', ___PrivateMessage_privateIEs__item__id),
+        ('criticality', ___PrivateMessage_privateIEs__item__criticality),
+        ('value', ___PrivateMessage_privateIEs__item__value),
         ])
     __PrivateMessage_privateIEs__item_._ext = None
     _PrivateMessage_privateIEs._cont = __PrivateMessage_privateIEs__item_
     _PrivateMessage_privateIEs._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=65535)], ev=None, er=[])
     PrivateMessage._cont = ASN1Dict([
-        (u'privateIEs', _PrivateMessage_privateIEs),
+        ('privateIEs', _PrivateMessage_privateIEs),
         ])
     PrivateMessage._ext = []
     
     #-----< PrivateMessage-IEs >-----#
-    PrivateMessage_IEs = CLASS(name=u'PrivateMessage-IEs', mode=MODE_SET, typeref=ASN1RefType(('RUA-Containers', 'RUA-PRIVATE-IES')))
+    PrivateMessage_IEs = CLASS(name='PrivateMessage-IEs', mode=MODE_SET, typeref=ASN1RefType(('RUA-Containers', 'RUA-PRIVATE-IES')))
     PrivateMessage_IEs._val = ASN1Set(rv=[], rr=[], ev=[], er=[])
     
     _all_ = [
@@ -1367,227 +1367,227 @@ class RUA_PDU_Contents:
 
 class RUA_PDU_Descriptions:
 
-    _name_  = u'RUA-PDU-Descriptions'
+    _name_  = 'RUA-PDU-Descriptions'
     _oid_   = [0, 4, 0, 0, 20, 3, 5, 1, 0]
     
     _obj_ = [
-        u'RUA-ELEMENTARY-PROCEDURE',
-        u'RUA-PDU',
-        u'InitiatingMessage',
-        u'SuccessfulOutcome',
-        u'UnsuccessfulOutcome',
-        u'RUA-ELEMENTARY-PROCEDURES',
-        u'RUA-ELEMENTARY-PROCEDURES-CLASS-1',
-        u'RUA-ELEMENTARY-PROCEDURES-CLASS-2',
-        u'connectionRequest',
-        u'directTransfer',
-        u'disconnectRequest',
-        u'connectionlessTransfer',
-        u'errorIndication',
-        u'privateMessage',
+        'RUA-ELEMENTARY-PROCEDURE',
+        'RUA-PDU',
+        'InitiatingMessage',
+        'SuccessfulOutcome',
+        'UnsuccessfulOutcome',
+        'RUA-ELEMENTARY-PROCEDURES',
+        'RUA-ELEMENTARY-PROCEDURES-CLASS-1',
+        'RUA-ELEMENTARY-PROCEDURES-CLASS-2',
+        'connectionRequest',
+        'directTransfer',
+        'disconnectRequest',
+        'connectionlessTransfer',
+        'errorIndication',
+        'privateMessage',
         ]
     _type_ = [
-        u'RUA-ELEMENTARY-PROCEDURE',
-        u'RUA-PDU',
-        u'InitiatingMessage',
-        u'SuccessfulOutcome',
-        u'UnsuccessfulOutcome',
+        'RUA-ELEMENTARY-PROCEDURE',
+        'RUA-PDU',
+        'InitiatingMessage',
+        'SuccessfulOutcome',
+        'UnsuccessfulOutcome',
         ]
     _set_ = [
-        u'RUA-ELEMENTARY-PROCEDURES',
-        u'RUA-ELEMENTARY-PROCEDURES-CLASS-1',
-        u'RUA-ELEMENTARY-PROCEDURES-CLASS-2',
+        'RUA-ELEMENTARY-PROCEDURES',
+        'RUA-ELEMENTARY-PROCEDURES-CLASS-1',
+        'RUA-ELEMENTARY-PROCEDURES-CLASS-2',
         ]
     _val_ = [
-        u'connectionRequest',
-        u'directTransfer',
-        u'disconnectRequest',
-        u'connectionlessTransfer',
-        u'errorIndication',
-        u'privateMessage',
+        'connectionRequest',
+        'directTransfer',
+        'disconnectRequest',
+        'connectionlessTransfer',
+        'errorIndication',
+        'privateMessage',
         ]
     _class_ = [
-        u'RUA-ELEMENTARY-PROCEDURE',
-        u'RUA-ELEMENTARY-PROCEDURES',
-        u'RUA-ELEMENTARY-PROCEDURES-CLASS-1',
-        u'RUA-ELEMENTARY-PROCEDURES-CLASS-2',
-        u'connectionRequest',
-        u'directTransfer',
-        u'disconnectRequest',
-        u'connectionlessTransfer',
-        u'errorIndication',
-        u'privateMessage',
+        'RUA-ELEMENTARY-PROCEDURE',
+        'RUA-ELEMENTARY-PROCEDURES',
+        'RUA-ELEMENTARY-PROCEDURES-CLASS-1',
+        'RUA-ELEMENTARY-PROCEDURES-CLASS-2',
+        'connectionRequest',
+        'directTransfer',
+        'disconnectRequest',
+        'connectionlessTransfer',
+        'errorIndication',
+        'privateMessage',
         ]
     _param_ = [
         ]
     
     #-----< RUA-ELEMENTARY-PROCEDURE >-----#
-    RUA_ELEMENTARY_PROCEDURE = CLASS(name=u'RUA-ELEMENTARY-PROCEDURE', mode=MODE_TYPE)
-    _RUA_ELEMENTARY_PROCEDURE_InitiatingMessage = OPEN(name=u'InitiatingMessage', mode=MODE_TYPE)
-    _RUA_ELEMENTARY_PROCEDURE_SuccessfulOutcome = OPEN(name=u'SuccessfulOutcome', mode=MODE_TYPE, opt=True)
-    _RUA_ELEMENTARY_PROCEDURE_UnsuccessfulOutcome = OPEN(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, opt=True)
-    _RUA_ELEMENTARY_PROCEDURE_procedureCode = INT(name=u'procedureCode', mode=MODE_VALUE, typeref=ASN1RefType(('RUA-CommonDataTypes', 'ProcedureCode')), uniq=True)
-    _RUA_ELEMENTARY_PROCEDURE_criticality = ENUM(name=u'criticality', mode=MODE_VALUE, typeref=ASN1RefType(('RUA-CommonDataTypes', 'Criticality')), default=u'ignore')
+    RUA_ELEMENTARY_PROCEDURE = CLASS(name='RUA-ELEMENTARY-PROCEDURE', mode=MODE_TYPE)
+    _RUA_ELEMENTARY_PROCEDURE_InitiatingMessage = OPEN(name='InitiatingMessage', mode=MODE_TYPE)
+    _RUA_ELEMENTARY_PROCEDURE_SuccessfulOutcome = OPEN(name='SuccessfulOutcome', mode=MODE_TYPE, opt=True)
+    _RUA_ELEMENTARY_PROCEDURE_UnsuccessfulOutcome = OPEN(name='UnsuccessfulOutcome', mode=MODE_TYPE, opt=True)
+    _RUA_ELEMENTARY_PROCEDURE_procedureCode = INT(name='procedureCode', mode=MODE_VALUE, typeref=ASN1RefType(('RUA-CommonDataTypes', 'ProcedureCode')), uniq=True)
+    _RUA_ELEMENTARY_PROCEDURE_criticality = ENUM(name='criticality', mode=MODE_VALUE, typeref=ASN1RefType(('RUA-CommonDataTypes', 'Criticality')), default='ignore')
     RUA_ELEMENTARY_PROCEDURE._cont = ASN1Dict([
-        (u'InitiatingMessage', _RUA_ELEMENTARY_PROCEDURE_InitiatingMessage),
-        (u'SuccessfulOutcome', _RUA_ELEMENTARY_PROCEDURE_SuccessfulOutcome),
-        (u'UnsuccessfulOutcome', _RUA_ELEMENTARY_PROCEDURE_UnsuccessfulOutcome),
-        (u'procedureCode', _RUA_ELEMENTARY_PROCEDURE_procedureCode),
-        (u'criticality', _RUA_ELEMENTARY_PROCEDURE_criticality),
+        ('InitiatingMessage', _RUA_ELEMENTARY_PROCEDURE_InitiatingMessage),
+        ('SuccessfulOutcome', _RUA_ELEMENTARY_PROCEDURE_SuccessfulOutcome),
+        ('UnsuccessfulOutcome', _RUA_ELEMENTARY_PROCEDURE_UnsuccessfulOutcome),
+        ('procedureCode', _RUA_ELEMENTARY_PROCEDURE_procedureCode),
+        ('criticality', _RUA_ELEMENTARY_PROCEDURE_criticality),
         ])
     
     #-----< RUA-PDU >-----#
-    RUA_PDU = CHOICE(name=u'RUA-PDU', mode=MODE_TYPE)
-    _RUA_PDU_initiatingMessage = SEQ(name=u'initiatingMessage', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('RUA-PDU-Descriptions', 'InitiatingMessage')))
-    _RUA_PDU_successfulOutcome = SEQ(name=u'successfulOutcome', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('RUA-PDU-Descriptions', 'SuccessfulOutcome')))
-    _RUA_PDU_unsuccessfulOutcome = SEQ(name=u'unsuccessfulOutcome', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('RUA-PDU-Descriptions', 'UnsuccessfulOutcome')))
+    RUA_PDU = CHOICE(name='RUA-PDU', mode=MODE_TYPE)
+    _RUA_PDU_initiatingMessage = SEQ(name='initiatingMessage', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('RUA-PDU-Descriptions', 'InitiatingMessage')))
+    _RUA_PDU_successfulOutcome = SEQ(name='successfulOutcome', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('RUA-PDU-Descriptions', 'SuccessfulOutcome')))
+    _RUA_PDU_unsuccessfulOutcome = SEQ(name='unsuccessfulOutcome', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('RUA-PDU-Descriptions', 'UnsuccessfulOutcome')))
     RUA_PDU._cont = ASN1Dict([
-        (u'initiatingMessage', _RUA_PDU_initiatingMessage),
-        (u'successfulOutcome', _RUA_PDU_successfulOutcome),
-        (u'unsuccessfulOutcome', _RUA_PDU_unsuccessfulOutcome),
+        ('initiatingMessage', _RUA_PDU_initiatingMessage),
+        ('successfulOutcome', _RUA_PDU_successfulOutcome),
+        ('unsuccessfulOutcome', _RUA_PDU_unsuccessfulOutcome),
         ])
     RUA_PDU._ext = []
     
     #-----< InitiatingMessage >-----#
-    InitiatingMessage = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE)
-    _InitiatingMessage_procedureCode = INT(name=u'procedureCode', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('RUA-PDU-Descriptions', 'RUA-ELEMENTARY-PROCEDURE'), [u'procedureCode']))
+    InitiatingMessage = SEQ(name='InitiatingMessage', mode=MODE_TYPE)
+    _InitiatingMessage_procedureCode = INT(name='procedureCode', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('RUA-PDU-Descriptions', 'RUA-ELEMENTARY-PROCEDURE'), ['procedureCode']))
     __InitiatingMessage_procedureCode_tab = CLASS(name='_tab_RUA-ELEMENTARY-PROCEDURE', mode=MODE_SET, typeref=ASN1RefType(('RUA-PDU-Descriptions', 'RUA-ELEMENTARY-PROCEDURE')))
-    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_0 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('RUA-PDU-Contents', 'Connect')))
-    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_1 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('RUA-PDU-Contents', 'DirectTransfer')))
-    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_2 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('RUA-PDU-Contents', 'Disconnect')))
-    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_3 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('RUA-PDU-Contents', 'ConnectionlessTransfer')))
-    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_4 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('RUA-PDU-Contents', 'ErrorIndication')))
-    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_5 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('RUA-PDU-Contents', 'PrivateMessage')))
-    __InitiatingMessage_procedureCode_tab._val = ASN1Set(rv=[dict([(u'InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_0), (u'procedureCode', 1), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_1), (u'procedureCode', 2), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_2), (u'procedureCode', 3), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_3), (u'procedureCode', 4), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_4), (u'procedureCode', 5), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_5), (u'procedureCode', 6), (u'criticality', u'ignore')])], rr=[], ev=None, er=[])
+    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_0 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('RUA-PDU-Contents', 'Connect')))
+    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_1 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('RUA-PDU-Contents', 'DirectTransfer')))
+    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_2 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('RUA-PDU-Contents', 'Disconnect')))
+    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_3 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('RUA-PDU-Contents', 'ConnectionlessTransfer')))
+    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_4 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('RUA-PDU-Contents', 'ErrorIndication')))
+    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_5 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('RUA-PDU-Contents', 'PrivateMessage')))
+    __InitiatingMessage_procedureCode_tab._val = ASN1Set(rv=[dict([('InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_0), ('procedureCode', 1), ('criticality', 'ignore')]), dict([('InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_1), ('procedureCode', 2), ('criticality', 'ignore')]), dict([('InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_2), ('procedureCode', 3), ('criticality', 'ignore')]), dict([('InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_3), ('procedureCode', 4), ('criticality', 'ignore')]), dict([('InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_4), ('procedureCode', 5), ('criticality', 'ignore')]), dict([('InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_5), ('procedureCode', 6), ('criticality', 'ignore')])], rr=[], ev=None, er=[])
     _InitiatingMessage_procedureCode._const_tab = __InitiatingMessage_procedureCode_tab
     _InitiatingMessage_procedureCode._const_tab_at = None
-    _InitiatingMessage_procedureCode._const_tab_id = u'procedureCode'
-    _InitiatingMessage_criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('RUA-PDU-Descriptions', 'RUA-ELEMENTARY-PROCEDURE'), [u'criticality']))
+    _InitiatingMessage_procedureCode._const_tab_id = 'procedureCode'
+    _InitiatingMessage_criticality = ENUM(name='criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('RUA-PDU-Descriptions', 'RUA-ELEMENTARY-PROCEDURE'), ['criticality']))
     _InitiatingMessage_criticality._const_tab = __InitiatingMessage_procedureCode_tab
-    _InitiatingMessage_criticality._const_tab_at = ('..', u'procedureCode')
-    _InitiatingMessage_criticality._const_tab_id = u'criticality'
-    _InitiatingMessage_value = OPEN(name=u'value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('RUA-PDU-Descriptions', 'RUA-ELEMENTARY-PROCEDURE'), [u'InitiatingMessage']))
+    _InitiatingMessage_criticality._const_tab_at = ('..', 'procedureCode')
+    _InitiatingMessage_criticality._const_tab_id = 'criticality'
+    _InitiatingMessage_value = OPEN(name='value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('RUA-PDU-Descriptions', 'RUA-ELEMENTARY-PROCEDURE'), ['InitiatingMessage']))
     _InitiatingMessage_value._const_tab = __InitiatingMessage_procedureCode_tab
-    _InitiatingMessage_value._const_tab_at = ('..', u'procedureCode')
-    _InitiatingMessage_value._const_tab_id = u'InitiatingMessage'
+    _InitiatingMessage_value._const_tab_at = ('..', 'procedureCode')
+    _InitiatingMessage_value._const_tab_id = 'InitiatingMessage'
     InitiatingMessage._cont = ASN1Dict([
-        (u'procedureCode', _InitiatingMessage_procedureCode),
-        (u'criticality', _InitiatingMessage_criticality),
-        (u'value', _InitiatingMessage_value),
+        ('procedureCode', _InitiatingMessage_procedureCode),
+        ('criticality', _InitiatingMessage_criticality),
+        ('value', _InitiatingMessage_value),
         ])
     InitiatingMessage._ext = None
     
     #-----< SuccessfulOutcome >-----#
-    SuccessfulOutcome = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE)
-    _SuccessfulOutcome_procedureCode = INT(name=u'procedureCode', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('RUA-PDU-Descriptions', 'RUA-ELEMENTARY-PROCEDURE'), [u'procedureCode']))
+    SuccessfulOutcome = SEQ(name='SuccessfulOutcome', mode=MODE_TYPE)
+    _SuccessfulOutcome_procedureCode = INT(name='procedureCode', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('RUA-PDU-Descriptions', 'RUA-ELEMENTARY-PROCEDURE'), ['procedureCode']))
     __SuccessfulOutcome_procedureCode_tab = CLASS(name='_tab_RUA-ELEMENTARY-PROCEDURE', mode=MODE_SET, typeref=ASN1RefType(('RUA-PDU-Descriptions', 'RUA-ELEMENTARY-PROCEDURE')))
-    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_0 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('RUA-PDU-Contents', 'Connect')))
-    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_1 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('RUA-PDU-Contents', 'DirectTransfer')))
-    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_2 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('RUA-PDU-Contents', 'Disconnect')))
-    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_3 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('RUA-PDU-Contents', 'ConnectionlessTransfer')))
-    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_4 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('RUA-PDU-Contents', 'ErrorIndication')))
-    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_5 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('RUA-PDU-Contents', 'PrivateMessage')))
-    __SuccessfulOutcome_procedureCode_tab._val = ASN1Set(rv=[dict([(u'InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_0), (u'procedureCode', 1), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_1), (u'procedureCode', 2), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_2), (u'procedureCode', 3), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_3), (u'procedureCode', 4), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_4), (u'procedureCode', 5), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_5), (u'procedureCode', 6), (u'criticality', u'ignore')])], rr=[], ev=None, er=[])
+    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_0 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('RUA-PDU-Contents', 'Connect')))
+    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_1 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('RUA-PDU-Contents', 'DirectTransfer')))
+    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_2 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('RUA-PDU-Contents', 'Disconnect')))
+    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_3 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('RUA-PDU-Contents', 'ConnectionlessTransfer')))
+    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_4 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('RUA-PDU-Contents', 'ErrorIndication')))
+    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_5 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('RUA-PDU-Contents', 'PrivateMessage')))
+    __SuccessfulOutcome_procedureCode_tab._val = ASN1Set(rv=[dict([('InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_0), ('procedureCode', 1), ('criticality', 'ignore')]), dict([('InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_1), ('procedureCode', 2), ('criticality', 'ignore')]), dict([('InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_2), ('procedureCode', 3), ('criticality', 'ignore')]), dict([('InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_3), ('procedureCode', 4), ('criticality', 'ignore')]), dict([('InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_4), ('procedureCode', 5), ('criticality', 'ignore')]), dict([('InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_5), ('procedureCode', 6), ('criticality', 'ignore')])], rr=[], ev=None, er=[])
     _SuccessfulOutcome_procedureCode._const_tab = __SuccessfulOutcome_procedureCode_tab
     _SuccessfulOutcome_procedureCode._const_tab_at = None
-    _SuccessfulOutcome_procedureCode._const_tab_id = u'procedureCode'
-    _SuccessfulOutcome_criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('RUA-PDU-Descriptions', 'RUA-ELEMENTARY-PROCEDURE'), [u'criticality']))
+    _SuccessfulOutcome_procedureCode._const_tab_id = 'procedureCode'
+    _SuccessfulOutcome_criticality = ENUM(name='criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('RUA-PDU-Descriptions', 'RUA-ELEMENTARY-PROCEDURE'), ['criticality']))
     _SuccessfulOutcome_criticality._const_tab = __SuccessfulOutcome_procedureCode_tab
-    _SuccessfulOutcome_criticality._const_tab_at = ('..', u'procedureCode')
-    _SuccessfulOutcome_criticality._const_tab_id = u'criticality'
-    _SuccessfulOutcome_value = OPEN(name=u'value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('RUA-PDU-Descriptions', 'RUA-ELEMENTARY-PROCEDURE'), [u'SuccessfulOutcome']))
+    _SuccessfulOutcome_criticality._const_tab_at = ('..', 'procedureCode')
+    _SuccessfulOutcome_criticality._const_tab_id = 'criticality'
+    _SuccessfulOutcome_value = OPEN(name='value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('RUA-PDU-Descriptions', 'RUA-ELEMENTARY-PROCEDURE'), ['SuccessfulOutcome']))
     _SuccessfulOutcome_value._const_tab = __SuccessfulOutcome_procedureCode_tab
-    _SuccessfulOutcome_value._const_tab_at = ('..', u'procedureCode')
-    _SuccessfulOutcome_value._const_tab_id = u'SuccessfulOutcome'
+    _SuccessfulOutcome_value._const_tab_at = ('..', 'procedureCode')
+    _SuccessfulOutcome_value._const_tab_id = 'SuccessfulOutcome'
     SuccessfulOutcome._cont = ASN1Dict([
-        (u'procedureCode', _SuccessfulOutcome_procedureCode),
-        (u'criticality', _SuccessfulOutcome_criticality),
-        (u'value', _SuccessfulOutcome_value),
+        ('procedureCode', _SuccessfulOutcome_procedureCode),
+        ('criticality', _SuccessfulOutcome_criticality),
+        ('value', _SuccessfulOutcome_value),
         ])
     SuccessfulOutcome._ext = None
     
     #-----< UnsuccessfulOutcome >-----#
-    UnsuccessfulOutcome = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE)
-    _UnsuccessfulOutcome_procedureCode = INT(name=u'procedureCode', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('RUA-PDU-Descriptions', 'RUA-ELEMENTARY-PROCEDURE'), [u'procedureCode']))
+    UnsuccessfulOutcome = SEQ(name='UnsuccessfulOutcome', mode=MODE_TYPE)
+    _UnsuccessfulOutcome_procedureCode = INT(name='procedureCode', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('RUA-PDU-Descriptions', 'RUA-ELEMENTARY-PROCEDURE'), ['procedureCode']))
     __UnsuccessfulOutcome_procedureCode_tab = CLASS(name='_tab_RUA-ELEMENTARY-PROCEDURE', mode=MODE_SET, typeref=ASN1RefType(('RUA-PDU-Descriptions', 'RUA-ELEMENTARY-PROCEDURE')))
-    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_0 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('RUA-PDU-Contents', 'Connect')))
-    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_1 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('RUA-PDU-Contents', 'DirectTransfer')))
-    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_2 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('RUA-PDU-Contents', 'Disconnect')))
-    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_3 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('RUA-PDU-Contents', 'ConnectionlessTransfer')))
-    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_4 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('RUA-PDU-Contents', 'ErrorIndication')))
-    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_5 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('RUA-PDU-Contents', 'PrivateMessage')))
-    __UnsuccessfulOutcome_procedureCode_tab._val = ASN1Set(rv=[dict([(u'InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_0), (u'procedureCode', 1), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_1), (u'procedureCode', 2), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_2), (u'procedureCode', 3), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_3), (u'procedureCode', 4), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_4), (u'procedureCode', 5), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_5), (u'procedureCode', 6), (u'criticality', u'ignore')])], rr=[], ev=None, er=[])
+    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_0 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('RUA-PDU-Contents', 'Connect')))
+    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_1 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('RUA-PDU-Contents', 'DirectTransfer')))
+    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_2 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('RUA-PDU-Contents', 'Disconnect')))
+    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_3 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('RUA-PDU-Contents', 'ConnectionlessTransfer')))
+    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_4 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('RUA-PDU-Contents', 'ErrorIndication')))
+    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_5 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('RUA-PDU-Contents', 'PrivateMessage')))
+    __UnsuccessfulOutcome_procedureCode_tab._val = ASN1Set(rv=[dict([('InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_0), ('procedureCode', 1), ('criticality', 'ignore')]), dict([('InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_1), ('procedureCode', 2), ('criticality', 'ignore')]), dict([('InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_2), ('procedureCode', 3), ('criticality', 'ignore')]), dict([('InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_3), ('procedureCode', 4), ('criticality', 'ignore')]), dict([('InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_4), ('procedureCode', 5), ('criticality', 'ignore')]), dict([('InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_5), ('procedureCode', 6), ('criticality', 'ignore')])], rr=[], ev=None, er=[])
     _UnsuccessfulOutcome_procedureCode._const_tab = __UnsuccessfulOutcome_procedureCode_tab
     _UnsuccessfulOutcome_procedureCode._const_tab_at = None
-    _UnsuccessfulOutcome_procedureCode._const_tab_id = u'procedureCode'
-    _UnsuccessfulOutcome_criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('RUA-PDU-Descriptions', 'RUA-ELEMENTARY-PROCEDURE'), [u'criticality']))
+    _UnsuccessfulOutcome_procedureCode._const_tab_id = 'procedureCode'
+    _UnsuccessfulOutcome_criticality = ENUM(name='criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('RUA-PDU-Descriptions', 'RUA-ELEMENTARY-PROCEDURE'), ['criticality']))
     _UnsuccessfulOutcome_criticality._const_tab = __UnsuccessfulOutcome_procedureCode_tab
-    _UnsuccessfulOutcome_criticality._const_tab_at = ('..', u'procedureCode')
-    _UnsuccessfulOutcome_criticality._const_tab_id = u'criticality'
-    _UnsuccessfulOutcome_value = OPEN(name=u'value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('RUA-PDU-Descriptions', 'RUA-ELEMENTARY-PROCEDURE'), [u'UnsuccessfulOutcome']))
+    _UnsuccessfulOutcome_criticality._const_tab_at = ('..', 'procedureCode')
+    _UnsuccessfulOutcome_criticality._const_tab_id = 'criticality'
+    _UnsuccessfulOutcome_value = OPEN(name='value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('RUA-PDU-Descriptions', 'RUA-ELEMENTARY-PROCEDURE'), ['UnsuccessfulOutcome']))
     _UnsuccessfulOutcome_value._const_tab = __UnsuccessfulOutcome_procedureCode_tab
-    _UnsuccessfulOutcome_value._const_tab_at = ('..', u'procedureCode')
-    _UnsuccessfulOutcome_value._const_tab_id = u'UnsuccessfulOutcome'
+    _UnsuccessfulOutcome_value._const_tab_at = ('..', 'procedureCode')
+    _UnsuccessfulOutcome_value._const_tab_id = 'UnsuccessfulOutcome'
     UnsuccessfulOutcome._cont = ASN1Dict([
-        (u'procedureCode', _UnsuccessfulOutcome_procedureCode),
-        (u'criticality', _UnsuccessfulOutcome_criticality),
-        (u'value', _UnsuccessfulOutcome_value),
+        ('procedureCode', _UnsuccessfulOutcome_procedureCode),
+        ('criticality', _UnsuccessfulOutcome_criticality),
+        ('value', _UnsuccessfulOutcome_value),
         ])
     UnsuccessfulOutcome._ext = None
     
     #-----< RUA-ELEMENTARY-PROCEDURES >-----#
-    RUA_ELEMENTARY_PROCEDURES = CLASS(name=u'RUA-ELEMENTARY-PROCEDURES', mode=MODE_SET, typeref=ASN1RefType(('RUA-PDU-Descriptions', 'RUA-ELEMENTARY-PROCEDURE')))
-    _RUA_ELEMENTARY_PROCEDURES_val_InitiatingMessage_0 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('RUA-PDU-Contents', 'Connect')))
-    _RUA_ELEMENTARY_PROCEDURES_val_InitiatingMessage_1 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('RUA-PDU-Contents', 'DirectTransfer')))
-    _RUA_ELEMENTARY_PROCEDURES_val_InitiatingMessage_2 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('RUA-PDU-Contents', 'Disconnect')))
-    _RUA_ELEMENTARY_PROCEDURES_val_InitiatingMessage_3 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('RUA-PDU-Contents', 'ConnectionlessTransfer')))
-    _RUA_ELEMENTARY_PROCEDURES_val_InitiatingMessage_4 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('RUA-PDU-Contents', 'ErrorIndication')))
-    _RUA_ELEMENTARY_PROCEDURES_val_InitiatingMessage_5 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('RUA-PDU-Contents', 'PrivateMessage')))
-    RUA_ELEMENTARY_PROCEDURES._val = ASN1Set(rv=[dict([(u'InitiatingMessage', _RUA_ELEMENTARY_PROCEDURES_val_InitiatingMessage_0), (u'procedureCode', 1), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', _RUA_ELEMENTARY_PROCEDURES_val_InitiatingMessage_1), (u'procedureCode', 2), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', _RUA_ELEMENTARY_PROCEDURES_val_InitiatingMessage_2), (u'procedureCode', 3), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', _RUA_ELEMENTARY_PROCEDURES_val_InitiatingMessage_3), (u'procedureCode', 4), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', _RUA_ELEMENTARY_PROCEDURES_val_InitiatingMessage_4), (u'procedureCode', 5), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', _RUA_ELEMENTARY_PROCEDURES_val_InitiatingMessage_5), (u'procedureCode', 6), (u'criticality', u'ignore')])], rr=[], ev=[], er=[])
+    RUA_ELEMENTARY_PROCEDURES = CLASS(name='RUA-ELEMENTARY-PROCEDURES', mode=MODE_SET, typeref=ASN1RefType(('RUA-PDU-Descriptions', 'RUA-ELEMENTARY-PROCEDURE')))
+    _RUA_ELEMENTARY_PROCEDURES_val_InitiatingMessage_0 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('RUA-PDU-Contents', 'Connect')))
+    _RUA_ELEMENTARY_PROCEDURES_val_InitiatingMessage_1 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('RUA-PDU-Contents', 'DirectTransfer')))
+    _RUA_ELEMENTARY_PROCEDURES_val_InitiatingMessage_2 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('RUA-PDU-Contents', 'Disconnect')))
+    _RUA_ELEMENTARY_PROCEDURES_val_InitiatingMessage_3 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('RUA-PDU-Contents', 'ConnectionlessTransfer')))
+    _RUA_ELEMENTARY_PROCEDURES_val_InitiatingMessage_4 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('RUA-PDU-Contents', 'ErrorIndication')))
+    _RUA_ELEMENTARY_PROCEDURES_val_InitiatingMessage_5 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('RUA-PDU-Contents', 'PrivateMessage')))
+    RUA_ELEMENTARY_PROCEDURES._val = ASN1Set(rv=[dict([('InitiatingMessage', _RUA_ELEMENTARY_PROCEDURES_val_InitiatingMessage_0), ('procedureCode', 1), ('criticality', 'ignore')]), dict([('InitiatingMessage', _RUA_ELEMENTARY_PROCEDURES_val_InitiatingMessage_1), ('procedureCode', 2), ('criticality', 'ignore')]), dict([('InitiatingMessage', _RUA_ELEMENTARY_PROCEDURES_val_InitiatingMessage_2), ('procedureCode', 3), ('criticality', 'ignore')]), dict([('InitiatingMessage', _RUA_ELEMENTARY_PROCEDURES_val_InitiatingMessage_3), ('procedureCode', 4), ('criticality', 'ignore')]), dict([('InitiatingMessage', _RUA_ELEMENTARY_PROCEDURES_val_InitiatingMessage_4), ('procedureCode', 5), ('criticality', 'ignore')]), dict([('InitiatingMessage', _RUA_ELEMENTARY_PROCEDURES_val_InitiatingMessage_5), ('procedureCode', 6), ('criticality', 'ignore')])], rr=[], ev=[], er=[])
     
     #-----< RUA-ELEMENTARY-PROCEDURES-CLASS-1 >-----#
-    RUA_ELEMENTARY_PROCEDURES_CLASS_1 = CLASS(name=u'RUA-ELEMENTARY-PROCEDURES-CLASS-1', mode=MODE_SET, typeref=ASN1RefType(('RUA-PDU-Descriptions', 'RUA-ELEMENTARY-PROCEDURE')))
+    RUA_ELEMENTARY_PROCEDURES_CLASS_1 = CLASS(name='RUA-ELEMENTARY-PROCEDURES-CLASS-1', mode=MODE_SET, typeref=ASN1RefType(('RUA-PDU-Descriptions', 'RUA-ELEMENTARY-PROCEDURE')))
     RUA_ELEMENTARY_PROCEDURES_CLASS_1._val = ASN1Set(rv=[], rr=[], ev=[], er=[])
     
     #-----< RUA-ELEMENTARY-PROCEDURES-CLASS-2 >-----#
-    RUA_ELEMENTARY_PROCEDURES_CLASS_2 = CLASS(name=u'RUA-ELEMENTARY-PROCEDURES-CLASS-2', mode=MODE_SET, typeref=ASN1RefType(('RUA-PDU-Descriptions', 'RUA-ELEMENTARY-PROCEDURE')))
-    _RUA_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_0 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('RUA-PDU-Contents', 'Connect')))
-    _RUA_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_1 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('RUA-PDU-Contents', 'DirectTransfer')))
-    _RUA_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_2 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('RUA-PDU-Contents', 'Disconnect')))
-    _RUA_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_3 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('RUA-PDU-Contents', 'ConnectionlessTransfer')))
-    _RUA_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_4 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('RUA-PDU-Contents', 'ErrorIndication')))
-    _RUA_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_5 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('RUA-PDU-Contents', 'PrivateMessage')))
-    RUA_ELEMENTARY_PROCEDURES_CLASS_2._val = ASN1Set(rv=[dict([(u'InitiatingMessage', _RUA_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_0), (u'procedureCode', 1), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', _RUA_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_1), (u'procedureCode', 2), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', _RUA_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_2), (u'procedureCode', 3), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', _RUA_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_3), (u'procedureCode', 4), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', _RUA_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_4), (u'procedureCode', 5), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', _RUA_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_5), (u'procedureCode', 6), (u'criticality', u'ignore')])], rr=[], ev=[], er=[])
+    RUA_ELEMENTARY_PROCEDURES_CLASS_2 = CLASS(name='RUA-ELEMENTARY-PROCEDURES-CLASS-2', mode=MODE_SET, typeref=ASN1RefType(('RUA-PDU-Descriptions', 'RUA-ELEMENTARY-PROCEDURE')))
+    _RUA_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_0 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('RUA-PDU-Contents', 'Connect')))
+    _RUA_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_1 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('RUA-PDU-Contents', 'DirectTransfer')))
+    _RUA_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_2 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('RUA-PDU-Contents', 'Disconnect')))
+    _RUA_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_3 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('RUA-PDU-Contents', 'ConnectionlessTransfer')))
+    _RUA_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_4 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('RUA-PDU-Contents', 'ErrorIndication')))
+    _RUA_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_5 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('RUA-PDU-Contents', 'PrivateMessage')))
+    RUA_ELEMENTARY_PROCEDURES_CLASS_2._val = ASN1Set(rv=[dict([('InitiatingMessage', _RUA_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_0), ('procedureCode', 1), ('criticality', 'ignore')]), dict([('InitiatingMessage', _RUA_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_1), ('procedureCode', 2), ('criticality', 'ignore')]), dict([('InitiatingMessage', _RUA_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_2), ('procedureCode', 3), ('criticality', 'ignore')]), dict([('InitiatingMessage', _RUA_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_3), ('procedureCode', 4), ('criticality', 'ignore')]), dict([('InitiatingMessage', _RUA_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_4), ('procedureCode', 5), ('criticality', 'ignore')]), dict([('InitiatingMessage', _RUA_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_5), ('procedureCode', 6), ('criticality', 'ignore')])], rr=[], ev=[], er=[])
     
     #-----< connectionRequest >-----#
-    connectionRequest = CLASS(name=u'connectionRequest', mode=MODE_VALUE, typeref=ASN1RefType(('RUA-PDU-Descriptions', 'RUA-ELEMENTARY-PROCEDURE')))
-    _connectionRequest_val_InitiatingMessage = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('RUA-PDU-Contents', 'Connect')))
-    connectionRequest._val = dict([(u'InitiatingMessage', _connectionRequest_val_InitiatingMessage), (u'procedureCode', 1), (u'criticality', u'ignore')])
+    connectionRequest = CLASS(name='connectionRequest', mode=MODE_VALUE, typeref=ASN1RefType(('RUA-PDU-Descriptions', 'RUA-ELEMENTARY-PROCEDURE')))
+    _connectionRequest_val_InitiatingMessage = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('RUA-PDU-Contents', 'Connect')))
+    connectionRequest._val = dict([('InitiatingMessage', _connectionRequest_val_InitiatingMessage), ('procedureCode', 1), ('criticality', 'ignore')])
     
     #-----< directTransfer >-----#
-    directTransfer = CLASS(name=u'directTransfer', mode=MODE_VALUE, typeref=ASN1RefType(('RUA-PDU-Descriptions', 'RUA-ELEMENTARY-PROCEDURE')))
-    _directTransfer_val_InitiatingMessage = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('RUA-PDU-Contents', 'DirectTransfer')))
-    directTransfer._val = dict([(u'InitiatingMessage', _directTransfer_val_InitiatingMessage), (u'procedureCode', 2), (u'criticality', u'ignore')])
+    directTransfer = CLASS(name='directTransfer', mode=MODE_VALUE, typeref=ASN1RefType(('RUA-PDU-Descriptions', 'RUA-ELEMENTARY-PROCEDURE')))
+    _directTransfer_val_InitiatingMessage = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('RUA-PDU-Contents', 'DirectTransfer')))
+    directTransfer._val = dict([('InitiatingMessage', _directTransfer_val_InitiatingMessage), ('procedureCode', 2), ('criticality', 'ignore')])
     
     #-----< disconnectRequest >-----#
-    disconnectRequest = CLASS(name=u'disconnectRequest', mode=MODE_VALUE, typeref=ASN1RefType(('RUA-PDU-Descriptions', 'RUA-ELEMENTARY-PROCEDURE')))
-    _disconnectRequest_val_InitiatingMessage = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('RUA-PDU-Contents', 'Disconnect')))
-    disconnectRequest._val = dict([(u'InitiatingMessage', _disconnectRequest_val_InitiatingMessage), (u'procedureCode', 3), (u'criticality', u'ignore')])
+    disconnectRequest = CLASS(name='disconnectRequest', mode=MODE_VALUE, typeref=ASN1RefType(('RUA-PDU-Descriptions', 'RUA-ELEMENTARY-PROCEDURE')))
+    _disconnectRequest_val_InitiatingMessage = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('RUA-PDU-Contents', 'Disconnect')))
+    disconnectRequest._val = dict([('InitiatingMessage', _disconnectRequest_val_InitiatingMessage), ('procedureCode', 3), ('criticality', 'ignore')])
     
     #-----< connectionlessTransfer >-----#
-    connectionlessTransfer = CLASS(name=u'connectionlessTransfer', mode=MODE_VALUE, typeref=ASN1RefType(('RUA-PDU-Descriptions', 'RUA-ELEMENTARY-PROCEDURE')))
-    _connectionlessTransfer_val_InitiatingMessage = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('RUA-PDU-Contents', 'ConnectionlessTransfer')))
-    connectionlessTransfer._val = dict([(u'InitiatingMessage', _connectionlessTransfer_val_InitiatingMessage), (u'procedureCode', 4), (u'criticality', u'ignore')])
+    connectionlessTransfer = CLASS(name='connectionlessTransfer', mode=MODE_VALUE, typeref=ASN1RefType(('RUA-PDU-Descriptions', 'RUA-ELEMENTARY-PROCEDURE')))
+    _connectionlessTransfer_val_InitiatingMessage = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('RUA-PDU-Contents', 'ConnectionlessTransfer')))
+    connectionlessTransfer._val = dict([('InitiatingMessage', _connectionlessTransfer_val_InitiatingMessage), ('procedureCode', 4), ('criticality', 'ignore')])
     
     #-----< errorIndication >-----#
-    errorIndication = CLASS(name=u'errorIndication', mode=MODE_VALUE, typeref=ASN1RefType(('RUA-PDU-Descriptions', 'RUA-ELEMENTARY-PROCEDURE')))
-    _errorIndication_val_InitiatingMessage = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('RUA-PDU-Contents', 'ErrorIndication')))
-    errorIndication._val = dict([(u'InitiatingMessage', _errorIndication_val_InitiatingMessage), (u'procedureCode', 5), (u'criticality', u'ignore')])
+    errorIndication = CLASS(name='errorIndication', mode=MODE_VALUE, typeref=ASN1RefType(('RUA-PDU-Descriptions', 'RUA-ELEMENTARY-PROCEDURE')))
+    _errorIndication_val_InitiatingMessage = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('RUA-PDU-Contents', 'ErrorIndication')))
+    errorIndication._val = dict([('InitiatingMessage', _errorIndication_val_InitiatingMessage), ('procedureCode', 5), ('criticality', 'ignore')])
     
     #-----< privateMessage >-----#
-    privateMessage = CLASS(name=u'privateMessage', mode=MODE_VALUE, typeref=ASN1RefType(('RUA-PDU-Descriptions', 'RUA-ELEMENTARY-PROCEDURE')))
-    _privateMessage_val_InitiatingMessage = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('RUA-PDU-Contents', 'PrivateMessage')))
-    privateMessage._val = dict([(u'InitiatingMessage', _privateMessage_val_InitiatingMessage), (u'procedureCode', 6), (u'criticality', u'ignore')])
+    privateMessage = CLASS(name='privateMessage', mode=MODE_VALUE, typeref=ASN1RefType(('RUA-PDU-Descriptions', 'RUA-ELEMENTARY-PROCEDURE')))
+    _privateMessage_val_InitiatingMessage = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('RUA-PDU-Contents', 'PrivateMessage')))
+    privateMessage._val = dict([('InitiatingMessage', _privateMessage_val_InitiatingMessage), ('procedureCode', 6), ('criticality', 'ignore')])
     
     _all_ = [
         _RUA_ELEMENTARY_PROCEDURE_InitiatingMessage,

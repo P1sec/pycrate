@@ -16,272 +16,272 @@ from pycrate_asn1rt.init             import init_modules
 
 class MEDIA_GATEWAY_CONTROL:
 
-    _name_  = u'MEDIA-GATEWAY-CONTROL'
+    _name_  = 'MEDIA-GATEWAY-CONTROL'
     _oid_   = [0, 0, 8, 248, 0, 0, 3]
     
     _obj_ = [
-        u'MegacoMessage',
-        u'AuthenticationHeader',
-        u'SecurityParmIndex',
-        u'SequenceNum',
-        u'AuthData',
-        u'Message',
-        u'Mid',
-        u'DomainName',
-        u'IP4Address',
-        u'IP6Address',
-        u'PathName',
-        u'Transaction',
-        u'TransactionId',
-        u'TransactionRequest',
-        u'TransactionPending',
-        u'TransactionReply',
-        u'SegmentReply',
-        u'SegmentNumber',
-        u'TransactionResponseAck',
-        u'TransactionAck',
-        u'ErrorDescriptor',
-        u'ErrorCode',
-        u'ErrorText',
-        u'ContextID',
-        u'ActionRequest',
-        u'ActionReply',
-        u'ContextRequest',
-        u'ContextAttrAuditRequest',
-        u'SelectLogic',
-        u'CommandRequest',
-        u'Command',
-        u'CommandReply',
-        u'TopologyRequest',
-        u'AmmRequest',
-        u'AmmDescriptor',
-        u'AmmsReply',
-        u'SubtractRequest',
-        u'AuditRequest',
-        u'AuditReply',
-        u'AuditResult',
-        u'TermListAuditResult',
-        u'TerminationAudit',
-        u'AuditReturnParameter',
-        u'AuditDescriptor',
-        u'IndAuditParameter',
-        u'IndAudMediaDescriptor',
-        u'IndAudStreamDescriptor',
-        u'IndAudStreamParms',
-        u'IndAudLocalControlDescriptor',
-        u'IndAudPropertyParm',
-        u'IndAudLocalRemoteDescriptor',
-        u'IndAudPropertyGroup',
-        u'IndAudTerminationStateDescriptor',
-        u'IndAudEventsDescriptor',
-        u'IndAudEventBufferDescriptor',
-        u'IndAudSignalsDescriptor',
-        u'IndAudSeqSigList',
-        u'IndAudSignal',
-        u'IndAudDigitMapDescriptor',
-        u'IndAudStatisticsDescriptor',
-        u'IndAudPackagesDescriptor',
-        u'NotifyRequest',
-        u'NotifyReply',
-        u'ObservedEventsDescriptor',
-        u'ObservedEvent',
-        u'EventName',
-        u'EventParameter',
-        u'ServiceChangeRequest',
-        u'ServiceChangeReply',
-        u'ServiceChangeResult',
-        u'WildcardField',
-        u'TerminationID',
-        u'TerminationIDList',
-        u'MediaDescriptor',
-        u'StreamDescriptor',
-        u'StreamParms',
-        u'LocalControlDescriptor',
-        u'StreamMode',
-        u'PropertyParm',
-        u'Name',
-        u'PkgdName',
-        u'Relation',
-        u'LocalRemoteDescriptor',
-        u'PropertyGroup',
-        u'TerminationStateDescriptor',
-        u'EventBufferControl',
-        u'ServiceState',
-        u'MuxDescriptor',
-        u'MuxType',
-        u'StreamID',
-        u'EventsDescriptor',
-        u'RequestedEvent',
-        u'RegulatedEmbeddedDescriptor',
-        u'NotifyBehaviour',
-        u'RequestedActions',
-        u'EventDM',
-        u'SecondEventsDescriptor',
-        u'SecondRequestedEvent',
-        u'SecondRequestedActions',
-        u'EventBufferDescriptor',
-        u'EventSpec',
-        u'SignalsDescriptor',
-        u'SignalRequest',
-        u'SeqSigList',
-        u'Signal',
-        u'SignalType',
-        u'SignalDirection',
-        u'SignalName',
-        u'NotifyCompletion',
-        u'SigParameter',
-        u'RequestID',
-        u'ModemDescriptor',
-        u'ModemType',
-        u'DigitMapDescriptor',
-        u'DigitMapName',
-        u'DigitMapValue',
-        u'ServiceChangeParm',
-        u'ServiceChangeAddress',
-        u'ServiceChangeResParm',
-        u'ServiceChangeMethod',
-        u'ServiceChangeProfile',
-        u'PackagesDescriptor',
-        u'PackagesItem',
-        u'StatisticsDescriptor',
-        u'StatisticsParameter',
-        u'NonStandardData',
-        u'NonStandardIdentifier',
-        u'H221NonStandard',
-        u'TimeNotation',
-        u'Value',
+        'MegacoMessage',
+        'AuthenticationHeader',
+        'SecurityParmIndex',
+        'SequenceNum',
+        'AuthData',
+        'Message',
+        'Mid',
+        'DomainName',
+        'IP4Address',
+        'IP6Address',
+        'PathName',
+        'Transaction',
+        'TransactionId',
+        'TransactionRequest',
+        'TransactionPending',
+        'TransactionReply',
+        'SegmentReply',
+        'SegmentNumber',
+        'TransactionResponseAck',
+        'TransactionAck',
+        'ErrorDescriptor',
+        'ErrorCode',
+        'ErrorText',
+        'ContextID',
+        'ActionRequest',
+        'ActionReply',
+        'ContextRequest',
+        'ContextAttrAuditRequest',
+        'SelectLogic',
+        'CommandRequest',
+        'Command',
+        'CommandReply',
+        'TopologyRequest',
+        'AmmRequest',
+        'AmmDescriptor',
+        'AmmsReply',
+        'SubtractRequest',
+        'AuditRequest',
+        'AuditReply',
+        'AuditResult',
+        'TermListAuditResult',
+        'TerminationAudit',
+        'AuditReturnParameter',
+        'AuditDescriptor',
+        'IndAuditParameter',
+        'IndAudMediaDescriptor',
+        'IndAudStreamDescriptor',
+        'IndAudStreamParms',
+        'IndAudLocalControlDescriptor',
+        'IndAudPropertyParm',
+        'IndAudLocalRemoteDescriptor',
+        'IndAudPropertyGroup',
+        'IndAudTerminationStateDescriptor',
+        'IndAudEventsDescriptor',
+        'IndAudEventBufferDescriptor',
+        'IndAudSignalsDescriptor',
+        'IndAudSeqSigList',
+        'IndAudSignal',
+        'IndAudDigitMapDescriptor',
+        'IndAudStatisticsDescriptor',
+        'IndAudPackagesDescriptor',
+        'NotifyRequest',
+        'NotifyReply',
+        'ObservedEventsDescriptor',
+        'ObservedEvent',
+        'EventName',
+        'EventParameter',
+        'ServiceChangeRequest',
+        'ServiceChangeReply',
+        'ServiceChangeResult',
+        'WildcardField',
+        'TerminationID',
+        'TerminationIDList',
+        'MediaDescriptor',
+        'StreamDescriptor',
+        'StreamParms',
+        'LocalControlDescriptor',
+        'StreamMode',
+        'PropertyParm',
+        'Name',
+        'PkgdName',
+        'Relation',
+        'LocalRemoteDescriptor',
+        'PropertyGroup',
+        'TerminationStateDescriptor',
+        'EventBufferControl',
+        'ServiceState',
+        'MuxDescriptor',
+        'MuxType',
+        'StreamID',
+        'EventsDescriptor',
+        'RequestedEvent',
+        'RegulatedEmbeddedDescriptor',
+        'NotifyBehaviour',
+        'RequestedActions',
+        'EventDM',
+        'SecondEventsDescriptor',
+        'SecondRequestedEvent',
+        'SecondRequestedActions',
+        'EventBufferDescriptor',
+        'EventSpec',
+        'SignalsDescriptor',
+        'SignalRequest',
+        'SeqSigList',
+        'Signal',
+        'SignalType',
+        'SignalDirection',
+        'SignalName',
+        'NotifyCompletion',
+        'SigParameter',
+        'RequestID',
+        'ModemDescriptor',
+        'ModemType',
+        'DigitMapDescriptor',
+        'DigitMapName',
+        'DigitMapValue',
+        'ServiceChangeParm',
+        'ServiceChangeAddress',
+        'ServiceChangeResParm',
+        'ServiceChangeMethod',
+        'ServiceChangeProfile',
+        'PackagesDescriptor',
+        'PackagesItem',
+        'StatisticsDescriptor',
+        'StatisticsParameter',
+        'NonStandardData',
+        'NonStandardIdentifier',
+        'H221NonStandard',
+        'TimeNotation',
+        'Value',
         ]
     _type_ = [
-        u'MegacoMessage',
-        u'AuthenticationHeader',
-        u'SecurityParmIndex',
-        u'SequenceNum',
-        u'AuthData',
-        u'Message',
-        u'Mid',
-        u'DomainName',
-        u'IP4Address',
-        u'IP6Address',
-        u'PathName',
-        u'Transaction',
-        u'TransactionId',
-        u'TransactionRequest',
-        u'TransactionPending',
-        u'TransactionReply',
-        u'SegmentReply',
-        u'SegmentNumber',
-        u'TransactionResponseAck',
-        u'TransactionAck',
-        u'ErrorDescriptor',
-        u'ErrorCode',
-        u'ErrorText',
-        u'ContextID',
-        u'ActionRequest',
-        u'ActionReply',
-        u'ContextRequest',
-        u'ContextAttrAuditRequest',
-        u'SelectLogic',
-        u'CommandRequest',
-        u'Command',
-        u'CommandReply',
-        u'TopologyRequest',
-        u'AmmRequest',
-        u'AmmDescriptor',
-        u'AmmsReply',
-        u'SubtractRequest',
-        u'AuditRequest',
-        u'AuditReply',
-        u'AuditResult',
-        u'TermListAuditResult',
-        u'TerminationAudit',
-        u'AuditReturnParameter',
-        u'AuditDescriptor',
-        u'IndAuditParameter',
-        u'IndAudMediaDescriptor',
-        u'IndAudStreamDescriptor',
-        u'IndAudStreamParms',
-        u'IndAudLocalControlDescriptor',
-        u'IndAudPropertyParm',
-        u'IndAudLocalRemoteDescriptor',
-        u'IndAudPropertyGroup',
-        u'IndAudTerminationStateDescriptor',
-        u'IndAudEventsDescriptor',
-        u'IndAudEventBufferDescriptor',
-        u'IndAudSignalsDescriptor',
-        u'IndAudSeqSigList',
-        u'IndAudSignal',
-        u'IndAudDigitMapDescriptor',
-        u'IndAudStatisticsDescriptor',
-        u'IndAudPackagesDescriptor',
-        u'NotifyRequest',
-        u'NotifyReply',
-        u'ObservedEventsDescriptor',
-        u'ObservedEvent',
-        u'EventName',
-        u'EventParameter',
-        u'ServiceChangeRequest',
-        u'ServiceChangeReply',
-        u'ServiceChangeResult',
-        u'WildcardField',
-        u'TerminationID',
-        u'TerminationIDList',
-        u'MediaDescriptor',
-        u'StreamDescriptor',
-        u'StreamParms',
-        u'LocalControlDescriptor',
-        u'StreamMode',
-        u'PropertyParm',
-        u'Name',
-        u'PkgdName',
-        u'Relation',
-        u'LocalRemoteDescriptor',
-        u'PropertyGroup',
-        u'TerminationStateDescriptor',
-        u'EventBufferControl',
-        u'ServiceState',
-        u'MuxDescriptor',
-        u'MuxType',
-        u'StreamID',
-        u'EventsDescriptor',
-        u'RequestedEvent',
-        u'RegulatedEmbeddedDescriptor',
-        u'NotifyBehaviour',
-        u'RequestedActions',
-        u'EventDM',
-        u'SecondEventsDescriptor',
-        u'SecondRequestedEvent',
-        u'SecondRequestedActions',
-        u'EventBufferDescriptor',
-        u'EventSpec',
-        u'SignalsDescriptor',
-        u'SignalRequest',
-        u'SeqSigList',
-        u'Signal',
-        u'SignalType',
-        u'SignalDirection',
-        u'SignalName',
-        u'NotifyCompletion',
-        u'SigParameter',
-        u'RequestID',
-        u'ModemDescriptor',
-        u'ModemType',
-        u'DigitMapDescriptor',
-        u'DigitMapName',
-        u'DigitMapValue',
-        u'ServiceChangeParm',
-        u'ServiceChangeAddress',
-        u'ServiceChangeResParm',
-        u'ServiceChangeMethod',
-        u'ServiceChangeProfile',
-        u'PackagesDescriptor',
-        u'PackagesItem',
-        u'StatisticsDescriptor',
-        u'StatisticsParameter',
-        u'NonStandardData',
-        u'NonStandardIdentifier',
-        u'H221NonStandard',
-        u'TimeNotation',
-        u'Value',
+        'MegacoMessage',
+        'AuthenticationHeader',
+        'SecurityParmIndex',
+        'SequenceNum',
+        'AuthData',
+        'Message',
+        'Mid',
+        'DomainName',
+        'IP4Address',
+        'IP6Address',
+        'PathName',
+        'Transaction',
+        'TransactionId',
+        'TransactionRequest',
+        'TransactionPending',
+        'TransactionReply',
+        'SegmentReply',
+        'SegmentNumber',
+        'TransactionResponseAck',
+        'TransactionAck',
+        'ErrorDescriptor',
+        'ErrorCode',
+        'ErrorText',
+        'ContextID',
+        'ActionRequest',
+        'ActionReply',
+        'ContextRequest',
+        'ContextAttrAuditRequest',
+        'SelectLogic',
+        'CommandRequest',
+        'Command',
+        'CommandReply',
+        'TopologyRequest',
+        'AmmRequest',
+        'AmmDescriptor',
+        'AmmsReply',
+        'SubtractRequest',
+        'AuditRequest',
+        'AuditReply',
+        'AuditResult',
+        'TermListAuditResult',
+        'TerminationAudit',
+        'AuditReturnParameter',
+        'AuditDescriptor',
+        'IndAuditParameter',
+        'IndAudMediaDescriptor',
+        'IndAudStreamDescriptor',
+        'IndAudStreamParms',
+        'IndAudLocalControlDescriptor',
+        'IndAudPropertyParm',
+        'IndAudLocalRemoteDescriptor',
+        'IndAudPropertyGroup',
+        'IndAudTerminationStateDescriptor',
+        'IndAudEventsDescriptor',
+        'IndAudEventBufferDescriptor',
+        'IndAudSignalsDescriptor',
+        'IndAudSeqSigList',
+        'IndAudSignal',
+        'IndAudDigitMapDescriptor',
+        'IndAudStatisticsDescriptor',
+        'IndAudPackagesDescriptor',
+        'NotifyRequest',
+        'NotifyReply',
+        'ObservedEventsDescriptor',
+        'ObservedEvent',
+        'EventName',
+        'EventParameter',
+        'ServiceChangeRequest',
+        'ServiceChangeReply',
+        'ServiceChangeResult',
+        'WildcardField',
+        'TerminationID',
+        'TerminationIDList',
+        'MediaDescriptor',
+        'StreamDescriptor',
+        'StreamParms',
+        'LocalControlDescriptor',
+        'StreamMode',
+        'PropertyParm',
+        'Name',
+        'PkgdName',
+        'Relation',
+        'LocalRemoteDescriptor',
+        'PropertyGroup',
+        'TerminationStateDescriptor',
+        'EventBufferControl',
+        'ServiceState',
+        'MuxDescriptor',
+        'MuxType',
+        'StreamID',
+        'EventsDescriptor',
+        'RequestedEvent',
+        'RegulatedEmbeddedDescriptor',
+        'NotifyBehaviour',
+        'RequestedActions',
+        'EventDM',
+        'SecondEventsDescriptor',
+        'SecondRequestedEvent',
+        'SecondRequestedActions',
+        'EventBufferDescriptor',
+        'EventSpec',
+        'SignalsDescriptor',
+        'SignalRequest',
+        'SeqSigList',
+        'Signal',
+        'SignalType',
+        'SignalDirection',
+        'SignalName',
+        'NotifyCompletion',
+        'SigParameter',
+        'RequestID',
+        'ModemDescriptor',
+        'ModemType',
+        'DigitMapDescriptor',
+        'DigitMapName',
+        'DigitMapValue',
+        'ServiceChangeParm',
+        'ServiceChangeAddress',
+        'ServiceChangeResParm',
+        'ServiceChangeMethod',
+        'ServiceChangeProfile',
+        'PackagesDescriptor',
+        'PackagesItem',
+        'StatisticsDescriptor',
+        'StatisticsParameter',
+        'NonStandardData',
+        'NonStandardIdentifier',
+        'H221NonStandard',
+        'TimeNotation',
+        'Value',
         ]
     _set_ = [
         ]
@@ -293,1509 +293,1509 @@ class MEDIA_GATEWAY_CONTROL:
         ]
     
     #-----< MegacoMessage >-----#
-    MegacoMessage = SEQ(name=u'MegacoMessage', mode=MODE_TYPE)
-    _MegacoMessage_authHeader = SEQ(name=u'authHeader', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'AuthenticationHeader')), opt=True)
-    _MegacoMessage_mess = SEQ(name=u'mess', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'Message')))
+    MegacoMessage = SEQ(name='MegacoMessage', mode=MODE_TYPE)
+    _MegacoMessage_authHeader = SEQ(name='authHeader', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'AuthenticationHeader')), opt=True)
+    _MegacoMessage_mess = SEQ(name='mess', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'Message')))
     MegacoMessage._cont = ASN1Dict([
-        (u'authHeader', _MegacoMessage_authHeader),
-        (u'mess', _MegacoMessage_mess),
+        ('authHeader', _MegacoMessage_authHeader),
+        ('mess', _MegacoMessage_mess),
         ])
     MegacoMessage._ext = None
     
     #-----< AuthenticationHeader >-----#
-    AuthenticationHeader = SEQ(name=u'AuthenticationHeader', mode=MODE_TYPE)
-    _AuthenticationHeader_secParmIndex = OCT_STR(name=u'secParmIndex', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'SecurityParmIndex')))
-    _AuthenticationHeader_seqNum = OCT_STR(name=u'seqNum', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'SequenceNum')))
-    _AuthenticationHeader_ad = OCT_STR(name=u'ad', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'AuthData')))
+    AuthenticationHeader = SEQ(name='AuthenticationHeader', mode=MODE_TYPE)
+    _AuthenticationHeader_secParmIndex = OCT_STR(name='secParmIndex', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'SecurityParmIndex')))
+    _AuthenticationHeader_seqNum = OCT_STR(name='seqNum', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'SequenceNum')))
+    _AuthenticationHeader_ad = OCT_STR(name='ad', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'AuthData')))
     AuthenticationHeader._cont = ASN1Dict([
-        (u'secParmIndex', _AuthenticationHeader_secParmIndex),
-        (u'seqNum', _AuthenticationHeader_seqNum),
-        (u'ad', _AuthenticationHeader_ad),
+        ('secParmIndex', _AuthenticationHeader_secParmIndex),
+        ('seqNum', _AuthenticationHeader_seqNum),
+        ('ad', _AuthenticationHeader_ad),
         ])
     AuthenticationHeader._ext = None
     
     #-----< SecurityParmIndex >-----#
-    SecurityParmIndex = OCT_STR(name=u'SecurityParmIndex', mode=MODE_TYPE)
+    SecurityParmIndex = OCT_STR(name='SecurityParmIndex', mode=MODE_TYPE)
     SecurityParmIndex._const_sz = ASN1Set(rv=[4], rr=[], ev=None, er=[])
     
     #-----< SequenceNum >-----#
-    SequenceNum = OCT_STR(name=u'SequenceNum', mode=MODE_TYPE)
+    SequenceNum = OCT_STR(name='SequenceNum', mode=MODE_TYPE)
     SequenceNum._const_sz = ASN1Set(rv=[4], rr=[], ev=None, er=[])
     
     #-----< AuthData >-----#
-    AuthData = OCT_STR(name=u'AuthData', mode=MODE_TYPE)
+    AuthData = OCT_STR(name='AuthData', mode=MODE_TYPE)
     AuthData._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=12, ub=32)], ev=None, er=[])
     
     #-----< Message >-----#
-    Message = SEQ(name=u'Message', mode=MODE_TYPE)
-    _Message_version = INT(name=u'version', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    Message = SEQ(name='Message', mode=MODE_TYPE)
+    _Message_version = INT(name='version', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     _Message_version._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=99)], ev=None, er=[])
-    _Message_mId = CHOICE(name=u'mId', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'Mid')))
-    _Message_messageBody = CHOICE(name=u'messageBody', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
-    __Message_messageBody_messageError = SEQ(name=u'messageError', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'ErrorDescriptor')))
-    __Message_messageBody_transactions = SEQ_OF(name=u'transactions', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _Message_mId = CHOICE(name='mId', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'Mid')))
+    _Message_messageBody = CHOICE(name='messageBody', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
+    __Message_messageBody_messageError = SEQ(name='messageError', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'ErrorDescriptor')))
+    __Message_messageBody_transactions = SEQ_OF(name='transactions', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     ___Message_messageBody_transactions__item_ = CHOICE(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'Transaction')))
     __Message_messageBody_transactions._cont = ___Message_messageBody_transactions__item_
     _Message_messageBody._cont = ASN1Dict([
-        (u'messageError', __Message_messageBody_messageError),
-        (u'transactions', __Message_messageBody_transactions),
+        ('messageError', __Message_messageBody_messageError),
+        ('transactions', __Message_messageBody_transactions),
         ])
     _Message_messageBody._ext = None
     Message._cont = ASN1Dict([
-        (u'version', _Message_version),
-        (u'mId', _Message_mId),
-        (u'messageBody', _Message_messageBody),
+        ('version', _Message_version),
+        ('mId', _Message_mId),
+        ('messageBody', _Message_messageBody),
         ])
     Message._ext = []
     
     #-----< Mid >-----#
-    Mid = CHOICE(name=u'Mid', mode=MODE_TYPE)
-    _Mid_ip4Address = SEQ(name=u'ip4Address', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'IP4Address')))
-    _Mid_ip6Address = SEQ(name=u'ip6Address', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'IP6Address')))
-    _Mid_domainName = SEQ(name=u'domainName', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'DomainName')))
-    _Mid_deviceName = STR_IA5(name=u'deviceName', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'PathName')))
-    _Mid_mtpAddress = OCT_STR(name=u'mtpAddress', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    Mid = CHOICE(name='Mid', mode=MODE_TYPE)
+    _Mid_ip4Address = SEQ(name='ip4Address', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'IP4Address')))
+    _Mid_ip6Address = SEQ(name='ip6Address', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'IP6Address')))
+    _Mid_domainName = SEQ(name='domainName', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'DomainName')))
+    _Mid_deviceName = STR_IA5(name='deviceName', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'PathName')))
+    _Mid_mtpAddress = OCT_STR(name='mtpAddress', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     _Mid_mtpAddress._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=2, ub=4)], ev=None, er=[])
     Mid._cont = ASN1Dict([
-        (u'ip4Address', _Mid_ip4Address),
-        (u'ip6Address', _Mid_ip6Address),
-        (u'domainName', _Mid_domainName),
-        (u'deviceName', _Mid_deviceName),
-        (u'mtpAddress', _Mid_mtpAddress),
+        ('ip4Address', _Mid_ip4Address),
+        ('ip6Address', _Mid_ip6Address),
+        ('domainName', _Mid_domainName),
+        ('deviceName', _Mid_deviceName),
+        ('mtpAddress', _Mid_mtpAddress),
         ])
     Mid._ext = []
     
     #-----< DomainName >-----#
-    DomainName = SEQ(name=u'DomainName', mode=MODE_TYPE)
-    _DomainName_name = STR_IA5(name=u'name', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _DomainName_portNumber = INT(name=u'portNumber', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    DomainName = SEQ(name='DomainName', mode=MODE_TYPE)
+    _DomainName_name = STR_IA5(name='name', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _DomainName_portNumber = INT(name='portNumber', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     _DomainName_portNumber._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=65535)], ev=None, er=[])
     DomainName._cont = ASN1Dict([
-        (u'name', _DomainName_name),
-        (u'portNumber', _DomainName_portNumber),
+        ('name', _DomainName_name),
+        ('portNumber', _DomainName_portNumber),
         ])
     DomainName._ext = None
     
     #-----< IP4Address >-----#
-    IP4Address = SEQ(name=u'IP4Address', mode=MODE_TYPE)
-    _IP4Address_address = OCT_STR(name=u'address', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    IP4Address = SEQ(name='IP4Address', mode=MODE_TYPE)
+    _IP4Address_address = OCT_STR(name='address', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     _IP4Address_address._const_sz = ASN1Set(rv=[4], rr=[], ev=None, er=[])
-    _IP4Address_portNumber = INT(name=u'portNumber', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _IP4Address_portNumber = INT(name='portNumber', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     _IP4Address_portNumber._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=65535)], ev=None, er=[])
     IP4Address._cont = ASN1Dict([
-        (u'address', _IP4Address_address),
-        (u'portNumber', _IP4Address_portNumber),
+        ('address', _IP4Address_address),
+        ('portNumber', _IP4Address_portNumber),
         ])
     IP4Address._ext = None
     
     #-----< IP6Address >-----#
-    IP6Address = SEQ(name=u'IP6Address', mode=MODE_TYPE)
-    _IP6Address_address = OCT_STR(name=u'address', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    IP6Address = SEQ(name='IP6Address', mode=MODE_TYPE)
+    _IP6Address_address = OCT_STR(name='address', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     _IP6Address_address._const_sz = ASN1Set(rv=[16], rr=[], ev=None, er=[])
-    _IP6Address_portNumber = INT(name=u'portNumber', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _IP6Address_portNumber = INT(name='portNumber', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     _IP6Address_portNumber._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=65535)], ev=None, er=[])
     IP6Address._cont = ASN1Dict([
-        (u'address', _IP6Address_address),
-        (u'portNumber', _IP6Address_portNumber),
+        ('address', _IP6Address_address),
+        ('portNumber', _IP6Address_portNumber),
         ])
     IP6Address._ext = None
     
     #-----< PathName >-----#
-    PathName = STR_IA5(name=u'PathName', mode=MODE_TYPE)
+    PathName = STR_IA5(name='PathName', mode=MODE_TYPE)
     PathName._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=64)], ev=None, er=[])
     
     #-----< Transaction >-----#
-    Transaction = CHOICE(name=u'Transaction', mode=MODE_TYPE)
-    _Transaction_transactionRequest = SEQ(name=u'transactionRequest', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'TransactionRequest')))
-    _Transaction_transactionPending = SEQ(name=u'transactionPending', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'TransactionPending')))
-    _Transaction_transactionReply = SEQ(name=u'transactionReply', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'TransactionReply')))
-    _Transaction_transactionResponseAck = SEQ_OF(name=u'transactionResponseAck', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'TransactionResponseAck')))
-    _Transaction_segmentReply = SEQ(name=u'segmentReply', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'SegmentReply')))
+    Transaction = CHOICE(name='Transaction', mode=MODE_TYPE)
+    _Transaction_transactionRequest = SEQ(name='transactionRequest', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'TransactionRequest')))
+    _Transaction_transactionPending = SEQ(name='transactionPending', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'TransactionPending')))
+    _Transaction_transactionReply = SEQ(name='transactionReply', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'TransactionReply')))
+    _Transaction_transactionResponseAck = SEQ_OF(name='transactionResponseAck', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'TransactionResponseAck')))
+    _Transaction_segmentReply = SEQ(name='segmentReply', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'SegmentReply')))
     Transaction._cont = ASN1Dict([
-        (u'transactionRequest', _Transaction_transactionRequest),
-        (u'transactionPending', _Transaction_transactionPending),
-        (u'transactionReply', _Transaction_transactionReply),
-        (u'transactionResponseAck', _Transaction_transactionResponseAck),
-        (u'segmentReply', _Transaction_segmentReply),
+        ('transactionRequest', _Transaction_transactionRequest),
+        ('transactionPending', _Transaction_transactionPending),
+        ('transactionReply', _Transaction_transactionReply),
+        ('transactionResponseAck', _Transaction_transactionResponseAck),
+        ('segmentReply', _Transaction_segmentReply),
         ])
-    Transaction._ext = [u'segmentReply']
+    Transaction._ext = ['segmentReply']
     
     #-----< TransactionId >-----#
-    TransactionId = INT(name=u'TransactionId', mode=MODE_TYPE)
+    TransactionId = INT(name='TransactionId', mode=MODE_TYPE)
     TransactionId._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=4294967295)], ev=None, er=[])
     
     #-----< TransactionRequest >-----#
-    TransactionRequest = SEQ(name=u'TransactionRequest', mode=MODE_TYPE)
-    _TransactionRequest_transactionId = INT(name=u'transactionId', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'TransactionId')))
-    _TransactionRequest_actions = SEQ_OF(name=u'actions', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    TransactionRequest = SEQ(name='TransactionRequest', mode=MODE_TYPE)
+    _TransactionRequest_transactionId = INT(name='transactionId', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'TransactionId')))
+    _TransactionRequest_actions = SEQ_OF(name='actions', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     __TransactionRequest_actions__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'ActionRequest')))
     _TransactionRequest_actions._cont = __TransactionRequest_actions__item_
     TransactionRequest._cont = ASN1Dict([
-        (u'transactionId', _TransactionRequest_transactionId),
-        (u'actions', _TransactionRequest_actions),
+        ('transactionId', _TransactionRequest_transactionId),
+        ('actions', _TransactionRequest_actions),
         ])
     TransactionRequest._ext = []
     
     #-----< TransactionPending >-----#
-    TransactionPending = SEQ(name=u'TransactionPending', mode=MODE_TYPE)
-    _TransactionPending_transactionId = INT(name=u'transactionId', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'TransactionId')))
+    TransactionPending = SEQ(name='TransactionPending', mode=MODE_TYPE)
+    _TransactionPending_transactionId = INT(name='transactionId', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'TransactionId')))
     TransactionPending._cont = ASN1Dict([
-        (u'transactionId', _TransactionPending_transactionId),
+        ('transactionId', _TransactionPending_transactionId),
         ])
     TransactionPending._ext = []
     
     #-----< TransactionReply >-----#
-    TransactionReply = SEQ(name=u'TransactionReply', mode=MODE_TYPE)
-    _TransactionReply_transactionId = INT(name=u'transactionId', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'TransactionId')))
-    _TransactionReply_immAckRequired = NULL(name=u'immAckRequired', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _TransactionReply_transactionResult = CHOICE(name=u'transactionResult', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
-    __TransactionReply_transactionResult_transactionError = SEQ(name=u'transactionError', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'ErrorDescriptor')))
-    __TransactionReply_transactionResult_actionReplies = SEQ_OF(name=u'actionReplies', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    TransactionReply = SEQ(name='TransactionReply', mode=MODE_TYPE)
+    _TransactionReply_transactionId = INT(name='transactionId', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'TransactionId')))
+    _TransactionReply_immAckRequired = NULL(name='immAckRequired', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _TransactionReply_transactionResult = CHOICE(name='transactionResult', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
+    __TransactionReply_transactionResult_transactionError = SEQ(name='transactionError', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'ErrorDescriptor')))
+    __TransactionReply_transactionResult_actionReplies = SEQ_OF(name='actionReplies', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     ___TransactionReply_transactionResult_actionReplies__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'ActionReply')))
     __TransactionReply_transactionResult_actionReplies._cont = ___TransactionReply_transactionResult_actionReplies__item_
     _TransactionReply_transactionResult._cont = ASN1Dict([
-        (u'transactionError', __TransactionReply_transactionResult_transactionError),
-        (u'actionReplies', __TransactionReply_transactionResult_actionReplies),
+        ('transactionError', __TransactionReply_transactionResult_transactionError),
+        ('actionReplies', __TransactionReply_transactionResult_actionReplies),
         ])
     _TransactionReply_transactionResult._ext = None
-    _TransactionReply_segmentNumber = INT(name=u'segmentNumber', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'SegmentNumber')), opt=True)
-    _TransactionReply_segmentationComplete = NULL(name=u'segmentationComplete', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _TransactionReply_segmentNumber = INT(name='segmentNumber', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'SegmentNumber')), opt=True)
+    _TransactionReply_segmentationComplete = NULL(name='segmentationComplete', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     TransactionReply._cont = ASN1Dict([
-        (u'transactionId', _TransactionReply_transactionId),
-        (u'immAckRequired', _TransactionReply_immAckRequired),
-        (u'transactionResult', _TransactionReply_transactionResult),
-        (u'segmentNumber', _TransactionReply_segmentNumber),
-        (u'segmentationComplete', _TransactionReply_segmentationComplete),
+        ('transactionId', _TransactionReply_transactionId),
+        ('immAckRequired', _TransactionReply_immAckRequired),
+        ('transactionResult', _TransactionReply_transactionResult),
+        ('segmentNumber', _TransactionReply_segmentNumber),
+        ('segmentationComplete', _TransactionReply_segmentationComplete),
         ])
-    TransactionReply._ext = [u'segmentNumber', u'segmentationComplete']
+    TransactionReply._ext = ['segmentNumber', 'segmentationComplete']
     
     #-----< SegmentReply >-----#
-    SegmentReply = SEQ(name=u'SegmentReply', mode=MODE_TYPE)
-    _SegmentReply_transactionId = INT(name=u'transactionId', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'TransactionId')))
-    _SegmentReply_segmentNumber = INT(name=u'segmentNumber', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'SegmentNumber')))
-    _SegmentReply_segmentationComplete = NULL(name=u'segmentationComplete', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    SegmentReply = SEQ(name='SegmentReply', mode=MODE_TYPE)
+    _SegmentReply_transactionId = INT(name='transactionId', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'TransactionId')))
+    _SegmentReply_segmentNumber = INT(name='segmentNumber', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'SegmentNumber')))
+    _SegmentReply_segmentationComplete = NULL(name='segmentationComplete', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     SegmentReply._cont = ASN1Dict([
-        (u'transactionId', _SegmentReply_transactionId),
-        (u'segmentNumber', _SegmentReply_segmentNumber),
-        (u'segmentationComplete', _SegmentReply_segmentationComplete),
+        ('transactionId', _SegmentReply_transactionId),
+        ('segmentNumber', _SegmentReply_segmentNumber),
+        ('segmentationComplete', _SegmentReply_segmentationComplete),
         ])
     SegmentReply._ext = []
     
     #-----< SegmentNumber >-----#
-    SegmentNumber = INT(name=u'SegmentNumber', mode=MODE_TYPE)
+    SegmentNumber = INT(name='SegmentNumber', mode=MODE_TYPE)
     SegmentNumber._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=65535)], ev=None, er=[])
     
     #-----< TransactionResponseAck >-----#
-    TransactionResponseAck = SEQ_OF(name=u'TransactionResponseAck', mode=MODE_TYPE)
+    TransactionResponseAck = SEQ_OF(name='TransactionResponseAck', mode=MODE_TYPE)
     _TransactionResponseAck__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'TransactionAck')))
     TransactionResponseAck._cont = _TransactionResponseAck__item_
     
     #-----< TransactionAck >-----#
-    TransactionAck = SEQ(name=u'TransactionAck', mode=MODE_TYPE)
-    _TransactionAck_firstAck = INT(name=u'firstAck', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'TransactionId')))
-    _TransactionAck_lastAck = INT(name=u'lastAck', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'TransactionId')), opt=True)
+    TransactionAck = SEQ(name='TransactionAck', mode=MODE_TYPE)
+    _TransactionAck_firstAck = INT(name='firstAck', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'TransactionId')))
+    _TransactionAck_lastAck = INT(name='lastAck', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'TransactionId')), opt=True)
     TransactionAck._cont = ASN1Dict([
-        (u'firstAck', _TransactionAck_firstAck),
-        (u'lastAck', _TransactionAck_lastAck),
+        ('firstAck', _TransactionAck_firstAck),
+        ('lastAck', _TransactionAck_lastAck),
         ])
     TransactionAck._ext = None
     
     #-----< ErrorDescriptor >-----#
-    ErrorDescriptor = SEQ(name=u'ErrorDescriptor', mode=MODE_TYPE)
-    _ErrorDescriptor_errorCode = INT(name=u'errorCode', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'ErrorCode')))
-    _ErrorDescriptor_errorText = STR_IA5(name=u'errorText', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'ErrorText')), opt=True)
+    ErrorDescriptor = SEQ(name='ErrorDescriptor', mode=MODE_TYPE)
+    _ErrorDescriptor_errorCode = INT(name='errorCode', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'ErrorCode')))
+    _ErrorDescriptor_errorText = STR_IA5(name='errorText', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'ErrorText')), opt=True)
     ErrorDescriptor._cont = ASN1Dict([
-        (u'errorCode', _ErrorDescriptor_errorCode),
-        (u'errorText', _ErrorDescriptor_errorText),
+        ('errorCode', _ErrorDescriptor_errorCode),
+        ('errorText', _ErrorDescriptor_errorText),
         ])
     ErrorDescriptor._ext = None
     
     #-----< ErrorCode >-----#
-    ErrorCode = INT(name=u'ErrorCode', mode=MODE_TYPE)
+    ErrorCode = INT(name='ErrorCode', mode=MODE_TYPE)
     ErrorCode._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=65535)], ev=None, er=[])
     
     #-----< ErrorText >-----#
-    ErrorText = STR_IA5(name=u'ErrorText', mode=MODE_TYPE)
+    ErrorText = STR_IA5(name='ErrorText', mode=MODE_TYPE)
     
     #-----< ContextID >-----#
-    ContextID = INT(name=u'ContextID', mode=MODE_TYPE)
+    ContextID = INT(name='ContextID', mode=MODE_TYPE)
     ContextID._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=4294967295)], ev=None, er=[])
     
     #-----< ActionRequest >-----#
-    ActionRequest = SEQ(name=u'ActionRequest', mode=MODE_TYPE)
-    _ActionRequest_contextId = INT(name=u'contextId', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'ContextID')))
-    _ActionRequest_contextRequest = SEQ(name=u'contextRequest', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'ContextRequest')), opt=True)
-    _ActionRequest_contextAttrAuditReq = SEQ(name=u'contextAttrAuditReq', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'ContextAttrAuditRequest')), opt=True)
-    _ActionRequest_commandRequests = SEQ_OF(name=u'commandRequests', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    ActionRequest = SEQ(name='ActionRequest', mode=MODE_TYPE)
+    _ActionRequest_contextId = INT(name='contextId', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'ContextID')))
+    _ActionRequest_contextRequest = SEQ(name='contextRequest', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'ContextRequest')), opt=True)
+    _ActionRequest_contextAttrAuditReq = SEQ(name='contextAttrAuditReq', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'ContextAttrAuditRequest')), opt=True)
+    _ActionRequest_commandRequests = SEQ_OF(name='commandRequests', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     __ActionRequest_commandRequests__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'CommandRequest')))
     _ActionRequest_commandRequests._cont = __ActionRequest_commandRequests__item_
     ActionRequest._cont = ASN1Dict([
-        (u'contextId', _ActionRequest_contextId),
-        (u'contextRequest', _ActionRequest_contextRequest),
-        (u'contextAttrAuditReq', _ActionRequest_contextAttrAuditReq),
-        (u'commandRequests', _ActionRequest_commandRequests),
+        ('contextId', _ActionRequest_contextId),
+        ('contextRequest', _ActionRequest_contextRequest),
+        ('contextAttrAuditReq', _ActionRequest_contextAttrAuditReq),
+        ('commandRequests', _ActionRequest_commandRequests),
         ])
     ActionRequest._ext = None
     
     #-----< ActionReply >-----#
-    ActionReply = SEQ(name=u'ActionReply', mode=MODE_TYPE)
-    _ActionReply_contextId = INT(name=u'contextId', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'ContextID')))
-    _ActionReply_errorDescriptor = SEQ(name=u'errorDescriptor', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'ErrorDescriptor')), opt=True)
-    _ActionReply_contextReply = SEQ(name=u'contextReply', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'ContextRequest')), opt=True)
-    _ActionReply_commandReply = SEQ_OF(name=u'commandReply', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    ActionReply = SEQ(name='ActionReply', mode=MODE_TYPE)
+    _ActionReply_contextId = INT(name='contextId', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'ContextID')))
+    _ActionReply_errorDescriptor = SEQ(name='errorDescriptor', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'ErrorDescriptor')), opt=True)
+    _ActionReply_contextReply = SEQ(name='contextReply', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'ContextRequest')), opt=True)
+    _ActionReply_commandReply = SEQ_OF(name='commandReply', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     __ActionReply_commandReply__item_ = CHOICE(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'CommandReply')))
     _ActionReply_commandReply._cont = __ActionReply_commandReply__item_
     ActionReply._cont = ASN1Dict([
-        (u'contextId', _ActionReply_contextId),
-        (u'errorDescriptor', _ActionReply_errorDescriptor),
-        (u'contextReply', _ActionReply_contextReply),
-        (u'commandReply', _ActionReply_commandReply),
+        ('contextId', _ActionReply_contextId),
+        ('errorDescriptor', _ActionReply_errorDescriptor),
+        ('contextReply', _ActionReply_contextReply),
+        ('commandReply', _ActionReply_commandReply),
         ])
     ActionReply._ext = None
     
     #-----< ContextRequest >-----#
-    ContextRequest = SEQ(name=u'ContextRequest', mode=MODE_TYPE)
-    _ContextRequest_priority = INT(name=u'priority', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    ContextRequest = SEQ(name='ContextRequest', mode=MODE_TYPE)
+    _ContextRequest_priority = INT(name='priority', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     _ContextRequest_priority._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=15)], ev=None, er=[])
-    _ContextRequest_emergency = BOOL(name=u'emergency', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _ContextRequest_topologyReq = SEQ_OF(name=u'topologyReq', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _ContextRequest_emergency = BOOL(name='emergency', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _ContextRequest_topologyReq = SEQ_OF(name='topologyReq', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     __ContextRequest_topologyReq__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'TopologyRequest')))
     _ContextRequest_topologyReq._cont = __ContextRequest_topologyReq__item_
-    _ContextRequest_iepscallind = BOOL(name=u'iepscallind', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _ContextRequest_contextProp = SEQ_OF(name=u'contextProp', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _ContextRequest_iepscallind = BOOL(name='iepscallind', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _ContextRequest_contextProp = SEQ_OF(name='contextProp', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     __ContextRequest_contextProp__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'PropertyParm')))
     _ContextRequest_contextProp._cont = __ContextRequest_contextProp__item_
-    _ContextRequest_contextList = SEQ_OF(name=u'contextList', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _ContextRequest_contextList = SEQ_OF(name='contextList', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     __ContextRequest_contextList__item_ = INT(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'ContextID')))
     _ContextRequest_contextList._cont = __ContextRequest_contextList__item_
     ContextRequest._cont = ASN1Dict([
-        (u'priority', _ContextRequest_priority),
-        (u'emergency', _ContextRequest_emergency),
-        (u'topologyReq', _ContextRequest_topologyReq),
-        (u'iepscallind', _ContextRequest_iepscallind),
-        (u'contextProp', _ContextRequest_contextProp),
-        (u'contextList', _ContextRequest_contextList),
+        ('priority', _ContextRequest_priority),
+        ('emergency', _ContextRequest_emergency),
+        ('topologyReq', _ContextRequest_topologyReq),
+        ('iepscallind', _ContextRequest_iepscallind),
+        ('contextProp', _ContextRequest_contextProp),
+        ('contextList', _ContextRequest_contextList),
         ])
-    ContextRequest._ext = [u'iepscallind', u'contextProp', u'contextList']
+    ContextRequest._ext = ['iepscallind', 'contextProp', 'contextList']
     
     #-----< ContextAttrAuditRequest >-----#
-    ContextAttrAuditRequest = SEQ(name=u'ContextAttrAuditRequest', mode=MODE_TYPE)
-    _ContextAttrAuditRequest_topology = NULL(name=u'topology', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _ContextAttrAuditRequest_emergency = NULL(name=u'emergency', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _ContextAttrAuditRequest_priority = NULL(name=u'priority', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _ContextAttrAuditRequest_iepscallind = NULL(name=u'iepscallind', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _ContextAttrAuditRequest_contextPropAud = SEQ_OF(name=u'contextPropAud', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    ContextAttrAuditRequest = SEQ(name='ContextAttrAuditRequest', mode=MODE_TYPE)
+    _ContextAttrAuditRequest_topology = NULL(name='topology', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _ContextAttrAuditRequest_emergency = NULL(name='emergency', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _ContextAttrAuditRequest_priority = NULL(name='priority', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _ContextAttrAuditRequest_iepscallind = NULL(name='iepscallind', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _ContextAttrAuditRequest_contextPropAud = SEQ_OF(name='contextPropAud', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     __ContextAttrAuditRequest_contextPropAud__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'IndAudPropertyParm')))
     _ContextAttrAuditRequest_contextPropAud._cont = __ContextAttrAuditRequest_contextPropAud__item_
-    _ContextAttrAuditRequest_selectpriority = INT(name=u'selectpriority', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _ContextAttrAuditRequest_selectpriority = INT(name='selectpriority', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     _ContextAttrAuditRequest_selectpriority._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=15)], ev=None, er=[])
-    _ContextAttrAuditRequest_selectemergency = BOOL(name=u'selectemergency', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _ContextAttrAuditRequest_selectiepscallind = BOOL(name=u'selectiepscallind', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _ContextAttrAuditRequest_selectLogic = CHOICE(name=u'selectLogic', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'SelectLogic')), opt=True)
+    _ContextAttrAuditRequest_selectemergency = BOOL(name='selectemergency', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _ContextAttrAuditRequest_selectiepscallind = BOOL(name='selectiepscallind', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _ContextAttrAuditRequest_selectLogic = CHOICE(name='selectLogic', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'SelectLogic')), opt=True)
     ContextAttrAuditRequest._cont = ASN1Dict([
-        (u'topology', _ContextAttrAuditRequest_topology),
-        (u'emergency', _ContextAttrAuditRequest_emergency),
-        (u'priority', _ContextAttrAuditRequest_priority),
-        (u'iepscallind', _ContextAttrAuditRequest_iepscallind),
-        (u'contextPropAud', _ContextAttrAuditRequest_contextPropAud),
-        (u'selectpriority', _ContextAttrAuditRequest_selectpriority),
-        (u'selectemergency', _ContextAttrAuditRequest_selectemergency),
-        (u'selectiepscallind', _ContextAttrAuditRequest_selectiepscallind),
-        (u'selectLogic', _ContextAttrAuditRequest_selectLogic),
+        ('topology', _ContextAttrAuditRequest_topology),
+        ('emergency', _ContextAttrAuditRequest_emergency),
+        ('priority', _ContextAttrAuditRequest_priority),
+        ('iepscallind', _ContextAttrAuditRequest_iepscallind),
+        ('contextPropAud', _ContextAttrAuditRequest_contextPropAud),
+        ('selectpriority', _ContextAttrAuditRequest_selectpriority),
+        ('selectemergency', _ContextAttrAuditRequest_selectemergency),
+        ('selectiepscallind', _ContextAttrAuditRequest_selectiepscallind),
+        ('selectLogic', _ContextAttrAuditRequest_selectLogic),
         ])
-    ContextAttrAuditRequest._ext = [u'iepscallind', u'contextPropAud', u'selectpriority', u'selectemergency', u'selectiepscallind', u'selectLogic']
+    ContextAttrAuditRequest._ext = ['iepscallind', 'contextPropAud', 'selectpriority', 'selectemergency', 'selectiepscallind', 'selectLogic']
     
     #-----< SelectLogic >-----#
-    SelectLogic = CHOICE(name=u'SelectLogic', mode=MODE_TYPE)
-    _SelectLogic_andAUDITSelect = NULL(name=u'andAUDITSelect', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _SelectLogic_orAUDITSelect = NULL(name=u'orAUDITSelect', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    SelectLogic = CHOICE(name='SelectLogic', mode=MODE_TYPE)
+    _SelectLogic_andAUDITSelect = NULL(name='andAUDITSelect', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _SelectLogic_orAUDITSelect = NULL(name='orAUDITSelect', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     SelectLogic._cont = ASN1Dict([
-        (u'andAUDITSelect', _SelectLogic_andAUDITSelect),
-        (u'orAUDITSelect', _SelectLogic_orAUDITSelect),
+        ('andAUDITSelect', _SelectLogic_andAUDITSelect),
+        ('orAUDITSelect', _SelectLogic_orAUDITSelect),
         ])
     SelectLogic._ext = []
     
     #-----< CommandRequest >-----#
-    CommandRequest = SEQ(name=u'CommandRequest', mode=MODE_TYPE)
-    _CommandRequest_command = CHOICE(name=u'command', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'Command')))
-    _CommandRequest_optional = NULL(name=u'optional', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _CommandRequest_wildcardReturn = NULL(name=u'wildcardReturn', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    CommandRequest = SEQ(name='CommandRequest', mode=MODE_TYPE)
+    _CommandRequest_command = CHOICE(name='command', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'Command')))
+    _CommandRequest_optional = NULL(name='optional', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _CommandRequest_wildcardReturn = NULL(name='wildcardReturn', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     CommandRequest._cont = ASN1Dict([
-        (u'command', _CommandRequest_command),
-        (u'optional', _CommandRequest_optional),
-        (u'wildcardReturn', _CommandRequest_wildcardReturn),
+        ('command', _CommandRequest_command),
+        ('optional', _CommandRequest_optional),
+        ('wildcardReturn', _CommandRequest_wildcardReturn),
         ])
     CommandRequest._ext = []
     
     #-----< Command >-----#
-    Command = CHOICE(name=u'Command', mode=MODE_TYPE)
-    _Command_addReq = SEQ(name=u'addReq', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'AmmRequest')))
-    _Command_moveReq = SEQ(name=u'moveReq', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'AmmRequest')))
-    _Command_modReq = SEQ(name=u'modReq', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'AmmRequest')))
-    _Command_subtractReq = SEQ(name=u'subtractReq', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'SubtractRequest')))
-    _Command_auditCapRequest = SEQ(name=u'auditCapRequest', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'AuditRequest')))
-    _Command_auditValueRequest = SEQ(name=u'auditValueRequest', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'AuditRequest')))
-    _Command_notifyReq = SEQ(name=u'notifyReq', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'NotifyRequest')))
-    _Command_serviceChangeReq = SEQ(name=u'serviceChangeReq', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'ServiceChangeRequest')))
+    Command = CHOICE(name='Command', mode=MODE_TYPE)
+    _Command_addReq = SEQ(name='addReq', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'AmmRequest')))
+    _Command_moveReq = SEQ(name='moveReq', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'AmmRequest')))
+    _Command_modReq = SEQ(name='modReq', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'AmmRequest')))
+    _Command_subtractReq = SEQ(name='subtractReq', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'SubtractRequest')))
+    _Command_auditCapRequest = SEQ(name='auditCapRequest', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'AuditRequest')))
+    _Command_auditValueRequest = SEQ(name='auditValueRequest', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'AuditRequest')))
+    _Command_notifyReq = SEQ(name='notifyReq', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'NotifyRequest')))
+    _Command_serviceChangeReq = SEQ(name='serviceChangeReq', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'ServiceChangeRequest')))
     Command._cont = ASN1Dict([
-        (u'addReq', _Command_addReq),
-        (u'moveReq', _Command_moveReq),
-        (u'modReq', _Command_modReq),
-        (u'subtractReq', _Command_subtractReq),
-        (u'auditCapRequest', _Command_auditCapRequest),
-        (u'auditValueRequest', _Command_auditValueRequest),
-        (u'notifyReq', _Command_notifyReq),
-        (u'serviceChangeReq', _Command_serviceChangeReq),
+        ('addReq', _Command_addReq),
+        ('moveReq', _Command_moveReq),
+        ('modReq', _Command_modReq),
+        ('subtractReq', _Command_subtractReq),
+        ('auditCapRequest', _Command_auditCapRequest),
+        ('auditValueRequest', _Command_auditValueRequest),
+        ('notifyReq', _Command_notifyReq),
+        ('serviceChangeReq', _Command_serviceChangeReq),
         ])
     Command._ext = []
     
     #-----< CommandReply >-----#
-    CommandReply = CHOICE(name=u'CommandReply', mode=MODE_TYPE)
-    _CommandReply_addReply = SEQ(name=u'addReply', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'AmmsReply')))
-    _CommandReply_moveReply = SEQ(name=u'moveReply', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'AmmsReply')))
-    _CommandReply_modReply = SEQ(name=u'modReply', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'AmmsReply')))
-    _CommandReply_subtractReply = SEQ(name=u'subtractReply', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'AmmsReply')))
-    _CommandReply_auditCapReply = CHOICE(name=u'auditCapReply', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'AuditReply')))
-    _CommandReply_auditValueReply = CHOICE(name=u'auditValueReply', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'AuditReply')))
-    _CommandReply_notifyReply = SEQ(name=u'notifyReply', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'NotifyReply')))
-    _CommandReply_serviceChangeReply = SEQ(name=u'serviceChangeReply', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'ServiceChangeReply')))
+    CommandReply = CHOICE(name='CommandReply', mode=MODE_TYPE)
+    _CommandReply_addReply = SEQ(name='addReply', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'AmmsReply')))
+    _CommandReply_moveReply = SEQ(name='moveReply', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'AmmsReply')))
+    _CommandReply_modReply = SEQ(name='modReply', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'AmmsReply')))
+    _CommandReply_subtractReply = SEQ(name='subtractReply', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'AmmsReply')))
+    _CommandReply_auditCapReply = CHOICE(name='auditCapReply', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'AuditReply')))
+    _CommandReply_auditValueReply = CHOICE(name='auditValueReply', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'AuditReply')))
+    _CommandReply_notifyReply = SEQ(name='notifyReply', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'NotifyReply')))
+    _CommandReply_serviceChangeReply = SEQ(name='serviceChangeReply', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'ServiceChangeReply')))
     CommandReply._cont = ASN1Dict([
-        (u'addReply', _CommandReply_addReply),
-        (u'moveReply', _CommandReply_moveReply),
-        (u'modReply', _CommandReply_modReply),
-        (u'subtractReply', _CommandReply_subtractReply),
-        (u'auditCapReply', _CommandReply_auditCapReply),
-        (u'auditValueReply', _CommandReply_auditValueReply),
-        (u'notifyReply', _CommandReply_notifyReply),
-        (u'serviceChangeReply', _CommandReply_serviceChangeReply),
+        ('addReply', _CommandReply_addReply),
+        ('moveReply', _CommandReply_moveReply),
+        ('modReply', _CommandReply_modReply),
+        ('subtractReply', _CommandReply_subtractReply),
+        ('auditCapReply', _CommandReply_auditCapReply),
+        ('auditValueReply', _CommandReply_auditValueReply),
+        ('notifyReply', _CommandReply_notifyReply),
+        ('serviceChangeReply', _CommandReply_serviceChangeReply),
         ])
     CommandReply._ext = []
     
     #-----< TopologyRequest >-----#
-    TopologyRequest = SEQ(name=u'TopologyRequest', mode=MODE_TYPE)
-    _TopologyRequest_terminationFrom = SEQ(name=u'terminationFrom', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'TerminationID')))
-    _TopologyRequest_terminationTo = SEQ(name=u'terminationTo', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'TerminationID')))
-    _TopologyRequest_topologyDirection = ENUM(name=u'topologyDirection', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _TopologyRequest_topologyDirection._cont = ASN1Dict([(u'bothway', 0), (u'isolate', 1), (u'oneway', 2)])
+    TopologyRequest = SEQ(name='TopologyRequest', mode=MODE_TYPE)
+    _TopologyRequest_terminationFrom = SEQ(name='terminationFrom', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'TerminationID')))
+    _TopologyRequest_terminationTo = SEQ(name='terminationTo', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'TerminationID')))
+    _TopologyRequest_topologyDirection = ENUM(name='topologyDirection', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _TopologyRequest_topologyDirection._cont = ASN1Dict([('bothway', 0), ('isolate', 1), ('oneway', 2)])
     _TopologyRequest_topologyDirection._ext = None
-    _TopologyRequest_streamID = INT(name=u'streamID', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'StreamID')), opt=True)
-    _TopologyRequest_topologyDirectionExtension = ENUM(name=u'topologyDirectionExtension', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _TopologyRequest_topologyDirectionExtension._cont = ASN1Dict([(u'onewayexternal', 0), (u'onewayboth', 1)])
+    _TopologyRequest_streamID = INT(name='streamID', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'StreamID')), opt=True)
+    _TopologyRequest_topologyDirectionExtension = ENUM(name='topologyDirectionExtension', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _TopologyRequest_topologyDirectionExtension._cont = ASN1Dict([('onewayexternal', 0), ('onewayboth', 1)])
     _TopologyRequest_topologyDirectionExtension._ext = []
     TopologyRequest._cont = ASN1Dict([
-        (u'terminationFrom', _TopologyRequest_terminationFrom),
-        (u'terminationTo', _TopologyRequest_terminationTo),
-        (u'topologyDirection', _TopologyRequest_topologyDirection),
-        (u'streamID', _TopologyRequest_streamID),
-        (u'topologyDirectionExtension', _TopologyRequest_topologyDirectionExtension),
+        ('terminationFrom', _TopologyRequest_terminationFrom),
+        ('terminationTo', _TopologyRequest_terminationTo),
+        ('topologyDirection', _TopologyRequest_topologyDirection),
+        ('streamID', _TopologyRequest_streamID),
+        ('topologyDirectionExtension', _TopologyRequest_topologyDirectionExtension),
         ])
-    TopologyRequest._ext = [u'streamID', u'topologyDirectionExtension']
+    TopologyRequest._ext = ['streamID', 'topologyDirectionExtension']
     
     #-----< AmmRequest >-----#
-    AmmRequest = SEQ(name=u'AmmRequest', mode=MODE_TYPE)
-    _AmmRequest_terminationID = SEQ_OF(name=u'terminationID', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'TerminationIDList')))
-    _AmmRequest_descriptors = SEQ_OF(name=u'descriptors', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    AmmRequest = SEQ(name='AmmRequest', mode=MODE_TYPE)
+    _AmmRequest_terminationID = SEQ_OF(name='terminationID', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'TerminationIDList')))
+    _AmmRequest_descriptors = SEQ_OF(name='descriptors', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     __AmmRequest_descriptors__item_ = CHOICE(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'AmmDescriptor')))
     _AmmRequest_descriptors._cont = __AmmRequest_descriptors__item_
     AmmRequest._cont = ASN1Dict([
-        (u'terminationID', _AmmRequest_terminationID),
-        (u'descriptors', _AmmRequest_descriptors),
+        ('terminationID', _AmmRequest_terminationID),
+        ('descriptors', _AmmRequest_descriptors),
         ])
     AmmRequest._ext = []
     
     #-----< AmmDescriptor >-----#
-    AmmDescriptor = CHOICE(name=u'AmmDescriptor', mode=MODE_TYPE)
-    _AmmDescriptor_mediaDescriptor = SEQ(name=u'mediaDescriptor', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'MediaDescriptor')))
-    _AmmDescriptor_modemDescriptor = SEQ(name=u'modemDescriptor', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'ModemDescriptor')))
-    _AmmDescriptor_muxDescriptor = SEQ(name=u'muxDescriptor', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'MuxDescriptor')))
-    _AmmDescriptor_eventsDescriptor = SEQ(name=u'eventsDescriptor', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'EventsDescriptor')))
-    _AmmDescriptor_eventBufferDescriptor = SEQ_OF(name=u'eventBufferDescriptor', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'EventBufferDescriptor')))
-    _AmmDescriptor_signalsDescriptor = SEQ_OF(name=u'signalsDescriptor', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'SignalsDescriptor')))
-    _AmmDescriptor_digitMapDescriptor = SEQ(name=u'digitMapDescriptor', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'DigitMapDescriptor')))
-    _AmmDescriptor_auditDescriptor = SEQ(name=u'auditDescriptor', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'AuditDescriptor')))
-    _AmmDescriptor_statisticsDescriptor = SEQ_OF(name=u'statisticsDescriptor', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'StatisticsDescriptor')))
+    AmmDescriptor = CHOICE(name='AmmDescriptor', mode=MODE_TYPE)
+    _AmmDescriptor_mediaDescriptor = SEQ(name='mediaDescriptor', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'MediaDescriptor')))
+    _AmmDescriptor_modemDescriptor = SEQ(name='modemDescriptor', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'ModemDescriptor')))
+    _AmmDescriptor_muxDescriptor = SEQ(name='muxDescriptor', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'MuxDescriptor')))
+    _AmmDescriptor_eventsDescriptor = SEQ(name='eventsDescriptor', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'EventsDescriptor')))
+    _AmmDescriptor_eventBufferDescriptor = SEQ_OF(name='eventBufferDescriptor', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'EventBufferDescriptor')))
+    _AmmDescriptor_signalsDescriptor = SEQ_OF(name='signalsDescriptor', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'SignalsDescriptor')))
+    _AmmDescriptor_digitMapDescriptor = SEQ(name='digitMapDescriptor', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'DigitMapDescriptor')))
+    _AmmDescriptor_auditDescriptor = SEQ(name='auditDescriptor', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'AuditDescriptor')))
+    _AmmDescriptor_statisticsDescriptor = SEQ_OF(name='statisticsDescriptor', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'StatisticsDescriptor')))
     AmmDescriptor._cont = ASN1Dict([
-        (u'mediaDescriptor', _AmmDescriptor_mediaDescriptor),
-        (u'modemDescriptor', _AmmDescriptor_modemDescriptor),
-        (u'muxDescriptor', _AmmDescriptor_muxDescriptor),
-        (u'eventsDescriptor', _AmmDescriptor_eventsDescriptor),
-        (u'eventBufferDescriptor', _AmmDescriptor_eventBufferDescriptor),
-        (u'signalsDescriptor', _AmmDescriptor_signalsDescriptor),
-        (u'digitMapDescriptor', _AmmDescriptor_digitMapDescriptor),
-        (u'auditDescriptor', _AmmDescriptor_auditDescriptor),
-        (u'statisticsDescriptor', _AmmDescriptor_statisticsDescriptor),
+        ('mediaDescriptor', _AmmDescriptor_mediaDescriptor),
+        ('modemDescriptor', _AmmDescriptor_modemDescriptor),
+        ('muxDescriptor', _AmmDescriptor_muxDescriptor),
+        ('eventsDescriptor', _AmmDescriptor_eventsDescriptor),
+        ('eventBufferDescriptor', _AmmDescriptor_eventBufferDescriptor),
+        ('signalsDescriptor', _AmmDescriptor_signalsDescriptor),
+        ('digitMapDescriptor', _AmmDescriptor_digitMapDescriptor),
+        ('auditDescriptor', _AmmDescriptor_auditDescriptor),
+        ('statisticsDescriptor', _AmmDescriptor_statisticsDescriptor),
         ])
-    AmmDescriptor._ext = [u'statisticsDescriptor']
+    AmmDescriptor._ext = ['statisticsDescriptor']
     
     #-----< AmmsReply >-----#
-    AmmsReply = SEQ(name=u'AmmsReply', mode=MODE_TYPE)
-    _AmmsReply_terminationID = SEQ_OF(name=u'terminationID', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'TerminationIDList')))
-    _AmmsReply_terminationAudit = SEQ_OF(name=u'terminationAudit', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'TerminationAudit')), opt=True)
+    AmmsReply = SEQ(name='AmmsReply', mode=MODE_TYPE)
+    _AmmsReply_terminationID = SEQ_OF(name='terminationID', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'TerminationIDList')))
+    _AmmsReply_terminationAudit = SEQ_OF(name='terminationAudit', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'TerminationAudit')), opt=True)
     AmmsReply._cont = ASN1Dict([
-        (u'terminationID', _AmmsReply_terminationID),
-        (u'terminationAudit', _AmmsReply_terminationAudit),
+        ('terminationID', _AmmsReply_terminationID),
+        ('terminationAudit', _AmmsReply_terminationAudit),
         ])
     AmmsReply._ext = []
     
     #-----< SubtractRequest >-----#
-    SubtractRequest = SEQ(name=u'SubtractRequest', mode=MODE_TYPE)
-    _SubtractRequest_terminationID = SEQ_OF(name=u'terminationID', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'TerminationIDList')))
-    _SubtractRequest_auditDescriptor = SEQ(name=u'auditDescriptor', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'AuditDescriptor')), opt=True)
+    SubtractRequest = SEQ(name='SubtractRequest', mode=MODE_TYPE)
+    _SubtractRequest_terminationID = SEQ_OF(name='terminationID', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'TerminationIDList')))
+    _SubtractRequest_auditDescriptor = SEQ(name='auditDescriptor', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'AuditDescriptor')), opt=True)
     SubtractRequest._cont = ASN1Dict([
-        (u'terminationID', _SubtractRequest_terminationID),
-        (u'auditDescriptor', _SubtractRequest_auditDescriptor),
+        ('terminationID', _SubtractRequest_terminationID),
+        ('auditDescriptor', _SubtractRequest_auditDescriptor),
         ])
     SubtractRequest._ext = []
     
     #-----< AuditRequest >-----#
-    AuditRequest = SEQ(name=u'AuditRequest', mode=MODE_TYPE)
-    _AuditRequest_terminationID = SEQ(name=u'terminationID', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'TerminationID')))
-    _AuditRequest_auditDescriptor = SEQ(name=u'auditDescriptor', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'AuditDescriptor')))
-    _AuditRequest_terminationIDList = SEQ_OF(name=u'terminationIDList', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'TerminationIDList')), opt=True)
+    AuditRequest = SEQ(name='AuditRequest', mode=MODE_TYPE)
+    _AuditRequest_terminationID = SEQ(name='terminationID', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'TerminationID')))
+    _AuditRequest_auditDescriptor = SEQ(name='auditDescriptor', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'AuditDescriptor')))
+    _AuditRequest_terminationIDList = SEQ_OF(name='terminationIDList', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'TerminationIDList')), opt=True)
     AuditRequest._cont = ASN1Dict([
-        (u'terminationID', _AuditRequest_terminationID),
-        (u'auditDescriptor', _AuditRequest_auditDescriptor),
-        (u'terminationIDList', _AuditRequest_terminationIDList),
+        ('terminationID', _AuditRequest_terminationID),
+        ('auditDescriptor', _AuditRequest_auditDescriptor),
+        ('terminationIDList', _AuditRequest_terminationIDList),
         ])
-    AuditRequest._ext = [u'terminationIDList']
+    AuditRequest._ext = ['terminationIDList']
     
     #-----< AuditReply >-----#
-    AuditReply = CHOICE(name=u'AuditReply', mode=MODE_TYPE)
-    _AuditReply_contextAuditResult = SEQ_OF(name=u'contextAuditResult', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'TerminationIDList')))
-    _AuditReply_error = SEQ(name=u'error', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'ErrorDescriptor')))
-    _AuditReply_auditResult = SEQ(name=u'auditResult', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'AuditResult')))
-    _AuditReply_auditResultTermList = SEQ(name=u'auditResultTermList', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'TermListAuditResult')))
+    AuditReply = CHOICE(name='AuditReply', mode=MODE_TYPE)
+    _AuditReply_contextAuditResult = SEQ_OF(name='contextAuditResult', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'TerminationIDList')))
+    _AuditReply_error = SEQ(name='error', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'ErrorDescriptor')))
+    _AuditReply_auditResult = SEQ(name='auditResult', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'AuditResult')))
+    _AuditReply_auditResultTermList = SEQ(name='auditResultTermList', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'TermListAuditResult')))
     AuditReply._cont = ASN1Dict([
-        (u'contextAuditResult', _AuditReply_contextAuditResult),
-        (u'error', _AuditReply_error),
-        (u'auditResult', _AuditReply_auditResult),
-        (u'auditResultTermList', _AuditReply_auditResultTermList),
+        ('contextAuditResult', _AuditReply_contextAuditResult),
+        ('error', _AuditReply_error),
+        ('auditResult', _AuditReply_auditResult),
+        ('auditResultTermList', _AuditReply_auditResultTermList),
         ])
-    AuditReply._ext = [u'auditResultTermList']
+    AuditReply._ext = ['auditResultTermList']
     
     #-----< AuditResult >-----#
-    AuditResult = SEQ(name=u'AuditResult', mode=MODE_TYPE)
-    _AuditResult_terminationID = SEQ(name=u'terminationID', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'TerminationID')))
-    _AuditResult_terminationAuditResult = SEQ_OF(name=u'terminationAuditResult', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'TerminationAudit')))
+    AuditResult = SEQ(name='AuditResult', mode=MODE_TYPE)
+    _AuditResult_terminationID = SEQ(name='terminationID', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'TerminationID')))
+    _AuditResult_terminationAuditResult = SEQ_OF(name='terminationAuditResult', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'TerminationAudit')))
     AuditResult._cont = ASN1Dict([
-        (u'terminationID', _AuditResult_terminationID),
-        (u'terminationAuditResult', _AuditResult_terminationAuditResult),
+        ('terminationID', _AuditResult_terminationID),
+        ('terminationAuditResult', _AuditResult_terminationAuditResult),
         ])
     AuditResult._ext = None
     
     #-----< TermListAuditResult >-----#
-    TermListAuditResult = SEQ(name=u'TermListAuditResult', mode=MODE_TYPE)
-    _TermListAuditResult_terminationIDList = SEQ_OF(name=u'terminationIDList', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'TerminationIDList')))
-    _TermListAuditResult_terminationAuditResult = SEQ_OF(name=u'terminationAuditResult', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'TerminationAudit')))
+    TermListAuditResult = SEQ(name='TermListAuditResult', mode=MODE_TYPE)
+    _TermListAuditResult_terminationIDList = SEQ_OF(name='terminationIDList', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'TerminationIDList')))
+    _TermListAuditResult_terminationAuditResult = SEQ_OF(name='terminationAuditResult', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'TerminationAudit')))
     TermListAuditResult._cont = ASN1Dict([
-        (u'terminationIDList', _TermListAuditResult_terminationIDList),
-        (u'terminationAuditResult', _TermListAuditResult_terminationAuditResult),
+        ('terminationIDList', _TermListAuditResult_terminationIDList),
+        ('terminationAuditResult', _TermListAuditResult_terminationAuditResult),
         ])
     TermListAuditResult._ext = []
     
     #-----< TerminationAudit >-----#
-    TerminationAudit = SEQ_OF(name=u'TerminationAudit', mode=MODE_TYPE)
+    TerminationAudit = SEQ_OF(name='TerminationAudit', mode=MODE_TYPE)
     _TerminationAudit__item_ = CHOICE(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'AuditReturnParameter')))
     TerminationAudit._cont = _TerminationAudit__item_
     
     #-----< AuditReturnParameter >-----#
-    AuditReturnParameter = CHOICE(name=u'AuditReturnParameter', mode=MODE_TYPE)
-    _AuditReturnParameter_errorDescriptor = SEQ(name=u'errorDescriptor', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'ErrorDescriptor')))
-    _AuditReturnParameter_mediaDescriptor = SEQ(name=u'mediaDescriptor', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'MediaDescriptor')))
-    _AuditReturnParameter_modemDescriptor = SEQ(name=u'modemDescriptor', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'ModemDescriptor')))
-    _AuditReturnParameter_muxDescriptor = SEQ(name=u'muxDescriptor', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'MuxDescriptor')))
-    _AuditReturnParameter_eventsDescriptor = SEQ(name=u'eventsDescriptor', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'EventsDescriptor')))
-    _AuditReturnParameter_eventBufferDescriptor = SEQ_OF(name=u'eventBufferDescriptor', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'EventBufferDescriptor')))
-    _AuditReturnParameter_signalsDescriptor = SEQ_OF(name=u'signalsDescriptor', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'SignalsDescriptor')))
-    _AuditReturnParameter_digitMapDescriptor = SEQ(name=u'digitMapDescriptor', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'DigitMapDescriptor')))
-    _AuditReturnParameter_observedEventsDescriptor = SEQ(name=u'observedEventsDescriptor', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'ObservedEventsDescriptor')))
-    _AuditReturnParameter_statisticsDescriptor = SEQ_OF(name=u'statisticsDescriptor', mode=MODE_TYPE, tag=(9, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'StatisticsDescriptor')))
-    _AuditReturnParameter_packagesDescriptor = SEQ_OF(name=u'packagesDescriptor', mode=MODE_TYPE, tag=(10, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'PackagesDescriptor')))
-    _AuditReturnParameter_emptyDescriptors = SEQ(name=u'emptyDescriptors', mode=MODE_TYPE, tag=(11, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'AuditDescriptor')))
+    AuditReturnParameter = CHOICE(name='AuditReturnParameter', mode=MODE_TYPE)
+    _AuditReturnParameter_errorDescriptor = SEQ(name='errorDescriptor', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'ErrorDescriptor')))
+    _AuditReturnParameter_mediaDescriptor = SEQ(name='mediaDescriptor', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'MediaDescriptor')))
+    _AuditReturnParameter_modemDescriptor = SEQ(name='modemDescriptor', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'ModemDescriptor')))
+    _AuditReturnParameter_muxDescriptor = SEQ(name='muxDescriptor', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'MuxDescriptor')))
+    _AuditReturnParameter_eventsDescriptor = SEQ(name='eventsDescriptor', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'EventsDescriptor')))
+    _AuditReturnParameter_eventBufferDescriptor = SEQ_OF(name='eventBufferDescriptor', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'EventBufferDescriptor')))
+    _AuditReturnParameter_signalsDescriptor = SEQ_OF(name='signalsDescriptor', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'SignalsDescriptor')))
+    _AuditReturnParameter_digitMapDescriptor = SEQ(name='digitMapDescriptor', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'DigitMapDescriptor')))
+    _AuditReturnParameter_observedEventsDescriptor = SEQ(name='observedEventsDescriptor', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'ObservedEventsDescriptor')))
+    _AuditReturnParameter_statisticsDescriptor = SEQ_OF(name='statisticsDescriptor', mode=MODE_TYPE, tag=(9, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'StatisticsDescriptor')))
+    _AuditReturnParameter_packagesDescriptor = SEQ_OF(name='packagesDescriptor', mode=MODE_TYPE, tag=(10, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'PackagesDescriptor')))
+    _AuditReturnParameter_emptyDescriptors = SEQ(name='emptyDescriptors', mode=MODE_TYPE, tag=(11, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'AuditDescriptor')))
     AuditReturnParameter._cont = ASN1Dict([
-        (u'errorDescriptor', _AuditReturnParameter_errorDescriptor),
-        (u'mediaDescriptor', _AuditReturnParameter_mediaDescriptor),
-        (u'modemDescriptor', _AuditReturnParameter_modemDescriptor),
-        (u'muxDescriptor', _AuditReturnParameter_muxDescriptor),
-        (u'eventsDescriptor', _AuditReturnParameter_eventsDescriptor),
-        (u'eventBufferDescriptor', _AuditReturnParameter_eventBufferDescriptor),
-        (u'signalsDescriptor', _AuditReturnParameter_signalsDescriptor),
-        (u'digitMapDescriptor', _AuditReturnParameter_digitMapDescriptor),
-        (u'observedEventsDescriptor', _AuditReturnParameter_observedEventsDescriptor),
-        (u'statisticsDescriptor', _AuditReturnParameter_statisticsDescriptor),
-        (u'packagesDescriptor', _AuditReturnParameter_packagesDescriptor),
-        (u'emptyDescriptors', _AuditReturnParameter_emptyDescriptors),
+        ('errorDescriptor', _AuditReturnParameter_errorDescriptor),
+        ('mediaDescriptor', _AuditReturnParameter_mediaDescriptor),
+        ('modemDescriptor', _AuditReturnParameter_modemDescriptor),
+        ('muxDescriptor', _AuditReturnParameter_muxDescriptor),
+        ('eventsDescriptor', _AuditReturnParameter_eventsDescriptor),
+        ('eventBufferDescriptor', _AuditReturnParameter_eventBufferDescriptor),
+        ('signalsDescriptor', _AuditReturnParameter_signalsDescriptor),
+        ('digitMapDescriptor', _AuditReturnParameter_digitMapDescriptor),
+        ('observedEventsDescriptor', _AuditReturnParameter_observedEventsDescriptor),
+        ('statisticsDescriptor', _AuditReturnParameter_statisticsDescriptor),
+        ('packagesDescriptor', _AuditReturnParameter_packagesDescriptor),
+        ('emptyDescriptors', _AuditReturnParameter_emptyDescriptors),
         ])
     AuditReturnParameter._ext = []
     
     #-----< AuditDescriptor >-----#
-    AuditDescriptor = SEQ(name=u'AuditDescriptor', mode=MODE_TYPE)
-    _AuditDescriptor_auditToken = BIT_STR(name=u'auditToken', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _AuditDescriptor_auditToken._cont = ASN1Dict([(u'muxToken', 0), (u'modemToken', 1), (u'mediaToken', 2), (u'eventsToken', 3), (u'signalsToken', 4), (u'digitMapToken', 5), (u'statsToken', 6), (u'observedEventsToken', 7), (u'packagesToken', 8), (u'eventBufferToken', 9)])
-    _AuditDescriptor_auditPropertyToken = SEQ_OF(name=u'auditPropertyToken', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    AuditDescriptor = SEQ(name='AuditDescriptor', mode=MODE_TYPE)
+    _AuditDescriptor_auditToken = BIT_STR(name='auditToken', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _AuditDescriptor_auditToken._cont = ASN1Dict([('muxToken', 0), ('modemToken', 1), ('mediaToken', 2), ('eventsToken', 3), ('signalsToken', 4), ('digitMapToken', 5), ('statsToken', 6), ('observedEventsToken', 7), ('packagesToken', 8), ('eventBufferToken', 9)])
+    _AuditDescriptor_auditPropertyToken = SEQ_OF(name='auditPropertyToken', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     __AuditDescriptor_auditPropertyToken__item_ = CHOICE(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'IndAuditParameter')))
     _AuditDescriptor_auditPropertyToken._cont = __AuditDescriptor_auditPropertyToken__item_
     AuditDescriptor._cont = ASN1Dict([
-        (u'auditToken', _AuditDescriptor_auditToken),
-        (u'auditPropertyToken', _AuditDescriptor_auditPropertyToken),
+        ('auditToken', _AuditDescriptor_auditToken),
+        ('auditPropertyToken', _AuditDescriptor_auditPropertyToken),
         ])
-    AuditDescriptor._ext = [u'auditPropertyToken']
+    AuditDescriptor._ext = ['auditPropertyToken']
     
     #-----< IndAuditParameter >-----#
-    IndAuditParameter = CHOICE(name=u'IndAuditParameter', mode=MODE_TYPE)
-    _IndAuditParameter_indaudmediaDescriptor = SEQ(name=u'indaudmediaDescriptor', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'IndAudMediaDescriptor')))
-    _IndAuditParameter_indaudeventsDescriptor = SEQ(name=u'indaudeventsDescriptor', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'IndAudEventsDescriptor')))
-    _IndAuditParameter_indaudeventBufferDescriptor = SEQ(name=u'indaudeventBufferDescriptor', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'IndAudEventBufferDescriptor')))
-    _IndAuditParameter_indaudsignalsDescriptor = CHOICE(name=u'indaudsignalsDescriptor', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'IndAudSignalsDescriptor')))
-    _IndAuditParameter_indauddigitMapDescriptor = SEQ(name=u'indauddigitMapDescriptor', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'IndAudDigitMapDescriptor')))
-    _IndAuditParameter_indaudstatisticsDescriptor = SEQ(name=u'indaudstatisticsDescriptor', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'IndAudStatisticsDescriptor')))
-    _IndAuditParameter_indaudpackagesDescriptor = SEQ(name=u'indaudpackagesDescriptor', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'IndAudPackagesDescriptor')))
+    IndAuditParameter = CHOICE(name='IndAuditParameter', mode=MODE_TYPE)
+    _IndAuditParameter_indaudmediaDescriptor = SEQ(name='indaudmediaDescriptor', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'IndAudMediaDescriptor')))
+    _IndAuditParameter_indaudeventsDescriptor = SEQ(name='indaudeventsDescriptor', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'IndAudEventsDescriptor')))
+    _IndAuditParameter_indaudeventBufferDescriptor = SEQ(name='indaudeventBufferDescriptor', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'IndAudEventBufferDescriptor')))
+    _IndAuditParameter_indaudsignalsDescriptor = CHOICE(name='indaudsignalsDescriptor', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'IndAudSignalsDescriptor')))
+    _IndAuditParameter_indauddigitMapDescriptor = SEQ(name='indauddigitMapDescriptor', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'IndAudDigitMapDescriptor')))
+    _IndAuditParameter_indaudstatisticsDescriptor = SEQ(name='indaudstatisticsDescriptor', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'IndAudStatisticsDescriptor')))
+    _IndAuditParameter_indaudpackagesDescriptor = SEQ(name='indaudpackagesDescriptor', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'IndAudPackagesDescriptor')))
     IndAuditParameter._cont = ASN1Dict([
-        (u'indaudmediaDescriptor', _IndAuditParameter_indaudmediaDescriptor),
-        (u'indaudeventsDescriptor', _IndAuditParameter_indaudeventsDescriptor),
-        (u'indaudeventBufferDescriptor', _IndAuditParameter_indaudeventBufferDescriptor),
-        (u'indaudsignalsDescriptor', _IndAuditParameter_indaudsignalsDescriptor),
-        (u'indauddigitMapDescriptor', _IndAuditParameter_indauddigitMapDescriptor),
-        (u'indaudstatisticsDescriptor', _IndAuditParameter_indaudstatisticsDescriptor),
-        (u'indaudpackagesDescriptor', _IndAuditParameter_indaudpackagesDescriptor),
+        ('indaudmediaDescriptor', _IndAuditParameter_indaudmediaDescriptor),
+        ('indaudeventsDescriptor', _IndAuditParameter_indaudeventsDescriptor),
+        ('indaudeventBufferDescriptor', _IndAuditParameter_indaudeventBufferDescriptor),
+        ('indaudsignalsDescriptor', _IndAuditParameter_indaudsignalsDescriptor),
+        ('indauddigitMapDescriptor', _IndAuditParameter_indauddigitMapDescriptor),
+        ('indaudstatisticsDescriptor', _IndAuditParameter_indaudstatisticsDescriptor),
+        ('indaudpackagesDescriptor', _IndAuditParameter_indaudpackagesDescriptor),
         ])
     IndAuditParameter._ext = []
     
     #-----< IndAudMediaDescriptor >-----#
-    IndAudMediaDescriptor = SEQ(name=u'IndAudMediaDescriptor', mode=MODE_TYPE)
-    _IndAudMediaDescriptor_termStateDescr = SEQ(name=u'termStateDescr', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'IndAudTerminationStateDescriptor')), opt=True)
-    _IndAudMediaDescriptor_streams = CHOICE(name=u'streams', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), opt=True)
-    __IndAudMediaDescriptor_streams_oneStream = SEQ(name=u'oneStream', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'IndAudStreamParms')))
-    __IndAudMediaDescriptor_streams_multiStream = SEQ_OF(name=u'multiStream', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    IndAudMediaDescriptor = SEQ(name='IndAudMediaDescriptor', mode=MODE_TYPE)
+    _IndAudMediaDescriptor_termStateDescr = SEQ(name='termStateDescr', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'IndAudTerminationStateDescriptor')), opt=True)
+    _IndAudMediaDescriptor_streams = CHOICE(name='streams', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), opt=True)
+    __IndAudMediaDescriptor_streams_oneStream = SEQ(name='oneStream', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'IndAudStreamParms')))
+    __IndAudMediaDescriptor_streams_multiStream = SEQ_OF(name='multiStream', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     ___IndAudMediaDescriptor_streams_multiStream__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'IndAudStreamDescriptor')))
     __IndAudMediaDescriptor_streams_multiStream._cont = ___IndAudMediaDescriptor_streams_multiStream__item_
     _IndAudMediaDescriptor_streams._cont = ASN1Dict([
-        (u'oneStream', __IndAudMediaDescriptor_streams_oneStream),
-        (u'multiStream', __IndAudMediaDescriptor_streams_multiStream),
+        ('oneStream', __IndAudMediaDescriptor_streams_oneStream),
+        ('multiStream', __IndAudMediaDescriptor_streams_multiStream),
         ])
     _IndAudMediaDescriptor_streams._ext = None
     IndAudMediaDescriptor._cont = ASN1Dict([
-        (u'termStateDescr', _IndAudMediaDescriptor_termStateDescr),
-        (u'streams', _IndAudMediaDescriptor_streams),
+        ('termStateDescr', _IndAudMediaDescriptor_termStateDescr),
+        ('streams', _IndAudMediaDescriptor_streams),
         ])
     IndAudMediaDescriptor._ext = []
     
     #-----< IndAudStreamDescriptor >-----#
-    IndAudStreamDescriptor = SEQ(name=u'IndAudStreamDescriptor', mode=MODE_TYPE)
-    _IndAudStreamDescriptor_streamID = INT(name=u'streamID', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'StreamID')))
-    _IndAudStreamDescriptor_streamParms = SEQ(name=u'streamParms', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'IndAudStreamParms')))
+    IndAudStreamDescriptor = SEQ(name='IndAudStreamDescriptor', mode=MODE_TYPE)
+    _IndAudStreamDescriptor_streamID = INT(name='streamID', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'StreamID')))
+    _IndAudStreamDescriptor_streamParms = SEQ(name='streamParms', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'IndAudStreamParms')))
     IndAudStreamDescriptor._cont = ASN1Dict([
-        (u'streamID', _IndAudStreamDescriptor_streamID),
-        (u'streamParms', _IndAudStreamDescriptor_streamParms),
+        ('streamID', _IndAudStreamDescriptor_streamID),
+        ('streamParms', _IndAudStreamDescriptor_streamParms),
         ])
     IndAudStreamDescriptor._ext = None
     
     #-----< IndAudStreamParms >-----#
-    IndAudStreamParms = SEQ(name=u'IndAudStreamParms', mode=MODE_TYPE)
-    _IndAudStreamParms_localControlDescriptor = SEQ(name=u'localControlDescriptor', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'IndAudLocalControlDescriptor')), opt=True)
-    _IndAudStreamParms_localDescriptor = SEQ(name=u'localDescriptor', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'IndAudLocalRemoteDescriptor')), opt=True)
-    _IndAudStreamParms_remoteDescriptor = SEQ(name=u'remoteDescriptor', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'IndAudLocalRemoteDescriptor')), opt=True)
-    _IndAudStreamParms_statisticsDescriptor = SEQ(name=u'statisticsDescriptor', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'IndAudStatisticsDescriptor')), opt=True)
+    IndAudStreamParms = SEQ(name='IndAudStreamParms', mode=MODE_TYPE)
+    _IndAudStreamParms_localControlDescriptor = SEQ(name='localControlDescriptor', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'IndAudLocalControlDescriptor')), opt=True)
+    _IndAudStreamParms_localDescriptor = SEQ(name='localDescriptor', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'IndAudLocalRemoteDescriptor')), opt=True)
+    _IndAudStreamParms_remoteDescriptor = SEQ(name='remoteDescriptor', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'IndAudLocalRemoteDescriptor')), opt=True)
+    _IndAudStreamParms_statisticsDescriptor = SEQ(name='statisticsDescriptor', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'IndAudStatisticsDescriptor')), opt=True)
     IndAudStreamParms._cont = ASN1Dict([
-        (u'localControlDescriptor', _IndAudStreamParms_localControlDescriptor),
-        (u'localDescriptor', _IndAudStreamParms_localDescriptor),
-        (u'remoteDescriptor', _IndAudStreamParms_remoteDescriptor),
-        (u'statisticsDescriptor', _IndAudStreamParms_statisticsDescriptor),
+        ('localControlDescriptor', _IndAudStreamParms_localControlDescriptor),
+        ('localDescriptor', _IndAudStreamParms_localDescriptor),
+        ('remoteDescriptor', _IndAudStreamParms_remoteDescriptor),
+        ('statisticsDescriptor', _IndAudStreamParms_statisticsDescriptor),
         ])
-    IndAudStreamParms._ext = [u'statisticsDescriptor']
+    IndAudStreamParms._ext = ['statisticsDescriptor']
     
     #-----< IndAudLocalControlDescriptor >-----#
-    IndAudLocalControlDescriptor = SEQ(name=u'IndAudLocalControlDescriptor', mode=MODE_TYPE)
-    _IndAudLocalControlDescriptor_streamMode = NULL(name=u'streamMode', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _IndAudLocalControlDescriptor_reserveValue = NULL(name=u'reserveValue', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _IndAudLocalControlDescriptor_reserveGroup = NULL(name=u'reserveGroup', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _IndAudLocalControlDescriptor_propertyParms = SEQ_OF(name=u'propertyParms', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    IndAudLocalControlDescriptor = SEQ(name='IndAudLocalControlDescriptor', mode=MODE_TYPE)
+    _IndAudLocalControlDescriptor_streamMode = NULL(name='streamMode', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _IndAudLocalControlDescriptor_reserveValue = NULL(name='reserveValue', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _IndAudLocalControlDescriptor_reserveGroup = NULL(name='reserveGroup', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _IndAudLocalControlDescriptor_propertyParms = SEQ_OF(name='propertyParms', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     __IndAudLocalControlDescriptor_propertyParms__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'IndAudPropertyParm')))
     _IndAudLocalControlDescriptor_propertyParms._cont = __IndAudLocalControlDescriptor_propertyParms__item_
-    _IndAudLocalControlDescriptor_streamModeSel = ENUM(name=u'streamModeSel', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'StreamMode')), opt=True)
+    _IndAudLocalControlDescriptor_streamModeSel = ENUM(name='streamModeSel', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'StreamMode')), opt=True)
     IndAudLocalControlDescriptor._cont = ASN1Dict([
-        (u'streamMode', _IndAudLocalControlDescriptor_streamMode),
-        (u'reserveValue', _IndAudLocalControlDescriptor_reserveValue),
-        (u'reserveGroup', _IndAudLocalControlDescriptor_reserveGroup),
-        (u'propertyParms', _IndAudLocalControlDescriptor_propertyParms),
-        (u'streamModeSel', _IndAudLocalControlDescriptor_streamModeSel),
+        ('streamMode', _IndAudLocalControlDescriptor_streamMode),
+        ('reserveValue', _IndAudLocalControlDescriptor_reserveValue),
+        ('reserveGroup', _IndAudLocalControlDescriptor_reserveGroup),
+        ('propertyParms', _IndAudLocalControlDescriptor_propertyParms),
+        ('streamModeSel', _IndAudLocalControlDescriptor_streamModeSel),
         ])
-    IndAudLocalControlDescriptor._ext = [u'streamModeSel']
+    IndAudLocalControlDescriptor._ext = ['streamModeSel']
     
     #-----< IndAudPropertyParm >-----#
-    IndAudPropertyParm = SEQ(name=u'IndAudPropertyParm', mode=MODE_TYPE)
-    _IndAudPropertyParm_name = OCT_STR(name=u'name', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'PkgdName')))
-    _IndAudPropertyParm_propertyParms = SEQ(name=u'propertyParms', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'PropertyParm')), opt=True)
+    IndAudPropertyParm = SEQ(name='IndAudPropertyParm', mode=MODE_TYPE)
+    _IndAudPropertyParm_name = OCT_STR(name='name', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'PkgdName')))
+    _IndAudPropertyParm_propertyParms = SEQ(name='propertyParms', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'PropertyParm')), opt=True)
     IndAudPropertyParm._cont = ASN1Dict([
-        (u'name', _IndAudPropertyParm_name),
-        (u'propertyParms', _IndAudPropertyParm_propertyParms),
+        ('name', _IndAudPropertyParm_name),
+        ('propertyParms', _IndAudPropertyParm_propertyParms),
         ])
-    IndAudPropertyParm._ext = [u'propertyParms']
+    IndAudPropertyParm._ext = ['propertyParms']
     
     #-----< IndAudLocalRemoteDescriptor >-----#
-    IndAudLocalRemoteDescriptor = SEQ(name=u'IndAudLocalRemoteDescriptor', mode=MODE_TYPE)
-    _IndAudLocalRemoteDescriptor_propGroupID = INT(name=u'propGroupID', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    IndAudLocalRemoteDescriptor = SEQ(name='IndAudLocalRemoteDescriptor', mode=MODE_TYPE)
+    _IndAudLocalRemoteDescriptor_propGroupID = INT(name='propGroupID', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     _IndAudLocalRemoteDescriptor_propGroupID._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=65535)], ev=None, er=[])
-    _IndAudLocalRemoteDescriptor_propGrps = SEQ_OF(name=u'propGrps', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'IndAudPropertyGroup')))
+    _IndAudLocalRemoteDescriptor_propGrps = SEQ_OF(name='propGrps', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'IndAudPropertyGroup')))
     IndAudLocalRemoteDescriptor._cont = ASN1Dict([
-        (u'propGroupID', _IndAudLocalRemoteDescriptor_propGroupID),
-        (u'propGrps', _IndAudLocalRemoteDescriptor_propGrps),
+        ('propGroupID', _IndAudLocalRemoteDescriptor_propGroupID),
+        ('propGrps', _IndAudLocalRemoteDescriptor_propGrps),
         ])
     IndAudLocalRemoteDescriptor._ext = []
     
     #-----< IndAudPropertyGroup >-----#
-    IndAudPropertyGroup = SEQ_OF(name=u'IndAudPropertyGroup', mode=MODE_TYPE)
+    IndAudPropertyGroup = SEQ_OF(name='IndAudPropertyGroup', mode=MODE_TYPE)
     _IndAudPropertyGroup__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'IndAudPropertyParm')))
     IndAudPropertyGroup._cont = _IndAudPropertyGroup__item_
     
     #-----< IndAudTerminationStateDescriptor >-----#
-    IndAudTerminationStateDescriptor = SEQ(name=u'IndAudTerminationStateDescriptor', mode=MODE_TYPE)
-    _IndAudTerminationStateDescriptor_propertyParms = SEQ_OF(name=u'propertyParms', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    IndAudTerminationStateDescriptor = SEQ(name='IndAudTerminationStateDescriptor', mode=MODE_TYPE)
+    _IndAudTerminationStateDescriptor_propertyParms = SEQ_OF(name='propertyParms', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     __IndAudTerminationStateDescriptor_propertyParms__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'IndAudPropertyParm')))
     _IndAudTerminationStateDescriptor_propertyParms._cont = __IndAudTerminationStateDescriptor_propertyParms__item_
-    _IndAudTerminationStateDescriptor_eventBufferControl = NULL(name=u'eventBufferControl', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _IndAudTerminationStateDescriptor_serviceState = NULL(name=u'serviceState', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _IndAudTerminationStateDescriptor_serviceStateSel = ENUM(name=u'serviceStateSel', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'ServiceState')), opt=True)
+    _IndAudTerminationStateDescriptor_eventBufferControl = NULL(name='eventBufferControl', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _IndAudTerminationStateDescriptor_serviceState = NULL(name='serviceState', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _IndAudTerminationStateDescriptor_serviceStateSel = ENUM(name='serviceStateSel', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'ServiceState')), opt=True)
     IndAudTerminationStateDescriptor._cont = ASN1Dict([
-        (u'propertyParms', _IndAudTerminationStateDescriptor_propertyParms),
-        (u'eventBufferControl', _IndAudTerminationStateDescriptor_eventBufferControl),
-        (u'serviceState', _IndAudTerminationStateDescriptor_serviceState),
-        (u'serviceStateSel', _IndAudTerminationStateDescriptor_serviceStateSel),
+        ('propertyParms', _IndAudTerminationStateDescriptor_propertyParms),
+        ('eventBufferControl', _IndAudTerminationStateDescriptor_eventBufferControl),
+        ('serviceState', _IndAudTerminationStateDescriptor_serviceState),
+        ('serviceStateSel', _IndAudTerminationStateDescriptor_serviceStateSel),
         ])
-    IndAudTerminationStateDescriptor._ext = [u'serviceStateSel']
+    IndAudTerminationStateDescriptor._ext = ['serviceStateSel']
     
     #-----< IndAudEventsDescriptor >-----#
-    IndAudEventsDescriptor = SEQ(name=u'IndAudEventsDescriptor', mode=MODE_TYPE)
-    _IndAudEventsDescriptor_requestID = INT(name=u'requestID', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'RequestID')), opt=True)
-    _IndAudEventsDescriptor_pkgdName = OCT_STR(name=u'pkgdName', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'PkgdName')))
-    _IndAudEventsDescriptor_streamID = INT(name=u'streamID', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'StreamID')), opt=True)
+    IndAudEventsDescriptor = SEQ(name='IndAudEventsDescriptor', mode=MODE_TYPE)
+    _IndAudEventsDescriptor_requestID = INT(name='requestID', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'RequestID')), opt=True)
+    _IndAudEventsDescriptor_pkgdName = OCT_STR(name='pkgdName', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'PkgdName')))
+    _IndAudEventsDescriptor_streamID = INT(name='streamID', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'StreamID')), opt=True)
     IndAudEventsDescriptor._cont = ASN1Dict([
-        (u'requestID', _IndAudEventsDescriptor_requestID),
-        (u'pkgdName', _IndAudEventsDescriptor_pkgdName),
-        (u'streamID', _IndAudEventsDescriptor_streamID),
+        ('requestID', _IndAudEventsDescriptor_requestID),
+        ('pkgdName', _IndAudEventsDescriptor_pkgdName),
+        ('streamID', _IndAudEventsDescriptor_streamID),
         ])
     IndAudEventsDescriptor._ext = []
     
     #-----< IndAudEventBufferDescriptor >-----#
-    IndAudEventBufferDescriptor = SEQ(name=u'IndAudEventBufferDescriptor', mode=MODE_TYPE)
-    _IndAudEventBufferDescriptor_eventName = OCT_STR(name=u'eventName', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'PkgdName')))
-    _IndAudEventBufferDescriptor_streamID = INT(name=u'streamID', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'StreamID')), opt=True)
+    IndAudEventBufferDescriptor = SEQ(name='IndAudEventBufferDescriptor', mode=MODE_TYPE)
+    _IndAudEventBufferDescriptor_eventName = OCT_STR(name='eventName', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'PkgdName')))
+    _IndAudEventBufferDescriptor_streamID = INT(name='streamID', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'StreamID')), opt=True)
     IndAudEventBufferDescriptor._cont = ASN1Dict([
-        (u'eventName', _IndAudEventBufferDescriptor_eventName),
-        (u'streamID', _IndAudEventBufferDescriptor_streamID),
+        ('eventName', _IndAudEventBufferDescriptor_eventName),
+        ('streamID', _IndAudEventBufferDescriptor_streamID),
         ])
     IndAudEventBufferDescriptor._ext = []
     
     #-----< IndAudSignalsDescriptor >-----#
-    IndAudSignalsDescriptor = CHOICE(name=u'IndAudSignalsDescriptor', mode=MODE_TYPE)
-    _IndAudSignalsDescriptor_signal = SEQ(name=u'signal', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'IndAudSignal')))
-    _IndAudSignalsDescriptor_seqSigList = SEQ(name=u'seqSigList', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'IndAudSeqSigList')))
+    IndAudSignalsDescriptor = CHOICE(name='IndAudSignalsDescriptor', mode=MODE_TYPE)
+    _IndAudSignalsDescriptor_signal = SEQ(name='signal', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'IndAudSignal')))
+    _IndAudSignalsDescriptor_seqSigList = SEQ(name='seqSigList', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'IndAudSeqSigList')))
     IndAudSignalsDescriptor._cont = ASN1Dict([
-        (u'signal', _IndAudSignalsDescriptor_signal),
-        (u'seqSigList', _IndAudSignalsDescriptor_seqSigList),
+        ('signal', _IndAudSignalsDescriptor_signal),
+        ('seqSigList', _IndAudSignalsDescriptor_seqSigList),
         ])
     IndAudSignalsDescriptor._ext = []
     
     #-----< IndAudSeqSigList >-----#
-    IndAudSeqSigList = SEQ(name=u'IndAudSeqSigList', mode=MODE_TYPE)
-    _IndAudSeqSigList_id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    IndAudSeqSigList = SEQ(name='IndAudSeqSigList', mode=MODE_TYPE)
+    _IndAudSeqSigList_id = INT(name='id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     _IndAudSeqSigList_id._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=65535)], ev=None, er=[])
-    _IndAudSeqSigList_signalList = SEQ(name=u'signalList', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'IndAudSignal')), opt=True)
+    _IndAudSeqSigList_signalList = SEQ(name='signalList', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'IndAudSignal')), opt=True)
     IndAudSeqSigList._cont = ASN1Dict([
-        (u'id', _IndAudSeqSigList_id),
-        (u'signalList', _IndAudSeqSigList_signalList),
+        ('id', _IndAudSeqSigList_id),
+        ('signalList', _IndAudSeqSigList_signalList),
         ])
     IndAudSeqSigList._ext = None
     
     #-----< IndAudSignal >-----#
-    IndAudSignal = SEQ(name=u'IndAudSignal', mode=MODE_TYPE)
-    _IndAudSignal_signalName = OCT_STR(name=u'signalName', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'PkgdName')))
-    _IndAudSignal_streamID = INT(name=u'streamID', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'StreamID')), opt=True)
-    _IndAudSignal_signalRequestID = INT(name=u'signalRequestID', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'RequestID')), opt=True)
+    IndAudSignal = SEQ(name='IndAudSignal', mode=MODE_TYPE)
+    _IndAudSignal_signalName = OCT_STR(name='signalName', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'PkgdName')))
+    _IndAudSignal_streamID = INT(name='streamID', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'StreamID')), opt=True)
+    _IndAudSignal_signalRequestID = INT(name='signalRequestID', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'RequestID')), opt=True)
     IndAudSignal._cont = ASN1Dict([
-        (u'signalName', _IndAudSignal_signalName),
-        (u'streamID', _IndAudSignal_streamID),
-        (u'signalRequestID', _IndAudSignal_signalRequestID),
+        ('signalName', _IndAudSignal_signalName),
+        ('streamID', _IndAudSignal_streamID),
+        ('signalRequestID', _IndAudSignal_signalRequestID),
         ])
-    IndAudSignal._ext = [u'signalRequestID']
+    IndAudSignal._ext = ['signalRequestID']
     
     #-----< IndAudDigitMapDescriptor >-----#
-    IndAudDigitMapDescriptor = SEQ(name=u'IndAudDigitMapDescriptor', mode=MODE_TYPE)
-    _IndAudDigitMapDescriptor_digitMapName = OCT_STR(name=u'digitMapName', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'DigitMapName')), opt=True)
+    IndAudDigitMapDescriptor = SEQ(name='IndAudDigitMapDescriptor', mode=MODE_TYPE)
+    _IndAudDigitMapDescriptor_digitMapName = OCT_STR(name='digitMapName', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'DigitMapName')), opt=True)
     IndAudDigitMapDescriptor._cont = ASN1Dict([
-        (u'digitMapName', _IndAudDigitMapDescriptor_digitMapName),
+        ('digitMapName', _IndAudDigitMapDescriptor_digitMapName),
         ])
     IndAudDigitMapDescriptor._ext = None
     
     #-----< IndAudStatisticsDescriptor >-----#
-    IndAudStatisticsDescriptor = SEQ(name=u'IndAudStatisticsDescriptor', mode=MODE_TYPE)
-    _IndAudStatisticsDescriptor_statName = OCT_STR(name=u'statName', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'PkgdName')))
+    IndAudStatisticsDescriptor = SEQ(name='IndAudStatisticsDescriptor', mode=MODE_TYPE)
+    _IndAudStatisticsDescriptor_statName = OCT_STR(name='statName', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'PkgdName')))
     IndAudStatisticsDescriptor._cont = ASN1Dict([
-        (u'statName', _IndAudStatisticsDescriptor_statName),
+        ('statName', _IndAudStatisticsDescriptor_statName),
         ])
     IndAudStatisticsDescriptor._ext = None
     
     #-----< IndAudPackagesDescriptor >-----#
-    IndAudPackagesDescriptor = SEQ(name=u'IndAudPackagesDescriptor', mode=MODE_TYPE)
-    _IndAudPackagesDescriptor_packageName = OCT_STR(name=u'packageName', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'Name')))
-    _IndAudPackagesDescriptor_packageVersion = INT(name=u'packageVersion', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    IndAudPackagesDescriptor = SEQ(name='IndAudPackagesDescriptor', mode=MODE_TYPE)
+    _IndAudPackagesDescriptor_packageName = OCT_STR(name='packageName', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'Name')))
+    _IndAudPackagesDescriptor_packageVersion = INT(name='packageVersion', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     _IndAudPackagesDescriptor_packageVersion._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=99)], ev=None, er=[])
     IndAudPackagesDescriptor._cont = ASN1Dict([
-        (u'packageName', _IndAudPackagesDescriptor_packageName),
-        (u'packageVersion', _IndAudPackagesDescriptor_packageVersion),
+        ('packageName', _IndAudPackagesDescriptor_packageName),
+        ('packageVersion', _IndAudPackagesDescriptor_packageVersion),
         ])
     IndAudPackagesDescriptor._ext = []
     
     #-----< NotifyRequest >-----#
-    NotifyRequest = SEQ(name=u'NotifyRequest', mode=MODE_TYPE)
-    _NotifyRequest_terminationID = SEQ_OF(name=u'terminationID', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'TerminationIDList')))
-    _NotifyRequest_observedEventsDescriptor = SEQ(name=u'observedEventsDescriptor', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'ObservedEventsDescriptor')))
-    _NotifyRequest_errorDescriptor = SEQ(name=u'errorDescriptor', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'ErrorDescriptor')), opt=True)
+    NotifyRequest = SEQ(name='NotifyRequest', mode=MODE_TYPE)
+    _NotifyRequest_terminationID = SEQ_OF(name='terminationID', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'TerminationIDList')))
+    _NotifyRequest_observedEventsDescriptor = SEQ(name='observedEventsDescriptor', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'ObservedEventsDescriptor')))
+    _NotifyRequest_errorDescriptor = SEQ(name='errorDescriptor', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'ErrorDescriptor')), opt=True)
     NotifyRequest._cont = ASN1Dict([
-        (u'terminationID', _NotifyRequest_terminationID),
-        (u'observedEventsDescriptor', _NotifyRequest_observedEventsDescriptor),
-        (u'errorDescriptor', _NotifyRequest_errorDescriptor),
+        ('terminationID', _NotifyRequest_terminationID),
+        ('observedEventsDescriptor', _NotifyRequest_observedEventsDescriptor),
+        ('errorDescriptor', _NotifyRequest_errorDescriptor),
         ])
     NotifyRequest._ext = []
     
     #-----< NotifyReply >-----#
-    NotifyReply = SEQ(name=u'NotifyReply', mode=MODE_TYPE)
-    _NotifyReply_terminationID = SEQ_OF(name=u'terminationID', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'TerminationIDList')))
-    _NotifyReply_errorDescriptor = SEQ(name=u'errorDescriptor', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'ErrorDescriptor')), opt=True)
+    NotifyReply = SEQ(name='NotifyReply', mode=MODE_TYPE)
+    _NotifyReply_terminationID = SEQ_OF(name='terminationID', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'TerminationIDList')))
+    _NotifyReply_errorDescriptor = SEQ(name='errorDescriptor', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'ErrorDescriptor')), opt=True)
     NotifyReply._cont = ASN1Dict([
-        (u'terminationID', _NotifyReply_terminationID),
-        (u'errorDescriptor', _NotifyReply_errorDescriptor),
+        ('terminationID', _NotifyReply_terminationID),
+        ('errorDescriptor', _NotifyReply_errorDescriptor),
         ])
     NotifyReply._ext = []
     
     #-----< ObservedEventsDescriptor >-----#
-    ObservedEventsDescriptor = SEQ(name=u'ObservedEventsDescriptor', mode=MODE_TYPE)
-    _ObservedEventsDescriptor_requestId = INT(name=u'requestId', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'RequestID')))
-    _ObservedEventsDescriptor_observedEventLst = SEQ_OF(name=u'observedEventLst', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    ObservedEventsDescriptor = SEQ(name='ObservedEventsDescriptor', mode=MODE_TYPE)
+    _ObservedEventsDescriptor_requestId = INT(name='requestId', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'RequestID')))
+    _ObservedEventsDescriptor_observedEventLst = SEQ_OF(name='observedEventLst', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     __ObservedEventsDescriptor_observedEventLst__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'ObservedEvent')))
     _ObservedEventsDescriptor_observedEventLst._cont = __ObservedEventsDescriptor_observedEventLst__item_
     ObservedEventsDescriptor._cont = ASN1Dict([
-        (u'requestId', _ObservedEventsDescriptor_requestId),
-        (u'observedEventLst', _ObservedEventsDescriptor_observedEventLst),
+        ('requestId', _ObservedEventsDescriptor_requestId),
+        ('observedEventLst', _ObservedEventsDescriptor_observedEventLst),
         ])
     ObservedEventsDescriptor._ext = None
     
     #-----< ObservedEvent >-----#
-    ObservedEvent = SEQ(name=u'ObservedEvent', mode=MODE_TYPE)
-    _ObservedEvent_eventName = OCT_STR(name=u'eventName', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'EventName')))
-    _ObservedEvent_streamID = INT(name=u'streamID', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'StreamID')), opt=True)
-    _ObservedEvent_eventParList = SEQ_OF(name=u'eventParList', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    ObservedEvent = SEQ(name='ObservedEvent', mode=MODE_TYPE)
+    _ObservedEvent_eventName = OCT_STR(name='eventName', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'EventName')))
+    _ObservedEvent_streamID = INT(name='streamID', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'StreamID')), opt=True)
+    _ObservedEvent_eventParList = SEQ_OF(name='eventParList', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     __ObservedEvent_eventParList__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'EventParameter')))
     _ObservedEvent_eventParList._cont = __ObservedEvent_eventParList__item_
-    _ObservedEvent_timeNotation = SEQ(name=u'timeNotation', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'TimeNotation')), opt=True)
+    _ObservedEvent_timeNotation = SEQ(name='timeNotation', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'TimeNotation')), opt=True)
     ObservedEvent._cont = ASN1Dict([
-        (u'eventName', _ObservedEvent_eventName),
-        (u'streamID', _ObservedEvent_streamID),
-        (u'eventParList', _ObservedEvent_eventParList),
-        (u'timeNotation', _ObservedEvent_timeNotation),
+        ('eventName', _ObservedEvent_eventName),
+        ('streamID', _ObservedEvent_streamID),
+        ('eventParList', _ObservedEvent_eventParList),
+        ('timeNotation', _ObservedEvent_timeNotation),
         ])
     ObservedEvent._ext = []
     
     #-----< EventName >-----#
-    EventName = OCT_STR(name=u'EventName', mode=MODE_TYPE, typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'PkgdName')))
+    EventName = OCT_STR(name='EventName', mode=MODE_TYPE, typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'PkgdName')))
     
     #-----< EventParameter >-----#
-    EventParameter = SEQ(name=u'EventParameter', mode=MODE_TYPE)
-    _EventParameter_eventParameterName = OCT_STR(name=u'eventParameterName', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'Name')))
-    _EventParameter_value = SEQ_OF(name=u'value', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'Value')))
-    _EventParameter_extraInfo = CHOICE(name=u'extraInfo', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), opt=True)
-    __EventParameter_extraInfo_relation = ENUM(name=u'relation', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'Relation')))
-    __EventParameter_extraInfo_range = BOOL(name=u'range', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    __EventParameter_extraInfo_sublist = BOOL(name=u'sublist', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    EventParameter = SEQ(name='EventParameter', mode=MODE_TYPE)
+    _EventParameter_eventParameterName = OCT_STR(name='eventParameterName', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'Name')))
+    _EventParameter_value = SEQ_OF(name='value', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'Value')))
+    _EventParameter_extraInfo = CHOICE(name='extraInfo', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), opt=True)
+    __EventParameter_extraInfo_relation = ENUM(name='relation', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'Relation')))
+    __EventParameter_extraInfo_range = BOOL(name='range', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __EventParameter_extraInfo_sublist = BOOL(name='sublist', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     _EventParameter_extraInfo._cont = ASN1Dict([
-        (u'relation', __EventParameter_extraInfo_relation),
-        (u'range', __EventParameter_extraInfo_range),
-        (u'sublist', __EventParameter_extraInfo_sublist),
+        ('relation', __EventParameter_extraInfo_relation),
+        ('range', __EventParameter_extraInfo_range),
+        ('sublist', __EventParameter_extraInfo_sublist),
         ])
     _EventParameter_extraInfo._ext = None
     EventParameter._cont = ASN1Dict([
-        (u'eventParameterName', _EventParameter_eventParameterName),
-        (u'value', _EventParameter_value),
-        (u'extraInfo', _EventParameter_extraInfo),
+        ('eventParameterName', _EventParameter_eventParameterName),
+        ('value', _EventParameter_value),
+        ('extraInfo', _EventParameter_extraInfo),
         ])
     EventParameter._ext = []
     
     #-----< ServiceChangeRequest >-----#
-    ServiceChangeRequest = SEQ(name=u'ServiceChangeRequest', mode=MODE_TYPE)
-    _ServiceChangeRequest_terminationID = SEQ_OF(name=u'terminationID', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'TerminationIDList')))
-    _ServiceChangeRequest_serviceChangeParms = SEQ(name=u'serviceChangeParms', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'ServiceChangeParm')))
+    ServiceChangeRequest = SEQ(name='ServiceChangeRequest', mode=MODE_TYPE)
+    _ServiceChangeRequest_terminationID = SEQ_OF(name='terminationID', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'TerminationIDList')))
+    _ServiceChangeRequest_serviceChangeParms = SEQ(name='serviceChangeParms', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'ServiceChangeParm')))
     ServiceChangeRequest._cont = ASN1Dict([
-        (u'terminationID', _ServiceChangeRequest_terminationID),
-        (u'serviceChangeParms', _ServiceChangeRequest_serviceChangeParms),
+        ('terminationID', _ServiceChangeRequest_terminationID),
+        ('serviceChangeParms', _ServiceChangeRequest_serviceChangeParms),
         ])
     ServiceChangeRequest._ext = []
     
     #-----< ServiceChangeReply >-----#
-    ServiceChangeReply = SEQ(name=u'ServiceChangeReply', mode=MODE_TYPE)
-    _ServiceChangeReply_terminationID = SEQ_OF(name=u'terminationID', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'TerminationIDList')))
-    _ServiceChangeReply_serviceChangeResult = CHOICE(name=u'serviceChangeResult', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'ServiceChangeResult')))
+    ServiceChangeReply = SEQ(name='ServiceChangeReply', mode=MODE_TYPE)
+    _ServiceChangeReply_terminationID = SEQ_OF(name='terminationID', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'TerminationIDList')))
+    _ServiceChangeReply_serviceChangeResult = CHOICE(name='serviceChangeResult', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'ServiceChangeResult')))
     ServiceChangeReply._cont = ASN1Dict([
-        (u'terminationID', _ServiceChangeReply_terminationID),
-        (u'serviceChangeResult', _ServiceChangeReply_serviceChangeResult),
+        ('terminationID', _ServiceChangeReply_terminationID),
+        ('serviceChangeResult', _ServiceChangeReply_serviceChangeResult),
         ])
     ServiceChangeReply._ext = []
     
     #-----< ServiceChangeResult >-----#
-    ServiceChangeResult = CHOICE(name=u'ServiceChangeResult', mode=MODE_TYPE)
-    _ServiceChangeResult_errorDescriptor = SEQ(name=u'errorDescriptor', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'ErrorDescriptor')))
-    _ServiceChangeResult_serviceChangeResParms = SEQ(name=u'serviceChangeResParms', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'ServiceChangeResParm')))
+    ServiceChangeResult = CHOICE(name='ServiceChangeResult', mode=MODE_TYPE)
+    _ServiceChangeResult_errorDescriptor = SEQ(name='errorDescriptor', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'ErrorDescriptor')))
+    _ServiceChangeResult_serviceChangeResParms = SEQ(name='serviceChangeResParms', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'ServiceChangeResParm')))
     ServiceChangeResult._cont = ASN1Dict([
-        (u'errorDescriptor', _ServiceChangeResult_errorDescriptor),
-        (u'serviceChangeResParms', _ServiceChangeResult_serviceChangeResParms),
+        ('errorDescriptor', _ServiceChangeResult_errorDescriptor),
+        ('serviceChangeResParms', _ServiceChangeResult_serviceChangeResParms),
         ])
     ServiceChangeResult._ext = None
     
     #-----< WildcardField >-----#
-    WildcardField = OCT_STR(name=u'WildcardField', mode=MODE_TYPE)
+    WildcardField = OCT_STR(name='WildcardField', mode=MODE_TYPE)
     WildcardField._const_sz = ASN1Set(rv=[1], rr=[], ev=None, er=[])
     
     #-----< TerminationID >-----#
-    TerminationID = SEQ(name=u'TerminationID', mode=MODE_TYPE)
-    _TerminationID_wildcard = SEQ_OF(name=u'wildcard', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    TerminationID = SEQ(name='TerminationID', mode=MODE_TYPE)
+    _TerminationID_wildcard = SEQ_OF(name='wildcard', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     __TerminationID_wildcard__item_ = OCT_STR(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'WildcardField')))
     _TerminationID_wildcard._cont = __TerminationID_wildcard__item_
-    _TerminationID_id = OCT_STR(name=u'id', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _TerminationID_id = OCT_STR(name='id', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     _TerminationID_id._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=8)], ev=None, er=[])
     TerminationID._cont = ASN1Dict([
-        (u'wildcard', _TerminationID_wildcard),
-        (u'id', _TerminationID_id),
+        ('wildcard', _TerminationID_wildcard),
+        ('id', _TerminationID_id),
         ])
     TerminationID._ext = []
     
     #-----< TerminationIDList >-----#
-    TerminationIDList = SEQ_OF(name=u'TerminationIDList', mode=MODE_TYPE)
+    TerminationIDList = SEQ_OF(name='TerminationIDList', mode=MODE_TYPE)
     _TerminationIDList__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'TerminationID')))
     TerminationIDList._cont = _TerminationIDList__item_
     
     #-----< MediaDescriptor >-----#
-    MediaDescriptor = SEQ(name=u'MediaDescriptor', mode=MODE_TYPE)
-    _MediaDescriptor_termStateDescr = SEQ(name=u'termStateDescr', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'TerminationStateDescriptor')), opt=True)
-    _MediaDescriptor_streams = CHOICE(name=u'streams', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), opt=True)
-    __MediaDescriptor_streams_oneStream = SEQ(name=u'oneStream', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'StreamParms')))
-    __MediaDescriptor_streams_multiStream = SEQ_OF(name=u'multiStream', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    MediaDescriptor = SEQ(name='MediaDescriptor', mode=MODE_TYPE)
+    _MediaDescriptor_termStateDescr = SEQ(name='termStateDescr', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'TerminationStateDescriptor')), opt=True)
+    _MediaDescriptor_streams = CHOICE(name='streams', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), opt=True)
+    __MediaDescriptor_streams_oneStream = SEQ(name='oneStream', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'StreamParms')))
+    __MediaDescriptor_streams_multiStream = SEQ_OF(name='multiStream', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     ___MediaDescriptor_streams_multiStream__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'StreamDescriptor')))
     __MediaDescriptor_streams_multiStream._cont = ___MediaDescriptor_streams_multiStream__item_
     _MediaDescriptor_streams._cont = ASN1Dict([
-        (u'oneStream', __MediaDescriptor_streams_oneStream),
-        (u'multiStream', __MediaDescriptor_streams_multiStream),
+        ('oneStream', __MediaDescriptor_streams_oneStream),
+        ('multiStream', __MediaDescriptor_streams_multiStream),
         ])
     _MediaDescriptor_streams._ext = None
     MediaDescriptor._cont = ASN1Dict([
-        (u'termStateDescr', _MediaDescriptor_termStateDescr),
-        (u'streams', _MediaDescriptor_streams),
+        ('termStateDescr', _MediaDescriptor_termStateDescr),
+        ('streams', _MediaDescriptor_streams),
         ])
     MediaDescriptor._ext = []
     
     #-----< StreamDescriptor >-----#
-    StreamDescriptor = SEQ(name=u'StreamDescriptor', mode=MODE_TYPE)
-    _StreamDescriptor_streamID = INT(name=u'streamID', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'StreamID')))
-    _StreamDescriptor_streamParms = SEQ(name=u'streamParms', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'StreamParms')))
+    StreamDescriptor = SEQ(name='StreamDescriptor', mode=MODE_TYPE)
+    _StreamDescriptor_streamID = INT(name='streamID', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'StreamID')))
+    _StreamDescriptor_streamParms = SEQ(name='streamParms', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'StreamParms')))
     StreamDescriptor._cont = ASN1Dict([
-        (u'streamID', _StreamDescriptor_streamID),
-        (u'streamParms', _StreamDescriptor_streamParms),
+        ('streamID', _StreamDescriptor_streamID),
+        ('streamParms', _StreamDescriptor_streamParms),
         ])
     StreamDescriptor._ext = None
     
     #-----< StreamParms >-----#
-    StreamParms = SEQ(name=u'StreamParms', mode=MODE_TYPE)
-    _StreamParms_localControlDescriptor = SEQ(name=u'localControlDescriptor', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'LocalControlDescriptor')), opt=True)
-    _StreamParms_localDescriptor = SEQ(name=u'localDescriptor', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'LocalRemoteDescriptor')), opt=True)
-    _StreamParms_remoteDescriptor = SEQ(name=u'remoteDescriptor', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'LocalRemoteDescriptor')), opt=True)
-    _StreamParms_statisticsDescriptor = SEQ_OF(name=u'statisticsDescriptor', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'StatisticsDescriptor')), opt=True)
+    StreamParms = SEQ(name='StreamParms', mode=MODE_TYPE)
+    _StreamParms_localControlDescriptor = SEQ(name='localControlDescriptor', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'LocalControlDescriptor')), opt=True)
+    _StreamParms_localDescriptor = SEQ(name='localDescriptor', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'LocalRemoteDescriptor')), opt=True)
+    _StreamParms_remoteDescriptor = SEQ(name='remoteDescriptor', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'LocalRemoteDescriptor')), opt=True)
+    _StreamParms_statisticsDescriptor = SEQ_OF(name='statisticsDescriptor', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'StatisticsDescriptor')), opt=True)
     StreamParms._cont = ASN1Dict([
-        (u'localControlDescriptor', _StreamParms_localControlDescriptor),
-        (u'localDescriptor', _StreamParms_localDescriptor),
-        (u'remoteDescriptor', _StreamParms_remoteDescriptor),
-        (u'statisticsDescriptor', _StreamParms_statisticsDescriptor),
+        ('localControlDescriptor', _StreamParms_localControlDescriptor),
+        ('localDescriptor', _StreamParms_localDescriptor),
+        ('remoteDescriptor', _StreamParms_remoteDescriptor),
+        ('statisticsDescriptor', _StreamParms_statisticsDescriptor),
         ])
-    StreamParms._ext = [u'statisticsDescriptor']
+    StreamParms._ext = ['statisticsDescriptor']
     
     #-----< LocalControlDescriptor >-----#
-    LocalControlDescriptor = SEQ(name=u'LocalControlDescriptor', mode=MODE_TYPE)
-    _LocalControlDescriptor_streamMode = ENUM(name=u'streamMode', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'StreamMode')), opt=True)
-    _LocalControlDescriptor_reserveValue = BOOL(name=u'reserveValue', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _LocalControlDescriptor_reserveGroup = BOOL(name=u'reserveGroup', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _LocalControlDescriptor_propertyParms = SEQ_OF(name=u'propertyParms', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    LocalControlDescriptor = SEQ(name='LocalControlDescriptor', mode=MODE_TYPE)
+    _LocalControlDescriptor_streamMode = ENUM(name='streamMode', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'StreamMode')), opt=True)
+    _LocalControlDescriptor_reserveValue = BOOL(name='reserveValue', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _LocalControlDescriptor_reserveGroup = BOOL(name='reserveGroup', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _LocalControlDescriptor_propertyParms = SEQ_OF(name='propertyParms', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     __LocalControlDescriptor_propertyParms__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'PropertyParm')))
     _LocalControlDescriptor_propertyParms._cont = __LocalControlDescriptor_propertyParms__item_
     LocalControlDescriptor._cont = ASN1Dict([
-        (u'streamMode', _LocalControlDescriptor_streamMode),
-        (u'reserveValue', _LocalControlDescriptor_reserveValue),
-        (u'reserveGroup', _LocalControlDescriptor_reserveGroup),
-        (u'propertyParms', _LocalControlDescriptor_propertyParms),
+        ('streamMode', _LocalControlDescriptor_streamMode),
+        ('reserveValue', _LocalControlDescriptor_reserveValue),
+        ('reserveGroup', _LocalControlDescriptor_reserveGroup),
+        ('propertyParms', _LocalControlDescriptor_propertyParms),
         ])
     LocalControlDescriptor._ext = []
     
     #-----< StreamMode >-----#
-    StreamMode = ENUM(name=u'StreamMode', mode=MODE_TYPE)
-    StreamMode._cont = ASN1Dict([(u'sendOnly', 0), (u'recvOnly', 1), (u'sendRecv', 2), (u'inactive', 3), (u'loopBack', 4)])
+    StreamMode = ENUM(name='StreamMode', mode=MODE_TYPE)
+    StreamMode._cont = ASN1Dict([('sendOnly', 0), ('recvOnly', 1), ('sendRecv', 2), ('inactive', 3), ('loopBack', 4)])
     StreamMode._ext = []
     
     #-----< PropertyParm >-----#
-    PropertyParm = SEQ(name=u'PropertyParm', mode=MODE_TYPE)
-    _PropertyParm_name = OCT_STR(name=u'name', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'PkgdName')))
-    _PropertyParm_value = SEQ_OF(name=u'value', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    PropertyParm = SEQ(name='PropertyParm', mode=MODE_TYPE)
+    _PropertyParm_name = OCT_STR(name='name', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'PkgdName')))
+    _PropertyParm_value = SEQ_OF(name='value', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     __PropertyParm_value__item_ = OCT_STR(name='_item_', mode=MODE_TYPE)
     _PropertyParm_value._cont = __PropertyParm_value__item_
-    _PropertyParm_extraInfo = CHOICE(name=u'extraInfo', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), opt=True)
-    __PropertyParm_extraInfo_relation = ENUM(name=u'relation', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'Relation')))
-    __PropertyParm_extraInfo_range = BOOL(name=u'range', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    __PropertyParm_extraInfo_sublist = BOOL(name=u'sublist', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _PropertyParm_extraInfo = CHOICE(name='extraInfo', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), opt=True)
+    __PropertyParm_extraInfo_relation = ENUM(name='relation', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'Relation')))
+    __PropertyParm_extraInfo_range = BOOL(name='range', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __PropertyParm_extraInfo_sublist = BOOL(name='sublist', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     _PropertyParm_extraInfo._cont = ASN1Dict([
-        (u'relation', __PropertyParm_extraInfo_relation),
-        (u'range', __PropertyParm_extraInfo_range),
-        (u'sublist', __PropertyParm_extraInfo_sublist),
+        ('relation', __PropertyParm_extraInfo_relation),
+        ('range', __PropertyParm_extraInfo_range),
+        ('sublist', __PropertyParm_extraInfo_sublist),
         ])
     _PropertyParm_extraInfo._ext = None
     PropertyParm._cont = ASN1Dict([
-        (u'name', _PropertyParm_name),
-        (u'value', _PropertyParm_value),
-        (u'extraInfo', _PropertyParm_extraInfo),
+        ('name', _PropertyParm_name),
+        ('value', _PropertyParm_value),
+        ('extraInfo', _PropertyParm_extraInfo),
         ])
     PropertyParm._ext = []
     
     #-----< Name >-----#
-    Name = OCT_STR(name=u'Name', mode=MODE_TYPE)
+    Name = OCT_STR(name='Name', mode=MODE_TYPE)
     Name._const_sz = ASN1Set(rv=[2], rr=[], ev=None, er=[])
     
     #-----< PkgdName >-----#
-    PkgdName = OCT_STR(name=u'PkgdName', mode=MODE_TYPE)
+    PkgdName = OCT_STR(name='PkgdName', mode=MODE_TYPE)
     PkgdName._const_sz = ASN1Set(rv=[4], rr=[], ev=None, er=[])
     
     #-----< Relation >-----#
-    Relation = ENUM(name=u'Relation', mode=MODE_TYPE)
-    Relation._cont = ASN1Dict([(u'greaterThan', 0), (u'smallerThan', 1), (u'unequalTo', 2)])
+    Relation = ENUM(name='Relation', mode=MODE_TYPE)
+    Relation._cont = ASN1Dict([('greaterThan', 0), ('smallerThan', 1), ('unequalTo', 2)])
     Relation._ext = []
     
     #-----< LocalRemoteDescriptor >-----#
-    LocalRemoteDescriptor = SEQ(name=u'LocalRemoteDescriptor', mode=MODE_TYPE)
-    _LocalRemoteDescriptor_propGrps = SEQ_OF(name=u'propGrps', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    LocalRemoteDescriptor = SEQ(name='LocalRemoteDescriptor', mode=MODE_TYPE)
+    _LocalRemoteDescriptor_propGrps = SEQ_OF(name='propGrps', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     __LocalRemoteDescriptor_propGrps__item_ = SEQ_OF(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'PropertyGroup')))
     _LocalRemoteDescriptor_propGrps._cont = __LocalRemoteDescriptor_propGrps__item_
     LocalRemoteDescriptor._cont = ASN1Dict([
-        (u'propGrps', _LocalRemoteDescriptor_propGrps),
+        ('propGrps', _LocalRemoteDescriptor_propGrps),
         ])
     LocalRemoteDescriptor._ext = []
     
     #-----< PropertyGroup >-----#
-    PropertyGroup = SEQ_OF(name=u'PropertyGroup', mode=MODE_TYPE)
+    PropertyGroup = SEQ_OF(name='PropertyGroup', mode=MODE_TYPE)
     _PropertyGroup__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'PropertyParm')))
     PropertyGroup._cont = _PropertyGroup__item_
     
     #-----< TerminationStateDescriptor >-----#
-    TerminationStateDescriptor = SEQ(name=u'TerminationStateDescriptor', mode=MODE_TYPE)
-    _TerminationStateDescriptor_propertyParms = SEQ_OF(name=u'propertyParms', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    TerminationStateDescriptor = SEQ(name='TerminationStateDescriptor', mode=MODE_TYPE)
+    _TerminationStateDescriptor_propertyParms = SEQ_OF(name='propertyParms', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     __TerminationStateDescriptor_propertyParms__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'PropertyParm')))
     _TerminationStateDescriptor_propertyParms._cont = __TerminationStateDescriptor_propertyParms__item_
-    _TerminationStateDescriptor_eventBufferControl = ENUM(name=u'eventBufferControl', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'EventBufferControl')), opt=True)
-    _TerminationStateDescriptor_serviceState = ENUM(name=u'serviceState', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'ServiceState')), opt=True)
+    _TerminationStateDescriptor_eventBufferControl = ENUM(name='eventBufferControl', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'EventBufferControl')), opt=True)
+    _TerminationStateDescriptor_serviceState = ENUM(name='serviceState', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'ServiceState')), opt=True)
     TerminationStateDescriptor._cont = ASN1Dict([
-        (u'propertyParms', _TerminationStateDescriptor_propertyParms),
-        (u'eventBufferControl', _TerminationStateDescriptor_eventBufferControl),
-        (u'serviceState', _TerminationStateDescriptor_serviceState),
+        ('propertyParms', _TerminationStateDescriptor_propertyParms),
+        ('eventBufferControl', _TerminationStateDescriptor_eventBufferControl),
+        ('serviceState', _TerminationStateDescriptor_serviceState),
         ])
     TerminationStateDescriptor._ext = []
     
     #-----< EventBufferControl >-----#
-    EventBufferControl = ENUM(name=u'EventBufferControl', mode=MODE_TYPE)
-    EventBufferControl._cont = ASN1Dict([(u'off', 0), (u'lockStep', 1)])
+    EventBufferControl = ENUM(name='EventBufferControl', mode=MODE_TYPE)
+    EventBufferControl._cont = ASN1Dict([('off', 0), ('lockStep', 1)])
     EventBufferControl._ext = []
     
     #-----< ServiceState >-----#
-    ServiceState = ENUM(name=u'ServiceState', mode=MODE_TYPE)
-    ServiceState._cont = ASN1Dict([(u'test', 0), (u'outOfSvc', 1), (u'inSvc', 2)])
+    ServiceState = ENUM(name='ServiceState', mode=MODE_TYPE)
+    ServiceState._cont = ASN1Dict([('test', 0), ('outOfSvc', 1), ('inSvc', 2)])
     ServiceState._ext = []
     
     #-----< MuxDescriptor >-----#
-    MuxDescriptor = SEQ(name=u'MuxDescriptor', mode=MODE_TYPE)
-    _MuxDescriptor_muxType = ENUM(name=u'muxType', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'MuxType')))
-    _MuxDescriptor_termList = SEQ_OF(name=u'termList', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    MuxDescriptor = SEQ(name='MuxDescriptor', mode=MODE_TYPE)
+    _MuxDescriptor_muxType = ENUM(name='muxType', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'MuxType')))
+    _MuxDescriptor_termList = SEQ_OF(name='termList', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     __MuxDescriptor_termList__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'TerminationID')))
     _MuxDescriptor_termList._cont = __MuxDescriptor_termList__item_
-    _MuxDescriptor_nonStandardData = SEQ(name=u'nonStandardData', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'NonStandardData')), opt=True)
+    _MuxDescriptor_nonStandardData = SEQ(name='nonStandardData', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'NonStandardData')), opt=True)
     MuxDescriptor._cont = ASN1Dict([
-        (u'muxType', _MuxDescriptor_muxType),
-        (u'termList', _MuxDescriptor_termList),
-        (u'nonStandardData', _MuxDescriptor_nonStandardData),
+        ('muxType', _MuxDescriptor_muxType),
+        ('termList', _MuxDescriptor_termList),
+        ('nonStandardData', _MuxDescriptor_nonStandardData),
         ])
     MuxDescriptor._ext = []
     
     #-----< MuxType >-----#
-    MuxType = ENUM(name=u'MuxType', mode=MODE_TYPE)
-    MuxType._cont = ASN1Dict([(u'h221', 0), (u'h223', 1), (u'h226', 2), (u'v76', 3), (u'nx64k', 4)])
-    MuxType._ext = [u'nx64k']
+    MuxType = ENUM(name='MuxType', mode=MODE_TYPE)
+    MuxType._cont = ASN1Dict([('h221', 0), ('h223', 1), ('h226', 2), ('v76', 3), ('nx64k', 4)])
+    MuxType._ext = ['nx64k']
     
     #-----< StreamID >-----#
-    StreamID = INT(name=u'StreamID', mode=MODE_TYPE)
+    StreamID = INT(name='StreamID', mode=MODE_TYPE)
     StreamID._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=65535)], ev=None, er=[])
     
     #-----< EventsDescriptor >-----#
-    EventsDescriptor = SEQ(name=u'EventsDescriptor', mode=MODE_TYPE)
-    _EventsDescriptor_requestID = INT(name=u'requestID', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'RequestID')), opt=True)
-    _EventsDescriptor_eventList = SEQ_OF(name=u'eventList', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    EventsDescriptor = SEQ(name='EventsDescriptor', mode=MODE_TYPE)
+    _EventsDescriptor_requestID = INT(name='requestID', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'RequestID')), opt=True)
+    _EventsDescriptor_eventList = SEQ_OF(name='eventList', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     __EventsDescriptor_eventList__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'RequestedEvent')))
     _EventsDescriptor_eventList._cont = __EventsDescriptor_eventList__item_
     EventsDescriptor._cont = ASN1Dict([
-        (u'requestID', _EventsDescriptor_requestID),
-        (u'eventList', _EventsDescriptor_eventList),
+        ('requestID', _EventsDescriptor_requestID),
+        ('eventList', _EventsDescriptor_eventList),
         ])
     EventsDescriptor._ext = []
     
     #-----< RequestedEvent >-----#
-    RequestedEvent = SEQ(name=u'RequestedEvent', mode=MODE_TYPE)
-    _RequestedEvent_pkgdName = OCT_STR(name=u'pkgdName', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'PkgdName')))
-    _RequestedEvent_streamID = INT(name=u'streamID', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'StreamID')), opt=True)
-    _RequestedEvent_eventAction = SEQ(name=u'eventAction', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'RequestedActions')), opt=True)
-    _RequestedEvent_evParList = SEQ_OF(name=u'evParList', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    RequestedEvent = SEQ(name='RequestedEvent', mode=MODE_TYPE)
+    _RequestedEvent_pkgdName = OCT_STR(name='pkgdName', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'PkgdName')))
+    _RequestedEvent_streamID = INT(name='streamID', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'StreamID')), opt=True)
+    _RequestedEvent_eventAction = SEQ(name='eventAction', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'RequestedActions')), opt=True)
+    _RequestedEvent_evParList = SEQ_OF(name='evParList', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     __RequestedEvent_evParList__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'EventParameter')))
     _RequestedEvent_evParList._cont = __RequestedEvent_evParList__item_
     RequestedEvent._cont = ASN1Dict([
-        (u'pkgdName', _RequestedEvent_pkgdName),
-        (u'streamID', _RequestedEvent_streamID),
-        (u'eventAction', _RequestedEvent_eventAction),
-        (u'evParList', _RequestedEvent_evParList),
+        ('pkgdName', _RequestedEvent_pkgdName),
+        ('streamID', _RequestedEvent_streamID),
+        ('eventAction', _RequestedEvent_eventAction),
+        ('evParList', _RequestedEvent_evParList),
         ])
     RequestedEvent._ext = []
     
     #-----< RegulatedEmbeddedDescriptor >-----#
-    RegulatedEmbeddedDescriptor = SEQ(name=u'RegulatedEmbeddedDescriptor', mode=MODE_TYPE)
-    _RegulatedEmbeddedDescriptor_secondEvent = SEQ(name=u'secondEvent', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'SecondEventsDescriptor')), opt=True)
-    _RegulatedEmbeddedDescriptor_signalsDescriptor = SEQ_OF(name=u'signalsDescriptor', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'SignalsDescriptor')), opt=True)
+    RegulatedEmbeddedDescriptor = SEQ(name='RegulatedEmbeddedDescriptor', mode=MODE_TYPE)
+    _RegulatedEmbeddedDescriptor_secondEvent = SEQ(name='secondEvent', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'SecondEventsDescriptor')), opt=True)
+    _RegulatedEmbeddedDescriptor_signalsDescriptor = SEQ_OF(name='signalsDescriptor', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'SignalsDescriptor')), opt=True)
     RegulatedEmbeddedDescriptor._cont = ASN1Dict([
-        (u'secondEvent', _RegulatedEmbeddedDescriptor_secondEvent),
-        (u'signalsDescriptor', _RegulatedEmbeddedDescriptor_signalsDescriptor),
+        ('secondEvent', _RegulatedEmbeddedDescriptor_secondEvent),
+        ('signalsDescriptor', _RegulatedEmbeddedDescriptor_signalsDescriptor),
         ])
     RegulatedEmbeddedDescriptor._ext = []
     
     #-----< NotifyBehaviour >-----#
-    NotifyBehaviour = CHOICE(name=u'NotifyBehaviour', mode=MODE_TYPE)
-    _NotifyBehaviour_notifyImmediate = NULL(name=u'notifyImmediate', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _NotifyBehaviour_notifyRegulated = SEQ(name=u'notifyRegulated', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'RegulatedEmbeddedDescriptor')))
-    _NotifyBehaviour_neverNotify = NULL(name=u'neverNotify', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    NotifyBehaviour = CHOICE(name='NotifyBehaviour', mode=MODE_TYPE)
+    _NotifyBehaviour_notifyImmediate = NULL(name='notifyImmediate', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _NotifyBehaviour_notifyRegulated = SEQ(name='notifyRegulated', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'RegulatedEmbeddedDescriptor')))
+    _NotifyBehaviour_neverNotify = NULL(name='neverNotify', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     NotifyBehaviour._cont = ASN1Dict([
-        (u'notifyImmediate', _NotifyBehaviour_notifyImmediate),
-        (u'notifyRegulated', _NotifyBehaviour_notifyRegulated),
-        (u'neverNotify', _NotifyBehaviour_neverNotify),
+        ('notifyImmediate', _NotifyBehaviour_notifyImmediate),
+        ('notifyRegulated', _NotifyBehaviour_notifyRegulated),
+        ('neverNotify', _NotifyBehaviour_neverNotify),
         ])
     NotifyBehaviour._ext = []
     
     #-----< RequestedActions >-----#
-    RequestedActions = SEQ(name=u'RequestedActions', mode=MODE_TYPE)
-    _RequestedActions_keepActive = BOOL(name=u'keepActive', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _RequestedActions_eventDM = CHOICE(name=u'eventDM', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'EventDM')), opt=True)
-    _RequestedActions_secondEvent = SEQ(name=u'secondEvent', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'SecondEventsDescriptor')), opt=True)
-    _RequestedActions_signalsDescriptor = SEQ_OF(name=u'signalsDescriptor', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'SignalsDescriptor')), opt=True)
-    _RequestedActions_notifyBehaviour = CHOICE(name=u'notifyBehaviour', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'NotifyBehaviour')), opt=True)
-    _RequestedActions_resetEventsDescriptor = NULL(name=u'resetEventsDescriptor', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    RequestedActions = SEQ(name='RequestedActions', mode=MODE_TYPE)
+    _RequestedActions_keepActive = BOOL(name='keepActive', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _RequestedActions_eventDM = CHOICE(name='eventDM', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'EventDM')), opt=True)
+    _RequestedActions_secondEvent = SEQ(name='secondEvent', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'SecondEventsDescriptor')), opt=True)
+    _RequestedActions_signalsDescriptor = SEQ_OF(name='signalsDescriptor', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'SignalsDescriptor')), opt=True)
+    _RequestedActions_notifyBehaviour = CHOICE(name='notifyBehaviour', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'NotifyBehaviour')), opt=True)
+    _RequestedActions_resetEventsDescriptor = NULL(name='resetEventsDescriptor', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     RequestedActions._cont = ASN1Dict([
-        (u'keepActive', _RequestedActions_keepActive),
-        (u'eventDM', _RequestedActions_eventDM),
-        (u'secondEvent', _RequestedActions_secondEvent),
-        (u'signalsDescriptor', _RequestedActions_signalsDescriptor),
-        (u'notifyBehaviour', _RequestedActions_notifyBehaviour),
-        (u'resetEventsDescriptor', _RequestedActions_resetEventsDescriptor),
+        ('keepActive', _RequestedActions_keepActive),
+        ('eventDM', _RequestedActions_eventDM),
+        ('secondEvent', _RequestedActions_secondEvent),
+        ('signalsDescriptor', _RequestedActions_signalsDescriptor),
+        ('notifyBehaviour', _RequestedActions_notifyBehaviour),
+        ('resetEventsDescriptor', _RequestedActions_resetEventsDescriptor),
         ])
-    RequestedActions._ext = [u'notifyBehaviour', u'resetEventsDescriptor']
+    RequestedActions._ext = ['notifyBehaviour', 'resetEventsDescriptor']
     
     #-----< EventDM >-----#
-    EventDM = CHOICE(name=u'EventDM', mode=MODE_TYPE)
-    _EventDM_digitMapName = OCT_STR(name=u'digitMapName', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'DigitMapName')))
-    _EventDM_digitMapValue = SEQ(name=u'digitMapValue', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'DigitMapValue')))
+    EventDM = CHOICE(name='EventDM', mode=MODE_TYPE)
+    _EventDM_digitMapName = OCT_STR(name='digitMapName', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'DigitMapName')))
+    _EventDM_digitMapValue = SEQ(name='digitMapValue', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'DigitMapValue')))
     EventDM._cont = ASN1Dict([
-        (u'digitMapName', _EventDM_digitMapName),
-        (u'digitMapValue', _EventDM_digitMapValue),
+        ('digitMapName', _EventDM_digitMapName),
+        ('digitMapValue', _EventDM_digitMapValue),
         ])
     EventDM._ext = None
     
     #-----< SecondEventsDescriptor >-----#
-    SecondEventsDescriptor = SEQ(name=u'SecondEventsDescriptor', mode=MODE_TYPE)
-    _SecondEventsDescriptor_requestID = INT(name=u'requestID', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'RequestID')), opt=True)
-    _SecondEventsDescriptor_eventList = SEQ_OF(name=u'eventList', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    SecondEventsDescriptor = SEQ(name='SecondEventsDescriptor', mode=MODE_TYPE)
+    _SecondEventsDescriptor_requestID = INT(name='requestID', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'RequestID')), opt=True)
+    _SecondEventsDescriptor_eventList = SEQ_OF(name='eventList', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     __SecondEventsDescriptor_eventList__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'SecondRequestedEvent')))
     _SecondEventsDescriptor_eventList._cont = __SecondEventsDescriptor_eventList__item_
     SecondEventsDescriptor._cont = ASN1Dict([
-        (u'requestID', _SecondEventsDescriptor_requestID),
-        (u'eventList', _SecondEventsDescriptor_eventList),
+        ('requestID', _SecondEventsDescriptor_requestID),
+        ('eventList', _SecondEventsDescriptor_eventList),
         ])
     SecondEventsDescriptor._ext = []
     
     #-----< SecondRequestedEvent >-----#
-    SecondRequestedEvent = SEQ(name=u'SecondRequestedEvent', mode=MODE_TYPE)
-    _SecondRequestedEvent_pkgdName = OCT_STR(name=u'pkgdName', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'PkgdName')))
-    _SecondRequestedEvent_streamID = INT(name=u'streamID', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'StreamID')), opt=True)
-    _SecondRequestedEvent_eventAction = SEQ(name=u'eventAction', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'SecondRequestedActions')), opt=True)
-    _SecondRequestedEvent_evParList = SEQ_OF(name=u'evParList', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    SecondRequestedEvent = SEQ(name='SecondRequestedEvent', mode=MODE_TYPE)
+    _SecondRequestedEvent_pkgdName = OCT_STR(name='pkgdName', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'PkgdName')))
+    _SecondRequestedEvent_streamID = INT(name='streamID', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'StreamID')), opt=True)
+    _SecondRequestedEvent_eventAction = SEQ(name='eventAction', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'SecondRequestedActions')), opt=True)
+    _SecondRequestedEvent_evParList = SEQ_OF(name='evParList', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     __SecondRequestedEvent_evParList__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'EventParameter')))
     _SecondRequestedEvent_evParList._cont = __SecondRequestedEvent_evParList__item_
     SecondRequestedEvent._cont = ASN1Dict([
-        (u'pkgdName', _SecondRequestedEvent_pkgdName),
-        (u'streamID', _SecondRequestedEvent_streamID),
-        (u'eventAction', _SecondRequestedEvent_eventAction),
-        (u'evParList', _SecondRequestedEvent_evParList),
+        ('pkgdName', _SecondRequestedEvent_pkgdName),
+        ('streamID', _SecondRequestedEvent_streamID),
+        ('eventAction', _SecondRequestedEvent_eventAction),
+        ('evParList', _SecondRequestedEvent_evParList),
         ])
     SecondRequestedEvent._ext = []
     
     #-----< SecondRequestedActions >-----#
-    SecondRequestedActions = SEQ(name=u'SecondRequestedActions', mode=MODE_TYPE)
-    _SecondRequestedActions_keepActive = BOOL(name=u'keepActive', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _SecondRequestedActions_eventDM = CHOICE(name=u'eventDM', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'EventDM')), opt=True)
-    _SecondRequestedActions_signalsDescriptor = SEQ_OF(name=u'signalsDescriptor', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'SignalsDescriptor')), opt=True)
-    _SecondRequestedActions_notifyBehaviour = CHOICE(name=u'notifyBehaviour', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'NotifyBehaviour')), opt=True)
-    _SecondRequestedActions_resetEventsDescriptor = NULL(name=u'resetEventsDescriptor', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    SecondRequestedActions = SEQ(name='SecondRequestedActions', mode=MODE_TYPE)
+    _SecondRequestedActions_keepActive = BOOL(name='keepActive', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _SecondRequestedActions_eventDM = CHOICE(name='eventDM', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'EventDM')), opt=True)
+    _SecondRequestedActions_signalsDescriptor = SEQ_OF(name='signalsDescriptor', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'SignalsDescriptor')), opt=True)
+    _SecondRequestedActions_notifyBehaviour = CHOICE(name='notifyBehaviour', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'NotifyBehaviour')), opt=True)
+    _SecondRequestedActions_resetEventsDescriptor = NULL(name='resetEventsDescriptor', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     SecondRequestedActions._cont = ASN1Dict([
-        (u'keepActive', _SecondRequestedActions_keepActive),
-        (u'eventDM', _SecondRequestedActions_eventDM),
-        (u'signalsDescriptor', _SecondRequestedActions_signalsDescriptor),
-        (u'notifyBehaviour', _SecondRequestedActions_notifyBehaviour),
-        (u'resetEventsDescriptor', _SecondRequestedActions_resetEventsDescriptor),
+        ('keepActive', _SecondRequestedActions_keepActive),
+        ('eventDM', _SecondRequestedActions_eventDM),
+        ('signalsDescriptor', _SecondRequestedActions_signalsDescriptor),
+        ('notifyBehaviour', _SecondRequestedActions_notifyBehaviour),
+        ('resetEventsDescriptor', _SecondRequestedActions_resetEventsDescriptor),
         ])
-    SecondRequestedActions._ext = [u'notifyBehaviour', u'resetEventsDescriptor']
+    SecondRequestedActions._ext = ['notifyBehaviour', 'resetEventsDescriptor']
     
     #-----< EventBufferDescriptor >-----#
-    EventBufferDescriptor = SEQ_OF(name=u'EventBufferDescriptor', mode=MODE_TYPE)
+    EventBufferDescriptor = SEQ_OF(name='EventBufferDescriptor', mode=MODE_TYPE)
     _EventBufferDescriptor__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'EventSpec')))
     EventBufferDescriptor._cont = _EventBufferDescriptor__item_
     
     #-----< EventSpec >-----#
-    EventSpec = SEQ(name=u'EventSpec', mode=MODE_TYPE)
-    _EventSpec_eventName = OCT_STR(name=u'eventName', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'EventName')))
-    _EventSpec_streamID = INT(name=u'streamID', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'StreamID')), opt=True)
-    _EventSpec_eventParList = SEQ_OF(name=u'eventParList', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    EventSpec = SEQ(name='EventSpec', mode=MODE_TYPE)
+    _EventSpec_eventName = OCT_STR(name='eventName', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'EventName')))
+    _EventSpec_streamID = INT(name='streamID', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'StreamID')), opt=True)
+    _EventSpec_eventParList = SEQ_OF(name='eventParList', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     __EventSpec_eventParList__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'EventParameter')))
     _EventSpec_eventParList._cont = __EventSpec_eventParList__item_
     EventSpec._cont = ASN1Dict([
-        (u'eventName', _EventSpec_eventName),
-        (u'streamID', _EventSpec_streamID),
-        (u'eventParList', _EventSpec_eventParList),
+        ('eventName', _EventSpec_eventName),
+        ('streamID', _EventSpec_streamID),
+        ('eventParList', _EventSpec_eventParList),
         ])
     EventSpec._ext = []
     
     #-----< SignalsDescriptor >-----#
-    SignalsDescriptor = SEQ_OF(name=u'SignalsDescriptor', mode=MODE_TYPE)
+    SignalsDescriptor = SEQ_OF(name='SignalsDescriptor', mode=MODE_TYPE)
     _SignalsDescriptor__item_ = CHOICE(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'SignalRequest')))
     SignalsDescriptor._cont = _SignalsDescriptor__item_
     
     #-----< SignalRequest >-----#
-    SignalRequest = CHOICE(name=u'SignalRequest', mode=MODE_TYPE)
-    _SignalRequest_signal = SEQ(name=u'signal', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'Signal')))
-    _SignalRequest_seqSigList = SEQ(name=u'seqSigList', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'SeqSigList')))
+    SignalRequest = CHOICE(name='SignalRequest', mode=MODE_TYPE)
+    _SignalRequest_signal = SEQ(name='signal', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'Signal')))
+    _SignalRequest_seqSigList = SEQ(name='seqSigList', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'SeqSigList')))
     SignalRequest._cont = ASN1Dict([
-        (u'signal', _SignalRequest_signal),
-        (u'seqSigList', _SignalRequest_seqSigList),
+        ('signal', _SignalRequest_signal),
+        ('seqSigList', _SignalRequest_seqSigList),
         ])
     SignalRequest._ext = []
     
     #-----< SeqSigList >-----#
-    SeqSigList = SEQ(name=u'SeqSigList', mode=MODE_TYPE)
-    _SeqSigList_id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    SeqSigList = SEQ(name='SeqSigList', mode=MODE_TYPE)
+    _SeqSigList_id = INT(name='id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     _SeqSigList_id._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=65535)], ev=None, er=[])
-    _SeqSigList_signalList = SEQ_OF(name=u'signalList', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _SeqSigList_signalList = SEQ_OF(name='signalList', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     __SeqSigList_signalList__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'Signal')))
     _SeqSigList_signalList._cont = __SeqSigList_signalList__item_
     SeqSigList._cont = ASN1Dict([
-        (u'id', _SeqSigList_id),
-        (u'signalList', _SeqSigList_signalList),
+        ('id', _SeqSigList_id),
+        ('signalList', _SeqSigList_signalList),
         ])
     SeqSigList._ext = None
     
     #-----< Signal >-----#
-    Signal = SEQ(name=u'Signal', mode=MODE_TYPE)
-    _Signal_signalName = OCT_STR(name=u'signalName', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'SignalName')))
-    _Signal_streamID = INT(name=u'streamID', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'StreamID')), opt=True)
-    _Signal_sigType = ENUM(name=u'sigType', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'SignalType')), opt=True)
-    _Signal_duration = INT(name=u'duration', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    Signal = SEQ(name='Signal', mode=MODE_TYPE)
+    _Signal_signalName = OCT_STR(name='signalName', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'SignalName')))
+    _Signal_streamID = INT(name='streamID', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'StreamID')), opt=True)
+    _Signal_sigType = ENUM(name='sigType', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'SignalType')), opt=True)
+    _Signal_duration = INT(name='duration', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     _Signal_duration._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=65535)], ev=None, er=[])
-    _Signal_notifyCompletion = BIT_STR(name=u'notifyCompletion', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'NotifyCompletion')), opt=True)
-    _Signal_keepActive = BOOL(name=u'keepActive', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _Signal_sigParList = SEQ_OF(name=u'sigParList', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _Signal_notifyCompletion = BIT_STR(name='notifyCompletion', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'NotifyCompletion')), opt=True)
+    _Signal_keepActive = BOOL(name='keepActive', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _Signal_sigParList = SEQ_OF(name='sigParList', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     __Signal_sigParList__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'SigParameter')))
     _Signal_sigParList._cont = __Signal_sigParList__item_
-    _Signal_direction = ENUM(name=u'direction', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'SignalDirection')), opt=True)
-    _Signal_requestID = INT(name=u'requestID', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'RequestID')), opt=True)
-    _Signal_intersigDelay = INT(name=u'intersigDelay', mode=MODE_TYPE, tag=(9, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _Signal_direction = ENUM(name='direction', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'SignalDirection')), opt=True)
+    _Signal_requestID = INT(name='requestID', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'RequestID')), opt=True)
+    _Signal_intersigDelay = INT(name='intersigDelay', mode=MODE_TYPE, tag=(9, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     _Signal_intersigDelay._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=65535)], ev=None, er=[])
     Signal._cont = ASN1Dict([
-        (u'signalName', _Signal_signalName),
-        (u'streamID', _Signal_streamID),
-        (u'sigType', _Signal_sigType),
-        (u'duration', _Signal_duration),
-        (u'notifyCompletion', _Signal_notifyCompletion),
-        (u'keepActive', _Signal_keepActive),
-        (u'sigParList', _Signal_sigParList),
-        (u'direction', _Signal_direction),
-        (u'requestID', _Signal_requestID),
-        (u'intersigDelay', _Signal_intersigDelay),
+        ('signalName', _Signal_signalName),
+        ('streamID', _Signal_streamID),
+        ('sigType', _Signal_sigType),
+        ('duration', _Signal_duration),
+        ('notifyCompletion', _Signal_notifyCompletion),
+        ('keepActive', _Signal_keepActive),
+        ('sigParList', _Signal_sigParList),
+        ('direction', _Signal_direction),
+        ('requestID', _Signal_requestID),
+        ('intersigDelay', _Signal_intersigDelay),
         ])
-    Signal._ext = [u'direction', u'requestID', u'intersigDelay']
+    Signal._ext = ['direction', 'requestID', 'intersigDelay']
     
     #-----< SignalType >-----#
-    SignalType = ENUM(name=u'SignalType', mode=MODE_TYPE)
-    SignalType._cont = ASN1Dict([(u'brief', 0), (u'onOff', 1), (u'timeOut', 2)])
+    SignalType = ENUM(name='SignalType', mode=MODE_TYPE)
+    SignalType._cont = ASN1Dict([('brief', 0), ('onOff', 1), ('timeOut', 2)])
     SignalType._ext = []
     
     #-----< SignalDirection >-----#
-    SignalDirection = ENUM(name=u'SignalDirection', mode=MODE_TYPE)
-    SignalDirection._cont = ASN1Dict([(u'internal', 0), (u'external', 1), (u'both', 2)])
+    SignalDirection = ENUM(name='SignalDirection', mode=MODE_TYPE)
+    SignalDirection._cont = ASN1Dict([('internal', 0), ('external', 1), ('both', 2)])
     SignalDirection._ext = []
     
     #-----< SignalName >-----#
-    SignalName = OCT_STR(name=u'SignalName', mode=MODE_TYPE, typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'PkgdName')))
+    SignalName = OCT_STR(name='SignalName', mode=MODE_TYPE, typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'PkgdName')))
     
     #-----< NotifyCompletion >-----#
-    NotifyCompletion = BIT_STR(name=u'NotifyCompletion', mode=MODE_TYPE)
-    NotifyCompletion._cont = ASN1Dict([(u'onTimeOut', 0), (u'onInterruptByEvent', 1), (u'onInterruptByNewSignalDescr', 2), (u'otherReason', 3), (u'onIteration', 4)])
+    NotifyCompletion = BIT_STR(name='NotifyCompletion', mode=MODE_TYPE)
+    NotifyCompletion._cont = ASN1Dict([('onTimeOut', 0), ('onInterruptByEvent', 1), ('onInterruptByNewSignalDescr', 2), ('otherReason', 3), ('onIteration', 4)])
     
     #-----< SigParameter >-----#
-    SigParameter = SEQ(name=u'SigParameter', mode=MODE_TYPE)
-    _SigParameter_sigParameterName = OCT_STR(name=u'sigParameterName', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'Name')))
-    _SigParameter_value = SEQ_OF(name=u'value', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'Value')))
-    _SigParameter_extraInfo = CHOICE(name=u'extraInfo', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), opt=True)
-    __SigParameter_extraInfo_relation = ENUM(name=u'relation', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'Relation')))
-    __SigParameter_extraInfo_range = BOOL(name=u'range', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    __SigParameter_extraInfo_sublist = BOOL(name=u'sublist', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    SigParameter = SEQ(name='SigParameter', mode=MODE_TYPE)
+    _SigParameter_sigParameterName = OCT_STR(name='sigParameterName', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'Name')))
+    _SigParameter_value = SEQ_OF(name='value', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'Value')))
+    _SigParameter_extraInfo = CHOICE(name='extraInfo', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), opt=True)
+    __SigParameter_extraInfo_relation = ENUM(name='relation', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'Relation')))
+    __SigParameter_extraInfo_range = BOOL(name='range', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __SigParameter_extraInfo_sublist = BOOL(name='sublist', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     _SigParameter_extraInfo._cont = ASN1Dict([
-        (u'relation', __SigParameter_extraInfo_relation),
-        (u'range', __SigParameter_extraInfo_range),
-        (u'sublist', __SigParameter_extraInfo_sublist),
+        ('relation', __SigParameter_extraInfo_relation),
+        ('range', __SigParameter_extraInfo_range),
+        ('sublist', __SigParameter_extraInfo_sublist),
         ])
     _SigParameter_extraInfo._ext = None
     SigParameter._cont = ASN1Dict([
-        (u'sigParameterName', _SigParameter_sigParameterName),
-        (u'value', _SigParameter_value),
-        (u'extraInfo', _SigParameter_extraInfo),
+        ('sigParameterName', _SigParameter_sigParameterName),
+        ('value', _SigParameter_value),
+        ('extraInfo', _SigParameter_extraInfo),
         ])
     SigParameter._ext = []
     
     #-----< RequestID >-----#
-    RequestID = INT(name=u'RequestID', mode=MODE_TYPE)
+    RequestID = INT(name='RequestID', mode=MODE_TYPE)
     RequestID._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=4294967295)], ev=None, er=[])
     
     #-----< ModemDescriptor >-----#
-    ModemDescriptor = SEQ(name=u'ModemDescriptor', mode=MODE_TYPE)
-    _ModemDescriptor_mtl = SEQ_OF(name=u'mtl', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    ModemDescriptor = SEQ(name='ModemDescriptor', mode=MODE_TYPE)
+    _ModemDescriptor_mtl = SEQ_OF(name='mtl', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     __ModemDescriptor_mtl__item_ = ENUM(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'ModemType')))
     _ModemDescriptor_mtl._cont = __ModemDescriptor_mtl__item_
-    _ModemDescriptor_mpl = SEQ_OF(name=u'mpl', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _ModemDescriptor_mpl = SEQ_OF(name='mpl', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     __ModemDescriptor_mpl__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'PropertyParm')))
     _ModemDescriptor_mpl._cont = __ModemDescriptor_mpl__item_
-    _ModemDescriptor_nonStandardData = SEQ(name=u'nonStandardData', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'NonStandardData')), opt=True)
+    _ModemDescriptor_nonStandardData = SEQ(name='nonStandardData', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'NonStandardData')), opt=True)
     ModemDescriptor._cont = ASN1Dict([
-        (u'mtl', _ModemDescriptor_mtl),
-        (u'mpl', _ModemDescriptor_mpl),
-        (u'nonStandardData', _ModemDescriptor_nonStandardData),
+        ('mtl', _ModemDescriptor_mtl),
+        ('mpl', _ModemDescriptor_mpl),
+        ('nonStandardData', _ModemDescriptor_nonStandardData),
         ])
     ModemDescriptor._ext = None
     
     #-----< ModemType >-----#
-    ModemType = ENUM(name=u'ModemType', mode=MODE_TYPE)
-    ModemType._cont = ASN1Dict([(u'v18', 0), (u'v22', 1), (u'v22bis', 2), (u'v32', 3), (u'v32bis', 4), (u'v34', 5), (u'v90', 6), (u'v91', 7), (u'synchISDN', 8)])
+    ModemType = ENUM(name='ModemType', mode=MODE_TYPE)
+    ModemType._cont = ASN1Dict([('v18', 0), ('v22', 1), ('v22bis', 2), ('v32', 3), ('v32bis', 4), ('v34', 5), ('v90', 6), ('v91', 7), ('synchISDN', 8)])
     ModemType._ext = []
     
     #-----< DigitMapDescriptor >-----#
-    DigitMapDescriptor = SEQ(name=u'DigitMapDescriptor', mode=MODE_TYPE)
-    _DigitMapDescriptor_digitMapName = OCT_STR(name=u'digitMapName', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'DigitMapName')), opt=True)
-    _DigitMapDescriptor_digitMapValue = SEQ(name=u'digitMapValue', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'DigitMapValue')), opt=True)
+    DigitMapDescriptor = SEQ(name='DigitMapDescriptor', mode=MODE_TYPE)
+    _DigitMapDescriptor_digitMapName = OCT_STR(name='digitMapName', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'DigitMapName')), opt=True)
+    _DigitMapDescriptor_digitMapValue = SEQ(name='digitMapValue', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'DigitMapValue')), opt=True)
     DigitMapDescriptor._cont = ASN1Dict([
-        (u'digitMapName', _DigitMapDescriptor_digitMapName),
-        (u'digitMapValue', _DigitMapDescriptor_digitMapValue),
+        ('digitMapName', _DigitMapDescriptor_digitMapName),
+        ('digitMapValue', _DigitMapDescriptor_digitMapValue),
         ])
     DigitMapDescriptor._ext = None
     
     #-----< DigitMapName >-----#
-    DigitMapName = OCT_STR(name=u'DigitMapName', mode=MODE_TYPE, typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'Name')))
+    DigitMapName = OCT_STR(name='DigitMapName', mode=MODE_TYPE, typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'Name')))
     
     #-----< DigitMapValue >-----#
-    DigitMapValue = SEQ(name=u'DigitMapValue', mode=MODE_TYPE)
-    _DigitMapValue_startTimer = INT(name=u'startTimer', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    DigitMapValue = SEQ(name='DigitMapValue', mode=MODE_TYPE)
+    _DigitMapValue_startTimer = INT(name='startTimer', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     _DigitMapValue_startTimer._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=99)], ev=None, er=[])
-    _DigitMapValue_shortTimer = INT(name=u'shortTimer', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _DigitMapValue_shortTimer = INT(name='shortTimer', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     _DigitMapValue_shortTimer._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=99)], ev=None, er=[])
-    _DigitMapValue_longTimer = INT(name=u'longTimer', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _DigitMapValue_longTimer = INT(name='longTimer', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     _DigitMapValue_longTimer._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=99)], ev=None, er=[])
-    _DigitMapValue_digitMapBody = STR_IA5(name=u'digitMapBody', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _DigitMapValue_durationTimer = INT(name=u'durationTimer', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _DigitMapValue_digitMapBody = STR_IA5(name='digitMapBody', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _DigitMapValue_durationTimer = INT(name='durationTimer', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     _DigitMapValue_durationTimer._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=99)], ev=None, er=[])
     DigitMapValue._cont = ASN1Dict([
-        (u'startTimer', _DigitMapValue_startTimer),
-        (u'shortTimer', _DigitMapValue_shortTimer),
-        (u'longTimer', _DigitMapValue_longTimer),
-        (u'digitMapBody', _DigitMapValue_digitMapBody),
-        (u'durationTimer', _DigitMapValue_durationTimer),
+        ('startTimer', _DigitMapValue_startTimer),
+        ('shortTimer', _DigitMapValue_shortTimer),
+        ('longTimer', _DigitMapValue_longTimer),
+        ('digitMapBody', _DigitMapValue_digitMapBody),
+        ('durationTimer', _DigitMapValue_durationTimer),
         ])
-    DigitMapValue._ext = [u'durationTimer']
+    DigitMapValue._ext = ['durationTimer']
     
     #-----< ServiceChangeParm >-----#
-    ServiceChangeParm = SEQ(name=u'ServiceChangeParm', mode=MODE_TYPE)
-    _ServiceChangeParm_serviceChangeMethod = ENUM(name=u'serviceChangeMethod', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'ServiceChangeMethod')))
-    _ServiceChangeParm_serviceChangeAddress = CHOICE(name=u'serviceChangeAddress', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'ServiceChangeAddress')), opt=True)
-    _ServiceChangeParm_serviceChangeVersion = INT(name=u'serviceChangeVersion', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    ServiceChangeParm = SEQ(name='ServiceChangeParm', mode=MODE_TYPE)
+    _ServiceChangeParm_serviceChangeMethod = ENUM(name='serviceChangeMethod', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'ServiceChangeMethod')))
+    _ServiceChangeParm_serviceChangeAddress = CHOICE(name='serviceChangeAddress', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'ServiceChangeAddress')), opt=True)
+    _ServiceChangeParm_serviceChangeVersion = INT(name='serviceChangeVersion', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     _ServiceChangeParm_serviceChangeVersion._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=99)], ev=None, er=[])
-    _ServiceChangeParm_serviceChangeProfile = SEQ(name=u'serviceChangeProfile', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'ServiceChangeProfile')), opt=True)
-    _ServiceChangeParm_serviceChangeReason = SEQ_OF(name=u'serviceChangeReason', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'Value')))
-    _ServiceChangeParm_serviceChangeDelay = INT(name=u'serviceChangeDelay', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _ServiceChangeParm_serviceChangeProfile = SEQ(name='serviceChangeProfile', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'ServiceChangeProfile')), opt=True)
+    _ServiceChangeParm_serviceChangeReason = SEQ_OF(name='serviceChangeReason', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'Value')))
+    _ServiceChangeParm_serviceChangeDelay = INT(name='serviceChangeDelay', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     _ServiceChangeParm_serviceChangeDelay._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=4294967295)], ev=None, er=[])
-    _ServiceChangeParm_serviceChangeMgcId = CHOICE(name=u'serviceChangeMgcId', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'Mid')), opt=True)
-    _ServiceChangeParm_timeStamp = SEQ(name=u'timeStamp', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'TimeNotation')), opt=True)
-    _ServiceChangeParm_nonStandardData = SEQ(name=u'nonStandardData', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'NonStandardData')), opt=True)
-    _ServiceChangeParm_serviceChangeInfo = SEQ(name=u'serviceChangeInfo', mode=MODE_TYPE, tag=(9, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'AuditDescriptor')), opt=True)
-    _ServiceChangeParm_serviceChangeIncompleteFlag = NULL(name=u'serviceChangeIncompleteFlag', mode=MODE_TYPE, tag=(10, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _ServiceChangeParm_serviceChangeMgcId = CHOICE(name='serviceChangeMgcId', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'Mid')), opt=True)
+    _ServiceChangeParm_timeStamp = SEQ(name='timeStamp', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'TimeNotation')), opt=True)
+    _ServiceChangeParm_nonStandardData = SEQ(name='nonStandardData', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'NonStandardData')), opt=True)
+    _ServiceChangeParm_serviceChangeInfo = SEQ(name='serviceChangeInfo', mode=MODE_TYPE, tag=(9, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'AuditDescriptor')), opt=True)
+    _ServiceChangeParm_serviceChangeIncompleteFlag = NULL(name='serviceChangeIncompleteFlag', mode=MODE_TYPE, tag=(10, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     ServiceChangeParm._cont = ASN1Dict([
-        (u'serviceChangeMethod', _ServiceChangeParm_serviceChangeMethod),
-        (u'serviceChangeAddress', _ServiceChangeParm_serviceChangeAddress),
-        (u'serviceChangeVersion', _ServiceChangeParm_serviceChangeVersion),
-        (u'serviceChangeProfile', _ServiceChangeParm_serviceChangeProfile),
-        (u'serviceChangeReason', _ServiceChangeParm_serviceChangeReason),
-        (u'serviceChangeDelay', _ServiceChangeParm_serviceChangeDelay),
-        (u'serviceChangeMgcId', _ServiceChangeParm_serviceChangeMgcId),
-        (u'timeStamp', _ServiceChangeParm_timeStamp),
-        (u'nonStandardData', _ServiceChangeParm_nonStandardData),
-        (u'serviceChangeInfo', _ServiceChangeParm_serviceChangeInfo),
-        (u'serviceChangeIncompleteFlag', _ServiceChangeParm_serviceChangeIncompleteFlag),
+        ('serviceChangeMethod', _ServiceChangeParm_serviceChangeMethod),
+        ('serviceChangeAddress', _ServiceChangeParm_serviceChangeAddress),
+        ('serviceChangeVersion', _ServiceChangeParm_serviceChangeVersion),
+        ('serviceChangeProfile', _ServiceChangeParm_serviceChangeProfile),
+        ('serviceChangeReason', _ServiceChangeParm_serviceChangeReason),
+        ('serviceChangeDelay', _ServiceChangeParm_serviceChangeDelay),
+        ('serviceChangeMgcId', _ServiceChangeParm_serviceChangeMgcId),
+        ('timeStamp', _ServiceChangeParm_timeStamp),
+        ('nonStandardData', _ServiceChangeParm_nonStandardData),
+        ('serviceChangeInfo', _ServiceChangeParm_serviceChangeInfo),
+        ('serviceChangeIncompleteFlag', _ServiceChangeParm_serviceChangeIncompleteFlag),
         ])
-    ServiceChangeParm._ext = [u'serviceChangeInfo', u'serviceChangeIncompleteFlag']
+    ServiceChangeParm._ext = ['serviceChangeInfo', 'serviceChangeIncompleteFlag']
     
     #-----< ServiceChangeAddress >-----#
-    ServiceChangeAddress = CHOICE(name=u'ServiceChangeAddress', mode=MODE_TYPE)
-    _ServiceChangeAddress_portNumber = INT(name=u'portNumber', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    ServiceChangeAddress = CHOICE(name='ServiceChangeAddress', mode=MODE_TYPE)
+    _ServiceChangeAddress_portNumber = INT(name='portNumber', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     _ServiceChangeAddress_portNumber._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=65535)], ev=None, er=[])
-    _ServiceChangeAddress_ip4Address = SEQ(name=u'ip4Address', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'IP4Address')))
-    _ServiceChangeAddress_ip6Address = SEQ(name=u'ip6Address', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'IP6Address')))
-    _ServiceChangeAddress_domainName = SEQ(name=u'domainName', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'DomainName')))
-    _ServiceChangeAddress_deviceName = STR_IA5(name=u'deviceName', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'PathName')))
-    _ServiceChangeAddress_mtpAddress = OCT_STR(name=u'mtpAddress', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _ServiceChangeAddress_ip4Address = SEQ(name='ip4Address', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'IP4Address')))
+    _ServiceChangeAddress_ip6Address = SEQ(name='ip6Address', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'IP6Address')))
+    _ServiceChangeAddress_domainName = SEQ(name='domainName', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'DomainName')))
+    _ServiceChangeAddress_deviceName = STR_IA5(name='deviceName', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'PathName')))
+    _ServiceChangeAddress_mtpAddress = OCT_STR(name='mtpAddress', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     _ServiceChangeAddress_mtpAddress._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=2, ub=4)], ev=None, er=[])
     ServiceChangeAddress._cont = ASN1Dict([
-        (u'portNumber', _ServiceChangeAddress_portNumber),
-        (u'ip4Address', _ServiceChangeAddress_ip4Address),
-        (u'ip6Address', _ServiceChangeAddress_ip6Address),
-        (u'domainName', _ServiceChangeAddress_domainName),
-        (u'deviceName', _ServiceChangeAddress_deviceName),
-        (u'mtpAddress', _ServiceChangeAddress_mtpAddress),
+        ('portNumber', _ServiceChangeAddress_portNumber),
+        ('ip4Address', _ServiceChangeAddress_ip4Address),
+        ('ip6Address', _ServiceChangeAddress_ip6Address),
+        ('domainName', _ServiceChangeAddress_domainName),
+        ('deviceName', _ServiceChangeAddress_deviceName),
+        ('mtpAddress', _ServiceChangeAddress_mtpAddress),
         ])
     ServiceChangeAddress._ext = []
     
     #-----< ServiceChangeResParm >-----#
-    ServiceChangeResParm = SEQ(name=u'ServiceChangeResParm', mode=MODE_TYPE)
-    _ServiceChangeResParm_serviceChangeMgcId = CHOICE(name=u'serviceChangeMgcId', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'Mid')), opt=True)
-    _ServiceChangeResParm_serviceChangeAddress = CHOICE(name=u'serviceChangeAddress', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'ServiceChangeAddress')), opt=True)
-    _ServiceChangeResParm_serviceChangeVersion = INT(name=u'serviceChangeVersion', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    ServiceChangeResParm = SEQ(name='ServiceChangeResParm', mode=MODE_TYPE)
+    _ServiceChangeResParm_serviceChangeMgcId = CHOICE(name='serviceChangeMgcId', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'Mid')), opt=True)
+    _ServiceChangeResParm_serviceChangeAddress = CHOICE(name='serviceChangeAddress', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'ServiceChangeAddress')), opt=True)
+    _ServiceChangeResParm_serviceChangeVersion = INT(name='serviceChangeVersion', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     _ServiceChangeResParm_serviceChangeVersion._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=99)], ev=None, er=[])
-    _ServiceChangeResParm_serviceChangeProfile = SEQ(name=u'serviceChangeProfile', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'ServiceChangeProfile')), opt=True)
-    _ServiceChangeResParm_timestamp = SEQ(name=u'timestamp', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'TimeNotation')), opt=True)
+    _ServiceChangeResParm_serviceChangeProfile = SEQ(name='serviceChangeProfile', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'ServiceChangeProfile')), opt=True)
+    _ServiceChangeResParm_timestamp = SEQ(name='timestamp', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'TimeNotation')), opt=True)
     ServiceChangeResParm._cont = ASN1Dict([
-        (u'serviceChangeMgcId', _ServiceChangeResParm_serviceChangeMgcId),
-        (u'serviceChangeAddress', _ServiceChangeResParm_serviceChangeAddress),
-        (u'serviceChangeVersion', _ServiceChangeResParm_serviceChangeVersion),
-        (u'serviceChangeProfile', _ServiceChangeResParm_serviceChangeProfile),
-        (u'timestamp', _ServiceChangeResParm_timestamp),
+        ('serviceChangeMgcId', _ServiceChangeResParm_serviceChangeMgcId),
+        ('serviceChangeAddress', _ServiceChangeResParm_serviceChangeAddress),
+        ('serviceChangeVersion', _ServiceChangeResParm_serviceChangeVersion),
+        ('serviceChangeProfile', _ServiceChangeResParm_serviceChangeProfile),
+        ('timestamp', _ServiceChangeResParm_timestamp),
         ])
     ServiceChangeResParm._ext = []
     
     #-----< ServiceChangeMethod >-----#
-    ServiceChangeMethod = ENUM(name=u'ServiceChangeMethod', mode=MODE_TYPE)
-    ServiceChangeMethod._cont = ASN1Dict([(u'failover', 0), (u'forced', 1), (u'graceful', 2), (u'restart', 3), (u'disconnected', 4), (u'handOff', 5)])
+    ServiceChangeMethod = ENUM(name='ServiceChangeMethod', mode=MODE_TYPE)
+    ServiceChangeMethod._cont = ASN1Dict([('failover', 0), ('forced', 1), ('graceful', 2), ('restart', 3), ('disconnected', 4), ('handOff', 5)])
     ServiceChangeMethod._ext = []
     
     #-----< ServiceChangeProfile >-----#
-    ServiceChangeProfile = SEQ(name=u'ServiceChangeProfile', mode=MODE_TYPE)
-    _ServiceChangeProfile_profileName = STR_IA5(name=u'profileName', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    ServiceChangeProfile = SEQ(name='ServiceChangeProfile', mode=MODE_TYPE)
+    _ServiceChangeProfile_profileName = STR_IA5(name='profileName', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     _ServiceChangeProfile_profileName._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=67)], ev=None, er=[])
     ServiceChangeProfile._cont = ASN1Dict([
-        (u'profileName', _ServiceChangeProfile_profileName),
+        ('profileName', _ServiceChangeProfile_profileName),
         ])
     ServiceChangeProfile._ext = None
     
     #-----< PackagesDescriptor >-----#
-    PackagesDescriptor = SEQ_OF(name=u'PackagesDescriptor', mode=MODE_TYPE)
+    PackagesDescriptor = SEQ_OF(name='PackagesDescriptor', mode=MODE_TYPE)
     _PackagesDescriptor__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'PackagesItem')))
     PackagesDescriptor._cont = _PackagesDescriptor__item_
     
     #-----< PackagesItem >-----#
-    PackagesItem = SEQ(name=u'PackagesItem', mode=MODE_TYPE)
-    _PackagesItem_packageName = OCT_STR(name=u'packageName', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'Name')))
-    _PackagesItem_packageVersion = INT(name=u'packageVersion', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    PackagesItem = SEQ(name='PackagesItem', mode=MODE_TYPE)
+    _PackagesItem_packageName = OCT_STR(name='packageName', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'Name')))
+    _PackagesItem_packageVersion = INT(name='packageVersion', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     _PackagesItem_packageVersion._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=99)], ev=None, er=[])
     PackagesItem._cont = ASN1Dict([
-        (u'packageName', _PackagesItem_packageName),
-        (u'packageVersion', _PackagesItem_packageVersion),
+        ('packageName', _PackagesItem_packageName),
+        ('packageVersion', _PackagesItem_packageVersion),
         ])
     PackagesItem._ext = []
     
     #-----< StatisticsDescriptor >-----#
-    StatisticsDescriptor = SEQ_OF(name=u'StatisticsDescriptor', mode=MODE_TYPE)
+    StatisticsDescriptor = SEQ_OF(name='StatisticsDescriptor', mode=MODE_TYPE)
     _StatisticsDescriptor__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'StatisticsParameter')))
     StatisticsDescriptor._cont = _StatisticsDescriptor__item_
     
     #-----< StatisticsParameter >-----#
-    StatisticsParameter = SEQ(name=u'StatisticsParameter', mode=MODE_TYPE)
-    _StatisticsParameter_statName = OCT_STR(name=u'statName', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'PkgdName')))
-    _StatisticsParameter_statValue = SEQ_OF(name=u'statValue', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'Value')), opt=True)
+    StatisticsParameter = SEQ(name='StatisticsParameter', mode=MODE_TYPE)
+    _StatisticsParameter_statName = OCT_STR(name='statName', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'PkgdName')))
+    _StatisticsParameter_statValue = SEQ_OF(name='statValue', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'Value')), opt=True)
     StatisticsParameter._cont = ASN1Dict([
-        (u'statName', _StatisticsParameter_statName),
-        (u'statValue', _StatisticsParameter_statValue),
+        ('statName', _StatisticsParameter_statName),
+        ('statValue', _StatisticsParameter_statValue),
         ])
     StatisticsParameter._ext = None
     
     #-----< NonStandardData >-----#
-    NonStandardData = SEQ(name=u'NonStandardData', mode=MODE_TYPE)
-    _NonStandardData_nonStandardIdentifier = CHOICE(name=u'nonStandardIdentifier', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'NonStandardIdentifier')))
-    _NonStandardData_data = OCT_STR(name=u'data', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    NonStandardData = SEQ(name='NonStandardData', mode=MODE_TYPE)
+    _NonStandardData_nonStandardIdentifier = CHOICE(name='nonStandardIdentifier', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'NonStandardIdentifier')))
+    _NonStandardData_data = OCT_STR(name='data', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     NonStandardData._cont = ASN1Dict([
-        (u'nonStandardIdentifier', _NonStandardData_nonStandardIdentifier),
-        (u'data', _NonStandardData_data),
+        ('nonStandardIdentifier', _NonStandardData_nonStandardIdentifier),
+        ('data', _NonStandardData_data),
         ])
     NonStandardData._ext = None
     
     #-----< NonStandardIdentifier >-----#
-    NonStandardIdentifier = CHOICE(name=u'NonStandardIdentifier', mode=MODE_TYPE)
-    _NonStandardIdentifier_object = OID(name=u'object', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _NonStandardIdentifier_h221NonStandard = SEQ(name=u'h221NonStandard', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'H221NonStandard')))
-    _NonStandardIdentifier_experimental = STR_IA5(name=u'experimental', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    NonStandardIdentifier = CHOICE(name='NonStandardIdentifier', mode=MODE_TYPE)
+    _NonStandardIdentifier_object = OID(name='object', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _NonStandardIdentifier_h221NonStandard = SEQ(name='h221NonStandard', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('MEDIA-GATEWAY-CONTROL', 'H221NonStandard')))
+    _NonStandardIdentifier_experimental = STR_IA5(name='experimental', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     _NonStandardIdentifier_experimental._const_sz = ASN1Set(rv=[8], rr=[], ev=None, er=[])
     NonStandardIdentifier._cont = ASN1Dict([
-        (u'object', _NonStandardIdentifier_object),
-        (u'h221NonStandard', _NonStandardIdentifier_h221NonStandard),
-        (u'experimental', _NonStandardIdentifier_experimental),
+        ('object', _NonStandardIdentifier_object),
+        ('h221NonStandard', _NonStandardIdentifier_h221NonStandard),
+        ('experimental', _NonStandardIdentifier_experimental),
         ])
     NonStandardIdentifier._ext = []
     
     #-----< H221NonStandard >-----#
-    H221NonStandard = SEQ(name=u'H221NonStandard', mode=MODE_TYPE)
-    _H221NonStandard_t35CountryCode1 = INT(name=u't35CountryCode1', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    H221NonStandard = SEQ(name='H221NonStandard', mode=MODE_TYPE)
+    _H221NonStandard_t35CountryCode1 = INT(name='t35CountryCode1', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     _H221NonStandard_t35CountryCode1._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=255)], ev=None, er=[])
-    _H221NonStandard_t35CountryCode2 = INT(name=u't35CountryCode2', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _H221NonStandard_t35CountryCode2 = INT(name='t35CountryCode2', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     _H221NonStandard_t35CountryCode2._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=255)], ev=None, er=[])
-    _H221NonStandard_t35Extension = INT(name=u't35Extension', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _H221NonStandard_t35Extension = INT(name='t35Extension', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     _H221NonStandard_t35Extension._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=255)], ev=None, er=[])
-    _H221NonStandard_manufacturerCode = INT(name=u'manufacturerCode', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _H221NonStandard_manufacturerCode = INT(name='manufacturerCode', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     _H221NonStandard_manufacturerCode._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=65535)], ev=None, er=[])
     H221NonStandard._cont = ASN1Dict([
-        (u't35CountryCode1', _H221NonStandard_t35CountryCode1),
-        (u't35CountryCode2', _H221NonStandard_t35CountryCode2),
-        (u't35Extension', _H221NonStandard_t35Extension),
-        (u'manufacturerCode', _H221NonStandard_manufacturerCode),
+        ('t35CountryCode1', _H221NonStandard_t35CountryCode1),
+        ('t35CountryCode2', _H221NonStandard_t35CountryCode2),
+        ('t35Extension', _H221NonStandard_t35Extension),
+        ('manufacturerCode', _H221NonStandard_manufacturerCode),
         ])
     H221NonStandard._ext = []
     
     #-----< TimeNotation >-----#
-    TimeNotation = SEQ(name=u'TimeNotation', mode=MODE_TYPE)
-    _TimeNotation_date = STR_IA5(name=u'date', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    TimeNotation = SEQ(name='TimeNotation', mode=MODE_TYPE)
+    _TimeNotation_date = STR_IA5(name='date', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     _TimeNotation_date._const_sz = ASN1Set(rv=[8], rr=[], ev=None, er=[])
-    _TimeNotation_time = STR_IA5(name=u'time', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _TimeNotation_time = STR_IA5(name='time', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     _TimeNotation_time._const_sz = ASN1Set(rv=[8], rr=[], ev=None, er=[])
     TimeNotation._cont = ASN1Dict([
-        (u'date', _TimeNotation_date),
-        (u'time', _TimeNotation_time),
+        ('date', _TimeNotation_date),
+        ('time', _TimeNotation_time),
         ])
     TimeNotation._ext = None
     
     #-----< Value >-----#
-    Value = SEQ_OF(name=u'Value', mode=MODE_TYPE)
+    Value = SEQ_OF(name='Value', mode=MODE_TYPE)
     _Value__item_ = OCT_STR(name='_item_', mode=MODE_TYPE)
     Value._cont = _Value__item_
     

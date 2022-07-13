@@ -16,130 +16,130 @@ from pycrate_asn1rt.init             import init_modules
 
 class KerberosV5Spec2:
 
-    _name_  = u'KerberosV5Spec2'
+    _name_  = 'KerberosV5Spec2'
     _oid_   = [1, 3, 6, 1, 5, 2, 4, 2]
     
     _obj_ = [
-        u'id-krb5',
-        u'Int32',
-        u'UInt32',
-        u'Microseconds',
-        u'KerberosString',
-        u'Realm',
-        u'PrincipalName',
-        u'KerberosTime',
-        u'HostAddress',
-        u'HostAddresses',
-        u'AuthorizationData',
-        u'PA-DATA',
-        u'KerberosFlags',
-        u'EncryptedData',
-        u'EncryptionKey',
-        u'Checksum',
-        u'Ticket',
-        u'EncTicketPart',
-        u'TransitedEncoding',
-        u'TicketFlags',
-        u'AS-REQ',
-        u'TGS-REQ',
-        u'KDC-REQ',
-        u'KDC-REQ-BODY',
-        u'KDCOptions',
-        u'AS-REP',
-        u'TGS-REP',
-        u'KDC-REP',
-        u'EncASRepPart',
-        u'EncTGSRepPart',
-        u'EncKDCRepPart',
-        u'LastReq',
-        u'AP-REQ',
-        u'APOptions',
-        u'Authenticator',
-        u'AP-REP',
-        u'EncAPRepPart',
-        u'KRB-SAFE',
-        u'KRB-SAFE-BODY',
-        u'KRB-PRIV',
-        u'EncKrbPrivPart',
-        u'KRB-CRED',
-        u'EncKrbCredPart',
-        u'KrbCredInfo',
-        u'KRB-ERROR',
-        u'METHOD-DATA',
-        u'TYPED-DATA',
-        u'PA-ENC-TIMESTAMP',
-        u'PA-ENC-TS-ENC',
-        u'ETYPE-INFO-ENTRY',
-        u'ETYPE-INFO',
-        u'ETYPE-INFO2-ENTRY',
-        u'ETYPE-INFO2',
-        u'AD-IF-RELEVANT',
-        u'AD-KDCIssued',
-        u'AD-AND-OR',
-        u'AD-MANDATORY-FOR-KDC',
+        'id-krb5',
+        'Int32',
+        'UInt32',
+        'Microseconds',
+        'KerberosString',
+        'Realm',
+        'PrincipalName',
+        'KerberosTime',
+        'HostAddress',
+        'HostAddresses',
+        'AuthorizationData',
+        'PA-DATA',
+        'KerberosFlags',
+        'EncryptedData',
+        'EncryptionKey',
+        'Checksum',
+        'Ticket',
+        'EncTicketPart',
+        'TransitedEncoding',
+        'TicketFlags',
+        'AS-REQ',
+        'TGS-REQ',
+        'KDC-REQ',
+        'KDC-REQ-BODY',
+        'KDCOptions',
+        'AS-REP',
+        'TGS-REP',
+        'KDC-REP',
+        'EncASRepPart',
+        'EncTGSRepPart',
+        'EncKDCRepPart',
+        'LastReq',
+        'AP-REQ',
+        'APOptions',
+        'Authenticator',
+        'AP-REP',
+        'EncAPRepPart',
+        'KRB-SAFE',
+        'KRB-SAFE-BODY',
+        'KRB-PRIV',
+        'EncKrbPrivPart',
+        'KRB-CRED',
+        'EncKrbCredPart',
+        'KrbCredInfo',
+        'KRB-ERROR',
+        'METHOD-DATA',
+        'TYPED-DATA',
+        'PA-ENC-TIMESTAMP',
+        'PA-ENC-TS-ENC',
+        'ETYPE-INFO-ENTRY',
+        'ETYPE-INFO',
+        'ETYPE-INFO2-ENTRY',
+        'ETYPE-INFO2',
+        'AD-IF-RELEVANT',
+        'AD-KDCIssued',
+        'AD-AND-OR',
+        'AD-MANDATORY-FOR-KDC',
         ]
     _type_ = [
-        u'Int32',
-        u'UInt32',
-        u'Microseconds',
-        u'KerberosString',
-        u'Realm',
-        u'PrincipalName',
-        u'KerberosTime',
-        u'HostAddress',
-        u'HostAddresses',
-        u'AuthorizationData',
-        u'PA-DATA',
-        u'KerberosFlags',
-        u'EncryptedData',
-        u'EncryptionKey',
-        u'Checksum',
-        u'Ticket',
-        u'EncTicketPart',
-        u'TransitedEncoding',
-        u'TicketFlags',
-        u'AS-REQ',
-        u'TGS-REQ',
-        u'KDC-REQ',
-        u'KDC-REQ-BODY',
-        u'KDCOptions',
-        u'AS-REP',
-        u'TGS-REP',
-        u'KDC-REP',
-        u'EncASRepPart',
-        u'EncTGSRepPart',
-        u'EncKDCRepPart',
-        u'LastReq',
-        u'AP-REQ',
-        u'APOptions',
-        u'Authenticator',
-        u'AP-REP',
-        u'EncAPRepPart',
-        u'KRB-SAFE',
-        u'KRB-SAFE-BODY',
-        u'KRB-PRIV',
-        u'EncKrbPrivPart',
-        u'KRB-CRED',
-        u'EncKrbCredPart',
-        u'KrbCredInfo',
-        u'KRB-ERROR',
-        u'METHOD-DATA',
-        u'TYPED-DATA',
-        u'PA-ENC-TIMESTAMP',
-        u'PA-ENC-TS-ENC',
-        u'ETYPE-INFO-ENTRY',
-        u'ETYPE-INFO',
-        u'ETYPE-INFO2-ENTRY',
-        u'ETYPE-INFO2',
-        u'AD-IF-RELEVANT',
-        u'AD-KDCIssued',
-        u'AD-AND-OR',
-        u'AD-MANDATORY-FOR-KDC',
+        'Int32',
+        'UInt32',
+        'Microseconds',
+        'KerberosString',
+        'Realm',
+        'PrincipalName',
+        'KerberosTime',
+        'HostAddress',
+        'HostAddresses',
+        'AuthorizationData',
+        'PA-DATA',
+        'KerberosFlags',
+        'EncryptedData',
+        'EncryptionKey',
+        'Checksum',
+        'Ticket',
+        'EncTicketPart',
+        'TransitedEncoding',
+        'TicketFlags',
+        'AS-REQ',
+        'TGS-REQ',
+        'KDC-REQ',
+        'KDC-REQ-BODY',
+        'KDCOptions',
+        'AS-REP',
+        'TGS-REP',
+        'KDC-REP',
+        'EncASRepPart',
+        'EncTGSRepPart',
+        'EncKDCRepPart',
+        'LastReq',
+        'AP-REQ',
+        'APOptions',
+        'Authenticator',
+        'AP-REP',
+        'EncAPRepPart',
+        'KRB-SAFE',
+        'KRB-SAFE-BODY',
+        'KRB-PRIV',
+        'EncKrbPrivPart',
+        'KRB-CRED',
+        'EncKrbCredPart',
+        'KrbCredInfo',
+        'KRB-ERROR',
+        'METHOD-DATA',
+        'TYPED-DATA',
+        'PA-ENC-TIMESTAMP',
+        'PA-ENC-TS-ENC',
+        'ETYPE-INFO-ENTRY',
+        'ETYPE-INFO',
+        'ETYPE-INFO2-ENTRY',
+        'ETYPE-INFO2',
+        'AD-IF-RELEVANT',
+        'AD-KDCIssued',
+        'AD-AND-OR',
+        'AD-MANDATORY-FOR-KDC',
         ]
     _set_ = [
         ]
     _val_ = [
-        u'id-krb5',
+        'id-krb5',
         ]
     _class_ = [
         ]
@@ -147,644 +147,644 @@ class KerberosV5Spec2:
         ]
     
     #-----< id-krb5 >-----#
-    id_krb5 = OID(name=u'id-krb5', mode=MODE_VALUE)
+    id_krb5 = OID(name='id-krb5', mode=MODE_VALUE)
     id_krb5._val = (1, 3, 6, 1, 5, 2)
     
     #-----< Int32 >-----#
-    Int32 = INT(name=u'Int32', mode=MODE_TYPE)
+    Int32 = INT(name='Int32', mode=MODE_TYPE)
     Int32._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=-2147483648, ub=2147483647)], ev=None, er=[])
     
     #-----< UInt32 >-----#
-    UInt32 = INT(name=u'UInt32', mode=MODE_TYPE)
+    UInt32 = INT(name='UInt32', mode=MODE_TYPE)
     UInt32._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=4294967295)], ev=None, er=[])
     
     #-----< Microseconds >-----#
-    Microseconds = INT(name=u'Microseconds', mode=MODE_TYPE)
+    Microseconds = INT(name='Microseconds', mode=MODE_TYPE)
     Microseconds._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=999999)], ev=None, er=[])
     
     #-----< KerberosString >-----#
-    KerberosString = STR_GENE(name=u'KerberosString', mode=MODE_TYPE)
+    KerberosString = STR_GENE(name='KerberosString', mode=MODE_TYPE)
     KerberosString._const_val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     
     #-----< Realm >-----#
-    Realm = STR_GENE(name=u'Realm', mode=MODE_TYPE, typeref=ASN1RefType(('KerberosV5Spec2', 'KerberosString')))
+    Realm = STR_GENE(name='Realm', mode=MODE_TYPE, typeref=ASN1RefType(('KerberosV5Spec2', 'KerberosString')))
     
     #-----< PrincipalName >-----#
-    PrincipalName = SEQ(name=u'PrincipalName', mode=MODE_TYPE)
-    _PrincipalName_name_type = INT(name=u'name-type', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'Int32')))
-    _PrincipalName_name_string = SEQ_OF(name=u'name-string', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
+    PrincipalName = SEQ(name='PrincipalName', mode=MODE_TYPE)
+    _PrincipalName_name_type = INT(name='name-type', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'Int32')))
+    _PrincipalName_name_string = SEQ_OF(name='name-string', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
     __PrincipalName_name_string__item_ = STR_GENE(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('KerberosV5Spec2', 'KerberosString')))
     _PrincipalName_name_string._cont = __PrincipalName_name_string__item_
     PrincipalName._cont = ASN1Dict([
-        (u'name-type', _PrincipalName_name_type),
-        (u'name-string', _PrincipalName_name_string),
+        ('name-type', _PrincipalName_name_type),
+        ('name-string', _PrincipalName_name_string),
         ])
     PrincipalName._ext = None
     
     #-----< KerberosTime >-----#
-    KerberosTime = TIME_GEN(name=u'KerberosTime', mode=MODE_TYPE)
+    KerberosTime = TIME_GEN(name='KerberosTime', mode=MODE_TYPE)
     
     #-----< HostAddress >-----#
-    HostAddress = SEQ(name=u'HostAddress', mode=MODE_TYPE)
-    _HostAddress_addr_type = INT(name=u'addr-type', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'Int32')))
-    _HostAddress_address = OCT_STR(name=u'address', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
+    HostAddress = SEQ(name='HostAddress', mode=MODE_TYPE)
+    _HostAddress_addr_type = INT(name='addr-type', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'Int32')))
+    _HostAddress_address = OCT_STR(name='address', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
     HostAddress._cont = ASN1Dict([
-        (u'addr-type', _HostAddress_addr_type),
-        (u'address', _HostAddress_address),
+        ('addr-type', _HostAddress_addr_type),
+        ('address', _HostAddress_address),
         ])
     HostAddress._ext = None
     
     #-----< HostAddresses >-----#
-    HostAddresses = SEQ_OF(name=u'HostAddresses', mode=MODE_TYPE)
+    HostAddresses = SEQ_OF(name='HostAddresses', mode=MODE_TYPE)
     _HostAddresses__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('KerberosV5Spec2', 'HostAddress')))
     HostAddresses._cont = _HostAddresses__item_
     
     #-----< AuthorizationData >-----#
-    AuthorizationData = SEQ_OF(name=u'AuthorizationData', mode=MODE_TYPE)
+    AuthorizationData = SEQ_OF(name='AuthorizationData', mode=MODE_TYPE)
     _AuthorizationData__item_ = SEQ(name='_item_', mode=MODE_TYPE)
-    __AuthorizationData__item__ad_type = INT(name=u'ad-type', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'Int32')))
-    __AuthorizationData__item__ad_data = OCT_STR(name=u'ad-data', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
+    __AuthorizationData__item__ad_type = INT(name='ad-type', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'Int32')))
+    __AuthorizationData__item__ad_data = OCT_STR(name='ad-data', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
     _AuthorizationData__item_._cont = ASN1Dict([
-        (u'ad-type', __AuthorizationData__item__ad_type),
-        (u'ad-data', __AuthorizationData__item__ad_data),
+        ('ad-type', __AuthorizationData__item__ad_type),
+        ('ad-data', __AuthorizationData__item__ad_data),
         ])
     _AuthorizationData__item_._ext = None
     AuthorizationData._cont = _AuthorizationData__item_
     
     #-----< PA-DATA >-----#
-    PA_DATA = SEQ(name=u'PA-DATA', mode=MODE_TYPE)
-    _PA_DATA_padata_type = INT(name=u'padata-type', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'Int32')))
-    _PA_DATA_padata_value = OCT_STR(name=u'padata-value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
+    PA_DATA = SEQ(name='PA-DATA', mode=MODE_TYPE)
+    _PA_DATA_padata_type = INT(name='padata-type', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'Int32')))
+    _PA_DATA_padata_value = OCT_STR(name='padata-value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
     PA_DATA._cont = ASN1Dict([
-        (u'padata-type', _PA_DATA_padata_type),
-        (u'padata-value', _PA_DATA_padata_value),
+        ('padata-type', _PA_DATA_padata_type),
+        ('padata-value', _PA_DATA_padata_value),
         ])
     PA_DATA._ext = None
     
     #-----< KerberosFlags >-----#
-    KerberosFlags = BIT_STR(name=u'KerberosFlags', mode=MODE_TYPE)
+    KerberosFlags = BIT_STR(name='KerberosFlags', mode=MODE_TYPE)
     KerberosFlags._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=32, ub=None)], ev=None, er=[])
     
     #-----< EncryptedData >-----#
-    EncryptedData = SEQ(name=u'EncryptedData', mode=MODE_TYPE)
-    _EncryptedData_etype = INT(name=u'etype', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'Int32')))
-    _EncryptedData_kvno = INT(name=u'kvno', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'UInt32')), opt=True)
-    _EncryptedData_cipher = OCT_STR(name=u'cipher', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
+    EncryptedData = SEQ(name='EncryptedData', mode=MODE_TYPE)
+    _EncryptedData_etype = INT(name='etype', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'Int32')))
+    _EncryptedData_kvno = INT(name='kvno', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'UInt32')), opt=True)
+    _EncryptedData_cipher = OCT_STR(name='cipher', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
     EncryptedData._cont = ASN1Dict([
-        (u'etype', _EncryptedData_etype),
-        (u'kvno', _EncryptedData_kvno),
-        (u'cipher', _EncryptedData_cipher),
+        ('etype', _EncryptedData_etype),
+        ('kvno', _EncryptedData_kvno),
+        ('cipher', _EncryptedData_cipher),
         ])
     EncryptedData._ext = None
     
     #-----< EncryptionKey >-----#
-    EncryptionKey = SEQ(name=u'EncryptionKey', mode=MODE_TYPE)
-    _EncryptionKey_keytype = INT(name=u'keytype', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'Int32')))
-    _EncryptionKey_keyvalue = OCT_STR(name=u'keyvalue', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
+    EncryptionKey = SEQ(name='EncryptionKey', mode=MODE_TYPE)
+    _EncryptionKey_keytype = INT(name='keytype', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'Int32')))
+    _EncryptionKey_keyvalue = OCT_STR(name='keyvalue', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
     EncryptionKey._cont = ASN1Dict([
-        (u'keytype', _EncryptionKey_keytype),
-        (u'keyvalue', _EncryptionKey_keyvalue),
+        ('keytype', _EncryptionKey_keytype),
+        ('keyvalue', _EncryptionKey_keyvalue),
         ])
     EncryptionKey._ext = None
     
     #-----< Checksum >-----#
-    Checksum = SEQ(name=u'Checksum', mode=MODE_TYPE)
-    _Checksum_cksumtype = INT(name=u'cksumtype', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'Int32')))
-    _Checksum_checksum = OCT_STR(name=u'checksum', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
+    Checksum = SEQ(name='Checksum', mode=MODE_TYPE)
+    _Checksum_cksumtype = INT(name='cksumtype', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'Int32')))
+    _Checksum_checksum = OCT_STR(name='checksum', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
     Checksum._cont = ASN1Dict([
-        (u'cksumtype', _Checksum_cksumtype),
-        (u'checksum', _Checksum_checksum),
+        ('cksumtype', _Checksum_cksumtype),
+        ('checksum', _Checksum_checksum),
         ])
     Checksum._ext = None
     
     #-----< Ticket >-----#
-    Ticket = SEQ(name=u'Ticket', mode=MODE_TYPE, tag=(1, TAG_APPLICATION, TAG_EXPLICIT))
-    _Ticket_tkt_vno = INT(name=u'tkt-vno', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
+    Ticket = SEQ(name='Ticket', mode=MODE_TYPE, tag=(1, TAG_APPLICATION, TAG_EXPLICIT))
+    _Ticket_tkt_vno = INT(name='tkt-vno', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
     _Ticket_tkt_vno._const_val = ASN1Set(rv=[5], rr=[], ev=None, er=[])
-    _Ticket_realm = STR_GENE(name=u'realm', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'Realm')))
-    _Ticket_sname = SEQ(name=u'sname', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'PrincipalName')))
-    _Ticket_enc_part = SEQ(name=u'enc-part', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'EncryptedData')))
+    _Ticket_realm = STR_GENE(name='realm', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'Realm')))
+    _Ticket_sname = SEQ(name='sname', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'PrincipalName')))
+    _Ticket_enc_part = SEQ(name='enc-part', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'EncryptedData')))
     Ticket._cont = ASN1Dict([
-        (u'tkt-vno', _Ticket_tkt_vno),
-        (u'realm', _Ticket_realm),
-        (u'sname', _Ticket_sname),
-        (u'enc-part', _Ticket_enc_part),
+        ('tkt-vno', _Ticket_tkt_vno),
+        ('realm', _Ticket_realm),
+        ('sname', _Ticket_sname),
+        ('enc-part', _Ticket_enc_part),
         ])
     Ticket._ext = None
     
     #-----< EncTicketPart >-----#
-    EncTicketPart = SEQ(name=u'EncTicketPart', mode=MODE_TYPE, tag=(3, TAG_APPLICATION, TAG_EXPLICIT))
-    _EncTicketPart_flags = BIT_STR(name=u'flags', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'TicketFlags')))
-    _EncTicketPart_key = SEQ(name=u'key', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'EncryptionKey')))
-    _EncTicketPart_crealm = STR_GENE(name=u'crealm', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'Realm')))
-    _EncTicketPart_cname = SEQ(name=u'cname', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'PrincipalName')))
-    _EncTicketPart_transited = SEQ(name=u'transited', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'TransitedEncoding')))
-    _EncTicketPart_authtime = TIME_GEN(name=u'authtime', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'KerberosTime')))
-    _EncTicketPart_starttime = TIME_GEN(name=u'starttime', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'KerberosTime')), opt=True)
-    _EncTicketPart_endtime = TIME_GEN(name=u'endtime', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'KerberosTime')))
-    _EncTicketPart_renew_till = TIME_GEN(name=u'renew-till', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'KerberosTime')), opt=True)
-    _EncTicketPart_caddr = SEQ_OF(name=u'caddr', mode=MODE_TYPE, tag=(9, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'HostAddresses')), opt=True)
-    _EncTicketPart_authorization_data = SEQ_OF(name=u'authorization-data', mode=MODE_TYPE, tag=(10, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'AuthorizationData')), opt=True)
+    EncTicketPart = SEQ(name='EncTicketPart', mode=MODE_TYPE, tag=(3, TAG_APPLICATION, TAG_EXPLICIT))
+    _EncTicketPart_flags = BIT_STR(name='flags', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'TicketFlags')))
+    _EncTicketPart_key = SEQ(name='key', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'EncryptionKey')))
+    _EncTicketPart_crealm = STR_GENE(name='crealm', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'Realm')))
+    _EncTicketPart_cname = SEQ(name='cname', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'PrincipalName')))
+    _EncTicketPart_transited = SEQ(name='transited', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'TransitedEncoding')))
+    _EncTicketPart_authtime = TIME_GEN(name='authtime', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'KerberosTime')))
+    _EncTicketPart_starttime = TIME_GEN(name='starttime', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'KerberosTime')), opt=True)
+    _EncTicketPart_endtime = TIME_GEN(name='endtime', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'KerberosTime')))
+    _EncTicketPart_renew_till = TIME_GEN(name='renew-till', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'KerberosTime')), opt=True)
+    _EncTicketPart_caddr = SEQ_OF(name='caddr', mode=MODE_TYPE, tag=(9, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'HostAddresses')), opt=True)
+    _EncTicketPart_authorization_data = SEQ_OF(name='authorization-data', mode=MODE_TYPE, tag=(10, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'AuthorizationData')), opt=True)
     EncTicketPart._cont = ASN1Dict([
-        (u'flags', _EncTicketPart_flags),
-        (u'key', _EncTicketPart_key),
-        (u'crealm', _EncTicketPart_crealm),
-        (u'cname', _EncTicketPart_cname),
-        (u'transited', _EncTicketPart_transited),
-        (u'authtime', _EncTicketPart_authtime),
-        (u'starttime', _EncTicketPart_starttime),
-        (u'endtime', _EncTicketPart_endtime),
-        (u'renew-till', _EncTicketPart_renew_till),
-        (u'caddr', _EncTicketPart_caddr),
-        (u'authorization-data', _EncTicketPart_authorization_data),
+        ('flags', _EncTicketPart_flags),
+        ('key', _EncTicketPart_key),
+        ('crealm', _EncTicketPart_crealm),
+        ('cname', _EncTicketPart_cname),
+        ('transited', _EncTicketPart_transited),
+        ('authtime', _EncTicketPart_authtime),
+        ('starttime', _EncTicketPart_starttime),
+        ('endtime', _EncTicketPart_endtime),
+        ('renew-till', _EncTicketPart_renew_till),
+        ('caddr', _EncTicketPart_caddr),
+        ('authorization-data', _EncTicketPart_authorization_data),
         ])
     EncTicketPart._ext = None
     
     #-----< TransitedEncoding >-----#
-    TransitedEncoding = SEQ(name=u'TransitedEncoding', mode=MODE_TYPE)
-    _TransitedEncoding_tr_type = INT(name=u'tr-type', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'Int32')))
-    _TransitedEncoding_contents = OCT_STR(name=u'contents', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
+    TransitedEncoding = SEQ(name='TransitedEncoding', mode=MODE_TYPE)
+    _TransitedEncoding_tr_type = INT(name='tr-type', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'Int32')))
+    _TransitedEncoding_contents = OCT_STR(name='contents', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
     TransitedEncoding._cont = ASN1Dict([
-        (u'tr-type', _TransitedEncoding_tr_type),
-        (u'contents', _TransitedEncoding_contents),
+        ('tr-type', _TransitedEncoding_tr_type),
+        ('contents', _TransitedEncoding_contents),
         ])
     TransitedEncoding._ext = None
     
     #-----< TicketFlags >-----#
-    TicketFlags = BIT_STR(name=u'TicketFlags', mode=MODE_TYPE, typeref=ASN1RefType(('KerberosV5Spec2', 'KerberosFlags')))
+    TicketFlags = BIT_STR(name='TicketFlags', mode=MODE_TYPE, typeref=ASN1RefType(('KerberosV5Spec2', 'KerberosFlags')))
     
     #-----< AS-REQ >-----#
-    AS_REQ = SEQ(name=u'AS-REQ', mode=MODE_TYPE, tag=(10, TAG_APPLICATION, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'KDC-REQ')))
+    AS_REQ = SEQ(name='AS-REQ', mode=MODE_TYPE, tag=(10, TAG_APPLICATION, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'KDC-REQ')))
     
     #-----< TGS-REQ >-----#
-    TGS_REQ = SEQ(name=u'TGS-REQ', mode=MODE_TYPE, tag=(12, TAG_APPLICATION, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'KDC-REQ')))
+    TGS_REQ = SEQ(name='TGS-REQ', mode=MODE_TYPE, tag=(12, TAG_APPLICATION, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'KDC-REQ')))
     
     #-----< KDC-REQ >-----#
-    KDC_REQ = SEQ(name=u'KDC-REQ', mode=MODE_TYPE)
-    _KDC_REQ_pvno = INT(name=u'pvno', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
+    KDC_REQ = SEQ(name='KDC-REQ', mode=MODE_TYPE)
+    _KDC_REQ_pvno = INT(name='pvno', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
     _KDC_REQ_pvno._const_val = ASN1Set(rv=[5], rr=[], ev=None, er=[])
-    _KDC_REQ_msg_type = INT(name=u'msg-type', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
+    _KDC_REQ_msg_type = INT(name='msg-type', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
     _KDC_REQ_msg_type._const_val = ASN1Set(rv=[10, 12], rr=[], ev=None, er=[])
-    _KDC_REQ_padata = SEQ_OF(name=u'padata', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_EXPLICIT), opt=True)
+    _KDC_REQ_padata = SEQ_OF(name='padata', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_EXPLICIT), opt=True)
     __KDC_REQ_padata__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('KerberosV5Spec2', 'PA-DATA')))
     _KDC_REQ_padata._cont = __KDC_REQ_padata__item_
-    _KDC_REQ_req_body = SEQ(name=u'req-body', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'KDC-REQ-BODY')))
+    _KDC_REQ_req_body = SEQ(name='req-body', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'KDC-REQ-BODY')))
     KDC_REQ._cont = ASN1Dict([
-        (u'pvno', _KDC_REQ_pvno),
-        (u'msg-type', _KDC_REQ_msg_type),
-        (u'padata', _KDC_REQ_padata),
-        (u'req-body', _KDC_REQ_req_body),
+        ('pvno', _KDC_REQ_pvno),
+        ('msg-type', _KDC_REQ_msg_type),
+        ('padata', _KDC_REQ_padata),
+        ('req-body', _KDC_REQ_req_body),
         ])
     KDC_REQ._ext = None
     
     #-----< KDC-REQ-BODY >-----#
-    KDC_REQ_BODY = SEQ(name=u'KDC-REQ-BODY', mode=MODE_TYPE)
-    _KDC_REQ_BODY_kdc_options = BIT_STR(name=u'kdc-options', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'KDCOptions')))
-    _KDC_REQ_BODY_cname = SEQ(name=u'cname', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'PrincipalName')), opt=True)
-    _KDC_REQ_BODY_realm = STR_GENE(name=u'realm', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'Realm')))
-    _KDC_REQ_BODY_sname = SEQ(name=u'sname', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'PrincipalName')), opt=True)
-    _KDC_REQ_BODY_from_ = TIME_GEN(name=u'from', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'KerberosTime')), opt=True)
-    _KDC_REQ_BODY_till = TIME_GEN(name=u'till', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'KerberosTime')))
-    _KDC_REQ_BODY_rtime = TIME_GEN(name=u'rtime', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'KerberosTime')), opt=True)
-    _KDC_REQ_BODY_nonce = INT(name=u'nonce', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'UInt32')))
-    _KDC_REQ_BODY_etype = SEQ_OF(name=u'etype', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
+    KDC_REQ_BODY = SEQ(name='KDC-REQ-BODY', mode=MODE_TYPE)
+    _KDC_REQ_BODY_kdc_options = BIT_STR(name='kdc-options', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'KDCOptions')))
+    _KDC_REQ_BODY_cname = SEQ(name='cname', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'PrincipalName')), opt=True)
+    _KDC_REQ_BODY_realm = STR_GENE(name='realm', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'Realm')))
+    _KDC_REQ_BODY_sname = SEQ(name='sname', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'PrincipalName')), opt=True)
+    _KDC_REQ_BODY_from_ = TIME_GEN(name='from', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'KerberosTime')), opt=True)
+    _KDC_REQ_BODY_till = TIME_GEN(name='till', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'KerberosTime')))
+    _KDC_REQ_BODY_rtime = TIME_GEN(name='rtime', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'KerberosTime')), opt=True)
+    _KDC_REQ_BODY_nonce = INT(name='nonce', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'UInt32')))
+    _KDC_REQ_BODY_etype = SEQ_OF(name='etype', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
     __KDC_REQ_BODY_etype__item_ = INT(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('KerberosV5Spec2', 'Int32')))
     _KDC_REQ_BODY_etype._cont = __KDC_REQ_BODY_etype__item_
-    _KDC_REQ_BODY_addresses = SEQ_OF(name=u'addresses', mode=MODE_TYPE, tag=(9, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'HostAddresses')), opt=True)
-    _KDC_REQ_BODY_enc_authorization_data = SEQ(name=u'enc-authorization-data', mode=MODE_TYPE, tag=(10, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'EncryptedData')), opt=True)
-    _KDC_REQ_BODY_additional_tickets = SEQ_OF(name=u'additional-tickets', mode=MODE_TYPE, tag=(11, TAG_CONTEXT_SPEC, TAG_EXPLICIT), opt=True)
+    _KDC_REQ_BODY_addresses = SEQ_OF(name='addresses', mode=MODE_TYPE, tag=(9, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'HostAddresses')), opt=True)
+    _KDC_REQ_BODY_enc_authorization_data = SEQ(name='enc-authorization-data', mode=MODE_TYPE, tag=(10, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'EncryptedData')), opt=True)
+    _KDC_REQ_BODY_additional_tickets = SEQ_OF(name='additional-tickets', mode=MODE_TYPE, tag=(11, TAG_CONTEXT_SPEC, TAG_EXPLICIT), opt=True)
     __KDC_REQ_BODY_additional_tickets__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('KerberosV5Spec2', 'Ticket')))
     _KDC_REQ_BODY_additional_tickets._cont = __KDC_REQ_BODY_additional_tickets__item_
     KDC_REQ_BODY._cont = ASN1Dict([
-        (u'kdc-options', _KDC_REQ_BODY_kdc_options),
-        (u'cname', _KDC_REQ_BODY_cname),
-        (u'realm', _KDC_REQ_BODY_realm),
-        (u'sname', _KDC_REQ_BODY_sname),
-        (u'from', _KDC_REQ_BODY_from_),
-        (u'till', _KDC_REQ_BODY_till),
-        (u'rtime', _KDC_REQ_BODY_rtime),
-        (u'nonce', _KDC_REQ_BODY_nonce),
-        (u'etype', _KDC_REQ_BODY_etype),
-        (u'addresses', _KDC_REQ_BODY_addresses),
-        (u'enc-authorization-data', _KDC_REQ_BODY_enc_authorization_data),
-        (u'additional-tickets', _KDC_REQ_BODY_additional_tickets),
+        ('kdc-options', _KDC_REQ_BODY_kdc_options),
+        ('cname', _KDC_REQ_BODY_cname),
+        ('realm', _KDC_REQ_BODY_realm),
+        ('sname', _KDC_REQ_BODY_sname),
+        ('from', _KDC_REQ_BODY_from_),
+        ('till', _KDC_REQ_BODY_till),
+        ('rtime', _KDC_REQ_BODY_rtime),
+        ('nonce', _KDC_REQ_BODY_nonce),
+        ('etype', _KDC_REQ_BODY_etype),
+        ('addresses', _KDC_REQ_BODY_addresses),
+        ('enc-authorization-data', _KDC_REQ_BODY_enc_authorization_data),
+        ('additional-tickets', _KDC_REQ_BODY_additional_tickets),
         ])
     KDC_REQ_BODY._ext = None
     
     #-----< KDCOptions >-----#
-    KDCOptions = BIT_STR(name=u'KDCOptions', mode=MODE_TYPE, typeref=ASN1RefType(('KerberosV5Spec2', 'KerberosFlags')))
+    KDCOptions = BIT_STR(name='KDCOptions', mode=MODE_TYPE, typeref=ASN1RefType(('KerberosV5Spec2', 'KerberosFlags')))
     
     #-----< AS-REP >-----#
-    AS_REP = SEQ(name=u'AS-REP', mode=MODE_TYPE, tag=(11, TAG_APPLICATION, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'KDC-REP')))
+    AS_REP = SEQ(name='AS-REP', mode=MODE_TYPE, tag=(11, TAG_APPLICATION, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'KDC-REP')))
     
     #-----< TGS-REP >-----#
-    TGS_REP = SEQ(name=u'TGS-REP', mode=MODE_TYPE, tag=(13, TAG_APPLICATION, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'KDC-REP')))
+    TGS_REP = SEQ(name='TGS-REP', mode=MODE_TYPE, tag=(13, TAG_APPLICATION, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'KDC-REP')))
     
     #-----< KDC-REP >-----#
-    KDC_REP = SEQ(name=u'KDC-REP', mode=MODE_TYPE)
-    _KDC_REP_pvno = INT(name=u'pvno', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
+    KDC_REP = SEQ(name='KDC-REP', mode=MODE_TYPE)
+    _KDC_REP_pvno = INT(name='pvno', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
     _KDC_REP_pvno._const_val = ASN1Set(rv=[5], rr=[], ev=None, er=[])
-    _KDC_REP_msg_type = INT(name=u'msg-type', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
+    _KDC_REP_msg_type = INT(name='msg-type', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
     _KDC_REP_msg_type._const_val = ASN1Set(rv=[11, 13], rr=[], ev=None, er=[])
-    _KDC_REP_padata = SEQ_OF(name=u'padata', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), opt=True)
+    _KDC_REP_padata = SEQ_OF(name='padata', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), opt=True)
     __KDC_REP_padata__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('KerberosV5Spec2', 'PA-DATA')))
     _KDC_REP_padata._cont = __KDC_REP_padata__item_
-    _KDC_REP_crealm = STR_GENE(name=u'crealm', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'Realm')))
-    _KDC_REP_cname = SEQ(name=u'cname', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'PrincipalName')))
-    _KDC_REP_ticket = SEQ(name=u'ticket', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'Ticket')))
-    _KDC_REP_enc_part = SEQ(name=u'enc-part', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'EncryptedData')))
+    _KDC_REP_crealm = STR_GENE(name='crealm', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'Realm')))
+    _KDC_REP_cname = SEQ(name='cname', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'PrincipalName')))
+    _KDC_REP_ticket = SEQ(name='ticket', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'Ticket')))
+    _KDC_REP_enc_part = SEQ(name='enc-part', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'EncryptedData')))
     KDC_REP._cont = ASN1Dict([
-        (u'pvno', _KDC_REP_pvno),
-        (u'msg-type', _KDC_REP_msg_type),
-        (u'padata', _KDC_REP_padata),
-        (u'crealm', _KDC_REP_crealm),
-        (u'cname', _KDC_REP_cname),
-        (u'ticket', _KDC_REP_ticket),
-        (u'enc-part', _KDC_REP_enc_part),
+        ('pvno', _KDC_REP_pvno),
+        ('msg-type', _KDC_REP_msg_type),
+        ('padata', _KDC_REP_padata),
+        ('crealm', _KDC_REP_crealm),
+        ('cname', _KDC_REP_cname),
+        ('ticket', _KDC_REP_ticket),
+        ('enc-part', _KDC_REP_enc_part),
         ])
     KDC_REP._ext = None
     
     #-----< EncASRepPart >-----#
-    EncASRepPart = SEQ(name=u'EncASRepPart', mode=MODE_TYPE, tag=(25, TAG_APPLICATION, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'EncKDCRepPart')))
+    EncASRepPart = SEQ(name='EncASRepPart', mode=MODE_TYPE, tag=(25, TAG_APPLICATION, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'EncKDCRepPart')))
     
     #-----< EncTGSRepPart >-----#
-    EncTGSRepPart = SEQ(name=u'EncTGSRepPart', mode=MODE_TYPE, tag=(26, TAG_APPLICATION, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'EncKDCRepPart')))
+    EncTGSRepPart = SEQ(name='EncTGSRepPart', mode=MODE_TYPE, tag=(26, TAG_APPLICATION, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'EncKDCRepPart')))
     
     #-----< EncKDCRepPart >-----#
-    EncKDCRepPart = SEQ(name=u'EncKDCRepPart', mode=MODE_TYPE)
-    _EncKDCRepPart_key = SEQ(name=u'key', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'EncryptionKey')))
-    _EncKDCRepPart_last_req = SEQ_OF(name=u'last-req', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'LastReq')))
-    _EncKDCRepPart_nonce = INT(name=u'nonce', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'UInt32')))
-    _EncKDCRepPart_key_expiration = TIME_GEN(name=u'key-expiration', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'KerberosTime')), opt=True)
-    _EncKDCRepPart_flags = BIT_STR(name=u'flags', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'TicketFlags')))
-    _EncKDCRepPart_authtime = TIME_GEN(name=u'authtime', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'KerberosTime')))
-    _EncKDCRepPart_starttime = TIME_GEN(name=u'starttime', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'KerberosTime')), opt=True)
-    _EncKDCRepPart_endtime = TIME_GEN(name=u'endtime', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'KerberosTime')))
-    _EncKDCRepPart_renew_till = TIME_GEN(name=u'renew-till', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'KerberosTime')), opt=True)
-    _EncKDCRepPart_srealm = STR_GENE(name=u'srealm', mode=MODE_TYPE, tag=(9, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'Realm')))
-    _EncKDCRepPart_sname = SEQ(name=u'sname', mode=MODE_TYPE, tag=(10, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'PrincipalName')))
-    _EncKDCRepPart_caddr = SEQ_OF(name=u'caddr', mode=MODE_TYPE, tag=(11, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'HostAddresses')), opt=True)
+    EncKDCRepPart = SEQ(name='EncKDCRepPart', mode=MODE_TYPE)
+    _EncKDCRepPart_key = SEQ(name='key', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'EncryptionKey')))
+    _EncKDCRepPart_last_req = SEQ_OF(name='last-req', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'LastReq')))
+    _EncKDCRepPart_nonce = INT(name='nonce', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'UInt32')))
+    _EncKDCRepPart_key_expiration = TIME_GEN(name='key-expiration', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'KerberosTime')), opt=True)
+    _EncKDCRepPart_flags = BIT_STR(name='flags', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'TicketFlags')))
+    _EncKDCRepPart_authtime = TIME_GEN(name='authtime', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'KerberosTime')))
+    _EncKDCRepPart_starttime = TIME_GEN(name='starttime', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'KerberosTime')), opt=True)
+    _EncKDCRepPart_endtime = TIME_GEN(name='endtime', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'KerberosTime')))
+    _EncKDCRepPart_renew_till = TIME_GEN(name='renew-till', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'KerberosTime')), opt=True)
+    _EncKDCRepPart_srealm = STR_GENE(name='srealm', mode=MODE_TYPE, tag=(9, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'Realm')))
+    _EncKDCRepPart_sname = SEQ(name='sname', mode=MODE_TYPE, tag=(10, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'PrincipalName')))
+    _EncKDCRepPart_caddr = SEQ_OF(name='caddr', mode=MODE_TYPE, tag=(11, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'HostAddresses')), opt=True)
     EncKDCRepPart._cont = ASN1Dict([
-        (u'key', _EncKDCRepPart_key),
-        (u'last-req', _EncKDCRepPart_last_req),
-        (u'nonce', _EncKDCRepPart_nonce),
-        (u'key-expiration', _EncKDCRepPart_key_expiration),
-        (u'flags', _EncKDCRepPart_flags),
-        (u'authtime', _EncKDCRepPart_authtime),
-        (u'starttime', _EncKDCRepPart_starttime),
-        (u'endtime', _EncKDCRepPart_endtime),
-        (u'renew-till', _EncKDCRepPart_renew_till),
-        (u'srealm', _EncKDCRepPart_srealm),
-        (u'sname', _EncKDCRepPart_sname),
-        (u'caddr', _EncKDCRepPart_caddr),
+        ('key', _EncKDCRepPart_key),
+        ('last-req', _EncKDCRepPart_last_req),
+        ('nonce', _EncKDCRepPart_nonce),
+        ('key-expiration', _EncKDCRepPart_key_expiration),
+        ('flags', _EncKDCRepPart_flags),
+        ('authtime', _EncKDCRepPart_authtime),
+        ('starttime', _EncKDCRepPart_starttime),
+        ('endtime', _EncKDCRepPart_endtime),
+        ('renew-till', _EncKDCRepPart_renew_till),
+        ('srealm', _EncKDCRepPart_srealm),
+        ('sname', _EncKDCRepPart_sname),
+        ('caddr', _EncKDCRepPart_caddr),
         ])
     EncKDCRepPart._ext = None
     
     #-----< LastReq >-----#
-    LastReq = SEQ_OF(name=u'LastReq', mode=MODE_TYPE)
+    LastReq = SEQ_OF(name='LastReq', mode=MODE_TYPE)
     _LastReq__item_ = SEQ(name='_item_', mode=MODE_TYPE)
-    __LastReq__item__lr_type = INT(name=u'lr-type', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'Int32')))
-    __LastReq__item__lr_value = TIME_GEN(name=u'lr-value', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'KerberosTime')))
+    __LastReq__item__lr_type = INT(name='lr-type', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'Int32')))
+    __LastReq__item__lr_value = TIME_GEN(name='lr-value', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'KerberosTime')))
     _LastReq__item_._cont = ASN1Dict([
-        (u'lr-type', __LastReq__item__lr_type),
-        (u'lr-value', __LastReq__item__lr_value),
+        ('lr-type', __LastReq__item__lr_type),
+        ('lr-value', __LastReq__item__lr_value),
         ])
     _LastReq__item_._ext = None
     LastReq._cont = _LastReq__item_
     
     #-----< AP-REQ >-----#
-    AP_REQ = SEQ(name=u'AP-REQ', mode=MODE_TYPE, tag=(14, TAG_APPLICATION, TAG_EXPLICIT))
-    _AP_REQ_pvno = INT(name=u'pvno', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
+    AP_REQ = SEQ(name='AP-REQ', mode=MODE_TYPE, tag=(14, TAG_APPLICATION, TAG_EXPLICIT))
+    _AP_REQ_pvno = INT(name='pvno', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
     _AP_REQ_pvno._const_val = ASN1Set(rv=[5], rr=[], ev=None, er=[])
-    _AP_REQ_msg_type = INT(name=u'msg-type', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
+    _AP_REQ_msg_type = INT(name='msg-type', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
     _AP_REQ_msg_type._const_val = ASN1Set(rv=[14], rr=[], ev=None, er=[])
-    _AP_REQ_ap_options = BIT_STR(name=u'ap-options', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'APOptions')))
-    _AP_REQ_ticket = SEQ(name=u'ticket', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'Ticket')))
-    _AP_REQ_authenticator = SEQ(name=u'authenticator', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'EncryptedData')))
+    _AP_REQ_ap_options = BIT_STR(name='ap-options', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'APOptions')))
+    _AP_REQ_ticket = SEQ(name='ticket', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'Ticket')))
+    _AP_REQ_authenticator = SEQ(name='authenticator', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'EncryptedData')))
     AP_REQ._cont = ASN1Dict([
-        (u'pvno', _AP_REQ_pvno),
-        (u'msg-type', _AP_REQ_msg_type),
-        (u'ap-options', _AP_REQ_ap_options),
-        (u'ticket', _AP_REQ_ticket),
-        (u'authenticator', _AP_REQ_authenticator),
+        ('pvno', _AP_REQ_pvno),
+        ('msg-type', _AP_REQ_msg_type),
+        ('ap-options', _AP_REQ_ap_options),
+        ('ticket', _AP_REQ_ticket),
+        ('authenticator', _AP_REQ_authenticator),
         ])
     AP_REQ._ext = None
     
     #-----< APOptions >-----#
-    APOptions = BIT_STR(name=u'APOptions', mode=MODE_TYPE, typeref=ASN1RefType(('KerberosV5Spec2', 'KerberosFlags')))
+    APOptions = BIT_STR(name='APOptions', mode=MODE_TYPE, typeref=ASN1RefType(('KerberosV5Spec2', 'KerberosFlags')))
     
     #-----< Authenticator >-----#
-    Authenticator = SEQ(name=u'Authenticator', mode=MODE_TYPE, tag=(2, TAG_APPLICATION, TAG_EXPLICIT))
-    _Authenticator_authenticator_vno = INT(name=u'authenticator-vno', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
+    Authenticator = SEQ(name='Authenticator', mode=MODE_TYPE, tag=(2, TAG_APPLICATION, TAG_EXPLICIT))
+    _Authenticator_authenticator_vno = INT(name='authenticator-vno', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
     _Authenticator_authenticator_vno._const_val = ASN1Set(rv=[5], rr=[], ev=None, er=[])
-    _Authenticator_crealm = STR_GENE(name=u'crealm', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'Realm')))
-    _Authenticator_cname = SEQ(name=u'cname', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'PrincipalName')))
-    _Authenticator_cksum = SEQ(name=u'cksum', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'Checksum')), opt=True)
-    _Authenticator_cusec = INT(name=u'cusec', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'Microseconds')))
-    _Authenticator_ctime = TIME_GEN(name=u'ctime', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'KerberosTime')))
-    _Authenticator_subkey = SEQ(name=u'subkey', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'EncryptionKey')), opt=True)
-    _Authenticator_seq_number = INT(name=u'seq-number', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'UInt32')), opt=True)
-    _Authenticator_authorization_data = SEQ_OF(name=u'authorization-data', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'AuthorizationData')), opt=True)
+    _Authenticator_crealm = STR_GENE(name='crealm', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'Realm')))
+    _Authenticator_cname = SEQ(name='cname', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'PrincipalName')))
+    _Authenticator_cksum = SEQ(name='cksum', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'Checksum')), opt=True)
+    _Authenticator_cusec = INT(name='cusec', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'Microseconds')))
+    _Authenticator_ctime = TIME_GEN(name='ctime', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'KerberosTime')))
+    _Authenticator_subkey = SEQ(name='subkey', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'EncryptionKey')), opt=True)
+    _Authenticator_seq_number = INT(name='seq-number', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'UInt32')), opt=True)
+    _Authenticator_authorization_data = SEQ_OF(name='authorization-data', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'AuthorizationData')), opt=True)
     Authenticator._cont = ASN1Dict([
-        (u'authenticator-vno', _Authenticator_authenticator_vno),
-        (u'crealm', _Authenticator_crealm),
-        (u'cname', _Authenticator_cname),
-        (u'cksum', _Authenticator_cksum),
-        (u'cusec', _Authenticator_cusec),
-        (u'ctime', _Authenticator_ctime),
-        (u'subkey', _Authenticator_subkey),
-        (u'seq-number', _Authenticator_seq_number),
-        (u'authorization-data', _Authenticator_authorization_data),
+        ('authenticator-vno', _Authenticator_authenticator_vno),
+        ('crealm', _Authenticator_crealm),
+        ('cname', _Authenticator_cname),
+        ('cksum', _Authenticator_cksum),
+        ('cusec', _Authenticator_cusec),
+        ('ctime', _Authenticator_ctime),
+        ('subkey', _Authenticator_subkey),
+        ('seq-number', _Authenticator_seq_number),
+        ('authorization-data', _Authenticator_authorization_data),
         ])
     Authenticator._ext = None
     
     #-----< AP-REP >-----#
-    AP_REP = SEQ(name=u'AP-REP', mode=MODE_TYPE, tag=(15, TAG_APPLICATION, TAG_EXPLICIT))
-    _AP_REP_pvno = INT(name=u'pvno', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
+    AP_REP = SEQ(name='AP-REP', mode=MODE_TYPE, tag=(15, TAG_APPLICATION, TAG_EXPLICIT))
+    _AP_REP_pvno = INT(name='pvno', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
     _AP_REP_pvno._const_val = ASN1Set(rv=[5], rr=[], ev=None, er=[])
-    _AP_REP_msg_type = INT(name=u'msg-type', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
+    _AP_REP_msg_type = INT(name='msg-type', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
     _AP_REP_msg_type._const_val = ASN1Set(rv=[15], rr=[], ev=None, er=[])
-    _AP_REP_enc_part = SEQ(name=u'enc-part', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'EncryptedData')))
+    _AP_REP_enc_part = SEQ(name='enc-part', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'EncryptedData')))
     AP_REP._cont = ASN1Dict([
-        (u'pvno', _AP_REP_pvno),
-        (u'msg-type', _AP_REP_msg_type),
-        (u'enc-part', _AP_REP_enc_part),
+        ('pvno', _AP_REP_pvno),
+        ('msg-type', _AP_REP_msg_type),
+        ('enc-part', _AP_REP_enc_part),
         ])
     AP_REP._ext = None
     
     #-----< EncAPRepPart >-----#
-    EncAPRepPart = SEQ(name=u'EncAPRepPart', mode=MODE_TYPE, tag=(27, TAG_APPLICATION, TAG_EXPLICIT))
-    _EncAPRepPart_ctime = TIME_GEN(name=u'ctime', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'KerberosTime')))
-    _EncAPRepPart_cusec = INT(name=u'cusec', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'Microseconds')))
-    _EncAPRepPart_subkey = SEQ(name=u'subkey', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'EncryptionKey')), opt=True)
-    _EncAPRepPart_seq_number = INT(name=u'seq-number', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'UInt32')), opt=True)
+    EncAPRepPart = SEQ(name='EncAPRepPart', mode=MODE_TYPE, tag=(27, TAG_APPLICATION, TAG_EXPLICIT))
+    _EncAPRepPart_ctime = TIME_GEN(name='ctime', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'KerberosTime')))
+    _EncAPRepPart_cusec = INT(name='cusec', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'Microseconds')))
+    _EncAPRepPart_subkey = SEQ(name='subkey', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'EncryptionKey')), opt=True)
+    _EncAPRepPart_seq_number = INT(name='seq-number', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'UInt32')), opt=True)
     EncAPRepPart._cont = ASN1Dict([
-        (u'ctime', _EncAPRepPart_ctime),
-        (u'cusec', _EncAPRepPart_cusec),
-        (u'subkey', _EncAPRepPart_subkey),
-        (u'seq-number', _EncAPRepPart_seq_number),
+        ('ctime', _EncAPRepPart_ctime),
+        ('cusec', _EncAPRepPart_cusec),
+        ('subkey', _EncAPRepPart_subkey),
+        ('seq-number', _EncAPRepPart_seq_number),
         ])
     EncAPRepPart._ext = None
     
     #-----< KRB-SAFE >-----#
-    KRB_SAFE = SEQ(name=u'KRB-SAFE', mode=MODE_TYPE, tag=(20, TAG_APPLICATION, TAG_EXPLICIT))
-    _KRB_SAFE_pvno = INT(name=u'pvno', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
+    KRB_SAFE = SEQ(name='KRB-SAFE', mode=MODE_TYPE, tag=(20, TAG_APPLICATION, TAG_EXPLICIT))
+    _KRB_SAFE_pvno = INT(name='pvno', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
     _KRB_SAFE_pvno._const_val = ASN1Set(rv=[5], rr=[], ev=None, er=[])
-    _KRB_SAFE_msg_type = INT(name=u'msg-type', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
+    _KRB_SAFE_msg_type = INT(name='msg-type', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
     _KRB_SAFE_msg_type._const_val = ASN1Set(rv=[20], rr=[], ev=None, er=[])
-    _KRB_SAFE_safe_body = SEQ(name=u'safe-body', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'KRB-SAFE-BODY')))
-    _KRB_SAFE_cksum = SEQ(name=u'cksum', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'Checksum')))
+    _KRB_SAFE_safe_body = SEQ(name='safe-body', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'KRB-SAFE-BODY')))
+    _KRB_SAFE_cksum = SEQ(name='cksum', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'Checksum')))
     KRB_SAFE._cont = ASN1Dict([
-        (u'pvno', _KRB_SAFE_pvno),
-        (u'msg-type', _KRB_SAFE_msg_type),
-        (u'safe-body', _KRB_SAFE_safe_body),
-        (u'cksum', _KRB_SAFE_cksum),
+        ('pvno', _KRB_SAFE_pvno),
+        ('msg-type', _KRB_SAFE_msg_type),
+        ('safe-body', _KRB_SAFE_safe_body),
+        ('cksum', _KRB_SAFE_cksum),
         ])
     KRB_SAFE._ext = None
     
     #-----< KRB-SAFE-BODY >-----#
-    KRB_SAFE_BODY = SEQ(name=u'KRB-SAFE-BODY', mode=MODE_TYPE)
-    _KRB_SAFE_BODY_user_data = OCT_STR(name=u'user-data', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
-    _KRB_SAFE_BODY_timestamp = TIME_GEN(name=u'timestamp', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'KerberosTime')), opt=True)
-    _KRB_SAFE_BODY_usec = INT(name=u'usec', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'Microseconds')), opt=True)
-    _KRB_SAFE_BODY_seq_number = INT(name=u'seq-number', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'UInt32')), opt=True)
-    _KRB_SAFE_BODY_s_address = SEQ(name=u's-address', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'HostAddress')))
-    _KRB_SAFE_BODY_r_address = SEQ(name=u'r-address', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'HostAddress')), opt=True)
+    KRB_SAFE_BODY = SEQ(name='KRB-SAFE-BODY', mode=MODE_TYPE)
+    _KRB_SAFE_BODY_user_data = OCT_STR(name='user-data', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
+    _KRB_SAFE_BODY_timestamp = TIME_GEN(name='timestamp', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'KerberosTime')), opt=True)
+    _KRB_SAFE_BODY_usec = INT(name='usec', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'Microseconds')), opt=True)
+    _KRB_SAFE_BODY_seq_number = INT(name='seq-number', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'UInt32')), opt=True)
+    _KRB_SAFE_BODY_s_address = SEQ(name='s-address', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'HostAddress')))
+    _KRB_SAFE_BODY_r_address = SEQ(name='r-address', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'HostAddress')), opt=True)
     KRB_SAFE_BODY._cont = ASN1Dict([
-        (u'user-data', _KRB_SAFE_BODY_user_data),
-        (u'timestamp', _KRB_SAFE_BODY_timestamp),
-        (u'usec', _KRB_SAFE_BODY_usec),
-        (u'seq-number', _KRB_SAFE_BODY_seq_number),
-        (u's-address', _KRB_SAFE_BODY_s_address),
-        (u'r-address', _KRB_SAFE_BODY_r_address),
+        ('user-data', _KRB_SAFE_BODY_user_data),
+        ('timestamp', _KRB_SAFE_BODY_timestamp),
+        ('usec', _KRB_SAFE_BODY_usec),
+        ('seq-number', _KRB_SAFE_BODY_seq_number),
+        ('s-address', _KRB_SAFE_BODY_s_address),
+        ('r-address', _KRB_SAFE_BODY_r_address),
         ])
     KRB_SAFE_BODY._ext = None
     
     #-----< KRB-PRIV >-----#
-    KRB_PRIV = SEQ(name=u'KRB-PRIV', mode=MODE_TYPE, tag=(21, TAG_APPLICATION, TAG_EXPLICIT))
-    _KRB_PRIV_pvno = INT(name=u'pvno', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
+    KRB_PRIV = SEQ(name='KRB-PRIV', mode=MODE_TYPE, tag=(21, TAG_APPLICATION, TAG_EXPLICIT))
+    _KRB_PRIV_pvno = INT(name='pvno', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
     _KRB_PRIV_pvno._const_val = ASN1Set(rv=[5], rr=[], ev=None, er=[])
-    _KRB_PRIV_msg_type = INT(name=u'msg-type', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
+    _KRB_PRIV_msg_type = INT(name='msg-type', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
     _KRB_PRIV_msg_type._const_val = ASN1Set(rv=[21], rr=[], ev=None, er=[])
-    _KRB_PRIV_enc_part = SEQ(name=u'enc-part', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'EncryptedData')))
+    _KRB_PRIV_enc_part = SEQ(name='enc-part', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'EncryptedData')))
     KRB_PRIV._cont = ASN1Dict([
-        (u'pvno', _KRB_PRIV_pvno),
-        (u'msg-type', _KRB_PRIV_msg_type),
-        (u'enc-part', _KRB_PRIV_enc_part),
+        ('pvno', _KRB_PRIV_pvno),
+        ('msg-type', _KRB_PRIV_msg_type),
+        ('enc-part', _KRB_PRIV_enc_part),
         ])
     KRB_PRIV._ext = None
     
     #-----< EncKrbPrivPart >-----#
-    EncKrbPrivPart = SEQ(name=u'EncKrbPrivPart', mode=MODE_TYPE, tag=(28, TAG_APPLICATION, TAG_EXPLICIT))
-    _EncKrbPrivPart_user_data = OCT_STR(name=u'user-data', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
-    _EncKrbPrivPart_timestamp = TIME_GEN(name=u'timestamp', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'KerberosTime')), opt=True)
-    _EncKrbPrivPart_usec = INT(name=u'usec', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'Microseconds')), opt=True)
-    _EncKrbPrivPart_seq_number = INT(name=u'seq-number', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'UInt32')), opt=True)
-    _EncKrbPrivPart_s_address = SEQ(name=u's-address', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'HostAddress')))
-    _EncKrbPrivPart_r_address = SEQ(name=u'r-address', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'HostAddress')), opt=True)
+    EncKrbPrivPart = SEQ(name='EncKrbPrivPart', mode=MODE_TYPE, tag=(28, TAG_APPLICATION, TAG_EXPLICIT))
+    _EncKrbPrivPart_user_data = OCT_STR(name='user-data', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
+    _EncKrbPrivPart_timestamp = TIME_GEN(name='timestamp', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'KerberosTime')), opt=True)
+    _EncKrbPrivPart_usec = INT(name='usec', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'Microseconds')), opt=True)
+    _EncKrbPrivPart_seq_number = INT(name='seq-number', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'UInt32')), opt=True)
+    _EncKrbPrivPart_s_address = SEQ(name='s-address', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'HostAddress')))
+    _EncKrbPrivPart_r_address = SEQ(name='r-address', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'HostAddress')), opt=True)
     EncKrbPrivPart._cont = ASN1Dict([
-        (u'user-data', _EncKrbPrivPart_user_data),
-        (u'timestamp', _EncKrbPrivPart_timestamp),
-        (u'usec', _EncKrbPrivPart_usec),
-        (u'seq-number', _EncKrbPrivPart_seq_number),
-        (u's-address', _EncKrbPrivPart_s_address),
-        (u'r-address', _EncKrbPrivPart_r_address),
+        ('user-data', _EncKrbPrivPart_user_data),
+        ('timestamp', _EncKrbPrivPart_timestamp),
+        ('usec', _EncKrbPrivPart_usec),
+        ('seq-number', _EncKrbPrivPart_seq_number),
+        ('s-address', _EncKrbPrivPart_s_address),
+        ('r-address', _EncKrbPrivPart_r_address),
         ])
     EncKrbPrivPart._ext = None
     
     #-----< KRB-CRED >-----#
-    KRB_CRED = SEQ(name=u'KRB-CRED', mode=MODE_TYPE, tag=(22, TAG_APPLICATION, TAG_EXPLICIT))
-    _KRB_CRED_pvno = INT(name=u'pvno', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
+    KRB_CRED = SEQ(name='KRB-CRED', mode=MODE_TYPE, tag=(22, TAG_APPLICATION, TAG_EXPLICIT))
+    _KRB_CRED_pvno = INT(name='pvno', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
     _KRB_CRED_pvno._const_val = ASN1Set(rv=[5], rr=[], ev=None, er=[])
-    _KRB_CRED_msg_type = INT(name=u'msg-type', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
+    _KRB_CRED_msg_type = INT(name='msg-type', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
     _KRB_CRED_msg_type._const_val = ASN1Set(rv=[22], rr=[], ev=None, er=[])
-    _KRB_CRED_tickets = SEQ_OF(name=u'tickets', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
+    _KRB_CRED_tickets = SEQ_OF(name='tickets', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
     __KRB_CRED_tickets__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('KerberosV5Spec2', 'Ticket')))
     _KRB_CRED_tickets._cont = __KRB_CRED_tickets__item_
-    _KRB_CRED_enc_part = SEQ(name=u'enc-part', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'EncryptedData')))
+    _KRB_CRED_enc_part = SEQ(name='enc-part', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'EncryptedData')))
     KRB_CRED._cont = ASN1Dict([
-        (u'pvno', _KRB_CRED_pvno),
-        (u'msg-type', _KRB_CRED_msg_type),
-        (u'tickets', _KRB_CRED_tickets),
-        (u'enc-part', _KRB_CRED_enc_part),
+        ('pvno', _KRB_CRED_pvno),
+        ('msg-type', _KRB_CRED_msg_type),
+        ('tickets', _KRB_CRED_tickets),
+        ('enc-part', _KRB_CRED_enc_part),
         ])
     KRB_CRED._ext = None
     
     #-----< EncKrbCredPart >-----#
-    EncKrbCredPart = SEQ(name=u'EncKrbCredPart', mode=MODE_TYPE, tag=(29, TAG_APPLICATION, TAG_EXPLICIT))
-    _EncKrbCredPart_ticket_info = SEQ_OF(name=u'ticket-info', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
+    EncKrbCredPart = SEQ(name='EncKrbCredPart', mode=MODE_TYPE, tag=(29, TAG_APPLICATION, TAG_EXPLICIT))
+    _EncKrbCredPart_ticket_info = SEQ_OF(name='ticket-info', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
     __EncKrbCredPart_ticket_info__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('KerberosV5Spec2', 'KrbCredInfo')))
     _EncKrbCredPart_ticket_info._cont = __EncKrbCredPart_ticket_info__item_
-    _EncKrbCredPart_nonce = INT(name=u'nonce', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'UInt32')), opt=True)
-    _EncKrbCredPart_timestamp = TIME_GEN(name=u'timestamp', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'KerberosTime')), opt=True)
-    _EncKrbCredPart_usec = INT(name=u'usec', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'Microseconds')), opt=True)
-    _EncKrbCredPart_s_address = SEQ(name=u's-address', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'HostAddress')), opt=True)
-    _EncKrbCredPart_r_address = SEQ(name=u'r-address', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'HostAddress')), opt=True)
+    _EncKrbCredPart_nonce = INT(name='nonce', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'UInt32')), opt=True)
+    _EncKrbCredPart_timestamp = TIME_GEN(name='timestamp', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'KerberosTime')), opt=True)
+    _EncKrbCredPart_usec = INT(name='usec', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'Microseconds')), opt=True)
+    _EncKrbCredPart_s_address = SEQ(name='s-address', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'HostAddress')), opt=True)
+    _EncKrbCredPart_r_address = SEQ(name='r-address', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'HostAddress')), opt=True)
     EncKrbCredPart._cont = ASN1Dict([
-        (u'ticket-info', _EncKrbCredPart_ticket_info),
-        (u'nonce', _EncKrbCredPart_nonce),
-        (u'timestamp', _EncKrbCredPart_timestamp),
-        (u'usec', _EncKrbCredPart_usec),
-        (u's-address', _EncKrbCredPart_s_address),
-        (u'r-address', _EncKrbCredPart_r_address),
+        ('ticket-info', _EncKrbCredPart_ticket_info),
+        ('nonce', _EncKrbCredPart_nonce),
+        ('timestamp', _EncKrbCredPart_timestamp),
+        ('usec', _EncKrbCredPart_usec),
+        ('s-address', _EncKrbCredPart_s_address),
+        ('r-address', _EncKrbCredPart_r_address),
         ])
     EncKrbCredPart._ext = None
     
     #-----< KrbCredInfo >-----#
-    KrbCredInfo = SEQ(name=u'KrbCredInfo', mode=MODE_TYPE)
-    _KrbCredInfo_key = SEQ(name=u'key', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'EncryptionKey')))
-    _KrbCredInfo_prealm = STR_GENE(name=u'prealm', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'Realm')), opt=True)
-    _KrbCredInfo_pname = SEQ(name=u'pname', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'PrincipalName')), opt=True)
-    _KrbCredInfo_flags = BIT_STR(name=u'flags', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'TicketFlags')), opt=True)
-    _KrbCredInfo_authtime = TIME_GEN(name=u'authtime', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'KerberosTime')), opt=True)
-    _KrbCredInfo_starttime = TIME_GEN(name=u'starttime', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'KerberosTime')), opt=True)
-    _KrbCredInfo_endtime = TIME_GEN(name=u'endtime', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'KerberosTime')), opt=True)
-    _KrbCredInfo_renew_till = TIME_GEN(name=u'renew-till', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'KerberosTime')), opt=True)
-    _KrbCredInfo_srealm = STR_GENE(name=u'srealm', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'Realm')), opt=True)
-    _KrbCredInfo_sname = SEQ(name=u'sname', mode=MODE_TYPE, tag=(9, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'PrincipalName')), opt=True)
-    _KrbCredInfo_caddr = SEQ_OF(name=u'caddr', mode=MODE_TYPE, tag=(10, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'HostAddresses')), opt=True)
+    KrbCredInfo = SEQ(name='KrbCredInfo', mode=MODE_TYPE)
+    _KrbCredInfo_key = SEQ(name='key', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'EncryptionKey')))
+    _KrbCredInfo_prealm = STR_GENE(name='prealm', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'Realm')), opt=True)
+    _KrbCredInfo_pname = SEQ(name='pname', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'PrincipalName')), opt=True)
+    _KrbCredInfo_flags = BIT_STR(name='flags', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'TicketFlags')), opt=True)
+    _KrbCredInfo_authtime = TIME_GEN(name='authtime', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'KerberosTime')), opt=True)
+    _KrbCredInfo_starttime = TIME_GEN(name='starttime', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'KerberosTime')), opt=True)
+    _KrbCredInfo_endtime = TIME_GEN(name='endtime', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'KerberosTime')), opt=True)
+    _KrbCredInfo_renew_till = TIME_GEN(name='renew-till', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'KerberosTime')), opt=True)
+    _KrbCredInfo_srealm = STR_GENE(name='srealm', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'Realm')), opt=True)
+    _KrbCredInfo_sname = SEQ(name='sname', mode=MODE_TYPE, tag=(9, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'PrincipalName')), opt=True)
+    _KrbCredInfo_caddr = SEQ_OF(name='caddr', mode=MODE_TYPE, tag=(10, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'HostAddresses')), opt=True)
     KrbCredInfo._cont = ASN1Dict([
-        (u'key', _KrbCredInfo_key),
-        (u'prealm', _KrbCredInfo_prealm),
-        (u'pname', _KrbCredInfo_pname),
-        (u'flags', _KrbCredInfo_flags),
-        (u'authtime', _KrbCredInfo_authtime),
-        (u'starttime', _KrbCredInfo_starttime),
-        (u'endtime', _KrbCredInfo_endtime),
-        (u'renew-till', _KrbCredInfo_renew_till),
-        (u'srealm', _KrbCredInfo_srealm),
-        (u'sname', _KrbCredInfo_sname),
-        (u'caddr', _KrbCredInfo_caddr),
+        ('key', _KrbCredInfo_key),
+        ('prealm', _KrbCredInfo_prealm),
+        ('pname', _KrbCredInfo_pname),
+        ('flags', _KrbCredInfo_flags),
+        ('authtime', _KrbCredInfo_authtime),
+        ('starttime', _KrbCredInfo_starttime),
+        ('endtime', _KrbCredInfo_endtime),
+        ('renew-till', _KrbCredInfo_renew_till),
+        ('srealm', _KrbCredInfo_srealm),
+        ('sname', _KrbCredInfo_sname),
+        ('caddr', _KrbCredInfo_caddr),
         ])
     KrbCredInfo._ext = None
     
     #-----< KRB-ERROR >-----#
-    KRB_ERROR = SEQ(name=u'KRB-ERROR', mode=MODE_TYPE, tag=(30, TAG_APPLICATION, TAG_EXPLICIT))
-    _KRB_ERROR_pvno = INT(name=u'pvno', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
+    KRB_ERROR = SEQ(name='KRB-ERROR', mode=MODE_TYPE, tag=(30, TAG_APPLICATION, TAG_EXPLICIT))
+    _KRB_ERROR_pvno = INT(name='pvno', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
     _KRB_ERROR_pvno._const_val = ASN1Set(rv=[5], rr=[], ev=None, er=[])
-    _KRB_ERROR_msg_type = INT(name=u'msg-type', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
+    _KRB_ERROR_msg_type = INT(name='msg-type', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
     _KRB_ERROR_msg_type._const_val = ASN1Set(rv=[30], rr=[], ev=None, er=[])
-    _KRB_ERROR_ctime = TIME_GEN(name=u'ctime', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'KerberosTime')), opt=True)
-    _KRB_ERROR_cusec = INT(name=u'cusec', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'Microseconds')), opt=True)
-    _KRB_ERROR_stime = TIME_GEN(name=u'stime', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'KerberosTime')))
-    _KRB_ERROR_susec = INT(name=u'susec', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'Microseconds')))
-    _KRB_ERROR_error_code = INT(name=u'error-code', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'Int32')))
-    _KRB_ERROR_crealm = STR_GENE(name=u'crealm', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'Realm')), opt=True)
-    _KRB_ERROR_cname = SEQ(name=u'cname', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'PrincipalName')), opt=True)
-    _KRB_ERROR_realm = STR_GENE(name=u'realm', mode=MODE_TYPE, tag=(9, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'Realm')))
-    _KRB_ERROR_sname = SEQ(name=u'sname', mode=MODE_TYPE, tag=(10, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'PrincipalName')))
-    _KRB_ERROR_e_text = STR_GENE(name=u'e-text', mode=MODE_TYPE, tag=(11, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'KerberosString')), opt=True)
-    _KRB_ERROR_e_data = OCT_STR(name=u'e-data', mode=MODE_TYPE, tag=(12, TAG_CONTEXT_SPEC, TAG_EXPLICIT), opt=True)
+    _KRB_ERROR_ctime = TIME_GEN(name='ctime', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'KerberosTime')), opt=True)
+    _KRB_ERROR_cusec = INT(name='cusec', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'Microseconds')), opt=True)
+    _KRB_ERROR_stime = TIME_GEN(name='stime', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'KerberosTime')))
+    _KRB_ERROR_susec = INT(name='susec', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'Microseconds')))
+    _KRB_ERROR_error_code = INT(name='error-code', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'Int32')))
+    _KRB_ERROR_crealm = STR_GENE(name='crealm', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'Realm')), opt=True)
+    _KRB_ERROR_cname = SEQ(name='cname', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'PrincipalName')), opt=True)
+    _KRB_ERROR_realm = STR_GENE(name='realm', mode=MODE_TYPE, tag=(9, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'Realm')))
+    _KRB_ERROR_sname = SEQ(name='sname', mode=MODE_TYPE, tag=(10, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'PrincipalName')))
+    _KRB_ERROR_e_text = STR_GENE(name='e-text', mode=MODE_TYPE, tag=(11, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'KerberosString')), opt=True)
+    _KRB_ERROR_e_data = OCT_STR(name='e-data', mode=MODE_TYPE, tag=(12, TAG_CONTEXT_SPEC, TAG_EXPLICIT), opt=True)
     KRB_ERROR._cont = ASN1Dict([
-        (u'pvno', _KRB_ERROR_pvno),
-        (u'msg-type', _KRB_ERROR_msg_type),
-        (u'ctime', _KRB_ERROR_ctime),
-        (u'cusec', _KRB_ERROR_cusec),
-        (u'stime', _KRB_ERROR_stime),
-        (u'susec', _KRB_ERROR_susec),
-        (u'error-code', _KRB_ERROR_error_code),
-        (u'crealm', _KRB_ERROR_crealm),
-        (u'cname', _KRB_ERROR_cname),
-        (u'realm', _KRB_ERROR_realm),
-        (u'sname', _KRB_ERROR_sname),
-        (u'e-text', _KRB_ERROR_e_text),
-        (u'e-data', _KRB_ERROR_e_data),
+        ('pvno', _KRB_ERROR_pvno),
+        ('msg-type', _KRB_ERROR_msg_type),
+        ('ctime', _KRB_ERROR_ctime),
+        ('cusec', _KRB_ERROR_cusec),
+        ('stime', _KRB_ERROR_stime),
+        ('susec', _KRB_ERROR_susec),
+        ('error-code', _KRB_ERROR_error_code),
+        ('crealm', _KRB_ERROR_crealm),
+        ('cname', _KRB_ERROR_cname),
+        ('realm', _KRB_ERROR_realm),
+        ('sname', _KRB_ERROR_sname),
+        ('e-text', _KRB_ERROR_e_text),
+        ('e-data', _KRB_ERROR_e_data),
         ])
     KRB_ERROR._ext = None
     
     #-----< METHOD-DATA >-----#
-    METHOD_DATA = SEQ_OF(name=u'METHOD-DATA', mode=MODE_TYPE)
+    METHOD_DATA = SEQ_OF(name='METHOD-DATA', mode=MODE_TYPE)
     _METHOD_DATA__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('KerberosV5Spec2', 'PA-DATA')))
     METHOD_DATA._cont = _METHOD_DATA__item_
     
     #-----< TYPED-DATA >-----#
-    TYPED_DATA = SEQ_OF(name=u'TYPED-DATA', mode=MODE_TYPE)
+    TYPED_DATA = SEQ_OF(name='TYPED-DATA', mode=MODE_TYPE)
     _TYPED_DATA__item_ = SEQ(name='_item_', mode=MODE_TYPE)
-    __TYPED_DATA__item__data_type = INT(name=u'data-type', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'Int32')))
-    __TYPED_DATA__item__data_value = OCT_STR(name=u'data-value', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), opt=True)
+    __TYPED_DATA__item__data_type = INT(name='data-type', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'Int32')))
+    __TYPED_DATA__item__data_value = OCT_STR(name='data-value', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), opt=True)
     _TYPED_DATA__item_._cont = ASN1Dict([
-        (u'data-type', __TYPED_DATA__item__data_type),
-        (u'data-value', __TYPED_DATA__item__data_value),
+        ('data-type', __TYPED_DATA__item__data_type),
+        ('data-value', __TYPED_DATA__item__data_value),
         ])
     _TYPED_DATA__item_._ext = None
     TYPED_DATA._cont = _TYPED_DATA__item_
     TYPED_DATA._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=None)], ev=None, er=[])
     
     #-----< PA-ENC-TIMESTAMP >-----#
-    PA_ENC_TIMESTAMP = SEQ(name=u'PA-ENC-TIMESTAMP', mode=MODE_TYPE, typeref=ASN1RefType(('KerberosV5Spec2', 'EncryptedData')))
+    PA_ENC_TIMESTAMP = SEQ(name='PA-ENC-TIMESTAMP', mode=MODE_TYPE, typeref=ASN1RefType(('KerberosV5Spec2', 'EncryptedData')))
     
     #-----< PA-ENC-TS-ENC >-----#
-    PA_ENC_TS_ENC = SEQ(name=u'PA-ENC-TS-ENC', mode=MODE_TYPE)
-    _PA_ENC_TS_ENC_patimestamp = TIME_GEN(name=u'patimestamp', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'KerberosTime')))
-    _PA_ENC_TS_ENC_pausec = INT(name=u'pausec', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'Microseconds')), opt=True)
+    PA_ENC_TS_ENC = SEQ(name='PA-ENC-TS-ENC', mode=MODE_TYPE)
+    _PA_ENC_TS_ENC_patimestamp = TIME_GEN(name='patimestamp', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'KerberosTime')))
+    _PA_ENC_TS_ENC_pausec = INT(name='pausec', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'Microseconds')), opt=True)
     PA_ENC_TS_ENC._cont = ASN1Dict([
-        (u'patimestamp', _PA_ENC_TS_ENC_patimestamp),
-        (u'pausec', _PA_ENC_TS_ENC_pausec),
+        ('patimestamp', _PA_ENC_TS_ENC_patimestamp),
+        ('pausec', _PA_ENC_TS_ENC_pausec),
         ])
     PA_ENC_TS_ENC._ext = None
     
     #-----< ETYPE-INFO-ENTRY >-----#
-    ETYPE_INFO_ENTRY = SEQ(name=u'ETYPE-INFO-ENTRY', mode=MODE_TYPE)
-    _ETYPE_INFO_ENTRY_etype = INT(name=u'etype', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'Int32')))
-    _ETYPE_INFO_ENTRY_salt = OCT_STR(name=u'salt', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), opt=True)
+    ETYPE_INFO_ENTRY = SEQ(name='ETYPE-INFO-ENTRY', mode=MODE_TYPE)
+    _ETYPE_INFO_ENTRY_etype = INT(name='etype', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'Int32')))
+    _ETYPE_INFO_ENTRY_salt = OCT_STR(name='salt', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), opt=True)
     ETYPE_INFO_ENTRY._cont = ASN1Dict([
-        (u'etype', _ETYPE_INFO_ENTRY_etype),
-        (u'salt', _ETYPE_INFO_ENTRY_salt),
+        ('etype', _ETYPE_INFO_ENTRY_etype),
+        ('salt', _ETYPE_INFO_ENTRY_salt),
         ])
     ETYPE_INFO_ENTRY._ext = None
     
     #-----< ETYPE-INFO >-----#
-    ETYPE_INFO = SEQ_OF(name=u'ETYPE-INFO', mode=MODE_TYPE)
+    ETYPE_INFO = SEQ_OF(name='ETYPE-INFO', mode=MODE_TYPE)
     _ETYPE_INFO__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('KerberosV5Spec2', 'ETYPE-INFO-ENTRY')))
     ETYPE_INFO._cont = _ETYPE_INFO__item_
     
     #-----< ETYPE-INFO2-ENTRY >-----#
-    ETYPE_INFO2_ENTRY = SEQ(name=u'ETYPE-INFO2-ENTRY', mode=MODE_TYPE)
-    _ETYPE_INFO2_ENTRY_etype = INT(name=u'etype', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'Int32')))
-    _ETYPE_INFO2_ENTRY_salt = STR_GENE(name=u'salt', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'KerberosString')), opt=True)
-    _ETYPE_INFO2_ENTRY_s2kparams = OCT_STR(name=u's2kparams', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), opt=True)
+    ETYPE_INFO2_ENTRY = SEQ(name='ETYPE-INFO2-ENTRY', mode=MODE_TYPE)
+    _ETYPE_INFO2_ENTRY_etype = INT(name='etype', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'Int32')))
+    _ETYPE_INFO2_ENTRY_salt = STR_GENE(name='salt', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'KerberosString')), opt=True)
+    _ETYPE_INFO2_ENTRY_s2kparams = OCT_STR(name='s2kparams', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), opt=True)
     ETYPE_INFO2_ENTRY._cont = ASN1Dict([
-        (u'etype', _ETYPE_INFO2_ENTRY_etype),
-        (u'salt', _ETYPE_INFO2_ENTRY_salt),
-        (u's2kparams', _ETYPE_INFO2_ENTRY_s2kparams),
+        ('etype', _ETYPE_INFO2_ENTRY_etype),
+        ('salt', _ETYPE_INFO2_ENTRY_salt),
+        ('s2kparams', _ETYPE_INFO2_ENTRY_s2kparams),
         ])
     ETYPE_INFO2_ENTRY._ext = None
     
     #-----< ETYPE-INFO2 >-----#
-    ETYPE_INFO2 = SEQ_OF(name=u'ETYPE-INFO2', mode=MODE_TYPE)
+    ETYPE_INFO2 = SEQ_OF(name='ETYPE-INFO2', mode=MODE_TYPE)
     _ETYPE_INFO2__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('KerberosV5Spec2', 'ETYPE-INFO2-ENTRY')))
     ETYPE_INFO2._cont = _ETYPE_INFO2__item_
     ETYPE_INFO2._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=None)], ev=None, er=[])
     
     #-----< AD-IF-RELEVANT >-----#
-    AD_IF_RELEVANT = SEQ_OF(name=u'AD-IF-RELEVANT', mode=MODE_TYPE, typeref=ASN1RefType(('KerberosV5Spec2', 'AuthorizationData')))
+    AD_IF_RELEVANT = SEQ_OF(name='AD-IF-RELEVANT', mode=MODE_TYPE, typeref=ASN1RefType(('KerberosV5Spec2', 'AuthorizationData')))
     
     #-----< AD-KDCIssued >-----#
-    AD_KDCIssued = SEQ(name=u'AD-KDCIssued', mode=MODE_TYPE)
-    _AD_KDCIssued_ad_checksum = SEQ(name=u'ad-checksum', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'Checksum')))
-    _AD_KDCIssued_i_realm = STR_GENE(name=u'i-realm', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'Realm')), opt=True)
-    _AD_KDCIssued_i_sname = SEQ(name=u'i-sname', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'PrincipalName')), opt=True)
-    _AD_KDCIssued_elements = SEQ_OF(name=u'elements', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'AuthorizationData')))
+    AD_KDCIssued = SEQ(name='AD-KDCIssued', mode=MODE_TYPE)
+    _AD_KDCIssued_ad_checksum = SEQ(name='ad-checksum', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'Checksum')))
+    _AD_KDCIssued_i_realm = STR_GENE(name='i-realm', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'Realm')), opt=True)
+    _AD_KDCIssued_i_sname = SEQ(name='i-sname', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'PrincipalName')), opt=True)
+    _AD_KDCIssued_elements = SEQ_OF(name='elements', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'AuthorizationData')))
     AD_KDCIssued._cont = ASN1Dict([
-        (u'ad-checksum', _AD_KDCIssued_ad_checksum),
-        (u'i-realm', _AD_KDCIssued_i_realm),
-        (u'i-sname', _AD_KDCIssued_i_sname),
-        (u'elements', _AD_KDCIssued_elements),
+        ('ad-checksum', _AD_KDCIssued_ad_checksum),
+        ('i-realm', _AD_KDCIssued_i_realm),
+        ('i-sname', _AD_KDCIssued_i_sname),
+        ('elements', _AD_KDCIssued_elements),
         ])
     AD_KDCIssued._ext = None
     
     #-----< AD-AND-OR >-----#
-    AD_AND_OR = SEQ(name=u'AD-AND-OR', mode=MODE_TYPE)
-    _AD_AND_OR_condition_count = INT(name=u'condition-count', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'Int32')))
-    _AD_AND_OR_elements = SEQ_OF(name=u'elements', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'AuthorizationData')))
+    AD_AND_OR = SEQ(name='AD-AND-OR', mode=MODE_TYPE)
+    _AD_AND_OR_condition_count = INT(name='condition-count', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'Int32')))
+    _AD_AND_OR_elements = SEQ_OF(name='elements', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('KerberosV5Spec2', 'AuthorizationData')))
     AD_AND_OR._cont = ASN1Dict([
-        (u'condition-count', _AD_AND_OR_condition_count),
-        (u'elements', _AD_AND_OR_elements),
+        ('condition-count', _AD_AND_OR_condition_count),
+        ('elements', _AD_AND_OR_elements),
         ])
     AD_AND_OR._ext = None
     
     #-----< AD-MANDATORY-FOR-KDC >-----#
-    AD_MANDATORY_FOR_KDC = SEQ_OF(name=u'AD-MANDATORY-FOR-KDC', mode=MODE_TYPE, typeref=ASN1RefType(('KerberosV5Spec2', 'AuthorizationData')))
+    AD_MANDATORY_FOR_KDC = SEQ_OF(name='AD-MANDATORY-FOR-KDC', mode=MODE_TYPE, typeref=ASN1RefType(('KerberosV5Spec2', 'AuthorizationData')))
     
     _all_ = [
         id_krb5,

@@ -16,88 +16,88 @@ from pycrate_asn1rt.init             import init_modules
 
 class H235_SECURITY_MESSAGES:
 
-    _name_  = u'H235-SECURITY-MESSAGES'
+    _name_  = 'H235-SECURITY-MESSAGES'
     _oid_   = []
     
     _obj_ = [
-        u'ChallengeString',
-        u'TimeStamp',
-        u'RandomVal',
-        u'Password',
-        u'Identifier',
-        u'KeyMaterial',
-        u'KeyMaterialExt',
-        u'NonStandardParameter',
-        u'DHset',
-        u'DHsetExt',
-        u'ECpoint',
-        u'ECKASDH',
-        u'ECGDSASignature',
-        u'TypedCertificate',
-        u'AuthenticationBES',
-        u'AuthenticationMechanism',
-        u'ClearToken',
-        u'ProfileElement',
-        u'Element',
-        u'SIGNED',
-        u'ENCRYPTED',
-        u'HASHED',
-        u'IV8',
-        u'IV16',
-        u'Params',
-        u'EncodedGeneralToken',
-        u'PwdCertToken',
-        u'EncodedPwdCertToken',
-        u'CryptoToken',
-        u'H235Key',
-        u'KeySignedMaterial',
-        u'EncodedKeySignedMaterial',
-        u'H235CertificateSignature',
-        u'ReturnSig',
-        u'EncodedReturnSig',
-        u'KeySyncMaterial',
-        u'EncodedKeySyncMaterial',
-        u'V3KeySyncMaterial',
+        'ChallengeString',
+        'TimeStamp',
+        'RandomVal',
+        'Password',
+        'Identifier',
+        'KeyMaterial',
+        'KeyMaterialExt',
+        'NonStandardParameter',
+        'DHset',
+        'DHsetExt',
+        'ECpoint',
+        'ECKASDH',
+        'ECGDSASignature',
+        'TypedCertificate',
+        'AuthenticationBES',
+        'AuthenticationMechanism',
+        'ClearToken',
+        'ProfileElement',
+        'Element',
+        'SIGNED',
+        'ENCRYPTED',
+        'HASHED',
+        'IV8',
+        'IV16',
+        'Params',
+        'EncodedGeneralToken',
+        'PwdCertToken',
+        'EncodedPwdCertToken',
+        'CryptoToken',
+        'H235Key',
+        'KeySignedMaterial',
+        'EncodedKeySignedMaterial',
+        'H235CertificateSignature',
+        'ReturnSig',
+        'EncodedReturnSig',
+        'KeySyncMaterial',
+        'EncodedKeySyncMaterial',
+        'V3KeySyncMaterial',
         ]
     _type_ = [
-        u'ChallengeString',
-        u'TimeStamp',
-        u'RandomVal',
-        u'Password',
-        u'Identifier',
-        u'KeyMaterial',
-        u'KeyMaterialExt',
-        u'NonStandardParameter',
-        u'DHset',
-        u'DHsetExt',
-        u'ECpoint',
-        u'ECKASDH',
-        u'ECGDSASignature',
-        u'TypedCertificate',
-        u'AuthenticationBES',
-        u'AuthenticationMechanism',
-        u'ClearToken',
-        u'ProfileElement',
-        u'Element',
-        u'SIGNED',
-        u'ENCRYPTED',
-        u'HASHED',
-        u'IV8',
-        u'IV16',
-        u'Params',
-        u'EncodedGeneralToken',
-        u'PwdCertToken',
-        u'EncodedPwdCertToken',
-        u'CryptoToken',
-        u'H235Key',
-        u'KeySignedMaterial',
-        u'EncodedKeySignedMaterial',
-        u'H235CertificateSignature',
-        u'ReturnSig',
-        u'EncodedReturnSig',
-        u'KeySyncMaterial',
-        u'EncodedKeySyncMaterial',
-        u'V3KeySyncMaterial',
+        'ChallengeString',
+        'TimeStamp',
+        'RandomVal',
+        'Password',
+        'Identifier',
+        'KeyMaterial',
+        'KeyMaterialExt',
+        'NonStandardParameter',
+        'DHset',
+        'DHsetExt',
+        'ECpoint',
+        'ECKASDH',
+        'ECGDSASignature',
+        'TypedCertificate',
+        'AuthenticationBES',
+        'AuthenticationMechanism',
+        'ClearToken',
+        'ProfileElement',
+        'Element',
+        'SIGNED',
+        'ENCRYPTED',
+        'HASHED',
+        'IV8',
+        'IV16',
+        'Params',
+        'EncodedGeneralToken',
+        'PwdCertToken',
+        'EncodedPwdCertToken',
+        'CryptoToken',
+        'H235Key',
+        'KeySignedMaterial',
+        'EncodedKeySignedMaterial',
+        'H235CertificateSignature',
+        'ReturnSig',
+        'EncodedReturnSig',
+        'KeySyncMaterial',
+        'EncodedKeySyncMaterial',
+        'V3KeySyncMaterial',
         ]
     _set_ = [
         ]
@@ -106,540 +106,540 @@ class H235_SECURITY_MESSAGES:
     _class_ = [
         ]
     _param_ = [
-        u'SIGNED',
-        u'ENCRYPTED',
-        u'HASHED',
+        'SIGNED',
+        'ENCRYPTED',
+        'HASHED',
         ]
     
     #-----< ChallengeString >-----#
-    ChallengeString = OCT_STR(name=u'ChallengeString', mode=MODE_TYPE)
+    ChallengeString = OCT_STR(name='ChallengeString', mode=MODE_TYPE)
     ChallengeString._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=8, ub=128)], ev=None, er=[])
     
     #-----< TimeStamp >-----#
-    TimeStamp = INT(name=u'TimeStamp', mode=MODE_TYPE)
+    TimeStamp = INT(name='TimeStamp', mode=MODE_TYPE)
     TimeStamp._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=4294967295)], ev=None, er=[])
     
     #-----< RandomVal >-----#
-    RandomVal = INT(name=u'RandomVal', mode=MODE_TYPE)
+    RandomVal = INT(name='RandomVal', mode=MODE_TYPE)
     
     #-----< Password >-----#
-    Password = STR_BMP(name=u'Password', mode=MODE_TYPE)
+    Password = STR_BMP(name='Password', mode=MODE_TYPE)
     Password._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=128)], ev=None, er=[])
     
     #-----< Identifier >-----#
-    Identifier = STR_BMP(name=u'Identifier', mode=MODE_TYPE)
+    Identifier = STR_BMP(name='Identifier', mode=MODE_TYPE)
     Identifier._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=128)], ev=None, er=[])
     
     #-----< KeyMaterial >-----#
-    KeyMaterial = BIT_STR(name=u'KeyMaterial', mode=MODE_TYPE)
+    KeyMaterial = BIT_STR(name='KeyMaterial', mode=MODE_TYPE)
     KeyMaterial._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=2048)], ev=None, er=[])
     
     #-----< KeyMaterialExt >-----#
-    KeyMaterialExt = BIT_STR(name=u'KeyMaterialExt', mode=MODE_TYPE)
+    KeyMaterialExt = BIT_STR(name='KeyMaterialExt', mode=MODE_TYPE)
     KeyMaterialExt._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=2049, ub=65536)], ev=None, er=[])
     
     #-----< NonStandardParameter >-----#
-    NonStandardParameter = SEQ(name=u'NonStandardParameter', mode=MODE_TYPE)
-    _NonStandardParameter_nonStandardIdentifier = OID(name=u'nonStandardIdentifier', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _NonStandardParameter_data = OCT_STR(name=u'data', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    NonStandardParameter = SEQ(name='NonStandardParameter', mode=MODE_TYPE)
+    _NonStandardParameter_nonStandardIdentifier = OID(name='nonStandardIdentifier', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _NonStandardParameter_data = OCT_STR(name='data', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     NonStandardParameter._cont = ASN1Dict([
-        (u'nonStandardIdentifier', _NonStandardParameter_nonStandardIdentifier),
-        (u'data', _NonStandardParameter_data),
+        ('nonStandardIdentifier', _NonStandardParameter_nonStandardIdentifier),
+        ('data', _NonStandardParameter_data),
         ])
     NonStandardParameter._ext = None
     
     #-----< DHset >-----#
-    DHset = SEQ(name=u'DHset', mode=MODE_TYPE)
-    _DHset_halfkey = BIT_STR(name=u'halfkey', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    DHset = SEQ(name='DHset', mode=MODE_TYPE)
+    _DHset_halfkey = BIT_STR(name='halfkey', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     _DHset_halfkey._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=2048)], ev=None, er=[])
-    _DHset_modSize = BIT_STR(name=u'modSize', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _DHset_modSize = BIT_STR(name='modSize', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     _DHset_modSize._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=2048)], ev=None, er=[])
-    _DHset_generator = BIT_STR(name=u'generator', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _DHset_generator = BIT_STR(name='generator', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     _DHset_generator._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=2048)], ev=None, er=[])
     DHset._cont = ASN1Dict([
-        (u'halfkey', _DHset_halfkey),
-        (u'modSize', _DHset_modSize),
-        (u'generator', _DHset_generator),
+        ('halfkey', _DHset_halfkey),
+        ('modSize', _DHset_modSize),
+        ('generator', _DHset_generator),
         ])
     DHset._ext = []
     
     #-----< DHsetExt >-----#
-    DHsetExt = SEQ(name=u'DHsetExt', mode=MODE_TYPE)
-    _DHsetExt_halfkey = BIT_STR(name=u'halfkey', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    DHsetExt = SEQ(name='DHsetExt', mode=MODE_TYPE)
+    _DHsetExt_halfkey = BIT_STR(name='halfkey', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     _DHsetExt_halfkey._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=2049, ub=65536)], ev=None, er=[])
-    _DHsetExt_modSize = BIT_STR(name=u'modSize', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _DHsetExt_modSize = BIT_STR(name='modSize', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     _DHsetExt_modSize._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=2049, ub=65536)], ev=None, er=[])
-    _DHsetExt_generator = BIT_STR(name=u'generator', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _DHsetExt_generator = BIT_STR(name='generator', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     _DHsetExt_generator._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=2049, ub=65536)], ev=None, er=[])
     DHsetExt._cont = ASN1Dict([
-        (u'halfkey', _DHsetExt_halfkey),
-        (u'modSize', _DHsetExt_modSize),
-        (u'generator', _DHsetExt_generator),
+        ('halfkey', _DHsetExt_halfkey),
+        ('modSize', _DHsetExt_modSize),
+        ('generator', _DHsetExt_generator),
         ])
     DHsetExt._ext = []
     
     #-----< ECpoint >-----#
-    ECpoint = SEQ(name=u'ECpoint', mode=MODE_TYPE)
-    _ECpoint_x = BIT_STR(name=u'x', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    ECpoint = SEQ(name='ECpoint', mode=MODE_TYPE)
+    _ECpoint_x = BIT_STR(name='x', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     _ECpoint_x._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=511)], ev=None, er=[])
-    _ECpoint_y = BIT_STR(name=u'y', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _ECpoint_y = BIT_STR(name='y', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     _ECpoint_y._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=511)], ev=None, er=[])
     ECpoint._cont = ASN1Dict([
-        (u'x', _ECpoint_x),
-        (u'y', _ECpoint_y),
+        ('x', _ECpoint_x),
+        ('y', _ECpoint_y),
         ])
     ECpoint._ext = []
     
     #-----< ECKASDH >-----#
-    ECKASDH = CHOICE(name=u'ECKASDH', mode=MODE_TYPE)
-    _ECKASDH_eckasdhp = SEQ(name=u'eckasdhp', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    __ECKASDH_eckasdhp_public_key = SEQ(name=u'public-key', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('H235-SECURITY-MESSAGES', 'ECpoint')))
-    __ECKASDH_eckasdhp_modulus = BIT_STR(name=u'modulus', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    ECKASDH = CHOICE(name='ECKASDH', mode=MODE_TYPE)
+    _ECKASDH_eckasdhp = SEQ(name='eckasdhp', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __ECKASDH_eckasdhp_public_key = SEQ(name='public-key', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('H235-SECURITY-MESSAGES', 'ECpoint')))
+    __ECKASDH_eckasdhp_modulus = BIT_STR(name='modulus', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     __ECKASDH_eckasdhp_modulus._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=511)], ev=None, er=[])
-    __ECKASDH_eckasdhp_base = SEQ(name=u'base', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('H235-SECURITY-MESSAGES', 'ECpoint')))
-    __ECKASDH_eckasdhp_weierstrassA = BIT_STR(name=u'weierstrassA', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __ECKASDH_eckasdhp_base = SEQ(name='base', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('H235-SECURITY-MESSAGES', 'ECpoint')))
+    __ECKASDH_eckasdhp_weierstrassA = BIT_STR(name='weierstrassA', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     __ECKASDH_eckasdhp_weierstrassA._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=511)], ev=None, er=[])
-    __ECKASDH_eckasdhp_weierstrassB = BIT_STR(name=u'weierstrassB', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __ECKASDH_eckasdhp_weierstrassB = BIT_STR(name='weierstrassB', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     __ECKASDH_eckasdhp_weierstrassB._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=511)], ev=None, er=[])
     _ECKASDH_eckasdhp._cont = ASN1Dict([
-        (u'public-key', __ECKASDH_eckasdhp_public_key),
-        (u'modulus', __ECKASDH_eckasdhp_modulus),
-        (u'base', __ECKASDH_eckasdhp_base),
-        (u'weierstrassA', __ECKASDH_eckasdhp_weierstrassA),
-        (u'weierstrassB', __ECKASDH_eckasdhp_weierstrassB),
+        ('public-key', __ECKASDH_eckasdhp_public_key),
+        ('modulus', __ECKASDH_eckasdhp_modulus),
+        ('base', __ECKASDH_eckasdhp_base),
+        ('weierstrassA', __ECKASDH_eckasdhp_weierstrassA),
+        ('weierstrassB', __ECKASDH_eckasdhp_weierstrassB),
         ])
     _ECKASDH_eckasdhp._ext = None
-    _ECKASDH_eckasdh2 = SEQ(name=u'eckasdh2', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    __ECKASDH_eckasdh2_public_key = SEQ(name=u'public-key', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('H235-SECURITY-MESSAGES', 'ECpoint')))
-    __ECKASDH_eckasdh2_fieldSize = BIT_STR(name=u'fieldSize', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _ECKASDH_eckasdh2 = SEQ(name='eckasdh2', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __ECKASDH_eckasdh2_public_key = SEQ(name='public-key', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('H235-SECURITY-MESSAGES', 'ECpoint')))
+    __ECKASDH_eckasdh2_fieldSize = BIT_STR(name='fieldSize', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     __ECKASDH_eckasdh2_fieldSize._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=511)], ev=None, er=[])
-    __ECKASDH_eckasdh2_base = SEQ(name=u'base', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('H235-SECURITY-MESSAGES', 'ECpoint')))
-    __ECKASDH_eckasdh2_weierstrassA = BIT_STR(name=u'weierstrassA', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __ECKASDH_eckasdh2_base = SEQ(name='base', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('H235-SECURITY-MESSAGES', 'ECpoint')))
+    __ECKASDH_eckasdh2_weierstrassA = BIT_STR(name='weierstrassA', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     __ECKASDH_eckasdh2_weierstrassA._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=511)], ev=None, er=[])
-    __ECKASDH_eckasdh2_weierstrassB = BIT_STR(name=u'weierstrassB', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __ECKASDH_eckasdh2_weierstrassB = BIT_STR(name='weierstrassB', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     __ECKASDH_eckasdh2_weierstrassB._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=511)], ev=None, er=[])
     _ECKASDH_eckasdh2._cont = ASN1Dict([
-        (u'public-key', __ECKASDH_eckasdh2_public_key),
-        (u'fieldSize', __ECKASDH_eckasdh2_fieldSize),
-        (u'base', __ECKASDH_eckasdh2_base),
-        (u'weierstrassA', __ECKASDH_eckasdh2_weierstrassA),
-        (u'weierstrassB', __ECKASDH_eckasdh2_weierstrassB),
+        ('public-key', __ECKASDH_eckasdh2_public_key),
+        ('fieldSize', __ECKASDH_eckasdh2_fieldSize),
+        ('base', __ECKASDH_eckasdh2_base),
+        ('weierstrassA', __ECKASDH_eckasdh2_weierstrassA),
+        ('weierstrassB', __ECKASDH_eckasdh2_weierstrassB),
         ])
     _ECKASDH_eckasdh2._ext = None
     ECKASDH._cont = ASN1Dict([
-        (u'eckasdhp', _ECKASDH_eckasdhp),
-        (u'eckasdh2', _ECKASDH_eckasdh2),
+        ('eckasdhp', _ECKASDH_eckasdhp),
+        ('eckasdh2', _ECKASDH_eckasdh2),
         ])
     ECKASDH._ext = []
     
     #-----< ECGDSASignature >-----#
-    ECGDSASignature = SEQ(name=u'ECGDSASignature', mode=MODE_TYPE)
-    _ECGDSASignature_r = BIT_STR(name=u'r', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    ECGDSASignature = SEQ(name='ECGDSASignature', mode=MODE_TYPE)
+    _ECGDSASignature_r = BIT_STR(name='r', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     _ECGDSASignature_r._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=511)], ev=None, er=[])
-    _ECGDSASignature_s = BIT_STR(name=u's', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _ECGDSASignature_s = BIT_STR(name='s', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     _ECGDSASignature_s._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=511)], ev=None, er=[])
     ECGDSASignature._cont = ASN1Dict([
-        (u'r', _ECGDSASignature_r),
-        (u's', _ECGDSASignature_s),
+        ('r', _ECGDSASignature_r),
+        ('s', _ECGDSASignature_s),
         ])
     ECGDSASignature._ext = None
     
     #-----< TypedCertificate >-----#
-    TypedCertificate = SEQ(name=u'TypedCertificate', mode=MODE_TYPE)
-    _TypedCertificate_type = OID(name=u'type', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _TypedCertificate_certificate = OCT_STR(name=u'certificate', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    TypedCertificate = SEQ(name='TypedCertificate', mode=MODE_TYPE)
+    _TypedCertificate_type = OID(name='type', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _TypedCertificate_certificate = OCT_STR(name='certificate', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     TypedCertificate._cont = ASN1Dict([
-        (u'type', _TypedCertificate_type),
-        (u'certificate', _TypedCertificate_certificate),
+        ('type', _TypedCertificate_type),
+        ('certificate', _TypedCertificate_certificate),
         ])
     TypedCertificate._ext = []
     
     #-----< AuthenticationBES >-----#
-    AuthenticationBES = CHOICE(name=u'AuthenticationBES', mode=MODE_TYPE)
-    _AuthenticationBES_default = NULL(name=u'default', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _AuthenticationBES_radius = NULL(name=u'radius', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    AuthenticationBES = CHOICE(name='AuthenticationBES', mode=MODE_TYPE)
+    _AuthenticationBES_default = NULL(name='default', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _AuthenticationBES_radius = NULL(name='radius', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     AuthenticationBES._cont = ASN1Dict([
-        (u'default', _AuthenticationBES_default),
-        (u'radius', _AuthenticationBES_radius),
+        ('default', _AuthenticationBES_default),
+        ('radius', _AuthenticationBES_radius),
         ])
     AuthenticationBES._ext = []
     
     #-----< AuthenticationMechanism >-----#
-    AuthenticationMechanism = CHOICE(name=u'AuthenticationMechanism', mode=MODE_TYPE)
-    _AuthenticationMechanism_dhExch = NULL(name=u'dhExch', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _AuthenticationMechanism_pwdSymEnc = NULL(name=u'pwdSymEnc', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _AuthenticationMechanism_pwdHash = NULL(name=u'pwdHash', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _AuthenticationMechanism_certSign = NULL(name=u'certSign', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _AuthenticationMechanism_ipsec = NULL(name=u'ipsec', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _AuthenticationMechanism_tls = NULL(name=u'tls', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _AuthenticationMechanism_nonStandard = SEQ(name=u'nonStandard', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('H235-SECURITY-MESSAGES', 'NonStandardParameter')))
-    _AuthenticationMechanism_authenticationBES = CHOICE(name=u'authenticationBES', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('H235-SECURITY-MESSAGES', 'AuthenticationBES')))
-    _AuthenticationMechanism_keyExch = OID(name=u'keyExch', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    AuthenticationMechanism = CHOICE(name='AuthenticationMechanism', mode=MODE_TYPE)
+    _AuthenticationMechanism_dhExch = NULL(name='dhExch', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _AuthenticationMechanism_pwdSymEnc = NULL(name='pwdSymEnc', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _AuthenticationMechanism_pwdHash = NULL(name='pwdHash', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _AuthenticationMechanism_certSign = NULL(name='certSign', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _AuthenticationMechanism_ipsec = NULL(name='ipsec', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _AuthenticationMechanism_tls = NULL(name='tls', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _AuthenticationMechanism_nonStandard = SEQ(name='nonStandard', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('H235-SECURITY-MESSAGES', 'NonStandardParameter')))
+    _AuthenticationMechanism_authenticationBES = CHOICE(name='authenticationBES', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('H235-SECURITY-MESSAGES', 'AuthenticationBES')))
+    _AuthenticationMechanism_keyExch = OID(name='keyExch', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     AuthenticationMechanism._cont = ASN1Dict([
-        (u'dhExch', _AuthenticationMechanism_dhExch),
-        (u'pwdSymEnc', _AuthenticationMechanism_pwdSymEnc),
-        (u'pwdHash', _AuthenticationMechanism_pwdHash),
-        (u'certSign', _AuthenticationMechanism_certSign),
-        (u'ipsec', _AuthenticationMechanism_ipsec),
-        (u'tls', _AuthenticationMechanism_tls),
-        (u'nonStandard', _AuthenticationMechanism_nonStandard),
-        (u'authenticationBES', _AuthenticationMechanism_authenticationBES),
-        (u'keyExch', _AuthenticationMechanism_keyExch),
+        ('dhExch', _AuthenticationMechanism_dhExch),
+        ('pwdSymEnc', _AuthenticationMechanism_pwdSymEnc),
+        ('pwdHash', _AuthenticationMechanism_pwdHash),
+        ('certSign', _AuthenticationMechanism_certSign),
+        ('ipsec', _AuthenticationMechanism_ipsec),
+        ('tls', _AuthenticationMechanism_tls),
+        ('nonStandard', _AuthenticationMechanism_nonStandard),
+        ('authenticationBES', _AuthenticationMechanism_authenticationBES),
+        ('keyExch', _AuthenticationMechanism_keyExch),
         ])
-    AuthenticationMechanism._ext = [u'authenticationBES', u'keyExch']
+    AuthenticationMechanism._ext = ['authenticationBES', 'keyExch']
     
     #-----< ClearToken >-----#
-    ClearToken = SEQ(name=u'ClearToken', mode=MODE_TYPE)
-    _ClearToken_tokenOID = OID(name=u'tokenOID', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _ClearToken_timeStamp = INT(name=u'timeStamp', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('H235-SECURITY-MESSAGES', 'TimeStamp')), opt=True)
-    _ClearToken_password = STR_BMP(name=u'password', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('H235-SECURITY-MESSAGES', 'Password')), opt=True)
-    _ClearToken_dhkey = SEQ(name=u'dhkey', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('H235-SECURITY-MESSAGES', 'DHset')), opt=True)
-    _ClearToken_challenge = OCT_STR(name=u'challenge', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('H235-SECURITY-MESSAGES', 'ChallengeString')), opt=True)
-    _ClearToken_random = INT(name=u'random', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('H235-SECURITY-MESSAGES', 'RandomVal')), opt=True)
-    _ClearToken_certificate = SEQ(name=u'certificate', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('H235-SECURITY-MESSAGES', 'TypedCertificate')), opt=True)
-    _ClearToken_generalID = STR_BMP(name=u'generalID', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('H235-SECURITY-MESSAGES', 'Identifier')), opt=True)
-    _ClearToken_nonStandard = SEQ(name=u'nonStandard', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('H235-SECURITY-MESSAGES', 'NonStandardParameter')), opt=True)
-    _ClearToken_eckasdhkey = CHOICE(name=u'eckasdhkey', mode=MODE_TYPE, tag=(9, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('H235-SECURITY-MESSAGES', 'ECKASDH')), opt=True)
-    _ClearToken_sendersID = STR_BMP(name=u'sendersID', mode=MODE_TYPE, tag=(10, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('H235-SECURITY-MESSAGES', 'Identifier')), opt=True)
-    _ClearToken_h235Key = CHOICE(name=u'h235Key', mode=MODE_TYPE, tag=(11, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('H235-SECURITY-MESSAGES', 'H235Key')), opt=True)
-    _ClearToken_profileInfo = SEQ_OF(name=u'profileInfo', mode=MODE_TYPE, tag=(12, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    ClearToken = SEQ(name='ClearToken', mode=MODE_TYPE)
+    _ClearToken_tokenOID = OID(name='tokenOID', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _ClearToken_timeStamp = INT(name='timeStamp', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('H235-SECURITY-MESSAGES', 'TimeStamp')), opt=True)
+    _ClearToken_password = STR_BMP(name='password', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('H235-SECURITY-MESSAGES', 'Password')), opt=True)
+    _ClearToken_dhkey = SEQ(name='dhkey', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('H235-SECURITY-MESSAGES', 'DHset')), opt=True)
+    _ClearToken_challenge = OCT_STR(name='challenge', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('H235-SECURITY-MESSAGES', 'ChallengeString')), opt=True)
+    _ClearToken_random = INT(name='random', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('H235-SECURITY-MESSAGES', 'RandomVal')), opt=True)
+    _ClearToken_certificate = SEQ(name='certificate', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('H235-SECURITY-MESSAGES', 'TypedCertificate')), opt=True)
+    _ClearToken_generalID = STR_BMP(name='generalID', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('H235-SECURITY-MESSAGES', 'Identifier')), opt=True)
+    _ClearToken_nonStandard = SEQ(name='nonStandard', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('H235-SECURITY-MESSAGES', 'NonStandardParameter')), opt=True)
+    _ClearToken_eckasdhkey = CHOICE(name='eckasdhkey', mode=MODE_TYPE, tag=(9, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('H235-SECURITY-MESSAGES', 'ECKASDH')), opt=True)
+    _ClearToken_sendersID = STR_BMP(name='sendersID', mode=MODE_TYPE, tag=(10, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('H235-SECURITY-MESSAGES', 'Identifier')), opt=True)
+    _ClearToken_h235Key = CHOICE(name='h235Key', mode=MODE_TYPE, tag=(11, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('H235-SECURITY-MESSAGES', 'H235Key')), opt=True)
+    _ClearToken_profileInfo = SEQ_OF(name='profileInfo', mode=MODE_TYPE, tag=(12, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     __ClearToken_profileInfo__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('H235-SECURITY-MESSAGES', 'ProfileElement')))
     _ClearToken_profileInfo._cont = __ClearToken_profileInfo__item_
-    _ClearToken_dhkeyext = SEQ(name=u'dhkeyext', mode=MODE_TYPE, tag=(13, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('H235-SECURITY-MESSAGES', 'DHsetExt')), opt=True)
+    _ClearToken_dhkeyext = SEQ(name='dhkeyext', mode=MODE_TYPE, tag=(13, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('H235-SECURITY-MESSAGES', 'DHsetExt')), opt=True)
     ClearToken._cont = ASN1Dict([
-        (u'tokenOID', _ClearToken_tokenOID),
-        (u'timeStamp', _ClearToken_timeStamp),
-        (u'password', _ClearToken_password),
-        (u'dhkey', _ClearToken_dhkey),
-        (u'challenge', _ClearToken_challenge),
-        (u'random', _ClearToken_random),
-        (u'certificate', _ClearToken_certificate),
-        (u'generalID', _ClearToken_generalID),
-        (u'nonStandard', _ClearToken_nonStandard),
-        (u'eckasdhkey', _ClearToken_eckasdhkey),
-        (u'sendersID', _ClearToken_sendersID),
-        (u'h235Key', _ClearToken_h235Key),
-        (u'profileInfo', _ClearToken_profileInfo),
-        (u'dhkeyext', _ClearToken_dhkeyext),
+        ('tokenOID', _ClearToken_tokenOID),
+        ('timeStamp', _ClearToken_timeStamp),
+        ('password', _ClearToken_password),
+        ('dhkey', _ClearToken_dhkey),
+        ('challenge', _ClearToken_challenge),
+        ('random', _ClearToken_random),
+        ('certificate', _ClearToken_certificate),
+        ('generalID', _ClearToken_generalID),
+        ('nonStandard', _ClearToken_nonStandard),
+        ('eckasdhkey', _ClearToken_eckasdhkey),
+        ('sendersID', _ClearToken_sendersID),
+        ('h235Key', _ClearToken_h235Key),
+        ('profileInfo', _ClearToken_profileInfo),
+        ('dhkeyext', _ClearToken_dhkeyext),
         ])
-    ClearToken._ext = [u'eckasdhkey', u'sendersID', u'h235Key', u'profileInfo', u'dhkeyext']
+    ClearToken._ext = ['eckasdhkey', 'sendersID', 'h235Key', 'profileInfo', 'dhkeyext']
     
     #-----< ProfileElement >-----#
-    ProfileElement = SEQ(name=u'ProfileElement', mode=MODE_TYPE)
-    _ProfileElement_elementID = INT(name=u'elementID', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    ProfileElement = SEQ(name='ProfileElement', mode=MODE_TYPE)
+    _ProfileElement_elementID = INT(name='elementID', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     _ProfileElement_elementID._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=255)], ev=None, er=[])
-    _ProfileElement_paramS = SEQ(name=u'paramS', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('H235-SECURITY-MESSAGES', 'Params')), opt=True)
-    _ProfileElement_element = CHOICE(name=u'element', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('H235-SECURITY-MESSAGES', 'Element')), opt=True)
+    _ProfileElement_paramS = SEQ(name='paramS', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('H235-SECURITY-MESSAGES', 'Params')), opt=True)
+    _ProfileElement_element = CHOICE(name='element', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('H235-SECURITY-MESSAGES', 'Element')), opt=True)
     ProfileElement._cont = ASN1Dict([
-        (u'elementID', _ProfileElement_elementID),
-        (u'paramS', _ProfileElement_paramS),
-        (u'element', _ProfileElement_element),
+        ('elementID', _ProfileElement_elementID),
+        ('paramS', _ProfileElement_paramS),
+        ('element', _ProfileElement_element),
         ])
     ProfileElement._ext = []
     
     #-----< Element >-----#
-    Element = CHOICE(name=u'Element', mode=MODE_TYPE)
-    _Element_octets = OCT_STR(name=u'octets', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _Element_integer = INT(name=u'integer', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _Element_bits = BIT_STR(name=u'bits', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _Element_name = STR_BMP(name=u'name', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _Element_flag = BOOL(name=u'flag', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    Element = CHOICE(name='Element', mode=MODE_TYPE)
+    _Element_octets = OCT_STR(name='octets', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _Element_integer = INT(name='integer', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _Element_bits = BIT_STR(name='bits', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _Element_name = STR_BMP(name='name', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _Element_flag = BOOL(name='flag', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     Element._cont = ASN1Dict([
-        (u'octets', _Element_octets),
-        (u'integer', _Element_integer),
-        (u'bits', _Element_bits),
-        (u'name', _Element_name),
-        (u'flag', _Element_flag),
+        ('octets', _Element_octets),
+        ('integer', _Element_integer),
+        ('bits', _Element_bits),
+        ('name', _Element_name),
+        ('flag', _Element_flag),
         ])
     Element._ext = []
     
     #-----< SIGNED >-----#
-    SIGNED = SEQ(name=u'SIGNED', mode=MODE_TYPE, param=True)
+    SIGNED = SEQ(name='SIGNED', mode=MODE_TYPE, param=True)
     
     #-----< ENCRYPTED >-----#
-    ENCRYPTED = SEQ(name=u'ENCRYPTED', mode=MODE_TYPE)
-    _ENCRYPTED_algorithmOID = OID(name=u'algorithmOID', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _ENCRYPTED_paramS = SEQ(name=u'paramS', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('H235-SECURITY-MESSAGES', 'Params')))
-    _ENCRYPTED_encryptedData = OCT_STR(name=u'encryptedData', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    ENCRYPTED = SEQ(name='ENCRYPTED', mode=MODE_TYPE)
+    _ENCRYPTED_algorithmOID = OID(name='algorithmOID', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _ENCRYPTED_paramS = SEQ(name='paramS', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('H235-SECURITY-MESSAGES', 'Params')))
+    _ENCRYPTED_encryptedData = OCT_STR(name='encryptedData', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     ENCRYPTED._cont = ASN1Dict([
-        (u'algorithmOID', _ENCRYPTED_algorithmOID),
-        (u'paramS', _ENCRYPTED_paramS),
-        (u'encryptedData', _ENCRYPTED_encryptedData),
+        ('algorithmOID', _ENCRYPTED_algorithmOID),
+        ('paramS', _ENCRYPTED_paramS),
+        ('encryptedData', _ENCRYPTED_encryptedData),
         ])
     ENCRYPTED._ext = None
     
     #-----< HASHED >-----#
-    HASHED = SEQ(name=u'HASHED', mode=MODE_TYPE)
-    _HASHED_algorithmOID = OID(name=u'algorithmOID', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _HASHED_paramS = SEQ(name=u'paramS', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('H235-SECURITY-MESSAGES', 'Params')))
-    _HASHED_hash = BIT_STR(name=u'hash', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    HASHED = SEQ(name='HASHED', mode=MODE_TYPE)
+    _HASHED_algorithmOID = OID(name='algorithmOID', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _HASHED_paramS = SEQ(name='paramS', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('H235-SECURITY-MESSAGES', 'Params')))
+    _HASHED_hash = BIT_STR(name='hash', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     HASHED._cont = ASN1Dict([
-        (u'algorithmOID', _HASHED_algorithmOID),
-        (u'paramS', _HASHED_paramS),
-        (u'hash', _HASHED_hash),
+        ('algorithmOID', _HASHED_algorithmOID),
+        ('paramS', _HASHED_paramS),
+        ('hash', _HASHED_hash),
         ])
     HASHED._ext = None
     
     #-----< IV8 >-----#
-    IV8 = OCT_STR(name=u'IV8', mode=MODE_TYPE)
+    IV8 = OCT_STR(name='IV8', mode=MODE_TYPE)
     IV8._const_sz = ASN1Set(rv=[8], rr=[], ev=None, er=[])
     
     #-----< IV16 >-----#
-    IV16 = OCT_STR(name=u'IV16', mode=MODE_TYPE)
+    IV16 = OCT_STR(name='IV16', mode=MODE_TYPE)
     IV16._const_sz = ASN1Set(rv=[16], rr=[], ev=None, er=[])
     
     #-----< Params >-----#
-    Params = SEQ(name=u'Params', mode=MODE_TYPE)
-    _Params_ranInt = INT(name=u'ranInt', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _Params_iv8 = OCT_STR(name=u'iv8', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('H235-SECURITY-MESSAGES', 'IV8')), opt=True)
-    _Params_iv16 = OCT_STR(name=u'iv16', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('H235-SECURITY-MESSAGES', 'IV16')), opt=True)
-    _Params_iv = OCT_STR(name=u'iv', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _Params_clearSalt = OCT_STR(name=u'clearSalt', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    Params = SEQ(name='Params', mode=MODE_TYPE)
+    _Params_ranInt = INT(name='ranInt', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _Params_iv8 = OCT_STR(name='iv8', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('H235-SECURITY-MESSAGES', 'IV8')), opt=True)
+    _Params_iv16 = OCT_STR(name='iv16', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('H235-SECURITY-MESSAGES', 'IV16')), opt=True)
+    _Params_iv = OCT_STR(name='iv', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _Params_clearSalt = OCT_STR(name='clearSalt', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     Params._cont = ASN1Dict([
-        (u'ranInt', _Params_ranInt),
-        (u'iv8', _Params_iv8),
-        (u'iv16', _Params_iv16),
-        (u'iv', _Params_iv),
-        (u'clearSalt', _Params_clearSalt),
+        ('ranInt', _Params_ranInt),
+        ('iv8', _Params_iv8),
+        ('iv16', _Params_iv16),
+        ('iv', _Params_iv),
+        ('clearSalt', _Params_clearSalt),
         ])
-    Params._ext = [u'iv16', u'iv', u'clearSalt']
+    Params._ext = ['iv16', 'iv', 'clearSalt']
     
     #-----< EncodedGeneralToken >-----#
-    EncodedGeneralToken = OPEN(name=u'EncodedGeneralToken', mode=MODE_TYPE, typeref=ASN1RefClassField(('_IMPL_', u'TYPE-IDENTIFIER'), [u'Type']))
-    _EncodedGeneralToken_val_0 = SEQ(name=u'EncodedGeneralToken', mode=MODE_TYPE, typeref=ASN1RefType(('H235-SECURITY-MESSAGES', 'ClearToken')))
+    EncodedGeneralToken = OPEN(name='EncodedGeneralToken', mode=MODE_TYPE, typeref=ASN1RefClassField(('_IMPL_', 'TYPE-IDENTIFIER'), ['Type']))
+    _EncodedGeneralToken_val_0 = SEQ(name='EncodedGeneralToken', mode=MODE_TYPE, typeref=ASN1RefType(('H235-SECURITY-MESSAGES', 'ClearToken')))
     EncodedGeneralToken._const_val = ASN1Set(rv=[_EncodedGeneralToken_val_0], ev=None)
     
     #-----< PwdCertToken >-----#
-    PwdCertToken = SEQ(name=u'PwdCertToken', mode=MODE_TYPE, typeref=ASN1RefType(('H235-SECURITY-MESSAGES', 'ClearToken')))
+    PwdCertToken = SEQ(name='PwdCertToken', mode=MODE_TYPE, typeref=ASN1RefType(('H235-SECURITY-MESSAGES', 'ClearToken')))
     
     #-----< EncodedPwdCertToken >-----#
-    EncodedPwdCertToken = OPEN(name=u'EncodedPwdCertToken', mode=MODE_TYPE, typeref=ASN1RefClassField(('_IMPL_', u'TYPE-IDENTIFIER'), [u'Type']))
-    _EncodedPwdCertToken_val_0 = SEQ(name=u'EncodedPwdCertToken', mode=MODE_TYPE, typeref=ASN1RefType(('H235-SECURITY-MESSAGES', 'PwdCertToken')))
+    EncodedPwdCertToken = OPEN(name='EncodedPwdCertToken', mode=MODE_TYPE, typeref=ASN1RefClassField(('_IMPL_', 'TYPE-IDENTIFIER'), ['Type']))
+    _EncodedPwdCertToken_val_0 = SEQ(name='EncodedPwdCertToken', mode=MODE_TYPE, typeref=ASN1RefType(('H235-SECURITY-MESSAGES', 'PwdCertToken')))
     EncodedPwdCertToken._const_val = ASN1Set(rv=[_EncodedPwdCertToken_val_0], ev=None)
     
     #-----< CryptoToken >-----#
-    CryptoToken = CHOICE(name=u'CryptoToken', mode=MODE_TYPE)
-    _CryptoToken_cryptoEncryptedToken = SEQ(name=u'cryptoEncryptedToken', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    __CryptoToken_cryptoEncryptedToken_tokenOID = OID(name=u'tokenOID', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    __CryptoToken_cryptoEncryptedToken_token = SEQ(name=u'token', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('H235-SECURITY-MESSAGES', 'ENCRYPTED')))
-    ___CryptoToken_cryptoEncryptedToken_token_algorithmOID = OID(name=u'algorithmOID', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    ___CryptoToken_cryptoEncryptedToken_token_paramS = SEQ(name=u'paramS', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('H235-SECURITY-MESSAGES', 'Params')))
-    ___CryptoToken_cryptoEncryptedToken_token_encryptedData = OCT_STR(name=u'encryptedData', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    CryptoToken = CHOICE(name='CryptoToken', mode=MODE_TYPE)
+    _CryptoToken_cryptoEncryptedToken = SEQ(name='cryptoEncryptedToken', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __CryptoToken_cryptoEncryptedToken_tokenOID = OID(name='tokenOID', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __CryptoToken_cryptoEncryptedToken_token = SEQ(name='token', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('H235-SECURITY-MESSAGES', 'ENCRYPTED')))
+    ___CryptoToken_cryptoEncryptedToken_token_algorithmOID = OID(name='algorithmOID', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    ___CryptoToken_cryptoEncryptedToken_token_paramS = SEQ(name='paramS', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('H235-SECURITY-MESSAGES', 'Params')))
+    ___CryptoToken_cryptoEncryptedToken_token_encryptedData = OCT_STR(name='encryptedData', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     __CryptoToken_cryptoEncryptedToken_token._cont = ASN1Dict([
-        (u'algorithmOID', ___CryptoToken_cryptoEncryptedToken_token_algorithmOID),
-        (u'paramS', ___CryptoToken_cryptoEncryptedToken_token_paramS),
-        (u'encryptedData', ___CryptoToken_cryptoEncryptedToken_token_encryptedData),
+        ('algorithmOID', ___CryptoToken_cryptoEncryptedToken_token_algorithmOID),
+        ('paramS', ___CryptoToken_cryptoEncryptedToken_token_paramS),
+        ('encryptedData', ___CryptoToken_cryptoEncryptedToken_token_encryptedData),
         ])
     __CryptoToken_cryptoEncryptedToken_token._ext = None
     _CryptoToken_cryptoEncryptedToken._cont = ASN1Dict([
-        (u'tokenOID', __CryptoToken_cryptoEncryptedToken_tokenOID),
-        (u'token', __CryptoToken_cryptoEncryptedToken_token),
+        ('tokenOID', __CryptoToken_cryptoEncryptedToken_tokenOID),
+        ('token', __CryptoToken_cryptoEncryptedToken_token),
         ])
     _CryptoToken_cryptoEncryptedToken._ext = None
-    _CryptoToken_cryptoSignedToken = SEQ(name=u'cryptoSignedToken', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    __CryptoToken_cryptoSignedToken_tokenOID = OID(name=u'tokenOID', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    __CryptoToken_cryptoSignedToken_token = SEQ(name=u'token', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('H235-SECURITY-MESSAGES', 'SIGNED')))
-    ___CryptoToken_cryptoSignedToken_token_toBeSigned = OPEN(name=u'toBeSigned', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('H235-SECURITY-MESSAGES', 'EncodedGeneralToken')))
-    ___CryptoToken_cryptoSignedToken_token_algorithmOID = OID(name=u'algorithmOID', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    ___CryptoToken_cryptoSignedToken_token_paramS = SEQ(name=u'paramS', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('H235-SECURITY-MESSAGES', 'Params')))
-    ___CryptoToken_cryptoSignedToken_token_signature = BIT_STR(name=u'signature', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _CryptoToken_cryptoSignedToken = SEQ(name='cryptoSignedToken', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __CryptoToken_cryptoSignedToken_tokenOID = OID(name='tokenOID', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __CryptoToken_cryptoSignedToken_token = SEQ(name='token', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('H235-SECURITY-MESSAGES', 'SIGNED')))
+    ___CryptoToken_cryptoSignedToken_token_toBeSigned = OPEN(name='toBeSigned', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('H235-SECURITY-MESSAGES', 'EncodedGeneralToken')))
+    ___CryptoToken_cryptoSignedToken_token_algorithmOID = OID(name='algorithmOID', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    ___CryptoToken_cryptoSignedToken_token_paramS = SEQ(name='paramS', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('H235-SECURITY-MESSAGES', 'Params')))
+    ___CryptoToken_cryptoSignedToken_token_signature = BIT_STR(name='signature', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     __CryptoToken_cryptoSignedToken_token._cont = ASN1Dict([
-        (u'toBeSigned', ___CryptoToken_cryptoSignedToken_token_toBeSigned),
-        (u'algorithmOID', ___CryptoToken_cryptoSignedToken_token_algorithmOID),
-        (u'paramS', ___CryptoToken_cryptoSignedToken_token_paramS),
-        (u'signature', ___CryptoToken_cryptoSignedToken_token_signature),
+        ('toBeSigned', ___CryptoToken_cryptoSignedToken_token_toBeSigned),
+        ('algorithmOID', ___CryptoToken_cryptoSignedToken_token_algorithmOID),
+        ('paramS', ___CryptoToken_cryptoSignedToken_token_paramS),
+        ('signature', ___CryptoToken_cryptoSignedToken_token_signature),
         ])
     __CryptoToken_cryptoSignedToken_token._ext = None
     _CryptoToken_cryptoSignedToken._cont = ASN1Dict([
-        (u'tokenOID', __CryptoToken_cryptoSignedToken_tokenOID),
-        (u'token', __CryptoToken_cryptoSignedToken_token),
+        ('tokenOID', __CryptoToken_cryptoSignedToken_tokenOID),
+        ('token', __CryptoToken_cryptoSignedToken_token),
         ])
     _CryptoToken_cryptoSignedToken._ext = None
-    _CryptoToken_cryptoHashedToken = SEQ(name=u'cryptoHashedToken', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    __CryptoToken_cryptoHashedToken_tokenOID = OID(name=u'tokenOID', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    __CryptoToken_cryptoHashedToken_hashedVals = SEQ(name=u'hashedVals', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('H235-SECURITY-MESSAGES', 'ClearToken')))
-    __CryptoToken_cryptoHashedToken_token = SEQ(name=u'token', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('H235-SECURITY-MESSAGES', 'HASHED')))
-    ___CryptoToken_cryptoHashedToken_token_algorithmOID = OID(name=u'algorithmOID', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    ___CryptoToken_cryptoHashedToken_token_paramS = SEQ(name=u'paramS', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('H235-SECURITY-MESSAGES', 'Params')))
-    ___CryptoToken_cryptoHashedToken_token_hash = BIT_STR(name=u'hash', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _CryptoToken_cryptoHashedToken = SEQ(name='cryptoHashedToken', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __CryptoToken_cryptoHashedToken_tokenOID = OID(name='tokenOID', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __CryptoToken_cryptoHashedToken_hashedVals = SEQ(name='hashedVals', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('H235-SECURITY-MESSAGES', 'ClearToken')))
+    __CryptoToken_cryptoHashedToken_token = SEQ(name='token', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('H235-SECURITY-MESSAGES', 'HASHED')))
+    ___CryptoToken_cryptoHashedToken_token_algorithmOID = OID(name='algorithmOID', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    ___CryptoToken_cryptoHashedToken_token_paramS = SEQ(name='paramS', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('H235-SECURITY-MESSAGES', 'Params')))
+    ___CryptoToken_cryptoHashedToken_token_hash = BIT_STR(name='hash', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     __CryptoToken_cryptoHashedToken_token._cont = ASN1Dict([
-        (u'algorithmOID', ___CryptoToken_cryptoHashedToken_token_algorithmOID),
-        (u'paramS', ___CryptoToken_cryptoHashedToken_token_paramS),
-        (u'hash', ___CryptoToken_cryptoHashedToken_token_hash),
+        ('algorithmOID', ___CryptoToken_cryptoHashedToken_token_algorithmOID),
+        ('paramS', ___CryptoToken_cryptoHashedToken_token_paramS),
+        ('hash', ___CryptoToken_cryptoHashedToken_token_hash),
         ])
     __CryptoToken_cryptoHashedToken_token._ext = None
     _CryptoToken_cryptoHashedToken._cont = ASN1Dict([
-        (u'tokenOID', __CryptoToken_cryptoHashedToken_tokenOID),
-        (u'hashedVals', __CryptoToken_cryptoHashedToken_hashedVals),
-        (u'token', __CryptoToken_cryptoHashedToken_token),
+        ('tokenOID', __CryptoToken_cryptoHashedToken_tokenOID),
+        ('hashedVals', __CryptoToken_cryptoHashedToken_hashedVals),
+        ('token', __CryptoToken_cryptoHashedToken_token),
         ])
     _CryptoToken_cryptoHashedToken._ext = None
-    _CryptoToken_cryptoPwdEncr = SEQ(name=u'cryptoPwdEncr', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('H235-SECURITY-MESSAGES', 'ENCRYPTED')))
-    __CryptoToken_cryptoPwdEncr_algorithmOID = OID(name=u'algorithmOID', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    __CryptoToken_cryptoPwdEncr_paramS = SEQ(name=u'paramS', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('H235-SECURITY-MESSAGES', 'Params')))
-    __CryptoToken_cryptoPwdEncr_encryptedData = OCT_STR(name=u'encryptedData', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _CryptoToken_cryptoPwdEncr = SEQ(name='cryptoPwdEncr', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('H235-SECURITY-MESSAGES', 'ENCRYPTED')))
+    __CryptoToken_cryptoPwdEncr_algorithmOID = OID(name='algorithmOID', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __CryptoToken_cryptoPwdEncr_paramS = SEQ(name='paramS', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('H235-SECURITY-MESSAGES', 'Params')))
+    __CryptoToken_cryptoPwdEncr_encryptedData = OCT_STR(name='encryptedData', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     _CryptoToken_cryptoPwdEncr._cont = ASN1Dict([
-        (u'algorithmOID', __CryptoToken_cryptoPwdEncr_algorithmOID),
-        (u'paramS', __CryptoToken_cryptoPwdEncr_paramS),
-        (u'encryptedData', __CryptoToken_cryptoPwdEncr_encryptedData),
+        ('algorithmOID', __CryptoToken_cryptoPwdEncr_algorithmOID),
+        ('paramS', __CryptoToken_cryptoPwdEncr_paramS),
+        ('encryptedData', __CryptoToken_cryptoPwdEncr_encryptedData),
         ])
     _CryptoToken_cryptoPwdEncr._ext = None
     CryptoToken._cont = ASN1Dict([
-        (u'cryptoEncryptedToken', _CryptoToken_cryptoEncryptedToken),
-        (u'cryptoSignedToken', _CryptoToken_cryptoSignedToken),
-        (u'cryptoHashedToken', _CryptoToken_cryptoHashedToken),
-        (u'cryptoPwdEncr', _CryptoToken_cryptoPwdEncr),
+        ('cryptoEncryptedToken', _CryptoToken_cryptoEncryptedToken),
+        ('cryptoSignedToken', _CryptoToken_cryptoSignedToken),
+        ('cryptoHashedToken', _CryptoToken_cryptoHashedToken),
+        ('cryptoPwdEncr', _CryptoToken_cryptoPwdEncr),
         ])
     CryptoToken._ext = []
     
     #-----< H235Key >-----#
-    H235Key = CHOICE(name=u'H235Key', mode=MODE_TYPE)
-    _H235Key_secureChannel = BIT_STR(name=u'secureChannel', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('H235-SECURITY-MESSAGES', 'KeyMaterial')))
-    _H235Key_sharedSecret = SEQ(name=u'sharedSecret', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('H235-SECURITY-MESSAGES', 'ENCRYPTED')))
-    __H235Key_sharedSecret_algorithmOID = OID(name=u'algorithmOID', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    __H235Key_sharedSecret_paramS = SEQ(name=u'paramS', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('H235-SECURITY-MESSAGES', 'Params')))
-    __H235Key_sharedSecret_encryptedData = OCT_STR(name=u'encryptedData', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    H235Key = CHOICE(name='H235Key', mode=MODE_TYPE)
+    _H235Key_secureChannel = BIT_STR(name='secureChannel', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('H235-SECURITY-MESSAGES', 'KeyMaterial')))
+    _H235Key_sharedSecret = SEQ(name='sharedSecret', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('H235-SECURITY-MESSAGES', 'ENCRYPTED')))
+    __H235Key_sharedSecret_algorithmOID = OID(name='algorithmOID', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __H235Key_sharedSecret_paramS = SEQ(name='paramS', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('H235-SECURITY-MESSAGES', 'Params')))
+    __H235Key_sharedSecret_encryptedData = OCT_STR(name='encryptedData', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     _H235Key_sharedSecret._cont = ASN1Dict([
-        (u'algorithmOID', __H235Key_sharedSecret_algorithmOID),
-        (u'paramS', __H235Key_sharedSecret_paramS),
-        (u'encryptedData', __H235Key_sharedSecret_encryptedData),
+        ('algorithmOID', __H235Key_sharedSecret_algorithmOID),
+        ('paramS', __H235Key_sharedSecret_paramS),
+        ('encryptedData', __H235Key_sharedSecret_encryptedData),
         ])
     _H235Key_sharedSecret._ext = None
-    _H235Key_certProtectedKey = SEQ(name=u'certProtectedKey', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('H235-SECURITY-MESSAGES', 'SIGNED')))
-    __H235Key_certProtectedKey_toBeSigned = OPEN(name=u'toBeSigned', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('H235-SECURITY-MESSAGES', 'EncodedKeySignedMaterial')))
-    __H235Key_certProtectedKey_algorithmOID = OID(name=u'algorithmOID', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    __H235Key_certProtectedKey_paramS = SEQ(name=u'paramS', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('H235-SECURITY-MESSAGES', 'Params')))
-    __H235Key_certProtectedKey_signature = BIT_STR(name=u'signature', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _H235Key_certProtectedKey = SEQ(name='certProtectedKey', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('H235-SECURITY-MESSAGES', 'SIGNED')))
+    __H235Key_certProtectedKey_toBeSigned = OPEN(name='toBeSigned', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('H235-SECURITY-MESSAGES', 'EncodedKeySignedMaterial')))
+    __H235Key_certProtectedKey_algorithmOID = OID(name='algorithmOID', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __H235Key_certProtectedKey_paramS = SEQ(name='paramS', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('H235-SECURITY-MESSAGES', 'Params')))
+    __H235Key_certProtectedKey_signature = BIT_STR(name='signature', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     _H235Key_certProtectedKey._cont = ASN1Dict([
-        (u'toBeSigned', __H235Key_certProtectedKey_toBeSigned),
-        (u'algorithmOID', __H235Key_certProtectedKey_algorithmOID),
-        (u'paramS', __H235Key_certProtectedKey_paramS),
-        (u'signature', __H235Key_certProtectedKey_signature),
+        ('toBeSigned', __H235Key_certProtectedKey_toBeSigned),
+        ('algorithmOID', __H235Key_certProtectedKey_algorithmOID),
+        ('paramS', __H235Key_certProtectedKey_paramS),
+        ('signature', __H235Key_certProtectedKey_signature),
         ])
     _H235Key_certProtectedKey._ext = None
-    _H235Key_secureSharedSecret = SEQ(name=u'secureSharedSecret', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('H235-SECURITY-MESSAGES', 'V3KeySyncMaterial')))
-    _H235Key_secureChannelExt = BIT_STR(name=u'secureChannelExt', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('H235-SECURITY-MESSAGES', 'KeyMaterialExt')))
+    _H235Key_secureSharedSecret = SEQ(name='secureSharedSecret', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('H235-SECURITY-MESSAGES', 'V3KeySyncMaterial')))
+    _H235Key_secureChannelExt = BIT_STR(name='secureChannelExt', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('H235-SECURITY-MESSAGES', 'KeyMaterialExt')))
     H235Key._cont = ASN1Dict([
-        (u'secureChannel', _H235Key_secureChannel),
-        (u'sharedSecret', _H235Key_sharedSecret),
-        (u'certProtectedKey', _H235Key_certProtectedKey),
-        (u'secureSharedSecret', _H235Key_secureSharedSecret),
-        (u'secureChannelExt', _H235Key_secureChannelExt),
+        ('secureChannel', _H235Key_secureChannel),
+        ('sharedSecret', _H235Key_sharedSecret),
+        ('certProtectedKey', _H235Key_certProtectedKey),
+        ('secureSharedSecret', _H235Key_secureSharedSecret),
+        ('secureChannelExt', _H235Key_secureChannelExt),
         ])
-    H235Key._ext = [u'secureSharedSecret', u'secureChannelExt']
+    H235Key._ext = ['secureSharedSecret', 'secureChannelExt']
     
     #-----< KeySignedMaterial >-----#
-    KeySignedMaterial = SEQ(name=u'KeySignedMaterial', mode=MODE_TYPE)
-    _KeySignedMaterial_generalId = STR_BMP(name=u'generalId', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('H235-SECURITY-MESSAGES', 'Identifier')))
-    _KeySignedMaterial_mrandom = INT(name=u'mrandom', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('H235-SECURITY-MESSAGES', 'RandomVal')))
-    _KeySignedMaterial_srandom = INT(name=u'srandom', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('H235-SECURITY-MESSAGES', 'RandomVal')), opt=True)
-    _KeySignedMaterial_timeStamp = INT(name=u'timeStamp', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('H235-SECURITY-MESSAGES', 'TimeStamp')), opt=True)
-    _KeySignedMaterial_encrptval = SEQ(name=u'encrptval', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('H235-SECURITY-MESSAGES', 'ENCRYPTED')))
-    __KeySignedMaterial_encrptval_algorithmOID = OID(name=u'algorithmOID', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    __KeySignedMaterial_encrptval_paramS = SEQ(name=u'paramS', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('H235-SECURITY-MESSAGES', 'Params')))
-    __KeySignedMaterial_encrptval_encryptedData = OCT_STR(name=u'encryptedData', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    KeySignedMaterial = SEQ(name='KeySignedMaterial', mode=MODE_TYPE)
+    _KeySignedMaterial_generalId = STR_BMP(name='generalId', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('H235-SECURITY-MESSAGES', 'Identifier')))
+    _KeySignedMaterial_mrandom = INT(name='mrandom', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('H235-SECURITY-MESSAGES', 'RandomVal')))
+    _KeySignedMaterial_srandom = INT(name='srandom', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('H235-SECURITY-MESSAGES', 'RandomVal')), opt=True)
+    _KeySignedMaterial_timeStamp = INT(name='timeStamp', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('H235-SECURITY-MESSAGES', 'TimeStamp')), opt=True)
+    _KeySignedMaterial_encrptval = SEQ(name='encrptval', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('H235-SECURITY-MESSAGES', 'ENCRYPTED')))
+    __KeySignedMaterial_encrptval_algorithmOID = OID(name='algorithmOID', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __KeySignedMaterial_encrptval_paramS = SEQ(name='paramS', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('H235-SECURITY-MESSAGES', 'Params')))
+    __KeySignedMaterial_encrptval_encryptedData = OCT_STR(name='encryptedData', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     _KeySignedMaterial_encrptval._cont = ASN1Dict([
-        (u'algorithmOID', __KeySignedMaterial_encrptval_algorithmOID),
-        (u'paramS', __KeySignedMaterial_encrptval_paramS),
-        (u'encryptedData', __KeySignedMaterial_encrptval_encryptedData),
+        ('algorithmOID', __KeySignedMaterial_encrptval_algorithmOID),
+        ('paramS', __KeySignedMaterial_encrptval_paramS),
+        ('encryptedData', __KeySignedMaterial_encrptval_encryptedData),
         ])
     _KeySignedMaterial_encrptval._ext = None
     KeySignedMaterial._cont = ASN1Dict([
-        (u'generalId', _KeySignedMaterial_generalId),
-        (u'mrandom', _KeySignedMaterial_mrandom),
-        (u'srandom', _KeySignedMaterial_srandom),
-        (u'timeStamp', _KeySignedMaterial_timeStamp),
-        (u'encrptval', _KeySignedMaterial_encrptval),
+        ('generalId', _KeySignedMaterial_generalId),
+        ('mrandom', _KeySignedMaterial_mrandom),
+        ('srandom', _KeySignedMaterial_srandom),
+        ('timeStamp', _KeySignedMaterial_timeStamp),
+        ('encrptval', _KeySignedMaterial_encrptval),
         ])
     KeySignedMaterial._ext = None
     
     #-----< EncodedKeySignedMaterial >-----#
-    EncodedKeySignedMaterial = OPEN(name=u'EncodedKeySignedMaterial', mode=MODE_TYPE, typeref=ASN1RefClassField(('_IMPL_', u'TYPE-IDENTIFIER'), [u'Type']))
-    _EncodedKeySignedMaterial_val_0 = SEQ(name=u'EncodedKeySignedMaterial', mode=MODE_TYPE, typeref=ASN1RefType(('H235-SECURITY-MESSAGES', 'KeySignedMaterial')))
+    EncodedKeySignedMaterial = OPEN(name='EncodedKeySignedMaterial', mode=MODE_TYPE, typeref=ASN1RefClassField(('_IMPL_', 'TYPE-IDENTIFIER'), ['Type']))
+    _EncodedKeySignedMaterial_val_0 = SEQ(name='EncodedKeySignedMaterial', mode=MODE_TYPE, typeref=ASN1RefType(('H235-SECURITY-MESSAGES', 'KeySignedMaterial')))
     EncodedKeySignedMaterial._const_val = ASN1Set(rv=[_EncodedKeySignedMaterial_val_0], ev=None)
     
     #-----< H235CertificateSignature >-----#
-    H235CertificateSignature = SEQ(name=u'H235CertificateSignature', mode=MODE_TYPE)
-    _H235CertificateSignature_certificate = SEQ(name=u'certificate', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('H235-SECURITY-MESSAGES', 'TypedCertificate')))
-    _H235CertificateSignature_responseRandom = INT(name=u'responseRandom', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('H235-SECURITY-MESSAGES', 'RandomVal')))
-    _H235CertificateSignature_requesterRandom = INT(name=u'requesterRandom', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('H235-SECURITY-MESSAGES', 'RandomVal')), opt=True)
-    _H235CertificateSignature_signature = SEQ(name=u'signature', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('H235-SECURITY-MESSAGES', 'SIGNED')))
-    __H235CertificateSignature_signature_toBeSigned = OPEN(name=u'toBeSigned', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('H235-SECURITY-MESSAGES', 'EncodedReturnSig')))
-    __H235CertificateSignature_signature_algorithmOID = OID(name=u'algorithmOID', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    __H235CertificateSignature_signature_paramS = SEQ(name=u'paramS', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('H235-SECURITY-MESSAGES', 'Params')))
-    __H235CertificateSignature_signature_signature = BIT_STR(name=u'signature', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    H235CertificateSignature = SEQ(name='H235CertificateSignature', mode=MODE_TYPE)
+    _H235CertificateSignature_certificate = SEQ(name='certificate', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('H235-SECURITY-MESSAGES', 'TypedCertificate')))
+    _H235CertificateSignature_responseRandom = INT(name='responseRandom', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('H235-SECURITY-MESSAGES', 'RandomVal')))
+    _H235CertificateSignature_requesterRandom = INT(name='requesterRandom', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('H235-SECURITY-MESSAGES', 'RandomVal')), opt=True)
+    _H235CertificateSignature_signature = SEQ(name='signature', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('H235-SECURITY-MESSAGES', 'SIGNED')))
+    __H235CertificateSignature_signature_toBeSigned = OPEN(name='toBeSigned', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('H235-SECURITY-MESSAGES', 'EncodedReturnSig')))
+    __H235CertificateSignature_signature_algorithmOID = OID(name='algorithmOID', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __H235CertificateSignature_signature_paramS = SEQ(name='paramS', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('H235-SECURITY-MESSAGES', 'Params')))
+    __H235CertificateSignature_signature_signature = BIT_STR(name='signature', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     _H235CertificateSignature_signature._cont = ASN1Dict([
-        (u'toBeSigned', __H235CertificateSignature_signature_toBeSigned),
-        (u'algorithmOID', __H235CertificateSignature_signature_algorithmOID),
-        (u'paramS', __H235CertificateSignature_signature_paramS),
-        (u'signature', __H235CertificateSignature_signature_signature),
+        ('toBeSigned', __H235CertificateSignature_signature_toBeSigned),
+        ('algorithmOID', __H235CertificateSignature_signature_algorithmOID),
+        ('paramS', __H235CertificateSignature_signature_paramS),
+        ('signature', __H235CertificateSignature_signature_signature),
         ])
     _H235CertificateSignature_signature._ext = None
     H235CertificateSignature._cont = ASN1Dict([
-        (u'certificate', _H235CertificateSignature_certificate),
-        (u'responseRandom', _H235CertificateSignature_responseRandom),
-        (u'requesterRandom', _H235CertificateSignature_requesterRandom),
-        (u'signature', _H235CertificateSignature_signature),
+        ('certificate', _H235CertificateSignature_certificate),
+        ('responseRandom', _H235CertificateSignature_responseRandom),
+        ('requesterRandom', _H235CertificateSignature_requesterRandom),
+        ('signature', _H235CertificateSignature_signature),
         ])
     H235CertificateSignature._ext = []
     
     #-----< ReturnSig >-----#
-    ReturnSig = SEQ(name=u'ReturnSig', mode=MODE_TYPE)
-    _ReturnSig_generalId = STR_BMP(name=u'generalId', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('H235-SECURITY-MESSAGES', 'Identifier')))
-    _ReturnSig_responseRandom = INT(name=u'responseRandom', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('H235-SECURITY-MESSAGES', 'RandomVal')))
-    _ReturnSig_requestRandom = INT(name=u'requestRandom', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('H235-SECURITY-MESSAGES', 'RandomVal')), opt=True)
-    _ReturnSig_certificate = SEQ(name=u'certificate', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('H235-SECURITY-MESSAGES', 'TypedCertificate')), opt=True)
+    ReturnSig = SEQ(name='ReturnSig', mode=MODE_TYPE)
+    _ReturnSig_generalId = STR_BMP(name='generalId', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('H235-SECURITY-MESSAGES', 'Identifier')))
+    _ReturnSig_responseRandom = INT(name='responseRandom', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('H235-SECURITY-MESSAGES', 'RandomVal')))
+    _ReturnSig_requestRandom = INT(name='requestRandom', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('H235-SECURITY-MESSAGES', 'RandomVal')), opt=True)
+    _ReturnSig_certificate = SEQ(name='certificate', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('H235-SECURITY-MESSAGES', 'TypedCertificate')), opt=True)
     ReturnSig._cont = ASN1Dict([
-        (u'generalId', _ReturnSig_generalId),
-        (u'responseRandom', _ReturnSig_responseRandom),
-        (u'requestRandom', _ReturnSig_requestRandom),
-        (u'certificate', _ReturnSig_certificate),
+        ('generalId', _ReturnSig_generalId),
+        ('responseRandom', _ReturnSig_responseRandom),
+        ('requestRandom', _ReturnSig_requestRandom),
+        ('certificate', _ReturnSig_certificate),
         ])
     ReturnSig._ext = None
     
     #-----< EncodedReturnSig >-----#
-    EncodedReturnSig = OPEN(name=u'EncodedReturnSig', mode=MODE_TYPE, typeref=ASN1RefClassField(('_IMPL_', u'TYPE-IDENTIFIER'), [u'Type']))
-    _EncodedReturnSig_val_0 = SEQ(name=u'EncodedReturnSig', mode=MODE_TYPE, typeref=ASN1RefType(('H235-SECURITY-MESSAGES', 'ReturnSig')))
+    EncodedReturnSig = OPEN(name='EncodedReturnSig', mode=MODE_TYPE, typeref=ASN1RefClassField(('_IMPL_', 'TYPE-IDENTIFIER'), ['Type']))
+    _EncodedReturnSig_val_0 = SEQ(name='EncodedReturnSig', mode=MODE_TYPE, typeref=ASN1RefType(('H235-SECURITY-MESSAGES', 'ReturnSig')))
     EncodedReturnSig._const_val = ASN1Set(rv=[_EncodedReturnSig_val_0], ev=None)
     
     #-----< KeySyncMaterial >-----#
-    KeySyncMaterial = SEQ(name=u'KeySyncMaterial', mode=MODE_TYPE)
-    _KeySyncMaterial_generalID = STR_BMP(name=u'generalID', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('H235-SECURITY-MESSAGES', 'Identifier')))
-    _KeySyncMaterial_keyMaterial = BIT_STR(name=u'keyMaterial', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('H235-SECURITY-MESSAGES', 'KeyMaterial')))
+    KeySyncMaterial = SEQ(name='KeySyncMaterial', mode=MODE_TYPE)
+    _KeySyncMaterial_generalID = STR_BMP(name='generalID', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('H235-SECURITY-MESSAGES', 'Identifier')))
+    _KeySyncMaterial_keyMaterial = BIT_STR(name='keyMaterial', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('H235-SECURITY-MESSAGES', 'KeyMaterial')))
     KeySyncMaterial._cont = ASN1Dict([
-        (u'generalID', _KeySyncMaterial_generalID),
-        (u'keyMaterial', _KeySyncMaterial_keyMaterial),
+        ('generalID', _KeySyncMaterial_generalID),
+        ('keyMaterial', _KeySyncMaterial_keyMaterial),
         ])
     KeySyncMaterial._ext = []
     
     #-----< EncodedKeySyncMaterial >-----#
-    EncodedKeySyncMaterial = OPEN(name=u'EncodedKeySyncMaterial', mode=MODE_TYPE, typeref=ASN1RefClassField(('_IMPL_', u'TYPE-IDENTIFIER'), [u'Type']))
-    _EncodedKeySyncMaterial_val_0 = SEQ(name=u'EncodedKeySyncMaterial', mode=MODE_TYPE, typeref=ASN1RefType(('H235-SECURITY-MESSAGES', 'KeySyncMaterial')))
+    EncodedKeySyncMaterial = OPEN(name='EncodedKeySyncMaterial', mode=MODE_TYPE, typeref=ASN1RefClassField(('_IMPL_', 'TYPE-IDENTIFIER'), ['Type']))
+    _EncodedKeySyncMaterial_val_0 = SEQ(name='EncodedKeySyncMaterial', mode=MODE_TYPE, typeref=ASN1RefType(('H235-SECURITY-MESSAGES', 'KeySyncMaterial')))
     EncodedKeySyncMaterial._const_val = ASN1Set(rv=[_EncodedKeySyncMaterial_val_0], ev=None)
     
     #-----< V3KeySyncMaterial >-----#
-    V3KeySyncMaterial = SEQ(name=u'V3KeySyncMaterial', mode=MODE_TYPE)
-    _V3KeySyncMaterial_generalID = STR_BMP(name=u'generalID', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('H235-SECURITY-MESSAGES', 'Identifier')), opt=True)
-    _V3KeySyncMaterial_algorithmOID = OID(name=u'algorithmOID', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _V3KeySyncMaterial_paramS = SEQ(name=u'paramS', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('H235-SECURITY-MESSAGES', 'Params')))
-    _V3KeySyncMaterial_encryptedSessionKey = OCT_STR(name=u'encryptedSessionKey', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _V3KeySyncMaterial_encryptedSaltingKey = OCT_STR(name=u'encryptedSaltingKey', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _V3KeySyncMaterial_clearSaltingKey = OCT_STR(name=u'clearSaltingKey', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _V3KeySyncMaterial_paramSsalt = SEQ(name=u'paramSsalt', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('H235-SECURITY-MESSAGES', 'Params')), opt=True)
-    _V3KeySyncMaterial_keyDerivationOID = OID(name=u'keyDerivationOID', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _V3KeySyncMaterial_genericKeyMaterial = OCT_STR(name=u'genericKeyMaterial', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    V3KeySyncMaterial = SEQ(name='V3KeySyncMaterial', mode=MODE_TYPE)
+    _V3KeySyncMaterial_generalID = STR_BMP(name='generalID', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('H235-SECURITY-MESSAGES', 'Identifier')), opt=True)
+    _V3KeySyncMaterial_algorithmOID = OID(name='algorithmOID', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _V3KeySyncMaterial_paramS = SEQ(name='paramS', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('H235-SECURITY-MESSAGES', 'Params')))
+    _V3KeySyncMaterial_encryptedSessionKey = OCT_STR(name='encryptedSessionKey', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _V3KeySyncMaterial_encryptedSaltingKey = OCT_STR(name='encryptedSaltingKey', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _V3KeySyncMaterial_clearSaltingKey = OCT_STR(name='clearSaltingKey', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _V3KeySyncMaterial_paramSsalt = SEQ(name='paramSsalt', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('H235-SECURITY-MESSAGES', 'Params')), opt=True)
+    _V3KeySyncMaterial_keyDerivationOID = OID(name='keyDerivationOID', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _V3KeySyncMaterial_genericKeyMaterial = OCT_STR(name='genericKeyMaterial', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     V3KeySyncMaterial._cont = ASN1Dict([
-        (u'generalID', _V3KeySyncMaterial_generalID),
-        (u'algorithmOID', _V3KeySyncMaterial_algorithmOID),
-        (u'paramS', _V3KeySyncMaterial_paramS),
-        (u'encryptedSessionKey', _V3KeySyncMaterial_encryptedSessionKey),
-        (u'encryptedSaltingKey', _V3KeySyncMaterial_encryptedSaltingKey),
-        (u'clearSaltingKey', _V3KeySyncMaterial_clearSaltingKey),
-        (u'paramSsalt', _V3KeySyncMaterial_paramSsalt),
-        (u'keyDerivationOID', _V3KeySyncMaterial_keyDerivationOID),
-        (u'genericKeyMaterial', _V3KeySyncMaterial_genericKeyMaterial),
+        ('generalID', _V3KeySyncMaterial_generalID),
+        ('algorithmOID', _V3KeySyncMaterial_algorithmOID),
+        ('paramS', _V3KeySyncMaterial_paramS),
+        ('encryptedSessionKey', _V3KeySyncMaterial_encryptedSessionKey),
+        ('encryptedSaltingKey', _V3KeySyncMaterial_encryptedSaltingKey),
+        ('clearSaltingKey', _V3KeySyncMaterial_clearSaltingKey),
+        ('paramSsalt', _V3KeySyncMaterial_paramSsalt),
+        ('keyDerivationOID', _V3KeySyncMaterial_keyDerivationOID),
+        ('genericKeyMaterial', _V3KeySyncMaterial_genericKeyMaterial),
         ])
-    V3KeySyncMaterial._ext = [u'genericKeyMaterial']
+    V3KeySyncMaterial._ext = ['genericKeyMaterial']
     
     _all_ = [
         ChallengeString,

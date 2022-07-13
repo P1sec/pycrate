@@ -20,13 +20,13 @@
     {"id": "CMS-AES-CCM-and-AES-GCM.AES-GCM-ICVlen", "group": 2}
   ],
   "links": [
-    {"source": "CMS-AES-CCM-and-AES-GCM.id-aes192-CCM", "target": "CMS-AES-CCM-and-AES-GCM.aes", "value": 1},
-    {"source": "CMS-AES-CCM-and-AES-GCM.CCMParameters", "target": "CMS-AES-CCM-and-AES-GCM.AES-CCM-ICVlen", "value": 1},
-    {"source": "CMS-AES-CCM-and-AES-GCM.id-aes256-GCM", "target": "CMS-AES-CCM-and-AES-GCM.aes", "value": 1},
     {"source": "CMS-AES-CCM-and-AES-GCM.id-aes128-CCM", "target": "CMS-AES-CCM-and-AES-GCM.aes", "value": 1},
-    {"source": "CMS-AES-CCM-and-AES-GCM.id-aes192-GCM", "target": "CMS-AES-CCM-and-AES-GCM.aes", "value": 1},
-    {"source": "CMS-AES-CCM-and-AES-GCM.id-aes128-GCM", "target": "CMS-AES-CCM-and-AES-GCM.aes", "value": 1},
+    {"source": "CMS-AES-CCM-and-AES-GCM.id-aes192-CCM", "target": "CMS-AES-CCM-and-AES-GCM.aes", "value": 1},
     {"source": "CMS-AES-CCM-and-AES-GCM.id-aes256-CCM", "target": "CMS-AES-CCM-and-AES-GCM.aes", "value": 1},
+    {"source": "CMS-AES-CCM-and-AES-GCM.id-aes128-GCM", "target": "CMS-AES-CCM-and-AES-GCM.aes", "value": 1},
+    {"source": "CMS-AES-CCM-and-AES-GCM.id-aes192-GCM", "target": "CMS-AES-CCM-and-AES-GCM.aes", "value": 1},
+    {"source": "CMS-AES-CCM-and-AES-GCM.id-aes256-GCM", "target": "CMS-AES-CCM-and-AES-GCM.aes", "value": 1},
+    {"source": "CMS-AES-CCM-and-AES-GCM.CCMParameters", "target": "CMS-AES-CCM-and-AES-GCM.AES-CCM-ICVlen", "value": 1},
     {"source": "CMS-AES-CCM-and-AES-GCM.GCMParameters", "target": "CMS-AES-CCM-and-AES-GCM.AES-GCM-ICVlen", "value": 1}
   ]
 }

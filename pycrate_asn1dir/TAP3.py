@@ -16,668 +16,668 @@ from pycrate_asn1rt.init             import init_modules
 
 class TAP_0312:
 
-    _name_  = u'TAP-0312'
+    _name_  = 'TAP-0312'
     _oid_   = []
     
     _obj_ = [
-        u'DataInterChange',
-        u'TransferBatch',
-        u'Notification',
-        u'CallEventDetailList',
-        u'CallEventDetail',
-        u'BatchControlInfo',
-        u'AccountingInfo',
-        u'NetworkInfo',
-        u'MessageDescriptionInfoList',
-        u'MobileOriginatedCall',
-        u'MobileTerminatedCall',
-        u'SupplServiceEvent',
-        u'ServiceCentreUsage',
-        u'GprsCall',
-        u'ContentTransaction',
-        u'LocationService',
-        u'MessagingEvent',
-        u'MobileSession',
-        u'AuditControlInfo',
-        u'AccessPointNameNI',
-        u'AccessPointNameOI',
-        u'ActualDeliveryTimeStamp',
-        u'AddressStringDigits',
-        u'AdvisedCharge',
-        u'AdvisedChargeCurrency',
-        u'AdvisedChargeInformation',
-        u'AgeOfLocation',
-        u'BasicService',
-        u'BasicServiceCode',
-        u'BasicServiceCodeList',
-        u'BasicServiceUsed',
-        u'BasicServiceUsedList',
-        u'BearerServiceCode',
-        u'CalledNumber',
-        u'CalledPlace',
-        u'CalledRegion',
-        u'CallEventDetailsCount',
-        u'CallEventStartTimeStamp',
-        u'CallingNumber',
-        u'CallOriginator',
-        u'CallReference',
-        u'CallTypeGroup',
-        u'CallTypeLevel1',
-        u'CallTypeLevel2',
-        u'CallTypeLevel3',
-        u'CamelDestinationNumber',
-        u'CamelInvocationFee',
-        u'CamelServiceKey',
-        u'CamelServiceLevel',
-        u'CamelServiceUsed',
-        u'CauseForTerm',
-        u'CellId',
-        u'Charge',
-        u'ChargeableSubscriber',
-        u'ChargeableUnits',
-        u'ChargeDetail',
-        u'ChargeDetailList',
-        u'ChargeDetailTimeStamp',
-        u'ChargedItem',
-        u'ChargedParty',
-        u'ChargedPartyEquipment',
-        u'ChargedPartyHomeIdentification',
-        u'ChargedPartyHomeIdList',
-        u'ChargedPartyIdentification',
-        u'ChargedPartyIdentifier',
-        u'ChargedPartyIdList',
-        u'ChargedPartyIdType',
-        u'ChargedPartyInformation',
-        u'ChargedPartyLocation',
-        u'ChargedPartyLocationList',
-        u'ChargedPartyStatus',
-        u'ChargedUnits',
-        u'ChargeInformation',
-        u'ChargeInformationList',
-        u'ChargeRefundIndicator',
-        u'ChargeType',
-        u'ChargingId',
-        u'ChargingPoint',
-        u'ChargingTimeStamp',
-        u'ClirIndicator',
-        u'Commission',
-        u'CompletionTimeStamp',
-        u'ContentChargingPoint',
-        u'ContentProvider',
-        u'ContentProviderIdentifier',
-        u'ContentProviderIdList',
-        u'ContentProviderIdType',
-        u'ContentProviderName',
-        u'ContentServiceUsed',
-        u'ContentServiceUsedList',
-        u'ContentTransactionBasicInfo',
-        u'ContentTransactionCode',
-        u'ContentTransactionType',
-        u'CseInformation',
-        u'CurrencyConversion',
-        u'CurrencyConversionList',
-        u'CustomerIdentifier',
-        u'CustomerIdType',
-        u'DataVolume',
-        u'DataVolumeIncoming',
-        u'DataVolumeOutgoing',
-        u'DateTime',
-        u'DateTimeLong',
-        u'DefaultCallHandlingIndicator',
-        u'DepositTimeStamp',
-        u'Destination',
-        u'DestinationNetwork',
-        u'DialledDigits',
-        u'Discount',
-        u'DiscountableAmount',
-        u'DiscountApplied',
-        u'DiscountCode',
-        u'DiscountInformation',
-        u'Discounting',
-        u'DiscountingList',
-        u'DiscountRate',
-        u'DiscountValue',
-        u'DistanceChargeBandCode',
-        u'EarliestCallTimeStamp',
-        u'ElementId',
-        u'ElementType',
-        u'EquipmentId',
-        u'EquipmentIdType',
-        u'Esn',
-        u'EventReference',
-        u'ExchangeRate',
-        u'ExchangeRateCode',
-        u'FileAvailableTimeStamp',
-        u'FileCreationTimeStamp',
-        u'FileSequenceNumber',
-        u'FileTypeIndicator',
-        u'FixedDiscountValue',
-        u'Fnur',
-        u'GeographicalLocation',
-        u'GprsBasicCallInformation',
-        u'GprsChargeableSubscriber',
-        u'GprsDestination',
-        u'GprsLocationInformation',
-        u'GprsNetworkLocation',
-        u'GprsServiceUsed',
-        u'GsmChargeableSubscriber',
-        u'GuaranteedBitRate',
-        u'HomeBid',
-        u'HomeIdentifier',
-        u'HomeIdType',
-        u'HomeLocationDescription',
-        u'HomeLocationInformation',
-        u'HorizontalAccuracyDelivered',
-        u'HorizontalAccuracyRequested',
-        u'HSCSDIndicator',
-        u'Imei',
-        u'ImeiOrEsn',
-        u'Imsi',
-        u'IMSSignallingContext',
-        u'InternetServiceProvider',
-        u'InternetServiceProviderIdList',
-        u'IspIdentifier',
-        u'IspIdType',
-        u'ISPList',
-        u'NetworkIdType',
-        u'NetworkIdentifier',
-        u'Network',
-        u'NetworkList',
-        u'LatestCallTimeStamp',
-        u'LCSQosDelivered',
-        u'LCSQosRequested',
-        u'LCSRequestTimestamp',
-        u'LCSSPIdentification',
-        u'LCSSPIdentificationList',
-        u'LCSSPInformation',
-        u'LCSTransactionStatus',
-        u'LocalCurrency',
-        u'LocalTimeStamp',
-        u'LocationArea',
-        u'LocationDescription',
-        u'LocationIdentifier',
-        u'LocationIdType',
-        u'LocationInformation',
-        u'LocationServiceUsage',
-        u'MaximumBitRate',
-        u'Mdn',
-        u'MessageDescription',
-        u'MessageDescriptionCode',
-        u'MessageDescriptionInformation',
-        u'MessageStatus',
-        u'MessageType',
-        u'MessagingEventService',
-        u'Min',
-        u'MinChargeableSubscriber',
-        u'MoBasicCallInformation',
-        u'MobileSessionService',
-        u'Msisdn',
-        u'MtBasicCallInformation',
-        u'NetworkAccessIdentifier',
-        u'NetworkElement',
-        u'NetworkElementList',
-        u'NetworkId',
-        u'NetworkInitPDPContext',
-        u'NetworkLocation',
-        u'NonChargedNumber',
-        u'NonChargedParty',
-        u'NonChargedPartyNumber',
-        u'NonChargedPublicUserId',
-        u'NumberOfDecimalPlaces',
-        u'ObjectType',
-        u'OperatorSpecInfoList',
-        u'OperatorSpecInformation',
-        u'OrderPlacedTimeStamp',
-        u'OriginatingNetwork',
-        u'PacketDataProtocolAddress',
-        u'PaidIndicator',
-        u'PartialTypeIndicator',
-        u'PaymentMethod',
-        u'PdpAddress',
-        u'PDPContextStartTimestamp',
-        u'PlmnId',
-        u'PositioningMethod',
-        u'PriorityCode',
-        u'PublicUserId',
-        u'RapFileSequenceNumber',
-        u'RecEntityCode',
-        u'RecEntityCodeList',
-        u'RecEntityId',
-        u'RecEntityInfoList',
-        u'RecEntityInformation',
-        u'RecEntityType',
-        u'Recipient',
-        u'ReleaseVersionNumber',
-        u'RequestedDeliveryTimeStamp',
-        u'RequestedDestination',
-        u'RequestedNumber',
-        u'RequestedPublicUserId',
-        u'ResponseTime',
-        u'ResponseTimeCategory',
-        u'ScuBasicInformation',
-        u'ScuChargeType',
-        u'ScuTimeStamps',
-        u'ScuChargeableSubscriber',
-        u'Sender',
-        u'ServiceStartTimestamp',
-        u'ServingBid',
-        u'ServingLocationDescription',
-        u'ServingNetwork',
-        u'ServingPartiesInformation',
-        u'SessionChargeInfoList',
-        u'SessionChargeInformation',
-        u'SimChargeableSubscriber',
-        u'SimToolkitIndicator',
-        u'SMSDestinationNumber',
-        u'SMSOriginator',
-        u'SpecificationVersionNumber',
-        u'SsParameters',
-        u'SupplServiceActionCode',
-        u'SupplServiceCode',
-        u'SupplServiceUsed',
-        u'TapCurrency',
-        u'TapDecimalPlaces',
-        u'TaxableAmount',
-        u'Taxation',
-        u'TaxationList',
-        u'TaxCode',
-        u'TaxIndicator',
-        u'TaxInformation',
-        u'TaxInformationList',
-        u'TaxRate',
-        u'TaxType',
-        u'TaxValue',
-        u'TeleServiceCode',
-        u'ThirdPartyInformation',
-        u'ThirdPartyNumber',
-        u'ThreeGcamelDestination',
-        u'TotalAdvisedCharge',
-        u'TotalAdvisedChargeRefund',
-        u'TotalAdvisedChargeValue',
-        u'TotalAdvisedChargeValueList',
-        u'TotalCallEventDuration',
-        u'TotalCharge',
-        u'TotalChargeRefund',
-        u'TotalCommission',
-        u'TotalCommissionRefund',
-        u'TotalDataVolume',
-        u'TotalDiscountRefund',
-        u'TotalDiscountValue',
-        u'TotalTaxRefund',
-        u'TotalTaxValue',
-        u'TotalTransactionDuration',
-        u'TrackedCustomerEquipment',
-        u'TrackedCustomerHomeId',
-        u'TrackedCustomerHomeIdList',
-        u'TrackedCustomerIdentification',
-        u'TrackedCustomerIdList',
-        u'TrackedCustomerInformation',
-        u'TrackedCustomerLocation',
-        u'TrackedCustomerLocList',
-        u'TrackingCustomerEquipment',
-        u'TrackingCustomerHomeId',
-        u'TrackingCustomerHomeIdList',
-        u'TrackingCustomerIdentification',
-        u'TrackingCustomerIdList',
-        u'TrackingCustomerInformation',
-        u'TrackingCustomerLocation',
-        u'TrackingCustomerLocList',
-        u'TrackingFrequency',
-        u'TrackingPeriod',
-        u'TransactionAuthCode',
-        u'TransactionDescriptionSupp',
-        u'TransactionDetailDescription',
-        u'TransactionIdentifier',
-        u'TransactionShortDescription',
-        u'TransactionStatus',
-        u'TransferCutOffTimeStamp',
-        u'TransparencyIndicator',
-        u'UserProtocolIndicator',
-        u'UtcTimeOffset',
-        u'UtcTimeOffsetCode',
-        u'UtcTimeOffsetInfo',
-        u'UtcTimeOffsetInfoList',
-        u'VerticalAccuracyDelivered',
-        u'VerticalAccuracyRequested',
-        u'AbsoluteAmount',
-        u'Bid',
-        u'Code',
-        u'AsciiString',
-        u'BCDString',
-        u'Currency',
-        u'HexString',
-        u'NumberString',
-        u'PercentageRate',
+        'DataInterChange',
+        'TransferBatch',
+        'Notification',
+        'CallEventDetailList',
+        'CallEventDetail',
+        'BatchControlInfo',
+        'AccountingInfo',
+        'NetworkInfo',
+        'MessageDescriptionInfoList',
+        'MobileOriginatedCall',
+        'MobileTerminatedCall',
+        'SupplServiceEvent',
+        'ServiceCentreUsage',
+        'GprsCall',
+        'ContentTransaction',
+        'LocationService',
+        'MessagingEvent',
+        'MobileSession',
+        'AuditControlInfo',
+        'AccessPointNameNI',
+        'AccessPointNameOI',
+        'ActualDeliveryTimeStamp',
+        'AddressStringDigits',
+        'AdvisedCharge',
+        'AdvisedChargeCurrency',
+        'AdvisedChargeInformation',
+        'AgeOfLocation',
+        'BasicService',
+        'BasicServiceCode',
+        'BasicServiceCodeList',
+        'BasicServiceUsed',
+        'BasicServiceUsedList',
+        'BearerServiceCode',
+        'CalledNumber',
+        'CalledPlace',
+        'CalledRegion',
+        'CallEventDetailsCount',
+        'CallEventStartTimeStamp',
+        'CallingNumber',
+        'CallOriginator',
+        'CallReference',
+        'CallTypeGroup',
+        'CallTypeLevel1',
+        'CallTypeLevel2',
+        'CallTypeLevel3',
+        'CamelDestinationNumber',
+        'CamelInvocationFee',
+        'CamelServiceKey',
+        'CamelServiceLevel',
+        'CamelServiceUsed',
+        'CauseForTerm',
+        'CellId',
+        'Charge',
+        'ChargeableSubscriber',
+        'ChargeableUnits',
+        'ChargeDetail',
+        'ChargeDetailList',
+        'ChargeDetailTimeStamp',
+        'ChargedItem',
+        'ChargedParty',
+        'ChargedPartyEquipment',
+        'ChargedPartyHomeIdentification',
+        'ChargedPartyHomeIdList',
+        'ChargedPartyIdentification',
+        'ChargedPartyIdentifier',
+        'ChargedPartyIdList',
+        'ChargedPartyIdType',
+        'ChargedPartyInformation',
+        'ChargedPartyLocation',
+        'ChargedPartyLocationList',
+        'ChargedPartyStatus',
+        'ChargedUnits',
+        'ChargeInformation',
+        'ChargeInformationList',
+        'ChargeRefundIndicator',
+        'ChargeType',
+        'ChargingId',
+        'ChargingPoint',
+        'ChargingTimeStamp',
+        'ClirIndicator',
+        'Commission',
+        'CompletionTimeStamp',
+        'ContentChargingPoint',
+        'ContentProvider',
+        'ContentProviderIdentifier',
+        'ContentProviderIdList',
+        'ContentProviderIdType',
+        'ContentProviderName',
+        'ContentServiceUsed',
+        'ContentServiceUsedList',
+        'ContentTransactionBasicInfo',
+        'ContentTransactionCode',
+        'ContentTransactionType',
+        'CseInformation',
+        'CurrencyConversion',
+        'CurrencyConversionList',
+        'CustomerIdentifier',
+        'CustomerIdType',
+        'DataVolume',
+        'DataVolumeIncoming',
+        'DataVolumeOutgoing',
+        'DateTime',
+        'DateTimeLong',
+        'DefaultCallHandlingIndicator',
+        'DepositTimeStamp',
+        'Destination',
+        'DestinationNetwork',
+        'DialledDigits',
+        'Discount',
+        'DiscountableAmount',
+        'DiscountApplied',
+        'DiscountCode',
+        'DiscountInformation',
+        'Discounting',
+        'DiscountingList',
+        'DiscountRate',
+        'DiscountValue',
+        'DistanceChargeBandCode',
+        'EarliestCallTimeStamp',
+        'ElementId',
+        'ElementType',
+        'EquipmentId',
+        'EquipmentIdType',
+        'Esn',
+        'EventReference',
+        'ExchangeRate',
+        'ExchangeRateCode',
+        'FileAvailableTimeStamp',
+        'FileCreationTimeStamp',
+        'FileSequenceNumber',
+        'FileTypeIndicator',
+        'FixedDiscountValue',
+        'Fnur',
+        'GeographicalLocation',
+        'GprsBasicCallInformation',
+        'GprsChargeableSubscriber',
+        'GprsDestination',
+        'GprsLocationInformation',
+        'GprsNetworkLocation',
+        'GprsServiceUsed',
+        'GsmChargeableSubscriber',
+        'GuaranteedBitRate',
+        'HomeBid',
+        'HomeIdentifier',
+        'HomeIdType',
+        'HomeLocationDescription',
+        'HomeLocationInformation',
+        'HorizontalAccuracyDelivered',
+        'HorizontalAccuracyRequested',
+        'HSCSDIndicator',
+        'Imei',
+        'ImeiOrEsn',
+        'Imsi',
+        'IMSSignallingContext',
+        'InternetServiceProvider',
+        'InternetServiceProviderIdList',
+        'IspIdentifier',
+        'IspIdType',
+        'ISPList',
+        'NetworkIdType',
+        'NetworkIdentifier',
+        'Network',
+        'NetworkList',
+        'LatestCallTimeStamp',
+        'LCSQosDelivered',
+        'LCSQosRequested',
+        'LCSRequestTimestamp',
+        'LCSSPIdentification',
+        'LCSSPIdentificationList',
+        'LCSSPInformation',
+        'LCSTransactionStatus',
+        'LocalCurrency',
+        'LocalTimeStamp',
+        'LocationArea',
+        'LocationDescription',
+        'LocationIdentifier',
+        'LocationIdType',
+        'LocationInformation',
+        'LocationServiceUsage',
+        'MaximumBitRate',
+        'Mdn',
+        'MessageDescription',
+        'MessageDescriptionCode',
+        'MessageDescriptionInformation',
+        'MessageStatus',
+        'MessageType',
+        'MessagingEventService',
+        'Min',
+        'MinChargeableSubscriber',
+        'MoBasicCallInformation',
+        'MobileSessionService',
+        'Msisdn',
+        'MtBasicCallInformation',
+        'NetworkAccessIdentifier',
+        'NetworkElement',
+        'NetworkElementList',
+        'NetworkId',
+        'NetworkInitPDPContext',
+        'NetworkLocation',
+        'NonChargedNumber',
+        'NonChargedParty',
+        'NonChargedPartyNumber',
+        'NonChargedPublicUserId',
+        'NumberOfDecimalPlaces',
+        'ObjectType',
+        'OperatorSpecInfoList',
+        'OperatorSpecInformation',
+        'OrderPlacedTimeStamp',
+        'OriginatingNetwork',
+        'PacketDataProtocolAddress',
+        'PaidIndicator',
+        'PartialTypeIndicator',
+        'PaymentMethod',
+        'PdpAddress',
+        'PDPContextStartTimestamp',
+        'PlmnId',
+        'PositioningMethod',
+        'PriorityCode',
+        'PublicUserId',
+        'RapFileSequenceNumber',
+        'RecEntityCode',
+        'RecEntityCodeList',
+        'RecEntityId',
+        'RecEntityInfoList',
+        'RecEntityInformation',
+        'RecEntityType',
+        'Recipient',
+        'ReleaseVersionNumber',
+        'RequestedDeliveryTimeStamp',
+        'RequestedDestination',
+        'RequestedNumber',
+        'RequestedPublicUserId',
+        'ResponseTime',
+        'ResponseTimeCategory',
+        'ScuBasicInformation',
+        'ScuChargeType',
+        'ScuTimeStamps',
+        'ScuChargeableSubscriber',
+        'Sender',
+        'ServiceStartTimestamp',
+        'ServingBid',
+        'ServingLocationDescription',
+        'ServingNetwork',
+        'ServingPartiesInformation',
+        'SessionChargeInfoList',
+        'SessionChargeInformation',
+        'SimChargeableSubscriber',
+        'SimToolkitIndicator',
+        'SMSDestinationNumber',
+        'SMSOriginator',
+        'SpecificationVersionNumber',
+        'SsParameters',
+        'SupplServiceActionCode',
+        'SupplServiceCode',
+        'SupplServiceUsed',
+        'TapCurrency',
+        'TapDecimalPlaces',
+        'TaxableAmount',
+        'Taxation',
+        'TaxationList',
+        'TaxCode',
+        'TaxIndicator',
+        'TaxInformation',
+        'TaxInformationList',
+        'TaxRate',
+        'TaxType',
+        'TaxValue',
+        'TeleServiceCode',
+        'ThirdPartyInformation',
+        'ThirdPartyNumber',
+        'ThreeGcamelDestination',
+        'TotalAdvisedCharge',
+        'TotalAdvisedChargeRefund',
+        'TotalAdvisedChargeValue',
+        'TotalAdvisedChargeValueList',
+        'TotalCallEventDuration',
+        'TotalCharge',
+        'TotalChargeRefund',
+        'TotalCommission',
+        'TotalCommissionRefund',
+        'TotalDataVolume',
+        'TotalDiscountRefund',
+        'TotalDiscountValue',
+        'TotalTaxRefund',
+        'TotalTaxValue',
+        'TotalTransactionDuration',
+        'TrackedCustomerEquipment',
+        'TrackedCustomerHomeId',
+        'TrackedCustomerHomeIdList',
+        'TrackedCustomerIdentification',
+        'TrackedCustomerIdList',
+        'TrackedCustomerInformation',
+        'TrackedCustomerLocation',
+        'TrackedCustomerLocList',
+        'TrackingCustomerEquipment',
+        'TrackingCustomerHomeId',
+        'TrackingCustomerHomeIdList',
+        'TrackingCustomerIdentification',
+        'TrackingCustomerIdList',
+        'TrackingCustomerInformation',
+        'TrackingCustomerLocation',
+        'TrackingCustomerLocList',
+        'TrackingFrequency',
+        'TrackingPeriod',
+        'TransactionAuthCode',
+        'TransactionDescriptionSupp',
+        'TransactionDetailDescription',
+        'TransactionIdentifier',
+        'TransactionShortDescription',
+        'TransactionStatus',
+        'TransferCutOffTimeStamp',
+        'TransparencyIndicator',
+        'UserProtocolIndicator',
+        'UtcTimeOffset',
+        'UtcTimeOffsetCode',
+        'UtcTimeOffsetInfo',
+        'UtcTimeOffsetInfoList',
+        'VerticalAccuracyDelivered',
+        'VerticalAccuracyRequested',
+        'AbsoluteAmount',
+        'Bid',
+        'Code',
+        'AsciiString',
+        'BCDString',
+        'Currency',
+        'HexString',
+        'NumberString',
+        'PercentageRate',
         ]
     _type_ = [
-        u'DataInterChange',
-        u'TransferBatch',
-        u'Notification',
-        u'CallEventDetailList',
-        u'CallEventDetail',
-        u'BatchControlInfo',
-        u'AccountingInfo',
-        u'NetworkInfo',
-        u'MessageDescriptionInfoList',
-        u'MobileOriginatedCall',
-        u'MobileTerminatedCall',
-        u'SupplServiceEvent',
-        u'ServiceCentreUsage',
-        u'GprsCall',
-        u'ContentTransaction',
-        u'LocationService',
-        u'MessagingEvent',
-        u'MobileSession',
-        u'AuditControlInfo',
-        u'AccessPointNameNI',
-        u'AccessPointNameOI',
-        u'ActualDeliveryTimeStamp',
-        u'AddressStringDigits',
-        u'AdvisedCharge',
-        u'AdvisedChargeCurrency',
-        u'AdvisedChargeInformation',
-        u'AgeOfLocation',
-        u'BasicService',
-        u'BasicServiceCode',
-        u'BasicServiceCodeList',
-        u'BasicServiceUsed',
-        u'BasicServiceUsedList',
-        u'BearerServiceCode',
-        u'CalledNumber',
-        u'CalledPlace',
-        u'CalledRegion',
-        u'CallEventDetailsCount',
-        u'CallEventStartTimeStamp',
-        u'CallingNumber',
-        u'CallOriginator',
-        u'CallReference',
-        u'CallTypeGroup',
-        u'CallTypeLevel1',
-        u'CallTypeLevel2',
-        u'CallTypeLevel3',
-        u'CamelDestinationNumber',
-        u'CamelInvocationFee',
-        u'CamelServiceKey',
-        u'CamelServiceLevel',
-        u'CamelServiceUsed',
-        u'CauseForTerm',
-        u'CellId',
-        u'Charge',
-        u'ChargeableSubscriber',
-        u'ChargeableUnits',
-        u'ChargeDetail',
-        u'ChargeDetailList',
-        u'ChargeDetailTimeStamp',
-        u'ChargedItem',
-        u'ChargedParty',
-        u'ChargedPartyEquipment',
-        u'ChargedPartyHomeIdentification',
-        u'ChargedPartyHomeIdList',
-        u'ChargedPartyIdentification',
-        u'ChargedPartyIdentifier',
-        u'ChargedPartyIdList',
-        u'ChargedPartyIdType',
-        u'ChargedPartyInformation',
-        u'ChargedPartyLocation',
-        u'ChargedPartyLocationList',
-        u'ChargedPartyStatus',
-        u'ChargedUnits',
-        u'ChargeInformation',
-        u'ChargeInformationList',
-        u'ChargeRefundIndicator',
-        u'ChargeType',
-        u'ChargingId',
-        u'ChargingPoint',
-        u'ChargingTimeStamp',
-        u'ClirIndicator',
-        u'Commission',
-        u'CompletionTimeStamp',
-        u'ContentChargingPoint',
-        u'ContentProvider',
-        u'ContentProviderIdentifier',
-        u'ContentProviderIdList',
-        u'ContentProviderIdType',
-        u'ContentProviderName',
-        u'ContentServiceUsed',
-        u'ContentServiceUsedList',
-        u'ContentTransactionBasicInfo',
-        u'ContentTransactionCode',
-        u'ContentTransactionType',
-        u'CseInformation',
-        u'CurrencyConversion',
-        u'CurrencyConversionList',
-        u'CustomerIdentifier',
-        u'CustomerIdType',
-        u'DataVolume',
-        u'DataVolumeIncoming',
-        u'DataVolumeOutgoing',
-        u'DateTime',
-        u'DateTimeLong',
-        u'DefaultCallHandlingIndicator',
-        u'DepositTimeStamp',
-        u'Destination',
-        u'DestinationNetwork',
-        u'DialledDigits',
-        u'Discount',
-        u'DiscountableAmount',
-        u'DiscountApplied',
-        u'DiscountCode',
-        u'DiscountInformation',
-        u'Discounting',
-        u'DiscountingList',
-        u'DiscountRate',
-        u'DiscountValue',
-        u'DistanceChargeBandCode',
-        u'EarliestCallTimeStamp',
-        u'ElementId',
-        u'ElementType',
-        u'EquipmentId',
-        u'EquipmentIdType',
-        u'Esn',
-        u'EventReference',
-        u'ExchangeRate',
-        u'ExchangeRateCode',
-        u'FileAvailableTimeStamp',
-        u'FileCreationTimeStamp',
-        u'FileSequenceNumber',
-        u'FileTypeIndicator',
-        u'FixedDiscountValue',
-        u'Fnur',
-        u'GeographicalLocation',
-        u'GprsBasicCallInformation',
-        u'GprsChargeableSubscriber',
-        u'GprsDestination',
-        u'GprsLocationInformation',
-        u'GprsNetworkLocation',
-        u'GprsServiceUsed',
-        u'GsmChargeableSubscriber',
-        u'GuaranteedBitRate',
-        u'HomeBid',
-        u'HomeIdentifier',
-        u'HomeIdType',
-        u'HomeLocationDescription',
-        u'HomeLocationInformation',
-        u'HorizontalAccuracyDelivered',
-        u'HorizontalAccuracyRequested',
-        u'HSCSDIndicator',
-        u'Imei',
-        u'ImeiOrEsn',
-        u'Imsi',
-        u'IMSSignallingContext',
-        u'InternetServiceProvider',
-        u'InternetServiceProviderIdList',
-        u'IspIdentifier',
-        u'IspIdType',
-        u'ISPList',
-        u'NetworkIdType',
-        u'NetworkIdentifier',
-        u'Network',
-        u'NetworkList',
-        u'LatestCallTimeStamp',
-        u'LCSQosDelivered',
-        u'LCSQosRequested',
-        u'LCSRequestTimestamp',
-        u'LCSSPIdentification',
-        u'LCSSPIdentificationList',
-        u'LCSSPInformation',
-        u'LCSTransactionStatus',
-        u'LocalCurrency',
-        u'LocalTimeStamp',
-        u'LocationArea',
-        u'LocationDescription',
-        u'LocationIdentifier',
-        u'LocationIdType',
-        u'LocationInformation',
-        u'LocationServiceUsage',
-        u'MaximumBitRate',
-        u'Mdn',
-        u'MessageDescription',
-        u'MessageDescriptionCode',
-        u'MessageDescriptionInformation',
-        u'MessageStatus',
-        u'MessageType',
-        u'MessagingEventService',
-        u'Min',
-        u'MinChargeableSubscriber',
-        u'MoBasicCallInformation',
-        u'MobileSessionService',
-        u'Msisdn',
-        u'MtBasicCallInformation',
-        u'NetworkAccessIdentifier',
-        u'NetworkElement',
-        u'NetworkElementList',
-        u'NetworkId',
-        u'NetworkInitPDPContext',
-        u'NetworkLocation',
-        u'NonChargedNumber',
-        u'NonChargedParty',
-        u'NonChargedPartyNumber',
-        u'NonChargedPublicUserId',
-        u'NumberOfDecimalPlaces',
-        u'ObjectType',
-        u'OperatorSpecInfoList',
-        u'OperatorSpecInformation',
-        u'OrderPlacedTimeStamp',
-        u'OriginatingNetwork',
-        u'PacketDataProtocolAddress',
-        u'PaidIndicator',
-        u'PartialTypeIndicator',
-        u'PaymentMethod',
-        u'PdpAddress',
-        u'PDPContextStartTimestamp',
-        u'PlmnId',
-        u'PositioningMethod',
-        u'PriorityCode',
-        u'PublicUserId',
-        u'RapFileSequenceNumber',
-        u'RecEntityCode',
-        u'RecEntityCodeList',
-        u'RecEntityId',
-        u'RecEntityInfoList',
-        u'RecEntityInformation',
-        u'RecEntityType',
-        u'Recipient',
-        u'ReleaseVersionNumber',
-        u'RequestedDeliveryTimeStamp',
-        u'RequestedDestination',
-        u'RequestedNumber',
-        u'RequestedPublicUserId',
-        u'ResponseTime',
-        u'ResponseTimeCategory',
-        u'ScuBasicInformation',
-        u'ScuChargeType',
-        u'ScuTimeStamps',
-        u'ScuChargeableSubscriber',
-        u'Sender',
-        u'ServiceStartTimestamp',
-        u'ServingBid',
-        u'ServingLocationDescription',
-        u'ServingNetwork',
-        u'ServingPartiesInformation',
-        u'SessionChargeInfoList',
-        u'SessionChargeInformation',
-        u'SimChargeableSubscriber',
-        u'SimToolkitIndicator',
-        u'SMSDestinationNumber',
-        u'SMSOriginator',
-        u'SpecificationVersionNumber',
-        u'SsParameters',
-        u'SupplServiceActionCode',
-        u'SupplServiceCode',
-        u'SupplServiceUsed',
-        u'TapCurrency',
-        u'TapDecimalPlaces',
-        u'TaxableAmount',
-        u'Taxation',
-        u'TaxationList',
-        u'TaxCode',
-        u'TaxIndicator',
-        u'TaxInformation',
-        u'TaxInformationList',
-        u'TaxRate',
-        u'TaxType',
-        u'TaxValue',
-        u'TeleServiceCode',
-        u'ThirdPartyInformation',
-        u'ThirdPartyNumber',
-        u'ThreeGcamelDestination',
-        u'TotalAdvisedCharge',
-        u'TotalAdvisedChargeRefund',
-        u'TotalAdvisedChargeValue',
-        u'TotalAdvisedChargeValueList',
-        u'TotalCallEventDuration',
-        u'TotalCharge',
-        u'TotalChargeRefund',
-        u'TotalCommission',
-        u'TotalCommissionRefund',
-        u'TotalDataVolume',
-        u'TotalDiscountRefund',
-        u'TotalDiscountValue',
-        u'TotalTaxRefund',
-        u'TotalTaxValue',
-        u'TotalTransactionDuration',
-        u'TrackedCustomerEquipment',
-        u'TrackedCustomerHomeId',
-        u'TrackedCustomerHomeIdList',
-        u'TrackedCustomerIdentification',
-        u'TrackedCustomerIdList',
-        u'TrackedCustomerInformation',
-        u'TrackedCustomerLocation',
-        u'TrackedCustomerLocList',
-        u'TrackingCustomerEquipment',
-        u'TrackingCustomerHomeId',
-        u'TrackingCustomerHomeIdList',
-        u'TrackingCustomerIdentification',
-        u'TrackingCustomerIdList',
-        u'TrackingCustomerInformation',
-        u'TrackingCustomerLocation',
-        u'TrackingCustomerLocList',
-        u'TrackingFrequency',
-        u'TrackingPeriod',
-        u'TransactionAuthCode',
-        u'TransactionDescriptionSupp',
-        u'TransactionDetailDescription',
-        u'TransactionIdentifier',
-        u'TransactionShortDescription',
-        u'TransactionStatus',
-        u'TransferCutOffTimeStamp',
-        u'TransparencyIndicator',
-        u'UserProtocolIndicator',
-        u'UtcTimeOffset',
-        u'UtcTimeOffsetCode',
-        u'UtcTimeOffsetInfo',
-        u'UtcTimeOffsetInfoList',
-        u'VerticalAccuracyDelivered',
-        u'VerticalAccuracyRequested',
-        u'AbsoluteAmount',
-        u'Bid',
-        u'Code',
-        u'AsciiString',
-        u'BCDString',
-        u'Currency',
-        u'HexString',
-        u'NumberString',
-        u'PercentageRate',
+        'DataInterChange',
+        'TransferBatch',
+        'Notification',
+        'CallEventDetailList',
+        'CallEventDetail',
+        'BatchControlInfo',
+        'AccountingInfo',
+        'NetworkInfo',
+        'MessageDescriptionInfoList',
+        'MobileOriginatedCall',
+        'MobileTerminatedCall',
+        'SupplServiceEvent',
+        'ServiceCentreUsage',
+        'GprsCall',
+        'ContentTransaction',
+        'LocationService',
+        'MessagingEvent',
+        'MobileSession',
+        'AuditControlInfo',
+        'AccessPointNameNI',
+        'AccessPointNameOI',
+        'ActualDeliveryTimeStamp',
+        'AddressStringDigits',
+        'AdvisedCharge',
+        'AdvisedChargeCurrency',
+        'AdvisedChargeInformation',
+        'AgeOfLocation',
+        'BasicService',
+        'BasicServiceCode',
+        'BasicServiceCodeList',
+        'BasicServiceUsed',
+        'BasicServiceUsedList',
+        'BearerServiceCode',
+        'CalledNumber',
+        'CalledPlace',
+        'CalledRegion',
+        'CallEventDetailsCount',
+        'CallEventStartTimeStamp',
+        'CallingNumber',
+        'CallOriginator',
+        'CallReference',
+        'CallTypeGroup',
+        'CallTypeLevel1',
+        'CallTypeLevel2',
+        'CallTypeLevel3',
+        'CamelDestinationNumber',
+        'CamelInvocationFee',
+        'CamelServiceKey',
+        'CamelServiceLevel',
+        'CamelServiceUsed',
+        'CauseForTerm',
+        'CellId',
+        'Charge',
+        'ChargeableSubscriber',
+        'ChargeableUnits',
+        'ChargeDetail',
+        'ChargeDetailList',
+        'ChargeDetailTimeStamp',
+        'ChargedItem',
+        'ChargedParty',
+        'ChargedPartyEquipment',
+        'ChargedPartyHomeIdentification',
+        'ChargedPartyHomeIdList',
+        'ChargedPartyIdentification',
+        'ChargedPartyIdentifier',
+        'ChargedPartyIdList',
+        'ChargedPartyIdType',
+        'ChargedPartyInformation',
+        'ChargedPartyLocation',
+        'ChargedPartyLocationList',
+        'ChargedPartyStatus',
+        'ChargedUnits',
+        'ChargeInformation',
+        'ChargeInformationList',
+        'ChargeRefundIndicator',
+        'ChargeType',
+        'ChargingId',
+        'ChargingPoint',
+        'ChargingTimeStamp',
+        'ClirIndicator',
+        'Commission',
+        'CompletionTimeStamp',
+        'ContentChargingPoint',
+        'ContentProvider',
+        'ContentProviderIdentifier',
+        'ContentProviderIdList',
+        'ContentProviderIdType',
+        'ContentProviderName',
+        'ContentServiceUsed',
+        'ContentServiceUsedList',
+        'ContentTransactionBasicInfo',
+        'ContentTransactionCode',
+        'ContentTransactionType',
+        'CseInformation',
+        'CurrencyConversion',
+        'CurrencyConversionList',
+        'CustomerIdentifier',
+        'CustomerIdType',
+        'DataVolume',
+        'DataVolumeIncoming',
+        'DataVolumeOutgoing',
+        'DateTime',
+        'DateTimeLong',
+        'DefaultCallHandlingIndicator',
+        'DepositTimeStamp',
+        'Destination',
+        'DestinationNetwork',
+        'DialledDigits',
+        'Discount',
+        'DiscountableAmount',
+        'DiscountApplied',
+        'DiscountCode',
+        'DiscountInformation',
+        'Discounting',
+        'DiscountingList',
+        'DiscountRate',
+        'DiscountValue',
+        'DistanceChargeBandCode',
+        'EarliestCallTimeStamp',
+        'ElementId',
+        'ElementType',
+        'EquipmentId',
+        'EquipmentIdType',
+        'Esn',
+        'EventReference',
+        'ExchangeRate',
+        'ExchangeRateCode',
+        'FileAvailableTimeStamp',
+        'FileCreationTimeStamp',
+        'FileSequenceNumber',
+        'FileTypeIndicator',
+        'FixedDiscountValue',
+        'Fnur',
+        'GeographicalLocation',
+        'GprsBasicCallInformation',
+        'GprsChargeableSubscriber',
+        'GprsDestination',
+        'GprsLocationInformation',
+        'GprsNetworkLocation',
+        'GprsServiceUsed',
+        'GsmChargeableSubscriber',
+        'GuaranteedBitRate',
+        'HomeBid',
+        'HomeIdentifier',
+        'HomeIdType',
+        'HomeLocationDescription',
+        'HomeLocationInformation',
+        'HorizontalAccuracyDelivered',
+        'HorizontalAccuracyRequested',
+        'HSCSDIndicator',
+        'Imei',
+        'ImeiOrEsn',
+        'Imsi',
+        'IMSSignallingContext',
+        'InternetServiceProvider',
+        'InternetServiceProviderIdList',
+        'IspIdentifier',
+        'IspIdType',
+        'ISPList',
+        'NetworkIdType',
+        'NetworkIdentifier',
+        'Network',
+        'NetworkList',
+        'LatestCallTimeStamp',
+        'LCSQosDelivered',
+        'LCSQosRequested',
+        'LCSRequestTimestamp',
+        'LCSSPIdentification',
+        'LCSSPIdentificationList',
+        'LCSSPInformation',
+        'LCSTransactionStatus',
+        'LocalCurrency',
+        'LocalTimeStamp',
+        'LocationArea',
+        'LocationDescription',
+        'LocationIdentifier',
+        'LocationIdType',
+        'LocationInformation',
+        'LocationServiceUsage',
+        'MaximumBitRate',
+        'Mdn',
+        'MessageDescription',
+        'MessageDescriptionCode',
+        'MessageDescriptionInformation',
+        'MessageStatus',
+        'MessageType',
+        'MessagingEventService',
+        'Min',
+        'MinChargeableSubscriber',
+        'MoBasicCallInformation',
+        'MobileSessionService',
+        'Msisdn',
+        'MtBasicCallInformation',
+        'NetworkAccessIdentifier',
+        'NetworkElement',
+        'NetworkElementList',
+        'NetworkId',
+        'NetworkInitPDPContext',
+        'NetworkLocation',
+        'NonChargedNumber',
+        'NonChargedParty',
+        'NonChargedPartyNumber',
+        'NonChargedPublicUserId',
+        'NumberOfDecimalPlaces',
+        'ObjectType',
+        'OperatorSpecInfoList',
+        'OperatorSpecInformation',
+        'OrderPlacedTimeStamp',
+        'OriginatingNetwork',
+        'PacketDataProtocolAddress',
+        'PaidIndicator',
+        'PartialTypeIndicator',
+        'PaymentMethod',
+        'PdpAddress',
+        'PDPContextStartTimestamp',
+        'PlmnId',
+        'PositioningMethod',
+        'PriorityCode',
+        'PublicUserId',
+        'RapFileSequenceNumber',
+        'RecEntityCode',
+        'RecEntityCodeList',
+        'RecEntityId',
+        'RecEntityInfoList',
+        'RecEntityInformation',
+        'RecEntityType',
+        'Recipient',
+        'ReleaseVersionNumber',
+        'RequestedDeliveryTimeStamp',
+        'RequestedDestination',
+        'RequestedNumber',
+        'RequestedPublicUserId',
+        'ResponseTime',
+        'ResponseTimeCategory',
+        'ScuBasicInformation',
+        'ScuChargeType',
+        'ScuTimeStamps',
+        'ScuChargeableSubscriber',
+        'Sender',
+        'ServiceStartTimestamp',
+        'ServingBid',
+        'ServingLocationDescription',
+        'ServingNetwork',
+        'ServingPartiesInformation',
+        'SessionChargeInfoList',
+        'SessionChargeInformation',
+        'SimChargeableSubscriber',
+        'SimToolkitIndicator',
+        'SMSDestinationNumber',
+        'SMSOriginator',
+        'SpecificationVersionNumber',
+        'SsParameters',
+        'SupplServiceActionCode',
+        'SupplServiceCode',
+        'SupplServiceUsed',
+        'TapCurrency',
+        'TapDecimalPlaces',
+        'TaxableAmount',
+        'Taxation',
+        'TaxationList',
+        'TaxCode',
+        'TaxIndicator',
+        'TaxInformation',
+        'TaxInformationList',
+        'TaxRate',
+        'TaxType',
+        'TaxValue',
+        'TeleServiceCode',
+        'ThirdPartyInformation',
+        'ThirdPartyNumber',
+        'ThreeGcamelDestination',
+        'TotalAdvisedCharge',
+        'TotalAdvisedChargeRefund',
+        'TotalAdvisedChargeValue',
+        'TotalAdvisedChargeValueList',
+        'TotalCallEventDuration',
+        'TotalCharge',
+        'TotalChargeRefund',
+        'TotalCommission',
+        'TotalCommissionRefund',
+        'TotalDataVolume',
+        'TotalDiscountRefund',
+        'TotalDiscountValue',
+        'TotalTaxRefund',
+        'TotalTaxValue',
+        'TotalTransactionDuration',
+        'TrackedCustomerEquipment',
+        'TrackedCustomerHomeId',
+        'TrackedCustomerHomeIdList',
+        'TrackedCustomerIdentification',
+        'TrackedCustomerIdList',
+        'TrackedCustomerInformation',
+        'TrackedCustomerLocation',
+        'TrackedCustomerLocList',
+        'TrackingCustomerEquipment',
+        'TrackingCustomerHomeId',
+        'TrackingCustomerHomeIdList',
+        'TrackingCustomerIdentification',
+        'TrackingCustomerIdList',
+        'TrackingCustomerInformation',
+        'TrackingCustomerLocation',
+        'TrackingCustomerLocList',
+        'TrackingFrequency',
+        'TrackingPeriod',
+        'TransactionAuthCode',
+        'TransactionDescriptionSupp',
+        'TransactionDetailDescription',
+        'TransactionIdentifier',
+        'TransactionShortDescription',
+        'TransactionStatus',
+        'TransferCutOffTimeStamp',
+        'TransparencyIndicator',
+        'UserProtocolIndicator',
+        'UtcTimeOffset',
+        'UtcTimeOffsetCode',
+        'UtcTimeOffsetInfo',
+        'UtcTimeOffsetInfoList',
+        'VerticalAccuracyDelivered',
+        'VerticalAccuracyRequested',
+        'AbsoluteAmount',
+        'Bid',
+        'Code',
+        'AsciiString',
+        'BCDString',
+        'Currency',
+        'HexString',
+        'NumberString',
+        'PercentageRate',
         ]
     _set_ = [
         ]
@@ -689,2197 +689,2197 @@ class TAP_0312:
         ]
     
     #-----< DataInterChange >-----#
-    DataInterChange = CHOICE(name=u'DataInterChange', mode=MODE_TYPE)
-    _DataInterChange_transferBatch = SEQ(name=u'transferBatch', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'TransferBatch')))
-    _DataInterChange_notification = SEQ(name=u'notification', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'Notification')))
+    DataInterChange = CHOICE(name='DataInterChange', mode=MODE_TYPE)
+    _DataInterChange_transferBatch = SEQ(name='transferBatch', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'TransferBatch')))
+    _DataInterChange_notification = SEQ(name='notification', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'Notification')))
     DataInterChange._cont = ASN1Dict([
-        (u'transferBatch', _DataInterChange_transferBatch),
-        (u'notification', _DataInterChange_notification),
+        ('transferBatch', _DataInterChange_transferBatch),
+        ('notification', _DataInterChange_notification),
         ])
     DataInterChange._ext = []
     
     #-----< TransferBatch >-----#
-    TransferBatch = SEQ(name=u'TransferBatch', mode=MODE_TYPE, tag=(1, TAG_APPLICATION, TAG_IMPLICIT))
-    _TransferBatch_batchControlInfo = SEQ(name=u'batchControlInfo', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'BatchControlInfo')), opt=True)
-    _TransferBatch_accountingInfo = SEQ(name=u'accountingInfo', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'AccountingInfo')), opt=True)
-    _TransferBatch_networkInfo = SEQ(name=u'networkInfo', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'NetworkInfo')), opt=True)
-    _TransferBatch_messageDescriptionInfo = SEQ_OF(name=u'messageDescriptionInfo', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'MessageDescriptionInfoList')), opt=True)
-    _TransferBatch_callEventDetails = SEQ_OF(name=u'callEventDetails', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'CallEventDetailList')), opt=True)
-    _TransferBatch_auditControlInfo = SEQ(name=u'auditControlInfo', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'AuditControlInfo')), opt=True)
+    TransferBatch = SEQ(name='TransferBatch', mode=MODE_TYPE, tag=(1, TAG_APPLICATION, TAG_IMPLICIT))
+    _TransferBatch_batchControlInfo = SEQ(name='batchControlInfo', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'BatchControlInfo')), opt=True)
+    _TransferBatch_accountingInfo = SEQ(name='accountingInfo', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'AccountingInfo')), opt=True)
+    _TransferBatch_networkInfo = SEQ(name='networkInfo', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'NetworkInfo')), opt=True)
+    _TransferBatch_messageDescriptionInfo = SEQ_OF(name='messageDescriptionInfo', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'MessageDescriptionInfoList')), opt=True)
+    _TransferBatch_callEventDetails = SEQ_OF(name='callEventDetails', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'CallEventDetailList')), opt=True)
+    _TransferBatch_auditControlInfo = SEQ(name='auditControlInfo', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'AuditControlInfo')), opt=True)
     TransferBatch._cont = ASN1Dict([
-        (u'batchControlInfo', _TransferBatch_batchControlInfo),
-        (u'accountingInfo', _TransferBatch_accountingInfo),
-        (u'networkInfo', _TransferBatch_networkInfo),
-        (u'messageDescriptionInfo', _TransferBatch_messageDescriptionInfo),
-        (u'callEventDetails', _TransferBatch_callEventDetails),
-        (u'auditControlInfo', _TransferBatch_auditControlInfo),
+        ('batchControlInfo', _TransferBatch_batchControlInfo),
+        ('accountingInfo', _TransferBatch_accountingInfo),
+        ('networkInfo', _TransferBatch_networkInfo),
+        ('messageDescriptionInfo', _TransferBatch_messageDescriptionInfo),
+        ('callEventDetails', _TransferBatch_callEventDetails),
+        ('auditControlInfo', _TransferBatch_auditControlInfo),
         ])
     TransferBatch._ext = []
     
     #-----< Notification >-----#
-    Notification = SEQ(name=u'Notification', mode=MODE_TYPE, tag=(2, TAG_APPLICATION, TAG_IMPLICIT))
-    _Notification_sender = OCT_STR(name=u'sender', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'Sender')), opt=True)
-    _Notification_recipient = OCT_STR(name=u'recipient', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'Recipient')), opt=True)
-    _Notification_fileSequenceNumber = OCT_STR(name=u'fileSequenceNumber', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'FileSequenceNumber')), opt=True)
-    _Notification_rapFileSequenceNumber = OCT_STR(name=u'rapFileSequenceNumber', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'RapFileSequenceNumber')), opt=True)
-    _Notification_fileCreationTimeStamp = SEQ(name=u'fileCreationTimeStamp', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'FileCreationTimeStamp')), opt=True)
-    _Notification_fileAvailableTimeStamp = SEQ(name=u'fileAvailableTimeStamp', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'FileAvailableTimeStamp')), opt=True)
-    _Notification_transferCutOffTimeStamp = SEQ(name=u'transferCutOffTimeStamp', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'TransferCutOffTimeStamp')), opt=True)
-    _Notification_specificationVersionNumber = INT(name=u'specificationVersionNumber', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'SpecificationVersionNumber')), opt=True)
-    _Notification_releaseVersionNumber = INT(name=u'releaseVersionNumber', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'ReleaseVersionNumber')), opt=True)
-    _Notification_fileTypeIndicator = OCT_STR(name=u'fileTypeIndicator', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'FileTypeIndicator')), opt=True)
-    _Notification_operatorSpecInformation = SEQ_OF(name=u'operatorSpecInformation', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'OperatorSpecInfoList')), opt=True)
+    Notification = SEQ(name='Notification', mode=MODE_TYPE, tag=(2, TAG_APPLICATION, TAG_IMPLICIT))
+    _Notification_sender = OCT_STR(name='sender', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'Sender')), opt=True)
+    _Notification_recipient = OCT_STR(name='recipient', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'Recipient')), opt=True)
+    _Notification_fileSequenceNumber = OCT_STR(name='fileSequenceNumber', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'FileSequenceNumber')), opt=True)
+    _Notification_rapFileSequenceNumber = OCT_STR(name='rapFileSequenceNumber', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'RapFileSequenceNumber')), opt=True)
+    _Notification_fileCreationTimeStamp = SEQ(name='fileCreationTimeStamp', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'FileCreationTimeStamp')), opt=True)
+    _Notification_fileAvailableTimeStamp = SEQ(name='fileAvailableTimeStamp', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'FileAvailableTimeStamp')), opt=True)
+    _Notification_transferCutOffTimeStamp = SEQ(name='transferCutOffTimeStamp', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'TransferCutOffTimeStamp')), opt=True)
+    _Notification_specificationVersionNumber = INT(name='specificationVersionNumber', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'SpecificationVersionNumber')), opt=True)
+    _Notification_releaseVersionNumber = INT(name='releaseVersionNumber', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'ReleaseVersionNumber')), opt=True)
+    _Notification_fileTypeIndicator = OCT_STR(name='fileTypeIndicator', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'FileTypeIndicator')), opt=True)
+    _Notification_operatorSpecInformation = SEQ_OF(name='operatorSpecInformation', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'OperatorSpecInfoList')), opt=True)
     Notification._cont = ASN1Dict([
-        (u'sender', _Notification_sender),
-        (u'recipient', _Notification_recipient),
-        (u'fileSequenceNumber', _Notification_fileSequenceNumber),
-        (u'rapFileSequenceNumber', _Notification_rapFileSequenceNumber),
-        (u'fileCreationTimeStamp', _Notification_fileCreationTimeStamp),
-        (u'fileAvailableTimeStamp', _Notification_fileAvailableTimeStamp),
-        (u'transferCutOffTimeStamp', _Notification_transferCutOffTimeStamp),
-        (u'specificationVersionNumber', _Notification_specificationVersionNumber),
-        (u'releaseVersionNumber', _Notification_releaseVersionNumber),
-        (u'fileTypeIndicator', _Notification_fileTypeIndicator),
-        (u'operatorSpecInformation', _Notification_operatorSpecInformation),
+        ('sender', _Notification_sender),
+        ('recipient', _Notification_recipient),
+        ('fileSequenceNumber', _Notification_fileSequenceNumber),
+        ('rapFileSequenceNumber', _Notification_rapFileSequenceNumber),
+        ('fileCreationTimeStamp', _Notification_fileCreationTimeStamp),
+        ('fileAvailableTimeStamp', _Notification_fileAvailableTimeStamp),
+        ('transferCutOffTimeStamp', _Notification_transferCutOffTimeStamp),
+        ('specificationVersionNumber', _Notification_specificationVersionNumber),
+        ('releaseVersionNumber', _Notification_releaseVersionNumber),
+        ('fileTypeIndicator', _Notification_fileTypeIndicator),
+        ('operatorSpecInformation', _Notification_operatorSpecInformation),
         ])
     Notification._ext = []
     
     #-----< CallEventDetailList >-----#
-    CallEventDetailList = SEQ_OF(name=u'CallEventDetailList', mode=MODE_TYPE, tag=(3, TAG_APPLICATION, TAG_IMPLICIT))
+    CallEventDetailList = SEQ_OF(name='CallEventDetailList', mode=MODE_TYPE, tag=(3, TAG_APPLICATION, TAG_IMPLICIT))
     _CallEventDetailList__item_ = CHOICE(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'CallEventDetail')))
     CallEventDetailList._cont = _CallEventDetailList__item_
     
     #-----< CallEventDetail >-----#
-    CallEventDetail = CHOICE(name=u'CallEventDetail', mode=MODE_TYPE)
-    _CallEventDetail_mobileOriginatedCall = SEQ(name=u'mobileOriginatedCall', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'MobileOriginatedCall')))
-    _CallEventDetail_mobileTerminatedCall = SEQ(name=u'mobileTerminatedCall', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'MobileTerminatedCall')))
-    _CallEventDetail_supplServiceEvent = SEQ(name=u'supplServiceEvent', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'SupplServiceEvent')))
-    _CallEventDetail_serviceCentreUsage = SEQ(name=u'serviceCentreUsage', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'ServiceCentreUsage')))
-    _CallEventDetail_gprsCall = SEQ(name=u'gprsCall', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'GprsCall')))
-    _CallEventDetail_contentTransaction = SEQ(name=u'contentTransaction', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'ContentTransaction')))
-    _CallEventDetail_locationService = SEQ(name=u'locationService', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'LocationService')))
-    _CallEventDetail_messagingEvent = SEQ(name=u'messagingEvent', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'MessagingEvent')))
-    _CallEventDetail_mobileSession = SEQ(name=u'mobileSession', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'MobileSession')))
+    CallEventDetail = CHOICE(name='CallEventDetail', mode=MODE_TYPE)
+    _CallEventDetail_mobileOriginatedCall = SEQ(name='mobileOriginatedCall', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'MobileOriginatedCall')))
+    _CallEventDetail_mobileTerminatedCall = SEQ(name='mobileTerminatedCall', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'MobileTerminatedCall')))
+    _CallEventDetail_supplServiceEvent = SEQ(name='supplServiceEvent', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'SupplServiceEvent')))
+    _CallEventDetail_serviceCentreUsage = SEQ(name='serviceCentreUsage', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'ServiceCentreUsage')))
+    _CallEventDetail_gprsCall = SEQ(name='gprsCall', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'GprsCall')))
+    _CallEventDetail_contentTransaction = SEQ(name='contentTransaction', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'ContentTransaction')))
+    _CallEventDetail_locationService = SEQ(name='locationService', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'LocationService')))
+    _CallEventDetail_messagingEvent = SEQ(name='messagingEvent', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'MessagingEvent')))
+    _CallEventDetail_mobileSession = SEQ(name='mobileSession', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'MobileSession')))
     CallEventDetail._cont = ASN1Dict([
-        (u'mobileOriginatedCall', _CallEventDetail_mobileOriginatedCall),
-        (u'mobileTerminatedCall', _CallEventDetail_mobileTerminatedCall),
-        (u'supplServiceEvent', _CallEventDetail_supplServiceEvent),
-        (u'serviceCentreUsage', _CallEventDetail_serviceCentreUsage),
-        (u'gprsCall', _CallEventDetail_gprsCall),
-        (u'contentTransaction', _CallEventDetail_contentTransaction),
-        (u'locationService', _CallEventDetail_locationService),
-        (u'messagingEvent', _CallEventDetail_messagingEvent),
-        (u'mobileSession', _CallEventDetail_mobileSession),
+        ('mobileOriginatedCall', _CallEventDetail_mobileOriginatedCall),
+        ('mobileTerminatedCall', _CallEventDetail_mobileTerminatedCall),
+        ('supplServiceEvent', _CallEventDetail_supplServiceEvent),
+        ('serviceCentreUsage', _CallEventDetail_serviceCentreUsage),
+        ('gprsCall', _CallEventDetail_gprsCall),
+        ('contentTransaction', _CallEventDetail_contentTransaction),
+        ('locationService', _CallEventDetail_locationService),
+        ('messagingEvent', _CallEventDetail_messagingEvent),
+        ('mobileSession', _CallEventDetail_mobileSession),
         ])
     CallEventDetail._ext = []
     
     #-----< BatchControlInfo >-----#
-    BatchControlInfo = SEQ(name=u'BatchControlInfo', mode=MODE_TYPE, tag=(4, TAG_APPLICATION, TAG_IMPLICIT))
-    _BatchControlInfo_sender = OCT_STR(name=u'sender', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'Sender')), opt=True)
-    _BatchControlInfo_recipient = OCT_STR(name=u'recipient', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'Recipient')), opt=True)
-    _BatchControlInfo_fileSequenceNumber = OCT_STR(name=u'fileSequenceNumber', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'FileSequenceNumber')), opt=True)
-    _BatchControlInfo_fileCreationTimeStamp = SEQ(name=u'fileCreationTimeStamp', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'FileCreationTimeStamp')), opt=True)
-    _BatchControlInfo_transferCutOffTimeStamp = SEQ(name=u'transferCutOffTimeStamp', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'TransferCutOffTimeStamp')), opt=True)
-    _BatchControlInfo_fileAvailableTimeStamp = SEQ(name=u'fileAvailableTimeStamp', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'FileAvailableTimeStamp')), opt=True)
-    _BatchControlInfo_specificationVersionNumber = INT(name=u'specificationVersionNumber', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'SpecificationVersionNumber')), opt=True)
-    _BatchControlInfo_releaseVersionNumber = INT(name=u'releaseVersionNumber', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'ReleaseVersionNumber')), opt=True)
-    _BatchControlInfo_fileTypeIndicator = OCT_STR(name=u'fileTypeIndicator', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'FileTypeIndicator')), opt=True)
-    _BatchControlInfo_rapFileSequenceNumber = OCT_STR(name=u'rapFileSequenceNumber', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'RapFileSequenceNumber')), opt=True)
-    _BatchControlInfo_operatorSpecInformation = SEQ_OF(name=u'operatorSpecInformation', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'OperatorSpecInfoList')), opt=True)
+    BatchControlInfo = SEQ(name='BatchControlInfo', mode=MODE_TYPE, tag=(4, TAG_APPLICATION, TAG_IMPLICIT))
+    _BatchControlInfo_sender = OCT_STR(name='sender', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'Sender')), opt=True)
+    _BatchControlInfo_recipient = OCT_STR(name='recipient', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'Recipient')), opt=True)
+    _BatchControlInfo_fileSequenceNumber = OCT_STR(name='fileSequenceNumber', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'FileSequenceNumber')), opt=True)
+    _BatchControlInfo_fileCreationTimeStamp = SEQ(name='fileCreationTimeStamp', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'FileCreationTimeStamp')), opt=True)
+    _BatchControlInfo_transferCutOffTimeStamp = SEQ(name='transferCutOffTimeStamp', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'TransferCutOffTimeStamp')), opt=True)
+    _BatchControlInfo_fileAvailableTimeStamp = SEQ(name='fileAvailableTimeStamp', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'FileAvailableTimeStamp')), opt=True)
+    _BatchControlInfo_specificationVersionNumber = INT(name='specificationVersionNumber', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'SpecificationVersionNumber')), opt=True)
+    _BatchControlInfo_releaseVersionNumber = INT(name='releaseVersionNumber', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'ReleaseVersionNumber')), opt=True)
+    _BatchControlInfo_fileTypeIndicator = OCT_STR(name='fileTypeIndicator', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'FileTypeIndicator')), opt=True)
+    _BatchControlInfo_rapFileSequenceNumber = OCT_STR(name='rapFileSequenceNumber', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'RapFileSequenceNumber')), opt=True)
+    _BatchControlInfo_operatorSpecInformation = SEQ_OF(name='operatorSpecInformation', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'OperatorSpecInfoList')), opt=True)
     BatchControlInfo._cont = ASN1Dict([
-        (u'sender', _BatchControlInfo_sender),
-        (u'recipient', _BatchControlInfo_recipient),
-        (u'fileSequenceNumber', _BatchControlInfo_fileSequenceNumber),
-        (u'fileCreationTimeStamp', _BatchControlInfo_fileCreationTimeStamp),
-        (u'transferCutOffTimeStamp', _BatchControlInfo_transferCutOffTimeStamp),
-        (u'fileAvailableTimeStamp', _BatchControlInfo_fileAvailableTimeStamp),
-        (u'specificationVersionNumber', _BatchControlInfo_specificationVersionNumber),
-        (u'releaseVersionNumber', _BatchControlInfo_releaseVersionNumber),
-        (u'fileTypeIndicator', _BatchControlInfo_fileTypeIndicator),
-        (u'rapFileSequenceNumber', _BatchControlInfo_rapFileSequenceNumber),
-        (u'operatorSpecInformation', _BatchControlInfo_operatorSpecInformation),
+        ('sender', _BatchControlInfo_sender),
+        ('recipient', _BatchControlInfo_recipient),
+        ('fileSequenceNumber', _BatchControlInfo_fileSequenceNumber),
+        ('fileCreationTimeStamp', _BatchControlInfo_fileCreationTimeStamp),
+        ('transferCutOffTimeStamp', _BatchControlInfo_transferCutOffTimeStamp),
+        ('fileAvailableTimeStamp', _BatchControlInfo_fileAvailableTimeStamp),
+        ('specificationVersionNumber', _BatchControlInfo_specificationVersionNumber),
+        ('releaseVersionNumber', _BatchControlInfo_releaseVersionNumber),
+        ('fileTypeIndicator', _BatchControlInfo_fileTypeIndicator),
+        ('rapFileSequenceNumber', _BatchControlInfo_rapFileSequenceNumber),
+        ('operatorSpecInformation', _BatchControlInfo_operatorSpecInformation),
         ])
     BatchControlInfo._ext = []
     
     #-----< AccountingInfo >-----#
-    AccountingInfo = SEQ(name=u'AccountingInfo', mode=MODE_TYPE, tag=(5, TAG_APPLICATION, TAG_IMPLICIT))
-    _AccountingInfo_taxation = SEQ_OF(name=u'taxation', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'TaxationList')), opt=True)
-    _AccountingInfo_discounting = SEQ_OF(name=u'discounting', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'DiscountingList')), opt=True)
-    _AccountingInfo_localCurrency = OCT_STR(name=u'localCurrency', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'LocalCurrency')), opt=True)
-    _AccountingInfo_tapCurrency = OCT_STR(name=u'tapCurrency', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'TapCurrency')), opt=True)
-    _AccountingInfo_currencyConversionInfo = SEQ_OF(name=u'currencyConversionInfo', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'CurrencyConversionList')), opt=True)
-    _AccountingInfo_tapDecimalPlaces = INT(name=u'tapDecimalPlaces', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'TapDecimalPlaces')), opt=True)
+    AccountingInfo = SEQ(name='AccountingInfo', mode=MODE_TYPE, tag=(5, TAG_APPLICATION, TAG_IMPLICIT))
+    _AccountingInfo_taxation = SEQ_OF(name='taxation', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'TaxationList')), opt=True)
+    _AccountingInfo_discounting = SEQ_OF(name='discounting', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'DiscountingList')), opt=True)
+    _AccountingInfo_localCurrency = OCT_STR(name='localCurrency', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'LocalCurrency')), opt=True)
+    _AccountingInfo_tapCurrency = OCT_STR(name='tapCurrency', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'TapCurrency')), opt=True)
+    _AccountingInfo_currencyConversionInfo = SEQ_OF(name='currencyConversionInfo', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'CurrencyConversionList')), opt=True)
+    _AccountingInfo_tapDecimalPlaces = INT(name='tapDecimalPlaces', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'TapDecimalPlaces')), opt=True)
     AccountingInfo._cont = ASN1Dict([
-        (u'taxation', _AccountingInfo_taxation),
-        (u'discounting', _AccountingInfo_discounting),
-        (u'localCurrency', _AccountingInfo_localCurrency),
-        (u'tapCurrency', _AccountingInfo_tapCurrency),
-        (u'currencyConversionInfo', _AccountingInfo_currencyConversionInfo),
-        (u'tapDecimalPlaces', _AccountingInfo_tapDecimalPlaces),
+        ('taxation', _AccountingInfo_taxation),
+        ('discounting', _AccountingInfo_discounting),
+        ('localCurrency', _AccountingInfo_localCurrency),
+        ('tapCurrency', _AccountingInfo_tapCurrency),
+        ('currencyConversionInfo', _AccountingInfo_currencyConversionInfo),
+        ('tapDecimalPlaces', _AccountingInfo_tapDecimalPlaces),
         ])
     AccountingInfo._ext = []
     
     #-----< NetworkInfo >-----#
-    NetworkInfo = SEQ(name=u'NetworkInfo', mode=MODE_TYPE, tag=(6, TAG_APPLICATION, TAG_IMPLICIT))
-    _NetworkInfo_utcTimeOffsetInfo = SEQ_OF(name=u'utcTimeOffsetInfo', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'UtcTimeOffsetInfoList')), opt=True)
-    _NetworkInfo_recEntityInfo = SEQ_OF(name=u'recEntityInfo', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'RecEntityInfoList')), opt=True)
+    NetworkInfo = SEQ(name='NetworkInfo', mode=MODE_TYPE, tag=(6, TAG_APPLICATION, TAG_IMPLICIT))
+    _NetworkInfo_utcTimeOffsetInfo = SEQ_OF(name='utcTimeOffsetInfo', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'UtcTimeOffsetInfoList')), opt=True)
+    _NetworkInfo_recEntityInfo = SEQ_OF(name='recEntityInfo', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'RecEntityInfoList')), opt=True)
     NetworkInfo._cont = ASN1Dict([
-        (u'utcTimeOffsetInfo', _NetworkInfo_utcTimeOffsetInfo),
-        (u'recEntityInfo', _NetworkInfo_recEntityInfo),
+        ('utcTimeOffsetInfo', _NetworkInfo_utcTimeOffsetInfo),
+        ('recEntityInfo', _NetworkInfo_recEntityInfo),
         ])
     NetworkInfo._ext = []
     
     #-----< MessageDescriptionInfoList >-----#
-    MessageDescriptionInfoList = SEQ_OF(name=u'MessageDescriptionInfoList', mode=MODE_TYPE, tag=(8, TAG_APPLICATION, TAG_IMPLICIT))
+    MessageDescriptionInfoList = SEQ_OF(name='MessageDescriptionInfoList', mode=MODE_TYPE, tag=(8, TAG_APPLICATION, TAG_IMPLICIT))
     _MessageDescriptionInfoList__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'MessageDescriptionInformation')))
     MessageDescriptionInfoList._cont = _MessageDescriptionInfoList__item_
     
     #-----< MobileOriginatedCall >-----#
-    MobileOriginatedCall = SEQ(name=u'MobileOriginatedCall', mode=MODE_TYPE, tag=(9, TAG_APPLICATION, TAG_IMPLICIT))
-    _MobileOriginatedCall_basicCallInformation = SEQ(name=u'basicCallInformation', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'MoBasicCallInformation')), opt=True)
-    _MobileOriginatedCall_locationInformation = SEQ(name=u'locationInformation', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'LocationInformation')), opt=True)
-    _MobileOriginatedCall_equipmentIdentifier = CHOICE(name=u'equipmentIdentifier', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'ImeiOrEsn')), opt=True)
-    _MobileOriginatedCall_basicServiceUsedList = SEQ_OF(name=u'basicServiceUsedList', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'BasicServiceUsedList')), opt=True)
-    _MobileOriginatedCall_supplServiceCode = OCT_STR(name=u'supplServiceCode', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'SupplServiceCode')), opt=True)
-    _MobileOriginatedCall_thirdPartyInformation = SEQ(name=u'thirdPartyInformation', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'ThirdPartyInformation')), opt=True)
-    _MobileOriginatedCall_camelServiceUsed = SEQ(name=u'camelServiceUsed', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'CamelServiceUsed')), opt=True)
-    _MobileOriginatedCall_operatorSpecInformation = SEQ_OF(name=u'operatorSpecInformation', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'OperatorSpecInfoList')), opt=True)
+    MobileOriginatedCall = SEQ(name='MobileOriginatedCall', mode=MODE_TYPE, tag=(9, TAG_APPLICATION, TAG_IMPLICIT))
+    _MobileOriginatedCall_basicCallInformation = SEQ(name='basicCallInformation', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'MoBasicCallInformation')), opt=True)
+    _MobileOriginatedCall_locationInformation = SEQ(name='locationInformation', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'LocationInformation')), opt=True)
+    _MobileOriginatedCall_equipmentIdentifier = CHOICE(name='equipmentIdentifier', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'ImeiOrEsn')), opt=True)
+    _MobileOriginatedCall_basicServiceUsedList = SEQ_OF(name='basicServiceUsedList', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'BasicServiceUsedList')), opt=True)
+    _MobileOriginatedCall_supplServiceCode = OCT_STR(name='supplServiceCode', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'SupplServiceCode')), opt=True)
+    _MobileOriginatedCall_thirdPartyInformation = SEQ(name='thirdPartyInformation', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'ThirdPartyInformation')), opt=True)
+    _MobileOriginatedCall_camelServiceUsed = SEQ(name='camelServiceUsed', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'CamelServiceUsed')), opt=True)
+    _MobileOriginatedCall_operatorSpecInformation = SEQ_OF(name='operatorSpecInformation', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'OperatorSpecInfoList')), opt=True)
     MobileOriginatedCall._cont = ASN1Dict([
-        (u'basicCallInformation', _MobileOriginatedCall_basicCallInformation),
-        (u'locationInformation', _MobileOriginatedCall_locationInformation),
-        (u'equipmentIdentifier', _MobileOriginatedCall_equipmentIdentifier),
-        (u'basicServiceUsedList', _MobileOriginatedCall_basicServiceUsedList),
-        (u'supplServiceCode', _MobileOriginatedCall_supplServiceCode),
-        (u'thirdPartyInformation', _MobileOriginatedCall_thirdPartyInformation),
-        (u'camelServiceUsed', _MobileOriginatedCall_camelServiceUsed),
-        (u'operatorSpecInformation', _MobileOriginatedCall_operatorSpecInformation),
+        ('basicCallInformation', _MobileOriginatedCall_basicCallInformation),
+        ('locationInformation', _MobileOriginatedCall_locationInformation),
+        ('equipmentIdentifier', _MobileOriginatedCall_equipmentIdentifier),
+        ('basicServiceUsedList', _MobileOriginatedCall_basicServiceUsedList),
+        ('supplServiceCode', _MobileOriginatedCall_supplServiceCode),
+        ('thirdPartyInformation', _MobileOriginatedCall_thirdPartyInformation),
+        ('camelServiceUsed', _MobileOriginatedCall_camelServiceUsed),
+        ('operatorSpecInformation', _MobileOriginatedCall_operatorSpecInformation),
         ])
     MobileOriginatedCall._ext = []
     
     #-----< MobileTerminatedCall >-----#
-    MobileTerminatedCall = SEQ(name=u'MobileTerminatedCall', mode=MODE_TYPE, tag=(10, TAG_APPLICATION, TAG_IMPLICIT))
-    _MobileTerminatedCall_basicCallInformation = SEQ(name=u'basicCallInformation', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'MtBasicCallInformation')), opt=True)
-    _MobileTerminatedCall_locationInformation = SEQ(name=u'locationInformation', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'LocationInformation')), opt=True)
-    _MobileTerminatedCall_equipmentIdentifier = CHOICE(name=u'equipmentIdentifier', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'ImeiOrEsn')), opt=True)
-    _MobileTerminatedCall_basicServiceUsedList = SEQ_OF(name=u'basicServiceUsedList', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'BasicServiceUsedList')), opt=True)
-    _MobileTerminatedCall_camelServiceUsed = SEQ(name=u'camelServiceUsed', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'CamelServiceUsed')), opt=True)
-    _MobileTerminatedCall_operatorSpecInformation = SEQ_OF(name=u'operatorSpecInformation', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'OperatorSpecInfoList')), opt=True)
+    MobileTerminatedCall = SEQ(name='MobileTerminatedCall', mode=MODE_TYPE, tag=(10, TAG_APPLICATION, TAG_IMPLICIT))
+    _MobileTerminatedCall_basicCallInformation = SEQ(name='basicCallInformation', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'MtBasicCallInformation')), opt=True)
+    _MobileTerminatedCall_locationInformation = SEQ(name='locationInformation', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'LocationInformation')), opt=True)
+    _MobileTerminatedCall_equipmentIdentifier = CHOICE(name='equipmentIdentifier', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'ImeiOrEsn')), opt=True)
+    _MobileTerminatedCall_basicServiceUsedList = SEQ_OF(name='basicServiceUsedList', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'BasicServiceUsedList')), opt=True)
+    _MobileTerminatedCall_camelServiceUsed = SEQ(name='camelServiceUsed', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'CamelServiceUsed')), opt=True)
+    _MobileTerminatedCall_operatorSpecInformation = SEQ_OF(name='operatorSpecInformation', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'OperatorSpecInfoList')), opt=True)
     MobileTerminatedCall._cont = ASN1Dict([
-        (u'basicCallInformation', _MobileTerminatedCall_basicCallInformation),
-        (u'locationInformation', _MobileTerminatedCall_locationInformation),
-        (u'equipmentIdentifier', _MobileTerminatedCall_equipmentIdentifier),
-        (u'basicServiceUsedList', _MobileTerminatedCall_basicServiceUsedList),
-        (u'camelServiceUsed', _MobileTerminatedCall_camelServiceUsed),
-        (u'operatorSpecInformation', _MobileTerminatedCall_operatorSpecInformation),
+        ('basicCallInformation', _MobileTerminatedCall_basicCallInformation),
+        ('locationInformation', _MobileTerminatedCall_locationInformation),
+        ('equipmentIdentifier', _MobileTerminatedCall_equipmentIdentifier),
+        ('basicServiceUsedList', _MobileTerminatedCall_basicServiceUsedList),
+        ('camelServiceUsed', _MobileTerminatedCall_camelServiceUsed),
+        ('operatorSpecInformation', _MobileTerminatedCall_operatorSpecInformation),
         ])
     MobileTerminatedCall._ext = []
     
     #-----< SupplServiceEvent >-----#
-    SupplServiceEvent = SEQ(name=u'SupplServiceEvent', mode=MODE_TYPE, tag=(11, TAG_APPLICATION, TAG_IMPLICIT))
-    _SupplServiceEvent_chargeableSubscriber = CHOICE(name=u'chargeableSubscriber', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'ChargeableSubscriber')), opt=True)
-    _SupplServiceEvent_rapFileSequenceNumber = OCT_STR(name=u'rapFileSequenceNumber', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'RapFileSequenceNumber')), opt=True)
-    _SupplServiceEvent_locationInformation = SEQ(name=u'locationInformation', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'LocationInformation')), opt=True)
-    _SupplServiceEvent_equipmentIdentifier = CHOICE(name=u'equipmentIdentifier', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'ImeiOrEsn')), opt=True)
-    _SupplServiceEvent_supplServiceUsed = SEQ(name=u'supplServiceUsed', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'SupplServiceUsed')), opt=True)
-    _SupplServiceEvent_operatorSpecInformation = SEQ_OF(name=u'operatorSpecInformation', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'OperatorSpecInfoList')), opt=True)
+    SupplServiceEvent = SEQ(name='SupplServiceEvent', mode=MODE_TYPE, tag=(11, TAG_APPLICATION, TAG_IMPLICIT))
+    _SupplServiceEvent_chargeableSubscriber = CHOICE(name='chargeableSubscriber', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'ChargeableSubscriber')), opt=True)
+    _SupplServiceEvent_rapFileSequenceNumber = OCT_STR(name='rapFileSequenceNumber', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'RapFileSequenceNumber')), opt=True)
+    _SupplServiceEvent_locationInformation = SEQ(name='locationInformation', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'LocationInformation')), opt=True)
+    _SupplServiceEvent_equipmentIdentifier = CHOICE(name='equipmentIdentifier', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'ImeiOrEsn')), opt=True)
+    _SupplServiceEvent_supplServiceUsed = SEQ(name='supplServiceUsed', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'SupplServiceUsed')), opt=True)
+    _SupplServiceEvent_operatorSpecInformation = SEQ_OF(name='operatorSpecInformation', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'OperatorSpecInfoList')), opt=True)
     SupplServiceEvent._cont = ASN1Dict([
-        (u'chargeableSubscriber', _SupplServiceEvent_chargeableSubscriber),
-        (u'rapFileSequenceNumber', _SupplServiceEvent_rapFileSequenceNumber),
-        (u'locationInformation', _SupplServiceEvent_locationInformation),
-        (u'equipmentIdentifier', _SupplServiceEvent_equipmentIdentifier),
-        (u'supplServiceUsed', _SupplServiceEvent_supplServiceUsed),
-        (u'operatorSpecInformation', _SupplServiceEvent_operatorSpecInformation),
+        ('chargeableSubscriber', _SupplServiceEvent_chargeableSubscriber),
+        ('rapFileSequenceNumber', _SupplServiceEvent_rapFileSequenceNumber),
+        ('locationInformation', _SupplServiceEvent_locationInformation),
+        ('equipmentIdentifier', _SupplServiceEvent_equipmentIdentifier),
+        ('supplServiceUsed', _SupplServiceEvent_supplServiceUsed),
+        ('operatorSpecInformation', _SupplServiceEvent_operatorSpecInformation),
         ])
     SupplServiceEvent._ext = []
     
     #-----< ServiceCentreUsage >-----#
-    ServiceCentreUsage = SEQ(name=u'ServiceCentreUsage', mode=MODE_TYPE, tag=(12, TAG_APPLICATION, TAG_IMPLICIT))
-    _ServiceCentreUsage_basicInformation = SEQ(name=u'basicInformation', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'ScuBasicInformation')), opt=True)
-    _ServiceCentreUsage_rapFileSequenceNumber = OCT_STR(name=u'rapFileSequenceNumber', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'RapFileSequenceNumber')), opt=True)
-    _ServiceCentreUsage_servingNetwork = OCT_STR(name=u'servingNetwork', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'ServingNetwork')), opt=True)
-    _ServiceCentreUsage_recEntityCode = INT(name=u'recEntityCode', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'RecEntityCode')), opt=True)
-    _ServiceCentreUsage_chargeInformation = SEQ(name=u'chargeInformation', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'ChargeInformation')), opt=True)
-    _ServiceCentreUsage_scuChargeType = SEQ(name=u'scuChargeType', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'ScuChargeType')), opt=True)
-    _ServiceCentreUsage_scuTimeStamps = SEQ(name=u'scuTimeStamps', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'ScuTimeStamps')), opt=True)
-    _ServiceCentreUsage_operatorSpecInformation = SEQ_OF(name=u'operatorSpecInformation', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'OperatorSpecInfoList')), opt=True)
+    ServiceCentreUsage = SEQ(name='ServiceCentreUsage', mode=MODE_TYPE, tag=(12, TAG_APPLICATION, TAG_IMPLICIT))
+    _ServiceCentreUsage_basicInformation = SEQ(name='basicInformation', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'ScuBasicInformation')), opt=True)
+    _ServiceCentreUsage_rapFileSequenceNumber = OCT_STR(name='rapFileSequenceNumber', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'RapFileSequenceNumber')), opt=True)
+    _ServiceCentreUsage_servingNetwork = OCT_STR(name='servingNetwork', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'ServingNetwork')), opt=True)
+    _ServiceCentreUsage_recEntityCode = INT(name='recEntityCode', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'RecEntityCode')), opt=True)
+    _ServiceCentreUsage_chargeInformation = SEQ(name='chargeInformation', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'ChargeInformation')), opt=True)
+    _ServiceCentreUsage_scuChargeType = SEQ(name='scuChargeType', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'ScuChargeType')), opt=True)
+    _ServiceCentreUsage_scuTimeStamps = SEQ(name='scuTimeStamps', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'ScuTimeStamps')), opt=True)
+    _ServiceCentreUsage_operatorSpecInformation = SEQ_OF(name='operatorSpecInformation', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'OperatorSpecInfoList')), opt=True)
     ServiceCentreUsage._cont = ASN1Dict([
-        (u'basicInformation', _ServiceCentreUsage_basicInformation),
-        (u'rapFileSequenceNumber', _ServiceCentreUsage_rapFileSequenceNumber),
-        (u'servingNetwork', _ServiceCentreUsage_servingNetwork),
-        (u'recEntityCode', _ServiceCentreUsage_recEntityCode),
-        (u'chargeInformation', _ServiceCentreUsage_chargeInformation),
-        (u'scuChargeType', _ServiceCentreUsage_scuChargeType),
-        (u'scuTimeStamps', _ServiceCentreUsage_scuTimeStamps),
-        (u'operatorSpecInformation', _ServiceCentreUsage_operatorSpecInformation),
+        ('basicInformation', _ServiceCentreUsage_basicInformation),
+        ('rapFileSequenceNumber', _ServiceCentreUsage_rapFileSequenceNumber),
+        ('servingNetwork', _ServiceCentreUsage_servingNetwork),
+        ('recEntityCode', _ServiceCentreUsage_recEntityCode),
+        ('chargeInformation', _ServiceCentreUsage_chargeInformation),
+        ('scuChargeType', _ServiceCentreUsage_scuChargeType),
+        ('scuTimeStamps', _ServiceCentreUsage_scuTimeStamps),
+        ('operatorSpecInformation', _ServiceCentreUsage_operatorSpecInformation),
         ])
     ServiceCentreUsage._ext = []
     
     #-----< GprsCall >-----#
-    GprsCall = SEQ(name=u'GprsCall', mode=MODE_TYPE, tag=(14, TAG_APPLICATION, TAG_IMPLICIT))
-    _GprsCall_gprsBasicCallInformation = SEQ(name=u'gprsBasicCallInformation', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'GprsBasicCallInformation')), opt=True)
-    _GprsCall_gprsLocationInformation = SEQ(name=u'gprsLocationInformation', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'GprsLocationInformation')), opt=True)
-    _GprsCall_equipmentIdentifier = CHOICE(name=u'equipmentIdentifier', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'ImeiOrEsn')), opt=True)
-    _GprsCall_gprsServiceUsed = SEQ(name=u'gprsServiceUsed', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'GprsServiceUsed')), opt=True)
-    _GprsCall_camelServiceUsed = SEQ(name=u'camelServiceUsed', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'CamelServiceUsed')), opt=True)
-    _GprsCall_operatorSpecInformation = SEQ_OF(name=u'operatorSpecInformation', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'OperatorSpecInfoList')), opt=True)
+    GprsCall = SEQ(name='GprsCall', mode=MODE_TYPE, tag=(14, TAG_APPLICATION, TAG_IMPLICIT))
+    _GprsCall_gprsBasicCallInformation = SEQ(name='gprsBasicCallInformation', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'GprsBasicCallInformation')), opt=True)
+    _GprsCall_gprsLocationInformation = SEQ(name='gprsLocationInformation', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'GprsLocationInformation')), opt=True)
+    _GprsCall_equipmentIdentifier = CHOICE(name='equipmentIdentifier', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'ImeiOrEsn')), opt=True)
+    _GprsCall_gprsServiceUsed = SEQ(name='gprsServiceUsed', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'GprsServiceUsed')), opt=True)
+    _GprsCall_camelServiceUsed = SEQ(name='camelServiceUsed', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'CamelServiceUsed')), opt=True)
+    _GprsCall_operatorSpecInformation = SEQ_OF(name='operatorSpecInformation', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'OperatorSpecInfoList')), opt=True)
     GprsCall._cont = ASN1Dict([
-        (u'gprsBasicCallInformation', _GprsCall_gprsBasicCallInformation),
-        (u'gprsLocationInformation', _GprsCall_gprsLocationInformation),
-        (u'equipmentIdentifier', _GprsCall_equipmentIdentifier),
-        (u'gprsServiceUsed', _GprsCall_gprsServiceUsed),
-        (u'camelServiceUsed', _GprsCall_camelServiceUsed),
-        (u'operatorSpecInformation', _GprsCall_operatorSpecInformation),
+        ('gprsBasicCallInformation', _GprsCall_gprsBasicCallInformation),
+        ('gprsLocationInformation', _GprsCall_gprsLocationInformation),
+        ('equipmentIdentifier', _GprsCall_equipmentIdentifier),
+        ('gprsServiceUsed', _GprsCall_gprsServiceUsed),
+        ('camelServiceUsed', _GprsCall_camelServiceUsed),
+        ('operatorSpecInformation', _GprsCall_operatorSpecInformation),
         ])
     GprsCall._ext = []
     
     #-----< ContentTransaction >-----#
-    ContentTransaction = SEQ(name=u'ContentTransaction', mode=MODE_TYPE, tag=(17, TAG_APPLICATION, TAG_IMPLICIT))
-    _ContentTransaction_contentTransactionBasicInfo = SEQ(name=u'contentTransactionBasicInfo', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'ContentTransactionBasicInfo')), opt=True)
-    _ContentTransaction_chargedPartyInformation = SEQ(name=u'chargedPartyInformation', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'ChargedPartyInformation')), opt=True)
-    _ContentTransaction_servingPartiesInformation = SEQ(name=u'servingPartiesInformation', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'ServingPartiesInformation')), opt=True)
-    _ContentTransaction_contentServiceUsed = SEQ_OF(name=u'contentServiceUsed', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'ContentServiceUsedList')), opt=True)
-    _ContentTransaction_operatorSpecInformation = SEQ_OF(name=u'operatorSpecInformation', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'OperatorSpecInfoList')), opt=True)
+    ContentTransaction = SEQ(name='ContentTransaction', mode=MODE_TYPE, tag=(17, TAG_APPLICATION, TAG_IMPLICIT))
+    _ContentTransaction_contentTransactionBasicInfo = SEQ(name='contentTransactionBasicInfo', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'ContentTransactionBasicInfo')), opt=True)
+    _ContentTransaction_chargedPartyInformation = SEQ(name='chargedPartyInformation', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'ChargedPartyInformation')), opt=True)
+    _ContentTransaction_servingPartiesInformation = SEQ(name='servingPartiesInformation', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'ServingPartiesInformation')), opt=True)
+    _ContentTransaction_contentServiceUsed = SEQ_OF(name='contentServiceUsed', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'ContentServiceUsedList')), opt=True)
+    _ContentTransaction_operatorSpecInformation = SEQ_OF(name='operatorSpecInformation', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'OperatorSpecInfoList')), opt=True)
     ContentTransaction._cont = ASN1Dict([
-        (u'contentTransactionBasicInfo', _ContentTransaction_contentTransactionBasicInfo),
-        (u'chargedPartyInformation', _ContentTransaction_chargedPartyInformation),
-        (u'servingPartiesInformation', _ContentTransaction_servingPartiesInformation),
-        (u'contentServiceUsed', _ContentTransaction_contentServiceUsed),
-        (u'operatorSpecInformation', _ContentTransaction_operatorSpecInformation),
+        ('contentTransactionBasicInfo', _ContentTransaction_contentTransactionBasicInfo),
+        ('chargedPartyInformation', _ContentTransaction_chargedPartyInformation),
+        ('servingPartiesInformation', _ContentTransaction_servingPartiesInformation),
+        ('contentServiceUsed', _ContentTransaction_contentServiceUsed),
+        ('operatorSpecInformation', _ContentTransaction_operatorSpecInformation),
         ])
     ContentTransaction._ext = []
     
     #-----< LocationService >-----#
-    LocationService = SEQ(name=u'LocationService', mode=MODE_TYPE, tag=(297, TAG_APPLICATION, TAG_IMPLICIT))
-    _LocationService_rapFileSequenceNumber = OCT_STR(name=u'rapFileSequenceNumber', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'RapFileSequenceNumber')), opt=True)
-    _LocationService_recEntityCode = INT(name=u'recEntityCode', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'RecEntityCode')), opt=True)
-    _LocationService_callReference = OCT_STR(name=u'callReference', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'CallReference')), opt=True)
-    _LocationService_trackingCustomerInformation = SEQ(name=u'trackingCustomerInformation', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'TrackingCustomerInformation')), opt=True)
-    _LocationService_lCSSPInformation = SEQ(name=u'lCSSPInformation', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'LCSSPInformation')), opt=True)
-    _LocationService_trackedCustomerInformation = SEQ(name=u'trackedCustomerInformation', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'TrackedCustomerInformation')), opt=True)
-    _LocationService_locationServiceUsage = SEQ(name=u'locationServiceUsage', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'LocationServiceUsage')), opt=True)
-    _LocationService_operatorSpecInformation = SEQ_OF(name=u'operatorSpecInformation', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'OperatorSpecInfoList')), opt=True)
+    LocationService = SEQ(name='LocationService', mode=MODE_TYPE, tag=(297, TAG_APPLICATION, TAG_IMPLICIT))
+    _LocationService_rapFileSequenceNumber = OCT_STR(name='rapFileSequenceNumber', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'RapFileSequenceNumber')), opt=True)
+    _LocationService_recEntityCode = INT(name='recEntityCode', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'RecEntityCode')), opt=True)
+    _LocationService_callReference = OCT_STR(name='callReference', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'CallReference')), opt=True)
+    _LocationService_trackingCustomerInformation = SEQ(name='trackingCustomerInformation', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'TrackingCustomerInformation')), opt=True)
+    _LocationService_lCSSPInformation = SEQ(name='lCSSPInformation', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'LCSSPInformation')), opt=True)
+    _LocationService_trackedCustomerInformation = SEQ(name='trackedCustomerInformation', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'TrackedCustomerInformation')), opt=True)
+    _LocationService_locationServiceUsage = SEQ(name='locationServiceUsage', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'LocationServiceUsage')), opt=True)
+    _LocationService_operatorSpecInformation = SEQ_OF(name='operatorSpecInformation', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'OperatorSpecInfoList')), opt=True)
     LocationService._cont = ASN1Dict([
-        (u'rapFileSequenceNumber', _LocationService_rapFileSequenceNumber),
-        (u'recEntityCode', _LocationService_recEntityCode),
-        (u'callReference', _LocationService_callReference),
-        (u'trackingCustomerInformation', _LocationService_trackingCustomerInformation),
-        (u'lCSSPInformation', _LocationService_lCSSPInformation),
-        (u'trackedCustomerInformation', _LocationService_trackedCustomerInformation),
-        (u'locationServiceUsage', _LocationService_locationServiceUsage),
-        (u'operatorSpecInformation', _LocationService_operatorSpecInformation),
+        ('rapFileSequenceNumber', _LocationService_rapFileSequenceNumber),
+        ('recEntityCode', _LocationService_recEntityCode),
+        ('callReference', _LocationService_callReference),
+        ('trackingCustomerInformation', _LocationService_trackingCustomerInformation),
+        ('lCSSPInformation', _LocationService_lCSSPInformation),
+        ('trackedCustomerInformation', _LocationService_trackedCustomerInformation),
+        ('locationServiceUsage', _LocationService_locationServiceUsage),
+        ('operatorSpecInformation', _LocationService_operatorSpecInformation),
         ])
     LocationService._ext = []
     
     #-----< MessagingEvent >-----#
-    MessagingEvent = SEQ(name=u'MessagingEvent', mode=MODE_TYPE, tag=(433, TAG_APPLICATION, TAG_IMPLICIT))
-    _MessagingEvent_messagingEventService = INT(name=u'messagingEventService', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'MessagingEventService')), opt=True)
-    _MessagingEvent_chargedParty = SEQ(name=u'chargedParty', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'ChargedParty')), opt=True)
-    _MessagingEvent_rapFileSequenceNumber = OCT_STR(name=u'rapFileSequenceNumber', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'RapFileSequenceNumber')), opt=True)
-    _MessagingEvent_simToolkitIndicator = OCT_STR(name=u'simToolkitIndicator', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'SimToolkitIndicator')), opt=True)
-    _MessagingEvent_geographicalLocation = SEQ(name=u'geographicalLocation', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'GeographicalLocation')), opt=True)
-    _MessagingEvent_eventReference = OCT_STR(name=u'eventReference', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'EventReference')), opt=True)
-    _MessagingEvent_recEntityCodeList = SEQ_OF(name=u'recEntityCodeList', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'RecEntityCodeList')), opt=True)
-    _MessagingEvent_networkElementList = SEQ_OF(name=u'networkElementList', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'NetworkElementList')), opt=True)
-    _MessagingEvent_locationArea = INT(name=u'locationArea', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'LocationArea')), opt=True)
-    _MessagingEvent_cellId = INT(name=u'cellId', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'CellId')), opt=True)
-    _MessagingEvent_serviceStartTimestamp = SEQ(name=u'serviceStartTimestamp', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'ServiceStartTimestamp')), opt=True)
-    _MessagingEvent_nonChargedParty = SEQ(name=u'nonChargedParty', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'NonChargedParty')), opt=True)
-    _MessagingEvent_exchangeRateCode = INT(name=u'exchangeRateCode', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'ExchangeRateCode')), opt=True)
-    _MessagingEvent_callTypeGroup = SEQ(name=u'callTypeGroup', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'CallTypeGroup')), opt=True)
-    _MessagingEvent_charge = INT(name=u'charge', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'Charge')), opt=True)
-    _MessagingEvent_taxInformationList = SEQ_OF(name=u'taxInformationList', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'TaxInformationList')), opt=True)
-    _MessagingEvent_operatorSpecInformation = SEQ_OF(name=u'operatorSpecInformation', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'OperatorSpecInfoList')), opt=True)
+    MessagingEvent = SEQ(name='MessagingEvent', mode=MODE_TYPE, tag=(433, TAG_APPLICATION, TAG_IMPLICIT))
+    _MessagingEvent_messagingEventService = INT(name='messagingEventService', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'MessagingEventService')), opt=True)
+    _MessagingEvent_chargedParty = SEQ(name='chargedParty', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'ChargedParty')), opt=True)
+    _MessagingEvent_rapFileSequenceNumber = OCT_STR(name='rapFileSequenceNumber', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'RapFileSequenceNumber')), opt=True)
+    _MessagingEvent_simToolkitIndicator = OCT_STR(name='simToolkitIndicator', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'SimToolkitIndicator')), opt=True)
+    _MessagingEvent_geographicalLocation = SEQ(name='geographicalLocation', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'GeographicalLocation')), opt=True)
+    _MessagingEvent_eventReference = OCT_STR(name='eventReference', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'EventReference')), opt=True)
+    _MessagingEvent_recEntityCodeList = SEQ_OF(name='recEntityCodeList', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'RecEntityCodeList')), opt=True)
+    _MessagingEvent_networkElementList = SEQ_OF(name='networkElementList', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'NetworkElementList')), opt=True)
+    _MessagingEvent_locationArea = INT(name='locationArea', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'LocationArea')), opt=True)
+    _MessagingEvent_cellId = INT(name='cellId', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'CellId')), opt=True)
+    _MessagingEvent_serviceStartTimestamp = SEQ(name='serviceStartTimestamp', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'ServiceStartTimestamp')), opt=True)
+    _MessagingEvent_nonChargedParty = SEQ(name='nonChargedParty', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'NonChargedParty')), opt=True)
+    _MessagingEvent_exchangeRateCode = INT(name='exchangeRateCode', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'ExchangeRateCode')), opt=True)
+    _MessagingEvent_callTypeGroup = SEQ(name='callTypeGroup', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'CallTypeGroup')), opt=True)
+    _MessagingEvent_charge = INT(name='charge', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'Charge')), opt=True)
+    _MessagingEvent_taxInformationList = SEQ_OF(name='taxInformationList', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'TaxInformationList')), opt=True)
+    _MessagingEvent_operatorSpecInformation = SEQ_OF(name='operatorSpecInformation', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'OperatorSpecInfoList')), opt=True)
     MessagingEvent._cont = ASN1Dict([
-        (u'messagingEventService', _MessagingEvent_messagingEventService),
-        (u'chargedParty', _MessagingEvent_chargedParty),
-        (u'rapFileSequenceNumber', _MessagingEvent_rapFileSequenceNumber),
-        (u'simToolkitIndicator', _MessagingEvent_simToolkitIndicator),
-        (u'geographicalLocation', _MessagingEvent_geographicalLocation),
-        (u'eventReference', _MessagingEvent_eventReference),
-        (u'recEntityCodeList', _MessagingEvent_recEntityCodeList),
-        (u'networkElementList', _MessagingEvent_networkElementList),
-        (u'locationArea', _MessagingEvent_locationArea),
-        (u'cellId', _MessagingEvent_cellId),
-        (u'serviceStartTimestamp', _MessagingEvent_serviceStartTimestamp),
-        (u'nonChargedParty', _MessagingEvent_nonChargedParty),
-        (u'exchangeRateCode', _MessagingEvent_exchangeRateCode),
-        (u'callTypeGroup', _MessagingEvent_callTypeGroup),
-        (u'charge', _MessagingEvent_charge),
-        (u'taxInformationList', _MessagingEvent_taxInformationList),
-        (u'operatorSpecInformation', _MessagingEvent_operatorSpecInformation),
+        ('messagingEventService', _MessagingEvent_messagingEventService),
+        ('chargedParty', _MessagingEvent_chargedParty),
+        ('rapFileSequenceNumber', _MessagingEvent_rapFileSequenceNumber),
+        ('simToolkitIndicator', _MessagingEvent_simToolkitIndicator),
+        ('geographicalLocation', _MessagingEvent_geographicalLocation),
+        ('eventReference', _MessagingEvent_eventReference),
+        ('recEntityCodeList', _MessagingEvent_recEntityCodeList),
+        ('networkElementList', _MessagingEvent_networkElementList),
+        ('locationArea', _MessagingEvent_locationArea),
+        ('cellId', _MessagingEvent_cellId),
+        ('serviceStartTimestamp', _MessagingEvent_serviceStartTimestamp),
+        ('nonChargedParty', _MessagingEvent_nonChargedParty),
+        ('exchangeRateCode', _MessagingEvent_exchangeRateCode),
+        ('callTypeGroup', _MessagingEvent_callTypeGroup),
+        ('charge', _MessagingEvent_charge),
+        ('taxInformationList', _MessagingEvent_taxInformationList),
+        ('operatorSpecInformation', _MessagingEvent_operatorSpecInformation),
         ])
     MessagingEvent._ext = []
     
     #-----< MobileSession >-----#
-    MobileSession = SEQ(name=u'MobileSession', mode=MODE_TYPE, tag=(434, TAG_APPLICATION, TAG_IMPLICIT))
-    _MobileSession_mobileSessionService = INT(name=u'mobileSessionService', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'MobileSessionService')), opt=True)
-    _MobileSession_chargedParty = SEQ(name=u'chargedParty', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'ChargedParty')), opt=True)
-    _MobileSession_rapFileSequenceNumber = OCT_STR(name=u'rapFileSequenceNumber', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'RapFileSequenceNumber')), opt=True)
-    _MobileSession_simToolkitIndicator = OCT_STR(name=u'simToolkitIndicator', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'SimToolkitIndicator')), opt=True)
-    _MobileSession_geographicalLocation = SEQ(name=u'geographicalLocation', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'GeographicalLocation')), opt=True)
-    _MobileSession_locationArea = INT(name=u'locationArea', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'LocationArea')), opt=True)
-    _MobileSession_cellId = INT(name=u'cellId', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'CellId')), opt=True)
-    _MobileSession_eventReference = OCT_STR(name=u'eventReference', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'EventReference')), opt=True)
-    _MobileSession_recEntityCodeList = SEQ_OF(name=u'recEntityCodeList', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'RecEntityCodeList')), opt=True)
-    _MobileSession_serviceStartTimestamp = SEQ(name=u'serviceStartTimestamp', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'ServiceStartTimestamp')), opt=True)
-    _MobileSession_causeForTerm = INT(name=u'causeForTerm', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'CauseForTerm')), opt=True)
-    _MobileSession_totalCallEventDuration = INT(name=u'totalCallEventDuration', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'TotalCallEventDuration')), opt=True)
-    _MobileSession_nonChargedParty = SEQ(name=u'nonChargedParty', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'NonChargedParty')), opt=True)
-    _MobileSession_requestedDestination = SEQ(name=u'requestedDestination', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'RequestedDestination')), opt=True)
-    _MobileSession_sessionChargeInfoList = SEQ_OF(name=u'sessionChargeInfoList', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'SessionChargeInfoList')), opt=True)
-    _MobileSession_operatorSpecInformation = SEQ_OF(name=u'operatorSpecInformation', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'OperatorSpecInfoList')), opt=True)
+    MobileSession = SEQ(name='MobileSession', mode=MODE_TYPE, tag=(434, TAG_APPLICATION, TAG_IMPLICIT))
+    _MobileSession_mobileSessionService = INT(name='mobileSessionService', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'MobileSessionService')), opt=True)
+    _MobileSession_chargedParty = SEQ(name='chargedParty', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'ChargedParty')), opt=True)
+    _MobileSession_rapFileSequenceNumber = OCT_STR(name='rapFileSequenceNumber', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'RapFileSequenceNumber')), opt=True)
+    _MobileSession_simToolkitIndicator = OCT_STR(name='simToolkitIndicator', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'SimToolkitIndicator')), opt=True)
+    _MobileSession_geographicalLocation = SEQ(name='geographicalLocation', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'GeographicalLocation')), opt=True)
+    _MobileSession_locationArea = INT(name='locationArea', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'LocationArea')), opt=True)
+    _MobileSession_cellId = INT(name='cellId', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'CellId')), opt=True)
+    _MobileSession_eventReference = OCT_STR(name='eventReference', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'EventReference')), opt=True)
+    _MobileSession_recEntityCodeList = SEQ_OF(name='recEntityCodeList', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'RecEntityCodeList')), opt=True)
+    _MobileSession_serviceStartTimestamp = SEQ(name='serviceStartTimestamp', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'ServiceStartTimestamp')), opt=True)
+    _MobileSession_causeForTerm = INT(name='causeForTerm', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'CauseForTerm')), opt=True)
+    _MobileSession_totalCallEventDuration = INT(name='totalCallEventDuration', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'TotalCallEventDuration')), opt=True)
+    _MobileSession_nonChargedParty = SEQ(name='nonChargedParty', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'NonChargedParty')), opt=True)
+    _MobileSession_requestedDestination = SEQ(name='requestedDestination', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'RequestedDestination')), opt=True)
+    _MobileSession_sessionChargeInfoList = SEQ_OF(name='sessionChargeInfoList', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'SessionChargeInfoList')), opt=True)
+    _MobileSession_operatorSpecInformation = SEQ_OF(name='operatorSpecInformation', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'OperatorSpecInfoList')), opt=True)
     MobileSession._cont = ASN1Dict([
-        (u'mobileSessionService', _MobileSession_mobileSessionService),
-        (u'chargedParty', _MobileSession_chargedParty),
-        (u'rapFileSequenceNumber', _MobileSession_rapFileSequenceNumber),
-        (u'simToolkitIndicator', _MobileSession_simToolkitIndicator),
-        (u'geographicalLocation', _MobileSession_geographicalLocation),
-        (u'locationArea', _MobileSession_locationArea),
-        (u'cellId', _MobileSession_cellId),
-        (u'eventReference', _MobileSession_eventReference),
-        (u'recEntityCodeList', _MobileSession_recEntityCodeList),
-        (u'serviceStartTimestamp', _MobileSession_serviceStartTimestamp),
-        (u'causeForTerm', _MobileSession_causeForTerm),
-        (u'totalCallEventDuration', _MobileSession_totalCallEventDuration),
-        (u'nonChargedParty', _MobileSession_nonChargedParty),
-        (u'requestedDestination', _MobileSession_requestedDestination),
-        (u'sessionChargeInfoList', _MobileSession_sessionChargeInfoList),
-        (u'operatorSpecInformation', _MobileSession_operatorSpecInformation),
+        ('mobileSessionService', _MobileSession_mobileSessionService),
+        ('chargedParty', _MobileSession_chargedParty),
+        ('rapFileSequenceNumber', _MobileSession_rapFileSequenceNumber),
+        ('simToolkitIndicator', _MobileSession_simToolkitIndicator),
+        ('geographicalLocation', _MobileSession_geographicalLocation),
+        ('locationArea', _MobileSession_locationArea),
+        ('cellId', _MobileSession_cellId),
+        ('eventReference', _MobileSession_eventReference),
+        ('recEntityCodeList', _MobileSession_recEntityCodeList),
+        ('serviceStartTimestamp', _MobileSession_serviceStartTimestamp),
+        ('causeForTerm', _MobileSession_causeForTerm),
+        ('totalCallEventDuration', _MobileSession_totalCallEventDuration),
+        ('nonChargedParty', _MobileSession_nonChargedParty),
+        ('requestedDestination', _MobileSession_requestedDestination),
+        ('sessionChargeInfoList', _MobileSession_sessionChargeInfoList),
+        ('operatorSpecInformation', _MobileSession_operatorSpecInformation),
         ])
     MobileSession._ext = []
     
     #-----< AuditControlInfo >-----#
-    AuditControlInfo = SEQ(name=u'AuditControlInfo', mode=MODE_TYPE, tag=(15, TAG_APPLICATION, TAG_IMPLICIT))
-    _AuditControlInfo_earliestCallTimeStamp = SEQ(name=u'earliestCallTimeStamp', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'EarliestCallTimeStamp')), opt=True)
-    _AuditControlInfo_latestCallTimeStamp = SEQ(name=u'latestCallTimeStamp', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'LatestCallTimeStamp')), opt=True)
-    _AuditControlInfo_totalCharge = INT(name=u'totalCharge', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'TotalCharge')), opt=True)
-    _AuditControlInfo_totalChargeRefund = INT(name=u'totalChargeRefund', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'TotalChargeRefund')), opt=True)
-    _AuditControlInfo_totalTaxRefund = INT(name=u'totalTaxRefund', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'TotalTaxRefund')), opt=True)
-    _AuditControlInfo_totalTaxValue = INT(name=u'totalTaxValue', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'TotalTaxValue')), opt=True)
-    _AuditControlInfo_totalDiscountValue = INT(name=u'totalDiscountValue', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'TotalDiscountValue')), opt=True)
-    _AuditControlInfo_totalDiscountRefund = INT(name=u'totalDiscountRefund', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'TotalDiscountRefund')), opt=True)
-    _AuditControlInfo_totalAdvisedChargeValueList = SEQ_OF(name=u'totalAdvisedChargeValueList', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'TotalAdvisedChargeValueList')), opt=True)
-    _AuditControlInfo_callEventDetailsCount = INT(name=u'callEventDetailsCount', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'CallEventDetailsCount')), opt=True)
-    _AuditControlInfo_operatorSpecInformation = SEQ_OF(name=u'operatorSpecInformation', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'OperatorSpecInfoList')), opt=True)
+    AuditControlInfo = SEQ(name='AuditControlInfo', mode=MODE_TYPE, tag=(15, TAG_APPLICATION, TAG_IMPLICIT))
+    _AuditControlInfo_earliestCallTimeStamp = SEQ(name='earliestCallTimeStamp', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'EarliestCallTimeStamp')), opt=True)
+    _AuditControlInfo_latestCallTimeStamp = SEQ(name='latestCallTimeStamp', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'LatestCallTimeStamp')), opt=True)
+    _AuditControlInfo_totalCharge = INT(name='totalCharge', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'TotalCharge')), opt=True)
+    _AuditControlInfo_totalChargeRefund = INT(name='totalChargeRefund', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'TotalChargeRefund')), opt=True)
+    _AuditControlInfo_totalTaxRefund = INT(name='totalTaxRefund', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'TotalTaxRefund')), opt=True)
+    _AuditControlInfo_totalTaxValue = INT(name='totalTaxValue', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'TotalTaxValue')), opt=True)
+    _AuditControlInfo_totalDiscountValue = INT(name='totalDiscountValue', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'TotalDiscountValue')), opt=True)
+    _AuditControlInfo_totalDiscountRefund = INT(name='totalDiscountRefund', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'TotalDiscountRefund')), opt=True)
+    _AuditControlInfo_totalAdvisedChargeValueList = SEQ_OF(name='totalAdvisedChargeValueList', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'TotalAdvisedChargeValueList')), opt=True)
+    _AuditControlInfo_callEventDetailsCount = INT(name='callEventDetailsCount', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'CallEventDetailsCount')), opt=True)
+    _AuditControlInfo_operatorSpecInformation = SEQ_OF(name='operatorSpecInformation', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'OperatorSpecInfoList')), opt=True)
     AuditControlInfo._cont = ASN1Dict([
-        (u'earliestCallTimeStamp', _AuditControlInfo_earliestCallTimeStamp),
-        (u'latestCallTimeStamp', _AuditControlInfo_latestCallTimeStamp),
-        (u'totalCharge', _AuditControlInfo_totalCharge),
-        (u'totalChargeRefund', _AuditControlInfo_totalChargeRefund),
-        (u'totalTaxRefund', _AuditControlInfo_totalTaxRefund),
-        (u'totalTaxValue', _AuditControlInfo_totalTaxValue),
-        (u'totalDiscountValue', _AuditControlInfo_totalDiscountValue),
-        (u'totalDiscountRefund', _AuditControlInfo_totalDiscountRefund),
-        (u'totalAdvisedChargeValueList', _AuditControlInfo_totalAdvisedChargeValueList),
-        (u'callEventDetailsCount', _AuditControlInfo_callEventDetailsCount),
-        (u'operatorSpecInformation', _AuditControlInfo_operatorSpecInformation),
+        ('earliestCallTimeStamp', _AuditControlInfo_earliestCallTimeStamp),
+        ('latestCallTimeStamp', _AuditControlInfo_latestCallTimeStamp),
+        ('totalCharge', _AuditControlInfo_totalCharge),
+        ('totalChargeRefund', _AuditControlInfo_totalChargeRefund),
+        ('totalTaxRefund', _AuditControlInfo_totalTaxRefund),
+        ('totalTaxValue', _AuditControlInfo_totalTaxValue),
+        ('totalDiscountValue', _AuditControlInfo_totalDiscountValue),
+        ('totalDiscountRefund', _AuditControlInfo_totalDiscountRefund),
+        ('totalAdvisedChargeValueList', _AuditControlInfo_totalAdvisedChargeValueList),
+        ('callEventDetailsCount', _AuditControlInfo_callEventDetailsCount),
+        ('operatorSpecInformation', _AuditControlInfo_operatorSpecInformation),
         ])
     AuditControlInfo._ext = []
     
     #-----< AccessPointNameNI >-----#
-    AccessPointNameNI = OCT_STR(name=u'AccessPointNameNI', mode=MODE_TYPE, tag=(261, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'AsciiString')))
+    AccessPointNameNI = OCT_STR(name='AccessPointNameNI', mode=MODE_TYPE, tag=(261, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'AsciiString')))
     AccessPointNameNI._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=63)], ev=None, er=[])
     
     #-----< AccessPointNameOI >-----#
-    AccessPointNameOI = OCT_STR(name=u'AccessPointNameOI', mode=MODE_TYPE, tag=(262, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'AsciiString')))
+    AccessPointNameOI = OCT_STR(name='AccessPointNameOI', mode=MODE_TYPE, tag=(262, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'AsciiString')))
     AccessPointNameOI._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=37)], ev=None, er=[])
     
     #-----< ActualDeliveryTimeStamp >-----#
-    ActualDeliveryTimeStamp = SEQ(name=u'ActualDeliveryTimeStamp', mode=MODE_TYPE, tag=(302, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'DateTime')))
+    ActualDeliveryTimeStamp = SEQ(name='ActualDeliveryTimeStamp', mode=MODE_TYPE, tag=(302, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'DateTime')))
     
     #-----< AddressStringDigits >-----#
-    AddressStringDigits = OCT_STR(name=u'AddressStringDigits', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'BCDString')))
+    AddressStringDigits = OCT_STR(name='AddressStringDigits', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'BCDString')))
     
     #-----< AdvisedCharge >-----#
-    AdvisedCharge = INT(name=u'AdvisedCharge', mode=MODE_TYPE, tag=(349, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'Charge')))
+    AdvisedCharge = INT(name='AdvisedCharge', mode=MODE_TYPE, tag=(349, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'Charge')))
     
     #-----< AdvisedChargeCurrency >-----#
-    AdvisedChargeCurrency = OCT_STR(name=u'AdvisedChargeCurrency', mode=MODE_TYPE, tag=(348, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'Currency')))
+    AdvisedChargeCurrency = OCT_STR(name='AdvisedChargeCurrency', mode=MODE_TYPE, tag=(348, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'Currency')))
     
     #-----< AdvisedChargeInformation >-----#
-    AdvisedChargeInformation = SEQ(name=u'AdvisedChargeInformation', mode=MODE_TYPE, tag=(351, TAG_APPLICATION, TAG_IMPLICIT))
-    _AdvisedChargeInformation_paidIndicator = INT(name=u'paidIndicator', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'PaidIndicator')), opt=True)
-    _AdvisedChargeInformation_paymentMethod = INT(name=u'paymentMethod', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'PaymentMethod')), opt=True)
-    _AdvisedChargeInformation_advisedChargeCurrency = OCT_STR(name=u'advisedChargeCurrency', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'AdvisedChargeCurrency')), opt=True)
-    _AdvisedChargeInformation_advisedCharge = INT(name=u'advisedCharge', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'AdvisedCharge')), opt=True)
-    _AdvisedChargeInformation_commission = INT(name=u'commission', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'Commission')), opt=True)
+    AdvisedChargeInformation = SEQ(name='AdvisedChargeInformation', mode=MODE_TYPE, tag=(351, TAG_APPLICATION, TAG_IMPLICIT))
+    _AdvisedChargeInformation_paidIndicator = INT(name='paidIndicator', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'PaidIndicator')), opt=True)
+    _AdvisedChargeInformation_paymentMethod = INT(name='paymentMethod', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'PaymentMethod')), opt=True)
+    _AdvisedChargeInformation_advisedChargeCurrency = OCT_STR(name='advisedChargeCurrency', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'AdvisedChargeCurrency')), opt=True)
+    _AdvisedChargeInformation_advisedCharge = INT(name='advisedCharge', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'AdvisedCharge')), opt=True)
+    _AdvisedChargeInformation_commission = INT(name='commission', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'Commission')), opt=True)
     AdvisedChargeInformation._cont = ASN1Dict([
-        (u'paidIndicator', _AdvisedChargeInformation_paidIndicator),
-        (u'paymentMethod', _AdvisedChargeInformation_paymentMethod),
-        (u'advisedChargeCurrency', _AdvisedChargeInformation_advisedChargeCurrency),
-        (u'advisedCharge', _AdvisedChargeInformation_advisedCharge),
-        (u'commission', _AdvisedChargeInformation_commission),
+        ('paidIndicator', _AdvisedChargeInformation_paidIndicator),
+        ('paymentMethod', _AdvisedChargeInformation_paymentMethod),
+        ('advisedChargeCurrency', _AdvisedChargeInformation_advisedChargeCurrency),
+        ('advisedCharge', _AdvisedChargeInformation_advisedCharge),
+        ('commission', _AdvisedChargeInformation_commission),
         ])
     AdvisedChargeInformation._ext = []
     
     #-----< AgeOfLocation >-----#
-    AgeOfLocation = INT(name=u'AgeOfLocation', mode=MODE_TYPE, tag=(396, TAG_APPLICATION, TAG_IMPLICIT))
+    AgeOfLocation = INT(name='AgeOfLocation', mode=MODE_TYPE, tag=(396, TAG_APPLICATION, TAG_IMPLICIT))
     
     #-----< BasicService >-----#
-    BasicService = SEQ(name=u'BasicService', mode=MODE_TYPE, tag=(36, TAG_APPLICATION, TAG_IMPLICIT))
-    _BasicService_serviceCode = CHOICE(name=u'serviceCode', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'BasicServiceCode')), opt=True)
-    _BasicService_transparencyIndicator = INT(name=u'transparencyIndicator', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'TransparencyIndicator')), opt=True)
-    _BasicService_fnur = INT(name=u'fnur', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'Fnur')), opt=True)
-    _BasicService_userProtocolIndicator = INT(name=u'userProtocolIndicator', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'UserProtocolIndicator')), opt=True)
-    _BasicService_guaranteedBitRate = OCT_STR(name=u'guaranteedBitRate', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'GuaranteedBitRate')), opt=True)
-    _BasicService_maximumBitRate = OCT_STR(name=u'maximumBitRate', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'MaximumBitRate')), opt=True)
+    BasicService = SEQ(name='BasicService', mode=MODE_TYPE, tag=(36, TAG_APPLICATION, TAG_IMPLICIT))
+    _BasicService_serviceCode = CHOICE(name='serviceCode', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'BasicServiceCode')), opt=True)
+    _BasicService_transparencyIndicator = INT(name='transparencyIndicator', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'TransparencyIndicator')), opt=True)
+    _BasicService_fnur = INT(name='fnur', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'Fnur')), opt=True)
+    _BasicService_userProtocolIndicator = INT(name='userProtocolIndicator', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'UserProtocolIndicator')), opt=True)
+    _BasicService_guaranteedBitRate = OCT_STR(name='guaranteedBitRate', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'GuaranteedBitRate')), opt=True)
+    _BasicService_maximumBitRate = OCT_STR(name='maximumBitRate', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'MaximumBitRate')), opt=True)
     BasicService._cont = ASN1Dict([
-        (u'serviceCode', _BasicService_serviceCode),
-        (u'transparencyIndicator', _BasicService_transparencyIndicator),
-        (u'fnur', _BasicService_fnur),
-        (u'userProtocolIndicator', _BasicService_userProtocolIndicator),
-        (u'guaranteedBitRate', _BasicService_guaranteedBitRate),
-        (u'maximumBitRate', _BasicService_maximumBitRate),
+        ('serviceCode', _BasicService_serviceCode),
+        ('transparencyIndicator', _BasicService_transparencyIndicator),
+        ('fnur', _BasicService_fnur),
+        ('userProtocolIndicator', _BasicService_userProtocolIndicator),
+        ('guaranteedBitRate', _BasicService_guaranteedBitRate),
+        ('maximumBitRate', _BasicService_maximumBitRate),
         ])
     BasicService._ext = []
     
     #-----< BasicServiceCode >-----#
-    BasicServiceCode = CHOICE(name=u'BasicServiceCode', mode=MODE_TYPE, tag=(426, TAG_APPLICATION, TAG_IMPLICIT))
-    _BasicServiceCode_teleServiceCode = OCT_STR(name=u'teleServiceCode', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'TeleServiceCode')))
-    _BasicServiceCode_bearerServiceCode = OCT_STR(name=u'bearerServiceCode', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'BearerServiceCode')))
+    BasicServiceCode = CHOICE(name='BasicServiceCode', mode=MODE_TYPE, tag=(426, TAG_APPLICATION, TAG_IMPLICIT))
+    _BasicServiceCode_teleServiceCode = OCT_STR(name='teleServiceCode', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'TeleServiceCode')))
+    _BasicServiceCode_bearerServiceCode = OCT_STR(name='bearerServiceCode', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'BearerServiceCode')))
     BasicServiceCode._cont = ASN1Dict([
-        (u'teleServiceCode', _BasicServiceCode_teleServiceCode),
-        (u'bearerServiceCode', _BasicServiceCode_bearerServiceCode),
+        ('teleServiceCode', _BasicServiceCode_teleServiceCode),
+        ('bearerServiceCode', _BasicServiceCode_bearerServiceCode),
         ])
     BasicServiceCode._ext = []
     
     #-----< BasicServiceCodeList >-----#
-    BasicServiceCodeList = SEQ_OF(name=u'BasicServiceCodeList', mode=MODE_TYPE, tag=(37, TAG_APPLICATION, TAG_IMPLICIT))
+    BasicServiceCodeList = SEQ_OF(name='BasicServiceCodeList', mode=MODE_TYPE, tag=(37, TAG_APPLICATION, TAG_IMPLICIT))
     _BasicServiceCodeList__item_ = CHOICE(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'BasicServiceCode')))
     BasicServiceCodeList._cont = _BasicServiceCodeList__item_
     
     #-----< BasicServiceUsed >-----#
-    BasicServiceUsed = SEQ(name=u'BasicServiceUsed', mode=MODE_TYPE, tag=(39, TAG_APPLICATION, TAG_IMPLICIT))
-    _BasicServiceUsed_basicService = SEQ(name=u'basicService', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'BasicService')), opt=True)
-    _BasicServiceUsed_chargingTimeStamp = SEQ(name=u'chargingTimeStamp', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'ChargingTimeStamp')), opt=True)
-    _BasicServiceUsed_chargeInformationList = SEQ_OF(name=u'chargeInformationList', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'ChargeInformationList')), opt=True)
-    _BasicServiceUsed_hSCSDIndicator = OCT_STR(name=u'hSCSDIndicator', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'HSCSDIndicator')), opt=True)
+    BasicServiceUsed = SEQ(name='BasicServiceUsed', mode=MODE_TYPE, tag=(39, TAG_APPLICATION, TAG_IMPLICIT))
+    _BasicServiceUsed_basicService = SEQ(name='basicService', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'BasicService')), opt=True)
+    _BasicServiceUsed_chargingTimeStamp = SEQ(name='chargingTimeStamp', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'ChargingTimeStamp')), opt=True)
+    _BasicServiceUsed_chargeInformationList = SEQ_OF(name='chargeInformationList', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'ChargeInformationList')), opt=True)
+    _BasicServiceUsed_hSCSDIndicator = OCT_STR(name='hSCSDIndicator', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'HSCSDIndicator')), opt=True)
     BasicServiceUsed._cont = ASN1Dict([
-        (u'basicService', _BasicServiceUsed_basicService),
-        (u'chargingTimeStamp', _BasicServiceUsed_chargingTimeStamp),
-        (u'chargeInformationList', _BasicServiceUsed_chargeInformationList),
-        (u'hSCSDIndicator', _BasicServiceUsed_hSCSDIndicator),
+        ('basicService', _BasicServiceUsed_basicService),
+        ('chargingTimeStamp', _BasicServiceUsed_chargingTimeStamp),
+        ('chargeInformationList', _BasicServiceUsed_chargeInformationList),
+        ('hSCSDIndicator', _BasicServiceUsed_hSCSDIndicator),
         ])
     BasicServiceUsed._ext = []
     
     #-----< BasicServiceUsedList >-----#
-    BasicServiceUsedList = SEQ_OF(name=u'BasicServiceUsedList', mode=MODE_TYPE, tag=(38, TAG_APPLICATION, TAG_IMPLICIT))
+    BasicServiceUsedList = SEQ_OF(name='BasicServiceUsedList', mode=MODE_TYPE, tag=(38, TAG_APPLICATION, TAG_IMPLICIT))
     _BasicServiceUsedList__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'BasicServiceUsed')))
     BasicServiceUsedList._cont = _BasicServiceUsedList__item_
     
     #-----< BearerServiceCode >-----#
-    BearerServiceCode = OCT_STR(name=u'BearerServiceCode', mode=MODE_TYPE, tag=(40, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'HexString')))
+    BearerServiceCode = OCT_STR(name='BearerServiceCode', mode=MODE_TYPE, tag=(40, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'HexString')))
     BearerServiceCode._const_sz = ASN1Set(rv=[2], rr=[], ev=None, er=[])
     
     #-----< CalledNumber >-----#
-    CalledNumber = OCT_STR(name=u'CalledNumber', mode=MODE_TYPE, tag=(407, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'AddressStringDigits')))
+    CalledNumber = OCT_STR(name='CalledNumber', mode=MODE_TYPE, tag=(407, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'AddressStringDigits')))
     
     #-----< CalledPlace >-----#
-    CalledPlace = OCT_STR(name=u'CalledPlace', mode=MODE_TYPE, tag=(42, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'AsciiString')))
+    CalledPlace = OCT_STR(name='CalledPlace', mode=MODE_TYPE, tag=(42, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'AsciiString')))
     
     #-----< CalledRegion >-----#
-    CalledRegion = OCT_STR(name=u'CalledRegion', mode=MODE_TYPE, tag=(46, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'AsciiString')))
+    CalledRegion = OCT_STR(name='CalledRegion', mode=MODE_TYPE, tag=(46, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'AsciiString')))
     
     #-----< CallEventDetailsCount >-----#
-    CallEventDetailsCount = INT(name=u'CallEventDetailsCount', mode=MODE_TYPE, tag=(43, TAG_APPLICATION, TAG_IMPLICIT))
+    CallEventDetailsCount = INT(name='CallEventDetailsCount', mode=MODE_TYPE, tag=(43, TAG_APPLICATION, TAG_IMPLICIT))
     
     #-----< CallEventStartTimeStamp >-----#
-    CallEventStartTimeStamp = SEQ(name=u'CallEventStartTimeStamp', mode=MODE_TYPE, tag=(44, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'DateTime')))
+    CallEventStartTimeStamp = SEQ(name='CallEventStartTimeStamp', mode=MODE_TYPE, tag=(44, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'DateTime')))
     
     #-----< CallingNumber >-----#
-    CallingNumber = OCT_STR(name=u'CallingNumber', mode=MODE_TYPE, tag=(405, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'AddressStringDigits')))
+    CallingNumber = OCT_STR(name='CallingNumber', mode=MODE_TYPE, tag=(405, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'AddressStringDigits')))
     
     #-----< CallOriginator >-----#
-    CallOriginator = SEQ(name=u'CallOriginator', mode=MODE_TYPE, tag=(41, TAG_APPLICATION, TAG_IMPLICIT))
-    _CallOriginator_callingNumber = OCT_STR(name=u'callingNumber', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'CallingNumber')), opt=True)
-    _CallOriginator_clirIndicator = INT(name=u'clirIndicator', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'ClirIndicator')), opt=True)
-    _CallOriginator_sMSOriginator = OCT_STR(name=u'sMSOriginator', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'SMSOriginator')), opt=True)
+    CallOriginator = SEQ(name='CallOriginator', mode=MODE_TYPE, tag=(41, TAG_APPLICATION, TAG_IMPLICIT))
+    _CallOriginator_callingNumber = OCT_STR(name='callingNumber', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'CallingNumber')), opt=True)
+    _CallOriginator_clirIndicator = INT(name='clirIndicator', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'ClirIndicator')), opt=True)
+    _CallOriginator_sMSOriginator = OCT_STR(name='sMSOriginator', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'SMSOriginator')), opt=True)
     CallOriginator._cont = ASN1Dict([
-        (u'callingNumber', _CallOriginator_callingNumber),
-        (u'clirIndicator', _CallOriginator_clirIndicator),
-        (u'sMSOriginator', _CallOriginator_sMSOriginator),
+        ('callingNumber', _CallOriginator_callingNumber),
+        ('clirIndicator', _CallOriginator_clirIndicator),
+        ('sMSOriginator', _CallOriginator_sMSOriginator),
         ])
     CallOriginator._ext = []
     
     #-----< CallReference >-----#
-    CallReference = OCT_STR(name=u'CallReference', mode=MODE_TYPE, tag=(45, TAG_APPLICATION, TAG_IMPLICIT))
+    CallReference = OCT_STR(name='CallReference', mode=MODE_TYPE, tag=(45, TAG_APPLICATION, TAG_IMPLICIT))
     CallReference._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=8)], ev=None, er=[])
     
     #-----< CallTypeGroup >-----#
-    CallTypeGroup = SEQ(name=u'CallTypeGroup', mode=MODE_TYPE, tag=(258, TAG_APPLICATION, TAG_IMPLICIT))
-    _CallTypeGroup_callTypeLevel1 = INT(name=u'callTypeLevel1', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'CallTypeLevel1')), opt=True)
-    _CallTypeGroup_callTypeLevel2 = INT(name=u'callTypeLevel2', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'CallTypeLevel2')), opt=True)
-    _CallTypeGroup_callTypeLevel3 = INT(name=u'callTypeLevel3', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'CallTypeLevel3')), opt=True)
+    CallTypeGroup = SEQ(name='CallTypeGroup', mode=MODE_TYPE, tag=(258, TAG_APPLICATION, TAG_IMPLICIT))
+    _CallTypeGroup_callTypeLevel1 = INT(name='callTypeLevel1', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'CallTypeLevel1')), opt=True)
+    _CallTypeGroup_callTypeLevel2 = INT(name='callTypeLevel2', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'CallTypeLevel2')), opt=True)
+    _CallTypeGroup_callTypeLevel3 = INT(name='callTypeLevel3', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'CallTypeLevel3')), opt=True)
     CallTypeGroup._cont = ASN1Dict([
-        (u'callTypeLevel1', _CallTypeGroup_callTypeLevel1),
-        (u'callTypeLevel2', _CallTypeGroup_callTypeLevel2),
-        (u'callTypeLevel3', _CallTypeGroup_callTypeLevel3),
+        ('callTypeLevel1', _CallTypeGroup_callTypeLevel1),
+        ('callTypeLevel2', _CallTypeGroup_callTypeLevel2),
+        ('callTypeLevel3', _CallTypeGroup_callTypeLevel3),
         ])
     CallTypeGroup._ext = []
     
     #-----< CallTypeLevel1 >-----#
-    CallTypeLevel1 = INT(name=u'CallTypeLevel1', mode=MODE_TYPE, tag=(259, TAG_APPLICATION, TAG_IMPLICIT))
+    CallTypeLevel1 = INT(name='CallTypeLevel1', mode=MODE_TYPE, tag=(259, TAG_APPLICATION, TAG_IMPLICIT))
     
     #-----< CallTypeLevel2 >-----#
-    CallTypeLevel2 = INT(name=u'CallTypeLevel2', mode=MODE_TYPE, tag=(255, TAG_APPLICATION, TAG_IMPLICIT))
+    CallTypeLevel2 = INT(name='CallTypeLevel2', mode=MODE_TYPE, tag=(255, TAG_APPLICATION, TAG_IMPLICIT))
     
     #-----< CallTypeLevel3 >-----#
-    CallTypeLevel3 = INT(name=u'CallTypeLevel3', mode=MODE_TYPE, tag=(256, TAG_APPLICATION, TAG_IMPLICIT))
+    CallTypeLevel3 = INT(name='CallTypeLevel3', mode=MODE_TYPE, tag=(256, TAG_APPLICATION, TAG_IMPLICIT))
     
     #-----< CamelDestinationNumber >-----#
-    CamelDestinationNumber = OCT_STR(name=u'CamelDestinationNumber', mode=MODE_TYPE, tag=(404, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'AddressStringDigits')))
+    CamelDestinationNumber = OCT_STR(name='CamelDestinationNumber', mode=MODE_TYPE, tag=(404, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'AddressStringDigits')))
     
     #-----< CamelInvocationFee >-----#
-    CamelInvocationFee = INT(name=u'CamelInvocationFee', mode=MODE_TYPE, tag=(422, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'AbsoluteAmount')))
+    CamelInvocationFee = INT(name='CamelInvocationFee', mode=MODE_TYPE, tag=(422, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'AbsoluteAmount')))
     
     #-----< CamelServiceKey >-----#
-    CamelServiceKey = INT(name=u'CamelServiceKey', mode=MODE_TYPE, tag=(55, TAG_APPLICATION, TAG_IMPLICIT))
+    CamelServiceKey = INT(name='CamelServiceKey', mode=MODE_TYPE, tag=(55, TAG_APPLICATION, TAG_IMPLICIT))
     
     #-----< CamelServiceLevel >-----#
-    CamelServiceLevel = INT(name=u'CamelServiceLevel', mode=MODE_TYPE, tag=(56, TAG_APPLICATION, TAG_IMPLICIT))
+    CamelServiceLevel = INT(name='CamelServiceLevel', mode=MODE_TYPE, tag=(56, TAG_APPLICATION, TAG_IMPLICIT))
     
     #-----< CamelServiceUsed >-----#
-    CamelServiceUsed = SEQ(name=u'CamelServiceUsed', mode=MODE_TYPE, tag=(57, TAG_APPLICATION, TAG_IMPLICIT))
-    _CamelServiceUsed_camelServiceLevel = INT(name=u'camelServiceLevel', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'CamelServiceLevel')), opt=True)
-    _CamelServiceUsed_camelServiceKey = INT(name=u'camelServiceKey', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'CamelServiceKey')), opt=True)
-    _CamelServiceUsed_defaultCallHandling = INT(name=u'defaultCallHandling', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'DefaultCallHandlingIndicator')), opt=True)
-    _CamelServiceUsed_exchangeRateCode = INT(name=u'exchangeRateCode', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'ExchangeRateCode')), opt=True)
-    _CamelServiceUsed_taxInformation = SEQ_OF(name=u'taxInformation', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'TaxInformationList')), opt=True)
-    _CamelServiceUsed_discountInformation = SEQ(name=u'discountInformation', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'DiscountInformation')), opt=True)
-    _CamelServiceUsed_camelInvocationFee = INT(name=u'camelInvocationFee', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'CamelInvocationFee')), opt=True)
-    _CamelServiceUsed_threeGcamelDestination = CHOICE(name=u'threeGcamelDestination', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'ThreeGcamelDestination')), opt=True)
-    _CamelServiceUsed_cseInformation = OCT_STR(name=u'cseInformation', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'CseInformation')), opt=True)
+    CamelServiceUsed = SEQ(name='CamelServiceUsed', mode=MODE_TYPE, tag=(57, TAG_APPLICATION, TAG_IMPLICIT))
+    _CamelServiceUsed_camelServiceLevel = INT(name='camelServiceLevel', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'CamelServiceLevel')), opt=True)
+    _CamelServiceUsed_camelServiceKey = INT(name='camelServiceKey', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'CamelServiceKey')), opt=True)
+    _CamelServiceUsed_defaultCallHandling = INT(name='defaultCallHandling', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'DefaultCallHandlingIndicator')), opt=True)
+    _CamelServiceUsed_exchangeRateCode = INT(name='exchangeRateCode', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'ExchangeRateCode')), opt=True)
+    _CamelServiceUsed_taxInformation = SEQ_OF(name='taxInformation', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'TaxInformationList')), opt=True)
+    _CamelServiceUsed_discountInformation = SEQ(name='discountInformation', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'DiscountInformation')), opt=True)
+    _CamelServiceUsed_camelInvocationFee = INT(name='camelInvocationFee', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'CamelInvocationFee')), opt=True)
+    _CamelServiceUsed_threeGcamelDestination = CHOICE(name='threeGcamelDestination', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'ThreeGcamelDestination')), opt=True)
+    _CamelServiceUsed_cseInformation = OCT_STR(name='cseInformation', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'CseInformation')), opt=True)
     CamelServiceUsed._cont = ASN1Dict([
-        (u'camelServiceLevel', _CamelServiceUsed_camelServiceLevel),
-        (u'camelServiceKey', _CamelServiceUsed_camelServiceKey),
-        (u'defaultCallHandling', _CamelServiceUsed_defaultCallHandling),
-        (u'exchangeRateCode', _CamelServiceUsed_exchangeRateCode),
-        (u'taxInformation', _CamelServiceUsed_taxInformation),
-        (u'discountInformation', _CamelServiceUsed_discountInformation),
-        (u'camelInvocationFee', _CamelServiceUsed_camelInvocationFee),
-        (u'threeGcamelDestination', _CamelServiceUsed_threeGcamelDestination),
-        (u'cseInformation', _CamelServiceUsed_cseInformation),
+        ('camelServiceLevel', _CamelServiceUsed_camelServiceLevel),
+        ('camelServiceKey', _CamelServiceUsed_camelServiceKey),
+        ('defaultCallHandling', _CamelServiceUsed_defaultCallHandling),
+        ('exchangeRateCode', _CamelServiceUsed_exchangeRateCode),
+        ('taxInformation', _CamelServiceUsed_taxInformation),
+        ('discountInformation', _CamelServiceUsed_discountInformation),
+        ('camelInvocationFee', _CamelServiceUsed_camelInvocationFee),
+        ('threeGcamelDestination', _CamelServiceUsed_threeGcamelDestination),
+        ('cseInformation', _CamelServiceUsed_cseInformation),
         ])
     CamelServiceUsed._ext = []
     
     #-----< CauseForTerm >-----#
-    CauseForTerm = INT(name=u'CauseForTerm', mode=MODE_TYPE, tag=(58, TAG_APPLICATION, TAG_IMPLICIT))
+    CauseForTerm = INT(name='CauseForTerm', mode=MODE_TYPE, tag=(58, TAG_APPLICATION, TAG_IMPLICIT))
     
     #-----< CellId >-----#
-    CellId = INT(name=u'CellId', mode=MODE_TYPE, tag=(59, TAG_APPLICATION, TAG_IMPLICIT))
+    CellId = INT(name='CellId', mode=MODE_TYPE, tag=(59, TAG_APPLICATION, TAG_IMPLICIT))
     
     #-----< Charge >-----#
-    Charge = INT(name=u'Charge', mode=MODE_TYPE, tag=(62, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'AbsoluteAmount')))
+    Charge = INT(name='Charge', mode=MODE_TYPE, tag=(62, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'AbsoluteAmount')))
     
     #-----< ChargeableSubscriber >-----#
-    ChargeableSubscriber = CHOICE(name=u'ChargeableSubscriber', mode=MODE_TYPE, tag=(427, TAG_APPLICATION, TAG_IMPLICIT))
-    _ChargeableSubscriber_simChargeableSubscriber = SEQ(name=u'simChargeableSubscriber', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'SimChargeableSubscriber')))
-    _ChargeableSubscriber_minChargeableSubscriber = SEQ(name=u'minChargeableSubscriber', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'MinChargeableSubscriber')))
+    ChargeableSubscriber = CHOICE(name='ChargeableSubscriber', mode=MODE_TYPE, tag=(427, TAG_APPLICATION, TAG_IMPLICIT))
+    _ChargeableSubscriber_simChargeableSubscriber = SEQ(name='simChargeableSubscriber', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'SimChargeableSubscriber')))
+    _ChargeableSubscriber_minChargeableSubscriber = SEQ(name='minChargeableSubscriber', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'MinChargeableSubscriber')))
     ChargeableSubscriber._cont = ASN1Dict([
-        (u'simChargeableSubscriber', _ChargeableSubscriber_simChargeableSubscriber),
-        (u'minChargeableSubscriber', _ChargeableSubscriber_minChargeableSubscriber),
+        ('simChargeableSubscriber', _ChargeableSubscriber_simChargeableSubscriber),
+        ('minChargeableSubscriber', _ChargeableSubscriber_minChargeableSubscriber),
         ])
     ChargeableSubscriber._ext = []
     
     #-----< ChargeableUnits >-----#
-    ChargeableUnits = INT(name=u'ChargeableUnits', mode=MODE_TYPE, tag=(65, TAG_APPLICATION, TAG_IMPLICIT))
+    ChargeableUnits = INT(name='ChargeableUnits', mode=MODE_TYPE, tag=(65, TAG_APPLICATION, TAG_IMPLICIT))
     
     #-----< ChargeDetail >-----#
-    ChargeDetail = SEQ(name=u'ChargeDetail', mode=MODE_TYPE, tag=(63, TAG_APPLICATION, TAG_IMPLICIT))
-    _ChargeDetail_chargeType = OCT_STR(name=u'chargeType', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'ChargeType')), opt=True)
-    _ChargeDetail_charge = INT(name=u'charge', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'Charge')), opt=True)
-    _ChargeDetail_chargeableUnits = INT(name=u'chargeableUnits', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'ChargeableUnits')), opt=True)
-    _ChargeDetail_chargedUnits = INT(name=u'chargedUnits', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'ChargedUnits')), opt=True)
-    _ChargeDetail_chargeDetailTimeStamp = SEQ(name=u'chargeDetailTimeStamp', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'ChargeDetailTimeStamp')), opt=True)
+    ChargeDetail = SEQ(name='ChargeDetail', mode=MODE_TYPE, tag=(63, TAG_APPLICATION, TAG_IMPLICIT))
+    _ChargeDetail_chargeType = OCT_STR(name='chargeType', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'ChargeType')), opt=True)
+    _ChargeDetail_charge = INT(name='charge', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'Charge')), opt=True)
+    _ChargeDetail_chargeableUnits = INT(name='chargeableUnits', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'ChargeableUnits')), opt=True)
+    _ChargeDetail_chargedUnits = INT(name='chargedUnits', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'ChargedUnits')), opt=True)
+    _ChargeDetail_chargeDetailTimeStamp = SEQ(name='chargeDetailTimeStamp', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'ChargeDetailTimeStamp')), opt=True)
     ChargeDetail._cont = ASN1Dict([
-        (u'chargeType', _ChargeDetail_chargeType),
-        (u'charge', _ChargeDetail_charge),
-        (u'chargeableUnits', _ChargeDetail_chargeableUnits),
-        (u'chargedUnits', _ChargeDetail_chargedUnits),
-        (u'chargeDetailTimeStamp', _ChargeDetail_chargeDetailTimeStamp),
+        ('chargeType', _ChargeDetail_chargeType),
+        ('charge', _ChargeDetail_charge),
+        ('chargeableUnits', _ChargeDetail_chargeableUnits),
+        ('chargedUnits', _ChargeDetail_chargedUnits),
+        ('chargeDetailTimeStamp', _ChargeDetail_chargeDetailTimeStamp),
         ])
     ChargeDetail._ext = []
     
     #-----< ChargeDetailList >-----#
-    ChargeDetailList = SEQ_OF(name=u'ChargeDetailList', mode=MODE_TYPE, tag=(64, TAG_APPLICATION, TAG_IMPLICIT))
+    ChargeDetailList = SEQ_OF(name='ChargeDetailList', mode=MODE_TYPE, tag=(64, TAG_APPLICATION, TAG_IMPLICIT))
     _ChargeDetailList__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'ChargeDetail')))
     ChargeDetailList._cont = _ChargeDetailList__item_
     
     #-----< ChargeDetailTimeStamp >-----#
-    ChargeDetailTimeStamp = SEQ(name=u'ChargeDetailTimeStamp', mode=MODE_TYPE, tag=(410, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'ChargingTimeStamp')))
+    ChargeDetailTimeStamp = SEQ(name='ChargeDetailTimeStamp', mode=MODE_TYPE, tag=(410, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'ChargingTimeStamp')))
     
     #-----< ChargedItem >-----#
-    ChargedItem = OCT_STR(name=u'ChargedItem', mode=MODE_TYPE, tag=(66, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'AsciiString')))
+    ChargedItem = OCT_STR(name='ChargedItem', mode=MODE_TYPE, tag=(66, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'AsciiString')))
     ChargedItem._const_sz = ASN1Set(rv=[1], rr=[], ev=None, er=[])
     
     #-----< ChargedParty >-----#
-    ChargedParty = SEQ(name=u'ChargedParty', mode=MODE_TYPE, tag=(436, TAG_APPLICATION, TAG_IMPLICIT))
-    _ChargedParty_imsi = OCT_STR(name=u'imsi', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'Imsi')), opt=True)
-    _ChargedParty_msisdn = OCT_STR(name=u'msisdn', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'Msisdn')), opt=True)
-    _ChargedParty_publicUserId = OCT_STR(name=u'publicUserId', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'PublicUserId')), opt=True)
-    _ChargedParty_homeBid = OCT_STR(name=u'homeBid', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'HomeBid')), opt=True)
-    _ChargedParty_homeLocationDescription = OCT_STR(name=u'homeLocationDescription', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'HomeLocationDescription')), opt=True)
-    _ChargedParty_imei = OCT_STR(name=u'imei', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'Imei')), opt=True)
+    ChargedParty = SEQ(name='ChargedParty', mode=MODE_TYPE, tag=(436, TAG_APPLICATION, TAG_IMPLICIT))
+    _ChargedParty_imsi = OCT_STR(name='imsi', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'Imsi')), opt=True)
+    _ChargedParty_msisdn = OCT_STR(name='msisdn', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'Msisdn')), opt=True)
+    _ChargedParty_publicUserId = OCT_STR(name='publicUserId', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'PublicUserId')), opt=True)
+    _ChargedParty_homeBid = OCT_STR(name='homeBid', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'HomeBid')), opt=True)
+    _ChargedParty_homeLocationDescription = OCT_STR(name='homeLocationDescription', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'HomeLocationDescription')), opt=True)
+    _ChargedParty_imei = OCT_STR(name='imei', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'Imei')), opt=True)
     ChargedParty._cont = ASN1Dict([
-        (u'imsi', _ChargedParty_imsi),
-        (u'msisdn', _ChargedParty_msisdn),
-        (u'publicUserId', _ChargedParty_publicUserId),
-        (u'homeBid', _ChargedParty_homeBid),
-        (u'homeLocationDescription', _ChargedParty_homeLocationDescription),
-        (u'imei', _ChargedParty_imei),
+        ('imsi', _ChargedParty_imsi),
+        ('msisdn', _ChargedParty_msisdn),
+        ('publicUserId', _ChargedParty_publicUserId),
+        ('homeBid', _ChargedParty_homeBid),
+        ('homeLocationDescription', _ChargedParty_homeLocationDescription),
+        ('imei', _ChargedParty_imei),
         ])
     ChargedParty._ext = []
     
     #-----< ChargedPartyEquipment >-----#
-    ChargedPartyEquipment = SEQ(name=u'ChargedPartyEquipment', mode=MODE_TYPE, tag=(323, TAG_APPLICATION, TAG_IMPLICIT))
-    _ChargedPartyEquipment_equipmentIdType = INT(name=u'equipmentIdType', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'EquipmentIdType')), opt=True)
-    _ChargedPartyEquipment_equipmentId = OCT_STR(name=u'equipmentId', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'EquipmentId')), opt=True)
+    ChargedPartyEquipment = SEQ(name='ChargedPartyEquipment', mode=MODE_TYPE, tag=(323, TAG_APPLICATION, TAG_IMPLICIT))
+    _ChargedPartyEquipment_equipmentIdType = INT(name='equipmentIdType', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'EquipmentIdType')), opt=True)
+    _ChargedPartyEquipment_equipmentId = OCT_STR(name='equipmentId', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'EquipmentId')), opt=True)
     ChargedPartyEquipment._cont = ASN1Dict([
-        (u'equipmentIdType', _ChargedPartyEquipment_equipmentIdType),
-        (u'equipmentId', _ChargedPartyEquipment_equipmentId),
+        ('equipmentIdType', _ChargedPartyEquipment_equipmentIdType),
+        ('equipmentId', _ChargedPartyEquipment_equipmentId),
         ])
     ChargedPartyEquipment._ext = []
     
     #-----< ChargedPartyHomeIdentification >-----#
-    ChargedPartyHomeIdentification = SEQ(name=u'ChargedPartyHomeIdentification', mode=MODE_TYPE, tag=(313, TAG_APPLICATION, TAG_IMPLICIT))
-    _ChargedPartyHomeIdentification_homeIdType = INT(name=u'homeIdType', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'HomeIdType')), opt=True)
-    _ChargedPartyHomeIdentification_homeIdentifier = OCT_STR(name=u'homeIdentifier', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'HomeIdentifier')), opt=True)
+    ChargedPartyHomeIdentification = SEQ(name='ChargedPartyHomeIdentification', mode=MODE_TYPE, tag=(313, TAG_APPLICATION, TAG_IMPLICIT))
+    _ChargedPartyHomeIdentification_homeIdType = INT(name='homeIdType', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'HomeIdType')), opt=True)
+    _ChargedPartyHomeIdentification_homeIdentifier = OCT_STR(name='homeIdentifier', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'HomeIdentifier')), opt=True)
     ChargedPartyHomeIdentification._cont = ASN1Dict([
-        (u'homeIdType', _ChargedPartyHomeIdentification_homeIdType),
-        (u'homeIdentifier', _ChargedPartyHomeIdentification_homeIdentifier),
+        ('homeIdType', _ChargedPartyHomeIdentification_homeIdType),
+        ('homeIdentifier', _ChargedPartyHomeIdentification_homeIdentifier),
         ])
     ChargedPartyHomeIdentification._ext = []
     
     #-----< ChargedPartyHomeIdList >-----#
-    ChargedPartyHomeIdList = SEQ_OF(name=u'ChargedPartyHomeIdList', mode=MODE_TYPE, tag=(314, TAG_APPLICATION, TAG_IMPLICIT))
+    ChargedPartyHomeIdList = SEQ_OF(name='ChargedPartyHomeIdList', mode=MODE_TYPE, tag=(314, TAG_APPLICATION, TAG_IMPLICIT))
     _ChargedPartyHomeIdList__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'ChargedPartyHomeIdentification')))
     ChargedPartyHomeIdList._cont = _ChargedPartyHomeIdList__item_
     
     #-----< ChargedPartyIdentification >-----#
-    ChargedPartyIdentification = SEQ(name=u'ChargedPartyIdentification', mode=MODE_TYPE, tag=(309, TAG_APPLICATION, TAG_IMPLICIT))
-    _ChargedPartyIdentification_chargedPartyIdType = INT(name=u'chargedPartyIdType', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'ChargedPartyIdType')), opt=True)
-    _ChargedPartyIdentification_chargedPartyIdentifier = OCT_STR(name=u'chargedPartyIdentifier', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'ChargedPartyIdentifier')), opt=True)
+    ChargedPartyIdentification = SEQ(name='ChargedPartyIdentification', mode=MODE_TYPE, tag=(309, TAG_APPLICATION, TAG_IMPLICIT))
+    _ChargedPartyIdentification_chargedPartyIdType = INT(name='chargedPartyIdType', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'ChargedPartyIdType')), opt=True)
+    _ChargedPartyIdentification_chargedPartyIdentifier = OCT_STR(name='chargedPartyIdentifier', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'ChargedPartyIdentifier')), opt=True)
     ChargedPartyIdentification._cont = ASN1Dict([
-        (u'chargedPartyIdType', _ChargedPartyIdentification_chargedPartyIdType),
-        (u'chargedPartyIdentifier', _ChargedPartyIdentification_chargedPartyIdentifier),
+        ('chargedPartyIdType', _ChargedPartyIdentification_chargedPartyIdType),
+        ('chargedPartyIdentifier', _ChargedPartyIdentification_chargedPartyIdentifier),
         ])
     ChargedPartyIdentification._ext = []
     
     #-----< ChargedPartyIdentifier >-----#
-    ChargedPartyIdentifier = OCT_STR(name=u'ChargedPartyIdentifier', mode=MODE_TYPE, tag=(287, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'AsciiString')))
+    ChargedPartyIdentifier = OCT_STR(name='ChargedPartyIdentifier', mode=MODE_TYPE, tag=(287, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'AsciiString')))
     
     #-----< ChargedPartyIdList >-----#
-    ChargedPartyIdList = SEQ_OF(name=u'ChargedPartyIdList', mode=MODE_TYPE, tag=(310, TAG_APPLICATION, TAG_IMPLICIT))
+    ChargedPartyIdList = SEQ_OF(name='ChargedPartyIdList', mode=MODE_TYPE, tag=(310, TAG_APPLICATION, TAG_IMPLICIT))
     _ChargedPartyIdList__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'ChargedPartyIdentification')))
     ChargedPartyIdList._cont = _ChargedPartyIdList__item_
     
     #-----< ChargedPartyIdType >-----#
-    ChargedPartyIdType = INT(name=u'ChargedPartyIdType', mode=MODE_TYPE, tag=(305, TAG_APPLICATION, TAG_IMPLICIT))
+    ChargedPartyIdType = INT(name='ChargedPartyIdType', mode=MODE_TYPE, tag=(305, TAG_APPLICATION, TAG_IMPLICIT))
     
     #-----< ChargedPartyInformation >-----#
-    ChargedPartyInformation = SEQ(name=u'ChargedPartyInformation', mode=MODE_TYPE, tag=(324, TAG_APPLICATION, TAG_IMPLICIT))
-    _ChargedPartyInformation_chargedPartyIdList = SEQ_OF(name=u'chargedPartyIdList', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'ChargedPartyIdList')), opt=True)
-    _ChargedPartyInformation_chargedPartyHomeIdList = SEQ_OF(name=u'chargedPartyHomeIdList', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'ChargedPartyHomeIdList')), opt=True)
-    _ChargedPartyInformation_chargedPartyLocationList = SEQ_OF(name=u'chargedPartyLocationList', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'ChargedPartyLocationList')), opt=True)
-    _ChargedPartyInformation_chargedPartyEquipment = SEQ(name=u'chargedPartyEquipment', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'ChargedPartyEquipment')), opt=True)
+    ChargedPartyInformation = SEQ(name='ChargedPartyInformation', mode=MODE_TYPE, tag=(324, TAG_APPLICATION, TAG_IMPLICIT))
+    _ChargedPartyInformation_chargedPartyIdList = SEQ_OF(name='chargedPartyIdList', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'ChargedPartyIdList')), opt=True)
+    _ChargedPartyInformation_chargedPartyHomeIdList = SEQ_OF(name='chargedPartyHomeIdList', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'ChargedPartyHomeIdList')), opt=True)
+    _ChargedPartyInformation_chargedPartyLocationList = SEQ_OF(name='chargedPartyLocationList', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'ChargedPartyLocationList')), opt=True)
+    _ChargedPartyInformation_chargedPartyEquipment = SEQ(name='chargedPartyEquipment', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'ChargedPartyEquipment')), opt=True)
     ChargedPartyInformation._cont = ASN1Dict([
-        (u'chargedPartyIdList', _ChargedPartyInformation_chargedPartyIdList),
-        (u'chargedPartyHomeIdList', _ChargedPartyInformation_chargedPartyHomeIdList),
-        (u'chargedPartyLocationList', _ChargedPartyInformation_chargedPartyLocationList),
-        (u'chargedPartyEquipment', _ChargedPartyInformation_chargedPartyEquipment),
+        ('chargedPartyIdList', _ChargedPartyInformation_chargedPartyIdList),
+        ('chargedPartyHomeIdList', _ChargedPartyInformation_chargedPartyHomeIdList),
+        ('chargedPartyLocationList', _ChargedPartyInformation_chargedPartyLocationList),
+        ('chargedPartyEquipment', _ChargedPartyInformation_chargedPartyEquipment),
         ])
     ChargedPartyInformation._ext = []
     
     #-----< ChargedPartyLocation >-----#
-    ChargedPartyLocation = SEQ(name=u'ChargedPartyLocation', mode=MODE_TYPE, tag=(320, TAG_APPLICATION, TAG_IMPLICIT))
-    _ChargedPartyLocation_locationIdType = INT(name=u'locationIdType', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'LocationIdType')), opt=True)
-    _ChargedPartyLocation_locationIdentifier = OCT_STR(name=u'locationIdentifier', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'LocationIdentifier')), opt=True)
+    ChargedPartyLocation = SEQ(name='ChargedPartyLocation', mode=MODE_TYPE, tag=(320, TAG_APPLICATION, TAG_IMPLICIT))
+    _ChargedPartyLocation_locationIdType = INT(name='locationIdType', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'LocationIdType')), opt=True)
+    _ChargedPartyLocation_locationIdentifier = OCT_STR(name='locationIdentifier', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'LocationIdentifier')), opt=True)
     ChargedPartyLocation._cont = ASN1Dict([
-        (u'locationIdType', _ChargedPartyLocation_locationIdType),
-        (u'locationIdentifier', _ChargedPartyLocation_locationIdentifier),
+        ('locationIdType', _ChargedPartyLocation_locationIdType),
+        ('locationIdentifier', _ChargedPartyLocation_locationIdentifier),
         ])
     ChargedPartyLocation._ext = []
     
     #-----< ChargedPartyLocationList >-----#
-    ChargedPartyLocationList = SEQ_OF(name=u'ChargedPartyLocationList', mode=MODE_TYPE, tag=(321, TAG_APPLICATION, TAG_IMPLICIT))
+    ChargedPartyLocationList = SEQ_OF(name='ChargedPartyLocationList', mode=MODE_TYPE, tag=(321, TAG_APPLICATION, TAG_IMPLICIT))
     _ChargedPartyLocationList__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'ChargedPartyLocation')))
     ChargedPartyLocationList._cont = _ChargedPartyLocationList__item_
     
     #-----< ChargedPartyStatus >-----#
-    ChargedPartyStatus = INT(name=u'ChargedPartyStatus', mode=MODE_TYPE, tag=(67, TAG_APPLICATION, TAG_IMPLICIT))
+    ChargedPartyStatus = INT(name='ChargedPartyStatus', mode=MODE_TYPE, tag=(67, TAG_APPLICATION, TAG_IMPLICIT))
     
     #-----< ChargedUnits >-----#
-    ChargedUnits = INT(name=u'ChargedUnits', mode=MODE_TYPE, tag=(68, TAG_APPLICATION, TAG_IMPLICIT))
+    ChargedUnits = INT(name='ChargedUnits', mode=MODE_TYPE, tag=(68, TAG_APPLICATION, TAG_IMPLICIT))
     
     #-----< ChargeInformation >-----#
-    ChargeInformation = SEQ(name=u'ChargeInformation', mode=MODE_TYPE, tag=(69, TAG_APPLICATION, TAG_IMPLICIT))
-    _ChargeInformation_chargedItem = OCT_STR(name=u'chargedItem', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'ChargedItem')), opt=True)
-    _ChargeInformation_exchangeRateCode = INT(name=u'exchangeRateCode', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'ExchangeRateCode')), opt=True)
-    _ChargeInformation_callTypeGroup = SEQ(name=u'callTypeGroup', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'CallTypeGroup')), opt=True)
-    _ChargeInformation_chargeDetailList = SEQ_OF(name=u'chargeDetailList', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'ChargeDetailList')), opt=True)
-    _ChargeInformation_taxInformation = SEQ_OF(name=u'taxInformation', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'TaxInformationList')), opt=True)
-    _ChargeInformation_discountInformation = SEQ(name=u'discountInformation', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'DiscountInformation')), opt=True)
+    ChargeInformation = SEQ(name='ChargeInformation', mode=MODE_TYPE, tag=(69, TAG_APPLICATION, TAG_IMPLICIT))
+    _ChargeInformation_chargedItem = OCT_STR(name='chargedItem', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'ChargedItem')), opt=True)
+    _ChargeInformation_exchangeRateCode = INT(name='exchangeRateCode', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'ExchangeRateCode')), opt=True)
+    _ChargeInformation_callTypeGroup = SEQ(name='callTypeGroup', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'CallTypeGroup')), opt=True)
+    _ChargeInformation_chargeDetailList = SEQ_OF(name='chargeDetailList', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'ChargeDetailList')), opt=True)
+    _ChargeInformation_taxInformation = SEQ_OF(name='taxInformation', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'TaxInformationList')), opt=True)
+    _ChargeInformation_discountInformation = SEQ(name='discountInformation', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'DiscountInformation')), opt=True)
     ChargeInformation._cont = ASN1Dict([
-        (u'chargedItem', _ChargeInformation_chargedItem),
-        (u'exchangeRateCode', _ChargeInformation_exchangeRateCode),
-        (u'callTypeGroup', _ChargeInformation_callTypeGroup),
-        (u'chargeDetailList', _ChargeInformation_chargeDetailList),
-        (u'taxInformation', _ChargeInformation_taxInformation),
-        (u'discountInformation', _ChargeInformation_discountInformation),
+        ('chargedItem', _ChargeInformation_chargedItem),
+        ('exchangeRateCode', _ChargeInformation_exchangeRateCode),
+        ('callTypeGroup', _ChargeInformation_callTypeGroup),
+        ('chargeDetailList', _ChargeInformation_chargeDetailList),
+        ('taxInformation', _ChargeInformation_taxInformation),
+        ('discountInformation', _ChargeInformation_discountInformation),
         ])
     ChargeInformation._ext = []
     
     #-----< ChargeInformationList >-----#
-    ChargeInformationList = SEQ_OF(name=u'ChargeInformationList', mode=MODE_TYPE, tag=(70, TAG_APPLICATION, TAG_IMPLICIT))
+    ChargeInformationList = SEQ_OF(name='ChargeInformationList', mode=MODE_TYPE, tag=(70, TAG_APPLICATION, TAG_IMPLICIT))
     _ChargeInformationList__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'ChargeInformation')))
     ChargeInformationList._cont = _ChargeInformationList__item_
     
     #-----< ChargeRefundIndicator >-----#
-    ChargeRefundIndicator = INT(name=u'ChargeRefundIndicator', mode=MODE_TYPE, tag=(344, TAG_APPLICATION, TAG_IMPLICIT))
+    ChargeRefundIndicator = INT(name='ChargeRefundIndicator', mode=MODE_TYPE, tag=(344, TAG_APPLICATION, TAG_IMPLICIT))
     
     #-----< ChargeType >-----#
-    ChargeType = OCT_STR(name=u'ChargeType', mode=MODE_TYPE, tag=(71, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'NumberString')))
+    ChargeType = OCT_STR(name='ChargeType', mode=MODE_TYPE, tag=(71, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'NumberString')))
     ChargeType._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=2, ub=3)], ev=None, er=[])
     
     #-----< ChargingId >-----#
-    ChargingId = INT(name=u'ChargingId', mode=MODE_TYPE, tag=(72, TAG_APPLICATION, TAG_IMPLICIT))
+    ChargingId = INT(name='ChargingId', mode=MODE_TYPE, tag=(72, TAG_APPLICATION, TAG_IMPLICIT))
     
     #-----< ChargingPoint >-----#
-    ChargingPoint = OCT_STR(name=u'ChargingPoint', mode=MODE_TYPE, tag=(73, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'AsciiString')))
+    ChargingPoint = OCT_STR(name='ChargingPoint', mode=MODE_TYPE, tag=(73, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'AsciiString')))
     ChargingPoint._const_sz = ASN1Set(rv=[1], rr=[], ev=None, er=[])
     
     #-----< ChargingTimeStamp >-----#
-    ChargingTimeStamp = SEQ(name=u'ChargingTimeStamp', mode=MODE_TYPE, tag=(74, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'DateTime')))
+    ChargingTimeStamp = SEQ(name='ChargingTimeStamp', mode=MODE_TYPE, tag=(74, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'DateTime')))
     
     #-----< ClirIndicator >-----#
-    ClirIndicator = INT(name=u'ClirIndicator', mode=MODE_TYPE, tag=(75, TAG_APPLICATION, TAG_IMPLICIT))
+    ClirIndicator = INT(name='ClirIndicator', mode=MODE_TYPE, tag=(75, TAG_APPLICATION, TAG_IMPLICIT))
     
     #-----< Commission >-----#
-    Commission = INT(name=u'Commission', mode=MODE_TYPE, tag=(350, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'Charge')))
+    Commission = INT(name='Commission', mode=MODE_TYPE, tag=(350, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'Charge')))
     
     #-----< CompletionTimeStamp >-----#
-    CompletionTimeStamp = SEQ(name=u'CompletionTimeStamp', mode=MODE_TYPE, tag=(76, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'DateTime')))
+    CompletionTimeStamp = SEQ(name='CompletionTimeStamp', mode=MODE_TYPE, tag=(76, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'DateTime')))
     
     #-----< ContentChargingPoint >-----#
-    ContentChargingPoint = INT(name=u'ContentChargingPoint', mode=MODE_TYPE, tag=(345, TAG_APPLICATION, TAG_IMPLICIT))
+    ContentChargingPoint = INT(name='ContentChargingPoint', mode=MODE_TYPE, tag=(345, TAG_APPLICATION, TAG_IMPLICIT))
     
     #-----< ContentProvider >-----#
-    ContentProvider = SEQ(name=u'ContentProvider', mode=MODE_TYPE, tag=(327, TAG_APPLICATION, TAG_IMPLICIT))
-    _ContentProvider_contentProviderIdType = INT(name=u'contentProviderIdType', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'ContentProviderIdType')), opt=True)
-    _ContentProvider_contentProviderIdentifier = OCT_STR(name=u'contentProviderIdentifier', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'ContentProviderIdentifier')), opt=True)
+    ContentProvider = SEQ(name='ContentProvider', mode=MODE_TYPE, tag=(327, TAG_APPLICATION, TAG_IMPLICIT))
+    _ContentProvider_contentProviderIdType = INT(name='contentProviderIdType', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'ContentProviderIdType')), opt=True)
+    _ContentProvider_contentProviderIdentifier = OCT_STR(name='contentProviderIdentifier', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'ContentProviderIdentifier')), opt=True)
     ContentProvider._cont = ASN1Dict([
-        (u'contentProviderIdType', _ContentProvider_contentProviderIdType),
-        (u'contentProviderIdentifier', _ContentProvider_contentProviderIdentifier),
+        ('contentProviderIdType', _ContentProvider_contentProviderIdType),
+        ('contentProviderIdentifier', _ContentProvider_contentProviderIdentifier),
         ])
     ContentProvider._ext = []
     
     #-----< ContentProviderIdentifier >-----#
-    ContentProviderIdentifier = OCT_STR(name=u'ContentProviderIdentifier', mode=MODE_TYPE, tag=(292, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'AsciiString')))
+    ContentProviderIdentifier = OCT_STR(name='ContentProviderIdentifier', mode=MODE_TYPE, tag=(292, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'AsciiString')))
     
     #-----< ContentProviderIdList >-----#
-    ContentProviderIdList = SEQ_OF(name=u'ContentProviderIdList', mode=MODE_TYPE, tag=(328, TAG_APPLICATION, TAG_IMPLICIT))
+    ContentProviderIdList = SEQ_OF(name='ContentProviderIdList', mode=MODE_TYPE, tag=(328, TAG_APPLICATION, TAG_IMPLICIT))
     _ContentProviderIdList__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'ContentProvider')))
     ContentProviderIdList._cont = _ContentProviderIdList__item_
     
     #-----< ContentProviderIdType >-----#
-    ContentProviderIdType = INT(name=u'ContentProviderIdType', mode=MODE_TYPE, tag=(291, TAG_APPLICATION, TAG_IMPLICIT))
+    ContentProviderIdType = INT(name='ContentProviderIdType', mode=MODE_TYPE, tag=(291, TAG_APPLICATION, TAG_IMPLICIT))
     
     #-----< ContentProviderName >-----#
-    ContentProviderName = OCT_STR(name=u'ContentProviderName', mode=MODE_TYPE, tag=(334, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'AsciiString')))
+    ContentProviderName = OCT_STR(name='ContentProviderName', mode=MODE_TYPE, tag=(334, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'AsciiString')))
     
     #-----< ContentServiceUsed >-----#
-    ContentServiceUsed = SEQ(name=u'ContentServiceUsed', mode=MODE_TYPE, tag=(352, TAG_APPLICATION, TAG_IMPLICIT))
-    _ContentServiceUsed_contentTransactionCode = INT(name=u'contentTransactionCode', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'ContentTransactionCode')), opt=True)
-    _ContentServiceUsed_contentTransactionType = INT(name=u'contentTransactionType', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'ContentTransactionType')), opt=True)
-    _ContentServiceUsed_objectType = INT(name=u'objectType', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'ObjectType')), opt=True)
-    _ContentServiceUsed_transactionDescriptionSupp = INT(name=u'transactionDescriptionSupp', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'TransactionDescriptionSupp')), opt=True)
-    _ContentServiceUsed_transactionShortDescription = OCT_STR(name=u'transactionShortDescription', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'TransactionShortDescription')), opt=True)
-    _ContentServiceUsed_transactionDetailDescription = OCT_STR(name=u'transactionDetailDescription', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'TransactionDetailDescription')), opt=True)
-    _ContentServiceUsed_transactionIdentifier = OCT_STR(name=u'transactionIdentifier', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'TransactionIdentifier')), opt=True)
-    _ContentServiceUsed_transactionAuthCode = OCT_STR(name=u'transactionAuthCode', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'TransactionAuthCode')), opt=True)
-    _ContentServiceUsed_dataVolumeIncoming = INT(name=u'dataVolumeIncoming', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'DataVolumeIncoming')), opt=True)
-    _ContentServiceUsed_dataVolumeOutgoing = INT(name=u'dataVolumeOutgoing', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'DataVolumeOutgoing')), opt=True)
-    _ContentServiceUsed_totalDataVolume = INT(name=u'totalDataVolume', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'TotalDataVolume')), opt=True)
-    _ContentServiceUsed_chargeRefundIndicator = INT(name=u'chargeRefundIndicator', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'ChargeRefundIndicator')), opt=True)
-    _ContentServiceUsed_contentChargingPoint = INT(name=u'contentChargingPoint', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'ContentChargingPoint')), opt=True)
-    _ContentServiceUsed_chargeInformationList = SEQ_OF(name=u'chargeInformationList', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'ChargeInformationList')), opt=True)
-    _ContentServiceUsed_advisedChargeInformation = SEQ(name=u'advisedChargeInformation', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'AdvisedChargeInformation')), opt=True)
+    ContentServiceUsed = SEQ(name='ContentServiceUsed', mode=MODE_TYPE, tag=(352, TAG_APPLICATION, TAG_IMPLICIT))
+    _ContentServiceUsed_contentTransactionCode = INT(name='contentTransactionCode', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'ContentTransactionCode')), opt=True)
+    _ContentServiceUsed_contentTransactionType = INT(name='contentTransactionType', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'ContentTransactionType')), opt=True)
+    _ContentServiceUsed_objectType = INT(name='objectType', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'ObjectType')), opt=True)
+    _ContentServiceUsed_transactionDescriptionSupp = INT(name='transactionDescriptionSupp', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'TransactionDescriptionSupp')), opt=True)
+    _ContentServiceUsed_transactionShortDescription = OCT_STR(name='transactionShortDescription', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'TransactionShortDescription')), opt=True)
+    _ContentServiceUsed_transactionDetailDescription = OCT_STR(name='transactionDetailDescription', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'TransactionDetailDescription')), opt=True)
+    _ContentServiceUsed_transactionIdentifier = OCT_STR(name='transactionIdentifier', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'TransactionIdentifier')), opt=True)
+    _ContentServiceUsed_transactionAuthCode = OCT_STR(name='transactionAuthCode', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'TransactionAuthCode')), opt=True)
+    _ContentServiceUsed_dataVolumeIncoming = INT(name='dataVolumeIncoming', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'DataVolumeIncoming')), opt=True)
+    _ContentServiceUsed_dataVolumeOutgoing = INT(name='dataVolumeOutgoing', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'DataVolumeOutgoing')), opt=True)
+    _ContentServiceUsed_totalDataVolume = INT(name='totalDataVolume', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'TotalDataVolume')), opt=True)
+    _ContentServiceUsed_chargeRefundIndicator = INT(name='chargeRefundIndicator', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'ChargeRefundIndicator')), opt=True)
+    _ContentServiceUsed_contentChargingPoint = INT(name='contentChargingPoint', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'ContentChargingPoint')), opt=True)
+    _ContentServiceUsed_chargeInformationList = SEQ_OF(name='chargeInformationList', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'ChargeInformationList')), opt=True)
+    _ContentServiceUsed_advisedChargeInformation = SEQ(name='advisedChargeInformation', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'AdvisedChargeInformation')), opt=True)
     ContentServiceUsed._cont = ASN1Dict([
-        (u'contentTransactionCode', _ContentServiceUsed_contentTransactionCode),
-        (u'contentTransactionType', _ContentServiceUsed_contentTransactionType),
-        (u'objectType', _ContentServiceUsed_objectType),
-        (u'transactionDescriptionSupp', _ContentServiceUsed_transactionDescriptionSupp),
-        (u'transactionShortDescription', _ContentServiceUsed_transactionShortDescription),
-        (u'transactionDetailDescription', _ContentServiceUsed_transactionDetailDescription),
-        (u'transactionIdentifier', _ContentServiceUsed_transactionIdentifier),
-        (u'transactionAuthCode', _ContentServiceUsed_transactionAuthCode),
-        (u'dataVolumeIncoming', _ContentServiceUsed_dataVolumeIncoming),
-        (u'dataVolumeOutgoing', _ContentServiceUsed_dataVolumeOutgoing),
-        (u'totalDataVolume', _ContentServiceUsed_totalDataVolume),
-        (u'chargeRefundIndicator', _ContentServiceUsed_chargeRefundIndicator),
-        (u'contentChargingPoint', _ContentServiceUsed_contentChargingPoint),
-        (u'chargeInformationList', _ContentServiceUsed_chargeInformationList),
-        (u'advisedChargeInformation', _ContentServiceUsed_advisedChargeInformation),
+        ('contentTransactionCode', _ContentServiceUsed_contentTransactionCode),
+        ('contentTransactionType', _ContentServiceUsed_contentTransactionType),
+        ('objectType', _ContentServiceUsed_objectType),
+        ('transactionDescriptionSupp', _ContentServiceUsed_transactionDescriptionSupp),
+        ('transactionShortDescription', _ContentServiceUsed_transactionShortDescription),
+        ('transactionDetailDescription', _ContentServiceUsed_transactionDetailDescription),
+        ('transactionIdentifier', _ContentServiceUsed_transactionIdentifier),
+        ('transactionAuthCode', _ContentServiceUsed_transactionAuthCode),
+        ('dataVolumeIncoming', _ContentServiceUsed_dataVolumeIncoming),
+        ('dataVolumeOutgoing', _ContentServiceUsed_dataVolumeOutgoing),
+        ('totalDataVolume', _ContentServiceUsed_totalDataVolume),
+        ('chargeRefundIndicator', _ContentServiceUsed_chargeRefundIndicator),
+        ('contentChargingPoint', _ContentServiceUsed_contentChargingPoint),
+        ('chargeInformationList', _ContentServiceUsed_chargeInformationList),
+        ('advisedChargeInformation', _ContentServiceUsed_advisedChargeInformation),
         ])
     ContentServiceUsed._ext = []
     
     #-----< ContentServiceUsedList >-----#
-    ContentServiceUsedList = SEQ_OF(name=u'ContentServiceUsedList', mode=MODE_TYPE, tag=(285, TAG_APPLICATION, TAG_IMPLICIT))
+    ContentServiceUsedList = SEQ_OF(name='ContentServiceUsedList', mode=MODE_TYPE, tag=(285, TAG_APPLICATION, TAG_IMPLICIT))
     _ContentServiceUsedList__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'ContentServiceUsed')))
     ContentServiceUsedList._cont = _ContentServiceUsedList__item_
     
     #-----< ContentTransactionBasicInfo >-----#
-    ContentTransactionBasicInfo = SEQ(name=u'ContentTransactionBasicInfo', mode=MODE_TYPE, tag=(304, TAG_APPLICATION, TAG_IMPLICIT))
-    _ContentTransactionBasicInfo_rapFileSequenceNumber = OCT_STR(name=u'rapFileSequenceNumber', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'RapFileSequenceNumber')), opt=True)
-    _ContentTransactionBasicInfo_orderPlacedTimeStamp = SEQ(name=u'orderPlacedTimeStamp', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'OrderPlacedTimeStamp')), opt=True)
-    _ContentTransactionBasicInfo_requestedDeliveryTimeStamp = SEQ(name=u'requestedDeliveryTimeStamp', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'RequestedDeliveryTimeStamp')), opt=True)
-    _ContentTransactionBasicInfo_actualDeliveryTimeStamp = SEQ(name=u'actualDeliveryTimeStamp', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'ActualDeliveryTimeStamp')), opt=True)
-    _ContentTransactionBasicInfo_totalTransactionDuration = INT(name=u'totalTransactionDuration', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'TotalTransactionDuration')), opt=True)
-    _ContentTransactionBasicInfo_transactionStatus = INT(name=u'transactionStatus', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'TransactionStatus')), opt=True)
+    ContentTransactionBasicInfo = SEQ(name='ContentTransactionBasicInfo', mode=MODE_TYPE, tag=(304, TAG_APPLICATION, TAG_IMPLICIT))
+    _ContentTransactionBasicInfo_rapFileSequenceNumber = OCT_STR(name='rapFileSequenceNumber', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'RapFileSequenceNumber')), opt=True)
+    _ContentTransactionBasicInfo_orderPlacedTimeStamp = SEQ(name='orderPlacedTimeStamp', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'OrderPlacedTimeStamp')), opt=True)
+    _ContentTransactionBasicInfo_requestedDeliveryTimeStamp = SEQ(name='requestedDeliveryTimeStamp', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'RequestedDeliveryTimeStamp')), opt=True)
+    _ContentTransactionBasicInfo_actualDeliveryTimeStamp = SEQ(name='actualDeliveryTimeStamp', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'ActualDeliveryTimeStamp')), opt=True)
+    _ContentTransactionBasicInfo_totalTransactionDuration = INT(name='totalTransactionDuration', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'TotalTransactionDuration')), opt=True)
+    _ContentTransactionBasicInfo_transactionStatus = INT(name='transactionStatus', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'TransactionStatus')), opt=True)
     ContentTransactionBasicInfo._cont = ASN1Dict([
-        (u'rapFileSequenceNumber', _ContentTransactionBasicInfo_rapFileSequenceNumber),
-        (u'orderPlacedTimeStamp', _ContentTransactionBasicInfo_orderPlacedTimeStamp),
-        (u'requestedDeliveryTimeStamp', _ContentTransactionBasicInfo_requestedDeliveryTimeStamp),
-        (u'actualDeliveryTimeStamp', _ContentTransactionBasicInfo_actualDeliveryTimeStamp),
-        (u'totalTransactionDuration', _ContentTransactionBasicInfo_totalTransactionDuration),
-        (u'transactionStatus', _ContentTransactionBasicInfo_transactionStatus),
+        ('rapFileSequenceNumber', _ContentTransactionBasicInfo_rapFileSequenceNumber),
+        ('orderPlacedTimeStamp', _ContentTransactionBasicInfo_orderPlacedTimeStamp),
+        ('requestedDeliveryTimeStamp', _ContentTransactionBasicInfo_requestedDeliveryTimeStamp),
+        ('actualDeliveryTimeStamp', _ContentTransactionBasicInfo_actualDeliveryTimeStamp),
+        ('totalTransactionDuration', _ContentTransactionBasicInfo_totalTransactionDuration),
+        ('transactionStatus', _ContentTransactionBasicInfo_transactionStatus),
         ])
     ContentTransactionBasicInfo._ext = []
     
     #-----< ContentTransactionCode >-----#
-    ContentTransactionCode = INT(name=u'ContentTransactionCode', mode=MODE_TYPE, tag=(336, TAG_APPLICATION, TAG_IMPLICIT))
+    ContentTransactionCode = INT(name='ContentTransactionCode', mode=MODE_TYPE, tag=(336, TAG_APPLICATION, TAG_IMPLICIT))
     
     #-----< ContentTransactionType >-----#
-    ContentTransactionType = INT(name=u'ContentTransactionType', mode=MODE_TYPE, tag=(337, TAG_APPLICATION, TAG_IMPLICIT))
+    ContentTransactionType = INT(name='ContentTransactionType', mode=MODE_TYPE, tag=(337, TAG_APPLICATION, TAG_IMPLICIT))
     
     #-----< CseInformation >-----#
-    CseInformation = OCT_STR(name=u'CseInformation', mode=MODE_TYPE, tag=(79, TAG_APPLICATION, TAG_IMPLICIT))
+    CseInformation = OCT_STR(name='CseInformation', mode=MODE_TYPE, tag=(79, TAG_APPLICATION, TAG_IMPLICIT))
     CseInformation._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=40)], ev=None, er=[])
     
     #-----< CurrencyConversion >-----#
-    CurrencyConversion = SEQ(name=u'CurrencyConversion', mode=MODE_TYPE, tag=(106, TAG_APPLICATION, TAG_IMPLICIT))
-    _CurrencyConversion_exchangeRateCode = INT(name=u'exchangeRateCode', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'ExchangeRateCode')), opt=True)
-    _CurrencyConversion_numberOfDecimalPlaces = INT(name=u'numberOfDecimalPlaces', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'NumberOfDecimalPlaces')), opt=True)
-    _CurrencyConversion_exchangeRate = INT(name=u'exchangeRate', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'ExchangeRate')), opt=True)
+    CurrencyConversion = SEQ(name='CurrencyConversion', mode=MODE_TYPE, tag=(106, TAG_APPLICATION, TAG_IMPLICIT))
+    _CurrencyConversion_exchangeRateCode = INT(name='exchangeRateCode', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'ExchangeRateCode')), opt=True)
+    _CurrencyConversion_numberOfDecimalPlaces = INT(name='numberOfDecimalPlaces', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'NumberOfDecimalPlaces')), opt=True)
+    _CurrencyConversion_exchangeRate = INT(name='exchangeRate', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'ExchangeRate')), opt=True)
     CurrencyConversion._cont = ASN1Dict([
-        (u'exchangeRateCode', _CurrencyConversion_exchangeRateCode),
-        (u'numberOfDecimalPlaces', _CurrencyConversion_numberOfDecimalPlaces),
-        (u'exchangeRate', _CurrencyConversion_exchangeRate),
+        ('exchangeRateCode', _CurrencyConversion_exchangeRateCode),
+        ('numberOfDecimalPlaces', _CurrencyConversion_numberOfDecimalPlaces),
+        ('exchangeRate', _CurrencyConversion_exchangeRate),
         ])
     CurrencyConversion._ext = []
     
     #-----< CurrencyConversionList >-----#
-    CurrencyConversionList = SEQ_OF(name=u'CurrencyConversionList', mode=MODE_TYPE, tag=(80, TAG_APPLICATION, TAG_IMPLICIT))
+    CurrencyConversionList = SEQ_OF(name='CurrencyConversionList', mode=MODE_TYPE, tag=(80, TAG_APPLICATION, TAG_IMPLICIT))
     _CurrencyConversionList__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'CurrencyConversion')))
     CurrencyConversionList._cont = _CurrencyConversionList__item_
     
     #-----< CustomerIdentifier >-----#
-    CustomerIdentifier = OCT_STR(name=u'CustomerIdentifier', mode=MODE_TYPE, tag=(364, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'AsciiString')))
+    CustomerIdentifier = OCT_STR(name='CustomerIdentifier', mode=MODE_TYPE, tag=(364, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'AsciiString')))
     
     #-----< CustomerIdType >-----#
-    CustomerIdType = INT(name=u'CustomerIdType', mode=MODE_TYPE, tag=(363, TAG_APPLICATION, TAG_IMPLICIT))
+    CustomerIdType = INT(name='CustomerIdType', mode=MODE_TYPE, tag=(363, TAG_APPLICATION, TAG_IMPLICIT))
     
     #-----< DataVolume >-----#
-    DataVolume = INT(name=u'DataVolume', mode=MODE_TYPE)
+    DataVolume = INT(name='DataVolume', mode=MODE_TYPE)
     
     #-----< DataVolumeIncoming >-----#
-    DataVolumeIncoming = INT(name=u'DataVolumeIncoming', mode=MODE_TYPE, tag=(250, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'DataVolume')))
+    DataVolumeIncoming = INT(name='DataVolumeIncoming', mode=MODE_TYPE, tag=(250, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'DataVolume')))
     
     #-----< DataVolumeOutgoing >-----#
-    DataVolumeOutgoing = INT(name=u'DataVolumeOutgoing', mode=MODE_TYPE, tag=(251, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'DataVolume')))
+    DataVolumeOutgoing = INT(name='DataVolumeOutgoing', mode=MODE_TYPE, tag=(251, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'DataVolume')))
     
     #-----< DateTime >-----#
-    DateTime = SEQ(name=u'DateTime', mode=MODE_TYPE)
-    _DateTime_localTimeStamp = OCT_STR(name=u'localTimeStamp', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'LocalTimeStamp')), opt=True)
-    _DateTime_utcTimeOffsetCode = INT(name=u'utcTimeOffsetCode', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'UtcTimeOffsetCode')), opt=True)
+    DateTime = SEQ(name='DateTime', mode=MODE_TYPE)
+    _DateTime_localTimeStamp = OCT_STR(name='localTimeStamp', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'LocalTimeStamp')), opt=True)
+    _DateTime_utcTimeOffsetCode = INT(name='utcTimeOffsetCode', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'UtcTimeOffsetCode')), opt=True)
     DateTime._cont = ASN1Dict([
-        (u'localTimeStamp', _DateTime_localTimeStamp),
-        (u'utcTimeOffsetCode', _DateTime_utcTimeOffsetCode),
+        ('localTimeStamp', _DateTime_localTimeStamp),
+        ('utcTimeOffsetCode', _DateTime_utcTimeOffsetCode),
         ])
     DateTime._ext = []
     
     #-----< DateTimeLong >-----#
-    DateTimeLong = SEQ(name=u'DateTimeLong', mode=MODE_TYPE)
-    _DateTimeLong_localTimeStamp = OCT_STR(name=u'localTimeStamp', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'LocalTimeStamp')), opt=True)
-    _DateTimeLong_utcTimeOffset = OCT_STR(name=u'utcTimeOffset', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'UtcTimeOffset')), opt=True)
+    DateTimeLong = SEQ(name='DateTimeLong', mode=MODE_TYPE)
+    _DateTimeLong_localTimeStamp = OCT_STR(name='localTimeStamp', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'LocalTimeStamp')), opt=True)
+    _DateTimeLong_utcTimeOffset = OCT_STR(name='utcTimeOffset', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'UtcTimeOffset')), opt=True)
     DateTimeLong._cont = ASN1Dict([
-        (u'localTimeStamp', _DateTimeLong_localTimeStamp),
-        (u'utcTimeOffset', _DateTimeLong_utcTimeOffset),
+        ('localTimeStamp', _DateTimeLong_localTimeStamp),
+        ('utcTimeOffset', _DateTimeLong_utcTimeOffset),
         ])
     DateTimeLong._ext = []
     
     #-----< DefaultCallHandlingIndicator >-----#
-    DefaultCallHandlingIndicator = INT(name=u'DefaultCallHandlingIndicator', mode=MODE_TYPE, tag=(87, TAG_APPLICATION, TAG_IMPLICIT))
+    DefaultCallHandlingIndicator = INT(name='DefaultCallHandlingIndicator', mode=MODE_TYPE, tag=(87, TAG_APPLICATION, TAG_IMPLICIT))
     
     #-----< DepositTimeStamp >-----#
-    DepositTimeStamp = SEQ(name=u'DepositTimeStamp', mode=MODE_TYPE, tag=(88, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'DateTime')))
+    DepositTimeStamp = SEQ(name='DepositTimeStamp', mode=MODE_TYPE, tag=(88, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'DateTime')))
     
     #-----< Destination >-----#
-    Destination = SEQ(name=u'Destination', mode=MODE_TYPE, tag=(89, TAG_APPLICATION, TAG_IMPLICIT))
-    _Destination_calledNumber = OCT_STR(name=u'calledNumber', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'CalledNumber')), opt=True)
-    _Destination_dialledDigits = OCT_STR(name=u'dialledDigits', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'DialledDigits')), opt=True)
-    _Destination_calledPlace = OCT_STR(name=u'calledPlace', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'CalledPlace')), opt=True)
-    _Destination_calledRegion = OCT_STR(name=u'calledRegion', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'CalledRegion')), opt=True)
-    _Destination_sMSDestinationNumber = OCT_STR(name=u'sMSDestinationNumber', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'SMSDestinationNumber')), opt=True)
+    Destination = SEQ(name='Destination', mode=MODE_TYPE, tag=(89, TAG_APPLICATION, TAG_IMPLICIT))
+    _Destination_calledNumber = OCT_STR(name='calledNumber', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'CalledNumber')), opt=True)
+    _Destination_dialledDigits = OCT_STR(name='dialledDigits', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'DialledDigits')), opt=True)
+    _Destination_calledPlace = OCT_STR(name='calledPlace', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'CalledPlace')), opt=True)
+    _Destination_calledRegion = OCT_STR(name='calledRegion', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'CalledRegion')), opt=True)
+    _Destination_sMSDestinationNumber = OCT_STR(name='sMSDestinationNumber', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'SMSDestinationNumber')), opt=True)
     Destination._cont = ASN1Dict([
-        (u'calledNumber', _Destination_calledNumber),
-        (u'dialledDigits', _Destination_dialledDigits),
-        (u'calledPlace', _Destination_calledPlace),
-        (u'calledRegion', _Destination_calledRegion),
-        (u'sMSDestinationNumber', _Destination_sMSDestinationNumber),
+        ('calledNumber', _Destination_calledNumber),
+        ('dialledDigits', _Destination_dialledDigits),
+        ('calledPlace', _Destination_calledPlace),
+        ('calledRegion', _Destination_calledRegion),
+        ('sMSDestinationNumber', _Destination_sMSDestinationNumber),
         ])
     Destination._ext = []
     
     #-----< DestinationNetwork >-----#
-    DestinationNetwork = OCT_STR(name=u'DestinationNetwork', mode=MODE_TYPE, tag=(90, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'NetworkId')))
+    DestinationNetwork = OCT_STR(name='DestinationNetwork', mode=MODE_TYPE, tag=(90, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'NetworkId')))
     
     #-----< DialledDigits >-----#
-    DialledDigits = OCT_STR(name=u'DialledDigits', mode=MODE_TYPE, tag=(279, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'AsciiString')))
+    DialledDigits = OCT_STR(name='DialledDigits', mode=MODE_TYPE, tag=(279, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'AsciiString')))
     
     #-----< Discount >-----#
-    Discount = INT(name=u'Discount', mode=MODE_TYPE, tag=(412, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'DiscountValue')))
+    Discount = INT(name='Discount', mode=MODE_TYPE, tag=(412, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'DiscountValue')))
     
     #-----< DiscountableAmount >-----#
-    DiscountableAmount = INT(name=u'DiscountableAmount', mode=MODE_TYPE, tag=(423, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'AbsoluteAmount')))
+    DiscountableAmount = INT(name='DiscountableAmount', mode=MODE_TYPE, tag=(423, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'AbsoluteAmount')))
     
     #-----< DiscountApplied >-----#
-    DiscountApplied = CHOICE(name=u'DiscountApplied', mode=MODE_TYPE, tag=(428, TAG_APPLICATION, TAG_IMPLICIT))
-    _DiscountApplied_fixedDiscountValue = INT(name=u'fixedDiscountValue', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'FixedDiscountValue')))
-    _DiscountApplied_discountRate = INT(name=u'discountRate', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'DiscountRate')))
+    DiscountApplied = CHOICE(name='DiscountApplied', mode=MODE_TYPE, tag=(428, TAG_APPLICATION, TAG_IMPLICIT))
+    _DiscountApplied_fixedDiscountValue = INT(name='fixedDiscountValue', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'FixedDiscountValue')))
+    _DiscountApplied_discountRate = INT(name='discountRate', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'DiscountRate')))
     DiscountApplied._cont = ASN1Dict([
-        (u'fixedDiscountValue', _DiscountApplied_fixedDiscountValue),
-        (u'discountRate', _DiscountApplied_discountRate),
+        ('fixedDiscountValue', _DiscountApplied_fixedDiscountValue),
+        ('discountRate', _DiscountApplied_discountRate),
         ])
     DiscountApplied._ext = []
     
     #-----< DiscountCode >-----#
-    DiscountCode = INT(name=u'DiscountCode', mode=MODE_TYPE, tag=(91, TAG_APPLICATION, TAG_IMPLICIT))
+    DiscountCode = INT(name='DiscountCode', mode=MODE_TYPE, tag=(91, TAG_APPLICATION, TAG_IMPLICIT))
     
     #-----< DiscountInformation >-----#
-    DiscountInformation = SEQ(name=u'DiscountInformation', mode=MODE_TYPE, tag=(96, TAG_APPLICATION, TAG_IMPLICIT))
-    _DiscountInformation_discountCode = INT(name=u'discountCode', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'DiscountCode')), opt=True)
-    _DiscountInformation_discount = INT(name=u'discount', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'Discount')), opt=True)
-    _DiscountInformation_discountableAmount = INT(name=u'discountableAmount', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'DiscountableAmount')), opt=True)
+    DiscountInformation = SEQ(name='DiscountInformation', mode=MODE_TYPE, tag=(96, TAG_APPLICATION, TAG_IMPLICIT))
+    _DiscountInformation_discountCode = INT(name='discountCode', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'DiscountCode')), opt=True)
+    _DiscountInformation_discount = INT(name='discount', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'Discount')), opt=True)
+    _DiscountInformation_discountableAmount = INT(name='discountableAmount', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'DiscountableAmount')), opt=True)
     DiscountInformation._cont = ASN1Dict([
-        (u'discountCode', _DiscountInformation_discountCode),
-        (u'discount', _DiscountInformation_discount),
-        (u'discountableAmount', _DiscountInformation_discountableAmount),
+        ('discountCode', _DiscountInformation_discountCode),
+        ('discount', _DiscountInformation_discount),
+        ('discountableAmount', _DiscountInformation_discountableAmount),
         ])
     DiscountInformation._ext = []
     
     #-----< Discounting >-----#
-    Discounting = SEQ(name=u'Discounting', mode=MODE_TYPE, tag=(94, TAG_APPLICATION, TAG_IMPLICIT))
-    _Discounting_discountCode = INT(name=u'discountCode', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'DiscountCode')), opt=True)
-    _Discounting_discountApplied = CHOICE(name=u'discountApplied', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'DiscountApplied')), opt=True)
+    Discounting = SEQ(name='Discounting', mode=MODE_TYPE, tag=(94, TAG_APPLICATION, TAG_IMPLICIT))
+    _Discounting_discountCode = INT(name='discountCode', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'DiscountCode')), opt=True)
+    _Discounting_discountApplied = CHOICE(name='discountApplied', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'DiscountApplied')), opt=True)
     Discounting._cont = ASN1Dict([
-        (u'discountCode', _Discounting_discountCode),
-        (u'discountApplied', _Discounting_discountApplied),
+        ('discountCode', _Discounting_discountCode),
+        ('discountApplied', _Discounting_discountApplied),
         ])
     Discounting._ext = []
     
     #-----< DiscountingList >-----#
-    DiscountingList = SEQ_OF(name=u'DiscountingList', mode=MODE_TYPE, tag=(95, TAG_APPLICATION, TAG_IMPLICIT))
+    DiscountingList = SEQ_OF(name='DiscountingList', mode=MODE_TYPE, tag=(95, TAG_APPLICATION, TAG_IMPLICIT))
     _DiscountingList__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'Discounting')))
     DiscountingList._cont = _DiscountingList__item_
     
     #-----< DiscountRate >-----#
-    DiscountRate = INT(name=u'DiscountRate', mode=MODE_TYPE, tag=(92, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'PercentageRate')))
+    DiscountRate = INT(name='DiscountRate', mode=MODE_TYPE, tag=(92, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'PercentageRate')))
     
     #-----< DiscountValue >-----#
-    DiscountValue = INT(name=u'DiscountValue', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'AbsoluteAmount')))
+    DiscountValue = INT(name='DiscountValue', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'AbsoluteAmount')))
     
     #-----< DistanceChargeBandCode >-----#
-    DistanceChargeBandCode = OCT_STR(name=u'DistanceChargeBandCode', mode=MODE_TYPE, tag=(98, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'AsciiString')))
+    DistanceChargeBandCode = OCT_STR(name='DistanceChargeBandCode', mode=MODE_TYPE, tag=(98, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'AsciiString')))
     DistanceChargeBandCode._const_sz = ASN1Set(rv=[1], rr=[], ev=None, er=[])
     
     #-----< EarliestCallTimeStamp >-----#
-    EarliestCallTimeStamp = SEQ(name=u'EarliestCallTimeStamp', mode=MODE_TYPE, tag=(101, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'DateTimeLong')))
+    EarliestCallTimeStamp = SEQ(name='EarliestCallTimeStamp', mode=MODE_TYPE, tag=(101, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'DateTimeLong')))
     
     #-----< ElementId >-----#
-    ElementId = OCT_STR(name=u'ElementId', mode=MODE_TYPE, tag=(437, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'AsciiString')))
+    ElementId = OCT_STR(name='ElementId', mode=MODE_TYPE, tag=(437, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'AsciiString')))
     
     #-----< ElementType >-----#
-    ElementType = INT(name=u'ElementType', mode=MODE_TYPE, tag=(438, TAG_APPLICATION, TAG_IMPLICIT))
+    ElementType = INT(name='ElementType', mode=MODE_TYPE, tag=(438, TAG_APPLICATION, TAG_IMPLICIT))
     
     #-----< EquipmentId >-----#
-    EquipmentId = OCT_STR(name=u'EquipmentId', mode=MODE_TYPE, tag=(290, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'AsciiString')))
+    EquipmentId = OCT_STR(name='EquipmentId', mode=MODE_TYPE, tag=(290, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'AsciiString')))
     
     #-----< EquipmentIdType >-----#
-    EquipmentIdType = INT(name=u'EquipmentIdType', mode=MODE_TYPE, tag=(322, TAG_APPLICATION, TAG_IMPLICIT))
+    EquipmentIdType = INT(name='EquipmentIdType', mode=MODE_TYPE, tag=(322, TAG_APPLICATION, TAG_IMPLICIT))
     
     #-----< Esn >-----#
-    Esn = OCT_STR(name=u'Esn', mode=MODE_TYPE, tag=(103, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'NumberString')))
+    Esn = OCT_STR(name='Esn', mode=MODE_TYPE, tag=(103, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'NumberString')))
     
     #-----< EventReference >-----#
-    EventReference = OCT_STR(name=u'EventReference', mode=MODE_TYPE, tag=(435, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'AsciiString')))
+    EventReference = OCT_STR(name='EventReference', mode=MODE_TYPE, tag=(435, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'AsciiString')))
     
     #-----< ExchangeRate >-----#
-    ExchangeRate = INT(name=u'ExchangeRate', mode=MODE_TYPE, tag=(104, TAG_APPLICATION, TAG_IMPLICIT))
+    ExchangeRate = INT(name='ExchangeRate', mode=MODE_TYPE, tag=(104, TAG_APPLICATION, TAG_IMPLICIT))
     
     #-----< ExchangeRateCode >-----#
-    ExchangeRateCode = INT(name=u'ExchangeRateCode', mode=MODE_TYPE, tag=(105, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'Code')))
+    ExchangeRateCode = INT(name='ExchangeRateCode', mode=MODE_TYPE, tag=(105, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'Code')))
     
     #-----< FileAvailableTimeStamp >-----#
-    FileAvailableTimeStamp = SEQ(name=u'FileAvailableTimeStamp', mode=MODE_TYPE, tag=(107, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'DateTimeLong')))
+    FileAvailableTimeStamp = SEQ(name='FileAvailableTimeStamp', mode=MODE_TYPE, tag=(107, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'DateTimeLong')))
     
     #-----< FileCreationTimeStamp >-----#
-    FileCreationTimeStamp = SEQ(name=u'FileCreationTimeStamp', mode=MODE_TYPE, tag=(108, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'DateTimeLong')))
+    FileCreationTimeStamp = SEQ(name='FileCreationTimeStamp', mode=MODE_TYPE, tag=(108, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'DateTimeLong')))
     
     #-----< FileSequenceNumber >-----#
-    FileSequenceNumber = OCT_STR(name=u'FileSequenceNumber', mode=MODE_TYPE, tag=(109, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'NumberString')))
+    FileSequenceNumber = OCT_STR(name='FileSequenceNumber', mode=MODE_TYPE, tag=(109, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'NumberString')))
     FileSequenceNumber._const_sz = ASN1Set(rv=[5], rr=[], ev=None, er=[])
     
     #-----< FileTypeIndicator >-----#
-    FileTypeIndicator = OCT_STR(name=u'FileTypeIndicator', mode=MODE_TYPE, tag=(110, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'AsciiString')))
+    FileTypeIndicator = OCT_STR(name='FileTypeIndicator', mode=MODE_TYPE, tag=(110, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'AsciiString')))
     FileTypeIndicator._const_sz = ASN1Set(rv=[1], rr=[], ev=None, er=[])
     
     #-----< FixedDiscountValue >-----#
-    FixedDiscountValue = INT(name=u'FixedDiscountValue', mode=MODE_TYPE, tag=(411, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'DiscountValue')))
+    FixedDiscountValue = INT(name='FixedDiscountValue', mode=MODE_TYPE, tag=(411, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'DiscountValue')))
     
     #-----< Fnur >-----#
-    Fnur = INT(name=u'Fnur', mode=MODE_TYPE, tag=(111, TAG_APPLICATION, TAG_IMPLICIT))
+    Fnur = INT(name='Fnur', mode=MODE_TYPE, tag=(111, TAG_APPLICATION, TAG_IMPLICIT))
     
     #-----< GeographicalLocation >-----#
-    GeographicalLocation = SEQ(name=u'GeographicalLocation', mode=MODE_TYPE, tag=(113, TAG_APPLICATION, TAG_IMPLICIT))
-    _GeographicalLocation_servingNetwork = OCT_STR(name=u'servingNetwork', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'ServingNetwork')), opt=True)
-    _GeographicalLocation_servingBid = OCT_STR(name=u'servingBid', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'ServingBid')), opt=True)
-    _GeographicalLocation_servingLocationDescription = OCT_STR(name=u'servingLocationDescription', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'ServingLocationDescription')), opt=True)
+    GeographicalLocation = SEQ(name='GeographicalLocation', mode=MODE_TYPE, tag=(113, TAG_APPLICATION, TAG_IMPLICIT))
+    _GeographicalLocation_servingNetwork = OCT_STR(name='servingNetwork', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'ServingNetwork')), opt=True)
+    _GeographicalLocation_servingBid = OCT_STR(name='servingBid', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'ServingBid')), opt=True)
+    _GeographicalLocation_servingLocationDescription = OCT_STR(name='servingLocationDescription', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'ServingLocationDescription')), opt=True)
     GeographicalLocation._cont = ASN1Dict([
-        (u'servingNetwork', _GeographicalLocation_servingNetwork),
-        (u'servingBid', _GeographicalLocation_servingBid),
-        (u'servingLocationDescription', _GeographicalLocation_servingLocationDescription),
+        ('servingNetwork', _GeographicalLocation_servingNetwork),
+        ('servingBid', _GeographicalLocation_servingBid),
+        ('servingLocationDescription', _GeographicalLocation_servingLocationDescription),
         ])
     GeographicalLocation._ext = []
     
     #-----< GprsBasicCallInformation >-----#
-    GprsBasicCallInformation = SEQ(name=u'GprsBasicCallInformation', mode=MODE_TYPE, tag=(114, TAG_APPLICATION, TAG_IMPLICIT))
-    _GprsBasicCallInformation_gprsChargeableSubscriber = SEQ(name=u'gprsChargeableSubscriber', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'GprsChargeableSubscriber')), opt=True)
-    _GprsBasicCallInformation_rapFileSequenceNumber = OCT_STR(name=u'rapFileSequenceNumber', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'RapFileSequenceNumber')), opt=True)
-    _GprsBasicCallInformation_gprsDestination = SEQ(name=u'gprsDestination', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'GprsDestination')), opt=True)
-    _GprsBasicCallInformation_callEventStartTimeStamp = SEQ(name=u'callEventStartTimeStamp', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'CallEventStartTimeStamp')), opt=True)
-    _GprsBasicCallInformation_totalCallEventDuration = INT(name=u'totalCallEventDuration', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'TotalCallEventDuration')), opt=True)
-    _GprsBasicCallInformation_causeForTerm = INT(name=u'causeForTerm', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'CauseForTerm')), opt=True)
-    _GprsBasicCallInformation_partialTypeIndicator = OCT_STR(name=u'partialTypeIndicator', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'PartialTypeIndicator')), opt=True)
-    _GprsBasicCallInformation_pDPContextStartTimestamp = SEQ(name=u'pDPContextStartTimestamp', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'PDPContextStartTimestamp')), opt=True)
-    _GprsBasicCallInformation_networkInitPDPContext = INT(name=u'networkInitPDPContext', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'NetworkInitPDPContext')), opt=True)
-    _GprsBasicCallInformation_chargingId = INT(name=u'chargingId', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'ChargingId')), opt=True)
+    GprsBasicCallInformation = SEQ(name='GprsBasicCallInformation', mode=MODE_TYPE, tag=(114, TAG_APPLICATION, TAG_IMPLICIT))
+    _GprsBasicCallInformation_gprsChargeableSubscriber = SEQ(name='gprsChargeableSubscriber', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'GprsChargeableSubscriber')), opt=True)
+    _GprsBasicCallInformation_rapFileSequenceNumber = OCT_STR(name='rapFileSequenceNumber', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'RapFileSequenceNumber')), opt=True)
+    _GprsBasicCallInformation_gprsDestination = SEQ(name='gprsDestination', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'GprsDestination')), opt=True)
+    _GprsBasicCallInformation_callEventStartTimeStamp = SEQ(name='callEventStartTimeStamp', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'CallEventStartTimeStamp')), opt=True)
+    _GprsBasicCallInformation_totalCallEventDuration = INT(name='totalCallEventDuration', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'TotalCallEventDuration')), opt=True)
+    _GprsBasicCallInformation_causeForTerm = INT(name='causeForTerm', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'CauseForTerm')), opt=True)
+    _GprsBasicCallInformation_partialTypeIndicator = OCT_STR(name='partialTypeIndicator', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'PartialTypeIndicator')), opt=True)
+    _GprsBasicCallInformation_pDPContextStartTimestamp = SEQ(name='pDPContextStartTimestamp', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'PDPContextStartTimestamp')), opt=True)
+    _GprsBasicCallInformation_networkInitPDPContext = INT(name='networkInitPDPContext', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'NetworkInitPDPContext')), opt=True)
+    _GprsBasicCallInformation_chargingId = INT(name='chargingId', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'ChargingId')), opt=True)
     GprsBasicCallInformation._cont = ASN1Dict([
-        (u'gprsChargeableSubscriber', _GprsBasicCallInformation_gprsChargeableSubscriber),
-        (u'rapFileSequenceNumber', _GprsBasicCallInformation_rapFileSequenceNumber),
-        (u'gprsDestination', _GprsBasicCallInformation_gprsDestination),
-        (u'callEventStartTimeStamp', _GprsBasicCallInformation_callEventStartTimeStamp),
-        (u'totalCallEventDuration', _GprsBasicCallInformation_totalCallEventDuration),
-        (u'causeForTerm', _GprsBasicCallInformation_causeForTerm),
-        (u'partialTypeIndicator', _GprsBasicCallInformation_partialTypeIndicator),
-        (u'pDPContextStartTimestamp', _GprsBasicCallInformation_pDPContextStartTimestamp),
-        (u'networkInitPDPContext', _GprsBasicCallInformation_networkInitPDPContext),
-        (u'chargingId', _GprsBasicCallInformation_chargingId),
+        ('gprsChargeableSubscriber', _GprsBasicCallInformation_gprsChargeableSubscriber),
+        ('rapFileSequenceNumber', _GprsBasicCallInformation_rapFileSequenceNumber),
+        ('gprsDestination', _GprsBasicCallInformation_gprsDestination),
+        ('callEventStartTimeStamp', _GprsBasicCallInformation_callEventStartTimeStamp),
+        ('totalCallEventDuration', _GprsBasicCallInformation_totalCallEventDuration),
+        ('causeForTerm', _GprsBasicCallInformation_causeForTerm),
+        ('partialTypeIndicator', _GprsBasicCallInformation_partialTypeIndicator),
+        ('pDPContextStartTimestamp', _GprsBasicCallInformation_pDPContextStartTimestamp),
+        ('networkInitPDPContext', _GprsBasicCallInformation_networkInitPDPContext),
+        ('chargingId', _GprsBasicCallInformation_chargingId),
         ])
     GprsBasicCallInformation._ext = []
     
     #-----< GprsChargeableSubscriber >-----#
-    GprsChargeableSubscriber = SEQ(name=u'GprsChargeableSubscriber', mode=MODE_TYPE, tag=(115, TAG_APPLICATION, TAG_IMPLICIT))
-    _GprsChargeableSubscriber_chargeableSubscriber = CHOICE(name=u'chargeableSubscriber', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'ChargeableSubscriber')), opt=True)
-    _GprsChargeableSubscriber_pdpAddress = OCT_STR(name=u'pdpAddress', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'PdpAddress')), opt=True)
-    _GprsChargeableSubscriber_networkAccessIdentifier = OCT_STR(name=u'networkAccessIdentifier', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'NetworkAccessIdentifier')), opt=True)
+    GprsChargeableSubscriber = SEQ(name='GprsChargeableSubscriber', mode=MODE_TYPE, tag=(115, TAG_APPLICATION, TAG_IMPLICIT))
+    _GprsChargeableSubscriber_chargeableSubscriber = CHOICE(name='chargeableSubscriber', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'ChargeableSubscriber')), opt=True)
+    _GprsChargeableSubscriber_pdpAddress = OCT_STR(name='pdpAddress', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'PdpAddress')), opt=True)
+    _GprsChargeableSubscriber_networkAccessIdentifier = OCT_STR(name='networkAccessIdentifier', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'NetworkAccessIdentifier')), opt=True)
     GprsChargeableSubscriber._cont = ASN1Dict([
-        (u'chargeableSubscriber', _GprsChargeableSubscriber_chargeableSubscriber),
-        (u'pdpAddress', _GprsChargeableSubscriber_pdpAddress),
-        (u'networkAccessIdentifier', _GprsChargeableSubscriber_networkAccessIdentifier),
+        ('chargeableSubscriber', _GprsChargeableSubscriber_chargeableSubscriber),
+        ('pdpAddress', _GprsChargeableSubscriber_pdpAddress),
+        ('networkAccessIdentifier', _GprsChargeableSubscriber_networkAccessIdentifier),
         ])
     GprsChargeableSubscriber._ext = []
     
     #-----< GprsDestination >-----#
-    GprsDestination = SEQ(name=u'GprsDestination', mode=MODE_TYPE, tag=(116, TAG_APPLICATION, TAG_IMPLICIT))
-    _GprsDestination_accessPointNameNI = OCT_STR(name=u'accessPointNameNI', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'AccessPointNameNI')), opt=True)
-    _GprsDestination_accessPointNameOI = OCT_STR(name=u'accessPointNameOI', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'AccessPointNameOI')), opt=True)
+    GprsDestination = SEQ(name='GprsDestination', mode=MODE_TYPE, tag=(116, TAG_APPLICATION, TAG_IMPLICIT))
+    _GprsDestination_accessPointNameNI = OCT_STR(name='accessPointNameNI', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'AccessPointNameNI')), opt=True)
+    _GprsDestination_accessPointNameOI = OCT_STR(name='accessPointNameOI', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'AccessPointNameOI')), opt=True)
     GprsDestination._cont = ASN1Dict([
-        (u'accessPointNameNI', _GprsDestination_accessPointNameNI),
-        (u'accessPointNameOI', _GprsDestination_accessPointNameOI),
+        ('accessPointNameNI', _GprsDestination_accessPointNameNI),
+        ('accessPointNameOI', _GprsDestination_accessPointNameOI),
         ])
     GprsDestination._ext = []
     
     #-----< GprsLocationInformation >-----#
-    GprsLocationInformation = SEQ(name=u'GprsLocationInformation', mode=MODE_TYPE, tag=(117, TAG_APPLICATION, TAG_IMPLICIT))
-    _GprsLocationInformation_gprsNetworkLocation = SEQ(name=u'gprsNetworkLocation', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'GprsNetworkLocation')), opt=True)
-    _GprsLocationInformation_homeLocationInformation = SEQ(name=u'homeLocationInformation', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'HomeLocationInformation')), opt=True)
-    _GprsLocationInformation_geographicalLocation = SEQ(name=u'geographicalLocation', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'GeographicalLocation')), opt=True)
+    GprsLocationInformation = SEQ(name='GprsLocationInformation', mode=MODE_TYPE, tag=(117, TAG_APPLICATION, TAG_IMPLICIT))
+    _GprsLocationInformation_gprsNetworkLocation = SEQ(name='gprsNetworkLocation', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'GprsNetworkLocation')), opt=True)
+    _GprsLocationInformation_homeLocationInformation = SEQ(name='homeLocationInformation', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'HomeLocationInformation')), opt=True)
+    _GprsLocationInformation_geographicalLocation = SEQ(name='geographicalLocation', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'GeographicalLocation')), opt=True)
     GprsLocationInformation._cont = ASN1Dict([
-        (u'gprsNetworkLocation', _GprsLocationInformation_gprsNetworkLocation),
-        (u'homeLocationInformation', _GprsLocationInformation_homeLocationInformation),
-        (u'geographicalLocation', _GprsLocationInformation_geographicalLocation),
+        ('gprsNetworkLocation', _GprsLocationInformation_gprsNetworkLocation),
+        ('homeLocationInformation', _GprsLocationInformation_homeLocationInformation),
+        ('geographicalLocation', _GprsLocationInformation_geographicalLocation),
         ])
     GprsLocationInformation._ext = []
     
     #-----< GprsNetworkLocation >-----#
-    GprsNetworkLocation = SEQ(name=u'GprsNetworkLocation', mode=MODE_TYPE, tag=(118, TAG_APPLICATION, TAG_IMPLICIT))
-    _GprsNetworkLocation_recEntity = SEQ_OF(name=u'recEntity', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'RecEntityCodeList')), opt=True)
-    _GprsNetworkLocation_locationArea = INT(name=u'locationArea', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'LocationArea')), opt=True)
-    _GprsNetworkLocation_cellId = INT(name=u'cellId', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'CellId')), opt=True)
+    GprsNetworkLocation = SEQ(name='GprsNetworkLocation', mode=MODE_TYPE, tag=(118, TAG_APPLICATION, TAG_IMPLICIT))
+    _GprsNetworkLocation_recEntity = SEQ_OF(name='recEntity', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'RecEntityCodeList')), opt=True)
+    _GprsNetworkLocation_locationArea = INT(name='locationArea', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'LocationArea')), opt=True)
+    _GprsNetworkLocation_cellId = INT(name='cellId', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'CellId')), opt=True)
     GprsNetworkLocation._cont = ASN1Dict([
-        (u'recEntity', _GprsNetworkLocation_recEntity),
-        (u'locationArea', _GprsNetworkLocation_locationArea),
-        (u'cellId', _GprsNetworkLocation_cellId),
+        ('recEntity', _GprsNetworkLocation_recEntity),
+        ('locationArea', _GprsNetworkLocation_locationArea),
+        ('cellId', _GprsNetworkLocation_cellId),
         ])
     GprsNetworkLocation._ext = []
     
     #-----< GprsServiceUsed >-----#
-    GprsServiceUsed = SEQ(name=u'GprsServiceUsed', mode=MODE_TYPE, tag=(121, TAG_APPLICATION, TAG_IMPLICIT))
-    _GprsServiceUsed_iMSSignallingContext = INT(name=u'iMSSignallingContext', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'IMSSignallingContext')), opt=True)
-    _GprsServiceUsed_dataVolumeIncoming = INT(name=u'dataVolumeIncoming', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'DataVolumeIncoming')), opt=True)
-    _GprsServiceUsed_dataVolumeOutgoing = INT(name=u'dataVolumeOutgoing', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'DataVolumeOutgoing')), opt=True)
-    _GprsServiceUsed_chargeInformationList = SEQ_OF(name=u'chargeInformationList', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'ChargeInformationList')), opt=True)
+    GprsServiceUsed = SEQ(name='GprsServiceUsed', mode=MODE_TYPE, tag=(121, TAG_APPLICATION, TAG_IMPLICIT))
+    _GprsServiceUsed_iMSSignallingContext = INT(name='iMSSignallingContext', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'IMSSignallingContext')), opt=True)
+    _GprsServiceUsed_dataVolumeIncoming = INT(name='dataVolumeIncoming', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'DataVolumeIncoming')), opt=True)
+    _GprsServiceUsed_dataVolumeOutgoing = INT(name='dataVolumeOutgoing', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'DataVolumeOutgoing')), opt=True)
+    _GprsServiceUsed_chargeInformationList = SEQ_OF(name='chargeInformationList', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'ChargeInformationList')), opt=True)
     GprsServiceUsed._cont = ASN1Dict([
-        (u'iMSSignallingContext', _GprsServiceUsed_iMSSignallingContext),
-        (u'dataVolumeIncoming', _GprsServiceUsed_dataVolumeIncoming),
-        (u'dataVolumeOutgoing', _GprsServiceUsed_dataVolumeOutgoing),
-        (u'chargeInformationList', _GprsServiceUsed_chargeInformationList),
+        ('iMSSignallingContext', _GprsServiceUsed_iMSSignallingContext),
+        ('dataVolumeIncoming', _GprsServiceUsed_dataVolumeIncoming),
+        ('dataVolumeOutgoing', _GprsServiceUsed_dataVolumeOutgoing),
+        ('chargeInformationList', _GprsServiceUsed_chargeInformationList),
         ])
     GprsServiceUsed._ext = []
     
     #-----< GsmChargeableSubscriber >-----#
-    GsmChargeableSubscriber = SEQ(name=u'GsmChargeableSubscriber', mode=MODE_TYPE, tag=(286, TAG_APPLICATION, TAG_IMPLICIT))
-    _GsmChargeableSubscriber_imsi = OCT_STR(name=u'imsi', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'Imsi')), opt=True)
-    _GsmChargeableSubscriber_msisdn = OCT_STR(name=u'msisdn', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'Msisdn')), opt=True)
+    GsmChargeableSubscriber = SEQ(name='GsmChargeableSubscriber', mode=MODE_TYPE, tag=(286, TAG_APPLICATION, TAG_IMPLICIT))
+    _GsmChargeableSubscriber_imsi = OCT_STR(name='imsi', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'Imsi')), opt=True)
+    _GsmChargeableSubscriber_msisdn = OCT_STR(name='msisdn', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'Msisdn')), opt=True)
     GsmChargeableSubscriber._cont = ASN1Dict([
-        (u'imsi', _GsmChargeableSubscriber_imsi),
-        (u'msisdn', _GsmChargeableSubscriber_msisdn),
+        ('imsi', _GsmChargeableSubscriber_imsi),
+        ('msisdn', _GsmChargeableSubscriber_msisdn),
         ])
     GsmChargeableSubscriber._ext = []
     
     #-----< GuaranteedBitRate >-----#
-    GuaranteedBitRate = OCT_STR(name=u'GuaranteedBitRate', mode=MODE_TYPE, tag=(420, TAG_APPLICATION, TAG_IMPLICIT))
+    GuaranteedBitRate = OCT_STR(name='GuaranteedBitRate', mode=MODE_TYPE, tag=(420, TAG_APPLICATION, TAG_IMPLICIT))
     GuaranteedBitRate._const_sz = ASN1Set(rv=[1], rr=[], ev=None, er=[])
     
     #-----< HomeBid >-----#
-    HomeBid = OCT_STR(name=u'HomeBid', mode=MODE_TYPE, tag=(122, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'Bid')))
+    HomeBid = OCT_STR(name='HomeBid', mode=MODE_TYPE, tag=(122, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'Bid')))
     
     #-----< HomeIdentifier >-----#
-    HomeIdentifier = OCT_STR(name=u'HomeIdentifier', mode=MODE_TYPE, tag=(288, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'AsciiString')))
+    HomeIdentifier = OCT_STR(name='HomeIdentifier', mode=MODE_TYPE, tag=(288, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'AsciiString')))
     
     #-----< HomeIdType >-----#
-    HomeIdType = INT(name=u'HomeIdType', mode=MODE_TYPE, tag=(311, TAG_APPLICATION, TAG_IMPLICIT))
+    HomeIdType = INT(name='HomeIdType', mode=MODE_TYPE, tag=(311, TAG_APPLICATION, TAG_IMPLICIT))
     
     #-----< HomeLocationDescription >-----#
-    HomeLocationDescription = OCT_STR(name=u'HomeLocationDescription', mode=MODE_TYPE, tag=(413, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'LocationDescription')))
+    HomeLocationDescription = OCT_STR(name='HomeLocationDescription', mode=MODE_TYPE, tag=(413, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'LocationDescription')))
     
     #-----< HomeLocationInformation >-----#
-    HomeLocationInformation = SEQ(name=u'HomeLocationInformation', mode=MODE_TYPE, tag=(123, TAG_APPLICATION, TAG_IMPLICIT))
-    _HomeLocationInformation_homeBid = OCT_STR(name=u'homeBid', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'HomeBid')), opt=True)
-    _HomeLocationInformation_homeLocationDescription = OCT_STR(name=u'homeLocationDescription', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'HomeLocationDescription')), opt=True)
+    HomeLocationInformation = SEQ(name='HomeLocationInformation', mode=MODE_TYPE, tag=(123, TAG_APPLICATION, TAG_IMPLICIT))
+    _HomeLocationInformation_homeBid = OCT_STR(name='homeBid', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'HomeBid')), opt=True)
+    _HomeLocationInformation_homeLocationDescription = OCT_STR(name='homeLocationDescription', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'HomeLocationDescription')), opt=True)
     HomeLocationInformation._cont = ASN1Dict([
-        (u'homeBid', _HomeLocationInformation_homeBid),
-        (u'homeLocationDescription', _HomeLocationInformation_homeLocationDescription),
+        ('homeBid', _HomeLocationInformation_homeBid),
+        ('homeLocationDescription', _HomeLocationInformation_homeLocationDescription),
         ])
     HomeLocationInformation._ext = []
     
     #-----< HorizontalAccuracyDelivered >-----#
-    HorizontalAccuracyDelivered = INT(name=u'HorizontalAccuracyDelivered', mode=MODE_TYPE, tag=(392, TAG_APPLICATION, TAG_IMPLICIT))
+    HorizontalAccuracyDelivered = INT(name='HorizontalAccuracyDelivered', mode=MODE_TYPE, tag=(392, TAG_APPLICATION, TAG_IMPLICIT))
     
     #-----< HorizontalAccuracyRequested >-----#
-    HorizontalAccuracyRequested = INT(name=u'HorizontalAccuracyRequested', mode=MODE_TYPE, tag=(385, TAG_APPLICATION, TAG_IMPLICIT))
+    HorizontalAccuracyRequested = INT(name='HorizontalAccuracyRequested', mode=MODE_TYPE, tag=(385, TAG_APPLICATION, TAG_IMPLICIT))
     
     #-----< HSCSDIndicator >-----#
-    HSCSDIndicator = OCT_STR(name=u'HSCSDIndicator', mode=MODE_TYPE, tag=(424, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'AsciiString')))
+    HSCSDIndicator = OCT_STR(name='HSCSDIndicator', mode=MODE_TYPE, tag=(424, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'AsciiString')))
     HSCSDIndicator._const_sz = ASN1Set(rv=[1], rr=[], ev=None, er=[])
     
     #-----< Imei >-----#
-    Imei = OCT_STR(name=u'Imei', mode=MODE_TYPE, tag=(128, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'BCDString')))
+    Imei = OCT_STR(name='Imei', mode=MODE_TYPE, tag=(128, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'BCDString')))
     Imei._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=7, ub=8)], ev=None, er=[])
     
     #-----< ImeiOrEsn >-----#
-    ImeiOrEsn = CHOICE(name=u'ImeiOrEsn', mode=MODE_TYPE, tag=(429, TAG_APPLICATION, TAG_IMPLICIT))
-    _ImeiOrEsn_imei = OCT_STR(name=u'imei', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'Imei')))
-    _ImeiOrEsn_esn = OCT_STR(name=u'esn', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'Esn')))
+    ImeiOrEsn = CHOICE(name='ImeiOrEsn', mode=MODE_TYPE, tag=(429, TAG_APPLICATION, TAG_IMPLICIT))
+    _ImeiOrEsn_imei = OCT_STR(name='imei', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'Imei')))
+    _ImeiOrEsn_esn = OCT_STR(name='esn', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'Esn')))
     ImeiOrEsn._cont = ASN1Dict([
-        (u'imei', _ImeiOrEsn_imei),
-        (u'esn', _ImeiOrEsn_esn),
+        ('imei', _ImeiOrEsn_imei),
+        ('esn', _ImeiOrEsn_esn),
         ])
     ImeiOrEsn._ext = []
     
     #-----< Imsi >-----#
-    Imsi = OCT_STR(name=u'Imsi', mode=MODE_TYPE, tag=(129, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'BCDString')))
+    Imsi = OCT_STR(name='Imsi', mode=MODE_TYPE, tag=(129, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'BCDString')))
     Imsi._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=3, ub=8)], ev=None, er=[])
     
     #-----< IMSSignallingContext >-----#
-    IMSSignallingContext = INT(name=u'IMSSignallingContext', mode=MODE_TYPE, tag=(418, TAG_APPLICATION, TAG_IMPLICIT))
+    IMSSignallingContext = INT(name='IMSSignallingContext', mode=MODE_TYPE, tag=(418, TAG_APPLICATION, TAG_IMPLICIT))
     
     #-----< InternetServiceProvider >-----#
-    InternetServiceProvider = SEQ(name=u'InternetServiceProvider', mode=MODE_TYPE, tag=(329, TAG_APPLICATION, TAG_IMPLICIT))
-    _InternetServiceProvider_ispIdType = INT(name=u'ispIdType', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'IspIdType')), opt=True)
-    _InternetServiceProvider_ispIdentifier = OCT_STR(name=u'ispIdentifier', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'IspIdentifier')), opt=True)
+    InternetServiceProvider = SEQ(name='InternetServiceProvider', mode=MODE_TYPE, tag=(329, TAG_APPLICATION, TAG_IMPLICIT))
+    _InternetServiceProvider_ispIdType = INT(name='ispIdType', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'IspIdType')), opt=True)
+    _InternetServiceProvider_ispIdentifier = OCT_STR(name='ispIdentifier', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'IspIdentifier')), opt=True)
     InternetServiceProvider._cont = ASN1Dict([
-        (u'ispIdType', _InternetServiceProvider_ispIdType),
-        (u'ispIdentifier', _InternetServiceProvider_ispIdentifier),
+        ('ispIdType', _InternetServiceProvider_ispIdType),
+        ('ispIdentifier', _InternetServiceProvider_ispIdentifier),
         ])
     InternetServiceProvider._ext = []
     
     #-----< InternetServiceProviderIdList >-----#
-    InternetServiceProviderIdList = SEQ_OF(name=u'InternetServiceProviderIdList', mode=MODE_TYPE, tag=(330, TAG_APPLICATION, TAG_IMPLICIT))
+    InternetServiceProviderIdList = SEQ_OF(name='InternetServiceProviderIdList', mode=MODE_TYPE, tag=(330, TAG_APPLICATION, TAG_IMPLICIT))
     _InternetServiceProviderIdList__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'InternetServiceProvider')))
     InternetServiceProviderIdList._cont = _InternetServiceProviderIdList__item_
     
     #-----< IspIdentifier >-----#
-    IspIdentifier = OCT_STR(name=u'IspIdentifier', mode=MODE_TYPE, tag=(294, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'AsciiString')))
+    IspIdentifier = OCT_STR(name='IspIdentifier', mode=MODE_TYPE, tag=(294, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'AsciiString')))
     
     #-----< IspIdType >-----#
-    IspIdType = INT(name=u'IspIdType', mode=MODE_TYPE, tag=(293, TAG_APPLICATION, TAG_IMPLICIT))
+    IspIdType = INT(name='IspIdType', mode=MODE_TYPE, tag=(293, TAG_APPLICATION, TAG_IMPLICIT))
     
     #-----< ISPList >-----#
-    ISPList = SEQ_OF(name=u'ISPList', mode=MODE_TYPE, tag=(378, TAG_APPLICATION, TAG_IMPLICIT))
+    ISPList = SEQ_OF(name='ISPList', mode=MODE_TYPE, tag=(378, TAG_APPLICATION, TAG_IMPLICIT))
     _ISPList__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'InternetServiceProvider')))
     ISPList._cont = _ISPList__item_
     
     #-----< NetworkIdType >-----#
-    NetworkIdType = INT(name=u'NetworkIdType', mode=MODE_TYPE, tag=(331, TAG_APPLICATION, TAG_IMPLICIT))
+    NetworkIdType = INT(name='NetworkIdType', mode=MODE_TYPE, tag=(331, TAG_APPLICATION, TAG_IMPLICIT))
     
     #-----< NetworkIdentifier >-----#
-    NetworkIdentifier = OCT_STR(name=u'NetworkIdentifier', mode=MODE_TYPE, tag=(295, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'AsciiString')))
+    NetworkIdentifier = OCT_STR(name='NetworkIdentifier', mode=MODE_TYPE, tag=(295, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'AsciiString')))
     
     #-----< Network >-----#
-    Network = SEQ(name=u'Network', mode=MODE_TYPE, tag=(332, TAG_APPLICATION, TAG_IMPLICIT))
-    _Network_networkIdType = INT(name=u'networkIdType', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'NetworkIdType')), opt=True)
-    _Network_networkIdentifier = OCT_STR(name=u'networkIdentifier', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'NetworkIdentifier')), opt=True)
+    Network = SEQ(name='Network', mode=MODE_TYPE, tag=(332, TAG_APPLICATION, TAG_IMPLICIT))
+    _Network_networkIdType = INT(name='networkIdType', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'NetworkIdType')), opt=True)
+    _Network_networkIdentifier = OCT_STR(name='networkIdentifier', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'NetworkIdentifier')), opt=True)
     Network._cont = ASN1Dict([
-        (u'networkIdType', _Network_networkIdType),
-        (u'networkIdentifier', _Network_networkIdentifier),
+        ('networkIdType', _Network_networkIdType),
+        ('networkIdentifier', _Network_networkIdentifier),
         ])
     Network._ext = []
     
     #-----< NetworkList >-----#
-    NetworkList = SEQ_OF(name=u'NetworkList', mode=MODE_TYPE, tag=(333, TAG_APPLICATION, TAG_IMPLICIT))
+    NetworkList = SEQ_OF(name='NetworkList', mode=MODE_TYPE, tag=(333, TAG_APPLICATION, TAG_IMPLICIT))
     _NetworkList__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'Network')))
     NetworkList._cont = _NetworkList__item_
     
     #-----< LatestCallTimeStamp >-----#
-    LatestCallTimeStamp = SEQ(name=u'LatestCallTimeStamp', mode=MODE_TYPE, tag=(133, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'DateTimeLong')))
+    LatestCallTimeStamp = SEQ(name='LatestCallTimeStamp', mode=MODE_TYPE, tag=(133, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'DateTimeLong')))
     
     #-----< LCSQosDelivered >-----#
-    LCSQosDelivered = SEQ(name=u'LCSQosDelivered', mode=MODE_TYPE, tag=(390, TAG_APPLICATION, TAG_IMPLICIT))
-    _LCSQosDelivered_lCSTransactionStatus = INT(name=u'lCSTransactionStatus', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'LCSTransactionStatus')), opt=True)
-    _LCSQosDelivered_horizontalAccuracyDelivered = INT(name=u'horizontalAccuracyDelivered', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'HorizontalAccuracyDelivered')), opt=True)
-    _LCSQosDelivered_verticalAccuracyDelivered = INT(name=u'verticalAccuracyDelivered', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'VerticalAccuracyDelivered')), opt=True)
-    _LCSQosDelivered_responseTime = INT(name=u'responseTime', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'ResponseTime')), opt=True)
-    _LCSQosDelivered_positioningMethod = INT(name=u'positioningMethod', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'PositioningMethod')), opt=True)
-    _LCSQosDelivered_trackingPeriod = INT(name=u'trackingPeriod', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'TrackingPeriod')), opt=True)
-    _LCSQosDelivered_trackingFrequency = INT(name=u'trackingFrequency', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'TrackingFrequency')), opt=True)
-    _LCSQosDelivered_ageOfLocation = INT(name=u'ageOfLocation', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'AgeOfLocation')), opt=True)
+    LCSQosDelivered = SEQ(name='LCSQosDelivered', mode=MODE_TYPE, tag=(390, TAG_APPLICATION, TAG_IMPLICIT))
+    _LCSQosDelivered_lCSTransactionStatus = INT(name='lCSTransactionStatus', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'LCSTransactionStatus')), opt=True)
+    _LCSQosDelivered_horizontalAccuracyDelivered = INT(name='horizontalAccuracyDelivered', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'HorizontalAccuracyDelivered')), opt=True)
+    _LCSQosDelivered_verticalAccuracyDelivered = INT(name='verticalAccuracyDelivered', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'VerticalAccuracyDelivered')), opt=True)
+    _LCSQosDelivered_responseTime = INT(name='responseTime', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'ResponseTime')), opt=True)
+    _LCSQosDelivered_positioningMethod = INT(name='positioningMethod', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'PositioningMethod')), opt=True)
+    _LCSQosDelivered_trackingPeriod = INT(name='trackingPeriod', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'TrackingPeriod')), opt=True)
+    _LCSQosDelivered_trackingFrequency = INT(name='trackingFrequency', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'TrackingFrequency')), opt=True)
+    _LCSQosDelivered_ageOfLocation = INT(name='ageOfLocation', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'AgeOfLocation')), opt=True)
     LCSQosDelivered._cont = ASN1Dict([
-        (u'lCSTransactionStatus', _LCSQosDelivered_lCSTransactionStatus),
-        (u'horizontalAccuracyDelivered', _LCSQosDelivered_horizontalAccuracyDelivered),
-        (u'verticalAccuracyDelivered', _LCSQosDelivered_verticalAccuracyDelivered),
-        (u'responseTime', _LCSQosDelivered_responseTime),
-        (u'positioningMethod', _LCSQosDelivered_positioningMethod),
-        (u'trackingPeriod', _LCSQosDelivered_trackingPeriod),
-        (u'trackingFrequency', _LCSQosDelivered_trackingFrequency),
-        (u'ageOfLocation', _LCSQosDelivered_ageOfLocation),
+        ('lCSTransactionStatus', _LCSQosDelivered_lCSTransactionStatus),
+        ('horizontalAccuracyDelivered', _LCSQosDelivered_horizontalAccuracyDelivered),
+        ('verticalAccuracyDelivered', _LCSQosDelivered_verticalAccuracyDelivered),
+        ('responseTime', _LCSQosDelivered_responseTime),
+        ('positioningMethod', _LCSQosDelivered_positioningMethod),
+        ('trackingPeriod', _LCSQosDelivered_trackingPeriod),
+        ('trackingFrequency', _LCSQosDelivered_trackingFrequency),
+        ('ageOfLocation', _LCSQosDelivered_ageOfLocation),
         ])
     LCSQosDelivered._ext = []
     
     #-----< LCSQosRequested >-----#
-    LCSQosRequested = SEQ(name=u'LCSQosRequested', mode=MODE_TYPE, tag=(383, TAG_APPLICATION, TAG_IMPLICIT))
-    _LCSQosRequested_lCSRequestTimestamp = SEQ(name=u'lCSRequestTimestamp', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'LCSRequestTimestamp')), opt=True)
-    _LCSQosRequested_horizontalAccuracyRequested = INT(name=u'horizontalAccuracyRequested', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'HorizontalAccuracyRequested')), opt=True)
-    _LCSQosRequested_verticalAccuracyRequested = INT(name=u'verticalAccuracyRequested', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'VerticalAccuracyRequested')), opt=True)
-    _LCSQosRequested_responseTimeCategory = INT(name=u'responseTimeCategory', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'ResponseTimeCategory')), opt=True)
-    _LCSQosRequested_trackingPeriod = INT(name=u'trackingPeriod', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'TrackingPeriod')), opt=True)
-    _LCSQosRequested_trackingFrequency = INT(name=u'trackingFrequency', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'TrackingFrequency')), opt=True)
+    LCSQosRequested = SEQ(name='LCSQosRequested', mode=MODE_TYPE, tag=(383, TAG_APPLICATION, TAG_IMPLICIT))
+    _LCSQosRequested_lCSRequestTimestamp = SEQ(name='lCSRequestTimestamp', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'LCSRequestTimestamp')), opt=True)
+    _LCSQosRequested_horizontalAccuracyRequested = INT(name='horizontalAccuracyRequested', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'HorizontalAccuracyRequested')), opt=True)
+    _LCSQosRequested_verticalAccuracyRequested = INT(name='verticalAccuracyRequested', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'VerticalAccuracyRequested')), opt=True)
+    _LCSQosRequested_responseTimeCategory = INT(name='responseTimeCategory', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'ResponseTimeCategory')), opt=True)
+    _LCSQosRequested_trackingPeriod = INT(name='trackingPeriod', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'TrackingPeriod')), opt=True)
+    _LCSQosRequested_trackingFrequency = INT(name='trackingFrequency', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'TrackingFrequency')), opt=True)
     LCSQosRequested._cont = ASN1Dict([
-        (u'lCSRequestTimestamp', _LCSQosRequested_lCSRequestTimestamp),
-        (u'horizontalAccuracyRequested', _LCSQosRequested_horizontalAccuracyRequested),
-        (u'verticalAccuracyRequested', _LCSQosRequested_verticalAccuracyRequested),
-        (u'responseTimeCategory', _LCSQosRequested_responseTimeCategory),
-        (u'trackingPeriod', _LCSQosRequested_trackingPeriod),
-        (u'trackingFrequency', _LCSQosRequested_trackingFrequency),
+        ('lCSRequestTimestamp', _LCSQosRequested_lCSRequestTimestamp),
+        ('horizontalAccuracyRequested', _LCSQosRequested_horizontalAccuracyRequested),
+        ('verticalAccuracyRequested', _LCSQosRequested_verticalAccuracyRequested),
+        ('responseTimeCategory', _LCSQosRequested_responseTimeCategory),
+        ('trackingPeriod', _LCSQosRequested_trackingPeriod),
+        ('trackingFrequency', _LCSQosRequested_trackingFrequency),
         ])
     LCSQosRequested._ext = []
     
     #-----< LCSRequestTimestamp >-----#
-    LCSRequestTimestamp = SEQ(name=u'LCSRequestTimestamp', mode=MODE_TYPE, tag=(384, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'DateTime')))
+    LCSRequestTimestamp = SEQ(name='LCSRequestTimestamp', mode=MODE_TYPE, tag=(384, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'DateTime')))
     
     #-----< LCSSPIdentification >-----#
-    LCSSPIdentification = SEQ(name=u'LCSSPIdentification', mode=MODE_TYPE, tag=(375, TAG_APPLICATION, TAG_IMPLICIT))
-    _LCSSPIdentification_contentProviderIdType = INT(name=u'contentProviderIdType', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'ContentProviderIdType')), opt=True)
-    _LCSSPIdentification_contentProviderIdentifier = OCT_STR(name=u'contentProviderIdentifier', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'ContentProviderIdentifier')), opt=True)
+    LCSSPIdentification = SEQ(name='LCSSPIdentification', mode=MODE_TYPE, tag=(375, TAG_APPLICATION, TAG_IMPLICIT))
+    _LCSSPIdentification_contentProviderIdType = INT(name='contentProviderIdType', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'ContentProviderIdType')), opt=True)
+    _LCSSPIdentification_contentProviderIdentifier = OCT_STR(name='contentProviderIdentifier', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'ContentProviderIdentifier')), opt=True)
     LCSSPIdentification._cont = ASN1Dict([
-        (u'contentProviderIdType', _LCSSPIdentification_contentProviderIdType),
-        (u'contentProviderIdentifier', _LCSSPIdentification_contentProviderIdentifier),
+        ('contentProviderIdType', _LCSSPIdentification_contentProviderIdType),
+        ('contentProviderIdentifier', _LCSSPIdentification_contentProviderIdentifier),
         ])
     LCSSPIdentification._ext = []
     
     #-----< LCSSPIdentificationList >-----#
-    LCSSPIdentificationList = SEQ_OF(name=u'LCSSPIdentificationList', mode=MODE_TYPE, tag=(374, TAG_APPLICATION, TAG_IMPLICIT))
+    LCSSPIdentificationList = SEQ_OF(name='LCSSPIdentificationList', mode=MODE_TYPE, tag=(374, TAG_APPLICATION, TAG_IMPLICIT))
     _LCSSPIdentificationList__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'LCSSPIdentification')))
     LCSSPIdentificationList._cont = _LCSSPIdentificationList__item_
     
     #-----< LCSSPInformation >-----#
-    LCSSPInformation = SEQ(name=u'LCSSPInformation', mode=MODE_TYPE, tag=(373, TAG_APPLICATION, TAG_IMPLICIT))
-    _LCSSPInformation_lCSSPIdentificationList = SEQ_OF(name=u'lCSSPIdentificationList', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'LCSSPIdentificationList')), opt=True)
-    _LCSSPInformation_iSPList = SEQ_OF(name=u'iSPList', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'ISPList')), opt=True)
-    _LCSSPInformation_networkList = SEQ_OF(name=u'networkList', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'NetworkList')), opt=True)
+    LCSSPInformation = SEQ(name='LCSSPInformation', mode=MODE_TYPE, tag=(373, TAG_APPLICATION, TAG_IMPLICIT))
+    _LCSSPInformation_lCSSPIdentificationList = SEQ_OF(name='lCSSPIdentificationList', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'LCSSPIdentificationList')), opt=True)
+    _LCSSPInformation_iSPList = SEQ_OF(name='iSPList', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'ISPList')), opt=True)
+    _LCSSPInformation_networkList = SEQ_OF(name='networkList', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'NetworkList')), opt=True)
     LCSSPInformation._cont = ASN1Dict([
-        (u'lCSSPIdentificationList', _LCSSPInformation_lCSSPIdentificationList),
-        (u'iSPList', _LCSSPInformation_iSPList),
-        (u'networkList', _LCSSPInformation_networkList),
+        ('lCSSPIdentificationList', _LCSSPInformation_lCSSPIdentificationList),
+        ('iSPList', _LCSSPInformation_iSPList),
+        ('networkList', _LCSSPInformation_networkList),
         ])
     LCSSPInformation._ext = []
     
     #-----< LCSTransactionStatus >-----#
-    LCSTransactionStatus = INT(name=u'LCSTransactionStatus', mode=MODE_TYPE, tag=(391, TAG_APPLICATION, TAG_IMPLICIT))
+    LCSTransactionStatus = INT(name='LCSTransactionStatus', mode=MODE_TYPE, tag=(391, TAG_APPLICATION, TAG_IMPLICIT))
     
     #-----< LocalCurrency >-----#
-    LocalCurrency = OCT_STR(name=u'LocalCurrency', mode=MODE_TYPE, tag=(135, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'Currency')))
+    LocalCurrency = OCT_STR(name='LocalCurrency', mode=MODE_TYPE, tag=(135, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'Currency')))
     
     #-----< LocalTimeStamp >-----#
-    LocalTimeStamp = OCT_STR(name=u'LocalTimeStamp', mode=MODE_TYPE, tag=(16, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'NumberString')))
+    LocalTimeStamp = OCT_STR(name='LocalTimeStamp', mode=MODE_TYPE, tag=(16, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'NumberString')))
     LocalTimeStamp._const_sz = ASN1Set(rv=[14], rr=[], ev=None, er=[])
     
     #-----< LocationArea >-----#
-    LocationArea = INT(name=u'LocationArea', mode=MODE_TYPE, tag=(136, TAG_APPLICATION, TAG_IMPLICIT))
+    LocationArea = INT(name='LocationArea', mode=MODE_TYPE, tag=(136, TAG_APPLICATION, TAG_IMPLICIT))
     
     #-----< LocationDescription >-----#
-    LocationDescription = OCT_STR(name=u'LocationDescription', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'AsciiString')))
+    LocationDescription = OCT_STR(name='LocationDescription', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'AsciiString')))
     
     #-----< LocationIdentifier >-----#
-    LocationIdentifier = OCT_STR(name=u'LocationIdentifier', mode=MODE_TYPE, tag=(289, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'AsciiString')))
+    LocationIdentifier = OCT_STR(name='LocationIdentifier', mode=MODE_TYPE, tag=(289, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'AsciiString')))
     
     #-----< LocationIdType >-----#
-    LocationIdType = INT(name=u'LocationIdType', mode=MODE_TYPE, tag=(315, TAG_APPLICATION, TAG_IMPLICIT))
+    LocationIdType = INT(name='LocationIdType', mode=MODE_TYPE, tag=(315, TAG_APPLICATION, TAG_IMPLICIT))
     
     #-----< LocationInformation >-----#
-    LocationInformation = SEQ(name=u'LocationInformation', mode=MODE_TYPE, tag=(138, TAG_APPLICATION, TAG_IMPLICIT))
-    _LocationInformation_networkLocation = SEQ(name=u'networkLocation', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'NetworkLocation')), opt=True)
-    _LocationInformation_homeLocationInformation = SEQ(name=u'homeLocationInformation', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'HomeLocationInformation')), opt=True)
-    _LocationInformation_geographicalLocation = SEQ(name=u'geographicalLocation', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'GeographicalLocation')), opt=True)
+    LocationInformation = SEQ(name='LocationInformation', mode=MODE_TYPE, tag=(138, TAG_APPLICATION, TAG_IMPLICIT))
+    _LocationInformation_networkLocation = SEQ(name='networkLocation', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'NetworkLocation')), opt=True)
+    _LocationInformation_homeLocationInformation = SEQ(name='homeLocationInformation', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'HomeLocationInformation')), opt=True)
+    _LocationInformation_geographicalLocation = SEQ(name='geographicalLocation', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'GeographicalLocation')), opt=True)
     LocationInformation._cont = ASN1Dict([
-        (u'networkLocation', _LocationInformation_networkLocation),
-        (u'homeLocationInformation', _LocationInformation_homeLocationInformation),
-        (u'geographicalLocation', _LocationInformation_geographicalLocation),
+        ('networkLocation', _LocationInformation_networkLocation),
+        ('homeLocationInformation', _LocationInformation_homeLocationInformation),
+        ('geographicalLocation', _LocationInformation_geographicalLocation),
         ])
     LocationInformation._ext = []
     
     #-----< LocationServiceUsage >-----#
-    LocationServiceUsage = SEQ(name=u'LocationServiceUsage', mode=MODE_TYPE, tag=(382, TAG_APPLICATION, TAG_IMPLICIT))
-    _LocationServiceUsage_lCSQosRequested = SEQ(name=u'lCSQosRequested', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'LCSQosRequested')), opt=True)
-    _LocationServiceUsage_lCSQosDelivered = SEQ(name=u'lCSQosDelivered', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'LCSQosDelivered')), opt=True)
-    _LocationServiceUsage_chargingTimeStamp = SEQ(name=u'chargingTimeStamp', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'ChargingTimeStamp')), opt=True)
-    _LocationServiceUsage_chargeInformationList = SEQ_OF(name=u'chargeInformationList', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'ChargeInformationList')), opt=True)
+    LocationServiceUsage = SEQ(name='LocationServiceUsage', mode=MODE_TYPE, tag=(382, TAG_APPLICATION, TAG_IMPLICIT))
+    _LocationServiceUsage_lCSQosRequested = SEQ(name='lCSQosRequested', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'LCSQosRequested')), opt=True)
+    _LocationServiceUsage_lCSQosDelivered = SEQ(name='lCSQosDelivered', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'LCSQosDelivered')), opt=True)
+    _LocationServiceUsage_chargingTimeStamp = SEQ(name='chargingTimeStamp', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'ChargingTimeStamp')), opt=True)
+    _LocationServiceUsage_chargeInformationList = SEQ_OF(name='chargeInformationList', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'ChargeInformationList')), opt=True)
     LocationServiceUsage._cont = ASN1Dict([
-        (u'lCSQosRequested', _LocationServiceUsage_lCSQosRequested),
-        (u'lCSQosDelivered', _LocationServiceUsage_lCSQosDelivered),
-        (u'chargingTimeStamp', _LocationServiceUsage_chargingTimeStamp),
-        (u'chargeInformationList', _LocationServiceUsage_chargeInformationList),
+        ('lCSQosRequested', _LocationServiceUsage_lCSQosRequested),
+        ('lCSQosDelivered', _LocationServiceUsage_lCSQosDelivered),
+        ('chargingTimeStamp', _LocationServiceUsage_chargingTimeStamp),
+        ('chargeInformationList', _LocationServiceUsage_chargeInformationList),
         ])
     LocationServiceUsage._ext = []
     
     #-----< MaximumBitRate >-----#
-    MaximumBitRate = OCT_STR(name=u'MaximumBitRate', mode=MODE_TYPE, tag=(421, TAG_APPLICATION, TAG_IMPLICIT))
+    MaximumBitRate = OCT_STR(name='MaximumBitRate', mode=MODE_TYPE, tag=(421, TAG_APPLICATION, TAG_IMPLICIT))
     MaximumBitRate._const_sz = ASN1Set(rv=[1], rr=[], ev=None, er=[])
     
     #-----< Mdn >-----#
-    Mdn = OCT_STR(name=u'Mdn', mode=MODE_TYPE, tag=(253, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'NumberString')))
+    Mdn = OCT_STR(name='Mdn', mode=MODE_TYPE, tag=(253, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'NumberString')))
     
     #-----< MessageDescription >-----#
-    MessageDescription = OCT_STR(name=u'MessageDescription', mode=MODE_TYPE, tag=(142, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'AsciiString')))
+    MessageDescription = OCT_STR(name='MessageDescription', mode=MODE_TYPE, tag=(142, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'AsciiString')))
     
     #-----< MessageDescriptionCode >-----#
-    MessageDescriptionCode = INT(name=u'MessageDescriptionCode', mode=MODE_TYPE, tag=(141, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'Code')))
+    MessageDescriptionCode = INT(name='MessageDescriptionCode', mode=MODE_TYPE, tag=(141, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'Code')))
     
     #-----< MessageDescriptionInformation >-----#
-    MessageDescriptionInformation = SEQ(name=u'MessageDescriptionInformation', mode=MODE_TYPE, tag=(143, TAG_APPLICATION, TAG_IMPLICIT))
-    _MessageDescriptionInformation_messageDescriptionCode = INT(name=u'messageDescriptionCode', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'MessageDescriptionCode')), opt=True)
-    _MessageDescriptionInformation_messageDescription = OCT_STR(name=u'messageDescription', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'MessageDescription')), opt=True)
+    MessageDescriptionInformation = SEQ(name='MessageDescriptionInformation', mode=MODE_TYPE, tag=(143, TAG_APPLICATION, TAG_IMPLICIT))
+    _MessageDescriptionInformation_messageDescriptionCode = INT(name='messageDescriptionCode', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'MessageDescriptionCode')), opt=True)
+    _MessageDescriptionInformation_messageDescription = OCT_STR(name='messageDescription', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'MessageDescription')), opt=True)
     MessageDescriptionInformation._cont = ASN1Dict([
-        (u'messageDescriptionCode', _MessageDescriptionInformation_messageDescriptionCode),
-        (u'messageDescription', _MessageDescriptionInformation_messageDescription),
+        ('messageDescriptionCode', _MessageDescriptionInformation_messageDescriptionCode),
+        ('messageDescription', _MessageDescriptionInformation_messageDescription),
         ])
     MessageDescriptionInformation._ext = []
     
     #-----< MessageStatus >-----#
-    MessageStatus = INT(name=u'MessageStatus', mode=MODE_TYPE, tag=(144, TAG_APPLICATION, TAG_IMPLICIT))
+    MessageStatus = INT(name='MessageStatus', mode=MODE_TYPE, tag=(144, TAG_APPLICATION, TAG_IMPLICIT))
     
     #-----< MessageType >-----#
-    MessageType = INT(name=u'MessageType', mode=MODE_TYPE, tag=(145, TAG_APPLICATION, TAG_IMPLICIT))
+    MessageType = INT(name='MessageType', mode=MODE_TYPE, tag=(145, TAG_APPLICATION, TAG_IMPLICIT))
     
     #-----< MessagingEventService >-----#
-    MessagingEventService = INT(name=u'MessagingEventService', mode=MODE_TYPE, tag=(439, TAG_APPLICATION, TAG_IMPLICIT))
+    MessagingEventService = INT(name='MessagingEventService', mode=MODE_TYPE, tag=(439, TAG_APPLICATION, TAG_IMPLICIT))
     
     #-----< Min >-----#
-    Min = OCT_STR(name=u'Min', mode=MODE_TYPE, tag=(146, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'NumberString')))
+    Min = OCT_STR(name='Min', mode=MODE_TYPE, tag=(146, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'NumberString')))
     Min._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=2, ub=15)], ev=None, er=[])
     
     #-----< MinChargeableSubscriber >-----#
-    MinChargeableSubscriber = SEQ(name=u'MinChargeableSubscriber', mode=MODE_TYPE, tag=(254, TAG_APPLICATION, TAG_IMPLICIT))
-    _MinChargeableSubscriber_min = OCT_STR(name=u'min', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'Min')), opt=True)
-    _MinChargeableSubscriber_mdn = OCT_STR(name=u'mdn', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'Mdn')), opt=True)
+    MinChargeableSubscriber = SEQ(name='MinChargeableSubscriber', mode=MODE_TYPE, tag=(254, TAG_APPLICATION, TAG_IMPLICIT))
+    _MinChargeableSubscriber_min = OCT_STR(name='min', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'Min')), opt=True)
+    _MinChargeableSubscriber_mdn = OCT_STR(name='mdn', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'Mdn')), opt=True)
     MinChargeableSubscriber._cont = ASN1Dict([
-        (u'min', _MinChargeableSubscriber_min),
-        (u'mdn', _MinChargeableSubscriber_mdn),
+        ('min', _MinChargeableSubscriber_min),
+        ('mdn', _MinChargeableSubscriber_mdn),
         ])
     MinChargeableSubscriber._ext = []
     
     #-----< MoBasicCallInformation >-----#
-    MoBasicCallInformation = SEQ(name=u'MoBasicCallInformation', mode=MODE_TYPE, tag=(147, TAG_APPLICATION, TAG_IMPLICIT))
-    _MoBasicCallInformation_chargeableSubscriber = CHOICE(name=u'chargeableSubscriber', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'ChargeableSubscriber')), opt=True)
-    _MoBasicCallInformation_rapFileSequenceNumber = OCT_STR(name=u'rapFileSequenceNumber', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'RapFileSequenceNumber')), opt=True)
-    _MoBasicCallInformation_destination = SEQ(name=u'destination', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'Destination')), opt=True)
-    _MoBasicCallInformation_destinationNetwork = OCT_STR(name=u'destinationNetwork', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'DestinationNetwork')), opt=True)
-    _MoBasicCallInformation_callEventStartTimeStamp = SEQ(name=u'callEventStartTimeStamp', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'CallEventStartTimeStamp')), opt=True)
-    _MoBasicCallInformation_totalCallEventDuration = INT(name=u'totalCallEventDuration', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'TotalCallEventDuration')), opt=True)
-    _MoBasicCallInformation_simToolkitIndicator = OCT_STR(name=u'simToolkitIndicator', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'SimToolkitIndicator')), opt=True)
-    _MoBasicCallInformation_causeForTerm = INT(name=u'causeForTerm', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'CauseForTerm')), opt=True)
+    MoBasicCallInformation = SEQ(name='MoBasicCallInformation', mode=MODE_TYPE, tag=(147, TAG_APPLICATION, TAG_IMPLICIT))
+    _MoBasicCallInformation_chargeableSubscriber = CHOICE(name='chargeableSubscriber', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'ChargeableSubscriber')), opt=True)
+    _MoBasicCallInformation_rapFileSequenceNumber = OCT_STR(name='rapFileSequenceNumber', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'RapFileSequenceNumber')), opt=True)
+    _MoBasicCallInformation_destination = SEQ(name='destination', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'Destination')), opt=True)
+    _MoBasicCallInformation_destinationNetwork = OCT_STR(name='destinationNetwork', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'DestinationNetwork')), opt=True)
+    _MoBasicCallInformation_callEventStartTimeStamp = SEQ(name='callEventStartTimeStamp', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'CallEventStartTimeStamp')), opt=True)
+    _MoBasicCallInformation_totalCallEventDuration = INT(name='totalCallEventDuration', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'TotalCallEventDuration')), opt=True)
+    _MoBasicCallInformation_simToolkitIndicator = OCT_STR(name='simToolkitIndicator', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'SimToolkitIndicator')), opt=True)
+    _MoBasicCallInformation_causeForTerm = INT(name='causeForTerm', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'CauseForTerm')), opt=True)
     MoBasicCallInformation._cont = ASN1Dict([
-        (u'chargeableSubscriber', _MoBasicCallInformation_chargeableSubscriber),
-        (u'rapFileSequenceNumber', _MoBasicCallInformation_rapFileSequenceNumber),
-        (u'destination', _MoBasicCallInformation_destination),
-        (u'destinationNetwork', _MoBasicCallInformation_destinationNetwork),
-        (u'callEventStartTimeStamp', _MoBasicCallInformation_callEventStartTimeStamp),
-        (u'totalCallEventDuration', _MoBasicCallInformation_totalCallEventDuration),
-        (u'simToolkitIndicator', _MoBasicCallInformation_simToolkitIndicator),
-        (u'causeForTerm', _MoBasicCallInformation_causeForTerm),
+        ('chargeableSubscriber', _MoBasicCallInformation_chargeableSubscriber),
+        ('rapFileSequenceNumber', _MoBasicCallInformation_rapFileSequenceNumber),
+        ('destination', _MoBasicCallInformation_destination),
+        ('destinationNetwork', _MoBasicCallInformation_destinationNetwork),
+        ('callEventStartTimeStamp', _MoBasicCallInformation_callEventStartTimeStamp),
+        ('totalCallEventDuration', _MoBasicCallInformation_totalCallEventDuration),
+        ('simToolkitIndicator', _MoBasicCallInformation_simToolkitIndicator),
+        ('causeForTerm', _MoBasicCallInformation_causeForTerm),
         ])
     MoBasicCallInformation._ext = []
     
     #-----< MobileSessionService >-----#
-    MobileSessionService = INT(name=u'MobileSessionService', mode=MODE_TYPE, tag=(440, TAG_APPLICATION, TAG_IMPLICIT))
+    MobileSessionService = INT(name='MobileSessionService', mode=MODE_TYPE, tag=(440, TAG_APPLICATION, TAG_IMPLICIT))
     
     #-----< Msisdn >-----#
-    Msisdn = OCT_STR(name=u'Msisdn', mode=MODE_TYPE, tag=(152, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'BCDString')))
+    Msisdn = OCT_STR(name='Msisdn', mode=MODE_TYPE, tag=(152, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'BCDString')))
     Msisdn._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=9)], ev=None, er=[])
     
     #-----< MtBasicCallInformation >-----#
-    MtBasicCallInformation = SEQ(name=u'MtBasicCallInformation', mode=MODE_TYPE, tag=(153, TAG_APPLICATION, TAG_IMPLICIT))
-    _MtBasicCallInformation_chargeableSubscriber = CHOICE(name=u'chargeableSubscriber', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'ChargeableSubscriber')), opt=True)
-    _MtBasicCallInformation_rapFileSequenceNumber = OCT_STR(name=u'rapFileSequenceNumber', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'RapFileSequenceNumber')), opt=True)
-    _MtBasicCallInformation_callOriginator = SEQ(name=u'callOriginator', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'CallOriginator')), opt=True)
-    _MtBasicCallInformation_originatingNetwork = OCT_STR(name=u'originatingNetwork', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'OriginatingNetwork')), opt=True)
-    _MtBasicCallInformation_callEventStartTimeStamp = SEQ(name=u'callEventStartTimeStamp', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'CallEventStartTimeStamp')), opt=True)
-    _MtBasicCallInformation_totalCallEventDuration = INT(name=u'totalCallEventDuration', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'TotalCallEventDuration')), opt=True)
-    _MtBasicCallInformation_simToolkitIndicator = OCT_STR(name=u'simToolkitIndicator', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'SimToolkitIndicator')), opt=True)
-    _MtBasicCallInformation_causeForTerm = INT(name=u'causeForTerm', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'CauseForTerm')), opt=True)
+    MtBasicCallInformation = SEQ(name='MtBasicCallInformation', mode=MODE_TYPE, tag=(153, TAG_APPLICATION, TAG_IMPLICIT))
+    _MtBasicCallInformation_chargeableSubscriber = CHOICE(name='chargeableSubscriber', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'ChargeableSubscriber')), opt=True)
+    _MtBasicCallInformation_rapFileSequenceNumber = OCT_STR(name='rapFileSequenceNumber', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'RapFileSequenceNumber')), opt=True)
+    _MtBasicCallInformation_callOriginator = SEQ(name='callOriginator', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'CallOriginator')), opt=True)
+    _MtBasicCallInformation_originatingNetwork = OCT_STR(name='originatingNetwork', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'OriginatingNetwork')), opt=True)
+    _MtBasicCallInformation_callEventStartTimeStamp = SEQ(name='callEventStartTimeStamp', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'CallEventStartTimeStamp')), opt=True)
+    _MtBasicCallInformation_totalCallEventDuration = INT(name='totalCallEventDuration', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'TotalCallEventDuration')), opt=True)
+    _MtBasicCallInformation_simToolkitIndicator = OCT_STR(name='simToolkitIndicator', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'SimToolkitIndicator')), opt=True)
+    _MtBasicCallInformation_causeForTerm = INT(name='causeForTerm', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'CauseForTerm')), opt=True)
     MtBasicCallInformation._cont = ASN1Dict([
-        (u'chargeableSubscriber', _MtBasicCallInformation_chargeableSubscriber),
-        (u'rapFileSequenceNumber', _MtBasicCallInformation_rapFileSequenceNumber),
-        (u'callOriginator', _MtBasicCallInformation_callOriginator),
-        (u'originatingNetwork', _MtBasicCallInformation_originatingNetwork),
-        (u'callEventStartTimeStamp', _MtBasicCallInformation_callEventStartTimeStamp),
-        (u'totalCallEventDuration', _MtBasicCallInformation_totalCallEventDuration),
-        (u'simToolkitIndicator', _MtBasicCallInformation_simToolkitIndicator),
-        (u'causeForTerm', _MtBasicCallInformation_causeForTerm),
+        ('chargeableSubscriber', _MtBasicCallInformation_chargeableSubscriber),
+        ('rapFileSequenceNumber', _MtBasicCallInformation_rapFileSequenceNumber),
+        ('callOriginator', _MtBasicCallInformation_callOriginator),
+        ('originatingNetwork', _MtBasicCallInformation_originatingNetwork),
+        ('callEventStartTimeStamp', _MtBasicCallInformation_callEventStartTimeStamp),
+        ('totalCallEventDuration', _MtBasicCallInformation_totalCallEventDuration),
+        ('simToolkitIndicator', _MtBasicCallInformation_simToolkitIndicator),
+        ('causeForTerm', _MtBasicCallInformation_causeForTerm),
         ])
     MtBasicCallInformation._ext = []
     
     #-----< NetworkAccessIdentifier >-----#
-    NetworkAccessIdentifier = OCT_STR(name=u'NetworkAccessIdentifier', mode=MODE_TYPE, tag=(417, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'AsciiString')))
+    NetworkAccessIdentifier = OCT_STR(name='NetworkAccessIdentifier', mode=MODE_TYPE, tag=(417, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'AsciiString')))
     
     #-----< NetworkElement >-----#
-    NetworkElement = SEQ(name=u'NetworkElement', mode=MODE_TYPE, tag=(441, TAG_APPLICATION, TAG_IMPLICIT))
-    _NetworkElement_elementType = INT(name=u'elementType', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'ElementType')), opt=True)
-    _NetworkElement_elementId = OCT_STR(name=u'elementId', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'ElementId')), opt=True)
+    NetworkElement = SEQ(name='NetworkElement', mode=MODE_TYPE, tag=(441, TAG_APPLICATION, TAG_IMPLICIT))
+    _NetworkElement_elementType = INT(name='elementType', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'ElementType')), opt=True)
+    _NetworkElement_elementId = OCT_STR(name='elementId', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'ElementId')), opt=True)
     NetworkElement._cont = ASN1Dict([
-        (u'elementType', _NetworkElement_elementType),
-        (u'elementId', _NetworkElement_elementId),
+        ('elementType', _NetworkElement_elementType),
+        ('elementId', _NetworkElement_elementId),
         ])
     NetworkElement._ext = []
     
     #-----< NetworkElementList >-----#
-    NetworkElementList = SEQ_OF(name=u'NetworkElementList', mode=MODE_TYPE, tag=(442, TAG_APPLICATION, TAG_IMPLICIT))
+    NetworkElementList = SEQ_OF(name='NetworkElementList', mode=MODE_TYPE, tag=(442, TAG_APPLICATION, TAG_IMPLICIT))
     _NetworkElementList__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'NetworkElement')))
     NetworkElementList._cont = _NetworkElementList__item_
     
     #-----< NetworkId >-----#
-    NetworkId = OCT_STR(name=u'NetworkId', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'AsciiString')))
+    NetworkId = OCT_STR(name='NetworkId', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'AsciiString')))
     NetworkId._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=6)], ev=None, er=[])
     
     #-----< NetworkInitPDPContext >-----#
-    NetworkInitPDPContext = INT(name=u'NetworkInitPDPContext', mode=MODE_TYPE, tag=(245, TAG_APPLICATION, TAG_IMPLICIT))
+    NetworkInitPDPContext = INT(name='NetworkInitPDPContext', mode=MODE_TYPE, tag=(245, TAG_APPLICATION, TAG_IMPLICIT))
     
     #-----< NetworkLocation >-----#
-    NetworkLocation = SEQ(name=u'NetworkLocation', mode=MODE_TYPE, tag=(156, TAG_APPLICATION, TAG_IMPLICIT))
-    _NetworkLocation_recEntityCode = INT(name=u'recEntityCode', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'RecEntityCode')), opt=True)
-    _NetworkLocation_callReference = OCT_STR(name=u'callReference', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'CallReference')), opt=True)
-    _NetworkLocation_locationArea = INT(name=u'locationArea', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'LocationArea')), opt=True)
-    _NetworkLocation_cellId = INT(name=u'cellId', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'CellId')), opt=True)
+    NetworkLocation = SEQ(name='NetworkLocation', mode=MODE_TYPE, tag=(156, TAG_APPLICATION, TAG_IMPLICIT))
+    _NetworkLocation_recEntityCode = INT(name='recEntityCode', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'RecEntityCode')), opt=True)
+    _NetworkLocation_callReference = OCT_STR(name='callReference', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'CallReference')), opt=True)
+    _NetworkLocation_locationArea = INT(name='locationArea', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'LocationArea')), opt=True)
+    _NetworkLocation_cellId = INT(name='cellId', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'CellId')), opt=True)
     NetworkLocation._cont = ASN1Dict([
-        (u'recEntityCode', _NetworkLocation_recEntityCode),
-        (u'callReference', _NetworkLocation_callReference),
-        (u'locationArea', _NetworkLocation_locationArea),
-        (u'cellId', _NetworkLocation_cellId),
+        ('recEntityCode', _NetworkLocation_recEntityCode),
+        ('callReference', _NetworkLocation_callReference),
+        ('locationArea', _NetworkLocation_locationArea),
+        ('cellId', _NetworkLocation_cellId),
         ])
     NetworkLocation._ext = []
     
     #-----< NonChargedNumber >-----#
-    NonChargedNumber = OCT_STR(name=u'NonChargedNumber', mode=MODE_TYPE, tag=(402, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'AsciiString')))
+    NonChargedNumber = OCT_STR(name='NonChargedNumber', mode=MODE_TYPE, tag=(402, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'AsciiString')))
     
     #-----< NonChargedParty >-----#
-    NonChargedParty = SEQ(name=u'NonChargedParty', mode=MODE_TYPE, tag=(443, TAG_APPLICATION, TAG_IMPLICIT))
-    _NonChargedParty_nonChargedPartyNumber = OCT_STR(name=u'nonChargedPartyNumber', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'NonChargedPartyNumber')), opt=True)
-    _NonChargedParty_nonChargedPublicUserId = OCT_STR(name=u'nonChargedPublicUserId', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'NonChargedPublicUserId')), opt=True)
+    NonChargedParty = SEQ(name='NonChargedParty', mode=MODE_TYPE, tag=(443, TAG_APPLICATION, TAG_IMPLICIT))
+    _NonChargedParty_nonChargedPartyNumber = OCT_STR(name='nonChargedPartyNumber', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'NonChargedPartyNumber')), opt=True)
+    _NonChargedParty_nonChargedPublicUserId = OCT_STR(name='nonChargedPublicUserId', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'NonChargedPublicUserId')), opt=True)
     NonChargedParty._cont = ASN1Dict([
-        (u'nonChargedPartyNumber', _NonChargedParty_nonChargedPartyNumber),
-        (u'nonChargedPublicUserId', _NonChargedParty_nonChargedPublicUserId),
+        ('nonChargedPartyNumber', _NonChargedParty_nonChargedPartyNumber),
+        ('nonChargedPublicUserId', _NonChargedParty_nonChargedPublicUserId),
         ])
     NonChargedParty._ext = []
     
     #-----< NonChargedPartyNumber >-----#
-    NonChargedPartyNumber = OCT_STR(name=u'NonChargedPartyNumber', mode=MODE_TYPE, tag=(444, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'AddressStringDigits')))
+    NonChargedPartyNumber = OCT_STR(name='NonChargedPartyNumber', mode=MODE_TYPE, tag=(444, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'AddressStringDigits')))
     
     #-----< NonChargedPublicUserId >-----#
-    NonChargedPublicUserId = OCT_STR(name=u'NonChargedPublicUserId', mode=MODE_TYPE, tag=(445, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'AsciiString')))
+    NonChargedPublicUserId = OCT_STR(name='NonChargedPublicUserId', mode=MODE_TYPE, tag=(445, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'AsciiString')))
     
     #-----< NumberOfDecimalPlaces >-----#
-    NumberOfDecimalPlaces = INT(name=u'NumberOfDecimalPlaces', mode=MODE_TYPE, tag=(159, TAG_APPLICATION, TAG_IMPLICIT))
+    NumberOfDecimalPlaces = INT(name='NumberOfDecimalPlaces', mode=MODE_TYPE, tag=(159, TAG_APPLICATION, TAG_IMPLICIT))
     
     #-----< ObjectType >-----#
-    ObjectType = INT(name=u'ObjectType', mode=MODE_TYPE, tag=(281, TAG_APPLICATION, TAG_IMPLICIT))
+    ObjectType = INT(name='ObjectType', mode=MODE_TYPE, tag=(281, TAG_APPLICATION, TAG_IMPLICIT))
     
     #-----< OperatorSpecInfoList >-----#
-    OperatorSpecInfoList = SEQ_OF(name=u'OperatorSpecInfoList', mode=MODE_TYPE, tag=(162, TAG_APPLICATION, TAG_IMPLICIT))
+    OperatorSpecInfoList = SEQ_OF(name='OperatorSpecInfoList', mode=MODE_TYPE, tag=(162, TAG_APPLICATION, TAG_IMPLICIT))
     _OperatorSpecInfoList__item_ = OCT_STR(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'OperatorSpecInformation')))
     OperatorSpecInfoList._cont = _OperatorSpecInfoList__item_
     
     #-----< OperatorSpecInformation >-----#
-    OperatorSpecInformation = OCT_STR(name=u'OperatorSpecInformation', mode=MODE_TYPE, tag=(163, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'AsciiString')))
+    OperatorSpecInformation = OCT_STR(name='OperatorSpecInformation', mode=MODE_TYPE, tag=(163, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'AsciiString')))
     
     #-----< OrderPlacedTimeStamp >-----#
-    OrderPlacedTimeStamp = SEQ(name=u'OrderPlacedTimeStamp', mode=MODE_TYPE, tag=(300, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'DateTime')))
+    OrderPlacedTimeStamp = SEQ(name='OrderPlacedTimeStamp', mode=MODE_TYPE, tag=(300, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'DateTime')))
     
     #-----< OriginatingNetwork >-----#
-    OriginatingNetwork = OCT_STR(name=u'OriginatingNetwork', mode=MODE_TYPE, tag=(164, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'NetworkId')))
+    OriginatingNetwork = OCT_STR(name='OriginatingNetwork', mode=MODE_TYPE, tag=(164, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'NetworkId')))
     
     #-----< PacketDataProtocolAddress >-----#
-    PacketDataProtocolAddress = OCT_STR(name=u'PacketDataProtocolAddress', mode=MODE_TYPE, tag=(165, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'AsciiString')))
+    PacketDataProtocolAddress = OCT_STR(name='PacketDataProtocolAddress', mode=MODE_TYPE, tag=(165, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'AsciiString')))
     
     #-----< PaidIndicator >-----#
-    PaidIndicator = INT(name=u'PaidIndicator', mode=MODE_TYPE, tag=(346, TAG_APPLICATION, TAG_IMPLICIT))
+    PaidIndicator = INT(name='PaidIndicator', mode=MODE_TYPE, tag=(346, TAG_APPLICATION, TAG_IMPLICIT))
     
     #-----< PartialTypeIndicator >-----#
-    PartialTypeIndicator = OCT_STR(name=u'PartialTypeIndicator', mode=MODE_TYPE, tag=(166, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'AsciiString')))
+    PartialTypeIndicator = OCT_STR(name='PartialTypeIndicator', mode=MODE_TYPE, tag=(166, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'AsciiString')))
     PartialTypeIndicator._const_sz = ASN1Set(rv=[1], rr=[], ev=None, er=[])
     
     #-----< PaymentMethod >-----#
-    PaymentMethod = INT(name=u'PaymentMethod', mode=MODE_TYPE, tag=(347, TAG_APPLICATION, TAG_IMPLICIT))
+    PaymentMethod = INT(name='PaymentMethod', mode=MODE_TYPE, tag=(347, TAG_APPLICATION, TAG_IMPLICIT))
     
     #-----< PdpAddress >-----#
-    PdpAddress = OCT_STR(name=u'PdpAddress', mode=MODE_TYPE, tag=(167, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'PacketDataProtocolAddress')))
+    PdpAddress = OCT_STR(name='PdpAddress', mode=MODE_TYPE, tag=(167, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'PacketDataProtocolAddress')))
     
     #-----< PDPContextStartTimestamp >-----#
-    PDPContextStartTimestamp = SEQ(name=u'PDPContextStartTimestamp', mode=MODE_TYPE, tag=(260, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'DateTime')))
+    PDPContextStartTimestamp = SEQ(name='PDPContextStartTimestamp', mode=MODE_TYPE, tag=(260, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'DateTime')))
     
     #-----< PlmnId >-----#
-    PlmnId = OCT_STR(name=u'PlmnId', mode=MODE_TYPE, tag=(169, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'AsciiString')))
+    PlmnId = OCT_STR(name='PlmnId', mode=MODE_TYPE, tag=(169, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'AsciiString')))
     PlmnId._const_sz = ASN1Set(rv=[5], rr=[], ev=None, er=[])
     
     #-----< PositioningMethod >-----#
-    PositioningMethod = INT(name=u'PositioningMethod', mode=MODE_TYPE, tag=(395, TAG_APPLICATION, TAG_IMPLICIT))
+    PositioningMethod = INT(name='PositioningMethod', mode=MODE_TYPE, tag=(395, TAG_APPLICATION, TAG_IMPLICIT))
     
     #-----< PriorityCode >-----#
-    PriorityCode = INT(name=u'PriorityCode', mode=MODE_TYPE, tag=(170, TAG_APPLICATION, TAG_IMPLICIT))
+    PriorityCode = INT(name='PriorityCode', mode=MODE_TYPE, tag=(170, TAG_APPLICATION, TAG_IMPLICIT))
     
     #-----< PublicUserId >-----#
-    PublicUserId = OCT_STR(name=u'PublicUserId', mode=MODE_TYPE, tag=(446, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'AsciiString')))
+    PublicUserId = OCT_STR(name='PublicUserId', mode=MODE_TYPE, tag=(446, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'AsciiString')))
     
     #-----< RapFileSequenceNumber >-----#
-    RapFileSequenceNumber = OCT_STR(name=u'RapFileSequenceNumber', mode=MODE_TYPE, tag=(181, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'FileSequenceNumber')))
+    RapFileSequenceNumber = OCT_STR(name='RapFileSequenceNumber', mode=MODE_TYPE, tag=(181, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'FileSequenceNumber')))
     
     #-----< RecEntityCode >-----#
-    RecEntityCode = INT(name=u'RecEntityCode', mode=MODE_TYPE, tag=(184, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'Code')))
+    RecEntityCode = INT(name='RecEntityCode', mode=MODE_TYPE, tag=(184, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'Code')))
     
     #-----< RecEntityCodeList >-----#
-    RecEntityCodeList = SEQ_OF(name=u'RecEntityCodeList', mode=MODE_TYPE, tag=(185, TAG_APPLICATION, TAG_IMPLICIT))
+    RecEntityCodeList = SEQ_OF(name='RecEntityCodeList', mode=MODE_TYPE, tag=(185, TAG_APPLICATION, TAG_IMPLICIT))
     _RecEntityCodeList__item_ = INT(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'RecEntityCode')))
     RecEntityCodeList._cont = _RecEntityCodeList__item_
     
     #-----< RecEntityId >-----#
-    RecEntityId = OCT_STR(name=u'RecEntityId', mode=MODE_TYPE, tag=(400, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'AsciiString')))
+    RecEntityId = OCT_STR(name='RecEntityId', mode=MODE_TYPE, tag=(400, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'AsciiString')))
     
     #-----< RecEntityInfoList >-----#
-    RecEntityInfoList = SEQ_OF(name=u'RecEntityInfoList', mode=MODE_TYPE, tag=(188, TAG_APPLICATION, TAG_IMPLICIT))
+    RecEntityInfoList = SEQ_OF(name='RecEntityInfoList', mode=MODE_TYPE, tag=(188, TAG_APPLICATION, TAG_IMPLICIT))
     _RecEntityInfoList__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'RecEntityInformation')))
     RecEntityInfoList._cont = _RecEntityInfoList__item_
     
     #-----< RecEntityInformation >-----#
-    RecEntityInformation = SEQ(name=u'RecEntityInformation', mode=MODE_TYPE, tag=(183, TAG_APPLICATION, TAG_IMPLICIT))
-    _RecEntityInformation_recEntityCode = INT(name=u'recEntityCode', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'RecEntityCode')), opt=True)
-    _RecEntityInformation_recEntityType = INT(name=u'recEntityType', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'RecEntityType')), opt=True)
-    _RecEntityInformation_recEntityId = OCT_STR(name=u'recEntityId', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'RecEntityId')), opt=True)
+    RecEntityInformation = SEQ(name='RecEntityInformation', mode=MODE_TYPE, tag=(183, TAG_APPLICATION, TAG_IMPLICIT))
+    _RecEntityInformation_recEntityCode = INT(name='recEntityCode', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'RecEntityCode')), opt=True)
+    _RecEntityInformation_recEntityType = INT(name='recEntityType', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'RecEntityType')), opt=True)
+    _RecEntityInformation_recEntityId = OCT_STR(name='recEntityId', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'RecEntityId')), opt=True)
     RecEntityInformation._cont = ASN1Dict([
-        (u'recEntityCode', _RecEntityInformation_recEntityCode),
-        (u'recEntityType', _RecEntityInformation_recEntityType),
-        (u'recEntityId', _RecEntityInformation_recEntityId),
+        ('recEntityCode', _RecEntityInformation_recEntityCode),
+        ('recEntityType', _RecEntityInformation_recEntityType),
+        ('recEntityId', _RecEntityInformation_recEntityId),
         ])
     RecEntityInformation._ext = []
     
     #-----< RecEntityType >-----#
-    RecEntityType = INT(name=u'RecEntityType', mode=MODE_TYPE, tag=(186, TAG_APPLICATION, TAG_IMPLICIT))
+    RecEntityType = INT(name='RecEntityType', mode=MODE_TYPE, tag=(186, TAG_APPLICATION, TAG_IMPLICIT))
     
     #-----< Recipient >-----#
-    Recipient = OCT_STR(name=u'Recipient', mode=MODE_TYPE, tag=(182, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'PlmnId')))
+    Recipient = OCT_STR(name='Recipient', mode=MODE_TYPE, tag=(182, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'PlmnId')))
     
     #-----< ReleaseVersionNumber >-----#
-    ReleaseVersionNumber = INT(name=u'ReleaseVersionNumber', mode=MODE_TYPE, tag=(189, TAG_APPLICATION, TAG_IMPLICIT))
+    ReleaseVersionNumber = INT(name='ReleaseVersionNumber', mode=MODE_TYPE, tag=(189, TAG_APPLICATION, TAG_IMPLICIT))
     
     #-----< RequestedDeliveryTimeStamp >-----#
-    RequestedDeliveryTimeStamp = SEQ(name=u'RequestedDeliveryTimeStamp', mode=MODE_TYPE, tag=(301, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'DateTime')))
+    RequestedDeliveryTimeStamp = SEQ(name='RequestedDeliveryTimeStamp', mode=MODE_TYPE, tag=(301, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'DateTime')))
     
     #-----< RequestedDestination >-----#
-    RequestedDestination = SEQ(name=u'RequestedDestination', mode=MODE_TYPE, tag=(450, TAG_APPLICATION, TAG_IMPLICIT))
-    _RequestedDestination_requestedNumber = OCT_STR(name=u'requestedNumber', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'RequestedNumber')), opt=True)
-    _RequestedDestination_requestedPublicUserId = OCT_STR(name=u'requestedPublicUserId', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'RequestedPublicUserId')), opt=True)
+    RequestedDestination = SEQ(name='RequestedDestination', mode=MODE_TYPE, tag=(450, TAG_APPLICATION, TAG_IMPLICIT))
+    _RequestedDestination_requestedNumber = OCT_STR(name='requestedNumber', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'RequestedNumber')), opt=True)
+    _RequestedDestination_requestedPublicUserId = OCT_STR(name='requestedPublicUserId', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'RequestedPublicUserId')), opt=True)
     RequestedDestination._cont = ASN1Dict([
-        (u'requestedNumber', _RequestedDestination_requestedNumber),
-        (u'requestedPublicUserId', _RequestedDestination_requestedPublicUserId),
+        ('requestedNumber', _RequestedDestination_requestedNumber),
+        ('requestedPublicUserId', _RequestedDestination_requestedPublicUserId),
         ])
     RequestedDestination._ext = []
     
     #-----< RequestedNumber >-----#
-    RequestedNumber = OCT_STR(name=u'RequestedNumber', mode=MODE_TYPE, tag=(451, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'AddressStringDigits')))
+    RequestedNumber = OCT_STR(name='RequestedNumber', mode=MODE_TYPE, tag=(451, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'AddressStringDigits')))
     
     #-----< RequestedPublicUserId >-----#
-    RequestedPublicUserId = OCT_STR(name=u'RequestedPublicUserId', mode=MODE_TYPE, tag=(452, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'AsciiString')))
+    RequestedPublicUserId = OCT_STR(name='RequestedPublicUserId', mode=MODE_TYPE, tag=(452, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'AsciiString')))
     
     #-----< ResponseTime >-----#
-    ResponseTime = INT(name=u'ResponseTime', mode=MODE_TYPE, tag=(394, TAG_APPLICATION, TAG_IMPLICIT))
+    ResponseTime = INT(name='ResponseTime', mode=MODE_TYPE, tag=(394, TAG_APPLICATION, TAG_IMPLICIT))
     
     #-----< ResponseTimeCategory >-----#
-    ResponseTimeCategory = INT(name=u'ResponseTimeCategory', mode=MODE_TYPE, tag=(387, TAG_APPLICATION, TAG_IMPLICIT))
+    ResponseTimeCategory = INT(name='ResponseTimeCategory', mode=MODE_TYPE, tag=(387, TAG_APPLICATION, TAG_IMPLICIT))
     
     #-----< ScuBasicInformation >-----#
-    ScuBasicInformation = SEQ(name=u'ScuBasicInformation', mode=MODE_TYPE, tag=(191, TAG_APPLICATION, TAG_IMPLICIT))
-    _ScuBasicInformation_chargeableSubscriber = CHOICE(name=u'chargeableSubscriber', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'ScuChargeableSubscriber')), opt=True)
-    _ScuBasicInformation_chargedPartyStatus = INT(name=u'chargedPartyStatus', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'ChargedPartyStatus')), opt=True)
-    _ScuBasicInformation_nonChargedNumber = OCT_STR(name=u'nonChargedNumber', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'NonChargedNumber')), opt=True)
-    _ScuBasicInformation_clirIndicator = INT(name=u'clirIndicator', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'ClirIndicator')), opt=True)
-    _ScuBasicInformation_originatingNetwork = OCT_STR(name=u'originatingNetwork', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'OriginatingNetwork')), opt=True)
-    _ScuBasicInformation_destinationNetwork = OCT_STR(name=u'destinationNetwork', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'DestinationNetwork')), opt=True)
+    ScuBasicInformation = SEQ(name='ScuBasicInformation', mode=MODE_TYPE, tag=(191, TAG_APPLICATION, TAG_IMPLICIT))
+    _ScuBasicInformation_chargeableSubscriber = CHOICE(name='chargeableSubscriber', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'ScuChargeableSubscriber')), opt=True)
+    _ScuBasicInformation_chargedPartyStatus = INT(name='chargedPartyStatus', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'ChargedPartyStatus')), opt=True)
+    _ScuBasicInformation_nonChargedNumber = OCT_STR(name='nonChargedNumber', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'NonChargedNumber')), opt=True)
+    _ScuBasicInformation_clirIndicator = INT(name='clirIndicator', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'ClirIndicator')), opt=True)
+    _ScuBasicInformation_originatingNetwork = OCT_STR(name='originatingNetwork', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'OriginatingNetwork')), opt=True)
+    _ScuBasicInformation_destinationNetwork = OCT_STR(name='destinationNetwork', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'DestinationNetwork')), opt=True)
     ScuBasicInformation._cont = ASN1Dict([
-        (u'chargeableSubscriber', _ScuBasicInformation_chargeableSubscriber),
-        (u'chargedPartyStatus', _ScuBasicInformation_chargedPartyStatus),
-        (u'nonChargedNumber', _ScuBasicInformation_nonChargedNumber),
-        (u'clirIndicator', _ScuBasicInformation_clirIndicator),
-        (u'originatingNetwork', _ScuBasicInformation_originatingNetwork),
-        (u'destinationNetwork', _ScuBasicInformation_destinationNetwork),
+        ('chargeableSubscriber', _ScuBasicInformation_chargeableSubscriber),
+        ('chargedPartyStatus', _ScuBasicInformation_chargedPartyStatus),
+        ('nonChargedNumber', _ScuBasicInformation_nonChargedNumber),
+        ('clirIndicator', _ScuBasicInformation_clirIndicator),
+        ('originatingNetwork', _ScuBasicInformation_originatingNetwork),
+        ('destinationNetwork', _ScuBasicInformation_destinationNetwork),
         ])
     ScuBasicInformation._ext = []
     
     #-----< ScuChargeType >-----#
-    ScuChargeType = SEQ(name=u'ScuChargeType', mode=MODE_TYPE, tag=(192, TAG_APPLICATION, TAG_IMPLICIT))
-    _ScuChargeType_messageStatus = INT(name=u'messageStatus', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'MessageStatus')), opt=True)
-    _ScuChargeType_priorityCode = INT(name=u'priorityCode', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'PriorityCode')), opt=True)
-    _ScuChargeType_distanceChargeBandCode = OCT_STR(name=u'distanceChargeBandCode', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'DistanceChargeBandCode')), opt=True)
-    _ScuChargeType_messageType = INT(name=u'messageType', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'MessageType')), opt=True)
-    _ScuChargeType_messageDescriptionCode = INT(name=u'messageDescriptionCode', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'MessageDescriptionCode')), opt=True)
+    ScuChargeType = SEQ(name='ScuChargeType', mode=MODE_TYPE, tag=(192, TAG_APPLICATION, TAG_IMPLICIT))
+    _ScuChargeType_messageStatus = INT(name='messageStatus', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'MessageStatus')), opt=True)
+    _ScuChargeType_priorityCode = INT(name='priorityCode', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'PriorityCode')), opt=True)
+    _ScuChargeType_distanceChargeBandCode = OCT_STR(name='distanceChargeBandCode', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'DistanceChargeBandCode')), opt=True)
+    _ScuChargeType_messageType = INT(name='messageType', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'MessageType')), opt=True)
+    _ScuChargeType_messageDescriptionCode = INT(name='messageDescriptionCode', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'MessageDescriptionCode')), opt=True)
     ScuChargeType._cont = ASN1Dict([
-        (u'messageStatus', _ScuChargeType_messageStatus),
-        (u'priorityCode', _ScuChargeType_priorityCode),
-        (u'distanceChargeBandCode', _ScuChargeType_distanceChargeBandCode),
-        (u'messageType', _ScuChargeType_messageType),
-        (u'messageDescriptionCode', _ScuChargeType_messageDescriptionCode),
+        ('messageStatus', _ScuChargeType_messageStatus),
+        ('priorityCode', _ScuChargeType_priorityCode),
+        ('distanceChargeBandCode', _ScuChargeType_distanceChargeBandCode),
+        ('messageType', _ScuChargeType_messageType),
+        ('messageDescriptionCode', _ScuChargeType_messageDescriptionCode),
         ])
     ScuChargeType._ext = []
     
     #-----< ScuTimeStamps >-----#
-    ScuTimeStamps = SEQ(name=u'ScuTimeStamps', mode=MODE_TYPE, tag=(193, TAG_APPLICATION, TAG_IMPLICIT))
-    _ScuTimeStamps_depositTimeStamp = SEQ(name=u'depositTimeStamp', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'DepositTimeStamp')), opt=True)
-    _ScuTimeStamps_completionTimeStamp = SEQ(name=u'completionTimeStamp', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'CompletionTimeStamp')), opt=True)
-    _ScuTimeStamps_chargingPoint = OCT_STR(name=u'chargingPoint', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'ChargingPoint')), opt=True)
+    ScuTimeStamps = SEQ(name='ScuTimeStamps', mode=MODE_TYPE, tag=(193, TAG_APPLICATION, TAG_IMPLICIT))
+    _ScuTimeStamps_depositTimeStamp = SEQ(name='depositTimeStamp', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'DepositTimeStamp')), opt=True)
+    _ScuTimeStamps_completionTimeStamp = SEQ(name='completionTimeStamp', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'CompletionTimeStamp')), opt=True)
+    _ScuTimeStamps_chargingPoint = OCT_STR(name='chargingPoint', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'ChargingPoint')), opt=True)
     ScuTimeStamps._cont = ASN1Dict([
-        (u'depositTimeStamp', _ScuTimeStamps_depositTimeStamp),
-        (u'completionTimeStamp', _ScuTimeStamps_completionTimeStamp),
-        (u'chargingPoint', _ScuTimeStamps_chargingPoint),
+        ('depositTimeStamp', _ScuTimeStamps_depositTimeStamp),
+        ('completionTimeStamp', _ScuTimeStamps_completionTimeStamp),
+        ('chargingPoint', _ScuTimeStamps_chargingPoint),
         ])
     ScuTimeStamps._ext = []
     
     #-----< ScuChargeableSubscriber >-----#
-    ScuChargeableSubscriber = CHOICE(name=u'ScuChargeableSubscriber', mode=MODE_TYPE, tag=(430, TAG_APPLICATION, TAG_IMPLICIT))
-    _ScuChargeableSubscriber_gsmChargeableSubscriber = SEQ(name=u'gsmChargeableSubscriber', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'GsmChargeableSubscriber')))
-    _ScuChargeableSubscriber_minChargeableSubscriber = SEQ(name=u'minChargeableSubscriber', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'MinChargeableSubscriber')))
+    ScuChargeableSubscriber = CHOICE(name='ScuChargeableSubscriber', mode=MODE_TYPE, tag=(430, TAG_APPLICATION, TAG_IMPLICIT))
+    _ScuChargeableSubscriber_gsmChargeableSubscriber = SEQ(name='gsmChargeableSubscriber', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'GsmChargeableSubscriber')))
+    _ScuChargeableSubscriber_minChargeableSubscriber = SEQ(name='minChargeableSubscriber', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'MinChargeableSubscriber')))
     ScuChargeableSubscriber._cont = ASN1Dict([
-        (u'gsmChargeableSubscriber', _ScuChargeableSubscriber_gsmChargeableSubscriber),
-        (u'minChargeableSubscriber', _ScuChargeableSubscriber_minChargeableSubscriber),
+        ('gsmChargeableSubscriber', _ScuChargeableSubscriber_gsmChargeableSubscriber),
+        ('minChargeableSubscriber', _ScuChargeableSubscriber_minChargeableSubscriber),
         ])
     ScuChargeableSubscriber._ext = []
     
     #-----< Sender >-----#
-    Sender = OCT_STR(name=u'Sender', mode=MODE_TYPE, tag=(196, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'PlmnId')))
+    Sender = OCT_STR(name='Sender', mode=MODE_TYPE, tag=(196, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'PlmnId')))
     
     #-----< ServiceStartTimestamp >-----#
-    ServiceStartTimestamp = SEQ(name=u'ServiceStartTimestamp', mode=MODE_TYPE, tag=(447, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'DateTime')))
+    ServiceStartTimestamp = SEQ(name='ServiceStartTimestamp', mode=MODE_TYPE, tag=(447, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'DateTime')))
     
     #-----< ServingBid >-----#
-    ServingBid = OCT_STR(name=u'ServingBid', mode=MODE_TYPE, tag=(198, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'Bid')))
+    ServingBid = OCT_STR(name='ServingBid', mode=MODE_TYPE, tag=(198, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'Bid')))
     
     #-----< ServingLocationDescription >-----#
-    ServingLocationDescription = OCT_STR(name=u'ServingLocationDescription', mode=MODE_TYPE, tag=(414, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'LocationDescription')))
+    ServingLocationDescription = OCT_STR(name='ServingLocationDescription', mode=MODE_TYPE, tag=(414, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'LocationDescription')))
     
     #-----< ServingNetwork >-----#
-    ServingNetwork = OCT_STR(name=u'ServingNetwork', mode=MODE_TYPE, tag=(195, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'AsciiString')))
+    ServingNetwork = OCT_STR(name='ServingNetwork', mode=MODE_TYPE, tag=(195, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'AsciiString')))
     
     #-----< ServingPartiesInformation >-----#
-    ServingPartiesInformation = SEQ(name=u'ServingPartiesInformation', mode=MODE_TYPE, tag=(335, TAG_APPLICATION, TAG_IMPLICIT))
-    _ServingPartiesInformation_contentProviderName = OCT_STR(name=u'contentProviderName', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'ContentProviderName')), opt=True)
-    _ServingPartiesInformation_contentProviderIdList = SEQ_OF(name=u'contentProviderIdList', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'ContentProviderIdList')), opt=True)
-    _ServingPartiesInformation_internetServiceProviderIdList = SEQ_OF(name=u'internetServiceProviderIdList', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'InternetServiceProviderIdList')), opt=True)
-    _ServingPartiesInformation_networkList = SEQ_OF(name=u'networkList', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'NetworkList')), opt=True)
+    ServingPartiesInformation = SEQ(name='ServingPartiesInformation', mode=MODE_TYPE, tag=(335, TAG_APPLICATION, TAG_IMPLICIT))
+    _ServingPartiesInformation_contentProviderName = OCT_STR(name='contentProviderName', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'ContentProviderName')), opt=True)
+    _ServingPartiesInformation_contentProviderIdList = SEQ_OF(name='contentProviderIdList', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'ContentProviderIdList')), opt=True)
+    _ServingPartiesInformation_internetServiceProviderIdList = SEQ_OF(name='internetServiceProviderIdList', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'InternetServiceProviderIdList')), opt=True)
+    _ServingPartiesInformation_networkList = SEQ_OF(name='networkList', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'NetworkList')), opt=True)
     ServingPartiesInformation._cont = ASN1Dict([
-        (u'contentProviderName', _ServingPartiesInformation_contentProviderName),
-        (u'contentProviderIdList', _ServingPartiesInformation_contentProviderIdList),
-        (u'internetServiceProviderIdList', _ServingPartiesInformation_internetServiceProviderIdList),
-        (u'networkList', _ServingPartiesInformation_networkList),
+        ('contentProviderName', _ServingPartiesInformation_contentProviderName),
+        ('contentProviderIdList', _ServingPartiesInformation_contentProviderIdList),
+        ('internetServiceProviderIdList', _ServingPartiesInformation_internetServiceProviderIdList),
+        ('networkList', _ServingPartiesInformation_networkList),
         ])
     ServingPartiesInformation._ext = []
     
     #-----< SessionChargeInfoList >-----#
-    SessionChargeInfoList = SEQ_OF(name=u'SessionChargeInfoList', mode=MODE_TYPE, tag=(448, TAG_APPLICATION, TAG_IMPLICIT))
+    SessionChargeInfoList = SEQ_OF(name='SessionChargeInfoList', mode=MODE_TYPE, tag=(448, TAG_APPLICATION, TAG_IMPLICIT))
     _SessionChargeInfoList__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'SessionChargeInformation')))
     SessionChargeInfoList._cont = _SessionChargeInfoList__item_
     
     #-----< SessionChargeInformation >-----#
-    SessionChargeInformation = SEQ(name=u'SessionChargeInformation', mode=MODE_TYPE, tag=(449, TAG_APPLICATION, TAG_IMPLICIT))
-    _SessionChargeInformation_chargedItem = OCT_STR(name=u'chargedItem', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'ChargedItem')), opt=True)
-    _SessionChargeInformation_exchangeRateCode = INT(name=u'exchangeRateCode', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'ExchangeRateCode')), opt=True)
-    _SessionChargeInformation_callTypeGroup = SEQ(name=u'callTypeGroup', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'CallTypeGroup')), opt=True)
-    _SessionChargeInformation_chargeDetailList = SEQ_OF(name=u'chargeDetailList', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'ChargeDetailList')), opt=True)
-    _SessionChargeInformation_taxInformationList = SEQ_OF(name=u'taxInformationList', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'TaxInformationList')), opt=True)
+    SessionChargeInformation = SEQ(name='SessionChargeInformation', mode=MODE_TYPE, tag=(449, TAG_APPLICATION, TAG_IMPLICIT))
+    _SessionChargeInformation_chargedItem = OCT_STR(name='chargedItem', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'ChargedItem')), opt=True)
+    _SessionChargeInformation_exchangeRateCode = INT(name='exchangeRateCode', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'ExchangeRateCode')), opt=True)
+    _SessionChargeInformation_callTypeGroup = SEQ(name='callTypeGroup', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'CallTypeGroup')), opt=True)
+    _SessionChargeInformation_chargeDetailList = SEQ_OF(name='chargeDetailList', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'ChargeDetailList')), opt=True)
+    _SessionChargeInformation_taxInformationList = SEQ_OF(name='taxInformationList', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'TaxInformationList')), opt=True)
     SessionChargeInformation._cont = ASN1Dict([
-        (u'chargedItem', _SessionChargeInformation_chargedItem),
-        (u'exchangeRateCode', _SessionChargeInformation_exchangeRateCode),
-        (u'callTypeGroup', _SessionChargeInformation_callTypeGroup),
-        (u'chargeDetailList', _SessionChargeInformation_chargeDetailList),
-        (u'taxInformationList', _SessionChargeInformation_taxInformationList),
+        ('chargedItem', _SessionChargeInformation_chargedItem),
+        ('exchangeRateCode', _SessionChargeInformation_exchangeRateCode),
+        ('callTypeGroup', _SessionChargeInformation_callTypeGroup),
+        ('chargeDetailList', _SessionChargeInformation_chargeDetailList),
+        ('taxInformationList', _SessionChargeInformation_taxInformationList),
         ])
     SessionChargeInformation._ext = []
     
     #-----< SimChargeableSubscriber >-----#
-    SimChargeableSubscriber = SEQ(name=u'SimChargeableSubscriber', mode=MODE_TYPE, tag=(199, TAG_APPLICATION, TAG_IMPLICIT))
-    _SimChargeableSubscriber_imsi = OCT_STR(name=u'imsi', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'Imsi')), opt=True)
-    _SimChargeableSubscriber_msisdn = OCT_STR(name=u'msisdn', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'Msisdn')), opt=True)
+    SimChargeableSubscriber = SEQ(name='SimChargeableSubscriber', mode=MODE_TYPE, tag=(199, TAG_APPLICATION, TAG_IMPLICIT))
+    _SimChargeableSubscriber_imsi = OCT_STR(name='imsi', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'Imsi')), opt=True)
+    _SimChargeableSubscriber_msisdn = OCT_STR(name='msisdn', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'Msisdn')), opt=True)
     SimChargeableSubscriber._cont = ASN1Dict([
-        (u'imsi', _SimChargeableSubscriber_imsi),
-        (u'msisdn', _SimChargeableSubscriber_msisdn),
+        ('imsi', _SimChargeableSubscriber_imsi),
+        ('msisdn', _SimChargeableSubscriber_msisdn),
         ])
     SimChargeableSubscriber._ext = []
     
     #-----< SimToolkitIndicator >-----#
-    SimToolkitIndicator = OCT_STR(name=u'SimToolkitIndicator', mode=MODE_TYPE, tag=(200, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'AsciiString')))
+    SimToolkitIndicator = OCT_STR(name='SimToolkitIndicator', mode=MODE_TYPE, tag=(200, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'AsciiString')))
     SimToolkitIndicator._const_sz = ASN1Set(rv=[1], rr=[], ev=None, er=[])
     
     #-----< SMSDestinationNumber >-----#
-    SMSDestinationNumber = OCT_STR(name=u'SMSDestinationNumber', mode=MODE_TYPE, tag=(419, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'AsciiString')))
+    SMSDestinationNumber = OCT_STR(name='SMSDestinationNumber', mode=MODE_TYPE, tag=(419, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'AsciiString')))
     
     #-----< SMSOriginator >-----#
-    SMSOriginator = OCT_STR(name=u'SMSOriginator', mode=MODE_TYPE, tag=(425, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'AsciiString')))
+    SMSOriginator = OCT_STR(name='SMSOriginator', mode=MODE_TYPE, tag=(425, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'AsciiString')))
     
     #-----< SpecificationVersionNumber >-----#
-    SpecificationVersionNumber = INT(name=u'SpecificationVersionNumber', mode=MODE_TYPE, tag=(201, TAG_APPLICATION, TAG_IMPLICIT))
+    SpecificationVersionNumber = INT(name='SpecificationVersionNumber', mode=MODE_TYPE, tag=(201, TAG_APPLICATION, TAG_IMPLICIT))
     
     #-----< SsParameters >-----#
-    SsParameters = OCT_STR(name=u'SsParameters', mode=MODE_TYPE, tag=(204, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'AsciiString')))
+    SsParameters = OCT_STR(name='SsParameters', mode=MODE_TYPE, tag=(204, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'AsciiString')))
     SsParameters._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=40)], ev=None, er=[])
     
     #-----< SupplServiceActionCode >-----#
-    SupplServiceActionCode = INT(name=u'SupplServiceActionCode', mode=MODE_TYPE, tag=(208, TAG_APPLICATION, TAG_IMPLICIT))
+    SupplServiceActionCode = INT(name='SupplServiceActionCode', mode=MODE_TYPE, tag=(208, TAG_APPLICATION, TAG_IMPLICIT))
     
     #-----< SupplServiceCode >-----#
-    SupplServiceCode = OCT_STR(name=u'SupplServiceCode', mode=MODE_TYPE, tag=(209, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'HexString')))
+    SupplServiceCode = OCT_STR(name='SupplServiceCode', mode=MODE_TYPE, tag=(209, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'HexString')))
     SupplServiceCode._const_sz = ASN1Set(rv=[2], rr=[], ev=None, er=[])
     
     #-----< SupplServiceUsed >-----#
-    SupplServiceUsed = SEQ(name=u'SupplServiceUsed', mode=MODE_TYPE, tag=(206, TAG_APPLICATION, TAG_IMPLICIT))
-    _SupplServiceUsed_supplServiceCode = OCT_STR(name=u'supplServiceCode', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'SupplServiceCode')), opt=True)
-    _SupplServiceUsed_supplServiceActionCode = INT(name=u'supplServiceActionCode', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'SupplServiceActionCode')), opt=True)
-    _SupplServiceUsed_ssParameters = OCT_STR(name=u'ssParameters', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'SsParameters')), opt=True)
-    _SupplServiceUsed_chargingTimeStamp = SEQ(name=u'chargingTimeStamp', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'ChargingTimeStamp')), opt=True)
-    _SupplServiceUsed_chargeInformation = SEQ(name=u'chargeInformation', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'ChargeInformation')), opt=True)
-    _SupplServiceUsed_basicServiceCodeList = SEQ_OF(name=u'basicServiceCodeList', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'BasicServiceCodeList')), opt=True)
+    SupplServiceUsed = SEQ(name='SupplServiceUsed', mode=MODE_TYPE, tag=(206, TAG_APPLICATION, TAG_IMPLICIT))
+    _SupplServiceUsed_supplServiceCode = OCT_STR(name='supplServiceCode', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'SupplServiceCode')), opt=True)
+    _SupplServiceUsed_supplServiceActionCode = INT(name='supplServiceActionCode', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'SupplServiceActionCode')), opt=True)
+    _SupplServiceUsed_ssParameters = OCT_STR(name='ssParameters', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'SsParameters')), opt=True)
+    _SupplServiceUsed_chargingTimeStamp = SEQ(name='chargingTimeStamp', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'ChargingTimeStamp')), opt=True)
+    _SupplServiceUsed_chargeInformation = SEQ(name='chargeInformation', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'ChargeInformation')), opt=True)
+    _SupplServiceUsed_basicServiceCodeList = SEQ_OF(name='basicServiceCodeList', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'BasicServiceCodeList')), opt=True)
     SupplServiceUsed._cont = ASN1Dict([
-        (u'supplServiceCode', _SupplServiceUsed_supplServiceCode),
-        (u'supplServiceActionCode', _SupplServiceUsed_supplServiceActionCode),
-        (u'ssParameters', _SupplServiceUsed_ssParameters),
-        (u'chargingTimeStamp', _SupplServiceUsed_chargingTimeStamp),
-        (u'chargeInformation', _SupplServiceUsed_chargeInformation),
-        (u'basicServiceCodeList', _SupplServiceUsed_basicServiceCodeList),
+        ('supplServiceCode', _SupplServiceUsed_supplServiceCode),
+        ('supplServiceActionCode', _SupplServiceUsed_supplServiceActionCode),
+        ('ssParameters', _SupplServiceUsed_ssParameters),
+        ('chargingTimeStamp', _SupplServiceUsed_chargingTimeStamp),
+        ('chargeInformation', _SupplServiceUsed_chargeInformation),
+        ('basicServiceCodeList', _SupplServiceUsed_basicServiceCodeList),
         ])
     SupplServiceUsed._ext = []
     
     #-----< TapCurrency >-----#
-    TapCurrency = OCT_STR(name=u'TapCurrency', mode=MODE_TYPE, tag=(210, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'Currency')))
+    TapCurrency = OCT_STR(name='TapCurrency', mode=MODE_TYPE, tag=(210, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'Currency')))
     
     #-----< TapDecimalPlaces >-----#
-    TapDecimalPlaces = INT(name=u'TapDecimalPlaces', mode=MODE_TYPE, tag=(244, TAG_APPLICATION, TAG_IMPLICIT))
+    TapDecimalPlaces = INT(name='TapDecimalPlaces', mode=MODE_TYPE, tag=(244, TAG_APPLICATION, TAG_IMPLICIT))
     
     #-----< TaxableAmount >-----#
-    TaxableAmount = INT(name=u'TaxableAmount', mode=MODE_TYPE, tag=(398, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'AbsoluteAmount')))
+    TaxableAmount = INT(name='TaxableAmount', mode=MODE_TYPE, tag=(398, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'AbsoluteAmount')))
     
     #-----< Taxation >-----#
-    Taxation = SEQ(name=u'Taxation', mode=MODE_TYPE, tag=(216, TAG_APPLICATION, TAG_IMPLICIT))
-    _Taxation_taxCode = INT(name=u'taxCode', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'TaxCode')), opt=True)
-    _Taxation_taxType = OCT_STR(name=u'taxType', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'TaxType')), opt=True)
-    _Taxation_taxRate = OCT_STR(name=u'taxRate', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'TaxRate')), opt=True)
-    _Taxation_chargeType = OCT_STR(name=u'chargeType', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'ChargeType')), opt=True)
-    _Taxation_taxIndicator = OCT_STR(name=u'taxIndicator', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'TaxIndicator')), opt=True)
+    Taxation = SEQ(name='Taxation', mode=MODE_TYPE, tag=(216, TAG_APPLICATION, TAG_IMPLICIT))
+    _Taxation_taxCode = INT(name='taxCode', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'TaxCode')), opt=True)
+    _Taxation_taxType = OCT_STR(name='taxType', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'TaxType')), opt=True)
+    _Taxation_taxRate = OCT_STR(name='taxRate', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'TaxRate')), opt=True)
+    _Taxation_chargeType = OCT_STR(name='chargeType', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'ChargeType')), opt=True)
+    _Taxation_taxIndicator = OCT_STR(name='taxIndicator', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'TaxIndicator')), opt=True)
     Taxation._cont = ASN1Dict([
-        (u'taxCode', _Taxation_taxCode),
-        (u'taxType', _Taxation_taxType),
-        (u'taxRate', _Taxation_taxRate),
-        (u'chargeType', _Taxation_chargeType),
-        (u'taxIndicator', _Taxation_taxIndicator),
+        ('taxCode', _Taxation_taxCode),
+        ('taxType', _Taxation_taxType),
+        ('taxRate', _Taxation_taxRate),
+        ('chargeType', _Taxation_chargeType),
+        ('taxIndicator', _Taxation_taxIndicator),
         ])
     Taxation._ext = []
     
     #-----< TaxationList >-----#
-    TaxationList = SEQ_OF(name=u'TaxationList', mode=MODE_TYPE, tag=(211, TAG_APPLICATION, TAG_IMPLICIT))
+    TaxationList = SEQ_OF(name='TaxationList', mode=MODE_TYPE, tag=(211, TAG_APPLICATION, TAG_IMPLICIT))
     _TaxationList__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'Taxation')))
     TaxationList._cont = _TaxationList__item_
     
     #-----< TaxCode >-----#
-    TaxCode = INT(name=u'TaxCode', mode=MODE_TYPE, tag=(212, TAG_APPLICATION, TAG_IMPLICIT))
+    TaxCode = INT(name='TaxCode', mode=MODE_TYPE, tag=(212, TAG_APPLICATION, TAG_IMPLICIT))
     
     #-----< TaxIndicator >-----#
-    TaxIndicator = OCT_STR(name=u'TaxIndicator', mode=MODE_TYPE, tag=(432, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'AsciiString')))
+    TaxIndicator = OCT_STR(name='TaxIndicator', mode=MODE_TYPE, tag=(432, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'AsciiString')))
     TaxIndicator._const_sz = ASN1Set(rv=[1], rr=[], ev=None, er=[])
     
     #-----< TaxInformation >-----#
-    TaxInformation = SEQ(name=u'TaxInformation', mode=MODE_TYPE, tag=(213, TAG_APPLICATION, TAG_IMPLICIT))
-    _TaxInformation_taxCode = INT(name=u'taxCode', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'TaxCode')), opt=True)
-    _TaxInformation_taxValue = INT(name=u'taxValue', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'TaxValue')), opt=True)
-    _TaxInformation_taxableAmount = INT(name=u'taxableAmount', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'TaxableAmount')), opt=True)
+    TaxInformation = SEQ(name='TaxInformation', mode=MODE_TYPE, tag=(213, TAG_APPLICATION, TAG_IMPLICIT))
+    _TaxInformation_taxCode = INT(name='taxCode', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'TaxCode')), opt=True)
+    _TaxInformation_taxValue = INT(name='taxValue', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'TaxValue')), opt=True)
+    _TaxInformation_taxableAmount = INT(name='taxableAmount', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'TaxableAmount')), opt=True)
     TaxInformation._cont = ASN1Dict([
-        (u'taxCode', _TaxInformation_taxCode),
-        (u'taxValue', _TaxInformation_taxValue),
-        (u'taxableAmount', _TaxInformation_taxableAmount),
+        ('taxCode', _TaxInformation_taxCode),
+        ('taxValue', _TaxInformation_taxValue),
+        ('taxableAmount', _TaxInformation_taxableAmount),
         ])
     TaxInformation._ext = []
     
     #-----< TaxInformationList >-----#
-    TaxInformationList = SEQ_OF(name=u'TaxInformationList', mode=MODE_TYPE, tag=(214, TAG_APPLICATION, TAG_IMPLICIT))
+    TaxInformationList = SEQ_OF(name='TaxInformationList', mode=MODE_TYPE, tag=(214, TAG_APPLICATION, TAG_IMPLICIT))
     _TaxInformationList__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'TaxInformation')))
     TaxInformationList._cont = _TaxInformationList__item_
     
     #-----< TaxRate >-----#
-    TaxRate = OCT_STR(name=u'TaxRate', mode=MODE_TYPE, tag=(215, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'NumberString')))
+    TaxRate = OCT_STR(name='TaxRate', mode=MODE_TYPE, tag=(215, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'NumberString')))
     TaxRate._const_sz = ASN1Set(rv=[7], rr=[], ev=None, er=[])
     
     #-----< TaxType >-----#
-    TaxType = OCT_STR(name=u'TaxType', mode=MODE_TYPE, tag=(217, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'AsciiString')))
+    TaxType = OCT_STR(name='TaxType', mode=MODE_TYPE, tag=(217, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'AsciiString')))
     TaxType._const_sz = ASN1Set(rv=[2], rr=[], ev=None, er=[])
     
     #-----< TaxValue >-----#
-    TaxValue = INT(name=u'TaxValue', mode=MODE_TYPE, tag=(397, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'AbsoluteAmount')))
+    TaxValue = INT(name='TaxValue', mode=MODE_TYPE, tag=(397, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'AbsoluteAmount')))
     
     #-----< TeleServiceCode >-----#
-    TeleServiceCode = OCT_STR(name=u'TeleServiceCode', mode=MODE_TYPE, tag=(218, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'HexString')))
+    TeleServiceCode = OCT_STR(name='TeleServiceCode', mode=MODE_TYPE, tag=(218, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'HexString')))
     TeleServiceCode._const_sz = ASN1Set(rv=[2], rr=[], ev=None, er=[])
     
     #-----< ThirdPartyInformation >-----#
-    ThirdPartyInformation = SEQ(name=u'ThirdPartyInformation', mode=MODE_TYPE, tag=(219, TAG_APPLICATION, TAG_IMPLICIT))
-    _ThirdPartyInformation_thirdPartyNumber = OCT_STR(name=u'thirdPartyNumber', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'ThirdPartyNumber')), opt=True)
-    _ThirdPartyInformation_clirIndicator = INT(name=u'clirIndicator', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'ClirIndicator')), opt=True)
+    ThirdPartyInformation = SEQ(name='ThirdPartyInformation', mode=MODE_TYPE, tag=(219, TAG_APPLICATION, TAG_IMPLICIT))
+    _ThirdPartyInformation_thirdPartyNumber = OCT_STR(name='thirdPartyNumber', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'ThirdPartyNumber')), opt=True)
+    _ThirdPartyInformation_clirIndicator = INT(name='clirIndicator', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'ClirIndicator')), opt=True)
     ThirdPartyInformation._cont = ASN1Dict([
-        (u'thirdPartyNumber', _ThirdPartyInformation_thirdPartyNumber),
-        (u'clirIndicator', _ThirdPartyInformation_clirIndicator),
+        ('thirdPartyNumber', _ThirdPartyInformation_thirdPartyNumber),
+        ('clirIndicator', _ThirdPartyInformation_clirIndicator),
         ])
     ThirdPartyInformation._ext = []
     
     #-----< ThirdPartyNumber >-----#
-    ThirdPartyNumber = OCT_STR(name=u'ThirdPartyNumber', mode=MODE_TYPE, tag=(403, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'AddressStringDigits')))
+    ThirdPartyNumber = OCT_STR(name='ThirdPartyNumber', mode=MODE_TYPE, tag=(403, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'AddressStringDigits')))
     
     #-----< ThreeGcamelDestination >-----#
-    ThreeGcamelDestination = CHOICE(name=u'ThreeGcamelDestination', mode=MODE_TYPE, tag=(431, TAG_APPLICATION, TAG_IMPLICIT))
-    _ThreeGcamelDestination_camelDestinationNumber = OCT_STR(name=u'camelDestinationNumber', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'CamelDestinationNumber')))
-    _ThreeGcamelDestination_gprsDestination = SEQ(name=u'gprsDestination', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'GprsDestination')))
+    ThreeGcamelDestination = CHOICE(name='ThreeGcamelDestination', mode=MODE_TYPE, tag=(431, TAG_APPLICATION, TAG_IMPLICIT))
+    _ThreeGcamelDestination_camelDestinationNumber = OCT_STR(name='camelDestinationNumber', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'CamelDestinationNumber')))
+    _ThreeGcamelDestination_gprsDestination = SEQ(name='gprsDestination', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'GprsDestination')))
     ThreeGcamelDestination._cont = ASN1Dict([
-        (u'camelDestinationNumber', _ThreeGcamelDestination_camelDestinationNumber),
-        (u'gprsDestination', _ThreeGcamelDestination_gprsDestination),
+        ('camelDestinationNumber', _ThreeGcamelDestination_camelDestinationNumber),
+        ('gprsDestination', _ThreeGcamelDestination_gprsDestination),
         ])
     ThreeGcamelDestination._ext = []
     
     #-----< TotalAdvisedCharge >-----#
-    TotalAdvisedCharge = INT(name=u'TotalAdvisedCharge', mode=MODE_TYPE, tag=(356, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'AbsoluteAmount')))
+    TotalAdvisedCharge = INT(name='TotalAdvisedCharge', mode=MODE_TYPE, tag=(356, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'AbsoluteAmount')))
     
     #-----< TotalAdvisedChargeRefund >-----#
-    TotalAdvisedChargeRefund = INT(name=u'TotalAdvisedChargeRefund', mode=MODE_TYPE, tag=(357, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'AbsoluteAmount')))
+    TotalAdvisedChargeRefund = INT(name='TotalAdvisedChargeRefund', mode=MODE_TYPE, tag=(357, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'AbsoluteAmount')))
     
     #-----< TotalAdvisedChargeValue >-----#
-    TotalAdvisedChargeValue = SEQ(name=u'TotalAdvisedChargeValue', mode=MODE_TYPE, tag=(360, TAG_APPLICATION, TAG_IMPLICIT))
-    _TotalAdvisedChargeValue_advisedChargeCurrency = OCT_STR(name=u'advisedChargeCurrency', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'AdvisedChargeCurrency')), opt=True)
-    _TotalAdvisedChargeValue_totalAdvisedCharge = INT(name=u'totalAdvisedCharge', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'TotalAdvisedCharge')), opt=True)
-    _TotalAdvisedChargeValue_totalAdvisedChargeRefund = INT(name=u'totalAdvisedChargeRefund', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'TotalAdvisedChargeRefund')), opt=True)
-    _TotalAdvisedChargeValue_totalCommission = INT(name=u'totalCommission', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'TotalCommission')), opt=True)
-    _TotalAdvisedChargeValue_totalCommissionRefund = INT(name=u'totalCommissionRefund', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'TotalCommissionRefund')), opt=True)
+    TotalAdvisedChargeValue = SEQ(name='TotalAdvisedChargeValue', mode=MODE_TYPE, tag=(360, TAG_APPLICATION, TAG_IMPLICIT))
+    _TotalAdvisedChargeValue_advisedChargeCurrency = OCT_STR(name='advisedChargeCurrency', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'AdvisedChargeCurrency')), opt=True)
+    _TotalAdvisedChargeValue_totalAdvisedCharge = INT(name='totalAdvisedCharge', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'TotalAdvisedCharge')), opt=True)
+    _TotalAdvisedChargeValue_totalAdvisedChargeRefund = INT(name='totalAdvisedChargeRefund', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'TotalAdvisedChargeRefund')), opt=True)
+    _TotalAdvisedChargeValue_totalCommission = INT(name='totalCommission', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'TotalCommission')), opt=True)
+    _TotalAdvisedChargeValue_totalCommissionRefund = INT(name='totalCommissionRefund', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'TotalCommissionRefund')), opt=True)
     TotalAdvisedChargeValue._cont = ASN1Dict([
-        (u'advisedChargeCurrency', _TotalAdvisedChargeValue_advisedChargeCurrency),
-        (u'totalAdvisedCharge', _TotalAdvisedChargeValue_totalAdvisedCharge),
-        (u'totalAdvisedChargeRefund', _TotalAdvisedChargeValue_totalAdvisedChargeRefund),
-        (u'totalCommission', _TotalAdvisedChargeValue_totalCommission),
-        (u'totalCommissionRefund', _TotalAdvisedChargeValue_totalCommissionRefund),
+        ('advisedChargeCurrency', _TotalAdvisedChargeValue_advisedChargeCurrency),
+        ('totalAdvisedCharge', _TotalAdvisedChargeValue_totalAdvisedCharge),
+        ('totalAdvisedChargeRefund', _TotalAdvisedChargeValue_totalAdvisedChargeRefund),
+        ('totalCommission', _TotalAdvisedChargeValue_totalCommission),
+        ('totalCommissionRefund', _TotalAdvisedChargeValue_totalCommissionRefund),
         ])
     TotalAdvisedChargeValue._ext = []
     
     #-----< TotalAdvisedChargeValueList >-----#
-    TotalAdvisedChargeValueList = SEQ_OF(name=u'TotalAdvisedChargeValueList', mode=MODE_TYPE, tag=(361, TAG_APPLICATION, TAG_IMPLICIT))
+    TotalAdvisedChargeValueList = SEQ_OF(name='TotalAdvisedChargeValueList', mode=MODE_TYPE, tag=(361, TAG_APPLICATION, TAG_IMPLICIT))
     _TotalAdvisedChargeValueList__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'TotalAdvisedChargeValue')))
     TotalAdvisedChargeValueList._cont = _TotalAdvisedChargeValueList__item_
     
     #-----< TotalCallEventDuration >-----#
-    TotalCallEventDuration = INT(name=u'TotalCallEventDuration', mode=MODE_TYPE, tag=(223, TAG_APPLICATION, TAG_IMPLICIT))
+    TotalCallEventDuration = INT(name='TotalCallEventDuration', mode=MODE_TYPE, tag=(223, TAG_APPLICATION, TAG_IMPLICIT))
     
     #-----< TotalCharge >-----#
-    TotalCharge = INT(name=u'TotalCharge', mode=MODE_TYPE, tag=(415, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'AbsoluteAmount')))
+    TotalCharge = INT(name='TotalCharge', mode=MODE_TYPE, tag=(415, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'AbsoluteAmount')))
     
     #-----< TotalChargeRefund >-----#
-    TotalChargeRefund = INT(name=u'TotalChargeRefund', mode=MODE_TYPE, tag=(355, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'AbsoluteAmount')))
+    TotalChargeRefund = INT(name='TotalChargeRefund', mode=MODE_TYPE, tag=(355, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'AbsoluteAmount')))
     
     #-----< TotalCommission >-----#
-    TotalCommission = INT(name=u'TotalCommission', mode=MODE_TYPE, tag=(358, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'AbsoluteAmount')))
+    TotalCommission = INT(name='TotalCommission', mode=MODE_TYPE, tag=(358, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'AbsoluteAmount')))
     
     #-----< TotalCommissionRefund >-----#
-    TotalCommissionRefund = INT(name=u'TotalCommissionRefund', mode=MODE_TYPE, tag=(359, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'AbsoluteAmount')))
+    TotalCommissionRefund = INT(name='TotalCommissionRefund', mode=MODE_TYPE, tag=(359, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'AbsoluteAmount')))
     
     #-----< TotalDataVolume >-----#
-    TotalDataVolume = INT(name=u'TotalDataVolume', mode=MODE_TYPE, tag=(343, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'DataVolume')))
+    TotalDataVolume = INT(name='TotalDataVolume', mode=MODE_TYPE, tag=(343, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'DataVolume')))
     
     #-----< TotalDiscountRefund >-----#
-    TotalDiscountRefund = INT(name=u'TotalDiscountRefund', mode=MODE_TYPE, tag=(354, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'AbsoluteAmount')))
+    TotalDiscountRefund = INT(name='TotalDiscountRefund', mode=MODE_TYPE, tag=(354, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'AbsoluteAmount')))
     
     #-----< TotalDiscountValue >-----#
-    TotalDiscountValue = INT(name=u'TotalDiscountValue', mode=MODE_TYPE, tag=(225, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'AbsoluteAmount')))
+    TotalDiscountValue = INT(name='TotalDiscountValue', mode=MODE_TYPE, tag=(225, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'AbsoluteAmount')))
     
     #-----< TotalTaxRefund >-----#
-    TotalTaxRefund = INT(name=u'TotalTaxRefund', mode=MODE_TYPE, tag=(353, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'AbsoluteAmount')))
+    TotalTaxRefund = INT(name='TotalTaxRefund', mode=MODE_TYPE, tag=(353, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'AbsoluteAmount')))
     
     #-----< TotalTaxValue >-----#
-    TotalTaxValue = INT(name=u'TotalTaxValue', mode=MODE_TYPE, tag=(226, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'AbsoluteAmount')))
+    TotalTaxValue = INT(name='TotalTaxValue', mode=MODE_TYPE, tag=(226, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'AbsoluteAmount')))
     
     #-----< TotalTransactionDuration >-----#
-    TotalTransactionDuration = INT(name=u'TotalTransactionDuration', mode=MODE_TYPE, tag=(416, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'TotalCallEventDuration')))
+    TotalTransactionDuration = INT(name='TotalTransactionDuration', mode=MODE_TYPE, tag=(416, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'TotalCallEventDuration')))
     
     #-----< TrackedCustomerEquipment >-----#
-    TrackedCustomerEquipment = SEQ(name=u'TrackedCustomerEquipment', mode=MODE_TYPE, tag=(381, TAG_APPLICATION, TAG_IMPLICIT))
-    _TrackedCustomerEquipment_equipmentIdType = INT(name=u'equipmentIdType', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'EquipmentIdType')), opt=True)
-    _TrackedCustomerEquipment_equipmentId = OCT_STR(name=u'equipmentId', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'EquipmentId')), opt=True)
+    TrackedCustomerEquipment = SEQ(name='TrackedCustomerEquipment', mode=MODE_TYPE, tag=(381, TAG_APPLICATION, TAG_IMPLICIT))
+    _TrackedCustomerEquipment_equipmentIdType = INT(name='equipmentIdType', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'EquipmentIdType')), opt=True)
+    _TrackedCustomerEquipment_equipmentId = OCT_STR(name='equipmentId', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'EquipmentId')), opt=True)
     TrackedCustomerEquipment._cont = ASN1Dict([
-        (u'equipmentIdType', _TrackedCustomerEquipment_equipmentIdType),
-        (u'equipmentId', _TrackedCustomerEquipment_equipmentId),
+        ('equipmentIdType', _TrackedCustomerEquipment_equipmentIdType),
+        ('equipmentId', _TrackedCustomerEquipment_equipmentId),
         ])
     TrackedCustomerEquipment._ext = []
     
     #-----< TrackedCustomerHomeId >-----#
-    TrackedCustomerHomeId = SEQ(name=u'TrackedCustomerHomeId', mode=MODE_TYPE, tag=(377, TAG_APPLICATION, TAG_IMPLICIT))
-    _TrackedCustomerHomeId_homeIdType = INT(name=u'homeIdType', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'HomeIdType')), opt=True)
-    _TrackedCustomerHomeId_homeIdentifier = OCT_STR(name=u'homeIdentifier', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'HomeIdentifier')), opt=True)
+    TrackedCustomerHomeId = SEQ(name='TrackedCustomerHomeId', mode=MODE_TYPE, tag=(377, TAG_APPLICATION, TAG_IMPLICIT))
+    _TrackedCustomerHomeId_homeIdType = INT(name='homeIdType', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'HomeIdType')), opt=True)
+    _TrackedCustomerHomeId_homeIdentifier = OCT_STR(name='homeIdentifier', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'HomeIdentifier')), opt=True)
     TrackedCustomerHomeId._cont = ASN1Dict([
-        (u'homeIdType', _TrackedCustomerHomeId_homeIdType),
-        (u'homeIdentifier', _TrackedCustomerHomeId_homeIdentifier),
+        ('homeIdType', _TrackedCustomerHomeId_homeIdType),
+        ('homeIdentifier', _TrackedCustomerHomeId_homeIdentifier),
         ])
     TrackedCustomerHomeId._ext = []
     
     #-----< TrackedCustomerHomeIdList >-----#
-    TrackedCustomerHomeIdList = SEQ_OF(name=u'TrackedCustomerHomeIdList', mode=MODE_TYPE, tag=(376, TAG_APPLICATION, TAG_IMPLICIT))
+    TrackedCustomerHomeIdList = SEQ_OF(name='TrackedCustomerHomeIdList', mode=MODE_TYPE, tag=(376, TAG_APPLICATION, TAG_IMPLICIT))
     _TrackedCustomerHomeIdList__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'TrackedCustomerHomeId')))
     TrackedCustomerHomeIdList._cont = _TrackedCustomerHomeIdList__item_
     
     #-----< TrackedCustomerIdentification >-----#
-    TrackedCustomerIdentification = SEQ(name=u'TrackedCustomerIdentification', mode=MODE_TYPE, tag=(372, TAG_APPLICATION, TAG_IMPLICIT))
-    _TrackedCustomerIdentification_customerIdType = INT(name=u'customerIdType', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'CustomerIdType')), opt=True)
-    _TrackedCustomerIdentification_customerIdentifier = OCT_STR(name=u'customerIdentifier', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'CustomerIdentifier')), opt=True)
+    TrackedCustomerIdentification = SEQ(name='TrackedCustomerIdentification', mode=MODE_TYPE, tag=(372, TAG_APPLICATION, TAG_IMPLICIT))
+    _TrackedCustomerIdentification_customerIdType = INT(name='customerIdType', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'CustomerIdType')), opt=True)
+    _TrackedCustomerIdentification_customerIdentifier = OCT_STR(name='customerIdentifier', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'CustomerIdentifier')), opt=True)
     TrackedCustomerIdentification._cont = ASN1Dict([
-        (u'customerIdType', _TrackedCustomerIdentification_customerIdType),
-        (u'customerIdentifier', _TrackedCustomerIdentification_customerIdentifier),
+        ('customerIdType', _TrackedCustomerIdentification_customerIdType),
+        ('customerIdentifier', _TrackedCustomerIdentification_customerIdentifier),
         ])
     TrackedCustomerIdentification._ext = []
     
     #-----< TrackedCustomerIdList >-----#
-    TrackedCustomerIdList = SEQ_OF(name=u'TrackedCustomerIdList', mode=MODE_TYPE, tag=(370, TAG_APPLICATION, TAG_IMPLICIT))
+    TrackedCustomerIdList = SEQ_OF(name='TrackedCustomerIdList', mode=MODE_TYPE, tag=(370, TAG_APPLICATION, TAG_IMPLICIT))
     _TrackedCustomerIdList__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'TrackedCustomerIdentification')))
     TrackedCustomerIdList._cont = _TrackedCustomerIdList__item_
     
     #-----< TrackedCustomerInformation >-----#
-    TrackedCustomerInformation = SEQ(name=u'TrackedCustomerInformation', mode=MODE_TYPE, tag=(367, TAG_APPLICATION, TAG_IMPLICIT))
-    _TrackedCustomerInformation_trackedCustomerIdList = SEQ_OF(name=u'trackedCustomerIdList', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'TrackedCustomerIdList')), opt=True)
-    _TrackedCustomerInformation_trackedCustomerHomeIdList = SEQ_OF(name=u'trackedCustomerHomeIdList', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'TrackedCustomerHomeIdList')), opt=True)
-    _TrackedCustomerInformation_trackedCustomerLocList = SEQ_OF(name=u'trackedCustomerLocList', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'TrackedCustomerLocList')), opt=True)
-    _TrackedCustomerInformation_trackedCustomerEquipment = SEQ(name=u'trackedCustomerEquipment', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'TrackedCustomerEquipment')), opt=True)
+    TrackedCustomerInformation = SEQ(name='TrackedCustomerInformation', mode=MODE_TYPE, tag=(367, TAG_APPLICATION, TAG_IMPLICIT))
+    _TrackedCustomerInformation_trackedCustomerIdList = SEQ_OF(name='trackedCustomerIdList', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'TrackedCustomerIdList')), opt=True)
+    _TrackedCustomerInformation_trackedCustomerHomeIdList = SEQ_OF(name='trackedCustomerHomeIdList', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'TrackedCustomerHomeIdList')), opt=True)
+    _TrackedCustomerInformation_trackedCustomerLocList = SEQ_OF(name='trackedCustomerLocList', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'TrackedCustomerLocList')), opt=True)
+    _TrackedCustomerInformation_trackedCustomerEquipment = SEQ(name='trackedCustomerEquipment', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'TrackedCustomerEquipment')), opt=True)
     TrackedCustomerInformation._cont = ASN1Dict([
-        (u'trackedCustomerIdList', _TrackedCustomerInformation_trackedCustomerIdList),
-        (u'trackedCustomerHomeIdList', _TrackedCustomerInformation_trackedCustomerHomeIdList),
-        (u'trackedCustomerLocList', _TrackedCustomerInformation_trackedCustomerLocList),
-        (u'trackedCustomerEquipment', _TrackedCustomerInformation_trackedCustomerEquipment),
+        ('trackedCustomerIdList', _TrackedCustomerInformation_trackedCustomerIdList),
+        ('trackedCustomerHomeIdList', _TrackedCustomerInformation_trackedCustomerHomeIdList),
+        ('trackedCustomerLocList', _TrackedCustomerInformation_trackedCustomerLocList),
+        ('trackedCustomerEquipment', _TrackedCustomerInformation_trackedCustomerEquipment),
         ])
     TrackedCustomerInformation._ext = []
     
     #-----< TrackedCustomerLocation >-----#
-    TrackedCustomerLocation = SEQ(name=u'TrackedCustomerLocation', mode=MODE_TYPE, tag=(380, TAG_APPLICATION, TAG_IMPLICIT))
-    _TrackedCustomerLocation_locationIdType = INT(name=u'locationIdType', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'LocationIdType')), opt=True)
-    _TrackedCustomerLocation_locationIdentifier = OCT_STR(name=u'locationIdentifier', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'LocationIdentifier')), opt=True)
+    TrackedCustomerLocation = SEQ(name='TrackedCustomerLocation', mode=MODE_TYPE, tag=(380, TAG_APPLICATION, TAG_IMPLICIT))
+    _TrackedCustomerLocation_locationIdType = INT(name='locationIdType', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'LocationIdType')), opt=True)
+    _TrackedCustomerLocation_locationIdentifier = OCT_STR(name='locationIdentifier', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'LocationIdentifier')), opt=True)
     TrackedCustomerLocation._cont = ASN1Dict([
-        (u'locationIdType', _TrackedCustomerLocation_locationIdType),
-        (u'locationIdentifier', _TrackedCustomerLocation_locationIdentifier),
+        ('locationIdType', _TrackedCustomerLocation_locationIdType),
+        ('locationIdentifier', _TrackedCustomerLocation_locationIdentifier),
         ])
     TrackedCustomerLocation._ext = []
     
     #-----< TrackedCustomerLocList >-----#
-    TrackedCustomerLocList = SEQ_OF(name=u'TrackedCustomerLocList', mode=MODE_TYPE, tag=(379, TAG_APPLICATION, TAG_IMPLICIT))
+    TrackedCustomerLocList = SEQ_OF(name='TrackedCustomerLocList', mode=MODE_TYPE, tag=(379, TAG_APPLICATION, TAG_IMPLICIT))
     _TrackedCustomerLocList__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'TrackedCustomerLocation')))
     TrackedCustomerLocList._cont = _TrackedCustomerLocList__item_
     
     #-----< TrackingCustomerEquipment >-----#
-    TrackingCustomerEquipment = SEQ(name=u'TrackingCustomerEquipment', mode=MODE_TYPE, tag=(371, TAG_APPLICATION, TAG_IMPLICIT))
-    _TrackingCustomerEquipment_equipmentIdType = INT(name=u'equipmentIdType', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'EquipmentIdType')), opt=True)
-    _TrackingCustomerEquipment_equipmentId = OCT_STR(name=u'equipmentId', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'EquipmentId')), opt=True)
+    TrackingCustomerEquipment = SEQ(name='TrackingCustomerEquipment', mode=MODE_TYPE, tag=(371, TAG_APPLICATION, TAG_IMPLICIT))
+    _TrackingCustomerEquipment_equipmentIdType = INT(name='equipmentIdType', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'EquipmentIdType')), opt=True)
+    _TrackingCustomerEquipment_equipmentId = OCT_STR(name='equipmentId', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'EquipmentId')), opt=True)
     TrackingCustomerEquipment._cont = ASN1Dict([
-        (u'equipmentIdType', _TrackingCustomerEquipment_equipmentIdType),
-        (u'equipmentId', _TrackingCustomerEquipment_equipmentId),
+        ('equipmentIdType', _TrackingCustomerEquipment_equipmentIdType),
+        ('equipmentId', _TrackingCustomerEquipment_equipmentId),
         ])
     TrackingCustomerEquipment._ext = []
     
     #-----< TrackingCustomerHomeId >-----#
-    TrackingCustomerHomeId = SEQ(name=u'TrackingCustomerHomeId', mode=MODE_TYPE, tag=(366, TAG_APPLICATION, TAG_IMPLICIT))
-    _TrackingCustomerHomeId_homeIdType = INT(name=u'homeIdType', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'HomeIdType')), opt=True)
-    _TrackingCustomerHomeId_homeIdentifier = OCT_STR(name=u'homeIdentifier', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'HomeIdentifier')), opt=True)
+    TrackingCustomerHomeId = SEQ(name='TrackingCustomerHomeId', mode=MODE_TYPE, tag=(366, TAG_APPLICATION, TAG_IMPLICIT))
+    _TrackingCustomerHomeId_homeIdType = INT(name='homeIdType', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'HomeIdType')), opt=True)
+    _TrackingCustomerHomeId_homeIdentifier = OCT_STR(name='homeIdentifier', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'HomeIdentifier')), opt=True)
     TrackingCustomerHomeId._cont = ASN1Dict([
-        (u'homeIdType', _TrackingCustomerHomeId_homeIdType),
-        (u'homeIdentifier', _TrackingCustomerHomeId_homeIdentifier),
+        ('homeIdType', _TrackingCustomerHomeId_homeIdType),
+        ('homeIdentifier', _TrackingCustomerHomeId_homeIdentifier),
         ])
     TrackingCustomerHomeId._ext = []
     
     #-----< TrackingCustomerHomeIdList >-----#
-    TrackingCustomerHomeIdList = SEQ_OF(name=u'TrackingCustomerHomeIdList', mode=MODE_TYPE, tag=(365, TAG_APPLICATION, TAG_IMPLICIT))
+    TrackingCustomerHomeIdList = SEQ_OF(name='TrackingCustomerHomeIdList', mode=MODE_TYPE, tag=(365, TAG_APPLICATION, TAG_IMPLICIT))
     _TrackingCustomerHomeIdList__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'TrackingCustomerHomeId')))
     TrackingCustomerHomeIdList._cont = _TrackingCustomerHomeIdList__item_
     
     #-----< TrackingCustomerIdentification >-----#
-    TrackingCustomerIdentification = SEQ(name=u'TrackingCustomerIdentification', mode=MODE_TYPE, tag=(362, TAG_APPLICATION, TAG_IMPLICIT))
-    _TrackingCustomerIdentification_customerIdType = INT(name=u'customerIdType', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'CustomerIdType')), opt=True)
-    _TrackingCustomerIdentification_customerIdentifier = OCT_STR(name=u'customerIdentifier', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'CustomerIdentifier')), opt=True)
+    TrackingCustomerIdentification = SEQ(name='TrackingCustomerIdentification', mode=MODE_TYPE, tag=(362, TAG_APPLICATION, TAG_IMPLICIT))
+    _TrackingCustomerIdentification_customerIdType = INT(name='customerIdType', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'CustomerIdType')), opt=True)
+    _TrackingCustomerIdentification_customerIdentifier = OCT_STR(name='customerIdentifier', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'CustomerIdentifier')), opt=True)
     TrackingCustomerIdentification._cont = ASN1Dict([
-        (u'customerIdType', _TrackingCustomerIdentification_customerIdType),
-        (u'customerIdentifier', _TrackingCustomerIdentification_customerIdentifier),
+        ('customerIdType', _TrackingCustomerIdentification_customerIdType),
+        ('customerIdentifier', _TrackingCustomerIdentification_customerIdentifier),
         ])
     TrackingCustomerIdentification._ext = []
     
     #-----< TrackingCustomerIdList >-----#
-    TrackingCustomerIdList = SEQ_OF(name=u'TrackingCustomerIdList', mode=MODE_TYPE, tag=(299, TAG_APPLICATION, TAG_IMPLICIT))
+    TrackingCustomerIdList = SEQ_OF(name='TrackingCustomerIdList', mode=MODE_TYPE, tag=(299, TAG_APPLICATION, TAG_IMPLICIT))
     _TrackingCustomerIdList__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'TrackingCustomerIdentification')))
     TrackingCustomerIdList._cont = _TrackingCustomerIdList__item_
     
     #-----< TrackingCustomerInformation >-----#
-    TrackingCustomerInformation = SEQ(name=u'TrackingCustomerInformation', mode=MODE_TYPE, tag=(298, TAG_APPLICATION, TAG_IMPLICIT))
-    _TrackingCustomerInformation_trackingCustomerIdList = SEQ_OF(name=u'trackingCustomerIdList', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'TrackingCustomerIdList')), opt=True)
-    _TrackingCustomerInformation_trackingCustomerHomeIdList = SEQ_OF(name=u'trackingCustomerHomeIdList', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'TrackingCustomerHomeIdList')), opt=True)
-    _TrackingCustomerInformation_trackingCustomerLocList = SEQ_OF(name=u'trackingCustomerLocList', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'TrackingCustomerLocList')), opt=True)
-    _TrackingCustomerInformation_trackingCustomerEquipment = SEQ(name=u'trackingCustomerEquipment', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'TrackingCustomerEquipment')), opt=True)
+    TrackingCustomerInformation = SEQ(name='TrackingCustomerInformation', mode=MODE_TYPE, tag=(298, TAG_APPLICATION, TAG_IMPLICIT))
+    _TrackingCustomerInformation_trackingCustomerIdList = SEQ_OF(name='trackingCustomerIdList', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'TrackingCustomerIdList')), opt=True)
+    _TrackingCustomerInformation_trackingCustomerHomeIdList = SEQ_OF(name='trackingCustomerHomeIdList', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'TrackingCustomerHomeIdList')), opt=True)
+    _TrackingCustomerInformation_trackingCustomerLocList = SEQ_OF(name='trackingCustomerLocList', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'TrackingCustomerLocList')), opt=True)
+    _TrackingCustomerInformation_trackingCustomerEquipment = SEQ(name='trackingCustomerEquipment', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'TrackingCustomerEquipment')), opt=True)
     TrackingCustomerInformation._cont = ASN1Dict([
-        (u'trackingCustomerIdList', _TrackingCustomerInformation_trackingCustomerIdList),
-        (u'trackingCustomerHomeIdList', _TrackingCustomerInformation_trackingCustomerHomeIdList),
-        (u'trackingCustomerLocList', _TrackingCustomerInformation_trackingCustomerLocList),
-        (u'trackingCustomerEquipment', _TrackingCustomerInformation_trackingCustomerEquipment),
+        ('trackingCustomerIdList', _TrackingCustomerInformation_trackingCustomerIdList),
+        ('trackingCustomerHomeIdList', _TrackingCustomerInformation_trackingCustomerHomeIdList),
+        ('trackingCustomerLocList', _TrackingCustomerInformation_trackingCustomerLocList),
+        ('trackingCustomerEquipment', _TrackingCustomerInformation_trackingCustomerEquipment),
         ])
     TrackingCustomerInformation._ext = []
     
     #-----< TrackingCustomerLocation >-----#
-    TrackingCustomerLocation = SEQ(name=u'TrackingCustomerLocation', mode=MODE_TYPE, tag=(369, TAG_APPLICATION, TAG_IMPLICIT))
-    _TrackingCustomerLocation_locationIdType = INT(name=u'locationIdType', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'LocationIdType')), opt=True)
-    _TrackingCustomerLocation_locationIdentifier = OCT_STR(name=u'locationIdentifier', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'LocationIdentifier')), opt=True)
+    TrackingCustomerLocation = SEQ(name='TrackingCustomerLocation', mode=MODE_TYPE, tag=(369, TAG_APPLICATION, TAG_IMPLICIT))
+    _TrackingCustomerLocation_locationIdType = INT(name='locationIdType', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'LocationIdType')), opt=True)
+    _TrackingCustomerLocation_locationIdentifier = OCT_STR(name='locationIdentifier', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'LocationIdentifier')), opt=True)
     TrackingCustomerLocation._cont = ASN1Dict([
-        (u'locationIdType', _TrackingCustomerLocation_locationIdType),
-        (u'locationIdentifier', _TrackingCustomerLocation_locationIdentifier),
+        ('locationIdType', _TrackingCustomerLocation_locationIdType),
+        ('locationIdentifier', _TrackingCustomerLocation_locationIdentifier),
         ])
     TrackingCustomerLocation._ext = []
     
     #-----< TrackingCustomerLocList >-----#
-    TrackingCustomerLocList = SEQ_OF(name=u'TrackingCustomerLocList', mode=MODE_TYPE, tag=(368, TAG_APPLICATION, TAG_IMPLICIT))
+    TrackingCustomerLocList = SEQ_OF(name='TrackingCustomerLocList', mode=MODE_TYPE, tag=(368, TAG_APPLICATION, TAG_IMPLICIT))
     _TrackingCustomerLocList__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'TrackingCustomerLocation')))
     TrackingCustomerLocList._cont = _TrackingCustomerLocList__item_
     
     #-----< TrackingFrequency >-----#
-    TrackingFrequency = INT(name=u'TrackingFrequency', mode=MODE_TYPE, tag=(389, TAG_APPLICATION, TAG_IMPLICIT))
+    TrackingFrequency = INT(name='TrackingFrequency', mode=MODE_TYPE, tag=(389, TAG_APPLICATION, TAG_IMPLICIT))
     
     #-----< TrackingPeriod >-----#
-    TrackingPeriod = INT(name=u'TrackingPeriod', mode=MODE_TYPE, tag=(388, TAG_APPLICATION, TAG_IMPLICIT))
+    TrackingPeriod = INT(name='TrackingPeriod', mode=MODE_TYPE, tag=(388, TAG_APPLICATION, TAG_IMPLICIT))
     
     #-----< TransactionAuthCode >-----#
-    TransactionAuthCode = OCT_STR(name=u'TransactionAuthCode', mode=MODE_TYPE, tag=(342, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'AsciiString')))
+    TransactionAuthCode = OCT_STR(name='TransactionAuthCode', mode=MODE_TYPE, tag=(342, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'AsciiString')))
     
     #-----< TransactionDescriptionSupp >-----#
-    TransactionDescriptionSupp = INT(name=u'TransactionDescriptionSupp', mode=MODE_TYPE, tag=(338, TAG_APPLICATION, TAG_IMPLICIT))
+    TransactionDescriptionSupp = INT(name='TransactionDescriptionSupp', mode=MODE_TYPE, tag=(338, TAG_APPLICATION, TAG_IMPLICIT))
     
     #-----< TransactionDetailDescription >-----#
-    TransactionDetailDescription = OCT_STR(name=u'TransactionDetailDescription', mode=MODE_TYPE, tag=(339, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'AsciiString')))
+    TransactionDetailDescription = OCT_STR(name='TransactionDetailDescription', mode=MODE_TYPE, tag=(339, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'AsciiString')))
     
     #-----< TransactionIdentifier >-----#
-    TransactionIdentifier = OCT_STR(name=u'TransactionIdentifier', mode=MODE_TYPE, tag=(341, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'AsciiString')))
+    TransactionIdentifier = OCT_STR(name='TransactionIdentifier', mode=MODE_TYPE, tag=(341, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'AsciiString')))
     
     #-----< TransactionShortDescription >-----#
-    TransactionShortDescription = OCT_STR(name=u'TransactionShortDescription', mode=MODE_TYPE, tag=(340, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'AsciiString')))
+    TransactionShortDescription = OCT_STR(name='TransactionShortDescription', mode=MODE_TYPE, tag=(340, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'AsciiString')))
     
     #-----< TransactionStatus >-----#
-    TransactionStatus = INT(name=u'TransactionStatus', mode=MODE_TYPE, tag=(303, TAG_APPLICATION, TAG_IMPLICIT))
+    TransactionStatus = INT(name='TransactionStatus', mode=MODE_TYPE, tag=(303, TAG_APPLICATION, TAG_IMPLICIT))
     
     #-----< TransferCutOffTimeStamp >-----#
-    TransferCutOffTimeStamp = SEQ(name=u'TransferCutOffTimeStamp', mode=MODE_TYPE, tag=(227, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'DateTimeLong')))
+    TransferCutOffTimeStamp = SEQ(name='TransferCutOffTimeStamp', mode=MODE_TYPE, tag=(227, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'DateTimeLong')))
     
     #-----< TransparencyIndicator >-----#
-    TransparencyIndicator = INT(name=u'TransparencyIndicator', mode=MODE_TYPE, tag=(228, TAG_APPLICATION, TAG_IMPLICIT))
+    TransparencyIndicator = INT(name='TransparencyIndicator', mode=MODE_TYPE, tag=(228, TAG_APPLICATION, TAG_IMPLICIT))
     
     #-----< UserProtocolIndicator >-----#
-    UserProtocolIndicator = INT(name=u'UserProtocolIndicator', mode=MODE_TYPE, tag=(280, TAG_APPLICATION, TAG_IMPLICIT))
+    UserProtocolIndicator = INT(name='UserProtocolIndicator', mode=MODE_TYPE, tag=(280, TAG_APPLICATION, TAG_IMPLICIT))
     
     #-----< UtcTimeOffset >-----#
-    UtcTimeOffset = OCT_STR(name=u'UtcTimeOffset', mode=MODE_TYPE, tag=(231, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'AsciiString')))
+    UtcTimeOffset = OCT_STR(name='UtcTimeOffset', mode=MODE_TYPE, tag=(231, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'AsciiString')))
     UtcTimeOffset._const_sz = ASN1Set(rv=[5], rr=[], ev=None, er=[])
     
     #-----< UtcTimeOffsetCode >-----#
-    UtcTimeOffsetCode = INT(name=u'UtcTimeOffsetCode', mode=MODE_TYPE, tag=(232, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'Code')))
+    UtcTimeOffsetCode = INT(name='UtcTimeOffsetCode', mode=MODE_TYPE, tag=(232, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'Code')))
     
     #-----< UtcTimeOffsetInfo >-----#
-    UtcTimeOffsetInfo = SEQ(name=u'UtcTimeOffsetInfo', mode=MODE_TYPE, tag=(233, TAG_APPLICATION, TAG_IMPLICIT))
-    _UtcTimeOffsetInfo_utcTimeOffsetCode = INT(name=u'utcTimeOffsetCode', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'UtcTimeOffsetCode')), opt=True)
-    _UtcTimeOffsetInfo_utcTimeOffset = OCT_STR(name=u'utcTimeOffset', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'UtcTimeOffset')), opt=True)
+    UtcTimeOffsetInfo = SEQ(name='UtcTimeOffsetInfo', mode=MODE_TYPE, tag=(233, TAG_APPLICATION, TAG_IMPLICIT))
+    _UtcTimeOffsetInfo_utcTimeOffsetCode = INT(name='utcTimeOffsetCode', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'UtcTimeOffsetCode')), opt=True)
+    _UtcTimeOffsetInfo_utcTimeOffset = OCT_STR(name='utcTimeOffset', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'UtcTimeOffset')), opt=True)
     UtcTimeOffsetInfo._cont = ASN1Dict([
-        (u'utcTimeOffsetCode', _UtcTimeOffsetInfo_utcTimeOffsetCode),
-        (u'utcTimeOffset', _UtcTimeOffsetInfo_utcTimeOffset),
+        ('utcTimeOffsetCode', _UtcTimeOffsetInfo_utcTimeOffsetCode),
+        ('utcTimeOffset', _UtcTimeOffsetInfo_utcTimeOffset),
         ])
     UtcTimeOffsetInfo._ext = []
     
     #-----< UtcTimeOffsetInfoList >-----#
-    UtcTimeOffsetInfoList = SEQ_OF(name=u'UtcTimeOffsetInfoList', mode=MODE_TYPE, tag=(234, TAG_APPLICATION, TAG_IMPLICIT))
+    UtcTimeOffsetInfoList = SEQ_OF(name='UtcTimeOffsetInfoList', mode=MODE_TYPE, tag=(234, TAG_APPLICATION, TAG_IMPLICIT))
     _UtcTimeOffsetInfoList__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'UtcTimeOffsetInfo')))
     UtcTimeOffsetInfoList._cont = _UtcTimeOffsetInfoList__item_
     
     #-----< VerticalAccuracyDelivered >-----#
-    VerticalAccuracyDelivered = INT(name=u'VerticalAccuracyDelivered', mode=MODE_TYPE, tag=(393, TAG_APPLICATION, TAG_IMPLICIT))
+    VerticalAccuracyDelivered = INT(name='VerticalAccuracyDelivered', mode=MODE_TYPE, tag=(393, TAG_APPLICATION, TAG_IMPLICIT))
     
     #-----< VerticalAccuracyRequested >-----#
-    VerticalAccuracyRequested = INT(name=u'VerticalAccuracyRequested', mode=MODE_TYPE, tag=(386, TAG_APPLICATION, TAG_IMPLICIT))
+    VerticalAccuracyRequested = INT(name='VerticalAccuracyRequested', mode=MODE_TYPE, tag=(386, TAG_APPLICATION, TAG_IMPLICIT))
     
     #-----< AbsoluteAmount >-----#
-    AbsoluteAmount = INT(name=u'AbsoluteAmount', mode=MODE_TYPE)
+    AbsoluteAmount = INT(name='AbsoluteAmount', mode=MODE_TYPE)
     
     #-----< Bid >-----#
-    Bid = OCT_STR(name=u'Bid', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'AsciiString')))
+    Bid = OCT_STR(name='Bid', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'AsciiString')))
     Bid._const_sz = ASN1Set(rv=[5], rr=[], ev=None, er=[])
     
     #-----< Code >-----#
-    Code = INT(name=u'Code', mode=MODE_TYPE)
+    Code = INT(name='Code', mode=MODE_TYPE)
     
     #-----< AsciiString >-----#
-    AsciiString = OCT_STR(name=u'AsciiString', mode=MODE_TYPE)
+    AsciiString = OCT_STR(name='AsciiString', mode=MODE_TYPE)
     
     #-----< BCDString >-----#
-    BCDString = OCT_STR(name=u'BCDString', mode=MODE_TYPE)
+    BCDString = OCT_STR(name='BCDString', mode=MODE_TYPE)
     
     #-----< Currency >-----#
-    Currency = OCT_STR(name=u'Currency', mode=MODE_TYPE)
+    Currency = OCT_STR(name='Currency', mode=MODE_TYPE)
     
     #-----< HexString >-----#
-    HexString = OCT_STR(name=u'HexString', mode=MODE_TYPE)
+    HexString = OCT_STR(name='HexString', mode=MODE_TYPE)
     
     #-----< NumberString >-----#
-    NumberString = OCT_STR(name=u'NumberString', mode=MODE_TYPE)
+    NumberString = OCT_STR(name='NumberString', mode=MODE_TYPE)
     
     #-----< PercentageRate >-----#
-    PercentageRate = INT(name=u'PercentageRate', mode=MODE_TYPE)
+    PercentageRate = INT(name='PercentageRate', mode=MODE_TYPE)
     
     _all_ = [
         _DataInterChange_transferBatch,
@@ -3662,98 +3662,98 @@ class TAP_0312:
 
 class RAP_0105:
 
-    _name_  = u'RAP-0105'
+    _name_  = 'RAP-0105'
     _oid_   = []
     
     _obj_ = [
-        u'RapDataInterChange',
-        u'ReturnBatch',
-        u'Acknowledgement',
-        u'ReturnDetailList',
-        u'ReturnDetail',
-        u'RapBatchControlInfo',
-        u'StopReturn',
-        u'MissingReturn',
-        u'FatalReturn',
-        u'SevereReturn',
-        u'RapAuditControlInfo',
-        u'AccountingInfoError',
-        u'AuditControlInfoError',
-        u'AckFileAvailableTimeStamp',
-        u'AckFileCreationTimeStamp',
-        u'BatchControlError',
-        u'EndMissingSeqNumber',
-        u'ErrorCode',
-        u'ErrorContext',
-        u'ErrorContextList',
-        u'ErrorDetail',
-        u'ErrorDetailList',
-        u'ItemLevel',
-        u'ItemOccurrence',
-        u'ItemOffset',
-        u'LastSeqNumber',
-        u'MessageDescriptionError',
-        u'MessageDescriptionInfoList',
-        u'MessageDescriptionInformationDefinition',
-        u'NetworkInfoError',
-        u'NotificationError',
-        u'OperatorSpecList',
-        u'PathItemId',
-        u'RapFileAvailableTimeStamp',
-        u'RapFileCreationTimeStamp',
-        u'RapReleaseVersionNumber',
-        u'RapSpecificationVersionNumber',
-        u'ReturnDetailsCount',
-        u'RoamingPartner',
-        u'StartMissingSeqNumber',
-        u'TotalSevereReturnTax',
-        u'TotalSevereReturnValue',
-        u'TransferBatchError',
+        'RapDataInterChange',
+        'ReturnBatch',
+        'Acknowledgement',
+        'ReturnDetailList',
+        'ReturnDetail',
+        'RapBatchControlInfo',
+        'StopReturn',
+        'MissingReturn',
+        'FatalReturn',
+        'SevereReturn',
+        'RapAuditControlInfo',
+        'AccountingInfoError',
+        'AuditControlInfoError',
+        'AckFileAvailableTimeStamp',
+        'AckFileCreationTimeStamp',
+        'BatchControlError',
+        'EndMissingSeqNumber',
+        'ErrorCode',
+        'ErrorContext',
+        'ErrorContextList',
+        'ErrorDetail',
+        'ErrorDetailList',
+        'ItemLevel',
+        'ItemOccurrence',
+        'ItemOffset',
+        'LastSeqNumber',
+        'MessageDescriptionError',
+        'MessageDescriptionInfoList',
+        'MessageDescriptionInformationDefinition',
+        'NetworkInfoError',
+        'NotificationError',
+        'OperatorSpecList',
+        'PathItemId',
+        'RapFileAvailableTimeStamp',
+        'RapFileCreationTimeStamp',
+        'RapReleaseVersionNumber',
+        'RapSpecificationVersionNumber',
+        'ReturnDetailsCount',
+        'RoamingPartner',
+        'StartMissingSeqNumber',
+        'TotalSevereReturnTax',
+        'TotalSevereReturnValue',
+        'TransferBatchError',
         ]
     _type_ = [
-        u'RapDataInterChange',
-        u'ReturnBatch',
-        u'Acknowledgement',
-        u'ReturnDetailList',
-        u'ReturnDetail',
-        u'RapBatchControlInfo',
-        u'StopReturn',
-        u'MissingReturn',
-        u'FatalReturn',
-        u'SevereReturn',
-        u'RapAuditControlInfo',
-        u'AccountingInfoError',
-        u'AuditControlInfoError',
-        u'AckFileAvailableTimeStamp',
-        u'AckFileCreationTimeStamp',
-        u'BatchControlError',
-        u'EndMissingSeqNumber',
-        u'ErrorCode',
-        u'ErrorContext',
-        u'ErrorContextList',
-        u'ErrorDetail',
-        u'ErrorDetailList',
-        u'ItemLevel',
-        u'ItemOccurrence',
-        u'ItemOffset',
-        u'LastSeqNumber',
-        u'MessageDescriptionError',
-        u'MessageDescriptionInfoList',
-        u'MessageDescriptionInformationDefinition',
-        u'NetworkInfoError',
-        u'NotificationError',
-        u'OperatorSpecList',
-        u'PathItemId',
-        u'RapFileAvailableTimeStamp',
-        u'RapFileCreationTimeStamp',
-        u'RapReleaseVersionNumber',
-        u'RapSpecificationVersionNumber',
-        u'ReturnDetailsCount',
-        u'RoamingPartner',
-        u'StartMissingSeqNumber',
-        u'TotalSevereReturnTax',
-        u'TotalSevereReturnValue',
-        u'TransferBatchError',
+        'RapDataInterChange',
+        'ReturnBatch',
+        'Acknowledgement',
+        'ReturnDetailList',
+        'ReturnDetail',
+        'RapBatchControlInfo',
+        'StopReturn',
+        'MissingReturn',
+        'FatalReturn',
+        'SevereReturn',
+        'RapAuditControlInfo',
+        'AccountingInfoError',
+        'AuditControlInfoError',
+        'AckFileAvailableTimeStamp',
+        'AckFileCreationTimeStamp',
+        'BatchControlError',
+        'EndMissingSeqNumber',
+        'ErrorCode',
+        'ErrorContext',
+        'ErrorContextList',
+        'ErrorDetail',
+        'ErrorDetailList',
+        'ItemLevel',
+        'ItemOccurrence',
+        'ItemOffset',
+        'LastSeqNumber',
+        'MessageDescriptionError',
+        'MessageDescriptionInfoList',
+        'MessageDescriptionInformationDefinition',
+        'NetworkInfoError',
+        'NotificationError',
+        'OperatorSpecList',
+        'PathItemId',
+        'RapFileAvailableTimeStamp',
+        'RapFileCreationTimeStamp',
+        'RapReleaseVersionNumber',
+        'RapSpecificationVersionNumber',
+        'ReturnDetailsCount',
+        'RoamingPartner',
+        'StartMissingSeqNumber',
+        'TotalSevereReturnTax',
+        'TotalSevereReturnValue',
+        'TransferBatchError',
         ]
     _set_ = [
         ]
@@ -3765,347 +3765,347 @@ class RAP_0105:
         ]
     
     #-----< RapDataInterChange >-----#
-    RapDataInterChange = CHOICE(name=u'RapDataInterChange', mode=MODE_TYPE)
-    _RapDataInterChange_returnBatch = SEQ(name=u'returnBatch', mode=MODE_TYPE, typeref=ASN1RefType(('RAP-0105', 'ReturnBatch')))
-    _RapDataInterChange_acknowledgement = SEQ(name=u'acknowledgement', mode=MODE_TYPE, typeref=ASN1RefType(('RAP-0105', 'Acknowledgement')))
+    RapDataInterChange = CHOICE(name='RapDataInterChange', mode=MODE_TYPE)
+    _RapDataInterChange_returnBatch = SEQ(name='returnBatch', mode=MODE_TYPE, typeref=ASN1RefType(('RAP-0105', 'ReturnBatch')))
+    _RapDataInterChange_acknowledgement = SEQ(name='acknowledgement', mode=MODE_TYPE, typeref=ASN1RefType(('RAP-0105', 'Acknowledgement')))
     RapDataInterChange._cont = ASN1Dict([
-        (u'returnBatch', _RapDataInterChange_returnBatch),
-        (u'acknowledgement', _RapDataInterChange_acknowledgement),
+        ('returnBatch', _RapDataInterChange_returnBatch),
+        ('acknowledgement', _RapDataInterChange_acknowledgement),
         ])
     RapDataInterChange._ext = []
     
     #-----< ReturnBatch >-----#
-    ReturnBatch = SEQ(name=u'ReturnBatch', mode=MODE_TYPE, tag=(534, TAG_APPLICATION, TAG_IMPLICIT))
-    _ReturnBatch_rapBatchControlInfoRap = SEQ(name=u'rapBatchControlInfoRap', mode=MODE_TYPE, typeref=ASN1RefType(('RAP-0105', 'RapBatchControlInfo')))
-    _ReturnBatch_returnDetails = SEQ_OF(name=u'returnDetails', mode=MODE_TYPE, typeref=ASN1RefType(('RAP-0105', 'ReturnDetailList')))
-    _ReturnBatch_rapAuditControlInfo = SEQ(name=u'rapAuditControlInfo', mode=MODE_TYPE, typeref=ASN1RefType(('RAP-0105', 'RapAuditControlInfo')))
+    ReturnBatch = SEQ(name='ReturnBatch', mode=MODE_TYPE, tag=(534, TAG_APPLICATION, TAG_IMPLICIT))
+    _ReturnBatch_rapBatchControlInfoRap = SEQ(name='rapBatchControlInfoRap', mode=MODE_TYPE, typeref=ASN1RefType(('RAP-0105', 'RapBatchControlInfo')))
+    _ReturnBatch_returnDetails = SEQ_OF(name='returnDetails', mode=MODE_TYPE, typeref=ASN1RefType(('RAP-0105', 'ReturnDetailList')))
+    _ReturnBatch_rapAuditControlInfo = SEQ(name='rapAuditControlInfo', mode=MODE_TYPE, typeref=ASN1RefType(('RAP-0105', 'RapAuditControlInfo')))
     ReturnBatch._cont = ASN1Dict([
-        (u'rapBatchControlInfoRap', _ReturnBatch_rapBatchControlInfoRap),
-        (u'returnDetails', _ReturnBatch_returnDetails),
-        (u'rapAuditControlInfo', _ReturnBatch_rapAuditControlInfo),
+        ('rapBatchControlInfoRap', _ReturnBatch_rapBatchControlInfoRap),
+        ('returnDetails', _ReturnBatch_returnDetails),
+        ('rapAuditControlInfo', _ReturnBatch_rapAuditControlInfo),
         ])
     ReturnBatch._ext = []
     
     #-----< Acknowledgement >-----#
-    Acknowledgement = SEQ(name=u'Acknowledgement', mode=MODE_TYPE, tag=(535, TAG_APPLICATION, TAG_IMPLICIT))
-    _Acknowledgement_sender = OCT_STR(name=u'sender', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'Sender')))
-    _Acknowledgement_recipient = OCT_STR(name=u'recipient', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'Recipient')))
-    _Acknowledgement_rapFileSequenceNumber = OCT_STR(name=u'rapFileSequenceNumber', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'RapFileSequenceNumber')))
-    _Acknowledgement_ackFileCreationTimeStamp = SEQ(name=u'ackFileCreationTimeStamp', mode=MODE_TYPE, typeref=ASN1RefType(('RAP-0105', 'AckFileCreationTimeStamp')))
-    _Acknowledgement_ackFileAvailableTimeStamp = SEQ(name=u'ackFileAvailableTimeStamp', mode=MODE_TYPE, typeref=ASN1RefType(('RAP-0105', 'AckFileAvailableTimeStamp')))
-    _Acknowledgement_fileTypeIndicator = OCT_STR(name=u'fileTypeIndicator', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'FileTypeIndicator')), opt=True)
-    _Acknowledgement_operatorSpecList = SEQ_OF(name=u'operatorSpecList', mode=MODE_TYPE, typeref=ASN1RefType(('RAP-0105', 'OperatorSpecList')), opt=True)
+    Acknowledgement = SEQ(name='Acknowledgement', mode=MODE_TYPE, tag=(535, TAG_APPLICATION, TAG_IMPLICIT))
+    _Acknowledgement_sender = OCT_STR(name='sender', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'Sender')))
+    _Acknowledgement_recipient = OCT_STR(name='recipient', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'Recipient')))
+    _Acknowledgement_rapFileSequenceNumber = OCT_STR(name='rapFileSequenceNumber', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'RapFileSequenceNumber')))
+    _Acknowledgement_ackFileCreationTimeStamp = SEQ(name='ackFileCreationTimeStamp', mode=MODE_TYPE, typeref=ASN1RefType(('RAP-0105', 'AckFileCreationTimeStamp')))
+    _Acknowledgement_ackFileAvailableTimeStamp = SEQ(name='ackFileAvailableTimeStamp', mode=MODE_TYPE, typeref=ASN1RefType(('RAP-0105', 'AckFileAvailableTimeStamp')))
+    _Acknowledgement_fileTypeIndicator = OCT_STR(name='fileTypeIndicator', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'FileTypeIndicator')), opt=True)
+    _Acknowledgement_operatorSpecList = SEQ_OF(name='operatorSpecList', mode=MODE_TYPE, typeref=ASN1RefType(('RAP-0105', 'OperatorSpecList')), opt=True)
     Acknowledgement._cont = ASN1Dict([
-        (u'sender', _Acknowledgement_sender),
-        (u'recipient', _Acknowledgement_recipient),
-        (u'rapFileSequenceNumber', _Acknowledgement_rapFileSequenceNumber),
-        (u'ackFileCreationTimeStamp', _Acknowledgement_ackFileCreationTimeStamp),
-        (u'ackFileAvailableTimeStamp', _Acknowledgement_ackFileAvailableTimeStamp),
-        (u'fileTypeIndicator', _Acknowledgement_fileTypeIndicator),
-        (u'operatorSpecList', _Acknowledgement_operatorSpecList),
+        ('sender', _Acknowledgement_sender),
+        ('recipient', _Acknowledgement_recipient),
+        ('rapFileSequenceNumber', _Acknowledgement_rapFileSequenceNumber),
+        ('ackFileCreationTimeStamp', _Acknowledgement_ackFileCreationTimeStamp),
+        ('ackFileAvailableTimeStamp', _Acknowledgement_ackFileAvailableTimeStamp),
+        ('fileTypeIndicator', _Acknowledgement_fileTypeIndicator),
+        ('operatorSpecList', _Acknowledgement_operatorSpecList),
         ])
     Acknowledgement._ext = []
     
     #-----< ReturnDetailList >-----#
-    ReturnDetailList = SEQ_OF(name=u'ReturnDetailList', mode=MODE_TYPE, tag=(536, TAG_APPLICATION, TAG_IMPLICIT))
+    ReturnDetailList = SEQ_OF(name='ReturnDetailList', mode=MODE_TYPE, tag=(536, TAG_APPLICATION, TAG_IMPLICIT))
     _ReturnDetailList__item_ = CHOICE(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('RAP-0105', 'ReturnDetail')))
     ReturnDetailList._cont = _ReturnDetailList__item_
     
     #-----< ReturnDetail >-----#
-    ReturnDetail = CHOICE(name=u'ReturnDetail', mode=MODE_TYPE)
-    _ReturnDetail_stopReturn = SEQ(name=u'stopReturn', mode=MODE_TYPE, typeref=ASN1RefType(('RAP-0105', 'StopReturn')))
-    _ReturnDetail_missingReturn = SEQ(name=u'missingReturn', mode=MODE_TYPE, typeref=ASN1RefType(('RAP-0105', 'MissingReturn')))
-    _ReturnDetail_fatalReturn = SEQ(name=u'fatalReturn', mode=MODE_TYPE, typeref=ASN1RefType(('RAP-0105', 'FatalReturn')))
-    _ReturnDetail_severeReturn = SEQ(name=u'severeReturn', mode=MODE_TYPE, typeref=ASN1RefType(('RAP-0105', 'SevereReturn')))
+    ReturnDetail = CHOICE(name='ReturnDetail', mode=MODE_TYPE)
+    _ReturnDetail_stopReturn = SEQ(name='stopReturn', mode=MODE_TYPE, typeref=ASN1RefType(('RAP-0105', 'StopReturn')))
+    _ReturnDetail_missingReturn = SEQ(name='missingReturn', mode=MODE_TYPE, typeref=ASN1RefType(('RAP-0105', 'MissingReturn')))
+    _ReturnDetail_fatalReturn = SEQ(name='fatalReturn', mode=MODE_TYPE, typeref=ASN1RefType(('RAP-0105', 'FatalReturn')))
+    _ReturnDetail_severeReturn = SEQ(name='severeReturn', mode=MODE_TYPE, typeref=ASN1RefType(('RAP-0105', 'SevereReturn')))
     ReturnDetail._cont = ASN1Dict([
-        (u'stopReturn', _ReturnDetail_stopReturn),
-        (u'missingReturn', _ReturnDetail_missingReturn),
-        (u'fatalReturn', _ReturnDetail_fatalReturn),
-        (u'severeReturn', _ReturnDetail_severeReturn),
+        ('stopReturn', _ReturnDetail_stopReturn),
+        ('missingReturn', _ReturnDetail_missingReturn),
+        ('fatalReturn', _ReturnDetail_fatalReturn),
+        ('severeReturn', _ReturnDetail_severeReturn),
         ])
     ReturnDetail._ext = []
     
     #-----< RapBatchControlInfo >-----#
-    RapBatchControlInfo = SEQ(name=u'RapBatchControlInfo', mode=MODE_TYPE, tag=(537, TAG_APPLICATION, TAG_IMPLICIT))
-    _RapBatchControlInfo_sender = OCT_STR(name=u'sender', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'Sender')))
-    _RapBatchControlInfo_recipient = OCT_STR(name=u'recipient', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'Recipient')))
-    _RapBatchControlInfo_rapFileSequenceNumber = OCT_STR(name=u'rapFileSequenceNumber', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'RapFileSequenceNumber')))
-    _RapBatchControlInfo_rapFileCreationTimeStamp = SEQ(name=u'rapFileCreationTimeStamp', mode=MODE_TYPE, typeref=ASN1RefType(('RAP-0105', 'RapFileCreationTimeStamp')))
-    _RapBatchControlInfo_rapFileAvailableTimeStamp = SEQ(name=u'rapFileAvailableTimeStamp', mode=MODE_TYPE, typeref=ASN1RefType(('RAP-0105', 'RapFileAvailableTimeStamp')))
-    _RapBatchControlInfo_specificationVersionNumber = INT(name=u'specificationVersionNumber', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'SpecificationVersionNumber')), opt=True)
-    _RapBatchControlInfo_releaseVersionNumber = INT(name=u'releaseVersionNumber', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'ReleaseVersionNumber')), opt=True)
-    _RapBatchControlInfo_rapSpecificationVersionNumber = INT(name=u'rapSpecificationVersionNumber', mode=MODE_TYPE, typeref=ASN1RefType(('RAP-0105', 'RapSpecificationVersionNumber')))
-    _RapBatchControlInfo_rapReleaseVersionNumber = INT(name=u'rapReleaseVersionNumber', mode=MODE_TYPE, typeref=ASN1RefType(('RAP-0105', 'RapReleaseVersionNumber')))
-    _RapBatchControlInfo_fileTypeIndicator = OCT_STR(name=u'fileTypeIndicator', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'FileTypeIndicator')), opt=True)
-    _RapBatchControlInfo_roamingPartner = OCT_STR(name=u'roamingPartner', mode=MODE_TYPE, typeref=ASN1RefType(('RAP-0105', 'RoamingPartner')), opt=True)
-    _RapBatchControlInfo_operatorSpecList = SEQ_OF(name=u'operatorSpecList', mode=MODE_TYPE, typeref=ASN1RefType(('RAP-0105', 'OperatorSpecList')), opt=True)
-    _RapBatchControlInfo_tapDecimalPlaces = INT(name=u'tapDecimalPlaces', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'TapDecimalPlaces')), opt=True)
-    _RapBatchControlInfo_tapCurrency = OCT_STR(name=u'tapCurrency', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'TapCurrency')), opt=True)
+    RapBatchControlInfo = SEQ(name='RapBatchControlInfo', mode=MODE_TYPE, tag=(537, TAG_APPLICATION, TAG_IMPLICIT))
+    _RapBatchControlInfo_sender = OCT_STR(name='sender', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'Sender')))
+    _RapBatchControlInfo_recipient = OCT_STR(name='recipient', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'Recipient')))
+    _RapBatchControlInfo_rapFileSequenceNumber = OCT_STR(name='rapFileSequenceNumber', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'RapFileSequenceNumber')))
+    _RapBatchControlInfo_rapFileCreationTimeStamp = SEQ(name='rapFileCreationTimeStamp', mode=MODE_TYPE, typeref=ASN1RefType(('RAP-0105', 'RapFileCreationTimeStamp')))
+    _RapBatchControlInfo_rapFileAvailableTimeStamp = SEQ(name='rapFileAvailableTimeStamp', mode=MODE_TYPE, typeref=ASN1RefType(('RAP-0105', 'RapFileAvailableTimeStamp')))
+    _RapBatchControlInfo_specificationVersionNumber = INT(name='specificationVersionNumber', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'SpecificationVersionNumber')), opt=True)
+    _RapBatchControlInfo_releaseVersionNumber = INT(name='releaseVersionNumber', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'ReleaseVersionNumber')), opt=True)
+    _RapBatchControlInfo_rapSpecificationVersionNumber = INT(name='rapSpecificationVersionNumber', mode=MODE_TYPE, typeref=ASN1RefType(('RAP-0105', 'RapSpecificationVersionNumber')))
+    _RapBatchControlInfo_rapReleaseVersionNumber = INT(name='rapReleaseVersionNumber', mode=MODE_TYPE, typeref=ASN1RefType(('RAP-0105', 'RapReleaseVersionNumber')))
+    _RapBatchControlInfo_fileTypeIndicator = OCT_STR(name='fileTypeIndicator', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'FileTypeIndicator')), opt=True)
+    _RapBatchControlInfo_roamingPartner = OCT_STR(name='roamingPartner', mode=MODE_TYPE, typeref=ASN1RefType(('RAP-0105', 'RoamingPartner')), opt=True)
+    _RapBatchControlInfo_operatorSpecList = SEQ_OF(name='operatorSpecList', mode=MODE_TYPE, typeref=ASN1RefType(('RAP-0105', 'OperatorSpecList')), opt=True)
+    _RapBatchControlInfo_tapDecimalPlaces = INT(name='tapDecimalPlaces', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'TapDecimalPlaces')), opt=True)
+    _RapBatchControlInfo_tapCurrency = OCT_STR(name='tapCurrency', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'TapCurrency')), opt=True)
     RapBatchControlInfo._cont = ASN1Dict([
-        (u'sender', _RapBatchControlInfo_sender),
-        (u'recipient', _RapBatchControlInfo_recipient),
-        (u'rapFileSequenceNumber', _RapBatchControlInfo_rapFileSequenceNumber),
-        (u'rapFileCreationTimeStamp', _RapBatchControlInfo_rapFileCreationTimeStamp),
-        (u'rapFileAvailableTimeStamp', _RapBatchControlInfo_rapFileAvailableTimeStamp),
-        (u'specificationVersionNumber', _RapBatchControlInfo_specificationVersionNumber),
-        (u'releaseVersionNumber', _RapBatchControlInfo_releaseVersionNumber),
-        (u'rapSpecificationVersionNumber', _RapBatchControlInfo_rapSpecificationVersionNumber),
-        (u'rapReleaseVersionNumber', _RapBatchControlInfo_rapReleaseVersionNumber),
-        (u'fileTypeIndicator', _RapBatchControlInfo_fileTypeIndicator),
-        (u'roamingPartner', _RapBatchControlInfo_roamingPartner),
-        (u'operatorSpecList', _RapBatchControlInfo_operatorSpecList),
-        (u'tapDecimalPlaces', _RapBatchControlInfo_tapDecimalPlaces),
-        (u'tapCurrency', _RapBatchControlInfo_tapCurrency),
+        ('sender', _RapBatchControlInfo_sender),
+        ('recipient', _RapBatchControlInfo_recipient),
+        ('rapFileSequenceNumber', _RapBatchControlInfo_rapFileSequenceNumber),
+        ('rapFileCreationTimeStamp', _RapBatchControlInfo_rapFileCreationTimeStamp),
+        ('rapFileAvailableTimeStamp', _RapBatchControlInfo_rapFileAvailableTimeStamp),
+        ('specificationVersionNumber', _RapBatchControlInfo_specificationVersionNumber),
+        ('releaseVersionNumber', _RapBatchControlInfo_releaseVersionNumber),
+        ('rapSpecificationVersionNumber', _RapBatchControlInfo_rapSpecificationVersionNumber),
+        ('rapReleaseVersionNumber', _RapBatchControlInfo_rapReleaseVersionNumber),
+        ('fileTypeIndicator', _RapBatchControlInfo_fileTypeIndicator),
+        ('roamingPartner', _RapBatchControlInfo_roamingPartner),
+        ('operatorSpecList', _RapBatchControlInfo_operatorSpecList),
+        ('tapDecimalPlaces', _RapBatchControlInfo_tapDecimalPlaces),
+        ('tapCurrency', _RapBatchControlInfo_tapCurrency),
         ])
     RapBatchControlInfo._ext = []
     
     #-----< StopReturn >-----#
-    StopReturn = SEQ(name=u'StopReturn', mode=MODE_TYPE, tag=(554, TAG_APPLICATION, TAG_IMPLICIT))
-    _StopReturn_lastSeqNumber = OCT_STR(name=u'lastSeqNumber', mode=MODE_TYPE, typeref=ASN1RefType(('RAP-0105', 'LastSeqNumber')))
-    _StopReturn_operatorSpecList = SEQ_OF(name=u'operatorSpecList', mode=MODE_TYPE, typeref=ASN1RefType(('RAP-0105', 'OperatorSpecList')), opt=True)
+    StopReturn = SEQ(name='StopReturn', mode=MODE_TYPE, tag=(554, TAG_APPLICATION, TAG_IMPLICIT))
+    _StopReturn_lastSeqNumber = OCT_STR(name='lastSeqNumber', mode=MODE_TYPE, typeref=ASN1RefType(('RAP-0105', 'LastSeqNumber')))
+    _StopReturn_operatorSpecList = SEQ_OF(name='operatorSpecList', mode=MODE_TYPE, typeref=ASN1RefType(('RAP-0105', 'OperatorSpecList')), opt=True)
     StopReturn._cont = ASN1Dict([
-        (u'lastSeqNumber', _StopReturn_lastSeqNumber),
-        (u'operatorSpecList', _StopReturn_operatorSpecList),
+        ('lastSeqNumber', _StopReturn_lastSeqNumber),
+        ('operatorSpecList', _StopReturn_operatorSpecList),
         ])
     StopReturn._ext = []
     
     #-----< MissingReturn >-----#
-    MissingReturn = SEQ(name=u'MissingReturn', mode=MODE_TYPE, tag=(538, TAG_APPLICATION, TAG_IMPLICIT))
-    _MissingReturn_startMissingSeqNumber = OCT_STR(name=u'startMissingSeqNumber', mode=MODE_TYPE, typeref=ASN1RefType(('RAP-0105', 'StartMissingSeqNumber')))
-    _MissingReturn_endMissingSeqNumber = OCT_STR(name=u'endMissingSeqNumber', mode=MODE_TYPE, typeref=ASN1RefType(('RAP-0105', 'EndMissingSeqNumber')), opt=True)
-    _MissingReturn_operatorSpecList = SEQ_OF(name=u'operatorSpecList', mode=MODE_TYPE, typeref=ASN1RefType(('RAP-0105', 'OperatorSpecList')), opt=True)
+    MissingReturn = SEQ(name='MissingReturn', mode=MODE_TYPE, tag=(538, TAG_APPLICATION, TAG_IMPLICIT))
+    _MissingReturn_startMissingSeqNumber = OCT_STR(name='startMissingSeqNumber', mode=MODE_TYPE, typeref=ASN1RefType(('RAP-0105', 'StartMissingSeqNumber')))
+    _MissingReturn_endMissingSeqNumber = OCT_STR(name='endMissingSeqNumber', mode=MODE_TYPE, typeref=ASN1RefType(('RAP-0105', 'EndMissingSeqNumber')), opt=True)
+    _MissingReturn_operatorSpecList = SEQ_OF(name='operatorSpecList', mode=MODE_TYPE, typeref=ASN1RefType(('RAP-0105', 'OperatorSpecList')), opt=True)
     MissingReturn._cont = ASN1Dict([
-        (u'startMissingSeqNumber', _MissingReturn_startMissingSeqNumber),
-        (u'endMissingSeqNumber', _MissingReturn_endMissingSeqNumber),
-        (u'operatorSpecList', _MissingReturn_operatorSpecList),
+        ('startMissingSeqNumber', _MissingReturn_startMissingSeqNumber),
+        ('endMissingSeqNumber', _MissingReturn_endMissingSeqNumber),
+        ('operatorSpecList', _MissingReturn_operatorSpecList),
         ])
     MissingReturn._ext = []
     
     #-----< FatalReturn >-----#
-    FatalReturn = SEQ(name=u'FatalReturn', mode=MODE_TYPE, tag=(539, TAG_APPLICATION, TAG_IMPLICIT))
-    _FatalReturn_fileSequenceNumber = OCT_STR(name=u'fileSequenceNumber', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'FileSequenceNumber')))
-    _FatalReturn_transferBatchError = SEQ(name=u'transferBatchError', mode=MODE_TYPE, typeref=ASN1RefType(('RAP-0105', 'TransferBatchError')), opt=True)
-    _FatalReturn_notificationError = SEQ(name=u'notificationError', mode=MODE_TYPE, typeref=ASN1RefType(('RAP-0105', 'NotificationError')), opt=True)
-    _FatalReturn_batchControlError = SEQ(name=u'batchControlError', mode=MODE_TYPE, typeref=ASN1RefType(('RAP-0105', 'BatchControlError')), opt=True)
-    _FatalReturn_accountingInfoError = SEQ(name=u'accountingInfoError', mode=MODE_TYPE, typeref=ASN1RefType(('RAP-0105', 'AccountingInfoError')), opt=True)
-    _FatalReturn_networkInfoError = SEQ(name=u'networkInfoError', mode=MODE_TYPE, typeref=ASN1RefType(('RAP-0105', 'NetworkInfoError')), opt=True)
-    _FatalReturn_messageDescriptionError = SEQ(name=u'messageDescriptionError', mode=MODE_TYPE, typeref=ASN1RefType(('RAP-0105', 'MessageDescriptionError')), opt=True)
-    _FatalReturn_auditControlInfoError = SEQ(name=u'auditControlInfoError', mode=MODE_TYPE, typeref=ASN1RefType(('RAP-0105', 'AuditControlInfoError')), opt=True)
-    _FatalReturn_operatorSpecList = SEQ_OF(name=u'operatorSpecList', mode=MODE_TYPE, typeref=ASN1RefType(('RAP-0105', 'OperatorSpecList')), opt=True)
+    FatalReturn = SEQ(name='FatalReturn', mode=MODE_TYPE, tag=(539, TAG_APPLICATION, TAG_IMPLICIT))
+    _FatalReturn_fileSequenceNumber = OCT_STR(name='fileSequenceNumber', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'FileSequenceNumber')))
+    _FatalReturn_transferBatchError = SEQ(name='transferBatchError', mode=MODE_TYPE, typeref=ASN1RefType(('RAP-0105', 'TransferBatchError')), opt=True)
+    _FatalReturn_notificationError = SEQ(name='notificationError', mode=MODE_TYPE, typeref=ASN1RefType(('RAP-0105', 'NotificationError')), opt=True)
+    _FatalReturn_batchControlError = SEQ(name='batchControlError', mode=MODE_TYPE, typeref=ASN1RefType(('RAP-0105', 'BatchControlError')), opt=True)
+    _FatalReturn_accountingInfoError = SEQ(name='accountingInfoError', mode=MODE_TYPE, typeref=ASN1RefType(('RAP-0105', 'AccountingInfoError')), opt=True)
+    _FatalReturn_networkInfoError = SEQ(name='networkInfoError', mode=MODE_TYPE, typeref=ASN1RefType(('RAP-0105', 'NetworkInfoError')), opt=True)
+    _FatalReturn_messageDescriptionError = SEQ(name='messageDescriptionError', mode=MODE_TYPE, typeref=ASN1RefType(('RAP-0105', 'MessageDescriptionError')), opt=True)
+    _FatalReturn_auditControlInfoError = SEQ(name='auditControlInfoError', mode=MODE_TYPE, typeref=ASN1RefType(('RAP-0105', 'AuditControlInfoError')), opt=True)
+    _FatalReturn_operatorSpecList = SEQ_OF(name='operatorSpecList', mode=MODE_TYPE, typeref=ASN1RefType(('RAP-0105', 'OperatorSpecList')), opt=True)
     FatalReturn._cont = ASN1Dict([
-        (u'fileSequenceNumber', _FatalReturn_fileSequenceNumber),
-        (u'transferBatchError', _FatalReturn_transferBatchError),
-        (u'notificationError', _FatalReturn_notificationError),
-        (u'batchControlError', _FatalReturn_batchControlError),
-        (u'accountingInfoError', _FatalReturn_accountingInfoError),
-        (u'networkInfoError', _FatalReturn_networkInfoError),
-        (u'messageDescriptionError', _FatalReturn_messageDescriptionError),
-        (u'auditControlInfoError', _FatalReturn_auditControlInfoError),
-        (u'operatorSpecList', _FatalReturn_operatorSpecList),
+        ('fileSequenceNumber', _FatalReturn_fileSequenceNumber),
+        ('transferBatchError', _FatalReturn_transferBatchError),
+        ('notificationError', _FatalReturn_notificationError),
+        ('batchControlError', _FatalReturn_batchControlError),
+        ('accountingInfoError', _FatalReturn_accountingInfoError),
+        ('networkInfoError', _FatalReturn_networkInfoError),
+        ('messageDescriptionError', _FatalReturn_messageDescriptionError),
+        ('auditControlInfoError', _FatalReturn_auditControlInfoError),
+        ('operatorSpecList', _FatalReturn_operatorSpecList),
         ])
     FatalReturn._ext = []
     
     #-----< SevereReturn >-----#
-    SevereReturn = SEQ(name=u'SevereReturn', mode=MODE_TYPE, tag=(540, TAG_APPLICATION, TAG_IMPLICIT))
-    _SevereReturn_fileSequenceNumber = OCT_STR(name=u'fileSequenceNumber', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'FileSequenceNumber')))
-    _SevereReturn_callEventDetail = CHOICE(name=u'callEventDetail', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'CallEventDetail')))
-    _SevereReturn_errorDetail = SEQ_OF(name=u'errorDetail', mode=MODE_TYPE, typeref=ASN1RefType(('RAP-0105', 'ErrorDetailList')))
-    _SevereReturn_operatorSpecList = SEQ_OF(name=u'operatorSpecList', mode=MODE_TYPE, typeref=ASN1RefType(('RAP-0105', 'OperatorSpecList')), opt=True)
+    SevereReturn = SEQ(name='SevereReturn', mode=MODE_TYPE, tag=(540, TAG_APPLICATION, TAG_IMPLICIT))
+    _SevereReturn_fileSequenceNumber = OCT_STR(name='fileSequenceNumber', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'FileSequenceNumber')))
+    _SevereReturn_callEventDetail = CHOICE(name='callEventDetail', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'CallEventDetail')))
+    _SevereReturn_errorDetail = SEQ_OF(name='errorDetail', mode=MODE_TYPE, typeref=ASN1RefType(('RAP-0105', 'ErrorDetailList')))
+    _SevereReturn_operatorSpecList = SEQ_OF(name='operatorSpecList', mode=MODE_TYPE, typeref=ASN1RefType(('RAP-0105', 'OperatorSpecList')), opt=True)
     SevereReturn._cont = ASN1Dict([
-        (u'fileSequenceNumber', _SevereReturn_fileSequenceNumber),
-        (u'callEventDetail', _SevereReturn_callEventDetail),
-        (u'errorDetail', _SevereReturn_errorDetail),
-        (u'operatorSpecList', _SevereReturn_operatorSpecList),
+        ('fileSequenceNumber', _SevereReturn_fileSequenceNumber),
+        ('callEventDetail', _SevereReturn_callEventDetail),
+        ('errorDetail', _SevereReturn_errorDetail),
+        ('operatorSpecList', _SevereReturn_operatorSpecList),
         ])
     SevereReturn._ext = []
     
     #-----< RapAuditControlInfo >-----#
-    RapAuditControlInfo = SEQ(name=u'RapAuditControlInfo', mode=MODE_TYPE, tag=(541, TAG_APPLICATION, TAG_IMPLICIT))
-    _RapAuditControlInfo_totalSevereReturnValue = INT(name=u'totalSevereReturnValue', mode=MODE_TYPE, typeref=ASN1RefType(('RAP-0105', 'TotalSevereReturnValue')))
-    _RapAuditControlInfo_returnDetailsCount = INT(name=u'returnDetailsCount', mode=MODE_TYPE, typeref=ASN1RefType(('RAP-0105', 'ReturnDetailsCount')))
-    _RapAuditControlInfo_operatorSpecList = SEQ_OF(name=u'operatorSpecList', mode=MODE_TYPE, typeref=ASN1RefType(('RAP-0105', 'OperatorSpecList')), opt=True)
-    _RapAuditControlInfo_totalSevereReturnTax = INT(name=u'totalSevereReturnTax', mode=MODE_TYPE, typeref=ASN1RefType(('RAP-0105', 'TotalSevereReturnTax')), opt=True)
+    RapAuditControlInfo = SEQ(name='RapAuditControlInfo', mode=MODE_TYPE, tag=(541, TAG_APPLICATION, TAG_IMPLICIT))
+    _RapAuditControlInfo_totalSevereReturnValue = INT(name='totalSevereReturnValue', mode=MODE_TYPE, typeref=ASN1RefType(('RAP-0105', 'TotalSevereReturnValue')))
+    _RapAuditControlInfo_returnDetailsCount = INT(name='returnDetailsCount', mode=MODE_TYPE, typeref=ASN1RefType(('RAP-0105', 'ReturnDetailsCount')))
+    _RapAuditControlInfo_operatorSpecList = SEQ_OF(name='operatorSpecList', mode=MODE_TYPE, typeref=ASN1RefType(('RAP-0105', 'OperatorSpecList')), opt=True)
+    _RapAuditControlInfo_totalSevereReturnTax = INT(name='totalSevereReturnTax', mode=MODE_TYPE, typeref=ASN1RefType(('RAP-0105', 'TotalSevereReturnTax')), opt=True)
     RapAuditControlInfo._cont = ASN1Dict([
-        (u'totalSevereReturnValue', _RapAuditControlInfo_totalSevereReturnValue),
-        (u'returnDetailsCount', _RapAuditControlInfo_returnDetailsCount),
-        (u'operatorSpecList', _RapAuditControlInfo_operatorSpecList),
-        (u'totalSevereReturnTax', _RapAuditControlInfo_totalSevereReturnTax),
+        ('totalSevereReturnValue', _RapAuditControlInfo_totalSevereReturnValue),
+        ('returnDetailsCount', _RapAuditControlInfo_returnDetailsCount),
+        ('operatorSpecList', _RapAuditControlInfo_operatorSpecList),
+        ('totalSevereReturnTax', _RapAuditControlInfo_totalSevereReturnTax),
         ])
     RapAuditControlInfo._ext = []
     
     #-----< AccountingInfoError >-----#
-    AccountingInfoError = SEQ(name=u'AccountingInfoError', mode=MODE_TYPE, tag=(512, TAG_APPLICATION, TAG_IMPLICIT))
-    _AccountingInfoError_accountingInfo = SEQ(name=u'accountingInfo', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'AccountingInfo')))
-    _AccountingInfoError_errorDetail = SEQ_OF(name=u'errorDetail', mode=MODE_TYPE, typeref=ASN1RefType(('RAP-0105', 'ErrorDetailList')))
+    AccountingInfoError = SEQ(name='AccountingInfoError', mode=MODE_TYPE, tag=(512, TAG_APPLICATION, TAG_IMPLICIT))
+    _AccountingInfoError_accountingInfo = SEQ(name='accountingInfo', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'AccountingInfo')))
+    _AccountingInfoError_errorDetail = SEQ_OF(name='errorDetail', mode=MODE_TYPE, typeref=ASN1RefType(('RAP-0105', 'ErrorDetailList')))
     AccountingInfoError._cont = ASN1Dict([
-        (u'accountingInfo', _AccountingInfoError_accountingInfo),
-        (u'errorDetail', _AccountingInfoError_errorDetail),
+        ('accountingInfo', _AccountingInfoError_accountingInfo),
+        ('errorDetail', _AccountingInfoError_errorDetail),
         ])
     AccountingInfoError._ext = []
     
     #-----< AuditControlInfoError >-----#
-    AuditControlInfoError = SEQ(name=u'AuditControlInfoError', mode=MODE_TYPE, tag=(513, TAG_APPLICATION, TAG_IMPLICIT))
-    _AuditControlInfoError_auditControlInfo = SEQ(name=u'auditControlInfo', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'AuditControlInfo')))
-    _AuditControlInfoError_errorDetail = SEQ_OF(name=u'errorDetail', mode=MODE_TYPE, typeref=ASN1RefType(('RAP-0105', 'ErrorDetailList')))
+    AuditControlInfoError = SEQ(name='AuditControlInfoError', mode=MODE_TYPE, tag=(513, TAG_APPLICATION, TAG_IMPLICIT))
+    _AuditControlInfoError_auditControlInfo = SEQ(name='auditControlInfo', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'AuditControlInfo')))
+    _AuditControlInfoError_errorDetail = SEQ_OF(name='errorDetail', mode=MODE_TYPE, typeref=ASN1RefType(('RAP-0105', 'ErrorDetailList')))
     AuditControlInfoError._cont = ASN1Dict([
-        (u'auditControlInfo', _AuditControlInfoError_auditControlInfo),
-        (u'errorDetail', _AuditControlInfoError_errorDetail),
+        ('auditControlInfo', _AuditControlInfoError_auditControlInfo),
+        ('errorDetail', _AuditControlInfoError_errorDetail),
         ])
     AuditControlInfoError._ext = []
     
     #-----< AckFileAvailableTimeStamp >-----#
-    AckFileAvailableTimeStamp = SEQ(name=u'AckFileAvailableTimeStamp', mode=MODE_TYPE, tag=(515, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'DateTimeLong')))
+    AckFileAvailableTimeStamp = SEQ(name='AckFileAvailableTimeStamp', mode=MODE_TYPE, tag=(515, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'DateTimeLong')))
     
     #-----< AckFileCreationTimeStamp >-----#
-    AckFileCreationTimeStamp = SEQ(name=u'AckFileCreationTimeStamp', mode=MODE_TYPE, tag=(516, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'DateTimeLong')))
+    AckFileCreationTimeStamp = SEQ(name='AckFileCreationTimeStamp', mode=MODE_TYPE, tag=(516, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'DateTimeLong')))
     
     #-----< BatchControlError >-----#
-    BatchControlError = SEQ(name=u'BatchControlError', mode=MODE_TYPE, tag=(517, TAG_APPLICATION, TAG_IMPLICIT))
-    _BatchControlError_batchControlInfo = SEQ(name=u'batchControlInfo', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'BatchControlInfo')))
-    _BatchControlError_errorDetail = SEQ_OF(name=u'errorDetail', mode=MODE_TYPE, typeref=ASN1RefType(('RAP-0105', 'ErrorDetailList')))
+    BatchControlError = SEQ(name='BatchControlError', mode=MODE_TYPE, tag=(517, TAG_APPLICATION, TAG_IMPLICIT))
+    _BatchControlError_batchControlInfo = SEQ(name='batchControlInfo', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'BatchControlInfo')))
+    _BatchControlError_errorDetail = SEQ_OF(name='errorDetail', mode=MODE_TYPE, typeref=ASN1RefType(('RAP-0105', 'ErrorDetailList')))
     BatchControlError._cont = ASN1Dict([
-        (u'batchControlInfo', _BatchControlError_batchControlInfo),
-        (u'errorDetail', _BatchControlError_errorDetail),
+        ('batchControlInfo', _BatchControlError_batchControlInfo),
+        ('errorDetail', _BatchControlError_errorDetail),
         ])
     BatchControlError._ext = []
     
     #-----< EndMissingSeqNumber >-----#
-    EndMissingSeqNumber = OCT_STR(name=u'EndMissingSeqNumber', mode=MODE_TYPE, tag=(518, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'FileSequenceNumber')))
+    EndMissingSeqNumber = OCT_STR(name='EndMissingSeqNumber', mode=MODE_TYPE, tag=(518, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'FileSequenceNumber')))
     
     #-----< ErrorCode >-----#
-    ErrorCode = INT(name=u'ErrorCode', mode=MODE_TYPE, tag=(519, TAG_APPLICATION, TAG_IMPLICIT))
+    ErrorCode = INT(name='ErrorCode', mode=MODE_TYPE, tag=(519, TAG_APPLICATION, TAG_IMPLICIT))
     
     #-----< ErrorContext >-----#
-    ErrorContext = SEQ(name=u'ErrorContext', mode=MODE_TYPE, tag=(545, TAG_APPLICATION, TAG_IMPLICIT))
-    _ErrorContext_pathItemId = INT(name=u'pathItemId', mode=MODE_TYPE, typeref=ASN1RefType(('RAP-0105', 'PathItemId')))
-    _ErrorContext_itemOccurrence = INT(name=u'itemOccurrence', mode=MODE_TYPE, typeref=ASN1RefType(('RAP-0105', 'ItemOccurrence')), opt=True)
-    _ErrorContext_itemLevel = INT(name=u'itemLevel', mode=MODE_TYPE, typeref=ASN1RefType(('RAP-0105', 'ItemLevel')))
+    ErrorContext = SEQ(name='ErrorContext', mode=MODE_TYPE, tag=(545, TAG_APPLICATION, TAG_IMPLICIT))
+    _ErrorContext_pathItemId = INT(name='pathItemId', mode=MODE_TYPE, typeref=ASN1RefType(('RAP-0105', 'PathItemId')))
+    _ErrorContext_itemOccurrence = INT(name='itemOccurrence', mode=MODE_TYPE, typeref=ASN1RefType(('RAP-0105', 'ItemOccurrence')), opt=True)
+    _ErrorContext_itemLevel = INT(name='itemLevel', mode=MODE_TYPE, typeref=ASN1RefType(('RAP-0105', 'ItemLevel')))
     ErrorContext._cont = ASN1Dict([
-        (u'pathItemId', _ErrorContext_pathItemId),
-        (u'itemOccurrence', _ErrorContext_itemOccurrence),
-        (u'itemLevel', _ErrorContext_itemLevel),
+        ('pathItemId', _ErrorContext_pathItemId),
+        ('itemOccurrence', _ErrorContext_itemOccurrence),
+        ('itemLevel', _ErrorContext_itemLevel),
         ])
     ErrorContext._ext = []
     
     #-----< ErrorContextList >-----#
-    ErrorContextList = SEQ_OF(name=u'ErrorContextList', mode=MODE_TYPE, tag=(549, TAG_APPLICATION, TAG_IMPLICIT))
+    ErrorContextList = SEQ_OF(name='ErrorContextList', mode=MODE_TYPE, tag=(549, TAG_APPLICATION, TAG_IMPLICIT))
     _ErrorContextList__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('RAP-0105', 'ErrorContext')))
     ErrorContextList._cont = _ErrorContextList__item_
     
     #-----< ErrorDetail >-----#
-    ErrorDetail = SEQ(name=u'ErrorDetail', mode=MODE_TYPE, tag=(521, TAG_APPLICATION, TAG_IMPLICIT))
-    _ErrorDetail_errorContext = SEQ_OF(name=u'errorContext', mode=MODE_TYPE, typeref=ASN1RefType(('RAP-0105', 'ErrorContextList')), opt=True)
-    _ErrorDetail_itemOffset = INT(name=u'itemOffset', mode=MODE_TYPE, typeref=ASN1RefType(('RAP-0105', 'ItemOffset')), opt=True)
-    _ErrorDetail_errorCode = INT(name=u'errorCode', mode=MODE_TYPE, typeref=ASN1RefType(('RAP-0105', 'ErrorCode')))
+    ErrorDetail = SEQ(name='ErrorDetail', mode=MODE_TYPE, tag=(521, TAG_APPLICATION, TAG_IMPLICIT))
+    _ErrorDetail_errorContext = SEQ_OF(name='errorContext', mode=MODE_TYPE, typeref=ASN1RefType(('RAP-0105', 'ErrorContextList')), opt=True)
+    _ErrorDetail_itemOffset = INT(name='itemOffset', mode=MODE_TYPE, typeref=ASN1RefType(('RAP-0105', 'ItemOffset')), opt=True)
+    _ErrorDetail_errorCode = INT(name='errorCode', mode=MODE_TYPE, typeref=ASN1RefType(('RAP-0105', 'ErrorCode')))
     ErrorDetail._cont = ASN1Dict([
-        (u'errorContext', _ErrorDetail_errorContext),
-        (u'itemOffset', _ErrorDetail_itemOffset),
-        (u'errorCode', _ErrorDetail_errorCode),
+        ('errorContext', _ErrorDetail_errorContext),
+        ('itemOffset', _ErrorDetail_itemOffset),
+        ('errorCode', _ErrorDetail_errorCode),
         ])
     ErrorDetail._ext = []
     
     #-----< ErrorDetailList >-----#
-    ErrorDetailList = SEQ_OF(name=u'ErrorDetailList', mode=MODE_TYPE, tag=(520, TAG_APPLICATION, TAG_IMPLICIT))
+    ErrorDetailList = SEQ_OF(name='ErrorDetailList', mode=MODE_TYPE, tag=(520, TAG_APPLICATION, TAG_IMPLICIT))
     _ErrorDetailList__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('RAP-0105', 'ErrorDetail')))
     ErrorDetailList._cont = _ErrorDetailList__item_
     
     #-----< ItemLevel >-----#
-    ItemLevel = INT(name=u'ItemLevel', mode=MODE_TYPE, tag=(548, TAG_APPLICATION, TAG_IMPLICIT))
+    ItemLevel = INT(name='ItemLevel', mode=MODE_TYPE, tag=(548, TAG_APPLICATION, TAG_IMPLICIT))
     
     #-----< ItemOccurrence >-----#
-    ItemOccurrence = INT(name=u'ItemOccurrence', mode=MODE_TYPE, tag=(547, TAG_APPLICATION, TAG_IMPLICIT))
+    ItemOccurrence = INT(name='ItemOccurrence', mode=MODE_TYPE, tag=(547, TAG_APPLICATION, TAG_IMPLICIT))
     
     #-----< ItemOffset >-----#
-    ItemOffset = INT(name=u'ItemOffset', mode=MODE_TYPE, tag=(524, TAG_APPLICATION, TAG_IMPLICIT))
+    ItemOffset = INT(name='ItemOffset', mode=MODE_TYPE, tag=(524, TAG_APPLICATION, TAG_IMPLICIT))
     
     #-----< LastSeqNumber >-----#
-    LastSeqNumber = OCT_STR(name=u'LastSeqNumber', mode=MODE_TYPE, tag=(555, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'FileSequenceNumber')))
+    LastSeqNumber = OCT_STR(name='LastSeqNumber', mode=MODE_TYPE, tag=(555, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'FileSequenceNumber')))
     
     #-----< MessageDescriptionError >-----#
-    MessageDescriptionError = SEQ(name=u'MessageDescriptionError', mode=MODE_TYPE, tag=(522, TAG_APPLICATION, TAG_IMPLICIT))
-    _MessageDescriptionError_messageDescriptionInfo = SEQ_OF(name=u'messageDescriptionInfo', mode=MODE_TYPE, typeref=ASN1RefType(('RAP-0105', 'MessageDescriptionInfoList')))
-    _MessageDescriptionError_errorDetail = SEQ_OF(name=u'errorDetail', mode=MODE_TYPE, typeref=ASN1RefType(('RAP-0105', 'ErrorDetailList')))
+    MessageDescriptionError = SEQ(name='MessageDescriptionError', mode=MODE_TYPE, tag=(522, TAG_APPLICATION, TAG_IMPLICIT))
+    _MessageDescriptionError_messageDescriptionInfo = SEQ_OF(name='messageDescriptionInfo', mode=MODE_TYPE, typeref=ASN1RefType(('RAP-0105', 'MessageDescriptionInfoList')))
+    _MessageDescriptionError_errorDetail = SEQ_OF(name='errorDetail', mode=MODE_TYPE, typeref=ASN1RefType(('RAP-0105', 'ErrorDetailList')))
     MessageDescriptionError._cont = ASN1Dict([
-        (u'messageDescriptionInfo', _MessageDescriptionError_messageDescriptionInfo),
-        (u'errorDetail', _MessageDescriptionError_errorDetail),
+        ('messageDescriptionInfo', _MessageDescriptionError_messageDescriptionInfo),
+        ('errorDetail', _MessageDescriptionError_errorDetail),
         ])
     MessageDescriptionError._ext = []
     
     #-----< MessageDescriptionInfoList >-----#
-    MessageDescriptionInfoList = SEQ_OF(name=u'MessageDescriptionInfoList', mode=MODE_TYPE, tag=(8, TAG_APPLICATION, TAG_IMPLICIT))
+    MessageDescriptionInfoList = SEQ_OF(name='MessageDescriptionInfoList', mode=MODE_TYPE, tag=(8, TAG_APPLICATION, TAG_IMPLICIT))
     _MessageDescriptionInfoList__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('RAP-0105', 'MessageDescriptionInformationDefinition')))
     MessageDescriptionInfoList._cont = _MessageDescriptionInfoList__item_
     
     #-----< MessageDescriptionInformationDefinition >-----#
-    MessageDescriptionInformationDefinition = SEQ(name=u'MessageDescriptionInformationDefinition', mode=MODE_TYPE, tag=(143, TAG_APPLICATION, TAG_IMPLICIT))
-    _MessageDescriptionInformationDefinition_messageDescriptionCode = INT(name=u'messageDescriptionCode', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'MessageDescriptionCode')), opt=True)
-    _MessageDescriptionInformationDefinition_messageDescription = OCT_STR(name=u'messageDescription', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'MessageDescription')), opt=True)
+    MessageDescriptionInformationDefinition = SEQ(name='MessageDescriptionInformationDefinition', mode=MODE_TYPE, tag=(143, TAG_APPLICATION, TAG_IMPLICIT))
+    _MessageDescriptionInformationDefinition_messageDescriptionCode = INT(name='messageDescriptionCode', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'MessageDescriptionCode')), opt=True)
+    _MessageDescriptionInformationDefinition_messageDescription = OCT_STR(name='messageDescription', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'MessageDescription')), opt=True)
     MessageDescriptionInformationDefinition._cont = ASN1Dict([
-        (u'messageDescriptionCode', _MessageDescriptionInformationDefinition_messageDescriptionCode),
-        (u'messageDescription', _MessageDescriptionInformationDefinition_messageDescription),
+        ('messageDescriptionCode', _MessageDescriptionInformationDefinition_messageDescriptionCode),
+        ('messageDescription', _MessageDescriptionInformationDefinition_messageDescription),
         ])
     MessageDescriptionInformationDefinition._ext = []
     
     #-----< NetworkInfoError >-----#
-    NetworkInfoError = SEQ(name=u'NetworkInfoError', mode=MODE_TYPE, tag=(523, TAG_APPLICATION, TAG_IMPLICIT))
-    _NetworkInfoError_networkInfo = SEQ(name=u'networkInfo', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'NetworkInfo')))
-    _NetworkInfoError_errorDetail = SEQ_OF(name=u'errorDetail', mode=MODE_TYPE, typeref=ASN1RefType(('RAP-0105', 'ErrorDetailList')))
+    NetworkInfoError = SEQ(name='NetworkInfoError', mode=MODE_TYPE, tag=(523, TAG_APPLICATION, TAG_IMPLICIT))
+    _NetworkInfoError_networkInfo = SEQ(name='networkInfo', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'NetworkInfo')))
+    _NetworkInfoError_errorDetail = SEQ_OF(name='errorDetail', mode=MODE_TYPE, typeref=ASN1RefType(('RAP-0105', 'ErrorDetailList')))
     NetworkInfoError._cont = ASN1Dict([
-        (u'networkInfo', _NetworkInfoError_networkInfo),
-        (u'errorDetail', _NetworkInfoError_errorDetail),
+        ('networkInfo', _NetworkInfoError_networkInfo),
+        ('errorDetail', _NetworkInfoError_errorDetail),
         ])
     NetworkInfoError._ext = []
     
     #-----< NotificationError >-----#
-    NotificationError = SEQ(name=u'NotificationError', mode=MODE_TYPE, tag=(552, TAG_APPLICATION, TAG_IMPLICIT))
-    _NotificationError_notification = SEQ(name=u'notification', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'Notification')))
-    _NotificationError_errorDetail = SEQ_OF(name=u'errorDetail', mode=MODE_TYPE, typeref=ASN1RefType(('RAP-0105', 'ErrorDetailList')))
+    NotificationError = SEQ(name='NotificationError', mode=MODE_TYPE, tag=(552, TAG_APPLICATION, TAG_IMPLICIT))
+    _NotificationError_notification = SEQ(name='notification', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'Notification')))
+    _NotificationError_errorDetail = SEQ_OF(name='errorDetail', mode=MODE_TYPE, typeref=ASN1RefType(('RAP-0105', 'ErrorDetailList')))
     NotificationError._cont = ASN1Dict([
-        (u'notification', _NotificationError_notification),
-        (u'errorDetail', _NotificationError_errorDetail),
+        ('notification', _NotificationError_notification),
+        ('errorDetail', _NotificationError_errorDetail),
         ])
     NotificationError._ext = []
     
     #-----< OperatorSpecList >-----#
-    OperatorSpecList = SEQ_OF(name=u'OperatorSpecList', mode=MODE_TYPE, tag=(551, TAG_APPLICATION, TAG_IMPLICIT))
+    OperatorSpecList = SEQ_OF(name='OperatorSpecList', mode=MODE_TYPE, tag=(551, TAG_APPLICATION, TAG_IMPLICIT))
     _OperatorSpecList__item_ = OCT_STR(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('TAP-0312', 'OperatorSpecInformation')))
     OperatorSpecList._cont = _OperatorSpecList__item_
     
     #-----< PathItemId >-----#
-    PathItemId = INT(name=u'PathItemId', mode=MODE_TYPE, tag=(546, TAG_APPLICATION, TAG_IMPLICIT))
+    PathItemId = INT(name='PathItemId', mode=MODE_TYPE, tag=(546, TAG_APPLICATION, TAG_IMPLICIT))
     
     #-----< RapFileAvailableTimeStamp >-----#
-    RapFileAvailableTimeStamp = SEQ(name=u'RapFileAvailableTimeStamp', mode=MODE_TYPE, tag=(525, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'DateTimeLong')))
+    RapFileAvailableTimeStamp = SEQ(name='RapFileAvailableTimeStamp', mode=MODE_TYPE, tag=(525, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'DateTimeLong')))
     
     #-----< RapFileCreationTimeStamp >-----#
-    RapFileCreationTimeStamp = SEQ(name=u'RapFileCreationTimeStamp', mode=MODE_TYPE, tag=(526, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'DateTimeLong')))
+    RapFileCreationTimeStamp = SEQ(name='RapFileCreationTimeStamp', mode=MODE_TYPE, tag=(526, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'DateTimeLong')))
     
     #-----< RapReleaseVersionNumber >-----#
-    RapReleaseVersionNumber = INT(name=u'RapReleaseVersionNumber', mode=MODE_TYPE, tag=(543, TAG_APPLICATION, TAG_IMPLICIT))
+    RapReleaseVersionNumber = INT(name='RapReleaseVersionNumber', mode=MODE_TYPE, tag=(543, TAG_APPLICATION, TAG_IMPLICIT))
     
     #-----< RapSpecificationVersionNumber >-----#
-    RapSpecificationVersionNumber = INT(name=u'RapSpecificationVersionNumber', mode=MODE_TYPE, tag=(544, TAG_APPLICATION, TAG_IMPLICIT))
+    RapSpecificationVersionNumber = INT(name='RapSpecificationVersionNumber', mode=MODE_TYPE, tag=(544, TAG_APPLICATION, TAG_IMPLICIT))
     
     #-----< ReturnDetailsCount >-----#
-    ReturnDetailsCount = INT(name=u'ReturnDetailsCount', mode=MODE_TYPE, tag=(528, TAG_APPLICATION, TAG_IMPLICIT))
+    ReturnDetailsCount = INT(name='ReturnDetailsCount', mode=MODE_TYPE, tag=(528, TAG_APPLICATION, TAG_IMPLICIT))
     
     #-----< RoamingPartner >-----#
-    RoamingPartner = OCT_STR(name=u'RoamingPartner', mode=MODE_TYPE, tag=(550, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'PlmnId')))
+    RoamingPartner = OCT_STR(name='RoamingPartner', mode=MODE_TYPE, tag=(550, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'PlmnId')))
     
     #-----< StartMissingSeqNumber >-----#
-    StartMissingSeqNumber = OCT_STR(name=u'StartMissingSeqNumber', mode=MODE_TYPE, tag=(532, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'FileSequenceNumber')))
+    StartMissingSeqNumber = OCT_STR(name='StartMissingSeqNumber', mode=MODE_TYPE, tag=(532, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'FileSequenceNumber')))
     
     #-----< TotalSevereReturnTax >-----#
-    TotalSevereReturnTax = INT(name=u'TotalSevereReturnTax', mode=MODE_TYPE, tag=(553, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'AbsoluteAmount')))
+    TotalSevereReturnTax = INT(name='TotalSevereReturnTax', mode=MODE_TYPE, tag=(553, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'AbsoluteAmount')))
     
     #-----< TotalSevereReturnValue >-----#
-    TotalSevereReturnValue = INT(name=u'TotalSevereReturnValue', mode=MODE_TYPE, tag=(533, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'AbsoluteAmount')))
+    TotalSevereReturnValue = INT(name='TotalSevereReturnValue', mode=MODE_TYPE, tag=(533, TAG_APPLICATION, TAG_IMPLICIT), typeref=ASN1RefType(('TAP-0312', 'AbsoluteAmount')))
     
     #-----< TransferBatchError >-----#
-    TransferBatchError = SEQ(name=u'TransferBatchError', mode=MODE_TYPE, tag=(542, TAG_APPLICATION, TAG_IMPLICIT))
-    _TransferBatchError_errorDetail = SEQ_OF(name=u'errorDetail', mode=MODE_TYPE, typeref=ASN1RefType(('RAP-0105', 'ErrorDetailList')))
+    TransferBatchError = SEQ(name='TransferBatchError', mode=MODE_TYPE, tag=(542, TAG_APPLICATION, TAG_IMPLICIT))
+    _TransferBatchError_errorDetail = SEQ_OF(name='errorDetail', mode=MODE_TYPE, typeref=ASN1RefType(('RAP-0105', 'ErrorDetailList')))
     TransferBatchError._cont = ASN1Dict([
-        (u'errorDetail', _TransferBatchError_errorDetail),
+        ('errorDetail', _TransferBatchError_errorDetail),
         ])
     TransferBatchError._ext = []
     

@@ -16,118 +16,118 @@ from pycrate_asn1rt.init             import init_modules
 
 class PKIX1Algorithms2008:
 
-    _name_  = u'PKIX1Algorithms2008'
+    _name_  = 'PKIX1Algorithms2008'
     _oid_   = [1, 3, 6, 1, 5, 5, 7, 0, 45]
     
     _obj_ = [
-        u'id-sha224',
-        u'id-sha256',
-        u'id-sha384',
-        u'id-sha512',
-        u'id-md2',
-        u'id-md5',
-        u'id-sha1',
-        u'rsaEncryption',
-        u'RSAPublicKey',
-        u'id-dsa',
-        u'DSAPublicKey',
-        u'DSS-Parms',
-        u'dhpublicnumber',
-        u'DHPublicKey',
-        u'DomainParameters',
-        u'ValidationParms',
-        u'id-keyExchangeAlgorithm',
-        u'KEA-Parms-Id',
-        u'id-ecPublicKey',
-        u'ECPoint',
-        u'ECParameters',
-        u'id-ecDH',
-        u'id-ecMQV',
-        u'md2WithRSAEncryption',
-        u'md5WithRSAEncryption',
-        u'sha1WithRSAEncryption',
-        u'id-dsa-with-sha1',
-        u'id-dsa-with-sha224',
-        u'id-dsa-with-sha256',
-        u'ecdsa-with-SHA1',
-        u'ecdsa-with-SHA224',
-        u'ecdsa-with-SHA256',
-        u'ecdsa-with-SHA384',
-        u'ecdsa-with-SHA512',
-        u'DSA-Sig-Value',
-        u'ECDSA-Sig-Value',
-        u'secp192r1',
-        u'sect163k1',
-        u'sect163r2',
-        u'secp224r1',
-        u'sect233k1',
-        u'sect233r1',
-        u'secp256r1',
-        u'sect283k1',
-        u'sect283r1',
-        u'secp384r1',
-        u'sect409k1',
-        u'sect409r1',
-        u'secp521r1',
-        u'sect571k1',
-        u'sect571r1',
+        'id-sha224',
+        'id-sha256',
+        'id-sha384',
+        'id-sha512',
+        'id-md2',
+        'id-md5',
+        'id-sha1',
+        'rsaEncryption',
+        'RSAPublicKey',
+        'id-dsa',
+        'DSAPublicKey',
+        'DSS-Parms',
+        'dhpublicnumber',
+        'DHPublicKey',
+        'DomainParameters',
+        'ValidationParms',
+        'id-keyExchangeAlgorithm',
+        'KEA-Parms-Id',
+        'id-ecPublicKey',
+        'ECPoint',
+        'ECParameters',
+        'id-ecDH',
+        'id-ecMQV',
+        'md2WithRSAEncryption',
+        'md5WithRSAEncryption',
+        'sha1WithRSAEncryption',
+        'id-dsa-with-sha1',
+        'id-dsa-with-sha224',
+        'id-dsa-with-sha256',
+        'ecdsa-with-SHA1',
+        'ecdsa-with-SHA224',
+        'ecdsa-with-SHA256',
+        'ecdsa-with-SHA384',
+        'ecdsa-with-SHA512',
+        'DSA-Sig-Value',
+        'ECDSA-Sig-Value',
+        'secp192r1',
+        'sect163k1',
+        'sect163r2',
+        'secp224r1',
+        'sect233k1',
+        'sect233r1',
+        'secp256r1',
+        'sect283k1',
+        'sect283r1',
+        'secp384r1',
+        'sect409k1',
+        'sect409r1',
+        'secp521r1',
+        'sect571k1',
+        'sect571r1',
         ]
     _type_ = [
-        u'RSAPublicKey',
-        u'DSAPublicKey',
-        u'DSS-Parms',
-        u'DHPublicKey',
-        u'DomainParameters',
-        u'ValidationParms',
-        u'KEA-Parms-Id',
-        u'ECPoint',
-        u'ECParameters',
-        u'DSA-Sig-Value',
-        u'ECDSA-Sig-Value',
+        'RSAPublicKey',
+        'DSAPublicKey',
+        'DSS-Parms',
+        'DHPublicKey',
+        'DomainParameters',
+        'ValidationParms',
+        'KEA-Parms-Id',
+        'ECPoint',
+        'ECParameters',
+        'DSA-Sig-Value',
+        'ECDSA-Sig-Value',
         ]
     _set_ = [
         ]
     _val_ = [
-        u'id-sha224',
-        u'id-sha256',
-        u'id-sha384',
-        u'id-sha512',
-        u'id-md2',
-        u'id-md5',
-        u'id-sha1',
-        u'rsaEncryption',
-        u'id-dsa',
-        u'dhpublicnumber',
-        u'id-keyExchangeAlgorithm',
-        u'id-ecPublicKey',
-        u'id-ecDH',
-        u'id-ecMQV',
-        u'md2WithRSAEncryption',
-        u'md5WithRSAEncryption',
-        u'sha1WithRSAEncryption',
-        u'id-dsa-with-sha1',
-        u'id-dsa-with-sha224',
-        u'id-dsa-with-sha256',
-        u'ecdsa-with-SHA1',
-        u'ecdsa-with-SHA224',
-        u'ecdsa-with-SHA256',
-        u'ecdsa-with-SHA384',
-        u'ecdsa-with-SHA512',
-        u'secp192r1',
-        u'sect163k1',
-        u'sect163r2',
-        u'secp224r1',
-        u'sect233k1',
-        u'sect233r1',
-        u'secp256r1',
-        u'sect283k1',
-        u'sect283r1',
-        u'secp384r1',
-        u'sect409k1',
-        u'sect409r1',
-        u'secp521r1',
-        u'sect571k1',
-        u'sect571r1',
+        'id-sha224',
+        'id-sha256',
+        'id-sha384',
+        'id-sha512',
+        'id-md2',
+        'id-md5',
+        'id-sha1',
+        'rsaEncryption',
+        'id-dsa',
+        'dhpublicnumber',
+        'id-keyExchangeAlgorithm',
+        'id-ecPublicKey',
+        'id-ecDH',
+        'id-ecMQV',
+        'md2WithRSAEncryption',
+        'md5WithRSAEncryption',
+        'sha1WithRSAEncryption',
+        'id-dsa-with-sha1',
+        'id-dsa-with-sha224',
+        'id-dsa-with-sha256',
+        'ecdsa-with-SHA1',
+        'ecdsa-with-SHA224',
+        'ecdsa-with-SHA256',
+        'ecdsa-with-SHA384',
+        'ecdsa-with-SHA512',
+        'secp192r1',
+        'sect163k1',
+        'sect163r2',
+        'secp224r1',
+        'sect233k1',
+        'sect233r1',
+        'secp256r1',
+        'sect283k1',
+        'sect283r1',
+        'secp384r1',
+        'sect409k1',
+        'sect409r1',
+        'secp521r1',
+        'sect571k1',
+        'sect571r1',
         ]
     _class_ = [
         ]
@@ -135,251 +135,251 @@ class PKIX1Algorithms2008:
         ]
     
     #-----< id-sha224 >-----#
-    id_sha224 = OID(name=u'id-sha224', mode=MODE_VALUE)
+    id_sha224 = OID(name='id-sha224', mode=MODE_VALUE)
     id_sha224._val = (2, 16, 840, 1, 101, 3, 4, 2, 4)
     
     #-----< id-sha256 >-----#
-    id_sha256 = OID(name=u'id-sha256', mode=MODE_VALUE)
+    id_sha256 = OID(name='id-sha256', mode=MODE_VALUE)
     id_sha256._val = (2, 16, 840, 1, 101, 3, 4, 2, 1)
     
     #-----< id-sha384 >-----#
-    id_sha384 = OID(name=u'id-sha384', mode=MODE_VALUE)
+    id_sha384 = OID(name='id-sha384', mode=MODE_VALUE)
     id_sha384._val = (2, 16, 840, 1, 101, 3, 4, 2, 2)
     
     #-----< id-sha512 >-----#
-    id_sha512 = OID(name=u'id-sha512', mode=MODE_VALUE)
+    id_sha512 = OID(name='id-sha512', mode=MODE_VALUE)
     id_sha512._val = (2, 16, 840, 1, 101, 3, 4, 2, 3)
     
     #-----< id-md2 >-----#
-    id_md2 = OID(name=u'id-md2', mode=MODE_VALUE)
+    id_md2 = OID(name='id-md2', mode=MODE_VALUE)
     id_md2._val = (1, 2, 840, 113549, 2, 2)
     
     #-----< id-md5 >-----#
-    id_md5 = OID(name=u'id-md5', mode=MODE_VALUE)
+    id_md5 = OID(name='id-md5', mode=MODE_VALUE)
     id_md5._val = (1, 2, 840, 113549, 2, 5)
     
     #-----< id-sha1 >-----#
-    id_sha1 = OID(name=u'id-sha1', mode=MODE_VALUE)
+    id_sha1 = OID(name='id-sha1', mode=MODE_VALUE)
     id_sha1._val = (1, 3, 14, 3, 2, 26)
     
     #-----< rsaEncryption >-----#
-    rsaEncryption = OID(name=u'rsaEncryption', mode=MODE_VALUE)
+    rsaEncryption = OID(name='rsaEncryption', mode=MODE_VALUE)
     rsaEncryption._val = (1, 2, 840, 113549, 1, 1, 1)
     
     #-----< RSAPublicKey >-----#
-    RSAPublicKey = SEQ(name=u'RSAPublicKey', mode=MODE_TYPE)
-    _RSAPublicKey_modulus = INT(name=u'modulus', mode=MODE_TYPE)
-    _RSAPublicKey_publicExponent = INT(name=u'publicExponent', mode=MODE_TYPE)
+    RSAPublicKey = SEQ(name='RSAPublicKey', mode=MODE_TYPE)
+    _RSAPublicKey_modulus = INT(name='modulus', mode=MODE_TYPE)
+    _RSAPublicKey_publicExponent = INT(name='publicExponent', mode=MODE_TYPE)
     RSAPublicKey._cont = ASN1Dict([
-        (u'modulus', _RSAPublicKey_modulus),
-        (u'publicExponent', _RSAPublicKey_publicExponent),
+        ('modulus', _RSAPublicKey_modulus),
+        ('publicExponent', _RSAPublicKey_publicExponent),
         ])
     RSAPublicKey._ext = None
     
     #-----< id-dsa >-----#
-    id_dsa = OID(name=u'id-dsa', mode=MODE_VALUE)
+    id_dsa = OID(name='id-dsa', mode=MODE_VALUE)
     id_dsa._val = (1, 2, 840, 10040, 4, 1)
     
     #-----< DSAPublicKey >-----#
-    DSAPublicKey = INT(name=u'DSAPublicKey', mode=MODE_TYPE)
+    DSAPublicKey = INT(name='DSAPublicKey', mode=MODE_TYPE)
     
     #-----< DSS-Parms >-----#
-    DSS_Parms = SEQ(name=u'DSS-Parms', mode=MODE_TYPE)
-    _DSS_Parms_p = INT(name=u'p', mode=MODE_TYPE)
-    _DSS_Parms_q = INT(name=u'q', mode=MODE_TYPE)
-    _DSS_Parms_g = INT(name=u'g', mode=MODE_TYPE)
+    DSS_Parms = SEQ(name='DSS-Parms', mode=MODE_TYPE)
+    _DSS_Parms_p = INT(name='p', mode=MODE_TYPE)
+    _DSS_Parms_q = INT(name='q', mode=MODE_TYPE)
+    _DSS_Parms_g = INT(name='g', mode=MODE_TYPE)
     DSS_Parms._cont = ASN1Dict([
-        (u'p', _DSS_Parms_p),
-        (u'q', _DSS_Parms_q),
-        (u'g', _DSS_Parms_g),
+        ('p', _DSS_Parms_p),
+        ('q', _DSS_Parms_q),
+        ('g', _DSS_Parms_g),
         ])
     DSS_Parms._ext = None
     
     #-----< dhpublicnumber >-----#
-    dhpublicnumber = OID(name=u'dhpublicnumber', mode=MODE_VALUE)
+    dhpublicnumber = OID(name='dhpublicnumber', mode=MODE_VALUE)
     dhpublicnumber._val = (1, 2, 840, 10046, 2, 1)
     
     #-----< DHPublicKey >-----#
-    DHPublicKey = INT(name=u'DHPublicKey', mode=MODE_TYPE)
+    DHPublicKey = INT(name='DHPublicKey', mode=MODE_TYPE)
     
     #-----< DomainParameters >-----#
-    DomainParameters = SEQ(name=u'DomainParameters', mode=MODE_TYPE)
-    _DomainParameters_p = INT(name=u'p', mode=MODE_TYPE)
-    _DomainParameters_g = INT(name=u'g', mode=MODE_TYPE)
-    _DomainParameters_q = INT(name=u'q', mode=MODE_TYPE)
-    _DomainParameters_j = INT(name=u'j', mode=MODE_TYPE, opt=True)
-    _DomainParameters_validationParms = SEQ(name=u'validationParms', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX1Algorithms2008', 'ValidationParms')), opt=True)
+    DomainParameters = SEQ(name='DomainParameters', mode=MODE_TYPE)
+    _DomainParameters_p = INT(name='p', mode=MODE_TYPE)
+    _DomainParameters_g = INT(name='g', mode=MODE_TYPE)
+    _DomainParameters_q = INT(name='q', mode=MODE_TYPE)
+    _DomainParameters_j = INT(name='j', mode=MODE_TYPE, opt=True)
+    _DomainParameters_validationParms = SEQ(name='validationParms', mode=MODE_TYPE, typeref=ASN1RefType(('PKIX1Algorithms2008', 'ValidationParms')), opt=True)
     DomainParameters._cont = ASN1Dict([
-        (u'p', _DomainParameters_p),
-        (u'g', _DomainParameters_g),
-        (u'q', _DomainParameters_q),
-        (u'j', _DomainParameters_j),
-        (u'validationParms', _DomainParameters_validationParms),
+        ('p', _DomainParameters_p),
+        ('g', _DomainParameters_g),
+        ('q', _DomainParameters_q),
+        ('j', _DomainParameters_j),
+        ('validationParms', _DomainParameters_validationParms),
         ])
     DomainParameters._ext = None
     
     #-----< ValidationParms >-----#
-    ValidationParms = SEQ(name=u'ValidationParms', mode=MODE_TYPE)
-    _ValidationParms_seed = BIT_STR(name=u'seed', mode=MODE_TYPE)
-    _ValidationParms_pgenCounter = INT(name=u'pgenCounter', mode=MODE_TYPE)
+    ValidationParms = SEQ(name='ValidationParms', mode=MODE_TYPE)
+    _ValidationParms_seed = BIT_STR(name='seed', mode=MODE_TYPE)
+    _ValidationParms_pgenCounter = INT(name='pgenCounter', mode=MODE_TYPE)
     ValidationParms._cont = ASN1Dict([
-        (u'seed', _ValidationParms_seed),
-        (u'pgenCounter', _ValidationParms_pgenCounter),
+        ('seed', _ValidationParms_seed),
+        ('pgenCounter', _ValidationParms_pgenCounter),
         ])
     ValidationParms._ext = None
     
     #-----< id-keyExchangeAlgorithm >-----#
-    id_keyExchangeAlgorithm = OID(name=u'id-keyExchangeAlgorithm', mode=MODE_VALUE)
+    id_keyExchangeAlgorithm = OID(name='id-keyExchangeAlgorithm', mode=MODE_VALUE)
     id_keyExchangeAlgorithm._val = (2, 16, 840, 1, 101, 2, 1, 1, 22)
     
     #-----< KEA-Parms-Id >-----#
-    KEA_Parms_Id = OCT_STR(name=u'KEA-Parms-Id', mode=MODE_TYPE)
+    KEA_Parms_Id = OCT_STR(name='KEA-Parms-Id', mode=MODE_TYPE)
     
     #-----< id-ecPublicKey >-----#
-    id_ecPublicKey = OID(name=u'id-ecPublicKey', mode=MODE_VALUE)
+    id_ecPublicKey = OID(name='id-ecPublicKey', mode=MODE_VALUE)
     id_ecPublicKey._val = (1, 2, 840, 10045, 2, 1)
     
     #-----< ECPoint >-----#
-    ECPoint = OCT_STR(name=u'ECPoint', mode=MODE_TYPE)
+    ECPoint = OCT_STR(name='ECPoint', mode=MODE_TYPE)
     
     #-----< ECParameters >-----#
-    ECParameters = CHOICE(name=u'ECParameters', mode=MODE_TYPE)
-    _ECParameters_namedCurve = OID(name=u'namedCurve', mode=MODE_TYPE)
+    ECParameters = CHOICE(name='ECParameters', mode=MODE_TYPE)
+    _ECParameters_namedCurve = OID(name='namedCurve', mode=MODE_TYPE)
     ECParameters._cont = ASN1Dict([
-        (u'namedCurve', _ECParameters_namedCurve),
+        ('namedCurve', _ECParameters_namedCurve),
         ])
     ECParameters._ext = None
     
     #-----< id-ecDH >-----#
-    id_ecDH = OID(name=u'id-ecDH', mode=MODE_VALUE)
+    id_ecDH = OID(name='id-ecDH', mode=MODE_VALUE)
     id_ecDH._val = (1, 3, 132, 1, 12)
     
     #-----< id-ecMQV >-----#
-    id_ecMQV = OID(name=u'id-ecMQV', mode=MODE_VALUE)
+    id_ecMQV = OID(name='id-ecMQV', mode=MODE_VALUE)
     id_ecMQV._val = (1, 3, 132, 1, 13)
     
     #-----< md2WithRSAEncryption >-----#
-    md2WithRSAEncryption = OID(name=u'md2WithRSAEncryption', mode=MODE_VALUE)
+    md2WithRSAEncryption = OID(name='md2WithRSAEncryption', mode=MODE_VALUE)
     md2WithRSAEncryption._val = (1, 2, 840, 113549, 1, 1, 2)
     
     #-----< md5WithRSAEncryption >-----#
-    md5WithRSAEncryption = OID(name=u'md5WithRSAEncryption', mode=MODE_VALUE)
+    md5WithRSAEncryption = OID(name='md5WithRSAEncryption', mode=MODE_VALUE)
     md5WithRSAEncryption._val = (1, 2, 840, 113549, 1, 1, 4)
     
     #-----< sha1WithRSAEncryption >-----#
-    sha1WithRSAEncryption = OID(name=u'sha1WithRSAEncryption', mode=MODE_VALUE)
+    sha1WithRSAEncryption = OID(name='sha1WithRSAEncryption', mode=MODE_VALUE)
     sha1WithRSAEncryption._val = (1, 2, 840, 113549, 1, 1, 5)
     
     #-----< id-dsa-with-sha1 >-----#
-    id_dsa_with_sha1 = OID(name=u'id-dsa-with-sha1', mode=MODE_VALUE)
+    id_dsa_with_sha1 = OID(name='id-dsa-with-sha1', mode=MODE_VALUE)
     id_dsa_with_sha1._val = (1, 2, 840, 10040, 4, 3)
     
     #-----< id-dsa-with-sha224 >-----#
-    id_dsa_with_sha224 = OID(name=u'id-dsa-with-sha224', mode=MODE_VALUE)
+    id_dsa_with_sha224 = OID(name='id-dsa-with-sha224', mode=MODE_VALUE)
     id_dsa_with_sha224._val = (2, 16, 840, 1, 101, 3, 4, 3, 1)
     
     #-----< id-dsa-with-sha256 >-----#
-    id_dsa_with_sha256 = OID(name=u'id-dsa-with-sha256', mode=MODE_VALUE)
+    id_dsa_with_sha256 = OID(name='id-dsa-with-sha256', mode=MODE_VALUE)
     id_dsa_with_sha256._val = (2, 16, 840, 1, 101, 3, 4, 3, 2)
     
     #-----< ecdsa-with-SHA1 >-----#
-    ecdsa_with_SHA1 = OID(name=u'ecdsa-with-SHA1', mode=MODE_VALUE)
+    ecdsa_with_SHA1 = OID(name='ecdsa-with-SHA1', mode=MODE_VALUE)
     ecdsa_with_SHA1._val = (1, 2, 840, 10045, 4, 1)
     
     #-----< ecdsa-with-SHA224 >-----#
-    ecdsa_with_SHA224 = OID(name=u'ecdsa-with-SHA224', mode=MODE_VALUE)
+    ecdsa_with_SHA224 = OID(name='ecdsa-with-SHA224', mode=MODE_VALUE)
     ecdsa_with_SHA224._val = (1, 2, 840, 10045, 4, 3, 1)
     
     #-----< ecdsa-with-SHA256 >-----#
-    ecdsa_with_SHA256 = OID(name=u'ecdsa-with-SHA256', mode=MODE_VALUE)
+    ecdsa_with_SHA256 = OID(name='ecdsa-with-SHA256', mode=MODE_VALUE)
     ecdsa_with_SHA256._val = (1, 2, 840, 10045, 4, 3, 2)
     
     #-----< ecdsa-with-SHA384 >-----#
-    ecdsa_with_SHA384 = OID(name=u'ecdsa-with-SHA384', mode=MODE_VALUE)
+    ecdsa_with_SHA384 = OID(name='ecdsa-with-SHA384', mode=MODE_VALUE)
     ecdsa_with_SHA384._val = (1, 2, 840, 10045, 4, 3, 3)
     
     #-----< ecdsa-with-SHA512 >-----#
-    ecdsa_with_SHA512 = OID(name=u'ecdsa-with-SHA512', mode=MODE_VALUE)
+    ecdsa_with_SHA512 = OID(name='ecdsa-with-SHA512', mode=MODE_VALUE)
     ecdsa_with_SHA512._val = (1, 2, 840, 10045, 4, 3, 4)
     
     #-----< DSA-Sig-Value >-----#
-    DSA_Sig_Value = SEQ(name=u'DSA-Sig-Value', mode=MODE_TYPE)
-    _DSA_Sig_Value_r = INT(name=u'r', mode=MODE_TYPE)
-    _DSA_Sig_Value_s = INT(name=u's', mode=MODE_TYPE)
+    DSA_Sig_Value = SEQ(name='DSA-Sig-Value', mode=MODE_TYPE)
+    _DSA_Sig_Value_r = INT(name='r', mode=MODE_TYPE)
+    _DSA_Sig_Value_s = INT(name='s', mode=MODE_TYPE)
     DSA_Sig_Value._cont = ASN1Dict([
-        (u'r', _DSA_Sig_Value_r),
-        (u's', _DSA_Sig_Value_s),
+        ('r', _DSA_Sig_Value_r),
+        ('s', _DSA_Sig_Value_s),
         ])
     DSA_Sig_Value._ext = None
     
     #-----< ECDSA-Sig-Value >-----#
-    ECDSA_Sig_Value = SEQ(name=u'ECDSA-Sig-Value', mode=MODE_TYPE)
-    _ECDSA_Sig_Value_r = INT(name=u'r', mode=MODE_TYPE)
-    _ECDSA_Sig_Value_s = INT(name=u's', mode=MODE_TYPE)
+    ECDSA_Sig_Value = SEQ(name='ECDSA-Sig-Value', mode=MODE_TYPE)
+    _ECDSA_Sig_Value_r = INT(name='r', mode=MODE_TYPE)
+    _ECDSA_Sig_Value_s = INT(name='s', mode=MODE_TYPE)
     ECDSA_Sig_Value._cont = ASN1Dict([
-        (u'r', _ECDSA_Sig_Value_r),
-        (u's', _ECDSA_Sig_Value_s),
+        ('r', _ECDSA_Sig_Value_r),
+        ('s', _ECDSA_Sig_Value_s),
         ])
     ECDSA_Sig_Value._ext = None
     
     #-----< secp192r1 >-----#
-    secp192r1 = OID(name=u'secp192r1', mode=MODE_VALUE)
+    secp192r1 = OID(name='secp192r1', mode=MODE_VALUE)
     secp192r1._val = (1, 2, 840, 10045, 3, 1, 1)
     
     #-----< sect163k1 >-----#
-    sect163k1 = OID(name=u'sect163k1', mode=MODE_VALUE)
+    sect163k1 = OID(name='sect163k1', mode=MODE_VALUE)
     sect163k1._val = (1, 3, 132, 0, 1)
     
     #-----< sect163r2 >-----#
-    sect163r2 = OID(name=u'sect163r2', mode=MODE_VALUE)
+    sect163r2 = OID(name='sect163r2', mode=MODE_VALUE)
     sect163r2._val = (1, 3, 132, 0, 15)
     
     #-----< secp224r1 >-----#
-    secp224r1 = OID(name=u'secp224r1', mode=MODE_VALUE)
+    secp224r1 = OID(name='secp224r1', mode=MODE_VALUE)
     secp224r1._val = (1, 3, 132, 0, 33)
     
     #-----< sect233k1 >-----#
-    sect233k1 = OID(name=u'sect233k1', mode=MODE_VALUE)
+    sect233k1 = OID(name='sect233k1', mode=MODE_VALUE)
     sect233k1._val = (1, 3, 132, 0, 26)
     
     #-----< sect233r1 >-----#
-    sect233r1 = OID(name=u'sect233r1', mode=MODE_VALUE)
+    sect233r1 = OID(name='sect233r1', mode=MODE_VALUE)
     sect233r1._val = (1, 3, 132, 0, 27)
     
     #-----< secp256r1 >-----#
-    secp256r1 = OID(name=u'secp256r1', mode=MODE_VALUE)
+    secp256r1 = OID(name='secp256r1', mode=MODE_VALUE)
     secp256r1._val = (1, 2, 840, 10045, 3, 1, 7)
     
     #-----< sect283k1 >-----#
-    sect283k1 = OID(name=u'sect283k1', mode=MODE_VALUE)
+    sect283k1 = OID(name='sect283k1', mode=MODE_VALUE)
     sect283k1._val = (1, 3, 132, 0, 16)
     
     #-----< sect283r1 >-----#
-    sect283r1 = OID(name=u'sect283r1', mode=MODE_VALUE)
+    sect283r1 = OID(name='sect283r1', mode=MODE_VALUE)
     sect283r1._val = (1, 3, 132, 0, 17)
     
     #-----< secp384r1 >-----#
-    secp384r1 = OID(name=u'secp384r1', mode=MODE_VALUE)
+    secp384r1 = OID(name='secp384r1', mode=MODE_VALUE)
     secp384r1._val = (1, 3, 132, 0, 34)
     
     #-----< sect409k1 >-----#
-    sect409k1 = OID(name=u'sect409k1', mode=MODE_VALUE)
+    sect409k1 = OID(name='sect409k1', mode=MODE_VALUE)
     sect409k1._val = (1, 3, 132, 0, 36)
     
     #-----< sect409r1 >-----#
-    sect409r1 = OID(name=u'sect409r1', mode=MODE_VALUE)
+    sect409r1 = OID(name='sect409r1', mode=MODE_VALUE)
     sect409r1._val = (1, 3, 132, 0, 37)
     
     #-----< secp521r1 >-----#
-    secp521r1 = OID(name=u'secp521r1', mode=MODE_VALUE)
+    secp521r1 = OID(name='secp521r1', mode=MODE_VALUE)
     secp521r1._val = (1, 3, 132, 0, 35)
     
     #-----< sect571k1 >-----#
-    sect571k1 = OID(name=u'sect571k1', mode=MODE_VALUE)
+    sect571k1 = OID(name='sect571k1', mode=MODE_VALUE)
     sect571k1._val = (1, 3, 132, 0, 38)
     
     #-----< sect571r1 >-----#
-    sect571r1 = OID(name=u'sect571r1', mode=MODE_VALUE)
+    sect571r1 = OID(name='sect571r1', mode=MODE_VALUE)
     sect571r1._val = (1, 3, 132, 0, 39)
     
     _all_ = [
