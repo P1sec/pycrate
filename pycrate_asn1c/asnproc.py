@@ -120,7 +120,10 @@ def get_spec_files(spec_dir):
     spec_texts, spec_fn = [], []
     for fn in load:
         try:
-            fd = open('%s%s' % (spec_dir, fn), 'r')
+            if python_version < 3:
+                fd = open('%s%s' % (spec_dir, fn), 'r')
+            else:
+                fd = open('%s%s' % (spec_dir, fn), 'r', encoding='utf-8')
         except Exception as err:
             raise(ASN1Err(
                   '[proc] unable to open spec file {0}, {1}'.format(fn, err)))

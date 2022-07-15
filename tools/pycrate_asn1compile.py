@@ -200,7 +200,10 @@ def main():
         txt = []
         for f in files:
             try:
-                fd = open(f)
+                if python_version < 3:
+                    fd = open(f, 'r')
+                else:
+                    fd = open(f, 'r', encoding='utf-8')
             except Exception as e:
                 print('%s, args error: unable to open input file %s' % (sys.argv[0], f))
                 print(e)
