@@ -200,14 +200,20 @@ def main():
         txt = []
         for f in files:
             try:
-                fd = open(f, encoding='utf-8')
+                if python_version < 3:
+                    fd = open(f, 'r')
+                else:
+                    fd = open(f, 'r', encoding='utf-8')
             except Exception as e:
                 print('%s, args error: unable to open input file %s' % (sys.argv[0], f))
                 print(e)
                 return 1
             else:
                 try:
-                    txt.append( fd.read() )
+                    if python_version < 3:
+                        txt.append( fd.read().decode('utf-8') )
+                    else:
+                        txt.append( fd.read() )
                 except Exception as e:
                     print('%s, args error: unable to read input file %s' % (sys.argv[0], f))
                     print(e)
