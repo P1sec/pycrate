@@ -2440,9 +2440,56 @@ def _test_tcap_map():
             M.from_jer(txt)
             assert( M() == val )
 
+
+def _test_tcap_map_rt():
+    # use a specific TCAP-MAP buffer for testing some more ASN.1 runtime features
+    # take care to not test for too-TCAP-MAP features, that could change in future versions
+    #
+    M = GLOBAL.MOD['TCAP-MAP-Messages']['TCAP-MAP-Message']
+    p = pkts_tcap_map[1]
+    M.from_ber(p)
+    #
+    assert( M.get_internals()['root'] == ['unidirectional', 'begin', 'end', 'continue', 'abort'] )
+    assert( M.get_typeref() == M._tr == GLOBAL.MOD['TCAPMessages']['TCMessage'] )
+    #
+    prot = M.get_proto(w_open=True, w_opt=True, w_enum=True, print_recurs=False, blacklist=set())
+    assert( len(prot[1]) == 5 and len(prot[1]['begin'][1]) == 3 )
+    comp = M.get_complexity(w_open=False, w_opt=False, print_recurs=False, blacklist=set())
+    assert( comp == (23, 7, []) )
+    comp = M.get_complexity(w_open=True, w_opt=True, print_recurs=False, blacklist=set())
+    assert( comp[0] >= 20156 and comp[1] >= 19 and len(comp[2]) >= 20 )
+    #
+    M.convert_named_val()
+    mvp  = M.get_val_paths()
+    mvjp = M.get_val_jer_paths()
+    assert( len(mvp) == len(mvjp) == 12 )
+    assert( mvp[0] == (['begin', 'otid'], b'mS\x07\x02') )
+    assert( mvp[5] == (['begin', 'components', 0, 'basicROS', 'invoke', 'opcode', 'local'], 2) )
+    assert( mvp[9] == (['begin', 'components', 0, 'basicROS', 'invoke', 'argument', 'UpdateLocationArg', 'vlr-Capability', 'supportedCamelPhases'], {'phase1'}) )
+    assert( mvp[11] == (['begin', 'components', 0, 'basicROS', 'invoke', 'argument', 'UpdateLocationArg', 'add-info', 'imeisv'], b"h5a0Q\x86\x84'") )
+    #
+    imei = M.get_at(mvp[11][0])
+    assert( imei._mod == 'MAP-MS-DataTypes' )
+    assert( imei.get_typeref_list()[0] == GLOBAL.MOD['MAP-CommonDataTypes']['IMEI'] )
+    assert( imei.get_type_list() == ['IMEI', 'TBCD-STRING', 'OCTET STRING'] )
+    assert( M.get_val_at(mvp[11][0]) == mvp[11][1] )
+    M.set_val_at(mvp[11][0], mvp[11][1])
+    assert( M.get_val_paths()[11][1] == mvp[11][1] )
+    #
+    ic = imei.get_const()
+    assert( len(ic) == 1 and 'sz' in ic )
+    assert( ic['sz'].root == [8] and ic['sz'].ext is None )
+    #
+    M.unset_val()
+    assert( imei._val is None )
+    assert( M._val is None )
+    M.reset_val()
+
+
 def test_tcap_map():
     _load_tcap_map()
     _test_tcap_map()
+    _test_tcap_map_rt()
 
 
 # https://wiki.wireshark.org/SampleCaptures?action=AttachFile&do=get&target=camel.pcap
