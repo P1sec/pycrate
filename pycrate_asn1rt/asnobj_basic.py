@@ -1611,7 +1611,7 @@ class _OID(ASN1Obj):
     def _from_asn1(self, txt):
         m = self._ASN_RE.match(txt)
         if m:
-            txtval = txt[m.start()+1:m.end()-1]
+            txtval = txt[m.start()+1:m.end()-1].strip()
             _val = []
             txt = txt[m.end():].strip()
             m = self._ASN_RE_COMP.match(txtval)
