@@ -284,7 +284,7 @@ bcsmEventHandlingPackage {PARAMETERS-BOUND : bound} OPERATION-PACKAGE ::= {
 	ID			id-package-bcsmEventHandling}
 
 ssfCallProcessingPackage {PARAMETERS-BOUND : bound} OPERATION-PACKAGE ::= {
-	CONSUMER INVOKES	{ collectInformation | continueWithArgument {bound} | continue}
+	CONSUMER INVOKES	{ collectInformation {bound} | continueWithArgument {bound} | continue}
 	ID			id-package-ssfCallProcessing}
 
 scfCallInitiationPackage {PARAMETERS-BOUND : bound} OPERATION-PACKAGE ::= {
@@ -368,7 +368,7 @@ SsfToScfGenericInvokable OPERATION ::= {
 	connect {cAPSpecificBoundSet} |
 	continueWithArgument {cAPSpecificBoundSet} |
 	connectToResource {cAPSpecificBoundSet} |
-	collectInformation |
+	collectInformation {cAPSpecificBoundSet} |
 	disconnectForwardConnection |
 	disconnectForwardConnectionWithArgument {cAPSpecificBoundSet} |
 	disconnectLeg {cAPSpecificBoundSet} |
@@ -401,7 +401,7 @@ SsfToScfGenericReturnable OPERATION ::= {
 	cancel {cAPSpecificBoundSet} |
 	connect {cAPSpecificBoundSet} |
 	connectToResource {cAPSpecificBoundSet} |
-	collectInformation |
+	collectInformation {cAPSpecificBoundSet} |
 	continue |
 	continueWithArgument {cAPSpecificBoundSet} |
 	disconnectForwardConnection |
@@ -437,8 +437,10 @@ assistHandoff-gsmSSF-scfAbstractSyntax ABSTRACT-SYNTAX ::= {
 	IDENTIFIED BY	id-as-assistHandoff-gsmSSF-scfAS}
 -- 'AssistHandoffsSF-gsmSCF-PDUs' is defined in the present module.
 
-AssistHandoffsSF-gsmSCF-PDUs ::= TCMessage {{AssistHandoffssfToScfInvokable},
-						{AssistHandoffssfToScfReturnable}}
+AssistHandoffsSF-gsmSCF-PDUs ::= TCMessage {
+	{AssistHandoffssfToScfInvokable},
+	{AssistHandoffssfToScfReturnable}
+	}
 -- 'AssistHandoffssfToScfInvokable' and 'AssistHandoffssfToScfReturnable' are defined in the
 -- present module.
 
@@ -479,8 +481,10 @@ scf-gsmSSFGenericAbstractSyntax	ABSTRACT-SYNTAX ::= {
 	IDENTIFIED BY	id-as-scf-gsmSSFGenericAS}
 -- 'GenericSCF-gsmSSF-PDUs' is defined in the present module.
 
-GenericSCF-gsmSSF-PDUs ::= TCMessage {{ScfToSsfGenericInvokable},
-					 {ScfToSsfGenericReturnable}}
+GenericSCF-gsmSSF-PDUs ::= TCMessage {
+    {ScfToSsfGenericInvokable},
+    {ScfToSsfGenericReturnable}
+    }
 -- 'ScfToSsfGenericInvokable' and 'ScfToSsfGenericReturnable' are defined in the
 -- present module.
 
@@ -490,7 +494,7 @@ ScfToSsfGenericInvokable OPERATION ::= {
 	applyChargingReport {cAPSpecificBoundSet} |
 	callInformationRequest {cAPSpecificBoundSet} |
 	cancel {cAPSpecificBoundSet} |
-	collectInformation |
+	collectInformation {cAPSpecificBoundSet} |
 	connect {cAPSpecificBoundSet} |
 	connectToResource {cAPSpecificBoundSet} |
 	continue |

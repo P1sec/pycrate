@@ -1,6 +1,6 @@
 MAP-BS-Code {
    itu-t identified-organization (4) etsi (0) mobileDomain (0)
-   gsm-Network (1) modules (3) map-BS-Code (20) version16 (16)}
+   gsm-Network (1) modules (3) map-BS-Code (20) version19 (19)}
 
 DEFINITIONS
 
@@ -40,7 +40,7 @@ Ext-BearerServiceCode ::= OCTET STRING (SIZE (1..5))
 	-- OCTETS 2-5: reserved for future use. If received the
     -- Ext-TeleserviceCode shall be
 	-- treated according to the exception handling defined for the
-	-- operation that uses this type. 
+	-- operation that uses this type.
 
 
 	-- Ext-BearerServiceCode includes all values defined for BearerServiceCode.
@@ -48,7 +48,7 @@ Ext-BearerServiceCode ::= OCTET STRING (SIZE (1..5))
 allBearerServices	BearerServiceCode ::= '00000000'B
 
 allDataCDA-Services	BearerServiceCode ::= '00010000'B
-dataCDA-300bps		BearerServiceCode ::= '00010001'B
+dataCDA-300bps	BearerServiceCode ::= '00010001'B
 dataCDA-1200bps	BearerServiceCode ::= '00010010'B
 dataCDA-1200-75bps	BearerServiceCode ::= '00010011'B
 dataCDA-2400bps	BearerServiceCode ::= '00010100'B

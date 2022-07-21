@@ -1,6 +1,6 @@
--- 8.2	gsmSCF/gprsSSF contracts, packages and ACs
--- 8.2.1	gprsSSF/gsmSCF ASN.1 module
-CAP-gprsSSF-gsmSCF-pkgs-contracts-acs {itu-t(0) identified-organization(4) etsi(0) mobileDomain(0) umts-network(1) modules(3) cap-gprsSSF-gsmSCF-pkgs-contracts-acs(108) version8(7)}
+CAP-gprsSSF-gsmSCF-pkgs-contracts-acs {itu-t(0) identified-organization(4) etsi(0) mobileDomain(0) 
+umts-network(1) modules(3) cap-gprsSSF-gsmSCF-pkgs-contracts-acs(108) version8(7)}
+
 DEFINITIONS ::= BEGIN
 
 -- This module specifies the Operation Packages, Contracts, Application Contexts
@@ -97,19 +97,19 @@ umts-network(1) modules(3) cap-object-identifiers(100) version8(7)}
 -- dialogue-abstract-syntax ABSTRACT SYNTAX is defined in ITU-T Recommendation Q.775.
 
 cap-gprssf-scfAC APPLICATION-CONTEXT ::= {
-	CONTRACT					capGprsSsfToScf
-	DIALOGUE MODE				structured
-	ABSTRACT SYNTAXES			{dialogue-abstract-syntax |
-								gprsSSF-gsmSCFAbstractSyntax}
+	CONTRACT			capGprsSsfToScf
+	DIALOGUE MODE		structured
+	ABSTRACT SYNTAXES		{dialogue-abstract-syntax |
+				gprsSSF-gsmSCFAbstractSyntax}
 	APPLICATION CONTEXT NAME	id-ac-CAP-gprsSSF-gsmSCF-AC}
 -- 'capGprsSsfToScf' and 'gprsSSF-gsmSCFAbstractSyntax' are defined in the present
 -- module.
 
 cap-gsmscf-gprsssfAC APPLICATION-CONTEXT ::= {
-	CONTRACT					capGsmScfToGprsSsf
-	DIALOGUE MODE				structured
-	ABSTRACT SYNTAXES			{dialogue-abstract-syntax |
-								gsmSCF-gprsSSFAbstractSyntax}
+	CONTRACT			capGsmScfToGprsSsf
+	DIALOGUE MODE		structured
+	ABSTRACT SYNTAXES		{dialogue-abstract-syntax |
+				gsmSCF-gprsSSFAbstractSyntax}
 	APPLICATION CONTEXT NAME	id-ac-CAP-gsmSCF-gprsSSF-AC}
 -- 'capGsmScfToGprsSsf' and 'gsmSCF-gprsSSFAbstractSyntax' are defined in the present
 -- module.
@@ -121,34 +121,34 @@ cap-gsmscf-gprsssfAC APPLICATION-CONTEXT ::= {
 capGprsSsfToScf CONTRACT ::= {
 -- dialogue initiated by gprsSSF with InitialDPGPRS, ApplyChargingReportGPRS,
 -- EntityReleasedGPRS and EventReportGPRS Operations
-	INITIATOR CONSUMER OF		{gprsScfActivationPackage {cAPSpecificBoundSet} |
-								gprsEventHandlingPackage {cAPSpecificBoundSet} |
-								gprsChargingPackage |
-								gprsExceptionInformationPackage {cAPSpecificBoundSet}}
-	RESPONDER CONSUMER OF		{gprsConnectPackage {cAPSpecificBoundSet} |
-								gprsProcessingPackage |
-								gprsReleasePackage {cAPSpecificBoundSet} |
-								gprsEventHandlingPackage {cAPSpecificBoundSet} |
-								gprsTimerPackage |
-								gprsBillingPackage {cAPSpecificBoundSet} |
-								gprsChargingPackage |
-								gprsCancelPackage |
-								gprsChargeAdvicePackage {cAPSpecificBoundSet}}
-	ID							id-capGprsSsfTogsmScf}
+	INITIATOR CONSUMER OF	{gprsScfActivationPackage {cAPSpecificBoundSet} |
+				gprsEventHandlingPackage {cAPSpecificBoundSet} |
+				gprsChargingPackage |
+				gprsExceptionInformationPackage {cAPSpecificBoundSet}}
+	RESPONDER CONSUMER OF	{gprsConnectPackage {cAPSpecificBoundSet} |
+				gprsProcessingPackage |
+				gprsReleasePackage {cAPSpecificBoundSet} |
+				gprsEventHandlingPackage {cAPSpecificBoundSet} |
+				gprsTimerPackage |
+				gprsBillingPackage {cAPSpecificBoundSet} |
+				gprsChargingPackage |
+				gprsCancelPackage |
+				gprsChargeAdvicePackage {cAPSpecificBoundSet}}
+	ID				id-capGprsSsfTogsmScf}
 -- The OPERATION-PACKAGEs are defined in the present module.
 
 capGsmScfToGprsSsf CONTRACT ::= {
 -- dialogue initiated by gsmSCF with ApplyChargingGPRS, ActivityTestGPRS,
 -- CancelGPRS, FurnishChargingInformationGPRS, ReleaseGPRS,
 -- RequestReportGPRSEvent and SendChargingInformationGPRS Operations
-	INITIATOR CONSUMER OF		{gprsReleasePackage {cAPSpecificBoundSet} |
-								gprsEventHandlingPackage {cAPSpecificBoundSet} |
-								gprsBillingPackage {cAPSpecificBoundSet} |
-								gprsChargingPackage |
-								gprsActivityTestPackage |
-								gprsCancelPackage |
-								gprsChargeAdvicePackage {cAPSpecificBoundSet}}
-	ID							id-capGsmScfToGprsSsf}
+	INITIATOR CONSUMER OF	{gprsReleasePackage {cAPSpecificBoundSet} |
+				gprsEventHandlingPackage {cAPSpecificBoundSet} |
+				gprsBillingPackage {cAPSpecificBoundSet} |
+				gprsChargingPackage |
+				gprsActivityTestPackage |
+				gprsCancelPackage |
+				gprsChargeAdvicePackage {cAPSpecificBoundSet}}
+	ID				id-capGsmScfToGprsSsf}
 -- The OPERATION-PACKAGEs are defined in the present module.
 
 
@@ -158,53 +158,53 @@ capGsmScfToGprsSsf CONTRACT ::= {
 
 gprsScfActivationPackage {PARAMETERS-BOUND : bound} OPERATION-PACKAGE ::= {
 	CONSUMER INVOKES	{initialDPGPRS {bound}}
-	ID					id-package-gprsScfActivation}
+	ID			id-package-gprsScfActivation}
 
 gprsConnectPackage {PARAMETERS-BOUND : bound} OPERATION-PACKAGE ::= {
 	CONSUMER INVOKES	{connectGPRS {bound}}
-	ID					id-package-gprsConnect}
+	ID			id-package-gprsConnect}
 
 gprsProcessingPackage OPERATION-PACKAGE ::= {
 	CONSUMER INVOKES	{continueGPRS }
-	ID					id-package-gprsContinue}
+	ID			id-package-gprsContinue}
 
 gprsReleasePackage {PARAMETERS-BOUND : bound} OPERATION-PACKAGE ::= {
 	CONSUMER INVOKES	{releaseGPRS {bound}}
-	ID					id-package-gprsRelease}
+	ID			id-package-gprsRelease}
 
 gprsEventHandlingPackage {PARAMETERS-BOUND : bound} OPERATION-PACKAGE ::= {
 	CONSUMER INVOKES	{requestReportGPRSEvent {bound}}
 	SUPPLIER INVOKES	{eventReportGPRS {bound}}
-	ID					id-package-gprsEventHandling}
+	ID			id-package-gprsEventHandling}
 
 gprsExceptionInformationPackage {PARAMETERS-BOUND : bound} OPERATION-PACKAGE ::= {
 	CONSUMER INVOKES	{entityReleasedGPRS {bound}}
-	ID					id-package-gprsExceptionInformation}
+	ID			id-package-gprsExceptionInformation}
 
 gprsTimerPackage OPERATION-PACKAGE ::= {
 	CONSUMER INVOKES	{resetTimerGPRS }
-	ID					id-package-gprsTimer}
+	ID			id-package-gprsTimer}
 
 gprsBillingPackage {PARAMETERS-BOUND : bound} OPERATION-PACKAGE ::= {
 	CONSUMER INVOKES	{furnishChargingInformationGPRS {bound}}
-	ID					id-package-gprsBilling}
+	ID			id-package-gprsBilling}
 
 gprsChargingPackage OPERATION-PACKAGE ::= {
 	CONSUMER INVOKES	{applyChargingGPRS}
 	SUPPLIER INVOKES	{applyChargingReportGPRS}
-	ID					id-package-gprsCharging}
+	ID			id-package-gprsCharging}
 
 gprsChargeAdvicePackage {PARAMETERS-BOUND : bound} OPERATION-PACKAGE ::= {
 	CONSUMER INVOKES	{sendChargingInformationGPRS {bound}}
-	ID					id-package-gprsChargeAdvice}
+	ID			id-package-gprsChargeAdvice}
 
 gprsActivityTestPackage OPERATION-PACKAGE ::= {
 	CONSUMER INVOKES	{activityTestGPRS}
-	ID					id-package-gprsActivityTest}
+	ID			id-package-gprsActivityTest}
 
 gprsCancelPackage OPERATION-PACKAGE ::= {
 	CONSUMER INVOKES	{cancelGPRS }
-	ID					id-package-gprsCancel}
+	ID			id-package-gprsCancel}
 
 
 -- Abstract Syntaxes
@@ -217,7 +217,7 @@ gprsSSF-gsmSCFAbstractSyntax ABSTRACT-SYNTAX ::= {
 -- 'GenericGprsSSF-gsmSCF-PDUs' is defined in the present module.
 
 GenericGprsSSF-gsmSCF-PDUs ::= TCMessage {{GprsSsfToGsmScfInvokable},
-										  {GprsSsfToGsmScfReturnable}}
+					 {GprsSsfToGsmScfReturnable}}
 -- 'GprsSsfToGsmScfInvokable' and 'GprsSsfToGsmScfReturnable' are defined in the present module.
 
 GprsSsfToGsmScfInvokable OPERATION ::= {
@@ -257,7 +257,7 @@ gsmSCF-gprsSSFAbstractSyntax ABSTRACT-SYNTAX ::= {
 -- 'GenericGsmSCF-gprsSSF-PDUs' is defined in the present module.
 
 GenericGsmSCF-gprsSSF-PDUs ::= TCMessage {{GsmScfToGprsSsfInvokable},
-										  {GsmScfToGprsSsfReturnable}}
+					 {GsmScfToGprsSsfReturnable}}
 -- 'GsmScfToGprsSsfInvokable' and' GsmScfToGprsSsfReturnable' are defined in the present module.
 
 GsmScfToGprsSsfInvokable OPERATION ::= {

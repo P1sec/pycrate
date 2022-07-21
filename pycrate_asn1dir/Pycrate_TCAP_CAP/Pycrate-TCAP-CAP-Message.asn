@@ -64,10 +64,36 @@ FROM CAP-gsmSCF-gsmSRF-ops-args
 	splitLeg {}
 FROM CAP-gsmSSF-gsmSCF-ops-args
 
+	connectSMS{},
+	continueSMS,
+	eventReportSMS{},
+	furnishChargingInformationSMS{},
+	initialDPSMS{},
+	releaseSMS,
+	requestReportSMSEvent{},
+	resetTimerSMS{}
+FROM CAP-SMS-ops-args
+
 ;
 
 -- TCMessage{OPERATION:Invokable, OPERATION:Returnable}
 -- here for commodity, we gather all CAP application contexts into a single TCMessage object
+-- this includes the following set of Invokable OPERATION:
+-- GprsSsfToGsmScfInvokable
+-- GsmScfToGprsSsfInvokable
+-- GsmSRFgsmSCFInvokable
+-- SsfToScfGenericInvokable
+-- AssistHandoffssfToScfInvokable
+-- ScfToSsfGenericInvokable
+-- SmsInvokable
+-- And the following set of Returnable OPERATION:
+-- GprsSsfToGsmScfReturnable
+-- GsmScfToGprsSsfReturnable
+-- GsmSRFgsmSCFReturnable
+-- SsfToScfGenericReturnable
+-- AssistHandoffssfToScfReturnable
+-- ScfToSsfGenericReturnable
+-- SmsReturnable
 
 
 TCAP-CAP-Message ::= TCMessage {{AllCAPInvokable},
@@ -75,104 +101,112 @@ TCAP-CAP-Message ::= TCMessage {{AllCAPInvokable},
 
 
 AllCAPInvokable OPERATION ::= {
-    -- CAP-gprsSSF-gsmSCF-pkgs-contracts-acs
-	activityTestGPRS |
-	applyChargingGPRS |
-	applyChargingReportGPRS |
-	cancelGPRS |
-	connectGPRS {cAPSpecificBoundSet} |
-	entityReleasedGPRS {cAPSpecificBoundSet} |
-	eventReportGPRS {cAPSpecificBoundSet} |
-	furnishChargingInformationGPRS {cAPSpecificBoundSet} |
-	initialDPGPRS {cAPSpecificBoundSet} |
-	releaseGPRS {cAPSpecificBoundSet} |
-	requestReportGPRSEvent {cAPSpecificBoundSet} |
-	resetTimerGPRS |
-	sendChargingInformationGPRS {cAPSpecificBoundSet} |
-	-- CAP-gsmSCF-gsmSRF-pkgs-contracts-acs
 	activityTest |
-	assistRequestInstructions {cAPSpecificBoundSet} |
-	cancel {cAPSpecificBoundSet} |
-	playAnnouncement {cAPSpecificBoundSet} |
-	promptAndCollectUserInformation {cAPSpecificBoundSet} |
-	specializedResourceReport |
-	-- CAP-gsmSSF-gsmSCF-pkgs-contracts-acs
+	activityTestGPRS |
 	applyCharging {cAPSpecificBoundSet} |
+	applyChargingGPRS |
 	applyChargingReport {cAPSpecificBoundSet} |
+	applyChargingReportGPRS |
+	assistRequestInstructions {cAPSpecificBoundSet} |
 	callInformationReport {cAPSpecificBoundSet} |
 	callInformationRequest {cAPSpecificBoundSet} |
-	connect {cAPSpecificBoundSet} |
-	connectToResource {cAPSpecificBoundSet} |
-	collectInformation |
-	continueWithArgument {cAPSpecificBoundSet} |
-	disconnectForwardConnection |
-	disconnectForwardConnectionWithArgument {cAPSpecificBoundSet} |
-	disconnectLeg {cAPSpecificBoundSet} |
-	entityReleased {cAPSpecificBoundSet} |
-	establishTemporaryConnection {cAPSpecificBoundSet} |
-	eventReportBCSM {cAPSpecificBoundSet} |
-	furnishChargingInformation {cAPSpecificBoundSet} |
-	initialDP {cAPSpecificBoundSet} |
-	initiateCallAttempt {cAPSpecificBoundSet} |
-	moveLeg {cAPSpecificBoundSet} |
-	releaseCall {cAPSpecificBoundSet} |
-	requestReportBCSMEvent {cAPSpecificBoundSet} |
-	resetTimer {cAPSpecificBoundSet} |
-	sendChargingInformation {cAPSpecificBoundSet} |
-	splitLeg {cAPSpecificBoundSet} |
-	playTone {cAPSpecificBoundSet} |
-	specializedResourceReport
-	}
-
-
-AllCAPReturnable OPERATION ::= {
-    -- CAP-gprsSSF-gsmSCF-pkgs-contracts-acs
-	activityTestGPRS |
-	applyChargingGPRS |
-	applyChargingReportGPRS |
-	cancelGPRS |
-	connectGPRS {cAPSpecificBoundSet} |
-	continueGPRS |
-	entityReleasedGPRS {cAPSpecificBoundSet} |
-	furnishChargingInformationGPRS {cAPSpecificBoundSet} |
-	initialDPGPRS {cAPSpecificBoundSet} |
-	releaseGPRS {cAPSpecificBoundSet} |
-	requestReportGPRSEvent {cAPSpecificBoundSet} |
-	resetTimerGPRS |
-	sendChargingInformationGPRS {cAPSpecificBoundSet} |
-	-- CAP-gsmSCF-gsmSRF-pkgs-contracts-acs
-	activityTest |
-	assistRequestInstructions {cAPSpecificBoundSet} |
 	cancel {cAPSpecificBoundSet} |
-	playAnnouncement {cAPSpecificBoundSet} |
-	promptAndCollectUserInformation {cAPSpecificBoundSet} |
-	-- CAP-gsmSSF-gsmSCF-pkgs-contracts-acs
-	applyCharging {cAPSpecificBoundSet} |
-	applyChargingReport {cAPSpecificBoundSet} |
-	callGap {cAPSpecificBoundSet} |
-	callInformationRequest {cAPSpecificBoundSet} |
+	cancelGPRS |
+	collectInformation {cAPSpecificBoundSet} |
 	connect {cAPSpecificBoundSet} |
+	connectGPRS {cAPSpecificBoundSet} |
+	connectSMS {cAPSpecificBoundSet} |
 	connectToResource {cAPSpecificBoundSet} |
-	collectInformation |
 	continue |
 	continueWithArgument {cAPSpecificBoundSet} |
 	disconnectForwardConnection |
 	disconnectForwardConnectionWithArgument {cAPSpecificBoundSet} |
 	disconnectLeg {cAPSpecificBoundSet} |
 	entityReleased {cAPSpecificBoundSet} |
+	entityReleasedGPRS {cAPSpecificBoundSet} |
 	establishTemporaryConnection {cAPSpecificBoundSet} |
+	eventReportBCSM {cAPSpecificBoundSet} |
+	eventReportGPRS {cAPSpecificBoundSet} |
+	eventReportSMS {cAPSpecificBoundSet} |
 	furnishChargingInformation {cAPSpecificBoundSet} |
+	furnishChargingInformationGPRS {cAPSpecificBoundSet} |
+	furnishChargingInformationSMS {cAPSpecificBoundSet} |
 	initialDP {cAPSpecificBoundSet} |
+	initialDPGPRS {cAPSpecificBoundSet} |
+	initialDPSMS {cAPSpecificBoundSet} |
 	initiateCallAttempt {cAPSpecificBoundSet} |
 	moveLeg {cAPSpecificBoundSet} |
-	releaseCall {cAPSpecificBoundSet} |
-	requestReportBCSMEvent {cAPSpecificBoundSet} |
-	resetTimer {cAPSpecificBoundSet} |
-	sendChargingInformation {cAPSpecificBoundSet} |
-	splitLeg {cAPSpecificBoundSet} |
+	playAnnouncement {cAPSpecificBoundSet} |
 	playTone {cAPSpecificBoundSet} |
+	promptAndCollectUserInformation {cAPSpecificBoundSet} |
+	releaseCall {cAPSpecificBoundSet} |
+	releaseGPRS {cAPSpecificBoundSet} |
+	requestReportBCSMEvent {cAPSpecificBoundSet} |
+	requestReportGPRSEvent {cAPSpecificBoundSet} |
+	requestReportSMSEvent {cAPSpecificBoundSet} |
+	resetTimer {cAPSpecificBoundSet} |
+	resetTimerGPRS |
+	resetTimerSMS {cAPSpecificBoundSet} |
+	sendChargingInformation {cAPSpecificBoundSet} |
+	sendChargingInformationGPRS {cAPSpecificBoundSet} |
+	specializedResourceReport |
+	splitLeg {cAPSpecificBoundSet}
+	}
+
+
+AllCAPReturnable OPERATION ::= {
+	activityTest |
+	activityTestGPRS |
+	applyCharging {cAPSpecificBoundSet} |
+	applyChargingGPRS |
+	applyChargingReport {cAPSpecificBoundSet} |
+	applyChargingReportGPRS |
+	assistRequestInstructions {cAPSpecificBoundSet} |
+	callGap {cAPSpecificBoundSet} |
+	callInformationReport {cAPSpecificBoundSet} |
+	callInformationRequest {cAPSpecificBoundSet} |
+	cancel {cAPSpecificBoundSet} |
+	cancelGPRS |
+	collectInformation {cAPSpecificBoundSet} |
+	connect {cAPSpecificBoundSet} |
+	connectGPRS {cAPSpecificBoundSet} |
+	connectSMS {cAPSpecificBoundSet} |
+	connectToResource {cAPSpecificBoundSet} |
+	continue |
+	continueGPRS |
+	continueSMS |
+	continueWithArgument {cAPSpecificBoundSet} |
+	disconnectForwardConnection |
+	disconnectForwardConnectionWithArgument {cAPSpecificBoundSet} |
+	disconnectLeg {cAPSpecificBoundSet} |
+	entityReleased {cAPSpecificBoundSet} |
+	entityReleasedGPRS {cAPSpecificBoundSet} |
+	establishTemporaryConnection {cAPSpecificBoundSet} |
 	eventReportBCSM {cAPSpecificBoundSet} |
-	specializedResourceReport
+	furnishChargingInformation {cAPSpecificBoundSet} |
+	furnishChargingInformationGPRS {cAPSpecificBoundSet} |
+	furnishChargingInformationSMS {cAPSpecificBoundSet} |
+	initialDP {cAPSpecificBoundSet} |
+	initialDPGPRS {cAPSpecificBoundSet} |
+	initialDPSMS {cAPSpecificBoundSet} |
+	initiateCallAttempt {cAPSpecificBoundSet} |
+	moveLeg {cAPSpecificBoundSet} |
+	playAnnouncement {cAPSpecificBoundSet} |
+	playTone {cAPSpecificBoundSet} |
+	promptAndCollectUserInformation {cAPSpecificBoundSet} |
+	releaseCall {cAPSpecificBoundSet} |
+	releaseGPRS {cAPSpecificBoundSet} |
+	releaseSMS |
+	requestReportBCSMEvent {cAPSpecificBoundSet} |
+	requestReportGPRSEvent {cAPSpecificBoundSet} |
+	requestReportSMSEvent {cAPSpecificBoundSet} |
+	resetTimer {cAPSpecificBoundSet} |
+	resetTimerGPRS |
+	resetTimerSMS {cAPSpecificBoundSet} |
+	sendChargingInformation {cAPSpecificBoundSet} |
+	sendChargingInformationGPRS {cAPSpecificBoundSet} |
+	specializedResourceReport |
+	splitLeg {cAPSpecificBoundSet}
 	}
 
 

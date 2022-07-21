@@ -1,4 +1,5 @@
-CAP-gsmSCF-gsmSRF-pkgs-contracts-acs {itu-t(0) identified-organization(4) etsi(0) mobileDomain(0) umts-network(1) modules(3) cap-gsmSCF-gsmSRF-pkgs-contracts-acs(104) version8(7)}
+CAP-gsmSCF-gsmSRF-pkgs-contracts-acs {itu-t(0) identified-organization(4) etsi(0) mobileDomain(0) umts-network(1) 
+modules(3) cap-gsmSCF-gsmSRF-pkgs-contracts-acs(104) version8(7)}
 
 DEFINITIONS ::= BEGIN
 
@@ -22,7 +23,7 @@ FROM CAP-classes classes
 	OPERATION
 FROM Remote-Operations-Information-Objects ros-InformationObjects
 
-	TCMessage {} 
+	TCMessage {}
 FROM TCAPMessages tc-Messages
 
 	APPLICATION-CONTEXT,
@@ -32,8 +33,7 @@ FROM TC-Notation-Extensions tc-NotationExtensions
 	playAnnouncement {},
 	promptAndCollectUserInformation {},
 	specializedResourceReport
-FROM CAP-gsmSCF-gsmSRF-ops-args gsmSCF-gsmSRF-Operations
--- Object Identifier 'gsmSCF-gsmSRF-Operations' is updated to version8(7) in Rel-6. As
+FROM CAP-gsmSCF-gsmSRF-ops-args gsmSCF-gsmSRF-Operations-- Object Identifier 'gsmSCF-gsmSRF-Operations' is updated to version8(7) in Rel-6. As
 -- a result, the present module, 'CAP-gsmSCF-gsmSRF-pkgs-contracts-acs', IMPORTS CAP
 -- Operation definitions from CAP-gsmSCF-gsmSRF-ops-args version8(7). Operation
 -- definitions are used in the ABSTRACT SYNTAX definitions and in the OPERATION PACKAGE
@@ -87,7 +87,8 @@ FROM CAP-gsmSSF-gsmSCF-pkgs-contracts-acs gsmSSF-gsmSCF-Protocol
 -- the present module IMPORTS Rel-6 versions of the CAP Operation Package definitions.
 
 FROM CAP-object-identifiers {itu-t(0) identified-organization(4) etsi(0) mobileDomain(0)
-umts-network(1) modules(3) cap-object-identifiers(100) version8(7)};
+umts-network(1) modules(3) cap-object-identifiers(100) version8(7)}
+;
 
 -- Application Contexts
 -- CAP V4 Rel-5 and CAP V4 Rel-6 use the same Application Context version. The CONTRACT
@@ -99,11 +100,11 @@ umts-network(1) modules(3) cap-object-identifiers(100) version8(7)};
 -- dialogue-abstract-syntax ABSTRACT SYNTAX is defined in ITU-T Recommendation Q.775.
 
 gsmSRF-gsmSCF-ac APPLICATION-CONTEXT ::= {
-	CONTRACT					gsmSRF-gsmSCF-contract
-	DIALOGUE MODE				structured
-	TERMINATION					basic
-	ABSTRACT SYNTAXES			{dialogue-abstract-syntax |
-								gsmSRF-gsmSCF-abstract-syntax}
+	CONTRACT			gsmSRF-gsmSCF-contract
+	DIALOGUE MODE		structured
+	TERMINATION			basic
+	ABSTRACT SYNTAXES		{dialogue-abstract-syntax |
+				gsmSRF-gsmSCF-abstract-syntax}
 	APPLICATION CONTEXT NAME	id-ac-gsmSRF-gsmSCF}
 -- 'gsmSRF-gsmSCF-contract' and 'gsmSRF-gsmSCF-abstract-syntax' are defined in the present
 -- module.
@@ -113,11 +114,11 @@ gsmSRF-gsmSCF-ac APPLICATION-CONTEXT ::= {
 -- OPERATION-PACKAGE definitions are updated in Rel-6.
 
 gsmSRF-gsmSCF-contract CONTRACT ::= {
-	INITIATOR CONSUMER OF		{gsmSRF-scfActivationOfAssistPackage {cAPSpecificBoundSet}}
-	RESPONDER CONSUMER OF		{specializedResourceControlPackage {cAPSpecificBoundSet} |
-								activityTestPackage |
-								gsmSRF-scfCancelPackage {cAPSpecificBoundSet} }
-	ID							id-contract-gsmSRF-gsmSCF}
+	INITIATOR CONSUMER OF	{gsmSRF-scfActivationOfAssistPackage {cAPSpecificBoundSet}}
+	RESPONDER CONSUMER OF	{specializedResourceControlPackage {cAPSpecificBoundSet} |
+				activityTestPackage |
+				gsmSRF-scfCancelPackage {cAPSpecificBoundSet} }
+	ID				id-contract-gsmSRF-gsmSCF}
 -- The OPERATION-PACKAGEs are defined in the present module, except for
 -- gsmSRF-scfActivationOfAssistPackage, which is defined in CAP-gsmSSF-gsmSCF-pkgs-contracts-acs.
 
@@ -128,17 +129,17 @@ gsmSRF-gsmSCF-contract CONTRACT ::= {
 
 specializedResourceControlPackage {PARAMETERS-BOUND : bound} OPERATION-PACKAGE ::= {
 	CONSUMER INVOKES	{playAnnouncement {bound} |
-						promptAndCollectUserInformation {bound}}
+			promptAndCollectUserInformation {bound}}
 	SUPPLIER INVOKES	{specializedResourceReport}
-	ID					id-package-specializedResourceControl}
+	ID			id-package-specializedResourceControl}
 
 gsmSRF-scfCancelPackage {PARAMETERS-BOUND : bound} OPERATION-PACKAGE ::= {
 	CONSUMER INVOKES	{cancel {bound}}
-	ID					id-package-gsmSRF-scfCancel}
+	ID			id-package-gsmSRF-scfCancel}
 
 activityTestPackage OPERATION-PACKAGE ::= {
 	CONSUMER INVOKES	{activityTest}
-	ID					id-package-activityTest}
+	ID			id-package-activityTest}
 
 -- Abstract Syntaxes
 
@@ -150,11 +151,11 @@ activityTestPackage OPERATION-PACKAGE ::= {
 
 gsmSRF-gsmSCF-abstract-syntax ABSTRACT-SYNTAX ::= {
 	BASIC-gsmSRF-gsmSCF-PDUs
-	IDENTIFIED BY		id-as-basic-gsmSRF-gsmSCF}
+	IDENTIFIED BY	id-as-basic-gsmSRF-gsmSCF}
 -- 'BASIC-gsmSRF-gsmSCF-PDUs' is defined in the present module.
 
 BASIC-gsmSRF-gsmSCF-PDUs ::= TCMessage {{GsmSRFgsmSCFInvokable},
-										{GsmSRFgsmSCFReturnable}}
+					{GsmSRFgsmSCFReturnable}}
 -- 'GsmSRFgsmSCFInvokable' and 'GsmSRFgsmSCFReturnable' are defined in the present module.
 
 GsmSRFgsmSCFInvokable OPERATION ::= {
